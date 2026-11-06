@@ -772,6 +772,14 @@ heated splits remain. It is deferred.
   vehicle-years are counted per category in the report
   (`likely_app_years_without_own_page`); a completion crawl (R3) of their
   pages brings them back. `policy.LIKELY_REQUIRES_OWN_PAGE`.
+- **Exterior hold (owner decision 2026-11-06).** In the exterior styling
+  categories (`policy.EXTERIOR_HOLD_CATS`: bumpers, grille, head and tail
+  lamps, fender, hood, doors, liftgate, tailgate, trunk lid) a group whose
+  apps span more than one base model (`policy.base_model`: make + first
+  word of the model after a leading "Grand"/"Super") is held: refusal
+  `held_exterior_cross_model`, listed with its note and record URLs in
+  `groups/_report/held_exterior.json` for an owner checklist. Held groups
+  are never shipped.
 - **Skips and refusals.** Single-model classes are skipped, because the
   same-model generation loop already covers them. Classes over the 12-model
   cap are refused.

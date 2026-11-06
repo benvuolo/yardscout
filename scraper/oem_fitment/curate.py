@@ -1209,6 +1209,7 @@ class Curation:
     def likely_groups(self, brand):
         out = []
         self.likely_own_page_drops = Counter()   # cat -> vehicle-years left out (§5.16 own-page rule)
+        self.held_exterior = []                  # §5.16 exterior hold (owner checklist)
         for (key, cat), c in sorted(self.classes.items()):
             if self.kinds.get(cat) != "body" or cat in policy.PHASE3_CATS:
                 continue
@@ -1240,6 +1241,15 @@ class Curation:
             reason, text = _likely_reason(whys)
             pns = sorted(c.pns)
             apps = _runs(Ts)
+            if cat in policy.EXTERIOR_HOLD_CATS and len({policy.base_model(T[0], T[1]) for T in Ts}) > 1:
+                # §5.16 exterior hold: only removes claims; kept for the owner checklist
+                urls = sorted({u for r in c.records for u in (r.product_url, r.list_url) if u})
+                self.refuse("held_exterior_cross_model", cat=cat, pn=pns[0], evidence=[r.pointer for r in c.records],
+                            detail=";".join(f"{a[0]} {a[1]} {a[2]}-{a[3]}" for a in apps))
+                self.held_exterior.append({"ns": self.ns, "cat": cat, "pn": pns, "apps": apps,
+                                           "note": _likely_note(brand, pns[0], text, PACK_TEXT.get(c.packaging, "")),
+                                           "reason": reason, "urls": urls})
+                continue
             slot = "+".join(sorted(slots)) or "C"
             note = _likely_note(brand, pns[0], text, PACK_TEXT.get(c.packaging, ""))
             # its own evidence date: build-time expiry drops a Likely group
@@ -1813,6 +1823,12 @@ def main(argv=None) -> int:
         s = rep["summary"]
         print(f"[curate] {ns}: records {s['records']} cells {s['cells']} verified {s['verified_groups']} "
               f"vg {s['vg_groups']} likely {s['likely_groups']}; {s['why_no_verified']}", file=sys.stderr)
+    held = [h for ns in sorted(results) for h in getattr(results[ns], "held_exterior", [])]
+    if held or any(getattr(c, "held_exterior", None) is not None for c in results.values()):
+        write_json(out / "_report" / "held_exterior.json", {
+            "note": "Likely groups held by the exterior cross-model rule (policy.EXTERIOR_HOLD_CATS, owner "
+                    "decision 2026-11-06); not shipped. Owner checklist: each needs a visual check before release.",
+            "namespaces": sorted(results), "count": len(held), "groups": held})
     coll = cross_ns_collisions(results)
     if coll:
         write_json(out / "_report" / "cross_ns_string_collisions.json", coll)

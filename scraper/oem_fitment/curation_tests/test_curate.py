@@ -280,9 +280,29 @@ check("12 own-page rule: the left-out vehicle-years are counted",
 lm_cal = list_manifest(JEEP, CAL, "headlights", "headlights-lighting/headlamps",
                        [("5303999ZZ", "Headlamp", None, [], ["Driver Side"], True, None)])
 cur, doc = run("mopar", {f"raw/{JEEP}.jsonl": [ag, hl], f"raw/{JEEP}.lists.jsonl": [lm_cal]})
-check("12 own-page rule: Caliber joins once its own page lists the number",
-      any(a[:2] == ["Dodge", "Caliber"] for g in doc["likely"] if "5303999ZZ" in g["pn"] for a in g["apps"]),
-      str([g["apps"] for g in doc["likely"]]))
+# with Caliber's own page the class spans Patriot + Caliber; a headlamp across
+# two base models is held by the exterior rule (owner decision 2026-11-06),
+# never shipped, and kept for the owner checklist with its record URLs
+h12 = [h for h in cur.held_exterior if "5303999ZZ" in h["pn"]]
+check("12 exterior hold: Patriot + Caliber headlamp is held, not shipped",
+      h12 and not any("5303999ZZ" in g["pn"] for g in doc["likely"])
+      and any(a[:2] == ["Dodge", "Caliber"] for a in h12[0]["apps"]), str(h12)[:300])
+check("12 exterior hold: refusal held_exterior_cross_model, entry carries note and record URLs",
+      any(r["reason"] == "held_exterior_cross_model" and r["pn"] == "5303999ZZ" for r in cur.refusals)
+      and h12[0]["urls"] and h12[0]["note"].startswith("Mopar catalog lists #5303999ZZ"), str(h12)[:300])
+import policy as _P  # noqa: E402
+check("12 base model: Camry / Camry Hybrid and RX 350 / RX 450h stay together; Grand Caravan = Caravan",
+      _P.base_model("Toyota", "Camry") == _P.base_model("Toyota", "Camry Hybrid")
+      and _P.base_model("Lexus", "RX 350") == _P.base_model("Lexus", "RX 450h")
+      and _P.base_model("Dodge", "Grand Caravan") == _P.base_model("Dodge", "Caravan"))
+check("12 base model: Legacy/Outback, DeVille/Seville, Caravan/Durango, Fusion/Milan differ",
+      _P.base_model("Subaru", "Legacy") != _P.base_model("Subaru", "Outback")
+      and _P.base_model("Cadillac", "DeVille") != _P.base_model("Cadillac", "Seville")
+      and _P.base_model("Dodge", "Caravan") != _P.base_model("Dodge", "Durango")
+      and _P.base_model("Ford", "Fusion") != _P.base_model("Mercury", "Milan"))
+check("12 hold covers exterior styling only (mirrors and window parts are not held)",
+      "side-mirrors" not in _P.EXTERIOR_HOLD_CATS and "window-regulator" not in _P.EXTERIOR_HOLD_CATS
+      and {"grille", "headlights", "tail-lights", "bumper-front"} <= _P.EXTERIOR_HOLD_CATS)
 
 # --------------------------------------------------------------- case 13
 tr = toyota_record("12345-67890", "headlights", ("Toyota", "Camry", 2007), "headlights-lighting/headlamps", "Headlamp",

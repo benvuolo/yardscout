@@ -54,6 +54,24 @@ MIN_GROUP_VEHICLE_YEARS = 2
 # app-years had no own-page evidence at all. Engine categories never form
 # Likely groups (body only), so they keep their own rules.
 LIKELY_REQUIRES_OWN_PAGE = True
+# §5.16 exterior hold (owner decision 2026-11-06, ops/hub.md): in exterior
+# styling categories a Likely group whose apps span more than one BASE model
+# is held (refusal held_exterior_cross_model, listed in
+# groups/_report/held_exterior.json for an owner checklist). Badge twins and
+# sister models usually differ in front/rear styling (Fusion/MKZ/Milan,
+# Legacy/Outback, DeVille/Seville), and a list page can print a platform
+# diagram. Base model = make + first word of the model after a leading
+# "Grand"/"Super" (Camry/Camry Hybrid and RX 350/RX 450h stay together).
+# Only removes claims.
+EXTERIOR_HOLD_CATS = frozenset({"bumper-front", "bumper-rear", "grille", "headlights", "tail-lights", "fender",
+                                "hood", "door-front", "door-rear", "liftgate", "tailgate", "trunk-lid"})
+
+
+def base_model(make: str, model: str) -> tuple:
+    words = (model or "").split()
+    if len(words) > 1 and words[0].lower() in ("grand", "super"):
+        words = words[1:]
+    return ((make or "").lower(), words[0].lower() if words else "")
 # §8 V11: interchange.json budget (raw bytes).
 PAYLOAD_BYTE_BUDGET = 1_300_000
 # §8 V14: churn gate against the committed file.
