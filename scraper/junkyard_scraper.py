@@ -95,6 +95,11 @@ LIVE_FILE = DATA_DIR / "inventory_live.json"
 # hotlinked, or referenced. (PnP's "own" API at picknpull.com/api is in fact
 # Row52-powered under the hood — responses carry Row52 account ids and CDN
 # URLs. The factual inventory data from it is fine to use; the images are not.)
+# Codes in the extras shard's photo column: "p<id>" LKQ (cdn.pypapps.com),
+# "w<yard>/<VIN>/<ms>.j|.p" Wrench-A-Part (its own GCS bucket, added
+# 2026-11-06), or a full https URL from the yard's own feed/page (Kiker's,
+# Weller, Pasco EZ Pull It, Army's). Capture is data only: the app renders a
+# chain's photos only while its PHOTO_SOURCES kill switch is on.
 EXTRAS_FILE = DATA_DIR / "vehicle_extras.json"
 
 PNP_API = "https://www.picknpull.com/api"
@@ -16325,8 +16330,8 @@ def refresh_pap_pricing_file(locations: list[dict] | None = None) -> Path:
 # Independent / regional yards — opt-in via --independents (or
 # JUNKYARD_INDEPENDENTS=1) so the scheduled scan enables them deliberately.
 # Registry + research: scraper/independent_yards_registry.json and
-# scraper/INDEPENDENT_YARDS.md. No photos are captured from any independent
-# (chain-wide owner policy), and nothing here touches Row52 (competitor;
+# scraper/INDEPENDENT_YARDS.md. Photos: only a yard's own self-hosted URL,
+# per-adapter (see PHOTO POLICY at EXTRAS_FILE), and nothing here touches Row52 (competitor;
 # Row52 is Pick-n-Pull-exclusive since their acquisition anyway).
 # ---------------------------------------------------------------------------
 
@@ -16398,9 +16403,38 @@ def _load_vehicle_snapshot(label: str, filename: str,
 # unauthenticated GET returns the ENTIRE multi-yard inventory (~11k vehicles);
 # robots.txt allows everything. Yard ids come from their
 # /api/closest-location?all=1 endpoint; coords geocoded once via Nominatim and
-# hardcoded (same convention as YARD_COORDS). The feed's photo field is
-# deliberately ignored (no-photos policy).
+# hardcoded (same convention as YARD_COORDS). Photos: Wrench-A-Part hosts
+# them in its own Google Cloud Storage bucket (wrench-car-photos); the feed's
+# own URL is captured as a compact "w" code (see _wap_photo_code) — 2026-11-06
+# owner decision, self-hosted chain photos only. Nothing is downloaded.
 WAP_VEHICLES_API = "https://api.wrenchapart.com/v1/vehicles"
+WAP_PHOTO_BASE = "https://storage.googleapis.com/wrench-car-photos/v1%2F"
+# Two URL shapes in the feed (2026-11-06): current uploads carry photoThumb
+# ".../v1%2F{yard}%2F{VIN}%2F{ms}-front_driver-thumb.jpg" (240x320, ~15 KB;
+# the full shot drops "-thumb", 1536x2048 ~450 KB); older uploads only carry
+# photo ".../v1%2F{yard}%2F{VIN}%2F{ms}.png" (served as a ~320x240 JPEG,
+# ~40-70 KB). Anything else is not captured.
+_WAP_THUMB_RE = re.compile(
+    r"^https://storage\.googleapis\.com/wrench-car-photos/v1%2F(\d{1,3})%2F"
+    r"([A-Za-z0-9]{5,17})%2F(\d{10,14})-front_driver-thumb\.jpg$")
+_WAP_PNG_RE = re.compile(
+    r"^https://storage\.googleapis\.com/wrench-car-photos/v1%2F(\d{1,3})%2F"
+    r"([A-Za-z0-9]{5,17})%2F(\d{10,14})\.png$")
+
+
+def _wap_photo_code(item: dict) -> str:
+    """Compact photo code for a Wrench-A-Part feed item, or "".
+
+    "w{yard}/{VIN}/{ms}.j" = the -front_driver-thumb.jpg shape,
+    "w{yard}/{VIN}/{ms}.p" = the older .png shape. The app rebuilds the URL
+    on WAP_PHOTO_BASE; a URL that matches neither shape yields no code."""
+    for key, rx, suf in (("photoThumb", _WAP_THUMB_RE, ".j"),
+                         ("photo", _WAP_PNG_RE, ".p")):
+        val = item.get(key)
+        m = rx.match(val.strip()) if isinstance(val, str) else None
+        if m:
+            return f"w{m.group(1)}/{m.group(2)}/{m.group(3)}{suf}"
+    return ""
 WAP_YARDS = {
     2: {"name": "Wrench-A-Part - Austin", "city": "Del Valle", "state": "TX",
         "lat": 30.1888, "lng": -97.5654},
@@ -16455,6 +16489,7 @@ def fetch_wrenchapart_inventory() -> list[dict]:
             "row": row_s,
             "dateAdded": str(item.get("dateAdded") or "")[:10],
             "_color": (item.get("color") or "").strip().title(),
+            "_photo": _wap_photo_code(item),
             "_location": yard["name"],
             "_city": yard["city"],
             "_state": yard["state"],
