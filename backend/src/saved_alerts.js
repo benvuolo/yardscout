@@ -25,7 +25,8 @@
  * (~every 4 hours), which is well inside the "leaving soon" window.
  */
 
-import { json, err, isoNow, gunzipToText, vindexBucket } from './util.js';
+import { json, err, isoNow } from './util.js';
+import { makeResolver } from './inv_resolve.js';
 import { getDirectory } from './inventory.js';
 import { sendDevicePush, devicePushConfigured } from './devices.js';
 import { entActive, esc, unsubUrl } from './email_alerts.js';
@@ -33,7 +34,6 @@ import { resendFetch } from './ops.js';
 
 const MAX_SAVED_PER_OWNER = 50;
 const MAX_KEYS_PER_RUN = 300;      // ~2 resolves/ms worst case; well under the budget
-const MAX_YARD_PARSES = 40;        // largest shard ≈ 300KB / 2-3ms each
 const MAX_SENDS_PER_RUN = 20;      // shares the commit's subrequest budget
 const LEAVING_RATIO = 0.8;         // mirrors the card's "leavingSoon" rule
 const PAST_TYPICAL_RATIO = 2;      // past this the card stops claiming "soon"
@@ -93,51 +93,6 @@ export function savedAlertPayload(ev) {
     title: `${name} — leaving soon?`,
     body: `Day ${ev.daysOn + 1} on the lot${where} — ${basis} typically last ~${ev.avg} days. Go soon if you want it.`,
     url: '/#alert=' + encodeURIComponent(String(ev.id)),
-  };
-}
-
-/* ----- shard resolver (memoized per run, budgeted) ----- */
-
-function makeResolver(env, dir) {
-  const mod = dir.vindexMod || 64;
-  const buckets = new Map();   // bucket → index object | null
-  const shards = new Map();    // yardIdx → parsed shard | null
-  let yardParses = 0;
-  const f = dir.fields || [];
-  const iId = f.indexOf('id'), iVin = f.indexOf('vin'), iDate = f.indexOf('dateAdded');
-
-  async function loadBucket(b) {
-    if (buckets.has(b)) return buckets.get(b);
-    const row = await env.DB.prepare(
-      'SELECT body FROM inv_shards WHERE kind = ?1 AND key = ?2 AND variant = ?3'
-    ).bind('vindex', String(b), 'all').first();
-    const idx = row ? JSON.parse(await gunzipToText(row.body)) : null;
-    buckets.set(b, idx);
-    return idx;
-  }
-  async function loadShard(yardIdx) {
-    if (shards.has(yardIdx)) return shards.get(yardIdx);
-    if (yardParses >= MAX_YARD_PARSES) return undefined;   // budget — defer
-    yardParses++;
-    const row = await env.DB.prepare(
-      'SELECT body FROM inv_shards WHERE kind = ?1 AND key = ?2 AND variant = ?3'
-    ).bind('yard', String(yardIdx), 'free').first();   // vpic/dates identical across variants
-    const shard = row ? JSON.parse(await gunzipToText(row.body)) : null;
-    shards.set(yardIdx, shard);
-    return shard;
-  }
-
-  /** → {state:'gone'} | {state:'present', id, yardIdx, dateAdded} | {state:'deferred'} */
-  return async function resolve(key) {
-    const idx = await loadBucket(vindexBucket(key, mod));
-    const hit = idx && idx[key];
-    if (!hit) return { state: 'gone' };
-    const [yardIdx, id] = hit;
-    const shard = await loadShard(yardIdx);
-    if (shard === undefined) return { state: 'deferred' };
-    const row = shard && shard.vehicles.find((r) => String(r[iId]) === String(id) || String(r[iVin]) === key);
-    if (!row) return { state: 'gone' };
-    return { state: 'present', id: row[iId], yardIdx, dateAdded: row[iDate] };
   };
 }
 
