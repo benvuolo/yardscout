@@ -56,6 +56,17 @@ jobs:
           for g in requests.get(f"{API}/apps/{app['id']}/betaGroups", headers=H, timeout=60).json().get("data", []):
               ga = g["attributes"]
               print(f"beta group: {ga.get('name')} internal={ga.get('isInternalGroup')} allBuilds={ga.get('hasAccessToAllBuilds')}")
+              # Tester counts and invite states only: this repo is public, never print names or emails.
+              tr = requests.get(f"{API}/betaGroups/{g['id']}/betaTesters", headers=H, params={"limit": 200}, timeout=60)
+              if tr.status_code == 200:
+                  tl = tr.json().get("data", [])
+                  st = {}
+                  for t in tl:
+                      k = f"{t['attributes'].get('inviteType')}/{t['attributes'].get('state')}"
+                      st[k] = st.get(k, 0) + 1
+                  print(f"  testers: {len(tl)} {st}")
+              else:
+                  print(f"  testers: HTTP {tr.status_code}")
           # Provisioning side (Certificates, Identifiers & Profiles). The release
           # workflow mints its App Store profile here; 2026-11-02 this started
           # answering 403 "Unable to find a team with the given Team ID" while
