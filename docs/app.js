@@ -819,7 +819,22 @@ function applyPricesReviewed(iso) {
   }
 }
 
+/* Model names the data-quality pass flags as mislabelled (e.g. a BMW listed
+ * as "Alfa-Romeo 4C"): {make: [model]}, raw row strings, published as
+ * noPickModels in inventory_live.json and inv/manifest.json. Those cars stay
+ * in inventory and search; the name is just never offered in a model picker
+ * (Parts "Your car", Cars filter, Alerts watch). Missing key = none. */
+let noPickModels = {};
+function setNoPickModels(m) {
+  noPickModels = (m && typeof m === 'object' && !Array.isArray(m)) ? m : {};
+}
+function isNoPickModel(make, model) {
+  const l = noPickModels[make];
+  return Array.isArray(l) && l.includes(model);
+}
+
 function parseInventoryPayload(raw) {
+  setNoPickModels(raw && !Array.isArray(raw) ? raw.noPickModels : null);
   {
     if (raw && raw.schemaVersion === 2 && Array.isArray(raw.vehicles)) {
       // v2 compact format: expand lookup-table rows into full vehicle objects.
@@ -1640,6 +1655,7 @@ function _invApply(s) {
   liveScrapedAt = m.scrapedAt;
   applyPricesReviewed(m.pricesLastReviewed);
   setPublishedPhotoSources(m.photoSources);
+  setNoPickModels(m.noPickModels);
   vehicleExtras = s.extras;
   s.applied = new Set(s.parsed.keys());
   if (complete) s.done = true;
@@ -2356,7 +2372,7 @@ function populateModelFilter() {
   btn.disabled = false;   // location gate lives in updateFilterAvailability
   const counts = new Map();
   for (const v of _scopedVehicles) {
-    if (v.make === make && v.model) {
+    if (v.make === make && v.model && !isNoPickModel(v.make, v.model)) {
       const m = canonicalModel(make, v.model);
       counts.set(m, (counts.get(m) || 0) + 1);
     }
@@ -5913,7 +5929,7 @@ function pfPopulateModels() {
   }
   const models = new Map(); // squashed -> display
   for (const v of liveInventory) {
-    if (canonicalMake(v.make) !== make || !v.model) continue;
+    if (canonicalMake(v.make) !== make || !v.model || isNoPickModel(v.make, v.model)) continue;
     const disp = canonicalModel(v.make, v.model);
     const key = pfSquashModel(disp, make);
     if (key && !models.has(key)) models.set(key, disp);
@@ -7764,7 +7780,7 @@ function populateWatchModelOptions() {
   btn.disabled = false;
   _watchModelCounts = new Map();
   for (const v of liveInventory) {
-    if (v.make === make && v.model) {
+    if (v.make === make && v.model && !isNoPickModel(v.make, v.model)) {
       _watchModelCounts.set(v.model, (_watchModelCounts.get(v.model) || 0) + 1);
     }
   }
