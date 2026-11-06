@@ -6505,7 +6505,7 @@ function pfRunSearch() {
       if (rowWarn) warns.push(rowWarn);
       results.set(v.id, { v, d, tier: 'likely', warns });
     }
-    if (!groupNotes.length) famNote = 'Same-generation donors of your own model' + (pfCat ? ` — ${pfCat.label.toLowerCase()}s rarely cross model lines without a verified platform group` : '');
+    if (!groupNotes.length) famNote = 'Same-generation donors of your own model' + (pfCat ? ` — ${pfCat.label.toLowerCase().replace(/s?$/, 's')} rarely cross model lines without a verified platform group` : '');
   }
 
   const rows = [...results.values()].sort((a, b) =>

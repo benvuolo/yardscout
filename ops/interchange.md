@@ -1586,3 +1586,87 @@ Open:
 - Own-page listing still cannot tell a platform-wide diagram from real
   fitment on a site that prints every twin's rows without a division note.
   The spec 11.4 audit sample should check visually distinct twins first.
+
+## Aftermarket shipped for the six approved pairs, 2026-11-06 ~14:50 UTC (session_016ZzJfLB9KQDQ64RoN6T9sX)
+
+- **Approval:** owner decision recorded by the hub in ops/hub.md (7ae3af1).
+  Aftermarket on only for mazda/starter, mitsubishi/starter,
+  mopar/alternator, mopar/starter, nissan/starter, volvo/alternator. Every
+  gap make stays off, including mopar's Plymouth and Fiat.
+- **File:** `groups/aftermarket/dbelectrical.json`, built by
+  `groups_am.py --ship …` (`ship()`; constants `SHIP_PAIRS`,
+  `SHIP_OFF_MAKES`). A refined sub-group ships only if every car's make
+  maps (policy.NAMESPACES) to an approved pair and none is a gap make.
+- **Slimmed:** id, cat, tier, src, label, unit, amps, trans, note (max 485
+  chars), apps, retrieved. 747 groups, 483 KB. Skipped: 4,500 not
+  eligible, 379 gap make, 42 single vehicle-year.
+- **Payload** (`build_interchange_files`): amStatus "ok … 747 groups
+  (likely only)", 0 refused. Lazy files: alternator 190 KB (289 am
+  groups), starter 254 KB (458), both under the 1.3 MB budget.
+- **Application rows by make:**
+  - alternator: Dodge 622, Chrysler 389, Volvo 136, Jeep 73, Ram 9, Eagle 8.
+  - starter: Dodge 550, Nissan 526, Mitsubishi 185, Chrysler 168, Jeep 153,
+    Mazda 111, Infiniti 82, Eagle 38, Ram 21.
+- **Lot cars with a shipped donor:**
+  - alternator: Dodge 11,022, Chrysler 3,821, Jeep 3,783, Volvo 1,632,
+    Ram 181, Eagle 4.
+  - starter: Nissan 20,518, Dodge 19,802, Jeep 9,254, Chrysler 9,233,
+    Mazda 4,647, Infiniti 2,346, Mitsubishi 2,231, Ram 469, Eagle 9.
+- **Tests:** test_groups_am 42/42 (+5 ship checks), test_dbelectrical
+  31/31, curation_tests 15/15 files, oem_fitment tests 29/29, scraper tests
+  19/19, backend/test/pf_guards_unit.mjs all pass.
+- **test_lazy_payload change:** its gate check is split. The aftermarket
+  half now asserts "only dbelectrical.json, only approved pairs, no gap
+  make". The `groups/<ns>.json` half is unchanged, for
+  session_016ZzJfMapNmKpMbuoJzVupB to update with its own commit. I did not
+  touch its files.
+
+## 2026-11-06 OEM Likely groups committed (owner decision ~12:30 UTC, ops/hub.md)
+
+Owner approval ("do everything you think"; the hub recorded it in ops/hub.md
+7ae3af1 and relayed it) satisfies the spec 11.5 review for toyota, gm,
+subaru, mopar, ford, vag, hmg and mb, with an extra hold rule:
+- e4ff17c exterior hold: in exterior styling categories
+  (`policy.EXTERIOR_HOLD_CATS`), a Likely group spanning more than one base
+  model (`policy.base_model`) is refused as `held_exterior_cross_model`.
+  Held groups are listed in `groups/_report/held_exterior.json` with apps,
+  category, number, note and record URLs, for the owner checklist.
+- Groups curated on oem-raw@42683f9 (the hub's reviewed ref, not newer crawl
+  data). Kept: toyota 781, gm 301, subaru 223, mopar 150, ford 48, vag 31,
+  hmg 6, mb 1 = 1,541. Held: 307 (subaru 156, gm 56, ford 40, mb 21,
+  mopar 19, vag 15). The hub counted 1,543 / 308; the 2-group mopar gap
+  is on the strict side. All 19 held mopar groups span two makes or base
+  models (Town & Country / Caravan / Durango, Dakota / Durango).
+- Committed: `groups/<ns>.json` for those 8 only (bmw, honda, mazda,
+  mitsubishi, nissan and volvo have 0 Likely groups and no file).
+- Gates, all passed before the commit:
+  - validate: structural at curate time, and V12-V15 against a second
+    independent curate run for all 8.
+  - measure.py: parity 6/6; old-client view 0 flipped pairs (V9); the
+    payload builder's V9 check accepts all 8 files ("ok", 0 Verified).
+  - Tests: curation_tests 15/15 (test_lazy_payload and test_payload now
+    assert that only the approved namespaces ship, with no Verified), tests
+    29/29, scraper/test_*.py 19/19, backend/test/pf_guards_unit.mjs ALL PASS.
+- Next: the next scan.yml run writes docs/data/interchange.json /
+  docs/data/oem/. Then live check at phone width: a Camry window regulator
+  search shows "Likely fits — check the part number" with the Toyota number
+  and nothing Verified; Cadillac DeVille headlights show no OEM row. If
+  anything fails, revert the groups commit.
+- 2026-11-06 ~17:55 UTC live check: PASS (no revert).
+  - Scan 3ded246 (16:51) published the groups: interchange.json oemStatus
+    "ok" for all 8, lazy per-category files under docs/data/oem/;
+    yardscout.io serves both (oem/window-regulator.json 200).
+  - Method: Playwright, iPhone 13 emulation, zip 75201, default 100 mi
+    radius. No horizontal overflow on either page.
+  - 2007 Toyota Camry, window regulator + motor: "0 verified · 51 likely",
+    rows labelled "Likely fits — check the part number" with "Source: Toyota
+    factory parts catalog #69801-06070 ..." and the note "Toyota catalog
+    lists #69801-06070 for both — regulator without motor; plant-specific
+    (US / Japan built); verify the number on the part". 19 OEM-source rows,
+    0 rows labelled Verified (the only "Verified" text is the filter toggle
+    and the explainer).
+  - 2004 Cadillac DeVille, headlights (held: 19208051 DeVille/Seville): 0 OEM
+    rows, no Seville donor; only the existing same-generation hand rows
+    ("Likely fit — verify part #").
+  - Seen in passing (app copy, not this workstream): the headlights hint reads
+    "headlightss rarely cross model lines" (pluralisation typo in app.js).

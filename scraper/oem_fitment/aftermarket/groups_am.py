@@ -527,6 +527,51 @@ def _side(side, mk, md) -> bool:
     return squash(md) == squash(smd)
 
 
+# ------------------------------------------------------------------ ship
+# Owner decision 2026-11-06 (ops/hub.md 7ae3af1): the aftermarket layer ships
+# ONLY for these (namespace, category) pairs, the ones whose rule-1 residual
+# disagreement against the OEM numbers was <= 5% (audit_am.py --compare).
+# Gap makes stay off even where their namespace is eligible (Plymouth and
+# Fiat are mopar makes): they could not be audited against an OEM catalog.
+SHIP_PAIRS = {("mazda", "starter"), ("mitsubishi", "starter"), ("mopar", "alternator"), ("mopar", "starter"),
+              ("nissan", "starter"), ("volvo", "alternator")}
+SHIP_OFF_MAKES = {"MINI", "Land Rover", "Jaguar", "Suzuki", "Isuzu", "Fiat", "Porsche", "Smart", "Saab",
+                  "Plymouth", "Geo"}
+SHIP_KEYS = ("id", "cat", "tier", "src", "label", "unit", "amps", "trans", "note", "apps", "retrieved")
+
+
+def _make_ns() -> dict:
+    sys.path.insert(0, str(HERE.parent))
+    import policy  # noqa: E402
+    return {mk: ns for ns, d in policy.NAMESPACES.items() for mk in d["makes"]}
+
+
+def ship(doc: dict) -> dict:
+    """Refined sub-groups whose every car falls in SHIP_PAIRS, slimmed to
+    what the payload loader and the app use."""
+    if "refined" not in doc:
+        raise ValueError("ship() needs refined groups (rule 1 + OEM override)")
+    mns = _make_ns()
+    keep, why = [], Counter()
+    for g in doc["groups"]:
+        makes = {a[0] for a in g["apps"]}
+        if makes & SHIP_OFF_MAKES:
+            why["gap_make"] += 1
+            continue
+        if not all((mns.get(mk), g["cat"]) in SHIP_PAIRS for mk in makes):
+            why["pair_not_eligible"] += 1
+            continue
+        if len(g["apps"]) < 2 and g["apps"][0][2] == g["apps"][0][3]:
+            why["single_vehicle_year"] += 1
+            continue
+        keep.append({k: g[k] for k in SHIP_KEYS if g.get(k) is not None})
+    keep.sort(key=lambda g: g["id"])
+    return {"schema": SCHEMA, "src": "aftermarket", "tier": "likely", "site": doc["site"], "raw": doc["raw"],
+            "decision": "owner 2026-11-06 (ops/hub.md): " + ", ".join(f"{n}/{c}" for n, c in sorted(SHIP_PAIRS)),
+            "groups": keep, "skipped": dict(why),
+            "sha256": hashlib.sha256(json.dumps(keep, sort_keys=True).encode()).hexdigest()}
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--raw")
@@ -534,6 +579,8 @@ def main(argv=None) -> int:
     ap.add_argument("--inventory", default=str(REPO / "docs" / "data" / "inventory_live.json"))
     ap.add_argument("--out", default=str(HERE.parent / "groups" / "_report" / "aftermarket-dbelectrical.json"))
     ap.add_argument("--no-refine", action="store_true", help="write the unit-wide groups only (audit 'before')")
+    ap.add_argument("--ship", default=None,
+                    help="also write the shipped file (SHIP_PAIRS only, slimmed), e.g. groups/aftermarket/dbelectrical.json")
     a = ap.parse_args(argv)
     recs, src = load_raw(a.raw, a.raw_ref)
     lot = None
@@ -558,6 +605,13 @@ def main(argv=None) -> int:
             for k, cls in m.items():
                 oem[cat][k] = frozenset(f"{ns}:{c}" for c in cls) | oem[cat].get(k, frozenset())
         doc = refine(doc, oem, twins.TWINS)
+        if a.ship:
+            sd = ship(doc)
+            sp = Path(a.ship)
+            sp.parent.mkdir(parents=True, exist_ok=True)
+            sp.write_text(json.dumps(sd, sort_keys=True, ensure_ascii=False, separators=(",", ":")) + "\n")
+            print(f"shipped {len(sd['groups'])} groups, skipped {sd['skipped']} -> {sp} "
+                  f"({sp.stat().st_size} bytes)", file=sys.stderr)
     out.write_text(json.dumps(doc, sort_keys=True, ensure_ascii=False, separators=(",", ":")) + "\n")
     print(report_md(doc))
     print(f"wrote {out}", file=sys.stderr)

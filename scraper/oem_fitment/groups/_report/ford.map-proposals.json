@@ -67,7 +67,7 @@
     ]
    },
    {
-    "basis": "catalog prints 'Pinto' (1 fitment rows, oem-raw@42683f9); normalize_model canon 'Pinto', 5 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints 'Pinto' (1 fitment rows, oem-raw@42683f9); normalize_model canon 'Pinto', 6 feed cars (inventory 2026-11-06); identity draft",
     "cat_make": "Ford",
     "cat_model": "Pinto",
     "ns": "ford",
@@ -236,19 +236,19 @@
    "squash_neighbours": [
     [
      "Explorer",
-     4585
+     4579
     ],
     [
      "Expedition",
-     3192
+     3186
     ],
     [
      "Explorer Sport Trac",
-     519
+     518
     ],
     [
      "Expedition EL",
-     115
+     114
     ],
     [
      "Explorer Sport",
@@ -398,7 +398,7 @@
   {
    "cat_make": "Ford",
    "cat_model": "Pinto",
-   "feed_cars": 5,
+   "feed_cars": 6,
    "fitment_rows": 1,
    "ns": "ford",
    "proposed": {

@@ -10,7 +10,7 @@
      "Volvo",
      "240"
     ],
-    "why": "1/17 vPIC decodes name another make (M6 over 2%)"
+    "why": "1/16 vPIC decodes name another make (M6 over 2%)"
    },
    {
     "cat_make": "Volvo",
@@ -28,7 +28,7 @@
   {
    "cat_make": "Volvo",
    "cat_model": "240",
-   "feed_cars": 53,
+   "feed_cars": 52,
    "fitment_rows": 12,
    "ns": "volvo",
    "proposed": {

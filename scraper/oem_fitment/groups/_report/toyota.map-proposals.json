@@ -2,7 +2,7 @@
  "draft": {
   "entries": [
    {
-    "basis": "catalog prints 'LS400' (87 fitment rows, oem-raw@42683f9); normalize_model canon 'LS 400', 123 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints 'LS400' (87 fitment rows, oem-raw@42683f9); normalize_model canon 'LS 400', 121 feed cars (inventory 2026-11-06); identity draft",
     "cat_make": "Lexus",
     "cat_model": "LS400",
     "ns": "toyota",
@@ -293,7 +293,7 @@
   {
    "cat_make": "Lexus",
    "cat_model": "LS400",
-   "feed_cars": 123,
+   "feed_cars": 121,
    "fitment_rows": 87,
    "ns": "toyota",
    "proposed": {

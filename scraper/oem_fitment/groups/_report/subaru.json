@@ -2009,12 +2009,12 @@
  "funnel_cars": {
   "ac-compressor": {
    "no_records": {
-    "": 494
+    "": 500
    },
    "not_closed": {
-    "no_list_manifest": 1533,
-    "no_year_manifest": 2989,
-    "unattested": 148,
+    "no_list_manifest": 1553,
+    "no_year_manifest": 2990,
+    "unattested": 149,
     "uncrawled_chain_member": 125,
     "year_manifest_bad": 1
    },
@@ -2027,10 +2027,10 @@
     "": 649
    },
    "not_closed": {
-    "no_list_manifest": 1533,
-    "no_year_manifest": 2834,
+    "no_list_manifest": 1553,
+    "no_year_manifest": 2841,
     "unattested": 44,
-    "uncrawled_chain_member": 229,
+    "uncrawled_chain_member": 230,
     "year_manifest_bad": 1
    },
    "unmapped": {
@@ -2039,13 +2039,13 @@
   },
   "bumper-front": {
    "no_records": {
-    "": 981
+    "": 987
    },
    "not_closed": {
-    "list_manifest_bad": 93,
+    "list_manifest_bad": 94,
     "no_list_manifest": 67,
     "no_year_manifest": 2496,
-    "unread_sibling_page": 1653
+    "unread_sibling_page": 1674
    },
    "unmapped": {
     "": 263
@@ -2053,13 +2053,13 @@
   },
   "bumper-rear": {
    "no_records": {
-    "": 590
+    "": 595
    },
    "not_closed": {
-    "list_manifest_bad": 93,
+    "list_manifest_bad": 94,
     "no_list_manifest": 67,
-    "no_year_manifest": 2887,
-    "unread_sibling_page": 1653
+    "no_year_manifest": 2888,
+    "unread_sibling_page": 1674
    },
    "unmapped": {
     "": 263
@@ -2067,12 +2067,12 @@
   },
   "climate-control": {
    "no_records": {
-    "": 520
+    "": 523
    },
    "not_closed": {
-    "no_list_manifest": 1533,
-    "no_year_manifest": 2963,
-    "unread_sibling_page": 273,
+    "no_list_manifest": 1553,
+    "no_year_manifest": 2967,
+    "unread_sibling_page": 274,
     "year_manifest_bad": 1
    },
    "unmapped": {
@@ -2081,13 +2081,13 @@
   },
   "door-front": {
    "no_records": {
-    "": 789
+    "": 786
    },
    "not_closed": {
-    "list_manifest_bad": 93,
+    "list_manifest_bad": 94,
     "no_list_manifest": 67,
-    "no_year_manifest": 2688,
-    "unread_sibling_page": 1653
+    "no_year_manifest": 2697,
+    "unread_sibling_page": 1674
    },
    "unmapped": {
     "": 263
@@ -2095,13 +2095,13 @@
   },
   "door-rear": {
    "no_records": {
-    "": 747
+    "": 750
    },
    "not_closed": {
-    "list_manifest_bad": 93,
+    "list_manifest_bad": 94,
     "no_list_manifest": 67,
-    "no_year_manifest": 2730,
-    "unread_sibling_page": 1653
+    "no_year_manifest": 2733,
+    "unread_sibling_page": 1674
    },
    "unmapped": {
     "": 263
@@ -2109,14 +2109,14 @@
   },
   "fender": {
    "no_records": {
-    "": 905
+    "": 909
    },
    "not_closed": {
-    "list_manifest_bad": 93,
+    "list_manifest_bad": 94,
     "no_list_manifest": 67,
-    "no_year_manifest": 2572,
-    "unattested": 1289,
-    "uncrawled_chain_member": 364
+    "no_year_manifest": 2574,
+    "unattested": 1309,
+    "uncrawled_chain_member": 365
    },
    "unmapped": {
     "": 263
@@ -2124,12 +2124,12 @@
   },
   "fuel-pump-module": {
    "no_records": {
-    "": 415
+    "": 418
    },
    "not_closed": {
-    "no_list_manifest": 1533,
-    "no_year_manifest": 3068,
-    "unread_sibling_page": 273,
+    "no_list_manifest": 1553,
+    "no_year_manifest": 3072,
+    "unread_sibling_page": 274,
     "year_manifest_bad": 1
    },
    "unmapped": {
@@ -2138,12 +2138,12 @@
   },
   "gauge-cluster": {
    "no_records": {
-    "": 3047
+    "": 3055
    },
    "not_closed": {
-    "list_manifest_bad": 93,
-    "no_year_manifest": 497,
-    "unread_sibling_page": 1653
+    "list_manifest_bad": 94,
+    "no_year_manifest": 495,
+    "unread_sibling_page": 1674
    },
    "unmapped": {
     "": 263
@@ -2151,15 +2151,15 @@
   },
   "grille": {
    "no_records": {
-    "": 1573
+    "": 1579
    },
    "not_closed": {
-    "list_manifest_bad": 93,
+    "list_manifest_bad": 94,
     "no_list_manifest": 67,
     "no_year_manifest": 1904,
-    "unattested": 332,
-    "uncrawled_chain_member": 218,
-    "unread_sibling_page": 1103
+    "unattested": 336,
+    "uncrawled_chain_member": 221,
+    "unread_sibling_page": 1117
    },
    "unmapped": {
     "": 263
@@ -2167,12 +2167,12 @@
   },
   "headlights": {
    "no_records": {
-    "": 1171
+    "": 1176
    },
    "not_closed": {
-    "no_list_manifest": 1533,
-    "no_year_manifest": 2312,
-    "unattested": 229,
+    "no_list_manifest": 1553,
+    "no_year_manifest": 2314,
+    "unattested": 230,
     "uncrawled_chain_member": 44,
     "year_manifest_bad": 1
    },
@@ -2182,13 +2182,13 @@
   },
   "hood": {
    "no_records": {
-    "": 444
+    "": 447
    },
    "not_closed": {
-    "list_manifest_bad": 93,
+    "list_manifest_bad": 94,
     "no_list_manifest": 67,
-    "no_year_manifest": 3033,
-    "unread_sibling_page": 1651,
+    "no_year_manifest": 3036,
+    "unread_sibling_page": 1672,
     "unverified_product": 2
    },
    "unmapped": {
@@ -2200,11 +2200,11 @@
     "": 232
    },
    "not_closed": {
-    "list_manifest_bad": 93,
+    "list_manifest_bad": 94,
     "no_list_manifest": 67,
-    "no_year_manifest": 3245,
+    "no_year_manifest": 3251,
     "unattested": 12,
-    "uncrawled_chain_member": 1639,
+    "uncrawled_chain_member": 1660,
     "unverified_product": 2
    },
    "unmapped": {
@@ -2213,14 +2213,14 @@
   },
   "liftgate": {
    "no_records": {
-    "": 701
+    "": 705
    },
    "not_closed": {
-    "list_manifest_bad": 93,
+    "list_manifest_bad": 94,
     "no_list_manifest": 67,
-    "no_year_manifest": 2776,
-    "unattested": 1426,
-    "uncrawled_chain_member": 225,
+    "no_year_manifest": 2778,
+    "unattested": 1445,
+    "uncrawled_chain_member": 227,
     "unverified_product": 2
    },
    "unmapped": {
@@ -2229,12 +2229,12 @@
   },
   "power-steering-pump": {
    "no_records": {
-    "": 1164
+    "": 1175
    },
    "not_closed": {
-    "no_list_manifest": 1313,
-    "no_year_manifest": 2615,
-    "unread_sibling_page": 198
+    "no_list_manifest": 1330,
+    "no_year_manifest": 2614,
+    "unread_sibling_page": 199
    },
    "unmapped": {
     "": 263
@@ -2242,15 +2242,15 @@
   },
   "radiator": {
    "no_records": {
-    "": 278
+    "": 279
    },
    "not_closed": {
-    "list_manifest_bad": 93,
+    "list_manifest_bad": 94,
     "no_list_manifest": 67,
-    "no_year_manifest": 3199,
-    "unattested": 1120,
-    "uncrawled_chain_member": 408,
-    "unread_sibling_page": 125
+    "no_year_manifest": 3204,
+    "unattested": 1133,
+    "uncrawled_chain_member": 412,
+    "unread_sibling_page": 129
    },
    "unmapped": {
     "": 263
@@ -2258,13 +2258,13 @@
   },
   "side-mirrors": {
    "no_records": {
-    "": 731
+    "": 733
    },
    "not_closed": {
-    "no_list_manifest": 1533,
-    "no_year_manifest": 2752,
+    "no_list_manifest": 1553,
+    "no_year_manifest": 2757,
     "unattested": 43,
-    "uncrawled_chain_member": 230,
+    "uncrawled_chain_member": 231,
     "year_manifest_bad": 1
    },
    "unmapped": {
@@ -2276,10 +2276,10 @@
     "": 66
    },
    "not_closed": {
-    "no_list_manifest": 1540,
-    "no_year_manifest": 3410,
+    "no_list_manifest": 1561,
+    "no_year_manifest": 3416,
     "unattested": 101,
-    "uncrawled_chain_member": 172,
+    "uncrawled_chain_member": 173,
     "year_manifest_bad": 1
    },
    "unmapped": {
@@ -2288,12 +2288,12 @@
   },
   "tail-lights": {
    "no_records": {
-    "": 600
+    "": 603
    },
    "not_closed": {
-    "no_list_manifest": 1540,
-    "no_year_manifest": 2876,
-    "unattested": 179,
+    "no_list_manifest": 1561,
+    "no_year_manifest": 2879,
+    "unattested": 180,
     "uncrawled_chain_member": 94,
     "year_manifest_bad": 1
    },
@@ -2303,13 +2303,13 @@
   },
   "throttle-body": {
    "no_records": {
-    "": 95
+    "": 97
    },
    "not_closed": {
-    "no_list_manifest": 1540,
-    "no_year_manifest": 3381,
+    "no_list_manifest": 1561,
+    "no_year_manifest": 3385,
     "unattested": 130,
-    "uncrawled_chain_member": 143,
+    "uncrawled_chain_member": 144,
     "year_manifest_bad": 1
    },
    "unmapped": {
@@ -2318,13 +2318,13 @@
   },
   "trunk-lid": {
    "no_records": {
-    "": 1663
+    "": 1671
    },
    "not_closed": {
-    "list_manifest_bad": 93,
+    "list_manifest_bad": 94,
     "no_list_manifest": 67,
-    "no_year_manifest": 1939,
-    "unread_sibling_page": 1528
+    "no_year_manifest": 1941,
+    "unread_sibling_page": 1545
    },
    "unmapped": {
     "": 263
@@ -2332,12 +2332,12 @@
   },
   "window-regulator": {
    "no_records": {
-    "": 106
+    "": 107
    },
    "not_closed": {
-    "no_list_manifest": 1540,
-    "no_year_manifest": 3370,
-    "unread_sibling_page": 273,
+    "no_list_manifest": 1561,
+    "no_year_manifest": 3375,
+    "unread_sibling_page": 274,
     "year_manifest_bad": 1
    },
    "unmapped": {
@@ -2346,12 +2346,12 @@
   },
   "window-switch": {
    "no_records": {
-    "": 865
+    "": 869
    },
    "not_closed": {
-    "no_list_manifest": 1533,
-    "no_year_manifest": 2618,
-    "unread_sibling_page": 273,
+    "no_list_manifest": 1553,
+    "no_year_manifest": 2621,
+    "unread_sibling_page": 274,
     "year_manifest_bad": 1
    },
    "unmapped": {
@@ -2363,13 +2363,13 @@
   "by_cat": {
    "ac-compressor": {
     "conditional": {
-     "conditional:engine_unattested": 2178
+     "conditional:engine_unattested": 2183
     },
     "no_records": {
-     "": 494
+     "": 500
     },
     "split": {
-     "option_split": 2618
+     "option_split": 2635
     },
     "unmapped": {
      "": 263
@@ -2377,14 +2377,14 @@
    },
    "alternator": {
     "conditional": {
-     "conditional:engine_unattested": 2063
+     "conditional:engine_unattested": 2080
     },
     "no_records": {
      "": 649
     },
     "split": {
      "no_candidates": 18,
-     "option_split": 2560
+     "option_split": 2571
     },
     "unmapped": {
      "": 263
@@ -2392,14 +2392,14 @@
    },
    "bumper-front": {
     "conditional": {
-     "conditional:engine_unattested": 942,
+     "conditional:engine_unattested": 945,
      "conditional:option": 12
     },
     "no_records": {
-     "": 981
+     "": 987
     },
     "split": {
-     "option_split": 3355
+     "option_split": 3374
     },
     "unmapped": {
      "": 263
@@ -2407,14 +2407,14 @@
    },
    "bumper-rear": {
     "conditional": {
-     "conditional:engine_unattested": 900,
+     "conditional:engine_unattested": 904,
      "conditional:option": 12
     },
     "no_records": {
-     "": 590
+     "": 595
     },
     "split": {
-     "option_split": 3788
+     "option_split": 3807
     },
     "unmapped": {
      "": 263
@@ -2422,14 +2422,14 @@
    },
    "climate-control": {
     "conditional": {
-     "conditional:engine_unattested": 1307
+     "conditional:engine_unattested": 1312
     },
     "no_records": {
-     "": 520
+     "": 523
     },
     "split": {
      "no_candidates": 43,
-     "option_split": 3420
+     "option_split": 3440
     },
     "unmapped": {
      "": 263
@@ -2437,13 +2437,13 @@
    },
    "door-front": {
     "conditional": {
-     "conditional:engine_unattested": 1431
+     "conditional:engine_unattested": 1442
     },
     "no_records": {
-     "": 789
+     "": 786
     },
     "split": {
-     "option_split": 3070
+     "option_split": 3090
     },
     "unmapped": {
      "": 263
@@ -2451,13 +2451,13 @@
    },
    "door-rear": {
     "conditional": {
-     "conditional:engine_unattested": 1587
+     "conditional:engine_unattested": 1595
     },
     "no_records": {
-     "": 747
+     "": 750
     },
     "split": {
-     "option_split": 2956
+     "option_split": 2973
     },
     "unmapped": {
      "": 263
@@ -2465,13 +2465,13 @@
    },
    "fender": {
     "conditional": {
-     "conditional:engine_unattested": 1717
+     "conditional:engine_unattested": 1727
     },
     "no_records": {
-     "": 905
+     "": 909
     },
     "split": {
-     "option_split": 2509,
+     "option_split": 2523,
      "slot_missing": 159
     },
     "unmapped": {
@@ -2480,14 +2480,14 @@
    },
    "fuel-pump-module": {
     "conditional": {
-     "conditional:engine_unattested": 1263
+     "conditional:engine_unattested": 1266
     },
     "no_records": {
-     "": 415
+     "": 418
     },
     "split": {
      "no_candidates": 1,
-     "option_split": 3611
+     "option_split": 3633
     },
     "unmapped": {
      "": 263
@@ -2495,11 +2495,11 @@
    },
    "gauge-cluster": {
     "no_records": {
-     "": 3047
+     "": 3055
     },
     "split": {
-     "no_candidates": 181,
-     "option_split": 2062
+     "no_candidates": 182,
+     "option_split": 2081
     },
     "unmapped": {
      "": 263
@@ -2507,14 +2507,14 @@
    },
    "grille": {
     "conditional": {
-     "conditional:engine_unattested": 548
+     "conditional:engine_unattested": 552
     },
     "no_records": {
-     "": 1573
+     "": 1579
     },
     "split": {
-     "no_candidates": 141,
-     "option_split": 3028
+     "no_candidates": 142,
+     "option_split": 3045
     },
     "unmapped": {
      "": 263
@@ -2522,14 +2522,14 @@
    },
    "headlights": {
     "conditional": {
-     "conditional:engine_unattested": 1027
+     "conditional:engine_unattested": 1037
     },
     "no_records": {
-     "": 1171
+     "": 1176
     },
     "split": {
      "no_candidates": 1,
-     "option_split": 3091
+     "option_split": 3104
     },
     "unmapped": {
      "": 263
@@ -2537,13 +2537,13 @@
    },
    "hood": {
     "conditional": {
-     "conditional:engine_unattested": 1996
+     "conditional:engine_unattested": 2004
     },
     "no_records": {
-     "": 444
+     "": 447
     },
     "split": {
-     "option_split": 2850
+     "option_split": 2867
     },
     "unmapped": {
      "": 263
@@ -2551,14 +2551,14 @@
    },
    "ignition-coils": {
     "conditional": {
-     "conditional:engine_unattested": 1350,
-     "conditional:package": 211
+     "conditional:engine_unattested": 1356,
+     "conditional:package": 212
     },
     "no_records": {
      "": 232
     },
     "split": {
-     "option_split": 3497
+     "option_split": 3518
     },
     "unmapped": {
      "": 263
@@ -2566,13 +2566,13 @@
    },
    "liftgate": {
     "conditional": {
-     "conditional:engine_unattested": 2325
+     "conditional:engine_unattested": 2336
     },
     "no_records": {
-     "": 701
+     "": 705
     },
     "split": {
-     "option_split": 2264
+     "option_split": 2277
     },
     "unmapped": {
      "": 263
@@ -2580,14 +2580,14 @@
    },
    "power-steering-pump": {
     "conditional": {
-     "conditional:engine_unattested": 680,
-     "conditional:option": 49
+     "conditional:engine_unattested": 678,
+     "conditional:option": 51
     },
     "no_records": {
-     "": 1164
+     "": 1175
     },
     "split": {
-     "option_split": 3397
+     "option_split": 3414
     },
     "unmapped": {
      "": 263
@@ -2595,13 +2595,13 @@
    },
    "radiator": {
     "conditional": {
-     "conditional:engine_unattested": 547
+     "conditional:engine_unattested": 551
     },
     "no_records": {
-     "": 278
+     "": 279
     },
     "split": {
-     "option_split": 4465
+     "option_split": 4488
     },
     "unmapped": {
      "": 263
@@ -2612,10 +2612,10 @@
      "conditional:engine_unattested": 257
     },
     "no_records": {
-     "": 731
+     "": 733
     },
     "split": {
-     "option_split": 4299,
+     "option_split": 4325,
      "slot_missing": 3
     },
     "unmapped": {
@@ -2624,13 +2624,13 @@
    },
    "starter": {
     "conditional": {
-     "conditional:engine_unattested": 113
+     "conditional:engine_unattested": 114
     },
     "no_records": {
      "": 66
     },
     "split": {
-     "option_split": 5111
+     "option_split": 5138
     },
     "unmapped": {
      "": 263
@@ -2638,14 +2638,14 @@
    },
    "tail-lights": {
     "conditional": {
-     "conditional:engine_unattested": 950
+     "conditional:engine_unattested": 956
     },
     "no_records": {
-     "": 600
+     "": 603
     },
     "split": {
      "no_candidates": 1,
-     "option_split": 3739
+     "option_split": 3758
     },
     "unmapped": {
      "": 263
@@ -2653,14 +2653,14 @@
    },
    "throttle-body": {
     "conditional": {
-     "conditional:engine_unattested": 774
+     "conditional:engine_unattested": 778
     },
     "no_records": {
-     "": 95
+     "": 97
     },
     "split": {
      "no_candidates": 1,
-     "option_split": 4420
+     "option_split": 4442
     },
     "unmapped": {
      "": 263
@@ -2668,14 +2668,14 @@
    },
    "trunk-lid": {
     "conditional": {
-     "conditional:engine_unattested": 1747
+     "conditional:engine_unattested": 1757
     },
     "no_records": {
-     "": 1663
+     "": 1671
     },
     "split": {
-     "no_candidates": 410,
-     "option_split": 1470
+     "no_candidates": 413,
+     "option_split": 1477
     },
     "unmapped": {
      "": 263
@@ -2683,11 +2683,11 @@
    },
    "window-regulator": {
     "no_records": {
-     "": 106
+     "": 107
     },
     "split": {
      "no_candidates": 1,
-     "packaging_unstated": 5183
+     "packaging_unstated": 5210
     },
     "unmapped": {
      "": 263
@@ -2695,12 +2695,12 @@
    },
    "window-switch": {
     "no_records": {
-     "": 865
+     "": 869
     },
     "split": {
      "no_candidates": 187,
-     "option_split": 2121,
-     "position_missing": 2117
+     "option_split": 2134,
+     "position_missing": 2128
     },
     "unmapped": {
      "": 263
@@ -2742,74 +2742,74 @@
  "model_map_report": {
   "M10": {
    "bmw": {
-    "cars": 5391,
-    "mapped_cars": 5068,
-    "mapped_share": 0.9401
+    "cars": 5412,
+    "mapped_cars": 5087,
+    "mapped_share": 0.9399
    },
    "ford": {
-    "cars": 60484,
-    "mapped_cars": 58224,
-    "mapped_share": 0.9626
+    "cars": 60470,
+    "mapped_cars": 58219,
+    "mapped_share": 0.9628
    },
    "gm": {
-    "cars": 78866,
-    "mapped_cars": 63665,
-    "mapped_share": 0.8073
+    "cars": 78880,
+    "mapped_cars": 63689,
+    "mapped_share": 0.8074
    },
    "hmg": {
-    "cars": 21826,
-    "mapped_cars": 21611,
+    "cars": 21813,
+    "mapped_cars": 21596,
     "mapped_share": 0.9901
    },
    "honda": {
-    "cars": 28563,
-    "mapped_cars": 28157,
-    "mapped_share": 0.9858
+    "cars": 28595,
+    "mapped_cars": 28194,
+    "mapped_share": 0.986
    },
    "mazda": {
-    "cars": 6229,
-    "mapped_cars": 5820,
-    "mapped_share": 0.9343
+    "cars": 6242,
+    "mapped_cars": 5837,
+    "mapped_share": 0.9351
    },
    "mb": {
-    "cars": 4738,
-    "mapped_cars": 1672,
-    "mapped_share": 0.3529
+    "cars": 4764,
+    "mapped_cars": 1671,
+    "mapped_share": 0.3508
    },
    "mitsubishi": {
-    "cars": 2995,
-    "mapped_cars": 2893,
-    "mapped_share": 0.9659
+    "cars": 3001,
+    "mapped_cars": 2898,
+    "mapped_share": 0.9657
    },
    "mopar": {
-    "cars": 44033,
-    "mapped_cars": 41642,
-    "mapped_share": 0.9457
+    "cars": 44063,
+    "mapped_cars": 41719,
+    "mapped_share": 0.9468
    },
    "nissan": {
-    "cars": 33126,
-    "mapped_cars": 31796,
-    "mapped_share": 0.9599
+    "cars": 33261,
+    "mapped_cars": 31925,
+    "mapped_share": 0.9598
    },
    "subaru": {
-    "cars": 5553,
-    "mapped_cars": 5290,
-    "mapped_share": 0.9526
+    "cars": 5581,
+    "mapped_cars": 5318,
+    "mapped_share": 0.9529
    },
    "toyota": {
-    "cars": 26298,
-    "mapped_cars": 25589,
+    "cars": 26358,
+    "mapped_cars": 25647,
     "mapped_share": 0.973
    },
    "vag": {
-    "cars": 9176,
-    "mapped_cars": 8470,
-    "mapped_share": 0.9231
+    "cars": 9193,
+    "mapped_cars": 8485,
+    "mapped_share": 0.923
    },
    "volvo": {
-    "cars": 2453,
-    "mapped_cars": 2298,
-    "mapped_share": 0.9368
+    "cars": 2466,
+    "mapped_cars": 2312,
+    "mapped_share": 0.9376
    }
   },
   "M6": {
@@ -2824,7 +2824,7 @@
      "decoded": 37
     },
     "Acura|MDX": {
-     "decoded": 900,
+     "decoded": 901,
      "make_mismatch": 2
     },
     "Acura|RDX": {
@@ -2837,17 +2837,17 @@
      "decoded": 3
     },
     "Acura|RSX": {
-     "decoded": 108
+     "decoded": 109
     },
     "Acura|TL": {
-     "decoded": 1125,
+     "decoded": 1128,
      "make_mismatch": 1
     },
     "Acura|TLX": {
      "decoded": 31
     },
     "Acura|TSX": {
-     "decoded": 141
+     "decoded": 143
     },
     "Acura|ZDX": {
      "decoded": 4
@@ -2862,19 +2862,19 @@
      "decoded": 8
     },
     "Audi|A4": {
-     "decoded": 638
+     "decoded": 636
     },
     "Audi|A4 Quattro": {
      "decoded": 103
     },
     "Audi|A5": {
-     "decoded": 52
+     "decoded": 53
     },
     "Audi|A5 Quattro": {
      "decoded": 13
     },
     "Audi|A6": {
-     "decoded": 187
+     "decoded": 186
     },
     "Audi|A6 Quattro": {
      "decoded": 63
@@ -2907,7 +2907,7 @@
     },
     "Audi|Q5 Sportback": {},
     "Audi|Q7": {
-     "decoded": 154
+     "decoded": 153
     },
     "Audi|S3": {
      "decoded": 4
@@ -2945,7 +2945,7 @@
     },
     "BMW|230i": {},
     "BMW|318i": {
-     "decoded": 12
+     "decoded": 13
     },
     "BMW|318is": {
      "decoded": 4
@@ -2963,13 +2963,13 @@
      "decoded": 10
     },
     "BMW|323i": {
-     "decoded": 62
+     "decoded": 64
     },
     "BMW|325ci": {
-     "decoded": 97
+     "decoded": 98
     },
     "BMW|325i": {
-     "decoded": 351
+     "decoded": 350
     },
     "BMW|325is": {
      "decoded": 5
@@ -2985,7 +2985,7 @@
      "decoded": 2
     },
     "BMW|328i": {
-     "decoded": 859
+     "decoded": 860
     },
     "BMW|328i GT xDrive": {
      "decoded": 2
@@ -3003,7 +3003,7 @@
      "decoded": 53
     },
     "BMW|330i": {
-     "decoded": 121
+     "decoded": 120
     },
     "BMW|330i GT xDrive": {},
     "BMW|330xi": {
@@ -3013,7 +3013,7 @@
      "decoded": 2
     },
     "BMW|335i": {
-     "decoded": 130
+     "decoded": 131
     },
     "BMW|335i xDrive": {
      "decoded": 8
@@ -3022,7 +3022,7 @@
      "decoded": 1
     },
     "BMW|335xi": {
-     "decoded": 12
+     "decoded": 11
     },
     "BMW|340i": {},
     "BMW|428i": {
@@ -3041,28 +3041,28 @@
      "decoded": 1
     },
     "BMW|525i": {
-     "decoded": 139
+     "decoded": 140
     },
     "BMW|525xi": {
      "decoded": 14
     },
     "BMW|528i": {
-     "decoded": 262
+     "decoded": 264
     },
     "BMW|528i xDrive": {
      "decoded": 12
     },
     "BMW|528xi": {
-     "decoded": 20
+     "decoded": 21
     },
     "BMW|530i": {
-     "decoded": 150
+     "decoded": 151
     },
     "BMW|530xi": {
      "decoded": 30
     },
     "BMW|535i": {
-     "decoded": 141
+     "decoded": 142
     },
     "BMW|535i GT": {
      "decoded": 5
@@ -3074,13 +3074,13 @@
      "decoded": 19
     },
     "BMW|540i": {
-     "decoded": 23
+     "decoded": 22
     },
     "BMW|545i": {
      "decoded": 21
     },
     "BMW|550i": {
-     "decoded": 58
+     "decoded": 57
     },
     "BMW|550i GT": {
      "decoded": 7
@@ -3110,7 +3110,7 @@
      "decoded": 37
     },
     "BMW|740iL": {
-     "decoded": 29
+     "decoded": 30
     },
     "BMW|745Li": {
      "decoded": 33
@@ -3119,7 +3119,7 @@
      "decoded": 22
     },
     "BMW|750Li": {
-     "decoded": 98,
+     "decoded": 99,
      "hybrid": 1
     },
     "BMW|750Li xDrive": {
@@ -3142,7 +3142,7 @@
      "hybrid": 1
     },
     "BMW|ActiveHybrid 5": {
-     "decoded": 2
+     "decoded": 3
     },
     "BMW|Alpina B7": {},
     "BMW|Alpina B7 xDrive": {
@@ -3167,13 +3167,13 @@
      "decoded": 90
     },
     "BMW|X3": {
-     "decoded": 395
+     "decoded": 400
     },
     "BMW|X4": {
      "decoded": 1
     },
     "BMW|X5": {
-     "decoded": 532
+     "decoded": 536
     },
     "BMW|X6": {
      "decoded": 11
@@ -3194,16 +3194,16 @@
      "decoded": 2
     },
     "Buick|Century": {
-     "decoded": 569
+     "decoded": 565
     },
     "Buick|Electra": {
      "decoded": 5
     },
     "Buick|Enclave": {
-     "decoded": 960
+     "decoded": 958
     },
     "Buick|Encore": {
-     "decoded": 250
+     "decoded": 251
     },
     "Buick|Encore GX": {
      "decoded": 7
@@ -3218,10 +3218,10 @@
      "decoded": 866
     },
     "Buick|LeSabre": {
-     "decoded": 899
+     "decoded": 898
     },
     "Buick|Lucerne": {
-     "decoded": 501
+     "decoded": 503
     },
     "Buick|Park Avenue": {
      "decoded": 53
@@ -3231,10 +3231,10 @@
     },
     "Buick|Reatta": {},
     "Buick|Regal": {
-     "decoded": 470
+     "decoded": 468
     },
     "Buick|Rendezvous": {
-     "decoded": 289
+     "decoded": 290
     },
     "Buick|Riviera": {
      "decoded": 4
@@ -3247,13 +3247,13 @@
      "decoded": 10
     },
     "Buick|Terraza": {
-     "decoded": 38
+     "decoded": 39
     },
     "Buick|Verano": {
      "decoded": 344
     },
     "Cadillac|ATS": {
-     "decoded": 123
+     "decoded": 122
     },
     "Cadillac|Allante": {},
     "Cadillac|Brougham": {
@@ -3264,13 +3264,13 @@
      "decoded": 2
     },
     "Cadillac|CTS": {
-     "decoded": 585
+     "decoded": 584
     },
     "Cadillac|DTS": {
      "decoded": 37
     },
     "Cadillac|DeVille": {
-     "decoded": 182,
+     "decoded": 183,
      "make_mismatch": 1
     },
     "Cadillac|ELR": {
@@ -3280,33 +3280,33 @@
      "decoded": 28
     },
     "Cadillac|Escalade": {
-     "decoded": 482,
+     "decoded": 480,
      "hybrid": 6
     },
     "Cadillac|Fleetwood": {
-     "decoded": 7
+     "decoded": 6
     },
     "Cadillac|SRX": {
      "decoded": 566
     },
     "Cadillac|STS": {
-     "decoded": 66
+     "decoded": 67
     },
     "Cadillac|Seville": {
-     "decoded": 121
+     "decoded": 120
     },
     "Cadillac|XLR": {},
     "Cadillac|XT5": {
      "decoded": 11
     },
     "Cadillac|XTS": {
-     "decoded": 71
+     "decoded": 73
     },
     "Chevrolet|Astro": {
-     "decoded": 416
+     "decoded": 419
     },
     "Chevrolet|Avalanche": {
-     "decoded": 396
+     "decoded": 398
     },
     "Chevrolet|Beretta": {
      "decoded": 5
@@ -3321,7 +3321,7 @@
      "decoded": 25
     },
     "Chevrolet|C1500": {
-     "decoded": 251
+     "decoded": 250
     },
     "Chevrolet|C20": {
      "decoded": 5
@@ -3337,23 +3337,23 @@
      "decoded": 42
     },
     "Chevrolet|Camaro": {
-     "decoded": 457
+     "decoded": 458
     },
     "Chevrolet|Caprice": {
-     "decoded": 69
+     "decoded": 70
     },
     "Chevrolet|Captiva Sport": {
-     "decoded": 243
+     "decoded": 245
     },
     "Chevrolet|Cavalier": {
-     "decoded": 172
+     "decoded": 173
     },
     "Chevrolet|Celebrity": {},
     "Chevrolet|Cobalt": {
-     "decoded": 1220
+     "decoded": 1224
     },
     "Chevrolet|Colorado": {
-     "decoded": 493
+     "decoded": 494
     },
     "Chevrolet|Corsica": {
      "decoded": 4
@@ -3362,10 +3362,10 @@
      "decoded": 12
     },
     "Chevrolet|Cruze": {
-     "decoded": 3629
+     "decoded": 3623
     },
     "Chevrolet|Equinox": {
-     "decoded": 3383
+     "decoded": 3374
     },
     "Chevrolet|Express": {
      "decoded": 1
@@ -3380,16 +3380,16 @@
      "decoded": 7
     },
     "Chevrolet|HHR": {
-     "decoded": 772
+     "decoded": 779
     },
     "Chevrolet|Impala": {
-     "decoded": 3201
+     "decoded": 3207
     },
     "Chevrolet|K10": {
      "decoded": 1
     },
     "Chevrolet|K1500": {
-     "decoded": 279
+     "decoded": 281
     },
     "Chevrolet|K20": {
      "decoded": 2
@@ -3404,12 +3404,12 @@
      "decoded": 48
     },
     "Chevrolet|Malibu": {
-     "decoded": 4331,
+     "decoded": 4312,
      "hybrid": 25
     },
     "Chevrolet|Metro": {},
     "Chevrolet|Monte Carlo": {
-     "decoded": 308
+     "decoded": 304
     },
     "Chevrolet|Orlando": {
      "decoded": 12
@@ -3424,15 +3424,15 @@
      "decoded": 2
     },
     "Chevrolet|S-10": {
-     "decoded": 853,
+     "decoded": 855,
      "make_mismatch": 3
     },
     "Chevrolet|Silverado": {},
     "Chevrolet|Sonic": {
-     "decoded": 1038
+     "decoded": 1040
     },
     "Chevrolet|Spark": {
-     "decoded": 282
+     "decoded": 280
     },
     "Chevrolet|Spark EV": {
      "decoded": 3
@@ -3442,7 +3442,7 @@
      "decoded": 3
     },
     "Chevrolet|Tahoe": {
-     "decoded": 2305,
+     "decoded": 2307,
      "hybrid": 1
     },
     "Chevrolet|Trailblazer": {
@@ -3452,34 +3452,34 @@
      "decoded": 1791
     },
     "Chevrolet|Trax": {
-     "decoded": 242
+     "decoded": 243
     },
     "Chevrolet|Uplander": {
-     "decoded": 287
+     "decoded": 289
     },
     "Chevrolet|Venture": {
      "decoded": 186
     },
     "Chevrolet|Volt": {
-     "decoded": 85
+     "decoded": 83
     },
     "Chrysler|200": {
-     "decoded": 1665
+     "decoded": 1667
     },
     "Chrysler|300": {
-     "decoded": 1323
+     "decoded": 1322
     },
     "Chrysler|300M": {
      "decoded": 69
     },
     "Chrysler|Aspen": {
-     "decoded": 142
+     "decoded": 140
     },
     "Chrysler|Cirrus": {
      "decoded": 12
     },
     "Chrysler|Concorde": {
-     "decoded": 63
+     "decoded": 64
     },
     "Chrysler|Fifth Avenue": {},
     "Chrysler|Imperial": {},
@@ -3493,28 +3493,28 @@
      "decoded": 12
     },
     "Chrysler|PT Cruiser": {
-     "decoded": 1000
+     "decoded": 995
     },
     "Chrysler|Pacifica": {
-     "decoded": 408
+     "decoded": 406
     },
     "Chrysler|Sebring": {
-     "decoded": 792
+     "decoded": 796
     },
     "Chrysler|TC By Maserati": {
      "decoded": 3
     },
     "Chrysler|Town & Country": {
-     "decoded": 2291
+     "decoded": 2288
     },
     "Chrysler|Voyager": {
-     "decoded": 49
+     "decoded": 48
     },
     "Dodge|Aries": {
      "decoded": 1
     },
     "Dodge|Avenger": {
-     "decoded": 1159
+     "decoded": 1166
     },
     "Dodge|B150": {
      "decoded": 2
@@ -3535,16 +3535,16 @@
      "decoded": 8
     },
     "Dodge|Caliber": {
-     "decoded": 711
+     "decoded": 719
     },
     "Dodge|Caravan": {
-     "decoded": 737
+     "decoded": 749
     },
     "Dodge|Challenger": {
-     "decoded": 146
+     "decoded": 148
     },
     "Dodge|Charger": {
-     "decoded": 1578
+     "decoded": 1588
     },
     "Dodge|D100": {
      "decoded": 4
@@ -3554,29 +3554,29 @@
     },
     "Dodge|D350": {},
     "Dodge|Dakota": {
-     "decoded": 1438
+     "decoded": 1445
     },
     "Dodge|Dart": {
-     "decoded": 786
+     "decoded": 793
     },
     "Dodge|Daytona": {
      "decoded": 6
     },
     "Dodge|Diplomat": {},
     "Dodge|Durango": {
-     "decoded": 1392
+     "decoded": 1398
     },
     "Dodge|Dynasty": {
      "decoded": 2
     },
     "Dodge|Grand Caravan": {
-     "decoded": 2754
+     "decoded": 2752
     },
     "Dodge|Intrepid": {
      "decoded": 72
     },
     "Dodge|Journey": {
-     "decoded": 1632
+     "decoded": 1635
     },
     "Dodge|Lancer": {},
     "Dodge|Magnum": {
@@ -3586,23 +3586,23 @@
      "decoded": 3
     },
     "Dodge|Neon": {
-     "decoded": 267,
+     "decoded": 268,
      "make_mismatch": 1
     },
     "Dodge|Nitro": {
-     "decoded": 359
+     "decoded": 362
     },
     "Dodge|Ram 1500": {
-     "decoded": 3579
+     "decoded": 3577
     },
     "Dodge|Ram 2500": {
-     "decoded": 283
+     "decoded": 280
     },
     "Dodge|Ram 3500": {
      "decoded": 33
     },
     "Dodge|Ram Van": {
-     "decoded": 166
+     "decoded": 169
     },
     "Dodge|Ram Van 1500": {
      "decoded": 24
@@ -3627,7 +3627,7 @@
     },
     "Dodge|Spirit": {},
     "Dodge|Stratus": {
-     "decoded": 241
+     "decoded": 242
     },
     "Dodge|W100": {
      "decoded": 1
@@ -3642,47 +3642,47 @@
      "decoded": 2
     },
     "Ford|Aerostar": {
-     "decoded": 62
+     "decoded": 63
     },
     "Ford|Bronco": {
      "decoded": 35
     },
     "Ford|Bronco II": {
-     "decoded": 36
+     "decoded": 37
     },
     "Ford|C-Max": {
-     "decoded": 77
+     "decoded": 76
     },
     "Ford|Contour": {
      "decoded": 54
     },
     "Ford|Crown Victoria": {
-     "decoded": 279
+     "decoded": 281
     },
     "Ford|E-150": {
-     "decoded": 685
+     "decoded": 686
     },
     "Ford|E-250": {
-     "decoded": 693
+     "decoded": 694
     },
     "Ford|E-450 Super Duty": {
      "decoded": 2
     },
     "Ford|E-Transit": {},
     "Ford|Edge": {
-     "decoded": 1619
+     "decoded": 1626
     },
     "Ford|Escape": {
-     "decoded": 4121
+     "decoded": 4125
     },
     "Ford|Escort": {
      "decoded": 210
     },
     "Ford|Excursion": {
-     "decoded": 83
+     "decoded": 81
     },
     "Ford|Expedition": {
-     "decoded": 2703
+     "decoded": 2702
     },
     "Ford|Explorer": {
      "decoded": 3773
@@ -3694,20 +3694,19 @@
      "decoded": 435
     },
     "Ford|F-150": {
-     "decoded": 7808,
-     "make_mismatch": 1
+     "decoded": 7786
     },
     "Ford|F-250": {
-     "decoded": 678
+     "decoded": 674
     },
     "Ford|F-250 Super Duty": {
-     "decoded": 513
+     "decoded": 514
     },
     "Ford|F-350": {
      "decoded": 225
     },
     "Ford|F-350 Super Duty": {
-     "decoded": 216
+     "decoded": 217
     },
     "Ford|F-450 Super Duty": {
      "decoded": 25
@@ -3716,7 +3715,7 @@
      "decoded": 11
     },
     "Ford|Fiesta": {
-     "decoded": 1033
+     "decoded": 1035
     },
     "Ford|Five Hundred": {
      "decoded": 327
@@ -3725,20 +3724,20 @@
      "decoded": 482
     },
     "Ford|Focus": {
-     "decoded": 5329
+     "decoded": 5337
     },
     "Ford|Freestar": {
-     "decoded": 204
+     "decoded": 206
     },
     "Ford|Freestyle": {
-     "decoded": 204
+     "decoded": 205
     },
     "Ford|Fusion": {
-     "decoded": 4215,
+     "decoded": 4214,
      "hybrid": 160
     },
     "Ford|Mustang": {
-     "decoded": 1043
+     "decoded": 1044
     },
     "Ford|Police Interceptor Sedan": {
      "decoded": 16
@@ -3750,10 +3749,10 @@
      "decoded": 11
     },
     "Ford|Ranger": {
-     "decoded": 1764
+     "decoded": 1772
     },
     "Ford|Taurus": {
-     "decoded": 2244
+     "decoded": 2243
     },
     "Ford|Taurus X": {
      "decoded": 74
@@ -3768,13 +3767,13 @@
      "decoded": 15
     },
     "Ford|Transit Connect": {
-     "decoded": 259
+     "decoded": 260
     },
     "Ford|Windstar": {
-     "decoded": 258
+     "decoded": 260
     },
     "GMC|Acadia": {
-     "decoded": 1464
+     "decoded": 1466
     },
     "GMC|C1500": {
      "decoded": 59
@@ -3786,10 +3785,10 @@
      "decoded": 5
     },
     "GMC|Canyon": {
-     "decoded": 105
+     "decoded": 106
     },
     "GMC|Envoy": {
-     "decoded": 702
+     "decoded": 708
     },
     "GMC|G1500": {
      "decoded": 1
@@ -3816,22 +3815,22 @@
      "decoded": 140
     },
     "GMC|Savana": {
-     "decoded": 151
+     "decoded": 154
     },
     "GMC|Sierra": {},
     "GMC|Sonoma": {
-     "decoded": 195
+     "decoded": 196
     },
     "GMC|Suburban": {},
     "GMC|Terrain": {
-     "decoded": 994
+     "decoded": 1000
     },
     "GMC|Yukon": {
-     "decoded": 941,
+     "decoded": 940,
      "hybrid": 1
     },
     "Honda|Accord": {
-     "decoded": 7719,
+     "decoded": 7734,
      "hybrid": 44,
      "make_mismatch": 1
     },
@@ -3840,7 +3839,7 @@
      "hybrid": 23
     },
     "Honda|CR-V": {
-     "decoded": 1554
+     "decoded": 1558
     },
     "Honda|CR-Z": {
      "decoded": 18
@@ -3849,8 +3848,8 @@
      "decoded": 5
     },
     "Honda|Civic": {
-     "decoded": 5669,
-     "hybrid": 300
+     "decoded": 5676,
+     "hybrid": 295
     },
     "Honda|Crosstour": {
      "decoded": 44
@@ -3859,52 +3858,52 @@
      "decoded": 1
     },
     "Honda|Element": {
-     "decoded": 309
+     "decoded": 308
     },
     "Honda|Fit": {
-     "decoded": 177
+     "decoded": 179
     },
     "Honda|HR-V": {
      "decoded": 24
     },
     "Honda|Insight": {
-     "decoded": 96
+     "decoded": 97
     },
     "Honda|Odyssey": {
-     "decoded": 3124
+     "decoded": 3118
     },
     "Honda|Pilot": {
-     "decoded": 1780
+     "decoded": 1786
     },
     "Honda|Prelude": {
-     "decoded": 39
+     "decoded": 41
     },
     "Honda|Ridgeline": {
-     "decoded": 194
+     "decoded": 196
     },
     "Hummer|H2": {
      "decoded": 9
     },
     "Hummer|H3": {
-     "decoded": 98
+     "decoded": 99
     },
     "Hyundai|Accent": {
-     "decoded": 1014
+     "decoded": 1011
     },
     "Hyundai|Azera": {
-     "decoded": 127
+     "decoded": 129
     },
     "Hyundai|Elantra": {
-     "decoded": 2414
+     "decoded": 2419
     },
     "Hyundai|Elantra GT": {
      "decoded": 95
     },
     "Hyundai|Elantra Touring": {
-     "decoded": 44
+     "decoded": 45
     },
     "Hyundai|Entourage": {
-     "decoded": 44
+     "decoded": 42
     },
     "Hyundai|Equus": {
      "decoded": 28
@@ -3913,7 +3912,7 @@
      "decoded": 4
     },
     "Hyundai|Genesis": {
-     "decoded": 273
+     "decoded": 271
     },
     "Hyundai|Genesis Coupe": {
      "decoded": 97
@@ -3928,7 +3927,7 @@
      "decoded": 1016
     },
     "Hyundai|Santa Fe Sport": {
-     "decoded": 103
+     "decoded": 102
     },
     "Hyundai|Santa Fe XL": {
      "decoded": 15
@@ -3937,21 +3936,21 @@
      "decoded": 1
     },
     "Hyundai|Sonata": {
-     "decoded": 3357,
+     "decoded": 3352,
      "hybrid": 35
     },
     "Hyundai|Sonata Hybrid": {
-     "decoded": 81,
-     "hybrid": 31
+     "decoded": 80,
+     "hybrid": 30
     },
     "Hyundai|Tiburon": {
-     "decoded": 86
+     "decoded": 87
     },
     "Hyundai|Tucson": {
-     "decoded": 461
+     "decoded": 455
     },
     "Hyundai|Veloster": {
-     "decoded": 260
+     "decoded": 262
     },
     "Hyundai|Veloster N": {
      "decoded": 1
@@ -3980,22 +3979,22 @@
      "decoded": 7
     },
     "Infiniti|G20": {
-     "decoded": 14
+     "decoded": 13
     },
     "Infiniti|G25": {
      "decoded": 24
     },
     "Infiniti|G35": {
-     "decoded": 806
+     "decoded": 811
     },
     "Infiniti|G37": {
-     "decoded": 286
+     "decoded": 288
     },
     "Infiniti|I30": {
-     "decoded": 14
+     "decoded": 15
     },
     "Infiniti|I35": {
-     "decoded": 31
+     "decoded": 32
     },
     "Infiniti|J30": {
      "decoded": 13
@@ -4004,7 +4003,7 @@
      "decoded": 33
     },
     "Infiniti|M35": {
-     "decoded": 191
+     "decoded": 192
     },
     "Infiniti|M35h": {
      "decoded": 2
@@ -4013,7 +4012,7 @@
      "decoded": 36
     },
     "Infiniti|M45": {
-     "decoded": 39
+     "decoded": 40
     },
     "Infiniti|M56": {
      "decoded": 2
@@ -4025,10 +4024,10 @@
      "decoded": 13
     },
     "Infiniti|Q50": {
-     "decoded": 119
+     "decoded": 121
     },
     "Infiniti|Q60": {
-     "decoded": 8
+     "decoded": 9
     },
     "Infiniti|Q70": {
      "decoded": 7
@@ -4043,10 +4042,10 @@
      "decoded": 24
     },
     "Infiniti|QX56": {
-     "decoded": 238
+     "decoded": 240
     },
     "Infiniti|QX60": {
-     "decoded": 166
+     "decoded": 165
     },
     "Infiniti|QX70": {
      "decoded": 12
@@ -4055,19 +4054,19 @@
      "decoded": 20
     },
     "Jeep|Cherokee": {
-     "decoded": 770
+     "decoded": 775
     },
     "Jeep|Comanche": {
      "decoded": 5
     },
     "Jeep|Commander": {
-     "decoded": 402
+     "decoded": 399
     },
     "Jeep|Compass": {
-     "decoded": 849
+     "decoded": 848
     },
     "Jeep|Grand Cherokee": {
-     "decoded": 2904
+     "decoded": 2912
     },
     "Jeep|Grand Cherokee L": {},
     "Jeep|Grand Wagoneer": {
@@ -4077,10 +4076,10 @@
      "decoded": 1
     },
     "Jeep|Liberty": {
-     "decoded": 1614
+     "decoded": 1613
     },
     "Jeep|Patriot": {
-     "decoded": 1193,
+     "decoded": 1201,
      "make_mismatch": 2
     },
     "Jeep|Renegade": {
@@ -4102,10 +4101,10 @@
      "decoded": 70
     },
     "Kia|Forte": {
-     "decoded": 979
+     "decoded": 975
     },
     "Kia|Forte Koup": {
-     "decoded": 69
+     "decoded": 68
     },
     "Kia|K4": {
      "decoded": 4
@@ -4120,7 +4119,7 @@
      "decoded": 18
     },
     "Kia|Optima": {
-     "decoded": 1857,
+     "decoded": 1860,
      "hybrid": 8
     },
     "Kia|Optima Hybrid": {
@@ -4128,13 +4127,13 @@
      "hybrid": 1
     },
     "Kia|Rio": {
-     "decoded": 562
+     "decoded": 565
     },
     "Kia|Rondo": {
-     "decoded": 139
+     "decoded": 140
     },
     "Kia|Sedona": {
-     "decoded": 460
+     "decoded": 463
     },
     "Kia|Seltos": {
      "decoded": 4
@@ -4143,19 +4142,19 @@
      "decoded": 16
     },
     "Kia|Sorento": {
-     "decoded": 1140
+     "decoded": 1139
     },
     "Kia|Soul": {
-     "decoded": 1423
+     "decoded": 1422
     },
     "Kia|Soul EV": {
      "decoded": 1
     },
     "Kia|Spectra": {
-     "decoded": 364
+     "decoded": 363
     },
     "Kia|Sportage": {
-     "decoded": 522
+     "decoded": 519
     },
     "Kia|Stinger": {
      "decoded": 4
@@ -4167,25 +4166,25 @@
      "decoded": 8
     },
     "Lexus|ES 300": {
-     "decoded": 438
+     "decoded": 439
     },
     "Lexus|ES 300h": {
      "decoded": 1
     },
     "Lexus|ES 330": {
-     "decoded": 210
+     "decoded": 211
     },
     "Lexus|ES 350": {
-     "decoded": 231
+     "decoded": 230
     },
     "Lexus|GS 300": {
-     "decoded": 179
+     "decoded": 180
     },
     "Lexus|GS 350": {
      "decoded": 64
     },
     "Lexus|GS 400": {
-     "decoded": 23
+     "decoded": 24
     },
     "Lexus|GS 430": {
      "decoded": 16
@@ -4209,7 +4208,7 @@
      "decoded": 236
     },
     "Lexus|IS 300": {
-     "decoded": 56
+     "decoded": 57
     },
     "Lexus|IS 350": {
      "decoded": 36
@@ -4225,22 +4224,22 @@
      "decoded": 306
     },
     "Lexus|RX 330": {
-     "decoded": 116
+     "decoded": 117
     },
     "Lexus|RX 350": {
-     "decoded": 122
+     "decoded": 123
     },
     "Lexus|RX 400h": {
      "decoded": 52
     },
     "Lexus|RX 450h": {
-     "decoded": 7
+     "decoded": 8
     },
     "Lexus|SC 430": {
      "decoded": 14
     },
     "Lincoln|Aviator": {
-     "decoded": 95
+     "decoded": 94
     },
     "Lincoln|Blackwood": {
      "decoded": 2
@@ -4249,7 +4248,7 @@
      "decoded": 13
     },
     "Lincoln|LS": {
-     "decoded": 80
+     "decoded": 81
     },
     "Lincoln|MKC": {
      "decoded": 22
@@ -4261,10 +4260,10 @@
      "decoded": 68
     },
     "Lincoln|MKX": {
-     "decoded": 318
+     "decoded": 315
     },
     "Lincoln|MKZ": {
-     "decoded": 389,
+     "decoded": 388,
      "hybrid": 29
     },
     "Lincoln|Mark LT": {
@@ -4283,14 +4282,14 @@
      "decoded": 546
     },
     "Lincoln|Town Car": {
-     "decoded": 693
+     "decoded": 694
     },
     "Lincoln|Zephyr": {
      "decoded": 59
     },
     "Mazda|323": {},
     "Mazda|626": {
-     "decoded": 86
+     "decoded": 87
     },
     "Mazda|929": {},
     "Mazda|B2000": {
@@ -4312,13 +4311,13 @@
      "decoded": 2
     },
     "Mazda|CX-7": {
-     "decoded": 338
+     "decoded": 339
     },
     "Mazda|CX-9": {
-     "decoded": 393
+     "decoded": 394
     },
     "Mazda|MPV": {
-     "decoded": 85
+     "decoded": 87
     },
     "Mazda|MX-3": {
      "decoded": 2
@@ -4328,22 +4327,22 @@
      "decoded": 40
     },
     "Mazda|Mazda3": {
-     "decoded": 1086
+     "decoded": 1091
     },
     "Mazda|Mazda5": {
-     "decoded": 173
+     "decoded": 172
     },
     "Mazda|Mazda6": {
      "decoded": 893
     },
     "Mazda|Millenia": {
-     "decoded": 28
+     "decoded": 29
     },
     "Mazda|Navajo": {
      "decoded": 5
     },
     "Mazda|Protege": {
-     "decoded": 189
+     "decoded": 188
     },
     "Mazda|Protege5": {
      "decoded": 50
@@ -4352,7 +4351,7 @@
      "decoded": 27
     },
     "Mazda|Tribute": {
-     "decoded": 313
+     "decoded": 315
     },
     "Mercedes-Benz|190D": {},
     "Mercedes-Benz|190E": {
@@ -4494,7 +4493,7 @@
      "decoded": 7
     },
     "Mercedes-Benz|GL350": {
-     "decoded": 6
+     "decoded": 5
     },
     "Mercedes-Benz|GL450": {
      "decoded": 68
@@ -4597,20 +4596,20 @@
      "decoded": 1
     },
     "Mercury|Capri": {
-     "decoded": 8
+     "decoded": 9
     },
     "Mercury|Cougar": {
      "decoded": 77,
      "make_mismatch": 1
     },
     "Mercury|Grand Marquis": {
-     "decoded": 786
+     "decoded": 783
     },
     "Mercury|Mariner": {
-     "decoded": 254
+     "decoded": 255
     },
     "Mercury|Milan": {
-     "decoded": 252,
+     "decoded": 250,
      "hybrid": 7
     },
     "Mercury|Montego": {
@@ -4620,10 +4619,10 @@
      "decoded": 30
     },
     "Mercury|Mountaineer": {
-     "decoded": 331
+     "decoded": 333
     },
     "Mercury|Mystique": {
-     "decoded": 13
+     "decoded": 12
     },
     "Mercury|Sable": {
      "decoded": 238
@@ -4632,7 +4631,7 @@
      "decoded": 6
     },
     "Mercury|Tracer": {
-     "decoded": 18
+     "decoded": 17
     },
     "Mitsubishi|3000GT": {
      "decoded": 15
@@ -4641,13 +4640,13 @@
      "decoded": 29
     },
     "Mitsubishi|Eclipse": {
-     "decoded": 114
+     "decoded": 117
     },
     "Mitsubishi|Eclipse Cross": {
      "decoded": 3
     },
     "Mitsubishi|Endeavor": {
-     "decoded": 168
+     "decoded": 166
     },
     "Mitsubishi|Expo": {
      "decoded": 2
@@ -4656,7 +4655,7 @@
      "decoded": 22
     },
     "Mitsubishi|Lancer": {
-     "decoded": 276,
+     "decoded": 278,
      "make_mismatch": 1
     },
     "Mitsubishi|Mighty Max": {
@@ -4669,78 +4668,78 @@
      "decoded": 18
     },
     "Mitsubishi|Montero": {
-     "decoded": 52
+     "decoded": 53
     },
     "Mitsubishi|Montero Sport": {
-     "decoded": 144
+     "decoded": 145
     },
     "Mitsubishi|Outlander": {
-     "decoded": 289
+     "decoded": 287
     },
     "Mitsubishi|Outlander Sport": {
-     "decoded": 156
+     "decoded": 157
     },
     "Nissan|200SX": {
-     "decoded": 10
+     "decoded": 9
     },
     "Nissan|350Z": {
      "decoded": 92
     },
     "Nissan|Altima": {
-     "decoded": 7443,
+     "decoded": 7473,
      "make_mismatch": 1
     },
     "Nissan|Armada": {
-     "decoded": 583
+     "decoded": 585
     },
     "Nissan|Cube": {
-     "decoded": 108
+     "decoded": 111
     },
     "Nissan|Frontier": {
-     "decoded": 533
+     "decoded": 538
     },
     "Nissan|Juke": {
-     "decoded": 280
+     "decoded": 281
     },
     "Nissan|Kicks": {
      "decoded": 29
     },
     "Nissan|Leaf": {
-     "decoded": 65
+     "decoded": 64
     },
     "Nissan|Maxima": {
-     "decoded": 1594
+     "decoded": 1607
     },
     "Nissan|Murano": {
-     "decoded": 1544
+     "decoded": 1548
     },
     "Nissan|NV": {
      "decoded": 4
     },
     "Nissan|Pathfinder": {
-     "decoded": 1826
+     "decoded": 1842
     },
     "Nissan|Quest": {
-     "decoded": 504
+     "decoded": 502
     },
     "Nissan|Rogue": {
-     "decoded": 2091
+     "decoded": 2098
     },
     "Nissan|Sentra": {
-     "decoded": 3526
+     "decoded": 3542
     },
     "Nissan|Stanza": {
      "decoded": 4
     },
     "Nissan|Titan": {
-     "decoded": 657,
+     "decoded": 659,
      "make_mismatch": 1
     },
     "Nissan|Versa": {
-     "decoded": 1955
+     "decoded": 1963
     },
     "Nissan|Xterra": {
-     "decoded": 934
+     "decoded": 938
     },
     "Oldsmobile|88": {
      "decoded": 13
@@ -4756,7 +4755,7 @@
     },
     "Oldsmobile|Aurora": {},
     "Oldsmobile|Bravada": {
-     "decoded": 61
+     "decoded": 62
     },
     "Oldsmobile|Calais": {
      "decoded": 1
@@ -4766,7 +4765,7 @@
      "decoded": 1
     },
     "Oldsmobile|Delta 88": {
-     "decoded": 13
+     "decoded": 14
     },
     "Oldsmobile|Firenza": {},
     "Oldsmobile|Intrigue": {
@@ -4782,10 +4781,10 @@
      "decoded": 1
     },
     "Pontiac|Aztek": {
-     "decoded": 57
+     "decoded": 58
     },
     "Pontiac|Bonneville": {
-     "decoded": 137
+     "decoded": 138
     },
     "Pontiac|Fiero": {
      "decoded": 15
@@ -4797,13 +4796,13 @@
      "decoded": 126
     },
     "Pontiac|G6": {
-     "decoded": 944
+     "decoded": 945
     },
     "Pontiac|Grand Am": {
-     "decoded": 388
+     "decoded": 387
     },
     "Pontiac|Grand Prix": {
-     "decoded": 676
+     "decoded": 672
     },
     "Pontiac|Montana": {
      "decoded": 100
@@ -4821,16 +4820,16 @@
      "decoded": 4
     },
     "Pontiac|Torrent": {
-     "decoded": 168
+     "decoded": 166
     },
     "Pontiac|Trans Sport": {
-     "decoded": 16
+     "decoded": 15
     },
     "Pontiac|Vibe": {
-     "decoded": 342
+     "decoded": 347
     },
     "Ram|1500": {
-     "decoded": 376
+     "decoded": 378
     },
     "Ram|1500 Classic": {
      "decoded": 12
@@ -4863,7 +4862,7 @@
      "decoded": 46
     },
     "Saturn|Aura": {
-     "decoded": 312,
+     "decoded": 311,
      "hybrid": 3
     },
     "Saturn|ION": {
@@ -4879,16 +4878,16 @@
     "Saturn|LW1": {},
     "Saturn|LW200": {},
     "Saturn|Outlook": {
-     "decoded": 143
+     "decoded": 144
     },
     "Saturn|Relay": {
-     "decoded": 20
+     "decoded": 19
     },
     "Saturn|Sky": {
      "decoded": 4
     },
     "Saturn|VUE": {
-     "decoded": 749,
+     "decoded": 745,
      "hybrid": 13
     },
     "Scion|iM": {
@@ -4901,7 +4900,7 @@
      "decoded": 99
     },
     "Scion|xB": {
-     "decoded": 470
+     "decoded": 472
     },
     "Scion|xD": {
      "decoded": 102
@@ -4913,20 +4912,20 @@
      "decoded": 23
     },
     "Subaru|Forester": {
-     "decoded": 1157
+     "decoded": 1163
     },
     "Subaru|Impreza": {
-     "decoded": 814,
+     "decoded": 821,
      "make_mismatch": 1
     },
     "Subaru|Impreza WRX": {
      "decoded": 4
     },
     "Subaru|Legacy": {
-     "decoded": 855
+     "decoded": 865
     },
     "Subaru|Outback": {
-     "decoded": 1279
+     "decoded": 1282
     },
     "Subaru|SVX": {
      "decoded": 2
@@ -4942,29 +4941,29 @@
      "decoded": 88
     },
     "Toyota|4Runner": {
-     "decoded": 464
+     "decoded": 467
     },
     "Toyota|Avalon": {
-     "decoded": 1054,
+     "decoded": 1058,
      "hybrid": 6
     },
     "Toyota|Camry": {
-     "decoded": 6884,
-     "gas": 2224,
+     "decoded": 6918,
+     "gas": 2236,
      "hybrid": 240
     },
     "Toyota|Camry Hybrid": {
-     "decoded": 96,
-     "hybrid": 96
+     "decoded": 94,
+     "hybrid": 94
     },
     "Toyota|Camry Solara": {
-     "decoded": 460
+     "decoded": 458
     },
     "Toyota|Celica": {
-     "decoded": 179
+     "decoded": 182
     },
     "Toyota|Corolla": {
-     "decoded": 3128
+     "decoded": 3138
     },
     "Toyota|Corolla iM": {
      "decoded": 2
@@ -4979,7 +4978,7 @@
      "decoded": 4
     },
     "Toyota|Highlander": {
-     "decoded": 693,
+     "decoded": 696,
      "hybrid": 38
     },
     "Toyota|Land Cruiser": {
@@ -4992,7 +4991,7 @@
      "decoded": 2
     },
     "Toyota|Matrix": {
-     "decoded": 382
+     "decoded": 379
     },
     "Toyota|Mirai": {
      "decoded": 5
@@ -5007,13 +5006,13 @@
      "decoded": 38
     },
     "Toyota|Prius": {
-     "decoded": 1330
+     "decoded": 1339
     },
     "Toyota|Prius C": {
      "decoded": 58
     },
     "Toyota|Prius Plug-In": {
-     "decoded": 5
+     "decoded": 6
     },
     "Toyota|Prius Prime": {
      "decoded": 2
@@ -5022,14 +5021,14 @@
      "decoded": 45
     },
     "Toyota|RAV4": {
-     "decoded": 747,
+     "decoded": 745,
      "make_mismatch": 1
     },
     "Toyota|Sequoia": {
-     "decoded": 365
+     "decoded": 364
     },
     "Toyota|Sienna": {
-     "decoded": 1460
+     "decoded": 1454
     },
     "Toyota|Supra": {
      "decoded": 11
@@ -5041,16 +5040,16 @@
      "decoded": 76
     },
     "Toyota|Tundra": {
-     "decoded": 410
+     "decoded": 411
     },
     "Toyota|Van": {
      "decoded": 8
     },
     "Toyota|Venza": {
-     "decoded": 35
+     "decoded": 34
     },
     "Toyota|Yaris": {
-     "decoded": 350,
+     "decoded": 351,
      "make_mismatch": 1
     },
     "Volkswagen|Arteon": {
@@ -5060,7 +5059,7 @@
      "decoded": 14
     },
     "Volkswagen|Beetle": {
-     "decoded": 229
+     "decoded": 227
     },
     "Volkswagen|CC": {
      "decoded": 334
@@ -5070,24 +5069,24 @@
     },
     "Volkswagen|Cabriolet": {},
     "Volkswagen|Eos": {
-     "decoded": 99
+     "decoded": 100
     },
     "Volkswagen|Fox": {},
     "Volkswagen|GTI": {
-     "decoded": 31
+     "decoded": 32
     },
     "Volkswagen|Golf": {
-     "decoded": 121
+     "decoded": 122
     },
     "Volkswagen|Golf Alltrack": {
      "decoded": 3
     },
     "Volkswagen|Jetta": {
-     "decoded": 2249,
+     "decoded": 2248,
      "hybrid": 11
     },
     "Volkswagen|Passat": {
-     "decoded": 1114
+     "decoded": 1123
     },
     "Volkswagen|Phaeton": {},
     "Volkswagen|Routan": {
@@ -5098,7 +5097,7 @@
      "decoded": 181
     },
     "Volkswagen|Touareg": {
-     "decoded": 133,
+     "decoded": 137,
      "hybrid": 20
     },
     "Volkswagen|Transporter": {},
@@ -5130,17 +5129,17 @@
      "decoded": 48
     },
     "Volvo|S40": {
-     "decoded": 197
+     "decoded": 198
     },
     "Volvo|S60": {
-     "decoded": 329
+     "decoded": 332
     },
     "Volvo|S60 Cross Country": {},
     "Volvo|S70": {
      "decoded": 2
     },
     "Volvo|S80": {
-     "decoded": 119
+     "decoded": 121
     },
     "Volvo|S90": {
      "decoded": 1
@@ -5160,13 +5159,13 @@
     },
     "Volvo|V90": {},
     "Volvo|XC60": {
-     "decoded": 117
+     "decoded": 118
     },
     "Volvo|XC70": {
      "decoded": 140
     },
     "Volvo|XC90": {
-     "decoded": 438
+     "decoded": 440
     }
    },
    "note": "vPIC model is not in the published inventory; checked make mismatches and, for hybrid trim subsets, vPIC trim 'Gas'"
@@ -66109,6 +66108,436 @@
  },
  "refusals": [
   {
+   "cat": "bumper-front",
+   "detail": "Subaru Legacy 2004-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1467"
+   ],
+   "pn": "57704AE20A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "bumper-front",
+   "detail": "Subaru Legacy 2004-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1468"
+   ],
+   "pn": "57704AE18A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "bumper-front",
+   "detail": "Subaru Legacy 2005-2005;Subaru Outback 2005-2005",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1376"
+   ],
+   "pn": "57704AG03A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "bumper-front",
+   "detail": "Subaru Legacy 2005-2005;Subaru Outback 2005-2005",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1377"
+   ],
+   "pn": "57704AG02A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "bumper-front",
+   "detail": "Subaru Legacy 2011-2012;Subaru Outback 2011-2011",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1314"
+   ],
+   "pn": "57704AJ08A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "bumper-front",
+   "detail": "Subaru Legacy 2011-2012;Subaru Outback 2011-2011",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1315"
+   ],
+   "pn": "57704AJ09A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "bumper-front",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1859"
+   ],
+   "pn": "57704AL00A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "bumper-front",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1860"
+   ],
+   "pn": "57704AL01A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "bumper-rear",
+   "detail": "Subaru Legacy 2001-2001;Subaru Legacy 2004-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1471"
+   ],
+   "pn": "57704AE10A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "bumper-rear",
+   "detail": "Subaru Legacy 2001-2001;Subaru Legacy 2004-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1473"
+   ],
+   "pn": "57704AE09A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "bumper-rear",
+   "detail": "Subaru Legacy 2001-2001;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1472"
+   ],
+   "pn": "57704AE11A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "bumper-rear",
+   "detail": "Subaru Legacy 2001-2001;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1474"
+   ],
+   "pn": "57704AE12A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "bumper-rear",
+   "detail": "Subaru Legacy 2004-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1470"
+   ],
+   "pn": "57704AE21A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "bumper-rear",
+   "detail": "Subaru Legacy 2005-2005;Subaru Outback 2005-2005",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1378"
+   ],
+   "pn": "57704AG10A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "bumper-rear",
+   "detail": "Subaru Legacy 2005-2005;Subaru Outback 2005-2005",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1379"
+   ],
+   "pn": "57704AG11A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "bumper-rear",
+   "detail": "Subaru Legacy 2005-2005;Subaru Outback 2005-2005",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1380"
+   ],
+   "pn": "57704AG09A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "bumper-rear",
+   "detail": "Subaru Legacy 2005-2005;Subaru Outback 2005-2005",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1381"
+   ],
+   "pn": "57704AG12A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "bumper-rear",
+   "detail": "Subaru Legacy 2011-2013;Subaru Outback 2011-2011",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1316"
+   ],
+   "pn": "57704AJ07A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "bumper-rear",
+   "detail": "Subaru Legacy 2011-2013;Subaru Outback 2011-2011",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1317"
+   ],
+   "pn": "57704AJ06A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "bumper-rear",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1861"
+   ],
+   "pn": "57704AL10A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "bumper-rear",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1862"
+   ],
+   "pn": "57704AL11A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-front",
+   "detail": "Subaru Impreza 2012-2012;Subaru XV Crosstrek 2013-2013",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1561"
+   ],
+   "pn": "60009FJ0319P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-front",
+   "detail": "Subaru Impreza 2012-2012;Subaru XV Crosstrek 2013-2013",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1563"
+   ],
+   "pn": "60009FJ0219P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-front",
+   "detail": "Subaru Legacy 2001-2001;Subaru Legacy 2004-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1450"
+   ],
+   "pn": "60010AE09A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-front",
+   "detail": "Subaru Legacy 2001-2001;Subaru Legacy 2004-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1451"
+   ],
+   "pn": "60010AE11A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-front",
+   "detail": "Subaru Legacy 2001-2001;Subaru Legacy 2004-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1452"
+   ],
+   "pn": "60010AE08A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-front",
+   "detail": "Subaru Legacy 2001-2001;Subaru Legacy 2004-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1453"
+   ],
+   "pn": "60010AE10A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-front",
+   "detail": "Subaru Legacy 2005-2005;Subaru Outback 2005-2005",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1357"
+   ],
+   "pn": "60009AG11A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-front",
+   "detail": "Subaru Legacy 2005-2005;Subaru Outback 2005-2005",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1358"
+   ],
+   "pn": "60009AG11B9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-front",
+   "detail": "Subaru Legacy 2005-2005;Subaru Outback 2005-2005",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1359"
+   ],
+   "pn": "60009AG13A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-front",
+   "detail": "Subaru Legacy 2005-2005;Subaru Outback 2005-2005",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1360"
+   ],
+   "pn": "60009AG13B9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-front",
+   "detail": "Subaru Legacy 2005-2005;Subaru Outback 2005-2005",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1361"
+   ],
+   "pn": "60009AG10A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-front",
+   "detail": "Subaru Legacy 2005-2005;Subaru Outback 2005-2005",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1362"
+   ],
+   "pn": "60009AG10B9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-front",
+   "detail": "Subaru Legacy 2005-2005;Subaru Outback 2005-2005",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1363"
+   ],
+   "pn": "60009AG12A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-front",
+   "detail": "Subaru Legacy 2005-2005;Subaru Outback 2005-2005",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1364"
+   ],
+   "pn": "60009AG12B9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-front",
+   "detail": "Subaru Legacy 2011-2012;Subaru Outback 2011-2011",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1300"
+   ],
+   "pn": "60009AJ01A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-front",
+   "detail": "Subaru Legacy 2011-2012;Subaru Outback 2011-2011",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1301"
+   ],
+   "pn": "60009AJ03A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-front",
+   "detail": "Subaru Legacy 2011-2012;Subaru Outback 2011-2011",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1302"
+   ],
+   "pn": "60009AJ00A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-front",
+   "detail": "Subaru Legacy 2011-2012;Subaru Outback 2011-2011",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1303"
+   ],
+   "pn": "60009AJ02A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-front",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1846"
+   ],
+   "pn": "60009AL03A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-front",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1847"
+   ],
+   "pn": "60009AL01A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-front",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1848"
+   ],
+   "pn": "60009AL02A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-front",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1849"
+   ],
+   "pn": "60009AL00A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
    "cat": "door-front",
    "detail": "door-rear",
    "evidence": [],
@@ -66890,6 +67319,166 @@
    "evidence": [],
    "pn": "subaru:60410AE25B",
    "reason": "cross_category_supersession",
+   "t": null
+  },
+  {
+   "cat": "door-rear",
+   "detail": "Subaru Legacy 2001-2001;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1454"
+   ],
+   "pn": "60410AE09A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-rear",
+   "detail": "Subaru Legacy 2001-2001;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1455"
+   ],
+   "pn": "60410AE11A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-rear",
+   "detail": "Subaru Legacy 2001-2001;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1457"
+   ],
+   "pn": "60410AE08A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-rear",
+   "detail": "Subaru Legacy 2001-2001;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1458"
+   ],
+   "pn": "60410AE10A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-rear",
+   "detail": "Subaru Legacy 2005-2005;Subaru Outback 2005-2005",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1365"
+   ],
+   "pn": "60409AG11A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-rear",
+   "detail": "Subaru Legacy 2005-2005;Subaru Outback 2005-2005",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1366"
+   ],
+   "pn": "60409AG13A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-rear",
+   "detail": "Subaru Legacy 2005-2005;Subaru Outback 2005-2005",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1367"
+   ],
+   "pn": "60409AG10A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-rear",
+   "detail": "Subaru Legacy 2005-2005;Subaru Outback 2005-2005",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1368"
+   ],
+   "pn": "60409AG12A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-rear",
+   "detail": "Subaru Legacy 2011-2012;Subaru Outback 2011-2011",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1304"
+   ],
+   "pn": "60409AJ01A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-rear",
+   "detail": "Subaru Legacy 2011-2012;Subaru Outback 2011-2011",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1305"
+   ],
+   "pn": "60409AJ03A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-rear",
+   "detail": "Subaru Legacy 2011-2012;Subaru Outback 2011-2011",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1306"
+   ],
+   "pn": "60409AJ00A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-rear",
+   "detail": "Subaru Legacy 2011-2012;Subaru Outback 2011-2011",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1307"
+   ],
+   "pn": "60409AJ02A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-rear",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015;Subaru Outback 2018-2018",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1850"
+   ],
+   "pn": "60409AL01A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-rear",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015;Subaru Outback 2018-2018",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1851"
+   ],
+   "pn": "60409AL03A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-rear",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015;Subaru Outback 2018-2018",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1852"
+   ],
+   "pn": "60409AL02A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "door-rear",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015;Subaru Outback 2018-2018",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1853"
+   ],
+   "pn": "60409AL00A9P",
+   "reason": "held_exterior_cross_model",
    "t": null
   },
   {
@@ -67917,6 +68506,586 @@
    "t": null
   },
   {
+   "cat": "fender",
+   "detail": "Subaru Legacy 2001-2001;Subaru Legacy 2004-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1462"
+   ],
+   "pn": "57120AE05A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "fender",
+   "detail": "Subaru Legacy 2001-2001;Subaru Legacy 2004-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1463"
+   ],
+   "pn": "57120AE07A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "fender",
+   "detail": "Subaru Legacy 2001-2001;Subaru Legacy 2004-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1465"
+   ],
+   "pn": "57120AE06A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "fender",
+   "detail": "Subaru Legacy 2001-2001;Subaru Legacy 2004-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1466"
+   ],
+   "pn": "57120AE04A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "fender",
+   "detail": "Subaru Legacy 2004-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1461"
+   ],
+   "pn": "57120AE09A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "fender",
+   "detail": "Subaru Legacy 2004-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1464"
+   ],
+   "pn": "57120AE08A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "fender",
+   "detail": "Subaru Legacy 2005-2005;Subaru Outback 2005-2005",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1372"
+   ],
+   "pn": "57110AG05A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "fender",
+   "detail": "Subaru Legacy 2005-2005;Subaru Outback 2005-2005",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1373"
+   ],
+   "pn": "57110AG07A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "fender",
+   "detail": "Subaru Legacy 2005-2005;Subaru Outback 2005-2005",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1374"
+   ],
+   "pn": "57110AG06A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "fender",
+   "detail": "Subaru Legacy 2005-2005;Subaru Outback 2005-2005",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1375"
+   ],
+   "pn": "57110AG04A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "fender",
+   "detail": "Subaru Legacy 2011-2013;Subaru Outback 2011-2011",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1310"
+   ],
+   "pn": "57120AJ01A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "fender",
+   "detail": "Subaru Legacy 2011-2013;Subaru Outback 2011-2011",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1311"
+   ],
+   "pn": "57120AJ07A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "fender",
+   "detail": "Subaru Legacy 2011-2013;Subaru Outback 2011-2011",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1312"
+   ],
+   "pn": "57120AJ06A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "fender",
+   "detail": "Subaru Legacy 2011-2013;Subaru Outback 2011-2011",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1313"
+   ],
+   "pn": "57120AJ00A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "fender",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015;Subaru Outback 2018-2018",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1855"
+   ],
+   "pn": "57120AL03A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "fender",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015;Subaru Outback 2018-2018",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1856"
+   ],
+   "pn": "57120AL01A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "fender",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015;Subaru Outback 2018-2018",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1857"
+   ],
+   "pn": "57120AL02A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "fender",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015;Subaru Outback 2018-2018",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1858"
+   ],
+   "pn": "57120AL00A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "grille",
+   "detail": "Subaru Legacy 2004-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1475"
+   ],
+   "pn": "91121AE39A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "grille",
+   "detail": "Subaru Legacy 2004-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1476"
+   ],
+   "pn": "91121AE36A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "grille",
+   "detail": "Subaru Legacy 2004-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1477"
+   ],
+   "pn": "91121AE38A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "grille",
+   "detail": "Subaru Legacy 2005-2005;Subaru Outback 2005-2005",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1382"
+   ],
+   "pn": "91121AG07A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "grille",
+   "detail": "Subaru Legacy 2005-2005;Subaru Outback 2005-2005",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1383"
+   ],
+   "pn": "91121AG07B",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "grille",
+   "detail": "Subaru Legacy 2005-2005;Subaru Outback 2005-2005",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1384"
+   ],
+   "pn": "91121AG12A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "grille",
+   "detail": "Subaru Legacy 2011-2012;Subaru Outback 2011-2011",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1318"
+   ],
+   "pn": "91121AJ04B",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "grille",
+   "detail": "Subaru Legacy 2011-2012;Subaru Outback 2011-2011",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1319"
+   ],
+   "pn": "91121AJ03B",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "grille",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1863"
+   ],
+   "pn": "91121AL13A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "grille",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1864"
+   ],
+   "pn": "91121AL00A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "grille",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1865"
+   ],
+   "pn": "91121AL05A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "headlights",
+   "detail": "Subaru Impreza 2012-2012;Subaru XV Crosstrek 2013-2013",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L464"
+   ],
+   "pn": "84001FJ090",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "headlights",
+   "detail": "Subaru Impreza 2012-2012;Subaru XV Crosstrek 2013-2013",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L465"
+   ],
+   "pn": "84001FJ150",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "headlights",
+   "detail": "Subaru Impreza 2012-2012;Subaru XV Crosstrek 2013-2013",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L466"
+   ],
+   "pn": "84001FJ080",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "headlights",
+   "detail": "Subaru Impreza 2012-2012;Subaru XV Crosstrek 2013-2013",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L467"
+   ],
+   "pn": "84001FJ140",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "headlights",
+   "detail": "Subaru Legacy 2001-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L225"
+   ],
+   "pn": "84001AE13A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "headlights",
+   "detail": "Subaru Legacy 2001-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L226"
+   ],
+   "pn": "84001AE15A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "headlights",
+   "detail": "Subaru Legacy 2001-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L227"
+   ],
+   "pn": "84001AE12A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "headlights",
+   "detail": "Subaru Legacy 2001-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L228"
+   ],
+   "pn": "84001AE14A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "headlights",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L963"
+   ],
+   "pn": "84001AL03A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "headlights",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L964"
+   ],
+   "pn": "84002AL01A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "headlights",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L965"
+   ],
+   "pn": "84001AL01A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "headlights",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L966"
+   ],
+   "pn": "84001AL02A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "headlights",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L967"
+   ],
+   "pn": "84001AL00A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "headlights",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L968"
+   ],
+   "pn": "84002AL00A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "hood",
+   "detail": "Subaru Impreza 2012-2012;Subaru XV Crosstrek 2013-2013",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1568"
+   ],
+   "pn": "57229FJ0009P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "hood",
+   "detail": "Subaru Legacy 2004-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1460"
+   ],
+   "pn": "57220AE00B",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "hood",
+   "detail": "Subaru Legacy 2005-2005;Subaru Outback 2005-2005",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1369"
+   ],
+   "pn": "57229AG04A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "hood",
+   "detail": "Subaru Legacy 2005-2005;Subaru Outback 2005-2005",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1370"
+   ],
+   "pn": "57229AG03A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "hood",
+   "detail": "Subaru Legacy 2005-2005;Subaru Outback 2005-2005",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1371"
+   ],
+   "pn": "57229AG05A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "hood",
+   "detail": "Subaru Legacy 2011-2012;Subaru Outback 2011-2011",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1309"
+   ],
+   "pn": "57229AJ01B9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "hood",
+   "detail": "Subaru Legacy 2011-2013;Subaru Outback 2011-2011",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1308"
+   ],
+   "pn": "57229AJ00A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "hood",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015;Subaru Outback 2018-2018",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1854"
+   ],
+   "pn": "57229AL00B9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "liftgate",
+   "detail": "Subaru Impreza 2012-2012;Subaru XV Crosstrek 2013-2013",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1576"
+   ],
+   "pn": "60809FJ0109P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "liftgate",
+   "detail": "Subaru Legacy 2004-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1479"
+   ],
+   "pn": "60810AE03B",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "liftgate",
+   "detail": "Subaru Legacy 2005-2005;Subaru Outback 2005-2005",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1386"
+   ],
+   "pn": "60809AG10A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "liftgate",
+   "detail": "Subaru Legacy 2011-2013;Subaru Outback 2011-2011",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1326"
+   ],
+   "pn": "60809AJ11A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "liftgate",
+   "detail": "Subaru Legacy 2011-2013;Subaru Outback 2011-2011",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1327"
+   ],
+   "pn": "60809AJ10A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "liftgate",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1867"
+   ],
+   "pn": "60809AL00A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "liftgate",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1868"
+   ],
+   "pn": "60809AL01A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
    "cat": "radiator",
    "evidence": [
     "www.subarupartsdeal.com:records:L1606",
@@ -67924,6 +69093,396 @@
    ],
    "pn": "45111FE081",
    "reason": "recrawl_resolved",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Subaru Impreza 2012-2012;Subaru XV Crosstrek 2013-2013",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L470"
+   ],
+   "pn": "84912FJ070",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Subaru Impreza 2012-2012;Subaru XV Crosstrek 2013-2013",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L471"
+   ],
+   "pn": "84912FJ060",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Subaru Legacy 2001-2002;Subaru Outback 2001-2001",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L334"
+   ],
+   "pn": "84201AE11A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Subaru Legacy 2001-2002;Subaru Outback 2001-2001",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L335"
+   ],
+   "pn": "84201AE10A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Subaru Legacy 2001-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L229"
+   ],
+   "pn": "84201AE17A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Subaru Legacy 2001-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L231"
+   ],
+   "pn": "84201AE13A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Subaru Legacy 2001-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L238"
+   ],
+   "pn": "84201AE16A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Subaru Legacy 2001-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L240"
+   ],
+   "pn": "84201AE12A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Subaru Legacy 2003-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L230"
+   ],
+   "pn": "84201AE11B",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Subaru Legacy 2003-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L232"
+   ],
+   "pn": "84201AE13B",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Subaru Legacy 2003-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L233"
+   ],
+   "pn": "84201AE31AVC",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Subaru Legacy 2003-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L234"
+   ],
+   "pn": "84201AE31ATC",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Subaru Legacy 2003-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L235"
+   ],
+   "pn": "84201AE31APL",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Subaru Legacy 2003-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L236"
+   ],
+   "pn": "84201AE31AHA",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Subaru Legacy 2003-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L237"
+   ],
+   "pn": "84201AE31AHE",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Subaru Legacy 2003-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L239"
+   ],
+   "pn": "84201AE10B",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Subaru Legacy 2003-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L241"
+   ],
+   "pn": "84201AE12B",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Subaru Legacy 2003-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L242"
+   ],
+   "pn": "84201AE30AVC",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Subaru Legacy 2003-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L243"
+   ],
+   "pn": "84201AE30ATC",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Subaru Legacy 2003-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L244"
+   ],
+   "pn": "84201AE30APL",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Subaru Legacy 2003-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L245"
+   ],
+   "pn": "84201AE30AHA",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Subaru Legacy 2003-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L246"
+   ],
+   "pn": "84201AE30AHE",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Subaru Legacy 2004-2004;Subaru Outback 2004-2004",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L401"
+   ],
+   "pn": "84201AE31ALB",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Subaru Legacy 2004-2004;Subaru Outback 2004-2004",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L402"
+   ],
+   "pn": "84201AE31AWT",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Subaru Legacy 2004-2004;Subaru Outback 2004-2004",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L403"
+   ],
+   "pn": "84201AE30ALB",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Subaru Legacy 2004-2004;Subaru Outback 2004-2004",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L404"
+   ],
+   "pn": "84201AE30AWT",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L969"
+   ],
+   "pn": "84912AL06A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L970"
+   ],
+   "pn": "84912AL10A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L971"
+   ],
+   "pn": "84912AL09A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L972"
+   ],
+   "pn": "84912AL05A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "trunk-lid",
+   "detail": "Subaru Legacy 2001-2001;Subaru Legacy 2004-2004;Subaru Outback 2003-2003",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1478"
+   ],
+   "pn": "57501AE02A",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "trunk-lid",
+   "detail": "Subaru Legacy 2005-2005;Subaru Outback 2005-2005",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1385"
+   ],
+   "pn": "57509AG00A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "trunk-lid",
+   "detail": "Subaru Legacy 2011-2011;Subaru Outback 2011-2011",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1320"
+   ],
+   "pn": "57509AJ00A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "trunk-lid",
+   "detail": "Subaru Legacy 2011-2011;Subaru Outback 2011-2011",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1321"
+   ],
+   "pn": "57509AJ00B9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "trunk-lid",
+   "detail": "Subaru Legacy 2011-2011;Subaru Outback 2011-2011",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1323"
+   ],
+   "pn": "57509AJ02A9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "trunk-lid",
+   "detail": "Subaru Legacy 2011-2011;Subaru Outback 2011-2011",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1324"
+   ],
+   "pn": "57509AJ02B9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "trunk-lid",
+   "detail": "Subaru Legacy 2011-2013;Subaru Outback 2011-2011",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1322"
+   ],
+   "pn": "57509AJ00C9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "trunk-lid",
+   "detail": "Subaru Legacy 2011-2013;Subaru Outback 2011-2011",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1325"
+   ],
+   "pn": "57509AJ02C9P",
+   "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "trunk-lid",
+   "detail": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015;Subaru Outback 2018-2018",
+   "evidence": [
+    "www.subarupartsdeal.com:records:L1866"
+   ],
+   "pn": "57509AL00A9P",
+   "reason": "held_exterior_cross_model",
    "t": null
   }
  ],
@@ -67977,7 +69536,7 @@
    "window-regulator": 916,
    "window-switch": 3
   },
-  "likely_groups": 379,
+  "likely_groups": 223,
   "list_rows": 21183,
   "records": 2101,
   "verified_groups": 0,

@@ -29,7 +29,7 @@
    }
   ],
   "exclude": {
-   "mopar|Plymouth|Grand Voyager": "feed spelling or sub-model the catalog does not print as its own model (55 cars, under catalog squash 'grandvoyager'); unmapped until a reviewed entry exists"
+   "mopar|Plymouth|Grand Voyager": "feed spelling or sub-model the catalog does not print as its own model (54 cars, under catalog squash 'grandvoyager'); unmapped until a reviewed entry exists"
   },
   "skipped": [
    {

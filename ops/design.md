@@ -4,7 +4,38 @@ Owner brief (2026-11-06): the app "looks obviously vibecoded"; wants a unique,
 user-friendly layout, keeping the logo and colour scheme. Screenshots first,
 nothing to prod until the owner decides.
 
-## State (2026-11-06)
+## State (2026-11-06, evening) — Direction A built on `design/pull-sheet`
+
+Owner (via hub, 2026-11-06): "for the design stuff do what you think. I want no
+words cut off and I want everything super clean. I'll want to test this test
+flight for sure." Hub chose A and answered the three questions: part names free
+(prices/values stay Pro, every other gate unchanged); "Saved" renamed "Pull
+sheet" in the UI only (jh_saved and watch storage untouched, rule 6); map deferred.
+
+- Branch `design/pull-sheet` (from main 7ae3af1; head ad26151; NOT merged). Touches only
+  docs/app.js, docs/index.html, docs/styles.css, docs/sw.js (jh-v146) and adds
+  backend/test/ui_no_truncation.mjs. No native, store or workflow changes.
+- Steps done, one commit each: 1 tokens · 2 base styles (one button system,
+  44px targets, no ellipsis/nowrap, no hazard stripe/card rails) · 3+4 car card
+  (row plate, stay meter, one "Add to pull sheet" action) and car screen (pushed,
+  sticky action bar with pull sheet / watch / share, "If equipped" group apart,
+  VIN, directions) · 5 zip chip beside Filters · 6 Pull sheet rename + tappable
+  rows, watch hits as pull-sheet cards, shorter Pro sheet with one-tap
+  "Already have Pro?" placed after every purchase flow.
+- Free tier now sees part names + fitment markers (alphabetical, so the value
+  order stays Pro); yard price, online price, savings, sell speed stay locked.
+- Guard: `node backend/test/ui_no_truncation.mjs` serves docs/ and checks 18
+  screens at 320/375/390/430/768/1280, light+dark, 100%+200% text: no
+  ellipsis/line-clamp, no text wider than its box or clipped, no sideways
+  scroll, fields fit their text, 44px targets, WCAG AA contrast.
+- Deferred: combined part-or-car search box (step 5 second half), B's
+  walk-by-row yard view, map.
+- Not run here: python e2e scripts (backend/test/*_e2e.py need the Python
+  playwright package, not installed in this container).
+- Next: hub builds TestFlight from the branch for the owner. Merge to main
+  only on the owner's word; releases still need the owner's "ship".
+
+## Earlier state (2026-11-06, exploration)
 
 - Branch: `design/redesign-2026-11` (exploration only; nothing merged).
 - Review artifact (private, owner's account): https://claude.ai/artifact/37NZkcuFtzMhH1jbcYhH2y
@@ -27,7 +58,7 @@ Build A (Pull Sheet) in small CSS-first releases; later add B's per-yard
 "walk by row" list as one screen inside it; park C (needs a new garage record
 and alert changes; must not rewrite saved watches, rule 6).
 
-## What implementing A would touch (not started — needs owner go-ahead)
+## What implementing A touches (built on design/pull-sheet, see State)
 
 1. `docs/styles.css` :root — add tokens only (no visual change).
 2. `docs/styles.css` — one button system, Inter for sentences/mono for numbers,
@@ -42,7 +73,7 @@ Each step: Playwright before/after screenshots. Native shells load docs/, so a
 store release is only needed for native-side changes (none planned). Releases
 still need the owner's explicit "ship".
 
-## Open questions for the owner
+## Owner questions (answered 2026-11-06 via hub: names free, rename UI only, map deferred)
 
 - Free tier shows blurred part names today. Show names free, lock only prices/demand?
 - Rename "Saved" to "Pull sheet", grouped by yard?
@@ -53,3 +84,5 @@ still need the owner's explicit "ship".
 - Audit saw results default-ordered with Newark (13 mi) before San Jose North
   (1 mi) and inconsistent radius copy (250 mi text vs 100 mi filter) — app.js
   owner should check when the card work starts.
+
+- 2026-11-06: main moved to sw jh-v147 (typo fix) while this branch uses jh-v146. When merging design/pull-sheet into main, bump to jh-v148 or later so no two different shells share a cache name.
