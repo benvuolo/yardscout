@@ -5937,6 +5937,18 @@ function pfPopulateModels() {
 /* Part combobox: tap-to-browse the full category list, type to narrow —
  * same pattern as the price-compare input. */
 const pfPartInput = document.getElementById('pf-part');
+/* The part field is a one-line textarea that grows, so a long part name
+ * ("ECM / PCM (engine computer)") wraps instead of being cut off at large
+ * text sizes. Enter never adds a line. */
+function pfFitPart() {
+  if (!pfPartInput.offsetParent) return;   // hidden tab: fit when shown
+  pfPartInput.style.height = 'auto';
+  pfPartInput.style.height = pfPartInput.scrollHeight + 2 + 'px';
+}
+function pfSetPartText(t) { pfPartInput.value = t; pfFitPart(); }
+pfPartInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') e.preventDefault(); });
+pfPartInput.addEventListener('input', pfFitPart);
+window.addEventListener('resize', pfFitPart);
 const pfPartSuggest = document.getElementById('pf-part-suggest');
 function pfRenderPartSuggest() {
   if (!interchangeData) return;
@@ -5976,7 +5988,7 @@ pfPartSuggest.addEventListener('mousedown', e => {
   if (!item) return;
   e.preventDefault();
   pfCat = interchangeData.categories.find(c => c.id === item.dataset.cat) || null;
-  pfPartInput.value = pfCat ? pfCat.label : '';
+  pfSetPartText(pfCat ? pfCat.label : '');
   pfChosenFam = null;
   pfHidePartSuggest();
   pfMaybeSearch();
@@ -6103,10 +6115,14 @@ function pfRenderBrowseFamPicker() {
     .sort((a, b) => a.label.localeCompare(b.label));
   wrap.innerHTML =
     '<span class="pf-engine-label">Browsing by engine — which engine are you hunting? Donors are matched by engine family, not by keyword.</span>'
-    + '<select id="pf-browse-fam" class="pf-browse-fam">'
+    // A native select can't wrap a long engine name, so a wrapping label
+    // shows the choice and the (transparent) select on top takes the tap.
+    + '<span class="pf-select-wrap"><span class="pf-select-label" aria-hidden="true">'
+    + escapeHtml((fams.find(f => f.id === pfChosenFam) || {}).label || 'Pick an engine\u2026') + '</span>'
+    + '<select id="pf-browse-fam" class="pf-browse-fam" aria-label="Engine to hunt">'
     + '<option value="">Pick an engine&hellip;</option>'
     + fams.map(f => `<option value="${f.id}" ${pfChosenFam === f.id ? 'selected' : ''}>${escapeHtml(f.label)}</option>`).join('')
-    + '</select>';
+    + '</select></span>';
 }
 document.getElementById('pf-engine').addEventListener('change', e => {
   if (e.target.id === 'pf-browse-fam') {
@@ -6206,7 +6222,7 @@ function pfRunBrowse(s) {
     return;
   }
 
-  rows.sort((a, b) => (a.d ?? 1e9) - (b.d ?? 1e9));
+  pfSortRows(rows);
   const CAP = 120;
   let quoteVariants = pfCat.priceTokens.map(t => t.toLowerCase());
   if (pfCat.id === 'engine-assembly' && fam) {
@@ -6219,7 +6235,8 @@ function pfRunBrowse(s) {
   const nVin = rows.filter(r => r.badge).length;
   out.classList.toggle('pf-vonly-on', pfCat.kind === 'engine' && pfVerifiedOnly);
   out.innerHTML =
-    `<div class="pf-results-head">${headTop} Sorted by distance. Yards track cars, not parts left on them &mdash; a long-sitting donor may be picked over.${(!unlocked && !pfCat.noValue) ? ' <span class="lock-text" role="button" onclick="openUpgradeSheet(\'pf-value\')">Pro adds what the same used part goes for online</span>' : ''}</div>`
+    `<div class="pf-results-head">${headTop} ${pfSort === 'new' ? 'Newest arrivals first.' : 'Nearest first.'} Yards track cars, not parts left on them &mdash; a long-sitting donor may be picked over.${(!unlocked && !pfCat.noValue) ? ' <span class="lock-text" role="button" onclick="openUpgradeSheet(\'pf-value\')">Pro adds what the same used part goes for online</span>' : ''}</div>`
+    + pfSortRowHtml()
     + (pfCat.kind === 'engine' ? pfVonlyRowHtml(nVin, rows.length - nVin, 'vin') : '')
     + filterNote
     + (pfCat.notes || []).map(n => `<div class="pf-caveat">${escapeHtml(n)}</div>`).join('')
@@ -6239,17 +6256,12 @@ function pfRunBrowse(s) {
       const saveHtml = (unlocked && !pfCat.noValue && r.hit && quote.status === 'priced' && r.hit.high - quote.price > 0)
         ? `<span class="pf-save" title="What you\u2019d save over buying this part used online — if the part on this car is good">Save ~${formatPrice(Math.max(0, Math.round(r.hit.low - quote.price)))}&ndash;${formatPrice(Math.round(r.hit.high - quote.price))}</span>`
         : '';
-      const dateLbl = pfDateLabel(v.dateAdded);
-      return `<div class="pf-row-card pf-browse${r.badge ? ' pf-vin' : ''}">
-        <div class="pf-car-line"><span class="pf-car-name">${v.year} ${escapeHtml(v.make)} ${escapeHtml(v.model.toLowerCase().startsWith(v.make.toLowerCase() + ' ') ? v.model.slice(v.make.length + 1) : v.model)}</span>${r.badge}</div>
-        <div class="pf-meta">${escapeHtml(v.location)}${r.d != null ? ` &middot; <span class="dist">${Math.round(r.d)} mi</span>` : ''}${v.row ? ` &middot; Row ${escapeHtml(String(v.row))}` : ''}${dateLbl ? ` &middot; set out ${dateLbl}` : ''}${saleBadgeHtml(v.location)}</div>
-        <div class="pf-value">${worthHtml}${priceHtml}${saveHtml}</div>
-        ${r.warns.length ? `<div class="pf-warn">${r.warns.join(' &middot; ')}</div>` : ''}
-      </div>`;
+      return pfDonorCardHtml(r, 'pf-browse' + (r.badge ? ' pf-vin' : ''), r.badge, `${worthHtml}${priceHtml}${saveHtml}`);
     }).join('')
     + (rows.length > CAP
-      ? `<div class="pf-more">Showing the ${CAP} nearest of ${rows.length.toLocaleString()} cars — tighten the radius to narrow.</div>`
+      ? `<div class="pf-more">Showing the first ${CAP} of ${rows.length.toLocaleString()} cars — tighten the radius to narrow.</div>`
       : '');
+  pfRenderTiles(); pfRevealResults();
 }
 
 /* ===== OEM CATALOG + AFTERMARKET LAYERS (CURATION_SPEC §7.4, §12) ========
@@ -6374,6 +6386,112 @@ function pfAmRows(s, groups, results, radius, fam) {
   }
   return hit;
 }
+/* ===== PARTS TAB, PULL SHEET ROUND 4 (2026-11-06) =====
+ * Donor rows are the app's car card: photo when the yard hosts one, row
+ * plate, name, the confidence chip up front, yard · distance · set-out, the
+ * fit source one tap away, value (Pro), warnings, and Add to pull sheet /
+ * Details. The parts the tests parse keep their exact markup: pf-row-card
+ * <tier class>, pf-car-name, pf-tier (pfTierChip), pf-note pf-src, pf-warn,
+ * .dist. */
+let pfSort = 'near';   // 'near' | 'new' (view order; no refetch of data)
+function pfSortRows(rows) {
+  const byDist = (a, b) => (a.d ?? 1e9) - (b.d ?? 1e9);
+  const tierRk = r => (r.tier === 'verified' ? 0 : 1);
+  return rows.sort(pfSort === 'new'
+    ? (a, b) => (yardDateMs(b.v.dateAdded) - yardDateMs(a.v.dateAdded)) || byDist(a, b)
+    : (a, b) => byDist(a, b) || (tierRk(a) - tierRk(b)));
+}
+function pfSortRowHtml() {
+  const b = (k, label) => `<button type="button" class="pf-sort-btn" data-sort="${k}" aria-pressed="${pfSort === k}">${label}</button>`;
+  return `<div class="pf-sort" role="group" aria-label="Sort donors">${b('near', 'Nearest')}${b('new', 'Newest arrivals')}</div>`;
+}
+function pfDonorName(v) {
+  return `${v.year} ${escapeHtml(v.make)} ${escapeHtml(v.model.toLowerCase().startsWith(v.make.toLowerCase() + ' ') ? v.model.slice(v.make.length + 1) : v.model)}`;
+}
+function pfDonorCardHtml(r, cls, chip, valueHtml) {
+  const v = r.v, key = vehicleKey(v);
+  const ex = extrasFor(v);
+  const photo = ex && ex[0] ? photoInfo(ex[0]) : null;
+  const dateLbl = pfDateLabel(v.dateAdded);
+  return `<div class="pf-row-card ${cls}" data-vkey="${escapeHtml(key)}">
+      ${photo ? photoBoxHtml(photo, key, `${v.year} ${v.make} ${v.model}`, 'card-photo') : ''}
+      <div class="cc-head">
+        ${rowPlateHtml(v.row)}
+        <div class="cc-id">
+          <div class="pf-car-line"><span class="pf-car-name">${pfDonorName(v)}</span></div>
+          ${chip ? `<div class="pf-chip-line">${chip}</div>` : ''}
+          <div class="pf-meta">${escapeHtml(v.location)}${r.d != null ? ` &middot; <span class="dist">${Math.round(r.d)} mi</span>` : ''}${dateLbl ? ` &middot; set out ${dateLbl}` : ' &middot; set-out date unknown'}${saleBadgeHtml(v.location)}</div>
+        </div>
+      </div>
+      ${r.srcLine ? `<details class="pf-src-more"><summary>Why it fits <span class="chev-r" aria-hidden="true"></span></summary><div class="pf-note pf-src">Source: ${r.srcLine}</div></details>` : ''}
+      ${valueHtml ? `<div class="pf-value">${valueHtml}</div>` : ''}
+      ${r.warns && r.warns.length ? `<div class="pf-warn">${r.warns.join(' &middot; ')}</div>` : ''}
+      <div class="cc-actions">${pullBtnHtml(key)}<button type="button" class="btn btn-quiet car-open" data-vkey="${escapeHtml(key)}">Details</button></div>
+    </div>`;
+}
+/* "Watch for this": a watch on the seeker's own model, limited to the
+ * generation we can vouch for, through the same quick-watch path as the
+ * rest of the app (free limit, radius and Pro gates unchanged). */
+function pfWatchHtml(s) {
+  if (!s || !s.make || !s.model) return '';
+  const w = pfGenWindow(s.make, s.model, s.year);
+  const yrs = w ? `${w[0]}–${w[1]} ` : '';
+  return `<div class="pf-watch"><p>Yards set out new cars every day. Get told when another ${escapeHtml(yrs + s.make + ' ' + s.model)} lands near you.</p>
+    <button type="button" class="btn btn-line pf-watch-btn" data-make="${escapeHtml(s.make)}" data-model="${escapeHtml(s.model)}" data-ymin="${w ? w[0] : ''}" data-ymax="${w ? w[1] : ''}">${ICON.bell} Watch for another ${escapeHtml(s.model)}</button></div>`;
+}
+function pfWatchClick(btn) {
+  const { make, model, ymin, ymax } = btn.dataset;
+  const r = addQuickWatch(make, model, ymin ? +ymin : null, ymax ? +ymax : null, 'parts');
+  if (r === 'added') { renderAlerts(); checkAndNotify(); showWatchToast(`${make} ${model}`); }
+  else if (r === 'exists') showWatchToast(`${make} ${model}`, { manage: true });
+  else if (r === 'limit') openUpgradeSheet('watch-limit');
+  else if (r === 'no-zip') alert('Set your zip code up top first, so the watch knows where "near you" is.');
+}
+/* Start screen tiles: the common carry-out parts, one tap each. */
+const PF_TILES = ['alternator', 'starter', 'headlights', 'tail-lights', 'side-mirrors', 'front-seats', 'window-regulator', 'gauge-cluster'];
+function pfRenderTiles() {
+  const box = document.getElementById('pf-tiles');
+  if (!box || !interchangeData) return;
+  const cats = PF_TILES.map(id => interchangeData.categories.find(c => c.id === id)).filter(Boolean);
+  box.innerHTML = cats.map(c => `<button type="button" class="pf-tile${pfCat && pfCat.id === c.id ? ' on' : ''}" role="listitem" data-cat="${escapeHtml(c.id)}" aria-pressed="${!!(pfCat && pfCat.id === c.id)}"><span class="pf-tile-name">${escapeHtml(c.label)}</span><span class="pf-tile-kind">${c.kind === 'engine' ? 'matched by engine' : 'matched by body'}</span></button>`).join('');
+}
+function pfUpdateWhereSum() {
+  const el = document.getElementById('pf-where-sum');
+  if (!el) return;
+  const zip = localStorage.getItem('jh_zip');
+  const r = effectiveRadiusMi();
+  el.textContent = activeZipCoords ? `Searching ${r ? 'within ' + r + ' mi of ' : 'everywhere from '}${zip || 'your location'}` : 'Set where to search';
+}
+/* After a search, bring the results up (the form stays above, unchanged). */
+function pfRevealResults() {
+  const out = document.getElementById('pf-results');
+  if (!out || !document.getElementById('tab-parts').classList.contains('active')) return;
+  const top = out.getBoundingClientRect().top;
+  if (top > innerHeight * 0.6) window.scrollTo({ top: window.scrollY + top - 80, behavior: 'smooth' });
+}
+document.getElementById('pf-results').addEventListener('click', e => {
+  const sort = e.target.closest('.pf-sort-btn');
+  if (sort) { pfSort = sort.dataset.sort; track('pf-sort/' + pfSort); pfRunSearch(); return; }
+  const watch = e.target.closest('.pf-watch-btn');
+  if (watch) { pfWatchClick(watch); return; }
+  const heart = e.target.closest('.heart-btn');
+  if (heart) { e.preventDefault(); toggleSaved(heart.dataset.vkey); return; }
+  const open = e.target.closest('.car-open');
+  if (open) { e.preventDefault(); openCarDetail(open.dataset.vkey, open); }
+});
+document.getElementById('pf-tiles').addEventListener('click', e => {
+  const t = e.target.closest('.pf-tile');
+  if (!t || !interchangeData) return;
+  pfCat = interchangeData.categories.find(c => c.id === t.dataset.cat) || null;
+  pfSetPartText(pfCat ? pfCat.label : '');
+  pfChosenFam = null;
+  pfRenderTiles();
+  track('pf-tile/' + t.dataset.cat);
+  pfMaybeSearch();
+  pfRevealResults();
+});
+['pf-year', 'pf-make', 'pf-model'].forEach(id => document.getElementById(id).addEventListener('change', () => pfSaveState()));
+
 function pfRunSearch() {
   const out = document.getElementById('pf-results');
   const status = document.getElementById('pf-status');
@@ -6655,18 +6773,18 @@ function pfRunSearch() {
     if (!groupNotes.length) famNote = 'Same-generation donors of your own model' + (pfCat ? ` — ${pfCat.label.toLowerCase().replace(/s?$/, 's')} rarely cross model lines without a verified platform group` : '');
   }
 
-  const rows = [...results.values()].sort((a, b) =>
-    (a.d ?? 1e9) - (b.d ?? 1e9)
-    || (a.tier === b.tier ? 0 : a.tier === 'verified' ? -1 : 1));
+  const rows = pfSortRows([...results.values()]);
   const nVer = rows.filter(r => r.tier === 'verified').length;
   if (!rows.length) {
-    out.innerHTML = `<div class="pf-empty">No donor cars for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)} ${escapeHtml(pfCat.label.toLowerCase())} within ${radius ? radius + ' mi' : 'range'} right now. Yards rotate stock weekly — add a watch on the Alerts tab, or widen the radius.</div>`;
+    out.innerHTML = `<div class="pf-empty">No donor cars for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)} ${escapeHtml(pfCat.label.toLowerCase())} within ${radius ? radius + ' mi' : 'range'} right now. Yards rotate stock weekly &mdash; widen the search area, or watch for one below.</div>${pfWatchHtml(s)}`;
+    pfRenderTiles(); pfRevealResults();
     return;
   }
   const CAP = 120;
   const unlocked = isPro();
   out.classList.toggle('pf-vonly-on', pfVerifiedOnly);
-  const head = `<div class="pf-results-head"><strong>${rows.length.toLocaleString()} donor car${rows.length === 1 ? '' : 's'}</strong> in range carrying a fitting ${escapeHtml(pfCat.label.toLowerCase())} &mdash; sorted by distance, then confidence. Yards track cars, not parts left on them — a long-sitting donor may be picked over.${(!unlocked && !pfCat.noValue) ? ' <span class="lock-text" role="button" onclick="openUpgradeSheet(\'pf-value\')">Pro adds what the same used part goes for online</span>' : ''}</div>`
+  const head = `<div class="pf-results-head"><strong>${rows.length.toLocaleString()} donor car${rows.length === 1 ? '' : 's'}</strong> in range carrying a fitting ${escapeHtml(pfCat.label.toLowerCase())} for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)} &mdash; ${pfSort === 'new' ? 'newest arrivals first' : 'nearest first, then confidence'}. Yards track cars, not parts left on them — a long-sitting donor may be picked over.${(!unlocked && !pfCat.noValue) ? ' <span class="lock-text" role="button" onclick="openUpgradeSheet(\'pf-value\')">Pro adds what the same used part goes for online</span>' : ''}</div>`
+    + pfSortRowHtml()
     + pfVonlyRowHtml(nVer, rows.length - nVer, pfCat.id === 'engine-assembly' ? 'engine' : 'fit')
     + (famNote ? `<div class="pf-caveat">${escapeHtml(famNote)}</div>` : '')
     // Header notes carry data strings (ambig notes, group labels/notes):
@@ -6701,17 +6819,11 @@ function pfRunSearch() {
     const saveHtml = (unlocked && partRow && quote.status === 'priced' && partRow.high - quote.price > 0)
       ? `<span class="pf-save" title="What you\u2019d save over buying this part used online — if the part on this car is good">Save ~${formatPrice(Math.max(0, Math.round(partRow.low - quote.price)))}&ndash;${formatPrice(Math.round(partRow.high - quote.price))}</span>`
       : '';
-    const dateLbl = pfDateLabel(v.dateAdded);
-    return `<div class="pf-row-card ${r.tier === 'verified' ? 'pf-verified' : 'pf-likely'}">
-      <div class="pf-car-line"><span class="pf-car-name">${v.year} ${escapeHtml(v.make)} ${escapeHtml(v.model.toLowerCase().startsWith(v.make.toLowerCase() + ' ') ? v.model.slice(v.make.length + 1) : v.model)}</span>${pfTierChip(r.tier, r.src)}</div>
-      ${r.srcLine ? `<div class="pf-note pf-src">Source: ${r.srcLine}</div>` : ''}
-      <div class="pf-meta">${escapeHtml(v.location)}${r.d != null ? ` &middot; <span class="dist">${Math.round(r.d)} mi</span>` : ''}${v.row ? ` &middot; Row ${escapeHtml(String(v.row))}` : ''}${dateLbl ? ` &middot; set out ${dateLbl}` : ' &middot; set-out date unknown'}${saleBadgeHtml(v.location)}</div>
-      <div class="pf-value">${ebayHtml}${priceHtml}${saveHtml}</div>
-      ${r.warns.length ? `<div class="pf-warn">${r.warns.join(' &middot; ')}</div>` : ''}
-    </div>`;
+    return pfDonorCardHtml(r, r.tier === 'verified' ? 'pf-verified' : 'pf-likely', pfTierChip(r.tier, r.src), `${ebayHtml}${priceHtml}${saveHtml}`);
   }).join('') + (rows.length > CAP
-    ? `<div class="pf-more">Showing the ${CAP} nearest of ${rows.length.toLocaleString()} donors — tighten the radius to narrow.</div>`
-    : '');
+    ? `<div class="pf-more">Showing the first ${CAP} of ${rows.length.toLocaleString()} donors — tighten the radius to narrow.</div>`
+    : '') + pfWatchHtml(s);
+  pfRenderTiles(); pfRevealResults();
 }
 
 /* ===== COVERAGE REQUESTS (owner ask, 2026-10) ============================
@@ -6865,6 +6977,7 @@ function pfSyncWhere() {
     pz.value = lz.value;
     pz.placeholder = lz.placeholder;   // carries 'Using your location' when GPS is the center
   }
+  pfUpdateWhereSum();
 }
 
 /* ===== TRY-EXAMPLE CHIPS (owner request, 2026-10-23) =====================
@@ -7002,7 +7115,7 @@ function pfTryExamples() {
 function pfTryRun(cat, car, famId) {
   track('pf-try-chip');
   pfCat = cat;
-  pfPartInput.value = cat.label;
+  pfSetPartText(cat.label);
   pfChosenFam = famId || null;
   document.getElementById('pf-year').value = car ? String(car.year) : '';
   document.getElementById('pf-make').value = car ? car.make : '';
@@ -7041,6 +7154,8 @@ document.getElementById('pf-results').addEventListener('click', e => {
 let pfInited = false;
 function initPartsTab() {
   pfSyncWhere();   // pick up any zip/radius change made on the other tabs
+  pfUpdateWhereSum();
+  setTimeout(pfFitPart, 0);
   if (pfInited) { loadInterchange().then(pfRenderTry); return; }
   pfInited = true;
   track('part-finder-open');
@@ -7050,12 +7165,13 @@ function initPartsTab() {
       const saved = JSON.parse(localStorage.getItem('jh_pf') || 'null');
       if (saved && !pfCat) {
         const cat = (interchangeData ? interchangeData.categories : []).find(c => c.id === saved.cat);
-        if (cat) { pfCat = cat; pfPartInput.value = cat.label; }
+        if (cat) { pfCat = cat; pfSetPartText(cat.label); }
         if (saved.year) document.getElementById('pf-year').value = saved.year;
         if (saved.make) { document.getElementById('pf-make').value = saved.make; pfPopulateModels(); }
         if (saved.model) document.getElementById('pf-model').value = saved.model;
       }
     } catch (e) { /* corrupt saved state — start clean */ }
+    pfRenderTiles();
     pfRenderTry();
   });
 }

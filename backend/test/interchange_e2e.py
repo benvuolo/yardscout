@@ -244,6 +244,14 @@ with sync_playwright() as pw:
     import re as _re
     check("free: no real value strings leak",
           not _re.search(r"(online: ~|worth )\$\d", page.locator("#pf-results").inner_text()))
+    # Round 4 donor cards: every row gets Add to pull sheet + Details, and
+    # free rows carry no value or saving element.
+    dc = page.evaluate("""() => { const rows = [...document.querySelectorAll('#pf-results .pf-row-card')];
+      return { n: rows.length, pull: rows.filter(r => r.querySelector('.pull-btn')).length,
+               details: rows.filter(r => r.querySelector('.car-open')).length,
+               value: document.querySelectorAll('#pf-results .pf-save, #pf-results .part-price, #pf-results .ebay-sold-link').length }; }""")
+    check("free donor cards: pull-sheet + Details on every row, no value elements",
+          dc["n"] > 0 and dc["pull"] == dc["n"] and dc["details"] == dc["n"] and dc["value"] == 0, str(dc))
     page.screenshot(path=str(SHOTS / "6_browse_free_blur.png"))
 
     # Free gate since the Pull Sheet redesign (owner decision 2026-11-06):

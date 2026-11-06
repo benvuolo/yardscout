@@ -329,58 +329,61 @@
        car in range carrying a fitting part, with an honest confidence tier
        per row. -->
   <div id="tab-parts" class="tab-content">
-    <div class="info-box" style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
-      <div style="flex:1;min-width:250px;">
-        <h3 style="margin:0 0 0.25rem;">I need a part</h3>
-        <!-- Kept to one line (owner request 2026-10-23): the try-example
-             chips below teach by doing, and the tier chips explain
-             themselves in place — the old tier-definitions paragraph was
-             redundant with both. -->
-        <p style="margin:0;">Name the part and your car &mdash; we list donor cars near you it fits, with how sure we are. No car? Leave it blank to browse everything carrying the part.</p>
-      </div>
-    </div>
+    <!-- Parts tab, Pull Sheet round 4 (2026-11-06): your car first (it is
+         remembered), then the part as big tiles or by name, then donor cars
+         as the same cards as the rest of the app. Every id the finder code
+         and tests use is unchanged. -->
+    <section class="info-box pf-hero">
+      <h2>Find a part for your car</h2>
+      <p>Donor cars near you that fit, and how sure we are. No car? Just pick the part.</p>
+    </section>
     <div class="part-finder part-finder-page" id="part-finder">
       <div class="pf-body" id="pf-body">
-        <div class="pf-grid">
+        <fieldset class="pf-car">
+          <legend>Your car <span class="pf-car-note">remembered for next time</span></legend>
+          <div class="pf-grid pf-car-grid">
+            <div class="pf-ctl"><label for="pf-year">Year</label><select id="pf-year"></select></div>
+            <div class="pf-ctl"><label for="pf-make">Make</label><select id="pf-make"></select></div>
+            <div class="pf-ctl"><label for="pf-model">Model</label><select id="pf-model" disabled></select></div>
+          </div>
+        </fieldset>
+        <div class="pf-part-block">
           <div class="pf-ctl pf-ctl-part">
             <label for="pf-part">Part</label>
             <div class="pf-part-wrap">
-              <input type="text" id="pf-part" class="search-box" placeholder="e.g. starter" autocomplete="off" role="combobox" aria-expanded="false">
+              <textarea id="pf-part" class="search-box pf-part-ta" rows="1" placeholder="e.g. starter" autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false"></textarea>
               <div class="compare-suggest" id="pf-part-suggest" style="display:none;" role="listbox"></div>
             </div>
           </div>
-          <div class="pf-ctl"><label for="pf-year">Year</label><select id="pf-year"></select></div>
-          <div class="pf-ctl"><label for="pf-make">Make</label><select id="pf-make"></select></div>
-          <div class="pf-ctl"><label for="pf-model">Model</label><select id="pf-model" disabled></select></div>
+          <div class="pf-tiles" id="pf-tiles" role="list" aria-label="Common parts"></div>
         </div>
-        <!-- Where controls (owner request, 2026-10-23): Parts always searched
-             inside the app's zip/radius — now that's visible on the tab, same
-             stored center and radius as the Live and Yards tabs, same free
-             250 mi cap and Pro gate. Its own two-up row so the part/car grid
-             stays uncrowded at phone widths. -->
-        <div class="pf-grid pf-where">
-          <div class="pf-ctl">
-            <label for="pf-zip">Zip code</label>
-            <input type="text" id="pf-zip" inputmode="numeric" maxlength="7" placeholder="e.g. 84101" title="Center point for the donor search &mdash; shared with the Cars and Yards tabs">
+        <!-- Where (shared with the Cars and Yards tabs; same free 250 mi cap
+             and Pro gate). Folded into one line: it rarely changes here. -->
+        <details class="pf-where-box" id="pf-where-box">
+          <summary><span class="pf-where-sum" id="pf-where-sum">Search area</span><span class="pf-where-edit">Change</span></summary>
+          <div class="pf-grid pf-where">
+            <div class="pf-ctl">
+              <label for="pf-zip">Zip code</label>
+              <input type="text" id="pf-zip" inputmode="numeric" maxlength="7" placeholder="e.g. 84101" title="Center point for the donor search &mdash; shared with the Cars and Yards tabs">
+            </div>
+            <div class="pf-ctl">
+              <label for="pf-radius">Within</label>
+              <select id="pf-radius" title="Only show donor cars within this distance of your zip">
+                <option value="">Any distance &mdash; Pro</option>
+                <option value="25">&le; 25 mi</option>
+                <option value="50">&le; 50 mi</option>
+                <option value="100" selected>&le; 100 mi</option>
+                <option value="250">&le; 250 mi</option>
+                <option value="500">&le; 500 mi &mdash; Pro</option>
+              </select>
+            </div>
           </div>
-          <div class="pf-ctl">
-            <label for="pf-radius">Within</label>
-            <select id="pf-radius" title="Only show donor cars within this distance of your zip">
-              <option value="">Any distance &mdash; Pro</option>
-              <option value="25">&le; 25 mi</option>
-              <option value="50">&le; 50 mi</option>
-              <option value="100" selected>&le; 100 mi</option>
-              <option value="250">&le; 250 mi</option>
-              <option value="500">&le; 500 mi &mdash; Pro</option>
-            </select>
-          </div>
-        </div>
+        </details>
         <div class="pf-engine" id="pf-engine" style="display:none;"></div>
         <div class="pf-actions">
-          <button type="button" class="btn btn-primary" id="pf-go">Find donor cars</button>
-          <span class="pf-status" id="pf-status"></span>
+          <button type="button" class="btn btn-accent btn-lg btn-block" id="pf-go">Find donor cars</button>
+          <span class="pf-status" id="pf-status" role="status"></span>
         </div>
-        <!-- Above the donor list (was below ~120 cards, so nobody saw it). -->
         <div class="pf-compare-cta">
           <button type="button" class="pf-compare-link" id="pf-compare-link">Compare this part&rsquo;s price across yards &rarr;</button>
         </div>

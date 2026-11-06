@@ -398,6 +398,31 @@ const SCREENS = [
       .catch(() => { throw new Error('part finder: no "Likely fits" OEM row rendered (fixture not picked up)'); });
     await page.evaluate(() => { const r = document.querySelector('.pf-row-card.pf-likely'); if (r) r.scrollIntoView({ block: 'center' }); });
   }],
+  // Parts tab states (round 4): try chips run real searches near the zip.
+  ...[['pf-fit', 'Alternator'], ['pf-hunt', 'Hunt'], ['pf-browse', 'Browse']].map(([name, label]) => [name, async (page) => {
+    await tab(page, 'parts');
+    await page.evaluate(() => { pfCat = null; document.getElementById('pf-results').innerHTML = ''; pfRenderTry(); });
+    await page.waitForSelector('#pf-results .pf-try-chip');
+    await page.evaluate((label) => { const c = [...document.querySelectorAll('#pf-results .pf-try-chip')].find(b => b.textContent.trim().startsWith(label)); if (!c) throw new Error('no try chip ' + label); c.click(); }, label);
+    await page.waitForFunction(() => document.querySelector('#pf-results .pf-row-card, #pf-results .pf-empty'), null, { timeout: 15000 });
+    await settle(page, 400);
+  }]),
+  ['pf-none', async (page) => {
+    await tab(page, 'parts');
+    await page.selectOption('#pf-year', '1985');
+    await page.selectOption('#pf-make', 'Toyota');
+    await page.waitForFunction(() => [...document.getElementById('pf-model').options].some(o => o.value));
+    await page.evaluate(() => { const m = document.getElementById('pf-model'); m.value = [...m.options].map(o => o.value).filter(Boolean)[0]; m.dispatchEvent(new Event('change', { bubbles: true })); });
+    await page.evaluate(() => { pfCat = interchangeData.categories.find(c => c.id === 'side-mirrors'); pfPartInput.value = pfCat.label; pfRunSearch(); });
+    await settle(page, 600);
+  }],
+  ['pf-likely-pro', async (page) => {
+    await page.evaluate(() => { localStorage.setItem('jh_pro', '1'); applyProGates(); });
+    await tab(page, 'parts');
+    await page.evaluate(() => { pfRunSearch(); });
+    await settle(page, 600);
+    await page.evaluate(() => { const r = document.querySelector('.pf-row-card.pf-likely'); if (r) r.scrollIntoView({ block: 'center' }); });
+  }, async (page) => { await page.evaluate(() => { localStorage.removeItem('jh_pro'); applyProGates(); }); }],
   ['alerts', async (page) => { await tab(page, 'alerts'); }],
   ['alerts-hits', async (page) => {
     await tab(page, 'live');
@@ -479,6 +504,7 @@ async function checkAll(page, screen, width) {
       if (z !== 1) await page.evaluate(ZOOM_FN, true);
       await settle(page, 120);
       const rows = await page.evaluate(CHECK_FN);
+      if (process.env.DEBUG_IMG) console.log(screen, await page.evaluate(() => [...document.querySelectorAll('.photo-box img')].slice(0, 3).map(i => [i.src.slice(0, 90), i.complete, i.naturalWidth, i.closest('.photo-box').className])));
       if (process.env.DEBUG_WIDE && rows.length) console.log(screen, width, theme, z, await page.evaluate(() => [...document.querySelectorAll('body *')].filter(e => e.getBoundingClientRect().right > innerWidth + 1 && e.getClientRects().length).slice(0, 8).map(e => e.tagName + '.' + e.className + ' ' + Math.round(e.getBoundingClientRect().width))));
       record(screen, `${width}/${theme}/${z * 100}%`, rows);
       passes++;
@@ -513,7 +539,7 @@ try {
     // shape every line break; the zip lookup is answered locally.
     // Chain photo hosts load for real (the photo boxes are measured with
     // their images); everything else stays blocked.
-    await page.route(/^https?:\/\/(?!127\.0\.0\.1|fonts\.googleapis\.com|fonts\.gstatic\.com|cdn\.pypapps\.com|storage\.googleapis\.com|www\.kikersupullit\.com|ik\.imagekit\.io|cdn\.shopify\.com)/, (route) => route.abort());
+    await page.route(/^https?:\/\/(?!127\.0\.0\.1|fonts\.googleapis\.com|fonts\.gstatic\.com|cdn\.pypapps\.com|storage\.googleapis\.com|www\.kikersupullit\.com|ik\.imagekit\.io|cdn\.shopify\.com|cdn\.row52\.com)/, (route) => route.abort());
     // Published photo switch (fail-closed in the app): publish the enabled
     // sources of scraper/photo_sources.json exactly as the scan does.
     const PHOTO_ON = publishedPhotoSources();
