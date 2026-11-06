@@ -168,3 +168,45 @@ hub review before merge.
   (CONFLICT_ONLY in compile_trans_rules.py; remove it to keep vPIC's 1997
   labels); (2) listing-vs-vPIC disagreements now record nothing (was:
   listing wins); no lot car has both today.
+
+## 2026-11-06 — cross-family make in the model (owner report: Toyota "Audi A3")
+
+Commit 4e6fbe7, scan dispatched 42308781489. Measured on the 21:10Z
+inventory: **40 cars** (25 make|model pairs) have a model opening with a
+different marque after the existing family rule — not ~480 as first
+estimated. All Pull-N-Save / Nevada Pic-A-Part; 39 have a cached decode, and
+the decodes show the rows are scrambled, not mislabelled (Toyota "Audi A3" =
+JTEBU5JR0D5116438 4Runner; Acura "Bmw Rl" = WBAVC535X7FZ81105 BMW 328i;
+Volvo/Lexus "Ls600hl" = S60s; Alfa Romeo "Hyundai Alfa-Romeo 4c" =
+KMHEC4A40FA137265 Hyundai Sonata).
+
+`resolve_foreign_make_model` (in `_apply_match`, and in the lifespan canon
+with VIN only): confident decode agreeing with either make -> decoded
+make/model; else strip onto a model the scan lists >= 3x under the row's
+make; else raw text kept, row flagged `noPick`. Untouched: GM twins whose
+make the VIN confirms, "Mini Ram", own-make spellings.
+`noPickModels` {make: [models]} is in inventory_live.json and
+inv/manifest.json; models.json moves those pairs to `noPick` (out of
+`makes`). The app does not read it yet — sent to the design session.
+Toyota folds: Rav-4 Sport/Prius Awd-E/T100 Pickup (canon, basis in code),
+"EL" by VIN only, Scion tC/xB/xD filed under Toyota -> Scion when the VIN
+decode names the same Scion model. Left: "Celica Supra", "Corona" (real
+names).
+
+Before/after on that data: 46 cars changed — vin 32 (19 of them change
+make), canon fold 3, Toyota EL by VIN 1, Scion by VIN 10, noPick 2 (BMW
+"Alfa-Romeo 4C" — decode is "750i, Alpina B7"; Lexus "Audi A6"), twin
+untouched 3. Toyota 57 -> 49 names, Acura 20 -> 18, BMW 129 -> 127,
+Dodge 134 -> 133.
+
+Open / next:
+- Same scrambling WITHOUT a make prefix is still there: Dodge "Civic Crx",
+  "CL", "CSX", "EL", "MDX", "RDX", "RL"; BMW "EL", "MDX", "TSX". The VIN
+  decode can fix these the same way (model not known for the row's make +
+  confident decode of another make); not done here.
+- BMW decode names with commas ("750i, Alpina B7", "750Li, Alpina B7") show
+  up as models via blob resolution; should stay the blob.
+- App/Worker canon mirrors (app.js `canonicalModel`, alerts.js
+  `canonModelLow`) lack rav4sport/priusawde/t100pickup; the scan's alert
+  matcher handles them. Add to both together (the mirror-agreement test
+  requires it).
