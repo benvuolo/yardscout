@@ -1,0 +1,474 @@
+/* UI guard: no text is ever cut off, touch targets are >= 44px, text meets
+ * WCAG AA contrast. Owner requirement (2026-11-06): "I want no words cut off
+ * and I want everything super clean."
+ *
+ * Serves docs/ locally (no network needed: data comes from docs/data), walks
+ * every main screen of the web app (the same code the iOS/Android shells
+ * load) at widths 320, 375, 390, 430, 768, 1280, light and dark, 100% and
+ * 200% text, and fails on any of:
+ *   - a text element with scrollWidth > clientWidth (text wider than its box)
+ *   - a computed text-overflow: ellipsis, or -webkit-line-clamp, anywhere
+ *   - text clipped by an ancestor with overflow hidden/clip/auto/scroll
+ *     (vertical scrolling of a sheet or page is allowed; horizontal is not)
+ *   - text past the viewport edge, or a page that scrolls sideways
+ *   - an input/select whose value or placeholder is wider than the field
+ *   - a tap target smaller than 44x44 CSS px (inline links in a sentence
+ *     are exempt, as in WCAG 2.5.8)
+ *   - text contrast below 4.5:1 (3:1 for large text), WCAG 1.4.3
+ *
+ * 200% text emulates the OS text-size setting the way Android WebView's
+ * textZoom does: every element's computed font-size (and px line-height) is
+ * doubled, so px-sized text grows too.
+ *
+ * Run:  node backend/test/ui_no_truncation.mjs
+ * Env:  WIDTHS=390,1280  THEMES=light  ZOOMS=1  SCREENS=results,pro-sheet
+ *       SHOTS=<dir>  screenshots of every screen (390 @2x and 1280, light,
+ *       plus dark at 390) for design review.
+ *       BASE=<url>  test a deployed copy instead of serving docs/.
+ * Playwright is pre-installed in this environment (require('playwright')). */
+import http from 'node:http';
+import fs from 'node:fs';
+import path from 'node:path';
+import { createRequire } from 'node:module';
+
+const require = createRequire(import.meta.url);
+const { chromium } = require('playwright');
+
+const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../..');
+const DOCS = path.join(ROOT, 'docs');
+const list = (v, d) => (v ? v.split(',').map(s => s.trim()).filter(Boolean) : d);
+const WIDTHS = list(process.env.WIDTHS, ['320', '375', '390', '430', '768', '1280']).map(Number);
+const THEMES = list(process.env.THEMES, ['light', 'dark']);
+const ZOOMS = list(process.env.ZOOMS, ['1', '2']).map(Number);
+const ONLY = list(process.env.SCREENS, null);
+const SHOTS = process.env.SHOTS || '';
+const ZIP = '95112';
+
+/* ---------- static server for docs/ ---------- */
+const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json',
+  '.png': 'image/png', '.svg': 'image/svg+xml', '.ico': 'image/x-icon', '.webmanifest': 'application/manifest+json',
+  '.woff2': 'font/woff2', '.webp': 'image/webp', '.jpg': 'image/jpeg' };
+let BASE = process.env.BASE;
+let server;
+if (!BASE) {
+  server = http.createServer((req, res) => {
+    let p = decodeURIComponent(new URL(req.url, 'http://x').pathname);
+    if (p.endsWith('/')) p += 'index.html';
+    const f = path.join(DOCS, path.normalize(p));
+    if (!f.startsWith(DOCS) || !fs.existsSync(f) || fs.statSync(f).isDirectory()) { res.writeHead(404); res.end(); return; }
+    res.writeHead(200, { 'content-type': TYPES[path.extname(f)] || 'application/octet-stream' });
+    fs.createReadStream(f).pipe(res);
+  });
+  await new Promise(r => server.listen(0, '127.0.0.1', r));
+  BASE = `http://127.0.0.1:${server.address().port}/`;
+}
+
+/* Fixture for the "Likely fits" OEM row: the published interchange.json may
+ * not carry the lazy OEM layer yet, so the test adds one (the same shape the
+ * pf_guards unit test uses) with long part numbers and notes. */
+const OEM_FIXTURE = {
+  schemaVersion: 1, cat: 'side-mirrors', amGroups: [],
+  oemGroups: [{
+    id: 'oem:toyota:side-mirrors:L:ui', ns: 'toyota', cat: 'side-mirrors', tier: 'likely', src: 'oem',
+    label: 'Toyota catalog',
+    note: 'Toyota catalog lists #87910-06470 for both — fits some configurations; verify the number on the part',
+    apps: [['Toyota', 'Camry', 1997, 2017], ['Toyota', 'Avalon', 1995, 2018], ['Toyota', 'Corolla', 1998, 2019], ['Toyota', 'Solara', 1999, 2008]],
+    pn: ['87910-06470', '87940-06470', '87940-06480', '87940-06490'],
+  }],
+};
+
+/* ---------- in-page checks ---------- */
+const CHECK_FN = () => {
+  const out = [];
+  const W = innerWidth, H = innerHeight;
+  const desc = (el) => {
+    let s = el.tagName.toLowerCase();
+    if (el.id) s += '#' + el.id;
+    const cls = typeof el.className === 'string' ? el.className.trim().split(/\s+/).filter(Boolean).slice(0, 3) : [];
+    if (cls.length) s += '.' + cls.join('.');
+    return s;
+  };
+  const ctxOf = (el) => { // nearest ancestor with an id, for a readable path
+    let a = el.parentElement;
+    while (a && !a.id) a = a.parentElement;
+    return a ? '#' + a.id : '';
+  };
+  const snippet = (t) => t.replace(/\s+/g, ' ').trim().slice(0, 60);
+  const add = (kind, el, text, extra = '') => out.push({ kind, el: desc(el), ctx: ctxOf(el), text: snippet(text || el.textContent || ''), extra });
+  const visible = (el) => el.checkVisibility ? el.checkVisibility({ opacityProperty: true, visibilityProperty: true }) : !!el.getClientRects().length;
+  const fixedAnc = (el) => { for (let a = el; a && a !== document.body; a = a.parentElement) if (getComputedStyle(a).position === 'fixed') return a; return null; };
+  const offscreenFixed = (el) => {
+    const f = fixedAnc(el);
+    if (!f) return false;
+    const r = f.getBoundingClientRect();
+    return r.bottom <= 0 || r.top >= H || r.right <= 0 || r.left >= W || r.width === 0 || r.height === 0;
+  };
+  const srOnly = (el) => {
+    for (let a = el; a && a !== document.body; a = a.parentElement) {
+      const cs = getComputedStyle(a);
+      if ((cs.clip && cs.clip !== 'auto') || (cs.clipPath && cs.clipPath !== 'none')) {
+        const r = a.getBoundingClientRect();
+        if (r.width <= 2 || r.height <= 2) return true;
+      }
+      if (a.getAttribute('aria-hidden') === 'true') return true;
+    }
+    return false;
+  };
+  const isInline = (cs) => cs.display === 'inline' || cs.display === 'contents';
+  const blockOf = (el) => { let a = el; while (a && isInline(getComputedStyle(a))) a = a.parentElement; return a; };
+
+  // 1) text-overflow / line-clamp anywhere visible
+  for (const el of document.querySelectorAll('body *')) {
+    const cs = getComputedStyle(el);
+    if (cs.textOverflow === 'ellipsis' && visible(el) && el.textContent.trim()) add('ellipsis', el);
+    const lc = cs.webkitLineClamp || cs.getPropertyValue('-webkit-line-clamp');
+    if (lc && lc !== 'none' && visible(el)) add('line-clamp', el);
+  }
+
+  // 2) per text node: overflow, clipping, viewport, contrast
+  const parse = (c) => { const m = c.match(/rgba?\(([^)]+)\)/); if (!m) return null; const p = m[1].split(/[ ,/]+/).filter(Boolean).map(Number); return { r: p[0], g: p[1], b: p[2], a: p.length > 3 ? p[3] : 1 }; };
+  const over = (top, bot) => ({ r: top.r * top.a + bot.r * (1 - top.a), g: top.g * top.a + bot.g * (1 - top.a), b: top.b * top.a + bot.b * (1 - top.a), a: 1 });
+  const lum = (c) => { const f = (v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }; return 0.2126 * f(c.r) + 0.7152 * f(c.g) + 0.0722 * f(c.b); };
+  const ratio = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
+  const bgOf = (el) => { // composite background colours up to the first opaque one
+    const stack = [];
+    for (let a = el; a; a = a.parentElement) {
+      const cs = getComputedStyle(a);
+      if (cs.backgroundImage && cs.backgroundImage !== 'none') return null; // gradient/image: can't judge
+      const c = parse(cs.backgroundColor);
+      if (c && c.a > 0) { stack.push(c); if (c.a >= 1) break; }
+    }
+    let base = { r: 255, g: 255, b: 255, a: 1 };
+    for (let i = stack.length - 1; i >= 0; i--) base = over(stack[i], base);
+    return base;
+  };
+  const opacityOf = (el) => { let o = 1; for (let a = el; a; a = a.parentElement) o *= parseFloat(getComputedStyle(a).opacity); return o; };
+  const blurred = (el) => { for (let a = el; a && a !== document.body; a = a.parentElement) { const f = getComputedStyle(a).filter; if (f && f.includes('blur')) return true; } return false; };
+  const disabled = (el) => !!el.closest('[disabled],[aria-disabled="true"],fieldset:disabled') || (el.closest('label') && el.closest('label').querySelector(':disabled'));
+
+  const seen = new Set();
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  let n;
+  while ((n = walker.nextNode())) {
+    if (!n.nodeValue.trim()) continue;
+    const el = n.parentElement;
+    if (!el || ['SCRIPT', 'STYLE', 'NOSCRIPT', 'TEMPLATE', 'OPTION', 'TITLE'].includes(el.tagName)) continue;
+    if (el.closest('svg')) continue;
+    if (!visible(el) || offscreenFixed(el) || srOnly(el)) continue;
+    const range = document.createRange(); range.selectNodeContents(n);
+    const rects = [...range.getClientRects()].filter(r => r.width > 0 && r.height > 0);
+    if (!rects.length) continue;
+    const tr = rects.reduce((u, r) => ({ left: Math.min(u.left, r.left), top: Math.min(u.top, r.top), right: Math.max(u.right, r.right), bottom: Math.max(u.bottom, r.bottom) }),
+      { left: Infinity, top: Infinity, right: -Infinity, bottom: -Infinity });
+    const text = n.nodeValue;
+    // (a) the text's block box is narrower than its content
+    const blk = blockOf(el);
+    if (blk && !seen.has(blk)) {
+      seen.add(blk);
+      if (blk.scrollWidth > blk.clientWidth + 1 && blk.clientWidth > 0) add('scrollWidth>clientWidth', blk, text, `${blk.scrollWidth}>${blk.clientWidth}`);
+    }
+    // (b) clipped by an ancestor (horizontal: any non-visible overflow;
+    // vertical: hidden/clip only — vertical scrolling is fine)
+    for (let a = el; a && a !== document.documentElement; a = a.parentElement) {
+      const cs = getComputedStyle(a);
+      const ox = cs.overflowX, oy = cs.overflowY;
+      if (ox === 'visible' && oy === 'visible') continue;
+      const r = a.getBoundingClientRect();
+      const bl = parseFloat(cs.borderLeftWidth), br = parseFloat(cs.borderRightWidth), bt = parseFloat(cs.borderTopWidth), bb = parseFloat(cs.borderBottomWidth);
+      const box = { left: r.left + bl, right: r.right - br, top: r.top + bt, bottom: r.bottom - bb };
+      if (ox !== 'visible' && (tr.left < box.left - 1 || tr.right > box.right + 1)) { add('clipped-x', el, text, `by ${desc(a)} (${ox})`); break; }
+      if ((oy === 'hidden' || oy === 'clip') && (tr.top < box.top - 1 || tr.bottom > box.bottom + 1)) { add('clipped-y', el, text, `by ${desc(a)}`); break; }
+    }
+    // (c) past the viewport edge
+    if (tr.right > W + 1 || tr.left < -1) add('offscreen-x', el, text, `${Math.round(tr.left)}..${Math.round(tr.right)} of ${W}`);
+    // (d) contrast
+    if (!blurred(el) && !disabled(el)) {
+      const cs = getComputedStyle(el);
+      const fg = parse(cs.color); const bg = bgOf(el);
+      if (fg && bg) {
+        const op = opacityOf(el);
+        const eff = over({ ...fg, a: fg.a * op }, bg);
+        const px = parseFloat(cs.fontSize), bold = parseInt(cs.fontWeight, 10) >= 700;
+        const large = px >= 24 || (bold && px >= 18.66);
+        const cr = ratio(eff, bg);
+        if (cr < (large ? 3 : 4.5) - 0.01) add('contrast', el, text, `${cr.toFixed(2)}:1 ${cs.color} on rgb(${bg.r | 0},${bg.g | 0},${bg.b | 0})`);
+      }
+    }
+  }
+  if (document.documentElement.scrollWidth > W + 1) out.push({ kind: 'page-hscroll', el: 'html', ctx: '', text: '', extra: `${document.documentElement.scrollWidth}>${W}` });
+
+  // 3) form fields: value / placeholder must fit
+  const cv = document.createElement('canvas').getContext('2d');
+  for (const f of document.querySelectorAll('input:not([type=checkbox]):not([type=radio]):not([type=hidden]), select, textarea')) {
+    if (!visible(f) || offscreenFixed(f) || srOnly(f)) continue;
+    const cs = getComputedStyle(f);
+    const t = f.tagName === 'SELECT' ? (f.selectedOptions[0] ? f.selectedOptions[0].textContent : '') : (f.value || f.placeholder || '');
+    if (!t.trim() || f.tagName === 'TEXTAREA') continue;
+    cv.font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+    const need = cv.measureText(t.trim()).width;
+    const avail = f.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight) - (f.tagName === 'SELECT' && cs.appearance !== 'none' ? 20 : 0);
+    if (need > avail + 1) add('field-text-cut', f, t, `${Math.round(need)}>${Math.round(avail)}`);
+    if (!f.value && f.placeholder && f.tagName === 'INPUT' && !disabled(f)) {
+      const pc = parse(getComputedStyle(f, '::placeholder').color), bg = bgOf(f);
+      if (pc && bg) { const cr = ratio(over(pc, bg), bg); if (cr < 4.49) add('contrast', f, f.placeholder, `placeholder ${cr.toFixed(2)}:1`); }
+    }
+  }
+
+  // 4) touch targets
+  const TARGETS = 'a[href], button, input:not([type=hidden]), select, textarea, summary, [role=button], [role=link], [role=tab], [role=switch], [role=checkbox]';
+  for (const t of document.querySelectorAll(TARGETS)) {
+    if (!visible(t) || offscreenFixed(t) || srOnly(t) || disabled(t)) continue;
+    let box = t;
+    if (t.matches('input[type=checkbox], input[type=radio]') && t.closest('label')) box = t.closest('label');
+    else if (t.matches('input[type=checkbox], input[type=radio]') && t.id && document.querySelector(`label[for="${t.id}"]`)) box = document.querySelector(`label[for="${t.id}"]`);
+    const cs = getComputedStyle(t);
+    if (cs.display === 'inline' && t.parentElement) { // a link inside a sentence
+      const own = t.textContent.trim().length, par = t.parentElement.textContent.trim().length;
+      if (par > own + 12) continue;
+    }
+    const r = box.getBoundingClientRect();
+    if (r.width < 43.5 || r.height < 43.5) add('target<44', t, t.textContent || t.getAttribute('aria-label') || t.title || t.placeholder || '', `${Math.round(r.width)}x${Math.round(r.height)}`);
+  }
+  return out;
+};
+
+/* Double every element's computed font-size (and px line-height); undo restores. */
+const ZOOM_FN = (on) => {
+  if (on) {
+    const els = [...document.querySelectorAll('html, body, body *')];
+    const orig = els.map(el => { const cs = getComputedStyle(el); return [cs.fontSize, cs.lineHeight]; });
+    window.__z = els.map((el, i) => [el, el.style.getPropertyValue('font-size'), el.style.getPropertyPriority('font-size'), el.style.getPropertyValue('line-height'), el.style.getPropertyPriority('line-height')]);
+    els.forEach((el, i) => {
+      const [fs, lh] = orig[i];
+      el.style.setProperty('font-size', parseFloat(fs) * 2 + 'px', 'important');
+      if (lh.endsWith('px')) el.style.setProperty('line-height', parseFloat(lh) * 2 + 'px', 'important');
+    });
+  } else if (window.__z) {
+    for (const [el, fs, fsp, lh, lhp] of window.__z) {
+      el.style.removeProperty('font-size'); el.style.removeProperty('line-height');
+      if (fs) el.style.setProperty('font-size', fs, fsp); if (lh) el.style.setProperty('line-height', lh, lhp);
+    }
+    window.__z = null;
+  }
+};
+
+/* ---------- screens ---------- */
+const settle = (page, ms = 250) => page.waitForTimeout(ms);
+const resetUi = async (page) => {
+  await page.evaluate(() => {
+    for (const f of ['closeUpgradeSheet', 'closeSavedSheet', 'closePricesSheet', 'closeCarDetail', 'closeYardSheet']) { try { window[f] && window[f](); } catch (e) { /* not open */ } }
+    window.scrollTo(0, 0);
+  });
+};
+const tab = async (page, t) => {
+  await resetUi(page);
+  await page.evaluate((t) => document.querySelector(`.tab[data-tab="${t}"]`).click(), t);
+  await settle(page, 400);
+  await page.evaluate(() => window.scrollTo(0, 0));
+};
+const firstKeys = (page, n) => page.evaluate((n) => [...document.querySelectorAll('#live-grid .heart-btn[data-vkey], #live-grid [data-vkey]')].map(b => b.dataset.vkey).filter((k, i, a) => a.indexOf(k) === i).slice(0, n), n);
+
+const SCREENS = [
+  ['results', async (page) => { await tab(page, 'live'); }],
+  ['car-card', async (page) => {
+    await tab(page, 'live');
+    await page.evaluate(() => {
+      document.querySelectorAll('#live-grid details').forEach((d, i) => { if (i < 6) d.open = true; });
+      const c = document.querySelector('#live-grid .car-card'); if (c) c.scrollIntoView();
+    });
+  }],
+  ['car-detail', async (page) => {
+    await tab(page, 'live');
+    const [k] = await firstKeys(page, 1);
+    await page.evaluate((k) => {
+      if (typeof openCarDetail === 'function') openCarDetail(k);
+      else document.querySelectorAll('#live-grid details').forEach(d => { d.open = true; });
+    }, k);
+    await settle(page, 400);
+  }],
+  ['results-pro', async (page) => {
+    await page.evaluate(() => { localStorage.setItem('jh_pro', '1'); applyProGates(); renderLive(); });
+    await tab(page, 'live');
+    await page.evaluate(() => document.querySelectorAll('#live-grid details').forEach((d, i) => { if (i < 6) d.open = true; }));
+  }, async (page) => { await page.evaluate(() => { localStorage.removeItem('jh_pro'); applyProGates(); renderLive(); }); }],
+  ['car-detail-pro', async (page) => {
+    await page.evaluate(() => { localStorage.setItem('jh_pro', '1'); applyProGates(); renderLive(); });
+    await tab(page, 'live');
+    const [k] = await firstKeys(page, 1);
+    await page.evaluate((k) => { if (typeof openCarDetail === 'function') openCarDetail(k); }, k);
+    await settle(page, 400);
+  }, async (page) => { await resetUi(page); await page.evaluate(() => { localStorage.removeItem('jh_pro'); applyProGates(); renderLive(); }); }],
+  ['part-finder', async (page) => { await tab(page, 'parts'); }],
+  ['part-finder-likely', async (page) => {
+    await tab(page, 'parts');
+    await page.evaluate(() => {
+      const sel = (id, v) => { const s = document.getElementById(id); s.value = v; s.dispatchEvent(new Event('change', { bubbles: true })); };
+      sel('pf-year', '2009'); sel('pf-make', 'Toyota'); sel('pf-model', 'Camry');
+      const p = document.getElementById('pf-part'); p.value = 'side mirror'; p.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    await settle(page, 300);
+    await page.evaluate(() => { const s = document.getElementById('pf-part-suggest'); const opt = s && s.querySelector('[data-cat="side-mirrors"], .compare-suggest-item'); if (opt) opt.click(); });
+    await settle(page, 200);
+    await page.evaluate(() => { const s = document.getElementById('pf-part-suggest'); if (s) s.style.display = 'none'; document.getElementById('pf-go').click(); });
+    await page.waitForFunction(() => /Likely fits/.test(document.getElementById('pf-results').textContent), null, { timeout: 15000 })
+      .catch(() => { throw new Error('part finder: no "Likely fits" OEM row rendered (fixture not picked up)'); });
+    await page.evaluate(() => { const r = document.querySelector('.pf-row-card.pf-likely'); if (r) r.scrollIntoView({ block: 'center' }); });
+  }],
+  ['alerts', async (page) => { await tab(page, 'alerts'); }],
+  ['pull-sheet', async (page) => {
+    await tab(page, 'live');
+    const ks = await firstKeys(page, 3);
+    await page.evaluate((ks) => { for (const k of ks) if (!savedCars[k]) toggleSaved(k); renderLive(); openSavedSheet(); }, ks);
+    await settle(page, 400);
+  }],
+  ['pro-sheet', async (page) => {
+    await resetUi(page);
+    await page.evaluate(() => openUpgradeSheet('header-pill'));
+    await settle(page, 400);
+  }],
+  ['pro-sheet-bottom', async (page) => {
+    await resetUi(page);
+    await page.evaluate(() => { openUpgradeSheet('header-pill'); const s = document.getElementById('upgrade-sheet'); s.scrollTop = s.scrollHeight; });
+    await settle(page, 400);
+  }],
+  ['pro-sheet-car', async (page) => {
+    await tab(page, 'live');
+    const [k] = await firstKeys(page, 1);
+    await page.evaluate((k) => openUpgradeSheet('card-value', encodeURIComponent(k)), k);
+    await settle(page, 400);
+  }],
+  ['yards', async (page) => { await tab(page, 'yards'); }],
+  ['yard-prices', async (page) => {
+    await tab(page, 'yards');
+    await page.evaluate(() => { const c = document.querySelector('#yards-grid .yard-card'); openYardPrices(c.dataset.loc); });
+    await settle(page, 800);
+  }],
+  ['empty', async (page) => {
+    await tab(page, 'live');
+    await page.evaluate(() => {
+      const s = document.getElementById('live-filter-year-min');
+      const o = [...s.options].map(o => o.value).filter(Boolean).sort().pop();
+      s.value = o; s.dispatchEvent(new Event('change', { bubbles: true }));
+      const m = document.getElementById('live-filter-make');
+      const mk = [...m.options].map(o => o.value).find(v => v && /^[A-Z]/.test(v) && v.length > 3);
+      m.value = mk; m.dispatchEvent(new Event('change', { bubbles: true }));
+      document.getElementById('live-filter-year-max').value = o;
+      document.getElementById('live-filter-year-max').dispatchEvent(new Event('change', { bubbles: true }));
+    });
+    await settle(page, 500);
+  }, async (page) => {
+    await page.evaluate(() => {
+      for (const id of ['live-filter-year-min', 'live-filter-year-max', 'live-filter-make']) { const s = document.getElementById(id); s.value = ''; s.dispatchEvent(new Event('change', { bubbles: true })); }
+    });
+    await settle(page, 300);
+  }],
+];
+
+/* ---------- run ---------- */
+const failures = new Map(); // key -> {screen, kind, el, text, extra, configs:Set}
+let passes = 0;
+const record = (screen, cfg, rows) => {
+  for (const r of rows) {
+    const key = [screen, r.kind, r.ctx, r.el, r.text].join(' | ');
+    if (!failures.has(key)) failures.set(key, { screen, ...r, configs: new Set() });
+    failures.get(key).configs.add(cfg);
+  }
+};
+async function checkAll(page, screen, width) {
+  for (const theme of THEMES) {
+    await page.emulateMedia({ colorScheme: theme });
+    await page.evaluate((t) => { document.documentElement.dataset.theme = t; }, theme);
+    for (const z of ZOOMS) {
+      if (z !== 1) await page.evaluate(ZOOM_FN, true);
+      await settle(page, 120);
+      const rows = await page.evaluate(CHECK_FN);
+      record(screen, `${width}/${theme}/${z * 100}%`, rows);
+      passes++;
+      if (SHOTS && z === 1 && (width === 390 || width === 1280) && (theme === 'light' || width === 390)) {
+        fs.mkdirSync(SHOTS, { recursive: true });
+        await page.screenshot({ path: path.join(SHOTS, `${width === 390 ? 'phone' : 'desk'}-${screen}${theme === 'dark' ? '-dark' : ''}.png`) });
+      }
+      if (z !== 1) await page.evaluate(ZOOM_FN, false);
+    }
+  }
+}
+
+const browser = await chromium.launch();
+try {
+  for (const width of WIDTHS) {
+    const ctx = await browser.newContext({
+      viewport: { width, height: width >= 1024 ? 900 : 820 },
+      deviceScaleFactor: SHOTS && width === 390 ? 2 : 1,
+      hasTouch: width < 1024, isMobile: false,
+      serviceWorkers: 'block',
+    });
+    const page = await ctx.newPage();
+    page.on('pageerror', (e) => console.log(`  [pageerror ${width}] ${e.message}`));
+    // interchange.json + the lazy OEM fixture for the "Likely fits" row
+    await page.route(/data\/interchange\.json(\?|$)/, async (route) => {
+      const res = await route.fetch(); const j = await res.json();
+      j.oemLazy = { schema: 1, path: 'data/oem/', cats: { 'side-mirrors': { oem: 1, am: 0 } } };
+      await route.fulfill({ response: res, json: j });
+    });
+    await page.route(/data\/oem\/side-mirrors\.json/, (route) => route.fulfill({ json: OEM_FIXTURE }));
+    // No third-party calls (API, analytics) except the web fonts, which
+    // shape every line break; the zip lookup is answered locally.
+    await page.route(/^https?:\/\/(?!127\.0\.0\.1|fonts\.googleapis\.com|fonts\.gstatic\.com)/, (route) => route.abort());
+    await page.route(/api\.zippopotam\.us\//, (route) => route.fulfill({ json: { 'post code': ZIP, country: 'United States',
+      places: [{ 'place name': 'San Jose', state: 'California', 'state abbreviation': 'CA', latitude: '37.3485', longitude: '-121.8863' }] } }));
+    // hold the inventory so the loading state can be checked
+    let release; const held = new Promise(r => { release = r; });
+    await page.route(/data\/inventory_live\.json/, async (route) => { await held; await route.continue(); });
+
+    // Measure what a person sees once scrolled to it: render every card
+    // (content-visibility skips off-screen layout) and finish transitions.
+    await page.addInitScript(() => document.addEventListener('DOMContentLoaded', () => {
+      const st = document.createElement('style');
+      st.textContent = '*,*::before,*::after{content-visibility:visible!important;transition-duration:0s!important;transition-delay:0s!important;animation-duration:0s!important;animation-delay:0s!important}';
+      document.head.appendChild(st);
+    }));
+    await page.goto(BASE, { waitUntil: 'domcontentloaded' });
+    await settle(page, 1200);
+    if (!ONLY || ONLY.includes('loading')) await checkAll(page, 'loading', width);
+    release();
+    await page.waitForSelector('#zip-banner-input', { state: 'visible', timeout: 60000 }).catch(() => {});
+    await settle(page, 600);
+    if (!ONLY || ONLY.includes('home')) await checkAll(page, 'home', width);
+    // enter the zip the way a person does
+    if (await page.isVisible('#zip-banner-input')) {
+      await page.fill('#zip-banner-input', ZIP);
+      await page.click('#zip-banner-go');
+    } else {
+      await page.evaluate((z) => { const i = document.getElementById('live-zip'); i.value = z; i.dispatchEvent(new Event('change', { bubbles: true })); }, ZIP);
+    }
+    await page.waitForSelector('#live-grid .car-card', { timeout: 60000 });
+    await settle(page, 1500);
+    for (const [name, setup, teardown] of SCREENS) {
+      if (ONLY && !ONLY.includes(name)) continue;
+      try {
+        await setup(page);
+        await settle(page, 300);
+        await checkAll(page, name, width);
+      } catch (e) {
+        record(name, `${width}`, [{ kind: 'setup-error', el: '', ctx: '', text: '', extra: e.message.split('\n')[0] }]);
+      }
+      if (teardown) await teardown(page).catch(() => {});
+    }
+    await ctx.close();
+    console.log(`width ${width}: done`);
+  }
+} finally {
+  await browser.close();
+  if (server) server.close();
+}
+
+const rows = [...failures.values()];
+const byKind = {};
+for (const r of rows) byKind[r.kind] = (byKind[r.kind] || 0) + 1;
+for (const r of rows.sort((a, b) => (a.screen + a.kind).localeCompare(b.screen + b.kind))) {
+  const cfgs = [...r.configs];
+  console.log(`FAIL  [${r.screen}] ${r.kind}  ${r.ctx} ${r.el}  "${r.text}"  ${r.extra}  (${cfgs.length} cfg: ${cfgs.slice(0, 4).join(', ')}${cfgs.length > 4 ? ', …' : ''})`);
+}
+console.log(`\n${passes} checks run; ${rows.length} distinct failures`, JSON.stringify(byKind));
+console.log(rows.length ? 'UI CHECK FAILED' : 'ALL PASS');
+process.exit(rows.length ? 1 : 0);
