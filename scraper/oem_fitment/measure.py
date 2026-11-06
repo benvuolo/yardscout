@@ -178,6 +178,7 @@ class Fleet:
         vp = inv.get("vpic") or {}
         self.part_sets = inv.get("partSets") or []
         self.cars = []
+        self.trans = []                  # decoded transmission text per car (aftermarket gate only)
         self.by_key: dict = defaultdict(list)
         for i, r in enumerate(inv["vehicles"]):
             e = ex.get(str(r[F["id"]]))
@@ -190,6 +191,7 @@ class Fleet:
                    donor_identity_ok(mism, vin, key[2]), donor_identity_ok(mism, vin, key[2], oem=True))
             self.by_key[key].append(len(self.cars))
             self.cars.append(car)
+            self.trans.append(e[3] if e and len(e) > 3 else "")
         self.keys = sorted(self.by_key)
         self.n = Counter({k: len(v) for k, v in self.by_key.items()})
         self.keys_by_make: dict = defaultdict(list)
@@ -739,6 +741,54 @@ def table_md(cov: dict) -> str:
     return "\n".join(lines) + "\n"
 
 
+# ============================================== aftermarket layer (Likely only)
+GAP_MAKES = ("MINI", "Land Rover", "Suzuki", "Jaguar", "Isuzu", "Saab", "Fiat", "Plymouth", "Porsche",
+             "Geo", "Smart")
+
+
+def measure_aftermarket(fleet, doc) -> dict:
+    """Aftermarket unit groups (aftermarket/groups_am.py). A lot car is
+    covered for a category when it sits in a unit group (engine agreeing or
+    undecoded) with at least one OTHER lot car that is engine-compatible.
+    Every such pair is Likely: this layer never adds a Verified pair, so the
+    client-tier views above are unchanged by it."""
+    sys.path.insert(0, str(HERE / "aftermarket"))
+    import groups_am as GA  # noqa: E402
+    cars = [(ci, c[3], c[4], c[2], c[7], fleet.trans[ci]) for ci, c in enumerate(fleet.cars)]
+    mem = GA.members(doc, cars)
+    cov = {cat: {} for cat in GA.CATS}          # cat -> ci -> confirmed?
+    pairs = Counter()
+    cat_of = {g["id"]: g["cat"] for g in doc["groups"]}
+    for gid, ms in mem.items():
+        if len(ms) < 2:
+            continue
+        cat = cat_of[gid]
+        pairs[cat] += len(ms) * (len(ms) - 1)
+        for ci, cond in ms:
+            cov[cat][ci] = cov[cat].get(ci, False) or not cond
+    by_make = defaultdict(lambda: Counter())
+    for ci, c in enumerate(fleet.cars):
+        mk = c[3]
+        row = by_make[mk]
+        row["cars"] += 1
+        hit = False
+        conf = False
+        for cat in GA.CATS:
+            if ci in cov[cat]:
+                row[cat] += 1
+                hit = True
+                conf = conf or cov[cat][ci]
+        row["either"] += hit
+        row["either_engine_confirmed"] += conf
+    order = sorted(by_make, key=lambda m: (m not in GAP_MAKES, -by_make[m]["either"]))
+    keys = ("cars", "alternator", "starter", "either", "either_engine_confirmed")
+    out = {"by_make": {m: {k: by_make[m][k] for k in keys} for m in order},
+           "total": {k: sum(by_make[m][k] for m in by_make) for k in keys},
+           "likely_car_pairs": dict(pairs), "verified_pairs_added": 0,
+           "raw": doc.get("raw"), "groups_sha256": doc.get("sha256")}
+    return out
+
+
 def run(inv, extras, before, after, report_dir: Path | None, with_parity: bool = False,
         parity_seekers=None) -> dict:
     fleet = Fleet(inv, extras)
@@ -796,6 +846,10 @@ def main(argv=None) -> int:
     ap.add_argument("--extras", default=str(DATA / "vehicle_extras.json"))
     ap.add_argument("--out", default=None, help="coverage json (default <reports>/coverage-YYYY-MM-DD.json)")
     ap.add_argument("--parity", action="store_true")
+    ap.add_argument("--aftermarket", default=None,
+                    help="aftermarket groups json (aftermarket/groups_am.py); adds an 'aftermarket' section")
+    ap.add_argument("--aftermarket-only", action="store_true",
+                    help="measure only the aftermarket layer (no payload build)")
     a = ap.parse_args(argv)
     inv_p = Path(a.inventory)
     if not inv_p.exists():
@@ -805,6 +859,15 @@ def main(argv=None) -> int:
     extras = json.loads(Path(a.extras).read_text()) if Path(a.extras).exists() else None
     if extras is None:
         print(f"note: {a.extras} absent; every engine verdict is 'no data'", file=sys.stderr)
+    if a.aftermarket_only:
+        if not a.aftermarket:
+            ap.error("--aftermarket-only needs --aftermarket")
+        am = measure_aftermarket(Fleet(inv, extras), json.loads(Path(a.aftermarket).read_text()))
+        out = Path(a.out) if a.out else HERE / "groups" / "_report" / "aftermarket-coverage.json"
+        out.write_text(json.dumps(am, sort_keys=True, indent=1) + "\n")
+        print(json.dumps(am["total"]), file=sys.stderr)
+        print(f"wrote {out}", file=sys.stderr)
+        return 0
     before, after = load_payloads(a.before, a.groups)
     reports = Path(a.reports) if a.reports else Path(a.groups) / "_report"
     seekers = DEFAULT_PARITY
@@ -815,6 +878,8 @@ def main(argv=None) -> int:
         seekers = [(c, s, f150 if (c, s) == ("alternator", ("Ford", "F-150", 1999)) else fam)
                    for c, s, fam in DEFAULT_PARITY]
     cov = run(inv, extras, before, after, reports, a.parity, seekers)
+    if a.aftermarket:
+        cov["aftermarket"] = measure_aftermarket(Fleet(inv, extras), json.loads(Path(a.aftermarket).read_text()))
     day = str(inv.get("scrapedAt") or "")[:10] or "undated"
     out = Path(a.out) if a.out else reports / f"coverage-{day}.json"
     out.parent.mkdir(parents=True, exist_ok=True)

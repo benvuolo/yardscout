@@ -34,3 +34,4 @@ scraper/.out-show-filter/
 .claude/worktrees/
 scraper/oem_fitment/cache/
 scraper/oem_fitment/.state/
+scraper/oem_fitment/groups/_report/aftermarket-dbelectrical.json
