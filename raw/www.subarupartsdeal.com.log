@@ -61,3 +61,256 @@
 10:19:25 seg done tier=A Subaru Legacy [2013, 2014] seeds=[2013] records=958 errors=2
 10:25:49 seg done tier=A Subaru Legacy [2015, 2019] seeds=[2015] records=993 errors=2
 10:26:37 STOPPED: www.subarupartsdeal.com refused or challenged (HTTP 403); domain stopped for this program
+02:38:03 start site=www.subarupartsdeal.com mode=worklist tiers=['A', 'B'] records=993 list_lines=0 year_lines=0 url_index=0
+02:38:03 seg done tier=A Subaru Outback [2010, 2014] seeds=[2011] records=993 errors=2
+02:38:03 seg done tier=A Subaru Outback [2005, 2009] seeds=[2005] records=993 errors=2
+02:38:03 seg done tier=A Subaru Forester [2009, 2013] seeds=[2010] records=993 errors=2
+02:38:03 seg done tier=A Subaru Forester [2003, 2008] seeds=[2004] records=993 errors=2
+02:38:03 seg done tier=A Subaru Outback [2000, 2004] seeds=[2003] records=993 errors=2
+02:38:03 seg done tier=A Subaru Impreza [2008, 2011] seeds=[2008] records=993 errors=2
+02:38:03 seg done tier=A Subaru Impreza [2012, 2016] seeds=[2012] records=993 errors=2
+02:38:03 seg done tier=A Subaru Legacy [2010, 2012] seeds=[2011] records=993 errors=2
+02:38:03 seg done tier=A Subaru Legacy [2005, 2009] seeds=[2005] records=993 errors=2
+02:38:03 seg done tier=A Subaru Impreza [2002, 2007] seeds=[2007] records=993 errors=2
+02:38:03 seg done tier=A Subaru Forester [1981, 2002] seeds=[2001] records=993 errors=2
+02:38:03 seg done tier=A Subaru Forester [2014, 2018] seeds=[2014] records=993 errors=2
+02:38:03 seg done tier=A Subaru Legacy [1990, 1999] seeds=[1999] records=993 errors=2
+02:38:03 seg done tier=A Subaru Legacy [2013, 2014] seeds=[2013] records=993 errors=2
+02:38:03 seg done tier=A Subaru Legacy [2015, 2019] seeds=[2015] records=993 errors=2
+02:38:28 chain-unlinked alternator 1 numbers named by 23700AA720, no catalog link: 23700AA721
+02:38:44 chain-unlinked ac-compressor 1 numbers named by 73111FJ000, no catalog link: 73111FJ002
+02:39:08 chain-unlinked side-mirrors 1 numbers named by 91036FJ110, no catalog link: 91036FJ112
+02:39:08 chain-unlinked side-mirrors 1 numbers named by 91036FJ170, no catalog link: 91036FJ172
+02:39:08 chain-unlinked side-mirrors 1 numbers named by 91036FJ210, no catalog link: 91036FJ212
+02:39:08 chain-unlinked side-mirrors 1 numbers named by 91036FJ100, no catalog link: 91036FJ102
+02:39:08 chain-unlinked side-mirrors 1 numbers named by 91036FJ160, no catalog link: 91036FJ162
+02:39:08 chain-unlinked side-mirrors 1 numbers named by 91036FJ200, no catalog link: 91036FJ202
+02:39:16 chain-unlinked window-regulator 1 numbers named by 61041FJ010, no catalog link: 61041FJ013
+02:39:16 chain-unlinked window-regulator 1 numbers named by 61041FJ020, no catalog link: 61041FJ023
+02:39:39 chain-unlinked climate-control 1 numbers named by 72311FJ040, no catalog link: 72311FJ041
+02:39:39 chain-unlinked climate-control 1 numbers named by 72311FJ160, no catalog link: 72311FJ161
+02:40:03 nav-fail Subaru XV Crosstrek 2020: ValueError: no 2020 catalog for Subaru XV Crosstrek (subaru-['xv_crosstrek'])
+02:40:03 seg done tier=A Subaru XV Crosstrek [2013, 2024] seeds=[2013, 2020] records=994 errors=3
+02:40:29 chain-unlinked alternator 1 numbers named by 23700AA31A, no catalog link: 23700AA31ARA
+02:40:29 chain-unlinked alternator 1 numbers named by 23700AA37A, no catalog link: 23700AA37AR1
+02:40:29 chain-unlinked alternator 1 numbers named by 23700AA401, no catalog link: 23700AA4018A
+02:40:36 chain-unlinked starter 1 numbers named by 23300AA41A, no catalog link: 23300AA230R1
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE44AWT, no catalog link: 91031AE99ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE31AVC, no catalog link: 91031AE91ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE35AVC, no catalog link: 91031AE95ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE42AVC, no catalog link: 91031AE97ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE44AVC, no catalog link: 91031AE99ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE31AYA, no catalog link: 91031AE91ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE35AYA, no catalog link: 91031AE95ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE31AQF, no catalog link: 91031AE91ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE35AQF, no catalog link: 91031AE95ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE42AQF, no catalog link: 91031AE97ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE44AQF, no catalog link: 91031AE99ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE31ARP, no catalog link: 91031AE91ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE35ARP, no catalog link: 91031AE95ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE42ARP, no catalog link: 91031AE97ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE44ARP, no catalog link: 91031AE99ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE42AYA, no catalog link: 91031AE97ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE44AYA, no catalog link: 91031AE99ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE44AFR, no catalog link: 91031AE99ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE31ANN, no catalog link: 91031AE91ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE33ANN, no catalog link: 91031AE93ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE35ANN, no catalog link: 91031AE95ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE42ANN, no catalog link: 91031AE97ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE44ANN, no catalog link: 91031AE99ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE31AMF, no catalog link: 91031AE91ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE35AMF, no catalog link: 91031AE95ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE43AWT, no catalog link: 91031AE98ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE30AVC, no catalog link: 91031AE90ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE34AVC, no catalog link: 91031AE94ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE41AVC, no catalog link: 91031AE96ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE43AVC, no catalog link: 91031AE98ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE30AYA, no catalog link: 91031AE90ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE34AYA, no catalog link: 91031AE94ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE30AQF, no catalog link: 91031AE90ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE34AQF, no catalog link: 91031AE94ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE41AQF, no catalog link: 91031AE96ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE43AQF, no catalog link: 91031AE98ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE30ARP, no catalog link: 91031AE90ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE41ARP, no catalog link: 91031AE96ARP
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE43ARP, no catalog link: 91031AE98ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE41AYA, no catalog link: 91031AE96AYA
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE43AYA, no catalog link: 91031AE98ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE41AFR, no catalog link: 91031AE96AFR
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE43AFR, no catalog link: 91031AE98ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE30ANN, no catalog link: 91031AE90ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE32ANN, no catalog link: 91031AE92ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE34ANN, no catalog link: 91031AE94ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE41ANN, no catalog link: 91031AE96ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE43ANN, no catalog link: 91031AE98ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE30AMF, no catalog link: 91031AE90ANN
+02:41:08 chain-unlinked side-mirrors 1 numbers named by 91031AE34AMF, no catalog link: 91031AE94ANN
+02:41:24 chain-unlinked window-switch 1 numbers named by 83071AE05A, no catalog link: 83071AE05B
+02:41:32 chain-unlinked climate-control 1 numbers named by 72311AE08B, no catalog link: 72311AE08A
+02:41:41 chain-unlinked fuel-pump-module 1 numbers named by 42021AE02A, no catalog link: 42021AE02B
+02:41:41 chain-unlinked fuel-pump-module 1 numbers named by 42021AE03A, no catalog link: 42021AE03B
+02:41:56 chain-unlinked throttle-body 1 numbers named by 16114AA83D, no catalog link: 16114AA83C
+02:41:56 chain-unlinked throttle-body 1 numbers named by 16114AA961, no catalog link: 16114AB590
+02:42:04 chain-unlinked power-steering-pump 1 numbers named by 34430AE082, no catalog link: 34430AE0839L
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE31ATC, no catalog link: 91031AE91ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE35ATC, no catalog link: 91031AE95ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE44BFR, no catalog link: 91031AE99ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE44AME, no catalog link: 91031AE99ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE35BNN, no catalog link: 91031AE95ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE31AHE, no catalog link: 91031AE91ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE35AHE, no catalog link: 91031AE95ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE44AHE, no catalog link: 91031AE99ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE30ATC, no catalog link: 91031AE90ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE34ATC, no catalog link: 91031AE94ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE43BFR, no catalog link: 91031AE98ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE43AME, no catalog link: 91031AE98ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE34BNN, no catalog link: 91031AE94ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE30AHE, no catalog link: 91031AE90ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE34AHE, no catalog link: 91031AE94ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE43AHE, no catalog link: 91031AE98ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE31BVC, no catalog link: 91031AE91ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE44BVC, no catalog link: 91031AE99ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE31BTC, no catalog link: 91031AE91ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE35BTC, no catalog link: 91031AE95ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE31BQF, no catalog link: 91031AE91ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE35BQF, no catalog link: 91031AE95ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE44BQF, no catalog link: 91031AE99ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE31BNN, no catalog link: 91031AE91ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE42BNN, no catalog link: 91031AE97ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE44BNN, no catalog link: 91031AE99ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE35BMF, no catalog link: 91031AE95ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE44BWT, no catalog link: 91031AE99ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE31BHE, no catalog link: 91031AE91ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE35BHE, no catalog link: 91031AE95ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE44BHE, no catalog link: 91031AE99ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE30BVC, no catalog link: 91031AE90ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE34BVC, no catalog link: 91031AE94ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE43BVC, no catalog link: 91031AE98ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE30BTC, no catalog link: 91031AE90ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE34BTC, no catalog link: 91031AE94ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE30BQF, no catalog link: 91031AE90ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE34BQF, no catalog link: 91031AE94ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE43BQF, no catalog link: 91031AE98ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE30BNN, no catalog link: 91031AE90ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE41BNN, no catalog link: 91031AE96ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE43BNN, no catalog link: 91031AE98ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE30BMF, no catalog link: 91031AE90ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE34BMF, no catalog link: 91031AE94ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE43BWT, no catalog link: 91031AE98ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE30BHE, no catalog link: 91031AE90ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE34BHE, no catalog link: 91031AE94ANN
+02:45:07 chain-unlinked side-mirrors 1 numbers named by 91031AE43BHE, no catalog link: 91031AE98ANN
+02:46:28 chain-unlinked power-steering-pump 1 numbers named by 34430AE04B, no catalog link: 34430AE04E
+02:46:28 seg done tier=A Subaru Legacy [2000, 2002] seeds=[2001, 2002] records=1013 errors=3
+02:46:52 chain-unlinked alternator 1 numbers named by 23700AA510, no catalog link: 23700AA5108A
+02:47:15 chain-unlinked ac-compressor 1 numbers named by 73111XA010, no catalog link: 73111XA011
+02:50:11 chain-unlinked window-regulator 1 numbers named by 61188XA00A, no catalog link: 61188XA00B
+02:50:11 chain-unlinked window-regulator 1 numbers named by 61188XA01A, no catalog link: 61188XA01B
+02:50:11 chain-unlinked window-regulator 1 numbers named by 62188XA01A, no catalog link: 62188XA01A9E
+02:50:11 chain-unlinked window-regulator 1 numbers named by 62188XA00A, no catalog link: 62188XA00A9E
+02:50:11 chain-unlinked window-regulator 1 numbers named by 61222XA01A, no catalog link: 61222XA01A9E
+02:50:11 chain-unlinked window-regulator 1 numbers named by 61222XA00A, no catalog link: 61222XA00A9E
+02:50:11 chain-unlinked window-regulator 1 numbers named by 62222XA01A, no catalog link: 62222XA01A9E
+02:50:11 chain-unlinked window-regulator 1 numbers named by 62222XA00A, no catalog link: 62222XA00A9E
+02:50:36 chain-unlinked fuel-pump-module 1 numbers named by 42021XA00A, no catalog link: 42021XA00B
+02:50:59 chain-unlinked power-steering-pump 1 numbers named by 34430XA000, no catalog link: 34430XA0009L
+02:51:23 chain-unlinked alternator 1 numbers named by 23700AA580, no catalog link: 23700AA5818A
+02:52:19 chain-unlinked headlights 1 numbers named by 84001XA03A, no catalog link: 84001XA03B
+02:52:19 chain-unlinked headlights 1 numbers named by 84001XA05A, no catalog link: 84001XA05C
+02:52:19 chain-unlinked headlights 1 numbers named by 84001XA02A, no catalog link: 84001XA02B
+02:52:19 chain-unlinked headlights 1 numbers named by 84001XA04A, no catalog link: 84001XA04C
+02:54:51 chain-unlinked power-steering-pump 1 numbers named by 34430XA011, no catalog link: 34430XA0119L
+02:55:47 chain-unlinked headlights 1 numbers named by 84001XA05B, no catalog link: 84001XA05C
+02:55:47 chain-unlinked headlights 1 numbers named by 84001XA04B, no catalog link: 84001XA04C
+02:56:27 chain-unlinked window-regulator 1 numbers named by 61188XA00B, no catalog link: 61188XA00A9E
+02:56:27 chain-unlinked window-regulator 1 numbers named by 61188XA01B, no catalog link: 61188XA01A9E
+02:57:08 seg done tier=A Subaru B9 Tribeca [2006, 2009] seeds=[2006, 2008, 2009] records=1054 errors=3
+02:57:24 chain-unlinked alternator 1 numbers named by 23700AA34A, no catalog link: 23700AA34ARA
+02:57:40 chain-unlinked ac-compressor 1 numbers named by 73111AC002, no catalog link: 73111AC0028A
+02:58:03 chain-unlinked headlights 1 numbers named by 84001AC232, no catalog link: 84001AC230
+02:58:03 chain-unlinked headlights 1 numbers named by 84001AC222, no catalog link: 84001AC220
+02:58:12 chain-unlinked tail-lights 1 numbers named by 84201AC091, no catalog link: 84201AC090
+02:58:12 chain-unlinked tail-lights 1 numbers named by 84201AC081, no catalog link: 84201AC080
+03:00:27 chain-unlinked side-mirrors 4 numbers named by 91031AC450NN, no catalog link: 91031AC450, 91031AC450DT, 91031AC450LN, 91031AC450WK
+03:00:27 chain-unlinked side-mirrors 2 numbers named by 91031AC530NN, no catalog link: 91031AC530, 91031AC530RF
+03:00:27 chain-unlinked side-mirrors 6 numbers named by 91031AC440NN, no catalog link: 91031AC440DT, 91031AC440, 91031AC440DN, 91031AC440RF, 91031AC440LN, 91031AC440WK
+03:00:27 chain-unlinked side-mirrors 1 numbers named by 91031AC081NN, no catalog link: 91031AC080NN
+03:00:27 chain-unlinked side-mirrors 2 numbers named by 91031AC520NN, no catalog link: 91031AC520, 91031AC520RF
+03:00:36 chain-unlinked window-regulator 1 numbers named by 62112AC110, no catalog link: 62112AC010
+03:00:36 chain-unlinked window-regulator 1 numbers named by 62112AC100, no catalog link: 62112AC000
+03:00:52 chain-unlinked window-switch 1 numbers named by 83081AC000, no catalog link: 83081AC060
+03:01:15 chain-unlinked climate-control 1 numbers named by 72311AC111, no catalog link: 72311AC110
+03:01:47 chain-unlinked fuel-pump-module 2 numbers named by 42021AC072, no catalog link: 42021AC070, 42021AC071
+03:01:47 chain-unlinked fuel-pump-module 1 numbers named by 42021AC121, no catalog link: 42021AC120
+03:02:29 seg done tier=A Subaru Legacy Wagon [1990, 2009] seeds=[1998, 2002, 2001] records=1079 errors=3
+03:02:44 chain-unlinked alternator 1 numbers named by 23700AA370, no catalog link: 23700AA3708A
+03:03:01 chain-unlinked ac-compressor 1 numbers named by 73111AE090, no catalog link: 73111AE091
+03:03:16 chain-unlinked tail-lights 1 numbers named by 84201AE31AVC, no catalog link: 84201AE31ANN
+03:03:16 chain-unlinked tail-lights 1 numbers named by 84201AE31ALB, no catalog link: 84201AE31ANN
+03:03:16 chain-unlinked tail-lights 1 numbers named by 84201AE31ATC, no catalog link: 84201AE31ANN
+03:03:16 chain-unlinked tail-lights 1 numbers named by 84201AE31APL, no catalog link: 84201AE31ANN
+03:03:16 chain-unlinked tail-lights 1 numbers named by 84201AE31AHA, no catalog link: 84201AE31ANN
+03:03:16 chain-unlinked tail-lights 1 numbers named by 84201AE31AHE, no catalog link: 84201AE31ANN
+03:03:16 chain-unlinked tail-lights 1 numbers named by 84201AE30ALB, no catalog link: 84201AE30ANN
+03:03:16 chain-unlinked tail-lights 1 numbers named by 84201AE30ATC, no catalog link: 84201AE30ANN
+03:03:16 chain-unlinked tail-lights 1 numbers named by 84201AE30APL, no catalog link: 84201AE30ANN
+03:03:16 chain-unlinked tail-lights 1 numbers named by 84201AE30AHA, no catalog link: 84201AE30ANN
+03:03:16 chain-unlinked tail-lights 1 numbers named by 84201AE30AHE, no catalog link: 84201AE30ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE42BVC, no catalog link: 91031AE97ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE42BLB, no catalog link: 91031AE97ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE42BTC, no catalog link: 91031AE97ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE44BTC, no catalog link: 91031AE99ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE44BGA, no catalog link: 91031AE99ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE31BYA, no catalog link: 91031AE91ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE31BPL, no catalog link: 91031AE91ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE42BPL, no catalog link: 91031AE97ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE44BPL, no catalog link: 91031AE99ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE31BME, no catalog link: 91031AE91ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE35BME, no catalog link: 91031AE95ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE44BME, no catalog link: 91031AE99ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE44BMF, no catalog link: 91031AE99ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE42BWT, no catalog link: 91031AE97ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE42BHA, no catalog link: 91031AE97ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE44BHA, no catalog link: 91031AE99ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE42BHE, no catalog link: 91031AE97ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE41BVC, no catalog link: 91031AE96ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE41BLB, no catalog link: 91031AE96ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE41BTC, no catalog link: 91031AE96ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE43BTC, no catalog link: 91031AE98ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE43BGA, no catalog link: 91031AE98ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE30BYA, no catalog link: 91031AE90ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE34BYA, no catalog link: 91031AE94ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE30BPL, no catalog link: 91031AE90ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE34BPL, no catalog link: 91031AE94ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE43BPL, no catalog link: 91031AE98ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE30BME, no catalog link: 91031AE90ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE43BME, no catalog link: 91031AE98ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE43BMF, no catalog link: 91031AE98ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE41BHA, no catalog link: 91031AE96ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE43BHA, no catalog link: 91031AE98ANN
+03:03:24 chain-unlinked side-mirrors 1 numbers named by 91031AE41BHE, no catalog link: 91031AE96ANN
+03:03:48 chain-unlinked climate-control 1 numbers named by 72311AE11D, no catalog link: 72311AE11A
+03:03:56 chain-unlinked fuel-pump-module 1 numbers named by 42021AE06A, no catalog link: 42021AE06B
+03:03:56 chain-unlinked fuel-pump-module 1 numbers named by 42021AE08A, no catalog link: 42021AE08B
+03:03:56 chain-unlinked fuel-pump-module 1 numbers named by 42021AE05A, no catalog link: 42021AE05B
+03:03:56 chain-unlinked fuel-pump-module 1 numbers named by 42021AE07A, no catalog link: 42021AE07B
+03:04:12 chain-unlinked throttle-body 1 numbers named by 16114AB182, no catalog link: 16114AB600
+03:04:12 chain-unlinked throttle-body 1 numbers named by 16112AA110, no catalog link: 16112AA090
+03:04:21 chain-unlinked power-steering-pump 1 numbers named by 34430AE083, no catalog link: 34430AE0839L
+03:06:12 seg done tier=A Subaru Legacy [2003, 2004] seeds=[2004, 2003] records=1079 errors=3
+03:07:00 chain-unlinked headlights 1 numbers named by 84002AL01A, no catalog link: 84002AL01B
+03:07:00 chain-unlinked headlights 1 numbers named by 84002AL00A, no catalog link: 84002AL00B
+03:07:16 chain-unlinked side-mirrors 1 numbers named by 91036AL20A, no catalog link: 91036AL20B
+03:07:16 chain-unlinked side-mirrors 1 numbers named by 91036AL10A, no catalog link: 91036AL10B
+03:07:16 chain-unlinked side-mirrors 1 numbers named by 91036AL12A, no catalog link: 91036AL12B
+03:07:16 chain-unlinked side-mirrors 1 numbers named by 91036AL21A, no catalog link: 91036AL21B
+03:07:16 chain-unlinked side-mirrors 1 numbers named by 91036AL11A, no catalog link: 91036AL11B
+03:07:16 chain-unlinked side-mirrors 1 numbers named by 91036AL13A, no catalog link: 91036AL13B
+03:07:32 chain-unlinked window-switch 1 numbers named by 83071AL04A, no catalog link: 83071AL04C
+03:07:32 chain-unlinked window-switch 1 numbers named by 83071AL05A, no catalog link: 83071AL05D
+03:07:40 chain-unlinked climate-control 1 numbers named by 72311AL11A, no catalog link: 72311AL11D
+03:07:40 chain-unlinked climate-control 1 numbers named by 72311AL20A, no catalog link: 72311AL20B
+03:07:40 chain-unlinked climate-control 1 numbers named by 72311AL21A, no catalog link: 72311AL21B
+03:07:48 chain-unlinked fuel-pump-module 1 numbers named by 42021AL02A, no catalog link: 42021AL02C
+03:07:48 chain-unlinked fuel-pump-module 1 numbers named by 42021AL03A, no catalog link: 42021AL03C
+03:08:04 time budget reached records=1079
