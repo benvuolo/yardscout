@@ -14026,9 +14026,15 @@ def _category_for_part_name(name: str) -> str | None:
     return None
 
 
-def build_interchange_payload() -> dict:
+def build_interchange_payload(lazy_out: dict | None = None) -> dict:
     """The part-first search table shipped to the app as
-    docs/data/interchange.json. Pure curated data — no scan required."""
+    docs/data/interchange.json. Pure curated data — no scan required.
+
+    lazy_out=None (tests, measure.py): every OEM group stays in oemGroups and
+    V11 trims Likely groups to the budget. With a dict (the writer, via
+    build_interchange_files): Likely OEM groups and the aftermarket groups
+    move to per-category files instead (CURATION_SPEC §12 lazy files) and
+    lazy_out receives them; V11 then measures the main file only."""
     cats = [
         {"id": cid, "label": pc["label"], "kind": pc["kind"],
          "tokens": pc["tokens"], "priceTokens": pc["priceTokens"],
@@ -14138,7 +14144,9 @@ def build_interchange_payload() -> dict:
         "modelGenerations": [[mk, md, [list(w) for w in wins]]
                              for mk, md, wins in MODEL_GENERATIONS],
     }
-    _attach_oem_layer(payload)
+    _attach_oem_layer(payload, lazy_out)
+    if lazy_out is not None:
+        _attach_lazy_layers(payload, lazy_out)
     return payload
 
 
@@ -14386,13 +14394,16 @@ def _apply_oem_contradictions(payload: dict, oem: dict) -> list:
     return found
 
 
-def _attach_oem_layer(payload: dict) -> None:
+def _attach_oem_layer(payload: dict, lazy_out: dict | None = None) -> None:
     """Never raises: on any failure the old keys are restored and every
     namespace is reported dropped in oemStatus."""
     before = json.loads(json.dumps({k: payload[k] for k in ("categories", "platformGroups", "engineFamilies")}))
     try:
-        _attach_oem_layer_inner(payload, before)
+        _attach_oem_layer_inner(payload, before, lazy_out)
     except Exception as e:  # noqa: BLE001 - the scan must keep publishing
+        if lazy_out is not None:
+            lazy_out.pop("oem", None)
+            lazy_out.pop("budget", None)
         for k, v in before.items():
             payload[k] = v
         st = {ns: f"dropped: OEM layer failed ({type(e).__name__})"
@@ -14416,7 +14427,7 @@ def _oem_entries(ns: str, doc: dict) -> tuple[list, list]:
     return groups, vg
 
 
-def _attach_oem_layer_inner(payload: dict, before: dict) -> None:
+def _attach_oem_layer_inner(payload: dict, before: dict, lazy_out: dict | None = None) -> None:
     oem = _load_oem_layer()
     if not oem["status"]:
         return      # no groups files: the payload is unchanged
@@ -14492,6 +14503,15 @@ def _attach_oem_layer_inner(payload: dict, before: dict) -> None:
         payload["oemStatus"] = {ns: f"dropped: {problems[0]}" for ns in status}
         print(f"[interchange] oem layer withheld: {problems[0]}", file=sys.stderr)
         return
+    if lazy_out is not None:
+        # §12 lazy per-category files: Likely groups ship in
+        # docs/data/oem/<cat>.json (fetched when the user opens that
+        # category) instead of being dropped to fit interchange.json.
+        # Verified groups and oemVg stay in the main file.
+        lazy_out["oem"] = [g for g in payload["oemGroups"] if g["tier"] != "verified"]
+        payload["oemGroups"] = [g for g in payload["oemGroups"] if g["tier"] == "verified"]
+        lazy_out["budget"] = (V, vg_ns)     # V11 runs on the main file once the index is in
+        return
     _oem_fit_budget(payload, V, vg_ns)
 
 
@@ -14533,7 +14553,176 @@ def _oem_fit_budget(payload: dict, V, vg_ns: dict) -> None:
 
 
 _OEM_BRANDS = {"toyota": "Toyota", "mopar": "Mopar", "gm": "GM", "ford": "Ford", "nissan": "Nissan",
-               "honda": "Honda", "hmg": "Hyundai/Kia", "subaru": "Subaru"}
+               "honda": "Honda", "hmg": "Hyundai/Kia", "subaru": "Subaru", "bmw": "BMW", "mb": "Mercedes",
+               "vag": "VW/Audi", "mazda": "Mazda", "mitsubishi": "Mitsubishi", "volvo": "Volvo"}
+
+
+# ---------------------------------------------------------------------------
+# Aftermarket unit groups (oem_fitment/aftermarket/groups_am.py; spec §12,
+# ops/interchange.md 2026-11-06). Committed docs live in
+# oem_fitment/groups/aftermarket/<site>.json. They ship ONLY in the lazy
+# per-category files under their own key amGroups, src "aftermarket", tier
+# always "likely": never mixed into oemGroups or the hand keys, never
+# Verified. Any malformed group drops the whole file (fail closed).
+# ---------------------------------------------------------------------------
+OEM_AM_DIR_NAME = "aftermarket"
+_AM_CATS = ("alternator", "starter")
+_AM_LABELS = {"dbelectrical": "DB Electrical"}
+
+
+def _am_group_entry(g: dict, site: str) -> dict:
+    cat = g["cat"]
+    if cat not in _AM_CATS or cat not in INTERCHANGE_PART_CATEGORIES:
+        raise ValueError(f"category {cat!r} is not an aftermarket category")
+    if g.get("tier") != "likely" or g.get("src") != "aftermarket":
+        raise ValueError("tier/src must be likely/aftermarket")
+    note = g.get("note")
+    if not isinstance(note, str) or not note or re.search(r"verif(y|ied)\s+fit|\bverified\b", note, re.I) \
+            or re.search(r"[<>]", note) or len(note) > 600:
+        raise ValueError("note refused (markup, a Verified claim, or over 600 chars)")
+    apps, seen = [], set()
+    for a in g.get("apps") or []:
+        mk, md, lo, hi, eng = a
+        if not (isinstance(mk, str) and isinstance(md, str) and mk and md and isinstance(lo, int)
+                and isinstance(hi, int) and 1940 <= lo <= hi <= 2030 and isinstance(eng, str)):
+            raise ValueError(f"malformed app {a!r}")
+        k = (mk, md, lo, hi, eng)
+        if k not in seen:
+            seen.add(k)
+            apps.append([mk, md, lo, hi, eng])
+    if not apps:
+        raise ValueError("no apps")
+    amps = g.get("amps")
+    trans = g.get("trans")
+    if trans not in (None, "AT", "MT"):
+        raise ValueError(f"trans {trans!r}")
+    return {"id": str(g["id"]), "cat": cat, "tier": "likely", "src": "aftermarket",
+            "label": _AM_LABELS.get(site, site), "unit": str(g.get("unit") or ""),
+            **({"amps": int(amps)} if isinstance(amps, (int, float)) and amps else {}),
+            **({"trans": trans} if trans else {}),
+            "note": note, "apps": apps}
+
+
+def _load_am_layer(now: datetime | None = None) -> dict:
+    """{"groups": [payload entries], "status": {site: "ok <raw> n groups" |
+    "dropped: <reason>"}}. Groups whose retrieval is over the evidence age
+    limit (120 days) are dropped, like the OEM layer's build-time expiry."""
+    out = {"groups": [], "status": {}}
+    d = Path(OEM_GROUPS_DIR) / OEM_AM_DIR_NAME
+    files = sorted(d.glob("*.json")) if d.is_dir() else []
+    now = now or datetime.now(timezone.utc)
+    for p in files:
+        site = p.stem
+        try:
+            doc = json.loads(p.read_text())
+            if doc.get("src") != "aftermarket" or doc.get("tier") != "likely":
+                raise ValueError("file is not an aftermarket Likely doc")
+            ents, expired, refused = [], 0, []
+            groups = doc.get("groups")
+            if not isinstance(groups, list) or not groups:
+                raise ValueError("no groups")
+            for g in groups:
+                ts = datetime.strptime(str(g.get("retrieved")), "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+                if now - ts > timedelta(days=120):
+                    expired += 1
+                    continue
+                try:
+                    ents.append(_am_group_entry(g, site))
+                except (ValueError, TypeError, KeyError) as e:
+                    # one malformed unit (e.g. HTML left in its fit notes) is
+                    # refused on its own; it never ships, the rest do
+                    refused.append(f"{g.get('id')}: {e}")
+                    print(f"[interchange] aftermarket {site} refused {g.get('id')}: {e}", file=sys.stderr)
+            ids = [e["id"] for e in ents]
+            if len(ids) != len(set(ids)):
+                raise ValueError("duplicate group ids")
+            if len(refused) > max(5, len(groups) // 20):
+                raise ValueError(f"{len(refused)} groups refused (first: {refused[0]})")
+        except Exception as e:  # noqa: BLE001 - the scan must keep publishing
+            out["status"][site] = f"dropped: {type(e).__name__}: {e}"[:300]
+            print(f"[interchange] aftermarket {site} dropped: {e}", file=sys.stderr)
+            continue
+        out["groups"] += ents
+        out["status"][site] = (f"ok {str(doc.get('raw') or '')[:60]} {len(ents)} groups (likely only)"
+                               + (f"; {len(refused)} refused (malformed)" if refused else "")
+                               + (f"; {expired} expired (evidence over 120 days old)" if expired else ""))
+    return out
+
+
+OEM_LAZY_DIR = "oem"          # docs/data/oem/<cat>.json
+OEM_LAZY_SCHEMA = 1
+
+
+def _lazy_trim(doc: dict, budget: int) -> tuple[list, int]:
+    """Keep one lazy file within budget: OEM Likely groups go first, lowest
+    value first (V11's own order), then aftermarket groups with the fewest
+    application rows. Returns (dropped OEM ids, dropped aftermarket count)."""
+    dumps = lambda o: json.dumps(o, separators=(",", ":"))  # noqa: E731
+    if len(dumps(doc)) + 1 <= budget:
+        return [], 0
+    V = _oem_validator()
+    dropped = V.size_trim(doc, budget - 1) if doc.get("oemGroups") else []
+    n_am = 0
+    if len(dumps(doc)) + 1 > budget and doc.get("amGroups"):
+        doc["amGroups"].sort(key=lambda g: (-len(g["apps"]), g["id"]))
+        while doc["amGroups"] and len(dumps(doc)) + 1 > budget:
+            doc["amGroups"].pop()
+            n_am += 1
+        doc["amGroups"].sort(key=lambda g: g["id"])
+    return dropped, n_am
+
+
+def _attach_lazy_layers(payload: dict, lazy_out: dict) -> None:
+    """Group the lazy entries by category into lazy_out["files"] ({cat:
+    doc}), index them in payload["oemLazy"], then run V11 on the main file.
+    Never raises: on failure no lazy file ships and the main file keeps
+    only what it already had."""
+    try:
+        am = _load_am_layer()
+        if am["status"]:
+            payload["amStatus"] = dict(sorted(am["status"].items()))
+        by_cat: dict = {}
+        for g in lazy_out.get("oem") or []:
+            by_cat.setdefault(g["cat"], {"oemGroups": [], "amGroups": []})["oemGroups"].append(g)
+        for g in am["groups"]:
+            by_cat.setdefault(g["cat"], {"oemGroups": [], "amGroups": []})["amGroups"].append(g)
+        V = _oem_validator() if by_cat else None
+        files, index = {}, {}
+        for cat in sorted(by_cat):
+            doc = {"schemaVersion": OEM_LAZY_SCHEMA, "builtAt": payload["builtAt"], "cat": cat,
+                   "oemGroups": by_cat[cat]["oemGroups"], "amGroups": by_cat[cat]["amGroups"]}
+            dropped, n_am = _lazy_trim(doc, V.policy.PAYLOAD_BYTE_BUDGET)
+            for gid in dropped:
+                ns = gid.split(":")[1] if gid.startswith("oem:") else "_unknown"
+                st = (payload.get("oemStatus") or {}).get(ns, "")
+                if st.startswith("ok"):
+                    payload["oemStatus"][ns] = st + f"; 1 dropped for size ({cat} file)"
+            if n_am:
+                for site in list(payload.get("amStatus") or {}):
+                    if payload["amStatus"][site].startswith("ok"):
+                        payload["amStatus"][site] += f"; {n_am} dropped for size ({cat} file)"
+            if not doc["oemGroups"] and not doc["amGroups"]:
+                continue
+            files[cat] = doc
+            index[cat] = {"oem": len(doc["oemGroups"]), "am": len(doc["amGroups"])}
+        lazy_out["files"] = files
+        if index:
+            payload["oemLazy"] = {"schema": OEM_LAZY_SCHEMA, "path": f"data/{OEM_LAZY_DIR}/", "cats": index}
+    except Exception as e:  # noqa: BLE001 - the scan must keep publishing
+        lazy_out["files"] = {}
+        payload.pop("oemLazy", None)
+        print(f"[interchange] lazy OEM/aftermarket files withheld: {type(e).__name__}: {e}", file=sys.stderr)
+    if lazy_out.get("budget"):
+        V, vg_ns = lazy_out.pop("budget")
+        _oem_fit_budget(payload, V, vg_ns)
+
+
+def build_interchange_files() -> tuple[dict, dict]:
+    """(interchange.json payload, {cat: lazy doc}) exactly as the writer
+    ships them."""
+    lazy: dict = {}
+    payload = build_interchange_payload(lazy_out=lazy)
+    return payload, lazy.get("files") or {}
 
 
 def _iso_utc_z_interchange() -> str:
@@ -14542,10 +14731,22 @@ def _iso_utc_z_interchange() -> str:
 
 
 def write_interchange_payload() -> None:
+    payload, files = build_interchange_files()
+    # Lazy files first, so a client that reads the new index finds them;
+    # files for categories no longer indexed are removed.
+    lazy_dir = DATA_DIR / OEM_LAZY_DIR
+    if files:
+        lazy_dir.mkdir(parents=True, exist_ok=True)
+    for cat, doc in files.items():
+        (lazy_dir / f"{cat}.json").write_text(json.dumps(doc, separators=(",", ":")) + "\n")
+    if lazy_dir.is_dir():
+        for p in lazy_dir.glob("*.json"):
+            if p.stem not in files:
+                p.unlink()
     out = DATA_DIR / "interchange.json"
-    out.write_text(json.dumps(build_interchange_payload(),
-                              separators=(",", ":")) + "\n")
-    print(f"  [interchange] wrote {out}", file=sys.stderr)
+    out.write_text(json.dumps(payload, separators=(",", ":")) + "\n")
+    print(f"  [interchange] wrote {out}" + (f" + {len(files)} lazy files in {lazy_dir}" if files else ""),
+          file=sys.stderr)
 
 
 # ---------------------------------------------------------------------------

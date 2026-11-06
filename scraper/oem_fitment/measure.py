@@ -725,7 +725,13 @@ def load_payloads(before_path, groups_dir):
     saved = js.OEM_GROUPS_DIR
     js.OEM_GROUPS_DIR = Path(groups_dir)
     try:
-        after = js.build_interchange_payload()
+        # what the writer ships: the main file plus the lazy per-category
+        # files (§12); their OEM groups are merged back for measuring (the
+        # client renders every lazy-file group Likely, as _tier does for a
+        # Likely group). Aftermarket groups are measured by --aftermarket.
+        after, files = js.build_interchange_files()
+        after["oemGroups"] = list(after.get("oemGroups") or []) + [
+            dict(g, tier="likely") for c in sorted(files) for g in files[c].get("oemGroups") or []]
     finally:
         js.OEM_GROUPS_DIR = saved
     return before, after
