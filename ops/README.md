@@ -13,6 +13,7 @@ is blocked, what is next). The owner's standing rules are in `/CLAUDE.md`.
 | Data quality | `ops/data.md` | normalization, lifespan data and its display | owner ask |
 | Interchange | `ops/interchange.md` | OEM-fitment crawl, curation, verified interchange | running (hub-orchestrated workflows) |
 | Release | `ops/release.md` | version bump, build, store submission | owner says "ship" |
+| Design | `ops/design.md` | redesign exploration (branch `design/redesign-2026-11`), prototypes, review artifact; no production files until the owner approves a direction | owner ask |
 
 Brief for a new session (paste as the first message):
 
