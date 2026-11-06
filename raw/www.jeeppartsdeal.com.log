@@ -1563,3 +1563,222 @@
 08:24:07 net-fail nav Chrysler Concorde 1995: network error after 3 tries: ReadTimeout
 08:24:07 seg done tier=A Chrysler Concorde [1993, 2004] seeds=[2002, 1995] records=2710 errors=20
 08:24:07 time budget reached records=2710
+08:29:18 start site=www.jeeppartsdeal.com mode=worklist tiers=['A', 'B'] records=2710 list_lines=824 year_lines=62 url_index=9043
+08:29:18 seg done tier=A Jeep Patriot [2007, 2017] seeds=[2014] records=2710 errors=20
+08:29:18 seg done tier=A Jeep Grand Cherokee [1999, 2004] seeds=[2004] records=2710 errors=20
+08:29:18 seg done tier=A Jeep Liberty [1998, 2007] seeds=[2005] records=2710 errors=20
+08:29:18 seg done tier=A Jeep Grand Cherokee [2005, 2010] seeds=[2005] records=2710 errors=20
+08:29:18 seg done tier=A Jeep Liberty [2008, 2012] seeds=[2008] records=2710 errors=20
+08:29:18 seg done tier=A Jeep Compass [2011, 2016] seeds=[2014] records=2710 errors=20
+08:29:18 seg done tier=A Jeep Grand Cherokee [2011, 2021] seeds=[2011] records=2710 errors=20
+08:29:18 seg done tier=A Jeep Cherokee [2014, 2022] seeds=[2015] records=2710 errors=20
+08:29:18 seg done tier=A Jeep Commander [2006, 2010] seeds=[2006] records=2710 errors=20
+08:29:18 seg done tier=A Jeep Grand Cherokee [1993, 1998] seeds=[1997] records=2710 errors=20
+08:29:18 seg done tier=A Jeep Cherokee [1978, 2001] seeds=[2000] records=2710 errors=20
+08:29:18 seg done tier=A Jeep Compass [2007, 2010] seeds=[2007] records=2710 errors=20
+08:29:18 seg done tier=A Jeep Renegade [2015, 2022] seeds=[2017] records=2710 errors=20
+08:29:18 seg done tier=A Jeep Compass [2017, 2024] seeds=[2017] records=2710 errors=20
+08:29:18 seg done tier=A Jeep Wrangler [1997, 2006] seeds=[1997] records=2710 errors=20
+08:29:18 seg done tier=A Dodge Ram 1500 [1971, 2018] seeds=[2002] records=2710 errors=20
+08:29:18 seg done tier=A Dodge Grand Caravan [2008, 2024] seeds=[2010] records=2710 errors=20
+08:29:18 seg done tier=A Chrysler 200 [1979, 2022] seeds=[2015] records=2710 errors=20
+08:29:18 seg done tier=A Dodge Journey [2009, 2020] seeds=[2012] records=2710 errors=20
+08:29:18 seg done tier=A Chrysler Town & Country [2008, 2016] seeds=[2008] records=2710 errors=20
+08:29:18 seg done tier=A Chrysler 300 [1999, 2021] seeds=[2006] records=2710 errors=20
+08:29:18 seg done tier=A Dodge Avenger [1995, 2014] seeds=[2013] records=2710 errors=20
+08:29:18 seg done tier=A Chrysler PT Cruiser [2001, 2010] seeds=[2006] records=2710 errors=20
+08:29:18 seg done tier=A Dodge Charger [1971, 2010] seeds=[2007] records=2710 errors=20
+08:29:18 seg done tier=A Dodge Dakota [1997, 2004] seeds=[2000] records=2710 errors=20
+08:29:18 seg done tier=A Dodge Caravan [1984, 2020] seeds=[2005] records=2710 errors=20
+08:29:18 seg done tier=A Chrysler Town & Country [1992, 2007] seeds=[2005] records=2710 errors=20
+08:29:18 seg done tier=A Dodge Dart [1960, 2016] seeds=[2013] records=2710 errors=20
+08:29:18 seg done tier=A Dodge Caliber [2007, 2012] seeds=[2007] records=2710 errors=20
+08:29:18 seg done tier=A Dodge Grand Caravan [2001, 2007] seeds=[2005] records=2710 errors=20
+08:29:18 seg done tier=A Dodge Charger [2011, 2023] seeds=[2013] records=2710 errors=20
+08:29:18 seg done tier=A Dodge Durango [2004, 2009] seeds=[2005] records=2710 errors=20
+08:29:18 seg done tier=A Dodge Durango [1998, 2003] seeds=[2003] records=2710 errors=20
+08:29:18 seg done tier=A Chrysler Sebring [2007, 2011] seeds=[2008] records=2710 errors=20
+08:29:18 seg done tier=A Dodge Dakota [2005, 2011] seeds=[2005] records=2710 errors=20
+08:29:18 seg done tier=A Chrysler Pacifica [2004, 2008] seeds=[2006] records=2710 errors=20
+08:29:18 seg done tier=A Dodge Nitro [2007, 2011] seeds=[2007] records=2710 errors=20
+08:29:18 seg done tier=A Ram 1500 [2009, 2022] seeds=[2012] records=2710 errors=20
+08:29:18 seg done tier=A Chrysler Sebring [2001, 2006] seeds=[2004] records=2710 errors=20
+08:29:18 seg done tier=A Dodge Durango [2011, 2023] seeds=[2013] records=2710 errors=20
+08:29:18 seg done tier=A Dodge Neon [2000, 2005] seeds=[2005] records=2710 errors=20
+08:29:18 seg done tier=A Dodge Ram Pickup [1988, 2011] seeds=[2004] records=2710 errors=20
+08:29:18 seg done tier=A Dodge Stratus [1996, 2008] seeds=[2006] records=2710 errors=20
+08:29:18 seg done tier=A Dodge Dakota [1987, 1996] seeds=[1992] records=2710 errors=20
+08:29:18 seg done tier=A Dodge Magnum [1978, 2008] seeds=[2005] records=2710 errors=20
+08:29:18 seg done tier=A Dodge Ram Van [1966, 2003] seeds=[1999] records=2710 errors=20
+08:29:18 seg done tier=A Dodge Grand Caravan [1988, 2000] seeds=[2000] records=2710 errors=20
+08:29:18 seg done tier=A Chrysler Aspen [2007, 2009] seeds=[2007] records=2710 errors=20
+08:29:18 seg done tier=A Dodge Ram 2500 [1979, 2002] seeds=[2001] records=2710 errors=20
+08:29:18 seg done tier=A Dodge 1500 Pickup [1995, 2023] seeds=[2002] records=2710 errors=20
+08:29:18 seg done tier=A Chrysler 300C [2005, 2018] seeds=[2006] records=2710 errors=20
+08:29:18 seg done tier=A Dodge Ram 2500 [2003, 2009] seeds=[2003] records=2710 errors=20
+08:29:18 seg done tier=A Dodge Challenger [2009, 2014] seeds=[2010] records=2710 errors=20
+08:29:18 seg done tier=A Dodge Intrepid [1993, 2004] seeds=[2004] records=2710 errors=20
+08:29:18 seg done tier=A Dodge Caravan/Grand Caravan [1996, 2008] seeds=[2005] records=2710 errors=20
+08:29:18 seg done tier=A Chrysler Concorde [1993, 2004] seeds=[2002] records=2710 errors=20
+08:29:58 listed after chain starter R4609058: line 2712 (recrawl_of 2349)
+08:32:30 chain-unlinked power-steering-pump 1 numbers named by R4874243, no catalog link: 4874243
+08:32:38 nav-fail Chrysler Sebring 1993: NavError: HTTP 404 for https://www.jeeppartsdeal.com/catalog/1993-chrysler-sebring-parts
+08:32:38 seg done tier=A Chrysler Sebring [1992, 2000] seeds=[2000, 1993] records=2723 errors=21
+08:32:38 nav-fail Dodge D1500 2004: NavError: Dodge D1500: no single catalog model for this feed name
+08:32:38 seg done tier=A Dodge D1500 [1995, 2015] seeds=[2004] records=2723 errors=22
+08:32:38 nav-fail Dodge Ram 2002: NavError: Dodge Ram: no single catalog model for this feed name
+08:32:38 seg done tier=A Dodge Ram [2002, 2008] seeds=[2002] records=2723 errors=23
+08:34:38 chain-unlinked tail-lights 3 numbers named by 68055178AA, no catalog link: 4805592AC, 4805592AD, 4805592AE
+08:34:38 chain-unlinked tail-lights 3 numbers named by 68055179AA, no catalog link: 4805593AC, 4805593AE, 4805593AD
+08:36:06 nav-fail Chrysler 300M 2005: NavError: HTTP 404 for https://www.jeeppartsdeal.com/catalog/2005-chrysler-300m-parts
+08:36:06 seg done tier=A Chrysler 300M [1999, 2005] seeds=[2002, 2005] records=2731 errors=24
+08:36:06 nav-fail Dodge Ram 2001: NavError: Dodge Ram: no single catalog model for this feed name
+08:36:06 seg done tier=A Dodge Ram [1961, 2001] seeds=[2001] records=2731 errors=25
+08:36:14 nav-fail Dodge Ram Wagon 1994: NavError: https://www.jeeppartsdeal.com/catalog/1994-dodge-ram-wagon-parts redirected to https://www.jeeppartsdeal.com/dodge-parts
+08:36:14 seg done tier=A Dodge Ram Wagon [1981, 2002] seeds=[1994] records=2731 errors=26
+08:37:34 chain-unlinked tail-lights 5 numbers named by 68241332AA, no catalog link: 4857600AE, 4857600AH, 4857600AC, 4857600AD, 4857600AG
+08:37:34 chain-unlinked tail-lights 6 numbers named by 68241333AA, no catalog link: 4857601AD, 4857601AC, 4857601AG, 4857601AH, 4857601AF, 4857601AE
+08:39:02 chain-unlinked window-regulator 1 numbers named by 5135248AA, no catalog link: 4894016AA
+08:39:02 chain-unlinked window-regulator 1 numbers named by 5135249AA, no catalog link: 4894017AA
+08:39:02 chain-unlinked window-regulator 2 numbers named by 5135250AA, no catalog link: 5170940AA, 4894536AA
+08:39:02 chain-unlinked window-regulator 2 numbers named by 5135251AA, no catalog link: 5170941AA, 4894537AA
+08:39:43 chain-unlinked fuel-pump-module 5 numbers named by 5101830AC, no catalog link: 5018875AB, 5101830AB, 5101830AA, RL101830AB, RL101830AC
+08:39:43 chain-unlinked fuel-pump-module 3 numbers named by RL096149AB, no catalog link: 5096149AB, 5018873AB, 5096149AA
+08:40:22 nav-fail Chrysler Voyager 2012: NavError: HTTP 404 for https://www.jeeppartsdeal.com/catalog/2012-chrysler-voyager-parts
+08:40:22 seg done tier=A Chrysler Voyager [1999, 2021] seeds=[2003, 2012] records=2747 errors=27
+08:41:02 chain-unlinked alternator 1 numbers named by 56029732AB, no catalog link: 56029732AC
+08:41:02 chain-unlinked alternator 1 numbers named by 56029733AB, no catalog link: 56029733AC
+08:41:34 chain-unlinked starter 1 numbers named by 68348376AC, no catalog link: 68348376AB
+08:41:34 chain-unlinked starter 1 numbers named by 56029818AA, no catalog link: 56029818AC
+08:41:34 chain-unlinked starter 1 numbers named by 56029615AD, no catalog link: 56029615AC
+08:42:30 chain-unlinked ac-compressor 4 numbers named by 68225206AF, no catalog link: 68225206AE, 68225206AC, 68225206AB, 68225206AD
+08:42:30 chain-unlinked ac-compressor 6 numbers named by 68237995AH, no catalog link: 68237995AG, 68237995AE, 68237995AA, 68237995AF, 68237995AB, 68237995AD
+08:44:46 chain-unlinked headlights 6 numbers named by 68228946AI, no catalog link: 68228946AH, 68228946AC, 68228946AD, 68228946AB, 68228946AF, 68228946AG
+08:44:46 chain-unlinked headlights 5 numbers named by 68228949AH, no catalog link: 68228949AE, 68228949AC, 68228949AF, 68228949AG, 68228949AD
+08:44:46 chain-unlinked headlights 3 numbers named by 68342193AE, no catalog link: 68342193AC, 68342193AB, 68342193AD
+08:44:46 chain-unlinked headlights 5 numbers named by 68228944AH, no catalog link: 68228944AE, 68228944AF, 68228944AD, 68228944AC, 68228944AG
+08:44:46 chain-unlinked headlights 6 numbers named by 68228945AH, no catalog link: 68228945AF, 68228945AG, 68228945AE, 68228945AD, 68228945AC, 68228945AB
+08:44:46 chain-unlinked headlights 6 numbers named by 68228947AI, no catalog link: 68228947AD, 68228947AH, 68228947AB, 68228947AF, 68228947AC, 68228947AG
+08:44:46 chain-unlinked headlights 5 numbers named by 68228948AH, no catalog link: 68228948AC, 68228948AF, 68228948AD, 68228948AG, 68228948AE
+08:44:46 chain-unlinked headlights 3 numbers named by 68342192AE, no catalog link: 68342192AB, 68342192AD, 68342192AC
+08:46:06 chain-unlinked tail-lights 5 numbers named by 68229027AF, no catalog link: 68229027AB, 68229027AA, 68229027AC, 68229027AE, 68229027AD
+08:46:06 chain-unlinked tail-lights 5 numbers named by 68229026AF, no catalog link: 68229026AC, 68229026AE, 68229026AD, 68229026AA, 68229026AB
+08:46:06 chain-unlinked tail-lights 3 numbers named by 68229028AD, no catalog link: 68229028AC, 68229028AA, 68229028AB
+08:46:06 chain-unlinked tail-lights 3 numbers named by 68229029AD, no catalog link: 68229029AA, 68229029AC, 68229029AB
+08:46:06 chain-unlinked tail-lights 4 numbers named by 68228940AF, no catalog link: 68228940AC, 68228940AB, 68228940AE, 68228940AD
+08:46:06 chain-unlinked tail-lights 3 numbers named by 68228952AE, no catalog link: 68228952AC, 68228952AB, 68228952AD
+08:46:06 chain-unlinked tail-lights 4 numbers named by 68228941AF, no catalog link: 68228941AC, 68228941AE, 68228941AD, 68228941AB
+08:46:06 chain-unlinked tail-lights 3 numbers named by 68228953AE, no catalog link: 68228953AD, 68228953AC, 68228953AB
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM14AXRAE, no catalog link: 5RM14AXRAC, 5RM14AXRAD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM241W7AF, no catalog link: 5RM241W7AE, 5RM241W7AD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM12AXRAE, no catalog link: 5RM12AXRAD, 5RM12AXRAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM12GW7AE, no catalog link: 5RM12GW7AC, 5RM12GW7AD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM12JSCAE, no catalog link: 5RM12JSCAD, 5RM12JSCAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM12KBXAE, no catalog link: 5RM12KBXAD, 5RM12KBXAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM12LAUAE, no catalog link: 5RM12LAUAD, 5RM12LAUAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM12NRVAE, no catalog link: 5RM12NRVAC, 5RM12NRVAD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM12PQAAE, no catalog link: 5RM12PQAAD, 5RM12PQAAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM12PTEAE, no catalog link: 5RM12PTEAD, 5RM12PTEAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM12PW2AE, no catalog link: 5RM12PW2AC, 5RM12PW2AD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM13GUVAE, no catalog link: 5RM13GUVAC, 5RM13GUVAD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM13GW7AE, no catalog link: 5RM13GW7AC, 5RM13GW7AD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM13KBXAE, no catalog link: 5RM13KBXAD, 5RM13KBXAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM13LAUAE, no catalog link: 5RM13LAUAC, 5RM13LAUAD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM13NRVAE, no catalog link: 5RM13NRVAD, 5RM13NRVAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM13PQAAE, no catalog link: 5RM13PQAAC, 5RM13PQAAD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM13PTEAE, no catalog link: 5RM13PTEAC, 5RM13PTEAD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM13PW2AE, no catalog link: 5RM13PW2AD, 5RM13PW2AC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM14GUVAE, no catalog link: 5RM14GUVAD, 5RM14GUVAC
+09:02:14 chain-unlinked side-mirrors 1 numbers named by 5RM14GW7AE, no catalog link: 5RM14GW7AD
+09:02:14 chain-unlinked side-mirrors 1 numbers named by 5RM14JSCAE, no catalog link: 5RM14JSCAD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM14KBXAE, no catalog link: 5RM14KBXAD, 5RM14KBXAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM14LAUAE, no catalog link: 5RM14LAUAD, 5RM14LAUAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM14NRVAE, no catalog link: 5RM14NRVAC, 5RM14NRVAD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM14PQAAE, no catalog link: 5RM14PQAAD, 5RM14PQAAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM14PTEAE, no catalog link: 5RM14PTEAD, 5RM14PTEAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM14PW2AE, no catalog link: 5RM14PW2AD, 5RM14PW2AC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM15AXRAE, no catalog link: 5RM15AXRAC, 5RM15AXRAD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM15GUVAE, no catalog link: 5RM15GUVAD, 5RM15GUVAC
+09:02:14 chain-unlinked side-mirrors 1 numbers named by 5RM15GW7AE, no catalog link: 5RM15GW7AD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM15JSCAE, no catalog link: 5RM15JSCAC, 5RM15JSCAD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM15KBXAE, no catalog link: 5RM15KBXAC, 5RM15KBXAD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM15LAUAE, no catalog link: 5RM15LAUAD, 5RM15LAUAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM15NRVAE, no catalog link: 5RM15NRVAC, 5RM15NRVAD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM15PQAAE, no catalog link: 5RM15PQAAC, 5RM15PQAAD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM15PTEAE, no catalog link: 5RM15PTEAD, 5RM15PTEAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM15PW2AE, no catalog link: 5RM15PW2AC, 5RM15PW2AD
+09:02:14 chain-unlinked side-mirrors 1 numbers named by 5RM221AUAD, no catalog link: 5RM221AUAC
+09:02:14 chain-unlinked side-mirrors 1 numbers named by 5RM221BXAD, no catalog link: 5RM221BXAC
+09:02:14 chain-unlinked side-mirrors 1 numbers named by 5RM221RVAD, no catalog link: 5RM221RVAC
+09:02:14 chain-unlinked side-mirrors 1 numbers named by 5RM221SCAD, no catalog link: 5RM221SCAC
+09:02:14 chain-unlinked side-mirrors 1 numbers named by 5RM221TEAD, no catalog link: 5RM221TEAC
+09:02:14 chain-unlinked side-mirrors 1 numbers named by 5RM221UVAD, no catalog link: 5RM221UVAC
+09:02:14 chain-unlinked side-mirrors 1 numbers named by 5RM221W7AD, no catalog link: 5RM221W7AC
+09:02:14 chain-unlinked side-mirrors 1 numbers named by 5RM221XRAD, no catalog link: 5RM221XRAC
+09:02:14 chain-unlinked side-mirrors 1 numbers named by 5RM231AUAD, no catalog link: 5RM231AUAC
+09:02:14 chain-unlinked side-mirrors 1 numbers named by 5RM231BXAD, no catalog link: 5RM231BXAC
+09:02:14 chain-unlinked side-mirrors 1 numbers named by 5RM231RVAD, no catalog link: 5RM231RVAC
+09:02:14 chain-unlinked side-mirrors 1 numbers named by 5RM231SCAD, no catalog link: 5RM231SCAC
+09:02:14 chain-unlinked side-mirrors 1 numbers named by 5RM231TEAD, no catalog link: 5RM231TEAC
+09:02:14 chain-unlinked side-mirrors 1 numbers named by 5RM231UVAD, no catalog link: 5RM231UVAC
+09:02:14 chain-unlinked side-mirrors 1 numbers named by 5RM231W7AD, no catalog link: 5RM231W7AC
+09:02:14 chain-unlinked side-mirrors 1 numbers named by 5RM231XRAD, no catalog link: 5RM231XRAC
+09:02:14 chain-unlinked side-mirrors 1 numbers named by 5RM241AUAF, no catalog link: 5RM241AUAE
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM241BXAF, no catalog link: 5RM241BXAE, 5RM241BXAD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM241RVAF, no catalog link: 5RM241RVAD, 5RM241RVAE
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM241SCAF, no catalog link: 5RM241SCAD, 5RM241SCAE
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM241TEAF, no catalog link: 5RM241TEAE, 5RM241TEAD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM241UVAF, no catalog link: 5RM241UVAE, 5RM241UVAD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM241XRAF, no catalog link: 5RM241XRAD, 5RM241XRAE
+09:02:14 chain-unlinked side-mirrors 1 numbers named by 5RM251AUAF, no catalog link: 5RM251AUAE
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM251BXAF, no catalog link: 5RM251BXAE, 5RM251BXAD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM251RVAF, no catalog link: 5RM251RVAD, 5RM251RVAE
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM251SCAF, no catalog link: 5RM251SCAD, 5RM251SCAE
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM251TEAF, no catalog link: 5RM251TEAD, 5RM251TEAE
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM251UVAF, no catalog link: 5RM251UVAE, 5RM251UVAD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM251W7AF, no catalog link: 5RM251W7AD, 5RM251W7AE
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5RM251XRAF, no catalog link: 5RM251XRAE, 5RM251XRAD
+09:02:14 chain-unlinked side-mirrors 1 numbers named by 5VD34AXRAE, no catalog link: 5VD34AXRAD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD34GUVAE, no catalog link: 5VD34GUVAD, 5VD34GUVAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD34GW7AE, no catalog link: 5VD34GW7AD, 5VD34GW7AC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD34JSCAE, no catalog link: 5VD34JSCAD, 5VD34JSCAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD34KBXAE, no catalog link: 5VD34KBXAD, 5VD34KBXAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD34LAUAE, no catalog link: 5VD34LAUAD, 5VD34LAUAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD34NRVAE, no catalog link: 5VD34NRVAC, 5VD34NRVAD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD34PTEAE, no catalog link: 5VD34PTEAC, 5VD34PTEAD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD34PW2AE, no catalog link: 5VD34PW2AC, 5VD34PW2AD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD35AXRAE, no catalog link: 5VD35AXRAC, 5VD35AXRAD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD35GUVAE, no catalog link: 5VD35GUVAD, 5VD35GUVAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD35GW7AE, no catalog link: 5VD35GW7AD, 5VD35GW7AC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD35JSCAE, no catalog link: 5VD35JSCAD, 5VD35JSCAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD35KBXAE, no catalog link: 5VD35KBXAD, 5VD35KBXAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD35LAUAE, no catalog link: 5VD35LAUAD, 5VD35LAUAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD35NRVAE, no catalog link: 5VD35NRVAD, 5VD35NRVAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD35PW2AE, no catalog link: 5VD35PW2AC, 5VD35PW2AD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD36AXRAE, no catalog link: 5VD36AXRAC, 5VD36AXRAD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD36GUVAE, no catalog link: 5VD36GUVAD, 5VD36GUVAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD36GW7AE, no catalog link: 5VD36GW7AC, 5VD36GW7AD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD36JSCAE, no catalog link: 5VD36JSCAD, 5VD36JSCAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD36KBXAE, no catalog link: 5VD36KBXAC, 5VD36KBXAD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD36LAUAE, no catalog link: 5VD36LAUAD, 5VD36LAUAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD36NRVAE, no catalog link: 5VD36NRVAD, 5VD36NRVAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD36PTEAE, no catalog link: 5VD36PTEAD, 5VD36PTEAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD36PW2AE, no catalog link: 5VD36PW2AD, 5VD36PW2AC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD37AXRAE, no catalog link: 5VD37AXRAC, 5VD37AXRAD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD37GUVAE, no catalog link: 5VD37GUVAD, 5VD37GUVAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD37GW7AE, no catalog link: 5VD37GW7AC, 5VD37GW7AD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD37JSCAE, no catalog link: 5VD37JSCAC, 5VD37JSCAD
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD37KBXAE, no catalog link: 5VD37KBXAD, 5VD37KBXAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD37LAUAE, no catalog link: 5VD37LAUAD, 5VD37LAUAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD37NRVAE, no catalog link: 5VD37NRVAD, 5VD37NRVAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD37PTEAE, no catalog link: 5VD37PTEAD, 5VD37PTEAC
+09:02:14 chain-unlinked side-mirrors 2 numbers named by 5VD37PW2AE, no catalog link: 5VD37PW2AD, 5VD37PW2AC
+09:02:14 chain-unlinked side-mirrors 1 numbers named by 5RM16GW7AD, no catalog link: 5RM16GW7AG
+09:04:22 chain-unlinked climate-control 1 numbers named by 68223336AF, no catalog link: 68223336AE
+09:04:22 chain-unlinked climate-control 1 numbers named by 68223337AF, no catalog link: 68223337AE
+09:04:46 chain-unlinked fuel-pump-module 3 numbers named by 68551013AA, no catalog link: 68319395AA, 68319395AB, 68551013AB
+09:04:46 chain-unlinked fuel-pump-module 3 numbers named by 68567295AA, no catalog link: 68319970AA, 68319970AB, 68567295AC
+09:05:10 chain-unlinked fuel-pump-module 1 numbers named by 68319970AA, no catalog link: 68567295AC
+09:05:10 chain-unlinked fuel-pump-module 1 numbers named by 68319395AA, no catalog link: 68551013AB
+09:05:18 seg done tier=A Chrysler Pacifica [2017, 2022] seeds=[2017] records=2918 errors=27
+09:05:18 time budget reached records=2918
