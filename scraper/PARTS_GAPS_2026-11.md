@@ -2332,13 +2332,13 @@ electric A/C compressor. Where a family is unconfirmed, the row is removed
     the same part as the gas car's;
   - the Aura/Malibu Hybrid starter, which is inferred rather than stated.
 
-## §24 Sensors (2026-11-06)
+## 24. Sensors (2026-11-06, owner via hub: "have we paid attention to sensors?")
 
 Owner asked whether sensors were covered ("I know those can get expensive").
 Before this block the table had 8 sensor rows (Subaru EyeSight, a few Hyundai/
 Nissan radar rows, Distronic, one BMW MAF).
 
-### §24.1 Federal-mandate rows (all light-vehicle entries)
+### 24.1 Federal-mandate rows (all light-vehicle entries)
 
 - **ABS / ESC Pump + Module (match part #)**, MY2013+. Basis: FMVSS 126
   (49 CFR 571.126) requires electronic stability control on every vehicle
