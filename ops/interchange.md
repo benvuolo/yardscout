@@ -1652,3 +1652,21 @@ subaru, mopar, ford, vag, hmg and mb, with an extra hold rule:
   search shows "Likely fits — check the part number" with the Toyota number
   and nothing Verified; Cadillac DeVille headlights show no OEM row. If
   anything fails, revert the groups commit.
+- 2026-11-06 ~17:55 UTC live check: PASS (no revert).
+  - Scan 3ded246 (16:51) published the groups: interchange.json oemStatus
+    "ok" for all 8, lazy per-category files under docs/data/oem/;
+    yardscout.io serves both (oem/window-regulator.json 200).
+  - Method: Playwright, iPhone 13 emulation, zip 75201, default 100 mi
+    radius. No horizontal overflow on either page.
+  - 2007 Toyota Camry, window regulator + motor: "0 verified · 51 likely",
+    rows labelled "Likely fits — check the part number" with "Source: Toyota
+    factory parts catalog #69801-06070 ..." and the note "Toyota catalog
+    lists #69801-06070 for both — regulator without motor; plant-specific
+    (US / Japan built); verify the number on the part". 19 OEM-source rows,
+    0 rows labelled Verified (the only "Verified" text is the filter toggle
+    and the explainer).
+  - 2004 Cadillac DeVille, headlights (held: 19208051 DeVille/Seville): 0 OEM
+    rows, no Seville donor; only the existing same-generation hand rows
+    ("Likely fit — verify part #").
+  - Seen in passing (app copy, not this workstream): the headlights hint reads
+    "headlightss rarely cross model lines" (pluralisation typo in app.js).
