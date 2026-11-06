@@ -1,4 +1,4 @@
-# Release workstream — status (updated 2026-11-05)
+# Release workstream — status (updated 2026-11-06)
 
 Owns: version bumps and store submissions via `release-ios.yml` and
 `release-android.yml`, `fastlane/metadata/`, release notes.
@@ -10,6 +10,7 @@ Procedure: `RELEASING.md`. **Dispatch only after the owner says "ship".**
 |---|---|---|
 | 1.12.10 | build 26, live (READY_FOR_SALE) | — |
 | 1.12.11 | — | versionCode 33, Play production, in review |
+| 1.12.13 | build 28 on TestFlight only (from branch design/pull-sheet @52f3e11, via release-ios source_ref; processing VALID, Main Tester group); owner testing. Not submitted. | not built |
 | 1.12.12 | build 27, submitted 2026-11-05 19:42 UTC, WAITING_FOR_REVIEW, auto-release on approval | versionCode 34, Play production, status completed, rollout 100% (Google review pending) |
 
 1.12.11 added the review prompt (`ReviewPlugin.swift` / `ReviewPlugin.java`,
