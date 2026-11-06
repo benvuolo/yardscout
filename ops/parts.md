@@ -210,6 +210,29 @@ conditional:engine 5, conditional:plant 1, conditional:production 1.
 | `toyota-rav4-1/alternator#0` | Toyota RAV4 1996-1997 | option_split 1 |
 | `toyota-rav4-1/alternator#1` | Toyota RAV4 1998-2000 | option_split 1 |
 
+### Parts re-check of the 41 vg groups (2026-11-06)
+
+Every group's basis is an aftermarket application list (one reman unit
+published for all members). Against the OEM splits:
+- **option_split (most groups):** the basis holds for what the app claims.
+  "Verified fit" says "cross-checked against public part-number fitment data
+  … Still match the part number at the yard", and the alternator note says
+  "match amperage, pulley and plug … options packages used higher-amp units".
+  The OEM's two numbers for one engine (e.g. 100A vs 130A) are that option
+  case. No change.
+- **conditional:trim / engine:** the same reasoning (trim-dependent amperage
+  or starter nose; engine is gated by the decode). No change.
+- **`toyota-1nz/alternator#4` (xA 2005–06, production):** the condition is
+  "From 8/03" (27060-21140-84), and every 2005–06 xA was built after it, so
+  the split never applies inside the group. No change.
+- **`toyota-2az/alternator#1` (plant): basis does not cover it.** Toyota lists
+  27060-37041 "Japan Built" for the 2009–10 Corolla (incl. 2.4) besides the
+  100A units (toyotapartsnow, oem-raw). Recommended narrowing: drop Corolla
+  2009–2010 from this group. **Not done here:** `test_interchange.py` (P0.5)
+  asserts "2009 Matrix <-> 2010 Corolla 2AZ alternator stays Verified", which
+  is interchange-owned. Handed to the hub to route to the interchange
+  session.
+
 ## How to measure
 
 `interchange_coverage.py` measures engine-family donors, not generic-only.
