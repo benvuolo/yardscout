@@ -87,6 +87,15 @@ LIVE_FILE = DATA_DIR / "inventory_live.json"
 # Photo/spec enrichment shard — lazy-loaded by the UI so the main inventory
 # payload (the critical rendering path) stays exactly as small as before.
 #
+# PHOTO POLICY. 2026-11-06 owner decisions (ops/hub.md): photos are back ON
+# in the app for chains that host their own vehicle photos, loaded from the
+# yard's own URL, credited, with a per-chain REMOTE kill switch in
+# scraper/photo_sources.json. Owner exception, 2026-11-06 ~18:40 UTC, verbatim:
+# "its fine to put pick-n-pull photos even with the water mark. I'll take it
+# down if they request it but it attracts customers to them." So the photo URL
+# Pick-n-Pull's own API returns (Row52 CDN, watermark) is captured as an "n"
+# code under its own switch. Nothing else from Row52 (CLAUDE.md rule 7).
+# History below (Sep 2026) is superseded where it conflicts.
 # PHOTO POLICY (owner directive, Sep 2026): photos are captured ONLY when the
 # chain itself hosts them (e.g. LKQ photos on LKQ's cdn.pypapps.com, carrying
 # LKQ's own PYP watermark). Pick-n-Pull's API returns photo URLs, but they
@@ -101,6 +110,88 @@ LIVE_FILE = DATA_DIR / "inventory_live.json"
 # Weller, Pasco EZ Pull It, Army's). Capture is data only: the app renders a
 # chain's photos only while its PHOTO_SOURCES kill switch is on.
 EXTRAS_FILE = DATA_DIR / "vehicle_extras.json"
+# The remote kill switch (owner, 2026-11-06): which chains' photos may be
+# published at all. See the _doc in the file and ops/yards.md "Photo takedown".
+PHOTO_SOURCES_FILE = SCRIPT_DIR / "photo_sources.json"
+
+
+def load_photo_sources(path: Path | None = None) -> dict:
+    """{key: source} from photo_sources.json; {} if missing or unreadable
+    (fail closed: no source -> no photo codes are published)."""
+    try:
+        data = json.loads((path or PHOTO_SOURCES_FILE).read_text())
+        src = data.get("sources")
+        return src if isinstance(src, dict) else {}
+    except Exception as e:  # noqa: BLE001
+        print(f"  [photos] photo_sources.json unreadable ({e}); no photos published",
+              file=sys.stderr)
+        return {}
+
+
+def published_photo_sources(sources: dict) -> dict:
+    """The enabled sources only, in the shape the app reads."""
+    out = {}
+    for key, src in sources.items():
+        if not (isinstance(src, dict) and src.get("enabled") is True):
+            continue
+        pats = [{"code": p["code"], "card": p["card"], "large": p["large"]}
+                for p in src.get("patterns") or []
+                if isinstance(p, dict) and all(isinstance(p.get(k), str) for k in ("code", "card", "large"))]
+        if pats and isinstance(src.get("label"), str):
+            out[key] = {"label": src["label"], "host": src.get("host", ""), "patterns": pats}
+    return out
+
+
+def photo_source_for(code: str, sources: dict) -> str | None:
+    """Key of the ENABLED source whose pattern matches the whole code."""
+    if not code:
+        return None
+    for key, src in published_photo_sources(sources).items():
+        for p in src["patterns"]:
+            if re.fullmatch(p["code"], code):
+                return key
+    return None
+
+
+def filter_photo_codes(extras: dict, sources: dict) -> int:
+    """Blank every photo code without an enabled source (in place); trims the
+    trailing empties the extras writer trims and drops rows left empty.
+    Returns how many codes were dropped."""
+    published = published_photo_sources(sources)
+    compiled = [re.compile(p["code"]) for s in published.values() for p in s["patterns"]]
+    dropped = 0
+    for vid in list(extras):
+        ex = extras[vid]
+        if not ex or not ex[0]:
+            continue
+        if any(rx.fullmatch(ex[0]) for rx in compiled):
+            continue
+        ex = list(ex)
+        ex[0] = ""
+        dropped += 1
+        while ex and not ex[-1]:
+            ex.pop()
+        if ex:
+            extras[vid] = ex
+        else:
+            del extras[vid]
+    return dropped
+
+
+_PNP_IMG_RE = re.compile(
+    r"^https://cdn\.row52\.com/images/([0-9a-f]{8})-([0-9a-f]{4})-([0-9a-f]{4})-"
+    r"([0-9a-f]{4})-([0-9a-f]{12})\.JPG$")
+
+
+def _pnp_photo_code(v: dict) -> str:
+    """"n<32 hex>" for the imageName URL Pick-n-Pull's own API returns
+    (600x400, Row52 CDN, watermark intact), or "". Owner exception
+    2026-11-06; nothing else from Row52 is read or stored."""
+    val = v.get("imageName")
+    m = _PNP_IMG_RE.match(val.strip()) if isinstance(val, str) else None
+    return "n" + "".join(m.groups()) if m else ""
+
+
 
 PNP_API = "https://www.picknpull.com/api"
 SLC_ZIP = "84101"
@@ -15619,9 +15710,12 @@ def _pnp_ingest_group(loc_data: dict, out: list[dict]) -> None:
     if not loc.get("name"):
         return
     for v in loc_data.get("vehicles", []):
-        # NOTE: the feed carries photo URLs, but they are Row52
-        # assets (cdn.row52.com, Row52 watermark) — deliberately
-        # NOT captured. See PHOTO POLICY at EXTRAS_FILE.
+        # Photo: the API's own imageName URL (Row52 CDN, watermark) as
+        # an "n" code — owner exception 2026-11-06, see PHOTO POLICY at
+        # EXTRAS_FILE. Published only while photo_sources.json "pnp" is on.
+        code = _pnp_photo_code(v)
+        if code:
+            v["_photo"] = code
         # Spec fields exist in the schema but are null in every
         # observed response; captured defensively if they appear —
         # facts aren't copyrightable, so these are fine regardless
@@ -25278,7 +25372,26 @@ def _write_inventory_meta(payload: dict) -> None:
         separators=(",", ":")))
 
 
-def _write_inventory_shards(payload: dict, extras: dict) -> None:
+def _write_extras_and_shards(payload: dict, extras: dict) -> None:
+    """vehicle_extras.json + data/inv shards. Photo codes are filtered against
+    the ENABLED sources in photo_sources.json first (after stale-keep, so a
+    carried-forward row can't keep a disabled chain's photo), and the enabled
+    map is published with both, so the app can render only those."""
+    sources = load_photo_sources()
+    dropped = filter_photo_codes(extras, sources)
+    if dropped:
+        print(f"  [photos] dropped {dropped} photo codes with no enabled source",
+              file=sys.stderr)
+    published = published_photo_sources(sources)
+    EXTRAS_FILE.write_text(json.dumps(
+        {"version": 1, "scrapedAt": payload["scrapedAt"],
+         "extraFields": ["photo", "color", "engine", "trans", "transSrc"],
+         "photoSources": published,
+         "extras": extras}, separators=(",", ":")))
+    _write_inventory_shards(payload, extras, photo_sources=published)
+
+
+def _write_inventory_shards(payload: dict, extras: dict, photo_sources: dict | None = None) -> None:
     """docs/data/inv/ — the same scan cut into geographic shards so the app
     can render the cars near the user before the rest has downloaded (see
     inventory_shards.py). Written IN ADDITION to inventory_live.json, which
@@ -25298,7 +25411,8 @@ def _write_inventory_shards(payload: dict, extras: dict) -> None:
             pass
         return
     try:
-        info = _shards.write_inventory_shards(payload, extras, DATA_DIR)
+        info = _shards.write_inventory_shards(payload, extras, DATA_DIR,
+                                              photo_sources=photo_sources)
         print(f"  [inv shards] {info['shards']} shards, {info['minShard']}-{info['maxShard']} vehicles each",
               file=sys.stderr)
     except Exception as e:  # noqa: BLE001
@@ -26523,11 +26637,7 @@ def main():
                     _write_models_json(payload)
                     _write_model_lifespan_json(payload.get("scrapedAt"))
                     _write_yards_added(payload)
-                    EXTRAS_FILE.write_text(json.dumps(
-                        {"version": 1, "scrapedAt": payload["scrapedAt"],
-                         "extraFields": ["photo", "color", "engine", "trans", "transSrc"],
-                         "extras": extras}, separators=(",", ":")))
-                    _write_inventory_shards(payload, extras)
+                    _write_extras_and_shards(payload, extras)
                     print(f"Saved {len(payload['vehicles'])} vehicles to {LIVE_FILE} (scrapedAt {payload['scrapedAt']})")
                     print(f"Saved {len(extras)} enrichment entries to {EXTRAS_FILE}")
                     write_interchange_payload()
@@ -26571,11 +26681,7 @@ def main():
                 _write_models_json(payload)
                 _write_model_lifespan_json(payload.get("scrapedAt"))
                 _write_yards_added(payload)
-                EXTRAS_FILE.write_text(json.dumps(
-                    {"version": 1, "scrapedAt": payload["scrapedAt"],
-                     "extraFields": ["photo", "color", "engine", "trans", "transSrc"],
-                     "extras": extras}, separators=(",", ":")))
-                _write_inventory_shards(payload, extras)
+                _write_extras_and_shards(payload, extras)
                 if not args.json:
                     print(f"Saved {len(payload['vehicles'])} vehicles to {LIVE_FILE} (scrapedAt {payload['scrapedAt']})", file=sys.stderr)
                     print(f"Saved {len(extras)} enrichment entries to {EXTRAS_FILE}", file=sys.stderr)

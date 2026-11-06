@@ -150,7 +150,8 @@ def _dump(path: Path, obj) -> int:
 
 def write_inventory_shards(payload: dict, extras: dict | None, data_dir: Path,
                            shard_count: int = SHARD_COUNT,
-                           key_buckets: int = KEY_BUCKETS) -> dict:
+                           key_buckets: int = KEY_BUCKETS,
+                           photo_sources: dict | None = None) -> dict:
     """Write docs/data/inv/ for one scan payload (schema v2, exactly what was
     written to inventory_live.json) plus its extras map (vehicle id -> list,
     exactly what was written to vehicle_extras.json). Returns a summary."""
@@ -241,6 +242,9 @@ def write_inventory_shards(payload: dict, extras: dict | None, data_dir: Path,
         "vehicles": len(vehicles),
         "shards": [len(rows_by[s]) for s in range(shard_count)],
         "keyBuckets": key_buckets,
+        # Enabled photo sources (scraper/photo_sources.json): the app renders
+        # a photo only through one of these — the remote kill switch.
+        "photoSources": photo_sources or {},
     })
     return {"shards": shard_count, "vehicles": len(vehicles),
             "minShard": min(len(r) for r in rows_by), "maxShard": max(len(r) for r in rows_by),
