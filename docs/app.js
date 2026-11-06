@@ -2708,7 +2708,7 @@ function proSheetProof() {
   const r = effectiveRadiusMi();
   let n = 0;
   for (const v of liveInventory) { if (!week(v)) continue; const d = vehicleDistanceMi(v); if (d != null && (!r || d <= r)) n++; }
-  return n ? `${n.toLocaleString()} cars were set out within ${r || 'any distance of'}${r ? ' miles' : ''} of you this week.` : '';
+  return n ? `${n.toLocaleString()} cars were set out within ${r || 'any distance of'}${r ? ' miles' : ''} of you this week. Pro pings you within hours when one you\u2019re watching lands.` : '';
 }
 /* Paywall at the moment of value: opened from a locked part or "What
  * you'd save" on a specific car, the sheet leads with THAT car — what it
@@ -2728,7 +2728,7 @@ function proSheetCarHtml(enc) {
   return `<div class="pro-car-name">${escapeHtml(`${v.year} ${v.make} ${v.model}`)}</div>
     <div class="pro-car-where">${where}</div>
     <div class="pro-car-facts">${v.topParts.length} part${v.topParts.length === 1 ? '' : 's'} worth checking${bucket ? ` &middot; <strong>$${bucket.toLocaleString()}+</strong> to buy them used online` : ''}${fast ? ' &middot; some get picked over fast' : ''}</div>
-    <div class="pro-car-note">Pro shows which parts, what this yard charges for each, and what you&rsquo;d save &mdash; on this car and every other one.</div>`;
+    <div class="pro-car-note">Pro pings you within hours when the next one like it lands, and shows which parts, what this yard charges for each, and what you&rsquo;d save &mdash; on this car and every other one.</div>`;
 }
 /* Why the sheet opened, in one line, when a watch gate opened it — the
  * generic local-proof line reads as a non sequitur after "6th watch". */
@@ -2789,11 +2789,11 @@ function openUpgradeSheet(trigger, carKey) {
     // Both platforms have real push now (APNs on iOS, FCM on Android since
     // 1.2) — same honest copy, only the store name differs.
     if (sheetSub) sheetSub.textContent =
-      'Finding cars near you is free and stays free. '
-      + 'Pro is for planning the trip: a push within hours of a watched '
-      + 'car landing (free gets the weekly recap), what the yard charges '
-      + 'vs what the same used part goes for online, and which parts get '
-      + 'picked over fast. Subscribe through '
+      'A push alert within hours when a car you want lands, so you get '
+      + 'there before the parts are gone. Free gets a Monday recap instead. '
+      + 'Pro also shows what the yard charges vs what the same used part '
+      + 'goes for online, and which parts get picked over fast. Finding cars '
+      + 'stays free. Subscribe through '
       + (IS_ANDROID ? 'Google Play' : 'the App Store') + '; cancel anytime.';
   }
   document.getElementById('upgrade-sheet').classList.add('open');
@@ -3218,6 +3218,16 @@ function renderCarDetail() {
       <p class="cd-hint">An estimate from how long cars like this stayed at this yard before leaving &mdash; not a schedule.</p>
     </section>`;
   }
+  // Lifespan line: only with this model's own history at this yard (the
+  // scan publishes a model entry only past its minimum departure count;
+  // the same data drives "leaves fast here").
+  const lsm = lifespanFor(v);
+  const lifeLine = lsm && lsm.basis === 'model-here'
+    ? `<section class="cd-life">
+        <p><strong>${escapeHtml(`${v.make} ${v.model}`)}s last about ${lsm.avg} days at this yard</strong> <span>(median of ${lsm.n} that already left${lsm.fast ? '; they go faster than most cars here' : ''})</span></p>
+        ${nextOneHtml(v.make, v.model, 'cd-next')}
+      </section>`
+    : `<section class="cd-life">${nextOneHtml(v.make, v.model, 'cd-next')}</section>`;
   const scan = liveScrapedAt ? `<span class="scan-stamp">scanned ${escapeHtml(scrapedShort())}</span>` : '';
   const pinfo = ex && ex[0] ? photoInfo(ex[0]) : null;
   box.innerHTML = `
@@ -3246,6 +3256,7 @@ function renderCarDetail() {
     </section>`
       : '<p class="cd-hint cd-noparts">No parts from our list flagged on this model yet &mdash; the yard\u2019s own listing has the whole car.</p>'}
     ${stay}
+    ${lifeLine}
     ${val && val.nParts ? val.partsList : ''}
     <section class="cd-ref">
       ${vm.vin ? `<div class="cd-vin">${vm.vin}${vm.warn}</div>` : ''}
@@ -3959,6 +3970,80 @@ function carValueParts(v, unlocked, isSampleCard) {
   }
   return { cardStyle, profitLine, partsList, partsSummary, nParts, worthHtml, alsoHtml, optHtml, allValueHtml };
 }
+
+/* ===== ALERTS FIRST (round 5, owner 2026-11-06: "alerts are the most
+ * valuable part of pro") =====
+ * Honest teasers only: every line below is built from data the app holds
+ * (set-out date, when the watch was made, the recap schedule) and is hidden
+ * when it can't be. Wording matches the backend digest ("Free gets a Monday
+ * recap; Pro pushes each one the day it lands"). Gates are unchanged. */
+const RECAP_WEEKDAY = 1;   // free weekly recap: Mondays (wrangler cron "0 15 * * 1")
+/* Does this free user actually get the Monday recap? Native push on, or the
+ * web email digest on. Without one, no line ever promises a recap. */
+function hasRecapChannel() {
+  try {
+    if (IS_NATIVE && typeof storedPushToken === 'function' && storedPushToken()) return true;
+    return localStorage.getItem('ys_email_alerts_on') === '1';
+  } catch (e) { return false; }
+}
+/* One quiet free-vs-Pro delivery note, true for THIS user. */
+function freeDeliveryNote() {
+  return hasRecapChannel()
+    ? 'Free: in Alerts and your Monday recap. Pro: an alert within hours.'
+    : 'Free: new ones show in Alerts. Pro: an alert within hours.';
+}
+const fmtDay = (d) => d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+/* "You'd have known sooner", free users, one watch hit: only for a car that
+ * landed on or after the day the watch was made (cars already on the lot
+ * are never in a recap), with a known set-out date. A car set out on a
+ * Monday may or may not make that morning's recap, so it gets no recap date. */
+function recapLineHtml(v, entries) {
+  if (isPro()) return '';
+  const landed = parseYardDate(v.dateAdded);
+  if (!landed) return '';
+  const since = Math.min(...entries.map(e => Date.parse(String(e.addedAt || '').split('~')[0])).filter(Number.isFinite));
+  if (!Number.isFinite(since)) return '';
+  const sinceDay = new Date(since); sinceDay.setHours(0, 0, 0, 0);
+  if (landed < sinceDay) return '';
+  let recap = '';
+  if (hasRecapChannel() && landed.getDay() !== RECAP_WEEKDAY) {
+    const r = new Date(landed);
+    r.setDate(r.getDate() + (((RECAP_WEEKDAY - r.getDay()) + 7) % 7 || 7));
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    recap = r < today ? `it was in your free recap ${escapeHtml(fmtDay(r))}` : `your free recap comes ${escapeHtml(fmtDay(r))}`;
+  }
+  return `<div class="recap-line">${ICON.bell}<span>Landed ${escapeHtml(fmtDay(landed))}${recap ? ` &middot; ${recap}` : ''} &middot; Pro would have pushed it the day it landed.</span>
+    <button type="button" class="linklike" onclick="openUpgradeSheet('watch-near-miss')">See Pro</button></div>`;
+}
+/* "Alert me when the next one lands": the same quick-watch path as a card
+ * bell (free limit, radius and Pro gates unchanged). Pro watches push
+ * instantly; free ones go to the recap / Alerts tab. */
+function nextOneWatch(make, model, source) {
+  const r = addQuickWatch(make, model, null, null, source);
+  const label = `${make} ${model}`.trim();
+  if (r === 'added') { renderAlerts(); checkAndNotify(); setCardBells(make, model, true); showWatchToast(label); }
+  else if (r === 'exists') showWatchToast(label, { manage: true });
+  else if (r === 'limit') openUpgradeSheet('watch-limit');
+  else if (r === 'no-zip') alert('Set your zip code up top first, so the watch knows where "near you" is.');
+  return r;
+}
+function nextOneHtml(make, model, cls) {
+  if (!make || !model) return '';
+  const on = hasWatchFor(make, model);
+  return `<div class="next-one ${cls || ''}">
+    ${on
+      ? `<p class="next-one-on">${ICON.check} Watching ${escapeHtml(`${make} ${model}`)}${isPro() ? ' &mdash; you’ll get an alert within hours when the next one lands.' : ' &mdash; the next one shows up in Alerts.'}</p>`
+      : `<button type="button" class="btn btn-line next-one-btn" data-make="${escapeHtml(make)}" data-model="${escapeHtml(model)}">${ICON.bell} Alert me when the next one lands</button>
+         ${isPro() ? '' : `<button type="button" class="linklike next-one-pro" onclick="openUpgradeSheet('watch-toast')">Pro: instant push</button>`}`}
+  </div>`;
+}
+document.addEventListener('click', (e) => {
+  const b = e.target.closest('.next-one-btn');
+  if (!b) return;
+  e.preventDefault();
+  nextOneWatch(b.dataset.make, b.dataset.model, 'next-one');
+  if (carDetailKey) renderCarDetail();
+});
 
 /* ===== PULL SHEET UI HELPERS (2026-11 redesign) ===== */
 const WORTH_TOP_N = 5;   // car screen: top picks shown up front
@@ -6450,11 +6535,11 @@ function pfDonorCardHtml(r, cls, chip, valueHtml) {
 /* "Watch for this": a watch on the seeker's own model, limited to the
  * generation we can vouch for, through the same quick-watch path as the
  * rest of the app (free limit, radius and Pro gates unchanged). */
-function pfWatchHtml(s) {
+function pfWatchHtml(s, compact) {
   if (!s || !s.make || !s.model) return '';
   const w = pfGenWindow(s.make, s.model, s.year);
   const yrs = w ? `${w[0]}–${w[1]} ` : '';
-  return `<div class="pf-watch"><p>Yards set out new cars every day. Get told when another ${escapeHtml(yrs + s.make + ' ' + s.model)} lands near you.</p>
+  return `<div class="pf-watch${compact ? ' pf-watch-compact' : ''}"><p>${compact ? 'Want the next one? Get pinged when' : 'Yards set out new cars every day. Get told when'} another ${escapeHtml(yrs + s.make + ' ' + s.model)} lands near you.${isPro() ? '' : ` <span class="watch-strip-note">${freeDeliveryNote()}</span>`}</p>
     <button type="button" class="btn btn-line pf-watch-btn" data-make="${escapeHtml(s.make)}" data-model="${escapeHtml(s.model)}" data-ymin="${w ? w[0] : ''}" data-ymax="${w ? w[1] : ''}">${ICON.bell} Watch for another ${escapeHtml(s.model)}</button></div>`;
 }
 function pfWatchClick(btn) {
@@ -6802,6 +6887,7 @@ function pfRunSearch() {
   const unlocked = isPro();
   out.classList.toggle('pf-vonly-on', pfVerifiedOnly);
   const head = `<div class="pf-results-head"><strong>${rows.length.toLocaleString()} donor car${rows.length === 1 ? '' : 's'}</strong> in range carrying a fitting ${escapeHtml(pfCat.label.toLowerCase())} for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)} &mdash; ${pfSort === 'new' ? 'newest arrivals first' : 'nearest first, then confidence'}. Yards track cars, not parts left on them — a long-sitting donor may be picked over.${(!unlocked && !pfCat.noValue) ? ' <span class="lock-text" role="button" onclick="openUpgradeSheet(\'pf-value\')">Pro adds what the same used part goes for online</span>' : ''}</div>`
+    + pfWatchHtml(s, true)
     + pfSortRowHtml()
     + pfVonlyRowHtml(nVer, rows.length - nVer, pfCat.id === 'engine-assembly' ? 'engine' : 'fit')
     + (famNote ? `<div class="pf-caveat">${escapeHtml(famNote)}</div>` : '')
@@ -6840,7 +6926,7 @@ function pfRunSearch() {
     return pfDonorCardHtml(r, r.tier === 'verified' ? 'pf-verified' : 'pf-likely', pfTierChip(r.tier, r.src), `${ebayHtml}${priceHtml}${saveHtml}`);
   }).join('') + (rows.length > CAP
     ? `<div class="pf-more">Showing the first ${CAP} of ${rows.length.toLocaleString()} donors — tighten the radius to narrow.</div>`
-    : '') + pfWatchHtml(s);
+    : '');
   pfRenderTiles(); pfRevealResults();
 }
 
@@ -7469,7 +7555,8 @@ function renderAlerts() {
     const isMatch = v.hasMatch;
     const setOutDate = parseYardDate(v.dateAdded);
     const dateStr = setOutDate ? setOutDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
-    const matchedRules = watchlist.filter(e => watchlistMatches(e, v)).map(e =>
+    const matchedEntries = watchlist.filter(e => watchlistMatches(e, v));
+    const matchedRules = matchedEntries.map(e =>
       [e.make, e.model].filter(Boolean).join(' ') || 'Any'
     );
     const key = vehicleKey(v);
@@ -7487,6 +7574,7 @@ function renderAlerts() {
           </div>
           <div class="car-badges"><span class="badge badge-new">Watch hit</span></div>
         </div>
+        ${recapLineHtml(v, matchedEntries)}
         ${isMatch && v.topParts && v.topParts.length ? `<button type="button" class="parts-summary car-open" data-vkey="${escapeHtml(key)}"><span>${v.topParts.length} part${v.topParts.length > 1 ? 's' : ''} to check: ${escapeHtml(partsByValue(v.topParts, v.location).slice(0, 3).map(p => p.name).join(', '))}${v.topParts.length > 3 ? ' and more' : ''}</span>${ICON.chev}</button>` : ''}
         <div class="cc-actions">
           ${pullBtnHtml(key)}
@@ -7639,7 +7727,7 @@ function watchStripHtml(nCars) {
   const r = activeZipCoords ? effectiveRadiusMi() : null;
   const where = r ? ` within ${r} mi` : (isPro() ? ' anywhere' : ' near you');
   return `<div class="watch-strip" style="grid-column:1/-1;">${ICON.bell}
-    <span>${nCars ? 'Not the one?' : 'None here right now.'} ${IS_NATIVE ? 'Get told when' : 'Watch for'} ${nCars ? 'another' : 'one'} <strong>${escapeHtml(sc.label)}</strong>${IS_NATIVE ? ' lands' : ''}${where}.</span>
+    <span>${nCars ? 'Want the next one?' : 'None here right now.'} Get pinged when ${nCars ? 'another' : 'one'} <strong>${escapeHtml(sc.label)}</strong> lands${where}.${isPro() ? '' : ` <span class="watch-strip-note">${freeDeliveryNote()}</span>`}</span>
     <button type="button" class="btn btn-primary btn-sm" onclick="jhWatchSearch()">Watch</button></div>`;
 }
 

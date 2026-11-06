@@ -445,6 +445,41 @@ const SCREENS = [
     await settle(page, 600);
     await page.evaluate(() => { const g = document.getElementById('alert-watchlist'); if (g) g.scrollIntoView(); });
   }],
+  // Round 5 (alerts first)
+  ['r5-alerts-recap', async (page) => {
+    // A free watch made 60 days ago, with the email recap on: matches that
+    // landed after it carry the "you'd have known sooner" line.
+    await tab(page, 'live');
+    await page.evaluate(() => {
+      const c = document.querySelector('#live-grid .car-card[data-vkey]');
+      const v = liveInventory.find(x => vehicleKey(x) === c.dataset.vkey);
+      const when = new Date(Date.now() - 60 * 86400000).toISOString() + '~test01';
+      saveWatchlist([...loadWatchlist().filter(e => !String(e.addedAt).endsWith('~test01')), { make: v.make, model: v.model, yrMin: null, yrMax: null, matchOnly: false, radiusMi: 100, addedAt: when }]);
+      localStorage.setItem('ys_email_alerts_on', '1');
+      renderAlerts();
+      document.querySelector('.tab[data-tab="alerts"]').click();
+    });
+    await settle(page, 500);
+    await page.evaluate(() => { const r = document.querySelector('#alert-matches-grid .recap-line'); if (!r) throw new Error('no recap line rendered'); r.closest('.car-card').scrollIntoView({ block: 'start' }); window.scrollBy(0, -90); });
+  }, async (page) => { await page.evaluate(() => { saveWatchlist(loadWatchlist().filter(e => !String(e.addedAt).endsWith('~test01'))); localStorage.removeItem('ys_email_alerts_on'); renderAlerts(); }); }],
+  ...[['r5-car-life', false], ['r5-car-life-pro', true]].map(([name, pro]) => [name, async (page) => {
+    if (pro) await page.evaluate(() => { localStorage.setItem('jh_pro', '1'); applyProGates(); renderLive(); });
+    await tab(page, 'live');
+    await page.evaluate(() => {
+      const keys = [...document.querySelectorAll('#live-grid .car-card[data-vkey]')].map(c => c.dataset.vkey);
+      const k = keys.find(k => { const v = liveInventory.find(x => vehicleKey(x) === k); const l = v && lifespanFor(v); return l && l.basis === 'model-here'; });
+      if (!k) throw new Error('no car with model-here lifespan in view');
+      openCarDetail(k);
+    });
+    await settle(page, 400);
+    await page.evaluate(() => { const l = document.querySelector('#car-detail .cd-life'); l.scrollIntoView({ block: 'center' }); });
+  }, pro ? async (page) => { await resetUi(page); await page.evaluate(() => { localStorage.removeItem('jh_pro'); applyProGates(); renderLive(); }); } : undefined]),
+  ['r5-cars-next', async (page) => {
+    await tab(page, 'live');
+    await page.evaluate(() => { const m = document.getElementById('live-filter-make'); m.value = 'Toyota'; m.dispatchEvent(new Event('change', { bubbles: true })); });
+    await settle(page, 500);
+    await page.evaluate(() => { const st = document.querySelector('#live-grid .watch-strip'); if (!st) throw new Error('no watch strip'); st.scrollIntoView({ block: 'center' }); });
+  }, async (page) => { await page.evaluate(() => { const m = document.getElementById('live-filter-make'); m.value = ''; m.dispatchEvent(new Event('change', { bubbles: true })); }); await settle(page, 300); }],
   ['pull-sheet', async (page) => {
     await tab(page, 'live');
     const ks = await firstKeys(page, 3);

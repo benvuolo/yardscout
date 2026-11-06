@@ -2932,3 +2932,27 @@ a { color: var(--accent); }
 .pf-select-wrap select { position: absolute; inset: 0; width: 100%; height: 100%; min-height: 0; opacity: 0; cursor: pointer; font-size: 16px; }
 .pf-select-wrap:focus-within .pf-select-label { outline: 2px solid var(--accent); outline-offset: 2px; }
 .pf-save { font-family: var(--font-ui); }
+
+/* ---------- Round 5: alerts first ---------- */
+#upgrade-sheet .sheet-head h2 { font-size: var(--t-xl); line-height: 1.2; }
+.pro-eyebrow { display: block; margin-bottom: var(--s1); font: 700 var(--t-xs)/1.3 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.tier-list li strong { color: var(--text); }
+.recap-line { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s1) var(--s2); margin-top: var(--s3); padding: var(--s2) var(--s3); border-radius: var(--r-sm); background: var(--accent-soft); --accent: var(--accent-on-soft); font-size: var(--t-sm); color: var(--text); }
+.recap-line > .ico { flex: none; color: var(--accent); }
+.recap-line > span { flex: 1 1 14em; min-width: 0; }
+.recap-line .linklike { font-weight: 700; }
+.cd-life { margin-top: var(--s5); }
+.cd-life p { margin: 0 0 var(--s2); font-size: var(--t-md); }
+.cd-life p span { color: var(--text-dim); font-size: var(--t-sm); }
+.next-one { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s1) var(--s3); }
+.next-one-btn { flex: 1 1 14em; }
+.next-one-pro { font-size: var(--t-sm); font-weight: 700; }
+.next-one-on { display: flex; align-items: flex-start; gap: var(--s2); margin: 0; font-size: var(--t-sm); color: var(--accent2); font-weight: 600; }
+.next-one-on .ico { flex: none; margin-top: 3px; }
+.watch-strip-note { display: block; margin-top: 2px; font-size: var(--t-xs); color: var(--text-dim); }
+.pf-watch-compact { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2) var(--s3); padding: var(--s3); border-style: solid; border-color: var(--border); background: var(--surface); }
+.pf-watch-compact p { flex: 1 1 14em; margin: 0; color: var(--text); }
+.linklike { background: none; border: 0; padding: 0; color: var(--accent); font: inherit; font-weight: 700; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+#upgrade-sheet .sheet-head { flex-wrap: nowrap; align-items: flex-start; }
+#upgrade-sheet .sheet-head h2 { flex: 1 1 auto; min-width: 0; }
+#upgrade-sheet .sheet-head button { flex: none; }

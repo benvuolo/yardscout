@@ -316,6 +316,13 @@ with sync_playwright() as pw:
     check("free card parts line leads with the car screen's top pick",
           bool(worth["first"]) and ("to check: " + worth["first"]) in worth["lead"], str(worth))
     check("free car screen: 'Also on this car' starts collapsed", worth["alsoClosed"], str(worth))
+    # Round 5: the car screen offers "Alert me when the next one lands" (or
+    # says it's already watched); free sees one quiet "Pro: instant push".
+    nx = page.evaluate("""() => { const b = document.getElementById('car-detail');
+      return { btn: !!b.querySelector('.next-one-btn, .next-one-on'), pro: b.querySelectorAll('.next-one-pro').length,
+               watching: !!b.querySelector('.next-one-on') }; }""")
+    check("free car screen: 'Alert me when the next one lands' + one quiet Pro link",
+          nx["btn"] and (nx["pro"] == 1 or nx["watching"]), str(nx))
     page.screenshot(path=str(SHOTS / "7_car_screen_free.png"))
     page.evaluate("closeCarDetail()")
     page.wait_for_timeout(300)
@@ -369,6 +376,9 @@ with sync_playwright() as pw:
                total: /\\$\\d/.test((w.querySelector('.worth-total') || {}).textContent || '') }; }""")
     check("pro Worth pulling: each top pick shows its value, plus a total",
           pworth["rows"] > 0 and pworth["valued"] == pworth["rows"] and pworth["total"], str(pworth))
+    pnx = page.evaluate("""() => { const b = document.getElementById('car-detail');
+      return { btn: !!b.querySelector('.next-one-btn, .next-one-on'), pro: b.querySelectorAll('.next-one-pro').length }; }""")
+    check("pro car screen: next-one action, no upsell link", pnx["btn"] and pnx["pro"] == 0, str(pnx))
     page.screenshot(path=str(SHOTS / "8_car_screen_pro.png"))
     ctx.close()
     browser.close()
