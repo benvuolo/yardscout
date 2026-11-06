@@ -52,6 +52,9 @@ GENERIC_PART_TOKENS = (
     # 2026-10 consensus evergreens — near-universal commodity sellers; their
     # presence alone must not make a group look richly covered.
     "starter", "gauge cluster", "climate control", "control module",
+    # §24 federal-mandate rows (FMVSS 126 ESC, FMVSS 111 camera) ride on
+    # every light vehicle — they never make a group look specifically covered.
+    "abs / esc pump", "backup camera (match part #)",
 )
 
 # Known enthusiast platforms: (label, make substring, model regex, optional

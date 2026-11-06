@@ -2331,3 +2331,39 @@ electric A/C compressor. Where a family is unconfirmed, the row is removed
   - BAS and early Escape belt compressors, because no source says they are
     the same part as the gas car's;
   - the Aura/Malibu Hybrid starter, which is inferred rather than stated.
+
+## §24 Sensors (2026-11-06)
+
+Owner asked whether sensors were covered ("I know those can get expensive").
+Before this block the table had 8 sensor rows (Subaru EyeSight, a few Hyundai/
+Nissan radar rows, Distronic, one BMW MAF).
+
+### §24.1 Federal-mandate rows (all light-vehicle entries)
+
+- **ABS / ESC Pump + Module (match part #)**, MY2013+. Basis: FMVSS 126
+  (49 CFR 571.126) requires electronic stability control on every vehicle
+  with GVWR ≤ 10,000 lb built on or after 2011-09-01. ESC works through the
+  ABS hydraulic unit, so the unit is present. MY2013 is the first model year
+  built entirely after the deadline; MY2012 is left out because a few early
+  builds came before it.
+- **Backup Camera (match part #)**, MY2020+. Basis: FMVSS 111
+  (49 CFR 571.111) rear-visibility amendment requires a rear-view camera on
+  every vehicle with GVWR ≤ 10,000 lb built on or after 2018-05-01. MY2020 is
+  the first full model year after it. MY2018–19 cars are left out because
+  some were built before the deadline.
+- Band: ABS $50–140 and camera $25–70, both before resale calibration.
+  Pull cost: ABS $31 (median of 30 yard lists); camera $15 (minor electrical
+  component).
+- **Left out:** heavy-duty entries whose GVWR can exceed 10,000 lb
+  (F-250/F-350, Ram 2500/3500, Silverado/Sierra HD, Express, Savana,
+  Econoline, Transit). Empty suppressor entries stay empty, and entries
+  that already track ABS or a camera keep their own row.
+- These rows count as generic in `mine_coverage_gaps.GENERIC_PART_TOKENS`, so
+  they never make a car look specifically covered.
+- Lot reach: 62,176 of 334,432 lot cars get the ABS row; 1,194 get the camera
+  row.
+- **Not added:**
+  - TPMS sensor sets. Several makes use indirect (wheel-speed) TPMS with no
+    wheel sensors, and per-make 315 vs 433 MHz needs its own basis.
+  - MAF. Speed-density engines (many Chrysler/GM) have none; fitment is
+    per engine.

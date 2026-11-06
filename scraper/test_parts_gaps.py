@@ -728,6 +728,17 @@ check("§22.10 cited exception: Civic Hybrid keeps the (backup) starter, not the
       "Starter (verify part number)" in parts(2008, "Honda", "Civic Hybrid")
       and not ({"Alternator (spin-test at yard)", "A/C Compressor (clutch spins free)"} & set(parts(2008, "Honda", "Civic Hybrid"))))
 
+# §24 federal-mandate sensor rows (FMVSS 126 ESC from MY2013, FMVSS 111 camera from MY2020)
+_ABS, _CAM = "ABS / ESC Pump + Module (match part #)", "Backup Camera (match part #)"
+check("§24 ABS/ESC row on MY2013+ light vehicles only", _ABS in parts(2015, "Ford", "Fusion") and _ABS not in parts(2012, "Ford", "Fusion"))
+check("§24 backup camera row from MY2020 only", _CAM in parts(2021, "Toyota", "Camry") and _CAM not in parts(2019, "Toyota", "Camry"))
+check("§24 heavy-duty entries (GVWR can exceed 10,000 lb) get neither",
+      not ({_ABS, _CAM} & set(parts(2021, "Ford", "F-350"))) and not ({_ABS, _CAM} & set(parts(2021, "Chevrolet", "Express"))))
+_mand_cross = [(k, q["name"], q.get("yr_min")) for k, e in js.UNOBTANIUM_DB.items() for q in e["top_parts"]
+               if q["name"] in (_ABS, _CAM) and q.get("yr_min", 0) < (2013 if q["name"] == _ABS else 2020)]
+check("§24 no mandate row starts before its mandate year", not _mand_cross, str(_mand_cross[:5]))
+check("§24 mandate rows count as generic for coverage", __import__("mine_coverage_gaps").is_generic_only({_ABS, _CAM}))
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "milan", "encore", "captiva sport", "park avenue", "scion xb 2008-2015", "sonata", "infiniti qx60", "escort", "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

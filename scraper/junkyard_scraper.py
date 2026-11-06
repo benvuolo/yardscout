@@ -7725,6 +7725,45 @@ def _apply_platform_families() -> list[str]:
 # missing row or silently copying a gated part is a data bug, not a runtime
 # condition.
 _family_problems = _apply_platform_families()
+
+# ---- 2026-11 §24 sensors (PARTS_GAPS §24): federal-mandate rows.
+# FMVSS 126 (49 CFR 571.126) requires ESC on every light vehicle (GVWR
+# <= 10,000 lb) built on/after 2011-09-01; ESC works through the ABS
+# hydraulic unit, so every MY2013+ light vehicle has one (2013 = first MY
+# built entirely after the deadline). FMVSS 111 (49 CFR 571.111, rear
+# visibility) requires a rear-view camera system on every light vehicle
+# built on/after 2018-05-01; MY2020 is the first MY built entirely after it.
+# Heavy-duty entries (GVWR can exceed 10,000 lb) are left out. Rows go only
+# onto entries that already ship rows (empty suppressor entries stay empty)
+# and that don't already track the category.
+_MANDATE_EXCLUDE_RE = re.compile(
+    r"^(f-250|f-350|ram [23]500|econoline|express|savana|ford transit$"
+    r"|silverado hd|sierra hd)")
+_MANDATE_ROWS = (
+    (2013, {"name": "ABS / ESC Pump + Module (match part #)", "rarity": "Uncommon",
+            "low": 50, "high": 140, "cost": 31}, ("abs",)),
+    (2020, {"name": "Backup Camera (match part #)", "rarity": "Uncommon",
+            "low": 25, "high": 70, "cost": 15}, ("camera",)),
+)
+
+
+def _apply_mandate_rows() -> None:
+    seen: set[int] = set()
+    for key, e in UNOBTANIUM_DB.items():
+        if id(e) in seen:
+            continue
+        seen.add(id(e))
+        if not e["top_parts"] or _MANDATE_EXCLUDE_RE.search(key):
+            continue
+        lo, hi = e["year_range"]
+        have = " | ".join(p["name"].lower() for p in e["top_parts"])
+        for yr, row, tokens in _MANDATE_ROWS:
+            if hi < yr or any(re.search(rf"\b{t}\b", have) for t in tokens):
+                continue
+            e["top_parts"].append({**row, "yr_min": max(lo, yr)})
+
+
+_apply_mandate_rows()
 # Runs after the platform families so they find and annotate the rows they
 # were curated against; each generation piece keeps the row's sharedWith.
 _bound_rows_per_generation()
