@@ -135,7 +135,7 @@ def db_index(doc: dict, lot_keys: set) -> dict:
             for y in range(lo, hi + 1):
                 k = (mk, GA.squash(md), y, round(lit, 1))
                 if k in lot_keys:
-                    out[g["cat"]][k].add(g["unit"])
+                    out[g["cat"]][k].add(g["id"])
     return out
 
 
@@ -208,6 +208,94 @@ def audit(doc, oem, examples, dbi, lot_n: Counter) -> dict:
     return res
 
 
+def lot_keys_from(inv_p: Path, ex_p: Path | None = None) -> set:
+    import twins  # noqa: E402
+    ex_p = ex_p or GA.REPO / "docs" / "data" / "vehicle_extras.json"
+    keys = set()
+    for _i, mk, md, yr, eng, _tr in twins.load_cars(inv_p, ex_p):
+        lit = GA.parse_engine(eng)[0]
+        if lit is not None:
+            keys.add((mk, GA.squash(md), yr, round(lit, 1)))
+    return keys
+
+
+ELIGIBLE_MAX = 0.05
+ELIGIBLE_MIN_PAIRS = 30
+GAP_MAKES = ("MINI", "Land Rover", "Jaguar", "Suzuki", "Isuzu", "Fiat", "Porsche", "Smart", "Saab", "Plymouth", "Geo")
+
+
+def compare(a) -> int:
+    """Eligibility is judged on the rule-1 residual: after the OEM override
+    the residual on measurable pairs is 0 by construction (the same OEM
+    numbers removed them), so it says nothing about pairs without OEM
+    numbers. The rule-1 rate on measurable pairs is the estimate for those."""
+    import twins  # noqa: E402
+    cars = twins.load_cars(Path(a.inventory), Path(a.extras))
+    lot_n = Counter()
+    for _i, mk, md, yr, eng, _tr in cars:
+        lit = GA.parse_engine(eng)[0]
+        if lit is not None:
+            lot_n[(mk, GA.squash(md), yr, round(lit, 1))] += 1
+    lot_keys = set(lot_n)
+    names = GA.Names({(c[1], c[2]) for c in cars})
+    gp = Path(a.groups)
+    after = json.loads(gp.read_text())
+    unit = json.loads(gp.with_name(gp.stem + ".unit.json").read_text())
+    rule1 = GA.refine(unit, None, twins.TWINS)
+    oem, ex = oem_index(a.raw_ref, names, lot_keys)
+    views = {"before": unit, "rule1": rule1, "after": after}
+    res = {v: audit(d, oem, ex, db_index(d, lot_keys), lot_n) for v, d in views.items()}
+    cov = {}
+    for v, d in views.items():
+        mem = GA.members(d, cars)
+        cat_of = {g["id"]: g["cat"] for g in d["groups"]}
+        hit = defaultdict(set)
+        for gid, ms in mem.items():
+            if len(ms) >= 2:
+                for ci, _c in ms:
+                    hit[cat_of[gid]].add(ci)
+        by = {}
+        for mk in GAP_MAKES:
+            n = sum(1 for c in cars if c[1] == mk)
+            al = {ci for ci in hit["alternator"] if cars[ci][1] == mk}
+            st = {ci for ci in hit["starter"] if cars[ci][1] == mk}
+            by[mk] = {"cars": n, "alternator": len(al), "starter": len(st), "either": len(al | st)}
+        by["all makes"] = {"cars": len(cars), "alternator": len(hit["alternator"]), "starter": len(hit["starter"]),
+                           "either": len(hit["alternator"] | hit["starter"])}
+        cov[v] = by
+    elig = {}
+    for k in sorted(res["rule1"]):
+        r1 = res["rule1"][k]
+        n, rate = r1["db_pairs_checked"], r1["contradict_rate"]
+        elig[k] = {"eligible": bool(n >= ELIGIBLE_MIN_PAIRS and rate is not None and rate <= ELIGIBLE_MAX),
+                   "rule1_pairs": n, "rule1_rate": rate,
+                   "before_pairs": res["before"].get(k, {}).get("db_pairs_checked"),
+                   "before_rate": res["before"].get(k, {}).get("contradict_rate"),
+                   "after_pairs": res["after"].get(k, {}).get("db_pairs_checked"),
+                   "after_rate": res["after"].get(k, {}).get("contradict_rate")}
+    sha = subprocess.run(["git", "-C", str(GA.REPO), "rev-parse", a.raw_ref], check=True, capture_output=True,
+                         text=True).stdout.strip()
+    out = {"raw": f"{a.raw_ref}@{sha[:8]}", "rule": GA.refine.__doc__.split("\n\n")[0],
+           "eligibility": f"rule-1 residual <= {ELIGIBLE_MAX} on >= {ELIGIBLE_MIN_PAIRS} measurable pairs",
+           "eligibility_by_ns_cat": elig, "coverage": cov,
+           "worst_rule1": {k: v["worst_units"][:3] for k, v in res["rule1"].items() if v["contradict"]},
+           "refined_stats": after.get("refined")}
+    op = Path(a.out).with_name("aftermarket-audit-refined.json")
+    op.write_text(json.dumps(out, sort_keys=True, indent=1) + "\n")
+    print("| ns/cat | before pairs | before rate | rule-1 pairs | rule-1 rate | after pairs | after rate | eligible |")
+    print("|---|---:|---:|---:|---:|---:|---:|---|")
+    for k, e in elig.items():
+        print(f"| {k} | {e['before_pairs']} | {e['before_rate']} | {e['rule1_pairs']} | {e['rule1_rate']} | "
+              f"{e['after_pairs']} | {e['after_rate']} | {'yes' if e['eligible'] else 'no'} |")
+    print("\n| make | lot cars | before either | rule 1 either | after either | status |\n|---|---:|---:|---:|---:|---|")
+    for mk in list(GAP_MAKES) + ["all makes"]:
+        st = "unaudited (no OEM catalog)" if mk in GAP_MAKES else ""
+        print(f"| {mk} | {cov['after'][mk]['cars']} | {cov['before'][mk]['either']} | {cov['rule1'][mk]['either']} | "
+              f"{cov['after'][mk]['either']} | {st} |")
+    print(f"wrote {op}", file=sys.stderr)
+    return 0
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--raw-ref", default="origin/oem-raw")
@@ -215,7 +303,11 @@ def main(argv=None) -> int:
     ap.add_argument("--inventory", default=str(GA.REPO / "docs" / "data" / "inventory_live.json"))
     ap.add_argument("--extras", default=str(GA.REPO / "docs" / "data" / "vehicle_extras.json"))
     ap.add_argument("--out", default=str(HERE.parent / "groups" / "_report" / "aftermarket-audit.json"))
+    ap.add_argument("--compare", action="store_true",
+                    help="before (unit-wide, <groups stem>.unit.json) vs rule 1 only vs rule 1 + OEM override (--groups)")
     a = ap.parse_args(argv)
+    if a.compare:
+        return compare(a)
     sys.path.insert(0, str(HERE))
     import twins  # noqa: E402
     cars = twins.load_cars(Path(a.inventory), Path(a.extras))

@@ -449,12 +449,91 @@ def report_md(doc: dict, cov: dict | None = None) -> str:
     return "\n".join(L) + "\n"
 
 
+# ------------------------------------------------------------ refinement
+def _fam_key(eng_label: str):
+    """(liters, diesel) from an app's engine label; None when no size."""
+    lit, _cyl, dsl = parse_engine(eng_label)
+    return None if lit is None else (round(lit, 1), dsl)
+
+
+def refine(doc: dict, oem: dict | None = None, twin_pairs=None) -> dict:
+    """Hub rule (2026-11-06) after the agreement audit: a donor pair inside
+    a DB unit needs the same make (or an owner-listed twin pair that this
+    unit itself prints), the same engine displacement and the same fuel; the
+    AT/MT and year guards stay. Each unit is split into sub-groups on those
+    keys. Rows without an engine size cannot meet the rule and are dropped.
+
+    oem: cat -> {(make, squash model, year, liters): frozenset(OEM classes)}.
+    Where a sub-group holds keys with OEM numbers it is split once more per
+    OEM class: each part holds the keys whose numbers include that class
+    plus every key without OEM numbers. So two keys with OEM numbers share a
+    group only when their numbers intersect (OEM overrides DB), and a key
+    without OEM numbers pairs on the rule-1 keys alone."""
+    oem = oem or {}
+    twin_pairs = twin_pairs or []
+    out = []
+    stats = Counter()
+    for g in doc["groups"]:
+        cat = g["cat"]
+        om = oem.get(cat, {})
+        years = defaultdict(list)          # (fam, (lit, dsl)) -> [(make, model, year, eng)]
+        for mk, md, lo, hi, eng in g["apps"]:
+            fk = _fam_key(eng)
+            if fk is None:
+                stats["rows_without_engine_size"] += 1
+                continue
+            for y in range(lo, hi + 1):
+                years[(mk, fk)].append((mk, md, y, eng))
+        # twin sub-groups: both sides printed on this unit with the same size and fuel
+        for label, A, B in twin_pairs:
+            for fk in {k[1] for k in years}:
+                sa = [t for (mk, f2), ts in years.items() if f2 == fk for t in ts if _side(A, t[0], t[1])]
+                sb = [t for (mk, f2), ts in years.items() if f2 == fk for t in ts if _side(B, t[0], t[1])]
+                if sa and sb and A[0] != B[0]:
+                    years[("twin:" + label, fk)] = sa + sb
+        for (fam, fk), ts in sorted(years.items(), key=lambda kv: (kv[0][0], kv[0][1])):
+            keyed = [(t, om.get((t[0], squash(t[1]), t[2], fk[0]))) for t in ts]
+            classes = sorted({c for _t, cs in keyed if cs for c in cs})
+            parts = [("*", ts)] if not classes else \
+                [(c, [t for t, cs in keyed if not cs or c in cs]) for c in classes]
+            if classes:
+                stats["subgroups_split_by_oem"] += 1
+            for c, part in parts:
+                rows = defaultdict(list)
+                for mk, md, y, eng in part:
+                    rows[(mk, md, eng)].append(y)
+                apps = [[mk, md, lo, hi, eng] for (mk, md, eng), ys in sorted(rows.items())
+                        for lo, hi in _runs(ys)]
+                sg = dict(g)
+                tag = f"{fam}:{fk[0]:.1f}{'d' if fk[1] else ''}" + ("" if c == "*" else f":{c}")
+                sg["id"] = f"{g['id']}:{squash(tag)}{hashlib.sha1(tag.encode()).hexdigest()[:6]}"
+                sg["apps"] = apps
+                sg["pair_rule"] = {"family": fam, "liters": fk[0], "diesel": fk[1], "oem_class": c}
+                out.append(sg)
+    r = dict(doc)
+    r["groups"] = out
+    r["refined"] = {"rule": "same make or evidenced twin + same displacement + same fuel; OEM numbers override",
+                    "stats": dict(stats), "unit_groups": len(doc["groups"]), "subgroups": len(out)}
+    r["sha256"] = hashlib.sha256(json.dumps(out, sort_keys=True).encode()).hexdigest()
+    return r
+
+
+def _side(side, mk, md) -> bool:
+    smk, smd = side
+    if mk != smk:
+        return False
+    if smd.endswith("*"):
+        return squash(md).startswith(squash(smd[:-1]))
+    return squash(md) == squash(smd)
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--raw")
     ap.add_argument("--raw-ref", default="origin/oem-raw")
     ap.add_argument("--inventory", default=str(REPO / "docs" / "data" / "inventory_live.json"))
     ap.add_argument("--out", default=str(HERE.parent / "groups" / "_report" / "aftermarket-dbelectrical.json"))
+    ap.add_argument("--no-refine", action="store_true", help="write the unit-wide groups only (audit 'before')")
     a = ap.parse_args(argv)
     recs, src = load_raw(a.raw, a.raw_ref)
     lot = None
@@ -463,9 +542,22 @@ def main(argv=None) -> int:
         inv = json.loads(inv_p.read_text())
         F = {k: i for i, k in enumerate(inv["fields"])}
         lot = {(v[F["make"]] or "", v[F["model"]] or "") for v in inv["vehicles"]}
-    doc = build(recs, Names(lot), src)
+    names = Names(lot)
+    doc = build(recs, names, src)
     out = Path(a.out)
     out.parent.mkdir(parents=True, exist_ok=True)
+    if not a.no_refine:
+        unit_p = out.with_name(out.stem + ".unit.json")
+        unit_p.write_text(json.dumps(doc, sort_keys=True, ensure_ascii=False, separators=(",", ":")) + "\n")
+        import audit_am  # noqa: E402  (reads oem-raw with git show; no network)
+        import twins  # noqa: E402
+        lot_keys = audit_am.lot_keys_from(Path(a.inventory))
+        idx, _ex = audit_am.oem_index(a.raw_ref, names, lot_keys)
+        oem = defaultdict(dict)
+        for (ns, cat), m in idx.items():
+            for k, cls in m.items():
+                oem[cat][k] = frozenset(f"{ns}:{c}" for c in cls) | oem[cat].get(k, frozenset())
+        doc = refine(doc, oem, twins.TWINS)
     out.write_text(json.dumps(doc, sort_keys=True, ensure_ascii=False, separators=(",", ":")) + "\n")
     print(report_md(doc))
     print(f"wrote {out}", file=sys.stderr)

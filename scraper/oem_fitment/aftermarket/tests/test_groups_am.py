@@ -130,6 +130,39 @@ check("year drops counted", d["rows_outside_fits_years"] == 1)
 check("two-digit and -ON ranges parsed", GA.fits_year_lines({"fits_text": "FORD E-450 6.0L 2004-07\nMINI COOPER 1.6L 2007-ON"})
       == [("FORD E-450 6.0L 2004-07", [(2004, 2007)]), ("MINI COOPER 1.6L 2007-ON", [(2007, 9999)])])
 
+# 6d. refine: same make (or evidenced twin) + same size + same fuel; OEM overrides
+LOT2 = LOT | {("Mercury", "Mountaineer"), ("Ford", "Explorer"), ("Ford", "Escort"), ("Ford", "Ranger")}
+N2 = GA.Names(LOT2)
+u = GA.build([rec("400-9", "alternator", [app("Ford", "Explorer", 2002, "4.0L V6"), app("Mercury", "Mountaineer", 2002, "4.0L V6"),
+                                          app("Ford", "Escort", 1998, "2.0L L4"), app("Ford", "Ranger", 2002, "4.0L V6"),
+                                          app("Ford", "F-150", 2002, "")], 130)], N2)
+TW = [("Mercury Mountaineer / Ford Explorer", ("Mercury", "Mountaineer"), ("Ford", "Explorer"))]
+r = GA.refine(u, None, TW)
+def fams(doc):
+    return sorted(sorted({(a[0], a[1], a[4]) for a in g["apps"]}) for g in doc["groups"])
+f = fams(r)
+check("different engine sizes never share a sub-group",
+      not any({x[2] for x in grp} >= {"4.0L 6-cyl", "2.0L 4-cyl"} for grp in f), str(f))
+check("other make only via an evidenced twin",
+      [("Ford", "Explorer", "4.0L 6-cyl"), ("Mercury", "Mountaineer", "4.0L 6-cyl")] in f
+      and not any(("Mercury", "Mountaineer", "4.0L 6-cyl") in grp and ("Ford", "Ranger", "4.0L 6-cyl") in grp for grp in f), str(f))
+check("rows without an engine size dropped", not any(x[1] == "F-150" for grp in f for x in grp)
+      and r["refined"]["stats"]["rows_without_engine_size"] == 1)
+dd = GA.build([rec("400-10", "alternator", [app("Ford", "F-250 SUPER-DUTY", 2005, "363cu in 6.0L V8 Diesel"),
+                                            app("Ford", "F-150", 2005, "6.0L V8")], 180)], N2)
+check("diesel and gas never share a sub-group", len(GA.refine(dd, None, [])["groups"]) == 2)
+key = lambda md, y: ("Ford", GA.squash(md), y, 4.0)
+oem = {"alternator": {key("Explorer", 2002): frozenset({"ford:a"}), key("Ranger", 2002): frozenset({"ford:b"})}}
+u2 = GA.build([rec("400-11", "alternator", [app("Ford", "Explorer", 2002, "4.0L V6"), app("Ford", "Ranger", 2002, "4.0L V6"),
+                                            app("Ford", "Explorer", 2003, "4.0L V6")], 130)], N2)
+ro = GA.refine(u2, oem, [])
+sets = [sorted((a[1], y) for a in g["apps"] for y in range(a[2], a[3] + 1)) for g in ro["groups"]]
+check("OEM-disjoint keys never share a sub-group",
+      not any(("Explorer", 2002) in s and ("Ranger", 2002) in s for s in sets), str(sets))
+check("a key without OEM numbers pairs with each OEM side",
+      all(("Explorer", 2003) in s for s in sets) and len(sets) == 2, str(sets))
+check("refined groups stay likely/aftermarket", all(g["tier"] == "likely" and g["src"] == "aftermarket" for g in ro["groups"]))
+
 # 7. parse_engine on both feeds and lot strings
 check("parse feeds", GA.parse_engine("181cu in 3.0L V6") == (3.0, 6, False)
       and GA.parse_engine("2500cc, AWD, 51kW 2.5L 4 cyl, Diesel") == (2.5, 4, True)

@@ -1442,3 +1442,87 @@ Recommendation for the owner review:
   hand audit (§11.4) of a sample of pairs from the gap makes.
 - Where an OEM catalog exists, the OEM numbers should override a DB pairing
   they contradict.
+
+## Aftermarket tightening (hub rule after the audit), 2026-11-06 ~08:10 UTC (session_016ZzJfLB9KQDQ64RoN6T9sX)
+
+`groups_am.refine()` now runs by default. Unit-wide groups still go to
+`aftermarket-dbelectrical.unit.json`; both JSONs are git-ignored, and no
+groups/aftermarket/*.json was committed.
+- **Rule 1.** A donor pair needs the same make, or an owner-listed twin pair
+  printed on that same unit; the same displacement; the same fuel; plus the
+  existing AT/MT and year guards.
+- **Splitting.** Each unit splits into sub-groups on those keys. 1,298 unit
+  groups become 5,668 sub-groups. 1,634 rows have no engine size and are
+  dropped, since they can't meet rule 1.
+- **OEM override.** Where keys carry OEM numbers (lot key → OEM classes,
+  merged over supersession/reman), a sub-group is split once more per OEM
+  class. Keys with disjoint numbers never pair; a key without numbers pairs
+  on rule 1 alone.
+- **Size.** The refined JSON is 23 MB (notes, OE lists and Fits text are
+  copied into every sub-group). The payload builder (cf7dcda) will need to
+  slim it if it ever ships.
+- **Tests.** test_groups_am.py: 37/37 (+7 refine checks).
+
+**Residual disagreement** (`audit_am.py --compare`,
+`groups/_report/aftermarket-audit-refined.json`). "after" is 0 everywhere
+by construction: the same OEM numbers removed those pairs. So eligibility
+is judged on the **rule-1** rate, which estimates the error on pairs
+without OEM numbers. Rule: ≤ 5% on ≥ 30 measurable pairs.
+
+| ns/cat | before pairs | before rate | rule-1 pairs | rule-1 rate | after pairs | after rate | eligible |
+|---|---:|---:|---:|---:|---:|---:|---|
+| ford/alternator | 3204 | 0.4498 | 1700 | 0.2606 | 1257 | 0.0 | no |
+| ford/starter | 2254 | 0.2937 | 1324 | 0.1548 | 1119 | 0.0 | no |
+| gm/alternator | 3775 | 0.2328 | 1478 | 0.1746 | 1220 | 0.0 | no |
+| gm/starter | 13028 | 0.3964 | 4041 | 0.3672 | 2557 | 0.0 | no |
+| hmg/alternator | 300 | 0.0933 | 268 | 0.1045 | 240 | 0.0 | no |
+| hmg/starter | 679 | 0.2739 | 571 | 0.2452 | 431 | 0.0 | no |
+| mazda/alternator | 136 | 0.3235 | 89 | 0.1011 | 80 | 0.0 | no |
+| mazda/starter | 424 | 0.2854 | 309 | 0.0194 | 303 | 0.0 | yes |
+| mb/alternator | 1049 | 0.3108 | 587 | 0.2504 | 440 | 0.0 | no |
+| mb/starter | 2116 | 0.3185 | 945 | 0.072 | 877 | 0.0 | no |
+| mitsubishi/alternator | 1 | 0.0 | 1 | 0.0 | 1 | 0.0 | no |
+| mitsubishi/starter | 248 | 0.0 | 248 | 0.0 | 248 | 0.0 | yes |
+| mopar/alternator | 843 | 0.0439 | 319 | 0.0439 | 305 | 0.0 | yes |
+| mopar/starter | 2721 | 0.0397 | 1172 | 0.006 | 1165 | 0.0 | yes |
+| nissan/alternator | 1924 | 0.2843 | 1324 | 0.2137 | 1041 | 0.0 | no |
+| nissan/starter | 1601 | 0.0725 | 1183 | 0.0304 | 1147 | 0.0 | yes |
+| subaru/alternator | 574 | 0.3885 | 574 | 0.3885 | 351 | 0.0 | no |
+| subaru/starter | 1100 | 0.7273 | 750 | 0.624 | 282 | 0.0 | no |
+| toyota/alternator | 585 | 0.3231 | 467 | 0.2227 | 363 | 0.0 | no |
+| toyota/starter | 1317 | 0.3379 | 807 | 0.1425 | 692 | 0.0 | no |
+| vag/alternator | 2090 | 0.2603 | 1130 | 0.1354 | 977 | 0.0 | no |
+| vag/starter | 3098 | 0.2363 | 2012 | 0.1779 | 1654 | 0.0 | no |
+| volvo/alternator | 131 | 0.0763 | 121 | 0.0 | 121 | 0.0 | yes |
+| volvo/starter | 66 | 0.1515 | 56 | 0.1607 | 47 | 0.0 | no |
+
+**Eligible (rule-1 ≤ 5%):** mazda/starter (1.9%), mitsubishi/starter
+(0%), mopar/alternator (4.4%, borderline), mopar/starter (0.6%),
+nissan/starter (3.0%), volvo/alternator (0%). mitsubishi/alternator has
+only 1 pair, so it is not judged. **Not eligible:** every ford, gm, hmg,
+subaru, toyota and vag category; mazda/alternator; mb (starter 7.2%);
+nissan/alternator; volvo/starter.
+
+**Gap makes: unaudited** (no OEM catalog to check against). Coverage
+under rule 1 (lot cars with a donor, either category). Inventory scan
+2026-11-06, so car counts differ slightly from earlier tables:
+
+| make | lot cars | before either | rule 1 either | after either | status |
+|---|---:|---:|---:|---:|---|
+| MINI | 1013 | 847 | 847 | 847 | unaudited (no OEM catalog) |
+| Land Rover | 830 | 677 | 677 | 677 | unaudited (no OEM catalog) |
+| Jaguar | 704 | 332 | 332 | 332 | unaudited (no OEM catalog) |
+| Suzuki | 750 | 578 | 571 | 571 | unaudited (no OEM catalog) |
+| Isuzu | 500 | 416 | 411 | 411 | unaudited (no OEM catalog) |
+| Fiat | 372 | 313 | 313 | 313 | unaudited (no OEM catalog) |
+| Porsche | 182 | 118 | 116 | 116 | unaudited (no OEM catalog) |
+| Smart | 77 | 62 | 62 | 62 | unaudited (no OEM catalog) |
+| Saab | 385 | 53 | 53 | 53 | unaudited (no OEM catalog) |
+| Plymouth | 221 | 136 | 136 | 136 | unaudited (no OEM catalog) |
+| Geo | 183 | 0 | 0 | 0 | unaudited (no OEM catalog) |
+| all makes | 334432 | 295184 | 293352 | 293351 |  |
+
+They stay off until a hand sample is done. Note how little rule 1 removes
+for them: their units are mostly single-make already, so it is not
+evidence that they are accurate. The disagreement within rule 1 elsewhere
+(e.g. gm/starter 37%, subaru 39-62%) is the best available warning for them.
