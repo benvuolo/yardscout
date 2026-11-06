@@ -5660,7 +5660,7 @@ function pfTierChip(tier, src) {
     return '<span class="pf-tier pf-tier-likely" title="The carmaker\u2019s parts catalog lists one part number for both cars on some configurations, not all of them. Check the part number on the car before you pull it.">Likely fits &mdash; check the part number</span>';
   }
   if (src === 'aftermarket') {
-    return '<span class="pf-tier pf-tier-likely" title="An aftermarket rebuilder (not the carmaker) sells one unit listed for both cars. Match the engine, the amperage on the tag and the part number before you pull it.">Likely fits &mdash; check the part number</span>';
+    return '<span class="pf-tier pf-tier-likely" title="An aftermarket rebuilder (not the carmaker) sells one unit listed for both cars. Match the engine and the part number (on an alternator, also the amperage on the tag) before you pull it.">Likely fits &mdash; check the part number</span>';
   }
   return '<span class="pf-tier pf-tier-likely" title="Same engine family / same generation, so it very likely fits — but this exact pairing wasn\u2019t individually verified. Verify the part number before driving out.">Likely fit &mdash; verify part #</span>';
 }
@@ -5890,7 +5890,7 @@ function pfRunBrowse(s) {
  *    groups, and always name their unit (and amperage);
  *  - the old keys (platformGroups, engineFamilies) render exactly as before. */
 const PF_OEM_LIKELY_HEAD = 'Catalog part numbers shared on some configurations — verify the number';
-const PF_AM_HEAD = 'Aftermarket match: one replacement unit is listed for your car and these donors. That list is the rebuilder\u2019s, not the carmaker\u2019s — match the engine, the amperage on the tag and the part number.';
+const PF_AM_HEAD = 'Aftermarket match: one replacement unit is listed for your car and these donors. That list is the rebuilder\u2019s, not the carmaker\u2019s — match the engine and the part number (on an alternator, also the amperage on the tag).';
 let pfOemLazyData = {};   // cat id -> {oemGroups, amGroups} (loaded or failed-empty)
 let pfOemLazyWait = {};   // cat id -> in-flight Promise
 function pfOemLazyLoad(catId) {

@@ -1231,3 +1231,110 @@ out (client-side / POST).
   already targets feed "Camry Solara" (its own catalog model, not Camry);
   unchanged. curation_tests 14/14, tests 29/29, scraper/test_*.py all pass.
   One M2 warning (a target with no cars) is a warning, not an error.
+
+## Phase 1 client + lazy files + aftermarket key, 2026-11-06 (session_016ZzJfMA669Yvjhjdfqndck)
+
+Owner direction 2026-11-06 ("do what you think"): build the display so
+curated matches reach users, web first. Did not touch crawler worklists,
+fetch.py, sites/, release workflows, store metadata or other workstreams.
+
+**Merged to main (web deploys via Pages; native waits for "ship"):**
+- `scraper/junkyard_scraper.py`: **§12 lazy per-category files, adopted.**
+  §12 allows them "only if V11's budget binds". It does. On oem-raw@cb5fa28f
+  (curate --write-groups into a scratch dir, all 14 namespaces) there are
+  11,049 Likely groups and 0 Verified. The single-file build is 1,299,746
+  bytes and drops **8,306** Likely groups for V11. The lazy build drops
+  **0**. interchange.json is 259,185 bytes. 20 files go in
+  `docs/data/oem/<cat>.json`, 5.5 MB in total. Largest: side-mirrors
+  1,153,850, alternator 768,461 (aftermarket), window-regulator 587,288,
+  starter 565,537. Each file has its own 1.3 MB budget and trim: OEM groups
+  go in V11 order, then aftermarket groups with the fewest rows. Drops are
+  reported in oemStatus/amStatus.
+  - interchange.json keeps Verified oemGroups, oemVg and oemStatus. It adds
+    `oemLazy {schema, path, cats: {cat: {oem, am}}}` and `amStatus`.
+  - `build_interchange_payload()` with no args is unchanged (tests,
+    V11-trimmed). `build_interchange_files()` is what the writer ships, and
+    measure.py now measures that, with lazy groups merged back as Likely.
+  - `_OEM_BRANDS` gains bmw/mb/vag/mazda/mitsubishi/volvo (labels read
+    "bmw catalog" before).
+- **Aftermarket key.** `groups/aftermarket/<site>.json` (the groups_am.py
+  doc) ships only in the lazy files under `amGroups`, with src
+  "aftermarket" and tier "likely". It is never in oemGroups or the old keys.
+  Each group is refused alone if it has tier ≠ likely, a note with markup or
+  "verified", or a malformed app. If more than 5% (min 5) are refused, the
+  whole file drops. Evidence expires after 120 days. One real refusal:
+  410-46009, whose fit notes carry "<br." from the page. 1,297 groups ship.
+- `docs/app.js` (§7.4):
+  - The category file is fetched on the first search of that category.
+    "Loading catalog matches…" shows meanwhile. A failed or mismatched file
+    is treated as empty and not retried.
+  - Body branch: OEM rows come after the hand platform groups. Only
+    main-file oemGroups with tier "verified" can be Verified, with
+    pfDonorIdentity({oem:true}). Every lazy-file group is Likely.
+  - Labels: chip "Likely fits — check the part number". Row line "Source:
+    Toyota factory parts catalog #A, #B +N more". The group note stays as
+    the row warning. One header per search: "Catalog part numbers shared
+    on some configurations — verify the number".
+  - Engine branch: `vgs = part.vg + oemVg[fam][cat]`; an OEM vg pair needs a
+    valid VIN. Aftermarket rows say "Source: aftermarket unit: DB Electrical
+    400-24098 (110 A unit)" plus the unit note and "lists your <yr> <model>
+    with the <engine> — match your engine".
+  - Aftermarket membership mirrors groups_am: the decode must not
+    contradict the engine, and the AT/MT gate applies. They answer cars no
+    family covers (MINI N-series, Land Rover). With a family, its rows win
+    and the unit adds the donors it doesn't list.
+  - Hand rows render exactly as before (byte-identical when there is no OEM
+    data for the category). sw.js jh-v145.
+- Tests:
+  - pf_guards_unit.mjs: 130 checks, 36 of which fail on main's app.js. They
+    cover lazy load, labels, fail-closed tiers, the VIN rule, oemVg,
+    aftermarket engine/trans gates, the empty state, the V9 byte-identity,
+    and JS↔Python parity of engine_agrees/car_trans.
+  - New curation_tests/test_lazy_payload.py: 27 checks.
+  - Also passing: curation_tests 16/16 (Phase 2 parity is a SKIP because
+    app.js has no OEM-TIER block; Phase 2 is not written), all 19
+    scraper/test_*.py, oem_fitment/tests 29/29, the aftermarket tests, the
+    other node unit tests and node --check.
+
+**Playwright (local static server of docs/ with the scratch-built data, zip
+22401, 100 mi, 430 px wide, SW blocked):**
+- (a) 2005 Camry window regulator: 124 donors, all "LIKELY FITS — CHECK THE
+  PART NUMBER", "Source: Toyota factory parts catalog #85710-AA050,
+  #85720-AA050". The header has the one catalog caveat; the row warning
+  carries the group note ("window motor only; plant-specific").
+- (b) 2011 MINI Cooper alternator: 47 donors, all Likely, "Source:
+  aftermarket unit: DB Electrical 400-24253 (150 A unit)", with the
+  aftermarket header. 2015 Coopers that decode 1.5L/2.0L are correctly left
+  out.
+- (b2) 2008 Land Rover LR2 starter: 6 Likely, DB Electrical 410-24293.
+- (b3) 2005 MINI Cooper alternator: 2 "Verified fit" rows from the existing
+  hand MINI W10 family (main's app.js shows the same 2), and the units are
+  added to the Likely rows.
+- (c) 1995 Geo Metro alternator: the existing "No interchange data yet"
+  empty state.
+- No page errors. No OEM or aftermarket row or label says Verified. The
+  pre-existing "0 verified · N likely" counter and the "Verified fits only"
+  filter still show, as on every search.
+
+**What users see on web now: no change yet.** The code is inert until data
+is committed. The repo has no `groups/<ns>.json` and no
+`groups/aftermarket/*.json`, by design (§11.5: the owner reviews
+`_report/<ns>.md` before the first merge per namespace; the aftermarket
+layer also wants an independent audit sample, §11.4). To turn it on:
+1. The owner reviews the reports and says which namespaces ship.
+2. Run `curate.py --ns <ns> --raw-ref origin/oem-raw --write-groups`.
+3. Run `aftermarket/groups_am.py --out scraper/oem_fitment/groups/aftermarket/dbelectrical.json`.
+4. Commit. The next scan.yml run writes docs/data/oem/ (scan.yml already
+   `git add docs/data/`).
+
+**For the audit (data, not code):** DB Electrical's application rows can
+outrun its own fit notes. 400-24253 prints "MINI COOPER 1.6L 2006-10" but
+lists Cooper 2007-2015 and Countryman 2011-16 (1.6L). The engine guard
+passes those rows; the year span is not checked against the fit text. The
+note is shown on every row, so the user sees "2006-10".
+
+**Next native release (after "ship"):** this app.js (lazy files, labels,
+oemVg). Old native clients ignore oemLazy/amStatus.
+
+**For backend ops (not done here):** ops_monitor.js should also alert on
+`amStatus` values starting "dropped" (same as oemStatus, §7.3).
