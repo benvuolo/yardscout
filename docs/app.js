@@ -2948,9 +2948,8 @@ function renderSavedSheet() {
         ${items.map(([key, s]) => {
           const gone = savedIsGone(key);
           const parts = s.topParts || [];
-          // Part names are free; Pro keeps the value order (best part first).
-          const names = isPro() ? parts.map(p => p.name)
-            : parts.map(p => p.name).sort((x, y) => String(x).localeCompare(String(y)));
+          // Part names are free, top picks first; prices stay Pro.
+          const names = partsByValue(parts, s.location).map(p => p.name);
           const partsTxt = !parts.length ? ''
             : `${parts.length} part${parts.length > 1 ? 's' : ''}: ${names.slice(0, 3).join(', ')}${parts.length > 3 ? ' and more' : ''}`;
           const setOut = s.dateAdded ? 'Set out ' + (parseYardDate(s.dateAdded) ? parseYardDate(s.dateAdded).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : s.dateAdded) : '';
@@ -3119,10 +3118,16 @@ function renderCarDetail() {
         </div>
       </div>
     </section>
-    ${stay}
-    ${val && val.profitLine ? `<section class="cd-value">${val.profitLine}</section>` : ''}
-    ${val && val.nParts ? `<h3 class="sec">Worth pulling <span>${val.nParts} part${val.nParts > 1 ? 's' : ''}</span></h3>${val.partsList}`
+    ${val && val.nParts ? `<section class="worth" aria-labelledby="worth-h">
+      <h3 class="sec" id="worth-h">Worth pulling <span>${val.nParts} part${val.nParts > 1 ? 's' : ''} on this model</span></h3>
+      ${val.worthHtml}
+      ${val.alsoHtml}
+      ${val.allValueHtml}
+      ${val.optHtml}
+    </section>`
       : '<p class="cd-hint cd-noparts">No parts from our list flagged on this model yet &mdash; the yard\u2019s own listing has the whole car.</p>'}
+    ${stay}
+    ${val && val.nParts ? val.partsList : ''}
     <section class="cd-ref">
       ${vm.vin ? `<div class="cd-vin">${vm.vin}${vm.warn}</div>` : ''}
       ${scan ? `<div class="cd-scan">${scan}</div>` : ''}
@@ -3643,7 +3648,7 @@ function carLotClock(v) {
  * detail screen shows. Free tier: part names and fitment markers are shown;
  * every price and saving stays Pro (owner decision 2026-11-06). */
 function carValueParts(v, unlocked, isSampleCard) {
-  let cardStyle = '', profitLine = '', partsList = '', partsSummary = '', nParts = 0;
+  let cardStyle = '', profitLine = '', partsList = '', partsSummary = '', nParts = 0, worthHtml = '', alsoHtml = '', optHtml = '', allValueHtml = '';
   const fm = freshnessMultiplier(v.dateAdded);
   {
     let totalCost = 0, lowSum = 0, highSum = 0, unconfirmedHigh = 0, bestPart = null, bestHigh = -Infinity;
@@ -3669,11 +3674,11 @@ function carValueParts(v, unlocked, isSampleCard) {
     const confirmedAuto = /automatic/i.test(exTrans) && !/manual/i.test(exTrans);
     const manualOnly = (p) => /\bmanual\b|clutch/i.test(p.name || '');
     const shownParts = v.topParts.filter((p) => !(confirmedAuto && manualOnly(p)));
-    // Free tier sees part NAMES (and the fitment honesty markers) but not
-    // the value order: names list alphabetically, prices stay Pro.
-    const ordered = unlocked ? shownParts
-      : [...shownParts].sort((x, y) => String(x.name).localeCompare(String(y.name)));
-    const optFlags = [];
+    // Value order (what you'd net over buying it used online) for both tiers:
+    // the top picks lead. Free sees the names in that order; every price,
+    // saving and sell-speed stays Pro (owner/hub decision, 2026-11-06).
+    const ordered = partsByValue(shownParts, v.location);
+    const optFlags = [], compactRows = [];
     const partRowList = ordered.map((p, pi) => {
       const lookup = lookupYardCost(p.name, v.location);
       const hasCost = lookup.cost != null;
@@ -3731,6 +3736,23 @@ function carValueParts(v, unlocked, isSampleCard) {
       // sibling's name. The caveat ships verbatim; never trimmed to fit.
       const sharedNote = p.sharedWith
         ? `<div class="shared-note"><span class="shared-badge" title="Platform interchange: hand-verified shared unit across sibling models. Read the caveat and verify part numbers before buying.">swaps with</span>${escapeHtml(p.sharedWith)}</div>` : '';
+      // Compact Pro row for the "Worth pulling" top picks: the value at a
+      // glance, everything else on one quiet line (same facts as the full row).
+      if (unlocked) {
+        const srcLbl = p.src === 'ebay-sold' ? 'sold on eBay, last 90 days' : p.src === 'ebay' ? 'on eBay now' : 'typical used online';
+        const meta = [
+          hasCost ? `<span class="part-cost">Yard ${formatPrice(yardCost)}</span>` : '<span class="part-cost">Yard price: check the list</span>',
+          hasCost && saveHigh > 0 ? `<span class="part-save">Save ~${formatPrice(saveLow)}&ndash;${formatPrice(saveHigh)}</span>` : '',
+          sellSpd ? `<span class="sell-word">${sellSpd === 'Fast' ? 'Picked over fast' : sellSpd === 'Slow' ? 'Usually still there' : 'Steady turnover'}</span>` : '',
+        ].filter(Boolean).join(' &middot; ');
+        compactRows[pi] = `
+          <li class="part-item worth-item">
+            <div class="worth-main"><span class="part-name">${escapeHtml(p.name)}</span>${trimMark}${fitsMark}</div>
+            ${p.low != null ? `<div class="worth-val"><b class="part-price">~${formatPrice(p.low)}&ndash;${formatPrice(p.high)}</b><small>${srcLbl}</small><a class="ebay-sold-link" href="${ebaySoldSearchUrl(v, p)}" target="_blank" rel="noopener">sold prices \u2197</a></div>` : ''}
+            <div class="worth-meta">${meta}</div>
+            ${verifyNote}${sharedNote}
+          </li>`;
+      }
       if (!unlocked) {
         return `
         <li class="part-item part-free">
@@ -3752,8 +3774,8 @@ function carValueParts(v, unlocked, isSampleCard) {
           </div>` : ''}
         </li>`;
     });
-    const mainRows = partRowList.filter((r, i) => !optFlags[i]).join('');
     const optRows = partRowList.filter((r, i) => optFlags[i]).join('');
+    optHtml = optRows ? `<h4 class="opt-head">If equipped <span>unconfirmed for this car &mdash; adds $0 to its ranking</span></h4><ul class="parts-list parts-opt">${optRows}</ul>` : '';
 
     // Demand is the primary signal; dollars are a supporting range, never a promise.
     // Only real price-list pull costs are subtracted — when any part isn't on
@@ -3790,20 +3812,44 @@ function carValueParts(v, unlocked, isSampleCard) {
       </div>`)
       : '';
     nParts = shownParts.length;
-    partsSummary = unlocked
-      ? `Up to ${nParts} part${nParts > 1 ? 's' : ''} to check &middot; top: ${escapeHtml(bestPart || '')}`
-      : `${nParts} part${nParts > 1 ? 's' : ''} to check: ${ordered.slice(0, 3).map(p => escapeHtml(p.name)).join(', ')}${nParts > 3 ? ' and more' : ''}`;
+    const mainIdx = ordered.map((p, i) => i).filter(i => !optFlags[i]);
+    const leadIdx = (mainIdx.length ? mainIdx : ordered.map((p, i) => i)).slice(0, 3);
+    partsSummary = `${unlocked ? 'Up to ' : ''}${nParts} part${nParts > 1 ? 's' : ''} to check: ${leadIdx.map(i => escapeHtml(ordered[i].name)).join(', ')}${nParts > leadIdx.length ? ' and more' : ''}`;
+    // Car screen: "Worth pulling" = the top picks by value, up front; the
+    // rest one tap away; option parts in their own group, $0 to ranking.
+    const topIdx = mainIdx.slice(0, WORTH_TOP_N), restIdx = mainIdx.slice(WORTH_TOP_N);
+    const rowsOf = (idx, compact) => idx.map(i => (compact && compactRows[i]) || partRowList[i]).join('');
+    let topLo = 0, topHi = 0;
+    for (const i of topIdx) { topLo += ordered[i].low || 0; topHi += ordered[i].high || 0; }
+    worthHtml = !topIdx.length ? '' : `
+          <ol class="parts-list worth-list">${rowsOf(topIdx, true)}</ol>
+          ${unlocked
+            ? (topHi > 0 ? `<p class="worth-total">${topIdx.length > 1 ? `Top ${topIdx.length} together` : 'This part'}: <b>~${formatPrice(Math.round(topLo))}&ndash;${formatPrice(Math.round(topHi))}</b> used online</p>` : '')
+            : `<button type="button" class="lock-text parts-lock" onclick="openUpgradeSheet('part-value','${encodeURIComponent(vehicleKey(v))}')">${ICON.lock} Pro shows what each is worth</button>`}`;
+    // The whole-car figure (every confirmed part, after pull prices) sits
+    // below the full list, labelled, so it never reads as the top-5 total.
+    allValueHtml = unlocked && profitLine ? `<section class="cd-allvalue"><p class="eyebrow">All ${mainIdx.length} confirmed part${mainIdx.length === 1 ? '' : 's'} on this car</p>${profitLine}</section>` : '';
+    alsoHtml = !restIdx.length ? '' : `
+          <details class="also-parts">
+            <summary>Also on this car <span>${restIdx.length} more part${restIdx.length > 1 ? 's' : ''}</span><span class="chev-r" aria-hidden="true"></span></summary>
+            <ul class="parts-list">${rowsOf(restIdx, true)}</ul>
+          </details>`;
     partsList = `
           <div class="ghost-note">These are parts this <strong>model</strong> typically shipped with &mdash; parts tied to a trim, option, or transmission that can\u2019t be confirmed from the VIN are marked &ldquo;if equipped.&rdquo; Yards track cars, not remaining parts, so some may already be pulled; newer arrivals are more likely intact.</div>
-          ${unlocked ? '' : `<button type="button" class="lock-chip parts-lock" onclick="openUpgradeSheet('part-value','${encodeURIComponent(vehicleKey(v))}')">${ICON.lock} Yard price, used-online price and what you\u2019d save &mdash; Pro</button>`}
-          ${mainRows ? `<ul class="parts-list">${mainRows}</ul>` : ''}
-          ${optRows ? `<h4 class="opt-head">If equipped <span>unconfirmed for this car &mdash; adds $0 to its ranking</span></h4><ul class="parts-list parts-opt">${optRows}</ul>` : ''}
           <a class="feedback-link" href="mailto:yardscout.io@gmail.com?subject=YardScout%20feedback">Spot a wrong price or bug? Tell us</a>`;
   }
-  return { cardStyle, profitLine, partsList, partsSummary, nParts };
+  return { cardStyle, profitLine, partsList, partsSummary, nParts, worthHtml, alsoHtml, optHtml, allValueHtml };
 }
 
 /* ===== PULL SHEET UI HELPERS (2026-11 redesign) ===== */
+const WORTH_TOP_N = 5;   // car screen: top picks shown up front
+/* Parts in value order: what the part nets over buying it used online (its
+ * high band minus this yard's published pull price, when there is one) —
+ * the same per-part figure the Pro ranking uses. */
+function partsByValue(parts, location) {
+  const net = (p) => { const lk = lookupYardCost(p.name, location); return (p.high || 0) - (lk.cost != null ? lk.cost : 0); };
+  return [...(parts || [])].sort((x, y) => net(y) - net(x));
+}
 /* Row plate: the numbered sign at the end of the yard row — the one datum
  * you need standing in the lot, so it leads every card. */
 let lastSampleKey = null;   // the one free sample car in the current view
@@ -7206,7 +7252,7 @@ function renderAlerts() {
           </div>
           <div class="car-badges"><span class="badge badge-new">Watch hit</span></div>
         </div>
-        ${isMatch && v.topParts && v.topParts.length ? `<button type="button" class="parts-summary car-open" data-vkey="${escapeHtml(key)}"><span>${v.topParts.length} part${v.topParts.length > 1 ? 's' : ''} to check: ${escapeHtml(v.topParts.slice(0, 3).map(p => p.name).join(', '))}${v.topParts.length > 3 ? ' and more' : ''}</span>${ICON.chev}</button>` : ''}
+        ${isMatch && v.topParts && v.topParts.length ? `<button type="button" class="parts-summary car-open" data-vkey="${escapeHtml(key)}"><span>${v.topParts.length} part${v.topParts.length > 1 ? 's' : ''} to check: ${escapeHtml(partsByValue(v.topParts, v.location).slice(0, 3).map(p => p.name).join(', '))}${v.topParts.length > 3 ? ' and more' : ''}</span>${ICON.chev}</button>` : ''}
         <div class="cc-actions">
           ${pullBtnHtml(key)}
           <button type="button" class="btn btn-quiet car-open" data-vkey="${escapeHtml(key)}">Details</button>

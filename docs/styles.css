@@ -2728,3 +2728,63 @@ select { padding-left: 12px; padding-right: 34px; background-position: right 12p
 .car-meta .stay-meter { order: 2; }
 .car-meta-text { flex: none; }
 a { color: var(--accent); }
+
+/* ---------- Car screen: Worth pulling up front (round 2) ---------- */
+.worth h3.sec { margin-top: var(--s6); }
+.worth-list { counter-reset: worth; }
+.worth-list .part-item { counter-increment: worth; position: relative; padding-left: calc(var(--s4) + 2rem); }
+.worth-list .part-item::before {
+  content: counter(worth);
+  position: absolute; left: var(--s4); top: var(--s3);
+  width: 1.5rem; height: 1.5rem; display: grid; place-items: center;
+  border-radius: 50%; background: var(--ink-btn); color: var(--on-ink);
+  font: 700 var(--t-xs)/1 var(--font-mono);
+}
+.worth-list .part-price { font-size: var(--t-md); }
+.worth-total { margin: var(--s3) 0 0; font-size: var(--t-md); }
+.worth-total b { font-family: var(--font-mono); }
+.worth .parts-lock { margin: var(--s2) 0 0; color: var(--text-dim); text-decoration-color: var(--border-dark); }
+.worth .profit-line { margin-top: var(--s2); }
+.also-parts { margin-top: var(--s4); }
+.also-parts > summary {
+  list-style: none; cursor: pointer;
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--s1) var(--s2);
+  min-height: var(--tap); padding: var(--s2) var(--s4);
+  border: 1px solid var(--border); border-radius: var(--r); background: var(--surface);
+  font-weight: 700; font-size: var(--t-md);
+}
+.also-parts > summary::-webkit-details-marker { display: none; }
+.also-parts > summary span:not(.chev-r) { font-weight: 400; font-size: var(--t-sm); color: var(--text-dim); flex: 1 1 auto; }
+.also-parts[open] > summary { border-radius: var(--r) var(--r) 0 0; border-bottom: 0; }
+.also-parts[open] > .parts-list { border-radius: 0 0 var(--r) var(--r); }
+.cd-stay { margin-top: var(--s8); }
+.worth-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s1) var(--s3); align-items: start; }
+.worth-item > .worth-meta, .worth-item > .verify-note, .worth-item > .shared-note { grid-column: 1 / -1; }
+.worth-main { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--s1) var(--s2); min-width: 0; }
+.worth-main .part-name { flex: 1 1 100%; }
+.worth-val { text-align: right; }
+.worth-val b { display: block; font: 700 var(--t-md)/1.2 var(--font-mono); white-space: nowrap; }
+.worth-val small { display: block; font-size: var(--t-xs); color: var(--text-dim); }
+.worth-meta { font-size: var(--t-sm); color: var(--text-dim); line-height: 1.45; }
+.worth-meta .part-cost, .worth-meta .part-save { font-family: var(--font-ui); font-size: var(--t-sm); font-weight: 600; }
+.worth-meta .part-save { color: var(--accent2); }
+.worth-meta .ebay-sold-link { margin-left: 0; font-size: var(--t-sm); }
+.worth-meta { display: flex; flex-wrap: wrap; align-items: center; column-gap: var(--s3); }
+.worth-meta-text { flex: 1 1 14em; min-width: 0; padding: var(--s1) 0; }
+.worth-meta { display: block; padding-top: var(--s1); }
+.worth-val .ebay-sold-link { justify-content: flex-end; min-height: var(--tap); margin-left: 0; font-size: var(--t-sm); }
+.worth-item { min-height: var(--tap); }
+.cd-allvalue { margin-top: var(--s5); padding: var(--s4); border-radius: var(--r); background: var(--surface2); }
+.cd-allvalue .eyebrow { margin-bottom: var(--s1); }
+.cd-allvalue .profit-line { margin-top: 0; }
+.also-parts .worth-item { padding-left: var(--s4); }
+.cd-allvalue .demand-badge { background: var(--surface); }
+/* Long slash-joined part names ("VQ35DE Intake/Plenum/…") may break anywhere
+   rather than widen the card. */
+.parts-summary > span, .part-name, .saved-item-parts, .worth-main { min-width: 0; overflow-wrap: anywhere; }
+/* Top-pick rows: name and value side by side while both fit; the value
+   drops under the name (right-aligned) when the text is large. */
+.worth-item { display: flex; flex-wrap: wrap; align-items: flex-start; }
+.worth-item > .worth-main { flex: 1 1 11em; }
+.worth-item > .worth-val { flex: 0 1 auto; margin-left: auto; }
+.worth-item > .worth-meta, .worth-item > .verify-note, .worth-item > .shared-note { flex: 1 1 100%; }

@@ -287,6 +287,27 @@ with sync_playwright() as pw:
           det["names"] > 0 and det["blur"] == 0, str(det))
     check("free car screen: one Pro lock line, no price/value strings",
           det["lock"] == 1 and not det["leak"], str(det))
+    # "Worth pulling" up front: the top picks by value, names only for free,
+    # one quiet Pro line, the card's parts line leading with the same picks.
+    worth = page.evaluate("""(args) => {
+      const [re, sel, key] = args; const w = document.querySelector('#car-detail .worth');
+      const names = [...w.querySelectorAll('.worth-list .part-name')].map(e => e.textContent.trim());
+      const card = document.querySelector(`#live-grid .car-card[data-vkey="${CSS.escape(key)}"] .parts-summary`);
+      const lead = card ? card.textContent.replace(/\\s+/g, ' ').trim() : '';
+      const top = w.querySelector('.worth-list');
+      return { n: names.length, first: names[0] || '', lead,
+               lockText: (w.querySelector('.parts-lock') || {}).textContent || '',
+               firstSection: w.firstElementChild && w.firstElementChild.matches('h3.sec') && !!top,
+               leak: new RegExp(re).test(top.innerText) || !!top.querySelector(sel) || !!w.querySelector('.worth-total, .cd-allvalue'),
+               alsoClosed: !w.querySelector('.also-parts') || !w.querySelector('.also-parts').open };
+    }""", [VALUE_RE, VALUE_SEL, free["key"]])
+    check("free Worth pulling: up front, top picks (3-5) named, no value strings",
+          worth["firstSection"] and 1 <= worth["n"] <= 5 and not worth["leak"], str(worth))
+    check("free Worth pulling: one quiet 'Pro shows what each is worth' line",
+          "Pro shows what each is worth" in worth["lockText"], str(worth))
+    check("free card parts line leads with the car screen's top pick",
+          bool(worth["first"]) and ("to check: " + worth["first"]) in worth["lead"], str(worth))
+    check("free car screen: 'Also on this car' starts collapsed", worth["alsoClosed"], str(worth))
     page.screenshot(path=str(SHOTS / "7_car_screen_free.png"))
     page.evaluate("closeCarDetail()")
     page.wait_for_timeout(300)
@@ -334,6 +355,12 @@ with sync_playwright() as pw:
                dollars: /\\$\\d/.test(b.innerText) }; }""")
     check("pro car screen: per-part prices, no lock line",
           pdet["prices"] > 0 and pdet["lock"] == 0 and pdet["dollars"], str(pdet))
+    pworth = page.evaluate("""() => { const w = document.querySelector('#car-detail .worth');
+      const rows = [...w.querySelectorAll('.worth-list .worth-item')];
+      return { rows: rows.length, valued: rows.filter(r => /\\$\\d/.test((r.querySelector('.part-price') || {}).textContent || '')).length,
+               total: /\\$\\d/.test((w.querySelector('.worth-total') || {}).textContent || '') }; }""")
+    check("pro Worth pulling: each top pick shows its value, plus a total",
+          pworth["rows"] > 0 and pworth["valued"] == pworth["rows"] and pworth["total"], str(pworth))
     page.screenshot(path=str(SHOTS / "8_car_screen_pro.png"))
     ctx.close()
     browser.close()

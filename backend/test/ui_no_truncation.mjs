@@ -187,7 +187,9 @@ const CHECK_FN = () => {
       const bl = parseFloat(cs.borderLeftWidth), br = parseFloat(cs.borderRightWidth), bt = parseFloat(cs.borderTopWidth), bb = parseFloat(cs.borderBottomWidth);
       const box = { left: r.left + bl, right: r.right - br, top: r.top + bt, bottom: r.bottom - bb };
       if (ox !== 'visible' && (tr.left < box.left - 1 || tr.right > box.right + 1)) { add('clipped-x', el, text, `by ${desc(a)} (${ox})`); break; }
-      if ((oy === 'hidden' || oy === 'clip') && (tr.top < box.top - 1 || tr.bottom > box.bottom + 1)) { add('clipped-y', el, text, `by ${desc(a)}`); break; }
+      const outY = tr.top < box.top - 1 || tr.bottom > box.bottom + 1;
+      if ((oy === 'auto' || oy === 'scroll') && outY) break;   // scrolled out of view, not clipped
+      if ((oy === 'hidden' || oy === 'clip') && outY) { add('clipped-y', el, text, `by ${desc(a)}`); break; }
     }
     // (c) past the viewport edge
     if (tr.right > W + 1 || tr.left < -1) add('offscreen-x', el, text, `${Math.round(tr.left)}..${Math.round(tr.right)} of ${W}`);
@@ -297,6 +299,44 @@ const SCREENS = [
     }, k);
     await settle(page, 400);
   }],
+  ['car-detail-more', async (page) => {
+    // the car with the most parts, "Also on this car" opened
+    await tab(page, 'live');
+    const k = await page.evaluate(() => {
+      let best = null, n = 0;
+      for (const c of document.querySelectorAll('#live-grid .car-card[data-vkey]')) {
+        const v = liveInventory.find(x => vehicleKey(x) === c.dataset.vkey);
+        if (v && v.topParts && v.topParts.length > n) { n = v.topParts.length; best = c.dataset.vkey; }
+      }
+      return best;
+    });
+    await page.evaluate((k) => openCarDetail(k), k);
+    await settle(page, 300);
+    await page.evaluate(() => {
+      const d = document.querySelector('#car-detail .also-parts'); if (d) d.open = true;
+      const t = document.querySelector('#car-detail .worth-total, #car-detail .worth .parts-lock') || document.querySelector('#car-detail .worth');
+      if (t) t.scrollIntoView({ block: 'start' });
+    });
+  }],
+  ['car-detail-more-pro', async (page) => {
+    await page.evaluate(() => { localStorage.setItem('jh_pro', '1'); applyProGates(); renderLive(); });
+    await tab(page, 'live');
+    const k = await page.evaluate(() => {
+      let best = null, n = 0;
+      for (const c of document.querySelectorAll('#live-grid .car-card[data-vkey]')) {
+        const v = liveInventory.find(x => vehicleKey(x) === c.dataset.vkey);
+        if (v && v.topParts && v.topParts.length > n) { n = v.topParts.length; best = c.dataset.vkey; }
+      }
+      return best;
+    });
+    await page.evaluate((k) => openCarDetail(k), k);
+    await settle(page, 300);
+    await page.evaluate(() => {
+      const d = document.querySelector('#car-detail .also-parts'); if (d) d.open = true;
+      const t = document.querySelector('#car-detail .worth-total') || document.querySelector('#car-detail .worth');
+      if (t) t.scrollIntoView({ block: 'start' });
+    });
+  }, async (page) => { await resetUi(page); await page.evaluate(() => { localStorage.removeItem('jh_pro'); applyProGates(); renderLive(); }); }],
   ['results-pro', async (page) => {
     await page.evaluate(() => { localStorage.setItem('jh_pro', '1'); applyProGates(); renderLive(); });
     await tab(page, 'live');
