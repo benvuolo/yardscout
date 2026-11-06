@@ -1338,3 +1338,20 @@ oemVg). Old native clients ignore oemLazy/amStatus.
 
 **For backend ops (not done here):** ops_monitor.js should also alert on
 `amStatus` values starting "dropped" (same as oemStatus, §7.3).
+
+- 2026-11-06 07:30 UTC (hub FYI from session_01LsgNuWEh1vdaDCtdP1jxMM:
+  should the `verify` hint show on every row that has one?). **Not done.**
+  - The hint is in `docs/app.js` at the vehicle-card part rows (~3711):
+    `ifEquipped && p.verify` renders "Spot it: …".
+  - That copy is a physical tell for whether an option is fitted. On a
+    standard-equipment row it would mislabel "match part #; needs
+    calibration after install".
+  - A correct change needs a second label for confirmed rows (e.g. "Check:
+    …"). No unit test loads the card renderer, so it is not a one-line
+    tested change.
+  - The scraper only fills a default hint for `trim_status == "unconfirmed"`.
+    An entry's own `verify` text can sit on confirmed rows, so a change
+    there would surface every such text.
+  - The parts session's row-name workaround already shows the ADAS caveat.
+  - It belongs to the vehicle-card / parts workstream; noted there for
+    whoever next ships app.js.
