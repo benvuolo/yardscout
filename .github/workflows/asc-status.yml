@@ -5,6 +5,10 @@ name: App Store status
 
 on:
   workflow_dispatch:
+    inputs:
+      tester_email:
+        description: "Optional: an Apple ID email to look up among this app's beta testers. It is masked and never printed; the log only says whether it was found and its group/state."
+        default: ""
 
 permissions:
   contents: read
@@ -18,6 +22,11 @@ jobs:
       ASC_P8: ${{ secrets.ASC_API_KEY_P8 }}
       BUNDLE_ID: com.benvuolo.yardscout
     steps:
+      - name: Mask the lookup email
+        run: |
+          set -euo pipefail
+          e=$(python3 -c "import json,os; print((json.load(open(os.environ['GITHUB_EVENT_PATH'])).get('inputs') or {}).get('tester_email','').strip().lower())")
+          if [ -n "$e" ]; then echo "::add-mask::$e"; echo "LOOKUP_EMAIL=$e" >> "$GITHUB_ENV"; fi
       - name: Query App Store Connect
         run: |
           set -euo pipefail
@@ -30,6 +39,28 @@ jobs:
                              headers={"kid": os.environ["ASC_KEY_ID"], "typ": "JWT"})
           H = {"Authorization": f"Bearer {token}"}
           API = "https://api.appstoreconnect.apple.com/v1"
+          for a in requests.get(f"{API}/apps", headers=H, params={"limit": 50}, timeout=60).json().get("data", []):
+              lb = requests.get(f"{API}/builds", headers=H, params={"filter[app]": a["id"], "sort": "-uploadedDate", "limit": 1,
+                                "include": "preReleaseVersion"}, timeout=60).json()
+              pv = next((i["attributes"].get("version") for i in lb.get("included", []) if i["type"] == "preReleaseVersions"), "-")
+              ub = (lb.get("data") or [{}])[0].get("attributes", {})
+              print(f"account app: {a['attributes']['name']} bundle={a['attributes']['bundleId']} latest build {pv} ({ub.get('version','-')}) uploaded={ub.get('uploadedDate','')[:10]}")
+          look = os.environ.get("LOOKUP_EMAIL", "")
+          if look:
+              r = requests.get(f"{API}/betaTesters", headers=H, params={"filter[email]": look, "include": "betaGroups,apps"}, timeout=60)
+              data = r.json().get("data", []) if r.status_code == 200 else []
+              if r.status_code != 200: print(f"lookup email: HTTP {r.status_code}")
+              elif not data: print("lookup email: NOT a beta tester on this account")
+              for t in data:
+                  inc = {(i["type"], i["id"]): i for i in r.json().get("included", [])}
+                  gs = [inc.get(("betaGroups", g["id"]), {}).get("attributes", {}).get("name", "?") for g in (t.get("relationships", {}).get("betaGroups", {}).get("data") or [])]
+                  print(f"lookup email: found, inviteType={t['attributes'].get('inviteType')} state={t['attributes'].get('state')} groups={gs}")
+              u = requests.get(f"{API}/users", headers=H, params={"filter[username]": look}, timeout=60)
+              if u.status_code == 200:
+                  ud = u.json().get("data", [])
+                  print(f"lookup email: App Store Connect user={'yes, roles=' + str(ud[0]['attributes'].get('roles')) if ud else 'no'}")
+              else:
+                  print(f"lookup email: users API HTTP {u.status_code}")
           app = requests.get(f"{API}/apps", headers=H, params={"filter[bundleId]": os.environ["BUNDLE_ID"]}, timeout=60).json()["data"][0]
           print("app:", app["attributes"]["name"], app["id"])
           vs = requests.get(f"{API}/apps/{app['id']}/appStoreVersions", headers=H,
