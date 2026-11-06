@@ -1327,3 +1327,241 @@
 07:14:14 chain-unlinked alternator 1 numbers named by 56028925AA, no catalog link: RL028925AA
 07:17:42 chain-unlinked fuel-pump-module 1 numbers named by 5014318AB, no catalog link: 5014318AG
 07:19:10 time budget reached records=2120
+07:19:24 start site=www.moparpartsgiant.com mode=worklist tiers=['A', 'B'] records=2120 list_lines=656 year_lines=55 url_index=5312
+07:19:24 seg done tier=A Dodge Ram 1500 [1971, 2018] seeds=[2002] records=2120 errors=10
+07:19:24 seg done tier=A Dodge Grand Caravan [2008, 2024] seeds=[2010] records=2120 errors=10
+07:19:24 seg done tier=A Chrysler 200 [1979, 2022] seeds=[2015] records=2120 errors=10
+07:19:24 seg done tier=A Dodge Journey [2009, 2020] seeds=[2012] records=2120 errors=10
+07:19:24 seg done tier=A Chrysler Town & Country [2008, 2016] seeds=[2008] records=2120 errors=10
+07:19:24 seg done tier=A Chrysler 300 [1999, 2021] seeds=[2006] records=2120 errors=10
+07:19:24 seg done tier=A Dodge Avenger [1995, 2014] seeds=[2013] records=2120 errors=10
+07:19:24 seg done tier=A Chrysler PT Cruiser [2001, 2010] seeds=[2006] records=2120 errors=10
+07:19:24 seg done tier=A Dodge Charger [1971, 2010] seeds=[2007] records=2120 errors=10
+07:19:24 seg done tier=A Dodge Dakota [1997, 2004] seeds=[2000] records=2120 errors=10
+07:19:24 seg done tier=A Dodge Caravan [1984, 2020] seeds=[2005] records=2120 errors=10
+07:19:24 seg done tier=A Chrysler Town & Country [1992, 2007] seeds=[2005] records=2120 errors=10
+07:19:24 seg done tier=A Dodge Dart [1960, 2016] seeds=[2013] records=2120 errors=10
+07:19:24 seg done tier=A Dodge Caliber [2007, 2012] seeds=[2007] records=2120 errors=10
+07:19:24 seg done tier=A Dodge Grand Caravan [2001, 2007] seeds=[2005] records=2120 errors=10
+07:19:24 seg done tier=A Dodge Charger [2011, 2023] seeds=[2013] records=2120 errors=10
+07:19:24 seg done tier=A Dodge Durango [2004, 2009] seeds=[2005] records=2120 errors=10
+07:19:24 seg done tier=A Dodge Durango [1998, 2003] seeds=[2003] records=2120 errors=10
+07:19:24 seg done tier=A Chrysler Sebring [2007, 2011] seeds=[2008] records=2120 errors=10
+07:19:24 seg done tier=A Dodge Dakota [2005, 2011] seeds=[2005] records=2120 errors=10
+07:19:24 seg done tier=A Chrysler Pacifica [2004, 2008] seeds=[2006] records=2120 errors=10
+07:19:24 seg done tier=A Dodge Nitro [2007, 2011] seeds=[2007] records=2120 errors=10
+07:19:24 seg done tier=A Ram 1500 [2009, 2022] seeds=[2012] records=2120 errors=10
+07:19:24 seg done tier=A Chrysler Sebring [2001, 2006] seeds=[2004] records=2120 errors=10
+07:19:24 seg done tier=A Dodge Durango [2011, 2023] seeds=[2013] records=2120 errors=10
+07:19:24 seg done tier=A Dodge Neon [2000, 2005] seeds=[2005] records=2120 errors=10
+07:19:24 seg done tier=A Dodge Ram Pickup [1988, 2011] seeds=[2004] records=2120 errors=10
+07:19:24 seg done tier=A Dodge Stratus [1996, 2008] seeds=[2006] records=2120 errors=10
+07:19:24 seg done tier=A Dodge Dakota [1987, 1996] seeds=[1992] records=2120 errors=10
+07:19:24 seg done tier=A Dodge Magnum [1978, 2008] seeds=[2005] records=2120 errors=10
+07:19:24 seg done tier=A Dodge Ram Van [1966, 2003] seeds=[1999] records=2120 errors=10
+07:19:24 seg done tier=A Dodge Grand Caravan [1988, 2000] seeds=[2000] records=2120 errors=10
+07:19:24 seg done tier=A Chrysler Aspen [2007, 2009] seeds=[2007] records=2120 errors=10
+07:19:24 seg done tier=A Dodge Ram 2500 [1979, 2002] seeds=[2001] records=2120 errors=10
+07:20:53 chain-unlinked fuel-pump-module 1 numbers named by 5072763AB, no catalog link: 5072763AD
+07:20:53 chain-unlinked fuel-pump-module 1 numbers named by 5072764AB, no catalog link: 5072764AD
+07:21:09 chain-unlinked throttle-body 2 numbers named by 53013163AD, no catalog link: 53013163AB, 53013163AC
+07:21:49 chain-unlinked alternator 1 numbers named by 56028697AM, no catalog link: 56028697AQ
+07:22:53 chain-unlinked headlights 1 numbers named by 55277409AD, no catalog link: 55277409AG
+07:22:53 chain-unlinked headlights 1 numbers named by 55277410AD, no catalog link: 55277410AG
+07:22:53 chain-unlinked headlights 1 numbers named by 68001484AD, no catalog link: 68001484AI
+07:22:53 chain-unlinked headlights 1 numbers named by 68001485AD, no catalog link: 68001485AI
+07:27:09 chain-unlinked side-mirrors 1 numbers named by 55372068AD, no catalog link: 55372068AI
+07:27:09 chain-unlinked side-mirrors 1 numbers named by 55372069AD, no catalog link: 55372069AH
+07:27:09 chain-unlinked side-mirrors 1 numbers named by 1QL201BSAA, no catalog link: 1QL201BSAF
+07:27:09 chain-unlinked side-mirrors 1 numbers named by 1QL201DMAA, no catalog link: 1QL201DMAF
+07:27:09 chain-unlinked side-mirrors 1 numbers named by 1QL201R4AA, no catalog link: 1QL201R4AF
+07:27:09 chain-unlinked side-mirrors 1 numbers named by 1QL201S2AA, no catalog link: 1QL201S2AF
+07:27:09 chain-unlinked side-mirrors 1 numbers named by 1QL201W7AA, no catalog link: 1QL201W7AF
+07:27:09 chain-unlinked side-mirrors 1 numbers named by 1QL201XRAA, no catalog link: 1QL201XRAF
+07:27:09 chain-unlinked side-mirrors 1 numbers named by 1QL211BSAA, no catalog link: 1QL211BSAF
+07:27:09 chain-unlinked side-mirrors 1 numbers named by 1QL211DMAA, no catalog link: 1QL211DMAF
+07:27:09 chain-unlinked side-mirrors 1 numbers named by 1QL211R4AA, no catalog link: 1QL211R4AF
+07:27:09 chain-unlinked side-mirrors 1 numbers named by 1QL211S2AA, no catalog link: 1QL211S2AF
+07:27:09 chain-unlinked side-mirrors 1 numbers named by 1QL211W7AA, no catalog link: 1QL211W7AF
+07:27:09 chain-unlinked side-mirrors 1 numbers named by 1QL211XRAA, no catalog link: 1QL211XRAF
+07:27:09 chain-unlinked side-mirrors 1 numbers named by 55372066AD, no catalog link: 55372066AI
+07:27:09 chain-unlinked side-mirrors 1 numbers named by 55372067AD, no catalog link: 55372067AI
+07:27:09 chain-unlinked side-mirrors 1 numbers named by 55372070AF, no catalog link: 55372070AM
+07:27:09 chain-unlinked side-mirrors 5 numbers named by 55372071AF, no catalog link: 55372071AA, 55372071AC, 55372071AE, 55372071AB, 55372071AD
+07:27:09 chain-unlinked side-mirrors 1 numbers named by 55372072AE, no catalog link: 55372072AL
+07:27:09 chain-unlinked side-mirrors 1 numbers named by 55372073AE, no catalog link: 55372073AL
+07:27:09 chain-unlinked side-mirrors 1 numbers named by 68033734AF, no catalog link: 68033734AM
+07:27:09 chain-unlinked side-mirrors 1 numbers named by 68033735AF, no catalog link: 68033735AM
+07:27:09 chain-unlinked side-mirrors 1 numbers named by 68060202AA, no catalog link: 68060202AF
+07:27:09 chain-unlinked side-mirrors 1 numbers named by 68060203AA, no catalog link: 68060203AF
+07:27:09 chain-unlinked side-mirrors 1 numbers named by 68061200AA, no catalog link: 68061200AF
+07:27:09 chain-unlinked side-mirrors 1 numbers named by 68061201AA, no catalog link: 68061201AF
+07:27:33 chain-unlinked window-switch 1 numbers named by 4602915AA, no catalog link: 4602915AB
+07:28:13 chain-unlinked climate-control 1 numbers named by 55056826AE, no catalog link: 55056826AL
+07:28:13 chain-unlinked climate-control 1 numbers named by 55056829AE, no catalog link: 55056829AK
+07:28:13 chain-unlinked climate-control 1 numbers named by 55056827AG, no catalog link: 55056827AK
+07:29:09 chain-unlinked power-steering-pump 1 numbers named by 55398903AE, no catalog link: 55398903AD
+07:29:09 chain-unlinked power-steering-pump 1 numbers named by 55398904AD, no catalog link: 55398904AE
+07:30:37 chain-unlinked headlights 1 numbers named by 55277409AC, no catalog link: 55277409AG
+07:30:37 chain-unlinked headlights 1 numbers named by 55277410AC, no catalog link: 55277410AG
+07:30:37 chain-unlinked headlights 1 numbers named by 68001484AC, no catalog link: 68001484AI
+07:30:37 chain-unlinked headlights 1 numbers named by 68001485AC, no catalog link: 68001485AI
+07:32:58 chain-unlinked side-mirrors 1 numbers named by 55372068AC, no catalog link: 55372068AI
+07:32:58 chain-unlinked side-mirrors 1 numbers named by 1FX361BSAC, no catalog link: 1FX361BSAD
+07:32:58 chain-unlinked side-mirrors 1 numbers named by 1FX361DMAC, no catalog link: 1FX361DMAD
+07:32:58 chain-unlinked side-mirrors 1 numbers named by 1FX361RHAC, no catalog link: 1FX361RHAD
+07:32:58 chain-unlinked side-mirrors 1 numbers named by 1FX361RJAC, no catalog link: 1FX361RJAD
+07:32:58 chain-unlinked side-mirrors 1 numbers named by 1FX361S2AC, no catalog link: 1FX361S2AD
+07:32:58 chain-unlinked side-mirrors 1 numbers named by 1FX361XRAC, no catalog link: 1FX361XRAD
+07:32:58 chain-unlinked side-mirrors 1 numbers named by 1FX361YBAC, no catalog link: 1FX361YBAD
+07:32:58 chain-unlinked side-mirrors 1 numbers named by 55079042AC, no catalog link: 55079042AD
+07:32:58 chain-unlinked side-mirrors 1 numbers named by 55079043AC, no catalog link: 55079043AD
+07:32:58 chain-unlinked side-mirrors 1 numbers named by 55372066AC, no catalog link: 55372066AI
+07:32:58 chain-unlinked side-mirrors 1 numbers named by 55372067AC, no catalog link: 55372067AI
+07:32:58 chain-unlinked side-mirrors 1 numbers named by 68026558AC, no catalog link: 68026558AD
+07:32:58 chain-unlinked side-mirrors 1 numbers named by 68026559AC, no catalog link: 68026559AD
+07:33:46 chain-unlinked climate-control 1 numbers named by 55056827AE, no catalog link: 55056827AK
+07:34:02 chain-unlinked fuel-pump-module 1 numbers named by 68050962AA, no catalog link: 68050962AC
+07:34:42 seg done tier=A Dodge 1500 Pickup [1995, 2023] seeds=[2002, 2010, 2009] records=2188 errors=10
+07:34:58 chain-unlinked alternator 1 numbers named by 4801835AB, no catalog link: 4801835AD
+07:35:14 chain-unlinked alternator 1 numbers named by 4896805AE, no catalog link: 4896805AD
+07:35:22 chain-unlinked starter 1 numbers named by 68080460AA, no catalog link: 68080460AB
+07:35:54 chain-unlinked ac-compressor 1 numbers named by 68021637AD, no catalog link: 68294506AC
+07:35:54 chain-unlinked ac-compressor 1 numbers named by 68028917AC, no catalog link: 68202994AC
+07:35:54 chain-unlinked ac-compressor 1 numbers named by 68021835AD, no catalog link: 68202995AD
+07:38:34 chain-unlinked tail-lights 1 numbers named by 5182300AD, no catalog link: 5182300AE
+07:38:34 chain-unlinked tail-lights 1 numbers named by 5182301AD, no catalog link: 5182301AE
+07:38:34 chain-unlinked tail-lights 1 numbers named by 68042170AD, no catalog link: 68042170AE
+07:38:34 chain-unlinked tail-lights 1 numbers named by 68042171AD, no catalog link: 68042171AE
+07:38:34 chain-unlinked tail-lights 1 numbers named by 68042172AD, no catalog link: 68042172AE
+07:38:34 chain-unlinked tail-lights 1 numbers named by 68042173AD, no catalog link: 68042173AE
+07:38:34 chain-unlinked tail-lights 1 numbers named by 68043136AD, no catalog link: 68043136AE
+07:38:34 chain-unlinked tail-lights 1 numbers named by 68043137AD, no catalog link: 68043137AE
+07:54:02 chain-unlinked side-mirrors 2 numbers named by 1LE27CDMAF, no catalog link: 1LE27CDMAE, 1LE27TZZAH
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1LE27WS2AF, no catalog link: 1LE27WS2AE
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1LE28CDMAF, no catalog link: 1LE28TZZAI
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1LE28WS2AF, no catalog link: 1LE28TZZAI
+07:54:02 chain-unlinked side-mirrors 4 numbers named by 1LE50CDMAG, no catalog link: 1LE50CDMAF, 1LE50CDMAC, 1LE50CDMAE, 1LE50CDMAD
+07:54:02 chain-unlinked side-mirrors 4 numbers named by 1LE51CDMAG, no catalog link: 1LE51CDMAE, 1LE51CDMAF, 1LE51CDMAC, 1LE51CDMAD
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1LE51DX8AG, no catalog link: 1LE51TZZAI
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1LE51GW7AG, no catalog link: 1LE51TZZAI
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1LE51JRPAG, no catalog link: 1LE51TZZAI
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1LE51JWDAG, no catalog link: 1LE51TZZAI
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1LE51WS2AG, no catalog link: 1LE51TZZAI
+07:54:02 chain-unlinked side-mirrors 3 numbers named by 1TK86CDMAG, no catalog link: 1TK86CDMAD, 1TK86CDMAF, 1TK86CDMAE
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1TK86DX8AG, no catalog link: 1TK86TZZAK
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1TK86GTWAG, no catalog link: 1TK86TZZAK
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1TK86GW7AG, no catalog link: 1TK86TZZAK
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1TK86HBVAG, no catalog link: 1TK86TZZAK
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1TK86JRPAG, no catalog link: 1TK86TZZAK
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1TK86JWDAG, no catalog link: 1TK86TZZAK
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1TK86KDBAG, no catalog link: 1TK86KDBAF
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1TK86KFSAG, no catalog link: 1TK86KFSAF
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1TK86KRQAG, no catalog link: 1TK86KRQAF
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1TK86WS2AG, no catalog link: 1TK86WS2AF
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1TK87CDMAG, no catalog link: 1TK87TZZAK
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1TK87DX8AG, no catalog link: 1TK87TZZAK
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1TK87GTWAG, no catalog link: 1TK87TZZAK
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1TK87GW7AG, no catalog link: 1TK87TZZAK
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1TK87HBVAG, no catalog link: 1TK87TZZAK
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1TK87JRPAG, no catalog link: 1TK87TZZAK
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1TK87JWDAG, no catalog link: 1TK87TZZAK
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1TK87WS2AG, no catalog link: 1TK87TZZAK
+07:54:02 chain-unlinked side-mirrors 2 numbers named by 1TV62CDMAE, no catalog link: 1TV62CDMAD, 1TV62CDMAC
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1TV62DX8AE, no catalog link: 1TV62TZZAI
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1TV62GW7AE, no catalog link: 1TV62TZZAI
+07:54:02 chain-unlinked side-mirrors 3 numbers named by 1TV62JWDAE, no catalog link: 1TV62JWDAC, 1TV62JWDAD, 1TV62TZZAI
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1TV62WS2AE, no catalog link: 1TV62WS2AD
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1TV63CDMAE, no catalog link: 1TV63CDMAD
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1TV63GW7AE, no catalog link: 1TV63TZZAI
+07:54:02 chain-unlinked side-mirrors 2 numbers named by 1TV63JRPAE, no catalog link: 1TV63JRPAD, 1TV63TZZAI
+07:54:02 chain-unlinked side-mirrors 2 numbers named by 1TV63JWDAE, no catalog link: 1TV63JWDAD, 1TV63TZZAI
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1TV63WS2AE, no catalog link: 1TV63WS2AD
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1TV64CDMAF, no catalog link: 1TV64TZZAH
+07:54:02 chain-unlinked side-mirrors 4 numbers named by 1TV64DX8AF, no catalog link: 1TV64AXRAC, 1TV64AXRAD, 1TV64DX8AD, 1TV64DX8AI
+07:54:02 chain-unlinked side-mirrors 3 numbers named by 1TV64GW7AF, no catalog link: 1TV64GW7AC, 1TV64GW7AD, 1TV64DX8AI
+07:54:02 chain-unlinked side-mirrors 3 numbers named by 1TV64JRPAF, no catalog link: 1TV64JRPAC, 1TV64JRPAD, 1TV64TZZAH
+07:54:02 chain-unlinked side-mirrors 2 numbers named by 1TV64JWDAF, no catalog link: 1TV64JWDAD, 1TV64JWDAC
+07:54:02 chain-unlinked side-mirrors 3 numbers named by 1TV64WS2AF, no catalog link: 1TV64JSCAD, 1TV64JSCAC, 1TV64WS2AD
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 57010306AF, no catalog link: 57010306AI
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 57010307AF, no catalog link: 57010307AI
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 57010308AF, no catalog link: 57010308AI
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 57010309AF, no catalog link: 57010309AI
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 57010336AG, no catalog link: 57010336AJ
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 57010337AG, no catalog link: 57010337AJ
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 57010342AF, no catalog link: 57010342AI
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 57010358AH, no catalog link: 57010358AK
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 57010420AF, no catalog link: 57010420AJ
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW48CDMAA, no catalog link: 5KW48TZZAC
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW48DX8AA, no catalog link: 5KW48DX8AB
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW48GTWAA, no catalog link: 5KW48TZZAC
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW48GW7AA, no catalog link: 5KW48TZZAD
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW48HBVAA, no catalog link: 5KW48TZZAC
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW48JRPAA, no catalog link: 5KW48TZZAC
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW48JWDAA, no catalog link: 5KW48TZZAC
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW48KDBAA, no catalog link: 5KW48TZZAC
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW48KFSAA, no catalog link: 5KW48TZZAC
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW48KRQAA, no catalog link: 5KW48TZZAC
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW48WS2AA, no catalog link: 5KW48TZZAC
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW49CDMAA, no catalog link: 5KW49TZZAC
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW49DX8AA, no catalog link: 5KW49DX8AD
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW49GTWAA, no catalog link: 5KW49TZZAC
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW49GW7AA, no catalog link: 5KW49DX8AD
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW49HBVAA, no catalog link: 5KW49TZZAC
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW49JRPAA, no catalog link: 5KW49TZZAC
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW49JWDAA, no catalog link: 5KW49TZZAC
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW49KDBAA, no catalog link: 5KW49TZZAC
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW49KFSAA, no catalog link: 5KW49TZZAC
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW49KRQAA, no catalog link: 5KW49TZZAC
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW49WS2AA, no catalog link: 5KW49TZZAC
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW60DX8AA, no catalog link: 5KW60TZZAC
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW60GTWAA, no catalog link: 5KW60TZZAB
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW60GW7AA, no catalog link: 5KW60TZZAC
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW60HBVAA, no catalog link: 5KW60TZZAB
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW60JRPAA, no catalog link: 5KW60TZZAB
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW60JWDAA, no catalog link: 5KW60TZZAB
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW60KDBAA, no catalog link: 5KW60TZZAB
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW60KFSAA, no catalog link: 5KW60TZZAB
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW60KRQAA, no catalog link: 5KW60TZZAB
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW60WS2AA, no catalog link: 5KW60TZZAB
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW63DX8AA, no catalog link: 5KW63TZZAC
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW63GTWAA, no catalog link: 5KW63TZZAB
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW63GW7AA, no catalog link: 5KW63TZZAC
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW63HBVAA, no catalog link: 5KW63TZZAB
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW63JRPAA, no catalog link: 5KW63TZZAB
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW63JWDAA, no catalog link: 5KW63TZZAB
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW63KDBAA, no catalog link: 5KW63TZZAB
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW63KFSAA, no catalog link: 5KW63TZZAB
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW63KRQAA, no catalog link: 5KW63TZZAB
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 5KW63WS2AA, no catalog link: 5KW63TZZAB
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 68088252AF, no catalog link: 68088252AI
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 68088256AG, no catalog link: 68088256AI
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 68088257AG, no catalog link: 68088257AI
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 68154815AB, no catalog link: 68154815AE
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 68154816AB, no catalog link: 68154816AE
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 68154818AB, no catalog link: 68154818AE
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 68154819AB, no catalog link: 68154819AE
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 68154820AB, no catalog link: 68154820AE
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 68154824AC, no catalog link: 68154824AE
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 68154825AC, no catalog link: 68154825AE
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 68154826AC, no catalog link: 68154826AE
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 68154827AC, no catalog link: 68154827AE
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1LE27DX8AF, no catalog link: 1LE27TZZAI
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1LE27GW7AF, no catalog link: 1LE27TZZAI
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 57010421AF, no catalog link: 57010421AJ
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 68154822AB, no catalog link: 68154822AE
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1LE27JRPAF, no catalog link: 1LE27TZZAH
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1LE27JWDAF, no catalog link: 1LE27TZZAH
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1LE28DX8AF, no catalog link: 1LE28TZZAI
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1LE28GW7AF, no catalog link: 1LE28TZZAI
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1LE28JRPAF, no catalog link: 1LE28TZZAI
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1LE28JWDAF, no catalog link: 1LE28TZZAI
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1LE50DX8AG, no catalog link: 1LE50TZZAI
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1LE50GW7AG, no catalog link: 1LE50TZZAI
+07:54:02 chain-unlinked side-mirrors 4 numbers named by 1LE50JRPAG, no catalog link: 1LE50JRPAE, 1LE50JRPAD, 1LE50JRPAF, 1LE50JRPAC
+07:54:02 chain-unlinked side-mirrors 1 numbers named by 1LE50JWDAG, no catalog link: 1LE50TZZAI
+07:54:26 chain-unlinked window-switch 1 numbers named by 56046832AB, no catalog link: 56046832AC
+07:54:42 chain-unlinked climate-control 1 numbers named by 55111919AK, no catalog link: 68349513AA
+07:55:38 chain-unlinked power-steering-pump 1 numbers named by 68059524AF, no catalog link: 68059524AL
+07:55:38 chain-unlinked power-steering-pump 1 numbers named by 68059525AG, no catalog link: 68059525AM
+07:55:38 time budget reached records=2327
