@@ -739,6 +739,21 @@ _mand_cross = [(k, q["name"], q.get("yr_min")) for k, e in js.UNOBTANIUM_DB.item
 check("§24 no mandate row starts before its mandate year", not _mand_cross, str(_mand_cross[:5]))
 check("§24 mandate rows count as generic for coverage", __import__("mine_coverage_gaps").is_generic_only({_ABS, _CAM}))
 
+_R, _C, _B = js._ADAS_R["name"], js._ADAS_C["name"], js._ADAS_B["name"]
+def _st(y, mk, md, name):
+    return next((q.get("trim_status") for m in js.match_vehicle(y, mk, md) for q in m["top_parts"] if q["name"] == name), "absent")
+check("§24.2 every ADAS row name carries the calibration note",
+      all("match part #; needs calibration after install" in n for n in (_R, _C, _B)))
+check("§24.2 cited standard cells are confirmed (Corolla 2017 TSS-P, CR-V 2020, Fusion 2019 BLIS)",
+      _st(2017, "Toyota", "Corolla", _R) is None and _st(2020, "Honda", "CR-V", _C) is None and _st(2019, "Ford", "Fusion", _B) is None)
+check("§24.2 optional cells ship 'if equipped' (Fusion 2015 radar, Camry 2021, CR-V 2018)",
+      _st(2015, "Ford", "Fusion", _R) == "unconfirmed" and _st(2021, "Toyota", "Camry", _R) == "unconfirmed" and _st(2018, "Honda", "CR-V", _R) == "unconfirmed")
+check("§24.2 no ADAS row before its cited first year (Corolla 2016, Fusion 2012, Altima 2015 blind spot)",
+      _st(2016, "Toyota", "Corolla", _R) == "absent" and _st(2012, "Ford", "Fusion", _R) == "absent" and _st(2015, "Nissan", "Altima", "Blind Spot Radar Module") == "absent")
+check("§24.2 existing Hyundai/Nissan radar rows now 'if equipped'",
+      _st(2017, "Hyundai", "Elantra", "Smart Cruise Radar Module") == "unconfirmed" and _st(2017, "Nissan", "Altima", "Blind Spot Radar Module") == "unconfirmed")
+check("§24.2 a windshield-camera row doesn't block the 2020+ backup camera", _CAM in parts(2021, "Toyota", "Camry"))
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "milan", "encore", "captiva sport", "park avenue", "scion xb 2008-2015", "sonata", "infiniti qx60", "escort", "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):

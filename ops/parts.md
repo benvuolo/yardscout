@@ -1,4 +1,4 @@
-# Parts workstream — status (updated 2026-11-05, §13–22 done; §23 facelifts and §23.6 routing in a second session)
+# Parts workstream — status (updated 2026-11-06, §13–22 and §24 sensors done; §23 facelifts and §23.6 routing in a second session)
 
 Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 (`_GAP_MECH`, `_gap_rows`, `_GAP_GENERIC_KEYS`, per-model blocks),
@@ -267,9 +267,32 @@ The generic-only count re-matches every distinct year/make/model in
   workflow's `pip install requests beautifulsoup4` step is no longer needed
   (workflow file not touched here).
 
+## §24 sensors (2026-11-06, owner via hub: "have we paid attention to sensors?")
+
+- **24.1, federal-mandate rows** on every light-vehicle entry that already
+  ships rows. Heavy-duty entries are excluded.
+  - ABS/ESC pump + module, MY2013+ (FMVSS 126): 62,176 lot cars.
+  - Backup camera, MY2020+ (FMVSS 111): 1,194 lot cars.
+  - Both count as generic in coverage metrics.
+- **24.2, ADAS rows on 15 entries.** Every name says "match part #; needs
+  calibration after install". Cells and sources are in PARTS_GAPS §24.2.
+  - Standard (ranked): Corolla 2017–20, RAV4 2017, CR-V 2020 radar + camera;
+    Fusion 2019–20 blind spot.
+  - Everything else is option ("if equipped", $0 rank) with a spot-it hint.
+  - Existing Altima/Elantra/Sonata/Maxima radar rows re-flagged option.
+  - Lot reach: 9,955 cars show an ADAS row; 1,139 have a ranked one.
+- **Not done (no basis or not researched):**
+  - TPMS (indirect systems on some makes; 315/433 MHz per make);
+  - MAF (speed-density engines);
+  - parking sensors, rain/light sensors, 360 cameras;
+  - ADAS cells where the source doesn't name the sensor type (list in §24.2).
+- **App note (not Parts' file):** `docs/app.js` shows the `verify` hint only
+  on "if equipped" rows. That's why the calibration note is in the row name.
+
 ## Next
 
-1. Next block by generic-only cars: Volvo S40 (276), Saturn SL (267), Chevrolet Trax (266), Chevrolet Sonic (261), Ford Freestar (254), Ford Freestyle (252), Mitsubishi Mirage (233), Chevrolet Venture (226).
+1. Sensors follow-up: research the not-researched ADAS cells (§24.2 list) and parking/rain sensors per model.
+2. Next block by generic-only cars: Volvo S40 (276), Saturn SL (267), Chevrolet Trax (266), Chevrolet Sonic (261), Ford Freestar (254), Ford Freestyle (252), Mitsubishi Mirage (233), Chevrolet Venture (226).
    Research generations and facelifts with sources first. The Fiat 500L/500X
    and Encore GX have evergreen-only entries awaiting their own research.
 2. Follow-up: "ES 300"/"ES 330" listings match both `lexus es` and the

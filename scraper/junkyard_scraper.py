@@ -7743,7 +7743,7 @@ _MANDATE_ROWS = (
     (2013, {"name": "ABS / ESC Pump + Module (match part #)", "rarity": "Uncommon",
             "low": 50, "high": 140, "cost": 31}, ("abs",)),
     (2020, {"name": "Backup Camera (match part #)", "rarity": "Uncommon",
-            "low": 25, "high": 70, "cost": 15}, ("camera",)),
+            "low": 25, "high": 70, "cost": 15}, ("backup camera", "rear camera", "rearview camera")),
 )
 
 
@@ -7758,11 +7758,66 @@ def _apply_mandate_rows() -> None:
         lo, hi = e["year_range"]
         have = " | ".join(p["name"].lower() for p in e["top_parts"])
         for yr, row, tokens in _MANDATE_ROWS:
-            if hi < yr or any(re.search(rf"\b{t}\b", have) for t in tokens):
+            if hi < yr or any(re.search(rf"\b{re.escape(t)}\b", have) for t in tokens):
                 continue
             e["top_parts"].append({**row, "yr_min": max(lo, yr)})
 
 
+# ---- §24.2 ADAS sensors (PARTS_GAPS §24.2). Only cells whose source names
+# the sensor (radar / windshield camera / rear corner radar) are used; the
+# cited source per cell is in PARTS_GAPS §24.2. Option rows run from the
+# cited first year to the end of that generation ("if equipped", $0 rank);
+# standard rows cover only the cited years.
+_ADAS_NOTE = "match part #; needs calibration after install"
+_ADAS_R = {"name": f"Front ACC/AEB Radar ({_ADAS_NOTE})", "rarity": "Rare", "low": 80, "high": 200, "cost": 22,
+           "verify": "radar unit behind the grille emblem or lower bumper cover"}
+_ADAS_C = {"name": f"Windshield Lane/AEB Camera ({_ADAS_NOTE})", "rarity": "Rare", "low": 60, "high": 180, "cost": 20,
+           "verify": "camera housing at the top of the windshield behind the mirror"}
+_ADAS_B = {"name": f"Blind Spot Radar Pair ({_ADAS_NOTE})", "rarity": "Uncommon", "low": 60, "high": 160, "cost": 22,
+           "verify": "blind-spot warning lights in the side mirror glass"}
+
+
+def _adas(rows, lo, hi, option=True):
+    return [{**r, "yr_min": lo, "yr_max": hi, **({"option": True} if option else {})} for r in rows]
+
+
+_ADAS_ROWS = {
+    "fusion": [*_adas([_ADAS_R], 2013, 2020), *_adas([_ADAS_B], 2013, 2018), *_adas([_ADAS_B], 2019, 2020, option=False)],
+    "escape": [*_adas([_ADAS_B], 2013, 2019), *_adas([_ADAS_R, _ADAS_C], 2017, 2019)],
+    "malibu": _adas([_ADAS_R], 2016, 2018),
+    "sentra": _adas([_ADAS_R], 2016, 2019),
+    "chrysler 200": _adas([_ADAS_R, _ADAS_B], 2015, 2017),
+    "cherokee 2014-2024": _adas([_ADAS_R, _ADAS_C, _ADAS_B], 2014, 2018),
+    "explorer 2011-2019": _adas([_ADAS_R, _ADAS_B], 2016, 2019),
+    "rogue": _adas([_ADAS_B], 2017, 2020),
+    "corolla": _adas([_ADAS_R, _ADAS_C], 2017, 2020, option=False),
+    "camry": _adas([_ADAS_R, _ADAS_C], 2018, 2024),
+    "rav4": [*_adas([_ADAS_R, _ADAS_C], 2017, 2017, option=False), *_adas([_ADAS_R, _ADAS_C], 2018, 2018),
+             *_adas([_ADAS_B], 2016, 2018)],
+    "accord 2013-2017": _adas([_ADAS_R, _ADAS_C], 2016, 2017),
+    "accord 2018-2024": _adas([_ADAS_R, _ADAS_C], 2018, 2022),
+    "civic 2016-2024": _adas([_ADAS_R, _ADAS_C], 2016, 2021),
+    "cr-v": [*_adas([_ADAS_R, _ADAS_C], 2017, 2019), *_adas([_ADAS_R, _ADAS_C], 2020, 2020, option=False),
+             *_adas([_ADAS_R, _ADAS_C], 2021, 2022)],
+}
+# Existing radar rows on trims where the sources show the sensor was an
+# option (or trim-limited): flag them "if equipped".
+_ADAS_OPTION_FLAGS = (("altima", "Blind Spot Radar Module"), ("elantra", "Smart Cruise Radar Module"),
+                      ("sonata", "Smart Cruise Radar Module"), ("maxima", "Adaptive Cruise Radar"))
+
+
+def _apply_adas_rows() -> None:
+    for key, rows in _ADAS_ROWS.items():
+        UNOBTANIUM_DB[key]["top_parts"].extend(dict(r) for r in rows)
+    for key, name in _ADAS_OPTION_FLAGS:
+        hits = [p for p in UNOBTANIUM_DB[key]["top_parts"] if p["name"] == name]
+        if not hits:
+            raise KeyError(f"§24.2 option flag: {key!r} has no {name!r} row")
+        for p in hits:
+            p["option"] = True
+
+
+_apply_adas_rows()
 _apply_mandate_rows()
 # Runs after the platform families so they find and annotate the rows they
 # were curated against; each generation piece keeps the row's sharedWith.

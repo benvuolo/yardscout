@@ -2367,3 +2367,71 @@ Nissan radar rows, Distronic, one BMW MAF).
     wheel sensors, and per-make 315 vs 433 MHz needs its own basis.
   - MAF. Speed-density engines (many Chrysler/GM) have none; fitment is
     per engine.
+
+### 24.2 ADAS radar, windshield camera, blind-spot radar (named entries)
+
+Every row name ends "(match part #; needs calibration after install)".
+Each cell below comes from a source that names the sensor: radar, windshield
+camera, or rear corner radar. AEB or forward-collision features whose sensor
+type wasn't stated are left out.
+
+**Optional rows.** These are flagged `option` and ship "if equipped" at $0
+ranking value. Each runs from the cited first year to the end of that
+generation, and carries a spot-it hint. **Standard rows** cover the cited
+years only.
+
+| Entry | Rows | Years | Basis |
+|---|---|---|---|
+| fusion | front radar opt | 2013–20 | Ford 2013 Fusion launch release (theautochannel reprint, 2012-05-10) |
+| fusion | blind spot opt / **std** | 2013–18 / **2019–20** | same; Ford 2019 Fusion release, Co-Pilot360 standard (automotiveworld.com reprint) |
+| escape | blind spot opt | 2013–19 | Ford 2013 Escape release (theautochannel, 2011-11-16) |
+| escape | radar + camera opt | 2017–19 | Ford 2017 Escape product sheet (media.ford.com) |
+| malibu | radar opt (Premier) | 2016–18 | autoblog 2015-07-28, 2016 Malibu safety |
+| sentra | radar opt (Tech pkg) | 2016–19 | Nissan 2016 Sentra pricing release (usa.nissannews.com) |
+| chrysler 200 | radar + blind spot (UWB radar) opt | 2015–17 | FCA/IIHS TSP+ release (prnewswire) |
+| cherokee 2014-2024 | radar + camera + blind spot opt | 2014–18 | FCA 2014 Cherokee release (media.stellantisnorthamerica.com id=14042) |
+| explorer 2011-2019 | radar + blind spot opt | 2016–19 | Edmunds 2016 Explorer trims |
+| rogue | blind spot (radar) opt | 2017–20 | Nissan 2017 Rogue release (usa.nissannews.com) |
+| corolla | radar + camera **std** (TSS-P / TSS 2.0) | 2017–20 | Toyota pressroom (TSS-P std 2017); 2020 Corolla eBrochure |
+| camry | radar + camera opt | 2018–24 | auto123 2018 Camry (third-party only, so not claimed standard) |
+| rav4 | radar + camera **std** 2017; opt 2018; blind spot opt 2016–18 | | automotive-fleet 2017 RAV4 TSS-P std; Toyota Canada 2016 RAV4 specs |
+| accord 2013-2017 / 2018-2024 | radar + camera opt | 2016–17 / 2018–22 | conceptcarz 2016 Accord; autoguide 2018 (secondary, so opt) |
+| civic 2016-2024 | radar + camera opt | 2016–21 | automotive-fleet 2016 Civic. The 2019 "standard" release covers sedan/coupe only; Type R lacked Honda Sensing, so the row stays opt. |
+| cr-v | radar + camera opt / **std** / opt | 2017–19 / **2020** / 2021–22 | Honda 2017 CR-V release (std EX+); Honda 2020 CR-V release (std) |
+
+**Re-flagged as `option`.** These existing radar rows were shipping as
+confirmed. The sources show trim-limited or package-only fitment:
+- Altima Blind Spot Radar: 2016 SV/SL only; 2019 Safety Shield 360 SV/SL only.
+- Elantra Smart Cruise: 2017 Limited Ultimate package.
+- Sonata Smart Cruise: optional in 2015; standard only by 2020.
+- Maxima Adaptive Cruise Radar: no standard-equipment basis.
+
+**Left out, no basis or sources conflict:**
+- Altima 2013–15 blind spot: it uses the rear camera, not radar.
+- Front-sensor type unstated, so no row:
+  - Altima 2016+ forward sensor;
+  - Cruze, Equinox and Impala FCA/LKA;
+  - Malibu blind spot;
+  - Hyundai/Kia lower-trim AEB;
+  - Nissan AEB and Rogue cruise;
+  - Fusion/Explorer 2020 Co-Pilot360 AEB.
+- Sources conflict:
+  - 2015 and 2020 Sonata blind spot;
+  - RAV4 2016 XLE;
+  - CR-V blind spot vs LaneWatch;
+  - Optima 2019 (no Kia release).
+- Not researched:
+  - Camry 2013–17, Corolla 2013–16, RAV4 2019+;
+  - Accord 2013–15, CR-V 2015–16;
+  - Explorer 2013–15, Escape 2020.
+
+**Not done in this block:**
+- parking sensors;
+- rain/light sensors;
+- 360 cameras;
+- TPMS and MAF (see 24.1).
+
+**Lot reach** (334,432 cars):
+- 9,955 cars now show at least one ADAS row.
+- 1,139 of those have a standard (ranked) ADAS row.
+- New rows: blind spot 5,750 cars, front radar 5,523, windshield camera 1,170.
