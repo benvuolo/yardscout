@@ -911,3 +911,253 @@
 05:34:32 chain-unlinked fuel-pump-module 1 numbers named by 5093455AB, no catalog link: 5093455AD
 05:36:24 seg done tier=A Chrysler Sebring [2001, 2006] seeds=[2004] records=1650 errors=8
 05:36:24 time budget reached records=1650
+05:36:38 start site=www.moparpartsgiant.com mode=worklist tiers=['A', 'B'] records=1650 list_lines=383 year_lines=33 url_index=3725
+05:36:38 seg done tier=A Dodge Ram 1500 [1971, 2018] seeds=[2002] records=1650 errors=8
+05:36:38 seg done tier=A Dodge Grand Caravan [2008, 2024] seeds=[2010] records=1650 errors=8
+05:36:38 seg done tier=A Chrysler 200 [1979, 2022] seeds=[2015] records=1650 errors=8
+05:36:38 seg done tier=A Dodge Journey [2009, 2020] seeds=[2012] records=1650 errors=8
+05:36:38 seg done tier=A Chrysler Town & Country [2008, 2016] seeds=[2008] records=1650 errors=8
+05:36:38 seg done tier=A Chrysler 300 [1999, 2021] seeds=[2006] records=1650 errors=8
+05:36:38 seg done tier=A Dodge Avenger [1995, 2014] seeds=[2013] records=1650 errors=8
+05:36:38 seg done tier=A Chrysler PT Cruiser [2001, 2010] seeds=[2006] records=1650 errors=8
+05:36:38 seg done tier=A Dodge Charger [1971, 2010] seeds=[2007] records=1650 errors=8
+05:36:38 seg done tier=A Dodge Dakota [1997, 2004] seeds=[2000] records=1650 errors=8
+05:36:38 seg done tier=A Dodge Caravan [1984, 2020] seeds=[2005] records=1650 errors=8
+05:36:38 seg done tier=A Chrysler Town & Country [1992, 2007] seeds=[2005] records=1650 errors=8
+05:36:38 seg done tier=A Dodge Dart [1960, 2016] seeds=[2013] records=1650 errors=8
+05:36:38 seg done tier=A Dodge Caliber [2007, 2012] seeds=[2007] records=1650 errors=8
+05:36:38 seg done tier=A Dodge Grand Caravan [2001, 2007] seeds=[2005] records=1650 errors=8
+05:36:38 seg done tier=A Dodge Charger [2011, 2023] seeds=[2013] records=1650 errors=8
+05:36:38 seg done tier=A Dodge Durango [2004, 2009] seeds=[2005] records=1650 errors=8
+05:36:38 seg done tier=A Dodge Durango [1998, 2003] seeds=[2003] records=1650 errors=8
+05:36:38 seg done tier=A Chrysler Sebring [2007, 2011] seeds=[2008] records=1650 errors=8
+05:36:38 seg done tier=A Dodge Dakota [2005, 2011] seeds=[2005] records=1650 errors=8
+05:36:38 seg done tier=A Chrysler Pacifica [2004, 2008] seeds=[2006] records=1650 errors=8
+05:36:38 seg done tier=A Dodge Nitro [2007, 2011] seeds=[2007] records=1650 errors=8
+05:36:38 seg done tier=A Ram 1500 [2009, 2022] seeds=[2012] records=1650 errors=8
+05:36:38 seg done tier=A Chrysler Sebring [2001, 2006] seeds=[2004] records=1650 errors=8
+05:36:46 chain-unlinked alternator 1 numbers named by 4801779AG, no catalog link: 4801779AI
+05:37:10 chain-unlinked ac-compressor 1 numbers named by 68021638AF, no catalog link: 68021638AH
+05:37:50 chain-unlinked tail-lights 1 numbers named by 55079136AF, no catalog link: 55079136AG
+05:37:50 chain-unlinked tail-lights 1 numbers named by 55079137AF, no catalog link: 55079137AG
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1NT28AXRAJ, no catalog link: 5SH42TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1NT28CDMAJ, no catalog link: 5SH42TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1NT28GTWAJ, no catalog link: 5SH42TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1NT28JRMAK, no catalog link: 5SH42TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1NT28JSCAK, no catalog link: 5SH42JSCAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1NT28KARAJ, no catalog link: 5SH42TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1NT28KBUAJ, no catalog link: 5SH42TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1NT28LAUAK, no catalog link: 5SH42TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1NT28WS2AJ, no catalog link: 5SH42TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1NT29AXRAJ, no catalog link: 5SH43TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1NT29CDMAJ, no catalog link: 5SH43TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1NT29GTWAJ, no catalog link: 5SH43GTWAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1NT29JRMAK, no catalog link: 5SH43JRMAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1NT29JSCAK, no catalog link: 5SH43JSCAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1NT29KARAJ, no catalog link: 5SH43KARAB
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1NT29KBUAJ, no catalog link: 5SH43TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1NT29LAUAK, no catalog link: 5SH43TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1NT29WS2AJ, no catalog link: 5SH43TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1RC30AXRAI, no catalog link: 5SH44TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1RC30CDMAI, no catalog link: 5SH44TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1RC30GTWAJ, no catalog link: 5SH44TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1RC30JRMAJ, no catalog link: 5SH44TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1RC30JRPAJ, no catalog link: 5SH44JRPAB
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1RC30JSCAJ, no catalog link: 5SH44JSCAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1RC30KARAI, no catalog link: 5SH44TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1RC30KBUAI, no catalog link: 5SH44TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1RC30LAUAJ, no catalog link: 5SH44LAUAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1RC30WS2AI, no catalog link: 5SH44TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1RC31AXRAI, no catalog link: 5SH45TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1RC31CDMAI, no catalog link: 5SH45TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1RC31GTWAJ, no catalog link: 1RC31GTWAI
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1RC31JRMAJ, no catalog link: 5SH45JRMAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1RC31JRPAJ, no catalog link: 5SH45TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1RC31JSCAJ, no catalog link: 5SH45JSCAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1RC31KARAI, no catalog link: 5SH45TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1RC31KBUAI, no catalog link: 5SH45TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1RC31WS2AI, no catalog link: 5SH45TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1XW46AXRAA, no catalog link: 5SH46TZZAG
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1XW46CDMAA, no catalog link: 5SH46TZZAG
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1XW46GTWAA, no catalog link: 5SH46TZZAG
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1XW46JRMAB, no catalog link: 5SH46TZZAG
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1XW46JRPAB, no catalog link: 5SH46TZZAG
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1XW46JSCAB, no catalog link: 5SH46JSCAG
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1XW46KARAA, no catalog link: 5SH46TZZAG
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1XW46KBUAA, no catalog link: 5SH46TZZAG
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1XW46LAUAB, no catalog link: 5SH46TZZAG
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1XW46WS2AA, no catalog link: 5SH46TZZAG
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1XW47AXRAA, no catalog link: 5SH47TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1XW47CDMAA, no catalog link: 5SH47TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1XW47GTWAA, no catalog link: 5SH47TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1XW47JRMAB, no catalog link: 5SH47JRMAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1XW47JRPAA, no catalog link: 5SH47TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1XW47JSCAB, no catalog link: 5SH47JSCAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1XW47KARAA, no catalog link: 5SH47TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1XW47KBUAA, no catalog link: 5SH47KBUAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1XW47LAUAB, no catalog link: 5SH47TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 1XW47WS2AA, no catalog link: 5SH47TZZAF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 5182328AJ, no catalog link: 68237572AF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 5182329AJ, no catalog link: 68237573AF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 55000946AE, no catalog link: 68237574AF
+05:46:14 chain-unlinked side-mirrors 1 numbers named by 55000947AE, no catalog link: 68237575AF
+05:46:30 chain-unlinked window-switch 1 numbers named by 68085690AB, no catalog link: 68085690AC
+05:47:35 chain-unlinked climate-control 1 numbers named by 68088062AP, no catalog link: 68088062AR
+05:47:35 chain-unlinked climate-control 1 numbers named by 55111925AP, no catalog link: 55111925AS
+05:47:35 chain-unlinked climate-control 1 numbers named by 68163934AP, no catalog link: 68163934AR
+05:47:35 chain-unlinked climate-control 1 numbers named by 55111865AP, no catalog link: 55111865AR
+05:47:35 chain-unlinked climate-control 1 numbers named by 68088603AP, no catalog link: 68088603AR
+05:47:35 chain-unlinked climate-control 1 numbers named by 55111866AD, no catalog link: 55111866AC
+05:47:35 chain-unlinked climate-control 1 numbers named by 68089124AC, no catalog link: 68089124AB
+05:48:14 chain-unlinked fuel-pump-module 1 numbers named by 5145585AB, no catalog link: 5145585AE
+05:48:14 chain-unlinked fuel-pump-module 1 numbers named by RL145583AB, no catalog link: 5145583AE
+05:48:14 chain-unlinked fuel-pump-module 1 numbers named by RL145586AB, no catalog link: 5145586AD
+05:49:02 chain-unlinked power-steering-pump 1 numbers named by 68068641AB, no catalog link: 68068641AA
+05:49:02 chain-unlinked power-steering-pump 1 numbers named by 52124998AH, no catalog link: 52124998AJ
+05:49:58 chain-unlinked alternator 1 numbers named by 4801779AI, no catalog link: 4801779AH
+05:49:58 chain-unlinked alternator 1 numbers named by 56029649AB, no catalog link: 56029649AC
+05:49:58 chain-unlinked alternator 1 numbers named by 56029789AA, no catalog link: 56029789AB
+05:50:22 chain-unlinked starter 2 numbers named by 5035322AC, no catalog link: 5035322AB, 5035322AA
+05:50:22 chain-unlinked starter 2 numbers named by 56029780AD, no catalog link: 56029780AC, 56029780AB
+05:50:54 chain-unlinked ac-compressor 1 numbers named by 68251535AE, no catalog link: 68251535AF
+05:50:54 chain-unlinked ac-compressor 1 numbers named by 68158260AA, no catalog link: 57009599AA
+05:50:54 chain-unlinked ac-compressor 1 numbers named by 68383659AA, no catalog link: 57009598AA
+05:51:42 chain-unlinked tail-lights 1 numbers named by 68272126AB, no catalog link: 68272126AC
+05:51:42 chain-unlinked tail-lights 3 numbers named by 68272127AB, no catalog link: 68272127AA, 68155949AC, 68155949AD
+06:12:22 chain-unlinked side-mirrors 9 numbers named by 68237575AF, no catalog link: 68237575AE, 68237575AA, 68237575AD, 68237575AC, 55000947AF, 55000947AD, 55000947AB, 55000947AC, 68237575AB
+06:12:22 chain-unlinked side-mirrors 9 numbers named by 5SH44JRMAF, no catalog link: 1RC30JRMAH, 5SH44JRMAD, 1RC30JRMAI, 1RC30JRMAG, 5SH44JRMAB, 5SH44JRMAE, 5SH44JRMAA, 5SH44JRMAC, 5SH44TZZAF
+06:12:22 chain-unlinked side-mirrors 6 numbers named by 5SH45GW7AF, no catalog link: 1RC31GW7AJ, 5SH45GW7AC, 5SH45GW7AB, 5SH45GW7AD, 5SH45GW7AA, 5SH45GW7AE
+06:12:22 chain-unlinked side-mirrors 5 numbers named by 5SH47JSCAF, no catalog link: 5SH47JSCAE, 5SH47JSCAD, 5SH47JSCAA, 5SH47JSCAB, 5SH47JSCAC
+06:12:22 chain-unlinked side-mirrors 9 numbers named by 68237572AF, no catalog link: 68237572AD, 68237572AE, 5182328AH, 5182328AI, 5182328AK, 5182328AG, 68237572AB, 68237572AA, 68237572AC
+06:12:22 chain-unlinked side-mirrors 5 numbers named by 5SH42DX8AF, no catalog link: 5SH42DX8AA, 5SH42DX8AB, 5SH42DX8AC, 5SH42DX8AE, 5SH42DX8AD
+06:12:22 chain-unlinked side-mirrors 6 numbers named by 5SH42GW7AF, no catalog link: 5SH42GW7AA, 1NT28GW7AK, 5SH42GW7AD, 5SH42GW7AE, 5SH42GW7AC, 5SH42GW7AB
+06:12:22 chain-unlinked side-mirrors 9 numbers named by 5SH42JRMAF, no catalog link: 5SH42JRMAE, 5SH42JRMAB, 1NT28JRMAH, 1NT28JRMAJ, 5SH42JRMAC, 5SH42JRMAA, 5SH42JRMAD, 1NT28JRMAI, 5SH42TZZAF
+06:12:22 chain-unlinked side-mirrors 5 numbers named by 5SH42JSCAF, no catalog link: 5SH42JSCAB, 5SH42JSCAD, 5SH42JSCAC, 5SH42JSCAE, 5SH42JSCAA
+06:12:22 chain-unlinked side-mirrors 1 numbers named by 5SH42JWDAF, no catalog link: 5SH42TZZAF
+06:12:22 chain-unlinked side-mirrors 3 numbers named by 5SH42KXJAF, no catalog link: 5SH42KXJAD, 5SH42KXJAE, 5SH42KXJAC
+06:12:22 chain-unlinked side-mirrors 6 numbers named by 5SH42LAUAF, no catalog link: 5SH42LAUAB, 5SH42LAUAD, 5SH42LAUAE, 5SH42LAUAC, 5SH42LAUAA, 5SH42TZZAF
+06:12:22 chain-unlinked side-mirrors 4 numbers named by 5SH42NRVAF, no catalog link: 5SH42NRVAC, 5SH42NRVAE, 5SH42NRVAD, 5SH42TZZAF
+06:12:22 chain-unlinked side-mirrors 2 numbers named by 5SH42SHRAF, no catalog link: 5SH42SHRAE, 5SH42TZZAF
+06:12:22 chain-unlinked side-mirrors 1 numbers named by 5SH42TBFAF, no catalog link: 5SH42TZZAF
+06:12:22 chain-unlinked side-mirrors 5 numbers named by 5SH43DX8AF, no catalog link: 5SH43DX8AC, 5SH43DX8AE, 5SH43DX8AA, 5SH43DX8AB, 5SH43DX8AD
+06:12:22 chain-unlinked side-mirrors 6 numbers named by 5SH43GW7AF, no catalog link: 5SH43GW7AE, 1NT29GW7AK, 5SH43GW7AA, 5SH43GW7AD, 5SH43GW7AB, 5SH43GW7AC
+06:12:22 chain-unlinked side-mirrors 8 numbers named by 5SH43JRMAF, no catalog link: 1NT29JRMAI, 1NT29JRMAJ, 5SH43JRMAC, 1NT29JRMAH, 5SH43JRMAD, 5SH43JRMAE, 5SH43JRMAA, 5SH43JRMAB
+06:12:22 chain-unlinked side-mirrors 5 numbers named by 5SH43JSCAF, no catalog link: 5SH43JSCAC, 5SH43JSCAB, 5SH43JSCAE, 5SH43JSCAA, 5SH43JSCAD
+06:12:22 chain-unlinked side-mirrors 1 numbers named by 5SH43JWDAF, no catalog link: 5SH43TZZAF
+06:12:22 chain-unlinked side-mirrors 3 numbers named by 5SH43KXJAF, no catalog link: 5SH43KXJAD, 5SH43KXJAE, 5SH43KXJAC
+06:12:22 chain-unlinked side-mirrors 6 numbers named by 5SH43LAUAF, no catalog link: 5SH43LAUAD, 5SH43LAUAC, 5SH43LAUAA, 5SH43LAUAE, 5SH43LAUAB, 5SH43TZZAF
+06:12:22 chain-unlinked side-mirrors 3 numbers named by 5SH43NRVAF, no catalog link: 5SH43NRVAD, 5SH43NRVAC, 5SH43NRVAE
+06:12:22 chain-unlinked side-mirrors 2 numbers named by 5SH43SHRAF, no catalog link: 5SH43SHRAE, 5SH43TZZAF
+06:12:22 chain-unlinked side-mirrors 1 numbers named by 5SH43TBFAF, no catalog link: 5SH43TZZAF
+06:12:22 chain-unlinked side-mirrors 5 numbers named by 5SH44DX8AF, no catalog link: 5SH44DX8AD, 5SH44DX8AA, 5SH44DX8AE, 5SH44DX8AC, 5SH44DX8AB
+06:12:22 chain-unlinked side-mirrors 6 numbers named by 5SH44GW7AF, no catalog link: 1RC30GW7AJ, 5SH44GW7AC, 5SH44GW7AA, 5SH44GW7AD, 5SH44GW7AE, 5SH44GW7AB
+06:12:22 chain-unlinked side-mirrors 5 numbers named by 5SH44JSCAF, no catalog link: 5SH44JSCAE, 5SH44JSCAB, 5SH44JSCAA, 5SH44JSCAC, 5SH44JSCAD
+06:12:22 chain-unlinked side-mirrors 1 numbers named by 5SH44JWDAF, no catalog link: 5SH44TZZAF
+06:12:22 chain-unlinked side-mirrors 3 numbers named by 5SH44KXJAF, no catalog link: 5SH44KXJAE, 5SH44KXJAD, 5SH44KXJAC
+06:12:22 chain-unlinked side-mirrors 5 numbers named by 5SH44LAUAF, no catalog link: 5SH44LAUAA, 5SH44LAUAB, 5SH44LAUAD, 5SH44LAUAE, 5SH44LAUAC
+06:12:22 chain-unlinked side-mirrors 4 numbers named by 5SH44NRVAF, no catalog link: 5SH44NRVAC, 5SH44NRVAD, 5SH44NRVAE, 5SH44TZZAF
+06:12:22 chain-unlinked side-mirrors 1 numbers named by 5SH44RFQAF, no catalog link: 5SH44TZZAF
+06:12:22 chain-unlinked side-mirrors 2 numbers named by 5SH44SHRAF, no catalog link: 5SH44SHRAE, 5SH44TZZAF
+06:12:22 chain-unlinked side-mirrors 1 numbers named by 5SH44TBFAF, no catalog link: 5SH44TZZAF
+06:12:22 chain-unlinked side-mirrors 1 numbers named by 5SH45DX8AF, no catalog link: 5SH45TZZAF
+06:12:22 chain-unlinked side-mirrors 8 numbers named by 5SH45JRMAF, no catalog link: 5SH45JRMAC, 5SH45JRMAD, 1RC31JRMAI, 1RC31JRMAH, 1RC31JRMAG, 5SH45JRMAA, 5SH45JRMAE, 5SH45JRMAB
+06:12:22 chain-unlinked side-mirrors 5 numbers named by 5SH45JSCAF, no catalog link: 5SH45JSCAD, 5SH45JSCAA, 5SH45JSCAB, 5SH45JSCAC, 5SH45JSCAE
+06:12:22 chain-unlinked side-mirrors 4 numbers named by 5SH45JWDAF, no catalog link: 5SH45JWDAE, 5SH45JWDAD, 5SH45JWDAC, 5SH45TZZAF
+06:12:22 chain-unlinked side-mirrors 3 numbers named by 5SH45KXJAF, no catalog link: 5SH45KXJAD, 5SH45KXJAE, 5SH45KXJAC
+06:12:22 chain-unlinked side-mirrors 7 numbers named by 5SH45LAUAF, no catalog link: 5SH45LAUAA, 1RC31LAUAJ, 5SH45LAUAD, 5SH45LAUAB, 5SH45LAUAC, 5SH45LAUAE, 5SH45TZZAF
+06:12:22 chain-unlinked side-mirrors 4 numbers named by 5SH45NRVAF, no catalog link: 5SH45NRVAE, 5SH45NRVAD, 5SH45NRVAC, 5SH45TZZAF
+06:12:22 chain-unlinked side-mirrors 1 numbers named by 5SH45RFQAF, no catalog link: 5SH45TZZAF
+06:12:22 chain-unlinked side-mirrors 2 numbers named by 5SH45SHRAF, no catalog link: 5SH45SHRAE, 5SH45TZZAF
+06:12:22 chain-unlinked side-mirrors 1 numbers named by 5SH45TBFAF, no catalog link: 5SH45TZZAF
+06:12:22 chain-unlinked side-mirrors 6 numbers named by 5SH46DX8AG, no catalog link: 5SH46DX8AB, 5SH46DX8AC, 5SH46DX8AF, 5SH46DX8AE, 5SH46DX8AA, 5SH46DX8AD
+06:12:22 chain-unlinked side-mirrors 6 numbers named by 5SH46GW7AG, no catalog link: 5SH46GW7AB, 5SH46GW7AF, 5SH46GW7AC, 5SH46GW7AA, 5SH46GW7AD, 5SH46GW7AE
+06:12:22 chain-unlinked side-mirrors 7 numbers named by 5SH46JRMAG, no catalog link: 5SH46JRMAB, 5SH46JRMAD, 5SH46JRMAE, 5SH46JRMAC, 5SH46JRMAA, 5SH46JRMAF, 5SH46TZZAG
+06:12:22 chain-unlinked side-mirrors 6 numbers named by 5SH46JSCAG, no catalog link: 5SH46JSCAC, 5SH46JSCAE, 5SH46JSCAA, 5SH46JSCAF, 5SH46JSCAD, 5SH46JSCAB
+06:12:22 chain-unlinked side-mirrors 1 numbers named by 5SH46JWDAG, no catalog link: 5SH46TZZAG
+06:12:22 chain-unlinked side-mirrors 4 numbers named by 5SH46KXJAG, no catalog link: 5SH46KXJAE, 5SH46KXJAF, 5SH46KXJAC, 5SH46KXJAD
+06:12:22 chain-unlinked side-mirrors 7 numbers named by 5SH46LAUAG, no catalog link: 5SH46LAUAB, 5SH46LAUAA, 5SH46LAUAF, 5SH46LAUAD, 5SH46LAUAC, 5SH46LAUAE, 5SH46TZZAG
+06:12:23 chain-unlinked side-mirrors 5 numbers named by 5SH46NRVAG, no catalog link: 5SH46NRVAD, 5SH46NRVAE, 5SH46NRVAF, 5SH46NRVAC, 5SH46TZZAG
+06:12:23 chain-unlinked side-mirrors 2 numbers named by 5SH46PDNAG, no catalog link: 5SH46PDNAF, 5SH46TZZAG
+06:12:23 chain-unlinked side-mirrors 2 numbers named by 5SH46RFQAG, no catalog link: 5SH46RFQAF, 5SH46TZZAG
+06:12:23 chain-unlinked side-mirrors 4 numbers named by 5SH46SHRAG, no catalog link: 5SH46SHRAF, 5SH46SHRAE, 5SH46SHRAD, 5SH46TZZAG
+06:12:23 chain-unlinked side-mirrors 2 numbers named by 5SH46TBFAG, no catalog link: 5SH46TBFAF, 5SH46TZZAG
+06:12:23 chain-unlinked side-mirrors 5 numbers named by 5SH47DX8AF, no catalog link: 5SH47DX8AE, 5SH47DX8AB, 5SH47DX8AC, 5SH47DX8AA, 5SH47DX8AD
+06:12:23 chain-unlinked side-mirrors 6 numbers named by 5SH47GW7AF, no catalog link: 5SH47GW7AB, 1XW47GW7AB, 5SH47GW7AC, 5SH47GW7AA, 5SH47GW7AE, 5SH47GW7AD
+06:12:23 chain-unlinked side-mirrors 5 numbers named by 5SH47JRMAF, no catalog link: 5SH47JRMAB, 5SH47JRMAA, 5SH47JRMAC, 5SH47JRMAD, 5SH47JRMAE
+06:12:23 chain-unlinked side-mirrors 1 numbers named by 5SH47JWDAF, no catalog link: 5SH47TZZAF
+06:12:23 chain-unlinked side-mirrors 3 numbers named by 5SH47KXJAF, no catalog link: 5SH47KXJAE, 5SH47KXJAC, 5SH47KXJAD
+06:12:23 chain-unlinked side-mirrors 6 numbers named by 5SH47LAUAF, no catalog link: 5SH47LAUAB, 5SH47LAUAA, 5SH47LAUAC, 5SH47LAUAD, 5SH47LAUAE, 5SH47TZZAF
+06:12:23 chain-unlinked side-mirrors 4 numbers named by 5SH47NRVAF, no catalog link: 5SH47NRVAC, 5SH47NRVAE, 5SH47NRVAD, 5SH47TZZAF
+06:12:23 chain-unlinked side-mirrors 1 numbers named by 5SH47RFQAF, no catalog link: 5SH47TZZAF
+06:12:23 chain-unlinked side-mirrors 3 numbers named by 5SH47SHRAF, no catalog link: 5SH47SHRAD, 5SH47SHRAE, 5SH47TZZAF
+06:12:23 chain-unlinked side-mirrors 1 numbers named by 5SH47TBFAF, no catalog link: 5SH47TZZAF
+06:12:23 chain-unlinked side-mirrors 5 numbers named by 5VN56DX8AF, no catalog link: 5VN56DX8AB, 5VN56DX8AE, 5VN56DX8AA, 5VN56DX8AC, 5VN56DX8AD
+06:12:23 chain-unlinked side-mirrors 5 numbers named by 5VN56GW7AF, no catalog link: 5VN56GW7AB, 5VN56GW7AA, 5VN56GW7AD, 5VN56GW7AE, 5VN56GW7AC
+06:12:23 chain-unlinked side-mirrors 5 numbers named by 5VN56JSCAF, no catalog link: 5VN56JSCAE, 5VN56JSCAA, 5VN56JSCAC, 5VN56JSCAB, 5VN56JSCAD
+06:12:23 chain-unlinked side-mirrors 4 numbers named by 5VN56JWDAF, no catalog link: 5VN56JWDAE, 5VN56JWDAD, 5VN56JWDAC, 5VN56TZZAF
+06:12:23 chain-unlinked side-mirrors 3 numbers named by 5VN56KXJAF, no catalog link: 5VN56KXJAC, 5VN56KXJAD, 5VN56KXJAE
+06:12:23 chain-unlinked side-mirrors 6 numbers named by 5VN56LAUAF, no catalog link: 5VN56LAUAE, 5VN56LAUAB, 5VN56LAUAC, 5VN56LAUAA, 5VN56LAUAD, 5VN56TZZAF
+06:12:23 chain-unlinked side-mirrors 4 numbers named by 5VN56NRVAF, no catalog link: 5VN56NRVAD, 5VN56NRVAC, 5VN56NRVAE, 5VN56TZZAF
+06:12:23 chain-unlinked side-mirrors 3 numbers named by 5VN56SHRAF, no catalog link: 5VN56SHRAE, 5VN56SHRAD, 5VN56TZZAF
+06:12:23 chain-unlinked side-mirrors 5 numbers named by 5VN57DX8AF, no catalog link: 5VN57DX8AD, 5VN57DX8AE, 5VN57DX8AC, 5VN57DX8AA, 5VN57DX8AB
+06:12:23 chain-unlinked side-mirrors 5 numbers named by 5VN57GW7AF, no catalog link: 5VN57GW7AD, 5VN57GW7AC, 5VN57GW7AE, 5VN57GW7AA, 5VN57GW7AB
+06:12:23 chain-unlinked side-mirrors 6 numbers named by 5VN57JRMAF, no catalog link: 5VN57JRMAB, 5VN57JRMAD, 5VN57JRMAE, 5VN57JRMAC, 5VN57JRMAA, 5VN57TZZAF
+06:12:23 chain-unlinked side-mirrors 3 numbers named by 5VN57JSCAF, no catalog link: 5VN57JSCAC, 5VN57JSCAD, 5VN57JSCAE
+06:12:23 chain-unlinked side-mirrors 3 numbers named by 5VN57JWDAF, no catalog link: 5VN57JWDAC, 5VN57JWDAD, 5VN57JWDAE
+06:12:23 chain-unlinked side-mirrors 2 numbers named by 5VN57KXJAF, no catalog link: 5VN57KXJAE, 5VN57KXJAD
+06:12:23 chain-unlinked side-mirrors 6 numbers named by 5VN57LAUAF, no catalog link: 5VN57LAUAA, 5VN57LAUAC, 5VN57LAUAB, 5VN57LAUAE, 5VN57LAUAD, 5VN57TZZAF
+06:12:23 chain-unlinked side-mirrors 4 numbers named by 5VN57NRVAF, no catalog link: 5VN57NRVAC, 5VN57NRVAE, 5VN57NRVAD, 5VN57TZZAF
+06:12:23 chain-unlinked side-mirrors 1 numbers named by 5VN57RFQAF, no catalog link: 5VN57TZZAF
+06:12:23 chain-unlinked side-mirrors 3 numbers named by 5VN57SHRAF, no catalog link: 5VN57SHRAE, 5VN57SHRAD, 5VN57TZZAF
+06:12:23 chain-unlinked side-mirrors 1 numbers named by 5VN57TBFAF, no catalog link: 5VN57TZZAF
+06:12:23 chain-unlinked side-mirrors 5 numbers named by 5VN58DX8AF, no catalog link: 5VN58DX8AC, 5VN58DX8AE, 5VN58DX8AB, 5VN58DX8AA, 5VN58DX8AD
+06:12:23 chain-unlinked side-mirrors 5 numbers named by 5VN58GW7AF, no catalog link: 5VN58GW7AC, 5VN58GW7AA, 5VN58GW7AE, 5VN58GW7AB, 5VN58GW7AD
+06:12:23 chain-unlinked side-mirrors 6 numbers named by 5VN58JRMAF, no catalog link: 5VN58JRMAB, 5VN58JRMAA, 5VN58JRMAD, 5VN58JRMAC, 5VN58JRMAE, 5VN58TZZAF
+06:12:23 chain-unlinked side-mirrors 5 numbers named by 5VN58JSCAF, no catalog link: 5VN58JSCAB, 5VN58JSCAA, 5VN58JSCAE, 5VN58JSCAC, 5VN58JSCAD
+06:12:23 chain-unlinked side-mirrors 4 numbers named by 5VN58JWDAF, no catalog link: 5VN58JWDAC, 5VN58JWDAD, 5VN58JWDAE, 5VN58TZZAF
+06:12:23 chain-unlinked side-mirrors 3 numbers named by 5VN58KXJAF, no catalog link: 5VN58KXJAC, 5VN58KXJAE, 5VN58KXJAD
+06:12:23 chain-unlinked side-mirrors 5 numbers named by 5VN58LAUAF, no catalog link: 5VN58LAUAD, 5VN58LAUAA, 5VN58LAUAC, 5VN58LAUAE, 5VN58LAUAB
+06:12:23 chain-unlinked side-mirrors 4 numbers named by 5VN58NRVAF, no catalog link: 5VN58NRVAD, 5VN58NRVAC, 5VN58NRVAE, 5VN58TZZAF
+06:12:23 chain-unlinked side-mirrors 1 numbers named by 5VN58RFQAF, no catalog link: 5VN58TZZAF
+06:12:23 chain-unlinked side-mirrors 3 numbers named by 5VN58SHRAF, no catalog link: 5VN58SHRAE, 5VN58SHRAD, 5VN58TZZAF
+06:12:23 chain-unlinked side-mirrors 1 numbers named by 5VN58TBFAF, no catalog link: 5VN58TZZAF
+06:12:23 chain-unlinked side-mirrors 15 numbers named by 68237573AF, no catalog link: 68237573AA, 5182329AE, 68237573AD, 5182329AD, 5182329AA, 68237573AE, 5182329AH, 5182329AI, 5182329AB, 5182329AF, 5182329AC, 5182329AK, 5182329AG, 68237573AC, 68237573AB
+06:12:23 chain-unlinked side-mirrors 9 numbers named by 68237574AF, no catalog link: 55000946AB, 68237574AA, 55000946AC, 55000946AF, 55000946AD, 68237574AB, 68237574AE, 68237574AC, 68237574AD
+06:12:23 chain-unlinked side-mirrors 5 numbers named by 68249320AF, no catalog link: 68249320AB, 68249320AC, 68249320AD, 68249320AA, 68249320AE
+06:12:23 chain-unlinked side-mirrors 5 numbers named by 68249321AF, no catalog link: 68249321AD, 68249321AE, 68249321AC, 68249321AB, 68249321AA
+06:12:23 chain-unlinked side-mirrors 3 numbers named by 68306188AE, no catalog link: 68306188AB, 68306188AC, 68306188AD
+06:12:23 chain-unlinked side-mirrors 3 numbers named by 68306189AE, no catalog link: 68306189AC, 68306189AB, 68306189AD
+06:12:23 chain-unlinked side-mirrors 4 numbers named by 68306190AF, no catalog link: 68306190AE, 68306190AD, 68306190AB, 68306190AC
+06:12:23 chain-unlinked side-mirrors 3 numbers named by 68306191AE, no catalog link: 68306191AB, 68306191AC, 68306191AD
+06:12:23 chain-unlinked side-mirrors 1 numbers named by 6RD26DX8AB, no catalog link: 6RD26DX8AA
+06:12:23 chain-unlinked side-mirrors 1 numbers named by 6RD26GW7AB, no catalog link: 6RD26GW7AA
+06:12:23 chain-unlinked side-mirrors 1 numbers named by 6RD26JRMAB, no catalog link: 6RD26JRMAA
+06:12:23 chain-unlinked side-mirrors 1 numbers named by 6RD26JSCAB, no catalog link: 6RD26JSCAA
+06:12:23 chain-unlinked side-mirrors 1 numbers named by 6RD26JWDAB, no catalog link: 6RD26JWDAA
+06:12:23 chain-unlinked side-mirrors 1 numbers named by 6RD26KXJAB, no catalog link: 6RD26KXJAA
+06:12:23 chain-unlinked side-mirrors 1 numbers named by 6RD26LAUAB, no catalog link: 6RD26LAUAA
+06:12:23 chain-unlinked side-mirrors 1 numbers named by 6RD26NRVAB, no catalog link: 6RD26NRVAA
+06:12:23 chain-unlinked side-mirrors 1 numbers named by 6RD26PDNAB, no catalog link: 6RD26PDNAA
+06:12:23 chain-unlinked side-mirrors 1 numbers named by 6RD26RFQAB, no catalog link: 6RD26RFQAA
+06:12:23 chain-unlinked side-mirrors 2 numbers named by 6RD26SHRAB, no catalog link: 6RD26SHRAA, 6RD26TZZAB
+06:12:23 chain-unlinked side-mirrors 1 numbers named by 6RD26TBFAB, no catalog link: 6RD26TBFAA
+06:12:23 chain-unlinked side-mirrors 1 numbers named by 6RD27DX8AB, no catalog link: 6RD27DX8AA
+06:12:23 chain-unlinked side-mirrors 1 numbers named by 6RD27GW7AB, no catalog link: 6RD27GW7AA
+06:12:23 chain-unlinked side-mirrors 2 numbers named by 6RD27JRMAB, no catalog link: 6RD27JRMAA, 6RD27TZZAB
+06:12:23 chain-unlinked side-mirrors 1 numbers named by 6RD27JSCAB, no catalog link: 6RD27JSCAA
+06:12:23 chain-unlinked side-mirrors 1 numbers named by 6RD27JWDAB, no catalog link: 6RD27JWDAA
+06:12:23 chain-unlinked side-mirrors 1 numbers named by 6RD27KXJAB, no catalog link: 6RD27KXJAA
+06:12:23 chain-unlinked side-mirrors 1 numbers named by 6RD27LAUAB, no catalog link: 6RD27LAUAA
+06:12:23 chain-unlinked side-mirrors 1 numbers named by 6RD27NRVAB, no catalog link: 6RD27NRVAA
+06:12:23 chain-unlinked side-mirrors 1 numbers named by 6RD27PDNAB, no catalog link: 6RD27PDNAA
+06:12:23 chain-unlinked side-mirrors 2 numbers named by 6RD27SHRAB, no catalog link: 6RD27SHRAA, 6RD27TZZAB
+06:12:23 chain-unlinked side-mirrors 1 numbers named by 6RD27TBFAB, no catalog link: 6RD27TZZAB
+06:13:10 chain-unlinked climate-control 1 numbers named by 68441900AC, no catalog link: 68441900AD
+06:13:10 chain-unlinked climate-control 1 numbers named by 68368988AA, no catalog link: 68368988AC
+06:13:10 chain-unlinked climate-control 1 numbers named by 68368991AA, no catalog link: 68368991AC
+06:13:34 chain-unlinked fuel-pump-module 1 numbers named by 68154305AB, no catalog link: 68154305AC
+06:13:34 chain-unlinked fuel-pump-module 1 numbers named by 68477870AA, no catalog link: 68535771AB
+06:14:14 chain-unlinked throttle-body 1 numbers named by 5184349AE, no catalog link: 5184349AF
+06:14:14 chain-unlinked throttle-body 1 numbers named by 53034251AD, no catalog link: 53034251AC
+06:14:14 seg done tier=A Dodge Durango [2011, 2023] seeds=[2013, 2020] records=1902 errors=8
+06:14:14 time budget reached records=1902
