@@ -893,7 +893,9 @@
   /* The VIN never splits across lines: the whole "VIN XXXX [copy]" chunk
    * wraps to a new line as one unit instead of breaking mid-string. */
   .vin-chunk { display: inline-flex; flex-wrap: wrap; align-items: center; column-gap: 0.25rem; max-width: 100%; }
-  .mono-vin { white-space: nowrap; }
+  /* The VIN stays on one line whenever it fits; only very large text sizes
+     on a narrow phone wrap it (never clipped). */
+  .mono-vin { overflow-wrap: anywhere; }
   .mono-vin {
     font-family: ui-monospace, 'SF Mono', Menlo, monospace;
     font-size: 0.6875rem;
@@ -2641,3 +2643,80 @@ h3.sec span { font: 500 var(--t-sm)/1.3 var(--font-ui); color: var(--text-dim); 
 .pull-btn.saved, .pull-btn.btn-on { color: var(--accent2); }
 .pull-btn.btn-accent { color: var(--on-accent); }
 .ebay-sold-link { min-height: var(--tap); display: inline-flex; align-items: center; }
+
+/* ---------- Header zip chip ---------- */
+.zip-chip {
+  display: inline-flex; align-items: center; gap: var(--s1); flex-wrap: wrap; justify-content: center;
+  min-height: var(--tap); padding: var(--s1) var(--s3);
+  border: 1px solid var(--border-dark); border-radius: var(--r-pill);
+  background: var(--surface); color: var(--text); cursor: pointer;
+  font: 600 var(--t-sm)/1.2 var(--font-ui);
+}
+.zip-chip .ico { width: 16px; height: 16px; color: var(--text-dim); }
+.zip-chip-zip { font-family: var(--font-mono); }
+
+/* ---------- Pull sheet (sheet + pill) ---------- */
+#saved-pill .ico { fill: none; stroke: var(--brand); }
+#saved-pill #saved-count { font-family: var(--font-mono); color: var(--brand); }
+#saved-pill .saved-pill-label { color: var(--on-ink); }
+#saved-pill { background: var(--ink-btn); border-color: var(--ink-btn); color: var(--on-ink); max-width: calc(100vw - 2rem); flex-wrap: wrap; justify-content: center; }
+#saved-sheet .sheet-head h2 { font-size: var(--t-xl); font-weight: 800; letter-spacing: -0.02em; }
+.saved-yard-name { font-family: var(--font-ui); font-size: var(--t-sm); letter-spacing: 0.02em; text-transform: none; font-weight: 800; padding-top: var(--s2); }
+.saved-item { align-items: flex-start; gap: var(--s3); padding: var(--s3) 0; }
+.saved-item .row-plate-lg { min-width: 3.5rem; min-height: 3.5rem; }
+.saved-item .row-plate-lg b { font-size: var(--t-lg); }
+.saved-item-name { font-size: var(--t-md); font-weight: 800; line-height: 1.25; }
+button.saved-item-name { display: flex; align-items: center; min-height: var(--tap); padding: 0; margin: 0; border: 0; background: none; color: var(--text); text-align: left; cursor: pointer; font-family: var(--font-ui); }
+.saved-item-parts { font-size: var(--t-sm); color: var(--text); margin-top: 2px; line-height: 1.45; }
+.saved-empty { font-size: var(--t-md); }
+
+/* ---------- Pro sheet ---------- */
+#upgrade-sheet .sheet-head h2 { font-size: var(--t-xl); font-weight: 800; }
+.tier-card { border-radius: var(--r); padding: var(--s4); }
+.tier-more summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between; gap: var(--s2);
+  min-height: var(--tap); margin-top: var(--s1);
+  font-size: var(--t-sm); font-weight: 700; color: var(--accent);
+}
+.tier-more summary::-webkit-details-marker { display: none; }
+.chev-r { flex: none; width: 10px; height: 10px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); margin-right: 6px; }
+details[open] > summary .chev-r { transform: rotate(45deg); }
+.restore { margin-top: var(--s5); border-radius: var(--r); background: var(--surface2); padding: 0 var(--s4); }
+.restore > summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between; gap: var(--s3);
+  min-height: 56px; padding: var(--s3) 0; color: var(--text);
+}
+.restore > summary::-webkit-details-marker { display: none; }
+.restore-text strong { display: block; font-size: var(--t-md); }
+.restore-text span { display: block; font-size: var(--t-sm); color: var(--text-dim); }
+.restore[open] { padding-bottom: var(--s4); }
+#native-iap .btn, #ent-buy .btn { min-height: 52px; }
+/* Location + filters share one toolbar row: where the list is centred and
+   how to narrow it, together (the zip chip replaces a separate notice). */
+.toolbar { flex-wrap: wrap; }
+.toolbar .zip-chip { flex: 0 1 auto; border-radius: var(--r-sm); }
+.toolbar .filter-toggle { flex: 1 1 8em; }
+.car-meta-text { flex-basis: 9em; }
+.stat-card .label { letter-spacing: 0.06em; }
+
+/* ---------- Fixes from the full matrix (320-1280, dark, 200%) ---------- */
+header h1 { flex-wrap: wrap; }
+.car-grid > * { min-width: 0; }
+@media (max-width: 480px) { .car-grid { grid-template-columns: minmax(0, 1fr); } }
+.cc-head > *, .cc-actions > *, .profit-line > * { min-width: 0; }
+/* Orange text on an orange tint: one step darker (light) / lighter (dark)
+   so it keeps 4.5:1 on the tint in both themes. */
+:root { --accent-on-soft: #9C3E08; }
+:root[data-theme="dark"] { --accent-on-soft: #FFA36B; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --accent-on-soft: #FFA36B; } }
+.sample-pitch, .pro-tag, .plan-option.selected, .tier-plus, .pro-car, .pro-proof, .watch-strip, .focus-banner,
+.pf-chip.active, .filter-toggle.open, .cd-icon-btn.watching, .part-item.part-hit, .lot-fast-soft { --accent: var(--accent-on-soft); }
+#saved-pill #saved-count { color: var(--on-ink); }
+.header-badges a { padding: 2px 0; }
+.watch-form { grid-template-columns: repeat(auto-fill, minmax(min(100%, 13em), 1fr)); }
+.price-core { white-space: normal; display: inline-block; }
+.price-amt { white-space: normal; text-align: right; }
+select { padding-left: 12px; padding-right: 34px; background-position: right 12px center; }
+.panel, .info-box { padding: var(--s4); }

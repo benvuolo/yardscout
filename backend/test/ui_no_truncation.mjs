@@ -81,6 +81,10 @@ const OEM_FIXTURE = {
 const CHECK_FN = () => {
   const out = [];
   const W = innerWidth, H = innerHeight;
+  // Per-pass caches: thousands of text nodes share the same ancestors.
+  const csCache = new Map();
+  const CS = (el) => { let c = csCache.get(el); if (!c) { c = getComputedStyle(el); csCache.set(el, c); } return c; };
+  const memo = (fn) => { const m = new Map(); return (el) => { if (!el) return fn(el); if (m.has(el)) return m.get(el); const r = fn(el); m.set(el, r); return r; }; };
   const desc = (el) => {
     let s = el.tagName.toLowerCase();
     if (el.id) s += '#' + el.id;
@@ -95,31 +99,33 @@ const CHECK_FN = () => {
   };
   const snippet = (t) => t.replace(/\s+/g, ' ').trim().slice(0, 60);
   const add = (kind, el, text, extra = '') => out.push({ kind, el: desc(el), ctx: ctxOf(el), text: snippet(text || el.textContent || ''), extra });
-  const visible = (el) => el.checkVisibility ? el.checkVisibility({ opacityProperty: true, visibilityProperty: true }) : !!el.getClientRects().length;
-  const fixedAnc = (el) => { for (let a = el; a && a !== document.body; a = a.parentElement) if (getComputedStyle(a).position === 'fixed') return a; return null; };
+  // A full-screen page (the car screen) covers everything under it.
+  const cover = document.querySelector('#car-detail.open');
+  const covered = (el) => cover && !cover.contains(el) && !el.closest('#upgrade-sheet, #saved-sheet, #prices-sheet, .watch-toast');
+  const visible = (el) => !covered(el) && (el.checkVisibility ? el.checkVisibility({ opacityProperty: true, visibilityProperty: true }) : !!el.getClientRects().length);
+  const fixedAnc = memo((el) => (!el || el === document.body) ? null : (CS(el).position === 'fixed' ? el : fixedAnc(el.parentElement)));
   const offscreenFixed = (el) => {
     const f = fixedAnc(el);
     if (!f) return false;
     const r = f.getBoundingClientRect();
     return r.bottom <= 0 || r.top >= H || r.right <= 0 || r.left >= W || r.width === 0 || r.height === 0;
   };
-  const srOnly = (el) => {
-    for (let a = el; a && a !== document.body; a = a.parentElement) {
-      const cs = getComputedStyle(a);
-      if ((cs.clip && cs.clip !== 'auto') || (cs.clipPath && cs.clipPath !== 'none')) {
-        const r = a.getBoundingClientRect();
-        if (r.width <= 2 || r.height <= 2) return true;
-      }
-      if (a.getAttribute('aria-hidden') === 'true') return true;
+  const srOnly = memo((a) => {
+    if (!a || a === document.body) return false;
+    const cs = CS(a);
+    if ((cs.clip && cs.clip !== 'auto') || (cs.clipPath && cs.clipPath !== 'none')) {
+      const r = a.getBoundingClientRect();
+      if (r.width <= 2 || r.height <= 2) return true;
     }
-    return false;
-  };
+    if (a.getAttribute('aria-hidden') === 'true') return true;
+    return srOnly(a.parentElement);
+  });
   const isInline = (cs) => cs.display === 'inline' || cs.display === 'contents';
-  const blockOf = (el) => { let a = el; while (a && isInline(getComputedStyle(a))) a = a.parentElement; return a; };
+  const blockOf = (el) => { let a = el; while (a && isInline(CS(a))) a = a.parentElement; return a; };
 
   // 1) text-overflow / line-clamp anywhere visible
   for (const el of document.querySelectorAll('body *')) {
-    const cs = getComputedStyle(el);
+    const cs = CS(el);
     if (cs.textOverflow === 'ellipsis' && visible(el) && el.textContent.trim()) add('ellipsis', el);
     const lc = cs.webkitLineClamp || cs.getPropertyValue('-webkit-line-clamp');
     if (lc && lc !== 'none' && visible(el)) add('line-clamp', el);
@@ -130,10 +136,10 @@ const CHECK_FN = () => {
   const over = (top, bot) => ({ r: top.r * top.a + bot.r * (1 - top.a), g: top.g * top.a + bot.g * (1 - top.a), b: top.b * top.a + bot.b * (1 - top.a), a: 1 });
   const lum = (c) => { const f = (v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }; return 0.2126 * f(c.r) + 0.7152 * f(c.g) + 0.0722 * f(c.b); };
   const ratio = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); };
-  const bgOf = (el) => { // composite background colours up to the first opaque one
+  const bgOf = memo((el) => { // composite background colours up to the first opaque one
     const stack = [];
     for (let a = el; a; a = a.parentElement) {
-      const cs = getComputedStyle(a);
+      const cs = CS(a);
       if (cs.backgroundImage && cs.backgroundImage !== 'none') return null; // gradient/image: can't judge
       const c = parse(cs.backgroundColor);
       if (c && c.a > 0) { stack.push(c); if (c.a >= 1) break; }
@@ -141,9 +147,14 @@ const CHECK_FN = () => {
     let base = { r: 255, g: 255, b: 255, a: 1 };
     for (let i = stack.length - 1; i >= 0; i--) base = over(stack[i], base);
     return base;
-  };
-  const opacityOf = (el) => { let o = 1; for (let a = el; a; a = a.parentElement) o *= parseFloat(getComputedStyle(a).opacity); return o; };
-  const blurred = (el) => { for (let a = el; a && a !== document.body; a = a.parentElement) { const f = getComputedStyle(a).filter; if (f && f.includes('blur')) return true; } return false; };
+  });
+  const opacityOf = memo((el) => el ? parseFloat(CS(el).opacity) * opacityOf(el.parentElement) : 1);
+  const blurred = memo((el) => (!el || el === document.body) ? false : ((CS(el).filter || '').includes('blur') || blurred(el.parentElement)));
+  const clipAnc = memo((el) => { // nearest ancestor (or self) whose overflow is not visible
+    if (!el || el === document.documentElement) return null;
+    const cs = CS(el);
+    return (cs.overflowX !== 'visible' || cs.overflowY !== 'visible') ? el : clipAnc(el.parentElement);
+  });
   const disabled = (el) => !!el.closest('[disabled],[aria-disabled="true"],fieldset:disabled') || (el.closest('label') && el.closest('label').querySelector(':disabled'));
 
   const seen = new Set();
@@ -169,10 +180,9 @@ const CHECK_FN = () => {
     }
     // (b) clipped by an ancestor (horizontal: any non-visible overflow;
     // vertical: hidden/clip only — vertical scrolling is fine)
-    for (let a = el; a && a !== document.documentElement; a = a.parentElement) {
-      const cs = getComputedStyle(a);
+    for (let a = clipAnc(el); a; a = clipAnc(a.parentElement)) {
+      const cs = CS(a);
       const ox = cs.overflowX, oy = cs.overflowY;
-      if (ox === 'visible' && oy === 'visible') continue;
       const r = a.getBoundingClientRect();
       const bl = parseFloat(cs.borderLeftWidth), br = parseFloat(cs.borderRightWidth), bt = parseFloat(cs.borderTopWidth), bb = parseFloat(cs.borderBottomWidth);
       const box = { left: r.left + bl, right: r.right - br, top: r.top + bt, bottom: r.bottom - bb };
@@ -184,7 +194,7 @@ const CHECK_FN = () => {
     // (d) contrast
     // WCAG 1.4.3 exempts logotypes: the stencil wordmark keeps its brand orange.
     if (!blurred(el) && !disabled(el) && !el.closest('header h1')) {
-      const cs = getComputedStyle(el);
+      const cs = CS(el);
       const fg = parse(cs.color); const bg = bgOf(el);
       if (fg && bg) {
         const op = opacityOf(el);
@@ -397,6 +407,7 @@ async function checkAll(page, screen, width) {
       if (z !== 1) await page.evaluate(ZOOM_FN, true);
       await settle(page, 120);
       const rows = await page.evaluate(CHECK_FN);
+      if (process.env.DEBUG_WIDE && rows.length) console.log(screen, width, theme, z, await page.evaluate(() => [...document.querySelectorAll('body *')].filter(e => e.getBoundingClientRect().right > innerWidth + 1 && e.getClientRects().length).slice(0, 8).map(e => e.tagName + '.' + e.className + ' ' + Math.round(e.getBoundingClientRect().width))));
       record(screen, `${width}/${theme}/${z * 100}%`, rows);
       passes++;
       if (SHOTS && z === 1 && (width === 390 || width === 1280) && (theme === 'light' || width === 390)) {
@@ -472,6 +483,8 @@ try {
     await ctx.close();
     console.log(`width ${width}: done`);
   }
+} catch (e) {
+  record('run', 'harness', [{ kind: 'harness-error', el: '', ctx: '', text: '', extra: e.message.split('\n')[0] }]);
 } finally {
   await browser.close();
   if (server) server.close();

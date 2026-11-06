@@ -2944,23 +2944,26 @@ function renderSavedSheet() {
     const items = byYard[yard].sort((a, b) => rowNum(a[1].row) - rowNum(b[1].row));
     return `
       <div class="saved-yard-group">
-        <div class="saved-yard-name">${yard} &middot; ${items.length} car${items.length > 1 ? 's' : ''}</div>
+        <div class="saved-yard-name">${escapeHtml(yard)} &middot; ${items.length} car${items.length > 1 ? 's' : ''}</div>
         ${items.map(([key, s]) => {
-          const best = (s.topParts && s.topParts[0]) ? s.topParts[0].name : '';
           const gone = savedIsGone(key);
+          const parts = s.topParts || [];
+          // Part names are free; Pro keeps the value order (best part first).
+          const names = isPro() ? parts.map(p => p.name)
+            : parts.map(p => p.name).sort((x, y) => String(x).localeCompare(String(y)));
+          const partsTxt = !parts.length ? ''
+            : `${parts.length} part${parts.length > 1 ? 's' : ''}: ${names.slice(0, 3).join(', ')}${parts.length > 3 ? ' and more' : ''}`;
+          const setOut = s.dateAdded ? 'Set out ' + (parseYardDate(s.dateAdded) ? parseYardDate(s.dateAdded).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : s.dateAdded) : '';
           return `
             <div class="saved-item${gone ? ' saved-gone' : ''}"${gone ? ' title="Not on the yard\u2019s current list \u2014 pulled or crushed since you saved it"' : ''}>
-              ${s.row
-                ? `<div class="saved-row-badge">${escapeHtml(String(s.row))}<small>row</small></div>`
-                : '<div class="saved-row-badge saved-row-none" title="The yard hasn\u2019t published a row for this car yet \u2014 ask at the counter">&mdash;<small>no row yet</small></div>'}
+              ${rowPlateHtml(s.row)}
               <div class="saved-item-info">
-                <div class="saved-item-name">${s.year} ${s.make} ${s.model}</div>
-                <div class="saved-item-sub">${[gone ? 'No longer listed' : '', s.dateAdded ? 'Set out ' + (parseYardDate(s.dateAdded) ? parseYardDate(s.dateAdded).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : s.dateAdded) : '',
-                  !best ? '' : isPro()
-                    ? best + (s.topParts.length > 1 ? ' +' + (s.topParts.length - 1) + ' more' : '')
-                    : s.topParts.length + ' part' + (s.topParts.length > 1 ? 's' : '') + ' to check'].filter(Boolean).join(' \u00b7 ')}</div>
+                ${gone ? `<div class="saved-item-name">${escapeHtml(`${s.year} ${s.make} ${s.model}`)}</div>`
+                  : `<button type="button" class="saved-item-name saved-open" data-vkey="${escapeHtml(key)}">${escapeHtml(`${s.year} ${s.make} ${s.model}`)}</button>`}
+                <div class="saved-item-sub">${[gone ? 'No longer listed' : '', setOut].filter(Boolean).map(escapeHtml).join(' \u00b7 ')}</div>
+                ${partsTxt ? `<div class="saved-item-parts">${escapeHtml(partsTxt)}</div>` : ''}
               </div>
-              <button type="button" class="saved-remove" data-vkey="${key}" title="Remove">${ICON.x}</button>
+              <button type="button" class="saved-remove" data-vkey="${escapeHtml(key)}" title="Take off the pull sheet" aria-label="Take ${escapeHtml(`${s.year} ${s.make} ${s.model}`)} off the pull sheet">${ICON.x}</button>
             </div>`;
         }).join('')}
       </div>`;
@@ -2979,7 +2982,7 @@ function closeSavedSheet() {
 document.getElementById('saved-pill').addEventListener('click', openSavedSheet);
 document.getElementById('saved-backdrop').addEventListener('click', closeSavedSheet);
 document.getElementById('saved-clear').addEventListener('click', () => {
-  if (!confirm('Remove all saved cars?')) return;
+  if (!confirm('Clear your pull sheet?')) return;
   savedCars = {};
   persistSaved();
   updateSavedPill();
@@ -2987,6 +2990,8 @@ document.getElementById('saved-clear').addEventListener('click', () => {
   renderLive();
 });
 document.getElementById('saved-list').addEventListener('click', e => {
+  const open = e.target.closest('.saved-open');
+  if (open) { closeSavedSheet(); openCarDetail(open.dataset.vkey, document.getElementById('saved-pill')); return; }
   const btn = e.target.closest('.saved-remove');
   if (!btn) return;
   toggleSaved(btn.dataset.vkey);
@@ -3027,6 +3032,26 @@ document.getElementById('alert-matches-grid').addEventListener('click', e => {
   const open = e.target.closest('.car-open') || (!e.target.closest('a, button') && e.target.closest('.car-card[data-vkey]'));
   if (open) { e.preventDefault(); openCarDetail(open.dataset.vkey, open); }
 });
+/* Header zip chip: where the list is centred, one tap to change it. */
+function updateZipChip() {
+  const chip = document.getElementById('zip-chip');
+  if (!chip) return;
+  const zip = localStorage.getItem('jh_zip');
+  const gps = localStorage.getItem('jh_gps');
+  if (!activeZipCoords || (!zip && !gps)) { chip.style.display = 'none'; return; }
+  const r = typeof effectiveRadiusMi === 'function' ? effectiveRadiusMi() : null;
+  chip.innerHTML = `${ICON.pin}<span class="zip-chip-zip">${escapeHtml(zip || 'Near me')}</span>${r ? `<span class="zip-chip-r">&middot; ${r} mi</span>` : ''}`;
+  chip.style.display = '';
+}
+document.getElementById('zip-chip').addEventListener('click', () => {
+  try { document.querySelector('.tab[data-tab="live"]').click(); } catch (e) { /* boot race */ }
+  const panel = document.getElementById('live-controls');
+  if (!panel.classList.contains('open')) document.getElementById('live-filter-toggle').click();
+  window.scrollTo({ top: 0 });
+  const z = document.getElementById('live-zip');
+  if (z) z.focus({ preventScroll: true });
+});
+
 /* ===== CAR SCREEN (pull-sheet detail) =====
  * A pushed screen over the list: row plate + yard locator, stay meter,
  * the parts checklist ("if equipped" parts grouped apart, $0 to ranking),
@@ -3943,6 +3968,7 @@ function renderLive() {
     </div>`;
   }
   lastSampleKey = sampleKey;
+  updateZipChip();
   document.getElementById('live-grid').innerHTML = focusBanner + weekBanner + watchStripHtml(vehicles.length) + vehiclesToRender.map(v => {
     // Pro sees everything; free users get exactly one fully-unlocked sample card.
     const unlocked = isPro() || (sampleKey !== null && vehicleKey(v) === sampleKey);
@@ -6574,13 +6600,13 @@ function pfCoverageFormHtml(ctx) {
   // Placeholder says what the box IS; the how/why lives in the hint below
   // (placeholder-pattern sweep 2026-10-26, same fix as the compare box).
   const notePh = ctx.kind === 'engine'
-    ? 'Engine (e.g. 3.0 V6) — optional'
-    : 'Notes — optional';
+    ? 'Engine, e.g. 3.0 V6'
+    : 'Notes';
   return `<div class="pf-coverage-form" id="pf-coverage-form">
     <div class="pfc-what">Asking us to add: <strong>${escapeHtml(what)}</strong>${ctx.zip ? ` <span class="pfc-zip">(near ${escapeHtml(ctx.zip)})</span>` : ''}</div>
-    <input type="email" id="pfc-email" placeholder="you@email.com — optional" autocomplete="email">
+    <input type="email" id="pfc-email" placeholder="Email" autocomplete="email">
     <input type="text" id="pfc-note" placeholder="${notePh}" maxlength="500">
-    <div class="pf-hint">A note helps us verify it. Leave an email and we may ping you if it lands &mdash; nothing automated.</div>
+    <div class="pf-hint">Both boxes are optional. A note helps us verify it. Leave an email and we may ping you if it lands &mdash; nothing automated.</div>
     <div class="pfc-actions">
       <button type="button" class="btn btn-primary" id="pfc-send" onclick="pfCoverageSubmit()">Add it to the list</button>
       <span class="pfc-status" id="pfc-status"></span>
@@ -7431,7 +7457,7 @@ function populateWatchOptions() {
   for (const v of liveInventory) {
     if (v.make && !JUNK_MAKES.has(v.make.toLowerCase())) makes.add(v.make);
   }
-  makeSel.innerHTML = '<option value="">Select make&hellip;</option>';
+  makeSel.innerHTML = '<option value="">Make</option>';
   [...makes].sort().forEach(m => {
     const opt = document.createElement('option');
     opt.value = m; opt.textContent = m;

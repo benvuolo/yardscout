@@ -52,7 +52,7 @@
          every self-service row. Two mounting screws, stamped letters. -->
     <svg class="brand-mark" viewBox="4 29 122 72" aria-hidden="true"><g fill="var(--mark-rim)"><circle cx="40" cy="65" r="36"/><circle cx="90" cy="65" r="36"/></g><g fill="#F26B1D"><circle cx="40" cy="65" r="32"/><circle cx="90" cy="65" r="32"/></g><g transform="translate(65 64) scale(0.88) translate(-66.5 -63)"><path d="M16 76 V62 Q16 59 19 59 H35 L46 44.5 Q47 43.5 49 43.5 H79 Q81 43.5 82 44.5 L92 58 L110 60 Q114 60.5 114 63 V76 Q114 79 111 79 H106 A10 10 0 0 0 86 79 H44 A10 10 0 0 0 24 79 H19 Q16 79 16 76 Z" fill="#1C1C1A"/><path d="M49 46.8 H78.3 L88 57.4 H46.6 L44 54.2 Z" fill="#F26B1D"/><rect x="63" y="46" width="2.6" height="12" fill="#1C1C1A"/><g fill="#1C1C1A"><circle cx="34" cy="80" r="8"/><circle cx="96" cy="80" r="8"/></g><g fill="#F26B1D"><circle cx="34" cy="80" r="3.2"/><circle cx="96" cy="80" r="3.2"/></g></g></svg>
     <div class="wordmark">
-      <h1>Yard<span class="wm-scout">Scout</span></h1>
+      <h1>Yard<wbr><span class="wm-scout">Scout</span></h1>
       <span class="head-spec" id="head-spec">SELF&#8209;SERVICE YARD INTEL</span>
     </div>
   </div>
@@ -131,6 +131,7 @@
       <div class="skel-chip skeleton"></div>
     </div>
     <div class="toolbar">
+      <button type="button" id="zip-chip" class="zip-chip" style="display:none;" aria-label="Change your zip code and distance"></button>
       <button type="button" class="filter-toggle" id="live-filter-toggle">
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2.4"/><circle cx="7" cy="17" r="2.4"/></svg> Filters <span class="filter-count" id="live-filter-count" style="display:none;">0</span>
       </button>
@@ -301,7 +302,7 @@
     <div class="price-compare-bar" id="price-compare-bar">
       <div class="compare-input-wrap">
         <input type="text" class="search-box" id="compare-input" autocomplete="off"
-               placeholder="Compare a part price">
+               placeholder="Part name" aria-label="Compare a part price">
         <div class="compare-suggest" id="compare-suggest" style="display:none;" role="listbox"></div>
       </div>
       <button type="button" class="btn btn-primary" id="compare-go">Compare</button>
@@ -314,9 +315,9 @@
     <div class="pf-coverage-form yard-request" id="yard-request">
       <div class="pfc-what"><strong>Don&rsquo;t see your yard?</strong> Tell us and we&rsquo;ll look at adding it.</div>
       <input type="text" id="yr-name" maxlength="80" placeholder="Yard name" autocomplete="off">
-      <input type="text" id="yr-where" maxlength="200" placeholder="City, state or website &mdash; optional" autocomplete="off">
-      <input type="email" id="yr-email" maxlength="120" placeholder="you@email.com &mdash; optional" autocomplete="email">
-      <div class="pf-hint">Self-service yards that post their inventory online are the quickest to add. Leave an email and we&rsquo;ll tell you when it&rsquo;s live.</div>
+      <input type="text" id="yr-where" maxlength="200" placeholder="City or site" aria-label="City, state or website (optional)" autocomplete="off">
+      <input type="email" id="yr-email" maxlength="120" placeholder="Email" aria-label="Your email (optional)" autocomplete="email">
+      <div class="pf-hint">Only the yard name is needed. Self-service yards that post their inventory online are the quickest to add. Leave an email and we&rsquo;ll tell you when it&rsquo;s live.</div>
       <div class="pfc-actions">
         <button type="button" class="btn btn-primary" id="yr-send">Request this yard</button>
         <span class="pfc-status" id="yr-status"></span>
@@ -344,7 +345,7 @@
           <div class="pf-ctl pf-ctl-part">
             <label for="pf-part">Part</label>
             <div class="pf-part-wrap">
-              <input type="text" id="pf-part" class="search-box" placeholder="e.g. alternator&hellip;" autocomplete="off" role="combobox" aria-expanded="false">
+              <input type="text" id="pf-part" class="search-box" placeholder="e.g. starter" autocomplete="off" role="combobox" aria-expanded="false">
               <div class="compare-suggest" id="pf-part-suggest" style="display:none;" role="listbox"></div>
             </div>
           </div>
@@ -411,7 +412,7 @@
       <div class="watch-form">
         <div>
           <label for="alert-make">Make</label>
-          <select id="alert-make"><option value="">Select make&hellip;</option></select>
+          <select id="alert-make"><option value="">Make</option></select>
         </div>
         <div>
           <label for="alert-model-btn">Models</label>
@@ -438,10 +439,10 @@
         <div>
           <label for="alert-radius" title="Alerts only fire for arrivals inside this distance of your search zip code">Alert radius</label>
           <select id="alert-radius">
-            <option value="25">Within 25 mi</option>
-            <option value="50">Within 50 mi</option>
-            <option value="100">Within 100 mi</option>
-            <option value="250" selected>Within 250 mi</option>
+            <option value="25">25 mi</option>
+            <option value="50">50 mi</option>
+            <option value="100">100 mi</option>
+            <option value="250" selected>250 mi</option>
             <option value="">Anywhere &mdash; Pro</option>
           </select>
         </div>
@@ -461,7 +462,7 @@
         </div>
         <div>
           <label for="alert-trim" title="Only alert for cars whose VIN decode names this trim or series. Whole words: LT won't match LTZ. Limited also finds Toyota's 'Luxury' label.">Trim contains <span class="pro-tag">Pro</span></label>
-          <input type="text" id="alert-trim" maxlength="40" placeholder="SR5, Limited, TRD&hellip;" autocomplete="off" disabled>
+          <input type="text" id="alert-trim" maxlength="40" placeholder="e.g. SR5" autocomplete="off" disabled>
         </div>
         <button id="alert-add-btn" class="btn btn-primary">Add</button>
       </div>
@@ -550,7 +551,7 @@
         Free members get a <strong>weekly recap push</strong> &mdash; every watched car that
         arrived this week, plus upcoming sale days near you. <strong>Pro</strong> gets a push
         within hours of a watched car hitting any yard, including sale-day alerts. No email, no account.
-        Saved-car alerts (Pro) &mdash; a push when a car on your visit list leaves the yard or passes its typical stay.
+        Pull-sheet alerts (Pro) &mdash; a push when a car on your pull sheet leaves the yard or passes its typical stay.
       </p>
       <div style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;">
         <button type="button" id="native-push-enable" class="btn btn-primary">Enable push notifications</button>
@@ -613,16 +614,16 @@
   </footer>
 </div>
 
-<!-- SAVED CARS: floating pill + pull-up yard-visit sheet -->
-<button type="button" id="saved-pill" style="display:none;"><svg class="ico" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.5-1.46 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.04 3 5.5l7 7Z"/></svg> <span id="saved-count">0</span></button>
+<!-- PULL SHEET (stored as "saved cars", jh_saved — keys unchanged): floating pill + pull-up sheet -->
+<button type="button" id="saved-pill" style="display:none;" aria-label="Open your pull sheet"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><path d="m3.5 6 1 1 2-2M3.5 12l1 1 2-2M3.5 18l1 1 2-2"/></svg> <span class="saved-pill-label">Pull sheet</span> <span id="saved-count">0</span></button>
 <div id="saved-backdrop"></div>
 <div id="saved-sheet">
   <div class="sheet-handle"></div>
   <div class="sheet-head">
-    <h2>Yard visit list</h2>
+    <h2>Pull sheet</h2>
     <button type="button" id="saved-clear">Clear all</button>
   </div>
-  <p class="sheet-sub">Your saved cars, grouped by yard and sorted by row &mdash; work the list top to bottom when you walk in. Driving far for one car? Call the yard first &mdash; this list matches our last scan, and cars leave daily.</p>
+  <p class="sheet-sub">Your cars, grouped by yard and sorted by row &mdash; work the list top to bottom when you walk in. Driving far for one car? Call the yard first &mdash; this list matches our last scan, and cars leave daily.</p>
   <div id="saved-list"></div>
 </div>
 
@@ -636,7 +637,7 @@
   </div>
   <p class="sheet-sub" id="prices-sub"></p>
   <div class="toolbar" id="prices-search-wrap" style="margin-bottom:0.5rem;">
-    <input type="text" class="search-box" id="prices-search" placeholder="Search parts&hellip;">
+    <input type="text" class="search-box" id="prices-search" placeholder="Search" aria-label="Search parts">
   </div>
   <div class="prices-sort" id="prices-sort-wrap" style="display:none;">
     <span class="prices-sort-label">Sort</span>
@@ -668,21 +669,26 @@
   </div>
   <div class="pro-car" id="pro-car" style="display:none;"></div>
   <p class="pro-proof" id="pro-proof" style="display:none;"></p>
-  <p class="sheet-sub">Finding cars near you is free and stays free. Pro is for planning the trip: a push within hours of a watched car landing (free gets the weekly recap), what the yard charges vs what the same used part goes for online, which parts get picked over fast, and days on the lot before the crusher. Subscribe in the YardScout app for iPhone or Android.</p>
+  <p class="sheet-sub">Finding cars near you is free and stays free, part names included. Pro is for planning the trip: same-day alerts, what the yard charges vs what the used part sells for online, and which parts get picked over fast. Subscribe in the YardScout app for iPhone or Android.</p>
 
   <div class="tier-card plan-option selected" data-plan="pro" data-price="8.99" role="button" tabindex="0">
     <div class="tier-head"><span class="tier-name">Pro</span><span class="tier-price">$8.99<small>/mo</small></span></div>
     <ul class="tier-list">
       <li id="tier-alerts-li">Donor-car alerts &mdash; a push within hours of a watched car hitting a yard, plus sale-day alerts (free gets the weekly recap)</li>
-      <li>Saved-car alerts &mdash; a push when a car on your visit list leaves the yard or passes its typical stay</li>
+      <li>Pull-sheet alerts &mdash; a push when a car on your pull sheet leaves the yard or passes its typical stay</li>
       <li>Price list before you drive &mdash; what the yard charges vs what the same used part goes for online, and which parts go fast, on nearly every car (pull prices where yards publish lists)</li>
       <li>Trim &amp; drivetrain watch filters &mdash; 4WD/AWD only, or a trim like SR5 or TRD, confirmed by the VIN decode</li>
-      <li>One-tap "watch this" from any car + nationwide watches (alerts from any yard in the country)</li>
-      <li>Email alerts &mdash; one email the same day a scan finds new matches for your watches</li>
-      <li>Unlimited radius + nationwide search across all <span class="coverage-count">210+</span> yards</li>
-      <li>Sort by leaving soonest, worth the trip, most to save &amp; picked-over-fast &mdash; get there before the crusher</li>
-      <li>Unlimited saved cars</li>
     </ul>
+    <details class="tier-more">
+      <summary>Everything else in Pro <span class="chev-r" aria-hidden="true"></span></summary>
+      <ul class="tier-list">
+        <li>One-tap "watch this" from any car + nationwide watches (alerts from any yard in the country)</li>
+        <li>Email alerts &mdash; one email the same day a scan finds new matches for your watches</li>
+        <li>Unlimited radius + nationwide search across all <span class="coverage-count">210+</span> yards</li>
+        <li>Sort by leaving soonest, worth the trip, most to save &amp; picked-over-fast &mdash; get there before the crusher</li>
+        <li>Unlimited cars on your pull sheet</li>
+      </ul>
+    </details>
   </div>
 
   <div id="upgrade-form-wrap" class="waitlist-form">
@@ -699,22 +705,6 @@
       <a class="btn" id="ent-appstore-link" href="https://apps.apple.com/app/id6817126581" target="_blank" rel="noopener" style="text-decoration:none;">Get YardScout on the App Store</a>
     </div>
     <span class="waitlist-note">$8.99/month through your App Store account &mdash; auto-renews monthly, cancel anytime in iOS Settings. Finding cars stays free here and in the app &mdash; <a href="privacy.html">privacy</a> &middot; <a href="terms.html">terms</a>.</span>
-  </div>
-  <!-- Cross-device unlock (web AND native: a comp or web purchase is unlocked
-     in the iPhone/Android app the same way). Never required to buy or to use Pro where it was
-       bought — only for bringing an existing Pro to this device. -->
-  <div id="ent-redeem" style="margin-top:1rem;padding-top:0.9rem;border-top:1px solid var(--border);">
-    <strong>Already have Pro?</strong>
-    <span class="waitlist-note" style="display:block;margin-top:0.2rem;">Enter the email from your purchase (or the one you linked in the app) and we&rsquo;ll send a 6-digit code that unlocks Pro on this device.</span>
-    <div class="waitlist-row" style="margin-top:0.55rem;">
-      <input type="email" id="ent-email" inputmode="email" autocomplete="email" placeholder="you@email.com">
-      <button type="button" id="ent-send-code" class="btn">Email&nbsp;code</button>
-    </div>
-    <div class="waitlist-row" id="ent-code-row" style="display:none;margin-top:0.55rem;">
-      <input type="text" id="ent-code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="6-digit code">
-      <button type="button" id="ent-redeem-btn" class="btn btn-primary">Unlock</button>
-    </div>
-    <span id="ent-status" class="account-status" role="status"></span>
   </div>
   <div id="upgrade-thanks" class="waitlist-thanks" style="display:none;">
     <strong>You&rsquo;re on the list.</strong>
@@ -754,6 +744,22 @@
     </div>
     <span class="waitlist-note" id="iap-note">Auto-renews monthly through your App Store account &mdash; cancel anytime in iOS Settings. <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a>.</span>
   </div>
+  <!-- Cross-device unlock (web AND native: a comp or web purchase is unlocked
+     in the iPhone/Android app the same way). Never required to buy or to use Pro where it was
+       bought — only for bringing an existing Pro to this device. -->
+  <details id="ent-redeem" class="restore">
+    <summary><span class="restore-text"><strong>Already have Pro?</strong><span>Unlock this device with your email</span></span><span class="chev-r" aria-hidden="true"></span></summary>
+    <span class="waitlist-note" style="display:block;margin-top:0.2rem;">Enter the email from your purchase (or the one you linked in the app) and we&rsquo;ll send a 6-digit code that unlocks Pro on this device.</span>
+    <div class="waitlist-row" style="margin-top:0.55rem;">
+      <input type="email" id="ent-email" inputmode="email" autocomplete="email" placeholder="you@email.com">
+      <button type="button" id="ent-send-code" class="btn">Email&nbsp;code</button>
+    </div>
+    <div class="waitlist-row" id="ent-code-row" style="display:none;margin-top:0.55rem;">
+      <input type="text" id="ent-code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="6-digit code">
+      <button type="button" id="ent-redeem-btn" class="btn btn-primary">Unlock</button>
+    </div>
+    <span id="ent-status" class="account-status" role="status"></span>
+  </details>
   <!-- Account sign-in (backend API mode only — stays hidden until the API is
        enabled; see api.js). Magic-link email auth, no passwords. -->
   <div id="account-wrap" class="account-wrap" style="display:none;">
