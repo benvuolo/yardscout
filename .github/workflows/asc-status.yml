@@ -63,6 +63,11 @@ jobs:
                   print(f"lookup email: users API HTTP {u.status_code}")
           app = requests.get(f"{API}/apps", headers=H, params={"filter[bundleId]": os.environ["BUNDLE_ID"]}, timeout=60).json()["data"][0]
           print("app:", app["attributes"]["name"], app["id"])
+          prv = requests.get(f"{API}/preReleaseVersions", headers=H, params={"filter[app]": app["id"], "limit": 50, "sort": "-version"}, timeout=60).json().get("data", [])
+          print("prerelease versions (TestFlight):", ", ".join(v["attributes"]["version"] for v in prv) or "none")
+          bi = requests.get(f"{API}/betaAppLocalizations", headers=H, params={"filter[app]": app["id"]}, timeout=60).json().get("data", [])
+          for l in bi:
+              la = l["attributes"]; print(f"beta app localization {la.get('locale')}: description={(la.get('description') or '')[:80]!r}")
           vs = requests.get(f"{API}/apps/{app['id']}/appStoreVersions", headers=H,
                             params={"filter[platform]": "IOS", "limit": 6, "include": "build", "fields[builds]": "version,processingState"}, timeout=60).json()
           builds = {b["id"]: b["attributes"] for b in vs.get("included", []) if b["type"] == "builds"}
