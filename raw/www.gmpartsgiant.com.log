@@ -6422,3 +6422,206 @@
 14:05:51 nav-fail Pontiac Montana SV6 2002: ValueError: every 2002 catalog excluded for Pontiac Montana SV6
 14:05:51 seg done tier=A Pontiac Montana SV6 [1999, 2009] seeds=[2006, 2002] records=4145 errors=60
 14:08:38 time budget reached records=4145
+19:35:07 start site=www.gmpartsgiant.com mode=worklist tiers=['A', 'B'] records=4145 list_lines=5670 year_lines=246 url_index=31432
+19:35:07 seg done tier=A Chevrolet Cruze [1986, 2014] seeds=[2014] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Silverado 1500 [1999, 2023] seeds=[2000] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Equinox [2010, 2015] seeds=[2012] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Impala [2006, 2011] seeds=[2008] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Malibu [2008, 2012] seeds=[2012] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Traverse [2008, 2017] seeds=[2011] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Trailblazer [2002, 2009] seeds=[2004] records=4145 errors=60
+19:35:07 seg done tier=A GMC Acadia [2007, 2016] seeds=[2012] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Suburban 1500 [1987, 2018] seeds=[2002] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Cobalt [2002, 2010] seeds=[2007] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Tahoe [2000, 2006] seeds=[2002] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Sonic [1982, 2020] seeds=[2013] records=4145 errors=60
+19:35:07 seg done tier=A GMC Sierra 1500 [1988, 2020] seeds=[2006] records=4145 errors=60
+19:35:07 seg done tier=A Cadillac CTS [2003, 2019] seeds=[2008] records=4145 errors=60
+19:35:07 seg done tier=A Pontiac G6 [2004, 2010] seeds=[2008] records=4145 errors=60
+19:35:07 seg done tier=A Buick Enclave [2008, 2017] seeds=[2011] records=4145 errors=60
+19:35:07 seg done tier=A GMC Terrain [2010, 2017] seeds=[2012] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Impala [1960, 2005] seeds=[2004] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet HHR [2006, 2011] seeds=[2008] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Equinox [2005, 2009] seeds=[2005] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet S-10 [1994, 2004] seeds=[2000] records=4145 errors=60
+19:35:07 seg done tier=A Buick LeSabre [2000, 2010] seeds=[2003] records=4145 errors=60
+19:35:07 seg done tier=A GMC Envoy [1998, 2009] seeds=[2003] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Tahoe [2007, 2014] seeds=[2007] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Malibu [2014, 2015] seeds=[2015] records=4145 errors=60
+19:35:07 seg done tier=A Pontiac Grand Prix [2004, 2008] seeds=[2006] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Cavalier [1983, 2005] seeds=[2003] records=4145 errors=60
+19:35:07 seg done tier=A Buick Century [1997, 2005] seeds=[2003] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Impala [2012, 2013] seeds=[2012] records=4145 errors=60
+19:35:07 seg done tier=A Buick Lucerne [2006, 2012] seeds=[2007] records=4145 errors=60
+19:35:07 seg done tier=A GMC Yukon [2000, 2006] seeds=[2003] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Blazer [1995, 2026] seeds=[2001] records=4145 errors=60
+19:35:07 seg done tier=A Cadillac SRX [2010, 2016] seeds=[2012] records=4145 errors=60
+19:35:07 seg done tier=A Buick LaCrosse [2010, 2016] seeds=[2011] records=4145 errors=60
+19:35:07 seg done tier=A Saturn VUE [2002, 2007] seeds=[2006] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Colorado [2004, 2012] seeds=[2005] records=4145 errors=60
+19:35:07 seg done tier=A Cadillac DeVille [2000, 2005] seeds=[2004] records=4145 errors=60
+19:35:07 seg done tier=A Saturn ION [2003, 2007] seeds=[2007] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Express 2500 [1997, 2021] seeds=[2005] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Malibu [2013, 2013] seeds=[2013] records=4145 errors=60
+19:35:07 seg done tier=A Buick Verano [2012, 2017] seeds=[2013] records=4145 errors=60
+19:35:07 seg done tier=A Buick LaCrosse [2005, 2009] seeds=[2005] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Malibu [2016, 2018] seeds=[2016] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Cruze [2015, 2015] seeds=[2015] records=4145 errors=60
+19:35:07 seg done tier=A Pontiac Grand Am [1999, 2005] seeds=[2004] records=4145 errors=60
+19:35:07 seg done tier=A GMC Yukon XL [2000, 2017] seeds=[2003] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Express 1500 [1980, 2014] seeds=[2006] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Cruze [2016, 2019] seeds=[2017] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Impala [2014, 2020] seeds=[2014] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Astro [1995, 2005] seeds=[2000] records=4145 errors=60
+19:35:07 seg done tier=A Pontiac Vibe [2003, 2010] seeds=[2005] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Malibu [2006, 2007] seeds=[2006] records=4145 errors=60
+19:35:07 seg done tier=A Buick Rendezvous [2002, 2007] seeds=[2006] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Uplander [2005, 2009] seeds=[2008] records=4145 errors=60
+19:35:07 seg done tier=A Cadillac DTS [2001, 2011] seeds=[2006] records=4145 errors=60
+19:35:07 seg done tier=A Cadillac DeVille [1963, 1999] seeds=[1998] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Monte Carlo [2000, 2007] seeds=[2004] records=4145 errors=60
+19:35:07 seg done tier=A Saturn Aura [2007, 2009] seeds=[2008] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Malibu [2004, 2005] seeds=[2005] records=4145 errors=60
+19:35:07 seg done tier=A GMC Yukon [2007, 2014] seeds=[2007] records=4145 errors=60
+19:35:07 seg done tier=A Saturn VUE [2008, 2010] seeds=[2008] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet C1500 [1977, 1999] seeds=[1997] records=4145 errors=60
+19:35:07 seg done tier=A GMC Yukon XL 1500 [2000, 2024] seeds=[2003] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Silverado 2500 [1999, 2020] seeds=[2003] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Spark [2013, 2022] seeds=[2014] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Equinox [2016, 2017] seeds=[2016] records=4145 errors=60
+19:35:07 seg done tier=A Cadillac Escalade [2002, 2006] seeds=[2002] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet K1500 [1983, 1999] seeds=[1998] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Avalanche [2002, 2006] seeds=[2004] records=4145 errors=60
+19:35:07 seg done tier=A Buick Encore [2013, 2023] seeds=[2015] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Malibu [2000, 2003] seeds=[2003] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Captiva Sport [2012, 2015] seeds=[2014] records=4145 errors=60
+19:35:07 seg done tier=A Buick Park Avenue [1980, 2005] seeds=[1999] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Tahoe [1995, 1999] seeds=[1999] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Avalanche 1500 [2002, 2013] seeds=[2002] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Express 3500 [1997, 2020] seeds=[2005] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet C/K 1500 [1978, 2001] seeds=[1998] records=4145 errors=60
+19:35:07 seg done tier=A Buick LeSabre [1963, 1999] seeds=[1997] records=4145 errors=60
+19:35:07 seg done tier=A Pontiac Grand Prix [1964, 2003] seeds=[2002] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Trax [2013, 2025] seeds=[2016] records=4145 errors=60
+19:35:07 seg done tier=A Cadillac SRX [2004, 2009] seeds=[2004] records=4145 errors=60
+19:35:07 seg done tier=A Cadillac STS [2005, 2011] seeds=[2005] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Camaro [1993, 2002] seeds=[1995] records=4145 errors=60
+19:35:07 seg done tier=A Buick Regal [2011, 2013] seeds=[2011] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Silverado [1993, 2006] seeds=[2000] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Trailblazer EXT [2002, 2006] seeds=[2005] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Aveo [2009, 2018] seeds=[2009] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Cruze Limited [2016, 2016] seeds=[2016] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Impala Limited [2014, 2016] seeds=[2014] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Venture [1997, 2005] seeds=[2004] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Camaro [2010, 2015] seeds=[2010] records=4145 errors=60
+19:35:07 seg done tier=A Pontiac Torrent [2006, 2009] seeds=[2006] records=4145 errors=60
+19:35:07 seg done tier=A GMC Sonoma [1994, 2004] seeds=[2000] records=4145 errors=60
+19:35:07 seg done tier=A Oldsmobile Alero [1999, 2004] seeds=[2001] records=4145 errors=60
+19:35:07 seg done tier=A GMC Envoy Xl [2002, 2006] seeds=[2003] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Lumina [1990, 2001] seeds=[1998] records=4145 errors=60
+19:35:07 seg done tier=A Pontiac Bonneville [1968, 2005] seeds=[2002] records=4145 errors=60
+19:35:07 seg done tier=A Buick Regal [1997, 2004] seeds=[2003] records=4145 errors=60
+19:35:07 seg done tier=A Cadillac Seville [1979, 2004] seeds=[2003] records=4145 errors=60
+19:35:07 seg done tier=A Saturn Outlook [2007, 2010] seeds=[2008] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Aveo [2007, 2008] seeds=[2007] records=4145 errors=60
+19:35:07 seg done tier=A Pontiac Sunfire [1995, 2005] seeds=[2005] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Avalanche [2007, 2013] seeds=[2007] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet S-10 [1982, 1993] seeds=[1992] records=4145 errors=60
+19:35:07 seg done tier=A GMC Jimmy [1995, 2005] seeds=[1998] records=4145 errors=60
+19:35:07 seg done tier=A Cadillac Escalade [2007, 2014] seeds=[2007] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Aveo [2004, 2006] seeds=[2006] records=4145 errors=60
+19:35:07 seg done tier=A Cadillac Eldorado [1970, 2002] seeds=[2000] records=4145 errors=60
+19:35:07 seg done tier=A GMC Sierra 2500 [1988, 2019] seeds=[2001] records=4145 errors=60
+19:35:07 seg done tier=A Pontiac G5 [2007, 2009] seeds=[2007] records=4145 errors=60
+19:35:07 seg done tier=A Cadillac ATS [1965, 2018] seeds=[2013] records=4145 errors=60
+19:35:07 seg done tier=A GMC Safari [1995, 2005] seeds=[2000] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Blazer S10/Jimmy S15 [1986, 2005] seeds=[2000] records=4145 errors=60
+19:35:07 seg done tier=A GMC Yukon [1992, 1999] seeds=[1999] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Equinox [2018, 2023] seeds=[2018] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Malibu Limited [2016, 2016] seeds=[2016] records=4145 errors=60
+19:35:07 seg done tier=A GMC Canyon [2004, 2016] seeds=[2005] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Silverado 2500HD [2001, 2019] seeds=[2004] records=4145 errors=60
+19:35:07 seg done tier=A GMC Sierra [1978, 2006] seeds=[2004] records=4145 errors=60
+19:35:07 seg done tier=A Pontiac Montana [1999, 2007] seeds=[2004] records=4145 errors=60
+19:35:07 seg done tier=A Hummer H3 [2006, 2010] seeds=[2006] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Silverado [2007, 2013] seeds=[2008] records=4145 errors=60
+19:35:07 seg done tier=A GMC Yukon Denali [2000, 2013] seeds=[2007] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Aveo5 [2007, 2011] seeds=[2009] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Tracker [1999, 2004] seeds=[2002] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Suburban [2000, 2006] seeds=[2001] records=4145 errors=60
+19:35:07 seg done tier=A Pontiac Firebird [1993, 2002] seeds=[1995] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Malibu [2019, 2025] seeds=[2020] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Caprice [1966, 2014] seeds=[1991] records=4145 errors=60
+19:35:07 seg done tier=A GMC Savana [2003, 2017] seeds=[2005] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Camaro [1967, 1992] seeds=[1992] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet K2500 [1981, 2000] seeds=[1998] records=4145 errors=60
+19:35:07 seg done tier=A Cadillac Escalade ESV [2003, 2018] seeds=[2004] records=4145 errors=60
+19:35:07 seg done tier=A Buick Rainier [2004, 2007] seeds=[2004] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Malibu Maxx [2004, 2007] seeds=[2006] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Malibu [1974, 1999] seeds=[1999] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Volt [2011, 2017] seeds=[2012] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet C/K 2500 [1980, 2000] seeds=[1997] records=4145 errors=60
+19:35:07 seg done tier=A GMC Suburban 1500 [1986, 1999] seeds=[1999] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Classic [1967, 2005] seeds=[2005] records=4145 errors=60
+19:35:07 seg done tier=A Oldsmobile Bravada [1991, 2004] seeds=[2002] records=4145 errors=60
+19:35:07 seg done tier=A Saturn SL2 [1992, 2002] seeds=[2002] records=4145 errors=60
+19:35:07 seg done tier=A Saturn SL [1993, 2002] seeds=[2002] records=4145 errors=60
+19:35:07 seg done tier=A Oldsmobile Cutlass Ciera [1980, 1996] seeds=[1992] records=4145 errors=60
+19:35:07 seg done tier=A Oldsmobile Intrigue [1998, 2002] seeds=[1999] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet C10 [1963, 1988] seeds=[1984] records=4145 errors=60
+19:35:07 seg done tier=A Buick Regal [2014, 2017] seeds=[2014] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet C2500 [1976, 2000] seeds=[1989] records=4145 errors=60
+19:35:07 seg done tier=A Cadillac XTS [2013, 2018] seeds=[2013] records=4145 errors=60
+19:35:07 seg done tier=A Oldsmobile Eighty-Eight [1973, 1999] seeds=[1998] records=4145 errors=60
+19:35:07 seg done tier=A Buick Century [1960, 1996] seeds=[1996] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Prizm [1993, 2002] seeds=[2001] records=4145 errors=60
+19:35:07 seg done tier=A GMC Savana [1972, 2002] seeds=[2000] records=4145 errors=60
+19:35:07 seg done tier=A Saturn SL1 [1993, 2002] seeds=[2002] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Gmt-400 [1988, 2000] seeds=[1997] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Suburban 2500 [1985, 2010] seeds=[2001] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Express [2003, 2023] seeds=[2006] records=4145 errors=60
+19:35:07 seg done tier=A Oldsmobile Cutlass Supreme [1968, 1997] seeds=[1997] records=4145 errors=60
+19:35:07 seg done tier=A Pontiac Aztek [2001, 2005] seeds=[2004] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Astro [1981, 1994] seeds=[1994] records=4145 errors=60
+19:35:07 seg done tier=A GMC Savana 2500 [1999, 2018] seeds=[2005] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet G20 [1979, 1996] seeds=[1995] records=4145 errors=60
+19:35:07 seg done tier=A Buick Regal [1988, 1996] seeds=[1996] records=4145 errors=60
+19:35:07 seg done tier=A Oldsmobile Cutlass [1965, 2007] seeds=[1999] records=4145 errors=60
+19:35:07 seg done tier=A GMC C1500 [1965, 1999] seeds=[1994] records=4145 errors=60
+19:35:07 seg done tier=A Cadillac Escalade [1999, 2001] seeds=[2000] records=4145 errors=60
+19:35:07 seg done tier=A GMC Savana 1500 [1996, 2019] seeds=[2004] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Silverado 1500 Classic [2007, 2007] seeds=[2007] records=4145 errors=60
+19:35:07 seg done tier=A GMC Sierra 2500HD [2001, 2013] seeds=[2001] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Corvette [1984, 1996] seeds=[1984] records=4145 errors=60
+19:35:07 seg done tier=A Chevrolet Suburban [1963, 1999] seeds=[1999] records=4145 errors=60
+19:35:07 seg done tier=A Buick Terraza [2005, 2007] seeds=[2006] records=4145 errors=60
+19:35:07 seg done tier=A Buick Riviera [1970, 1999] seeds=[1997] records=4145 errors=60
+19:35:07 seg done tier=A Oldsmobile Silhouette [1995, 2004] seeds=[2000] records=4145 errors=60
+19:35:07 seg done tier=A Saturn Astra [2008, 2009] seeds=[2008] records=4145 errors=60
+19:35:07 seg done tier=A Pontiac Grand Am [1984, 1998] seeds=[1997] records=4145 errors=60
+19:35:07 seg done tier=A Pontiac Montana SV6 [1999, 2009] seeds=[2006] records=4145 errors=60
+19:35:07 seg done tier=A Saturn S-Series [1992, 2002] seeds=[1997] records=4145 errors=60
+19:37:39 chain-unlinked headlights 1 numbers named by 15181851, no catalog link: 15044521
+19:37:39 chain-unlinked headlights 1 numbers named by 15181850, no catalog link: 15044522
+19:38:11 chain-unlinked side-mirrors 4 numbers named by 88980580, no catalog link: 15077260, 88944242, 15062940, 88986360
+19:38:11 chain-unlinked side-mirrors 2 numbers named by 88980579, no catalog link: 88944244, 88986361
+19:39:47 chain-unlinked climate-control 1 numbers named by 15126605, no catalog link: 15072169
+19:39:47 chain-unlinked climate-control 1 numbers named by 15126606, no catalog link: 15072170
+19:41:24 chain-unlinked fuel-pump-module 2 numbers named by 19179480, no catalog link: 19303375, 25345022
+19:41:24 chain-unlinked fuel-pump-module 2 numbers named by 19303374, no catalog link: 19179479, 25345017
+19:41:24 chain-unlinked fuel-pump-module 3 numbers named by 19369908, no catalog link: 19331259, 25345015, 19180101
+19:41:24 chain-unlinked fuel-pump-module 3 numbers named by 19369909, no catalog link: 19331260, 25345024, 19180099
+19:49:39 chain-unlinked tail-lights 2 numbers named by 22739266, no catalog link: 25862700, 25885682
+19:49:39 chain-unlinked tail-lights 3 numbers named by 22739265, no catalog link: 25862699, 15939098, 25885681
+19:50:43 chain-unlinked climate-control 1 numbers named by 25936308, no catalog link: 19370232
+19:51:56 seg done tier=A Cadillac Escalade EXT [2002, 2008] seeds=[2002, 2006, 2007] records=4153 errors=60
+19:54:35 chain-unlinked side-mirrors 1 numbers named by 15026854, no catalog link: 15614762
+19:56:03 chain-unlinked fuel-pump-module 1 numbers named by 19179535, no catalog link: 25027657
+19:56:46 chain-unlinked fuel-pump-module 1 numbers named by 19179427, no catalog link: 25177976
+19:57:56 nav-fail Chevrolet C3500 1986: ValueError: no 1986 catalog for Chevrolet C3500 (chevrolet-['c3500'])
+19:57:56 seg done tier=A Chevrolet C3500 [1981, 2000] seeds=[1997, 1986] records=4165 errors=61
+20:01:31 chain-unlinked alternator 2 numbers named by 10464074, no catalog link: 10463390, 10464066
+20:03:55 chain-unlinked fuel-pump-module 1 numbers named by 19180097, no catalog link: 25164186
+20:04:35 chain-unlinked power-steering-pump 1 numbers named by 26046621, no catalog link: 26015622
+20:07:31 seg done tier=A Chevrolet Monte Carlo [1995, 1999] seeds=[1999, 1997, 1998] records=4171 errors=61
+20:07:31 time budget reached records=4171
