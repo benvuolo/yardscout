@@ -138,7 +138,9 @@ def published_photo_sources(sources: dict) -> dict:
                 for p in src.get("patterns") or []
                 if isinstance(p, dict) and all(isinstance(p.get(k), str) for k in ("code", "card", "large"))]
         if pats and isinstance(src.get("label"), str):
-            out[key] = {"label": src["label"], "host": src.get("host", ""), "patterns": pats}
+            # onCards: false = too heavy for list cards (car screen + viewer only).
+            out[key] = {"label": src["label"], "host": src.get("host", ""),
+                        "onCards": src.get("onCards") is not False, "patterns": pats}
     return out
 
 

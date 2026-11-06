@@ -53,6 +53,12 @@ check("every published source has a label and patterns",
 check("every published URL is https on the source's host",
       all(p[w].startswith("https://" + s["host"] + "/") or p[w] == "{1}"
           for s in PUB.values() for p in s["patterns"] for w in ("card", "large")))
+check("onCards published as a bool on every source", all(isinstance(s.get("onCards"), bool) for s in PUB.values()))
+check("heavy sources are off list cards",
+      {k for k, s in PUB.items() if not s["onCards"]} == {"byot", "papva", "upullitwa", "aesop", "midwayupull", "kikers"},
+      sorted(k for k, s in PUB.items() if not s["onCards"]))
+check("onCards defaults to true", js.published_photo_sources({"x": {"enabled": True, "label": "Photo: X", "host": "h",
+      "patterns": [{"code": "^x$", "card": "https://h/a", "large": "https://h/a"}]}})["x"]["onCards"] is True)
 check("LKQ card is not cropped (mode=max, not mode=crop)",
       "mode=max" in PUB["pyp"]["patterns"][0]["card"] and "mode=crop" not in PUB["pyp"]["patterns"][0]["card"])
 

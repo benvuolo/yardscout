@@ -1,5 +1,5 @@
 {
-  "_doc": "Vehicle photo sources: the REMOTE KILL SWITCH. The scraper keeps a car's photo code in vehicle_extras.json / data/inv shards only when the code matches a pattern of an ENABLED source here, and publishes the enabled sources as `photoSources` in vehicle_extras.json and data/inv/manifest.json. The app renders a photo only through a published, enabled source, so a takedown is: set enabled=false, commit, dispatch scan.yml (runbook: ops/yards.md 'Photo takedown'). Patterns are plain regexes valid in both Python and JavaScript, anchored, matched against the whole code; {1}..{9} in card/large are the capture groups. Images load from the yard's own URL, unaltered; never downloaded, rehosted or proxied.",
+  "_doc": "Vehicle photo sources: the REMOTE KILL SWITCH. The scraper keeps a car's photo code in vehicle_extras.json / data/inv shards only when the code matches a pattern of an ENABLED source here, and publishes the enabled sources as `photoSources` in vehicle_extras.json and data/inv/manifest.json. The app renders a photo only through a published, enabled source, so a takedown is: set enabled=false, commit, dispatch scan.yml (runbook: ops/yards.md 'Photo takedown'). Patterns are plain regexes valid in both Python and JavaScript, anchored, matched against the whole code; {1}..{9} in card/large are the capture groups. Images load from the yard's own URL, unaltered; never downloaded, rehosted or proxied. onCards (default true): false = the source's images are too heavy for list cards (>~150 KB each), so the app shows them only on the car screen and in the viewer.",
   "version": 1,
   "sources": {
     "pyp": {
@@ -83,7 +83,8 @@
           "large": "{1}"
         }
       ],
-      "note": "Own site; only full-size files (1600x1200, 320-420 KB)."
+      "note": "Own site; only full-size files (1600x1200, 320-420 KB).",
+      "onCards": false
     },
     "armys": {
       "enabled": false,
@@ -109,7 +110,8 @@
           "large": "https://da8h1v3w8q6n5.cloudfront.net/{1}/images/{2}/{3}.jpg"
         }
       ],
-      "note": "Pick-A-Part VA (2 yards). URG's CloudFront (URG hosts the yard's iis-pro-upull inventory plugin and its photos); 800x600 JPEG ~400 KB, the only size."
+      "note": "Pick-A-Part VA (2 yards). URG's CloudFront (URG hosts the yard's iis-pro-upull inventory plugin and its photos); 800x600 JPEG ~400 KB, the only size.",
+      "onCards": false
     },
     "upullitwa": {
       "enabled": true,
@@ -122,7 +124,8 @@
           "large": "https://da8h1v3w8q6n5.cloudfront.net/{1}/images/{2}/{3}.jpg"
         }
       ],
-      "note": "U-Pull-It Auto Parts WA (3 yards). URG's CloudFront (URG hosts the yard's iis-pro-upull inventory plugin and its photos); 800x600 JPEG ~400 KB, the only size."
+      "note": "U-Pull-It Auto Parts WA (3 yards). URG's CloudFront (URG hosts the yard's iis-pro-upull inventory plugin and its photos); 800x600 JPEG ~400 KB, the only size.",
+      "onCards": false
     },
     "aesop": {
       "enabled": true,
@@ -135,7 +138,8 @@
           "large": "https://da8h1v3w8q6n5.cloudfront.net/{1}/images/{2}/{3}.jpg"
         }
       ],
-      "note": "AESOP Tulsa. URG's CloudFront (URG hosts the yard's iis-pro-upull inventory plugin and its photos); 800x600 JPEG ~400 KB, the only size."
+      "note": "AESOP Tulsa. URG's CloudFront (URG hosts the yard's iis-pro-upull inventory plugin and its photos); 800x600 JPEG ~400 KB, the only size.",
+      "onCards": false
     },
     "midwayupull": {
       "enabled": true,
@@ -148,7 +152,8 @@
           "large": "https://da8h1v3w8q6n5.cloudfront.net/{1}/images/{2}/{3}.jpg"
         }
       ],
-      "note": "Midway U-Pull KS/MO. URG's CloudFront (URG hosts the yard's iis-pro-upull inventory plugin and its photos); 800x600 JPEG ~400 KB, the only size."
+      "note": "Midway U-Pull KS/MO. URG's CloudFront (URG hosts the yard's iis-pro-upull inventory plugin and its photos); 800x600 JPEG ~400 KB, the only size.",
+      "onCards": false
     },
     "byot": {
       "enabled": true,
@@ -161,7 +166,8 @@
           "large": "https://storage.googleapis.com/byotautoparts.appspot.com/yard_inventory/{1}"
         }
       ],
-      "note": "BYOT's own Firebase bucket; 540x720 JPEG ~450-570 KB, the only size."
+      "note": "BYOT's own Firebase bucket; 540x720 JPEG ~450-570 KB, the only size.",
+      "onCards": false
     },
     "wilberts": {
       "enabled": true,
