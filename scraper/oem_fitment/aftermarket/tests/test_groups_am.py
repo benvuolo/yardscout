@@ -118,6 +118,18 @@ check("row whose liters the Fits text does not state is dropped",
       str(d["groups"][0]["apps"]))
 check("no Fits liters -> no row guard", not GA.row_contradicts_fits({"engine": "1.4L"}, set()))
 
+# 6c. year span vs the Fits text (400-24253: "MINI COOPER 1.6L 2006-10")
+d = GA.build([rec("400-24253", "alternator", [app("Mini", "Cooper", 2008, "1.6L"), app("Mini", "Cooper", 2013, "1.6L"),
+                                              app("Mini", "COOPER COUNTRYMAN", 2012, "1.6L")], 150,
+                  fits="MINI COOPER 1.6L 2006-10\n6-GROOVE CLUTCH PULLEY 49.5mm OD")],
+             GA.Names(LOT | {("MINI", "Countryman")}))
+ys = sorted((a[1], a[2]) for a in d["groups"][0]["apps"])
+check("row outside the Fits year range for that model dropped", ("Cooper", 2013) not in ys and ("Cooper", 2008) in ys, str(ys))
+check("model the Fits text does not name keeps its rows", ("Countryman", 2012) in ys, str(ys))
+check("year drops counted", d["rows_outside_fits_years"] == 1)
+check("two-digit and -ON ranges parsed", GA.fits_year_lines({"fits_text": "FORD E-450 6.0L 2004-07\nMINI COOPER 1.6L 2007-ON"})
+      == [("FORD E-450 6.0L 2004-07", [(2004, 2007)]), ("MINI COOPER 1.6L 2007-ON", [(2007, 9999)])])
+
 # 7. parse_engine on both feeds and lot strings
 check("parse feeds", GA.parse_engine("181cu in 3.0L V6") == (3.0, 6, False)
       and GA.parse_engine("2500cc, AWD, 51kW 2.5L 4 cyl, Diesel") == (2.5, 4, True)

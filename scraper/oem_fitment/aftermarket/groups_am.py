@@ -146,6 +146,55 @@ def row_contradicts_fits(a: dict, fl: set) -> bool:
     return lit is not None and not any(abs(lit - x) < 0.05 for x in fl)
 
 
+_YR = re.compile(r"\b((?:19|20)\d\d)\s*-\s*((?:19|20)?\d\d|on)\b", re.I)
+
+
+def fits_year_lines(r: dict) -> list:
+    """[(upper-case line, [(lo, hi), ...])] for every Fits line that states
+    an explicit year range ("MINI COOPER 1.6L 2006-10" -> 2006-2010;
+    "2007-ON" -> open-ended)."""
+    out = []
+    for line in str(r.get("fits_text") or "").splitlines():
+        spans = []
+        for a, b in _YR.findall(line):
+            lo = int(a)
+            if b.lower() == "on":
+                hi = 9999
+            elif len(b) == 2:
+                hi = (lo // 100) * 100 + int(b)
+                if hi < lo:
+                    hi += 100
+            else:
+                hi = int(b)
+            spans.append((lo, hi))
+        if spans:
+            out.append((line.upper(), spans))
+    return out
+
+
+def _names_in(line: str, word: str) -> bool:
+    w = str(word or "").upper().strip()
+    return bool(w) and re.search(r"(?<![A-Z0-9])" + re.escape(w) + r"(?![A-Z0-9])", line) is not None
+
+
+def row_outside_fits_years(a: dict, canon, yl: list) -> bool:
+    """True when the unit's own Fits text gives an explicit year range for
+    this row's make AND model and the row's years fall outside every such
+    range. Seen: 400-24253 Fits "MINI COOPER 1.6L 2006-10" while its rows
+    list Cooper to 2015. Models the Fits text does not name keep their rows."""
+    if not yl:
+        return False
+    mk = canon[0] if canon else a.get("make", "")
+    models = {a.get("model", "")} | ({canon[1]} if canon else set())
+    spans = [sp for line, sps in yl for sp in sps
+             if (_names_in(line, mk) or _names_in(line, a.get("make", "")))
+             and any(_names_in(line, m) for m in models)]
+    if not spans:
+        return False
+    y0, y1 = a["years"]
+    return not any(lo <= y0 and y1 <= hi for lo, hi in spans)
+
+
 def amps(r: dict):
     a = str((r.get("specs") or {}).get("Amperage") or "").strip()
     return int(a) if a.isdigit() else None
@@ -215,6 +264,7 @@ def build(records: list, names: Names, src: str = "") -> dict:
     unmapped = Counter()
     combined = Counter()
     dropped_rows = Counter()
+    dropped_years = Counter()
     groups = []
     for r in sorted(records, key=lambda r: (r.get("category", ""), r.get("aftermarket_pn", ""))):
         why = accept(r)
@@ -224,10 +274,14 @@ def build(records: list, names: Names, src: str = "") -> dict:
         rows = defaultdict(list)       # (make, model, engine label) -> years
         dsl = set()                    # (make, model, year, liters) printed as diesel on this unit
         fl = fits_liters(r)
+        yl = fits_year_lines(r)
         apps_in = []
         for a in r["applications"]:
             if row_contradicts_fits(a, fl):
                 dropped_rows[f"{r['aftermarket_pn']}: {a.get('raw', '')}"] += 1
+                continue
+            if row_outside_fits_years(a, names.canon(a.get("make", ""), a.get("model", "")), yl):
+                dropped_years[f"{r['aftermarket_pn']}: {a.get('raw', '')}"] += 1
                 continue
             apps_in.append(a)
         for a in apps_in:
@@ -282,6 +336,8 @@ def build(records: list, names: Names, src: str = "") -> dict:
            "unmapped_models": dict(unmapped.most_common()),
            "rows_contradicting_fits_text": len(dropped_rows),
            "rows_contradicting_fits_text_sample": sorted(dropped_rows)[:40],
+           "rows_outside_fits_years": len(dropped_years),
+           "rows_outside_fits_years_sample": sorted(dropped_years)[:40],
            "combined_makes": dict(combined.most_common())}
     doc["sha256"] = hashlib.sha256(json.dumps(groups, sort_keys=True).encode()).hexdigest()
     return doc
@@ -376,6 +432,8 @@ def report_md(doc: dict, cov: dict | None = None) -> str:
          f"- combined-make rows skipped: {sum(doc['combined_makes'].values())}",
          f"- app rows dropped because their engine size is not in the unit's own Fits text: "
          f"{doc.get('rows_contradicting_fits_text', 0)}",
+         f"- app rows dropped because their year falls outside a range the unit's Fits text gives for that "
+         f"make and model: {doc.get('rows_outside_fits_years', 0)}",
          f"- app rows whose model matches no lot model: {sum(doc['unmapped_models'].values())} "
          f"({len(doc['unmapped_models'])} names; top: "
          + ", ".join(f"{k} ({v})" for k, v in list(doc['unmapped_models'].items())[:12]) + ")",

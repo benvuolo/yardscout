@@ -3,8 +3,8 @@
   "Fiat": {
    "alternator": 0,
    "cars": 372,
-   "either": 166,
-   "starter": 166
+   "either": 163,
+   "starter": 163
   },
   "Geo": {
    "alternator": 0,
@@ -13,7 +13,7 @@
    "starter": 0
   },
   "Isuzu": {
-   "alternator": 360,
+   "alternator": 328,
    "cars": 501,
    "either": 413,
    "starter": 389
@@ -21,8 +21,8 @@
   "Jaguar": {
    "alternator": 0,
    "cars": 704,
-   "either": 230,
-   "starter": 230
+   "either": 194,
+   "starter": 194
   },
   "Land Rover": {
    "alternator": 59,
@@ -37,21 +37,21 @@
    "starter": 0
   },
   "Mazda": {
-   "alternator": 884,
+   "alternator": 845,
    "cars": 6241,
    "either": 959,
    "starter": 586
   },
   "Mercury": {
-   "alternator": 2371,
+   "alternator": 2337,
    "cars": 2869,
-   "either": 2541,
-   "starter": 2408
+   "either": 2538,
+   "starter": 2329
   },
   "Mitsubishi": {
-   "alternator": 305,
+   "alternator": 279,
    "cars": 2996,
-   "either": 1352,
+   "either": 1341,
    "starter": 1341
   },
   "Plymouth": {
@@ -61,16 +61,16 @@
    "starter": 110
   },
   "Pontiac": {
-   "alternator": 3595,
+   "alternator": 3256,
    "cars": 4391,
-   "either": 4110,
-   "starter": 3869
+   "either": 4081,
+   "starter": 3847
   },
   "Porsche": {
    "alternator": 25,
    "cars": 183,
-   "either": 32,
-   "starter": 32
+   "either": 27,
+   "starter": 16
   },
   "Saab": {
    "alternator": 37,
@@ -88,10 +88,10 @@
    "alternator": 186,
    "cars": 750,
    "either": 281,
-   "starter": 281
+   "starter": 247
   }
  },
- "groups_sha256": "2a32305770eae58698bfa114c86626ca6206cc431be41e80982e9c23ffe903df",
+ "groups_sha256": "66435ce8c2b59bc49a39d2a8fab500822575965b2e1e2e6057bb426b9b9b0191",
  "raw": "origin/oem-raw@9d2c3b76:aftermarket/raw/www.dbelectrical.com.jsonl",
  "twins": {
   "Geo Metro / Suzuki Swift": {
@@ -228,9 +228,9 @@
     },
     "starter": {
      "a_cars": 6,
-     "a_cars_engine_confirmed": 4,
-     "b_cars": 210,
-     "b_cars_engine_confirmed": 172,
+     "a_cars_engine_confirmed": 2,
+     "b_cars": 207,
+     "b_cars_engine_confirmed": 169,
      "units": [
       "410-24046",
       "410-44008",
@@ -330,8 +330,8 @@
     "alternator": {
      "a_cars": 17,
      "a_cars_engine_confirmed": 12,
-     "b_cars": 593,
-     "b_cars_engine_confirmed": 455,
+     "b_cars": 566,
+     "b_cars_engine_confirmed": 438,
      "units": [
       "400-12107",
       "400-12110",
@@ -367,7 +367,7 @@
     "alternator": {
      "a_cars": 193,
      "a_cars_engine_confirmed": 156,
-     "b_cars": 86,
+     "b_cars": 75,
      "b_cars_engine_confirmed": 64,
      "units": [
       "400-44003",
@@ -436,8 +436,8 @@
     "alternator": {
      "a_cars": 10,
      "a_cars_engine_confirmed": 9,
-     "b_cars": 121,
-     "b_cars_engine_confirmed": 99,
+     "b_cars": 116,
+     "b_cars_engine_confirmed": 94,
      "units": [
       "400-40039",
       "400-40101"
@@ -470,8 +470,8 @@
     "alternator": {
      "a_cars": 34,
      "a_cars_engine_confirmed": 28,
-     "b_cars": 1380,
-     "b_cars_engine_confirmed": 1115,
+     "b_cars": 1324,
+     "b_cars_engine_confirmed": 1059,
      "units": [
       "400-14061",
       "400-14091",
@@ -553,10 +553,10 @@
    ],
    "by_cat": {
     "alternator": {
-     "a_cars": 318,
-     "a_cars_engine_confirmed": 256,
-     "b_cars": 2265,
-     "b_cars_engine_confirmed": 1930,
+     "a_cars": 297,
+     "a_cars_engine_confirmed": 235,
+     "b_cars": 2187,
+     "b_cars_engine_confirmed": 1852,
      "units": [
       "400-14081",
       "400-14112",
@@ -567,8 +567,8 @@
      ]
     },
     "starter": {
-     "a_cars": 332,
-     "a_cars_engine_confirmed": 270,
+     "a_cars": 324,
+     "a_cars_engine_confirmed": 262,
      "b_cars": 2505,
      "b_cars_engine_confirmed": 2104,
      "units": [
@@ -605,9 +605,9 @@
     },
     "starter": {
      "a_cars": 311,
-     "a_cars_engine_confirmed": 256,
+     "a_cars_engine_confirmed": 201,
      "b_cars": 3012,
-     "b_cars_engine_confirmed": 2443,
+     "b_cars_engine_confirmed": 2017,
      "units": [
       "410-14076",
       "410-48124",
@@ -654,10 +654,10 @@
      ]
     },
     "starter": {
-     "a_cars": 424,
-     "a_cars_engine_confirmed": 292,
-     "b_cars": 3270,
-     "b_cars_engine_confirmed": 2219,
+     "a_cars": 387,
+     "a_cars_engine_confirmed": 255,
+     "b_cars": 3145,
+     "b_cars_engine_confirmed": 2014,
      "units": [
       "410-14044",
       "410-14045",
@@ -680,10 +680,10 @@
    ],
    "by_cat": {
     "alternator": {
-     "a_cars": 312,
-     "a_cars_engine_confirmed": 252,
-     "b_cars": 2586,
-     "b_cars_engine_confirmed": 2139,
+     "a_cars": 308,
+     "a_cars_engine_confirmed": 248,
+     "b_cars": 2554,
+     "b_cars_engine_confirmed": 2107,
      "units": [
       "400-14011",
       "400-14022",
@@ -700,8 +700,8 @@
     "starter": {
      "a_cars": 312,
      "a_cars_engine_confirmed": 252,
-     "b_cars": 2686,
-     "b_cars_engine_confirmed": 2223,
+     "b_cars": 2330,
+     "b_cars_engine_confirmed": 1916,
      "units": [
       "410-14024",
       "410-14059",
@@ -894,8 +894,8 @@
     "alternator": {
      "a_cars": 24,
      "a_cars_engine_confirmed": 20,
-     "b_cars": 338,
-     "b_cars_engine_confirmed": 269,
+     "b_cars": 9,
+     "b_cars_engine_confirmed": 8,
      "units": [
       "400-48034"
      ]
@@ -938,8 +938,8 @@
     "starter": {
      "a_cars": 24,
      "a_cars_engine_confirmed": 17,
-     "b_cars": 361,
-     "b_cars_engine_confirmed": 250,
+     "b_cars": 350,
+     "b_cars_engine_confirmed": 239,
      "units": [
       "410-52066",
       "410-52089",
@@ -999,8 +999,8 @@
     "alternator": {
      "a_cars": 11,
      "a_cars_engine_confirmed": 11,
-     "b_cars": 590,
-     "b_cars_engine_confirmed": 519,
+     "b_cars": 519,
+     "b_cars_engine_confirmed": 453,
      "units": [
       "400-44036",
       "400-48053",
@@ -1013,7 +1013,7 @@
     "starter": {
      "a_cars": 11,
      "a_cars_engine_confirmed": 1,
-     "b_cars": 627,
+     "b_cars": 626,
      "b_cars_engine_confirmed": 140,
      "units": [
       "410-48181",
@@ -1108,8 +1108,8 @@
     "alternator": {
      "a_cars": 3,
      "a_cars_engine_confirmed": 3,
-     "b_cars": 185,
-     "b_cars_engine_confirmed": 153,
+     "b_cars": 112,
+     "b_cars_engine_confirmed": 94,
      "units": [
       "400-40069",
       "400-44118"
@@ -1118,8 +1118,8 @@
     "starter": {
      "a_cars": 3,
      "a_cars_engine_confirmed": 3,
-     "b_cars": 274,
-     "b_cars_engine_confirmed": 242,
+     "b_cars": 214,
+     "b_cars_engine_confirmed": 190,
      "units": [
       "410-48112",
       "410-48184"
@@ -1151,8 +1151,8 @@
     "starter": {
      "a_cars": 70,
      "a_cars_engine_confirmed": 55,
-     "b_cars": 769,
-     "b_cars_engine_confirmed": 295,
+     "b_cars": 616,
+     "b_cars_engine_confirmed": 215,
      "units": [
       "410-48100",
       "410-48122"

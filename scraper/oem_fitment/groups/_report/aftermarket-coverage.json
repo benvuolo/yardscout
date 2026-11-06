@@ -15,11 +15,11 @@
    "starter": 0
   },
   "Acura": {
-   "alternator": 1794,
+   "alternator": 1581,
    "cars": 4117,
-   "either": 3931,
-   "either_engine_confirmed": 3415,
-   "starter": 3820
+   "either": 3919,
+   "either_engine_confirmed": 3403,
+   "starter": 3785
   },
   "Alfa Romeo": {
    "alternator": 0,
@@ -36,53 +36,53 @@
    "starter": 0
   },
   "Audi": {
-   "alternator": 960,
+   "alternator": 950,
    "cars": 2269,
-   "either": 1232,
-   "either_engine_confirmed": 1029,
-   "starter": 1174
+   "either": 1221,
+   "either_engine_confirmed": 1021,
+   "starter": 1158
   },
   "BMW": {
-   "alternator": 2538,
+   "alternator": 2516,
    "cars": 5388,
-   "either": 4454,
-   "either_engine_confirmed": 3837,
-   "starter": 4064
+   "either": 4450,
+   "either_engine_confirmed": 3834,
+   "starter": 4047
   },
   "Buick": {
-   "alternator": 5877,
+   "alternator": 5257,
    "cars": 7261,
-   "either": 7058,
-   "either_engine_confirmed": 5762,
-   "starter": 6646
+   "either": 7057,
+   "either_engine_confirmed": 5761,
+   "starter": 6645
   },
   "Cadillac": {
-   "alternator": 2563,
+   "alternator": 2416,
    "cars": 4998,
-   "either": 4723,
-   "either_engine_confirmed": 3810,
-   "starter": 4427
+   "either": 4167,
+   "either_engine_confirmed": 3292,
+   "starter": 3864
   },
   "Chevrolet": {
-   "alternator": 37727,
+   "alternator": 35456,
    "cars": 48762,
-   "either": 43543,
-   "either_engine_confirmed": 36997,
-   "starter": 38256
+   "either": 43481,
+   "either_engine_confirmed": 36937,
+   "starter": 37979
   },
   "Chrysler": {
-   "alternator": 3876,
+   "alternator": 3823,
    "cars": 10234,
-   "either": 9694,
-   "either_engine_confirmed": 8191,
-   "starter": 9614
+   "either": 9648,
+   "either_engine_confirmed": 8146,
+   "starter": 9307
   },
   "Daewoo": {
-   "alternator": 7,
+   "alternator": 2,
    "cars": 13,
-   "either": 13,
+   "either": 10,
    "either_engine_confirmed": 6,
-   "starter": 13
+   "starter": 10
   },
   "Daihatsu": {
    "alternator": 0,
@@ -99,11 +99,11 @@
    "starter": 0
   },
   "Dodge": {
-   "alternator": 12544,
+   "alternator": 11096,
    "cars": 22559,
-   "either": 20759,
-   "either_engine_confirmed": 17586,
-   "starter": 20557
+   "either": 20117,
+   "either_engine_confirmed": 16975,
+   "starter": 19953
   },
   "Ducati": {
    "alternator": 0,
@@ -122,16 +122,16 @@
   "Fiat": {
    "alternator": 150,
    "cars": 372,
-   "either": 316,
-   "either_engine_confirmed": 247,
-   "starter": 316
+   "either": 313,
+   "either_engine_confirmed": 245,
+   "starter": 313
   },
   "Ford": {
-   "alternator": 40327,
+   "alternator": 38697,
    "cars": 54189,
-   "either": 50505,
-   "either_engine_confirmed": 42524,
-   "starter": 39337
+   "either": 50187,
+   "either_engine_confirmed": 42228,
+   "starter": 38448
   },
   "Freightliner": {
    "alternator": 6,
@@ -141,7 +141,7 @@
    "starter": 4
   },
   "GMC": {
-   "alternator": 6432,
+   "alternator": 6427,
    "cars": 9268,
    "either": 7205,
    "either_engine_confirmed": 6101,
@@ -169,11 +169,11 @@
    "starter": 0
   },
   "Honda": {
-   "alternator": 16898,
+   "alternator": 16567,
    "cars": 24414,
-   "either": 23845,
-   "either_engine_confirmed": 21047,
-   "starter": 23397
+   "either": 23837,
+   "either_engine_confirmed": 21040,
+   "starter": 23372
   },
   "Hummer": {
    "alternator": 117,
@@ -183,18 +183,18 @@
    "starter": 79
   },
   "Hyundai": {
-   "alternator": 9193,
+   "alternator": 8412,
    "cars": 12274,
-   "either": 11381,
-   "either_engine_confirmed": 9893,
-   "starter": 10649
+   "either": 11102,
+   "either_engine_confirmed": 9634,
+   "starter": 10420
   },
   "Infiniti": {
-   "alternator": 2609,
+   "alternator": 2603,
    "cars": 3406,
-   "either": 2967,
+   "either": 2952,
    "either_engine_confirmed": 2684,
-   "starter": 2392
+   "starter": 2348
   },
   "International": {
    "alternator": 0,
@@ -204,25 +204,25 @@
    "starter": 0
   },
   "Isuzu": {
-   "alternator": 367,
+   "alternator": 335,
    "cars": 501,
-   "either": 419,
-   "either_engine_confirmed": 328,
-   "starter": 395
+   "either": 417,
+   "either_engine_confirmed": 326,
+   "starter": 392
   },
   "Jaguar": {
-   "alternator": 242,
+   "alternator": 211,
    "cars": 704,
-   "either": 363,
-   "either_engine_confirmed": 310,
-   "starter": 306
+   "either": 332,
+   "either_engine_confirmed": 279,
+   "starter": 249
   },
   "Jeep": {
-   "alternator": 4182,
+   "alternator": 4081,
    "cars": 10044,
-   "either": 9891,
-   "either_engine_confirmed": 8353,
-   "starter": 9589
+   "either": 9640,
+   "either_engine_confirmed": 8126,
+   "starter": 9370
   },
   "Kawasaki": {
    "alternator": 0,
@@ -232,32 +232,32 @@
    "starter": 0
   },
   "Kia": {
-   "alternator": 7323,
+   "alternator": 7076,
    "cars": 9549,
-   "either": 9069,
-   "either_engine_confirmed": 7822,
-   "starter": 8816
+   "either": 8907,
+   "either_engine_confirmed": 7687,
+   "starter": 8560
   },
   "Land Rover": {
-   "alternator": 400,
+   "alternator": 342,
    "cars": 827,
-   "either": 729,
-   "either_engine_confirmed": 653,
-   "starter": 729
+   "either": 674,
+   "either_engine_confirmed": 600,
+   "starter": 674
   },
   "Lexus": {
-   "alternator": 1658,
+   "alternator": 1326,
    "cars": 3145,
-   "either": 2278,
-   "either_engine_confirmed": 2017,
-   "starter": 1745
+   "either": 1963,
+   "either_engine_confirmed": 1738,
+   "starter": 1699
   },
   "Lincoln": {
-   "alternator": 2387,
+   "alternator": 2270,
    "cars": 3395,
-   "either": 2722,
-   "either_engine_confirmed": 2268,
-   "starter": 1766
+   "either": 2571,
+   "either_engine_confirmed": 2141,
+   "starter": 1615
   },
   "Lucid": {
    "alternator": 0,
@@ -278,7 +278,7 @@
    "cars": 1011,
    "either": 846,
    "either_engine_confirmed": 528,
-   "starter": 842
+   "starter": 838
   },
   "Maserati": {
    "alternator": 0,
@@ -288,11 +288,11 @@
    "starter": 0
   },
   "Mazda": {
-   "alternator": 5372,
+   "alternator": 4674,
    "cars": 6241,
-   "either": 5705,
-   "either_engine_confirmed": 4703,
-   "starter": 4755
+   "either": 5555,
+   "either_engine_confirmed": 4575,
+   "starter": 4658
   },
   "Mercedes-Benz": {
    "alternator": 1163,
@@ -302,11 +302,11 @@
    "starter": 1099
   },
   "Mercury": {
-   "alternator": 2382,
+   "alternator": 2348,
    "cars": 2869,
-   "either": 2541,
-   "either_engine_confirmed": 2047,
-   "starter": 2408
+   "either": 2538,
+   "either_engine_confirmed": 2044,
+   "starter": 2329
   },
   "Merkur": {
    "alternator": 0,
@@ -323,11 +323,11 @@
    "starter": 0
   },
   "Mitsubishi": {
-   "alternator": 1885,
+   "alternator": 1849,
    "cars": 2996,
-   "either": 2413,
-   "either_engine_confirmed": 2017,
-   "starter": 2367
+   "either": 2329,
+   "either_engine_confirmed": 1944,
+   "starter": 2231
   },
   "Mitsubishi Fuso": {
    "alternator": 0,
@@ -351,14 +351,14 @@
    "starter": 0
   },
   "Nissan": {
-   "alternator": 25567,
+   "alternator": 23644,
    "cars": 29754,
-   "either": 28840,
-   "either_engine_confirmed": 25108,
-   "starter": 27394
+   "either": 27883,
+   "either_engine_confirmed": 24203,
+   "starter": 21105
   },
   "Oldsmobile": {
-   "alternator": 536,
+   "alternator": 478,
    "cars": 961,
    "either": 629,
    "either_engine_confirmed": 497,
@@ -400,18 +400,18 @@
    "starter": 110
   },
   "Pontiac": {
-   "alternator": 3781,
+   "alternator": 3442,
    "cars": 4391,
-   "either": 4120,
-   "either_engine_confirmed": 3366,
-   "starter": 3879
+   "either": 4091,
+   "either_engine_confirmed": 3337,
+   "starter": 3857
   },
   "Porsche": {
-   "alternator": 41,
+   "alternator": 38,
    "cars": 183,
-   "either": 125,
-   "either_engine_confirmed": 103,
-   "starter": 123
+   "either": 119,
+   "either_engine_confirmed": 96,
+   "starter": 109
   },
   "Qvale": {
    "alternator": 0,
@@ -421,11 +421,11 @@
    "starter": 0
   },
   "Ram": {
-   "alternator": 185,
+   "alternator": 181,
    "cars": 561,
-   "either": 527,
-   "either_engine_confirmed": 406,
-   "starter": 503
+   "either": 505,
+   "either_engine_confirmed": 395,
+   "starter": 475
   },
   "Renault": {
    "alternator": 0,
@@ -451,16 +451,16 @@
   "Saturn": {
    "alternator": 1977,
    "cars": 2778,
-   "either": 2320,
-   "either_engine_confirmed": 1922,
-   "starter": 2320
+   "either": 2249,
+   "either_engine_confirmed": 1851,
+   "starter": 2249
   },
   "Scion": {
-   "alternator": 705,
+   "alternator": 580,
    "cars": 1524,
-   "either": 1512,
-   "either_engine_confirmed": 1285,
-   "starter": 1499
+   "either": 1165,
+   "either_engine_confirmed": 872,
+   "starter": 1153
   },
   "Smart": {
    "alternator": 0,
@@ -491,18 +491,18 @@
    "starter": 0
   },
   "Subaru": {
-   "alternator": 3742,
+   "alternator": 3671,
    "cars": 5568,
-   "either": 5227,
-   "either_engine_confirmed": 4310,
-   "starter": 5049
+   "either": 4905,
+   "either_engine_confirmed": 3998,
+   "starter": 4689
   },
   "Suzuki": {
-   "alternator": 540,
+   "alternator": 506,
    "cars": 750,
-   "either": 585,
-   "either_engine_confirmed": 474,
-   "starter": 457
+   "either": 577,
+   "either_engine_confirmed": 461,
+   "starter": 423
   },
   "Tesla": {
    "alternator": 0,
@@ -512,11 +512,11 @@
    "starter": 0
   },
   "Toyota": {
-   "alternator": 15870,
+   "alternator": 15556,
    "cars": 21635,
-   "either": 18126,
-   "either_engine_confirmed": 15678,
-   "starter": 15743
+   "either": 17932,
+   "either_engine_confirmed": 15517,
+   "starter": 15667
   },
   "Trailer": {
    "alternator": 0,
@@ -540,18 +540,18 @@
    "starter": 0
   },
   "Volkswagen": {
-   "alternator": 5369,
+   "alternator": 5292,
    "cars": 6915,
-   "either": 6110,
-   "either_engine_confirmed": 5176,
-   "starter": 5985
+   "either": 6078,
+   "either_engine_confirmed": 5091,
+   "starter": 5876
   },
   "Volvo": {
-   "alternator": 1651,
+   "alternator": 1637,
    "cars": 2460,
-   "either": 1838,
-   "either_engine_confirmed": 897,
-   "starter": 1453
+   "either": 1827,
+   "either_engine_confirmed": 886,
+   "starter": 1344
   },
   "Yamaha": {
    "alternator": 0,
@@ -568,18 +568,18 @@
    "starter": 0
   }
  },
- "groups_sha256": "2a32305770eae58698bfa114c86626ca6206cc431be41e80982e9c23ffe903df",
+ "groups_sha256": "66435ce8c2b59bc49a39d2a8fab500822575965b2e1e2e6057bb426b9b9b0191",
  "likely_car_pairs": {
-  "alternator": 888980550,
-  "starter": 1527885312
+  "alternator": 788162372,
+  "starter": 1312737648
  },
  "raw": "origin/oem-raw@9d2c3b76:aftermarket/raw/www.dbelectrical.com.jsonl",
  "total": {
-  "alternator": 231938,
+  "alternator": 219748,
   "cars": 334293,
-  "either": 300275,
-  "either_engine_confirmed": 254921,
-  "starter": 270856
+  "either": 295112,
+  "either_engine_confirmed": 250023,
+  "starter": 259282
  },
  "verified_pairs_added": 0
 }
