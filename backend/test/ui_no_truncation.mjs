@@ -296,6 +296,22 @@ const tab = async (page, t) => {
 };
 const firstKeys = (page, n) => page.evaluate((n) => [...document.querySelectorAll('#live-grid .heart-btn[data-vkey], #live-grid [data-vkey]')].map(b => b.dataset.vkey).filter((k, i, a) => a.indexOf(k) === i).slice(0, n), n);
 
+const likelySearch = async (page) => {
+    await tab(page, 'parts');
+    await page.selectOption('#pf-year', '2009');
+    await page.selectOption('#pf-make', 'Toyota');
+    await page.waitForFunction(() => [...document.getElementById('pf-model').options].some(o => o.value === 'Camry'));
+    await page.selectOption('#pf-model', 'Camry');
+    await page.click('#pf-part');
+    await page.fill('#pf-part', 'mirror');
+    await page.waitForSelector('#pf-part-suggest [data-cat="side-mirrors"]');
+    await page.dispatchEvent('#pf-part-suggest [data-cat="side-mirrors"]', 'mousedown');
+    await settle(page, 300);
+    if (!(await page.evaluate(() => /Likely fits/.test(document.getElementById('pf-results').textContent)))) await page.click('#pf-go');
+    await page.waitForFunction(() => /Likely fits/.test(document.getElementById('pf-results').textContent), null, { timeout: 15000 })
+      .catch(() => { throw new Error('part finder: no "Likely fits" OEM row rendered (fixture not picked up)'); });
+    await page.evaluate(() => { const r = document.querySelector('.pf-row-card.pf-likely'); if (r) r.scrollIntoView({ block: 'center' }); });
+};
 const SCREENS = [
   ['results', async (page) => { await tab(page, 'live'); }],
   ['car-card', async (page) => {
@@ -382,22 +398,7 @@ const SCREENS = [
     await settle(page, 400);
   }, async (page) => { await resetUi(page); await page.evaluate(() => { localStorage.removeItem('jh_pro'); applyProGates(); renderLive(); }); }],
   ['part-finder', async (page) => { await tab(page, 'parts'); }],
-  ['part-finder-likely', async (page) => {
-    await tab(page, 'parts');
-    await page.selectOption('#pf-year', '2009');
-    await page.selectOption('#pf-make', 'Toyota');
-    await page.waitForFunction(() => [...document.getElementById('pf-model').options].some(o => o.value === 'Camry'));
-    await page.selectOption('#pf-model', 'Camry');
-    await page.click('#pf-part');
-    await page.fill('#pf-part', 'mirror');
-    await page.waitForSelector('#pf-part-suggest [data-cat="side-mirrors"]');
-    await page.dispatchEvent('#pf-part-suggest [data-cat="side-mirrors"]', 'mousedown');
-    await settle(page, 300);
-    if (!(await page.evaluate(() => /Likely fits/.test(document.getElementById('pf-results').textContent)))) await page.click('#pf-go');
-    await page.waitForFunction(() => /Likely fits/.test(document.getElementById('pf-results').textContent), null, { timeout: 15000 })
-      .catch(() => { throw new Error('part finder: no "Likely fits" OEM row rendered (fixture not picked up)'); });
-    await page.evaluate(() => { const r = document.querySelector('.pf-row-card.pf-likely'); if (r) r.scrollIntoView({ block: 'center' }); });
-  }],
+  ['part-finder-likely', likelySearch],
   // Parts tab states (round 4): try chips run real searches near the zip.
   ...[['pf-fit', 'Alternator'], ['pf-hunt', 'Hunt'], ['pf-browse', 'Browse']].map(([name, label]) => [name, async (page) => {
     await tab(page, 'parts');
@@ -407,6 +408,16 @@ const SCREENS = [
     await page.waitForFunction(() => document.querySelector('#pf-results .pf-row-card, #pf-results .pf-empty'), null, { timeout: 15000 });
     await settle(page, 400);
   }]),
+  ['pf-fit-pro', async (page) => {
+    await page.evaluate(() => { localStorage.setItem('jh_pro', '1'); applyProGates(); });
+    await tab(page, 'parts');
+    await page.evaluate(() => { pfCat = null; document.getElementById('pf-results').innerHTML = ''; pfRenderTry(); });
+    await page.waitForSelector('#pf-results .pf-try-chip');
+    await page.evaluate(() => [...document.querySelectorAll('#pf-results .pf-try-chip')].find(b => b.textContent.trim().startsWith('Alternator')).click());
+    await page.waitForSelector('#pf-results .pf-row-card', { timeout: 15000 });
+    await page.evaluate(() => { const r = document.querySelector('#pf-results .pf-row-card'); if (r) r.scrollIntoView({ block: 'start' }); window.scrollBy(0, -90); });
+    await settle(page, 400);
+  }, async (page) => { await page.evaluate(() => { localStorage.removeItem('jh_pro'); applyProGates(); }); }],
   ['pf-none', async (page) => {
     await tab(page, 'parts');
     await page.selectOption('#pf-year', '1985');
@@ -418,10 +429,7 @@ const SCREENS = [
   }],
   ['pf-likely-pro', async (page) => {
     await page.evaluate(() => { localStorage.setItem('jh_pro', '1'); applyProGates(); });
-    await tab(page, 'parts');
-    await page.evaluate(() => { pfRunSearch(); });
-    await settle(page, 600);
-    await page.evaluate(() => { const r = document.querySelector('.pf-row-card.pf-likely'); if (r) r.scrollIntoView({ block: 'center' }); });
+    await likelySearch(page);
   }, async (page) => { await page.evaluate(() => { localStorage.removeItem('jh_pro'); applyProGates(); }); }],
   ['alerts', async (page) => { await tab(page, 'alerts'); }],
   ['alerts-hits', async (page) => {
