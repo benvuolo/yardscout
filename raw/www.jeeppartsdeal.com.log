@@ -989,3 +989,195 @@
 06:13:21 chain-unlinked power-steering-pump 1 numbers named by 52129328AC, no catalog link: 52129328AD
 06:13:21 seg done tier=A Dodge Nitro [2007, 2011] seeds=[2007] records=2078 errors=11
 06:13:21 time budget reached records=2078
+06:13:35 start site=www.jeeppartsdeal.com mode=worklist tiers=['A', 'B'] records=2078 list_lines=479 year_lines=35 url_index=5635
+06:13:35 seg done tier=A Jeep Patriot [2007, 2017] seeds=[2014] records=2078 errors=11
+06:13:35 seg done tier=A Jeep Grand Cherokee [1999, 2004] seeds=[2004] records=2078 errors=11
+06:13:35 seg done tier=A Jeep Liberty [1998, 2007] seeds=[2005] records=2078 errors=11
+06:13:35 seg done tier=A Jeep Grand Cherokee [2005, 2010] seeds=[2005] records=2078 errors=11
+06:13:35 seg done tier=A Jeep Liberty [2008, 2012] seeds=[2008] records=2078 errors=11
+06:13:35 seg done tier=A Jeep Compass [2011, 2016] seeds=[2014] records=2078 errors=11
+06:13:35 seg done tier=A Jeep Grand Cherokee [2011, 2021] seeds=[2011] records=2078 errors=11
+06:13:35 seg done tier=A Jeep Cherokee [2014, 2022] seeds=[2015] records=2078 errors=11
+06:13:35 seg done tier=A Jeep Commander [2006, 2010] seeds=[2006] records=2078 errors=11
+06:13:35 seg done tier=A Jeep Grand Cherokee [1993, 1998] seeds=[1997] records=2078 errors=11
+06:13:35 seg done tier=A Jeep Cherokee [1978, 2001] seeds=[2000] records=2078 errors=11
+06:13:35 seg done tier=A Jeep Compass [2007, 2010] seeds=[2007] records=2078 errors=11
+06:13:35 seg done tier=A Jeep Renegade [2015, 2022] seeds=[2017] records=2078 errors=11
+06:13:35 seg done tier=A Jeep Compass [2017, 2024] seeds=[2017] records=2078 errors=11
+06:13:35 seg done tier=A Jeep Wrangler [1997, 2006] seeds=[1997] records=2078 errors=11
+06:13:35 seg done tier=A Dodge Ram 1500 [1971, 2018] seeds=[2002] records=2078 errors=11
+06:13:35 seg done tier=A Dodge Grand Caravan [2008, 2024] seeds=[2010] records=2078 errors=11
+06:13:35 seg done tier=A Chrysler 200 [1979, 2022] seeds=[2015] records=2078 errors=11
+06:13:35 seg done tier=A Dodge Journey [2009, 2020] seeds=[2012] records=2078 errors=11
+06:13:35 seg done tier=A Chrysler Town & Country [2008, 2016] seeds=[2008] records=2078 errors=11
+06:13:35 seg done tier=A Chrysler 300 [1999, 2021] seeds=[2006] records=2078 errors=11
+06:13:35 seg done tier=A Dodge Avenger [1995, 2014] seeds=[2013] records=2078 errors=11
+06:13:35 seg done tier=A Chrysler PT Cruiser [2001, 2010] seeds=[2006] records=2078 errors=11
+06:13:35 seg done tier=A Dodge Charger [1971, 2010] seeds=[2007] records=2078 errors=11
+06:13:35 seg done tier=A Dodge Dakota [1997, 2004] seeds=[2000] records=2078 errors=11
+06:13:35 seg done tier=A Dodge Caravan [1984, 2020] seeds=[2005] records=2078 errors=11
+06:13:35 seg done tier=A Chrysler Town & Country [1992, 2007] seeds=[2005] records=2078 errors=11
+06:13:35 seg done tier=A Dodge Dart [1960, 2016] seeds=[2013] records=2078 errors=11
+06:13:35 seg done tier=A Dodge Caliber [2007, 2012] seeds=[2007] records=2078 errors=11
+06:13:35 seg done tier=A Dodge Grand Caravan [2001, 2007] seeds=[2005] records=2078 errors=11
+06:13:35 seg done tier=A Dodge Charger [2011, 2023] seeds=[2013] records=2078 errors=11
+06:13:35 seg done tier=A Dodge Durango [2004, 2009] seeds=[2005] records=2078 errors=11
+06:13:35 seg done tier=A Dodge Durango [1998, 2003] seeds=[2003] records=2078 errors=11
+06:13:35 seg done tier=A Chrysler Sebring [2007, 2011] seeds=[2008] records=2078 errors=11
+06:13:35 seg done tier=A Dodge Dakota [2005, 2011] seeds=[2005] records=2078 errors=11
+06:13:35 seg done tier=A Chrysler Pacifica [2004, 2008] seeds=[2006] records=2078 errors=11
+06:13:35 seg done tier=A Dodge Nitro [2007, 2011] seeds=[2007] records=2078 errors=11
+06:14:16 chain-unlinked alternator 3 numbers named by 56028697AQ, no catalog link: 56028697AL, 56028697AM, 56028697AO
+06:14:16 chain-unlinked alternator 1 numbers named by 56029653AA, no catalog link: 56029653AB
+06:14:32 chain-unlinked starter 2 numbers named by 4801256AC, no catalog link: 4801256AA, 4801256AB
+06:15:12 chain-unlinked ac-compressor 4 numbers named by 55111436AE, no catalog link: RL111436AB, 55111436AD, R5111436AB, 55111436AB
+06:15:20 chain-unlinked ac-compressor 4 numbers named by 57009385AA, no catalog link: 68454989AB, 55111442AG, RL111442AD, 68454989AA
+06:15:20 chain-unlinked ac-compressor 1 numbers named by 2AMA1436AA, no catalog link: 2AMA11436A
+06:16:00 chain-unlinked headlights 6 numbers named by 68001484AI, no catalog link: 68001484AE, 68001484AD, 68001484AH, 68001484AF, 68001484AC, 68001484AG
+06:16:00 chain-unlinked headlights 4 numbers named by 55277409AG, no catalog link: 55277409AC, 55277409AD, 55277409AE, 55277409AF
+06:16:00 chain-unlinked headlights 6 numbers named by 68001485AI, no catalog link: 68001485AC, 68001485AF, 68001485AD, 68001485AG, 68001485AH, 68001485AE
+06:16:00 chain-unlinked headlights 4 numbers named by 55277410AG, no catalog link: 55277410AF, 55277410AC, 55277410AE, 55277410AD
+06:16:48 chain-unlinked tail-lights 4 numbers named by 55277414AF, no catalog link: 55277414AE, 55277414AC, 55277414AD, 55277414AA
+06:16:48 chain-unlinked tail-lights 4 numbers named by 55277415AF, no catalog link: 55277415AC, 55277415AD, 55277415AA, 55277415AE
+06:21:52 chain-unlinked side-mirrors 5 numbers named by 1QL211S2AF, no catalog link: 1QL211S2AA, 1QL211S2AC, 1QL211S2AD, 1QL211S2AB, 1QL211S2AE
+06:21:52 chain-unlinked side-mirrors 4 numbers named by 68060203AF, no catalog link: 68060203AB, 68060203AD, 68060203AE, 68060203AA
+06:21:52 chain-unlinked side-mirrors 4 numbers named by 68060202AF, no catalog link: 68060202AD, 68060202AA, 68060202AB, 68060202AE
+06:21:52 chain-unlinked side-mirrors 5 numbers named by 1QL201BSAF, no catalog link: 1QL201BSAB, 1QL201BSAE, 1QL201BSAC, 1QL201BSAA, 1QL201BSAD
+06:21:52 chain-unlinked side-mirrors 5 numbers named by 1QL211RPAF, no catalog link: 1QL211RPAB, 1QL211RPAE, 1QL211RPAC, 1QL211RPAA, 1QL211RPAD
+06:21:52 chain-unlinked side-mirrors 6 numbers named by 55372067AI, no catalog link: 55372067AF, 55372067AH, 55372067AE, 55372067AG, 55372067AC, 55372067AD
+06:21:52 chain-unlinked side-mirrors 4 numbers named by 68061200AF, no catalog link: 68061200AA, 68061200AB, 68061200AD, 68061200AE
+06:21:52 chain-unlinked side-mirrors 4 numbers named by 68061201AF, no catalog link: 68061201AA, 68061201AE, 68061201AB, 68061201AD
+06:21:52 chain-unlinked side-mirrors 5 numbers named by 1QL201DMAF, no catalog link: 1QL201DMAB, 1QL201DMAC, 1QL201DMAA, 1QL201DMAE, 1QL201DMAD
+06:21:52 chain-unlinked side-mirrors 5 numbers named by 1QL201GTAF, no catalog link: 1QL201GTAB, 1QL201GTAE, 1QL201GTAC, 1QL201GTAA, 1QL201GTAD
+06:21:52 chain-unlinked side-mirrors 6 numbers named by 1QL201R4AF, no catalog link: 1QL201R4AE, 1QL201R4AB, 1QL201R4AD, 1QL201R4AA, 1QL201R3AA, 1QL201R4AC
+06:21:52 chain-unlinked side-mirrors 5 numbers named by 1QL201RPAF, no catalog link: 1QL201RPAC, 1QL201RPAA, 1QL201RPAB, 1QL201RPAD, 1QL201RPAE
+06:21:52 chain-unlinked side-mirrors 5 numbers named by 1QL201S2AF, no catalog link: 1QL201S2AC, 1QL201S2AE, 1QL201S2AD, 1QL201S2AA, 1QL201S2AB
+06:21:52 chain-unlinked side-mirrors 5 numbers named by 1QL201W7AF, no catalog link: 1QL201W7AB, 1QL201W7AE, 1QL201W7AA, 1QL201W7AD, 1QL201W7AC
+06:21:52 chain-unlinked side-mirrors 5 numbers named by 1QL201XRAF, no catalog link: 1QL201XRAB, 1QL201XRAE, 1QL201XRAA, 1QL201XRAD, 1QL201XRAC
+06:21:52 chain-unlinked side-mirrors 5 numbers named by 1QL211BSAF, no catalog link: 1QL211BSAD, 1QL211BSAC, 1QL211BSAB, 1QL211BSAA, 1QL211BSAE
+06:21:52 chain-unlinked side-mirrors 5 numbers named by 1QL211DMAF, no catalog link: 1QL211DMAC, 1QL211DMAB, 1QL211DMAD, 1QL211DMAE, 1QL211DMAA
+06:21:52 chain-unlinked side-mirrors 5 numbers named by 1QL211GTAF, no catalog link: 1QL211GTAB, 1QL211GTAC, 1QL211GTAD, 1QL211GTAE, 1QL211GTAA
+06:21:52 chain-unlinked side-mirrors 6 numbers named by 1QL211R4AF, no catalog link: 1QL211R4AA, 1QL211R4AB, 1QL211R4AC, 1QL211R4AE, 1QL211R4AD, 1QL211R3AA
+06:21:52 chain-unlinked side-mirrors 5 numbers named by 1QL211W7AF, no catalog link: 1QL211W7AE, 1QL211W7AD, 1QL211W7AC, 1QL211W7AB, 1QL211W7AA
+06:21:52 chain-unlinked side-mirrors 5 numbers named by 1QL211XRAF, no catalog link: 1QL211XRAC, 1QL211XRAD, 1QL211XRAE, 1QL211XRAB, 1QL211XRAA
+06:21:52 chain-unlinked side-mirrors 5 numbers named by 55372066AI, no catalog link: 55372066AH, 55372066AF, 55372066AC, 55372066AD, 55372066AG
+06:21:52 chain-unlinked side-mirrors 6 numbers named by 55372068AI, no catalog link: 55372068AG, 55372068AF, 55372068AC, 55372068AH, 55372068AD, 55372068AE
+06:21:52 chain-unlinked side-mirrors 4 numbers named by 55372069AH, no catalog link: 55372069AG, 55372069AD, 55372069AF, 55372069AE
+06:21:52 chain-unlinked side-mirrors 6 numbers named by 55372072AL, no catalog link: 55372072AF, 55372072AH, 55372072AK, 55372072AJ, 55372072AI, 55372072AE
+06:21:52 chain-unlinked side-mirrors 6 numbers named by 55372073AL, no catalog link: 55372073AH, 55372073AI, 55372073AK, 55372073AE, 55372073AF, 55372073AJ
+06:21:52 chain-unlinked side-mirrors 9 numbers named by 68033734AM, no catalog link: 68033734AK, 68080092AD, 68033734AE, 68033734AH, 68033734AF, 68033734AI, 68033734AG, 68033734AL, 68033734AJ
+06:21:52 chain-unlinked side-mirrors 8 numbers named by 68033735AM, no catalog link: 68033735AG, 68033735AH, 68033735AF, 68033735AL, 68033735AI, 68033735AJ, 68080093AD, 68033735AK
+06:21:52 chain-unlinked side-mirrors 1 numbers named by 68143805AB, no catalog link: 68143805AF
+06:21:52 chain-unlinked side-mirrors 1 numbers named by 68143804AB, no catalog link: 68143804AF
+06:21:52 chain-unlinked side-mirrors 1 numbers named by 68143807AB, no catalog link: 68143807AF
+06:21:52 chain-unlinked side-mirrors 1 numbers named by 68143806AB, no catalog link: 68143806AF
+06:22:40 chain-unlinked window-regulator 1 numbers named by 68045134AB, no catalog link: 68045134AA
+06:22:40 chain-unlinked window-regulator 1 numbers named by 68045135AB, no catalog link: 68045135AA
+06:23:20 chain-unlinked window-switch 2 numbers named by 4602870AD, no catalog link: 4602870AC, 4602870AB
+06:23:20 chain-unlinked window-switch 2 numbers named by 68021708AD, no catalog link: 68021708AB, 68021708AC
+06:23:20 chain-unlinked window-switch 3 numbers named by 68620450AA, no catalog link: 4602863AB, 4602863AC, 4602863AD
+06:23:20 chain-unlinked window-switch 3 numbers named by 68620462AA, no catalog link: 4602881AD, 4602881AB, 4602881AC
+06:23:20 chain-unlinked window-switch 1 numbers named by 68620466AA, no catalog link: 68091001AB
+06:24:08 chain-unlinked climate-control 1 numbers named by 55111291AE, no catalog link: 55111291AC
+06:24:08 chain-unlinked climate-control 2 numbers named by 55111292AF, no catalog link: 55111292AE, 55111292AD
+06:24:08 chain-unlinked climate-control 2 numbers named by 55111290AF, no catalog link: 55111290AD, 55111290AE
+06:24:32 chain-unlinked fuel-pump-module 3 numbers named by 68050948AB, no catalog link: RL050948AA, 68050948AA, RL145594AA
+06:25:28 chain-unlinked power-steering-pump 1 numbers named by 55398903AE, no catalog link: 55398903AD
+06:25:28 chain-unlinked power-steering-pump 1 numbers named by 55398904AE, no catalog link: 55398904AD
+06:25:28 chain-unlinked power-steering-pump 1 numbers named by 68069904AC, no catalog link: 68069904AB
+06:25:28 seg done tier=A Ram 1500 [2009, 2022] seeds=[2012] records=2153 errors=11
+06:26:08 chain-unlinked alternator 3 numbers named by 4801858AA, no catalog link: 4606755AD, 4606755AC, 4606755AB
+06:26:48 chain-unlinked starter 1 numbers named by 4609703AG, no catalog link: 4609703AF
+06:27:36 chain-unlinked ac-compressor 2 numbers named by 5069029AA, no catalog link: 4596366AB, R5069029AA
+06:28:24 chain-unlinked headlights 4 numbers named by 4806036AF, no catalog link: 4806036AC, 4806036AD, 4806036AB, 4806036AE
+06:28:24 chain-unlinked headlights 4 numbers named by 4806037AF, no catalog link: 4806037AC, 4806037AD, 4806037AE, 4806037AB
+06:29:12 chain-unlinked tail-lights 1 numbers named by 4805463AC, no catalog link: 4805463AB
+06:29:12 chain-unlinked tail-lights 1 numbers named by 4805352AC, no catalog link: 4805352AB
+06:29:12 chain-unlinked tail-lights 1 numbers named by 4805462AC, no catalog link: 4805462AB
+06:29:12 chain-unlinked tail-lights 1 numbers named by 4805353AC, no catalog link: 4805353AB
+06:32:16 chain-unlinked side-mirrors 2 numbers named by 4805310AD, no catalog link: 4805310AB, 4805310AC
+06:32:16 chain-unlinked side-mirrors 1 numbers named by 4805311AD, no catalog link: 4805311AC
+06:32:16 chain-unlinked side-mirrors 3 numbers named by 4805312AF, no catalog link: 4805312AE, 4805312AD, 4805312AC
+06:32:16 chain-unlinked side-mirrors 3 numbers named by 4805313AF, no catalog link: 4805313AD, 4805313AC, 4805313AE
+06:32:16 chain-unlinked side-mirrors 3 numbers named by 4805434AF, no catalog link: 4805434AD, 4805434AE, 4805434AC
+06:32:16 chain-unlinked side-mirrors 3 numbers named by 4805435AF, no catalog link: 4805435AC, 4805435AE, 4805435AD
+06:32:16 chain-unlinked side-mirrors 2 numbers named by 4806132AA, no catalog link: 4805694AD, 4805694AC
+06:32:16 chain-unlinked side-mirrors 2 numbers named by 4806133AA, no catalog link: 4805695AD, 4805695AC
+06:32:16 chain-unlinked side-mirrors 1 numbers named by 4806137AB, no catalog link: 4806137AA
+06:33:28 chain-unlinked window-regulator 6 numbers named by 4878108AL, no catalog link: 4878108AG, 4878108AK, 4878108AF, 4878108AJ, 4878108AH, 4878108AI
+06:33:28 chain-unlinked window-regulator 6 numbers named by 4878109AL, no catalog link: 4878109AG, 4878109AK, 4878109AJ, 4878109AF, 4878109AH, 4878109AI
+06:33:28 chain-unlinked window-regulator 3 numbers named by 5056028AG, no catalog link: 5056028AD, 5056028AF, 5056028AE
+06:33:28 chain-unlinked window-regulator 3 numbers named by 5056029AG, no catalog link: 5056029AD, 5056029AE, 5056029AF
+06:34:08 chain-unlinked window-regulator 1 numbers named by 5056030AD, no catalog link: 5056030AC
+06:34:08 chain-unlinked window-regulator 1 numbers named by 5056031AD, no catalog link: 5056031AC
+06:34:48 chain-unlinked climate-control 5 numbers named by 4698199AG, no catalog link: 4698199AD, 4698199AC, 4698199AB, 4698199AF, 4698199AE
+06:37:28 chain-unlinked power-steering-pump 2 numbers named by 4764718AC, no catalog link: 4764718AD, 4764718AB
+06:37:28 chain-unlinked power-steering-pump 1 numbers named by 4764421AB, no catalog link: 4764421AA
+06:37:28 seg done tier=A Chrysler Sebring [2001, 2006] seeds=[2004] records=2225 errors=11
+06:38:24 chain-unlinked ac-compressor 3 numbers named by 68021638AH, no catalog link: 68021638AD, RL021638AD, 68021638AG
+06:38:24 chain-unlinked ac-compressor 3 numbers named by RL111514AC, no catalog link: RL111514AB, 55111514AB, 55111514AC
+06:40:16 chain-unlinked headlights 1 numbers named by 55079366AD, no catalog link: 55079366AB
+06:40:16 chain-unlinked headlights 4 numbers named by 5182394AE, no catalog link: 5182394AA, 5182394AD, 5182394AB, 5182394AC
+06:40:16 chain-unlinked headlights 4 numbers named by 5182395AD, no catalog link: 5182395AE, 5182395AC, 5182395AB, 5182395AA
+06:40:16 chain-unlinked headlights 1 numbers named by 55079367AD, no catalog link: 55079367AB
+06:40:16 chain-unlinked headlights 1 numbers named by 68084076AC, no catalog link: 68084076AA
+06:40:16 chain-unlinked headlights 1 numbers named by 68084077AC, no catalog link: 68084077AA
+06:40:16 chain-unlinked headlights 4 numbers named by 68086318AE, no catalog link: 68086318AD, 68086318AC, 68086318AB, 68086318AA
+06:40:16 chain-unlinked headlights 5 numbers named by 68086419AD, no catalog link: 68086419AE, 68086319AE, 68086419AC, 68086419AB, 68086419AA
+06:40:56 chain-unlinked tail-lights 2 numbers named by 55079136AG, no catalog link: 55079136AE, 55079136AF
+06:40:56 chain-unlinked tail-lights 1 numbers named by 55079137AG, no catalog link: 55079137AE
+06:47:20 chain-unlinked side-mirrors 10 numbers named by 68237575AF, no catalog link: 55000947AF, 68237575AB, 68237575AC, 55000947AC, 68237575AA, 55000947AE, 55000947AD, 68237575AE, 55000947AB, 68237575AD
+06:47:20 chain-unlinked side-mirrors 6 numbers named by 5SH47JSCAF, no catalog link: 5SH47JSCAE, 5SH47JSCAD, 5SH47JSCAA, 5SH47JSCAB, 5SH47JSCAC, 1XW47JSCAB
+06:47:20 chain-unlinked side-mirrors 9 numbers named by 68237572AF, no catalog link: 5182328AK, 5182328AG, 68237572AE, 68237572AA, 68237572AC, 5182328AI, 5182328AH, 68237572AD, 68237572AB
+06:47:20 chain-unlinked side-mirrors 6 numbers named by 5SH42GW7AF, no catalog link: 5SH42GW7AB, 5SH42GW7AD, 5SH42GW7AA, 1NT28GW7AK, 5SH42GW7AC, 5SH42GW7AE
+06:47:20 chain-unlinked side-mirrors 9 numbers named by 5SH42JRMAF, no catalog link: 1NT28JRMAI, 1NT28JRMAH, 1NT28JRMAJ, 5SH42JRMAE, 5SH42JRMAA, 5SH42JRMAB, 5SH42JRMAD, 5SH42JRMAC, 1NT28JRMAK
+06:47:20 chain-unlinked side-mirrors 6 numbers named by 5SH42JSCAF, no catalog link: 5SH42JSCAE, 5SH42JSCAC, 1NT28JSCAK, 5SH42JSCAB, 5SH42JSCAA, 5SH42JSCAD
+06:47:20 chain-unlinked side-mirrors 8 numbers named by 5SH42KBUAF, no catalog link: 5SH42KBUAC, 1NT28KBUAJ, 1NT28KBUAI, 1NT28KBUAK, 5SH42KBUAE, 5SH42KBUAA, 5SH42KBUAD, 5SH42KBUAB
+06:47:20 chain-unlinked side-mirrors 6 numbers named by 5SH42LAUAF, no catalog link: 5SH42LAUAB, 1NT28LAUAK, 5SH42LAUAC, 5SH42LAUAE, 5SH42LAUAA, 5SH42LAUAD
+06:47:20 chain-unlinked side-mirrors 70 numbers named by 5SH42TZZAF, no catalog link: 5SH42CDMAC, 1NT28CDMAI, 1NT28HWLAI, 1NT28KEPAK, 1NT28HAVAH, 1NT28KARAI, 1NT28JUSAI, 1NT28AXRAI, 1NT28HAVAI, 1NT28HWLAK, 1NT28HGNAK, 1NT28SW1AI, 1NT28WS2AH, 1NT28SW1AJ, 1NT28WS2AK, 1NT28HAVAK, 1NT28WS2AJ, 1NT28HBVAK, 1NT28KARAJ, 1NT28BR8AK, 5SH42KARAC, 1NT28AXRAK, 5SH42JWDAC, 5SH42JWDAD, 5SH42KEPAC, 5SH42JWDAF, 5SH42KEPAB, 1NT28HWLAJ, 1NT28KARAK, 1NT28CDMAH, 1NT28SW1AH, 1NT28HBVAJ, 5SH42JRPAD, 5SH42KFSAA, 5SH42TZZAD, 5SH42AXRAF, 5SH42AXRAA, 5SH42HAVAC, 5SH42KARAB, 5SH42KEPAA, 1NT28JUSAK, 1NT28AXRAJ, 1NT28HAVAJ, 1NT28HGNAJ, 1NT28HBVAH, 5SH42AXRAB, 1NT28ARHAJ, 1NT28GTWAJ, 1NT28HGNAH, 1NT28HWLAH, 1NT28ARHAK, 1NT28CDMAJ, 1NT28HGNAI, 1NT28CDMAK, 1NT28JUSAJ, 1NT28GTWAK, 5SH42KFSAB, 5SH42CDMAA, 1NT28KFSAK, 1NT28SW1AK, 1NT28BR8AJ, 5SH42SW1AC, 1NT28AXRAH, 1NT28HBVAI, 1NT28WS2AI, 5SH42AXRAC, 5SH42AXRAD, 5SH42KARAA, 5SH42JWDAE, 5SH42KFSAF
+06:47:20 chain-unlinked side-mirrors 4 numbers named by 5SH43GTWAF, no catalog link: 5SH43GTWAD, 5SH43GTWAE, 5SH43GTWAC, 5SH43GTWAB
+06:47:20 chain-unlinked side-mirrors 6 numbers named by 5SH43GW7AF, no catalog link: 1NT29GW7AK, 5SH43GW7AC, 5SH43GW7AD, 5SH43GW7AB, 5SH43GW7AE, 5SH43GW7AA
+06:47:20 chain-unlinked side-mirrors 8 numbers named by 5SH43JRMAF, no catalog link: 1NT29JRMAJ, 5SH43JRMAB, 5SH43JRMAA, 5SH43JRMAD, 5SH43JRMAC, 5SH43JRMAE, 1NT29JRMAI, 1NT29JRMAH
+06:47:20 chain-unlinked side-mirrors 6 numbers named by 5SH43JSCAF, no catalog link: 1NT29JSCAK, 5SH43JSCAA, 5SH43JSCAE, 5SH43JSCAB, 5SH43JSCAD, 5SH43JSCAC
+06:47:20 chain-unlinked side-mirrors 6 numbers named by 5SH43LAUAF, no catalog link: 5SH43LAUAA, 5SH43LAUAB, 5SH43LAUAE, 1NT29LAUAK, 5SH43LAUAD, 5SH43LAUAC
+06:47:20 chain-unlinked side-mirrors 69 numbers named by 5SH43TZZAF, no catalog link: 5SH43KBUAD, 5SH43KGZAA, 5SH43CDMAF, 5SH43MSQAE, 5SH43JRPAB, 5SH43KARAC, 1NT29HWLAI, 1NT29KBUAI, 1NT29WS2AJ, 1NT29JUSAI, 1NT29SW1AK, 1NT29SW1AJ, 1NT29AXRAJ, 1NT29HBVAJ, 1NT29HAVAJ, 1NT29JUSAK, 1NT29HAVAK, 1NT29JUSAJ, 1NT29HBVAK, 1NT29AXRAK, 1NT29HWLAH, 1NT29ARHAI, 1NT29BR8AJ, 1NT29SW1AI, 1NT29HWLAJ, 1NT29WS2AK, 5SH43AXRAB, 5SH43KBUAF, 5SH43JRPAA, 5SH43KEPAA, 1NT29CDMAJ, 1NT29HAVAI, 1NT29HGNAH, 1NT29JRPAK, 5SH43AXRAC, 5SH43KEPAB, 5SH43KBUAA, 5SH43HAVAC, 1NT29BR8AK, 1NT29WS2AH, 5SH43KBUAC, 5SH43HGNAC, 5SH43KBUAE, 5SH43KGZAB, 1NT29AXRAI, 1NT29ARHAH, 1NT29CDMAK, 1NT29KBUAJ, 1NT29AXRAH, 1NT29HGNAJ, 1NT29HGNAK, 1NT29HBVAH, 1NT29KBUAK, 1NT29HGNAI, 1NT29SW1AH, 1NT29CDMAH, 1NT29CDMAI, 1NT29HWLAK, 1NT29WS2AI, 1NT29ARHAK, 5SH43AXRAD, 5SH43KBUAB, 5SH43TZZAD, 5SH43MSQAF, 1NT29HAVAH, 1NT29ARHAJ, 5SH43AXRAA, 1NT29KEPAK, 1NT29HBVAI
+06:47:20 chain-unlinked side-mirrors 7 numbers named by 5SH44GTWAF, no catalog link: 1RC30GTWAI, 5SH44GTWAD, 5SH44GTWAB, 5SH44GTWAE, 5SH44GTWAC, 1RC30GTWAJ, 5SH44GTWAA
+06:47:20 chain-unlinked side-mirrors 6 numbers named by 5SH44JSCAF, no catalog link: 5SH44JSCAB, 5SH44JSCAD, 1RC30JSCAJ, 5SH44JSCAE, 5SH44JSCAA, 5SH44JSCAC
+06:47:20 chain-unlinked side-mirrors 6 numbers named by 5SH44LAUAF, no catalog link: 5SH44LAUAD, 5SH44LAUAE, 5SH44LAUAC, 5SH44LAUAA, 1RC30LAUAJ, 5SH44LAUAB
+06:47:21 chain-unlinked side-mirrors 97 numbers named by 5SH44TZZAF, no catalog link: 5SH44HBVAA, 5SH44HWLAB, 5SH44KEPAC, 5SH44WS2AB, 5SH44AXRAA, 5SH44HGNAB, 5SH44HWLAC, 5SH44KARAC, 5SH44KBUAA, 5SH44KARAB, 5SH44BR8AB, 5SH44JUSAA, 5SH44SW1AC, 5SH44CDMAD, 5SH44FQDAE, 5SH44JUSAB, 5SH44BR8AA, 1RC30HGNAG, 1RC30HWLAI, 5SH44KFSAB, 1RC30AXRAI, 1RC30KBUAI, 1RC30JUSAJ, 1RC30SW1AI, 1RC30HWLAH, 1RC30JUSAH, 1RC30CDMAJ, 1RC30CDMAI, 1RC30HGNAH, 1RC30ARHAI, 1RC30AXRAG, 1RC30KARAI, 1RC30ARHAG, 1RC30HWLAG, 1RC30KARAH, 5SH44KGZAB, 5SH44AXRAD, 5SH44HWLAA, 5SH44KGZAC, 5SH44KFSAC, 5SH44KEPAB, 1RC30ARHAJ, 1RC30SW1AG, 1RC30JUSAI, 5SH44HGNAA, 1RC30HGNAJ, 5SH44BR8AC, 5SH44HBVAB, 5SH44KARAA, 5SH44KGZAA, 5SH44WS2AA, 5SH44SW1AD, 5SH44AXRAB, 5SH44FQDAF, 5SH44JRPAC, 5SH44SW1AB, 5SH44ARHAC, 5SH44HT6AC, 5SH44WS2AC, 5SH44HBVAC, 5SH44KEPAA, 5SH44CDMAB, 5SH44HAVAC, 5SH44TZZAD, 1RC30BR8AI, 1RC30WS2AG, 1RC30HBVAI, 1RC30HBVAJ, 1RC30HWLAJ, 1RC30HBVAG, 1RC30HBVAH, 1RC30WS2AI, 1RC30HGNAI, 1RC30SW1AH, 1RC30AXRAH, 1RC30KBUAH, 1RC30KARAJ, 1RC30KBUAJ, 1RC30SW1AJ, 5SH44KFSAA, 1RC30ARHAH, 1RC30BR8AJ, 5SH44ARHAA, 1RC30AXRAJ, 1RC30KEPAJ, 5SH44JUSAC, 5SH44AXRAC, 5SH44ARHAB, 5SH44CDMAA, 1RC30WS2AH, 1RC30CDMAH, 1RC30WS2AJ, 1RC30CDMAG, 5SH44CDMAC, 5SH44KBUAB, 1RC30KFSAJ, 5SH44HGNAC
+06:47:21 chain-unlinked side-mirrors 3 numbers named by 5SH45GTWAF, no catalog link: 5SH45GTWAD, 5SH45GTWAC, 5SH45GTWAE
+06:47:21 chain-unlinked side-mirrors 4 numbers named by 5SH45JRPAF, no catalog link: 5SH45JRPAB, 5SH45JRPAC, 1RC31JRPAJ, 5SH45JRPAA
+06:47:21 chain-unlinked side-mirrors 5 numbers named by 5SH45JSCAF, no catalog link: 5SH45JSCAD, 5SH45JSCAB, 5SH45JSCAC, 5SH45JSCAE, 5SH45JSCAA
+06:47:21 chain-unlinked side-mirrors 7 numbers named by 5SH45KBUAF, no catalog link: 1RC31KBUAJ, 5SH45KBUAB, 1RC31KBUAH, 5SH45KBUAC, 5SH45KBUAE, 5SH45KBUAD, 5SH45KBUAA
+06:47:21 chain-unlinked side-mirrors 6 numbers named by 5SH45LAUAF, no catalog link: 1RC31LAUAJ, 5SH45LAUAC, 5SH45LAUAB, 5SH45LAUAA, 5SH45LAUAE, 5SH45LAUAD
+06:47:21 chain-unlinked side-mirrors 67 numbers named by 5SH45TZZAF, no catalog link: 5SH45DX8AB, 5SH45DX8AF, 1RC31HAVAG, 1RC31HGNAJ, 5SH45SW1AC, 5SH45CDMAC, 5SH45KFSAA, 1RC31SW1AG, 1RC31WS2AJ, 1RC31KFSAJ, 1RC31SW1AJ, 1RC31CDMAI, 1RC31KARAH, 1RC31KEPAJ, 1RC31JUSAH, 1RC31CDMAJ, 1RC31HWLAG, 1RC31WS2AG, 1RC31CDMAH, 1RC31HBVAI, 5SH45MSQAF, 5SH45KGZAB, 5SH45MSQAC, 1RC31HBVAH, 1RC31HWLAH, 5SH45KFSAB, 1RC31BR8AI, 1RC31HGNAH, 5SH45KARAA, 5SH45KEPAA, 1RC31ARHAI, 1RC31HGNAI, 5SH45HAVAC, 5SH45KARAB, 1RC31HGNAG, 1RC31KARAI, 5SH45MSQAE, 5SH45WS2AC, 5SH45KEPAB, 5SH45KARAC, 5SH45DX8AA, 5SH45DX8AC, 1RC31ARHAH, 1RC31HAVAI, 1RC31JUSAI, 1RC31BR8AJ, 1RC31SW1AH, 1RC31HAVAJ, 1RC31SW1AI, 1RC31CDMAG, 1RC31ARHAJ, 1RC31HWLAI, 1RC31WS2AH, 5SH45HAVAD, 5SH45SW1AD, 5SH45DX8AE, 5SH45TZZAD, 1RC31HAVAH, 1RC31HBVAJ, 1RC31JUSAJ, 1RC31HWLAJ, 5SH45HGNAC, 5SH45MSQAD, 1RC31ARHAG, 1RC31HBVAG, 1RC31KARAJ, 5SH45DX8AD
+06:47:21 chain-unlinked side-mirrors 6 numbers named by 5SH46AXRAG, no catalog link: 1XW46AXRAA, 1XW46AXRAB, 5SH46AXRAB, 5SH46AXRAF, 5SH46AXRAA, 5SH46AXRAC
+06:47:21 chain-unlinked side-mirrors 7 numbers named by 5SH46JRMAG, no catalog link: 5SH46JRMAB, 5SH46JRMAE, 1XW46JRMAB, 5SH46JRMAD, 5SH46JRMAF, 5SH46JRMAA, 5SH46JRMAC
+06:47:21 chain-unlinked side-mirrors 7 numbers named by 5SH46JSCAG, no catalog link: 1XW46JSCAB, 5SH46JSCAC, 5SH46JSCAF, 5SH46JSCAD, 5SH46JSCAA, 5SH46JSCAE, 5SH46JSCAB
+06:47:21 chain-unlinked side-mirrors 7 numbers named by 5SH46LAUAG, no catalog link: 5SH46LAUAF, 5SH46LAUAA, 5SH46LAUAD, 5SH46LAUAC, 5SH46LAUAE, 1XW46LAUAB, 5SH46LAUAB
+06:47:21 chain-unlinked side-mirrors 57 numbers named by 5SH46TZZAG, no catalog link: 5SH46FQDAG, 5SH46KEPAB, 5SH46JRPAB, 5SH46KBUAD, 1XW46WS2AA, 5SH46MSQAG, 5SH46KBUAB, 5SH46KFSAA, 5SH46KFSAB, 1XW46BR8AB, 1XW46GW7AB, 1XW46HWLAB, 1XW46CDMAA, 5SH46MSQAC, 1XW46JUSAB, 1XW46KBUAB, 1XW46BR8AA, 1XW46SW1AB, 1XW46GTWAB, 1XW46KARAA, 1XW46CDMAB, 1XW46KBUAA, 1XW46SW1AA, 1XW46KARAB, 1XW46KFSAB, 1XW46WS2AB, 5SH46TZZAD, 5SH46JWDAF, 5SH46MSQAD, 5SH46KBUAG, 5SH46FQDAE, 5SH46JRPAA, 5SH46KARAA, 5SH46MSQAE, 5SH46JWDAG, 5SH46KBUAF, 5SH46FQDAF, 5SH46CDMAC, 1XW46JRPAA, 5SH46MSQAF, 5SH46KEPAC, 1XW46JRPAB, 1XW46KEPAB, 5SH46JWDAD, 5SH46JWDAE, 5SH46KBUAC, 5SH46SW1AC, 5SH46FQDAD, 1XW46GTWAA, 1XW46HWLAA, 5SH46JWDAC, 1XW46JUSAA, 5SH46KARAB, 5SH46KBUAE, 5SH46KBUAA, 5SH46TZZAF, 5SH46KARAC
+06:47:21 chain-unlinked side-mirrors 6 numbers named by 5SH47GW7AF, no catalog link: 5SH47GW7AB, 5SH47GW7AD, 5SH47GW7AE, 5SH47GW7AA, 5SH47GW7AC, 1XW47GW7AB
+06:47:21 chain-unlinked side-mirrors 6 numbers named by 5SH47JRMAF, no catalog link: 5SH47JRMAA, 5SH47JRMAC, 5SH47JRMAE, 1XW47JRMAB, 5SH47JRMAD, 5SH47JRMAB
+06:47:21 chain-unlinked side-mirrors 7 numbers named by 5SH47KBUAF, no catalog link: 5SH47KBUAC, 5SH47KBUAD, 5SH47KBUAB, 1XW47KBUAB, 5SH47KBUAE, 1XW47KBUAA, 5SH47KBUAA
+06:47:21 chain-unlinked side-mirrors 6 numbers named by 5SH47LAUAF, no catalog link: 1XW47LAUAB, 5SH47LAUAE, 5SH47LAUAC, 5SH47LAUAA, 5SH47LAUAB, 5SH47LAUAD
+06:47:21 chain-unlinked side-mirrors 37 numbers named by 5SH47TZZAF, no catalog link: 5SH47JRPAA, 5SH47MSQAC, 5SH47JWDAC, 5SH47AXRAC, 5SH47MSQAD, 1XW47JUSAB, 5SH47KARAA, 1XW47BR8AA, 1XW47GTWAA, 1XW47SW1AB, 1XW47GTWAB, 1XW47JRPAB, 1XW47CDMAB, 1XW47KARAA, 1XW47KARAB, 1XW47HWLAA, 5SH47JRPAB, 1XW47JRPAA, 5SH47MSQAF, 5SH47WS2AC, 5SH47AXRAB, 5SH47KARAB, 5SH47JWDAF, 5SH47KARAC, 5SH47JWDAE, 1XW47AXRAA, 5SH47AXRAA, 5SH47TZZAD, 1XW47WS2AA, 1XW47WS2AB, 1XW47JUSAA, 1XW47SW1AA, 1XW47BR8AB, 1XW47AXRAB, 1XW47HWLAB, 5SH47JWDAD, 5SH47MSQAE
+06:47:21 chain-unlinked side-mirrors 15 numbers named by 68237573AF, no catalog link: 5182329AH, 5182329AI, 5182329AK, 5182329AE, 5182329AB, 68237573AB, 68237573AD, 5182329AA, 5182329AD, 5182329AF, 5182329AG, 5182329AC, 68237573AC, 68237573AA, 68237573AE
+06:47:21 chain-unlinked side-mirrors 9 numbers named by 68237574AF, no catalog link: 55000946AC, 68237574AA, 55000946AD, 55000946AF, 68237574AC, 55000946AB, 68237574AD, 68237574AE, 68237574AB
+06:47:21 chain-unlinked side-mirrors 1 numbers named by 1RC30JRPAJ, no catalog link: 5SH44JRPAB
+06:47:36 chain-unlinked window-regulator 2 numbers named by 68079282AB, no catalog link: 68227225AA, 68079282AA
+06:47:36 chain-unlinked window-regulator 1 numbers named by 68079283AB, no catalog link: 68227224AA
+06:48:00 chain-unlinked window-regulator 3 numbers named by 68079284AB, no catalog link: 68092228AA, 68227366AA, 68079284AA
+06:48:00 chain-unlinked window-regulator 3 numbers named by 68079285AB, no catalog link: 68092229AA, 68227367AA, 68079285AA
+06:48:08 chain-unlinked window-switch 3 numbers named by 68620461AA, no catalog link: 68086693AD, 68086693AE, 68086693AC
+06:49:12 chain-unlinked climate-control 14 numbers named by 55111925AS, no catalog link: 55111925AE, 55111925AQ, 55111925AF, 55111925AL, 55111925AO, 55111925AP, 55111925AJ, 55111925AR, 55111925AI, 55111925AK, 55111925AH, 55111925AN, 55111925AG, 55111925AD
+06:49:12 chain-unlinked climate-control 13 numbers named by 55111865AR, no catalog link: 55111865AQ, 55111865AD, 55111865AP, 55111865AO, 55111865AK, 55111865AF, 55111865AN, 55111865AL, 55111865AE, 55111865AG, 55111865AH, 55111865AI, 55111865AJ
+06:49:12 chain-unlinked climate-control 8 numbers named by 68088062AR, no catalog link: 68088062AP, 68088062AK, 68088062AN, 68088062AO, 68088062AJ, 68088062AL, 68088062AQ, 68088062AA
+06:49:12 chain-unlinked climate-control 7 numbers named by 68088603AR, no catalog link: 68088603AJ, 68088603AQ, 68088603AK, 68088603AP, 68088603AO, 68088603AL, 68088603AN
+06:49:12 chain-unlinked climate-control 12 numbers named by 55111833AO, no catalog link: 55111833AN, 55111833AC, 55111833AJ, 55111833AF, 55111833AK, 55111833AL, 55111833AG, 55111833AD, 55111833AE, 55111833AI, 55111833AB, 55111833AH
+06:49:21 chain-unlinked fuel-pump-module 5 numbers named by 5145583AD, no catalog link: 5145583AB, 5145583AA, RL145583AB, 5145583AC, 5145583AE
+06:49:44 chain-unlinked fuel-pump-module 1 numbers named by RL145583AB, no catalog link: 5145583AE
+06:50:01 chain-unlinked throttle-body 1 numbers named by 53034251AD, no catalog link: 53034251AC
+06:50:16 chain-unlinked power-steering-pump 9 numbers named by 52124998AJ, no catalog link: 52124998AH, 52124998AE, 52124998AI, 52124998AD, 52124998AC, 52124998AG, 52124998AB, 52124998AF, RL124998AE
+06:50:16 chain-unlinked power-steering-pump 1 numbers named by 68068641AB, no catalog link: 68068641AA
+06:50:16 seg done tier=A Dodge Durango [2011, 2023] seeds=[2013] records=2303 errors=11
+06:50:16 time budget reached records=2303
