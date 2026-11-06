@@ -764,3 +764,89 @@
 05:51:34 chain-unlinked door-rear 1 numbers named by 60409XA00D9P, no catalog link: 60409XA00C9P
 05:55:18 seg done tier=B Subaru B9 Tribeca [2006, 2009] seeds=[2006, 2008, 2009] records=1923 errors=6
 05:58:07 time budget reached records=1933
+05:58:22 start site=www.subarupartsdeal.com mode=worklist tiers=['A', 'B'] records=1933 list_lines=571 year_lines=51 url_index=6647
+05:58:22 seg done tier=A Subaru Outback [2010, 2014] seeds=[2011] records=1933 errors=6
+05:58:22 seg done tier=A Subaru Outback [2005, 2009] seeds=[2005] records=1933 errors=6
+05:58:22 seg done tier=A Subaru Forester [2009, 2013] seeds=[2010] records=1933 errors=6
+05:58:22 seg done tier=A Subaru Forester [2003, 2008] seeds=[2004] records=1933 errors=6
+05:58:22 seg done tier=A Subaru Outback [2000, 2004] seeds=[2003] records=1933 errors=6
+05:58:22 seg done tier=A Subaru Impreza [2008, 2011] seeds=[2008] records=1933 errors=6
+05:58:22 seg done tier=A Subaru Impreza [2012, 2016] seeds=[2012] records=1933 errors=6
+05:58:22 seg done tier=A Subaru Legacy [2010, 2012] seeds=[2011] records=1933 errors=6
+05:58:22 seg done tier=A Subaru Legacy [2005, 2009] seeds=[2005] records=1933 errors=6
+05:58:22 seg done tier=A Subaru Impreza [2002, 2007] seeds=[2007] records=1933 errors=6
+05:58:22 seg done tier=A Subaru Forester [1981, 2002] seeds=[2001] records=1933 errors=6
+05:58:22 seg done tier=A Subaru Forester [2014, 2018] seeds=[2014] records=1933 errors=6
+05:58:22 seg done tier=A Subaru Legacy [1990, 1999] seeds=[1999] records=1933 errors=6
+05:58:22 seg done tier=A Subaru Legacy [2013, 2014] seeds=[2013] records=1933 errors=6
+05:58:22 seg done tier=A Subaru Legacy [2015, 2019] seeds=[2015] records=1933 errors=6
+05:58:22 seg done tier=A Subaru XV Crosstrek [2013, 2024] seeds=[2013] records=1933 errors=6
+05:58:22 seg done tier=A Subaru Legacy [2000, 2002] seeds=[2001] records=1933 errors=6
+05:58:22 seg done tier=A Subaru B9 Tribeca [2006, 2009] seeds=[2006] records=1933 errors=6
+05:58:22 seg done tier=A Subaru Legacy Wagon [1990, 2009] seeds=[1998] records=1933 errors=6
+05:58:22 seg done tier=A Subaru Legacy [2003, 2004] seeds=[2004] records=1933 errors=6
+05:58:22 seg done tier=A Subaru Outback [2015, 2019] seeds=[2015] records=1933 errors=6
+05:58:22 seg done tier=A Subaru Tribeca [2006, 2013] seeds=[2008] records=1933 errors=6
+05:58:22 seg done tier=A Subaru Impreza [1993, 2001] seeds=[1998] records=1933 errors=6
+05:58:22 seg done tier=A Subaru Impreza Wagon [1993, 2007] seeds=[2005] records=1933 errors=6
+05:58:22 seg done tier=A Subaru Impreza [2017, 2022] seeds=[2017] records=1933 errors=6
+05:58:22 seg done tier=B Subaru Outback [2010, 2014] seeds=[2011] records=1933 errors=6
+05:58:22 seg done tier=B Subaru Outback [2005, 2009] seeds=[2005] records=1933 errors=6
+05:58:22 seg done tier=B Subaru Forester [2009, 2013] seeds=[2010] records=1933 errors=6
+05:58:22 seg done tier=B Subaru Forester [2003, 2008] seeds=[2004] records=1933 errors=6
+05:58:22 seg done tier=B Subaru Outback [2000, 2004] seeds=[2003] records=1933 errors=6
+05:58:22 seg done tier=B Subaru Impreza [2008, 2011] seeds=[2008] records=1933 errors=6
+05:58:22 seg done tier=B Subaru Impreza [2012, 2016] seeds=[2012] records=1933 errors=6
+05:58:22 seg done tier=B Subaru Legacy [2010, 2012] seeds=[2011] records=1933 errors=6
+05:58:22 seg done tier=B Subaru Legacy [2005, 2009] seeds=[2005] records=1933 errors=6
+05:58:22 seg done tier=B Subaru Impreza [2002, 2007] seeds=[2007] records=1933 errors=6
+05:58:22 seg done tier=B Subaru Forester [1981, 2002] seeds=[2001] records=1933 errors=6
+05:58:22 seg done tier=B Subaru Forester [2014, 2018] seeds=[2014] records=1933 errors=6
+05:58:22 seg done tier=B Subaru Legacy [1990, 1999] seeds=[1999] records=1933 errors=6
+05:58:22 seg done tier=B Subaru Legacy [2013, 2014] seeds=[2013] records=1933 errors=6
+05:58:22 seg done tier=B Subaru Legacy [2015, 2019] seeds=[2015] records=1933 errors=6
+05:58:22 seg done tier=B Subaru XV Crosstrek [2013, 2024] seeds=[2013] records=1933 errors=6
+05:58:22 seg done tier=B Subaru Legacy [2000, 2002] seeds=[2001] records=1933 errors=6
+05:58:22 seg done tier=B Subaru B9 Tribeca [2006, 2009] seeds=[2006] records=1933 errors=6
+05:58:22 seg done tier=B Subaru Legacy Wagon [1990, 2009] seeds=[1998] records=1933 errors=6
+06:01:19 seg done tier=B Subaru Legacy [2003, 2004] seeds=[2004] records=1945 errors=6
+06:04:38 chain-unlinked ignition-coils 1 numbers named by 22433AA70B, no catalog link: 22433AA700
+06:08:22 seg done tier=B Subaru Outback [2015, 2019] seeds=[2015, 2018] records=1975 errors=6
+06:11:26 seg done tier=B Subaru Tribeca [2006, 2013] seeds=[2008, 2010, 2011] records=1976 errors=6
+06:13:58 chain-unlinked radiator 1 numbers named by 45199FA040, no catalog link: 45199FC031
+06:13:58 chain-unlinked radiator 1 numbers named by 45111FC100, no catalog link: 45199FC100
+06:13:58 chain-unlinked radiator 1 numbers named by 45111FC110, no catalog link: 45199FC110
+06:13:58 chain-unlinked radiator 1 numbers named by 45199FA000, no catalog link: 45199FC021
+06:13:58 chain-unlinked radiator 1 numbers named by 45199FA030, no catalog link: 45199FC021
+06:14:38 chain-unlinked door-front 2 numbers named by 61100FA031, no catalog link: 61100FA030, 61100FA070
+06:14:38 chain-unlinked door-front 1 numbers named by 61150FA011, no catalog link: 61150FA010
+06:14:38 chain-unlinked door-front 2 numbers named by 61100FA021, no catalog link: 61100FA020, 61100FA060
+06:14:38 chain-unlinked door-front 1 numbers named by 61150FA001, no catalog link: 61150FA000
+06:15:02 chain-unlinked door-rear 2 numbers named by 61400FA110, no catalog link: 61400FA030, 61400FA031
+06:15:02 chain-unlinked door-rear 2 numbers named by 61400FA100, no catalog link: 61400FA021, 61400FA020
+06:15:26 chain-unlinked hood 1 numbers named by 57220FA090, no catalog link: 57220FA120
+06:15:26 chain-unlinked hood 1 numbers named by 57220FA080, no catalog link: 57220FA110
+06:16:54 chain-unlinked grille 1 numbers named by 91065FA050NN, no catalog link: 91065FA050IB
+06:17:10 chain-unlinked liftgate 1 numbers named by 61700FA001, no catalog link: 61700FA000
+06:17:10 seg done tier=B Subaru Impreza [1993, 2001] seeds=[1998] records=2008 errors=6
+06:17:50 chain-unlinked ignition-coils 1 numbers named by 22433AA451, no catalog link: 22433AA551
+06:18:30 listed after chain radiator 45111FE081: line 2016 (recrawl_of 1606)
+06:18:54 chain-unlinked radiator 1 numbers named by 45111FE111, no catalog link: 45119FE010
+06:18:54 chain-unlinked radiator 1 numbers named by 45111FE112, no catalog link: 45119FE010
+06:21:50 chain-unlinked hood 2 numbers named by 57229FE062, no catalog link: 57229FE061, 57229FE060
+06:24:14 chain-unlinked trunk-lid 3 numbers named by 57509FE003, no catalog link: 57509FE002, 57509FE001, 57509FE000
+06:24:14 chain-unlinked trunk-lid 2 numbers named by 57509FE013, no catalog link: 57509FE012, 57509FE011
+06:24:14 chain-unlinked trunk-lid 1 numbers named by 57509FE042, no catalog link: 57509FE041
+06:28:00 seg done tier=B Subaru Impreza Wagon [1993, 2007] seeds=[2005, 1998, 1997] records=2068 errors=6
+06:29:34 chain-unlinked ignition-coils 1 numbers named by 22433AA740, no catalog link: 22433AA741
+06:29:50 chain-unlinked radiator 1 numbers named by 45111FL00B, no catalog link: 45111FL00A
+06:31:34 chain-unlinked door-rear 1 numbers named by 60409FL01A9P, no catalog link: 60409FL05B9P
+06:31:34 chain-unlinked door-rear 1 numbers named by 60409FL03A9P, no catalog link: 60409FL07B9P
+06:31:34 chain-unlinked door-rear 1 numbers named by 60409FL05A9P, no catalog link: 60409FL05B9P
+06:31:34 chain-unlinked door-rear 1 numbers named by 60409FL07A9P, no catalog link: 60409FL07B9P
+06:31:34 chain-unlinked door-rear 1 numbers named by 60409FL00A9P, no catalog link: 60409FL04B9P
+06:31:34 chain-unlinked door-rear 1 numbers named by 60409FL02A9P, no catalog link: 60409FL06B9P
+06:31:34 chain-unlinked door-rear 1 numbers named by 60409FL04A9P, no catalog link: 60409FL04B9P
+06:31:34 chain-unlinked door-rear 1 numbers named by 60409FL06A9P, no catalog link: 60409FL06B9P
+06:33:58 chain-unlinked liftgate 1 numbers named by 60809FL00A9P, no catalog link: 60809FL0109P
+06:33:58 time budget reached records=2102
