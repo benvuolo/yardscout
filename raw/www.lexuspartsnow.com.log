@@ -573,3 +573,80 @@
 23:36:04 chain-unlinked grille 1 numbers named by 53101-48110, no catalog link: 53101-48221
 23:36:12 seg done tier=B Lexus RX 400h [2006, 2008] seeds=[2006] records=2375 errors=22
 23:36:12 time budget reached records=2375
+23:36:24 start site=www.lexuspartsnow.com mode=worklist tiers=['A', 'B'] records=2375 list_lines=393 year_lines=51 url_index=11948
+23:36:24 seg done tier=A Lexus ES 300 [1992, 2008] seeds=[2002] records=2375 errors=22
+23:36:24 seg done tier=A Lexus RX 300 [1999, 2008] seeds=[2000] records=2375 errors=22
+23:36:24 seg done tier=A Lexus IS 250 [2006, 2015] seeds=[2007] records=2375 errors=22
+23:36:24 seg done tier=A Lexus ES 350 [1997, 2018] seeds=[2007] records=2375 errors=22
+23:36:24 seg done tier=A Lexus ES 330 [2004, 2006] seeds=[2004] records=2375 errors=22
+23:36:24 seg done tier=A Lexus GS 300 [1993, 2006] seeds=[2006] records=2375 errors=22
+23:36:24 seg done tier=A Lexus RX 350 [2004, 2016] seeds=[2007] records=2375 errors=22
+23:36:24 seg done tier=A Lexus RX 330 [2004, 2006] seeds=[2004] records=2375 errors=22
+23:36:24 seg done tier=A Lexus LS 400 [1990, 2005] seeds=[1996] records=2375 errors=22
+23:36:24 seg done tier=A Lexus LS 430 [2001, 2006] seeds=[2001] records=2375 errors=22
+23:36:24 seg done tier=A Lexus IS [2004, 2016] seeds=[2007] records=2375 errors=22
+23:36:24 seg done tier=A Lexus LS 460 [1996, 2016] seeds=[2007] records=2375 errors=22
+23:36:24 seg done tier=A Lexus GS [1998, 2018] seeds=[2006] records=2375 errors=22
+23:36:24 seg done tier=A Lexus ES [1990, 2015] seeds=[2007] records=2375 errors=22
+23:36:24 seg done tier=A Lexus GS 350 [1995, 2015] seeds=[2007] records=2375 errors=22
+23:36:24 seg done tier=A Lexus IS 300 [2001, 2005] seeds=[2001] records=2375 errors=22
+23:36:24 seg done tier=A Lexus RX 400h [2006, 2008] seeds=[2006] records=2375 errors=22
+23:36:24 seg done tier=A Lexus IS 350 [2006, 2014] seeds=[2006] records=2375 errors=22
+23:36:24 seg done tier=A Lexus RX [2004, 2008] seeds=[2005] records=2375 errors=22
+23:36:24 seg done tier=A Lexus RX [1999, 2003] seeds=[2001] records=2375 errors=22
+23:36:24 seg done tier=A Lexus GS 400 [1998, 2002] seeds=[1998] records=2375 errors=22
+23:36:24 seg done tier=A Lexus LS [1990, 2012] seeds=[1998] records=2375 errors=22
+23:36:24 seg done tier=A Lexus SC 400 [1992, 1999] seeds=[1992] records=2375 errors=22
+23:36:24 seg done tier=A Lexus GS 430 [2001, 2006] seeds=[2006] records=2375 errors=22
+23:36:24 seg done tier=A Lexus SC 430 [2002, 2005] seeds=[2002] records=2375 errors=22
+23:36:24 seg done tier=B Lexus ES 300 [1992, 2008] seeds=[2002] records=2375 errors=22
+23:36:24 seg done tier=B Lexus RX 300 [1999, 2008] seeds=[2000] records=2375 errors=22
+23:36:24 seg done tier=B Lexus IS 250 [2006, 2015] seeds=[2007] records=2375 errors=22
+23:36:24 seg done tier=B Lexus ES 350 [1997, 2018] seeds=[2007] records=2375 errors=22
+23:36:24 seg done tier=B Lexus ES 330 [2004, 2006] seeds=[2004] records=2375 errors=22
+23:36:24 seg done tier=B Lexus GS 300 [1993, 2006] seeds=[2006] records=2375 errors=22
+23:36:24 seg done tier=B Lexus RX 350 [2004, 2016] seeds=[2007] records=2375 errors=22
+23:36:24 seg done tier=B Lexus RX 330 [2004, 2006] seeds=[2004] records=2375 errors=22
+23:36:24 seg done tier=B Lexus LS 400 [1990, 2005] seeds=[1996] records=2375 errors=22
+23:36:24 seg done tier=B Lexus LS 430 [2001, 2006] seeds=[2001] records=2375 errors=22
+23:36:24 seg done tier=B Lexus IS [2004, 2016] seeds=[2007] records=2375 errors=22
+23:36:24 seg done tier=B Lexus LS 460 [1996, 2016] seeds=[2007] records=2375 errors=22
+23:36:24 seg done tier=B Lexus GS [1998, 2018] seeds=[2006] records=2375 errors=22
+23:36:24 seg done tier=B Lexus ES [1990, 2015] seeds=[2007] records=2375 errors=22
+23:36:24 seg done tier=B Lexus GS 350 [1995, 2015] seeds=[2007] records=2375 errors=22
+23:36:24 seg done tier=B Lexus IS 300 [2001, 2005] seeds=[2001] records=2375 errors=22
+23:36:24 seg done tier=B Lexus RX 400h [2006, 2008] seeds=[2006] records=2375 errors=22
+23:42:01 chain-unlinked ignition-coils 1 numbers named by 90919-02256, no catalog link: 90919-A2005
+23:49:29 chain-unlinked bumper-rear 1 numbers named by 52159-53929, no catalog link: 52159-53917
+23:49:29 chain-unlinked bumper-rear 1 numbers named by 52159-53930, no catalog link: 52159-53926
+23:50:57 chain-unlinked grille 1 numbers named by 53112-53180, no catalog link: 53112-53900
+23:50:57 chain-unlinked grille 1 numbers named by 53112-53220, no catalog link: 53112-53902
+23:51:21 chain-unlinked grille 1 numbers named by 53112-53110, no catalog link: 53112-53903
+23:52:33 chain-unlinked trunk-lid 1 numbers named by 64401-53192, no catalog link: 64401-53152
+23:54:25 seg done tier=B Lexus IS 350 [2006, 2014] seeds=[2006, 2011, 2007] records=2469 errors=22
+23:54:25 nav-fail Lexus RX 2005: ValueError: no model page for Lexus RX (lexus-['rx'])
+23:54:25 seg done tier=B Lexus RX [2004, 2008] seeds=[2005] records=2469 errors=23
+23:54:25 nav-fail Lexus RX 2001: ValueError: no model page for Lexus RX (lexus-['rx'])
+23:54:25 seg done tier=B Lexus RX [1999, 2003] seeds=[2001] records=2469 errors=24
+23:55:45 nav-fail Lexus GS 400 2001: ValueError: no 2001 catalog for Lexus GS 400 (lexus-['gs400'])
+23:55:45 seg done tier=B Lexus GS 400 [1998, 2002] seeds=[1998, 2001] records=2469 errors=25
+23:55:45 nav-fail Lexus LS 1998: ValueError: no model page for Lexus LS (lexus-['ls'])
+23:55:45 seg done tier=B Lexus LS [1990, 2012] seeds=[1998] records=2469 errors=26
+23:56:41 chain-unlinked radiator 1 numbers named by 16400-50061, no catalog link: 16400-50062
+23:56:41 chain-unlinked radiator 2 numbers named by 16400-46110, no catalog link: 16400-46121, 16400-46370
+23:57:05 chain-unlinked door-front 1 numbers named by 67001-24050, no catalog link: 67001-24060
+23:57:05 chain-unlinked door-front 1 numbers named by 67002-24050, no catalog link: 67002-24060
+23:57:21 chain-unlinked hood 1 numbers named by 53301-24030, no catalog link: 53301-24031
+23:57:37 chain-unlinked fender 1 numbers named by 53801-24130, no catalog link: 53801-24132
+23:57:37 chain-unlinked fender 1 numbers named by 53802-24130, no catalog link: 53802-24132
+23:58:57 seg done tier=B Lexus SC 400 [1992, 1999] seeds=[1992] records=2485 errors=26
+00:01:21 chain-unlinked door-front 1 numbers named by 67001-30820, no catalog link: 67001-30792
+00:01:21 chain-unlinked door-front 1 numbers named by 67002-3A010, no catalog link: 67002-30872
+00:02:57 chain-unlinked trunk-lid 2 numbers named by 64401-3A130, no catalog link: 64401-3A022, 64401-3A021
+00:02:57 chain-unlinked trunk-lid 2 numbers named by 64401-3A150, no catalog link: 64401-3A061, 64401-3A062
+00:02:57 seg done tier=B Lexus GS 430 [2001, 2006] seeds=[2006, 2003] records=2494 errors=26
+00:04:49 chain-unlinked fender 1 numbers named by 53802-24903, no catalog link: 53802-24170
+00:04:49 chain-unlinked fender 1 numbers named by 53801-24903, no catalog link: 53801-24170
+00:05:45 chain-unlinked grille 1 numbers named by 53111-24040, no catalog link: 53111-24900
+00:06:09 seg done tier=B Lexus SC 430 [2002, 2005] seeds=[2002] records=2509 errors=26
+00:06:09 finished records=2509 errors=26 chain_records=2 chain_unlinked=393 chain_failed=0 chain_given_up=0
