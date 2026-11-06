@@ -850,3 +850,55 @@
 06:31:34 chain-unlinked door-rear 1 numbers named by 60409FL06A9P, no catalog link: 60409FL06B9P
 06:33:58 chain-unlinked liftgate 1 numbers named by 60809FL00A9P, no catalog link: 60809FL0109P
 06:33:58 time budget reached records=2102
+06:34:13 start site=www.subarupartsdeal.com mode=worklist tiers=['A', 'B'] records=2102 list_lines=700 year_lines=62 url_index=7366
+06:34:13 seg done tier=A Subaru Outback [2010, 2014] seeds=[2011] records=2102 errors=6
+06:34:13 seg done tier=A Subaru Outback [2005, 2009] seeds=[2005] records=2102 errors=6
+06:34:13 seg done tier=A Subaru Forester [2009, 2013] seeds=[2010] records=2102 errors=6
+06:34:13 seg done tier=A Subaru Forester [2003, 2008] seeds=[2004] records=2102 errors=6
+06:34:13 seg done tier=A Subaru Outback [2000, 2004] seeds=[2003] records=2102 errors=6
+06:34:13 seg done tier=A Subaru Impreza [2008, 2011] seeds=[2008] records=2102 errors=6
+06:34:13 seg done tier=A Subaru Impreza [2012, 2016] seeds=[2012] records=2102 errors=6
+06:34:13 seg done tier=A Subaru Legacy [2010, 2012] seeds=[2011] records=2102 errors=6
+06:34:13 seg done tier=A Subaru Legacy [2005, 2009] seeds=[2005] records=2102 errors=6
+06:34:13 seg done tier=A Subaru Impreza [2002, 2007] seeds=[2007] records=2102 errors=6
+06:34:13 seg done tier=A Subaru Forester [1981, 2002] seeds=[2001] records=2102 errors=6
+06:34:13 seg done tier=A Subaru Forester [2014, 2018] seeds=[2014] records=2102 errors=6
+06:34:13 seg done tier=A Subaru Legacy [1990, 1999] seeds=[1999] records=2102 errors=6
+06:34:13 seg done tier=A Subaru Legacy [2013, 2014] seeds=[2013] records=2102 errors=6
+06:34:13 seg done tier=A Subaru Legacy [2015, 2019] seeds=[2015] records=2102 errors=6
+06:34:13 seg done tier=A Subaru XV Crosstrek [2013, 2024] seeds=[2013] records=2102 errors=6
+06:34:13 seg done tier=A Subaru Legacy [2000, 2002] seeds=[2001] records=2102 errors=6
+06:34:13 seg done tier=A Subaru B9 Tribeca [2006, 2009] seeds=[2006] records=2102 errors=6
+06:34:13 seg done tier=A Subaru Legacy Wagon [1990, 2009] seeds=[1998] records=2102 errors=6
+06:34:13 seg done tier=A Subaru Legacy [2003, 2004] seeds=[2004] records=2102 errors=6
+06:34:13 seg done tier=A Subaru Outback [2015, 2019] seeds=[2015] records=2102 errors=6
+06:34:13 seg done tier=A Subaru Tribeca [2006, 2013] seeds=[2008] records=2102 errors=6
+06:34:13 seg done tier=A Subaru Impreza [1993, 2001] seeds=[1998] records=2102 errors=6
+06:34:13 seg done tier=A Subaru Impreza Wagon [1993, 2007] seeds=[2005] records=2102 errors=6
+06:34:13 seg done tier=A Subaru Impreza [2017, 2022] seeds=[2017] records=2102 errors=6
+06:34:13 seg done tier=B Subaru Outback [2010, 2014] seeds=[2011] records=2102 errors=6
+06:34:13 seg done tier=B Subaru Outback [2005, 2009] seeds=[2005] records=2102 errors=6
+06:34:13 seg done tier=B Subaru Forester [2009, 2013] seeds=[2010] records=2102 errors=6
+06:34:13 seg done tier=B Subaru Forester [2003, 2008] seeds=[2004] records=2102 errors=6
+06:34:13 seg done tier=B Subaru Outback [2000, 2004] seeds=[2003] records=2102 errors=6
+06:34:13 seg done tier=B Subaru Impreza [2008, 2011] seeds=[2008] records=2102 errors=6
+06:34:13 seg done tier=B Subaru Impreza [2012, 2016] seeds=[2012] records=2102 errors=6
+06:34:13 seg done tier=B Subaru Legacy [2010, 2012] seeds=[2011] records=2102 errors=6
+06:34:13 seg done tier=B Subaru Legacy [2005, 2009] seeds=[2005] records=2102 errors=6
+06:34:13 seg done tier=B Subaru Impreza [2002, 2007] seeds=[2007] records=2102 errors=6
+06:34:13 seg done tier=B Subaru Forester [1981, 2002] seeds=[2001] records=2102 errors=6
+06:34:13 seg done tier=B Subaru Forester [2014, 2018] seeds=[2014] records=2102 errors=6
+06:34:13 seg done tier=B Subaru Legacy [1990, 1999] seeds=[1999] records=2102 errors=6
+06:34:13 seg done tier=B Subaru Legacy [2013, 2014] seeds=[2013] records=2102 errors=6
+06:34:13 seg done tier=B Subaru Legacy [2015, 2019] seeds=[2015] records=2102 errors=6
+06:34:13 seg done tier=B Subaru XV Crosstrek [2013, 2024] seeds=[2013] records=2102 errors=6
+06:34:13 seg done tier=B Subaru Legacy [2000, 2002] seeds=[2001] records=2102 errors=6
+06:34:13 seg done tier=B Subaru B9 Tribeca [2006, 2009] seeds=[2006] records=2102 errors=6
+06:34:13 seg done tier=B Subaru Legacy Wagon [1990, 2009] seeds=[1998] records=2102 errors=6
+06:34:13 seg done tier=B Subaru Legacy [2003, 2004] seeds=[2004] records=2102 errors=6
+06:34:13 seg done tier=B Subaru Outback [2015, 2019] seeds=[2015] records=2102 errors=6
+06:34:13 seg done tier=B Subaru Tribeca [2006, 2013] seeds=[2008] records=2102 errors=6
+06:34:13 seg done tier=B Subaru Impreza [1993, 2001] seeds=[1998] records=2102 errors=6
+06:34:13 seg done tier=B Subaru Impreza Wagon [1993, 2007] seeds=[2005] records=2102 errors=6
+06:34:13 seg done tier=B Subaru Impreza [2017, 2022] seeds=[2017] records=2102 errors=6
+06:34:13 finished records=2102 errors=6 chain_records=1 chain_unlinked=439 chain_failed=0 chain_given_up=0
