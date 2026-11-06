@@ -38,6 +38,9 @@ on:
         description: "Skip build/upload: submit an ALREADY-UPLOADED build (give its build_number) for review"
         type: boolean
         default: false
+      source_ref:
+        description: "Branch to build from (default main). A non-main branch is TestFlight only: submit must be false, and the version bump is pushed to that branch, not main"
+        default: "main"
 
 permissions:
   contents: write
@@ -52,6 +55,7 @@ concurrency:
 # Play "What's new" rendered one word per line) and is an injection risk.
 env:
   RELEASE_NOTES: ${{ github.event.inputs.notes }}
+  SOURCE_REF: ${{ github.event.inputs.source_ref || 'main' }}
 
 jobs:
   archive-upload:
@@ -60,9 +64,17 @@ jobs:
       TEAM_ID: G23Z9MSBUG
       BUNDLE_ID: com.benvuolo.yardscout
     steps:
+      - name: Guard source branch
+        run: |
+          set -euo pipefail
+          if ! printf '%s' "$SOURCE_REF" | grep -Eq '^[A-Za-z0-9._/-]+$'; then echo "::error::bad source_ref"; exit 1; fi
+          if [ "$SOURCE_REF" != "main" ] && [ "${{ github.event.inputs.submit }}" = "true" ]; then
+            echo "::error::only main can be submitted for review; a branch build is TestFlight only"; exit 1
+          fi
+
       - uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ github.event.inputs.source_ref || 'main' }}
 
       - uses: actions/setup-node@v4
         with:
@@ -277,7 +289,7 @@ jobs:
           git add ios/App/App.xcodeproj/project.pbxproj
           git commit -m "chore(release): iOS ${{ steps.ver.outputs.mv }} build ${{ steps.ver.outputs.bn }}${{ github.event.inputs.submit == 'true' && ' (submitted)' || ' (TestFlight)' }}"
           for attempt in 1 2 3 4; do
-            git -c rebase.autoStash=true pull --rebase origin main && git push && exit 0
+            git -c rebase.autoStash=true pull --rebase origin "$SOURCE_REF" && git push origin "HEAD:$SOURCE_REF" && exit 0
             sleep 10
           done
           echo "::error::could not push the version bump"; exit 1
