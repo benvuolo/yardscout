@@ -10558,6 +10558,7 @@
   "ford|Ford|F-350 Chassis Cab": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'f350'); unmapped until a reviewed entry exists",
   "ford|Ford|F-350 Crew Cab": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash 'f350'); unmapped until a reviewed entry exists",
   "ford|Ford|F-350 crew cab": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'f350'); unmapped until a reviewed entry exists",
+  "ford|Ford|F150 Raptor": "feed sub-model (1 car, scan 2026-11-06) under catalog squash 'f150'; the Raptor shares only some parts with the F-150 (own body, suspension and fenders), so not a plain F-150 target; unmapped (no claims) until a reviewed entry exists (interchange, 2026-11-06)",
   "ford|Ford|F53 Stripped Chassis": "catalog model with no feed cars as 'F53 Stripped Chassis' (inventory 2026-11-04); nothing to map",
   "ford|Ford|Flex SEL": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'flex'); unmapped until a reviewed entry exists",
   "ford|Ford|Focus Rs": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'focus'); unmapped until a reviewed entry exists",

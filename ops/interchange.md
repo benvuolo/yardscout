@@ -1223,3 +1223,11 @@ out (client-side / POST).
 **Found, not mine:** `curation_tests/test_model_map.py` fails on main
 (pre-existing, inventory-driven): M5 Ford "F150 Raptor" (1 car) and Toyota
 "Camry Solara" (545 cars) / M1 "Solara" need model_map entries.
+- 2026-11-06 (hub): model_map.json failed M5 on the new scan's feed name
+  "Ford F150 Raptor" (1 car). It is now excluded with a basis (the Raptor
+  shares only some parts with the F-150), so it gives no claims. The
+  "M1 Solara" / "M5 Camry Solara" lines in test_model_map's output come from
+  its negative sub-test, not from the committed map. The Solara entry
+  already targets feed "Camry Solara" (its own catalog model, not Camry);
+  unchanged. curation_tests 14/14, tests 29/29, scraper/test_*.py all pass.
+  One M2 warning (a target with no cars) is a warning, not an error.
