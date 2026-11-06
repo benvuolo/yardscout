@@ -34,7 +34,7 @@ const { photoInfo, setPublishedPhotoSources } = ctx.__t;
 /* Same shape junkyard_scraper.py published_photo_sources() writes. */
 const publish = (srcs) => Object.fromEntries(Object.entries(srcs)
   .filter(([, s]) => s && s.enabled === true && typeof s.label === 'string')
-  .map(([k, s]) => [k, { label: s.label, host: s.host || '', patterns: (s.patterns || []).map(p => ({ code: p.code, card: p.card, large: p.large })) }])
+  .map(([k, s]) => [k, { label: s.label, host: s.host || '', onCards: s.onCards !== false, patterns: (s.patterns || []).map(p => ({ code: p.code, card: p.card, large: p.large })) }])
   .filter(([, s]) => s.patterns.length));
 
 let fails = 0;
@@ -70,6 +70,11 @@ check('Army’s (expiring signed URLs) never renders', photoInfo(ARMYS) === null
 check('unknown hosts, wrong paths, http and junk never render',
   ['https://evil.example/x.jpg', 'https://ik.imagekit.io/someoneelse/a/b.jpg', 'http://www.kikersupullit.com/inventory-feed/photos/a.jpg',
    'https://cdn.shopify.com/s/files/1/9999/files/a.jpg', 'r123456', 'p12x', 'w12/../x/1730000000000.j', ''].every(c => photoInfo(c) === null));
+
+// onCards: a heavy source (published onCards false) is car-screen only.
+const heavy = Object.entries(sources).find(([, s]) => s.enabled === true && s.onCards === false);
+check('onCards false in photo_sources.json -> photoInfo marks it car-screen only; others default to cards',
+  !!heavy && photoInfo(C.pyp).onCards === true && photoInfo(C.kikers).onCards === (sources.kikers.onCards !== false), heavy && heavy[0]);
 
 // A takedown: switch one source off in the data -> it stops rendering.
 const off = JSON.parse(JSON.stringify(sources)); off.wap.enabled = false;

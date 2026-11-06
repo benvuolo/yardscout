@@ -879,7 +879,9 @@ function setPublishedPhotoSources(ps) {
       if (!pat || typeof pat.code !== 'string' || typeof pat.card !== 'string' || typeof pat.large !== 'string') continue;
       let rx;
       try { rx = new RegExp('^(?:' + pat.code + ')$'); } catch (e) { continue; }
-      rules.push({ key, label: src.label, host: src.host.toLowerCase(), rx, card: pat.card, large: pat.large });
+      // onCards false (published per source) = images too heavy for list
+      // cards: car screen and viewer only.
+      rules.push({ key, label: src.label, host: src.host.toLowerCase(), rx, card: pat.card, large: pat.large, onCards: src.onCards !== false });
     }
   }
   publishedPhotoSources = ps;
@@ -902,7 +904,7 @@ function photoInfo(code) {
     });
     if (!ok) return null;
     const [w, h] = r.key === 'wap' && /\.j$/.test(code) ? PHOTO_ASPECT.wapj : (PHOTO_ASPECT[r.key] || [4, 3]);
-    return { url: urls[0], large: urls[1], label: r.label, key: r.key, w, h };
+    return { url: urls[0], large: urls[1], label: r.label, key: r.key, w, h, onCards: r.onCards };
   }
   return null;
 }
@@ -1149,7 +1151,7 @@ function hydratePhotos() {
     if (card.querySelector('.photo-box')) return;
     const ex = vehicleExtras && vehicleExtras[card.dataset.eid];
     const info = ex && ex[0] ? photoInfo(ex[0]) : null;
-    if (!info) return;
+    if (!info || !info.onCards) return;
     const title = (card.querySelector('.car-name') || {}).textContent || 'car';
     card.insertAdjacentHTML('afterbegin', photoBoxHtml(info, card.dataset.vkey || '', title.trim(), 'card-photo'));
   });
@@ -4170,7 +4172,7 @@ function renderLive() {
     // car screen a tap away.
     return `
       <article class="car-card ${cardClass}" style="${cardStyle}" data-eid="${escapeHtml(String(v.id))}" data-vkey="${escapeHtml(key)}">
-        ${photo ? photoBoxHtml(photo, key, `${v.year} ${v.make} ${v.model}`, 'card-photo') : ''}
+        ${photo && photo.onCards ? photoBoxHtml(photo, key, `${v.year} ${v.make} ${v.model}`, 'card-photo') : ''}
         <div class="cc-head">
           ${rowPlateHtml(v.row)}
           <div class="cc-id">
@@ -6414,7 +6416,7 @@ function pfDonorCardHtml(r, cls, chip, valueHtml) {
   const photo = ex && ex[0] ? photoInfo(ex[0]) : null;
   const dateLbl = pfDateLabel(v.dateAdded);
   return `<div class="pf-row-card ${cls}" data-vkey="${escapeHtml(key)}">
-      ${photo ? photoBoxHtml(photo, key, `${v.year} ${v.make} ${v.model}`, 'card-photo') : ''}
+      ${photo && photo.onCards ? photoBoxHtml(photo, key, `${v.year} ${v.make} ${v.model}`, 'card-photo') : ''}
       <div class="cc-head">
         ${rowPlateHtml(v.row)}
         <div class="cc-id">

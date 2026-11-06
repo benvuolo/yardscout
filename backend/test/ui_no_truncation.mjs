@@ -73,7 +73,7 @@ function publishedPhotoSources() {
     if (!src || src.enabled !== true || typeof src.label !== 'string') continue;
     const pats = (src.patterns || []).filter(p => p && ['code', 'card', 'large'].every(k => typeof p[k] === 'string'))
       .map(p => ({ code: p.code, card: p.card, large: p.large }));
-    if (pats.length) out[key] = { label: src.label, host: src.host || '', patterns: pats };
+    if (pats.length) out[key] = { label: src.label, host: src.host || '', onCards: src.onCards !== false, patterns: pats };
   }
   return out;
 }
