@@ -211,15 +211,15 @@ Sweep follow-ups (mine):
 
 ## 2026-11-06 vehicle photos: coverage, capture, native fit
 
-**Status: done.** The study, the Wrench-A-Part capture (data only) and the
-hand-off to design are complete. Basis: the owner decision recorded in
-`ops/hub.md` ("2026-11-06 ~18:30 UTC owner decisions", commit 8c24ed82):
-chain-hosted photos only, from the yard's own URL, credited, with a per-chain
-kill switch. This replaces the Sep 2026 "all off" note in `docs/app.js`.
-Not done here: the later Pick-n-Pull exception (hub, ~18:40 UTC, 1707014f,
-Row52-hosted and watermarked). It is outside this task's brief, which kept
-PnP excluded. The PnP fetcher still captures no photos; the hub decides who
-picks that up.
+**Status: done.** Study, capture, remote kill switch and design hand-off.
+Basis, from `ops/hub.md`:
+- 2026-11-06 ~18:30 UTC: chain-hosted photos, own URL, credit, kill switch.
+- ~18:40 UTC owner exception, verbatim: "its fine to put pick-n-pull photos
+  even with the water mark. I'll take it down if they request it but it
+  attracts customers to them". Pick-n-Pull's API photo URLs (Row52 CDN) are
+  now captured under their own switch. Nothing else from Row52.
+
+Owner priority (via hub): "low risk but the best UX. No lawsuits."
 
 ### Coverage (scan of 2026-11-06 16:51Z: 334,499 lot cars)
 
@@ -237,18 +237,26 @@ fetches.
 | Kiker's U-Pull-It | 656 | 656 | www.kikersupullit.com | yes | own site | yes, full URL | 3/3 200 JPEG 1600×1200, **320–420 KB**, immutable | 653/653 | **pass**, but heavy (see data cost) |
 | Army's Auto Wrecking | 238 | 14 | api.yardsmartapp.com | yes | YardSmart (platform vendor) | yes, full URL | 3/3 **404**: signed blob URLs whose token expires within hours | 0/14 | **fail**, do not enable |
 | Pull-N-Save | 9,008 | every row (658/658 in a Honda sample) | app.pullnsaveapp.com | yes | own app domain | no | URL is built from the stock #. A real photo is a 200×200 PNG of ~100 KB; a car without one gets a 3,474 B "no image" PNG at the same kind of URL | n/a | **fail**: the feed can't tell real photos from placeholders without fetching every one |
-| Pick-n-Pull | 47,440 | yes | cdn.row52.com | — | **Row52 (competitor)** | never | not sampled | — | **excluded by policy** |
+| Pick-n-Pull | 47,440 | ~47,150 (99.4%: 4,754 of 4,782 in a national Honda sample) | cdn.row52.com (Azure blob) | yes | **Row52, PnP's photo partner and a competitor**; owner exception 2026-11-06 | **added today** (`n` + 32 hex, from the API's `imageName`) | all 200 with and without a yardscout.io Referer; `access-control-allow-origin: *`; no content-type header but no `nosniff` either, so `<img>` sniffs it (real JPEG); imageName 600×400 ~41–47 KB with the Row52 watermark intact; max-age 600 | blob GUID with last-modified = upload time; not yet compared across scans | **pass** (owner exception) |
 | Pull-A-Part | 42,385 | 0 | — | — | — | — | `Vehicle/Search` has no image field | — | none |
 | Fenix U-Pull | 5,758 | 0 | — | — | — | — | page 1: all 50 rows show the theme's `placeholder-150x100.jpg` | — | none |
 | yardconnect-pro tenants (U-Pick-It AZ 3,098; Chuck & Eddie's, Genesis, Robertson's, Barry's, Hwy 82, Route 34, Sunshine) | — | thumbnails in table | api.yardsmartapp.com | — | YardSmart | no | **not sampled**; same signed-blob backend as Army's, so expect the same expiry | — | not pursued |
 | Ario tenants, CRUSH (Sturtevant, St. Cloud), Ace | — | image column/field noted in code | — | — | — | no | **not sampled** (Ario is rate-limited; Ace is Cloudflare-blocked in CI) | — | open |
 | All other chains | — | not checked: their fetchers note no image field | | | | | | | open |
 
-**Total that passes: 78,583 of 334,499 lot cars (23.5%).** LKQ 66,041,
-Wrench-A-Part 9,612, Weller 1,373, Pasco 901, Kiker's 656.
+**Total that passes: ~125,700 of 334,499 lot cars (~37.6%).** LKQ 66,041,
+Pick-n-Pull ~47,150, Wrench-A-Part 9,612, Weller 1,373, Pasco 901,
+Kiker's 656.
+
+LKQ crop: the original is 1280×720 with the PYP watermark bottom-right. The
+old card URL used `mode=crop` to 640×427, which trims the sides and can
+clip the mark. The card now uses `mode=max` (640×360, whole image), and the
+large form is the original file. Pick-n-Pull's 600×400 image already shows
+its full Row52 watermark.
 
 ### Capture (on main, data only)
 
+Commits: 9343692d (Wrench-A-Part) and 3662bf2c (kill switch + Pick-n-Pull).
 `fetch_wrenchapart_inventory` now stores `_photo` = `_wap_photo_code(item)`.
 The code takes one of two forms:
 
@@ -256,12 +264,48 @@ The code takes one of two forms:
   `…/v1%2F{yard}%2F{VIN}%2F{ms}-front_driver-thumb.jpg`
 - `w{yard}/{VIN}/{ms}.p` for the older `photo` `…%2F{ms}.png`
 
-Any other URL shape gets no code. Test: `scraper/test_wap_photo.py`. All 20
-`scraper/test_*.py` pass. `vehicle_extras.json` size, simulated on today's feed:
-14,898,768 → 15,246,089 B (+347 KB, +2.3%); gzip 2.03 → 2.21 MB. It stays a
+Any other URL shape gets no code. Test: `scraper/test_wap_photo.py`.
+`_pnp_ingest_group` stores `n<32 hex>` from the API's own `imageName`
+(`_pnp_photo_code`). Test: `scraper/test_photo_sources.py`. All 21
+`scraper/test_*.py` pass.
+
+`vehicle_extras.json` size, simulated on today's data: 14,898,768 B before.
+After WAP it is 15,246,089 B (+2.3%). After WAP + PnP + photoSources it is
+16,807,722 B (+12.8%); gzip goes 2.03 → 3.03 MB, because GUIDs don't
+compress. It is still lazy and off the critical path. The `inv/` shards carry
+the same per-car codes for their own yards. It stays a
 lazy shard. The app renders nothing for `w` codes until a `PHOTO_SOURCES`
 entry exists and is enabled. Army's capture is left as is: its URLs are dead
 on arrival, and `photoInfo` must never render them (see the hand-off).
+
+### Remote kill switch (`scraper/photo_sources.json`)
+
+Each source has `enabled`, `label`, `host`, and `patterns`: anchored regexes
+valid in both Python and JS, with `card`/`large` URL templates using `{1}`…
+At write time (`_write_extras_and_shards`, after stale-keep) the scraper
+blanks every photo code that no enabled pattern matches. It publishes the
+enabled sources as `photoSources` in `vehicle_extras.json` and in
+`data/inv/manifest.json`. The app renders only through that published map,
+so a source missing from it means no photo, even if a stale code survives
+somewhere. Missing or unreadable file means no sources: it fails closed.
+`armys` is listed but off. Pull-N-Save has no entry and no capture.
+
+### Photo takedown
+
+1. In `scraper/photo_sources.json`, set the chain's `"enabled": false`
+   (do not delete the entry). Commit to main: `photos: takedown <chain>
+   (<who asked, date>)`.
+2. Dispatch a scan:
+   `gh api -X POST repos/benvuolo/yardscout/actions/workflows/scan.yml/dispatches --input body.json`
+   with `{"ref":"main"}`. Takes the usual scan time.
+3. The scan commit drops that chain from `photoSources` and blanks its codes
+   in `vehicle_extras.json` and `inv/` shards. Web and every installed native
+   version stop showing the photos on their next data fetch: the manifest is
+   revalidated on each launch, and no app release is needed.
+4. Check: `photoSources` in `docs/data/inv/manifest.json` on main lacks the
+   chain, and `grep -c` of its code prefix/host in `vehicle_extras.json` is 0.
+5. Reply to the requester (the terms page promises usually within 24 h) and
+   log it under this section with the date.
 
 ### Native fit (iOS WKWebView / Android WebView, Capacitor 8)
 
@@ -297,6 +341,12 @@ on arrival, and `photoInfo` must never render them (see the hand-off).
   that images load from yards' servers. No tracking is involved.
 
 ### Hand-off to design (sent 2026-11-06 to session_016ZzJfKjBN7He2RMxFV9A8z)
+
+Superseded by a second message (also 2026-11-06). The app now renders from the
+published `photoSources` (no hard-coded hosts), uses object-fit: contain
+(never crop a watermark), and adds a viewer credit, a "View on <yard>" link
+and a "Photo owner? Request removal" mailto. Pick-n-Pull is added; sw must be
+jh-v150+. The first message is kept below for the record.
 
 > Photos, from the yards workstream (owner decision: ops/hub.md 2026-11-06
 > ~18:30). `docs/app.js` `PHOTO_SOURCES` / `photoInfo` on
@@ -336,4 +386,4 @@ on arrival, and `photoInfo` must never render them (see the hand-off).
 3. After each monthly sweep: review tiers A–B in `coverage_sweep.md`, verify
    each has self-service inventory online before adding.
 4. Chains frozen for 6+ scans show in the daily email as `chain-frozen:<chain>`.
-5. Photos: sample the Ario, CRUSH and remaining chains, and re-check WAP URL stability after a few scans.
+5. Photos: after the next scan, confirm `photoSources` in `inv/manifest.json` and real PnP/WAP code counts; compare PnP/WAP URLs across scans. Sample the Ario, CRUSH and remaining chains, and re-check WAP URL stability after a few scans.
