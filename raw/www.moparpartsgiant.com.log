@@ -1697,3 +1697,73 @@
 08:26:07 chain-unlinked window-regulator 1 numbers named by 4574101AQ, no catalog link: 4574101AR
 08:27:19 seed A|Dodge|Intrepid|2004 had network failures; left open for retry
 08:27:19 time budget reached records=2464
+08:29:12 start site=www.moparpartsgiant.com mode=worklist tiers=['A', 'B'] records=2464 list_lines=792 year_lines=64 url_index=6155
+08:29:12 seg done tier=A Dodge Ram 1500 [1971, 2018] seeds=[2002] records=2464 errors=11
+08:29:12 seg done tier=A Dodge Grand Caravan [2008, 2024] seeds=[2010] records=2464 errors=11
+08:29:12 seg done tier=A Chrysler 200 [1979, 2022] seeds=[2015] records=2464 errors=11
+08:29:12 seg done tier=A Dodge Journey [2009, 2020] seeds=[2012] records=2464 errors=11
+08:29:12 seg done tier=A Chrysler Town & Country [2008, 2016] seeds=[2008] records=2464 errors=11
+08:29:12 seg done tier=A Chrysler 300 [1999, 2021] seeds=[2006] records=2464 errors=11
+08:29:12 seg done tier=A Dodge Avenger [1995, 2014] seeds=[2013] records=2464 errors=11
+08:29:12 seg done tier=A Chrysler PT Cruiser [2001, 2010] seeds=[2006] records=2464 errors=11
+08:29:12 seg done tier=A Dodge Charger [1971, 2010] seeds=[2007] records=2464 errors=11
+08:29:12 seg done tier=A Dodge Dakota [1997, 2004] seeds=[2000] records=2464 errors=11
+08:29:12 seg done tier=A Dodge Caravan [1984, 2020] seeds=[2005] records=2464 errors=11
+08:29:12 seg done tier=A Chrysler Town & Country [1992, 2007] seeds=[2005] records=2464 errors=11
+08:29:12 seg done tier=A Dodge Dart [1960, 2016] seeds=[2013] records=2464 errors=11
+08:29:12 seg done tier=A Dodge Caliber [2007, 2012] seeds=[2007] records=2464 errors=11
+08:29:12 seg done tier=A Dodge Grand Caravan [2001, 2007] seeds=[2005] records=2464 errors=11
+08:29:12 seg done tier=A Dodge Charger [2011, 2023] seeds=[2013] records=2464 errors=11
+08:29:12 seg done tier=A Dodge Durango [2004, 2009] seeds=[2005] records=2464 errors=11
+08:29:12 seg done tier=A Dodge Durango [1998, 2003] seeds=[2003] records=2464 errors=11
+08:29:12 seg done tier=A Chrysler Sebring [2007, 2011] seeds=[2008] records=2464 errors=11
+08:29:12 seg done tier=A Dodge Dakota [2005, 2011] seeds=[2005] records=2464 errors=11
+08:29:12 seg done tier=A Chrysler Pacifica [2004, 2008] seeds=[2006] records=2464 errors=11
+08:29:12 seg done tier=A Dodge Nitro [2007, 2011] seeds=[2007] records=2464 errors=11
+08:29:12 seg done tier=A Ram 1500 [2009, 2022] seeds=[2012] records=2464 errors=11
+08:29:12 seg done tier=A Chrysler Sebring [2001, 2006] seeds=[2004] records=2464 errors=11
+08:29:12 seg done tier=A Dodge Durango [2011, 2023] seeds=[2013] records=2464 errors=11
+08:29:12 seg done tier=A Dodge Neon [2000, 2005] seeds=[2005] records=2464 errors=11
+08:29:12 seg done tier=A Dodge Ram Pickup [1988, 2011] seeds=[2004] records=2464 errors=11
+08:29:12 seg done tier=A Dodge Stratus [1996, 2008] seeds=[2006] records=2464 errors=11
+08:29:12 seg done tier=A Dodge Dakota [1987, 1996] seeds=[1992] records=2464 errors=11
+08:29:12 seg done tier=A Dodge Magnum [1978, 2008] seeds=[2005] records=2464 errors=11
+08:29:12 seg done tier=A Dodge Ram Van [1966, 2003] seeds=[1999] records=2464 errors=11
+08:29:12 seg done tier=A Dodge Grand Caravan [1988, 2000] seeds=[2000] records=2464 errors=11
+08:29:12 seg done tier=A Chrysler Aspen [2007, 2009] seeds=[2007] records=2464 errors=11
+08:29:12 seg done tier=A Dodge Ram 2500 [1979, 2002] seeds=[2001] records=2464 errors=11
+08:29:12 seg done tier=A Dodge 1500 Pickup [1995, 2023] seeds=[2002] records=2464 errors=11
+08:29:12 seg done tier=A Chrysler 300C [2005, 2018] seeds=[2006] records=2464 errors=11
+08:29:12 seg done tier=A Dodge Ram 2500 [2003, 2009] seeds=[2003] records=2464 errors=11
+08:29:12 seg done tier=A Dodge Challenger [2009, 2014] seeds=[2010] records=2464 errors=11
+08:30:41 chain-unlinked window-regulator 1 numbers named by 4574093AR, no catalog link: 4574093AS
+08:33:45 chain-unlinked side-mirrors 1 numbers named by 4805116AD, no catalog link: 4805116AF
+08:33:45 chain-unlinked side-mirrors 1 numbers named by 4805117AD, no catalog link: 4805117AF
+08:34:25 chain-unlinked window-regulator 1 numbers named by 4574092AG, no catalog link: 4574092AS
+08:34:25 chain-unlinked window-regulator 1 numbers named by 4574093AG, no catalog link: 4574093AS
+08:34:49 chain-unlinked window-switch 1 numbers named by 56007695AB, no catalog link: 56007695AD
+08:41:21 seg done tier=A Dodge Intrepid [1993, 2004] seeds=[2004, 1998, 1995] records=2509 errors=11
+08:44:17 chain-unlinked tail-lights 1 numbers named by 4857600AF, no catalog link: 68241332AA
+08:44:17 chain-unlinked tail-lights 1 numbers named by 4857601AF, no catalog link: 68241333AA
+08:44:41 chain-unlinked fuel-pump-module 1 numbers named by 5018875AB, no catalog link: 5101830AC
+08:45:21 chain-unlinked throttle-body 1 numbers named by 4861254AC, no catalog link: 4861254AD
+08:45:21 chain-unlinked throttle-body 1 numbers named by 4861256AC, no catalog link: 4861256AD
+08:47:21 seg done tier=A Dodge Caravan/Grand Caravan [1996, 2008] seeds=[2005, 2002, 2001] records=2514 errors=11
+08:48:17 chain-unlinked starter 1 numbers named by 4609346AB, no catalog link: RL609346AB
+08:48:17 chain-unlinked starter 1 numbers named by 4609345AC, no catalog link: 4609345AG
+08:50:57 chain-unlinked side-mirrors 1 numbers named by 4574590AI, no catalog link: 4805944AB
+08:50:57 chain-unlinked side-mirrors 1 numbers named by 4805944AA, no catalog link: 4805944AB
+08:50:57 chain-unlinked side-mirrors 4 numbers named by 4805946AB, no catalog link: 4805424AG, 4805424AE, 4805424AF, 4805424AH
+08:50:57 chain-unlinked side-mirrors 1 numbers named by 4805947AB, no catalog link: 4805947AD
+08:50:57 chain-unlinked side-mirrors 1 numbers named by 4805738AI, no catalog link: 4805948AB
+08:50:57 chain-unlinked side-mirrors 1 numbers named by 4805869AA, no catalog link: 4805949AD
+08:50:57 chain-unlinked side-mirrors 1 numbers named by 4805949AB, no catalog link: 4805949AD
+08:51:21 chain-unlinked window-regulator 1 numbers named by 4574092AO, no catalog link: 4574092AS
+08:51:21 chain-unlinked window-regulator 1 numbers named by 4574093AO, no catalog link: 4574093AS
+08:51:45 chain-unlinked window-regulator 1 numbers named by 4574100AN, no catalog link: 4574100AR
+08:51:45 chain-unlinked window-regulator 1 numbers named by 4574101AN, no catalog link: 4574101AR
+08:56:17 seg done tier=A Chrysler Concorde [1993, 2004] seeds=[2002, 1996, 1995] records=2537 errors=11
+08:58:01 chain-unlinked starter 1 numbers named by 4609058, no catalog link: R4609058
+08:58:41 chain-unlinked ac-compressor 1 numbers named by 4596367AA, no catalog link: RL016695AA
+09:02:25 chain-unlinked window-regulator 1 numbers named by 5011012AA, no catalog link: 4724282AH
+09:05:05 time budget reached records=2575
