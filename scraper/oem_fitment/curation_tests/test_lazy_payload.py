@@ -79,8 +79,23 @@ base = plain_build(empty)
 check("no groups and no aftermarket files: no lazy files, no new keys, payload as before",
       f0 == {} and not any(k in p0 for k in ("oemGroups", "oemVg", "oemStatus", "oemLazy", "amStatus"))
       and canon(p0) == canon(base))
-check("the repo ships no groups/<ns>.json and no groups/aftermarket/*.json yet (owner review first, §11.5)",
-      not list(DEFAULT_DIR.glob("*.json")) and not list((DEFAULT_DIR / "aftermarket").glob("*.json")))
+check("the repo ships no groups/<ns>.json yet (owner review first, §11.5)",
+      not list(DEFAULT_DIR.glob("*.json")))
+# aftermarket: owner decision 2026-11-06 (ops/hub.md): dbelectrical.json only,
+# only the six approved (namespace, category) pairs, never a gap make
+import sys as _sys  # noqa: E402
+_sys.path.insert(0, str(J.SCRIPT_DIR / "oem_fitment" / "aftermarket"))
+import groups_am as _GA  # noqa: E402
+_am = sorted(p.name for p in (DEFAULT_DIR / "aftermarket").glob("*.json"))
+_mns = _GA._make_ns()
+_bad = []
+for _p in (DEFAULT_DIR / "aftermarket").glob("*.json"):
+    for _g in json.loads(_p.read_text())["groups"]:
+        for _a in _g["apps"]:
+            if _a[0] in _GA.SHIP_OFF_MAKES or (_mns.get(_a[0]), _g["cat"]) not in _GA.SHIP_PAIRS:
+                _bad.append((_g["id"], _a[0]))
+check("groups/aftermarket ships only dbelectrical.json, only the owner-approved pairs, no gap make",
+      _am in ([], ["dbelectrical.json"]) and not _bad, str((_am, _bad[:3])))
 
 # ---------------------------------------------------------------- OEM split
 def likely_entry(i, cat="headlights"):

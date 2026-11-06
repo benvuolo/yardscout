@@ -163,6 +163,28 @@ check("a key without OEM numbers pairs with each OEM side",
       all(("Explorer", 2003) in s for s in sets) and len(sets) == 2, str(sets))
 check("refined groups stay likely/aftermarket", all(g["tier"] == "likely" and g["src"] == "aftermarket" for g in ro["groups"]))
 
+# 6e. ship(): only the six owner-approved pairs, never a gap make, slimmed
+LOT3 = {("Dodge", "Caravan"), ("Plymouth", "Voyager"), ("Ford", "Explorer"), ("Nissan", "Altima"), ("Dodge", "Neon")}
+N3 = GA.Names(LOT3)
+u3 = GA.build([rec("410-1", "starter", [app("Dodge", "Caravan", 2000, "3.3L V6"), app("Dodge", "Caravan", 2001, "3.3L V6"),
+                                         app("Plymouth", "Voyager", 2000, "3.3L V6")]),
+               rec("410-2", "starter", [app("Ford", "Explorer", 2002, "4.0L V6"), app("Ford", "Explorer", 2003, "4.0L V6")]),
+               rec("410-3", "starter", [app("Nissan", "Altima", 2005, "2.5L L4"), app("Nissan", "Altima", 2006, "2.5L L4")]),
+               rec("400-3", "alternator", [app("Nissan", "Altima", 2005, "2.5L L4"), app("Nissan", "Altima", 2006, "2.5L L4")], 110)],
+              N3)
+sh = GA.ship(GA.refine(u3, None, [("Plymouth Voyager / Dodge Caravan", ("Plymouth", "Voyager"), ("Dodge", "Caravan"))]))
+units = sorted({(g["cat"], g["unit"]) for g in sh["groups"]})
+check("ships mopar/starter and nissan/starter only", units == [("starter", "410-1"), ("starter", "410-3")], str(units))
+check("Plymouth (gap make) never ships, even as a mopar twin",
+      not any(a[0] == "Plymouth" for g in sh["groups"] for a in g["apps"]) and sh["skipped"].get("gap_make") == 2, str(sh["skipped"]))  # own sub-group + twin
+check("ford/starter and nissan/alternator not eligible", sh["skipped"].get("pair_not_eligible") == 2, str(sh["skipped"]))
+check("slim keys only", all(set(g) <= set(GA.SHIP_KEYS) for g in sh["groups"]) and all("fits_text" not in g for g in sh["groups"]))
+try:
+    GA.ship(u3)
+    check("ship refuses unrefined groups", False)
+except ValueError:
+    check("ship refuses unrefined groups", True)
+
 # 7. parse_engine on both feeds and lot strings
 check("parse feeds", GA.parse_engine("181cu in 3.0L V6") == (3.0, 6, False)
       and GA.parse_engine("2500cc, AWD, 51kW 2.5L 4 cyl, Diesel") == (2.5, 4, True)
