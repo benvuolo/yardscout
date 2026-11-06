@@ -3531,3 +3531,228 @@
 04:59:11 chain-unlinked climate-control 1 numbers named by 15176982, no catalog link: 15765096
 05:00:31 chain-unlinked fuel-pump-module 5 numbers named by 19369906, no catalog link: 19153716, 25315983, 19331257, 19121630, 19540754
 05:02:31 time budget reached records=3402
+05:02:46 start site=www.gmpartsgiant.com mode=worklist tiers=['A', 'B'] records=3402 list_lines=2676 year_lines=116 url_index=18859
+05:02:46 seg done tier=A Chevrolet Cruze [1986, 2014] seeds=[2014] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Silverado 1500 [1999, 2023] seeds=[2000] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Equinox [2010, 2015] seeds=[2012] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Impala [2006, 2011] seeds=[2008] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Malibu [2008, 2012] seeds=[2012] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Traverse [2008, 2017] seeds=[2011] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Trailblazer [2002, 2009] seeds=[2004] records=3402 errors=37
+05:02:46 seg done tier=A GMC Acadia [2007, 2016] seeds=[2012] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Suburban 1500 [1987, 2018] seeds=[2002] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Cobalt [2002, 2010] seeds=[2007] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Tahoe [2000, 2006] seeds=[2002] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Sonic [1982, 2020] seeds=[2013] records=3402 errors=37
+05:02:46 seg done tier=A GMC Sierra 1500 [1988, 2020] seeds=[2006] records=3402 errors=37
+05:02:46 seg done tier=A Cadillac CTS [2003, 2019] seeds=[2008] records=3402 errors=37
+05:02:46 seg done tier=A Pontiac G6 [2004, 2010] seeds=[2008] records=3402 errors=37
+05:02:46 seg done tier=A Buick Enclave [2008, 2017] seeds=[2011] records=3402 errors=37
+05:02:46 seg done tier=A GMC Terrain [2010, 2017] seeds=[2012] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Impala [1960, 2005] seeds=[2004] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet HHR [2006, 2011] seeds=[2008] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Equinox [2005, 2009] seeds=[2005] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet S-10 [1994, 2004] seeds=[2000] records=3402 errors=37
+05:02:46 seg done tier=A Buick LeSabre [2000, 2010] seeds=[2003] records=3402 errors=37
+05:02:46 seg done tier=A GMC Envoy [1998, 2009] seeds=[2003] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Tahoe [2007, 2014] seeds=[2007] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Malibu [2014, 2015] seeds=[2015] records=3402 errors=37
+05:02:46 seg done tier=A Pontiac Grand Prix [2004, 2008] seeds=[2006] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Cavalier [1983, 2005] seeds=[2003] records=3402 errors=37
+05:02:46 seg done tier=A Buick Century [1997, 2005] seeds=[2003] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Impala [2012, 2013] seeds=[2012] records=3402 errors=37
+05:02:46 seg done tier=A Buick Lucerne [2006, 2012] seeds=[2007] records=3402 errors=37
+05:02:46 seg done tier=A GMC Yukon [2000, 2006] seeds=[2003] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Blazer [1995, 2026] seeds=[2001] records=3402 errors=37
+05:02:46 seg done tier=A Cadillac SRX [2010, 2016] seeds=[2012] records=3402 errors=37
+05:02:46 seg done tier=A Buick LaCrosse [2010, 2016] seeds=[2011] records=3402 errors=37
+05:02:46 seg done tier=A Saturn VUE [2002, 2007] seeds=[2006] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Colorado [2004, 2012] seeds=[2005] records=3402 errors=37
+05:02:46 seg done tier=A Cadillac DeVille [2000, 2005] seeds=[2004] records=3402 errors=37
+05:02:46 seg done tier=A Saturn ION [2003, 2007] seeds=[2007] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Express 2500 [1997, 2021] seeds=[2005] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Malibu [2013, 2013] seeds=[2013] records=3402 errors=37
+05:02:46 seg done tier=A Buick Verano [2012, 2017] seeds=[2013] records=3402 errors=37
+05:02:46 seg done tier=A Buick LaCrosse [2005, 2009] seeds=[2005] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Malibu [2016, 2018] seeds=[2016] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Cruze [2015, 2015] seeds=[2015] records=3402 errors=37
+05:02:46 seg done tier=A Pontiac Grand Am [1999, 2005] seeds=[2004] records=3402 errors=37
+05:02:46 seg done tier=A GMC Yukon XL [2000, 2017] seeds=[2003] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Express 1500 [1980, 2014] seeds=[2006] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Cruze [2016, 2019] seeds=[2017] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Impala [2014, 2020] seeds=[2014] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Astro [1995, 2005] seeds=[2000] records=3402 errors=37
+05:02:46 seg done tier=A Pontiac Vibe [2003, 2010] seeds=[2005] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Malibu [2006, 2007] seeds=[2006] records=3402 errors=37
+05:02:46 seg done tier=A Buick Rendezvous [2002, 2007] seeds=[2006] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Uplander [2005, 2009] seeds=[2008] records=3402 errors=37
+05:02:46 seg done tier=A Cadillac DTS [2001, 2011] seeds=[2006] records=3402 errors=37
+05:02:46 seg done tier=A Cadillac DeVille [1963, 1999] seeds=[1998] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Monte Carlo [2000, 2007] seeds=[2004] records=3402 errors=37
+05:02:46 seg done tier=A Saturn Aura [2007, 2009] seeds=[2008] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Malibu [2004, 2005] seeds=[2005] records=3402 errors=37
+05:02:46 seg done tier=A GMC Yukon [2007, 2014] seeds=[2007] records=3402 errors=37
+05:02:46 seg done tier=A Saturn VUE [2008, 2010] seeds=[2008] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet C1500 [1977, 1999] seeds=[1997] records=3402 errors=37
+05:02:46 seg done tier=A GMC Yukon XL 1500 [2000, 2024] seeds=[2003] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Silverado 2500 [1999, 2020] seeds=[2003] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Spark [2013, 2022] seeds=[2014] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Equinox [2016, 2017] seeds=[2016] records=3402 errors=37
+05:02:46 seg done tier=A Cadillac Escalade [2002, 2006] seeds=[2002] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet K1500 [1983, 1999] seeds=[1998] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Avalanche [2002, 2006] seeds=[2004] records=3402 errors=37
+05:02:46 seg done tier=A Buick Encore [2013, 2023] seeds=[2015] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Malibu [2000, 2003] seeds=[2003] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Captiva Sport [2012, 2015] seeds=[2014] records=3402 errors=37
+05:02:46 seg done tier=A Buick Park Avenue [1980, 2005] seeds=[1999] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Tahoe [1995, 1999] seeds=[1999] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Avalanche 1500 [2002, 2013] seeds=[2002] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Express 3500 [1997, 2020] seeds=[2005] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet C/K 1500 [1978, 2001] seeds=[1998] records=3402 errors=37
+05:02:46 seg done tier=A Buick LeSabre [1963, 1999] seeds=[1997] records=3402 errors=37
+05:02:46 seg done tier=A Pontiac Grand Prix [1964, 2003] seeds=[2002] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Trax [2013, 2025] seeds=[2016] records=3402 errors=37
+05:02:46 seg done tier=A Cadillac SRX [2004, 2009] seeds=[2004] records=3402 errors=37
+05:02:46 seg done tier=A Cadillac STS [2005, 2011] seeds=[2005] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Camaro [1993, 2002] seeds=[1995] records=3402 errors=37
+05:02:46 seg done tier=A Buick Regal [2011, 2013] seeds=[2011] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Silverado [1993, 2006] seeds=[2000] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Trailblazer EXT [2002, 2006] seeds=[2005] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Aveo [2009, 2018] seeds=[2009] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Cruze Limited [2016, 2016] seeds=[2016] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Impala Limited [2014, 2016] seeds=[2014] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Venture [1997, 2005] seeds=[2004] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Camaro [2010, 2015] seeds=[2010] records=3402 errors=37
+05:02:46 seg done tier=A Pontiac Torrent [2006, 2009] seeds=[2006] records=3402 errors=37
+05:02:46 seg done tier=A GMC Sonoma [1994, 2004] seeds=[2000] records=3402 errors=37
+05:02:46 seg done tier=A Oldsmobile Alero [1999, 2004] seeds=[2001] records=3402 errors=37
+05:02:46 seg done tier=A GMC Envoy Xl [2002, 2006] seeds=[2003] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Lumina [1990, 2001] seeds=[1998] records=3402 errors=37
+05:02:46 seg done tier=A Pontiac Bonneville [1968, 2005] seeds=[2002] records=3402 errors=37
+05:02:46 seg done tier=A Buick Regal [1997, 2004] seeds=[2003] records=3402 errors=37
+05:02:46 seg done tier=A Cadillac Seville [1979, 2004] seeds=[2003] records=3402 errors=37
+05:02:46 seg done tier=A Saturn Outlook [2007, 2010] seeds=[2008] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Aveo [2007, 2008] seeds=[2007] records=3402 errors=37
+05:02:46 seg done tier=A Pontiac Sunfire [1995, 2005] seeds=[2005] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Avalanche [2007, 2013] seeds=[2007] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet S-10 [1982, 1993] seeds=[1992] records=3402 errors=37
+05:02:46 seg done tier=A GMC Jimmy [1995, 2005] seeds=[1998] records=3402 errors=37
+05:02:46 seg done tier=A Cadillac Escalade [2007, 2014] seeds=[2007] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Aveo [2004, 2006] seeds=[2006] records=3402 errors=37
+05:02:46 seg done tier=A Cadillac Eldorado [1970, 2002] seeds=[2000] records=3402 errors=37
+05:02:46 seg done tier=A GMC Sierra 2500 [1988, 2019] seeds=[2001] records=3402 errors=37
+05:02:46 seg done tier=A Pontiac G5 [2007, 2009] seeds=[2007] records=3402 errors=37
+05:02:46 seg done tier=A Cadillac ATS [1965, 2018] seeds=[2013] records=3402 errors=37
+05:02:46 seg done tier=A GMC Safari [1995, 2005] seeds=[2000] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Blazer S10/Jimmy S15 [1986, 2005] seeds=[2000] records=3402 errors=37
+05:02:46 seg done tier=A GMC Yukon [1992, 1999] seeds=[1999] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Equinox [2018, 2023] seeds=[2018] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Malibu Limited [2016, 2016] seeds=[2016] records=3402 errors=37
+05:02:46 seg done tier=A GMC Canyon [2004, 2016] seeds=[2005] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Silverado 2500HD [2001, 2019] seeds=[2004] records=3402 errors=37
+05:02:46 seg done tier=A GMC Sierra [1978, 2006] seeds=[2004] records=3402 errors=37
+05:02:46 seg done tier=A Pontiac Montana [1999, 2007] seeds=[2004] records=3402 errors=37
+05:02:46 seg done tier=A Hummer H3 [2006, 2010] seeds=[2006] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Silverado [2007, 2013] seeds=[2008] records=3402 errors=37
+05:02:46 seg done tier=A GMC Yukon Denali [2000, 2013] seeds=[2007] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Aveo5 [2007, 2011] seeds=[2009] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Tracker [1999, 2004] seeds=[2002] records=3402 errors=37
+05:02:46 seg done tier=A Chevrolet Suburban [2000, 2006] seeds=[2001] records=3402 errors=37
+05:05:34 chain-unlinked side-mirrors 2 numbers named by 10279410, no catalog link: 10238272, 10230760
+05:05:34 chain-unlinked side-mirrors 2 numbers named by 10279435, no catalog link: 10230777, 10238289
+05:05:34 chain-unlinked side-mirrors 2 numbers named by 10279436, no catalog link: 10238290, 10230778
+05:05:34 chain-unlinked side-mirrors 2 numbers named by 10279409, no catalog link: 10238271, 10230759
+05:05:58 chain-unlinked window-switch 1 numbers named by 10402845, no catalog link: 10290118
+05:07:50 seg done tier=A Pontiac Firebird [1993, 2002] seeds=[1995] records=3417 errors=37
+05:08:06 chain-unlinked alternator 1 numbers named by 13534118, no catalog link: 85769333
+05:08:06 chain-unlinked alternator 4 numbers named by 13555796, no catalog link: 13513504, 13515942, 13506528, 85769333
+05:08:30 chain-unlinked ac-compressor 1 numbers named by 86805575, no catalog link: 86352654
+05:08:30 chain-unlinked ac-compressor 5 numbers named by 86792446, no catalog link: 84308409, 84767890, 23422347, 84005712, 86345075
+05:09:18 chain-unlinked headlights 2 numbers named by 84680166, no catalog link: 84494360, 84650572
+05:09:18 chain-unlinked headlights 1 numbers named by 84650574, no catalog link: 84586787
+05:09:18 chain-unlinked headlights 1 numbers named by 84650575, no catalog link: 84586788
+05:09:18 chain-unlinked headlights 2 numbers named by 84680167, no catalog link: 84494361, 84650573
+05:10:14 chain-unlinked tail-lights 1 numbers named by 84595945, no catalog link: 84469990
+05:10:14 chain-unlinked tail-lights 1 numbers named by 84595946, no catalog link: 84469991
+05:10:14 chain-unlinked tail-lights 1 numbers named by 84882377, no catalog link: 84595944
+05:10:14 chain-unlinked tail-lights 1 numbers named by 84882378, no catalog link: 84595943
+05:10:14 chain-unlinked tail-lights 4 numbers named by 84882383, no catalog link: 23323248, 84132376, 84516374, 84059908
+05:10:14 chain-unlinked tail-lights 4 numbers named by 84882384, no catalog link: 84059909, 23323249, 84132377, 84516375
+05:10:14 chain-unlinked tail-lights 1 numbers named by 42816046, no catalog link: 23174489
+05:10:14 chain-unlinked tail-lights 1 numbers named by 42816047, no catalog link: 23174490
+05:10:14 chain-unlinked tail-lights 1 numbers named by 84130996, no catalog link: 23508091
+05:10:14 chain-unlinked tail-lights 1 numbers named by 84130997, no catalog link: 23508092
+05:11:34 chain-unlinked side-mirrors 1 numbers named by 84705499, no catalog link: 84288113
+05:11:34 chain-unlinked side-mirrors 2 numbers named by 84705502, no catalog link: 84288115, 84450511
+05:11:34 chain-unlinked side-mirrors 1 numbers named by 84705505, no catalog link: 84450513
+05:11:34 chain-unlinked side-mirrors 1 numbers named by 84705508, no catalog link: 84450515
+05:11:34 chain-unlinked side-mirrors 1 numbers named by 84705511, no catalog link: 84450517
+05:11:34 chain-unlinked side-mirrors 1 numbers named by 84705514, no catalog link: 84450519
+05:11:34 chain-unlinked side-mirrors 1 numbers named by 84705517, no catalog link: 84450521
+05:11:34 chain-unlinked side-mirrors 1 numbers named by 84705520, no catalog link: 84450523
+05:11:34 chain-unlinked side-mirrors 4 numbers named by 84705487, no catalog link: 84450477, 23372275, 84269690, 84288097
+05:11:34 chain-unlinked side-mirrors 4 numbers named by 84705490, no catalog link: 84450479, 23372276, 84288099, 84269689
+05:11:34 chain-unlinked side-mirrors 3 numbers named by 84705493, no catalog link: 23372281, 84288109, 84450505
+05:11:34 chain-unlinked side-mirrors 3 numbers named by 84705496, no catalog link: 23372282, 84288111, 84450507
+05:11:50 chain-unlinked window-regulator 1 numbers named by 23467107, no catalog link: 84198840
+05:11:50 chain-unlinked window-regulator 3 numbers named by 84451816, no catalog link: 22977463, 84198846, 84107261
+05:11:50 chain-unlinked window-regulator 3 numbers named by 84451817, no catalog link: 22977464, 84107262, 84198847
+05:11:50 chain-unlinked window-regulator 3 numbers named by 84451818, no catalog link: 23232808, 84107263, 84198848
+05:11:58 chain-unlinked window-regulator 6 numbers named by 84948221, no catalog link: 23374449, 84451822, 84198844, 84261382, 84091143, 84594393
+05:11:58 chain-unlinked window-regulator 6 numbers named by 84948222, no catalog link: 84594394, 84091144, 84198845, 23374450, 84451823, 84261383
+05:12:07 chain-unlinked window-switch 2 numbers named by 84512940, no catalog link: 84151774, 23326296
+05:12:54 chain-unlinked fuel-pump-module 4 numbers named by 85510206, no catalog link: 84610428, 84483575, 84428585, 42926153
+05:13:02 nav-fail Chevrolet Malibu 2025: ValueError: no 2025 catalog for Chevrolet Malibu (chevrolet-['malibu'])
+05:13:02 seg done tier=A Chevrolet Malibu [2019, 2025] seeds=[2020, 2025] records=3437 errors=38
+05:13:34 chain-unlinked alternator 2 numbers named by 19152460, no catalog link: 10463566, 10463393
+05:13:58 chain-unlinked starter 1 numbers named by 10465097, no catalog link: 10455012
+05:13:58 chain-unlinked starter 3 numbers named by 10496873, no catalog link: 01988714, 10455305, 1988714
+05:17:50 chain-unlinked window-regulator 4 numbers named by 19153542, no catalog link: 19152036, 22143946, 19151984, 22138766
+05:17:50 chain-unlinked window-regulator 1 numbers named by 16631402, no catalog link: 16621634
+05:23:42 nav-fail Chevrolet Caprice 1998: ValueError: no 1998 catalog for Chevrolet Caprice (chevrolet-['caprice'])
+05:23:42 seg done tier=A Chevrolet Caprice [1966, 2014] seeds=[1991, 1986, 1998] records=3474 errors=39
+05:24:46 chain-unlinked ac-compressor 8 numbers named by 19433082, no catalog link: 15036041, 15106397, 19130455, 89023457, 10366546, 89024908, 89024884, 19436022
+05:25:18 chain-unlinked headlights 2 numbers named by 85577295, no catalog link: 25758558, 15879432
+05:25:18 chain-unlinked headlights 2 numbers named by 85577296, no catalog link: 15879433, 25758557
+05:25:35 chain-unlinked tail-lights 7 numbers named by 84639023, no catalog link: 20989662, 25752545, 25756611, 84216114, 25823028, 23338319, 15813652
+05:25:35 chain-unlinked tail-lights 7 numbers named by 84639024, no catalog link: 25823027, 25752546, 25756610, 84216115, 20989661, 23338320, 15813651
+05:25:50 chain-unlinked side-mirrors 5 numbers named by 15937984, no catalog link: 15281048, 25755424, 15117627, 15872714, 25753831
+05:25:50 chain-unlinked side-mirrors 6 numbers named by 15937986, no catalog link: 15117633, 25755421, 15783682, 15821121, 15281055, 25753829
+05:25:50 chain-unlinked side-mirrors 6 numbers named by 15937981, no catalog link: 15821105, 15872717, 25755425, 25753832, 15281052, 15117630
+05:25:50 chain-unlinked side-mirrors 2 numbers named by 15937979, no catalog link: 15117636, 25753839
+05:25:50 chain-unlinked side-mirrors 3 numbers named by 15937980, no catalog link: 15117631, 25753836, 15821106
+05:25:50 chain-unlinked side-mirrors 4 numbers named by 15937982, no catalog link: 15117628, 15821104, 25753838, 25755428
+05:25:50 chain-unlinked side-mirrors 6 numbers named by 15937983, no catalog link: 15117634, 15281049, 25755427, 15821103, 25753837, 15872715
+05:25:50 chain-unlinked side-mirrors 6 numbers named by 15937996, no catalog link: 15281054, 25753830, 15783681, 15117632, 15821110, 25755422
+05:25:50 chain-unlinked side-mirrors 3 numbers named by 15937997, no catalog link: 15117635, 15821109, 15783680
+05:28:30 chain-unlinked climate-control 3 numbers named by 15858577, no catalog link: 25753630, 9375825, 09375825
+05:28:30 chain-unlinked climate-control 3 numbers named by 15858578, no catalog link: 09375795, 25753629, 9375795
+05:28:30 chain-unlinked climate-control 3 numbers named by 15858579, no catalog link: 09375785, 25753628, 9375785
+05:29:34 chain-unlinked fuel-pump-module 4 numbers named by 19331939, no catalog link: 19133519, 19153039, 19303380, 88965414
+05:29:34 chain-unlinked fuel-pump-module 3 numbers named by 19331938, no catalog link: 19153038, 19303383, 19133518
+05:29:34 chain-unlinked fuel-pump-module 3 numbers named by 19331949, no catalog link: 19153041, 19303384, 19133515
+05:29:34 chain-unlinked fuel-pump-module 3 numbers named by 19331946, no catalog link: 19153042, 19303381, 19133516
+05:30:54 chain-unlinked power-steering-pump 9 numbers named by 84996212, no catalog link: 20832683, 26065829, 26065848, 15270799, 15928343, 26069070, 26069075, 88963503, 84132437
+05:31:50 chain-unlinked alternator 3 numbers named by 22817848, no catalog link: 15204278, 20911204, 22781128
+05:32:23 chain-unlinked ac-compressor 3 numbers named by 86811107, no catalog link: 84208258, 20880831, 19436032
+05:32:23 chain-unlinked ac-compressor 1 numbers named by 86811109, no catalog link: 19541175
+05:33:26 chain-unlinked side-mirrors 1 numbers named by 20838065, no catalog link: 15227423
+05:33:26 chain-unlinked side-mirrors 1 numbers named by 20838066, no catalog link: 15227433
+05:33:26 chain-unlinked side-mirrors 1 numbers named by 84994861, no catalog link: 15227440
+05:33:26 chain-unlinked side-mirrors 1 numbers named by 84994862, no catalog link: 15227416
+05:33:26 chain-unlinked side-mirrors 1 numbers named by 84994863, no catalog link: 15227437
+05:33:26 chain-unlinked side-mirrors 1 numbers named by 84994864, no catalog link: 15227418
+05:35:35 chain-unlinked window-switch 2 numbers named by 84806723, no catalog link: 84075357, 15860001
+05:36:07 chain-unlinked climate-control 5 numbers named by 84793087, no catalog link: 15773678, 23283455, 84288985, 84555663, 84106610
+05:36:07 chain-unlinked climate-control 6 numbers named by 84793089, no catalog link: 15773677, 23283456, 84288987, 84106608, 84555665, 22738890
+05:36:07 chain-unlinked climate-control 6 numbers named by 84793088, no catalog link: 22738891, 15773679, 84106609, 23283457, 84555664, 84288986
+05:36:07 chain-unlinked climate-control 3 numbers named by 84793086, no catalog link: 23283454, 15773676, 84555662
+05:38:14 chain-unlinked fuel-pump-module 1 numbers named by 19329211, no catalog link: 19420775
+05:38:14 chain-unlinked fuel-pump-module 1 numbers named by 19420773, no catalog link: 19329210
+05:38:14 chain-unlinked fuel-pump-module 1 numbers named by 19420779, no catalog link: 19329213
+05:38:14 chain-unlinked fuel-pump-module 2 numbers named by 19420785, no catalog link: 19329212, 19352937
+05:38:14 chain-unlinked fuel-pump-module 2 numbers named by 19420739, no catalog link: 19259484, 19301231
+05:38:14 chain-unlinked fuel-pump-module 2 numbers named by 19420791, no catalog link: 19259483, 19301232
+05:38:14 chain-unlinked fuel-pump-module 3 numbers named by 19420757, no catalog link: 19352936, 19211042, 19301233
+05:38:14 chain-unlinked fuel-pump-module 2 numbers named by 19420767, no catalog link: 19211077, 19301234
+05:40:07 time budget reached records=3481
