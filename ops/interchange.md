@@ -1193,8 +1193,11 @@ model-year lists. Build only if that yield is real. TSB numbers are
 usually superseding parts ("use new P/N"), so even when parsed they are
 supersession evidence, not fitment lists.
 
-**5. eBay (finding; nothing built).** Our keyset uses Browse with the
-application token (scraper/ebay_prices.py). As far as I can tell, Browse
+**5. eBay (finding; nothing built; no eBay calls made).** Correction from
+the hub (02:42 UTC): there are **no eBay credentials**. The Developers
+Program registration was rejected and EBAY_CLIENT_ID / EBAY_CLIENT_SECRET
+are not set (ops/ebay.md). scraper/ebay_prices.py is written for Browse with
+an application token, but it has no keyset to run with. As far as I can tell, Browse
 has no full item compatibility list, only a one-vehicle compatibility
 check per item. The full list (Trading GetItem compatibility list) needs a
 user token. I could not read the API License Agreement: developer.ebay.com
