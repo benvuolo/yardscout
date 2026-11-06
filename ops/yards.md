@@ -211,14 +211,15 @@ Sweep follow-ups (mine):
 
 ## 2026-11-06 vehicle photos: coverage, capture, native fit
 
-**Status: the study and the Wrench-A-Part capture are done (data only). The
-hand-off to design is HELD until the owner confirms.** This task came from an
-automated session notice that quoted a 2026-11-06 owner decision turning
-self-hosted chain photos back on. That decision is not recorded anywhere in
-the repo. The last recorded call is the Sep 2026 one in `docs/app.js`
-(`PHOTO_SOURCES`: "ALL chain-sourced photos are OFF", legal caution). So
-nothing has been sent that would turn photos on. The hand-off text is below,
-ready to send once the owner says so in their own words.
+**Status: done.** The study, the Wrench-A-Part capture (data only) and the
+hand-off to design are complete. Basis: the owner decision recorded in
+`ops/hub.md` ("2026-11-06 ~18:30 UTC owner decisions", commit 8c24ed82):
+chain-hosted photos only, from the yard's own URL, credited, with a per-chain
+kill switch. This replaces the Sep 2026 "all off" note in `docs/app.js`.
+Not done here: the later Pick-n-Pull exception (hub, ~18:40 UTC, 1707014f,
+Row52-hosted and watermarked). It is outside this task's brief, which kept
+PnP excluded. The PnP fetcher still captures no photos; the hub decides who
+picks that up.
 
 ### Coverage (scan of 2026-11-06 16:51Z: 334,499 lot cars)
 
@@ -295,10 +296,10 @@ on arrival, and `photoInfo` must never render them (see the hand-off).
   to the yard's host. The privacy policy / App Privacy answers should say
   that images load from yards' servers. No tracking is involved.
 
-### Hand-off to design (HELD; send to session_016ZzJfKjBN7He2RMxFV9A8z once the owner confirms)
+### Hand-off to design (sent 2026-11-06 to session_016ZzJfKjBN7He2RMxFV9A8z)
 
-> Photos, from the yards workstream. Owner confirmation pending; do not
-> enable until it lands. `docs/app.js` `PHOTO_SOURCES` / `photoInfo` on
+> Photos, from the yards workstream (owner decision: ops/hub.md 2026-11-06
+> ~18:30). `docs/app.js` `PHOTO_SOURCES` / `photoInfo` on
 > design/pull-sheet:
 > 1. `pyp`: keep the entry and set `enabled: true`. Code `p<id>`, label
 >    "Photo: LKQ Pick Your Part", URL as now (640×427 webp).
@@ -335,4 +336,4 @@ on arrival, and `photoInfo` must never render them (see the hand-off).
 3. After each monthly sweep: review tiers A–B in `coverage_sweep.md`, verify
    each has self-service inventory online before adding.
 4. Chains frozen for 6+ scans show in the daily email as `chain-frozen:<chain>`.
-5. Photos: once the owner confirms the 2026-11-06 photos-on decision in their own words, send the held hand-off above to design and a summary to the hub. Then sample the Ario, CRUSH and remaining chains, and re-check WAP URL stability after a few scans.
+5. Photos: sample the Ario, CRUSH and remaining chains, and re-check WAP URL stability after a few scans.
