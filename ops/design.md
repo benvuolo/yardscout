@@ -47,6 +47,19 @@ sheet" in the UI only (jh_saved and watch storage untouched, rule 6); map deferr
   part_finder fails only the known M3 data check (main identical).
 - Photos: not added. Owner decision pending (chain photos were turned off in Sept).
 
+### Round 3: photos (2026-11-06 evening)
+- Branch head b4297b4 (merged main eb93379; branch shell jh-v151, since build 29 shipped jh-v150).
+- Photos render only from the published `photoSources` (scraper/photo_sources.json
+  patterns; no hosts in app.js; fail closed; URLs must be https on the source's
+  own published host). Includes the PnP owner exception (ops/hub.md 18:40).
+- Display: 4:3 box, object-fit: contain (never crop a watermark), slim
+  "No photo from this yard" strip on the car screen, card photo only when one
+  exists, viewer with credit, "View on <yard>" and a removal mailto.
+- Tests: ui_no_truncation 552/552 (23 screens incl. photo card/screen/viewer);
+  backend/test/photo_policy_unit.mjs (new) against photo_sources.json.
+- Blocker for TestFlight 30: main's data has no photoSources until the next
+  scan with the new scraper. Privacy policy should say images load from yards' servers.
+
 ## Earlier state (2026-11-06, exploration)
 
 - Branch: `design/redesign-2026-11` (exploration only; nothing merged).
