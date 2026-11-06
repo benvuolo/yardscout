@@ -35,6 +35,18 @@ sheet" in the UI only (jh_saved and watch storage untouched, rule 6); map deferr
 - Next: hub builds TestFlight from the branch for the owner. Merge to main
   only on the owner's word; releases still need the owner's "ship".
 
+### Round 2 (2026-11-06, after the owner tested TestFlight 28: "looks good")
+- Branch head a36ffbc (merged main; branch shell jh-v148, main jh-v147).
+- Car screen leads with "Worth pulling": the top picks (up to 5) by value. Pro
+  sees a value per pick plus a top total; free sees the same names and one
+  quiet Pro line. Then "Also on this car" (collapsed), the labelled whole-car
+  figure (Pro), "If equipped". Cards, pull sheet and watch hits lead with the
+  top picks (free sees the value order now; hub's call).
+- Tests at a36ffbc: ui_no_truncation 480/480 (20 screens); interchange_e2e
+  covers the free/Pro gate on the Worth pulling block; pf_ux, yaris pass;
+  part_finder fails only the known M3 data check (main identical).
+- Photos: not added. Owner decision pending (chain photos were turned off in Sept).
+
 ## Earlier state (2026-11-06, exploration)
 
 - Branch: `design/redesign-2026-11` (exploration only; nothing merged).
