@@ -868,7 +868,10 @@ const DATA_CACHE = 'jh-data-v1';
 let publishedPhotoSources = null;
 let _photoRules = [];   // compiled [{key, label, host, rx, card, large}]
 function setPublishedPhotoSources(ps) {
-  if (!ps || typeof ps !== 'object' || Array.isArray(ps)) return;
+  // Each manifest / extras file replaces the last: data without photoSources
+  // (older data, or a full takedown) clears every rule, so a switch-off never
+  // outlives the data that carried the switch.
+  if (!ps || typeof ps !== 'object' || Array.isArray(ps)) { publishedPhotoSources = null; _photoRules = []; return; }
   const rules = [];
   for (const [key, src] of Object.entries(ps)) {
     if (!src || typeof src !== 'object' || typeof src.label !== 'string' || typeof src.host !== 'string' || !src.host) continue;

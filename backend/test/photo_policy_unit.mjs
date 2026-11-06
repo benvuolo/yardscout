@@ -80,5 +80,10 @@ check('takedown: wap off in the published data -> no wap photo, others unaffecte
 setPublishedPhotoSources({ pyp: { label: 'Photo: X', host: 'cdn.pypapps.com', patterns: [{ code: '^p(\\d+)$', card: 'https://evil.example/{1}.jpg', large: 'https://cdn.pypapps.com/{1}.jpg' }] } });
 check('a URL off the source’s own host is refused', photoInfo('p123') === null);
 
+// Newer data without photoSources (older format, or a full takedown) clears everything.
+setPublishedPhotoSources(publish(sources));
+setPublishedPhotoSources(undefined);
+check('data without photoSources clears every rule (no stale switch)', Object.values(C).every(c => photoInfo(c) === null));
+
 console.log(fails ? `\n${fails} FAILED` : '\nALL PASS');
 process.exit(fails ? 1 : 0);
