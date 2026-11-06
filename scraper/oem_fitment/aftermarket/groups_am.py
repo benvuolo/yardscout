@@ -129,6 +129,23 @@ def accept(r: dict) -> str | None:
     return None
 
 
+def fits_liters(r: dict) -> set:
+    """Engine sizes the unit's own Fits text states (e.g. "CHRYSLER 3.3L
+    1990-91" -> {3.3}). Empty when it states none."""
+    return {float(x) for x in re.findall(r"(\d+\.\d)\s*l\b", str(r.get("fits_text") or "").lower())}
+
+
+def row_contradicts_fits(a: dict, fl: set) -> bool:
+    """An application row whose engine size is not among the sizes the
+    unit's own Fits text states. Seen on real records: Fiat 500 1.4L rows
+    on 410-52066 ("CHRYSLER 3.3L 1990-91") and 410-52033 ("DODGE TRUCKS
+    3.9L, 5.2L, 5.9L"). Such rows are dropped, never claimed."""
+    if not fl:
+        return False
+    lit = parse_engine(a.get("engine", ""))[0]
+    return lit is not None and not any(abs(lit - x) < 0.05 for x in fl)
+
+
 def amps(r: dict):
     a = str((r.get("specs") or {}).get("Amperage") or "").strip()
     return int(a) if a.isdigit() else None
@@ -197,6 +214,7 @@ def build(records: list, names: Names, src: str = "") -> dict:
     refused = Counter()
     unmapped = Counter()
     combined = Counter()
+    dropped_rows = Counter()
     groups = []
     for r in sorted(records, key=lambda r: (r.get("category", ""), r.get("aftermarket_pn", ""))):
         why = accept(r)
@@ -205,13 +223,20 @@ def build(records: list, names: Names, src: str = "") -> dict:
             continue
         rows = defaultdict(list)       # (make, model, engine label) -> years
         dsl = set()                    # (make, model, year, liters) printed as diesel on this unit
+        fl = fits_liters(r)
+        apps_in = []
         for a in r["applications"]:
+            if row_contradicts_fits(a, fl):
+                dropped_rows[f"{r['aftermarket_pn']}: {a.get('raw', '')}"] += 1
+                continue
+            apps_in.append(a)
+        for a in apps_in:
             c = names.canon(a.get("make", ""), a.get("model", ""))
             lit, _cy, d = parse_engine(a.get("engine", ""))
             if c and d and lit is not None:
                 for y in range(a["years"][0], a["years"][1] + 1):
                     dsl.add((c[0], c[1], y, lit))
-        for a in r["applications"]:
+        for a in apps_in:
             c = names.canon(a.get("make", ""), a.get("model", ""))
             if c is None:
                 combined[f"{a.get('make')} | {a.get('model')}"] += 1
@@ -255,6 +280,8 @@ def build(records: list, names: Names, src: str = "") -> dict:
                        "refused": dict(sorted(refused.items())),
                        "apps": sum(len(g["apps"]) for g in groups)},
            "unmapped_models": dict(unmapped.most_common()),
+           "rows_contradicting_fits_text": len(dropped_rows),
+           "rows_contradicting_fits_text_sample": sorted(dropped_rows)[:40],
            "combined_makes": dict(combined.most_common())}
     doc["sha256"] = hashlib.sha256(json.dumps(groups, sort_keys=True).encode()).hexdigest()
     return doc
@@ -347,6 +374,8 @@ def report_md(doc: dict, cov: dict | None = None) -> str:
          f"- records {s['records']}, groups {s['groups']}, app rows {s['apps']}",
          f"- refused: {json.dumps(s['refused'], sort_keys=True)}",
          f"- combined-make rows skipped: {sum(doc['combined_makes'].values())}",
+         f"- app rows dropped because their engine size is not in the unit's own Fits text: "
+         f"{doc.get('rows_contradicting_fits_text', 0)}",
          f"- app rows whose model matches no lot model: {sum(doc['unmapped_models'].values())} "
          f"({len(doc['unmapped_models'])} names; top: "
          + ", ".join(f"{k} ({v})" for k, v in list(doc['unmapped_models'].items())[:12]) + ")",

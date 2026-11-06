@@ -109,6 +109,15 @@ check("automatic car not in MT unit", 1 not in mt and mt.get(0) == "")
 check("unknown trans kept with condition", at.get(2) == "trans_unconfirmed" and mt.get(2) == "trans_unconfirmed")
 check("mixed AT+MT notes give no gate", GA.unit_trans({"fits_text": "X w/AT\nY w/MT"}) is None)
 
+# 6b. a row contradicting the unit's own Fits text is dropped
+d = GA.build([rec("410-52066", "starter", [app("Chrysler", "Voyager", 1990, "3.3L V6"),
+                                           app("Fiat", "500", 2014, "1.4L 4 cyl")], fits="CHRYSLER 3.3L 1990-91")],
+             GA.Names(LOT | {("Fiat", "500"), ("Chrysler", "Voyager")}))
+check("row whose liters the Fits text does not state is dropped",
+      [a[0] for a in d["groups"][0]["apps"]] == ["Chrysler"] and d["rows_contradicting_fits_text"] == 1,
+      str(d["groups"][0]["apps"]))
+check("no Fits liters -> no row guard", not GA.row_contradicts_fits({"engine": "1.4L"}, set()))
+
 # 7. parse_engine on both feeds and lot strings
 check("parse feeds", GA.parse_engine("181cu in 3.0L V6") == (3.0, 6, False)
       and GA.parse_engine("2500cc, AWD, 51kW 2.5L 4 cyl, Diesel") == (2.5, 4, True)

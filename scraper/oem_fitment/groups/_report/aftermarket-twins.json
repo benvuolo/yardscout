@@ -1,0 +1,1166 @@
+{
+ "cross_make_gain": {
+  "Fiat": {
+   "alternator": 0,
+   "cars": 372,
+   "either": 166,
+   "starter": 166
+  },
+  "Geo": {
+   "alternator": 0,
+   "cars": 182,
+   "either": 0,
+   "starter": 0
+  },
+  "Isuzu": {
+   "alternator": 360,
+   "cars": 501,
+   "either": 413,
+   "starter": 389
+  },
+  "Jaguar": {
+   "alternator": 0,
+   "cars": 704,
+   "either": 230,
+   "starter": 230
+  },
+  "Land Rover": {
+   "alternator": 59,
+   "cars": 827,
+   "either": 59,
+   "starter": 0
+  },
+  "MINI": {
+   "alternator": 0,
+   "cars": 1011,
+   "either": 0,
+   "starter": 0
+  },
+  "Mazda": {
+   "alternator": 884,
+   "cars": 6241,
+   "either": 959,
+   "starter": 586
+  },
+  "Mercury": {
+   "alternator": 2371,
+   "cars": 2869,
+   "either": 2541,
+   "starter": 2408
+  },
+  "Mitsubishi": {
+   "alternator": 305,
+   "cars": 2996,
+   "either": 1352,
+   "starter": 1341
+  },
+  "Plymouth": {
+   "alternator": 108,
+   "cars": 222,
+   "either": 137,
+   "starter": 110
+  },
+  "Pontiac": {
+   "alternator": 3595,
+   "cars": 4391,
+   "either": 4110,
+   "starter": 3869
+  },
+  "Porsche": {
+   "alternator": 25,
+   "cars": 183,
+   "either": 32,
+   "starter": 32
+  },
+  "Saab": {
+   "alternator": 37,
+   "cars": 387,
+   "either": 37,
+   "starter": 37
+  },
+  "Smart": {
+   "alternator": 0,
+   "cars": 77,
+   "either": 0,
+   "starter": 0
+  },
+  "Suzuki": {
+   "alternator": 186,
+   "cars": 750,
+   "either": 281,
+   "starter": 281
+  }
+ },
+ "groups_sha256": "2a32305770eae58698bfa114c86626ca6206cc431be41e80982e9c23ffe903df",
+ "raw": "origin/oem-raw@9d2c3b76:aftermarket/raw/www.dbelectrical.com.jsonl",
+ "twins": {
+  "Geo Metro / Suzuki Swift": {
+   "a": [
+    "Geo",
+    "Metro"
+   ],
+   "b": [
+    "Suzuki",
+    "Swift"
+   ],
+   "by_cat": {
+    "alternator": {
+     "a_cars": 0,
+     "a_cars_engine_confirmed": 0,
+     "b_cars": 0,
+     "b_cars_engine_confirmed": 0,
+     "units": []
+    },
+    "starter": {
+     "a_cars": 0,
+     "a_cars_engine_confirmed": 0,
+     "b_cars": 0,
+     "b_cars_engine_confirmed": 0,
+     "units": []
+    }
+   },
+   "lot_a": 60,
+   "lot_b": 10
+  },
+  "Geo Prizm / Toyota Corolla": {
+   "a": [
+    "Geo",
+    "Prizm"
+   ],
+   "b": [
+    "Toyota",
+    "Corolla"
+   ],
+   "by_cat": {
+    "alternator": {
+     "a_cars": 0,
+     "a_cars_engine_confirmed": 0,
+     "b_cars": 0,
+     "b_cars_engine_confirmed": 0,
+     "units": []
+    },
+    "starter": {
+     "a_cars": 0,
+     "a_cars_engine_confirmed": 0,
+     "b_cars": 0,
+     "b_cars_engine_confirmed": 0,
+     "units": []
+    }
+   },
+   "lot_a": 91,
+   "lot_b": 3568
+  },
+  "Geo Tracker / Chevrolet Tracker": {
+   "a": [
+    "Geo",
+    "Tracker"
+   ],
+   "b": [
+    "Chevrolet",
+    "Tracker"
+   ],
+   "by_cat": {
+    "alternator": {
+     "a_cars": 0,
+     "a_cars_engine_confirmed": 0,
+     "b_cars": 0,
+     "b_cars_engine_confirmed": 0,
+     "units": []
+    },
+    "starter": {
+     "a_cars": 0,
+     "a_cars_engine_confirmed": 0,
+     "b_cars": 0,
+     "b_cars_engine_confirmed": 0,
+     "units": []
+    }
+   },
+   "lot_a": 26,
+   "lot_b": 115
+  },
+  "Geo Tracker / Suzuki Sidekick": {
+   "a": [
+    "Geo",
+    "Tracker"
+   ],
+   "b": [
+    "Suzuki",
+    "Sidekick"
+   ],
+   "by_cat": {
+    "alternator": {
+     "a_cars": 0,
+     "a_cars_engine_confirmed": 0,
+     "b_cars": 0,
+     "b_cars_engine_confirmed": 0,
+     "units": []
+    },
+    "starter": {
+     "a_cars": 0,
+     "a_cars_engine_confirmed": 0,
+     "b_cars": 0,
+     "b_cars_engine_confirmed": 0,
+     "units": []
+    }
+   },
+   "lot_a": 26,
+   "lot_b": 29
+  },
+  "Isuzu Amigo / Isuzu Rodeo": {
+   "a": [
+    "Isuzu",
+    "Amigo"
+   ],
+   "b": [
+    "Isuzu",
+    "Rodeo"
+   ],
+   "by_cat": {
+    "alternator": {
+     "a_cars": 6,
+     "a_cars_engine_confirmed": 4,
+     "b_cars": 147,
+     "b_cars_engine_confirmed": 122,
+     "units": [
+      "400-12207",
+      "400-44016"
+     ]
+    },
+    "starter": {
+     "a_cars": 6,
+     "a_cars_engine_confirmed": 4,
+     "b_cars": 210,
+     "b_cars_engine_confirmed": 172,
+     "units": [
+      "410-24046",
+      "410-44008",
+      "410-52197"
+     ]
+    }
+   },
+   "lot_a": 8,
+   "lot_b": 222
+  },
+  "Isuzu Ascender / Chevrolet TrailBlazer": {
+   "a": [
+    "Isuzu",
+    "Ascender"
+   ],
+   "b": [
+    "Chevrolet",
+    "Trailblazer"
+   ],
+   "by_cat": {
+    "alternator": {
+     "a_cars": 40,
+     "a_cars_engine_confirmed": 33,
+     "b_cars": 1950,
+     "b_cars_engine_confirmed": 1686,
+     "units": [
+      "400-12179",
+      "400-12229",
+      "400-12284"
+     ]
+    },
+    "starter": {
+     "a_cars": 41,
+     "a_cars_engine_confirmed": 34,
+     "b_cars": 1954,
+     "b_cars_engine_confirmed": 1690,
+     "units": [
+      "410-12184",
+      "410-12278",
+      "410-12302",
+      "410-12357",
+      "410-12440"
+     ]
+    }
+   },
+   "lot_a": 42,
+   "lot_b": 1983
+  },
+  "Isuzu Ascender / GMC Envoy": {
+   "a": [
+    "Isuzu",
+    "Ascender"
+   ],
+   "b": [
+    "GMC",
+    "Envoy"
+   ],
+   "by_cat": {
+    "alternator": {
+     "a_cars": 40,
+     "a_cars_engine_confirmed": 33,
+     "b_cars": 790,
+     "b_cars_engine_confirmed": 671,
+     "units": [
+      "400-12179",
+      "400-12229",
+      "400-12284"
+     ]
+    },
+    "starter": {
+     "a_cars": 41,
+     "a_cars_engine_confirmed": 34,
+     "b_cars": 793,
+     "b_cars_engine_confirmed": 674,
+     "units": [
+      "410-12184",
+      "410-12278",
+      "410-12302",
+      "410-12357",
+      "410-12440"
+     ]
+    }
+   },
+   "lot_a": 42,
+   "lot_b": 857
+  },
+  "Isuzu Hombre / Chevrolet S10": {
+   "a": [
+    "Isuzu",
+    "Hombre"
+   ],
+   "b": [
+    "Chevrolet",
+    "S10"
+   ],
+   "by_cat": {
+    "alternator": {
+     "a_cars": 17,
+     "a_cars_engine_confirmed": 12,
+     "b_cars": 593,
+     "b_cars_engine_confirmed": 455,
+     "units": [
+      "400-12107",
+      "400-12110",
+      "400-12245",
+      "400-12442"
+     ]
+    },
+    "starter": {
+     "a_cars": 3,
+     "a_cars_engine_confirmed": 3,
+     "b_cars": 328,
+     "b_cars_engine_confirmed": 234,
+     "units": [
+      "410-12197",
+      "410-12228",
+      "410-52283"
+     ]
+    }
+   },
+   "lot_a": 18,
+   "lot_b": 1065
+  },
+  "Isuzu Rodeo / Honda Passport": {
+   "a": [
+    "Isuzu",
+    "Rodeo"
+   ],
+   "b": [
+    "Honda",
+    "Passport"
+   ],
+   "by_cat": {
+    "alternator": {
+     "a_cars": 193,
+     "a_cars_engine_confirmed": 156,
+     "b_cars": 86,
+     "b_cars_engine_confirmed": 64,
+     "units": [
+      "400-44003",
+      "400-44009",
+      "400-44016"
+     ]
+    },
+    "starter": {
+     "a_cars": 207,
+     "a_cars_engine_confirmed": 169,
+     "b_cars": 86,
+     "b_cars_engine_confirmed": 71,
+     "units": [
+      "410-44008",
+      "410-52197"
+     ]
+    }
+   },
+   "lot_a": 222,
+   "lot_b": 86
+  },
+  "Isuzu i-Series / Chevrolet Colorado": {
+   "a": [
+    "Isuzu",
+    "i-*"
+   ],
+   "b": [
+    "Chevrolet",
+    "Colorado"
+   ],
+   "by_cat": {
+    "alternator": {
+     "a_cars": 10,
+     "a_cars_engine_confirmed": 9,
+     "b_cars": 551,
+     "b_cars_engine_confirmed": 473,
+     "units": [
+      "400-40039",
+      "400-40101"
+     ]
+    },
+    "starter": {
+     "a_cars": 9,
+     "a_cars_engine_confirmed": 8,
+     "b_cars": 190,
+     "b_cars_engine_confirmed": 162,
+     "units": [
+      "410-12302",
+      "410-12357"
+     ]
+    }
+   },
+   "lot_a": 14,
+   "lot_b": 593
+  },
+  "Isuzu i-Series / GMC Canyon": {
+   "a": [
+    "Isuzu",
+    "i-*"
+   ],
+   "b": [
+    "GMC",
+    "Canyon"
+   ],
+   "by_cat": {
+    "alternator": {
+     "a_cars": 10,
+     "a_cars_engine_confirmed": 9,
+     "b_cars": 121,
+     "b_cars_engine_confirmed": 99,
+     "units": [
+      "400-40039",
+      "400-40101"
+     ]
+    },
+    "starter": {
+     "a_cars": 9,
+     "a_cars_engine_confirmed": 8,
+     "b_cars": 52,
+     "b_cars_engine_confirmed": 48,
+     "units": [
+      "410-12302",
+      "410-12357"
+     ]
+    }
+   },
+   "lot_a": 14,
+   "lot_b": 132
+  },
+  "Mazda B-Series / Ford Ranger": {
+   "a": [
+    "Mazda",
+    "B*"
+   ],
+   "b": [
+    "Ford",
+    "Ranger"
+   ],
+   "by_cat": {
+    "alternator": {
+     "a_cars": 34,
+     "a_cars_engine_confirmed": 28,
+     "b_cars": 1380,
+     "b_cars_engine_confirmed": 1115,
+     "units": [
+      "400-14061",
+      "400-14091",
+      "400-14096",
+      "400-14100",
+      "400-14106"
+     ]
+    },
+    "starter": {
+     "a_cars": 56,
+     "a_cars_engine_confirmed": 33,
+     "b_cars": 2117,
+     "b_cars_engine_confirmed": 1500,
+     "units": [
+      "410-14026",
+      "410-14027",
+      "410-14030",
+      "410-14031",
+      "410-14045",
+      "410-14056",
+      "410-14110",
+      "410-52582"
+     ]
+    }
+   },
+   "lot_a": 258,
+   "lot_b": 2239
+  },
+  "Mercury Grand Marquis / Ford Crown Victoria": {
+   "a": [
+    "Mercury",
+    "Grand Marquis"
+   ],
+   "b": [
+    "Ford",
+    "Crown Victoria"
+   ],
+   "by_cat": {
+    "alternator": {
+     "a_cars": 803,
+     "a_cars_engine_confirmed": 649,
+     "b_cars": 725,
+     "b_cars_engine_confirmed": 606,
+     "units": [
+      "400-14029",
+      "400-14037",
+      "400-14047",
+      "400-14055",
+      "400-14083",
+      "400-14094",
+      "400-14158",
+      "400-14173",
+      "400-48110",
+      "400-52322R"
+     ]
+    },
+    "starter": {
+     "a_cars": 712,
+     "a_cars_engine_confirmed": 575,
+     "b_cars": 459,
+     "b_cars_engine_confirmed": 389,
+     "units": [
+      "410-14032",
+      "410-52582"
+     ]
+    }
+   },
+   "lot_a": 997,
+   "lot_b": 771
+  },
+  "Mercury Mariner / Ford Escape": {
+   "a": [
+    "Mercury",
+    "Mariner"
+   ],
+   "b": [
+    "Ford",
+    "Escape"
+   ],
+   "by_cat": {
+    "alternator": {
+     "a_cars": 318,
+     "a_cars_engine_confirmed": 256,
+     "b_cars": 2265,
+     "b_cars_engine_confirmed": 1930,
+     "units": [
+      "400-14081",
+      "400-14112",
+      "400-14113",
+      "400-48124",
+      "400-48165",
+      "400-48167"
+     ]
+    },
+    "starter": {
+     "a_cars": 332,
+     "a_cars_engine_confirmed": 270,
+     "b_cars": 2505,
+     "b_cars_engine_confirmed": 2104,
+     "units": [
+      "410-14072",
+      "410-14076",
+      "410-48347"
+     ]
+    }
+   },
+   "lot_a": 332,
+   "lot_b": 4929
+  },
+  "Mercury Milan / Ford Fusion": {
+   "a": [
+    "Mercury",
+    "Milan"
+   ],
+   "b": [
+    "Ford",
+    "Fusion"
+   ],
+   "by_cat": {
+    "alternator": {
+     "a_cars": 311,
+     "a_cars_engine_confirmed": 256,
+     "b_cars": 2941,
+     "b_cars_engine_confirmed": 2443,
+     "units": [
+      "400-48118",
+      "400-48124",
+      "400-48167",
+      "400-48215"
+     ]
+    },
+    "starter": {
+     "a_cars": 311,
+     "a_cars_engine_confirmed": 256,
+     "b_cars": 3012,
+     "b_cars_engine_confirmed": 2443,
+     "units": [
+      "410-14076",
+      "410-48124",
+      "410-48251",
+      "410-48347",
+      "410-48347--001",
+      "410-48347--002",
+      "410-48347--003",
+      "410-52494"
+     ]
+    }
+   },
+   "lot_a": 311,
+   "lot_b": 5078
+  },
+  "Mercury Mountaineer / Ford Explorer": {
+   "a": [
+    "Mercury",
+    "Mountaineer"
+   ],
+   "b": [
+    "Ford",
+    "Explorer"
+   ],
+   "by_cat": {
+    "alternator": {
+     "a_cars": 421,
+     "a_cars_engine_confirmed": 345,
+     "b_cars": 3255,
+     "b_cars_engine_confirmed": 2729,
+     "units": [
+      "400-14029",
+      "400-14047",
+      "400-14082",
+      "400-14101",
+      "400-14101--002",
+      "400-14102",
+      "400-14106",
+      "400-14119",
+      "400-14156",
+      "400-14158",
+      "400-14201",
+      "400-48091"
+     ]
+    },
+    "starter": {
+     "a_cars": 424,
+     "a_cars_engine_confirmed": 292,
+     "b_cars": 3270,
+     "b_cars_engine_confirmed": 2219,
+     "units": [
+      "410-14044",
+      "410-14045",
+      "410-14057",
+      "410-52582"
+     ]
+    }
+   },
+   "lot_a": 424,
+   "lot_b": 4583
+  },
+  "Mercury Sable / Ford Taurus": {
+   "a": [
+    "Mercury",
+    "Sable"
+   ],
+   "b": [
+    "Ford",
+    "Taurus"
+   ],
+   "by_cat": {
+    "alternator": {
+     "a_cars": 312,
+     "a_cars_engine_confirmed": 252,
+     "b_cars": 2586,
+     "b_cars_engine_confirmed": 2139,
+     "units": [
+      "400-14011",
+      "400-14022",
+      "400-14035",
+      "400-14053",
+      "400-14059",
+      "400-14063",
+      "400-14099",
+      "400-14152",
+      "400-14153",
+      "400-48083"
+     ]
+    },
+    "starter": {
+     "a_cars": 312,
+     "a_cars_engine_confirmed": 252,
+     "b_cars": 2686,
+     "b_cars_engine_confirmed": 2223,
+     "units": [
+      "410-14024",
+      "410-14059",
+      "410-14063",
+      "410-14078",
+      "410-14111"
+     ]
+    }
+   },
+   "lot_a": 314,
+   "lot_b": 2829
+  },
+  "Mercury Tracer / Ford Escort": {
+   "a": [
+    "Mercury",
+    "Tracer"
+   ],
+   "b": [
+    "Ford",
+    "Escort"
+   ],
+   "by_cat": {
+    "alternator": {
+     "a_cars": 17,
+     "a_cars_engine_confirmed": 12,
+     "b_cars": 194,
+     "b_cars_engine_confirmed": 148,
+     "units": [
+      "400-14057",
+      "400-14096"
+     ]
+    },
+    "starter": {
+     "a_cars": 25,
+     "a_cars_engine_confirmed": 17,
+     "b_cars": 266,
+     "b_cars_engine_confirmed": 207,
+     "units": [
+      "410-14025"
+     ]
+    }
+   },
+   "lot_a": 26,
+   "lot_b": 290
+  },
+  "Mercury Villager / Nissan Quest": {
+   "a": [
+    "Mercury",
+    "Villager"
+   ],
+   "b": [
+    "Nissan",
+    "Quest"
+   ],
+   "by_cat": {
+    "alternator": {
+     "a_cars": 0,
+     "a_cars_engine_confirmed": 0,
+     "b_cars": 0,
+     "b_cars_engine_confirmed": 0,
+     "units": []
+    },
+    "starter": {
+     "a_cars": 43,
+     "a_cars_engine_confirmed": 38,
+     "b_cars": 43,
+     "b_cars_engine_confirmed": 42,
+     "units": [
+      "410-48060"
+     ]
+    }
+   },
+   "lot_a": 80,
+   "lot_b": 604
+  },
+  "Mitsubishi Raider / Dodge Dakota": {
+   "a": [
+    "Mitsubishi",
+    "Raider"
+   ],
+   "b": [
+    "Dodge",
+    "Dakota"
+   ],
+   "by_cat": {
+    "alternator": {
+     "a_cars": 39,
+     "a_cars_engine_confirmed": 35,
+     "b_cars": 757,
+     "b_cars_engine_confirmed": 601,
+     "units": [
+      "400-52058",
+      "400-52248"
+     ]
+    },
+    "starter": {
+     "a_cars": 43,
+     "a_cars_engine_confirmed": 0,
+     "b_cars": 1341,
+     "b_cars_engine_confirmed": 0,
+     "units": [
+      "410-52164",
+      "410-52233",
+      "410-52512"
+     ]
+    }
+   },
+   "lot_a": 43,
+   "lot_b": 1855
+  },
+  "Plymouth Breeze / Dodge Stratus": {
+   "a": [
+    "Plymouth",
+    "Breeze"
+   ],
+   "b": [
+    "Dodge",
+    "Stratus"
+   ],
+   "by_cat": {
+    "alternator": {
+     "a_cars": 17,
+     "a_cars_engine_confirmed": 11,
+     "b_cars": 146,
+     "b_cars_engine_confirmed": 67,
+     "units": [
+      "400-52042"
+     ]
+    },
+    "starter": {
+     "a_cars": 11,
+     "a_cars_engine_confirmed": 5,
+     "b_cars": 12,
+     "b_cars_engine_confirmed": 3,
+     "units": [
+      "410-24019"
+     ]
+    }
+   },
+   "lot_a": 17,
+   "lot_b": 318
+  },
+  "Plymouth Grand Voyager / Dodge Grand Caravan": {
+   "a": [
+    "Plymouth",
+    "Grand Voyager"
+   ],
+   "b": [
+    "Dodge",
+    "Grand Caravan"
+   ],
+   "by_cat": {
+    "alternator": {
+     "a_cars": 38,
+     "a_cars_engine_confirmed": 32,
+     "b_cars": 162,
+     "b_cars_engine_confirmed": 148,
+     "units": [
+      "400-52025",
+      "400-52049",
+      "400-52109"
+     ]
+    },
+    "starter": {
+     "a_cars": 51,
+     "a_cars_engine_confirmed": 39,
+     "b_cars": 672,
+     "b_cars_engine_confirmed": 575,
+     "units": [
+      "410-52066",
+      "410-52089",
+      "410-52121",
+      "410-52365"
+     ]
+    }
+   },
+   "lot_a": 55,
+   "lot_b": 3235
+  },
+  "Plymouth Neon / Dodge Neon": {
+   "a": [
+    "Plymouth",
+    "Neon"
+   ],
+   "b": [
+    "Dodge",
+    "Neon"
+   ],
+   "by_cat": {
+    "alternator": {
+     "a_cars": 24,
+     "a_cars_engine_confirmed": 20,
+     "b_cars": 338,
+     "b_cars_engine_confirmed": 269,
+     "units": [
+      "400-48034"
+     ]
+    },
+    "starter": {
+     "a_cars": 24,
+     "a_cars_engine_confirmed": 20,
+     "b_cars": 114,
+     "b_cars_engine_confirmed": 97,
+     "units": [
+      "410-24019",
+      "410-24022"
+     ]
+    }
+   },
+   "lot_a": 33,
+   "lot_b": 352
+  },
+  "Plymouth Voyager / Dodge Caravan": {
+   "a": [
+    "Plymouth",
+    "Voyager"
+   ],
+   "b": [
+    "Dodge",
+    "Caravan"
+   ],
+   "by_cat": {
+    "alternator": {
+     "a_cars": 29,
+     "a_cars_engine_confirmed": 27,
+     "b_cars": 101,
+     "b_cars_engine_confirmed": 78,
+     "units": [
+      "400-52025",
+      "400-52049",
+      "400-52109"
+     ]
+    },
+    "starter": {
+     "a_cars": 24,
+     "a_cars_engine_confirmed": 17,
+     "b_cars": 361,
+     "b_cars_engine_confirmed": 250,
+     "units": [
+      "410-52066",
+      "410-52089",
+      "410-52121",
+      "410-52365"
+     ]
+    }
+   },
+   "lot_a": 52,
+   "lot_b": 1039
+  },
+  "Pontiac Vibe / Toyota Matrix": {
+   "a": [
+    "Pontiac",
+    "Vibe"
+   ],
+   "b": [
+    "Toyota",
+    "Matrix"
+   ],
+   "by_cat": {
+    "alternator": {
+     "a_cars": 387,
+     "a_cars_engine_confirmed": 330,
+     "b_cars": 397,
+     "b_cars_engine_confirmed": 357,
+     "units": [
+      "400-52056",
+      "400-52135",
+      "400-52167R"
+     ]
+    },
+    "starter": {
+     "a_cars": 350,
+     "a_cars_engine_confirmed": 294,
+     "b_cars": 392,
+     "b_cars_engine_confirmed": 352,
+     "units": [
+      "410-52207",
+      "410-52518"
+     ]
+    }
+   },
+   "lot_a": 408,
+   "lot_b": 431
+  },
+  "Saab 9-2X / Subaru Impreza": {
+   "a": [
+    "Saab",
+    "9-2X"
+   ],
+   "b": [
+    "Subaru",
+    "Impreza"
+   ],
+   "by_cat": {
+    "alternator": {
+     "a_cars": 11,
+     "a_cars_engine_confirmed": 11,
+     "b_cars": 590,
+     "b_cars_engine_confirmed": 519,
+     "units": [
+      "400-44036",
+      "400-48053",
+      "400-48097",
+      "400-48137",
+      "400-48148",
+      "400-48152"
+     ]
+    },
+    "starter": {
+     "a_cars": 11,
+     "a_cars_engine_confirmed": 1,
+     "b_cars": 627,
+     "b_cars_engine_confirmed": 140,
+     "units": [
+      "410-48181",
+      "410-48231",
+      "410-48232",
+      "410-48265",
+      "410-52495"
+     ]
+    }
+   },
+   "lot_a": 11,
+   "lot_b": 974
+  },
+  "Saab 9-7X / Chevrolet TrailBlazer": {
+   "a": [
+    "Saab",
+    "9-7X"
+   ],
+   "b": [
+    "Chevrolet",
+    "Trailblazer"
+   ],
+   "by_cat": {
+    "alternator": {
+     "a_cars": 26,
+     "a_cars_engine_confirmed": 25,
+     "b_cars": 736,
+     "b_cars_engine_confirmed": 624,
+     "units": [
+      "400-12229",
+      "400-12284"
+     ]
+    },
+    "starter": {
+     "a_cars": 26,
+     "a_cars_engine_confirmed": 25,
+     "b_cars": 736,
+     "b_cars_engine_confirmed": 624,
+     "units": [
+      "410-12302",
+      "410-12357"
+     ]
+    }
+   },
+   "lot_a": 28,
+   "lot_b": 1983
+  },
+  "Saab 9-7X / GMC Envoy": {
+   "a": [
+    "Saab",
+    "9-7X"
+   ],
+   "b": [
+    "GMC",
+    "Envoy"
+   ],
+   "by_cat": {
+    "alternator": {
+     "a_cars": 26,
+     "a_cars_engine_confirmed": 25,
+     "b_cars": 257,
+     "b_cars_engine_confirmed": 226,
+     "units": [
+      "400-12229",
+      "400-12284"
+     ]
+    },
+    "starter": {
+     "a_cars": 26,
+     "a_cars_engine_confirmed": 25,
+     "b_cars": 257,
+     "b_cars_engine_confirmed": 226,
+     "units": [
+      "410-12302",
+      "410-12357"
+     ]
+    }
+   },
+   "lot_a": 28,
+   "lot_b": 857
+  },
+  "Suzuki Equator / Nissan Frontier": {
+   "a": [
+    "Suzuki",
+    "Equator"
+   ],
+   "b": [
+    "Nissan",
+    "Frontier"
+   ],
+   "by_cat": {
+    "alternator": {
+     "a_cars": 3,
+     "a_cars_engine_confirmed": 3,
+     "b_cars": 185,
+     "b_cars_engine_confirmed": 153,
+     "units": [
+      "400-40069",
+      "400-44118"
+     ]
+    },
+    "starter": {
+     "a_cars": 3,
+     "a_cars_engine_confirmed": 3,
+     "b_cars": 274,
+     "b_cars_engine_confirmed": 242,
+     "units": [
+      "410-48112",
+      "410-48184"
+     ]
+    }
+   },
+   "lot_a": 3,
+   "lot_b": 644
+  },
+  "Suzuki XL-7 / Chevrolet Equinox": {
+   "a": [
+    "Suzuki",
+    "XL-7"
+   ],
+   "b": [
+    "Chevrolet",
+    "Equinox"
+   ],
+   "by_cat": {
+    "alternator": {
+     "a_cars": 70,
+     "a_cars_engine_confirmed": 55,
+     "b_cars": 373,
+     "b_cars_engine_confirmed": 95,
+     "units": [
+      "400-52447R"
+     ]
+    },
+    "starter": {
+     "a_cars": 70,
+     "a_cars_engine_confirmed": 55,
+     "b_cars": 769,
+     "b_cars_engine_confirmed": 295,
+     "units": [
+      "410-48100",
+      "410-48122"
+     ]
+    }
+   },
+   "lot_a": 149,
+   "lot_b": 4114
+  }
+ }
+}
