@@ -593,3 +593,103 @@
 04:50:53 chain-unlinked door-rear 1 numbers named by 60409AJ02B9P, no catalog link: 60409AJ02D9P
 04:51:49 seg done tier=B Subaru Legacy [2010, 2012] seeds=[2011, 2012] records=1599 errors=4
 04:53:25 time budget reached records=1599
+04:53:36 start site=www.subarupartsdeal.com mode=worklist tiers=['A', 'B'] records=1599 list_lines=419 year_lines=36 url_index=4960
+04:53:36 seg done tier=A Subaru Outback [2010, 2014] seeds=[2011] records=1599 errors=4
+04:53:36 seg done tier=A Subaru Outback [2005, 2009] seeds=[2005] records=1599 errors=4
+04:53:36 seg done tier=A Subaru Forester [2009, 2013] seeds=[2010] records=1599 errors=4
+04:53:36 seg done tier=A Subaru Forester [2003, 2008] seeds=[2004] records=1599 errors=4
+04:53:36 seg done tier=A Subaru Outback [2000, 2004] seeds=[2003] records=1599 errors=4
+04:53:36 seg done tier=A Subaru Impreza [2008, 2011] seeds=[2008] records=1599 errors=4
+04:53:36 seg done tier=A Subaru Impreza [2012, 2016] seeds=[2012] records=1599 errors=4
+04:53:36 seg done tier=A Subaru Legacy [2010, 2012] seeds=[2011] records=1599 errors=4
+04:53:36 seg done tier=A Subaru Legacy [2005, 2009] seeds=[2005] records=1599 errors=4
+04:53:36 seg done tier=A Subaru Impreza [2002, 2007] seeds=[2007] records=1599 errors=4
+04:53:36 seg done tier=A Subaru Forester [1981, 2002] seeds=[2001] records=1599 errors=4
+04:53:36 seg done tier=A Subaru Forester [2014, 2018] seeds=[2014] records=1599 errors=4
+04:53:36 seg done tier=A Subaru Legacy [1990, 1999] seeds=[1999] records=1599 errors=4
+04:53:36 seg done tier=A Subaru Legacy [2013, 2014] seeds=[2013] records=1599 errors=4
+04:53:36 seg done tier=A Subaru Legacy [2015, 2019] seeds=[2015] records=1599 errors=4
+04:53:36 seg done tier=A Subaru XV Crosstrek [2013, 2024] seeds=[2013] records=1599 errors=4
+04:53:36 seg done tier=A Subaru Legacy [2000, 2002] seeds=[2001] records=1599 errors=4
+04:53:36 seg done tier=A Subaru B9 Tribeca [2006, 2009] seeds=[2006] records=1599 errors=4
+04:53:36 seg done tier=A Subaru Legacy Wagon [1990, 2009] seeds=[1998] records=1599 errors=4
+04:53:36 seg done tier=A Subaru Legacy [2003, 2004] seeds=[2004] records=1599 errors=4
+04:53:36 seg done tier=A Subaru Outback [2015, 2019] seeds=[2015] records=1599 errors=4
+04:53:36 seg done tier=A Subaru Tribeca [2006, 2013] seeds=[2008] records=1599 errors=4
+04:53:36 seg done tier=A Subaru Impreza [1993, 2001] seeds=[1998] records=1599 errors=4
+04:53:36 seg done tier=A Subaru Impreza Wagon [1993, 2007] seeds=[2005] records=1599 errors=4
+04:53:36 seg done tier=A Subaru Impreza [2017, 2022] seeds=[2017] records=1599 errors=4
+04:53:36 seg done tier=B Subaru Outback [2010, 2014] seeds=[2011] records=1599 errors=4
+04:53:36 seg done tier=B Subaru Outback [2005, 2009] seeds=[2005] records=1599 errors=4
+04:53:36 seg done tier=B Subaru Forester [2009, 2013] seeds=[2010] records=1599 errors=4
+04:53:36 seg done tier=B Subaru Forester [2003, 2008] seeds=[2004] records=1599 errors=4
+04:53:36 seg done tier=B Subaru Outback [2000, 2004] seeds=[2003] records=1599 errors=4
+04:53:36 seg done tier=B Subaru Impreza [2008, 2011] seeds=[2008] records=1599 errors=4
+04:53:36 seg done tier=B Subaru Impreza [2012, 2016] seeds=[2012] records=1599 errors=4
+04:53:36 seg done tier=B Subaru Legacy [2010, 2012] seeds=[2011] records=1599 errors=4
+04:53:36 seg done tier=B Subaru Legacy [2005, 2009] seeds=[2005] records=1599 errors=4
+04:54:48 chain-unlinked radiator 3 numbers named by 45119FE020, no catalog link: 45111FE091, 45111FE092, X4511FE092
+04:54:48 chain-unlinked radiator 4 numbers named by 45119FE000, no catalog link: 45111FE100, 45111FE102, 45111FE101, X4511FE102
+04:54:56 chain-unlinked radiator 2 numbers named by 45119FE030, no catalog link: 45111FE080, X4511FE081
+04:54:56 chain-unlinked radiator 2 numbers named by 45119FE050, no catalog link: 45111FE150, X4511FE150
+04:55:36 chain-unlinked door-front 7 numbers named by 60009FE017, no catalog link: 60009FE015, 60009FE010, 60009FE016, 60009FE013, 60009FE011, 60009FE014, 60009FE012
+04:55:36 chain-unlinked door-front 7 numbers named by 60009FE037, no catalog link: 60009FE030, 60009FE032, 60009FE033, 60009FE031, 60009FE034, 60009FE036, 60009FE035
+04:55:36 chain-unlinked door-front 7 numbers named by 60009FE007, no catalog link: 60009FE006, 60009FE003, 60009FE004, 60009FE001, 60009FE002, 60009FE000, 60009FE005
+04:55:36 chain-unlinked door-front 7 numbers named by 60009FE027, no catalog link: 60009FE025, 60009FE021, 60009FE022, 60009FE026, 60009FE020, 60009FE023, 60009FE024
+04:56:24 chain-unlinked door-rear 3 numbers named by 60409FE013, no catalog link: 60409FE010, 60409FE011, 60409FE012
+04:56:24 chain-unlinked door-rear 3 numbers named by 60409FE033, no catalog link: 60409FE030, 60409FE031, 60409FE032
+04:56:24 chain-unlinked door-rear 3 numbers named by 60409FE053, no catalog link: 60409FE052, 60409FE050, 60409FE051
+04:56:24 chain-unlinked door-rear 3 numbers named by 60409FE003, no catalog link: 60409FE000, 60409FE001, 60409FE002
+04:56:24 chain-unlinked door-rear 3 numbers named by 60409FE023, no catalog link: 60409FE021, 60409FE020, 60409FE022
+04:56:24 chain-unlinked door-rear 3 numbers named by 60409FE043, no catalog link: 60409FE042, 60409FE041, 60409FE040
+04:56:48 chain-unlinked hood 1 numbers named by 57229FE121, no catalog link: 57229FE120
+04:56:48 chain-unlinked hood 1 numbers named by 57229FE111, no catalog link: 57229FE110
+04:59:36 chain-unlinked grille 1 numbers named by 91121FE201, no catalog link: 91121FE200
+04:59:36 chain-unlinked grille 1 numbers named by 91121FE231MJ, no catalog link: 91121FE230MJ
+04:59:36 chain-unlinked grille 1 numbers named by 91121FE231VW, no catalog link: 91121FE230VW
+04:59:36 chain-unlinked grille 1 numbers named by 91121FE231PG, no catalog link: 91121FE230PG
+05:00:40 seg done tier=B Subaru Impreza [2002, 2007] seeds=[2007] records=1641 errors=4
+05:01:44 chain-unlinked ignition-coils 1 numbers named by 22433AA410, no catalog link: 22433AA570
+05:02:24 chain-unlinked radiator 1 numbers named by 45111FC340, no catalog link: 45199FC340
+05:02:24 chain-unlinked radiator 1 numbers named by 45111FC350, no catalog link: 45199FC350
+05:02:24 chain-unlinked radiator 1 numbers named by 45111FC360, no catalog link: 45199FC340
+05:02:24 chain-unlinked radiator 1 numbers named by 45111FC370, no catalog link: 45199FC350
+05:02:48 chain-unlinked door-front 4 numbers named by 61101FC050, no catalog link: 61101FC032, 61101FC010, 61101FC030, 61101FC031
+05:02:48 chain-unlinked door-front 4 numbers named by 61101FC040, no catalog link: 61101FC021, 61101FC000, 61101FC022, 61101FC020
+05:03:12 chain-unlinked door-rear 3 numbers named by 61401FC052, no catalog link: 61401FC030, 61401FC050, 61401FC031
+05:03:12 chain-unlinked door-rear 3 numbers named by 61401FC042, no catalog link: 61401FC021, 61401FC020, 61401FC040
+05:06:00 nav-fail Subaru Forester 1989: ValueError: no 1989 catalog for Subaru Forester (subaru-['forester'])
+05:06:00 seg done tier=B Subaru Forester [1981, 2002] seeds=[2001, 1989] records=1669 errors=5
+05:10:16 chain-unlinked ignition-coils 1 numbers named by 22433AA681, no catalog link: 22433AA682
+05:10:16 chain-unlinked ignition-coils 1 numbers named by 22433AA680, no catalog link: 22433AA682
+05:11:52 chain-unlinked door-rear 1 numbers named by 60409SG0309P, no catalog link: 60409SG0319P
+05:11:52 chain-unlinked door-rear 1 numbers named by 60409SG0209P, no catalog link: 60409SG0219P
+05:13:28 chain-unlinked bumper-rear 1 numbers named by 57704SG010, no catalog link: 57794SG000
+05:14:08 chain-unlinked grille 1 numbers named by 91121SG000, no catalog link: 91121SG001
+05:14:08 chain-unlinked grille 1 numbers named by 91121SG010, no catalog link: 91121SG011
+05:14:48 seg done tier=B Subaru Forester [2014, 2018] seeds=[2014] records=1723 errors=5
+05:16:32 chain-unlinked ignition-coils 1 numbers named by 22433AA41A, no catalog link: 22433AA570
+05:17:04 chain-unlinked radiator 2 numbers named by 45199AC270, no catalog link: 45199AC040, 45199AC041
+05:17:04 chain-unlinked radiator 2 numbers named by 45199AC280, no catalog link: 45199AC071, 45199AC070
+05:18:16 chain-unlinked hood 1 numbers named by 57220AC080, no catalog link: 57220AC020
+05:20:24 chain-unlinked grille 1 numbers named by 91061AC091, no catalog link: 91061AC350
+05:20:24 chain-unlinked grille 1 numbers named by 91061AC161, no catalog link: 91061AC160
+05:22:24 chain-unlinked gauge-cluster 1 numbers named by 85013AA570, no catalog link: 85014AA780
+05:22:48 chain-unlinked ignition-coils 1 numbers named by 22433AA240, no catalog link: 22433AA370
+05:23:44 chain-unlinked radiator 1 numbers named by 45111AA260, no catalog link: 45111AA240
+05:23:44 chain-unlinked radiator 1 numbers named by 45111AA180, no catalog link: 45111AC230
+05:23:44 chain-unlinked radiator 1 numbers named by 45111AA181, no catalog link: 45111AC230
+05:23:44 chain-unlinked radiator 1 numbers named by 45199AA101, no catalog link: 45199AA201
+05:23:44 chain-unlinked radiator 3 numbers named by 45199AA220, no catalog link: 45199AA110, 45199AA080, 45199AA190
+05:24:08 chain-unlinked door-front 1 numbers named by 61110AA030, no catalog link: 61110AA070
+05:24:08 chain-unlinked door-front 1 numbers named by 61110AA020, no catalog link: 61110AA060
+05:24:48 chain-unlinked door-rear 1 numbers named by 61120AA030, no catalog link: 61120AA090
+05:24:48 chain-unlinked door-rear 1 numbers named by 61120AA070, no catalog link: 61120AA090
+05:24:48 chain-unlinked door-rear 1 numbers named by 61120AA020, no catalog link: 61120AA080
+05:24:48 chain-unlinked door-rear 1 numbers named by 61120AA060, no catalog link: 61120AA080
+05:25:12 chain-unlinked hood 1 numbers named by 57220AA060, no catalog link: 57220AA121
+05:25:12 chain-unlinked hood 1 numbers named by 57220AA070, no catalog link: 57220AA131
+05:26:00 chain-unlinked bumper-front 1 numbers named by 57720AA120, no catalog link: 57720AA210
+05:27:28 chain-unlinked liftgate 2 numbers named by 61160AA041, no catalog link: 61160AA100, 61160AA040
+05:27:28 seg done tier=B Subaru Legacy [1990, 1999] seeds=[1999, 1992] records=1794 errors=5
+05:27:28 time budget reached records=1794
