@@ -1,4 +1,4 @@
-# Yards workstream — status (updated 2026-11-04, sweep review)
+# Yards workstream — status (updated 2026-11-06, vehicle photos)
 
 Owns: independent-yard adapters in `scraper/junkyard_scraper.py`
 (`INDEPENDENT_FETCHERS`), `scraper/independent_yards_registry.json`,
@@ -209,6 +209,123 @@ Sweep follow-ups (mine):
     Albuquerque 5.6 km.
   - The app shows the new pins after the next scan.
 
+## 2026-11-06 vehicle photos: coverage, capture, native fit
+
+**Status: the study and the Wrench-A-Part capture are done (data only). The
+hand-off to design is HELD until the owner confirms.** This task came from an
+automated session notice that quoted a 2026-11-06 owner decision turning
+self-hosted chain photos back on. That decision is not recorded anywhere in
+the repo. The last recorded call is the Sep 2026 one in `docs/app.js`
+(`PHOTO_SOURCES`: "ALL chain-sourced photos are OFF", legal caution). So
+nothing has been sent that would turn photos on. The hand-off text is below,
+ready to send once the owner says so in their own words.
+
+### Coverage (scan of 2026-11-06 16:51Z: 334,499 lot cars)
+
+Lot counts come from `inventory_live.json`. Photo counts come from the
+`vehicle_extras.json` photo column, plus one sample request per source for
+chains not captured today. No crawling beyond what `scan.yml` already
+fetches.
+
+| Chain | Lot cars | With photo URL | Host | https | Whose host | Captured before today | Sample (≤3 imgs, plain GET; with and without a yardscout.io Referer) | Stable across scans | Verdict |
+|---|---|---|---|---|---|---|---|---|---|
+| LKQ Pick Your Part | 72,188 | 66,041 (91%) | cdn.pypapps.com | yes | LKQ's own CDN (PYP watermark) | yes, `p<id>` | 3/3 200, image/webp, 640×427, 17–40 KB, no referer check, no CORP, max-age 7 d | 65,075/65,075 identical over 16 h | **pass** |
+| Wrench-A-Part | 11,274 (`wap-*`) | 9,612 (85%) | storage.googleapis.com/wrench-car-photos | yes | WAP's own GCS bucket | **no, added today** (`w` code) | thumb 240×320 JPEG ~15 KB; old ".png" shape is served as a 320×240–392×294 JPEG, 40–70 KB; full 1536×2048 ~450 KB; 200 both ways; max-age 1 h | path carries an upload timestamp; first capture, so not yet compared across scans | **pass** |
+| Weller Self Serve | 1,380 | 1,373 | ik.imagekit.io/rm8xun1iy5t | yes | Weller's own ImageKit account (a CDN vendor, not a competitor) | yes, full URL | 3/3 200 JPEG 960×1280, 68–136 KB, max-age 1 y | 1,363/1,363 | **pass** |
+| Pasco EZ Pull It | 901 | 901 | cdn.shopify.com | yes | the yard's own Shopify store files | yes, full URL | 3/3 200 JPEG 400×533 / 400×300, 20–50 KB | 901/901 | **pass** |
+| Kiker's U-Pull-It | 656 | 656 | www.kikersupullit.com | yes | own site | yes, full URL | 3/3 200 JPEG 1600×1200, **320–420 KB**, immutable | 653/653 | **pass**, but heavy (see data cost) |
+| Army's Auto Wrecking | 238 | 14 | api.yardsmartapp.com | yes | YardSmart (platform vendor) | yes, full URL | 3/3 **404**: signed blob URLs whose token expires within hours | 0/14 | **fail**, do not enable |
+| Pull-N-Save | 9,008 | every row (658/658 in a Honda sample) | app.pullnsaveapp.com | yes | own app domain | no | URL is built from the stock #. A real photo is a 200×200 PNG of ~100 KB; a car without one gets a 3,474 B "no image" PNG at the same kind of URL | n/a | **fail**: the feed can't tell real photos from placeholders without fetching every one |
+| Pick-n-Pull | 47,440 | yes | cdn.row52.com | — | **Row52 (competitor)** | never | not sampled | — | **excluded by policy** |
+| Pull-A-Part | 42,385 | 0 | — | — | — | — | `Vehicle/Search` has no image field | — | none |
+| Fenix U-Pull | 5,758 | 0 | — | — | — | — | page 1: all 50 rows show the theme's `placeholder-150x100.jpg` | — | none |
+| yardconnect-pro tenants (U-Pick-It AZ 3,098; Chuck & Eddie's, Genesis, Robertson's, Barry's, Hwy 82, Route 34, Sunshine) | — | thumbnails in table | api.yardsmartapp.com | — | YardSmart | no | **not sampled**; same signed-blob backend as Army's, so expect the same expiry | — | not pursued |
+| Ario tenants, CRUSH (Sturtevant, St. Cloud), Ace | — | image column/field noted in code | — | — | — | no | **not sampled** (Ario is rate-limited; Ace is Cloudflare-blocked in CI) | — | open |
+| All other chains | — | not checked: their fetchers note no image field | | | | | | | open |
+
+**Total that passes: 78,583 of 334,499 lot cars (23.5%).** LKQ 66,041,
+Wrench-A-Part 9,612, Weller 1,373, Pasco 901, Kiker's 656.
+
+### Capture (on main, data only)
+
+`fetch_wrenchapart_inventory` now stores `_photo` = `_wap_photo_code(item)`.
+The code takes one of two forms:
+
+- `w{yard}/{VIN}/{ms}.j` for the feed's `photoThumb`
+  `…/v1%2F{yard}%2F{VIN}%2F{ms}-front_driver-thumb.jpg`
+- `w{yard}/{VIN}/{ms}.p` for the older `photo` `…%2F{ms}.png`
+
+Any other URL shape gets no code. Test: `scraper/test_wap_photo.py`. All 20
+`scraper/test_*.py` pass. `vehicle_extras.json` size, simulated on today's feed:
+14,898,768 → 15,246,089 B (+347 KB, +2.3%); gzip 2.03 → 2.21 MB. It stays a
+lazy shard. The app renders nothing for `w` codes until a `PHOTO_SOURCES`
+entry exists and is enabled. Army's capture is left as is: its URLs are dead
+on arrival, and `photoInfo` must never render them (see the hand-off).
+
+### Native fit (iOS WKWebView / Android WebView, Capacitor 8)
+
+- No CSP anywhere: no `<meta http-equiv>` in `docs/index.html`, none in
+  `backend/site-proxy`, no `_headers`. Nothing blocks `img-src`.
+- iOS: `Info.plist` has no `NSAppTransportSecurity`, so default ATS applies.
+  All passing hosts are https on major CDNs. TLS couldn't be checked from here
+  (the session proxy terminates TLS). The one small origin worth a device check
+  is www.kikersupullit.com (needs TLS 1.2+ with forward secrecy).
+- Android: no `networkSecurityConfig`, and cleartext is off by default. All
+  passing hosts are https, so nothing changes.
+- `capacitor.config.json` `server.allowNavigation` only governs navigation,
+  not `<img>` subresources, so no change is needed.
+- **No native project changes are needed.**
+- The service worker skips cross-origin requests (`docs/sw.js:41`), so yard
+  images are never cached or rehosted by us. The `jh-vNNN` name is unaffected
+  unless the shell changes.
+- Referer: WKWebView on `capacitor://localhost` sends none, and Android sends
+  `https://localhost/`. Every host returned 200 with no Referer and with a
+  cross-site Referer.
+- Lazy loading: `loading="lazy"` works in WKWebView on iOS 15.4+ and in
+  Android WebView (Chromium 77+). WebP (LKQ) works on iOS 14+.
+- Decode size: cards should use the small form. A full 1536×2048 WAP shot
+  decodes to ~12.6 MB RGBA; a Kiker's 1600×1200 to ~7.7 MB. Load the large
+  form only on tap-to-enlarge, with `decoding="async"` and width/height set.
+- Cellular cost per car screen (one photo): LKQ ~17–40 KB, WAP thumb ~15 KB
+  (old shape 40–70 KB), Pasco 20–50 KB, Weller 68–136 KB, Kiker's 320–420 KB.
+  A list screen of 20 LKQ cards is ~0.5–0.8 MB. Kiker's only offers the
+  full-size file. Weller's ImageKit could serve a smaller size with `?tr=w-480`
+  (not tested here).
+- Privacy note for the owner: a hotlinked image sends the viewer's IP and UA
+  to the yard's host. The privacy policy / App Privacy answers should say
+  that images load from yards' servers. No tracking is involved.
+
+### Hand-off to design (HELD; send to session_016ZzJfKjBN7He2RMxFV9A8z once the owner confirms)
+
+> Photos, from the yards workstream. Owner confirmation pending; do not
+> enable until it lands. `docs/app.js` `PHOTO_SOURCES` / `photoInfo` on
+> design/pull-sheet:
+> 1. `pyp`: keep the entry and set `enabled: true`. Code `p<id>`, label
+>    "Photo: LKQ Pick Your Part", URL as now (640×427 webp).
+> 2. Add `wap`: label "Photo: Wrench-A-Part". Code `w{yard}/{VIN}/{ms}.j|.p`.
+>    `const [y,vin,ms]=code.slice(1,-2).split('/'), b='https://storage.googleapis.com/wrench-car-photos/v1%2F'+y+'%2F'+vin+'%2F'+ms;`
+>    For `.j`, card = `b+'-front_driver-thumb.jpg'` and large = `b+'-front_driver.jpg'`.
+>    For `.p`, card = large = `b+'.png'`.
+> 3. Full-URL codes (start with `https://`): pick the source by exact host,
+>    and render only these hosts:
+>    `www.kikersupullit.com` → "Photo: Kiker's U-Pull-It";
+>    `ik.imagekit.io` with path prefix `/rm8xun1iy5t/` → "Photo: Weller Self Serve";
+>    `cdn.shopify.com` with path prefix `/s/files/1/0731/9250/5650/` → "Photo: Pasco EZ Pull It".
+>    Never render `api.yardsmartapp.com` (Army's signed URLs expire, 404),
+>    `cdn.row52.com`, or `r…` codes. Unknown hosts → null.
+> 4. Each source keeps its own `enabled` kill switch, and `photoInfo` returns
+>    null when it is off.
+> Display: photo on the car card and the car screen. `loading="lazy"`,
+> `decoding="async"`, inside a fixed aspect-ratio box (4:3 is fine; object-fit:
+> cover) so nothing shifts. A clean CSS placeholder sits under it; `onerror`
+> hides the img, so no broken-image icon ever shows. The credit line
+> "Photo: <yard>" sits under the image. Tap opens the large form. The photo
+> must not affect the no-truncation check (the box takes its own row/column;
+> titles and part names keep their width). Kiker's files are 320–420 KB:
+> fine on the car screen, and acceptable on cards with lazy load.
+> No native config changes are needed (no CSP/ATS/Android rules block these
+> https hosts). Details: ops/yards.md "2026-11-06 vehicle photos".
+
 ## Next
 
 1. When a reply arrives: build the adapter from whatever feed they offer,
@@ -218,3 +335,4 @@ Sweep follow-ups (mine):
 3. After each monthly sweep: review tiers A–B in `coverage_sweep.md`, verify
    each has self-service inventory online before adding.
 4. Chains frozen for 6+ scans show in the daily email as `chain-frozen:<chain>`.
+5. Photos: once the owner confirms the 2026-11-06 photos-on decision in their own words, send the held hand-off above to design and a summary to the hub. Then sample the Ario, CRUSH and remaining chains, and re-check WAP URL stability after a few scans.
