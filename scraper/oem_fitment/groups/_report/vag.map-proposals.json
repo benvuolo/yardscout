@@ -1,6 +1,20 @@
 {
  "draft": {
-  "entries": [],
+  "entries": [
+   {
+    "basis": "catalog prints 'Taos' (14 fitment rows, oem-raw@42683f9); normalize_model canon 'Taos', 5 feed cars (inventory 2026-11-06); identity draft",
+    "cat_make": "Volkswagen",
+    "cat_model": "Taos",
+    "ns": "vag",
+    "targets": [
+     {
+      "make": "Volkswagen",
+      "model": "Taos",
+      "trims": "*"
+     }
+    ]
+   }
+  ],
   "exclude": {},
   "skipped": [
    {
@@ -428,6 +442,24 @@
    },
    {
     "cat_make": "Volkswagen",
+    "cat_model": "ID. Buzz",
+    "feed": [
+     "Volkswagen",
+     "ID. Buzz"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Volkswagen",
+    "cat_model": "ID.4",
+    "feed": [
+     "Volkswagen",
+     "ID.4"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Volkswagen",
     "cat_model": "Quantum",
     "feed": [
      "Volkswagen",
@@ -459,6 +491,15 @@
     "feed": [
      "Volkswagen",
      "Tiguan Limited"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Volkswagen",
+    "cat_model": "e-Golf",
+    "feed": [
+     "Volkswagen",
+     "e-Golf"
     ],
     "why": "no feed car under the canonical name"
    }
@@ -1021,7 +1062,7 @@
    "cat_make": "Volkswagen",
    "cat_model": "Atlas Cross Sport",
    "feed_cars": 0,
-   "fitment_rows": 2,
+   "fitment_rows": 18,
    "ns": "vag",
    "proposed": {
     "make": "Volkswagen",
@@ -1034,7 +1075,7 @@
    "cat_make": "Volkswagen",
    "cat_model": "Corrado",
    "feed_cars": 0,
-   "fitment_rows": 6,
+   "fitment_rows": 11,
    "ns": "vag",
    "proposed": {
     "make": "Volkswagen",
@@ -1047,7 +1088,7 @@
    "cat_make": "Volkswagen",
    "cat_model": "EuroVan",
    "feed_cars": 0,
-   "fitment_rows": 20,
+   "fitment_rows": 34,
    "ns": "vag",
    "proposed": {
     "make": "Volkswagen",
@@ -1065,7 +1106,7 @@
    "cat_make": "Volkswagen",
    "cat_model": "Golf R",
    "feed_cars": 0,
-   "fitment_rows": 15,
+   "fitment_rows": 78,
    "ns": "vag",
    "proposed": {
     "make": "Volkswagen",
@@ -1078,7 +1119,7 @@
    "cat_make": "Volkswagen",
    "cat_model": "Golf SportWagen",
    "feed_cars": 0,
-   "fitment_rows": 7,
+   "fitment_rows": 60,
    "ns": "vag",
    "proposed": {
     "make": "Volkswagen",
@@ -1091,6 +1132,32 @@
      13
     ]
    ]
+  },
+  {
+   "cat_make": "Volkswagen",
+   "cat_model": "ID. Buzz",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "vag",
+   "proposed": {
+    "make": "Volkswagen",
+    "model": "ID. Buzz",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Volkswagen",
+   "cat_model": "ID.4",
+   "feed_cars": 0,
+   "fitment_rows": 3,
+   "ns": "vag",
+   "proposed": {
+    "make": "Volkswagen",
+    "model": "ID.4",
+    "trims": "*"
+   },
+   "squash_neighbours": []
   },
   {
    "cat_make": "Volkswagen",
@@ -1109,7 +1176,7 @@
    "cat_make": "Volkswagen",
    "cat_model": "R32",
    "feed_cars": 0,
-   "fitment_rows": 51,
+   "fitment_rows": 61,
    "ns": "vag",
    "proposed": {
     "make": "Volkswagen",
@@ -1121,8 +1188,8 @@
   {
    "cat_make": "Volkswagen",
    "cat_model": "Rabbit",
-   "feed_cars": 128,
-   "fitment_rows": 49,
+   "feed_cars": 129,
+   "fitment_rows": 62,
    "ns": "vag",
    "proposed": {
     "make": "Volkswagen",
@@ -1138,9 +1205,22 @@
   },
   {
    "cat_make": "Volkswagen",
+   "cat_model": "Taos",
+   "feed_cars": 5,
+   "fitment_rows": 14,
+   "ns": "vag",
+   "proposed": {
+    "make": "Volkswagen",
+    "model": "Taos",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Volkswagen",
    "cat_model": "Tiguan Limited",
    "feed_cars": 0,
-   "fitment_rows": 27,
+   "fitment_rows": 36,
    "ns": "vag",
    "proposed": {
     "make": "Volkswagen",
@@ -1148,7 +1228,25 @@
     "trims": "*"
    },
    "squash_neighbours": []
+  },
+  {
+   "cat_make": "Volkswagen",
+   "cat_model": "e-Golf",
+   "feed_cars": 0,
+   "fitment_rows": 14,
+   "ns": "vag",
+   "proposed": {
+    "make": "Volkswagen",
+    "model": "e-Golf",
+    "trims": "*"
+   },
+   "squash_neighbours": [
+    [
+     "E-Golf",
+     2
+    ]
+   ]
   }
  ],
- "raw": "ceccc800d7ba22c0291121baabb0a9292eb8f271"
+ "raw": "42683f9d86450b6bd00eb7fc7cc9640154607768"
 }

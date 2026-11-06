@@ -1526,3 +1526,63 @@ They stay off until a hand sample is done. Note how little rule 1 removes
 for them: their units are mostly single-make already, so it is not
 evidence that they are accurate. The disagreement within rule 1 elsewhere
 (e.g. gm/starter 37%, subaru 39-62%) is the best available warning for them.
+
+## 2026-11-06 accuracy audit: own-page rule for Likely body groups (hub request)
+
+Cause found by the hub: Ford AH6Z-8200-ACP, an MKZ grille, appeared as a Likely
+group for Fusion 2010-12, MKZ 2010-12 and Milan 2010-11. The product page's
+fitment table repeats the whole platform's engine/trans union (it lists the
+2.5L and the manual for the MKZ, which never had them), so it is a platform
+rollup.
+
+Measured on oem-raw@42683f9 (every Likely group is body-only; scratch
+script, not committed). App vehicle-years of Likely groups, by their own
+list page:
+- 80-95% have **no own-page evidence** (product page only), because the crawl
+  reads 1-3 seed years per segment.
+- Where the own page was crawled (R1 manifest), it **did not list the number**
+  for this share of exterior app-years (lamps, panels, mirrors, gates): mopar
+  136/733 (19%), ford 91/811 (11%), hmg 8/71 (11%), gm 42/563 (7%), subaru 54/856 (6%),
+  toyota 34/1193 (3%), mb 1/391, vag 0/94. Interior/other body categories:
+  mopar 33/284, gm 21/441, subaru 15/260, toyota 7/203, ford 4/397.
+- Even the own list pages share platform rows on Ford: the 2010 Milan and
+  2012 Fusion pages print AH6Z-8200-ACP with the Fit Note "Lincoln Division
+  Derivative". There are 1,706 such "<Make> Division Derivative" rows on
+  fordpartsgiant.
+
+Rules (merged):
+- 7747152 §5.16 own-page rule (`policy.LIKELY_REQUIRES_OWN_PAGE`): a
+  vehicle-year joins a Likely group only when `own_page` says its own page
+  lists the number (a matched R1 manifest row, or for a site without
+  manifests a record seeded there). The class still needs 2 models. Left-out
+  years are counted per category in each report's
+  `summary.likely_app_years_without_own_page`. A completion crawl (R3) of
+  those pages brings them back.
+- 2e21ae0 `own_page` leaves out a row whose note names another make's
+  division ("Lincoln Division Derivative" is not listed for a Ford or
+  Mercury T). This applies to Verified closure and to Likely.
+- Engine categories never form Likely groups, so they are unchanged.
+
+Likely groups, before -> after (both on oem-raw@42683f9): toyota 1749 -> 781,
+gm 1110 -> 357, subaru 1111 -> 379, mopar 756 -> 169, ford 1935 -> 88, vag 802 -> 46,
+mb 958 -> 22, hmg 445 -> 6; bmw 957, nissan 905, volvo 271, mazda 58, honda 35,
+mitsubishi 32 -> 0 (no R1 manifests, and a record is written once per site,
+so the seed proxy gives one model only). Total 11,124 -> 1,848. AH6Z-8200-ACP
+now makes no group. measure.py: parity 6/6, M-car before == after in every
+category, no V11 size drops. Verified 0 everywhere. All `_report/*`
+re-curated; no groups/<ns>.json committed.
+
+Tests: curation_tests 15/15 (case 12 now asserts the rule both ways;
+regressions 5 and F18 fixtures gained own-page manifests; 4 division unit
+checks), tests 29/29, scraper/test_*.py 19/19.
+
+Open:
+- Sites with no list manifests (bmw, nissan, volvo, mazda, honda,
+  mitsubishi) now yield no Likely groups until the crawler writes R1
+  manifests there or an R3 completion run reads the apps' own pages.
+- Survivors to include in the audit sample: Ford Expedition 2003 / Navigator
+  2004 bumper assemblies 2L1Z-17757-BA / -BACP / 2L1Z-17906-BA. Both own pages
+  list them; plausibly the shared frame-mounted bar, but unaudited.
+- Own-page listing still cannot tell a platform-wide diagram from real
+  fitment on a site that prints every twin's rows without a division note.
+  The spec 11.4 audit sample should check visually distinct twins first.

@@ -29,7 +29,7 @@
    "cat_make": "Subaru",
    "cat_model": "Impreza STI",
    "feed_cars": 0,
-   "fitment_rows": 139,
+   "fitment_rows": 388,
    "ns": "subaru",
    "proposed": {
     "make": "Subaru",
@@ -52,5 +52,5 @@
    "squash_neighbours": []
   }
  ],
- "raw": "ceccc800d7ba22c0291121baabb0a9292eb8f271"
+ "raw": "42683f9d86450b6bd00eb7fc7cc9640154607768"
 }

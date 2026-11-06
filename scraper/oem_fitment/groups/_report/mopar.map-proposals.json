@@ -1,10 +1,111 @@
 {
  "draft": {
-  "entries": [],
-  "exclude": {},
-  "skipped": []
+  "entries": [
+   {
+    "basis": "catalog prints 'Grand Voyager' (57 fitment rows, oem-raw@42683f9); normalize_model canon 'Grand Voyager', 8 feed cars (inventory 2026-11-06); identity draft",
+    "cat_make": "Chrysler",
+    "cat_model": "Grand Voyager",
+    "ns": "mopar",
+    "targets": [
+     {
+      "make": "Chrysler",
+      "model": "Grand Voyager",
+      "trims": "*"
+     }
+    ]
+   },
+   {
+    "basis": "catalog prints 'Gladiator' (1 fitment rows, oem-raw@42683f9); normalize_model canon 'Gladiator', 1 feed cars (inventory 2026-11-06); identity draft",
+    "cat_make": "Jeep",
+    "cat_model": "Gladiator",
+    "ns": "mopar",
+    "targets": [
+     {
+      "make": "Jeep",
+      "model": "Gladiator",
+      "trims": "*"
+     }
+    ]
+   }
+  ],
+  "exclude": {
+   "mopar|Plymouth|Grand Voyager": "feed spelling or sub-model the catalog does not print as its own model (55 cars, under catalog squash 'grandvoyager'); unmapped until a reviewed entry exists"
+  },
+  "skipped": [
+   {
+    "cat_make": "Ram",
+    "cat_model": "4500",
+    "feed": [
+     "Ram",
+     "4500"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Ram",
+    "cat_model": "5500",
+    "feed": [
+     "Ram",
+     "5500"
+    ],
+    "why": "no feed car under the canonical name"
+   }
+  ]
  },
  "ns": "mopar",
- "proposals": [],
- "raw": "ceccc800d7ba22c0291121baabb0a9292eb8f271"
+ "proposals": [
+  {
+   "cat_make": "Chrysler",
+   "cat_model": "Grand Voyager",
+   "feed_cars": 8,
+   "fitment_rows": 57,
+   "ns": "mopar",
+   "proposed": {
+    "make": "Chrysler",
+    "model": "Grand Voyager",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Jeep",
+   "cat_model": "Gladiator",
+   "feed_cars": 1,
+   "fitment_rows": 1,
+   "ns": "mopar",
+   "proposed": {
+    "make": "Jeep",
+    "model": "Gladiator",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Ram",
+   "cat_model": "4500",
+   "feed_cars": 0,
+   "fitment_rows": 28,
+   "ns": "mopar",
+   "proposed": {
+    "make": "Ram",
+    "model": "4500",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Ram",
+   "cat_model": "5500",
+   "feed_cars": 0,
+   "fitment_rows": 28,
+   "ns": "mopar",
+   "proposed": {
+    "make": "Ram",
+    "model": "5500",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  }
+ ],
+ "raw": "42683f9d86450b6bd00eb7fc7cc9640154607768"
 }

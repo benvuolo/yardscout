@@ -2,7 +2,7 @@
  "draft": {
   "entries": [
    {
-    "basis": "catalog prints 'Passport' (7 fitment rows, oem-raw@ceccc80); normalize_model canon 'Passport', 87 feed cars (inventory 2026-11-05); identity draft",
+    "basis": "catalog prints 'Passport' (7 fitment rows, oem-raw@42683f9); normalize_model canon 'Passport', 85 feed cars (inventory 2026-11-06); identity draft",
     "cat_make": "Honda",
     "cat_model": "Passport",
     "ns": "honda",
@@ -24,7 +24,7 @@
      "Acura",
      "ILX"
     ],
-    "why": "2/64 vPIC decodes name another make (M6 over 2%)"
+    "why": "2/65 vPIC decodes name another make (M6 over 2%)"
    },
    {
     "cat_make": "Acura",
@@ -69,7 +69,7 @@
   {
    "cat_make": "Acura",
    "cat_model": "ILX",
-   "feed_cars": 71,
+   "feed_cars": 72,
    "fitment_rows": 158,
    "ns": "honda",
    "proposed": {
@@ -121,7 +121,7 @@
   {
    "cat_make": "Honda",
    "cat_model": "Passport",
-   "feed_cars": 87,
+   "feed_cars": 85,
    "fitment_rows": 7,
    "ns": "honda",
    "proposed": {
@@ -145,5 +145,5 @@
    "squash_neighbours": []
   }
  ],
- "raw": "ceccc800d7ba22c0291121baabb0a9292eb8f271"
+ "raw": "42683f9d86450b6bd00eb7fc7cc9640154607768"
 }

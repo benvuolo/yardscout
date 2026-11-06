@@ -2,7 +2,7 @@
  "draft": {
   "entries": [
    {
-    "basis": "catalog prints 'LS400' (71 fitment rows, oem-raw@ceccc80); normalize_model canon 'LS 400', 118 feed cars (inventory 2026-11-05); identity draft",
+    "basis": "catalog prints 'LS400' (87 fitment rows, oem-raw@42683f9); normalize_model canon 'LS 400', 123 feed cars (inventory 2026-11-06); identity draft",
     "cat_make": "Lexus",
     "cat_model": "LS400",
     "ns": "toyota",
@@ -15,7 +15,20 @@
     ]
    },
    {
-    "basis": "catalog prints 'SC300' (75 fitment rows, oem-raw@ceccc80); normalize_model canon 'SC 300', 10 feed cars (inventory 2026-11-05); identity draft",
+    "basis": "catalog prints 'LX470' (2 fitment rows, oem-raw@42683f9); normalize_model canon 'LX 470', 4 feed cars (inventory 2026-11-06); identity draft",
+    "cat_make": "Lexus",
+    "cat_model": "LX470",
+    "ns": "toyota",
+    "targets": [
+     {
+      "make": "Lexus",
+      "model": "LX 470",
+      "trims": "*"
+     }
+    ]
+   },
+   {
+    "basis": "catalog prints 'SC300' (95 fitment rows, oem-raw@42683f9); normalize_model canon 'SC 300', 10 feed cars (inventory 2026-11-06); identity draft",
     "cat_make": "Lexus",
     "cat_model": "SC300",
     "ns": "toyota",
@@ -28,7 +41,7 @@
     ]
    },
    {
-    "basis": "catalog prints 'SC400' (75 fitment rows, oem-raw@ceccc80); normalize_model canon 'SC 400', 19 feed cars (inventory 2026-11-05); identity draft",
+    "basis": "catalog prints 'SC400' (95 fitment rows, oem-raw@42683f9); normalize_model canon 'SC 400', 19 feed cars (inventory 2026-11-06); identity draft",
     "cat_make": "Lexus",
     "cat_model": "SC400",
     "ns": "toyota",
@@ -41,7 +54,7 @@
     ]
    },
    {
-    "basis": "catalog prints 'C-HR' (3 fitment rows, oem-raw@ceccc80); normalize_model canon 'C-HR', 12 feed cars (inventory 2026-11-05); identity draft",
+    "basis": "catalog prints 'C-HR' (3 fitment rows, oem-raw@42683f9); normalize_model canon 'C-HR', 12 feed cars (inventory 2026-11-06); identity draft",
     "cat_make": "Toyota",
     "cat_model": "C-HR",
     "ns": "toyota",
@@ -61,10 +74,28 @@
   "skipped": [
    {
     "cat_make": "Lexus",
+    "cat_model": "GS Turbo",
+    "feed": [
+     "Lexus",
+     "GS Turbo"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Lexus",
     "cat_model": "GS200t",
     "feed": [
      "Lexus",
      "GS 200t"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Lexus",
+    "cat_model": "GX460",
+    "feed": [
+     "Lexus",
+     "GX 460"
     ],
     "why": "no feed car under the canonical name"
    },
@@ -83,6 +114,33 @@
     "feed": [
      "Lexus",
      "LX 570"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Lexus",
+    "cat_model": "NX200t",
+    "feed": [
+     "Lexus",
+     "NX 200t"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Lexus",
+    "cat_model": "NX300",
+    "feed": [
+     "Lexus",
+     "NX 300"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Lexus",
+    "cat_model": "NX300h",
+    "feed": [
+     "Lexus",
+     "NX 300h"
     ],
     "why": "no feed car under the canonical name"
    },
@@ -182,9 +240,22 @@
  "proposals": [
   {
    "cat_make": "Lexus",
+   "cat_model": "GS Turbo",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "toyota",
+   "proposed": {
+    "make": "Lexus",
+    "model": "GS Turbo",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Lexus",
    "cat_model": "GS200t",
    "feed_cars": 0,
-   "fitment_rows": 4,
+   "fitment_rows": 5,
    "ns": "toyota",
    "proposed": {
     "make": "Lexus",
@@ -195,9 +266,22 @@
   },
   {
    "cat_make": "Lexus",
+   "cat_model": "GX460",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "toyota",
+   "proposed": {
+    "make": "Lexus",
+    "model": "GX 460",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Lexus",
    "cat_model": "IS Turbo",
    "feed_cars": 0,
-   "fitment_rows": 3,
+   "fitment_rows": 4,
    "ns": "toyota",
    "proposed": {
     "make": "Lexus",
@@ -209,8 +293,8 @@
   {
    "cat_make": "Lexus",
    "cat_model": "LS400",
-   "feed_cars": 118,
-   "fitment_rows": 71,
+   "feed_cars": 123,
+   "fitment_rows": 87,
    "ns": "toyota",
    "proposed": {
     "make": "Lexus",
@@ -221,9 +305,22 @@
   },
   {
    "cat_make": "Lexus",
+   "cat_model": "LX470",
+   "feed_cars": 4,
+   "fitment_rows": 2,
+   "ns": "toyota",
+   "proposed": {
+    "make": "Lexus",
+    "model": "LX 470",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Lexus",
    "cat_model": "LX570",
    "feed_cars": 0,
-   "fitment_rows": 1,
+   "fitment_rows": 2,
    "ns": "toyota",
    "proposed": {
     "make": "Lexus",
@@ -234,9 +331,48 @@
   },
   {
    "cat_make": "Lexus",
+   "cat_model": "NX200t",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "toyota",
+   "proposed": {
+    "make": "Lexus",
+    "model": "NX 200t",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Lexus",
+   "cat_model": "NX300",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "toyota",
+   "proposed": {
+    "make": "Lexus",
+    "model": "NX 300",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Lexus",
+   "cat_model": "NX300h",
+   "feed_cars": 0,
+   "fitment_rows": 1,
+   "ns": "toyota",
+   "proposed": {
+    "make": "Lexus",
+    "model": "NX 300h",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Lexus",
    "cat_model": "RC Turbo",
    "feed_cars": 0,
-   "fitment_rows": 3,
+   "fitment_rows": 4,
    "ns": "toyota",
    "proposed": {
     "make": "Lexus",
@@ -249,7 +385,7 @@
    "cat_make": "Lexus",
    "cat_model": "RC200t",
    "feed_cars": 0,
-   "fitment_rows": 3,
+   "fitment_rows": 4,
    "ns": "toyota",
    "proposed": {
     "make": "Lexus",
@@ -262,7 +398,7 @@
    "cat_make": "Lexus",
    "cat_model": "RC300",
    "feed_cars": 0,
-   "fitment_rows": 3,
+   "fitment_rows": 4,
    "ns": "toyota",
    "proposed": {
     "make": "Lexus",
@@ -275,7 +411,7 @@
    "cat_make": "Lexus",
    "cat_model": "SC300",
    "feed_cars": 10,
-   "fitment_rows": 75,
+   "fitment_rows": 95,
    "ns": "toyota",
    "proposed": {
     "make": "Lexus",
@@ -297,7 +433,7 @@
    "cat_make": "Lexus",
    "cat_model": "SC400",
    "feed_cars": 19,
-   "fitment_rows": 75,
+   "fitment_rows": 95,
    "ns": "toyota",
    "proposed": {
     "make": "Lexus",
@@ -416,5 +552,5 @@
    ]
   }
  ],
- "raw": "ceccc800d7ba22c0291121baabb0a9292eb8f271"
+ "raw": "42683f9d86450b6bd00eb7fc7cc9640154607768"
 }

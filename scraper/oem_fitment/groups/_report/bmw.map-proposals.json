@@ -1095,7 +1095,7 @@
    "squash_neighbours": [
     [
      "M235i",
-     1
+     2
     ]
    ]
   },
@@ -1321,5 +1321,5 @@
    "squash_neighbours": []
   }
  ],
- "raw": "ceccc800d7ba22c0291121baabb0a9292eb8f271"
+ "raw": "42683f9d86450b6bd00eb7fc7cc9640154607768"
 }

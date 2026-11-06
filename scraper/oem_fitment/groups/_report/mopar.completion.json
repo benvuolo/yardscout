@@ -1,5 +1,5 @@
 {
- "as_of": "2026-11-05T03:26:17Z",
+ "as_of": "2026-11-06T07:21:04Z",
  "note": "R3 input: rows ordered by Verified ordered car pairs gained if the cell closed with its current candidate state and its own pages carried no restricting note (optimistic upper bound for ranking crawl work; never shipped)",
  "ns": "mopar",
  "rows": [
@@ -10,7 +10,7 @@
     "ignition-coils",
     "liftgate"
    ],
-   "gain_pairs": 920535,
+   "gain_pairs": 914067,
    "make": "Jeep",
    "model": "Patriot",
    "year": 2014
@@ -22,7 +22,7 @@
     "ignition-coils",
     "liftgate"
    ],
-   "gain_pairs": 686665,
+   "gain_pairs": 685746,
    "make": "Jeep",
    "model": "Patriot",
    "year": 2012
@@ -33,7 +33,7 @@
     "ignition-coils",
     "liftgate"
    ],
-   "gain_pairs": 562296,
+   "gain_pairs": 558600,
    "make": "Jeep",
    "model": "Patriot",
    "year": 2015
@@ -44,39 +44,10 @@
     "ignition-coils",
     "liftgate"
    ],
-   "gain_pairs": 548006,
+   "gain_pairs": 544420,
    "make": "Jeep",
    "model": "Patriot",
    "year": 2016
-  },
-  {
-   "cats": [
-    "door-rear",
-    "ignition-coils",
-    "liftgate",
-    "window-switch"
-   ],
-   "gain_pairs": 481962,
-   "make": "Jeep",
-   "model": "Compass",
-   "year": 2014
-  },
-  {
-   "cats": [
-    "climate-control",
-    "door-front",
-    "door-rear",
-    "fender",
-    "headlights",
-    "hood",
-    "liftgate",
-    "tail-lights",
-    "window-switch"
-   ],
-   "gain_pairs": 466792,
-   "make": "Jeep",
-   "model": "Commander",
-   "year": 2007
   },
   {
    "cats": [
@@ -84,7 +55,7 @@
     "headlights",
     "liftgate"
    ],
-   "gain_pairs": 458285,
+   "gain_pairs": 458736,
    "make": "Jeep",
    "model": "Patriot",
    "year": 2011
@@ -99,10 +70,37 @@
     "liftgate",
     "tail-lights"
    ],
-   "gain_pairs": 420110,
+   "gain_pairs": 413646,
    "make": "Jeep",
    "model": "Commander",
    "year": 2006
+  },
+  {
+   "cats": [
+    "door-rear",
+    "ignition-coils",
+    "liftgate"
+   ],
+   "gain_pairs": 403440,
+   "make": "Jeep",
+   "model": "Compass",
+   "year": 2014
+  },
+  {
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights"
+   ],
+   "gain_pairs": 398566,
+   "make": "Jeep",
+   "model": "Commander",
+   "year": 2007
   },
   {
    "cats": [
@@ -111,7 +109,7 @@
     "ignition-coils",
     "liftgate"
    ],
-   "gain_pairs": 386364,
+   "gain_pairs": 383064,
    "make": "Jeep",
    "model": "Compass",
    "year": 2016
@@ -123,30 +121,17 @@
     "ignition-coils",
     "liftgate"
    ],
-   "gain_pairs": 379891,
+   "gain_pairs": 360635,
    "make": "Jeep",
    "model": "Patriot",
    "year": 2013
   },
   {
    "cats": [
-    "door-rear",
-    "hood",
-    "ignition-coils",
-    "liftgate",
-    "window-switch"
-   ],
-   "gain_pairs": 344253,
-   "make": "Jeep",
-   "model": "Compass",
-   "year": 2012
-  },
-  {
-   "cats": [
     "headlights",
     "liftgate"
    ],
-   "gain_pairs": 341475,
+   "gain_pairs": 332163,
    "make": "Jeep",
    "model": "Patriot",
    "year": 2008
@@ -160,10 +145,32 @@
     "hood",
     "liftgate"
    ],
-   "gain_pairs": 323268,
+   "gain_pairs": 297201,
    "make": "Jeep",
    "model": "Liberty",
    "year": 2012
+  },
+  {
+   "cats": [
+    "door-rear",
+    "hood",
+    "ignition-coils",
+    "liftgate"
+   ],
+   "gain_pairs": 289750,
+   "make": "Jeep",
+   "model": "Compass",
+   "year": 2012
+  },
+  {
+   "cats": [
+    "headlights",
+    "liftgate"
+   ],
+   "gain_pairs": 278375,
+   "make": "Jeep",
+   "model": "Patriot",
+   "year": 2010
   },
   {
    "cats": [
@@ -174,10 +181,22 @@
     "hood",
     "liftgate"
    ],
-   "gain_pairs": 300240,
+   "gain_pairs": 278139,
    "make": "Jeep",
    "model": "Liberty",
    "year": 2011
+  },
+  {
+   "cats": [
+    "door-rear",
+    "hood",
+    "ignition-coils",
+    "liftgate"
+   ],
+   "gain_pairs": 246006,
+   "make": "Jeep",
+   "model": "Compass",
+   "year": 2015
   },
   {
    "cats": [
@@ -188,67 +207,19 @@
     "headlights",
     "hood",
     "liftgate",
-    "tail-lights",
-    "window-switch"
+    "tail-lights"
    ],
-   "gain_pairs": 289784,
+   "gain_pairs": 244288,
    "make": "Jeep",
    "model": "Commander",
    "year": 2008
   },
   {
    "cats": [
-    "headlights",
-    "liftgate"
-   ],
-   "gain_pairs": 277884,
-   "make": "Jeep",
-   "model": "Patriot",
-   "year": 2010
-  },
-  {
-   "cats": [
-    "door-rear",
-    "hood",
-    "ignition-coils",
-    "liftgate"
-   ],
-   "gain_pairs": 247981,
-   "make": "Jeep",
-   "model": "Compass",
-   "year": 2015
-  },
-  {
-   "cats": [
-    "door-rear",
-    "hood",
-    "liftgate",
-    "window-switch"
-   ],
-   "gain_pairs": 242480,
-   "make": "Jeep",
-   "model": "Compass",
-   "year": 2011
-  },
-  {
-   "cats": [
-    "door-rear",
-    "hood",
-    "ignition-coils",
-    "liftgate",
-    "window-switch"
-   ],
-   "gain_pairs": 224040,
-   "make": "Jeep",
-   "model": "Compass",
-   "year": 2013
-  },
-  {
-   "cats": [
     "bumper-rear",
     "door-rear"
    ],
-   "gain_pairs": 218988,
+   "gain_pairs": 214288,
    "make": "Jeep",
    "model": "Liberty",
    "year": 2004
@@ -261,17 +232,40 @@
     "hood",
     "liftgate"
    ],
-   "gain_pairs": 215830,
+   "gain_pairs": 212240,
    "make": "Jeep",
    "model": "Liberty",
    "year": 2010
   },
   {
    "cats": [
+    "door-rear",
+    "hood",
+    "ignition-coils",
+    "liftgate"
+   ],
+   "gain_pairs": 191400,
+   "make": "Jeep",
+   "model": "Compass",
+   "year": 2013
+  },
+  {
+   "cats": [
+    "door-rear",
+    "hood",
+    "liftgate"
+   ],
+   "gain_pairs": 188944,
+   "make": "Jeep",
+   "model": "Compass",
+   "year": 2011
+  },
+  {
+   "cats": [
     "headlights",
     "liftgate"
    ],
-   "gain_pairs": 186320,
+   "gain_pairs": 185360,
    "make": "Jeep",
    "model": "Patriot",
    "year": 2009
@@ -284,7 +278,7 @@
     "hood",
     "liftgate"
    ],
-   "gain_pairs": 174250,
+   "gain_pairs": 169320,
    "make": "Jeep",
    "model": "Liberty",
    "year": 2009
@@ -294,7 +288,7 @@
     "headlights",
     "liftgate"
    ],
-   "gain_pairs": 166637,
+   "gain_pairs": 163590,
    "make": "Jeep",
    "model": "Patriot",
    "year": 2007
@@ -305,25 +299,16 @@
     "ignition-coils",
     "liftgate"
    ],
-   "gain_pairs": 156450,
+   "gain_pairs": 155526,
    "make": "Jeep",
    "model": "Patriot",
    "year": 2017
   },
   {
    "cats": [
-    "ignition-coils"
-   ],
-   "gain_pairs": 132963,
-   "make": "Chrysler",
-   "model": "PT Cruiser",
-   "year": 2002
-  },
-  {
-   "cats": [
     "door-rear"
    ],
-   "gain_pairs": 128104,
+   "gain_pairs": 126291,
    "make": "Jeep",
    "model": "Liberty",
    "year": 2005
@@ -332,25 +317,111 @@
    "cats": [
     "door-rear"
    ],
-   "gain_pairs": 123253,
+   "gain_pairs": 121524,
    "make": "Jeep",
    "model": "Liberty",
    "year": 2006
   },
   {
    "cats": [
-    "ignition-coils"
+    "bumper-rear"
    ],
-   "gain_pairs": 114835,
-   "make": "Chrysler",
-   "model": "Sebring",
-   "year": 2004
+   "gain_pairs": 98832,
+   "make": "Jeep",
+   "model": "Liberty",
+   "year": 2003
+  },
+  {
+   "cats": [
+    "liftgate"
+   ],
+   "gain_pairs": 94622,
+   "make": "Jeep",
+   "model": "Compass",
+   "year": 2007
+  },
+  {
+   "cats": [
+    "bumper-rear"
+   ],
+   "gain_pairs": 91341,
+   "make": "Jeep",
+   "model": "Liberty",
+   "year": 2002
+  },
+  {
+   "cats": [
+    "tail-lights"
+   ],
+   "gain_pairs": 76708,
+   "make": "Dodge",
+   "model": "Dart",
+   "year": 2015
+  },
+  {
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights"
+   ],
+   "gain_pairs": 69552,
+   "make": "Jeep",
+   "model": "Commander",
+   "year": 2009
+  },
+  {
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights"
+   ],
+   "gain_pairs": 69552,
+   "make": "Jeep",
+   "model": "Commander",
+   "year": 2010
   },
   {
    "cats": [
     "ignition-coils"
    ],
-   "gain_pairs": 113139,
+   "gain_pairs": 66552,
+   "make": "Chrysler",
+   "model": "PT Cruiser",
+   "year": 2002
+  },
+  {
+   "cats": [
+    "tail-lights"
+   ],
+   "gain_pairs": 62400,
+   "make": "Dodge",
+   "model": "Dart",
+   "year": 2016
+  },
+  {
+   "cats": [
+    "tail-lights"
+   ],
+   "gain_pairs": 59860,
+   "make": "Dodge",
+   "model": "Dart",
+   "year": 2014
+  },
+  {
+   "cats": [
+    "ignition-coils"
+   ],
+   "gain_pairs": 58032,
    "make": "Chrysler",
    "model": "PT Cruiser",
    "year": 2001
@@ -359,113 +430,16 @@
    "cats": [
     "ignition-coils"
    ],
-   "gain_pairs": 104539,
+   "gain_pairs": 53742,
    "make": "Chrysler",
    "model": "PT Cruiser",
    "year": 2003
   },
   {
    "cats": [
-    "bumper-rear"
-   ],
-   "gain_pairs": 100224,
-   "make": "Jeep",
-   "model": "Liberty",
-   "year": 2003
-  },
-  {
-   "cats": [
     "liftgate"
    ],
-   "gain_pairs": 95106,
-   "make": "Jeep",
-   "model": "Compass",
-   "year": 2007
-  },
-  {
-   "cats": [
-    "bumper-rear"
-   ],
-   "gain_pairs": 93063,
-   "make": "Jeep",
-   "model": "Liberty",
-   "year": 2002
-  },
-  {
-   "cats": [
-    "door-front",
-    "door-rear",
-    "fender",
-    "grille",
-    "headlights",
-    "hood",
-    "liftgate",
-    "tail-lights",
-    "window-switch"
-   ],
-   "gain_pairs": 84898,
-   "make": "Jeep",
-   "model": "Commander",
-   "year": 2010
-  },
-  {
-   "cats": [
-    "door-front",
-    "door-rear",
-    "fender",
-    "grille",
-    "headlights",
-    "hood",
-    "liftgate",
-    "tail-lights",
-    "window-switch"
-   ],
-   "gain_pairs": 81228,
-   "make": "Jeep",
-   "model": "Commander",
-   "year": 2009
-  },
-  {
-   "cats": [
-    "ignition-coils"
-   ],
-   "gain_pairs": 63364,
-   "make": "Dodge",
-   "model": "Stratus",
-   "year": 2004
-  },
-  {
-   "cats": [
-    "ignition-coils"
-   ],
-   "gain_pairs": 62403,
-   "make": "Dodge",
-   "model": "Neon",
-   "year": 2003
-  },
-  {
-   "cats": [
-    "ignition-coils"
-   ],
-   "gain_pairs": 54643,
-   "make": "Chrysler",
-   "model": "Sebring",
-   "year": 2002
-  },
-  {
-   "cats": [
-    "window-switch"
-   ],
-   "gain_pairs": 53708,
-   "make": "Chrysler",
-   "model": "Sebring",
-   "year": 2007
-  },
-  {
-   "cats": [
-    "liftgate"
-   ],
-   "gain_pairs": 50032,
+   "gain_pairs": 49796,
    "make": "Jeep",
    "model": "Compass",
    "year": 2008
@@ -474,25 +448,16 @@
    "cats": [
     "liftgate"
    ],
-   "gain_pairs": 46062,
+   "gain_pairs": 46640,
    "make": "Jeep",
    "model": "Compass",
    "year": 2010
   },
   {
    "cats": [
-    "climate-control"
-   ],
-   "gain_pairs": 45878,
-   "make": "Dodge",
-   "model": "Nitro",
-   "year": 2008
-  },
-  {
-   "cats": [
     "ignition-coils"
    ],
-   "gain_pairs": 44448,
+   "gain_pairs": 44000,
    "make": "Dodge",
    "model": "Caliber",
    "year": 2012
@@ -501,115 +466,43 @@
    "cats": [
     "ignition-coils"
    ],
-   "gain_pairs": 43764,
+   "gain_pairs": 33672,
    "make": "Dodge",
    "model": "Neon",
-   "year": 2002
-  },
-  {
-   "cats": [
-    "window-switch"
-   ],
-   "gain_pairs": 38294,
-   "make": "Chrysler",
-   "model": "Aspen",
-   "year": 2007
-  },
-  {
-   "cats": [
-    "ignition-coils"
-   ],
-   "gain_pairs": 37728,
-   "make": "Dodge",
-   "model": "Neon",
-   "year": 2001
+   "year": 2003
   },
   {
    "cats": [
     "climate-control"
    ],
-   "gain_pairs": 36540,
+   "gain_pairs": 24864,
    "make": "Dodge",
    "model": "Nitro",
    "year": 2011
   },
   {
    "cats": [
-    "ignition-coils"
-   ],
-   "gain_pairs": 32643,
-   "make": "Chrysler",
-   "model": "Sebring",
-   "year": 2001
-  },
-  {
-   "cats": [
-    "ignition-coils"
-   ],
-   "gain_pairs": 32643,
-   "make": "Dodge",
-   "model": "Stratus",
-   "year": 2000
-  },
-  {
-   "cats": [
-    "window-switch"
-   ],
-   "gain_pairs": 29768,
-   "make": "Chrysler",
-   "model": "Aspen",
-   "year": 2008
-  },
-  {
-   "cats": [
-    "ignition-coils"
-   ],
-   "gain_pairs": 28539,
-   "make": "Dodge",
-   "model": "Neon",
-   "year": 2000
-  },
-  {
-   "cats": [
-    "window-switch"
-   ],
-   "gain_pairs": 27170,
-   "make": "Dodge",
-   "model": "Magnum",
-   "year": 2006
-  },
-  {
-   "cats": [
-    "ignition-coils"
-   ],
-   "gain_pairs": 26475,
-   "make": "Dodge",
-   "model": "Stratus",
-   "year": 2002
-  },
-  {
-   "cats": [
-    "ignition-coils"
-   ],
-   "gain_pairs": 25440,
-   "make": "Chrysler",
-   "model": "Sebring",
-   "year": 1999
-  },
-  {
-   "cats": [
     "hood"
    ],
-   "gain_pairs": 24895,
+   "gain_pairs": 24816,
    "make": "Jeep",
    "model": "Cherokee",
    "year": 2000
   },
   {
    "cats": [
+    "ignition-coils"
+   ],
+   "gain_pairs": 23982,
+   "make": "Dodge",
+   "model": "Neon",
+   "year": 2002
+  },
+  {
+   "cats": [
     "liftgate"
    ],
-   "gain_pairs": 22906,
+   "gain_pairs": 22802,
    "make": "Jeep",
    "model": "Compass",
    "year": 2009
@@ -618,7 +511,7 @@
    "cats": [
     "hood"
    ],
-   "gain_pairs": 21615,
+   "gain_pairs": 20952,
    "make": "Jeep",
    "model": "Cherokee",
    "year": 1996
@@ -627,28 +520,19 @@
    "cats": [
     "ignition-coils"
    ],
-   "gain_pairs": 21280,
-   "make": "Chrysler",
-   "model": "Sebring",
-   "year": 1997
+   "gain_pairs": 20772,
+   "make": "Dodge",
+   "model": "Neon",
+   "year": 2001
   },
   {
    "cats": [
-    "ignition-coils"
+    "climate-control"
    ],
-   "gain_pairs": 20235,
+   "gain_pairs": 20400,
    "make": "Chrysler",
-   "model": "Sebring",
-   "year": 1998
-  },
-  {
-   "cats": [
-    "ignition-coils"
-   ],
-   "gain_pairs": 20235,
-   "make": "Chrysler",
-   "model": "Sebring",
-   "year": 2003
+   "model": "Town & Country",
+   "year": 2002
   },
   {
    "cats": [
@@ -656,45 +540,18 @@
     "fender",
     "hood"
    ],
-   "gain_pairs": 19734,
+   "gain_pairs": 20163,
    "make": "Jeep",
    "model": "Renegade",
    "year": 2017
   },
   {
    "cats": [
-    "hood"
-   ],
-   "gain_pairs": 19200,
-   "make": "Jeep",
-   "model": "Cherokee",
-   "year": 1999
-  },
-  {
-   "cats": [
-    "hood"
-   ],
-   "gain_pairs": 19200,
-   "make": "Jeep",
-   "model": "Cherokee",
-   "year": 2001
-  },
-  {
-   "cats": [
-    "ignition-coils"
-   ],
-   "gain_pairs": 19188,
-   "make": "Chrysler",
-   "model": "Voyager",
-   "year": 2003
-  },
-  {
-   "cats": [
     "door-rear",
     "fender",
     "hood"
    ],
-   "gain_pairs": 18522,
+   "gain_pairs": 18648,
    "make": "Jeep",
    "model": "Renegade",
    "year": 2016
@@ -703,37 +560,64 @@
    "cats": [
     "hood"
    ],
-   "gain_pairs": 18135,
+   "gain_pairs": 18216,
+   "make": "Jeep",
+   "model": "Cherokee",
+   "year": 1999
+  },
+  {
+   "cats": [
+    "hood"
+   ],
+   "gain_pairs": 18216,
+   "make": "Jeep",
+   "model": "Cherokee",
+   "year": 2001
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 18063,
+   "make": "Chrysler",
+   "model": "Town & Country",
+   "year": 2003
+  },
+  {
+   "cats": [
+    "ignition-coils"
+   ],
+   "gain_pairs": 18042,
+   "make": "Dodge",
+   "model": "Stratus",
+   "year": 2000
+  },
+  {
+   "cats": [
+    "hood"
+   ],
+   "gain_pairs": 17865,
    "make": "Jeep",
    "model": "Cherokee",
    "year": 1998
   },
   {
    "cats": [
-    "ignition-coils"
+    "climate-control"
    ],
-   "gain_pairs": 17088,
+   "gain_pairs": 17328,
    "make": "Chrysler",
-   "model": "Voyager",
-   "year": 2002
-  },
-  {
-   "cats": [
-    "window-switch"
-   ],
-   "gain_pairs": 16544,
-   "make": "Dodge",
-   "model": "Magnum",
-   "year": 2008
+   "model": "Town & Country",
+   "year": 2001
   },
   {
    "cats": [
     "ignition-coils"
    ],
-   "gain_pairs": 16035,
+   "gain_pairs": 15822,
    "make": "Dodge",
-   "model": "Stratus",
-   "year": 2001
+   "model": "Neon",
+   "year": 2000
   },
   {
    "cats": [
@@ -741,111 +625,39 @@
     "fender",
     "hood"
    ],
-   "gain_pairs": 15444,
+   "gain_pairs": 15543,
    "make": "Jeep",
    "model": "Renegade",
    "year": 2015
   },
   {
    "cats": [
-    "ignition-coils"
-   ],
-   "gain_pairs": 14980,
-   "make": "Chrysler",
-   "model": "Voyager",
-   "year": 2001
-  },
-  {
-   "cats": [
     "door-rear",
     "fender",
     "hood"
    ],
-   "gain_pairs": 14694,
+   "gain_pairs": 14787,
    "make": "Jeep",
    "model": "Renegade",
    "year": 2018
   },
   {
    "cats": [
-    "climate-control"
-   ],
-   "gain_pairs": 12350,
-   "make": "Dodge",
-   "model": "Nitro",
-   "year": 2009
-  },
-  {
-   "cats": [
-    "ignition-coils"
-   ],
-   "gain_pairs": 11803,
-   "make": "Chrysler",
-   "model": "Cirrus",
-   "year": 2000
-  },
-  {
-   "cats": [
-    "ignition-coils"
-   ],
-   "gain_pairs": 11803,
-   "make": "Dodge",
-   "model": "Stratus",
-   "year": 1998
-  },
-  {
-   "cats": [
-    "ignition-coils"
-   ],
-   "gain_pairs": 11803,
-   "make": "Dodge",
-   "model": "Stratus",
-   "year": 2003
-  },
-  {
-   "cats": [
     "hood"
    ],
-   "gain_pairs": 11760,
-   "make": "Jeep",
-   "model": "Cherokee",
-   "year": 1992
-  },
-  {
-   "cats": [
-    "hood"
-   ],
-   "gain_pairs": 11367,
+   "gain_pairs": 11592,
    "make": "Jeep",
    "model": "Cherokee",
    "year": 1997
   },
   {
    "cats": [
-    "window-switch"
-   ],
-   "gain_pairs": 11088,
-   "make": "Chrysler",
-   "model": "Aspen",
-   "year": 2009
-  },
-  {
-   "cats": [
-    "window-switch"
-   ],
-   "gain_pairs": 9008,
-   "make": "Dodge",
-   "model": "Dakota",
-   "year": 2010
-  },
-  {
-   "cats": [
     "hood"
    ],
-   "gain_pairs": 8967,
+   "gain_pairs": 11205,
    "make": "Jeep",
    "model": "Cherokee",
-   "year": 1994
+   "year": 1992
   },
   {
    "cats": [
@@ -855,28 +667,19 @@
     "hood",
     "liftgate"
    ],
-   "gain_pairs": 8740,
+   "gain_pairs": 9000,
    "make": "Jeep",
    "model": "Compass",
    "year": 2018
   },
   {
    "cats": [
-    "ignition-coils"
+    "hood"
    ],
-   "gain_pairs": 8608,
-   "make": "Dodge",
-   "model": "Stratus",
-   "year": 1999
-  },
-  {
-   "cats": [
-    "ignition-coils"
-   ],
-   "gain_pairs": 8490,
-   "make": "Dodge",
-   "model": "Journey",
-   "year": 2020
+   "gain_pairs": 8440,
+   "make": "Jeep",
+   "model": "Cherokee",
+   "year": 1994
   },
   {
    "cats": [
@@ -885,7 +688,7 @@
     "fender",
     "hood"
    ],
-   "gain_pairs": 8160,
+   "gain_pairs": 8205,
    "make": "Jeep",
    "model": "Renegade",
    "year": 2019
@@ -894,7 +697,7 @@
    "cats": [
     "hood"
    ],
-   "gain_pairs": 7740,
+   "gain_pairs": 7225,
    "make": "Jeep",
    "model": "Cherokee",
    "year": 1989
@@ -903,10 +706,28 @@
    "cats": [
     "hood"
    ],
-   "gain_pairs": 7327,
+   "gain_pairs": 7225,
    "make": "Jeep",
    "model": "Cherokee",
    "year": 1995
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 7176,
+   "make": "Dodge",
+   "model": "Intrepid",
+   "year": 2004
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 6972,
+   "make": "Chrysler",
+   "model": "Aspen",
+   "year": 2007
   },
   {
    "cats": [
@@ -915,52 +736,61 @@
     "fender",
     "hood"
    ],
-   "gain_pairs": 6672,
+   "gain_pairs": 6708,
    "make": "Jeep",
    "model": "Renegade",
    "year": 2020
   },
   {
    "cats": [
+    "ignition-coils"
+   ],
+   "gain_pairs": 6622,
+   "make": "Dodge",
+   "model": "Stratus",
+   "year": 1998
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 6510,
+   "make": "Chrysler",
+   "model": "Aspen",
+   "year": 2008
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 6417,
+   "make": "Dodge",
+   "model": "Intrepid",
+   "year": 2002
+  },
+  {
+   "cats": [
     "hood"
    ],
-   "gain_pairs": 6495,
+   "gain_pairs": 6405,
    "make": "Jeep",
    "model": "Cherokee",
    "year": 1993
   },
   {
    "cats": [
-    "ignition-coils"
+    "climate-control"
    ],
-   "gain_pairs": 6468,
+   "gain_pairs": 6160,
    "make": "Dodge",
-   "model": "Neon",
-   "year": 1997
-  },
-  {
-   "cats": [
-    "ignition-coils"
-   ],
-   "gain_pairs": 6468,
-   "make": "Dodge",
-   "model": "Neon",
-   "year": 1998
-  },
-  {
-   "cats": [
-    "ignition-coils"
-   ],
-   "gain_pairs": 6468,
-   "make": "Dodge",
-   "model": "Stratus",
-   "year": 1997
+   "model": "Intrepid",
+   "year": 2000
   },
   {
    "cats": [
     "hood"
    ],
-   "gain_pairs": 5655,
+   "gain_pairs": 5577,
    "make": "Jeep",
    "model": "Cherokee",
    "year": 1988
@@ -969,7 +799,7 @@
    "cats": [
     "hood"
    ],
-   "gain_pairs": 5655,
+   "gain_pairs": 5577,
    "make": "Jeep",
    "model": "Cherokee",
    "year": 1991
@@ -982,28 +812,28 @@
     "hood",
     "liftgate"
    ],
-   "gain_pairs": 5440,
+   "gain_pairs": 5520,
    "make": "Jeep",
    "model": "Compass",
    "year": 2019
   },
   {
    "cats": [
-    "ignition-coils"
+    "climate-control"
    ],
-   "gain_pairs": 5395,
+   "gain_pairs": 5377,
    "make": "Chrysler",
-   "model": "Cirrus",
-   "year": 1999
+   "model": "Concorde",
+   "year": 2002
   },
   {
    "cats": [
-    "ignition-coils"
+    "climate-control"
    ],
-   "gain_pairs": 5395,
-   "make": "Dodge",
-   "model": "Avenger",
-   "year": 1998
+   "gain_pairs": 5148,
+   "make": "Chrysler",
+   "model": "Voyager",
+   "year": 2003
   },
   {
    "cats": [
@@ -1012,37 +842,118 @@
     "fender",
     "hood"
    ],
-   "gain_pairs": 5112,
+   "gain_pairs": 5139,
    "make": "Jeep",
    "model": "Renegade",
    "year": 2021
   },
   {
    "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 5112,
+   "make": "Chrysler",
+   "model": "300M",
+   "year": 2001
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 4845,
+   "make": "Chrysler",
+   "model": "300M",
+   "year": 1999
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 4845,
+   "make": "Chrysler",
+   "model": "300M",
+   "year": 2002
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 4845,
+   "make": "Chrysler",
+   "model": "Concorde",
+   "year": 2004
+  },
+  {
+   "cats": [
+    "ignition-coils"
+   ],
+   "gain_pairs": 4840,
+   "make": "Dodge",
+   "model": "Stratus",
+   "year": 1999
+  },
+  {
+   "cats": [
     "hood"
    ],
-   "gain_pairs": 4807,
+   "gain_pairs": 4741,
    "make": "Jeep",
    "model": "Cherokee",
    "year": 1990
   },
   {
    "cats": [
-    "ignition-coils"
+    "climate-control"
    ],
-   "gain_pairs": 4320,
+   "gain_pairs": 4608,
    "make": "Chrysler",
    "model": "Voyager",
+   "year": 2002
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 4576,
+   "make": "Chrysler",
+   "model": "300M",
+   "year": 2004
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 4305,
+   "make": "Dodge",
+   "model": "Intrepid",
+   "year": 2001
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 4032,
+   "make": "Chrysler",
+   "model": "300M",
    "year": 2000
   },
   {
    "cats": [
-    "ignition-coils"
+    "climate-control"
    ],
-   "gain_pairs": 4320,
-   "make": "Dodge",
-   "model": "Neon",
-   "year": 1999
+   "gain_pairs": 4032,
+   "make": "Chrysler",
+   "model": "LHS",
+   "year": 2000
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 3783,
+   "make": "Chrysler",
+   "model": "Voyager",
+   "year": 2001
   },
   {
    "cats": [
@@ -1052,77 +963,167 @@
     "hood",
     "liftgate"
    ],
-   "gain_pairs": 3700,
+   "gain_pairs": 3750,
    "make": "Jeep",
    "model": "Compass",
    "year": 2020
   },
   {
    "cats": [
-    "door-front",
-    "door-rear",
-    "fender",
-    "hood",
-    "liftgate"
+    "ignition-coils"
    ],
-   "gain_pairs": 3700,
-   "make": "Jeep",
-   "model": "Compass",
-   "year": 2021
+   "gain_pairs": 3642,
+   "make": "Dodge",
+   "model": "Neon",
+   "year": 1997
+  },
+  {
+   "cats": [
+    "ignition-coils"
+   ],
+   "gain_pairs": 3642,
+   "make": "Dodge",
+   "model": "Stratus",
+   "year": 1997
   },
   {
    "cats": [
     "hood"
    ],
-   "gain_pairs": 3520,
+   "gain_pairs": 3472,
    "make": "Jeep",
    "model": "Cherokee",
    "year": 1987
   },
   {
    "cats": [
-    "window-switch"
+    "door-front",
+    "door-rear",
+    "fender",
+    "hood",
+    "liftgate"
    ],
-   "gain_pairs": 3438,
-   "make": "Ram",
-   "model": "Dakota",
-   "year": 2011
+   "gain_pairs": 3420,
+   "make": "Jeep",
+   "model": "Compass",
+   "year": 2021
   },
   {
    "cats": [
-    "ignition-coils"
+    "climate-control"
    ],
-   "gain_pairs": 3243,
-   "make": "Chrysler",
-   "model": "Cirrus",
-   "year": 1996
-  },
-  {
-   "cats": [
-    "ignition-coils"
-   ],
-   "gain_pairs": 3243,
+   "gain_pairs": 3201,
    "make": "Dodge",
-   "model": "Avenger",
+   "model": "Intrepid",
    "year": 1999
   },
   {
    "cats": [
-    "window-switch"
+    "climate-control"
    ],
-   "gain_pairs": 2870,
-   "make": "Dodge",
-   "model": "Dakota",
+   "gain_pairs": 3066,
+   "make": "Chrysler",
+   "model": "Aspen",
    "year": 2009
   },
   {
    "cats": [
     "ignition-coils"
    ],
-   "gain_pairs": 2164,
+   "gain_pairs": 3040,
    "make": "Dodge",
    "model": "Avenger",
-   "year": 1995
+   "year": 1998
+  },
+  {
+   "cats": [
+    "ignition-coils"
+   ],
+   "gain_pairs": 3040,
+   "make": "Dodge",
+   "model": "Neon",
+   "year": 1998
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 2920,
+   "make": "Chrysler",
+   "model": "Concorde",
+   "year": 1998
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 2920,
+   "make": "Chrysler",
+   "model": "Concorde",
+   "year": 2000
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 2920,
+   "make": "Chrysler",
+   "model": "LHS",
+   "year": 1999
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 2637,
+   "make": "Chrysler",
+   "model": "Concorde",
+   "year": 2001
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 2464,
+   "make": "Chrysler",
+   "model": "Pacifica",
+   "year": 2007
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 2464,
+   "make": "Chrysler",
+   "model": "Pacifica",
+   "year": 2008
+  },
+  {
+   "cats": [
+    "ignition-coils"
+   ],
+   "gain_pairs": 2436,
+   "make": "Dodge",
+   "model": "Neon",
+   "year": 1999
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 2352,
+   "make": "Chrysler",
+   "model": "Concorde",
+   "year": 1999
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 2352,
+   "make": "Dodge",
+   "model": "Intrepid",
+   "year": 2003
   },
   {
    "cats": [
@@ -1132,34 +1133,43 @@
     "hood",
     "liftgate"
    ],
-   "gain_pairs": 1975,
+   "gain_pairs": 2000,
    "make": "Jeep",
    "model": "Compass",
    "year": 2022
   },
   {
    "cats": [
-    "starter"
+    "ignition-coils"
    ],
-   "gain_pairs": 1775,
+   "gain_pairs": 1830,
    "make": "Dodge",
-   "model": "Ram 2500",
-   "year": 2005
+   "model": "Avenger",
+   "year": 1999
   },
   {
    "cats": [
-    "starter"
+    "climate-control"
    ],
-   "gain_pairs": 1679,
-   "make": "Dodge",
-   "model": "Ram 2500",
-   "year": 2006
+   "gain_pairs": 1485,
+   "make": "Chrysler",
+   "model": "300M",
+   "year": 2003
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 1485,
+   "make": "Chrysler",
+   "model": "Concorde",
+   "year": 2003
   },
   {
    "cats": [
     "hood"
    ],
-   "gain_pairs": 1335,
+   "gain_pairs": 1317,
    "make": "Jeep",
    "model": "Comanche",
    "year": 1986
@@ -1172,7 +1182,7 @@
     "hood",
     "liftgate"
    ],
-   "gain_pairs": 1215,
+   "gain_pairs": 1230,
    "make": "Jeep",
    "model": "Compass",
    "year": 2023
@@ -1181,52 +1191,52 @@
    "cats": [
     "ignition-coils"
    ],
-   "gain_pairs": 1083,
+   "gain_pairs": 1222,
    "make": "Dodge",
    "model": "Avenger",
-   "year": 1996
+   "year": 1995
   },
   {
    "cats": [
-    "ignition-coils"
+    "climate-control"
    ],
-   "gain_pairs": 1083,
-   "make": "Dodge",
-   "model": "Avenger",
-   "year": 1997
+   "gain_pairs": 1192,
+   "make": "Chrysler",
+   "model": "LHS",
+   "year": 2001
   },
   {
    "cats": [
-    "starter"
+    "climate-control"
    ],
-   "gain_pairs": 1079,
+   "gain_pairs": 1192,
    "make": "Dodge",
-   "model": "Ram 2500",
-   "year": 2007
+   "model": "Intrepid",
+   "year": 1998
   },
   {
    "cats": [
-    "starter"
+    "side-mirrors"
    ],
-   "gain_pairs": 1079,
+   "gain_pairs": 950,
    "make": "Dodge",
-   "model": "Ram 2500",
-   "year": 2008
-  },
-  {
-   "cats": [
-    "starter"
-   ],
-   "gain_pairs": 1008,
-   "make": "Dodge",
-   "model": "Ram 2500",
+   "model": "Nitro",
    "year": 2009
+  },
+  {
+   "cats": [
+    "side-mirrors"
+   ],
+   "gain_pairs": 950,
+   "make": "Dodge",
+   "model": "Nitro",
+   "year": 2010
   },
   {
    "cats": [
     "hood"
    ],
-   "gain_pairs": 892,
+   "gain_pairs": 880,
    "make": "Jeep",
    "model": "Cherokee",
    "year": 1985
@@ -1235,7 +1245,7 @@
    "cats": [
     "hood"
    ],
-   "gain_pairs": 892,
+   "gain_pairs": 880,
    "make": "Jeep",
    "model": "Cherokee",
    "year": 1986
@@ -1244,7 +1254,7 @@
    "cats": [
     "hood"
    ],
-   "gain_pairs": 892,
+   "gain_pairs": 880,
    "make": "Jeep",
    "model": "Comanche",
    "year": 1989
@@ -1257,10 +1267,28 @@
     "hood",
     "liftgate"
    ],
-   "gain_pairs": 820,
+   "gain_pairs": 830,
    "make": "Jeep",
    "model": "Compass",
    "year": 2024
+  },
+  {
+   "cats": [
+    "ignition-coils"
+   ],
+   "gain_pairs": 612,
+   "make": "Dodge",
+   "model": "Avenger",
+   "year": 1996
+  },
+  {
+   "cats": [
+    "ignition-coils"
+   ],
+   "gain_pairs": 612,
+   "make": "Dodge",
+   "model": "Avenger",
+   "year": 1997
   },
   {
    "cats": [
@@ -1269,7 +1297,7 @@
     "fender",
     "hood"
    ],
-   "gain_pairs": 600,
+   "gain_pairs": 603,
    "make": "Jeep",
    "model": "Renegade",
    "year": 2022
@@ -1278,7 +1306,7 @@
    "cats": [
     "hood"
    ],
-   "gain_pairs": 447,
+   "gain_pairs": 441,
    "make": "Jeep",
    "model": "Comanche",
    "year": 1988
@@ -1287,7 +1315,7 @@
    "cats": [
     "hood"
    ],
-   "gain_pairs": 447,
+   "gain_pairs": 441,
    "make": "Jeep",
    "model": "Comanche",
    "year": 1990
@@ -1296,7 +1324,7 @@
    "cats": [
     "hood"
    ],
-   "gain_pairs": 447,
+   "gain_pairs": 441,
    "make": "Jeep",
    "model": "Comanche",
    "year": 1991
@@ -1305,7 +1333,7 @@
    "cats": [
     "hood"
    ],
-   "gain_pairs": 447,
+   "gain_pairs": 441,
    "make": "Jeep",
    "model": "Wagoneer",
    "year": 1985
@@ -1314,7 +1342,7 @@
    "cats": [
     "hood"
    ],
-   "gain_pairs": 447,
+   "gain_pairs": 441,
    "make": "Jeep",
    "model": "Wagoneer",
    "year": 1986
@@ -1323,7 +1351,7 @@
    "cats": [
     "hood"
    ],
-   "gain_pairs": 447,
+   "gain_pairs": 441,
    "make": "Jeep",
    "model": "Wagoneer",
    "year": 1987
@@ -1332,7 +1360,7 @@
    "cats": [
     "hood"
    ],
-   "gain_pairs": 447,
+   "gain_pairs": 441,
    "make": "Jeep",
    "model": "Wagoneer",
    "year": 1988
@@ -1349,21 +1377,21 @@
   },
   {
    "cats": [
-    "starter"
+    "climate-control"
    ],
-   "gain_pairs": 279,
-   "make": "Dodge",
-   "model": "Ram 2500",
-   "year": 2010
+   "gain_pairs": 242,
+   "make": "Chrysler",
+   "model": "Sebring",
+   "year": 1996
   },
   {
    "cats": [
-    "starter"
+    "climate-control"
    ],
-   "gain_pairs": 279,
-   "make": "Dodge",
-   "model": "Ram 3500",
-   "year": 2006
+   "gain_pairs": 230,
+   "make": "Chrysler",
+   "model": "Cirrus",
+   "year": 2000
   },
   {
    "cats": [
@@ -1387,15 +1415,6 @@
   },
   {
    "cats": [
-    "starter"
-   ],
-   "gain_pairs": 188,
-   "make": "Dodge",
-   "model": "Ram 3500",
-   "year": 2008
-  },
-  {
-   "cats": [
     "bumper-front",
     "fender"
    ],
@@ -1406,30 +1425,101 @@
   },
   {
    "cats": [
-    "starter"
+    "climate-control"
    ],
-   "gain_pairs": 95,
-   "make": "Dodge",
-   "model": "Ram 3500",
-   "year": 2005
+   "gain_pairs": 140,
+   "make": "Chrysler",
+   "model": "Cirrus",
+   "year": 1999
   },
   {
    "cats": [
-    "starter"
+    "tail-lights"
    ],
-   "gain_pairs": 95,
+   "gain_pairs": 96,
    "make": "Dodge",
-   "model": "Ram 3500",
-   "year": 2009
+   "model": "Dakota",
+   "year": 2010
   },
   {
    "cats": [
-    "alternator",
-    "ignition-coils"
+    "tail-lights"
    ],
-   "gain_pairs": 21,
+   "gain_pairs": 96,
    "make": "Ram",
-   "model": "ProMaster City",
+   "model": "Dakota",
+   "year": 2011
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 90,
+   "make": "Chrysler",
+   "model": "Cirrus",
+   "year": 1996
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 75,
+   "make": "Chrysler",
+   "model": "Town & Country",
+   "year": 1996
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 75,
+   "make": "Chrysler",
+   "model": "Town & Country",
+   "year": 1997
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 62,
+   "make": "Chrysler",
+   "model": "Cirrus",
+   "year": 1995
+  },
+  {
+   "cats": [
+    "tail-lights"
+   ],
+   "gain_pairs": 42,
+   "make": "Ram",
+   "model": "1500 Classic",
+   "year": 2019
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 32,
+   "make": "Chrysler",
+   "model": "Cirrus",
+   "year": 1998
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 32,
+   "make": "Dodge",
+   "model": "Stratus",
+   "year": 1996
+  },
+  {
+   "cats": [
+    "tail-lights"
+   ],
+   "gain_pairs": 30,
+   "make": "Ram",
+   "model": "1500 Classic",
    "year": 2022
   },
   {
@@ -1437,19 +1527,47 @@
     "alternator",
     "ignition-coils"
    ],
-   "gain_pairs": 18,
+   "gain_pairs": 24,
    "make": "Ram",
    "model": "ProMaster City",
+   "year": 2022
+  },
+  {
+   "cats": [
+    "tail-lights"
+   ],
+   "gain_pairs": 22,
+   "make": "Ram",
+   "model": "1500 Classic",
    "year": 2021
   },
   {
    "cats": [
     "ignition-coils"
    ],
-   "gain_pairs": 15,
+   "gain_pairs": 20,
    "make": "Ram",
    "model": "ProMaster City",
    "year": 2019
+  },
+  {
+   "cats": [
+    "alternator",
+    "ignition-coils"
+   ],
+   "gain_pairs": 20,
+   "make": "Ram",
+   "model": "ProMaster City",
+   "year": 2021
+  },
+  {
+   "cats": [
+    "tail-lights"
+   ],
+   "gain_pairs": 12,
+   "make": "Ram",
+   "model": "1500 Classic",
+   "year": 2020
   }
  ]
 }
