@@ -425,3 +425,95 @@
 03:47:54 net-fail list https://www.subarupartsdeal.com/parts-list/2017-subaru-impreza/engine_auxiliaries/throttle_chamber.html: network error after 3 tries: ReadTimeout
 03:47:54 seed A|Subaru|Impreza|2017 had network failures; left open for retry
 03:47:54 time budget reached records=1271
+03:48:06 start site=www.subarupartsdeal.com mode=worklist tiers=['A', 'B'] records=1271 list_lines=252 year_lines=21 url_index=3106
+03:48:06 seg done tier=A Subaru Outback [2010, 2014] seeds=[2011] records=1271 errors=4
+03:48:06 seg done tier=A Subaru Outback [2005, 2009] seeds=[2005] records=1271 errors=4
+03:48:06 seg done tier=A Subaru Forester [2009, 2013] seeds=[2010] records=1271 errors=4
+03:48:06 seg done tier=A Subaru Forester [2003, 2008] seeds=[2004] records=1271 errors=4
+03:48:06 seg done tier=A Subaru Outback [2000, 2004] seeds=[2003] records=1271 errors=4
+03:48:06 seg done tier=A Subaru Impreza [2008, 2011] seeds=[2008] records=1271 errors=4
+03:48:06 seg done tier=A Subaru Impreza [2012, 2016] seeds=[2012] records=1271 errors=4
+03:48:06 seg done tier=A Subaru Legacy [2010, 2012] seeds=[2011] records=1271 errors=4
+03:48:06 seg done tier=A Subaru Legacy [2005, 2009] seeds=[2005] records=1271 errors=4
+03:48:06 seg done tier=A Subaru Impreza [2002, 2007] seeds=[2007] records=1271 errors=4
+03:48:06 seg done tier=A Subaru Forester [1981, 2002] seeds=[2001] records=1271 errors=4
+03:48:06 seg done tier=A Subaru Forester [2014, 2018] seeds=[2014] records=1271 errors=4
+03:48:06 seg done tier=A Subaru Legacy [1990, 1999] seeds=[1999] records=1271 errors=4
+03:48:06 seg done tier=A Subaru Legacy [2013, 2014] seeds=[2013] records=1271 errors=4
+03:48:06 seg done tier=A Subaru Legacy [2015, 2019] seeds=[2015] records=1271 errors=4
+03:48:06 seg done tier=A Subaru XV Crosstrek [2013, 2024] seeds=[2013] records=1271 errors=4
+03:48:06 seg done tier=A Subaru Legacy [2000, 2002] seeds=[2001] records=1271 errors=4
+03:48:06 seg done tier=A Subaru B9 Tribeca [2006, 2009] seeds=[2006] records=1271 errors=4
+03:48:06 seg done tier=A Subaru Legacy Wagon [1990, 2009] seeds=[1998] records=1271 errors=4
+03:48:06 seg done tier=A Subaru Legacy [2003, 2004] seeds=[2004] records=1271 errors=4
+03:48:06 seg done tier=A Subaru Outback [2015, 2019] seeds=[2015] records=1271 errors=4
+03:48:06 seg done tier=A Subaru Tribeca [2006, 2013] seeds=[2008] records=1271 errors=4
+03:48:06 seg done tier=A Subaru Impreza [1993, 2001] seeds=[1998] records=1271 errors=4
+03:48:06 seg done tier=A Subaru Impreza Wagon [1993, 2007] seeds=[2005] records=1271 errors=4
+03:50:56 chain-unlinked side-mirrors 1 numbers named by 91036FL09B, no catalog link: 91036FL09C
+03:52:32 seg done tier=A Subaru Impreza [2017, 2022] seeds=[2017, 2022] records=1275 errors=4
+03:55:28 chain-unlinked ignition-coils 1 numbers named by 22433AA600, no catalog link: 22433AA602
+03:55:28 chain-unlinked ignition-coils 1 numbers named by 22433AA601, no catalog link: 22433AA602
+03:55:28 chain-unlinked ignition-coils 1 numbers named by 22433AA611, no catalog link: 22433AA613
+03:55:28 chain-unlinked ignition-coils 1 numbers named by 22433AA610, no catalog link: 22433AA613
+03:56:56 chain-unlinked door-front 1 numbers named by 60009AJ01A9P, no catalog link: 60009AJ01B9P
+03:56:56 chain-unlinked door-front 1 numbers named by 60009AJ03A9P, no catalog link: 60009AJ03B9P
+03:56:56 chain-unlinked door-front 1 numbers named by 60009AJ00A9P, no catalog link: 60009AJ00B9P
+03:56:56 chain-unlinked door-front 1 numbers named by 60009AJ02A9P, no catalog link: 60009AJ02B9P
+03:57:28 chain-unlinked door-rear 1 numbers named by 60409AJ01A9P, no catalog link: 60409AJ01C9P
+03:57:28 chain-unlinked door-rear 1 numbers named by 60409AJ03A9P, no catalog link: 60409AJ03D9P
+03:57:28 chain-unlinked door-rear 1 numbers named by 60409AJ00A9P, no catalog link: 60409AJ00C9P
+03:57:28 chain-unlinked door-rear 1 numbers named by 60409AJ02A9P, no catalog link: 60409AJ02D9P
+03:57:52 chain-unlinked hood 1 numbers named by 57229AJ01B9P, no catalog link: 57229AJ01A9P
+03:59:44 chain-unlinked grille 1 numbers named by 91121AJ04B, no catalog link: 91121AJ04A
+03:59:44 chain-unlinked grille 1 numbers named by 91121AJ03B, no catalog link: 91121AJ03A
+04:01:04 seg done tier=B Subaru Outback [2010, 2014] seeds=[2011] records=1327 errors=4
+04:04:40 chain-unlinked ignition-coils 1 numbers named by 22433AA480, no catalog link: 22433AA542
+04:04:40 chain-unlinked ignition-coils 1 numbers named by 22433AA540, no catalog link: 22433AA542
+04:04:40 chain-unlinked ignition-coils 1 numbers named by 22433AA441, no catalog link: 22433AA532
+04:04:40 chain-unlinked ignition-coils 1 numbers named by 22433AA530, no catalog link: 22433AA532
+04:04:40 chain-unlinked ignition-coils 1 numbers named by 22433AA41B, no catalog link: 22433AA570
+04:04:40 chain-unlinked ignition-coils 1 numbers named by 22433AA50A, no catalog link: 22433AA580
+04:05:28 chain-unlinked radiator 1 numbers named by 45111AG02A, no catalog link: 45119AG01A
+04:05:28 chain-unlinked radiator 1 numbers named by 45111AG03A, no catalog link: 45111AG09A
+04:06:40 chain-unlinked door-front 1 numbers named by 60009AG11A9P, no catalog link: 60009AG11C9P
+04:06:40 chain-unlinked door-front 1 numbers named by 60009AG11B9P, no catalog link: 60009AG11C9P
+04:06:40 chain-unlinked door-front 1 numbers named by 60009AG13A9P, no catalog link: 60009AG13C9P
+04:06:40 chain-unlinked door-front 1 numbers named by 60009AG13B9P, no catalog link: 60009AG13C9P
+04:06:40 chain-unlinked door-front 1 numbers named by 60009AG10A9P, no catalog link: 60009AG10C9P
+04:06:40 chain-unlinked door-front 1 numbers named by 60009AG10B9P, no catalog link: 60009AG10C9P
+04:06:40 chain-unlinked door-front 1 numbers named by 60009AG12A9P, no catalog link: 60009AG12C9P
+04:06:40 chain-unlinked door-front 1 numbers named by 60009AG12B9P, no catalog link: 60009AG12C9P
+04:07:12 chain-unlinked door-rear 1 numbers named by 60409AG11A9P, no catalog link: 60409AG11C9P
+04:07:12 chain-unlinked door-rear 1 numbers named by 60409AG13A9P, no catalog link: 60409AG13C9P
+04:07:12 chain-unlinked door-rear 1 numbers named by 60409AG10A9P, no catalog link: 60409AG10C9P
+04:07:12 chain-unlinked door-rear 1 numbers named by 60409AG12A9P, no catalog link: 60409AG12C9P
+04:08:24 chain-unlinked fender 1 numbers named by 57110AG05A9P, no catalog link: 57110AG05B9P
+04:08:24 chain-unlinked fender 1 numbers named by 57110AG07A9P, no catalog link: 57110AG07B9P
+04:08:24 chain-unlinked fender 1 numbers named by 57110AG06A9P, no catalog link: 57110AG06B9P
+04:08:24 chain-unlinked fender 1 numbers named by 57110AG04A9P, no catalog link: 57110AG04B9P
+04:10:00 chain-unlinked grille 1 numbers named by 91121AG07A, no catalog link: 91121AG07C
+04:10:00 chain-unlinked grille 1 numbers named by 91121AG07B, no catalog link: 91121AG07C
+04:10:00 chain-unlinked grille 1 numbers named by 91121AG12A, no catalog link: 91121AG12B
+04:10:32 chain-unlinked liftgate 1 numbers named by 60809AG10A9P, no catalog link: 60809AG10B9P
+04:10:32 seg done tier=B Subaru Outback [2005, 2009] seeds=[2005] records=1386 errors=4
+04:12:40 chain-unlinked ignition-coils 1 numbers named by 22433AA640, no catalog link: 22433AA542
+04:14:56 chain-unlinked fender 1 numbers named by 57120SC0319P, no catalog link: 57120SC0309P
+04:14:56 chain-unlinked fender 1 numbers named by 57120SC0219P, no catalog link: 57120SC0209P
+04:15:52 chain-unlinked grille 1 numbers named by 91121SC012, no catalog link: 91191SC001
+04:15:52 chain-unlinked grille 1 numbers named by 91191SC000, no catalog link: 91191SC001
+04:16:32 seg done tier=B Subaru Forester [2009, 2013] seeds=[2010] records=1418 errors=4
+04:18:40 chain-unlinked radiator 1 numbers named by 45111SA020, no catalog link: 45119SA040
+04:18:40 chain-unlinked radiator 1 numbers named by 45111SA030, no catalog link: 45119SA050
+04:18:40 chain-unlinked radiator 1 numbers named by 45111SA080, no catalog link: 45119SA000
+04:18:40 chain-unlinked radiator 1 numbers named by 45111SA090, no catalog link: 45119SA010
+04:19:04 chain-unlinked door-front 1 numbers named by 60009SA1309P, no catalog link: 60009SA1319P
+04:19:04 chain-unlinked door-front 1 numbers named by 60009SA1209P, no catalog link: 60009SA1219P
+04:19:36 chain-unlinked door-rear 1 numbers named by 60409SA0109P, no catalog link: 60409SA0129P
+04:19:36 chain-unlinked door-rear 1 numbers named by 60409SA0119P, no catalog link: 60409SA0129P
+04:19:36 chain-unlinked door-rear 1 numbers named by 60409SA0009P, no catalog link: 60409SA0029P
+04:19:36 chain-unlinked door-rear 1 numbers named by 60409SA0019P, no catalog link: 60409SA0029P
+04:21:13 chain-unlinked bumper-rear 1 numbers named by 57703SA030MC, no catalog link: 57703SA101MC
+04:21:13 chain-unlinked bumper-rear 1 numbers named by 57704SA010, no catalog link: 57704SA012
+04:21:28 chain-unlinked grille 1 numbers named by 91121SA050, no catalog link: 91121SA030
+04:21:52 time budget reached records=1446
