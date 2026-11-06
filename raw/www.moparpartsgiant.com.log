@@ -1247,3 +1247,83 @@
 06:45:50 chain-unlinked window-regulator 3 numbers named by 5056029AG, no catalog link: 5056029AD, 5056029AE, 5056029AF
 06:46:14 chain-unlinked fuel-pump-module 1 numbers named by 5093455AC, no catalog link: 5093455AD
 06:46:46 time budget reached records=2036
+06:47:01 start site=www.moparpartsgiant.com mode=worklist tiers=['A', 'B'] records=2036 list_lines=513 year_lines=42 url_index=4777
+06:47:01 seg done tier=A Dodge Ram 1500 [1971, 2018] seeds=[2002] records=2036 errors=8
+06:47:01 seg done tier=A Dodge Grand Caravan [2008, 2024] seeds=[2010] records=2036 errors=8
+06:47:01 seg done tier=A Chrysler 200 [1979, 2022] seeds=[2015] records=2036 errors=8
+06:47:01 seg done tier=A Dodge Journey [2009, 2020] seeds=[2012] records=2036 errors=8
+06:47:01 seg done tier=A Chrysler Town & Country [2008, 2016] seeds=[2008] records=2036 errors=8
+06:47:01 seg done tier=A Chrysler 300 [1999, 2021] seeds=[2006] records=2036 errors=8
+06:47:01 seg done tier=A Dodge Avenger [1995, 2014] seeds=[2013] records=2036 errors=8
+06:47:01 seg done tier=A Chrysler PT Cruiser [2001, 2010] seeds=[2006] records=2036 errors=8
+06:47:01 seg done tier=A Dodge Charger [1971, 2010] seeds=[2007] records=2036 errors=8
+06:47:01 seg done tier=A Dodge Dakota [1997, 2004] seeds=[2000] records=2036 errors=8
+06:47:01 seg done tier=A Dodge Caravan [1984, 2020] seeds=[2005] records=2036 errors=8
+06:47:01 seg done tier=A Chrysler Town & Country [1992, 2007] seeds=[2005] records=2036 errors=8
+06:47:01 seg done tier=A Dodge Dart [1960, 2016] seeds=[2013] records=2036 errors=8
+06:47:01 seg done tier=A Dodge Caliber [2007, 2012] seeds=[2007] records=2036 errors=8
+06:47:01 seg done tier=A Dodge Grand Caravan [2001, 2007] seeds=[2005] records=2036 errors=8
+06:47:01 seg done tier=A Dodge Charger [2011, 2023] seeds=[2013] records=2036 errors=8
+06:47:01 seg done tier=A Dodge Durango [2004, 2009] seeds=[2005] records=2036 errors=8
+06:47:01 seg done tier=A Dodge Durango [1998, 2003] seeds=[2003] records=2036 errors=8
+06:47:01 seg done tier=A Chrysler Sebring [2007, 2011] seeds=[2008] records=2036 errors=8
+06:47:01 seg done tier=A Dodge Dakota [2005, 2011] seeds=[2005] records=2036 errors=8
+06:47:01 seg done tier=A Chrysler Pacifica [2004, 2008] seeds=[2006] records=2036 errors=8
+06:47:01 seg done tier=A Dodge Nitro [2007, 2011] seeds=[2007] records=2036 errors=8
+06:47:01 seg done tier=A Ram 1500 [2009, 2022] seeds=[2012] records=2036 errors=8
+06:47:01 seg done tier=A Chrysler Sebring [2001, 2006] seeds=[2004] records=2036 errors=8
+06:47:01 seg done tier=A Dodge Durango [2011, 2023] seeds=[2013] records=2036 errors=8
+06:47:01 seg done tier=A Dodge Neon [2000, 2005] seeds=[2005] records=2036 errors=8
+06:47:01 seg done tier=A Dodge Ram Pickup [1988, 2011] seeds=[2004] records=2036 errors=8
+06:47:01 seg done tier=A Dodge Stratus [1996, 2008] seeds=[2006] records=2036 errors=8
+06:47:17 chain-unlinked starter 1 numbers named by 53005984, no catalog link: 53005984AB
+06:48:21 chain-unlinked fuel-pump-module 1 numbers named by 52127763, no catalog link: 5014211AA
+06:48:54 chain-unlinked throttle-body 1 numbers named by 4740202, no catalog link: 4886525AA
+06:52:13 seg done tier=A Dodge Dakota [1987, 1996] seeds=[1992, 1988, 1989] records=2041 errors=8
+06:53:33 chain-unlinked ac-compressor 1 numbers named by 2AMA6491AA, no catalog link: 2AMA96491A
+06:53:33 chain-unlinked ac-compressor 1 numbers named by 4596491AC, no catalog link: 4596491AD
+06:57:57 chain-unlinked side-mirrors 1 numbers named by 1AQ521S2AA, no catalog link: 1AQ521S2AD
+06:57:57 chain-unlinked side-mirrors 1 numbers named by 1AQ521XRAA, no catalog link: 1AQ521XRAD
+06:57:57 chain-unlinked side-mirrors 1 numbers named by 1AQ531S2AA, no catalog link: 1AQ531S2AD
+06:57:57 chain-unlinked side-mirrors 1 numbers named by 1AQ531XRAA, no catalog link: 1AQ531XRAD
+06:57:57 chain-unlinked side-mirrors 1 numbers named by XB801B8AG, no catalog link: XB801B8AK
+06:57:57 chain-unlinked side-mirrors 1 numbers named by XB801DMAG, no catalog link: XB801DMAK
+06:57:57 chain-unlinked side-mirrors 1 numbers named by XB801ELAG, no catalog link: XB801ELAK
+06:57:57 chain-unlinked side-mirrors 1 numbers named by XB801MQAG, no catalog link: XB801MQAK
+06:57:57 chain-unlinked side-mirrors 1 numbers named by XB801P4AG, no catalog link: XB801P4AK
+06:57:57 chain-unlinked side-mirrors 1 numbers named by XB801PKAG, no catalog link: XB801PKAK
+06:57:57 chain-unlinked side-mirrors 1 numbers named by XB801S2AG, no catalog link: XB801S2AK
+06:57:57 chain-unlinked side-mirrors 1 numbers named by XB801WGAG, no catalog link: XB801WGAK
+06:57:57 chain-unlinked side-mirrors 1 numbers named by XB801XRAG, no catalog link: XB801XRAK
+06:57:57 chain-unlinked side-mirrors 1 numbers named by XB811B8AG, no catalog link: XB811B8AK
+06:57:57 chain-unlinked side-mirrors 1 numbers named by XB811ELAG, no catalog link: XB811ELAK
+06:57:57 chain-unlinked side-mirrors 1 numbers named by XB811MQAG, no catalog link: XB811MQAK
+06:57:57 chain-unlinked side-mirrors 1 numbers named by XB811P4AG, no catalog link: XB811P4AK
+06:57:57 chain-unlinked side-mirrors 1 numbers named by XB811PKAG, no catalog link: XB811PKAK
+06:57:57 chain-unlinked side-mirrors 1 numbers named by XB811S2AG, no catalog link: XB811S2AK
+06:57:57 chain-unlinked side-mirrors 1 numbers named by XB811WGAG, no catalog link: XB811WGAK
+06:57:57 chain-unlinked side-mirrors 1 numbers named by XB811XRAG, no catalog link: XB811XRAK
+06:57:57 chain-unlinked side-mirrors 1 numbers named by 4805980AF, no catalog link: 4805980AI
+06:57:57 chain-unlinked side-mirrors 1 numbers named by 4805981AF, no catalog link: 4805981AI
+06:58:54 chain-unlinked fuel-pump-module 1 numbers named by 5136022AB, no catalog link: 5136022AE
+06:59:25 nav-fail Dodge Magnum 1993: ValueError: no 1993 catalog for Dodge Magnum (dodge-['magnum'])
+06:59:25 seg done tier=A Dodge Magnum [1978, 2008] seeds=[2005, 1993] records=2079 errors=9
+07:01:42 nav-fail Dodge Ram Van 1981: ValueError: no 1981 catalog for Dodge Ram Van (dodge-['ram_van'])
+07:01:42 seg done tier=A Dodge Ram Van [1966, 2003] seeds=[1999, 1981] records=2082 errors=10
+07:03:41 chain-unlinked fuel-pump-module 1 numbers named by 4897431AB, no catalog link: 4897431AC
+07:05:09 chain-unlinked alternator 1 numbers named by R5234031, no catalog link: 4557431
+07:08:46 seg done tier=A Dodge Grand Caravan [1988, 2000] seeds=[2000, 1992, 1989] records=2093 errors=10
+07:09:18 chain-unlinked alternator 1 numbers named by 56028697AE, no catalog link: 56028697AH
+07:10:05 chain-unlinked ac-compressor 1 numbers named by 55056157AC, no catalog link: 55056157AE
+07:10:05 chain-unlinked ac-compressor 1 numbers named by 55056288AC, no catalog link: 55056288AF
+07:10:05 chain-unlinked ac-compressor 1 numbers named by R5056288AD, no catalog link: 55056288AF
+07:10:38 chain-unlinked headlights 1 numbers named by 55078020AG, no catalog link: 55078020AI
+07:10:38 chain-unlinked headlights 1 numbers named by 55078021AG, no catalog link: 55078021AI
+07:12:22 chain-unlinked window-switch 1 numbers named by 4602781AA, no catalog link: 4602736AA
+07:12:46 chain-unlinked fuel-pump-module 1 numbers named by 5135549AB, no catalog link: RL135549AC
+07:12:46 chain-unlinked fuel-pump-module 1 numbers named by 68003766AA, no catalog link: RL003766AA
+07:13:10 seg done tier=A Chrysler Aspen [2007, 2009] seeds=[2007] records=2110 errors=10
+07:14:14 chain-unlinked alternator 1 numbers named by 56028920AC, no catalog link: RL028925AA
+07:14:14 chain-unlinked alternator 1 numbers named by 56028925AA, no catalog link: RL028925AA
+07:17:42 chain-unlinked fuel-pump-module 1 numbers named by 5014318AB, no catalog link: 5014318AG
+07:19:10 time budget reached records=2120
