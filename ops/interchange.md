@@ -1106,3 +1106,117 @@ Blocked / not done:
   AZE141; every Japan-built 2009-10 Corolla on the lots decodes 1.8L).
   No change to ENGINE_FAMILIES or test_interchange P0.5. Evidence is in
   ops/parts.md under the item.
+
+## Interchange session status, 2026-11-06 ~03:10 UTC (session_016ZzJfLB9KQDQ64RoN6T9sX)
+
+Did not touch: crawler worklists, fetch.py ALLOWED, jeeppartsdeal v2, sites/,
+the payload (junkyard_scraper.py) or app.js. Nothing was fetched from a
+catalog. Reads: oem-raw files via `git show`, plus web docs (NHTSA field
+spec, eBay search results).
+
+**1. Aftermarket layer (merged ae57806, beba873).** `aftermarket/groups_am.py`
+turns DB Electrical (oem-raw@9d2c3b76) into one **Likely** group per unit
+(`am:dbe:<cat>:<item>`, src aftermarket, never Verified). Before this,
+curation did not read the track at all (policy AFTERMARKET_SITES; spec §12).
+- Amperages are never merged. When one vehicle-year and engine appears on
+  units of different amperage, each unit carries `amperage_split:105A/120A…`.
+- Membership: a car joins a row only when its decoded engine agrees (liters
+  ±0.05, cylinders, diesel both ways; diesel is harmonised across the two
+  feeds). Undecoded engine → `engine_unconfirmed`; row without an engine →
+  `engine_unlisted`. Starter AT/MT gate comes from the unit's own Fits text
+  (MINI 410-24071 w/AT vs 410-24074 w/MT list the same cars).
+- Refused: 155 crawler-flagged records. Also dropped: 9,501 application rows
+  whose engine size is absent from the unit's own Fits text. That source
+  error is real: Fiat 500 1.4L is printed on 410-52066 "CHRYSLER 3.3L
+  1990-91" and on 410-52033. The guard is fail-closed, so many dropped rows
+  are probably correct. Combined makes ("Chevrolet / GMC") and model names
+  matching no lot model are reported, never guessed.
+- `measure.py --aftermarket FILE [--aftermarket-only]`: client-tier views
+  are unchanged, Verified pairs added 0. Tests:
+  `aftermarket/tests/test_groups_am.py`, 26 checks, including 200 sampled
+  pairs re-checked against raw rows. Report:
+  `groups/_report/aftermarket-dbelectrical.md`. Groups JSON (4 MB)
+  git-ignored, rebuilds from the pinned raw.
+- Lot cars with an aftermarket Likely alternator/starter donor (either /
+  engine-confirmed): MINI 846/528 of 1,011; Land Rover 729/653 of 827;
+  Suzuki 585/474 of 750; Jaguar 363/310 of 704; Isuzu 419/328 of 501;
+  Saab 53/49 of 387; Fiat 316/247 of 372; Plymouth 137/108 of 222;
+  Porsche 125/103 of 183; Smart 62/49 of 77; **Geo 0 of 182** (DB has no
+  Geo rows). All makes: 300,275 of 334,293.
+- **Not shipped.** Shipping needs a payload key (e.g. `amGroups`), client
+  display as "Likely (aftermarket)", owner review, and an independent audit
+  sample per spec §11.4. That is the hub's call.
+
+**2. Badge twins (beba873, `aftermarket/twins.py`,
+`groups/_report/aftermarket-twins.json`).** The only basis used: one DB
+Electrical unit printing both vehicles. The OEM catalogs on oem-raw print
+no Geo/Saab/Isuzu/Suzuki/Plymouth rows. Mercury and Pontiac/Saturn already
+sit inside the ford/gm namespaces. Shared units found for: Saab 9-7X /
+TrailBlazer / Envoy (26 of 28 Saab cars), 9-2X / Impreza (11/11), Ascender
+/ Envoy / TrailBlazer (41/42), i-Series / Colorado / Canyon (10/14), Rodeo
+/ Passport (207/222), Hombre / S10, XL-7 / Equinox (70/149), Equator /
+Frontier (3/3), B-Series / Ranger, Raider / Dakota (43/43), Plymouth
+Voyager / Grand Voyager / Neon / Breeze ↔ Dodge, Vibe / Matrix (387/408),
+Mercury twins, and Villager / Quest (starter only). **Geo Prizm, Metro and
+Tracker: no basis (0 cars).** Cross-make donor gain by make: Isuzu 413,
+Suzuki 281, Jaguar 230, Fiat 166, Plymouth 137, Land Rover 59, Saab 37,
+Porsche 32; MINI 0 and Smart 0 (single-make units only).
+
+**3. Second sources (proposal for session_016ZzJfMapNmKpMbuoJzVupB or the
+hub; not applied).** That session is idle, not archived, so I did not race
+it.
+- Add www.toyotapartsdeal.com (`.html` PartsGiant template →
+  `_partsgiant.py`, `/oem/toyota~<slug>~<pn>.html`) and
+  www.chevypartsdeal.com (SimplePart, `/oem/gm~<slug>~<pn>`) to ALLOWED,
+  with a site module each and worklist seeds limited to the numbers the
+  primary already holds (cross-check), then to cells the primary left open
+  (completeness).
+- Same operator as the sites that refused us (Mopar 403, Subaru 403), so:
+  (a) run only after the primary's `.done`, or count it inside the same
+  max-parallel budget, so the operator's total request rate does not rise;
+  (b) a refusal on either stops it for good;
+  (c) never use them for Mopar, Subaru or other refused makes;
+  (d) agreement with the primary is not independent verification.
+- Value is low (Toyota and GM are already covered makes). Priority below
+  everything above.
+
+**4. NHTSA (finding; nothing built).** The manufacturer-communications flat
+file (static.nhtsa.gov/odi/ffdd/tsbs/, field spec TSBS.txt) has Make,
+Model, Model Year, NHTSA Components, Mfr Component System/Subsystem and a
+4,000-character Summary. **It has no part-number field.** Part numbers
+appear only inside free-text summaries or the bulletin PDFs. Yield is
+unmeasured. Measuring it means downloading the bulk file (one file per
+5-year chunk, government public data), which belongs on Actions with
+static.nhtsa.gov allowlisted after a robots read. Proposed spike: count
+summaries in our categories that carry part-number-shaped tokens plus
+model-year lists. Build only if that yield is real. TSB numbers are
+usually superseding parts ("use new P/N"), so even when parsed they are
+supersession evidence, not fitment lists.
+
+**5. eBay (finding; nothing built).** Our keyset uses Browse with the
+application token (scraper/ebay_prices.py). As far as I can tell, Browse
+has no full item compatibility list, only a one-vehicle compatibility
+check per item. The full list (Trading GetItem compatibility list) needs a
+user token. I could not read the API License Agreement: developer.ebay.com
+answers 403 to our fetch tool. Community reports describe cache-refresh
+limits (about 6 h) and a recent revision restricting Restricted APIs and
+AI use. That is not "clearly allows storing derived fitment", so no build.
+Owner option: read the agreement in a browser or ask eBay developer
+support.
+
+**6. Real-browser rendering: not needed.** All 1,098 audipartsgiant
+records on oem-raw carry fitment from the server HTML (0 `no_fitment_rows`).
+No allowlisted catalog currently needs a render path. Nothing built.
+
+**7. More aftermarket catalogs: not surveyed past a desk search.** The one
+hit, 7zap's LIFT-TEK brand pages, is a diagram EPC already rejected in
+SOURCES.md (no per-part fit list). Candidates for a probe.py pass (robots
+RFC 9309, terms read for an anti-automation clause, no challenge, not a
+SimplePart/PartsGiant sister), none checked yet: Four Seasons / SMP (AC
+compressors, switches), Spectra Premium (radiators), Depo (lamps), ACI /
+Cardone (window regulators). Dorman stays out (robots). TYC and Denso stay
+out (client-side / POST).
+
+**Found, not mine:** `curation_tests/test_model_map.py` fails on main
+(pre-existing, inventory-driven): M5 Ford "F150 Raptor" (1 car) and Toyota
+"Camry Solara" (545 cars) / M1 "Solara" need model_map entries.
