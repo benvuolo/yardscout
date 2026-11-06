@@ -1288,3 +1288,144 @@
 07:18:24 chain-unlinked fuel-pump-module 1 numbers named by 4897431AB, no catalog link: 4897431AC
 07:18:56 chain-unlinked alternator 1 numbers named by 4727036, no catalog link: 4557432
 07:21:04 time budget reached records=2418
+07:21:14 start site=www.jeeppartsdeal.com mode=worklist tiers=['A', 'B'] records=2418 list_lines=645 year_lines=49 url_index=7723
+07:21:14 seg done tier=A Jeep Patriot [2007, 2017] seeds=[2014] records=2418 errors=15
+07:21:14 seg done tier=A Jeep Grand Cherokee [1999, 2004] seeds=[2004] records=2418 errors=15
+07:21:14 seg done tier=A Jeep Liberty [1998, 2007] seeds=[2005] records=2418 errors=15
+07:21:14 seg done tier=A Jeep Grand Cherokee [2005, 2010] seeds=[2005] records=2418 errors=15
+07:21:14 seg done tier=A Jeep Liberty [2008, 2012] seeds=[2008] records=2418 errors=15
+07:21:14 seg done tier=A Jeep Compass [2011, 2016] seeds=[2014] records=2418 errors=15
+07:21:14 seg done tier=A Jeep Grand Cherokee [2011, 2021] seeds=[2011] records=2418 errors=15
+07:21:14 seg done tier=A Jeep Cherokee [2014, 2022] seeds=[2015] records=2418 errors=15
+07:21:14 seg done tier=A Jeep Commander [2006, 2010] seeds=[2006] records=2418 errors=15
+07:21:14 seg done tier=A Jeep Grand Cherokee [1993, 1998] seeds=[1997] records=2418 errors=15
+07:21:14 seg done tier=A Jeep Cherokee [1978, 2001] seeds=[2000] records=2418 errors=15
+07:21:14 seg done tier=A Jeep Compass [2007, 2010] seeds=[2007] records=2418 errors=15
+07:21:14 seg done tier=A Jeep Renegade [2015, 2022] seeds=[2017] records=2418 errors=15
+07:21:14 seg done tier=A Jeep Compass [2017, 2024] seeds=[2017] records=2418 errors=15
+07:21:14 seg done tier=A Jeep Wrangler [1997, 2006] seeds=[1997] records=2418 errors=15
+07:21:14 seg done tier=A Dodge Ram 1500 [1971, 2018] seeds=[2002] records=2418 errors=15
+07:21:14 seg done tier=A Dodge Grand Caravan [2008, 2024] seeds=[2010] records=2418 errors=15
+07:21:14 seg done tier=A Chrysler 200 [1979, 2022] seeds=[2015] records=2418 errors=15
+07:21:14 seg done tier=A Dodge Journey [2009, 2020] seeds=[2012] records=2418 errors=15
+07:21:14 seg done tier=A Chrysler Town & Country [2008, 2016] seeds=[2008] records=2418 errors=15
+07:21:14 seg done tier=A Chrysler 300 [1999, 2021] seeds=[2006] records=2418 errors=15
+07:21:14 seg done tier=A Dodge Avenger [1995, 2014] seeds=[2013] records=2418 errors=15
+07:21:14 seg done tier=A Chrysler PT Cruiser [2001, 2010] seeds=[2006] records=2418 errors=15
+07:21:14 seg done tier=A Dodge Charger [1971, 2010] seeds=[2007] records=2418 errors=15
+07:21:14 seg done tier=A Dodge Dakota [1997, 2004] seeds=[2000] records=2418 errors=15
+07:21:14 seg done tier=A Dodge Caravan [1984, 2020] seeds=[2005] records=2418 errors=15
+07:21:14 seg done tier=A Chrysler Town & Country [1992, 2007] seeds=[2005] records=2418 errors=15
+07:21:14 seg done tier=A Dodge Dart [1960, 2016] seeds=[2013] records=2418 errors=15
+07:21:14 seg done tier=A Dodge Caliber [2007, 2012] seeds=[2007] records=2418 errors=15
+07:21:14 seg done tier=A Dodge Grand Caravan [2001, 2007] seeds=[2005] records=2418 errors=15
+07:21:14 seg done tier=A Dodge Charger [2011, 2023] seeds=[2013] records=2418 errors=15
+07:21:14 seg done tier=A Dodge Durango [2004, 2009] seeds=[2005] records=2418 errors=15
+07:21:14 seg done tier=A Dodge Durango [1998, 2003] seeds=[2003] records=2418 errors=15
+07:21:14 seg done tier=A Chrysler Sebring [2007, 2011] seeds=[2008] records=2418 errors=15
+07:21:14 seg done tier=A Dodge Dakota [2005, 2011] seeds=[2005] records=2418 errors=15
+07:21:14 seg done tier=A Chrysler Pacifica [2004, 2008] seeds=[2006] records=2418 errors=15
+07:21:14 seg done tier=A Dodge Nitro [2007, 2011] seeds=[2007] records=2418 errors=15
+07:21:14 seg done tier=A Ram 1500 [2009, 2022] seeds=[2012] records=2418 errors=15
+07:21:14 seg done tier=A Chrysler Sebring [2001, 2006] seeds=[2004] records=2418 errors=15
+07:21:14 seg done tier=A Dodge Durango [2011, 2023] seeds=[2013] records=2418 errors=15
+07:21:14 seg done tier=A Dodge Neon [2000, 2005] seeds=[2005] records=2418 errors=15
+07:21:14 seg done tier=A Dodge Ram Pickup [1988, 2011] seeds=[2004] records=2418 errors=15
+07:21:14 seg done tier=A Dodge Stratus [1996, 2008] seeds=[2006] records=2418 errors=15
+07:21:14 seg done tier=A Dodge Dakota [1987, 1996] seeds=[1992] records=2418 errors=15
+07:21:14 seg done tier=A Dodge Magnum [1978, 2008] seeds=[2005] records=2418 errors=15
+07:21:14 seg done tier=A Dodge Ram Van [1966, 2003] seeds=[1999] records=2418 errors=15
+07:21:14 seg done tier=A Dodge Grand Caravan [1988, 2000] seeds=[2000] records=2418 errors=15
+07:21:31 chain-unlinked alternator 1 numbers named by 56028697AE, no catalog link: 56028697AH
+07:22:51 chain-unlinked headlights 2 numbers named by 55078020AI, no catalog link: 55078020AH, 55078020AF
+07:22:51 chain-unlinked headlights 3 numbers named by 55078021AI, no catalog link: 55078021AG, 55078021AF, 55078021AH
+07:24:03 chain-unlinked side-mirrors 3 numbers named by 55364664AI, no catalog link: 55364664AH, 55364664AF, 55364664AG
+07:24:03 chain-unlinked side-mirrors 3 numbers named by 55078074AK, no catalog link: 55078074AI, 55078074AJ, 55078074AH
+07:24:03 chain-unlinked side-mirrors 3 numbers named by 55078075AK, no catalog link: 55078075AH, 55078075AI, 55078075AJ
+07:24:03 chain-unlinked side-mirrors 3 numbers named by 55364665AI, no catalog link: 55364665AF, 55364665AG, 55364665AH
+07:25:07 chain-unlinked climate-control 5 numbers named by 55056675AG, no catalog link: 55056675AF, 55056675AD, 55056675AE, 55056675AB, 55056675AC
+07:25:47 seg done tier=A Chrysler Aspen [2007, 2009] seeds=[2007] records=2435 errors=15
+07:26:27 chain-unlinked alternator 1 numbers named by 5104762AA, no catalog link: RL104762AA
+07:26:51 chain-unlinked starter 1 numbers named by R6027703AC, no catalog link: 56027703AC
+07:27:07 chain-unlinked ac-compressor 5 numbers named by 55055339AH, no catalog link: 55055339AI, 55055339AG, 55055339AE, 55055339AD, 55055339AF
+07:28:03 chain-unlinked headlights 7 numbers named by 55076748AO, no catalog link: 55076748AL, 55076748AN, 55076748AD, 55076748AI, 55076748AJ, 55076748AK, 55076748AM
+07:28:03 chain-unlinked headlights 7 numbers named by 55076749AO, no catalog link: 55076749AJ, 55076749AK, 55076749AI, 55076749AN, 55076749AL, 55076749AD, 55076749AM
+07:28:03 chain-unlinked headlights 4 numbers named by 55077024AG, no catalog link: 55077024AE, 55077024AC, 55077024AD, 55077024AF
+07:28:03 chain-unlinked headlights 5 numbers named by 55077025AG, no catalog link: 55077025AE, 55077025AC, 55077025AD, 55077025AB, 55077025AF
+07:30:03 chain-unlinked tail-lights 1 numbers named by 55055264AC, no catalog link: 55055264
+07:31:15 chain-unlinked side-mirrors 2 numbers named by 55076478AE, no catalog link: 55076478AD, 55076478AC
+07:31:15 chain-unlinked side-mirrors 2 numbers named by 55076479AE, no catalog link: 55076479AD, 55076479AC
+07:31:15 chain-unlinked side-mirrors 4 numbers named by 55076488AG, no catalog link: 55076488AF, 55076488AD, 55076488AC, 55076488AE
+07:31:15 chain-unlinked side-mirrors 5 numbers named by 55076489AG, no catalog link: 55076489AB, 55076489AF, 55076489AC, 55076489AD, 55076489AE
+07:31:15 chain-unlinked side-mirrors 5 numbers named by 55076744AH, no catalog link: 55076744AC, 55076744AF, 55076744AD, 55076744AE, 55076744AG
+07:33:06 chain-unlinked climate-control 1 numbers named by 68171480AA, no catalog link: 5015734AA
+07:33:06 chain-unlinked climate-control 1 numbers named by 68171481AA, no catalog link: 5015736AA
+07:34:10 chain-unlinked fuel-pump-module 4 numbers named by 4897667AH, no catalog link: 4897667AE, 4897667AG, RL897667AF, 4897667AF
+07:34:10 chain-unlinked fuel-pump-module 5 numbers named by 4897668AI, no catalog link: 4897668AF, 4897668AH, 4897668AD, 4897668AG, 4897668AE
+07:34:10 chain-unlinked fuel-pump-module 4 numbers named by 5014318AG, no catalog link: 5014318AD, 5014318AE, 5014318AB, 5014318AC
+07:34:10 chain-unlinked fuel-pump-module 5 numbers named by RL897666AF, no catalog link: 4897666AF, 4897666AC, 4897666AD, 4897666AE, 4897666AB
+07:35:14 nav-fail Dodge Ram 2500 1986: NavError: Dodge Ram 2500 1986: no catalog model for this year
+07:35:14 seg done tier=A Dodge Ram 2500 [1979, 2002] seeds=[2001, 1986] records=2488 errors=16
+07:35:14 nav-fail Dodge 1500 Pickup 2002: NavError: Dodge 1500 Pickup: no single catalog model for this feed name
+07:35:14 seg done tier=A Dodge 1500 Pickup [1995, 2023] seeds=[2002] records=2488 errors=17
+07:35:38 chain-unlinked alternator 1 numbers named by 4896805AE, no catalog link: 4896805AD
+07:35:46 chain-unlinked starter 1 numbers named by 68080460AA, no catalog link: 68080460AB
+07:37:54 chain-unlinked headlights 4 numbers named by 68085416AF, no catalog link: 68085416AD, 68085416AE, 68085416AC, 68085416AB
+07:37:54 chain-unlinked headlights 4 numbers named by 68085417AF, no catalog link: 68085417AB, 68085417AE, 68085417AC, 68085417AD
+07:37:54 chain-unlinked headlights 3 numbers named by 68185766AB, no catalog link: 68085418AE, 68085418AD, 68085418AC
+07:37:54 chain-unlinked headlights 3 numbers named by 68185767AB, no catalog link: 68085419AD, 68085419AC, 68085419AE
+07:37:54 chain-unlinked headlights 1 numbers named by 68042155AE, no catalog link: 68042155AG
+07:37:54 chain-unlinked headlights 1 numbers named by 68042154AE, no catalog link: 68042154AG
+07:37:54 chain-unlinked headlights 1 numbers named by 68085419AF, no catalog link: 68085419AG
+07:37:54 chain-unlinked headlights 1 numbers named by 68085418AF, no catalog link: 68085418AG
+07:38:22 chain-unlinked headlights 2 numbers named by 68042154AG, no catalog link: 68042154AF, 68042154AD
+07:38:22 chain-unlinked headlights 2 numbers named by 68042155AG, no catalog link: 68042155AD, 68042155AF
+07:40:10 chain-unlinked tail-lights 3 numbers named by 68042172AE, no catalog link: 68042172AB, 68042172AC, 68042172AD
+07:40:10 chain-unlinked tail-lights 4 numbers named by 68042173AE, no catalog link: 68042173AA, 68042173AB, 68042173AC, 68042173AD
+07:40:10 chain-unlinked tail-lights 1 numbers named by 68154602AC, no catalog link: 68154602AB
+07:40:10 chain-unlinked tail-lights 1 numbers named by 68154603AC, no catalog link: 68154603AB
+07:40:10 chain-unlinked tail-lights 2 numbers named by 68154606AC, no catalog link: 68154606AB, 68154606AA
+07:40:10 chain-unlinked tail-lights 2 numbers named by 68154607AC, no catalog link: 68154607AB, 68154607AA
+07:40:10 chain-unlinked tail-lights 1 numbers named by 68154605AA, no catalog link: 68154605AC
+07:40:10 chain-unlinked tail-lights 1 numbers named by 68154604AA, no catalog link: 68154604AC
+07:40:10 chain-unlinked tail-lights 1 numbers named by 68043136AD, no catalog link: 68043136AE
+07:41:38 chain-unlinked side-mirrors 1 numbers named by 1LE28CDMAF, no catalog link: 1LE28TZZAI
+07:41:38 chain-unlinked side-mirrors 1 numbers named by 68088256AG, no catalog link: 68088256AI
+07:41:38 chain-unlinked side-mirrors 1 numbers named by 1LE27JWDAF, no catalog link: 1LE27TZZAH
+07:41:38 chain-unlinked side-mirrors 1 numbers named by 57010358AH, no catalog link: 57010358AK
+07:41:38 chain-unlinked side-mirrors 1 numbers named by 68154824AC, no catalog link: 68154824AE
+07:41:38 chain-unlinked side-mirrors 2 numbers named by 1LE27CDMAF, no catalog link: 1LE27CDMAE, 1LE27TZZAH
+07:41:38 chain-unlinked side-mirrors 1 numbers named by 68154825AC, no catalog link: 68154825AE
+07:41:38 chain-unlinked side-mirrors 1 numbers named by 68154815AB, no catalog link: 68154815AE
+07:43:38 chain-unlinked starter 1 numbers named by 5035102AA, no catalog link: 5035102AB
+07:43:54 chain-unlinked ac-compressor 1 numbers named by 68160395AH, no catalog link: 68160395AJ
+07:46:02 chain-unlinked headlights 1 numbers named by 68214383AD, no catalog link: 68214383AB
+07:46:02 chain-unlinked headlights 2 numbers named by 68196276AD, no catalog link: 68196276AB, 68196276AC
+07:46:02 chain-unlinked headlights 2 numbers named by 68214382AD, no catalog link: 68214382AC, 68214382AB
+07:46:02 chain-unlinked headlights 4 numbers named by 68402940AB, no catalog link: 68196278AF, 68402940AA, 68196278AB, 68196278AD
+07:46:02 chain-unlinked headlights 5 numbers named by 68402941AB, no catalog link: 68402941AA, 68196279AC, 68196279AF, 68196279AB, 68196279AD
+07:46:02 chain-unlinked headlights 4 numbers named by 68402942AB, no catalog link: 68402942AA, 68214384AD, 68214384AB, 68214384AF
+07:46:02 chain-unlinked headlights 4 numbers named by 68402943AB, no catalog link: 68214385AD, 68214385AF, 68402943AA, 68214385AB
+07:46:02 chain-unlinked headlights 1 numbers named by 68214388AC, no catalog link: 68214388AF
+07:48:02 chain-unlinked headlights 3 numbers named by 68214388AF, no catalog link: 68214388AD, 68214388AE, 68214388AB
+07:48:02 chain-unlinked headlights 3 numbers named by 68214389AF, no catalog link: 68214389AE, 68214389AB, 68214389AD
+07:48:02 chain-unlinked headlights 2 numbers named by 68402946AA, no catalog link: 68269810AC, 68269810AA
+07:48:02 chain-unlinked headlights 2 numbers named by 68402947AA, no catalog link: 68269811AC, 68269811AA
+07:48:02 chain-unlinked headlights 2 numbers named by 68402948AA, no catalog link: 68269812AC, 68269812AA
+07:48:02 chain-unlinked headlights 2 numbers named by 68402949AA, no catalog link: 68269813AC, 68269813AA
+07:48:02 chain-unlinked headlights 5 numbers named by 68402952AB, no catalog link: 68402952AA, 68214386AE, 68214386AB, 68214386AF, 68214386AD
+07:48:02 chain-unlinked headlights 5 numbers named by 68402953AB, no catalog link: 68214387AB, 68214387AF, 68214387AD, 68214387AE, 68402953AA
+07:49:14 chain-unlinked tail-lights 1 numbers named by 68400295AA, no catalog link: 68225358AB
+07:49:14 chain-unlinked tail-lights 1 numbers named by 68400331AA, no catalog link: 68225359AB
+07:49:14 chain-unlinked tail-lights 1 numbers named by 68400290AA, no catalog link: 68196290AB
+07:49:14 chain-unlinked tail-lights 1 numbers named by 68400325AA, no catalog link: 68196291AB
+07:50:58 chain-unlinked side-mirrors 5 numbers named by 68088256AI, no catalog link: 68088256AF, 68088256AC, 68088256AH, 68088256AE, 68088256AD
+07:50:58 chain-unlinked side-mirrors 6 numbers named by 68088257AI, no catalog link: 68088257AH, 68088257AG, 68088257AF, 68088257AC, 68088257AE, 68088257AD
+07:50:58 chain-unlinked side-mirrors 1 numbers named by 5KW49JSCAB, no catalog link: 5KW49JSCAA
+07:50:58 chain-unlinked side-mirrors 2 numbers named by 5KW49JWDAB, no catalog link: 5KW49JWDAA, 5KW49TZZAC
+07:50:58 chain-unlinked side-mirrors 1 numbers named by 68154822AC, no catalog link: 68154822AE
+07:50:58 chain-unlinked side-mirrors 1 numbers named by 5KW48JSCAB, no catalog link: 5KW48JSCAA
+07:50:58 chain-unlinked side-mirrors 2 numbers named by 5KW63KBXAB, no catalog link: 5KW63KBXAA, 5KW63TZZAC
+07:50:58 chain-unlinked side-mirrors 2 numbers named by 5KW48LAUAB, no catalog link: 5KW48LAUAA, 5KW48TZZAD
+07:52:02 seg done tier=A Chrysler 300C [2005, 2018] seeds=[2006, 2012, 2016] records=2579 errors=17
+07:52:02 time budget reached records=2579
