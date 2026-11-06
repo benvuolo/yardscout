@@ -1,5 +1,5 @@
 {
-  "_doc": "Vehicle photo sources: the REMOTE KILL SWITCH. The scraper keeps a car's photo code in vehicle_extras.json / data/inv shards only when the code matches a pattern of an ENABLED source here, and publishes the enabled sources as `photoSources` in vehicle_extras.json and data/inv/manifest.json. The app renders a photo only through a published, enabled source, so a takedown is: set enabled=false, commit, dispatch scan.yml (runbook: ops/yards.md 'Photo takedown'). Patterns are plain regexes valid in both Python and JavaScript, anchored, matched against the whole code; {1}..{9} in card/large are the capture groups. Images load from the yard's own URL, unaltered; never downloaded, rehosted or proxied.",
+  "_doc": "Vehicle photo sources: the REMOTE KILL SWITCH. The scraper keeps a car's photo code in vehicle_extras.json / data/inv shards only when the code matches a pattern of an ENABLED source here, and publishes the enabled sources as `photoSources` in vehicle_extras.json and data/inv/manifest.json. The app renders a photo only through a published, enabled source, so a takedown is: set enabled=false, commit, dispatch scan.yml (runbook: ops/yards.md 'Photo takedown'). Patterns are plain regexes valid in both Python and JavaScript, anchored, matched against the whole code; {1}..{9} in card/large are the capture groups. Images load from the yard's own URL, unaltered; never downloaded, rehosted or proxied. onCards (default true): false = the source's images are too heavy for list cards (>~150 KB each), so the app shows them only on the car screen and in the viewer.",
   "version": 1,
   "sources": {
     "pyp": {
@@ -7,9 +7,11 @@
       "label": "Photo: LKQ Pick Your Part",
       "host": "cdn.pypapps.com",
       "patterns": [
-        {"code": "^p(\\d{1,12})$",
-         "card": "https://cdn.pypapps.com/carbuy/CAR-FRONT-LEFT_{1}_front_left_corner.jpg?quality=70&w=640&h=427&mode=max&format=webp",
-         "large": "https://cdn.pypapps.com/carbuy/CAR-FRONT-LEFT_{1}_front_left_corner.jpg"}
+        {
+          "code": "^p(\\d{1,12})$",
+          "card": "https://cdn.pypapps.com/carbuy/CAR-FRONT-LEFT_{1}_front_left_corner.jpg?quality=70&w=640&h=427&mode=max&format=webp",
+          "large": "https://cdn.pypapps.com/carbuy/CAR-FRONT-LEFT_{1}_front_left_corner.jpg"
+        }
       ],
       "note": "LKQ's own CDN, PYP watermark bottom-right. mode=max (whole image, 640x360) - mode=crop trimmed the sides and could clip the watermark."
     },
@@ -18,9 +20,11 @@
       "label": "Photo: Pick-n-Pull",
       "host": "cdn.row52.com",
       "patterns": [
-        {"code": "^n([0-9a-f]{8})([0-9a-f]{4})([0-9a-f]{4})([0-9a-f]{4})([0-9a-f]{12})$",
-         "card": "https://cdn.row52.com/images/{1}-{2}-{3}-{4}-{5}.JPG",
-         "large": "https://cdn.row52.com/images/{1}-{2}-{3}-{4}-{5}.JPG"}
+        {
+          "code": "^n([0-9a-f]{8})([0-9a-f]{4})([0-9a-f]{4})([0-9a-f]{4})([0-9a-f]{12})$",
+          "card": "https://cdn.row52.com/images/{1}-{2}-{3}-{4}-{5}.JPG",
+          "large": "https://cdn.row52.com/images/{1}-{2}-{3}-{4}-{5}.JPG"
+        }
       ],
       "note": "Owner exception 2026-11-06 ~18:40 UTC: the URL Pick-n-Pull's own API returns (imageName, 600x400, Row52 watermark). Nothing else from Row52."
     },
@@ -29,12 +33,16 @@
       "label": "Photo: Wrench-A-Part",
       "host": "storage.googleapis.com",
       "patterns": [
-        {"code": "^w(\\d{1,3})/([A-Za-z0-9]{5,17})/(\\d{10,14})\\.j$",
-         "card": "https://storage.googleapis.com/wrench-car-photos/v1%2F{1}%2F{2}%2F{3}-front_driver-thumb.jpg",
-         "large": "https://storage.googleapis.com/wrench-car-photos/v1%2F{1}%2F{2}%2F{3}-front_driver.jpg"},
-        {"code": "^w(\\d{1,3})/([A-Za-z0-9]{5,17})/(\\d{10,14})\\.p$",
-         "card": "https://storage.googleapis.com/wrench-car-photos/v1%2F{1}%2F{2}%2F{3}.png",
-         "large": "https://storage.googleapis.com/wrench-car-photos/v1%2F{1}%2F{2}%2F{3}.png"}
+        {
+          "code": "^w(\\d{1,3})/([A-Za-z0-9]{5,17})/(\\d{10,14})\\.j$",
+          "card": "https://storage.googleapis.com/wrench-car-photos/v1%2F{1}%2F{2}%2F{3}-front_driver-thumb.jpg",
+          "large": "https://storage.googleapis.com/wrench-car-photos/v1%2F{1}%2F{2}%2F{3}-front_driver.jpg"
+        },
+        {
+          "code": "^w(\\d{1,3})/([A-Za-z0-9]{5,17})/(\\d{10,14})\\.p$",
+          "card": "https://storage.googleapis.com/wrench-car-photos/v1%2F{1}%2F{2}%2F{3}.png",
+          "large": "https://storage.googleapis.com/wrench-car-photos/v1%2F{1}%2F{2}%2F{3}.png"
+        }
       ],
       "note": "Wrench-A-Part's own GCS bucket (wrench-car-photos)."
     },
@@ -43,8 +51,11 @@
       "label": "Photo: Weller Self Serve",
       "host": "ik.imagekit.io",
       "patterns": [
-        {"code": "^(https://ik\\.imagekit\\.io/rm8xun1iy5t/[A-Za-z0-9]{1,20}/[A-Za-z0-9_-]{1,80}\\.(?:jpg|jpeg|png|webp))$",
-         "card": "{1}", "large": "{1}"}
+        {
+          "code": "^(https://ik\\.imagekit\\.io/rm8xun1iy5t/[A-Za-z0-9]{1,20}/[A-Za-z0-9_-]{1,80}\\.(?:jpg|jpeg|png|webp))$",
+          "card": "{1}",
+          "large": "{1}"
+        }
       ],
       "note": "Weller's own ImageKit account rm8xun1iy5t."
     },
@@ -53,8 +64,11 @@
       "label": "Photo: Pasco EZ Pull It",
       "host": "cdn.shopify.com",
       "patterns": [
-        {"code": "^(https://cdn\\.shopify\\.com/s/files/1/0731/9250/5650/files/[A-Za-z0-9_.%-]{1,200}(?:\\?v=\\d{1,12})?)$",
-         "card": "{1}", "large": "{1}"}
+        {
+          "code": "^(https://cdn\\.shopify\\.com/s/files/1/0731/9250/5650/files/[A-Za-z0-9_.%-]{1,200}(?:\\?v=\\d{1,12})?)$",
+          "card": "{1}",
+          "large": "{1}"
+        }
       ],
       "note": "The yard's own Shopify store files."
     },
@@ -63,20 +77,149 @@
       "label": "Photo: Kiker's U-Pull-It",
       "host": "www.kikersupullit.com",
       "patterns": [
-        {"code": "^(https://www\\.kikersupullit\\.com/inventory-feed/photos/[A-Za-z0-9_-]{1,120}\\.(?:jpg|jpeg|png|webp))$",
-         "card": "{1}", "large": "{1}"}
+        {
+          "code": "^(https://www\\.kikersupullit\\.com/inventory-feed/photos/[A-Za-z0-9_-]{1,120}\\.(?:jpg|jpeg|png|webp))$",
+          "card": "{1}",
+          "large": "{1}"
+        }
       ],
-      "note": "Own site; only full-size files (1600x1200, 320-420 KB)."
+      "note": "Own site; only full-size files (1600x1200, 320-420 KB).",
+      "onCards": false
     },
     "armys": {
       "enabled": false,
       "label": "Photo: Army's Auto Wrecking",
       "host": "api.yardsmartapp.com",
       "patterns": [
-        {"code": "^(https://api\\.yardsmartapp\\.com/rails/active_storage/blobs/redirect/[A-Za-z0-9=_-]{1,400}--[0-9a-f]{40}/[A-Za-z0-9_.-]{1,120})$",
-         "card": "{1}", "large": "{1}"}
+        {
+          "code": "^(https://api\\.yardsmartapp\\.com/rails/active_storage/blobs/redirect/[A-Za-z0-9=_-]{1,400}--[0-9a-f]{40}/[A-Za-z0-9_.-]{1,120})$",
+          "card": "{1}",
+          "large": "{1}"
+        }
       ],
       "note": "OFF: YardSmart signed URLs expire within hours (3/3 sampled returned 404)."
+    },
+    "papva": {
+      "enabled": true,
+      "label": "Photo: Pick-A-Part VA",
+      "host": "da8h1v3w8q6n5.cloudfront.net",
+      "patterns": [
+        {
+          "code": "^u(tt87|uu81)/([A-Za-z0-9]{1,20})/([A-Za-z0-9_-]{1,60})$",
+          "card": "https://da8h1v3w8q6n5.cloudfront.net/{1}/images/{2}/{3}.jpg",
+          "large": "https://da8h1v3w8q6n5.cloudfront.net/{1}/images/{2}/{3}.jpg"
+        }
+      ],
+      "note": "Pick-A-Part VA (2 yards). URG's CloudFront (URG hosts the yard's iis-pro-upull inventory plugin and its photos); 800x600 JPEG ~400 KB, the only size.",
+      "onCards": false
+    },
+    "upullitwa": {
+      "enabled": true,
+      "label": "Photo: U-Pull-It Auto Parts",
+      "host": "da8h1v3w8q6n5.cloudfront.net",
+      "patterns": [
+        {
+          "code": "^u(jj65)/([A-Za-z0-9]{1,20})/([A-Za-z0-9_-]{1,60})$",
+          "card": "https://da8h1v3w8q6n5.cloudfront.net/{1}/images/{2}/{3}.jpg",
+          "large": "https://da8h1v3w8q6n5.cloudfront.net/{1}/images/{2}/{3}.jpg"
+        }
+      ],
+      "note": "U-Pull-It Auto Parts WA (3 yards). URG's CloudFront (URG hosts the yard's iis-pro-upull inventory plugin and its photos); 800x600 JPEG ~400 KB, the only size.",
+      "onCards": false
+    },
+    "aesop": {
+      "enabled": true,
+      "label": "Photo: AESOP U-Pull",
+      "host": "da8h1v3w8q6n5.cloudfront.net",
+      "patterns": [
+        {
+          "code": "^u(oo95)/([A-Za-z0-9]{1,20})/([A-Za-z0-9_-]{1,60})$",
+          "card": "https://da8h1v3w8q6n5.cloudfront.net/{1}/images/{2}/{3}.jpg",
+          "large": "https://da8h1v3w8q6n5.cloudfront.net/{1}/images/{2}/{3}.jpg"
+        }
+      ],
+      "note": "AESOP Tulsa. URG's CloudFront (URG hosts the yard's iis-pro-upull inventory plugin and its photos); 800x600 JPEG ~400 KB, the only size.",
+      "onCards": false
+    },
+    "midwayupull": {
+      "enabled": true,
+      "label": "Photo: Midway U-Pull",
+      "host": "da8h1v3w8q6n5.cloudfront.net",
+      "patterns": [
+        {
+          "code": "^u(mo06)/([A-Za-z0-9]{1,20})/([A-Za-z0-9_-]{1,60})$",
+          "card": "https://da8h1v3w8q6n5.cloudfront.net/{1}/images/{2}/{3}.jpg",
+          "large": "https://da8h1v3w8q6n5.cloudfront.net/{1}/images/{2}/{3}.jpg"
+        }
+      ],
+      "note": "Midway U-Pull KS/MO. URG's CloudFront (URG hosts the yard's iis-pro-upull inventory plugin and its photos); 800x600 JPEG ~400 KB, the only size.",
+      "onCards": false
+    },
+    "byot": {
+      "enabled": true,
+      "label": "Photo: BYOT Auto Parts",
+      "host": "storage.googleapis.com",
+      "patterns": [
+        {
+          "code": "^b([0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4})$",
+          "card": "https://storage.googleapis.com/byotautoparts.appspot.com/yard_inventory/{1}",
+          "large": "https://storage.googleapis.com/byotautoparts.appspot.com/yard_inventory/{1}"
+        }
+      ],
+      "note": "BYOT's own Firebase bucket; 540x720 JPEG ~450-570 KB, the only size.",
+      "onCards": false
+    },
+    "wilberts": {
+      "enabled": true,
+      "label": "Photo: Wilbert's U-Pull-It",
+      "host": "buyingtoolrg.blob.core.windows.net",
+      "patterns": [
+        {
+          "code": "^l([A-HJ-NPR-Z0-9]{17})/([0-9_]{8,80})$",
+          "card": "https://buyingtoolrg.blob.core.windows.net/vehicleimagesresized/{1}/{2}.jpg",
+          "large": "https://buyingtoolrg.blob.core.windows.net/vehicleimagesresized/{1}/{2}.jpg"
+        }
+      ],
+      "note": "Wilbert's Azure blob store (their parts-search API's ImageURLs); 652x489 JPEG ~60 KB served as application/octet-stream (no nosniff; browsers sniff it)."
+    },
+    "nvpap": {
+      "enabled": true,
+      "label": "Photo: Nevada Pic-A-Part",
+      "host": "www.nvpap.com",
+      "patterns": [
+        {
+          "code": "^v([A-Za-z0-9]{1,20}_[a-z]{1,20})$",
+          "card": "https://www.nvpap.com/photos/preview_photos/{1}.JPG",
+          "large": "https://www.nvpap.com/photos/preview_photos/{1}.JPG"
+        }
+      ],
+      "note": "Own site; the result list's preview image only (200x150, ~6 KB). No guessed larger sizes."
+    },
+    "pns": {
+      "enabled": true,
+      "label": "Photo: Pull-N-Save",
+      "host": "app.pullnsaveapp.com",
+      "patterns": [
+        {
+          "code": "^s(STK\\d{3,9}-\\d{1,3})$",
+          "card": "https://app.pullnsaveapp.com/v1/Vehicles/Images/StockId/{1}/OrderId/1",
+          "large": "https://app.pullnsaveapp.com/v1/Vehicles/Images/StockId/{1}/OrderId/1"
+        }
+      ],
+      "note": "Own app host; 200x200 PNG ~100 KB. Codes only for cars whose URL was checked as a real photo (not the 3,474 B placeholder) - see _pns_apply_photo_checks."
+    },
+    "sturtevant": {
+      "enabled": false,
+      "label": "Photo: Sturtevant Auto",
+      "host": "inventory.sturtevantauto.com",
+      "patterns": [
+        {
+          "code": "^t(STK\\d{3,9})$",
+          "card": "https://inventory.sturtevantauto.com/InventoryPhotos/{1}.JPG",
+          "large": "https://inventory.sturtevantauto.com/InventoryPhotos/{1}.JPG"
+        }
+      ],
+      "note": "OFF: the only size is the camera original (4032x3024, ~3.8 MB) - too heavy for a phone card."
     }
   }
 }

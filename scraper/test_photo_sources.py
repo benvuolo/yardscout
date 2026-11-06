@@ -43,13 +43,22 @@ def rebuild(code, which="card"):
 # --- the file ---------------------------------------------------------------
 check("photo_sources.json loads", isinstance(SRC, dict) and SRC)
 check("enabled set is exactly the passing chains",
-      set(PUB) == {"pyp", "pnp", "wap", "weller", "ezpullit", "kikers"}, sorted(PUB))
+      set(PUB) == {"pyp", "pnp", "wap", "weller", "ezpullit", "kikers",
+                   "papva", "upullitwa", "aesop", "midwayupull", "byot", "wilberts",
+                   "nvpap", "pns"}, sorted(PUB))
 check("army's is listed but OFF", "armys" in SRC and "armys" not in PUB)
+check("sturtevant is listed but OFF (3.8 MB originals)", "sturtevant" in SRC and "sturtevant" not in PUB)
 check("every published source has a label and patterns",
       all(s["label"].startswith("Photo: ") and s["patterns"] for s in PUB.values()))
 check("every published URL is https on the source's host",
       all(p[w].startswith("https://" + s["host"] + "/") or p[w] == "{1}"
           for s in PUB.values() for p in s["patterns"] for w in ("card", "large")))
+check("onCards published as a bool on every source", all(isinstance(s.get("onCards"), bool) for s in PUB.values()))
+check("heavy sources are off list cards",
+      {k for k, s in PUB.items() if not s["onCards"]} == {"byot", "papva", "upullitwa", "aesop", "midwayupull", "kikers"},
+      sorted(k for k, s in PUB.items() if not s["onCards"]))
+check("onCards defaults to true", js.published_photo_sources({"x": {"enabled": True, "label": "Photo: X", "host": "h",
+      "patterns": [{"code": "^x$", "card": "https://h/a", "large": "https://h/a"}]}})["x"]["onCards"] is True)
 check("LKQ card is not cropped (mode=max, not mode=crop)",
       "mode=max" in PUB["pyp"]["patterns"][0]["card"] and "mode=crop" not in PUB["pyp"]["patterns"][0]["card"])
 
@@ -62,6 +71,14 @@ CASES = {
     "https://ik.imagekit.io/rm8xun1iy5t/ZFBHRFBB4M6T24102/291966_01.jpg": ("weller", "https://ik.imagekit.io/rm8xun1iy5t/ZFBHRFBB4M6T24102/291966_01.jpg"),
     "https://cdn.shopify.com/s/files/1/0731/9250/5650/files/users_2FzTcvQAepjoYI1lHMoZFeD8THq9O2_2Fuploads_2F1793723763603000.jpg?v=1793893783": ("ezpullit", None),
     "https://www.kikersupullit.com/inventory-feed/photos/27347fde-eebf-4320-be22-7bffe11ea702_8fffc11b3f82528a.jpg": ("kikers", None),
+    "utt87/PAP175750/PAP175750-1-HDDN5D_1": ("papva", "https://da8h1v3w8q6n5.cloudfront.net/tt87/images/PAP175750/PAP175750-1-HDDN5D_1.jpg"),
+    "ujj65/2L2756/2L2756_1": ("upullitwa", "https://da8h1v3w8q6n5.cloudfront.net/jj65/images/2L2756/2L2756_1.jpg"),
+    "uoo95/STK031489/STK031489-1-BOAAD1_1": ("aesop", "https://da8h1v3w8q6n5.cloudfront.net/oo95/images/STK031489/STK031489-1-BOAAD1_1.jpg"),
+    "umo06/2604445/2604445_0": ("midwayupull", "https://da8h1v3w8q6n5.cloudfront.net/mo06/images/2604445/2604445_0.jpg"),
+    "b8e86-e286-5094-248f": ("byot", "https://storage.googleapis.com/byotautoparts.appspot.com/yard_inventory/8e86-e286-5094-248f"),
+    "l1G1JC6SH6C4172184/179380681910558733016406597819920261104_104113": ("wilberts", "https://buyingtoolrg.blob.core.windows.net/vehicleimagesresized/1G1JC6SH6C4172184/179380681910558733016406597819920261104_104113.jpg"),
+    "vH065291_left": ("nvpap", "https://www.nvpap.com/photos/preview_photos/H065291_left.JPG"),
+    "sSTK134723-1": ("pns", "https://app.pullnsaveapp.com/v1/Vehicles/Images/StockId/STK134723-1/OrderId/1"),
 }
 for code, (want_key, want_url) in CASES.items():
     key, url = rebuild(code)
@@ -79,6 +96,9 @@ REJECT = [
     "https://evil.example/p.jpg", "p", "pabc", "N054E0D16D12847DAA3F888E2EE3B8C39",
     "https://www.kikersupullit.com.evil.example/inventory-feed/photos/a.jpg",
     "javascript:alert(1)",
+    "tSTK049735",            # Sturtevant: off
+    "uzz99/A1/A1_1",         # URG folder no enabled source owns
+    "sSTK134723",            # Pull-N-Save without the -n suffix
 ]
 for code in REJECT:
     check(f"rejected: {code[:50]}", js.photo_source_for(code, SRC) is None)

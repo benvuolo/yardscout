@@ -138,7 +138,9 @@ def published_photo_sources(sources: dict) -> dict:
                 for p in src.get("patterns") or []
                 if isinstance(p, dict) and all(isinstance(p.get(k), str) for k in ("code", "card", "large"))]
         if pats and isinstance(src.get("label"), str):
-            out[key] = {"label": src["label"], "host": src.get("host", ""), "patterns": pats}
+            # onCards: false = too heavy for list cards (car screen + viewer only).
+            out[key] = {"label": src["label"], "host": src.get("host", ""),
+                        "onCards": src.get("onCards") is not False, "patterns": pats}
     return out
 
 
@@ -17758,6 +17760,113 @@ _PNS_ROW_RE = re.compile(r"<tr[^>]*>\s*((?:<td[^>]*>.*?</td>\s*)+)</tr>", re.S)
 _PNS_DATE_RE = re.compile(r"data-value='(\d{4}-\d{2}-\d{2})'")
 
 
+# Pull-N-Save photos (2026-11-06). Every result row links
+# https://app.pullnsaveapp.com/v1/Vehicles/Images/StockId/{STOCK}-{n}/OrderId/1
+# whether or not the car was photographed; without a photo that URL serves a
+# 3,474-byte "no image" PNG. So each car's URL is checked ONCE, headers only
+# (HEAD is 405 and Range is ignored, so: a streamed GET closed after the
+# headers; only a small body is read, to hash it). Results persist in the
+# history DB (pns_photo_checks); only 'photo' cars get an "s{STOCK}-{n}" code.
+# Politeness: pullnsave.com's robots.txt asks Crawl-delay 10 (the image host
+# has none) — honored on the image host too; at most PNS_PHOTO_CHECK_MAX
+# checks per scan, newest set-outs first; honest YardScout UA; stops after 5
+# consecutive errors. 'none' results are re-checked once after 3 days (a photo
+# can be added after set-out).
+PNS_PHOTO_URL = "https://app.pullnsaveapp.com/v1/Vehicles/Images/StockId/{key}/OrderId/1"
+PNS_PHOTO_DELAY_SEC = 10.0
+PNS_PHOTO_CHECK_MAX = int(os.environ.get("PNS_PHOTO_CHECK_MAX", "150"))
+PNS_PHOTO_RECHECK_DAYS = 3
+PNS_PLACEHOLDER_SHA256 = "77e3d56a6763faae23e1bd6d425aabc086cba7221556e28c131ed277ed3d7e4b"
+PNS_PLACEHOLDER_MAX_BYTES = 8192   # bodies this small are read and hashed
+_PNS_PHOTO_KEY_RE = re.compile(
+    r"src='https://app\.pullnsaveapp\.com/v1/Vehicles/Images/StockId/(STK\d{3,9}-\d{1,3})/OrderId/1'")
+
+
+def _pns_photo_key(img_cell: str, stock: str) -> str:
+    m = _PNS_PHOTO_KEY_RE.search(img_cell or "")
+    return m.group(1) if m and m.group(1).split("-")[0] == stock.strip() else ""
+
+
+def _pns_classify_photo(resp) -> str | None:
+    """'photo' | 'none' from a streamed response, or None (unknown: retry)."""
+    if resp.status_code != 200:
+        return None
+    ctype = (resp.headers.get("content-type") or "").lower()
+    try:
+        length = int(resp.headers.get("content-length") or "")
+    except ValueError:
+        return None
+    if not ctype.startswith("image/"):
+        return None
+    if length > PNS_PLACEHOLDER_MAX_BYTES:
+        return "photo"
+    body = resp.raw.read(PNS_PLACEHOLDER_MAX_BYTES + 1, decode_content=True)
+    if hashlib.sha256(body).hexdigest() != PNS_PLACEHOLDER_SHA256:
+        # Small but not the known placeholder: fail closed (no photo) and say so.
+        print(f"  [Pull-N-Save photos] unknown small image ({len(body)} B) treated as none",
+              file=sys.stderr)
+    return "none"
+
+
+def _pns_check_photo(session, key: str) -> str | None:
+    try:
+        with session.get(PNS_PHOTO_URL.format(key=key), headers=YARDSCOUT_HEADERS,
+                         stream=True, timeout=20) as r:
+            return _pns_classify_photo(r)
+    except Exception:  # noqa: BLE001
+        return None
+
+
+def _pns_apply_photo_checks(vehicles: list, *, check=None, now=None, sleep=time.sleep) -> dict:
+    """Set _photo = "s{key}" on cars whose URL was checked as a real photo;
+    check up to PNS_PHOTO_CHECK_MAX unchecked keys (newest first). Returns
+    counts for the log/tests."""
+    try:
+        import db as _db
+    except ImportError:
+        from scraper import db as _db  # pragma: no cover
+    now = now or datetime.now(timezone.utc)
+    known = _db.load_pns_photo_checks()
+    recheck_before = (now - timedelta(days=PNS_PHOTO_RECHECK_DAYS)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    keyed = [v for v in vehicles if v.get("_pns_photo_key")]
+    keyed.sort(key=lambda v: v.get("dateAdded") or "", reverse=True)
+    todo = [v["_pns_photo_key"] for v in keyed if v["_pns_photo_key"] not in known]
+    todo += [v["_pns_photo_key"] for v in keyed
+             if known.get(v["_pns_photo_key"], ("", ""))[0] == "none"
+             and known[v["_pns_photo_key"]][1] < recheck_before]
+    todo = list(dict.fromkeys(todo))[:max(PNS_PHOTO_CHECK_MAX, 0)]
+    results: dict = {}
+    errors = 0
+    if todo:
+        session = requests.Session()
+        check = check or (lambda k: _pns_check_photo(session, k))
+        for i, key in enumerate(todo):
+            if i:
+                sleep(PNS_PHOTO_DELAY_SEC)
+            st = check(key)
+            if st is None:
+                errors += 1
+                if errors >= 5:
+                    print("  [Pull-N-Save photos] 5 consecutive errors — stopping for this scan",
+                          file=sys.stderr)
+                    break
+                continue
+            errors = 0
+            results[key] = st
+        _db.store_pns_photo_checks(results, now.strftime("%Y-%m-%dT%H:%M:%SZ"))
+        known = _db.load_pns_photo_checks()
+    n_photo = 0
+    for v in keyed:
+        if known.get(v["_pns_photo_key"], ("", ""))[0] == "photo":
+            v["_photo"] = "s" + v["_pns_photo_key"]
+            n_photo += 1
+    pending = sum(1 for v in keyed if v["_pns_photo_key"] not in known)
+    print(f"  [Pull-N-Save photos] checked {len(results)} this scan "
+          f"({sum(1 for s in results.values() if s == 'photo')} photo); "
+          f"{n_photo} cars with photos, {pending} still unchecked", file=sys.stderr)
+    return {"checked": len(results), "photo": n_photo, "pending": pending}
+
+
 def fetch_pns_inventory() -> list[dict]:
     """Fetch Pull-N-Save's 8-yard inventory (one getVehicles POST per make,
     10s apart per their robots.txt crawl-delay — ~8 min per scan)."""
@@ -17836,6 +17945,7 @@ def fetch_pns_inventory() -> list[dict]:
                 "row": row_n,
                 "dateAdded": date_iso,
                 "_color": color,
+                "_pns_photo_key": _pns_photo_key(raw_cells[0], stock),
                 "_location": store["name"],
                 "_city": store["city"],
                 "_state": store["state"],
@@ -17848,6 +17958,12 @@ def fetch_pns_inventory() -> list[dict]:
               f"{sorted(unknown_stores)} — update PNS_STORES/registry", file=sys.stderr)
     seen: set[str] = set()
     unique = [v for v in all_vehicles if not (v["id"] in seen or seen.add(v["id"]))]
+    try:
+        _pns_apply_photo_checks(unique)
+    except Exception as e:  # noqa: BLE001 — photos are optional, never fatal
+        print(f"  [Pull-N-Save photos] skipped: {e}", file=sys.stderr)
+    for v in unique:
+        v.pop("_pns_photo_key", None)
     print(f"  [Pull-N-Save] {len(unique)} vehicles across "
           f"{len({v['_location'] for v in unique})} yards", file=sys.stderr)
     return unique
@@ -18306,6 +18422,14 @@ _STURTEVANT_OPTION_RE = re.compile(r'<option value="([^"]+)"')
 _STURTEVANT_ROW_RE = re.compile(r"<tr[^>]*>\s*((?:<td[^>]*>.*?</td>\s*)+)</tr>", re.S)
 
 
+# Sturtevant photos (2026-11-06): the result row's own thumbnail,
+# <img src="../InventoryPhotos/{STOCK}.JPG"> on inventory.sturtevantauto.com
+# (the yard's own app). Code "t{STOCK}"; a row without that exact image gets none.
+def _sturtevant_photo_code(block: str, stock: str) -> str:
+    m = re.search(r'<img src="\.\./InventoryPhotos/(STK\d{3,9})\.JPG"', block)
+    return "t" + m.group(1) if m and m.group(1) == stock.strip() else ""
+
+
 def fetch_sturtevant_inventory() -> list[dict]:
     """Fetch Sturtevant Auto's inventory (one tokenless POST per make)."""
     import html as html_mod
@@ -18361,6 +18485,7 @@ def fetch_sturtevant_inventory() -> list[dict]:
                 "row": row_n,
                 "dateAdded": date_iso,
                 "_color": color.title(),
+                "_photo": _sturtevant_photo_code(block, stock),
                 "_location": STURTEVANT_YARD["name"],
                 "_city": STURTEVANT_YARD["city"],
                 "_state": STURTEVANT_YARD["state"],
@@ -19016,6 +19141,16 @@ _NVPAP_FIELD_RES = {
 }
 
 
+# Nevada Pic-A-Part photos (2026-11-06): the result item's first preview
+# image on the yard's own site, www.nvpap.com/photos/preview_photos/
+# {STOCK}_{view}.JPG (200x150, ~6 KB). Code "v{STOCK}_{view}"; only the URL the
+# page itself gives is used (no guessed larger sizes).
+def _nvpap_photo_code(block: str, stock: str) -> str:
+    m = re.search(r'<img src="https://www\.nvpap\.com/photos/preview_photos/'
+                  r'([A-Za-z0-9]{1,20})_([a-z]{1,20})\.JPG"', block)
+    return f"v{m.group(1)}_{m.group(2)}" if m and m.group(1) == stock.strip() else ""
+
+
 def fetch_nvpap_inventory() -> list[dict]:
     """Fetch Nevada Pic-A-Part's 2-yard inventory (one REST POST per make)."""
     import html as html_mod
@@ -19082,6 +19217,7 @@ def fetch_nvpap_inventory() -> list[dict]:
                 "row": re.sub(r"(?i)^row\s+", "", f["row"]),
                 "dateAdded": date_iso,
                 "_color": f["color"].title(),
+                "_photo": _nvpap_photo_code(block, f["stock"]),
                 "_location": store["name"],
                 "_city": store["city"],
                 "_state": store["state"],
@@ -19291,6 +19427,24 @@ _IIS_UPULL_CARD_RE = re.compile(
     r'<b>Location: </b>\s*([^<]*)<br/>\s*<b>Row: </b>\s*([^<]*)<br/>'
     r'(<b>Set Date: </b>\s*([^<]*)<br/>)?', re.S)
 _IIS_UPULL_PAGENUM_RE = re.compile(r"pagenum=(\d+)")
+# Card photo (2026-11-06): the plugin's own main image, on URG's CloudFront
+# (URG hosts the plugin and its photos for the yard): <div class="card-img"
+# data-vstock-no="STOCK"><a href="https://da8h1v3w8q6n5.cloudfront.net/{urg}/
+# images/{STOCK}/{file}.jpg">. Cards without a photo link the yard's logo
+# placeholder instead and get no code. Code: "u{urg}/{STOCK}/{file}".
+_IIS_UPULL_PHOTO_RE = re.compile(
+    r'data-vstock-no="([A-Za-z0-9]{1,20})">\s*<a href="https://da8h1v3w8q6n5\.cloudfront\.net/'
+    r'([a-z]{2}\d{2})/images/([A-Za-z0-9]{1,20})/([A-Za-z0-9_-]{1,60})\.jpg"')
+
+
+def _iis_upull_photo_codes(page: str) -> dict:
+    """{stock: "u{urg}/{stock}/{file}"} for cards whose photo is the
+    yard's own (the stock in the image path must be the card's stock)."""
+    out = {}
+    for stock, urg, path_stock, fname in _IIS_UPULL_PHOTO_RE.findall(page):
+        if stock == path_stock:
+            out[stock] = f"u{urg}/{stock}/{fname}"
+    return out
 _PAPVA_TWO_WORD_MAKES = ("LAND ROVER", "ALFA ROMEO", "ASTON MARTIN")
 # Back-compat names (update_papva_snapshot.sh and old notes refer to these).
 PAPVA_DELAY_SEC = IIS_UPULL_SITES["papva"]["delay"]
@@ -19363,6 +19517,7 @@ def fetch_iis_upull_site(source: str) -> list[dict]:
             if page is None:
                 break
             cards = _IIS_UPULL_CARD_RE.findall(page)
+            page_photos = _iis_upull_photo_codes(page)
             if site.get("require_set_date"):
                 cards = [c for c in cards if c[6]]  # field present (value may be blank)
             if not cards:
@@ -19413,6 +19568,7 @@ def fetch_iis_upull_site(source: str) -> list[dict]:
                     "model": _utpap_format_label(model_s),
                     "row": row_s.strip(),
                     "dateAdded": date_s.strip(),
+                    "_photo": page_photos.get(stock, ""),
                     "_location": yard["name"],
                     "_city": yard["city"],
                     "_state": yard["state"],
@@ -22476,6 +22632,21 @@ def _strip_hollander_make_prefix(make_s: str, model_s: str) -> str:
     return model_s
 
 
+# BYOT photos (2026-11-06): the API's own `images` list points at BYOT's
+# Firebase bucket (storage.googleapis.com/byotautoparts.appspot.com). The
+# first image becomes "b{xxxx-xxxx-xxxx-xxxx}"; anything else gets no code.
+_BYOT_IMG_RE = re.compile(
+    r"^https://storage\.googleapis\.com/byotautoparts\.appspot\.com/yard_inventory/"
+    r"([0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4})$")
+
+
+def _byot_photo_code(v: dict) -> str:
+    imgs = v.get("images")
+    first = imgs[0] if isinstance(imgs, list) and imgs and isinstance(imgs[0], str) else ""
+    m = _BYOT_IMG_RE.match(first.strip())
+    return "b" + m.group(1) if m else ""
+
+
 def fetch_byot_inventory() -> list[dict]:
     """BYOT Auto Parts (Waco, Bryan/College Station, Beaumont TX): one
     recent-arrivals call per yard returns the yard's whole lot."""
@@ -22535,6 +22706,7 @@ def fetch_byot_inventory() -> list[dict]:
                 "row": str(row).strip() if row not in (None, "") else "",
                 "dateAdded": _sanitize_date_added(str(v.get("YardLocationDt") or "")[:10]),
                 **({"_color": color.title()} if color else {}),
+                "_photo": _byot_photo_code(v),
                 "_location": yard["name"],
                 "_city": yard["city"],
                 "_state": yard["state"],
@@ -22649,6 +22821,19 @@ WILBERTS_PRICES_URL = ("https://www.wilberts.com/u-pull-it/wp-admin/admin-ajax.p
                        "?action=price_list_get_prices")
 WILBERTS_DELAY_SEC = 10.0  # robots.txt Crawl-delay: 10 — do not lower
 WILBERTS_CACHE_PATH = DATA_DIR / "wilberts_cache.json"
+# Wilbert's photos (2026-11-06): the parts-search API's own ImageURLs point at
+# Wilbert's Azure blob store (buyingtoolrg, container vehicleimagesresized,
+# ~652x489 JPEG ~60 KB). First URL -> "l{VIN}/{file}"; anything else no code.
+_WILBERTS_IMG_RE = re.compile(
+    r"^https://buyingtoolrg\.blob\.core\.windows\.net/vehicleimagesresized/"
+    r"([A-HJ-NPR-Z0-9]{17})/([0-9_]{8,80})\.jpg$")
+
+
+def _wilberts_photo_code(v: dict) -> str:
+    urls = v.get("ImageURLs")
+    first = urls[0] if isinstance(urls, list) and urls and isinstance(urls[0], str) else ""
+    m = _WILBERTS_IMG_RE.match(first.strip())
+    return f"l{m.group(1)}/{m.group(2)}" if m else ""
 WILBERTS_PAIR_BUDGET = 240  # pair searches per scan (40 min at crawl-delay pacing)
 WILBERTS_STALE_DAYS = 14    # drop a cached car its pair sweep hasn't confirmed in this long
 WILBERTS_YARDS = {  # keyed by the feed's lower-case Location value
@@ -22733,6 +22918,8 @@ def fetch_wilberts_inventory() -> list[dict]:
                 "row": str(row).strip() if row not in (None, "") else "",
                 "loc": str(v.get("Location") or "").strip().lower(),
                 "date": date_s, "seen": today_s,
+                **({"photo": ph} if (ph := _wilberts_photo_code(v)
+                                     or (cached.get(stock) or {}).get("photo")) else {}),
             }
             got.add(stock)
         return got
@@ -22813,6 +23000,7 @@ def fetch_wilberts_inventory() -> list[dict]:
             "model": _utpap_format_label(_strip_hollander_make_prefix(c["make"], c["model"])),
             "row": c.get("row") or "",
             "dateAdded": _sanitize_date_added(c.get("date") or ""),
+            "_photo": c.get("photo") or "",
             "_location": yard["name"],
             "_city": yard["city"],
             "_state": yard["state"],

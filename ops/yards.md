@@ -1,4 +1,4 @@
-# Yards workstream — status (updated 2026-11-06, vehicle photos)
+# Yards workstream — status (updated 2026-11-06, vehicle photos round 3)
 
 Owns: independent-yard adapters in `scraper/junkyard_scraper.py`
 (`INDEPENDENT_FETCHERS`), `scraper/independent_yards_registry.json`,
@@ -209,6 +209,95 @@ Sweep follow-ups (mine):
     Albuquerque 5.6 km.
   - The app shows the new pins after the next scan.
 
+## 2026-11-06 vehicle photos, round 3 (more coverage)
+
+Owner, via the hub: "can we get better photo coverage?" The rules are
+unchanged.
+
+**Published before this round** (scan 20:33Z): 125,672 of 334,524 cars.
+**After round 3, expected** (each source fills on the next scans):
+~155,400 cars (~46%). New sources:
+
+- **Pull-N-Save, ~9,000 cars:** fills over ~10 days at 150 checks per scan.
+- **Pick-A-Part VA, ~5,000 cars:** ~67% of cards.
+- **BYOT, ~5,275 cars.**
+- **Wilbert's, ~4,400 cars.** Grows as cached cars are re-read.
+- **Nevada Pic-A-Part, ~2,555 cars.**
+- **U-Pull-It WA, ~1,800 cars.**
+- **AESOP, ~930 cars.**
+- **Midway, ~760 cars.**
+
+Commit 3b1e2379. All 22 `scraper/test_*.py` pass, including the new
+`test_photo_capture.py`.
+
+`vehicle_extras.json`, simulated on today's file: 16.80 MB grows by about
+0.6 MB (+~4%). `docs/data/wilberts_cache.json` gains a `photo` field per car
+(~+0.3 MB).
+
+### New sources (checks done for each one)
+
+Every source passes the same checks: a plain GET with and without a
+yardscout.io Referer returns 200. A real Chromium page on a yardscout.io
+origin renders it (`naturalWidth` > 0). The URL comes from the data the scan
+already fetches. WebKit was not tested.
+
+| Source (key) | Host | Image | Notes |
+|---|---|---|---|
+| Pull-N-Save (`pns`) | app.pullnsaveapp.com (own) | 200×200 PNG ~100 KB | See the next subsection |
+| Pick-A-Part VA, U-Pull-It WA, AESOP, Midway (`papva`, `upullitwa`, `aesop`, `midwayupull`) | da8h1v3w8q6n5.cloudfront.net | 800×600 JPEG ~400 KB, the only size | URG (United Recyclers Group) hosts the yard's inventory plugin and its photos. One source per URG image folder (tt87/uu81, jj65, oo95, mo06) so each gets its own credit. A folder no source owns is dropped (fails closed). Cards showing the yard's logo placeholder get no code |
+| BYOT (`byot`) | storage.googleapis.com/byotautoparts.appspot.com | 540×720 JPEG ~450–570 KB, the only size | 1,225/1,225 in the recent-arrivals sample |
+| Wilbert's (`wilberts`) | buyingtoolrg.blob.core.windows.net | 652×489 JPEG ~60 KB | Served as `application/octet-stream` without `nosniff`; Chromium renders it. 315/316 in sample |
+| Nevada Pic-A-Part (`nvpap`) | www.nvpap.com (own) | 200×150 JPEG ~6 KB | Only the preview URL the page gives. A bigger `/photos/` file exists, but nothing in the data names it, so it isn't used |
+| Sturtevant (`sturtevant`) | inventory.sturtevantauto.com (own) | **4032×3024 ~3.8 MB** | Captured but **OFF**: too heavy for a phone card |
+
+**Data cost:** BYOT and the four URG yards serve only ~400–570 KB files,
+heavy for a list on cellular. If design wants, these could show on the car
+screen only. Each source is separate, so that is a per-source display
+choice.
+
+### Pull-N-Save placeholder (solved, fails closed)
+
+- **The problem:** every row links
+  `…/StockId/{STK}-{n}/OrderId/1`, and a car without a photo gets the same
+  3,474 B "no image" PNG.
+- **Why not HEAD or Range:** HEAD returns 405 and Range is ignored.
+- **The check:** a streamed GET, closed after the headers.
+  - Over 8 KB and `image/*` → `photo`.
+  - ≤ 8 KB → read and SHA-256'd. The known placeholder → `none`, and so is
+    any other small image (logged).
+  - Anything else → unknown, retried on the next scan.
+- **Storage:** results go in the history DB (`pns_photo_checks`, which
+  persists through the Actions cache). A `photo` result is never downgraded.
+  `none` is re-checked once after 3 days.
+- **Politeness:** 10 s between requests (`pullnsave.com` robots.txt asks
+  Crawl-delay 10; the image host has no robots.txt). At most
+  `PNS_PHOTO_CHECK_MAX` = 150 checks per scan, newest set-outs first, which
+  adds ~25 min to the Pull-N-Save thread. Honest YardScout UA. Stops after
+  5 consecutive errors.
+- **Sample:** 15/15 random cars had a real photo, so coverage should
+  approach 100% once the backlog clears (~9,000 / 150 per scan ≈ 60 scans ≈
+  10 days).
+- **If the cache is lost:** checks simply start over at the same pace.
+
+### Biggest chains still without photos, and why
+
+| Chain | Lot cars | Why no photo |
+|---|---|---|
+| Pull-A-Part | 42,527 | Source has none (`Vehicle/Search` has no image field) |
+| EZ Pull N Pay, Foss, Paul's, UAPI, RG, Auto Parts U Pull, Youngstown, Ryan's and the other Ario tenants (~35k) | | Ario search has no per-car photo (only a "coming soon" placeholder and logos) |
+| Go Pull-It, San Antonio PnP, Chesterfield, Pickers, 195, Bessler's, Joliet, US Auto Supply, Prestige, Pick Ur Part, RTP, Pipes (VinPlus, ~22k) | | YardSmart signed blob URLs that expire (~12 h). Off, as with Army's |
+| Pick-A-Part Jalopy Jungle | 6,466 | Source has none (results table has no image) |
+| Fenix U-Pull | 5,758 | Source has the theme placeholder only |
+| U-Pull-It Auto Parts TN, Buddy's, Marion County, 662, Polk County, Trusty, M&M, CP's (CRUSH table sites) | | Source has none (no image column) |
+| iPull-uPull (+ Canada CSV) | 5,277 | None found in the data |
+| Harry's | 4,298 | Not probed (Sucuri; the existing solver is left as is, no new probing) |
+| U-Pull-It IA/NE, U-Pick-It AZ, Robertson's, Genesis (yardconnect) | | YardSmart representation URLs with an expiry. Off |
+| Rupert's (819), Chuck & Eddie's (868) | | yardconnect, but **mostly non-expiring** YardSmart URLs (`exp: null`). Candidate for a later round: needs per-URL exp filtering in the yardconnect parser |
+| Ace Pick-A-Part | 2,572 | Not probed (Cloudflare blocks CI) |
+| Budget, Cagle's, Indy, Bevell's, OKC, U-Pull and Save, Parts Galore, C&C, Barry's, Hwy 82, Sunshine, Tear-A-Part, Utah PAP | | None in the data we fetch |
+| Sturtevant | 711 | Captured, OFF (3.8 MB originals) |
+| St. Cloud | — | Undetermined (sampled pages had no rows) |
+
 ## 2026-11-06 vehicle photos: coverage, capture, native fit
 
 **Status: done.** Study, capture, remote kill switch and design hand-off.
@@ -386,4 +475,4 @@ jh-v150+. The first message is kept below for the record.
 3. After each monthly sweep: review tiers A–B in `coverage_sweep.md`, verify
    each has self-service inventory online before adding.
 4. Chains frozen for 6+ scans show in the daily email as `chain-frozen:<chain>`.
-5. Photos: after the next scan, confirm `photoSources` in `inv/manifest.json` and real PnP/WAP code counts; compare PnP/WAP URLs across scans. Sample the Ario, CRUSH and remaining chains, and re-check WAP URL stability after a few scans.
+5. Photos: Rupert's and Chuck & Eddie's non-expiring YardSmart URLs (yardconnect parser, per-URL exp check). Watch the Pull-N-Save backlog in the scan log ("[Pull-N-Save photos] … still unchecked"). After the next scan, confirm `photoSources` in `inv/manifest.json` and real PnP/WAP code counts; compare PnP/WAP URLs across scans. Sample the Ario, CRUSH and remaining chains, and re-check WAP URL stability after a few scans.
