@@ -1,4 +1,4 @@
-# eBay pricing workstream — status (updated 2026-11-04)
+# eBay pricing workstream — status (updated 2026-11-06)
 
 Owns: `scraper/ebay_prices.py`, `.github/workflows/ebay-prices.yml`
 (Mondays), `docs/data/ebay_prices.json`, `_ebay_band` in the scraper,
@@ -18,6 +18,8 @@ Owns: `scraper/ebay_prices.py`, `.github/workflows/ebay-prices.yml`
 - No eBay page scraping, ever (robots disallows /sch/).
 
 ## Blocked on
+
+- **2026-11-06: eBay rejected the developer account** (username benvuolo; registration rejected, appeal answered "unable to approve activation at this time ... you may consider reapplying at a later time", no reason given). No keyset exists. `ebay-prices.yml` stays dormant; bands stay curated; the app's "sold prices" link to eBay's own search is unaffected. Do not open a second account. Reapply later as YardScout LLC (business registration, hello@yardscout.io, details matching the eBay account and W-9) once the app has more history.
 
 - Repo secrets `EBAY_CLIENT_ID` and `EBAY_CLIENT_SECRET` (owner creates a
   keyset at developer.ebay.com). Until then `ebay-prices.yml` exits early
