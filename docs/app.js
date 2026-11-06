@@ -862,25 +862,77 @@ const DATA_CACHE = 'jh-data-v1';
  * ("r..." — Row52-hosted, Row52-watermarked, a competitor's assets) are never
  * rendered even if present in older data. */
 const PHOTO_SOURCES = {
-  // LKQ hosts these on its own CDN (cdn.pypapps.com) with LKQ's PYP watermark.
-  // 2026-09 owner decision (legal caution): ALL chain-sourced photos are OFF —
-  // LKQ's watermark prompted a blanket no-chain-photos call. URL capture and
-  // this rendering plumbing stay intact so we can revisit (e.g. user-submitted
-  // photos); flipping `enabled` back on is the only change needed.
+  // 2026-11-06 owner decision (ops/hub.md): chain-hosted photos back on, each
+  // chain with its own kill switch. A source renders only when BOTH its flag
+  // here AND the published data's photoSources[key] are true, so turning a
+  // chain off is a data publish, not an app release (fail closed: no published
+  // flag = no photo). Never Pick-n-Pull/Row52 ("r" codes), never
+  // api.yardsmartapp.com (signed URLs expire). Hotlinked from the chain's own
+  // host only: we never download, rehost, proxy or cache them (the service
+  // worker ignores cross-origin requests).
   pyp: {
-    enabled: false,
+    enabled: true,
     label: 'Photo: LKQ Pick Your Part',
     url: id => 'https://cdn.pypapps.com/carbuy/CAR-FRONT-LEFT_' + id
       + '_front_left_corner.jpg?quality=70&w=640&h=427&mode=crop&format=webp',
   },
+  wap: { enabled: true, label: 'Photo: Wrench-A-Part' },
+  kikers: { enabled: true, label: 'Photo: Kiker’s U-Pull-It', host: 'www.kikersupullit.com', path: '/' },
+  weller: { enabled: true, label: 'Photo: Weller Self Serve', host: 'ik.imagekit.io', path: '/rm8xun1iy5t/' },
+  pasco: { enabled: true, label: 'Photo: Pasco EZ Pull It', host: 'cdn.shopify.com', path: '/s/files/1/0731/9250/5650/' },
 };
+let publishedPhotoSources = null;   // photoSources from the inv manifest / extras file
+function setPublishedPhotoSources(ps) {
+  if (ps && typeof ps === 'object') publishedPhotoSources = ps;
+}
+const photoOn = (key) => !!(PHOTO_SOURCES[key] && PHOTO_SOURCES[key].enabled
+  && publishedPhotoSources && publishedPhotoSources[key] === true);
 let vehicleExtras = null;
 
+/* Photo for a car's extras code, or null. {url (card), large (viewer),
+ * label (credit), w, h (intrinsic size hint)}. */
 function photoInfo(code) {
-  if (!code || code[0] !== 'p') return null; // 'r' (Row52) codes: excluded by policy
-  const src = PHOTO_SOURCES.pyp;
-  if (!src || !src.enabled) return null;
-  return { url: src.url(code.slice(1)), label: src.label };
+  if (!code || typeof code !== 'string') return null;
+  if (code[0] === 'p' && /^p[\w-]+$/.test(code)) {
+    if (!photoOn('pyp')) return null;
+    const u = PHOTO_SOURCES.pyp.url(code.slice(1));
+    return { url: u, large: u, label: PHOTO_SOURCES.pyp.label, w: 640, h: 427, key: 'pyp' };
+  }
+  if (code[0] === 'w' && /\.(j|p)$/.test(code)) {
+    if (!photoOn('wap')) return null;
+    const parts = code.slice(1, -2).split('/');
+    if (parts.length !== 3 || parts.some(x => !/^[\w-]+$/.test(x))) return null;
+    const [y, vin, ms] = parts.map(encodeURIComponent);
+    const b = 'https://storage.googleapis.com/wrench-car-photos/v1%2F' + y + '%2F' + vin + '%2F' + ms;
+    return code.endsWith('.j')
+      ? { url: b + '-front_driver-thumb.jpg', large: b + '-front_driver.jpg', label: PHOTO_SOURCES.wap.label, w: 240, h: 320, key: 'wap' }
+      : { url: b + '.png', large: b + '.png', label: PHOTO_SOURCES.wap.label, w: 320, h: 240, key: 'wap' };
+  }
+  if (code.startsWith('https://')) {
+    let u;
+    try { u = new URL(code); } catch (e) { return null; }
+    for (const key of ['kikers', 'weller', 'pasco']) {
+      const src = PHOTO_SOURCES[key];
+      if (u.protocol === 'https:' && u.hostname === src.host && u.pathname.startsWith(src.path)) {
+        if (!photoOn(key)) return null;
+        const size = key === 'weller' ? [960, 1280] : key === 'kikers' ? [1600, 1200] : [400, 300];
+        return { url: u.href, large: u.href, label: src.label, w: size[0], h: size[1], key };
+      }
+    }
+    return null;   // any other host: never rendered
+  }
+  return null;   // 'r' (Row52) and unknown codes: excluded by policy
+}
+/* The photo box: fixed 4:3, the whole image shown (contain: never cropped,
+ * so a chain's watermark is never cut off), a plain placeholder under it, and
+ * a failed image simply hides. Tap opens the viewer. */
+function photoBoxHtml(info, key, title, cls) {
+  key = escapeHtml(key);
+  if (!info) return `<div class="photo-box photo-none ${cls || ''}" aria-hidden="true"><span>No photo from this yard</span></div>`;
+  return `<button type="button" class="photo-box ${cls || ''}" data-photo-vkey="${key}" aria-label="View photo of the ${escapeHtml(title)}">
+      <img src="${escapeHtml(info.url)}" alt="" loading="lazy" decoding="async" width="${info.w}" height="${info.h}" onerror="this.closest('.photo-box').classList.add('photo-failed')">
+      <span class="photo-credit">${escapeHtml(info.label)}</span>
+    </button>`;
 }
 function extrasFor(v) {
   return (vehicleExtras && vehicleExtras[String(v.id)]) || null;
@@ -935,6 +987,7 @@ function loadVehicleExtrasFile() {
       if (!d || !d.extras) return;
       // A shard session that took over meanwhile owns vehicleExtras.
       if (_inv && _inv.shown) return;
+      setPublishedPhotoSources(d.photoSources);
       vehicleExtras = d.extras;
       hydratePhotos();
     })
@@ -1110,18 +1163,19 @@ document.getElementById('sale-strip').addEventListener('click', e => {
 /* Insert photos into already-rendered cards (extras arrived after render). */
 function hydratePhotos() {
   document.querySelectorAll('#live-grid .car-card[data-eid]').forEach(card => {
-    if (card.querySelector('.car-photo-wrap')) return;
+    if (card.querySelector('.photo-box')) return;
     const ex = vehicleExtras && vehicleExtras[card.dataset.eid];
     const info = ex && ex[0] ? photoInfo(ex[0]) : null;
     if (!info) return;
-    const wrap = document.createElement('div');
-    wrap.className = 'car-photo-wrap';
-    wrap.innerHTML = '<img class="car-photo" loading="lazy" alt="" onerror="this.parentNode.remove()">'
-      + '<span class="photo-credit"></span>';
-    wrap.querySelector('img').src = info.url;
-    wrap.querySelector('.photo-credit').textContent = info.label;
-    card.prepend(wrap);
+    const title = (card.querySelector('.car-name') || {}).textContent || 'car';
+    card.insertAdjacentHTML('afterbegin', photoBoxHtml(info, card.dataset.vkey || '', title.trim(), 'card-photo'));
   });
+  // The car screen drew a placeholder before the extras arrived: redraw once.
+  if (carDetailKey && document.querySelector('#car-detail .photo-box.photo-none')) {
+    const v = liveInventory.find(x => vehicleKey(x) === carDetailKey);
+    const ex = v && extrasFor(v);
+    if (ex && ex[0] && photoInfo(ex[0])) renderCarDetail();
+  }
 }
 const INVENTORY_URL = DATA_BASE + 'data/inventory_live.json';
 const INVENTORY_META_URL = DATA_BASE + 'data/inventory_meta.json';
@@ -1600,6 +1654,7 @@ function _invApply(s) {
   liveComplete = complete;
   liveScrapedAt = m.scrapedAt;
   applyPricesReviewed(m.pricesLastReviewed);
+  setPublishedPhotoSources(m.photoSources);
   vehicleExtras = s.extras;
   s.applied = new Set(s.parsed.keys());
   if (complete) s.done = true;
@@ -3051,6 +3106,67 @@ document.getElementById('zip-chip').addEventListener('click', () => {
   if (z) z.focus({ preventScroll: true });
 });
 
+/* ===== PHOTO VIEWER =====
+ * The large form of a chain-hosted photo, shown whole (contain), with its
+ * credit, a link to the car on the yard's own site, and a removal request
+ * link for the photo's owner. Back / Escape close it. */
+function openPhotoViewer(key) {
+  const v = liveInventory.find(x => vehicleKey(x) === key);
+  const ex = v && extrasFor(v);
+  const info = ex && ex[0] ? photoInfo(ex[0]) : null;
+  if (!info) return;
+  const el = document.getElementById('photo-viewer');
+  const img = document.getElementById('photo-viewer-img');
+  img.removeAttribute('src');
+  el.classList.remove('pv-failed');
+  img.onerror = () => el.classList.add('pv-failed');
+  img.src = info.large;
+  img.alt = `${v.year} ${v.make} ${v.model}`;
+  const link = yardPageUrl(v);
+  const subject = encodeURIComponent('Photo removal request');
+  const body = encodeURIComponent(`Please remove this photo from YardScout.\n\nPhoto: ${info.large}\nCar: ${v.year} ${v.make} ${v.model}, ${v.location}${v.vin ? ', VIN ' + v.vin : ''}\n`);
+  document.getElementById('photo-viewer-foot').innerHTML = `
+    <p class="pv-credit">${escapeHtml(info.label)}</p>
+    <p class="pv-fail-note">This photo didn’t load from the yard’s site.</p>
+    <div class="pv-links">
+      ${link ? `<a class="locator-link" href="${escapeHtml(link.url)}" target="_blank" rel="noopener">View on ${escapeHtml(v.location)} ↗</a>` : ''}
+      <a class="pv-remove" href="mailto:yardscout.io@gmail.com?subject=${subject}&body=${body}">Photo owner? Request removal</a>
+    </div>`;
+  el.classList.add('open');
+  el.setAttribute('aria-hidden', 'false');
+  document.documentElement.classList.add('cd-lock');
+  try { history.pushState({ ysPhoto: key, ysCar: history.state && history.state.ysCar }, ''); } catch (e) { /* sandboxed */ }
+  document.getElementById('photo-viewer-close').focus({ preventScroll: true });
+  track('photo-viewer/' + info.key);
+}
+function hidePhotoViewer() {
+  const el = document.getElementById('photo-viewer');
+  if (!el.classList.contains('open')) return false;
+  el.classList.remove('open');
+  el.setAttribute('aria-hidden', 'true');
+  document.getElementById('photo-viewer-img').removeAttribute('src');
+  if (!document.querySelector('#car-detail.open')) document.documentElement.classList.remove('cd-lock');
+  return true;
+}
+function closePhotoViewer() {
+  if (history.state && history.state.ysPhoto) history.back();   // popstate hides it
+  else hidePhotoViewer();
+}
+window.addEventListener('popstate', () => {
+  if (!(history.state && history.state.ysPhoto)) hidePhotoViewer();
+});
+document.getElementById('photo-viewer-close').addEventListener('click', closePhotoViewer);
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && document.querySelector('#photo-viewer.open')) { e.stopImmediatePropagation(); closePhotoViewer(); }
+}, true);
+document.addEventListener('click', (e) => {
+  const b = e.target.closest('.photo-box[data-photo-vkey]');
+  if (!b || b.classList.contains('photo-failed')) return;
+  e.preventDefault();
+  e.stopPropagation();
+  openPhotoViewer(b.dataset.photoVkey);
+}, true);
+
 /* ===== CAR SCREEN (pull-sheet detail) =====
  * A pushed screen over the list: row plate + yard locator, stay meter,
  * the parts checklist ("if equipped" parts grouped apart, $0 to ranking),
@@ -3102,7 +3218,9 @@ function renderCarDetail() {
     </section>`;
   }
   const scan = liveScrapedAt ? `<span class="scan-stamp">scanned ${escapeHtml(scrapedShort())}</span>` : '';
+  const pinfo = ex && ex[0] ? photoInfo(ex[0]) : null;
   box.innerHTML = `
+    ${photoBoxHtml(pinfo, key, `${v.year} ${v.make} ${v.model}`, 'cd-photo')}
     <p class="eyebrow">${dateStr ? 'Set out ' + dateStr : 'Set-out date unknown'}${isNew(v.dateAdded) ? ' &middot; <span class="eyebrow-new">New</span>' : ''}</p>
     <h2 class="cd-name" id="car-detail-title">${escapeHtml(`${v.year} ${v.make} ${v.model}`)}</h2>
     ${specs.length ? `<p class="cd-spec">${specs.join(' &middot; ')}</p>` : ''}
@@ -4069,7 +4187,7 @@ function renderLive() {
     // car screen a tap away.
     return `
       <article class="car-card ${cardClass}" style="${cardStyle}" data-eid="${escapeHtml(String(v.id))}" data-vkey="${escapeHtml(key)}">
-        ${photo ? `<div class="car-photo-wrap"><img class="car-photo" loading="lazy" src="${photo.url}" alt="" onerror="this.parentNode.remove()"><span class="photo-credit">${escapeHtml(photo.label)}</span></div>` : ''}
+        ${photo ? photoBoxHtml(photo, key, `${v.year} ${v.make} ${v.model}`, 'card-photo') : ''}
         <div class="cc-head">
           ${rowPlateHtml(v.row)}
           <div class="cc-id">

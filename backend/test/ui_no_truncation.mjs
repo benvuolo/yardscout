@@ -100,7 +100,7 @@ const CHECK_FN = () => {
   const snippet = (t) => t.replace(/\s+/g, ' ').trim().slice(0, 60);
   const add = (kind, el, text, extra = '') => out.push({ kind, el: desc(el), ctx: ctxOf(el), text: snippet(text || el.textContent || ''), extra });
   // A full-screen page (the car screen) covers everything under it.
-  const cover = document.querySelector('#car-detail.open');
+  const cover = document.querySelector('#photo-viewer.open') || document.querySelector('#car-detail.open');
   const covered = (el) => cover && !cover.contains(el) && !el.closest('#upgrade-sheet, #saved-sheet, #prices-sheet, .watch-toast');
   const visible = (el) => !covered(el) && (el.checkVisibility ? el.checkVisibility({ opacityProperty: true, visibilityProperty: true }) : !!el.getClientRects().length);
   const fixedAnc = memo((el) => (!el || el === document.body) ? null : (CS(el).position === 'fixed' ? el : fixedAnc(el.parentElement)));
@@ -269,7 +269,7 @@ const ZOOM_FN = (on) => {
 const settle = (page, ms = 250) => page.waitForTimeout(ms);
 const resetUi = async (page) => {
   await page.evaluate(() => {
-    for (const f of ['closeUpgradeSheet', 'closeSavedSheet', 'closePricesSheet', 'closeCarDetail', 'closeYardSheet']) { try { window[f] && window[f](); } catch (e) { /* not open */ } }
+    for (const f of ['hidePhotoViewer', 'hideCarDetail', 'closeUpgradeSheet', 'closeSavedSheet', 'closePricesSheet', 'closeYardSheet']) { try { window[f] && window[f](); } catch (e) { /* not open */ } }
     window.scrollTo(0, 0);
   });
 };
@@ -337,6 +337,23 @@ const SCREENS = [
       if (t) t.scrollIntoView({ block: 'start' });
     });
   }, async (page) => { await resetUi(page); await page.evaluate(() => { localStorage.removeItem('jh_pro'); applyProGates(); renderLive(); }); }],
+  ['photo-card', async (page) => {
+    await tab(page, 'live');
+    await page.evaluate(() => { const k = photoCarKey('p'); location.hash = '#car=' + encodeURIComponent(k); });
+    await settle(page, 800);
+    await page.waitForSelector('#live-grid .card-photo img', { timeout: 10000 });
+    await page.evaluate(() => window.scrollTo(0, 0));
+  }, async (page) => { await page.evaluate(() => { history.replaceState(null, '', location.pathname); window.dispatchEvent(new HashChangeEvent('hashchange')); }); await settle(page, 400); }],
+  ['photo-detail', async (page) => {
+    await tab(page, 'live');
+    await page.evaluate(() => openCarDetail(photoCarKey('https://ik.imagekit.io')));
+    await settle(page, 1200);
+  }],
+  ['photo-viewer', async (page) => {
+    await tab(page, 'live');
+    await page.evaluate(() => { const k = photoCarKey('p'); openCarDetail(k); openPhotoViewer(k); });
+    await settle(page, 1200);
+  }],
   ['results-pro', async (page) => {
     await page.evaluate(() => { localStorage.setItem('jh_pro', '1'); applyProGates(); renderLive(); });
     await tab(page, 'live');
@@ -479,7 +496,17 @@ try {
     await page.route(/data\/oem\/side-mirrors\.json/, (route) => route.fulfill({ json: OEM_FIXTURE }));
     // No third-party calls (API, analytics) except the web fonts, which
     // shape every line break; the zip lookup is answered locally.
-    await page.route(/^https?:\/\/(?!127\.0\.0\.1|fonts\.googleapis\.com|fonts\.gstatic\.com)/, (route) => route.abort());
+    // Chain photo hosts load for real (the photo boxes are measured with
+    // their images); everything else stays blocked.
+    await page.route(/^https?:\/\/(?!127\.0\.0\.1|fonts\.googleapis\.com|fonts\.gstatic\.com|cdn\.pypapps\.com|storage\.googleapis\.com|www\.kikersupullit\.com|ik\.imagekit\.io|cdn\.shopify\.com)/, (route) => route.abort());
+    // Published photo switch (fail-closed in the app): the test turns every
+    // known source on, the way the scan will publish it.
+    const PHOTO_ON = { pyp: true, wap: true, kikers: true, weller: true, pasco: true };
+    await page.route(/data\/(inv\/manifest|vehicle_extras)\.json(\?|$)/, async (route) => {
+      const res = await route.fetch(); const j = await res.json();
+      j.photoSources = PHOTO_ON;
+      await route.fulfill({ response: res, json: j });
+    });
     await page.route(/api\.zippopotam\.us\//, (route) => route.fulfill({ json: { 'post code': ZIP, country: 'United States',
       places: [{ 'place name': 'San Jose', state: 'California', 'state abbreviation': 'CA', latitude: '37.3485', longitude: '-121.8863' }] } }));
     // hold the inventory so the loading state can be checked
@@ -493,6 +520,15 @@ try {
       st.textContent = '*,*::before,*::after{content-visibility:visible!important;transition-duration:0s!important;transition-delay:0s!important;animation-duration:0s!important;animation-delay:0s!important}';
       document.head.appendChild(st);
     }));
+    await page.addInitScript(() => {
+      window.photoCarKey = (prefix) => {
+        for (const v of liveInventory) {
+          const ex = extrasFor(v);
+          if (ex && ex[0] && String(ex[0]).startsWith(prefix) && photoInfo(ex[0])) return vehicleKey(v);
+        }
+        throw new Error('no car with a ' + prefix + ' photo in the loaded inventory');
+      };
+    });
     await page.goto(BASE, { waitUntil: 'domcontentloaded' });
     await settle(page, 1200);
     if (!ONLY || ONLY.includes('loading')) await checkAll(page, 'loading', width);

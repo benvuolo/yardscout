@@ -2788,3 +2788,56 @@ a { color: var(--accent); }
 .worth-item > .worth-main { flex: 1 1 11em; }
 .worth-item > .worth-val { flex: 0 1 auto; margin-left: auto; }
 .worth-item > .worth-meta, .worth-item > .verify-note, .worth-item > .shared-note { flex: 1 1 100%; }
+
+/* ---------- Photos (chain-hosted, 2026-11-06) ----------
+   Fixed 4:3 box so nothing moves when an image loads or fails; the whole
+   image is shown (contain: a chain's watermark is never cropped); a plain
+   placeholder sits underneath; a failed image just hides. */
+.photo-box {
+  position: relative; display: block; width: 100%;
+  aspect-ratio: 4 / 3; max-height: 16rem;
+  margin: 0; padding: 0; border: 0; border-radius: var(--r-sm);
+  background: var(--surface2); overflow: hidden; cursor: zoom-in;
+}
+.photo-box img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block; }
+.photo-box.photo-failed { cursor: default; }
+.photo-box.photo-failed img, .photo-box.photo-failed .photo-credit { display: none; }
+.photo-box::before {
+  content: ''; position: absolute; inset: 0; margin: auto; width: 3rem; height: 2rem;
+  background: currentColor; opacity: 0.12; color: var(--text);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 32'%3E%3Cpath d='M6 24v-8c0-1 1-2 2-2h8l6-7c1-1 2-1 3-1h10c1 0 2 0 3 1l5 7h1c2 0 3 1 3 3v7c0 1-1 2-2 2h-3a5 5 0 0 0-10 0H19a5 5 0 0 0-10 0H7c-1 0-1-1-1-2z'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 32'%3E%3Cpath d='M6 24v-8c0-1 1-2 2-2h8l6-7c1-1 2-1 3-1h10c1 0 2 0 3 1l5 7h1c2 0 3 1 3 3v7c0 1-1 2-2 2h-3a5 5 0 0 0-10 0H19a5 5 0 0 0-10 0H7c-1 0-1-1-1-2z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.photo-box .photo-credit {
+  position: absolute; right: 0; bottom: 0; max-width: 100%;
+  padding: 2px var(--s2); border-radius: var(--r-sm) 0 0 0;
+  font: 500 var(--t-xs)/1.4 var(--font-ui); color: #fff; background: rgba(20, 18, 14, 0.78);
+}
+.photo-none { display: flex; align-items: flex-end; justify-content: center; cursor: default; }
+.photo-none span { position: relative; margin-bottom: var(--s3); font-size: var(--t-sm); color: var(--text-dim); }
+.card-photo { margin: calc(-1 * var(--s4)) calc(-1 * var(--s4)) var(--s3); width: calc(100% + 2 * var(--s4)); border-radius: var(--r) var(--r) 0 0; }
+.cd-photo { margin-bottom: var(--s4); max-height: 20rem; border-radius: var(--r); }
+
+#photo-viewer {
+  position: fixed; inset: 0; z-index: 260; display: none; flex-direction: column;
+  background: #0f0e0c; color: #F4F2EC;
+}
+#photo-viewer.open { display: flex; }
+.pv-top { padding: calc(var(--s2) + env(safe-area-inset-top)) max(var(--s2), env(safe-area-inset-right)) var(--s2) max(var(--s2), env(safe-area-inset-left)); }
+#photo-viewer .cd-back { color: #F4F2EC; }
+.pv-img { position: relative; flex: 1 1 auto; min-height: 0; }
+.pv-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.pv-foot { padding: var(--s3) max(var(--s4), env(safe-area-inset-right)) calc(var(--s4) + env(safe-area-inset-bottom)) max(var(--s4), env(safe-area-inset-left)); }
+.pv-credit { margin: 0; font-size: var(--t-sm); color: #D8D5CC; }
+.pv-fail-note { display: none; margin: var(--s1) 0 0; font-size: var(--t-sm); color: #D8D5CC; }
+#photo-viewer.pv-failed .pv-fail-note { display: block; }
+#photo-viewer.pv-failed .pv-img { display: none; }
+.pv-links { display: flex; flex-wrap: wrap; column-gap: var(--s5); }
+#photo-viewer .locator-link { color: #FFA36B; }
+.pv-remove { min-height: var(--tap); display: inline-flex; align-items: center; font-size: var(--t-sm); color: #D8D5CC; }
+/* No photo: a slim strip, so Worth pulling stays near the top. */
+.photo-box.photo-none { aspect-ratio: auto; min-height: 3rem; height: auto; max-height: none; align-items: center; justify-content: flex-start; gap: var(--s2); padding: var(--s2) var(--s3); }
+.photo-box.photo-none::before { position: static; margin: 0; flex: none; width: 2.25rem; height: 1.5rem; opacity: 0.25; }
+.photo-none span { margin: 0; }
+.row-plate-lg { max-width: 100%; }
+.row-plate-lg b { min-width: 0; max-width: 100%; overflow-wrap: anywhere; }
