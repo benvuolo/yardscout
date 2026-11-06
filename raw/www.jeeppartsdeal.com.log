@@ -1782,3 +1782,111 @@
 09:05:10 chain-unlinked fuel-pump-module 1 numbers named by 68319395AA, no catalog link: 68551013AB
 09:05:18 seg done tier=A Chrysler Pacifica [2017, 2022] seeds=[2017] records=2918 errors=27
 09:05:18 time budget reached records=2918
+09:05:29 start site=www.jeeppartsdeal.com mode=worklist tiers=['A', 'B'] records=2918 list_lines=883 year_lines=73 url_index=9709
+09:05:29 seg done tier=A Jeep Patriot [2007, 2017] seeds=[2014] records=2918 errors=27
+09:05:29 seg done tier=A Jeep Grand Cherokee [1999, 2004] seeds=[2004] records=2918 errors=27
+09:05:29 seg done tier=A Jeep Liberty [1998, 2007] seeds=[2005] records=2918 errors=27
+09:05:29 seg done tier=A Jeep Grand Cherokee [2005, 2010] seeds=[2005] records=2918 errors=27
+09:05:29 seg done tier=A Jeep Liberty [2008, 2012] seeds=[2008] records=2918 errors=27
+09:05:29 seg done tier=A Jeep Compass [2011, 2016] seeds=[2014] records=2918 errors=27
+09:05:29 seg done tier=A Jeep Grand Cherokee [2011, 2021] seeds=[2011] records=2918 errors=27
+09:05:29 seg done tier=A Jeep Cherokee [2014, 2022] seeds=[2015] records=2918 errors=27
+09:05:29 seg done tier=A Jeep Commander [2006, 2010] seeds=[2006] records=2918 errors=27
+09:05:29 seg done tier=A Jeep Grand Cherokee [1993, 1998] seeds=[1997] records=2918 errors=27
+09:05:29 seg done tier=A Jeep Cherokee [1978, 2001] seeds=[2000] records=2918 errors=27
+09:05:29 seg done tier=A Jeep Compass [2007, 2010] seeds=[2007] records=2918 errors=27
+09:05:29 seg done tier=A Jeep Renegade [2015, 2022] seeds=[2017] records=2918 errors=27
+09:05:29 seg done tier=A Jeep Compass [2017, 2024] seeds=[2017] records=2918 errors=27
+09:05:29 seg done tier=A Jeep Wrangler [1997, 2006] seeds=[1997] records=2918 errors=27
+09:05:29 seg done tier=A Dodge Ram 1500 [1971, 2018] seeds=[2002] records=2918 errors=27
+09:05:29 seg done tier=A Dodge Grand Caravan [2008, 2024] seeds=[2010] records=2918 errors=27
+09:05:29 seg done tier=A Chrysler 200 [1979, 2022] seeds=[2015] records=2918 errors=27
+09:05:29 seg done tier=A Dodge Journey [2009, 2020] seeds=[2012] records=2918 errors=27
+09:05:29 seg done tier=A Chrysler Town & Country [2008, 2016] seeds=[2008] records=2918 errors=27
+09:05:29 seg done tier=A Chrysler 300 [1999, 2021] seeds=[2006] records=2918 errors=27
+09:05:29 seg done tier=A Dodge Avenger [1995, 2014] seeds=[2013] records=2918 errors=27
+09:05:29 seg done tier=A Chrysler PT Cruiser [2001, 2010] seeds=[2006] records=2918 errors=27
+09:05:29 seg done tier=A Dodge Charger [1971, 2010] seeds=[2007] records=2918 errors=27
+09:05:29 seg done tier=A Dodge Dakota [1997, 2004] seeds=[2000] records=2918 errors=27
+09:05:29 seg done tier=A Dodge Caravan [1984, 2020] seeds=[2005] records=2918 errors=27
+09:05:29 seg done tier=A Chrysler Town & Country [1992, 2007] seeds=[2005] records=2918 errors=27
+09:05:29 seg done tier=A Dodge Dart [1960, 2016] seeds=[2013] records=2918 errors=27
+09:05:29 seg done tier=A Dodge Caliber [2007, 2012] seeds=[2007] records=2918 errors=27
+09:05:29 seg done tier=A Dodge Grand Caravan [2001, 2007] seeds=[2005] records=2918 errors=27
+09:05:29 seg done tier=A Dodge Charger [2011, 2023] seeds=[2013] records=2918 errors=27
+09:05:29 seg done tier=A Dodge Durango [2004, 2009] seeds=[2005] records=2918 errors=27
+09:05:29 seg done tier=A Dodge Durango [1998, 2003] seeds=[2003] records=2918 errors=27
+09:05:29 seg done tier=A Chrysler Sebring [2007, 2011] seeds=[2008] records=2918 errors=27
+09:05:29 seg done tier=A Dodge Dakota [2005, 2011] seeds=[2005] records=2918 errors=27
+09:05:29 seg done tier=A Chrysler Pacifica [2004, 2008] seeds=[2006] records=2918 errors=27
+09:05:29 seg done tier=A Dodge Nitro [2007, 2011] seeds=[2007] records=2918 errors=27
+09:05:29 seg done tier=A Ram 1500 [2009, 2022] seeds=[2012] records=2918 errors=27
+09:05:29 seg done tier=A Chrysler Sebring [2001, 2006] seeds=[2004] records=2918 errors=27
+09:05:29 seg done tier=A Dodge Durango [2011, 2023] seeds=[2013] records=2918 errors=27
+09:05:29 seg done tier=A Dodge Neon [2000, 2005] seeds=[2005] records=2918 errors=27
+09:05:29 seg done tier=A Dodge Ram Pickup [1988, 2011] seeds=[2004] records=2918 errors=27
+09:05:29 seg done tier=A Dodge Stratus [1996, 2008] seeds=[2006] records=2918 errors=27
+09:05:29 seg done tier=A Dodge Dakota [1987, 1996] seeds=[1992] records=2918 errors=27
+09:05:29 seg done tier=A Dodge Magnum [1978, 2008] seeds=[2005] records=2918 errors=27
+09:05:29 seg done tier=A Dodge Ram Van [1966, 2003] seeds=[1999] records=2918 errors=27
+09:05:29 seg done tier=A Dodge Grand Caravan [1988, 2000] seeds=[2000] records=2918 errors=27
+09:05:29 seg done tier=A Chrysler Aspen [2007, 2009] seeds=[2007] records=2918 errors=27
+09:05:29 seg done tier=A Dodge Ram 2500 [1979, 2002] seeds=[2001] records=2918 errors=27
+09:05:29 seg done tier=A Dodge 1500 Pickup [1995, 2023] seeds=[2002] records=2918 errors=27
+09:05:29 seg done tier=A Chrysler 300C [2005, 2018] seeds=[2006] records=2918 errors=27
+09:05:29 seg done tier=A Dodge Ram 2500 [2003, 2009] seeds=[2003] records=2918 errors=27
+09:05:29 seg done tier=A Dodge Challenger [2009, 2014] seeds=[2010] records=2918 errors=27
+09:05:29 seg done tier=A Dodge Intrepid [1993, 2004] seeds=[2004] records=2918 errors=27
+09:05:29 seg done tier=A Dodge Caravan/Grand Caravan [1996, 2008] seeds=[2005] records=2918 errors=27
+09:05:29 seg done tier=A Chrysler Concorde [1993, 2004] seeds=[2002] records=2918 errors=27
+09:05:29 seg done tier=A Chrysler Sebring [1992, 2000] seeds=[2000] records=2918 errors=27
+09:05:29 seg done tier=A Dodge D1500 [1995, 2015] seeds=[2004] records=2918 errors=27
+09:05:29 seg done tier=A Dodge Ram [2002, 2008] seeds=[2002] records=2918 errors=27
+09:05:29 seg done tier=A Chrysler 300M [1999, 2005] seeds=[2002] records=2918 errors=27
+09:05:29 seg done tier=A Dodge Ram [1961, 2001] seeds=[2001] records=2918 errors=27
+09:05:29 seg done tier=A Dodge Ram Wagon [1981, 2002] seeds=[1994] records=2918 errors=27
+09:05:29 seg done tier=A Chrysler Voyager [1999, 2021] seeds=[2003] records=2918 errors=27
+09:05:29 seg done tier=A Chrysler Pacifica [2017, 2022] seeds=[2017] records=2918 errors=27
+09:05:29 nav-fail Chrysler Caravan 2012: NavError: HTTP 404 for https://www.jeeppartsdeal.com/catalog/2012-chrysler-caravan-parts
+09:05:29 seg done tier=A Chrysler Caravan [1999, 2018] seeds=[2012] records=2918 errors=28
+09:06:09 chain-unlinked alternator 1 numbers named by 5097755AA, no catalog link: 5183492AA
+09:06:09 chain-unlinked alternator 1 numbers named by 5135465AA, no catalog link: 5135465AB
+09:06:41 chain-unlinked ac-compressor 1 numbers named by 5097010AA, no catalog link: RX097010AA
+09:07:13 chain-unlinked headlights 2 numbers named by 68024632AA, no catalog link: 68000177AA, 5170840AA
+09:07:13 chain-unlinked headlights 2 numbers named by 68024633AA, no catalog link: 5170838AA, 68000174AA
+09:09:29 chain-unlinked power-steering-pump 1 numbers named by 5097049AA, no catalog link: 5097051AA
+09:09:29 seg done tier=A Chrysler Crossfire [2004, 2008] seeds=[2004] records=2934 errors=28
+09:11:37 chain-unlinked headlights 3 numbers named by 68174064AG, no catalog link: 68174064AE, 68174064AF, 68174064AD
+09:11:37 chain-unlinked headlights 3 numbers named by 68174065AG, no catalog link: 68174065AC, 68174065AF, 68174065AE
+09:11:37 chain-unlinked headlights 2 numbers named by 68174066AF, no catalog link: 68174066AD, 68174066AE
+09:11:37 chain-unlinked headlights 2 numbers named by 68174067AF, no catalog link: 68174067AD, 68174067AE
+09:11:37 chain-unlinked headlights 2 numbers named by 68233213AF, no catalog link: 68233213AD, 68233213AE
+09:12:41 chain-unlinked tail-lights 6 numbers named by 68419751AB, no catalog link: 68195784AF, 68195784AG, 68195784AE, 68404882AA, 68195784AC, 68419751AA
+09:12:41 chain-unlinked tail-lights 5 numbers named by 68510770AA, no catalog link: 68403954AC, 68174068AE, 68174068AF, 68403954AA, 68403954AB
+09:12:41 chain-unlinked tail-lights 6 numbers named by 68510771AA, no catalog link: 68403955AC, 68174069AE, 68403955AA, 68403955AB, 68174069AF, 68174069AB
+09:15:29 chain-unlinked side-mirrors 2 numbers named by 5LD66KBXAD, no catalog link: 5LD66KBXAC, 5LD66KBXAB
+09:15:29 chain-unlinked side-mirrors 2 numbers named by 5PE55GW7AD, no catalog link: 5PE55GW7AB, 5PE55GW7AC
+09:15:29 chain-unlinked side-mirrors 1 numbers named by 5PE55KBXAC, no catalog link: 5PE55KBXAB
+09:15:29 chain-unlinked side-mirrors 1 numbers named by 5PE54FQDAB, no catalog link: 5PE54TZZAD
+09:15:29 chain-unlinked side-mirrors 1 numbers named by 5PE54LAUAB, no catalog link: 5PE54TZZAD
+09:16:25 chain-unlinked fuel-pump-module 7 numbers named by 68258753AG, no catalog link: 68258753AD, 68258753AF, 68258753AC, 68258753AB, 68258753AA, 68258753AE, 68258753AJ
+09:16:49 chain-unlinked fuel-pump-module 1 numbers named by 68258753AA, no catalog link: 68258753AJ
+09:17:05 seg done tier=A Dodge Challenger [2015, 2023] seeds=[2015] records=2974 errors=28
+09:18:57 nav-fail Chrysler LeBaron 1983: NavError: HTTP 404 for https://www.jeeppartsdeal.com/catalog/1983-chrysler-lebaron-parts
+09:18:57 seg done tier=A Chrysler LeBaron [1980, 1995] seeds=[1995, 1983] records=2976 errors=29
+09:20:41 chain-unlinked side-mirrors 4 numbers named by 4574591AJ, no catalog link: 4574591AF, 4574591AE, 4574591AG, 4574591AH
+09:25:05 chain-unlinked fuel-pump-module 1 numbers named by 4897428AB, no catalog link: 4897428AA
+09:25:37 nav-fail Chrysler LHS 1998: NavError: HTTP 404 for https://www.jeeppartsdeal.com/catalog/1998-chrysler-lhs-parts
+09:25:37 seg done tier=A Chrysler LHS [1994, 2001] seeds=[2000, 1996, 1998] records=2992 errors=30
+09:27:21 nav-fail Dodge D150 1977: NavError: HTTP 404 for https://www.jeeppartsdeal.com/catalog/1977-dodge-d150-parts
+09:27:21 seg done tier=A Dodge D150 [1964, 1998] seeds=[1985, 1977] records=2995 errors=31
+09:28:01 chain-unlinked ac-compressor 1 numbers named by 68477449AA, no catalog link: 68280720AA
+09:28:41 chain-unlinked headlights 2 numbers named by 68469415AA, no catalog link: 68400690AA, 68322691AA
+09:28:41 chain-unlinked headlights 3 numbers named by 68469416AA, no catalog link: 68400628AA, 68263673AA, 68322692AA
+09:29:13 chain-unlinked tail-lights 1 numbers named by 68311693AA, no catalog link: 68263569AA
+09:29:13 chain-unlinked tail-lights 1 numbers named by 68311694AA, no catalog link: 68263425AA
+09:31:05 chain-unlinked window-regulator 1 numbers named by 68366052AA, no catalog link: 68637655AA
+09:31:05 chain-unlinked window-regulator 1 numbers named by 68366053AA, no catalog link: 68637631AA
+09:34:38 product-fail https://www.jeeppartsdeal.com/oem/mopar~pump-power-steering~68593672aa: NavError: no __INITIAL_STORE__ on page
+09:34:38 seg done tier=A Ram ProMaster City [2015, 2022] seeds=[2015] records=3015 errors=32
+09:37:42 time budget reached records=3018
