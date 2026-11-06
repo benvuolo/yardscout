@@ -314,3 +314,114 @@
 03:07:48 chain-unlinked fuel-pump-module 1 numbers named by 42021AL02A, no catalog link: 42021AL02C
 03:07:48 chain-unlinked fuel-pump-module 1 numbers named by 42021AL03A, no catalog link: 42021AL03C
 03:08:04 time budget reached records=1079
+03:08:06 start site=www.subarupartsdeal.com mode=worklist tiers=['A', 'B'] records=1079 list_lines=151 year_lines=13 url_index=2097
+03:08:06 seg done tier=A Subaru Outback [2010, 2014] seeds=[2011] records=1079 errors=3
+03:08:06 seg done tier=A Subaru Outback [2005, 2009] seeds=[2005] records=1079 errors=3
+03:08:06 seg done tier=A Subaru Forester [2009, 2013] seeds=[2010] records=1079 errors=3
+03:08:06 seg done tier=A Subaru Forester [2003, 2008] seeds=[2004] records=1079 errors=3
+03:08:06 seg done tier=A Subaru Outback [2000, 2004] seeds=[2003] records=1079 errors=3
+03:08:06 seg done tier=A Subaru Impreza [2008, 2011] seeds=[2008] records=1079 errors=3
+03:08:06 seg done tier=A Subaru Impreza [2012, 2016] seeds=[2012] records=1079 errors=3
+03:08:06 seg done tier=A Subaru Legacy [2010, 2012] seeds=[2011] records=1079 errors=3
+03:08:06 seg done tier=A Subaru Legacy [2005, 2009] seeds=[2005] records=1079 errors=3
+03:08:06 seg done tier=A Subaru Impreza [2002, 2007] seeds=[2007] records=1079 errors=3
+03:08:06 seg done tier=A Subaru Forester [1981, 2002] seeds=[2001] records=1079 errors=3
+03:08:06 seg done tier=A Subaru Forester [2014, 2018] seeds=[2014] records=1079 errors=3
+03:08:06 seg done tier=A Subaru Legacy [1990, 1999] seeds=[1999] records=1079 errors=3
+03:08:06 seg done tier=A Subaru Legacy [2013, 2014] seeds=[2013] records=1079 errors=3
+03:08:06 seg done tier=A Subaru Legacy [2015, 2019] seeds=[2015] records=1079 errors=3
+03:08:06 seg done tier=A Subaru XV Crosstrek [2013, 2024] seeds=[2013] records=1079 errors=3
+03:08:06 seg done tier=A Subaru Legacy [2000, 2002] seeds=[2001] records=1079 errors=3
+03:08:06 seg done tier=A Subaru B9 Tribeca [2006, 2009] seeds=[2006] records=1079 errors=3
+03:08:06 seg done tier=A Subaru Legacy Wagon [1990, 2009] seeds=[1998] records=1079 errors=3
+03:08:06 seg done tier=A Subaru Legacy [2003, 2004] seeds=[2004] records=1079 errors=3
+03:08:06 seg done tier=A Subaru Outback [2015, 2019] seeds=[2015] records=1079 errors=3
+03:08:20 chain-unlinked alternator 1 numbers named by 23700AA620, no catalog link: 23700AA831
+03:10:04 chain-unlinked alternator 1 numbers named by 23700AA621, no catalog link: 23700AA831
+03:12:04 seg done tier=A Subaru Tribeca [2006, 2013] seeds=[2008, 2010, 2011] records=1083 errors=3
+03:12:35 chain-unlinked alternator 1 numbers named by 23700AA290, no catalog link: 23700AA2908A
+03:12:51 chain-unlinked starter 1 numbers named by 23300AA390, no catalog link: 23300AA390R1
+03:13:07 chain-unlinked ac-compressor 1 numbers named by 73111FA132, no catalog link: 73111FA133
+03:14:11 chain-unlinked tail-lights 1 numbers named by 84201FA071, no catalog link: 84201FA070
+03:14:11 chain-unlinked tail-lights 1 numbers named by 84201FA061, no catalog link: 84201FA060
+03:15:39 chain-unlinked side-mirrors 1 numbers named by 91039FA050VF, no catalog link: 91039FA051NN
+03:15:39 chain-unlinked side-mirrors 1 numbers named by 91039FA050UA, no catalog link: 91039FA051NN
+03:15:39 chain-unlinked side-mirrors 1 numbers named by 91039FA050QA, no catalog link: 91039FA051NN
+03:15:39 chain-unlinked side-mirrors 1 numbers named by 91039FA050NN, no catalog link: 91039FA051NN
+03:15:39 chain-unlinked side-mirrors 1 numbers named by 91039FA050DD, no catalog link: 91039FA051NN
+03:15:39 chain-unlinked side-mirrors 1 numbers named by 91039FA040VF, no catalog link: 91039FA041NN
+03:15:39 chain-unlinked side-mirrors 1 numbers named by 91039FA040UA, no catalog link: 91039FA041NN
+03:15:39 chain-unlinked side-mirrors 1 numbers named by 91039FA040QA, no catalog link: 91039FA041NN
+03:15:39 chain-unlinked side-mirrors 1 numbers named by 91039FA040NN, no catalog link: 91039FA041NN
+03:15:39 chain-unlinked side-mirrors 1 numbers named by 91039FA040DD, no catalog link: 91039FA041NN
+03:17:07 chain-unlinked window-regulator 1 numbers named by 62113FA011, no catalog link: 62113FA010
+03:17:07 chain-unlinked window-regulator 1 numbers named by 62163FA011, no catalog link: 62163FA010
+03:17:07 chain-unlinked window-regulator 1 numbers named by 62162FA010, no catalog link: 62162FA011
+03:17:07 chain-unlinked window-regulator 1 numbers named by 62112FA010, no catalog link: 62112FA011
+03:17:07 chain-unlinked window-regulator 1 numbers named by 62111FA010, no catalog link: 62111FA011
+03:17:07 chain-unlinked window-regulator 1 numbers named by 62162FA000, no catalog link: 62162FA001
+03:17:07 chain-unlinked window-regulator 1 numbers named by 62111FA000, no catalog link: 62111FA001
+03:17:07 chain-unlinked window-regulator 1 numbers named by 62112FA000, no catalog link: 62112FA001
+03:18:03 chain-unlinked window-regulator 1 numbers named by 63113FA120, no catalog link: 63113AC000
+03:18:03 chain-unlinked window-regulator 1 numbers named by 63111FA010, no catalog link: 63111FA011
+03:18:03 chain-unlinked window-regulator 1 numbers named by 63112FA110, no catalog link: 63112FA111
+03:18:03 chain-unlinked window-regulator 1 numbers named by 63111FA000, no catalog link: 63111FA001
+03:18:03 chain-unlinked window-regulator 1 numbers named by 63112FA100, no catalog link: 63112FA101
+03:18:51 chain-unlinked climate-control 1 numbers named by 72311FC030, no catalog link: 72311FC031
+03:19:39 seg done tier=A Subaru Impreza [1993, 2001] seeds=[1998] records=1124 errors=3
+03:20:03 chain-unlinked alternator 1 numbers named by 23700AA430, no catalog link: 23700AA430R1
+03:20:03 chain-unlinked alternator 1 numbers named by 23700AA540, no catalog link: 23700AA5418A
+03:20:12 chain-unlinked starter 1 numbers named by 23300AA420, no catalog link: 23300AA4209L
+03:22:11 chain-unlinked tail-lights 1 numbers named by 84201FE251, no catalog link: 84201FE250
+03:22:11 chain-unlinked tail-lights 1 numbers named by 84201FE241, no catalog link: 84201FE240
+03:22:11 chain-unlinked tail-lights 1 numbers named by 84912FE911, no catalog link: 84912FE910
+03:22:11 chain-unlinked tail-lights 1 numbers named by 84912FE901, no catalog link: 84912FE900
+03:30:28 chain-unlinked window-regulator 1 numbers named by 62188FE011, no catalog link: 62188FE010
+03:30:28 chain-unlinked window-regulator 1 numbers named by 62188FE001, no catalog link: 62188FE000
+03:30:28 chain-unlinked window-regulator 1 numbers named by 61222FE010, no catalog link: 61222FE012
+03:30:28 chain-unlinked window-regulator 1 numbers named by 61222FE030, no catalog link: 61222FE032
+03:30:28 chain-unlinked window-regulator 1 numbers named by 61222FE000, no catalog link: 61222FE002
+03:30:28 chain-unlinked window-regulator 1 numbers named by 61222FE020, no catalog link: 61222FE022
+03:30:28 chain-unlinked window-regulator 1 numbers named by 62222FE010, no catalog link: 62222FE011
+03:30:28 chain-unlinked window-regulator 1 numbers named by 62222FE000, no catalog link: 62222FE001
+03:30:52 chain-unlinked climate-control 1 numbers named by 72311FE021, no catalog link: 72311FE022
+03:31:31 chain-unlinked fuel-pump-module 1 numbers named by 42021SA010, no catalog link: 42021SA011
+03:31:31 chain-unlinked fuel-pump-module 1 numbers named by 42021SA020, no catalog link: 42021SA021
+03:31:56 chain-unlinked throttle-body 1 numbers named by 16114AB024, no catalog link: 16114AB0249L
+03:31:56 chain-unlinked throttle-body 1 numbers named by 16114AB023, no catalog link: 16114AB0249L
+03:32:59 chain-unlinked ac-compressor 1 numbers named by 73111FA131, no catalog link: 73111FA133
+03:34:03 chain-unlinked side-mirrors 1 numbers named by 91031FA731NN, no catalog link: 91031FA732NN
+03:34:03 chain-unlinked side-mirrors 1 numbers named by 91031FA771NN, no catalog link: 91031FA772NN
+03:34:03 chain-unlinked side-mirrors 1 numbers named by 91031FA720NN, no catalog link: 91031FA721NN
+03:35:39 chain-unlinked window-regulator 1 numbers named by 63113FA030, no catalog link: 63113FA010
+03:35:39 chain-unlinked window-regulator 1 numbers named by 63113FA020, no catalog link: 63113FA000
+03:36:27 chain-unlinked climate-control 1 numbers named by 72311FA111, no catalog link: 72311FA112
+03:37:15 chain-unlinked fuel-pump-module 2 numbers named by 42021FA081, no catalog link: 42021FA080, 42021FA110
+03:38:04 seg done tier=A Subaru Impreza Wagon [1993, 2007] seeds=[2005, 1998, 1997] records=1234 errors=3
+03:38:43 chain-unlinked starter 1 numbers named by 23300AA85A, no catalog link: 23300AA85B
+03:40:12 chain-unlinked headlights 1 numbers named by 84001FL01A, no catalog link: 84001FL01B
+03:40:12 chain-unlinked headlights 1 numbers named by 84002FL071, no catalog link: 84002FL074
+03:40:12 chain-unlinked headlights 1 numbers named by 84001FL00A, no catalog link: 84001FL00B
+03:40:12 chain-unlinked headlights 1 numbers named by 84002FL060, no catalog link: 84002FL064
+03:40:12 chain-unlinked headlights 1 numbers named by 84002FL061, no catalog link: 84002FL064
+03:40:51 chain-unlinked tail-lights 1 numbers named by 84912FL05A, no catalog link: 84201FL03B
+03:40:51 chain-unlinked tail-lights 1 numbers named by 84912FL04A, no catalog link: 84201FL02B
+03:42:19 chain-unlinked side-mirrors 1 numbers named by 91036FL00A, no catalog link: 91036FL00B
+03:42:19 chain-unlinked side-mirrors 1 numbers named by 91036FL02A, no catalog link: 91036FL02B
+03:42:19 chain-unlinked side-mirrors 1 numbers named by 91036FL04A, no catalog link: 91036FL04C
+03:42:19 chain-unlinked side-mirrors 1 numbers named by 91036FL06A, no catalog link: 91036FL06B
+03:42:19 chain-unlinked side-mirrors 1 numbers named by 91036FL08A, no catalog link: 91036FL08B
+03:42:19 chain-unlinked side-mirrors 1 numbers named by 91036FL01A, no catalog link: 91036FL01B
+03:42:19 chain-unlinked side-mirrors 1 numbers named by 91036FL05A, no catalog link: 91036FL05B
+03:42:19 chain-unlinked side-mirrors 1 numbers named by 91036FL03A, no catalog link: 91036FL03C
+03:42:19 chain-unlinked side-mirrors 1 numbers named by 91036FL07A, no catalog link: 91036FL07B
+03:42:19 chain-unlinked side-mirrors 1 numbers named by 91036FL09A, no catalog link: 91036FL09C
+03:42:59 chain-unlinked window-regulator 1 numbers named by 61041FL01A, no catalog link: 61041FL01B
+03:42:59 chain-unlinked window-regulator 1 numbers named by 61041FL00A, no catalog link: 61041FL00B
+03:43:32 chain-unlinked window-switch 1 numbers named by 83071FL12A, no catalog link: 83071FL62A
+03:43:32 chain-unlinked window-switch 1 numbers named by 83071FL10A, no catalog link: 83071FL60A
+03:43:32 chain-unlinked window-switch 1 numbers named by 83071FL11A, no catalog link: 83071FL61A
+03:44:46 chain-unlinked fuel-pump-module 1 numbers named by 42021FL02A, no catalog link: 42021FL02D
+03:47:54 net-fail list https://www.subarupartsdeal.com/parts-list/2017-subaru-impreza/engine_auxiliaries/throttle_chamber.html: network error after 3 tries: ReadTimeout
+03:47:54 seed A|Subaru|Impreza|2017 had network failures; left open for retry
+03:47:54 time budget reached records=1271
