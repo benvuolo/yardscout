@@ -368,7 +368,9 @@ class Curation:
         """(on_page, notes, position sources, pointers) for class c on T."""
         rows = [lr for lr in self.t_list_rows.get((T, cat), []) if policy.pn_key(self.ns, lr.pn) == c.key]
         if self.t_list_rows.get((T, cat)):
-            on = [lr for lr in rows if lr.matched]
+            # a row restricted to another make's division ("Lincoln Division
+            # Derivative" on a Ford page) is not listed for T (§5.6)
+            on = [lr for lr in rows if lr.matched and not _other_division(lr.notes, T[0])]
             # §5.6: T's own manifest rows for that pn, matched or not: a second
             # row of the same number on T's page ('Japan Built') restricts it
             # even when the crawler did not match that row (review F9).
@@ -377,7 +379,8 @@ class Curation:
             src = [("location", x) for lr in on for x in lr.locations] + [("slug", lr.list_url) for lr in on]
             src += [("note", n) for n in self.note_position_texts(notes, T)]     # §5.8
             return bool(on), notes, src, [lr.pointer for lr in on], "manifest"
-        recs = [r for r in self.t_seed_records.get((T, cat), []) if r.key == c.key]
+        recs = [r for r in self.t_seed_records.get((T, cat), [])
+                if r.key == c.key and not _other_division(r.note_texts, T[0])]
         notes = [n for r in recs for n in r.note_texts]
         src = [("location", x) for r in recs for x in r.list_location] + [("slug", r.list_url) for r in recs]
         src += [("note", n) for n in self.note_position_texts(notes, T)]
@@ -1588,6 +1591,19 @@ PACK_TEXT = {"motor": "window motor only", "reg": "regulator without motor", "as
              "door-module": "whole door module panel with the regulator",
              "switch-module": "single switch module, not the full control panel"}
 _LIKELY_TAIL = "; verify the number on the part"
+
+
+_DIVISION_RE = re.compile(r"\b([A-Za-z]+)\s+Division\s+Derivative\b", re.I)
+
+
+def _other_division(notes, make: str) -> bool:
+    """True when a note restricts the row to another make's division: Ford
+    list pages print shared platform rows with 'Lincoln Division Derivative'
+    / 'Mercury Division Derivative' (fordpartsgiant AH6Z-8200-ACP, an MKZ
+    grille, on the 2010 Milan and 2012 Fusion pages; 1,706 such rows on
+    oem-raw@42683f9). A note naming T's own make, or none, does not."""
+    named = {m.group(1).lower() for n in notes or [] for m in _DIVISION_RE.finditer(n or "")}
+    return bool(named) and (make or "").lower() not in named
 
 
 def _likely_note(brand: str, pn: str, text: str, pack: str = "") -> str:

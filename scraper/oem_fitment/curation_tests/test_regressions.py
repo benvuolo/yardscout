@@ -165,4 +165,17 @@ g7 = C.global_gates(cur)
 check("7 a PartsGiant site: unreliable engine cells block every category, option-layout rows are named",
       any("in any category" in g for g in g7) and any("can be coverage" in g and "option column" in g for g in g7),
       str(g7))
+
+# ------------------------------------------- §5.6 other-division rows (2026-11-06)
+# fordpartsgiant prints shared platform rows on every twin's page, with the
+# variant in a Fit Note: AH6Z-8200-ACP (MKZ grille) on the 2010 Milan page
+# reads "Less Appearance Group, With Wood Appearance Package, Lincoln Division
+# Derivative" -> not listed for a Mercury or Ford T.
+import curate as _C  # noqa: E402
+_n = ["Less Appearance Group, With Wood Appearance Package, Lincoln Division Derivative"]
+check("division: a Lincoln-division row is not listed for a Mercury", _C._other_division(_n, "Mercury"))
+check("division: ... nor for a Ford", _C._other_division(_n, "Ford"))
+check("division: it is listed for the Lincoln", not _C._other_division(_n, "Lincoln"))
+check("division: no division note, no restriction", not _C._other_division(["With Heavy Duty Trailer Towing"], "Ford"))
+
 done("test_regressions")
