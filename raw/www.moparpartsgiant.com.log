@@ -1161,3 +1161,89 @@
 06:14:14 chain-unlinked throttle-body 1 numbers named by 53034251AD, no catalog link: 53034251AC
 06:14:14 seg done tier=A Dodge Durango [2011, 2023] seeds=[2013, 2020] records=1902 errors=8
 06:14:14 time budget reached records=1902
+06:14:29 start site=www.moparpartsgiant.com mode=worklist tiers=['A', 'B'] records=1902 list_lines=412 year_lines=35 url_index=4189
+06:14:29 seg done tier=A Dodge Ram 1500 [1971, 2018] seeds=[2002] records=1902 errors=8
+06:14:29 seg done tier=A Dodge Grand Caravan [2008, 2024] seeds=[2010] records=1902 errors=8
+06:14:29 seg done tier=A Chrysler 200 [1979, 2022] seeds=[2015] records=1902 errors=8
+06:14:29 seg done tier=A Dodge Journey [2009, 2020] seeds=[2012] records=1902 errors=8
+06:14:29 seg done tier=A Chrysler Town & Country [2008, 2016] seeds=[2008] records=1902 errors=8
+06:14:29 seg done tier=A Chrysler 300 [1999, 2021] seeds=[2006] records=1902 errors=8
+06:14:29 seg done tier=A Dodge Avenger [1995, 2014] seeds=[2013] records=1902 errors=8
+06:14:29 seg done tier=A Chrysler PT Cruiser [2001, 2010] seeds=[2006] records=1902 errors=8
+06:14:29 seg done tier=A Dodge Charger [1971, 2010] seeds=[2007] records=1902 errors=8
+06:14:29 seg done tier=A Dodge Dakota [1997, 2004] seeds=[2000] records=1902 errors=8
+06:14:29 seg done tier=A Dodge Caravan [1984, 2020] seeds=[2005] records=1902 errors=8
+06:14:29 seg done tier=A Chrysler Town & Country [1992, 2007] seeds=[2005] records=1902 errors=8
+06:14:29 seg done tier=A Dodge Dart [1960, 2016] seeds=[2013] records=1902 errors=8
+06:14:29 seg done tier=A Dodge Caliber [2007, 2012] seeds=[2007] records=1902 errors=8
+06:14:29 seg done tier=A Dodge Grand Caravan [2001, 2007] seeds=[2005] records=1902 errors=8
+06:14:29 seg done tier=A Dodge Charger [2011, 2023] seeds=[2013] records=1902 errors=8
+06:14:29 seg done tier=A Dodge Durango [2004, 2009] seeds=[2005] records=1902 errors=8
+06:14:29 seg done tier=A Dodge Durango [1998, 2003] seeds=[2003] records=1902 errors=8
+06:14:29 seg done tier=A Chrysler Sebring [2007, 2011] seeds=[2008] records=1902 errors=8
+06:14:29 seg done tier=A Dodge Dakota [2005, 2011] seeds=[2005] records=1902 errors=8
+06:14:29 seg done tier=A Chrysler Pacifica [2004, 2008] seeds=[2006] records=1902 errors=8
+06:14:29 seg done tier=A Dodge Nitro [2007, 2011] seeds=[2007] records=1902 errors=8
+06:14:29 seg done tier=A Ram 1500 [2009, 2022] seeds=[2012] records=1902 errors=8
+06:14:29 seg done tier=A Chrysler Sebring [2001, 2006] seeds=[2004] records=1902 errors=8
+06:14:29 seg done tier=A Dodge Durango [2011, 2023] seeds=[2013] records=1902 errors=8
+06:15:26 chain-unlinked starter 1 numbers named by 5033556AC, no catalog link: 5033556AB
+06:15:50 chain-unlinked ac-compressor 1 numbers named by 5058163AD, no catalog link: 5058163AE
+06:17:26 chain-unlinked headlights 3 numbers named by 5288508AH, no catalog link: 5288508AE, 5288508AF, 5288508AG
+06:17:26 chain-unlinked headlights 3 numbers named by 5288509AH, no catalog link: 5288509AG, 5288509AE, 5288509AF
+06:17:26 chain-unlinked headlights 1 numbers named by 5288513AE, no catalog link: 5288513AD
+06:18:22 chain-unlinked tail-lights 1 numbers named by 5288526AM, no catalog link: 5288526AL
+06:18:22 chain-unlinked tail-lights 1 numbers named by 5288527AM, no catalog link: 5288527AL
+06:18:22 chain-unlinked tail-lights 1 numbers named by 5288528AL, no catalog link: 5288528AK
+06:18:22 chain-unlinked tail-lights 1 numbers named by 5288529AL, no catalog link: 5288529AK
+06:19:18 chain-unlinked side-mirrors 1 numbers named by 4783566AO, no catalog link: 4783566AP
+06:19:18 chain-unlinked side-mirrors 1 numbers named by 4783567AO, no catalog link: 4783567AP
+06:19:58 chain-unlinked fuel-pump-module 1 numbers named by 5018697AA, no catalog link: 5018697AB
+06:20:30 seg done tier=A Dodge Neon [2000, 2005] seeds=[2005] records=1935 errors=8
+06:21:58 chain-unlinked alternator 1 numbers named by 56028732AA, no catalog link: 4801475AA
+06:21:58 chain-unlinked alternator 1 numbers named by 56041120AC, no catalog link: RL041120AC
+06:24:38 chain-unlinked window-regulator 1 numbers named by 55276207AD, no catalog link: 55276207AC
+06:24:38 chain-unlinked window-regulator 1 numbers named by 55276206AD, no catalog link: 55276206AC
+06:25:18 chain-unlinked window-regulator 1 numbers named by 55276103AC, no catalog link: 55276103AD
+06:25:18 chain-unlinked window-regulator 1 numbers named by 55276102AC, no catalog link: 55276102AD
+06:25:18 chain-unlinked window-regulator 1 numbers named by 55276116AC, no catalog link: 55276116AD
+06:25:18 chain-unlinked window-regulator 1 numbers named by 55276117AC, no catalog link: 55276117AD
+06:26:30 chain-unlinked fuel-pump-module 1 numbers named by 5104695AA, no catalog link: 5104695AB
+06:26:30 chain-unlinked fuel-pump-module 1 numbers named by 5104698AB, no catalog link: 68011609AA
+06:26:30 chain-unlinked fuel-pump-module 2 numbers named by 5134555AA, no catalog link: RL134555AA, 5134555AB
+06:27:10 chain-unlinked throttle-body 1 numbers named by 53032120AC, no catalog link: 5161805AA
+06:28:06 listed after chain alternator R6027912AB: line 1973 (recrawl_of 914)
+06:28:06 chain-unlinked alternator 1 numbers named by R6027912AB, no catalog link: RL027912AB
+06:29:18 chain-unlinked ac-compressor 1 numbers named by 55055339AD, no catalog link: 55055339AH
+06:29:18 chain-unlinked ac-compressor 1 numbers named by 55055540AF, no catalog link: 55055540AM
+06:29:42 chain-unlinked ac-compressor 1 numbers named by 55055540AC, no catalog link: 55055540AM
+06:30:54 chain-unlinked headlights 1 numbers named by 55076748AD, no catalog link: 55076748AO
+06:30:54 chain-unlinked headlights 1 numbers named by 55077024AC, no catalog link: 55077024AG
+06:30:54 chain-unlinked headlights 1 numbers named by 55077025AC, no catalog link: 55077025AG
+06:30:54 chain-unlinked headlights 1 numbers named by 55076749AD, no catalog link: 55076749AO
+06:32:46 chain-unlinked tail-lights 1 numbers named by 55055264AC, no catalog link: 55055264
+06:33:42 chain-unlinked side-mirrors 1 numbers named by 55076478AB, no catalog link: 55076478AE
+06:33:42 chain-unlinked side-mirrors 1 numbers named by 55076488AB, no catalog link: 55076488AG
+06:33:42 chain-unlinked side-mirrors 1 numbers named by 55076489AB, no catalog link: 55076489AG
+06:33:42 chain-unlinked side-mirrors 1 numbers named by 55076744AC, no catalog link: 55076744AH
+06:33:42 chain-unlinked side-mirrors 1 numbers named by 55077122AB, no catalog link: 55077122AG
+06:35:34 chain-unlinked fuel-pump-module 1 numbers named by 4897668AD, no catalog link: 4897668AI
+06:35:34 chain-unlinked fuel-pump-module 1 numbers named by 4897666AB, no catalog link: RL897666AF
+06:37:34 chain-unlinked power-steering-pump 1 numbers named by 4883960AA, no catalog link: 4883960AB
+06:38:14 listed after chain starter R6027703AC: line 2017 (recrawl_of 1976)
+06:39:34 chain-unlinked headlights 1 numbers named by 55076748AI, no catalog link: 55076748AO
+06:39:34 chain-unlinked headlights 1 numbers named by 55076749AI, no catalog link: 55076749AO
+06:41:26 chain-unlinked fuel-pump-module 1 numbers named by 5014318AA, no catalog link: 5014318AG
+06:41:26 chain-unlinked fuel-pump-module 1 numbers named by 4897666AC, no catalog link: RL897666AF
+06:41:26 chain-unlinked fuel-pump-module 1 numbers named by 4897667AD, no catalog link: 4897667AH
+06:41:26 chain-unlinked fuel-pump-module 1 numbers named by 4897668AE, no catalog link: 4897668AI
+06:42:54 seg done tier=A Dodge Ram Pickup [1988, 2011] seeds=[2004, 1999, 2000] records=2023 errors=8
+06:43:50 chain-unlinked ac-compressor 1 numbers named by 4596550AC, no catalog link: RL596550AC
+06:44:22 chain-unlinked tail-lights 1 numbers named by 4805350AB, no catalog link: 4805350AC
+06:44:22 chain-unlinked tail-lights 1 numbers named by 4805351AB, no catalog link: 4805351AC
+06:45:50 chain-unlinked window-regulator 5 numbers named by 4878108AL, no catalog link: 4878108AH, 4878108AJ, 4878108AK, 4878108AF, 4878108AI
+06:45:50 chain-unlinked window-regulator 5 numbers named by 4878109AL, no catalog link: 4878109AI, 4878109AK, 4878109AF, 4878109AJ, 4878109AH
+06:45:50 chain-unlinked window-regulator 3 numbers named by 5056028AG, no catalog link: 5056028AD, 5056028AE, 5056028AF
+06:45:50 chain-unlinked window-regulator 3 numbers named by 5056029AG, no catalog link: 5056029AD, 5056029AE, 5056029AF
+06:46:14 chain-unlinked fuel-pump-module 1 numbers named by 5093455AC, no catalog link: 5093455AD
+06:46:46 time budget reached records=2036
