@@ -1767,3 +1767,83 @@
 08:58:41 chain-unlinked ac-compressor 1 numbers named by 4596367AA, no catalog link: RL016695AA
 09:02:25 chain-unlinked window-regulator 1 numbers named by 5011012AA, no catalog link: 4724282AH
 09:05:05 time budget reached records=2575
+09:05:15 start site=www.moparpartsgiant.com mode=worklist tiers=['A', 'B'] records=2575 list_lines=935 year_lines=75 url_index=6661
+09:05:15 seg done tier=A Dodge Ram 1500 [1971, 2018] seeds=[2002] records=2575 errors=11
+09:05:15 seg done tier=A Dodge Grand Caravan [2008, 2024] seeds=[2010] records=2575 errors=11
+09:05:15 seg done tier=A Chrysler 200 [1979, 2022] seeds=[2015] records=2575 errors=11
+09:05:15 seg done tier=A Dodge Journey [2009, 2020] seeds=[2012] records=2575 errors=11
+09:05:15 seg done tier=A Chrysler Town & Country [2008, 2016] seeds=[2008] records=2575 errors=11
+09:05:15 seg done tier=A Chrysler 300 [1999, 2021] seeds=[2006] records=2575 errors=11
+09:05:15 seg done tier=A Dodge Avenger [1995, 2014] seeds=[2013] records=2575 errors=11
+09:05:15 seg done tier=A Chrysler PT Cruiser [2001, 2010] seeds=[2006] records=2575 errors=11
+09:05:15 seg done tier=A Dodge Charger [1971, 2010] seeds=[2007] records=2575 errors=11
+09:05:15 seg done tier=A Dodge Dakota [1997, 2004] seeds=[2000] records=2575 errors=11
+09:05:15 seg done tier=A Dodge Caravan [1984, 2020] seeds=[2005] records=2575 errors=11
+09:05:15 seg done tier=A Chrysler Town & Country [1992, 2007] seeds=[2005] records=2575 errors=11
+09:05:15 seg done tier=A Dodge Dart [1960, 2016] seeds=[2013] records=2575 errors=11
+09:05:15 seg done tier=A Dodge Caliber [2007, 2012] seeds=[2007] records=2575 errors=11
+09:05:15 seg done tier=A Dodge Grand Caravan [2001, 2007] seeds=[2005] records=2575 errors=11
+09:05:15 seg done tier=A Dodge Charger [2011, 2023] seeds=[2013] records=2575 errors=11
+09:05:15 seg done tier=A Dodge Durango [2004, 2009] seeds=[2005] records=2575 errors=11
+09:05:15 seg done tier=A Dodge Durango [1998, 2003] seeds=[2003] records=2575 errors=11
+09:05:15 seg done tier=A Chrysler Sebring [2007, 2011] seeds=[2008] records=2575 errors=11
+09:05:15 seg done tier=A Dodge Dakota [2005, 2011] seeds=[2005] records=2575 errors=11
+09:05:15 seg done tier=A Chrysler Pacifica [2004, 2008] seeds=[2006] records=2575 errors=11
+09:05:15 seg done tier=A Dodge Nitro [2007, 2011] seeds=[2007] records=2575 errors=11
+09:05:15 seg done tier=A Ram 1500 [2009, 2022] seeds=[2012] records=2575 errors=11
+09:05:15 seg done tier=A Chrysler Sebring [2001, 2006] seeds=[2004] records=2575 errors=11
+09:05:15 seg done tier=A Dodge Durango [2011, 2023] seeds=[2013] records=2575 errors=11
+09:05:15 seg done tier=A Dodge Neon [2000, 2005] seeds=[2005] records=2575 errors=11
+09:05:15 seg done tier=A Dodge Ram Pickup [1988, 2011] seeds=[2004] records=2575 errors=11
+09:05:15 seg done tier=A Dodge Stratus [1996, 2008] seeds=[2006] records=2575 errors=11
+09:05:15 seg done tier=A Dodge Dakota [1987, 1996] seeds=[1992] records=2575 errors=11
+09:05:15 seg done tier=A Dodge Magnum [1978, 2008] seeds=[2005] records=2575 errors=11
+09:05:15 seg done tier=A Dodge Ram Van [1966, 2003] seeds=[1999] records=2575 errors=11
+09:05:15 seg done tier=A Dodge Grand Caravan [1988, 2000] seeds=[2000] records=2575 errors=11
+09:05:15 seg done tier=A Chrysler Aspen [2007, 2009] seeds=[2007] records=2575 errors=11
+09:05:15 seg done tier=A Dodge Ram 2500 [1979, 2002] seeds=[2001] records=2575 errors=11
+09:05:15 seg done tier=A Dodge 1500 Pickup [1995, 2023] seeds=[2002] records=2575 errors=11
+09:05:15 seg done tier=A Chrysler 300C [2005, 2018] seeds=[2006] records=2575 errors=11
+09:05:15 seg done tier=A Dodge Ram 2500 [2003, 2009] seeds=[2003] records=2575 errors=11
+09:05:15 seg done tier=A Dodge Challenger [2009, 2014] seeds=[2010] records=2575 errors=11
+09:05:15 seg done tier=A Dodge Intrepid [1993, 2004] seeds=[2004] records=2575 errors=11
+09:05:15 seg done tier=A Dodge Caravan/Grand Caravan [1996, 2008] seeds=[2005] records=2575 errors=11
+09:05:15 seg done tier=A Chrysler Concorde [1993, 2004] seeds=[2002] records=2575 errors=11
+09:05:15 seg done tier=A Chrysler Sebring [1992, 2000] seeds=[2000] records=2575 errors=11
+09:05:16 nav-fail Dodge D1500 2004: ValueError: no 2004 catalog for Dodge D1500 (dodge-['d150'])
+09:05:16 seg done tier=A Dodge D1500 [1995, 2015] seeds=[2004] records=2575 errors=12
+09:07:56 chain-unlinked starter 1 numbers named by R6044736AC, no catalog link: R6044736AB
+09:08:52 chain-unlinked headlights 1 numbers named by 55077794AB, no catalog link: 55077794AD
+09:08:52 chain-unlinked headlights 1 numbers named by 55077795AB, no catalog link: 55077795AD
+09:08:52 chain-unlinked headlights 1 numbers named by 55372814AA, no catalog link: 55372814AB
+09:08:52 chain-unlinked headlights 1 numbers named by 55372815AA, no catalog link: 55372815AB
+09:10:20 chain-unlinked fuel-pump-module 1 numbers named by 5104694AB, no catalog link: RL104694AC
+09:10:20 chain-unlinked fuel-pump-module 1 numbers named by 5104696AB, no catalog link: 68001958AB
+09:10:20 chain-unlinked fuel-pump-module 1 numbers named by 5134554AC, no catalog link: 5134554AE
+09:10:20 chain-unlinked fuel-pump-module 1 numbers named by 5179439AA, no catalog link: RL179439AB
+09:13:24 seg done tier=A Dodge Ram [2002, 2008] seeds=[2002, 2006, 2003] records=2590 errors=12
+09:15:00 chain-unlinked tail-lights 1 numbers named by 4805592AD, no catalog link: 68055178AA
+09:15:00 chain-unlinked tail-lights 1 numbers named by 4805593AD, no catalog link: 68055179AA
+09:15:00 chain-unlinked tail-lights 1 numbers named by 4805594AC, no catalog link: 4805594AD
+09:15:00 chain-unlinked tail-lights 1 numbers named by 4805595AC, no catalog link: 4805595AD
+09:17:32 chain-unlinked tail-lights 1 numbers named by 4805592AE, no catalog link: 68055178AA
+09:17:32 chain-unlinked tail-lights 1 numbers named by 4805593AE, no catalog link: 68055179AA
+09:19:48 chain-unlinked tail-lights 1 numbers named by 4780050AH, no catalog link: 4780050AG
+09:19:48 chain-unlinked tail-lights 1 numbers named by 4780051AH, no catalog link: 4780051AG
+09:20:20 chain-unlinked side-mirrors 1 numbers named by 4574590AE, no catalog link: 4805944AB
+09:20:20 chain-unlinked side-mirrors 1 numbers named by 4574591AE, no catalog link: 4574591AJ
+09:21:00 chain-unlinked window-regulator 1 numbers named by 4574092AK, no catalog link: 4574092AS
+09:21:00 chain-unlinked window-regulator 1 numbers named by 4574093AK, no catalog link: 4574093AS
+09:22:12 chain-unlinked throttle-body 1 numbers named by 4591169AC, no catalog link: 4591169AD
+09:22:20 seg done tier=A Chrysler 300M [1999, 2005] seeds=[2002, 2004, 2000] records=2611 errors=12
+09:27:00 nav-fail Dodge Ram 1981: ValueError: no 1981 catalog for Dodge Ram (dodge-['d150', 'w150'])
+09:27:00 seg done tier=A Dodge Ram [1961, 2001] seeds=[2001, 1981] records=2611 errors=13
+09:29:56 chain-unlinked power-steering-pump 1 numbers named by R2038708, no catalog link: 52038708AB
+09:35:13 net-fail list https://www.moparpartsgiant.com/parts-list/1987-dodge-ram_wagon/steering/power_steering_pump.html: network error after 3 tries: ReadTimeout
+09:35:13 seed A|Dodge|Ram Wagon|1987 had network failures; left open for retry
+09:35:13 seg done tier=A Dodge Ram Wagon [1981, 2002] seeds=[1994, 1988, 1987] records=2618 errors=14
+09:36:07 chain-unlinked alternator 1 numbers named by 4868430AD, no catalog link: 4868430AH
+09:36:31 chain-unlinked ac-compressor 1 numbers named by 5005410AD, no catalog link: 5005498AF
+09:37:27 chain-unlinked fuel-pump-module 1 numbers named by 5096149AA, no catalog link: RL096149AB
+09:37:27 chain-unlinked fuel-pump-module 1 numbers named by 5101830AA, no catalog link: 5101830AC
+09:38:07 time budget reached records=2624
