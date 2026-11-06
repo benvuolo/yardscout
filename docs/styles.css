@@ -2723,3 +2723,8 @@ select { padding-left: 12px; padding-right: 34px; background-position: right 12p
 .filter-count { color: var(--on-accent); }
 .zip-banner-form input, .waitlist-row input, .compare-input-wrap .search-box { min-width: 0; width: 100%; }
 #car-detail:not(.open) { transform: none; }
+/* Stay line: the words first, the meter right under them (never squeezed). */
+.car-meta { flex-direction: column; align-items: flex-start; gap: 6px; }
+.car-meta .stay-meter { order: 2; }
+.car-meta-text { flex: none; }
+a { color: var(--accent); }
