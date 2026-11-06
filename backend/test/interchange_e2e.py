@@ -246,15 +246,95 @@ with sync_playwright() as pw:
           not _re.search(r"(online: ~|worth )\$\d", page.locator("#pf-results").inner_text()))
     page.screenshot(path=str(SHOTS / "6_browse_free_blur.png"))
 
-    # Live cards' free blur unaffected by the filter's removal.
+    # Free gate since the Pull Sheet redesign (owner decision 2026-11-06):
+    # part NAMES are free; every price/value stays Pro. Proven on every
+    # surface that shows a car: live card, car screen, pull sheet, watch hits.
+    # The one free "sample" car per view (shown in full on purpose) is skipped.
+    VALUE_RE = (r"\$\s?\d|Used online|online: ~|Yard: \$|Save ~|save ~|worth \$"
+                r"|Picked over fast|Steady turnover|Usually still there")
+    VALUE_SEL = ".part-cost, .part-price, .part-save, .sell-badge, .range-text, .range-extra, .pf-save"
     page.click(".tab[data-tab='live']")
+    page.wait_for_timeout(500)
+    free = page.evaluate("""(args) => {
+      const [re, sel] = args; const rx = new RegExp(re);
+      const sample = typeof lastSampleKey !== 'undefined' ? lastSampleKey : null;
+      const cards = [...document.querySelectorAll('#live-grid .car-card[data-vkey]')]
+        .filter(c => c.dataset.vkey !== sample && !c.querySelector('.sample-pitch'));
+      const withParts = cards.filter(c => c.querySelector('.parts-summary'));
+      const named = withParts.filter(c => /to check: \\S/.test(c.querySelector('.parts-summary').textContent));
+      const leaks = cards.filter(c => rx.test(c.innerText) || c.querySelector(sel))
+        .map(c => [(c.innerText.match(new RegExp(re, 'g')) || []).join('|'), (c.querySelector(sel) || {}).className]);
+      return { cards: cards.length, withParts: withParts.length, named: named.length, leaks,
+               key: withParts.length ? withParts[0].dataset.vkey : null,
+               keys: withParts.slice(0, 3).map(c => c.dataset.vkey) };
+    }""", [VALUE_RE, VALUE_SEL])
+    check("free live cards: part names shown on the card",
+          free["withParts"] > 0 and free["named"] == free["withParts"], str(free)[:300])
+    check("free live cards: no price/value strings", not free["leaks"], str(free["leaks"][:2]))
+    # car screen
+    page.evaluate("(k) => openCarDetail(k)", free["key"])
+    page.wait_for_selector("#car-detail.open #car-detail-body .part-name")
+    det = page.evaluate("""(args) => {
+      const [re, sel] = args; const b = document.getElementById('car-detail');
+      return { names: b.querySelectorAll('.part-name').length,
+               blur: b.querySelectorAll('.locked-blur').length,
+               lock: b.querySelectorAll('.parts-lock').length,
+               leak: new RegExp(re).test(b.innerText) || !!b.querySelector(sel),
+               why: [(b.innerText.match(new RegExp(re, 'g')) || []).join('|'), (b.querySelector(sel) || {}).className],
+               text: b.innerText.slice(0, 200) };
+    }""", [VALUE_RE, VALUE_SEL])
+    check("free car screen: part names shown, none blurred",
+          det["names"] > 0 and det["blur"] == 0, str(det))
+    check("free car screen: one Pro lock line, no price/value strings",
+          det["lock"] == 1 and not det["leak"], str(det))
+    page.screenshot(path=str(SHOTS / "7_car_screen_free.png"))
+    page.evaluate("closeCarDetail()")
     page.wait_for_timeout(300)
-    leak = page.evaluate("""() => {
-      document.querySelectorAll('#live-grid .parts-details summary')
-        .forEach(s => s.click());
-      return document.querySelectorAll('#live-grid .locked-blur').length;
+    # pull sheet
+    sheet = page.evaluate("""(args) => {
+      const [re, sel, keys] = args;
+      for (const k of keys) if (!savedCars[k]) toggleSaved(k);
+      openSavedSheet();
+      const s = document.getElementById('saved-sheet');
+      return { parts: s.querySelectorAll('.saved-item-parts').length,
+               leak: new RegExp(re).test(s.innerText) || !!s.querySelector(sel) };
+    }""", [VALUE_RE, VALUE_SEL, free["keys"]])
+    check("free pull sheet: part names, no price/value strings",
+          sheet["parts"] > 0 and not sheet["leak"], str(sheet))
+    page.evaluate("closeSavedSheet()")
+    # watch hits
+    page.evaluate("""(k) => { const v = liveInventory.find(x => vehicleKey(x) === k);
+      const b = document.createElement('button'); b.dataset.make = v.make; b.dataset.model = v.model;
+      watchFromCard(b); }""", free["key"])
+    page.click(".tab[data-tab='alerts']")
+    page.wait_for_selector("#alert-matches-grid .car-card", timeout=10000)
+    hits = page.evaluate("""(args) => {
+      const [re, sel] = args; const g = document.getElementById('alert-matches-grid');
+      return { named: [...g.querySelectorAll('.parts-summary')].filter(b => /to check: \\S/.test(b.textContent)).length,
+               leak: new RegExp(re).test(g.innerText) || !!g.querySelector(sel),
+               why: [(g.innerText.match(new RegExp(re, 'g')) || []).join('|'), (g.querySelector(sel) || {}).className] };
+    }""", [VALUE_RE, VALUE_SEL])
+    check("free watch hits: part names, no price/value strings",
+          hits["named"] > 0 and not hits["leak"], str(hits))
+    ctx.close()
+
+    # Pro still sees the values on the same surfaces.
+    ctx = browser.new_context(**IPHONE)
+    page = boot(ctx, PRO_BOOT)
+    page.wait_for_timeout(500)
+    pro = page.evaluate("""() => {
+      const c = [...document.querySelectorAll('#live-grid .car-card[data-vkey]')].find(c => c.querySelector('.range-text'));
+      return { cardValue: !!c && /\\$\\d/.test(c.querySelector('.range-text').textContent), key: c ? c.dataset.vkey : null };
     }""")
-    check("free: live-card blur unaffected", leak > 0, str(leak))
+    check("pro live card: value line shows dollars", pro["cardValue"], str(pro))
+    page.evaluate("(k) => openCarDetail(k)", pro["key"])
+    page.wait_for_selector("#car-detail.open #car-detail-body .part-name")
+    pdet = page.evaluate("""() => { const b = document.getElementById('car-detail');
+      return { prices: b.querySelectorAll('.part-price').length, lock: b.querySelectorAll('.parts-lock').length,
+               dollars: /\\$\\d/.test(b.innerText) }; }""")
+    check("pro car screen: per-part prices, no lock line",
+          pdet["prices"] > 0 and pdet["lock"] == 0 and pdet["dollars"], str(pdet))
+    page.screenshot(path=str(SHOTS / "8_car_screen_pro.png"))
     ctx.close()
     browser.close()
 

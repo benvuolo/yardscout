@@ -3792,7 +3792,7 @@ function carValueParts(v, unlocked, isSampleCard) {
     nParts = shownParts.length;
     partsSummary = unlocked
       ? `Up to ${nParts} part${nParts > 1 ? 's' : ''} to check &middot; top: ${escapeHtml(bestPart || '')}`
-      : `${nParts} part${nParts > 1 ? 's' : ''} to check`;
+      : `${nParts} part${nParts > 1 ? 's' : ''} to check: ${ordered.slice(0, 3).map(p => escapeHtml(p.name)).join(', ')}${nParts > 3 ? ' and more' : ''}`;
     partsList = `
           <div class="ghost-note">These are parts this <strong>model</strong> typically shipped with &mdash; parts tied to a trim, option, or transmission that can\u2019t be confirmed from the VIN are marked &ldquo;if equipped.&rdquo; Yards track cars, not remaining parts, so some may already be pulled; newer arrivals are more likely intact.</div>
           ${unlocked ? '' : `<button type="button" class="lock-chip parts-lock" onclick="openUpgradeSheet('part-value','${encodeURIComponent(vehicleKey(v))}')">${ICON.lock} Yard price, used-online price and what you\u2019d save &mdash; Pro</button>`}
