@@ -154,7 +154,7 @@
   {
    "cat_make": "Mazda",
    "cat_model": "B3000",
-   "feed_cars": 18,
+   "feed_cars": 19,
    "fitment_rows": 29,
    "ns": "mazda",
    "proposed": {
@@ -229,7 +229,7 @@
   {
    "cat_make": "Mazda",
    "cat_model": "MX-5 Miata",
-   "feed_cars": 112,
+   "feed_cars": 108,
    "fitment_rows": 58,
    "ns": "mazda",
    "proposed": {
@@ -242,7 +242,7 @@
   {
    "cat_make": "Mazda",
    "cat_model": "Miata",
-   "feed_cars": 112,
+   "feed_cars": 108,
    "fitment_rows": 51,
    "ns": "mazda",
    "proposed": {

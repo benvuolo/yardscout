@@ -15,7 +15,7 @@
     ]
    },
    {
-    "basis": "catalog prints 'Aveo' (65 fitment rows, oem-raw@42683f9); normalize_model canon 'Aveo', 577 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints 'Aveo' (65 fitment rows, oem-raw@42683f9); normalize_model canon 'Aveo', 576 feed cars (inventory 2026-11-06); identity draft",
     "cat_make": "Chevrolet",
     "cat_model": "Aveo",
     "ns": "gm",
@@ -67,7 +67,7 @@
     ]
    },
    {
-    "basis": "catalog prints 'Tracker' (24 fitment rows, oem-raw@42683f9); normalize_model canon 'Tracker', 115 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints 'Tracker' (24 fitment rows, oem-raw@42683f9); normalize_model canon 'Tracker', 114 feed cars (inventory 2026-11-06); identity draft",
     "cat_make": "Chevrolet",
     "cat_model": "Tracker",
     "ns": "gm",
@@ -159,7 +159,7 @@
    }
   ],
   "exclude": {
-   "gm|Chevrolet|Aveo5": "feed spelling or sub-model the catalog does not print as its own model (114 cars, under catalog squash 'aveo'); unmapped until a reviewed entry exists",
+   "gm|Chevrolet|Aveo5": "feed spelling or sub-model the catalog does not print as its own model (116 cars, under catalog squash 'aveo'); unmapped until a reviewed entry exists",
    "gm|Chevrolet|G3500": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash 'g3'); unmapped until a reviewed entry exists",
    "gm|GMC|G3500 Rally": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'g3'); unmapped until a reviewed entry exists",
    "gm|GMC|G3500 Vandura": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash 'g3'); unmapped until a reviewed entry exists",
@@ -539,7 +539,7 @@
   {
    "cat_make": "Chevrolet",
    "cat_model": "Aveo",
-   "feed_cars": 577,
+   "feed_cars": 576,
    "fitment_rows": 65,
    "ns": "gm",
    "proposed": {
@@ -550,7 +550,7 @@
    "squash_neighbours": [
     [
      "Aveo5",
-     114
+     116
     ]
    ]
   },
@@ -718,7 +718,7 @@
   {
    "cat_make": "Chevrolet",
    "cat_model": "Tracker",
-   "feed_cars": 115,
+   "feed_cars": 114,
    "fitment_rows": 24,
    "ns": "gm",
    "proposed": {

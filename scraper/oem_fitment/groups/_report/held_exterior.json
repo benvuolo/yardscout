@@ -1,0 +1,8707 @@
+{
+ "count": 307,
+ "groups": [
+  {
+   "apps": [
+    [
+     "Ford",
+     "Expedition",
+     2003,
+     2003
+    ],
+    [
+     "Lincoln",
+     "Navigator",
+     2004,
+     2004
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Ford catalog lists #2L1Z-17757-BA for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "2L1Z-17757-BA"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2003-ford-expedition/body_and_paint/radiator_grille_and_front_bumper.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper-asy-front_2l1z-17757-ba.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Expedition",
+     2003,
+     2003
+    ],
+    [
+     "Lincoln",
+     "Navigator",
+     2004,
+     2004
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Ford catalog lists #2L1Z-17757-BACP for both — fits some configurations; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "2L1Z-17757-BACP"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2003-ford-expedition/body_and_paint/radiator_grille_and_front_bumper.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper-asy-front_2l1z-17757-bacp.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Expedition",
+     2003,
+     2003
+    ],
+    [
+     "Lincoln",
+     "Navigator",
+     2004,
+     2004
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Ford catalog lists #2L1Z-17906-BA for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "2L1Z-17906-BA"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2003-ford-expedition/body_and_paint/rear_bumper.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper-asy-rear_2l1z-17906-ba.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Escape",
+     2008,
+     2008
+    ],
+    [
+     "Mercury",
+     "Mariner",
+     2008,
+     2008
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Ford catalog lists #8L8Z-7820125-A for both — fits some configurations; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "8L8Z-7820125-A"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2008-ford-escape-gas/body_and_paint/front_doors_hinges_weatherstrips.html",
+    "https://www.fordpartsgiant.com/parts/ford-door-asy-front_8l8z-7820125-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Escape",
+     2008,
+     2008
+    ],
+    [
+     "Mercury",
+     "Mariner",
+     2008,
+     2008
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Ford catalog lists #8L8Z-7824630-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "8L8Z-7824630-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2008-ford-escape-gas/body_and_paint/rear_doors_hinges_weatherstrips.html",
+    "https://www.fordpartsgiant.com/parts/ford-door-assy-rear-less-hinges_8l8z-7824630-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Escape",
+     2008,
+     2008
+    ],
+    [
+     "Mercury",
+     "Mariner",
+     2008,
+     2008
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Ford catalog lists #8L8Z-7824631-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "8L8Z-7824631-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2008-ford-escape-gas/body_and_paint/rear_doors_hinges_weatherstrips.html",
+    "https://www.fordpartsgiant.com/parts/ford-door-assy-rear-less-hinges_8l8z-7824631-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Escape",
+     2008,
+     2008
+    ],
+    [
+     "Mercury",
+     "Mariner",
+     2008,
+     2008
+    ]
+   ],
+   "cat": "liftgate",
+   "note": "Ford catalog lists #8L8Z-7840010-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "8L8Z-7840010-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2008-ford-escape-gas/body_and_paint/luggage_compartment_door.html",
+    "https://www.fordpartsgiant.com/parts/ford-gate-asy_8l8z-7840010-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Fusion",
+     2008,
+     2008
+    ],
+    [
+     "Mercury",
+     "Milan",
+     2010,
+     2010
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Ford catalog lists #9E5Z-5420125-C for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "9E5Z-5420125-C"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2008-ford-fusion/body_and_paint/front_doors_hinges_weatherstrips.html",
+    "https://www.fordpartsgiant.com/parts/ford-door-front-rear_9e5z-5420125-c.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Fusion",
+     2012,
+     2012
+    ],
+    [
+     "Mercury",
+     "Milan",
+     2010,
+     2010
+    ]
+   ],
+   "cat": "fender",
+   "note": "Ford catalog lists #AE5Z-16005-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "AE5Z-16005-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2012-ford-fusion/body_and_paint/dash_panel_and_front_fenders.html",
+    "https://www.fordpartsgiant.com/parts/ford-fender-asy-front_ae5z-16005-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Fusion",
+     2012,
+     2012
+    ],
+    [
+     "Mercury",
+     "Milan",
+     2010,
+     2010
+    ]
+   ],
+   "cat": "fender",
+   "note": "Ford catalog lists #AE5Z-16006-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "AE5Z-16006-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2012-ford-fusion/body_and_paint/dash_panel_and_front_fenders.html",
+    "https://www.fordpartsgiant.com/parts/ford-fender-asy-front_ae5z-16006-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Fusion",
+     2012,
+     2012
+    ],
+    [
+     "Mercury",
+     "Milan",
+     2010,
+     2010
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Ford catalog lists #AE5Z-17757-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "AE5Z-17757-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2012-ford-fusion/body_and_paint/radiator_grille_and_front_bumper.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper-asy-front_ae5z-17757-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Fusion",
+     2012,
+     2012
+    ],
+    [
+     "Mercury",
+     "Milan",
+     2010,
+     2010
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Ford catalog lists #AE5Z-17757-ACP for both — fits some configurations; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "AE5Z-17757-ACP"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2012-ford-fusion/body_and_paint/radiator_grille_and_front_bumper.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper-asy-front_ae5z-17757-acp.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Fusion",
+     2012,
+     2012
+    ],
+    [
+     "Mercury",
+     "Milan",
+     2010,
+     2010
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Ford catalog lists #AE5Z-17906-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "AE5Z-17906-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2012-ford-fusion/body_and_paint/rear_bumper.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper-asy-rear_ae5z-17906-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Fusion",
+     2012,
+     2012
+    ],
+    [
+     "Mercury",
+     "Milan",
+     2010,
+     2010
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Ford catalog lists #AE5Z-17906-ACP for both — fits some configurations; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "AE5Z-17906-ACP"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2012-ford-fusion/body_and_paint/rear_bumper.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper-asy-rear_ae5z-17906-acp.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "F-150",
+     1995,
+     1995
+    ],
+    [
+     "Ford",
+     "F-250",
+     1997,
+     1997
+    ]
+   ],
+   "cat": "fender",
+   "note": "Ford catalog lists #F2TZ-16005-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "F2TZ-16005-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/1995-ford-f_150--6_cyl_4_9l-3at_c6/fenders_hood/fenders_aprons_related_parts.html",
+    "https://www.fordpartsgiant.com/parts/ford-fender-asy-front_f2tz-16005-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "F-150",
+     1995,
+     1995
+    ],
+    [
+     "Ford",
+     "F-250",
+     1997,
+     1997
+    ]
+   ],
+   "cat": "hood",
+   "note": "Ford catalog lists #F2TZ-16612-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "F2TZ-16612-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/1995-ford-f_150--6_cyl_4_9l-3at_c6/fenders_hood/hood_related_parts.html",
+    "https://www.fordpartsgiant.com/parts/ford-hood-asy_f2tz-16612-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "F-150",
+     1995,
+     1995
+    ],
+    [
+     "Ford",
+     "F-250",
+     1997,
+     1997
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Ford catalog lists #F2TZ-17757-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "F2TZ-17757-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/1995-ford-f_150--6_cyl_4_9l-3at_c6/speedometer_bumpers_mirrors_wipers/front_bumper_parts.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper-asy-front_f2tz-17757-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "F-150",
+     1995,
+     1995
+    ],
+    [
+     "Ford",
+     "F-250",
+     1997,
+     1997
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Ford catalog lists #F2TZ-17757-C for both — option: fits some option packages; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "F2TZ-17757-C"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/1995-ford-f_150--6_cyl_4_9l-3at_c6/speedometer_bumpers_mirrors_wipers/front_bumper_parts.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper-asy-front_f2tz-17757-c.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "F-150",
+     1995,
+     1995
+    ],
+    [
+     "Ford",
+     "F-250",
+     1997,
+     1997
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Ford catalog lists #F2TZ-17906-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "F2TZ-17906-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/1995-ford-f_150--6_cyl_4_9l-3at_c6/speedometer_bumpers_mirrors_wipers/rear_bumper_parts.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper-asy-rear_f2tz-17906-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "F-150",
+     1995,
+     1995
+    ],
+    [
+     "Ford",
+     "F-250",
+     1997,
+     1997
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Ford catalog lists #F2TZ-17906-B for both — option: fits some option packages; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "F2TZ-17906-B"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/1995-ford-f_150--6_cyl_4_9l-3at_c6/speedometer_bumpers_mirrors_wipers/rear_bumper_parts.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper-asy-rear_f2tz-17906-b.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "F-150",
+     1995,
+     1995
+    ],
+    [
+     "Ford",
+     "F-250",
+     1997,
+     1997
+    ]
+   ],
+   "cat": "tailgate",
+   "note": "Ford catalog lists #F2TZ-9940700-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "F2TZ-9940700-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/1995-ford-f_150--6_cyl_4_9l-3at_c6/fuel_filler_luggage_carrier_rear_door/tailgate_hinge_latch_parts.html",
+    "https://www.fordpartsgiant.com/parts/ford-tailgate-asy_f2tz-9940700-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "E-150",
+     1999,
+     1999
+    ],
+    [
+     "Ford",
+     "E-250",
+     2006,
+     2006
+    ]
+   ],
+   "cat": "liftgate",
+   "note": "Ford catalog lists #F2UZ-1540010-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "F2UZ-1540010-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2006-ford-e_250/body_and_paint/back_doors_hinges_weatherstrips.html",
+    "https://www.fordpartsgiant.com/parts/ford-tailgate-and-hinge-assy_f2uz-1540010-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "E-150",
+     1999,
+     1999
+    ],
+    [
+     "Ford",
+     "E-250",
+     2006,
+     2006
+    ]
+   ],
+   "cat": "liftgate",
+   "note": "Ford catalog lists #F2UZ-1540010-B for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "F2UZ-1540010-B"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2006-ford-e_250/body_and_paint/back_doors_hinges_weatherstrips.html",
+    "https://www.fordpartsgiant.com/parts/ford-tailgate-and-hinge-assy_f2uz-1540010-b.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "F-150",
+     1995,
+     1995
+    ],
+    [
+     "Ford",
+     "F-250",
+     1997,
+     1997
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Ford catalog lists #F3TZ-17757-ABCP for both — option: fits some option packages; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "F3TZ-17757-ABCP"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/1995-ford-f_150--6_cyl_4_9l-3at_c6/speedometer_bumpers_mirrors_wipers/front_bumper_parts.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper_f3tz-17757-abcp.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "F-150",
+     1995,
+     1995
+    ],
+    [
+     "Ford",
+     "F-250",
+     1997,
+     1997
+    ]
+   ],
+   "cat": "fender",
+   "note": "Ford catalog lists #F4TZ-16006-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "F4TZ-16006-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/1995-ford-f_150--6_cyl_4_9l-3at_c6/fenders_hood/fenders_aprons_related_parts.html",
+    "https://www.fordpartsgiant.com/parts/ford-fender-asy-front_f4tz-16006-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "F-150",
+     1995,
+     1995
+    ],
+    [
+     "Ford",
+     "F-250",
+     1997,
+     1997
+    ]
+   ],
+   "cat": "grille",
+   "note": "Ford catalog lists #F4TZ-8200-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "F4TZ-8200-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/1995-ford-f_150--6_cyl_4_9l-3at_c6/radiator_grill/radiator_grille_related_parts.html",
+    "https://www.fordpartsgiant.com/parts/ford-grille-assy-radiator_f4tz-8200-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "F-150",
+     1995,
+     1995
+    ],
+    [
+     "Ford",
+     "F-250",
+     1997,
+     1997
+    ]
+   ],
+   "cat": "grille",
+   "note": "Ford catalog lists #F4TZ-8200-ACP for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "F4TZ-8200-ACP"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/1995-ford-f_150--6_cyl_4_9l-3at_c6/radiator_grill/radiator_grille_related_parts.html",
+    "https://www.fordpartsgiant.com/parts/ford-grille-assy-radiator_f4tz-8200-acp.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "E-150",
+     1999,
+     1999
+    ],
+    [
+     "Ford",
+     "E-250",
+     2006,
+     2006
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Ford catalog lists #F4UZ-17906-C for both — option: fits some option packages; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "F4UZ-17906-C"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2006-ford-e_250/body_and_paint/rear_bumper.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper-assy-rear_f4uz-17906-c.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Expedition",
+     2000,
+     2000
+    ],
+    [
+     "Ford",
+     "F-150",
+     2001,
+     2001
+    ],
+    [
+     "Ford",
+     "F-250",
+     1997,
+     1997
+    ]
+   ],
+   "cat": "hood",
+   "note": "Ford catalog lists #F65Z-16612-AL for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "F65Z-16612-AL"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--6_cyl_4_2l-4at_4r100/fenders_hood/hood_related_parts.html",
+    "https://www.fordpartsgiant.com/parts/ford-hood-asy_f65z-16612-al.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "F-150",
+     2001,
+     2001
+    ],
+    [
+     "Ford",
+     "F-250",
+     1997,
+     1997
+    ],
+    [
+     "Ford",
+     "F-250",
+     1999,
+     1999
+    ]
+   ],
+   "cat": "tailgate",
+   "note": "Ford catalog lists #F65Z-9940700-AX for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "F65Z-9940700-AX"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--6_cyl_4_2l-4at_4r100/fuel_filler_luggage_carrier_rear_door/tailgate_hinge_latch_parts.html",
+    "https://www.fordpartsgiant.com/parts/ford-tailgate-asy_f65z-9940700-ax.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Explorer",
+     1999,
+     1999
+    ],
+    [
+     "Mercury",
+     "Mountaineer",
+     2000,
+     2000
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Ford catalog lists #F87Z-13404-AB for both — fits some configurations; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "F87Z-13404-AB"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/1999-ford-explorer--6_cyl_4_0l-4at_4r70w/lamps_wiring/rear_lamp_backup_lamp_related_parts.html",
+    "https://www.fordpartsgiant.com/parts/ford-lamp-assy-rear-stop-and-flasher_f87z-13404-ab.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Explorer",
+     1999,
+     1999
+    ],
+    [
+     "Mercury",
+     "Mountaineer",
+     2000,
+     2000
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Ford catalog lists #F87Z-13404-AC for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "F87Z-13404-AC"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/1999-ford-explorer--6_cyl_4_0l-4at_4r70w/lamps_wiring/rear_lamp_backup_lamp_related_parts.html",
+    "https://www.fordpartsgiant.com/parts/ford-lamp-assy-rear-stop-and-flasher_f87z-13404-ac.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Explorer",
+     1999,
+     1999
+    ],
+    [
+     "Mercury",
+     "Mountaineer",
+     2000,
+     2000
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Ford catalog lists #F87Z-13404-ACCP for both — fits some configurations; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "F87Z-13404-ACCP"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/1999-ford-explorer--6_cyl_4_0l-4at_4r70w/lamps_wiring/rear_lamp_backup_lamp_related_parts.html",
+    "https://www.fordpartsgiant.com/parts/ford-lamp-assy-rear-stop-and-flasher_f87z-13404-accp.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Explorer",
+     1999,
+     1999
+    ],
+    [
+     "Mercury",
+     "Mountaineer",
+     2000,
+     2000
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Ford catalog lists #F87Z-13405-AB for both — fits some configurations; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "F87Z-13405-AB"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/1999-ford-explorer--6_cyl_4_0l-4at_4r70w/lamps_wiring/rear_lamp_backup_lamp_related_parts.html",
+    "https://www.fordpartsgiant.com/parts/ford-lamp-assy-rear-stop-and-flasher_f87z-13405-ab.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Explorer",
+     1999,
+     1999
+    ],
+    [
+     "Mercury",
+     "Mountaineer",
+     2000,
+     2000
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Ford catalog lists #F87Z-13405-AC for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "F87Z-13405-AC"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/1999-ford-explorer--6_cyl_4_0l-4at_4r70w/lamps_wiring/rear_lamp_backup_lamp_related_parts.html",
+    "https://www.fordpartsgiant.com/parts/ford-lamp-assy-rear-stop-and-flasher_f87z-13405-ac.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Explorer",
+     1999,
+     1999
+    ],
+    [
+     "Mercury",
+     "Mountaineer",
+     2000,
+     2000
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Ford catalog lists #F87Z-13405-ACCP for both — fits some configurations; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "F87Z-13405-ACCP"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/1999-ford-explorer--6_cyl_4_0l-4at_4r70w/lamps_wiring/rear_lamp_backup_lamp_related_parts.html",
+    "https://www.fordpartsgiant.com/parts/ford-lamp-assy-rear-stop-and-flasher_f87z-13405-accp.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Expedition",
+     2000,
+     2000
+    ],
+    [
+     "Ford",
+     "F-150",
+     2001,
+     2001
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Ford catalog lists #XL3Z-17757-AA for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "XL3Z-17757-AA"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--6_cyl_4_2l-4at_4r100/speedometer_bumpers_mirrors_wipers/front_bumper_parts.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper_xl3z-17757-aa.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Expedition",
+     2000,
+     2000
+    ],
+    [
+     "Ford",
+     "F-150",
+     2001,
+     2001
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Ford catalog lists #XL3Z-17757-AACP for both — option: fits some option packages; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "XL3Z-17757-AACP"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--6_cyl_4_2l-4at_4r100/speedometer_bumpers_mirrors_wipers/front_bumper_parts.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper_xl3z-17757-aacp.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "F-150",
+     2001,
+     2001
+    ],
+    [
+     "Ford",
+     "F-250",
+     1997,
+     1997
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Ford catalog lists #XL3Z-17906-BBCP for both — option: fits some option packages; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "XL3Z-17906-BBCP"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--6_cyl_4_2l-4at_4r100/speedometer_bumpers_mirrors_wipers/rear_bumper_parts.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper_xl3z-17906-bbcp.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "F-150",
+     2001,
+     2001
+    ],
+    [
+     "Ford",
+     "F-250",
+     1997,
+     1997
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Ford catalog lists #YL3Z-17906-CABCP for both — fits some configurations; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "YL3Z-17906-CABCP"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--6_cyl_4_2l-4at_4r100/speedometer_bumpers_mirrors_wipers/rear_bumper_parts.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper-assy-rear_yl3z-17906-cabcp.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Colorado",
+     2005,
+     2005
+    ],
+    [
+     "GMC",
+     "Canyon",
+     2005,
+     2005
+    ],
+    [
+     "GMC",
+     "Canyon",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "GM catalog lists #15105522 for both — fits some configurations; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "15105522"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2005-chevrolet-colorado-2wd/starter_generator_ignition_electrical_lamps/lamps_rear.html",
+    "https://www.gmpartsgiant.com/parts/gm-lamp-15105522.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Tahoe",
+     1999,
+     1999
+    ],
+    [
+     "GMC",
+     "Yukon",
+     1999,
+     1999
+    ]
+   ],
+   "cat": "headlights",
+   "note": "GM catalog lists #15738657 for both — fits some configurations; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "15738657"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/1999-chevrolet-tahoe-4wd/starter_generator_ignition_electrical_lamps/lamps_front_composite.html",
+    "https://www.gmpartsgiant.com/parts/gm-headlamp-15738657.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Tahoe",
+     1999,
+     1999
+    ],
+    [
+     "GMC",
+     "Yukon",
+     1999,
+     1999
+    ]
+   ],
+   "cat": "headlights",
+   "note": "GM catalog lists #15738658 for both — fits some configurations; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "15738658"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/1999-chevrolet-tahoe-4wd/starter_generator_ignition_electrical_lamps/lamps_front_composite.html",
+    "https://www.gmpartsgiant.com/parts/gm-headlamp-15738658.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Cadillac",
+     "DeVille",
+     2004,
+     2004
+    ],
+    [
+     "Cadillac",
+     "Seville",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "GM catalog lists #16524767 for both — fits some configurations; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "16524767"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_rear.html",
+    "https://www.gmpartsgiant.com/parts/gm-lamp-asm-16524767.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Cadillac",
+     "DeVille",
+     2004,
+     2004
+    ],
+    [
+     "Cadillac",
+     "Seville",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "GM catalog lists #16524768 for both — fits some configurations; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "16524768"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_rear.html",
+    "https://www.gmpartsgiant.com/parts/gm-lamp-asm-16524768.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Astro",
+     2000,
+     2000
+    ],
+    [
+     "GMC",
+     "Safari",
+     1997,
+     1997
+    ],
+    [
+     "GMC",
+     "Safari",
+     2000,
+     2001
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "GM catalog lists #16525607 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "16525607"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2000-chevrolet-astro-2wd/starter_generator_ignition_electrical_lamps/lamps_rear.html",
+    "https://www.gmpartsgiant.com/parts/gm-lamp-16525607.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Astro",
+     2000,
+     2000
+    ],
+    [
+     "GMC",
+     "Safari",
+     1997,
+     1997
+    ],
+    [
+     "GMC",
+     "Safari",
+     2000,
+     2001
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "GM catalog lists #16525608 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "16525608"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2000-chevrolet-astro-2wd/starter_generator_ignition_electrical_lamps/lamps_rear.html",
+    "https://www.gmpartsgiant.com/parts/gm-lamp-16525608.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Silverado",
+     1999,
+     2000
+    ],
+    [
+     "Chevrolet",
+     "Suburban",
+     2001,
+     2001
+    ]
+   ],
+   "cat": "headlights",
+   "note": "GM catalog lists #16526133 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "16526133"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2000-chevrolet-silverado-1500_2wd/starter_generator_ignition_electrical_lamps/lamps_front.html",
+    "https://www.gmpartsgiant.com/parts/gm-headlamp-16526133.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Silverado",
+     1999,
+     2000
+    ],
+    [
+     "Chevrolet",
+     "Suburban",
+     2001,
+     2001
+    ]
+   ],
+   "cat": "headlights",
+   "note": "GM catalog lists #16526134 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "16526134"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2000-chevrolet-silverado-1500_2wd/starter_generator_ignition_electrical_lamps/lamps_front.html",
+    "https://www.gmpartsgiant.com/parts/gm-headlamp-16526134.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Silverado",
+     1999,
+     2000
+    ],
+    [
+     "Chevrolet",
+     "Suburban",
+     2001,
+     2001
+    ]
+   ],
+   "cat": "headlights",
+   "note": "GM catalog lists #16526137 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "16526137"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2000-chevrolet-silverado-1500_2wd/starter_generator_ignition_electrical_lamps/lamps_front.html",
+    "https://www.gmpartsgiant.com/parts/gm-headlamp-16526137.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Silverado",
+     1999,
+     2000
+    ],
+    [
+     "Chevrolet",
+     "Suburban",
+     2001,
+     2001
+    ]
+   ],
+   "cat": "headlights",
+   "note": "GM catalog lists #16526138 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "16526138"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2000-chevrolet-silverado-1500_2wd/starter_generator_ignition_electrical_lamps/lamps_front.html",
+    "https://www.gmpartsgiant.com/parts/gm-headlamp-16526138.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "GMC",
+     "Jimmy",
+     1998,
+     1998
+    ],
+    [
+     "GMC",
+     "Sonoma",
+     2000,
+     2000
+    ]
+   ],
+   "cat": "headlights",
+   "note": "GM catalog lists #16526225 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "16526225"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2000-gmc-sonoma-2wd/starter_generator_ignition_electrical_lamps/headlamps_composite.html",
+    "https://www.gmpartsgiant.com/parts/gm-headlamp-16526225.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "GMC",
+     "Jimmy",
+     1998,
+     1998
+    ],
+    [
+     "GMC",
+     "Sonoma",
+     2000,
+     2000
+    ]
+   ],
+   "cat": "headlights",
+   "note": "GM catalog lists #16526226 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "16526226"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2000-gmc-sonoma-2wd/starter_generator_ignition_electrical_lamps/headlamps_composite.html",
+    "https://www.gmpartsgiant.com/parts/gm-headlamp-16526226.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "GMC",
+     "Jimmy",
+     1998,
+     1998
+    ],
+    [
+     "GMC",
+     "Sonoma",
+     2000,
+     2000
+    ]
+   ],
+   "cat": "headlights",
+   "note": "GM catalog lists #16526227 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "16526227"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2000-gmc-sonoma-2wd/starter_generator_ignition_electrical_lamps/headlamps_composite.html",
+    "https://www.gmpartsgiant.com/parts/gm-headlamp-16526227.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "GMC",
+     "Jimmy",
+     1998,
+     1998
+    ],
+    [
+     "GMC",
+     "Sonoma",
+     2000,
+     2000
+    ]
+   ],
+   "cat": "headlights",
+   "note": "GM catalog lists #16526228 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "16526228"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2000-gmc-sonoma-2wd/starter_generator_ignition_electrical_lamps/headlamps_composite.html",
+    "https://www.gmpartsgiant.com/parts/gm-headlamp-16526228.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Buick",
+     "Century",
+     2003,
+     2003
+    ],
+    [
+     "Buick",
+     "Regal",
+     2000,
+     2000
+    ],
+    [
+     "Buick",
+     "Regal",
+     2003,
+     2004
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "GM catalog lists #19149887 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "19149887"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2003-buick-century/starter_generator_ignition_electrical_lamps/lamps_rear.html",
+    "https://www.gmpartsgiant.com/parts/gm-lamp-19149887.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Buick",
+     "Century",
+     2003,
+     2003
+    ],
+    [
+     "Buick",
+     "Regal",
+     2000,
+     2000
+    ],
+    [
+     "Buick",
+     "Regal",
+     2003,
+     2004
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "GM catalog lists #19149888 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "19149888"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2003-buick-century/starter_generator_ignition_electrical_lamps/lamps_rear.html",
+    "https://www.gmpartsgiant.com/parts/gm-lamp-19149888.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Buick",
+     "Century",
+     2003,
+     2003
+    ],
+    [
+     "Buick",
+     "Regal",
+     2000,
+     2000
+    ],
+    [
+     "Buick",
+     "Regal",
+     2003,
+     2004
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "GM catalog lists #19149889 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "19149889"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2003-buick-century/starter_generator_ignition_electrical_lamps/lamps_rear.html",
+    "https://www.gmpartsgiant.com/parts/gm-capsule-19149889.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Buick",
+     "Century",
+     2003,
+     2003
+    ],
+    [
+     "Buick",
+     "Regal",
+     2000,
+     2000
+    ],
+    [
+     "Buick",
+     "Regal",
+     2003,
+     2004
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "GM catalog lists #19149890 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "19149890"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2003-buick-century/starter_generator_ignition_electrical_lamps/lamps_rear.html",
+    "https://www.gmpartsgiant.com/parts/gm-lamp-19149890.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Blazer",
+     2001,
+     2001
+    ],
+    [
+     "GMC",
+     "Jimmy",
+     1998,
+     1998
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "GM catalog lists #19179358 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "19179358"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2001-chevrolet-blazer-2wd/starter_generator_ignition_electrical_lamps/lamps_rear.html",
+    "https://www.gmpartsgiant.com/parts/gm-lamp-19179358.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Blazer",
+     2001,
+     2001
+    ],
+    [
+     "GMC",
+     "Jimmy",
+     1998,
+     1998
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "GM catalog lists #19179679 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "19179679"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2001-chevrolet-blazer-2wd/starter_generator_ignition_electrical_lamps/lamps_rear.html",
+    "https://www.gmpartsgiant.com/parts/gm-lamp-19179679.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Venture",
+     2004,
+     2004
+    ],
+    [
+     "Pontiac",
+     "Montana",
+     2004,
+     2004
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "GM catalog lists #19206745 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "19206745"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2004-chevrolet-venture/starter_generator_ignition_electrical_lamps/lamps_rear.html",
+    "https://www.gmpartsgiant.com/parts/gm-lamp-19206745.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Venture",
+     2004,
+     2004
+    ],
+    [
+     "Pontiac",
+     "Montana",
+     2004,
+     2004
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "GM catalog lists #19206746 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "19206746"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2004-chevrolet-venture/starter_generator_ignition_electrical_lamps/lamps_rear.html",
+    "https://www.gmpartsgiant.com/parts/gm-lamp-19206746.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Cadillac",
+     "DeVille",
+     2004,
+     2004
+    ],
+    [
+     "Cadillac",
+     "Seville",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "headlights",
+   "note": "GM catalog lists #19208051 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "19208051"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_front.html",
+    "https://www.gmpartsgiant.com/parts/gm-headlamp-19208051.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Cadillac",
+     "DeVille",
+     2004,
+     2004
+    ],
+    [
+     "Cadillac",
+     "Seville",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "headlights",
+   "note": "GM catalog lists #19208052 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "19208052"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_front.html",
+    "https://www.gmpartsgiant.com/parts/gm-headlamp-19208052.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Cadillac",
+     "DeVille",
+     2004,
+     2004
+    ],
+    [
+     "Cadillac",
+     "Seville",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "headlights",
+   "note": "GM catalog lists #19208053 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "19208053"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_front.html",
+    "https://www.gmpartsgiant.com/parts/gm-headlamp-19208053.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Cadillac",
+     "DeVille",
+     2004,
+     2004
+    ],
+    [
+     "Cadillac",
+     "Seville",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "headlights",
+   "note": "GM catalog lists #19208054 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "19208054"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_front.html",
+    "https://www.gmpartsgiant.com/parts/gm-headlamp-19208054.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Cadillac",
+     "DeVille",
+     2004,
+     2004
+    ],
+    [
+     "Cadillac",
+     "Seville",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "headlights",
+   "note": "GM catalog lists #19208058 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "19208058"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_front.html",
+    "https://www.gmpartsgiant.com/parts/gm-headlamp-19208058.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Cadillac",
+     "DeVille",
+     2004,
+     2004
+    ],
+    [
+     "Cadillac",
+     "Seville",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "headlights",
+   "note": "GM catalog lists #19208061 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "19208061"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_front.html",
+    "https://www.gmpartsgiant.com/parts/gm-headlamp-19208061.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Cadillac",
+     "DeVille",
+     2004,
+     2004
+    ],
+    [
+     "Cadillac",
+     "Seville",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "headlights",
+   "note": "GM catalog lists #19208062 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "19208062"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_front.html",
+    "https://www.gmpartsgiant.com/parts/gm-headlamp-19208062.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Buick",
+     "Century",
+     2003,
+     2003
+    ],
+    [
+     "Buick",
+     "Regal",
+     2000,
+     2000
+    ],
+    [
+     "Buick",
+     "Regal",
+     2003,
+     2004
+    ]
+   ],
+   "cat": "headlights",
+   "note": "GM catalog lists #19244638 for both — fits some configurations; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "19244638"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2003-buick-century/starter_generator_ignition_electrical_lamps/lamps_front.html",
+    "https://www.gmpartsgiant.com/parts/gm-headlamp-19244638.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Buick",
+     "Century",
+     2003,
+     2003
+    ],
+    [
+     "Buick",
+     "Regal",
+     2000,
+     2000
+    ],
+    [
+     "Buick",
+     "Regal",
+     2003,
+     2004
+    ]
+   ],
+   "cat": "headlights",
+   "note": "GM catalog lists #19244639 for both — fits some configurations; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "19244639"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2003-buick-century/starter_generator_ignition_electrical_lamps/lamps_front.html",
+    "https://www.gmpartsgiant.com/parts/gm-headlamp-19244639.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Colorado",
+     2005,
+     2005
+    ],
+    [
+     "GMC",
+     "Canyon",
+     2005,
+     2005
+    ],
+    [
+     "GMC",
+     "Canyon",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "GM catalog lists #19417443 for both — fits some configurations; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "19417443"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2005-chevrolet-colorado-2wd/starter_generator_ignition_electrical_lamps/lamps_rear.html",
+    "https://www.gmpartsgiant.com/parts/gm-lamp-asm-tail-19417443.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Colorado",
+     2005,
+     2005
+    ],
+    [
+     "GMC",
+     "Canyon",
+     2005,
+     2005
+    ],
+    [
+     "GMC",
+     "Canyon",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "GM catalog lists #19417444 for both — fits some configurations; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "19417444"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2005-chevrolet-colorado-2wd/starter_generator_ignition_electrical_lamps/lamps_rear.html",
+    "https://www.gmpartsgiant.com/parts/gm-lamp-asm-tail-19417444.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Cobalt",
+     2007,
+     2007
+    ],
+    [
+     "Pontiac",
+     "G5",
+     2007,
+     2007
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "GM catalog lists #19418414 for both — fits some configurations; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "19418414"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2007-chevrolet-cobalt/starter_generator_ignition_electrical_lamps/lamps_rear.html",
+    "https://www.gmpartsgiant.com/parts/gm-lamp-asm-tail-see-guide-contact-bfo-19418414.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Cobalt",
+     2007,
+     2007
+    ],
+    [
+     "Pontiac",
+     "G5",
+     2007,
+     2007
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "GM catalog lists #19418415 for both — fits some configurations; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "19418415"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2007-chevrolet-cobalt/starter_generator_ignition_electrical_lamps/lamps_rear.html",
+    "https://www.gmpartsgiant.com/parts/gm-lamp-asm-tail-see-guide-contact-bfo-19418415.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Cobalt",
+     2007,
+     2007
+    ],
+    [
+     "Pontiac",
+     "G5",
+     2007,
+     2007
+    ]
+   ],
+   "cat": "headlights",
+   "note": "GM catalog lists #20964008 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "20964008"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2007-chevrolet-cobalt/starter_generator_ignition_electrical_lamps/lamps_front.html",
+    "https://www.gmpartsgiant.com/parts/gm-headlamp-20964008.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Cobalt",
+     2007,
+     2007
+    ],
+    [
+     "Pontiac",
+     "G5",
+     2007,
+     2007
+    ]
+   ],
+   "cat": "headlights",
+   "note": "GM catalog lists #20964009 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "20964009"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2007-chevrolet-cobalt/starter_generator_ignition_electrical_lamps/lamps_front.html",
+    "https://www.gmpartsgiant.com/parts/gm-headlamp-20964009.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Avalanche",
+     2007,
+     2007
+    ],
+    [
+     "Chevrolet",
+     "Tahoe",
+     2007,
+     2007
+    ]
+   ],
+   "cat": "headlights",
+   "note": "GM catalog lists #22853025 for both — fits some configurations; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "22853025"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2007-chevrolet-tahoe-2wd/starter_generator_ignition_electrical_lamps/lamps_front.html",
+    "https://www.gmpartsgiant.com/parts/gm-headlamp-22853025.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Avalanche",
+     2007,
+     2007
+    ],
+    [
+     "Chevrolet",
+     "Tahoe",
+     2007,
+     2007
+    ]
+   ],
+   "cat": "headlights",
+   "note": "GM catalog lists #22853026 for both — fits some configurations; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "22853026"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2007-chevrolet-tahoe-2wd/starter_generator_ignition_electrical_lamps/lamps_front.html",
+    "https://www.gmpartsgiant.com/parts/gm-headlamp-22853026.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Cadillac",
+     "DeVille",
+     2004,
+     2004
+    ],
+    [
+     "Cadillac",
+     "Seville",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "headlights",
+   "note": "GM catalog lists #25723077 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "25723077"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_front.html",
+    "https://www.gmpartsgiant.com/parts/gm-headlamp-25723077.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Cadillac",
+     "DeVille",
+     2004,
+     2004
+    ],
+    [
+     "Cadillac",
+     "Seville",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "headlights",
+   "note": "GM catalog lists #25723544 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "25723544"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_front.html",
+    "https://www.gmpartsgiant.com/parts/gm-headlamp-25723544.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Cadillac",
+     "DeVille",
+     2004,
+     2004
+    ],
+    [
+     "Cadillac",
+     "Seville",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "GM catalog lists #25749113 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "25749113"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_rear.html",
+    "https://www.gmpartsgiant.com/parts/gm-lamp-25749113.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Cadillac",
+     "DeVille",
+     2004,
+     2004
+    ],
+    [
+     "Cadillac",
+     "Seville",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "GM catalog lists #25749114 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "25749114"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_rear.html",
+    "https://www.gmpartsgiant.com/parts/gm-lamp-25749114.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Cadillac",
+     "DeVille",
+     2004,
+     2004
+    ],
+    [
+     "Cadillac",
+     "Seville",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "GM catalog lists #25751057 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "25751057"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_rear.html",
+    "https://www.gmpartsgiant.com/parts/gm-lamp-25751057.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Cadillac",
+     "DeVille",
+     2004,
+     2004
+    ],
+    [
+     "Cadillac",
+     "Seville",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "GM catalog lists #25751058 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "25751058"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_rear.html",
+    "https://www.gmpartsgiant.com/parts/gm-lamp-25751058.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Cadillac",
+     "DeVille",
+     2004,
+     2004
+    ],
+    [
+     "Cadillac",
+     "Seville",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "headlights",
+   "note": "GM catalog lists #25769515 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "25769515"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_front.html",
+    "https://www.gmpartsgiant.com/parts/gm-headlamp-25769515.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Cadillac",
+     "DeVille",
+     2004,
+     2004
+    ],
+    [
+     "Cadillac",
+     "Seville",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "headlights",
+   "note": "GM catalog lists #25769516 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "25769516"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_front.html",
+    "https://www.gmpartsgiant.com/parts/gm-headlamp-25769516.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Cadillac",
+     "DeVille",
+     2004,
+     2004
+    ],
+    [
+     "Cadillac",
+     "Seville",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "headlights",
+   "note": "GM catalog lists #25769517 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "25769517"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_front.html",
+    "https://www.gmpartsgiant.com/parts/gm-headlamp-25769517.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Cadillac",
+     "DeVille",
+     2004,
+     2004
+    ],
+    [
+     "Cadillac",
+     "Seville",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "headlights",
+   "note": "GM catalog lists #25769518 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "25769518"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_front.html",
+    "https://www.gmpartsgiant.com/parts/gm-headlamp-25769518.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Astro",
+     2000,
+     2000
+    ],
+    [
+     "GMC",
+     "Safari",
+     1997,
+     1997
+    ],
+    [
+     "GMC",
+     "Safari",
+     2000,
+     2001
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "GM catalog lists #5978023 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "5978023"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2000-chevrolet-astro-2wd/starter_generator_ignition_electrical_lamps/lamps_rear.html",
+    "https://www.gmpartsgiant.com/parts/gm-lamp-5978023.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Astro",
+     2000,
+     2000
+    ],
+    [
+     "GMC",
+     "Safari",
+     1997,
+     1997
+    ],
+    [
+     "GMC",
+     "Safari",
+     2000,
+     2001
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "GM catalog lists #5978024 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "5978024"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2000-chevrolet-astro-2wd/starter_generator_ignition_electrical_lamps/lamps_rear.html",
+    "https://www.gmpartsgiant.com/parts/gm-lamp-5978024.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Cadillac",
+     "DeVille",
+     1998,
+     1998
+    ],
+    [
+     "Cadillac",
+     "Seville",
+     1996,
+     1996
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "GM catalog lists #5978125 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "5978125"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/1998-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_rear.html",
+    "https://www.gmpartsgiant.com/parts/gm-lamp-5978125.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Cadillac",
+     "DeVille",
+     1998,
+     1998
+    ],
+    [
+     "Cadillac",
+     "Seville",
+     1996,
+     1996
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "GM catalog lists #5978126 for both — option: fits some option packages; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "5978126"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/1998-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_rear.html",
+    "https://www.gmpartsgiant.com/parts/gm-lamp-5978126.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "S-10",
+     2000,
+     2000
+    ],
+    [
+     "GMC",
+     "Sonoma",
+     1996,
+     1996
+    ],
+    [
+     "GMC",
+     "Sonoma",
+     2000,
+     2000
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "GM catalog lists #5978195 for both — fits some configurations; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "5978195"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2000-chevrolet-s10-2wd/starter_generator_ignition_electrical_lamps/lamps_rear.html",
+    "https://www.gmpartsgiant.com/parts/gm-lamp-5978195.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "S-10",
+     2000,
+     2000
+    ],
+    [
+     "GMC",
+     "Sonoma",
+     1996,
+     1996
+    ],
+    [
+     "GMC",
+     "Sonoma",
+     2000,
+     2000
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "GM catalog lists #5978196 for both — fits some configurations; verify the number on the part",
+   "ns": "gm",
+   "pn": [
+    "5978196"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.gmpartsgiant.com/parts-list/2000-chevrolet-s10-2wd/starter_generator_ignition_electrical_lamps/lamps_rear.html",
+    "https://www.gmpartsgiant.com/parts/gm-lamp-5978196.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "C280",
+     2007,
+     2007
+    ],
+    [
+     "Mercedes-Benz",
+     "C320",
+     2002,
+     2002
+    ]
+   ],
+   "cat": "trunk-lid",
+   "note": "Mercedes catalog lists #203-750-06-75-67 for both — fits some configurations; verify the number on the part",
+   "ns": "mb",
+   "pn": [
+    "203-750-06-75-67"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.mbpartsgiant.com/genuine/mercedes-benz~trunk-lid~203750067567",
+    "https://www.mbpartsgiant.com/parts-list/2005-mercedes_benz-c230/body-hardware/trunk-lid-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "C280",
+     2007,
+     2007
+    ],
+    [
+     "Mercedes-Benz",
+     "C320",
+     2002,
+     2002
+    ]
+   ],
+   "cat": "fender",
+   "note": "Mercedes catalog lists #203-880-01-18-67 for both — fits some configurations; verify the number on the part",
+   "ns": "mb",
+   "pn": [
+    "203-880-01-18-67"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.mbpartsgiant.com/genuine/mercedes-benz~fender~203880011867",
+    "https://www.mbpartsgiant.com/parts-list/2005-mercedes_benz-c230/body-hardware/fender-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "C280",
+     2007,
+     2007
+    ],
+    [
+     "Mercedes-Benz",
+     "C320",
+     2002,
+     2002
+    ]
+   ],
+   "cat": "hood",
+   "note": "Mercedes catalog lists #203-880-01-57-28 for both — fits some configurations; verify the number on the part",
+   "ns": "mb",
+   "pn": [
+    "203-880-01-57-28"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.mbpartsgiant.com/genuine/mercedes-benz~hood~203880015728",
+    "https://www.mbpartsgiant.com/parts-list/2005-mercedes_benz-c230/body-hardware/hood-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "C280",
+     2007,
+     2007
+    ],
+    [
+     "Mercedes-Benz",
+     "C320",
+     2002,
+     2002
+    ]
+   ],
+   "cat": "fender",
+   "note": "Mercedes catalog lists #203-880-02-18-67 for both — fits some configurations; verify the number on the part",
+   "ns": "mb",
+   "pn": [
+    "203-880-02-18-67"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.mbpartsgiant.com/genuine/mercedes-benz~fender~203880021867",
+    "https://www.mbpartsgiant.com/parts-list/2005-mercedes_benz-c230/body-hardware/fender-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "C280",
+     2007,
+     2007
+    ],
+    [
+     "Mercedes-Benz",
+     "C320",
+     2002,
+     2002
+    ]
+   ],
+   "cat": "grille",
+   "note": "Mercedes catalog lists #203-880-02-23-7246 for both — trim-limited; verify the number on the part",
+   "ns": "mb",
+   "pn": [
+    "203-880-02-23-7246"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.mbpartsgiant.com/genuine/mercedes-benz~grille~20388002237246",
+    "https://www.mbpartsgiant.com/parts-list/2005-mercedes_benz-c230/body-hardware/grille-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "C280",
+     2007,
+     2007
+    ],
+    [
+     "Mercedes-Benz",
+     "C320",
+     2002,
+     2002
+    ]
+   ],
+   "cat": "grille",
+   "note": "Mercedes catalog lists #203-880-02-23-9040 for both — trim-limited; verify the number on the part",
+   "ns": "mb",
+   "pn": [
+    "203-880-02-23-9040"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.mbpartsgiant.com/genuine/mercedes-benz~grille~20388002239040",
+    "https://www.mbpartsgiant.com/parts-list/2005-mercedes_benz-c230/body-hardware/grille-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "C280",
+     2007,
+     2007
+    ],
+    [
+     "Mercedes-Benz",
+     "C320",
+     2002,
+     2002
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Mercedes catalog lists #203-885-16-25-27 for both — fits some configurations; verify the number on the part",
+   "ns": "mb",
+   "pn": [
+    "203-885-16-25-27"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.mbpartsgiant.com/genuine/mercedes-benz~bumper-cover~203885162527",
+    "https://www.mbpartsgiant.com/parts-list/2005-mercedes_benz-c230/body-hardware/bumper-components-rear"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "C280",
+     2007,
+     2007
+    ],
+    [
+     "Mercedes-Benz",
+     "C320",
+     2002,
+     2002
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Mercedes catalog lists #203-885-21-25 for both — fits some configurations; verify the number on the part",
+   "ns": "mb",
+   "pn": [
+    "203-885-21-25"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.mbpartsgiant.com/genuine/mercedes-benz~bumper-cover~2038852125",
+    "https://www.mbpartsgiant.com/parts-list/2005-mercedes_benz-c230/body-hardware/bumper-components-rear"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "C280",
+     2007,
+     2007
+    ],
+    [
+     "Mercedes-Benz",
+     "C320",
+     2002,
+     2002
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Mercedes catalog lists #203-885-50-25 for both — fits some configurations; verify the number on the part",
+   "ns": "mb",
+   "pn": [
+    "203-885-50-25"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.mbpartsgiant.com/genuine/mercedes-benz~trim~2038855025",
+    "https://www.mbpartsgiant.com/parts-list/2005-mercedes_benz-c230/body-hardware/bumper-components-front"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "C280",
+     2007,
+     2007
+    ],
+    [
+     "Mercedes-Benz",
+     "C320",
+     2002,
+     2002
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Mercedes catalog lists #203-885-51-25 for both — fits some configurations; verify the number on the part",
+   "ns": "mb",
+   "pn": [
+    "203-885-51-25"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.mbpartsgiant.com/genuine/mercedes-benz~trim~2038855125",
+    "https://www.mbpartsgiant.com/parts-list/2005-mercedes_benz-c230/body-hardware/bumper-components-front"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "C280",
+     2007,
+     2007
+    ],
+    [
+     "Mercedes-Benz",
+     "C320",
+     2002,
+     2002
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Mercedes catalog lists #203-885-52-25 for both — fits some configurations; verify the number on the part",
+   "ns": "mb",
+   "pn": [
+    "203-885-52-25"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.mbpartsgiant.com/genuine/mercedes-benz~trim~2038855225",
+    "https://www.mbpartsgiant.com/parts-list/2005-mercedes_benz-c230/body-hardware/bumper-components-front"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "C280",
+     2007,
+     2007
+    ],
+    [
+     "Mercedes-Benz",
+     "C320",
+     2002,
+     2002
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Mercedes catalog lists #203-885-53-25 for both — fits some configurations; verify the number on the part",
+   "ns": "mb",
+   "pn": [
+    "203-885-53-25"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.mbpartsgiant.com/genuine/mercedes-benz~trim~2038855325",
+    "https://www.mbpartsgiant.com/parts-list/2005-mercedes_benz-c230/body-hardware/bumper-components-front"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "C300",
+     2011,
+     2011
+    ],
+    [
+     "Mercedes-Benz",
+     "C350",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Mercedes catalog lists #204-880-38-40-9999 for both — trim-limited; verify the number on the part",
+   "ns": "mb",
+   "pn": [
+    "204-880-38-40-9999"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.mbpartsgiant.com/genuine/mercedes-benz~exchange-trim~20488038409999",
+    "https://www.mbpartsgiant.com/parts-list/2011-mercedes_benz-c300/body-hardware/bumper-components-front"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "C300",
+     2011,
+     2011
+    ],
+    [
+     "Mercedes-Benz",
+     "C350",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Mercedes catalog lists #204-885-00-25-9999 for both — trim-limited; verify the number on the part",
+   "ns": "mb",
+   "pn": [
+    "204-885-00-25-9999"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.mbpartsgiant.com/genuine/mercedes-benz~bumper-cover~20488500259999",
+    "https://www.mbpartsgiant.com/parts-list/2011-mercedes_benz-c300/body-hardware/bumper-components-front"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "C300",
+     2011,
+     2011
+    ],
+    [
+     "Mercedes-Benz",
+     "C350",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Mercedes catalog lists #204-885-76-25-9999 for both — trim-limited; verify the number on the part",
+   "ns": "mb",
+   "pn": [
+    "204-885-76-25-9999"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.mbpartsgiant.com/genuine/mercedes-benz~bumper-cover~20488576259999",
+    "https://www.mbpartsgiant.com/parts-list/2011-mercedes_benz-c300/body-hardware/bumper-components-front"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "E350",
+     2006,
+     2006
+    ],
+    [
+     "Mercedes-Benz",
+     "E500",
+     2004,
+     2006
+    ]
+   ],
+   "cat": "liftgate",
+   "note": "Mercedes catalog lists #211-740-03-05-28 for both — trim-limited; verify the number on the part",
+   "ns": "mb",
+   "pn": [
+    "211-740-03-05-28"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.mbpartsgiant.com/genuine/mercedes-benz~lift-gate~211740030528",
+    "https://www.mbpartsgiant.com/parts-list/2006-mercedes_benz-e350/body-hardware/lift-gate"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "E350",
+     2006,
+     2006
+    ],
+    [
+     "Mercedes-Benz",
+     "E500",
+     2004,
+     2006
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Mercedes catalog lists #211-880-15-83 for both — trim-limited; verify the number on the part",
+   "ns": "mb",
+   "pn": [
+    "211-880-15-83"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.mbpartsgiant.com/genuine/mercedes-benz~bumper-cover~2118801583",
+    "https://www.mbpartsgiant.com/parts-list/2006-mercedes_benz-e350/body-hardware/bumper-components-rear"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "E350",
+     2006,
+     2006
+    ],
+    [
+     "Mercedes-Benz",
+     "E500",
+     2004,
+     2006
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Mercedes catalog lists #211-885-14-25 for both — trim-limited; verify the number on the part",
+   "ns": "mb",
+   "pn": [
+    "211-885-14-25"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.mbpartsgiant.com/genuine/mercedes-benz~bumper-cover~2118851425",
+    "https://www.mbpartsgiant.com/parts-list/2006-mercedes_benz-e350/body-hardware/bumper-components-rear"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "S430",
+     2002,
+     2002
+    ],
+    [
+     "Mercedes-Benz",
+     "S500",
+     2001,
+     2001
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Mercedes catalog lists #220-880-03-40 for both — trim-limited; verify the number on the part",
+   "ns": "mb",
+   "pn": [
+    "220-880-03-40"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.mbpartsgiant.com/genuine/mercedes-benz~bumper-cover~2208800340",
+    "https://www.mbpartsgiant.com/parts-list/2001-mercedes_benz-s500/body-hardware/bumper-components-front"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "S430",
+     2002,
+     2002
+    ],
+    [
+     "Mercedes-Benz",
+     "S500",
+     2001,
+     2001
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Mercedes catalog lists #220-885-03-25 for both — trim-limited; verify the number on the part",
+   "ns": "mb",
+   "pn": [
+    "220-885-03-25"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.mbpartsgiant.com/genuine/mercedes-benz~bumper-cover~2208850325",
+    "https://www.mbpartsgiant.com/parts-list/2001-mercedes_benz-s500/body-hardware/bumper-components-front"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "S430",
+     2002,
+     2002
+    ],
+    [
+     "Mercedes-Benz",
+     "S500",
+     2001,
+     2001
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Mercedes catalog lists #220-885-05-25 for both — trim-limited; verify the number on the part",
+   "ns": "mb",
+   "pn": [
+    "220-885-05-25"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.mbpartsgiant.com/genuine/mercedes-benz~bumper-cover~2208850525",
+    "https://www.mbpartsgiant.com/parts-list/2001-mercedes_benz-s500/body-hardware/bumper-components-rear"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     1998,
+     1999
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     1999,
+     1999
+    ],
+    [
+     "Dodge",
+     "Durango",
+     2003,
+     2003
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2000,
+     2000
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Mopar catalog lists #2AME76244A for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "2AME76244A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~lamp-tail-stop-turn~2ame76244a",
+    "https://www.jeeppartsdeal.com/parts-list/1999-dodge-caravan/headlights-lighting/combination-lamps"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     1998,
+     1999
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     1999,
+     1999
+    ],
+    [
+     "Dodge",
+     "Durango",
+     2003,
+     2003
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2000,
+     2000
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Mopar catalog lists #2AME76245A for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "2AME76245A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~lamp-tail-stop-turn~2ame76245a",
+    "https://www.jeeppartsdeal.com/parts-list/1999-dodge-caravan/headlights-lighting/combination-lamps"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     1999,
+     1999
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     1999,
+     1999
+    ],
+    [
+     "Dodge",
+     "Durango",
+     2003,
+     2003
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2000,
+     2000
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Mopar catalog lists #4576244 for both — older catalog-only number; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4576244"
+   ],
+   "reason": "older",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/1999-dodge-caravan/electrical/lamps_rear.html",
+    "https://www.moparpartsgiant.com/parts/mopar-lamp-tail-stop-turn~4576244.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     1998,
+     1999
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     1999,
+     1999
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #4857040AB for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4857040AB"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~composite-headlamp~4857040ab",
+    "https://www.jeeppartsdeal.com/parts-list/1999-dodge-caravan/headlights-lighting/headlamp-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     1998,
+     1999
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     1999,
+     1999
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #4857041AB for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4857041AB"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~composite-headlamp~4857041ab",
+    "https://www.jeeppartsdeal.com/parts-list/1999-dodge-caravan/headlights-lighting/headlamp-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     1998,
+     1999
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     1999,
+     1999
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #4857150AC for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4857150AC"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~headlamp-assembly~4857150ac",
+    "https://www.jeeppartsdeal.com/parts-list/1999-dodge-caravan/headlights-lighting/headlamp-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     1998,
+     1999
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     1999,
+     1999
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #4857151AC for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4857151AC"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~headlamp-assembly~4857151ac",
+    "https://www.jeeppartsdeal.com/parts-list/1999-dodge-caravan/headlights-lighting/headlamp-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2001,
+     2001
+    ],
+    [
+     "Chrysler",
+     "Town & Country",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2004,
+     2006
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #4857700AB for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4857700AB"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/2005-dodge-caravan/electrical/lamps_front.html",
+    "https://www.moparpartsgiant.com/parts/mopar-headlamp-headlamp~4857700ab.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2004,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2007,
+     2007
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #4857700AC for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4857700AC"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~headlight-passenger-replacement~4857700ac",
+    "https://www.jeeppartsdeal.com/parts-list/2005-dodge-caravan/headlights-lighting/headlamp-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2001,
+     2001
+    ],
+    [
+     "Chrysler",
+     "Town & Country",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2004,
+     2006
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #4857701AB for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4857701AB"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/2005-dodge-caravan/electrical/lamps_front.html",
+    "https://www.moparpartsgiant.com/parts/mopar-lamp-headlamp~4857701ab.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2004,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2007,
+     2007
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #4857701AC for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4857701AC"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~driver-side-headlight-assembly-composite~4857701ac",
+    "https://www.jeeppartsdeal.com/parts-list/2005-dodge-caravan/headlights-lighting/headlamp-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2004,
+     2006
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Mopar catalog lists #4857954AA for both — older catalog-only number; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4857954AA"
+   ],
+   "reason": "older",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/2005-dodge-caravan/electrical/lamps_rear.html",
+    "https://www.moparpartsgiant.com/parts/mopar-lamp-tail-stop-turn~4857954aa.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2004,
+     2006
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Mopar catalog lists #4857955AA for both — older catalog-only number; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4857955AA"
+   ],
+   "reason": "older",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/2005-dodge-caravan/electrical/lamps_rear.html",
+    "https://www.moparpartsgiant.com/parts/mopar-lamp-tail-stop-turn~4857955aa.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Dodge",
+     "Dakota",
+     2000,
+     2000
+    ],
+    [
+     "Dodge",
+     "Durango",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #55055110AI for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "55055110AI"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~lamp-headlamp-park-and-turn~55055110ai",
+    "https://www.jeeppartsdeal.com/parts-list/2000-dodge-dakota/headlights-lighting/headlamp-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Dodge",
+     "Dakota",
+     2000,
+     2000
+    ],
+    [
+     "Dodge",
+     "Durango",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #55055111AI for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "55055111AI"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~lamp-headlamp-park-and-turn~55055111ai",
+    "https://www.jeeppartsdeal.com/parts-list/2000-dodge-dakota/headlights-lighting/headlamp-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2004,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2007,
+     2007
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Mopar catalog lists #68241334AA for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "68241334AA"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~lamp-tail-stop-turn~68241334aa",
+    "https://www.jeeppartsdeal.com/parts-list/2005-dodge-caravan/headlights-lighting/combination-lamps"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2004,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2007,
+     2007
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Mopar catalog lists #68241335AA for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "68241335AA"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~lamp-tail-stop-turn~68241335aa",
+    "https://www.jeeppartsdeal.com/parts-list/2005-dodge-caravan/headlights-lighting/combination-lamps"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2001,
+     2001
+    ],
+    [
+     "Chrysler",
+     "Town & Country",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2004,
+     2006
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #V7107700AA for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "V7107700AA"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/2005-dodge-caravan/electrical/lamps_front.html",
+    "https://www.moparpartsgiant.com/parts/mopar-headlamp-headlamp~v7107700aa.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2001,
+     2001
+    ],
+    [
+     "Chrysler",
+     "Town & Country",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2004,
+     2006
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #V7107701AA for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "V7107701AA"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/2005-dodge-caravan/electrical/lamps_front.html",
+    "https://www.moparpartsgiant.com/parts/mopar-headlamp-headlamp~v7107701aa.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "fender",
+   "note": "Subaru catalog lists #57110AG04A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57110AG04A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/body_key_kit_bumper/fender.html",
+    "https://www.subarupartsdeal.com/parts/subaru-fender-complete-front-right~57110ag04a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "fender",
+   "note": "Subaru catalog lists #57110AG05A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57110AG05A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/body_key_kit_bumper/fender.html",
+    "https://www.subarupartsdeal.com/parts/subaru-fender-complete-front-left~57110ag05a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "fender",
+   "note": "Subaru catalog lists #57110AG06A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57110AG06A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/body_key_kit_bumper/fender.html",
+    "https://www.subarupartsdeal.com/parts/subaru-fender-complete-front-right~57110ag06a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "fender",
+   "note": "Subaru catalog lists #57110AG07A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57110AG07A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/body_key_kit_bumper/fender.html",
+    "https://www.subarupartsdeal.com/parts/subaru-fender-complete-front-left~57110ag07a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2001,
+     2001
+    ],
+    [
+     "Subaru",
+     "Legacy",
+     2004,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "fender",
+   "note": "Subaru catalog lists #57120AE04A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57120AE04A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_key_kit_bumper/fender.html",
+    "https://www.subarupartsdeal.com/parts/subaru-fender-complete-front-right~57120ae04a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2001,
+     2001
+    ],
+    [
+     "Subaru",
+     "Legacy",
+     2004,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "fender",
+   "note": "Subaru catalog lists #57120AE05A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57120AE05A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_key_kit_bumper/fender.html",
+    "https://www.subarupartsdeal.com/parts/subaru-fender-complete-front-left~57120ae05a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2001,
+     2001
+    ],
+    [
+     "Subaru",
+     "Legacy",
+     2004,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "fender",
+   "note": "Subaru catalog lists #57120AE06A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57120AE06A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_key_kit_bumper/fender.html",
+    "https://www.subarupartsdeal.com/parts/subaru-fender-complete-front-right~57120ae06a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2001,
+     2001
+    ],
+    [
+     "Subaru",
+     "Legacy",
+     2004,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "fender",
+   "note": "Subaru catalog lists #57120AE07A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57120AE07A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_key_kit_bumper/fender.html",
+    "https://www.subarupartsdeal.com/parts/subaru-fender-complete-front-left~57120ae07a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2004,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "fender",
+   "note": "Subaru catalog lists #57120AE08A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57120AE08A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_key_kit_bumper/fender.html",
+    "https://www.subarupartsdeal.com/parts/subaru-fender-complete-front-right~57120ae08a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2004,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "fender",
+   "note": "Subaru catalog lists #57120AE09A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57120AE09A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_key_kit_bumper/fender.html",
+    "https://www.subarupartsdeal.com/parts/subaru-fender-complete-front-left~57120ae09a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2013
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "fender",
+   "note": "Subaru catalog lists #57120AJ00A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57120AJ00A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/body_key_kit_bumper/fender.html",
+    "https://www.subarupartsdeal.com/parts/subaru-fender-complete-front-right~57120aj00a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2013
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "fender",
+   "note": "Subaru catalog lists #57120AJ01A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57120AJ01A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/body_key_kit_bumper/fender.html",
+    "https://www.subarupartsdeal.com/parts/subaru-fender-complete-front-left~57120aj01a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2013
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "fender",
+   "note": "Subaru catalog lists #57120AJ06A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57120AJ06A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/body_key_kit_bumper/fender.html",
+    "https://www.subarupartsdeal.com/parts/subaru-fender-complete-front-right~57120aj06a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2013
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "fender",
+   "note": "Subaru catalog lists #57120AJ07A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57120AJ07A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/body_key_kit_bumper/fender.html",
+    "https://www.subarupartsdeal.com/parts/subaru-fender-complete-front-left~57120aj07a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2018,
+     2018
+    ]
+   ],
+   "cat": "fender",
+   "note": "Subaru catalog lists #57120AL00A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57120AL00A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_key_kit_bumper/fender.html",
+    "https://www.subarupartsdeal.com/parts/subaru-fender-f-rh-sdn~57120al00a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2018,
+     2018
+    ]
+   ],
+   "cat": "fender",
+   "note": "Subaru catalog lists #57120AL01A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57120AL01A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_key_kit_bumper/fender.html",
+    "https://www.subarupartsdeal.com/parts/subaru-fender-f-lh-sdn~57120al01a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2018,
+     2018
+    ]
+   ],
+   "cat": "fender",
+   "note": "Subaru catalog lists #57120AL02A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57120AL02A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_key_kit_bumper/fender.html",
+    "https://www.subarupartsdeal.com/parts/subaru-fender-f-rh-obk~57120al02a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2018,
+     2018
+    ]
+   ],
+   "cat": "fender",
+   "note": "Subaru catalog lists #57120AL03A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57120AL03A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_key_kit_bumper/fender.html",
+    "https://www.subarupartsdeal.com/parts/subaru-fender-f-lh-obk~57120al03a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2004,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "hood",
+   "note": "Subaru catalog lists #57220AE00B for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57220AE00B"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_key_kit_bumper/front_hood_front_hood_lock.html",
+    "https://www.subarupartsdeal.com/parts/subaru-hood-complete-front~57220ae00b.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "hood",
+   "note": "Subaru catalog lists #57229AG03A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57229AG03A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/body_key_kit_bumper/front_hood_front_hood_lock.html",
+    "https://www.subarupartsdeal.com/parts/subaru-hood-complete-front~57229ag03a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "hood",
+   "note": "Subaru catalog lists #57229AG04A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57229AG04A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/body_key_kit_bumper/front_hood_front_hood_lock.html",
+    "https://www.subarupartsdeal.com/parts/subaru-hood-complete-front~57229ag04a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "hood",
+   "note": "Subaru catalog lists #57229AG05A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57229AG05A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/body_key_kit_bumper/front_hood_front_hood_lock.html",
+    "https://www.subarupartsdeal.com/parts/subaru-hood-complete-front~57229ag05a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2013
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "hood",
+   "note": "Subaru catalog lists #57229AJ00A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57229AJ00A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/body_key_kit_bumper/front_hood_front_hood_lock.html",
+    "https://www.subarupartsdeal.com/parts/subaru-hood-complete-front~57229aj00a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2012
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "hood",
+   "note": "Subaru catalog lists #57229AJ01B9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57229AJ01B9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/body_key_kit_bumper/front_hood_front_hood_lock.html",
+    "https://www.subarupartsdeal.com/parts/subaru-hood-complete-front~57229aj01b9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2018,
+     2018
+    ]
+   ],
+   "cat": "hood",
+   "note": "Subaru catalog lists #57229AL00B9P for both — fits some configurations; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57229AL00B9P"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_key_kit_bumper/front_hood_front_hood_lock.html",
+    "https://www.subarupartsdeal.com/parts/subaru-hood-complete-front~57229al00b9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Impreza",
+     2012,
+     2012
+    ],
+    [
+     "Subaru",
+     "XV Crosstrek",
+     2013,
+     2013
+    ]
+   ],
+   "cat": "hood",
+   "note": "Subaru catalog lists #57229FJ0009P for both — fits some configurations; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57229FJ0009P"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2012-subaru-impreza-sedan/body_key_kit_bumper/front_hood_front_hood_lock.html",
+    "https://www.subarupartsdeal.com/parts/subaru-hood-complete-front~57229fj0009p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2001,
+     2001
+    ],
+    [
+     "Subaru",
+     "Legacy",
+     2004,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "trunk-lid",
+   "note": "Subaru catalog lists #57501AE02A for both — fits some configurations; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57501AE02A"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_key_kit_bumper/trunk_fuel_parts.html",
+    "https://www.subarupartsdeal.com/parts/subaru-trunk-lid-complete~57501ae02a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "trunk-lid",
+   "note": "Subaru catalog lists #57509AG00A9P for both — fits some configurations; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57509AG00A9P"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/body_key_kit_bumper/trunk_fuel_parts.html",
+    "https://www.subarupartsdeal.com/parts/subaru-trunk-lid-complete~57509ag00a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2011
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "trunk-lid",
+   "note": "Subaru catalog lists #57509AJ00A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57509AJ00A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/body_key_kit_bumper/trunk_fuel_parts.html",
+    "https://www.subarupartsdeal.com/parts/subaru-trunk-lid-complete~57509aj00a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2011
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "trunk-lid",
+   "note": "Subaru catalog lists #57509AJ00B9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57509AJ00B9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/body_key_kit_bumper/trunk_fuel_parts.html",
+    "https://www.subarupartsdeal.com/parts/subaru-trunk-lid-complete~57509aj00b9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2013
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "trunk-lid",
+   "note": "Subaru catalog lists #57509AJ00C9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57509AJ00C9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/body_key_kit_bumper/trunk_fuel_parts.html",
+    "https://www.subarupartsdeal.com/parts/subaru-trunk-lid-complete~57509aj00c9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2011
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "trunk-lid",
+   "note": "Subaru catalog lists #57509AJ02A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57509AJ02A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/body_key_kit_bumper/trunk_fuel_parts.html",
+    "https://www.subarupartsdeal.com/parts/subaru-trunk-lid-complete~57509aj02a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2011
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "trunk-lid",
+   "note": "Subaru catalog lists #57509AJ02B9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57509AJ02B9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/body_key_kit_bumper/trunk_fuel_parts.html",
+    "https://www.subarupartsdeal.com/parts/subaru-trunk-lid-complete~57509aj02b9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2013
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "trunk-lid",
+   "note": "Subaru catalog lists #57509AJ02C9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57509AJ02C9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/body_key_kit_bumper/trunk_fuel_parts.html",
+    "https://www.subarupartsdeal.com/parts/subaru-trunk-lid-complete~57509aj02c9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2018,
+     2018
+    ]
+   ],
+   "cat": "trunk-lid",
+   "note": "Subaru catalog lists #57509AL00A9P for both — fits some configurations; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57509AL00A9P"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_key_kit_bumper/trunk_fuel_parts.html",
+    "https://www.subarupartsdeal.com/parts/subaru-trunk-lid-complete~57509al00a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2001,
+     2001
+    ],
+    [
+     "Subaru",
+     "Legacy",
+     2004,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Subaru catalog lists #57704AE09A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57704AE09A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_key_kit_bumper/rear_bumper.html",
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-rear~57704ae09a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2001,
+     2001
+    ],
+    [
+     "Subaru",
+     "Legacy",
+     2004,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Subaru catalog lists #57704AE10A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57704AE10A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_key_kit_bumper/rear_bumper.html",
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-rear~57704ae10a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2001,
+     2001
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Subaru catalog lists #57704AE11A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57704AE11A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_key_kit_bumper/rear_bumper.html",
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-rear~57704ae11a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2001,
+     2001
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Subaru catalog lists #57704AE12A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57704AE12A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_key_kit_bumper/rear_bumper.html",
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-rear~57704ae12a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2004,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Subaru catalog lists #57704AE18A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57704AE18A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_key_kit_bumper/front_bumper.html",
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-front~57704ae18a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2004,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Subaru catalog lists #57704AE20A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57704AE20A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_key_kit_bumper/front_bumper.html",
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-front~57704ae20a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2004,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Subaru catalog lists #57704AE21A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57704AE21A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_key_kit_bumper/rear_bumper.html",
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-rear~57704ae21a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Subaru catalog lists #57704AG02A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57704AG02A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/body_key_kit_bumper/front_bumper.html",
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-front~57704ag02a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Subaru catalog lists #57704AG03A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57704AG03A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/body_key_kit_bumper/front_bumper.html",
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-front~57704ag03a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Subaru catalog lists #57704AG09A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57704AG09A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/body_key_kit_bumper/rear_bumper.html",
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-rear~57704ag09a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Subaru catalog lists #57704AG10A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57704AG10A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/body_key_kit_bumper/rear_bumper.html",
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-rear~57704ag10a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Subaru catalog lists #57704AG11A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57704AG11A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/body_key_kit_bumper/rear_bumper.html",
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-rear~57704ag11a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Subaru catalog lists #57704AG12A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57704AG12A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/body_key_kit_bumper/rear_bumper.html",
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-rear~57704ag12a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2013
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Subaru catalog lists #57704AJ06A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57704AJ06A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/body_key_kit_bumper/rear_bumper.html",
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-rear~57704aj06a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2013
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Subaru catalog lists #57704AJ07A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57704AJ07A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/body_key_kit_bumper/rear_bumper.html",
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-rear~57704aj07a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2012
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Subaru catalog lists #57704AJ08A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57704AJ08A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/body_key_kit_bumper/front_bumper.html",
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-front~57704aj08a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2012
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Subaru catalog lists #57704AJ09A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57704AJ09A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/body_key_kit_bumper/front_bumper.html",
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-front~57704aj09a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Subaru catalog lists #57704AL00A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57704AL00A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_key_kit_bumper/front_bumper.html",
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-front-sdn~57704al00a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Subaru catalog lists #57704AL01A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57704AL01A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_key_kit_bumper/front_bumper.html",
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-front-obk~57704al01a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Subaru catalog lists #57704AL10A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57704AL10A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_key_kit_bumper/rear_bumper.html",
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-rear-sdn~57704al10a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Subaru catalog lists #57704AL11A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "57704AL11A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_key_kit_bumper/rear_bumper.html",
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-rear-obk~57704al11a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Subaru catalog lists #60009AG10A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60009AG10A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-assembly-front-door-right~60009ag10a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Subaru catalog lists #60009AG10B9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60009AG10B9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-assembly-front-door-right~60009ag10b9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Subaru catalog lists #60009AG11A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60009AG11A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-assembly-front-door-left~60009ag11a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Subaru catalog lists #60009AG11B9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60009AG11B9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-assembly-front-door-left~60009ag11b9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Subaru catalog lists #60009AG12A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60009AG12A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-assembly-front-door-right~60009ag12a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Subaru catalog lists #60009AG12B9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60009AG12B9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-assembly-front-door-right~60009ag12b9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Subaru catalog lists #60009AG13A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60009AG13A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-assembly-front-door-left~60009ag13a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Subaru catalog lists #60009AG13B9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60009AG13B9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-assembly-front-door-left~60009ag13b9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2012
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Subaru catalog lists #60009AJ00A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60009AJ00A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-assembly-front-door-right~60009aj00a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2012
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Subaru catalog lists #60009AJ01A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60009AJ01A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-assembly-front-door-left~60009aj01a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2012
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Subaru catalog lists #60009AJ02A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60009AJ02A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-assembly-front-door-right~60009aj02a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2012
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Subaru catalog lists #60009AJ03A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60009AJ03A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-assembly-front-door-left~60009aj03a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Subaru catalog lists #60009AL00A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60009AL00A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-complete-front-door~60009al00a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Subaru catalog lists #60009AL01A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60009AL01A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-complete-front-door~60009al01a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Subaru catalog lists #60009AL02A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60009AL02A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-complete-front-door~60009al02a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Subaru catalog lists #60009AL03A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60009AL03A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-complete-front-door~60009al03a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Impreza",
+     2012,
+     2012
+    ],
+    [
+     "Subaru",
+     "XV Crosstrek",
+     2013,
+     2013
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Subaru catalog lists #60009FJ0219P for both — fits some configurations; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60009FJ0219P"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2012-subaru-impreza-sedan/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-assembly-front-door-right~60009fj0219p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Impreza",
+     2012,
+     2012
+    ],
+    [
+     "Subaru",
+     "XV Crosstrek",
+     2013,
+     2013
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Subaru catalog lists #60009FJ0319P for both — fits some configurations; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60009FJ0319P"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2012-subaru-impreza-sedan/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-assembly-front-door-left~60009fj0319p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2001,
+     2001
+    ],
+    [
+     "Subaru",
+     "Legacy",
+     2004,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Subaru catalog lists #60010AE08A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60010AE08A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-assembly-front-door-right~60010ae08a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2001,
+     2001
+    ],
+    [
+     "Subaru",
+     "Legacy",
+     2004,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Subaru catalog lists #60010AE09A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60010AE09A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-assembly-front-door-left~60010ae09a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2001,
+     2001
+    ],
+    [
+     "Subaru",
+     "Legacy",
+     2004,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Subaru catalog lists #60010AE10A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60010AE10A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-assembly-front-door-right~60010ae10a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2001,
+     2001
+    ],
+    [
+     "Subaru",
+     "Legacy",
+     2004,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Subaru catalog lists #60010AE11A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60010AE11A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-assembly-front-door-left~60010ae11a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Subaru catalog lists #60409AG10A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60409AG10A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-assembly-rear-door-right~60409ag10a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Subaru catalog lists #60409AG11A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60409AG11A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-assembly-rear-door-left~60409ag11a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Subaru catalog lists #60409AG12A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60409AG12A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-assembly-rear-door-right~60409ag12a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Subaru catalog lists #60409AG13A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60409AG13A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-assembly-rear-door-left~60409ag13a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2012
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Subaru catalog lists #60409AJ00A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60409AJ00A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-assembly-rear-door-right~60409aj00a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2012
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Subaru catalog lists #60409AJ01A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60409AJ01A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-assembly-rear-door-left~60409aj01a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2012
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Subaru catalog lists #60409AJ02A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60409AJ02A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-assembly-rear-door-right~60409aj02a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2012
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Subaru catalog lists #60409AJ03A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60409AJ03A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-assembly-rear-door-left~60409aj03a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2018,
+     2018
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Subaru catalog lists #60409AL00A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60409AL00A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-complete-rear-door~60409al00a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2018,
+     2018
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Subaru catalog lists #60409AL01A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60409AL01A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-complete-rear-door~60409al01a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2018,
+     2018
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Subaru catalog lists #60409AL02A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60409AL02A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-complete-rear-door~60409al02a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2018,
+     2018
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Subaru catalog lists #60409AL03A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60409AL03A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-complete-rear-door~60409al03a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2001,
+     2001
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Subaru catalog lists #60410AE08A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60410AE08A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-assembly-rear-door-right~60410ae08a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2001,
+     2001
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Subaru catalog lists #60410AE09A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60410AE09A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-assembly-rear-door-left~60410ae09a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2001,
+     2001
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Subaru catalog lists #60410AE10A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60410AE10A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-assembly-rear-door-right~60410ae10a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2001,
+     2001
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Subaru catalog lists #60410AE11A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60410AE11A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-assembly-rear-door-left~60410ae11a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "liftgate",
+   "note": "Subaru catalog lists #60809AG10A9P for both — fits some configurations; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60809AG10A9P"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/door/back_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-rear-gate~60809ag10a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2013
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "liftgate",
+   "note": "Subaru catalog lists #60809AJ10A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60809AJ10A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/door/back_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-rear-gate~60809aj10a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2013
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "liftgate",
+   "note": "Subaru catalog lists #60809AJ11A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60809AJ11A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/door/back_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-rear-gate~60809aj11a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "liftgate",
+   "note": "Subaru catalog lists #60809AL00A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60809AL00A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/door/back_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-complete-rear-gate~60809al00a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "liftgate",
+   "note": "Subaru catalog lists #60809AL01A9P for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60809AL01A9P"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/door/back_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-complete-rear-gate~60809al01a9p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Impreza",
+     2012,
+     2012
+    ],
+    [
+     "Subaru",
+     "XV Crosstrek",
+     2013,
+     2013
+    ]
+   ],
+   "cat": "liftgate",
+   "note": "Subaru catalog lists #60809FJ0109P for both — fits some configurations; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60809FJ0109P"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2012-subaru-impreza-wagon/door/back_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-rear-gate~60809fj0109p.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2004,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "liftgate",
+   "note": "Subaru catalog lists #60810AE03B for both — fits some configurations; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "60810AE03B"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/door/back_door_panel.html",
+    "https://www.subarupartsdeal.com/parts/subaru-panel-rear-gate~60810ae03b.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2001,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Subaru catalog lists #84001AE12A for both — fits some configurations; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84001AE12A"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_electronics/head_lamp.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-head-right~84001ae12a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2001,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Subaru catalog lists #84001AE13A for both — fits some configurations; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84001AE13A"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_electronics/head_lamp.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-head-left~84001ae13a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2001,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Subaru catalog lists #84001AE14A for both — fits some configurations; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84001AE14A"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_electronics/head_lamp.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-head-right~84001ae14a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2001,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Subaru catalog lists #84001AE15A for both — fits some configurations; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84001AE15A"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_electronics/head_lamp.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-head-left~84001ae15a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Subaru catalog lists #84001AL00A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84001AL00A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_electronics/head_lamp.html",
+    "https://www.subarupartsdeal.com/parts/subaru-headlamp-ay~84001al00a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Subaru catalog lists #84001AL01A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84001AL01A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_electronics/head_lamp.html",
+    "https://www.subarupartsdeal.com/parts/subaru-headlamp-ay~84001al01a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Subaru catalog lists #84001AL02A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84001AL02A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_electronics/head_lamp.html",
+    "https://www.subarupartsdeal.com/parts/subaru-headlamp-ay~84001al02a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Subaru catalog lists #84001AL03A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84001AL03A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_electronics/head_lamp.html",
+    "https://www.subarupartsdeal.com/parts/subaru-headlamp-ay~84001al03a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Impreza",
+     2012,
+     2012
+    ],
+    [
+     "Subaru",
+     "XV Crosstrek",
+     2013,
+     2013
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Subaru catalog lists #84001FJ080 for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84001FJ080"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2012-subaru-impreza-sedan/body_electronics/head_lamp.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-head-right~84001fj080.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Impreza",
+     2012,
+     2012
+    ],
+    [
+     "Subaru",
+     "XV Crosstrek",
+     2013,
+     2013
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Subaru catalog lists #84001FJ090 for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84001FJ090"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2012-subaru-impreza-sedan/body_electronics/head_lamp.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-head-left~84001fj090.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Impreza",
+     2012,
+     2012
+    ],
+    [
+     "Subaru",
+     "XV Crosstrek",
+     2013,
+     2013
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Subaru catalog lists #84001FJ140 for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84001FJ140"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2012-subaru-impreza-sedan/body_electronics/head_lamp.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-head-right~84001fj140.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Impreza",
+     2012,
+     2012
+    ],
+    [
+     "Subaru",
+     "XV Crosstrek",
+     2013,
+     2013
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Subaru catalog lists #84001FJ150 for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84001FJ150"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2012-subaru-impreza-sedan/body_electronics/head_lamp.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-head-left~84001fj150.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Subaru catalog lists #84002AL00A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84002AL00A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_electronics/head_lamp.html",
+    "https://www.subarupartsdeal.com/parts/subaru-headlamp-ay~84002al00a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Subaru catalog lists #84002AL01A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84002AL01A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_electronics/head_lamp.html",
+    "https://www.subarupartsdeal.com/parts/subaru-headlamp-ay~84002al01a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2001,
+     2002
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2001,
+     2001
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Subaru catalog lists #84201AE10A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84201AE10A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2001-subaru-outback/body_electronics/lamp_rear.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-rear-combination-right~84201ae10a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2003,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Subaru catalog lists #84201AE10B for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84201AE10B"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_electronics/lamp_rear.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-rear-combination-right~84201ae10b.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2001,
+     2002
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2001,
+     2001
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Subaru catalog lists #84201AE11A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84201AE11A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2001-subaru-outback/body_electronics/lamp_rear.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-rear-combination-left~84201ae11a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2003,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Subaru catalog lists #84201AE11B for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84201AE11B"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_electronics/lamp_rear.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-rear-combination-left~84201ae11b.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2001,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Subaru catalog lists #84201AE12A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84201AE12A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_electronics/lamp_rear.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-rear-combination-right~84201ae12a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2003,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Subaru catalog lists #84201AE12B for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84201AE12B"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_electronics/lamp_rear.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-rear-combination-right~84201ae12b.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2001,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Subaru catalog lists #84201AE13A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84201AE13A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_electronics/lamp_rear.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-rear-combination-left~84201ae13a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2003,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Subaru catalog lists #84201AE13B for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84201AE13B"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_electronics/lamp_rear.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-rear-combination-left~84201ae13b.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2001,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Subaru catalog lists #84201AE16A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84201AE16A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_electronics/lamp_rear.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-rear-combination-right~84201ae16a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2001,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Subaru catalog lists #84201AE17A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84201AE17A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_electronics/lamp_rear.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-rear-combination-left~84201ae17a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2003,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Subaru catalog lists #84201AE30AHA for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84201AE30AHA"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_electronics/lamp_rear.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-rear-combination-right~84201ae30aha.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2003,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Subaru catalog lists #84201AE30AHE for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84201AE30AHE"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_electronics/lamp_rear.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-rear-combination-right~84201ae30ahe.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2004,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2004,
+     2004
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Subaru catalog lists #84201AE30ALB for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84201AE30ALB"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2004-subaru-outback/body_electronics/lamp_rear.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-rear-combination-right~84201ae30alb.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2003,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Subaru catalog lists #84201AE30APL for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84201AE30APL"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_electronics/lamp_rear.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-rear-combination-right~84201ae30apl.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2003,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Subaru catalog lists #84201AE30ATC for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84201AE30ATC"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_electronics/lamp_rear.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-rear-combination-right~84201ae30atc.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2003,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Subaru catalog lists #84201AE30AVC for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84201AE30AVC"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_electronics/lamp_rear.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-rear-combination-right~84201ae30avc.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2004,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2004,
+     2004
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Subaru catalog lists #84201AE30AWT for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84201AE30AWT"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2004-subaru-outback/body_electronics/lamp_rear.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-rear-combination-right~84201ae30awt.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2003,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Subaru catalog lists #84201AE31AHA for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84201AE31AHA"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_electronics/lamp_rear.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-rear-combination-left~84201ae31aha.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2003,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Subaru catalog lists #84201AE31AHE for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84201AE31AHE"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_electronics/lamp_rear.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-rear-combination-left~84201ae31ahe.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2004,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2004,
+     2004
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Subaru catalog lists #84201AE31ALB for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84201AE31ALB"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2004-subaru-outback/body_electronics/lamp_rear.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-rear-combination-left~84201ae31alb.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2003,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Subaru catalog lists #84201AE31APL for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84201AE31APL"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_electronics/lamp_rear.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-rear-combination-left~84201ae31apl.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2003,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Subaru catalog lists #84201AE31ATC for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84201AE31ATC"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_electronics/lamp_rear.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-rear-combination-left~84201ae31atc.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2003,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Subaru catalog lists #84201AE31AVC for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84201AE31AVC"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_electronics/lamp_rear.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-rear-combination-left~84201ae31avc.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2004,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2004,
+     2004
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Subaru catalog lists #84201AE31AWT for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84201AE31AWT"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2004-subaru-outback/body_electronics/lamp_rear.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-rear-combination-left~84201ae31awt.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Subaru catalog lists #84912AL05A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84912AL05A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_electronics/lamp_rear.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lens-and-body-complete~84912al05a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Subaru catalog lists #84912AL06A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84912AL06A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_electronics/lamp_rear.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lens-and-body-complete~84912al06a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Subaru catalog lists #84912AL09A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84912AL09A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_electronics/lamp_rear.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lens-and-body-complete~84912al09a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Subaru catalog lists #84912AL10A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84912AL10A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_electronics/lamp_rear.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lens-and-body-complete~84912al10a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Impreza",
+     2012,
+     2012
+    ],
+    [
+     "Subaru",
+     "XV Crosstrek",
+     2013,
+     2013
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Subaru catalog lists #84912FJ060 for both — fits some configurations; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84912FJ060"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2012-subaru-impreza-wagon/body_electronics/lamp_rear.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lens-body-rear-combination-lamp-right~84912fj060.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Impreza",
+     2012,
+     2012
+    ],
+    [
+     "Subaru",
+     "XV Crosstrek",
+     2013,
+     2013
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Subaru catalog lists #84912FJ070 for both — fits some configurations; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "84912FJ070"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2012-subaru-impreza-wagon/body_electronics/lamp_rear.html",
+    "https://www.subarupartsdeal.com/parts/subaru-lens-body-rear-combination-lamp-left~84912fj070.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2004,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "grille",
+   "note": "Subaru catalog lists #91121AE36A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "91121AE36A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/outer_accessories/front_grille.html",
+    "https://www.subarupartsdeal.com/parts/subaru-front-grille-assembly~91121ae36a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2004,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "grille",
+   "note": "Subaru catalog lists #91121AE38A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "91121AE38A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/outer_accessories/front_grille.html",
+    "https://www.subarupartsdeal.com/parts/subaru-front-grille-assembly~91121ae38a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2004,
+     2004
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "grille",
+   "note": "Subaru catalog lists #91121AE39A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "91121AE39A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/outer_accessories/front_grille.html",
+    "https://www.subarupartsdeal.com/parts/subaru-front-grille-assembly~91121ae39a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "grille",
+   "note": "Subaru catalog lists #91121AG07A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "91121AG07A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/outer_accessories/front_grille.html",
+    "https://www.subarupartsdeal.com/parts/subaru-front-grille-assembly~91121ag07a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "grille",
+   "note": "Subaru catalog lists #91121AG07B for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "91121AG07B"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/outer_accessories/front_grille.html",
+    "https://www.subarupartsdeal.com/parts/subaru-front-grille-assembly~91121ag07b.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "grille",
+   "note": "Subaru catalog lists #91121AG12A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "91121AG12A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/outer_accessories/front_grille.html",
+    "https://www.subarupartsdeal.com/parts/subaru-front-grille-assembly~91121ag12a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2012
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "grille",
+   "note": "Subaru catalog lists #91121AJ03B for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "91121AJ03B"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/outer_accessories/front_grille.html",
+    "https://www.subarupartsdeal.com/parts/subaru-front-grille-assembly~91121aj03b.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2012
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "grille",
+   "note": "Subaru catalog lists #91121AJ04B for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "91121AJ04B"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/outer_accessories/front_grille.html",
+    "https://www.subarupartsdeal.com/parts/subaru-front-grille-assembly~91121aj04b.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "grille",
+   "note": "Subaru catalog lists #91121AL00A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "91121AL00A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/outer_accessories/front_grille.html",
+    "https://www.subarupartsdeal.com/parts/subaru-front-grille-ay~91121al00a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "grille",
+   "note": "Subaru catalog lists #91121AL05A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "91121AL05A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/outer_accessories/front_grille.html",
+    "https://www.subarupartsdeal.com/parts/subaru-front-grille-ay~91121al05a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "grille",
+   "note": "Subaru catalog lists #91121AL13A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "91121AL13A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/outer_accessories/front_grille.html",
+    "https://www.subarupartsdeal.com/parts/subaru-front-grille-ay~91121al13a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Volkswagen",
+     "Golf",
+     1996,
+     1996
+    ],
+    [
+     "Volkswagen",
+     "Jetta",
+     1997,
+     1997
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "VW/Audi catalog lists #1HM-807-217-D-GRU for both — trim-limited; verify the number on the part",
+   "ns": "vag",
+   "pn": [
+    "1HM-807-217-D-GRU"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.vwpartsgiant.com/genuine/volkswagen~bumper-cover~1hm807217dgru",
+    "https://www.vwpartsgiant.com/parts-list/1996-volkswagen-golf/body-hardware/bumper-components-front"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Volkswagen",
+     "Golf",
+     1996,
+     1996
+    ],
+    [
+     "Volkswagen",
+     "Jetta",
+     1997,
+     1997
+    ]
+   ],
+   "cat": "fender",
+   "note": "VW/Audi catalog lists #1HM-821-021-D for both — trim-limited; verify the number on the part",
+   "ns": "vag",
+   "pn": [
+    "1HM-821-021-D"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.vwpartsgiant.com/genuine/volkswagen~fender~1hm821021d",
+    "https://www.vwpartsgiant.com/parts-list/1996-volkswagen-golf/body-hardware/fender-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Volkswagen",
+     "Golf",
+     1996,
+     1996
+    ],
+    [
+     "Volkswagen",
+     "Jetta",
+     1997,
+     1997
+    ]
+   ],
+   "cat": "fender",
+   "note": "VW/Audi catalog lists #1HM-821-021-E for both — trim-limited; verify the number on the part",
+   "ns": "vag",
+   "pn": [
+    "1HM-821-021-E"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.vwpartsgiant.com/genuine/volkswagen~fender~1hm821021e",
+    "https://www.vwpartsgiant.com/parts-list/1996-volkswagen-golf/body-hardware/fender-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Volkswagen",
+     "Golf",
+     1996,
+     1996
+    ],
+    [
+     "Volkswagen",
+     "Jetta",
+     1997,
+     1997
+    ]
+   ],
+   "cat": "fender",
+   "note": "VW/Audi catalog lists #1HM-821-022-B for both — trim-limited; verify the number on the part",
+   "ns": "vag",
+   "pn": [
+    "1HM-821-022-B"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.vwpartsgiant.com/genuine/volkswagen~fender~1hm821022b",
+    "https://www.vwpartsgiant.com/parts-list/1996-volkswagen-golf/body-hardware/fender-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Volkswagen",
+     "Cabrio",
+     2001,
+     2001
+    ],
+    [
+     "Volkswagen",
+     "Golf",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "headlights",
+   "note": "VW/Audi catalog lists #1J0-941-017-B for both — trim-limited; verify the number on the part",
+   "ns": "vag",
+   "pn": [
+    "1J0-941-017-B"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.vwpartsgiant.com/genuine/volkswagen~headlamp-assembly~1j0941017b",
+    "https://www.vwpartsgiant.com/parts-list/2003-volkswagen-golf/headlights-lighting/headlamps"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Volkswagen",
+     "Cabrio",
+     2001,
+     2001
+    ],
+    [
+     "Volkswagen",
+     "Golf",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "headlights",
+   "note": "VW/Audi catalog lists #1J0-941-017-C for both — trim-limited; verify the number on the part",
+   "ns": "vag",
+   "pn": [
+    "1J0-941-017-C"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.vwpartsgiant.com/genuine/volkswagen~headlamp-assembly~1j0941017c",
+    "https://www.vwpartsgiant.com/parts-list/2003-volkswagen-golf/headlights-lighting/headlamps"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Volkswagen",
+     "Cabrio",
+     2001,
+     2001
+    ],
+    [
+     "Volkswagen",
+     "Golf",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "headlights",
+   "note": "VW/Audi catalog lists #1J0-941-018-B for both — trim-limited; verify the number on the part",
+   "ns": "vag",
+   "pn": [
+    "1J0-941-018-B"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.vwpartsgiant.com/genuine/volkswagen~headlamp-assembly~1j0941018b",
+    "https://www.vwpartsgiant.com/parts-list/2003-volkswagen-golf/headlights-lighting/headlamps"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Volkswagen",
+     "Cabrio",
+     2001,
+     2001
+    ],
+    [
+     "Volkswagen",
+     "Golf",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "headlights",
+   "note": "VW/Audi catalog lists #1J0-941-018-C for both — trim-limited; verify the number on the part",
+   "ns": "vag",
+   "pn": [
+    "1J0-941-018-C"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.vwpartsgiant.com/genuine/volkswagen~headlamp-assembly~1j0941018c",
+    "https://www.vwpartsgiant.com/parts-list/2003-volkswagen-golf/headlights-lighting/headlamps"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Volkswagen",
+     "GTI",
+     2007,
+     2007
+    ],
+    [
+     "Volkswagen",
+     "Jetta",
+     2006,
+     2006
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "VW/Audi catalog lists #1K0-807-217-A-GRU for both — trim-limited; verify the number on the part",
+   "ns": "vag",
+   "pn": [
+    "1K0-807-217-A-GRU"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.vwpartsgiant.com/genuine/volkswagen~bumper-cover~1k0807217agru",
+    "https://www.vwpartsgiant.com/parts-list/2006-volkswagen-jetta/body-hardware/bumper-components-front"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Volkswagen",
+     "GTI",
+     2007,
+     2007
+    ],
+    [
+     "Volkswagen",
+     "Jetta",
+     2006,
+     2006
+    ]
+   ],
+   "cat": "hood",
+   "note": "VW/Audi catalog lists #1K0-823-031-J for both — trim-limited; verify the number on the part",
+   "ns": "vag",
+   "pn": [
+    "1K0-823-031-J"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.vwpartsgiant.com/genuine/volkswagen~hood~1k0823031j",
+    "https://www.vwpartsgiant.com/parts-list/2006-volkswagen-jetta/body-hardware/hood-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Volkswagen",
+     "GTI",
+     2007,
+     2007
+    ],
+    [
+     "Volkswagen",
+     "GTI",
+     2009,
+     2009
+    ],
+    [
+     "Volkswagen",
+     "Jetta",
+     2006,
+     2006
+    ]
+   ],
+   "cat": "headlights",
+   "note": "VW/Audi catalog lists #1K6-941-005-S for both — trim-limited; verify the number on the part",
+   "ns": "vag",
+   "pn": [
+    "1K6-941-005-S"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.vwpartsgiant.com/genuine/volkswagen~headlamp-assembly~1k6941005s",
+    "https://www.vwpartsgiant.com/parts-list/2006-volkswagen-jetta/headlights-lighting/headlamps"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Volkswagen",
+     "GTI",
+     2007,
+     2007
+    ],
+    [
+     "Volkswagen",
+     "GTI",
+     2009,
+     2009
+    ],
+    [
+     "Volkswagen",
+     "Jetta",
+     2006,
+     2006
+    ]
+   ],
+   "cat": "headlights",
+   "note": "VW/Audi catalog lists #1K6-941-006-S for both — trim-limited; verify the number on the part",
+   "ns": "vag",
+   "pn": [
+    "1K6-941-006-S"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.vwpartsgiant.com/genuine/volkswagen~headlamp-assembly~1k6941006s",
+    "https://www.vwpartsgiant.com/parts-list/2006-volkswagen-jetta/headlights-lighting/headlamps"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Volkswagen",
+     "GTI",
+     2007,
+     2007
+    ],
+    [
+     "Volkswagen",
+     "GTI",
+     2009,
+     2009
+    ],
+    [
+     "Volkswagen",
+     "Jetta",
+     2006,
+     2006
+    ]
+   ],
+   "cat": "headlights",
+   "note": "VW/Audi catalog lists #1K6-941-039-B for both — trim-limited; verify the number on the part",
+   "ns": "vag",
+   "pn": [
+    "1K6-941-039-B"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.vwpartsgiant.com/genuine/volkswagen~headlamp-assembly~1k6941039b",
+    "https://www.vwpartsgiant.com/parts-list/2006-volkswagen-jetta/headlights-lighting/headlamps"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Volkswagen",
+     "GTI",
+     2007,
+     2007
+    ],
+    [
+     "Volkswagen",
+     "GTI",
+     2009,
+     2009
+    ],
+    [
+     "Volkswagen",
+     "Jetta",
+     2006,
+     2006
+    ]
+   ],
+   "cat": "headlights",
+   "note": "VW/Audi catalog lists #1K6-941-040-B for both — trim-limited; verify the number on the part",
+   "ns": "vag",
+   "pn": [
+    "1K6-941-040-B"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.vwpartsgiant.com/genuine/volkswagen~headlamp-assembly~1k6941040b",
+    "https://www.vwpartsgiant.com/parts-list/2006-volkswagen-jetta/headlights-lighting/headlamps"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Volkswagen",
+     "GTI",
+     2010,
+     2010
+    ],
+    [
+     "Volkswagen",
+     "Jetta",
+     2014,
+     2014
+    ]
+   ],
+   "cat": "hood",
+   "note": "VW/Audi catalog lists #5K0-823-031-G for both — trim-limited; verify the number on the part",
+   "ns": "vag",
+   "pn": [
+    "5K0-823-031-G"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.vwpartsgiant.com/genuine/volkswagen~hood~5k0823031g",
+    "https://www.vwpartsgiant.com/parts-list/2014-volkswagen-jetta/body-hardware/hood-components"
+   ]
+  }
+ ],
+ "namespaces": [
+  "bmw",
+  "ford",
+  "gm",
+  "hmg",
+  "honda",
+  "mazda",
+  "mb",
+  "mitsubishi",
+  "mopar",
+  "nissan",
+  "subaru",
+  "toyota",
+  "vag",
+  "volvo"
+ ],
+ "note": "Likely groups held by the exterior cross-model rule (policy.EXTERIOR_HOLD_CATS, owner decision 2026-11-06); not shipped. Owner checklist: each needs a visual check before release."
+}

@@ -12,7 +12,7 @@
   expires;
 - write_interchange_payload writes the files and removes stale ones;
 - a lazy file over budget is trimmed (OEM by V11 order, then aftermarket);
-- the repo ships no groups files yet (first merge waits for owner review)."""
+- the repo ships groups files only for the owner-approved namespaces (2026-11-06)."""
 import json
 import tempfile
 from datetime import datetime, timedelta, timezone
@@ -79,8 +79,15 @@ base = plain_build(empty)
 check("no groups and no aftermarket files: no lazy files, no new keys, payload as before",
       f0 == {} and not any(k in p0 for k in ("oemGroups", "oemVg", "oemStatus", "oemLazy", "amStatus"))
       and canon(p0) == canon(base))
-check("the repo ships no groups/<ns>.json yet (owner review first, §11.5)",
-      not list(DEFAULT_DIR.glob("*.json")))
+# owner decision 2026-11-06 (ops/hub.md): OEM Likely groups on for these
+# namespaces only (§11.5 review satisfied by that approval)
+APPROVED_NS = {"toyota", "gm", "subaru", "mopar", "ford", "vag", "hmg", "mb"}
+_shipped = {p.stem for p in DEFAULT_DIR.glob("*.json")}
+check("the repo ships groups/<ns>.json only for the owner-approved namespaces (§11.5)",
+      _shipped <= APPROVED_NS, str(sorted(_shipped - APPROVED_NS)))
+check("the shipped groups files hold no Verified group (Likely only)",
+      all(not json.loads((DEFAULT_DIR / f"{ns}.json").read_text()).get("groups")
+          and not json.loads((DEFAULT_DIR / f"{ns}.json").read_text()).get("vg") for ns in _shipped))
 # aftermarket: owner decision 2026-11-06 (ops/hub.md): dbelectrical.json only,
 # only the six approved (namespace, category) pairs, never a gap make
 import sys as _sys  # noqa: E402

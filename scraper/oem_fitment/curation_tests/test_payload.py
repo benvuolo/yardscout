@@ -36,8 +36,10 @@ empty = Path(tempfile.mkdtemp(prefix="oem_none_"))
 base = build(empty)
 check("no groups files: the payload has no OEM keys at all",
       not any(k in base for k in ("oemGroups", "oemVg", "oemStatus")))
-check("the repo ships no groups/<ns>.json yet (first merge waits for owner review)",
-      not list((J.SCRIPT_DIR / "oem_fitment" / "groups").glob("*.json")))
+# owner decision 2026-11-06 (ops/hub.md): only these namespaces ship
+check("the repo ships groups/<ns>.json only for the owner-approved namespaces",
+      {p.stem for p in (J.SCRIPT_DIR / "oem_fitment" / "groups").glob("*.json")}
+      <= {"toyota", "gm", "subaru", "mopar", "ford", "vag", "hmg", "mb"})
 real_default = J.build_interchange_payload()
 check("the default build equals the no-OEM build on the old keys", canon(real_default) == canon(base))
 

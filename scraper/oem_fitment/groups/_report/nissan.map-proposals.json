@@ -2,7 +2,7 @@
  "draft": {
   "entries": [
    {
-    "basis": "catalog prints '300ZX' (1 fitment rows, oem-raw@42683f9); normalize_model canon '300ZX', 55 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints '300ZX' (1 fitment rows, oem-raw@42683f9); normalize_model canon '300ZX', 54 feed cars (inventory 2026-11-06); identity draft",
     "cat_make": "Nissan",
     "cat_model": "300ZX",
     "ns": "nissan",
@@ -55,7 +55,7 @@
   {
    "cat_make": "Nissan",
    "cat_model": "300ZX",
-   "feed_cars": 55,
+   "feed_cars": 54,
    "fitment_rows": 1,
    "ns": "nissan",
    "proposed": {
