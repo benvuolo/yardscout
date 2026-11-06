@@ -84,3 +84,5 @@ still need the owner's explicit "ship".
 - Audit saw results default-ordered with Newark (13 mi) before San Jose North
   (1 mi) and inconsistent radius copy (250 mi text vs 100 mi filter) — app.js
   owner should check when the card work starts.
+
+- 2026-11-06: main moved to sw jh-v147 (typo fix) while this branch uses jh-v146. When merging design/pull-sheet into main, bump to jh-v148 or later so no two different shells share a cache name.
