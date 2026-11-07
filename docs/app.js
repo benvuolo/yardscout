@@ -3911,7 +3911,7 @@ function carValueParts(v, unlocked, isSampleCard) {
         </li>`;
     });
     const optRows = partRowList.filter((r, i) => optFlags[i]).join('');
-    optHtml = optRows ? `<h4 class="opt-head">If equipped <span>unconfirmed for this car &mdash; adds $0 to its ranking</span></h4><ul class="parts-list parts-opt">${optRows}</ul>` : '';
+    optHtml = optRows ? `<h4 class="opt-head">If equipped <span>unconfirmed for this car &mdash; not counted in its ranking</span></h4><ul class="parts-list parts-opt">${optRows}</ul>` : '';
 
     // Demand is the primary signal; dollars are a supporting range, never a promise.
     // Only real price-list pull costs are subtracted — when any part isn't on
@@ -3929,12 +3929,12 @@ function carValueParts(v, unlocked, isSampleCard) {
       : { cls: 'demand-steady', label: '' };
     cardStyle = `--tier-color:var(--${demandRk === 3 ? 'demand-fast' : demandRk === 1 ? 'demand-slow' : 'demand-steady'});`;
     const rangeText = anyUnknownCost
-      ? `~${formatPrice(rangeLow)}&ndash;${formatPrice(rangeHigh)} to buy these used online &middot; pull price: check yard price list`
-      : `save ~${formatPrice(rangeLow)}&ndash;${formatPrice(rangeHigh)} vs buying used online, if parts are good &middot; ${formatPrice(Math.round(totalCost))} to pull`;
+      ? `These parts sell for ~${formatPrice(rangeLow)}&ndash;${formatPrice(rangeHigh)} used online, all together. This yard\u2019s pull prices: see its price list.`
+      : `Pull them all here for ~${formatPrice(Math.round(totalCost))} and save ~${formatPrice(rangeLow)}&ndash;${formatPrice(rangeHigh)} vs buying used online (if the parts are good).`;
     // Upside stays visible without misleading: unconfirmed ("if equipped")
     // parts never inflate the headline range — they get a muted second line.
     const extraNote = extraHigh > 0 ? `
-      <div class="range-extra" title="Parts specific to a trim or factory option that couldn\u2019t be confirmed for this car &mdash; they add nothing to its ranking or headline figure">+ up to ${formatPrice(extraHigh)}${rangeHigh > 0 ? ' more' : ''} if equipped (unconfirmed &mdash; check at the yard)</div>` : '';
+      <div class="range-extra" title="Parts specific to a trim or factory option that couldn\u2019t be confirmed for this car &mdash; they add nothing to its ranking or headline figure">+ up to ${formatPrice(extraHigh)}${rangeHigh > 0 ? ' more' : ''} in parts this car may have (unconfirmed &mdash; check at the yard)</div>` : '';
     profitLine = (rangeHigh > 0 || extraHigh > 0)
       ? (unlocked ? `
       ${isSampleCard ? '<div class="sample-pitch" role="button" onclick="openUpgradeSheet(\'sample-note\')"><strong>Free look:</strong> this is what Pro shows on every car &mdash; parts worth pulling, what the yard charges, what they sell for. <span class="sample-pitch-cta">See Pro &rarr;</span></div>' : ''}
