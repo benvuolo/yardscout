@@ -87,3 +87,35 @@ breaker (403/503) pending an owner decision on one VW retry.
 - The stray TestFlight prerelease version 2.0 was expired by the owner.
 - Next TestFlight (build 29): "Worth pulling" leads the car screen (top 3-5 parts; Pro sees values, free sees names only), plus photos if they are ready.
 - 2026-11-06 ~18:40 UTC, owner: "its fine to put pick-n-pull photos even with the water mark. I'll take it down if they request it but it attracts customers to them." Narrow exception to the photo policy: show the Pick-n-Pull photo URLs that their API already returns (Row52-hosted, watermarked). They load from the original URL with the credit "Photo: Pick-n-Pull" and their own kill switch. CLAUDE.md rule 7 otherwise stands (no Row52 site, API, account or data).
+
+## 2026-11-06 ~23:30 UTC alerts: free weekly recap teaser (branch, awaiting review)
+Branch `alerts/recap-teaser` @ 181f0a2 (session_016ZzJfKjBN7He2RMxFV9A8z's
+app work is separate, on design/pull-sheet). Not merged, not deployed.
+- Free weekly recap email only (`sendWeeklyDigests` → `buildDigestEmail`):
+  per car "Landed Tue — Pro would have pinged you Tue." (first sighting
+  seen_at + yard dateAdded; weekday only when the same in ET..PT, else
+  "N days before this email"; nothing if found < 1 day before the email or
+  data is missing). Gone cars: "Was at <yard> from Wed and left before this
+  email" (current shards via the saved-car resolver, now `inv_resolve.js`;
+  only when the yard is still scanned). No days-on-lot for gone cars:
+  last-seen is not stored, so the number would be invented.
+- One summary line at the top plus one link to the existing Pro page
+  (`/#tab=alerts`, "See Pro alerts ($8.99/mo)"); gone count only when
+  presence is known for every match. Weekly recap gains an HTML part.
+- Unchanged: which cars are included, dedupe, free limits/gates, Pro instant
+  email (byte-identical text, unit-tested) and pushes, device weekly push.
+- DEV_MODE-only `{now, preview}` body on `/v1/admin/digest/run` (prod ignores it).
+- Tests run locally: `test/recap_unit.mjs` ALL PASS (new); `e2e-email.sh`
+  ALL PASS (new section 7: real shards, gone/present/unknown, Pro skipped,
+  match set, one link, dedupe); `e2e-devices.sh` ALL PASS; `e2e-ops.sh` ALL
+  PASS; `alerts_e2e.mjs` ALL PASS (ad-hoc harness, no runner script exists);
+  `e2e.sh` 38/39, the 1 failure ("radius filter did not narrow") also fails
+  on unmodified main, so pre-existing.
+- Screenshot: `design/screenshots/recap-teaser/free-recap-phone.png` (390 px,
+  2x) + sample .html/.txt, rendered by `backend/test/recap_preview.mjs`.
+- To deploy once the owner approves: merge `alerts/recap-teaser` into main.
+  The push touches `backend/**`, so Deploy Workers runs automatically
+  (deploy-workers.yml; no new migration, no new secret). The next Monday
+  15:00 UTC cron sends the new recap. Check after deploy:
+  `POST /v1/admin/digest/run` is NOT a dry run in prod (it sends), so verify
+  with the Monday cron logs / ops daily email instead.

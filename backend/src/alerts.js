@@ -15,6 +15,8 @@ import { json, err, isoNow, haversineMiles } from './util.js';
 import { getSessionUser, resolveTier } from './auth.js';
 import { sendWebPush, pushConfigured } from './push.js';
 import { resendFetch } from './ops.js';
+import { makeResolver } from './inv_resolve.js';
+import { getDirectory } from './inventory.js';
 
 const MAX_WATCHES_PER_USER = 20;
 const MAX_WATCHES_FREE = 5;
@@ -636,7 +638,7 @@ export function watchMatches(w, v) {
  * expects (vpic parsed from vpic_json). Used by the seed-on-create paths
  * and the weekly digests. */
 export async function loadArrivals(env, since = null) {
-  const sql = 'SELECT vehicle_id, year, make, model, row, location, lat, lng, vpic_json, seen_at FROM arrivals'
+  const sql = 'SELECT vehicle_id, year, make, model, row, location, lat, lng, vpic_json, date_added, seen_at FROM arrivals'
     + (since ? ' WHERE seen_at >= ?1' : '');
   const stmt = env.DB.prepare(sql);
   const rows = (await (since ? stmt.bind(since) : stmt).all()).results || [];
@@ -647,6 +649,7 @@ export async function loadArrivals(env, since = null) {
       id: r.vehicle_id, year: r.year, make: r.make, model: r.model,
       row: r.row, location: r.location, lat: r.lat, lng: r.lng, vpic,
       seenAt: r.seen_at,   // first sighting — lets the weekly digest say how long ago it landed
+      dateAdded: r.date_added || null,   // the yard's own listing date (YYYY-MM-DD)
     };
   });
 }
@@ -702,10 +705,112 @@ export function digestUpsell(matches, { short = false, now = Date.now(), url = '
   return `${lead}${when}. Alerts within hours are part of Pro ($8.99/mo):\n${url}`;
 }
 
-/** Builds the digest email (subject + plain text). Pure — no I/O — so a
- * preview script can render it. `weekly` = the free-tier Monday digest;
- * otherwise the instant email fallback for Pro users without push. */
-export function buildDigestEmail(env, email, matches, { weekly = false, sales = [], now = Date.now() } = {}) {
+/* ===== free weekly recap: honest "Pro would have pinged you" lines =====
+ * Only data the Worker already holds: seenAt (the commit that first carried
+ * the car = exactly when Pro's dispatchAlerts would have sent), the yard's
+ * own dateAdded, and whether the car is in the current inventory shards
+ * (presence, resolved in sendWeeklyDigests). Every line is omitted unless
+ * its facts are certain:
+ *   - a weekday is printed only when it is the same day in every
+ *     continental US zone (ET..PT); otherwise "N days before this email";
+ *   - "Landed <day>" needs a well-formed dateAdded on/before the seen date;
+ *   - "Pro would have pinged you" needs the first sighting ≥ 1 day before
+ *     the email (less than that is no real head start);
+ *   - "gone" needs presence === 'gone', which sendWeeklyDigests only sets
+ *     when the car's yard is still in the scan and the lookup completed.
+ * How long a gone car stayed is NOT known (no last-seen is stored), so the
+ * copy never states a number of days on the lot for it. */
+
+const DAY_MS = 86400_000;
+const US_ZONES = ['America/New_York', 'America/Chicago', 'America/Denver', 'America/Los_Angeles'];
+const RECAP_MAX_AGE_MS = 8 * DAY_MS;   // the weekly window plus slack
+
+function zoned(ms, opts) {
+  const out = new Set(US_ZONES.map((tz) => new Intl.DateTimeFormat('en-US', { timeZone: tz, ...opts }).format(ms)));
+  return out.size === 1 ? [...out][0] : null;
+}
+/** 'Tue' when the instant is that weekday in every continental US zone, else null. */
+export function usWeekday(ms) { return zoned(ms, { weekday: 'short' }); }
+function usYmd(ms) {
+  const d = zoned(ms, { year: 'numeric', month: '2-digit', day: '2-digit' });   // MM/DD/YYYY
+  return d ? `${d.slice(6, 10)}-${d.slice(0, 2)}-${d.slice(3, 5)}` : null;
+}
+function ymdWeekday(ymd) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(ymd || '').slice(0, 10));
+  if (!m) return null;
+  const t = Date.UTC(+m[1], +m[2] - 1, +m[3], 12);
+  return Number.isFinite(t) ? new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', weekday: 'short' }).format(t) : null;
+}
+
+/** Certain facts for one recap car, or null when the first sighting is unusable. */
+export function recapFacts(v, { now = Date.now(), presence = null } = {}) {
+  const seen = Date.parse(v.seenAt || '');
+  if (!Number.isFinite(seen) || seen > now || now - seen > RECAP_MAX_AGE_MS) return null;
+  const ageMs = now - seen;
+  const pingDay = usWeekday(seen);
+  const seenYmd = usYmd(seen);
+  const added = String(v.dateAdded || '').slice(0, 10);
+  const landedDay = (seenYmd && /^\d{4}-\d{2}-\d{2}$/.test(added) && added <= seenYmd) ? ymdWeekday(added) : null;
+  return {
+    ageDays: Math.floor(ageMs / DAY_MS),
+    early: ageMs >= DAY_MS,
+    pingDay, landedDay,
+    gone: presence === 'gone',
+  };
+}
+
+/** One short line under a car in the free recap, or '' when nothing certain. */
+export function recapLine(v, opts = {}) {
+  const f = recapFacts(v, opts);
+  if (!f) return '';
+  const ping = f.early
+    ? (f.pingDay ? `Pro would have pinged you ${f.pingDay}` : `Pro would have pinged you ${f.ageDays} day${f.ageDays === 1 ? '' : 's'} before this email`)
+    : '';
+  if (f.gone) {
+    const yard = v.location || 'the yard';
+    const from = f.landedDay || f.pingDay;
+    const lead = from ? `Was at ${yard} from ${from} and left before this email` : `Was at ${yard} and left before this email`;
+    return ping ? `${lead} — ${ping}.` : `${lead}.`;
+  }
+  if (!ping) return '';
+  return f.landedDay ? `Landed ${f.landedDay} — ${ping}.` : `${ping}.`;
+}
+
+/** The one summary line at the top of a free recap, or '' when nothing in it
+ * would be true. The gone count is stated only when presence is known for
+ * EVERY match (otherwise it could undercount). */
+export function recapSummary(matches, { now = Date.now(), presence = null } = {}) {
+  const n = matches.length;
+  if (!n) return '';
+  const facts = matches.map((v) => recapFacts(v, { now, presence: presence ? presence.get(String(v.id)) : null }));
+  const earlyAges = facts.filter((f) => f && f.early).map((f) => f.ageDays);
+  const allKnown = !!presence && matches.every((v) => ['present', 'gone'].includes(presence.get(String(v.id))));
+  const gone = allKnown ? facts.filter((f) => f && f.gone).length : 0;
+  if (!earlyAges.length && !gone) return '';
+  const k = earlyAges.length;
+  const subject = (cnt) => (cnt === n
+    ? (n === 1 ? "This week's match" : `All ${n} of this week's matches`)
+    : `${cnt} of this week's ${n} matches`);
+  const parts = [];
+  if (k) {
+    const lo = Math.min(...earlyAges), hi = Math.max(...earlyAges);
+    const span = lo === hi ? `${lo} day${lo === 1 ? '' : 's'}` : `${lo}–${hi} days`;
+    parts.push(`${subject(k)} ${k === 1 ? 'was' : 'were'} found ${span} before this email`);
+    if (gone) parts.push(`${gone} ${gone === 1 ? 'is' : 'are'} already gone`);
+  } else {
+    parts.push(`${subject(gone)} ${gone === 1 ? 'is' : 'are'} already gone`);
+  }
+  return `${parts.join('; ')}. Pro sends an alert within hours of the scan that finds a car.`;
+}
+
+const PRO_LINK_TEXT = 'See Pro alerts ($8.99/mo)';
+
+/** Builds the digest email (subject + plain text, plus HTML for the weekly
+ * recap). Pure — no I/O — so a preview script can render it. `weekly` = the
+ * free-tier Monday digest; otherwise the instant email fallback for Pro users
+ * without push (that one is text-only and unchanged). `presence` (weekly
+ * only) = Map vehicleId → 'present' | 'gone'; anything else means unknown. */
+export function buildDigestEmail(env, email, matches, { weekly = false, sales = [], now = Date.now(), presence = null } = {}) {
   const n = matches.length;
   const subject = n
     ? (weekly
@@ -715,23 +820,82 @@ export function buildDigestEmail(env, email, matches, { weekly = false, sales = 
   const intro = weekly
     ? 'Arrivals from the past week matching your YardScout watches:'
     : 'New arrivals matching your YardScout watches:';
-  // Exactly one Pro mention per free digest, and only when there is
-  // something it would have alerted on.
-  const upsell = weekly && n ? `\n\n${digestUpsell(matches, { now, url: upgradeUrl(env) })}` : '';
   const salesTxt = sales.length
     ? `\n\nSale days at yards near your watches:\n` + sales.slice(0, 6).map((s) =>
         `${s.yard} — ${fmtSaleRange(s.start_date, s.end_date)}${s.pct ? ` (${s.pct}% off)` : ''}`).join('\n')
     : '';
-  const text =
-    (n ? `${intro}\n\n${digestText(matches)}` : 'Nothing new matched your watches this week, but:') +
-    upsell + salesTxt + `\n\n` +
+  const outro = `\n\n` +
     `Open the app for rows, VINs, and part details:\n${(env.APP_URL || '').trim()}\n\n` +
     `Yards crush cars within weeks — fresh arrivals are the best odds.`;
-  return { subject, text, to: email };
+
+  if (!weekly) {
+    // Pro instant fallback — byte-for-byte what it was.
+    const text = (n ? `${intro}\n\n${digestText(matches)}` : 'Nothing new matched your watches this week, but:') +
+      salesTxt + outro;
+    return { subject, text, to: email };
+  }
+
+  // Free weekly recap. Exactly one Pro mention + link, and only when there is
+  // something it would have alerted on: the top summary when its facts are
+  // certain, else the original calm line after the list.
+  const url = upgradeUrl(env);
+  const presOf = (v) => (presence ? presence.get(String(v.id)) : null);
+  const summary = n ? recapSummary(matches, { now, presence }) : '';
+  const shown = matches.slice(0, MAX_VEHICLES_PER_DIGEST);
+  const more = n - shown.length;
+  const lines = shown.map((v) => recapLine(v, { now, presence: presOf(v) }));
+  const carTxt = (v) => `${v.year || ''} ${v.make} ${v.model} — ${v.location}${v.row ? ` (row ${v.row})` : ''}`.trim();
+  const listTxt = shown.map((v, i) => carTxt(v) + (lines[i] ? `\n  ${lines[i]}` : '')).join('\n')
+    + (more > 0 ? `\n…and ${more} more` : '');
+  const top = summary ? `${summary}\n${PRO_LINK_TEXT}: ${url}\n\n` : '';
+  const bottomUpsell = (!summary && n) ? `\n\n${digestUpsell(matches, { now, url })}` : '';
+  const text = top +
+    (n ? `${intro}\n\n${listTxt}` : 'Nothing new matched your watches this week, but:') +
+    bottomUpsell + salesTxt + outro;
+
+  const appUrl = (env.APP_URL || 'https://yardscout.io/').trim();
+  const carHref = (v) => `${appUrl.replace(/\/+$/, '')}/#car=${encodeURIComponent(String(v.id))}`;
+  const rowsHtml = shown.map((v, i) => `
+    <tr><td style="padding:12px 0;border-bottom:1px solid #2a2a2a;">
+      <a href="${escH(carHref(v))}" style="color:#ff9500;font-weight:600;text-decoration:none;font-size:15px;">${escH(`${v.year || ''} ${v.make || ''} ${v.model || ''}`.replace(/\s+/g, ' ').trim())}</a><br>
+      <span style="color:#999;font-size:13px;">${escH(v.location || 'unknown yard')}${v.row ? ` &middot; Row ${escH(v.row)}` : ''}</span>
+      ${lines[i] ? `<div style="margin-top:6px;font-size:13px;line-height:1.45;color:${presOf(v) === 'gone' ? '#c9a27a' : '#bdbdbd'};">${escH(lines[i])}</div>` : ''}
+    </td></tr>`).join('');
+  const proBlock = summary
+    ? `<div style="background:#1f1f1f;border:1px solid #333;border-radius:10px;padding:14px 14px 12px;margin:0 0 18px;">
+    <p style="margin:0 0 10px;font-size:14px;line-height:1.5;color:#e8e8e8;">${escH(summary)}</p>
+    <a href="${escH(url)}" style="display:inline-block;background:#ff9500;color:#141414;font-weight:700;font-size:14px;text-decoration:none;padding:9px 14px;border-radius:8px;">${escH(PRO_LINK_TEXT)}</a>
+  </div>` : '';
+  const bottomHtml = bottomUpsell
+    ? `<p style="color:#bbb;font-size:13px;line-height:1.6;margin:16px 0 0;">${escH(digestUpsell(matches, { now, url: '' }).replace(/:\n$/, '.'))} <a href="${escH(url)}" style="color:#ff9500;">${escH(PRO_LINK_TEXT)}</a></p>` : '';
+  const salesHtml = sales.length
+    ? `<p style="color:#bbb;font-size:14px;margin:20px 0 6px;font-weight:600;">Sale days at yards near your watches</p>`
+      + sales.slice(0, 6).map((s) => `<p style="color:#999;font-size:13px;margin:0 0 4px;">${escH(s.yard)} — ${escH(fmtSaleRange(s.start_date, s.end_date))}${s.pct ? ` (${escH(s.pct)}% off)` : ''}</p>`).join('')
+    : '';
+  const html = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;background:#141414;color:#eee;font-family:system-ui,-apple-system,sans-serif;">
+<div style="max-width:540px;margin:0 auto;padding:24px 16px;">
+  <p style="color:#bbb;font-size:14px;margin:0 0 4px;">YardScout weekly recap</p>
+  <h2 style="margin:0 0 14px;font-size:19px;color:#fff;">${escH(n ? `${n} watched car${n === 1 ? '' : 's'} arrived this week` : 'Sale days coming up near you')}</h2>
+  ${proBlock}
+  ${n ? `<p style="color:#999;font-size:13px;margin:0;">${escH(intro)}</p>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${rowsHtml}</table>
+  ${more > 0 ? `<p style="color:#999;font-size:13px;">…and ${more} more in the app.</p>` : ''}` : `<p style="color:#bbb;font-size:14px;">Nothing new matched your watches this week.</p>`}
+  ${bottomHtml}
+  ${salesHtml}
+  <p style="color:#999;font-size:13px;line-height:1.6;margin:18px 0 0;">Yards crush cars within weeks — fresh arrivals are the best odds.
+    <a href="${escH(appUrl)}" style="color:#ff9500;">Open the app</a> for rows, VINs, and part details.</p>
+</div></body></html>`;
+  return { subject, text, html, to: email };
 }
 
-async function emailDigest(env, email, matches, { weekly = false, sales = [] } = {}) {
-  const { subject, text } = buildDigestEmail(env, email, matches, { weekly, sales });
+const escH = (x) => String(x == null ? '' : x)
+  .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+async function emailDigest(env, email, matches, { weekly = false, sales = [], now = Date.now(), presence = null, previews = null } = {}) {
+  const built = buildDigestEmail(env, email, matches, { weekly, sales, now, presence });
+  const { subject, text, html } = built;
+  if (previews) previews.push(built);   // DEV-only seam (handleDigestRun)
   if (!env.RESEND_API_KEY) {
     // Local dev has no Resend key — log-and-succeed so e2e tests can assert
     // the dedupe bookkeeping. Production without a key correctly reports
@@ -751,6 +915,7 @@ async function emailDigest(env, email, matches, { weekly = false, sales = [] } =
       to: [email],
       subject,
       text,
+      ...(html ? { html } : {}),
     }),
   });
   if (!r.ok) console.log('alert email failed:', r.status, (await r.text()).slice(0, 200));
@@ -879,8 +1044,39 @@ export async function storeArrivals(env, arrivals) {
  * free user whose watches matched anything this week. Shares the
  * alerts_sent dedupe with instant alerts, so a user upgraded mid-week never
  * hears about the same car twice. */
-export async function sendWeeklyDigests(env) {
-  const since = new Date(Date.now() - 7 * 86400_000).toISOString();
+/** Presence of recap cars in the CURRENT inventory: Map id → 'present' |
+ * 'gone'. A car is 'gone' only when its yard is still in the scan directory
+ * (a yard that dropped out of a scan says nothing about its cars) and the
+ * lookup completed; deferred/unknown cars are simply absent from the map.
+ * Read-only: it never changes which cars a recap includes. */
+const RECAP_MAX_KEYS = 300;
+const RECAP_MAX_YARD_PARSES = 20;
+async function makePresenceLookup(env) {
+  const now = Date.now();   // presence is about the inventory as it is right now
+  let dir = null;
+  try { dir = await getDirectory(env); } catch { dir = null; }
+  const fresh = dir && Array.isArray(dir.yards) && dir.yards.length && Array.isArray(dir.fields)
+    && Number.isFinite(Date.parse(dir.scrapedAt || '')) && now - Date.parse(dir.scrapedAt) < 2 * DAY_MS;
+  if (!fresh) return async () => new Map();
+  const yardLocs = new Set(dir.yards.map((y) => y && y[0]));
+  const resolve = makeResolver(env, dir, { maxYardParses: RECAP_MAX_YARD_PARSES });
+  let keys = RECAP_MAX_KEYS;
+  return async (cars) => {
+    const m = new Map();
+    for (const v of cars) {
+      if (keys <= 0) break;
+      keys--;
+      let r;
+      try { r = await resolve(String(v.id)); } catch { continue; }
+      if (r.state === 'present') m.set(String(v.id), 'present');
+      else if (r.state === 'gone' && v.location && yardLocs.has(v.location)) m.set(String(v.id), 'gone');
+    }
+    return m;
+  };
+}
+
+export async function sendWeeklyDigests(env, { now = Date.now(), previews = null } = {}) {
+  const since = new Date(now - 7 * 86400_000).toISOString();
   const arrivals = await loadArrivals(env, since);
   if (!arrivals.length) return { users: 0, emails: 0, arrivals: 0 };
 
@@ -899,6 +1095,7 @@ export async function sendWeeklyDigests(env) {
   }
 
   let emails = 0, usersMatched = 0;
+  let presenceOf = null;   // built lazily: only when some recap is actually sent
   for (const [userId, { email, watches }] of byUser) {
     if (emails >= MAX_WEEKLY_EMAILS) { console.log('digest email budget hit — remaining users deferred to next week'); break; }
     const matched = arrivals.filter((v) => watches.some((w) => watchMatches(w, v)));
@@ -923,7 +1120,9 @@ export async function sendWeeklyDigests(env) {
     if (!fresh.length && !freshSales.length) continue;
     usersMatched++;
     emails++;
-    const delivered = await emailDigest(env, email, fresh, { weekly: true, sales: freshSales });
+    if (!presenceOf) presenceOf = await makePresenceLookup(env);
+    const presence = fresh.length ? await presenceOf(fresh) : null;
+    const delivered = await emailDigest(env, email, fresh, { weekly: true, sales: freshSales, now, presence, previews });
     if (delivered) {
       for (const v of fresh) {
         await env.DB.prepare(

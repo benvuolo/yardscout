@@ -68,6 +68,22 @@ sheet" in the UI only (jh_saved and watch storage untouched, rule 6); map deferr
 - Guards unchanged; pf_guards_unit now loads the real donor card. Tests: ui_no_truncation
   672/672 (28 screens), interchange/pf_ux/yaris pass, part_finder known M3 only.
 
+### Round 5: alerts first (2026-11-06 night; owner: "alerts are the most valuable part of pro")
+- Branch head 32466c5 (shell jh-v153; main jh-v152). Screenshots only, no build requested.
+- Copy/order only, gates and limits unchanged: every upgrade surface (Pro sheet,
+  native sheet, car-screen note, price-lock lines' sheet) leads with "Get pinged
+  when the car you want lands"; restore sits after the purchase flow.
+- Alerts tab, free only: "Landed X · your free recap comes Y / it was in your
+  free recap Y · Pro would have pushed it the day it landed." Only for cars that
+  landed after the watch was added; recap date only when a recap channel exists.
+  "Left before recap" not built: app data holds only cars on the lot now.
+- Car screen: lifespan line only on a model-here basis, plus "Alert me when the
+  next one lands" (free: quiet "Pro: instant push"). Cars/Parts results end with
+  "Want the next one?" (addQuickWatch; stored watches untouched, rule 6).
+- Tests at 32466c5: ui_no_truncation 792/792 (33 screens), alerts_first_unit (new),
+  watch_match_unit +5, no_pick_models_e2e 11/11, interchange/pf_ux/yaris pass,
+  part_finder known M3 only. Artifact section "Round 5: alerts first".
+
 ## Earlier state (2026-11-06, exploration)
 
 - Branch: `design/redesign-2026-11` (exploration only; nothing merged).

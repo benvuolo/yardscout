@@ -168,3 +168,82 @@ hub review before merge.
   (CONFLICT_ONLY in compile_trans_rules.py; remove it to keep vPIC's 1997
   labels); (2) listing-vs-vPIC disagreements now record nothing (was:
   listing wins); no lot car has both today.
+
+## 2026-11-06 — cross-family make in the model (owner report: Toyota "Audi A3")
+
+Commit 4e6fbe7, scan dispatched 42308781489. Measured on the 21:10Z
+inventory: **40 cars** (25 make|model pairs) have a model opening with a
+different marque after the existing family rule — not ~480 as first
+estimated. All Pull-N-Save / Nevada Pic-A-Part; 39 have a cached decode, and
+the decodes show the rows are scrambled, not mislabelled (Toyota "Audi A3" =
+JTEBU5JR0D5116438 4Runner; Acura "Bmw Rl" = WBAVC535X7FZ81105 BMW 328i;
+Volvo/Lexus "Ls600hl" = S60s; Alfa Romeo "Hyundai Alfa-Romeo 4c" =
+KMHEC4A40FA137265 Hyundai Sonata).
+
+`resolve_foreign_make_model` (in `_apply_match`, and in the lifespan canon
+with VIN only): confident decode agreeing with either make -> decoded
+make/model; else strip onto a model the scan lists >= 3x under the row's
+make; else raw text kept, row flagged `noPick`. Untouched: GM twins whose
+make the VIN confirms, "Mini Ram", own-make spellings.
+`noPickModels` {make: [models]} is in inventory_live.json and
+inv/manifest.json; models.json moves those pairs to `noPick` (out of
+`makes`). The app does not read it yet — sent to the design session.
+Toyota folds: Rav-4 Sport/Prius Awd-E/T100 Pickup (canon, basis in code),
+"EL" by VIN only, Scion tC/xB/xD filed under Toyota -> Scion when the VIN
+decode names the same Scion model. Left: "Celica Supra", "Corona" (real
+names).
+
+Before/after on that data: 46 cars changed — vin 32 (19 of them change
+make), canon fold 3, Toyota EL by VIN 1, Scion by VIN 10, noPick 2 (BMW
+"Alfa-Romeo 4C" — decode is "750i, Alpina B7"; Lexus "Audi A6"), twin
+untouched 3. Toyota 57 -> 49 names, Acura 20 -> 18, BMW 129 -> 127,
+Dodge 134 -> 133.
+
+Open / next:
+- Same scrambling WITHOUT a make prefix is still there: Dodge "Civic Crx",
+  "CL", "CSX", "EL", "MDX", "RDX", "RL"; BMW "EL", "MDX", "TSX". The VIN
+  decode can fix these the same way (model not known for the row's make +
+  confident decode of another make); not done here.
+- BMW decode names with commas ("750i, Alpina B7", "750Li, Alpina B7") show
+  up as models via blob resolution; should stay the blob.
+- App/Worker canon mirrors (app.js `canonicalModel`, alerts.js
+  `canonModelLow`) lack rav4sport/priusawde/t100pickup; the scan's alert
+  matcher handles them. Add to both together (the mirror-agreement test
+  requires it).
+
+## 2026-11-07 — follow-up: another make's model without a make word; comma decodes
+
+Commit d40a940, scan 42318061784 (published 4ebc0aa, 02:00Z). Rule
+`resolve_other_make_model`: model not known for the row's make (< 3 cars)
+and owned by exactly one other-family make (>= 10 cars) -> confident VIN
+decode (make agrees with the row's make or the owner) wins; else noPick.
+Skipped: numeric names, makes outside the mainstream list, Sprinter twins;
+a decode agreeing with the row's model leaves it as is. `resolve_model_blob`
+treats comma decodes ("750i, Alpina B7") as unconfident.
+
+Counts. Pre-scan, on the 00:19Z data: 33 cars resolved by VIN (2 change
+make), 9 noPick, 8 comma-named BMWs back to "7 Series". In the CI scan log:
+other_vin 3, other_nopick 8, vin 20, scion_vin 10, twin 10. Live noPick
+now: Chevrolet Capri/Ram1500, Chrysler XTS, Ford KONA, Mercury Aspen,
+Plymouth SW, Pontiac Optima, Subaru Bravada.
+Known false positive: a Dodge "Lancer" with no decode would be flagged
+noPick (a real 1985-89 car). That follows the hub's "no decode -> noPick".
+
+Follow-up commit (no scan dispatched; the next scheduled scan applies it): a
+row whose own model is a comma list is flagged noPick. One car: US Auto
+Supply's VIN-only feed takes the model straight from the decode ("750Lxi,
+Alpina B7").
+
+**Open, needs a hub/owner call — Pull-N-Save scramble moves between
+columns.** `fetch_pns_inventory` sets `make` to the make we QUERIED
+(getVehicles per make); the site's per-make answers include other makes'
+cars with wrong models. Which column is wrong changes from scan to scan.
+At 00:19Z JTEBU5JR0D5116438 was Toyota "Audi A3" (fixed to 4Runner); at
+02:00Z the same car came back as Audi "A3", which no make-in-model rule can
+catch. The 02:00Z data has 59 Pull-N-Save cars whose row make contradicts
+a confident VIN decode across corporate families (e.g. Acura "MDX" =
+Dodge Grand Caravan / Kia Optima / Subaru Outback). Proposed fix: for
+Pull-N-Save rows only, take make/model from a confident decode when the
+decode's make is in another family. Basis: the row's make there is our
+query parameter, not the yard's data. Not done; it belongs to the
+Pull-N-Save adapter (yards workstream) and needs a decision.

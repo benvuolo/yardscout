@@ -17775,6 +17775,12 @@ _PNS_DATE_RE = re.compile(r"data-value='(\d{4}-\d{2}-\d{2})'")
 PNS_PHOTO_URL = "https://app.pullnsaveapp.com/v1/Vehicles/Images/StockId/{key}/OrderId/1"
 PNS_PHOTO_DELAY_SEC = 10.0
 PNS_PHOTO_CHECK_MAX = int(os.environ.get("PNS_PHOTO_CHECK_MAX", "150"))
+# PAUSED 2026-11-07 (hub/owner): no Pull-N-Save image fetches at all until
+# further notice. U-Pull-R's CTO (same gm_vehicle_search platform) said
+# scanners pulling many images are why they added their check, and an
+# official API is expected. Already-verified 'photo' results still publish
+# (that only references the yard's URL). Un-pause = set this to False.
+PNS_PHOTO_CHECKS_PAUSED = True
 PNS_PHOTO_RECHECK_DAYS = 3
 PNS_PLACEHOLDER_SHA256 = "77e3d56a6763faae23e1bd6d425aabc086cba7221556e28c131ed277ed3d7e4b"
 PNS_PLACEHOLDER_MAX_BYTES = 8192   # bodies this small are read and hashed
@@ -17834,7 +17840,8 @@ def _pns_apply_photo_checks(vehicles: list, *, check=None, now=None, sleep=time.
     todo += [v["_pns_photo_key"] for v in keyed
              if known.get(v["_pns_photo_key"], ("", ""))[0] == "none"
              and known[v["_pns_photo_key"]][1] < recheck_before]
-    todo = list(dict.fromkeys(todo))[:max(PNS_PHOTO_CHECK_MAX, 0)]
+    cap = 0 if PNS_PHOTO_CHECKS_PAUSED else max(PNS_PHOTO_CHECK_MAX, 0)
+    todo = list(dict.fromkeys(todo))[:cap]
     results: dict = {}
     errors = 0
     if todo:
@@ -17865,6 +17872,92 @@ def _pns_apply_photo_checks(vehicles: list, *, check=None, now=None, sleep=time.
           f"({sum(1 for s in results.values() if s == 'photo')} photo); "
           f"{n_photo} cars with photos, {pending} still unchecked", file=sys.stderr)
     return {"checked": len(results), "photo": n_photo, "pending": pending}
+
+
+# Pull-N-Save make/model (2026-11-07, hub-approved accuracy fix). The site's
+# per-make results carry rows whose OWN text contradicts their VIN: the
+# Audi query returns "2013 AUDI A3" with VIN JTEBU5JR0D5116438 (a 2013
+# 4Runner), "1985 AUDI 4000" with a 1985 Chrysler VIN, and the Acura query
+# "MDX" rows whose VIN is a Dodge Grand Caravan. The VIN's model year agrees
+# with the row's year in every case checked, so the VIN wins. The adapter used
+# to stamp the QUERIED make on every row. Now, per row:
+#   1. A confident cached VIN decode (vPIC cache; no new requests) whose make
+#      differs from the row's make -> decoded make + concrete model ("vin").
+#      When it agrees, the row's own model text stays (downstream blob
+#      resolution still refines it with the decode).
+#   2. No confident decode: the row's own model text (query-make prefix
+#      stripped); make = the one make that model belongs to in the previous
+#      scan's models.json (>= PNS_MODEL_OWNER_MIN cars) ("model"). Otherwise the
+#      queried make, flagged not-pickable ("nopick").
+PNS_MODEL_OWNER_MIN = 10
+PNS_MAKE_STATS: dict[str, int] = {}
+
+
+def _pns_model_owners(path: Path | None = None) -> dict[str, set[str]]:
+    """squashed model -> make display names with >= PNS_MODEL_OWNER_MIN cars,
+    from the previously published models.json (no requests)."""
+    try:
+        makes = json.loads((path or (DATA_DIR / "models.json")).read_text()).get("makes") or {}
+    except Exception:  # noqa: BLE001
+        return {}
+    out: dict[str, set[str]] = {}
+    for mk, models in makes.items():
+        if not isinstance(models, dict):
+            continue
+        for md, n in models.items():
+            if isinstance(n, int) and n >= PNS_MODEL_OWNER_MIN:
+                out.setdefault(_squash_model_key(md), set()).add(mk)
+    return out
+
+
+def _pns_strip_make_prefix(model_text: str, query_make: str) -> str:
+    m, q = model_text.strip(), query_make.strip()
+    if q and m.upper().startswith(q.upper() + " "):
+        return m[len(q):].strip()
+    return m
+
+
+def pns_resolve_make_model(query_make: str, model_text: str, vin_dec: dict | None,
+                           owners: dict[str, set[str]]) -> tuple[str, str, bool, str]:
+    """(make, model, pickable, rule) for one Pull-N-Save row; see above."""
+    own_model = _utpap_format_label(_pns_strip_make_prefix(model_text, query_make))
+    dec_make = ((vin_dec or {}).get("make") or "").strip()
+    dec_model = _decode_concrete_model(vin_dec)
+    if dec_make and dec_model:
+        row_make = query_make
+        hit = owners.get(_squash_model_key(own_model)) or set()
+        if len(hit) == 1:
+            row_make = next(iter(hit))
+        if _decode_make_agrees(row_make, dec_make) or _decode_make_agrees(query_make, dec_make):
+            return _utpap_format_label(row_make), own_model, True, "vin_agrees"
+        if dec_model.isupper():  # NHTSA sometimes answers in capitals ('FIFTH AVENUE')
+            dec_model = _utpap_format_label(dec_model)
+        return _utpap_format_label(dec_make), dec_model, True, "vin"
+    hit = owners.get(_squash_model_key(own_model)) or set()
+    if len(hit) == 1:
+        return _utpap_format_label(next(iter(hit))), own_model, True, "model"
+    return _utpap_format_label(query_make), own_model, False, "nopick"
+
+
+def _pns_resolve_makes(vehicles: list[dict], *, lookup=None, owners=None) -> None:
+    if lookup is None:
+        try:
+            import db as _db
+        except ImportError:
+            from scraper import db as _db  # pragma: no cover
+        lookup = _db.vin_decode
+    owners = _pns_model_owners() if owners is None else owners
+    PNS_MAKE_STATS.clear()
+    for v in vehicles:
+        vin = v.get("vin") or ""
+        dec = _correct_vpic(lookup(vin), vin) if len(vin) == 17 else None
+        mk, md, pick, rule = pns_resolve_make_model(
+            v.get("_pns_query_make") or v.get("make") or "", v.get("model") or "", dec, owners)
+        v["make"], v["model"] = mk, md
+        if not pick:
+            v["_noPickAdapter"] = True
+        PNS_MAKE_STATS[rule] = PNS_MAKE_STATS.get(rule, 0) + 1
+    print(f"  [Pull-N-Save make/model] {dict(sorted(PNS_MAKE_STATS.items()))}", file=sys.stderr)
 
 
 def fetch_pns_inventory() -> list[dict]:
@@ -17942,6 +18035,7 @@ def fetch_pns_inventory() -> list[dict]:
                 "year": year_i,
                 "make": _utpap_format_label(make_name),
                 "model": _utpap_format_label(model_s),
+                "_pns_query_make": make_name,
                 "row": row_n,
                 "dateAdded": date_iso,
                 "_color": color,
@@ -17957,7 +18051,15 @@ def fetch_pns_inventory() -> list[dict]:
         print(f"  [Pull-N-Save] skipped rows from unmapped store(s): "
               f"{sorted(unknown_stores)} — update PNS_STORES/registry", file=sys.stderr)
     seen: set[str] = set()
+    # One row per stock number across the per-make queries (first wins; the
+    # make is decided below from the VIN / the model, never from the query).
     unique = [v for v in all_vehicles if not (v["id"] in seen or seen.add(v["id"]))]
+    try:
+        _pns_resolve_makes(unique)
+    except Exception as e:  # noqa: BLE001 — never lose the chain over this
+        print(f"  [Pull-N-Save make/model] skipped: {e}", file=sys.stderr)
+    for v in unique:
+        v.pop("_pns_query_make", None)
     try:
         _pns_apply_photo_checks(unique)
     except Exception as e:  # noqa: BLE001 — photos are optional, never fatal
@@ -24280,6 +24382,11 @@ _MODEL_CANON_BY_MAKE: dict[str, dict[str, str]] = {
         "celicast": "Celica ST", "celicagt": "Celica GT",
         "mr2": "MR2",            # pins 'Mr2' / 'MR-2' / 'Mr 2' feed spellings
         "mr2spyder": "MR2 Spyder", "vanwagon": "Van",
+        # 2026-11-06 owner report (Toyota picker noise). Trim/body words on a
+        # model that has no other variant: RAV4 Sport was a RAV4 trim
+        # (2006-12), AWD-e a Prius trim (2019+; the cached VIN decode of the
+        # one listed car says Prius), T100 was only ever a pickup.
+        "rav4sport": "RAV4", "priusawde": "Prius", "t100pickup": "T100",
     },
     "volkswagen": {
         "cc": "CC", "golfgti": "GTI",
@@ -24572,6 +24679,9 @@ _MODEL_BLOBS: dict[str, set[str]] = {
               "3500van", "150van", "250van",
               "caravangrandcaravan"},
     "lexus": {"gs300400", "sc300400", "scseries"},
+    # 'EL' under Toyota: no Toyota nameplate (Pull-N-Save, 2026-11-06; the one
+    # car's VIN decodes as a 4Runner). Resolves by VIN only, else stays.
+    "toyota": {"el"},
 }
 # Bare BMW three-digit strings ('328' could be i/is/ci/xi) also resolve by
 # VIN; 'Unknown' resolves for every make.
@@ -24656,7 +24766,9 @@ def resolve_model_blob(model: str, make: str, vin_dec: dict | None) -> str:
         return model
     # NHTSA sometimes answers with a multi-model string ('325/325e') or the
     # same blob the feed used ('E-Series' stays series-less) — not confident.
-    if "/" in dec_model or dm_key in ("unknown", "") or dm_key == key:
+    # Comma lists ('750i, Alpina B7', 2026-11-07) likewise: the row keeps its
+    # own blob ('7 Series'), which the decode's make already confirms.
+    if "/" in dec_model or "," in dec_model or dm_key in ("unknown", "") or dm_key == key:
         return model
     return normalize_model(dec_model, make)
 
@@ -24763,6 +24875,153 @@ def _make_named_in_model(make_key: str, model: str) -> str | None:
     if _MAKE_FAMILY_OF.get(make_key) is None or _MAKE_FAMILY_OF.get(make_key) != _MAKE_FAMILY_OF.get(hk):
         return None
     return hit
+
+
+# ---------------------------------------------------------------------------
+# Cross-family make in the model ("Toyota" + "Audi A3", "Acura" + "Bmw Rl",
+# "BMW" + "Hyundai 550i"): owner report 2026-11-06 from the Parts tab picker.
+# _make_named_in_model deliberately leaves these alone (no wording rule can
+# tell which column is right). Audit of the 2026-11-06 scan: 40 cars, all
+# Pull-N-Save / Nevada Pic-A-Part, 39 with a cached NHTSA decode — and the
+# decode showed the rows are scrambled, not mislabelled: the VIN is right and
+# either column can be wrong (Toyota "Audi A3" is a 4Runner, Acura "Bmw Rl"
+# a BMW 328i, Volvo "Lexus Ls600Hl" an S60). Basis, in order:
+#   1. VIN decode: confident decode (concrete model, decoded make agrees with
+#      the row's make OR the make named in the model) -> decoded make/model.
+#   2. No decode: drop the foreign word only when what remains is a model
+#      this scan already lists under the row's make (>= 3 clean cars).
+#   3. Otherwise the raw text stays (searchable) but the row is flagged
+#      not-pickable: never offered in model pickers or models.json `makes`.
+# Untouched: GMC/Chevrolet twin names whose make the VIN confirms (Hollander
+# "Chevrolet 1500 Pickup" under GMC), Dodge/Plymouth "Mini Ram" (the 1980s
+# van), and own-make spellings ("Alfa-Romeo 4c" under Alfa Romeo).
+_FOREIGN_MAKE_REAL_NAMES = {("dodge", "miniram"), ("plymouth", "miniram"), ("ram", "miniram")}
+FOREIGN_MAKE_KNOWN_MIN = 3   # clean cars of make|model before it counts as "known"
+# Per-scan tallies for the report line (reset by enrich_vehicles).
+FOREIGN_MAKE_STATS: dict[str, int] = {}
+
+
+def _foreign_make_in_model(make: str, model: str) -> str | None:
+    """Canonical name of a DIFFERENT marque that opens the model string."""
+    words = (model or "").split()
+    if len(words) < 2:
+        return None
+    mk = _make_key(make)
+    if (mk, _squash_model_key(model)) in _FOREIGN_MAKE_REAL_NAMES:
+        return None
+    k = _MAKE_SQUASH_RE.sub("", words[0].lower())
+    hit = _MAKE_IN_MODEL.get(k) or _MAKE_IN_MODEL_ALIASES.get(k)
+    if not hit or _make_key(hit) == mk:
+        return None
+    return hit
+
+
+def _decode_concrete_model(vin_dec: dict | None) -> str:
+    """NHTSA model when it names one car ('' for '750i, Alpina B7', '325/325e',
+    'Unknown')."""
+    dm = ((vin_dec or {}).get("model") or "").strip()
+    if not dm or "/" in dm or "," in dm or _squash_model_key(dm) in ("unknown", ""):
+        return ""
+    return dm
+
+
+def resolve_foreign_make_model(make: str, model: str, vin_dec: dict | None,
+                               known: dict[str, dict[str, str]] | None = None
+                               ) -> tuple[str, str, bool, str]:
+    """(make, model, pickable, rule) for a row whose model opens with another
+    marque's name. `known` maps make key -> {squashed model: display} of the
+    scan's clean models. rule: '' (not a foreign-make row / left as is),
+    'vin', 'strip', 'nopick', 'twin' (twin confirmed by VIN, untouched)."""
+    hit = _foreign_make_in_model(make, model)
+    if not hit:
+        return make, model, True, ""
+    mk, hk = _make_key(make), _make_key(hit)
+    twin = (mk, hk) in _MAKE_IN_MODEL_TWINS
+    dm = _decode_concrete_model(vin_dec)
+    dmake = ((vin_dec or {}).get("make") or "").strip()
+    if dm and dmake and (_decode_make_agrees(make, dmake) or _decode_make_agrees(hit, dmake)):
+        if twin and _decode_make_agrees(make, dmake):
+            return make, model, True, "twin"
+        new_make = normalize_make(dmake)
+        new_model = resolve_model_blob(normalize_model(dm, new_make), new_make, vin_dec)
+        disp = ((known or {}).get(_make_key(new_make)) or {}).get(_squash_model_key(new_model))
+        return new_make, disp or new_model, True, "vin"
+    if twin:
+        # No decode: Hollander's shared GM truck names stay as filed.
+        return make, model, True, ""
+    rest = normalize_model(" ".join(model.split()[1:]), make)
+    disp = ((known or {}).get(mk) or {}).get(_squash_model_key(rest))
+    if disp:
+        return make, disp, True, "strip"
+    return make, model, False, "nopick"
+
+
+# ---------------------------------------------------------------------------
+# Another make's model with no make word (hub follow-up 2026-11-07): the same
+# scrambled Pull-N-Save / Nevada rows also give Dodge "MDX" (VIN: Grand
+# Caravan), BMW "TSX" (VIN: 335i), Oldsmobile "Sentra" (VIN: Nissan Sentra).
+# A row qualifies only when its model is NOT a known model of its make
+# (< FOREIGN_MAKE_KNOWN_MIN clean cars) and IS a well-established model
+# (>= OTHER_MAKE_OWNER_MIN cars) of exactly one make in the whole scan, from
+# another corporate family. Skipped: numeric names (BMW 740 / Volvo 740,
+# Fiat 850, Mercedes 200 are real shared designations), makes outside the
+# mainstream marque list (AMC Spirit, Studebaker Commander, Genesis), and
+# cross-family twins (Sprinter: Mercedes-Benz / Dodge / Freightliner).
+# Basis: confident VIN decode whose make agrees with the row's make or the
+# model's owner -> decoded make/model (a decode that agrees with the row's
+# model leaves it as is: Dodge Lancer, Chrysler TC, Lexus SC); else noPick.
+OTHER_MAKE_OWNER_MIN = 10
+_OTHER_MAKE_TWINS = {frozenset(p) for p in (("mercedesbenz", "dodge"), ("mercedesbenz", "freightliner"),
+                                            ("dodge", "freightliner"))}
+
+
+def resolve_other_make_model(make: str, model: str, vin_dec: dict | None,
+                             counts: dict[tuple[str, str], int],
+                             owners: dict[str, set[str]],
+                             known: dict[str, dict[str, str]] | None = None
+                             ) -> tuple[str, str, bool, str]:
+    """(make, model, pickable, rule) for a row whose model belongs to one
+    other make. counts: (make key, squashed model) -> clean cars; owners:
+    squashed model -> make keys with >= OTHER_MAKE_OWNER_MIN cars. rule ''
+    (not such a row / unchanged), 'other_vin', 'other_nopick'."""
+    mk, key = _make_key(make), _squash_model_key(model)
+    if (not key or key.isdigit() or mk not in _MAKE_IN_MODEL
+            or counts.get((mk, key), 0) >= FOREIGN_MAKE_KNOWN_MIN):
+        return make, model, True, ""
+    own = owners.get(key) or set()
+    if len(own) != 1 or mk in own:
+        return make, model, True, ""
+    ok = next(iter(own))
+    fam = _MAKE_FAMILY_OF.get(mk)
+    if (fam is not None and fam == _MAKE_FAMILY_OF.get(ok)) or frozenset((mk, ok)) in _OTHER_MAKE_TWINS:
+        return make, model, True, ""
+    dmake = ((vin_dec or {}).get("make") or "").strip()
+    dm = _decode_concrete_model(vin_dec)
+    if dm and dmake and (_decode_make_agrees(make, dmake) or _decode_make_agrees(ok, dmake)):
+        if _decode_make_agrees(make, dmake) and _squash_model_key(dm) == key:
+            return make, model, True, ""
+        new_make = normalize_make(dmake)
+        new_model = resolve_model_blob(normalize_model(dm, new_make), new_make, vin_dec)
+        disp = ((known or {}).get(_make_key(new_make)) or {}).get(_squash_model_key(new_model))
+        return new_make, disp or new_model, True, "other_vin"
+    return make, model, False, "other_nopick"
+
+
+_SCION_MODEL_KEYS = {"tc", "xa", "xb", "xd", "iq", "ia", "im", "frs"}
+
+
+def _scion_by_vin(make: str, model: str, vin_dec: dict | None) -> str | None:
+    """'Scion' for a Toyota-filed Scion ('tC', 'xD') when NHTSA's decode names
+    the same Scion model ('Scion tC') — NHTSA files Scions under TOYOTA with
+    the marque in the model. Model must agree; else None."""
+    if _make_key(make) != "toyota" or not vin_dec:
+        return None
+    dm = _decode_concrete_model(vin_dec)
+    if not dm.lower().startswith("scion ") or not _decode_make_agrees(make, vin_dec.get("make") or ""):
+        return None
+    if _squash_model_key(dm[6:]) != _squash_model_key(model):
+        return None
+    return "Scion"
 
 # "General Motors" (3,046 rows: Pull-N-Save + Nevada Pic-A-Part label every GM
 # car with the corporation, not the division). Resolve to the real marque only
@@ -24970,13 +25229,67 @@ def enrich_vehicles(
         v["dateAdded"] = _sanitize_date_added(v.get("dateAdded", ""))
     allowed_vins: set[str] | None = None
 
+    # The scan's own clean models per make (>= FOREIGN_MAKE_KNOWN_MIN cars,
+    # no foreign make in front) — the "known model" basis for stripping a
+    # foreign-make word from an undecoded row.
+    FOREIGN_MAKE_STATS.clear()
+    _known_cnt: dict[tuple[str, str], int] = {}
+    _known_disp: dict[tuple[str, str], str] = {}
+    for v in vehicles:
+        mk, md = v.get("make") or "", v.get("model") or ""
+        if md and not _foreign_make_in_model(mk, md):
+            k = (_make_key(mk), _squash_model_key(md))
+            _known_cnt[k] = _known_cnt.get(k, 0) + 1
+            _known_disp.setdefault(k, md)
+    known_models: dict[str, dict[str, str]] = {}
+    model_owners: dict[str, set[str]] = {}
+    for k, n in _known_cnt.items():
+        if n >= FOREIGN_MAKE_KNOWN_MIN:
+            known_models.setdefault(k[0], {})[k[1]] = _known_disp[k]
+        if n >= OTHER_MAKE_OWNER_MIN:
+            model_owners.setdefault(k[1], set()).add(k[0])
+
     def _apply_match(v: dict, vin_dec: dict | None) -> None:
+        # Cross-family make in the model ('Toyota' + 'Audi A3'): VIN decode,
+        # else a known-model strip, else flag not-pickable (see
+        # resolve_foreign_make_model).
+        mk2, md2, pick, rule = resolve_foreign_make_model(
+            v.get("make") or "", v.get("model") or "", vin_dec, known_models)
+        if rule:
+            FOREIGN_MAKE_STATS[rule] = FOREIGN_MAKE_STATS.get(rule, 0) + 1
+            if rule == "vin" and mk2 != v.get("make"):
+                FOREIGN_MAKE_STATS["vin_make_changed"] = FOREIGN_MAKE_STATS.get("vin_make_changed", 0) + 1
+        if not rule:
+            mk2, md2, pick, rule = resolve_other_make_model(
+                mk2, md2, vin_dec, _known_cnt, model_owners, known_models)
+            if rule:
+                FOREIGN_MAKE_STATS[rule] = FOREIGN_MAKE_STATS.get(rule, 0) + 1
+                if rule == "other_vin" and mk2 != v.get("make"):
+                    FOREIGN_MAKE_STATS["other_vin_make_changed"] = FOREIGN_MAKE_STATS.get("other_vin_make_changed", 0) + 1
+        v["make"], v["model"] = mk2, md2
+        if pick and "," in md2:
+            # A comma list as the row's own model ('750Lxi, Alpina B7': VIN-only
+            # feeds take the model straight from the decode) names no one
+            # model: searchable, never a pick.
+            pick, rule = False, "comma_nopick"
+            FOREIGN_MAKE_STATS[rule] = FOREIGN_MAKE_STATS.get(rule, 0) + 1
+        if not pick:
+            v["_noPick"] = True
+        else:
+            v.pop("_noPick", None)
         # Generic-blob rows ('3 Series', 'E-Series', 'Sierra', 'Ram Pickup')
         # resolve to the concrete model here, where the VIN decode is in hand
         # — before matching, so UNOBTANIUM_DB keyword matches see the real
         # model too. Non-blob rows and unconfident decodes pass through.
+        before = v.get("model") or ""
         v["model"] = resolve_model_blob(
             v.get("model") or "", v.get("make") or "", vin_dec)
+        if _make_key(v.get("make")) == "toyota" and _squash_model_key(before) == "el" and v["model"] != before:
+            FOREIGN_MAKE_STATS["variant_vin"] = FOREIGN_MAKE_STATS.get("variant_vin", 0) + 1
+        scion = _scion_by_vin(v.get("make") or "", v.get("model") or "", vin_dec)
+        if scion:
+            v["make"] = scion
+            FOREIGN_MAKE_STATS["scion_vin"] = FOREIGN_MAKE_STATS.get("scion_vin", 0) + 1
         mismatch = _vpic_mismatch_msg(v, vin_dec)
         if mismatch:
             v["_vpic_mismatch"] = mismatch
@@ -25176,6 +25489,8 @@ def enrich_vehicles(
             f"  VPIC decode-well (trim-specific, per vehicle row): {n_decode_well}",
             file=sys.stderr,
         )
+    if FOREIGN_MAKE_STATS:
+        print(f"  [models] other-make model rows by rule: {dict(sorted(FOREIGN_MAKE_STATS.items()))}", file=sys.stderr)
     return vehicles
 
 
@@ -25358,6 +25673,8 @@ def output_json(vehicles: list[dict], only_matches: bool = True):
                 entry["vpicDriveType"] = vp["driveType"]
         if v.get("_vpic_mismatch"):
             entry["vpicMismatch"] = v["_vpic_mismatch"]
+        if v.get("_noPick") or v.get("_noPickAdapter"):
+            entry["noPick"] = True
         output.append(entry)
     return output
 
@@ -25474,8 +25791,11 @@ def compact_inventory_v2(entries: list[dict]) -> dict:
     part_set_idx: dict[str, int] = {}
     rows: list[list] = []
     vpic: dict[str, list] = {}
+    no_pick: dict[str, set[str]] = {}
 
     for e in entries:
+        if e.get("noPick"):
+            no_pick.setdefault(e.get("make", ""), set()).add(e.get("model", ""))
         ykey = (e.get("location", ""), e.get("city", ""), e.get("state", ""),
                 e.get("lat"), e.get("lng"))
         yi = yard_idx.get(ykey)
@@ -25546,6 +25866,11 @@ def compact_inventory_v2(entries: list[dict]) -> dict:
         "yards": yards,
         "partSets": part_sets,
         "vpic": vpic,
+        # make -> model strings that stay searchable but are never offered
+        # in a model picker (raw text with another marque's name in front
+        # and no VIN/known-model basis to fix it). A make|model pair is
+        # listed only when EVERY car carrying it is flagged.
+        "noPickModels": {mk: sorted(ms) for mk, ms in sorted(no_pick.items())},
         "vehicles": rows,
         "_extras": extras,
     }
@@ -25760,16 +26085,22 @@ def _write_models_json(payload: dict) -> None:
     fi = {n: i for i, n in enumerate(fields)}
     if "make" not in fi or "model" not in fi:
         return
+    # Not-pickable pairs (payload noPickModels) go under "noPick", never
+    # "makes": every picker built from this file offers only clean names.
+    np_pairs = {(mk, md) for mk, ms in (payload.get("noPickModels") or {}).items() for md in ms}
     makes: dict[str, dict[str, int]] = {}
+    no_pick: dict[str, dict[str, int]] = {}
     for r in payload.get("vehicles") or []:
         mk, md = str(r[fi["make"]] or ""), str(r[fi["model"]] or "")
         if not mk:
             continue
-        makes.setdefault(mk, {})
-        makes[mk][md] = makes[mk].get(md, 0) + 1
+        tgt = no_pick if (mk, md) in np_pairs else makes
+        tgt.setdefault(mk, {})
+        tgt[mk][md] = tgt[mk].get(md, 0) + 1
     (DATA_DIR / "models.json").write_text(json.dumps(
         {"scrapedAt": payload.get("scrapedAt"),
-         "makes": {mk: dict(sorted(v.items())) for mk, v in sorted(makes.items())}},
+         "makes": {mk: dict(sorted(v.items())) for mk, v in sorted(makes.items())},
+         "noPick": {mk: dict(sorted(v.items())) for mk, v in sorted(no_pick.items())}},
         separators=(",", ":")))
 
 
@@ -25799,12 +26130,18 @@ def _lifespan_canon_factory(db_mod):
             return hit
         mk = normalize_make(make or "", model=model or "", vin=vin or "", year=year or 0)
         md = normalize_model(model or "", mk)
-        if vin and _is_model_blob(md, mk):
+        foreign = bool(_foreign_make_in_model(mk, md))
+        if vin and (foreign or _is_model_blob(md, mk) or (_make_key(mk) == "toyota" and _squash_model_key(md) in _SCION_MODEL_KEYS)):
             try:
                 dec = db_mod.vin_decode(vin)
             except Exception:
                 dec = None
+            if foreign:
+                # Same VIN basis as the live scan; no known-model strip here
+                # (history rows have no per-scan model census).
+                mk, md, _pick, _rule = resolve_foreign_make_model(mk, md, dec)
             md = resolve_model_blob(md, mk, dec)
+            mk = _scion_by_vin(mk, md, dec) or mk
         cache[k] = (mk, md)
         return mk, md
 
@@ -26004,6 +26341,12 @@ def merge_carryforward_yards(new_payload: dict, prev_payload: dict,
                 new_row[i_pset] = npi
             new_ri = len(new_payload["vehicles"])
             new_payload["vehicles"].append(new_row)
+            # A carried row keeps the not-pickable flag it was published with.
+            mk_c, md_c = new_row[f.index("make")], new_row[f.index("model")]
+            if md_c in (prev_payload.get("noPickModels") or {}).get(mk_c, ()):
+                npm = new_payload.setdefault("noPickModels", {})
+                if md_c not in npm.setdefault(mk_c, []):
+                    npm[mk_c] = sorted(npm[mk_c] + [md_c])
             pv = prev_vpic.get(str(prev_i))
             if pv is not None:
                 new_payload["vpic"][str(new_ri)] = pv

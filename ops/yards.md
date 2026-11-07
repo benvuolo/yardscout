@@ -209,6 +209,43 @@ Sweep follow-ups (mine):
     Albuquerque 5.6 km.
   - The app shows the new pins after the next scan.
 
+## 2026-11-07 Pull-N-Save make/model accuracy fix (hub-approved)
+
+**Problem** (data-quality session): Pull-N-Save cars contradicted their
+VINs. VIN JTEBU5JR0D5116438 (2013 Toyota 4Runner) was published as Audi
+"A3", and 59 cars disagreed across families (e.g. Acura "MDX" =
+Dodge Grand Caravan, VINs 2D4RN5D18AR323652 and 2C4RDGCG1CR241704).
+
+**Cause** (checked with one Audi query, the same request the scan makes):
+it is not query bleed or a parse shift. Pull-N-Save's own rows contradict
+their VINs:
+- "2013 AUDI A3" carries the 4Runner VIN.
+- "1985 AUDI 4000" carries a 1985 Chrysler VIN.
+- "2000 AUDI A6" carries a 2000 Lexus RX VIN.
+
+Each VIN's model year matches the row's year, so the yard's model pick is
+what's wrong and the VIN is right. The adapter also stamped the queried make
+on every row. Rows were already one per stock number (id `pns-{stock}`, first
+wins); a test now covers that.
+
+**Fix** (3edce5bc, `pns_resolve_make_model`, test `test_pns_make_model.py`):
+1. If a confident cached vPIC decode's make differs from the row's, the
+   car takes the decoded make and concrete model (`vin`). If the make agrees,
+   the row's own model text stays (`vin_agrees`).
+2. With no confident decode, the car keeps its own model text (with the
+   query-make prefix stripped). The make is the one make owning that model
+   (≥10 cars in the previous `models.json`) (`model`).
+3. Otherwise the car keeps the queried make and is flagged not-pickable
+   (`_noPickAdapter` → `noPick`) (`nopick`).
+
+Same requests and pacing; the photo checker stays paused. A car first seen
+with a new VIN gets rule 2 or 3 and is corrected on the next scan, once its
+VIN is decoded and cached. The scan log prints
+`[Pull-N-Save make/model] {rule: count}`.
+
+On the Audi sample, 4 of 69 rows were corrected from the VIN: 4Runner, Dodge
+Ram, Chrysler Fifth Avenue, Ford Escape.
+
 ## 2026-11-06 vehicle photos, round 3 (more coverage)
 
 Owner, via the hub: "can we get better photo coverage?" The rules are
@@ -256,6 +293,23 @@ screen only. Each source is separate, so that is a per-source display
 choice.
 
 ### Pull-N-Save placeholder (solved, fails closed)
+
+**PAUSED 2026-11-07 (hub, for the owner).** `PNS_PHOTO_CHECKS_PAUSED = True`
+in `junkyard_scraper.py`, so the checker makes no image requests at all.
+Reason: U-Pull-R's CTO, whose company appears to run the same
+gm_vehicle_search platform, told the owner that scanners pulling many images
+are why they added their check, and an official API is expected.
+
+Already-verified `photo` results still publish, since that only references
+the yard's URL. One scan ran with the checker on before the pause: run
+42308781489, started 2026-11-06 22:59Z on 4e6fbe76. It makes at most 150
+image requests at 10 s, newest cars first; it was not cancelled, since by
+the time of the pause it had most likely finished them. Before that the
+only checks were 18 manual samples on 2026-11-06. Every later scan makes
+none. Un-pause by
+setting the flag to `False`, only when the owner says so (or switch to the
+official API).
+
 
 - **The problem:** every row links
   `…/StockId/{STK}-{n}/OrderId/1`, and a car without a photo gets the same
@@ -475,4 +529,4 @@ jh-v150+. The first message is kept below for the record.
 3. After each monthly sweep: review tiers A–B in `coverage_sweep.md`, verify
    each has self-service inventory online before adding.
 4. Chains frozen for 6+ scans show in the daily email as `chain-frozen:<chain>`.
-5. Photos: Rupert's and Chuck & Eddie's non-expiring YardSmart URLs (yardconnect parser, per-URL exp check). Watch the Pull-N-Save backlog in the scan log ("[Pull-N-Save photos] … still unchecked"). After the next scan, confirm `photoSources` in `inv/manifest.json` and real PnP/WAP code counts; compare PnP/WAP URLs across scans. Sample the Ario, CRUSH and remaining chains, and re-check WAP URL stability after a few scans.
+5. Photos: Rupert's and Chuck & Eddie's non-expiring YardSmart URLs (yardconnect parser, per-URL exp check). Pull-N-Save checker is PAUSED (2026-11-07); watch the backlog in the scan log only once un-paused ("[Pull-N-Save photos] … still unchecked"). After the next scan, confirm `photoSources` in `inv/manifest.json` and real PnP/WAP code counts; compare PnP/WAP URLs across scans. Sample the Ario, CRUSH and remaining chains, and re-check WAP URL stability after a few scans.

@@ -87,6 +87,19 @@ check("classify: 404 -> unknown", js._pns_classify_photo(FakeResp(status=404, le
 check("classify: html -> unknown", js._pns_classify_photo(FakeResp(ctype="text/html", length=99999)) is None)
 check("classify: no length -> unknown", js._pns_classify_photo(FakeResp()) is None)
 
+import contextlib
+
+
+@contextlib.contextmanager
+def sqlite_reset(dbmod):
+    """Start the checker scenario below from an empty table."""
+    conn = dbmod._connect()
+    conn.execute("DELETE FROM pns_photo_checks")
+    conn.commit()
+    conn.close()
+    yield
+
+
 with tempfile.TemporaryDirectory() as td:
     db.DB_FILE = Path(td) / "h.db"
     now = datetime(2026, 11, 6, 12, tzinfo=timezone.utc)
@@ -98,7 +111,17 @@ with tempfile.TemporaryDirectory() as td:
     def fake(k):
         asked.append(k)
         return answers[k]
+    check("PNS checks are paused by default (2026-11-07)", js.PNS_PHOTO_CHECKS_PAUSED is True)
+    paused_asked = []
     js.PNS_PHOTO_CHECK_MAX = 3
+    db.store_pns_photo_checks({"STK100-1": "photo"}, "2026-11-01T00:00:00Z")
+    js._pns_apply_photo_checks(cars, check=lambda k: paused_asked.append(k), now=now, sleep=lambda s: None)
+    check("PNS paused: no image fetches", paused_asked == [], paused_asked)
+    check("PNS paused: verified photo still published", cars[0].get("_photo") == "sSTK100-1", cars[0])
+    with sqlite_reset(db):
+        pass
+    cars[0].pop("_photo", None)
+    js.PNS_PHOTO_CHECKS_PAUSED = False
     r = js._pns_apply_photo_checks(cars, check=fake, now=now, sleep=lambda s: None)
     check("PNS: newest first, capped", asked == ["STK500-1", "STK400-1", "STK300-1"], asked)
     check("PNS: only checked photos get codes",
