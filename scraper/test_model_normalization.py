@@ -572,6 +572,41 @@ check("models.json: 'Audi A3' not under makes.Toyota", "Audi A3" not in mj["make
 check("models.json: 'Audi A3' under noPick.Toyota", mj["noPick"].get("Toyota") == {"Audi A3": 1}, str(mj.get("noPick")))
 check("models.json: Acura RL counted 4", mj["makes"]["Acura"].get("RL") == 4, str(mj["makes"]))
 
+# ---- another make's model, no make word (hub follow-up 2026-11-07) ----------
+print("another make's model without a make word:")
+OM = js.resolve_other_make_model
+CNT = {("acura", "mdx"): 900, ("acura", "tsx"): 400, ("acura", "csx"): 20, ("nissan", "sentra"): 2000,
+       ("mitsubishi", "lancer"): 300, ("dodge", "lancer"): 1, ("bmw", "740"): 1, ("volvo", "740"): 50,
+       ("dodge", "sprinter"): 40, ("mercedesbenz", "sprinter"): 1, ("dodge", "caravan"): 900}
+OWN = {}
+for (mk_, md_), n_ in CNT.items():
+    if n_ >= js.OTHER_MAKE_OWNER_MIN:
+        OWN.setdefault(md_, set()).add(mk_)
+for make, model, dec, want in [
+    ("Dodge", "MDX", _dec("DODGE", "Grand Caravan"), ("Dodge", "Grand Caravan", True, "other_vin")),
+    ("BMW", "TSX", _dec("BMW", "335i"), ("BMW", "335i", True, "other_vin")),
+    ("Oldsmobile", "Sentra", _dec("NISSAN", "Sentra"), ("Nissan", "Sentra", True, "other_vin")),
+    ("Dodge", "CSX", None, ("Dodge", "CSX", False, "other_nopick")),
+    # decode names a third make: no basis -> noPick, never guessed
+    ("Dodge", "MDX", _dec("HONDA", "Odyssey"), ("Dodge", "MDX", False, "other_nopick")),
+    # comma decode is not confident
+    ("BMW", "TSX", _dec("BMW", "750i, Alpina B7"), ("BMW", "TSX", False, "other_nopick")),
+    # real names: decode agrees with the row's model / numeric / twin / known
+    ("Dodge", "Lancer", _dec("DODGE", "LANCER"), ("Dodge", "Lancer", True, "")),
+    ("Dodge", "Lancer", None, ("Dodge", "Lancer", False, "other_nopick")),
+    ("BMW", "740", None, ("BMW", "740", True, "")),
+    ("Mercedes-Benz", "Sprinter", None, ("Mercedes-Benz", "Sprinter", True, "")),
+    ("Dodge", "Caravan", None, ("Dodge", "Caravan", True, "")),
+    ("AMC", "Sentra", None, ("AMC", "Sentra", True, "")),
+]:
+    got = OM(make, model, dec, CNT, OWN)
+    check(f"{make} {model!r} dec={dec and dec['make']+' '+dec['model']} -> {want}", got == want, str(got))
+# comma-joined decode names never become the model; the row keeps its own blob
+for blob, dm in [("7 Series", "750i, Alpina B7"), ("7 Series", "750Li, Alpina B7"), ("7 Series", "750Lxi, Alpina B7")]:
+    check(f"BMW {blob!r} + decode {dm!r} keeps {blob!r}", R(blob, "BMW", _dec("BMW", dm, "7-Series")) == blob,
+          R(blob, "BMW", _dec("BMW", dm, "7-Series")))
+check("BMW '7 Series' + decode '750i' still resolves", R("7 Series", "BMW", _dec("BMW", "750i")) == "750i")
+
 check("app and worker mirror tables agree (same keys, same values modulo case)",
       all(set(APP.get(m, {})) == set(SRV.get(m, {})) and
           all(APP[m][k].lower() == SRV[m][k] for k in APP.get(m, {})) for m in set(APP) | set(SRV)),

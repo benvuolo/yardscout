@@ -24671,7 +24671,9 @@ def resolve_model_blob(model: str, make: str, vin_dec: dict | None) -> str:
         return model
     # NHTSA sometimes answers with a multi-model string ('325/325e') or the
     # same blob the feed used ('E-Series' stays series-less) — not confident.
-    if "/" in dec_model or dm_key in ("unknown", "") or dm_key == key:
+    # Comma lists ('750i, Alpina B7', 2026-11-07) likewise: the row keeps its
+    # own blob ('7 Series'), which the decode's make already confirms.
+    if "/" in dec_model or "," in dec_model or dm_key in ("unknown", "") or dm_key == key:
         return model
     return normalize_model(dec_model, make)
 
@@ -24857,6 +24859,57 @@ def resolve_foreign_make_model(make: str, model: str, vin_dec: dict | None,
     if disp:
         return make, disp, True, "strip"
     return make, model, False, "nopick"
+
+
+# ---------------------------------------------------------------------------
+# Another make's model with no make word (hub follow-up 2026-11-07): the same
+# scrambled Pull-N-Save / Nevada rows also give Dodge "MDX" (VIN: Grand
+# Caravan), BMW "TSX" (VIN: 335i), Oldsmobile "Sentra" (VIN: Nissan Sentra).
+# A row qualifies only when its model is NOT a known model of its make
+# (< FOREIGN_MAKE_KNOWN_MIN clean cars) and IS a well-established model
+# (>= OTHER_MAKE_OWNER_MIN cars) of exactly one make in the whole scan, from
+# another corporate family. Skipped: numeric names (BMW 740 / Volvo 740,
+# Fiat 850, Mercedes 200 are real shared designations), makes outside the
+# mainstream marque list (AMC Spirit, Studebaker Commander, Genesis), and
+# cross-family twins (Sprinter: Mercedes-Benz / Dodge / Freightliner).
+# Basis: confident VIN decode whose make agrees with the row's make or the
+# model's owner -> decoded make/model (a decode that agrees with the row's
+# model leaves it as is: Dodge Lancer, Chrysler TC, Lexus SC); else noPick.
+OTHER_MAKE_OWNER_MIN = 10
+_OTHER_MAKE_TWINS = {frozenset(p) for p in (("mercedesbenz", "dodge"), ("mercedesbenz", "freightliner"),
+                                            ("dodge", "freightliner"))}
+
+
+def resolve_other_make_model(make: str, model: str, vin_dec: dict | None,
+                             counts: dict[tuple[str, str], int],
+                             owners: dict[str, set[str]],
+                             known: dict[str, dict[str, str]] | None = None
+                             ) -> tuple[str, str, bool, str]:
+    """(make, model, pickable, rule) for a row whose model belongs to one
+    other make. counts: (make key, squashed model) -> clean cars; owners:
+    squashed model -> make keys with >= OTHER_MAKE_OWNER_MIN cars. rule ''
+    (not such a row / unchanged), 'other_vin', 'other_nopick'."""
+    mk, key = _make_key(make), _squash_model_key(model)
+    if (not key or key.isdigit() or mk not in _MAKE_IN_MODEL
+            or counts.get((mk, key), 0) >= FOREIGN_MAKE_KNOWN_MIN):
+        return make, model, True, ""
+    own = owners.get(key) or set()
+    if len(own) != 1 or mk in own:
+        return make, model, True, ""
+    ok = next(iter(own))
+    fam = _MAKE_FAMILY_OF.get(mk)
+    if (fam is not None and fam == _MAKE_FAMILY_OF.get(ok)) or frozenset((mk, ok)) in _OTHER_MAKE_TWINS:
+        return make, model, True, ""
+    dmake = ((vin_dec or {}).get("make") or "").strip()
+    dm = _decode_concrete_model(vin_dec)
+    if dm and dmake and (_decode_make_agrees(make, dmake) or _decode_make_agrees(ok, dmake)):
+        if _decode_make_agrees(make, dmake) and _squash_model_key(dm) == key:
+            return make, model, True, ""
+        new_make = normalize_make(dmake)
+        new_model = resolve_model_blob(normalize_model(dm, new_make), new_make, vin_dec)
+        disp = ((known or {}).get(_make_key(new_make)) or {}).get(_squash_model_key(new_model))
+        return new_make, disp or new_model, True, "other_vin"
+    return make, model, False, "other_nopick"
 
 
 _SCION_MODEL_KEYS = {"tc", "xa", "xb", "xd", "iq", "ia", "im", "frs"}
@@ -25094,9 +25147,12 @@ def enrich_vehicles(
             _known_cnt[k] = _known_cnt.get(k, 0) + 1
             _known_disp.setdefault(k, md)
     known_models: dict[str, dict[str, str]] = {}
+    model_owners: dict[str, set[str]] = {}
     for k, n in _known_cnt.items():
         if n >= FOREIGN_MAKE_KNOWN_MIN:
             known_models.setdefault(k[0], {})[k[1]] = _known_disp[k]
+        if n >= OTHER_MAKE_OWNER_MIN:
+            model_owners.setdefault(k[1], set()).add(k[0])
 
     def _apply_match(v: dict, vin_dec: dict | None) -> None:
         # Cross-family make in the model ('Toyota' + 'Audi A3'): VIN decode,
@@ -25108,6 +25164,13 @@ def enrich_vehicles(
             FOREIGN_MAKE_STATS[rule] = FOREIGN_MAKE_STATS.get(rule, 0) + 1
             if rule == "vin" and mk2 != v.get("make"):
                 FOREIGN_MAKE_STATS["vin_make_changed"] = FOREIGN_MAKE_STATS.get("vin_make_changed", 0) + 1
+        if not rule:
+            mk2, md2, pick, rule = resolve_other_make_model(
+                mk2, md2, vin_dec, _known_cnt, model_owners, known_models)
+            if rule:
+                FOREIGN_MAKE_STATS[rule] = FOREIGN_MAKE_STATS.get(rule, 0) + 1
+                if rule == "other_vin" and mk2 != v.get("make"):
+                    FOREIGN_MAKE_STATS["other_vin_make_changed"] = FOREIGN_MAKE_STATS.get("other_vin_make_changed", 0) + 1
         v["make"], v["model"] = mk2, md2
         if not pick:
             v["_noPick"] = True
@@ -25325,6 +25388,8 @@ def enrich_vehicles(
             f"  VPIC decode-well (trim-specific, per vehicle row): {n_decode_well}",
             file=sys.stderr,
         )
+    if FOREIGN_MAKE_STATS:
+        print(f"  [models] other-make model rows by rule: {dict(sorted(FOREIGN_MAKE_STATS.items()))}", file=sys.stderr)
     return vehicles
 
 
