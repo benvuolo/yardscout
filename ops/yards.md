@@ -209,6 +209,43 @@ Sweep follow-ups (mine):
     Albuquerque 5.6 km.
   - The app shows the new pins after the next scan.
 
+## 2026-11-07 Pull-N-Save make/model accuracy fix (hub-approved)
+
+**Problem** (data-quality session): Pull-N-Save cars contradicted their
+VINs. VIN JTEBU5JR0D5116438 (2013 Toyota 4Runner) was published as Audi
+"A3", and 59 cars disagreed across families (e.g. Acura "MDX" =
+Dodge Grand Caravan, VINs 2D4RN5D18AR323652 and 2C4RDGCG1CR241704).
+
+**Cause** (checked with one Audi query, the same request the scan makes):
+it is not query bleed or a parse shift. Pull-N-Save's own rows contradict
+their VINs:
+- "2013 AUDI A3" carries the 4Runner VIN.
+- "1985 AUDI 4000" carries a 1985 Chrysler VIN.
+- "2000 AUDI A6" carries a 2000 Lexus RX VIN.
+
+Each VIN's model year matches the row's year, so the yard's model pick is
+what's wrong and the VIN is right. The adapter also stamped the queried make
+on every row. Rows were already one per stock number (id `pns-{stock}`, first
+wins); a test now covers that.
+
+**Fix** (3edce5bc, `pns_resolve_make_model`, test `test_pns_make_model.py`):
+1. If a confident cached vPIC decode's make differs from the row's, the
+   car takes the decoded make and concrete model (`vin`). If the make agrees,
+   the row's own model text stays (`vin_agrees`).
+2. With no confident decode, the car keeps its own model text (with the
+   query-make prefix stripped). The make is the one make owning that model
+   (≥10 cars in the previous `models.json`) (`model`).
+3. Otherwise the car keeps the queried make and is flagged not-pickable
+   (`_noPickAdapter` → `noPick`) (`nopick`).
+
+Same requests and pacing; the photo checker stays paused. A car first seen
+with a new VIN gets rule 2 or 3 and is corrected on the next scan, once its
+VIN is decoded and cached. The scan log prints
+`[Pull-N-Save make/model] {rule: count}`.
+
+On the Audi sample, 4 of 69 rows were corrected from the VIN: 4Runner, Dodge
+Ram, Chrysler Fifth Avenue, Ford Escape.
+
 ## 2026-11-06 vehicle photos, round 3 (more coverage)
 
 Owner, via the hub: "can we get better photo coverage?" The rules are
