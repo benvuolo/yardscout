@@ -84,6 +84,17 @@ sheet" in the UI only (jh_saved and watch storage untouched, rule 6); map deferr
   watch_match_unit +5, no_pick_models_e2e 11/11, interchange/pf_ux/yaris pass,
   part_finder known M3 only. Artifact section "Round 5: alerts first".
 
+### Final round: Pro box (2026-11-07; owner on build 32: "Make the pro a box or just look better ... then push this to prod!")
+- Branch head 80f31bc (merged main; shell jh-v154 because the shell changed since build 32). Hub merges and ships; this session did not merge or release.
+- One Pro box (`proBoxHtml` in app.js, `.pro-box` in styles.css): accent border, PRO badge, one line,
+  chevron, the whole box opens the Pro sheet; Pro users see none. It replaces every free-user
+  Pro link: car screen next-one (stacked under a full-width one-line button), watch hits,
+  "Want the next one?" rows, card and part value locks, watch toast, Alerts tab, zip banner.
+- Polish: tabular digits moved off body (Inter widened hyphens: "6 - cyl"); distances keep "mi" on the same line.
+- Tests at 80f31bc: ui_no_truncation 792/792 (new rules: no bare "Pro" links, no box for Pro,
+  next-one button one line from 375px); interchange, pf_ux, yaris, no_pick_models, all node units pass;
+  part_finder known M3 only. Artifact section "Final round: the Pro box".
+
 ## Earlier state (2026-11-06, exploration)
 
 - Branch: `design/redesign-2026-11` (exploration only; nothing merged).
