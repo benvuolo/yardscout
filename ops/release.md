@@ -1,4 +1,4 @@
-# Release workstream — status (updated 2026-11-06)
+# Release workstream — status (updated 2026-11-07)
 
 Owns: version bumps and store submissions via `release-ios.yml` and
 `release-android.yml`, `fastlane/metadata/`, release notes.
@@ -10,7 +10,7 @@ Procedure: `RELEASING.md`. **Dispatch only after the owner says "ship".**
 |---|---|---|
 | 1.12.10 | build 26, live (READY_FOR_SALE) | — |
 | 1.12.11 | — | versionCode 33, Play production, in review |
-| 1.12.13 | TestFlight only, from branch design/pull-sheet via release-ios source_ref: build 28 (redesign), 29 (Worth pulling), 30 (photos, branch e3d09b4 + bump; VALID 2026-11-06 ~21:00 UTC). 31 (new Parts tab + onCards), 32 (alerts first + noPick models, branch 32466c5 + bump; VALID 2026-11-07 ~01:15 UTC). Owner testing 32. Not submitted. To ship: merge the branch into main (sw jh-v153 or later; main is jh-v152), then submit_only build 32. | not built |
+| 1.12.13 | SHIPPED 2026-11-07 (owner: "push this to prod"). design/pull-sheet merged to main (4331322, sw jh-v154), then the coverage-count fix (sw jh-v155). Build 33 was submitted and then replaced by build 34 (with the fix), WAITING_FOR_REVIEW since 04:40 UTC. 1.12.12 was withdrawn and never reached iOS users; 1.12.13 includes it. | versionCode 35, then 36 (with the fix): Play production, completed, rollout 100% |
 | 1.12.12 | build 27, submitted 2026-11-05 19:42 UTC, WAITING_FOR_REVIEW, auto-release on approval | versionCode 34, Play production, status completed, rollout 100% (Google review pending) |
 
 1.12.11 added the review prompt (`ReviewPlugin.swift` / `ReviewPlugin.java`,
