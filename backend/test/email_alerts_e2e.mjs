@@ -7,7 +7,9 @@
  * the DEV log-and-succeed path marked the dedupe bookkeeping — the real
  * Resend send is verified against production separately.
  */
-import { createHmac, randomBytes } from 'node:crypto';
+import { createHmac, randomBytes, createHash } from 'node:crypto';
+import { gzipSync } from 'node:zlib';
+import { vindexBucket } from '../src/util.js';
 
 const BASE = process.env.YS_TEST_BASE || 'http://localhost:8793';
 const ADMIN = { 'x-admin-secret': 'dev-admin-secret-change-me' };
@@ -136,6 +138,85 @@ const arrival4 = [{ id: 9666, year: 2001, make: 'Toyota', model: '4Runner', row:
   location: 'Utah Pick-A-Part - Ogden', city: 'Ogden', state: 'UT', lat: 41.19, lng: -111.94 }];
 r = await api('/v1/admin/email-alerts/dispatch', J({ arrivals: arrival4 }, ADMIN));
 check('lapsed Pro skipped at send time', r.data.users === 0 && r.data.emails === 0, JSON.stringify(r.data));
+
+
+/* ---- 7. free weekly recap teaser (accounts + weekly cron path) ----
+ * Real inventory shards so the "already gone" lookup runs the production
+ * resolver: 9801 is in the current shards, 9802 is not (its yard is still
+ * scanned → gone), 9803's yard is not in the directory (→ unknown, so no
+ * gone line and no gone count). A Pro account with the same watch must be
+ * skipped by the weekly recap and keep its instant email. */
+async function login(email) {
+  const { data } = await api('/v1/auth/request-link', J({ email }));
+  const tok = new URL(data.dev_link).searchParams.get('token');
+  const cb = await fetch(`${BASE}/v1/auth/callback?token=${tok}`, { redirect: 'manual' });
+  return { authorization: 'Bearer ' + decodeURIComponent(cb.headers.get('location').split('#session=')[1]) };
+}
+const FREE_AUTH = await login('recap-free@test.dev');
+const PRO_AUTH = await login('recap-pro@test.dev');
+await api('/v1/admin/grant', J({ email: 'recap-pro@test.dev', tier: 'pro', note: 'e2e' }, ADMIN));
+const TACOMA = { make: 'Toyota', model: 'Tacoma', lat: 40.76, lng: -111.89, radiusMi: 100 };
+r = await api('/v1/watches', J(TACOMA, FREE_AUTH));
+check('free radius watch created', r.status === 200 && r.data.id, JSON.stringify(r.data));
+r = await api('/v1/watches', J(TACOMA, PRO_AUTH));
+check('pro watch created', r.status === 200 && r.data.id, JSON.stringify(r.data));
+
+const FIELDS = ['id', 'vin', 'year', 'make', 'model', 'row', 'dateAdded', 'yard', 'partSet', 'maxValue', 'premium'];
+const OGDEN = 'Utah Pick-A-Part - Ogden';
+const todayYmd = new Date().toISOString().slice(0, 10);
+async function putShard(kind, key, variant, obj) {
+  const raw = JSON.stringify(obj);
+  const res = await fetch(`${BASE}/v1/admin/inventory/shard/${kind}/${key}/${variant}`, {
+    method: 'PUT', headers: { ...UPLOAD, 'x-content-sha256': createHash('sha256').update(raw).digest('hex') },
+    body: gzipSync(Buffer.from(raw)) });
+  return res.status;
+}
+const manifest = {};
+let st = await putShard('yard', '0', 'free', { vehicles: [[9801, '1TACOMA0000009801', 2003, 'Toyota', 'Tacoma', '14', todayYmd, 0, null, null, null]], vpic: {} });
+manifest['yard/0/free'] = 'x';
+const buckets = {};
+for (const id of ['9801', '9802', '9803']) buckets[vindexBucket(id, 64)] ||= {};
+buckets[vindexBucket('9801', 64)]['9801'] = [0, 9801];
+for (const [b, idx] of Object.entries(buckets)) { st = Math.max(st, await putShard('vindex', b, 'all', idx)); manifest[`vindex/${b}/all`] = 'x'; }
+check('synthetic shards uploaded', st === 200, `status ${st}`);
+
+const tacoma = (id, location, lat, lng) => ({ id, year: 2003, make: 'Toyota', model: 'Tacoma', row: '14',
+  dateAdded: todayYmd, location, city: 'Ogden', state: 'UT', lat, lng });
+const recapArrivals = [tacoma(9801, OGDEN, 41.19, -111.94), tacoma(9802, OGDEN, 41.19, -111.94),
+  tacoma(9803, 'Closed Yard - Layton', 41.06, -111.97)];
+r = await api('/v1/admin/inventory/commit', J({
+  directory: { yards: [[OGDEN, 'Ogden', 'UT', 41.19, -111.94]], fields: FIELDS, vindexMod: 64,
+    scrapedAt: new Date().toISOString() },
+  manifest, newArrivals: recapArrivals }, UPLOAD));
+check('recap commit accepted', r.status === 200 && r.data.arrivals === 3, JSON.stringify(r.data));
+// getDirectory() caches the directory per isolate for 30s, and earlier
+// sections committed an empty one moments ago — wait it out.
+await sleep(31_000);
+
+// Run the weekly recap as of 3 days later (DEV seam) and read the built email.
+const LATER = new Date(Date.now() + 3 * 86400_000).toISOString();
+r = await api('/v1/admin/digest/run', J({ now: LATER, preview: true }, ADMIN));
+const pv = (r.data.previews || []);
+check('weekly recap: one free email, Pro account skipped', r.data.users === 1 && r.data.emails === 1
+  && pv.length === 1 && pv[0].to === 'recap-free@test.dev', JSON.stringify({ ...r.data, previews: pv.map((p) => p.to) }));
+const em = pv[0] || { text: '', html: '' };
+check('match set unchanged: all 3 watched arrivals listed, gone one included',
+  ['9801', '9802', '9803'].every((id) => em.html.includes(`#car=${id}`)) && /3 watched cars arrived/.test(em.subject));
+const lineFor = (id) => {
+  const seg = em.html.split(`#car=${id}`)[1] || '';
+  return (seg.split('</td>')[0].match(/<div[^>]*>([^<]*)<\/div>/) || [])[1] || '';
+};
+check('present car: "Pro would have pinged you", not gone', /Pro would have pinged you/.test(lineFor('9801')) && !/left/.test(lineFor('9801')), lineFor('9801'));
+check('gone car: "Was at <yard> … left before this email"',
+  lineFor('9802').startsWith(`Was at ${OGDEN} from `) && /left before this email/.test(lineFor('9802')), lineFor('9802'));
+check('unknown-yard car: never called gone', !/left/.test(lineFor('9803')), lineFor('9803'));
+check('summary at top, gone count omitted (one car unknown)',
+  em.text.startsWith("All 3 of this week's matches were found 3 days before this email.") && !/already gone/.test(em.text),
+  em.text.split('\n')[0]);
+check('exactly one upgrade link, to the existing Pro page',
+  (em.text.match(/#tab=alerts/g) || []).length === 1 && (em.html.match(/#tab=alerts/g) || []).length === 1);
+r = await api('/v1/admin/digest/run', J({ now: LATER, preview: true }, ADMIN));
+check('recap rerun sends nothing (dedupe unchanged)', r.data.users === 0 && r.data.emails === 0, JSON.stringify(r.data));
 
 console.log(failures ? `\n${failures} FAILURES` : '\nALL PASS');
 process.exit(failures ? 1 : 0);

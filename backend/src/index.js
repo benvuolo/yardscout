@@ -282,6 +282,17 @@ async function route(req, env, url, ctx) {
     // Manual digest trigger — same code path as the Monday cron. Handy for
     // ops ("did anyone match this week?") and exercised by the e2e test.
     if (method === 'POST' && path === '/v1/admin/digest/run') {
+      // DEV_MODE only: {now} runs the recap as of another instant and
+      // {preview:true} returns the built emails, so e2e can assert copy.
+      // Production ignores the body entirely.
+      if (env.DEV_MODE === '1') {
+        let body = {};
+        try { body = await req.json(); } catch { body = {}; }
+        const now = Number.isFinite(Date.parse(body.now || '')) ? Date.parse(body.now) : Date.now();
+        const previews = body.preview ? [] : null;
+        const r = await sendWeeklyDigests(env, { now, previews });
+        return json(previews ? { ...r, previews } : r);
+      }
       return json(await sendWeeklyDigests(env));
     }
     // Manual email-alert dispatch (exact production path, caller-supplied
