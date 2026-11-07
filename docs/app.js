@@ -466,6 +466,9 @@ const ICON = {
   x: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>',
   lock: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>',
   chev: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>',
+  plus: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>',
+  chevR: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>',
+  back: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>',
   share: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v13M8 7l4-4 4 4"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/></svg>',
 };
 
@@ -701,6 +704,7 @@ function _pricingRefreshViews() {
       if (window.scrollY !== y) window.scrollTo(0, y);
     }
   }
+  if (carDetailKey) renderCarDetail();
   if (active('tab-yards')) renderYards();
   if (compareSuggest.style.display !== 'none') renderCompareSuggest();
 }
@@ -815,7 +819,22 @@ function applyPricesReviewed(iso) {
   }
 }
 
+/* Model names the data-quality pass flags as mislabelled (e.g. a BMW listed
+ * as "Alfa-Romeo 4C"): {make: [model]}, raw row strings, published as
+ * noPickModels in inventory_live.json and inv/manifest.json. Those cars stay
+ * in inventory and search; the name is just never offered in a model picker
+ * (Parts "Your car", Cars filter, Alerts watch). Missing key = none. */
+let noPickModels = {};
+function setNoPickModels(m) {
+  noPickModels = (m && typeof m === 'object' && !Array.isArray(m)) ? m : {};
+}
+function isNoPickModel(make, model) {
+  const l = noPickModels[make];
+  return Array.isArray(l) && l.includes(model);
+}
+
 function parseInventoryPayload(raw) {
+  setNoPickModels(raw && !Array.isArray(raw) ? raw.noPickModels : null);
   {
     if (raw && raw.schemaVersion === 2 && Array.isArray(raw.vehicles)) {
       // v2 compact format: expand lookup-table rows into full vehicle objects.
@@ -850,33 +869,70 @@ const DATA_CACHE = 'jh-data-v1';
  * The last four only ever say "Manual" (scraper/trans_evidence.py).
  * It loads in parallel with the inventory and is never on the critical path:
  * cards render photo-less first if it hasn't arrived, then hydrate.
- *
- * PHOTO POLICY: a photo renders ONLY when the chain whose car it is hosts the
- * image itself (same-chain, hotlinked — their server serves it, we never
- * download/rehost/proxy). Each chain has a kill switch below so photos can be
- * turned off with one flag if a chain ever objects. Pick-n-Pull photo codes
- * ("r..." — Row52-hosted, Row52-watermarked, a competitor's assets) are never
- * rendered even if present in older data. */
-const PHOTO_SOURCES = {
-  // LKQ hosts these on its own CDN (cdn.pypapps.com) with LKQ's PYP watermark.
-  // 2026-09 owner decision (legal caution): ALL chain-sourced photos are OFF —
-  // LKQ's watermark prompted a blanket no-chain-photos call. URL capture and
-  // this rendering plumbing stay intact so we can revisit (e.g. user-submitted
-  // photos); flipping `enabled` back on is the only change needed.
-  pyp: {
-    enabled: false,
-    label: 'Photo: LKQ Pick Your Part',
-    url: id => 'https://cdn.pypapps.com/carbuy/CAR-FRONT-LEFT_' + id
-      + '_front_left_corner.jpg?quality=70&w=640&h=427&mode=crop&format=webp',
-  },
-};
+ * Photo policy: see "Chain photos" below (Sep 2026 policy superseded by the
+ * 2026-11-06 owner decisions, incl. the narrow Pick-n-Pull exception). */
+/* Chain photos (owner decisions 2026-11-06, ops/hub.md): photos load from the
+ * yard's own URL, credited, never downloaded/rehosted/proxied/cached (the
+ * service worker ignores cross-origin requests). WHICH chains render is data,
+ * not code: the scan publishes the enabled sources from
+ * scraper/photo_sources.json as `photoSources` in data/inv/manifest.json and
+ * data/vehicle_extras.json — {key: {label, host, patterns: [{code, card,
+ * large}]}}. A takedown is a data publish (ops/yards.md "Photo takedown").
+ * Fail closed: nothing published -> no photos. A pattern's URLs must be
+ * https on that source's own published host, or the photo is skipped. */
+let publishedPhotoSources = null;
+let _photoRules = [];   // compiled [{key, label, host, rx, card, large}]
+function setPublishedPhotoSources(ps) {
+  // Each manifest / extras file replaces the last: data without photoSources
+  // (older data, or a full takedown) clears every rule, so a switch-off never
+  // outlives the data that carried the switch.
+  if (!ps || typeof ps !== 'object' || Array.isArray(ps)) { publishedPhotoSources = null; _photoRules = []; return; }
+  const rules = [];
+  for (const [key, src] of Object.entries(ps)) {
+    if (!src || typeof src !== 'object' || typeof src.label !== 'string' || typeof src.host !== 'string' || !src.host) continue;
+    for (const pat of Array.isArray(src.patterns) ? src.patterns : []) {
+      if (!pat || typeof pat.code !== 'string' || typeof pat.card !== 'string' || typeof pat.large !== 'string') continue;
+      let rx;
+      try { rx = new RegExp('^(?:' + pat.code + ')$'); } catch (e) { continue; }
+      // onCards false (published per source) = images too heavy for list
+      // cards: car screen and viewer only.
+      rules.push({ key, label: src.label, host: src.host.toLowerCase(), rx, card: pat.card, large: pat.large, onCards: src.onCards !== false });
+    }
+  }
+  publishedPhotoSources = ps;
+  _photoRules = rules;
+}
 let vehicleExtras = null;
 
+/* Photo for a car's extras code, or null: {url (card), large (viewer),
+ * label (credit), key, w, h (aspect hint for the box)}. */
+const PHOTO_ASPECT = { wapj: [240, 320], weller: [960, 1280] };
 function photoInfo(code) {
-  if (!code || code[0] !== 'p') return null; // 'r' (Row52) codes: excluded by policy
-  const src = PHOTO_SOURCES.pyp;
-  if (!src || !src.enabled) return null;
-  return { url: src.url(code.slice(1)), label: src.label };
+  if (!code || typeof code !== 'string' || code.length > 600) return null;
+  for (const r of _photoRules) {
+    const m = r.rx.exec(code);
+    if (!m) continue;
+    const fill = (t) => t.replace(/\{([1-9])\}/g, (x, i) => m[+i] || '');
+    const urls = [fill(r.card), fill(r.large)];
+    const ok = urls.every(u => {
+      try { const x = new URL(u); return x.protocol === 'https:' && x.hostname.toLowerCase() === r.host; } catch (e) { return false; }
+    });
+    if (!ok) return null;
+    const [w, h] = r.key === 'wap' && /\.j$/.test(code) ? PHOTO_ASPECT.wapj : (PHOTO_ASPECT[r.key] || [4, 3]);
+    return { url: urls[0], large: urls[1], label: r.label, key: r.key, w, h, onCards: r.onCards };
+  }
+  return null;
+}
+/* The photo box: fixed 4:3, the whole image shown (contain: never cropped,
+ * so a chain's watermark is never cut off), a plain placeholder under it, and
+ * a failed image simply hides. Tap opens the viewer. */
+function photoBoxHtml(info, key, title, cls) {
+  key = escapeHtml(key);
+  if (!info) return `<div class="photo-box photo-none ${cls || ''}" aria-hidden="true"><span>No photo from this yard</span></div>`;
+  return `<button type="button" class="photo-box ${cls || ''}" data-photo-vkey="${key}" aria-label="View photo of the ${escapeHtml(title)}">
+      <img src="${escapeHtml(info.url)}" alt="" loading="lazy" decoding="async" width="${info.w}" height="${info.h}" onerror="this.closest('.photo-box').classList.add('photo-failed')">
+      <span class="photo-credit">${escapeHtml(info.label)}</span>
+    </button>`;
 }
 function extrasFor(v) {
   return (vehicleExtras && vehicleExtras[String(v.id)]) || null;
@@ -931,6 +987,7 @@ function loadVehicleExtrasFile() {
       if (!d || !d.extras) return;
       // A shard session that took over meanwhile owns vehicleExtras.
       if (_inv && _inv.shown) return;
+      setPublishedPhotoSources(d.photoSources);
       vehicleExtras = d.extras;
       hydratePhotos();
     })
@@ -1093,7 +1150,7 @@ function renderSaleStrip() {
     `<button type="button" class="sale-strip-row" data-loc="${escapeHtml(y.location)}">
        <span class="sale-pill">${ev.pct ? ev.pct + '% off' : 'Sale'}</span>
        <span class="sale-strip-yard">${escapeHtml(y.location)}</span>
-       <span class="sale-strip-when">${saleDateLabel(ev)}${d != null ? ' &middot; ' + Math.round(d) + ' mi' : ''}</span>
+       <span class="sale-strip-when">${saleDateLabel(ev)}${d != null ? ' &middot; ' + Math.round(d) + '\u00a0mi' : ''}</span>
      </button>`).join('')
     + (rows.length > shown.length ? `<div class="sale-strip-more">+${rows.length - shown.length} more sale${rows.length - shown.length > 1 ? 's' : ''} in range</div>` : '');
   strip.style.display = '';
@@ -1106,18 +1163,19 @@ document.getElementById('sale-strip').addEventListener('click', e => {
 /* Insert photos into already-rendered cards (extras arrived after render). */
 function hydratePhotos() {
   document.querySelectorAll('#live-grid .car-card[data-eid]').forEach(card => {
-    if (card.querySelector('.car-photo-wrap')) return;
+    if (card.querySelector('.photo-box')) return;
     const ex = vehicleExtras && vehicleExtras[card.dataset.eid];
     const info = ex && ex[0] ? photoInfo(ex[0]) : null;
-    if (!info) return;
-    const wrap = document.createElement('div');
-    wrap.className = 'car-photo-wrap';
-    wrap.innerHTML = '<img class="car-photo" loading="lazy" alt="" onerror="this.parentNode.remove()">'
-      + '<span class="photo-credit"></span>';
-    wrap.querySelector('img').src = info.url;
-    wrap.querySelector('.photo-credit').textContent = info.label;
-    card.prepend(wrap);
+    if (!info || !info.onCards) return;
+    const title = (card.querySelector('.car-name') || {}).textContent || 'car';
+    card.insertAdjacentHTML('afterbegin', photoBoxHtml(info, card.dataset.vkey || '', title.trim(), 'card-photo'));
   });
+  // The car screen drew a placeholder before the extras arrived: redraw once.
+  if (carDetailKey && document.querySelector('#car-detail .photo-box.photo-none')) {
+    const v = liveInventory.find(x => vehicleKey(x) === carDetailKey);
+    const ex = v && extrasFor(v);
+    if (ex && ex[0] && photoInfo(ex[0])) renderCarDetail();
+  }
 }
 const INVENTORY_URL = DATA_BASE + 'data/inventory_live.json';
 const INVENTORY_META_URL = DATA_BASE + 'data/inventory_meta.json';
@@ -1596,6 +1654,8 @@ function _invApply(s) {
   liveComplete = complete;
   liveScrapedAt = m.scrapedAt;
   applyPricesReviewed(m.pricesLastReviewed);
+  setPublishedPhotoSources(m.photoSources);
+  setNoPickModels(m.noPickModels);
   vehicleExtras = s.extras;
   s.applied = new Set(s.parsed.keys());
   if (complete) s.done = true;
@@ -2312,7 +2372,7 @@ function populateModelFilter() {
   btn.disabled = false;   // location gate lives in updateFilterAvailability
   const counts = new Map();
   for (const v of _scopedVehicles) {
-    if (v.make === make && v.model) {
+    if (v.make === make && v.model && !isNoPickModel(v.make, v.model)) {
       const m = canonicalModel(make, v.model);
       counts.set(m, (counts.get(m) || 0) + 1);
     }
@@ -2423,7 +2483,7 @@ function populateYardFilter() {
     const opt = document.createElement('option');
     opt.value = r.name;
     opt.textContent = r.name
-      + (r.dist != null ? ' \u2014 ' + Math.round(r.dist) + ' mi' : '')
+      + (r.dist != null ? ' \u2014 ' + Math.round(r.dist) + '\u00a0mi' : '')
       + ' (' + r.count + ' cars)';
     locSel.appendChild(opt);
   });
@@ -2648,7 +2708,7 @@ function proSheetProof() {
   const r = effectiveRadiusMi();
   let n = 0;
   for (const v of liveInventory) { if (!week(v)) continue; const d = vehicleDistanceMi(v); if (d != null && (!r || d <= r)) n++; }
-  return n ? `${n.toLocaleString()} cars were set out within ${r || 'any distance of'}${r ? ' miles' : ''} of you this week.` : '';
+  return n ? `${n.toLocaleString()} cars were set out within ${r || 'any distance of'}${r ? ' miles' : ''} of you this week. Pro pings you within hours when one you\u2019re watching lands.` : '';
 }
 /* Paywall at the moment of value: opened from a locked part or "What
  * you'd save" on a specific car, the sheet leads with THAT car — what it
@@ -2664,11 +2724,11 @@ function proSheetCarHtml(enc) {
   const bucket = [1500, 1000, 500, 250, 100].find(b => high >= b);
   const fast = v.topParts.some(p => p.sell_speed === 'Fast');
   const d = vehicleDistanceMi(v);
-  const where = [v.location, d != null ? Math.round(d) + ' mi' : '', v.row ? 'Row ' + v.row : ''].filter(Boolean).map(escapeHtml).join(' &middot; ');
+  const where = [v.location, d != null ? Math.round(d) + '\u00a0mi' : '', v.row ? 'Row ' + v.row : ''].filter(Boolean).map(escapeHtml).join(' &middot; ');
   return `<div class="pro-car-name">${escapeHtml(`${v.year} ${v.make} ${v.model}`)}</div>
     <div class="pro-car-where">${where}</div>
     <div class="pro-car-facts">${v.topParts.length} part${v.topParts.length === 1 ? '' : 's'} worth checking${bucket ? ` &middot; <strong>$${bucket.toLocaleString()}+</strong> to buy them used online` : ''}${fast ? ' &middot; some get picked over fast' : ''}</div>
-    <div class="pro-car-note">Pro shows which parts, what this yard charges for each, and what you&rsquo;d save &mdash; on this car and every other one.</div>`;
+    <div class="pro-car-note">Pro pings you within hours when the next one like it lands, and shows which parts, what this yard charges for each, and what you&rsquo;d save &mdash; on this car and every other one.</div>`;
 }
 /* Why the sheet opened, in one line, when a watch gate opened it — the
  * generic local-proof line reads as a non sequitur after "6th watch". */
@@ -2729,11 +2789,11 @@ function openUpgradeSheet(trigger, carKey) {
     // Both platforms have real push now (APNs on iOS, FCM on Android since
     // 1.2) — same honest copy, only the store name differs.
     if (sheetSub) sheetSub.textContent =
-      'Finding cars near you is free and stays free. '
-      + 'Pro is for planning the trip: a push within hours of a watched '
-      + 'car landing (free gets the weekly recap), what the yard charges '
-      + 'vs what the same used part goes for online, and which parts get '
-      + 'picked over fast. Subscribe through '
+      'A push alert within hours when a car you want lands, so you get '
+      + 'there before the parts are gone. Free gets a Monday recap instead. '
+      + 'Pro also shows what the yard charges vs what the same used part '
+      + 'goes for online, and which parts get picked over fast. Finding cars '
+      + 'stays free. Subscribe through '
       + (IS_ANDROID ? 'Google Play' : 'the App Store') + '; cancel anytime.';
   }
   document.getElementById('upgrade-sheet').classList.add('open');
@@ -2767,7 +2827,11 @@ function applyProGates() {
   // Nationwide browsing is Pro: the zip-banner skip and the "Any distance"
   // radius option say so honestly for free users, and work normally for Pro.
   const skipBtn = document.getElementById('zip-banner-skip');
-  if (skipBtn) skipBtn.innerHTML = pro ? 'Skip &mdash; show everything nationwide' : 'Nationwide browsing is a Pro feature &rarr;';
+  if (skipBtn) {
+    skipBtn.className = pro ? 'zip-banner-skip' : 'pro-box zip-banner-skip-pro';
+    skipBtn.innerHTML = pro ? 'Skip &mdash; show everything nationwide'
+      : '<span class="pro-badge">Pro</span><span class="pro-box-line">Browse every yard nationwide</span><span class="pro-box-chev" aria-hidden="true">&rsaquo;</span>';
+  }
   const anyOpt = document.querySelector('#live-radius option[value=""]');
   if (anyOpt) anyOpt.innerHTML = pro ? 'Any distance' : 'Any distance &mdash; Pro';
   // Value-intelligence sorts are Pro: a free user sorting by value would get
@@ -2790,6 +2854,8 @@ function applyProGates() {
   if (driveEl) { driveEl.disabled = !pro; if (!pro) driveEl.value = ''; }
   if (trimEl) { trimEl.disabled = !pro; if (!pro) trimEl.value = ''; }
   if (lock) lock.style.display = pro ? 'none' : '';
+  const pushPro = document.getElementById('alerts-push-pro');
+  if (pushPro) pushPro.style.display = pro ? 'none' : '';
 }
 
 /* Sorting BY value hands out the value ranking even with prices blurred, so
@@ -2890,6 +2956,7 @@ function toggleSaved(key) {
   persistSaved();
   updateSavedPill();
   renderSavedSheet();
+  if (typeof refreshPullBtns === 'function') refreshPullBtns(key);
 }
 
 function savedRange(s) {
@@ -2924,7 +2991,7 @@ function renderSavedSheet() {
   const list = document.getElementById('saved-list');
   const entries = Object.entries(savedCars);
   if (!entries.length) {
-    list.innerHTML = '<div class="saved-empty">Tap the heart on any car to build your pull list.</div>';
+    list.innerHTML = '<div class="saved-empty">Tap \u201cAdd to pull sheet\u201d on any car to build your list for the yard.</div>';
     return;
   }
   // Group by yard; inside each yard sort by row number so the list matches a
@@ -2939,23 +3006,25 @@ function renderSavedSheet() {
     const items = byYard[yard].sort((a, b) => rowNum(a[1].row) - rowNum(b[1].row));
     return `
       <div class="saved-yard-group">
-        <div class="saved-yard-name">${yard} &middot; ${items.length} car${items.length > 1 ? 's' : ''}</div>
+        <div class="saved-yard-name">${escapeHtml(yard)} &middot; ${items.length} car${items.length > 1 ? 's' : ''}</div>
         ${items.map(([key, s]) => {
-          const best = (s.topParts && s.topParts[0]) ? s.topParts[0].name : '';
           const gone = savedIsGone(key);
+          const parts = s.topParts || [];
+          // Part names are free, top picks first; prices stay Pro.
+          const names = partsByValue(parts, s.location).map(p => p.name);
+          const partsTxt = !parts.length ? ''
+            : `${parts.length} part${parts.length > 1 ? 's' : ''}: ${names.slice(0, 3).join(', ')}${parts.length > 3 ? ' and more' : ''}`;
+          const setOut = s.dateAdded ? 'Set out ' + (parseYardDate(s.dateAdded) ? parseYardDate(s.dateAdded).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : s.dateAdded) : '';
           return `
             <div class="saved-item${gone ? ' saved-gone' : ''}"${gone ? ' title="Not on the yard\u2019s current list \u2014 pulled or crushed since you saved it"' : ''}>
-              ${s.row
-                ? `<div class="saved-row-badge">${escapeHtml(String(s.row))}<small>row</small></div>`
-                : '<div class="saved-row-badge saved-row-none" title="The yard hasn\u2019t published a row for this car yet \u2014 ask at the counter">&mdash;<small>no row yet</small></div>'}
+              ${rowPlateHtml(s.row)}
               <div class="saved-item-info">
-                <div class="saved-item-name">${s.year} ${s.make} ${s.model}</div>
-                <div class="saved-item-sub">${[gone ? 'No longer listed' : '', s.dateAdded ? 'Set out ' + (parseYardDate(s.dateAdded) ? parseYardDate(s.dateAdded).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : s.dateAdded) : '',
-                  !best ? '' : isPro()
-                    ? best + (s.topParts.length > 1 ? ' +' + (s.topParts.length - 1) + ' more' : '')
-                    : s.topParts.length + ' part' + (s.topParts.length > 1 ? 's' : '') + ' to check'].filter(Boolean).join(' \u00b7 ')}</div>
+                ${gone ? `<div class="saved-item-name">${escapeHtml(`${s.year} ${s.make} ${s.model}`)}</div>`
+                  : `<button type="button" class="saved-item-name saved-open" data-vkey="${escapeHtml(key)}">${escapeHtml(`${s.year} ${s.make} ${s.model}`)}</button>`}
+                <div class="saved-item-sub">${[gone ? 'No longer listed' : '', setOut].filter(Boolean).map(escapeHtml).join(' \u00b7 ')}</div>
+                ${partsTxt ? `<div class="saved-item-parts">${escapeHtml(partsTxt)}</div>` : ''}
               </div>
-              <button type="button" class="saved-remove" data-vkey="${key}" title="Remove">${ICON.x}</button>
+              <button type="button" class="saved-remove" data-vkey="${escapeHtml(key)}" title="Take off the pull sheet" aria-label="Take ${escapeHtml(`${s.year} ${s.make} ${s.model}`)} off the pull sheet">${ICON.x}</button>
             </div>`;
         }).join('')}
       </div>`;
@@ -2974,7 +3043,7 @@ function closeSavedSheet() {
 document.getElementById('saved-pill').addEventListener('click', openSavedSheet);
 document.getElementById('saved-backdrop').addEventListener('click', closeSavedSheet);
 document.getElementById('saved-clear').addEventListener('click', () => {
-  if (!confirm('Remove all saved cars?')) return;
+  if (!confirm('Clear your pull sheet?')) return;
   savedCars = {};
   persistSaved();
   updateSavedPill();
@@ -2982,6 +3051,8 @@ document.getElementById('saved-clear').addEventListener('click', () => {
   renderLive();
 });
 document.getElementById('saved-list').addEventListener('click', e => {
+  const open = e.target.closest('.saved-open');
+  if (open) { closeSavedSheet(); openCarDetail(open.dataset.vkey, document.getElementById('saved-pill')); return; }
   const btn = e.target.closest('.saved-remove');
   if (!btn) return;
   toggleSaved(btn.dataset.vkey);
@@ -3002,12 +3073,254 @@ document.getElementById('live-grid').addEventListener('click', e => {
     return;
   }
   const btn = e.target.closest('.heart-btn');
-  if (!btn) return;
-  e.preventDefault();
-  toggleSaved(btn.dataset.vkey);
-  btn.classList.toggle('saved', !!savedCars[btn.dataset.vkey]);
+  if (btn) {
+    e.preventDefault();
+    toggleSaved(btn.dataset.vkey);
+    return;
+  }
+  // Car screen: the title, the parts line and "Details" open it, and so
+  // does a tap anywhere else on the card that isn't a control or a link.
+  const open = e.target.closest('.car-open');
+  if (open) { e.preventDefault(); openCarDetail(open.dataset.vkey, open); return; }
+  const card = e.target.closest('.car-card[data-vkey]');
+  if (card && !e.target.closest('a, button, input, select, summary, details, label')) openCarDetail(card.dataset.vkey, card);
 });
 updateSavedPill();
+
+document.getElementById('alert-matches-grid').addEventListener('click', e => {
+  const btn = e.target.closest('.heart-btn');
+  if (btn) { e.preventDefault(); toggleSaved(btn.dataset.vkey); return; }
+  const open = e.target.closest('.car-open') || (!e.target.closest('a, button') && e.target.closest('.car-card[data-vkey]'));
+  if (open) { e.preventDefault(); openCarDetail(open.dataset.vkey, open); }
+});
+/* Header zip chip: where the list is centred, one tap to change it. */
+function updateZipChip() {
+  const chip = document.getElementById('zip-chip');
+  if (!chip) return;
+  const zip = localStorage.getItem('jh_zip');
+  const gps = localStorage.getItem('jh_gps');
+  if (!activeZipCoords || (!zip && !gps)) { chip.style.display = 'none'; return; }
+  const r = typeof effectiveRadiusMi === 'function' ? effectiveRadiusMi() : null;
+  chip.innerHTML = `${ICON.pin}<span class="zip-chip-zip">${escapeHtml(zip || 'Near me')}</span>${r ? `<span class="zip-chip-r">&middot; ${r}\u00a0mi</span>` : ''}`;
+  chip.style.display = '';
+}
+document.getElementById('zip-chip').addEventListener('click', () => {
+  try { document.querySelector('.tab[data-tab="live"]').click(); } catch (e) { /* boot race */ }
+  const panel = document.getElementById('live-controls');
+  if (!panel.classList.contains('open')) document.getElementById('live-filter-toggle').click();
+  window.scrollTo({ top: 0 });
+  const z = document.getElementById('live-zip');
+  if (z) z.focus({ preventScroll: true });
+});
+
+/* ===== PHOTO VIEWER =====
+ * The large form of a chain-hosted photo, shown whole (contain), with its
+ * credit, a link to the car on the yard's own site, and a removal request
+ * link for the photo's owner. Back / Escape close it. */
+function openPhotoViewer(key) {
+  const v = liveInventory.find(x => vehicleKey(x) === key);
+  const ex = v && extrasFor(v);
+  const info = ex && ex[0] ? photoInfo(ex[0]) : null;
+  if (!info) return;
+  const el = document.getElementById('photo-viewer');
+  const img = document.getElementById('photo-viewer-img');
+  img.removeAttribute('src');
+  el.classList.remove('pv-failed');
+  img.onerror = () => el.classList.add('pv-failed');
+  img.src = info.large;
+  img.alt = `${v.year} ${v.make} ${v.model}`;
+  const link = yardPageUrl(v);
+  const subject = encodeURIComponent('Photo removal request');
+  const body = encodeURIComponent(`Please remove this photo from YardScout.\n\nPhoto: ${info.large}\nCar: ${v.year} ${v.make} ${v.model}, ${v.location}${v.vin ? ', VIN ' + v.vin : ''}\n`);
+  document.getElementById('photo-viewer-foot').innerHTML = `
+    <p class="pv-credit">${escapeHtml(info.label)}</p>
+    <p class="pv-fail-note">This photo didn’t load from the yard’s site.</p>
+    <div class="pv-links">
+      ${link ? `<a class="locator-link" href="${escapeHtml(link.url)}" target="_blank" rel="noopener">View on ${escapeHtml(v.location)} ↗</a>` : ''}
+      <a class="pv-remove" href="mailto:yardscout.io@gmail.com?subject=${subject}&body=${body}">Photo owner? Request removal</a>
+    </div>`;
+  el.classList.add('open');
+  el.setAttribute('aria-hidden', 'false');
+  document.documentElement.classList.add('cd-lock');
+  try { history.pushState({ ysPhoto: key, ysCar: history.state && history.state.ysCar }, ''); } catch (e) { /* sandboxed */ }
+  document.getElementById('photo-viewer-close').focus({ preventScroll: true });
+  track('photo-viewer/' + info.key);
+}
+function hidePhotoViewer() {
+  const el = document.getElementById('photo-viewer');
+  if (!el.classList.contains('open')) return false;
+  el.classList.remove('open');
+  el.setAttribute('aria-hidden', 'true');
+  document.getElementById('photo-viewer-img').removeAttribute('src');
+  if (!document.querySelector('#car-detail.open')) document.documentElement.classList.remove('cd-lock');
+  return true;
+}
+function closePhotoViewer() {
+  if (history.state && history.state.ysPhoto) history.back();   // popstate hides it
+  else hidePhotoViewer();
+}
+window.addEventListener('popstate', () => {
+  if (!(history.state && history.state.ysPhoto)) hidePhotoViewer();
+});
+document.getElementById('photo-viewer-close').addEventListener('click', closePhotoViewer);
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && document.querySelector('#photo-viewer.open')) { e.stopImmediatePropagation(); closePhotoViewer(); }
+}, true);
+document.addEventListener('click', (e) => {
+  const b = e.target.closest('.photo-box[data-photo-vkey]');
+  if (!b || b.classList.contains('photo-failed')) return;
+  e.preventDefault();
+  e.stopPropagation();
+  openPhotoViewer(b.dataset.photoVkey);
+}, true);
+
+/* ===== CAR SCREEN (pull-sheet detail) =====
+ * A pushed screen over the list: row plate + yard locator, stay meter,
+ * the parts checklist ("if equipped" parts grouped apart, $0 to ranking),
+ * VIN, and one sticky action bar (pull sheet, watch, share). Android's
+ * back button and the browser back gesture close it (history entry). */
+let carDetailKey = null, carDetailOpener = null;
+function carDirectionsUrl(v) {
+  if (v.lat == null || v.lng == null) return '';
+  const ll = `${v.lat},${v.lng}`;
+  return /iPhone|iPad|Macintosh/.test(navigator.userAgent) && IS_NATIVE
+    ? `https://maps.apple.com/?daddr=${ll}`
+    : `https://www.google.com/maps/dir/?api=1&destination=${ll}`;
+}
+function renderCarDetail() {
+  const box = document.getElementById('car-detail-body');
+  const v = carDetailKey && liveInventory.find(x => vehicleKey(x) === carDetailKey);
+  if (!box) return;
+  if (!v) {
+    box.innerHTML = '<div class="empty-state"><h3>This car isn\u2019t in the current list</h3><p>It may have left the yard since the last scan.</p></div>';
+    document.getElementById('car-detail-actions').innerHTML = '';
+    return;
+  }
+  const key = vehicleKey(v);
+  const unlocked = isPro() || key === lastSampleKey;
+  const isSampleCard = unlocked && !isPro();
+  const val = (v.hasMatch && v.topParts && v.topParts.length) ? carValueParts(v, unlocked, isSampleCard) : null;
+  const lc = carLotClock(v);
+  const setOut = parseYardDate(v.dateAdded);
+  const dateStr = setOut ? setOut.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
+  const ex = extrasFor(v);
+  const vm = vinMetaHtml(v, unlocked);
+  const transShown = ex && ex[3] && isConfirmedManual(v) && manualSourceInfo(v).short
+    ? `${ex[3]} (${manualSourceInfo(v).short})` : (ex ? ex[3] : '');
+  const specs = [vm.spec, ...(ex ? [ex[1], shortEngine(ex[2]), transShown].filter(Boolean).map(escapeHtml) : [])].filter(Boolean);
+  const d = vehicleDistanceMi(v);
+  const place = [v.city, v.state].filter(Boolean).join(', ');
+  const zip = localStorage.getItem('jh_zip');
+  const where = [place ? escapeHtml(place) : '', d != null ? `${Math.round(d)}\u00a0mi${zip ? ' from ' + escapeHtml(zip) : ' away'}` : ''].filter(Boolean).join(' &middot; ');
+  const dir = carDirectionsUrl(v);
+  let stay = '';
+  if (lc.avg && lc.daysOn != null) {
+    const f = (lc.daysOn + 1) / lc.avg;
+    const word = lc.daysOn > 2 * lc.avg ? 'Past typical' : f >= 0.8 ? 'Leaving soon' : f >= 0.34 ? 'Mid-stay' : 'Fresh';
+    const cls = f >= 0.8 ? 'late' : f >= 0.34 ? 'mid' : 'fresh';
+    stay = `<section class="cd-stay ${cls}">
+      <div class="cd-stay-lbl"><span>${lc.lotClock}</span><b>${word}</b></div>
+      ${stayMeterHtml(lc.daysOn, lc.avg).replace('stay-meter', 'stay-meter stay-meter-lg')}
+      <p class="cd-hint">An estimate from how long cars like this stayed at this yard before leaving &mdash; not a schedule.</p>
+    </section>`;
+  }
+  // Lifespan line: only with this model's own history at this yard (the
+  // scan publishes a model entry only past its minimum departure count;
+  // the same data drives "leaves fast here").
+  const lsm = lifespanFor(v);
+  const lifeLine = lsm && lsm.basis === 'model-here'
+    ? `<section class="cd-life">
+        <p><strong>${escapeHtml(`${v.make} ${v.model}`)}s last about ${lsm.avg} days at this yard</strong> <span>(median of ${lsm.n} that already left${lsm.fast ? '; they go faster than most cars here' : ''})</span></p>
+        ${nextOneHtml(v.make, v.model, 'cd-next')}
+      </section>`
+    : `<section class="cd-life">${nextOneHtml(v.make, v.model, 'cd-next')}</section>`;
+  const scan = liveScrapedAt ? `<span class="scan-stamp">scanned ${escapeHtml(scrapedShort())}</span>` : '';
+  const pinfo = ex && ex[0] ? photoInfo(ex[0]) : null;
+  box.innerHTML = `
+    ${photoBoxHtml(pinfo, key, `${v.year} ${v.make} ${v.model}`, 'cd-photo')}
+    <p class="eyebrow">${dateStr ? 'Set out ' + dateStr : 'Set-out date unknown'}${isNew(v.dateAdded) ? ' &middot; <span class="eyebrow-new">New</span>' : ''}</p>
+    <h2 class="cd-name" id="car-detail-title">${escapeHtml(`${v.year} ${v.make} ${v.model}`)}</h2>
+    ${specs.length ? `<p class="cd-spec">${specs.join(' &middot; ')}</p>` : ''}
+    ${isConfirmedManual(v) ? `<p class="cd-spec"><span class="badge badge-manual">Manual</span> ${escapeHtml(manualSourceInfo(v).tip)}</p>` : ''}
+    <section class="locator">
+      ${rowPlateHtml(v.row)}
+      <div class="locator-text">
+        <h3>${escapeHtml(v.location)}${saleBadgeHtml(v.location)}</h3>
+        ${where ? `<p>${where}</p>` : ''}
+        <div class="locator-links">
+          ${dir ? `<a class="locator-link" href="${escapeHtml(dir)}" target="_blank" rel="noopener">${ICON.pin} Directions</a>` : ''}
+          ${yardSiteLinkHtml(v)}
+        </div>
+      </div>
+    </section>
+    ${val && val.nParts ? `<section class="worth" aria-labelledby="worth-h">
+      <h3 class="sec" id="worth-h">Worth pulling <span>${val.nParts} part${val.nParts > 1 ? 's' : ''} on this model</span></h3>
+      ${val.worthHtml}
+      ${val.alsoHtml}
+      ${val.allValueHtml}
+      ${val.optHtml}
+    </section>`
+      : '<p class="cd-hint cd-noparts">No parts from our list flagged on this model yet &mdash; the yard\u2019s own listing has the whole car.</p>'}
+    ${stay}
+    ${lifeLine}
+    ${val && val.nParts ? val.partsList : ''}
+    <section class="cd-ref">
+      ${vm.vin ? `<div class="cd-vin">${vm.vin}${vm.warn}</div>` : ''}
+      ${scan ? `<div class="cd-scan">${scan}</div>` : ''}
+    </section>`;
+  document.getElementById('car-detail-actions').innerHTML = `
+    ${pullBtnHtml(key, true)}
+    <button type="button" class="btn btn-quiet watch-btn cd-icon-btn ${hasWatchFor(v.make, v.model) ? 'watching' : ''}" data-make="${escapeHtml(v.make || '')}" data-model="${escapeHtml(v.model || '')}" title="${hasWatchFor(v.make, v.model) ? 'Watching \u2014 tap to stop' : 'Watch this model \u2014 get alerted when another shows up'}" aria-label="Watch this model">${ICON.bell}</button>
+    <button type="button" class="btn btn-quiet share-btn cd-icon-btn" data-vkey="${escapeHtml(key)}" title="Share this find" aria-label="Share this car">${ICON.share}</button>`;
+}
+function openCarDetail(key, opener) {
+  if (!key) return;
+  const el = document.getElementById('car-detail');
+  const wasOpen = el.classList.contains('open');
+  carDetailKey = key;
+  carDetailOpener = opener || document.activeElement;
+  renderCarDetail();
+  el.scrollTop = 0;
+  const sc = document.getElementById('car-detail-scroll'); if (sc) sc.scrollTop = 0;
+  if (!wasOpen) {
+    el.classList.add('open');
+    el.setAttribute('aria-hidden', 'false');
+    document.documentElement.classList.add('cd-lock');
+    try { history.pushState({ ysCar: key }, ''); } catch (e) { /* sandboxed */ }
+  }
+  track('car-detail');
+  const back = document.getElementById('car-detail-back');
+  if (back) back.focus({ preventScroll: true });
+}
+function hideCarDetail() {
+  const el = document.getElementById('car-detail');
+  if (!el || !el.classList.contains('open')) return;
+  el.classList.remove('open');
+  el.setAttribute('aria-hidden', 'true');
+  document.documentElement.classList.remove('cd-lock');
+  carDetailKey = null;
+  if (carDetailOpener && document.contains(carDetailOpener)) carDetailOpener.focus({ preventScroll: true });
+  carDetailOpener = null;
+}
+function closeCarDetail() {
+  if (history.state && history.state.ysCar) history.back();   // popstate hides it
+  else hideCarDetail();
+}
+window.addEventListener('popstate', () => {
+  if (!(history.state && history.state.ysCar)) hideCarDetail();
+});
+document.getElementById('car-detail-back').addEventListener('click', closeCarDetail);
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && carDetailKey && !document.querySelector('#upgrade-sheet.open, #saved-sheet.open, #prices-sheet.open')) closeCarDetail();
+});
+document.getElementById('car-detail').addEventListener('click', e => {
+  const watch = e.target.closest('.watch-btn');
+  if (watch) { e.preventDefault(); watchFromCard(watch); return; }
+  const share = e.target.closest('.share-btn');
+  if (share) { e.preventDefault(); shareVehicle(share.dataset.vkey); return; }
+  const heart = e.target.closest('.heart-btn');
+  if (heart) { e.preventDefault(); toggleSaved(heart.dataset.vkey); }
+});
 
 /* ===== SHAREABLE FINDS (deep links) ===== */
 let focusedCarKey = null;
@@ -3438,6 +3751,351 @@ function renderLivePending() {
     `<div class="skel-note" style="grid-column:1/-1;">${msg}</div>` + skel.repeat(3);
 }
 
+/* Crush-risk clock for one car (estimate, never a prediction): day count on
+ * the lot vs this yard's departure history. Shared by the card and detail. */
+function carLotClock(v) {
+  // Crush-risk signal from yard departure history: factual day count vs the
+  // yard's historical average — an estimate, never a prediction.
+  const daysOn = v.dateAdded ? Math.floor(daysSinceAdded(v.dateAdded)) : null;
+  let lotClock = '', leavingSoon = false;
+  const ls = lifespanFor(v);
+  if (ls && daysOn != null) {
+    const basisTxt = ls.basis === 'model-here' ? `for ${escapeHtml(v.make)} ${escapeHtml(v.model)}s at this yard (${ls.n} that already left)`
+      : ls.basis === 'yard' ? 'at this yard'
+      : ls.basis === 'chain' ? 'for this chain' : 'across covered yards';
+    const avg = ls.avg;
+    const title = `Compared to how long departed vehicles stayed on the lot (${ls.basis === 'model-here' ? 'median' : 'historical average'} ${basisTxt} — an estimate, not a schedule)`;
+    const fastTag = ls.fast
+      ? ` <span class="lot-fast" title="${escapeHtml(v.make)} ${escapeHtml(v.model)}s leave this yard in ~${avg} days against ~${ls.typical} for the yard as a whole: they get picked over and pulled fast. Get there early.">leaves fast here</span>`
+      : '';
+    if (daysOn > 2 * avg) {
+      // Long-timers have already outlived the average — claiming "leaving
+      // soon" would be false urgency, so just state the facts.
+      lotClock = `<span title="${title}">${daysOn} days on the lot (past the ~${avg}-day typical)</span>${fastTag}`;
+    } else {
+      leavingSoon = daysOn >= 0.8 * avg;
+      lotClock = `<span class="${leavingSoon ? 'lot-clock-soon' : ''}" title="${title}">Day ${daysOn + 1} of ~${avg} typical</span>${fastTag}`;
+    }
+  }
+  return { daysOn, avg: ls && daysOn != null ? ls.avg : null, lotClock, leavingSoon };
+}
+
+/* Value + parts for one car: the card's value line, and the parts list the
+ * detail screen shows. Free tier: part names and fitment markers are shown;
+ * every price and saving stays Pro (owner decision 2026-11-06). */
+function carValueParts(v, unlocked, isSampleCard) {
+  let cardStyle = '', profitLine = '', partsList = '', partsSummary = '', nParts = 0, worthHtml = '', alsoHtml = '', optHtml = '', allValueHtml = '';
+  const fm = freshnessMultiplier(v.dateAdded);
+  {
+    let totalCost = 0, lowSum = 0, highSum = 0, unconfirmedHigh = 0, bestPart = null, bestHigh = -Infinity;
+    let anyUnknownCost = false;
+    const speedRk = s => s === 'Fast' ? 3 : s === 'Medium' ? 2 : s === 'Slow' ? 1 : 0;
+    let demandRk = 0;
+    const chainLabel = { pnp: 'PnP list', tap: 'TAP list', utpap: 'UTPAP list', pyp: 'PYP list', pap: 'PAP list', wap: 'WAP list', upullr: 'UPR list', budget: 'yard list', list: 'yard list' };
+    const chainTitle = {
+      pnp: 'Pick-n-Pull published price',
+      tap: 'Tear-A-Part published price',
+      utpap: 'Utah Pic-A-Part published price',
+      pyp: 'This Pick Your Part yard\u2019s published price',
+      pap: 'This Pull-A-Part yard\u2019s published price',
+      wap: 'This Wrench-A-Part yard\u2019s published price',
+      upullr: 'U-Pull-R Parts published price',
+      budget: 'This Budget U-Pull-It yard\u2019s published price', list: 'From this yard\u2019s own published price list' };
+    // Transmission honesty: the parts DB is model-generation-level, so a
+    // manual-only part (shifter, clutch, pedal box) can list on a car that
+    // left the factory as an automatic. If this car's own data confirms
+    // "Automatic", drop manual-only parts entirely; if the transmission is
+    // simply unknown, force them into the "if equipped" bucket.
+    const exTrans = (extrasFor(v) || [])[3] ? String(extrasFor(v)[3]) : '';
+    const confirmedAuto = /automatic/i.test(exTrans) && !/manual/i.test(exTrans);
+    const manualOnly = (p) => /\bmanual\b|clutch/i.test(p.name || '');
+    const shownParts = v.topParts.filter((p) => !(confirmedAuto && manualOnly(p)));
+    // Value order (what you'd net over buying it used online) for both tiers:
+    // the top picks lead. Free sees the names in that order; every price,
+    // saving and sell-speed stays Pro (owner/hub decision, 2026-11-06).
+    const ordered = partsByValue(shownParts, v.location);
+    const optFlags = [], compactRows = [];
+    const partRowList = ordered.map((p, pi) => {
+      const lookup = lookupYardCost(p.name, v.location);
+      const hasCost = lookup.cost != null;
+      const yardCost = hasCost ? lookup.cost : 0;
+      if (!hasCost) anyUnknownCost = true;
+      const pHigh = Math.round(p.high - yardCost);
+      // Trim/option-unconfirmed parts ("if equipped") are excluded from the
+      // headline range entirely — they're tallied separately and shown as a
+      // muted "+ up to $X more if equipped" note, never as promised dollars.
+      const ifEquipped = p.trim_status === 'unconfirmed'
+        || (manualOnly(p) && !isConfirmedManual(v));
+      optFlags[pi] = ifEquipped;
+      if (ifEquipped) {
+        unconfirmedHigh += p.high - yardCost;
+      } else {
+        totalCost += yardCost;
+        lowSum += p.low - yardCost;
+        highSum += p.high - yardCost;
+      }
+      if (pHigh > bestHigh) { bestHigh = pHigh; bestPart = p.name; }
+      demandRk = Math.max(demandRk, speedRk(p.sell_speed));
+      const sellSpd = p.sell_speed || '';
+      const sellCls = sellSpd === 'Fast' ? 'sell-fast' : sellSpd === 'Slow' ? 'sell-slow' : 'sell-medium';
+      const costHtml = hasCost
+        ? `<span class="part-cost" title="${chainTitle[lookup.source]}: ${lookup.yardName || ''}">Yard: ${formatPrice(yardCost)} <small class="part-cost-src">${chainLabel[lookup.source]}</small></span>`
+        : `<span class="part-cost" title="This part isn\u2019t on the yard\u2019s published price list — ask at the counter"><small>check yard price list</small></span>`;
+      // Buyer's math: the eBay-sold band is what this used part costs to BUY
+      // online; the yard's list price is the gate price. The difference is
+      // the reader's savings — only shown when the yard cost is real.
+      const saveLow = Math.max(0, Math.round(p.low - yardCost));
+      const saveHigh = Math.round(p.high - yardCost);
+      const saveHtml = hasCost && saveHigh > 0
+        ? `<span class="part-save" title="What you\u2019d save over buying this part used online — if the part on this car is good">Save ~${formatPrice(saveLow)}&ndash;${formatPrice(saveHigh)}</span>`
+        : '';
+      // Trim-honesty marker: shown to everyone (it's about whether the part
+      // exists on the car, not its value).
+      const trimMark = p.trim_status === 'vin'
+        ? ' <span class="trim-badge trim-vin" title="This car\u2019s VIN decode confirms the trim, drivetrain, or transmission that carries this part">VIN-confirmed</span>'
+        : ifEquipped
+        ? ' <span class="trim-badge trim-unknown" title="This part is specific to a trim, drivetrain, or transmission that couldn\u2019t be confirmed from the VIN or the yard listing — check the car at the yard">if equipped &mdash; unconfirmed</span>'
+        : '';
+      // Generation provenance: which model years this part actually fits
+      // (from the generation-specific DB entry) — shown to everyone.
+      const fitsMark = p.fits
+        ? ` <span class="fits-badge" title="Model years this part fits — prices are specific to this generation">fits ${p.fits}</span>`
+        : '';
+      const hitCls = '';  // part-hit highlight retired with the Live filter
+      // "Spot it" tell for unconfirmed option parts — the VIN can't confirm
+      // an option box was ticked, but nearly every option has a physical
+      // tell you can check from outside the car.
+      const verifyNote = ifEquipped && p.verify
+        ? `<div class="verify-note">Spot it: ${escapeHtml(p.verify)}</div>` : '';
+      // Interchange provenance: the same unit (or a bolt-up swap) appears
+      // on sibling models — widens the donor pool for buyers searching the
+      // sibling's name. The caveat ships verbatim; never trimmed to fit.
+      const sharedNote = p.sharedWith
+        ? `<div class="shared-note"><span class="shared-badge" title="Platform interchange: hand-verified shared unit across sibling models. Read the caveat and verify part numbers before buying.">swaps with</span>${escapeHtml(p.sharedWith)}</div>` : '';
+      // Compact Pro row for the "Worth pulling" top picks: the value at a
+      // glance, everything else on one quiet line (same facts as the full row).
+      if (unlocked) {
+        const srcLbl = p.src === 'ebay-sold' ? 'sold on eBay, last 90 days' : p.src === 'ebay' ? 'on eBay now' : 'typical used online';
+        const meta = [
+          hasCost ? `<span class="part-cost">Yard ${formatPrice(yardCost)}</span>` : '<span class="part-cost">Yard price: check the list</span>',
+          hasCost && saveHigh > 0 ? `<span class="part-save">Save ~${formatPrice(saveLow)}&ndash;${formatPrice(saveHigh)}</span>` : '',
+          sellSpd ? `<span class="sell-word">${sellSpd === 'Fast' ? 'Picked over fast' : sellSpd === 'Slow' ? 'Usually still there' : 'Steady turnover'}</span>` : '',
+        ].filter(Boolean).join(' &middot; ');
+        compactRows[pi] = `
+          <li class="part-item worth-item">
+            <div class="worth-main"><span class="part-name">${escapeHtml(p.name)}</span>${trimMark}${fitsMark}</div>
+            ${p.low != null ? `<div class="worth-val"><b class="part-price">~${formatPrice(p.low)}&ndash;${formatPrice(p.high)}</b><small>${srcLbl}</small><a class="ebay-sold-link" href="${ebaySoldSearchUrl(v, p)}" target="_blank" rel="noopener">sold prices \u2197</a></div>` : ''}
+            <div class="worth-meta">${meta}</div>
+            ${verifyNote}${sharedNote}
+          </li>`;
+      }
+      if (!unlocked) {
+        return `
+        <li class="part-item part-free">
+          <span class="part-name">${escapeHtml(p.name)}</span>
+          ${trimMark}${fitsMark}
+          ${verifyNote}${sharedNote}
+        </li>`;
+      }
+      return `
+        <li class="part-item${hitCls}">
+          <span class="part-name">${escapeHtml(p.name)}</span>
+          ${trimMark}${fitsMark}
+          ${onlinePriceHtml(p, 'part-price', v)}
+          ${costHtml}
+          ${saveHtml}
+          ${verifyNote}${sharedNote}
+          ${sellSpd ? `<div class="part-sell">
+            <span class="sell-badge ${sellCls}" title="How quickly parts like these typically get claimed at the yard">${sellSpd === 'Fast' ? 'Picked over fast' : sellSpd === 'Slow' ? 'Usually still there' : 'Steady turnover'}</span>
+          </div>` : ''}
+        </li>`;
+    });
+    const optRows = partRowList.filter((r, i) => optFlags[i]).join('');
+    optHtml = optRows ? `<h4 class="opt-head">If equipped <span>unconfirmed for this car &mdash; adds $0 to its ranking</span></h4><ul class="parts-list parts-opt">${optRows}</ul>` : '';
+
+    // Demand is the primary signal; dollars are a supporting range, never a promise.
+    // Only real price-list pull costs are subtracted — when any part isn't on
+    // the yard's list, the range is labeled value-only instead of guessing.
+    const rangeLow = Math.max(0, Math.round(lowSum * fm));
+    const rangeHigh = Math.round(highSum * fm);
+    const extraHigh = Math.round(unconfirmedHigh * fm);
+    // Demand reads as "how soon should I go", not "how fast it sells":
+    // only the two informative states get a label; steady is the default
+    // and says nothing.
+    const demand = demandRk === 3
+      ? { cls: 'demand-fast', label: 'Gets picked over fast' }
+      : demandRk === 1
+      ? { cls: 'demand-slow', label: 'Usually still there' }
+      : { cls: 'demand-steady', label: '' };
+    cardStyle = `--tier-color:var(--${demandRk === 3 ? 'demand-fast' : demandRk === 1 ? 'demand-slow' : 'demand-steady'});`;
+    const rangeText = anyUnknownCost
+      ? `~${formatPrice(rangeLow)}&ndash;${formatPrice(rangeHigh)} to buy these used online &middot; pull price: check yard price list`
+      : `save ~${formatPrice(rangeLow)}&ndash;${formatPrice(rangeHigh)} vs buying used online, if parts are good &middot; ${formatPrice(Math.round(totalCost))} to pull`;
+    // Upside stays visible without misleading: unconfirmed ("if equipped")
+    // parts never inflate the headline range — they get a muted second line.
+    const extraNote = extraHigh > 0 ? `
+      <div class="range-extra" title="Parts specific to a trim or factory option that couldn\u2019t be confirmed for this car &mdash; they add nothing to its ranking or headline figure">+ up to ${formatPrice(extraHigh)}${rangeHigh > 0 ? ' more' : ''} if equipped (unconfirmed &mdash; check at the yard)</div>` : '';
+    profitLine = (rangeHigh > 0 || extraHigh > 0)
+      ? (unlocked ? `
+      ${isSampleCard ? '<div class="sample-pitch" role="button" onclick="openUpgradeSheet(\'sample-note\')"><strong>Free look:</strong> this is what Pro shows on every car &mdash; parts worth pulling, what the yard charges, what they sell for. <span class="sample-pitch-cta">See Pro &rarr;</span></div>' : ''}
+      <div class="profit-line">
+        ${demand.label ? `<span class="demand-badge ${demand.cls}" title="How quickly parts like these typically get claimed at the yard">${demand.label}</span>` : ''}
+        ${rangeHigh > 0 ? `<span class="range-text">${rangeText}</span>` : ''}
+      </div>${extraNote}` : `
+      <div class="profit-line">
+        ${demand.label ? `<span class="demand-badge ${demand.cls}" title="How quickly parts like these typically get claimed at the yard">${demand.label}</span>` : ''}
+        ${proBoxHtml('See what you’d save on this car', 'card-value', encodeURIComponent(vehicleKey(v)), 'card-pro')}
+      </div>`)
+      : '';
+    nParts = shownParts.length;
+    const mainIdx = ordered.map((p, i) => i).filter(i => !optFlags[i]);
+    const leadIdx = (mainIdx.length ? mainIdx : ordered.map((p, i) => i)).slice(0, 3);
+    partsSummary = `${unlocked ? 'Up to ' : ''}${nParts} part${nParts > 1 ? 's' : ''} to check: ${leadIdx.map(i => escapeHtml(ordered[i].name)).join(', ')}${nParts > leadIdx.length ? ' and more' : ''}`;
+    // Car screen: "Worth pulling" = the top picks by value, up front; the
+    // rest one tap away; option parts in their own group, $0 to ranking.
+    const topIdx = mainIdx.slice(0, WORTH_TOP_N), restIdx = mainIdx.slice(WORTH_TOP_N);
+    const rowsOf = (idx, compact) => idx.map(i => (compact && compactRows[i]) || partRowList[i]).join('');
+    let topLo = 0, topHi = 0;
+    for (const i of topIdx) { topLo += ordered[i].low || 0; topHi += ordered[i].high || 0; }
+    worthHtml = !topIdx.length ? '' : `
+          <ol class="parts-list worth-list">${rowsOf(topIdx, true)}</ol>
+          ${unlocked
+            ? (topHi > 0 ? `<p class="worth-total">${topIdx.length > 1 ? `Top ${topIdx.length} together` : 'This part'}: <b>~${formatPrice(Math.round(topLo))}&ndash;${formatPrice(Math.round(topHi))}</b> used online</p>` : '')
+            : proBoxHtml('See what each part is worth', 'part-value', encodeURIComponent(vehicleKey(v)), 'parts-lock')}`;
+    // The whole-car figure (every confirmed part, after pull prices) sits
+    // below the full list, labelled, so it never reads as the top-5 total.
+    allValueHtml = unlocked && profitLine ? `<section class="cd-allvalue"><p class="eyebrow">All ${mainIdx.length} confirmed part${mainIdx.length === 1 ? '' : 's'} on this car</p>${profitLine}</section>` : '';
+    alsoHtml = !restIdx.length ? '' : `
+          <details class="also-parts">
+            <summary>Also on this car <span>${restIdx.length} more part${restIdx.length > 1 ? 's' : ''}</span><span class="chev-r" aria-hidden="true"></span></summary>
+            <ul class="parts-list">${rowsOf(restIdx, true)}</ul>
+          </details>`;
+    partsList = `
+          <div class="ghost-note">These are parts this <strong>model</strong> typically shipped with &mdash; parts tied to a trim, option, or transmission that can\u2019t be confirmed from the VIN are marked &ldquo;if equipped.&rdquo; Yards track cars, not remaining parts, so some may already be pulled; newer arrivals are more likely intact.</div>
+          <a class="feedback-link" href="mailto:yardscout.io@gmail.com?subject=YardScout%20feedback">Spot a wrong price or bug? Tell us</a>`;
+  }
+  return { cardStyle, profitLine, partsList, partsSummary, nParts, worthHtml, alsoHtml, optHtml, allValueHtml };
+}
+
+/* ===== ALERTS FIRST (round 5, owner 2026-11-06: "alerts are the most
+ * valuable part of pro") =====
+ * Honest teasers only: every line below is built from data the app holds
+ * (set-out date, when the watch was made, the recap schedule) and is hidden
+ * when it can't be. Wording matches the backend digest ("Free gets a Monday
+ * recap; Pro pushes each one the day it lands"). Gates are unchanged. */
+const RECAP_WEEKDAY = 1;   // free weekly recap: Mondays (wrangler cron "0 15 * * 1")
+/* Does this free user actually get the Monday recap? Native push on, or the
+ * web email digest on. Without one, no line ever promises a recap. */
+function hasRecapChannel() {
+  try {
+    if (IS_NATIVE && typeof storedPushToken === 'function' && storedPushToken()) return true;
+    return localStorage.getItem('ys_email_alerts_on') === '1';
+  } catch (e) { return false; }
+}
+/* The one Pro upsell for free users: a bordered, fully tappable box with a
+ * PRO badge, one line and a chevron, opening the Pro sheet. Pro users get
+ * nothing. trigger/arg are the openUpgradeSheet analytics trigger + arg. */
+function proBoxHtml(line, trigger, arg, cls) {
+  if (isPro()) return '';
+  const a = arg ? `,'${String(arg).replace(/[^A-Za-z0-9%._~-]/g, '')}'` : '';
+  return `<button type="button" class="pro-box${cls ? ' ' + cls : ''}" onclick="event.stopPropagation();openUpgradeSheet('${trigger}'${a})"><span class="pro-badge">Pro</span><span class="pro-box-line">${line}</span><span class="pro-box-chev" aria-hidden="true">&rsaquo;</span></button>`;
+}
+/* The free half of the delivery note, true for THIS user (the Pro half is
+ * the Pro box beside it). */
+function freeDeliveryNote() {
+  return hasRecapChannel() ? 'Free: in Alerts and your Monday recap.' : 'Free: new ones show in Alerts.';
+}
+const PRO_PUSH_LINE = 'An alert within hours when one lands';
+const fmtDay = (d) => d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+/* "You'd have known sooner", free users, one watch hit: only for a car that
+ * landed on or after the day the watch was made (cars already on the lot
+ * are never in a recap), with a known set-out date. A car set out on a
+ * Monday may or may not make that morning's recap, so it gets no recap date. */
+function recapLineHtml(v, entries) {
+  if (isPro()) return '';
+  const landed = parseYardDate(v.dateAdded);
+  if (!landed) return '';
+  const since = Math.min(...entries.map(e => Date.parse(String(e.addedAt || '').split('~')[0])).filter(Number.isFinite));
+  if (!Number.isFinite(since)) return '';
+  const sinceDay = new Date(since); sinceDay.setHours(0, 0, 0, 0);
+  if (landed < sinceDay) return '';
+  let recap = '';
+  if (hasRecapChannel() && landed.getDay() !== RECAP_WEEKDAY) {
+    const r = new Date(landed);
+    r.setDate(r.getDate() + (((RECAP_WEEKDAY - r.getDay()) + 7) % 7 || 7));
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    recap = r < today ? `it was in your free recap ${escapeHtml(fmtDay(r))}` : `your free recap comes ${escapeHtml(fmtDay(r))}`;
+  }
+  return `<div class="recap-line"><p>${ICON.bell}<span>Landed ${escapeHtml(fmtDay(landed))}${recap ? ` &middot; ${recap}` : ''}.</span></p>
+    ${proBoxHtml('Would have pushed it the day it landed', 'watch-near-miss')}</div>`;
+}
+/* "Alert me when the next one lands": the same quick-watch path as a card
+ * bell (free limit, radius and Pro gates unchanged). Pro watches push
+ * instantly; free ones go to the recap / Alerts tab. */
+function nextOneWatch(make, model, source) {
+  const r = addQuickWatch(make, model, null, null, source);
+  const label = `${make} ${model}`.trim();
+  if (r === 'added') { renderAlerts(); checkAndNotify(); setCardBells(make, model, true); showWatchToast(label); }
+  else if (r === 'exists') showWatchToast(label, { manage: true });
+  else if (r === 'limit') openUpgradeSheet('watch-limit');
+  else if (r === 'no-zip') alert('Set your zip code up top first, so the watch knows where "near you" is.');
+  return r;
+}
+function nextOneHtml(make, model, cls) {
+  if (!make || !model) return '';
+  const on = hasWatchFor(make, model);
+  return `<div class="next-one ${cls || ''}">
+    ${on
+      ? `<p class="next-one-on">${ICON.check} Watching ${escapeHtml(`${make} ${model}`)}${isPro() ? ' &mdash; you’ll get an alert within hours when the next one lands.' : ' &mdash; the next one shows up in Alerts.'}</p>`
+      : `<button type="button" class="btn btn-line next-one-btn" data-make="${escapeHtml(make)}" data-model="${escapeHtml(model)}">${ICON.bell} Alert me when the next one lands</button>
+         ${proBoxHtml(PRO_PUSH_LINE, 'watch-toast')}`}
+  </div>`;
+}
+document.addEventListener('click', (e) => {
+  const b = e.target.closest('.next-one-btn');
+  if (!b) return;
+  e.preventDefault();
+  nextOneWatch(b.dataset.make, b.dataset.model, 'next-one');
+  if (carDetailKey) renderCarDetail();
+});
+
+/* ===== PULL SHEET UI HELPERS (2026-11 redesign) ===== */
+const WORTH_TOP_N = 5;   // car screen: top picks shown up front
+/* Parts in value order: what the part nets over buying it used online (its
+ * high band minus this yard's published pull price, when there is one) —
+ * the same per-part figure the Pro ranking uses. */
+function partsByValue(parts, location) {
+  const net = (p) => { const lk = lookupYardCost(p.name, location); return (p.high || 0) - (lk.cost != null ? lk.cost : 0); };
+  return [...(parts || [])].sort((x, y) => net(y) - net(x));
+}
+/* Row plate: the numbered sign at the end of the yard row — the one datum
+ * you need standing in the lot, so it leads every card. */
+let lastSampleKey = null;   // the one free sample car in the current view
+function rowPlateHtml(row) {
+  return row
+    ? `<div class="row-plate-lg" title="The yard's row number for this car"><small>Row</small><b>${escapeHtml(String(row))}</b></div>`
+    : '<div class="row-plate-lg row-plate-none" title="The yard hasn’t published a row for this car yet — ask at the counter"><small>Row</small><b>&mdash;</b></div>';
+}
+/* Stay meter: day on the lot against the yard's typical stay (estimate). */
+function stayMeterHtml(daysOn, avg) {
+  if (daysOn == null || !avg) return '';
+  const f = Math.max(0.04, Math.min(1, (daysOn + 1) / avg));
+  const cls = f >= 0.8 ? 'late' : f >= 0.34 ? 'mid' : '';
+  return `<span class="stay-meter ${cls}" aria-hidden="true"><i style="width:${Math.round(f * 100)}%"></i></span>`;
+}
+/* The one primary action on a car: add it to (or take it off) the pull
+ * sheet. Same storage as the old heart (jh_saved) — nothing is migrated. */
+function pullBtnHtml(key, big) {
+  const on = !!savedCars[key];
+  return `<button type="button" class="btn ${on ? 'btn-on' : 'btn-accent'} heart-btn pull-btn${big ? ' btn-lg' : ''}${on ? ' saved' : ''}" data-vkey="${escapeHtml(key)}" aria-pressed="${on}">${on ? ICON.check + ' On pull sheet' : ICON.plus + ' Add to pull sheet'}</button>`;
+}
+function refreshPullBtns(key) {
+  document.querySelectorAll(`.pull-btn[data-vkey="${CSS.escape(key)}"]`).forEach(b => {
+    const big = b.classList.contains('btn-lg');
+    b.outerHTML = pullBtnHtml(key, big);
+  });
+}
+
 function renderLive() {
   updateFilterAvailability();
   if (!liveLoaded) return;
@@ -3573,6 +4231,8 @@ function renderLive() {
       ${chips ? `<div class="week-chips">${chips}</div>` : ''}
     </div>`;
   }
+  lastSampleKey = sampleKey;
+  updateZipChip();
   document.getElementById('live-grid').innerHTML = focusBanner + weekBanner + watchStripHtml(vehicles.length) + vehiclesToRender.map(v => {
     // Pro sees everything; free users get exactly one fully-unlocked sample card.
     const unlocked = isPro() || (sampleKey !== null && vehicleKey(v) === sampleKey);
@@ -3585,29 +4245,7 @@ function renderLive() {
     const fm = freshnessMultiplier(v.dateAdded);
     const fl = freshnessLabel(v.dateAdded);
 
-    // Crush-risk signal from yard departure history: factual day count vs the
-    // yard's historical average — an estimate, never a prediction.
-    const daysOn = v.dateAdded ? Math.floor(daysSinceAdded(v.dateAdded)) : null;
-    let lotClock = '', leavingSoon = false;
-    const ls = lifespanFor(v);
-    if (ls && daysOn != null) {
-      const basisTxt = ls.basis === 'model-here' ? `for ${escapeHtml(v.make)} ${escapeHtml(v.model)}s at this yard (${ls.n} that already left)`
-        : ls.basis === 'yard' ? 'at this yard'
-        : ls.basis === 'chain' ? 'for this chain' : 'across covered yards';
-      const avg = ls.avg;
-      const title = `Compared to how long departed vehicles stayed on the lot (${ls.basis === 'model-here' ? 'median' : 'historical average'} ${basisTxt} — an estimate, not a schedule)`;
-      const fastTag = ls.fast
-        ? ` <span class="lot-fast" title="${escapeHtml(v.make)} ${escapeHtml(v.model)}s leave this yard in ~${avg} days against ~${ls.typical} for the yard as a whole: they get picked over and pulled fast. Get there early.">leaves fast here</span>`
-        : '';
-      if (daysOn > 2 * avg) {
-        // Long-timers have already outlived the average — claiming "leaving
-        // soon" would be false urgency, so just state the facts.
-        lotClock = `<span title="${title}">${daysOn} days on the lot (past the ~${avg}-day typical)</span>${fastTag}`;
-      } else {
-        leavingSoon = daysOn >= 0.8 * avg;
-        lotClock = `<span class="${leavingSoon ? 'lot-clock-soon' : ''}" title="${title}">Day ${daysOn + 1} of ~${avg} typical</span>${fastTag}`;
-      }
-    }
+    const { lotClock, leavingSoon, daysOn, avg: lotAvg } = carLotClock(v);
 
     // Scan stamp so a screenshot carries when this list was true. The
     // inventory has no per-yard scan time (yard_health.json isn't loaded
@@ -3621,160 +4259,8 @@ function renderLive() {
       ? `<span class="scan-stamp" title="When YardScout last scanned the yards (${escapeHtml(scrapedTitle())}) — cars can leave between scans">scanned ${escapeHtml(scrapedShort())}</span>`
       : '';
 
-    let cardStyle = '', profitLine = '', partsBlock = '';
-    if (isMatch && v.topParts && v.topParts.length) {
-      let totalCost = 0, lowSum = 0, highSum = 0, unconfirmedHigh = 0, bestPart = null, bestHigh = -Infinity;
-      let anyUnknownCost = false;
-      const speedRk = s => s === 'Fast' ? 3 : s === 'Medium' ? 2 : s === 'Slow' ? 1 : 0;
-      let demandRk = 0;
-      const chainLabel = { pnp: 'PnP list', tap: 'TAP list', utpap: 'UTPAP list', pyp: 'PYP list', pap: 'PAP list', wap: 'WAP list', upullr: 'UPR list', budget: 'yard list', list: 'yard list' };
-      const chainTitle = {
-        pnp: 'Pick-n-Pull published price',
-        tap: 'Tear-A-Part published price',
-        utpap: 'Utah Pic-A-Part published price',
-        pyp: 'This Pick Your Part yard\u2019s published price',
-        pap: 'This Pull-A-Part yard\u2019s published price',
-        wap: 'This Wrench-A-Part yard\u2019s published price',
-        upullr: 'U-Pull-R Parts published price',
-        budget: 'This Budget U-Pull-It yard\u2019s published price', list: 'From this yard\u2019s own published price list' };
-      // Transmission honesty: the parts DB is model-generation-level, so a
-      // manual-only part (shifter, clutch, pedal box) can list on a car that
-      // left the factory as an automatic. If this car's own data confirms
-      // "Automatic", drop manual-only parts entirely; if the transmission is
-      // simply unknown, force them into the "if equipped" bucket.
-      const exTrans = (extrasFor(v) || [])[3] ? String(extrasFor(v)[3]) : '';
-      const confirmedAuto = /automatic/i.test(exTrans) && !/manual/i.test(exTrans);
-      const manualOnly = (p) => /\bmanual\b|clutch/i.test(p.name || '');
-      const shownParts = v.topParts.filter((p) => !(confirmedAuto && manualOnly(p)));
-      const partRows = shownParts.map((p, pi) => {
-        const lookup = lookupYardCost(p.name, v.location);
-        const hasCost = lookup.cost != null;
-        const yardCost = hasCost ? lookup.cost : 0;
-        if (!hasCost) anyUnknownCost = true;
-        const pHigh = Math.round(p.high - yardCost);
-        // Trim/option-unconfirmed parts ("if equipped") are excluded from the
-        // headline range entirely — they're tallied separately and shown as a
-        // muted "+ up to $X more if equipped" note, never as promised dollars.
-        const ifEquipped = p.trim_status === 'unconfirmed'
-          || (manualOnly(p) && !isConfirmedManual(v));
-        if (ifEquipped) {
-          unconfirmedHigh += p.high - yardCost;
-        } else {
-          totalCost += yardCost;
-          lowSum += p.low - yardCost;
-          highSum += p.high - yardCost;
-        }
-        if (pHigh > bestHigh) { bestHigh = pHigh; bestPart = p.name; }
-        demandRk = Math.max(demandRk, speedRk(p.sell_speed));
-        const sellSpd = p.sell_speed || '';
-        const sellCls = sellSpd === 'Fast' ? 'sell-fast' : sellSpd === 'Slow' ? 'sell-slow' : 'sell-medium';
-        const costHtml = hasCost
-          ? `<span class="part-cost" title="${chainTitle[lookup.source]}: ${lookup.yardName || ''}">Yard: ${formatPrice(yardCost)} <small style="opacity:0.65">${chainLabel[lookup.source]}</small></span>`
-          : `<span class="part-cost" title="This part isn\u2019t on the yard\u2019s published price list — ask at the counter" style="opacity:0.75;"><small>check yard price list</small></span>`;
-        // Buyer's math: the eBay-sold band is what this used part costs to BUY
-        // online; the yard's list price is the gate price. The difference is
-        // the reader's savings — only shown when the yard cost is real.
-        const saveLow = Math.max(0, Math.round(p.low - yardCost));
-        const saveHigh = Math.round(p.high - yardCost);
-        const saveHtml = hasCost && saveHigh > 0
-          ? `<span class="part-save" title="What you\u2019d save over buying this part used online — if the part on this car is good">Save ~${formatPrice(saveLow)}&ndash;${formatPrice(saveHigh)}</span>`
-          : '';
-        // Trim-honesty marker: shown to everyone (it's about whether the part
-        // exists on the car, not its value).
-        const trimMark = p.trim_status === 'vin'
-          ? ' <span class="trim-badge trim-vin" title="This car\u2019s VIN decode confirms the trim, drivetrain, or transmission that carries this part">VIN-confirmed</span>'
-          : ifEquipped
-          ? ' <span class="trim-badge trim-unknown" title="This part is specific to a trim, drivetrain, or transmission that couldn\u2019t be confirmed from the VIN or the yard listing — check the car at the yard">if equipped &mdash; unconfirmed</span>'
-          : '';
-        // Generation provenance: which model years this part actually fits
-        // (from the generation-specific DB entry) — shown to everyone.
-        const fitsMark = p.fits
-          ? ` <span class="fits-badge" title="Model years this part fits — prices are specific to this generation">fits ${p.fits}</span>`
-          : '';
-        const hitCls = '';  // part-hit highlight retired with the Live filter
-        // Free tier: everything the parts database produces is blurred —
-        // names, fits, values, channels. Real strings never reach the DOM;
-        // rows render plausible placeholders so the blur has a shape. The
-        // free tease is the count, the demand word, and one sample card.
-        if (!unlocked) {
-          const ph = LOCKED_PART_PLACEHOLDERS[pi % LOCKED_PART_PLACEHOLDERS.length];
-          return `
-            <li class="part-item" style="flex-wrap:wrap;">
-              <span class="part-name locked-blur" role="button" onclick="openUpgradeSheet('part-name','${encodeURIComponent(vehicleKey(v))}')">${ph}</span>
-              <span class="part-cost locked-blur" role="button" onclick="openUpgradeSheet('part-value','${encodeURIComponent(vehicleKey(v))}')">Yard: $\u2022\u2022</span>
-              <span class="part-price locked-blur" role="button" onclick="openUpgradeSheet('part-value','${encodeURIComponent(vehicleKey(v))}')">Used online: ${LOCKED_PRICE_MASK}</span>
-            </li>`;
-        }
-        // "Spot it" tell for unconfirmed option parts — the VIN can't confirm
-        // an option box was ticked, but nearly every option has a physical
-        // tell you can check from outside the car.
-        const verifyNote = ifEquipped && p.verify
-          ? `<div class="verify-note">Spot it: ${escapeHtml(p.verify)}</div>` : '';
-        // Interchange provenance: the same unit (or a bolt-up swap) appears
-        // on sibling models — widens the donor pool for buyers searching the
-        // sibling's name. The caveat ships verbatim; never trimmed to fit.
-        const sharedNote = p.sharedWith
-          ? `<div class="shared-note"><span class="shared-badge" title="Platform interchange: hand-verified shared unit across sibling models. Read the caveat and verify part numbers before buying.">swaps with</span>${escapeHtml(p.sharedWith)}</div>` : '';
-        return `
-          <li class="part-item${hitCls}" style="flex-wrap:wrap;">
-            <span class="part-name">${escapeHtml(p.name)}</span>
-            ${trimMark}${fitsMark}
-            ${onlinePriceHtml(p, 'part-price', v)}
-            ${costHtml}
-            ${saveHtml}
-            ${verifyNote}${sharedNote}
-            ${sellSpd ? `<div style="width:100%;display:flex;align-items:center;gap:0.4rem;margin-top:0.1rem;flex-wrap:wrap;">
-              <span class="sell-badge ${sellCls}" title="How quickly parts like these typically get claimed at the yard">${sellSpd === 'Fast' ? 'Picked over fast' : sellSpd === 'Slow' ? 'Usually still there' : 'Steady turnover'}</span>
-            </div>` : ''}
-          </li>`;
-      }).join('');
-
-      // Demand is the primary signal; dollars are a supporting range, never a promise.
-      // Only real price-list pull costs are subtracted — when any part isn't on
-      // the yard's list, the range is labeled value-only instead of guessing.
-      const rangeLow = Math.max(0, Math.round(lowSum * fm));
-      const rangeHigh = Math.round(highSum * fm);
-      const extraHigh = Math.round(unconfirmedHigh * fm);
-      // Demand reads as "how soon should I go", not "how fast it sells":
-      // only the two informative states get a label; steady is the default
-      // and says nothing.
-      const demand = demandRk === 3
-        ? { cls: 'demand-fast', label: 'Gets picked over fast' }
-        : demandRk === 1
-        ? { cls: 'demand-slow', label: 'Usually still there' }
-        : { cls: 'demand-steady', label: '' };
-      cardStyle = `--tier-color:var(--${demandRk === 3 ? 'demand-fast' : demandRk === 1 ? 'demand-slow' : 'demand-steady'});`;
-      const rangeText = anyUnknownCost
-        ? `~${formatPrice(rangeLow)}&ndash;${formatPrice(rangeHigh)} to buy these used online &middot; pull price: check yard price list`
-        : `save ~${formatPrice(rangeLow)}&ndash;${formatPrice(rangeHigh)} vs buying used online, if parts are good &middot; ${formatPrice(Math.round(totalCost))} to pull`;
-      // Upside stays visible without misleading: unconfirmed ("if equipped")
-      // parts never inflate the headline range — they get a muted second line.
-      const extraNote = extraHigh > 0 ? `
-        <div class="range-extra" title="Parts specific to a trim or factory option that couldn\u2019t be confirmed for this car &mdash; they add nothing to its ranking or headline figure">+ up to ${formatPrice(extraHigh)}${rangeHigh > 0 ? ' more' : ''} if equipped (unconfirmed &mdash; check at the yard)</div>` : '';
-      profitLine = (rangeHigh > 0 || extraHigh > 0)
-        ? (unlocked ? `
-        ${isSampleCard ? '<div class="sample-pitch" role="button" onclick="openUpgradeSheet(\'sample-note\')"><strong>Free look:</strong> this is what Pro shows on every car &mdash; parts worth pulling, what the yard charges, what they sell for. <span class="sample-pitch-cta">See Pro &rarr;</span></div>' : ''}
-        <div class="profit-line">
-          ${demand.label ? `<span class="demand-badge ${demand.cls}" title="How quickly parts like these typically get claimed at the yard">${demand.label}</span>` : ''}
-          ${rangeHigh > 0 ? `<span class="range-text">${rangeText}</span>` : ''}
-        </div>${extraNote}` : `
-        <div class="profit-line">
-          ${demand.label ? `<span class="demand-badge ${demand.cls}" title="How quickly parts like these typically get claimed at the yard">${demand.label}</span>` : ''}
-          <button type="button" class="lock-chip" onclick="openUpgradeSheet('card-value','${encodeURIComponent(vehicleKey(v))}')">${ICON.lock} What you’d save &mdash; Pro</button>
-        </div>`)
-        : '';
-      partsBlock = `
-        <details class="parts-details">
-          <summary>${unlocked
-            ? `Up to ${shownParts.length} part${shownParts.length > 1 ? 's' : ''} to check &middot; top: ${bestPart}`
-            : `${shownParts.length} part${shownParts.length > 1 ? 's' : ''} to check`} <span class="chev">${ICON.chev}</span></summary>
-          <div class="car-body">
-            <div class="ghost-note">These are parts this <strong>model</strong> typically shipped with &mdash; parts tied to a trim, option, or transmission that can\u2019t be confirmed from the VIN are marked &ldquo;if equipped.&rdquo; Yards track cars, not remaining parts, so some may already be pulled; newer arrivals are more likely intact.</div>
-            <ul class="parts-list">${partRows}</ul>
-            <a class="feedback-link" href="mailto:yardscout.io@gmail.com?subject=YardScout%20feedback">Spot a wrong price or bug? Tell us</a>
-          </div>
-        </details>`;
-    }
+    const val = (isMatch && v.topParts && v.topParts.length) ? carValueParts(v, unlocked, isSampleCard) : null;
+    const cardStyle = val ? val.cardStyle : '', profitLine = val ? val.profitLine : '';
 
     // One status badge per card, by priority — never a row of colored pills.
     const statusBadge = isNewVehicle
@@ -3793,28 +4279,33 @@ function renderLive() {
     // Line 2 — WHEN: set-out date + time on the lot, one line.
     const whenBits = [dateStr ? `<span title="Set-out date published by the yard">Set out ${dateStr}</span>` : 'Set-out date unknown'];
     if (lotClock) whenBits.push(lotClock);
+    const key = vehicleKey(v);
+    const manualBadge = isConfirmedManual(v) ? `<span class="badge badge-manual" title="${escapeHtml(manualSourceInfo(v).tip)}">Manual</span>` : '';
+    const d = vehicleDistanceMi(v);
+    // Pull-sheet card: row plate is the hero datum, one primary action
+    // (add to pull sheet); watch, share, VIN and the yard link live on the
+    // car screen a tap away.
     return `
-      <div class="car-card ${cardClass}" style="${cardStyle}" data-eid="${escapeHtml(String(v.id))}">
-        ${photo ? `<div class="car-photo-wrap"><img class="car-photo" loading="lazy" src="${photo.url}" alt="" onerror="this.parentNode.remove()"><span class="photo-credit">${escapeHtml(photo.label)}</span></div>` : ''}
-        <div class="car-header">
-          <div style="min-width:0;">
-            <div class="car-name">${escapeHtml(`${v.year} ${v.make} ${v.model}`)}</div>
-            <div class="live-card-location">${ICON.pin} <span class="loc-name">${escapeHtml(v.location)}</span>${(() => { const d = vehicleDistanceMi(v); return d != null ? ' <span class="dist">&middot; ' + Math.round(d) + ' mi</span>' : ''; })()}${v.row ? '<span class="live-card-row">Row ' + escapeHtml(v.row) + '</span>' : ''}${saleBadgeHtml(v.location)}</div>
+      <article class="car-card ${cardClass}" style="${cardStyle}" data-eid="${escapeHtml(String(v.id))}" data-vkey="${escapeHtml(key)}">
+        ${photo && photo.onCards ? photoBoxHtml(photo, key, `${v.year} ${v.make} ${v.model}`, 'card-photo') : ''}
+        <div class="cc-head">
+          ${rowPlateHtml(v.row)}
+          <div class="cc-id">
+            <h3 class="car-name"><button type="button" class="car-open" data-vkey="${escapeHtml(key)}">${escapeHtml(`${v.year} ${v.make} ${v.model}`)}</button></h3>
+            ${specLine ? `<div class="car-spec-line">${specLine}</div>` : ''}
+            <div class="live-card-location">${ICON.pin} <span class="loc-name">${escapeHtml(v.location)}</span>${d != null ? ' <span class="dist">&middot; ' + Math.round(d) + '\u00a0mi</span>' : ''}${saleBadgeHtml(v.location)}</div>
+            <div class="car-meta">${stayMeterHtml(daysOn, lotAvg)}<span class="car-meta-text">${whenBits.join(' &middot; ')}${vm.warn}</span></div>
           </div>
-          <div class="car-badges">
-            ${isConfirmedManual(v) ? `<span class="badge badge-manual" title="${escapeHtml(manualSourceInfo(v).tip)}" aria-label="${escapeHtml(manualSourceInfo(v).tip)}">Manual</span>` : ''}
-            ${statusBadge}
-            <button type="button" class="watch-btn ${hasWatchFor(v.make, v.model) ? 'watching' : ''}" data-make="${escapeHtml(v.make || '')}" data-model="${escapeHtml(v.model || '')}" title="${hasWatchFor(v.make, v.model) ? 'Watching — tap to stop' : 'Watch this model — get alerted when another shows up'}">${ICON.bell}</button>
-            <button type="button" class="share-btn" data-vkey="${escapeHtml(vehicleKey(v))}" title="Share this find">${ICON.share}</button>
-            <button type="button" class="heart-btn ${isSaved(v) ? 'saved' : ''}" data-vkey="${escapeHtml(vehicleKey(v))}" title="Save for your yard visit">${ICON.heart}</button>
-          </div>
+          ${manualBadge || statusBadge ? `<div class="car-badges">${manualBadge}${statusBadge}</div>` : ''}
         </div>
-        ${specLine ? `<div class="car-spec-line">${specLine}</div>` : ''}
-        <div class="car-meta">${whenBits.join(' &middot; ')}${vm.warn}</div>
         ${profitLine}
-        ${partsBlock}
-        <div class="car-footer">${yardSiteLinkHtml(v)}<span class="car-footer-meta">${vm.vin}${scanLine}</span></div>
-      </div>`;
+        ${val && val.nParts ? `<button type="button" class="parts-summary car-open" data-vkey="${escapeHtml(key)}"><span>${val.partsSummary}</span>${ICON.chev}</button>` : ''}
+        <div class="cc-actions">
+          ${pullBtnHtml(key)}
+          <button type="button" class="btn btn-quiet car-open" data-vkey="${escapeHtml(key)}">Details</button>
+        </div>
+        ${/stamp-stale/.test(scanLine) ? `<div class="car-footer"><span class="car-footer-meta">${scanLine}</span></div>` : ''}
+      </article>`;
   }).join('') + (overflow
     ? `<div class="empty-state" style="grid-column:1/-1;padding:1rem;"><p>Showing first ${RENDER_CAP} of ${vehicles.length.toLocaleString()} vehicles &mdash; narrow with search or filters (results stay fully sorted).</p></div>`
     : '');
@@ -3986,7 +4477,7 @@ document.getElementById('live-refresh-btn').addEventListener('click', async () =
   }
   alert("You\u2019re already seeing the latest scan. Yards are re-scanned automatically about every 4 hours." + age);
 });
-document.getElementById('tab-live').addEventListener('click', (e) => {
+document.addEventListener('click', (e) => {
   const btn = e.target.closest('.btn-copy-vin');
   if (!btn || !btn.dataset.vin) return;
   e.preventDefault();
@@ -4449,7 +4940,7 @@ function renderYards() {
   const chipYards = view.filtered ? shown : inRange;
   const carsInView = chipYards.reduce((s, y) => s + (y.count || 0), 0);
   statsBar.innerHTML = `
-    <div class="stat-card" title="Yards ${view.filtered ? 'matching your filters' : 'inside your radius'}${radius ? ` — within ${radius} mi` : ''}"><div class="label">${view.filtered ? 'Yards in view' : 'Yards near you'}</div><div class="value">${chipYards.length.toLocaleString()}</div></div>
+    <div class="stat-card" title="Yards ${view.filtered ? 'matching your filters' : 'inside your radius'}${radius ? ` — within ${radius}\u00a0mi` : ''}"><div class="label">${view.filtered ? 'Yards in view' : 'Yards near you'}</div><div class="value">${chipYards.length.toLocaleString()}</div></div>
     <div class="stat-card" title="Cars on those lots as of the last scan"><div class="label">${view.filtered ? 'Cars in view' : 'Cars in range'}</div><div class="value">${carsInView.toLocaleString()}</div></div>
     <div class="stat-card" title="Last scan: ${scrapedTitle()} — every yard re-scanned about every 4 hours"><div class="label">Updated</div><div class="value value-sm">${scrapeAgoLabel()}</div></div>
   `;
@@ -4458,11 +4949,11 @@ function renderYards() {
     if (!inRange.length) {
       const nearest = view.yards.find(y => y.dist != null);
       const nearestTxt = nearest
-        ? `The nearest yard we track is <strong>${escapeHtml(nearest.location)}</strong> in ${escapeHtml([nearest.city, nearest.state].filter(Boolean).join(', '))} &mdash; ${Math.round(nearest.dist)} mi away.`
+        ? `The nearest yard we track is <strong>${escapeHtml(nearest.location)}</strong> in ${escapeHtml([nearest.city, nearest.state].filter(Boolean).join(', '))} &mdash; ${Math.round(nearest.dist)}\u00a0mi away.`
         : '';
       grid.innerHTML = `
         <div class="empty-state" style="grid-column:1/-1;">
-          <h3>No yards within ${radius} mi</h3>
+          <h3>No yards within ${radius}\u00a0mi</h3>
           <p>${nearestTxt}</p>
           <div style="display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;margin-top:0.75rem;">
             ${radius < 250 ? '<button type="button" class="btn" id="yards-widen">Widen to 250 mi</button>' : ''}
@@ -4490,7 +4981,7 @@ function renderYards() {
   grid.innerHTML = shown.map(y => {
     const chain = CHAIN_PRICE_PAGES.find(c => c[0].test(y.location));
     const place = [y.city, y.state].filter(Boolean).join(', ');
-    const distTxt = y.dist != null ? ` <span class="dist">&middot; ${Math.round(y.dist)} mi</span>` : '';
+    const distTxt = y.dist != null ? ` <span class="dist">&middot; ${Math.round(y.dist)}\u00a0mi</span>` : '';
     const life = y.avgLifespan
       ? `Cars typically last ~${y.avgLifespan} days here` +
         (y.lifespanBasis === 'chain' ? ' (chain average)' : y.lifespanBasis === 'all' ? ' (all-yards average)' : '')
@@ -4845,7 +5336,7 @@ function renderCompareResults() {
     : (a, b) => a.price - b.price);
   const rows = sorted.map(r => {
     const core = r.core > 0 ? ` <span class="price-core" title="Refundable core deposit — bring the old part back to get it refunded">+ $${r.core.toFixed(2)} core</span>` : '';
-    const dist = r.dist != null ? ` &middot; ${Math.round(r.dist)} mi` : '';
+    const dist = r.dist != null ? ` &middot; ${Math.round(r.dist)}\u00a0mi` : '';
     return `<div class="price-row compare-row" data-loc="${escapeHtml(r.yard)}" role="button" tabindex="0">
       <span class="price-part"><strong>${escapeHtml(r.yard)}</strong><br>
         <span class="compare-detail">${escapeHtml(r.part)}${dist}</span></span>
@@ -4855,7 +5346,7 @@ function renderCompareResults() {
   let extra = '';
   if (compareMissing.length) {
     const names = compareMissing.slice(0, 8).map(y =>
-      y.dist != null ? `${escapeHtml(y.location)} (${Math.round(y.dist)} mi)` : escapeHtml(y.location));
+      y.dist != null ? `${escapeHtml(y.location)} (${Math.round(y.dist)}\u00a0mi)` : escapeHtml(y.location));
     const more = compareMissing.length > 8 ? ` +${compareMissing.length - 8} more` : '';
     extra += `<div class="compare-missing">Not on the published list at ${names.join(', ')}${more} &mdash; ask at the counter.</div>`;
   }
@@ -5537,7 +6028,7 @@ function pfPopulateModels() {
   }
   const models = new Map(); // squashed -> display
   for (const v of liveInventory) {
-    if (canonicalMake(v.make) !== make || !v.model) continue;
+    if (canonicalMake(v.make) !== make || !v.model || isNoPickModel(v.make, v.model)) continue;
     const disp = canonicalModel(v.make, v.model);
     const key = pfSquashModel(disp, make);
     if (key && !models.has(key)) models.set(key, disp);
@@ -5563,6 +6054,18 @@ function pfPopulateModels() {
 /* Part combobox: tap-to-browse the full category list, type to narrow —
  * same pattern as the price-compare input. */
 const pfPartInput = document.getElementById('pf-part');
+/* The part field is a one-line textarea that grows, so a long part name
+ * ("ECM / PCM (engine computer)") wraps instead of being cut off at large
+ * text sizes. Enter never adds a line. */
+function pfFitPart() {
+  if (!pfPartInput.offsetParent) return;   // hidden tab: fit when shown
+  pfPartInput.style.height = 'auto';
+  pfPartInput.style.height = pfPartInput.scrollHeight + 2 + 'px';
+}
+function pfSetPartText(t) { pfPartInput.value = t; pfFitPart(); }
+pfPartInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') e.preventDefault(); });
+pfPartInput.addEventListener('input', pfFitPart);
+window.addEventListener('resize', pfFitPart);
 const pfPartSuggest = document.getElementById('pf-part-suggest');
 function pfRenderPartSuggest() {
   if (!interchangeData) return;
@@ -5602,7 +6105,7 @@ pfPartSuggest.addEventListener('mousedown', e => {
   if (!item) return;
   e.preventDefault();
   pfCat = interchangeData.categories.find(c => c.id === item.dataset.cat) || null;
-  pfPartInput.value = pfCat ? pfCat.label : '';
+  pfSetPartText(pfCat ? pfCat.label : '');
   pfChosenFam = null;
   pfHidePartSuggest();
   pfMaybeSearch();
@@ -5729,10 +6232,14 @@ function pfRenderBrowseFamPicker() {
     .sort((a, b) => a.label.localeCompare(b.label));
   wrap.innerHTML =
     '<span class="pf-engine-label">Browsing by engine — which engine are you hunting? Donors are matched by engine family, not by keyword.</span>'
-    + '<select id="pf-browse-fam" class="pf-browse-fam">'
+    // A native select can't wrap a long engine name, so a wrapping label
+    // shows the choice and the (transparent) select on top takes the tap.
+    + '<span class="pf-select-wrap"><span class="pf-select-label" aria-hidden="true">'
+    + escapeHtml((fams.find(f => f.id === pfChosenFam) || {}).label || 'Pick an engine\u2026') + '</span>'
+    + '<select id="pf-browse-fam" class="pf-browse-fam" aria-label="Engine to hunt">'
     + '<option value="">Pick an engine&hellip;</option>'
     + fams.map(f => `<option value="${f.id}" ${pfChosenFam === f.id ? 'selected' : ''}>${escapeHtml(f.label)}</option>`).join('')
-    + '</select>';
+    + '</select></span>';
 }
 document.getElementById('pf-engine').addEventListener('change', e => {
   if (e.target.id === 'pf-browse-fam') {
@@ -5832,7 +6339,7 @@ function pfRunBrowse(s) {
     return;
   }
 
-  rows.sort((a, b) => (a.d ?? 1e9) - (b.d ?? 1e9));
+  pfSortRows(rows);
   const CAP = 120;
   let quoteVariants = pfCat.priceTokens.map(t => t.toLowerCase());
   if (pfCat.id === 'engine-assembly' && fam) {
@@ -5845,7 +6352,8 @@ function pfRunBrowse(s) {
   const nVin = rows.filter(r => r.badge).length;
   out.classList.toggle('pf-vonly-on', pfCat.kind === 'engine' && pfVerifiedOnly);
   out.innerHTML =
-    `<div class="pf-results-head">${headTop} Sorted by distance. Yards track cars, not parts left on them &mdash; a long-sitting donor may be picked over.${(!unlocked && !pfCat.noValue) ? ' <span class="lock-text" role="button" onclick="openUpgradeSheet(\'pf-value\')">Pro adds what the same used part goes for online</span>' : ''}</div>`
+    `<div class="pf-results-head">${headTop} ${pfSort === 'new' ? 'Newest arrivals first.' : 'Nearest first.'} Yards track cars, not parts left on them &mdash; a long-sitting donor may be picked over.</div>${(!unlocked && !pfCat.noValue) ? proBoxHtml('See what the same used part goes for online', 'pf-value', '', 'pf-pro-box') : ''}`
+    + pfSortRowHtml()
     + (pfCat.kind === 'engine' ? pfVonlyRowHtml(nVin, rows.length - nVin, 'vin') : '')
     + filterNote
     + (pfCat.notes || []).map(n => `<div class="pf-caveat">${escapeHtml(n)}</div>`).join('')
@@ -5865,17 +6373,12 @@ function pfRunBrowse(s) {
       const saveHtml = (unlocked && !pfCat.noValue && r.hit && quote.status === 'priced' && r.hit.high - quote.price > 0)
         ? `<span class="pf-save" title="What you\u2019d save over buying this part used online — if the part on this car is good">Save ~${formatPrice(Math.max(0, Math.round(r.hit.low - quote.price)))}&ndash;${formatPrice(Math.round(r.hit.high - quote.price))}</span>`
         : '';
-      const dateLbl = pfDateLabel(v.dateAdded);
-      return `<div class="pf-row-card pf-browse${r.badge ? ' pf-vin' : ''}">
-        <div class="pf-car-line"><span class="pf-car-name">${v.year} ${escapeHtml(v.make)} ${escapeHtml(v.model.toLowerCase().startsWith(v.make.toLowerCase() + ' ') ? v.model.slice(v.make.length + 1) : v.model)}</span>${r.badge}</div>
-        <div class="pf-meta">${escapeHtml(v.location)}${r.d != null ? ` &middot; <span class="dist">${Math.round(r.d)} mi</span>` : ''}${v.row ? ` &middot; Row ${escapeHtml(String(v.row))}` : ''}${dateLbl ? ` &middot; set out ${dateLbl}` : ''}${saleBadgeHtml(v.location)}</div>
-        <div class="pf-value">${worthHtml}${priceHtml}${saveHtml}</div>
-        ${r.warns.length ? `<div class="pf-warn">${r.warns.join(' &middot; ')}</div>` : ''}
-      </div>`;
+      return pfDonorCardHtml(r, 'pf-browse' + (r.badge ? ' pf-vin' : ''), r.badge, `${worthHtml}${priceHtml}${saveHtml}`);
     }).join('')
     + (rows.length > CAP
-      ? `<div class="pf-more">Showing the ${CAP} nearest of ${rows.length.toLocaleString()} cars — tighten the radius to narrow.</div>`
+      ? `<div class="pf-more">Showing the first ${CAP} of ${rows.length.toLocaleString()} cars — tighten the radius to narrow.</div>`
       : '');
+  pfRenderTiles(); pfRevealResults();
 }
 
 /* ===== OEM CATALOG + AFTERMARKET LAYERS (CURATION_SPEC §7.4, §12) ========
@@ -6000,6 +6503,112 @@ function pfAmRows(s, groups, results, radius, fam) {
   }
   return hit;
 }
+/* ===== PARTS TAB, PULL SHEET ROUND 4 (2026-11-06) =====
+ * Donor rows are the app's car card: photo when the yard hosts one, row
+ * plate, name, the confidence chip up front, yard · distance · set-out, the
+ * fit source one tap away, value (Pro), warnings, and Add to pull sheet /
+ * Details. The parts the tests parse keep their exact markup: pf-row-card
+ * <tier class>, pf-car-name, pf-tier (pfTierChip), pf-note pf-src, pf-warn,
+ * .dist. */
+let pfSort = 'near';   // 'near' | 'new' (view order; no refetch of data)
+function pfSortRows(rows) {
+  const byDist = (a, b) => (a.d ?? 1e9) - (b.d ?? 1e9);
+  const tierRk = r => (r.tier === 'verified' ? 0 : 1);
+  return rows.sort(pfSort === 'new'
+    ? (a, b) => (yardDateMs(b.v.dateAdded) - yardDateMs(a.v.dateAdded)) || byDist(a, b)
+    : (a, b) => byDist(a, b) || (tierRk(a) - tierRk(b)));
+}
+function pfSortRowHtml() {
+  const b = (k, label) => `<button type="button" class="pf-sort-btn" data-sort="${k}" aria-pressed="${pfSort === k}">${label}</button>`;
+  return `<div class="pf-sort" role="group" aria-label="Sort donors">${b('near', 'Nearest')}${b('new', 'Newest arrivals')}</div>`;
+}
+function pfDonorName(v) {
+  return `${v.year} ${escapeHtml(v.make)} ${escapeHtml(v.model.toLowerCase().startsWith(v.make.toLowerCase() + ' ') ? v.model.slice(v.make.length + 1) : v.model)}`;
+}
+function pfDonorCardHtml(r, cls, chip, valueHtml) {
+  const v = r.v, key = vehicleKey(v);
+  const ex = extrasFor(v);
+  const photo = ex && ex[0] ? photoInfo(ex[0]) : null;
+  const dateLbl = pfDateLabel(v.dateAdded);
+  return `<div class="pf-row-card ${cls}" data-vkey="${escapeHtml(key)}">
+      ${photo && photo.onCards ? photoBoxHtml(photo, key, `${v.year} ${v.make} ${v.model}`, 'card-photo') : ''}
+      <div class="cc-head">
+        ${rowPlateHtml(v.row)}
+        <div class="cc-id">
+          <div class="pf-car-line"><span class="pf-car-name">${pfDonorName(v)}</span></div>
+          ${chip ? `<div class="pf-chip-line">${chip}</div>` : ''}
+          <div class="pf-meta">${escapeHtml(v.location)}${r.d != null ? ` &middot; <span class="dist">${Math.round(r.d)}\u00a0mi</span>` : ''}${dateLbl ? ` &middot; set out ${dateLbl}` : ' &middot; set-out date unknown'}${saleBadgeHtml(v.location)}</div>
+        </div>
+      </div>
+      ${r.srcLine ? `<details class="pf-src-more"><summary>Why it fits <span class="chev-r" aria-hidden="true"></span></summary><div class="pf-note pf-src">Source: ${r.srcLine}</div></details>` : ''}
+      ${valueHtml ? `<div class="pf-value">${valueHtml}</div>` : ''}
+      ${r.warns && r.warns.length ? `<div class="pf-warn">${r.warns.join(' &middot; ')}</div>` : ''}
+      <div class="cc-actions">${pullBtnHtml(key)}<button type="button" class="btn btn-quiet car-open" data-vkey="${escapeHtml(key)}">Details</button></div>
+    </div>`;
+}
+/* "Watch for this": a watch on the seeker's own model, limited to the
+ * generation we can vouch for, through the same quick-watch path as the
+ * rest of the app (free limit, radius and Pro gates unchanged). */
+function pfWatchHtml(s, compact) {
+  if (!s || !s.make || !s.model) return '';
+  const w = pfGenWindow(s.make, s.model, s.year);
+  const yrs = w ? `${w[0]}–${w[1]} ` : '';
+  return `<div class="pf-watch${compact ? ' pf-watch-compact' : ''}"><p>${compact ? 'Want the next one? Get pinged when' : 'Yards set out new cars every day. Get told when'} another ${escapeHtml(yrs + s.make + ' ' + s.model)} lands near you.${isPro() ? '' : ` <span class="watch-strip-note">${freeDeliveryNote()}</span>`}</p>
+    <button type="button" class="btn btn-line pf-watch-btn" data-make="${escapeHtml(s.make)}" data-model="${escapeHtml(s.model)}" data-ymin="${w ? w[0] : ''}" data-ymax="${w ? w[1] : ''}">${ICON.bell} Watch for another ${escapeHtml(s.model)}</button>${proBoxHtml(PRO_PUSH_LINE, 'watch-toast', '', 'strip-pro')}</div>`;
+}
+function pfWatchClick(btn) {
+  const { make, model, ymin, ymax } = btn.dataset;
+  const r = addQuickWatch(make, model, ymin ? +ymin : null, ymax ? +ymax : null, 'parts');
+  if (r === 'added') { renderAlerts(); checkAndNotify(); showWatchToast(`${make} ${model}`); }
+  else if (r === 'exists') showWatchToast(`${make} ${model}`, { manage: true });
+  else if (r === 'limit') openUpgradeSheet('watch-limit');
+  else if (r === 'no-zip') alert('Set your zip code up top first, so the watch knows where "near you" is.');
+}
+/* Start screen tiles: the common carry-out parts, one tap each. */
+const PF_TILES = ['alternator', 'starter', 'headlights', 'tail-lights', 'side-mirrors', 'front-seats', 'window-regulator', 'gauge-cluster'];
+function pfRenderTiles() {
+  const box = document.getElementById('pf-tiles');
+  if (!box || !interchangeData) return;
+  const cats = PF_TILES.map(id => interchangeData.categories.find(c => c.id === id)).filter(Boolean);
+  box.innerHTML = cats.map(c => `<button type="button" class="pf-tile${pfCat && pfCat.id === c.id ? ' on' : ''}" role="listitem" data-cat="${escapeHtml(c.id)}" aria-pressed="${!!(pfCat && pfCat.id === c.id)}"><span class="pf-tile-name">${escapeHtml(c.label)}</span><span class="pf-tile-kind">${c.kind === 'engine' ? 'matched by engine' : 'matched by body'}</span></button>`).join('');
+}
+function pfUpdateWhereSum() {
+  const el = document.getElementById('pf-where-sum');
+  if (!el) return;
+  const zip = localStorage.getItem('jh_zip');
+  const r = effectiveRadiusMi();
+  el.textContent = activeZipCoords ? `Searching ${r ? 'within ' + r + ' mi of ' : 'everywhere from '}${zip || 'your location'}` : 'Set where to search';
+}
+/* After a search, bring the results up (the form stays above, unchanged). */
+function pfRevealResults() {
+  const out = document.getElementById('pf-results');
+  if (!out || !document.getElementById('tab-parts').classList.contains('active')) return;
+  const top = out.getBoundingClientRect().top;
+  if (top > innerHeight * 0.6) window.scrollTo({ top: window.scrollY + top - 80, behavior: 'smooth' });
+}
+document.getElementById('pf-results').addEventListener('click', e => {
+  const sort = e.target.closest('.pf-sort-btn');
+  if (sort) { pfSort = sort.dataset.sort; track('pf-sort/' + pfSort); pfRunSearch(); return; }
+  const watch = e.target.closest('.pf-watch-btn');
+  if (watch) { pfWatchClick(watch); return; }
+  const heart = e.target.closest('.heart-btn');
+  if (heart) { e.preventDefault(); toggleSaved(heart.dataset.vkey); return; }
+  const open = e.target.closest('.car-open');
+  if (open) { e.preventDefault(); openCarDetail(open.dataset.vkey, open); }
+});
+document.getElementById('pf-tiles').addEventListener('click', e => {
+  const t = e.target.closest('.pf-tile');
+  if (!t || !interchangeData) return;
+  pfCat = interchangeData.categories.find(c => c.id === t.dataset.cat) || null;
+  pfSetPartText(pfCat ? pfCat.label : '');
+  pfChosenFam = null;
+  pfRenderTiles();
+  track('pf-tile/' + t.dataset.cat);
+  pfMaybeSearch();
+  pfRevealResults();
+});
+['pf-year', 'pf-make', 'pf-model'].forEach(id => document.getElementById(id).addEventListener('change', () => pfSaveState()));
+
 function pfRunSearch() {
   const out = document.getElementById('pf-results');
   const status = document.getElementById('pf-status');
@@ -6281,18 +6890,19 @@ function pfRunSearch() {
     if (!groupNotes.length) famNote = 'Same-generation donors of your own model' + (pfCat ? ` — ${pfCat.label.toLowerCase().replace(/s?$/, 's')} rarely cross model lines without a verified platform group` : '');
   }
 
-  const rows = [...results.values()].sort((a, b) =>
-    (a.d ?? 1e9) - (b.d ?? 1e9)
-    || (a.tier === b.tier ? 0 : a.tier === 'verified' ? -1 : 1));
+  const rows = pfSortRows([...results.values()]);
   const nVer = rows.filter(r => r.tier === 'verified').length;
   if (!rows.length) {
-    out.innerHTML = `<div class="pf-empty">No donor cars for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)} ${escapeHtml(pfCat.label.toLowerCase())} within ${radius ? radius + ' mi' : 'range'} right now. Yards rotate stock weekly — add a watch on the Alerts tab, or widen the radius.</div>`;
+    out.innerHTML = `<div class="pf-empty">No donor cars for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)} ${escapeHtml(pfCat.label.toLowerCase())} within ${radius ? radius + ' mi' : 'range'} right now. Yards rotate stock weekly &mdash; widen the search area, or watch for one below.</div>${pfWatchHtml(s)}`;
+    pfRenderTiles(); pfRevealResults();
     return;
   }
   const CAP = 120;
   const unlocked = isPro();
   out.classList.toggle('pf-vonly-on', pfVerifiedOnly);
-  const head = `<div class="pf-results-head"><strong>${rows.length.toLocaleString()} donor car${rows.length === 1 ? '' : 's'}</strong> in range carrying a fitting ${escapeHtml(pfCat.label.toLowerCase())} &mdash; sorted by distance, then confidence. Yards track cars, not parts left on them — a long-sitting donor may be picked over.${(!unlocked && !pfCat.noValue) ? ' <span class="lock-text" role="button" onclick="openUpgradeSheet(\'pf-value\')">Pro adds what the same used part goes for online</span>' : ''}</div>`
+  const head = `<div class="pf-results-head"><strong>${rows.length.toLocaleString()} donor car${rows.length === 1 ? '' : 's'}</strong> in range carrying a fitting ${escapeHtml(pfCat.label.toLowerCase())} for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)} &mdash; ${pfSort === 'new' ? 'newest arrivals first' : 'nearest first, then confidence'}. Yards track cars, not parts left on them — a long-sitting donor may be picked over.</div>${(!unlocked && !pfCat.noValue) ? proBoxHtml('See what the same used part goes for online', 'pf-value', '', 'pf-pro-box') : ''}`
+    + pfWatchHtml(s, true)
+    + pfSortRowHtml()
     + pfVonlyRowHtml(nVer, rows.length - nVer, pfCat.id === 'engine-assembly' ? 'engine' : 'fit')
     + (famNote ? `<div class="pf-caveat">${escapeHtml(famNote)}</div>` : '')
     // Header notes carry data strings (ambig notes, group labels/notes):
@@ -6327,17 +6937,11 @@ function pfRunSearch() {
     const saveHtml = (unlocked && partRow && quote.status === 'priced' && partRow.high - quote.price > 0)
       ? `<span class="pf-save" title="What you\u2019d save over buying this part used online — if the part on this car is good">Save ~${formatPrice(Math.max(0, Math.round(partRow.low - quote.price)))}&ndash;${formatPrice(Math.round(partRow.high - quote.price))}</span>`
       : '';
-    const dateLbl = pfDateLabel(v.dateAdded);
-    return `<div class="pf-row-card ${r.tier === 'verified' ? 'pf-verified' : 'pf-likely'}">
-      <div class="pf-car-line"><span class="pf-car-name">${v.year} ${escapeHtml(v.make)} ${escapeHtml(v.model.toLowerCase().startsWith(v.make.toLowerCase() + ' ') ? v.model.slice(v.make.length + 1) : v.model)}</span>${pfTierChip(r.tier, r.src)}</div>
-      ${r.srcLine ? `<div class="pf-note pf-src">Source: ${r.srcLine}</div>` : ''}
-      <div class="pf-meta">${escapeHtml(v.location)}${r.d != null ? ` &middot; <span class="dist">${Math.round(r.d)} mi</span>` : ''}${v.row ? ` &middot; Row ${escapeHtml(String(v.row))}` : ''}${dateLbl ? ` &middot; set out ${dateLbl}` : ' &middot; set-out date unknown'}${saleBadgeHtml(v.location)}</div>
-      <div class="pf-value">${ebayHtml}${priceHtml}${saveHtml}</div>
-      ${r.warns.length ? `<div class="pf-warn">${r.warns.join(' &middot; ')}</div>` : ''}
-    </div>`;
+    return pfDonorCardHtml(r, r.tier === 'verified' ? 'pf-verified' : 'pf-likely', pfTierChip(r.tier, r.src), `${ebayHtml}${priceHtml}${saveHtml}`);
   }).join('') + (rows.length > CAP
-    ? `<div class="pf-more">Showing the ${CAP} nearest of ${rows.length.toLocaleString()} donors — tighten the radius to narrow.</div>`
+    ? `<div class="pf-more">Showing the first ${CAP} of ${rows.length.toLocaleString()} donors — tighten the radius to narrow.</div>`
     : '');
+  pfRenderTiles(); pfRevealResults();
 }
 
 /* ===== COVERAGE REQUESTS (owner ask, 2026-10) ============================
@@ -6373,13 +6977,13 @@ function pfCoverageFormHtml(ctx) {
   // Placeholder says what the box IS; the how/why lives in the hint below
   // (placeholder-pattern sweep 2026-10-26, same fix as the compare box).
   const notePh = ctx.kind === 'engine'
-    ? 'Engine (e.g. 3.0 V6) — optional'
-    : 'Notes — optional';
+    ? 'Engine, e.g. 3.0 V6'
+    : 'Notes';
   return `<div class="pf-coverage-form" id="pf-coverage-form">
     <div class="pfc-what">Asking us to add: <strong>${escapeHtml(what)}</strong>${ctx.zip ? ` <span class="pfc-zip">(near ${escapeHtml(ctx.zip)})</span>` : ''}</div>
-    <input type="email" id="pfc-email" placeholder="you@email.com — optional" autocomplete="email">
+    <input type="email" id="pfc-email" placeholder="Email" autocomplete="email">
     <input type="text" id="pfc-note" placeholder="${notePh}" maxlength="500">
-    <div class="pf-hint">A note helps us verify it. Leave an email and we may ping you if it lands &mdash; nothing automated.</div>
+    <div class="pf-hint">Both boxes are optional. A note helps us verify it. Leave an email and we may ping you if it lands &mdash; nothing automated.</div>
     <div class="pfc-actions">
       <button type="button" class="btn btn-primary" id="pfc-send" onclick="pfCoverageSubmit()">Add it to the list</button>
       <span class="pfc-status" id="pfc-status"></span>
@@ -6491,6 +7095,7 @@ function pfSyncWhere() {
     pz.value = lz.value;
     pz.placeholder = lz.placeholder;   // carries 'Using your location' when GPS is the center
   }
+  pfUpdateWhereSum();
 }
 
 /* ===== TRY-EXAMPLE CHIPS (owner request, 2026-10-23) =====================
@@ -6628,7 +7233,7 @@ function pfTryExamples() {
 function pfTryRun(cat, car, famId) {
   track('pf-try-chip');
   pfCat = cat;
-  pfPartInput.value = cat.label;
+  pfSetPartText(cat.label);
   pfChosenFam = famId || null;
   document.getElementById('pf-year').value = car ? String(car.year) : '';
   document.getElementById('pf-make').value = car ? car.make : '';
@@ -6667,6 +7272,8 @@ document.getElementById('pf-results').addEventListener('click', e => {
 let pfInited = false;
 function initPartsTab() {
   pfSyncWhere();   // pick up any zip/radius change made on the other tabs
+  pfUpdateWhereSum();
+  setTimeout(pfFitPart, 0);
   if (pfInited) { loadInterchange().then(pfRenderTry); return; }
   pfInited = true;
   track('part-finder-open');
@@ -6676,12 +7283,13 @@ function initPartsTab() {
       const saved = JSON.parse(localStorage.getItem('jh_pf') || 'null');
       if (saved && !pfCat) {
         const cat = (interchangeData ? interchangeData.categories : []).find(c => c.id === saved.cat);
-        if (cat) { pfCat = cat; pfPartInput.value = cat.label; }
+        if (cat) { pfCat = cat; pfSetPartText(cat.label); }
         if (saved.year) document.getElementById('pf-year').value = saved.year;
         if (saved.make) { document.getElementById('pf-make').value = saved.make; pfPopulateModels(); }
         if (saved.model) document.getElementById('pf-model').value = saved.model;
       }
     } catch (e) { /* corrupt saved state — start clean */ }
+    pfRenderTiles();
     pfRenderTry();
   });
 }
@@ -6890,7 +7498,7 @@ function renderAlerts() {
         : 'All years';
       // Legacy watches (no radiusMi key) predate radius scoping — say nothing.
       const radLabel = !('radiusMi' in e) ? ''
-        : e.radiusMi ? ` &middot; within ${e.radiusMi} mi` : ' &middot; anywhere';
+        : e.radiusMi ? ` &middot; within ${e.radiusMi}\u00a0mi` : ' &middot; anywhere';
       const hitCount = r.hits.length;
       // Near-miss (free only): cars that landed AFTER this watch was set and
       // at least a day ago — Pro would already have pushed them. One line,
@@ -6906,12 +7514,12 @@ function renderAlerts() {
           const lead = missed.length === 1
             ? `One landed on ${escapeHtml(when)}, after you set this watch.`
             : `${missed.length} landed since you set this watch, the first on ${escapeHtml(when)}.`;
-          missLine = `<span class="wl-miss">${lead} Pro would have sent a push within hours. <button type="button" class="linklike" onclick="openUpgradeSheet('watch-near-miss')">See Pro</button></span>`;
+          missLine = `<span class="wl-miss">${lead}</span>${proBoxHtml('Would have sent a push within hours', 'watch-near-miss', '', 'wl-pro')}`;
         }
       }
       // Free watches past the limit are ignored by the alert backend; say so.
       if (!isPro() && i >= FREE_WATCH_LIMIT) {
-        missLine = `<span class="wl-miss wl-off">Not sending alerts &mdash; free covers ${FREE_WATCH_LIMIT} watches. Remove one above, or <button type="button" class="linklike" onclick="openUpgradeSheet('watch-limit')">go Pro for 20</button>.</span>`;
+        missLine = `<span class="wl-miss wl-off">Not sending alerts &mdash; free covers ${FREE_WATCH_LIMIT} watches. Remove one above, or go Pro.</span>${proBoxHtml('Watch up to 20 cars', 'watch-limit', '', 'wl-pro')}`;
       }
       const vpicLabel = (e.driveFilter === '4x4' ? ' &middot; 4WD/AWD only' : e.driveFilter === '2wd' ? ' &middot; 2WD only' : '')
         + (e.trimFilter ? ' &middot; trim &ldquo;' + escapeHtml(e.trimFilter) + '&rdquo;' : '');
@@ -6961,41 +7569,32 @@ function renderAlerts() {
     const isMatch = v.hasMatch;
     const setOutDate = parseYardDate(v.dateAdded);
     const dateStr = setOutDate ? setOutDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
-    const matchedRules = watchlist.filter(e => watchlistMatches(e, v)).map(e =>
+    const matchedEntries = watchlist.filter(e => watchlistMatches(e, v));
+    const matchedRules = matchedEntries.map(e =>
       [e.make, e.model].filter(Boolean).join(' ') || 'Any'
     );
+    const key = vehicleKey(v);
+    const d = vehicleDistanceMi(v);
+    // Same pull-sheet row as the Cars list: row plate, one primary action,
+    // the car screen a tap away. Part names are free; prices stay Pro.
     return `
-      <div class="car-card match-card" style="--tier-color:var(--accent);">
-        <div class="car-header">
-          <div style="min-width:0;">
-            <div class="car-name">${escapeHtml(`${v.year} ${v.make} ${v.model}`)}</div>
-            <div class="live-card-location">${ICON.pin} <span class="loc-name">${escapeHtml(v.location)}</span>${(() => { const d = vehicleDistanceMi(v); return d != null ? ' <span class="dist">&middot; ' + Math.round(d) + ' mi</span>' : ''; })()}${v.row ? '<span class="live-card-row">Row ' + escapeHtml(v.row) + '</span>' : ''}${saleBadgeHtml(v.location)}</div>
-            <div class="car-meta">${dateStr ? `<span title="Set-out date published by the yard">Set out ${dateStr}</span>` : 'Set-out date unknown'}${vinMetaHtml(v).warn} &middot; matched: ${matchedRules.join(', ')}</div>
+      <article class="car-card match-card" data-vkey="${escapeHtml(key)}">
+        <div class="cc-head">
+          ${rowPlateHtml(v.row)}
+          <div class="cc-id">
+            <h3 class="car-name"><button type="button" class="car-open" data-vkey="${escapeHtml(key)}">${escapeHtml(`${v.year} ${v.make} ${v.model}`)}</button></h3>
+            <div class="live-card-location">${ICON.pin} <span class="loc-name">${escapeHtml(v.location)}</span>${d != null ? ' <span class="dist">&middot; ' + Math.round(d) + '\u00a0mi</span>' : ''}${saleBadgeHtml(v.location)}</div>
+            <div class="car-meta"><span class="car-meta-text">${dateStr ? `<span title="Set-out date published by the yard">Set out ${dateStr}</span>` : 'Set-out date unknown'}${vinMetaHtml(v).warn} &middot; matched: ${escapeHtml(matchedRules.join(', '))}</span></div>
           </div>
-          <div class="car-badges">
-            <span class="badge badge-new">Watchlist hit</span>
-          </div>
+          <div class="car-badges"><span class="badge badge-new">Watch hit</span></div>
         </div>
-        ${isMatch && v.topParts && v.topParts.length ? `
-          <details class="parts-details">
-            <summary>Up to ${v.topParts.length} part${v.topParts.length > 1 ? 's' : ''} to check <span class="chev">${ICON.chev}</span></summary>
-            <div class="car-body">
-              <ul class="parts-list">
-                ${v.topParts.slice(0, 5).map(p => `
-                  <li class="part-item">
-                    <span class="part-name">${escapeHtml(p.name)}</span>
-                    
-                    ${isPro()
-                      ? `<span class="part-price" title="Typical online price for this used part (eBay sold listings, national) — what you\u2019d pay if you didn\u2019t pull it yourself">Used online: ~${formatPrice(p.low)}&ndash;${formatPrice(p.high)}</span>`
-                      : `<span class="part-price locked-blur" role="button" onclick="openUpgradeSheet('alerts-value')">Used online: ${LOCKED_PRICE_MASK}</span>`}
-                  </li>
-                `).join('')}
-              </ul>
-            </div>
-          </details>
-        ` : ''}
-        ${yardSiteLinkHtml(v)}
-      </div>`;
+        ${recapLineHtml(v, matchedEntries)}
+        ${isMatch && v.topParts && v.topParts.length ? `<button type="button" class="parts-summary car-open" data-vkey="${escapeHtml(key)}"><span>${v.topParts.length} part${v.topParts.length > 1 ? 's' : ''} to check: ${escapeHtml(partsByValue(v.topParts, v.location).slice(0, 3).map(p => p.name).join(', '))}${v.topParts.length > 3 ? ' and more' : ''}</span>${ICON.chev}</button>` : ''}
+        <div class="cc-actions">
+          ${pullBtnHtml(key)}
+          <button type="button" class="btn btn-quiet car-open" data-vkey="${escapeHtml(key)}">Details</button>
+        </div>
+      </article>`;
   }).join('');
 }
 
@@ -7140,10 +7739,10 @@ function watchStripHtml(nCars) {
       <button type="button" class="linklike" onclick="jhOpenAlertsTab()">Manage</button></div>`;
   }
   const r = activeZipCoords ? effectiveRadiusMi() : null;
-  const where = r ? ` within ${r} mi` : (isPro() ? ' anywhere' : ' near you');
+  const where = r ? ` within ${r}\u00a0mi` : (isPro() ? ' anywhere' : ' near you');
   return `<div class="watch-strip" style="grid-column:1/-1;">${ICON.bell}
-    <span>${nCars ? 'Not the one?' : 'None here right now.'} ${IS_NATIVE ? 'Get told when' : 'Watch for'} ${nCars ? 'another' : 'one'} <strong>${escapeHtml(sc.label)}</strong>${IS_NATIVE ? ' lands' : ''}${where}.</span>
-    <button type="button" class="btn btn-primary btn-sm" onclick="jhWatchSearch()">Watch</button></div>`;
+    <span>${nCars ? 'Want the next one?' : 'None here right now.'} Get pinged when ${nCars ? 'another' : 'one'} <strong>${escapeHtml(sc.label)}</strong> lands${where}.${isPro() ? '' : ` <span class="watch-strip-note">${freeDeliveryNote()}</span>`}</span>
+    <button type="button" class="btn btn-primary btn-sm" onclick="jhWatchSearch()">Watch</button>${proBoxHtml(PRO_PUSH_LINE, 'watch-toast', '', 'strip-pro')}</div>`;
 }
 
 function jhWatchSearch() {
@@ -7199,8 +7798,7 @@ function showWatchToast(label, opts = {}) {
     // that a phone can be told the day one lands.
     next = `<span>New ones light up in Alerts. The free iPhone and Android apps can push you the day one lands.</span>`;
   } else if (!isPro()) {
-    next = `<span>Free: a recap every Monday. Pro: a push within hours.</span>
-      <button type="button" class="linklike" data-act="pro">See Pro</button>`;
+    next = `<span>Free: a recap every Monday.</span>${proBoxHtml('A push within hours instead', 'watch-toast', '', 'toast-pro')}`;
   }
   el.innerHTML = `<div class="watch-toast-head">${opts.undo ? ICON.bell : ICON.check}<span>${head}</span>
       <button type="button" class="watch-toast-x" data-act="close" aria-label="Dismiss">&times;</button></div>
@@ -7241,7 +7839,7 @@ function populateWatchOptions() {
   for (const v of liveInventory) {
     if (v.make && !JUNK_MAKES.has(v.make.toLowerCase())) makes.add(v.make);
   }
-  makeSel.innerHTML = '<option value="">Select make&hellip;</option>';
+  makeSel.innerHTML = '<option value="">Make</option>';
   [...makes].sort().forEach(m => {
     const opt = document.createElement('option');
     opt.value = m; opt.textContent = m;
@@ -7283,7 +7881,7 @@ function populateWatchModelOptions() {
   btn.disabled = false;
   _watchModelCounts = new Map();
   for (const v of liveInventory) {
-    if (v.make === make && v.model) {
+    if (v.make === make && v.model && !isNoPickModel(v.make, v.model)) {
       _watchModelCounts.set(v.model, (_watchModelCounts.get(v.model) || 0) + 1);
     }
   }
@@ -8634,6 +9232,7 @@ async function refreshNativeIapUi() {
       } catch (e) { /* retry */ }
       await new Promise((res) => setTimeout(res, 2500));
     }
+    { const rd = $id('ent-redeem'); if (rd) rd.open = true; }   // the message lives inside the one-tap row
     setMsg($id('ent-status'),
       'Payment received. Activation can take a minute — use "Already have Pro?" with your checkout email if it doesn\u2019t unlock shortly.', true);
   })();

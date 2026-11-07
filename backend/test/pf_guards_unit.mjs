@@ -44,7 +44,10 @@ function extractConst(name) {
 
 const REAL_FNS = ['escapeHtml', 'normalizeVinForDedupe', 'pfSquash', 'pfSquashModel',
   'pfAppMatches', 'pfGenWindows', 'pfGenWindow', 'pfParseEngine', 'pfEngineVerdict',
-  'pfParseFits', 'pfPartRow', 'pfTierChip', 'pfEngineQuoteVariants', 'pfRunSearch'];
+  'pfParseFits', 'pfPartRow', 'pfTierChip', 'pfEngineQuoteVariants', 'pfRunSearch',
+  // Pull Sheet round 4: the donor card + sort the rows are rendered through
+  // (real, so the markup parsed below is the markup users get).
+  'pfSortRows', 'pfSortRowHtml', 'pfDonorName', 'pfDonorCardHtml', 'pfWatchHtml'];
 const NEW_FNS = ['pfVinModelYear', 'pfVinValid', 'pfDonorIdentity'];
 const NEW_CONSTS = ['PF_VIN_YEAR_CHARS', 'PF_VIN_TRANSLIT', 'PF_VIN_WEIGHTS'];
 // Phase 1 (§7.4 / §12). Absent in an older app.js: stubbed so the P0 checks
@@ -122,6 +125,19 @@ function onlinePriceHtml() { return ''; }
 function formatPrice(n) { return '$' + n; }
 function pfDateLabel() { return ''; }
 function saleBadgeHtml() { return ''; }
+var pfSort = 'near';
+function yardDateMs() { return 0; }
+function vehicleKey(v) { return v.vin || String(v.id); }
+function photoInfo() { return null; }
+function photoBoxHtml() { return ''; }
+function rowPlateHtml() { return ''; }
+function pullBtnHtml() { return ''; }
+function pfRenderTiles() {}
+function pfRevealResults() {}
+var ICON = { bell: '' };
+function freeDeliveryNote() { return ''; }
+function proBoxHtml() { return ''; }
+var PRO_PUSH_LINE = '';
 `;
 const ctx = vm.createContext({ console, Promise, Map, Set, Math, String, Number, JSON, Infinity });
 vm.runInContext(prelude + code, ctx, { filename: 'app.js-extract' });

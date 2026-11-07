@@ -45,5 +45,16 @@ check("'Ram 1500' watch does not match a Ram 2500", !watchMatches(w('Dodge', 'Ra
 check("'Trailblazer' watch also matches a Trailblazer EXT (contains, same rule as Silverado)", watchMatches(w('Chevrolet', 'Trailblazer'), car('Chevrolet', 'Trailblazer EXT')));
 check("'Dodge / Ram 1500' watch matches a truck filed under make Ram", watchMatches(w('Dodge', 'Ram 1500'), car('Ram', '1500')));
 
+// Round 5 (alerts first): "Alert me when the next one lands", "Want the next
+// one?" and "Watch for another …" create quick watches from the car's RAW
+// row strings (make + model, no years) through the app's addQuickWatch, or the
+// seeker's model + generation years on the Parts tab. Those shapes must match
+// the next car of the same model on the server, and nothing else.
+check('car-screen watch from raw row strings matches the next one (BMW X5)', watchMatches(w('BMW', 'X5'), car('BMW', 'X5', 2004)));
+check('car-screen watch from a yard spelling matches the canonical car (Ram1500)', watchMatches(w('Dodge', 'Ram1500'), car('Dodge', 'Ram 1500')));
+check('parts-tab watch with the generation years matches inside them', watchMatches(w('Honda', 'Accord', { year_min: 1994, year_max: 1997 }), car('Honda', 'Accord', 1996)));
+check('parts-tab watch with the generation years does not match outside them', !watchMatches(w('Honda', 'Accord', { year_min: 1994, year_max: 1997 }), car('Honda', 'Accord', 2001)));
+check('a next-one watch does not match a different model at the same yard', !watchMatches(w('BMW', 'X5'), car('BMW', 'X3')));
+
 console.log(failures ? `\n${failures} FAILURES` : '\nALL PASS');
 process.exit(failures ? 1 : 0);
