@@ -246,6 +246,20 @@ VIN is decoded and cached. The scan log prints
 On the Audi sample, 4 of 69 rows were corrected from the VIN: 4Runner, Dodge
 Ram, Chrysler Fifth Avenue, Ford Escape.
 
+**Verified:** scan 42328162999 on 3edce5bc published 2026-11-07T03:23Z.
+- JTEBU5JR0D5116438 → Toyota 4Runner (Phoenix North).
+- 2D4RN5D18AR323652 → Dodge Grand Caravan (Phoenix South).
+- 2C4RDGCG1CR241704 → Dodge Grand Caravan (Gilbert).
+
+Of 10,822 Pull-N-Save cars with a cached decode, 142 show a make different
+from the decoded one:
+- 139 are within one family: Chrysler/Dodge 89, Scion/Toyota 50.
+- 3 cross families: Alfa Romeo/BMW, Cadillac/McCullough, Hyundai/Peterbilt.
+  Their decodes name implausible makes (likely VIN typos at the yard), so
+  the decode isn't trusted there.
+
+Before the fix, 59 cross-family contradictions.
+
 ## 2026-11-06 vehicle photos, round 3 (more coverage)
 
 Owner, via the hub: "can we get better photo coverage?" The rules are
