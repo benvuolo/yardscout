@@ -262,11 +262,11 @@ const CHECK_FN = () => {
   // A Pro nudge is always the Pro box, never bare underlined link text, and
   // Pro users never see a Pro box.
   for (const t of document.querySelectorAll('a, button, [role=button], .linklike, .lock-text, .lock-chip')) {
-    if (!t.getClientRects().length || covered(t) || t.closest('.pro-box, #upgrade-sheet, .sheet, header')) continue;
+    if (!t.getClientRects().length || covered(t) || getComputedStyle(t).visibility === 'hidden' || t.closest('.pro-box, #upgrade-sheet, .sheet, header')) continue;
     if (!/\bPro\b/.test(t.textContent || '')) continue;
     if (/underline/.test(getComputedStyle(t).textDecorationLine)) add('bare-pro-link', t, t.textContent);
   }
-  if (localStorage.getItem('jh_pro') === '1') for (const b of document.querySelectorAll('.pro-box')) if (b.getClientRects().length && !covered(b)) add('pro-box-for-pro', b, b.textContent);
+  if (localStorage.getItem('jh_pro') === '1') for (const b of document.querySelectorAll('.pro-box')) if (b.getClientRects().length && !covered(b) && getComputedStyle(b).visibility !== 'hidden') add('pro-box-for-pro', b, b.textContent);
   return out;
 };
 
@@ -488,8 +488,10 @@ const SCREENS = [
       // from 375px up; the Pro box (free only) is stacked under it.
       const btn = l.querySelector('.next-one-btn'), box = l.querySelector('.pro-box');
       if (btn && innerWidth >= 375) {
-        const cs = getComputedStyle(btn), h = btn.getBoundingClientRect().height - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom) - parseFloat(cs.borderTopWidth) - parseFloat(cs.borderBottomWidth);
-        if (h > parseFloat(cs.lineHeight) * 1.5) throw new Error(`next-one button wraps at ${innerWidth}px (${Math.round(h)}px tall)`);
+        const tops = new Set();
+        for (const n of btn.childNodes) if (n.nodeType === 3 && n.textContent.trim()) { const rg = document.createRange(); rg.selectNodeContents(n); for (const x of rg.getClientRects()) if (x.width > 1) tops.add(Math.round(x.top)); }
+        const lines = tops.size;
+        if (lines !== 1) throw new Error(`next-one button text on ${lines} lines at ${innerWidth}px`);
       }
       if (btn && box && box.getBoundingClientRect().top < btn.getBoundingClientRect().bottom - 1) throw new Error('Pro box not stacked under the next-one button');
       if (!localStorage.getItem('jh_pro') && btn && !box) throw new Error('free car screen: no Pro box under the next-one button');

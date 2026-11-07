@@ -2989,3 +2989,4 @@ a { color: var(--accent); }
 .profit-line > .card-pro { flex: 1 1 100%; }
 .cd-life { margin-bottom: var(--s5); }
 .pf-watch-compact > .pf-watch-btn { flex: 1 1 100%; }
+.zip-banner-skip-pro { margin-top: var(--s3); }

@@ -321,11 +321,12 @@ with sync_playwright() as pw:
     # No bare underlined upsell links anywhere on the car screen.
     nx = page.evaluate("""() => { const b = document.getElementById('car-detail');
       const btn = b.querySelector('.next-one-btn'), box = b.querySelector('.next-one .pro-box');
-      const lh = btn ? parseFloat(getComputedStyle(btn).lineHeight) || 20 : 0;
       return { btn: !!b.querySelector('.next-one-btn, .next-one-on'), pro: b.querySelectorAll('.next-one .pro-box').length,
                watching: !!b.querySelector('.next-one-on'),
                stacked: !btn || !box || box.getBoundingClientRect().top >= btn.getBoundingClientRect().bottom - 1,
-               oneLine: !btn || (btn.getBoundingClientRect().height - parseFloat(getComputedStyle(btn).paddingTop) - parseFloat(getComputedStyle(btn).paddingBottom)) < lh * 1.6,
+               oneLine: !btn || (() => { const tops = new Set(); for (const n of btn.childNodes) if (n.nodeType === 3 && n.textContent.trim()) {
+                 const r = document.createRange(); r.selectNodeContents(n); for (const x of r.getClientRects()) if (x.width > 1) tops.add(Math.round(x.top)); }
+                 return tops.size === 1; })(),
                bareLinks: [...b.querySelectorAll('.linklike, .lock-text')].filter(e => e.offsetParent && /pro/i.test(e.textContent)).length }; }""")
     check("free car screen: 'Alert me when the next one lands' + one Pro box below it",
           nx["btn"] and (nx["pro"] == 1 or nx["watching"]) and nx["stacked"] and nx["bareLinks"] == 0, str(nx))

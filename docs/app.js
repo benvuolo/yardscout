@@ -1150,7 +1150,7 @@ function renderSaleStrip() {
     `<button type="button" class="sale-strip-row" data-loc="${escapeHtml(y.location)}">
        <span class="sale-pill">${ev.pct ? ev.pct + '% off' : 'Sale'}</span>
        <span class="sale-strip-yard">${escapeHtml(y.location)}</span>
-       <span class="sale-strip-when">${saleDateLabel(ev)}${d != null ? ' &middot; ' + Math.round(d) + ' mi' : ''}</span>
+       <span class="sale-strip-when">${saleDateLabel(ev)}${d != null ? ' &middot; ' + Math.round(d) + '\u00a0mi' : ''}</span>
      </button>`).join('')
     + (rows.length > shown.length ? `<div class="sale-strip-more">+${rows.length - shown.length} more sale${rows.length - shown.length > 1 ? 's' : ''} in range</div>` : '');
   strip.style.display = '';
@@ -2483,7 +2483,7 @@ function populateYardFilter() {
     const opt = document.createElement('option');
     opt.value = r.name;
     opt.textContent = r.name
-      + (r.dist != null ? ' \u2014 ' + Math.round(r.dist) + ' mi' : '')
+      + (r.dist != null ? ' \u2014 ' + Math.round(r.dist) + '\u00a0mi' : '')
       + ' (' + r.count + ' cars)';
     locSel.appendChild(opt);
   });
@@ -2724,7 +2724,7 @@ function proSheetCarHtml(enc) {
   const bucket = [1500, 1000, 500, 250, 100].find(b => high >= b);
   const fast = v.topParts.some(p => p.sell_speed === 'Fast');
   const d = vehicleDistanceMi(v);
-  const where = [v.location, d != null ? Math.round(d) + ' mi' : '', v.row ? 'Row ' + v.row : ''].filter(Boolean).map(escapeHtml).join(' &middot; ');
+  const where = [v.location, d != null ? Math.round(d) + '\u00a0mi' : '', v.row ? 'Row ' + v.row : ''].filter(Boolean).map(escapeHtml).join(' &middot; ');
   return `<div class="pro-car-name">${escapeHtml(`${v.year} ${v.make} ${v.model}`)}</div>
     <div class="pro-car-where">${where}</div>
     <div class="pro-car-facts">${v.topParts.length} part${v.topParts.length === 1 ? '' : 's'} worth checking${bucket ? ` &middot; <strong>$${bucket.toLocaleString()}+</strong> to buy them used online` : ''}${fast ? ' &middot; some get picked over fast' : ''}</div>
@@ -2827,7 +2827,11 @@ function applyProGates() {
   // Nationwide browsing is Pro: the zip-banner skip and the "Any distance"
   // radius option say so honestly for free users, and work normally for Pro.
   const skipBtn = document.getElementById('zip-banner-skip');
-  if (skipBtn) skipBtn.innerHTML = pro ? 'Skip &mdash; show everything nationwide' : 'Nationwide browsing is a Pro feature &rarr;';
+  if (skipBtn) {
+    skipBtn.className = pro ? 'zip-banner-skip' : 'pro-box zip-banner-skip-pro';
+    skipBtn.innerHTML = pro ? 'Skip &mdash; show everything nationwide'
+      : '<span class="pro-badge">Pro</span><span class="pro-box-line">Browse every yard nationwide</span><span class="pro-box-chev" aria-hidden="true">&rsaquo;</span>';
+  }
   const anyOpt = document.querySelector('#live-radius option[value=""]');
   if (anyOpt) anyOpt.innerHTML = pro ? 'Any distance' : 'Any distance &mdash; Pro';
   // Value-intelligence sorts are Pro: a free user sorting by value would get
@@ -3097,7 +3101,7 @@ function updateZipChip() {
   const gps = localStorage.getItem('jh_gps');
   if (!activeZipCoords || (!zip && !gps)) { chip.style.display = 'none'; return; }
   const r = typeof effectiveRadiusMi === 'function' ? effectiveRadiusMi() : null;
-  chip.innerHTML = `${ICON.pin}<span class="zip-chip-zip">${escapeHtml(zip || 'Near me')}</span>${r ? `<span class="zip-chip-r">&middot; ${r} mi</span>` : ''}`;
+  chip.innerHTML = `${ICON.pin}<span class="zip-chip-zip">${escapeHtml(zip || 'Near me')}</span>${r ? `<span class="zip-chip-r">&middot; ${r}\u00a0mi</span>` : ''}`;
   chip.style.display = '';
 }
 document.getElementById('zip-chip').addEventListener('click', () => {
@@ -3207,7 +3211,7 @@ function renderCarDetail() {
   const d = vehicleDistanceMi(v);
   const place = [v.city, v.state].filter(Boolean).join(', ');
   const zip = localStorage.getItem('jh_zip');
-  const where = [place ? escapeHtml(place) : '', d != null ? `${Math.round(d)} mi${zip ? ' from ' + escapeHtml(zip) : ' away'}` : ''].filter(Boolean).join(' &middot; ');
+  const where = [place ? escapeHtml(place) : '', d != null ? `${Math.round(d)}\u00a0mi${zip ? ' from ' + escapeHtml(zip) : ' away'}` : ''].filter(Boolean).join(' &middot; ');
   const dir = carDirectionsUrl(v);
   let stay = '';
   if (lc.avg && lc.daysOn != null) {
@@ -4289,7 +4293,7 @@ function renderLive() {
           <div class="cc-id">
             <h3 class="car-name"><button type="button" class="car-open" data-vkey="${escapeHtml(key)}">${escapeHtml(`${v.year} ${v.make} ${v.model}`)}</button></h3>
             ${specLine ? `<div class="car-spec-line">${specLine}</div>` : ''}
-            <div class="live-card-location">${ICON.pin} <span class="loc-name">${escapeHtml(v.location)}</span>${d != null ? ' <span class="dist">&middot; ' + Math.round(d) + ' mi</span>' : ''}${saleBadgeHtml(v.location)}</div>
+            <div class="live-card-location">${ICON.pin} <span class="loc-name">${escapeHtml(v.location)}</span>${d != null ? ' <span class="dist">&middot; ' + Math.round(d) + '\u00a0mi</span>' : ''}${saleBadgeHtml(v.location)}</div>
             <div class="car-meta">${stayMeterHtml(daysOn, lotAvg)}<span class="car-meta-text">${whenBits.join(' &middot; ')}${vm.warn}</span></div>
           </div>
           ${manualBadge || statusBadge ? `<div class="car-badges">${manualBadge}${statusBadge}</div>` : ''}
@@ -4936,7 +4940,7 @@ function renderYards() {
   const chipYards = view.filtered ? shown : inRange;
   const carsInView = chipYards.reduce((s, y) => s + (y.count || 0), 0);
   statsBar.innerHTML = `
-    <div class="stat-card" title="Yards ${view.filtered ? 'matching your filters' : 'inside your radius'}${radius ? ` — within ${radius} mi` : ''}"><div class="label">${view.filtered ? 'Yards in view' : 'Yards near you'}</div><div class="value">${chipYards.length.toLocaleString()}</div></div>
+    <div class="stat-card" title="Yards ${view.filtered ? 'matching your filters' : 'inside your radius'}${radius ? ` — within ${radius}\u00a0mi` : ''}"><div class="label">${view.filtered ? 'Yards in view' : 'Yards near you'}</div><div class="value">${chipYards.length.toLocaleString()}</div></div>
     <div class="stat-card" title="Cars on those lots as of the last scan"><div class="label">${view.filtered ? 'Cars in view' : 'Cars in range'}</div><div class="value">${carsInView.toLocaleString()}</div></div>
     <div class="stat-card" title="Last scan: ${scrapedTitle()} — every yard re-scanned about every 4 hours"><div class="label">Updated</div><div class="value value-sm">${scrapeAgoLabel()}</div></div>
   `;
@@ -4945,11 +4949,11 @@ function renderYards() {
     if (!inRange.length) {
       const nearest = view.yards.find(y => y.dist != null);
       const nearestTxt = nearest
-        ? `The nearest yard we track is <strong>${escapeHtml(nearest.location)}</strong> in ${escapeHtml([nearest.city, nearest.state].filter(Boolean).join(', '))} &mdash; ${Math.round(nearest.dist)} mi away.`
+        ? `The nearest yard we track is <strong>${escapeHtml(nearest.location)}</strong> in ${escapeHtml([nearest.city, nearest.state].filter(Boolean).join(', '))} &mdash; ${Math.round(nearest.dist)}\u00a0mi away.`
         : '';
       grid.innerHTML = `
         <div class="empty-state" style="grid-column:1/-1;">
-          <h3>No yards within ${radius} mi</h3>
+          <h3>No yards within ${radius}\u00a0mi</h3>
           <p>${nearestTxt}</p>
           <div style="display:flex;gap:0.6rem;justify-content:center;flex-wrap:wrap;margin-top:0.75rem;">
             ${radius < 250 ? '<button type="button" class="btn" id="yards-widen">Widen to 250 mi</button>' : ''}
@@ -4977,7 +4981,7 @@ function renderYards() {
   grid.innerHTML = shown.map(y => {
     const chain = CHAIN_PRICE_PAGES.find(c => c[0].test(y.location));
     const place = [y.city, y.state].filter(Boolean).join(', ');
-    const distTxt = y.dist != null ? ` <span class="dist">&middot; ${Math.round(y.dist)} mi</span>` : '';
+    const distTxt = y.dist != null ? ` <span class="dist">&middot; ${Math.round(y.dist)}\u00a0mi</span>` : '';
     const life = y.avgLifespan
       ? `Cars typically last ~${y.avgLifespan} days here` +
         (y.lifespanBasis === 'chain' ? ' (chain average)' : y.lifespanBasis === 'all' ? ' (all-yards average)' : '')
@@ -5332,7 +5336,7 @@ function renderCompareResults() {
     : (a, b) => a.price - b.price);
   const rows = sorted.map(r => {
     const core = r.core > 0 ? ` <span class="price-core" title="Refundable core deposit — bring the old part back to get it refunded">+ $${r.core.toFixed(2)} core</span>` : '';
-    const dist = r.dist != null ? ` &middot; ${Math.round(r.dist)} mi` : '';
+    const dist = r.dist != null ? ` &middot; ${Math.round(r.dist)}\u00a0mi` : '';
     return `<div class="price-row compare-row" data-loc="${escapeHtml(r.yard)}" role="button" tabindex="0">
       <span class="price-part"><strong>${escapeHtml(r.yard)}</strong><br>
         <span class="compare-detail">${escapeHtml(r.part)}${dist}</span></span>
@@ -5342,7 +5346,7 @@ function renderCompareResults() {
   let extra = '';
   if (compareMissing.length) {
     const names = compareMissing.slice(0, 8).map(y =>
-      y.dist != null ? `${escapeHtml(y.location)} (${Math.round(y.dist)} mi)` : escapeHtml(y.location));
+      y.dist != null ? `${escapeHtml(y.location)} (${Math.round(y.dist)}\u00a0mi)` : escapeHtml(y.location));
     const more = compareMissing.length > 8 ? ` +${compareMissing.length - 8} more` : '';
     extra += `<div class="compare-missing">Not on the published list at ${names.join(', ')}${more} &mdash; ask at the counter.</div>`;
   }
@@ -6533,7 +6537,7 @@ function pfDonorCardHtml(r, cls, chip, valueHtml) {
         <div class="cc-id">
           <div class="pf-car-line"><span class="pf-car-name">${pfDonorName(v)}</span></div>
           ${chip ? `<div class="pf-chip-line">${chip}</div>` : ''}
-          <div class="pf-meta">${escapeHtml(v.location)}${r.d != null ? ` &middot; <span class="dist">${Math.round(r.d)} mi</span>` : ''}${dateLbl ? ` &middot; set out ${dateLbl}` : ' &middot; set-out date unknown'}${saleBadgeHtml(v.location)}</div>
+          <div class="pf-meta">${escapeHtml(v.location)}${r.d != null ? ` &middot; <span class="dist">${Math.round(r.d)}\u00a0mi</span>` : ''}${dateLbl ? ` &middot; set out ${dateLbl}` : ' &middot; set-out date unknown'}${saleBadgeHtml(v.location)}</div>
         </div>
       </div>
       ${r.srcLine ? `<details class="pf-src-more"><summary>Why it fits <span class="chev-r" aria-hidden="true"></span></summary><div class="pf-note pf-src">Source: ${r.srcLine}</div></details>` : ''}
@@ -7494,7 +7498,7 @@ function renderAlerts() {
         : 'All years';
       // Legacy watches (no radiusMi key) predate radius scoping — say nothing.
       const radLabel = !('radiusMi' in e) ? ''
-        : e.radiusMi ? ` &middot; within ${e.radiusMi} mi` : ' &middot; anywhere';
+        : e.radiusMi ? ` &middot; within ${e.radiusMi}\u00a0mi` : ' &middot; anywhere';
       const hitCount = r.hits.length;
       // Near-miss (free only): cars that landed AFTER this watch was set and
       // at least a day ago — Pro would already have pushed them. One line,
@@ -7579,7 +7583,7 @@ function renderAlerts() {
           ${rowPlateHtml(v.row)}
           <div class="cc-id">
             <h3 class="car-name"><button type="button" class="car-open" data-vkey="${escapeHtml(key)}">${escapeHtml(`${v.year} ${v.make} ${v.model}`)}</button></h3>
-            <div class="live-card-location">${ICON.pin} <span class="loc-name">${escapeHtml(v.location)}</span>${d != null ? ' <span class="dist">&middot; ' + Math.round(d) + ' mi</span>' : ''}${saleBadgeHtml(v.location)}</div>
+            <div class="live-card-location">${ICON.pin} <span class="loc-name">${escapeHtml(v.location)}</span>${d != null ? ' <span class="dist">&middot; ' + Math.round(d) + '\u00a0mi</span>' : ''}${saleBadgeHtml(v.location)}</div>
             <div class="car-meta"><span class="car-meta-text">${dateStr ? `<span title="Set-out date published by the yard">Set out ${dateStr}</span>` : 'Set-out date unknown'}${vinMetaHtml(v).warn} &middot; matched: ${escapeHtml(matchedRules.join(', '))}</span></div>
           </div>
           <div class="car-badges"><span class="badge badge-new">Watch hit</span></div>
@@ -7735,7 +7739,7 @@ function watchStripHtml(nCars) {
       <button type="button" class="linklike" onclick="jhOpenAlertsTab()">Manage</button></div>`;
   }
   const r = activeZipCoords ? effectiveRadiusMi() : null;
-  const where = r ? ` within ${r} mi` : (isPro() ? ' anywhere' : ' near you');
+  const where = r ? ` within ${r}\u00a0mi` : (isPro() ? ' anywhere' : ' near you');
   return `<div class="watch-strip" style="grid-column:1/-1;">${ICON.bell}
     <span>${nCars ? 'Want the next one?' : 'None here right now.'} Get pinged when ${nCars ? 'another' : 'one'} <strong>${escapeHtml(sc.label)}</strong> lands${where}.${isPro() ? '' : ` <span class="watch-strip-note">${freeDeliveryNote()}</span>`}</span>
     <button type="button" class="btn btn-primary btn-sm" onclick="jhWatchSearch()">Watch</button>${proBoxHtml(PRO_PUSH_LINE, 'watch-toast', '', 'strip-pro')}</div>`;
