@@ -264,9 +264,12 @@ gm_vehicle_search platform, told the owner that scanners pulling many images
 are why they added their check, and an official API is expected.
 
 Already-verified `photo` results still publish, since that only references
-the yard's URL. As of the pause, the only checks ever made were 18 manual
-samples on 2026-11-06. No scan ran with the checker on and a non-empty
-backlog, so there are few or no verified Pull-N-Save photos. Un-pause by
+the yard's URL. One scan ran with the checker on before the pause: run
+42308781489, started 2026-11-06 22:59Z on 4e6fbe76. It makes at most 150
+image requests at 10 s, newest cars first; it was not cancelled, since by
+the time of the pause it had most likely finished them. Before that the
+only checks were 18 manual samples on 2026-11-06. Every later scan makes
+none. Un-pause by
 setting the flag to `False`, only when the owner says so (or switch to the
 official API).
 
