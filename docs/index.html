@@ -473,8 +473,8 @@
       <p style="font-size:0.75rem;color:var(--text-dim);margin:0.6rem 0 0;">
         Drivetrain and trim filters match only cars whose VIN decode confirms it &mdash; a car with no
         decode never matches a filtered watch, so a filtered watch hears less, never wrong.
-        <span id="alert-vpic-lock" class="lock-text" role="button" onclick="openUpgradeSheet('watch-trim')">Trim and drivetrain filters are part of Pro &rarr;</span>
       </p>
+      <button type="button" id="alert-vpic-lock" class="pro-box" onclick="openUpgradeSheet('watch-trim')"><span class="pro-badge">Pro</span><span class="pro-box-line">Filter watches by trim and drivetrain</span><span class="pro-box-chev" aria-hidden="true">&rsaquo;</span></button>
     </div>
 
     <div id="alert-watchlist" style="margin-top:1rem;"></div>
@@ -560,9 +560,7 @@
         <button type="button" id="native-push-enable" class="btn btn-primary">Enable push notifications</button>
         <span id="native-push-status" style="font-size:0.8125rem;color:var(--text-dim);"></span>
       </div>
-      <p style="font-size:0.75rem;color:var(--text-dim);margin:0.7rem 0 0;">
-        <a href="#" onclick="openUpgradeSheet('alerts-push');return false;" style="color:var(--accent);">Want alerts within hours of a car landing? That&rsquo;s Pro &rarr;</a>
-      </p>
+      <button type="button" id="alerts-push-pro" class="pro-box" onclick="openUpgradeSheet('alerts-push')"><span class="pro-badge">Pro</span><span class="pro-box-line">An alert within hours of a car landing</span><span class="pro-box-chev" aria-hidden="true">&rsaquo;</span></button>
     </div>
 
     <div class="panel" id="appstore-alerts-panel">

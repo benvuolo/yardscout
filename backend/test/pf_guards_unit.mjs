@@ -136,6 +136,8 @@ function pfRenderTiles() {}
 function pfRevealResults() {}
 var ICON = { bell: '' };
 function freeDeliveryNote() { return ''; }
+function proBoxHtml() { return ''; }
+var PRO_PUSH_LINE = '';
 `;
 const ctx = vm.createContext({ console, Promise, Map, Set, Math, String, Number, JSON, Infinity });
 vm.runInContext(prelude + code, ctx, { filename: 'app.js-extract' });

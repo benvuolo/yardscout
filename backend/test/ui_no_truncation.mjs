@@ -15,6 +15,8 @@
  *   - a tap target smaller than 44x44 CSS px (inline links in a sentence
  *     are exempt, as in WCAG 2.5.8)
  *   - text contrast below 4.5:1 (3:1 for large text), WCAG 1.4.3
+ *   - a Pro nudge shown as bare underlined link text (it must be the Pro
+ *     box), or a Pro box shown to a Pro user
  *
  * 200% text emulates the OS text-size setting the way Android WebView's
  * textZoom does: every element's computed font-size (and px line-height) is
@@ -257,6 +259,14 @@ const CHECK_FN = () => {
     const r = box.getBoundingClientRect();
     if (r.width < 43.5 || r.height < 43.5) add('target<44', t, t.textContent || t.getAttribute('aria-label') || t.title || t.placeholder || '', `${Math.round(r.width)}x${Math.round(r.height)}`);
   }
+  // A Pro nudge is always the Pro box, never bare underlined link text, and
+  // Pro users never see a Pro box.
+  for (const t of document.querySelectorAll('a, button, [role=button], .linklike, .lock-text, .lock-chip')) {
+    if (!t.getClientRects().length || covered(t) || t.closest('.pro-box, #upgrade-sheet, .sheet, header')) continue;
+    if (!/\bPro\b/.test(t.textContent || '')) continue;
+    if (/underline/.test(getComputedStyle(t).textDecorationLine)) add('bare-pro-link', t, t.textContent);
+  }
+  if (localStorage.getItem('jh_pro') === '1') for (const b of document.querySelectorAll('.pro-box')) if (b.getClientRects().length && !covered(b)) add('pro-box-for-pro', b, b.textContent);
   return out;
 };
 
@@ -472,7 +482,18 @@ const SCREENS = [
       openCarDetail(k);
     });
     await settle(page, 400);
-    await page.evaluate(() => { const l = document.querySelector('#car-detail .cd-life'); l.scrollIntoView({ block: 'center' }); });
+    await page.evaluate(() => {
+      const l = document.querySelector('#car-detail .cd-life'); l.scrollIntoView({ block: 'center' });
+      // The next-one button sits on its own full-width line, one text line
+      // from 375px up; the Pro box (free only) is stacked under it.
+      const btn = l.querySelector('.next-one-btn'), box = l.querySelector('.pro-box');
+      if (btn && innerWidth >= 375) {
+        const cs = getComputedStyle(btn), h = btn.getBoundingClientRect().height - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom) - parseFloat(cs.borderTopWidth) - parseFloat(cs.borderBottomWidth);
+        if (h > parseFloat(cs.lineHeight) * 1.5) throw new Error(`next-one button wraps at ${innerWidth}px (${Math.round(h)}px tall)`);
+      }
+      if (btn && box && box.getBoundingClientRect().top < btn.getBoundingClientRect().bottom - 1) throw new Error('Pro box not stacked under the next-one button');
+      if (!localStorage.getItem('jh_pro') && btn && !box) throw new Error('free car screen: no Pro box under the next-one button');
+    });
   }, pro ? async (page) => { await resetUi(page); await page.evaluate(() => { localStorage.removeItem('jh_pro'); applyProGates(); renderLive(); }); } : undefined]),
   ['r5-cars-next', async (page) => {
     await tab(page, 'live');

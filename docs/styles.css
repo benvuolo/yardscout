@@ -176,7 +176,6 @@
     color: var(--text);
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
-    font-variant-numeric: tabular-nums; /* digits align in stats, prices, counts */
     padding-bottom: calc(var(--nav-h) + env(safe-area-inset-bottom) + 16px);
   }
 
@@ -2937,16 +2936,15 @@ a { color: var(--accent); }
 #upgrade-sheet .sheet-head h2 { font-size: var(--t-xl); line-height: 1.2; }
 .pro-eyebrow { display: block; margin-bottom: var(--s1); font: 700 var(--t-xs)/1.3 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
 .tier-list li strong { color: var(--text); }
-.recap-line { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s1) var(--s2); margin-top: var(--s3); padding: var(--s2) var(--s3); border-radius: var(--r-sm); background: var(--accent-soft); --accent: var(--accent-on-soft); font-size: var(--t-sm); color: var(--text); }
-.recap-line > .ico { flex: none; color: var(--accent); }
-.recap-line > span { flex: 1 1 14em; min-width: 0; }
-.recap-line .linklike { font-weight: 700; }
+.recap-line { display: flex; flex-direction: column; align-items: stretch; gap: var(--s2); margin-top: var(--s3); padding: var(--s2) var(--s3); border-radius: var(--r-sm); background: var(--accent-soft); --accent: var(--accent-on-soft); font-size: var(--t-sm); color: var(--text); }
+.recap-line > p { display: flex; align-items: flex-start; gap: var(--s2); margin: 0; }
+.recap-line > p > .ico { flex: none; margin-top: 3px; color: var(--accent); }
+.recap-line > p > span { flex: 1 1 auto; min-width: 0; }
 .cd-life { margin-top: var(--s5); }
 .cd-life p { margin: 0 0 var(--s2); font-size: var(--t-md); }
 .cd-life p span { color: var(--text-dim); font-size: var(--t-sm); }
-.next-one { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s1) var(--s3); }
-.next-one-btn { flex: 1 1 14em; }
-.next-one-pro { font-size: var(--t-sm); font-weight: 700; }
+.next-one { display: flex; flex-direction: column; align-items: stretch; gap: var(--s2); }
+.next-one-btn { width: 100%; }
 .next-one-on { display: flex; align-items: flex-start; gap: var(--s2); margin: 0; font-size: var(--t-sm); color: var(--accent2); font-weight: 600; }
 .next-one-on .ico { flex: none; margin-top: 3px; }
 .watch-strip-note { display: block; margin-top: 2px; font-size: var(--t-xs); color: var(--text-dim); }
@@ -2956,3 +2954,38 @@ a { color: var(--accent); }
 #upgrade-sheet .sheet-head { flex-wrap: nowrap; align-items: flex-start; }
 #upgrade-sheet .sheet-head h2 { flex: 1 1 auto; min-width: 0; }
 #upgrade-sheet .sheet-head button { flex: none; }
+
+/* ---- Pro box: the one free-user Pro nudge (accent border, PRO badge, one
+   line, chevron; the whole box opens the Pro sheet). Pro users never see it. */
+.pro-box {
+  display: flex; align-items: center; gap: var(--s2) var(--s3);
+  width: 100%; min-height: var(--tap); margin: 0; padding: var(--s2) var(--s3);
+  border: 1.5px solid var(--accent); border-radius: var(--r);
+  background: var(--surface); color: var(--text);
+  font: 600 var(--t-sm)/1.35 var(--font-ui); text-align: left; text-decoration: none;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.pro-box:hover { background: var(--accent-soft); }
+.pro-box:active { transform: scale(0.99); }
+.pro-box:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+.pro-badge {
+  flex: none; padding: 3px 7px; border-radius: 5px;
+  background: var(--accent); color: var(--on-accent);
+  font: 700 var(--t-xs)/1.2 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase;
+}
+.pro-box-line { flex: 1 1 auto; min-width: 0; }
+.pro-box-chev { flex: none; color: var(--accent-on-soft); font-size: 1.5em; line-height: 1; font-weight: 400; }
+.watch-strip > .pro-box, .pf-watch-compact > .pro-box, .watch-toast-next > .pro-box { flex: 1 1 100%; }
+.pf-watch > .pro-box:not(:first-child) { margin-top: var(--s3); }
+.pf-watch-compact > .pro-box { margin-top: 0; }
+.worth .parts-lock.pro-box, .parts-lock.pro-box { margin: var(--s3) 0 0; color: var(--text); }
+.pf-pro-box { margin: 0 0 var(--s3); }
+.wl-pro { margin-top: var(--s2); }
+#alert-vpic-lock, #alerts-push-pro { margin-top: var(--s3); }
+
+/* Tabular digits only where numbers line up (prices, values, counts). Set on
+   body, Inter's tnum also widened hyphens ("6 - cyl", "iPull - uPull"). */
+.part-price, .worth-val, .worth-total, .range-text, .price-core, .cd-allvalue, .chip-n, .stat-num, .wl-count { font-variant-numeric: tabular-nums; }
+.profit-line > .card-pro { flex: 1 1 100%; }
+.cd-life { margin-bottom: var(--s5); }
+.pf-watch-compact > .pf-watch-btn { flex: 1 1 100%; }

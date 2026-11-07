@@ -2850,6 +2850,8 @@ function applyProGates() {
   if (driveEl) { driveEl.disabled = !pro; if (!pro) driveEl.value = ''; }
   if (trimEl) { trimEl.disabled = !pro; if (!pro) trimEl.value = ''; }
   if (lock) lock.style.display = pro ? 'none' : '';
+  const pushPro = document.getElementById('alerts-push-pro');
+  if (pushPro) pushPro.style.display = pro ? 'none' : '';
 }
 
 /* Sorting BY value hands out the value ranking even with prices blurred, so
@@ -3938,7 +3940,7 @@ function carValueParts(v, unlocked, isSampleCard) {
       </div>${extraNote}` : `
       <div class="profit-line">
         ${demand.label ? `<span class="demand-badge ${demand.cls}" title="How quickly parts like these typically get claimed at the yard">${demand.label}</span>` : ''}
-        <button type="button" class="lock-chip" onclick="openUpgradeSheet('card-value','${encodeURIComponent(vehicleKey(v))}')">${ICON.lock} What you’d save &mdash; Pro</button>
+        ${proBoxHtml('See what you’d save on this car', 'card-value', encodeURIComponent(vehicleKey(v)), 'card-pro')}
       </div>`)
       : '';
     nParts = shownParts.length;
@@ -3955,7 +3957,7 @@ function carValueParts(v, unlocked, isSampleCard) {
           <ol class="parts-list worth-list">${rowsOf(topIdx, true)}</ol>
           ${unlocked
             ? (topHi > 0 ? `<p class="worth-total">${topIdx.length > 1 ? `Top ${topIdx.length} together` : 'This part'}: <b>~${formatPrice(Math.round(topLo))}&ndash;${formatPrice(Math.round(topHi))}</b> used online</p>` : '')
-            : `<button type="button" class="lock-text parts-lock" onclick="openUpgradeSheet('part-value','${encodeURIComponent(vehicleKey(v))}')">${ICON.lock} Pro shows what each is worth</button>`}`;
+            : proBoxHtml('See what each part is worth', 'part-value', encodeURIComponent(vehicleKey(v)), 'parts-lock')}`;
     // The whole-car figure (every confirmed part, after pull prices) sits
     // below the full list, labelled, so it never reads as the top-5 total.
     allValueHtml = unlocked && profitLine ? `<section class="cd-allvalue"><p class="eyebrow">All ${mainIdx.length} confirmed part${mainIdx.length === 1 ? '' : 's'} on this car</p>${profitLine}</section>` : '';
@@ -3986,12 +3988,20 @@ function hasRecapChannel() {
     return localStorage.getItem('ys_email_alerts_on') === '1';
   } catch (e) { return false; }
 }
-/* One quiet free-vs-Pro delivery note, true for THIS user. */
-function freeDeliveryNote() {
-  return hasRecapChannel()
-    ? 'Free: in Alerts and your Monday recap. Pro: an alert within hours.'
-    : 'Free: new ones show in Alerts. Pro: an alert within hours.';
+/* The one Pro upsell for free users: a bordered, fully tappable box with a
+ * PRO badge, one line and a chevron, opening the Pro sheet. Pro users get
+ * nothing. trigger/arg are the openUpgradeSheet analytics trigger + arg. */
+function proBoxHtml(line, trigger, arg, cls) {
+  if (isPro()) return '';
+  const a = arg ? `,'${String(arg).replace(/[^A-Za-z0-9%._~-]/g, '')}'` : '';
+  return `<button type="button" class="pro-box${cls ? ' ' + cls : ''}" onclick="event.stopPropagation();openUpgradeSheet('${trigger}'${a})"><span class="pro-badge">Pro</span><span class="pro-box-line">${line}</span><span class="pro-box-chev" aria-hidden="true">&rsaquo;</span></button>`;
 }
+/* The free half of the delivery note, true for THIS user (the Pro half is
+ * the Pro box beside it). */
+function freeDeliveryNote() {
+  return hasRecapChannel() ? 'Free: in Alerts and your Monday recap.' : 'Free: new ones show in Alerts.';
+}
+const PRO_PUSH_LINE = 'An alert within hours when one lands';
 const fmtDay = (d) => d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
 /* "You'd have known sooner", free users, one watch hit: only for a car that
  * landed on or after the day the watch was made (cars already on the lot
@@ -4012,8 +4022,8 @@ function recapLineHtml(v, entries) {
     const today = new Date(); today.setHours(0, 0, 0, 0);
     recap = r < today ? `it was in your free recap ${escapeHtml(fmtDay(r))}` : `your free recap comes ${escapeHtml(fmtDay(r))}`;
   }
-  return `<div class="recap-line">${ICON.bell}<span>Landed ${escapeHtml(fmtDay(landed))}${recap ? ` &middot; ${recap}` : ''} &middot; Pro would have pushed it the day it landed.</span>
-    <button type="button" class="linklike" onclick="openUpgradeSheet('watch-near-miss')">See Pro</button></div>`;
+  return `<div class="recap-line"><p>${ICON.bell}<span>Landed ${escapeHtml(fmtDay(landed))}${recap ? ` &middot; ${recap}` : ''}.</span></p>
+    ${proBoxHtml('Would have pushed it the day it landed', 'watch-near-miss')}</div>`;
 }
 /* "Alert me when the next one lands": the same quick-watch path as a card
  * bell (free limit, radius and Pro gates unchanged). Pro watches push
@@ -4034,7 +4044,7 @@ function nextOneHtml(make, model, cls) {
     ${on
       ? `<p class="next-one-on">${ICON.check} Watching ${escapeHtml(`${make} ${model}`)}${isPro() ? ' &mdash; you’ll get an alert within hours when the next one lands.' : ' &mdash; the next one shows up in Alerts.'}</p>`
       : `<button type="button" class="btn btn-line next-one-btn" data-make="${escapeHtml(make)}" data-model="${escapeHtml(model)}">${ICON.bell} Alert me when the next one lands</button>
-         ${isPro() ? '' : `<button type="button" class="linklike next-one-pro" onclick="openUpgradeSheet('watch-toast')">Pro: instant push</button>`}`}
+         ${proBoxHtml(PRO_PUSH_LINE, 'watch-toast')}`}
   </div>`;
 }
 document.addEventListener('click', (e) => {
@@ -6338,7 +6348,7 @@ function pfRunBrowse(s) {
   const nVin = rows.filter(r => r.badge).length;
   out.classList.toggle('pf-vonly-on', pfCat.kind === 'engine' && pfVerifiedOnly);
   out.innerHTML =
-    `<div class="pf-results-head">${headTop} ${pfSort === 'new' ? 'Newest arrivals first.' : 'Nearest first.'} Yards track cars, not parts left on them &mdash; a long-sitting donor may be picked over.${(!unlocked && !pfCat.noValue) ? ' <span class="lock-text" role="button" onclick="openUpgradeSheet(\'pf-value\')">Pro adds what the same used part goes for online</span>' : ''}</div>`
+    `<div class="pf-results-head">${headTop} ${pfSort === 'new' ? 'Newest arrivals first.' : 'Nearest first.'} Yards track cars, not parts left on them &mdash; a long-sitting donor may be picked over.</div>${(!unlocked && !pfCat.noValue) ? proBoxHtml('See what the same used part goes for online', 'pf-value', '', 'pf-pro-box') : ''}`
     + pfSortRowHtml()
     + (pfCat.kind === 'engine' ? pfVonlyRowHtml(nVin, rows.length - nVin, 'vin') : '')
     + filterNote
@@ -6540,7 +6550,7 @@ function pfWatchHtml(s, compact) {
   const w = pfGenWindow(s.make, s.model, s.year);
   const yrs = w ? `${w[0]}–${w[1]} ` : '';
   return `<div class="pf-watch${compact ? ' pf-watch-compact' : ''}"><p>${compact ? 'Want the next one? Get pinged when' : 'Yards set out new cars every day. Get told when'} another ${escapeHtml(yrs + s.make + ' ' + s.model)} lands near you.${isPro() ? '' : ` <span class="watch-strip-note">${freeDeliveryNote()}</span>`}</p>
-    <button type="button" class="btn btn-line pf-watch-btn" data-make="${escapeHtml(s.make)}" data-model="${escapeHtml(s.model)}" data-ymin="${w ? w[0] : ''}" data-ymax="${w ? w[1] : ''}">${ICON.bell} Watch for another ${escapeHtml(s.model)}</button></div>`;
+    <button type="button" class="btn btn-line pf-watch-btn" data-make="${escapeHtml(s.make)}" data-model="${escapeHtml(s.model)}" data-ymin="${w ? w[0] : ''}" data-ymax="${w ? w[1] : ''}">${ICON.bell} Watch for another ${escapeHtml(s.model)}</button>${proBoxHtml(PRO_PUSH_LINE, 'watch-toast', '', 'strip-pro')}</div>`;
 }
 function pfWatchClick(btn) {
   const { make, model, ymin, ymax } = btn.dataset;
@@ -6886,7 +6896,7 @@ function pfRunSearch() {
   const CAP = 120;
   const unlocked = isPro();
   out.classList.toggle('pf-vonly-on', pfVerifiedOnly);
-  const head = `<div class="pf-results-head"><strong>${rows.length.toLocaleString()} donor car${rows.length === 1 ? '' : 's'}</strong> in range carrying a fitting ${escapeHtml(pfCat.label.toLowerCase())} for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)} &mdash; ${pfSort === 'new' ? 'newest arrivals first' : 'nearest first, then confidence'}. Yards track cars, not parts left on them — a long-sitting donor may be picked over.${(!unlocked && !pfCat.noValue) ? ' <span class="lock-text" role="button" onclick="openUpgradeSheet(\'pf-value\')">Pro adds what the same used part goes for online</span>' : ''}</div>`
+  const head = `<div class="pf-results-head"><strong>${rows.length.toLocaleString()} donor car${rows.length === 1 ? '' : 's'}</strong> in range carrying a fitting ${escapeHtml(pfCat.label.toLowerCase())} for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)} &mdash; ${pfSort === 'new' ? 'newest arrivals first' : 'nearest first, then confidence'}. Yards track cars, not parts left on them — a long-sitting donor may be picked over.</div>${(!unlocked && !pfCat.noValue) ? proBoxHtml('See what the same used part goes for online', 'pf-value', '', 'pf-pro-box') : ''}`
     + pfWatchHtml(s, true)
     + pfSortRowHtml()
     + pfVonlyRowHtml(nVer, rows.length - nVer, pfCat.id === 'engine-assembly' ? 'engine' : 'fit')
@@ -7500,12 +7510,12 @@ function renderAlerts() {
           const lead = missed.length === 1
             ? `One landed on ${escapeHtml(when)}, after you set this watch.`
             : `${missed.length} landed since you set this watch, the first on ${escapeHtml(when)}.`;
-          missLine = `<span class="wl-miss">${lead} Pro would have sent a push within hours. <button type="button" class="linklike" onclick="openUpgradeSheet('watch-near-miss')">See Pro</button></span>`;
+          missLine = `<span class="wl-miss">${lead}</span>${proBoxHtml('Would have sent a push within hours', 'watch-near-miss', '', 'wl-pro')}`;
         }
       }
       // Free watches past the limit are ignored by the alert backend; say so.
       if (!isPro() && i >= FREE_WATCH_LIMIT) {
-        missLine = `<span class="wl-miss wl-off">Not sending alerts &mdash; free covers ${FREE_WATCH_LIMIT} watches. Remove one above, or <button type="button" class="linklike" onclick="openUpgradeSheet('watch-limit')">go Pro for 20</button>.</span>`;
+        missLine = `<span class="wl-miss wl-off">Not sending alerts &mdash; free covers ${FREE_WATCH_LIMIT} watches. Remove one above, or go Pro.</span>${proBoxHtml('Watch up to 20 cars', 'watch-limit', '', 'wl-pro')}`;
       }
       const vpicLabel = (e.driveFilter === '4x4' ? ' &middot; 4WD/AWD only' : e.driveFilter === '2wd' ? ' &middot; 2WD only' : '')
         + (e.trimFilter ? ' &middot; trim &ldquo;' + escapeHtml(e.trimFilter) + '&rdquo;' : '');
@@ -7728,7 +7738,7 @@ function watchStripHtml(nCars) {
   const where = r ? ` within ${r} mi` : (isPro() ? ' anywhere' : ' near you');
   return `<div class="watch-strip" style="grid-column:1/-1;">${ICON.bell}
     <span>${nCars ? 'Want the next one?' : 'None here right now.'} Get pinged when ${nCars ? 'another' : 'one'} <strong>${escapeHtml(sc.label)}</strong> lands${where}.${isPro() ? '' : ` <span class="watch-strip-note">${freeDeliveryNote()}</span>`}</span>
-    <button type="button" class="btn btn-primary btn-sm" onclick="jhWatchSearch()">Watch</button></div>`;
+    <button type="button" class="btn btn-primary btn-sm" onclick="jhWatchSearch()">Watch</button>${proBoxHtml(PRO_PUSH_LINE, 'watch-toast', '', 'strip-pro')}</div>`;
 }
 
 function jhWatchSearch() {
@@ -7784,8 +7794,7 @@ function showWatchToast(label, opts = {}) {
     // that a phone can be told the day one lands.
     next = `<span>New ones light up in Alerts. The free iPhone and Android apps can push you the day one lands.</span>`;
   } else if (!isPro()) {
-    next = `<span>Free: a recap every Monday. Pro: a push within hours.</span>
-      <button type="button" class="linklike" data-act="pro">See Pro</button>`;
+    next = `<span>Free: a recap every Monday.</span>${proBoxHtml('A push within hours instead', 'watch-toast', '', 'toast-pro')}`;
   }
   el.innerHTML = `<div class="watch-toast-head">${opts.undo ? ICON.bell : ICON.check}<span>${head}</span>
       <button type="button" class="watch-toast-x" data-act="close" aria-label="Dismiss">&times;</button></div>

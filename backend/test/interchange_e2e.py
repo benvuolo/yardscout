@@ -238,9 +238,9 @@ with sync_playwright() as pw:
     rows = page.locator("#pf-results .pf-row-card.pf-browse")
     check("free: browse still lists cars", rows.count() > 0)
     # Since 2026-10-26 free rows carry no value at all (no per-row blur);
-    # one honest "Pro adds…" line in the head says what's missing.
-    check("free: browse resale values blurred",
-          page.locator("#pf-results .pf-results-head .lock-text").count() == 1)
+    # one Pro box under the head says what's missing.
+    check("free: browse resale values blurred (one Pro box)",
+          page.locator("#pf-results .pf-pro-box.pro-box").count() == 1)
     import re as _re
     check("free: no real value strings leak",
           not _re.search(r"(online: ~|worth )\$\d", page.locator("#pf-results").inner_text()))
@@ -304,25 +304,38 @@ with sync_playwright() as pw:
       const lead = card ? card.textContent.replace(/\\s+/g, ' ').trim() : '';
       const top = w.querySelector('.worth-list');
       return { n: names.length, first: names[0] || '', lead,
-               lockText: (w.querySelector('.parts-lock') || {}).textContent || '',
+               lockText: (w.querySelector('.parts-lock.pro-box') || {}).textContent || '',
                firstSection: w.firstElementChild && w.firstElementChild.matches('h3.sec') && !!top,
                leak: new RegExp(re).test(top.innerText) || !!top.querySelector(sel) || !!w.querySelector('.worth-total, .cd-allvalue'),
                alsoClosed: !w.querySelector('.also-parts') || !w.querySelector('.also-parts').open };
     }""", [VALUE_RE, VALUE_SEL, free["key"]])
     check("free Worth pulling: up front, top picks (3-5) named, no value strings",
           worth["firstSection"] and 1 <= worth["n"] <= 5 and not worth["leak"], str(worth))
-    check("free Worth pulling: one quiet 'Pro shows what each is worth' line",
-          "Pro shows what each is worth" in worth["lockText"], str(worth))
+    check("free Worth pulling: one Pro box 'See what each part is worth'",
+          "See what each part is worth" in worth["lockText"], str(worth))
     check("free card parts line leads with the car screen's top pick",
           bool(worth["first"]) and ("to check: " + worth["first"]) in worth["lead"], str(worth))
     check("free car screen: 'Also on this car' starts collapsed", worth["alsoClosed"], str(worth))
     # Round 5: the car screen offers "Alert me when the next one lands" (or
-    # says it's already watched); free sees one quiet "Pro: instant push".
+    # says it's already watched); free sees one Pro box stacked under it.
+    # No bare underlined upsell links anywhere on the car screen.
     nx = page.evaluate("""() => { const b = document.getElementById('car-detail');
-      return { btn: !!b.querySelector('.next-one-btn, .next-one-on'), pro: b.querySelectorAll('.next-one-pro').length,
-               watching: !!b.querySelector('.next-one-on') }; }""")
-    check("free car screen: 'Alert me when the next one lands' + one quiet Pro link",
-          nx["btn"] and (nx["pro"] == 1 or nx["watching"]), str(nx))
+      const btn = b.querySelector('.next-one-btn'), box = b.querySelector('.next-one .pro-box');
+      const lh = btn ? parseFloat(getComputedStyle(btn).lineHeight) || 20 : 0;
+      return { btn: !!b.querySelector('.next-one-btn, .next-one-on'), pro: b.querySelectorAll('.next-one .pro-box').length,
+               watching: !!b.querySelector('.next-one-on'),
+               stacked: !btn || !box || box.getBoundingClientRect().top >= btn.getBoundingClientRect().bottom - 1,
+               oneLine: !btn || (btn.getBoundingClientRect().height - parseFloat(getComputedStyle(btn).paddingTop) - parseFloat(getComputedStyle(btn).paddingBottom)) < lh * 1.6,
+               bareLinks: [...b.querySelectorAll('.linklike, .lock-text')].filter(e => e.offsetParent && /pro/i.test(e.textContent)).length }; }""")
+    check("free car screen: 'Alert me when the next one lands' + one Pro box below it",
+          nx["btn"] and (nx["pro"] == 1 or nx["watching"]) and nx["stacked"] and nx["bareLinks"] == 0, str(nx))
+    check("free car screen: the next-one button is one line", nx["oneLine"], str(nx))
+    page.evaluate("document.querySelector('#car-detail .worth .pro-box').click()")
+    page.wait_for_timeout(200)
+    trig = page.evaluate("typeof upgradeTrigger === 'undefined' ? null : upgradeTrigger")
+    check("free car screen: tapping the Pro box opens the Pro sheet", trig == "part-value", str(trig))
+    page.evaluate("typeof closeUpgradeSheet === 'function' && closeUpgradeSheet()")
+    page.wait_for_timeout(200)
     page.screenshot(path=str(SHOTS / "7_car_screen_free.png"))
     page.evaluate("closeCarDetail()")
     page.wait_for_timeout(300)
@@ -377,8 +390,8 @@ with sync_playwright() as pw:
     check("pro Worth pulling: each top pick shows its value, plus a total",
           pworth["rows"] > 0 and pworth["valued"] == pworth["rows"] and pworth["total"], str(pworth))
     pnx = page.evaluate("""() => { const b = document.getElementById('car-detail');
-      return { btn: !!b.querySelector('.next-one-btn, .next-one-on'), pro: b.querySelectorAll('.next-one-pro').length }; }""")
-    check("pro car screen: next-one action, no upsell link", pnx["btn"] and pnx["pro"] == 0, str(pnx))
+      return { btn: !!b.querySelector('.next-one-btn, .next-one-on'), pro: b.querySelectorAll('.pro-box').length }; }""")
+    check("pro car screen: next-one action, no Pro box", pnx["btn"] and pnx["pro"] == 0, str(pnx))
     page.screenshot(path=str(SHOTS / "8_car_screen_pro.png"))
     ctx.close()
     browser.close()

@@ -29,6 +29,7 @@ var ICON = { bell: '' };
 function parseYardDate(s) { if (!s) return null; const d = new Date(s + 'T12:00:00'); d.setHours(0, 0, 0, 0); return d; }
 ${one(/^const RECAP_WEEKDAY = /)}
 ${fn('hasRecapChannel')}
+${fn('proBoxHtml')}
 ${fn('freeDeliveryNote')}
 ${one(/^const fmtDay = /)}
 ${fn('recapLineHtml')}
@@ -47,14 +48,15 @@ const watch = (y, m, d) => [{ addedAt: iso(new Date(y, m - 1, d, 9)) + '~abc123'
 set({ __pro: false, __email: '1' });
 // Tue 2026-11-03 set-out, watch made Sun 2026-11-01 -> next Monday is 2026-11-09
 let h = T.recapLineHtml({ dateAdded: day(2026, 11, 3) }, watch(2026, 11, 1));
-check('free + email recap: names the next Monday after the set-out day', /Landed Tue, Nov 3/.test(h) && /Mon, Nov 9/.test(h) && /Pro would have pushed it the day it landed/.test(h), h);
+check('free + email recap: names the next Monday after the set-out day', /Landed Tue, Nov 3/.test(h) && /Mon, Nov 9/.test(h) && /Would have pushed it the day it landed/.test(h), h);
+check('free: the Pro half is a Pro box that opens the Pro sheet, no bare link', /class="pro-box"/.test(h) && /openUpgradeSheet\('watch-near-miss'\)/.test(h) && !/linklike/.test(h), h);
 check('car that landed before the watch was made: no line', T.recapLineHtml({ dateAdded: day(2026, 10, 20) }, watch(2026, 11, 1)) === '');
 check('unknown set-out date: no line', T.recapLineHtml({ dateAdded: '' }, watch(2026, 11, 1)) === '');
 h = T.recapLineHtml({ dateAdded: day(2026, 11, 2) }, watch(2026, 11, 1));   // a Monday
 check('Monday set-out: no recap date claimed (may or may not make that recap)', !/recap/.test(text(h)) && /Landed Mon, Nov 2/.test(h), h);
 set({ __email: null });
 h = T.recapLineHtml({ dateAdded: day(2026, 11, 3) }, watch(2026, 11, 1));
-check('no recap channel: no recap mentioned, Pro line kept', !/recap/.test(text(h)) && /Pro would have pushed/.test(h), h);
+check('no recap channel: no recap mentioned, Pro line kept', !/recap/.test(text(h)) && /Would have pushed/.test(h), h);
 check('no recap channel: delivery note promises no recap', !/recap/i.test(T.freeDeliveryNote()), T.freeDeliveryNote());
 set({ __email: '1' });
 check('recap channel: delivery note names the Monday recap', /Monday recap/.test(T.freeDeliveryNote()));
