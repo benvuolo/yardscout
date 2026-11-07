@@ -17775,6 +17775,12 @@ _PNS_DATE_RE = re.compile(r"data-value='(\d{4}-\d{2}-\d{2})'")
 PNS_PHOTO_URL = "https://app.pullnsaveapp.com/v1/Vehicles/Images/StockId/{key}/OrderId/1"
 PNS_PHOTO_DELAY_SEC = 10.0
 PNS_PHOTO_CHECK_MAX = int(os.environ.get("PNS_PHOTO_CHECK_MAX", "150"))
+# PAUSED 2026-11-07 (hub/owner): no Pull-N-Save image fetches at all until
+# further notice. U-Pull-R's CTO (same gm_vehicle_search platform) said
+# scanners pulling many images are why they added their check, and an
+# official API is expected. Already-verified 'photo' results still publish
+# (that only references the yard's URL). Un-pause = set this to False.
+PNS_PHOTO_CHECKS_PAUSED = True
 PNS_PHOTO_RECHECK_DAYS = 3
 PNS_PLACEHOLDER_SHA256 = "77e3d56a6763faae23e1bd6d425aabc086cba7221556e28c131ed277ed3d7e4b"
 PNS_PLACEHOLDER_MAX_BYTES = 8192   # bodies this small are read and hashed
@@ -17834,7 +17840,8 @@ def _pns_apply_photo_checks(vehicles: list, *, check=None, now=None, sleep=time.
     todo += [v["_pns_photo_key"] for v in keyed
              if known.get(v["_pns_photo_key"], ("", ""))[0] == "none"
              and known[v["_pns_photo_key"]][1] < recheck_before]
-    todo = list(dict.fromkeys(todo))[:max(PNS_PHOTO_CHECK_MAX, 0)]
+    cap = 0 if PNS_PHOTO_CHECKS_PAUSED else max(PNS_PHOTO_CHECK_MAX, 0)
+    todo = list(dict.fromkeys(todo))[:cap]
     results: dict = {}
     errors = 0
     if todo:

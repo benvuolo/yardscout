@@ -257,6 +257,20 @@ choice.
 
 ### Pull-N-Save placeholder (solved, fails closed)
 
+**PAUSED 2026-11-07 (hub, for the owner).** `PNS_PHOTO_CHECKS_PAUSED = True`
+in `junkyard_scraper.py`, so the checker makes no image requests at all.
+Reason: U-Pull-R's CTO, whose company appears to run the same
+gm_vehicle_search platform, told the owner that scanners pulling many images
+are why they added their check, and an official API is expected.
+
+Already-verified `photo` results still publish, since that only references
+the yard's URL. As of the pause, the only checks ever made were 18 manual
+samples on 2026-11-06. No scan ran with the checker on and a non-empty
+backlog, so there are few or no verified Pull-N-Save photos. Un-pause by
+setting the flag to `False`, only when the owner says so (or switch to the
+official API).
+
+
 - **The problem:** every row links
   `…/StockId/{STK}-{n}/OrderId/1`, and a car without a photo gets the same
   3,474 B "no image" PNG.
@@ -475,4 +489,4 @@ jh-v150+. The first message is kept below for the record.
 3. After each monthly sweep: review tiers A–B in `coverage_sweep.md`, verify
    each has self-service inventory online before adding.
 4. Chains frozen for 6+ scans show in the daily email as `chain-frozen:<chain>`.
-5. Photos: Rupert's and Chuck & Eddie's non-expiring YardSmart URLs (yardconnect parser, per-URL exp check). Watch the Pull-N-Save backlog in the scan log ("[Pull-N-Save photos] … still unchecked"). After the next scan, confirm `photoSources` in `inv/manifest.json` and real PnP/WAP code counts; compare PnP/WAP URLs across scans. Sample the Ario, CRUSH and remaining chains, and re-check WAP URL stability after a few scans.
+5. Photos: Rupert's and Chuck & Eddie's non-expiring YardSmart URLs (yardconnect parser, per-URL exp check). Pull-N-Save checker is PAUSED (2026-11-07); watch the backlog in the scan log only once un-paused ("[Pull-N-Save photos] … still unchecked"). After the next scan, confirm `photoSources` in `inv/manifest.json` and real PnP/WAP code counts; compare PnP/WAP URLs across scans. Sample the Ario, CRUSH and remaining chains, and re-check WAP URL stability after a few scans.
