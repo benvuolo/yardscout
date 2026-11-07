@@ -17874,6 +17874,92 @@ def _pns_apply_photo_checks(vehicles: list, *, check=None, now=None, sleep=time.
     return {"checked": len(results), "photo": n_photo, "pending": pending}
 
 
+# Pull-N-Save make/model (2026-11-07, hub-approved accuracy fix). The site's
+# per-make results carry rows whose OWN text contradicts their VIN: the
+# Audi query returns "2013 AUDI A3" with VIN JTEBU5JR0D5116438 (a 2013
+# 4Runner), "1985 AUDI 4000" with a 1985 Chrysler VIN, and the Acura query
+# "MDX" rows whose VIN is a Dodge Grand Caravan. The VIN's model year agrees
+# with the row's year in every case checked, so the VIN wins. The adapter used
+# to stamp the QUERIED make on every row. Now, per row:
+#   1. A confident cached VIN decode (vPIC cache; no new requests) whose make
+#      differs from the row's make -> decoded make + concrete model ("vin").
+#      When it agrees, the row's own model text stays (downstream blob
+#      resolution still refines it with the decode).
+#   2. No confident decode: the row's own model text (query-make prefix
+#      stripped); make = the one make that model belongs to in the previous
+#      scan's models.json (>= PNS_MODEL_OWNER_MIN cars) ("model"). Otherwise the
+#      queried make, flagged not-pickable ("nopick").
+PNS_MODEL_OWNER_MIN = 10
+PNS_MAKE_STATS: dict[str, int] = {}
+
+
+def _pns_model_owners(path: Path | None = None) -> dict[str, set[str]]:
+    """squashed model -> make display names with >= PNS_MODEL_OWNER_MIN cars,
+    from the previously published models.json (no requests)."""
+    try:
+        makes = json.loads((path or (DATA_DIR / "models.json")).read_text()).get("makes") or {}
+    except Exception:  # noqa: BLE001
+        return {}
+    out: dict[str, set[str]] = {}
+    for mk, models in makes.items():
+        if not isinstance(models, dict):
+            continue
+        for md, n in models.items():
+            if isinstance(n, int) and n >= PNS_MODEL_OWNER_MIN:
+                out.setdefault(_squash_model_key(md), set()).add(mk)
+    return out
+
+
+def _pns_strip_make_prefix(model_text: str, query_make: str) -> str:
+    m, q = model_text.strip(), query_make.strip()
+    if q and m.upper().startswith(q.upper() + " "):
+        return m[len(q):].strip()
+    return m
+
+
+def pns_resolve_make_model(query_make: str, model_text: str, vin_dec: dict | None,
+                           owners: dict[str, set[str]]) -> tuple[str, str, bool, str]:
+    """(make, model, pickable, rule) for one Pull-N-Save row; see above."""
+    own_model = _utpap_format_label(_pns_strip_make_prefix(model_text, query_make))
+    dec_make = ((vin_dec or {}).get("make") or "").strip()
+    dec_model = _decode_concrete_model(vin_dec)
+    if dec_make and dec_model:
+        row_make = query_make
+        hit = owners.get(_squash_model_key(own_model)) or set()
+        if len(hit) == 1:
+            row_make = next(iter(hit))
+        if _decode_make_agrees(row_make, dec_make) or _decode_make_agrees(query_make, dec_make):
+            return _utpap_format_label(row_make), own_model, True, "vin_agrees"
+        if dec_model.isupper():  # NHTSA sometimes answers in capitals ('FIFTH AVENUE')
+            dec_model = _utpap_format_label(dec_model)
+        return _utpap_format_label(dec_make), dec_model, True, "vin"
+    hit = owners.get(_squash_model_key(own_model)) or set()
+    if len(hit) == 1:
+        return _utpap_format_label(next(iter(hit))), own_model, True, "model"
+    return _utpap_format_label(query_make), own_model, False, "nopick"
+
+
+def _pns_resolve_makes(vehicles: list[dict], *, lookup=None, owners=None) -> None:
+    if lookup is None:
+        try:
+            import db as _db
+        except ImportError:
+            from scraper import db as _db  # pragma: no cover
+        lookup = _db.vin_decode
+    owners = _pns_model_owners() if owners is None else owners
+    PNS_MAKE_STATS.clear()
+    for v in vehicles:
+        vin = v.get("vin") or ""
+        dec = _correct_vpic(lookup(vin), vin) if len(vin) == 17 else None
+        mk, md, pick, rule = pns_resolve_make_model(
+            v.get("_pns_query_make") or v.get("make") or "", v.get("model") or "", dec, owners)
+        v["make"], v["model"] = mk, md
+        if not pick:
+            v["_noPickAdapter"] = True
+        PNS_MAKE_STATS[rule] = PNS_MAKE_STATS.get(rule, 0) + 1
+    print(f"  [Pull-N-Save make/model] {dict(sorted(PNS_MAKE_STATS.items()))}", file=sys.stderr)
+
+
 def fetch_pns_inventory() -> list[dict]:
     """Fetch Pull-N-Save's 8-yard inventory (one getVehicles POST per make,
     10s apart per their robots.txt crawl-delay — ~8 min per scan)."""
@@ -17949,6 +18035,7 @@ def fetch_pns_inventory() -> list[dict]:
                 "year": year_i,
                 "make": _utpap_format_label(make_name),
                 "model": _utpap_format_label(model_s),
+                "_pns_query_make": make_name,
                 "row": row_n,
                 "dateAdded": date_iso,
                 "_color": color,
@@ -17964,7 +18051,15 @@ def fetch_pns_inventory() -> list[dict]:
         print(f"  [Pull-N-Save] skipped rows from unmapped store(s): "
               f"{sorted(unknown_stores)} — update PNS_STORES/registry", file=sys.stderr)
     seen: set[str] = set()
+    # One row per stock number across the per-make queries (first wins; the
+    # make is decided below from the VIN / the model, never from the query).
     unique = [v for v in all_vehicles if not (v["id"] in seen or seen.add(v["id"]))]
+    try:
+        _pns_resolve_makes(unique)
+    except Exception as e:  # noqa: BLE001 — never lose the chain over this
+        print(f"  [Pull-N-Save make/model] skipped: {e}", file=sys.stderr)
+    for v in unique:
+        v.pop("_pns_query_make", None)
     try:
         _pns_apply_photo_checks(unique)
     except Exception as e:  # noqa: BLE001 — photos are optional, never fatal
@@ -25578,7 +25673,7 @@ def output_json(vehicles: list[dict], only_matches: bool = True):
                 entry["vpicDriveType"] = vp["driveType"]
         if v.get("_vpic_mismatch"):
             entry["vpicMismatch"] = v["_vpic_mismatch"]
-        if v.get("_noPick"):
+        if v.get("_noPick") or v.get("_noPickAdapter"):
             entry["noPick"] = True
         output.append(entry)
     return output
