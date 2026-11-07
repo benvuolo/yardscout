@@ -98,12 +98,12 @@ function fmtReqLine(g) {
 async function sendDigestEmail(env, groups, total) {
   const to = env.OWNER_EMAIL;
   if (!to) { console.log('coverage digest: OWNER_EMAIL not configured — skipped'); return false; }
-  const lines = groups.map(fmtReqLine);
   const subject = `YardScout coverage requests — ${total} new`;
   const text =
     `${total} new coverage request${total === 1 ? '' : 's'} from the Parts tab since the last digest:\n\n`
-    + lines.map((l) => `• ${l}`).join('\n')
-    + `\n\nFull list (emails + notes): GET /v1/admin/coverage with x-admin-secret.\n`
+    + groups.map((g) => `• ${fmtReqLine(g)}` + (g.extras || []).map((x) =>
+        `\n    ${x.note ? `"${x.note}"` : '(no note)'}${x.email ? ` — reply to ${x.email}` : ''}`).join('')).join('\n')
+    + `\n\nFull history: GET /v1/admin/coverage with x-admin-secret.\n`
     + `Requests like these decide what the coverage workers verify next.\n`;
   const esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   const html =
@@ -112,10 +112,11 @@ async function sendDigestEmail(env, groups, total) {
   <p style="color:#bbb;font-size:14px;margin:0 0 4px;">YardScout — Parts tab</p>
   <h2 style="margin:0 0 14px;font-size:19px;color:#fff;">${total} new coverage request${total === 1 ? '' : 's'}</h2>
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${groups.map((g) => `
-    <tr><td style="padding:8px 0;border-bottom:1px solid #2a2a2a;color:#ddd;font-size:14px;">${esc(fmtReqLine(g))}</td></tr>`).join('')}
+    <tr><td style="padding:8px 0;border-bottom:1px solid #2a2a2a;color:#ddd;font-size:14px;">${esc(fmtReqLine(g))}${(g.extras || []).map((x) => `
+      <div style="margin:6px 0 0 12px;color:#bbb;font-size:13px;">${x.note ? `&ldquo;${esc(x.note)}&rdquo;` : '(no note)'}${x.email ? ` &mdash; reply to <a style="color:#f26b1d;" href="mailto:${esc(x.email)}">${esc(x.email)}</a>` : ''}</div>`).join('')}</td></tr>`).join('')}
   </table>
   <p style="color:#999;font-size:13px;line-height:1.6;margin:16px 0 0;">
-    Full list with emails and notes: <code>GET /v1/admin/coverage</code> (x-admin-secret).
+    Full history: <code>GET /v1/admin/coverage</code> (x-admin-secret).
     Requests like these decide what the coverage workers verify next.</p>
 </div></body>`;
 
@@ -166,6 +167,16 @@ export async function maybeSendCoverageDigest(env) {
   ).bind(since).all()).results || [];
   const total = groups.reduce((n, g) => n + g.requests, 0);
   if (!total) return { sent: false, reason: 'no_new_requests', since };
+  // Owner-only email: include what people actually wrote (and their email, if
+  // they left one, so the owner can reply). Never logged.
+  const extras = (await env.DB.prepare(
+    `SELECT request_key, email, note FROM coverage_requests
+      WHERE created_at > ?1 AND (note IS NOT NULL OR email IS NOT NULL)
+      ORDER BY id DESC LIMIT 100`
+  ).bind(since).all()).results || [];
+  for (const g of groups) {
+    g.extras = extras.filter((x) => x.request_key === g.request_key).slice(0, 5);
+  }
 
   const delivered = await sendDigestEmail(env, groups, total);
   if (delivered) {
