@@ -210,3 +210,40 @@ Open / next:
   `canonModelLow`) lack rav4sport/priusawde/t100pickup; the scan's alert
   matcher handles them. Add to both together (the mirror-agreement test
   requires it).
+
+## 2026-11-07 — follow-up: another make's model without a make word; comma decodes
+
+Commit d40a940, scan 42318061784 (published 4ebc0aa, 02:00Z). Rule
+`resolve_other_make_model`: model not known for the row's make (< 3 cars)
+and owned by exactly one other-family make (>= 10 cars) -> confident VIN
+decode (make agrees with the row's make or the owner) wins; else noPick.
+Skipped: numeric names, makes outside the mainstream list, Sprinter twins;
+a decode agreeing with the row's model leaves it as is. `resolve_model_blob`
+treats comma decodes ("750i, Alpina B7") as unconfident.
+
+Counts. Pre-scan, on the 00:19Z data: 33 cars resolved by VIN (2 change
+make), 9 noPick, 8 comma-named BMWs back to "7 Series". In the CI scan log:
+other_vin 3, other_nopick 8, vin 20, scion_vin 10, twin 10. Live noPick
+now: Chevrolet Capri/Ram1500, Chrysler XTS, Ford KONA, Mercury Aspen,
+Plymouth SW, Pontiac Optima, Subaru Bravada.
+Known false positive: a Dodge "Lancer" with no decode would be flagged
+noPick (a real 1985-89 car). That follows the hub's "no decode -> noPick".
+
+Follow-up commit (no scan dispatched; the next scheduled scan applies it): a
+row whose own model is a comma list is flagged noPick. One car: US Auto
+Supply's VIN-only feed takes the model straight from the decode ("750Lxi,
+Alpina B7").
+
+**Open, needs a hub/owner call — Pull-N-Save scramble moves between
+columns.** `fetch_pns_inventory` sets `make` to the make we QUERIED
+(getVehicles per make); the site's per-make answers include other makes'
+cars with wrong models. Which column is wrong changes from scan to scan.
+At 00:19Z JTEBU5JR0D5116438 was Toyota "Audi A3" (fixed to 4Runner); at
+02:00Z the same car came back as Audi "A3", which no make-in-model rule can
+catch. The 02:00Z data has 59 Pull-N-Save cars whose row make contradicts
+a confident VIN decode across corporate families (e.g. Acura "MDX" =
+Dodge Grand Caravan / Kia Optima / Subaru Outback). Proposed fix: for
+Pull-N-Save rows only, take make/model from a confident decode when the
+decode's make is in another family. Basis: the row's make there is our
+query parameter, not the yard's data. Not done; it belongs to the
+Pull-N-Save adapter (yards workstream) and needs a decision.

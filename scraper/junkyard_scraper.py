@@ -25172,6 +25172,12 @@ def enrich_vehicles(
                 if rule == "other_vin" and mk2 != v.get("make"):
                     FOREIGN_MAKE_STATS["other_vin_make_changed"] = FOREIGN_MAKE_STATS.get("other_vin_make_changed", 0) + 1
         v["make"], v["model"] = mk2, md2
+        if pick and "," in md2:
+            # A comma list as the row's own model ('750Lxi, Alpina B7': VIN-only
+            # feeds take the model straight from the decode) names no one
+            # model: searchable, never a pick.
+            pick, rule = False, "comma_nopick"
+            FOREIGN_MAKE_STATS[rule] = FOREIGN_MAKE_STATS.get(rule, 0) + 1
         if not pick:
             v["_noPick"] = True
         else:

@@ -605,6 +605,11 @@ for make, model, dec, want in [
 for blob, dm in [("7 Series", "750i, Alpina B7"), ("7 Series", "750Li, Alpina B7"), ("7 Series", "750Lxi, Alpina B7")]:
     check(f"BMW {blob!r} + decode {dm!r} keeps {blob!r}", R(blob, "BMW", _dec("BMW", dm, "7-Series")) == blob,
           R(blob, "BMW", _dec("BMW", dm, "7-Series")))
+cars2 = [{"id": 20, "vin": "", "year": 2012, "make": "BMW", "model": "750Lxi, Alpina B7"},
+         {"id": 21, "vin": "", "year": 2012, "make": "BMW", "model": "750Li"}]
+js.enrich_vehicles(cars2)
+check("enrich: comma model kept as text, flagged noPick", cars2[0]["model"] == "750Lxi, Alpina B7" and cars2[0].get("_noPick"))
+check("enrich: plain model not flagged", not cars2[1].get("_noPick"))
 check("BMW '7 Series' + decode '750i' still resolves", R("7 Series", "BMW", _dec("BMW", "750i")) == "750i")
 
 check("app and worker mirror tables agree (same keys, same values modulo case)",
