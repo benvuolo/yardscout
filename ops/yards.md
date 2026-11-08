@@ -245,6 +245,8 @@ Sweep follow-ups (mine):
      `test_iis_timeout_retry.py`.
    - Midway's frozen index is the yard's issue; noted for outreach if it
      stays frozen.
+   - **Verified:** scan 42499474067 (includes a631d750, published
+     2026-11-08T17:31Z): Muncie 419 cars again, Liberty 344.
 
 ## 2026-11-07 Pull-N-Save make/model accuracy fix (hub-approved)
 
