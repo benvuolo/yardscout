@@ -211,6 +211,17 @@ Sweep follow-ups (mine):
 
 ## 2026-11-08 daily ops email: frozen and missing yards
 
+0. **Utah Pic-A-Part - Orem (Premium)** (owner asked "is this right?"):
+   **correct, source-side.** utpap.com's own `invupdPremiumOrem.html` still
+   filters `VEHICLE_ROW` 900–925 (Ogden 294–300), which matches
+   `UTPAP_PREMIUM_ROW_RANGE`.
+   - `1065_inventory.xml` (2026-11-08) has 86 cars in 900–925, newest
+     YARD_DATE 2026-07-05.
+   - No other row is ≥ 600, and no REFERENCE says PREMIUM. Regular Orem has
+     661 cars, newest 11-03.
+   - The yard has added no premium cars since July; the warning stands, and
+     there is no code change.
+
 1. **Wrench-A-Part:** the source is frozen for **Holland only**. WAP's own
    API returns the same 1,113 Holland cars, newest set-out 2026-10-09, so we
    are not re-serving a stale copy.
