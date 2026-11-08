@@ -248,6 +248,8 @@ def write_inventory_shards(payload: dict, extras: dict | None, data_dir: Path,
         # make -> model strings never offered in a model picker (they stay
         # searchable); see output_json's noPickModels.
         "noPickModels": payload.get("noPickModels") or {},
+        # make -> model -> [minYear, maxYear]; see compact_inventory_v2.
+        "modelYears": payload.get("modelYears") or {},
     })
     return {"shards": shard_count, "vehicles": len(vehicles),
             "minShard": min(len(r) for r in rows_by), "maxShard": max(len(r) for r in rows_by),

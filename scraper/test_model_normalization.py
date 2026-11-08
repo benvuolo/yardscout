@@ -649,6 +649,66 @@ js.merge_carryforward_yards(newp, prevp, ["B"])
 check("carry-forward: clean carried Geo Storm un-lists it; flagged pairs stay",
       newp["noPickModels"] == {"Plymouth": ["SW"], "Pontiac": ["Optima"]}, str(newp["noPickModels"]))
 
+# ---- junk model names (owner report 2026-11-08, Parts tab 2003 Chevrolet) ---
+print("junk model names:")
+JK, RJ = js.junk_model_kind, js.resolve_junk_model
+for make, model, want in [
+    ("Chevrolet", "chevy", "alias"), ("Smart", "Smart", "alias"), ("Dodge", "Dodge", "alias"),
+    ("Chevrolet", "Caprice Classic Or Impala", "alternatives"), ("Isuzu", "Rodeo/Amigo", "alternatives"),
+    ("Audi", "A3/S3", "alternatives"), ("Chevrolet", "Cargo Van", "body"), ("Ford", "Wagon", "body"),
+    ("Chevrolet", "Van", "body"), ("Ford", "Truck", "body"), ("Packard", "Sedan", "body"),
+    # real names stay
+    ("Toyota", "Pickup", ""), ("Nissan", "Pickup", ""), ("Nissan", "Truck", ""), ("Mazda", "Truck", ""),
+    ("Toyota", "Van", ""), ("Saturn", "SW", ""), ("MINI", "Convertible", ""), ("Volkswagen", "Bus", ""),
+    ("Dodge", "Ram Van", ""), ("Dodge", "Ram", ""), ("Land Rover", "Range Rover", ""),
+    ("Cadillac", "Fleetwood", ""), ("Chevrolet", "C/K 1500", ""), ("Chevrolet", "R/V 20", ""),
+    ("Ram", "C/V", ""), ("Chevrolet", "Blazer S10/Jimmy S15", ""), ("Chevrolet", "S10/S15/Sonoma", ""),
+    ("Dodge", "Caravan/Grand Caravan", ""), ("GMC", "Jimmy Or Envoy", ""), ("Lexus", "SC 300/400", ""),
+    ("Other", "Other", ""), ("Trailer", "Trailer", ""), ("Chevrolet", "Impala", ""),
+]:
+    check(f"junk kind {make} {model!r} -> {want!r}", JK(make, model) == want, JK(make, model))
+for make, model, dec, want in [
+    ("Chevrolet", "Caprice Classic Or Impala", _dec("CHEVROLET", "Impala"), ("Impala", True, "junk_vin")),
+    ("Chevrolet", "Cargo Van", _dec("CHEVROLET", "Express", "2500 (3/4 Ton)"), ("Express 2500", True, "junk_vin")),
+    ("Chevrolet", "chevy", _dec("CHEVROLET", "Malibu"), ("Malibu", True, "junk_vin")),
+    ("Chevrolet", "chevy", None, ("chevy", False, "junk_nopick")),
+    ("Chevrolet", "Cargo Van", _dec("FORD", "E-250"), ("Cargo Van", False, "junk_nopick")),  # make disagrees
+    ("Ford", "Wagon", _dec("FORD", "Wagon"), ("Wagon", False, "junk_nopick")),              # decode no better
+    ("Toyota", "Pickup", _dec("TOYOTA", "Pickup"), ("Pickup", True, "")),
+]:
+    got = RJ(make, model, dec)
+    check(f"{make} {model!r} dec={dec and dec['make']+' '+dec['model']} -> {want}", got == want, str(got))
+
+for mk_ in ("Chevrolet", "GMC"):
+    for raw_ in ("S10/s15/sonoma Truck", "S10/S15/Sonoma Pickup"):
+        check(f"{mk_} {raw_!r} -> 'S10/S15/Sonoma'", N(raw_, mk_) == "S10/S15/Sonoma", N(raw_, mk_))
+        check(f"scan alert: watch {mk_}/{raw_!r} matches car 'S10/S15/Sonoma'",
+              _scan_alert_matches(mk_, raw_, mk_, N(raw_, mk_)))
+
+# ---- modelYears: per make|model span for year-appropriate pickers -----------
+print("modelYears:")
+ye = [_ent(1, "Chevrolet", "Chevelle", False), _ent(2, "Chevrolet", "Chevelle", False),
+      _ent(3, "Chevrolet", "Impala", False), _ent(4, "Chevrolet", "Impala", False), _ent(5, "Chevrolet", "Impala", False)]
+ye[0]["year"], ye[1]["year"] = 1970, 1972
+ye[2]["year"], ye[3]["year"], ye[4]["year"] = 2003, 2003, 1999
+ye[4]["spanYear"] = 2008          # VIN model year wins over the listing year
+ye.append(dict(_ent(6, "Chevrolet", "Impala", False), year=0))       # unknown year skipped
+ye.append(dict(_ent(7, "Chevrolet", "Impala", False), year=2091))    # implausible skipped
+ply = js.compact_inventory_v2(ye)
+check("modelYears Chevelle [1970, 1972]", ply["modelYears"]["Chevrolet"]["Chevelle"] == [1970, 1972], str(ply["modelYears"]))
+check("modelYears Impala [2003, 2008] (VIN year, junk years skipped)",
+      ply["modelYears"]["Chevrolet"]["Impala"] == [2003, 2008], str(ply["modelYears"]))
+with _tf.TemporaryDirectory() as td:
+    js.DATA_DIR = Path(td)
+    try:
+        js._write_models_json(ply)
+        mj3 = _json.loads((Path(td) / "models.json").read_text())
+    finally:
+        js.DATA_DIR = _old_dd
+check("models.json carries modelYears", mj3["modelYears"] == ply["modelYears"])
+cy = js.enrich_vehicles([{"id": 30, "vin": "", "year": 2003, "make": "Chevrolet", "model": "Impala"}])
+check("enrich sets _spanYear from the listing year without a decode", cy[0].get("_spanYear") == 2003, str(cy[0].get("_spanYear")))
+
 check("app and worker mirror tables agree (same keys, same values modulo case)",
       all(set(APP.get(m, {})) == set(SRV.get(m, {})) and
           all(APP[m][k].lower() == SRV[m][k] for k in APP.get(m, {})) for m in set(APP) | set(SRV)),

@@ -24159,6 +24159,8 @@ _MODEL_CANON_BY_MAKE: dict[str, dict[str, str]] = {
         "escaladeesv": "Escalade ESV", "ats": "ATS", "allante": "Allante",
     },
     "chevrolet": {
+        # 2026-11-08: Hollander twin name + body word -> the canon twin name
+        "s10s15sonomatruck": "S10/S15/Sonoma", "s10s15sonomapickup": "S10/S15/Sonoma",
         "s10pickup": "S-10", "s10pu": "S-10", "c10": "C10",
         "c10pickup": "C10", "belair": "Bel Air", "vega": "Vega",
         "trailblazerext": "Trailblazer EXT",
@@ -24250,6 +24252,8 @@ _MODEL_CANON_BY_MAKE: dict[str, dict[str, str]] = {
         "f100truck": "F-100", "f100pickup": "F-100",
     },
     "gmc": {
+        # 2026-11-08: Hollander twin name + body word -> the canon twin name
+        "s10s15sonomatruck": "S10/S15/Sonoma", "s10s15sonomapickup": "S10/S15/Sonoma",
         "sierra1500pickup": "Sierra 1500", "sierra2500pickup": "Sierra 2500",
         "sierrack1500": "Sierra 1500", "sierrack2500": "Sierra 2500",
         "sierrack3500": "Sierra 3500",
@@ -25017,6 +25021,83 @@ def resolve_other_make_model(make: str, model: str, vin_dec: dict | None,
     return make, model, False, "other_nopick"
 
 
+# ---------------------------------------------------------------------------
+# Junk model names (owner report 2026-11-08, Parts tab 2003 Chevrolet list):
+# a model that is only a make name ('chevy' under Chevrolet, 'Smart' under
+# Smart), offers alternatives ('Caprice Classic Or Impala', 'Rodeo/Amigo'),
+# a bare body type ('Cargo Van', 'Wagon', 'Sedan'), or 'Unknown'. Confident VIN
+# decode (make agrees) -> decoded model; else noPick (searchable, never a
+# pick). Real nameplates that look generic stay, each with its basis:
+_JUNK_MODEL_REAL = {
+    # make alias that IS a model name
+    ("landrover", "rangerover"), ("dodge", "ram"), ("cadillac", "fleetwood"), ("hyundai", "genesis"),
+    # bare 'Pickup' sold as the model name (Toyota/Nissan/Datsun/Isuzu/
+    # Mitsubishi/Mazda/VW compact trucks before their names: Hilux, Hardbody,
+    # P'up, Mighty Max, B-Series, Rabbit Pickup)
+    ("toyota", "pickup"), ("nissan", "pickup"), ("datsun", "pickup"), ("isuzu", "pickup"),
+    ("mitsubishi", "pickup"), ("mazda", "pickup"), ("volkswagen", "pickup"),
+    ("nissan", "truck"),        # 'Nissan Truck' 1986-97 (Hardbody's US name)
+    ("mazda", "truck"),         # 'Mazda Truck' 2002-09 (B-Series' US name)
+    ("toyota", "van"),          # Toyota Van 1984-89
+    ("mitsubishi", "van"),      # Mitsubishi Van 1987-90
+    ("saturn", "sw"),           # Saturn SW1/SW2 wagon
+    ("mini", "convertible"),    # MINI Convertible
+    ("volkswagen", "bus"),      # VW Type 2 'Bus'
+}
+_JUNK_BODY_KEYS = {"van", "cargovan", "passengervan", "fullsizevan", "minivan", "wagon", "stationwagon",
+                   "truck", "pickup", "pickuptruck", "sedan", "coupe", "convertible", "hatchback", "suv",
+                   "car", "bus", "sw", "utility", "cutaway", "chassiscab", "boxtruck", "unknown"}
+_JUNK_SKIP_MAKES = {"other", "trailer", "atvmotorcycle", "misc", ""}
+_JUNK_OR_RE = re.compile(r"\bor\b", re.IGNORECASE)
+
+
+def _canon_slash_names() -> set[str]:
+    vals = set(_MODEL_CANON.values())
+    for t in (_MODEL_CANON_BY_MAKE, _HOLLANDER_MODEL_CANON):
+        for d in t.values():
+            vals.update(d.values())
+    return {_squash_model_key(v) for v in vals if "/" in v}
+
+
+_CANON_SLASH_KEYS: set[str] | None = None
+
+
+def junk_model_kind(make: str, model: str) -> str:
+    """'' or the junk kind: 'alias', 'alternatives', 'body'."""
+    global _CANON_SLASH_KEYS
+    mk, key = _make_key(make), _squash_model_key(model)
+    if mk in _JUNK_SKIP_MAKES or not key or (mk, key) in _JUNK_MODEL_REAL:
+        return ""
+    if key == mk or key in _MAKE_IN_MODEL or key in _MAKE_IN_MODEL_ALIASES or key in _MAKE_ALIASES:
+        return "alias"
+    if key in _JUNK_BODY_KEYS:
+        return "body"
+    if _JUNK_OR_RE.search(model) or "/" in model:
+        if _CANON_SLASH_KEYS is None:
+            _CANON_SLASH_KEYS = _canon_slash_names()
+        # Canon forms (C/K 1500, R/V 20, Blazer S10/Jimmy S15, Caravan/Grand
+        # Caravan) and registered VIN blobs ('SC 300/400', 'Jimmy Or Envoy')
+        # are the app's own names, never junk.
+        if key in _CANON_SLASH_KEYS or _is_model_blob(model, make) or re.match(r"^[A-Za-z]/[A-Za-z]\b", model):
+            return ""
+        return "alternatives"
+    return ""
+
+
+def resolve_junk_model(make: str, model: str, vin_dec: dict | None,
+                       known: dict[str, dict[str, str]] | None = None) -> tuple[str, bool, str]:
+    """(model, pickable, rule) — rule '' / 'junk_vin' / 'junk_nopick'."""
+    if not junk_model_kind(make, model):
+        return model, True, ""
+    dm = _decode_concrete_model(vin_dec)
+    if dm and _decode_make_agrees(make, (vin_dec or {}).get("make") or ""):
+        new_model = resolve_model_blob(normalize_model(dm, make), make, vin_dec)
+        if not junk_model_kind(make, new_model) and _squash_model_key(new_model) != _squash_model_key(model):
+            disp = ((known or {}).get(_make_key(make)) or {}).get(_squash_model_key(new_model))
+            return disp or new_model, True, "junk_vin"
+    return model, False, "junk_nopick"
+
+
 _SCION_MODEL_KEYS = {"tc", "xa", "xb", "xd", "iq", "ia", "im", "frs"}
 
 
@@ -25276,6 +25357,10 @@ def enrich_vehicles(
                 FOREIGN_MAKE_STATS[rule] = FOREIGN_MAKE_STATS.get(rule, 0) + 1
                 if rule == "other_vin" and mk2 != v.get("make"):
                     FOREIGN_MAKE_STATS["other_vin_make_changed"] = FOREIGN_MAKE_STATS.get("other_vin_make_changed", 0) + 1
+        if not rule:
+            md2, pick, rule = resolve_junk_model(mk2, md2, vin_dec, known_models)
+            if rule:
+                FOREIGN_MAKE_STATS[rule] = FOREIGN_MAKE_STATS.get(rule, 0) + 1
         v["make"], v["model"] = mk2, md2
         if pick and "," in md2:
             # A comma list as the row's own model ('750Lxi, Alpina B7': VIN-only
@@ -25314,6 +25399,7 @@ def enrich_vehicles(
                 vy = 0
             if vy:
                 match_year = vy
+        v["_spanYear"] = match_year   # modelYears: VIN year, else the listing's
         v["_matches"] = match_vehicle(
             match_year, v.get("make", ""), v.get("model", ""),
             vin_decode=vin_dec,
@@ -25685,6 +25771,8 @@ def output_json(vehicles: list[dict], only_matches: bool = True):
             entry["vpicMismatch"] = v["_vpic_mismatch"]
         if v.get("_noPick") or v.get("_noPickAdapter"):
             entry["noPick"] = True
+        if v.get("_spanYear"):
+            entry["spanYear"] = v["_spanYear"]
         output.append(entry)
     return output
 
@@ -25777,6 +25865,20 @@ def _yard_lifespan_lookup() -> dict[str, tuple[int, str]]:
     return out
 
 
+def _span_add(spans: dict, make: str, model: str, year) -> None:
+    try:
+        y = int(year or 0)
+    except (TypeError, ValueError):
+        return
+    if not make or not model or y < 1900 or y > datetime.now(timezone.utc).year + 1:
+        return
+    sp = spans.setdefault(make, {}).get(model)
+    if sp is None:
+        spans[make][model] = [y, y]
+    else:
+        sp[0], sp[1] = min(sp[0], y), max(sp[1], y)
+
+
 def compact_inventory_v2(entries: list[dict]) -> dict:
     """Schema v2: dedupe yards + part lists into lookup tables and store vehicles
     as flat arrays. Identical part lists repeat across every vehicle of the same
@@ -25811,7 +25913,9 @@ def compact_inventory_v2(entries: list[dict]) -> dict:
         if not e.get("noPick"):
             clean_pairs.add((e.get("make", ""), e.get("model", "")))
 
+    spans: dict[str, dict[str, list[int]]] = {}
     for e in entries:
+        _span_add(spans, e.get("make", ""), e.get("model", ""), e.get("spanYear") or e.get("year"))
         if e.get("noPick") and (e.get("make", ""), e.get("model", "")) not in clean_pairs:
             no_pick.setdefault(e.get("make", ""), set()).add(e.get("model", ""))
         ykey = (e.get("location", ""), e.get("city", ""), e.get("state", ""),
@@ -25889,6 +25993,10 @@ def compact_inventory_v2(entries: list[dict]) -> dict:
         # and no VIN/known-model basis to fix it). A make|model pair is
         # listed only when EVERY car carrying it is flagged.
         "noPickModels": {mk: sorted(ms) for mk, ms in sorted(no_pick.items())},
+        # make -> model -> [minYear, maxYear] over this scan's lot cars (VIN
+        # model year where decoded, else the listing year; implausible years
+        # skipped). Pickers show a model for a selected year within span +-1.
+        "modelYears": {mk: dict(sorted(v.items())) for mk, v in sorted(spans.items())},
         "vehicles": rows,
         "_extras": extras,
     }
@@ -26118,7 +26226,8 @@ def _write_models_json(payload: dict) -> None:
     (DATA_DIR / "models.json").write_text(json.dumps(
         {"scrapedAt": payload.get("scrapedAt"),
          "makes": {mk: dict(sorted(v.items())) for mk, v in sorted(makes.items())},
-         "noPick": {mk: dict(sorted(v.items())) for mk, v in sorted(no_pick.items())}},
+         "noPick": {mk: dict(sorted(v.items())) for mk, v in sorted(no_pick.items())},
+         "modelYears": payload.get("modelYears") or {}},
         separators=(",", ":")))
 
 
@@ -26367,6 +26476,7 @@ def merge_carryforward_yards(new_payload: dict, prev_payload: dict,
             # A carried row keeps the not-pickable flag it was published with
             # (its pair was listed then, so every car of it was flagged).
             mk_c, md_c = new_row[f.index("make")], new_row[f.index("model")]
+            _span_add(new_payload.setdefault("modelYears", {}), mk_c, md_c, new_row[f.index("year")])
             if md_c in (prev_payload.get("noPickModels") or {}).get(mk_c, ()):
                 np_listed.add((mk_c, md_c))
             else:
