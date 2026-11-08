@@ -414,7 +414,9 @@ function yardFlags(h) {
       c.total++;
       if ((y.unchangedScans || 0) >= CHAIN_STUCK_SCANS) {
         c.stuck++;
-        if (y.lastChangedAt && (!c.since || y.lastChangedAt < c.since)) c.since = y.lastChangedAt;
+        // "Unchanged since" must be true of every stuck yard, so it is the
+        // LATEST change among them (the oldest date overstated chain freezes).
+        if (y.lastChangedAt && (!c.since || y.lastChangedAt > c.since)) c.since = y.lastChangedAt;
       }
       chains.set(chain, c);
     }
@@ -441,6 +443,9 @@ function yardFlags(h) {
   missing.sort((a, b) => b.missingScans - a.missingScans);
   const chainFrozen = [...chains.values()]
     .filter((c) => c.total >= CHAIN_MIN_YARDS && c.stuck / c.total >= CHAIN_FROZEN_SHARE)
+    // Same-day detection stays, but a stuck window with no weekday in it is
+    // labelled as possibly just a quiet weekend (yards rarely post Sat/Sun).
+    .map((c) => ({ ...c, weekendOnly: !!c.since && weekdaysBetween(Date.parse(c.since), scraped) === 0 }))
     .sort((a, b) => b.total - a.total);
   return { scrapedAt: h.scrapedAt || null, yards: Object.keys(h.yards).length, dormant, frozen, carried, missing, chainFrozen };
 }
@@ -517,7 +522,7 @@ function composeDaily(r) {
     L.push(`  MISSING from the scan (users can't see them): ${yh.missing.length}${yh.missing.length ? ' — ' + nameList(yh.missing, (y) => `${y.name} (${y.reason}; ${y.missingScans} scans)`) : ''}`);
     L.push(`  Re-serving last copy (fetch returned nothing): ${yh.carried.length}${yh.carried.length ? ' — ' + nameList(yh.carried, (y) => `${y.name} (since ${String(y.lastChangedAt).slice(5, 10)})`) : ''}`);
     if (yh.chainFrozen && yh.chainFrozen.length) {
-      L.push(`  CHAIN FEED FROZEN (same-day): ${yh.chainFrozen.map((c) => `${c.chain} — ${c.stuck} of ${c.total} yards unchanged since ${String(c.since || '').slice(5, 16)}`).join('; ')}`);
+      L.push(`  CHAIN FEED FROZEN (same-day): ${yh.chainFrozen.map((c) => `${c.chain} — ${c.stuck} of ${c.total} yards unchanged since ${String(c.since || '').slice(5, 16)}${c.weekendOnly ? ' (weekend: may just be quiet)' : ''}`).join('; ')}`);
     }
     L.push(`  Frozen, unchanged 3+ weekdays at the source: ${yh.frozen.length}${yh.frozen.length ? ' — ' + nameList(yh.frozen, (y) => `${y.name} (${String(y.lastChangedAt).slice(5, 10)})`) : ''}`);
   } else {
@@ -960,7 +965,7 @@ export async function buildDailyReport(env, { now = Date.now() } = {}) {
   }
   if (yardHealth && yardHealth.chainFrozen && yardHealth.chainFrozen.length) {
     for (const c of yardHealth.chainFrozen) {
-      conds.push({ id: 'chain-frozen:' + c.chain, title: `${c.chain}'s feed looks frozen: ${c.stuck} of ${c.total} yards unchanged since ${String(c.since || '').slice(0, 16)}` });
+      conds.push({ id: 'chain-frozen:' + c.chain, title: `${c.chain}'s feed looks frozen: ${c.stuck} of ${c.total} yards unchanged since ${String(c.since || '').slice(0, 16)}${c.weekendOnly ? ' (weekend: may just be quiet)' : ''}` });
     }
   }
   if (watchCheck && !watchCheck.error && watchCheck.newlyOrphaned.length) {
