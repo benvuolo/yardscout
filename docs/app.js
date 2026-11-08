@@ -832,9 +832,29 @@ function isNoPickModel(make, model) {
   const l = noPickModels[make];
   return Array.isArray(l) && l.includes(model);
 }
+/* Per-model year spans the scan publishes ({make: {rawModel: [first, last]}})
+ * so a model picker with a year chosen offers only models built within a year
+ * of it (no 2003 Chevelle). Missing field = today's behaviour (no year
+ * filter); a model with no published span is kept, never hidden. */
+let modelYearSpans = null;
+function setModelYears(m) {
+  modelYearSpans = (m && typeof m === 'object' && !Array.isArray(m)) ? m : null;
+}
+/* lo/hi: the chosen year range (either may be null = open). Overlap with the
+ * model's span widened by one year each side. */
+function modelFitsYears(make, model, lo, hi) {
+  if (!modelYearSpans || (!lo && !hi)) return true;
+  const span = modelYearSpans[make] && modelYearSpans[make][model];
+  if (!Array.isArray(span)) return true;
+  const a = Number(span[0]), b = Number(span[1]);
+  if (!Number.isFinite(a) || !Number.isFinite(b) || !a || !b) return true;
+  return a - 1 <= (hi || Infinity) && b + 1 >= (lo || -Infinity);
+}
+const yearVal = (id) => { const el = document.getElementById(id); return (el && parseInt(el.value, 10)) || null; };
 
 function parseInventoryPayload(raw) {
   setNoPickModels(raw && !Array.isArray(raw) ? raw.noPickModels : null);
+  setModelYears(raw && !Array.isArray(raw) ? raw.modelYears : null);
   {
     if (raw && raw.schemaVersion === 2 && Array.isArray(raw.vehicles)) {
       // v2 compact format: expand lookup-table rows into full vehicle objects.
@@ -1656,6 +1676,7 @@ function _invApply(s) {
   applyPricesReviewed(m.pricesLastReviewed);
   setPublishedPhotoSources(m.photoSources);
   setNoPickModels(m.noPickModels);
+  setModelYears(m.modelYears);
   vehicleExtras = s.extras;
   s.applied = new Set(s.parsed.keys());
   if (complete) s.done = true;
@@ -2370,13 +2391,17 @@ function populateModelFilter() {
     return;
   }
   btn.disabled = false;   // location gate lives in updateFilterAvailability
-  const counts = new Map();
+  const counts = new Map(), yLo = yearVal('live-filter-year-min'), yHi = yearVal('live-filter-year-max');
+  let yearHidden = new Map();
   for (const v of _scopedVehicles) {
     if (v.make === make && v.model && !isNoPickModel(v.make, v.model)) {
       const m = canonicalModel(make, v.model);
-      counts.set(m, (counts.get(m) || 0) + 1);
+      const bucket = modelFitsYears(v.make, v.model, yLo, yHi) ? counts : yearHidden;
+      bucket.set(m, (bucket.get(m) || 0) + 1);
     }
   }
+  // A model already picked stays listed when only the year range hides it.
+  for (const m of selectedModels) if (!counts.has(m) && yearHidden.has(m)) counts.set(m, yearHidden.get(m));
   // Drop selections that no longer exist in scope (make change, radius change).
   for (const m of [...selectedModels]) if (!counts.has(m)) selectedModels.delete(m);
   renderModelList(counts);
@@ -6027,8 +6052,10 @@ function pfPopulateModels() {
     return;
   }
   const models = new Map(); // squashed -> display
+  const yr = yearVal('pf-year');
   for (const v of liveInventory) {
     if (canonicalMake(v.make) !== make || !v.model || isNoPickModel(v.make, v.model)) continue;
+    if (!modelFitsYears(v.make, v.model, yr, yr)) continue;
     const disp = canonicalModel(v.make, v.model);
     const key = pfSquashModel(disp, make);
     if (key && !models.has(key)) models.set(key, disp);
@@ -6036,14 +6063,19 @@ function pfPopulateModels() {
   if (interchangeData) {
     const pools = [...interchangeData.engineFamilies,
                    ...interchangeData.platformGroups.map(g => ({ apps: g.apps }))];
+    // Curated nameplates: with a year chosen (and spans published), only
+    // names whose own interchange years reach within a year of it.
+    const yrOk = (a) => !(modelYearSpans && yr) || !(Number(a[2]) && Number(a[3])) || (a[2] - 1 <= yr && a[3] + 1 >= yr);
     for (const f of pools) {
       for (const a of f.apps) {
-        if (!a[0].split('|').includes(make) || a[1].endsWith('*')) continue;
+        if (!a[0].split('|').includes(make) || a[1].endsWith('*') || !yrOk(a)) continue;
         const key = pfSquash(a[1]);
         if (key && !models.has(key)) models.set(key, a[1]);
       }
     }
   }
+  // The car already chosen is never dropped by the year filter.
+  if (prev && ![...models.values()].includes(prev)) models.set(pfSquash(prev), prev);
   mSel.innerHTML = '<option value="">Model</option>' +
     [...models.values()].sort((a, b) => a.localeCompare(b))
       .map(m => `<option>${escapeHtml(m)}</option>`).join('');
@@ -7043,7 +7075,7 @@ document.getElementById('pf-results').addEventListener('click', e => {
 document.getElementById('pf-go').addEventListener('click', pfRunSearch);
 ['pf-year', 'pf-make', 'pf-model'].forEach(id => {
   document.getElementById(id).addEventListener('change', () => {
-    if (id === 'pf-make') pfPopulateModels();
+    if (id === 'pf-make' || id === 'pf-year') pfPopulateModels();
     // Keep a chosen engine family across car-field changes: a browse-mode
     // "Vortec 5.3" pick survives adding a make filter, and carries into the
     // fitment flow when it's valid for the car (the chips validate it).
@@ -7880,8 +7912,9 @@ function populateWatchModelOptions() {
   }
   btn.disabled = false;
   _watchModelCounts = new Map();
+  const yLo = yearVal('alert-yr-min'), yHi = yearVal('alert-yr-max');
   for (const v of liveInventory) {
-    if (v.make === make && v.model && !isNoPickModel(v.make, v.model)) {
+    if (v.make === make && v.model && !isNoPickModel(v.make, v.model) && modelFitsYears(v.make, v.model, yLo, yHi)) {
       _watchModelCounts.set(v.model, (_watchModelCounts.get(v.model) || 0) + 1);
     }
   }
@@ -7892,6 +7925,17 @@ function populateWatchModelOptions() {
   renderWatchModelList();
   updateWatchModelBtnLabel();
 }
+
+/* Year range changed: re-list models for it, keeping every model already
+ * picked (an edited watch's stored model is never dropped, rule 6). */
+function refreshWatchModelsForYears() {
+  if (!document.getElementById('alert-make').value) return;
+  const keep = new Map([...watchSelectedModels].map(m => [m, _watchModelCounts.get(m) || 0]));
+  populateWatchModelOptions();
+  for (const [m, n] of keep) { watchSelectedModels.add(m); if (!_watchModelCounts.has(m)) _watchModelCounts.set(m, n); }
+  renderWatchModelList(); updateWatchModelBtnLabel();
+}
+['alert-yr-min', 'alert-yr-max'].forEach(id => document.getElementById(id).addEventListener('change', refreshWatchModelsForYears));
 
 function renderWatchModelList() {
   const list = document.getElementById('alert-model-list');
@@ -7981,6 +8025,7 @@ function editWatchItem(idx) {
   if (e.model) { watchSelectedModels.add(e.model); _watchModelCounts.has(e.model) || _watchModelCounts.set(e.model, 0); renderWatchModelList(); updateWatchModelBtnLabel(); }
   document.getElementById('alert-yr-min').value = e.yrMin || '';
   document.getElementById('alert-yr-max').value = e.yrMax || '';
+  refreshWatchModelsForYears();
   // Legacy watches (no radiusMi key) predate the picker: offer the free cap.
   document.getElementById('alert-radius').value = !('radiusMi' in e) ? '250' : (e.radiusMi ? String(e.radiusMi) : (isPro() ? '' : '250'));
   document.getElementById('alert-match-only').checked = !!e.matchOnly;
