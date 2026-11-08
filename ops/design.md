@@ -95,6 +95,14 @@ sheet" in the UI only (jh_saved and watch storage untouched, rule 6); map deferr
   next-one button one line from 375px); interchange, pf_ux, yaris, no_pick_models, all node units pass;
   part_finder known M3 only. Artifact section "Final round: the Pro box".
 
+### Follow-up: model pickers follow the year (2026-11-08; owner: 2003 Chevrolet offered Chevelle, Chevette, Celebrity, Caprice)
+- On main. App reads `modelYears` {make: {rawModel: [first, last]}} from inventory_live.json and
+  inv/manifest.json (data session publishes it). With a year chosen, Parts "Your car", the Cars model
+  filter and the Alerts watch builder offer only models whose span reaches within one year. No year =
+  all; field missing = today's behaviour; no span = kept; a picked model is never dropped. Shell jh-v157.
+- Tests: model_years_unit, model_years_e2e (both data paths), ui_no_truncation picker screens,
+  interchange, pf_ux, no_pick_models, all node units pass. Reaches native apps in the next release.
+
 ## Earlier state (2026-11-06, exploration)
 
 - Branch: `design/redesign-2026-11` (exploration only; nothing merged).
