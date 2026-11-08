@@ -25802,9 +25802,17 @@ def compact_inventory_v2(entries: list[dict]) -> dict:
     rows: list[list] = []
     vpic: dict[str, list] = {}
     no_pick: dict[str, set[str]] = {}
+    # A pair is listed only when EVERY car carrying it is flagged: one
+    # unresolved Pull-N-Save "F-150" must not hide 9,000 real F-150s
+    # (2026-11-08 regression: Geo Tracker, Ford F-150, Mazda3 ... vanished
+    # from models.json `makes` because a few cars of each were flagged).
+    clean_pairs: set[tuple[str, str]] = set()
+    for e in entries:
+        if not e.get("noPick"):
+            clean_pairs.add((e.get("make", ""), e.get("model", "")))
 
     for e in entries:
-        if e.get("noPick"):
+        if e.get("noPick") and (e.get("make", ""), e.get("model", "")) not in clean_pairs:
             no_pick.setdefault(e.get("make", ""), set()).add(e.get("model", ""))
         ykey = (e.get("location", ""), e.get("city", ""), e.get("state", ""),
                 e.get("lat"), e.get("lng"))
@@ -26293,6 +26301,11 @@ def merge_carryforward_yards(new_payload: dict, prev_payload: dict,
     if f != prev_payload["fields"]:
         raise ValueError("field layout changed between payloads — cannot carry forward")
     i_id, i_yard, i_pset = f.index("id"), f.index("yard"), f.index("partSet")
+    # noPickModels after the merge: listed pairs minus any pair that has a
+    # clean car on either side (new rows of a pair not listed are clean).
+    i_mk, i_md = f.index("make"), f.index("model")
+    np_listed = {(mk, md) for mk, ms in (new_payload.get("noPickModels") or {}).items() for md in ms}
+    np_clean = {(r[i_mk], r[i_md]) for r in new_payload["vehicles"]} - np_listed
     targets = set(yard_names)
     new_names = [y[0] for y in new_payload["yards"]]
     prev_names = [y[0] for y in prev_payload["yards"]]
@@ -26351,12 +26364,13 @@ def merge_carryforward_yards(new_payload: dict, prev_payload: dict,
                 new_row[i_pset] = npi
             new_ri = len(new_payload["vehicles"])
             new_payload["vehicles"].append(new_row)
-            # A carried row keeps the not-pickable flag it was published with.
+            # A carried row keeps the not-pickable flag it was published with
+            # (its pair was listed then, so every car of it was flagged).
             mk_c, md_c = new_row[f.index("make")], new_row[f.index("model")]
             if md_c in (prev_payload.get("noPickModels") or {}).get(mk_c, ()):
-                npm = new_payload.setdefault("noPickModels", {})
-                if md_c not in npm.setdefault(mk_c, []):
-                    npm[mk_c] = sorted(npm[mk_c] + [md_c])
+                np_listed.add((mk_c, md_c))
+            else:
+                np_clean.add((mk_c, md_c))
             pv = prev_vpic.get(str(prev_i))
             if pv is not None:
                 new_payload["vpic"][str(new_ri)] = pv
@@ -26366,6 +26380,10 @@ def merge_carryforward_yards(new_payload: dict, prev_payload: dict,
                     new_extras[str(new_row[i_id])] = pe
             n += 1
         carried[yname] = n
+    final: dict[str, list[str]] = {}
+    for mk, md in sorted(np_listed - np_clean):
+        final.setdefault(mk, []).append(md)
+    new_payload["noPickModels"] = final
     return carried
 
 

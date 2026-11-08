@@ -612,6 +612,43 @@ check("enrich: comma model kept as text, flagged noPick", cars2[0]["model"] == "
 check("enrich: plain model not flagged", not cars2[1].get("_noPick"))
 check("BMW '7 Series' + decode '750i' still resolves", R("7 Series", "BMW", _dec("BMW", "750i")) == "750i")
 
+# ---- noPick is pair-level only when EVERY car of the pair is flagged --------
+# 2026-11-08 regression: one unresolved Pull-N-Save "Tracker" (adapter flag)
+# moved all 27 Geo Trackers out of models.json `makes`; the daily ops email
+# then reported a saved "Geo Tracker" watch as matching no car.
+print("noPick pairs need every car flagged:")
+def _ent(i, make, model, flag):
+    e = {"id": i, "vin": "", "year": 1995, "make": make, "model": model, "row": "", "dateAdded": "",
+         "location": "Y", "city": "C", "state": "AZ", "lat": 1.0, "lng": 2.0, "maxValue": 0, "topParts": []}
+    if flag:
+        e["noPick"] = True
+    return e
+mixed = [_ent(1, "Geo", "Tracker", True), _ent(2, "Geo", "Tracker", False), _ent(3, "Geo", "Tracker", False),
+         _ent(4, "Plymouth", "SW", True), _ent(5, "Ford", "F-150", True)] + [_ent(10 + i, "Ford", "F-150", False) for i in range(5)]
+plm = js.compact_inventory_v2(mixed)
+check("mixed pair Geo Tracker not listed", "Tracker" not in plm["noPickModels"].get("Geo", []), str(plm["noPickModels"]))
+check("mixed pair Ford F-150 not listed", "F-150" not in plm["noPickModels"].get("Ford", []), str(plm["noPickModels"]))
+check("all-flagged pair Plymouth SW listed", plm["noPickModels"] == {"Plymouth": ["SW"]}, str(plm["noPickModels"]))
+with _tf.TemporaryDirectory() as td:
+    js.DATA_DIR = Path(td)
+    try:
+        js._write_models_json(plm)
+        mj2 = _json.loads((Path(td) / "models.json").read_text())
+    finally:
+        js.DATA_DIR = _old_dd
+check("models.json: Geo Tracker stays in makes with all 3 cars", mj2["makes"].get("Geo", {}).get("Tracker") == 3, str(mj2["makes"]))
+check("models.json: Ford F-150 stays in makes with all 6 cars", mj2["makes"].get("Ford", {}).get("F-150") == 6)
+check("models.json: Plymouth SW under noPick", mj2["noPick"] == {"Plymouth": {"SW": 1}}, str(mj2["noPick"]))
+# carry-forward: a carried clean car un-lists a pair; a carried flagged car
+# keeps it listed only when no clean car of it exists
+_y2 = lambda name: dict(location=name, city="C", state="AZ", lat=1.0, lng=2.0)
+new_e = [dict(_ent(1, "Plymouth", "SW", True), **_y2("A")), dict(_ent(2, "Geo", "Storm", True), **_y2("A"))]
+prev_e = [dict(_ent(7, "Geo", "Storm", False), **_y2("B")), dict(_ent(8, "Pontiac", "Optima", True), **_y2("B"))]
+newp, prevp = js.compact_inventory_v2(new_e), js.compact_inventory_v2(prev_e)
+js.merge_carryforward_yards(newp, prevp, ["B"])
+check("carry-forward: clean carried Geo Storm un-lists it; flagged pairs stay",
+      newp["noPickModels"] == {"Plymouth": ["SW"], "Pontiac": ["Optima"]}, str(newp["noPickModels"]))
+
 check("app and worker mirror tables agree (same keys, same values modulo case)",
       all(set(APP.get(m, {})) == set(SRV.get(m, {})) and
           all(APP[m][k].lower() == SRV[m][k] for k in APP.get(m, {})) for m in set(APP) | set(SRV)),
