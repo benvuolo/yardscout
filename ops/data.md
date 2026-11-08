@@ -247,3 +247,38 @@ Pull-N-Save rows only, take make/model from a confident decode when the
 decode's make is in another family. Basis: the row's make there is our
 query parameter, not the yard's data. Not done; it belongs to the
 Pull-N-Save adapter (yards workstream) and needs a decision.
+
+## 2026-11-08 — Geo Tracker watch regression; junk model names; modelYears
+
+**Geo Tracker (5aa00ba, scan 42499474067, live 17:31Z).** The daily email
+reported a saved "Geo Tracker" watch matching no car. No car was renamed (the
+VIN rules skip Geo; Prizm/Metro/Storm untouched). Cause: noPickModels was
+built per make|model pair from ANY flagged car. The PNS adapter flag
+(3edce5b) on one undecoded PNS "Tracker" (Geo or Chevrolet) moved all 27 Geo
+Trackers out of models.json `makes`. The same thing hid Ford F-150 (9,374),
+Mazda3 (2,256), Sierra 1500, Express 2500, Fiat 500 ... Fix: a pair is listed
+only when every car of it is flagged, in compact_inventory_v2 and in the
+carry-forward merge. After: Geo Tracker 27 back, noPick 23 cars. No watch,
+matcher or app change. "Ford Mustang Svt Cobra" and "Infiniti Q60 Coupe" are
+already absent from the oldest models.json in the clone (2026-11-06 06:02,
+before the VIN rules): no lot car carries those names, unrelated.
+
+**Junk model names (3667837, live in the scheduled scan 42504914255,
+18:43Z).** `junk_model_kind`: make alias ("chevy", "Smart", "Dodge"),
+alternatives (" or ", "/" except canon names like C/K 1500 and Blazer
+S10/Jimmy S15, and VIN blobs like SC 300/400 and Jimmy Or Envoy), bare body
+type or "Unknown". Confident VIN decode -> decoded model, else noPick. Real
+generic names are kept, with the basis in `_JUNK_MODEL_REAL` (Toyota/Nissan
+Pickup, Nissan/Mazda Truck, Toyota/Mitsubishi Van, Saturn SW, MINI
+Convertible, VW Bus, Dodge Ram, Range Rover, Fleetwood). "S10/S15/Sonoma
+Pickup|Truck" fold into the canon "S10/S15/Sonoma". Audit on the 12:05Z
+data: alias 49 cars (19 VIN / 30 noPick), alternatives 45 (9 / 36), body or
+Unknown 77 (3 / 74). After publish: 0 junk names left in models.json `makes`;
+noPick 134 cars / 72 names.
+
+**modelYears** {make: {model: [min, max]}} (VIN model year where decoded,
+else the listing year; 1900..now+1) in inventory_live.json,
+inv/manifest.json and models.json: 81 makes / 2,053 pairs. The app on main
+(design, 8bbac6d) filters pickers to span +-1. 2003 Chevrolet: 62 of 211
+names. Limits: one span per model, no gaps (Caprice [1966, 2017]); a typo
+year only widens (Impala min 1901 from an undecoded listing).
