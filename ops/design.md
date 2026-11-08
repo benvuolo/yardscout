@@ -102,6 +102,10 @@ sheet" in the UI only (jh_saved and watch storage untouched, rule 6); map deferr
   all; field missing = today's behaviour; no span = kept; a picked model is never dropped. Shell jh-v157.
 - Tests: model_years_unit, model_years_e2e (both data paths), ui_no_truncation picker screens,
   interchange, pf_ux, no_pick_models, all node units pass. Reaches native apps in the next release.
+- Premium lots (hub, same day): UTPAP "(Premium)" yards show a lifespan only from their own history
+  (model entry, the scan's own yard figure, or their own typical in model_lifespan.json), never the
+  chain/all-yards average. Orem Premium (chain 83) and Ogden Premium now show none. Shell jh-v158.
+  Test: lifespan_premium_unit.
 
 ## Earlier state (2026-11-06, exploration)
 
