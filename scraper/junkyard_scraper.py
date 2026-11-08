@@ -19423,6 +19423,7 @@ def refresh_nvpap_pricing_file() -> Path:
 # pacing. Both addresses geocode exactly.
 YARDSCOUT_HEADERS = {**HEADERS, "User-Agent": "YardScout/1.12 (+https://yardscout.io)"}
 IIS_UPULL_DELAY_SEC = 2.0
+IIS_UPULL_TIMEOUT_RETRY_PAUSE = 30.0
 IIS_UPULL_SITES: dict[str, dict] = {
     "papva": {
         "label": "Pick-A-Part VA",
@@ -19558,8 +19559,17 @@ def _iis_upull_get(site: dict, url: str) -> str | None:
     """Plain GET; curl_cffi fallback only for sites flagged cffi_fallback."""
     label = site["label"]
     try:
-        r = requests.get(url, headers={**site.get("headers", YARDSCOUT_HEADERS),
-                                       "Accept": "text/html"}, timeout=60)
+        hdrs = {**site.get("headers", YARDSCOUT_HEADERS), "Accept": "text/html"}
+        try:
+            r = requests.get(url, headers=hdrs, timeout=60)
+        except requests.Timeout as e:
+            # 2026-11-08: midwayupull.com timed out once at 60 s (normally ~5 s)
+            # and the Muncie yard dropped out of the scan. Slow server, not a
+            # block: the same request once more, later, with more patience.
+            print(f"  [{label}] timed out ({e}); retrying once in "
+                  f"{IIS_UPULL_TIMEOUT_RETRY_PAUSE:.0f}s", file=sys.stderr)
+            time.sleep(IIS_UPULL_TIMEOUT_RETRY_PAUSE)
+            r = requests.get(url, headers=hdrs, timeout=120)
         r.raise_for_status()
         if "iis-uPull" in r.text or "car-details-uPull" in r.text:
             return r.text

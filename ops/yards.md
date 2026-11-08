@@ -209,6 +209,32 @@ Sweep follow-ups (mine):
     Albuquerque 5.6 km.
   - The app shows the new pins after the next scan.
 
+## 2026-11-08 daily ops email: frozen and missing yards
+
+1. **Wrench-A-Part:** the source is frozen for **Holland only**. WAP's own
+   API returns the same 1,113 Holland cars, newest set-out 2026-10-09, so we
+   are not re-serving a stale copy.
+   - The other six WAP yards fetch live (11,279 cars). Their newest set-outs
+     are 11-06; their last change was late 11-06 to 11-07 UTC (weekend since).
+   - The email's chain line ("5 of 5 since 10-22") counts every yard
+     unchanged for 6+ scans and prints the OLDEST lastChangedAt, here
+     Holland's. That's an `ops_monitor.js` wording issue (hub's file); not
+     changed here.
+2. **Pull-A-Part and BYOT:** the weekend, not our side. Both fetch live
+   (PAP 42,683 cars from 35 yards; BYOT 5,318). Newest set-outs are 11-05 to
+   11-07, and nothing new since Friday. No stale-keep involved.
+3. **Midway Muncie:** the source has been frozen since 10-23 at both
+   Midway yards (Muncie 419 cars, Liberty 344, newest set date 10-23). That
+   explains Liberty's "identical for 59 scans".
+   - On 11-08 the Muncie page timed out once at 60 s; it loads in ~5 s
+     otherwise. Stale-keep had already passed its 30-scan cap (the yard was
+     unchanged), so it published 0 and Muncie dropped out.
+   - **Fix:** `_iis_upull_get` retries a read timeout once, after 30 s, with
+     a 120 s timeout. Same request; other errors are not retried. Test:
+     `test_iis_timeout_retry.py`.
+   - Midway's frozen index is the yard's issue; noted for outreach if it
+     stays frozen.
+
 ## 2026-11-07 Pull-N-Save make/model accuracy fix (hub-approved)
 
 **Problem** (data-quality session): Pull-N-Save cars contradicted their
