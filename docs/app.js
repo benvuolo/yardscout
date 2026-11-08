@@ -1083,8 +1083,19 @@ function lifespanFor(v) {
         fast: !!(y.typical && m[0] <= LIFESPAN_FAST_RATIO * y.typical) };
     }
   }
-  if (v.yardAvgLifespan) return { avg: v.yardAvgLifespan, basis: v.yardLifespanBasis || 'all', fast: false };
-  return null;
+  return yardLifespan(v.location, v.yardAvgLifespan, v.yardLifespanBasis);
+}
+/* Premium lots (UTPAP "(Premium)" rows) keep cars for months, so a chain or
+ * all-yards average misleads there: they use only their own history (the
+ * scan's yard figure, or this yard's own typical in model_lifespan.json),
+ * else no lifespan at all. Other yards are unchanged. */
+const isPremiumLot = (loc) => /\(premium\)\s*$/i.test(loc || '');
+function yardLifespan(loc, avg, basis) {
+  basis = basis || 'all';
+  if (!isPremiumLot(loc)) return avg ? { avg, basis, fast: false } : null;
+  if (avg && basis === 'yard') return { avg, basis, fast: false };
+  const y = modelLifespan && modelLifespan.yards && modelLifespan.yards[loc];
+  return y && y.typical > 0 ? { avg: y.typical, basis: 'yard', fast: false } : null;
 }
 
 /* ===== SALE DAYS (chain sale calendars -> data/sale_events.json) =====
@@ -5007,9 +5018,10 @@ function renderYards() {
     const chain = CHAIN_PRICE_PAGES.find(c => c[0].test(y.location));
     const place = [y.city, y.state].filter(Boolean).join(', ');
     const distTxt = y.dist != null ? ` <span class="dist">&middot; ${Math.round(y.dist)}\u00a0mi</span>` : '';
-    const life = y.avgLifespan
-      ? `Cars typically last ~${y.avgLifespan} days here` +
-        (y.lifespanBasis === 'chain' ? ' (chain average)' : y.lifespanBasis === 'all' ? ' (all-yards average)' : '')
+    const yl = yardLifespan(y.location, y.avgLifespan, y.lifespanBasis);
+    const life = yl
+      ? `Cars typically last ~${yl.avg} days here` +
+        (yl.basis === 'chain' ? ' (chain average)' : yl.basis === 'all' ? ' (all-yards average)' : '')
       : 'Not enough departure history yet for a typical-lifespan estimate';
     return `
       <div class="car-card yard-card" data-loc="${escapeHtml(y.location)}" role="button" tabindex="0"
