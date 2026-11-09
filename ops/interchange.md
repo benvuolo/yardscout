@@ -2493,6 +2493,17 @@ Other outputs of this session:
   - The policy/positions change ships in ONE push with all 9 namespaces re-curated
     (identical or explained) and test_groups_hash green. interchange/wheels-curation also has a
     pending policy.py change: whoever pushes second rebases and re-curates.
+  - Queued for the categories app branch, NOT to be added yet (session_016ZzJfMnemMEFN88kPnYgxs,
+    20:41 UTC): 4 new INTERCHANGE_PART_CATEGORIES entries, all kind "engine": radiator,
+    ac-compressor, ac-condenser, fuel-pump-module. They ship ONLY with Spectra aftermarket groups
+    and same-generation donors, never path E. They wait for the Spectra §11.4 sample (0 WRONG)
+    and the hub's confirm. Before adding:
+    - ac-condenser has no coverage_matrix candidate list. Validate its proposed tokens against
+      the yards' price lists.
+    - ac-compressor and fuel-pump-module have no CAND_EXCL. Add the proposed exclusions
+      (clutch/line/hose/mech; relay/filter/driver module/line) and check them on the lists.
+    - App: body-gated aftermarket rows carry a 6th element (body). `_am_group_entry` unpacks 5,
+      so add body support or those rows get dropped.
   - Then the curation build (design above). Per category, a §11.4 sample (60, independent
     session, 0 WRONG) and the hub's confirm before any app change on
     `interchange/categories-<n>`.
