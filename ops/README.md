@@ -39,6 +39,8 @@ section of ops/interchange.md:
   continues session_016ZzJfKdkBXaVYDDQb9cy2J from its §8 handover)
 - aftermarket application catalogs (Depo, Cardone/ACI, Spectra, Four
   Seasons): session_016ZzJfMnemMEFN88kPnYgxs
+- source scout 2 (strut/suspension makers, OE-brand retail catalogs):
+  session_016ZzJfKZ49mzzQhu4KT7HkU
 Shared oem_fitment code: pull --rebase, run curation_tests + tests before
 every push. One crawl run at a time. Nothing ships to users without a §11.4
 sample with 0 WRONG and the hub's confirmation.
