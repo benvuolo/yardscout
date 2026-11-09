@@ -65,7 +65,10 @@ li = sp.parse_listing(li["children"][0], '[{"vehicule_id":7},{"vehicule_id":8}]'
 ok(li["products"] == [sp.vehicle_url("7"), sp.vehicle_url("8")], "motorizations -> vehicles")
 root = sp.parse_listing(sp.BASE + "/en", "")
 ok(root["children"] == [sp.models_url(2012, "Honda")], "root -> worklist (year, make)")
-ok(sp.score(sp.models_url(2012, "Honda")) > sp.score(li["products"][0] if False else sp.submodels_url(2012, "Honda", "Civic") + "&_score=900"), "make pages first")
+ok(sp.score(sp.models_url(2012, "Honda")) > sp.score(sp.submodels_url(2012, "Honda", "Civic") + "&_score=900"),
+   "a (year, make) page just outranks its best model's submodel page")
+ok(sp.score(sp.submodels_url(2012, "Honda", "Civic") + "&_score=900") > sp.score(sp.models_url(2099, "Nobody")),
+   "a valuable submodel page outranks a low-value (year, make) page (depth-first by value)")
 
 # run.py maps the domain to this module
 ok(run.module_for("ecat.spectrapremium.com") is sp, "run.module_for")

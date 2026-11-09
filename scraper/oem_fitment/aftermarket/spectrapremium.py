@@ -112,8 +112,10 @@ def score(url: str, *_ignored) -> float:
     """Crawl order (run.py calls this when a module defines it)."""
     q = _qs(url)
     if "/get-models.json" in url:
+        # depth-first by value: a (year, make) page scores as its best lot
+        # model, so its submodel and vehicle pages follow it straight away
         t = targets().get((int(q["year"]), q["make"]), {})
-        return 1e9 + sum(t.values())
+        return max(t.values(), default=0.0) + 0.001
     if "/get-submodels.json" in url or "/get-motorizations.json" in url:
         return float(q.get("_score", 0)) or 1.0
     return 1e12

@@ -154,6 +154,9 @@ def main() -> None:
             if st["finished"]:
                 continue
             done_lists = set(st["done_lists"])
+            if getattr(mod, "score", None):
+                # module-defined order: rescore a resumed queue too
+                st["pending"] = [[mod.score(u), u] for _, u in st["pending"]]
             while st["pending"]:
                 if deadline and time.time() > deadline:
                     save()
