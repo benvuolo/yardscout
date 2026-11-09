@@ -2452,9 +2452,23 @@ select { line-height: 1.3; }
 .price-part { flex: 1 1 10em; }
 .price-compare-bar { flex-wrap: wrap; }
 .price-compare-bar .compare-input-wrap { flex: 1 1 12em; }
-#app-promo { flex-wrap: wrap; border-radius: var(--r); }
-.app-promo-text { flex: 1 1 12em; font-size: var(--t-sm); }
-.app-promo-btn { padding: 0 var(--s3); border-radius: var(--r-sm); font-family: var(--font-ui); font-size: var(--t-sm); }
+/* Mobile-web store banner: one compact row (name + short line, button, ✕ in
+   the top-right corner). Narrow or large text: the short line steps aside,
+   then the button takes its own row. Never over the map view. */
+#app-promo { display: block; padding: 0; border-radius: var(--r); container-type: inline-size; }
+.app-promo-in {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto auto; grid-template-areas: "text btn close";
+  align-items: center; gap: var(--s2) var(--s3); padding: var(--s2) 0 var(--s2) var(--s4);
+}
+.app-promo-text { grid-area: text; gap: 0; font-size: var(--t-sm); line-height: 1.35; min-width: 0; }
+.app-promo-btn { grid-area: btn; padding: 0 var(--s3); border-radius: var(--r-sm); font-family: var(--font-ui); font-size: var(--t-sm); }
+#app-promo-close { grid-area: close; align-self: start; padding: 0; }
+@container (max-width: 21em) { #app-promo-copy { display: none; } }
+@container (max-width: 15em) {
+  .app-promo-in { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "text close" "btn btn"; padding-bottom: var(--s3); }
+  .app-promo-btn { justify-self: start; }
+}
+html.map-lock #app-promo { display: none !important; }
 #saved-pill { min-height: 48px; border-radius: var(--r-pill); padding: 0 var(--s5); font-family: var(--font-ui); }
 #saved-sheet, #upgrade-sheet, #prices-sheet { border-radius: var(--r-xl) var(--r-xl) 0 0; box-shadow: var(--shadow-sheet); }
 #upgrade-sheet .sheet-head button, #prices-sheet .sheet-head button { min-height: var(--tap); font-size: var(--t-sm); }
@@ -3307,7 +3321,10 @@ html.map-lock, html.map-lock body { overflow: hidden; overscroll-behavior: none;
 .pin-layer { position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; }
 .pin-layer .map-pin-at { position: absolute; transform: none; pointer-events: auto; }
 .pin-layer .map-pin-at.nudged .map-pin::after { display: none; }
+.pin-layer .map-pin-at.below .map-pin::after { bottom: auto; top: -7px; border: 6px solid transparent; border-bottom-color: var(--ink-btn); border-top: 0; }
+.pin-layer .map-pin-at.below .map-pin.has-watch::after { border-bottom-color: var(--accent); }
 .pin-layer .map-you { position: absolute; margin: -8px 0 0 -8px; }
+.map-you.up span { top: auto; bottom: 18px; }   /* no room under the dot: label above it */
 .pin-measure { position: absolute; left: -9999px; top: 0; visibility: hidden; }
 /* The sheet header holds the handle and, in map mode, the pull sheet button. */
 .ms-head { display: flex; align-items: stretch; border-bottom: 1px solid var(--border); }

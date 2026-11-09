@@ -325,6 +325,11 @@ const likelySearch = async (page) => {
 };
 const SCREENS = [
   ['results', async (page) => { await tab(page, 'live'); }],
+  // Mobile-web store banner (shown on phones only; forced here for each store).
+  ...['ios', 'android'].map(pl => ['app-promo-' + pl, async (page) => {
+    await tab(page, 'live');
+    await page.evaluate((pl) => showAppPromo(pl), pl);
+  }, async (page) => { await page.evaluate(() => { document.getElementById('app-promo').style.display = 'none'; }); }]),
   ['car-card', async (page) => {
     await tab(page, 'live');
     await page.evaluate(() => {
@@ -652,7 +657,7 @@ const SCREENS = [
         if (!w || !w.querySelector('.pin-watch svg')) throw new Error('no bell badge on a pin with a watch match');
         if (!/(match(es)?|matching) your watches/.test(w.getAttribute('aria-label'))) throw new Error('watch aria-label: ' + w.getAttribute('aria-label'));
         if (![...document.querySelectorAll('#yards-map .map-pin:not(.map-cluster)')].every(p => / cars$/.test(p.querySelector('.pin-cars').textContent))) throw new Error('a single-yard pin without "N cars"');
-        if (!/Pins show cars on the lot/.test(document.querySelector('.yards-map-legend').textContent)) throw new Error('no legend');
+        { const lg = document.querySelector('.yards-map-legend'); if (!lg.getClientRects().length || !/matches your watches/.test(lg.textContent)) throw new Error('no watch key with a bell pin'); }
       });
     } else if (mode === 'schematic') {
       await page.evaluate(() => renderSchematicMap((getYardsView().shown || []).filter(y => y.lat != null), 'Map tiles couldn\u2019t load, so yards are shown by position only. The row view works offline.'));

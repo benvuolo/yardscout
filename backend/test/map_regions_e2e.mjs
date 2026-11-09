@@ -8,8 +8,13 @@
  *    them (the credit may move into the sheet when there's no room);
  *  - no floating pull-sheet pill over the map;
  *  - a cluster of yards at one spot opens a list in the sheet;
- *  - no "(Premium)" lot gets its own pin.
- * 200% text doubles the map's own text (pins, legend, credit, sheet); the app
+ *  - no "(Premium)" lot gets its own pin;
+ *  - first view (hub 2026-11-09): the nearest yard is its own named pin,
+ *    drawn above the sheet, and the user's spot is on the map (unless the
+ *    nearest yard needed a closer view than that allows; reported). Zooming out
+ *    from there (-2, -4) still clusters under the same rules.
+ * 200% text doubles the map's own text (pins, legend, credit, sheet) and the
+ * pin's rem-based width cap, as a real text-size change does; the app
  * measures pins every time it places them, which is what a real text-size
  * change goes through.
  * Run: node backend/test/map_regions_e2e.mjs   (Playwright pre-installed;
@@ -39,6 +44,7 @@ const REGIONS = [
   ['Atlanta', 33.749, -84.388], ['Phoenix', 33.448, -112.074], ['Los Angeles / Inland Empire', 34.05, -117.75],
   ['Chicago', 41.878, -87.63], ['Dallas–Fort Worth', 32.85, -97.05], ['Houston', 29.76, -95.37],
   ['Denver', 39.74, -104.99], ['Northeast corridor', 40.35, -74.65], ['Salt Lake', 40.76, -111.89],
+  ['Ogden', 41.223, -111.973],
 ].filter(r => !process.env.REGIONS || process.env.REGIONS.split(',').some(x => r[0].toLowerCase().startsWith(x.toLowerCase())));
 const WIDTHS = (process.env.WIDTHS || '320,390,768,1280').split(',').map(Number);
 
@@ -70,7 +76,7 @@ try {
             else { localStorage.removeItem('jh_pro'); applyProGates(); document.getElementById('live-radius').value = '100'; }
             activeZipCoords = { lat, lng };
             let st = document.getElementById('__big');
-            if (big && !st) { st = document.createElement('style'); st.id = '__big'; st.textContent = '#yards-map .map-pin .pin-name{font-size:24px!important}#yards-map .map-pin .pin-cars,#yards-map .map-pin .pin-watch{font-size:22px!important}#yards-map-wrap .yards-map-legend,#yards-map .maplibregl-ctrl-attrib,.ms-credit{font-size:24px!important}.ms-title{font-size:32px!important}.ms-row-name{font-size:28px!important}.ms-row-meta{font-size:24px!important}'; document.head.appendChild(st); }
+            if (big && !st) { st = document.createElement('style'); st.id = '__big'; st.textContent = '#yards-map .map-pin{max-width:15rem!important}#yards-map .map-pin .pin-name{font-size:24px!important}#yards-map .map-pin .pin-cars,#yards-map .map-pin .pin-watch{font-size:22px!important}#yards-map-wrap .yards-map-legend,#yards-map .maplibregl-ctrl-attrib,.ms-credit{font-size:24px!important}.ms-title{font-size:32px!important}.ms-row-name{font-size:28px!important}.ms-row-meta{font-size:24px!important}'; document.head.appendChild(st); }
             if (!big && st) st.remove();
             setYardsView('map'); await renderYardsMap();
             const t0 = Date.now();
@@ -108,14 +114,30 @@ try {
             };
             const z0 = _yardsMap.getZoom();
             check('fitted');
-            for (const d of [2, 4]) { _yardsMap.jumpTo({ zoom: z0 + d }); check('zoom +' + d); }
+            {
+              const near = _mapSites.filter(s => s.dist != null).sort((a, b) => a.dist - b.dist)[0];
+              const sheetTop = document.getElementById('yards-map-sheet').getBoundingClientRect().top;
+              const sheetSpans = document.getElementById('yards-map-sheet').getBoundingClientRect().width > document.getElementById('yards-map').getBoundingClientRect().width - 48;
+              const pin = near && [...document.querySelectorAll('#yards-map .pin-layer .map-pin')].find(p => p.dataset.loc === near.key && !p.classList.contains('map-cluster'));
+              if (!near) fails.push('first view: no nearest yard');
+              else if (!pin) fails.push(`first view: nearest yard ${near.key} (${Math.round(near.dist)} mi) is not its own pin`);
+              else if (sheetSpans && pin.getBoundingClientRect().bottom > sheetTop + 0.5) fails.push(`first view: nearest yard pin under the sheet`);
+              const youEl = document.querySelector('#yards-map .map-you');
+              if (!youEl) { if (!_firstViewNoYou) fails.push('first view: the user\'s spot is not on the map'); }
+              else {
+                const yr = (youEl.querySelector('span') || youEl).getBoundingClientRect(), A2 = pinArea(), mb = document.getElementById('yards-map').getBoundingClientRect();
+                if (yr.bottom > mb.top + A2.b + 1) fails.push(`first view: the "You" label runs under the sheet or credit line`);
+              }
+              stats.push({ label: 'first', nearest: near ? `${yardShortLabel(near.key)} ${Math.round(near.dist)} mi, zoom ${z0.toFixed(1)}${_firstViewNoYou ? ', zoomed past your spot' : ''}` : '' , pins: _pinGroups.filter(g => g.items.length === 1).length, clusters: _pinGroups.filter(g => g.items.length > 1).length, same: 0, sites: _mapSites.length });
+            }
+            for (const d of [2, 4, -2, -4]) { _yardsMap.jumpTo({ zoom: z0 + d }); check('zoom ' + (d > 0 ? '+' : '') + d); }
             _yardsMap.jumpTo({ zoom: z0 });
             return { fails, stats };
           }, { lat, lng, national: !!national, theme, big });
           const r = rec(name);
           r.checks += out.stats.length;
           out.fails.forEach(f => r.fails.push(`${cfg} ${f}`));
-          out.stats.forEach(s => { r.pins.push(s.pins); r.clusters.push(s.clusters); r.same = Math.max(r.same, s.same); r.sites = s.sites; });
+          out.stats.forEach(s => { if (s.nearest) r.nearest = s.nearest; r.pins.push(s.pins); r.clusters.push(s.clusters); r.same = Math.max(r.same, s.same); r.sites = s.sites; });
         }
       }
     }
@@ -129,7 +151,7 @@ let total = 0;
 for (const [name, r] of results) {
   total += r.fails.length;
   const rng = (a) => a.length ? `${Math.min(...a)}–${Math.max(...a)}` : '0';
-  console.log(`${r.fails.length ? 'FAIL' : 'PASS'}  ${name}: ${r.checks} layouts, ${r.sites} yards in view, single pins ${rng(r.pins)}, clusters ${rng(r.clusters)}, same-spot clusters ${r.same}${r.fails.length ? ` — ${r.fails.length} problems:` : ''}`);
+  console.log(`${r.fails.length ? 'FAIL' : 'PASS'}  ${name}: ${r.checks} layouts, ${r.sites} yards in view, single pins ${rng(r.pins)}, clusters ${rng(r.clusters)}, same-spot clusters ${r.same}; first view: ${r.nearest || '-'}${r.fails.length ? ` — ${r.fails.length} problems:` : ''}`);
   [...new Set(r.fails)].slice(0, 8).forEach(f => console.log('      ' + f));
 }
 console.log(total ? `\n${total} FAILED` : '\nALL PASS');
