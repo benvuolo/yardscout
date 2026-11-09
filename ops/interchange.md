@@ -2807,3 +2807,11 @@ each); nothing allowlisted or crawled.
     to the hub; not ours.
   - Next: the hub dispatches 1A; GSP after the rule answer. Then curate,
     then the §11.4 sample per source × category.
+- ~20:35 UTC: GSP rule approved by the hub, implemented (`fetch.gsp_challenged`)
+  and allowlisted (e35d16ae); tests in `tests/test_fetch_gsp.py`. The owner
+  added for 1A: "im not selling the part fitment portion". So 1A fits are never
+  behind Pro and 1A prices/descriptions/images are never shown. The free = Pro
+  render test is a ship blocker, to be written at integration. Part
+  Interchange numbers are brand equivalence only, never vehicle fitment.
+  Dispatch bodies for GSP and 1A sent to the hub. Waiting for the hub to
+  dispatch them; then curate and run the §11.4 sample.
