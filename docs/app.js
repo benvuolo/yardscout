@@ -7083,7 +7083,12 @@ function pfTierChip(tier, src) {
   if (src === 'aftermarket') {
     return '<span class="pf-tier pf-tier-likely" title="An aftermarket rebuilder (not the carmaker) sells one unit listed for both cars. Match the engine and the part number (on an alternator, also the amperage on the tag) before you pull it.">Likely fits &mdash; check the part number</span>';
   }
-  return '<span class="pf-tier pf-tier-likely" title="Same engine family / same generation, so it very likely fits — but this exact pairing wasn\u2019t individually verified. Verify the part number before driving out.">Likely fit &mdash; verify part #</span>';
+  if (src === 'same-engine') {
+    // Hand engine family only, donor a different model (owner, 2026-11-09):
+    // the engine matches, the accessory on it often doesn't.
+    return '<span class="pf-tier pf-tier-same" title="Same engine, different model. No part-number list we have covers both cars, and accessories often differ between models (bracket, pulley, amperage, plug). Match the part number on both cars before you pull it.">Same engine &mdash; part may differ</span>';
+  }
+  return '<span class="pf-tier pf-tier-likely" title="Same model and generation, or the same engine in the same model, but this exact pairing is not in a published part-number list. Trim and options vary. Check the part number before you pull it.">Likely fit &mdash; verify part #</span>';
 }
 
 /* 'Verified fits only' (owner request, 2026-10-23): a pure VIEW filter over
@@ -7096,14 +7101,14 @@ function pfTierChip(tier, src) {
  * the session (a view preference), and when a later search has zero verified
  * rows the explicit "flip the toggle off" note keeps that state honest. */
 let pfVerifiedOnly = false;
-function pfVonlyRowHtml(nVer, nOther, vocab) {
+function pfVonlyRowHtml(nVer, nOther, vocab, nSame = 0) {
   // vocab: 'vin' = engine browse; 'engine' = engine-assembly fit search,
   // whose Verified is a confirming VIN decode (no catalog lists engine
   // assemblies); 'fit' = everything else (published part-number lists).
   const verWord = vocab === 'vin' ? 'VIN-confirmed' : 'verified';
   const otherWord = vocab === 'vin' ? 'unconfirmed' : 'likely';
   return `<div class="pf-vonly-row">
-      <span class="pf-tier-counts"><strong>${nVer.toLocaleString()}</strong> ${verWord} &middot; <strong>${nOther.toLocaleString()}</strong> ${otherWord}</span>
+      <span class="pf-tier-counts"><strong>${nVer.toLocaleString()}</strong> ${verWord} &middot; <strong>${(nOther - nSame).toLocaleString()}</strong> ${otherWord}${nSame ? ` &middot; <strong>${nSame.toLocaleString()}</strong> same engine` : ''}</span>
       <label class="pf-vonly"><input type="checkbox" id="pf-vonly-cb"${pfVerifiedOnly ? ' checked' : ''}> ${vocab === 'vin' ? 'VIN-confirmed only' : 'Verified fits only'}</label>
     </div>`
     // What 'verified' means, said out loud (honesty audit, 2026-10-23): the
@@ -7114,7 +7119,7 @@ function pfVonlyRowHtml(nVer, nOther, vocab) {
           ? 'Verified = the donor\u2019s VIN decode shows an engine in this family (no catalog lists engine assemblies), not a physical inspection &mdash; match the displacement and check under the hood at the yard.'
           : 'Verified = published catalog fitment data, not a physical inspection &mdash; match the part number at the yard.'}</div>`
     + (nVer === 0
-      ? `<div class="pf-vonly-none pf-empty">No ${verWord} donors in range right now &mdash; flip the toggle off to see the ${nOther.toLocaleString()} ${otherWord} one${nOther === 1 ? '' : 's'}.</div>`
+      ? `<div class="pf-vonly-none pf-empty">No ${verWord} donors in range right now &mdash; flip the toggle off to see the ${nOther.toLocaleString()} ${nSame ? 'other' : otherWord} one${nOther === 1 ? '' : 's'}.</div>`
       : '');
 }
 document.getElementById('pf-results').addEventListener('change', e => {
@@ -7411,6 +7416,8 @@ function pfAmRows(s, groups, results, radius, fam) {
       if (prev) {
         // hand data wins; a Likely hand row also names the unit
         if (prev.tier !== 'verified' && !prev.warns.includes(srcLine)) prev.warns.push(srcLine);
+        // a rebuilder's unit list names both cars: part-number-backed Likely
+        if (prev.src === 'same-engine') prev.src = 'aftermarket';
         continue;
       }
       const warns = [escapeHtml(g.note), escapeHtml(yours)];
@@ -7432,9 +7439,12 @@ let pfSort = 'near';   // 'near' | 'new' (view order; no refetch of data)
 function pfSortRows(rows) {
   const byDist = (a, b) => (a.d ?? 1e9) - (b.d ?? 1e9);
   const tierRk = r => (r.tier === 'verified' ? 0 : 1);
+  // "Same engine — part may differ" rows list below Verified and below
+  // part-number-backed Likely rows, in either sort order.
+  const grpRk = r => (r.src === 'same-engine' ? 1 : 0);
   return rows.sort(pfSort === 'new'
-    ? (a, b) => (yardDateMs(b.v.dateAdded) - yardDateMs(a.v.dateAdded)) || byDist(a, b)
-    : (a, b) => byDist(a, b) || (tierRk(a) - tierRk(b)));
+    ? (a, b) => (grpRk(a) - grpRk(b)) || (yardDateMs(b.v.dateAdded) - yardDateMs(a.v.dateAdded)) || byDist(a, b)
+    : (a, b) => (grpRk(a) - grpRk(b)) || byDist(a, b) || (tierRk(a) - tierRk(b)));
 }
 function pfSortRowHtml() {
   const b = (k, label) => `<button type="button" class="pf-sort-btn" data-sort="${k}" aria-pressed="${pfSort === k}">${label}</button>`;
@@ -7640,6 +7650,11 @@ function pfRunSearch() {
       // several distinct units, so family membership alone is never enough.
       let tier = 'likely';
       let viaOem = false;
+      // Does any part-number list (hand or OEM vg) name both cars? Even when
+      // the row can't be Verified (engine unconfirmed, ambiguity), it is then
+      // a part-number-backed Likely, not a bare engine-family one.
+      const inVg = vgs.some(([g]) => g.some(sp => pfAppMatches(sp, s.year, s.make, s.model))
+        && g.some(sp => pfAppMatches(sp, v.year, canonicalMake(v.make), v.model)));
       if (engineOk && !app[5] && !seekerAmbig && vgs.length) {
         for (const [g, oem] of vgs) {
           if (g.some(sp => pfAppMatches(sp, s.year, s.make, s.model))
@@ -7664,7 +7679,13 @@ function pfRunSearch() {
         const id = pfDonorIdentity(v, viaOem ? { oem: true } : undefined);
         if (!id.ok) { tier = 'likely'; warns.push(escapeHtml(id.warn)); }
       }
-      results.set(v.id, { v, d, tier, warns, ...(tier === 'verified' && viaOem ? { src: 'oem' } : {}) });
+      // Engine family is the ONLY link and the donor is another model:
+      // accessories (alternator, starter, coils, intake) often differ there.
+      // Engine assemblies keep their label — the long block is the fit.
+      const sameEngine = tier === 'likely' && !inVg && pfCat.id !== 'engine-assembly'
+        && (canonicalMake(v.make) !== s.make
+          || pfSquashModel(canonicalModel(v.make, v.model), v.make) !== pfSquashModel(s.model, s.make));
+      results.set(v.id, { v, d, tier, warns, ...(tier === 'verified' && viaOem ? { src: 'oem' } : {}), ...(sameEngine ? { src: 'same-engine' } : {}) });
     }
     // Aftermarket donors this family's data didn't list (Likely, unit named).
     if (pfAmRows(s, lazy.amGroups, results, radius, fam)) groupNotes.push(PF_AM_HEAD);
@@ -7810,6 +7831,7 @@ function pfRunSearch() {
 
   const rows = pfSortRows([...results.values()]);
   const nVer = rows.filter(r => r.tier === 'verified').length;
+  const nSame = rows.filter(r => r.src === 'same-engine').length;
   if (!rows.length) {
     out.innerHTML = `<div class="pf-empty">No donor cars for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)} ${escapeHtml(pfCat.label.toLowerCase())} within ${radius ? radius + ' mi' : 'range'} right now. Yards rotate stock weekly &mdash; widen the search area, or watch for one below.</div>${pfWatchHtml(s)}`;
     pfRenderTiles(); pfRevealResults();
@@ -7821,7 +7843,7 @@ function pfRunSearch() {
   const head = `<div class="pf-results-head"><strong>${rows.length.toLocaleString()} donor car${rows.length === 1 ? '' : 's'}</strong> in range carrying a fitting ${escapeHtml(pfCat.label.toLowerCase())} for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)} &mdash; ${pfSort === 'new' ? 'newest arrivals first' : 'nearest first, then confidence'}. Yards track cars, not parts left on them — a long-sitting donor may be picked over.</div>${(!unlocked && !pfCat.noValue) ? proBoxHtml('See what the same used part goes for online', 'pf-value', '', 'pf-pro-box') : ''}`
     + pfWatchHtml(s, true)
     + pfSortRowHtml()
-    + pfVonlyRowHtml(nVer, rows.length - nVer, pfCat.id === 'engine-assembly' ? 'engine' : 'fit')
+    + pfVonlyRowHtml(nVer, rows.length - nVer, pfCat.id === 'engine-assembly' ? 'engine' : 'fit', nSame)
     + (famNote ? `<div class="pf-caveat">${escapeHtml(famNote)}</div>` : '')
     // Header notes carry data strings (ambig notes, group labels/notes):
     // escaped like every row warning (P0.2).
@@ -7855,7 +7877,7 @@ function pfRunSearch() {
     const saveHtml = (unlocked && partRow && quote.status === 'priced' && partRow.high - quote.price > 0)
       ? `<span class="pf-save" title="What you\u2019d save over buying this part used online — if the part on this car is good">Save ~${formatPrice(Math.max(0, Math.round(partRow.low - quote.price)))}&ndash;${formatPrice(Math.round(partRow.high - quote.price))}</span>`
       : '';
-    return pfDonorCardHtml(r, r.tier === 'verified' ? 'pf-verified' : 'pf-likely', pfTierChip(r.tier, r.src), `${ebayHtml}${priceHtml}${saveHtml}`);
+    return pfDonorCardHtml(r, r.tier === 'verified' ? 'pf-verified' : (r.src === 'same-engine' ? 'pf-likely pf-same-engine' : 'pf-likely'), pfTierChip(r.tier, r.src), `${ebayHtml}${priceHtml}${saveHtml}`);
   }).join('') + (rows.length > CAP
     ? `<div class="pf-more">Showing the first ${CAP} of ${rows.length.toLocaleString()} donors — tighten the radius to narrow.</div>`
     : '');

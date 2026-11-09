@@ -2917,6 +2917,8 @@ a { color: var(--accent); }
 :root[data-theme="dark"] .pf-tier-verified { color: #1C1C1A; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .pf-tier-verified { color: #1C1C1A; } }
 .pf-tier-likely { background: var(--gold-soft); color: var(--gold); border: 1px solid var(--gold-border); }
+/* Same engine, different model: weaker than Likely, so a neutral chip */
+.pf-tier-same { background: var(--surface3); color: var(--text-dim); border: 1px dashed var(--border-dark, var(--border)); }
 .pf-meta { margin-top: var(--s1); font-size: var(--t-sm); }
 .pf-src-more { margin-top: var(--s2); }
 .pf-src-more > summary { list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: var(--s2); min-height: var(--tap); font-size: var(--t-sm); font-weight: 700; color: var(--accent); }

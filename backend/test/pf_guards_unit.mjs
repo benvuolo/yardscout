@@ -617,5 +617,100 @@ print(json.dumps([G.engine_agrees(G.parse_engine(a), G.parse_engine(b)) for a, b
     JSON.stringify(js) + ' vs ' + JSON.stringify(py));
 }
 
+/* ---- Same engine, different model (owner, 2026-11-09) ---------------------
+ * Real toyota-2uz shape: the family spans Tundra/Sequoia/4Runner/Land
+ * Cruiser/GX 470/LX 470, but the alternator part-number list (vg) covers only
+ * Tundra 2003-09 + Sequoia 2003-09. A donor joined to the seeker ONLY by the
+ * family, of another base model, is "Same engine — part may differ", listed
+ * after Verified and part-number-backed Likely rows, with its own count. */
+{
+  const fam2uz = { id: 'toyota-2uz', label: 'Toyota/Lexus 2UZ-FE 4.7 V8', liters: [4.7], cyl: 8,
+    apps: [['Toyota', 'Tundra', 2000, 2009, 0, ''], ['Toyota', 'Sequoia', 2001, 2009, 0, ''],
+      ['Toyota', 'Land Cruiser', 1998, 2007, 1, ''], ['Toyota', '4Runner', 2003, 2009, 0, ''],
+      ['Lexus', 'GX 470', 2003, 2009, 1, ''], ['Lexus', 'LX 470', 1998, 2007, 1, '']],
+    parts: {
+      alternator: { note: '2UZ unit', vg: [[['Toyota', 'Tundra', 2003, 2009], ['Toyota', 'Sequoia', 2003, 2009]]] },
+      'engine-assembly': { note: 'same long block' },
+    } };
+  const acat = { id: 'alternator', label: 'Alternator', kind: 'engine', tokens: ['alternator'], priceTokens: ['alternator'] };
+  const engcat = { id: 'engine-assembly', label: 'Engine', kind: 'engine', tokens: ['engine'], priceTokens: ['engine'], noValue: true };
+  const V8 = ['', '', '4.7L 8-cyl'];
+  const inv = [
+    car(1, 2005, 'Toyota', 'Tundra'),        // nearest, other model, no vg with a GX
+    car(2, 2006, 'Lexus', 'GX 470'),         // same model, outside any vg
+    car(3, 2005, 'Toyota', 'Sequoia'),
+    car(4, 2002, 'Toyota', 'Tundra'),        // outside the vg years
+  ];
+  const extras = { 1: V8, 2: V8, 3: V8, 4: V8 };
+  const data = base([], { engineFamilies: [fam2uz] });
+  const GX = { year: 2005, make: 'Lexus', model: 'GX 470' };
+  const r = run(data, inv, GX, acat, extras);
+  const tu = r.rows['2005 Toyota Tundra'], gx = r.rows['2006 Lexus GX 470'];
+  check('same-engine: GX 470 seeker + Tundra alternator donor -> "Same engine — part may differ"',
+    tu?.chip === 'Same engine &mdash; part may differ', JSON.stringify(tu));
+  check('same-engine: its tooltip says different model / match the number on both cars, not "very likely"',
+    /different model/.test(tu?.tip) && /both cars/.test(tu?.tip) && !/very likely/i.test(tu?.tip), tu?.tip);
+  check('same-engine: card stays pf-likely (Verified-only hides it) and carries pf-same-engine',
+    /pf-row-card pf-likely pf-same-engine/.test(r.html), r.html.slice(0, 300));
+  check('same-engine: same-model GX donor outside the vg keeps a Likely label',
+    gx?.tier === 'likely' && gx.chip === 'Likely fit &mdash; verify part #', JSON.stringify(gx));
+  check('same-engine: the Likely tooltip no longer says "very likely fits"',
+    !/very likely/i.test(gx?.tip || 'very likely'), gx?.tip);
+  const order = Object.keys(r.rows);
+  check('same-engine: rows list after the part-number-backed / same-model rows (nearer Tundra goes last group)',
+    order.indexOf('2006 Lexus GX 470') < order.indexOf('2005 Toyota Tundra')
+    && order.indexOf('2006 Lexus GX 470') < order.indexOf('2005 Toyota Sequoia'), order.join(' | '));
+  check('same-engine: no "very likely" text anywhere in the rendered list', !/very likely/i.test(r.html));
+
+  // Tundra 2005 seeker + Sequoia 2005 donor: one vg names both -> Verified.
+  const rT = run(data, inv, { year: 2005, make: 'Toyota', model: 'Tundra' }, acat, extras);
+  check('same-engine: Tundra 2005 + Sequoia 2005 alternator -> Verified', rT.rows['2005 Toyota Sequoia']?.tier === 'verified',
+    JSON.stringify(rT.rows['2005 Toyota Sequoia']));
+  check('same-engine: Tundra seeker + GX donor (outside the vg) -> same-engine label',
+    rT.rows['2006 Lexus GX 470']?.chip === 'Same engine &mdash; part may differ', JSON.stringify(rT.rows['2006 Lexus GX 470']));
+  check('same-engine: Tundra 2005 seeker + 2002 Tundra (same model, outside vg years) -> Likely',
+    rT.rows['2002 Toyota Tundra']?.chip === 'Likely fit &mdash; verify part #', JSON.stringify(rT.rows['2002 Toyota Tundra']));
+
+  // vg names both but the donor engine is unconfirmed -> part-number-backed Likely, not same-engine.
+  const rU = run(data, inv, { year: 2005, make: 'Toyota', model: 'Tundra' }, acat, { ...extras, 3: ['', '', ''] });
+  check('same-engine: vg-joined donor with an unconfirmed engine stays plain Likely',
+    rU.rows['2005 Toyota Sequoia']?.tier === 'likely' && rU.rows['2005 Toyota Sequoia'].chip === 'Likely fit &mdash; verify part #',
+    JSON.stringify(rU.rows['2005 Toyota Sequoia']));
+
+  // Engine assembly: the long block is the fit; label unchanged.
+  const rE = run(data, inv, GX, engcat, extras);
+  check('same-engine: engine-assembly search never uses the new label',
+    !/Same engine &mdash; part may differ/.test(rE.html) && rE.rows['2005 Toyota Tundra']?.tier === 'verified',
+    JSON.stringify(rE.rows['2005 Toyota Tundra']));
+
+  // An aftermarket unit list naming both cars makes the row part-number-backed.
+  lazyPreset = { alternator: { oemGroups: [], amGroups: [{ id: 'am#gx', cat: 'alternator', src: 'aftermarket', tier: 'likely',
+    label: 'DB Electrical', unit: '400-52xxx', note: 'unit note', apps: [['Lexus', 'GX 470', 2003, 2009, ''], ['Toyota', 'Tundra', 2003, 2006, '']] }] } };
+  const rA = run(data, inv, GX, acat, extras);
+  lazyPreset = null;
+  check('same-engine: an aftermarket list naming both cars lifts the row to part-number-backed Likely',
+    rA.rows['2005 Toyota Tundra']?.chip === 'Likely fits &mdash; check the part number', JSON.stringify(rA.rows['2005 Toyota Tundra']));
+
+  // Free users still see no values; Pro does.
+  const invP = inv.map(v => ({ ...v, topParts: [{ name: 'Alternator', low: 40, high: 90 }] }));
+  ctx.onlinePriceHtml = () => '<span class="VALUEMARK">$40-90</span>';
+  const rFree = run(data, invP, GX, acat, extras);
+  ctx.isPro = () => true;
+  const rPro = run(data, invP, GX, acat, extras);
+  ctx.isPro = () => false;
+  ctx.onlinePriceHtml = () => '';
+  check('same-engine: free users see no value on any row', !/VALUEMARK/.test(rFree.html));
+  check('same-engine: Pro users see the value on same-engine rows too',
+    (rPro.html.split('pf-same-engine')[1] || '').includes('VALUEMARK'));
+
+  // Counts: real pfVonlyRowHtml (ctx2) — same-engine has its own count.
+  ctx2.pfVerifiedOnly = false;
+  const hc = ctx2.pfVonlyRowHtml(1, 3, 'fit', 2);
+  check('same-engine: tier counts read "1 verified · 1 likely · 2 same engine"',
+    /<strong>1<\/strong> verified &middot; <strong>1<\/strong> likely &middot; <strong>2<\/strong> same engine/.test(hc), hc);
+  check('same-engine: no same-engine count when there are none',
+    !/same engine/.test(ctx2.pfVonlyRowHtml(1, 3, 'fit')));
+}
+
 console.log(failures ? `\n${failures} FAILURES` : '\nALL PASS');
 process.exit(failures ? 1 : 0);
