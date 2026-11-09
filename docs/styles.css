@@ -3112,8 +3112,8 @@ button.saved-item-name { max-width: 100%; min-width: 0; overflow-wrap: anywhere;
 .yard-actions .yard-walk-btn { order: -1; }
 
 /* ===== LOT MAP: yards view switch + map ===== */
-.yards-view-switch { display: inline-flex; margin: 0 0 var(--s3); padding: 3px; border-radius: var(--r-pill); background: var(--surface2); }
-.yv-btn { min-height: var(--tap); min-width: 5.5rem; padding: 0 var(--s4); border: 0; border-radius: var(--r-pill); background: none; font: 700 var(--t-sm)/1.2 var(--font-ui); color: var(--text-dim); cursor: pointer; }
+.yards-view-switch { display: flex; max-width: 20rem; margin: 0 0 var(--s3); padding: 3px; border-radius: var(--r-pill); background: var(--surface2); }
+.yv-btn { flex: 1 1 0; min-width: 0; min-height: var(--tap); padding: 0 var(--s3); overflow-wrap: anywhere; border: 0; border-radius: var(--r-pill); background: none; font: 700 var(--t-sm)/1.2 var(--font-ui); color: var(--text-dim); cursor: pointer; }
 .yv-btn[aria-pressed="true"] { background: var(--surface); color: var(--text); box-shadow: 0 1px 2px rgba(0,0,0,.12); }
 #tab-yards.yards-map-mode #price-compare-bar, #tab-yards.yards-map-mode .yards-hint,
 #tab-yards.yards-map-mode #yards-grid, #tab-yards.yards-map-mode #yard-request,
