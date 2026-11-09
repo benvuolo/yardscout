@@ -1313,6 +1313,7 @@ class Curation:
                 Ts.append(T)
                 whys |= set(m["why"])
                 slots |= set(m["slot"].slots)
+            Ts = self._drop_catchall_twins(Ts)
             if len({(T[0], T[1]) for T in Ts}) < 2:
                 continue        # single-model: the same-model generation loop covers it
             Ts2 = self._generation_cut(c, Ts)
@@ -1322,6 +1323,7 @@ class Curation:
                 if len({(T[0], T[1]) for T in Ts}) < 2:
                     continue
             reason, text = _likely_reason(whys)
+            text = policy.GROUP_NOTES.get((self.ns, cat, sorted(c.pns)[0]), text)
             cab = self._cab_only(c, cat, Ts)
             if cab:
                 text = f"{text}; {cab}"
@@ -1357,6 +1359,27 @@ class Curation:
                         "tier": "likely", "kind": "body", "apps": apps, "pn": pns, "reason": reason,
                         "note": note, "keys": [key], "cars": sum(self.inv_counts.get(T, 0) for T in Ts),
                         "oldest_retrieved": stamps[0] if stamps else None})
+        return out
+
+    def _drop_catchall_twins(self, Ts):
+        """Make breadth 2026-11-09: a feed name whose series is unknown
+        ('Silverado', an ambig catch-all target) is left out of a Likely
+        group when the group already holds a series-filtered target of the
+        same catalog model and year ('Silverado 1500'): the catch-all car may
+        be a 2500HD, and pairing it with the 1500 claims the 1500 part for it.
+        Only removes claims."""
+        def tg(T):
+            return self.mm.sources(self.ns, T[0], T[1], T[2])
+        precise = {(t.cat_make, t.cat_model, T[2]) for T in Ts for t in tg(T) if t.series}
+        if not precise:
+            return Ts
+        out = []
+        for T in Ts:
+            ts = tg(T)
+            if ts and all(t.ambig and not t.series for t in ts) and \
+                    any((t.cat_make, t.cat_model, T[2]) in precise for t in ts):
+                continue
+            out.append(T)
         return out
 
     def _gen_breaks(self, model: str):
@@ -1617,7 +1640,12 @@ def directional_verified(seeker: dict, donor: dict) -> bool:
 # ------------------------------------------------------------------ helpers
 def _row_maps(f: A.FitRow, t: MM.Target) -> bool:
     """A row maps to a trim-subset target only when its trims meet the subset
-    (or when the row prints no trims: then it is a candidate, never coverage)."""
+    (or when the row prints no trims: then it is a candidate, never coverage).
+    A series target (model_map `series`) maps only rows whose trims match its
+    series; a row with no trims does not map (fail closed)."""
+    if t.series:
+        if not any(re.search(p, tr, re.I) for p in t.series for tr in (f.trims or [])):
+            return False
     if t.trims == "*":
         return True
     if f.layout == "trim" and f.trims:

@@ -1,0 +1,45 @@
+== toyota: other keys ['policy_sha256']; removed 0; added 0
+== gm: other keys ['engine_cells', 'policy_sha256', 'cells']; removed 0; added 0
+  APPS climate-control 10367042: Sierra 2004, Yukon 2003 -> Sierra 1500 2004, Yukon 2003
+  APPS climate-control 20787112: Avalanche 2007, Silverado 2008, Tahoe 2007 -> Avalanche 2007, Silverado 1500 2008, Tahoe 2007
+  APPS climate-control 20787113: Avalanche 2007, Silverado 2008, Tahoe 2007 -> Avalanche 2007, Silverado 1500 2008, Tahoe 2007
+  APPS climate-control 20787114: Avalanche 2007, Silverado 2008, Tahoe 2007 -> Avalanche 2007, Silverado 1500 2008, Tahoe 2007
+  APPS climate-control 21997350: Sierra 2004, Yukon 2003 -> Sierra 1500 2004, Yukon 2003
+  APPS climate-control 21997352: Sierra 2004, Yukon 2003 -> Sierra 1500 2004, Yukon 2003
+  APPS side-mirrors 15172059: Silverado 1999-2000, Sierra 2004 -> Silverado 1500 1999-2000, Sierra 1500 2004
+  APPS side-mirrors 15172060: Silverado 1999-2000, Sierra 2004 -> Silverado 1500 1999-2000, Sierra 1500 2004
+  APPS side-mirrors 19153377: Sierra 2004, Yukon 2003 -> Sierra 1500 2004, Yukon 2003
+  APPS side-mirrors 19153378: Sierra 2004, Yukon 2003 -> Sierra 1500 2004, Yukon 2003
+  APPS side-mirrors 20809948: Avalanche 2007, Silverado 2008, Silverado 2012 -> Avalanche 2007, Silverado 1500 2008, Silverado 1500 2012
+  APPS side-mirrors 20809968: Avalanche 2007, Silverado 2008, Silverado 2012 -> Avalanche 2007, Silverado 1500 2008, Silverado 1500 2012
+  APPS side-mirrors 20843116: Avalanche 2007, Silverado 2008, Silverado 2012 -> Avalanche 2007, Silverado 1500 2008, Silverado 1500 2012
+  APPS side-mirrors 20843177: Avalanche 2007, Silverado 2008, Silverado 2012 -> Avalanche 2007, Silverado 1500 2008, Silverado 1500 2012
+  APPS side-mirrors 20862098: Avalanche 2007, Silverado 2008, Silverado 2012 -> Avalanche 2007, Silverado 1500 2008, Silverado 1500 2012
+  APPS side-mirrors 20862099: Avalanche 2007, Silverado 2008, Silverado 2012 -> Avalanche 2007, Silverado 1500 2008, Silverado 1500 2012
+  NOTE side-mirrors 20862099: GM catalog lists #20862099 for both — power-heated mirror; towing and standard mirrors differ — match yours; verify the number on the part
+  APPS side-mirrors 25876714: Silverado 1999-2000, Sierra 2004 -> Silverado 1500 1999-2000, Sierra 1500 2004
+  APPS side-mirrors 25876715: Silverado 1999-2000, Sierra 2004 -> Silverado 1500 1999-2000, Sierra 1500 2004
+  APPS window-regulator 15844876: Escalade 2007, Silverado 2008, Silverado 2012 -> Escalade 2007, Silverado 1500 2008, Silverado 1500 2012
+  NOTE window-regulator 15844876: GM catalog lists #15844876 for both — window motor only; fits some configurations; Silverado 1500: extended cab only; verify the number on the part
+  APPS window-regulator 15844877: Escalade 2007, Silverado 2008, Silverado 2012 -> Escalade 2007, Silverado 1500 2008, Silverado 1500 2012
+  NOTE window-regulator 15844877: GM catalog lists #15844877 for both — window motor only; fits some configurations; Silverado 1500: extended cab only; verify the number on the part
+  APPS window-regulator 15871124: Silverado 1999-2000, Sierra 2004 -> Silverado 1500 1999-2000, Sierra 1500 2004
+  APPS window-regulator 15871125: Silverado 1999-2000, Sierra 2004 -> Silverado 1500 1999-2000, Sierra 1500 2004
+  APPS window-regulator 19120846: Silverado 1999-2000, Sierra 2004 -> Silverado 1500 1999-2000, Sierra 1500 2004
+  APPS window-regulator 19120847: Silverado 1999-2000, Sierra 2004 -> Silverado 1500 1999-2000, Sierra 1500 2004
+  APPS window-regulator 20914715: Avalanche 2007, Silverado 2008, Silverado 2012 -> Avalanche 2007, Silverado 1500 2008, Silverado 1500 2012
+  APPS window-regulator 20914716: Avalanche 2007, Silverado 2008, Silverado 2012 -> Avalanche 2007, Silverado 1500 2008, Silverado 1500 2012
+  APPS window-regulator 20945138: Escalade 2007, Avalanche 2007, Silverado 2008, Silverado 2012 -> Escalade 2007, Avalanche 2007, Silverado 1500 2008, Silverado 1500 2012
+  APPS window-regulator 20945139: Escalade 2007, Avalanche 2007, Silverado 2008, Silverado 2012 -> Escalade 2007, Avalanche 2007, Silverado 1500 2008, Silverado 1500 2012
+  APPS window-regulator 20945140: Avalanche 2007, Silverado 2008, Silverado 2012 -> Avalanche 2007, Silverado 1500 2008, Silverado 1500 2012
+  NOTE window-regulator 20945140: GM catalog lists #20945140 for both — regulator with motor; option: fits some option packages; Silverado 1500: crew cab only; verify the number on the part
+  APPS window-regulator 20945141: Avalanche 2007, Silverado 2008, Silverado 2012 -> Avalanche 2007, Silverado 1500 2008, Silverado 1500 2012
+  NOTE window-regulator 20945141: GM catalog lists #20945141 for both — regulator with motor; option: fits some option packages; Silverado 1500: crew cab only; verify the number on the part
+  APPS window-switch 20835552: Avalanche 2007, Silverado 2008, Silverado 2012 -> Avalanche 2007, Silverado 1500 2008, Silverado 1500 2012
+  APPS window-switch 20835553: Avalanche 2007, Silverado 2008, Silverado 2012 -> Avalanche 2007, Silverado 1500 2008, Silverado 1500 2012
+== mopar: other keys ['policy_sha256']; removed 0; added 0
+== ford: other keys ['policy_sha256']; removed 0; added 0
+== vag: other keys ['policy_sha256']; removed 0; added 0
+== hmg: other keys ['policy_sha256']; removed 0; added 0
+== mb: other keys ['policy_sha256']; removed 0; added 0
+== subaru: other keys ['policy_sha256']; removed 0; added 0

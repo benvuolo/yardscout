@@ -617,6 +617,38 @@ check("23 Jeep 4602785AD (Front Right) is out of window-switch",
 check("23 DM is present", "DM" in I["slots"], str(I["slots"]))
 check("23 jeeppartsdeal/window-switch is unconfirmed, so nothing is Verified",
       "category_unconfirmed" in I["elig"] and doc["groups"] == [])
+# make breadth 2026-11-09 (hub): GM series filter. Feed 'Silverado 1500' maps only rows
+# whose option column names the 1500 / 1/2 TON series; CLASSIC rows and rows with no
+# series never map; the unknown-series catch-all 'Silverado' leaves a group that holds
+# the 1500 twin of the same catalog model and year.
+import model_map as _MM
+_SER = ("^(?!.*CLASSIC)1500(?!\\s*HD)\\b", "^(?!.*CLASSIC).*\\b1/2 TON\\b")
+_t15 = _MM.Target("gm", "Chevrolet", "Silverado", "Chevrolet", "Silverado 1500", "*", (2008, 2026), False, "s", _SER)
+_tall = _MM.Target("gm", "Chevrolet", "Silverado", "Chevrolet", "Silverado", "*", None, False, "any series")
+def _fr(trims):
+    return A.FitRow(0, 2010, 2010, "Chevrolet", "Silverado", trims, [], trims, "trim", "", trims_from_options=True)
+check("series: 1500 and 1/2 TON rows map to Silverado 1500",
+      C._row_maps(_fr(["1500 REGULAR CAB LONG BOX"]), _t15)
+      and C._row_maps(_fr(["EXTENDED CAB 6'6\" BOX 1/2 TON"]), _t15)
+      and C._row_maps(_fr(["2500 REGULAR CAB", "1500 CREW CAB"]), _t15))
+check("series: 2500/3500, HD, CLASSIC and no-series rows do not map to Silverado 1500",
+      not C._row_maps(_fr(["2500 REGULAR CAB"]), _t15) and not C._row_maps(_fr(["3500 CREW CAB"]), _t15)
+      and not C._row_maps(_fr(["1500 HD CREW CAB"]), _t15)
+      and not C._row_maps(_fr(["CLASSIC 1500 REGULAR CAB LONG BOX"]), _t15)
+      and not C._row_maps(_fr([]), _t15) and not C._row_maps(_fr(["EXTENDED CAB 3/4 TON"]), _t15))
+check("series: the catch-all target still maps any row", C._row_maps(_fr(["2500 REGULAR CAB"]), _tall))
+class _FakeMM:
+    def sources(self, ns, mk, md, y):
+        return [_t15] if md == "Silverado 1500" else [_tall] if md == "Silverado" else []
+_cur = C.Curation.__new__(C.Curation); _cur.ns = "gm"; _cur.mm = _FakeMM()
+_Ts = [("Chevrolet", "Silverado", 2010), ("Chevrolet", "Silverado 1500", 2010), ("Chevrolet", "Avalanche", 2010),
+       ("Chevrolet", "Silverado", 2011)]
+check("catch-all twin: Silverado 2010 leaves when Silverado 1500 2010 is in the group; 2011 and others stay",
+      _cur._drop_catchall_twins(_Ts) == [("Chevrolet", "Silverado 1500", 2010), ("Chevrolet", "Avalanche", 2010),
+                                         ("Chevrolet", "Silverado", 2011)])
+check("catch-all twin: no series target in the group, nothing dropped",
+      _cur._drop_catchall_twins([("Chevrolet", "Silverado", 2010), ("Chevrolet", "Avalanche", 2010)])
+      == [("Chevrolet", "Silverado", 2010), ("Chevrolet", "Avalanche", 2010)])
 check("option hold: subaru gauge clusters held (Canada km/h clusters unmarked)",
       _P.held_cross_model_cat("subaru", "gauge-cluster") == "held_option_cross_model")
 # hub 2026-11-09 rules 1-3 (GM 20945139, 25876716, 15844876), both ways
@@ -657,4 +689,7 @@ check("pack text: a climate-control 'assy' gets no regulator words; regulators a
       C._pack_text("climate-control", "assy") == "" and C._pack_text("window-regulator", "assy") == "regulator with motor"
       and C._pack_text("climate-control", "switch-module").startswith("single switch module")
       and C._pack_text("side-mirrors", "motor") == "")
+check("group notes: 20862099 names the towing/standard split; keys are (ns, cat, pn)",
+      "towing" in _P.GROUP_NOTES[("gm", "side-mirrors", "20862099")]
+      and all(len(k) == 3 for k in _P.GROUP_NOTES))
 done("test_curate")

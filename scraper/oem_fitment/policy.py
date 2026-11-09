@@ -87,6 +87,14 @@ def held_cross_model_cat(ns: str, cat: str) -> str | None:
     return None
 
 
+# Per-group Likely note text (hub decisions, 2026-11-09): replaces the
+# generic reason for one (ns, cat, pn) when its sample showed an option
+# split the yard listing cannot show. Only adds a warning; no claim changes.
+GROUP_NOTES: dict = {
+    ("gm", "side-mirrors", "20862099"): "power-heated mirror; towing and standard mirrors differ \u2014 match yours",
+}
+
+
 # Namespaces withheld from shipping (2026-11-09, ops/interchange.md): their
 # held groups are never released by the allowlist.
 WITHHELD_NS = frozenset()   # subaru re-shipped 2026-11-09 (§11.4 round 4: 0 WRONG; hub confirmed)

@@ -3166,7 +3166,7 @@
    ]
   },
   {
-   "basis": "catalog prints 'Silverado' (242 fitment rows, oem-raw@d1108d0); normalize_model canon 'Silverado', 365 feed cars (inventory 2026-11-05); identity draft; ambig (Likely only): the feed name is coarser than the series the catalog splits",
+   "basis": "catalog prints 'Silverado' (242 fitment rows, oem-raw@d1108d0); normalize_model canon 'Silverado', 365 feed cars (inventory 2026-11-05); identity draft; ambig (Likely only): the feed name is coarser than the series the catalog splits; feed 'Silverado 1500' = catalog 'Silverado' rows whose option column names the 1500 / 1/2 TON series (series filter; CLASSIC rows and rows with no series never map); 2007 left out (Classic and new body both sold, the feed name does not say which); make breadth 2026-11-09, hub request",
    "cat_make": "Chevrolet",
    "cat_model": "Silverado",
    "ns": "gm",
@@ -3176,6 +3176,34 @@
      "make": "Chevrolet",
      "model": "Silverado",
      "trims": "*"
+    },
+    {
+     "ambig": "series from the option column; Likely only",
+     "make": "Chevrolet",
+     "model": "Silverado 1500",
+     "series": [
+      "^(?!.*CLASSIC)1500(?!\\s*HD)\\b",
+      "^(?!.*CLASSIC).*\\b1/2 TON\\b"
+     ],
+     "trims": "*",
+     "years": [
+      1999,
+      2006
+     ]
+    },
+    {
+     "ambig": "series from the option column; Likely only",
+     "make": "Chevrolet",
+     "model": "Silverado 1500",
+     "series": [
+      "^(?!.*CLASSIC)1500(?!\\s*HD)\\b",
+      "^(?!.*CLASSIC).*\\b1/2 TON\\b"
+     ],
+     "trims": "*",
+     "years": [
+      2008,
+      2026
+     ]
     }
    ]
   },
@@ -3521,7 +3549,7 @@
    ]
   },
   {
-   "basis": "catalog prints 'Sierra' (243 fitment rows, oem-raw@d1108d0); normalize_model canon 'Sierra', 167 feed cars (inventory 2026-11-05); identity draft; ambig (Likely only): the feed name is coarser than the series the catalog splits",
+   "basis": "catalog prints 'Sierra' (243 fitment rows, oem-raw@d1108d0); normalize_model canon 'Sierra', 167 feed cars (inventory 2026-11-05); identity draft; ambig (Likely only): the feed name is coarser than the series the catalog splits; feed 'Sierra 1500' = catalog 'Sierra' rows whose option column names the 1500 / 1/2 TON series (series filter; CLASSIC rows and rows with no series never map); 2007 left out (Classic and new body both sold, the feed name does not say which); make breadth 2026-11-09, hub request",
    "cat_make": "GMC",
    "cat_model": "Sierra",
    "ns": "gm",
@@ -3531,6 +3559,34 @@
      "make": "GMC",
      "model": "Sierra",
      "trims": "*"
+    },
+    {
+     "ambig": "series from the option column; Likely only",
+     "make": "GMC",
+     "model": "Sierra 1500",
+     "series": [
+      "^(?!.*CLASSIC)1500(?!\\s*HD)\\b",
+      "^(?!.*CLASSIC).*\\b1/2 TON\\b"
+     ],
+     "trims": "*",
+     "years": [
+      1999,
+      2006
+     ]
+    },
+    {
+     "ambig": "series from the option column; Likely only",
+     "make": "GMC",
+     "model": "Sierra 1500",
+     "series": [
+      "^(?!.*CLASSIC)1500(?!\\s*HD)\\b",
+      "^(?!.*CLASSIC).*\\b1/2 TON\\b"
+     ],
+     "trims": "*",
+     "years": [
+      2008,
+      2026
+     ]
     }
    ]
   },
@@ -10679,7 +10735,6 @@
   "gm|Chevrolet|S10/S15/Sonoma Pickup": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash 's10'); unmapped until a reviewed entry exists",
   "gm|Chevrolet|S10/s15/sonoma Truck": "feed spelling or sub-model the catalog does not print as its own model (17 cars, under catalog squash 's10'); unmapped until a reviewed entry exists",
   "gm|Chevrolet|Sierra150": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash 'sierra'); unmapped until a reviewed entry exists",
-  "gm|Chevrolet|Silverado 1500": "feed spelling or sub-model the catalog does not print as its own model (3217 cars, under catalog squash 'silverado'); unmapped until a reviewed entry exists",
   "gm|Chevrolet|Silverado 1500 Classic": "feed spelling or sub-model the catalog does not print as its own model (60 cars, under catalog squash 'silverado'); unmapped until a reviewed entry exists",
   "gm|Chevrolet|Silverado 1500 Ext Cab": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'silverado'); unmapped until a reviewed entry exists",
   "gm|Chevrolet|Silverado 1500 Hd Classic": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'silverado'); unmapped until a reviewed entry exists",
@@ -10726,7 +10781,6 @@
   "gm|GMC|Savana 1500": "feed spelling or sub-model the catalog does not print as its own model (62 cars, under catalog squash 'savana'); unmapped until a reviewed entry exists",
   "gm|GMC|Savana 2500": "feed spelling or sub-model the catalog does not print as its own model (68 cars, under catalog squash 'savana'); unmapped until a reviewed entry exists",
   "gm|GMC|Savana 3500": "feed spelling or sub-model the catalog does not print as its own model (28 cars, under catalog squash 'savana'); unmapped until a reviewed entry exists",
-  "gm|GMC|Sierra 1500": "feed spelling or sub-model the catalog does not print as its own model (1219 cars, under catalog squash 'sierra'); unmapped until a reviewed entry exists",
   "gm|GMC|Sierra 1500 Classic": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash 'sierra'); unmapped until a reviewed entry exists",
   "gm|GMC|Sierra 1500HD": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'sierra'); unmapped until a reviewed entry exists",
   "gm|GMC|Sierra 2500": "feed spelling or sub-model the catalog does not print as its own model (156 cars, under catalog squash 'sierra'); unmapped until a reviewed entry exists",
