@@ -5779,9 +5779,22 @@ function layoutPins() {
   // sheet still lists the yard), rather than push it over the controls.
   for (let i = groups.length - 1; i >= 0; i--) if (groups[i].rect.t < A.t - 0.5 || groups[i].rect.b > A.b + 0.5) groups.splice(i, 1);
   _pinGroups = groups;
+  watchPinSizes(layer);
   const you = activeZipCoords && _projectFn({ lat: activeZipCoords.lat, lng: activeZipCoords.lng });
   layer.innerHTML = `${you && you.x > A.l && you.x < A.W && you.y > A.t && you.y < A.b ? `<span class="map-you${you.y + 34 > A.b ? ' up' : ''}" style="left:${you.x}px;top:${you.y}px"><span>You</span></span>` : ''}
     ${groups.map((g, i) => `<span class="map-pin-at${g.nudged ? ' nudged' : ''}${g.below ? ' below' : ''}" data-g="${i}" style="left:${g.rect.l}px;top:${g.rect.t}px">${g.html}</span>`).join('')}`;
+}
+/* A pin that changes size after it was placed (text size changed, fonts
+ * arrived) gets the layout solved again; same size = no-op, so no loop. */
+var _pinRO = null;
+function watchPinSizes(layer) {
+  if (!window.ResizeObserver) return;
+  if (!_pinRO) _pinRO = new ResizeObserver((entries) => {
+    const off = entries.some(e => { const g = _pinGroups[+e.target.dataset.g]; const r = e.target.getBoundingClientRect(); return g && g.sz && (Math.abs(r.width - g.sz.w) > 1 || Math.abs(r.height - g.sz.h) > 1); });
+    if (off) requestAnimationFrame(layoutPins);
+  });
+  _pinRO.disconnect();
+  requestAnimationFrame(() => layer.querySelectorAll('.map-pin-at').forEach(el => _pinRO.observe(el)));
 }
 /* During a pan the pins follow the map; overlaps are re-solved when it stops. */
 function followPins() {
@@ -5850,9 +5863,9 @@ function renderSchematicMap(yards, note) {
   el.innerHTML = '';
   document.getElementById('yards-map-note').textContent = note;
   _projectFn = (p) => {
-    const A = pinArea(), padX = 70, top = A.t + 50, bot = A.b - 10;
-    const sx = (A.W - 2 * padX) / w, sy = (bot - top) / h, s = Math.min(sx, sy);
-    const ox = padX + ((A.W - 2 * padX) - w * s) / 2, oy = top + ((bot - top) - h * s) / 2;
+    const A = pinArea(), padX = 70, top = A.t + 50, bot = A.b - 40, L = A.l + padX, R = A.r - padX;   // room for the You label
+    const sx = (R - L) / w, sy = (bot - top) / h, s = Math.min(sx, sy);
+    const ox = L + ((R - L) - w * s) / 2, oy = top + ((bot - top) - h * s) / 2;
     return { x: ox + (p.lng - minLn) * k * s, y: oy + (maxLa - p.lat) * s };
   };
   layoutPins();
