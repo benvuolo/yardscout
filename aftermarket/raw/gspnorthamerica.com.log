@@ -1,0 +1,11 @@
+2026-11-09T20:42:19Z start site=gspnorthamerica.com cats=['cv-axle'] max_products=0 minutes=28.0
+2026-11-09T20:42:35Z list cv-axle https://gspnorthamerica.com/sitemap.xml products=0 children=17 next=n records=0 new_requests=1
+2026-11-09T21:05:00Z list cv-axle https://gspnorthamerica.com/sitemap_products_1.xml?from=9027270050006&to=9082106020054 products=167 children=0 next=n records=167 new_requests=169
+2026-11-09T21:05:08Z list cv-axle https://gspnorthamerica.com/sitemap_products_2.xml?from=9082106052822&to=9082140033238 products=0 children=0 next=n records=167 new_requests=170
+2026-11-09T21:05:16Z list cv-axle https://gspnorthamerica.com/sitemap_products_3.xml?from=9082140066006&to=9082176012502 products=0 children=0 next=n records=167 new_requests=171
+2026-11-09T21:05:24Z list cv-axle https://gspnorthamerica.com/sitemap_products_4.xml?from=9082176045270&to=9082210222294 products=0 children=0 next=n records=167 new_requests=172
+2026-11-09T21:05:32Z list cv-axle https://gspnorthamerica.com/sitemap_products_5.xml?from=9082210255062&to=9082244563158 products=0 children=0 next=n records=167 new_requests=173
+2026-11-09T21:05:40Z list cv-axle https://gspnorthamerica.com/sitemap_products_6.xml?from=9082244595926&to=9082277986518 products=0 children=0 next=n records=167 new_requests=174
+2026-11-09T21:05:48Z list cv-axle https://gspnorthamerica.com/sitemap_products_7.xml?from=9082278019286&to=9082313179350 products=0 children=0 next=n records=167 new_requests=175
+2026-11-09T21:10:20Z list cv-axle https://gspnorthamerica.com/sitemap_products_8.xml?from=9082313212118&to=9082352926934 products=793 children=0 next=n records=200 new_requests=209
+2026-11-09T21:10:20Z time budget reached records=200
