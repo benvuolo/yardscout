@@ -653,4 +653,8 @@ check("cab note: every crediting row names one cab -> '<model>: <cab> only'; oth
 _cc.t_rows[(_T1, "window-regulator")].append((_k, None, _fr2(["1500 CREW CAB LONG BOX"]), None))
 check("cab note: two cab types, or a row without a cab, gives no note",
       _cc._cab_only(_k, "window-regulator", [_T1, _T2]) == "")
+check("pack text: a climate-control 'assy' gets no regulator words; regulators and switch modules keep theirs",
+      C._pack_text("climate-control", "assy") == "" and C._pack_text("window-regulator", "assy") == "regulator with motor"
+      and C._pack_text("climate-control", "switch-module").startswith("single switch module")
+      and C._pack_text("side-mirrors", "motor") == "")
 done("test_curate")
