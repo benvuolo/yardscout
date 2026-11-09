@@ -446,7 +446,7 @@ const SCREENS = [
       const bodyOf = (m) => Object.keys(KNOWN).find(k => KNOWN[k].test(m)) || '';
       const vOf = (c) => liveInventory.find(x => vehicleKey(x) === c.dataset.vkey);
       // Fixtures: the first card is marked as a light car-screen-only source
-      // ("Photo inside"), the second as a heavy source ("Photo at yard · tap to
+      // ("Photo on car page"), the second as a heavy source ("Photo at yard · tap to
       // load"); neither image shows on a card. Colours are the cars' own.
       window.__fxBody = [];
       cards.forEach((c, k) => { const e = own(c); if (k === 0) e[0] = 'https://www.kikersupullit.com/inventory-feed/photos/stock-12345.jpg'; if (k === 1) e[0] = 'tSTK12345'; e[5] = k < n - 1 ? bodyOf(vOf(c).model) : ''; window.__fxBody.push(e[5] || 'car'); vehicleExtras[c.dataset.eid] = e; });
@@ -462,7 +462,7 @@ const SCREENS = [
       const want = [['photo-box', 'has-illo'], ...cards.map(() => ['photo-illo'])];
       boxes.forEach((b, k) => { if (!want[k].every(x => b.classList.contains(x))) throw new Error(`card ${k}: ${b.className}`); });
       const badge = (b) => (b && b.querySelector('.illo-badge') || {}).textContent || '';
-      if (!/Photo inside/.test(badge(boxes[1])) || !/Photo at yard · tap to load/.test(badge(boxes[2])) || (boxes[3] && badge(boxes[3]))) throw new Error('badges wrong: ' + boxes.map(badge).join(' | '));
+      if (!/Photo on car page/.test(badge(boxes[1])) || !/Photo at yard · tap to load/.test(badge(boxes[2])) || (boxes[3] && badge(boxes[3]))) throw new Error('badges wrong: ' + boxes.map(badge).join(' | '));
       if (document.querySelector('#live-grid .car-card img[src*="kikersupullit"]')) throw new Error('car-screen-only photo on a card');
       window.__fxBody.forEach((b, k) => { if (!boxes[k + 1].innerHTML.includes(`#illo-${b}"`)) throw new Error(`card ${k + 1}: body ${b} not drawn`); });
       if (document.querySelector('#live-grid .car-card img[src*="sturtevant"]')) throw new Error('heavy photo on a card');

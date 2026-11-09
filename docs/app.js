@@ -1013,7 +1013,7 @@ function illoBody(ex) {
 function illoBoxHtml(v, ex, cls, opts = {}) {
   const body = illoBody(ex), paint = paintHex(ex && ex[extraIdx.color]);
   const name = `${v.year} ${v.make} ${v.model}`;
-  const badge = opts.photo === 'heavy' ? 'Photo at yard &middot; tap to load' : opts.photo ? 'Photo inside' : '';
+  const badge = opts.photo === 'heavy' ? 'Photo at yard &middot; tap to load' : opts.photo ? 'Photo on car page' : '';
   return `<div class="photo-box photo-illo ${cls || ''}" role="img" aria-label="Drawing of a ${escapeHtml(name)}${opts.photo ? '. A photo is on the car screen' : ''}"${paint ? ` style="--paint:${paint}"` : ''}>
       <svg class="illo-car" viewBox="0 0 200 90" aria-hidden="true" focusable="false"><use href="#illo-${body}"/></svg>
       <span class="illo-cap" aria-hidden="true">${escapeHtml(name)}</span>
