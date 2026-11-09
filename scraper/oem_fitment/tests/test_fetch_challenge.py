@@ -55,6 +55,9 @@ check("ecat.spectrapremium.com is allowlisted", SP in fetch.ALLOWED)
 # 2. Spectra: real pages pass
 check("real vehicle page passes", not fetch.challenged(SP, VP, 200, VEH))
 check("real part page passes", not fetch.challenged(SP, PP, 200, PART))
+HOME = VEH.replace("parts__motorization", "x").replace("</body>", '<form id="vehicle-search-form"></form></body>')
+check("site root '/' (robots warm-up; redirects to /en) passes on the catalog home body", not fetch.challenged(SP, "/", 200, HOME))
+check("/en passes on the catalog home body", not fetch.challenged(SP, "/en", 200, HOME))
 check("JSON endpoint passes", not fetch.challenged(SP, "/en/vehicules/get-models.json", 200, '{"Civic": "Civic"}'))
 
 W = fetch._SP_WIDGET.search(VEH).group(0)

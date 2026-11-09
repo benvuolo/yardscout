@@ -228,7 +228,7 @@ def _spectra_body_ok(path: str, body: str) -> bool:
         return "parts__motorization" in body and "Showing parts" in body
     if re.fullmatch(r"/(en|fr|es)/parts/[^/]+", path):
         return "part__table-applications" in body
-    if re.fullmatch(r"/(en|fr|es)/?", path):
+    if re.fullmatch(r"/|/(en|fr|es)/?", path):  # "/" redirects to /en; common.py warms robots with it
         return 'id="vehicle-search-form"' in body
     return False
 
