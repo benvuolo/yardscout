@@ -55,7 +55,7 @@ LINES = {
     "Automotive Radiator": "radiator",
     "Compressor": "ac-compressor",
     "Condenser": "ac-condenser",
-    "Evaporator": "ac-evaporator",
+    "Evaporator": "evaporator",
     "Heater": "heater-core",
     "Fuel Tank": "fuel-tank",
     "Fuel Module": "fuel-pump-module",
@@ -63,7 +63,7 @@ LINES = {
     "Electronic Throttle Body": "throttle-body",
 }
 LABEL = {"radiator": "radiator", "ac-compressor": "A/C compressor", "ac-condenser": "A/C condenser",
-         "ac-evaporator": "A/C evaporator", "heater-core": "heater core", "fuel-tank": "fuel tank",
+         "evaporator": "A/C evaporator", "heater-core": "heater core", "fuel-tank": "fuel tank",
          "fuel-pump-module": "fuel pump module", "ignition-coils": "ignition coil",
          "throttle-body": "electronic throttle body"}
 
