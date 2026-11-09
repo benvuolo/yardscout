@@ -114,6 +114,25 @@ sheet" in the UI only (jh_saved and watch storage untouched, rule 6); map deferr
   auto-load. Today only sturtevant. Shell jh-v159. Tests: photo_policy_unit (+5),
   ui_no_truncation photo-heavy / photo-heavy-loaded screens.
 
+### Round 9: lot map with bottom sheet — SHIPPED in 1.12.14 (2026-11-09)
+- Owner: "Ship the latest". Hub merged `design/map-sheet` (cb8b36a8) into main as 4c1b482e,
+  shell jh-v167; 1.12.14 dispatched to App Store review (build 36) and Play production (c1ae792).
+- Yards tab List / Map switch. Full-height MapLibre map (OpenFreeMap positron/dark, keyless,
+  attribution kept open) with a bottom sheet (peek / full / card / min); the page is locked in map
+  mode. Credit line and map controls are never under the sheet (lifted, or moved into the sheet).
+- Pins are our own layer: labelled yard pins, clustered by measured size so nothing overlaps at any
+  zoom; pins that do not fit the open area are not drawn. "(Premium)" lots are one place with the main
+  yard (pin, sheet, and List cards). Several yards at one spot open a list. Pull sheet button sits in
+  the sheet header.
+- Also in this release from main: Walk the rows (row-ordered yard view, "Seen" / "+ Pull sheet",
+  checks expire after 24h or when the car leaves; 96641bf), drawings in place of missing photos,
+  long-listed notice, tab re-tap closes the open layer then scrolls to top, labelled pins and row
+  photo tags (70aa36d).
+- Tests: map_regions_e2e (10 regions, 480/480 layouts), lot_rows_unit, long_listed_unit,
+  tab_retap_e2e, illo_unit, ui_no_truncation (map, rows, premium, long-listed screens) all pass.
+- Known: dense metros mostly show count bubbles at the fitted zoom; a shorter pin label is the
+  lever if the owner wants more named pins. iOS status-bar tap to top not checked on a device.
+
 ## Earlier state (2026-11-06, exploration)
 
 - Branch: `design/redesign-2026-11` (exploration only; nothing merged).
