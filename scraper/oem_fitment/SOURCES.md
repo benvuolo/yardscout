@@ -164,3 +164,51 @@ Not allowlisted, fetch.py unchanged, not crawled.
 "no email needed").** No outreach. `fetch.py` and `fetch.ALLOWED` stay
 unchanged. `aftermarket/spectrapremium.py` stays on main unused; it may not
 be run against the site unless the owner reverses this.
+
+**Spectra Premium: REOPENED (owner, verbatim, relayed by the hub 2026-11-09
+~19:45 UTC: "use spectra if it doesnt break anything").** This supersedes the
+OUT entry above. The hub approved detector rule (a)-(e) at ~19:45 UTC.
+
+Page evidence (4 pages fetched in the probe: home, part-number search,
+/en/vehicles/23745/parts, /en/parts/CU13221). Every page carries:
+- in `<head>`, `<script src="https://www.google.com/recaptcha/api.js?hl=en" async="async" defer="defer"></script>`;
+- exactly one `<div class="g-recaptcha" data-sitekey=… data-callback="googleRecaptchaOnSubmit"
+  data-size="invisible"></div>`, inside `<form id="vin-search-form" action="/en/vehicules/get-vehicle">`
+  (header VIN search; it runs only when a VIN is submitted, which we never do), at byte ~19.7-20.2 K;
+- the full catalog content alongside it: no interstitial.
+
+The old detector (`captcha` in the first 20 KB) would have stopped the
+domain on the first page. Rule, in `fetch.challenged()`, for
+`ecat.spectrapremium.com` only: the page is NOT challenged only when ALL of
+these hold:
+- (a) HTTP 200;
+- (b) the expected catalog body for the path is present:
+  - vehicle page: `parts__motorization` + "Showing parts";
+  - part page: `part__table-applications`;
+  - home: the vehicle-search form;
+  - `.json`: valid JSON;
+  - any other path: none, so it stops;
+- (c) exactly one api.js include of that exact form;
+- (d) exactly one `g-recaptcha`, the invisible VIN-form widget above, inside vin-search-form;
+- (e) with exactly those two snippets removed, CHALLENGE_RE and HUMAN_RE
+  ("verify you are human", "unusual traffic", "are you a robot", "access denied")
+  match nowhere in the body.
+
+Anything else stops the domain for good. Other hosts keep the old rule
+byte for byte. We never load, render, execute or submit anything
+captcha-related.
+
+Tests: `tests/test_fetch_challenge.py`:
+- 350 non-Spectra inputs are identical to the old rule;
+- the real vehicle and part pages pass;
+- each of these stops:
+  - a second widget, a visible widget, a widget without data-size, a widget outside the form;
+  - a missing motorization block, a missing counter, a missing application table;
+  - "unusual traffic", "verify you are human", challenge-platform, other "captcha" text, hCaptcha;
+  - a second include, an interstitial, an empty body;
+  - HTML on a JSON path, an unknown path;
+  - HTTP 403/429/503/500/404/301.
+
+Data use (hub): store application facts only, as for DB Electrical.
+Publish only our derived groups, labelled "Spectra Premium" + unit number,
+with notes in our own words. No page text, images or descriptions.

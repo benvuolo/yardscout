@@ -2581,7 +2581,16 @@ Spectra stays OUT and gets no outreach. fetch.py and fetch.ALLOWED are
 unchanged. The adapter stays on main, unused. No aftermarket source passed
 this round. Session closed.
 
-**(Superseded) plan had Spectra been allowed:** crawl -> `groups_spectra` curation (one Likely group per Spectra
+**REOPENED ~19:45 UTC.** Owner, verbatim, relayed by the hub: "use
+spectra if it doesnt break anything". The hub approved detector rule
+(a)-(e), scoped to the site (SOURCES.md has the rule and the evidence).
+ecat.spectrapremium.com is now in fetch.ALLOWED. `fetch.challenged()` keeps
+the old rule for every other host. Tests: `tests/test_fetch_challenge.py`,
+real pages pass and 25 variants stop. All suites pass except
+test_model_map, which fails identically on main: the known Honda "Cr-Z"
+feed row, which clears after the rescan (ops/hub.md).
+
+**Next:** the hub checks for running crawls and dispatches the crawl -> `groups_spectra` curation (one Likely group per Spectra
 pn x line; engine gate on Eng. Desg./liters; body gate on Body Type; refuse
 other notes) -> §11.4 sample per line -> hub -> branch
 interchange/aftermarket-1 for any app change. Nothing shipped.

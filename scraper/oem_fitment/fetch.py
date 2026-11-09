@@ -57,6 +57,9 @@ ALLOWED = {
     "www.volvopartsgiant.com", "www.audipartsgiant.com",
     # aftermarket application catalogs (robots allow, no bot check, 2026-11-05)
     "www.densoautoparts.com", "www.dbelectrical.com", "www.tycamericas.com",
+    # Spectra Premium e-catalog (owner 2026-11-09 "use spectra if it doesnt
+    # break anything"; site-scoped detector rule below; SOURCES.md)
+    "ecat.spectrapremium.com",
 }
 # robots.txt Crawl-delay or a gentler pace where a site asks for it
 DOMAIN_GAP = {"www.tycamericas.com": 10.0, "www.subarupartsdeal.com": 5.0}
@@ -186,6 +189,71 @@ def _robots_delay(netloc: str) -> float:
     return float(d) if d else 0.0
 
 
+# --- challenge detection ---------------------------------------------------
+# Default (every site): 403/429/503 or a CHALLENGE_RE marker in the first
+# 20 KB stops the domain for good.
+#
+# ecat.spectrapremium.com only (owner 2026-11-09, "use spectra if it doesnt
+# break anything"; hub-approved rule (a)-(e), SOURCES.md): every catalog page
+# carries an inert Google reCAPTCHA include and ONE invisible widget that
+# belongs to the header VIN search form (we never call that form). The page
+# is NOT challenged only when ALL hold:
+#   (a) HTTP 200;
+#   (b) the expected catalog body for that path is present;
+#   (c) the api.js include matches exactly (HTML pages);
+#   (d) exactly one g-recaptcha div, data-size="invisible" and
+#       data-callback="googleRecaptchaOnSubmit", inside <form id="vin-search-form">;
+#   (e) with exactly those two snippets removed, neither CHALLENGE_RE nor
+#       HUMAN_RE matches anywhere in the body.
+# Anything else stops the domain for good, as for every other site. We never
+# load, render, execute or submit anything captcha-related.
+HUMAN_RE = re.compile(r"verify you are (a )?human|unusual traffic|are you a robot|access denied", re.I)
+SPECTRA = "ecat.spectrapremium.com"
+_SP_SCRIPT = re.compile(r'<script src="https://www\.google\.com/recaptcha/api\.js\?hl=(?:en|fr|es)"'
+                        r' async="async" defer="defer"></script>')
+_SP_WIDGET = re.compile(r'<div class="g-recaptcha"\s+data-sitekey="[A-Za-z0-9_-]+"\s+'
+                        r'data-callback="googleRecaptchaOnSubmit"\s+data-size="invisible">\s*</div>')
+_SP_VINFORM = re.compile(r'<form [^>]*id="vin-search-form"[^>]*>(.*?)</form>', re.S)
+
+
+def _spectra_body_ok(path: str, body: str) -> bool:
+    """(b): the catalog content each path we fetch must carry."""
+    if path.endswith(".json"):
+        try:
+            json.loads(body)
+            return True
+        except ValueError:
+            return False
+    if re.fullmatch(r"/(en|fr|es)/vehicles/\d+/parts", path):
+        return "parts__motorization" in body and "Showing parts" in body
+    if re.fullmatch(r"/(en|fr|es)/parts/[^/]+", path):
+        return "part__table-applications" in body
+    if re.fullmatch(r"/(en|fr|es)/?", path):
+        return 'id="vehicle-search-form"' in body
+    return False
+
+
+def spectra_challenged(path: str, status: int, body: str) -> bool:
+    if status != 200 or not _spectra_body_ok(path, body):
+        return True
+    if path.endswith(".json"):
+        return bool(CHALLENGE_RE.search(body) or HUMAN_RE.search(body))
+    if len(_SP_SCRIPT.findall(body)) != 1 or body.count("g-recaptcha") != 1:
+        return True
+    widgets = _SP_WIDGET.findall(body)
+    forms = _SP_VINFORM.findall(body)
+    if len(widgets) != 1 or len(forms) != 1 or widgets[0] not in forms[0]:
+        return True
+    rest = _SP_WIDGET.sub("", _SP_SCRIPT.sub("", body))
+    return bool(CHALLENGE_RE.search(rest) or HUMAN_RE.search(rest))
+
+
+def challenged(netloc: str, path: str, status: int, body: str) -> bool:
+    if netloc == SPECTRA:
+        return spectra_challenged(path, status, body)
+    return status in (403, 429, 503) or bool(CHALLENGE_RE.search(body[:20000]))
+
+
 def cache_path(url: str) -> Path:
     u = urllib.parse.urlsplit(url)
     h = hashlib.sha1(url.encode()).hexdigest()
@@ -221,7 +289,7 @@ def get(url: str) -> dict:
                 raise NetworkError(f"network error after 3 tries: {type(e).__name__}") from e
             time.sleep(15 * (attempt + 1))
     body = r.text
-    if r.status_code in (403, 429, 503) or CHALLENGE_RE.search(body[:20000]):
+    if challenged(u.netloc, u.path, r.status_code, body):
         STATE.mkdir(parents=True, exist_ok=True)
         _breaker(u.netloc).write_text(f"{_now()} HTTP {r.status_code} on {url}")
         raise Refused(f"{u.netloc} refused or challenged (HTTP {r.status_code}); domain stopped for this program")
