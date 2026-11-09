@@ -123,3 +123,13 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
 ## 2026-11-09 ~03:10 UTC owner decisions: held exterior release and heavy photos
 - Held exterior groups: the owner chose option 1, "Do 1". Release all 96 groups in scraper/oem_fitment/groups/_report/held_exterior_release.json: still held, agent RIGHT, and at least one cited independent non-eBay source. Agent RIGHT plus one source is enough; owner checklist taps are not required. The groups still have to pass every curate rule. Subaru entries stay out while Subaru is withheld. Claims read "Likely fits — check the part number".
 - Heavy photos (VinPlus ~22k, Sturtevant, Army's 4 MB originals): the owner wants them included. They are published per scan with a heavy flag, and the app shows them on the car screen as tap-to-load.
+
+## 2026-11-09 ~07:40 UTC Round 9 (map sheet) regression; Ogden pins wait on the next scan
+- Trial merge main (503f24cf) + design/map-sheet (33ffc9d), shell jh-v167. All pass: unit 11/11, scraper tests 26/26, backend e2e/e2e-email/e2e-devices/e2e-coverage/e2e-ops, interchange_e2e, pf_ux_e2e, tab_retap, no_pick_models, model_years, yaris, map_regions_e2e (10 regions, 480 layouts) and ui_no_truncation (1248 checks, 0 failures).
+- part_finder_e2e fails only on the known M3 data case: no E46 M3 on a tracked lot today.
+- e2e-email "gone car" failed between 00:00 ET and 00:00 PT because the recap rightly names no weekday then. That was a test bug, not an app bug. Fixed in 503f24cf, and the suite passes.
+- Watch for this: the backend e2e scripts leave `wrangler dev` / `workerd` running. Kill them before rerunning a suite, or the rerun talks to the stale server and fails with "internal" errors.
+- Ogden is still a same-spot cluster on live data because junkyards.json predates c5fe7570. Scan 42567561362 checked out f3111e3f before the re-pin. The ~08:00Z scheduled scan publishes the new coordinates.
+- Waiting on the owner's "ship it" for Round 9. On "ship it", merge design/map-sheet (head cb8b36a8, which includes main) and confirm the live sw is jh-v167.
+- Today, Monday, the 15:00Z cron sends the first weekly recap with the Pro teaser (alerts/recap-teaser). Check it in the next daily ops email.
+- Manual filter (owner asked 11-09): it was dropped 2026-10-27 because it emptied most searches. Today 3,658 cars in the extras are confirmed manual (vin 3118, vin_code 463, listing 43, engine 25, trim 8, model 1). Proposed: a free "Manual (N nearby)" chip with honest copy, and "manual only" as a Pro watch option. Waiting on the owner.
