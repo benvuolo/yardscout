@@ -2792,3 +2792,18 @@ each); nothing allowlisted or crawled.
   refusals, drive/trans never inferred) and 1A Auto no. UAC skipped
   (POST-only). Until the owner answers: ALLOWED and fetch.py stay unchanged,
   and nothing is built or crawled. Scout session stopped.
+- 2026-11-09 ~20:15 UTC, owner (via the hub): GSP "Yes, use GSP" and 1A Auto
+  "Yes, use 1A Auto anyway".
+  - GSP: the approved "no other marker" rule fails on real pages. There are 68
+    "captcha" matches per page, all inside `<script>` elements (Globo Form
+    Builder config, translation strings). A corrected rule went to the hub at
+    ~20:16. Adapter `aftermarket/gspnorthamerica.py` is on main (159f5634).
+    Not allowlisted.
+  - 1A Auto: confirmed server-rendered GET (fitment table + Part
+    Interchange). Adapter `aftermarket/oneaauto.py` (358b0785, 12 categories,
+    strut first). Allowlisted (e5cda1a9). Dispatch body
+    `{"ref":"main","inputs":{"site":"www.1aauto.com"}}` sent to the hub.
+  - test_model_map fails on clean main (feed "Cr-Z" spelling, M3/M5). Reported
+    to the hub; not ours.
+  - Next: the hub dispatches 1A; GSP after the rule answer. Then curate,
+    then the §11.4 sample per source × category.
