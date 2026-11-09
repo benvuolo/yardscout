@@ -2835,3 +2835,7 @@ each); nothing allowlisted or crawled.
   dispatch of "all" waits for the current runs to finish and for the hub's
   word. CR-Z model_map failure: fixed upstream in 1cf5dd03; it clears after
   the next scan.
+- §11.4 verifier brief, Honda/Nissan (hub note, 2026-11-09 20:55): until
+  make breadth's truncation marker lands, `fetch.py --text` stops at 400 lines
+  without warning. Verifiers must pass `--max-lines 100000` or read the cached
+  HTML directly, so long list pages are not cut.
