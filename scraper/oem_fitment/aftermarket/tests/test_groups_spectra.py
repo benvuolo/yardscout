@@ -40,6 +40,17 @@ for n in ("USA Built; Canadian Built", "Japan Built", "with California Emissions
           "with Manual Trans", "w/ Towing Package", "exc. Hybrid", "Body Type: Spaceship", "Some new wording"):
     ok(GS.classify(n)[0] == "refuse", f"refuse {n!r}")
 
+ok(GS.classify("Contains 1 Units; Pack; Radiator Cap Is Required") == ("ok", "*"), "packaging clauses")
+ok(GS.classify("Transmission Control Type: Manual OR Transmission Control Type: Automatic") == ("ok", "*"),
+   "either transmission = no limit")
+ok(GS.classify("Body Type: Standard Cab Pickup") == ("ok", "Standard Cab Pickup"), "cab style is a body gate")
+ok(GS.classify("Services OE # 20824314") == ("ok", "*") and GS.oe_refs("Services OE # 20824314") == ["20824314"],
+   "OE reference kept as data")
+for n in ("Region: USA", "Light Duty", "Position: Front", "Drive Type: AWD", "Transmission Control Type: Automatic",
+          "with 28.25in x 17.25in x 1in Core", "Partial Zero Emissions Vehicle (PZEV)", "Body Num Doors: 4",
+          "Mfr Body Code: CL32"):
+    ok(GS.classify(n)[0] == "refuse", f"still refused {n!r}")
+
 # real vehicle page -> records
 html = (HERE / "fixtures" / "spectra_vehicle_23745_2012_civic_lx.html").read_text()
 sp.get = lambda u: {"status": 200, "retrieved": "2026-11-09T20:00:00Z", "html": html}

@@ -69,7 +69,8 @@ LABEL = {"radiator": "radiator", "ac-compressor": "A/C compressor", "ac-condense
 
 BODY_RE = re.compile(r"^Body Type:\s*([A-Za-z ]+)$")
 BODIES = {"sedan", "coupe", "hatchback", "wagon", "convertible", "van", "minivan", "pickup", "suv",
-          "sport utility", "cab chassis"}
+          "sport utility", "cab chassis", "standard cab pickup", "extended cab pickup",
+          "crew cab pickup"}
 # install / packaging / description clauses that do not limit which car it fits
 INSTALL_RE = re.compile(
     r"^(?:New|Remanufactured|with Clutch|without Clutch|Sensor Only|Complete Assembly|Desiccant Kit"
@@ -78,6 +79,11 @@ INSTALL_RE = re.compile(
     r"|May Require Use Of Original [A-Za-z ]+"
     r"|Replacement of Stretch Fit Belt Required"
     r"|Gasket And/Or Sealant Not Included"
+    r"|Contains \d+ Units?|Pack|Radiator Cap Is Required"
+    r"|Hoist May Be Required for Radiator Installation Underneath the Vehicle"
+    r"|Module has \d+ Electrical Connector\(s\)"
+    r"|Transmission Control Type: Manual OR Transmission Control Type: Automatic"
+    r"|Transmission Control Type: Automatic OR Transmission Control Type: Manual"
     r"|Failure [Tt]o [A-Za-z ,/]+ (?:Will )?[Vv]oid(?: [Tt]he)? [Ww]arranty\.?)$")
 
 
@@ -85,10 +91,19 @@ def clauses(note: str) -> list[str]:
     return [c.strip().rstrip(".").strip() for c in (note or "").split(";") if c.strip()]
 
 
+OE_RE = re.compile(r"^Services OE #\s*([A-Z0-9-]+)$")
+
+
+def oe_refs(note: str) -> list[str]:
+    return [m.group(1) for m in (OE_RE.match(c) for c in clauses(note)) if m]
+
+
 def classify(note: str):
     """-> ("ok", body or "*") | ("refuse", clause)."""
     body = "*"
     for c in clauses(note):
+        if OE_RE.match(c):
+            continue                        # an OE reference, kept as data, not a limit
         m = BODY_RE.match(c)
         if m and m.group(1).strip().lower() in BODIES:
             if body != "*":
@@ -146,6 +161,7 @@ def build(records: list, names: GA.Names, src: str = "") -> dict:
     # (cat, mk, md, year, eng) -> list of resolutions (one per vehicle record)
     reso: dict = defaultdict(list)
     retrieved: dict = {}
+    oe_by_unit: dict = defaultdict(set)
     seen_vid = set()
     for r in records:
         if r.get("vehicle_id") in seen_vid:
@@ -177,6 +193,8 @@ def build(records: list, names: GA.Names, src: str = "") -> dict:
             if cat:
                 by_line[cat].append(card)
         for cat, cards in by_line.items():
+            for card in cards:
+                oe_by_unit[(cat, card["pn"])].update(oe_refs(card.get("note", "")))
             res, why = resolve(cards)
             key = (cat, mk, md, int(r["year"]), eng)
             if res is None:
@@ -216,6 +234,7 @@ def build(records: list, names: GA.Names, src: str = "") -> dict:
         groups.append({"id": f"am:spp:{cat}:{pn}", "cat": cat, "tier": "likely", "src": "aftermarket",
                        "label": "Spectra Premium application list", "unit": pn, "apps": apps,
                        "cross_model": len(models) > 1, "body_gated": bool(bodies),
+                       "oe_refs": sorted(oe_by_unit[(cat, pn)]),
                        "retrieved": unit_ret[(cat, pn)], "note": note})
     doc = {"schema": SCHEMA, "src": "aftermarket", "site": SITE, "raw": src, "tier": "likely",
            "groups": groups,
