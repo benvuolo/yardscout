@@ -3347,6 +3347,7 @@ html.map-lock, html.map-lock body { overflow: hidden; overscroll-behavior: none;
 .pin-layer .map-pin-at.below .map-pin.has-watch::after { border-bottom-color: var(--accent); }
 .pin-layer .map-you { position: absolute; margin: -8px 0 0 -8px; }
 .map-you.up span { top: auto; bottom: 18px; }   /* no room under the dot: label above it */
+.map-you.no-label span { display: none; }   /* no room either side inside the map: the dot alone */
 .pin-layer .map-you.over { z-index: 3; }   /* no pin placement clears it: the dot stays on top */
 .pin-measure { position: absolute; left: -9999px; top: 0; visibility: hidden; }
 /* The sheet header holds the handle and, in map mode, the pull sheet button. */

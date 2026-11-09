@@ -5556,6 +5556,8 @@ function setSheetState(st) {
   // The open part of the map changed: re-solve the pins after the slide.
   clearTimeout(setSheetState._t);
   setSheetState._t = setTimeout(() => { if (yardsView === 'map') { liftMapControls(); layoutPins(); } }, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 240);
+  // and once more when the slide has really finished (timers can beat it)
+  if (!sh.__te) { sh.__te = true; sh.addEventListener('transitionend', (e) => { if (e.target === sh && yardsView === 'map') { liftMapControls(); layoutPins(); } }); }
 }
 /* Keep the map's credit line and its bottom controls above the sheet when the
  * sheet spans the map (phones); a side-docked sheet (wide screens) leaves them. */
@@ -5725,7 +5727,9 @@ function pinArea() {
     if (sh.left <= c.left + 24 && sh.right >= c.right - 24) bottom = Math.min(bottom, sh.top - c.top - 6);
     else if (sh.left <= c.left + 24) left = Math.max(left, sh.right - c.left + 6);
   }
-  return { l: left, r: c.width - 4, t: top, b: Math.max(top + 44, bottom), W: c.width, H: c.height, ctl };
+  // No floor: with the sheet pulled up there may be no open map at all, and
+  // then no pin is drawn (the sheet lists every yard).
+  return { l: left, r: c.width - 4, t: top, b: Math.max(top, bottom), W: c.width, H: c.height, ctl };
 }
 function measurePin(html) {
   const layer = pinLayer();
@@ -5811,7 +5815,15 @@ function layoutPins() {
   const you = activeZipCoords && _projectFn({ lat: activeZipCoords.lat, lng: activeZipCoords.lng });
   const youOn = you && you.x > A.l && you.x < A.W && you.y > A.t && you.y < A.b;
   const youLbl = youOn ? youLabelSize() : null;
-  const youUp = youOn && you.y + 12 + youLbl.h > A.b;
+  // Label under the dot unless there's more room above; never past the map's
+  // edge (the pin layer clips): if neither side has room, the dot shows alone.
+  let youUp = false, youNoLabel = false;
+  if (youOn) {
+    const below = A.b - (you.y + 12), above = (you.y - 12) - A.t;
+    youUp = below < youLbl.h && above > below;
+    const room = youUp ? (you.y - 12) : (A.H - (you.y + 12));
+    youNoLabel = room < youLbl.h + 2;
+  }
   // The You dot is the reader's bearing: pins keep off it (flip to the other
   // side of their point, or slide beside the dot); only if neither fits is
   // the dot drawn over the pin.
@@ -5837,7 +5849,7 @@ function layoutPins() {
   }
   _pinGroups = groups;
   watchPinSizes(layer);
-  layer.innerHTML = `${youOn ? `<span class="map-you${youUp ? ' up' : ''}${youOver ? ' over' : ''}" style="left:${you.x}px;top:${you.y}px"><span data-you="${youLbl.h}">You</span></span>` : ''}
+  layer.innerHTML = `${youOn ? `<span class="map-you${youUp ? ' up' : ''}${youOver ? ' over' : ''}${youNoLabel ? ' no-label' : ''}" style="left:${you.x}px;top:${you.y}px"><span data-you="${youLbl.h}">You</span></span>` : ''}
     ${groups.map((g, i) => `<span class="map-pin-at${g.nudged ? ' nudged' : ''}${g.below ? ' below' : ''}" data-g="${i}" style="left:${g.rect.l}px;top:${g.rect.t}px">${g.html}</span>`).join('')}`;
 }
 /* The You dot and its label, as a box on the map (for pins to keep off). */

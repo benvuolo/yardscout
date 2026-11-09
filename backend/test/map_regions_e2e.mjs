@@ -10,6 +10,8 @@
  *  - a cluster of yards at one spot opens a list in the sheet;
  *  - no "(Premium)" lot gets its own pin;
  *  - the sheet never runs under the tab bar (short phone screens);
+ *  - the You label is never cut off by the map edge (also with the sheet
+ *    pulled up and with a yard's card open);
  *  - no pin covers the You dot or its label (if nothing clears it, the dot
  *    is drawn on top; counted in the summary);
  *  - first view (hub 2026-11-09): the nearest yard is its own named pin,
@@ -92,7 +94,7 @@ try {
             const ov = (a, b) => a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
             const vis = (el) => el && el.getClientRects().length && getComputedStyle(el).display !== 'none' && getComputedStyle(el).visibility !== 'hidden';
             const check = (label) => {
-              layoutPins(); liftMapControls();
+              liftMapControls(); layoutPins();
               const pins = [...document.querySelectorAll('#yards-map .pin-layer .map-pin')];
               const rs = pins.map(p => p.getBoundingClientRect());
               for (let i = 0; i < rs.length; i++) for (let j = i + 1; j < rs.length; j++) if (ov(rs[i], rs[j])) fails.push(`${label}: pins overlap (${pins[i].textContent.trim().slice(0, 30)} / ${pins[j].textContent.trim().slice(0, 30)})`);
@@ -105,7 +107,7 @@ try {
               const covers = [...pins, document.getElementById('saved-pill'), document.getElementById('yards-map-sheet')].filter(vis).map(e => e.getBoundingClientRect());
               if (inSheet) { const c = document.querySelector('#yards-map-sheet.with-credit .ms-credit'); if (!vis(c)) fails.push(`${label}: credit line missing (sheet)`); }
               else if (!vis(at)) fails.push(`${label}: credit line not visible`);
-              else { const ar = at.getBoundingClientRect(); if (ar.top < box.top - 1 || ar.bottom > box.bottom + 1) fails.push(`${label}: credit line outside the map`); if (covers.some(r => ov(r, ar))) fails.push(`${label}: something covers the credit line`); }
+              else { const ar = at.getBoundingClientRect(); if (ar.top < box.top - 1 || ar.bottom > box.bottom + 1) fails.push(`${label}: credit line outside the map`); if (covers.some(r => ov(r, ar))) fails.push(`${label}: something covers the credit line` + (" " + [...pins, document.getElementById("saved-pill"), document.getElementById("yards-map-sheet")].filter(vis).filter(e => ov(e.getBoundingClientRect(), ar)).map(e => e.id || e.textContent.trim().slice(0, 24)).join(", "))); }
               const zc = document.querySelector('#yards-map .maplibregl-ctrl-group');
               if (!vis(zc)) fails.push(`${label}: zoom buttons not visible`);
               else { const zr = zc.getBoundingClientRect(); if (rs.some(r => ov(r, zr))) fails.push(`${label}: a pin covers the zoom buttons`); }
@@ -120,6 +122,9 @@ try {
                 const under = rs.some(r => parts.some(q => ov(r, q)));
                 if (under && !youEl.classList.contains('over')) fails.push(`${label}: a pin covers the You dot`);
                 if (youEl.classList.contains('over')) youOverCount++;
+                // never clipped by the map's edge (the pin layer clips)
+                const lb = youEl.querySelector('span'), mb2 = document.getElementById('yards-map').getBoundingClientRect();
+                if (lb && lb.getClientRects().length) { const q = lb.getBoundingClientRect(); if (q.top < mb2.top - 0.5 || q.bottom > mb2.bottom + 0.5 || q.left < mb2.left - 0.5 || q.right > mb2.right + 0.5) fails.push(`${label}: the You label is cut off by the map edge`); }
               }
               const same = _pinGroups.filter(g => g.items.length > 1 && g.items.every(x => siteNear(x, g.items[0])));
               for (const g of same.slice(0, 2)) {
@@ -148,6 +153,14 @@ try {
               stats.push({ label: 'first', nearest: near ? `${yardShortLabel(near.key)} ${Math.round(near.dist)} mi, zoom ${z0.toFixed(1)}${_firstViewNoYou ? ', zoomed past your spot' : ''}` : '' , pins: _pinGroups.filter(g => g.items.length === 1).length, clusters: _pinGroups.filter(g => g.items.length > 1).length, same: 0, sites: _mapSites.length });
             }
             for (const d of [2, 4, -2, -4]) { _yardsMap.jumpTo({ zoom: z0 + d }); check('zoom ' + (d > 0 ? '+' : '') + d); }
+            _yardsMap.jumpTo({ zoom: z0 });
+            // the sheet pulled up, and a yard's card open: less open map
+            for (const st of ['full', 'card']) {
+              if (st === 'card' && _mapSites[0]) selectMapYard(_mapSites[0].key); else setSheetState(st);
+              await new Promise(r => setTimeout(r, 400));
+              check('sheet ' + st);
+            }
+            selectMapYard(null);
             _yardsMap.jumpTo({ zoom: z0 });
             return { fails, stats, youOver: youOverCount };
           }, { lat, lng, national: !!national, theme, big });
