@@ -57,8 +57,11 @@ check("every published URL is https on the source's host",
       all(p[w].startswith("https://" + s["host"] + "/") or p[w] == "{1}"
           for s in PUB.values() for p in s["patterns"] for w in ("card", "large")))
 check("onCards published as a bool on every source", all(isinstance(s.get("onCards"), bool) for s in PUB.values()))
+# 2026-11-09 owner ("do what you think, it needs to be free"): sources up to
+# ~300 KB per image (Ario tenants, Fenix) show on list cards, lazy-loaded;
+# 400 KB+ sources stay car-screen only.
 check("heavy sources are off list cards",
-      {"byot", "papva", "upullitwa", "aesop", "midwayupull", "kikers", "pap", "fenix", "ario_foss"}
+      {"byot", "papva", "upullitwa", "aesop", "midwayupull", "kikers", "pap"}
       <= {k for k, s in PUB.items() if not s["onCards"]},
       sorted(k for k, s in PUB.items() if not s["onCards"]))
 check("onCards defaults to true", js.published_photo_sources({"x": {"enabled": True, "label": "Photo: X", "host": "h",
