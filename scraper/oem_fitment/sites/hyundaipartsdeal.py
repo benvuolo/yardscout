@@ -139,10 +139,17 @@ PARTS = {
                   PNL + r"|Torsion|Bar\b|Spoiler|Lamp|Cylinder|Actuator|Cover|Bumper|Striker"),
     "liftgate": (r"^Panel Assy-Tail ?Gate|^Tail ?Gate Assy|^Panel Assy-Back Door|^Door Assy-Tail ?Gate",
                  PNL + r"|Glass|Spoiler|Lamp|Cylinder|Actuator|Cover|Bumper|Striker|Wiper|Motor|Switch|Strut|Lifter"),
-    # tier C: name rule pending (written after reading the trial's list rows)
-    "wiper-motor": (r"(?!x)x", ""),
-    "knuckle": (r"(?!x)x", ""),
-    "strut": (r"(?!x)x", ""),
+    # tier C, Kia trial rows (Hyundai shares the EPC names): "Motor Assy-Windshield
+    # Wiper" / "Motor Assy-Rear Wiper" (not "Motor & Link Assy", motor plus
+    # linkage); "Knuckle-Front Axle, LH", "Carrier Assy-Rear Axle, LH"; "Strut
+    # Assy-Fr, LH", "Shock Absorber Assy-Front, LH" / "-Rear". "Damper
+    # Assy-Dynamic" is not a strut; "Strut, LH" on the rear axle page is a brake part.
+    "wiper-motor": (r"^Motor Assy-(Windshield|Front|Rear|Back|Tail ?Gate|Liftgate)?\s*Wiper",
+                    r"Link|Washer|Pump|Arm|Blade|Cover|Cap|Pivot|Crank|Relay|Switch"),
+    "knuckle": (r"^Knuckle(?: Assy)?-(Front|Fr|Steering)|^Carrier Assy-(Rear|Rr) Axle|^Knuckle-Rear|^Carrier-Rear Axle",
+                r"Hub|Bearing|Bolt|Nut|Cover|Seal|Shield|Bush|Arm|Sensor|Ring"),
+    "strut": (r"^Strut Assy-|^Shock Absorber Assy-|^Strut & Spring Assy|^Shock Absorber & Spring",
+              r"Mount|Insulator|Bearing|Spring Pad|Pad|Seat|Bumper|Stopper|Cap|Cover|Dust|Kit|Bracket|Nut|Bolt|Dynamic|Bar|Rod"),
 }
 
 # Older catalogs spell "Assembly" where newer ones print "Assy".
