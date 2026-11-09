@@ -169,8 +169,35 @@ def oneaauto_rows(r: dict):
     return refuse, pos, rows
 
 
+# ------------------------------------------------------------- generations ---
+MAX_SPAN_NO_GEN = 6  # model years, inclusive, for a model with no generation entry
+
+
+def load_generations() -> dict:
+    """squash(make)|squash(model) -> [[from, to], ...] from the app's own table
+    (docs/data/interchange.json modelGenerations, PART_CATALOG_SPEC §5.1)."""
+    p = GA.REPO / "docs" / "data" / "interchange.json"
+    try:
+        rows = json.loads(p.read_text()).get("modelGenerations", [])
+    except (OSError, ValueError):
+        rows = []
+    return {f"{GA.squash(mk)}|{GA.squash(md)}": wins for mk, md, wins in rows}
+
+
+def span_ok(gens: dict, make: str, models: list, lo: int, hi: int) -> bool:
+    """Hub 2026-11-09: a row whose span crosses a generation boundary is coarse
+    and refused; with no generation entry, only spans <= 6 model years pass."""
+    for md in models:
+        wins = gens.get(f"{GA.squash(make)}|{GA.squash(md)}")
+        if wins is not None:
+            return any(w[0] <= lo and hi <= w[1] for w in wins)
+    return hi - lo + 1 <= MAX_SPAN_NO_GEN
+
+
 # ------------------------------------------------------------------ build ---
-def build(records: list, names: GA.Names, site: str, src: str = "", complete: dict | None = None) -> dict:
+def build(records: list, names: GA.Names, site: str, src: str = "", complete: dict | None = None,
+          gens: dict | None = None) -> dict:
+    gens = load_generations() if gens is None else gens
     meta = SITES[site]
     rowfn = gsp_rows if meta["short"] == "gsp" else oneaauto_rows
     refused_units, refused_rows, unmapped = Counter(), Counter(), Counter()
@@ -212,6 +239,8 @@ def build(records: list, names: GA.Names, site: str, src: str = "", complete: di
                 unmapped[f"{a['make']} | {a['model']}"] += 1
                 continue
             mk, md, _ = c
+            if not why and not span_ok(gens, mk, [md, a["model"]], a["years"][0], a["years"][1]):
+                why = "generation_span"
             cpos = rp if rp is not None else (pos or "")
             for y in range(a["years"][0], a["years"][1] + 1):
                 for p in claim_positions(cpos):
@@ -247,7 +276,7 @@ def build(records: list, names: GA.Names, site: str, src: str = "", complete: di
                 f"vehicles in {meta['label']}'s own application list; aftermarket data, not the carmaker's "
                 f"catalog. No other unit of the same brand is listed for the same {where or ''}position on these "
                 f"cars. " + ("Match the engine. " if eng else "No engine is stated; check the engine. ")
-                + "Drive and transmission are not stated; check them.")
+                + "Drive, transmission, trim and suspension (sport / electronic) are not stated; match them.")
         groups.append({"id": f"am:{meta['short']}:{cat}:{unit}" + (f":{pos.replace(' ', '-')}" if pos else ""), "cat": cat, "tier": "likely",
                        "src": "aftermarket", "label": f"{meta['label']} {where.strip()}".strip(),
                        "unit": unit, "position": pos, "apps": apps, "cross_model": len(models) > 1,

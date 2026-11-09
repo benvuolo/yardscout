@@ -397,3 +397,27 @@ Stops proved in tests:
 - HTTP 403/429/503/500/404/301.
 
 We never load, run or submit anything.
+
+### GSP / 1A Auto curation rules after the 1A strut shakeout (hub decisions, 2026-11-09)
+
+`aftermarket/groups_rows.py`. Likely only.
+
+- **Split check:** a (category, make, model, year, corner) claimed by more
+  than one unit of the same brand and product kind is dropped from every
+  unit.
+- **Qualifiers:** every qualifier refuses its row (trim, body, drive,
+  engine, option, hybrid, production date, "without …"). Such rows still
+  claim. The position comes from the LAST position phrase.
+- **Coarse rows refuse:**
+  - an unqualified row whose unit qualifies the same make/model elsewhere;
+  - for struts, plain rows of any model the source ever qualifies by a
+    suspension option;
+  - a 1A unit whose Part Interchange lists more than one number for one
+    brand (L/R pairs aside). This is rule 5; the hub keeps it strict.
+- **Generation spans:** a row whose year span crosses a generation boundary
+  in the app's own table (`docs/data/interchange.json` `modelGenerations`,
+  PART_CATALOG_SPEC §5.1) is refused. A model with no entry passes only
+  spans of 6 model years or fewer. There is one table, not a Python copy.
+- **Notes:** each says to match engine, drive, transmission, trim and
+  suspension. The hub accepts the remaining same-engine sport-trim risk
+  (e.g. the 2007-08 TL Type-S) as Likely on that basis.
