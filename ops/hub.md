@@ -187,3 +187,8 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
   - No 1A prices, descriptions or images.
   - The GSP detector rule (script-only "captcha" word tolerated; visible or strong markers still stop) was approved under the owner's GSP go.
 - ~20:40 UTC: oem-aftermarket-crawl.yml now runs a matrix over every live aftermarket site (scout, 33655227; schedule 53 */6, input "all"). Hub cancelled the serial Spectra and 1A runs and dispatched "all": run 42694329196 has Spectra, GSP and 1A Auto in parallel. DB Electrical is .done.
+- ~22:55 UTC:
+  - The scan finished at 22:29 (data 22:24). Live oemStatus: subaru 42, gm 279, the others unchanged, CR-Z clean.
+  - Main fast-forwarded to b271356 (wheels-ship): 29 audited cross-model Mopar wheels groups, 9,610 lot cars, mopar 281→310. WHEELS_AUDITED_NS={mopar}; hmg/mb/vag wheels wait for their own §11.4 rounds.
+  - Verified: test_groups_hash, oemStatus ok x8, pf_guards, test_interchange.
+  - The stale branches interchange/wheels and interchange/wheels-curation are left in place; deleting them was refused as destructive, and that's harmless.
