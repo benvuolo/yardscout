@@ -1382,7 +1382,12 @@ class Curation:
         basis on every app's own page (policy.WHEEL_DIAMETER_RE etc.), else None."""
         if self.ns in policy.WHEEL_SAME_MODEL_ONLY_NS and len({(T[0], T[1]) for T in Ts}) > 1:
             return "wheel_cross_model_chassis", "; ".join(sorted({f"{T[0]} {T[1]}" for T in Ts}))
-        sizes = {}
+        # a record whose own description names a spare ("Spare Wheel, Steel",
+        # Mopar 5105665AA; 19 of 541 Mopar wheel records) is not offered
+        for r in c.records:
+            if policy.WHEEL_SPARE_NOTE_RE.search(r.description or ""):
+                return "wheel_spare_description", f"{r.pn}: {r.description[:80]}"
+        sizes, widths = {}, set()
         for T in Ts:
             notes = [n or "" for n in self.own_page(T, cat, c)[1]]
             text = " ; ".join(notes)
@@ -1396,9 +1401,12 @@ class Curation:
             if not d:
                 return "wheel_size_unstated", f"{T[0]} {T[1]} {T[2]}"
             sizes[T] = d
+            widths |= {float(m.group(1)) for m in policy.WHEEL_WIDTH_RE.finditer(text)}
         allsz = set().union(*sizes.values()) if sizes else set()
         if len(allsz) != 1:
             return "wheel_size_conflict", "; ".join(f"{T[1]} {T[2]}: {sorted(v)}" for T, v in sizes.items())
+        if len(widths) > 1:
+            return "wheel_width_conflict", f"widths {sorted(widths)}"
         return None
 
     def _drop_catchall_twins(self, Ts):

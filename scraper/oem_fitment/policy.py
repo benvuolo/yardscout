@@ -442,6 +442,10 @@ EXCLUDE_AT_CURATION: dict[tuple[str, str, str], str] = {
 # basis yet, so in these namespaces a wheels group stays within ONE exact model.
 WHEEL_SAME_MODEL_ONLY_NS = frozenset({"toyota"})
 WHEEL_DIAMETER_RE = re.compile(r"\b(1[3-9]|2[0-4])(?:\.\d)?\s*(?:x\s*\d|\"|''|-?\s*inch|\s*in\b)", re.I)
+# round 2 (2026-11-09, 2 WRONG): diameters agreed but widths did not ("15x6" on
+# the 2000 Cherokee vs "15x7" on the Wranglers; "20x9, Code WP2" vs "20x8, Code
+# WP2"): every width a page states must agree too.
+WHEEL_WIDTH_RE = re.compile(r"\b(?:1[3-9]|2[0-4])\s*x\s*(\d{1,2}(?:\.\d{1,2})?)", re.I)
 WHEEL_SPARE_NOTE_RE = re.compile(r"\bspare\b", re.I)
 MODEL_NUMBER_RE = re.compile(r"\b(1500|2500|3500|4500|5500)\b")
 WHEEL_NOTES_ARE_OPTIONS = frozenset({"www.hyundaipartsdeal.com", "www.kiapartsnow.com",

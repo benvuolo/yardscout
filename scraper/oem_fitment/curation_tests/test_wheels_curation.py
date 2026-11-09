@@ -62,5 +62,12 @@ ok("toyota" in policy.WHEEL_SAME_MODEL_ONLY_NS, "Toyota/Lexus wheels groups stay
 ok(all(x in src for x in ["wheel_size_unstated", "wheel_size_conflict", "wheel_model_other", "wheel_spare_note",
                           "wheel_cross_model_chassis"]), "curate.wheel_group_refusal codes wired")
 
+W = policy.WHEEL_WIDTH_RE
+ok({float(m.group(1)) for m in W.finditer("Part Notes: 15x6 WJW")} == {6.0}
+   and {float(m.group(1)) for m in W.finditer("2009-15, 20x8, Code WP2")} == {8.0}
+   and {float(m.group(1)) for m in W.finditer("16 X 6.5 - [WNG]")} == {6.5} and not W.search("16 Inch"),
+   "width read from '15x6', '20x8', '16 X 6.5'; none from '16 Inch' (round 2: 1SZ98PAKAA, 1DP88SZ0AB)")
+ok("wheel_width_conflict" in src and "wheel_spare_description" in src, "width conflict and spare description wired")
+
 print("OK" if not fails else f"{len(fails)} FAIL")
 sys.exit(1 if fails else 0)
