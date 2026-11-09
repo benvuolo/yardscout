@@ -2517,7 +2517,9 @@ Other outputs of this session:
       ac-condenser, heater-core, evaporator (exact); strut (body). Price tokens are exact rows.
     - _am_group_entry accepts gates. Test: scraper/test_am_gates.py.
     - Merges only after the Spectra and GSP/1A §11.4 samples pass and the hub confirms. When
-      merging, re-check sw.js (jh-v173 on the branch) and the test_interchange category count.
+      merging, re-check the test_interchange category count. sw: the branch is jh-v174
+      (rebased on main ac8de08, 5efdc7e). design/phoenix-cluster also takes jh-v174 and will
+      likely merge first, so on the next rebase set the branch to jh-v175 (hub 22:27 UTC).
     - Tier C wiper-motor/knuckle categories are not on it yet; they follow the OEM curation.
     - Checked with both sessions (21:20 UTC):
       - Spectra emits radiator, ac-compressor, ac-condenser, evaporator (renamed from
