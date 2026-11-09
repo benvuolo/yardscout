@@ -1,8 +1,8 @@
 # OEM curation report: gm
 
-Raw: `c36da2eb98835c02f81c05e8c36b6a926634a332` @ `c36da2eb9883`; as of 2026-11-09T02:38:43Z.
+Raw: `3b4677ae1df7` @ `3b4677ae1df7`; as of 2026-11-09T21:57:34Z.
 
-- records 5875, classes 5875, list rows 95531, year manifests 424, cells 22215
+- records 6878, classes 6878, list rows 95531, year manifests 578, cells 24653
 - Verified groups 0, engine vg groups 0, Likely groups 279
 - blocked sites: none
 
@@ -10,368 +10,375 @@ Raw: `c36da2eb98835c02f81c05e8c36b6a926634a332` @ `c36da2eb9883`; as of 2026-11-
 
 - no (site, category) of this namespace has passed the audit gate (audits.json has no record; spec 11.4, E5/V7)
 - engine cells not audited as reliable on www.gmpartsgiant.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE
-- www.gmpartsgiant.com: only 0% of its 17867 fitment rows can be coverage: its option column holds trims (option_column_is_trims), which count only after a namespace audit (spec 5.2)
+- www.gmpartsgiant.com: only 0% of its 20154 fitment rows can be coverage: its option column holds trims (option_column_is_trims), which count only after a namespace audit (spec 5.2)
 
 ## Funnel (lot cars per category, first open reason)
 
 | category | stage | reason | cars |
 |---|---|---|---|
-| ac-compressor | unmapped | - | 11216 |
-| ac-compressor | no_records | - | 3527 |
-| ac-compressor | not_closed | ambig_target | 10515 |
-| ac-compressor | not_closed | no_list_manifest | 12225 |
-| ac-compressor | not_closed | no_year_manifest | 41322 |
+| ac-compressor | unmapped | - | 11256 |
+| ac-compressor | no_records | - | 3513 |
+| ac-compressor | not_closed | ambig_target | 10516 |
+| ac-compressor | not_closed | no_list_manifest | 13583 |
+| ac-compressor | not_closed | no_year_manifest | 39609 |
 | ac-compressor | not_closed | unattested | 34 |
-| ac-compressor | not_closed | uncrawled_chain_member | 1107 |
+| ac-compressor | not_closed | uncrawled_chain_member | 1102 |
 | ac-compressor | not_closed | unverified_product | 1041 |
-| ac-compressor | not_closed | variant_unread | 381 |
+| ac-compressor | not_closed | variant_unread | 635 |
 | ac-compressor | not_closed | year_manifest_bad | 7 |
-| alternator | unmapped | - | 11216 |
-| alternator | no_records | - | 4571 |
-| alternator | not_closed | ambig_target | 10229 |
-| alternator | not_closed | no_list_manifest | 12278 |
-| alternator | not_closed | no_year_manifest | 40554 |
-| alternator | not_closed | unread_sibling_page | 2139 |
-| alternator | not_closed | variant_unread | 381 |
+| alternator | unmapped | - | 11256 |
+| alternator | no_records | - | 4563 |
+| alternator | not_closed | ambig_target | 10225 |
+| alternator | not_closed | no_list_manifest | 13631 |
+| alternator | not_closed | no_year_manifest | 38845 |
+| alternator | not_closed | unread_sibling_page | 2134 |
+| alternator | not_closed | variant_unread | 635 |
 | alternator | not_closed | year_manifest_bad | 7 |
-| bumper-front | unmapped | - | 11216 |
-| bumper-front | no_records | - | 21999 |
-| bumper-front | not_closed | ambig_target | 5797 |
-| bumper-front | not_closed | no_list_manifest | 12319 |
-| bumper-front | not_closed | no_year_manifest | 29663 |
-| bumper-front | not_closed | variant_unread | 381 |
-| bumper-rear | unmapped | - | 11216 |
-| bumper-rear | no_records | - | 22820 |
-| bumper-rear | not_closed | ambig_target | 6123 |
-| bumper-rear | not_closed | no_list_manifest | 11680 |
-| bumper-rear | not_closed | no_year_manifest | 29155 |
-| bumper-rear | not_closed | variant_unread | 381 |
-| climate-control | unmapped | - | 11216 |
-| climate-control | no_records | - | 17104 |
-| climate-control | not_closed | ambig_target | 10799 |
-| climate-control | not_closed | no_list_manifest | 10503 |
-| climate-control | not_closed | no_year_manifest | 29495 |
-| climate-control | not_closed | unread_sibling_page | 1891 |
-| climate-control | not_closed | variant_unread | 361 |
+| bumper-front | unmapped | - | 11256 |
+| bumper-front | no_records | - | 11972 |
+| bumper-front | not_closed | ambig_target | 7707 |
+| bumper-front | not_closed | no_list_manifest | 15361 |
+| bumper-front | not_closed | no_year_manifest | 34365 |
+| bumper-front | not_closed | variant_unread | 635 |
+| bumper-rear | unmapped | - | 11256 |
+| bumper-rear | no_records | - | 14123 |
+| bumper-rear | not_closed | ambig_target | 7407 |
+| bumper-rear | not_closed | no_list_manifest | 14432 |
+| bumper-rear | not_closed | no_year_manifest | 33443 |
+| bumper-rear | not_closed | variant_unread | 635 |
+| climate-control | unmapped | - | 11256 |
+| climate-control | no_records | - | 17079 |
+| climate-control | not_closed | ambig_target | 10800 |
+| climate-control | not_closed | no_list_manifest | 11619 |
+| climate-control | not_closed | no_year_manifest | 28036 |
+| climate-control | not_closed | unread_sibling_page | 1885 |
+| climate-control | not_closed | variant_unread | 615 |
 | climate-control | not_closed | year_manifest_bad | 6 |
-| door-front | unmapped | - | 11216 |
-| door-front | no_records | - | 15378 |
-| door-front | not_closed | ambig_target | 10245 |
-| door-front | not_closed | no_list_manifest | 11710 |
-| door-front | not_closed | no_year_manifest | 32439 |
-| door-front | not_closed | variant_unread | 381 |
+| door-front | unmapped | - | 11256 |
+| door-front | no_records | - | 9607 |
+| door-front | not_closed | ambig_target | 10933 |
+| door-front | not_closed | no_list_manifest | 14044 |
+| door-front | not_closed | no_year_manifest | 34815 |
+| door-front | not_closed | variant_unread | 635 |
 | door-front | not_closed | year_manifest_bad | 6 |
-| door-rear | unmapped | - | 11216 |
-| door-rear | no_records | - | 23429 |
-| door-rear | not_closed | ambig_target | 5746 |
-| door-rear | not_closed | no_list_manifest | 11330 |
-| door-rear | not_closed | no_year_manifest | 29267 |
-| door-rear | not_closed | variant_unread | 381 |
+| door-rear | unmapped | - | 11256 |
+| door-rear | no_records | - | 15387 |
+| door-rear | not_closed | ambig_target | 7716 |
+| door-rear | not_closed | no_list_manifest | 13680 |
+| door-rear | not_closed | no_year_manifest | 32616 |
+| door-rear | not_closed | variant_unread | 635 |
 | door-rear | not_closed | year_manifest_bad | 6 |
-| fender | unmapped | - | 11216 |
-| fender | no_records | - | 29951 |
-| fender | not_closed | ambig_target | 5838 |
-| fender | not_closed | no_list_manifest | 9955 |
-| fender | not_closed | no_year_manifest | 24048 |
-| fender | not_closed | variant_unread | 361 |
+| fender | unmapped | - | 11256 |
+| fender | no_records | - | 19703 |
+| fender | not_closed | ambig_target | 9504 |
+| fender | not_closed | no_list_manifest | 12174 |
+| fender | not_closed | no_year_manifest | 28038 |
+| fender | not_closed | variant_unread | 615 |
 | fender | not_closed | year_manifest_bad | 6 |
-| fuel-pump-module | unmapped | - | 11216 |
-| fuel-pump-module | no_records | - | 7157 |
-| fuel-pump-module | not_closed | ambig_target | 10282 |
-| fuel-pump-module | not_closed | no_list_manifest | 12307 |
-| fuel-pump-module | not_closed | no_year_manifest | 37844 |
-| fuel-pump-module | not_closed | unread_sibling_page | 2181 |
-| fuel-pump-module | not_closed | variant_unread | 381 |
+| fuel-pump-module | unmapped | - | 11256 |
+| fuel-pump-module | no_records | - | 7129 |
+| fuel-pump-module | not_closed | ambig_target | 10285 |
+| fuel-pump-module | not_closed | no_list_manifest | 13500 |
+| fuel-pump-module | not_closed | no_year_manifest | 36308 |
+| fuel-pump-module | not_closed | unread_sibling_page | 2176 |
+| fuel-pump-module | not_closed | variant_unread | 635 |
 | fuel-pump-module | not_closed | year_manifest_bad | 7 |
-| gauge-cluster | unmapped | - | 11216 |
-| gauge-cluster | no_records | - | 36862 |
-| gauge-cluster | not_closed | ambig_target | 6569 |
-| gauge-cluster | not_closed | no_list_manifest | 11354 |
-| gauge-cluster | not_closed | no_year_manifest | 15013 |
-| gauge-cluster | not_closed | variant_unread | 361 |
-| grille | unmapped | - | 11216 |
-| grille | no_records | - | 21976 |
-| grille | not_closed | ambig_target | 6449 |
-| grille | not_closed | no_list_manifest | 11636 |
-| grille | not_closed | no_year_manifest | 29737 |
-| grille | not_closed | variant_unread | 361 |
-| headlights | unmapped | - | 11216 |
-| headlights | no_records | - | 10011 |
-| headlights | not_closed | ambig_target | 10739 |
-| headlights | not_closed | no_list_manifest | 11633 |
-| headlights | not_closed | no_year_manifest | 35207 |
-| headlights | not_closed | unattested | 592 |
+| gauge-cluster | unmapped | - | 11256 |
+| gauge-cluster | no_records | - | 26840 |
+| gauge-cluster | not_closed | ambig_target | 8721 |
+| gauge-cluster | not_closed | no_list_manifest | 14081 |
+| gauge-cluster | not_closed | no_year_manifest | 19783 |
+| gauge-cluster | not_closed | variant_unread | 615 |
+| grille | unmapped | - | 11256 |
+| grille | no_records | - | 11367 |
+| grille | not_closed | ambig_target | 10198 |
+| grille | not_closed | no_list_manifest | 14530 |
+| grille | not_closed | no_year_manifest | 33330 |
+| grille | not_closed | variant_unread | 615 |
+| headlights | unmapped | - | 11256 |
+| headlights | no_records | - | 9980 |
+| headlights | not_closed | ambig_target | 10741 |
+| headlights | not_closed | no_list_manifest | 12971 |
+| headlights | not_closed | no_year_manifest | 33530 |
+| headlights | not_closed | unattested | 589 |
 | headlights | not_closed | uncrawled_chain_member | 712 |
-| headlights | not_closed | unread_sibling_page | 827 |
+| headlights | not_closed | unread_sibling_page | 825 |
 | headlights | not_closed | unverified_product | 51 |
-| headlights | not_closed | variant_unread | 381 |
+| headlights | not_closed | variant_unread | 635 |
 | headlights | not_closed | year_manifest_bad | 6 |
-| hood | unmapped | - | 11216 |
-| hood | no_records | - | 26030 |
-| hood | not_closed | ambig_target | 5838 |
-| hood | not_closed | no_list_manifest | 10964 |
-| hood | not_closed | no_year_manifest | 26960 |
-| hood | not_closed | variant_unread | 361 |
+| hood | unmapped | - | 11256 |
+| hood | no_records | - | 18446 |
+| hood | not_closed | ambig_target | 9376 |
+| hood | not_closed | no_list_manifest | 12937 |
+| hood | not_closed | no_year_manifest | 28660 |
+| hood | not_closed | variant_unread | 615 |
 | hood | not_closed | year_manifest_bad | 6 |
-| ignition-coils | unmapped | - | 11216 |
-| ignition-coils | no_records | - | 6340 |
-| ignition-coils | not_closed | ambig_target | 9335 |
-| ignition-coils | not_closed | no_list_manifest | 13862 |
-| ignition-coils | not_closed | no_year_manifest | 40234 |
-| ignition-coils | not_closed | variant_unread | 381 |
+| ignition-coils | unmapped | - | 11256 |
+| ignition-coils | no_records | - | 4805 |
+| ignition-coils | not_closed | ambig_target | 9338 |
+| ignition-coils | not_closed | no_list_manifest | 15505 |
+| ignition-coils | not_closed | no_year_manifest | 39750 |
+| ignition-coils | not_closed | variant_unread | 635 |
 | ignition-coils | not_closed | year_manifest_bad | 7 |
-| liftgate | unmapped | - | 11216 |
-| liftgate | no_records | - | 48311 |
-| liftgate | not_closed | ambig_target | 4390 |
-| liftgate | not_closed | no_list_manifest | 4218 |
-| liftgate | not_closed | no_year_manifest | 13214 |
+| liftgate | unmapped | - | 11256 |
+| liftgate | no_records | - | 46123 |
+| liftgate | not_closed | ambig_target | 4397 |
+| liftgate | not_closed | no_list_manifest | 5156 |
+| liftgate | not_closed | no_year_manifest | 14338 |
 | liftgate | not_closed | variant_unread | 20 |
 | liftgate | not_closed | year_manifest_bad | 6 |
-| power-steering-pump | unmapped | - | 11216 |
-| power-steering-pump | no_records | - | 17754 |
-| power-steering-pump | not_closed | ambig_target | 10729 |
-| power-steering-pump | not_closed | no_list_manifest | 8036 |
-| power-steering-pump | not_closed | no_year_manifest | 31639 |
-| power-steering-pump | not_closed | unread_sibling_page | 1821 |
-| power-steering-pump | not_closed | variant_unread | 173 |
+| power-steering-pump | unmapped | - | 11256 |
+| power-steering-pump | no_records | - | 17684 |
+| power-steering-pump | not_closed | ambig_target | 10730 |
+| power-steering-pump | not_closed | no_list_manifest | 9189 |
+| power-steering-pump | not_closed | no_year_manifest | 30187 |
+| power-steering-pump | not_closed | unread_sibling_page | 1815 |
+| power-steering-pump | not_closed | variant_unread | 428 |
 | power-steering-pump | not_closed | year_manifest_bad | 7 |
-| radiator | unmapped | - | 11216 |
-| radiator | no_records | - | 11017 |
-| radiator | not_closed | ambig_target | 10563 |
-| radiator | not_closed | no_list_manifest | 12875 |
-| radiator | not_closed | no_year_manifest | 35317 |
-| radiator | not_closed | variant_unread | 381 |
+| radiator | unmapped | - | 11256 |
+| radiator | no_records | - | 5280 |
+| radiator | not_closed | ambig_target | 10693 |
+| radiator | not_closed | no_list_manifest | 15305 |
+| radiator | not_closed | no_year_manifest | 38121 |
+| radiator | not_closed | variant_unread | 635 |
 | radiator | not_closed | year_manifest_bad | 6 |
-| side-mirrors | unmapped | - | 11216 |
-| side-mirrors | no_records | - | 3133 |
-| side-mirrors | not_closed | ambig_target | 10829 |
-| side-mirrors | not_closed | no_list_manifest | 12425 |
-| side-mirrors | not_closed | no_year_manifest | 41202 |
-| side-mirrors | not_closed | unread_sibling_page | 2182 |
-| side-mirrors | not_closed | variant_unread | 381 |
+| side-mirrors | unmapped | - | 11256 |
+| side-mirrors | no_records | - | 3123 |
+| side-mirrors | not_closed | ambig_target | 10830 |
+| side-mirrors | not_closed | no_list_manifest | 13771 |
+| side-mirrors | not_closed | no_year_manifest | 39497 |
+| side-mirrors | not_closed | unread_sibling_page | 2177 |
+| side-mirrors | not_closed | variant_unread | 635 |
 | side-mirrors | not_closed | year_manifest_bad | 7 |
-| starter | unmapped | - | 11216 |
-| starter | no_records | - | 2262 |
-| starter | not_closed | ambig_target | 10947 |
-| starter | not_closed | no_list_manifest | 12155 |
-| starter | not_closed | no_year_manifest | 42226 |
-| starter | not_closed | unread_sibling_page | 2181 |
-| starter | not_closed | variant_unread | 381 |
+| starter | unmapped | - | 11256 |
+| starter | no_records | - | 2258 |
+| starter | not_closed | ambig_target | 10949 |
+| starter | not_closed | no_list_manifest | 13502 |
+| starter | not_closed | no_year_manifest | 40513 |
+| starter | not_closed | unread_sibling_page | 2176 |
+| starter | not_closed | variant_unread | 635 |
 | starter | not_closed | year_manifest_bad | 7 |
-| tail-lights | unmapped | - | 11216 |
-| tail-lights | no_records | - | 5608 |
-| tail-lights | not_closed | ambig_target | 10711 |
-| tail-lights | not_closed | no_list_manifest | 12197 |
-| tail-lights | not_closed | no_year_manifest | 39074 |
-| tail-lights | not_closed | unattested | 598 |
-| tail-lights | not_closed | uncrawled_chain_member | 1430 |
-| tail-lights | not_closed | unverified_product | 154 |
-| tail-lights | not_closed | variant_unread | 381 |
+| tail-lights | unmapped | - | 11256 |
+| tail-lights | no_records | - | 5593 |
+| tail-lights | not_closed | ambig_target | 10712 |
+| tail-lights | not_closed | no_list_manifest | 13426 |
+| tail-lights | not_closed | no_year_manifest | 37491 |
+| tail-lights | not_closed | unattested | 597 |
+| tail-lights | not_closed | uncrawled_chain_member | 1428 |
+| tail-lights | not_closed | unverified_product | 152 |
+| tail-lights | not_closed | variant_unread | 635 |
 | tail-lights | not_closed | year_manifest_bad | 6 |
-| tailgate | unmapped | - | 11216 |
-| tailgate | no_records | - | 64453 |
-| tailgate | not_closed | ambig_target | 4148 |
-| tailgate | not_closed | no_list_manifest | 110 |
-| tailgate | not_closed | no_year_manifest | 1448 |
-| throttle-body | unmapped | - | 11216 |
-| throttle-body | no_records | - | 24452 |
-| throttle-body | not_closed | ambig_target | 10263 |
-| throttle-body | not_closed | no_list_manifest | 7377 |
-| throttle-body | not_closed | no_year_manifest | 25881 |
-| throttle-body | not_closed | unattested | 1046 |
+| tailgate | unmapped | - | 11256 |
+| tailgate | no_records | - | 62889 |
+| tailgate | not_closed | ambig_target | 5578 |
+| tailgate | not_closed | no_list_manifest | 367 |
+| tailgate | not_closed | no_year_manifest | 1206 |
+| throttle-body | unmapped | - | 11256 |
+| throttle-body | no_records | - | 24431 |
+| throttle-body | not_closed | ambig_target | 10260 |
+| throttle-body | not_closed | no_list_manifest | 8212 |
+| throttle-body | not_closed | no_year_manifest | 24699 |
+| throttle-body | not_closed | unattested | 1042 |
 | throttle-body | not_closed | uncrawled_chain_member | 849 |
-| throttle-body | not_closed | unverified_product | 285 |
+| throttle-body | not_closed | unverified_product | 284 |
+| throttle-body | not_closed | variant_unread | 257 |
 | throttle-body | not_closed | year_manifest_bad | 6 |
-| trunk-lid | unmapped | - | 11216 |
-| trunk-lid | no_records | - | 48210 |
-| trunk-lid | not_closed | no_list_manifest | 6776 |
-| trunk-lid | not_closed | no_year_manifest | 14812 |
-| trunk-lid | not_closed | variant_unread | 361 |
-| window-regulator | unmapped | - | 11216 |
-| window-regulator | no_records | - | 1926 |
+| trunk-lid | unmapped | - | 11256 |
+| trunk-lid | no_records | - | 44646 |
+| trunk-lid | not_closed | no_list_manifest | 7881 |
+| trunk-lid | not_closed | no_year_manifest | 16898 |
+| trunk-lid | not_closed | variant_unread | 615 |
+| window-regulator | unmapped | - | 11256 |
+| window-regulator | no_records | - | 1931 |
 | window-regulator | not_closed | ambig_target | 10754 |
-| window-regulator | not_closed | no_list_manifest | 12438 |
-| window-regulator | not_closed | no_year_manifest | 42479 |
-| window-regulator | not_closed | unattested | 33 |
-| window-regulator | not_closed | uncrawled_chain_member | 669 |
-| window-regulator | not_closed | unread_sibling_page | 1288 |
-| window-regulator | not_closed | unverified_product | 184 |
-| window-regulator | not_closed | variant_unread | 381 |
+| window-regulator | not_closed | no_list_manifest | 13789 |
+| window-regulator | not_closed | no_year_manifest | 40755 |
+| window-regulator | not_closed | unattested | 32 |
+| window-regulator | not_closed | uncrawled_chain_member | 662 |
+| window-regulator | not_closed | unread_sibling_page | 1290 |
+| window-regulator | not_closed | unverified_product | 185 |
+| window-regulator | not_closed | variant_unread | 635 |
 | window-regulator | not_closed | year_manifest_bad | 7 |
-| window-switch | unmapped | - | 11216 |
-| window-switch | no_records | - | 7754 |
-| window-switch | not_closed | ambig_target | 10804 |
-| window-switch | not_closed | no_list_manifest | 11631 |
-| window-switch | not_closed | no_year_manifest | 37409 |
+| window-switch | unmapped | - | 11256 |
+| window-switch | no_records | - | 7740 |
+| window-switch | not_closed | ambig_target | 10806 |
+| window-switch | not_closed | no_list_manifest | 12726 |
+| window-switch | not_closed | no_year_manifest | 35958 |
 | window-switch | not_closed | unattested | 139 |
-| window-switch | not_closed | uncrawled_chain_member | 649 |
-| window-switch | not_closed | unread_sibling_page | 1064 |
-| window-switch | not_closed | unverified_product | 322 |
-| window-switch | not_closed | variant_unread | 381 |
+| window-switch | not_closed | uncrawled_chain_member | 642 |
+| window-switch | not_closed | unread_sibling_page | 1067 |
+| window-switch | not_closed | unverified_product | 321 |
+| window-switch | not_closed | variant_unread | 635 |
 | window-switch | not_closed | year_manifest_bad | 6 |
 
 ## Hypothetical funnel (closure assumed; never shipped)
 
 | category | stage | reason | cars |
 |---|---|---|---|
-| ac-compressor | unmapped | - | 11216 |
-| ac-compressor | no_records | - | 3527 |
+| ac-compressor | unmapped | - | 11256 |
+| ac-compressor | no_records | - | 3513 |
 | ac-compressor | split | no_candidates | 66 |
-| ac-compressor | split | option_split | 40976 |
-| ac-compressor | conditional | conditional:engine_unattested | 16709 |
+| ac-compressor | split | option_split | 40922 |
+| ac-compressor | conditional | conditional:engine_unattested | 16673 |
 | ac-compressor | conditional | conditional:option | 152 |
-| ac-compressor | conditional | conditional:qualifier | 8729 |
-| alternator | unmapped | - | 11216 |
-| alternator | no_records | - | 4571 |
+| ac-compressor | conditional | conditional:qualifier | 8714 |
+| alternator | unmapped | - | 11256 |
+| alternator | no_records | - | 4563 |
 | alternator | split | no_candidates | 7 |
-| alternator | split | option_split | 46491 |
-| alternator | conditional | conditional:engine_unattested | 17450 |
+| alternator | split | option_split | 46433 |
+| alternator | conditional | conditional:engine_unattested | 17397 |
 | alternator | conditional | conditional:qualifier | 1640 |
-| bumper-front | unmapped | - | 11216 |
-| bumper-front | no_records | - | 21999 |
-| bumper-front | split | option_split | 41434 |
-| bumper-front | conditional | conditional:engine_unattested | 6450 |
-| bumper-front | conditional | conditional:qualifier | 276 |
-| bumper-rear | unmapped | - | 11216 |
-| bumper-rear | no_records | - | 22820 |
-| bumper-rear | split | option_split | 38599 |
-| bumper-rear | conditional | conditional:engine_unattested | 4406 |
-| bumper-rear | conditional | conditional:qualifier | 4334 |
-| climate-control | unmapped | - | 11216 |
-| climate-control | no_records | - | 17104 |
-| climate-control | split | no_candidates | 439 |
-| climate-control | split | option_split | 43439 |
-| climate-control | conditional | conditional:engine_unattested | 7578 |
-| climate-control | conditional | conditional:option | 1590 |
+| bumper-front | unmapped | - | 11256 |
+| bumper-front | no_records | - | 11972 |
+| bumper-front | split | option_split | 50621 |
+| bumper-front | conditional | conditional:engine_unattested | 6833 |
+| bumper-front | conditional | conditional:qualifier | 614 |
+| bumper-rear | unmapped | - | 11256 |
+| bumper-rear | no_records | - | 14123 |
+| bumper-rear | split | option_split | 45374 |
+| bumper-rear | conditional | conditional:engine_unattested | 8434 |
+| bumper-rear | conditional | conditional:qualifier | 2109 |
+| climate-control | unmapped | - | 11256 |
+| climate-control | no_records | - | 17079 |
+| climate-control | split | no_candidates | 440 |
+| climate-control | split | option_split | 43368 |
+| climate-control | conditional | conditional:engine_unattested | 7558 |
+| climate-control | conditional | conditional:option | 1586 |
 | climate-control | conditional | conditional:qualifier | 9 |
-| door-front | unmapped | - | 11216 |
-| door-front | no_records | - | 15378 |
-| door-front | split | option_split | 7790 |
-| door-front | split | slot_missing | 6075 |
-| door-front | conditional | conditional:engine_unattested | 29609 |
-| door-front | conditional | conditional:option | 189 |
-| door-front | conditional | conditional:qualifier | 11118 |
-| door-rear | unmapped | - | 11216 |
-| door-rear | no_records | - | 23429 |
-| door-rear | split | option_split | 10698 |
-| door-rear | split | slot_missing | 3113 |
-| door-rear | conditional | conditional:engine_unattested | 15840 |
-| door-rear | conditional | conditional:option | 373 |
-| door-rear | conditional | conditional:qualifier | 16706 |
-| fender | unmapped | - | 11216 |
-| fender | no_records | - | 29951 |
-| fender | split | option_split | 7168 |
-| fender | conditional | conditional:engine_unattested | 25578 |
-| fender | conditional | conditional:option | 521 |
-| fender | conditional | conditional:qualifier | 6941 |
-| fuel-pump-module | unmapped | - | 11216 |
-| fuel-pump-module | no_records | - | 7157 |
+| door-front | unmapped | - | 11256 |
+| door-front | no_records | - | 9607 |
+| door-front | split | option_split | 8703 |
+| door-front | split | slot_missing | 6425 |
+| door-front | conditional | conditional:engine_unattested | 32654 |
+| door-front | conditional | conditional:option | 336 |
+| door-front | conditional | conditional:qualifier | 12315 |
+| door-rear | unmapped | - | 11256 |
+| door-rear | no_records | - | 15387 |
+| door-rear | split | option_split | 12273 |
+| door-rear | split | position_missing | 230 |
+| door-rear | split | slot_missing | 3370 |
+| door-rear | conditional | conditional:engine_unattested | 19399 |
+| door-rear | conditional | conditional:option | 633 |
+| door-rear | conditional | conditional:qualifier | 18748 |
+| fender | unmapped | - | 11256 |
+| fender | no_records | - | 19703 |
+| fender | split | option_split | 8554 |
+| fender | conditional | conditional:engine_unattested | 33174 |
+| fender | conditional | conditional:option | 530 |
+| fender | conditional | conditional:qualifier | 8079 |
+| fuel-pump-module | unmapped | - | 11256 |
+| fuel-pump-module | no_records | - | 7129 |
 | fuel-pump-module | split | no_candidates | 358 |
-| fuel-pump-module | split | option_split | 48206 |
-| fuel-pump-module | conditional | conditional:engine_unattested | 6695 |
-| fuel-pump-module | conditional | conditional:qualifier | 7743 |
-| gauge-cluster | unmapped | - | 11216 |
-| gauge-cluster | no_records | - | 36862 |
-| gauge-cluster | split | option_split | 31621 |
-| gauge-cluster | conditional | conditional:engine_unattested | 1676 |
-| grille | unmapped | - | 11216 |
-| grille | no_records | - | 21976 |
-| grille | split | option_split | 41418 |
-| grille | conditional | conditional:engine_unattested | 3804 |
-| grille | conditional | conditional:qualifier | 2961 |
-| headlights | unmapped | - | 11216 |
-| headlights | no_records | - | 10011 |
-| headlights | split | no_candidates | 315 |
-| headlights | split | option_split | 28048 |
-| headlights | split | position_missing | 393 |
-| headlights | split | slot_missing | 164 |
-| headlights | conditional | conditional:engine_unattested | 16226 |
-| headlights | conditional | conditional:option | 853 |
-| headlights | conditional | conditional:qualifier | 14149 |
-| hood | unmapped | - | 11216 |
-| hood | no_records | - | 26030 |
-| hood | split | option_split | 4749 |
-| hood | conditional | conditional:engine_unattested | 34545 |
-| hood | conditional | conditional:qualifier | 4835 |
-| ignition-coils | unmapped | - | 11216 |
-| ignition-coils | no_records | - | 6340 |
-| ignition-coils | split | option_split | 40248 |
-| ignition-coils | conditional | conditional:engine_unattested | 20180 |
-| ignition-coils | conditional | conditional:package | 635 |
-| ignition-coils | conditional | conditional:qualifier | 2756 |
-| liftgate | unmapped | - | 11216 |
-| liftgate | no_records | - | 48311 |
-| liftgate | split | option_split | 686 |
-| liftgate | conditional | conditional:engine_unattested | 12810 |
-| liftgate | conditional | conditional:qualifier | 8352 |
-| power-steering-pump | unmapped | - | 11216 |
-| power-steering-pump | no_records | - | 17754 |
-| power-steering-pump | split | no_candidates | 35 |
-| power-steering-pump | split | option_split | 27954 |
-| power-steering-pump | conditional | conditional:engine_unattested | 18142 |
-| power-steering-pump | conditional | conditional:qualifier | 6274 |
-| radiator | unmapped | - | 11216 |
-| radiator | no_records | - | 11017 |
-| radiator | split | option_split | 47475 |
-| radiator | conditional | conditional:engine_unattested | 8971 |
-| radiator | conditional | conditional:qualifier | 2696 |
-| side-mirrors | unmapped | - | 11216 |
-| side-mirrors | no_records | - | 3133 |
+| fuel-pump-module | split | option_split | 48139 |
+| fuel-pump-module | conditional | conditional:engine_unattested | 6676 |
+| fuel-pump-module | conditional | conditional:qualifier | 7738 |
+| gauge-cluster | unmapped | - | 11256 |
+| gauge-cluster | no_records | - | 26840 |
+| gauge-cluster | split | option_split | 40232 |
+| gauge-cluster | conditional | conditional:engine_unattested | 2890 |
+| gauge-cluster | conditional | conditional:qualifier | 78 |
+| grille | unmapped | - | 11256 |
+| grille | no_records | - | 11367 |
+| grille | split | option_split | 50242 |
+| grille | conditional | conditional:engine_unattested | 5527 |
+| grille | conditional | conditional:qualifier | 2904 |
+| headlights | unmapped | - | 11256 |
+| headlights | no_records | - | 9980 |
+| headlights | split | no_candidates | 310 |
+| headlights | split | option_split | 28006 |
+| headlights | split | position_missing | 383 |
+| headlights | split | slot_missing | 165 |
+| headlights | conditional | conditional:engine_unattested | 16214 |
+| headlights | conditional | conditional:option | 858 |
+| headlights | conditional | conditional:qualifier | 14124 |
+| hood | unmapped | - | 11256 |
+| hood | no_records | - | 18446 |
+| hood | split | option_split | 5247 |
+| hood | conditional | conditional:engine_unattested | 39250 |
+| hood | conditional | conditional:option | 65 |
+| hood | conditional | conditional:qualifier | 7032 |
+| ignition-coils | unmapped | - | 11256 |
+| ignition-coils | no_records | - | 4805 |
+| ignition-coils | split | option_split | 42363 |
+| ignition-coils | conditional | conditional:engine_unattested | 19239 |
+| ignition-coils | conditional | conditional:package | 763 |
+| ignition-coils | conditional | conditional:qualifier | 2870 |
+| liftgate | unmapped | - | 11256 |
+| liftgate | no_records | - | 46123 |
+| liftgate | split | option_split | 3249 |
+| liftgate | conditional | conditional:engine_unattested | 14181 |
+| liftgate | conditional | conditional:qualifier | 6487 |
+| power-steering-pump | unmapped | - | 11256 |
+| power-steering-pump | no_records | - | 17684 |
+| power-steering-pump | split | no_candidates | 36 |
+| power-steering-pump | split | option_split | 27933 |
+| power-steering-pump | conditional | conditional:engine_unattested | 18148 |
+| power-steering-pump | conditional | conditional:qualifier | 6239 |
+| radiator | unmapped | - | 11256 |
+| radiator | no_records | - | 5280 |
+| radiator | split | option_split | 52264 |
+| radiator | conditional | conditional:engine_unattested | 10076 |
+| radiator | conditional | conditional:option | 63 |
+| radiator | conditional | conditional:qualifier | 2357 |
+| side-mirrors | unmapped | - | 11256 |
+| side-mirrors | no_records | - | 3123 |
 | side-mirrors | split | no_candidates | 1 |
-| side-mirrors | split | option_split | 61320 |
+| side-mirrors | split | option_split | 61216 |
 | side-mirrors | split | position_missing | 14 |
 | side-mirrors | split | slot_missing | 123 |
-| side-mirrors | conditional | conditional:engine_unattested | 4676 |
-| side-mirrors | conditional | conditional:option | 530 |
-| side-mirrors | conditional | conditional:qualifier | 362 |
-| starter | unmapped | - | 11216 |
-| starter | no_records | - | 2262 |
+| side-mirrors | conditional | conditional:engine_unattested | 4668 |
+| side-mirrors | conditional | conditional:option | 532 |
+| side-mirrors | conditional | conditional:qualifier | 363 |
+| starter | unmapped | - | 11256 |
+| starter | no_records | - | 2258 |
 | starter | split | no_candidates | 195 |
-| starter | split | option_split | 38671 |
-| starter | conditional | conditional:engine_unattested | 17202 |
-| starter | conditional | conditional:option | 306 |
-| starter | conditional | conditional:qualifier | 11523 |
-| tail-lights | unmapped | - | 11216 |
-| tail-lights | no_records | - | 5608 |
-| tail-lights | split | no_candidates | 279 |
-| tail-lights | split | option_split | 39477 |
+| starter | split | option_split | 38616 |
+| starter | conditional | conditional:engine_unattested | 17140 |
+| starter | conditional | conditional:option | 307 |
+| starter | conditional | conditional:qualifier | 11524 |
+| tail-lights | unmapped | - | 11256 |
+| tail-lights | no_records | - | 5593 |
+| tail-lights | split | no_candidates | 280 |
+| tail-lights | split | option_split | 39416 |
 | tail-lights | split | position_missing | 982 |
-| tail-lights | split | slot_missing | 429 |
-| tail-lights | conditional | conditional:engine_unattested | 22545 |
-| tail-lights | conditional | conditional:option | 67 |
-| tail-lights | conditional | conditional:qualifier | 772 |
-| tailgate | unmapped | - | 11216 |
-| tailgate | no_records | - | 64453 |
-| tailgate | split | option_split | 4704 |
-| tailgate | conditional | conditional:engine_unattested | 1002 |
-| throttle-body | unmapped | - | 11216 |
-| throttle-body | no_records | - | 24452 |
+| tail-lights | split | slot_missing | 431 |
+| tail-lights | conditional | conditional:engine_unattested | 22496 |
+| tail-lights | conditional | conditional:option | 68 |
+| tail-lights | conditional | conditional:qualifier | 774 |
+| tailgate | unmapped | - | 11256 |
+| tailgate | no_records | - | 62889 |
+| tailgate | split | option_split | 5990 |
+| tailgate | conditional | conditional:engine_unattested | 963 |
+| tailgate | conditional | conditional:option | 32 |
+| tailgate | conditional | conditional:qualifier | 166 |
+| throttle-body | unmapped | - | 11256 |
+| throttle-body | no_records | - | 24431 |
 | throttle-body | split | no_candidates | 809 |
-| throttle-body | split | option_split | 23953 |
-| throttle-body | conditional | conditional:engine_unattested | 5520 |
-| throttle-body | conditional | conditional:qualifier | 15425 |
-| trunk-lid | unmapped | - | 11216 |
-| trunk-lid | no_records | - | 48210 |
-| trunk-lid | split | option_split | 8831 |
-| trunk-lid | conditional | conditional:engine_unattested | 11630 |
-| trunk-lid | conditional | conditional:qualifier | 1488 |
-| window-regulator | unmapped | - | 11216 |
-| window-regulator | no_records | - | 1926 |
-| window-regulator | split | no_candidates | 50 |
-| window-regulator | split | packaging_incomplete | 3739 |
-| window-regulator | split | packaging_split | 19580 |
-| window-regulator | split | packaging_unstated | 44455 |
+| throttle-body | split | option_split | 23887 |
+| throttle-body | conditional | conditional:engine_unattested | 5505 |
+| throttle-body | conditional | conditional:qualifier | 15408 |
+| trunk-lid | unmapped | - | 11256 |
+| trunk-lid | no_records | - | 44646 |
+| trunk-lid | split | option_split | 10469 |
+| trunk-lid | conditional | conditional:engine_unattested | 13017 |
+| trunk-lid | conditional | conditional:qualifier | 1908 |
+| window-regulator | unmapped | - | 11256 |
+| window-regulator | no_records | - | 1931 |
+| window-regulator | split | no_candidates | 49 |
+| window-regulator | split | packaging_incomplete | 3732 |
+| window-regulator | split | packaging_split | 19563 |
+| window-regulator | split | packaging_unstated | 44357 |
 | window-regulator | split | slot_missing | 13 |
 | window-regulator | conditional | conditional:engine_unattested | 360 |
-| window-regulator | conditional | conditional:option | 36 |
-| window-switch | unmapped | - | 11216 |
-| window-switch | no_records | - | 7754 |
+| window-regulator | conditional | conditional:option | 35 |
+| window-switch | unmapped | - | 11256 |
+| window-switch | no_records | - | 7740 |
 | window-switch | split | no_candidates | 443 |
-| window-switch | split | option_split | 41858 |
-| window-switch | split | position_missing | 12974 |
-| window-switch | conditional | conditional:engine_unattested | 4331 |
-| window-switch | conditional | conditional:option | 102 |
-| window-switch | conditional | conditional:qualifier | 2697 |
+| window-switch | split | option_split | 41771 |
+| window-switch | split | position_missing | 12963 |
+| window-switch | conditional | conditional:engine_unattested | 4324 |
+| window-switch | conditional | conditional:option | 100 |
+| window-switch | conditional | conditional:qualifier | 2699 |
 
 ## Contradictions with hand-curated groups (spec 7.6)
 
@@ -379,44 +386,44 @@ Raw: `c36da2eb98835c02f81c05e8c36b6a926634a332` @ `c36da2eb9883`; as of 2026-11-
 
 ## Refusals by reason
 
-- cross_category_supersession: 17
+- cross_category_supersession: 29
 - held_exterior_cross_model: 17
-- recrawl_resolved: 1
-- rule_drift: 2
-- universal_part_suspect: 198
+- recrawl_resolved: 4
+- rule_drift: 5
+- universal_part_suspect: 219
 
 ## Unknown note clauses (top 30)
 
-- `2`: 957
-- `CK1`: 479
-- `Package Quantity: 1`: 118
-- `FASCIA`: 89
-- `Require Quantity: 02`: 89
+- `2`: 969
+- `CK1`: 486
+- `FASCIA`: 167
+- `Package Quantity: 1`: 123
+- `INSTRUMENT`: 96
+- `GRILLE`: 94
+- `Require Quantity: 02`: 90
 - `2(5B5)`: 80
 - `2(A31)(EXC 5B5)`: 80
+- `JV`: 72
 - `BS`: 68
-- `INSTRUMENT`: 64
-- `JV`: 52
-- `GRILLE`: 50
+- `HOOD`: 56
+- `FRONT BUMPER(PAINT TO MATCH)`: 50
 - `SWITCH`: 47
 - `MODULE KIT`: 46
 - `GENERATOR`: 44
 - `NC`: 43
+- `REAR BUMPER(PAINT TO MATCH)`: 42
 - `CONTROL`: 35
-- `HOOD`: 35
 - `PUMP`: 33
 - `3(X88,Z88,5B5)`: 32
-- `FRONT BUMPER(PAINT TO MATCH)`: 31
 - `HEATER & A/C`: 30
-- `REAR BUMPER(PAINT TO MATCH)`: 30
+- `RADIATOR`: 30
+- `LID`: 29
+- `REAR COMPARTMENT`: 29
+- `COIL`: 27
 - `FRONT SIDE DOOR WINDOW`: 27
+- `GATE`: 27
 - `OUTSIDE REAR VIEW(INCLUDES 1,2,5)(PAINT TO MATCH)`: 26
 - `ZC`: 25
-- `3(5B5)`: 24
-- `3(8B2)`: 24
-- `3(A31)(EXC 5B5)`: 24
-- `REAR SIDE DOOR WINDOW`: 24
-- `TAIL`: 24
 
 ## Unmapped catalog models
 
@@ -476,7 +483,7 @@ Raw: `c36da2eb98835c02f81c05e8c36b6a926634a332` @ `c36da2eb9883`; as of 2026-11-
 - Saturn SC1: feed 'SC1' 23 cars
 - Saturn SC2: feed 'SC2' 27 cars
 - Saturn SL: feed 'SL' 99 cars
-- Saturn SL1: feed 'SL1' 83 cars
-- Saturn SL2: feed 'SL2' 110 cars
+- Saturn SL1: feed 'SL1' 81 cars
+- Saturn SL2: feed 'SL2' 114 cars
 - Saturn SW1: feed 'SW1' 4 cars
 - Saturn SW2: feed 'SW2' 24 cars

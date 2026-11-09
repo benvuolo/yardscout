@@ -1,5 +1,5 @@
 {
- "as_of": "2026-11-06T01:15:49Z",
+ "as_of": "2026-11-09T22:20:57Z",
  "cells": [
   [
    "Audi",
@@ -35187,6 +35187,13 @@
    "Volkswagen",
    "Arteon",
    2019,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Arteon",
+   2019,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -35236,6 +35243,13 @@
    "Volkswagen",
    "Arteon",
    2020,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Arteon",
+   2020,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -35279,6 +35293,13 @@
    "Arteon",
    2021,
    "ignition-coils",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Arteon",
+   2021,
+   "knuckle",
    "open:no_year_manifest"
   ],
   [
@@ -35314,6 +35335,13 @@
    "Arteon",
    2022,
    "ignition-coils",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Arteon",
+   2022,
+   "knuckle",
    "open:no_year_manifest"
   ],
   [
@@ -35342,6 +35370,13 @@
    "Arteon",
    2023,
    "ignition-coils",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Arteon",
+   2023,
+   "knuckle",
    "open:no_year_manifest"
   ],
   [
@@ -35747,6 +35782,13 @@
    "Volkswagen",
    "Beetle",
    1998,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   1998,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -35782,6 +35824,13 @@
    "Volkswagen",
    "Beetle",
    1998,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   1998,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -35795,6 +35844,20 @@
   [
    "Volkswagen",
    "Beetle",
+   1998,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   1998,
+   "wiper-motor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
    1999,
    "alternator",
    "open:no_year_manifest"
@@ -35866,6 +35929,13 @@
    "Volkswagen",
    "Beetle",
    1999,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   1999,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -35895,6 +35965,13 @@
    "Beetle",
    1999,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   1999,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -35914,6 +35991,20 @@
   [
    "Volkswagen",
    "Beetle",
+   1999,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   1999,
+   "wiper-motor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
    2000,
    "ac-compressor",
    "open:no_year_manifest"
@@ -35992,6 +36083,13 @@
    "Volkswagen",
    "Beetle",
    2000,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2000,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -36021,6 +36119,13 @@
    "Beetle",
    2000,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2000,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -36040,6 +36145,20 @@
   [
    "Volkswagen",
    "Beetle",
+   2000,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2000,
+   "wiper-motor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
    2001,
    "ac-compressor",
    "open:no_year_manifest"
@@ -36118,6 +36237,13 @@
    "Volkswagen",
    "Beetle",
    2001,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2001,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -36147,6 +36273,13 @@
    "Beetle",
    2001,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2001,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -36166,6 +36299,20 @@
   [
    "Volkswagen",
    "Beetle",
+   2001,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2001,
+   "wiper-motor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
    2002,
    "ac-compressor",
    "open:no_year_manifest"
@@ -36244,6 +36391,13 @@
    "Volkswagen",
    "Beetle",
    2002,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2002,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -36273,6 +36427,13 @@
    "Beetle",
    2002,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2002,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -36292,6 +36453,20 @@
   [
    "Volkswagen",
    "Beetle",
+   2002,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2002,
+   "wiper-motor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
    2003,
    "ac-compressor",
    "open:no_list_manifest"
@@ -36370,6 +36545,13 @@
    "Volkswagen",
    "Beetle",
    2003,
+   "knuckle",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2003,
    "liftgate",
    "open:unread_sibling_page"
   ],
@@ -36400,6 +36582,13 @@
    2003,
    "starter",
    "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2003,
+   "strut",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
@@ -36425,6 +36614,20 @@
   [
    "Volkswagen",
    "Beetle",
+   2003,
+   "wheels",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2003,
+   "wiper-motor",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
    2004,
    "ac-compressor",
    "open:no_year_manifest"
@@ -36503,6 +36706,13 @@
    "Volkswagen",
    "Beetle",
    2004,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2004,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -36532,6 +36742,13 @@
    "Beetle",
    2004,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2004,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -36558,6 +36775,20 @@
   [
    "Volkswagen",
    "Beetle",
+   2004,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2004,
+   "wiper-motor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
    2005,
    "ac-compressor",
    "open:no_year_manifest"
@@ -36636,6 +36867,13 @@
    "Volkswagen",
    "Beetle",
    2005,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2005,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -36665,6 +36903,13 @@
    "Beetle",
    2005,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2005,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -36691,6 +36936,20 @@
   [
    "Volkswagen",
    "Beetle",
+   2005,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2005,
+   "wiper-motor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
    2006,
    "ac-compressor",
    "open:no_year_manifest"
@@ -36769,6 +37028,13 @@
    "Volkswagen",
    "Beetle",
    2006,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2006,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -36804,6 +37070,13 @@
    "Volkswagen",
    "Beetle",
    2006,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2006,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -36812,6 +37085,20 @@
    "Beetle",
    2006,
    "trunk-lid",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2006,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2006,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -36895,6 +37182,13 @@
    "Volkswagen",
    "Beetle",
    2007,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2007,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -36930,6 +37224,13 @@
    "Volkswagen",
    "Beetle",
    2007,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2007,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -36938,6 +37239,20 @@
    "Beetle",
    2007,
    "trunk-lid",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2007,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2007,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -37021,6 +37336,13 @@
    "Volkswagen",
    "Beetle",
    2008,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2008,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -37056,6 +37378,13 @@
    "Volkswagen",
    "Beetle",
    2008,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2008,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -37064,6 +37393,20 @@
    "Beetle",
    2008,
    "trunk-lid",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2008,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2008,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -37147,6 +37490,13 @@
    "Volkswagen",
    "Beetle",
    2009,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2009,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -37182,6 +37532,13 @@
    "Volkswagen",
    "Beetle",
    2009,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2009,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -37190,6 +37547,20 @@
    "Beetle",
    2009,
    "trunk-lid",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2009,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2009,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -37273,6 +37644,13 @@
    "Volkswagen",
    "Beetle",
    2010,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2010,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -37308,6 +37686,13 @@
    "Volkswagen",
    "Beetle",
    2010,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2010,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -37316,6 +37701,20 @@
    "Beetle",
    2010,
    "trunk-lid",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2010,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2010,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -37350,6 +37749,13 @@
    "Volkswagen",
    "Beetle",
    2012,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2012,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -37372,6 +37778,13 @@
    "Beetle",
    2012,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2012,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -37406,6 +37819,13 @@
    "Volkswagen",
    "Beetle",
    2013,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2013,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -37428,6 +37848,13 @@
    "Beetle",
    2013,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2013,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -37462,6 +37889,13 @@
    "Volkswagen",
    "Beetle",
    2014,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2014,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -37484,6 +37918,13 @@
    "Beetle",
    2014,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2014,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -37518,6 +37959,13 @@
    "Volkswagen",
    "Beetle",
    2015,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2015,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -37533,6 +37981,13 @@
    "Beetle",
    2015,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2015,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -37567,6 +38022,13 @@
    "Volkswagen",
    "Beetle",
    2016,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2016,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -37582,6 +38044,13 @@
    "Beetle",
    2016,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2016,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -37616,6 +38085,13 @@
    "Volkswagen",
    "Beetle",
    2017,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2017,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -37631,6 +38107,13 @@
    "Beetle",
    2017,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2017,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -37652,6 +38135,13 @@
    "Beetle",
    2018,
    "ignition-coils",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2018,
+   "knuckle",
    "open:no_year_manifest"
   ],
   [
@@ -37694,6 +38184,13 @@
    "Beetle",
    2019,
    "ignition-coils",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Beetle",
+   2019,
+   "knuckle",
    "open:no_year_manifest"
   ],
   [
@@ -37798,6 +38295,13 @@
    "Volkswagen",
    "CC",
    2009,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "CC",
+   2009,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -37819,6 +38323,13 @@
    "Volkswagen",
    "CC",
    2009,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "CC",
+   2009,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -37834,6 +38345,13 @@
    "CC",
    2009,
    "trunk-lid",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "CC",
+   2009,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -37931,6 +38449,13 @@
    "Volkswagen",
    "CC",
    2010,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "CC",
+   2010,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -37952,6 +38477,13 @@
    "Volkswagen",
    "CC",
    2010,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "CC",
+   2010,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -37967,6 +38499,13 @@
    "CC",
    2010,
    "trunk-lid",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "CC",
+   2010,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -38064,6 +38603,13 @@
    "Volkswagen",
    "CC",
    2011,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "CC",
+   2011,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -38085,6 +38631,13 @@
    "Volkswagen",
    "CC",
    2011,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "CC",
+   2011,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -38100,6 +38653,13 @@
    "CC",
    2011,
    "trunk-lid",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "CC",
+   2011,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -38204,6 +38764,13 @@
    "Volkswagen",
    "CC",
    2012,
+   "knuckle",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "CC",
+   2012,
    "radiator",
    "open:unread_sibling_page"
   ],
@@ -38225,6 +38792,13 @@
    "Volkswagen",
    "CC",
    2012,
+   "strut",
+   "open:option_split"
+  ],
+  [
+   "Volkswagen",
+   "CC",
+   2012,
    "tail-lights",
    "open:no_list_manifest"
   ],
@@ -38246,6 +38820,13 @@
    "Volkswagen",
    "CC",
    2012,
+   "wheels",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "CC",
+   2012,
    "window-regulator",
    "open:no_list_manifest"
   ],
@@ -38259,6 +38840,13 @@
   [
    "Volkswagen",
    "CC",
+   2012,
+   "wiper-motor",
+   "open:no_candidates"
+  ],
+  [
+   "Volkswagen",
+   "CC",
    2013,
    "ac-compressor",
    "open:no_year_manifest"
@@ -38302,6 +38890,13 @@
    "Volkswagen",
    "CC",
    2013,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "CC",
+   2013,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -38316,7 +38911,21 @@
    "Volkswagen",
    "CC",
    2013,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "CC",
+   2013,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "CC",
+   2013,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -38379,6 +38988,13 @@
    "Volkswagen",
    "CC",
    2014,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "CC",
+   2014,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -38393,7 +39009,21 @@
    "Volkswagen",
    "CC",
    2014,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "CC",
+   2014,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "CC",
+   2014,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -38456,6 +39086,13 @@
    "Volkswagen",
    "CC",
    2015,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "CC",
+   2015,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -38470,7 +39107,21 @@
    "Volkswagen",
    "CC",
    2015,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "CC",
+   2015,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "CC",
+   2015,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -38533,6 +39184,13 @@
    "Volkswagen",
    "CC",
    2016,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "CC",
+   2016,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -38547,7 +39205,21 @@
    "Volkswagen",
    "CC",
    2016,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "CC",
+   2016,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "CC",
+   2016,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -38610,6 +39282,13 @@
    "Volkswagen",
    "CC",
    2017,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "CC",
+   2017,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -38624,7 +39303,21 @@
    "Volkswagen",
    "CC",
    2017,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "CC",
+   2017,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "CC",
+   2017,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -38715,6 +39408,13 @@
    "Volkswagen",
    "Cabrio",
    1995,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   1995,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -38736,7 +39436,21 @@
    "Volkswagen",
    "Cabrio",
    1995,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   1995,
    "tail-lights",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   1995,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -38749,114 +39463,149 @@
   [
    "Volkswagen",
    "Cabrio",
+   1995,
+   "wiper-motor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
    1996,
    "ac-compressor",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1996,
    "alternator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1996,
    "bumper-front",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1996,
    "bumper-rear",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1996,
    "climate-control",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1996,
    "fuel-pump-module",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1996,
    "gauge-cluster",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1996,
    "headlights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1996,
    "hood",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1996,
    "ignition-coils",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   1996,
+   "knuckle",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1996,
    "power-steering-pump",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1996,
    "radiator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1996,
    "starter",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   1996,
+   "strut",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1996,
    "tail-lights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1996,
    "throttle-body",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   1996,
+   "wheels",
+   "open:option_split"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1996,
    "window-regulator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   1996,
+   "wiper-motor",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -38932,6 +39681,13 @@
    "Volkswagen",
    "Cabrio",
    1997,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   1997,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -38953,6 +39709,13 @@
    "Volkswagen",
    "Cabrio",
    1997,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   1997,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -38961,6 +39724,13 @@
    "Cabrio",
    1997,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   1997,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -38973,238 +39743,448 @@
   [
    "Volkswagen",
    "Cabrio",
+   1997,
+   "wiper-motor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
    1998,
    "ac-compressor",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1998,
    "alternator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1998,
    "bumper-front",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1998,
    "bumper-rear",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1998,
    "climate-control",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1998,
    "fuel-pump-module",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1998,
    "gauge-cluster",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1998,
    "grille",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1998,
    "headlights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1998,
    "ignition-coils",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   1998,
+   "knuckle",
+   "open:option_split"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1998,
    "power-steering-pump",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1998,
    "radiator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1998,
    "starter",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   1998,
+   "strut",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1998,
    "tail-lights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1998,
    "throttle-body",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   1998,
+   "wheels",
+   "open:option_split"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   1998,
+   "wiper-motor",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1999,
    "ac-compressor",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1999,
    "alternator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1999,
    "bumper-front",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1999,
    "bumper-rear",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1999,
    "climate-control",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1999,
    "fender",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1999,
    "fuel-pump-module",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1999,
    "gauge-cluster",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1999,
    "grille",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1999,
    "headlights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1999,
    "hood",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1999,
    "ignition-coils",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   1999,
+   "knuckle",
+   "open:option_split"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1999,
    "power-steering-pump",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1999,
    "radiator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1999,
    "side-mirrors",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1999,
    "starter",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   1999,
+   "strut",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1999,
    "tail-lights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1999,
    "throttle-body",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    1999,
+   "trunk-lid",
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   1999,
+   "wheels",
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   1999,
+   "wiper-motor",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   2000,
+   "ac-compressor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   2000,
+   "alternator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   2000,
+   "bumper-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   2000,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   2000,
+   "climate-control",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   2000,
+   "fender",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   2000,
+   "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   2000,
+   "gauge-cluster",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   2000,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   2000,
+   "headlights",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   2000,
+   "hood",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   2000,
+   "ignition-coils",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   2000,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   2000,
+   "power-steering-pump",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   2000,
+   "radiator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   2000,
+   "side-mirrors",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   2000,
+   "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   2000,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   2000,
+   "tail-lights",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   2000,
+   "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   2000,
    "trunk-lid",
    "open:no_year_manifest"
   ],
@@ -39212,133 +40192,14 @@
    "Volkswagen",
    "Cabrio",
    2000,
-   "ac-compressor",
+   "wheels",
    "open:no_year_manifest"
   ],
   [
    "Volkswagen",
    "Cabrio",
    2000,
-   "alternator",
-   "open:no_year_manifest"
-  ],
-  [
-   "Volkswagen",
-   "Cabrio",
-   2000,
-   "bumper-front",
-   "open:no_year_manifest"
-  ],
-  [
-   "Volkswagen",
-   "Cabrio",
-   2000,
-   "bumper-rear",
-   "open:no_year_manifest"
-  ],
-  [
-   "Volkswagen",
-   "Cabrio",
-   2000,
-   "climate-control",
-   "open:no_year_manifest"
-  ],
-  [
-   "Volkswagen",
-   "Cabrio",
-   2000,
-   "fender",
-   "open:no_year_manifest"
-  ],
-  [
-   "Volkswagen",
-   "Cabrio",
-   2000,
-   "fuel-pump-module",
-   "open:no_year_manifest"
-  ],
-  [
-   "Volkswagen",
-   "Cabrio",
-   2000,
-   "gauge-cluster",
-   "open:no_year_manifest"
-  ],
-  [
-   "Volkswagen",
-   "Cabrio",
-   2000,
-   "grille",
-   "open:no_year_manifest"
-  ],
-  [
-   "Volkswagen",
-   "Cabrio",
-   2000,
-   "headlights",
-   "open:no_year_manifest"
-  ],
-  [
-   "Volkswagen",
-   "Cabrio",
-   2000,
-   "hood",
-   "open:no_year_manifest"
-  ],
-  [
-   "Volkswagen",
-   "Cabrio",
-   2000,
-   "ignition-coils",
-   "open:no_year_manifest"
-  ],
-  [
-   "Volkswagen",
-   "Cabrio",
-   2000,
-   "power-steering-pump",
-   "open:no_year_manifest"
-  ],
-  [
-   "Volkswagen",
-   "Cabrio",
-   2000,
-   "radiator",
-   "open:no_year_manifest"
-  ],
-  [
-   "Volkswagen",
-   "Cabrio",
-   2000,
-   "side-mirrors",
-   "open:no_year_manifest"
-  ],
-  [
-   "Volkswagen",
-   "Cabrio",
-   2000,
-   "starter",
-   "open:no_year_manifest"
-  ],
-  [
-   "Volkswagen",
-   "Cabrio",
-   2000,
-   "tail-lights",
-   "open:no_year_manifest"
-  ],
-  [
-   "Volkswagen",
-   "Cabrio",
-   2000,
-   "throttle-body",
-   "open:no_year_manifest"
-  ],
-  [
-   "Volkswagen",
-   "Cabrio",
-   2000,
-   "trunk-lid",
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -39429,6 +40290,13 @@
    "Volkswagen",
    "Cabrio",
    2001,
+   "knuckle",
+   "open:option_split"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   2001,
    "power-steering-pump",
    "open:unread_sibling_page"
   ],
@@ -39457,6 +40325,13 @@
    "Volkswagen",
    "Cabrio",
    2001,
+   "strut",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   2001,
    "tail-lights",
    "open:no_list_manifest"
   ],
@@ -39478,6 +40353,13 @@
    "Volkswagen",
    "Cabrio",
    2001,
+   "wheels",
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   2001,
    "window-regulator",
    "open:unread_sibling_page"
   ],
@@ -39487,6 +40369,13 @@
    2001,
    "window-switch",
    "open:unread_sibling_page"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   2001,
+   "wiper-motor",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
@@ -39576,6 +40465,13 @@
    "Volkswagen",
    "Cabrio",
    2002,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   2002,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -39604,6 +40500,13 @@
    "Volkswagen",
    "Cabrio",
    2002,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   2002,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -39619,6 +40522,20 @@
    "Cabrio",
    2002,
    "trunk-lid",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   2002,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Cabrio",
+   2002,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -39975,6 +40892,13 @@
    "Volkswagen",
    "Eos",
    2007,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2007,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -39990,6 +40914,13 @@
    "Eos",
    2007,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2007,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -40017,7 +40948,21 @@
    "Volkswagen",
    "Eos",
    2007,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2007,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2007,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -40108,6 +41053,13 @@
    "Volkswagen",
    "Eos",
    2008,
+   "knuckle",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2008,
    "radiator",
    "open:unread_sibling_page"
   ],
@@ -40124,6 +41076,13 @@
    2008,
    "starter",
    "open:suspect_variant"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2008,
+   "strut",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
@@ -40150,12 +41109,26 @@
    "Volkswagen",
    "Eos",
    2008,
+   "wheels",
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2008,
    "window-switch",
    "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
+   2008,
+   "wiper-motor",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
    2009,
    "ac-compressor",
    "open:no_year_manifest"
@@ -40234,6 +41207,13 @@
    "Volkswagen",
    "Eos",
    2009,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2009,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -40249,6 +41229,13 @@
    "Eos",
    2009,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2009,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -40276,7 +41263,21 @@
    "Volkswagen",
    "Eos",
    2009,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2009,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2009,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -40360,6 +41361,13 @@
    "Volkswagen",
    "Eos",
    2010,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2010,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -40375,6 +41383,13 @@
    "Eos",
    2010,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2010,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -40402,7 +41417,21 @@
    "Volkswagen",
    "Eos",
    2010,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2010,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2010,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -40410,231 +41439,287 @@
    "Eos",
    2011,
    "ac-compressor",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2011,
    "alternator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2011,
    "bumper-front",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2011,
    "bumper-rear",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2011,
    "climate-control",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2011,
    "fender",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2011,
    "fuel-pump-module",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2011,
    "grille",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2011,
    "headlights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2011,
    "hood",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2011,
    "ignition-coils",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2011,
+   "knuckle",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2011,
    "radiator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2011,
    "side-mirrors",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2011,
    "starter",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2011,
+   "strut",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2011,
    "tail-lights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2011,
    "throttle-body",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2011,
    "trunk-lid",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2011,
+   "wheels",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2011,
    "window-switch",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2011,
+   "wiper-motor",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2012,
    "ac-compressor",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2012,
    "alternator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2012,
    "climate-control",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2012,
    "fender",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2012,
    "fuel-pump-module",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2012,
    "headlights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2012,
    "hood",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2012,
    "ignition-coils",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2012,
+   "knuckle",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2012,
    "radiator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2012,
    "side-mirrors",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2012,
    "starter",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2012,
+   "strut",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2012,
    "tail-lights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2012,
    "throttle-body",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2012,
    "trunk-lid",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2012,
+   "wheels",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Eos",
    2012,
    "window-switch",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2012,
+   "wiper-motor",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -40690,6 +41775,13 @@
    "Eos",
    2013,
    "ignition-coils",
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2013,
+   "knuckle",
    "open:no_list_manifest"
   ],
   [
@@ -40717,6 +41809,13 @@
    "Volkswagen",
    "Eos",
    2013,
+   "strut",
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2013,
    "tail-lights",
    "open:uncrawled_chain_member"
   ],
@@ -40744,6 +41843,13 @@
   [
    "Volkswagen",
    "Eos",
+   2013,
+   "wiper-motor",
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
    2014,
    "ac-compressor",
    "open:no_year_manifest"
@@ -40801,6 +41907,13 @@
    "Volkswagen",
    "Eos",
    2014,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2014,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -40816,6 +41929,13 @@
    "Eos",
    2014,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2014,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -40844,6 +41964,13 @@
    "Eos",
    2014,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2014,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -40906,6 +42033,13 @@
    "Volkswagen",
    "Eos",
    2015,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2015,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -40921,6 +42055,13 @@
    "Eos",
    2015,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2015,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -40949,6 +42090,13 @@
    "Eos",
    2015,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2015,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -41011,6 +42159,13 @@
    "Volkswagen",
    "Eos",
    2016,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2016,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -41026,6 +42181,13 @@
    "Eos",
    2016,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2016,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -41054,6 +42216,13 @@
    "Eos",
    2016,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Eos",
+   2016,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -41229,140 +42398,168 @@
    "GTI",
    2006,
    "ac-compressor",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2006,
    "alternator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2006,
    "bumper-front",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2006,
    "bumper-rear",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2006,
    "climate-control",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2006,
    "fender",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2006,
    "fuel-pump-module",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2006,
    "gauge-cluster",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2006,
    "grille",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2006,
    "headlights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2006,
    "hood",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2006,
    "ignition-coils",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2006,
+   "knuckle",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2006,
    "liftgate",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2006,
    "radiator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2006,
    "side-mirrors",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2006,
    "starter",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2006,
+   "strut",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2006,
    "tail-lights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2006,
    "throttle-body",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2006,
+   "wheels",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
    "GTI",
    2006,
    "window-regulator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2006,
    "window-switch",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2006,
+   "wiper-motor",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -41452,6 +42649,13 @@
    "Volkswagen",
    "GTI",
    2007,
+   "knuckle",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2007,
    "liftgate",
    "open:unread_sibling_page"
   ],
@@ -41475,6 +42679,13 @@
    2007,
    "starter",
    "open:unverified_product"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2007,
+   "strut",
+   "open:option_split"
   ],
   [
    "Volkswagen",
@@ -41494,6 +42705,13 @@
    "Volkswagen",
    "GTI",
    2007,
+   "wheels",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2007,
    "window-regulator",
    "open:unread_sibling_page"
   ],
@@ -41507,128 +42725,163 @@
   [
    "Volkswagen",
    "GTI",
+   2007,
+   "wiper-motor",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
    2008,
    "ac-compressor",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2008,
    "alternator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2008,
    "bumper-rear",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2008,
    "climate-control",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2008,
    "fender",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2008,
    "fuel-pump-module",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2008,
    "grille",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2008,
    "headlights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2008,
    "hood",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2008,
    "ignition-coils",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2008,
+   "knuckle",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2008,
    "liftgate",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2008,
    "radiator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2008,
    "side-mirrors",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2008,
    "starter",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2008,
+   "strut",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2008,
    "tail-lights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2008,
    "throttle-body",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2008,
+   "wheels",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
    "GTI",
    2008,
    "window-regulator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2008,
    "window-switch",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2008,
+   "wiper-motor",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -41704,6 +42957,13 @@
    "Volkswagen",
    "GTI",
    2009,
+   "knuckle",
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2009,
    "liftgate",
    "open:no_list_manifest"
   ],
@@ -41727,6 +42987,13 @@
    2009,
    "starter",
    "open:unverified_product"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2009,
+   "strut",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -41746,6 +43013,13 @@
    "Volkswagen",
    "GTI",
    2009,
+   "wheels",
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2009,
    "window-regulator",
    "open:unread_sibling_page"
   ],
@@ -41755,6 +43029,13 @@
    2009,
    "window-switch",
    "open:unread_sibling_page"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2009,
+   "wiper-motor",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -41844,6 +43125,13 @@
    "Volkswagen",
    "GTI",
    2010,
+   "knuckle",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2010,
    "liftgate",
    "open:unread_sibling_page"
   ],
@@ -41867,6 +43155,13 @@
    2010,
    "starter",
    "open:unverified_product"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2010,
+   "strut",
+   "open:option_split"
   ],
   [
    "Volkswagen",
@@ -41886,6 +43181,13 @@
    "Volkswagen",
    "GTI",
    2010,
+   "wheels",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2010,
    "window-regulator",
    "open:uncrawled_chain_member"
   ],
@@ -41895,6 +43197,13 @@
    2010,
    "window-switch",
    "open:unread_sibling_page"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2010,
+   "wiper-motor",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
@@ -41984,6 +43293,13 @@
    "Volkswagen",
    "GTI",
    2011,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2011,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -42012,6 +43328,13 @@
    "Volkswagen",
    "GTI",
    2011,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2011,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -42020,6 +43343,13 @@
    "GTI",
    2011,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2011,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -42039,254 +43369,317 @@
   [
    "Volkswagen",
    "GTI",
+   2011,
+   "wiper-motor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
    2012,
    "ac-compressor",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2012,
    "alternator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2012,
    "bumper-front",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2012,
    "bumper-rear",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2012,
    "climate-control",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2012,
    "fender",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2012,
    "fuel-pump-module",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2012,
    "grille",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2012,
    "headlights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2012,
    "hood",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2012,
    "ignition-coils",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2012,
+   "knuckle",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
    "GTI",
    2012,
    "radiator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2012,
    "side-mirrors",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2012,
    "starter",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2012,
+   "strut",
+   "open:option_split"
   ],
   [
    "Volkswagen",
    "GTI",
    2012,
    "tail-lights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2012,
    "throttle-body",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2012,
+   "wheels",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2012,
    "window-regulator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2012,
    "window-switch",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2012,
+   "wiper-motor",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
    "GTI",
    2013,
    "ac-compressor",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2013,
    "alternator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2013,
    "bumper-front",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2013,
    "bumper-rear",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2013,
    "climate-control",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2013,
    "fender",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2013,
    "fuel-pump-module",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2013,
    "grille",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2013,
    "headlights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2013,
    "hood",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2013,
    "ignition-coils",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2013,
+   "knuckle",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
    "GTI",
    2013,
    "radiator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2013,
    "side-mirrors",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2013,
    "starter",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2013,
+   "strut",
+   "open:option_split"
   ],
   [
    "Volkswagen",
    "GTI",
    2013,
    "tail-lights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2013,
    "throttle-body",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2013,
+   "wheels",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2013,
    "window-regulator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "GTI",
    2013,
    "window-switch",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2013,
+   "wiper-motor",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
@@ -42369,6 +43762,13 @@
    "Volkswagen",
    "GTI",
    2014,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2014,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -42390,6 +43790,13 @@
    "Volkswagen",
    "GTI",
    2014,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2014,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -42404,6 +43811,13 @@
    "Volkswagen",
    "GTI",
    2014,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2014,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -42412,6 +43826,13 @@
    "GTI",
    2014,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2014,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -42488,6 +43909,13 @@
    "Volkswagen",
    "GTI",
    2015,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2015,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -42524,6 +43952,13 @@
    "GTI",
    2015,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2015,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -42614,6 +44049,13 @@
    "Volkswagen",
    "GTI",
    2016,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2016,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -42740,6 +44182,13 @@
    "Volkswagen",
    "GTI",
    2017,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2017,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -42838,6 +44287,13 @@
    "Volkswagen",
    "GTI",
    2018,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2018,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -42929,6 +44385,13 @@
    "Volkswagen",
    "GTI",
    2019,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2019,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -43013,6 +44476,13 @@
    "Volkswagen",
    "GTI",
    2020,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2020,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -43091,6 +44561,13 @@
    "GTI",
    2021,
    "ignition-coils",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "GTI",
+   2021,
+   "knuckle",
    "open:no_year_manifest"
   ],
   [
@@ -43314,6 +44791,13 @@
    "Volkswagen",
    "Golf",
    1985,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1985,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -43327,6 +44811,13 @@
   [
    "Volkswagen",
    "Golf",
+   1985,
+   "wiper-motor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
    1986,
    "ac-compressor",
    "open:no_year_manifest"
@@ -43357,6 +44848,13 @@
    "Golf",
    1986,
    "radiator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1986,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -43376,6 +44874,13 @@
   [
    "Volkswagen",
    "Golf",
+   1986,
+   "wiper-motor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
    1987,
    "ac-compressor",
    "open:no_year_manifest"
@@ -43398,6 +44903,13 @@
    "Volkswagen",
    "Golf",
    1987,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1987,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -43406,6 +44918,13 @@
    "Golf",
    1987,
    "radiator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1987,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -43427,6 +44946,13 @@
    "Golf",
    1987,
    "window-regulator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1987,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -43475,6 +45001,13 @@
    "Volkswagen",
    "Golf",
    1988,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1988,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -43483,6 +45016,13 @@
    "Golf",
    1988,
    "radiator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1988,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -43504,6 +45044,13 @@
    "Golf",
    1988,
    "window-regulator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1988,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -43552,6 +45099,13 @@
    "Volkswagen",
    "Golf",
    1989,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1989,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -43560,6 +45114,13 @@
    "Golf",
    1989,
    "radiator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1989,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -43581,6 +45142,13 @@
    "Golf",
    1989,
    "window-regulator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1989,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -43651,6 +45219,13 @@
    "Golf",
    1990,
    "ignition-coils",
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1990,
+   "knuckle",
    "open:no_list_manifest"
   ],
   [
@@ -43685,8 +45260,15 @@
    "Volkswagen",
    "Golf",
    1990,
+   "strut",
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1990,
    "tail-lights",
-   "open:conditional:engine_unattested"
+   "open:conditional:trim"
   ],
   [
    "Volkswagen",
@@ -43712,93 +45294,121 @@
   [
    "Volkswagen",
    "Golf",
+   1990,
+   "wiper-motor",
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
    1991,
    "ac-compressor",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1991,
    "alternator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1991,
    "bumper-front",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1991,
    "bumper-rear",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1991,
    "fender",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1991,
    "grille",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1991,
    "headlights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1991,
    "hood",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1991,
    "ignition-coils",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1991,
+   "knuckle",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
    "Golf",
    1991,
    "power-steering-pump",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1991,
    "radiator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1991,
+   "strut",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
    "Golf",
    1991,
    "tail-lights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1991,
    "window-regulator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1991,
+   "wiper-motor",
+   "open:conditional:trim"
   ],
   [
    "Volkswagen",
@@ -43861,7 +45471,7 @@
    "Golf",
    1992,
    "hood",
-   "open:conditional:engine_unattested"
+   "open:conditional:trim"
   ],
   [
    "Volkswagen",
@@ -43869,6 +45479,13 @@
    1992,
    "ignition-coils",
    "open:unread_sibling_page"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1992,
+   "knuckle",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -43895,6 +45512,13 @@
    "Volkswagen",
    "Golf",
    1992,
+   "strut",
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1992,
    "tail-lights",
    "open:no_list_manifest"
   ],
@@ -43908,233 +45532,296 @@
   [
    "Volkswagen",
    "Golf",
+   1992,
+   "wiper-motor",
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
    1993,
    "ac-compressor",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1993,
    "alternator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1993,
    "bumper-front",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1993,
    "bumper-rear",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1993,
    "fender",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1993,
    "grille",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1993,
    "headlights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1993,
    "hood",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1993,
    "ignition-coils",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1993,
+   "knuckle",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1993,
    "liftgate",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1993,
    "power-steering-pump",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1993,
    "radiator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1993,
    "side-mirrors",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1993,
    "starter",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1993,
+   "strut",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1993,
    "tail-lights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1993,
+   "wheels",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1993,
    "window-regulator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1993,
+   "wiper-motor",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1994,
    "ac-compressor",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1994,
    "alternator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1994,
    "bumper-front",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1994,
    "bumper-rear",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1994,
    "climate-control",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1994,
    "fender",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1994,
    "grille",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1994,
    "headlights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1994,
    "hood",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1994,
    "ignition-coils",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1994,
+   "knuckle",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1994,
    "liftgate",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1994,
    "power-steering-pump",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1994,
    "radiator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1994,
    "side-mirrors",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1994,
    "starter",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1994,
+   "strut",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1994,
    "tail-lights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1994,
+   "wheels",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    1994,
    "window-regulator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1994,
+   "wiper-motor",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -44203,6 +45890,13 @@
    "Volkswagen",
    "Golf",
    1995,
+   "knuckle",
+   "open:option_split"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1995,
    "liftgate",
    "open:no_list_manifest"
   ],
@@ -44238,6 +45932,13 @@
    "Volkswagen",
    "Golf",
    1995,
+   "strut",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1995,
    "tail-lights",
    "open:uncrawled_chain_member"
   ],
@@ -44245,8 +45946,22 @@
    "Volkswagen",
    "Golf",
    1995,
+   "wheels",
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1995,
    "window-regulator",
    "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1995,
+   "wiper-motor",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
@@ -44336,6 +46051,13 @@
    "Volkswagen",
    "Golf",
    1996,
+   "knuckle",
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1996,
    "liftgate",
    "open:conditional:trim"
   ],
@@ -44371,6 +46093,13 @@
    "Volkswagen",
    "Golf",
    1996,
+   "strut",
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1996,
    "tail-lights",
    "open:no_list_manifest"
   ],
@@ -44385,7 +46114,21 @@
    "Volkswagen",
    "Golf",
    1996,
+   "wheels",
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1996,
    "window-regulator",
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1996,
+   "wiper-motor",
    "open:no_list_manifest"
   ],
   [
@@ -44469,6 +46212,13 @@
    "Volkswagen",
    "Golf",
    1997,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1997,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -44497,6 +46247,13 @@
    "Volkswagen",
    "Golf",
    1997,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1997,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -44511,7 +46268,21 @@
    "Volkswagen",
    "Golf",
    1997,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1997,
    "window-regulator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1997,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -44588,6 +46359,13 @@
    "Volkswagen",
    "Golf",
    1998,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1998,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -44616,6 +46394,13 @@
    "Volkswagen",
    "Golf",
    1998,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1998,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -44630,7 +46415,21 @@
    "Volkswagen",
    "Golf",
    1998,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1998,
    "window-regulator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1998,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -44714,6 +46513,13 @@
    "Volkswagen",
    "Golf",
    1999,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1999,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -44749,6 +46555,13 @@
    "Volkswagen",
    "Golf",
    1999,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1999,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -44763,6 +46576,13 @@
    "Volkswagen",
    "Golf",
    1999,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1999,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -44771,6 +46591,13 @@
    "Golf",
    1999,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   1999,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -44854,6 +46681,13 @@
    "Volkswagen",
    "Golf",
    2000,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2000,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -44889,6 +46723,13 @@
    "Volkswagen",
    "Golf",
    2000,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2000,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -44903,6 +46744,13 @@
    "Volkswagen",
    "Golf",
    2000,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2000,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -44911,6 +46759,13 @@
    "Golf",
    2000,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2000,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -45001,6 +46856,13 @@
    "Volkswagen",
    "Golf",
    2001,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2001,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -45036,6 +46898,13 @@
    "Volkswagen",
    "Golf",
    2001,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2001,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -45050,6 +46919,13 @@
    "Volkswagen",
    "Golf",
    2001,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2001,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -45058,6 +46934,13 @@
    "Golf",
    2001,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2001,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -45148,6 +47031,13 @@
    "Volkswagen",
    "Golf",
    2002,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2002,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -45183,6 +47073,13 @@
    "Volkswagen",
    "Golf",
    2002,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2002,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -45197,6 +47094,13 @@
    "Volkswagen",
    "Golf",
    2002,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2002,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -45205,6 +47109,13 @@
    "Golf",
    2002,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2002,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -45290,6 +47201,13 @@
    2003,
    "ignition-coils",
    "open:unread_sibling_page"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2003,
+   "knuckle",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
@@ -45325,6 +47243,13 @@
    2003,
    "starter",
    "open:suspect_variant"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2003,
+   "strut",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
@@ -45344,6 +47269,13 @@
    "Volkswagen",
    "Golf",
    2003,
+   "wheels",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2003,
    "window-regulator",
    "open:unread_sibling_page"
   ],
@@ -45357,6 +47289,13 @@
   [
    "Volkswagen",
    "Golf",
+   2003,
+   "wiper-motor",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
    2004,
    "ac-compressor",
    "open:no_year_manifest"
@@ -45436,6 +47375,13 @@
    "Golf",
    2004,
    "ignition-coils",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2004,
+   "knuckle",
    "open:no_year_manifest"
   ],
   [
@@ -45477,6 +47423,13 @@
    "Volkswagen",
    "Golf",
    2004,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2004,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -45491,6 +47444,13 @@
    "Volkswagen",
    "Golf",
    2004,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2004,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -45499,6 +47459,13 @@
    "Golf",
    2004,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2004,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -45583,6 +47550,13 @@
    "Golf",
    2005,
    "ignition-coils",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2005,
+   "knuckle",
    "open:no_year_manifest"
   ],
   [
@@ -45624,6 +47598,13 @@
    "Volkswagen",
    "Golf",
    2005,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2005,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -45638,6 +47619,13 @@
    "Volkswagen",
    "Golf",
    2005,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2005,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -45646,6 +47634,13 @@
    "Golf",
    2005,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2005,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -45730,6 +47725,13 @@
    "Golf",
    2006,
    "ignition-coils",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2006,
+   "knuckle",
    "open:no_year_manifest"
   ],
   [
@@ -45771,6 +47773,13 @@
    "Volkswagen",
    "Golf",
    2006,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2006,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -45785,6 +47794,13 @@
    "Volkswagen",
    "Golf",
    2006,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2006,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -45793,6 +47809,13 @@
    "Golf",
    2006,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2006,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -45863,6 +47886,13 @@
    "Golf",
    2010,
    "ignition-coils",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2010,
+   "knuckle",
    "open:no_year_manifest"
   ],
   [
@@ -45897,6 +47927,13 @@
    "Volkswagen",
    "Golf",
    2010,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2010,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -45911,6 +47948,13 @@
    "Volkswagen",
    "Golf",
    2010,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2010,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -45919,6 +47963,13 @@
    "Golf",
    2010,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2010,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -45989,6 +48040,13 @@
    "Golf",
    2011,
    "ignition-coils",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2011,
+   "knuckle",
    "open:no_year_manifest"
   ],
   [
@@ -46023,6 +48081,13 @@
    "Volkswagen",
    "Golf",
    2011,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2011,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -46031,6 +48096,13 @@
    "Golf",
    2011,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2011,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -46050,121 +48122,156 @@
   [
    "Volkswagen",
    "Golf",
+   2011,
+   "wiper-motor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
    2012,
    "ac-compressor",
-   "open:year_manifest_bad"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    2012,
    "alternator",
-   "open:year_manifest_bad"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    2012,
    "bumper-rear",
-   "open:year_manifest_bad"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    2012,
    "climate-control",
-   "open:year_manifest_bad"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    2012,
    "fender",
-   "open:year_manifest_bad"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    2012,
    "fuel-pump-module",
-   "open:year_manifest_bad"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    2012,
    "gauge-cluster",
-   "open:year_manifest_bad"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    2012,
    "headlights",
-   "open:year_manifest_bad"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    2012,
    "hood",
-   "open:year_manifest_bad"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    2012,
    "ignition-coils",
-   "open:year_manifest_bad"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2012,
+   "knuckle",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
    "Golf",
    2012,
    "radiator",
-   "open:year_manifest_bad"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    2012,
    "side-mirrors",
-   "open:year_manifest_bad"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    2012,
    "starter",
-   "open:year_manifest_bad"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2012,
+   "strut",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
    "Golf",
    2012,
    "tail-lights",
-   "open:year_manifest_bad"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    2012,
    "throttle-body",
-   "open:year_manifest_bad"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2012,
+   "wheels",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
    "Golf",
    2012,
    "window-regulator",
-   "open:year_manifest_bad"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Golf",
    2012,
    "window-switch",
-   "open:year_manifest_bad"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2012,
+   "wiper-motor",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
@@ -46233,6 +48340,13 @@
    "Volkswagen",
    "Golf",
    2013,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2013,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -46254,6 +48368,13 @@
    "Volkswagen",
    "Golf",
    2013,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2013,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -46268,6 +48389,13 @@
    "Volkswagen",
    "Golf",
    2013,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2013,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -46276,6 +48404,13 @@
    "Golf",
    2013,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2013,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -46345,6 +48480,13 @@
    "Volkswagen",
    "Golf",
    2014,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2014,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -46366,6 +48508,13 @@
    "Volkswagen",
    "Golf",
    2014,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2014,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -46380,6 +48529,13 @@
    "Volkswagen",
    "Golf",
    2014,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2014,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -46388,6 +48544,13 @@
    "Golf",
    2014,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2014,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -46471,6 +48634,13 @@
    "Volkswagen",
    "Golf",
    2015,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2015,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -46499,6 +48669,13 @@
    "Volkswagen",
    "Golf",
    2015,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2015,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -46507,6 +48684,13 @@
    "Golf",
    2015,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2015,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -46611,6 +48795,13 @@
    "Volkswagen",
    "Golf",
    2016,
+   "knuckle",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2016,
    "liftgate",
    "open:unread_sibling_page"
   ],
@@ -46634,6 +48825,13 @@
    2016,
    "starter",
    "open:suspect_variant"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2016,
+   "strut",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
@@ -46653,6 +48851,13 @@
    "Volkswagen",
    "Golf",
    2016,
+   "wheels",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2016,
    "window-regulator",
    "open:unverified_product"
   ],
@@ -46666,6 +48871,13 @@
   [
    "Volkswagen",
    "Golf",
+   2016,
+   "wiper-motor",
+   "open:no_candidates"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
    2017,
    "ac-compressor",
    "open:no_year_manifest"
@@ -46744,6 +48956,13 @@
    "Volkswagen",
    "Golf",
    2017,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2017,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -46766,6 +48985,13 @@
    "Golf",
    2017,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2017,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -46786,6 +49012,13 @@
    "Volkswagen",
    "Golf",
    2017,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2017,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -46842,6 +49075,13 @@
    "Volkswagen",
    "Golf",
    2018,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2018,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -46870,7 +49110,21 @@
    "Volkswagen",
    "Golf",
    2018,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2018,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2018,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -46933,6 +49187,13 @@
    "Volkswagen",
    "Golf",
    2019,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2019,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -46961,7 +49222,21 @@
    "Volkswagen",
    "Golf",
    2019,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2019,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2019,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -47024,6 +49299,13 @@
    "Volkswagen",
    "Golf",
    2020,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2020,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -47052,7 +49334,21 @@
    "Volkswagen",
    "Golf",
    2020,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2020,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2020,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -47115,6 +49411,13 @@
    "Volkswagen",
    "Golf",
    2021,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2021,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -47143,7 +49446,21 @@
    "Volkswagen",
    "Golf",
    2021,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2021,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf",
+   2021,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -47220,6 +49537,13 @@
    "Volkswagen",
    "Golf Alltrack",
    2017,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf Alltrack",
+   2017,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -47241,7 +49565,21 @@
    "Volkswagen",
    "Golf Alltrack",
    2017,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf Alltrack",
+   2017,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf Alltrack",
+   2017,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -47304,6 +49642,13 @@
    "Volkswagen",
    "Golf Alltrack",
    2018,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf Alltrack",
+   2018,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -47325,7 +49670,21 @@
    "Volkswagen",
    "Golf Alltrack",
    2018,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf Alltrack",
+   2018,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf Alltrack",
+   2018,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -47388,6 +49747,13 @@
    "Volkswagen",
    "Golf Alltrack",
    2019,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf Alltrack",
+   2019,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -47409,7 +49775,21 @@
    "Volkswagen",
    "Golf Alltrack",
    2019,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf Alltrack",
+   2019,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Golf Alltrack",
+   2019,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -47486,6 +49866,13 @@
    "Volkswagen",
    "Jetta",
    1985,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1985,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -47535,6 +49922,13 @@
    "Volkswagen",
    "Jetta",
    1986,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1986,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -47570,6 +49964,13 @@
    "Volkswagen",
    "Jetta",
    1987,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1987,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -47578,6 +49979,13 @@
    "Jetta",
    1987,
    "radiator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1987,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -47633,6 +50041,13 @@
    "Volkswagen",
    "Jetta",
    1988,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1988,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -47641,6 +50056,13 @@
    "Jetta",
    1988,
    "radiator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1988,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -47696,6 +50118,13 @@
    "Volkswagen",
    "Jetta",
    1989,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1989,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -47704,6 +50133,13 @@
    "Jetta",
    1989,
    "radiator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1989,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -47766,6 +50202,13 @@
    "Volkswagen",
    "Jetta",
    1990,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1990,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -47774,6 +50217,13 @@
    "Jetta",
    1990,
    "radiator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1990,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -47836,6 +50286,13 @@
    "Volkswagen",
    "Jetta",
    1991,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1991,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -47850,7 +50307,21 @@
    "Volkswagen",
    "Jetta",
    1991,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1991,
    "window-regulator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1991,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -47906,6 +50377,13 @@
    "Volkswagen",
    "Jetta",
    1992,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1992,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -47920,7 +50398,21 @@
    "Volkswagen",
    "Jetta",
    1992,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1992,
    "window-regulator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1992,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -47990,6 +50482,13 @@
    "Volkswagen",
    "Jetta",
    1993,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1993,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -48018,6 +50517,13 @@
    "Volkswagen",
    "Jetta",
    1993,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1993,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -48026,6 +50532,13 @@
    "Jetta",
    1993,
    "window-regulator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1993,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -48102,6 +50615,13 @@
    "Volkswagen",
    "Jetta",
    1994,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1994,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -48130,6 +50650,13 @@
    "Volkswagen",
    "Jetta",
    1994,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1994,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -48143,240 +50670,289 @@
   [
    "Volkswagen",
    "Jetta",
+   1994,
+   "wiper-motor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
    1995,
    "ac-compressor",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    1995,
    "alternator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    1995,
    "bumper-front",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    1995,
    "bumper-rear",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    1995,
    "climate-control",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    1995,
    "fender",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    1995,
    "fuel-pump-module",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    1995,
    "headlights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    1995,
    "hood",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    1995,
    "ignition-coils",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1995,
+   "knuckle",
+   "open:option_split"
   ],
   [
    "Volkswagen",
    "Jetta",
    1995,
    "power-steering-pump",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    1995,
    "radiator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    1995,
    "side-mirrors",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    1995,
    "starter",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1995,
+   "strut",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
    "Jetta",
    1995,
    "tail-lights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    1995,
    "window-regulator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1995,
+   "wiper-motor",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
    "Jetta",
    1996,
    "ac-compressor",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    1996,
    "alternator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    1996,
    "bumper-front",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    1996,
    "bumper-rear",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    1996,
    "fender",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    1996,
    "fuel-pump-module",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    1996,
    "gauge-cluster",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    1996,
    "grille",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    1996,
    "headlights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    1996,
    "hood",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    1996,
    "ignition-coils",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1996,
+   "knuckle",
+   "open:option_split"
   ],
   [
    "Volkswagen",
    "Jetta",
    1996,
    "power-steering-pump",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    1996,
    "radiator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    1996,
    "side-mirrors",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    1996,
    "starter",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1996,
+   "strut",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
    "Jetta",
    1996,
    "tail-lights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    1996,
    "throttle-body",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    1996,
    "window-regulator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1996,
+   "wiper-motor",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
@@ -48454,6 +51030,13 @@
    1997,
    "ignition-coils",
    "open:unread_sibling_page"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1997,
+   "knuckle",
+   "open:option_split"
   ],
   [
    "Volkswagen",
@@ -48494,6 +51077,13 @@
    "Volkswagen",
    "Jetta",
    1997,
+   "strut",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1997,
    "tail-lights",
    "open:option_split"
   ],
@@ -48528,6 +51118,13 @@
   [
    "Volkswagen",
    "Jetta",
+   1997,
+   "wiper-motor",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
    1998,
    "ac-compressor",
    "open:no_year_manifest"
@@ -48606,6 +51203,13 @@
    "Volkswagen",
    "Jetta",
    1998,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1998,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -48634,6 +51238,13 @@
    "Volkswagen",
    "Jetta",
    1998,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1998,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -48649,6 +51260,13 @@
    "Jetta",
    1998,
    "window-regulator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1998,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -48732,6 +51350,13 @@
    "Volkswagen",
    "Jetta",
    1999,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1999,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -48760,6 +51385,13 @@
    "Volkswagen",
    "Jetta",
    1999,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1999,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -48781,6 +51413,13 @@
    "Volkswagen",
    "Jetta",
    1999,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1999,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -48789,6 +51428,13 @@
    "Jetta",
    1999,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   1999,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -48865,6 +51511,13 @@
    "Volkswagen",
    "Jetta",
    2000,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2000,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -48893,6 +51546,13 @@
    "Volkswagen",
    "Jetta",
    2000,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2000,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -48914,6 +51574,13 @@
    "Volkswagen",
    "Jetta",
    2000,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2000,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -48922,6 +51589,13 @@
    "Jetta",
    2000,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2000,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -49005,6 +51679,13 @@
    "Volkswagen",
    "Jetta",
    2001,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2001,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -49040,6 +51721,13 @@
    "Volkswagen",
    "Jetta",
    2001,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2001,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -49061,6 +51749,13 @@
    "Volkswagen",
    "Jetta",
    2001,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2001,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -49069,6 +51764,13 @@
    "Jetta",
    2001,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2001,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -49159,6 +51861,13 @@
    "Volkswagen",
    "Jetta",
    2002,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2002,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -49194,6 +51903,13 @@
    "Volkswagen",
    "Jetta",
    2002,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2002,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -49215,6 +51931,13 @@
    "Volkswagen",
    "Jetta",
    2002,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2002,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -49223,6 +51946,13 @@
    "Jetta",
    2002,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2002,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -49313,6 +52043,13 @@
    "Volkswagen",
    "Jetta",
    2003,
+   "knuckle",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2003,
    "liftgate",
    "open:unread_sibling_page"
   ],
@@ -49348,6 +52085,13 @@
    "Volkswagen",
    "Jetta",
    2003,
+   "strut",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2003,
    "tail-lights",
    "open:no_list_manifest"
   ],
@@ -49369,6 +52113,13 @@
    "Volkswagen",
    "Jetta",
    2003,
+   "wheels",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2003,
    "window-regulator",
    "open:no_list_manifest"
   ],
@@ -49378,6 +52129,13 @@
    2003,
    "window-switch",
    "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2003,
+   "wiper-motor",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
@@ -49467,6 +52225,13 @@
    "Volkswagen",
    "Jetta",
    2004,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2004,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -49502,6 +52267,13 @@
    "Volkswagen",
    "Jetta",
    2004,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2004,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -49523,6 +52295,13 @@
    "Volkswagen",
    "Jetta",
    2004,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2004,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -49531,6 +52310,13 @@
    "Jetta",
    2004,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2004,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -49621,6 +52407,13 @@
    "Volkswagen",
    "Jetta",
    2005,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2005,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -49656,6 +52449,13 @@
    "Volkswagen",
    "Jetta",
    2005,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2005,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -49677,6 +52477,13 @@
    "Volkswagen",
    "Jetta",
    2005,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2005,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -49685,6 +52492,13 @@
    "Jetta",
    2005,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2005,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -49775,6 +52589,13 @@
    "Volkswagen",
    "Jetta",
    2006,
+   "knuckle",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2006,
    "radiator",
    "open:unread_sibling_page"
   ],
@@ -49796,6 +52617,13 @@
    "Volkswagen",
    "Jetta",
    2006,
+   "strut",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2006,
    "tail-lights",
    "open:no_list_manifest"
   ],
@@ -49817,6 +52645,13 @@
    "Volkswagen",
    "Jetta",
    2006,
+   "wheels",
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2006,
    "window-regulator",
    "open:no_list_manifest"
   ],
@@ -49830,6 +52665,13 @@
   [
    "Volkswagen",
    "Jetta",
+   2006,
+   "wiper-motor",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
    2007,
    "ac-compressor",
    "open:no_year_manifest"
@@ -49909,6 +52751,13 @@
    "Jetta",
    2007,
    "ignition-coils",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2007,
+   "knuckle",
    "open:no_year_manifest"
   ],
   [
@@ -49936,6 +52785,13 @@
    "Volkswagen",
    "Jetta",
    2007,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2007,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -49957,6 +52813,13 @@
    "Volkswagen",
    "Jetta",
    2007,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2007,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -49970,289 +52833,352 @@
   [
    "Volkswagen",
    "Jetta",
+   2007,
+   "wiper-motor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
    2008,
    "ac-compressor",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2008,
    "alternator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2008,
    "bumper-front",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2008,
    "bumper-rear",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2008,
    "climate-control",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2008,
    "fender",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2008,
    "fuel-pump-module",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2008,
    "gauge-cluster",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2008,
    "grille",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2008,
    "headlights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2008,
    "hood",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2008,
    "ignition-coils",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2008,
+   "knuckle",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2008,
    "radiator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2008,
    "side-mirrors",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2008,
    "starter",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2008,
+   "strut",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2008,
    "tail-lights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2008,
    "throttle-body",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2008,
    "trunk-lid",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2008,
+   "wheels",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2008,
    "window-regulator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2008,
    "window-switch",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2008,
+   "wiper-motor",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2009,
    "ac-compressor",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2009,
    "alternator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2009,
    "bumper-front",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2009,
    "bumper-rear",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2009,
    "climate-control",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2009,
    "fender",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2009,
    "fuel-pump-module",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2009,
    "gauge-cluster",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2009,
    "grille",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2009,
    "headlights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2009,
    "hood",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2009,
    "ignition-coils",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2009,
+   "knuckle",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2009,
    "liftgate",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2009,
    "radiator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2009,
    "side-mirrors",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2009,
    "starter",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2009,
+   "strut",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2009,
    "tail-lights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2009,
    "throttle-body",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2009,
    "trunk-lid",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2009,
+   "wheels",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2009,
    "window-regulator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2009,
    "window-switch",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2009,
+   "wiper-motor",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -50336,6 +53262,13 @@
    "Jetta",
    2010,
    "ignition-coils",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2010,
+   "knuckle",
    "open:no_year_manifest"
   ],
   [
@@ -50370,6 +53303,13 @@
    "Volkswagen",
    "Jetta",
    2010,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2010,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -50391,6 +53331,13 @@
    "Volkswagen",
    "Jetta",
    2010,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2010,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -50399,6 +53346,13 @@
    "Jetta",
    2010,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2010,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -50483,6 +53437,13 @@
    "Jetta",
    2011,
    "ignition-coils",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2011,
+   "knuckle",
    "open:no_year_manifest"
   ],
   [
@@ -50524,6 +53485,13 @@
    "Volkswagen",
    "Jetta",
    2011,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2011,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -50545,6 +53513,13 @@
    "Volkswagen",
    "Jetta",
    2011,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2011,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -50553,6 +53528,13 @@
    "Jetta",
    2011,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2011,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -50560,308 +53542,364 @@
    "Jetta",
    2012,
    "ac-compressor",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2012,
    "alternator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2012,
    "bumper-front",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2012,
    "bumper-rear",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2012,
    "climate-control",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2012,
    "fender",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2012,
    "fuel-pump-module",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2012,
    "gauge-cluster",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2012,
    "grille",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2012,
    "headlights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2012,
    "hood",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2012,
    "ignition-coils",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2012,
+   "knuckle",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2012,
    "liftgate",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2012,
    "power-steering-pump",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2012,
    "radiator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2012,
    "side-mirrors",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2012,
    "starter",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2012,
+   "strut",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2012,
    "tail-lights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2012,
    "throttle-body",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2012,
    "trunk-lid",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2012,
+   "wheels",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2012,
    "window-regulator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2012,
    "window-switch",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2012,
+   "wiper-motor",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2013,
    "ac-compressor",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2013,
    "alternator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2013,
    "bumper-front",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2013,
    "bumper-rear",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2013,
    "climate-control",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2013,
    "fender",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2013,
    "fuel-pump-module",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2013,
    "gauge-cluster",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2013,
    "grille",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2013,
    "headlights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2013,
    "hood",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2013,
    "ignition-coils",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2013,
+   "knuckle",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2013,
    "liftgate",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2013,
    "power-steering-pump",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2013,
    "radiator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2013,
    "side-mirrors",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2013,
    "starter",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2013,
+   "strut",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2013,
    "tail-lights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2013,
    "throttle-body",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2013,
    "trunk-lid",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2013,
+   "wheels",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2013,
    "window-regulator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2013,
    "window-switch",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2013,
+   "wiper-motor",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -50951,6 +53989,13 @@
    "Volkswagen",
    "Jetta",
    2014,
+   "knuckle",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2014,
    "liftgate",
    "open:unread_sibling_page"
   ],
@@ -50986,6 +54031,13 @@
    "Volkswagen",
    "Jetta",
    2014,
+   "strut",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2014,
    "tail-lights",
    "open:no_list_manifest"
   ],
@@ -51007,6 +54059,13 @@
    "Volkswagen",
    "Jetta",
    2014,
+   "wheels",
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2014,
    "window-regulator",
    "open:no_list_manifest"
   ],
@@ -51016,6 +54075,13 @@
    2014,
    "window-switch",
    "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2014,
+   "wiper-motor",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
@@ -51100,6 +54166,13 @@
    2015,
    "ignition-coils",
    "open:unread_sibling_page"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2015,
+   "knuckle",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
@@ -51133,6 +54206,13 @@
    "Volkswagen",
    "Jetta",
    2015,
+   "strut",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2015,
    "tail-lights",
    "open:uncrawled_chain_member"
   ],
@@ -51154,6 +54234,13 @@
    "Volkswagen",
    "Jetta",
    2015,
+   "wheels",
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2015,
    "window-regulator",
    "open:uncrawled_chain_member"
   ],
@@ -51163,6 +54250,13 @@
    2015,
    "window-switch",
    "open:unread_sibling_page"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2015,
+   "wiper-motor",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
@@ -51245,6 +54339,13 @@
    "Volkswagen",
    "Jetta",
    2016,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2016,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -51260,6 +54361,13 @@
    "Jetta",
    2016,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2016,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -51287,6 +54395,13 @@
    "Volkswagen",
    "Jetta",
    2016,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2016,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -51295,6 +54410,13 @@
    "Jetta",
    2016,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2016,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -51302,252 +54424,301 @@
    "Jetta",
    2017,
    "ac-compressor",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2017,
    "alternator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2017,
    "bumper-front",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2017,
    "bumper-rear",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2017,
    "climate-control",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2017,
    "fender",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2017,
    "fuel-pump-module",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2017,
    "grille",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2017,
    "hood",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2017,
    "ignition-coils",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2017,
+   "knuckle",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
    "Jetta",
    2017,
    "radiator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2017,
    "side-mirrors",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2017,
    "starter",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2017,
+   "strut",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
    "Jetta",
    2017,
    "tail-lights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2017,
    "throttle-body",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2017,
    "trunk-lid",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2017,
+   "wheels",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2017,
    "window-regulator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2017,
    "window-switch",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2017,
+   "wiper-motor",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
    "Jetta",
    2018,
    "ac-compressor",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2018,
    "alternator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2018,
    "bumper-front",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2018,
    "bumper-rear",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2018,
    "climate-control",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2018,
    "fender",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2018,
    "fuel-pump-module",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2018,
    "grille",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2018,
    "hood",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2018,
    "ignition-coils",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2018,
+   "knuckle",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2018,
    "radiator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2018,
    "side-mirrors",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2018,
    "starter",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2018,
+   "strut",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2018,
    "tail-lights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2018,
    "throttle-body",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2018,
    "trunk-lid",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2018,
    "window-regulator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2018,
    "window-switch",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2018,
+   "wiper-motor",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -51632,6 +54803,13 @@
    2019,
    "ignition-coils",
    "open:unread_sibling_page"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2019,
+   "knuckle",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
@@ -51658,6 +54836,13 @@
    "Volkswagen",
    "Jetta",
    2019,
+   "strut",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2019,
    "tail-lights",
    "open:uncrawled_chain_member"
   ],
@@ -51688,6 +54873,13 @@
    2019,
    "window-switch",
    "open:unread_sibling_page"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2019,
+   "wiper-motor",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
@@ -51777,6 +54969,13 @@
    "Volkswagen",
    "Jetta",
    2020,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2020,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -51792,6 +54991,13 @@
    "Jetta",
    2020,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2020,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -51827,6 +55033,13 @@
    "Jetta",
    2020,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2020,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -51910,6 +55123,13 @@
    "Volkswagen",
    "Jetta",
    2021,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2021,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -51925,6 +55145,13 @@
    "Jetta",
    2021,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2021,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -51960,6 +55187,13 @@
    "Jetta",
    2021,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2021,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -51967,210 +55201,252 @@
    "Jetta",
    2022,
    "ac-compressor",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2022,
    "alternator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2022,
    "fender",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2022,
    "fuel-pump-module",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2022,
    "headlights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2022,
    "hood",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2022,
    "ignition-coils",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2022,
+   "knuckle",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2022,
    "radiator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2022,
    "side-mirrors",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2022,
    "starter",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2022,
+   "strut",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2022,
    "tail-lights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2022,
    "throttle-body",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2022,
    "trunk-lid",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2022,
    "window-regulator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2022,
    "window-switch",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2022,
+   "wiper-motor",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2023,
    "ac-compressor",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2023,
    "alternator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2023,
    "fender",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2023,
    "fuel-pump-module",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2023,
    "headlights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2023,
    "hood",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2023,
    "ignition-coils",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2023,
+   "knuckle",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2023,
    "radiator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2023,
    "side-mirrors",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2023,
    "starter",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2023,
+   "strut",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2023,
    "tail-lights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2023,
    "throttle-body",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2023,
    "trunk-lid",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2023,
    "window-regulator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Jetta",
    2023,
    "window-switch",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2023,
+   "wiper-motor",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -52225,6 +55501,13 @@
    "Volkswagen",
    "Jetta",
    2024,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2024,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -52240,6 +55523,13 @@
    "Jetta",
    2024,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2024,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -52309,6 +55599,13 @@
    "Volkswagen",
    "Jetta",
    2025,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2025,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -52324,6 +55621,13 @@
    "Jetta",
    2025,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Jetta",
+   2025,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -52379,6 +55683,13 @@
    "Volkswagen",
    "Passat",
    1990,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1990,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -52400,6 +55711,13 @@
    "Volkswagen",
    "Passat",
    1990,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1990,
    "trunk-lid",
    "open:no_year_manifest"
   ],
@@ -52407,7 +55725,21 @@
    "Volkswagen",
    "Passat",
    1990,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1990,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1990,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -52449,6 +55781,13 @@
    "Volkswagen",
    "Passat",
    1991,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1991,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -52477,6 +55816,13 @@
    "Volkswagen",
    "Passat",
    1991,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1991,
    "trunk-lid",
    "open:no_year_manifest"
   ],
@@ -52484,7 +55830,21 @@
    "Volkswagen",
    "Passat",
    1991,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1991,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1991,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -52540,6 +55900,13 @@
    "Volkswagen",
    "Passat",
    1992,
+   "knuckle",
+   "open:option_split"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1992,
    "liftgate",
    "open:unread_sibling_page"
   ],
@@ -52568,8 +55935,22 @@
    "Volkswagen",
    "Passat",
    1992,
+   "strut",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1992,
    "trunk-lid",
    "open:unread_sibling_page"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1992,
+   "wheels",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -52581,79 +55962,114 @@
   [
    "Volkswagen",
    "Passat",
+   1992,
+   "wiper-motor",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
    1993,
    "ac-compressor",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Passat",
    1993,
    "alternator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Passat",
    1993,
    "bumper-front",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Passat",
    1993,
    "bumper-rear",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Passat",
    1993,
    "fender",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Passat",
    1993,
    "hood",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1993,
+   "knuckle",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Passat",
    1993,
    "liftgate",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Passat",
    1993,
    "power-steering-pump",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Passat",
    1993,
    "starter",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1993,
+   "strut",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Passat",
    1993,
    "trunk-lid",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1993,
+   "wheels",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
    "Passat",
    1993,
    "window-switch",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1993,
+   "wiper-motor",
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -52701,6 +56117,13 @@
    "Volkswagen",
    "Passat",
    1994,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1994,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -52722,7 +56145,21 @@
    "Volkswagen",
    "Passat",
    1994,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1994,
    "trunk-lid",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1994,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -52735,6 +56172,13 @@
   [
    "Volkswagen",
    "Passat",
+   1994,
+   "wiper-motor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
    1995,
    "ac-compressor",
    "open:no_year_manifest"
@@ -52764,6 +56208,13 @@
    "Volkswagen",
    "Passat",
    1995,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1995,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -52777,6 +56228,27 @@
   [
    "Volkswagen",
    "Passat",
+   1995,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1995,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1995,
+   "wiper-motor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
    1996,
    "ac-compressor",
    "open:no_year_manifest"
@@ -52806,6 +56278,13 @@
    "Volkswagen",
    "Passat",
    1996,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1996,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -52814,6 +56293,27 @@
    "Passat",
    1996,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1996,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1996,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1996,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -52848,6 +56348,13 @@
    "Volkswagen",
    "Passat",
    1997,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1997,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -52856,6 +56363,27 @@
    "Passat",
    1997,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1997,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1997,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1997,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -52932,6 +56460,13 @@
    "Volkswagen",
    "Passat",
    1998,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1998,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -52967,6 +56502,13 @@
    "Volkswagen",
    "Passat",
    1998,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1998,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -52982,6 +56524,13 @@
    "Passat",
    1998,
    "trunk-lid",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1998,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -53072,6 +56621,13 @@
    "Volkswagen",
    "Passat",
    1999,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1999,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -53107,6 +56663,13 @@
    "Volkswagen",
    "Passat",
    1999,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1999,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -53128,6 +56691,13 @@
    "Volkswagen",
    "Passat",
    1999,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1999,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -53136,6 +56706,13 @@
    "Passat",
    1999,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   1999,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -53212,6 +56789,13 @@
    "Volkswagen",
    "Passat",
    2000,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2000,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -53247,6 +56831,13 @@
    "Volkswagen",
    "Passat",
    2000,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2000,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -53268,6 +56859,13 @@
    "Volkswagen",
    "Passat",
    2000,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2000,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -53276,6 +56874,13 @@
    "Passat",
    2000,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2000,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -53366,6 +56971,13 @@
    "Volkswagen",
    "Passat",
    2001,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2001,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -53401,6 +57013,13 @@
    "Volkswagen",
    "Passat",
    2001,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2001,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -53422,6 +57041,13 @@
    "Volkswagen",
    "Passat",
    2001,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2001,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -53430,6 +57056,13 @@
    "Passat",
    2001,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2001,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -53520,6 +57153,13 @@
    "Volkswagen",
    "Passat",
    2002,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2002,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -53555,6 +57195,13 @@
    "Volkswagen",
    "Passat",
    2002,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2002,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -53576,6 +57223,13 @@
    "Volkswagen",
    "Passat",
    2002,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2002,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -53584,6 +57238,13 @@
    "Passat",
    2002,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2002,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -53674,6 +57335,13 @@
    "Volkswagen",
    "Passat",
    2003,
+   "knuckle",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2003,
    "liftgate",
    "open:unread_sibling_page"
   ],
@@ -53709,6 +57377,13 @@
    "Volkswagen",
    "Passat",
    2003,
+   "strut",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2003,
    "tail-lights",
    "open:option_split"
   ],
@@ -53730,6 +57405,13 @@
    "Volkswagen",
    "Passat",
    2003,
+   "wheels",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2003,
    "window-regulator",
    "open:unread_sibling_page"
   ],
@@ -53743,6 +57425,13 @@
   [
    "Volkswagen",
    "Passat",
+   2003,
+   "wiper-motor",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
    2004,
    "ac-compressor",
    "open:no_year_manifest"
@@ -53828,6 +57517,13 @@
    "Volkswagen",
    "Passat",
    2004,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2004,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -53863,6 +57559,13 @@
    "Volkswagen",
    "Passat",
    2004,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2004,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -53884,6 +57587,13 @@
    "Volkswagen",
    "Passat",
    2004,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2004,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -53892,6 +57602,13 @@
    "Passat",
    2004,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2004,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -53982,6 +57699,13 @@
    "Volkswagen",
    "Passat",
    2005,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2005,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -54010,6 +57734,13 @@
    "Volkswagen",
    "Passat",
    2005,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2005,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -54031,6 +57762,13 @@
    "Volkswagen",
    "Passat",
    2005,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2005,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -54039,6 +57777,13 @@
    "Passat",
    2005,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2005,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -54115,6 +57860,13 @@
    "Volkswagen",
    "Passat",
    2006,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2006,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -54136,6 +57888,13 @@
    "Volkswagen",
    "Passat",
    2006,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2006,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -54151,6 +57910,13 @@
    "Passat",
    2006,
    "trunk-lid",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2006,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -54248,6 +58014,13 @@
    "Volkswagen",
    "Passat",
    2007,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2007,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -54276,6 +58049,13 @@
    "Volkswagen",
    "Passat",
    2007,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2007,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -54297,6 +58077,13 @@
    "Volkswagen",
    "Passat",
    2007,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2007,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -54305,6 +58092,13 @@
    "Passat",
    2007,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2007,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -54395,6 +58189,13 @@
    "Volkswagen",
    "Passat",
    2008,
+   "knuckle",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2008,
    "liftgate",
    "open:unread_sibling_page"
   ],
@@ -54423,6 +58224,13 @@
    "Volkswagen",
    "Passat",
    2008,
+   "strut",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2008,
    "tail-lights",
    "open:uncrawled_chain_member"
   ],
@@ -54444,6 +58252,13 @@
    "Volkswagen",
    "Passat",
    2008,
+   "wheels",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2008,
    "window-regulator",
    "open:uncrawled_chain_member"
   ],
@@ -54457,6 +58272,13 @@
   [
    "Volkswagen",
    "Passat",
+   2008,
+   "wiper-motor",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
    2009,
    "ac-compressor",
    "open:no_year_manifest"
@@ -54535,6 +58357,13 @@
    "Volkswagen",
    "Passat",
    2009,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2009,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -54563,6 +58392,13 @@
    "Volkswagen",
    "Passat",
    2009,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2009,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -54584,6 +58420,13 @@
    "Volkswagen",
    "Passat",
    2009,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2009,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -54592,6 +58435,13 @@
    "Passat",
    2009,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2009,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -54675,6 +58525,13 @@
    "Volkswagen",
    "Passat",
    2010,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2010,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -54703,6 +58560,13 @@
    "Volkswagen",
    "Passat",
    2010,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2010,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -54724,6 +58588,13 @@
    "Volkswagen",
    "Passat",
    2010,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2010,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -54732,6 +58603,13 @@
    "Passat",
    2010,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2010,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -54822,6 +58700,13 @@
    "Volkswagen",
    "Passat",
    2012,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2012,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -54843,6 +58728,13 @@
    "Volkswagen",
    "Passat",
    2012,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2012,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -54858,6 +58750,13 @@
    "Passat",
    2012,
    "trunk-lid",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2012,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -54962,6 +58861,13 @@
    "Volkswagen",
    "Passat",
    2013,
+   "knuckle",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2013,
    "power-steering-pump",
    "open:no_list_manifest"
   ],
@@ -54990,6 +58896,13 @@
    "Volkswagen",
    "Passat",
    2013,
+   "strut",
+   "open:option_split"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2013,
    "tail-lights",
    "open:no_list_manifest"
   ],
@@ -55011,6 +58924,13 @@
    "Volkswagen",
    "Passat",
    2013,
+   "wheels",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2013,
    "window-regulator",
    "open:no_list_manifest"
   ],
@@ -55020,6 +58940,13 @@
    2013,
    "window-switch",
    "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2013,
+   "wiper-motor",
+   "open:no_candidates"
   ],
   [
    "Volkswagen",
@@ -55109,6 +59036,13 @@
    "Volkswagen",
    "Passat",
    2014,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2014,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -55137,6 +59071,13 @@
    "Volkswagen",
    "Passat",
    2014,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2014,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -55152,6 +59093,13 @@
    "Passat",
    2014,
    "trunk-lid",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2014,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -55256,6 +59204,13 @@
    "Volkswagen",
    "Passat",
    2015,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2015,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -55271,6 +59226,13 @@
    "Passat",
    2015,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2015,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -55298,6 +59260,13 @@
    "Volkswagen",
    "Passat",
    2015,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2015,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -55375,6 +59344,13 @@
    "Volkswagen",
    "Passat",
    2016,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2016,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -55389,6 +59365,13 @@
    "Volkswagen",
    "Passat",
    2016,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2016,
    "throttle-body",
    "open:no_year_manifest"
   ],
@@ -55397,6 +59380,13 @@
    "Passat",
    2016,
    "trunk-lid",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2016,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -55480,6 +59470,13 @@
    "Volkswagen",
    "Passat",
    2017,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2017,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -55494,6 +59491,13 @@
    "Volkswagen",
    "Passat",
    2017,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2017,
    "throttle-body",
    "open:no_year_manifest"
   ],
@@ -55502,6 +59506,13 @@
    "Passat",
    2017,
    "trunk-lid",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2017,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -55585,6 +59596,13 @@
    "Volkswagen",
    "Passat",
    2018,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2018,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -55599,6 +59617,13 @@
    "Volkswagen",
    "Passat",
    2018,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2018,
    "throttle-body",
    "open:no_year_manifest"
   ],
@@ -55607,6 +59632,13 @@
    "Passat",
    2018,
    "trunk-lid",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2018,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -55690,6 +59722,13 @@
    "Volkswagen",
    "Passat",
    2019,
+   "knuckle",
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2019,
    "radiator",
    "open:unread_sibling_page"
   ],
@@ -55698,6 +59737,13 @@
    "Passat",
    2019,
    "starter",
+   "open:no_list_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2019,
+   "strut",
    "open:no_list_manifest"
   ],
   [
@@ -55718,6 +59764,13 @@
    "Volkswagen",
    "Passat",
    2019,
+   "wheels",
+   "open:option_split"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2019,
    "window-regulator",
    "open:no_list_manifest"
   ],
@@ -55760,6 +59813,13 @@
    "Volkswagen",
    "Passat",
    2020,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2020,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -55768,6 +59828,13 @@
    "Passat",
    2020,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2020,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -55823,6 +59890,13 @@
    "Volkswagen",
    "Passat",
    2021,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2021,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -55831,6 +59905,13 @@
    "Passat",
    2021,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2021,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -55886,6 +59967,13 @@
    "Volkswagen",
    "Passat",
    2022,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2022,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -55894,6 +59982,13 @@
    "Passat",
    2022,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Passat",
+   2022,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -56110,6 +60205,13 @@
    "Volkswagen",
    "Routan",
    2009,
+   "knuckle",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Routan",
+   2009,
    "liftgate",
    "open:unread_sibling_page"
   ],
@@ -56145,6 +60247,13 @@
    "Volkswagen",
    "Routan",
    2009,
+   "strut",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Routan",
+   2009,
    "tail-lights",
    "open:unread_sibling_page"
   ],
@@ -56159,6 +60268,13 @@
    "Volkswagen",
    "Routan",
    2009,
+   "wheels",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Routan",
+   2009,
    "window-regulator",
    "open:unread_sibling_page"
   ],
@@ -56168,6 +60284,13 @@
    2009,
    "window-switch",
    "open:unread_sibling_page"
+  ],
+  [
+   "Volkswagen",
+   "Routan",
+   2009,
+   "wiper-motor",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
@@ -56250,6 +60373,13 @@
    "Volkswagen",
    "Routan",
    2010,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Routan",
+   2010,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -56278,6 +60408,13 @@
    "Volkswagen",
    "Routan",
    2010,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Routan",
+   2010,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -56292,6 +60429,13 @@
    "Volkswagen",
    "Routan",
    2010,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Routan",
+   2010,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -56305,6 +60449,13 @@
   [
    "Volkswagen",
    "Routan",
+   2010,
+   "wiper-motor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Routan",
    2011,
    "bumper-front",
    "open:no_year_manifest"
@@ -56355,6 +60506,13 @@
    "Volkswagen",
    "Routan",
    2011,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Routan",
+   2011,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -56376,7 +60534,21 @@
    "Volkswagen",
    "Routan",
    2011,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Routan",
+   2011,
    "tail-lights",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Routan",
+   2011,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -56391,6 +60563,13 @@
    "Routan",
    2011,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Routan",
+   2011,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -56446,6 +60625,13 @@
    "Volkswagen",
    "Routan",
    2012,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Routan",
+   2012,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -56467,7 +60653,21 @@
    "Volkswagen",
    "Routan",
    2012,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Routan",
+   2012,
    "tail-lights",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Routan",
+   2012,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -56482,6 +60682,13 @@
    "Routan",
    2012,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Routan",
+   2012,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -56537,6 +60744,13 @@
    "Volkswagen",
    "Routan",
    2013,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Routan",
+   2013,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -56558,7 +60772,21 @@
    "Volkswagen",
    "Routan",
    2013,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Routan",
+   2013,
    "tail-lights",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Routan",
+   2013,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -56573,6 +60801,13 @@
    "Routan",
    2013,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Routan",
+   2013,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -56628,6 +60863,13 @@
    "Volkswagen",
    "Routan",
    2014,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Routan",
+   2014,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -56649,7 +60891,21 @@
    "Volkswagen",
    "Routan",
    2014,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Routan",
+   2014,
    "tail-lights",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Routan",
+   2014,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -56664,6 +60920,13 @@
    "Routan",
    2014,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Routan",
+   2014,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -56824,6 +61087,13 @@
    "Volkswagen",
    "Tiguan",
    2009,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2009,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -56852,7 +61122,21 @@
    "Volkswagen",
    "Tiguan",
    2009,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2009,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2009,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -56867,6 +61151,13 @@
    "Tiguan",
    2009,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2009,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -56915,6 +61206,13 @@
    "Volkswagen",
    "Tiguan",
    2010,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2010,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -56943,7 +61241,21 @@
    "Volkswagen",
    "Tiguan",
    2010,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2010,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2010,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -56958,6 +61270,13 @@
    "Tiguan",
    2010,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2010,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -57006,6 +61325,13 @@
    "Volkswagen",
    "Tiguan",
    2011,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2011,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -57034,7 +61360,21 @@
    "Volkswagen",
    "Tiguan",
    2011,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2011,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2011,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -57049,6 +61389,13 @@
    "Tiguan",
    2011,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2011,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -57132,6 +61479,13 @@
    "Volkswagen",
    "Tiguan",
    2012,
+   "knuckle",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2012,
    "liftgate",
    "open:unread_sibling_page"
   ],
@@ -57160,6 +61514,13 @@
    "Volkswagen",
    "Tiguan",
    2012,
+   "strut",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2012,
    "tail-lights",
    "open:no_list_manifest"
   ],
@@ -57174,6 +61535,13 @@
    "Volkswagen",
    "Tiguan",
    2012,
+   "wheels",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2012,
    "window-regulator",
    "open:no_list_manifest"
   ],
@@ -57187,6 +61555,13 @@
   [
    "Volkswagen",
    "Tiguan",
+   2012,
+   "wiper-motor",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
    2013,
    "ac-compressor",
    "open:no_year_manifest"
@@ -57258,6 +61633,13 @@
    "Volkswagen",
    "Tiguan",
    2013,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2013,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -57286,6 +61668,13 @@
    "Volkswagen",
    "Tiguan",
    2013,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2013,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -57300,6 +61689,13 @@
    "Volkswagen",
    "Tiguan",
    2013,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2013,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -57308,6 +61704,13 @@
    "Tiguan",
    2013,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2013,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -57384,6 +61787,13 @@
    "Volkswagen",
    "Tiguan",
    2014,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2014,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -57412,6 +61822,13 @@
    "Volkswagen",
    "Tiguan",
    2014,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2014,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -57426,6 +61843,13 @@
    "Volkswagen",
    "Tiguan",
    2014,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2014,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -57434,6 +61858,13 @@
    "Tiguan",
    2014,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2014,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -57510,6 +61941,13 @@
    "Volkswagen",
    "Tiguan",
    2015,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2015,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -57538,6 +61976,13 @@
    "Volkswagen",
    "Tiguan",
    2015,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2015,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -57552,6 +61997,13 @@
    "Volkswagen",
    "Tiguan",
    2015,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2015,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -57560,6 +62012,13 @@
    "Tiguan",
    2015,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2015,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -57636,6 +62095,13 @@
    "Volkswagen",
    "Tiguan",
    2016,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2016,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -57664,6 +62130,13 @@
    "Volkswagen",
    "Tiguan",
    2016,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2016,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -57678,6 +62151,13 @@
    "Volkswagen",
    "Tiguan",
    2016,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2016,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -57686,6 +62166,13 @@
    "Tiguan",
    2016,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2016,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -57762,6 +62249,13 @@
    "Volkswagen",
    "Tiguan",
    2017,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2017,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -57790,6 +62284,13 @@
    "Volkswagen",
    "Tiguan",
    2017,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2017,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -57804,6 +62305,13 @@
    "Volkswagen",
    "Tiguan",
    2017,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2017,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -57812,6 +62320,13 @@
    "Tiguan",
    2017,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2017,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -57897,6 +62412,13 @@
    2018,
    "ignition-coils",
    "open:unread_sibling_page"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2018,
+   "knuckle",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
@@ -57930,6 +62452,13 @@
    "Volkswagen",
    "Tiguan",
    2018,
+   "strut",
+   "open:option_split"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2018,
    "tail-lights",
    "open:unread_sibling_page"
   ],
@@ -57944,6 +62473,13 @@
    "Volkswagen",
    "Tiguan",
    2018,
+   "wheels",
+   "open:option_split"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2018,
    "window-regulator",
    "open:unverified_product"
   ],
@@ -57957,6 +62493,13 @@
   [
    "Volkswagen",
    "Tiguan",
+   2018,
+   "wiper-motor",
+   "open:no_candidates"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
    2019,
    "ac-compressor",
    "open:no_year_manifest"
@@ -58028,6 +62571,13 @@
    "Volkswagen",
    "Tiguan",
    2019,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2019,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -58056,6 +62606,13 @@
    "Volkswagen",
    "Tiguan",
    2019,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2019,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -58064,6 +62621,13 @@
    "Tiguan",
    2019,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2019,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -58140,6 +62704,13 @@
    "Volkswagen",
    "Tiguan",
    2020,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2020,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -58168,6 +62739,13 @@
    "Volkswagen",
    "Tiguan",
    2020,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2020,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -58176,6 +62754,13 @@
    "Tiguan",
    2020,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2020,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -58252,6 +62837,13 @@
    "Volkswagen",
    "Tiguan",
    2021,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2021,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -58280,6 +62872,13 @@
    "Volkswagen",
    "Tiguan",
    2021,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2021,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -58288,6 +62887,13 @@
    "Tiguan",
    2021,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2021,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -58336,6 +62942,13 @@
    "Volkswagen",
    "Tiguan",
    2022,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2022,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -58364,6 +62977,13 @@
    "Volkswagen",
    "Tiguan",
    2022,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2022,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -58372,6 +62992,13 @@
    "Tiguan",
    2022,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2022,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -58420,6 +63047,13 @@
    "Volkswagen",
    "Tiguan",
    2023,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2023,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -58442,6 +63076,13 @@
    "Tiguan",
    2023,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2023,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -58504,6 +63145,13 @@
    "Volkswagen",
    "Tiguan",
    2024,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2024,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -58526,6 +63174,13 @@
    "Tiguan",
    2024,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Tiguan",
+   2024,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -58639,6 +63294,13 @@
    2004,
    "ignition-coils",
    "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2004,
+   "knuckle",
+   "open:option_split"
   ],
   [
    "Volkswagen",
@@ -58679,6 +63341,13 @@
    "Volkswagen",
    "Touareg",
    2004,
+   "strut",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2004,
    "tail-lights",
    "open:uncrawled_chain_member"
   ],
@@ -58693,6 +63362,13 @@
    "Volkswagen",
    "Touareg",
    2004,
+   "wheels",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2004,
    "window-regulator",
    "open:uncrawled_chain_member"
   ],
@@ -58702,6 +63378,13 @@
    2004,
    "window-switch",
    "open:unread_sibling_page"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2004,
+   "wiper-motor",
+   "open:uncrawled_chain_member"
   ],
   [
    "Volkswagen",
@@ -58791,6 +63474,13 @@
    "Volkswagen",
    "Touareg",
    2005,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2005,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -58826,6 +63516,13 @@
    "Volkswagen",
    "Touareg",
    2005,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2005,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -58840,7 +63537,21 @@
    "Volkswagen",
    "Touareg",
    2005,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2005,
    "window-regulator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2005,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -58924,6 +63635,13 @@
    "Volkswagen",
    "Touareg",
    2006,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2006,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -58959,6 +63677,13 @@
    "Volkswagen",
    "Touareg",
    2006,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2006,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -58973,7 +63698,21 @@
    "Volkswagen",
    "Touareg",
    2006,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2006,
    "window-regulator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2006,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -59050,6 +63789,13 @@
    "Volkswagen",
    "Touareg",
    2007,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2007,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -59085,6 +63831,13 @@
    "Volkswagen",
    "Touareg",
    2007,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2007,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -59099,6 +63852,13 @@
    "Volkswagen",
    "Touareg",
    2007,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2007,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -59107,6 +63867,13 @@
    "Touareg",
    2007,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2007,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -59155,6 +63922,13 @@
    "Volkswagen",
    "Touareg",
    2008,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2008,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -59183,7 +63957,21 @@
    "Volkswagen",
    "Touareg",
    2008,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2008,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2008,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -59196,6 +63984,13 @@
   [
    "Volkswagen",
    "Touareg",
+   2008,
+   "wiper-motor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
    2009,
    "bumper-rear",
    "open:no_year_manifest"
@@ -59232,6 +64027,13 @@
    "Volkswagen",
    "Touareg",
    2009,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2009,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -59246,6 +64048,13 @@
    "Volkswagen",
    "Touareg",
    2009,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2009,
    "throttle-body",
    "open:no_year_manifest"
   ],
@@ -59253,7 +64062,21 @@
    "Volkswagen",
    "Touareg",
    2009,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2009,
    "window-regulator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2009,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -59295,6 +64118,13 @@
    "Volkswagen",
    "Touareg",
    2010,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2010,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -59309,7 +64139,21 @@
    "Volkswagen",
    "Touareg",
    2010,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2010,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2010,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -59322,6 +64166,13 @@
   [
    "Volkswagen",
    "Touareg",
+   2010,
+   "wiper-motor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
    2011,
    "bumper-front",
    "open:no_year_manifest"
@@ -59365,6 +64216,13 @@
    "Volkswagen",
    "Touareg",
    2011,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2011,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -59379,6 +64237,13 @@
    "Volkswagen",
    "Touareg",
    2011,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2011,
    "throttle-body",
    "open:no_year_manifest"
   ],
@@ -59386,7 +64251,21 @@
    "Volkswagen",
    "Touareg",
    2011,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2011,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2011,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -59435,6 +64314,13 @@
    "Volkswagen",
    "Touareg",
    2012,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2012,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -59449,6 +64335,13 @@
    "Volkswagen",
    "Touareg",
    2012,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2012,
    "throttle-body",
    "open:no_year_manifest"
   ],
@@ -59456,7 +64349,21 @@
    "Volkswagen",
    "Touareg",
    2012,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2012,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2012,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -59505,6 +64412,13 @@
    "Volkswagen",
    "Touareg",
    2013,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2013,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -59519,6 +64433,13 @@
    "Volkswagen",
    "Touareg",
    2013,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2013,
    "throttle-body",
    "open:no_year_manifest"
   ],
@@ -59526,7 +64447,21 @@
    "Volkswagen",
    "Touareg",
    2013,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2013,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2013,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -59582,6 +64517,13 @@
    "Volkswagen",
    "Touareg",
    2014,
+   "knuckle",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2014,
    "liftgate",
    "open:unread_sibling_page"
   ],
@@ -59591,6 +64533,13 @@
    2014,
    "radiator",
    "open:unread_sibling_page"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2014,
+   "strut",
+   "open:option_split"
   ],
   [
    "Volkswagen",
@@ -59603,12 +64552,26 @@
    "Volkswagen",
    "Touareg",
    2014,
+   "wheels",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2014,
    "window-switch",
    "open:no_list_manifest"
   ],
   [
    "Volkswagen",
    "Touareg",
+   2014,
+   "wiper-motor",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
    2015,
    "fender",
    "open:no_year_manifest"
@@ -59631,6 +64594,13 @@
    "Volkswagen",
    "Touareg",
    2015,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2015,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -59645,7 +64615,21 @@
    "Volkswagen",
    "Touareg",
    2015,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2015,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2015,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -59658,6 +64642,13 @@
   [
    "Volkswagen",
    "Touareg",
+   2015,
+   "wiper-motor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
    2016,
    "fender",
    "open:no_year_manifest"
@@ -59680,6 +64671,13 @@
    "Volkswagen",
    "Touareg",
    2016,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2016,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -59694,7 +64692,21 @@
    "Volkswagen",
    "Touareg",
    2016,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2016,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2016,
+   "wheels",
    "open:no_year_manifest"
   ],
   [
@@ -59707,6 +64719,13 @@
   [
    "Volkswagen",
    "Touareg",
+   2016,
+   "wiper-motor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
    2017,
    "fender",
    "open:no_year_manifest"
@@ -59729,6 +64748,13 @@
    "Volkswagen",
    "Touareg",
    2017,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2017,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -59743,7 +64769,28 @@
    "Volkswagen",
    "Touareg",
    2017,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2017,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2017,
+   "wheels",
+   "open:no_year_manifest"
+  ],
+  [
+   "Volkswagen",
+   "Touareg",
+   2017,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -61516,7 +66563,7 @@
    1999,
    "alternator",
    "vw-mk4",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -61524,7 +66571,7 @@
    1999,
    "ignition-coils",
    "vw-mk4",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -61532,7 +66579,7 @@
    1999,
    "starter",
    "vw-mk4",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -61708,7 +66755,7 @@
    2011,
    "alternator",
    "vw-20t",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -61716,7 +66763,7 @@
    2011,
    "ignition-coils",
    "vw-20t",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -61724,7 +66771,7 @@
    2011,
    "starter",
    "vw-20t",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -61732,7 +66779,7 @@
    2012,
    "alternator",
    "vw-20t",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -61740,7 +66787,7 @@
    2012,
    "ignition-coils",
    "vw-20t",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -61748,7 +66795,7 @@
    2012,
    "starter",
    "vw-20t",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -61852,7 +66899,7 @@
    2006,
    "alternator",
    "vw-20t",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -61860,7 +66907,7 @@
    2006,
    "ignition-coils",
    "vw-20t",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -61868,7 +66915,7 @@
    2006,
    "starter",
    "vw-20t",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -61900,7 +66947,7 @@
    2008,
    "alternator",
    "vw-20t",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -61908,7 +66955,7 @@
    2008,
    "ignition-coils",
    "vw-20t",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -61916,7 +66963,7 @@
    2008,
    "starter",
    "vw-20t",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -61996,7 +67043,7 @@
    2012,
    "alternator",
    "vw-20t",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62004,7 +67051,7 @@
    2012,
    "ignition-coils",
    "vw-20t",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62012,7 +67059,7 @@
    2012,
    "starter",
    "vw-20t",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62020,7 +67067,7 @@
    2013,
    "alternator",
    "vw-20t",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62028,7 +67075,7 @@
    2013,
    "ignition-coils",
    "vw-20t",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62036,7 +67083,7 @@
    2013,
    "starter",
    "vw-20t",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62308,7 +67355,7 @@
    2012,
    "alternator",
    "vw-25",
-   "open:year_manifest_bad"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62316,7 +67363,7 @@
    2012,
    "ignition-coils",
    "vw-25",
-   "open:year_manifest_bad"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62324,7 +67371,7 @@
    2012,
    "starter",
    "vw-25",
-   "open:year_manifest_bad"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62668,7 +67715,7 @@
    2008,
    "alternator",
    "vw-20t",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62676,7 +67723,7 @@
    2008,
    "alternator",
    "vw-25",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62684,7 +67731,7 @@
    2008,
    "ignition-coils",
    "vw-20t",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62692,7 +67739,7 @@
    2008,
    "ignition-coils",
    "vw-25",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62700,7 +67747,7 @@
    2008,
    "starter",
    "vw-20t",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62708,7 +67755,7 @@
    2008,
    "starter",
    "vw-25",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62716,7 +67763,7 @@
    2009,
    "alternator",
    "vw-20t",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62724,7 +67771,7 @@
    2009,
    "alternator",
    "vw-25",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62732,7 +67779,7 @@
    2009,
    "ignition-coils",
    "vw-20t",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62740,7 +67787,7 @@
    2009,
    "ignition-coils",
    "vw-25",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62748,7 +67795,7 @@
    2009,
    "starter",
    "vw-20t",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62756,7 +67803,7 @@
    2009,
    "starter",
    "vw-25",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62860,7 +67907,7 @@
    2012,
    "alternator",
    "vw-20t",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62868,7 +67915,7 @@
    2012,
    "alternator",
    "vw-25",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62876,7 +67923,7 @@
    2012,
    "ignition-coils",
    "vw-20t",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62884,7 +67931,7 @@
    2012,
    "ignition-coils",
    "vw-25",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62892,7 +67939,7 @@
    2012,
    "starter",
    "vw-20t",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62900,7 +67947,7 @@
    2012,
    "starter",
    "vw-25",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62908,7 +67955,7 @@
    2013,
    "alternator",
    "vw-20t",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62916,7 +67963,7 @@
    2013,
    "alternator",
    "vw-25",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62924,7 +67971,7 @@
    2013,
    "ignition-coils",
    "vw-20t",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62932,7 +67979,7 @@
    2013,
    "ignition-coils",
    "vw-25",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62940,7 +67987,7 @@
    2013,
    "starter",
    "vw-20t",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -62948,7 +67995,7 @@
    2013,
    "starter",
    "vw-25",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Volkswagen",
@@ -64078,7 +69125,7 @@
      2003
     ]
    ],
-   "cars": 140,
+   "cars": 139,
    "cat": "gauge-cluster",
    "id": "oem:vag:gauge-cluster:C:ce122997d5",
    "kind": "body",
@@ -64105,7 +69152,7 @@
      2003
     ]
    ],
-   "cars": 140,
+   "cars": 139,
    "cat": "gauge-cluster",
    "id": "oem:vag:gauge-cluster:C:3208fc0615",
    "kind": "body",
@@ -64251,10 +69298,10 @@
   }
  ],
  "ns": "vag",
- "policy_sha256": "4e44d299c2602859ba450786b49513dd2661580dd6ce47e5d20a2dcb6c7943eb",
+ "policy_sha256": "ad35d5f7de72cd56cff9b08c54ada70478f601d4c5d6aff7d3bf3555e1e53bd1",
  "raw": {
-  "commit": "c36da2eb98835c02f81c05e8c36b6a926634a332",
-  "ref": "c36da2eb98835c02f81c05e8c36b6a926634a332",
+  "commit": "3b4677ae1df7eb3b60765ce402d5a79167561981",
+  "ref": "3b4677ae1df7",
   "sites": {
    "www.audipartsgiant.com": {
     "blocked": false,
@@ -64269,12 +69316,12 @@
    "www.vwpartsgiant.com": {
     "blocked": false,
     "done": true,
-    "lists": 673,
-    "lists_sha256": "ba96e786e0559d4a6cfbae6bb5b8240c698ebb7363e1057bb28c29fb121ef941",
-    "records": 1278,
-    "records_sha256": "03002c909902fb9d9f02d8cffd23135b1694660f3f8a7ac212b870e0aa885c13",
-    "years": 76,
-    "years_sha256": "23f085c2b9d885568eb9e41c583889c42dc57ad5f1a6d3a1302bc2cdff990f78"
+    "lists": 1204,
+    "lists_sha256": "39ad3ca5a14cc74eb3720aaa20e36c9592a5d22a3668aed46465e82471066356",
+    "records": 1677,
+    "records_sha256": "1d8a4912600ce530cab7b49dc5d807de09255e3a1f3a8bf4ee6420b9fe004c85",
+    "years": 186,
+    "years_sha256": "2244da2a0bb43209b6af24ea44883b7cbc8ad99bfbd479f074d8d29ca592872c"
    }
   }
  },

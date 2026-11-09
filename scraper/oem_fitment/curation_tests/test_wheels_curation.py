@@ -69,5 +69,8 @@ ok({float(m.group(1)) for m in W.finditer("Part Notes: 15x6 WJW")} == {6.0}
    "width read from '15x6', '20x8', '16 X 6.5'; none from '16 Inch' (round 2: 1SZ98PAKAA, 1DP88SZ0AB)")
 ok("wheel_width_conflict" in src and "wheel_spare_description" in src, "width conflict and spare description wired")
 
+ok(policy.WHEELS_AUDITED_NS == frozenset({"mopar"}) and "wheels_not_audited" in src,
+   "wheels publish only in audited namespaces (mopar, 2026-11-09)")
+
 print("OK" if not fails else f"{len(fails)} FAIL")
 sys.exit(1 if fails else 0)

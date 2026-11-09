@@ -2955,3 +2955,10 @@ each); nothing allowlisted or crawled.
 - Result (scratch, raw f2078e0a): mopar 29 groups, 9,613 lot cars, every one OK in the census, with no new group. toyota 0, ford 0.
 - Still to do: one push with policy + all 8 shipped namespaces re-curated on the republished inventory (after the Cr-Z map fix) + test_groups_hash green, after the hub confirms.
 - Verifier note: `fetch.py --text` prints only 400 lines unless --max-lines is given (hub is fixing it).
+- 2026-11-09 ~23:00 UTC, single push (hub-confirmed):
+  - All 14 namespaces curated `--ns all` on oem-raw@3b4677ae with the republished inventory (scan 435f911; model_map check clean). The 8 shipped group files are committed; the 6 unshipped namespaces' new group files and own_page_completion reports are not.
+  - Diff vs main: the only additions are mopar +29 wheels groups (all OK in the census, 5105665AA absent, 9,610 lot cars). No group removed anywhere. Every other changed field is `cars` (new inventory).
+  - held_exterior.json reflects current code: Subaru option holds (gauge-cluster, side-mirrors) added; allowlist-released GM/Subaru entries gone. Shipped groups unaffected.
+  - New WHEELS_AUDITED_NS = {mopar}. hmg (17), mb (14) and vag (5) wheels groups from today's tier W crawl are refused `wheels_not_audited` until their own §11.4 round.
+  - Payload: new lazy file docs/data/oem/wheels.json (29 groups). interchange.json changes only builtAt, oemStatus and the oemLazy index.
+  - pf_guards_unit: the wheels block now loads an empty wheels lazy file. New check: a shipped wheels group adds the cross-model donor as Likely.

@@ -1,5 +1,5 @@
 {
- "count": 199,
+ "count": 205,
  "groups": [
   {
    "apps": [
@@ -1741,72 +1741,6 @@
   {
    "apps": [
     [
-     "Chevrolet",
-     "Astro",
-     2000,
-     2000
-    ],
-    [
-     "GMC",
-     "Safari",
-     1997,
-     1997
-    ],
-    [
-     "GMC",
-     "Safari",
-     2000,
-     2001
-    ]
-   ],
-   "cat": "tail-lights",
-   "note": "GM catalog lists #16525607 for both — option: fits some option packages; verify the number on the part",
-   "ns": "gm",
-   "pn": [
-    "16525607"
-   ],
-   "reason": "option",
-   "urls": [
-    "https://www.gmpartsgiant.com/parts-list/2000-chevrolet-astro-2wd/starter_generator_ignition_electrical_lamps/lamps_rear.html",
-    "https://www.gmpartsgiant.com/parts/gm-lamp-16525607.html"
-   ]
-  },
-  {
-   "apps": [
-    [
-     "Chevrolet",
-     "Astro",
-     2000,
-     2000
-    ],
-    [
-     "GMC",
-     "Safari",
-     1997,
-     1997
-    ],
-    [
-     "GMC",
-     "Safari",
-     2000,
-     2001
-    ]
-   ],
-   "cat": "tail-lights",
-   "note": "GM catalog lists #16525608 for both — option: fits some option packages; verify the number on the part",
-   "ns": "gm",
-   "pn": [
-    "16525608"
-   ],
-   "reason": "option",
-   "urls": [
-    "https://www.gmpartsgiant.com/parts-list/2000-chevrolet-astro-2wd/starter_generator_ignition_electrical_lamps/lamps_rear.html",
-    "https://www.gmpartsgiant.com/parts/gm-lamp-16525608.html"
-   ]
-  },
-  {
-   "apps": [
-    [
      "Buick",
      "Century",
      2003,
@@ -1940,87 +1874,6 @@
     ]
    ],
    "cat": "headlights",
-   "note": "GM catalog lists #19208053 for both — option: fits some option packages; verify the number on the part",
-   "ns": "gm",
-   "pn": [
-    "19208053"
-   ],
-   "reason": "option",
-   "urls": [
-    "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_front.html",
-    "https://www.gmpartsgiant.com/parts/gm-headlamp-19208053.html"
-   ]
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "DeVille",
-     2004,
-     2004
-    ],
-    [
-     "Cadillac",
-     "Seville",
-     2003,
-     2003
-    ]
-   ],
-   "cat": "headlights",
-   "note": "GM catalog lists #19208054 for both — option: fits some option packages; verify the number on the part",
-   "ns": "gm",
-   "pn": [
-    "19208054"
-   ],
-   "reason": "option",
-   "urls": [
-    "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_front.html",
-    "https://www.gmpartsgiant.com/parts/gm-headlamp-19208054.html"
-   ]
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "DeVille",
-     2004,
-     2004
-    ],
-    [
-     "Cadillac",
-     "Seville",
-     2003,
-     2003
-    ]
-   ],
-   "cat": "headlights",
-   "note": "GM catalog lists #19208058 for both — option: fits some option packages; verify the number on the part",
-   "ns": "gm",
-   "pn": [
-    "19208058"
-   ],
-   "reason": "option",
-   "urls": [
-    "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_front.html",
-    "https://www.gmpartsgiant.com/parts/gm-headlamp-19208058.html"
-   ]
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "DeVille",
-     2004,
-     2004
-    ],
-    [
-     "Cadillac",
-     "Seville",
-     2003,
-     2003
-    ]
-   ],
-   "cat": "headlights",
    "note": "GM catalog lists #19208061 for both — option: fits some option packages; verify the number on the part",
    "ns": "gm",
    "pn": [
@@ -2128,60 +1981,6 @@
      2003
     ]
    ],
-   "cat": "headlights",
-   "note": "GM catalog lists #25723077 for both — option: fits some option packages; verify the number on the part",
-   "ns": "gm",
-   "pn": [
-    "25723077"
-   ],
-   "reason": "option",
-   "urls": [
-    "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_front.html",
-    "https://www.gmpartsgiant.com/parts/gm-headlamp-25723077.html"
-   ]
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "DeVille",
-     2004,
-     2004
-    ],
-    [
-     "Cadillac",
-     "Seville",
-     2003,
-     2003
-    ]
-   ],
-   "cat": "headlights",
-   "note": "GM catalog lists #25723544 for both — option: fits some option packages; verify the number on the part",
-   "ns": "gm",
-   "pn": [
-    "25723544"
-   ],
-   "reason": "option",
-   "urls": [
-    "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_front.html",
-    "https://www.gmpartsgiant.com/parts/gm-headlamp-25723544.html"
-   ]
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "DeVille",
-     2004,
-     2004
-    ],
-    [
-     "Cadillac",
-     "Seville",
-     2003,
-     2003
-    ]
-   ],
    "cat": "tail-lights",
    "note": "GM catalog lists #25749113 for both — option: fits some option packages; verify the number on the part",
    "ns": "gm",
@@ -2219,168 +2018,6 @@
    "urls": [
     "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_rear.html",
     "https://www.gmpartsgiant.com/parts/gm-lamp-25749114.html"
-   ]
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "DeVille",
-     2004,
-     2004
-    ],
-    [
-     "Cadillac",
-     "Seville",
-     2003,
-     2003
-    ]
-   ],
-   "cat": "tail-lights",
-   "note": "GM catalog lists #25751057 for both — option: fits some option packages; verify the number on the part",
-   "ns": "gm",
-   "pn": [
-    "25751057"
-   ],
-   "reason": "option",
-   "urls": [
-    "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_rear.html",
-    "https://www.gmpartsgiant.com/parts/gm-lamp-25751057.html"
-   ]
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "DeVille",
-     2004,
-     2004
-    ],
-    [
-     "Cadillac",
-     "Seville",
-     2003,
-     2003
-    ]
-   ],
-   "cat": "tail-lights",
-   "note": "GM catalog lists #25751058 for both — option: fits some option packages; verify the number on the part",
-   "ns": "gm",
-   "pn": [
-    "25751058"
-   ],
-   "reason": "option",
-   "urls": [
-    "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_rear.html",
-    "https://www.gmpartsgiant.com/parts/gm-lamp-25751058.html"
-   ]
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "DeVille",
-     2004,
-     2004
-    ],
-    [
-     "Cadillac",
-     "Seville",
-     2003,
-     2003
-    ]
-   ],
-   "cat": "headlights",
-   "note": "GM catalog lists #25769515 for both — option: fits some option packages; verify the number on the part",
-   "ns": "gm",
-   "pn": [
-    "25769515"
-   ],
-   "reason": "option",
-   "urls": [
-    "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_front.html",
-    "https://www.gmpartsgiant.com/parts/gm-headlamp-25769515.html"
-   ]
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "DeVille",
-     2004,
-     2004
-    ],
-    [
-     "Cadillac",
-     "Seville",
-     2003,
-     2003
-    ]
-   ],
-   "cat": "headlights",
-   "note": "GM catalog lists #25769516 for both — option: fits some option packages; verify the number on the part",
-   "ns": "gm",
-   "pn": [
-    "25769516"
-   ],
-   "reason": "option",
-   "urls": [
-    "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_front.html",
-    "https://www.gmpartsgiant.com/parts/gm-headlamp-25769516.html"
-   ]
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "DeVille",
-     2004,
-     2004
-    ],
-    [
-     "Cadillac",
-     "Seville",
-     2003,
-     2003
-    ]
-   ],
-   "cat": "headlights",
-   "note": "GM catalog lists #25769517 for both — option: fits some option packages; verify the number on the part",
-   "ns": "gm",
-   "pn": [
-    "25769517"
-   ],
-   "reason": "option",
-   "urls": [
-    "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_front.html",
-    "https://www.gmpartsgiant.com/parts/gm-headlamp-25769517.html"
-   ]
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "DeVille",
-     2004,
-     2004
-    ],
-    [
-     "Cadillac",
-     "Seville",
-     2003,
-     2003
-    ]
-   ],
-   "cat": "headlights",
-   "note": "GM catalog lists #25769518 for both — option: fits some option packages; verify the number on the part",
-   "ns": "gm",
-   "pn": [
-    "25769518"
-   ],
-   "reason": "option",
-   "urls": [
-    "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/starter_generator_ignition_electrical_lamps/lamps_front.html",
-    "https://www.gmpartsgiant.com/parts/gm-headlamp-25769518.html"
    ]
   },
   {
@@ -4791,120 +4428,6 @@
     [
      "Subaru",
      "Legacy",
-     2005,
-     2005
-    ],
-    [
-     "Subaru",
-     "Outback",
-     2005,
-     2005
-    ]
-   ],
-   "cat": "hood",
-   "note": "Subaru catalog lists #57229AG04A9P for both — option: fits some option packages; verify the number on the part",
-   "ns": "subaru",
-   "pn": [
-    "57229AG04A9P"
-   ],
-   "reason": "option",
-   "urls": [
-    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/body_key_kit_bumper/front_hood_front_hood_lock.html",
-    "https://www.subarupartsdeal.com/parts/subaru-hood-complete-front~57229ag04a9p.html"
-   ]
-  },
-  {
-   "apps": [
-    [
-     "Subaru",
-     "Legacy",
-     2011,
-     2013
-    ],
-    [
-     "Subaru",
-     "Outback",
-     2011,
-     2011
-    ]
-   ],
-   "cat": "hood",
-   "note": "Subaru catalog lists #57229AJ00A9P for both — option: fits some option packages; verify the number on the part",
-   "ns": "subaru",
-   "pn": [
-    "57229AJ00A9P"
-   ],
-   "reason": "option",
-   "urls": [
-    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/body_key_kit_bumper/front_hood_front_hood_lock.html",
-    "https://www.subarupartsdeal.com/parts/subaru-hood-complete-front~57229aj00a9p.html"
-   ]
-  },
-  {
-   "apps": [
-    [
-     "Subaru",
-     "Legacy",
-     2015,
-     2015
-    ],
-    [
-     "Subaru",
-     "Outback",
-     2015,
-     2015
-    ],
-    [
-     "Subaru",
-     "Outback",
-     2018,
-     2018
-    ]
-   ],
-   "cat": "hood",
-   "note": "Subaru catalog lists #57229AL00B9P for both — fits some configurations; verify the number on the part",
-   "ns": "subaru",
-   "pn": [
-    "57229AL00B9P"
-   ],
-   "reason": "conditional",
-   "urls": [
-    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_key_kit_bumper/front_hood_front_hood_lock.html",
-    "https://www.subarupartsdeal.com/parts/subaru-hood-complete-front~57229al00b9p.html"
-   ]
-  },
-  {
-   "apps": [
-    [
-     "Subaru",
-     "Impreza",
-     2012,
-     2012
-    ],
-    [
-     "Subaru",
-     "XV Crosstrek",
-     2013,
-     2013
-    ]
-   ],
-   "cat": "hood",
-   "note": "Subaru catalog lists #57229FJ0009P for both — fits some configurations; verify the number on the part",
-   "ns": "subaru",
-   "pn": [
-    "57229FJ0009P"
-   ],
-   "reason": "conditional",
-   "urls": [
-    "https://www.subarupartsdeal.com/parts-list/2012-subaru-impreza-sedan/body_key_kit_bumper/front_hood_front_hood_lock.html",
-    "https://www.subarupartsdeal.com/parts/subaru-hood-complete-front~57229fj0009p.html"
-   ]
-  },
-  {
-   "apps": [
-    [
-     "Subaru",
-     "Legacy",
      2001,
      2001
     ],
@@ -5240,114 +4763,6 @@
    "apps": [
     [
      "Subaru",
-     "Legacy",
-     2015,
-     2015
-    ],
-    [
-     "Subaru",
-     "Outback",
-     2015,
-     2015
-    ]
-   ],
-   "cat": "headlights",
-   "note": "Subaru catalog lists #84001AL02A for both — option: fits some option packages; verify the number on the part",
-   "ns": "subaru",
-   "pn": [
-    "84001AL02A"
-   ],
-   "reason": "option",
-   "urls": [
-    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_electronics/head_lamp.html",
-    "https://www.subarupartsdeal.com/parts/subaru-headlamp-ay~84001al02a.html"
-   ]
-  },
-  {
-   "apps": [
-    [
-     "Subaru",
-     "Legacy",
-     2015,
-     2015
-    ],
-    [
-     "Subaru",
-     "Outback",
-     2015,
-     2015
-    ]
-   ],
-   "cat": "headlights",
-   "note": "Subaru catalog lists #84001AL03A for both — option: fits some option packages; verify the number on the part",
-   "ns": "subaru",
-   "pn": [
-    "84001AL03A"
-   ],
-   "reason": "option",
-   "urls": [
-    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_electronics/head_lamp.html",
-    "https://www.subarupartsdeal.com/parts/subaru-headlamp-ay~84001al03a.html"
-   ]
-  },
-  {
-   "apps": [
-    [
-     "Subaru",
-     "Impreza",
-     2012,
-     2012
-    ],
-    [
-     "Subaru",
-     "XV Crosstrek",
-     2013,
-     2013
-    ]
-   ],
-   "cat": "headlights",
-   "note": "Subaru catalog lists #84001FJ080 for both — option: fits some option packages; verify the number on the part",
-   "ns": "subaru",
-   "pn": [
-    "84001FJ080"
-   ],
-   "reason": "option",
-   "urls": [
-    "https://www.subarupartsdeal.com/parts-list/2012-subaru-impreza-sedan/body_electronics/head_lamp.html",
-    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-head-right~84001fj080.html"
-   ]
-  },
-  {
-   "apps": [
-    [
-     "Subaru",
-     "Impreza",
-     2012,
-     2012
-    ],
-    [
-     "Subaru",
-     "XV Crosstrek",
-     2013,
-     2013
-    ]
-   ],
-   "cat": "headlights",
-   "note": "Subaru catalog lists #84001FJ090 for both — option: fits some option packages; verify the number on the part",
-   "ns": "subaru",
-   "pn": [
-    "84001FJ090"
-   ],
-   "reason": "option",
-   "urls": [
-    "https://www.subarupartsdeal.com/parts-list/2012-subaru-impreza-sedan/body_electronics/head_lamp.html",
-    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-head-left~84001fj090.html"
-   ]
-  },
-  {
-   "apps": [
-    [
-     "Subaru",
      "Impreza",
      2012,
      2012
@@ -5504,6 +4919,735 @@
    "urls": [
     "https://www.subarupartsdeal.com/parts-list/2012-subaru-impreza-wagon/body_electronics/lamp_rear.html",
     "https://www.subarupartsdeal.com/parts/subaru-lens-body-rear-combination-lamp-left~84912fj070.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "gauge-cluster",
+   "note": "Subaru catalog lists #85002AL00A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "85002AL00A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_electronics/meter.html",
+    "https://www.subarupartsdeal.com/parts/subaru-combination-meter-assembl~85002al00a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "gauge-cluster",
+   "note": "Subaru catalog lists #85002AL01A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "85002AL01A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_electronics/meter.html",
+    "https://www.subarupartsdeal.com/parts/subaru-combination-meter-assembl~85002al01a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "gauge-cluster",
+   "note": "Subaru catalog lists #85002AL02A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "85002AL02A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_electronics/meter.html",
+    "https://www.subarupartsdeal.com/parts/subaru-combination-meter-assembl~85002al02a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "gauge-cluster",
+   "note": "Subaru catalog lists #85002AL03A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "85002AL03A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_electronics/meter.html",
+    "https://www.subarupartsdeal.com/parts/subaru-combination-meter-assembl~85002al03a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "gauge-cluster",
+   "note": "Subaru catalog lists #85002AL04A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "85002AL04A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_electronics/meter.html",
+    "https://www.subarupartsdeal.com/parts/subaru-combination-meter-assembl~85002al04a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "gauge-cluster",
+   "note": "Subaru catalog lists #85002AL05A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "85002AL05A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_electronics/meter.html",
+    "https://www.subarupartsdeal.com/parts/subaru-combination-meter-assembl~85002al05a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "gauge-cluster",
+   "note": "Subaru catalog lists #85003AL00A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "85003AL00A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_electronics/meter.html",
+    "https://www.subarupartsdeal.com/parts/subaru-combination-meter-assembl~85003al00a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "gauge-cluster",
+   "note": "Subaru catalog lists #85003AL01A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "85003AL01A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_electronics/meter.html",
+    "https://www.subarupartsdeal.com/parts/subaru-combination-meter-assembl~85003al01a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "gauge-cluster",
+   "note": "Subaru catalog lists #85003AL02A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "85003AL02A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_electronics/meter.html",
+    "https://www.subarupartsdeal.com/parts/subaru-combination-meter-assembl~85003al02a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "gauge-cluster",
+   "note": "Subaru catalog lists #85003AL03A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "85003AL03A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_electronics/meter.html",
+    "https://www.subarupartsdeal.com/parts/subaru-combination-meter-assembl~85003al03a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "gauge-cluster",
+   "note": "Subaru catalog lists #85021AG59A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "85021AG59A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/body_electronics/meter.html",
+    "https://www.subarupartsdeal.com/parts/subaru-meter-main-assembly~85021ag59a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "gauge-cluster",
+   "note": "Subaru catalog lists #85021AG64A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "85021AG64A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/body_electronics/meter.html",
+    "https://www.subarupartsdeal.com/parts/subaru-meter-main-assembly~85021ag64a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2011
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "gauge-cluster",
+   "note": "Subaru catalog lists #85021AJ14A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "85021AJ14A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/body_electronics/meter.html",
+    "https://www.subarupartsdeal.com/parts/subaru-meter-main-assembly~85021aj14a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2011
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "gauge-cluster",
+   "note": "Subaru catalog lists #85021AJ19A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "85021AJ19A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/body_electronics/meter.html",
+    "https://www.subarupartsdeal.com/parts/subaru-meter-main-assembly~85021aj19a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2011
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "gauge-cluster",
+   "note": "Subaru catalog lists #85021AJ23A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "85021AJ23A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/body_electronics/meter.html",
+    "https://www.subarupartsdeal.com/parts/subaru-meter-main-assembly~85021aj23a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "side-mirrors",
+   "note": "Subaru catalog lists #91036AL10A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "91036AL10A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/outer_accessories/rear_view_mirror.html",
+    "https://www.subarupartsdeal.com/parts/subaru-rear-view-mirror-ay-left~91036al10a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "side-mirrors",
+   "note": "Subaru catalog lists #91036AL11A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "91036AL11A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/outer_accessories/rear_view_mirror.html",
+    "https://www.subarupartsdeal.com/parts/subaru-rear-view-mirror-ay-right~91036al11a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "side-mirrors",
+   "note": "Subaru catalog lists #91036AL12A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "91036AL12A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/outer_accessories/rear_view_mirror.html",
+    "https://www.subarupartsdeal.com/parts/subaru-r-view-mir-unit-lhl~91036al12a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "side-mirrors",
+   "note": "Subaru catalog lists #91036AL13A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "91036AL13A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/outer_accessories/rear_view_mirror.html",
+    "https://www.subarupartsdeal.com/parts/subaru-r-view-mir-unit-lhr~91036al13a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "side-mirrors",
+   "note": "Subaru catalog lists #91036AL20A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "91036AL20A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/outer_accessories/rear_view_mirror.html",
+    "https://www.subarupartsdeal.com/parts/subaru-r-view-mir-unit-lhl~91036al20a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "side-mirrors",
+   "note": "Subaru catalog lists #91036AL21A for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "91036AL21A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/outer_accessories/rear_view_mirror.html",
+    "https://www.subarupartsdeal.com/parts/subaru-r-view-mir-unit-lhr~91036al21a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Impreza",
+     2012,
+     2012
+    ],
+    [
+     "Subaru",
+     "XV Crosstrek",
+     2013,
+     2013
+    ]
+   ],
+   "cat": "side-mirrors",
+   "note": "Subaru catalog lists #91036FJ100 for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "91036FJ100"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2012-subaru-impreza-sedan/outer_accessories/rear_view_mirror.html",
+    "https://www.subarupartsdeal.com/parts/subaru-door-mirror-unit-right~91036fj100.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Impreza",
+     2012,
+     2012
+    ],
+    [
+     "Subaru",
+     "XV Crosstrek",
+     2013,
+     2013
+    ]
+   ],
+   "cat": "side-mirrors",
+   "note": "Subaru catalog lists #91036FJ110 for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "91036FJ110"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2012-subaru-impreza-sedan/outer_accessories/rear_view_mirror.html",
+    "https://www.subarupartsdeal.com/parts/subaru-door-mirror-unit-left~91036fj110.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Impreza",
+     2012,
+     2012
+    ],
+    [
+     "Subaru",
+     "XV Crosstrek",
+     2013,
+     2013
+    ]
+   ],
+   "cat": "side-mirrors",
+   "note": "Subaru catalog lists #91036FJ160 for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "91036FJ160"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2012-subaru-impreza-sedan/outer_accessories/rear_view_mirror.html",
+    "https://www.subarupartsdeal.com/parts/subaru-door-mirror-unit-right~91036fj160.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Impreza",
+     2012,
+     2012
+    ],
+    [
+     "Subaru",
+     "XV Crosstrek",
+     2013,
+     2013
+    ]
+   ],
+   "cat": "side-mirrors",
+   "note": "Subaru catalog lists #91036FJ170 for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "91036FJ170"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2012-subaru-impreza-sedan/outer_accessories/rear_view_mirror.html",
+    "https://www.subarupartsdeal.com/parts/subaru-door-mirror-unit-left~91036fj170.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Impreza",
+     2012,
+     2012
+    ],
+    [
+     "Subaru",
+     "XV Crosstrek",
+     2013,
+     2013
+    ]
+   ],
+   "cat": "side-mirrors",
+   "note": "Subaru catalog lists #91036FJ200 for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "91036FJ200"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2012-subaru-impreza-sedan/outer_accessories/rear_view_mirror.html",
+    "https://www.subarupartsdeal.com/parts/subaru-door-mirror-unit-right~91036fj200.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Impreza",
+     2012,
+     2012
+    ],
+    [
+     "Subaru",
+     "XV Crosstrek",
+     2013,
+     2013
+    ]
+   ],
+   "cat": "side-mirrors",
+   "note": "Subaru catalog lists #91036FJ210 for both — option: fits some option packages; verify the number on the part",
+   "ns": "subaru",
+   "pn": [
+    "91036FJ210"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.subarupartsdeal.com/parts-list/2012-subaru-impreza-sedan/outer_accessories/rear_view_mirror.html",
+    "https://www.subarupartsdeal.com/parts/subaru-door-mirror-unit-left~91036fj210.html"
    ]
   },
   {

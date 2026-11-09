@@ -739,6 +739,9 @@ print(json.dumps([G.engine_agrees(G.parse_engine(a), G.parse_engine(b)) for a, b
   ctx.isPro = () => true;
   ctx.yardPartQuote = () => ({ status: 'priced', part: 'WHEEL ALUMINUM', price: 31.99, core: 0 });
   ctx.onlinePriceHtml = (p, c, v, unit = '') => `<span class="pf-ebay">$200–$400${unit}</span>`;
+  // the shipped payload indexes a wheels lazy file (OEM wheels groups, 2026-11-09):
+  // these checks isolate the same-generation search with that file loaded and empty
+  lazyPreset = { wheels: { oemGroups: [], amGroups: [] } };
   const r = run({ ...real, ...gens, platformGroups: real.platformGroups, oemGroups: [] }, inv,
     { year: 2009, make: 'Toyota', model: 'Camry' }, wc);
   const names = Object.keys(r.rows).sort();
@@ -761,6 +764,19 @@ print(json.dumps([G.engine_agrees(G.parse_engine(a), G.parse_engine(b)) for a, b
     && !rt.html.includes('$19.99') && !rt.html.includes('$24.99'), (rt.html.match(/Yard:[^\n]{0,160}/) || [''])[0]);
   ctx.__priceList = null;
   ctx.yardPartQuote = () => ({ status: 'priced', part: 'WHEEL ALUMINUM', price: 31.99, core: 0 });
+  // a shipped OEM wheels group (Mopar 1AN31PAKAD, census OK) adds a cross-model donor
+  // as Likely, part-number-backed; never Verified
+  const vanGens = { modelGenerations: [['Chrysler', 'Town & Country', [[2008, 2016]]], ['Dodge', 'Grand Caravan', [[2008, 2020]]]] };
+  const vinv = [car(11, 2010, 'Dodge', 'Grand Caravan', { topParts: [set] }), car(12, 2010, 'Chrysler', 'Town & Country')];
+  lazyPreset = { wheels: { oemGroups: [{ id: 'oem:mopar:wheels:C:x', ns: 'mopar', src: 'oem', label: 'Mopar catalog', cat: 'wheels', tier: 'likely', kind: 'body', pn: ['1AN31PAKAD'],
+    apps: [['Chrysler', 'Town & Country', 2010, 2010], ['Dodge', 'Grand Caravan', 2010, 2010]], reason: 'trim',
+    note: 'Mopar catalog lists #1AN31PAKAD for both' }], amGroups: [] } };
+  const rv = run({ ...real, ...vanGens, platformGroups: real.platformGroups, oemGroups: [] }, vinv,
+    { year: 2010, make: 'Chrysler', model: 'Town & Country' }, wc);
+  const gc = rv.rows['2010 Dodge Grand Caravan'];
+  check('wheels: a shipped OEM wheels group adds the cross-model Grand Caravan donor as Likely (never Verified)',
+    !!gc && gc.tier === 'likely', JSON.stringify(rv.rows));
+  lazyPreset = null;
   const rm = run(base([], gens), inv, { year: 2009, make: 'Toyota', model: 'Camry' }, cat());
   check('other categories: no "each" on the yard price', rm.html.includes('Yard: $31.99') && !rm.html.includes('Yard: $31.99 each'), '');
   Object.assign(ctx, { isPro: saved.isPro, yardPartQuote: saved.q, onlinePriceHtml: saved.o });

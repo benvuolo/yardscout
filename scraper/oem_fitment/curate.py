@@ -1380,6 +1380,8 @@ class Curation:
     def wheel_group_refusal(self, Ts, cat, c):
         """(code, detail) when a wheels Likely group lacks a stated, agreeing
         basis on every app's own page (policy.WHEEL_DIAMETER_RE etc.), else None."""
+        if self.ns not in policy.WHEELS_AUDITED_NS:
+            return "wheels_not_audited", f"{self.ns}: no passed §11.4 wheels audit yet"
         if self.ns in policy.WHEEL_SAME_MODEL_ONLY_NS and len({(T[0], T[1]) for T in Ts}) > 1:
             return "wheel_cross_model_chassis", "; ".join(sorted({f"{T[0]} {T[1]}" for T in Ts}))
         # a record whose own description names a spare ("Spare Wheel, Steel",

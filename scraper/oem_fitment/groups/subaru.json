@@ -22912,7 +22912,7 @@
      2018
     ]
    ],
-   "cars": 87,
+   "cars": 86,
    "cat": "hood",
    "id": "oem:subaru:hood:C:2035737a3f",
    "kind": "body",
@@ -22939,7 +22939,7 @@
      2013
     ]
    ],
-   "cars": 130,
+   "cars": 131,
    "cat": "hood",
    "id": "oem:subaru:hood:C:d4bcee9028",
    "kind": "body",
@@ -22966,7 +22966,7 @@
      2015
     ]
    ],
-   "cars": 78,
+   "cars": 77,
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:FR:8320b0ed7c",
    "kind": "body",
@@ -22993,7 +22993,7 @@
      2015
     ]
    ],
-   "cars": 78,
+   "cars": 77,
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:FL:661ca5e9e9",
    "kind": "body",
@@ -23020,7 +23020,7 @@
      2015
     ]
    ],
-   "cars": 78,
+   "cars": 77,
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:FR:d817e2de1f",
    "kind": "body",
@@ -23047,7 +23047,7 @@
      2015
     ]
    ],
-   "cars": 78,
+   "cars": 77,
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:FR:f9ddc89e61",
    "kind": "body",
@@ -23074,7 +23074,7 @@
      2015
     ]
    ],
-   "cars": 78,
+   "cars": 77,
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:FL:fb3a85b9c2",
    "kind": "body",
@@ -23101,7 +23101,7 @@
      2013
     ]
    ],
-   "cars": 130,
+   "cars": 131,
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:FL:448e605b2e",
    "kind": "body",
@@ -23128,7 +23128,7 @@
      2013
     ]
    ],
-   "cars": 130,
+   "cars": 131,
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:FR:7fac2a333e",
    "kind": "body",
@@ -23155,7 +23155,7 @@
      2015
     ]
    ],
-   "cars": 78,
+   "cars": 77,
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:RR:c61223d269",
    "kind": "body",
@@ -23182,7 +23182,7 @@
      2015
     ]
    ],
-   "cars": 78,
+   "cars": 77,
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:RL:91c549f117",
    "kind": "body",
@@ -23209,7 +23209,7 @@
      2003
     ]
    ],
-   "cars": 207,
+   "cars": 206,
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:FL+FR:d3510d5ccf",
    "kind": "body",
@@ -23263,7 +23263,7 @@
      2003
     ]
    ],
-   "cars": 207,
+   "cars": 206,
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:FL:dd63359e02",
    "kind": "body",
@@ -23317,7 +23317,7 @@
      2013
     ]
    ],
-   "cars": 130,
+   "cars": 131,
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:FL+FR+RL+RR+SL+SR:3f26f73028",
    "kind": "body",
@@ -23344,7 +23344,7 @@
      2013
     ]
    ],
-   "cars": 130,
+   "cars": 131,
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:FL+FR+RL+RR+SL+SR:815a223692",
    "kind": "body",
@@ -23371,7 +23371,7 @@
      2003
     ]
    ],
-   "cars": 245,
+   "cars": 244,
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:FR:846ea273d3",
    "kind": "body",
@@ -23398,7 +23398,7 @@
      2003
     ]
    ],
-   "cars": 245,
+   "cars": 244,
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:FL:a36b2c9d05",
    "kind": "body",
@@ -23425,7 +23425,7 @@
      2003
     ]
    ],
-   "cars": 207,
+   "cars": 206,
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:RR:616fb00389",
    "kind": "body",
@@ -23479,7 +23479,7 @@
      2003
     ]
    ],
-   "cars": 207,
+   "cars": 206,
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:RL:d80075e6aa",
    "kind": "body",
@@ -23533,7 +23533,7 @@
      2003
     ]
    ],
-   "cars": 245,
+   "cars": 244,
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:RR:5cb3f55aa4",
    "kind": "body",
@@ -23560,7 +23560,7 @@
      2003
     ]
    ],
-   "cars": 245,
+   "cars": 244,
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:RL:368f4f95d1",
    "kind": "body",
@@ -23587,7 +23587,7 @@
      2013
     ]
    ],
-   "cars": 130,
+   "cars": 131,
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:RR:c4cbff57cb",
    "kind": "body",
@@ -23614,7 +23614,7 @@
      2013
     ]
    ],
-   "cars": 130,
+   "cars": 131,
    "cat": "window-regulator",
    "id": "oem:subaru:window-regulator:RL:f4b7f062e3",
    "kind": "body",
@@ -23641,7 +23641,7 @@
      2001
     ]
    ],
-   "cars": 115,
+   "cars": 113,
    "cat": "climate-control",
    "id": "oem:subaru:climate-control:C:ea7caa716a",
    "kind": "body",
@@ -23668,7 +23668,7 @@
      2015
     ]
    ],
-   "cars": 78,
+   "cars": 77,
    "cat": "climate-control",
    "id": "oem:subaru:climate-control:C:991a451755",
    "kind": "body",
@@ -23695,7 +23695,7 @@
      2015
     ]
    ],
-   "cars": 78,
+   "cars": 77,
    "cat": "climate-control",
    "id": "oem:subaru:climate-control:C:f8eb087059",
    "kind": "body",
@@ -23722,7 +23722,7 @@
      2015
     ]
    ],
-   "cars": 78,
+   "cars": 77,
    "cat": "climate-control",
    "id": "oem:subaru:climate-control:C:c2cbfc66f7",
    "kind": "body",
@@ -23749,7 +23749,7 @@
      2015
     ]
    ],
-   "cars": 78,
+   "cars": 77,
    "cat": "climate-control",
    "id": "oem:subaru:climate-control:C:03ca87ea7f",
    "kind": "body",
@@ -23776,7 +23776,7 @@
      2013
     ]
    ],
-   "cars": 130,
+   "cars": 131,
    "cat": "climate-control",
    "id": "oem:subaru:climate-control:C:02c42ecbcf",
    "kind": "body",
@@ -23803,7 +23803,7 @@
      2013
     ]
    ],
-   "cars": 130,
+   "cars": 131,
    "cat": "climate-control",
    "id": "oem:subaru:climate-control:C:ecad08f072",
    "kind": "body",
@@ -23830,7 +23830,7 @@
      2013
     ]
    ],
-   "cars": 130,
+   "cars": 131,
    "cat": "climate-control",
    "id": "oem:subaru:climate-control:C:d394abb7da",
    "kind": "body",
@@ -23857,7 +23857,7 @@
      2013
     ]
    ],
-   "cars": 130,
+   "cars": 131,
    "cat": "climate-control",
    "id": "oem:subaru:climate-control:C:2c103cfe62",
    "kind": "body",
@@ -23884,7 +23884,7 @@
      2015
     ]
    ],
-   "cars": 78,
+   "cars": 77,
    "cat": "headlights",
    "id": "oem:subaru:headlights:R:a060437df7",
    "kind": "body",
@@ -23911,7 +23911,7 @@
      2015
     ]
    ],
-   "cars": 78,
+   "cars": 77,
    "cat": "headlights",
    "id": "oem:subaru:headlights:L:fc23cda30c",
    "kind": "body",
@@ -23938,7 +23938,7 @@
      2013
     ]
    ],
-   "cars": 130,
+   "cars": 131,
    "cat": "headlights",
    "id": "oem:subaru:headlights:R:cc9f39a147",
    "kind": "body",
@@ -23965,7 +23965,7 @@
      2013
     ]
    ],
-   "cars": 130,
+   "cars": 131,
    "cat": "headlights",
    "id": "oem:subaru:headlights:L:1e4e3fa05a",
    "kind": "body",
@@ -23979,10 +23979,10 @@
   }
  ],
  "ns": "subaru",
- "policy_sha256": "4e44d299c2602859ba450786b49513dd2661580dd6ce47e5d20a2dcb6c7943eb",
+ "policy_sha256": "ad35d5f7de72cd56cff9b08c54ada70478f601d4c5d6aff7d3bf3555e1e53bd1",
  "raw": {
-  "commit": "75dc442f0f21bff4725fe1bee2ba6f323d249079",
-  "ref": "75dc442f0f21bff4725fe1bee2ba6f323d249079",
+  "commit": "3b4677ae1df7eb3b60765ce402d5a79167561981",
+  "ref": "3b4677ae1df7",
   "sites": {
    "www.subarupartsdeal.com": {
     "blocked": false,
