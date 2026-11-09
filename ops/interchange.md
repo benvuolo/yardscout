@@ -2915,3 +2915,11 @@ each); nothing allowlisted or crawled.
   - 1A strut 69 → 8 groups; GSP 15 → 13. Rule 5 strictness and
     generation-boundary handling are with the hub. The full §11.4 sample
     still waits for crawl completion.
+- ~22:30 UTC, hub decisions applied (942c2481):
+  - Rule 5 stays strict.
+  - Rows crossing a generation boundary in the app's `modelGenerations` are
+    refused; a model with no entry passes only spans of 6 years or fewer.
+  - Notes say to match trim and suspension.
+  - First slice: GSP 12 groups, 1A strut 8.
+  - Waiting for crawl completion per (site, category) before the full §11.4
+    sample. The hub pings this session.
