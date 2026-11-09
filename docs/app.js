@@ -7251,7 +7251,7 @@ function pfRunBrowse(s) {
 
   if (!rows.length) {
     const kindNote = (pfCat.kind === 'combo' || pfCat.kind === 'exact')
-      ? ` The spotted-parts data tracks smaller carry-out parts, and ${escapeHtml(pfCat.label.toLowerCase())}s mostly aren\u2019t in it — add your car above and the fit search will find donors by ${pfCat.kind === 'combo' ? 'generation and engine' : 'generation'} instead.`
+      ? ` The spotted-parts data tracks smaller carry-out parts, and ${escapeHtml(pfCat.label.toLowerCase().replace(/s?$/, 's'))} mostly aren\u2019t in it — add your car above and the fit search will find donors by ${pfCat.kind === 'combo' ? 'generation and engine' : 'generation'} instead.`
       : ' Yards rotate stock weekly — widen the radius or check back.';
     out.innerHTML = `<div class="pf-empty">No cars within ${radius ? radius + ' mi' : 'range'} ${pfCat.kind === 'engine' ? `carrying a ${escapeHtml(fam.label)}` : `listing a spotted ${escapeHtml(pfCat.label.toLowerCase())}`} right now.${kindNote}</div>`;
     return;
@@ -7279,11 +7279,11 @@ function pfRunBrowse(s) {
       const v = r.v;
       const quote = yardPartQuote(v.location, quoteVariants);
       const priceHtml = quote.status === 'priced'
-        ? `<span class="pf-yard-price" title="${escapeHtml(quote.part)} — from the yard\u2019s own published price list">Yard: $${quote.price.toFixed(2)}${pfCat.perEach ? ` each <span class="pf-price-row" style="font-weight:400;color:var(--text-dim);">(${escapeHtml(quote.part)})</span>` : ''}${quote.core > 0 ? ` <span style="font-weight:400;color:var(--text-dim);">+ $${quote.core.toFixed(2)} core</span>` : ''}</span>`
+        ? pfYardPriceHtml(quote, v.location, quoteVariants)
         : `<span class="pf-ebay">${quote.status === 'not-listed' ? 'not on the yard\u2019s published list — ask at the counter' : 'yard posts prices in-store only'}</span>`;
       const worthHtml = (!pfCat.noValue && r.hit)
         ? (unlocked
-          ? onlinePriceHtml(r.hit, 'pf-ebay', v)
+          ? onlinePriceHtml(r.hit, 'pf-ebay', v, pfCat.perEach ? ' for a set of 4' : '')
           : '')
         : '';
       // Buyer's savings line — only when BOTH sides are real: a published
@@ -7818,7 +7818,7 @@ function pfRunSearch() {
   const CAP = 120;
   const unlocked = isPro();
   out.classList.toggle('pf-vonly-on', pfVerifiedOnly);
-  const head = `<div class="pf-results-head"><strong>${rows.length.toLocaleString()} donor car${rows.length === 1 ? '' : 's'}</strong> in range carrying a fitting ${escapeHtml(pfCat.label.toLowerCase())} for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)} &mdash; ${pfSort === 'new' ? 'newest arrivals first' : 'nearest first, then confidence'}. Yards track cars, not parts left on them — a long-sitting donor may be picked over.</div>${(!unlocked && !pfCat.noValue) ? proBoxHtml('See what the same used part goes for online', 'pf-value', '', 'pf-pro-box') : ''}`
+  const head = `<div class="pf-results-head"><strong>${rows.length.toLocaleString()} donor car${rows.length === 1 ? '' : 's'}</strong> in range carrying ${/s$/.test(pfCat.label) ? '' : 'a '}fitting ${escapeHtml(pfCat.label.toLowerCase())} for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)} &mdash; ${pfSort === 'new' ? 'newest arrivals first' : 'nearest first, then confidence'}. Yards track cars, not parts left on them — a long-sitting donor may be picked over.</div>${(!unlocked && !pfCat.noValue) ? proBoxHtml('See what the same used part goes for online', 'pf-value', '', 'pf-pro-box') : ''}`
     + pfWatchHtml(s, true)
     + pfSortRowHtml()
     + pfVonlyRowHtml(nVer, rows.length - nVer, pfCat.id === 'engine-assembly' ? 'engine' : 'fit')
@@ -7840,14 +7840,14 @@ function pfRunSearch() {
     const v = r.v;
     const quote = yardPartQuote(v.location, quoteVariants);
     const priceHtml = quote.status === 'priced'
-      ? `<span class="pf-yard-price" title="${escapeHtml(quote.part)} — from the yard\u2019s own published price list">Yard: $${quote.price.toFixed(2)}${pfCat.perEach ? ` each <span class="pf-price-row" style="font-weight:400;color:var(--text-dim);">(${escapeHtml(quote.part)})</span>` : ''}${quote.core > 0 ? ` <span style="font-weight:400;color:var(--text-dim);">+ $${quote.core.toFixed(2)} core</span>` : ''}</span>`
+      ? pfYardPriceHtml(quote, v.location, quoteVariants)
       : `<span class="pf-ebay">${quote.status === 'not-listed' ? 'not on the yard\u2019s published list — ask at the counter' : 'yard posts prices in-store only'}</span>`;
     // noValue categories (engine assemblies, transmissions) ship no value
     // band by charter — you can't carry one out, so "worth" is misleading.
     const partRow = pfCat.noValue ? null : pfPartRow(v, pfCat);
     const ebayHtml = partRow
       ? (unlocked
-        ? onlinePriceHtml(partRow, 'pf-ebay', v)
+        ? onlinePriceHtml(partRow, 'pf-ebay', v, pfCat.perEach ? ' for a set of 4' : '')
         : '')
       : '';
     // Buyer's savings line — both sides real, Pro only (free users would
@@ -9455,9 +9455,31 @@ function ebaySoldSearchUrl(v, p) {
   const q = [v && v.year, v && v.make, v && v.model, part].filter(Boolean).join(' ');
   return 'https://www.ebay.com/sch/i.html?_nkw=' + encodeURIComponent(q) + '&LH_Sold=1&LH_Complete=1&LH_ItemCondition=3000';
 }
-function onlinePriceHtml(p, cls, v) {
+/* Part finder yard price. perEach (wheels): yards price wheels by size
+ * ("WHEEL ALUM UNDER 16\"" / "OVER 16\""), and the donor's size is unknown,
+ * so when the list has several matching rows at different prices the line
+ * shows the whole per-wheel range with the cheapest and dearest row names,
+ * never only the cheapest tier. */
+function pfYardPriceHtml(quote, location, variants) {
+  const dim = 'font-weight:400;color:var(--text-dim);';
+  const core = q => q.core > 0 ? ` <span style="${dim}">+ $${q.core.toFixed(2)} core</span>` : '';
+  if (!pfCat.perEach) {
+    return `<span class="pf-yard-price" title="${escapeHtml(quote.part)} — from the yard’s own published price list">Yard: $${quote.price.toFixed(2)}${core(quote)}</span>`;
+  }
+  let hi = quote;
+  for (const r of (yardPriceList(location) || [])) {
+    const pl = r.part.toLowerCase();
+    const hit = variants.flat().some(tv => tv.charAt(0) === '=' ? pl.trim() === tv.slice(1) : pl.includes(tv));
+    if (hit && r.price > hi.price) hi = r;
+  }
+  const names = hi === quote ? escapeHtml(quote.part) : `${escapeHtml(quote.part)} … ${escapeHtml(hi.part)}`;
+  const amount = hi === quote ? `$${quote.price.toFixed(2)} each` : `$${quote.price.toFixed(2)}–$${hi.price.toFixed(2)} each by size`;
+  return `<span class="pf-yard-price" title="${names} — from the yard’s own published price list">Yard: ${amount} <span class="pf-price-row" style="${dim}">(${names})</span>${core(quote)}</span>`;
+}
+/* unit: ' for a set of 4' where the yard price is per piece (wheels) */
+function onlinePriceHtml(p, cls, v, unit = '') {
   if (!p || p.low == null) return '';
-  const range = `~${formatPrice(p.low)}&ndash;${formatPrice(p.high)}`;
+  const range = `~${formatPrice(p.low)}&ndash;${formatPrice(p.high)}${unit}`;
   const link = v ? ` <a class="ebay-sold-link" href="${ebaySoldSearchUrl(v, p)}" target="_blank" rel="noopener" title="Open eBay\u2019s sold listings for this part on this car">sold prices \u2197</a>` : '';
   if (p.src === 'ebay-sold') {
     const n = p.n ? `${p.n} used ones` : 'used ones';

@@ -42,7 +42,7 @@ function extractConst(name) {
   return line || null;
 }
 
-const REAL_FNS = ['escapeHtml', 'normalizeVinForDedupe', 'pfSquash', 'pfSquashModel',
+const REAL_FNS = ['escapeHtml', 'pfYardPriceHtml', 'normalizeVinForDedupe', 'pfSquash', 'pfSquashModel',
   'pfAppMatches', 'pfGenWindows', 'pfGenWindow', 'pfParseEngine', 'pfEngineVerdict',
   'pfParseFits', 'pfPartRow', 'pfTierChip', 'pfEngineQuoteVariants', 'pfRunSearch',
   // Pull Sheet round 4: the donor card + sort the rows are rendered through
@@ -121,6 +121,8 @@ function canonicalModel(mk, md) { return md; }
 function isPro() { return false; }
 function pfVonlyRowHtml() { return ''; }
 function yardPartQuote() { return { status: 'in-store' }; }
+var __priceList = null;
+function yardPriceList() { return __priceList; }
 function onlinePriceHtml() { return ''; }
 function formatPrice(n) { return '$' + n; }
 function pfDateLabel() { return ''; }
@@ -642,7 +644,7 @@ print(json.dumps([G.engine_agrees(G.parse_engine(a), G.parse_engine(b)) for a, b
   const saved = { isPro: ctx.isPro, q: ctx.yardPartQuote, o: ctx.onlinePriceHtml };
   ctx.isPro = () => true;
   ctx.yardPartQuote = () => ({ status: 'priced', part: 'WHEEL ALUMINUM', price: 31.99, core: 0 });
-  ctx.onlinePriceHtml = () => '<span class="pf-ebay">$200–$400</span>';
+  ctx.onlinePriceHtml = (p, c, v, unit = '') => `<span class="pf-ebay">$200–$400${unit}</span>`;
   const r = run({ ...real, ...gens, platformGroups: real.platformGroups, oemGroups: [] }, inv,
     { year: 2009, make: 'Toyota', model: 'Camry' }, wc);
   const names = Object.keys(r.rows).sort();
@@ -651,6 +653,20 @@ print(json.dumps([G.engine_agrees(G.parse_engine(a), G.parse_engine(b)) for a, b
   check('wheels: every donor Likely, with the lug-count check on the row',
     Object.values(r.rows).every(x => x.tier === 'likely' && x.warn.includes('count the lugs')), JSON.stringify(r.rows));
   check('wheels: yard price reads "each" with the yard row (size tier) inline, and no savings line', r.html.includes('Yard: $31.99 each <span class="pf-price-row"') && r.html.includes('(WHEEL ALUMINUM)') && !r.html.includes('pf-save'));
+  check('wheels: the online value says it is for a set of 4 (the yard price is per wheel)', r.html.includes('$200–$400 for a set of 4</span>'), '');
+  check('wheels: header reads "carrying fitting wheels" (no "a" before a plural label)',
+    r.html.includes('carrying fitting wheels') && !r.html.includes('a fitting wheels'), (r.html.match(/carrying[^<]{0,40}/) || [''])[0]);
+  // size-tiered yard list: the line shows the whole per-wheel range, never only the cheapest tier
+  ctx.yardPartQuote = () => ({ status: 'priced', part: 'WHEEL ALUM UNDER 16"', price: 28.99, core: 14 });
+  ctx.__priceList = [{ part: 'WHEEL ALUM UNDER 16"', price: 28.99, core: 14 }, { part: 'WHEEL ALUM OVER 16"', price: 39.99, core: 14 },
+    { part: 'WHEEL STEEL', price: 19.99, core: 0 }, { part: 'STEERING WHEEL', price: 24.99, core: 0 }];
+  const rt = run({ ...real, ...gens, platformGroups: real.platformGroups, oemGroups: [] }, inv,
+    { year: 2009, make: 'Toyota', model: 'Camry' }, wc);
+  check('wheels: a size-tiered yard shows the per-wheel range by size with both row names',
+    rt.html.includes('Yard: $28.99\u2013$39.99 each by size') && rt.html.includes('(WHEEL ALUM UNDER 16&quot; \u2026 WHEEL ALUM OVER 16&quot;)')
+    && !rt.html.includes('$19.99') && !rt.html.includes('$24.99'), (rt.html.match(/Yard:[^\n]{0,160}/) || [''])[0]);
+  ctx.__priceList = null;
+  ctx.yardPartQuote = () => ({ status: 'priced', part: 'WHEEL ALUMINUM', price: 31.99, core: 0 });
   const rm = run(base([], gens), inv, { year: 2009, make: 'Toyota', model: 'Camry' }, cat());
   check('other categories: no "each" on the yard price', rm.html.includes('Yard: $31.99') && !rm.html.includes('Yard: $31.99 each'), '');
   Object.assign(ctx, { isPro: saved.isPro, yardPartQuote: saved.q, onlinePriceHtml: saved.o });
