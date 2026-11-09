@@ -163,6 +163,7 @@ KIND_RE = re.compile(r"^(?:hvac )?blower motor(?: assembly)?|headlight(?: assemb
 # and refusal of any body outside BODY_CLASS's values ("4 door" alone is not
 # a silhouette class). Until then every body-qualified row is refused.
 EMIT_BODY_GATE = False
+MAX_OPTIONS = 6
 LAMPS = {"headlight", "tail-light", "fog-light"}
 
 
@@ -229,6 +230,8 @@ def oneaauto_rows(r: dict):
             rows.append((a, rp, [""], None, meta))
     if refuse is None and len(optsets) > 1:
         refuse = "options_differ_across_rows"
+    if refuse is None and any(len(o) > MAX_OPTIONS for o in optsets):
+        refuse = "too_many_options"  # app accepts <= 6 items (category breadth)
     pos = next(iter(positions)) if len(positions) == 1 else ""
     return refuse, pos, rows
 

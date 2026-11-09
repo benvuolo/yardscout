@@ -246,6 +246,13 @@ lamp = R.build([d_rec("1AH9", "headlight", "Honda Accord Passenger Side Headligh
 check("headlight groups emit cat 'headlights' and an id to match", lamp["cat"] == "headlights"
       and lamp["id"].startswith("am:1a:headlights:"))
 
+many = d_rec("1AX", "mirror", "Honda Accord Passenger Side Power Folding Heated Memory with Turn Signal Power Manual with Power Door Locks Mirror",
+             years=(1998, 2002))
+check("more than 6 options -> unit refused (app limit)", not R.build([many], Names(), "www.1aauto.com", gens=GENS,
+                                                                    facelifts={})["groups"])
+check("option labels fit the app's shape (<=60 chars, no markup)",
+      all(len(lab) <= 60 and "<" not in lab for _, lab in R.OPTION_Q))
+
 # ---- facts only; owner's free-fitment rule
 out = json.dumps(B([A0, u1, u4], Names(), "www.1aauto.com"))
 check("1A output carries no price / description / image / interchange numbers",
