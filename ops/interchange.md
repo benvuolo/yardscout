@@ -2815,3 +2815,9 @@ each); nothing allowlisted or crawled.
   Interchange numbers are brand equivalence only, never vehicle fitment.
   Dispatch bodies for GSP and 1A sent to the hub. Waiting for the hub to
   dispatch them; then curate and run the §11.4 sample.
+- ~20:45 UTC: `oem-aftermarket-crawl.yml` is now a plan + matrix (33655227):
+  every `STATUS = "ok"` adapter not .done/.blocked, max-parallel 3, one run at
+  a time, schedule = all. The hub dispatched 1A (queued behind Spectra). Test
+  dispatch of "all" waits for the current runs to finish and for the hub's
+  word. CR-Z model_map failure: fixed upstream in 1cf5dd03; it clears after
+  the next scan.
