@@ -94778,7 +94778,7 @@
    "cat": "climate-control",
    "id": "oem:ford:climate-control:C:9921744f31",
    "kind": "body",
-   "note": "Ford catalog lists #1L5Z-19980-AB for both — regulator with motor; trim-limited; verify the number on the part",
+   "note": "Ford catalog lists #1L5Z-19980-AB for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:59:16Z",
    "pn": [
     "1L5Z-19980-AB"
@@ -94919,7 +94919,7 @@
    "cat": "climate-control",
    "id": "oem:ford:climate-control:C:9c75a7dc22",
    "kind": "body",
-   "note": "Ford catalog lists #5F9Z-19980-EA for both — regulator with motor; trim-limited; verify the number on the part",
+   "note": "Ford catalog lists #5F9Z-19980-EA for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T07:25:57Z",
    "pn": [
     "5F9Z-19980-EA"
@@ -95207,7 +95207,7 @@
    "cat": "climate-control",
    "id": "oem:ford:climate-control:C:b5bd47b6b6",
    "kind": "body",
-   "note": "Ford catalog lists #5G1Z-19980-AA for both — regulator with motor; fits some configurations; verify the number on the part",
+   "note": "Ford catalog lists #5G1Z-19980-AA for both — fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T07:26:05Z",
    "pn": [
     "5G1Z-19980-AA"
@@ -95234,7 +95234,7 @@
    "cat": "climate-control",
    "id": "oem:ford:climate-control:C:2303ac87db",
    "kind": "body",
-   "note": "Ford catalog lists #5G1Z-19980-BA for both — regulator with motor; fits some configurations; verify the number on the part",
+   "note": "Ford catalog lists #5G1Z-19980-BA for both — fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T07:26:13Z",
    "pn": [
     "5G1Z-19980-BA"
@@ -95558,7 +95558,7 @@
    "cat": "climate-control",
    "id": "oem:ford:climate-control:C:a484f27b2c",
    "kind": "body",
-   "note": "Ford catalog lists #8G1Z-19980-C for both — regulator with motor; fits some configurations; verify the number on the part",
+   "note": "Ford catalog lists #8G1Z-19980-C for both — fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T11:20:36Z",
    "pn": [
     "8G1Z-19980-C"
@@ -95585,7 +95585,7 @@
    "cat": "climate-control",
    "id": "oem:ford:climate-control:C:0ff36dd140",
    "kind": "body",
-   "note": "Ford catalog lists #8G1Z-19980-F for both — regulator with motor; trim-limited; verify the number on the part",
+   "note": "Ford catalog lists #8G1Z-19980-F for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T11:21:16Z",
    "pn": [
     "8G1Z-19980-F"
@@ -96770,7 +96770,7 @@
    "cat": "climate-control",
    "id": "oem:ford:climate-control:C:72c7053cc8",
    "kind": "body",
-   "note": "Ford catalog lists #F8XZ-19980-AA for both — regulator with motor; trim-limited; verify the number on the part",
+   "note": "Ford catalog lists #F8XZ-19980-AA for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T09:03:16Z",
    "pn": [
     "F8XZ-19980-AA"

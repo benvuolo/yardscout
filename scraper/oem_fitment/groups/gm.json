@@ -175455,7 +175455,7 @@
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:284426c1ed",
    "kind": "body",
-   "note": "GM catalog lists #10308120 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #10308120 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:22:15Z",
    "pn": [
     "10308120"
@@ -175482,7 +175482,7 @@
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:8636ae0453",
    "kind": "body",
-   "note": "GM catalog lists #10312688 for both — regulator with motor; fits some configurations; verify the number on the part",
+   "note": "GM catalog lists #10312688 for both — fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T21:45:51Z",
    "pn": [
     "10312688"
@@ -175941,7 +175941,7 @@
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:2343d02c7e",
    "kind": "body",
-   "note": "GM catalog lists #10367042 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #10367042 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:41:22Z",
    "pn": [
     "10367042"
@@ -176136,7 +176136,7 @@
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:118574b478",
    "kind": "body",
-   "note": "GM catalog lists #10435588 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #10435588 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:22:23Z",
    "pn": [
     "10435588"
@@ -176367,7 +176367,7 @@
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:c56743a878",
    "kind": "body",
-   "note": "GM catalog lists #15098963 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #15098963 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:21:12Z",
    "pn": [
     "15098963"
@@ -176400,7 +176400,7 @@
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:bb29252b2e",
    "kind": "body",
-   "note": "GM catalog lists #15098964 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #15098964 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:20:48Z",
    "pn": [
     "15098964"
@@ -176427,7 +176427,7 @@
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:f892e2f3f0",
    "kind": "body",
-   "note": "GM catalog lists #15098965 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #15098965 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:20:56Z",
    "pn": [
     "15098965"
@@ -176589,7 +176589,7 @@
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:2336d93361",
    "kind": "body",
-   "note": "GM catalog lists #15132070 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #15132070 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T02:01:38Z",
    "pn": [
     "15132070"
@@ -177687,7 +177687,7 @@
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:0e71950e4b",
    "kind": "body",
-   "note": "GM catalog lists #15829485 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #15829485 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T03:17:59Z",
    "pn": [
     "15829485"
@@ -177780,7 +177780,7 @@
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:9dd6a7cc3a",
    "kind": "body",
-   "note": "GM catalog lists #15858832 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #15858832 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T07:23:33Z",
    "pn": [
     "15858832"
@@ -177861,7 +177861,7 @@
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:164820b5ca",
    "kind": "body",
-   "note": "GM catalog lists #15890411 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #15890411 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T03:18:06Z",
    "pn": [
     "15890411"
@@ -177888,7 +177888,7 @@
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:91a2833cb4",
    "kind": "body",
-   "note": "GM catalog lists #15890412 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #15890412 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T03:18:23Z",
    "pn": [
     "15890412"
@@ -178902,7 +178902,7 @@
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:7c19e2c65b",
    "kind": "body",
-   "note": "GM catalog lists #19151965 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #19151965 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T10:28:03Z",
    "pn": [
     "19151965"
@@ -179973,7 +179973,7 @@
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:a9d88ac6ef",
    "kind": "body",
-   "note": "GM catalog lists #19433953 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #19433953 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T07:23:17Z",
    "pn": [
     "19433953"
@@ -180087,7 +180087,7 @@
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:c3b2f309be",
    "kind": "body",
-   "note": "GM catalog lists #20787112 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #20787112 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:49:21Z",
    "pn": [
     "20787112"
@@ -180120,7 +180120,7 @@
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:9894b99607",
    "kind": "body",
-   "note": "GM catalog lists #20787113 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #20787113 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:48:57Z",
    "pn": [
     "20787113"
@@ -180153,7 +180153,7 @@
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:5596bbf598",
    "kind": "body",
-   "note": "GM catalog lists #20787114 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #20787114 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:49:05Z",
    "pn": [
     "20787114"
@@ -180897,7 +180897,7 @@
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:9a78e1bccc",
    "kind": "body",
-   "note": "GM catalog lists #21997350 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #21997350 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:41:38Z",
    "pn": [
     "21997350"
@@ -180924,7 +180924,7 @@
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:953cc860ea",
    "kind": "body",
-   "note": "GM catalog lists #21997352 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #21997352 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:41:46Z",
    "pn": [
     "21997352"
@@ -180951,7 +180951,7 @@
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:8543b702e3",
    "kind": "body",
-   "note": "GM catalog lists #21999159 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #21999159 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T02:01:30Z",
    "pn": [
     "21999159"
@@ -180978,7 +180978,7 @@
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:178a968699",
    "kind": "body",
-   "note": "GM catalog lists #21999161 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #21999161 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T02:01:34Z",
    "pn": [
     "21999161"
@@ -181005,7 +181005,7 @@
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:38a446cf61",
    "kind": "body",
-   "note": "GM catalog lists #21999163 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #21999163 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T02:01:42Z",
    "pn": [
     "21999163"
@@ -182718,7 +182718,7 @@
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:6484422bec",
    "kind": "body",
-   "note": "GM catalog lists #25945046 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #25945046 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T02:01:26Z",
    "pn": [
     "25945046"
@@ -182745,7 +182745,7 @@
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:bf5778ec5c",
    "kind": "body",
-   "note": "GM catalog lists #25945047 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #25945047 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T02:01:46Z",
    "pn": [
     "25945047"

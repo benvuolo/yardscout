@@ -108966,7 +108966,7 @@
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:8fe280a398",
    "kind": "body",
-   "note": "Mopar catalog lists #4677615AE for both — regulator with motor; trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #4677615AE for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-06T04:47:27Z",
    "pn": [
     "4677615AE"
@@ -108993,7 +108993,7 @@
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:58de734372",
    "kind": "body",
-   "note": "Mopar catalog lists #4677617AE for both — regulator with motor; trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #4677617AE for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-06T04:47:35Z",
    "pn": [
     "4677617AE"
@@ -109020,7 +109020,7 @@
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:5213fa5d0c",
    "kind": "body",
-   "note": "Mopar catalog lists #4677681 for both — regulator with motor; trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #4677681 for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-06T04:47:43Z",
    "pn": [
     "4677681"
@@ -109047,7 +109047,7 @@
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:d8dbd2d227",
    "kind": "body",
-   "note": "Mopar catalog lists #4677927AB for both — regulator with motor; trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #4677927AB for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-06T04:47:20Z",
    "pn": [
     "4677927AB"
@@ -109086,7 +109086,7 @@
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:663e844c45",
    "kind": "body",
-   "note": "Mopar catalog lists #4698198AC for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "Mopar catalog lists #4698198AC for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-06T08:11:54Z",
    "pn": [
     "4698198AC"
@@ -109131,7 +109131,7 @@
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:d2ecfab57c",
    "kind": "body",
-   "note": "Mopar catalog lists #4698199AG for both — regulator with motor; trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #4698199AG for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-06T06:34:48Z",
    "pn": [
     "4698199AG"
@@ -111693,7 +111693,7 @@
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:32dc100e76",
    "kind": "body",
-   "note": "Mopar catalog lists #5134624AA for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "Mopar catalog lists #5134624AA for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-06T04:40:47Z",
    "pn": [
     "5134624AA"
@@ -111732,7 +111732,7 @@
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:26f117dc08",
    "kind": "body",
-   "note": "Mopar catalog lists #5134624AC for both — regulator with motor; trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #5134624AC for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-06T04:40:15Z",
    "pn": [
     "5134624AC"
@@ -111771,7 +111771,7 @@
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:301c95cba9",
    "kind": "body",
-   "note": "Mopar catalog lists #5134625AC for both — regulator with motor; trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #5134625AC for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-06T04:40:24Z",
    "pn": [
     "5134625AC"
@@ -111810,7 +111810,7 @@
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:739ffd19d7",
    "kind": "body",
-   "note": "Mopar catalog lists #5134626AC for both — regulator with motor; trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #5134626AC for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-06T04:40:07Z",
    "pn": [
     "5134626AC"
@@ -111849,7 +111849,7 @@
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:c2a5a37ed4",
    "kind": "body",
-   "note": "Mopar catalog lists #5134627AC for both — regulator with motor; trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #5134627AC for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-06T04:40:31Z",
    "pn": [
     "5134627AC"
@@ -111882,7 +111882,7 @@
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:de5f78a527",
    "kind": "body",
-   "note": "Mopar catalog lists #5136781AA for both — regulator with motor; trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #5136781AA for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-06T04:40:39Z",
    "pn": [
     "5136781AA"
@@ -112023,7 +112023,7 @@
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:b7a3f1ecc5",
    "kind": "body",
-   "note": "Mopar catalog lists #55057280AF for both — regulator with motor; trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #55057280AF for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-06T05:33:26Z",
    "pn": [
     "55057280AF"
@@ -112326,7 +112326,7 @@
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:f8cb1f82d2",
    "kind": "body",
-   "note": "Mopar catalog lists #55111030AH for both — regulator with motor; trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #55111030AH for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-06T03:50:29Z",
    "pn": [
     "55111030AH"
@@ -112353,7 +112353,7 @@
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:7fd45cf94a",
    "kind": "body",
-   "note": "Mopar catalog lists #55111290AD for both — regulator with motor; older catalog-only number; verify the number on the part",
+   "note": "Mopar catalog lists #55111290AD for both — older catalog-only number; verify the number on the part",
    "oldest_retrieved": "2026-11-06T05:22:08Z",
    "pn": [
     "55111290AD"
@@ -112380,7 +112380,7 @@
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:9424d53889",
    "kind": "body",
-   "note": "Mopar catalog lists #55111291AC for both — regulator with motor; older catalog-only number; verify the number on the part",
+   "note": "Mopar catalog lists #55111291AC for both — older catalog-only number; verify the number on the part",
    "oldest_retrieved": "2026-11-06T05:22:24Z",
    "pn": [
     "55111291AC"
@@ -112407,7 +112407,7 @@
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:de515432b6",
    "kind": "body",
-   "note": "Mopar catalog lists #55111292AD for both — regulator with motor; older catalog-only number; verify the number on the part",
+   "note": "Mopar catalog lists #55111292AD for both — older catalog-only number; verify the number on the part",
    "oldest_retrieved": "2026-11-06T05:22:16Z",
    "pn": [
     "55111292AD"
@@ -112434,7 +112434,7 @@
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:71e0e84111",
    "kind": "body",
-   "note": "Mopar catalog lists #55111804AJ for both — regulator with motor; trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #55111804AJ for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-06T02:55:48Z",
    "pn": [
     "55111804AJ"
@@ -112461,7 +112461,7 @@
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:21d0c4257d",
    "kind": "body",
-   "note": "Mopar catalog lists #55111805AJ for both — regulator with motor; trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #55111805AJ for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-06T02:55:56Z",
    "pn": [
     "55111805AJ"
@@ -112488,7 +112488,7 @@
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:61e5b7dc3b",
    "kind": "body",
-   "note": "Mopar catalog lists #55111807AK for both — regulator with motor; trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #55111807AK for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-06T02:56:20Z",
    "pn": [
     "55111807AK"
@@ -112515,7 +112515,7 @@
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:1448d0447d",
    "kind": "body",
-   "note": "Mopar catalog lists #55111808AK for both — regulator with motor; trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #55111808AK for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-06T02:56:28Z",
    "pn": [
     "55111808AK"
@@ -112542,7 +112542,7 @@
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:c2059aa9c9",
    "kind": "body",
-   "note": "Mopar catalog lists #55111871AE for both — regulator with motor; trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #55111871AE for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-06T03:50:21Z",
    "pn": [
     "55111871AE"
@@ -112569,7 +112569,7 @@
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:649ee32e15",
    "kind": "body",
-   "note": "Mopar catalog lists #55111874AF for both — regulator with motor; trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #55111874AF for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:35:31Z",
    "pn": [
     "55111874AF"
@@ -112596,7 +112596,7 @@
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:cfb58109e2",
    "kind": "body",
-   "note": "Mopar catalog lists #55111878AE for both — regulator with motor; trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #55111878AE for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:35:34Z",
    "pn": [
     "55111878AE"

@@ -84935,7 +84935,7 @@
    "cat": "climate-control",
    "id": "oem:toyota:climate-control:C:1c9a358020",
    "kind": "body",
-   "note": "Toyota catalog lists #55900-06271 for both — regulator with motor; trim-limited; verify the number on the part",
+   "note": "Toyota catalog lists #55900-06271 for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T00:55:09Z",
    "pn": [
     "55900-06271"
@@ -84962,7 +84962,7 @@
    "cat": "climate-control",
    "id": "oem:toyota:climate-control:C:23adf8ae71",
    "kind": "body",
-   "note": "Toyota catalog lists #55900-06300 for both — regulator with motor; trim-limited; verify the number on the part",
+   "note": "Toyota catalog lists #55900-06300 for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T12:04:13Z",
    "pn": [
     "55900-06300"
@@ -84989,7 +84989,7 @@
    "cat": "climate-control",
    "id": "oem:toyota:climate-control:C:d41007eda9",
    "kind": "body",
-   "note": "Toyota catalog lists #55900-06330 for both — regulator with motor; plant-specific (US / Japan built); verify the number on the part",
+   "note": "Toyota catalog lists #55900-06330 for both — plant-specific (US / Japan built); verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:42:43Z",
    "pn": [
     "55900-06330"
@@ -85016,7 +85016,7 @@
    "cat": "climate-control",
    "id": "oem:toyota:climate-control:C:22188a16a8",
    "kind": "body",
-   "note": "Toyota catalog lists #55900-06370 for both — regulator with motor; trim-limited; verify the number on the part",
+   "note": "Toyota catalog lists #55900-06370 for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T09:44:38Z",
    "pn": [
     "55900-06370"
@@ -85043,7 +85043,7 @@
    "cat": "climate-control",
    "id": "oem:toyota:climate-control:C:e336a91b73",
    "kind": "body",
-   "note": "Toyota catalog lists #55900-06380 for both — regulator with motor; trim-limited; verify the number on the part",
+   "note": "Toyota catalog lists #55900-06380 for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-05T09:44:46Z",
    "pn": [
     "55900-06380"

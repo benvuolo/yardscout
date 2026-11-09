@@ -1325,7 +1325,7 @@ class Curation:
             cab = self._cab_only(c, cat, Ts)
             if cab:
                 text = f"{text}; {cab}"
-                if len(_likely_note(brand, sorted(c.pns)[0], text, PACK_TEXT.get(c.packaging, ""))) > policy.NOTE_MAX_LEN:
+                if len(_likely_note(brand, sorted(c.pns)[0], text, _pack_text(cat, c.packaging))) > policy.NOTE_MAX_LEN:
                     self.refuse("held_cab_qualifier", cat=cat, pn=sorted(c.pns)[0],
                                 evidence=[r.pointer for r in c.records], detail=cab)
                     continue
@@ -1345,11 +1345,11 @@ class Curation:
                 self.refuse(hold, cat=cat, pn=pns[0], evidence=[r.pointer for r in c.records],
                             detail=";".join(f"{a[0]} {a[1]} {a[2]}-{a[3]}" for a in apps))
                 self.held_exterior.append({"ns": self.ns, "cat": cat, "pn": pns, "apps": apps,
-                                           "note": _likely_note(brand, pns[0], text, PACK_TEXT.get(c.packaging, "")),
+                                           "note": _likely_note(brand, pns[0], text, _pack_text(cat, c.packaging)),
                                            "reason": reason, "urls": urls})
                 continue
             slot = "+".join(sorted(slots)) or "C"
-            note = _likely_note(brand, pns[0], text, PACK_TEXT.get(c.packaging, ""))
+            note = _likely_note(brand, pns[0], text, _pack_text(cat, c.packaging))
             # its own evidence date: build-time expiry drops a Likely group
             # whose oldest record passes 120 days (review F18)
             stamps = sorted(r.retrieved for r in c.records if _ts(r.retrieved))
@@ -1794,6 +1794,17 @@ def _verified_note(brand: str, pns: list) -> str:
 PACK_TEXT = {"motor": "window motor only", "reg": "regulator without motor", "assy": "regulator with motor",
              "door-module": "whole door module panel with the regulator",
              "switch-module": "single switch module, not the full control panel"}
+_PACK_CATS = {"window-regulator": ("motor", "reg", "assy", "door-module"),
+              "climate-control": ("switch-module",)}
+
+
+def _pack_text(cat: str, packaging: str) -> str:
+    """Packaging words for a Likely note, only in the category they describe
+    (2026-11-09 GM resample: climate-control panels with packaging 'assy'
+    read 'regulator with motor'; a full control panel needs no words)."""
+    return PACK_TEXT.get(packaging, "") if packaging in _PACK_CATS.get(cat, ()) else ""
+
+
 _LIKELY_TAIL = "; verify the number on the part"
 
 

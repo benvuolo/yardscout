@@ -23645,7 +23645,7 @@
    "cat": "climate-control",
    "id": "oem:subaru:climate-control:C:ea7caa716a",
    "kind": "body",
-   "note": "Subaru catalog lists #72311AE06B for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "Subaru catalog lists #72311AE06B for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T08:32:14Z",
    "pn": [
     "72311AE06B"
@@ -23672,7 +23672,7 @@
    "cat": "climate-control",
    "id": "oem:subaru:climate-control:C:991a451755",
    "kind": "body",
-   "note": "Subaru catalog lists #72311AL10A for both — regulator with motor; fits some configurations; verify the number on the part",
+   "note": "Subaru catalog lists #72311AL10A for both — fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T10:24:45Z",
    "pn": [
     "72311AL10A"
@@ -23699,7 +23699,7 @@
    "cat": "climate-control",
    "id": "oem:subaru:climate-control:C:f8eb087059",
    "kind": "body",
-   "note": "Subaru catalog lists #72311AL11A for both — regulator with motor; fits some configurations; verify the number on the part",
+   "note": "Subaru catalog lists #72311AL11A for both — fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T10:24:53Z",
    "pn": [
     "72311AL11A"
@@ -23726,7 +23726,7 @@
    "cat": "climate-control",
    "id": "oem:subaru:climate-control:C:c2cbfc66f7",
    "kind": "body",
-   "note": "Subaru catalog lists #72311AL20A for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "Subaru catalog lists #72311AL20A for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T10:25:01Z",
    "pn": [
     "72311AL20A"
@@ -23753,7 +23753,7 @@
    "cat": "climate-control",
    "id": "oem:subaru:climate-control:C:03ca87ea7f",
    "kind": "body",
-   "note": "Subaru catalog lists #72311AL21A for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "Subaru catalog lists #72311AL21A for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T10:25:09Z",
    "pn": [
     "72311AL21A"
@@ -23780,7 +23780,7 @@
    "cat": "climate-control",
    "id": "oem:subaru:climate-control:C:02c42ecbcf",
    "kind": "body",
-   "note": "Subaru catalog lists #72311FJ040 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "Subaru catalog lists #72311FJ040 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T08:55:38Z",
    "pn": [
     "72311FJ040"
@@ -23807,7 +23807,7 @@
    "cat": "climate-control",
    "id": "oem:subaru:climate-control:C:ecad08f072",
    "kind": "body",
-   "note": "Subaru catalog lists #72311FJ050 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "Subaru catalog lists #72311FJ050 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T08:55:30Z",
    "pn": [
     "72311FJ050"
@@ -23834,7 +23834,7 @@
    "cat": "climate-control",
    "id": "oem:subaru:climate-control:C:d394abb7da",
    "kind": "body",
-   "note": "Subaru catalog lists #72311FJ130 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "Subaru catalog lists #72311FJ130 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T08:55:46Z",
    "pn": [
     "72311FJ130"
@@ -23861,7 +23861,7 @@
    "cat": "climate-control",
    "id": "oem:subaru:climate-control:C:2c103cfe62",
    "kind": "body",
-   "note": "Subaru catalog lists #72311FJ160 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "Subaru catalog lists #72311FJ160 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T08:55:54Z",
    "pn": [
     "72311FJ160"
