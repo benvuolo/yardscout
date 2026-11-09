@@ -10,6 +10,7 @@
 import { createHmac, randomBytes, createHash } from 'node:crypto';
 import { gzipSync } from 'node:zlib';
 import { vindexBucket } from '../src/util.js';
+import { usWeekday } from '../src/alerts.js';
 
 const BASE = process.env.YS_TEST_BASE || 'http://localhost:8793';
 const ADMIN = { 'x-admin-secret': 'dev-admin-secret-change-me' };
@@ -184,11 +185,17 @@ const tacoma = (id, location, lat, lng) => ({ id, year: 2003, make: 'Toyota', mo
   dateAdded: todayYmd, location, city: 'Ogden', state: 'UT', lat, lng });
 const recapArrivals = [tacoma(9801, OGDEN, 41.19, -111.94), tacoma(9802, OGDEN, 41.19, -111.94),
   tacoma(9803, 'Closed Yard - Layton', 41.06, -111.97)];
+// The recap names a weekday only when the first sighting is that weekday in
+// every continental US zone (00:00 ET to 00:00 PT it is two different days,
+// so the line correctly says no day). Note it around the commit that stamps
+// the sighting, so the gone-car check expects whichever form is true.
+const seenDay0 = usWeekday(Date.now());
 r = await api('/v1/admin/inventory/commit', J({
   directory: { yards: [[OGDEN, 'Ogden', 'UT', 41.19, -111.94]], fields: FIELDS, vindexMod: 64,
     scrapedAt: new Date().toISOString() },
   manifest, newArrivals: recapArrivals }, UPLOAD));
 check('recap commit accepted', r.status === 200 && r.data.arrivals === 3, JSON.stringify(r.data));
+const seenDay = seenDay0 && seenDay0 === usWeekday(Date.now()) ? seenDay0 : null;
 // getDirectory() caches the directory per isolate for 30s, and earlier
 // sections committed an empty one moments ago — wait it out.
 await sleep(31_000);
@@ -208,7 +215,9 @@ const lineFor = (id) => {
 };
 check('present car: "Pro would have pinged you", not gone', /Pro would have pinged you/.test(lineFor('9801')) && !/left/.test(lineFor('9801')), lineFor('9801'));
 check('gone car: "Was at <yard> … left before this email"',
-  lineFor('9802').startsWith(`Was at ${OGDEN} from `) && /left before this email/.test(lineFor('9802')), lineFor('9802'));
+  (seenDay ? lineFor('9802').startsWith(`Was at ${OGDEN} from `)
+    : lineFor('9802').startsWith(`Was at ${OGDEN} and left before this email`))
+  && /left before this email/.test(lineFor('9802')), lineFor('9802'));
 check('unknown-yard car: never called gone', !/left/.test(lineFor('9803')), lineFor('9803'));
 check('summary at top, gone count omitted (one car unknown)',
   em.text.startsWith("All 3 of this week's matches were found 3 days before this email.") && !/already gone/.test(em.text),
