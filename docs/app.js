@@ -915,8 +915,13 @@ function setPublishedPhotoSources(ps) {
       let rx;
       try { rx = new RegExp('^(?:' + pat.code + ')$'); } catch (e) { continue; }
       // onCards false (published per source) = images too heavy for list
-      // cards: car screen and viewer only.
-      rules.push({ key, label: src.label, host: src.host.toLowerCase(), rx, card: pat.card, large: pat.large, onCards: src.onCards !== false });
+      // cards: car screen and viewer only. heavy true = the yard offers only
+      // a large original: never on cards, and on the car screen it loads
+      // only when tapped (approxKB says roughly how big).
+      const heavy = src.heavy === true;
+      const kb = Number(src.approxKB);
+      rules.push({ key, label: src.label, host: src.host.toLowerCase(), rx, card: pat.card, large: pat.large,
+        onCards: src.onCards !== false && !heavy, heavy, approxKB: heavy && Number.isFinite(kb) && kb > 0 ? Math.round(kb) : null });
     }
   }
   publishedPhotoSources = ps;
@@ -939,18 +944,34 @@ function photoInfo(code) {
     });
     if (!ok) return null;
     const [w, h] = r.key === 'wap' && /\.j$/.test(code) ? PHOTO_ASPECT.wapj : (PHOTO_ASPECT[r.key] || [4, 3]);
-    return { url: urls[0], large: urls[1], label: r.label, key: r.key, w, h, onCards: r.onCards };
+    return { url: urls[0], large: urls[1], label: r.label, key: r.key, w, h, onCards: r.onCards, heavy: r.heavy, approxKB: r.approxKB };
   }
   return null;
 }
 /* The photo box: fixed 4:3, the whole image shown (contain: never cropped,
  * so a chain's watermark is never cut off), a plain placeholder under it, and
  * a failed image simply hides. Tap opens the viewer. */
+/* Heavy photos the user tapped to load, this session only (memory, never stored). */
+const heavyPhotosLoaded = new Set();
+function photoSizeText(kb) {
+  if (!kb) return 'large file';
+  const mb = kb / 1000;
+  return '~' + (mb < 10 ? mb.toFixed(1).replace(/\.0$/, '') : Math.round(mb)) + '\u00a0MB';
+}
 function photoBoxHtml(info, key, title, cls) {
+  const rawKey = key;
   key = escapeHtml(key);
   if (!info) return `<div class="photo-box photo-none ${cls || ''}" aria-hidden="true"><span>No photo from this yard</span></div>`;
+  if (info.heavy && !heavyPhotosLoaded.has(rawKey)) {
+    return `<button type="button" class="photo-box photo-heavy ${cls || ''}" data-photo-load="${key}" aria-label="Load the photo of the ${escapeHtml(title)} (${photoSizeText(info.approxKB)})">
+      <span class="photo-heavy-msg">Photo available &mdash; tap to load (${photoSizeText(info.approxKB)})</span>
+      <span class="photo-credit">${escapeHtml(info.label)}</span>
+    </button>`;
+  }
+  // A heavy source has only the original: load `large` (on that tap) and show it.
+  const src = info.heavy ? info.large : info.url;
   return `<button type="button" class="photo-box ${cls || ''}" data-photo-vkey="${key}" aria-label="View photo of the ${escapeHtml(title)}">
-      <img src="${escapeHtml(info.url)}" alt="" loading="lazy" decoding="async" width="${info.w}" height="${info.h}" onerror="this.closest('.photo-box').classList.add('photo-failed')">
+      <img src="${escapeHtml(src)}" alt="" ${info.heavy ? '' : 'loading="lazy" '}decoding="async" width="${info.w}" height="${info.h}" onerror="this.closest('.photo-box').classList.add('photo-failed')">
       <span class="photo-credit">${escapeHtml(info.label)}</span>
     </button>`;
 }
@@ -3157,7 +3178,7 @@ function openPhotoViewer(key) {
   const v = liveInventory.find(x => vehicleKey(x) === key);
   const ex = v && extrasFor(v);
   const info = ex && ex[0] ? photoInfo(ex[0]) : null;
-  if (!info) return;
+  if (!info || (info.heavy && !heavyPhotosLoaded.has(key))) return;
   const el = document.getElementById('photo-viewer');
   const img = document.getElementById('photo-viewer-img');
   img.removeAttribute('src');
@@ -3208,6 +3229,22 @@ document.addEventListener('click', (e) => {
   e.preventDefault();
   e.stopPropagation();
   openPhotoViewer(b.dataset.photoVkey);
+}, true);
+/* Heavy photo: tap loads the original into the same box (nothing auto-loads). */
+document.addEventListener('click', (e) => {
+  const b = e.target.closest('.photo-box[data-photo-load]');
+  if (!b) return;
+  e.preventDefault();
+  e.stopPropagation();
+  const key = b.dataset.photoLoad;
+  const v = liveInventory.find(x => vehicleKey(x) === key);
+  const ex = v && extrasFor(v);
+  const info = ex && ex[0] ? photoInfo(ex[0]) : null;
+  if (!info) return;
+  heavyPhotosLoaded.add(key);
+  const cls = [...b.classList].filter(c => c !== 'photo-box' && c !== 'photo-heavy').join(' ');
+  b.outerHTML = photoBoxHtml(info, key, `${v.year} ${v.make} ${v.model}`, cls);
+  track('photo-load/' + info.key);
 }, true);
 
 /* ===== CAR SCREEN (pull-sheet detail) =====

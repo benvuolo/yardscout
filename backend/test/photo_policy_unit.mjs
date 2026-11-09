@@ -8,6 +8,8 @@
  *  - Army's (signed URLs that expire) is off; unknown hosts never render
  *  - Wrench-A-Part ".j": thumb on the card, full image in the viewer
  *  - LKQ: the card URL keeps the whole image (mode=max, never mode=crop)
+ *  - heavy sources: never on cards; car screen shows a tap-to-load box with
+ *    the size and credit; the original loads only on that tap
  * Run: node backend/test/photo_policy_unit.mjs */
 import fs from 'node:fs';
 import vm from 'node:vm';
@@ -27,14 +29,16 @@ const ctx = vm.createContext({ URL });
 vm.runInContext([
   one(/^let publishedPhotoSources = /), one(/^let _photoRules = /), one(/^const PHOTO_ASPECT = /),
   fn('setPublishedPhotoSources'), fn('photoInfo'),
-  'globalThis.__t = { photoInfo, setPublishedPhotoSources };',
+  one(/^const heavyPhotosLoaded = /), fn('photoSizeText'), fn('photoBoxHtml'),
+  "function escapeHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;'); }",
+  'globalThis.__t = { photoInfo, setPublishedPhotoSources, photoBoxHtml, heavyPhotosLoaded };',
 ].join('\n'), ctx);
-const { photoInfo, setPublishedPhotoSources } = ctx.__t;
+const { photoInfo, setPublishedPhotoSources, photoBoxHtml, heavyPhotosLoaded } = ctx.__t;
 
 /* Same shape junkyard_scraper.py published_photo_sources() writes. */
 const publish = (srcs) => Object.fromEntries(Object.entries(srcs)
   .filter(([, s]) => s && s.enabled === true && typeof s.label === 'string')
-  .map(([k, s]) => [k, { label: s.label, host: s.host || '', onCards: s.onCards !== false, patterns: (s.patterns || []).map(p => ({ code: p.code, card: p.card, large: p.large })) }])
+  .map(([k, s]) => [k, { label: s.label, host: s.host || '', onCards: s.onCards !== false, ...(s.heavy === true ? { heavy: true, approxKB: s.approxKB } : {}), patterns: (s.patterns || []).map(p => ({ code: p.code, card: p.card, large: p.large })) }])
   .filter(([, s]) => s.patterns.length));
 
 let fails = 0;
@@ -84,6 +88,32 @@ check('takedown: wap off in the published data -> no wap photo, others unaffecte
 // A pattern whose URL leaves its own host is refused.
 setPublishedPhotoSources({ pyp: { label: 'Photo: X', host: 'cdn.pypapps.com', patterns: [{ code: '^p(\\d+)$', card: 'https://evil.example/{1}.jpg', large: 'https://cdn.pypapps.com/{1}.jpg' }] } });
 check('a URL off the source’s own host is refused', photoInfo('p123') === null);
+
+// heavy: true (a yard that offers only a camera original) -> never on cards,
+// a tap-to-load box on the car screen, the original loads only on that tap.
+setPublishedPhotoSources(publish(sources));
+const heavyKey = Object.entries(sources).find(([, s]) => s.enabled === true && s.heavy === true);
+check('photo_sources.json publishes at least one heavy source', !!heavyKey);
+if (heavyKey) {
+  const [hk, hs] = heavyKey;
+  const code = hk === 'sturtevant' ? 'tSTK12345' : null;
+  const hi = code && photoInfo(code);
+  check(`${hk}: heavy, never on cards, size published`, hi && hi.heavy === true && hi.onCards === false && hi.approxKB === hs.approxKB, JSON.stringify(hi));
+  const box = hi ? photoBoxHtml(hi, 'car-1', '2004 Honda Civic', 'cd-photo') : '';
+  const mb = (hs.approxKB / 1000).toFixed(1).replace(/\.0$/, '');
+  check(`${hk}: car screen shows "Photo available — tap to load (~${mb} MB)" with the credit, no image`,
+    /Photo available &mdash; tap to load \(~[\d.]+\u00a0MB\)/.test(box) && box.includes(`~${mb}\u00a0MB`) && box.includes(hs.label) && !/<img/.test(box) && /data-photo-load="car-1"/.test(box) && !/data-photo-vkey/.test(box), box);
+  heavyPhotosLoaded.add('car-1');
+  const loaded = photoBoxHtml(hi, 'car-1', '2004 Honda Civic', 'cd-photo');
+  check(`${hk}: after the tap, the box loads the original (large) and opens the viewer as usual`,
+    loaded.includes(`src="${hi.large}"`) && /data-photo-vkey="car-1"/.test(loaded) && !/loading="lazy"/.test(loaded) && loaded.includes(hs.label), loaded);
+  heavyPhotosLoaded.clear();
+}
+setPublishedPhotoSources({ x: { label: 'Photo: X', host: 'x.example', onCards: true, heavy: true, patterns: [{ code: 'x(\\d+)', card: 'https://x.example/{1}.jpg', large: 'https://x.example/{1}.jpg' }] } });
+const hx = photoInfo('x12');
+check('heavy overrides onCards true; no approxKB -> "large file"', hx && hx.onCards === false && hx.approxKB === null && photoBoxHtml(hx, 'k', 't').includes('tap to load (large file)'), JSON.stringify(hx));
+setPublishedPhotoSources({ x: { label: 'Photo: X', host: 'x.example', heavy: 'yes', patterns: [{ code: 'x(\\d+)', card: 'https://x.example/{1}.jpg', large: 'https://x.example/{1}.jpg' }] } });
+check('heavy missing or not exactly true -> not heavy (normal photo)', photoInfo('x12') && photoInfo('x12').heavy === false && /<img/.test(photoBoxHtml(photoInfo('x12'), 'k', 't')));
 
 // Newer data without photoSources (older format, or a full takedown) clears everything.
 setPublishedPhotoSources(publish(sources));

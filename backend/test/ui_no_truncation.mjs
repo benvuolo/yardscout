@@ -75,7 +75,8 @@ function publishedPhotoSources() {
     if (!src || src.enabled !== true || typeof src.label !== 'string') continue;
     const pats = (src.patterns || []).filter(p => p && ['code', 'card', 'large'].every(k => typeof p[k] === 'string'))
       .map(p => ({ code: p.code, card: p.card, large: p.large }));
-    if (pats.length) out[key] = { label: src.label, host: src.host || '', onCards: src.onCards !== false, patterns: pats };
+    if (pats.length) out[key] = { label: src.label, host: src.host || '', onCards: src.onCards !== false,
+      ...(src.heavy === true ? { heavy: true, approxKB: src.approxKB } : {}), patterns: pats };
   }
   return out;
 }
@@ -390,6 +391,28 @@ const SCREENS = [
     await page.evaluate(() => openCarDetail(photoCarKey('https://ik.imagekit.io')));
     await settle(page, 1200);
   }],
+  // Heavy source (Sturtevant: camera originals only): the car screen shows a
+  // tap-to-load box with the size; the tap loads the original into it. The
+  // code is put on a car in view; the image host is answered locally.
+  ...[['photo-heavy', false], ['photo-heavy-loaded', true]].map(([name, load]) => [name, async (page) => {
+    await tab(page, 'live');
+    await page.evaluate(() => {
+      const v = liveInventory.find(x => vehicleKey(x) === document.querySelector('#live-grid .car-card[data-vkey]').dataset.vkey);
+      vehicleExtras = vehicleExtras || {};
+      const ex = vehicleExtras[String(v.id)] || [];
+      ex[0] = 'tSTK12345'; vehicleExtras[String(v.id)] = ex;
+      if (!photoInfo('tSTK12345') || !photoInfo('tSTK12345').heavy) throw new Error('heavy source not published');
+      openCarDetail(vehicleKey(v));
+      const box = document.querySelector('#car-detail .photo-heavy');
+      if (!box || !/tap to load \(~3\.8\u00a0MB\)/.test(box.textContent)) throw new Error('no tap-to-load box: ' + (box && box.textContent));
+      if (document.querySelector('#car-detail .photo-box img')) throw new Error('heavy photo loaded without a tap');
+    });
+    if (load) {
+      await page.click('#car-detail .photo-heavy');
+      await page.waitForSelector('#car-detail .photo-box[data-photo-vkey] img', { timeout: 10000 });
+    }
+    await settle(page, 800);
+  }, async (page) => { await page.evaluate(() => { heavyPhotosLoaded.clear(); }); }]),
   ['photo-viewer', async (page) => {
     await tab(page, 'live');
     await page.evaluate(() => { const k = photoCarKey('p'); openCarDetail(k); openPhotoViewer(k); });
@@ -606,6 +629,8 @@ try {
     // Chain photo hosts load for real (the photo boxes are measured with
     // their images); everything else stays blocked.
     await page.route(/^https?:\/\/(?!127\.0\.0\.1|fonts\.googleapis\.com|fonts\.gstatic\.com|cdn\.pypapps\.com|storage\.googleapis\.com|www\.kikersupullit\.com|ik\.imagekit\.io|cdn\.shopify\.com|cdn\.row52\.com)/, (route) => route.abort());
+    // A heavy source's camera original, answered locally (no 4 MB download).
+    await page.route(/^https:\/\/inventory\.sturtevantauto\.com\//, (route) => route.fulfill({ contentType: 'image/png', body: fs.readFileSync(path.join(ROOT, 'docs/icon-512.png')) }));
     // Published photo switch (fail-closed in the app): publish the enabled
     // sources of scraper/photo_sources.json exactly as the scan does.
     const PHOTO_ON = publishedPhotoSources();
