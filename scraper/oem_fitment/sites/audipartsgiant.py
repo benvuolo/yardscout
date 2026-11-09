@@ -127,10 +127,13 @@ RULES = {
     "trunk-lid": (r"^trunk lid$", r"stop|bumper|weatherstrip|hinge|strut|damper|lamp|cover|switch|lock|latch|trim|spoiler|garnish|molding|stay|cylinder|release"),
     "liftgate": (r"^(lift gate|liftgate|tail gate|tailgate|rear hatch)$",
                  r"handle|hinge|cable|lock|latch|glass|weather|stay|strut|cylinder|motor|wiper|spoiler|lamp|trim|molding|garnish|emblem|switch|striker|link|cover|pad|finish|damper|stop"),
-    # tier C: name rule pending (written after reading the trial's list rows)
-    "wiper-motor": (r"(?!x)x", ""),
-    "knuckle": (r"(?!x)x", ""),
-    "strut": (r"(?!x)x", ""),
+    # tier C, A4 trial rows (exact names, wiper pages only): "Wiper Motor" (slug
+    # front-motor), "Wiper Motor Assembly", "Rear Motor" (slug wiper-motor);
+    # "Knuckle"; "Strut" / "Shock Absorber" / "Shock". "Carrier" is the
+    # differential (slug differential-assembly), not taken.
+    "wiper-motor": (r"^((front|rear) )?(wiper )?motor( assembly)?$", ""),
+    "knuckle": (r"^(steering )?knuckle( assembly)?$", ""),
+    "strut": (r"^(front |rear )?(strut|shock absorber|shock)( assembly)?$", ""),
 }
 
 SLUG_RULES = {
@@ -156,10 +159,10 @@ SLUG_RULES = {
     "grille": r"^(radiator-|center-)?grille(-assembly)?$",
     "trunk-lid": r"^trunk-lid$",
     "liftgate": rf"^(lift-?gate|tail-?gate|rear-hatch){SIDE}$",
-    # tier C: name rule pending (written after reading the trial's list rows)
-    "wiper-motor": r"(?!x)x",
-    "knuckle": r"(?!x)x",
-    "strut": r"(?!x)x",
+    # tier C (slugs read on the A4 trial rows)
+    "wiper-motor": rf"^((front|rear)-)?(wiper-)?motor(-assembly)?{SIDE}$",
+    "knuckle": rf"^(steering-)?knuckle{SIDE}$",
+    "strut": rf"^(strut|shock-absorber|shock)(-assembly)?{SIDE}$",
 }
 
 NOTES = {
