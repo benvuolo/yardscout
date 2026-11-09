@@ -2249,3 +2249,53 @@ Not dispatched by me; the 6-hourly schedule picks sites up in `complete`
 mode once each has its worklist marker. Next: once `.c1.done` lands per site,
 re-curate on a pinned sha, run the §11.4 sample per namespace, report to the
 hub, ship only on 0 WRONG plus hub confirmation.
+
+### 5. Path E audit: FAILED, 34 WRONG of 60. Not shipped, not on main.
+
+- Sample: 30 per category, 20 of each cross-model, from the c36da2e run.
+  Verified by an independent subagent: every product page re-read through
+  fetch.py (all 200), 56 list pages re-read, WebSearch only to check
+  which engines a model had. Result file:
+  `groups/_report/pathE_audit_2026-11-09.json`.
+- ac-compressor: RIGHT 15, WRONG 13, UNSURE 2. fuel-pump-module: RIGHT 7,
+  WRONG 21, UNSURE 2.
+- Root causes. Each one breaks a design assumption, so none is fixed by a
+  patch:
+  1. **The engine cells in product-page fitment rows belong to the model,
+     not to the part.** They list every engine of the year span: the 2002
+     RAV4 "2.0, 2.4" (the 2.4 came in 2004), 2008 Mazda5 2.5, 2013 Avenger
+     2.7, Tribeca 3.0 after 2007, a 1999 Silverado 8.1. The list-page notes
+     then restrict the engine ("3.2L/3.5L only", "Federal, 2.4L", "Primary,
+     3.6L", "2.0L With Turbo"). This is why ENGINE_CELLS_RELIABLE is false
+     for PartsGiant. Path E trusted the cells anyway.
+  2. **List-page notes name invisible options**, and the Likely reason
+     machinery let them through as "conditional": rear A/C or rear heat
+     (6 Mopar compressors); tank size or side (18/22/24 gal); emissions
+     (PZEV, Federal); plant (Mexico built); production breaks (To 3/12);
+     drive (FWD, without quattro); body (convertible/sedan); GM option
+     codes (C69, L43 flex, L56 diesel; H6 vs 10PA17 compressor design).
+     For a mechanical part, any such note means a puller can't tell which
+     number the car has.
+  3. **Name rules:** sender-only units passed ("W/O PUMP", "SENDER,FUEL
+     (*KIT1)"), along with a dealer A/C retrofit kit (F87Z-19703-BA) and a
+     bare compressor without clutch.
+- What it would take: claim a (vehicle-year, engine) only when that
+  vehicle's own list-page row for the number carries no note other than
+  one naming that exact engine, and the engine comes from that note or a
+  single-engine fitment row (never a multi-engine cell); refuse every
+  option/tank/emission/plant/date/drive/body note; tighten the names; then
+  draw a fresh 60-item sample. That may leave little yield. I'm not
+  building it without a hub decision.
+- The code stays on branch `interchange/path-e` (`likely_engine`, the
+  lint, 13 tests). No group from it is committed anywhere.
+- Side effect: fetch.py marked en.wikipedia.org blocked (a 200 page it
+  read as a bot check). That's in this container's gitignored .state/ only,
+  and it was left in place (permanent-stop rule).
+
+### 6. V8 fix (hub request, 18:07 UTC, ef6f340)
+- Main@1fe9425 would have dropped all 7 shipped namespaces (V8 hash
+  mismatch after model_map/curate edits). They were re-curated on main's
+  tree, same raw.
+- Payload identical to the pre-break build; oemStatus ok x7.
+- New `curation_tests/test_groups_hash.py` fails on any stale hash. Checked
+  both ways.

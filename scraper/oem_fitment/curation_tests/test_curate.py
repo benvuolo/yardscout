@@ -608,6 +608,7 @@ check("23 Jeep 4602785AD (Front Right) is out of window-switch",
 check("23 DM is present", "DM" in I["slots"], str(I["slots"]))
 check("23 jeeppartsdeal/window-switch is unconfirmed, so nothing is Verified",
       "category_unconfirmed" in I["elig"] and doc["groups"] == [])
+<<<<<<< HEAD
 # make breadth 2026-11-09 (hub): GM series filter. Feed 'Silverado 1500' maps only rows
 # whose option column names the 1500 / 1/2 TON series; CLASSIC rows and rows with no
 # series never map; the unknown-series catch-all 'Silverado' leaves a group that holds
@@ -640,6 +641,8 @@ check("catch-all twin: Silverado 2010 leaves when Silverado 1500 2010 is in the 
 check("catch-all twin: no series target in the group, nothing dropped",
       _cur._drop_catchall_twins([("Chevrolet", "Silverado", 2010), ("Chevrolet", "Avalanche", 2010)])
       == [("Chevrolet", "Silverado", 2010), ("Chevrolet", "Avalanche", 2010)])
+=======
+>>>>>>> origin/main
 check("option hold: subaru gauge clusters held (Canada km/h clusters unmarked)",
       _P.held_cross_model_cat("subaru", "gauge-cluster") == "held_option_cross_model")
 done("test_curate")
