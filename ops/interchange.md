@@ -2504,6 +2504,9 @@ Other outputs of this session:
       (clutch/line/hose/mech; relay/filter/driver module/line) and check them on the lists.
     - App: body-gated aftermarket rows carry a 6th element (body). `_am_group_entry` unpacks 5,
       so add body support or those rows get dropped.
+  - Audit integrity (hub, 20:55 UTC): `fetch.py --text` silently cuts output at 400 lines.
+    Until the truncation-marker fix lands, every §11.4 verifier brief must say: pass
+    `--max-lines 100000`, or read the cached HTML directly. Strut and knuckle list pages are long.
   - Then the curation build (design above). Per category, a §11.4 sample (60, independent
     session, 0 WRONG) and the hub's confirm before any app change on
     `interchange/categories-<n>`.
@@ -2844,3 +2847,10 @@ each); nothing allowlisted or crawled.
   evidence_lines at 60. None of the 86 sampled items (Subaru 60, GM 26) has
   a record over 60 lines, so nothing was hidden. No verdict changes; no
   group pulled.
+- §11.4 verifier brief, Honda/Nissan (hub note, 2026-11-09 20:55): until
+  make breadth's truncation marker lands, `fetch.py --text` stops at 400 lines
+  without warning. Verifiers must pass `--max-lines 100000` or read the cached
+  HTML directly, so long list pages are not cut.
+- Audit note from the hub (~20:55 UTC), for the GSP and 1A §11.4 runs:
+  `fetch.py --text` cuts output at 400 lines unless `--max-lines` is passed.
+  Verifiers pass `--max-lines 100000` or read the cached pages directly.
