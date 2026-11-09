@@ -1,0 +1,2711 @@
+{
+ "as_of": "2026-11-05T12:14:35Z",
+ "built_on": "oem-raw@75dc442",
+ "kind": "own_page",
+ "note": "R3 input (CURATION_SPEC 3.2 R3, 5.16): vehicle-years left out of Likely candidate classes because their own page was never read; crawl.py --complete reads those pages and the curator re-checks them. Never shipped.",
+ "ns": "volvo",
+ "rows": [
+  {
+   "cars": 50,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 41,
+   "gain": 2050,
+   "make": "Volvo",
+   "model": "S40",
+   "site": "www.volvopartsgiant.com",
+   "year": 2007
+  },
+  {
+   "cars": 27,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 63,
+   "gain": 1701,
+   "make": "Volvo",
+   "model": "V70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2001
+  },
+  {
+   "cars": 36,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 43,
+   "gain": 1548,
+   "make": "Volvo",
+   "model": "S40",
+   "site": "www.volvopartsgiant.com",
+   "year": 2005
+  },
+  {
+   "cars": 25,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 55,
+   "gain": 1375,
+   "make": "Volvo",
+   "model": "XC70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2004
+  },
+  {
+   "cars": 16,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 85,
+   "gain": 1360,
+   "make": "Volvo",
+   "model": "V70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2004
+  },
+  {
+   "cars": 20,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 60,
+   "gain": 1200,
+   "make": "Volvo",
+   "model": "S40",
+   "site": "www.volvopartsgiant.com",
+   "year": 2004
+  },
+  {
+   "cars": 53,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "gauge-cluster",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 21,
+   "gain": 1113,
+   "make": "Volvo",
+   "model": "S60",
+   "site": "www.volvopartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 37,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 26,
+   "gain": 962,
+   "make": "Volvo",
+   "model": "S40",
+   "site": "www.volvopartsgiant.com",
+   "year": 2008
+  },
+  {
+   "cars": 42,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 756,
+   "make": "Volvo",
+   "model": "S60",
+   "site": "www.volvopartsgiant.com",
+   "year": 2006
+  },
+  {
+   "cars": 22,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 29,
+   "gain": 638,
+   "make": "Volvo",
+   "model": "XC70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2005
+  },
+  {
+   "cars": 22,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 29,
+   "gain": 638,
+   "make": "Volvo",
+   "model": "XC70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2006
+  },
+  {
+   "cars": 29,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 21,
+   "gain": 609,
+   "make": "Volvo",
+   "model": "S60",
+   "site": "www.volvopartsgiant.com",
+   "year": 2005
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 42,
+   "gain": 588,
+   "make": "Volvo",
+   "model": "V50",
+   "site": "www.volvopartsgiant.com",
+   "year": 2005
+  },
+  {
+   "cars": 45,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 585,
+   "make": "Volvo",
+   "model": "S60",
+   "site": "www.volvopartsgiant.com",
+   "year": 2007
+  },
+  {
+   "cars": 22,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 26,
+   "gain": 572,
+   "make": "Volvo",
+   "model": "S40",
+   "site": "www.volvopartsgiant.com",
+   "year": 2009
+  },
+  {
+   "cars": 28,
+   "cats": [
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 20,
+   "gain": 560,
+   "make": "Volvo",
+   "model": "S80",
+   "site": "www.volvopartsgiant.com",
+   "year": 2008
+  },
+  {
+   "cars": 31,
+   "cats": [
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 17,
+   "gain": 527,
+   "make": "Volvo",
+   "model": "S80",
+   "site": "www.volvopartsgiant.com",
+   "year": 2007
+  },
+  {
+   "cars": 18,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 450,
+   "make": "Volvo",
+   "model": "S40",
+   "site": "www.volvopartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 25,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 450,
+   "make": "Volvo",
+   "model": "S60",
+   "site": "www.volvopartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 24,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 432,
+   "make": "Volvo",
+   "model": "S60",
+   "site": "www.volvopartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 43,
+   "gain": 430,
+   "make": "Volvo",
+   "model": "V50",
+   "site": "www.volvopartsgiant.com",
+   "year": 2006
+  },
+  {
+   "cars": 17,
+   "cats": [
+    "climate-control",
+    "door-rear",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 425,
+   "make": "Volvo",
+   "model": "XC70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2008
+  },
+  {
+   "cars": 21,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 20,
+   "gain": 420,
+   "make": "Volvo",
+   "model": "XC70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2007
+  },
+  {
+   "cars": 13,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 32,
+   "gain": 416,
+   "make": "Volvo",
+   "model": "XC70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2003
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 55,
+   "gain": 385,
+   "make": "Volvo",
+   "model": "V70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2003
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 375,
+   "make": "Volvo",
+   "model": "S80",
+   "site": "www.volvopartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 51,
+   "cats": [
+    "door-front",
+    "fender",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 7,
+   "gain": 357,
+   "make": "Volvo",
+   "model": "S60",
+   "site": "www.volvopartsgiant.com",
+   "year": 2004
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 33,
+   "gain": 330,
+   "make": "Volvo",
+   "model": "V70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2005
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 36,
+   "gain": 324,
+   "make": "Volvo",
+   "model": "V50",
+   "site": "www.volvopartsgiant.com",
+   "year": 2007
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 32,
+   "gain": 320,
+   "make": "Volvo",
+   "model": "V70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2006
+  },
+  {
+   "cars": 28,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 308,
+   "make": "Volvo",
+   "model": "V70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2002
+  },
+  {
+   "cars": 30,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 300,
+   "make": "Volvo",
+   "model": "XC60",
+   "site": "www.volvopartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 27,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 297,
+   "make": "Volvo",
+   "model": "S60",
+   "site": "www.volvopartsgiant.com",
+   "year": 2008
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "climate-control",
+    "door-rear",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 29,
+   "gain": 290,
+   "make": "Volvo",
+   "model": "XC70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2009
+  },
+  {
+   "cars": 32,
+   "cats": [
+    "gauge-cluster",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 288,
+   "make": "Volvo",
+   "model": "XC60",
+   "site": "www.volvopartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 20,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 14,
+   "gain": 280,
+   "make": "Volvo",
+   "model": "S60",
+   "site": "www.volvopartsgiant.com",
+   "year": 2002
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 31,
+   "gain": 279,
+   "make": "Volvo",
+   "model": "XC70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 21,
+   "cats": [
+    "climate-control",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 273,
+   "make": "Volvo",
+   "model": "S60",
+   "site": "www.volvopartsgiant.com",
+   "year": 2003
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 252,
+   "make": "Volvo",
+   "model": "S60",
+   "site": "www.volvopartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 27,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 243,
+   "make": "Volvo",
+   "model": "XC60",
+   "site": "www.volvopartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 22,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "fender",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 242,
+   "make": "Volvo",
+   "model": "V70",
+   "site": "www.volvopartsgiant.com",
+   "year": 1998
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "grille",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 23,
+   "gain": 230,
+   "make": "Volvo",
+   "model": "S40",
+   "site": "www.volvopartsgiant.com",
+   "year": 2003
+  },
+  {
+   "cars": 17,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 221,
+   "make": "Volvo",
+   "model": "S40",
+   "site": "www.volvopartsgiant.com",
+   "year": 2001
+  },
+  {
+   "cars": 24,
+   "cats": [
+    "gauge-cluster",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 216,
+   "make": "Volvo",
+   "model": "XC60",
+   "site": "www.volvopartsgiant.com",
+   "year": 2012
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 23,
+   "gain": 207,
+   "make": "Volvo",
+   "model": "S80",
+   "site": "www.volvopartsgiant.com",
+   "year": 2009
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 14,
+   "gain": 196,
+   "make": "Volvo",
+   "model": "S60",
+   "site": "www.volvopartsgiant.com",
+   "year": 2001
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 27,
+   "gain": 189,
+   "make": "Volvo",
+   "model": "XC70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2012
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 175,
+   "make": "Volvo",
+   "model": "S40",
+   "site": "www.volvopartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "climate-control",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 28,
+   "gain": 168,
+   "make": "Volvo",
+   "model": "V70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2008
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 23,
+   "gain": 161,
+   "make": "Volvo",
+   "model": "S80",
+   "site": "www.volvopartsgiant.com",
+   "year": 2012
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "liftgate",
+    "window-regulator"
+   ],
+   "classes": 15,
+   "gain": 150,
+   "make": "Volvo",
+   "model": "V70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2007
+  },
+  {
+   "cars": 18,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "fender",
+    "window-regulator"
+   ],
+   "classes": 8,
+   "gain": 144,
+   "make": "Volvo",
+   "model": "S70",
+   "site": "www.volvopartsgiant.com",
+   "year": 1998
+  },
+  {
+   "cars": 18,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "fender",
+    "window-regulator"
+   ],
+   "classes": 8,
+   "gain": 144,
+   "make": "Volvo",
+   "model": "S70",
+   "site": "www.volvopartsgiant.com",
+   "year": 1999
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "gauge-cluster",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 23,
+   "gain": 138,
+   "make": "Volvo",
+   "model": "S60",
+   "site": "www.volvopartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 16,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 8,
+   "gain": 128,
+   "make": "Volvo",
+   "model": "C30",
+   "site": "www.volvopartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "headlights",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 126,
+   "make": "Volvo",
+   "model": "S80",
+   "site": "www.volvopartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "fender",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 121,
+   "make": "Volvo",
+   "model": "V70",
+   "site": "www.volvopartsgiant.com",
+   "year": 1999
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 120,
+   "make": "Volvo",
+   "model": "S60",
+   "site": "www.volvopartsgiant.com",
+   "year": 2009
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "fender",
+    "headlights",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 117,
+   "make": "Volvo",
+   "model": "V70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2000
+  },
+  {
+   "cars": 29,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "headlights"
+   ],
+   "classes": 4,
+   "gain": 116,
+   "make": "Volvo",
+   "model": "S70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2000
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 108,
+   "make": "Volvo",
+   "model": "S60",
+   "site": "www.volvopartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 108,
+   "make": "Volvo",
+   "model": "C30",
+   "site": "www.volvopartsgiant.com",
+   "year": 2008
+  },
+  {
+   "cars": 8,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 104,
+   "make": "Volvo",
+   "model": "S40",
+   "site": "www.volvopartsgiant.com",
+   "year": 2002
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "fender",
+    "headlights",
+    "hood",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 100,
+   "make": "Volvo",
+   "model": "940",
+   "site": "www.volvopartsgiant.com",
+   "year": 1994
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 33,
+   "gain": 99,
+   "make": "Volvo",
+   "model": "XC70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 47,
+   "cats": [
+    "headlights"
+   ],
+   "classes": 2,
+   "gain": 94,
+   "make": "Volvo",
+   "model": "S40",
+   "site": "www.volvopartsgiant.com",
+   "year": 2006
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 23,
+   "gain": 92,
+   "make": "Volvo",
+   "model": "V50",
+   "site": "www.volvopartsgiant.com",
+   "year": 2009
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 15,
+   "gain": 75,
+   "make": "Volvo",
+   "model": "V50",
+   "site": "www.volvopartsgiant.com",
+   "year": 2008
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 23,
+   "gain": 69,
+   "make": "Volvo",
+   "model": "V50",
+   "site": "www.volvopartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 17,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 68,
+   "make": "Volvo",
+   "model": "S80",
+   "site": "www.volvopartsgiant.com",
+   "year": 2001
+  },
+  {
+   "cars": 17,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 68,
+   "make": "Volvo",
+   "model": "S80",
+   "site": "www.volvopartsgiant.com",
+   "year": 2006
+  },
+  {
+   "cars": 16,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "hood"
+   ],
+   "classes": 4,
+   "gain": 64,
+   "make": "Volvo",
+   "model": "C70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2008
+  },
+  {
+   "cars": 32,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 64,
+   "make": "Volvo",
+   "model": "S80",
+   "site": "www.volvopartsgiant.com",
+   "year": 2004
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 63,
+   "make": "Volvo",
+   "model": "C30",
+   "site": "www.volvopartsgiant.com",
+   "year": 2009
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "bumper-rear",
+    "grille",
+    "headlights",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 60,
+   "make": "Volvo",
+   "model": "960",
+   "site": "www.volvopartsgiant.com",
+   "year": 1997
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 60,
+   "make": "Volvo",
+   "model": "S80",
+   "site": "www.volvopartsgiant.com",
+   "year": 2000
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 60,
+   "make": "Volvo",
+   "model": "XC60",
+   "site": "www.volvopartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 56,
+   "make": "Volvo",
+   "model": "S80",
+   "site": "www.volvopartsgiant.com",
+   "year": 2005
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 27,
+   "gain": 54,
+   "make": "Volvo",
+   "model": "XC70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 52,
+   "make": "Volvo",
+   "model": "V40",
+   "site": "www.volvopartsgiant.com",
+   "year": 2001
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "bumper-rear",
+    "grille",
+    "headlights",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 50,
+   "make": "Volvo",
+   "model": "960",
+   "site": "www.volvopartsgiant.com",
+   "year": 1995
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "door-front",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 50,
+   "make": "Volvo",
+   "model": "V60",
+   "site": "www.volvopartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "bumper-rear",
+    "grille",
+    "headlights",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 7,
+   "gain": 49,
+   "make": "Volvo",
+   "model": "S90",
+   "site": "www.volvopartsgiant.com",
+   "year": 1998
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 48,
+   "make": "Volvo",
+   "model": "S80",
+   "site": "www.volvopartsgiant.com",
+   "year": 2002
+  },
+  {
+   "cars": 16,
+   "cats": [
+    "liftgate",
+    "tail-lights"
+   ],
+   "classes": 3,
+   "gain": 48,
+   "make": "Volvo",
+   "model": "850",
+   "site": "www.volvopartsgiant.com",
+   "year": 1996
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 23,
+   "gain": 46,
+   "make": "Volvo",
+   "model": "S80",
+   "site": "www.volvopartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 23,
+   "gain": 46,
+   "make": "Volvo",
+   "model": "V50",
+   "site": "www.volvopartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 36,
+   "make": "Volvo",
+   "model": "XC70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 36,
+   "make": "Volvo",
+   "model": "XC70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "hood"
+   ],
+   "classes": 4,
+   "gain": 36,
+   "make": "Volvo",
+   "model": "C70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2009
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 33,
+   "make": "Volvo",
+   "model": "940",
+   "site": "www.volvopartsgiant.com",
+   "year": 1993
+  },
+  {
+   "cars": 8,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 32,
+   "make": "Volvo",
+   "model": "C70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2000
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "door-front",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 30,
+   "make": "Volvo",
+   "model": "V60",
+   "site": "www.volvopartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 28,
+   "make": "Volvo",
+   "model": "S80",
+   "site": "www.volvopartsgiant.com",
+   "year": 2003
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "climate-control",
+    "hood"
+   ],
+   "classes": 3,
+   "gain": 27,
+   "make": "Volvo",
+   "model": "C70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2012
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 26,
+   "make": "Volvo",
+   "model": "940",
+   "site": "www.volvopartsgiant.com",
+   "year": 1995
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 26,
+   "make": "Volvo",
+   "model": "V40",
+   "site": "www.volvopartsgiant.com",
+   "year": 2002
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "climate-control",
+    "headlights"
+   ],
+   "classes": 4,
+   "gain": 24,
+   "make": "Volvo",
+   "model": "C70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2001
+  },
+  {
+   "cars": 8,
+   "cats": [
+    "climate-control",
+    "hood"
+   ],
+   "classes": 3,
+   "gain": 24,
+   "make": "Volvo",
+   "model": "C70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2007
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "grille",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 23,
+   "gain": 23,
+   "make": "Volvo",
+   "model": "V40",
+   "site": "www.volvopartsgiant.com",
+   "year": 2003
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 22,
+   "make": "Volvo",
+   "model": "940",
+   "site": "www.volvopartsgiant.com",
+   "year": 1992
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "liftgate",
+    "tail-lights"
+   ],
+   "classes": 3,
+   "gain": 21,
+   "make": "Volvo",
+   "model": "850",
+   "site": "www.volvopartsgiant.com",
+   "year": 1994
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "climate-control",
+    "hood"
+   ],
+   "classes": 3,
+   "gain": 21,
+   "make": "Volvo",
+   "model": "C70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "climate-control",
+    "hood"
+   ],
+   "classes": 3,
+   "gain": 21,
+   "make": "Volvo",
+   "model": "C70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "hood"
+   ],
+   "classes": 4,
+   "gain": 20,
+   "make": "Volvo",
+   "model": "C70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 20,
+   "make": "Volvo",
+   "model": "XC60",
+   "site": "www.volvopartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 20,
+   "make": "Volvo",
+   "model": "XC60",
+   "site": "www.volvopartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 18,
+   "make": "Volvo",
+   "model": "S60 Cross Country",
+   "site": "www.volvopartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 18,
+   "make": "Volvo",
+   "model": "C30",
+   "site": "www.volvopartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 18,
+   "make": "Volvo",
+   "model": "C30",
+   "site": "www.volvopartsgiant.com",
+   "year": 2012
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "fender",
+    "headlights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 18,
+   "make": "Volvo",
+   "model": "740",
+   "site": "www.volvopartsgiant.com",
+   "year": 1990
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "climate-control",
+    "hood"
+   ],
+   "classes": 3,
+   "gain": 18,
+   "make": "Volvo",
+   "model": "C70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2006
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 17,
+   "gain": 17,
+   "make": "Volvo",
+   "model": "S60",
+   "site": "www.volvopartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 17,
+   "gain": 17,
+   "make": "Volvo",
+   "model": "S80",
+   "site": "www.volvopartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "grille",
+    "headlights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 8,
+   "gain": 16,
+   "make": "Volvo",
+   "model": "960",
+   "site": "www.volvopartsgiant.com",
+   "year": 1994
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 16,
+   "make": "Volvo",
+   "model": "S80",
+   "site": "www.volvopartsgiant.com",
+   "year": 1999
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "liftgate",
+    "tail-lights"
+   ],
+   "classes": 3,
+   "gain": 15,
+   "make": "Volvo",
+   "model": "850",
+   "site": "www.volvopartsgiant.com",
+   "year": 1997
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 7,
+   "gain": 14,
+   "make": "Volvo",
+   "model": "S40",
+   "site": "www.volvopartsgiant.com",
+   "year": 2000
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 7,
+   "gain": 14,
+   "make": "Volvo",
+   "model": "V40",
+   "site": "www.volvopartsgiant.com",
+   "year": 2000
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-rear",
+    "grille",
+    "headlights",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 12,
+   "make": "Volvo",
+   "model": "V90",
+   "site": "www.volvopartsgiant.com",
+   "year": 1998
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 10,
+   "make": "Volvo",
+   "model": "940",
+   "site": "www.volvopartsgiant.com",
+   "year": 1991
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 10,
+   "make": "Volvo",
+   "model": "V60",
+   "site": "www.volvopartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 10,
+   "make": "Volvo",
+   "model": "V60 Cross Country",
+   "site": "www.volvopartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "fender",
+    "gauge-cluster",
+    "hood"
+   ],
+   "classes": 5,
+   "gain": 10,
+   "make": "Volvo",
+   "model": "V70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2009
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "fender",
+    "headlights",
+    "hood",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 9,
+   "make": "Volvo",
+   "model": "740",
+   "site": "www.volvopartsgiant.com",
+   "year": 1992
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 9,
+   "make": "Volvo",
+   "model": "C30",
+   "site": "www.volvopartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 1,
+   "gain": 9,
+   "make": "Volvo",
+   "model": "C70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2004
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "grille",
+    "headlights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 8,
+   "gain": 8,
+   "make": "Volvo",
+   "model": "960",
+   "site": "www.volvopartsgiant.com",
+   "year": 1992
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-rear",
+    "grille",
+    "headlights",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 8,
+   "gain": 8,
+   "make": "Volvo",
+   "model": "S90",
+   "site": "www.volvopartsgiant.com",
+   "year": 1997
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 8,
+   "make": "Volvo",
+   "model": "740",
+   "site": "www.volvopartsgiant.com",
+   "year": 1987
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 8,
+   "make": "Volvo",
+   "model": "C70",
+   "site": "www.volvopartsgiant.com",
+   "year": 1999
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "grille",
+    "headlights",
+    "trunk-lid"
+   ],
+   "classes": 4,
+   "gain": 4,
+   "make": "Volvo",
+   "model": "960",
+   "site": "www.volvopartsgiant.com",
+   "year": 1993
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "grille",
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 3,
+   "make": "Volvo",
+   "model": "244",
+   "site": "www.volvopartsgiant.com",
+   "year": 1988
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "headlights"
+   ],
+   "classes": 3,
+   "gain": 3,
+   "make": "Volvo",
+   "model": "C70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2003
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Volvo",
+   "model": "244",
+   "site": "www.volvopartsgiant.com",
+   "year": 1985
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Volvo",
+   "model": "740",
+   "site": "www.volvopartsgiant.com",
+   "year": 1986
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Volvo",
+   "model": "760",
+   "site": "www.volvopartsgiant.com",
+   "year": 1984
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Volvo",
+   "model": "760",
+   "site": "www.volvopartsgiant.com",
+   "year": 1987
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Volvo",
+   "model": "C70",
+   "site": "www.volvopartsgiant.com",
+   "year": 1998
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Volvo",
+   "model": "C70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2002
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 27,
+   "gain": 0,
+   "make": "Volvo",
+   "model": "V70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 0,
+   "make": "Volvo",
+   "model": "S60 Cross Country",
+   "site": "www.volvopartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 0,
+   "make": "Volvo",
+   "model": "XC70",
+   "site": "www.volvopartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 17,
+   "gain": 0,
+   "make": "Volvo",
+   "model": "S60 Cross Country",
+   "site": "www.volvopartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "fender",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 0,
+   "make": "Volvo",
+   "model": "S80",
+   "site": "www.volvopartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "fender",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 0,
+   "make": "Volvo",
+   "model": "S80",
+   "site": "www.volvopartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 0,
+   "make": "Volvo",
+   "model": "V60",
+   "site": "www.volvopartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 0,
+   "make": "Volvo",
+   "model": "V60 Cross Country",
+   "site": "www.volvopartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 0,
+   "make": "Volvo",
+   "model": "V60 Cross Country",
+   "site": "www.volvopartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 0,
+   "make": "Volvo",
+   "model": "V60 Cross Country",
+   "site": "www.volvopartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-rear",
+    "grille",
+    "headlights",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 0,
+   "make": "Volvo",
+   "model": "V90",
+   "site": "www.volvopartsgiant.com",
+   "year": 1997
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "grille",
+    "headlights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 0,
+   "make": "Volvo",
+   "model": "760",
+   "site": "www.volvopartsgiant.com",
+   "year": 1988
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "grille",
+    "headlights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 0,
+   "make": "Volvo",
+   "model": "760",
+   "site": "www.volvopartsgiant.com",
+   "year": 1989
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "grille",
+    "headlights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 0,
+   "make": "Volvo",
+   "model": "760",
+   "site": "www.volvopartsgiant.com",
+   "year": 1990
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Volvo",
+   "model": "XC60",
+   "site": "www.volvopartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "grille",
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Volvo",
+   "model": "244",
+   "site": "www.volvopartsgiant.com",
+   "year": 1986
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "grille",
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Volvo",
+   "model": "244",
+   "site": "www.volvopartsgiant.com",
+   "year": 1987
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "grille",
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Volvo",
+   "model": "244",
+   "site": "www.volvopartsgiant.com",
+   "year": 1989
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "grille",
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Volvo",
+   "model": "245",
+   "site": "www.volvopartsgiant.com",
+   "year": 1986
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "grille",
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Volvo",
+   "model": "245",
+   "site": "www.volvopartsgiant.com",
+   "year": 1987
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "grille",
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Volvo",
+   "model": "245",
+   "site": "www.volvopartsgiant.com",
+   "year": 1988
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "grille",
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Volvo",
+   "model": "245",
+   "site": "www.volvopartsgiant.com",
+   "year": 1989
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Volvo",
+   "model": "244",
+   "site": "www.volvopartsgiant.com",
+   "year": 1984
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Volvo",
+   "model": "245",
+   "site": "www.volvopartsgiant.com",
+   "year": 1984
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Volvo",
+   "model": "245",
+   "site": "www.volvopartsgiant.com",
+   "year": 1985
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Volvo",
+   "model": "740",
+   "site": "www.volvopartsgiant.com",
+   "year": 1985
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Volvo",
+   "model": "740",
+   "site": "www.volvopartsgiant.com",
+   "year": 1988
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Volvo",
+   "model": "740",
+   "site": "www.volvopartsgiant.com",
+   "year": 1989
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Volvo",
+   "model": "760",
+   "site": "www.volvopartsgiant.com",
+   "year": 1985
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Volvo",
+   "model": "760",
+   "site": "www.volvopartsgiant.com",
+   "year": 1986
+  }
+ ],
+ "unrouted_makes": {}
+}

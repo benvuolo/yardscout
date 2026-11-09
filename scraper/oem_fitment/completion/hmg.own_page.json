@@ -1,0 +1,1784 @@
+{
+ "as_of": "2026-11-06T00:42:44Z",
+ "built_on": "oem-raw@75dc442",
+ "kind": "own_page",
+ "note": "R3 input (CURATION_SPEC 3.2 R3, 5.16): vehicle-years left out of Likely candidate classes because their own page was never read; crawl.py --complete reads those pages and the curator re-checks them. Never shipped.",
+ "ns": "hmg",
+ "rows": [
+  {
+   "cars": 111,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 173,
+   "gain": 19203,
+   "make": "Kia",
+   "model": "Forte",
+   "site": "www.kiapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 135,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 136,
+   "gain": 18360,
+   "make": "Kia",
+   "model": "Forte",
+   "site": "www.kiapartsnow.com",
+   "year": 2016
+  },
+  {
+   "cars": 106,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 173,
+   "gain": 18338,
+   "make": "Kia",
+   "model": "Forte",
+   "site": "www.kiapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 126,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 136,
+   "gain": 17136,
+   "make": "Kia",
+   "model": "Forte",
+   "site": "www.kiapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 88,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 173,
+   "gain": 15224,
+   "make": "Kia",
+   "model": "Forte",
+   "site": "www.kiapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 448,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 14,
+   "gain": 6272,
+   "make": "Kia",
+   "model": "Optima",
+   "site": "www.kiapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 114,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 54,
+   "gain": 6156,
+   "make": "Kia",
+   "model": "Forte",
+   "site": "www.kiapartsnow.com",
+   "year": 2017
+  },
+  {
+   "cars": 244,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 4392,
+   "make": "Kia",
+   "model": "Optima",
+   "site": "www.kiapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 22,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 173,
+   "gain": 3806,
+   "make": "Kia",
+   "model": "Forte Koup",
+   "site": "www.kiapartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 200,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "liftgate",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 3800,
+   "make": "Kia",
+   "model": "Soul",
+   "site": "www.kiapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 172,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "liftgate",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 3268,
+   "make": "Kia",
+   "model": "Soul",
+   "site": "www.kiapartsnow.com",
+   "year": 2016
+  },
+  {
+   "cars": 206,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "window-regulator"
+   ],
+   "classes": 15,
+   "gain": 3090,
+   "make": "Hyundai",
+   "model": "Sonata",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 214,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 14,
+   "gain": 2996,
+   "make": "Kia",
+   "model": "Optima",
+   "site": "www.kiapartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 17,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 173,
+   "gain": 2941,
+   "make": "Kia",
+   "model": "Forte Koup",
+   "site": "www.kiapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 146,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 2628,
+   "make": "Kia",
+   "model": "Optima",
+   "site": "www.kiapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 46,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 54,
+   "gain": 2484,
+   "make": "Kia",
+   "model": "Forte",
+   "site": "www.kiapartsnow.com",
+   "year": 2018
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 173,
+   "gain": 2422,
+   "make": "Kia",
+   "model": "Forte Koup",
+   "site": "www.kiapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 137,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "window-regulator"
+   ],
+   "classes": 15,
+   "gain": 2055,
+   "make": "Hyundai",
+   "model": "Sonata",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 173,
+   "gain": 1730,
+   "make": "Kia",
+   "model": "Forte Koup",
+   "site": "www.kiapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 67,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "liftgate",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 1273,
+   "make": "Kia",
+   "model": "Soul",
+   "site": "www.kiapartsnow.com",
+   "year": 2017
+  },
+  {
+   "cars": 63,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "liftgate",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 1197,
+   "make": "Kia",
+   "model": "Soul",
+   "site": "www.kiapartsnow.com",
+   "year": 2018
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 136,
+   "gain": 816,
+   "make": "Kia",
+   "model": "Forte Koup",
+   "site": "www.kiapartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 745,
+   "cats": [
+    "hood"
+   ],
+   "classes": 1,
+   "gain": 745,
+   "make": "Hyundai",
+   "model": "Sonata",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 136,
+   "gain": 680,
+   "make": "Kia",
+   "model": "Forte Koup",
+   "site": "www.kiapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 17,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 40,
+   "gain": 680,
+   "make": "Hyundai",
+   "model": "XG350",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 327,
+   "cats": [
+    "door-front",
+    "door-rear"
+   ],
+   "classes": 2,
+   "gain": 654,
+   "make": "Hyundai",
+   "model": "Sonata",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 643,
+   "cats": [
+    "hood"
+   ],
+   "classes": 1,
+   "gain": 643,
+   "make": "Hyundai",
+   "model": "Sonata",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 27,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "hood",
+    "liftgate",
+    "window-regulator"
+   ],
+   "classes": 23,
+   "gain": 621,
+   "make": "Hyundai",
+   "model": "Santa Fe",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 136,
+   "gain": 544,
+   "make": "Kia",
+   "model": "Forte Koup",
+   "site": "www.kiapartsnow.com",
+   "year": 2016
+  },
+  {
+   "cars": 27,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "liftgate",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 513,
+   "make": "Kia",
+   "model": "Soul",
+   "site": "www.kiapartsnow.com",
+   "year": 2019
+  },
+  {
+   "cars": 62,
+   "cats": [
+    "fender",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 8,
+   "gain": 496,
+   "make": "Kia",
+   "model": "Optima",
+   "site": "www.kiapartsnow.com",
+   "year": 2018
+  },
+  {
+   "cars": 240,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 480,
+   "make": "Kia",
+   "model": "Soul",
+   "site": "www.kiapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 25,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "hood",
+    "liftgate",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 475,
+   "make": "Hyundai",
+   "model": "Santa Fe",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 53,
+   "cats": [
+    "fender",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 8,
+   "gain": 424,
+   "make": "Kia",
+   "model": "Optima",
+   "site": "www.kiapartsnow.com",
+   "year": 2017
+  },
+  {
+   "cars": 206,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 412,
+   "make": "Kia",
+   "model": "Forte",
+   "site": "www.kiapartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 410,
+   "cats": [
+    "hood"
+   ],
+   "classes": 1,
+   "gain": 410,
+   "make": "Hyundai",
+   "model": "Sonata",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 196,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 392,
+   "make": "Kia",
+   "model": "Soul",
+   "site": "www.kiapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 17,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "hood",
+    "liftgate",
+    "window-regulator"
+   ],
+   "classes": 23,
+   "gain": 391,
+   "make": "Hyundai",
+   "model": "Santa Fe",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 40,
+   "gain": 360,
+   "make": "Hyundai",
+   "model": "XG350",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2002
+  },
+  {
+   "cars": 172,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 344,
+   "make": "Kia",
+   "model": "Soul",
+   "site": "www.kiapartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 315,
+   "cats": [
+    "hood"
+   ],
+   "classes": 1,
+   "gain": 315,
+   "make": "Hyundai",
+   "model": "Sonata",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 38,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 8,
+   "gain": 304,
+   "make": "Hyundai",
+   "model": "Santa Fe Sport",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 25,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 275,
+   "make": "Hyundai",
+   "model": "Sonata",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2019
+  },
+  {
+   "cars": 34,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 8,
+   "gain": 272,
+   "make": "Hyundai",
+   "model": "Santa Fe Sport",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 270,
+   "cats": [
+    "hood"
+   ],
+   "classes": 1,
+   "gain": 270,
+   "make": "Hyundai",
+   "model": "Sonata",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 13,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "hood",
+    "liftgate",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 247,
+   "make": "Hyundai",
+   "model": "Santa Fe",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 216,
+   "make": "Kia",
+   "model": "Optima Hybrid",
+   "site": "www.kiapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 27,
+   "cats": [
+    "fender",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 8,
+   "gain": 216,
+   "make": "Kia",
+   "model": "Optima",
+   "site": "www.kiapartsnow.com",
+   "year": 2020
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 40,
+   "gain": 200,
+   "make": "Hyundai",
+   "model": "XG300",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2001
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 40,
+   "gain": 200,
+   "make": "Hyundai",
+   "model": "XG350",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2003
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 198,
+   "make": "Kia",
+   "model": "Optima Hybrid",
+   "site": "www.kiapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 44,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 176,
+   "make": "Hyundai",
+   "model": "Sonata",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 77,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 154,
+   "make": "Kia",
+   "model": "Sedona",
+   "site": "www.kiapartsnow.com",
+   "year": 2006
+  },
+  {
+   "cars": 153,
+   "cats": [
+    "hood"
+   ],
+   "classes": 1,
+   "gain": 153,
+   "make": "Hyundai",
+   "model": "Sonata",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 31,
+   "cats": [
+    "fender",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 124,
+   "make": "Kia",
+   "model": "Optima",
+   "site": "www.kiapartsnow.com",
+   "year": 2019
+  },
+  {
+   "cars": 62,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 124,
+   "make": "Kia",
+   "model": "Sedona",
+   "site": "www.kiapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 55,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 110,
+   "make": "Kia",
+   "model": "Sedona",
+   "site": "www.kiapartsnow.com",
+   "year": 2008
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "window-regulator"
+   ],
+   "classes": 15,
+   "gain": 105,
+   "make": "Hyundai",
+   "model": "Sonata Hybrid",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 47,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 94,
+   "make": "Kia",
+   "model": "Sedona",
+   "site": "www.kiapartsnow.com",
+   "year": 2007
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 8,
+   "gain": 88,
+   "make": "Hyundai",
+   "model": "Santa Fe Sport",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 16,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 80,
+   "make": "Hyundai",
+   "model": "Santa Fe Sport",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 16,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 80,
+   "make": "Hyundai",
+   "model": "Santa Fe Sport",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "hood",
+    "liftgate",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 76,
+   "make": "Hyundai",
+   "model": "Santa Fe",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 34,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 68,
+   "make": "Kia",
+   "model": "Sedona",
+   "site": "www.kiapartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 33,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 66,
+   "make": "Kia",
+   "model": "Sedona",
+   "site": "www.kiapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 28,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 56,
+   "make": "Kia",
+   "model": "Sedona",
+   "site": "www.kiapartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 55,
+   "make": "Hyundai",
+   "model": "Santa Fe Sport",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 26,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 52,
+   "make": "Kia",
+   "model": "Sedona",
+   "site": "www.kiapartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 25,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 50,
+   "make": "Hyundai",
+   "model": "Veracruz",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 24,
+   "cats": [
+    "door-front"
+   ],
+   "classes": 2,
+   "gain": 48,
+   "make": "Kia",
+   "model": "Spectra",
+   "site": "www.kiapartsnow.com",
+   "year": 2003
+  },
+  {
+   "cars": 23,
+   "cats": [
+    "door-front"
+   ],
+   "classes": 2,
+   "gain": 46,
+   "make": "Kia",
+   "model": "Spectra",
+   "site": "www.kiapartsnow.com",
+   "year": 2002
+  },
+  {
+   "cars": 19,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 38,
+   "make": "Hyundai",
+   "model": "Elantra Touring",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 19,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 38,
+   "make": "Hyundai",
+   "model": "Elantra Touring",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 18,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 36,
+   "make": "Hyundai",
+   "model": "Elantra Touring",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "window-regulator"
+   ],
+   "classes": 7,
+   "gain": 28,
+   "make": "Hyundai",
+   "model": "Sonata Hybrid",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 28,
+   "make": "Hyundai",
+   "model": "Veracruz",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 28,
+   "make": "Hyundai",
+   "model": "Veracruz",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 13,
+   "cats": [
+    "door-front"
+   ],
+   "classes": 2,
+   "gain": 26,
+   "make": "Kia",
+   "model": "Sephia",
+   "site": "www.kiapartsnow.com",
+   "year": 2000
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "fender",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 8,
+   "gain": 24,
+   "make": "Kia",
+   "model": "Optima Hybrid",
+   "site": "www.kiapartsnow.com",
+   "year": 2016
+  },
+  {
+   "cars": 24,
+   "cats": [
+    "hood"
+   ],
+   "classes": 1,
+   "gain": 24,
+   "make": "Hyundai",
+   "model": "Sonata Hybrid",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 20,
+   "make": "Hyundai",
+   "model": "Veracruz",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "liftgate",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 19,
+   "make": "Kia",
+   "model": "Soul EV",
+   "site": "www.kiapartsnow.com",
+   "year": 2016
+  },
+  {
+   "cars": 18,
+   "cats": [
+    "hood"
+   ],
+   "classes": 1,
+   "gain": 18,
+   "make": "Hyundai",
+   "model": "Sonata Hybrid",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "fender",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 8,
+   "gain": 16,
+   "make": "Kia",
+   "model": "Optima Hybrid",
+   "site": "www.kiapartsnow.com",
+   "year": 2017
+  },
+  {
+   "cars": 13,
+   "cats": [
+    "hood"
+   ],
+   "classes": 1,
+   "gain": 13,
+   "make": "Hyundai",
+   "model": "Sonata Hybrid",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "door-front"
+   ],
+   "classes": 2,
+   "gain": 12,
+   "make": "Kia",
+   "model": "Sephia",
+   "site": "www.kiapartsnow.com",
+   "year": 2001
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "door-front"
+   ],
+   "classes": 2,
+   "gain": 10,
+   "make": "Kia",
+   "model": "Spectra",
+   "site": "www.kiapartsnow.com",
+   "year": 2001
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "hood"
+   ],
+   "classes": 1,
+   "gain": 7,
+   "make": "Hyundai",
+   "model": "Sonata Hybrid",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "Hyundai",
+   "model": "Elantra Touring",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "Hyundai",
+   "model": "Veracruz",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "door-front"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "Kia",
+   "model": "Sephia",
+   "site": "www.kiapartsnow.com",
+   "year": 1998
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "door-front"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "Kia",
+   "model": "Sephia",
+   "site": "www.kiapartsnow.com",
+   "year": 1999
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Kia",
+   "model": "Sephia",
+   "site": "www.kiapartsnow.com",
+   "year": 1997
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 173,
+   "gain": 0,
+   "make": "Kia",
+   "model": "Forte",
+   "site": "www.kiapartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 173,
+   "gain": 0,
+   "make": "Kia",
+   "model": "Forte Koup",
+   "site": "www.kiapartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 40,
+   "gain": 0,
+   "make": "Hyundai",
+   "model": "XG300",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2000
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "hood",
+    "liftgate",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 0,
+   "make": "Hyundai",
+   "model": "Santa Fe XL",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2019
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "liftgate",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 0,
+   "make": "Kia",
+   "model": "Soul EV",
+   "site": "www.kiapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "liftgate",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 0,
+   "make": "Kia",
+   "model": "Soul EV",
+   "site": "www.kiapartsnow.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "liftgate",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 0,
+   "make": "Kia",
+   "model": "Soul EV",
+   "site": "www.kiapartsnow.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "liftgate",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 0,
+   "make": "Kia",
+   "model": "Soul EV",
+   "site": "www.kiapartsnow.com",
+   "year": 2019
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 0,
+   "make": "Kia",
+   "model": "Optima Hybrid",
+   "site": "www.kiapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 0,
+   "make": "Hyundai",
+   "model": "Sonata Hybrid",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 0,
+   "make": "Hyundai",
+   "model": "Sonata Hybrid",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2019
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "fender",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 8,
+   "gain": 0,
+   "make": "Kia",
+   "model": "Optima Hybrid",
+   "site": "www.kiapartsnow.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "fender",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 8,
+   "gain": 0,
+   "make": "Kia",
+   "model": "Optima Hybrid",
+   "site": "www.kiapartsnow.com",
+   "year": 2019
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "fender",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 8,
+   "gain": 0,
+   "make": "Kia",
+   "model": "Optima Hybrid",
+   "site": "www.kiapartsnow.com",
+   "year": 2020
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Hyundai",
+   "model": "Elantra Touring",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Hyundai",
+   "model": "Veracruz",
+   "site": "www.hyundaipartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Kia",
+   "model": "Sedona",
+   "site": "www.kiapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Kia",
+   "model": "Soul",
+   "site": "www.kiapartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Kia",
+   "model": "Spectra",
+   "site": "www.kiapartsnow.com",
+   "year": 2000
+  }
+ ],
+ "unrouted_makes": {}
+}

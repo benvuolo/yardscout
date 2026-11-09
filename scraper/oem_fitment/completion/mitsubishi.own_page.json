@@ -1,0 +1,936 @@
+{
+ "as_of": "2026-11-05T09:25:16Z",
+ "built_on": "oem-raw@75dc442",
+ "kind": "own_page",
+ "note": "R3 input (CURATION_SPEC 3.2 R3, 5.16): vehicle-years left out of Likely candidate classes because their own page was never read; crawl.py --complete reads those pages and the curator re-checks them. Never shipped.",
+ "ns": "mitsubishi",
+ "rows": [
+  {
+   "cars": 29,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 551,
+   "make": "Mitsubishi",
+   "model": "Mirage",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 73,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "window-regulator"
+   ],
+   "classes": 7,
+   "gain": 511,
+   "make": "Mitsubishi",
+   "model": "Lancer",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2009
+  },
+  {
+   "cars": 52,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 7,
+   "gain": 364,
+   "make": "Mitsubishi",
+   "model": "Lancer",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 25,
+   "cats": [
+    "door-front",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 325,
+   "make": "Mitsubishi",
+   "model": "Mirage",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 57,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 285,
+   "make": "Mitsubishi",
+   "model": "Outlander",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2007
+  },
+  {
+   "cars": 13,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 247,
+   "make": "Mitsubishi",
+   "model": "Mirage G4",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 228,
+   "make": "Mitsubishi",
+   "model": "Mirage",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 32,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 7,
+   "gain": 224,
+   "make": "Mitsubishi",
+   "model": "Lancer",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 27,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 8,
+   "gain": 216,
+   "make": "Mitsubishi",
+   "model": "Lancer",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2012
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "door-front",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 15,
+   "gain": 210,
+   "make": "Mitsubishi",
+   "model": "Mirage G4",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 209,
+   "make": "Mitsubishi",
+   "model": "Mirage",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2019
+  },
+  {
+   "cars": 39,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 195,
+   "make": "Mitsubishi",
+   "model": "Lancer",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 37,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 185,
+   "make": "Mitsubishi",
+   "model": "Lancer",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 35,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 175,
+   "make": "Mitsubishi",
+   "model": "Lancer",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 171,
+   "make": "Mitsubishi",
+   "model": "Mirage G4",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2019
+  },
+  {
+   "cars": 42,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 168,
+   "make": "Mitsubishi",
+   "model": "Outlander Sport",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 24,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 144,
+   "make": "Mitsubishi",
+   "model": "Outlander",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2008
+  },
+  {
+   "cars": 25,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 125,
+   "make": "Mitsubishi",
+   "model": "Outlander Sport",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 31,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 124,
+   "make": "Mitsubishi",
+   "model": "Outlander Sport",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 20,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 120,
+   "make": "Mitsubishi",
+   "model": "Outlander",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2009
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 108,
+   "make": "Mitsubishi",
+   "model": "Mirage G4",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2020
+  },
+  {
+   "cars": 17,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 102,
+   "make": "Mitsubishi",
+   "model": "Outlander",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2012
+  },
+  {
+   "cars": 22,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 88,
+   "make": "Mitsubishi",
+   "model": "Outlander",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 75,
+   "make": "Mitsubishi",
+   "model": "Lancer",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 72,
+   "make": "Mitsubishi",
+   "model": "Mirage",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2020
+  },
+  {
+   "cars": 18,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 72,
+   "make": "Mitsubishi",
+   "model": "Outlander",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 56,
+   "make": "Mitsubishi",
+   "model": "Outlander Sport",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "door-front",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 54,
+   "make": "Mitsubishi",
+   "model": "Mirage G4",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2024
+  },
+  {
+   "cars": 13,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 52,
+   "make": "Mitsubishi",
+   "model": "Outlander",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 50,
+   "make": "Mitsubishi",
+   "model": "Mirage",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2021
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 50,
+   "make": "Mitsubishi",
+   "model": "Mirage G4",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2022
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 45,
+   "make": "Mitsubishi",
+   "model": "Outlander Sport",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2012
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 44,
+   "make": "Mitsubishi",
+   "model": "Lancer",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "door-front",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 27,
+   "make": "Mitsubishi",
+   "model": "Mirage",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2024
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 20,
+   "make": "Mitsubishi",
+   "model": "Mirage",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2022
+  },
+  {
+   "cars": 18,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 18,
+   "make": "Mitsubishi",
+   "model": "Outlander",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 17,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 17,
+   "make": "Mitsubishi",
+   "model": "Outlander",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 16,
+   "make": "Mitsubishi",
+   "model": "Outlander Sport",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 14,
+   "make": "Mitsubishi",
+   "model": "Outlander Sport",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 10,
+   "make": "Mitsubishi",
+   "model": "Mirage G4",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2021
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 10,
+   "make": "Mitsubishi",
+   "model": "Outlander Sport",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2019
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 9,
+   "make": "Mitsubishi",
+   "model": "Outlander",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 7,
+   "make": "Mitsubishi",
+   "model": "Outlander",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 6,
+   "make": "Mitsubishi",
+   "model": "Outlander Sport",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2020
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 5,
+   "make": "Mitsubishi",
+   "model": "Montero",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 1995
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 5,
+   "make": "Mitsubishi",
+   "model": "Outlander",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2019
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 4,
+   "make": "Mitsubishi",
+   "model": "Montero",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 1997
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 4,
+   "make": "Mitsubishi",
+   "model": "Montero",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 1999
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 3,
+   "make": "Mitsubishi",
+   "model": "Montero",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2000
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Mitsubishi",
+   "model": "Outlander Sport",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2021
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 2,
+   "make": "Mitsubishi",
+   "model": "Expo",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 1994
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 2,
+   "make": "Mitsubishi",
+   "model": "Outlander",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2020
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 1,
+   "make": "Mitsubishi",
+   "model": "Eclipse Cross",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2020
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 1,
+   "make": "Mitsubishi",
+   "model": "Expo",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 1995
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 1,
+   "make": "Mitsubishi",
+   "model": "Montero",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 1996
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 0,
+   "make": "Mitsubishi",
+   "model": "Mirage",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2023
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 0,
+   "make": "Mitsubishi",
+   "model": "Mirage G4",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2023
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Mitsubishi",
+   "model": "Outlander Sport",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2022
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Mitsubishi",
+   "model": "Outlander Sport",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2023
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Mitsubishi",
+   "model": "Outlander Sport",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2024
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Mitsubishi",
+   "model": "Outlander Sport",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2025
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Mitsubishi",
+   "model": "Eclipse Cross",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2022
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Mitsubishi",
+   "model": "Eclipse Cross",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2023
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Mitsubishi",
+   "model": "Eclipse Cross",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2024
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Mitsubishi",
+   "model": "Eclipse Cross",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 2025
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Mitsubishi",
+   "model": "Expo",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 1992
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Mitsubishi",
+   "model": "Expo",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 1993
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Mitsubishi",
+   "model": "Montero",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 1992
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Mitsubishi",
+   "model": "Montero",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 1993
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Mitsubishi",
+   "model": "Montero",
+   "site": "www.mitsubishipartsgiant.com",
+   "year": 1998
+  }
+ ],
+ "unrouted_makes": {}
+}

@@ -1,0 +1,9243 @@
+{
+ "as_of": "2026-11-05T10:07:33Z",
+ "built_on": "oem-raw@75dc442",
+ "kind": "own_page",
+ "note": "R3 input (CURATION_SPEC 3.2 R3, 5.16): vehicle-years left out of Likely candidate classes because their own page was never read; crawl.py --complete reads those pages and the curator re-checks them. Never shipped.",
+ "ns": "bmw",
+ "rows": [
+  {
+   "cars": 152,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 95,
+   "gain": 14440,
+   "make": "BMW",
+   "model": "328i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 129,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 95,
+   "gain": 12255,
+   "make": "BMW",
+   "model": "328i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 104,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 100,
+   "gain": 10400,
+   "make": "BMW",
+   "model": "328i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 214,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 41,
+   "gain": 8774,
+   "make": "BMW",
+   "model": "328i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 79,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 102,
+   "gain": 8058,
+   "make": "BMW",
+   "model": "328i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 71,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 100,
+   "gain": 7100,
+   "make": "BMW",
+   "model": "328i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 50,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 136,
+   "gain": 6800,
+   "make": "BMW",
+   "model": "328i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 51,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 83,
+   "gain": 4233,
+   "make": "BMW",
+   "model": "328xi",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 60,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 69,
+   "gain": 4140,
+   "make": "BMW",
+   "model": "325i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2003
+  },
+  {
+   "cars": 51,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 69,
+   "gain": 3519,
+   "make": "BMW",
+   "model": "325i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 41,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 84,
+   "gain": 3444,
+   "make": "BMW",
+   "model": "335i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 44,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 69,
+   "gain": 3036,
+   "make": "BMW",
+   "model": "325i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2002
+  },
+  {
+   "cars": 42,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 69,
+   "gain": 2898,
+   "make": "BMW",
+   "model": "325i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 40,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 69,
+   "gain": 2760,
+   "make": "BMW",
+   "model": "325i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2001
+  },
+  {
+   "cars": 35,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 76,
+   "gain": 2660,
+   "make": "BMW",
+   "model": "528i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2000
+  },
+  {
+   "cars": 32,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 83,
+   "gain": 2656,
+   "make": "BMW",
+   "model": "328xi",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 30,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 82,
+   "gain": 2460,
+   "make": "BMW",
+   "model": "328i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 39,
+   "cats": [
+    "bumper-front",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 60,
+   "gain": 2340,
+   "make": "BMW",
+   "model": "328i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 71,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 31,
+   "gain": 2201,
+   "make": "BMW",
+   "model": "330i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 45,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 47,
+   "gain": 2115,
+   "make": "BMW",
+   "model": "530i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 41,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 47,
+   "gain": 1927,
+   "make": "BMW",
+   "model": "530i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 19,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 94,
+   "gain": 1786,
+   "make": "BMW",
+   "model": "335i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 32,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 54,
+   "gain": 1728,
+   "make": "BMW",
+   "model": "323i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2000
+  },
+  {
+   "cars": 23,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 75,
+   "gain": 1725,
+   "make": "BMW",
+   "model": "330ci",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2001
+  },
+  {
+   "cars": 21,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 78,
+   "gain": 1638,
+   "make": "BMW",
+   "model": "325ci",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 27,
+   "cats": [
+    "bumper-front",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 60,
+   "gain": 1620,
+   "make": "BMW",
+   "model": "328i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 30,
+   "cats": [
+    "bumper-front",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 54,
+   "gain": 1620,
+   "make": "BMW",
+   "model": "528i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 29,
+   "cats": [
+    "bumper-front",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 54,
+   "gain": 1566,
+   "make": "BMW",
+   "model": "528i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 19,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 81,
+   "gain": 1539,
+   "make": "BMW",
+   "model": "335i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 25,
+   "cats": [
+    "bumper-front",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 60,
+   "gain": 1500,
+   "make": "BMW",
+   "model": "320i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 35,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "trunk-lid"
+   ],
+   "classes": 42,
+   "gain": 1470,
+   "make": "BMW",
+   "model": "535i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 35,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 38,
+   "gain": 1330,
+   "make": "BMW",
+   "model": "530i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 39,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 34,
+   "gain": 1326,
+   "make": "BMW",
+   "model": "335i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 28,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 47,
+   "gain": 1316,
+   "make": "BMW",
+   "model": "525i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 23,
+   "cats": [
+    "bumper-front",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 56,
+   "gain": 1288,
+   "make": "BMW",
+   "model": "528i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 157,
+   "cats": [
+    "fender",
+    "gauge-cluster",
+    "grille"
+   ],
+   "classes": 8,
+   "gain": 1256,
+   "make": "BMW",
+   "model": "325i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 22,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 57,
+   "gain": 1254,
+   "make": "BMW",
+   "model": "525i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2003
+  },
+  {
+   "cars": 33,
+   "cats": [
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 37,
+   "gain": 1221,
+   "make": "BMW",
+   "model": "X3",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 21,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 58,
+   "gain": 1218,
+   "make": "BMW",
+   "model": "330i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2001
+  },
+  {
+   "cars": 21,
+   "cats": [
+    "bumper-front",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 56,
+   "gain": 1176,
+   "make": "BMW",
+   "model": "528i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 78,
+   "gain": 1170,
+   "make": "BMW",
+   "model": "325ci",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2001
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 78,
+   "gain": 1170,
+   "make": "BMW",
+   "model": "325ci",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 31,
+   "cats": [
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 37,
+   "gain": 1147,
+   "make": "BMW",
+   "model": "X3",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 30,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 38,
+   "gain": 1140,
+   "make": "BMW",
+   "model": "525i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 22,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 51,
+   "gain": 1122,
+   "make": "BMW",
+   "model": "323i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1999
+  },
+  {
+   "cars": 19,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 58,
+   "gain": 1102,
+   "make": "BMW",
+   "model": "535i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 19,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 57,
+   "gain": 1083,
+   "make": "BMW",
+   "model": "525i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2002
+  },
+  {
+   "cars": 17,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 63,
+   "gain": 1071,
+   "make": "BMW",
+   "model": "320i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 76,
+   "gain": 1064,
+   "make": "BMW",
+   "model": "528i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1999
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 75,
+   "gain": 1050,
+   "make": "BMW",
+   "model": "330ci",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 17,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 61,
+   "gain": 1037,
+   "make": "BMW",
+   "model": "745i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2003
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 69,
+   "gain": 966,
+   "make": "BMW",
+   "model": "325xi",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2003
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 63,
+   "gain": 945,
+   "make": "BMW",
+   "model": "320i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 16,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 59,
+   "gain": 944,
+   "make": "BMW",
+   "model": "528i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1998
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 94,
+   "gain": 940,
+   "make": "BMW",
+   "model": "335i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 75,
+   "gain": 900,
+   "make": "BMW",
+   "model": "330ci",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2002
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 88,
+   "gain": 880,
+   "make": "BMW",
+   "model": "328i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 58,
+   "gain": 870,
+   "make": "BMW",
+   "model": "330i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 58,
+   "gain": 870,
+   "make": "BMW",
+   "model": "535i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 20,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "trunk-lid"
+   ],
+   "classes": 43,
+   "gain": 860,
+   "make": "BMW",
+   "model": "535xi",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 78,
+   "gain": 858,
+   "make": "BMW",
+   "model": "325ci",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 69,
+   "gain": 828,
+   "make": "BMW",
+   "model": "325xi",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 25,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 33,
+   "gain": 825,
+   "make": "BMW",
+   "model": "750Li",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 24,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "trunk-lid"
+   ],
+   "classes": 34,
+   "gain": 816,
+   "make": "BMW",
+   "model": "528i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 13,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 62,
+   "gain": 806,
+   "make": "BMW",
+   "model": "745i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 17,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 47,
+   "gain": 799,
+   "make": "BMW",
+   "model": "530xi",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 13,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 61,
+   "gain": 793,
+   "make": "BMW",
+   "model": "745Li",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 78,
+   "gain": 780,
+   "make": "BMW",
+   "model": "325ci",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2003
+  },
+  {
+   "cars": 13,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 58,
+   "gain": 754,
+   "make": "BMW",
+   "model": "330i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2002
+  },
+  {
+   "cars": 18,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 41,
+   "gain": 738,
+   "make": "BMW",
+   "model": "530i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2003
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 52,
+   "gain": 728,
+   "make": "BMW",
+   "model": "530xi",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 22,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 32,
+   "gain": 704,
+   "make": "BMW",
+   "model": "330xi",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 58,
+   "gain": 696,
+   "make": "BMW",
+   "model": "330i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2003
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 58,
+   "gain": 696,
+   "make": "BMW",
+   "model": "550i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 69,
+   "gain": 690,
+   "make": "BMW",
+   "model": "325xi",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2001
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 57,
+   "gain": 684,
+   "make": "BMW",
+   "model": "525i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2001
+  },
+  {
+   "cars": 18,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 38,
+   "gain": 684,
+   "make": "BMW",
+   "model": "525i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 61,
+   "gain": 671,
+   "make": "BMW",
+   "model": "745Li",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2003
+  },
+  {
+   "cars": 18,
+   "cats": [
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 37,
+   "gain": 666,
+   "make": "BMW",
+   "model": "X3",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 20,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 33,
+   "gain": 660,
+   "make": "BMW",
+   "model": "325xi",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 16,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 41,
+   "gain": 656,
+   "make": "BMW",
+   "model": "530i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2002
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 59,
+   "gain": 649,
+   "make": "BMW",
+   "model": "528i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1997
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 72,
+   "gain": 648,
+   "make": "BMW",
+   "model": "323ci",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2000
+  },
+  {
+   "cars": 17,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 38,
+   "gain": 646,
+   "make": "BMW",
+   "model": "530i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "trunk-lid"
+   ],
+   "classes": 42,
+   "gain": 630,
+   "make": "BMW",
+   "model": "535i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 19,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 33,
+   "gain": 627,
+   "make": "BMW",
+   "model": "750Li",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "trunk-lid"
+   ],
+   "classes": 42,
+   "gain": 588,
+   "make": "BMW",
+   "model": "528xi",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 58,
+   "gain": 580,
+   "make": "BMW",
+   "model": "535i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 53,
+   "gain": 530,
+   "make": "BMW",
+   "model": "328i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1999
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 88,
+   "gain": 528,
+   "make": "BMW",
+   "model": "328i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 104,
+   "gain": 520,
+   "make": "BMW",
+   "model": "335i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 36,
+   "gain": 504,
+   "make": "BMW",
+   "model": "740iL",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2001
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 71,
+   "gain": 497,
+   "make": "BMW",
+   "model": "335xi",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 8,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 62,
+   "gain": 496,
+   "make": "BMW",
+   "model": "745i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 16,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "trunk-lid"
+   ],
+   "classes": 31,
+   "gain": 496,
+   "make": "BMW",
+   "model": "550i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 8,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 61,
+   "gain": 488,
+   "make": "BMW",
+   "model": "745Li",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2002
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 54,
+   "gain": 486,
+   "make": "BMW",
+   "model": "330xi",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2003
+  },
+  {
+   "cars": 18,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 26,
+   "gain": 468,
+   "make": "BMW",
+   "model": "645ci",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 31,
+   "gain": 465,
+   "make": "BMW",
+   "model": "550i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 33,
+   "gain": 462,
+   "make": "BMW",
+   "model": "545i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 41,
+   "gain": 451,
+   "make": "BMW",
+   "model": "528i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 75,
+   "gain": 450,
+   "make": "BMW",
+   "model": "330ci",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2003
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 75,
+   "gain": 450,
+   "make": "BMW",
+   "model": "330ci",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 63,
+   "gain": 441,
+   "make": "BMW",
+   "model": "540i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1998
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 47,
+   "gain": 423,
+   "make": "BMW",
+   "model": "525xi",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 42,
+   "gain": 420,
+   "make": "BMW",
+   "model": "328i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2000
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 58,
+   "gain": 406,
+   "make": "BMW",
+   "model": "535i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 78,
+   "gain": 390,
+   "make": "BMW",
+   "model": "540i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2002
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 78,
+   "gain": 390,
+   "make": "BMW",
+   "model": "540i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2003
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 96,
+   "gain": 384,
+   "make": "BMW",
+   "model": "328i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 38,
+   "gain": 380,
+   "make": "BMW",
+   "model": "545i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 62,
+   "gain": 372,
+   "make": "BMW",
+   "model": "745i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2002
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 31,
+   "gain": 372,
+   "make": "BMW",
+   "model": "550i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 41,
+   "gain": 369,
+   "make": "BMW",
+   "model": "528i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 33,
+   "gain": 363,
+   "make": "BMW",
+   "model": "750i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 33,
+   "cats": [
+    "fender",
+    "gauge-cluster",
+    "side-mirrors",
+    "trunk-lid"
+   ],
+   "classes": 11,
+   "gain": 363,
+   "make": "BMW",
+   "model": "525i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 51,
+   "gain": 357,
+   "make": "BMW",
+   "model": "750i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 58,
+   "gain": 348,
+   "make": "BMW",
+   "model": "330i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 58,
+   "gain": 348,
+   "make": "BMW",
+   "model": "330xi",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2002
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 29,
+   "gain": 348,
+   "make": "BMW",
+   "model": "750i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 69,
+   "gain": 345,
+   "make": "BMW",
+   "model": "325xi",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 31,
+   "cats": [
+    "climate-control",
+    "gauge-cluster"
+   ],
+   "classes": 11,
+   "gain": 341,
+   "make": "BMW",
+   "model": "X1",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "bumper-front",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 56,
+   "gain": 336,
+   "make": "BMW",
+   "model": "528i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 37,
+   "gain": 333,
+   "make": "BMW",
+   "model": "X3",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 55,
+   "gain": 330,
+   "make": "BMW",
+   "model": "328ci",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2000
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 63,
+   "gain": 315,
+   "make": "BMW",
+   "model": "320i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 21,
+   "gain": 315,
+   "make": "BMW",
+   "model": "745Li",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 104,
+   "gain": 312,
+   "make": "BMW",
+   "model": "335i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 44,
+   "gain": 308,
+   "make": "BMW",
+   "model": "328d",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 51,
+   "gain": 306,
+   "make": "BMW",
+   "model": "750i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 33,
+   "gain": 297,
+   "make": "BMW",
+   "model": "750i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 8,
+   "cats": [
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 37,
+   "gain": 296,
+   "make": "BMW",
+   "model": "X3",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 47,
+   "gain": 282,
+   "make": "BMW",
+   "model": "128i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 47,
+   "gain": 282,
+   "make": "BMW",
+   "model": "128i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 47,
+   "gain": 282,
+   "make": "BMW",
+   "model": "525xi",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 53,
+   "gain": 265,
+   "make": "BMW",
+   "model": "750Li",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 24,
+   "cats": [
+    "climate-control",
+    "gauge-cluster"
+   ],
+   "classes": 11,
+   "gain": 264,
+   "make": "BMW",
+   "model": "X1",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 63,
+   "gain": 252,
+   "make": "BMW",
+   "model": "540i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1997
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 28,
+   "gain": 252,
+   "make": "BMW",
+   "model": "323i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 82,
+   "gain": 246,
+   "make": "BMW",
+   "model": "335i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 41,
+   "gain": 246,
+   "make": "BMW",
+   "model": "530i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2001
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 41,
+   "gain": 246,
+   "make": "BMW",
+   "model": "535i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 47,
+   "gain": 235,
+   "make": "BMW",
+   "model": "128i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 47,
+   "gain": 235,
+   "make": "BMW",
+   "model": "128i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 78,
+   "gain": 234,
+   "make": "BMW",
+   "model": "540i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2001
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 38,
+   "gain": 228,
+   "make": "BMW",
+   "model": "740iL",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1998
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 75,
+   "gain": 225,
+   "make": "BMW",
+   "model": "335i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 44,
+   "gain": 220,
+   "make": "BMW",
+   "model": "740i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 36,
+   "gain": 216,
+   "make": "BMW",
+   "model": "740i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2001
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 53,
+   "gain": 212,
+   "make": "BMW",
+   "model": "740Li",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 53,
+   "gain": 212,
+   "make": "BMW",
+   "model": "750Li",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 35,
+   "cats": [
+    "climate-control",
+    "gauge-cluster"
+   ],
+   "classes": 6,
+   "gain": 210,
+   "make": "BMW",
+   "model": "X1",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 41,
+   "gain": 205,
+   "make": "BMW",
+   "model": "528i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 51,
+   "gain": 204,
+   "make": "BMW",
+   "model": "750i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 20,
+   "gain": 200,
+   "make": "BMW",
+   "model": "328i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1997
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 38,
+   "gain": 190,
+   "make": "BMW",
+   "model": "740iL",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2000
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 63,
+   "gain": 189,
+   "make": "BMW",
+   "model": "335i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 47,
+   "gain": 188,
+   "make": "BMW",
+   "model": "128i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 37,
+   "gain": 185,
+   "make": "BMW",
+   "model": "X3",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 26,
+   "gain": 182,
+   "make": "BMW",
+   "model": "650i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 44,
+   "gain": 176,
+   "make": "BMW",
+   "model": "740i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 58,
+   "gain": 174,
+   "make": "BMW",
+   "model": "330xi",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 58,
+   "gain": 174,
+   "make": "BMW",
+   "model": "330xi",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 58,
+   "gain": 174,
+   "make": "BMW",
+   "model": "535i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 17,
+   "gain": 170,
+   "make": "BMW",
+   "model": "428i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 56,
+   "gain": 168,
+   "make": "BMW",
+   "model": "550i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "trunk-lid"
+   ],
+   "classes": 42,
+   "gain": 168,
+   "make": "BMW",
+   "model": "528i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 8,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 21,
+   "gain": 168,
+   "make": "BMW",
+   "model": "325i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1995
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 54,
+   "gain": 162,
+   "make": "BMW",
+   "model": "135i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 160,
+   "make": "BMW",
+   "model": "320i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 53,
+   "gain": 159,
+   "make": "BMW",
+   "model": "750Li",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 52,
+   "gain": 156,
+   "make": "BMW",
+   "model": "ActiveHybrid 5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 75,
+   "gain": 150,
+   "make": "BMW",
+   "model": "330ci",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 30,
+   "gain": 150,
+   "make": "BMW",
+   "model": "335xi",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 74,
+   "gain": 148,
+   "make": "BMW",
+   "model": "760i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 36,
+   "gain": 144,
+   "make": "BMW",
+   "model": "740i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2000
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 144,
+   "make": "BMW",
+   "model": "328i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 68,
+   "gain": 136,
+   "make": "BMW",
+   "model": "328i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 63,
+   "gain": 126,
+   "make": "BMW",
+   "model": "320i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 63,
+   "gain": 126,
+   "make": "BMW",
+   "model": "320i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 60,
+   "gain": 120,
+   "make": "BMW",
+   "model": "328i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 58,
+   "gain": 116,
+   "make": "BMW",
+   "model": "550i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 54,
+   "gain": 108,
+   "make": "BMW",
+   "model": "535i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 36,
+   "gain": 108,
+   "make": "BMW",
+   "model": "740i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1997
+  },
+  {
+   "cars": 54,
+   "cats": [
+    "hood"
+   ],
+   "classes": 2,
+   "gain": 108,
+   "make": "BMW",
+   "model": "X5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 53,
+   "gain": 106,
+   "make": "BMW",
+   "model": "320i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2002
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 53,
+   "gain": 106,
+   "make": "BMW",
+   "model": "320i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2003
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 53,
+   "gain": 106,
+   "make": "BMW",
+   "model": "750Li xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 53,
+   "gain": 106,
+   "make": "BMW",
+   "model": "Alpina B7L xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 21,
+   "gain": 105,
+   "make": "BMW",
+   "model": "325i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1994
+  },
+  {
+   "cars": 52,
+   "cats": [
+    "hood"
+   ],
+   "classes": 2,
+   "gain": 104,
+   "make": "BMW",
+   "model": "X5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 51,
+   "gain": 102,
+   "make": "BMW",
+   "model": "750i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 100,
+   "make": "BMW",
+   "model": "318i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1995
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 99,
+   "make": "BMW",
+   "model": "525i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1995
+  },
+  {
+   "cars": 49,
+   "cats": [
+    "hood"
+   ],
+   "classes": 2,
+   "gain": 98,
+   "make": "BMW",
+   "model": "X5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 19,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 95,
+   "make": "BMW",
+   "model": "325xi",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2002
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights"
+   ],
+   "classes": 13,
+   "gain": 91,
+   "make": "BMW",
+   "model": "318i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1997
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 44,
+   "gain": 88,
+   "make": "BMW",
+   "model": "323i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 44,
+   "gain": 88,
+   "make": "BMW",
+   "model": "323i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 44,
+   "gain": 88,
+   "make": "BMW",
+   "model": "328d xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 29,
+   "gain": 87,
+   "make": "BMW",
+   "model": "740i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1995
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 42,
+   "gain": 84,
+   "make": "BMW",
+   "model": "640i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 28,
+   "gain": 84,
+   "make": "BMW",
+   "model": "323i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 41,
+   "gain": 82,
+   "make": "BMW",
+   "model": "535i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 41,
+   "gain": 82,
+   "make": "BMW",
+   "model": "535i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 20,
+   "gain": 80,
+   "make": "BMW",
+   "model": "328i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1996
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 20,
+   "gain": 80,
+   "make": "BMW",
+   "model": "328i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1998
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 78,
+   "gain": 78,
+   "make": "BMW",
+   "model": "540i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1999
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 26,
+   "gain": 78,
+   "make": "BMW",
+   "model": "645ci",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 38,
+   "gain": 76,
+   "make": "BMW",
+   "model": "740iL",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1996
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 38,
+   "gain": 76,
+   "make": "BMW",
+   "model": "740iL",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1997
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 38,
+   "gain": 76,
+   "make": "BMW",
+   "model": "740iL",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1999
+  },
+  {
+   "cars": 38,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 2,
+   "gain": 76,
+   "make": "BMW",
+   "model": "750Li",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 75,
+   "make": "BMW",
+   "model": "318i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1994
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 74,
+   "gain": 74,
+   "make": "BMW",
+   "model": "760Li",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2003
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 74,
+   "gain": 74,
+   "make": "BMW",
+   "model": "760Li",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 36,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 2,
+   "gain": 72,
+   "make": "BMW",
+   "model": "X3",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 35,
+   "cats": [
+    "hood"
+   ],
+   "classes": 2,
+   "gain": 70,
+   "make": "BMW",
+   "model": "X5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "gauge-cluster",
+    "window-regulator"
+   ],
+   "classes": 22,
+   "gain": 66,
+   "make": "BMW",
+   "model": "X5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 64,
+   "make": "BMW",
+   "model": "320i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 64,
+   "make": "BMW",
+   "model": "320i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 63,
+   "gain": 63,
+   "make": "BMW",
+   "model": "335i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 63,
+   "gain": 63,
+   "make": "BMW",
+   "model": "335i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 31,
+   "gain": 62,
+   "make": "BMW",
+   "model": "323i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 60,
+   "gain": 60,
+   "make": "BMW",
+   "model": "328i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 58,
+   "gain": 58,
+   "make": "BMW",
+   "model": "330xi",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2001
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 58,
+   "gain": 58,
+   "make": "BMW",
+   "model": "535i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 58,
+   "gain": 58,
+   "make": "BMW",
+   "model": "550i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 58,
+   "gain": 58,
+   "make": "BMW",
+   "model": "550i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 58,
+   "gain": 58,
+   "make": "BMW",
+   "model": "550i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 29,
+   "gain": 58,
+   "make": "BMW",
+   "model": "X4",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 56,
+   "gain": 56,
+   "make": "BMW",
+   "model": "528i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 56,
+   "gain": 56,
+   "make": "BMW",
+   "model": "ActiveHybrid 3",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 28,
+   "cats": [
+    "hood"
+   ],
+   "classes": 2,
+   "gain": 56,
+   "make": "BMW",
+   "model": "X5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 54,
+   "gain": 54,
+   "make": "BMW",
+   "model": "135i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 54,
+   "gain": 54,
+   "make": "BMW",
+   "model": "135i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 54,
+   "gain": 54,
+   "make": "BMW",
+   "model": "535i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 53,
+   "gain": 53,
+   "make": "BMW",
+   "model": "320i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 53,
+   "gain": 53,
+   "make": "BMW",
+   "model": "Alpina B7L",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 51,
+   "gain": 51,
+   "make": "BMW",
+   "model": "Alpina B7 xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 51,
+   "gain": 51,
+   "make": "BMW",
+   "model": "Alpina B7 xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 17,
+   "gain": 51,
+   "make": "BMW",
+   "model": "428i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 23,
+   "cats": [
+    "hood"
+   ],
+   "classes": 2,
+   "gain": 46,
+   "make": "BMW",
+   "model": "X5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 44,
+   "gain": 44,
+   "make": "BMW",
+   "model": "323i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 44,
+   "gain": 44,
+   "make": "BMW",
+   "model": "328d",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "gauge-cluster",
+    "window-regulator"
+   ],
+   "classes": 22,
+   "gain": 44,
+   "make": "BMW",
+   "model": "X5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "gauge-cluster",
+    "window-regulator"
+   ],
+   "classes": 22,
+   "gain": 44,
+   "make": "BMW",
+   "model": "X5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "trunk-lid"
+   ],
+   "classes": 42,
+   "gain": 42,
+   "make": "BMW",
+   "model": "528i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 42,
+   "gain": 42,
+   "make": "BMW",
+   "model": "640i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 42,
+   "gain": 42,
+   "make": "BMW",
+   "model": "650i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 42,
+   "gain": 42,
+   "make": "BMW",
+   "model": "650i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 41,
+   "gain": 41,
+   "make": "BMW",
+   "model": "335d",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 41,
+   "gain": 41,
+   "make": "BMW",
+   "model": "335d",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 41,
+   "gain": 41,
+   "make": "BMW",
+   "model": "528i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 41,
+   "gain": 41,
+   "make": "BMW",
+   "model": "535i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 41,
+   "gain": 41,
+   "make": "BMW",
+   "model": "535i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 41,
+   "gain": 41,
+   "make": "BMW",
+   "model": "550i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 41,
+   "gain": 41,
+   "make": "BMW",
+   "model": "550i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 41,
+   "gain": 41,
+   "make": "BMW",
+   "model": "550i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "grille",
+    "headlights",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 41,
+   "gain": 41,
+   "make": "BMW",
+   "model": "M3",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "headlights",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 38,
+   "gain": 38,
+   "make": "BMW",
+   "model": "335is",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 36,
+   "gain": 36,
+   "make": "BMW",
+   "model": "740i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1999
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 36,
+   "gain": 36,
+   "make": "BMW",
+   "model": "750iL",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1996
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 36,
+   "gain": 36,
+   "make": "BMW",
+   "model": "750iL",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1997
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 36,
+   "make": "BMW",
+   "model": "525i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1992
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "trunk-lid"
+   ],
+   "classes": 35,
+   "gain": 35,
+   "make": "BMW",
+   "model": "550i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 35,
+   "gain": 35,
+   "make": "BMW",
+   "model": "740iL",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1995
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 34,
+   "gain": 34,
+   "make": "BMW",
+   "model": "750iL",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1999
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 32,
+   "make": "BMW",
+   "model": "330i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 30,
+   "gain": 30,
+   "make": "BMW",
+   "model": "Alpina B7",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "fender",
+    "gauge-cluster",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 30,
+   "make": "BMW",
+   "model": "650i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "fender",
+    "gauge-cluster",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 30,
+   "make": "BMW",
+   "model": "650i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 29,
+   "gain": 29,
+   "make": "BMW",
+   "model": "X4",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 29,
+   "gain": 29,
+   "make": "BMW",
+   "model": "X4",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 28,
+   "gain": 28,
+   "make": "BMW",
+   "model": "318i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1998
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 27,
+   "gain": 27,
+   "make": "BMW",
+   "model": "318i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1996
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 27,
+   "make": "BMW",
+   "model": "323i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1998
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "headlights",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 24,
+   "gain": 24,
+   "make": "BMW",
+   "model": "M5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood"
+   ],
+   "classes": 12,
+   "gain": 24,
+   "make": "BMW",
+   "model": "325i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1992
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "gauge-cluster",
+    "window-regulator"
+   ],
+   "classes": 22,
+   "gain": 22,
+   "make": "BMW",
+   "model": "X5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 21,
+   "gain": 21,
+   "make": "BMW",
+   "model": "325i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1993
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "hood"
+   ],
+   "classes": 10,
+   "gain": 20,
+   "make": "BMW",
+   "model": "325is",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1995
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood"
+   ],
+   "classes": 9,
+   "gain": 18,
+   "make": "BMW",
+   "model": "328is",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1997
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 18,
+   "make": "BMW",
+   "model": "535i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1990
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 17,
+   "gain": 17,
+   "make": "BMW",
+   "model": "328i GT xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 17,
+   "gain": 17,
+   "make": "BMW",
+   "model": "328i GT xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 17,
+   "gain": 17,
+   "make": "BMW",
+   "model": "428i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 17,
+   "gain": 17,
+   "make": "BMW",
+   "model": "428i Gran Coupe",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 17,
+   "gain": 17,
+   "make": "BMW",
+   "model": "435i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 16,
+   "make": "BMW",
+   "model": "320i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 16,
+   "make": "BMW",
+   "model": "330i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 16,
+   "make": "BMW",
+   "model": "340i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "headlights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 16,
+   "make": "BMW",
+   "model": "M5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 8,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 16,
+   "make": "BMW",
+   "model": "650i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "fender",
+    "trunk-lid"
+   ],
+   "classes": 5,
+   "gain": 15,
+   "make": "BMW",
+   "model": "525i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1990
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights"
+   ],
+   "classes": 14,
+   "gain": 14,
+   "make": "BMW",
+   "model": "318i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1992
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "door-front",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 7,
+   "gain": 14,
+   "make": "BMW",
+   "model": "740i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "door-front",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 7,
+   "gain": 14,
+   "make": "BMW",
+   "model": "740i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "door-front",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 7,
+   "gain": 14,
+   "make": "BMW",
+   "model": "750i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights"
+   ],
+   "classes": 12,
+   "gain": 12,
+   "make": "BMW",
+   "model": "318is",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1994
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights"
+   ],
+   "classes": 12,
+   "gain": 12,
+   "make": "BMW",
+   "model": "318is",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1995
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "hood"
+   ],
+   "classes": 10,
+   "gain": 10,
+   "make": "BMW",
+   "model": "325is",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1991
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "hood"
+   ],
+   "classes": 10,
+   "gain": 10,
+   "make": "BMW",
+   "model": "325is",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1993
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "hood"
+   ],
+   "classes": 10,
+   "gain": 10,
+   "make": "BMW",
+   "model": "325is",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1994
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "fender",
+    "gauge-cluster",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 10,
+   "make": "BMW",
+   "model": "650i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "fender",
+    "headlights",
+    "hood"
+   ],
+   "classes": 5,
+   "gain": 10,
+   "make": "BMW",
+   "model": "318ti",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1995
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "fender",
+    "trunk-lid"
+   ],
+   "classes": 5,
+   "gain": 10,
+   "make": "BMW",
+   "model": "525i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1989
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood"
+   ],
+   "classes": 9,
+   "gain": 9,
+   "make": "BMW",
+   "model": "328is",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1998
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood"
+   ],
+   "classes": 9,
+   "gain": 9,
+   "make": "BMW",
+   "model": "328is",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1999
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 9,
+   "make": "BMW",
+   "model": "525i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1991
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 9,
+   "make": "BMW",
+   "model": "525i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1993
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 9,
+   "make": "BMW",
+   "model": "525i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1994
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 9,
+   "make": "BMW",
+   "model": "530i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1994
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 9,
+   "make": "BMW",
+   "model": "530i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1995
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 9,
+   "make": "BMW",
+   "model": "540i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1994
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 9,
+   "make": "BMW",
+   "model": "740Li xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 2,
+   "gain": 8,
+   "make": "BMW",
+   "model": "550i GT",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "fender",
+    "headlights",
+    "hood"
+   ],
+   "classes": 7,
+   "gain": 7,
+   "make": "BMW",
+   "model": "318ti",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1996
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "fender",
+    "headlights",
+    "hood"
+   ],
+   "classes": 7,
+   "gain": 7,
+   "make": "BMW",
+   "model": "318ti",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1999
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 7,
+   "gain": 7,
+   "make": "BMW",
+   "model": "740i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 7,
+   "gain": 7,
+   "make": "BMW",
+   "model": "Alpina B7 xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "hood"
+   ],
+   "classes": 2,
+   "gain": 6,
+   "make": "BMW",
+   "model": "X6",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "BMW",
+   "model": "228i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "BMW",
+   "model": "535i GT",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "hood"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "BMW",
+   "model": "X6",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "BMW",
+   "model": "228i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "BMW",
+   "model": "535i GT",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "BMW",
+   "model": "535i GT",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "BMW",
+   "model": "550i GT",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "BMW",
+   "model": "550i GT",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "BMW",
+   "model": "M235i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "BMW",
+   "model": "M235i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "hood"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "BMW",
+   "model": "X6",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "hood"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "BMW",
+   "model": "X6",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "hood"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "BMW",
+   "model": "X6",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "hood"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "BMW",
+   "model": "X6",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "hood"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "BMW",
+   "model": "X6",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "BMW",
+   "model": "X6",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "BMW",
+   "model": "Z4",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 98,
+   "gain": 0,
+   "make": "BMW",
+   "model": "335i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 82,
+   "gain": 0,
+   "make": "BMW",
+   "model": "335i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 74,
+   "gain": 0,
+   "make": "BMW",
+   "model": "760Li",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 74,
+   "gain": 0,
+   "make": "BMW",
+   "model": "760Li",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 74,
+   "gain": 0,
+   "make": "BMW",
+   "model": "760Li",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 74,
+   "gain": 0,
+   "make": "BMW",
+   "model": "760Li",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 74,
+   "gain": 0,
+   "make": "BMW",
+   "model": "760i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 74,
+   "gain": 0,
+   "make": "BMW",
+   "model": "760i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 58,
+   "gain": 0,
+   "make": "BMW",
+   "model": "550i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 56,
+   "gain": 0,
+   "make": "BMW",
+   "model": "ActiveHybrid 3",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 56,
+   "gain": 0,
+   "make": "BMW",
+   "model": "ActiveHybrid 3",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 54,
+   "gain": 0,
+   "make": "BMW",
+   "model": "135i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 54,
+   "gain": 0,
+   "make": "BMW",
+   "model": "135i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 54,
+   "gain": 0,
+   "make": "BMW",
+   "model": "135i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 53,
+   "gain": 0,
+   "make": "BMW",
+   "model": "320i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2001
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 53,
+   "gain": 0,
+   "make": "BMW",
+   "model": "320i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 53,
+   "gain": 0,
+   "make": "BMW",
+   "model": "740Li",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 53,
+   "gain": 0,
+   "make": "BMW",
+   "model": "750Li xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 53,
+   "gain": 0,
+   "make": "BMW",
+   "model": "750Li xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 53,
+   "gain": 0,
+   "make": "BMW",
+   "model": "Alpina B7L",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 53,
+   "gain": 0,
+   "make": "BMW",
+   "model": "Alpina B7L xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 52,
+   "gain": 0,
+   "make": "BMW",
+   "model": "760Li",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 52,
+   "gain": 0,
+   "make": "BMW",
+   "model": "760Li",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 52,
+   "gain": 0,
+   "make": "BMW",
+   "model": "760Li",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 52,
+   "gain": 0,
+   "make": "BMW",
+   "model": "ActiveHybrid 5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 51,
+   "gain": 0,
+   "make": "BMW",
+   "model": "Alpina B7",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 51,
+   "gain": 0,
+   "make": "BMW",
+   "model": "Alpina B7",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "headlights",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 45,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M3",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2001
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "headlights",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 45,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M3",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2002
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "headlights",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 45,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M3",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2003
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "headlights",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 45,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M3",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "headlights",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 45,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M3",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "headlights",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 45,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M3",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 44,
+   "gain": 0,
+   "make": "BMW",
+   "model": "328d xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "grille",
+    "headlights",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 43,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M3",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "grille",
+    "headlights",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 43,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M3",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 42,
+   "gain": 0,
+   "make": "BMW",
+   "model": "640i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 42,
+   "gain": 0,
+   "make": "BMW",
+   "model": "640i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 42,
+   "gain": 0,
+   "make": "BMW",
+   "model": "640i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 42,
+   "gain": 0,
+   "make": "BMW",
+   "model": "650i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 41,
+   "gain": 0,
+   "make": "BMW",
+   "model": "335d",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 41,
+   "gain": 0,
+   "make": "BMW",
+   "model": "528i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 41,
+   "gain": 0,
+   "make": "BMW",
+   "model": "528i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 41,
+   "gain": 0,
+   "make": "BMW",
+   "model": "535i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 41,
+   "gain": 0,
+   "make": "BMW",
+   "model": "550i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 41,
+   "gain": 0,
+   "make": "BMW",
+   "model": "550i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "headlights",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 38,
+   "gain": 0,
+   "make": "BMW",
+   "model": "335is",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "headlights",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 38,
+   "gain": 0,
+   "make": "BMW",
+   "model": "335is",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 36,
+   "gain": 0,
+   "make": "BMW",
+   "model": "750iL",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1995
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 36,
+   "gain": 0,
+   "make": "BMW",
+   "model": "750iL",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1998
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 35,
+   "gain": 0,
+   "make": "BMW",
+   "model": "335i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 34,
+   "gain": 0,
+   "make": "BMW",
+   "model": "750iL",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2000
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 34,
+   "gain": 0,
+   "make": "BMW",
+   "model": "750iL",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2001
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "grille",
+    "headlights",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 32,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M3",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 31,
+   "gain": 0,
+   "make": "BMW",
+   "model": "ActiveHybrid 5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 31,
+   "gain": 0,
+   "make": "BMW",
+   "model": "ActiveHybrid 5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 31,
+   "gain": 0,
+   "make": "BMW",
+   "model": "ActiveHybrid 5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 30,
+   "gain": 0,
+   "make": "BMW",
+   "model": "Alpina B7",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 29,
+   "gain": 0,
+   "make": "BMW",
+   "model": "X4",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 28,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2000
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 28,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2001
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 28,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2002
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 28,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2003
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "window-regulator"
+   ],
+   "classes": 24,
+   "gain": 0,
+   "make": "BMW",
+   "model": "550i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "headlights",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 24,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "headlights",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 24,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "headlights",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 24,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 22,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M3",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "gauge-cluster",
+    "window-regulator"
+   ],
+   "classes": 22,
+   "gain": 0,
+   "make": "BMW",
+   "model": "X5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood"
+   ],
+   "classes": 20,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M3",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1997
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood"
+   ],
+   "classes": 20,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M3",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1998
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "fender",
+    "hood",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 0,
+   "make": "BMW",
+   "model": "640i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "fender",
+    "hood",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 0,
+   "make": "BMW",
+   "model": "640i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "fender",
+    "hood",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 0,
+   "make": "BMW",
+   "model": "650i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "fender",
+    "hood",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 0,
+   "make": "BMW",
+   "model": "650i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "fender",
+    "hood",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 0,
+   "make": "BMW",
+   "model": "650i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 17,
+   "gain": 0,
+   "make": "BMW",
+   "model": "328i GT xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 17,
+   "gain": 0,
+   "make": "BMW",
+   "model": "428i Gran Coupe",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 17,
+   "gain": 0,
+   "make": "BMW",
+   "model": "435i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 17,
+   "gain": 0,
+   "make": "BMW",
+   "model": "435i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "BMW",
+   "model": "320i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "BMW",
+   "model": "320i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "BMW",
+   "model": "328d",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "BMW",
+   "model": "328d",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "BMW",
+   "model": "328d",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "BMW",
+   "model": "328d xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "BMW",
+   "model": "328d xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "BMW",
+   "model": "328d xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "BMW",
+   "model": "328i xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "BMW",
+   "model": "340i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "BMW",
+   "model": "340i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "grille",
+    "headlights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M3",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "grille",
+    "headlights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M3",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M3",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M3",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M3",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "headlights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "headlights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "headlights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "headlights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights"
+   ],
+   "classes": 14,
+   "gain": 0,
+   "make": "BMW",
+   "model": "318i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1993
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights"
+   ],
+   "classes": 14,
+   "gain": 0,
+   "make": "BMW",
+   "model": "320i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1993
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights"
+   ],
+   "classes": 14,
+   "gain": 0,
+   "make": "BMW",
+   "model": "320i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1994
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights"
+   ],
+   "classes": 13,
+   "gain": 0,
+   "make": "BMW",
+   "model": "318is",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1996
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights"
+   ],
+   "classes": 13,
+   "gain": 0,
+   "make": "BMW",
+   "model": "318is",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1997
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights"
+   ],
+   "classes": 13,
+   "gain": 0,
+   "make": "BMW",
+   "model": "318is",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1998
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights"
+   ],
+   "classes": 13,
+   "gain": 0,
+   "make": "BMW",
+   "model": "318is",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1999
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M3",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1999
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights"
+   ],
+   "classes": 12,
+   "gain": 0,
+   "make": "BMW",
+   "model": "318is",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1992
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights"
+   ],
+   "classes": 12,
+   "gain": 0,
+   "make": "BMW",
+   "model": "318is",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1993
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "hood"
+   ],
+   "classes": 10,
+   "gain": 0,
+   "make": "BMW",
+   "model": "325is",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1992
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "hood"
+   ],
+   "classes": 10,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M3",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1995
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "hood"
+   ],
+   "classes": 10,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M3",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1996
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "BMW",
+   "model": "328is",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1996
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "BMW",
+   "model": "535i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1989
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "BMW",
+   "model": "535i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1991
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "BMW",
+   "model": "535i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1992
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "BMW",
+   "model": "535i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1993
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "BMW",
+   "model": "740Li",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "BMW",
+   "model": "740Li",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "BMW",
+   "model": "740Li",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "BMW",
+   "model": "740Li xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "BMW",
+   "model": "740Li xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "BMW",
+   "model": "750Li",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "BMW",
+   "model": "750Li",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "BMW",
+   "model": "750Li",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "BMW",
+   "model": "750Li xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "BMW",
+   "model": "750Li xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "BMW",
+   "model": "750Li xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "BMW",
+   "model": "760Li",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "BMW",
+   "model": "760Li",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "BMW",
+   "model": "760Li",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "BMW",
+   "model": "Alpina B7L",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "BMW",
+   "model": "Alpina B7L",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "BMW",
+   "model": "Alpina B7L",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "BMW",
+   "model": "Alpina B7L xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "BMW",
+   "model": "Alpina B7L xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "BMW",
+   "model": "Alpina B7L xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1991
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1992
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "trunk-lid"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M5",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1993
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "fender",
+    "headlights",
+    "hood"
+   ],
+   "classes": 7,
+   "gain": 0,
+   "make": "BMW",
+   "model": "318ti",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1997
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "fender",
+    "headlights",
+    "hood"
+   ],
+   "classes": 7,
+   "gain": 0,
+   "make": "BMW",
+   "model": "318ti",
+   "site": "www.bmwpartsdeal.com",
+   "year": 1998
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 7,
+   "gain": 0,
+   "make": "BMW",
+   "model": "750i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 7,
+   "gain": 0,
+   "make": "BMW",
+   "model": "750i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 7,
+   "gain": 0,
+   "make": "BMW",
+   "model": "Alpina B7",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 7,
+   "gain": 0,
+   "make": "BMW",
+   "model": "Alpina B7",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 7,
+   "gain": 0,
+   "make": "BMW",
+   "model": "Alpina B7",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 7,
+   "gain": 0,
+   "make": "BMW",
+   "model": "Alpina B7 xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "fender",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 7,
+   "gain": 0,
+   "make": "BMW",
+   "model": "Alpina B7 xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "BMW",
+   "model": "228i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "BMW",
+   "model": "230i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "BMW",
+   "model": "535i GT",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "BMW",
+   "model": "550i GT xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "BMW",
+   "model": "550i GT xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "BMW",
+   "model": "550i GT xDrive",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "BMW",
+   "model": "M235i",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "BMW",
+   "model": "X6",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "BMW",
+   "model": "X6",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "BMW",
+   "model": "X6",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "BMW",
+   "model": "X6",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2019
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "BMW",
+   "model": "Z4",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "BMW",
+   "model": "Z4",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "BMW",
+   "model": "Z4",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "BMW",
+   "model": "Z4",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "BMW",
+   "model": "Z4",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "BMW",
+   "model": "Z4",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "BMW",
+   "model": "Z4",
+   "site": "www.bmwpartsdeal.com",
+   "year": 2016
+  }
+ ],
+ "unrouted_makes": {}
+}

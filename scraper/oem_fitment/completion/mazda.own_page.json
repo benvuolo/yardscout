@@ -1,0 +1,1419 @@
+{
+ "as_of": "2026-11-05T12:14:17Z",
+ "built_on": "oem-raw@75dc442",
+ "kind": "own_page",
+ "note": "R3 input (CURATION_SPEC 3.2 R3, 5.16): vehicle-years left out of Likely candidate classes because their own page was never read; crawl.py --complete reads those pages and the curator re-checks them. Never shipped.",
+ "ns": "mazda",
+ "rows": [
+  {
+   "cars": 48,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 44,
+   "gain": 2112,
+   "make": "Mazda",
+   "model": "Protege",
+   "site": "www.mazdapartsnow.com",
+   "year": 2002
+  },
+  {
+   "cars": 30,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 45,
+   "gain": 1350,
+   "make": "Mazda",
+   "model": "Protege5",
+   "site": "www.mazdapartsnow.com",
+   "year": 2003
+  },
+  {
+   "cars": 29,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 40,
+   "gain": 1160,
+   "make": "Mazda",
+   "model": "Protege",
+   "site": "www.mazdapartsnow.com",
+   "year": 2001
+  },
+  {
+   "cars": 26,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 44,
+   "gain": 1144,
+   "make": "Mazda",
+   "model": "Protege5",
+   "site": "www.mazdapartsnow.com",
+   "year": 2002
+  },
+  {
+   "cars": 247,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 741,
+   "make": "Mazda",
+   "model": "Mazda3",
+   "site": "www.mazdapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 229,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 687,
+   "make": "Mazda",
+   "model": "Mazda3",
+   "site": "www.mazdapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 106,
+   "cats": [
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 530,
+   "make": "Mazda",
+   "model": "CX-7",
+   "site": "www.mazdapartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 176,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 528,
+   "make": "Mazda",
+   "model": "Mazda3",
+   "site": "www.mazdapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 34,
+   "cats": [
+    "door-front",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 15,
+   "gain": 510,
+   "make": "Mazda",
+   "model": "Protege",
+   "site": "www.mazdapartsnow.com",
+   "year": 2000
+  },
+  {
+   "cars": 251,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 502,
+   "make": "Mazda",
+   "model": "Mazda3",
+   "site": "www.mazdapartsnow.com",
+   "year": 2007
+  },
+  {
+   "cars": 91,
+   "cats": [
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 455,
+   "make": "Mazda",
+   "model": "CX-7",
+   "site": "www.mazdapartsnow.com",
+   "year": 2007
+  },
+  {
+   "cars": 89,
+   "cats": [
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 445,
+   "make": "Mazda",
+   "model": "CX-7",
+   "site": "www.mazdapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 84,
+   "cats": [
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 420,
+   "make": "Mazda",
+   "model": "CX-9",
+   "site": "www.mazdapartsnow.com",
+   "year": 2008
+  },
+  {
+   "cars": 26,
+   "cats": [
+    "door-front",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 15,
+   "gain": 390,
+   "make": "Mazda",
+   "model": "Protege",
+   "site": "www.mazdapartsnow.com",
+   "year": 1999
+  },
+  {
+   "cars": 97,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 388,
+   "make": "Mazda",
+   "model": "Mazda6",
+   "site": "www.mazdapartsnow.com",
+   "year": 2006
+  },
+  {
+   "cars": 188,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 376,
+   "make": "Mazda",
+   "model": "Mazda3",
+   "site": "www.mazdapartsnow.com",
+   "year": 2006
+  },
+  {
+   "cars": 111,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 333,
+   "make": "Mazda",
+   "model": "Mazda6",
+   "site": "www.mazdapartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 81,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 324,
+   "make": "Mazda",
+   "model": "Mazda6",
+   "site": "www.mazdapartsnow.com",
+   "year": 2008
+  },
+  {
+   "cars": 104,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 312,
+   "make": "Mazda",
+   "model": "Mazda6",
+   "site": "www.mazdapartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 102,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 306,
+   "make": "Mazda",
+   "model": "Mazda6",
+   "site": "www.mazdapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 76,
+   "cats": [
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 304,
+   "make": "Mazda",
+   "model": "Mazda5",
+   "site": "www.mazdapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 57,
+   "cats": [
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 285,
+   "make": "Mazda",
+   "model": "CX-7",
+   "site": "www.mazdapartsnow.com",
+   "year": 2008
+  },
+  {
+   "cars": 71,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 284,
+   "make": "Mazda",
+   "model": "CX-9",
+   "site": "www.mazdapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 65,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 260,
+   "make": "Mazda",
+   "model": "CX-9",
+   "site": "www.mazdapartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 61,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 244,
+   "make": "Mazda",
+   "model": "CX-9",
+   "site": "www.mazdapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 114,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 228,
+   "make": "Mazda",
+   "model": "Mazda3",
+   "site": "www.mazdapartsnow.com",
+   "year": 2005
+  },
+  {
+   "cars": 45,
+   "cats": [
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 225,
+   "make": "Mazda",
+   "model": "CX-9",
+   "site": "www.mazdapartsnow.com",
+   "year": 2007
+  },
+  {
+   "cars": 112,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 224,
+   "make": "Mazda",
+   "model": "Mazda3",
+   "site": "www.mazdapartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 106,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 212,
+   "make": "Mazda",
+   "model": "Mazda3",
+   "site": "www.mazdapartsnow.com",
+   "year": 2004
+  },
+  {
+   "cars": 106,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 212,
+   "make": "Mazda",
+   "model": "Mazda6",
+   "site": "www.mazdapartsnow.com",
+   "year": 2005
+  },
+  {
+   "cars": 103,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 206,
+   "make": "Mazda",
+   "model": "Mazda6",
+   "site": "www.mazdapartsnow.com",
+   "year": 2007
+  },
+  {
+   "cars": 97,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 194,
+   "make": "Mazda",
+   "model": "Mazda6",
+   "site": "www.mazdapartsnow.com",
+   "year": 2004
+  },
+  {
+   "cars": 53,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 159,
+   "make": "Mazda",
+   "model": "Mazda6",
+   "site": "www.mazdapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 31,
+   "cats": [
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 155,
+   "make": "Mazda",
+   "model": "CX-9",
+   "site": "www.mazdapartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 51,
+   "cats": [
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 153,
+   "make": "Mazda",
+   "model": "Mazda5",
+   "site": "www.mazdapartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 38,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 152,
+   "make": "Mazda",
+   "model": "CX-9",
+   "site": "www.mazdapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 29,
+   "cats": [
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 145,
+   "make": "Mazda",
+   "model": "CX-7",
+   "site": "www.mazdapartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 34,
+   "cats": [
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 136,
+   "make": "Mazda",
+   "model": "Mazda5",
+   "site": "www.mazdapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 45,
+   "cats": [
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 135,
+   "make": "Mazda",
+   "model": "Mazda5",
+   "site": "www.mazdapartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 30,
+   "cats": [
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 120,
+   "make": "Mazda",
+   "model": "Mazda5",
+   "site": "www.mazdapartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 40,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 120,
+   "make": "Mazda",
+   "model": "Mazda6",
+   "site": "www.mazdapartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 39,
+   "cats": [
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 117,
+   "make": "Mazda",
+   "model": "Mazda5",
+   "site": "www.mazdapartsnow.com",
+   "year": 2007
+  },
+  {
+   "cars": 29,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 116,
+   "make": "Mazda",
+   "model": "CX-9",
+   "site": "www.mazdapartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 38,
+   "cats": [
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 114,
+   "make": "Mazda",
+   "model": "Mazda5",
+   "site": "www.mazdapartsnow.com",
+   "year": 2006
+  },
+  {
+   "cars": 36,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 108,
+   "make": "Mazda",
+   "model": "Mazda2",
+   "site": "www.mazdapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 26,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 104,
+   "make": "Mazda",
+   "model": "CX-9",
+   "site": "www.mazdapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 34,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 102,
+   "make": "Mazda",
+   "model": "Mazda3",
+   "site": "www.mazdapartsnow.com",
+   "year": 2016
+  },
+  {
+   "cars": 51,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 102,
+   "make": "Mazda",
+   "model": "Mazda5",
+   "site": "www.mazdapartsnow.com",
+   "year": 2008
+  },
+  {
+   "cars": 32,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 96,
+   "make": "Mazda",
+   "model": "Mazda3",
+   "site": "www.mazdapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 47,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 94,
+   "make": "Mazda",
+   "model": "Mazda6",
+   "site": "www.mazdapartsnow.com",
+   "year": 2003
+  },
+  {
+   "cars": 23,
+   "cats": [
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 92,
+   "make": "Mazda",
+   "model": "CX-7",
+   "site": "www.mazdapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 28,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 84,
+   "make": "Mazda",
+   "model": "Mazda6",
+   "site": "www.mazdapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 28,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 84,
+   "make": "Mazda",
+   "model": "Mazda6",
+   "site": "www.mazdapartsnow.com",
+   "year": 2016
+  },
+  {
+   "cars": 27,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 81,
+   "make": "Mazda",
+   "model": "CX-5",
+   "site": "www.mazdapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 26,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 78,
+   "make": "Mazda",
+   "model": "CX-5",
+   "site": "www.mazdapartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 25,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 75,
+   "make": "Mazda",
+   "model": "Mazda6",
+   "site": "www.mazdapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 35,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 70,
+   "make": "Mazda",
+   "model": "RX-8",
+   "site": "www.mazdapartsnow.com",
+   "year": 2004
+  },
+  {
+   "cars": 20,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 60,
+   "make": "Mazda",
+   "model": "Mazda2",
+   "site": "www.mazdapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 17,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 51,
+   "make": "Mazda",
+   "model": "Mazda3",
+   "site": "www.mazdapartsnow.com",
+   "year": 2017
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 45,
+   "make": "Mazda",
+   "model": "CX-5",
+   "site": "www.mazdapartsnow.com",
+   "year": 2016
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 45,
+   "make": "Mazda",
+   "model": "Mazda2",
+   "site": "www.mazdapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 45,
+   "make": "Mazda",
+   "model": "Mazda3",
+   "site": "www.mazdapartsnow.com",
+   "year": 2018
+  },
+  {
+   "cars": 13,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 39,
+   "make": "Mazda",
+   "model": "CX-5",
+   "site": "www.mazdapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 13,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 39,
+   "make": "Mazda",
+   "model": "Mazda2",
+   "site": "www.mazdapartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 36,
+   "make": "Mazda",
+   "model": "Mazda6",
+   "site": "www.mazdapartsnow.com",
+   "year": 2017
+  },
+  {
+   "cars": 17,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 34,
+   "make": "Mazda",
+   "model": "RX-8",
+   "site": "www.mazdapartsnow.com",
+   "year": 2005
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 21,
+   "make": "Mazda",
+   "model": "Mazda5",
+   "site": "www.mazdapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 18,
+   "make": "Mazda",
+   "model": "CX-5",
+   "site": "www.mazdapartsnow.com",
+   "year": 2017
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 12,
+   "make": "Mazda",
+   "model": "CX-3",
+   "site": "www.mazdapartsnow.com",
+   "year": 2016
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 12,
+   "make": "Mazda",
+   "model": "RX-8",
+   "site": "www.mazdapartsnow.com",
+   "year": 2006
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 8,
+   "make": "Mazda",
+   "model": "CX-5",
+   "site": "www.mazdapartsnow.com",
+   "year": 2018
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 8,
+   "make": "Mazda",
+   "model": "CX-9",
+   "site": "www.mazdapartsnow.com",
+   "year": 2016
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 8,
+   "make": "Mazda",
+   "model": "RX-8",
+   "site": "www.mazdapartsnow.com",
+   "year": 2007
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 6,
+   "make": "Mazda",
+   "model": "CX-5",
+   "site": "www.mazdapartsnow.com",
+   "year": 2019
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 6,
+   "make": "Mazda",
+   "model": "CX-9",
+   "site": "www.mazdapartsnow.com",
+   "year": 2018
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 6,
+   "make": "Mazda",
+   "model": "Mazda6",
+   "site": "www.mazdapartsnow.com",
+   "year": 2018
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 5,
+   "make": "Mazda",
+   "model": "MPV",
+   "site": "www.mazdapartsnow.com",
+   "year": 1996
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "Mazda",
+   "model": "CX-5",
+   "site": "www.mazdapartsnow.com",
+   "year": 2021
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "Mazda",
+   "model": "CX-5",
+   "site": "www.mazdapartsnow.com",
+   "year": 2023
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "Mazda",
+   "model": "CX-9",
+   "site": "www.mazdapartsnow.com",
+   "year": 2017
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "Mazda",
+   "model": "CX-9",
+   "site": "www.mazdapartsnow.com",
+   "year": 2021
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "Mazda",
+   "model": "RX-8",
+   "site": "www.mazdapartsnow.com",
+   "year": 2008
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 3,
+   "make": "Mazda",
+   "model": "CX-3",
+   "site": "www.mazdapartsnow.com",
+   "year": 2018
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 3,
+   "make": "Mazda",
+   "model": "MPV",
+   "site": "www.mazdapartsnow.com",
+   "year": 1997
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Mazda",
+   "model": "CX-5",
+   "site": "www.mazdapartsnow.com",
+   "year": 2020
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Mazda",
+   "model": "CX-9",
+   "site": "www.mazdapartsnow.com",
+   "year": 2019
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Mazda",
+   "model": "RX-8",
+   "site": "www.mazdapartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Mazda",
+   "model": "RX-8",
+   "site": "www.mazdapartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 2,
+   "make": "Mazda",
+   "model": "MPV",
+   "site": "www.mazdapartsnow.com",
+   "year": 1992
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 1,
+   "make": "Mazda",
+   "model": "MPV",
+   "site": "www.mazdapartsnow.com",
+   "year": 1989
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 1,
+   "make": "Mazda",
+   "model": "MPV",
+   "site": "www.mazdapartsnow.com",
+   "year": 1991
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 1,
+   "make": "Mazda",
+   "model": "MPV",
+   "site": "www.mazdapartsnow.com",
+   "year": 1998
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 1,
+   "make": "Mazda",
+   "model": "MX-6",
+   "site": "www.mazdapartsnow.com",
+   "year": 1989
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 1,
+   "make": "Mazda",
+   "model": "MX-6",
+   "site": "www.mazdapartsnow.com",
+   "year": 1990
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 1,
+   "make": "Mazda",
+   "model": "MX-6",
+   "site": "www.mazdapartsnow.com",
+   "year": 1991
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 1,
+   "make": "Mazda",
+   "model": "MX-6",
+   "site": "www.mazdapartsnow.com",
+   "year": 1992
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 1,
+   "make": "Mazda",
+   "model": "Mazda6",
+   "site": "www.mazdapartsnow.com",
+   "year": 2021
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Mazda",
+   "model": "CX-3",
+   "site": "www.mazdapartsnow.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Mazda",
+   "model": "CX-3",
+   "site": "www.mazdapartsnow.com",
+   "year": 2019
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Mazda",
+   "model": "CX-3",
+   "site": "www.mazdapartsnow.com",
+   "year": 2020
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Mazda",
+   "model": "CX-3",
+   "site": "www.mazdapartsnow.com",
+   "year": 2021
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Mazda",
+   "model": "CX-5",
+   "site": "www.mazdapartsnow.com",
+   "year": 2022
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Mazda",
+   "model": "CX-5",
+   "site": "www.mazdapartsnow.com",
+   "year": 2024
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Mazda",
+   "model": "CX-5",
+   "site": "www.mazdapartsnow.com",
+   "year": 2025
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Mazda",
+   "model": "CX-9",
+   "site": "www.mazdapartsnow.com",
+   "year": 2020
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Mazda",
+   "model": "CX-9",
+   "site": "www.mazdapartsnow.com",
+   "year": 2022
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Mazda",
+   "model": "CX-9",
+   "site": "www.mazdapartsnow.com",
+   "year": 2023
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Mazda",
+   "model": "RX-8",
+   "site": "www.mazdapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Mazda",
+   "model": "MPV",
+   "site": "www.mazdapartsnow.com",
+   "year": 1990
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Mazda",
+   "model": "MPV",
+   "site": "www.mazdapartsnow.com",
+   "year": 1993
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Mazda",
+   "model": "MPV",
+   "site": "www.mazdapartsnow.com",
+   "year": 1995
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Mazda",
+   "model": "MX-6",
+   "site": "www.mazdapartsnow.com",
+   "year": 1988
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Mazda",
+   "model": "Mazda6",
+   "site": "www.mazdapartsnow.com",
+   "year": 2019
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Mazda",
+   "model": "Mazda6",
+   "site": "www.mazdapartsnow.com",
+   "year": 2020
+  }
+ ],
+ "unrouted_makes": {}
+}

@@ -2122,7 +2122,11 @@
      "cars": 66,
      "seed_year": 1981
     }
-   ]
+   ],
+   "complete": {
+    "file": "completion/ford.own_page.json",
+    "version": 1
+   }
   },
   "www.gmpartsgiant.com": {
    "cars": 78432,
@@ -4599,7 +4603,11 @@
      "cars": 34,
      "seed_year": 2017
     }
-   ]
+   ],
+   "complete": {
+    "file": "completion/gm.own_page.json",
+    "version": 1
+   }
   },
   "www.nissanpartsdeal.com": {
    "cars": 29587,
@@ -6098,7 +6106,11 @@
      "cars": 55,
      "seed_year": 1995
     }
-   ]
+   ],
+   "complete": {
+    "file": "completion/toyota.own_page.json",
+    "version": 1
+   }
   },
   "www.hyundaipartsdeal.com": {
    "cars": 12247,
@@ -6523,7 +6535,11 @@
      "cars": 54,
      "seed_year": 2012
     }
-   ]
+   ],
+   "complete": {
+    "file": "completion/hmg.own_page.json",
+    "version": 1
+   }
   },
   "www.acurapartswarehouse.com": {
    "cars": 4098,
@@ -7607,7 +7623,11 @@
     }
    ],
    "version": 2,
-   "version_note": "2026-11-05 v2: Dodge/Chrysler/Ram segments (copied from the moparpartsgiant worklist, same feed segments and seed years; Plymouth left out: no Plymouth fitment rows on this site). v1 (Jeep only) finished as raw/www.jeeppartsdeal.com.done, kept on oem-raw; v2 finishes as raw/www.jeeppartsdeal.com.v2.done (markers.py). Jeep seeds are skipped through progress.json done keys."
+   "version_note": "2026-11-05 v2: Dodge/Chrysler/Ram segments (copied from the moparpartsgiant worklist, same feed segments and seed years; Plymouth left out: no Plymouth fitment rows on this site). v1 (Jeep only) finished as raw/www.jeeppartsdeal.com.done, kept on oem-raw; v2 finishes as raw/www.jeeppartsdeal.com.v2.done (markers.py). Jeep seeds are skipped through progress.json done keys.",
+   "complete": {
+    "file": "completion/mopar.own_page.json",
+    "version": 1
+   }
   },
   "www.kiapartsnow.com": {
    "cars": 9530,
@@ -8032,7 +8052,11 @@
      "cars": 45,
      "seed_year": 2017
     }
-   ]
+   ],
+   "complete": {
+    "file": "completion/hmg.own_page.json",
+    "version": 1
+   }
   },
   "www.infinitipartsdeal.com": {
    "cars": 3383,
@@ -8682,7 +8706,11 @@
      "cars": 36,
      "seed_year": 2017
     }
-   ]
+   ],
+   "complete": {
+    "file": "completion/subaru.own_page.json",
+    "version": 1
+   }
   },
   "www.lexuspartsnow.com": {
    "cars": 3131,
@@ -8987,7 +9015,11 @@
      "cars": 16,
      "seed_year": 2002
     }
-   ]
+   ],
+   "complete": {
+    "file": "completion/toyota.own_page.json",
+    "version": 1
+   }
   },
   "www.audipartsgiant.com": {
    "cars": 2271,
@@ -9160,7 +9192,11 @@
      "cars": 15,
      "seed_year": 2016
     }
-   ]
+   ],
+   "complete": {
+    "file": "completion/vag.own_page.json",
+    "version": 1
+   }
   },
   "www.bmwpartsdeal.com": {
    "cars": 5353,
@@ -9693,7 +9729,11 @@
      "cars": 16,
      "seed_year": 2004
     }
-   ]
+   ],
+   "complete": {
+    "file": "completion/bmw.own_page.json",
+    "version": 1
+   }
   },
   "www.mazdapartsnow.com": {
    "cars": 6231,
@@ -10070,7 +10110,11 @@
      "cars": 17,
      "seed_year": 2017
     }
-   ]
+   ],
+   "complete": {
+    "file": "completion/mazda.own_page.json",
+    "version": 1
+   }
   },
   "www.mbpartsgiant.com": {
    "cars": 4710,
@@ -10675,7 +10719,11 @@
      "cars": 16,
      "seed_year": 1988
     }
-   ]
+   ],
+   "complete": {
+    "file": "completion/mb.own_page.json",
+    "version": 1
+   }
   },
   "www.mitsubishipartsgiant.com": {
    "cars": 2970,
@@ -10956,7 +11004,11 @@
      "cars": 26,
      "seed_year": 1992
     }
-   ]
+   ],
+   "complete": {
+    "file": "completion/mitsubishi.own_page.json",
+    "version": 1
+   }
   },
   "www.vwpartsgiant.com": {
    "cars": 6886,
@@ -11297,7 +11349,11 @@
      "cars": 20,
      "seed_year": 2016
     }
-   ]
+   ],
+   "complete": {
+    "file": "completion/vag.own_page.json",
+    "version": 1
+   }
   },
   "www.volvopartsgiant.com": {
    "cars": 2460,
@@ -11530,7 +11586,11 @@
      "cars": 15,
      "seed_year": 2012
     }
-   ]
+   ],
+   "complete": {
+    "file": "completion/volvo.own_page.json",
+    "version": 1
+   }
   }
  }
 }
