@@ -183,7 +183,7 @@ SLUG_RULES = {
 PRODUCT_RULES = {"door-front": r"\bfront\s+door\b", "door-rear": r"\brear\s+door\b",
                  # tier C: a "Motor" / "Front Motor" product page that does not say
                  # wiper is not taken (as on mazdapartsnow)
-                 "wiper-motor": r"^(?!.*\bwasher\b).*\bwiper\b"}
+                 "wiper-motor": r"^(?!.*\b(washer|bracket|frame|linkage)\b).*\bwiper\b"}
 
 
 _T = SlugCheckedSimplePart(SITE, URL_MAKE, MODEL_SLUGS, CAT_PAGES, RULES, oem_name_field="main",

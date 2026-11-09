@@ -110,7 +110,7 @@ PRODUCT_RULES = {
     "door-rear": r"\brear door\b",
     "window-switch": r"Position: Driver Side",
     # tier C: a bare "Motor" on a wiper page must be the wiper's, not the washer's
-    "wiper-motor": r"^(?!.*\bwasher\b).*\bwiper\b",
+    "wiper-motor": r"^(?!.*\b(washer|bracket|frame|linkage)\b).*\bwiper\b",
 }
 
 NOTES = {

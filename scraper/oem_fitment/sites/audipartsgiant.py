@@ -172,9 +172,14 @@ NOTES = {
                      "use position to tell the driver switch.",
 }
 
+# tier C: the product page must say wiper and must not be the frame/bracket
+# ("Front Motor | Motor" says neither; 8K1-955-023-E "Wiper Motor Assembly" is
+# "Bracket" on its own page)
+PRODUCT_RULES = {"wiper-motor": r"^(?!.*\b(washer|bracket|frame|linkage)\b).*\bwiper\b"}
+
 _T = SlugCheckedSimplePart(SITE, URL_MAKE, MODEL_SLUGS, CAT_PAGES, RULES, oem_name_field="main",
                            year_path="/{year}-{make}-{model}-parts", product_prefixes=("/genuine/",),
-                           category_notes=NOTES, slug_rules=SLUG_RULES)
+                           category_notes=NOTES, slug_rules=SLUG_RULES, product_rules=PRODUCT_RULES)
 
 
 def categories_for(make: str, model: str, year: int, cats: list[str]) -> dict[str, list[str]]:
