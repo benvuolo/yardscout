@@ -7637,12 +7637,14 @@
      "seed_year": 2004
     }
    ],
-   "version": 2,
+   "version": 4,
    "version_note": "2026-11-05 v2: Dodge/Chrysler/Ram segments (copied from the moparpartsgiant worklist, same feed segments and seed years; Plymouth left out: no Plymouth fitment rows on this site). v1 (Jeep only) finished as raw/www.jeeppartsdeal.com.done, kept on oem-raw; v2 finishes as raw/www.jeeppartsdeal.com.v2.done (markers.py). Jeep seeds are skipped through progress.json done keys.",
    "complete": {
     "file": "completion/mopar.own_page.json",
     "version": 1
-   }
+   },
+   "tierC": true,
+   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 4 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys)."
   },
   "www.kiapartsnow.com": {
    "cars": 9530,
