@@ -157,7 +157,7 @@ def resolve(cards: list) -> tuple[dict | None, str]:
 
 def load_raw(raw: str | None, raw_ref: str | None) -> tuple[list, str]:
     if raw_ref:
-        txt = subprocess.run(["git", "show", f"{raw_ref}:scraper/oem_fitment/{RAW_PATH}"], cwd=GA.REPO,
+        txt = subprocess.run(["git", "show", f"{raw_ref}:{RAW_PATH}"], cwd=GA.REPO,
                              capture_output=True, text=True, check=True).stdout
         sha = subprocess.run(["git", "rev-parse", raw_ref], cwd=GA.REPO, capture_output=True,
                              text=True, check=True).stdout.strip()
