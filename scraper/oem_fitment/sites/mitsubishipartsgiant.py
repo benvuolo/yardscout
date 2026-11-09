@@ -180,7 +180,10 @@ SLUG_RULES = {
 
 # door shells: the product page's Mitsubishi name decides front vs rear
 # ("Panel Assembly, Front Door, Left-Hand"); kept in `product_check`
-PRODUCT_RULES = {"door-front": r"\bfront\s+door\b", "door-rear": r"\brear\s+door\b"}
+PRODUCT_RULES = {"door-front": r"\bfront\s+door\b", "door-rear": r"\brear\s+door\b",
+                 # tier C: a "Motor" / "Front Motor" product page that does not say
+                 # wiper is not taken (as on mazdapartsnow)
+                 "wiper-motor": r"^(?!.*\bwasher\b).*\bwiper\b"}
 
 
 _T = SlugCheckedSimplePart(SITE, URL_MAKE, MODEL_SLUGS, CAT_PAGES, RULES, oem_name_field="main",
