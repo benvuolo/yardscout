@@ -9421,6 +9421,95 @@ INTERCHANGE_PART_CATEGORIES: dict[str, dict] = {
             "needs a spring compressor; a loaded strut (with spring) is the "
             "safer pull."],
         "rowWarn": "match front/rear and side; air, adaptive and sport units differ"},
+    # 2026-11-09 tier D wave 1 (owner: "parts people go to junkyards for";
+    # ops/interchange.md §10). Body kind: same-model-generation donors now,
+    # OEM catalog groups after their own §11.4. Several are options (sunroof,
+    # fog lights): a same-generation donor may not have one, so every row says
+    # check first. Interior parts are colour- and trim-specific. priceTokens
+    # are EXACT rows from the yards' lists (2026-11-09); bare substrings
+    # would quote a shade, a bezel, a console lid or a resistor.
+    "sunroof": {
+        "label": "Sunroof (glass / motor)", "kind": "body",
+        "tokens": ["sunroof glass + motor", "sunroof assembly", "sunroof motor + glass",
+                   "panoramic sunroof assembly", "panoramic roof assembly"],
+        "priceTokens": [
+            "=sunroof assy", "=sunroof assembly", "=sun roof assembly", "=sun roof assy",
+            "=sunroof assm.", "=sun roof assm.", "=sunroof complete", "=sunroof assym comp.",
+            "=sunroof assy+motor", "=sunroof w/motor", "=sunroof assembly electric",
+            "=sunroof assy-power", "=sun roof (power)", "=sunroof - power", "=sunroof electric",
+            "=sunroof/cover/shade assembly w/motor", "=top - sunroof frame with glass",
+            "=sunroof glass", "=sun roof glass", "=sunroof glass only", "=glass - sunroof",
+            "=glass sunroof", "=roof glass (sun roof)", "=top - sunroof glass only",
+            "=sunroof motor", "=sun roof motor", "=sunroof mtr", "=motor - sun roof",
+            "=top motor, sunroof", "=sunroof motor assembly", "=sunroof"],
+        "notes": [
+            "A sunroof is an option: look up at the donor's roof before you "
+            "drive. Standard and panoramic roofs, and power and manual units, "
+            "are different parts.",
+            "Pull the glass and the motor together if you can. Check the "
+            "glass for chips and the tracks for broken guides; a clogged "
+            "drain tube means water damage inside."],
+        "rowWarn": "check the donor has a sunroof; standard, panoramic and manual units differ"},
+    "center-console": {
+        "label": "Center console", "kind": "body",
+        "tokens": ["center console ("],
+        "priceTokens": [
+            "=center console", "=console (center)", "=console floor", "=console (any)",
+            "=console ( any)", "=console", "=console bare", "=center console small",
+            "=center console large", "=console (small)", "=console (sm)", "=console small",
+            "=console - small", "=console (med)", "=console medium", "=console (large)",
+            "=console (lg)", "=console large", "=console - large", "=console (xlarge)",
+            "=console short", "=console long"],
+        "notes": [
+            "Consoles split by colour, by trim (leather, wood, shifter type) "
+            "and by automatic vs manual, and some carry climate or seat "
+            "switches. Match the colour and the shifter opening.",
+            "Check the lid hinge and latch: a broken lid is the common "
+            "failure. Overhead consoles are a different part."],
+        "rowWarn": "match the colour and the shifter opening (automatic vs manual)"},
+    "door-panel": {
+        "label": "Door panel (interior trim)", "kind": "body",
+        "tokens": ["door panels / interior trim", "interior door panels"],
+        "priceTokens": [
+            "=interior door panel", "=door panel (interior)", "=door panel (interior) g2",
+            "=int. door panel", "=int door panel", "=door trim panel", "=door trim panel(w/o acce)",
+            "=door panel", "=door panel complete", "=door panel bare", "=door panel (bare)",
+            "=door panel - bare", "=door panel front (bare)", "=door panel w/o switc",
+            "=door panel- no switches", "=interior door panel with master switch"],
+        "notes": [
+            "Door panels split by colour, by trim (cloth, leather, wood) and "
+            "by power vs manual windows, and front panels differ from rear. "
+            "Match the colour, the switch cut-outs and the speaker size.",
+            "Clips break on removal: bring a trim tool and spare clips. "
+            "Leave the switches and speakers in unless the yard prices them "
+            "separately."],
+        "rowWarn": "match the colour, the switch cut-outs and front vs rear"},
+    "blower-motor": {
+        "label": "Blower motor (heater fan)", "kind": "body",
+        "tokens": ["blower motor"],
+        "priceTokens": [
+            "=heater blower motor", "=blower motor", "=a/c blower motor", "=blower motor-heater",
+            "=motor - blower w/fan", "=motor blower w/o fan", "=blower motor w housi"],
+        "notes": [
+            "Blower motors split by climate system (manual vs automatic) and "
+            "on some cars by front vs rear (vans and SUVs with rear air). "
+            "Match the connector and the fan wheel.",
+            "Spin the fan by hand: it should turn freely and quietly. The "
+            "resistor or control module is a separate part."],
+        "rowWarn": "match the connector and the fan wheel; rear-air units differ"},
+    "fog-lights": {
+        "label": "Fog lights", "kind": "body",
+        "tokens": ["fog lights + bezels", "oem fog lights"],
+        "priceTokens": [
+            "=fog light", "=fog lamp", "=foglight", "=foglamp", "=fog lights",
+            "=fog lamp (each)", "=fog lamps each", "=fog lamp-each"],
+        "notes": [
+            "Fog lights are often a trim option, and facelifts change the "
+            "lamp and the bumper opening. Check the donor has them and "
+            "match left and right.",
+            "Check the lens for cracks and the housing for water inside. "
+            "Bezels and brackets are often separate."],
+        "rowWarn": "check the donor has fog lights; match the side and the bumper opening"},
 }
 
 # Default caveat lines — families override where the family has a sharper one.
