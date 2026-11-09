@@ -2569,6 +2569,32 @@ Other outputs of this session:
     (0 Verified), second subaru curate byte-identical, test_groups_hash
     passes.
 
+### 10. Tier D — junkyard-demand categories (owner 2026-11-09 ~23:00 UTC; hub plan ack 22:54)
+- Owner: "think of parts people go to junkyards for. It wont be brake pads, its more likely other items."
+- Ranking (yard price lists: chains pricing it out of 30 x median low price):
+  1. rear-seat 21/$40
+  2. sunroof 22/$31.8
+  3. center-console 26/$19.5
+  4. door-panel 25/$18
+  5. blower-motor 25/$18
+  6. backup-camera 14/$22.5
+  7. fog-lights 27/$11
+  8. door-handle-ext 19/$12
+  9. door-lock-actuator 18/$11.5
+  10. door-handle-int 14/$8.7
+  11. tailgate-handle 5/$10.5
+
+  pf/ search counts are too thin to weigh.
+- Wave 1 (TIERS["D"], 8dbbe67): sunroof, center-console, door-panel (interior trim), blower-motor,
+  fog-lights. Wave 2: door handles, lock actuator, backup camera, tailgate handle.
+- rear-seat waits for an airbag rule. Seats can carry side airbags, and anything with an airbag is never included.
+- Honda/Acura/Nissan/Infiniti tier D: left to session_016ZzJfMtLKpUFu8TiEFMrkF after its R3 work (hub).
+  Ids, Honda slugs and method sent 22:57 UTC.
+- Rules: interior categories keep colour/trim words in the name. A row naming an airbag is excluded.
+  Worklist version = one above every tier already flagged.
+- Tier C priority: wiper-motor curation and §11.4 next, once honda/toyota/nissan have C data.
+  Knuckle and strut audits are last.
+
 ## Aftermarket breadth (session_016ZzJfMnemMEFN88kPnYgxs, 2026-11-09)
 
 Scope: more aftermarket application catalogs (owner: breadth + data
