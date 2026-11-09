@@ -4,6 +4,8 @@ Each case asserts the groups and the exact open reason. R = real lines from
 oem-raw (fixtures/real, provenance.json); manifests (R1/R2) are synthetic
 fixtures that follow the spec exactly, because the crawler has written none."""
 import copy
+from pathlib import Path
+import tempfile
 import json
 import random
 from datetime import datetime, timedelta, timezone
@@ -290,7 +292,36 @@ check("12 exterior hold: Patriot + Caliber headlamp is held, not shipped",
 check("12 exterior hold: refusal held_exterior_cross_model, entry carries note and record URLs",
       any(r["reason"] == "held_exterior_cross_model" and r["pn"] == "5303999ZZ" for r in cur.refusals)
       and h12[0]["urls"] and h12[0]["note"].startswith("Mopar catalog lists #5303999ZZ"), str(h12)[:300])
+# §5.16 release allowlist (2026-11-09): an exact (ns, cat, pn, apps) entry
+# releases a held group; a differing entry, or a withheld namespace, does not
 import policy as _P  # noqa: E402
+_apps12 = h12[0]["apps"]
+_rel = Path(tempfile.mkdtemp()) / "allow.json"
+
+
+def _with_allow(entries):
+    _rel.write_text(json.dumps({"groups": entries}))
+    old = _P.RELEASE_ALLOWLIST_PATH
+    _P.RELEASE_ALLOWLIST_PATH = _rel
+    try:
+        return run("mopar", {f"raw/{JEEP}.jsonl": [ag, hl], f"raw/{JEEP}.lists.jsonl": [lm_cal]})
+    finally:
+        _P.RELEASE_ALLOWLIST_PATH = old
+
+
+c_ok, d_ok = _with_allow([{"ns": "mopar", "cat": "headlights", "pn": ["5303999ZZ"], "apps": _apps12}])
+check("12 allowlist: an exact entry releases the held headlamp into Likely",
+      any("5303999ZZ" in g["pn"] for g in d_ok["likely"]) and not any("5303999ZZ" in h["pn"] for h in c_ok.held_exterior))
+_bad = [list(a) for a in _apps12]
+_bad[0][3] += 1
+c_no, d_no = _with_allow([{"ns": "mopar", "cat": "headlights", "pn": ["5303999ZZ"], "apps": _bad}])
+check("12 allowlist: an entry whose apps differ by one year leaves it held",
+      not any("5303999ZZ" in g["pn"] for g in d_no["likely"]) and any("5303999ZZ" in h["pn"] for h in c_no.held_exterior))
+c_ns, d_ns = _with_allow([{"ns": "subaru", "cat": "headlights", "pn": ["5303999ZZ"], "apps": _apps12}])
+check("12 allowlist: a withheld namespace's entry never releases (and the wrong ns does not match)",
+      not any("5303999ZZ" in g["pn"] for g in d_ns["likely"]) and _P.release_allowlist(_rel) == set())
+check("12 allowlist: the committed allowlist is part of the policy hash",
+      "release_allowlist.json" in _P.POLICY_INPUTS)
 check("12 base model: Camry / Camry Hybrid and RX 350 / RX 450h stay together; Grand Caravan = Caravan",
       _P.base_model("Toyota", "Camry") == _P.base_model("Toyota", "Camry Hybrid")
       and _P.base_model("Lexus", "RX 350") == _P.base_model("Lexus", "RX 450h")

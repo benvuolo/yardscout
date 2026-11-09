@@ -1,0 +1,5 @@
+{
+ "note": "Exterior-hold release allowlist (CURATION_SPEC 5.16). A held Likely group is released only when (ns, cat, pn, apps) matches an entry exactly and the group still passes every other rule. Entries are added only on an owner go recorded in ops/hub.md. Hashed into policy_sha256 (policy.POLICY_INPUTS).",
+ "owner_go": null,
+ "groups": []
+}

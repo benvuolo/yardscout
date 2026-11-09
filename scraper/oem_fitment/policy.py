@@ -67,6 +67,30 @@ EXTERIOR_HOLD_CATS = frozenset({"bumper-front", "bumper-rear", "grille", "headli
                                 "hood", "door-front", "door-rear", "liftgate", "tailgate", "trunk-lid"})
 
 
+# Namespaces withheld from shipping (2026-11-09, ops/interchange.md): their
+# held groups are never released by the allowlist.
+WITHHELD_NS = frozenset({"subaru"})
+# §5.16 release allowlist: exact (ns, cat, pn, apps) entries let a held group
+# through the exterior hold; OEM_RELEASE_ALLOWLIST (tests only) points at
+# another file with the same layout.
+RELEASE_ALLOWLIST_PATH = _Path(__import__("os").environ.get("OEM_RELEASE_ALLOWLIST")
+                               or (_HERE / "release_allowlist.json"))
+
+
+def release_allowlist(path=None) -> set:
+    """{(ns, cat, (pn, ...), ((make, model, lo, hi), ...))} of released held groups."""
+    import json
+    p = _Path(path) if path else RELEASE_ALLOWLIST_PATH
+    if not p.exists():
+        return set()
+    out = set()
+    for g in json.loads(p.read_text()).get("groups") or []:
+        if g.get("ns") in WITHHELD_NS:
+            continue
+        out.add((g["ns"], g["cat"], tuple(sorted(g["pn"])), tuple(tuple(a) for a in g["apps"])))
+    return out
+
+
 def base_model(make: str, model: str) -> tuple:
     words = (model or "").split()
     if len(words) > 1 and words[0].lower() in ("grand", "super"):
@@ -190,7 +214,7 @@ CATEGORY_STATUS: dict[str, dict[str, dict]] = load_category_status()
 
 # §4.1 policy_sha256: the curation policy a groups file was curated under.
 # audits.json is deliberately not an input (see CATEGORY_STATUS above).
-POLICY_INPUTS = ("policy.py", "notes.py", "positions.py", "model_map.json")
+POLICY_INPUTS = ("policy.py", "notes.py", "positions.py", "model_map.json", "release_allowlist.json")
 
 
 def tree_sha256(model_map_path=None) -> str:
