@@ -2592,6 +2592,14 @@ Other outputs of this session:
   Ids, Honda slugs and method sent 22:57 UTC.
 - Rules: interior categories keep colour/trim words in the name. A row naming an airbag is excluded.
   Worklist version = one above every tier already flagged.
+- 22:55 UTC: local tier D list trials STOPPED after ~2 min. Run 42684614492 was crawling
+  gm/mb/hyundai/kia, and local lanes on the same domains double the paced rate. No refusal was
+  logged. Every site has CI work pending (markers.mode crawl/complete), so local trials wait
+  for the hub's choice: (a) per site once its mode is None, (b) between runs, or
+  (c) placeholder flags so CI reads the rows.
+- Branch interchange/categories-2 (a6e5b04, stacked on categories-1, sw jh-v175, NOT merged):
+  wave 1 app categories, body kind. Price tokens are exact rows (25-27/30 chains); notes cover
+  colour, trim and option fitment.
 - Tier C priority: wiper-motor curation and §11.4 next, once honda/toyota/nissan have C data.
   Knuckle and strut audits are last.
 
