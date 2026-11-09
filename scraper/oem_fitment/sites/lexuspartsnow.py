@@ -85,7 +85,8 @@ SUBCATS = {
     "liftgate": r"^back_door_panel_glass$",
     # tier C (§8): subs from the R2 years manifest
     "wiper-motor": r"^windshield_wiper$|^rear_wiper$",
-    "knuckle": r"^front_axle_arm_steering_knuckle$|^rear_axle_shaft_hub$",
+    # the rear axle carrier is printed on the rear spring/shock page (2007 RX 350)
+    "knuckle": r"^front_axle_arm_steering_knuckle$|^rear_axle_shaft_hub$|^rear_spring_shock_absorber$",
     "strut": r"^(front|rear)_spring_shock_absorber$",
 }
 
@@ -136,10 +137,15 @@ RULES = {
                   r"trim|cushion|weatherstrip|lock|hinge|torsion|garnish|spoiler|lamp|emblem|stay|molding|moulding|inner|outer"),
     "liftgate": (rf"^panel\s+sub-{A},?\s*back\s+door|^door\s+sub-{A},?\s*back|^back\s+door\s+(panel\s+)?sub-{A}",
                  r"handle|hinge|lock|glass|weather|stay|motor|spoiler|lamp|trim|garnish|emblem|outer|outside|inner|board|cover"),
-    # tier C: name rule pending (written after reading the trial's list rows)
-    "wiper-motor": (r"(?!x)x", r"x^"),
-    "knuckle": (r"(?!x)x", r"x^"),
-    "strut": (r"(?!x)x", r"x^"),
+    # tier C, RX trial rows: "Motor Assy, Windshield Wiper" / "Rear Wiper",
+    # "Knuckle, Steering, LH", "Carrier Sub-Assy, Rear Axle, LH", "Absorber
+    # Assy, Shock, Front LH"
+    "wiper-motor": (rf"^motor\s+{A},?\s*(front|rear|windshield)?\s*wiper\b",
+                    r"washer|pump|link|arm|blade|cap|cover|relay|switch"),
+    "knuckle": (rf"^knuckle,?\s*steering\b|^carrier\s+(sub-)?{A},?\s*rear(\s+axle)?\b",
+                r"differential|bearing|hub|bolt|nut|cover|seal|arm|rod|bush"),
+    "strut": (rf"^absorber\s+({A}|set),?\s*shock\b",
+              r"support|mount|bumper|bound|cover|insulator|spring|cushion|kit|rod|bracket|cap|bearing|collar"),
 }
 # excludes match at a word start ("ring" must not hit "steering")
 RULES = {k: (re.compile(inc, re.I), re.compile(rf"\b(?:{exc})", re.I)) for k, (inc, exc) in RULES.items()}
