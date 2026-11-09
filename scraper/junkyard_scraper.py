@@ -17825,6 +17825,7 @@ def fetch_ruperts_inventory() -> list[dict]:
     _indep_cache_raw("ruperts_inventory.html", page.encode())
 
     vehicles: list[dict] = []
+    grid_photos = _yardsmart_grid_codes(page, "ruperts")
     for block in _RUPERTS_ROW_RE.findall(page):
         cells = _FENIX_TD_RE.findall(block)
         if len(cells) < 8:
@@ -17853,7 +17854,7 @@ def fetch_ruperts_inventory() -> list[dict]:
             "model": _utpap_format_label(model),
             "row": row_n,
             "dateAdded": date_iso,
-            "_photo": _yardsmart_photo_code(block, "ruperts"),
+            "_photo": _yardsmart_photo_code(block, "ruperts") or grid_photos.get(stock, ""),
             "_location": RUPERTS_YARD["name"],
             "_city": RUPERTS_YARD["city"],
             "_state": RUPERTS_YARD["state"],
@@ -20201,6 +20202,26 @@ _YARDSMART_REP_RE = re.compile(
     r"[A-Za-z0-9=_-]{20,400}--([0-9a-f]{40})(?:\\?/)")
 
 
+# Some yardconnect sites (Rupert's, Chuck & Eddie's, Robertson's) show a
+# generic icon in the table row and keep each car's photo in the page's
+# hidden grid view: <div class="yardconnect-vehicle-card-img ..."
+# data-stock-number="..."> <img src=".../representations/redirect/...">.
+_YARDCONNECT_GRID_RE = re.compile(
+    r'yardconnect-vehicle-card-img[^"]*"[^>]*data-stock-number="([^"]+)"[^>]*>\s*<img[^>]*src="([^"]+)"')
+
+
+def _yardsmart_grid_codes(page: str, source: str, now: datetime | None = None) -> dict:
+    """{stock: code} from the hidden grid cards (first photo per stock)."""
+    out: dict = {}
+    for stock, src in _YARDCONNECT_GRID_RE.findall(page or ""):
+        stock = stock.strip()
+        if stock and stock not in out:
+            code = _yardsmart_photo_code(src, source, now=now)
+            if code:
+                out[stock] = code
+    return out
+
+
 def _yardsmart_photo_code(block: str, source: str | None = None, now: datetime | None = None,
                           *, sid: str | None = None) -> str:
     sid = sid or YARDSMART_SITE_IDS.get(source or "")
@@ -20338,6 +20359,7 @@ def fetch_yardconnect_site(source: str) -> list[dict]:
         if not {"make", "model", "year", "date"} <= set(header_keys):
             header_keys = []  # unexpected/missing header → positional fallback
         lot_tag = yard.get("lot") or ""
+        grid_photos = _yardsmart_grid_codes(page, source)
         for block in _YARDCONNECT_ROW_RE.findall(page):
             raw_cells = _FENIX_TD_RE.findall(block)
             cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip() for c in raw_cells]
@@ -20378,7 +20400,8 @@ def fetch_yardconnect_site(source: str) -> list[dict]:
                 "dateAdded": date_iso,
                 **({"_color": color_s.title()} if color_s else {}),
                 **({"_engine": engine_s} if engine_s else {}),
-                "_photo": _yardsmart_photo_code(block, source),
+                "_photo": (_yardsmart_photo_code(block, source)
+                           or (grid_photos.get(sm.group(1).strip()) if sm else "") or ""),
                 "_location": yard["name"],
                 "_city": yard["city"],
                 "_state": yard["state"],

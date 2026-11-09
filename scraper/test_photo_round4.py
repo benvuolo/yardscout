@@ -148,6 +148,14 @@ check("Army's blob -> thumbnail code", js._yardsmart_photo_code(
     "https://api.yardsmartapp.com/rails/active_storage/blobs/redirect/" + blob(None) + "--" + D + "/a.jpg",
     "armys", now=NOW).startswith("yam1"))
 
+GRID = ('<td class="thumbnail"><img src="https://rupertsupullit.com/wp-content/uploads/2024/10/img-yardconnect-pro-thumb.webp" data-stock-number="000000000444"></td>'
+        '<div id="yardconnect-vehicles-grid" style="display: none"><div class="yardconnect-vehicle-card">'
+        '<div class="yardconnect-vehicle-card-img custom-gallery " data-vehicle-id="1" data-stock-number="000000000444"> '
+        + rep(blob(None)) + '</div></div>')
+g = js._yardsmart_grid_codes(GRID, "ruperts", now=NOW)
+check("yardconnect hidden grid: photo by stock number", list(g) == ["000000000444"] and g["000000000444"].startswith("yru1"), g)
+check("yardconnect row icon alone -> no code", js._yardsmart_photo_code(GRID.split("<div id=")[0], "ruperts", now=NOW) == "")
+
 # --- shared lookup cache -------------------------------------------------------------
 with tempfile.TemporaryDirectory() as td:
     db.DB_FILE = Path(td) / "h.db"
