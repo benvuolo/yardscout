@@ -158,3 +158,11 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
   - Hub policy under it: a new make or category ships once its CURATION_SPEC §11.4 sample has 0 WRONG. The hub confirms each and tells the owner as it goes live, so there's no per-namespace wait.
   - Paid sources and licences stay out.
   - Added session_016ZzJfKqBWhtUcqYMMseVgn (make breadth + Subaru) and session_016ZzJfKdkBXaVYDDQb9cy2J (categories + coverage matrix). See the ops/README exception.
+- 18:50 UTC: aftermarket probe results.
+  - OUT: Depo (challenge), Four Seasons (403), SMP/ACI (403), Cardone (robots, client-side).
+  - Spectra Premium passes robots, has no challenge on catalog pages, and no anti-automation clause. Two issues are HELD for the owner:
+    (1) fetch.py's CHALLENGE_RE trips on the inert reCAPTCHA script include on every ecat page. An exemption would loosen our bot-check detector, so it's the owner's call under CLAUDE.md rule 2.
+    (2) Their Legal Notice has a no-reproduction clause. We would store facts only.
+  - Not crawled; fetch.py unchanged.
+- 18:47 UTC: make-breadth pushed rules 1-3 (7192563). GM went 309→279 (30 removed, 3 lose apps, 11 gain cab notes). These were live wrong or uncertain claims: GMT800/900 regulators and EXPORT-coded mirrors. Hub verified oemStatus ok x8 and test_groups_hash.
+- 18:40 UTC: same-engine relabel merged (080e1061, sw jh-v171).
