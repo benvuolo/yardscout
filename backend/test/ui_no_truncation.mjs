@@ -118,7 +118,7 @@ const CHECK_FN = () => {
   const snippet = (t) => t.replace(/\s+/g, ' ').trim().slice(0, 60);
   const add = (kind, el, text, extra = '') => out.push({ kind, el: desc(el), ctx: ctxOf(el), text: snippet(text || el.textContent || ''), extra });
   // A full-screen page (the car screen) covers everything under it.
-  const cover = document.querySelector('#photo-viewer.open') || document.querySelector('#car-detail.open');
+  const cover = document.querySelector('#photo-viewer.open') || document.querySelector('#car-detail.open') || document.querySelector('#yard-rows.open');
   const covered = (el) => cover && !cover.contains(el) && !el.closest('#upgrade-sheet, #saved-sheet, #prices-sheet, .watch-toast');
   const visible = (el) => !covered(el) && (el.checkVisibility ? el.checkVisibility({ opacityProperty: true, visibilityProperty: true }) : !!el.getClientRects().length);
   const fixedAnc = memo((el) => (!el || el === document.body) ? null : (CS(el).position === 'fixed' ? el : fixedAnc(el.parentElement)));
@@ -471,6 +471,68 @@ const SCREENS = [
     await page.waitForFunction(() => [...document.querySelectorAll('#live-grid .car-card img')].slice(0, 1).every(im => im.complete), null, { timeout: 15000 }).catch(() => {});
     await settle(page, 1200);
   }, async (page) => { await page.evaluate(() => { window.__shotClip = null; const sel = document.getElementById('live-filter-location'); sel.value = ''; for (const [k, v] of window.__fxOrig || []) { if (v === undefined) delete vehicleExtras[k]; else vehicleExtras[k] = v; } renderLive(); }); await resetUi(page); }],
+  // Lot Map: walk one yard by row (free, Pro, and with pull-sheet cars and a
+  // watch match marked), the yards map with pins (MapLibre + OpenFreeMap),
+  // a yard's sheet from a pin, and the schematic fallback.
+  ...[['yard-rows', false, false], ['yard-rows-pro', true, false], ['yard-rows-marked', false, true]].map(([name, pro, marked]) => [name, async (page) => {
+    if (pro) await page.evaluate(() => { localStorage.setItem('jh_pro', '1'); applyProGates(); });
+    await tab(page, 'yards');
+    await page.evaluate((marked) => {
+      setYardsView('list'); renderYards();
+      const card = document.querySelector('#yards-grid .yard-card[data-loc]');
+      if (!card) throw new Error('no yard card');
+      const loc = card.dataset.loc;
+      if (marked) {
+        const cars = liveInventory.filter(v => v.location === loc && v.row).slice(0, 40);
+        window.__fxSaved = cars.slice(3, 5).map(v => vehicleKey(v));
+        for (const k of window.__fxSaved) if (!savedCars[k]) toggleSaved(k);
+        const w = cars[0];
+        window.__fxWatch = new Date().toISOString() + '~yardrows';
+        saveWatchlist([...loadWatchlist(), { make: w.make, model: w.model, yrMin: null, yrMax: null, matchOnly: false, radiusMi: 100, addedAt: window.__fxWatch }]);
+      }
+      card.querySelector('.yard-walk-btn').click();
+      const box = document.getElementById('yard-rows-body');
+      if (!document.querySelector('#yard-rows.open') || !box.querySelector('.yr-row')) throw new Error('row view did not open');
+      if (marked && (!box.querySelector('.yr-item.is-pull') || !box.querySelector('.yr-item.is-watch'))) throw new Error('pull-sheet / watch cars not marked');
+      const heads = [...box.querySelectorAll('.yr-row-plate')].map(e => e.textContent.replace('Row', '').trim()).filter(r => r !== '?');
+      const sorted = [...heads].sort(compareRows);
+      if (heads.join('|') !== sorted.join('|')) throw new Error('rows not in number order: ' + heads.slice(0, 8).join(','));
+      if (!localStorage.getItem('jh_pro') && /\$\d/.test(box.textContent)) throw new Error('a value leaked to a free user');
+      if (!localStorage.getItem('jh_pro') && !box.querySelector('.yr-pro.pro-box')) throw new Error('free: no Pro box');
+      if (marked) { const first = box.querySelector('.yr-item.is-pull, .yr-item.is-watch'); const sec = first.closest('.yr-row'); document.getElementById('yard-rows-scroll').scrollTop = sec.offsetTop - 70; }
+    }, marked);
+    await settle(page, 600);
+  }, async (page) => {
+    await page.evaluate(() => {
+      hideYardRows();
+      for (const k of window.__fxSaved || []) if (savedCars[k]) toggleSaved(k);
+      if (window.__fxWatch) saveWatchlist(loadWatchlist().filter(e => e.addedAt !== window.__fxWatch));
+      window.__fxSaved = null; window.__fxWatch = null;
+      localStorage.removeItem('jh_pro'); applyProGates();
+    });
+    await resetUi(page);
+  }]),
+  ...[['yards-map', 'gl'], ['yards-map-sheet', 'sheet'], ['yards-map-schematic', 'schematic']].map(([name, mode]) => [name, async (page) => {
+    await tab(page, 'yards');
+    await page.evaluate(() => setYardsView('map'));
+    if (mode === 'schematic') {
+      await page.evaluate(() => renderSchematicMap((getYardsView().shown || []).filter(y => y.lat != null), 'Map tiles couldn\u2019t load, so yards are shown by position only. The row view works offline.'));
+    } else {
+      await page.waitForFunction(() => window._yardsMap && _yardsMap.loaded() && document.querySelector('#yards-map .map-pin'), null, { timeout: 30000 });
+      await page.waitForFunction(() => _yardsMap.areTilesLoaded(), null, { timeout: 30000 }).catch(() => {});
+    }
+    await page.evaluate((mode) => {
+      if (!document.querySelector('#yards-map .map-pin')) throw new Error('no pins');
+      if (mode === 'gl' && !/OpenStreetMap/.test(document.querySelector('#yards-map').textContent)) throw new Error('no map attribution');
+      if (mode !== 'gl') {
+        const pin = document.querySelector('#yards-map .map-pin:not(.map-cluster)');
+        selectMapYard(pin.dataset.loc);
+        if (!document.querySelector('#yards-map-sheet .map-walk')) throw new Error('no yard sheet');
+        document.getElementById('yards-map-sheet').scrollIntoView({ block: 'end' });
+      } else window.scrollTo(0, document.getElementById('yards-map').getBoundingClientRect().top + scrollY - 140);
+    }, mode);
+    await settle(page, 800);
+  }, async (page) => { await page.evaluate(() => { _mapSheetLoc = null; setYardsView('list'); }); await resetUi(page); }]),
   ['photo-viewer', async (page) => {
     await tab(page, 'live');
     await page.evaluate(() => { const k = photoCarKey('p'); openCarDetail(k); openPhotoViewer(k); });
@@ -695,7 +757,7 @@ try {
     // shape every line break; the zip lookup is answered locally.
     // Chain photo hosts load for real (the photo boxes are measured with
     // their images); everything else stays blocked.
-    await page.route(/^https?:\/\/(?!127\.0\.0\.1|fonts\.googleapis\.com|fonts\.gstatic\.com|cdn\.pypapps\.com|storage\.googleapis\.com|www\.kikersupullit\.com|ik\.imagekit\.io|cdn\.shopify\.com|cdn\.row52\.com)/, (route) => route.abort());
+    await page.route(/^https?:\/\/(?!127\.0\.0\.1|fonts\.googleapis\.com|fonts\.gstatic\.com|cdn\.pypapps\.com|storage\.googleapis\.com|www\.kikersupullit\.com|ik\.imagekit\.io|cdn\.shopify\.com|cdn\.row52\.com|unpkg\.com|tiles\.openfreemap\.org)/, (route) => route.abort());
     // A heavy source's camera original, answered locally (no 4 MB download).
     await page.route(/^https:\/\/inventory\.sturtevantauto\.com\//, (route) => route.fulfill({ contentType: 'image/png', body: fs.readFileSync(path.join(ROOT, 'docs/icon-512.png')) }));
     // Published photo switch (fail-closed in the app): publish the enabled

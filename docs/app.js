@@ -3272,7 +3272,7 @@ function hidePhotoViewer() {
   el.classList.remove('open');
   el.setAttribute('aria-hidden', 'true');
   document.getElementById('photo-viewer-img').removeAttribute('src');
-  if (!document.querySelector('#car-detail.open')) document.documentElement.classList.remove('cd-lock');
+  if (!document.querySelector('#car-detail.open, #yard-rows.open')) document.documentElement.classList.remove('cd-lock');
   return true;
 }
 function closePhotoViewer() {
@@ -3433,7 +3433,7 @@ function hideCarDetail() {
   if (!el || !el.classList.contains('open')) return;
   el.classList.remove('open');
   el.setAttribute('aria-hidden', 'true');
-  document.documentElement.classList.remove('cd-lock');
+  if (!document.querySelector('#yard-rows.open')) document.documentElement.classList.remove('cd-lock');
   carDetailKey = null;
   if (carDetailOpener && document.contains(carDetailOpener)) carDetailOpener.focus({ preventScroll: true });
   carDetailOpener = null;
@@ -4999,6 +4999,7 @@ function populateYardFilters(inRange) {
 }
 
 function renderYards() {
+  if (yardsView === 'map') setTimeout(renderYardsMap, 0);
   const grid = document.getElementById('yards-grid');
   const statsBar = document.getElementById('yards-stats-bar');
   // This tab's Within select and zip mirror the Live tab's (one stored
@@ -5125,7 +5126,7 @@ function renderYards() {
       : 'Not enough departure history yet for a typical-lifespan estimate';
     return `
       <div class="car-card yard-card" data-loc="${escapeHtml(y.location)}" role="button" tabindex="0"
-           aria-label="View cars at ${escapeHtml(y.location)}">
+           aria-label="Walk the rows at ${escapeHtml(y.location)}">
         <div class="car-header">
           <div style="min-width:0;">
             <div class="car-name">${escapeHtml(y.location)}</div>
@@ -5139,6 +5140,7 @@ function renderYards() {
           </div>
         </div>
         <div class="yard-actions">
+          <button type="button" class="btn btn-accent yard-walk-btn">Walk the rows</button>
           <button type="button" class="btn yard-view-btn">View cars</button>
           ${IS_NATIVE
             ? `<button type="button" class="btn yard-week-btn" data-yard="${escapeHtml(y.location)}" title="This yard's set-outs from the last 7 days">This week</button><button type="button" class="btn yard-share-btn" data-url="https://yardscout.io/yard/${yardSlug(y.location)}" data-yard="${escapeHtml(y.location)}" title="Share this yard's week" aria-label="Share this yard's week">${ICON.share}</button>`
@@ -5190,14 +5192,374 @@ document.getElementById('yards-grid').addEventListener('click', e => {
   const card = e.target.closest('.yard-card');
   if (!card) return;
   if (e.target.closest('.yard-prices-btn')) { openYardPrices(card.dataset.loc); return; }
-  viewYardInLive(card.dataset.loc);
+  if (e.target.closest('.yard-view-btn')) { viewYardInLive(card.dataset.loc); return; }
+  if (e.target.closest('.yard-week-btn, .yard-share-btn')) return;   // their own handlers
+  openYardRows(card.dataset.loc, card);
 });
 document.getElementById('yards-grid').addEventListener('keydown', e => {
   if (e.key !== 'Enter') return;
   const card = e.target.closest('.yard-card');
-  if (card) viewYardInLive(card.dataset.loc);
+  if (card && e.target === card) openYardRows(card.dataset.loc, card);
 });
 document.getElementById('yards-search').addEventListener('input', () => renderYards());
+
+/* ===== WALK THE YARD (Lot Map, row view) =====
+ * One yard's cars grouped by row, in row-number order (the order the yard
+ * numbers its rows; not a surveyed walking path). Pull-sheet cars, watch
+ * matches and new arrivals are marked and can be filtered; each car has the
+ * quick add-to-pull-sheet button and opens the car screen. Runs entirely
+ * from the inventory already on the phone, so it works with poor signal. */
+let yardRowsLoc = null, yardRowsFilter = 'all', yardRowsOpener = null;
+const rowSortKey = (r) => {
+  const s = String(r || '').trim();
+  const m = /^(\D*?)\s*(\d+)(.*)$/.exec(s);
+  return m ? [m[1].toUpperCase(), +m[2], m[3].toUpperCase()] : [s.toUpperCase(), Infinity, ''];
+};
+function compareRows(a, b) {
+  const x = rowSortKey(a), y = rowSortKey(b);
+  return x[0] < y[0] ? -1 : x[0] > y[0] ? 1 : (x[1] - y[1]) || (x[2] < y[2] ? -1 : x[2] > y[2] ? 1 : 0);
+}
+function watchMatchesFor(v, list) {
+  for (const e of list) { try { if (watchlistMatches(e, v)) return true; } catch (err) { /* malformed watch: skip */ } }
+  return false;
+}
+/* Per-yard counts for the map and the yard sheet. */
+function yardMarks(loc) {
+  const watches = loadWatchlist();
+  let cars = 0, fresh = 0, pull = 0, watch = 0;
+  for (const v of liveInventory) {
+    if (v.location !== loc) continue;
+    cars++;
+    if (isNew(v.dateAdded)) fresh++;
+    if (savedCars[vehicleKey(v)]) pull++;
+    if (watches.length && watchMatchesFor(v, watches)) watch++;
+  }
+  return { cars, fresh, pull, watch };
+}
+function yardRowThumb(v) {
+  const ex = extrasFor(v);
+  const info = ex && ex[extraIdx.photo] ? photoInfo(ex[extraIdx.photo]) : null;
+  if (info && info.onCards) {
+    return `<span class="yr-thumb has-illo">${illoSvgHtml(ex)}<img src="${escapeHtml(info.url)}" alt="" loading="lazy" decoding="async" width="${info.w}" height="${info.h}" onerror="this.remove()"></span>`;
+  }
+  const paint = paintHex(ex && ex[extraIdx.color]);
+  return `<span class="yr-thumb"${paint ? ` style="--paint:${paint}"` : ''}><svg class="illo-car" viewBox="0 0 200 90" aria-hidden="true" focusable="false"><use href="#illo-${illoBody(ex)}"/></svg></span>`;
+}
+function yardRowItemHtml(v, flags) {
+  const key = vehicleKey(v);
+  const unlocked = isPro();
+  const val = (v.hasMatch && v.topParts && v.topParts.length) ? carValueParts(v, unlocked, false) : null;
+  const ex = extrasFor(v);
+  const color = ex && ex[extraIdx.color] ? String(ex[extraIdx.color]).replace(/^\[|\]$/g, '').replace(/^Field-/, '') : '';
+  const tags = [
+    flags.pull ? '<span class="yr-tag yr-tag-pull">On pull sheet</span>' : '',
+    flags.watch ? '<span class="yr-tag yr-tag-watch">Watch match</span>' : '',
+    flags.fresh ? '<span class="yr-tag yr-tag-new">New</span>' : '',
+  ].join('');
+  return `<li class="yr-item${flags.pull ? ' is-pull' : ''}${flags.watch ? ' is-watch' : ''}" data-vkey="${escapeHtml(key)}">
+      <button type="button" class="yr-open car-open" data-vkey="${escapeHtml(key)}" aria-label="Open the ${escapeHtml(`${v.year} ${v.make} ${v.model}`)}">
+        ${yardRowThumb(v)}
+        <span class="yr-main">
+          <span class="yr-name">${escapeHtml(`${v.year} ${v.make} ${v.model}`)}</span>
+          ${color ? `<span class="yr-sub">${escapeHtml(color)}</span>` : ''}
+          ${tags ? `<span class="yr-tags">${tags}</span>` : ''}
+          ${val && val.partsSummary ? `<span class="yr-parts">${val.partsSummary}</span>` : ''}
+        </span>
+      </button>
+      ${unlocked && val && val.profitLine ? `<div class="yr-value">${val.profitLine}</div>` : ''}
+      <div class="yr-act">${(() => { const on = !!savedCars[key]; return `<button type="button" class="btn ${on ? 'btn-on' : 'btn-accent'} heart-btn yr-add" data-vkey="${escapeHtml(key)}" aria-pressed="${on}" aria-label="${on ? 'On your pull sheet. Remove' : 'Add to pull sheet'}">${on ? ICON.check + '<span>On sheet</span>' : ICON.plus + '<span>Add</span>'}</button>`; })()}</div>
+    </li>`;
+}
+function renderYardRows() {
+  const box = document.getElementById('yard-rows-body');
+  const loc = yardRowsLoc;
+  const cars = liveInventory.filter(v => v.location === loc);
+  if (!cars.length) {
+    box.innerHTML = `<h2 class="yr-title" id="yard-rows-title">${escapeHtml(loc || 'Yard')}</h2><div class="empty-state"><p>No cars from this yard in the current list.</p></div>`;
+    return;
+  }
+  const watches = loadWatchlist();
+  const items = cars.map(v => ({ v, pull: !!savedCars[vehicleKey(v)], watch: watches.length ? watchMatchesFor(v, watches) : false, fresh: isNew(v.dateAdded) }));
+  const n = { all: items.length, pull: items.filter(i => i.pull).length, watch: items.filter(i => i.watch).length, fresh: items.filter(i => i.fresh).length };
+  if (yardRowsFilter !== 'all' && !n[yardRowsFilter]) yardRowsFilter = 'all';
+  const shown = items.filter(i => yardRowsFilter === 'all' || i[yardRowsFilter]);
+  const byRow = new Map();
+  for (const it of shown) {
+    const r = String(it.v.row || '').trim();
+    if (!byRow.has(r)) byRow.set(r, []);
+    byRow.get(r).push(it);
+  }
+  const rows = [...byRow.keys()].sort((a, b) => (a === '') - (b === '') || compareRows(a, b));
+  const v0 = cars[0];
+  const place = [v0.city, v0.state].filter(Boolean).join(', ');
+  const d = vehicleDistanceMi(v0);
+  const chip = (k, label) => `<button type="button" class="yr-chip" data-filter="${k}" aria-pressed="${yardRowsFilter === k}"${n[k] ? '' : ' disabled'}>${label} <b>${n[k].toLocaleString()}</b></button>`;
+  box.innerHTML = `
+    <p class="eyebrow">Walk the yard</p>
+    <h2 class="yr-title" id="yard-rows-title">${escapeHtml(loc)}</h2>
+    <p class="yr-place">${escapeHtml(place)}${d != null ? ` &middot; ${Math.round(d)} mi` : ''}${liveScrapedAt ? ` &middot; rows as listed, scanned ${escapeHtml(scrapedShort())}` : ''}</p>
+    <div class="yr-chips" role="group" aria-label="Show">
+      ${chip('all', 'All cars')}${chip('pull', 'Pull sheet')}${chip('watch', 'Watch matches')}${chip('fresh', 'New this week')}
+    </div>
+    ${isPro() ? '' : proBoxHtml('See what each car’s parts are worth', 'yard-rows-value', '', 'yr-pro')}
+    <p class="yr-hint">Rows in number order. Yards move cars and the row is what the yard listed, so check the plate at the row end.</p>
+    ${rows.map(r => {
+      const list = byRow.get(r).sort((a, b) => (b.pull - a.pull) || (b.watch - a.watch) || (parseYardDate(b.v.dateAdded) - parseYardDate(a.v.dateAdded)));
+      return `<section class="yr-row" aria-label="${r ? 'Row ' + escapeHtml(r) : 'Row not listed'}">
+        <h3 class="yr-row-head"><span class="yr-row-plate">${r ? `<small>Row</small>${escapeHtml(r)}` : '<small>Row</small>?'}</span><span class="yr-row-count">${r ? '' : 'Row not listed &middot; '}${list.length} car${list.length === 1 ? '' : 's'}${list.some(i => i.pull) ? ' &middot; <em>pull sheet</em>' : ''}${list.some(i => i.watch) ? ' &middot; <em>watch match</em>' : ''}</span></h3>
+        <ul class="yr-list">${list.map(i => yardRowItemHtml(i.v, i)).join('')}</ul>
+      </section>`;
+    }).join('')}`;
+}
+function openYardRows(loc, opener) {
+  if (!loc) return;
+  const el = document.getElementById('yard-rows');
+  const wasOpen = el.classList.contains('open');
+  yardRowsLoc = loc; yardRowsFilter = 'all';
+  yardRowsOpener = opener || document.activeElement;
+  renderYardRows();
+  const sc = document.getElementById('yard-rows-scroll'); if (sc) sc.scrollTop = 0;
+  if (!wasOpen) {
+    el.classList.add('open');
+    el.setAttribute('aria-hidden', 'false');
+    document.documentElement.classList.add('cd-lock');
+    try { history.pushState({ ysYard: loc }, ''); } catch (e) { /* sandboxed */ }
+  }
+  track('yard-rows');
+  document.getElementById('yard-rows-back').focus({ preventScroll: true });
+}
+function hideYardRows() {
+  const el = document.getElementById('yard-rows');
+  if (!el || !el.classList.contains('open')) return;
+  el.classList.remove('open');
+  el.setAttribute('aria-hidden', 'true');
+  if (!document.querySelector('#car-detail.open, #photo-viewer.open')) document.documentElement.classList.remove('cd-lock');
+  yardRowsLoc = null;
+  if (yardRowsOpener && document.contains(yardRowsOpener)) yardRowsOpener.focus({ preventScroll: true });
+  yardRowsOpener = null;
+}
+function closeYardRows() {
+  if (history.state && history.state.ysYard) history.back();
+  else hideYardRows();
+}
+window.addEventListener('popstate', () => {
+  if (!(history.state && (history.state.ysYard || history.state.ysCar || history.state.ysPhoto))) hideYardRows();
+});
+document.getElementById('yard-rows-back').addEventListener('click', closeYardRows);
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && yardRowsLoc && !carDetailKey && !document.querySelector('#photo-viewer.open, #upgrade-sheet.open, #saved-sheet.open')) closeYardRows();
+});
+document.getElementById('yard-rows').addEventListener('click', e => {
+  const chip = e.target.closest('.yr-chip');
+  if (chip) { yardRowsFilter = chip.dataset.filter; renderYardRows(); return; }
+  const heart = e.target.closest('.heart-btn');
+  if (heart) { e.preventDefault(); toggleSaved(heart.dataset.vkey); renderYardRows(); return; }
+  const open = e.target.closest('.car-open');
+  if (open) { e.preventDefault(); openCarDetail(open.dataset.vkey, open); }
+});
+
+/* ===== LOT MAP (yards as pins) =====
+ * Free and keyless: MapLibre GL (pinned, from unpkg, loaded only when the map
+ * is opened) with OpenFreeMap's public vector tiles (free for apps, no key, no
+ * cookies; attribution shown). If the library or tiles can't load (offline,
+ * no WebGL), the yards are drawn on a plain schematic map instead. */
+const MAPLIBRE_VER = '4.7.1';
+// var, not let: renderYards() can run before this line during boot.
+var _mapLibP = null, _yardsMap = null, _yardsMapMarkers = [], yardsView = 'list', _mapSheetLoc = null;
+function loadMapLib() {
+  if (window.maplibregl) return Promise.resolve(window.maplibregl);
+  if (_mapLibP) return _mapLibP;
+  _mapLibP = new Promise((resolve, reject) => {
+    const css = document.createElement('link');
+    css.rel = 'stylesheet'; css.href = `https://unpkg.com/maplibre-gl@${MAPLIBRE_VER}/dist/maplibre-gl.css`;
+    document.head.appendChild(css);
+    const s = document.createElement('script');
+    s.src = `https://unpkg.com/maplibre-gl@${MAPLIBRE_VER}/dist/maplibre-gl.js`;
+    s.async = true;
+    const t = setTimeout(() => reject(new Error('map library timed out')), 12000);
+    s.onload = () => { clearTimeout(t); window.maplibregl ? resolve(window.maplibregl) : reject(new Error('no maplibregl')); };
+    s.onerror = () => { clearTimeout(t); reject(new Error('map library failed to load')); };
+    document.head.appendChild(s);
+  }).catch(e => { _mapLibP = null; throw e; });
+  return _mapLibP;
+}
+const mapDark = () => document.documentElement.dataset.theme === 'dark'
+  || (document.documentElement.dataset.theme !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
+function yardPinHtml(y, m) {
+  const label = `${y.location}: ${m.cars} cars, ${m.fresh} new this week${m.watch ? `, ${m.watch} watch match${m.watch === 1 ? '' : 'es'}` : ''}`;
+  return `<button type="button" class="map-pin${m.watch ? ' has-watch' : ''}${_mapSheetLoc === y.location ? ' on' : ''}" data-loc="${escapeHtml(y.location)}" aria-label="${escapeHtml(label)}"><b>${m.cars.toLocaleString()}</b>${m.watch ? `<i>${m.watch}</i>` : ''}</button>`;
+}
+function renderMapSheet() {
+  const box = document.getElementById('yards-map-sheet');
+  if (!_mapSheetLoc) { box.innerHTML = '<p class="yards-map-tip">Tap a pin to see the yard.</p>'; return; }
+  const y = (getYardsView().shown || []).find(x => x.location === _mapSheetLoc);
+  if (!y) { box.innerHTML = ''; return; }
+  const m = yardMarks(y.location);
+  const place = [y.city, y.state].filter(Boolean).join(', ');
+  box.innerHTML = `<div class="map-sheet-card">
+      <h3>${escapeHtml(y.location)}</h3>
+      <p class="map-sheet-place">${escapeHtml(place)}${y.dist != null ? ` &middot; ${Math.round(y.dist)} mi` : ''}</p>
+      <ul class="map-sheet-stats">
+        <li><b>${m.cars.toLocaleString()}</b> cars</li>
+        <li><b>${m.fresh.toLocaleString()}</b> new this week</li>
+        <li><b>${m.watch.toLocaleString()}</b> watch match${m.watch === 1 ? '' : 'es'}</li>
+        ${m.pull ? `<li><b>${m.pull}</b> on your pull sheet</li>` : ''}
+      </ul>
+      <div class="map-sheet-actions">
+        <button type="button" class="btn btn-accent btn-lg map-walk" data-loc="${escapeHtml(y.location)}">Walk the rows</button>
+        <button type="button" class="btn btn-quiet map-cars" data-loc="${escapeHtml(y.location)}">View cars</button>
+      </div>
+    </div>`;
+}
+function selectMapYard(loc) {
+  _mapSheetLoc = loc;
+  document.querySelectorAll('#yards-map .map-pin').forEach(p => p.classList.toggle('on', p.dataset.loc === loc));
+  renderMapSheet();
+}
+function renderSchematicMap(yards, note) {
+  const el = document.getElementById('yards-map');
+  if (_yardsMap) { try { _yardsMap.remove(); } catch (e) { /* gone */ } _yardsMap = null; }
+  const pts = yards.filter(y => y.lat != null && y.lng != null);
+  const c = activeZipCoords;
+  const all = c ? [...pts, { lat: c.lat, lng: c.lng }] : pts;
+  const la = all.map(p => p.lat), ln = all.map(p => p.lng);
+  const minLa = Math.min(...la), maxLa = Math.max(...la), minLn = Math.min(...ln), maxLn = Math.max(...ln);
+  const k = Math.cos(((minLa + maxLa) / 2) * Math.PI / 180);
+  const w = Math.max((maxLn - minLn) * k, 0.05), h = Math.max(maxLa - minLa, 0.05), span = Math.max(w, h * 1.33);
+  const pos = (p) => ({ x: 8 + 84 * (((p.lng - minLn) * k) + (span - w) / 2) / span, y: 8 + 84 * (((maxLa - p.lat)) + (span / 1.33 - h) / 2) / (span / 1.33) });
+  el.className = 'yards-map-schematic';
+  // Same merging as the live map: pins closer than ~56px share one bubble.
+  const W = el.clientWidth || 360, H = el.clientHeight || 320, groups = [];
+  _mapYards = pts.map(y => ({ y, m: yardMarks(y.location) }));
+  for (const it of [..._mapYards].sort((a, b) => b.m.cars - a.m.cars)) {
+    const p = pos(it.y), px = p.x * W / 100, py = p.y * H / 100;
+    const g = groups.find(g => Math.hypot(g.px - px, g.py - py) < 56);
+    if (g) g.items.push(it); else groups.push({ px, py, p, items: [it] });
+  }
+  el.innerHTML = `${c ? `<span class="map-you" style="left:${pos(c).x}%;top:${pos(c).y}%"><span>You</span></span>` : ''}
+    ${groups.map(g => `<span class="map-pin-at" style="left:${g.p.x}%;top:${g.p.y}%">${g.items.length === 1 ? yardPinHtml(g.items[0].y, g.items[0].m)
+      : `<button type="button" class="map-pin map-cluster${g.items.some(i => i.m.watch) ? ' has-watch' : ''}" data-locs="${escapeHtml(JSON.stringify(g.items.map(i => i.y.location)))}" aria-label="${g.items.length} yards here. Show them"><b>${g.items.length} yards</b></button>`}</span>`).join('')}`;
+  document.getElementById('yards-map-note').textContent = note;
+}
+async function renderYardsMap() {
+  const el = document.getElementById('yards-map');
+  if (!activeZipCoords) { el.className = ''; el.innerHTML = ''; document.getElementById('yards-map-note').textContent = 'Set your zip code to see yards near you on the map.'; return; }
+  const yards = (getYardsView().shown || []).filter(y => y.lat != null && y.lng != null);
+  renderMapSheet();
+  let lib;
+  try {
+    lib = await loadMapLib();
+    const cv = document.createElement('canvas');
+    if (!(cv.getContext('webgl2') || cv.getContext('webgl'))) throw new Error('no WebGL');
+  } catch (e) {
+    renderSchematicMap(yards, 'Map tiles couldn’t load, so yards are shown by position only. The row view works offline.');
+    return;
+  }
+  const style = `https://tiles.openfreemap.org/styles/${mapDark() ? 'dark' : 'positron'}`;
+  if (!_yardsMap) {
+    el.className = 'yards-map-gl'; el.innerHTML = '';
+    try {
+      _yardsMap = new lib.Map({
+        container: el, style, attributionControl: false, cooperativeGestures: false,
+        center: [activeZipCoords.lng, activeZipCoords.lat], zoom: 8, maxZoom: 15,
+      });
+    } catch (e) {
+      _yardsMap = null;
+      renderSchematicMap(yards, 'This device can’t draw the map, so yards are shown by position only.');
+      return;
+    }
+    // The tile source supplies its own credit line (OpenFreeMap, OpenMapTiles,
+    // OpenStreetMap); keep it always expanded.
+    _yardsMap.addControl(new lib.AttributionControl({ compact: false }));
+    _yardsMap.addControl(new lib.NavigationControl({ showCompass: false }), 'top-right');
+    _yardsMap.on('error', () => {
+      if (!_yardsMap || _yardsMap.__failed) return;
+      if (!_yardsMap.isStyleLoaded()) { _yardsMap.__failed = true; renderSchematicMap(yards, 'Map tiles couldn’t load, so yards are shown by position only. The row view works offline.'); }
+    });
+    _yardsMap.__style = style;
+    // The box can change size while the map is created (tab switch, fonts):
+    // re-measure once it's live.
+    _yardsMap.once('load', () => { if (_yardsMap) { _yardsMap.resize(); placeMapMarkers(); } });
+    if (window.ResizeObserver) new ResizeObserver(() => { if (_yardsMap && el.clientWidth) _yardsMap.resize(); }).observe(el);
+    requestAnimationFrame(() => _yardsMap && _yardsMap.resize());
+  } else if (_yardsMap.__style !== style) {
+    _yardsMap.setStyle(style); _yardsMap.__style = style;
+  }
+  document.getElementById('yards-map-note').textContent = '';
+  _mapYards = yards.map(y => ({ y, m: yardMarks(y.location) }));
+  if (!_yardsMap.__moveHooked) { _yardsMap.on('moveend', placeMapMarkers); _yardsMap.__moveHooked = true; }
+  const b = new lib.LngLatBounds([activeZipCoords.lng, activeZipCoords.lat], [activeZipCoords.lng, activeZipCoords.lat]);
+  yards.forEach(y => b.extend([y.lng, y.lat]));
+  _yardsMap.fitBounds(b, { padding: 48, maxZoom: 11, duration: 0 });
+  placeMapMarkers();
+}
+/* Pins that would overlap on screen merge into one "N yards" bubble; tapping
+ * it zooms to those yards. Recomputed after every pan/zoom. */
+var _mapYards = [];
+function placeMapMarkers() {
+  const lib = window.maplibregl, map = _yardsMap;
+  if (!lib || !map) return;
+  for (const mk of _yardsMapMarkers) mk.remove();
+  _yardsMapMarkers = [];
+  const you = document.createElement('span'); you.className = 'map-you'; you.innerHTML = '<span>You</span>';
+  _yardsMapMarkers.push(new lib.Marker({ element: you }).setLngLat([activeZipCoords.lng, activeZipCoords.lat]).addTo(map));
+  const groups = [];
+  for (const it of [..._mapYards].sort((a, b) => b.m.cars - a.m.cars)) {
+    const pt = map.project([it.y.lng, it.y.lat]);
+    const g = groups.find(g => Math.hypot(g.x - pt.x, g.y - pt.y) < 56);
+    if (g) g.items.push(it); else groups.push({ x: pt.x, y: pt.y, items: [it] });
+  }
+  for (const g of groups) {
+    const wrap = document.createElement('span');
+    wrap.className = 'map-pin-at';
+    let at;
+    if (g.items.length === 1) { const { y, m } = g.items[0]; wrap.innerHTML = yardPinHtml(y, m); at = [y.lng, y.lat]; }
+    else {
+      const cars = g.items.reduce((n, i) => n + i.m.cars, 0), watch = g.items.reduce((n, i) => n + i.m.watch, 0);
+      const locs = g.items.map(i => i.y.location);
+      wrap.innerHTML = `<button type="button" class="map-pin map-cluster${watch ? ' has-watch' : ''}" data-locs="${escapeHtml(JSON.stringify(locs))}" aria-label="${g.items.length} yards here, ${cars.toLocaleString()} cars. Zoom in"><b>${g.items.length} yards</b></button>`;
+      at = [g.items[0].y.lng, g.items[0].y.lat];
+    }
+    _yardsMapMarkers.push(new lib.Marker({ element: wrap, anchor: 'bottom', offset: [0, -6] }).setLngLat(at).addTo(map));
+  }
+}
+function zoomToYards(locs) {
+  const lib = window.maplibregl, pts = _mapYards.filter(i => locs.includes(i.y.location));
+  if (!pts.length) return;
+  if (!lib || !_yardsMap) {   // schematic map: list the yards in the sheet
+    _mapSheetLoc = null;
+    document.getElementById('yards-map-sheet').innerHTML = `<div class="map-sheet-card"><h3>${pts.length} yards here</h3><ul class="map-sheet-list">${pts.map(i => `<li><button type="button" class="map-sheet-pick" data-loc="${escapeHtml(i.y.location)}"><span>${escapeHtml(i.y.location)}</span><b>${i.m.cars.toLocaleString()} cars</b></button></li>`).join('')}</ul></div>`;
+    return;
+  }
+  const b = new lib.LngLatBounds([pts[0].y.lng, pts[0].y.lat], [pts[0].y.lng, pts[0].y.lat]);
+  pts.forEach(i => b.extend([i.y.lng, i.y.lat]));
+  if (_yardsMap.getZoom() >= 14.5) { selectMapYard(locs[0]); return; }
+  _yardsMap.fitBounds(b, { padding: 80, maxZoom: 15, duration: 300 });
+}
+function setYardsView(view) {
+  yardsView = view === 'map' ? 'map' : 'list';
+  document.querySelectorAll('.yv-btn').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === yardsView)));
+  document.getElementById('tab-yards').classList.toggle('yards-map-mode', yardsView === 'map');
+  document.getElementById('yards-map-wrap').hidden = yardsView !== 'map';
+  if (yardsView === 'map') { renderYardsMap(); if (_yardsMap) setTimeout(() => _yardsMap && _yardsMap.resize(), 50); }
+  try { sessionStorage.setItem('ys_yards_view', yardsView); } catch (e) { /* private mode */ }
+}
+document.querySelector('.yards-view-switch').addEventListener('click', e => {
+  const b = e.target.closest('.yv-btn');
+  if (b) setYardsView(b.dataset.view);
+});
+document.getElementById('yards-map-wrap').addEventListener('click', e => {
+  const cl = e.target.closest('.map-cluster');
+  if (cl) { e.preventDefault(); e.stopPropagation(); zoomToYards(JSON.parse(cl.dataset.locs)); return; }
+  const pin = e.target.closest('.map-pin');
+  if (pin) { e.preventDefault(); e.stopPropagation(); selectMapYard(pin.dataset.loc); return; }
+  const pick = e.target.closest('.map-sheet-pick');
+  if (pick) { selectMapYard(pick.dataset.loc); return; }
+  const walk = e.target.closest('.map-walk');
+  if (walk) { openYardRows(walk.dataset.loc, walk); return; }
+  const cars = e.target.closest('.map-cars');
+  if (cars) viewYardInLive(cars.dataset.loc);
+});
 /* Request a yard (Yards tab footer). kind=yard: the name rides in `part`,
  * city/website in `note` — identical to the public /yards form. */
 document.getElementById('yr-send').addEventListener('click', async () => {
