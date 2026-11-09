@@ -416,6 +416,25 @@ EXCLUDE_AT_CURATION: dict[tuple[str, str, str], str] = {
         "headlamp boot / bulb cap ('Boot, Front'), not a headlamp (AUDIT.md)",
 }
 
+# Wheels (ops/interchange.md "Wheels"): a compact / mini / temporary / T-type
+# spare is never a road wheel. Any record of a (site, wheels, pn) whose name,
+# description, aux or own-page notes say so refuses the number for that site
+# (wheel_compact_spare). A FULL-SIZE spare mention ("Wheel, Disc (For Spare)",
+# "With Full Size Spare", "Spare Wheel, 16x6.5") is the same wheel as the road
+# wheels and stays, because only matched road-wheel rows ever seed a record
+# (2026-11-09, oem-raw@4a733550: Mopar 4721567AB "[TBK] Compact Spare" for the
+# 2010 Town & Country / Grand Caravan was the one such group).
+# Sites whose list notes / info on a wheel row list the CAR's options (Hyundai /
+# Kia Fit Note "TEMPORARY - STEEL WHEEL & TIRE (MINI)", Toyota / Lexus info
+# "&SPARE TIRE-REINFORCED TEMPORARY(T165/90D18)" on 19" road wheels): their
+# notes are not read for the compact-spare check; their spares are named
+# "Wheel Assy-Temporary" / "Wheel, Disc (For Spare)" and never seed a record.
+WHEEL_NOTES_ARE_OPTIONS = frozenset({"www.hyundaipartsdeal.com", "www.kiapartsnow.com",
+                                     "www.lexuspartsnow.com", "www.toyotapartsnow.com"})
+WHEEL_COMPACT_SPARE_RE = re.compile(
+    r"\b(compact|mini|temporary|temp\.?|space[\s-]*saver)\s*(use\s+)?(steel\s+|aluminum\s+|alloy\s+)?spare"
+    r"|\bspare\b[^,;]{0,20}\b(compact|mini|temporary)\b|\btemporary\b|\bT-?type\b|\bT1[0-9]{2}/[0-9]{2}", re.I)
+
 # Hub decisions (ops/interchange.md "Hub decisions (curation policy)").
 # T1: Toyota climate-control sub-assemblies are their own packaging/slot.
 TOYOTA_CLIMATE_SWITCH_BASES = ("55901", "55902", "55903")

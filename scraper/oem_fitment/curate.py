@@ -191,7 +191,17 @@ class Curation:
     # ------------------------------------------- 5.1 dups, 5.3 verification
     def verify(self):
         kept = []
+        # policy.WHEEL_COMPACT_SPARE_RE: one record naming a compact / temporary
+        # spare refuses every record of that (site, wheels, pn)
+        # (policy.WHEEL_NOTES_ARE_OPTIONS: sites whose notes list the car's options)
+        compact_spare = {(r.site, r.pn) for r in self.records if r.cat == "wheels" and any(
+            policy.WHEEL_COMPACT_SPARE_RE.search(x or "") for x in [r.name, r.aux, r.description]
+            + ([] if r.site in policy.WHEEL_NOTES_ARE_OPTIONS else r.note_texts))}
         for r in self.records:
+            if r.cat == "wheels" and (r.site, r.pn) in compact_spare:
+                self.refuse("wheel_compact_spare", cat=r.cat, pn=r.pn, evidence=[r.pointer],
+                            detail="a record of this number names a compact / temporary spare")
+                continue
             why = policy.EXCLUDE_AT_CURATION.get((r.site, r.cat, r.pn))
             if why:
                 self.refuse("exclude_at_curation", cat=r.cat, pn=r.pn, evidence=[r.pointer], detail=why)
