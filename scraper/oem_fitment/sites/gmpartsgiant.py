@@ -117,6 +117,10 @@ SUBCATS = {
     "trunk-lid": r"rear_compartment|deck_lid|trunk",
     "tailgate": r"tailgate|end_gate|pickup_box|box_",
     "liftgate": r"lift_?gate|end_gate|rear_door_hardware|body_rear_end",
+    # tier W (ops/interchange.md "Wheels"): the years manifest lists
+    # brakes_rear_axle_propeller_shaft_wheels_tires/wheels, wheels_wheel_covers and
+    # wheels_hub_caps; spare_wheel, wheel_covers and the TPMS pages are not read
+    "wheels": r"^wheels(_wheel_covers|_hub_caps)?$",
 }
 SUBCAT_EXCL = {
     "window-regulator": r"trim|weatherstrip|glass_only|moldings",
@@ -174,6 +178,15 @@ PARTS = {
                  r"HANDLE|LATCH|CABLE|LOCK|HINGE|STRUT|LIFT ASSIST|PROTECTOR|LINER|STOP|SUPPORT|TRUNNION|ROD|CAP|TRIM|LAMP", SUB),
     "liftgate": (r"^(GATE|LIFTGATE|GATE ASM)\b[^|]*\|.*\bLIFT ?GATE\b|^(GATE|GATE ASM)\b[^|]*\|[^|]*\|\s*(GATE,\s*)?LIFT",
                  r"STRUT|HINGE|LATCH|LOCK|MOTOR|WINDOW|GLASS|SWITCH|HANDLE|ACTUATOR|LAMP|WIPER|APPLIQUE|SPOILER|CYLINDER|RELEASE|TRIM|PANEL", SUB),
+    # tier W: 2016 Trax .../wheels (fetch.py 2026-11-09) prints group "WHEEL, Rear or
+    # Spare", remark "WHEEL (PKG),(11.7876 KG)(...)(18X7)": the noun is WHEEL and
+    # the group text after the comma is the illustration heading. A full-size
+    # road wheel that also serves as the spare ("Rear or Spare") is kept; a row
+    # whose heading is only a spare ("WHEEL, Spare ..."), or whose remark says
+    # spare / temporary / compact anywhere (also inside the parentheses), is not.
+    "wheels": (N.format("WHEEL|WHEEL ASM|WHEEL,\\s*ALUMINUM|WHEEL,\\s*STEEL") + r"(?!\s+(COVER|TRIM|HOUSE|LINER|OPENING|NUT|BOLT|STUD|LOCK|CAP|WEIGHT|BEARING|SPEED|CYLINDER|ALIGN|DRIVE))",
+               r"COVER|CAP|NUT|BOLT|STUD|LOCK|WEIGHT|VALVE|SENSOR|ORNAMENT|EMBLEM|INSERT|SPARE|TEMPORARY|COMPACT|CARRIER|BEARING|HUB|KIT|TRIM|RING|BALANCE|TIRE|STEERING|HOUSE|LINER|SKIN|CLAD",
+               SUB + r"|^[^|]*,\s*(SPARE|TEMPORARY|COMPACT)\b[^|]*\||\|\s*[^|]*\b(SPARE|TEMPORARY|COMPACT|MINI SPARE|T-TYPE)\b[^|]*\|[^|]*$"),
 }
 
 def head(r: dict) -> str:

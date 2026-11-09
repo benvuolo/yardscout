@@ -63,6 +63,8 @@ CAT_PAGES = {
     "grille": r"^body-hardware/grille-components$",
     "trunk-lid": r"^body-hardware/trunk-lid-components$",
     "liftgate": r"^body-hardware/(lift-gate|liftgate[a-z-]*|lift-gate-body)$",
+    # tier W (ops/interchange.md "Wheels"): the years manifest lists suspension/wheels
+    "wheels": r"^suspension/wheels$",
 }
 
 RULES = {
@@ -85,6 +87,10 @@ RULES = {
     "grille": (r"^grille( assembly)?$", ""),
     "trunk-lid": (r"^trunk lid$", ""),
     "liftgate": (r"^lift ?gate$", ""),
+    # tier W: 2008 C350 suspension/wheels (fetch.py 2026-11-09) prints "Wheel, Alloy"
+    # and "Wheel Alloy" beside "Wheel, Spare", "Wheel Cover", "Hub Cap", "Valve Stem"
+    # and "Wheel Bolt"; anchored, so only road-wheel names match
+    "wheels": (r"^wheel(,? (alloy|steel|aluminum|light alloy))?$|^(alloy|steel|aluminum|light alloy) wheel$", ""),
 }
 
 PRODUCT_RULES = {

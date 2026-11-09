@@ -50,6 +50,8 @@ CAT_PAGES = {
     "grille": r"^body-hardware/grille-components$",
     "trunk-lid": r"^body-hardware/trunk-lid-components$",
     "liftgate": r"^body-hardware/(lift-gate|liftgate[a-z-]*|lift-gate-body|tailgate[a-z-]*|tail-gate[a-z-]*)$",
+    # tier W (ops/interchange.md "Wheels"): the years manifest lists suspension/wheels
+    "wheels": r"^suspension/wheels$",
 }
 
 RULES = {
@@ -81,6 +83,10 @@ RULES = {
     "grille": (r"^(upper |center |radiator )?grille( assembly)?$", ""),
     "trunk-lid": (r"^trunk lid$", ""),
     "liftgate": (r"^(lift ?gate|tail ?gate|hatch|rear hatch)$", ""),
+    # tier W: 2008 Passat suspension/wheels (fetch.py 2026-11-09) prints "Wheel, Alloy"
+    # beside "Spare Wheel", "Wheel Bolt", "Wheel Bolt Cap", "Wheel Lock Kit",
+    # "Center Cap" and "Valve Stem"; anchored, so only road-wheel names match
+    "wheels": (r"^wheel(,? (alloy|steel|aluminum|light alloy))?$|^(alloy|steel|aluminum) wheel$", ""),
 }
 
 NOTES = {

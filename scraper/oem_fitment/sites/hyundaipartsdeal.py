@@ -78,6 +78,9 @@ SUBCATS = {
     "grille": r"radiator_grille|^grille|^(front_bumper|bumper_front)$",
     "trunk-lid": r"trunk_lid_back_panel|back_panel_trunk_lid|^trunk_lid$",
     "liftgate": r"^tail_gate$|^back_door$",
+    # tier W (ops/interchange.md "Wheels"): the years manifest lists chassis/wheel_cap
+    # ("Wheel & Cap"); accessories/wheel_kit_alloy and wheel_locks are not read
+    "wheels": r"^wheel_cap$",
 }
 SUBCAT_EXCL = {
     "ac-compressor": r"duct|blower|evaporator|heater_unit",
@@ -135,6 +138,13 @@ PARTS = {
                   PNL + r"|Torsion|Bar\b|Spoiler|Lamp|Cylinder|Actuator|Cover|Bumper|Striker"),
     "liftgate": (r"^Panel Assy-Tail ?Gate|^Tail ?Gate Assy|^Panel Assy-Back Door|^Door Assy-Tail ?Gate",
                  PNL + r"|Glass|Spoiler|Lamp|Cylinder|Actuator|Cover|Bumper|Striker|Wiper|Motor|Switch|Strut|Lifter"),
+    # tier W: 2005 XG350 chassis/wheel_cap (fetch.py 2026-11-09) prints "Wheel Assy-Aluminium"
+    # beside "Wheel Assy-Temporary" (the spare), "Cap Assy-Wheel Hub", "Nut-Hub" and
+    # "Clamp-Spare Tire". Road wheels only: a spare / temporary / compact word
+    # anywhere on the row (name, remark, fit note) drops it.
+    "wheels": (r"^Wheel Assy-(Aluminium|Aluminum|Alloy|Steel|Chrome|Forged)\b|^Wheel Assy\s*\|",
+               r"Cap|Cover|Nut|Bolt|Stud|Lock|Weight|Valve|Sensor|TPMS|Ornament|Emblem|Insert|Hub|Kit|Balance|Tire",
+               r"\b(Temporary|Temp|Spare|Compact|T-?Type|Space ?Saver)\b"),
 }
 
 # Older catalogs spell "Assembly" where newer ones print "Assy".
