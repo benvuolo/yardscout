@@ -7409,6 +7409,7 @@ function pfRunBrowse(s) {
  *  - the old keys (platformGroups, engineFamilies) render exactly as before. */
 const PF_OEM_LIKELY_HEAD = 'Catalog part numbers shared on some configurations — verify the number';
 const PF_AM_HEAD = 'Aftermarket match: one replacement unit is listed for your car and these donors. That list is the rebuilder\u2019s, not the carmaker\u2019s — match the engine and the part number (on an alternator, also the amperage on the tag).';
+const PF_AM_HEAD_PART = 'Aftermarket match: one replacement unit is listed for your car and these donors. That list is the rebuilder\u2019s, not the carmaker\u2019s — match the part number and the fittings before you pull.';
 let pfOemLazyData = {};   // cat id -> {oemGroups, amGroups} (loaded or failed-empty)
 let pfOemLazyWait = {};   // cat id -> in-flight Promise
 function pfOemLazyLoad(catId) {
@@ -7476,6 +7477,72 @@ function pfAmCarTrans(s) {
  * engine its decode does not contradict. Every row is Likely and names the
  * unit. Cars already in `results` (hand data) keep their row; they gain the
  * unit line. Returns the number of groups that matched the seeker. */
+/* AM-GATE BEGIN — gated aftermarket app rows (ops/interchange.md §9).
+ * An app row's 6th element limits it to a body style and/or drivetrain the
+ * unit list states: {body: "Sedan"} / {drive: "awd"} (a bare string is the
+ * older body-only form). Same honesty as the car-card parts table
+ * (match_vehicle's body and drive gates): the VIN decode or the yard's
+ * listing naming the gate confirms it; a decode naming another body, or
+ * exactly one other drive class, rules the donor out; anything else is
+ * "if equipped". Nothing is inferred. The decode's body here is the
+ * published silhouette class, so a finer gate ("Crew Cab Pickup") can be
+ * ruled out by it but only confirmed by the listing.
+ * pfAmGate(gates, model, bodyClass, driveType) -> 'confirm' | 'unconfirmed' | 'exclude' */
+const PF_AM_SIL = { sedan: 'sedan', saloon: 'sedan', coupe: 'coupe', hatchback: 'hatchback', liftback: 'hatchback',
+  wagon: 'wagon', suv: 'suv', 'sport utility': 'suv', crossover: 'suv', pickup: 'pickup', truck: 'pickup',
+  van: 'van', minivan: 'van', convertible: 'convertible', cabriolet: 'convertible', roadster: 'convertible' };
+const PF_AM_DRIVE = { '4wd': ['4wd', '4x4', 'four-wheel'], awd: ['awd', 'all-wheel'],
+  rwd: ['rwd', 'rear-wheel'], fwd: ['fwd', 'front-wheel'] };
+function pfAmWord(tok, text) {
+  const t = String(tok).toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp('(^|[^a-z0-9])' + t + '($|[^a-z0-9])').test(String(text || '').toLowerCase());
+}
+function pfAmGateParse(g) {
+  if (g == null || g === '') return null;
+  if (typeof g === 'string') return { body: g };
+  return (typeof g === 'object' && (g.body || g.drive)) ? g : null;
+}
+function pfAmBodyVerdict(body, model, sil) {
+  const b = String(body).trim().toLowerCase();
+  const sils = [...new Set(Object.keys(PF_AM_SIL).filter(w => pfAmWord(w, b)).map(w => PF_AM_SIL[w]))];
+  const gateSil = sils.length === 1 ? sils[0] : null;
+  const exact = gateSil && Object.keys(PF_AM_SIL).some(w => PF_AM_SIL[w] === gateSil && w === b);
+  const decoded = sil && Object.values(PF_AM_SIL).includes(sil) ? sil : '';
+  if (decoded && exact && decoded === gateSil) return 'confirm';            // decode names it
+  if (pfAmWord(b, model)) return 'confirm';                                 // listing names it
+  if (decoded && gateSil && decoded !== gateSil) return 'exclude';          // decode names another body
+  return 'unconfirmed';
+}
+function pfAmDriveVerdict(drive, model, driveType) {
+  const toks = PF_AM_DRIVE[String(drive).toLowerCase()] || [String(drive).toLowerCase()];
+  const dt = String(driveType || '').toLowerCase();
+  if (dt && toks.some(t => pfAmWord(t, dt))) return 'confirm';
+  if (toks.some(t => pfAmWord(t, model))) return 'confirm';
+  if (dt) {
+    const classes = new Set(Object.keys(PF_AM_DRIVE).filter(c => PF_AM_DRIVE[c].some(t => pfAmWord(t, dt))));
+    if (['2wd', '4x2'].some(t => pfAmWord(t, dt))) classes.add('2wd');
+    if (classes.size === 1) return 'exclude';  // one class named, not the gate's
+  }
+  return 'unconfirmed';
+}
+function pfAmGate(gates, model, bodyClass, driveType) {
+  const g = pfAmGateParse(gates);
+  if (!g) return 'confirm';
+  const vs = [];
+  if (g.body) vs.push(pfAmBodyVerdict(g.body, model, bodyClass));
+  if (g.drive) vs.push(pfAmDriveVerdict(g.drive, model, driveType));
+  if (vs.includes('exclude')) return 'exclude';
+  return vs.every(x => x === 'confirm') ? 'confirm' : 'unconfirmed';
+}
+function pfAmGateText(gates) {
+  const g = pfAmGateParse(gates);
+  if (!g) return '';
+  const bits = [];
+  if (g.body) bits.push(String(g.body));
+  if (g.drive) bits.push(String(g.drive).toUpperCase());
+  return bits.join(', ');
+}
+/* AM-GATE END */
 function pfAmRows(s, groups, results, radius, fam) {
   let hit = 0;
   for (const g of groups || []) {
@@ -7489,14 +7556,25 @@ function pfAmRows(s, groups, results, radius, fam) {
     hit++;
     const srcLine = escapeHtml(pfAmSourceText(g));
     const sEngines = [...new Set(sRows.map(a => a[4]).filter(Boolean))];
-    const yours = sEngines.length
+    let yours = sEngines.length
       ? `lists your ${s.year} ${s.model} with the ${sEngines.join(' or ')} — match your engine`
       : `lists your ${s.year} ${s.model} without an engine — match your engine`;
+    // the seeker's own body/drive is not known here: a unit listed only for
+    // some versions of the car says so (gated rows only; never inferred)
+    if (sRows.every(a => pfAmGateParse(a[5]))) {
+      yours += ` — listed only for ${[...new Set(sRows.map(a => pfAmGateText(a[5])))].join(' or ')}: match yours`;
+    }
     for (const v of liveInventory) {
       const vm = canonicalMake(v.make);
-      const rows = g.apps.filter(a => pfAppMatches(a, v.year, vm, v.model));
-      if (!rows.length) continue;
       const ex = extrasFor(v);
+      // body/drive gates per app row (AM-GATE): a decode naming another body
+      // or drive drops that row; a donor with no row left is not offered
+      const gated = g.apps.filter(a => pfAppMatches(a, v.year, vm, v.model))
+        .map(a => [a, pfAmGate(a[5], v.model, ex ? ex[extraIdx.body] : '', v.vpicDriveType)])
+        .filter(([, gv]) => gv !== 'exclude');
+      const rows = gated.map(([a]) => a);
+      if (!rows.length) continue;
+      const gateUnconfirmed = !gated.some(([, gv]) => gv === 'confirm');
       const eng = ex ? ex[2] : '';
       const verdicts = rows.map(a => (a[4] ? pfAmEngineAgrees(a[4], eng) : null));
       if (!verdicts.some(x => x !== false)) continue;  // decode says another engine
@@ -7514,6 +7592,10 @@ function pfAmRows(s, groups, results, radius, fam) {
       }
       const warns = [escapeHtml(g.note), escapeHtml(yours)];
       if (!verdicts.includes(true)) warns.push('engine not confirmed — check under the hood before pulling');
+      if (gateUnconfirmed) {
+        warns.push(escapeHtml(`if equipped: this unit is listed for ${[...new Set(rows.map(a => pfAmGateText(a[5])))].join(' or ')} only — this donor's body style/drivetrain isn't confirmed, check the car`));
+      }
+      if (pfCat && pfCat.rowWarn) warns.push(escapeHtml(pfCat.rowWarn));
       if (g.trans && !tr) warns.push(`this unit is for ${g.trans === 'AT' ? 'automatic' : 'manual'}-transmission cars — check the transmission`);
       results.set(v.id, { v, d, tier: 'likely', src: 'aftermarket', srcLine, warns });
     }
@@ -7885,6 +7967,10 @@ function pfRunSearch() {
       }
       if (oemLikelyHit) groupNotes.push(PF_OEM_LIKELY_HEAD);
     }
+    // Aftermarket unit lists (Spectra, GSP/1A…) for chassis-side categories:
+    // Likely rows that name their unit, before same-generation donors (a donor
+    // both lists gains the unit line). Never Verified, never engine-family.
+    if (pfAmRows(s, lazy.amGroups, results, radius, famFilter)) groupNotes.push(PF_AM_HEAD_PART);
     // Same model, same generation. Two honest sources, donor-row first:
     // (1) the donor's own researched part row carries a fits window;
     // (2) the factory generation table — seeker and donor years inside ONE
