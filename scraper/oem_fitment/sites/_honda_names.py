@@ -91,13 +91,15 @@ SIDE = r"(?:[rl]\.\s*)?"
 RULES = {
     # tier C: names as printed on the 2005 Accord pages ("Motor, FR. Wiper",
     # "Knuckle, R. FR.", "Shock Absorber Assy., R. FR." next to the bare
-    # damper "Shock Absorber Unit, FR."; both kept, the name says which)
+    # damper "Shock Absorber Unit, FR."; both kept, the name says which;
+    # trial 2026-11-09: "Shock Absorber Assy., RR. (N/A FOR USA: SEE
+    # COMPONENTS)" is not sold in the US and is dropped)
     "wiper-motor": (r"^motor(\s+assy\.?)?,\s*(fr\.?|rr\.?|front|rear)?\s*(windshield\s+)?wiper\b|^wiper\s+motor\b",
                     r"washer|headlight|cap|cover|bracket|rubber|link|arm|blade|pivot|switch|relay|seal|collar"),
     "knuckle": (rf"^knuckle(\s+(assy|sub-assy)\.?)?,\s*{SIDE}(fr|rr)\.?",
                 r"ring|boot|dust|seal|guard|plate|cover|sensor|bolt|nut|pin"),
     "strut": (r"^shock\s+absorber\s+(assy|unit|set)\.?|^damper\s+(assy|unit)\.?|^strut\s+(assy|unit)\.?",
-              r"mount|bush|base|bracket|washer|collar|rubber|cover|boot|bump|seat|cap|nut|bolt|plate|sleeve|stopper|insulator"),
+              r"mount|bush|base|bracket|washer|collar|rubber|cover|boot|bump|seat|cap|nut|bolt|plate|sleeve|stopper|insulator|n/a\s+for\s+usa"),
     "alternator": (r"^alternator(\s+assy\.?|\s*\(|,\s*core id|$)",
                    r"belt|bracket|pulley|brush|bearing|frame|cover|rotor|stator|holder|regulator|rectifier|terminal|insulator|bush|stay|fan|nut|tensioner"),
     "starter": (r"^starter(\s+motor)?(\s+assy\.?|\s*\(|,\s*core id|$)",
