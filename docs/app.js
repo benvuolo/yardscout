@@ -980,7 +980,7 @@ function photoBoxHtml(info, key, title, cls, under) {
  * already in the browser's memory: no second download. The photo itself is
  * never cropped. */
 function photoFill(img) {
-  const box = img.closest('.photo-box'), fill = box && box.querySelector('.ph-fill');
+  const box = img.closest('.photo-box, .yr-thumb'), fill = box && box.querySelector('.ph-fill');
   if (!fill || !img.currentSrc) return;
   fill.style.backgroundImage = 'url("' + img.currentSrc.replace(/["\\\n]/g, encodeURIComponent) + '")';
   box.classList.add('ph-filled');
@@ -5337,7 +5337,7 @@ function yardRowThumb(v) {
   const ex = extrasFor(v);
   const info = ex && ex[extraIdx.photo] ? photoInfo(ex[extraIdx.photo]) : null;
   if (info && info.onCards) {
-    return `<span class="yr-thumb has-illo">${illoSvgHtml(ex)}<img src="${escapeHtml(info.url)}" alt="" loading="lazy" decoding="async" width="${info.w}" height="${info.h}" onerror="this.remove()"></span>`;
+    return `<span class="yr-thumb has-illo">${illoSvgHtml(ex)}<span class="ph-fill" aria-hidden="true"></span><img src="${escapeHtml(info.url)}" alt="" loading="lazy" decoding="async" width="${info.w}" height="${info.h}" onload="photoFill(this)" onerror="this.remove()"></span>`;
   }
   const paint = paintHex(ex && ex[extraIdx.color]);
   return `<span class="yr-thumb"${paint ? ` style="--paint:${paint}"` : ''}><svg class="illo-car" viewBox="0 0 200 90" aria-hidden="true" focusable="false"><use href="#illo-${illoBody(ex)}"/></svg></span>`;
