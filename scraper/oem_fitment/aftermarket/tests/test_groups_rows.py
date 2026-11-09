@@ -166,6 +166,70 @@ long_ = a_rec("1AL", [(2001, 2009, "", "Front Driver Side")])
 check("no generation entry: a 9-year span is refused", not B([long_], Names(), "www.1aauto.com", gens={})["groups"])
 check("the app's own table is loaded", "toyota|camry" in R.load_generations())
 
+
+# ---- junkyard-demand lines: grammar on real 1A descriptions (probe 2026-11-09)
+def d_rec(sku, cat, desc, years=(2003, 2007), make="Honda", model="Accord", brand="TRQ", bpn="X1", ic=None):
+    r = copy.deepcopy(A0)
+    r.update(aftermarket_pn=sku, category=cat, house_brand=brand, house_brand_pn=bpn, flags=[],
+             interchange_numbers=ic or [],
+             applications=[{"years": list(years), "make": make, "model": model, "type": "", "engine": "",
+                            "notes": "", "raw": "", "description": f"{desc} {brand} {bpn}"}])
+    return r
+
+
+NOFL = {}
+hl = d_rec("1AH", "headlight", "Honda Accord Passenger Side Headlight Assembly", years=(2003, 2005))
+d = R.build([hl], Names(), "www.1aauto.com", gens=GENS, facelifts=NOFL)
+check("side-only position parsed ('Passenger Side' -> right)", d["groups"] and d["groups"][0]["position"] == "right")
+d = R.build([d_rec("1AH2", "headlight", "Honda Accord Passenger Side Headlight Assembly")], Names(), "www.1aauto.com",
+            gens=GENS, facelifts={"accord": [2006, 2011]})
+check("lamp row crossing a facelift (Accord 2003-07 over 2006) is refused", not d["groups"]
+      and d["refused_rows"].get("facelift_span") == 1)
+st = d_rec("1AST", "strut", "Honda Accord Front Driver Side Strut & Spring Assembly")
+check("facelift guard applies to lamps only", R.build([st], Names(), "www.1aauto.com", gens=GENS,
+                                                      facelifts={"accord": [2006]})["groups"] != [])
+tl = d_rec("1AT", "tail-light", "Honda Accord Sedan Driver Side Tail Light", years=(2006, 2007))
+d = R.build([tl], Names(), "www.1aauto.com", gens=GENS, facelifts=NOFL)
+check("body-qualified row waits for the app body gate (refused today)", not d["groups"]
+      and d["refused_rows"].get("body_gate_pending") == 1)
+mi = d_rec("1AM", "mirror", "Honda Accord Sedan Passenger Side Power Paint to Match Mirror", years=(1998, 2002))
+_, _, rows = R.oneaauto_rows(mi)
+check("mirror grammar: body sedan, option power, cosmetic finish, kind mirror",
+      rows[0][4] == {"kind": "mirror", "options": ("power",), "body": "sedan", "cosmetic": True})
+dh = d_rec("1AD", "door-handle-ext", "Honda Accord 4 Door Front Driver Side with Manual Door Locks Black Exterior Door Handle",
+           years=(1990, 1993))
+_, _, rows = R.oneaauto_rows(dh)
+check("handle grammar: 4 Door body, manual-locks option, color cosmetic",
+      rows[0][4]["options"] == ("manual door locks",) and rows[0][4]["cosmetic"] and rows[0][4]["kind"] == "exterior door handle"
+      and rows[0][1] == "front left")
+pm = d_rec("1AP2", "mirror", "Honda Accord Passenger Side Power Heated Mirror", years=(1998, 2002))
+pn = d_rec("1AP3", "mirror", "Honda Accord Passenger Side Power Mirror", years=(1998, 2002), bpn="X2")
+d = R.build([pm, pn], Names(), "www.1aauto.com", gens=GENS, facelifts=NOFL)
+check("units told apart by stated options both publish, each 'if equipped'",
+      sorted(g["if_equipped"] for g in d["groups"]) == [["heated", "power"], ["power"]]
+      and all(g["option"] and "If equipped:" in g["note"] for g in d["groups"]))
+pl = d_rec("1AP4", "mirror", "Honda Accord Passenger Side Mirror", years=(1998, 2002), bpn="X3")
+d = R.build([pm, pl], Names(), "www.1aauto.com", gens=GENS, facelifts=NOFL)
+check("a plain unit next to an option unit for one corner is a split (both dropped)", not d["groups"])
+bt = d_rec("1AB", "blower-motor", "Acura TL HVAC Blower Motor Assembly", years=(2004, 2008), make="Acura", model="TL")
+d = R.build([bt], Names(), "www.1aauto.com", gens={}, facelifts=NOFL)
+check("plain blower row (no position) -> group", d["groups"] and d["groups"][0]["position"] == "")
+un = d_rec("1AU", "mirror", "Honda Accord Passenger Side Power Mirror with Blind Spot Detection", years=(1998, 2002))
+check("a qualifier outside the grammar refuses", not R.build([un], Names(), "www.1aauto.com", gens=GENS,
+                                                             facelifts=NOFL)["groups"])
+fog = d_rec("1AF2", "fog-light", "Honda Civic Sedan L4 2.4L Driver Side Fog Light", make="Honda", model="Civic", years=(2013, 2015))
+check("engine words outside the grammar refuse (fog light 'L4 2.4L')",
+      not R.build([fog], Names(), "www.1aauto.com", gens={}, facelifts=NOFL)["groups"])
+# rule 5: separators and case only (hub 2026-11-09)
+check("rule 5: 47-1578R == 471578R (one number)", not R.merged_variants(
+    [{"brand": "CARDONE Reman", "pn": "47-1578R"}, {"brand": "Cardone reman", "pn": "471578r"}]))
+check("rule 5: 821578AR next to 47-1578R is two numbers (refuse)", R.merged_variants(
+    [{"brand": "CARDONE Reman", "pn": "821578AR"}, {"brand": "CARDONE Reman", "pn": "47-1578R"}]))
+check("rule 5: Honda 33551SDAA32 == 33551-SDA-A32", not R.merged_variants(
+    [{"brand": "Honda", "pn": "33551SDAA32"}, {"brand": "Honda", "pn": "33551-SDA-A32"}]))
+check("rule 5: real Honda mirror variants refuse", R.merged_variants(
+    [{"brand": "Honda", "pn": "76200-S84-A21ZF"}, {"brand": "Honda", "pn": "76200-S4K-A41ZF"}]))
+
 # ---- facts only; owner's free-fitment rule
 out = json.dumps(B([A0, u1, u4], Names(), "www.1aauto.com"))
 check("1A output carries no price / description / image / interchange numbers",

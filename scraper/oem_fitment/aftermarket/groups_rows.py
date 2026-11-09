@@ -50,7 +50,9 @@ SITES = {
     "gspnorthamerica.com": {"short": "gsp", "label": "GSP", "file": "gspnorthamerica"},
     "www.1aauto.com": {"short": "1a", "label": "1A Auto", "file": "oneaauto"},
 }
-CAT_LABEL = {"cv-axle": "CV axle", "strut": "strut assembly", "knuckle": "steering knuckle",
+CAT_LABEL = {"headlight": "headlight", "tail-light": "tail light", "fog-light": "fog light",
+             "mirror": "side mirror", "door-handle-int": "interior door handle",
+             "window-regulator": "window regulator", "cv-axle": "CV axle", "strut": "strut assembly", "knuckle": "steering knuckle",
              "door-handle-ext": "exterior door handle", "door-lock-actuator": "door lock actuator",
              "wiper-motor": "wiper motor", "blower-motor": "blower motor", "maf-sensor": "mass air flow sensor",
              "throttle-body": "throttle body", "fuel-pump-module": "fuel pump module",
@@ -61,15 +63,16 @@ SIDES = ("left", "right")
 # ------------------------------------------------------------- positions ---
 def norm_position(s: str) -> str | None:
     """'Front Left' / 'Front Driver Side' -> 'front left'; 'Rear' -> 'rear';
-    '' -> '' (no position, e.g. a radiator); anything else -> None."""
+    'Driver Side' (lamps, mirrors) -> 'left'; '' -> '' (no position, e.g. a
+    radiator); anything else -> None."""
     t = re.sub(r"\s+", " ", (s or "").strip().lower())
     if not t:
         return ""
-    m = re.fullmatch(r"(front|rear)(?: (left|right|driver side|passenger side))?", t)
-    if not m:
+    m = re.fullmatch(r"(?:(front|rear) ?)?(left|right|driver side|passenger side)?", t)
+    if not m or not (m.group(1) or m.group(2)):
         return None
     side = {"driver side": "left", "passenger side": "right"}.get(m.group(2), m.group(2))
-    return m.group(1) + (f" {side}" if side else "")
+    return " ".join(x for x in (m.group(1), side) if x)
 
 
 def claim_positions(pos: str) -> list[str]:
@@ -110,7 +113,7 @@ def gsp_rows(r: dict):
         if refuse is None and rp != pos:
             refuse = "row_position_differs"
         why = "submodel" if a.get("submodel") else None
-        rows.append((a, rp if rp is not None else pos, engines if not why else None, why))
+        rows.append((a, rp if rp is not None else pos, engines if not why else None, why, {}))
     return refuse, pos, rows
 
 
@@ -125,17 +128,72 @@ def merged_variants(ic: list) -> bool:
 
 
 SUSPENSION_Q = re.compile(r"suspension|adaptive|electronic|air ride|magnetic|sport susp", re.I)
-_POS_IN_DESC = re.compile(r"\b(Front|Rear)(?: (Driver Side|Passenger Side|Left|Right))?\b")
-_ENG_Q = re.compile(r"^([VLHIW])(\d{1,2}) (\d\.\d)L$")
+_POS_IN_DESC = re.compile(r"\b(?:(?:Front|Rear) )?(?:Driver Side|Passenger Side|Left|Right)\b|\b(?:Front|Rear)\b")
+
+# Qualifier grammar (hub 2026-11-09, CLAUDE.md rule 3 spirit). Anything a row
+# says that is not in it refuses the row.
+BODY_Q = re.compile(r"\b(?:(?:2|4) Door(?: (?:Sedan|Coupe|Hatchback|Wagon))?|Sedan|Coupe|Hatchback|Wagon|Convertible)\b")
+BODY_CLASS = {"sedan": "sedan", "coupe": "coupe", "hatchback": "hatchback", "wagon": "wagon",
+              "convertible": "convertible", "2 door coupe": "coupe", "4 door sedan": "sedan",
+              "2 door hatchback": "hatchback", "4 door hatchback": "hatchback", "4 door wagon": "wagon"}
+OPTION_Q = [  # (pattern, option label shown as "if equipped: <label>")
+    (re.compile(r"\bwith Manual Door Locks\b"), "manual door locks"),
+    (re.compile(r"\bwith Power Door Locks\b"), "power door locks"),
+    (re.compile(r"\bPower Folding\b"), "power folding"),
+    (re.compile(r"\bHeated\b"), "heated"),
+    (re.compile(r"\bMemory\b"), "memory"),
+    (re.compile(r"\b(?:with )?(?:Turn )?Signal\b"), "turn signal"),
+    (re.compile(r"\bManual\b"), "manual"),
+    (re.compile(r"\bPower(?! (?:Window|Door Lock|Steering))\b"), "power"),
+]
+COSMETIC_Q = re.compile(r"\b(?:Paint to Match|Textured|Smooth|Chrome|(?:(?:Light|Dark|Medium) )?(?:Black|Tan|Gray|"
+                        r"Grey|Beige|Brown|White|Silver|Ivory|Graphite|Ebony|Parchment|Taupe))\b")
+KIND_RE = re.compile(r"^(?:hvac )?blower motor(?: assembly)?|headlight(?: assembly)?|tail light(?: assembly)?|"
+                     r"fog light(?: assembly)?|(?:exterior|interior|outside|inside) door handle|mirror|"
+                     r"door lock actuator|power window (?:motor (?:&|and) )?regulator(?: assembly)?|"
+                     r"power window motor|window regulator|strut(?: & spring)? assembly|"
+                     r"shock(?: & spring)? assembly|windshield wiper motor|wiper motor$")
+# On only after interchange/categories-1 (app body gate) merges AND the hub
+# OKs it. Turning it on also needs: apps carrying a[5] = {"body": <class>},
+# and refusal of any body outside BODY_CLASS's values ("4 door" alone is not
+# a silhouette class). Until then every body-qualified row is refused.
+EMIT_BODY_GATE = False
+LAMPS = {"headlight", "tail-light", "fog-light"}
+
+
+def grammar(pre: str, post: str):
+    """-> (body | None, options tuple, cosmetic bool, kind, leftover).
+    `pre` is the text before the position phrase, `post` the text after it."""
+    body, opts, cosm = None, [], False
+    parts = []
+    for t in (pre, post):
+        bm = list(BODY_Q.finditer(t))
+        for m in bm:
+            b = BODY_CLASS.get(m.group(0).lower(), m.group(0).lower())
+            body = b if body in (None, b) else "conflict"
+        t = BODY_Q.sub(" ", t)
+        for rx, lab in OPTION_Q:
+            if rx.search(t):
+                opts.append(lab)
+                t = rx.sub(" ", t)
+        if COSMETIC_Q.search(t):
+            cosm = True
+            t = COSMETIC_Q.sub(" ", t)
+        parts.append(re.sub(r"\s+", " ", t).strip())
+    leftover_pre, kind = parts[0], parts[1].lower()
+    km = KIND_RE.match(kind)
+    leftover = " ".join(x for x in (leftover_pre, "" if km and km.group(0) == kind else kind) if x)
+    return body, tuple(sorted(set(opts))), cosm, kind if km else "", leftover
 
 
 def oneaauto_rows(r: dict):
+    """-> (unit_refusal, position, [(row, position, engines | None, row_refusal, meta)])"""
     flags = [f for f in r.get("flags", []) if f != "multi_make"]
     refuse = ("flag:" + flags[0]) if flags else None
     if refuse is None and merged_variants(r.get("interchange_numbers", [])):
         refuse = "interchange_variants"
     rows = []
-    positions = set()
+    positions, optsets = set(), set()
     tail = f" {r.get('house_brand', '')} {r.get('house_brand_pn', '')}".rstrip()
     for a in r.get("applications", []):
         d = a.get("description", "")
@@ -143,28 +201,29 @@ def oneaauto_rows(r: dict):
             d = d[: -len(tail)]
         pre = f"{a['make']} {a['model']} "
         if not d.startswith(pre):
-            rows.append((a, None, None, "description_shape"))
+            rows.append((a, None, None, "description_shape", {}))
             continue
         rest = d[len(pre):]
         # the LAST position phrase: "Front Wheel Drive Front Passenger Side"
-        # must keep "Front Wheel Drive" as a (refused) qualifier
+        # keeps "Front Wheel Drive" as a (refused) qualifier
         ms = [x for x in _POS_IN_DESC.finditer(rest) if not rest[x.end():].startswith(" Wheel Drive")]
         m = ms[-1] if ms else None
-        if not m:
-            q, rp = rest, ""
-        else:
-            q, rp = rest[:m.start()].strip(), norm_position(m.group(0))
-            a = {**a, "kind": rest[m.end():].strip().lower()}
+        q, post, rp = (rest[:m.start()], rest[m.end():], norm_position(m.group(0))) if m else ("", rest, "")
+        body, opts, cosm, kind, left = grammar(q.strip(), post.strip())
+        meta = {"kind": kind, "options": opts, "body": body, "cosmetic": cosm}
         if rp is not None:
             positions.add(rp)
-        if not q:
-            rows.append((a, rp, [""], None))
+        optsets.add(opts)
+        if left:
+            rows.append((a, rp, None, "qualifier:" + left, meta))
+        elif not kind:
+            rows.append((a, rp, None, "unknown_kind", meta))
+        elif body == "conflict" or (body and not EMIT_BODY_GATE):
+            rows.append((a, rp, None, "body_gate_pending" if body != "conflict" else "body_conflict", meta))
         else:
-            # every qualifier refuses, engine ones too ("V6 3.2L" does not
-            # exclude a same-engine sport trim; shakeout 2026-11-09)
-            rows.append((a, rp, None, "qualifier:" + q))
-    # per-row positions: one unit may be listed for the left corner of one car
-    # and the right corner of another; groups are per (unit, position)
+            rows.append((a, rp, [""], None, meta))
+    if refuse is None and len(optsets) > 1:
+        refuse = "options_differ_across_rows"
     pos = next(iter(positions)) if len(positions) == 1 else ""
     return refuse, pos, rows
 
@@ -194,14 +253,45 @@ def span_ok(gens: dict, make: str, models: list, lo: int, hi: int) -> bool:
     return hi - lo + 1 <= MAX_SPAN_NO_GEN
 
 
+def load_facelifts() -> dict:
+    """model (lower) -> facelift start years, from the Parts table
+    (scraper/junkyard_scraper.FACELIFT_BREAKS); one source, no copy."""
+    sys.path.insert(0, str(GA.REPO / "scraper"))
+    try:
+        import junkyard_scraper as js  # noqa: E402
+        return {k.lower(): list(v) for k, v in js.FACELIFT_BREAKS.items()}
+    except (ImportError, AttributeError):
+        return {}
+
+
+def crosses_facelift(fl: dict, models: list, lo: int, hi: int) -> bool:
+    for md in models:
+        for y in fl.get(str(md).lower(), []):
+            if lo < y <= hi:
+                return True
+    return False
+
+
+def split(units: dict) -> bool:
+    """Units of one brand+kind+body claiming one corner-year. Not a split when
+    there is one unit, or when every unit states a non-empty option set and
+    the sets all differ (the option tells them apart: "if equipped")."""
+    if len(units) <= 1:
+        return False
+    sets = list(units.values())
+    return not (all(sets) and len(set(sets)) == len(sets))
+
+
 # ------------------------------------------------------------------ build ---
 def build(records: list, names: GA.Names, site: str, src: str = "", complete: dict | None = None,
-          gens: dict | None = None) -> dict:
+          gens: dict | None = None, facelifts: dict | None = None) -> dict:
     gens = load_generations() if gens is None else gens
+    fl = load_facelifts() if facelifts is None else facelifts
     meta = SITES[site]
     rowfn = gsp_rows if meta["short"] == "gsp" else oneaauto_rows
     refused_units, refused_rows, unmapped = Counter(), Counter(), Counter()
-    claims = defaultdict(set)            # (cat, brand, mk, md, year, pos) -> {unit}
+    claims = defaultdict(dict)           # (cat, brand, mk, md, year, pos) -> {unit: options}
+    unit_meta = {}                       # (cat, unit) -> (options, cosmetic)
     accepted = defaultdict(list)         # (cat, unit, pos) -> [(mk, md, year, eng)]
     retrieved, seen = {}, set()
     # models the source ever qualifies by a suspension option (any unit, any year)
@@ -223,17 +313,18 @@ def build(records: list, names: GA.Names, site: str, src: str = "", complete: di
             refused_units[f"{cat}:{refuse.split(':')[0]}"] += 1
             if refuse.startswith("title_token:"):
                 refused_rows["title_token " + refuse.split(":", 1)[1]] += 1
-        qualified_models = {(a["make"], a["model"]) for a, _rp, _e, why in rows if why}
-        for a, rp, engines, why in rows:
+        qualified_models = {(a["make"], a["model"]) for a, _rp, _e, why, mt in rows
+                            if why or mt.get("options") or mt.get("body")}
+        for a, rp, engines, why, mt in rows:
             # a unqualified row of a make/model this unit also lists WITH a
             # qualifier is coarse data: refuse it (shakeout 2026-11-09)
-            if not why and (a["make"], a["model"]) in qualified_models:
+            if not why and not mt.get("options") and (a["make"], a["model"]) in qualified_models:
                 why = "sibling_row_qualified"
             if not why and cat == "strut" and (a["make"], a["model"]) in susp_models:
                 why = "model_has_suspension_options"
             # product kind (1A: "strut & spring assembly" vs bare "strut assembly")
             # is part of the split key: two kinds for one corner are not a split
-            brand = (brand_name, a.get("kind", ""))
+            brand = (brand_name, mt.get("kind", ""), mt.get("body") or "")
             c = names.canon(a["make"], a["model"])
             if c is None or c[2] is False:
                 unmapped[f"{a['make']} | {a['model']}"] += 1
@@ -241,10 +332,12 @@ def build(records: list, names: GA.Names, site: str, src: str = "", complete: di
             mk, md, _ = c
             if not why and not span_ok(gens, mk, [md, a["model"]], a["years"][0], a["years"][1]):
                 why = "generation_span"
+            if not why and cat in LAMPS and crosses_facelift(fl, [md, a["model"]], a["years"][0], a["years"][1]):
+                why = "facelift_span"
             cpos = rp if rp is not None else (pos or "")
             for y in range(a["years"][0], a["years"][1] + 1):
                 for p in claim_positions(cpos):
-                    claims[(cat, brand, mk, md, y, p)].add(unit)
+                    claims[(cat, brand, mk, md, y, p)][unit] = mt.get("options", ())
             if why:
                 refused_rows[why if not why.startswith("qualifier:") else "qualifier"] += 1  # noqa
                 if why.startswith("qualifier:"):
@@ -256,12 +349,13 @@ def build(records: list, names: GA.Names, site: str, src: str = "", complete: di
                 for e in engines:
                     accepted[(cat, unit, cpos)].append((mk, md, y, e, brand))
             retrieved[(cat, unit)] = r.get("retrieved", "")
+            unit_meta[(cat, unit)] = (mt.get("options", ()), mt.get("cosmetic", False))
     conflicts = Counter()
     groups = []
     for (cat, unit, pos), rows in sorted(accepted.items()):
         keep = defaultdict(list)
         for mk, md, y, e, brand in rows:
-            if any(len(claims[(cat, brand, mk, md, y, p)]) > 1 for p in claim_positions(pos)):
+            if any(split(claims[(cat, brand, mk, md, y, p)]) for p in claim_positions(pos)):
                 conflicts[cat] += 1
                 continue
             keep[(mk, md, e)].append(y)
@@ -272,16 +366,20 @@ def build(records: list, names: GA.Names, site: str, src: str = "", complete: di
         models = {(a[0], a[1]) for a in apps}
         where = f"{pos} " if pos else ""
         eng = any(a[4] for a in apps)
+        opts, cosm = unit_meta.get((cat, unit), ((), False))
         note = (f"{meta['label']} {unit} ({where}{CAT_LABEL.get(cat, cat)}) is listed for each of these "
                 f"vehicles in {meta['label']}'s own application list; aftermarket data, not the carmaker's "
                 f"catalog. No other unit of the same brand is listed for the same {where or ''}position on these "
                 f"cars. " + ("Match the engine. " if eng else "No engine is stated; check the engine. ")
-                + "Drive, transmission, trim and suspension (sport / electronic) are not stated; match them.")
+                + "Drive, transmission, trim and suspension (sport / electronic) are not stated; match them."
+                + (f" If equipped: {', '.join(opts)}." if opts else "")
+                + (" Color or finish may differ; it may need paint." if cosm else ""))
         groups.append({"id": f"am:{meta['short']}:{cat}:{unit}" + (f":{pos.replace(' ', '-')}" if pos else ""), "cat": cat, "tier": "likely",
                        "src": "aftermarket", "label": f"{meta['label']} {where.strip()}".strip(),
                        "unit": unit, "position": pos, "apps": apps, "cross_model": len(models) > 1,
                        "body_gated": False, "retrieved": retrieved.get((cat, unit), ""),
-                       "pro_gated": False, "note": note})
+                       "pro_gated": False, "if_equipped": list(opts), "option": bool(opts),
+                       "cosmetic": bool(cosm), "note": note})
     doc = {"schema": SCHEMA, "src": "aftermarket", "site": site, "raw": src, "tier": "likely",
            "crawl_complete": complete or {}, "groups": groups,
            "summary": {"unit_records": len(seen), "groups": len(groups),
