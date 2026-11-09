@@ -429,6 +429,21 @@ EXCLUDE_AT_CURATION: dict[tuple[str, str, str], str] = {
 # "&SPARE TIRE-REINFORCED TEMPORARY(T165/90D18)" on 19" road wheels): their
 # notes are not read for the compact-spare check; their spares are named
 # "Wheel Assy-Temporary" / "Wheel, Disc (For Spare)" and never seed a record.
+# Wheels cross-model groups (§11.4 sample 2026-11-09, Mopar): every app's own
+# page must STATE the wheel diameter and all must agree ("17x6.5" on the 2012
+# Journey vs "16 Inch" on the 2014 Ram C/V for one code was WRONG); a note on
+# any app's page naming a spare, or another numbered model ("3500" on the 2003
+# Ram 2500 page), refuses the group.
+# Wheels §11.4 sample 2026-11-09 (8 of 12 Toyota/Lexus groups WRONG): sibling
+# models share one catalog page (GS 300/GS 400/GS 430, RX 330/RX 350, IS 250/
+# IS 350, SC 300/SC 400, ES 300/ES 330) and the wheel row's "Fitting Vehicle
+# Options" chassis code (UZS160 = GS 400, JZS160 = GS 300; MCU3# = RX 330, GSU3#
+# = RX 350) limits it to one of them. No chassis-to-model map has a stated
+# basis yet, so in these namespaces a wheels group stays within ONE exact model.
+WHEEL_SAME_MODEL_ONLY_NS = frozenset({"toyota"})
+WHEEL_DIAMETER_RE = re.compile(r"\b(1[3-9]|2[0-4])(?:\.\d)?\s*(?:x\s*\d|\"|''|-?\s*inch|\s*in\b)", re.I)
+WHEEL_SPARE_NOTE_RE = re.compile(r"\bspare\b", re.I)
+MODEL_NUMBER_RE = re.compile(r"\b(1500|2500|3500|4500|5500)\b")
 WHEEL_NOTES_ARE_OPTIONS = frozenset({"www.hyundaipartsdeal.com", "www.kiapartsnow.com",
                                      "www.lexuspartsnow.com", "www.toyotapartsnow.com"})
 WHEEL_COMPACT_SPARE_RE = re.compile(

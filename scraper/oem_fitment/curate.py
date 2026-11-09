@@ -1360,6 +1360,12 @@ class Curation:
                                            "note": _likely_note(brand, pns[0], text, _pack_text(cat, c.packaging)),
                                            "reason": reason, "urls": urls})
                 continue
+            if cat == "wheels":
+                why_w = self.wheel_group_refusal(Ts, cat, c)
+                if why_w:
+                    self.refuse(why_w[0], cat=cat, pn=pns[0], evidence=[r.pointer for r in c.records],
+                                detail=why_w[1])
+                    continue
             slot = "+".join(sorted(slots)) or "C"
             note = _likely_note(brand, pns[0], text, _pack_text(cat, c.packaging))
             # its own evidence date: build-time expiry drops a Likely group
@@ -1370,6 +1376,30 @@ class Curation:
                         "note": note, "keys": [key], "cars": sum(self.inv_counts.get(T, 0) for T in Ts),
                         "oldest_retrieved": stamps[0] if stamps else None})
         return out
+
+    def wheel_group_refusal(self, Ts, cat, c):
+        """(code, detail) when a wheels Likely group lacks a stated, agreeing
+        basis on every app's own page (policy.WHEEL_DIAMETER_RE etc.), else None."""
+        if self.ns in policy.WHEEL_SAME_MODEL_ONLY_NS and len({(T[0], T[1]) for T in Ts}) > 1:
+            return "wheel_cross_model_chassis", "; ".join(sorted({f"{T[0]} {T[1]}" for T in Ts}))
+        sizes = {}
+        for T in Ts:
+            notes = [n or "" for n in self.own_page(T, cat, c)[1]]
+            text = " ; ".join(notes)
+            if policy.WHEEL_SPARE_NOTE_RE.search(text):
+                return "wheel_spare_note", f"{T[0]} {T[1]} {T[2]}: {text[:120]}"
+            own_num = set(policy.MODEL_NUMBER_RE.findall(T[1]))
+            other = set(policy.MODEL_NUMBER_RE.findall(text)) - own_num
+            if other:
+                return "wheel_model_other", f"{T[0]} {T[1]} {T[2]}: names {sorted(other)}"
+            d = {m.group(1) for m in policy.WHEEL_DIAMETER_RE.finditer(text)}
+            if not d:
+                return "wheel_size_unstated", f"{T[0]} {T[1]} {T[2]}"
+            sizes[T] = d
+        allsz = set().union(*sizes.values()) if sizes else set()
+        if len(allsz) != 1:
+            return "wheel_size_conflict", "; ".join(f"{T[1]} {T[2]}: {sorted(v)}" for T, v in sizes.items())
+        return None
 
     def _drop_catchall_twins(self, Ts):
         """Make breadth 2026-11-09: a feed name whose series is unknown
