@@ -1902,3 +1902,14 @@ All verdicts are ADVISORY. Nothing was shipped and nothing reads the allowlist y
    includes release_allowlist.json); tests 29/29; scraper/test_*.py all
    pass; pf_guards_unit ALL PASS. `_report/*` regenerated, including
    held_exterior.json.
+- 2026-11-09 ~03:30 UTC, held exterior release (owner go, ops/hub.md 30723df):
+  release_allowlist.json holds the 96 entries of
+  `_report/held_exterior_release.json` minus 8 subaru (withheld) = 88.
+  Re-curated on oem-raw@c36da2e: **all 88 released** on an exact (ns, cat,
+  pn, apps) match after every rule (gm 20, mopar 36, ford 22, vag 10). Groups
+  now: toyota 583, gm 309, mopar 281, ford 81, vag 16, hmg 6, mb 0. The only
+  change against bc5e228 is the 88 released groups: no removals, nothing
+  added outside the allowlist. The 8 subaru entries release only if subaru is
+  re-shipped and they still match. Gates: V12-V15, parity 6/6, V9 0 flips,
+  payload ok x7 (0 Verified), curation_tests 15/15, tests 29/29,
+  scraper/test_*.py, pf_guards_unit.

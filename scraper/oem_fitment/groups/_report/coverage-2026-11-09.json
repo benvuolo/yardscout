@@ -1,12 +1,12 @@
 {
  "after_oem_status": {
-  "ford": "ok c36da2eb 59 groups (0 verified, 59 likely)",
-  "gm": "ok c36da2eb 289 groups (0 verified, 289 likely)",
+  "ford": "ok c36da2eb 81 groups (0 verified, 81 likely)",
+  "gm": "ok c36da2eb 309 groups (0 verified, 309 likely)",
   "hmg": "ok c36da2eb 6 groups (0 verified, 6 likely)",
   "mb": "ok c36da2eb 0 groups (0 verified, 0 likely)",
-  "mopar": "ok c36da2eb 245 groups (0 verified, 245 likely)",
+  "mopar": "ok c36da2eb 281 groups (0 verified, 281 likely)",
   "toyota": "ok c36da2eb 583 groups (0 verified, 583 likely)",
-  "vag": "ok c36da2eb 6 groups (0 verified, 6 likely)"
+  "vag": "ok c36da2eb 16 groups (0 verified, 16 likely)"
  },
  "cars": 338652,
  "categories": {
@@ -123,7 +123,7 @@
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376642863,
+    "pairs_likely": 377521995,
     "pairs_verified": 0,
     "seekers": 338652
    },
@@ -173,7 +173,7 @@
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376574952,
+    "pairs_likely": 377175604,
     "pairs_verified": 0,
     "seekers": 338652
    },
@@ -481,7 +481,7 @@
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376619499,
+    "pairs_likely": 377295217,
     "pairs_verified": 0,
     "seekers": 338652
    },
@@ -631,7 +631,7 @@
     "m_local": 41,
     "m_local_share": 0.0001,
     "m_pairs": 0.0,
-    "pairs_likely": 376907373,
+    "pairs_likely": 376961899,
     "pairs_verified": 2756,
     "seekers": 338652
    },
@@ -681,7 +681,7 @@
     "m_local": 5030,
     "m_local_share": 0.0149,
     "m_pairs": 0.0417,
-    "pairs_likely": 375529801,
+    "pairs_likely": 375742075,
     "pairs_verified": 16359010,
     "seekers": 338652
    },
@@ -731,7 +731,7 @@
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376611067,
+    "pairs_likely": 376910275,
     "pairs_verified": 0,
     "seekers": 338652
    },
@@ -1097,7 +1097,7 @@
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 382534436,
+    "pairs_likely": 383189986,
     "pairs_verified": 0,
     "seekers": 338652
    },
@@ -1147,7 +1147,7 @@
     "m_local": 2686,
     "m_local_share": 0.0079,
     "m_pairs": 0.0054,
-    "pairs_likely": 375750333,
+    "pairs_likely": 375750957,
     "pairs_verified": 2029278,
     "seekers": 338652
    },
@@ -1559,24 +1559,12 @@
     "sample": []
    },
    "new_cross_model_likely": {
-    "car_pairs": 148718,
-    "key_pairs": 30,
+    "car_pairs": 1012644,
+    "key_pairs": 54,
     "sample": [
      [
       [
        "Dodge",
-       "Ram 1500",
-       2002
-      ],
-      [
-       "Dodge",
-       "Ram 2500",
-       2003
-      ]
-     ],
-     [
-      [
-       "Dodge",
        "Ram 2500",
        2003
       ],
@@ -1588,14 +1576,110 @@
      ],
      [
       [
-       "Lexus",
-       "ES 300",
-       2002
+       "Ford",
+       "Expedition",
+       2000
       ],
       [
-       "Lexus",
-       "ES 330",
+       "Ford",
+       "F-150",
+       2001
+      ]
+     ],
+     [
+      [
+       "Ford",
+       "Expedition",
+       2003
+      ],
+      [
+       "Lincoln",
+       "Navigator",
        2004
+      ]
+     ],
+     [
+      [
+       "Ford",
+       "Expedition",
+       2007
+      ],
+      [
+       "Lincoln",
+       "Navigator",
+       2007
+      ]
+     ],
+     [
+      [
+       "Ford",
+       "F-150",
+       2001
+      ],
+      [
+       "Ford",
+       "Expedition",
+       2000
+      ]
+     ],
+     [
+      [
+       "Ford",
+       "Flex",
+       2009
+      ],
+      [
+       "Lincoln",
+       "MKS",
+       2009
+      ]
+     ],
+     [
+      [
+       "Ford",
+       "Fusion",
+       2012
+      ],
+      [
+       "Lincoln",
+       "MKZ",
+       2010
+      ]
+     ],
+     [
+      [
+       "Ford",
+       "Fusion",
+       2012
+      ],
+      [
+       "Lincoln",
+       "MKZ",
+       2011
+      ]
+     ],
+     [
+      [
+       "Ford",
+       "Fusion",
+       2012
+      ],
+      [
+       "Lincoln",
+       "MKZ",
+       2012
+      ]
+     ],
+     [
+      [
+       "Ford",
+       "Fusion",
+       2012
+      ],
+      [
+       "Mercury",
+       "Milan",
+       2010
       ]
      ],
      [
@@ -1828,6 +1912,150 @@
      ],
      [
       [
+       "Lincoln",
+       "MKS",
+       2009
+      ],
+      [
+       "Ford",
+       "Flex",
+       2009
+      ]
+     ],
+     [
+      [
+       "Lincoln",
+       "MKZ",
+       2010
+      ],
+      [
+       "Ford",
+       "Fusion",
+       2012
+      ]
+     ],
+     [
+      [
+       "Lincoln",
+       "MKZ",
+       2010
+      ],
+      [
+       "Mercury",
+       "Milan",
+       2010
+      ]
+     ],
+     [
+      [
+       "Lincoln",
+       "MKZ",
+       2011
+      ],
+      [
+       "Ford",
+       "Fusion",
+       2012
+      ]
+     ],
+     [
+      [
+       "Lincoln",
+       "MKZ",
+       2011
+      ],
+      [
+       "Mercury",
+       "Milan",
+       2010
+      ]
+     ],
+     [
+      [
+       "Lincoln",
+       "MKZ",
+       2012
+      ],
+      [
+       "Ford",
+       "Fusion",
+       2012
+      ]
+     ],
+     [
+      [
+       "Lincoln",
+       "MKZ",
+       2012
+      ],
+      [
+       "Mercury",
+       "Milan",
+       2010
+      ]
+     ],
+     [
+      [
+       "Lincoln",
+       "Navigator",
+       2004
+      ],
+      [
+       "Ford",
+       "Expedition",
+       2003
+      ]
+     ],
+     [
+      [
+       "Lincoln",
+       "Navigator",
+       2007
+      ],
+      [
+       "Ford",
+       "Expedition",
+       2007
+      ]
+     ],
+     [
+      [
+       "Mercury",
+       "Milan",
+       2010
+      ],
+      [
+       "Ford",
+       "Fusion",
+       2012
+      ]
+     ],
+     [
+      [
+       "Mercury",
+       "Milan",
+       2010
+      ],
+      [
+       "Lincoln",
+       "MKZ",
+       2010
+      ]
+     ],
+     [
+      [
+       "Mercury",
+       "Milan",
+       2010
+      ],
+      [
+       "Lincoln",
+       "MKZ",
+       2012
+      ]
+     ],
+     [
+      [
        "Toyota",
        "Camry Hybrid",
        2007
@@ -1865,18 +2093,6 @@
      [
       [
        "Toyota",
-       "Camry Hybrid",
-       2015
-      ],
-      [
-       "Toyota",
-       "Camry",
-       2015
-      ]
-     ],
-     [
-      [
-       "Toyota",
        "Camry",
        2007
       ],
@@ -1920,6 +2136,30 @@
        "Toyota",
        "Camry Hybrid",
        2015
+      ]
+     ],
+     [
+      [
+       "Volkswagen",
+       "Golf",
+       1996
+      ],
+      [
+       "Volkswagen",
+       "Jetta",
+       1997
+      ]
+     ],
+     [
+      [
+       "Volkswagen",
+       "Jetta",
+       1997
+      ],
+      [
+       "Volkswagen",
+       "Golf",
+       1996
       ]
      ]
     ]
@@ -1945,8 +2185,8 @@
     "sample": []
    },
    "new_cross_model_likely": {
-    "car_pairs": 150462,
-    "key_pairs": 32,
+    "car_pairs": 739538,
+    "key_pairs": 54,
     "sample": [
      [
       [
@@ -1974,6 +2214,102 @@
      ],
      [
       [
+       "Ford",
+       "Edge",
+       2013
+      ],
+      [
+       "Lincoln",
+       "MKX",
+       2011
+      ]
+     ],
+     [
+      [
+       "Ford",
+       "Fusion",
+       2008
+      ],
+      [
+       "Lincoln",
+       "MKZ",
+       2008
+      ]
+     ],
+     [
+      [
+       "Ford",
+       "Fusion",
+       2012
+      ],
+      [
+       "Lincoln",
+       "MKZ",
+       2010
+      ]
+     ],
+     [
+      [
+       "Ford",
+       "Fusion",
+       2012
+      ],
+      [
+       "Lincoln",
+       "MKZ",
+       2011
+      ]
+     ],
+     [
+      [
+       "Ford",
+       "Fusion",
+       2012
+      ],
+      [
+       "Lincoln",
+       "MKZ",
+       2012
+      ]
+     ],
+     [
+      [
+       "Ford",
+       "Fusion",
+       2012
+      ],
+      [
+       "Mercury",
+       "Milan",
+       2010
+      ]
+     ],
+     [
+      [
+       "Ford",
+       "Fusion",
+       2014
+      ],
+      [
+       "Lincoln",
+       "MKZ",
+       2014
+      ]
+     ],
+     [
+      [
+       "Ford",
+       "Fusion",
+       2017
+      ],
+      [
+       "Lincoln",
+       "MKZ",
+       2014
+      ]
+     ],
+     [
+      [
        "Lexus",
        "ES 300",
        2002
@@ -2155,18 +2491,6 @@
      [
       [
        "Lexus",
-       "IS 250",
-       2007
-      ],
-      [
-       "Lexus",
-       "IS 350",
-       2007
-      ]
-     ],
-     [
-      [
-       "Lexus",
        "IS 350",
        2006
       ],
@@ -2250,14 +2574,146 @@
      ],
      [
       [
-       "Lexus",
-       "RX 400h",
-       2006
+       "Lincoln",
+       "MKX",
+       2011
       ],
       [
-       "Lexus",
-       "RX 350",
-       2007
+       "Ford",
+       "Edge",
+       2013
+      ]
+     ],
+     [
+      [
+       "Lincoln",
+       "MKZ",
+       2008
+      ],
+      [
+       "Ford",
+       "Fusion",
+       2008
+      ]
+     ],
+     [
+      [
+       "Lincoln",
+       "MKZ",
+       2010
+      ],
+      [
+       "Ford",
+       "Fusion",
+       2012
+      ]
+     ],
+     [
+      [
+       "Lincoln",
+       "MKZ",
+       2010
+      ],
+      [
+       "Mercury",
+       "Milan",
+       2010
+      ]
+     ],
+     [
+      [
+       "Lincoln",
+       "MKZ",
+       2011
+      ],
+      [
+       "Ford",
+       "Fusion",
+       2012
+      ]
+     ],
+     [
+      [
+       "Lincoln",
+       "MKZ",
+       2011
+      ],
+      [
+       "Mercury",
+       "Milan",
+       2010
+      ]
+     ],
+     [
+      [
+       "Lincoln",
+       "MKZ",
+       2014
+      ],
+      [
+       "Ford",
+       "Fusion",
+       2014
+      ]
+     ],
+     [
+      [
+       "Lincoln",
+       "MKZ",
+       2014
+      ],
+      [
+       "Ford",
+       "Fusion",
+       2017
+      ]
+     ],
+     [
+      [
+       "Mercury",
+       "Milan",
+       2010
+      ],
+      [
+       "Ford",
+       "Fusion",
+       2012
+      ]
+     ],
+     [
+      [
+       "Mercury",
+       "Milan",
+       2010
+      ],
+      [
+       "Lincoln",
+       "MKZ",
+       2010
+      ]
+     ],
+     [
+      [
+       "Mercury",
+       "Milan",
+       2010
+      ],
+      [
+       "Lincoln",
+       "MKZ",
+       2011
+      ]
+     ],
+     [
+      [
+       "Mercury",
+       "Milan",
+       2010
+      ],
+      [
+       "Lincoln",
+       "MKZ",
+       2012
       ]
      ],
      [
@@ -2361,37 +2817,25 @@
      [
       [
        "Buick",
-       "Rainier",
-       2004
+       "Century",
+       2003
       ],
       [
-       "Chevrolet",
-       "Trailblazer",
+       "Buick",
+       "Regal",
        2004
       ]
      ],
      [
       [
-       "Buick",
-       "Regal",
+       "Cadillac",
+       "DeVille",
+       1998
+      ],
+      [
+       "Cadillac",
+       "Eldorado",
        2000
-      ],
-      [
-       "Buick",
-       "Century",
-       2003
-      ]
-     ],
-     [
-      [
-       "Buick",
-       "Regal",
-       2003
-      ],
-      [
-       "Buick",
-       "Century",
-       2003
       ]
      ],
      [
@@ -2404,18 +2848,6 @@
        "Cadillac",
        "DeVille",
        1998
-      ]
-     ],
-     [
-      [
-       "Chevrolet",
-       "Avalanche",
-       2007
-      ],
-      [
-       "Chevrolet",
-       "Silverado",
-       2008
       ]
      ],
      [
@@ -2450,15 +2882,15 @@
       ],
       [
        "GMC",
-       "Sonoma",
-       2000
+       "Jimmy",
+       1998
       ]
      ],
      [
       [
        "Chevrolet",
-       "Tahoe",
-       2007
+       "Silverado",
+       2008
       ],
       [
        "Chevrolet",
@@ -2469,13 +2901,13 @@
      [
       [
        "Chevrolet",
-       "Tahoe",
-       2007
+       "Silverado",
+       2008
       ],
       [
        "Chevrolet",
-       "Silverado",
-       2008
+       "Tahoe",
+       2007
       ]
      ],
      [
@@ -2498,8 +2930,8 @@
       ],
       [
        "Dodge",
-       "Magnum",
-       2005
+       "Charger",
+       2007
       ]
      ],
      [
@@ -2512,6 +2944,42 @@
        "Chrysler",
        "Concorde",
        2002
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "300M",
+       2002
+      ],
+      [
+       "Chrysler",
+       "LHS",
+       2000
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "300M",
+       2002
+      ],
+      [
+       "Chrysler",
+       "Sebring",
+       2004
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "300M",
+       2002
+      ],
+      [
+       "Dodge",
+       "Intrepid",
+       2004
       ]
      ],
      [
@@ -2534,18 +3002,6 @@
       ],
       [
        "Chrysler",
-       "LHS",
-       2000
-      ]
-     ],
-     [
-      [
-       "Chrysler",
-       "Concorde",
-       2002
-      ],
-      [
-       "Chrysler",
        "Sebring",
        2004
       ]
@@ -2560,6 +3016,18 @@
        "Chrysler",
        "Concorde",
        2002
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "LHS",
+       2000
+      ],
+      [
+       "Chrysler",
+       "Sebring",
+       2004
       ]
      ],
      [
@@ -2582,44 +3050,8 @@
       ],
       [
        "Chrysler",
-       "Concorde",
-       2002
-      ]
-     ],
-     [
-      [
-       "Chrysler",
-       "Sebring",
-       2004
-      ],
-      [
-       "Dodge",
-       "Intrepid",
-       2004
-      ]
-     ],
-     [
-      [
-       "Chrysler",
-       "Town & Country",
-       1999
-      ],
-      [
-       "Dodge",
-       "Caravan",
-       1999
-      ]
-     ],
-     [
-      [
-       "Chrysler",
-       "Town & Country",
-       2005
-      ],
-      [
-       "Dodge",
-       "Caravan",
-       2005
+       "LHS",
+       2000
       ]
      ],
      [
@@ -2660,26 +3092,50 @@
      ],
      [
       [
-       "Chrysler",
-       "Town & Country",
-       2008
+       "Dodge",
+       "Caravan",
+       2005
       ],
       [
-       "Dodge",
-       "Grand Caravan",
-       2010
+       "Chrysler",
+       "Town & Country",
+       2005
       ]
      ],
      [
       [
        "Dodge",
-       "Charger",
+       "Caravan",
+       2005
+      ],
+      [
+       "Dodge",
+       "Grand Caravan",
+       2004
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Caravan",
+       2005
+      ],
+      [
+       "Dodge",
+       "Grand Caravan",
        2007
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Grand Caravan",
+       2004
       ],
       [
        "Chrysler",
-       "300",
-       2006
+       "Town & Country",
+       2005
       ]
      ],
      [
@@ -2710,7 +3166,7 @@
       [
        "Dodge",
        "Grand Caravan",
-       2007
+       2005
       ],
       [
        "Dodge",
@@ -2722,12 +3178,12 @@
       [
        "Dodge",
        "Grand Caravan",
-       2010
+       2007
       ],
       [
        "Chrysler",
        "Town & Country",
-       2008
+       2005
       ]
      ],
      [
@@ -2745,18 +3201,6 @@
      [
       [
        "Dodge",
-       "Intrepid",
-       2004
-      ],
-      [
-       "Chrysler",
-       "LHS",
-       2000
-      ]
-     ],
-     [
-      [
-       "Dodge",
        "Magnum",
        2005
       ],
@@ -2764,30 +3208,6 @@
        "Chrysler",
        "300",
        2006
-      ]
-     ],
-     [
-      [
-       "Dodge",
-       "Magnum",
-       2005
-      ],
-      [
-       "Dodge",
-       "Charger",
-       2007
-      ]
-     ],
-     [
-      [
-       "Ford",
-       "Contour",
-       1998
-      ],
-      [
-       "Ford",
-       "Mustang",
-       1998
       ]
      ],
      [
@@ -2812,6 +3232,30 @@
        "Ford",
        "Contour",
        1998
+      ]
+     ],
+     [
+      [
+       "Ford",
+       "Taurus X",
+       2008
+      ],
+      [
+       "Ford",
+       "Taurus",
+       2008
+      ]
+     ],
+     [
+      [
+       "Ford",
+       "Taurus",
+       2008
+      ],
+      [
+       "Ford",
+       "Taurus X",
+       2008
       ]
      ],
      [
@@ -2841,12 +3285,12 @@
      [
       [
        "GMC",
-       "Jimmy",
-       1998
+       "Sonoma",
+       2000
       ],
       [
-       "GMC",
-       "Sonoma",
+       "Chevrolet",
+       "S-10",
        2000
       ]
      ],
@@ -2876,14 +3320,14 @@
      ],
      [
       [
-       "Jeep",
-       "Compass",
-       2007
+       "Mercury",
+       "Montego",
+       2005
       ],
       [
-       "Dodge",
-       "Caliber",
-       2007
+       "Ford",
+       "Five Hundred",
+       2005
       ]
      ],
      [
@@ -2925,13 +3369,25 @@
      [
       [
        "Toyota",
-       "Camry",
-       2011
+       "Camry Hybrid",
+       2007
       ],
       [
        "Toyota",
+       "Camry",
+       2007
+      ]
+     ],
+     [
+      [
+       "Toyota",
        "Camry Hybrid",
-       2011
+       2015
+      ],
+      [
+       "Toyota",
+       "Camry",
+       2015
       ]
      ],
      [
@@ -3755,11 +4211,311 @@
     "sample": []
    },
    "new_cross_model_likely": {
-    "car_pairs": 140616,
-    "key_pairs": 26,
+    "car_pairs": 806588,
+    "key_pairs": 64,
     "sample": [
      [
       [
+       "Chrysler",
+       "Town & Country",
+       1998
+      ],
+      [
+       "Dodge",
+       "Grand Caravan",
+       2000
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Town & Country",
+       2001
+      ],
+      [
+       "Dodge",
+       "Caravan",
+       2005
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Town & Country",
+       2001
+      ],
+      [
+       "Dodge",
+       "Grand Caravan",
+       2007
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Town & Country",
+       2005
+      ],
+      [
+       "Chrysler",
+       "Voyager",
+       2003
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Town & Country",
+       2005
+      ],
+      [
+       "Dodge",
+       "Caravan",
+       2005
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Town & Country",
+       2005
+      ],
+      [
+       "Dodge",
+       "Grand Caravan",
+       2007
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Voyager",
+       2003
+      ],
+      [
+       "Chrysler",
+       "Town & Country",
+       2001
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Voyager",
+       2003
+      ],
+      [
+       "Chrysler",
+       "Town & Country",
+       2005
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Voyager",
+       2003
+      ],
+      [
+       "Dodge",
+       "Caravan",
+       2005
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Voyager",
+       2003
+      ],
+      [
+       "Dodge",
+       "Grand Caravan",
+       2005
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Caravan",
+       1999
+      ],
+      [
+       "Dodge",
+       "Grand Caravan",
+       2000
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Caravan",
+       2005
+      ],
+      [
+       "Chrysler",
+       "Town & Country",
+       2001
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Caravan",
+       2005
+      ],
+      [
+       "Chrysler",
+       "Voyager",
+       2003
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Caravan",
+       2005
+      ],
+      [
+       "Dodge",
+       "Grand Caravan",
+       2005
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Caravan",
+       2005
+      ],
+      [
+       "Dodge",
+       "Grand Caravan",
+       2007
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Dakota",
+       2000
+      ],
+      [
+       "Dodge",
+       "Durango",
+       2003
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Durango",
+       2003
+      ],
+      [
+       "Dodge",
+       "Dakota",
+       2000
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Grand Caravan",
+       2000
+      ],
+      [
+       "Chrysler",
+       "Town & Country",
+       1998
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Grand Caravan",
+       2000
+      ],
+      [
+       "Dodge",
+       "Caravan",
+       1999
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Grand Caravan",
+       2005
+      ],
+      [
+       "Chrysler",
+       "Town & Country",
+       2001
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Grand Caravan",
+       2005
+      ],
+      [
+       "Dodge",
+       "Caravan",
+       2005
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Grand Caravan",
+       2007
+      ],
+      [
+       "Chrysler",
+       "Town & Country",
+       2001
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Grand Caravan",
+       2007
+      ],
+      [
+       "Chrysler",
+       "Town & Country",
+       2005
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Grand Caravan",
+       2007
+      ],
+      [
+       "Chrysler",
+       "Voyager",
+       2003
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Grand Caravan",
+       2007
+      ],
+      [
+       "Dodge",
+       "Caravan",
+       2005
+      ]
+     ],
+     [
+      [
        "Dodge",
        "Ram 1500",
        2002
@@ -3772,26 +4528,14 @@
      ],
      [
       [
-       "Dodge",
-       "Ram 2500",
-       2003
+       "Ford",
+       "Fusion",
+       2012
       ],
       [
-       "Dodge",
-       "Ram 1500",
-       2002
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "ES 300",
-       2002
-      ],
-      [
-       "Lexus",
-       "ES 330",
-       2004
+       "Mercury",
+       "Milan",
+       2010
       ]
      ],
      [
@@ -3822,18 +4566,6 @@
       [
        "Lexus",
        "GS 300",
-       1998
-      ],
-      [
-       "Lexus",
-       "GS 430",
-       2003
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "GS 300",
        2006
       ],
       [
@@ -3888,18 +4620,6 @@
        "Lexus",
        "GS 300",
        1998
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "GS 400",
-       1998
-      ],
-      [
-       "Lexus",
-       "GS 430",
-       2003
       ]
      ],
      [
@@ -4024,6 +4744,18 @@
      ],
      [
       [
+       "Mercury",
+       "Milan",
+       2010
+      ],
+      [
+       "Ford",
+       "Fusion",
+       2012
+      ]
+     ],
+     [
+      [
        "Toyota",
        "Camry Hybrid",
        2007
@@ -4068,6 +4800,18 @@
        "Toyota",
        "Camry Hybrid",
        2011
+      ]
+     ],
+     [
+      [
+       "Volkswagen",
+       "Jetta",
+       1997
+      ],
+      [
+       "Volkswagen",
+       "Golf",
+       1996
       ]
      ]
     ]
@@ -4624,9 +5368,33 @@
     "sample": []
    },
    "new_cross_model_likely": {
-    "car_pairs": 148626,
-    "key_pairs": 26,
+    "car_pairs": 203152,
+    "key_pairs": 28,
     "sample": [
+     [
+      [
+       "Dodge",
+       "Dakota",
+       2000
+      ],
+      [
+       "Dodge",
+       "Durango",
+       2003
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Durango",
+       2003
+      ],
+      [
+       "Dodge",
+       "Dakota",
+       2000
+      ]
+     ],
      [
       [
        "Dodge",
@@ -4962,11 +5730,167 @@
     "sample": []
    },
    "new_cross_model_likely": {
-    "car_pairs": 111990,
-    "key_pairs": 26,
+    "car_pairs": 319490,
+    "key_pairs": 50,
     "sample": [
      [
       [
+       "Buick",
+       "Century",
+       2003
+      ],
+      [
+       "Buick",
+       "Regal",
+       2000
+      ]
+     ],
+     [
+      [
+       "Buick",
+       "Century",
+       2003
+      ],
+      [
+       "Buick",
+       "Regal",
+       2003
+      ]
+     ],
+     [
+      [
+       "Buick",
+       "Century",
+       2003
+      ],
+      [
+       "Buick",
+       "Regal",
+       2004
+      ]
+     ],
+     [
+      [
+       "Buick",
+       "Regal",
+       2000
+      ],
+      [
+       "Buick",
+       "Century",
+       2003
+      ]
+     ],
+     [
+      [
+       "Buick",
+       "Regal",
+       2003
+      ],
+      [
+       "Buick",
+       "Century",
+       2003
+      ]
+     ],
+     [
+      [
+       "Buick",
+       "Regal",
+       2004
+      ],
+      [
+       "Buick",
+       "Century",
+       2003
+      ]
+     ],
+     [
+      [
+       "Chevrolet",
+       "Avalanche",
+       2007
+      ],
+      [
+       "Chevrolet",
+       "Tahoe",
+       2007
+      ]
+     ],
+     [
+      [
+       "Chevrolet",
+       "Cobalt",
+       2007
+      ],
+      [
+       "Pontiac",
+       "G5",
+       2007
+      ]
+     ],
+     [
+      [
+       "Chevrolet",
+       "Tahoe",
+       2007
+      ],
+      [
+       "Chevrolet",
+       "Avalanche",
+       2007
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Concorde",
+       2002
+      ],
+      [
+       "Chrysler",
+       "LHS",
+       2000
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "LHS",
+       2000
+      ],
+      [
+       "Chrysler",
+       "Concorde",
+       2002
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Dakota",
+       2000
+      ],
+      [
+       "Dodge",
+       "Durango",
+       2003
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Durango",
+       2003
+      ],
+      [
+       "Dodge",
+       "Dakota",
+       2000
+      ]
+     ],
+     [
+      [
        "Ford",
        "Explorer Sport Trac",
        2001
@@ -4987,6 +5911,30 @@
        "Ford",
        "Explorer Sport Trac",
        2001
+      ]
+     ],
+     [
+      [
+       "GMC",
+       "Jimmy",
+       1998
+      ],
+      [
+       "GMC",
+       "Sonoma",
+       2000
+      ]
+     ],
+     [
+      [
+       "GMC",
+       "Sonoma",
+       2000
+      ],
+      [
+       "GMC",
+       "Jimmy",
+       1998
       ]
      ],
      [
@@ -5183,6 +6131,42 @@
      ],
      [
       [
+       "Pontiac",
+       "G5",
+       2007
+      ],
+      [
+       "Chevrolet",
+       "Cobalt",
+       2007
+      ]
+     ],
+     [
+      [
+       "Ram",
+       "1500",
+       2012
+      ],
+      [
+       "Ram",
+       "2500",
+       2011
+      ]
+     ],
+     [
+      [
+       "Ram",
+       "2500",
+       2011
+      ],
+      [
+       "Ram",
+       "1500",
+       2012
+      ]
+     ],
+     [
+      [
        "Toyota",
        "Camry Hybrid",
        2007
@@ -5275,6 +6259,78 @@
        "Toyota",
        "Camry Hybrid",
        2015
+      ]
+     ],
+     [
+      [
+       "Volkswagen",
+       "Cabrio",
+       2001
+      ],
+      [
+       "Volkswagen",
+       "Golf",
+       2003
+      ]
+     ],
+     [
+      [
+       "Volkswagen",
+       "GTI",
+       2007
+      ],
+      [
+       "Volkswagen",
+       "Jetta",
+       2006
+      ]
+     ],
+     [
+      [
+       "Volkswagen",
+       "GTI",
+       2009
+      ],
+      [
+       "Volkswagen",
+       "Jetta",
+       2006
+      ]
+     ],
+     [
+      [
+       "Volkswagen",
+       "Golf",
+       2003
+      ],
+      [
+       "Volkswagen",
+       "Cabrio",
+       2001
+      ]
+     ],
+     [
+      [
+       "Volkswagen",
+       "Jetta",
+       2006
+      ],
+      [
+       "Volkswagen",
+       "GTI",
+       2007
+      ]
+     ],
+     [
+      [
+       "Volkswagen",
+       "Jetta",
+       2006
+      ],
+      [
+       "Volkswagen",
+       "GTI",
+       2009
       ]
      ]
     ]
@@ -5300,9 +6356,69 @@
     "sample": []
    },
    "new_cross_model_likely": {
-    "car_pairs": 153446,
-    "key_pairs": 34,
+    "car_pairs": 452654,
+    "key_pairs": 46,
     "sample": [
+     [
+      [
+       "Chrysler",
+       "Town & Country",
+       1998
+      ],
+      [
+       "Dodge",
+       "Caravan",
+       1999
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Town & Country",
+       1998
+      ],
+      [
+       "Dodge",
+       "Grand Caravan",
+       2000
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Town & Country",
+       2005
+      ],
+      [
+       "Dodge",
+       "Caravan",
+       2005
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Town & Country",
+       2005
+      ],
+      [
+       "Dodge",
+       "Grand Caravan",
+       2005
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Caravan",
+       1999
+      ],
+      [
+       "Chrysler",
+       "Town & Country",
+       1998
+      ]
+     ],
      [
       [
        "Dodge",
@@ -5318,6 +6434,66 @@
      [
       [
        "Dodge",
+       "Caravan",
+       2005
+      ],
+      [
+       "Chrysler",
+       "Town & Country",
+       2005
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Caravan",
+       2005
+      ],
+      [
+       "Dodge",
+       "Grand Caravan",
+       2005
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Dakota",
+       2000
+      ],
+      [
+       "Dodge",
+       "Durango",
+       2003
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Durango",
+       2003
+      ],
+      [
+       "Dodge",
+       "Dakota",
+       2000
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Grand Caravan",
+       2000
+      ],
+      [
+       "Chrysler",
+       "Town & Country",
+       1998
+      ]
+     ],
+     [
+      [
+       "Dodge",
        "Grand Caravan",
        2000
       ],
@@ -5325,6 +6501,30 @@
        "Dodge",
        "Caravan",
        1999
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Grand Caravan",
+       2005
+      ],
+      [
+       "Chrysler",
+       "Town & Country",
+       2005
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Grand Caravan",
+       2005
+      ],
+      [
+       "Dodge",
+       "Caravan",
+       2005
       ]
      ],
      [
@@ -5913,30 +7113,6 @@
      [
       [
        "Buick",
-       "Century",
-       2003
-      ],
-      [
-       "Buick",
-       "Regal",
-       2003
-      ]
-     ],
-     [
-      [
-       "Buick",
-       "Rainier",
-       2004
-      ],
-      [
-       "Chevrolet",
-       "Trailblazer",
-       2004
-      ]
-     ],
-     [
-      [
-       "Buick",
        "Regal",
        2000
       ],
@@ -5948,50 +7124,38 @@
      ],
      [
       [
-       "Buick",
-       "Regal",
-       2003
-      ],
-      [
-       "Buick",
-       "Century",
-       2003
-      ]
-     ],
-     [
-      [
        "Cadillac",
        "DeVille",
-       2004
+       1998
       ],
       [
        "Cadillac",
        "Seville",
-       2003
+       1996
       ]
      ],
      [
       [
        "Cadillac",
-       "Seville",
-       2003
+       "Escalade",
+       2007
       ],
-      [
-       "Cadillac",
-       "DeVille",
-       2004
-      ]
-     ],
-     [
       [
        "Chevrolet",
-       "Astro",
-       2000
+       "Tahoe",
+       2007
+      ]
+     ],
+     [
+      [
+       "Cadillac",
+       "Seville",
+       1996
       ],
       [
-       "GMC",
-       "Safari",
-       2001
+       "Cadillac",
+       "DeVille",
+       1998
       ]
      ],
      [
@@ -6001,28 +7165,52 @@
        2007
       ],
       [
-       "Cadillac",
-       "Escalade",
+       "Chevrolet",
+       "Silverado",
+       2008
+      ]
+     ],
+     [
+      [
+       "Chevrolet",
+       "Cavalier",
+       2003
+      ],
+      [
+       "Pontiac",
+       "Sunfire",
+       1999
+      ]
+     ],
+     [
+      [
+       "Chevrolet",
+       "Cobalt",
+       2007
+      ],
+      [
+       "Pontiac",
+       "G5",
        2007
       ]
      ],
      [
       [
        "Chevrolet",
-       "S-10",
-       2000
+       "Colorado",
+       2005
       ],
       [
        "GMC",
-       "Sonoma",
-       2000
+       "Canyon",
+       2011
       ]
      ],
      [
       [
        "Chevrolet",
        "Silverado",
-       1999
+       2000
       ],
       [
        "GMC",
@@ -6034,7 +7222,7 @@
       [
        "Chevrolet",
        "Silverado",
-       2008
+       2012
       ],
       [
        "Chevrolet",
@@ -6045,18 +7233,6 @@
      [
       [
        "Chevrolet",
-       "Tahoe",
-       2007
-      ],
-      [
-       "Cadillac",
-       "Escalade",
-       2007
-      ]
-     ],
-     [
-      [
-       "Chevrolet",
        "Uplander",
        2008
       ],
@@ -6069,20 +7245,8 @@
      [
       [
        "Chevrolet",
-       "Venture",
-       2004
-      ],
-      [
-       "Chevrolet",
        "Uplander",
        2008
-      ]
-     ],
-     [
-      [
-       "Chevrolet",
-       "Venture",
-       2004
       ],
       [
        "Pontiac",
@@ -6092,14 +7256,14 @@
      ],
      [
       [
-       "Chrysler",
-       "300",
-       2006
+       "Chevrolet",
+       "Venture",
+       2004
       ],
       [
-       "Dodge",
-       "Magnum",
-       2005
+       "Chevrolet",
+       "Uplander",
+       2008
       ]
      ],
      [
@@ -6111,18 +7275,6 @@
       [
        "Chrysler",
        "Concorde",
-       2002
-      ]
-     ],
-     [
-      [
-       "Chrysler",
-       "Concorde",
-       2002
-      ],
-      [
-       "Chrysler",
-       "300M",
        2002
       ]
      ],
@@ -6141,104 +7293,164 @@
      [
       [
        "Chrysler",
-       "Town & Country",
-       2005
-      ],
-      [
-       "Dodge",
-       "Caravan",
-       2005
-      ]
-     ],
-     [
-      [
-       "Chrysler",
-       "Town & Country",
-       2005
-      ],
-      [
-       "Dodge",
-       "Grand Caravan",
+       "Sebring",
        2004
+      ],
+      [
+       "Dodge",
+       "Stratus",
+       2006
       ]
      ],
      [
       [
        "Chrysler",
-       "Voyager",
-       2003
+       "Town & Country",
+       1998
       ],
       [
        "Dodge",
        "Caravan",
-       2005
+       1999
       ]
      ],
      [
       [
        "Chrysler",
-       "Voyager",
-       2003
+       "Town & Country",
+       1999
       ],
       [
        "Dodge",
        "Grand Caravan",
-       2004
-      ]
-     ],
-     [
-      [
-       "Chrysler",
-       "Voyager",
-       2003
-      ],
-      [
-       "Dodge",
-       "Grand Caravan",
-       2005
-      ]
-     ],
-     [
-      [
-       "Dodge",
-       "Caravan",
-       2005
-      ],
-      [
-       "Chrysler",
-       "Voyager",
-       2003
-      ]
-     ],
-     [
-      [
-       "Dodge",
-       "Dakota",
-       2000
-      ],
-      [
-       "Dodge",
-       "Durango",
-       2003
-      ]
-     ],
-     [
-      [
-       "Dodge",
-       "Durango",
-       2003
-      ],
-      [
-       "Dodge",
-       "Dakota",
        2000
       ]
      ],
      [
       [
+       "Chrysler",
+       "Town & Country",
+       2005
+      ],
+      [
+       "Dodge",
+       "Grand Caravan",
+       2005
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Voyager",
+       2003
+      ],
+      [
+       "Dodge",
+       "Caravan",
+       2005
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Voyager",
+       2003
+      ],
+      [
+       "Dodge",
+       "Grand Caravan",
+       2005
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Caravan",
+       1999
+      ],
+      [
+       "Chrysler",
+       "Town & Country",
+       1998
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Caravan",
+       1999
+      ],
+      [
+       "Chrysler",
+       "Town & Country",
+       1999
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Caravan",
+       1999
+      ],
+      [
+       "Dodge",
+       "Grand Caravan",
+       2000
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Caravan",
+       2005
+      ],
+      [
+       "Dodge",
+       "Grand Caravan",
+       2005
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Charger",
+       2007
+      ],
+      [
+       "Chrysler",
+       "300",
+       2006
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Grand Caravan",
+       2000
+      ],
+      [
+       "Dodge",
+       "Caravan",
+       1999
+      ]
+     ],
+     [
+      [
        "Dodge",
        "Grand Caravan",
        2004
+      ],
+      [
+       "Dodge",
+       "Caravan",
+       2005
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Grand Caravan",
+       2005
       ],
       [
        "Chrysler",
@@ -6265,9 +7477,33 @@
        2007
       ],
       [
+       "Chrysler",
+       "Voyager",
+       2003
+      ]
+     ],
+     [
+      [
        "Dodge",
-       "Caravan",
-       2005
+       "Grand Caravan",
+       2010
+      ],
+      [
+       "Chrysler",
+       "Town & Country",
+       2008
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Intrepid",
+       1998
+      ],
+      [
+       "Chrysler",
+       "300M",
+       2000
       ]
      ],
      [
@@ -6277,9 +7513,9 @@
        2005
       ],
       [
-       "Dodge",
-       "Charger",
-       2007
+       "Chrysler",
+       "300",
+       2006
       ]
      ],
      [
@@ -6297,6 +7533,30 @@
      [
       [
        "Ford",
+       "Explorer Sport",
+       2001
+      ],
+      [
+       "Ford",
+       "Explorer",
+       1999
+      ]
+     ],
+     [
+      [
+       "Ford",
+       "Explorer",
+       1999
+      ],
+      [
+       "Ford",
+       "Explorer Sport",
+       2001
+      ]
+     ],
+     [
+      [
+       "Ford",
        "Five Hundred",
        2005
       ],
@@ -6309,13 +7569,13 @@
      [
       [
        "GMC",
-       "Canyon",
-       2005
+       "Acadia",
+       2012
       ],
       [
-       "Chevrolet",
-       "Colorado",
-       2005
+       "Saturn",
+       "Outlook",
+       2008
       ]
      ],
      [
@@ -6337,9 +7597,9 @@
        2004
       ],
       [
-       "Chevrolet",
-       "Silverado",
-       1999
+       "GMC",
+       "Yukon",
+       2003
       ]
      ],
      [
@@ -6356,74 +7616,26 @@
      ],
      [
       [
-       "GMC",
-       "Yukon",
-       2003
+       "Lexus",
+       "GS 350",
+       2007
       ],
       [
-       "GMC",
-       "Sierra",
+       "Lexus",
+       "GS 300",
+       2006
+      ]
+     ],
+     [
+      [
+       "Lexus",
+       "RX 330",
        2004
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "GS 300",
-       2006
       ],
       [
        "Lexus",
-       "GS 350",
+       "RX 350",
        2007
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "GS 350",
-       2007
-      ],
-      [
-       "Lexus",
-       "GS 300",
-       2006
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "GS 430",
-       2006
-      ],
-      [
-       "Lexus",
-       "GS 300",
-       2006
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "IS 250",
-       2013
-      ],
-      [
-       "Lexus",
-       "IS 350",
-       2012
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "IS 350",
-       2012
-      ],
-      [
-       "Lexus",
-       "IS 250",
-       2013
       ]
      ],
      [
@@ -6441,60 +7653,48 @@
      [
       [
        "Lexus",
-       "RX 350",
-       2007
-      ],
-      [
-       "Lexus",
-       "RX 400h",
-       2006
-      ]
-     ],
-     [
-      [
-       "Lexus",
        "RX 400h",
        2006
       ],
       [
        "Lexus",
-       "RX 350",
-       2007
+       "RX 330",
+       2004
       ]
      ],
      [
       [
        "Pontiac",
-       "Sunfire",
-       1999
+       "Montana",
+       2004
       ],
       [
        "Chevrolet",
-       "Cavalier",
-       2003
-      ]
-     ],
-     [
-      [
-       "Pontiac",
-       "Sunfire",
-       2005
-      ],
-      [
-       "Chevrolet",
-       "Cavalier",
-       2003
-      ]
-     ],
-     [
-      [
-       "Saturn",
-       "Outlook",
+       "Uplander",
        2008
+      ]
+     ],
+     [
+      [
+       "Ram",
+       "1500",
+       2012
       ],
       [
-       "GMC",
-       "Acadia",
+       "Ram",
+       "2500",
+       2011
+      ]
+     ],
+     [
+      [
+       "Ram",
+       "2500",
+       2011
+      ],
+      [
+       "Ram",
+       "1500",
        2012
       ]
      ],
@@ -6558,31 +7758,403 @@
     "sample": []
    },
    "new_cross_model_likely": {
-    "car_pairs": 43484,
-    "key_pairs": 20,
+    "car_pairs": 691220,
+    "key_pairs": 80,
     "sample": [
      [
       [
-       "Dodge",
-       "Ram 1500",
+       "Chevrolet",
+       "Astro",
+       2000
+      ],
+      [
+       "GMC",
+       "Safari",
+       1997
+      ]
+     ],
+     [
+      [
+       "Chevrolet",
+       "Astro",
+       2000
+      ],
+      [
+       "GMC",
+       "Safari",
+       2000
+      ]
+     ],
+     [
+      [
+       "Chevrolet",
+       "Astro",
+       2000
+      ],
+      [
+       "GMC",
+       "Safari",
+       2001
+      ]
+     ],
+     [
+      [
+       "Chevrolet",
+       "Blazer",
+       2001
+      ],
+      [
+       "GMC",
+       "Jimmy",
+       1998
+      ]
+     ],
+     [
+      [
+       "Chevrolet",
+       "S-10",
+       2000
+      ],
+      [
+       "GMC",
+       "Sonoma",
+       2000
+      ]
+     ],
+     [
+      [
+       "Chevrolet",
+       "Venture",
+       2004
+      ],
+      [
+       "Pontiac",
+       "Montana",
+       2004
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Concorde",
        2002
       ],
       [
+       "Chrysler",
+       "LHS",
+       2000
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "LHS",
+       2000
+      ],
+      [
+       "Chrysler",
+       "Concorde",
+       2002
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Town & Country",
+       1998
+      ],
+      [
        "Dodge",
-       "Ram 2500",
+       "Caravan",
+       1999
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Town & Country",
+       1998
+      ],
+      [
+       "Dodge",
+       "Durango",
        2003
       ]
      ],
      [
       [
+       "Chrysler",
+       "Town & Country",
+       1998
+      ],
+      [
        "Dodge",
-       "Ram 2500",
+       "Grand Caravan",
+       2000
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Town & Country",
+       1999
+      ],
+      [
+       "Dodge",
+       "Durango",
+       2003
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Town & Country",
+       1999
+      ],
+      [
+       "Dodge",
+       "Grand Caravan",
+       2000
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Town & Country",
+       2005
+      ],
+      [
+       "Dodge",
+       "Caravan",
+       2005
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Town & Country",
+       2005
+      ],
+      [
+       "Dodge",
+       "Grand Caravan",
+       2004
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Town & Country",
+       2005
+      ],
+      [
+       "Dodge",
+       "Grand Caravan",
+       2005
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Caravan",
+       1999
+      ],
+      [
+       "Chrysler",
+       "Town & Country",
+       1998
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Caravan",
+       1999
+      ],
+      [
+       "Chrysler",
+       "Town & Country",
+       1999
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Caravan",
+       2005
+      ],
+      [
+       "Dodge",
+       "Grand Caravan",
+       2005
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Caravan",
+       2005
+      ],
+      [
+       "Dodge",
+       "Grand Caravan",
+       2007
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Durango",
+       2003
+      ],
+      [
+       "Chrysler",
+       "Town & Country",
+       1999
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Durango",
        2003
       ],
       [
        "Dodge",
-       "Ram 1500",
-       2002
+       "Caravan",
+       1999
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Durango",
+       2003
+      ],
+      [
+       "Dodge",
+       "Grand Caravan",
+       2000
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Grand Caravan",
+       2004
+      ],
+      [
+       "Chrysler",
+       "Town & Country",
+       2005
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Grand Caravan",
+       2004
+      ],
+      [
+       "Dodge",
+       "Caravan",
+       2005
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Grand Caravan",
+       2006
+      ],
+      [
+       "Chrysler",
+       "Town & Country",
+       2005
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Grand Caravan",
+       2007
+      ],
+      [
+       "Chrysler",
+       "Town & Country",
+       2005
+      ]
+     ],
+     [
+      [
+       "GMC",
+       "Canyon",
+       2005
+      ],
+      [
+       "Chevrolet",
+       "Colorado",
+       2005
+      ]
+     ],
+     [
+      [
+       "GMC",
+       "Canyon",
+       2011
+      ],
+      [
+       "Chevrolet",
+       "Colorado",
+       2005
+      ]
+     ],
+     [
+      [
+       "GMC",
+       "Jimmy",
+       1998
+      ],
+      [
+       "Chevrolet",
+       "Blazer",
+       2001
+      ]
+     ],
+     [
+      [
+       "GMC",
+       "Safari",
+       1997
+      ],
+      [
+       "Chevrolet",
+       "Astro",
+       2000
+      ]
+     ],
+     [
+      [
+       "GMC",
+       "Safari",
+       2000
+      ],
+      [
+       "Chevrolet",
+       "Astro",
+       2000
+      ]
+     ],
+     [
+      [
+       "GMC",
+       "Sonoma",
+       1996
+      ],
+      [
+       "Chevrolet",
+       "S-10",
+       2000
       ]
      ],
      [
@@ -6624,18 +8196,6 @@
      [
       [
        "Lexus",
-       "GS 350",
-       2007
-      ],
-      [
-       "Lexus",
-       "GS 430",
-       2006
-      ]
-     ],
-     [
-      [
-       "Lexus",
        "GS 430",
        2006
       ],
@@ -6655,18 +8215,6 @@
        "Lexus",
        "GS 350",
        2007
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "IS 250",
-       2007
-      ],
-      [
-       "Lexus",
-       "IS 350",
-       2006
       ]
      ],
      [
@@ -6696,18 +8244,6 @@
      [
       [
        "Lexus",
-       "IS 350",
-       2012
-      ],
-      [
-       "Lexus",
-       "IS 250",
-       2013
-      ]
-     ],
-     [
-      [
-       "Lexus",
        "RX 330",
        2004
       ],
@@ -6731,6 +8267,54 @@
      ],
      [
       [
+       "Mercury",
+       "Mountaineer",
+       2000
+      ],
+      [
+       "Ford",
+       "Explorer",
+       1999
+      ]
+     ],
+     [
+      [
+       "Pontiac",
+       "Montana",
+       2004
+      ],
+      [
+       "Chevrolet",
+       "Venture",
+       2004
+      ]
+     ],
+     [
+      [
+       "Ram",
+       "1500",
+       2012
+      ],
+      [
+       "Ram",
+       "2500",
+       2011
+      ]
+     ],
+     [
+      [
+       "Ram",
+       "2500",
+       2011
+      ],
+      [
+       "Ram",
+       "1500",
+       2012
+      ]
+     ],
+     [
+      [
        "Toyota",
        "Camry Hybrid",
        2011
@@ -6769,36 +8353,12 @@
       [
        "Toyota",
        "Camry",
-       2011
-      ],
-      [
-       "Toyota",
-       "Camry Hybrid",
-       2011
-      ]
-     ],
-     [
-      [
-       "Toyota",
-       "Camry",
        2012
       ],
       [
        "Toyota",
        "Camry Hybrid",
        2012
-      ]
-     ],
-     [
-      [
-       "Toyota",
-       "Camry",
-       2015
-      ],
-      [
-       "Toyota",
-       "Camry Hybrid",
-       2015
       ]
      ]
     ]
@@ -6824,9 +8384,34 @@
     "sample": []
    },
    "new_cross_model_likely": {
-    "car_pairs": 0,
-    "key_pairs": 0,
-    "sample": []
+    "car_pairs": 624,
+    "key_pairs": 2,
+    "sample": [
+     [
+      [
+       "Ram",
+       "1500",
+       2012
+      ],
+      [
+       "Ram",
+       "2500",
+       2011
+      ]
+     ],
+     [
+      [
+       "Ram",
+       "2500",
+       2011
+      ],
+      [
+       "Ram",
+       "1500",
+       2012
+      ]
+     ]
+    ]
    },
    "verified_to_likely": {
     "car_pairs": 0,
@@ -7172,20 +8757,32 @@
      [
       [
        "Buick",
-       "LaCrosse",
-       2011
+       "Century",
+       2003
       ],
       [
        "Buick",
        "Regal",
-       2011
+       2000
+      ]
+     ],
+     [
+      [
+       "Buick",
+       "Century",
+       2003
+      ],
+      [
+       "Buick",
+       "Regal",
+       2003
       ]
      ],
      [
       [
        "Buick",
        "Regal",
-       2004
+       2000
       ],
       [
        "Buick",
@@ -7195,14 +8792,26 @@
      ],
      [
       [
-       "Cadillac",
-       "Escalade",
-       2007
+       "Buick",
+       "Regal",
+       2011
       ],
       [
-       "Chevrolet",
-       "Avalanche",
-       2007
+       "Buick",
+       "LaCrosse",
+       2011
+      ]
+     ],
+     [
+      [
+       "Buick",
+       "Verano",
+       2013
+      ],
+      [
+       "Buick",
+       "Regal",
+       2011
       ]
      ],
      [
@@ -7220,6 +8829,18 @@
      [
       [
        "Cadillac",
+       "Escalade",
+       2007
+      ],
+      [
+       "GMC",
+       "Sierra",
+       2004
+      ]
+     ],
+     [
+      [
+       "Cadillac",
        "Seville",
        2003
       ],
@@ -7232,49 +8853,25 @@
      [
       [
        "Chevrolet",
-       "Astro",
-       2000
+       "Cavalier",
+       2003
       ],
       [
-       "GMC",
-       "Safari",
-       2001
-      ]
-     ],
-     [
-      [
-       "Chevrolet",
-       "Avalanche",
-       2007
-      ],
-      [
-       "Chevrolet",
-       "Silverado",
+       "Pontiac",
+       "Sunfire",
        1999
       ]
      ],
      [
       [
        "Chevrolet",
-       "Blazer",
-       2001
+       "Colorado",
+       2005
       ],
       [
        "GMC",
-       "Jimmy",
-       1998
-      ]
-     ],
-     [
-      [
-       "Chevrolet",
-       "Cobalt",
-       2007
-      ],
-      [
-       "Pontiac",
-       "G5",
-       2007
+       "Canyon",
+       2011
       ]
      ],
      [
@@ -7304,12 +8901,24 @@
      [
       [
        "Chevrolet",
+       "S-10",
+       2000
+      ],
+      [
+       "GMC",
+       "Jimmy",
+       1998
+      ]
+     ],
+     [
+      [
+       "Chevrolet",
        "Silverado",
        1999
       ],
       [
-       "Cadillac",
-       "Escalade",
+       "Chevrolet",
+       "Avalanche",
        2007
       ]
      ],
@@ -7317,7 +8926,7 @@
       [
        "Chevrolet",
        "Silverado",
-       2008
+       2000
       ],
       [
        "GMC",
@@ -7328,13 +8937,25 @@
      [
       [
        "Chevrolet",
-       "Trax",
-       2016
+       "Tahoe",
+       1999
       ],
       [
-       "Buick",
-       "Encore",
-       2015
+       "GMC",
+       "Yukon",
+       1999
+      ]
+     ],
+     [
+      [
+       "Chevrolet",
+       "Tahoe",
+       2007
+      ],
+      [
+       "Cadillac",
+       "Escalade",
+       2007
       ]
      ],
      [
@@ -7353,12 +8974,36 @@
       [
        "Chrysler",
        "300",
-       2011
+       2006
       ],
       [
        "Dodge",
-       "Charger",
-       2013
+       "Magnum",
+       2005
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "300M",
+       2000
+      ],
+      [
+       "Dodge",
+       "Intrepid",
+       1998
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "300M",
+       2002
+      ],
+      [
+       "Chrysler",
+       "Concorde",
+       2002
       ]
      ],
      [
@@ -7376,13 +9021,25 @@
      [
       [
        "Chrysler",
+       "LHS",
+       2000
+      ],
+      [
+       "Dodge",
+       "Intrepid",
+       1998
+      ]
+     ],
+     [
+      [
+       "Chrysler",
        "Town & Country",
        1998
       ],
       [
        "Dodge",
-       "Caravan",
-       1999
+       "Grand Caravan",
+       2000
       ]
      ],
      [
@@ -7405,8 +9062,8 @@
       ],
       [
        "Dodge",
-       "Grand Caravan",
-       2004
+       "Caravan",
+       2005
       ]
      ],
      [
@@ -7442,42 +9099,6 @@
       [
        "Dodge",
        "Grand Caravan",
-       2007
-      ]
-     ],
-     [
-      [
-       "Dodge",
-       "Grand Caravan",
-       2000
-      ],
-      [
-       "Chrysler",
-       "Town & Country",
-       1998
-      ]
-     ],
-     [
-      [
-       "Dodge",
-       "Grand Caravan",
-       2004
-      ],
-      [
-       "Dodge",
-       "Caravan",
-       2005
-      ]
-     ],
-     [
-      [
-       "Dodge",
-       "Grand Caravan",
-       2005
-      ],
-      [
-       "Chrysler",
-       "Town & Country",
        2005
       ]
      ],
@@ -7496,13 +9117,13 @@
      [
       [
        "Dodge",
-       "Grand Caravan",
-       2010
+       "Intrepid",
+       1995
       ],
       [
        "Chrysler",
-       "Town & Country",
-       2008
+       "LHS",
+       1996
       ]
      ],
      [
@@ -7519,37 +9140,37 @@
      ],
      [
       [
-       "Ford",
-       "Explorer Sport Trac",
-       2001
+       "Dodge",
+       "Magnum",
+       2005
       ],
       [
-       "Ford",
-       "Explorer Sport",
-       2001
+       "Dodge",
+       "Charger",
+       2007
       ]
      ],
      [
       [
        "Ford",
-       "Focus",
-       2015
+       "Five Hundred",
+       2005
       ],
-      [
-       "Ford",
-       "Transit Connect",
-       2015
-      ]
-     ],
-     [
       [
        "Ford",
        "Taurus X",
        2008
-      ],
+      ]
+     ],
+     [
       [
        "Ford",
        "Five Hundred",
+       2005
+      ],
+      [
+       "Mercury",
+       "Montego",
        2005
       ]
      ],
@@ -7560,40 +9181,64 @@
        1998
       ],
       [
-       "Chevrolet",
-       "Blazer",
-       2001
-      ]
-     ],
-     [
-      [
        "GMC",
-       "Safari",
-       1997
-      ],
-      [
-       "Chevrolet",
-       "Astro",
+       "Sonoma",
        2000
       ]
      ],
      [
       [
        "GMC",
-       "Sierra",
-       2004
+       "Sonoma",
+       1996
       ],
       [
-       "Cadillac",
-       "Escalade",
-       2007
+       "GMC",
+       "Jimmy",
+       1998
       ]
      ],
      [
       [
        "Lexus",
-       "ES 300",
-       2002
+       "GS 350",
+       2007
+      ],
+      [
+       "Lexus",
+       "IS 350",
+       2012
+      ]
+     ],
+     [
+      [
+       "Lexus",
+       "GS 350",
+       2007
+      ],
+      [
+       "Lexus",
+       "RX 400h",
+       2006
+      ]
+     ],
+     [
+      [
+       "Lexus",
+       "GS 430",
+       2006
+      ],
+      [
+       "Lexus",
+       "GS 300",
+       2006
+      ]
+     ],
+     [
+      [
+       "Lexus",
+       "GS 430",
+       2006
       ],
       [
        "Lexus",
@@ -7604,85 +9249,13 @@
      [
       [
        "Lexus",
-       "GS 430",
-       2006
-      ],
-      [
-       "Lexus",
-       "IS 250",
-       2007
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "IS 250",
+       "LS 460",
        2007
       ],
       [
        "Lexus",
        "GS 350",
        2007
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "IS 250",
-       2007
-      ],
-      [
-       "Lexus",
-       "GS 430",
-       2006
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "IS 250",
-       2007
-      ],
-      [
-       "Lexus",
-       "RX 330",
-       2004
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "IS 350",
-       2012
-      ],
-      [
-       "Lexus",
-       "GS 350",
-       2007
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "LS 460",
-       2007
-      ],
-      [
-       "Lexus",
-       "GS 430",
-       2006
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "LS 460",
-       2007
-      ],
-      [
-       "Lexus",
-       "IS 350",
-       2006
       ]
      ],
      [
@@ -7693,56 +9266,80 @@
       ],
       [
        "Lexus",
-       "ES 300",
+       "IS 250",
+       2007
+      ]
+     ],
+     [
+      [
+       "Oldsmobile",
+       "Alero",
+       2001
+      ],
+      [
+       "Pontiac",
+       "Bonneville",
        2002
       ]
      ],
      [
       [
-       "Mercury",
-       "Montego",
-       2005
+       "Oldsmobile",
+       "Alero",
+       2001
       ],
       [
-       "Ford",
-       "Taurus X",
-       2008
+       "Pontiac",
+       "Grand Am",
+       2004
       ]
      ],
      [
       [
        "Pontiac",
-       "Torrent",
-       2006
+       "Bonneville",
+       2002
+      ],
+      [
+       "Buick",
+       "LeSabre",
+       2003
+      ]
+     ],
+     [
+      [
+       "Ram",
+       "1500",
+       2012
+      ],
+      [
+       "Ram",
+       "2500",
+       2011
+      ]
+     ],
+     [
+      [
+       "Saturn",
+       "Outlook",
+       2008
       ],
       [
        "Chevrolet",
-       "Equinox",
-       2005
+       "Traverse",
+       2011
       ]
      ],
      [
       [
        "Toyota",
        "Camry Hybrid",
-       2012
+       2011
       ],
       [
        "Toyota",
        "Camry",
-       2012
-      ]
-     ],
-     [
-      [
-       "Toyota",
-       "Camry Hybrid",
-       2015
-      ],
-      [
-       "Toyota",
-       "Camry",
-       2015
+       2011
       ]
      ],
      [
@@ -7755,18 +9352,6 @@
        "Toyota",
        "Camry Hybrid",
        2007
-      ]
-     ],
-     [
-      [
-       "Toyota",
-       "Camry",
-       2012
-      ],
-      [
-       "Toyota",
-       "Camry Hybrid",
-       2012
       ]
      ]
     ]
@@ -10133,7 +11718,7 @@
      "engine cells not audited as reliable on www.fordpartsgiant.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE",
      "www.fordpartsgiant.com: only 1% of its 14302 fitment rows can be coverage: it prints an option column, and option-layout rows are never coverage (spec 5.5)"
     ],
-    "likely_groups": 59,
+    "likely_groups": 81,
     "raw": "c36da2eb98835c02f81c05e8c36b6a926634a332",
     "verified_groups": 0,
     "vg_groups": 0
@@ -10541,7 +12126,7 @@
      "engine cells not audited as reliable on www.gmpartsgiant.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE",
      "www.gmpartsgiant.com: only 0% of its 17867 fitment rows can be coverage: its option column holds trims (option_column_is_trims), which count only after a namespace audit (spec 5.2)"
     ],
-    "likely_groups": 289,
+    "likely_groups": 309,
     "raw": "c36da2eb98835c02f81c05e8c36b6a926634a332",
     "verified_groups": 0,
     "vg_groups": 0
@@ -12637,7 +14222,7 @@
      "www.moparpartsgiant.com: only 3% of its 7351 fitment rows can be coverage: its option column holds trims (option_column_is_trims), which count only after a namespace audit (spec 5.2)",
      "blocked by the crawl breaker: www.moparpartsgiant.com (their cells never close, C9)"
     ],
-    "likely_groups": 245,
+    "likely_groups": 281,
     "raw": "c36da2eb98835c02f81c05e8c36b6a926634a332",
     "verified_groups": 0,
     "vg_groups": 0
@@ -14147,7 +15732,7 @@
      "no (site, category) of this namespace has passed the audit gate (audits.json has no record; spec 11.4, E5/V7)",
      "engine cells not audited as reliable on www.audipartsgiant.com, www.vwpartsgiant.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE"
     ],
-    "likely_groups": 6,
+    "likely_groups": 16,
     "raw": "c36da2eb98835c02f81c05e8c36b6a926634a332",
     "verified_groups": 0,
     "vg_groups": 0
