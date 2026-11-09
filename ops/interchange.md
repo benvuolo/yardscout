@@ -2854,3 +2854,14 @@ each); nothing allowlisted or crawled.
 - Audit note from the hub (~20:55 UTC), for the GSP and 1A §11.4 runs:
   `fetch.py --text` cuts output at 400 lines unless `--max-lines` is passed.
   Verifiers pass `--max-lines 100000` or read the cached pages directly.
+- 21:10 UTC, first checkpoints of run 42694329196:
+  - GSP passed the detector: 200 cv-axle records, 209 requests, no .blocked.
+    20% have duplicate_rows (they refuse). Half the rows name a submodel.
+    88 titles list no engine.
+  - 1A Auto passed: 113 strut records, no flags, all with Part Interchange.
+    The Description column carries trim and body qualifiers (Sedan, Sport,
+    Coupe, "without …"); curation must gate or refuse on them.
+  - Spectra: no new checkpoint after the 20:20Z run (records=0); flagged to
+    the hub.
+  - Next: curation (`groups_gsp` / `groups_1a`) once the hub says go, then
+    §11.4.
