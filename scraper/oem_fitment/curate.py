@@ -404,6 +404,8 @@ class Curation:
         Only ever removes claims; an unparsed note restricts nothing here."""
         if market and _market_excludes(notes):
             return True
+        if market and self.ns == "subaru" and _subaru_manual_only(notes):
+            return True
         if _other_division(notes, T[0]):
             return True
         if _brand_codes_exclude(notes, T[0]):
@@ -1818,6 +1820,27 @@ def _subaru_body_excludes(notes, model: str) -> bool:
                 break
             allowed |= a
         if allowed is not None and fam not in allowed:
+            return True
+    return False
+
+
+_SUBARU_MANUAL = re.compile(r"^\d?MT$")
+
+
+def _subaru_manual_only(notes) -> bool:
+    """§5.6 (2026-11-09 Subaru resample): a 'Fitting Vehicle Options' note
+    whose every alternative requires a manual transmission (MT/5MT/6MT).
+    A yard listing does not show the transmission, and some manual
+    configurations were never sold in the US (2015 Legacy/Outback 6MT
+    gauge clusters 85002AL06A/AL07A: Canada only). Per row, like a market
+    note. Only removes claims."""
+    for n in notes or []:
+        mm = re.match(r"^\s*Fitting Vehicle Options\s*:\s*(.+)$", n or "", re.I)
+        if not mm:
+            continue
+        alts = [a.strip().lstrip("*") for a in _split_top(mm.group(1)) if a.strip()]
+        if alts and all(any(_SUBARU_MANUAL.match(q) for q in re.findall(r"[A-Z0-9#]+", a.partition(".")[2]))
+                        for a in alts):
             return True
     return False
 
