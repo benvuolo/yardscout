@@ -18544,7 +18544,7 @@ ACE_FALLBACK_MAKES = (
     "SCION", "SUBARU", "SUZUKI", "TOYOTA", "VOLKSWAGEN", "VOLVO",
 )
 ACE_YARD = {"name": "Ace Pick-A-Part - Jacksonville", "city": "Jacksonville",
-            "state": "FL", "lat": 30.4560, "lng": -81.6424}
+            "state": "FL", "lat": 30.4066, "lng": -81.6501}  # 9152 N Main St: Census geocoder exact address match (2026-11-09)
 _ACE_MAKES_RE = re.compile(r'<select[^>]*id="search_make"[^>]*>(.*?)</select>', re.S)
 _ACE_OPTION_RE = re.compile(r'<option value="([^"]+)"')
 _ACE_ROW_RE = re.compile(r"<tr[^>]*>\s*((?:<td[^>]*>.*?</td>\s*)+)</tr>", re.S)
@@ -18715,7 +18715,7 @@ def refresh_ace_pricing_file() -> Path:
 STURTEVANT_URL = "https://inventory.sturtevantauto.com/"
 STURTEVANT_DELAY_SEC = 2.0
 STURTEVANT_YARD = {"name": "Sturtevant Auto - Sturtevant", "city": "Sturtevant",
-                   "state": "WI", "lat": 42.6981, "lng": -87.8945}
+                   "state": "WI", "lat": 42.7491, "lng": -87.9535}  # 2145 NE Frontage Rd: Census geocoder exact address match (2026-11-09)
 _STURTEVANT_MAKES_RE = re.compile(r"<select[^>]*>(.*?)</select>", re.S)
 _STURTEVANT_OPTION_RE = re.compile(r'<option value="([^"]+)"')
 _STURTEVANT_ROW_RE = re.compile(r"<tr[^>]*>\s*((?:<td[^>]*>.*?</td>\s*)+)</tr>", re.S)
@@ -19187,7 +19187,7 @@ VINPLUS_TENANTS = {
     },
     "195_used_auto_parts": {
         "": {"code": "hwy195", "name": "195 Used Auto Parts",
-             "city": "Killeen", "state": "TX", "lat": 31.0647, "lng": -97.7219},
+             "city": "Killeen", "state": "TX", "lat": 31.0179, "lng": -97.7537},  # 12077 SH 195: Census geocoder exact address match (2026-11-09)
     },
     "pick_ur_part": {
         "": {"code": "pickurpart", "name": "Pick Ur Part Auto Salvage",
@@ -19765,7 +19765,7 @@ IIS_UPULL_SITES: dict[str, dict] = {
         "yards": {
             "Tulsa U-Pull": {"code": "tulsa", "name": "AESOP U-Pull - Tulsa",
                              "city": "Tulsa", "state": "OK",
-                             "lat": 36.1716, "lng": -95.8327},
+                             "lat": 36.1915, "lng": -95.8237},  # 13802 E Apache St: Census geocoder exact address match (2026-11-09)
         },
     },
     # Midway U-Pull (midwayupull.com) — Muncie (6345 Kansas Ave, Kansas City
@@ -22776,7 +22776,7 @@ CRUSH_MVC_SITES: dict[str, dict] = {
             # 2430 S Dixie Hwy (not in OSM; Dalton centroid)
             {"yard_id": None, "code": "dalton",
              "name": "CP's U-Pull-It - Dalton", "city": "Dalton",
-             "state": "GA", "lat": 34.7692, "lng": -84.9702},
+             "state": "GA", "lat": 34.7289, "lng": -84.9788},  # Census geocoder exact address match (2026-11-09)
         ],
     },
 }
@@ -23083,7 +23083,7 @@ BYOT_YARDS = [
     # frontage-road number isn't in OSM; pin is Nominatim's Port Allen centroid.
     {"code": "batonrouge", "location": 1259, "slug": "baton-rouge",
      "name": "BYOT Auto Parts - Baton Rouge", "city": "Port Allen", "state": "LA",
-     "lat": 30.4534, "lng": -91.2101},
+     "lat": 30.4518, "lng": -91.2635},  # 4007 I-10: Census geocoder exact address match (2026-11-09)
     # 908 S Roach St, Jackson MS 39201 (exact OSM address)
     {"code": "jackson", "location": 1289, "slug": "jackson-ms",
      "name": "BYOT Auto Parts - Jackson", "city": "Jackson", "state": "MS",
@@ -25978,9 +25978,13 @@ def save_seen(seen: dict):
 # Fixed coordinates for Utah-chain yards (PnP provides lat/lng in its own feed).
 # Matched by location-name prefix so "(Premium)" variants resolve too.
 YARD_COORDS = {
-    "Tear-A-Part - Salt Lake City": (40.7608, -111.8910),
-    "Tear-A-Part - Ogden": (41.2230, -111.9738),
-    "Utah Pic-A-Part - Ogden": (41.2230, -111.9738),
+    # 2026-11-09: these three were city centroids (Tear-A-Part Ogden stacked on
+    # Utah Pic-A-Part Ogden). Street addresses from the yards' own sites,
+    # Census geocoder exact matches (Nominatim agrees within 311 m / 37 m;
+    # for 12th St it only resolves the street, 1.7 km off).
+    "Tear-A-Part - Salt Lake City": (40.7550, -111.9391),   # 652 S Redwood Rd
+    "Tear-A-Part - Ogden": (41.2444, -111.9962),            # 763 W 12th St
+    "Utah Pic-A-Part - Ogden": (41.2369, -111.9917),        # 555 W 17th St
     "Utah Pic-A-Part - Orem": (40.2924, -111.7324),  # 255 S Geneva Rd; OSM way/531732584, Census geocode 130 m (2026-11-04)
 }
 
