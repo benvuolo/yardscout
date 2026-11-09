@@ -2945,3 +2945,13 @@ each); nothing allowlisted or crawled.
   - Every group is `reason: option`, Likely.
 - The policy.py change moves the policy hash, so every committed namespace fails V8 until re-curated. It should land together with the re-curate that ships wheels.
 - §11.4 audit: not started. It needs ~100 fetch.py reads on the Jeep site and Lexus, which run 42666726212 is crawling now. Fetching in parallel would double the request rate on those sites (503 risk, which stops a site for good). It starts when that run ends.
+- §11.4 round 1 (30 groups, separate verifier, fetch.py sequential, 0 refusals): 19 OK / 10 WRONG / 1 UNSURE. Fixes in eaff7ef:
+  - Toyota namespace: wheels groups stay within one exact model, because sibling-chassis codes limit the row.
+  - Mopar: every own page must state the diameter, all equal; a note mentioning a spare or another numbered model refuses the group.
+- §11.4 round 2 (census of all 32 Mopar groups): 29 OK / 2 WRONG / 1 UNSURE.
+  - The 2 WRONG had equal diameters but different widths: 1SZ98PAKAA 15x6 vs 15x7; 1DP88SZ0AB "20x9, Code WP2" vs "20x8, Code WP2".
+  - The UNSURE was 5105665AA, whose product title is "Spare Wheel, Steel".
+  - Fix: stated widths must agree too, and a record description naming a spare refuses the group (19 of 541 Mopar wheel records).
+- Result (scratch, raw f2078e0a): mopar 29 groups, 9,613 lot cars, every one OK in the census, with no new group. toyota 0, ford 0.
+- Still to do: one push with policy + all 8 shipped namespaces re-curated on the republished inventory (after the Cr-Z map fix) + test_groups_hash green, after the hub confirms.
+- Verifier note: `fetch.py --text` prints only 400 lines unless --max-lines is given (hub is fixing it).
