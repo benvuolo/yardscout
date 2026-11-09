@@ -98,22 +98,35 @@ def oe_refs(note: str) -> list[str]:
     return [m.group(1) for m in (OE_RE.match(c) for c in clauses(note)) if m]
 
 
+DRIVE_RE = re.compile(r"^Drive Type:\s*(AWD|4WD|FWD|RWD)$")
+FUEL_LINES = {"fuel-pump-module", "fuel-tank"}
+
+
 def classify(note: str):
-    """-> ("ok", body or "*") | ("refuse", clause)."""
-    body = "*"
+    """-> ("ok", gates) | ("refuse", clause). gates is a sorted tuple of
+    (gate, value) pairs, () for no condition. Gates: "body" (Body Type, as
+    printed, title case) and "drive" (Drive Type, lower case like the parts
+    table's drive gate: awd / 4wd / fwd / rwd). Never inferred."""
+    gates: dict = {}
     for c in clauses(note):
         if OE_RE.match(c):
             continue                        # an OE reference, kept as data, not a limit
         m = BODY_RE.match(c)
         if m and m.group(1).strip().lower() in BODIES:
-            if body != "*":
+            if "body" in gates:
                 return "refuse", c          # two body clauses
-            body = m.group(1).strip().title()
+            gates["body"] = m.group(1).strip().title()
+            continue
+        m = DRIVE_RE.match(c)
+        if m:
+            if "drive" in gates:
+                return "refuse", c
+            gates["drive"] = m.group(1).lower()
             continue
         if INSTALL_RE.match(c):
             continue
         return "refuse", c
-    return "ok", body
+    return "ok", tuple(sorted(gates.items()))
 
 
 def engine_label(rec: dict) -> str | None:
@@ -126,17 +139,19 @@ def engine_label(rec: dict) -> str | None:
 
 
 def resolve(cards: list) -> tuple[dict | None, str]:
-    """Cards of ONE line on ONE vehicle -> ({body: pn}, "") or (None, why)."""
+    """Cards of ONE line on ONE vehicle -> ({gates: pn}, "") or (None, why).
+    The cards must be told apart by their gates alone: one card, or one card
+    per distinct gate value over the SAME gate dimensions."""
     res: dict = {}
     for c in cards:
         st, v = classify(c.get("note", ""))
         if st == "refuse":
             return None, f"note:{v}"
         if v in res and res[v] != c["pn"]:
-            return None, "two_units_same_body"
+            return None, "two_units_same_gates"
         res[v] = c["pn"]
-    if "*" in res and len(res) > 1:
-        return None, "unit_for_all_and_body_specific"
+    if len(res) > 1 and len({tuple(k for k, _ in g) for g in res}) != 1:
+        return None, "units_on_different_gate_dimensions"   # also covers () with a gated one
     return res, ""
 
 
@@ -171,7 +186,7 @@ def build(records: list, names: GA.Names, src: str = "") -> dict:
             refused["vehicle_flagged"] += 1
             continue
         fuel = (r.get("motorization") or {}).get("Fuel", "").upper()
-        if fuel not in ("GAS", "DIESEL"):
+        if fuel not in ("GAS", "DIESEL", "FLEX"):
             refused[f"fuel:{fuel or 'none'}"] += 1
             continue
         eng = engine_label(r)
@@ -193,6 +208,9 @@ def build(records: list, names: GA.Names, src: str = "") -> dict:
             if cat:
                 by_line[cat].append(card)
         for cat, cards in by_line.items():
+            if fuel == "FLEX" and cat in FUEL_LINES:
+                refused[f"{cat}:fuel_FLEX"] += 1
+                continue
             for card in cards:
                 oe_by_unit[(cat, card["pn"])].update(oe_refs(card.get("note", "")))
             res, why = resolve(cards)
@@ -201,9 +219,9 @@ def build(records: list, names: GA.Names, src: str = "") -> dict:
                 refused[f"{cat}:{why.split(':')[0]}"] += 1
                 if why.startswith("note:"):
                     refused_clause[why[5:]] += 1
-                reso[key].append(None)
+                reso[key].append((fuel, None))
             else:
-                reso[key].append(tuple(sorted(res.items())))
+                reso[key].append((fuel, tuple(sorted(res.items()))))
             retrieved[key] = max(retrieved.get(key, ""), r.get("retrieved", ""))
     # consistency across submodels / motorizations
     units: dict = defaultdict(lambda: defaultdict(list))   # (cat, pn) -> (mk, md, eng, body) -> years
@@ -211,29 +229,36 @@ def build(records: list, names: GA.Names, src: str = "") -> dict:
     split = Counter()
     for key, rs in reso.items():
         cat, mk, md, y, eng = key
+        fuels = {f for f, _ in rs}
+        rs = [x for _, x in rs]
         if any(x is None for x in rs):
             continue
-        if len(set(rs)) != 1:
-            split[cat] += 1
+        if "FLEX" in fuels and "GAS" not in fuels:
+            split[f"{cat}:flex_without_gas"] += 1   # FLEX rows count only beside the same GAS unit
             continue
-        for body, pn in rs[0]:
-            units[(cat, pn)][(mk, md, eng, body)].append(y)
+        if len(set(rs)) != 1:
+            split[cat if fuels != {"GAS", "FLEX"} else f"{cat}:flex_gas_differ"] += 1
+            continue
+        for gates, pn in rs[0]:
+            units[(cat, pn)][(mk, md, eng, gates)].append(y)
             unit_ret[(cat, pn)] = max(unit_ret[(cat, pn)], retrieved[key])
     groups = []
     for (cat, pn), rows in sorted(units.items()):
         apps = []
-        for (mk, md, eng, body), ys in sorted(rows.items()):
+        for (mk, md, eng, gates), ys in sorted(rows.items()):
             for lo, hi in GA._runs(ys):
-                apps.append([mk, md, lo, hi, eng] + ([body] if body != "*" else []))
+                apps.append([mk, md, lo, hi, eng] + ([dict(gates)] if gates else []))
         models = {(a[0], a[1]) for a in apps}
-        bodies = sorted({a[5] for a in apps if len(a) > 5})
+        bodies = sorted({a[5]["body"] for a in apps if len(a) > 5 and "body" in a[5]})
+        drives = sorted({a[5]["drive"] for a in apps if len(a) > 5 and "drive" in a[5]})
         note = (f"Spectra Premium {pn} ({LABEL[cat]}) is listed for each of these vehicles on that "
                 f"vehicle's own catalog page; aftermarket application data, not the carmaker's catalog. "
-                f"Match the engine" + (" and the body style" if bodies else "") +
+                "Match the engine" + (" and the body style" if bodies else "") +
+                (" and the drivetrain (" + "/".join(d.upper() for d in drives) + ")" if drives else "") +
                 ". Only the years shown were checked.")
         groups.append({"id": f"am:spp:{cat}:{pn}", "cat": cat, "tier": "likely", "src": "aftermarket",
                        "label": "Spectra Premium application list", "unit": pn, "apps": apps,
-                       "cross_model": len(models) > 1, "body_gated": bool(bodies),
+                       "cross_model": len(models) > 1, "body_gated": bool(bodies), "drive_gated": bool(drives),
                        "oe_refs": sorted(oe_by_unit[(cat, pn)]),
                        "retrieved": unit_ret[(cat, pn)], "note": note})
     doc = {"schema": SCHEMA, "src": "aftermarket", "site": SITE, "raw": src, "tier": "likely",
