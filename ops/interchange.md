@@ -2511,6 +2511,14 @@ Other outputs of this session:
   - Audit integrity (hub, 20:55 UTC): `fetch.py --text` silently cuts output at 400 lines.
     Until the truncation-marker fix lands, every §11.4 verifier brief must say: pass
     `--max-lines 100000`, or read the cached HTML directly. Strut and knuckle list pages are long.
+  - **Branch interchange/categories-1 (e4d6373, NOT merged; hub request 21:18 UTC).**
+    - Gated aftermarket rows in pfAmRows (AM-GATE block, parts-table semantics).
+    - 9 categories: radiator, ac-compressor, throttle-body, fuel-pump-module, cv-axle (combo);
+      ac-condenser, heater-core, evaporator (exact); strut (body). Price tokens are exact rows.
+    - _am_group_entry accepts gates. Test: scraper/test_am_gates.py.
+    - Merges only after the Spectra and GSP/1A §11.4 samples pass and the hub confirms. When
+      merging, re-check sw.js (jh-v173 on the branch) and the test_interchange category count.
+    - Tier C wiper-motor/knuckle categories are not on it yet; they follow the OEM curation.
   - Then the curation build (design above). Per category, a §11.4 sample (60, independent
     session, 0 WRONG) and the hub's confirm before any app change on
     `interchange/categories-<n>`.
