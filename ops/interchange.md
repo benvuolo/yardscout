@@ -2787,3 +2787,8 @@ each); nothing allowlisted or crawled.
 - **Next:** the hub confirms the GSP rule and the allowlist, and sends 1A
   Auto to the owner. Then build `aftermarket/gspnorthamerica.py` with
   offline fixtures and crawl cv-axle.
+- 2026-11-09 ~20:13 UTC, the hub: HOLD. GSP (detector rule) and 1A Auto
+  (licence) go to the owner. The hub recommends GSP yes (Likely-only, strict
+  refusals, drive/trans never inferred) and 1A Auto no. UAC skipped
+  (POST-only). Until the owner answers: ALLOWED and fetch.py stay unchanged,
+  and nothing is built or crawled. Scout session stopped.
