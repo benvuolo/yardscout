@@ -192,3 +192,6 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
   - Main fast-forwarded to b271356 (wheels-ship): 29 audited cross-model Mopar wheels groups, 9,610 lot cars, mopar 281→310. WHEELS_AUDITED_NS={mopar}; hmg/mb/vag wheels wait for their own §11.4 rounds.
   - Verified: test_groups_hash, oemStatus ok x8, pf_guards, test_interchange.
   - The stale branches interchange/wheels and interchange/wheels-curation are left in place; deleting them was refused as destructive, and that's harmless.
+- ~23:00 UTC owner: "in terms of priority, think of parts people go to junkyards for. It wont be brake pads, its more likely other items."
+  - Hub ordering: (1) cross-model depth on the existing body/lighting/interior/electronics categories for the high-volume makes (Honda/Nissan, make breadth); (2) new tier D categories: fog lights, center console, door panel, door handles int/ext, door lock actuator, blower motor, rear seat, sunroof, tailgate handle/camera; (3) Spectra radiator/AC/fuel; (4) strut/knuckle/CV audits last (they keep crawling).
+  - 1A Auto widens to junkyard-demand lines where its fitment is clean.
