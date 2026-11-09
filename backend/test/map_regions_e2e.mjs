@@ -9,6 +9,7 @@
  *  - no floating pull-sheet pill over the map;
  *  - a cluster of yards at one spot opens a list in the sheet;
  *  - no "(Premium)" lot gets its own pin;
+ *  - the sheet never runs under the tab bar (short phone screens);
  *  - no pin covers the You dot or its label (if nothing clears it, the dot
  *    is drawn on top; counted in the summary);
  *  - first view (hub 2026-11-09): the nearest yard is its own named pin,
@@ -48,15 +49,18 @@ const REGIONS = [
   ['Denver', 39.74, -104.99], ['Northeast corridor', 40.35, -74.65], ['Salt Lake', 40.76, -111.89],
   ['Ogden', 41.223, -111.973],
 ].filter(r => !process.env.REGIONS || process.env.REGIONS.split(',').some(x => r[0].toLowerCase().startsWith(x.toLowerCase())));
-const WIDTHS = (process.env.WIDTHS || '320,390,768,1280').split(',').map(Number);
+// width, or WIDTHxHEIGHT: 390x664 is iPhone 13 Safari with its bars showing,
+// 375x553 iPhone SE Safari (Playwright's device sizes).
+const WIDTHS = (process.env.WIDTHS || '320,390,768,1280,390x664,375x553').split(',');
 
 const results = new Map();   // region -> {checks, fails:[], pins:Set, clusters:Set, same:0}
 const rec = (r) => { if (!results.has(r)) results.set(r, { checks: 0, fails: [], pins: [], clusters: [], same: 0 }); return results.get(r); };
 
 const browser = await chromium.launch();
 try {
-  for (const width of WIDTHS) {
-    const page = await browser.newPage({ viewport: { width, height: width >= 768 ? 900 : 844 } });
+  for (const size of WIDTHS) {
+    const [width, hgt] = size.split('x').map(Number);
+    const page = await browser.newPage({ viewport: { width, height: hgt || (width >= 768 ? 900 : 844) } });
     await page.route(/^https?:\/\/(?!127\.0\.0\.1|unpkg\.com|tiles\.openfreemap\.org)/, r => r.abort());
     // Full-file data path: every region's cars are in from the start.
     await page.route(/data\/inv\/manifest\.json/, r => r.fulfill({ status: 404, body: '' }));
@@ -71,7 +75,7 @@ try {
     for (const [name, lat, lng, national] of REGIONS) {
       for (const theme of ['light', 'dark']) {
         for (const big of [false, true]) {
-          const cfg = `${width}/${theme}/${big ? '200%' : '100%'}`;
+          const cfg = `${size}/${theme}/${big ? '200%' : '100%'}`;
           const out = await page.evaluate(async ({ lat, lng, national, theme, big }) => {
             document.documentElement.dataset.theme = theme; applyThemeColor();
             if (national) { localStorage.setItem('jh_pro', '1'); applyProGates(); document.getElementById('live-radius').value = ''; }
@@ -106,6 +110,8 @@ try {
               if (!vis(zc)) fails.push(`${label}: zoom buttons not visible`);
               else { const zr = zc.getBoundingClientRect(); if (rs.some(r => ov(r, zr))) fails.push(`${label}: a pin covers the zoom buttons`); }
               if (vis(document.getElementById('saved-pill'))) fails.push(`${label}: floating pull sheet pill over the map`);
+              { const tb = document.querySelector('.tabs'), sh = document.getElementById('yards-map-sheet').getBoundingClientRect();
+                if (tb && getComputedStyle(tb).position === 'fixed' && sh.bottom > tb.getBoundingClientRect().top + 1) fails.push(`${label}: the sheet runs under the tab bar`); }
               // The You dot (and its label) is never under a pin; if no pin
               // placement clears it, the dot is drawn on top (counted).
               const youEl = document.querySelector('#yards-map .map-you');

@@ -5631,7 +5631,7 @@ function layoutMapMode() {
   const tr = tabs ? tabs.getBoundingClientRect() : null;
   const bottomLimit = tr && getComputedStyle(tabs).position === 'fixed' ? tr.top : window.innerHeight;
   const top = wrap.getBoundingClientRect().top;
-  wrap.style.height = Math.max(320, Math.floor(bottomLimit - top - 8)) + 'px';
+  wrap.style.height = Math.max(220, Math.floor(bottomLimit - top - 8)) + 'px';   // short phones: never under the tab bar
   liftMapControls();
   if (_yardsMap) _yardsMap.resize();
 }
@@ -5701,7 +5701,11 @@ function pinArea() {
   const box = document.getElementById('yards-map'), c = box.getBoundingClientRect();
   let top = 4, bottom = c.height - 4;
   const over = (sel) => { const el = document.querySelector(sel); if (!el || !el.getClientRects().length) return null; const r = el.getBoundingClientRect(); return r.height ? r : null; };
-  for (const r of [over('#yards-map-wrap .yards-map-legend'), over('#yards-map .maplibregl-ctrl-top-right .maplibregl-ctrl-group'), over('#yards-map-wrap .yards-map-note:not(:empty)')]) if (r) top = Math.max(top, r.bottom - c.top + 6);
+  for (const r of [over('#yards-map-wrap .yards-map-legend'), over('#yards-map-wrap .yards-map-note:not(:empty)')]) if (r) top = Math.max(top, r.bottom - c.top + 6);
+  // The zoom buttons only fill the top-right corner: pins keep off them
+  // (layoutPins), rather than the whole top band being closed.
+  const zc = over('#yards-map .maplibregl-ctrl-top-right .maplibregl-ctrl-group');
+  const ctl = zc ? { l: zc.left - c.left, r: zc.right - c.left, t: zc.top - c.top, b: zc.bottom - c.top } : null;
   let left = 4;
   const at = over('#yards-map .maplibregl-ctrl-attrib'), sh = over('#yards-map-sheet');
   if (at) bottom = Math.min(bottom, at.top - c.top - 6);
@@ -5711,7 +5715,7 @@ function pinArea() {
     if (sh.left <= c.left + 24 && sh.right >= c.right - 24) bottom = Math.min(bottom, sh.top - c.top - 6);
     else if (sh.left <= c.left + 24) left = Math.max(left, sh.right - c.left + 6);
   }
-  return { l: left, r: c.width - 4, t: top, b: Math.max(top + 44, bottom), W: c.width, H: c.height };
+  return { l: left, r: c.width - 4, t: top, b: Math.max(top + 44, bottom), W: c.width, H: c.height, ctl };
 }
 function measurePin(html) {
   const layer = pinLayer();
@@ -5777,6 +5781,22 @@ function layoutPins() {
   }
   // A pin taller than the open strip of map has no room: don't draw it (the
   // sheet still lists the yard), rather than push it over the controls.
+  // Pins over the zoom buttons slide left of them, or flip below their
+  // point; if neither fits, the pin isn't drawn (the sheet still lists it).
+  if (A.ctl) {
+    const fits = (g) => g.rect.l >= A.l - 0.5 && g.rect.t >= A.t - 0.5 && g.rect.b <= A.b + 0.5 && !hit(g.rect, A.ctl) && !groups.some(o => o !== g && hit(o.rect, g.rect));
+    for (let i = groups.length - 1; i >= 0; i--) {
+      const g = groups[i];
+      if (!hit(g.rect, A.ctl)) continue;
+      const keep = { below: g.below, rect: g.rect, nudged: g.nudged };
+      const w = g.rect.r - g.rect.l;
+      g.rect = { l: A.ctl.l - 6 - w, r: A.ctl.l - 6, t: keep.rect.t, b: keep.rect.b }; g.nudged = true;
+      if (fits(g)) continue;
+      g.below = !keep.below; rectOf(g);
+      if (fits(g)) continue;
+      groups.splice(i, 1);
+    }
+  }
   for (let i = groups.length - 1; i >= 0; i--) if (groups[i].rect.t < A.t - 0.5 || groups[i].rect.b > A.b + 0.5) groups.splice(i, 1);
   const you = activeZipCoords && _projectFn({ lat: activeZipCoords.lat, lng: activeZipCoords.lng });
   const youOn = you && you.x > A.l && you.x < A.W && you.y > A.t && you.y < A.b;
