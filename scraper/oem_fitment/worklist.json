@@ -4610,7 +4610,9 @@
    "complete": {
     "file": "completion/gm.own_page.json",
     "version": 1
-   }
+   },
+   "tierC": true,
+   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; the site is not done yet, so tier C follows A/B in the same crawl (no version change)."
   },
   "www.nissanpartsdeal.com": {
    "cars": 29587,
