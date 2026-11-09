@@ -2614,3 +2614,16 @@ nissan.completion.json), plus R1 manifests on acura/nissan/infiniti.
     sample per namespace (bmw, mb, vag, volvo, mazda, mitsubishi, hmg,
     toyota/lexus, ford, mopar), checking unseen-option splits (heated,
     power-fold, turbo, km/h, export) in each sample.
+- **2026-11-09 ~19:25 UTC: both pending pushes shipped (hub confirmed).**
+  - 661d537 note fix: 69 climate-control notes no longer say "regulator
+    with motor". Claims unchanged.
+  - c5d7f44 (+ merge f9423ed) GM series filter: 32 groups now name
+    "Silverado 1500"/"Sierra 1500"; 20862099 carries the towing/standard
+    note (`policy.GROUP_NOTES`). Diff: `_report/gm_series_2026-11-09_diff.txt`.
+  - Both curated with `--inventory` = inventory_live.json at 7192563
+    (pre-Cr-Z; hub allowed). From the next re-curate on, use the live
+    inventory once the scan republishes with "CR-Z" (hub 1cf5dd0).
+  - Failing on plain main as well, not from these pushes:
+    test_model_map (live Cr-Z row; clears after the rescan) and
+    test_jeeppartsdeal (asserts worklist version 2; the tier C session
+    raised it to 4).
