@@ -107,6 +107,13 @@ sheet" in the UI only (jh_saved and watch storage untouched, rule 6); map deferr
   chain/all-yards average. Orem Premium (chain 83) and Ogden Premium now show none. Shell jh-v158.
   Test: lifespan_premium_unit.
 
+### Follow-up: heavy photo sources (2026-11-09)
+- On main. `photoSources[key].heavy: true` (+ optional `approxKB`, yards session contract): never on
+  cards; car screen shows the 4:3 box "Photo available — tap to load (~3.8 MB)" with the credit; the
+  tap loads `large` into the box, then the viewer works as usual. In-memory for the session only, no
+  auto-load. Today only sturtevant. Shell jh-v159. Tests: photo_policy_unit (+5),
+  ui_no_truncation photo-heavy / photo-heavy-loaded screens.
+
 ## Earlier state (2026-11-06, exploration)
 
 - Branch: `design/redesign-2026-11` (exploration only; nothing merged).
