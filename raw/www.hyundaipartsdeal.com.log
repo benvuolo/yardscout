@@ -767,3 +767,115 @@
 00:40:28 chain-unlinked door-front 1 numbers named by 76004-2L210, no catalog link: 76004-2R210
 00:42:44 seg done tier=B Hyundai Elantra Touring [2009, 2012] seeds=[2012] records=3396 errors=1
 00:42:44 finished records=3396 errors=1 chain_records=1 chain_unlinked=114 chain_failed=0 chain_given_up=0
+20:27:04 start site=www.hyundaipartsdeal.com mode=worklist tiers=['A', 'B', 'W', 'C'] records=3396 list_lines=608 year_lines=55 url_index=7334
+20:27:04 seg done tier=A Hyundai Sonata [2011, 2013] seeds=[2011] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Sonata [2006, 2010] seeds=[2009] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Elantra [2011, 2013] seeds=[2013] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Elantra [2007, 2010] seeds=[2010] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Santa Fe [2007, 2012] seeds=[2007] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Accent [2012, 2017] seeds=[2013] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Sonata [2015, 2017] seeds=[2015] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Elantra [2014, 2016] seeds=[2016] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Accent [2006, 2011] seeds=[2009] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Elantra [2004, 2006] seeds=[2005] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Genesis [2009, 2016] seeds=[2013] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Veloster [2012, 2017] seeds=[2013] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Sonata [1997, 2005] seeds=[2004] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Elantra [2017, 2018] seeds=[2017] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Santa Fe [2001, 2004] seeds=[2004] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Tucson [2005, 2008] seeds=[2006] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Sonata [2014, 2014] seeds=[2014] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Elantra [1995, 2003] seeds=[2002] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Tiburon [2003, 2008] seeds=[2003] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Accent [1995, 2005] seeds=[2005] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Azera [2006, 2017] seeds=[2006] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Santa Fe [2005, 2006] seeds=[2005] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Santa Fe [2013, 2018] seeds=[2013] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Santa Fe Sport [2013, 2018] seeds=[2013] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Tucson [2010, 2013] seeds=[2013] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Elantra GT [2013, 2019] seeds=[2013] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Genesis Coupe [2010, 2016] seeds=[2010] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Sonata Hybrid [2011, 2017] seeds=[2013] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Veracruz [2007, 2012] seeds=[2007] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Tucson [2016, 2018] seeds=[2016] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Sonata [2018, 2019] seeds=[2018] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Tucson [2014, 2015] seeds=[2015] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Elantra [2019, 2020] seeds=[2019] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai XG350 [2002, 2005] seeds=[2005] records=3396 errors=1
+20:27:04 seg done tier=A Hyundai Elantra Touring [2009, 2012] seeds=[2012] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Sonata [2011, 2013] seeds=[2011] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Sonata [2006, 2010] seeds=[2009] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Elantra [2011, 2013] seeds=[2013] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Elantra [2007, 2010] seeds=[2010] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Santa Fe [2007, 2012] seeds=[2007] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Accent [2012, 2017] seeds=[2013] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Sonata [2015, 2017] seeds=[2015] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Elantra [2014, 2016] seeds=[2016] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Accent [2006, 2011] seeds=[2009] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Elantra [2004, 2006] seeds=[2005] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Genesis [2009, 2016] seeds=[2013] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Veloster [2012, 2017] seeds=[2013] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Sonata [1997, 2005] seeds=[2004] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Elantra [2017, 2018] seeds=[2017] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Santa Fe [2001, 2004] seeds=[2004] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Tucson [2005, 2008] seeds=[2006] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Sonata [2014, 2014] seeds=[2014] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Elantra [1995, 2003] seeds=[2002] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Tiburon [2003, 2008] seeds=[2003] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Accent [1995, 2005] seeds=[2005] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Azera [2006, 2017] seeds=[2006] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Santa Fe [2005, 2006] seeds=[2005] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Santa Fe [2013, 2018] seeds=[2013] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Santa Fe Sport [2013, 2018] seeds=[2013] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Tucson [2010, 2013] seeds=[2013] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Elantra GT [2013, 2019] seeds=[2013] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Genesis Coupe [2010, 2016] seeds=[2010] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Sonata Hybrid [2011, 2017] seeds=[2013] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Veracruz [2007, 2012] seeds=[2007] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Tucson [2016, 2018] seeds=[2016] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Sonata [2018, 2019] seeds=[2018] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Tucson [2014, 2015] seeds=[2015] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Elantra [2019, 2020] seeds=[2019] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai XG350 [2002, 2005] seeds=[2005] records=3396 errors=1
+20:27:04 seg done tier=B Hyundai Elantra Touring [2009, 2012] seeds=[2012] records=3396 errors=1
+20:28:42 seg done tier=W Hyundai Sonata [2011, 2013] seeds=[2011] records=3405 errors=1
+20:29:45 seg done tier=W Hyundai Sonata [2006, 2010] seeds=[2009] records=3409 errors=1
+20:30:41 chain-unlinked wheels 1 numbers named by 52910-3Y250, no catalog link: 52910-3Y260
+20:30:41 chain-unlinked wheels 1 numbers named by 52910-3Y350, no catalog link: 52910-3Y360
+20:30:41 seg done tier=W Hyundai Elantra [2011, 2013] seeds=[2013] records=3413 errors=1
+20:31:45 seg done tier=W Hyundai Elantra [2007, 2010] seeds=[2010] records=3419 errors=1
+20:32:49 chain-unlinked wheels 1 numbers named by 52910-0W900, no catalog link: 52910-0W920
+20:32:49 chain-unlinked wheels 1 numbers named by 52910-0W910, no catalog link: 52910-0W920
+20:32:49 seg done tier=W Hyundai Santa Fe [2007, 2012] seeds=[2007] records=3424 errors=1
+20:33:37 seg done tier=W Hyundai Accent [2012, 2017] seeds=[2013] records=3427 errors=1
+20:35:45 seg done tier=W Hyundai Sonata [2015, 2017] seeds=[2015] records=3441 errors=1
+20:36:41 chain-unlinked wheels 1 numbers named by 52910-F3200, no catalog link: 52910-F3250
+20:36:41 chain-unlinked wheels 1 numbers named by 52910-F3300, no catalog link: 52910-F3350
+20:37:37 seg done tier=W Hyundai Elantra [2014, 2016] seeds=[2016, 2015] records=3451 errors=1
+20:38:57 seg done tier=W Hyundai Accent [2006, 2011] seeds=[2009] records=3459 errors=1
+20:40:18 chain-unlinked wheels 1 numbers named by 52910-27700, no catalog link: 52910-27730
+20:40:18 seg done tier=W Hyundai Elantra [2004, 2006] seeds=[2005] records=3467 errors=1
+20:42:41 seg done tier=W Hyundai Genesis [2009, 2016] seeds=[2013, 2016] records=3480 errors=1
+20:44:02 seg done tier=W Hyundai Veloster [2012, 2017] seeds=[2013, 2016] records=3485 errors=1
+20:45:54 chain-unlinked wheels 1 numbers named by 52910-38801, no catalog link: 52910-38600
+20:45:54 chain-unlinked wheels 1 numbers named by 52910-23240, no catalog link: 52910-3C240
+20:45:54 seg done tier=W Hyundai Sonata [1997, 2005] seeds=[2004, 1999] records=3495 errors=1
+20:46:25 seg done tier=W Hyundai Elantra [2017, 2018] seeds=[2017, 2018] records=3495 errors=1
+20:46:57 chain-unlinked wheels 1 numbers named by 52910-26250, no catalog link: 52910-26200
+20:46:57 chain-unlinked wheels 1 numbers named by 52910-26550, no catalog link: 52910-26500
+20:46:57 seg done tier=W Hyundai Santa Fe [2001, 2004] seeds=[2004] records=3497 errors=1
+20:48:17 chain-unlinked wheels 1 numbers named by 52910-2E710, no catalog link: 52910-2E700
+20:48:33 seg done tier=W Hyundai Tucson [2005, 2008] seeds=[2006] records=3504 errors=1
+20:48:50 seg done tier=W Hyundai Sonata [2014, 2014] seeds=[2014] records=3504 errors=1
+20:50:57 chain-unlinked wheels 1 numbers named by 52910-29609, no catalog link: 52910-29500
+20:50:57 chain-unlinked wheels 1 numbers named by 52910-23210, no catalog link: 52910-23200
+20:50:57 chain-unlinked wheels 1 numbers named by 52910-29140, no catalog link: 52910-23500
+20:50:57 chain-unlinked wheels 1 numbers named by 52910-29301, no catalog link: 52910-3C240
+20:51:13 seg done tier=W Hyundai Elantra [1995, 2003] seeds=[2002, 1999, 2003] records=3516 errors=1
+20:52:33 seg done tier=W Hyundai Tiburon [2003, 2008] seeds=[2003] records=3523 errors=1
+20:54:17 chain-unlinked wheels 1 numbers named by 52910-25400, no catalog link: 52910-25410
+20:56:41 chain-unlinked wheels 1 numbers named by 52910-21620, no catalog link: 52910-21400
+20:56:41 chain-unlinked wheels 2 numbers named by 52910-24520, no catalog link: 52910-24510, 52910-24511
+20:56:41 seg done tier=W Hyundai Accent [1995, 2005] seeds=[2005, 1997] records=3548 errors=1
+20:58:49 chain-unlinked wheels 1 numbers named by 52910-3L110, no catalog link: 52910-3L160
+20:58:57 time budget reached records=3560
