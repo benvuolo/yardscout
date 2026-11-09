@@ -116,7 +116,29 @@ check("1A: another brand's unit for the same corner is an equivalent, not a spli
       d["groups"][0]["apps"] == [["Honda", "Accord", 2008, 2012, ""]] and len(d["groups"]) == 2)
 u4 = a_rec("1A4", [(2008, 2012, "V6 3.0L ", "Front Driver Side")], bpn="SCA4")
 d = R.build([u4], Names(), "www.1aauto.com")
-check("1A: an engine qualifier becomes the app's engine", d["groups"][0]["apps"] == [["Honda", "Accord", 2008, 2012, "3.0L 6-cyl"]])
+check("1A: an engine qualifier refuses too (V6 3.2L does not exclude a Type-S)", not d["groups"]
+      and d["refused_rows"].get("q: V6 3.0L") == 1)
+# shakeout 2026-11-09 regressions
+fwd = a_rec("1AW", [(2019, 2022, "Front Wheel Drive ", "Front Passenger Side")])
+_, _, rows = R.oneaauto_rows(fwd)
+check("drive phrase: side kept from the LAST position phrase, drive is a refused qualifier",
+      rows[0][1] == "front right" and rows[0][3] == "qualifier:Front Wheel Drive")
+check("drive-qualified unit yields no group", not R.build([fwd], Names(), "www.1aauto.com")["groups"])
+sib = a_rec("1AS", [(2003, 2004, "", "Rear Driver Side"), (2005, 2007, "LX ", "Rear Driver Side")])
+d = R.build([sib], Names(), "www.1aauto.com")
+check("unqualified row refused when the same unit qualifies the same model elsewhere",
+      not d["groups"] and d["refused_rows"].get("sibling_row_qualified") == 1)
+plain = a_rec("1AP", [(2002, 2003, "", "Front Driver Side")])
+opt = a_rec("1AO", [(1997, 2001, "without Electronic Suspension ", "Front Driver Side")], bpn="SCA9")
+d = R.build([plain, opt], Names(), "www.1aauto.com")
+check("strut: a model the source ever qualifies by suspension option refuses its plain rows",
+      not d["groups"] and d["refused_rows"].get("model_has_suspension_options") == 1)
+mv = copy.deepcopy(plain)
+mv["interchange_numbers"] = [{"brand": "KYB", "pn": "SR4150"}, {"brand": "KYB", "pn": "SR4054"}]
+check("one brand cross-referenced to two numbers -> unit refused", not R.build([mv], Names(), "www.1aauto.com")["groups"])
+lr = copy.deepcopy(plain)
+lr["interchange_numbers"] = [{"brand": "Hollander", "pn": "527-59373L"}, {"brand": "Hollander", "pn": "527-59373R"}]
+check("a left/right pair is not a merged variant", R.build([lr], Names(), "www.1aauto.com")["groups"] != [])
 for q in ("Sedan ", "without Electronic Suspension ", "Hybrid ", "From 1/01/06 Production Date "):
     d = R.build([a_rec("1AQ", [(2008, 2012, q, "Front Driver Side")])], Names(), "www.1aauto.com")
     check(f"1A refuses the qualifier {q.strip()!r}", not d["groups"])

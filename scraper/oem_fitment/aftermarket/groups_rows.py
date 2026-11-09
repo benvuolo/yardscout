@@ -114,6 +114,17 @@ def gsp_rows(r: dict):
     return refuse, pos, rows
 
 
+def merged_variants(ic: list) -> bool:
+    """One brand cross-referenced to several numbers (left/right pairs aside):
+    a cheap sign that the unit merges variants (shakeout 2026-11-09)."""
+    by = defaultdict(set)
+    for x in ic:
+        pn = re.sub(r"[^A-Z0-9]", "", str(x.get("pn", "")).upper())
+        by[x.get("brand", "").strip().upper()].add(re.sub(r"[LR]$", "", pn))
+    return any(len(v) > 1 for v in by.values())
+
+
+SUSPENSION_Q = re.compile(r"suspension|adaptive|electronic|air ride|magnetic|sport susp", re.I)
 _POS_IN_DESC = re.compile(r"\b(Front|Rear)(?: (Driver Side|Passenger Side|Left|Right))?\b")
 _ENG_Q = re.compile(r"^([VLHIW])(\d{1,2}) (\d\.\d)L$")
 
@@ -121,6 +132,8 @@ _ENG_Q = re.compile(r"^([VLHIW])(\d{1,2}) (\d\.\d)L$")
 def oneaauto_rows(r: dict):
     flags = [f for f in r.get("flags", []) if f != "multi_make"]
     refuse = ("flag:" + flags[0]) if flags else None
+    if refuse is None and merged_variants(r.get("interchange_numbers", [])):
+        refuse = "interchange_variants"
     rows = []
     positions = set()
     tail = f" {r.get('house_brand', '')} {r.get('house_brand_pn', '')}".rstrip()
@@ -133,7 +146,10 @@ def oneaauto_rows(r: dict):
             rows.append((a, None, None, "description_shape"))
             continue
         rest = d[len(pre):]
-        m = _POS_IN_DESC.search(rest)
+        # the LAST position phrase: "Front Wheel Drive Front Passenger Side"
+        # must keep "Front Wheel Drive" as a (refused) qualifier
+        ms = [x for x in _POS_IN_DESC.finditer(rest) if not rest[x.end():].startswith(" Wheel Drive")]
+        m = ms[-1] if ms else None
         if not m:
             q, rp = rest, ""
         else:
@@ -143,10 +159,9 @@ def oneaauto_rows(r: dict):
             positions.add(rp)
         if not q:
             rows.append((a, rp, [""], None))
-        elif _ENG_Q.match(q):
-            e = _ENG_Q.match(q)
-            rows.append((a, rp, [f"{float(e.group(3)):.1f}L {int(e.group(2))}-cyl"], None))
         else:
+            # every qualifier refuses, engine ones too ("V6 3.2L" does not
+            # exclude a same-engine sport trim; shakeout 2026-11-09)
             rows.append((a, rp, None, "qualifier:" + q))
     # per-row positions: one unit may be listed for the left corner of one car
     # and the right corner of another; groups are per (unit, position)
@@ -162,6 +177,12 @@ def build(records: list, names: GA.Names, site: str, src: str = "", complete: di
     claims = defaultdict(set)            # (cat, brand, mk, md, year, pos) -> {unit}
     accepted = defaultdict(list)         # (cat, unit, pos) -> [(mk, md, year, eng)]
     retrieved, seen = {}, set()
+    # models the source ever qualifies by a suspension option (any unit, any year)
+    susp_models = set()
+    for r in records:
+        for a in r.get("applications", []):
+            if SUSPENSION_Q.search(a.get("description", "")) or SUSPENSION_Q.search(a.get("submodel", "")):
+                susp_models.add((a["make"], a["model"]))
     for r in records:
         unit, cat = r.get("aftermarket_pn", ""), r.get("category", "")
         if not unit or (cat, unit) in seen:
@@ -175,7 +196,14 @@ def build(records: list, names: GA.Names, site: str, src: str = "", complete: di
             refused_units[f"{cat}:{refuse.split(':')[0]}"] += 1
             if refuse.startswith("title_token:"):
                 refused_rows["title_token " + refuse.split(":", 1)[1]] += 1
+        qualified_models = {(a["make"], a["model"]) for a, _rp, _e, why in rows if why}
         for a, rp, engines, why in rows:
+            # a unqualified row of a make/model this unit also lists WITH a
+            # qualifier is coarse data: refuse it (shakeout 2026-11-09)
+            if not why and (a["make"], a["model"]) in qualified_models:
+                why = "sibling_row_qualified"
+            if not why and cat == "strut" and (a["make"], a["model"]) in susp_models:
+                why = "model_has_suspension_options"
             # product kind (1A: "strut & spring assembly" vs bare "strut assembly")
             # is part of the split key: two kinds for one corner are not a split
             brand = (brand_name, a.get("kind", ""))
@@ -189,7 +217,7 @@ def build(records: list, names: GA.Names, site: str, src: str = "", complete: di
                 for p in claim_positions(cpos):
                     claims[(cat, brand, mk, md, y, p)].add(unit)
             if why:
-                refused_rows[why if not why.startswith("qualifier:") else "qualifier"] += 1
+                refused_rows[why if not why.startswith("qualifier:") else "qualifier"] += 1  # noqa
                 if why.startswith("qualifier:"):
                     refused_rows["q: " + why.split(":", 1)[1]] += 1
                 continue
