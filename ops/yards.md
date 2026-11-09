@@ -209,6 +209,20 @@ Sweep follow-ups (mine):
     Albuquerque 5.6 km.
   - The app shows the new pins after the next scan.
 
+## 2026-11-09 watch: Pull-N-Save 202 page
+
+Scan 42588733706 (08:49Z): `getMakes` got HTTP 202 with a 194-byte
+meta-refresh page three times. It looks like a bot-check/challenge page, so
+all 8 PNS yards were carried by stale-keep. The 12:22Z scan fetched them
+normally (11,533 cars). Rule 2: no workaround. If it repeats or sticks,
+follow up with outreach (the 2026-11-02 email to PNS has no reply).
+
+Bevell's, Budget Winter Garden and Route 34 fetched 0 in the same scan.
+They are back now, but still serve identical sets (STALE YARD).
+
+The hub changed `ops_monitor` (ca2a07c0): a chain unchanged only over a
+weekend or overnight is now listed as "quiet", not an issue.
+
 ## 2026-11-09 photos round 5 (open every car) + yard pins
 
 **Photos.** Owner: "Can we get them from the thumbnails within the lists?
