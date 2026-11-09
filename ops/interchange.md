@@ -1934,3 +1934,22 @@ Owner: "Yes relabel those, and start on Honda/Nissan and wheels". The hub approv
 - Not yet covered: GM, VW, MB, Hyundai rules, the no-manifest makes, and Honda/Acura/Nissan/Infiniti (another session). Mopar's moparpartsgiant is blocked, and Subaru is withheld.
 - Tests: pf_guards_unit ALL PASS; test_interchange pass (30 categories); oem_fitment tests 30/30; curation_tests pass; scraper/test_*.py pass.
 - Patch transfer: the originating session couldn't push. The hub applied its diff on 533b3c1. Unicode escapes in app.js were restored, and the wheels entry in interchange.json was regenerated with build_interchange_payload().
+
+### Wheels, continued (session_016ZzJfKi8ND3Ey2g66qhiZT, 2026-11-09)
+
+- (b) merge fixes, commit 52d9aa2:
+  - Header reads "carrying fitting wheels" (no "a" before a plural label). The browse note no longer doubles a plural ("wheelss").
+  - The online value on a wheel row reads "for a set of 4", because the yard price is per wheel.
+  - Size-tiered yard lists show the full per-wheel range with both row names, e.g. "Yard: $28.99–$37.99 each by size (WHEEL ALUM UNDER 16" … WHEEL ALUM OVER 17")". The old code quoted only the cheapest tier, which is the wrong price for a 16–17" Camry wheel.
+  - Seven lists price wheels by size: ace, chesterfield, chuckeddies, p195, pnpsa, pns, usauto. Every row the wheel tokens match there is an alloy-wheel size tier (checked against all `*_pricing.json`).
+  - pf_guards_unit has a check for each of the three changes.
+  - Screenshots: `ops/screens/wheels_2009_camry_85003_390_{light,dark}{,_row,_priced}.png`. 2009 Camry near 85003: 27 Likely donors, 22 of them with a yard price.
+- (a) tier W rules for GM, VW, MB and Hyundai, commit 3177cbb. Each was checked on one real wheels list page, read through fetch.py on 2026-11-09; all four answered 200.
+  - gmpartsgiant: subs `wheels`, `wheels_wheel_covers`, `wheels_hub_caps`. Noun WHEEL.
+    - The 2016 Trax row "WHEEL, Rear or Spare" (18X7) is kept: it is a full-size road wheel, and the group text is the illustration heading.
+    - Dropped: a "WHEEL, Spare…" heading, or a remark (including inside parentheses) that says spare, temporary or compact.
+  - vwpartsgiant / mbpartsgiant: `suspension/wheels`, anchored names. "Wheel, Alloy" and "Wheel Alloy" are kept. "Spare Wheel", "Wheel, Spare", bolts, bolt caps, lock kits, center caps, hub caps, covers and valve stems miss the include. MB lists accessory wheels (6-6-03-xxxx) as "Wheel, Alloy": their product pages decide fitment.
+  - hyundaipartsdeal: `chassis/wheel_cap`. "Wheel Assy-Aluminium" / "-Steel" are kept. "Wheel Assy-Temporary", caps, hub nuts and spare-tire clamps/pads are dropped, as is any row that says spare, temporary or compact.
+  - Worklist: `wheels: true` on all four. VW, MB and Hyundai go to version 2 to re-open their done sites. GM is not done, so tier W follows its A/B crawl.
+  - Kia reuses Hyundai's PARTS and SUBCATS, so its rules exist, but it is not flagged: not asked yet. It is a one-line worklist change if the hub wants it.
+  - Tests: test_wheels_rules covers the real row names and the subcat/page regexes. oem_fitment tests 30/30; curation_tests all PASS.
