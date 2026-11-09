@@ -3028,3 +3028,8 @@ each); nothing allowlisted or crawled.
     "if equipped"; colour/finish is a cosmetic note; anything else refuses.
   - Data so far: GSP 833 units → 30 groups; 1A strut 494 → 105.
   - Item 4 (OE corroboration) waits for the new lines' data.
+- ~00:05 UTC: GSP/1A output now uses the app's category ids: headlights,
+  tail-lights, side-mirrors, fog-lights; the rest are unchanged (b672c437).
+  A test checks that every emitted id exists (app list, crawl.TIERS,
+  coverage_matrix, or the wave-2 pending list). Category breadth was asked
+  to confirm `door-handle-int` and that pfAmRows renders `if_equipped`.
