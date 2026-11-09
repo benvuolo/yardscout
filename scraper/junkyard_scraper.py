@@ -20169,7 +20169,13 @@ _YARDCONNECT_ROW_RE = re.compile(r"<tr[^>]*>(.*?)</tr>", re.S)
 # through YardSmart's OWN resize endpoint instead (round 5, 2026-11-09): the
 # same signed blob id + the platform's public 325x600 variation = a ~45 KB
 # thumbnail, verified on VinPlus samples. The original is never linked.
-YARDSMART_MIN_HOURS_LEFT = 5.0   # ids expire at a fixed daily time (6-12 h left at fetch)
+# 2026-11-09 (measured on three scans): signed ids expire at one fixed time
+# of day (~10:20 UTC), not N hours after issue, so a scan sees anywhere from
+# minutes to ~24 h left. Publish while at least an hour remains; when an id
+# lapses before the next scan, the app's onerror hides that photo until the
+# next scan republishes a fresh id. (A 5-6 h floor dropped every YardSmart
+# photo from the 04:00/08:00 scans.)
+YARDSMART_MIN_HOURS_LEFT = 1.0
 YARDSMART_SITE_IDS = {"upickitaz": "az", "upullitne": "ne", "genesis": "ge",
                       "robertsons": "ro", "chuckeddies": "ce", "ruperts": "ru",
                       "armys": "am"}

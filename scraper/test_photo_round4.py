@@ -125,8 +125,10 @@ check("YardSmart: rebuilt URL has the full blob id",
       k == "ys_ruperts" and (blob(None) + "--" + D) in url and V1 in url, url)
 check("YardSmart: 10 h left -> code",
       js._yardsmart_photo_code(rep(blob("2026-11-09T10:00:00.000Z")), "upullitne", now=NOW).startswith("yne1"))
-check("YardSmart: 2 h left -> none",
-      js._yardsmart_photo_code(rep(blob("2026-11-09T02:00:00.000Z")), "upullitne", now=NOW) == "")
+check("YardSmart: 2 h left -> still published (app hides it once it lapses)",
+      js._yardsmart_photo_code(rep(blob("2026-11-09T02:00:00.000Z")), "upullitne", now=NOW).startswith("yne1"))
+check("YardSmart: 30 min left -> none",
+      js._yardsmart_photo_code(rep(blob("2026-11-09T00:30:00.000Z")), "upullitne", now=NOW) == "")
 check("YardSmart: unknown variation -> none",
       js._yardsmart_photo_code(rep(blob(None), var="f" * 40), "ruperts", now=NOW) == "")
 check("YardSmart: unknown site -> none", js._yardsmart_photo_code(rep(blob(None)), "nosuchsite", now=NOW) == "")
@@ -139,8 +141,8 @@ check("YardSmart blob (VinPlus) -> resized-thumbnail code", bc.startswith("yvl1"
 k, url = build(bc)
 check("YardSmart blob: credited per brand, rendered via representations (never the original)",
       k == "ys_vinplus_vl" and "/representations/redirect/" in url and "/blobs/" not in url, (k, url))
-check("YardSmart blob: expired -> none", js._yardsmart_photo_code(
-    "https://api.yardsmartapp.com/rails/active_storage/blobs/redirect/" + blob("2026-11-09T01:00:00.000Z")
+check("YardSmart blob: about to expire -> none", js._yardsmart_photo_code(
+    "https://api.yardsmartapp.com/rails/active_storage/blobs/redirect/" + blob("2026-11-09T00:20:00.000Z")
     + "--" + D + "/a.jpg", sid="vl", now=NOW) == "")
 check("Army's blob -> thumbnail code", js._yardsmart_photo_code(
     "https://api.yardsmartapp.com/rails/active_storage/blobs/redirect/" + blob(None) + "--" + D + "/a.jpg",
