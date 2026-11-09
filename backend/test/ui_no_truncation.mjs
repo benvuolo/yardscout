@@ -548,6 +548,23 @@ const SCREENS = [
     await page.evaluate(() => { saveYardChecks({}); try { localStorage.removeItem('ys_yard_checks'); } catch (e) {} hideYardRows(); });
     await resetUi(page);
   }]),
+  // The long-listed notice in the row view (one car's date moved back 200 days).
+  ['yard-rows-long', async (page) => {
+    await tab(page, 'yards');
+    await page.evaluate(() => {
+      setYardsView('list'); renderYards();
+      const loc = document.querySelector('#yards-grid .yard-card[data-loc]').dataset.loc;
+      const v = liveInventory.filter(x => x.location === loc && x.row).sort((a, b) => compareRows(a.row, b.row))[0];
+      window.__llOrig = [v, v.dateAdded];
+      v.dateAdded = new Date(Date.now() - 200 * 86400000).toISOString().slice(0, 10);
+      openYardRows(loc);
+      const it = document.querySelector(`#yard-rows .yr-item[data-vkey="${CSS.escape(vehicleKey(v))}"]`);
+      if (!it || !it.querySelector('.yr-long')) throw new Error('no long-listed notice in the row view');
+      const sc = document.getElementById('yard-rows-scroll');
+      sc.scrollTop += it.getBoundingClientRect().top - sc.getBoundingClientRect().top - 140;
+    });
+    await settle(page, 500);
+  }, async (page) => { await page.evaluate(() => { if (window.__llOrig) { window.__llOrig[0].dateAdded = window.__llOrig[1]; window.__llOrig = null; } hideYardRows(); }); await resetUi(page); }],
   ...[['yards-map', 'gl'], ['yards-map-sheet', 'sheet'], ['yards-map-schematic', 'schematic']].map(([name, mode]) => [name, async (page) => {
     await tab(page, 'yards');
     await page.evaluate(() => setYardsView('map'));

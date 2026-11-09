@@ -5329,6 +5329,7 @@ function yardRowItemHtml(v, flags) {
           ${color ? `<span class="yr-sub">${escapeHtml(color)}</span>` : ''}
           ${tags ? `<span class="yr-tags">${tags}</span>` : ''}
           ${val && val.partsSummary ? `<span class="yr-parts">${val.partsSummary}</span>` : ''}
+          ${(() => { const lc = carLotClock(v); return lc.longListed ? `<span class="long-listed yr-long" role="note">Listed ${lc.daysOn.toLocaleString()} days, longer than usual here. Yards\u2019 lists can fall behind; call before going for this one.</span>` : ''; })()}
         </span>
       </button>
       ${unlocked && val && val.profitLine ? `<div class="yr-value">${val.profitLine}</div>` : ''}

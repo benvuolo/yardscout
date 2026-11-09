@@ -3207,3 +3207,5 @@ button.saved-item-name { max-width: 100%; min-width: 0; overflow-wrap: anywhere;
 /* Listed far past the typical stay: a neutral note, never an alarm. */
 .long-listed { margin: var(--s2) 0 0; padding: var(--s2) var(--s3); border: 1px solid var(--border); border-left: 3px solid var(--border-dark); border-radius: var(--r-sm); background: var(--surface2); font-size: var(--t-sm); line-height: 1.45; color: var(--text); }
 .cd-stay-long .long-listed { margin: 0; }
+.yr-long { display: block; margin-top: var(--s1); font-size: var(--t-xs); }
+.yr-item.is-checked .yr-long { display: none; }
