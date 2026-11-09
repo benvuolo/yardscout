@@ -608,4 +608,6 @@ check("23 Jeep 4602785AD (Front Right) is out of window-switch",
 check("23 DM is present", "DM" in I["slots"], str(I["slots"]))
 check("23 jeeppartsdeal/window-switch is unconfirmed, so nothing is Verified",
       "category_unconfirmed" in I["elig"] and doc["groups"] == [])
+check("option hold: subaru gauge clusters held (Canada km/h clusters unmarked)",
+      _P.held_cross_model_cat("subaru", "gauge-cluster") == "held_option_cross_model")
 done("test_curate")
