@@ -3010,3 +3010,13 @@ each); nothing allowlisted or crawled.
   Order after R3: slug map, scratch `--tier D --max-segments 2` trial, every
   row read, strict rules (colour words kept, airbag rows excluded), product
   trial, ci_audit, flag one version above every flagged tier.
+- ~23:45 UTC, hub items 1-3 done (3561c95f):
+  - 1A crawl order now starts with the junkyard-demand lines: headlight,
+    tail/fog light, blower, mirror, door handles, regulator. Strut is
+    paused, with its progress kept.
+  - Lamp guard on FACELIFT_BREAKS; side-only positions.
+  - Rule 5 normalizes separators and case only.
+  - Qualifier grammar: body gate held behind EMIT_BODY_GATE; options become
+    "if equipped"; colour/finish is a cosmetic note; anything else refuses.
+  - Data so far: GSP 833 units → 30 groups; 1A strut 494 → 105.
+  - Item 4 (OE corroboration) waits for the new lines' data.
