@@ -971,9 +971,19 @@ function photoBoxHtml(info, key, title, cls, under) {
   // A heavy source has only the original: load `large` (on that tap) and show it.
   const src = info.heavy ? info.large : info.url;
   return `<button type="button" class="photo-box ${under ? 'has-illo ' : ''}${cls || ''}" data-photo-vkey="${key}" aria-label="View photo of the ${escapeHtml(title)}">
-      ${under || ''}<img src="${escapeHtml(src)}" alt="" ${info.heavy ? '' : 'loading="lazy" '}decoding="async" width="${info.w}" height="${info.h}" onerror="this.closest('.photo-box').classList.add('photo-failed')">
+      ${under || ''}<span class="ph-fill" aria-hidden="true"></span><img src="${escapeHtml(src)}" alt="" ${info.heavy ? '' : 'loading="lazy" '}decoding="async" width="${info.w}" height="${info.h}" onload="photoFill(this)" onerror="this.closest('.photo-box').classList.add('photo-failed')">
       <span class="photo-credit">${escapeHtml(info.label)}</span>
     </button>`;
+}
+/* Once a photo has loaded, the space around it (its shape differs from the
+ * box) shows a soft blur of the same photo instead of grey bars. Same image,
+ * already in the browser's memory: no second download. The photo itself is
+ * never cropped. */
+function photoFill(img) {
+  const box = img.closest('.photo-box'), fill = box && box.querySelector('.ph-fill');
+  if (!fill || !img.currentSrc) return;
+  fill.style.backgroundImage = 'url("' + img.currentSrc.replace(/["\\\n]/g, encodeURIComponent) + '")';
+  box.classList.add('ph-filled');
 }
 /* Positions in a car's extras row, by the published extraFields names
  * (photo, color, engine, trans, transSrc, body); defaults match today's order. */
