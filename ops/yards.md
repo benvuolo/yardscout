@@ -232,6 +232,43 @@ URLs only, per-source kill switch; Pull-N-Save checks stay paused.
 | Ace | 2,557 | Not checkable from CI (Cloudflare blocks datacenter IPs) | — | — | Unknown |
 | Army's | 238 | Full-size blobs, expiring | — | — | Off |
 
+**Result:** commits 3a16d2b9 and 63236fe7; scan 42540250682, published
+2026-11-09T02:41Z, ran ~78 min. All 25 `scraper/test_*.py` pass;
+`test_photo_round4.py` is new, and all 47 published patterns are checked
+in Node. Cars with a photo rose from 147,254 (43.5%) to **162,807 of
+338,652 (48.1%)**.
+
+New this scan:
+- Ario 9,427 (YMS storage) + Paul's 1,505.
+- YardSmart thumbnails 4,296.
+- Pull-A-Part 290 (backlog 42,399).
+- Fenix 36 (backlog 5,602; the newest cars mostly have no photo yet, and
+  "none" is re-asked after 3 days).
+
+Unchanged: LKQ 66,498, Pick-n-Pull 47,390, Wrench-A-Part 9,647, BYOT 5,318,
+Pick-A-Part VA 4,919, Wilbert's 4,384, Nevada PAP 2,529, U-Pull-It WA 1,848,
+Weller 1,372, AESOP 928, Pasco 910, Midway 760, Kiker's 656, Pull-N-Save 94
+(paused).
+
+**Size:** `vehicle_extras.json` 17.75 → 18.90 MB (gzip 3.69 → 3.97 MB). The
+yardconnect codes change every scan, since the signed ids are re-issued.
+
+**Still growing:** the Pull-A-Part and Fenix backlogs (300 and 150 lookups
+per scan).
+
+**Sites with truly no per-car photos:** Harry's; Jalopy Jungle; the
+CRUSH-table sites (Buddy's, Marion County, 662, Polk County, U-Pull-It TN,
+Trusty, M&M, CP's); iPull-uPull (+ Canada); Budget; Cagle's; Indy; Bevell's;
+OKC; U-Pull and Save; Parts Galore; C&C; Hwy 82; Sunshine; Barry's;
+Route 34; Utah PAP; Tear-A-Part; and the Ario tenants with empty
+`image_url` (EZ Pull N Pay, UAPI, RG, Youngstown, others).
+
+**Photos exist but deliberately not shown:** VinPlus (~22k) and Sturtevant
+(4 MB originals only), Army's (expiring originals), Auto Parts U Pull
+(Copart's photos), Pull-N-Save (checks paused).
+
+**Unknown:** Ace (blocked in CI); St. Cloud (column exists, no photos seen).
+
 ## 2026-11-08 daily ops email: frozen and missing yards
 
 0. **Utah Pic-A-Part - Orem (Premium)** (owner asked "is this right?"):
