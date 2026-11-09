@@ -326,3 +326,74 @@ fetch.py pacing, cache, robots and the permanent stop are unchanged.
   labelled "GSP" plus the unit number. No page text.
 - **Size:** about 20k handles, of which perhaps 3-5k are cv-axle. At 4 s/site
   that is 4-6 h of crawl in 28-minute slices.
+
+### Owner decisions and the GSP detector rule (2026-11-09)
+
+Owner, verbatim (question dialog, relayed by the hub, ops/hub.md, ~20:15 UTC):
+- GSP North America: "Yes, use GSP".
+- 1A Auto: "Yes, use 1A Auto anyway". This accepts the risk of its
+  personal/non-commercial licence.
+- ~20:20 UTC: "lets do it, also 1A im not selling the part fitment portion".
+
+**1A Auto data-use design (hub, from the owner's words):**
+- Fits derived from 1A data are never behind Pro. They stay in the free part
+  of the Parts tab, as all fitment does today: donors and tiers are free, and
+  only prices/values are Pro.
+- 1A's prices, descriptions and images are never shown.
+- Labelled "1A Auto" plus the unit number. Notes are in our own wording.
+- When 1A groups are integrated, a test must assert that 1A-sourced rows
+  render identically for free and Pro users, apart from the existing
+  price/value lines. That test is not written yet, because no 1A rows exist
+  yet; it is a ship blocker for 1A.
+- The "Part Interchange" cross-brand numbers (e.g. Unity 13432, FCS 2337077R)
+  are evidence of brand equivalence only. They are never evidence of vehicle
+  fitment on their own.
+
+**GSP detector rule, hub-approved (~20:21 UTC); `fetch.gsp_challenged`, host
+`gspnorthamerica.com` only.** The page counts as NOT challenged only when ALL
+of these hold:
+- (a) HTTP 200.
+- (b) The expected body for the path is present:
+  - `/products/<handle>`: `<p class="product__text …"><strong>Part Number:</strong>`
+    and a `<title>` ending "GSP North America";
+  - `/sitemap.xml` and `/sitemap_products_N.xml`: a valid `sitemapindex` or
+    `urlset`;
+  - `/`: that title.
+  - Any other path stops, including `/search`, `/collections/*` and `.json`.
+- (c) HTML has exactly one `<script id="captcha-bootstrap">`.
+- (d) With every `<script>…</script>` element removed, neither CHALLENGE_RE,
+  HUMAN_RE nor "turnstile" matches anywhere.
+- (e) The full body has no strong marker (cf-chl, challenge-platform,
+  "Just a moment...", "Attention Required!", `/challenge`, `/checkpoint`) and
+  no HUMAN_RE anywhere, scripts included. Sitemaps allow no marker at all.
+
+Anything else, and any 403/429/503, stops the domain for good. Every other
+host keeps the old rule byte for byte (`tests/test_fetch_gsp.py`, 1,260
+inputs, including the real GSP pages).
+
+Page evidence, from the real pages retrieved 2026-11-09 (product
+ncv36167xd, home, /pages/products, terms):
+- Each page has 68 matches of the bare word "captcha", all inside `<script>`
+  elements. One is Shopify's `captcha-bootstrap` (form protection for
+  contact/account forms, 3,417 bytes). The rest are the Globo Form Builder
+  config (`"reCaptcha":{"enable":false}`, `"hCaptcha":{"siteKey":false}`,
+  `"turnstile":{"siteKey":false}`) and translation strings
+  (`"requiredCaptcha"`, `"Please complete reCAPTCHA task"`).
+- No match is in visible markup or text. None are cf-chl, challenge-platform,
+  interstitial titles or HUMAN_RE.
+- The full product page is committed as
+  `tests/fixtures/gsp_full_product_ncv36167xd.html.gz`.
+
+Stops proved in tests:
+- visible widgets: g-recaptcha, h-captcha, turnstile;
+- visible text: "verify you are human", "unusual traffic", "captcha";
+- "verify you are human" inside a script;
+- Shopify `/challenge` and `/checkpoint`;
+- cf-chl, challenge-platform, "Just a moment...", "Attention Required!";
+- a second bootstrap script, or none;
+- a missing part-number line, a missing title;
+- an interstitial page, an empty body;
+- unknown, search or `.json` paths; an HTML or marked sitemap;
+- HTTP 403/429/503/500/404/301.
+
+We never load, run or submit anything.

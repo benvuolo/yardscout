@@ -63,6 +63,9 @@ ALLOWED = {
     # 1A Auto retailer catalog (owner 2026-11-09 "Yes, use 1A Auto anyway",
     # relayed by the hub; robots Crawl-Delay 1 < our gap; old challenge rule)
     "www.1aauto.com",
+    # GSP North America (owner 2026-11-09 "Yes, use GSP"; site-scoped detector
+    # rule gsp_challenged below; SOURCES.md "Source scout 2")
+    "gspnorthamerica.com",
 }
 # robots.txt Crawl-delay or a gentler pace where a site asks for it
 DOMAIN_GAP = {"www.tycamericas.com": 10.0, "www.subarupartsdeal.com": 5.0}
@@ -251,9 +254,72 @@ def spectra_challenged(path: str, status: int, body: str) -> bool:
     return bool(CHALLENGE_RE.search(rest) or HUMAN_RE.search(rest))
 
 
+# gspnorthamerica.com only (owner 2026-11-09 "Yes, use GSP"; hub-approved rule
+# (a)-(e), SOURCES.md "Source scout 2"). Every Shopify page carries one
+# form-protection <script id="captcha-bootstrap"> and form-builder config with
+# the bare word "captcha" inside <script> elements (68 per page measured). The
+# page is NOT challenged only when ALL hold:
+#   (a) HTTP 200;
+#   (b) the expected body for the path: product page -> the part-number line
+#       and a title ending "GSP North America"; sitemap -> valid sitemap XML;
+#       "/" -> that title; any other path stops;
+#   (c) HTML: exactly one <script id="captcha-bootstrap">;
+#   (d) with every <script>...</script> element removed, neither CHALLENGE_RE,
+#       HUMAN_RE nor "turnstile" matches anywhere (visible markup and text);
+#   (e) in the full body: no strong challenge marker (cf-chl, challenge-platform,
+#       "Just a moment...", "Attention Required!", Shopify /challenge or
+#       /checkpoint) and no HUMAN_RE; only the bare word "captcha" inside
+#       scripts is tolerated. Sitemaps tolerate no marker at all.
+# Anything else stops the domain for good. We never load or run any script.
+GSP = "gspnorthamerica.com"
+_GSP_TITLE = re.compile(r"<title>[^<]*GSP North America\s*</title>", re.S)
+_GSP_PN = re.compile(r'<p\s+class="product__text[^"]*"[^>]*>\s*<strong>Part Number:</strong>')
+_GSP_BOOT = re.compile(r'<script id="captcha-bootstrap">')
+_SCRIPT_EL = re.compile(r"<script\b[^>]*>.*?</script\s*>", re.S | re.I)
+_STRONG_RE = re.compile(r"Attention Required!|cf-chl|challenge-platform|Just a moment\.\.\.|"
+                        r"/challenge\b|/checkpoint\b", re.I)
+
+
+def _gsp_body_ok(path: str, body: str) -> str | None:
+    """(b): 'html' or 'xml' when the expected body is present, else None."""
+    if re.fullmatch(r"/products/[a-z0-9-]+", path):
+        return "html" if _GSP_TITLE.search(body) and _GSP_PN.search(body) else None
+    if re.fullmatch(r"/sitemap(?:_products_\d+)?\.xml", path):
+        try:
+            import xml.etree.ElementTree as ET
+            tag = ET.fromstring(body).tag.split("}")[-1]
+        except ET.ParseError:
+            return None
+        return "xml" if tag in ("sitemapindex", "urlset") else None
+    if path == "/":
+        return "html" if _GSP_TITLE.search(body) else None
+    return None
+
+
+def gsp_challenged(path: str, status: int, body: str) -> bool:
+    if status != 200:
+        return True
+    kind = _gsp_body_ok(path, body)
+    if kind is None:
+        return True
+    if kind == "xml":
+        return bool(CHALLENGE_RE.search(body) or HUMAN_RE.search(body) or _STRONG_RE.search(body))
+    if len(_GSP_BOOT.findall(body)) != 1:
+        return True
+    visible = _SCRIPT_EL.sub(" ", body)
+    if CHALLENGE_RE.search(visible) or HUMAN_RE.search(visible) or re.search(r"turnstile", visible, re.I):
+        return True
+    if HUMAN_RE.search(body):
+        return True
+    strong = [m.group(0) for m in _STRONG_RE.finditer(body)]
+    return bool(strong)
+
+
 def challenged(netloc: str, path: str, status: int, body: str) -> bool:
     if netloc == SPECTRA:
         return spectra_challenged(path, status, body)
+    if netloc == GSP:
+        return gsp_challenged(path, status, body)
     return status in (403, 429, 503) or bool(CHALLENGE_RE.search(body[:20000]))
 
 
