@@ -2869,3 +2869,16 @@ each); nothing allowlisted or crawled.
     the hub.
   - Next: curation (`groups_gsp` / `groups_1a`) once the hub says go, then
     §11.4.
+- ~21:45 UTC: curation is on main (a9f551c7, `aftermarket/groups_rows.py`).
+  - Rules: Likely only. Every row is a claim, and a corner-year is dropped
+    when the same brand and kind has more than one unit for it. Qualified
+    rows refuse, except a 1A engine qualifier, which becomes the engine. GSP
+    title rules as listed in the hub message. No body gating, because
+    `pfAmRows` ignores a[5].
+  - Tests: 33 checks, including the free = Pro render guard and the
+    facts-only check.
+  - First slice: GSP 200 units → 15 groups; 1A 113 → 69. Neither crawl is
+    complete.
+  - §11.4: proposed to run per (site, category) once its crawl completes,
+    with an independent verifier and `--max-lines 100000`. Waiting for the
+    hub.
