@@ -347,6 +347,13 @@ check("12 base model: Legacy/Outback, DeVille/Seville, Caravan/Durango, Fusion/M
 check("12 hold covers exterior styling only (mirrors and window parts are not held)",
       "side-mirrors" not in _P.EXTERIOR_HOLD_CATS and "window-regulator" not in _P.EXTERIOR_HOLD_CATS
       and {"grille", "headlights", "tail-lights", "bumper-front"} <= _P.EXTERIOR_HOLD_CATS)
+# hub 2026-11-09 (Subaru resample: 91036FJ100 non-heated mirror credited to the US XV):
+# subaru cross-model side-mirror groups are held; other namespaces' mirrors are not
+check("12 option hold: subaru side-mirrors held, other ns mirrors and subaru regulators not",
+      _P.held_cross_model_cat("subaru", "side-mirrors") == "held_option_cross_model"
+      and _P.held_cross_model_cat("toyota", "side-mirrors") is None
+      and _P.held_cross_model_cat("subaru", "window-regulator") is None
+      and _P.held_cross_model_cat("gm", "hood") == "held_exterior_cross_model")
 
 # --------------------------------------------------------------- case 13
 tr = toyota_record("12345-67890", "headlights", ("Toyota", "Camry", 2007), "headlights-lighting/headlamps", "Headlamp",

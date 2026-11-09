@@ -67,6 +67,24 @@ EXTERIOR_HOLD_CATS = frozenset({"bumper-front", "bumper-rear", "grille", "headli
                                 "hood", "door-front", "door-rear", "liftgate", "tailgate", "trunk-lid"})
 
 
+# Per-namespace option holds (hub decision 2026-11-09, make breadth §11.4
+# Subaru resample): categories where an option we cannot see per row (heated
+# vs non-heated mirror; US vs non-US configurations the catalog does not
+# mark) splits the part. A cross-model Likely group in one of these is held
+# like an exterior group (held_option_cross_model), listed in
+# held_exterior.json for the owner checklist. Only removes claims.
+OPTION_HOLD_CATS: dict = {"subaru": frozenset({"side-mirrors"})}
+
+
+def held_cross_model_cat(ns: str, cat: str) -> str | None:
+    """Refusal code when a cross-model Likely group in (ns, cat) is held."""
+    if cat in EXTERIOR_HOLD_CATS:
+        return "held_exterior_cross_model"
+    if cat in OPTION_HOLD_CATS.get(ns, ()):
+        return "held_option_cross_model"
+    return None
+
+
 # Namespaces withheld from shipping (2026-11-09, ops/interchange.md): their
 # held groups are never released by the allowlist.
 WITHHELD_NS = frozenset({"subaru"})

@@ -1319,11 +1319,12 @@ class Curation:
             released = (self.ns, cat, tuple(pns), tuple(tuple(a) for a in apps)) in self.release_allow
             if released:
                 self.released_exterior.append({"cat": cat, "pn": pns, "apps": apps})
-            if not released and cat in policy.EXTERIOR_HOLD_CATS and \
+            hold = policy.held_cross_model_cat(self.ns, cat)
+            if not released and hold and \
                     len({policy.base_model(T[0], T[1]) for T in Ts}) > 1:
                 # §5.16 exterior hold: only removes claims; kept for the owner checklist
                 urls = sorted({u for r in c.records for u in (r.product_url, r.list_url) if u})
-                self.refuse("held_exterior_cross_model", cat=cat, pn=pns[0], evidence=[r.pointer for r in c.records],
+                self.refuse(hold, cat=cat, pn=pns[0], evidence=[r.pointer for r in c.records],
                             detail=";".join(f"{a[0]} {a[1]} {a[2]}-{a[3]}" for a in apps))
                 self.held_exterior.append({"ns": self.ns, "cat": cat, "pn": pns, "apps": apps,
                                            "note": _likely_note(brand, pns[0], text, PACK_TEXT.get(c.packaging, "")),
