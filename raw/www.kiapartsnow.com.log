@@ -848,3 +848,172 @@
 21:25:38 chain-unlinked strut 1 numbers named by 546601W200, no catalog link: 546601W210
 21:28:58 seg done tier=C Kia Rio [2001, 2023] seeds=[2013, 2009, 2019] records=3331 errors=6
 21:28:58 time budget reached records=3331
+21:29:23 start site=www.kiapartsnow.com mode=worklist tiers=['A', 'B', 'W', 'C'] records=3331 list_lines=104 year_lines=80 url_index=1040
+21:29:23 seg done tier=A Kia Soul [2010, 2013] seeds=[2013] records=3331 errors=6
+21:29:23 seg done tier=A Kia Optima [2011, 2013] seeds=[2013] records=3331 errors=6
+21:29:23 seg done tier=A Kia Soul [2014, 2019] seeds=[2014] records=3331 errors=6
+21:29:23 seg done tier=A Kia Rio [2001, 2023] seeds=[2013] records=3331 errors=6
+21:29:23 seg done tier=A Kia Sorento [2011, 2015] seeds=[2011] records=3331 errors=6
+21:29:23 seg done tier=A Kia Optima [2014, 2015] seeds=[2015] records=3331 errors=6
+21:29:23 seg done tier=A Kia Forte [2014, 2018] seeds=[2014] records=3331 errors=6
+21:29:23 seg done tier=A Kia Forte [2010, 2013] seeds=[2010] records=3331 errors=6
+21:29:23 seg done tier=A Kia Sedona [2006, 2014] seeds=[2006] records=3331 errors=6
+21:29:23 seg done tier=A Kia Sportage [1995, 2008] seeds=[2007] records=3331 errors=6
+21:29:23 seg done tier=A Kia Spectra [2007, 2009] seeds=[2009] records=3331 errors=6
+21:29:23 seg done tier=A Kia Optima [2016, 2018] seeds=[2016] records=3331 errors=6
+21:29:23 seg done tier=A Kia Sorento [2003, 2006] seeds=[2006] records=3331 errors=6
+21:29:23 seg done tier=A Kia Sorento [2007, 2009] seeds=[2008] records=3331 errors=6
+21:29:23 seg done tier=A Kia Sorento [2016, 2020] seeds=[2016] records=3331 errors=6
+21:29:23 seg done tier=A Kia Rondo [2007, 2015] seeds=[2007] records=3331 errors=6
+21:29:23 seg done tier=A Kia Sedona [2015, 2021] seeds=[2016] records=3331 errors=6
+21:29:23 seg done tier=A Kia Optima [2007, 2008] seeds=[2008] records=3331 errors=6
+21:29:23 seg done tier=A Kia Spectra [2005, 2006] seeds=[2006] records=3331 errors=6
+21:29:23 seg done tier=A Kia Optima [2009, 2010] seeds=[2009] records=3331 errors=6
+21:29:23 seg done tier=A Kia Sedona [2002, 2005] seeds=[2005] records=3331 errors=6
+21:29:23 seg done tier=A Kia Sportage [2011, 2013] seeds=[2011] records=3331 errors=6
+21:29:23 seg done tier=A Kia Spectra [2001, 2004] seeds=[2004] records=3331 errors=6
+21:29:23 seg done tier=A Kia Sportage [2014, 2016] seeds=[2015] records=3331 errors=6
+21:29:23 seg done tier=A Kia Sportage [2009, 2010] seeds=[2009] records=3331 errors=6
+21:29:23 seg done tier=A Kia Forte Koup [2010, 2016] seeds=[2010] records=3331 errors=6
+21:29:23 seg done tier=A Kia Cadenza [2014, 2019] seeds=[2014] records=3331 errors=6
+21:29:23 seg done tier=A Kia Optima [2005, 2006] seeds=[2006] records=3331 errors=6
+21:29:23 seg done tier=A Kia Rio5 [2002, 2016] seeds=[2013] records=3331 errors=6
+21:29:23 seg done tier=A Kia Forte [2019, 2024] seeds=[2019] records=3331 errors=6
+21:29:23 seg done tier=A Kia Amanti [2004, 2009] seeds=[2004] records=3331 errors=6
+21:29:23 seg done tier=A Kia Optima [2019, 2020] seeds=[2019] records=3331 errors=6
+21:29:23 seg done tier=A Kia Borrego [2009, 2010] seeds=[2009] records=3331 errors=6
+21:29:23 seg done tier=A Kia Forte5 [2011, 2018] seeds=[2016] records=3331 errors=6
+21:29:23 seg done tier=A Kia Sportage [2017, 2019] seeds=[2017] records=3331 errors=6
+21:29:23 seg done tier=B Kia Soul [2010, 2013] seeds=[2013] records=3331 errors=6
+21:29:23 seg done tier=B Kia Optima [2011, 2013] seeds=[2013] records=3331 errors=6
+21:29:23 seg done tier=B Kia Soul [2014, 2019] seeds=[2014] records=3331 errors=6
+21:29:23 seg done tier=B Kia Rio [2001, 2023] seeds=[2013] records=3331 errors=6
+21:29:23 seg done tier=B Kia Sorento [2011, 2015] seeds=[2011] records=3331 errors=6
+21:29:23 seg done tier=B Kia Optima [2014, 2015] seeds=[2015] records=3331 errors=6
+21:29:23 seg done tier=B Kia Forte [2014, 2018] seeds=[2014] records=3331 errors=6
+21:29:23 seg done tier=B Kia Forte [2010, 2013] seeds=[2010] records=3331 errors=6
+21:29:23 seg done tier=B Kia Sedona [2006, 2014] seeds=[2006] records=3331 errors=6
+21:29:23 seg done tier=B Kia Sportage [1995, 2008] seeds=[2007] records=3331 errors=6
+21:29:23 seg done tier=B Kia Spectra [2007, 2009] seeds=[2009] records=3331 errors=6
+21:29:23 seg done tier=B Kia Optima [2016, 2018] seeds=[2016] records=3331 errors=6
+21:29:23 seg done tier=B Kia Sorento [2003, 2006] seeds=[2006] records=3331 errors=6
+21:29:23 seg done tier=B Kia Sorento [2007, 2009] seeds=[2008] records=3331 errors=6
+21:29:23 seg done tier=B Kia Sorento [2016, 2020] seeds=[2016] records=3331 errors=6
+21:29:23 seg done tier=B Kia Rondo [2007, 2015] seeds=[2007] records=3331 errors=6
+21:29:23 seg done tier=B Kia Sedona [2015, 2021] seeds=[2016] records=3331 errors=6
+21:29:23 seg done tier=B Kia Optima [2007, 2008] seeds=[2008] records=3331 errors=6
+21:29:23 seg done tier=B Kia Spectra [2005, 2006] seeds=[2006] records=3331 errors=6
+21:29:23 seg done tier=B Kia Optima [2009, 2010] seeds=[2009] records=3331 errors=6
+21:29:23 seg done tier=B Kia Sedona [2002, 2005] seeds=[2005] records=3331 errors=6
+21:29:23 seg done tier=B Kia Sportage [2011, 2013] seeds=[2011] records=3331 errors=6
+21:29:23 seg done tier=B Kia Spectra [2001, 2004] seeds=[2004] records=3331 errors=6
+21:29:23 seg done tier=B Kia Sportage [2014, 2016] seeds=[2015] records=3331 errors=6
+21:29:23 seg done tier=B Kia Sportage [2009, 2010] seeds=[2009] records=3331 errors=6
+21:29:23 seg done tier=B Kia Forte Koup [2010, 2016] seeds=[2010] records=3331 errors=6
+21:29:23 seg done tier=B Kia Cadenza [2014, 2019] seeds=[2014] records=3331 errors=6
+21:29:23 seg done tier=B Kia Optima [2005, 2006] seeds=[2006] records=3331 errors=6
+21:29:23 seg done tier=B Kia Rio5 [2002, 2016] seeds=[2013] records=3331 errors=6
+21:29:23 seg done tier=B Kia Forte [2019, 2024] seeds=[2019] records=3331 errors=6
+21:29:23 seg done tier=B Kia Amanti [2004, 2009] seeds=[2004] records=3331 errors=6
+21:29:23 seg done tier=B Kia Optima [2019, 2020] seeds=[2019] records=3331 errors=6
+21:29:23 seg done tier=B Kia Borrego [2009, 2010] seeds=[2009] records=3331 errors=6
+21:29:23 seg done tier=B Kia Forte5 [2011, 2018] seeds=[2016] records=3331 errors=6
+21:29:23 seg done tier=B Kia Sportage [2017, 2019] seeds=[2017] records=3331 errors=6
+21:29:23 seg done tier=W Kia Soul [2010, 2013] seeds=[2013] records=3331 errors=6
+21:29:23 seg done tier=W Kia Optima [2011, 2013] seeds=[2013] records=3331 errors=6
+21:29:23 seg done tier=W Kia Soul [2014, 2019] seeds=[2014] records=3331 errors=6
+21:29:23 seg done tier=W Kia Rio [2001, 2023] seeds=[2013] records=3331 errors=6
+21:29:23 seg done tier=W Kia Sorento [2011, 2015] seeds=[2011] records=3331 errors=6
+21:29:23 seg done tier=W Kia Optima [2014, 2015] seeds=[2015] records=3331 errors=6
+21:29:23 seg done tier=W Kia Forte [2014, 2018] seeds=[2014] records=3331 errors=6
+21:29:23 seg done tier=W Kia Forte [2010, 2013] seeds=[2010] records=3331 errors=6
+21:29:23 seg done tier=W Kia Sedona [2006, 2014] seeds=[2006] records=3331 errors=6
+21:29:23 seg done tier=W Kia Sportage [1995, 2008] seeds=[2007] records=3331 errors=6
+21:29:23 seg done tier=W Kia Spectra [2007, 2009] seeds=[2009] records=3331 errors=6
+21:29:23 seg done tier=W Kia Optima [2016, 2018] seeds=[2016] records=3331 errors=6
+21:29:23 seg done tier=W Kia Sorento [2003, 2006] seeds=[2006] records=3331 errors=6
+21:29:23 seg done tier=W Kia Sorento [2007, 2009] seeds=[2008] records=3331 errors=6
+21:29:23 seg done tier=W Kia Sorento [2016, 2020] seeds=[2016] records=3331 errors=6
+21:29:23 seg done tier=W Kia Rondo [2007, 2015] seeds=[2007] records=3331 errors=6
+21:29:23 seg done tier=W Kia Sedona [2015, 2021] seeds=[2016] records=3331 errors=6
+21:29:23 seg done tier=W Kia Optima [2007, 2008] seeds=[2008] records=3331 errors=6
+21:29:23 seg done tier=W Kia Spectra [2005, 2006] seeds=[2006] records=3331 errors=6
+21:29:23 seg done tier=W Kia Optima [2009, 2010] seeds=[2009] records=3331 errors=6
+21:29:23 seg done tier=W Kia Sedona [2002, 2005] seeds=[2005] records=3331 errors=6
+21:29:23 seg done tier=W Kia Sportage [2011, 2013] seeds=[2011] records=3331 errors=6
+21:29:23 seg done tier=W Kia Spectra [2001, 2004] seeds=[2004] records=3331 errors=6
+21:29:23 seg done tier=W Kia Sportage [2014, 2016] seeds=[2015] records=3331 errors=6
+21:29:23 seg done tier=W Kia Sportage [2009, 2010] seeds=[2009] records=3331 errors=6
+21:29:23 seg done tier=W Kia Forte Koup [2010, 2016] seeds=[2010] records=3331 errors=6
+21:29:23 seg done tier=W Kia Cadenza [2014, 2019] seeds=[2014] records=3331 errors=6
+21:29:23 seg done tier=W Kia Optima [2005, 2006] seeds=[2006] records=3331 errors=6
+21:29:23 seg done tier=W Kia Rio5 [2002, 2016] seeds=[2013] records=3331 errors=6
+21:29:23 seg done tier=W Kia Forte [2019, 2024] seeds=[2019] records=3331 errors=6
+21:29:23 seg done tier=W Kia Amanti [2004, 2009] seeds=[2004] records=3331 errors=6
+21:29:23 seg done tier=W Kia Optima [2019, 2020] seeds=[2019] records=3331 errors=6
+21:29:23 seg done tier=W Kia Borrego [2009, 2010] seeds=[2009] records=3331 errors=6
+21:29:23 seg done tier=W Kia Forte5 [2011, 2018] seeds=[2016] records=3331 errors=6
+21:29:23 seg done tier=W Kia Sportage [2017, 2019] seeds=[2017] records=3331 errors=6
+21:29:23 seg done tier=C Kia Soul [2010, 2013] seeds=[2013] records=3331 errors=6
+21:29:23 seg done tier=C Kia Optima [2011, 2013] seeds=[2013] records=3331 errors=6
+21:29:23 seg done tier=C Kia Soul [2014, 2019] seeds=[2014] records=3331 errors=6
+21:29:23 seg done tier=C Kia Rio [2001, 2023] seeds=[2013] records=3331 errors=6
+21:34:44 chain-unlinked strut 1 numbers named by 546501U000, no catalog link: 546031U000FFF
+21:34:44 chain-unlinked strut 1 numbers named by 546501U250, no catalog link: 546031U250FFF
+21:34:44 chain-unlinked strut 1 numbers named by 546501U350, no catalog link: 546031U350FFF
+21:34:44 chain-unlinked strut 1 numbers named by 546501U200, no catalog link: 546031U200FFF
+21:34:44 chain-unlinked strut 1 numbers named by 546501U300, no catalog link: 546031U300FFF
+21:34:44 chain-unlinked strut 1 numbers named by 546501U400, no catalog link: 546031U400FFF
+21:34:44 chain-unlinked strut 1 numbers named by 546501U450, no catalog link: 546031U450FFF
+21:34:44 chain-unlinked strut 1 numbers named by 546501U500, no catalog link: 546031U500FFF
+21:34:44 chain-unlinked strut 1 numbers named by 546501U600, no catalog link: 546031U600FFF
+21:34:44 chain-unlinked strut 1 numbers named by 546601U200, no catalog link: 546041U200FFF
+21:34:44 chain-unlinked strut 1 numbers named by 546601U000, no catalog link: 546041U001FFF
+21:34:44 chain-unlinked strut 1 numbers named by 546601U250, no catalog link: 546041U250FFF
+21:34:44 chain-unlinked strut 1 numbers named by 546601U300, no catalog link: 546041U300FFF
+21:34:44 chain-unlinked strut 1 numbers named by 546601U350, no catalog link: 546041U350FFF
+21:34:44 chain-unlinked strut 1 numbers named by 546601U400, no catalog link: 546041U400FFF
+21:34:44 chain-unlinked strut 1 numbers named by 546601U450, no catalog link: 546041U450FFF
+21:34:44 chain-unlinked strut 1 numbers named by 546601U500, no catalog link: 546041U500FFF
+21:34:44 chain-unlinked strut 1 numbers named by 546601U600, no catalog link: 546041U600FFF
+21:36:44 chain-unlinked strut 2 numbers named by 55310C6000, no catalog link: 55310C6050, 55310C6250
+21:38:28 seg done tier=C Kia Sorento [2011, 2015] seeds=[2011, 2015] records=3387 errors=6
+21:40:52 chain-unlinked strut 1 numbers named by 546512T824, no catalog link: 546512T420
+21:40:52 chain-unlinked strut 1 numbers named by 546612T824, no catalog link: 546612T420
+21:41:33 seg done tier=C Kia Optima [2014, 2015] seeds=[2015] records=3396 errors=6
+21:43:31 chain-unlinked strut 1 numbers named by 55300A7300, no catalog link: 55300A7AA0
+21:43:31 chain-unlinked strut 1 numbers named by 55300A7400, no catalog link: 55300A7AA0
+21:43:31 chain-unlinked strut 1 numbers named by 55300A7650, no catalog link: 55300A7DA0
+21:43:31 chain-unlinked strut 1 numbers named by 55300A7660, no catalog link: 55300A7DA0
+21:45:00 chain-unlinked strut 1 numbers named by 54651A7200, no catalog link: 54651A7AA0
+21:45:00 chain-unlinked strut 1 numbers named by 54651A7300, no catalog link: 54651A7AA0
+21:45:00 chain-unlinked strut 1 numbers named by 54651A7650, no catalog link: 54651A7AB0
+21:45:00 chain-unlinked strut 1 numbers named by 54661A7200, no catalog link: 54661A7AA0
+21:45:00 chain-unlinked strut 1 numbers named by 54661A7300, no catalog link: 54661A7AA0
+21:45:00 chain-unlinked strut 1 numbers named by 54661A7650, no catalog link: 54661A7AB0
+21:45:00 seg done tier=C Kia Forte [2014, 2018] seeds=[2014] records=3416 errors=6
+21:45:56 chain-unlinked knuckle 1 numbers named by 517161M100, no catalog link: 517161M000
+21:49:16 seg done tier=C Kia Forte [2010, 2013] seeds=[2010] records=3442 errors=6
+21:50:27 chain-unlinked strut 1 numbers named by 553104D100, no catalog link: 553104D401
+21:50:27 chain-unlinked strut 1 numbers named by 553104D500, no catalog link: 553104D401
+21:51:10 chain-unlinked strut 1 numbers named by 546514D100, no catalog link: 546514D001
+21:51:10 chain-unlinked strut 1 numbers named by 546514D101, no catalog link: 546514D001
+21:51:10 chain-unlinked strut 1 numbers named by 546614D100, no catalog link: 546614D001
+21:51:10 chain-unlinked strut 1 numbers named by 546614D101, no catalog link: 546614D001
+21:51:24 seg done tier=C Kia Sedona [2006, 2014] seeds=[2006] records=3450 errors=6
+21:52:27 chain-unlinked knuckle 1 numbers named by 517152E100, no catalog link: 517152E000
+21:53:56 chain-unlinked strut 1 numbers named by 553511F800, no catalog link: 553512E501
+21:53:56 chain-unlinked strut 1 numbers named by 553512E202, no catalog link: 553512E501
+21:53:56 chain-unlinked strut 1 numbers named by 553611F800, no catalog link: 553612E501
+21:53:56 chain-unlinked strut 1 numbers named by 553612E202, no catalog link: 553612E501
+21:54:20 chain-unlinked strut 1 numbers named by 546512E201, no catalog link: 546512E500
+21:54:20 chain-unlinked strut 1 numbers named by 546612E201, no catalog link: 546612E500
+21:55:08 seg done tier=C Kia Sportage [1995, 2008] seeds=[2007, 2000, 1999] records=3465 errors=6
+21:56:12 chain-unlinked knuckle 1 numbers named by 517152F110, no catalog link: 517152F010
+21:57:15 chain-unlinked strut 1 numbers named by 553512F301, no catalog link: 553512F401
+21:57:15 chain-unlinked strut 1 numbers named by 553612F301, no catalog link: 553612F401
+21:57:40 chain-unlinked strut 1 numbers named by 546512F300, no catalog link: 546512F200
+21:57:40 chain-unlinked strut 1 numbers named by 546612F300, no catalog link: 546612F200
+21:57:40 seg done tier=C Kia Spectra [2007, 2009] seeds=[2009] records=3479 errors=6
+21:59:48 seg done tier=C Kia Optima [2016, 2018] seeds=[2016] records=3490 errors=6
+21:59:48 time budget reached records=3490
