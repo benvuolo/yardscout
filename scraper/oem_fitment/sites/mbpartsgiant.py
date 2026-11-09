@@ -89,10 +89,13 @@ RULES = {
     "grille": (r"^grille( assembly)?$", ""),
     "trunk-lid": (r"^trunk lid$", ""),
     "liftgate": (r"^lift ?gate$", ""),
-    # tier C: name rule pending (written after reading the trial's list rows)
-    "wiper-motor": (r"(?!x)x", ""),
-    "knuckle": (r"(?!x)x", ""),
-    "strut": (r"(?!x)x", ""),
+    # tier C, C-Class (W204) trial rows: exact names "Knuckle", "Strut", "Shock
+    # Absorber", "Shock". "Carrier" (221-330-09-02) and "Housing Support" are not
+    # taken: the name does not say wheel carrier. The W204 sells no bare wiper
+    # motor (only "Linkage Assembly"); only rows named "Wiper Motor" are taken.
+    "wiper-motor": (r"^((front|rear|windshield|rear window) )?wiper motor( assembly)?$", ""),
+    "knuckle": (r"^(steering )?knuckle( assembly)?$", ""),
+    "strut": (r"^(front |rear )?(strut|shock absorber|shock)( assembly)?$", ""),
 }
 
 PRODUCT_RULES = {
