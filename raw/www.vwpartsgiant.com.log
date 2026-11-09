@@ -906,3 +906,128 @@
 01:15:49 chain-unlinked liftgate 1 numbers named by 5G6-827-025-Q, no catalog link: 5G6-827-025-H
 01:15:49 seg done tier=B Volkswagen Golf [2015, 2018] seeds=[2016] records=1278 errors=12
 01:15:49 finished records=1278 errors=12 chain_records=2 chain_unlinked=1276 chain_failed=0 chain_given_up=0
+20:27:07 start site=www.vwpartsgiant.com mode=worklist tiers=['A', 'B', 'W', 'C'] records=1278 list_lines=673 year_lines=76 url_index=8215
+20:27:07 seg done tier=A Volkswagen Jetta [2006, 2010] seeds=[2006] records=1278 errors=12
+20:27:07 seg done tier=A Volkswagen Jetta [2011, 2014] seeds=[2014] records=1278 errors=12
+20:27:07 seg done tier=A Volkswagen Passat [2012, 2019] seeds=[2013] records=1278 errors=12
+20:27:07 seg done tier=A Volkswagen Jetta [1999, 2005] seeds=[2003] records=1278 errors=12
+20:27:07 seg done tier=A Volkswagen CC [2009, 2016] seeds=[2012] records=1278 errors=12
+20:27:07 seg done tier=A Volkswagen Tiguan [2009, 2017] seeds=[2012] records=1278 errors=12
+20:27:07 seg done tier=A Volkswagen New Beetle [1991, 2010] seeds=[2000] records=1278 errors=12
+20:27:07 seg done tier=A Volkswagen Beetle [1964, 2019] seeds=[2003] records=1278 errors=12
+20:27:07 seg done tier=A Volkswagen Passat [2006, 2011] seeds=[2008] records=1278 errors=12
+20:27:07 seg done tier=A Volkswagen Passat [1986, 2005] seeds=[2003] records=1278 errors=12
+20:27:07 seg done tier=A Volkswagen Jetta [2015, 2018] seeds=[2015] records=1278 errors=12
+20:27:07 seg done tier=A Volkswagen Routan [2009, 2014] seeds=[2009] records=1278 errors=12
+20:27:07 seg done tier=A Volkswagen Touareg [2004, 2017] seeds=[2004] records=1278 errors=12
+20:27:07 seg done tier=A Volkswagen Eos [2007, 2014] seeds=[2008] records=1278 errors=12
+20:27:07 seg done tier=A Volkswagen Rabbit [1977, 2009] seeds=[2007] records=1278 errors=12
+20:27:07 seg done tier=A Volkswagen Golf [1985, 2005] seeds=[2003] records=1278 errors=12
+20:27:07 seg done tier=A Volkswagen Golf [2010, 2014] seeds=[2012] records=1278 errors=12
+20:27:07 seg done tier=A Volkswagen GTI [2006, 2009] seeds=[2007] records=1278 errors=12
+20:27:07 seg done tier=A Volkswagen Cabrio [1995, 2002] seeds=[2001] records=1278 errors=12
+20:27:07 seg done tier=A Volkswagen GTI [1996, 2005] seeds=[2003] records=1278 errors=12
+20:27:07 seg done tier=A Volkswagen GTI [2010, 2014] seeds=[2010] records=1278 errors=12
+20:27:07 seg done tier=A Volkswagen Jetta [2019, 2024] seeds=[2019] records=1278 errors=12
+20:27:07 seg done tier=A Volkswagen Passat Wagon [1993, 2010] seeds=[2004] records=1278 errors=12
+20:27:07 seg done tier=A Volkswagen Jetta SportWagen [2009, 2013] seeds=[2012] records=1278 errors=12
+20:27:07 seg done tier=A Volkswagen Jetta [1994, 1998] seeds=[1997] records=1278 errors=12
+20:27:07 seg done tier=A Volkswagen New Beetle Convertible [2003, 2010] seeds=[2005] records=1278 errors=12
+20:27:07 seg done tier=A Volkswagen Tiguan [2018, 2022] seeds=[2018] records=1278 errors=12
+20:27:07 seg done tier=A Volkswagen Golf [2015, 2018] seeds=[2016] records=1278 errors=12
+20:27:07 seg done tier=B Volkswagen Jetta [2006, 2010] seeds=[2006] records=1278 errors=12
+20:27:07 seg done tier=B Volkswagen Jetta [2011, 2014] seeds=[2014] records=1278 errors=12
+20:27:07 seg done tier=B Volkswagen Passat [2012, 2019] seeds=[2013] records=1278 errors=12
+20:27:07 seg done tier=B Volkswagen Jetta [1999, 2005] seeds=[2003] records=1278 errors=12
+20:27:07 seg done tier=B Volkswagen CC [2009, 2016] seeds=[2012] records=1278 errors=12
+20:27:07 seg done tier=B Volkswagen Tiguan [2009, 2017] seeds=[2012] records=1278 errors=12
+20:27:07 seg done tier=B Volkswagen New Beetle [1991, 2010] seeds=[2000] records=1278 errors=12
+20:27:07 seg done tier=B Volkswagen Beetle [1964, 2019] seeds=[2003] records=1278 errors=12
+20:27:07 seg done tier=B Volkswagen Passat [2006, 2011] seeds=[2008] records=1278 errors=12
+20:27:07 seg done tier=B Volkswagen Passat [1986, 2005] seeds=[2003] records=1278 errors=12
+20:27:07 seg done tier=B Volkswagen Jetta [2015, 2018] seeds=[2015] records=1278 errors=12
+20:27:07 seg done tier=B Volkswagen Routan [2009, 2014] seeds=[2009] records=1278 errors=12
+20:27:07 seg done tier=B Volkswagen Touareg [2004, 2017] seeds=[2004] records=1278 errors=12
+20:27:07 seg done tier=B Volkswagen Eos [2007, 2014] seeds=[2008] records=1278 errors=12
+20:27:07 seg done tier=B Volkswagen Rabbit [1977, 2009] seeds=[2007] records=1278 errors=12
+20:27:07 seg done tier=B Volkswagen Golf [1985, 2005] seeds=[2003] records=1278 errors=12
+20:27:07 seg done tier=B Volkswagen Golf [2010, 2014] seeds=[2012] records=1278 errors=12
+20:27:07 seg done tier=B Volkswagen GTI [2006, 2009] seeds=[2007] records=1278 errors=12
+20:27:07 seg done tier=B Volkswagen Cabrio [1995, 2002] seeds=[2001] records=1278 errors=12
+20:27:07 seg done tier=B Volkswagen GTI [1996, 2005] seeds=[2003] records=1278 errors=12
+20:27:07 seg done tier=B Volkswagen GTI [2010, 2014] seeds=[2010] records=1278 errors=12
+20:27:07 seg done tier=B Volkswagen Jetta [2019, 2024] seeds=[2019] records=1278 errors=12
+20:27:07 seg done tier=B Volkswagen Passat Wagon [1993, 2010] seeds=[2004] records=1278 errors=12
+20:27:07 seg done tier=B Volkswagen Jetta SportWagen [2009, 2013] seeds=[2012] records=1278 errors=12
+20:27:07 seg done tier=B Volkswagen Jetta [1994, 1998] seeds=[1997] records=1278 errors=12
+20:27:07 seg done tier=B Volkswagen New Beetle Convertible [2003, 2010] seeds=[2005] records=1278 errors=12
+20:27:07 seg done tier=B Volkswagen Tiguan [2018, 2022] seeds=[2018] records=1278 errors=12
+20:27:07 seg done tier=B Volkswagen Golf [2015, 2018] seeds=[2016] records=1278 errors=12
+20:27:31 seg done tier=W Volkswagen Jetta [2006, 2010] seeds=[2006, 2009, 2008] records=1278 errors=12
+20:27:56 seg done tier=W Volkswagen Jetta [2011, 2014] seeds=[2014, 2012, 2013] records=1278 errors=12
+20:28:51 chain-unlinked wheels 1 numbers named by 561-601-025-A-8Z8, no catalog link: 5C0-601-025-AA-8Z8
+20:28:51 chain-unlinked wheels 1 numbers named by 561-601-025-F-8Z8, no catalog link: 561-601-025-F-88Z
+20:29:32 seg done tier=W Volkswagen Passat [2012, 2019] seeds=[2013, 2019] records=1286 errors=12
+20:30:43 chain-unlinked wheels 4 numbers named by 1J0-601-027-AJ-03C, no catalog link: 1J0-601-027-AB-03C, 1J0-601-027-H-03C, 1J0-601-027-Q-03C, 1J0-601-027-K-03C
+20:30:43 chain-unlinked wheels 1 numbers named by 1J0-601-025-AA-091, no catalog link: 1J0-601-025-B-091
+20:30:43 chain-unlinked wheels 1 numbers named by 1J0-601-025-AF-1Z2, no catalog link: 1J0-601-025-M-1Z2
+20:30:43 chain-unlinked wheels 2 numbers named by 1J0-601-025-BD-Z31, no catalog link: 1J0-601-025-AL-Z31, 1J0-601-025-P-Z31
+20:30:43 seg done tier=W Volkswagen Jetta [1999, 2005] seeds=[2003] records=1293 errors=12
+20:32:12 chain-unlinked wheels 1 numbers named by 1K8-601-025-S-88Z, no catalog link: 1K8-601-025-C-88Z
+20:32:12 chain-unlinked wheels 1 numbers named by 3C8-601-025-AE-88Z, no catalog link: 3C8-601-025-E-88Z
+20:32:12 chain-unlinked wheels 1 numbers named by 3C8-601-025-AB-3AJ, no catalog link: 3C8-601-025-D-3AJ
+20:32:12 chain-unlinked wheels 1 numbers named by 3C8-601-025-AB-88Z, no catalog link: 3C8-601-025-D-88Z
+20:32:12 chain-unlinked wheels 1 numbers named by 1K8-601-025-R-88Z, no catalog link: 1K8-601-025-E-88Z
+20:32:12 chain-unlinked wheels 1 numbers named by 3C8-601-025-AG-88Z, no catalog link: 3C8-601-025-K-88Z
+20:32:12 seg done tier=W Volkswagen CC [2009, 2016] seeds=[2012] records=1302 errors=12
+20:33:47 chain-unlinked wheels 1 numbers named by 5N0-601-025-AF-8Z8, no catalog link: 5N0-601-025-D-8Z8
+20:33:47 chain-unlinked wheels 2 numbers named by 7N0-601-027-E-03C, no catalog link: 7N0-601-027-B-03C, 7N0-601-027-A-03C
+20:33:47 seg done tier=W Volkswagen Tiguan [2009, 2017] seeds=[2012] records=1312 errors=12
+20:34:27 chain-unlinked wheels 4 numbers named by 1J0-601-027-AP-03C, no catalog link: 1J0-601-027-R-03C, 1J0-601-027-T-03C, 1J0-601-027-L-03C, 1J0-601-027-AD-03C
+20:34:27 chain-unlinked wheels 1 numbers named by 1C0-601-025-D-091, no catalog link: 1C0-601-025-A-091
+20:34:27 chain-unlinked wheels 3 numbers named by 1C0-601-025-E-091, no catalog link: 1C0-601-025-E-Z31, 1C0-601-025-B-091, 1C0-601-025-E
+20:35:35 seg done tier=W Volkswagen New Beetle [1991, 2010] seeds=[2000, 2001, 2002] records=1319 errors=12
+20:36:03 chain-unlinked wheels 2 numbers named by 1C0-601-025-BB-8Z8, no catalog link: 1C0-601-025-Q, 1C0-601-025-Q-8Z8
+20:36:11 nav-fail Volkswagen Beetle 1988: NavError: HTTP 404 for https://www.vwpartsgiant.com/1988-volkswagen-beetle-parts
+20:36:11 seg done tier=W Volkswagen Beetle [1964, 2019] seeds=[2003, 1988] records=1321 errors=13
+20:37:23 chain-unlinked wheels 1 numbers named by 3C0-601-025-AE-8Z8, no catalog link: 3C0-601-025-A-8Z8
+20:37:23 chain-unlinked wheels 1 numbers named by 3C0-601-025-BR-8Z8, no catalog link: 3C0-601-025-J-8Z8
+20:37:23 chain-unlinked wheels 1 numbers named by 3C0-601-025-BA-QQ9, no catalog link: 3C0-601-025-AA-QQ9
+20:37:31 nav-fail Volkswagen Passat 2011: NavError: HTTP 404 for https://www.vwpartsgiant.com/2011-volkswagen-passat-parts
+20:37:31 seg done tier=W Volkswagen Passat [2006, 2011] seeds=[2008, 2011] records=1328 errors=14
+20:39:07 chain-unlinked wheels 1 numbers named by 3B7-601-025-G-1Z2, no catalog link: 3B7-601-025-A-1Z2
+20:40:11 chain-unlinked wheels 2 numbers named by 191-601-025-P-V7G, no catalog link: 191-601-025-P, 191-601-025-P-091
+20:40:11 chain-unlinked wheels 1 numbers named by 3A0-601-027-091, no catalog link: 3A0-601-027
+20:40:11 chain-unlinked wheels 1 numbers named by 191-601-025-AD-V7G, no catalog link: 191-601-025-AD-091
+20:40:19 nav-fail Volkswagen Passat 1989: NavError: HTTP 404 for https://www.vwpartsgiant.com/1989-volkswagen-passat-parts
+20:40:19 seg done tier=W Volkswagen Passat [1986, 2005] seeds=[2003, 1993, 1989] records=1344 errors=15
+20:40:43 seg done tier=W Volkswagen Jetta [2015, 2018] seeds=[2015, 2017, 2018] records=1344 errors=15
+20:41:23 chain-unlinked wheels 1 numbers named by 7B0-601-025-G, no catalog link: 7B0-601-025
+20:41:23 seg done tier=W Volkswagen Routan [2009, 2014] seeds=[2009] records=1347 errors=15
+20:42:13 chain-unlinked wheels 1 numbers named by 7L6-601-025-T-Z31, no catalog link: 7L6-601-025-Z31
+20:43:31 chain-unlinked wheels 1 numbers named by 7P6-601-025-AE-88Z, no catalog link: 7P6-601-025-D-88Z
+20:43:31 chain-unlinked wheels 1 numbers named by 7P6-601-025-AJ-ZD8, no catalog link: 7P6-601-025-AA-ZD8
+20:43:31 chain-unlinked wheels 1 numbers named by 7P6-601-025-AF-88Z, no catalog link: 7P6-601-025-E-88Z
+20:43:31 seg done tier=W Volkswagen Touareg [2004, 2017] seeds=[2004, 2014] records=1359 errors=15
+20:43:56 seg done tier=W Volkswagen Eos [2007, 2014] seeds=[2008, 2011, 2012] records=1359 errors=15
+20:46:35 chain-unlinked wheels 5 numbers named by 1K0-601-027-CB-03C, no catalog link: 1K0-601-027-T-03C, 1K0-601-027-BG-03C, 1K0-601-027-C-03C, 1K0-601-027-AG-03C, 1K0-601-027-BF-03C
+20:46:35 chain-unlinked wheels 2 numbers named by 1K0-601-025-DE-8Z8, no catalog link: 1K0-601-025-AN-8Z8, 1K0-601-025-T-8Z8
+20:46:43 nav-fail Volkswagen Rabbit 1991: NavError: HTTP 404 for https://www.vwpartsgiant.com/1991-volkswagen-rabbit-parts
+20:46:43 seg done tier=W Volkswagen Rabbit [1977, 2009] seeds=[2007, 1991] records=1377 errors=16
+20:47:23 chain-unlinked wheels 1 numbers named by 1J0-601-025-AT-Z31, no catalog link: 1JD-601-025-Z31
+20:47:40 seg done tier=W Volkswagen Golf [1985, 2005] seeds=[2003, 1993, 1994] records=1380 errors=16
+20:49:15 chain-unlinked wheels 4 numbers named by 1K0-601-027-CD-03C, no catalog link: 1K0-601-027-BE-03C, 1K0-601-027-BB-03C, 1K0-601-027-BD-03C, 1K0-601-027-CC-03C
+20:49:15 chain-unlinked wheels 1 numbers named by 5K0-601-025-AN-8Z8, no catalog link: 5K0-601-025-F-8Z8
+20:49:15 seg done tier=W Volkswagen Golf [2010, 2014] seeds=[2012] records=1390 errors=16
+20:50:51 seg done tier=W Volkswagen GTI [2006, 2009] seeds=[2007, 2008, 2006] records=1396 errors=16
+20:52:03 seg done tier=W Volkswagen Cabrio [1995, 2002] seeds=[2001, 1998, 1996] records=1400 errors=16
+20:52:11 nav-fail Volkswagen GTI 2003: NavError: HTTP 404 for https://www.vwpartsgiant.com/2003-volkswagen-gti-parts
+20:52:11 seg done tier=W Volkswagen GTI [1996, 2005] seeds=[2003] records=1400 errors=17
+20:53:07 seg done tier=W Volkswagen GTI [2010, 2014] seeds=[2010] records=1405 errors=17
+20:53:33 seg done tier=W Volkswagen Jetta [2019, 2024] seeds=[2019, 2022, 2023] records=1405 errors=17
+20:54:43 seg done tier=W Volkswagen Passat Wagon [1993, 2010] seeds=[2004, 2001, 2003] records=1410 errors=17
+20:54:59 seg done tier=W Volkswagen Jetta SportWagen [2009, 2013] seeds=[2012, 2011, 2010] records=1410 errors=17
+20:55:23 seg done tier=W Volkswagen Jetta [1994, 1998] seeds=[1997, 1996, 1995] records=1410 errors=17
+20:57:24 chain-unlinked wheels 1 numbers named by 1C0-601-025-BA-8Z8, no catalog link: 1C0-601-025-AE-8Z8
+20:57:24 chain-unlinked wheels 1 numbers named by 1J0-071-497-A-8Z8, no catalog link: 6Q0-071-492-666
+20:57:24 time budget reached records=1421
