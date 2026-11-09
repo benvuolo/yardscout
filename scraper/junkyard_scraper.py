@@ -18880,11 +18880,43 @@ IPULL_YARDS = {  # keyed by the CSV's "Yard City" column
 
 
 # iPull-uPull photos (2026-11-09, round 5): opening a car on ipullupull.com
-# shows its photo from the site's own catalog folder:
-# /wp-content/uploads/ipullupull-catalog/{STOCK}/{STOCK}-1.jpg (1920x1440
-# ~585 KB) with a WordPress 768x576 copy (~100 KB) beside it. The path is the
-# stock number, but ~16% of cars have none, so one HEAD per NEW car checks
-# the 768 copy (cached; robots allows all; 10 s). Code "i{STOCK}".
+# shows its photo from the site's own catalog folder
+# /wp-content/uploads/ipullupull-catalog/{STOCK}/{file}.jpg (~1920x1440,
+# ~585 KB). File names vary ({STOCK}-1, {STOCK}_1, IMG_4097, ...), so the URL
+# is taken from the same search API the site's own inventory page calls
+# (VinPlus inventory-search-api, tenant ipull_upull_auto_parts): one request
+# per make per scan at VINPLUS_DELAY_SEC. Code "i{STOCK}/{file}".
+# (_ipull_lookup_photo, the first per-car HEAD try, is kept for tests only.)
+IPULL_API_TENANT = "ipull_upull_auto_parts"
+_IPULL_IMG_RE = re.compile(
+    r"^https://ipullupull\.com/wp-content/uploads/ipullupull-catalog/([A-Z]{2,4}\d{4,8})/"
+    r"([A-Za-z0-9_.-]{1,80})\.(?:jpg|jpeg|JPG|JPEG)$")
+
+
+def _ipull_photo_code(image_url: str, stock: str) -> str:
+    m = _IPULL_IMG_RE.match((image_url or "").strip())
+    if not m or m.group(1) != stock or "." in m.group(2):
+        return ""
+    return f"i{m.group(1)}/{m.group(2)}"
+
+
+def _ipull_apply_api_photos(vehicles: list) -> int:
+    by_stock = {v["id"].split("-", 1)[1].upper(): v for v in vehicles if v["id"].startswith("ipull-")}
+    makes = sorted({str(v.get("make") or "").upper() for v in by_stock.values() if v.get("make")})
+    n = 0
+    for mk in makes:
+        for row in _vinplus_search(IPULL_API_TENANT, mk, None) or []:
+            st = str(row.get("stock") or "").strip().upper()
+            v = by_stock.get(st)
+            if v is None or v.get("_photo"):
+                continue
+            code = _ipull_photo_code(str(row.get("imageUrl") or ""), st)
+            if code:
+                v["_photo"] = code
+                n += 1
+    print(f"  [iPull-uPull photos] {n} of {len(by_stock)} cars with photos ({len(makes)} make queries)",
+          file=sys.stderr)
+    return n
 IPULL_PHOTO_LOOKUP_MAX = int(os.environ.get("IPULL_PHOTO_LOOKUP_MAX", "200"))
 IPULL_PHOTO_DELAY_SEC = 10.0
 
@@ -18977,9 +19009,7 @@ def fetch_ipull_inventory() -> list[dict]:
     seen: set[str] = set()
     unique = [v for v in vehicles if not (v["id"] in seen or seen.add(v["id"]))]
     try:
-        photo_lookup_pass("ipull", [(v, v["id"].split("-", 1)[1].upper()) for v in unique
-                                    if v["id"].startswith("ipull-")],
-                          _ipull_lookup_photo, cap=IPULL_PHOTO_LOOKUP_MAX, delay=IPULL_PHOTO_DELAY_SEC)
+        _ipull_apply_api_photos(unique)
     except Exception as e:  # noqa: BLE001 — photos are optional
         print(f"  [iPull-uPull photos] skipped: {e}", file=sys.stderr)
     print(f"  [iPull-uPull] {len(unique)} vehicles across "
@@ -19261,6 +19291,18 @@ def _vinplus_search(tenant: str, make: str, location_id: str,
     return rows
 
 
+_USAUTO_IMG_RE = re.compile(r"^https://usautosupplymi\.com/inventory-photos/(STK\d{3,9})\.jpg$")
+
+
+def _vinplus_photo_code(image_url: str, stock: str, brand: str) -> str:
+    """VinPlus rows' imageUrl: YardSmart blob -> resized thumbnail code; US
+    Auto Supply's own /inventory-photos/{STK}.jpg -> "m{STK}" (2026-11-09)."""
+    m = _USAUTO_IMG_RE.match(image_url.strip())
+    if m:
+        return "m" + m.group(1) if m.group(1).upper() == stock.strip().upper() else ""
+    return _yardsmart_photo_code(image_url, sid=VINPLUS_BRAND_SIDS.get(brand))
+
+
 def fetch_vinplus_inventory() -> list[dict]:
     """Fetch every VinPlus tenant's inventory (make x location loop)."""
     try:
@@ -19306,9 +19348,8 @@ def fetch_vinplus_inventory() -> list[dict]:
                     "dateAdded": date_s,
                     "_color": str(row.get("color") or "").strip().title(),
                     **({"_engine": engine} if engine else {}),
-                    "_photo": _yardsmart_photo_code(
-                        str(row.get("imageUrl") or ""),
-                        sid=VINPLUS_BRAND_SIDS.get(yard["name"].split(" - ")[0])),
+                    "_photo": _vinplus_photo_code(str(row.get("imageUrl") or ""), stock,
+                                                  yard["name"].split(" - ")[0]),
                     "_location": yard["name"],
                     "_city": yard["city"],
                     "_state": yard["state"],
@@ -20125,7 +20166,7 @@ _YARDCONNECT_ROW_RE = re.compile(r"<tr[^>]*>(.*?)</tr>", re.S)
 # through YardSmart's OWN resize endpoint instead (round 5, 2026-11-09): the
 # same signed blob id + the platform's public 325x600 variation = a ~45 KB
 # thumbnail, verified on VinPlus samples. The original is never linked.
-YARDSMART_MIN_HOURS_LEFT = 6.0
+YARDSMART_MIN_HOURS_LEFT = 5.0   # ids expire at a fixed daily time (6-12 h left at fetch)
 YARDSMART_SITE_IDS = {"upickitaz": "az", "upullitne": "ne", "genesis": "ge",
                       "robertsons": "ro", "chuckeddies": "ce", "ruperts": "ru",
                       "armys": "am"}

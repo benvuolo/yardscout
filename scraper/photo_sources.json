@@ -908,14 +908,29 @@
       "enabled": true,
       "label": "Photo: iPull-uPull",
       "host": "ipullupull.com",
+      "onCards": false,
       "patterns": [
         {
-          "code": "^i([A-Z]{2,4}\\d{4,8})$",
-          "card": "https://ipullupull.com/wp-content/uploads/ipullupull-catalog/{1}/{1}-1-768x576.jpg",
-          "large": "https://ipullupull.com/wp-content/uploads/ipullupull-catalog/{1}/{1}-1.jpg"
+          "code": "^i([A-Z]{2,4}\\d{4,8})/([A-Za-z0-9_-]{1,80})$",
+          "card": "https://ipullupull.com/wp-content/uploads/ipullupull-catalog/{1}/{2}.jpg",
+          "large": "https://ipullupull.com/wp-content/uploads/ipullupull-catalog/{1}/{2}.jpg"
         }
       ],
-      "note": "Own site catalog photo (what a user sees on opening a car). Card 768x576 ~100 KB; large 1920x1440 ~585 KB. Checked once per car (HEAD), cached."
+      "note": "Own site catalog photo (what a user sees on opening a car), URL from the site's own search API. ~1920x1440 ~585 KB."
+    },
+    "usautosupply": {
+      "enabled": true,
+      "label": "Photo: US Auto Supply",
+      "host": "usautosupplymi.com",
+      "onCards": false,
+      "patterns": [
+        {
+          "code": "^m(STK\\d{3,9})$",
+          "card": "https://usautosupplymi.com/inventory-photos/{1}.jpg",
+          "large": "https://usautosupplymi.com/inventory-photos/{1}.jpg"
+        }
+      ],
+      "note": "Own site, URL from the VinPlus search API row. 2048x1536 JPEG ~250-500 KB."
     }
   }
 }

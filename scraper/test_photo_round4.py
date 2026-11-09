@@ -82,14 +82,25 @@ with mock.patch.object(js.requests, "head", return_value=H(503)):
     check("Fenix: server error -> unknown (retry)", js._fenix_lookup_photo("2|2026-11-01") is None)
 
 # --- iPull-uPull (round 5) ----------------------------------------------------------
-check("iPull code -> 768 card + full large",
-      build("iFRE118566") == ("ipull", "https://ipullupull.com/wp-content/uploads/ipullupull-catalog/FRE118566/FRE118566-1-768x576.jpg")
-      and build("iFRE118566", "large")[1].endswith("/FRE118566/FRE118566-1.jpg"))
-with mock.patch.object(js.requests, "head", return_value=H(200)):
-    check("iPull: 768 copy exists -> photo", js._ipull_lookup_photo("FRE118566") == ("photo", "iFRE118566"))
-with mock.patch.object(js.requests, "head", return_value=H(404)):
-    check("iPull: 404 -> none", js._ipull_lookup_photo("SAC053985") == ("none", ""))
-check("iPull: odd stock -> none, no request", js._ipull_lookup_photo("../x") == ("none", ""))
+IC = "https://ipullupull.com/wp-content/uploads/ipullupull-catalog/"
+check("iPull: API imageUrl -> code", js._ipull_photo_code(IC + "FRE118500/Photo-Oct-26-2026-3-25-23-PM.jpg", "FRE118500")
+      == "iFRE118500/Photo-Oct-26-2026-3-25-23-PM")
+check("iPull: code -> same URL", build("iSAC053156/SAC053156_1") == ("ipull", IC + "SAC053156/SAC053156_1.jpg"))
+check("iPull: other stock's folder -> none", js._ipull_photo_code(IC + "SAC1/x.jpg", "SAC2") == "")
+check("iPull: other host -> none", js._ipull_photo_code("https://evil.example/ipullupull-catalog/SAC1/x.jpg", "SAC1") == "")
+with mock.patch.object(js, "_vinplus_search", return_value=[
+        {"stock": "SAC053156", "imageUrl": IC + "SAC053156/SAC053156_1.jpg"}, {"stock": "SAC9", "imageUrl": ""}]):
+    cars = [{"id": "ipull-sac053156", "make": "Honda"}, {"id": "ipull-sac9", "make": "Honda"}]
+    js._ipull_apply_api_photos(cars)
+check("iPull: API pass sets codes only where the API has a photo",
+      cars[0].get("_photo") == "iSAC053156/SAC053156_1" and "_photo" not in cars[1], cars)
+
+check("US Auto Supply: own photo -> code", js._vinplus_photo_code(
+    "https://usautosupplymi.com/inventory-photos/STK187533.jpg", "STK187533", "US Auto Supply") == "mSTK187533")
+check("US Auto Supply: code -> URL", build("mSTK187533") ==
+      ("usautosupply", "https://usautosupplymi.com/inventory-photos/STK187533.jpg"))
+check("US Auto Supply: other stock -> none", js._vinplus_photo_code(
+    "https://usautosupplymi.com/inventory-photos/STK1.jpg", "STK2", "US Auto Supply") == "")
 
 # --- YardSmart ----------------------------------------------------------------------
 def blob(exp):
