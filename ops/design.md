@@ -133,7 +133,7 @@ sheet" in the UI only (jh_saved and watch storage untouched, rule 6); map deferr
 - Known: dense metros mostly show count bubbles at the fitted zoom; a shorter pin label is the
   lever if the owner wants more named pins. iOS status-bar tap to top not checked on a device.
 
-### Round 9b: compact app banner + map first view (2026-11-09, branch design/promo-map-fit, NOT merged)
+### Round 9b: compact app banner + map first view (2026-11-09; merged by hub as 86d29797, jh-v168)
 - Hub, from live jh-v167 (+ owner: "make the x so it's not its own line item"): banner was ~285px with the
   X on its own row and covered the map sheet; the map's first view near Ogden fit the whole 100 mi range,
   so the 6 Utah yards became one bubble at the sheet edge.
@@ -143,6 +143,19 @@ sheet" in the UI only (jh_saved and watch storage untouched, rule 6); map deferr
   side-docked sheet closes the left of the pin area; long credit moves into the sheet; key only with bells.
 - Tests: app_promo_e2e (new, 174), map_regions_e2e 11 regions / 1,056 layouts, ui_no_truncation 1,296, units.
 - Known: Atlanta first view, a "2 yards" bubble can cover the You dot. Waiting on hub review/merge.
+
+### Round 9c: photos on the computer (2026-11-09, branch design/photo-desktop daa3049, NOT merged)
+- Owner: "on the computer, the images are large/wonky". Credit was under the photo (cards read "-Pull"):
+  credit now above the photo, bottom-left (clear of ROW52-style watermarks). >=700px: card and car-screen
+  photo boxes 3:2, no 16rem cap (no wide grey bars), cards even; never cropped, margins show a blur of the
+  same loaded photo. Phones keep 4:3. jh-v170. Tests: photo_layout_e2e (new, fixture photos, 554),
+  ui_no_truncation 1,296, units. WebKit not installed here: Safari/iPad-on-Mac unchecked.
+
+### Round 9d: You dot + short phone screens (2026-11-09, branch design/you-dot d9cff7d, NOT merged)
+- Pins keep off the You dot (flip / slide; else dot on top). Short Safari screens (390x664, 375x553):
+  pins slide around the zoom buttons instead of closing the top band, one-row sheet peek at <=760px tall,
+  map min height 220px so the sheet never runs under the tab bar. jh-v169 (second of 9c/9d to merge
+  needs jh-v171). Tests: map_regions_e2e 11 regions x 6 sizes (1,584 layouts), ui_no_truncation, units.
 
 ## Earlier state (2026-11-06, exploration)
 

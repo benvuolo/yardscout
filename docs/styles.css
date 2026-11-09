@@ -3041,7 +3041,22 @@ a { color: var(--accent); }
 .photo-illo::before, .has-illo::before { content: none; }
 .photo-box.photo-illo { display: flex; flex-direction: column; justify-content: flex-end; cursor: default; overflow: visible; max-height: none; }
 .illo-car { position: absolute; left: 13%; top: 46%; width: 74%; height: auto; transform: translateY(-50%); }
-.photo-box img { z-index: 1; }
+/* Layers: drawing (under) · blurred fill · photo · credit. The credit must
+   sit above the photo (it was under it: cards read "-Pull"). */
+.photo-box .ph-fill { position: absolute; inset: -16px; z-index: 1; background: center / cover no-repeat; filter: blur(14px) brightness(0.8); opacity: 0; }
+.photo-box.ph-filled .ph-fill { opacity: 1; }
+.photo-box.photo-failed .ph-fill { display: none; }
+.photo-box img { z-index: 2; }
+.photo-box .photo-credit, .photo-box .photo-heavy-msg { z-index: 3; }
+/* Bottom-left: chain watermarks (e.g. ROW52) sit bottom-right and stay clear. */
+.photo-box .photo-credit { right: auto; left: 0; border-radius: 0 var(--r-sm) 0 0; }
+/* Wide screens: card and car-screen photos use the common 3:2 photo shape
+   (no 16rem cap that left wide grey side bars), every card the same, so the
+   grid stays even. Phones keep 4:3. */
+@media (min-width: 700px) {
+  .photo-box.card-photo { aspect-ratio: 3 / 2; max-height: none; }
+  .photo-box.cd-photo { aspect-ratio: 3 / 2; max-height: 30rem; }
+}
 .photo-illo .illo-cap {
   position: relative; align-self: center; max-width: calc(100% - 2 * var(--s4)); margin: 0 var(--s4) var(--s4); padding: 0; text-align: center;
   font: 600 var(--t-xs)/1.35 var(--font-mono); letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-dim);

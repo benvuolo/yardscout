@@ -56,6 +56,14 @@ ok(match("trunk-lid", "Lid-Trunk", "W/ SPOILER,W/O CAM") and not match("trunk-li
 ok(match("gauge-cluster", "Meter Assy-Analog") and match("gauge-cluster", "Combination Meter Assy-Instrument")
    and not match("gauge-cluster", "Meter Assy-Temperature", "F/COMPASS")
    and not match("gauge-cluster", "Housing-Combination Meter, Upper"), "G35 analog cluster")
+# tier C, names from the 2012 Altima sedan pages (2026-11-09)
+ok(match("wiper-motor", "Drive Assy-Windshield Wiper") and not match("wiper-motor", "Arm Assy-Windshield Wiper")
+   and not match("wiper-motor", "Blade Assy-Windshield Wiper") and not match("wiper-motor", "Refill-Wiper Blade, Driver"), "wiper drive")
+ok(match("knuckle", "Knuckle Spindle-LH") and not match("knuckle", "Nut-Knuckle Spindle") and not match("knuckle", "Bolt-Knuckle Arm")
+   and not match("knuckle", "Hub Assy-Road Wheel, Front"), "knuckle")
+ok(match("strut", "Strut Kit-Front Suspension, LH") and match("strut", "Shock Absorber Kit-Rear")
+   and not match("strut", "Insulator Assy-Strut Mounting") and not match("strut", "Bearing-Strut Mounting")
+   and not match("strut", "Bush-Rear Shock Absorber") and not match("strut", "Bracket Assy-Mounting, Shock Absorber"), "strut")
 pure = n
 
 if not _pg_cacheonly.have([MODEL, SEDAN, COUPE, ALT, MIRRORS, SWITCH, REAR_REG, P_ALT, P_STARTER, P_MOTOR]):

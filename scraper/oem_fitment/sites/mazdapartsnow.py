@@ -57,6 +57,10 @@ CAT_PAGES = {
     "trunk-lid": r"^body-hardware/trunk-lid-components$",
     "tailgate": r"^body-hardware/(tailgate|tail-gate[a-z-]*)$",
     "liftgate": r"^body-hardware/(lift-gate|liftgate[a-z-]*|lift-gate-body)$",
+    # tier C (ops/interchange.md "Category breadth" §8): slugs from the R2 years manifests
+    "wiper-motor": r"^(electrical/wipers|body-hardware/wiper-washer-components(-body)?)$",
+    "knuckle": r"^suspension/(front-suspension|front-suspension-components|rear-suspension|rear-suspension-components|front-axle-carrier)$|^driveline-axles/(front-axle|front-axle-driveline|rear-axle)$",
+    "strut": r"^suspension/(struts-components|shocks-components|struts-suspension-components-front|front-suspension|front-suspension-components|rear-suspension|rear-suspension-components|ride-control-front|ride-control-rear)$",
 }
 
 RULES = {
@@ -86,6 +90,10 @@ RULES = {
     "trunk-lid": (r"^trunk lid$", ""),
     "tailgate": (r"^tail ?gate$", ""),
     "liftgate": (r"^lift ?gate$", ""),
+    # tier C: name rule pending (written after reading the trial's list rows)
+    "wiper-motor": (r"(?!x)x", ""),
+    "knuckle": (r"(?!x)x", ""),
+    "strut": (r"(?!x)x", ""),
 }
 
 PRODUCT_RULES = {

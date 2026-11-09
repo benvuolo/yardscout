@@ -116,3 +116,32 @@ may appear on moparpartsgiant; that is untested.
 fetched: template markers, fitment markers, YMM row samples, terms-clause
 hits, linked sister domains, and same-site `.html` links. The request
 pattern is unchanged.
+
+## Aftermarket catalogs, probe 2026-11-09 (Aftermarket breadth session)
+
+Each checked with `probe.py` (robots, home page, challenge markers) and, where
+it passed that, by hand: the terms read for an anti-automation clause and one
+or two catalog pages fetched with the program UA, 5-6 s apart. Rule: a robots
+disallow, a challenge, or an anti-automation clause is OUT; no workaround.
+
+| source | robots (RFC 9309) | challenge | terms | per-unit pages as GET HTML | verdict |
+|---|---|---|---|---|---|
+| Depo (www.depoautolamp.com) | Cloudflare-managed file (`Content-signal: ai-train=no`; named AI crawlers disallowed; `*` allowed) | **yes**: home page is a challenge (probe `challenge: true`) | not reached | not reached | **OUT** (challenge) |
+| Four Seasons (www.4s.com) | managed file | **yes**: HTTP 403 "Just a moment..." | not reached | not reached | **OUT** (challenge) |
+| SMP e-catalog (ecatalog.smpcorp.com) | managed file | **yes**: HTTP 403 "Access is denied" | not reached | not reached | **OUT** (refusal) |
+| ACI (window regulators / motors) | ACI is an SMP / Four Seasons brand; no own catalog found; its data is SMP's e-catalog above | (as SMP) | (as SMP) | resellers only (out of scope: third-party) | **OUT** (same owner, refused) |
+| Cardone (www.cardone.com) | `*` allows product/category paths, disallows `*?` (every query URL, incl. the sub-sitemaps) and `/terms-of-use/` | none | **unreadable**: the terms pages are robots-disallowed for us | **no**: category pages (e.g. /motors/window-lift/window-regulator/) carry no product links; the grid loads client-side | **OUT / unreachable** (owner may read the terms in a browser; still no server-side product list) |
+| Spectra Premium (ecat.spectrapremium.com; corporate www.spectrapremium.com) | ecat: `User-Agent: * / Disallow:` (all allowed); corporate: only /qr.php | none on catalog pages; Google reCAPTCHA protects only the VIN search form (never called) | Legal Notice: copyright, "may not be reproduced in whole or in part without prior written consent"; **no anti-automation clause** | **yes**: `/en/parts/<pn>` (all application rows, year x submodel x engine code, paginated `?page=N`), `/en/vehicles/<id>/parts` (every part for one vehicle WITH the application note), GET JSON vehicle tree (`/en/vehicules/get-*.json`) | **PASS, pending hub**: allowlist + the fetch.py captcha marker (below); the hub weighs the no-reproduction clause (we store facts, not pages, and publish groups) |
+
+Spectra notes for the hub:
+- `fetch.CHALLENGE_RE` matches `captcha` in `<script src="https://www.google.com/recaptcha/api.js">`,
+  present in the first 20 KB of EVERY ecat page (the VIN form's invisible
+  reCAPTCHA). As is, the first page would trip the permanent breaker. The
+  pages are served in full (no interstitial). Narrow fix proposed: ignore
+  exactly that script tag when matching; any other marker still stops.
+  Not changed; the hub's call.
+- The application note is only on vehicle pages, so the adapter is
+  vehicle-driven (`aftermarket/spectrapremium.py`).
+- Pages print no OE numbers (only Spectra part numbers and specs); the
+  "Interchange #" search exists but was not probed. The dealer-catalog OE
+  join is therefore not available from the pages we read.

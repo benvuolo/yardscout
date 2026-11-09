@@ -3,6 +3,7 @@
 Each case asserts the groups and the exact open reason. R = real lines from
 oem-raw (fixtures/real, provenance.json); manifests (R1/R2) are synthetic
 fixtures that follow the spec exactly, because the crawler has written none."""
+from collections import Counter
 import copy
 from pathlib import Path
 import tempfile
@@ -277,6 +278,18 @@ check("12 own-page rule: Caliber (product page only) is not in Likely",
       not any(a[:2] == ["Dodge", "Caliber"] for g in doc["likely"] for a in g["apps"]))
 check("12 own-page rule: the left-out vehicle-years are counted",
       sum(cur.likely_own_page_drops.values()) > 0, str(dict(cur.likely_own_page_drops)))
+# R3 own-page completion input: Caliber's own headlights page goes on the
+# worklist, routed to the site seeded on its make's pages (none here: the
+# only seeds are Jeep), so it is counted as unrouted, never guessed
+_opc = cur.own_page_completion(Counter({CAL: 3}))
+check("12 R3 input: Caliber headlights waits, unrouted (no seed on a Dodge page)",
+      _opc["rows"] == [] and _opc["unrouted_makes"] == {"Dodge": 1} and not [(r["make"], r["model"], r["year"], r["cats"]) for r in _opc["rows"]] == [("Dodge", "Caliber", 2009, ["headlights"])],
+      str(_opc)[:300])
+cur.records[0].seed = ("Dodge",) + tuple(cur.records[0].seed[1:])
+_opc3 = cur.own_page_completion(Counter({CAL: 3}))
+check("12 R3 input: routed by the seed site of the make, ranked by cars x classes",
+      [(r["site"], r["make"], r["model"], r["year"], r["cats"], r["gain"]) for r in _opc3["rows"]]
+      == [(JEEP, "Dodge", "Caliber", 2009, ["headlights"], 3)], str(_opc3)[:300])
 # the crawler records a number once per site; a later page that lists it
 # shows up in the R1 list manifest
 lm_cal = list_manifest(JEEP, CAL, "headlights", "headlights-lighting/headlamps",
@@ -317,9 +330,18 @@ _bad[0][3] += 1
 c_no, d_no = _with_allow([{"ns": "mopar", "cat": "headlights", "pn": ["5303999ZZ"], "apps": _bad}])
 check("12 allowlist: an entry whose apps differ by one year leaves it held",
       not any("5303999ZZ" in g["pn"] for g in d_no["likely"]) and any("5303999ZZ" in h["pn"] for h in c_no.held_exterior))
-c_ns, d_ns = _with_allow([{"ns": "subaru", "cat": "headlights", "pn": ["5303999ZZ"], "apps": _apps12}])
-check("12 allowlist: a withheld namespace's entry never releases (and the wrong ns does not match)",
-      not any("5303999ZZ" in g["pn"] for g in d_ns["likely"]) and _P.release_allowlist(_rel) == set())
+# subaru re-shipped 2026-11-09: the withheld mechanism is tested with it set again
+_wh = _P.WITHHELD_NS
+_P.WITHHELD_NS = frozenset({"subaru"})
+try:
+    c_ns, d_ns = _with_allow([{"ns": "subaru", "cat": "headlights", "pn": ["5303999ZZ"], "apps": _apps12}])
+    check("12 allowlist: a withheld namespace's entry never releases (and the wrong ns does not match)",
+          not any("5303999ZZ" in g["pn"] for g in d_ns["likely"]) and _P.release_allowlist(_rel) == set())
+finally:
+    _P.WITHHELD_NS = _wh
+check("12 allowlist notes: an entry's note is keyed like the release (hoods name the turbo split)",
+      any("Turbo hood" in v for v in _P.release_notes().values())
+      and set(_P.release_notes()) <= _P.release_allowlist())
 check("12 allowlist: the committed allowlist is part of the policy hash",
       "release_allowlist.json" in _P.POLICY_INPUTS)
 check("12 base model: Camry / Camry Hybrid and RX 350 / RX 450h stay together; Grand Caravan = Caravan",
@@ -334,6 +356,13 @@ check("12 base model: Legacy/Outback, DeVille/Seville, Caravan/Durango, Fusion/M
 check("12 hold covers exterior styling only (mirrors and window parts are not held)",
       "side-mirrors" not in _P.EXTERIOR_HOLD_CATS and "window-regulator" not in _P.EXTERIOR_HOLD_CATS
       and {"grille", "headlights", "tail-lights", "bumper-front"} <= _P.EXTERIOR_HOLD_CATS)
+# hub 2026-11-09 (Subaru resample: 91036FJ100 non-heated mirror credited to the US XV):
+# subaru cross-model side-mirror groups are held; other namespaces' mirrors are not
+check("12 option hold: subaru side-mirrors held, other ns mirrors and subaru regulators not",
+      _P.held_cross_model_cat("subaru", "side-mirrors") == "held_option_cross_model"
+      and _P.held_cross_model_cat("toyota", "side-mirrors") is None
+      and _P.held_cross_model_cat("subaru", "window-regulator") is None
+      and _P.held_cross_model_cat("gm", "hood") == "held_exterior_cross_model")
 
 # --------------------------------------------------------------- case 13
 tr = toyota_record("12345-67890", "headlights", ("Toyota", "Camry", 2007), "headlights-lighting/headlamps", "Headlamp",
@@ -588,4 +617,40 @@ check("23 Jeep 4602785AD (Front Right) is out of window-switch",
 check("23 DM is present", "DM" in I["slots"], str(I["slots"]))
 check("23 jeeppartsdeal/window-switch is unconfirmed, so nothing is Verified",
       "category_unconfirmed" in I["elig"] and doc["groups"] == [])
+check("option hold: subaru gauge clusters held (Canada km/h clusters unmarked)",
+      _P.held_cross_model_cat("subaru", "gauge-cluster") == "held_option_cross_model")
+# hub 2026-11-09 rules 1-3 (GM 20945139, 25876716, 15844876), both ways
+from types import SimpleNamespace as _NS
+_FO = "Fitting Vehicle Options: "
+check("EXPORT: an export-only option row is not for US cars (25876716, 10381000)",
+      C._export_only([_FO + "CK1,2(DE2,Z5X)(EXPORT)"]) and C._export_only([_FO + "KE(DR4,Z5X)(EXPORT)"]))
+check("EXPORT: a row with a non-export alternative, or EXC EXPORT, stays",
+      not C._export_only([_FO + "CK1,2(DE2,Z5X)(EXPORT), CK1,2(DL8)"])
+      and not C._export_only([_FO + "CK1,2(DL8)(EXC EXPORT)"]) and not C._export_only([_FO + "CK1,2(5B5)"]))
+_gc = C.Curation.__new__(C.Curation)
+_gc.js = _NS(GENERATION_BREAKS={"silverado": [2007, 2014], "sierra": [2007, 2014], "avalanche": [2007]})
+_rec = lambda rep: _NS(replaces=rep, replaced_by=[], list_replaced_by=[], via=None)
+_gTs = [("Chevrolet", "Silverado", 1999), ("Chevrolet", "Silverado", 2008), ("GMC", "Sierra", 2004),
+        ("Chevrolet", "Avalanche", 2007)]
+check("generation cut: a superseding number spanning a break keeps only the newest generation (twins too)",
+      _gc._generation_cut(_NS(records=[_rec(["15880567"])]), _gTs)
+      == [("Chevrolet", "Silverado", 2008), ("Chevrolet", "Avalanche", 2007)])
+check("generation cut: no supersession keeps every vehicle-year; no break crossed keeps every one",
+      _gc._generation_cut(_NS(records=[_rec([])]), _gTs) == _gTs
+      and _gc._generation_cut(_NS(records=[_rec(["X"])]), [("Chevrolet", "Silverado", 2008), ("Chevrolet", "Avalanche", 2010)])
+      == [("Chevrolet", "Silverado", 2008), ("Chevrolet", "Avalanche", 2010)])
+check("generation cut: the longest leading-word key is used ('silverado hd' before 'silverado')",
+      C.Curation._gen_breaks(_NS(js=_NS(GENERATION_BREAKS={"silverado": [2007], "silverado hd": [2001]})), "Silverado HD 2500")
+      == [2001])
+_cc = C.Curation.__new__(C.Curation)
+_k = object()
+_fr2 = lambda trims: _NS(trims=trims)
+_T1, _T2 = ("Chevrolet", "Silverado", 2008), ("Cadillac", "Escalade", 2007)
+_cc.t_rows = {(_T1, "window-regulator"): [(_k, None, _fr2(["1500 EXTENDED CAB LONG BOX", "2500 EXTENDED CAB STANDARD BOX"]), None)],
+              (_T2, "window-regulator"): [(_k, None, _fr2(["YUKON/DENALI/ESCALADE"]), None)]}
+check("cab note: every crediting row names one cab -> '<model>: <cab> only'; other models no note",
+      _cc._cab_only(_k, "window-regulator", [_T1, _T2]) == "Silverado: extended cab only")
+_cc.t_rows[(_T1, "window-regulator")].append((_k, None, _fr2(["1500 CREW CAB LONG BOX"]), None))
+check("cab note: two cab types, or a row without a cab, gives no note",
+      _cc._cab_only(_k, "window-regulator", [_T1, _T2]) == "")
 done("test_curate")

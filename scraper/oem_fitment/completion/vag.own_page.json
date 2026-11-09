@@ -1,0 +1,8565 @@
+{
+ "as_of": "2026-11-06T01:15:49Z",
+ "built_on": "oem-raw@75dc442",
+ "kind": "own_page",
+ "note": "R3 input (CURATION_SPEC 3.2 R3, 5.16): vehicle-years left out of Likely candidate classes because their own page was never read; crawl.py --complete reads those pages and the curator re-checks them. Never shipped.",
+ "ns": "vag",
+ "rows": [
+  {
+   "cars": 84,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 74,
+   "gain": 6216,
+   "make": "Audi",
+   "model": "A4",
+   "site": "www.audipartsgiant.com",
+   "year": 2009
+  },
+  {
+   "cars": 92,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 58,
+   "gain": 5336,
+   "make": "Audi",
+   "model": "A4",
+   "site": "www.audipartsgiant.com",
+   "year": 2007
+  },
+  {
+   "cars": 90,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 57,
+   "gain": 5130,
+   "make": "Audi",
+   "model": "A4",
+   "site": "www.audipartsgiant.com",
+   "year": 2006
+  },
+  {
+   "cars": 110,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 39,
+   "gain": 4290,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 2005
+  },
+  {
+   "cars": 56,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 70,
+   "gain": 3920,
+   "make": "Audi",
+   "model": "A4",
+   "site": "www.audipartsgiant.com",
+   "year": 2005
+  },
+  {
+   "cars": 164,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 23,
+   "gain": 3772,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 74,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 40,
+   "gain": 2960,
+   "make": "Audi",
+   "model": "A4",
+   "site": "www.audipartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 73,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 39,
+   "gain": 2847,
+   "make": "Audi",
+   "model": "A4",
+   "site": "www.audipartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 172,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 2752,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 2009
+  },
+  {
+   "cars": 215,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 2365,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 84,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 28,
+   "gain": 2352,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 2002
+  },
+  {
+   "cars": 232,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 2320,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 2012
+  },
+  {
+   "cars": 85,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 27,
+   "gain": 2295,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 2004
+  },
+  {
+   "cars": 51,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 44,
+   "gain": 2244,
+   "make": "Audi",
+   "model": "A4",
+   "site": "www.audipartsgiant.com",
+   "year": 2004
+  },
+  {
+   "cars": 197,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 2167,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 2008
+  },
+  {
+   "cars": 175,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 12,
+   "gain": 2100,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 2007
+  },
+  {
+   "cars": 41,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 44,
+   "gain": 1804,
+   "make": "Audi",
+   "model": "A4",
+   "site": "www.audipartsgiant.com",
+   "year": 2003
+  },
+  {
+   "cars": 50,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 36,
+   "gain": 1800,
+   "make": "Audi",
+   "model": "A4",
+   "site": "www.audipartsgiant.com",
+   "year": 2012
+  },
+  {
+   "cars": 87,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 1653,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 2001
+  },
+  {
+   "cars": 205,
+   "cats": [
+    "climate-control",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 7,
+   "gain": 1435,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 35,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 36,
+   "gain": 1260,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 1999
+  },
+  {
+   "cars": 23,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 54,
+   "gain": 1242,
+   "make": "Audi",
+   "model": "A6",
+   "site": "www.audipartsgiant.com",
+   "year": 2012
+  },
+  {
+   "cars": 101,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 12,
+   "gain": 1212,
+   "make": "Audi",
+   "model": "A4",
+   "site": "www.audipartsgiant.com",
+   "year": 2008
+  },
+  {
+   "cars": 31,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 39,
+   "gain": 1209,
+   "make": "Audi",
+   "model": "A6",
+   "site": "www.audipartsgiant.com",
+   "year": 2006
+  },
+  {
+   "cars": 41,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 24,
+   "gain": 984,
+   "make": "Audi",
+   "model": "A4",
+   "site": "www.audipartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 66,
+   "gain": 924,
+   "make": "Audi",
+   "model": "A4 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2008
+  },
+  {
+   "cars": 17,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 54,
+   "gain": 918,
+   "make": "Audi",
+   "model": "A6",
+   "site": "www.audipartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 64,
+   "gain": 896,
+   "make": "Audi",
+   "model": "A4 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2007
+  },
+  {
+   "cars": 27,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 32,
+   "gain": 864,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 48,
+   "cats": [
+    "climate-control",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 17,
+   "gain": 816,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 2000
+  },
+  {
+   "cars": 115,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 7,
+   "gain": 805,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 2003
+  },
+  {
+   "cars": 32,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 800,
+   "make": "Audi",
+   "model": "A4",
+   "site": "www.audipartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 262,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 786,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 21,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 37,
+   "gain": 777,
+   "make": "Audi",
+   "model": "A4 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2009
+  },
+  {
+   "cars": 45,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 17,
+   "gain": 765,
+   "make": "Audi",
+   "model": "Q5",
+   "site": "www.audipartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 23,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 33,
+   "gain": 759,
+   "make": "Audi",
+   "model": "A6",
+   "site": "www.audipartsgiant.com",
+   "year": 2007
+  },
+  {
+   "cars": 28,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 700,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 2012
+  },
+  {
+   "cars": 17,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 41,
+   "gain": 697,
+   "make": "Audi",
+   "model": "A5",
+   "site": "www.audipartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 63,
+   "gain": 693,
+   "make": "Audi",
+   "model": "A4 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2006
+  },
+  {
+   "cars": 29,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "grille",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 23,
+   "gain": 667,
+   "make": "Audi",
+   "model": "A4",
+   "site": "www.audipartsgiant.com",
+   "year": 2002
+  },
+  {
+   "cars": 38,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 17,
+   "gain": 646,
+   "make": "Audi",
+   "model": "Q5",
+   "site": "www.audipartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 8,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 78,
+   "gain": 624,
+   "make": "Audi",
+   "model": "A4 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2005
+  },
+  {
+   "cars": 18,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 33,
+   "gain": 594,
+   "make": "Audi",
+   "model": "A3",
+   "site": "www.audipartsgiant.com",
+   "year": 2007
+  },
+  {
+   "cars": 22,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 26,
+   "gain": 572,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 56,
+   "gain": 560,
+   "make": "Audi",
+   "model": "A6",
+   "site": "www.audipartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 22,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 23,
+   "gain": 506,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 20,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 500,
+   "make": "Audi",
+   "model": "A4",
+   "site": "www.audipartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 67,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 7,
+   "gain": 469,
+   "make": "Volkswagen",
+   "model": "Tiguan",
+   "site": "www.vwpartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 38,
+   "gain": 418,
+   "make": "Audi",
+   "model": "A4 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2012
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 38,
+   "gain": 418,
+   "make": "Audi",
+   "model": "A5",
+   "site": "www.audipartsgiant.com",
+   "year": 2012
+  },
+  {
+   "cars": 13,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 32,
+   "gain": 416,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 2002
+  },
+  {
+   "cars": 79,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 5,
+   "gain": 395,
+   "make": "Volkswagen",
+   "model": "CC",
+   "site": "www.vwpartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 54,
+   "gain": 378,
+   "make": "Audi",
+   "model": "A6 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 27,
+   "gain": 378,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 2004
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 37,
+   "gain": 370,
+   "make": "Audi",
+   "model": "S4",
+   "site": "www.audipartsgiant.com",
+   "year": 2005
+  },
+  {
+   "cars": 16,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 23,
+   "gain": 368,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 2001
+  },
+  {
+   "cars": 23,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 15,
+   "gain": 345,
+   "make": "Audi",
+   "model": "Q5",
+   "site": "www.audipartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 22,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 15,
+   "gain": 330,
+   "make": "Audi",
+   "model": "Q5",
+   "site": "www.audipartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 161,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 2,
+   "gain": 322,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "site": "www.vwpartsgiant.com",
+   "year": 2012
+  },
+  {
+   "cars": 161,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 2,
+   "gain": 322,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "site": "www.vwpartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 28,
+   "gain": 308,
+   "make": "Audi",
+   "model": "A3",
+   "site": "www.audipartsgiant.com",
+   "year": 2008
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 22,
+   "gain": 308,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 2000
+  },
+  {
+   "cars": 13,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "hood",
+    "trunk-lid"
+   ],
+   "classes": 22,
+   "gain": 286,
+   "make": "Audi",
+   "model": "A6",
+   "site": "www.audipartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 22,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "hood"
+   ],
+   "classes": 13,
+   "gain": 286,
+   "make": "Volkswagen",
+   "model": "GTI",
+   "site": "www.vwpartsgiant.com",
+   "year": 2008
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 31,
+   "gain": 279,
+   "make": "Audi",
+   "model": "A6 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2008
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 23,
+   "gain": 276,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 2005
+  },
+  {
+   "cars": 135,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 2,
+   "gain": 270,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "site": "www.vwpartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 24,
+   "gain": 264,
+   "make": "Audi",
+   "model": "A6",
+   "site": "www.audipartsgiant.com",
+   "year": 2003
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 22,
+   "gain": 264,
+   "make": "Audi",
+   "model": "A6",
+   "site": "www.audipartsgiant.com",
+   "year": 2002
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 22,
+   "gain": 264,
+   "make": "Volkswagen",
+   "model": "GTI",
+   "site": "www.vwpartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 86,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 3,
+   "gain": 258,
+   "make": "Volkswagen",
+   "model": "CC",
+   "site": "www.vwpartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 64,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 4,
+   "gain": 256,
+   "make": "Volkswagen",
+   "model": "Tiguan",
+   "site": "www.vwpartsgiant.com",
+   "year": 2012
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 26,
+   "gain": 234,
+   "make": "Volkswagen",
+   "model": "GTI",
+   "site": "www.vwpartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 33,
+   "gain": 231,
+   "make": "Audi",
+   "model": "A6 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2007
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 225,
+   "make": "Audi",
+   "model": "A4",
+   "site": "www.audipartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 22,
+   "gain": 220,
+   "make": "Volkswagen",
+   "model": "GTI",
+   "site": "www.vwpartsgiant.com",
+   "year": 2012
+  },
+  {
+   "cars": 20,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "hood",
+    "trunk-lid"
+   ],
+   "classes": 11,
+   "gain": 220,
+   "make": "Audi",
+   "model": "A4",
+   "site": "www.audipartsgiant.com",
+   "year": 2001
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 31,
+   "gain": 217,
+   "make": "Audi",
+   "model": "A6 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2006
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 36,
+   "gain": 216,
+   "make": "Audi",
+   "model": "A5 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 216,
+   "make": "Audi",
+   "model": "TT",
+   "site": "www.audipartsgiant.com",
+   "year": 2003
+  },
+  {
+   "cars": 54,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 216,
+   "make": "Audi",
+   "model": "Q5",
+   "site": "www.audipartsgiant.com",
+   "year": 2012
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 42,
+   "gain": 210,
+   "make": "Audi",
+   "model": "A4 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 42,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 5,
+   "gain": 210,
+   "make": "Volkswagen",
+   "model": "CC",
+   "site": "www.vwpartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 41,
+   "gain": 205,
+   "make": "Audi",
+   "model": "A4 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 18,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 198,
+   "make": "Audi",
+   "model": "A5",
+   "site": "www.audipartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 13,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 15,
+   "gain": 195,
+   "make": "Audi",
+   "model": "Q5",
+   "site": "www.audipartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 46,
+   "gain": 184,
+   "make": "Audi",
+   "model": "A4 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2004
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "grille",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 46,
+   "gain": 184,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 1999
+  },
+  {
+   "cars": 46,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 4,
+   "gain": 184,
+   "make": "Volkswagen",
+   "model": "Tiguan",
+   "site": "www.vwpartsgiant.com",
+   "year": 2009
+  },
+  {
+   "cars": 13,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 14,
+   "gain": 182,
+   "make": "Volkswagen",
+   "model": "GTI",
+   "site": "www.vwpartsgiant.com",
+   "year": 2006
+  },
+  {
+   "cars": 26,
+   "cats": [
+    "fender",
+    "hood",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 7,
+   "gain": 182,
+   "make": "Audi",
+   "model": "A3",
+   "site": "www.audipartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "hood",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 30,
+   "gain": 180,
+   "make": "Audi",
+   "model": "A6",
+   "site": "www.audipartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 30,
+   "gain": 180,
+   "make": "Audi",
+   "model": "A6 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2005
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "grille",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 30,
+   "gain": 180,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 1998
+  },
+  {
+   "cars": 45,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 4,
+   "gain": 180,
+   "make": "Volkswagen",
+   "model": "CC",
+   "site": "www.vwpartsgiant.com",
+   "year": 2009
+  },
+  {
+   "cars": 58,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 3,
+   "gain": 174,
+   "make": "Volkswagen",
+   "model": "Tiguan",
+   "site": "www.vwpartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "grille",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 171,
+   "make": "Audi",
+   "model": "TT",
+   "site": "www.audipartsgiant.com",
+   "year": 2002
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 34,
+   "gain": 170,
+   "make": "Audi",
+   "model": "A4",
+   "site": "www.audipartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 34,
+   "gain": 170,
+   "make": "Audi",
+   "model": "S4",
+   "site": "www.audipartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 42,
+   "gain": 168,
+   "make": "Audi",
+   "model": "S4",
+   "site": "www.audipartsgiant.com",
+   "year": 2004
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 54,
+   "gain": 162,
+   "make": "Audi",
+   "model": "A6 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2012
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 39,
+   "gain": 156,
+   "make": "Audi",
+   "model": "S5",
+   "site": "www.audipartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "hood",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 17,
+   "gain": 153,
+   "make": "Audi",
+   "model": "TT",
+   "site": "www.audipartsgiant.com",
+   "year": 2000
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 15,
+   "gain": 150,
+   "make": "Audi",
+   "model": "Q5",
+   "site": "www.audipartsgiant.com",
+   "year": 2009
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 36,
+   "gain": 144,
+   "make": "Audi",
+   "model": "A5 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2009
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 23,
+   "gain": 138,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 46,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 3,
+   "gain": 138,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "site": "www.vwpartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 132,
+   "make": "Audi",
+   "model": "A6",
+   "site": "www.audipartsgiant.com",
+   "year": 2001
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 43,
+   "gain": 129,
+   "make": "Audi",
+   "model": "A5 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 43,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 3,
+   "gain": 129,
+   "make": "Volkswagen",
+   "model": "Tiguan",
+   "site": "www.vwpartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 18,
+   "cats": [
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 7,
+   "gain": 126,
+   "make": "Audi",
+   "model": "A6",
+   "site": "www.audipartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 41,
+   "gain": 123,
+   "make": "Audi",
+   "model": "A5 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2012
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 24,
+   "gain": 120,
+   "make": "Audi",
+   "model": "A8 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2007
+  },
+  {
+   "cars": 8,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 15,
+   "gain": 120,
+   "make": "Audi",
+   "model": "Q5",
+   "site": "www.audipartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "fender",
+    "hood",
+    "liftgate",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 8,
+   "gain": 120,
+   "make": "Audi",
+   "model": "A3",
+   "site": "www.audipartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 17,
+   "gain": 119,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 17,
+   "cats": [
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 7,
+   "gain": 119,
+   "make": "Audi",
+   "model": "A6",
+   "site": "www.audipartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 58,
+   "gain": 116,
+   "make": "Audi",
+   "model": "S4",
+   "site": "www.audipartsgiant.com",
+   "year": 2006
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 29,
+   "gain": 116,
+   "make": "Audi",
+   "model": "Q3",
+   "site": "www.audipartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "climate-control",
+    "fender",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 112,
+   "make": "Audi",
+   "model": "A5",
+   "site": "www.audipartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 8,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 14,
+   "gain": 112,
+   "make": "Audi",
+   "model": "A4",
+   "site": "www.audipartsgiant.com",
+   "year": 2000
+  },
+  {
+   "cars": 8,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "tail-lights"
+   ],
+   "classes": 14,
+   "gain": 112,
+   "make": "Volkswagen",
+   "model": "Cabrio",
+   "site": "www.vwpartsgiant.com",
+   "year": 1998
+  },
+  {
+   "cars": 56,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 2,
+   "gain": 112,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "site": "www.vwpartsgiant.com",
+   "year": 2009
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 37,
+   "gain": 111,
+   "make": "Audi",
+   "model": "A4",
+   "site": "www.audipartsgiant.com",
+   "year": 2019
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 55,
+   "gain": 110,
+   "make": "Audi",
+   "model": "S4",
+   "site": "www.audipartsgiant.com",
+   "year": 2007
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 22,
+   "gain": 110,
+   "make": "Audi",
+   "model": "TT Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2001
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 22,
+   "gain": 110,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 108,
+   "make": "Audi",
+   "model": "TT",
+   "site": "www.audipartsgiant.com",
+   "year": 2004
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 108,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 1998
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 35,
+   "gain": 105,
+   "make": "Audi",
+   "model": "A6 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2002
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 35,
+   "gain": 105,
+   "make": "Audi",
+   "model": "S4",
+   "site": "www.audipartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 52,
+   "gain": 104,
+   "make": "Audi",
+   "model": "S4",
+   "site": "www.audipartsgiant.com",
+   "year": 2008
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 34,
+   "gain": 102,
+   "make": "Audi",
+   "model": "A6 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 34,
+   "gain": 102,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 1997
+  },
+  {
+   "cars": 25,
+   "cats": [
+    "side-mirrors"
+   ],
+   "classes": 4,
+   "gain": 100,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 2003
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "headlights",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 99,
+   "make": "Audi",
+   "model": "A4",
+   "site": "www.audipartsgiant.com",
+   "year": 1999
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "climate-control",
+    "fender",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 96,
+   "make": "Audi",
+   "model": "A5",
+   "site": "www.audipartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 32,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 3,
+   "gain": 96,
+   "make": "Volkswagen",
+   "model": "Tiguan",
+   "site": "www.vwpartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 95,
+   "make": "Audi",
+   "model": "Allroad Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2004
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 95,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 1995
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "liftgate",
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 90,
+   "make": "Audi",
+   "model": "A3",
+   "site": "www.audipartsgiant.com",
+   "year": 2012
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 22,
+   "gain": 88,
+   "make": "Audi",
+   "model": "Q5",
+   "site": "www.audipartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 22,
+   "gain": 88,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 2006
+  },
+  {
+   "cars": 8,
+   "cats": [
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 88,
+   "make": "Audi",
+   "model": "A6",
+   "site": "www.audipartsgiant.com",
+   "year": 1999
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 21,
+   "gain": 84,
+   "make": "Audi",
+   "model": "Allroad Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2005
+  },
+  {
+   "cars": 41,
+   "cats": [
+    "climate-control",
+    "tail-lights"
+   ],
+   "classes": 2,
+   "gain": 82,
+   "make": "Volkswagen",
+   "model": "Beetle",
+   "site": "www.vwpartsgiant.com",
+   "year": 2003
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 20,
+   "gain": 80,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 1996
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 80,
+   "make": "Audi",
+   "model": "Allroad",
+   "site": "www.audipartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "headlights",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 78,
+   "make": "Audi",
+   "model": "A4",
+   "site": "www.audipartsgiant.com",
+   "year": 1998
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 78,
+   "make": "Audi",
+   "model": "A6",
+   "site": "www.audipartsgiant.com",
+   "year": 2000
+  },
+  {
+   "cars": 26,
+   "cats": [
+    "climate-control",
+    "tail-lights"
+   ],
+   "classes": 3,
+   "gain": 78,
+   "make": "Volkswagen",
+   "model": "Beetle",
+   "site": "www.vwpartsgiant.com",
+   "year": 2000
+  },
+  {
+   "cars": 26,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 3,
+   "gain": 78,
+   "make": "Volkswagen",
+   "model": "Tiguan",
+   "site": "www.vwpartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 76,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 1,
+   "gain": 76,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "site": "www.vwpartsgiant.com",
+   "year": 2007
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 75,
+   "make": "Audi",
+   "model": "A6 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2004
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 15,
+   "gain": 75,
+   "make": "Audi",
+   "model": "Q5",
+   "site": "www.audipartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "bumper-front",
+    "fender",
+    "grille",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 15,
+   "gain": 75,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 1991
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 37,
+   "gain": 74,
+   "make": "Audi",
+   "model": "A6 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2003
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 24,
+   "gain": 72,
+   "make": "Audi",
+   "model": "S4",
+   "site": "www.audipartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "grille",
+    "headlights",
+    "tail-lights"
+   ],
+   "classes": 18,
+   "gain": 72,
+   "make": "Volkswagen",
+   "model": "Cabrio",
+   "site": "www.vwpartsgiant.com",
+   "year": 1999
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "liftgate",
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 72,
+   "make": "Audi",
+   "model": "A3",
+   "site": "www.audipartsgiant.com",
+   "year": 2009
+  },
+  {
+   "cars": 72,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 1,
+   "gain": 72,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "site": "www.vwpartsgiant.com",
+   "year": 2006
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 35,
+   "gain": 70,
+   "make": "Audi",
+   "model": "S5",
+   "site": "www.audipartsgiant.com",
+   "year": 2012
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 23,
+   "gain": 69,
+   "make": "Volkswagen",
+   "model": "GTI",
+   "site": "www.vwpartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 69,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 1,
+   "gain": 69,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 32,
+   "gain": 64,
+   "make": "Audi",
+   "model": "Q3",
+   "site": "www.audipartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 32,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 2,
+   "gain": 64,
+   "make": "Volkswagen",
+   "model": "Tiguan",
+   "site": "www.vwpartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 21,
+   "gain": 63,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 20,
+   "gain": 60,
+   "make": "Volkswagen",
+   "model": "GTI",
+   "site": "www.vwpartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 60,
+   "make": "Audi",
+   "model": "A6",
+   "site": "www.audipartsgiant.com",
+   "year": 2009
+  },
+  {
+   "cars": 29,
+   "cats": [
+    "climate-control",
+    "tail-lights"
+   ],
+   "classes": 2,
+   "gain": 58,
+   "make": "Volkswagen",
+   "model": "Beetle",
+   "site": "www.vwpartsgiant.com",
+   "year": 2002
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 57,
+   "make": "Volkswagen",
+   "model": "Golf Alltrack",
+   "site": "www.vwpartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 56,
+   "gain": 56,
+   "make": "Audi",
+   "model": "A6 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "climate-control",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 14,
+   "gain": 56,
+   "make": "Audi",
+   "model": "A4 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2003
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "tail-lights"
+   ],
+   "classes": 8,
+   "gain": 56,
+   "make": "Volkswagen",
+   "model": "Cabrio",
+   "site": "www.vwpartsgiant.com",
+   "year": 2002
+  },
+  {
+   "cars": 56,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 1,
+   "gain": 56,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "site": "www.vwpartsgiant.com",
+   "year": 2004
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 27,
+   "gain": 54,
+   "make": "Audi",
+   "model": "A4 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2001
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "liftgate",
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 54,
+   "make": "Audi",
+   "model": "A3",
+   "site": "www.audipartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 18,
+   "cats": [
+    "climate-control",
+    "tail-lights"
+   ],
+   "classes": 3,
+   "gain": 54,
+   "make": "Volkswagen",
+   "model": "Beetle",
+   "site": "www.vwpartsgiant.com",
+   "year": 1999
+  },
+  {
+   "cars": 27,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 2,
+   "gain": 54,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "site": "www.vwpartsgiant.com",
+   "year": 2001
+  },
+  {
+   "cars": 54,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 1,
+   "gain": 54,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "hood",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 26,
+   "gain": 52,
+   "make": "Audi",
+   "model": "A6",
+   "site": "www.audipartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 26,
+   "gain": 52,
+   "make": "Audi",
+   "model": "A8 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2006
+  },
+  {
+   "cars": 26,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 52,
+   "make": "Audi",
+   "model": "Q7",
+   "site": "www.audipartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 26,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 2,
+   "gain": 52,
+   "make": "Volkswagen",
+   "model": "CC",
+   "site": "www.vwpartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 17,
+   "gain": 51,
+   "make": "Volkswagen",
+   "model": "Cabrio",
+   "site": "www.vwpartsgiant.com",
+   "year": 1997
+  },
+  {
+   "cars": 51,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 1,
+   "gain": 51,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "site": "www.vwpartsgiant.com",
+   "year": 2002
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "grille",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 50,
+   "make": "Audi",
+   "model": "A4 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2002
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 50,
+   "make": "Audi",
+   "model": "S4",
+   "site": "www.audipartsgiant.com",
+   "year": 2012
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 50,
+   "make": "Audi",
+   "model": "A6 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2009
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "climate-control",
+    "grille",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 24,
+   "gain": 48,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 1996
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 48,
+   "make": "Volkswagen",
+   "model": "Cabrio",
+   "site": "www.vwpartsgiant.com",
+   "year": 1995
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 48,
+   "make": "Volkswagen",
+   "model": "Cabrio",
+   "site": "www.vwpartsgiant.com",
+   "year": 1996
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "tail-lights"
+   ],
+   "classes": 8,
+   "gain": 48,
+   "make": "Volkswagen",
+   "model": "Cabrio",
+   "site": "www.vwpartsgiant.com",
+   "year": 2000
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 48,
+   "make": "Audi",
+   "model": "A6",
+   "site": "www.audipartsgiant.com",
+   "year": 2004
+  },
+  {
+   "cars": 24,
+   "cats": [
+    "climate-control",
+    "tail-lights"
+   ],
+   "classes": 2,
+   "gain": 48,
+   "make": "Volkswagen",
+   "model": "Beetle",
+   "site": "www.vwpartsgiant.com",
+   "year": 2004
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 23,
+   "gain": 46,
+   "make": "Audi",
+   "model": "S4",
+   "site": "www.audipartsgiant.com",
+   "year": 2000
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 22,
+   "gain": 44,
+   "make": "Volkswagen",
+   "model": "GTI",
+   "site": "www.vwpartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 44,
+   "make": "Audi",
+   "model": "A6",
+   "site": "www.audipartsgiant.com",
+   "year": 1998
+  },
+  {
+   "cars": 22,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 44,
+   "make": "Audi",
+   "model": "Q7",
+   "site": "www.audipartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 22,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 2,
+   "gain": 44,
+   "make": "Volkswagen",
+   "model": "GTI",
+   "site": "www.vwpartsgiant.com",
+   "year": 2007
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 3,
+   "gain": 42,
+   "make": "Volkswagen",
+   "model": "Eos",
+   "site": "www.vwpartsgiant.com",
+   "year": 2012
+  },
+  {
+   "cars": 21,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 42,
+   "make": "Audi",
+   "model": "Q7",
+   "site": "www.audipartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "hood",
+    "liftgate",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 20,
+   "gain": 40,
+   "make": "Audi",
+   "model": "A3",
+   "site": "www.audipartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 38,
+   "make": "Audi",
+   "model": "Allroad Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2003
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 36,
+   "gain": 36,
+   "make": "Audi",
+   "model": "S6",
+   "site": "www.audipartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 36,
+   "make": "Audi",
+   "model": "TT",
+   "site": "www.audipartsgiant.com",
+   "year": 2005
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "headlights",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 36,
+   "make": "Audi",
+   "model": "A4",
+   "site": "www.audipartsgiant.com",
+   "year": 1996
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "headlights",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 36,
+   "make": "Audi",
+   "model": "A4",
+   "site": "www.audipartsgiant.com",
+   "year": 1997
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "tail-lights"
+   ],
+   "classes": 3,
+   "gain": 36,
+   "make": "Volkswagen",
+   "model": "Cabrio",
+   "site": "www.vwpartsgiant.com",
+   "year": 2001
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 34,
+   "gain": 34,
+   "make": "Audi",
+   "model": "Q3 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 17,
+   "cats": [
+    "climate-control",
+    "tail-lights"
+   ],
+   "classes": 2,
+   "gain": 34,
+   "make": "Volkswagen",
+   "model": "Beetle",
+   "site": "www.vwpartsgiant.com",
+   "year": 2005
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "headlights",
+    "hood",
+    "liftgate",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 32,
+   "make": "Audi",
+   "model": "A6 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2000
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 32,
+   "make": "Audi",
+   "model": "SQ5",
+   "site": "www.audipartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "climate-control",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 32,
+   "make": "Volkswagen",
+   "model": "GTI",
+   "site": "www.vwpartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "window-regulator"
+   ],
+   "classes": 8,
+   "gain": 32,
+   "make": "Audi",
+   "model": "A7 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 8,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 32,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 2020
+  },
+  {
+   "cars": 16,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 2,
+   "gain": 32,
+   "make": "Volkswagen",
+   "model": "CC",
+   "site": "www.vwpartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 32,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 1,
+   "gain": 32,
+   "make": "Volkswagen",
+   "model": "Beetle",
+   "site": "www.vwpartsgiant.com",
+   "year": 2006
+  },
+  {
+   "cars": 31,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 1,
+   "gain": 31,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "site": "www.vwpartsgiant.com",
+   "year": 2005
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 30,
+   "gain": 30,
+   "make": "Audi",
+   "model": "S5",
+   "site": "www.audipartsgiant.com",
+   "year": 2009
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "fender",
+    "grille",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 15,
+   "gain": 30,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 1992
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 3,
+   "gain": 30,
+   "make": "Volkswagen",
+   "model": "Eos",
+   "site": "www.vwpartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 29,
+   "gain": 29,
+   "make": "Audi",
+   "model": "Q3 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "hood",
+    "liftgate",
+    "window-regulator"
+   ],
+   "classes": 14,
+   "gain": 28,
+   "make": "Audi",
+   "model": "A6 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2001
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "climate-control",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 14,
+   "gain": 28,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "fender",
+    "hood",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 7,
+   "gain": 28,
+   "make": "Audi",
+   "model": "A3 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "climate-control",
+    "tail-lights"
+   ],
+   "classes": 2,
+   "gain": 28,
+   "make": "Volkswagen",
+   "model": "Beetle",
+   "site": "www.vwpartsgiant.com",
+   "year": 2001
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 27,
+   "gain": 27,
+   "make": "Audi",
+   "model": "A4 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2000
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "fender",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 27,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 1985
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 26,
+   "gain": 26,
+   "make": "Audi",
+   "model": "S5",
+   "site": "www.audipartsgiant.com",
+   "year": 2008
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "fender",
+    "grille",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 26,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 1989
+  },
+  {
+   "cars": 13,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 26,
+   "make": "Audi",
+   "model": "Q7",
+   "site": "www.audipartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 25,
+   "make": "Audi",
+   "model": "A4 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "liftgate",
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 24,
+   "make": "Audi",
+   "model": "A3",
+   "site": "www.audipartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "fender",
+    "hood",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 24,
+   "make": "Audi",
+   "model": "S3",
+   "site": "www.audipartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 24,
+   "make": "Audi",
+   "model": "Q3",
+   "site": "www.audipartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 23,
+   "gain": 23,
+   "make": "Audi",
+   "model": "S6",
+   "site": "www.audipartsgiant.com",
+   "year": 2007
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 22,
+   "gain": 22,
+   "make": "Audi",
+   "model": "S8",
+   "site": "www.audipartsgiant.com",
+   "year": 2001
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 22,
+   "gain": 22,
+   "make": "Audi",
+   "model": "S8",
+   "site": "www.audipartsgiant.com",
+   "year": 2002
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 22,
+   "make": "Audi",
+   "model": "Q7",
+   "site": "www.audipartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 22,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 1,
+   "gain": 22,
+   "make": "Volkswagen",
+   "model": "Beetle",
+   "site": "www.vwpartsgiant.com",
+   "year": 2007
+  },
+  {
+   "cars": 22,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 1,
+   "gain": 22,
+   "make": "Volkswagen",
+   "model": "Beetle",
+   "site": "www.vwpartsgiant.com",
+   "year": 2009
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 21,
+   "gain": 21,
+   "make": "Audi",
+   "model": "A8 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2004
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 21,
+   "gain": 21,
+   "make": "Audi",
+   "model": "S6",
+   "site": "www.audipartsgiant.com",
+   "year": 2008
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 7,
+   "gain": 21,
+   "make": "Audi",
+   "model": "A6 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 21,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 1,
+   "gain": 21,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "site": "www.vwpartsgiant.com",
+   "year": 2000
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "grille",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 19,
+   "make": "Audi",
+   "model": "TT Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2002
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 19,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 1994
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "fender",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 18,
+   "make": "Audi",
+   "model": "S5",
+   "site": "www.audipartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 18,
+   "make": "Audi",
+   "model": "A8",
+   "site": "www.audipartsgiant.com",
+   "year": 1997
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "fender",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 18,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 1986
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "liftgate",
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 18,
+   "make": "Audi",
+   "model": "A3",
+   "site": "www.audipartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 18,
+   "make": "Audi",
+   "model": "Q7",
+   "site": "www.audipartsgiant.com",
+   "year": 2012
+  },
+  {
+   "cars": 18,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 1,
+   "gain": 18,
+   "make": "Volkswagen",
+   "model": "Beetle",
+   "site": "www.vwpartsgiant.com",
+   "year": 2008
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "grille",
+    "hood",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 17,
+   "gain": 17,
+   "make": "Audi",
+   "model": "A3",
+   "site": "www.audipartsgiant.com",
+   "year": 2019
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "hood",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 17,
+   "gain": 17,
+   "make": "Audi",
+   "model": "A8 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2008
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "hood",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 17,
+   "gain": 17,
+   "make": "Audi",
+   "model": "A8 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "liftgate",
+    "window-regulator"
+   ],
+   "classes": 17,
+   "gain": 17,
+   "make": "Audi",
+   "model": "Q3",
+   "site": "www.audipartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "liftgate",
+    "window-regulator"
+   ],
+   "classes": 17,
+   "gain": 17,
+   "make": "Audi",
+   "model": "Q3 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "hood",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 17,
+   "gain": 17,
+   "make": "Audi",
+   "model": "TT Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2000
+  },
+  {
+   "cars": 17,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 1,
+   "gain": 17,
+   "make": "Volkswagen",
+   "model": "Tiguan",
+   "site": "www.vwpartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 16,
+   "make": "Audi",
+   "model": "Allroad",
+   "site": "www.audipartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 16,
+   "make": "Audi",
+   "model": "Allroad",
+   "site": "www.audipartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "fender",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 16,
+   "make": "Audi",
+   "model": "S5",
+   "site": "www.audipartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "fender",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 16,
+   "make": "Audi",
+   "model": "S5",
+   "site": "www.audipartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 16,
+   "make": "Audi",
+   "model": "TT",
+   "site": "www.audipartsgiant.com",
+   "year": 2006
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 15,
+   "gain": 15,
+   "make": "Audi",
+   "model": "A8",
+   "site": "www.audipartsgiant.com",
+   "year": 1999
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "fender",
+    "grille",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 15,
+   "gain": 15,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 1991
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 1,
+   "gain": 15,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "site": "www.vwpartsgiant.com",
+   "year": 1999
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "hood",
+    "trunk-lid"
+   ],
+   "classes": 14,
+   "gain": 14,
+   "make": "Audi",
+   "model": "TT Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2009
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 7,
+   "gain": 14,
+   "make": "Audi",
+   "model": "A6 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 14,
+   "make": "Volkswagen",
+   "model": "Atlas",
+   "site": "www.vwpartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "fender",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 13,
+   "make": "Audi",
+   "model": "Q5",
+   "site": "www.audipartsgiant.com",
+   "year": 2022
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "fender",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 13,
+   "make": "Audi",
+   "model": "Q5 Sportback",
+   "site": "www.audipartsgiant.com",
+   "year": 2022
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "fender",
+    "grille",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 13,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 1988
+  },
+  {
+   "cars": 13,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 1,
+   "gain": 13,
+   "make": "Volkswagen",
+   "model": "Beetle",
+   "site": "www.vwpartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 12,
+   "gain": 12,
+   "make": "Audi",
+   "model": "S4",
+   "site": "www.audipartsgiant.com",
+   "year": 2021
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "grille",
+    "hood",
+    "trunk-lid"
+   ],
+   "classes": 12,
+   "gain": 12,
+   "make": "Audi",
+   "model": "TT Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "climate-control",
+    "tail-lights"
+   ],
+   "classes": 3,
+   "gain": 12,
+   "make": "Volkswagen",
+   "model": "Beetle",
+   "site": "www.vwpartsgiant.com",
+   "year": 1998
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 12,
+   "make": "Volkswagen",
+   "model": "Tiguan",
+   "site": "www.vwpartsgiant.com",
+   "year": 2021
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "hood"
+   ],
+   "classes": 1,
+   "gain": 12,
+   "make": "Volkswagen",
+   "model": "GTI",
+   "site": "www.vwpartsgiant.com",
+   "year": 2009
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "fender",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 9,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 1986
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "fender",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 9,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 1987
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "fender",
+    "hood",
+    "liftgate",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 8,
+   "gain": 8,
+   "make": "Audi",
+   "model": "A3 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 8,
+   "make": "Audi",
+   "model": "A7 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 8,
+   "make": "Audi",
+   "model": "Q7",
+   "site": "www.audipartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 8,
+   "make": "Volkswagen",
+   "model": "Atlas",
+   "site": "www.vwpartsgiant.com",
+   "year": 2021
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 8,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 2021
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 8,
+   "make": "Volkswagen",
+   "model": "Tiguan",
+   "site": "www.vwpartsgiant.com",
+   "year": 2019
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 8,
+   "make": "Volkswagen",
+   "model": "Tiguan",
+   "site": "www.vwpartsgiant.com",
+   "year": 2020
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "headlights",
+    "window-regulator"
+   ],
+   "classes": 7,
+   "gain": 7,
+   "make": "Audi",
+   "model": "A4 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 1999
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "window-regulator"
+   ],
+   "classes": 7,
+   "gain": 7,
+   "make": "Audi",
+   "model": "A7 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2012
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "liftgate",
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 6,
+   "make": "Audi",
+   "model": "A3 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "liftgate",
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 6,
+   "make": "Audi",
+   "model": "A3 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 6,
+   "make": "Audi",
+   "model": "S4",
+   "site": "www.audipartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 2,
+   "gain": 6,
+   "make": "Volkswagen",
+   "model": "CC",
+   "site": "www.vwpartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 1,
+   "gain": 5,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 1,
+   "gain": 5,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "site": "www.vwpartsgiant.com",
+   "year": 1996
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 4,
+   "make": "Audi",
+   "model": "Q3",
+   "site": "www.audipartsgiant.com",
+   "year": 2021
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 4,
+   "make": "Audi",
+   "model": "S5",
+   "site": "www.audipartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 4,
+   "make": "Audi",
+   "model": "S7",
+   "site": "www.audipartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "Audi",
+   "model": "A3",
+   "site": "www.audipartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "Audi",
+   "model": "A8 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "Volkswagen",
+   "model": "Atlas",
+   "site": "www.vwpartsgiant.com",
+   "year": 2019
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 2024
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "Volkswagen",
+   "model": "Tiguan",
+   "site": "www.vwpartsgiant.com",
+   "year": 2022
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 1,
+   "gain": 4,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "site": "www.vwpartsgiant.com",
+   "year": 1998
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 3,
+   "make": "Audi",
+   "model": "A7 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 1,
+   "gain": 3,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "site": "www.vwpartsgiant.com",
+   "year": 1997
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Audi",
+   "model": "A8 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2012
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Volkswagen",
+   "model": "Atlas",
+   "site": "www.vwpartsgiant.com",
+   "year": 2023
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 1,
+   "gain": 2,
+   "make": "Volkswagen",
+   "model": "Eos",
+   "site": "www.vwpartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 1,
+   "gain": 2,
+   "make": "Volkswagen",
+   "model": "Eos",
+   "site": "www.vwpartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "tail-lights"
+   ],
+   "classes": 1,
+   "gain": 1,
+   "make": "Volkswagen",
+   "model": "Fox",
+   "site": "www.vwpartsgiant.com",
+   "year": 1988
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "tail-lights"
+   ],
+   "classes": 1,
+   "gain": 1,
+   "make": "Volkswagen",
+   "model": "Fox",
+   "site": "www.vwpartsgiant.com",
+   "year": 1989
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "tail-lights"
+   ],
+   "classes": 1,
+   "gain": 1,
+   "make": "Volkswagen",
+   "model": "Scirocco",
+   "site": "www.vwpartsgiant.com",
+   "year": 1985
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 38,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A4 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 38,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S5",
+   "site": "www.audipartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 37,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A4 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2019
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 36,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S6",
+   "site": "www.audipartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 36,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S6",
+   "site": "www.audipartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 34,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A3 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2006
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 34,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A4 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 33,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A3 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2007
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 32,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A5 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2008
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 32,
+   "gain": 0,
+   "make": "Audi",
+   "model": "Q3 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 32,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 1994
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 31,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S4",
+   "site": "www.audipartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 31,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S4",
+   "site": "www.audipartsgiant.com",
+   "year": 2019
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "hood",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 30,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A6 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 29,
+   "gain": 0,
+   "make": "Audi",
+   "model": "SQ5",
+   "site": "www.audipartsgiant.com",
+   "year": 2019
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 28,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A3 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2008
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 28,
+   "gain": 0,
+   "make": "Audi",
+   "model": "SQ5",
+   "site": "www.audipartsgiant.com",
+   "year": 2020
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 27,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S4",
+   "site": "www.audipartsgiant.com",
+   "year": 2001
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "hood",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 26,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A6",
+   "site": "www.audipartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "hood",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 26,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A6 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "hood",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 26,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A6 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 26,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S4",
+   "site": "www.audipartsgiant.com",
+   "year": 2002
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A4 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A4 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S4",
+   "site": "www.audipartsgiant.com",
+   "year": 2009
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S4",
+   "site": "www.audipartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S4",
+   "site": "www.audipartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 1993
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 24,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A4 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 24,
+   "gain": 0,
+   "make": "Audi",
+   "model": "Q5",
+   "site": "www.audipartsgiant.com",
+   "year": 2019
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 24,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S6",
+   "site": "www.audipartsgiant.com",
+   "year": 2003
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 24,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S8",
+   "site": "www.audipartsgiant.com",
+   "year": 2007
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "hood",
+    "liftgate",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 23,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A3 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 23,
+   "gain": 0,
+   "make": "Audi",
+   "model": "SQ5",
+   "site": "www.audipartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 23,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "GTI",
+   "site": "www.vwpartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 22,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A8 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2000
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 22,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A8 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2001
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 22,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A8 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2002
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 22,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A8 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2003
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 22,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A8 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2005
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 22,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S6",
+   "site": "www.audipartsgiant.com",
+   "year": 2002
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 22,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S8",
+   "site": "www.audipartsgiant.com",
+   "year": 2003
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "fender",
+    "hood",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 21,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S6",
+   "site": "www.audipartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "fender",
+    "hood",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 21,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S6",
+   "site": "www.audipartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "fender",
+    "hood",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 21,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S6",
+   "site": "www.audipartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "hood",
+    "liftgate",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 20,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A3 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 20,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 1995
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 0,
+   "make": "Audi",
+   "model": "Allroad Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2002
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "fender",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A5 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "fender",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A5 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "fender",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S5",
+   "site": "www.audipartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 0,
+   "make": "Audi",
+   "model": "TT Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2003
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 0,
+   "make": "Audi",
+   "model": "TT Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2004
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 0,
+   "make": "Audi",
+   "model": "TT Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2005
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "grille",
+    "hood",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 17,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A3 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2019
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "hood",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 17,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A8 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2009
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "hood",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 17,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S8",
+   "site": "www.audipartsgiant.com",
+   "year": 2008
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "hood",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 17,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S8",
+   "site": "www.audipartsgiant.com",
+   "year": 2009
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 17,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 1993
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "grille",
+    "hood",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A3",
+   "site": "www.audipartsgiant.com",
+   "year": 2020
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "grille",
+    "hood",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A3 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2020
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "fender",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A5 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "fender",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A5 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "fender",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A5 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "Audi",
+   "model": "Allroad",
+   "site": "www.audipartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "fender",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S5",
+   "site": "www.audipartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "Audi",
+   "model": "SQ5",
+   "site": "www.audipartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "Audi",
+   "model": "SQ5",
+   "site": "www.audipartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "Audi",
+   "model": "SQ5",
+   "site": "www.audipartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "fender",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "Audi",
+   "model": "TT Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2006
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 15,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A8 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 1999
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "hood",
+    "trunk-lid"
+   ],
+   "classes": 15,
+   "gain": 0,
+   "make": "Audi",
+   "model": "TT Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2008
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 15,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Golf Alltrack",
+   "site": "www.vwpartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "fender",
+    "grille",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 15,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 1990
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "headlights",
+    "hood",
+    "liftgate",
+    "window-regulator"
+   ],
+   "classes": 14,
+   "gain": 0,
+   "make": "Audi",
+   "model": "Allroad Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2001
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "fender",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 14,
+   "gain": 0,
+   "make": "Audi",
+   "model": "Q5",
+   "site": "www.audipartsgiant.com",
+   "year": 2021
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "fender",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 14,
+   "gain": 0,
+   "make": "Audi",
+   "model": "Q5 Sportback",
+   "site": "www.audipartsgiant.com",
+   "year": 2021
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "hood",
+    "trunk-lid"
+   ],
+   "classes": 14,
+   "gain": 0,
+   "make": "Audi",
+   "model": "TT",
+   "site": "www.audipartsgiant.com",
+   "year": 2009
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 14,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "GTI",
+   "site": "www.vwpartsgiant.com",
+   "year": 2019
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 14,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 2019
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "headlights",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A4 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 1998
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "fender",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 0,
+   "make": "Audi",
+   "model": "Q5",
+   "site": "www.audipartsgiant.com",
+   "year": 2023
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "fender",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 0,
+   "make": "Audi",
+   "model": "Q5",
+   "site": "www.audipartsgiant.com",
+   "year": 2024
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "fender",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 0,
+   "make": "Audi",
+   "model": "Q5",
+   "site": "www.audipartsgiant.com",
+   "year": 2025
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "fender",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 0,
+   "make": "Audi",
+   "model": "Q5 Sportback",
+   "site": "www.audipartsgiant.com",
+   "year": 2023
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "fender",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 0,
+   "make": "Audi",
+   "model": "Q5 Sportback",
+   "site": "www.audipartsgiant.com",
+   "year": 2024
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "GTI",
+   "site": "www.vwpartsgiant.com",
+   "year": 2020
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 2020
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 2021
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Golf Alltrack",
+   "site": "www.vwpartsgiant.com",
+   "year": 2019
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 12,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A4",
+   "site": "www.audipartsgiant.com",
+   "year": 2020
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 12,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A4 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2020
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 12,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A4 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2021
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 12,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A4 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2022
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 12,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A4 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2023
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 12,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A4 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2024
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "headlights",
+    "hood",
+    "liftgate",
+    "window-regulator"
+   ],
+   "classes": 12,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A6 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 1999
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 12,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S4",
+   "site": "www.audipartsgiant.com",
+   "year": 2020
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 12,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S4",
+   "site": "www.audipartsgiant.com",
+   "year": 2022
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 12,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S4",
+   "site": "www.audipartsgiant.com",
+   "year": 2023
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 12,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S4",
+   "site": "www.audipartsgiant.com",
+   "year": 2024
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "fender",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 12,
+   "gain": 0,
+   "make": "Audi",
+   "model": "SQ5",
+   "site": "www.audipartsgiant.com",
+   "year": 2021
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "fender",
+    "grille",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 12,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 1988
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "fender",
+    "grille",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 12,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 1989
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A6 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 1998
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A8",
+   "site": "www.audipartsgiant.com",
+   "year": 1998
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A8 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 1998
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "fender",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 0,
+   "make": "Audi",
+   "model": "Q5 Sportback",
+   "site": "www.audipartsgiant.com",
+   "year": 2025
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "fender",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 0,
+   "make": "Audi",
+   "model": "SQ5",
+   "site": "www.audipartsgiant.com",
+   "year": 2022
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "fender",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 0,
+   "make": "Audi",
+   "model": "SQ5",
+   "site": "www.audipartsgiant.com",
+   "year": 2023
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "fender",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 0,
+   "make": "Audi",
+   "model": "SQ5",
+   "site": "www.audipartsgiant.com",
+   "year": 2024
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "fender",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 0,
+   "make": "Audi",
+   "model": "SQ5",
+   "site": "www.audipartsgiant.com",
+   "year": 2025
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "GTI",
+   "site": "www.vwpartsgiant.com",
+   "year": 2021
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "fender",
+    "grille",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 1992
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A4 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2025
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "hood",
+    "liftgate",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S3",
+   "site": "www.audipartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S4",
+   "site": "www.audipartsgiant.com",
+   "year": 2025
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S6",
+   "site": "www.audipartsgiant.com",
+   "year": 2009
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "headlights",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A4 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 1996
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "headlights",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A4 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 1997
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A8 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 1997
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "hood",
+    "liftgate",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S3",
+   "site": "www.audipartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "fender",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 1987
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "fender",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 1985
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "hood",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 8,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S3",
+   "site": "www.audipartsgiant.com",
+   "year": 2019
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-rear",
+    "fender",
+    "gauge-cluster",
+    "hood",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 8,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S3",
+   "site": "www.audipartsgiant.com",
+   "year": 2020
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "fender",
+    "hood",
+    "liftgate",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 7,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S3",
+   "site": "www.audipartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 7,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S6",
+   "site": "www.audipartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 7,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S6",
+   "site": "www.audipartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "fender",
+    "grille",
+    "hood"
+   ],
+   "classes": 7,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Golf",
+   "site": "www.vwpartsgiant.com",
+   "year": 1990
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "liftgate",
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A3 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2009
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "liftgate",
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A3 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2010
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "liftgate",
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A3 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2012
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-rear",
+    "fender",
+    "hood",
+    "trunk-lid"
+   ],
+   "classes": 6,
+   "gain": 0,
+   "make": "Audi",
+   "model": "TT Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2011
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-rear",
+    "fender",
+    "hood",
+    "trunk-lid"
+   ],
+   "classes": 6,
+   "gain": 0,
+   "make": "Audi",
+   "model": "TT Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2012
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-rear",
+    "fender",
+    "hood",
+    "trunk-lid"
+   ],
+   "classes": 6,
+   "gain": 0,
+   "make": "Audi",
+   "model": "TT Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-rear",
+    "fender",
+    "hood",
+    "trunk-lid"
+   ],
+   "classes": 6,
+   "gain": 0,
+   "make": "Audi",
+   "model": "TT Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-rear",
+    "fender",
+    "hood",
+    "trunk-lid"
+   ],
+   "classes": 6,
+   "gain": 0,
+   "make": "Audi",
+   "model": "TT Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A5 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2019
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "gauge-cluster",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S5",
+   "site": "www.audipartsgiant.com",
+   "year": 2019
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A3",
+   "site": "www.audipartsgiant.com",
+   "year": 2022
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A3",
+   "site": "www.audipartsgiant.com",
+   "year": 2023
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A3",
+   "site": "www.audipartsgiant.com",
+   "year": 2024
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A3 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2022
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A3 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2023
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A3 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2024
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A3 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2025
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A5 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A5 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2020
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A5 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2021
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A5 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2022
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A5 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2023
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A5 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2024
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A7 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Audi",
+   "model": "Q3",
+   "site": "www.audipartsgiant.com",
+   "year": 2019
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Audi",
+   "model": "Q3",
+   "site": "www.audipartsgiant.com",
+   "year": 2022
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Audi",
+   "model": "Q3",
+   "site": "www.audipartsgiant.com",
+   "year": 2023
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Audi",
+   "model": "Q3",
+   "site": "www.audipartsgiant.com",
+   "year": 2024
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Audi",
+   "model": "Q3",
+   "site": "www.audipartsgiant.com",
+   "year": 2025
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S3",
+   "site": "www.audipartsgiant.com",
+   "year": 2022
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S3",
+   "site": "www.audipartsgiant.com",
+   "year": 2023
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S3",
+   "site": "www.audipartsgiant.com",
+   "year": 2024
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S3",
+   "site": "www.audipartsgiant.com",
+   "year": 2025
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S5",
+   "site": "www.audipartsgiant.com",
+   "year": 2020
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S5",
+   "site": "www.audipartsgiant.com",
+   "year": 2021
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S5",
+   "site": "www.audipartsgiant.com",
+   "year": 2022
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S5",
+   "site": "www.audipartsgiant.com",
+   "year": 2023
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S5",
+   "site": "www.audipartsgiant.com",
+   "year": 2024
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S7",
+   "site": "www.audipartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S7",
+   "site": "www.audipartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 1984
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A7 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A7 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S7",
+   "site": "www.audipartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S7",
+   "site": "www.audipartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S7",
+   "site": "www.audipartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Audi",
+   "model": "TT Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2020
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Audi",
+   "model": "TT Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2021
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Audi",
+   "model": "TT Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2022
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Audi",
+   "model": "TT Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2023
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A8 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A8 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A8 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A8 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A8 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Audi",
+   "model": "A8 Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Audi",
+   "model": "Q7",
+   "site": "www.audipartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Audi",
+   "model": "Q7",
+   "site": "www.audipartsgiant.com",
+   "year": 2019
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Audi",
+   "model": "Q7",
+   "site": "www.audipartsgiant.com",
+   "year": 2020
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Audi",
+   "model": "Q7",
+   "site": "www.audipartsgiant.com",
+   "year": 2021
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Audi",
+   "model": "Q7",
+   "site": "www.audipartsgiant.com",
+   "year": 2022
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Audi",
+   "model": "Q7",
+   "site": "www.audipartsgiant.com",
+   "year": 2023
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Audi",
+   "model": "Q7",
+   "site": "www.audipartsgiant.com",
+   "year": 2024
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Audi",
+   "model": "Q7",
+   "site": "www.audipartsgiant.com",
+   "year": 2025
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S8",
+   "site": "www.audipartsgiant.com",
+   "year": 2013
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S8",
+   "site": "www.audipartsgiant.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S8",
+   "site": "www.audipartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S8",
+   "site": "www.audipartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S8",
+   "site": "www.audipartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Audi",
+   "model": "S8",
+   "site": "www.audipartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Atlas",
+   "site": "www.vwpartsgiant.com",
+   "year": 2020
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Atlas",
+   "site": "www.vwpartsgiant.com",
+   "year": 2022
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "CC",
+   "site": "www.vwpartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 2022
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Jetta",
+   "site": "www.vwpartsgiant.com",
+   "year": 2023
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Audi",
+   "model": "Q5",
+   "site": "www.audipartsgiant.com",
+   "year": 2020
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Audi",
+   "model": "TT Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Audi",
+   "model": "TT Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Audi",
+   "model": "TT Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Audi",
+   "model": "TT Quattro",
+   "site": "www.audipartsgiant.com",
+   "year": 2019
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Eos",
+   "site": "www.vwpartsgiant.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Eos",
+   "site": "www.vwpartsgiant.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "tail-lights"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Fox",
+   "site": "www.vwpartsgiant.com",
+   "year": 1987
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "tail-lights"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Fox",
+   "site": "www.vwpartsgiant.com",
+   "year": 1990
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "tail-lights"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Fox",
+   "site": "www.vwpartsgiant.com",
+   "year": 1991
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "tail-lights"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Fox",
+   "site": "www.vwpartsgiant.com",
+   "year": 1992
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "tail-lights"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Fox",
+   "site": "www.vwpartsgiant.com",
+   "year": 1993
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Passat",
+   "site": "www.vwpartsgiant.com",
+   "year": 1995
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "tail-lights"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Scirocco",
+   "site": "www.vwpartsgiant.com",
+   "year": 1986
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "tail-lights"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Scirocco",
+   "site": "www.vwpartsgiant.com",
+   "year": 1987
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "tail-lights"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Volkswagen",
+   "model": "Scirocco",
+   "site": "www.vwpartsgiant.com",
+   "year": 1988
+  }
+ ],
+ "unrouted_makes": {}
+}

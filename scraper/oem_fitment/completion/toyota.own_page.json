@@ -1,0 +1,7441 @@
+{
+ "as_of": "2026-11-06T00:06:09Z",
+ "built_on": "oem-raw@75dc442",
+ "kind": "own_page",
+ "note": "R3 input (CURATION_SPEC 3.2 R3, 5.16): vehicle-years left out of Likely candidate classes because their own page was never read; crawl.py --complete reads those pages and the curator re-checks them. Never shipped.",
+ "ns": "toyota",
+ "rows": [
+  {
+   "cars": 627,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 85,
+   "gain": 53295,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 301,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 97,
+   "gain": 29197,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 324,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 63,
+   "gain": 20412,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 2008
+  },
+  {
+   "cars": 386,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "hood",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 46,
+   "gain": 17756,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 59,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 184,
+   "gain": 10856,
+   "make": "Lexus",
+   "model": "IS 250",
+   "site": "www.lexuspartsnow.com",
+   "year": 2008
+  },
+  {
+   "cars": 67,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 137,
+   "gain": 9179,
+   "make": "Lexus",
+   "model": "IS 250",
+   "site": "www.lexuspartsnow.com",
+   "year": 2006
+  },
+  {
+   "cars": 49,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 187,
+   "gain": 9163,
+   "make": "Lexus",
+   "model": "RX 330",
+   "site": "www.lexuspartsnow.com",
+   "year": 2005
+  },
+  {
+   "cars": 95,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 87,
+   "gain": 8265,
+   "make": "Lexus",
+   "model": "ES 300",
+   "site": "www.lexuspartsnow.com",
+   "year": 2003
+  },
+  {
+   "cars": 100,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 74,
+   "gain": 7400,
+   "make": "Lexus",
+   "model": "ES 330",
+   "site": "www.lexuspartsnow.com",
+   "year": 2005
+  },
+  {
+   "cars": 24,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 283,
+   "gain": 6792,
+   "make": "Lexus",
+   "model": "IS 250",
+   "site": "www.lexuspartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 562,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 12,
+   "gain": 6744,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 2003
+  },
+  {
+   "cars": 105,
+   "cats": [
+    "bumper-front",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 61,
+   "gain": 6405,
+   "make": "Lexus",
+   "model": "ES 330",
+   "site": "www.lexuspartsnow.com",
+   "year": 2004
+  },
+  {
+   "cars": 911,
+   "cats": [
+    "door-front",
+    "gauge-cluster",
+    "side-mirrors",
+    "trunk-lid"
+   ],
+   "classes": 6,
+   "gain": 5466,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 2007
+  },
+  {
+   "cars": 33,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 164,
+   "gain": 5412,
+   "make": "Lexus",
+   "model": "RX 350",
+   "site": "www.lexuspartsnow.com",
+   "year": 2008
+  },
+  {
+   "cars": 29,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 177,
+   "gain": 5133,
+   "make": "Lexus",
+   "model": "IS 250",
+   "site": "www.lexuspartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 273,
+   "cats": [
+    "bumper-rear",
+    "door-front",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 18,
+   "gain": 4914,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 2003
+  },
+  {
+   "cars": 402,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 11,
+   "gain": 4422,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 2000
+  },
+  {
+   "cars": 259,
+   "cats": [
+    "climate-control",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 17,
+   "gain": 4403,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 62,
+   "cats": [
+    "bumper-front",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights"
+   ],
+   "classes": 71,
+   "gain": 4402,
+   "make": "Lexus",
+   "model": "RX 330",
+   "site": "www.lexuspartsnow.com",
+   "year": 2004
+  },
+  {
+   "cars": 104,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 42,
+   "gain": 4368,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 208,
+   "cats": [
+    "bumper-rear",
+    "door-front",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 21,
+   "gain": 4368,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 2004
+  },
+  {
+   "cars": 341,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 12,
+   "gain": 4092,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 2001
+  },
+  {
+   "cars": 30,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 121,
+   "gain": 3630,
+   "make": "Lexus",
+   "model": "GS 300",
+   "site": "www.lexuspartsnow.com",
+   "year": 1999
+  },
+  {
+   "cars": 251,
+   "cats": [
+    "bumper-rear",
+    "door-front",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 14,
+   "gain": 3514,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 2005
+  },
+  {
+   "cars": 68,
+   "cats": [
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "trunk-lid"
+   ],
+   "classes": 49,
+   "gain": 3332,
+   "make": "Lexus",
+   "model": "IS 250",
+   "site": "www.lexuspartsnow.com",
+   "year": 2007
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 216,
+   "gain": 3240,
+   "make": "Lexus",
+   "model": "RX 330",
+   "site": "www.lexuspartsnow.com",
+   "year": 2006
+  },
+  {
+   "cars": 49,
+   "cats": [
+    "bumper-front",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 66,
+   "gain": 3234,
+   "make": "Lexus",
+   "model": "RX 350",
+   "site": "www.lexuspartsnow.com",
+   "year": 2007
+  },
+  {
+   "cars": 25,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 124,
+   "gain": 3100,
+   "make": "Lexus",
+   "model": "RX 350",
+   "site": "www.lexuspartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 204,
+   "cats": [
+    "bumper-rear",
+    "side-mirrors",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 15,
+   "gain": 3060,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 2006
+  },
+  {
+   "cars": 95,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 30,
+   "gain": 2850,
+   "make": "Toyota",
+   "model": "Sequoia",
+   "site": "www.toyotapartsnow.com",
+   "year": 2003
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 379,
+   "gain": 2653,
+   "make": "Lexus",
+   "model": "IS 250",
+   "site": "www.lexuspartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 87,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 30,
+   "gain": 2610,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 186,
+   "cats": [
+    "bumper-rear",
+    "side-mirrors",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 14,
+   "gain": 2604,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 2007
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 363,
+   "gain": 2541,
+   "make": "Lexus",
+   "model": "IS 250",
+   "site": "www.lexuspartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 21,
+   "cats": [
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 106,
+   "gain": 2226,
+   "make": "Lexus",
+   "model": "RX 400h",
+   "site": "www.lexuspartsnow.com",
+   "year": 2007
+  },
+  {
+   "cars": 19,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 113,
+   "gain": 2147,
+   "make": "Lexus",
+   "model": "GS 350",
+   "site": "www.lexuspartsnow.com",
+   "year": 2008
+  },
+  {
+   "cars": 22,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 96,
+   "gain": 2112,
+   "make": "Lexus",
+   "model": "GS 300",
+   "site": "www.lexuspartsnow.com",
+   "year": 2000
+  },
+  {
+   "cars": 62,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 34,
+   "gain": 2108,
+   "make": "Toyota",
+   "model": "Sequoia",
+   "site": "www.toyotapartsnow.com",
+   "year": 2004
+  },
+  {
+   "cars": 198,
+   "cats": [
+    "bumper-rear",
+    "door-rear",
+    "fender",
+    "hood",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 10,
+   "gain": 1980,
+   "make": "Toyota",
+   "model": "Prius",
+   "site": "www.toyotapartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 129,
+   "cats": [
+    "climate-control",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 15,
+   "gain": 1935,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 86,
+   "cats": [
+    "bumper-rear",
+    "door-front",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 22,
+   "gain": 1892,
+   "make": "Toyota",
+   "model": "Matrix",
+   "site": "www.toyotapartsnow.com",
+   "year": 2005
+  },
+  {
+   "cars": 102,
+   "cats": [
+    "climate-control",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 18,
+   "gain": 1836,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 23,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 79,
+   "gain": 1817,
+   "make": "Lexus",
+   "model": "GS 300",
+   "site": "www.lexuspartsnow.com",
+   "year": 2001
+  },
+  {
+   "cars": 603,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 1809,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 2005
+  },
+  {
+   "cars": 361,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 5,
+   "gain": 1805,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 1999
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 184,
+   "gain": 1656,
+   "make": "Lexus",
+   "model": "IS 350",
+   "site": "www.lexuspartsnow.com",
+   "year": 2008
+  },
+  {
+   "cars": 533,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 1599,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 2004
+  },
+  {
+   "cars": 59,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 27,
+   "gain": 1593,
+   "make": "Toyota",
+   "model": "Sequoia",
+   "site": "www.toyotapartsnow.com",
+   "year": 2001
+  },
+  {
+   "cars": 43,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 36,
+   "gain": 1548,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 2016
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "headlights",
+    "side-mirrors",
+    "tail-lights"
+   ],
+   "classes": 125,
+   "gain": 1500,
+   "make": "Lexus",
+   "model": "RX 350",
+   "site": "www.lexuspartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 107,
+   "cats": [
+    "bumper-rear",
+    "side-mirrors",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 14,
+   "gain": 1498,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 2008
+  },
+  {
+   "cars": 88,
+   "cats": [
+    "climate-control",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 17,
+   "gain": 1496,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 678,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 1356,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 2002
+  },
+  {
+   "cars": 111,
+   "cats": [
+    "bumper-front",
+    "gauge-cluster",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 12,
+   "gain": 1332,
+   "make": "Lexus",
+   "model": "ES 300",
+   "site": "www.lexuspartsnow.com",
+   "year": 2002
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 119,
+   "gain": 1309,
+   "make": "Lexus",
+   "model": "IS 350",
+   "site": "www.lexuspartsnow.com",
+   "year": 2007
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 92,
+   "gain": 1288,
+   "make": "Lexus",
+   "model": "RX 400h",
+   "site": "www.lexuspartsnow.com",
+   "year": 2008
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 85,
+   "gain": 1275,
+   "make": "Toyota",
+   "model": "Camry Hybrid",
+   "site": "www.toyotapartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 67,
+   "cats": [
+    "gauge-cluster",
+    "headlights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 1273,
+   "make": "Lexus",
+   "model": "GS 300",
+   "site": "www.lexuspartsnow.com",
+   "year": 2006
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 105,
+   "gain": 1260,
+   "make": "Lexus",
+   "model": "GS 300",
+   "site": "www.lexuspartsnow.com",
+   "year": 1998
+  },
+  {
+   "cars": 56,
+   "cats": [
+    "bumper-rear",
+    "door-front",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 22,
+   "gain": 1232,
+   "make": "Toyota",
+   "model": "Matrix",
+   "site": "www.toyotapartsnow.com",
+   "year": 2004
+  },
+  {
+   "cars": 42,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 29,
+   "gain": 1218,
+   "make": "Toyota",
+   "model": "Sequoia",
+   "site": "www.toyotapartsnow.com",
+   "year": 2005
+  },
+  {
+   "cars": 301,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 4,
+   "gain": 1204,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 2006
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 101,
+   "gain": 1111,
+   "make": "Lexus",
+   "model": "GS 450h",
+   "site": "www.lexuspartsnow.com",
+   "year": 2007
+  },
+  {
+   "cars": 85,
+   "cats": [
+    "bumper-rear",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 13,
+   "gain": 1105,
+   "make": "Toyota",
+   "model": "Matrix",
+   "site": "www.toyotapartsnow.com",
+   "year": 2003
+  },
+  {
+   "cars": 17,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 63,
+   "gain": 1071,
+   "make": "Toyota",
+   "model": "Camry Hybrid",
+   "site": "www.toyotapartsnow.com",
+   "year": 2008
+  },
+  {
+   "cars": 71,
+   "cats": [
+    "door-front",
+    "hood",
+    "side-mirrors",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 14,
+   "gain": 994,
+   "make": "Toyota",
+   "model": "Tundra",
+   "site": "www.toyotapartsnow.com",
+   "year": 2006
+  },
+  {
+   "cars": 29,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 34,
+   "gain": 986,
+   "make": "Toyota",
+   "model": "Tundra",
+   "site": "www.toyotapartsnow.com",
+   "year": 2004
+  },
+  {
+   "cars": 192,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "headlights",
+    "window-switch"
+   ],
+   "classes": 5,
+   "gain": 960,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 58,
+   "cats": [
+    "bumper-rear",
+    "side-mirrors",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 16,
+   "gain": 928,
+   "make": "Toyota",
+   "model": "Matrix",
+   "site": "www.toyotapartsnow.com",
+   "year": 2006
+  },
+  {
+   "cars": 39,
+   "cats": [
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 23,
+   "gain": 897,
+   "make": "Toyota",
+   "model": "Tundra",
+   "site": "www.toyotapartsnow.com",
+   "year": 2005
+  },
+  {
+   "cars": 112,
+   "cats": [
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 8,
+   "gain": 896,
+   "make": "Toyota",
+   "model": "Sequoia",
+   "site": "www.toyotapartsnow.com",
+   "year": 2002
+  },
+  {
+   "cars": 33,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 27,
+   "gain": 891,
+   "make": "Toyota",
+   "model": "Sequoia",
+   "site": "www.toyotapartsnow.com",
+   "year": 2006
+  },
+  {
+   "cars": 44,
+   "cats": [
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "hood",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 20,
+   "gain": 880,
+   "make": "Lexus",
+   "model": "ES 330",
+   "site": "www.lexuspartsnow.com",
+   "year": 2006
+  },
+  {
+   "cars": 29,
+   "cats": [
+    "bumper-front",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 29,
+   "gain": 841,
+   "make": "Lexus",
+   "model": "GS 350",
+   "site": "www.lexuspartsnow.com",
+   "year": 2007
+  },
+  {
+   "cars": 24,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 34,
+   "gain": 816,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 2017
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 149,
+   "gain": 745,
+   "make": "Lexus",
+   "model": "IS 250",
+   "site": "www.lexuspartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 52,
+   "cats": [
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-switch"
+   ],
+   "classes": 14,
+   "gain": 728,
+   "make": "Toyota",
+   "model": "Tundra",
+   "site": "www.toyotapartsnow.com",
+   "year": 2003
+  },
+  {
+   "cars": 54,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "gauge-cluster",
+    "headlights",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 702,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "trunk-lid"
+   ],
+   "classes": 46,
+   "gain": 690,
+   "make": "Lexus",
+   "model": "IS 350",
+   "site": "www.lexuspartsnow.com",
+   "year": 2006
+  },
+  {
+   "cars": 53,
+   "cats": [
+    "climate-control",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 13,
+   "gain": 689,
+   "make": "Toyota",
+   "model": "Matrix",
+   "site": "www.toyotapartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 31,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 22,
+   "gain": 682,
+   "make": "Toyota",
+   "model": "Tundra",
+   "site": "www.toyotapartsnow.com",
+   "year": 2008
+  },
+  {
+   "cars": 62,
+   "cats": [
+    "climate-control",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 11,
+   "gain": 682,
+   "make": "Scion",
+   "model": "xA",
+   "site": "www.toyotapartsnow.com",
+   "year": 2006
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 96,
+   "gain": 672,
+   "make": "Lexus",
+   "model": "GS 400",
+   "site": "www.lexuspartsnow.com",
+   "year": 2000
+  },
+  {
+   "cars": 41,
+   "cats": [
+    "bumper-rear",
+    "side-mirrors",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 16,
+   "gain": 656,
+   "make": "Toyota",
+   "model": "Matrix",
+   "site": "www.toyotapartsnow.com",
+   "year": 2007
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 314,
+   "gain": 628,
+   "make": "Lexus",
+   "model": "IS 350",
+   "site": "www.lexuspartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "headlights",
+    "side-mirrors",
+    "tail-lights"
+   ],
+   "classes": 125,
+   "gain": 625,
+   "make": "Lexus",
+   "model": "RX 450h",
+   "site": "www.lexuspartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 69,
+   "cats": [
+    "bumper-rear",
+    "door-rear",
+    "fender",
+    "hood",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 9,
+   "gain": 621,
+   "make": "Toyota",
+   "model": "Prius",
+   "site": "www.toyotapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 121,
+   "gain": 605,
+   "make": "Lexus",
+   "model": "GS 400",
+   "site": "www.lexuspartsnow.com",
+   "year": 1999
+  },
+  {
+   "cars": 71,
+   "cats": [
+    "headlights",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 8,
+   "gain": 568,
+   "make": "Toyota",
+   "model": "Camry Solara",
+   "site": "www.toyotapartsnow.com",
+   "year": 2000
+  },
+  {
+   "cars": 189,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 567,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 1999
+  },
+  {
+   "cars": 283,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 2,
+   "gain": 566,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 1998
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "headlights",
+    "side-mirrors",
+    "tail-lights"
+   ],
+   "classes": 137,
+   "gain": 548,
+   "make": "Lexus",
+   "model": "RX 350",
+   "site": "www.lexuspartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 253,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 2,
+   "gain": 506,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 1997
+  },
+  {
+   "cars": 56,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 9,
+   "gain": 504,
+   "make": "Toyota",
+   "model": "Camry Solara",
+   "site": "www.toyotapartsnow.com",
+   "year": 2002
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "headlights",
+    "side-mirrors",
+    "tail-lights"
+   ],
+   "classes": 245,
+   "gain": 490,
+   "make": "Lexus",
+   "model": "RX 450h",
+   "site": "www.lexuspartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 81,
+   "gain": 486,
+   "make": "Lexus",
+   "model": "GS 350",
+   "site": "www.lexuspartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 18,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 27,
+   "gain": 486,
+   "make": "Toyota",
+   "model": "Sequoia",
+   "site": "www.toyotapartsnow.com",
+   "year": 2007
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 97,
+   "gain": 485,
+   "make": "Toyota",
+   "model": "Camry Hybrid",
+   "site": "www.toyotapartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 18,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "hood",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 26,
+   "gain": 468,
+   "make": "Lexus",
+   "model": "GS 300",
+   "site": "www.lexuspartsnow.com",
+   "year": 2002
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "headlights",
+    "side-mirrors",
+    "tail-lights"
+   ],
+   "classes": 232,
+   "gain": 464,
+   "make": "Lexus",
+   "model": "RX 450h",
+   "site": "www.lexuspartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 229,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 458,
+   "make": "Toyota",
+   "model": "Prius",
+   "site": "www.toyotapartsnow.com",
+   "year": 2007
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 74,
+   "gain": 444,
+   "make": "Lexus",
+   "model": "GS 350",
+   "site": "www.lexuspartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 55,
+   "cats": [
+    "headlights",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 8,
+   "gain": 440,
+   "make": "Toyota",
+   "model": "Camry Solara",
+   "site": "www.toyotapartsnow.com",
+   "year": 2001
+  },
+  {
+   "cars": 146,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 438,
+   "make": "Toyota",
+   "model": "Yaris",
+   "site": "www.toyotapartsnow.com",
+   "year": 2007
+  },
+  {
+   "cars": 145,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 435,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 2002
+  },
+  {
+   "cars": 27,
+   "cats": [
+    "bumper-rear",
+    "side-mirrors",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 16,
+   "gain": 432,
+   "make": "Toyota",
+   "model": "Matrix",
+   "site": "www.toyotapartsnow.com",
+   "year": 2008
+  },
+  {
+   "cars": 213,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 426,
+   "make": "Toyota",
+   "model": "Prius",
+   "site": "www.toyotapartsnow.com",
+   "year": 2005
+  },
+  {
+   "cars": 138,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 414,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 1998
+  },
+  {
+   "cars": 59,
+   "cats": [
+    "headlights",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 7,
+   "gain": 413,
+   "make": "Toyota",
+   "model": "Camry Solara",
+   "site": "www.toyotapartsnow.com",
+   "year": 1999
+  },
+  {
+   "cars": 137,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 411,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 2000
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 79,
+   "gain": 395,
+   "make": "Lexus",
+   "model": "GS 430",
+   "site": "www.lexuspartsnow.com",
+   "year": 2001
+  },
+  {
+   "cars": 95,
+   "cats": [
+    "climate-control",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 4,
+   "gain": 380,
+   "make": "Scion",
+   "model": "xB",
+   "site": "www.toyotapartsnow.com",
+   "year": 2005
+  },
+  {
+   "cars": 95,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 380,
+   "make": "Toyota",
+   "model": "RAV4",
+   "site": "www.toyotapartsnow.com",
+   "year": 2008
+  },
+  {
+   "cars": 95,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 4,
+   "gain": 380,
+   "make": "Toyota",
+   "model": "Yaris",
+   "site": "www.toyotapartsnow.com",
+   "year": 2008
+  },
+  {
+   "cars": 34,
+   "cats": [
+    "climate-control",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 11,
+   "gain": 374,
+   "make": "Scion",
+   "model": "xA",
+   "site": "www.toyotapartsnow.com",
+   "year": 2005
+  },
+  {
+   "cars": 53,
+   "cats": [
+    "climate-control",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 7,
+   "gain": 371,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 91,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 4,
+   "gain": 364,
+   "make": "Toyota",
+   "model": "Prius",
+   "site": "www.toyotapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 120,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 360,
+   "make": "Toyota",
+   "model": "Sienna",
+   "site": "www.toyotapartsnow.com",
+   "year": 2000
+  },
+  {
+   "cars": 50,
+   "cats": [
+    "climate-control",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 7,
+   "gain": 350,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 2016
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 116,
+   "gain": 348,
+   "make": "Lexus",
+   "model": "IS 250",
+   "site": "www.lexuspartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 31,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 341,
+   "make": "Toyota",
+   "model": "4Runner",
+   "site": "www.toyotapartsnow.com",
+   "year": 1995
+  },
+  {
+   "cars": 110,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 330,
+   "make": "Scion",
+   "model": "xB",
+   "site": "www.toyotapartsnow.com",
+   "year": 2008
+  },
+  {
+   "cars": 54,
+   "cats": [
+    "bumper-rear",
+    "door-rear",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 6,
+   "gain": 324,
+   "make": "Toyota",
+   "model": "Prius",
+   "site": "www.toyotapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 22,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "hood",
+    "liftgate",
+    "window-regulator"
+   ],
+   "classes": 14,
+   "gain": 308,
+   "make": "Lexus",
+   "model": "RX 400h",
+   "site": "www.lexuspartsnow.com",
+   "year": 2006
+  },
+  {
+   "cars": 151,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 302,
+   "make": "Scion",
+   "model": "tC",
+   "site": "www.toyotapartsnow.com",
+   "year": 2007
+  },
+  {
+   "cars": 75,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 300,
+   "make": "Toyota",
+   "model": "RAV4",
+   "site": "www.toyotapartsnow.com",
+   "year": 2006
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "bumper-front",
+    "headlights",
+    "side-mirrors"
+   ],
+   "classes": 27,
+   "gain": 297,
+   "make": "Lexus",
+   "model": "GS 400",
+   "site": "www.lexuspartsnow.com",
+   "year": 1998
+  },
+  {
+   "cars": 144,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 288,
+   "make": "Scion",
+   "model": "tC",
+   "site": "www.toyotapartsnow.com",
+   "year": 2006
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "hood",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 26,
+   "gain": 286,
+   "make": "Lexus",
+   "model": "GS 300",
+   "site": "www.lexuspartsnow.com",
+   "year": 2003
+  },
+  {
+   "cars": 57,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 5,
+   "gain": 285,
+   "make": "Toyota",
+   "model": "Yaris",
+   "site": "www.toyotapartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 134,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 268,
+   "make": "Toyota",
+   "model": "Prius",
+   "site": "www.toyotapartsnow.com",
+   "year": 2006
+  },
+  {
+   "cars": 33,
+   "cats": [
+    "climate-control",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 8,
+   "gain": 264,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 2017
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 255,
+   "gain": 255,
+   "make": "Lexus",
+   "model": "IS 350",
+   "site": "www.lexuspartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 48,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 5,
+   "gain": 240,
+   "make": "Scion",
+   "model": "xD",
+   "site": "www.toyotapartsnow.com",
+   "year": 2008
+  },
+  {
+   "cars": 239,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 239,
+   "make": "Toyota",
+   "model": "Sienna",
+   "site": "www.toyotapartsnow.com",
+   "year": 2004
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "hood",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 26,
+   "gain": 234,
+   "make": "Lexus",
+   "model": "GS 300",
+   "site": "www.lexuspartsnow.com",
+   "year": 2004
+  },
+  {
+   "cars": 116,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 232,
+   "make": "Scion",
+   "model": "tC",
+   "site": "www.toyotapartsnow.com",
+   "year": 2008
+  },
+  {
+   "cars": 114,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 228,
+   "make": "Toyota",
+   "model": "Prius",
+   "site": "www.toyotapartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 45,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 5,
+   "gain": 225,
+   "make": "Toyota",
+   "model": "Yaris",
+   "site": "www.toyotapartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 225,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 225,
+   "make": "Toyota",
+   "model": "Sienna",
+   "site": "www.toyotapartsnow.com",
+   "year": 2006
+  },
+  {
+   "cars": 112,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 224,
+   "make": "Toyota",
+   "model": "Highlander",
+   "site": "www.toyotapartsnow.com",
+   "year": 2003
+  },
+  {
+   "cars": 74,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 222,
+   "make": "Toyota",
+   "model": "Sienna",
+   "site": "www.toyotapartsnow.com",
+   "year": 2001
+  },
+  {
+   "cars": 17,
+   "cats": [
+    "climate-control",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 13,
+   "gain": 221,
+   "make": "Toyota",
+   "model": "Matrix",
+   "site": "www.toyotapartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 44,
+   "cats": [
+    "door-front",
+    "side-mirrors",
+    "trunk-lid"
+   ],
+   "classes": 5,
+   "gain": 220,
+   "make": "Toyota",
+   "model": "Camry Hybrid",
+   "site": "www.toyotapartsnow.com",
+   "year": 2007
+  },
+  {
+   "cars": 109,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 218,
+   "make": "Toyota",
+   "model": "Highlander",
+   "site": "www.toyotapartsnow.com",
+   "year": 2005
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 24,
+   "gain": 216,
+   "make": "Toyota",
+   "model": "4Runner",
+   "site": "www.toyotapartsnow.com",
+   "year": 1991
+  },
+  {
+   "cars": 36,
+   "cats": [
+    "bumper-rear",
+    "door-rear",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 6,
+   "gain": 216,
+   "make": "Toyota",
+   "model": "Prius",
+   "site": "www.toyotapartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 106,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 212,
+   "make": "Scion",
+   "model": "tC",
+   "site": "www.toyotapartsnow.com",
+   "year": 2005
+  },
+  {
+   "cars": 212,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 212,
+   "make": "Toyota",
+   "model": "Sienna",
+   "site": "www.toyotapartsnow.com",
+   "year": 2005
+  },
+  {
+   "cars": 206,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 206,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 2001
+  },
+  {
+   "cars": 101,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 202,
+   "make": "Toyota",
+   "model": "Highlander",
+   "site": "www.toyotapartsnow.com",
+   "year": 2004
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 22,
+   "gain": 198,
+   "make": "Toyota",
+   "model": "Sequoia",
+   "site": "www.toyotapartsnow.com",
+   "year": 2008
+  },
+  {
+   "cars": 66,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 198,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 1996
+  },
+  {
+   "cars": 98,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 196,
+   "make": "Toyota",
+   "model": "Highlander",
+   "site": "www.toyotapartsnow.com",
+   "year": 2002
+  },
+  {
+   "cars": 65,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 195,
+   "make": "Toyota",
+   "model": "Sienna",
+   "site": "www.toyotapartsnow.com",
+   "year": 1999
+  },
+  {
+   "cars": 24,
+   "cats": [
+    "climate-control",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 8,
+   "gain": 192,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 2018
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 19,
+   "gain": 190,
+   "make": "Toyota",
+   "model": "4Runner",
+   "site": "www.toyotapartsnow.com",
+   "year": 1990
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "hood",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 46,
+   "gain": 184,
+   "make": "Toyota",
+   "model": "Camry Hybrid",
+   "site": "www.toyotapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 8,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 23,
+   "gain": 184,
+   "make": "Toyota",
+   "model": "Pickup",
+   "site": "www.toyotapartsnow.com",
+   "year": 1991
+  },
+  {
+   "cars": 46,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 184,
+   "make": "Toyota",
+   "model": "RAV4",
+   "site": "www.toyotapartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 46,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 184,
+   "make": "Toyota",
+   "model": "RAV4",
+   "site": "www.toyotapartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 90,
+   "gain": 180,
+   "make": "Lexus",
+   "model": "IS 250",
+   "site": "www.lexuspartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 180,
+   "make": "Toyota",
+   "model": "Tundra",
+   "site": "www.toyotapartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 15,
+   "gain": 180,
+   "make": "Toyota",
+   "model": "4Runner",
+   "site": "www.toyotapartsnow.com",
+   "year": 1994
+  },
+  {
+   "cars": 18,
+   "cats": [
+    "climate-control",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 10,
+   "gain": 180,
+   "make": "Scion",
+   "model": "xA",
+   "site": "www.toyotapartsnow.com",
+   "year": 2004
+  },
+  {
+   "cars": 60,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 180,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 1995
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 177,
+   "gain": 177,
+   "make": "Lexus",
+   "model": "IS 350",
+   "site": "www.lexuspartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 59,
+   "cats": [
+    "hood",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 177,
+   "make": "Toyota",
+   "model": "Tundra",
+   "site": "www.toyotapartsnow.com",
+   "year": 2000
+  },
+  {
+   "cars": 44,
+   "cats": [
+    "climate-control",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 4,
+   "gain": 176,
+   "make": "Scion",
+   "model": "xB",
+   "site": "www.toyotapartsnow.com",
+   "year": 2004
+  },
+  {
+   "cars": 57,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 171,
+   "make": "Toyota",
+   "model": "Highlander",
+   "site": "www.toyotapartsnow.com",
+   "year": 2008
+  },
+  {
+   "cars": 57,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 171,
+   "make": "Toyota",
+   "model": "Sienna",
+   "site": "www.toyotapartsnow.com",
+   "year": 1998
+  },
+  {
+   "cars": 56,
+   "cats": [
+    "hood",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 168,
+   "make": "Toyota",
+   "model": "Tundra",
+   "site": "www.toyotapartsnow.com",
+   "year": 2001
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 15,
+   "gain": 165,
+   "make": "Toyota",
+   "model": "4Runner",
+   "site": "www.toyotapartsnow.com",
+   "year": 1993
+  },
+  {
+   "cars": 55,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 165,
+   "make": "Scion",
+   "model": "xB",
+   "site": "www.toyotapartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 162,
+   "make": "Toyota",
+   "model": "Pickup",
+   "site": "www.toyotapartsnow.com",
+   "year": 1989
+  },
+  {
+   "cars": 81,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 162,
+   "make": "Toyota",
+   "model": "Prius",
+   "site": "www.toyotapartsnow.com",
+   "year": 2004
+  },
+  {
+   "cars": 40,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 160,
+   "make": "Toyota",
+   "model": "4Runner",
+   "site": "www.toyotapartsnow.com",
+   "year": 2004
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "trunk-lid"
+   ],
+   "classes": 159,
+   "gain": 159,
+   "make": "Lexus",
+   "model": "IS 350",
+   "site": "www.lexuspartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 26,
+   "gain": 156,
+   "make": "Toyota",
+   "model": "Pickup",
+   "site": "www.toyotapartsnow.com",
+   "year": 1992
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 156,
+   "make": "Toyota",
+   "model": "Tundra",
+   "site": "www.toyotapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 52,
+   "cats": [
+    "climate-control",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 156,
+   "make": "Toyota",
+   "model": "4Runner",
+   "site": "www.toyotapartsnow.com",
+   "year": 1997
+  },
+  {
+   "cars": 155,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 155,
+   "make": "Toyota",
+   "model": "Sienna",
+   "site": "www.toyotapartsnow.com",
+   "year": 2008
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "hood",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 150,
+   "make": "Lexus",
+   "model": "GS 300",
+   "site": "www.lexuspartsnow.com",
+   "year": 2005
+  },
+  {
+   "cars": 30,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 5,
+   "gain": 150,
+   "make": "Toyota",
+   "model": "Yaris",
+   "site": "www.toyotapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 36,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 144,
+   "make": "Toyota",
+   "model": "RAV4",
+   "site": "www.toyotapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 71,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 142,
+   "make": "Toyota",
+   "model": "Highlander",
+   "site": "www.toyotapartsnow.com",
+   "year": 2007
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 28,
+   "gain": 140,
+   "make": "Toyota",
+   "model": "Pickup",
+   "site": "www.toyotapartsnow.com",
+   "year": 1993
+  },
+  {
+   "cars": 35,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 140,
+   "make": "Toyota",
+   "model": "RAV4",
+   "site": "www.toyotapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 46,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 138,
+   "make": "Scion",
+   "model": "xB",
+   "site": "www.toyotapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 46,
+   "cats": [
+    "hood",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 138,
+   "make": "Toyota",
+   "model": "Tundra",
+   "site": "www.toyotapartsnow.com",
+   "year": 2002
+  },
+  {
+   "cars": 67,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 2,
+   "gain": 134,
+   "make": "Toyota",
+   "model": "4Runner",
+   "site": "www.toyotapartsnow.com",
+   "year": 1998
+  },
+  {
+   "cars": 21,
+   "cats": [
+    "bumper-rear",
+    "door-rear",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 6,
+   "gain": 126,
+   "make": "Toyota",
+   "model": "Prius",
+   "site": "www.toyotapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 42,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 126,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 1994
+  },
+  {
+   "cars": 122,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 122,
+   "make": "Scion",
+   "model": "xB",
+   "site": "www.toyotapartsnow.com",
+   "year": 2006
+  },
+  {
+   "cars": 60,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 120,
+   "make": "Toyota",
+   "model": "RAV4",
+   "site": "www.toyotapartsnow.com",
+   "year": 2002
+  },
+  {
+   "cars": 59,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 118,
+   "make": "Toyota",
+   "model": "4Runner",
+   "site": "www.toyotapartsnow.com",
+   "year": 2000
+  },
+  {
+   "cars": 58,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 116,
+   "make": "Toyota",
+   "model": "RAV4",
+   "site": "www.toyotapartsnow.com",
+   "year": 2005
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 113,
+   "gain": 113,
+   "make": "Lexus",
+   "model": "GS 460",
+   "site": "www.lexuspartsnow.com",
+   "year": 2008
+  },
+  {
+   "cars": 112,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 112,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 1995
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 110,
+   "make": "Toyota",
+   "model": "Tundra",
+   "site": "www.toyotapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 22,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 5,
+   "gain": 110,
+   "make": "Scion",
+   "model": "xD",
+   "site": "www.toyotapartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 55,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 110,
+   "make": "Toyota",
+   "model": "Highlander",
+   "site": "www.toyotapartsnow.com",
+   "year": 2001
+  },
+  {
+   "cars": 108,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 108,
+   "make": "Toyota",
+   "model": "Sienna",
+   "site": "www.toyotapartsnow.com",
+   "year": 2007
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 7,
+   "gain": 105,
+   "make": "Toyota",
+   "model": "Camry Solara",
+   "site": "www.toyotapartsnow.com",
+   "year": 2003
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "hood",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 26,
+   "gain": 104,
+   "make": "Lexus",
+   "model": "GS 430",
+   "site": "www.lexuspartsnow.com",
+   "year": 2002
+  },
+  {
+   "cars": 13,
+   "cats": [
+    "climate-control",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 8,
+   "gain": 104,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 2019
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "headlights",
+    "side-mirrors",
+    "tail-lights"
+   ],
+   "classes": 102,
+   "gain": 102,
+   "make": "Lexus",
+   "model": "RX 350",
+   "site": "www.lexuspartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 34,
+   "cats": [
+    "climate-control",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 102,
+   "make": "Toyota",
+   "model": "4Runner",
+   "site": "www.toyotapartsnow.com",
+   "year": 1996
+  },
+  {
+   "cars": 51,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 102,
+   "make": "Toyota",
+   "model": "RAV4",
+   "site": "www.toyotapartsnow.com",
+   "year": 2004
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 99,
+   "make": "Toyota",
+   "model": "Tundra",
+   "site": "www.toyotapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 49,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 98,
+   "make": "Toyota",
+   "model": "4Runner",
+   "site": "www.toyotapartsnow.com",
+   "year": 1999
+  },
+  {
+   "cars": 32,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 96,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 1993
+  },
+  {
+   "cars": 23,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 92,
+   "make": "Toyota",
+   "model": "4Runner",
+   "site": "www.toyotapartsnow.com",
+   "year": 2005
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 30,
+   "gain": 90,
+   "make": "Toyota",
+   "model": "Camry Hybrid",
+   "site": "www.toyotapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 18,
+   "cats": [
+    "climate-control",
+    "side-mirrors",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 5,
+   "gain": 90,
+   "make": "Toyota",
+   "model": "Tercel",
+   "site": "www.toyotapartsnow.com",
+   "year": 1995
+  },
+  {
+   "cars": 45,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 90,
+   "make": "Scion",
+   "model": "tC",
+   "site": "www.toyotapartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 89,
+   "gain": 89,
+   "make": "Lexus",
+   "model": "GS 450h",
+   "site": "www.lexuspartsnow.com",
+   "year": 2008
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 44,
+   "gain": 88,
+   "make": "Lexus",
+   "model": "GS 350",
+   "site": "www.lexuspartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 22,
+   "gain": 88,
+   "make": "Toyota",
+   "model": "Tundra",
+   "site": "www.toyotapartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 44,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 88,
+   "make": "Toyota",
+   "model": "RAV4",
+   "site": "www.toyotapartsnow.com",
+   "year": 2001
+  },
+  {
+   "cars": 87,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 87,
+   "make": "Toyota",
+   "model": "Sienna",
+   "site": "www.toyotapartsnow.com",
+   "year": 2002
+  },
+  {
+   "cars": 43,
+   "cats": [
+    "climate-control",
+    "window-switch"
+   ],
+   "classes": 2,
+   "gain": 86,
+   "make": "Toyota",
+   "model": "Echo",
+   "site": "www.toyotapartsnow.com",
+   "year": 2000
+  },
+  {
+   "cars": 17,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 5,
+   "gain": 85,
+   "make": "Toyota",
+   "model": "Highlander",
+   "site": "www.toyotapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 21,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 4,
+   "gain": 84,
+   "make": "Toyota",
+   "model": "Highlander",
+   "site": "www.toyotapartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 42,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 84,
+   "make": "Toyota",
+   "model": "RAV4",
+   "site": "www.toyotapartsnow.com",
+   "year": 2003
+  },
+  {
+   "cars": 27,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 81,
+   "make": "Scion",
+   "model": "xB",
+   "site": "www.toyotapartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "climate-control",
+    "side-mirrors",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 16,
+   "gain": 80,
+   "make": "Toyota",
+   "model": "Prius",
+   "site": "www.toyotapartsnow.com",
+   "year": 2016
+  },
+  {
+   "cars": 79,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 79,
+   "make": "Toyota",
+   "model": "Avalon",
+   "site": "www.toyotapartsnow.com",
+   "year": 1998
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "gauge-cluster",
+    "headlights",
+    "trunk-lid"
+   ],
+   "classes": 13,
+   "gain": 78,
+   "make": "Lexus",
+   "model": "GS 430",
+   "site": "www.lexuspartsnow.com",
+   "year": 2006
+  },
+  {
+   "cars": 26,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 78,
+   "make": "Scion",
+   "model": "xB",
+   "site": "www.toyotapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 5,
+   "gain": 75,
+   "make": "Toyota",
+   "model": "Highlander",
+   "site": "www.toyotapartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 37,
+   "cats": [
+    "climate-control",
+    "window-switch"
+   ],
+   "classes": 2,
+   "gain": 74,
+   "make": "Toyota",
+   "model": "Echo",
+   "site": "www.toyotapartsnow.com",
+   "year": 2001
+  },
+  {
+   "cars": 73,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 73,
+   "make": "Toyota",
+   "model": "Avalon",
+   "site": "www.toyotapartsnow.com",
+   "year": 1999
+  },
+  {
+   "cars": 18,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 72,
+   "make": "Toyota",
+   "model": "4Runner",
+   "site": "www.toyotapartsnow.com",
+   "year": 2006
+  },
+  {
+   "cars": 36,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 72,
+   "make": "Scion",
+   "model": "tC",
+   "site": "www.toyotapartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 5,
+   "gain": 70,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 2018
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "side-mirrors",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 5,
+   "gain": 70,
+   "make": "Toyota",
+   "model": "Tercel",
+   "site": "www.toyotapartsnow.com",
+   "year": 1997
+  },
+  {
+   "cars": 23,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 69,
+   "make": "Toyota",
+   "model": "Prius C",
+   "site": "www.toyotapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 17,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 4,
+   "gain": 68,
+   "make": "Toyota",
+   "model": "Prius V",
+   "site": "www.toyotapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 66,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 66,
+   "make": "Toyota",
+   "model": "Sienna",
+   "site": "www.toyotapartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 13,
+   "cats": [
+    "climate-control",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 5,
+   "gain": 65,
+   "make": "Toyota",
+   "model": "RAV4",
+   "site": "www.toyotapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 32,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 64,
+   "make": "Lexus",
+   "model": "LS 460",
+   "site": "www.lexuspartsnow.com",
+   "year": 2008
+  },
+  {
+   "cars": 32,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 2,
+   "gain": 64,
+   "make": "Toyota",
+   "model": "RAV4",
+   "site": "www.toyotapartsnow.com",
+   "year": 1997
+  },
+  {
+   "cars": 31,
+   "cats": [
+    "climate-control",
+    "window-switch"
+   ],
+   "classes": 2,
+   "gain": 62,
+   "make": "Toyota",
+   "model": "Echo",
+   "site": "www.toyotapartsnow.com",
+   "year": 2003
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 5,
+   "gain": 60,
+   "make": "Scion",
+   "model": "xD",
+   "site": "www.toyotapartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 5,
+   "gain": 60,
+   "make": "Scion",
+   "model": "xD",
+   "site": "www.toyotapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 20,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 60,
+   "make": "Toyota",
+   "model": "Prius C",
+   "site": "www.toyotapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 29,
+   "cats": [
+    "climate-control",
+    "window-switch"
+   ],
+   "classes": 2,
+   "gain": 58,
+   "make": "Toyota",
+   "model": "Echo",
+   "site": "www.toyotapartsnow.com",
+   "year": 2002
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "hood",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 57,
+   "gain": 57,
+   "make": "Lexus",
+   "model": "GS 450h",
+   "site": "www.lexuspartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 57,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 57,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 56,
+   "make": "Toyota",
+   "model": "4Runner",
+   "site": "www.toyotapartsnow.com",
+   "year": 2007
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 4,
+   "gain": 56,
+   "make": "Toyota",
+   "model": "Prius V",
+   "site": "www.toyotapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 28,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 56,
+   "make": "Scion",
+   "model": "tC",
+   "site": "www.toyotapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 28,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 56,
+   "make": "Scion",
+   "model": "tC",
+   "site": "www.toyotapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 5,
+   "gain": 55,
+   "make": "Toyota",
+   "model": "Highlander",
+   "site": "www.toyotapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 54,
+   "make": "Toyota",
+   "model": "Pickup",
+   "site": "www.toyotapartsnow.com",
+   "year": 1990
+  },
+  {
+   "cars": 17,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 51,
+   "make": "Scion",
+   "model": "xB",
+   "site": "www.toyotapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 50,
+   "make": "Toyota",
+   "model": "Pickup",
+   "site": "www.toyotapartsnow.com",
+   "year": 1995
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 5,
+   "gain": 50,
+   "make": "Scion",
+   "model": "xD",
+   "site": "www.toyotapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "climate-control",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 5,
+   "gain": 50,
+   "make": "Toyota",
+   "model": "RAV4",
+   "site": "www.toyotapartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 25,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 50,
+   "make": "Toyota",
+   "model": "Tacoma",
+   "site": "www.toyotapartsnow.com",
+   "year": 1998
+  },
+  {
+   "cars": 50,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 50,
+   "make": "Toyota",
+   "model": "Sienna",
+   "site": "www.toyotapartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 49,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 49,
+   "make": "Toyota",
+   "model": "Avalon",
+   "site": "www.toyotapartsnow.com",
+   "year": 1997
+  },
+  {
+   "cars": 16,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 48,
+   "make": "Scion",
+   "model": "xB",
+   "site": "www.toyotapartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 16,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 48,
+   "make": "Toyota",
+   "model": "Prius C",
+   "site": "www.toyotapartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 5,
+   "gain": 45,
+   "make": "Toyota",
+   "model": "Yaris",
+   "site": "www.toyotapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 45,
+   "make": "Toyota",
+   "model": "Tacoma",
+   "site": "www.toyotapartsnow.com",
+   "year": 1996
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 4,
+   "gain": 44,
+   "make": "Toyota",
+   "model": "Prius V",
+   "site": "www.toyotapartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 22,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 44,
+   "make": "Scion",
+   "model": "tC",
+   "site": "www.toyotapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 42,
+   "gain": 42,
+   "make": "Toyota",
+   "model": "Camry Hybrid",
+   "site": "www.toyotapartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 42,
+   "make": "Toyota",
+   "model": "Venza",
+   "site": "www.toyotapartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 8,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 5,
+   "gain": 40,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 2019
+  },
+  {
+   "cars": 8,
+   "cats": [
+    "climate-control",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 5,
+   "gain": 40,
+   "make": "Toyota",
+   "model": "RAV4",
+   "site": "www.toyotapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 13,
+   "gain": 39,
+   "make": "Toyota",
+   "model": "4Runner",
+   "site": "www.toyotapartsnow.com",
+   "year": 1992
+  },
+  {
+   "cars": 19,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 38,
+   "make": "Toyota",
+   "model": "Tacoma",
+   "site": "www.toyotapartsnow.com",
+   "year": 2000
+  },
+  {
+   "cars": 37,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 37,
+   "make": "Toyota",
+   "model": "Sienna",
+   "site": "www.toyotapartsnow.com",
+   "year": 2003
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 36,
+   "make": "Toyota",
+   "model": "4Runner",
+   "site": "www.toyotapartsnow.com",
+   "year": 2008
+  },
+  {
+   "cars": 18,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 36,
+   "make": "Toyota",
+   "model": "Tacoma",
+   "site": "www.toyotapartsnow.com",
+   "year": 1999
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 5,
+   "gain": 35,
+   "make": "Scion",
+   "model": "xD",
+   "site": "www.toyotapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 35,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 35,
+   "make": "Toyota",
+   "model": "4Runner",
+   "site": "www.toyotapartsnow.com",
+   "year": 2001
+  },
+  {
+   "cars": 35,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 35,
+   "make": "Toyota",
+   "model": "4Runner",
+   "site": "www.toyotapartsnow.com",
+   "year": 2002
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 33,
+   "make": "Toyota",
+   "model": "Tacoma",
+   "site": "www.toyotapartsnow.com",
+   "year": 1997
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 33,
+   "make": "Toyota",
+   "model": "Venza",
+   "site": "www.toyotapartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "climate-control",
+    "side-mirrors",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 16,
+   "gain": 32,
+   "make": "Toyota",
+   "model": "Prius",
+   "site": "www.toyotapartsnow.com",
+   "year": 2017
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "headlights",
+    "tail-lights"
+   ],
+   "classes": 8,
+   "gain": 32,
+   "make": "Lexus",
+   "model": "RX 350",
+   "site": "www.lexuspartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 32,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 32,
+   "make": "Toyota",
+   "model": "Sienna",
+   "site": "www.toyotapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "climate-control",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 15,
+   "gain": 30,
+   "make": "Toyota",
+   "model": "Prius",
+   "site": "www.toyotapartsnow.com",
+   "year": 2019
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "headlights",
+    "window-switch"
+   ],
+   "classes": 5,
+   "gain": 30,
+   "make": "Toyota",
+   "model": "Camry Hybrid",
+   "site": "www.toyotapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 2,
+   "gain": 30,
+   "make": "Toyota",
+   "model": "RAV4",
+   "site": "www.toyotapartsnow.com",
+   "year": 1996
+  },
+  {
+   "cars": 30,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 30,
+   "make": "Toyota",
+   "model": "Avalon",
+   "site": "www.toyotapartsnow.com",
+   "year": 1996
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "climate-control",
+    "window-switch"
+   ],
+   "classes": 4,
+   "gain": 28,
+   "make": "Toyota",
+   "model": "RAV4",
+   "site": "www.toyotapartsnow.com",
+   "year": 2018
+  },
+  {
+   "cars": 28,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 28,
+   "make": "Toyota",
+   "model": "Avalon",
+   "site": "www.toyotapartsnow.com",
+   "year": 1995
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-rear",
+    "door-rear",
+    "fender",
+    "hood",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 9,
+   "gain": 27,
+   "make": "Toyota",
+   "model": "Prius Plug-In",
+   "site": "www.toyotapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 27,
+   "make": "Toyota",
+   "model": "Prius C",
+   "site": "www.toyotapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 27,
+   "make": "Toyota",
+   "model": "Venza",
+   "site": "www.toyotapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 26,
+   "make": "Lexus",
+   "model": "GS 430",
+   "site": "www.lexuspartsnow.com",
+   "year": 2003
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "climate-control",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 13,
+   "gain": 26,
+   "make": "Toyota",
+   "model": "Matrix",
+   "site": "www.toyotapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 13,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 26,
+   "make": "Scion",
+   "model": "tC",
+   "site": "www.toyotapartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 26,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 26,
+   "make": "Toyota",
+   "model": "Sienna",
+   "site": "www.toyotapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "climate-control",
+    "window-switch"
+   ],
+   "classes": 4,
+   "gain": 24,
+   "make": "Toyota",
+   "model": "RAV4",
+   "site": "www.toyotapartsnow.com",
+   "year": 2017
+  },
+  {
+   "cars": 23,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 23,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 1990
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 22,
+   "gain": 22,
+   "make": "Toyota",
+   "model": "Sequoia",
+   "site": "www.toyotapartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 22,
+   "make": "Scion",
+   "model": "tC",
+   "site": "www.toyotapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 22,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 22,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 1991
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 5,
+   "gain": 20,
+   "make": "Toyota",
+   "model": "Highlander",
+   "site": "www.toyotapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 20,
+   "make": "Lexus",
+   "model": "HS 250h",
+   "site": "www.lexuspartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 20,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 20,
+   "make": "Toyota",
+   "model": "Tacoma",
+   "site": "www.toyotapartsnow.com",
+   "year": 2001
+  },
+  {
+   "cars": 19,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 19,
+   "make": "Toyota",
+   "model": "Tercel",
+   "site": "www.toyotapartsnow.com",
+   "year": 1996
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 18,
+   "make": "Toyota",
+   "model": "Sequoia",
+   "site": "www.toyotapartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 18,
+   "make": "Scion",
+   "model": "xB",
+   "site": "www.toyotapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "climate-control",
+    "window-switch"
+   ],
+   "classes": 2,
+   "gain": 18,
+   "make": "Toyota",
+   "model": "Echo",
+   "site": "www.toyotapartsnow.com",
+   "year": 2005
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 18,
+   "make": "Toyota",
+   "model": "Sienna",
+   "site": "www.toyotapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 18,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 18,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 1990
+  },
+  {
+   "cars": 17,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 17,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 1989
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "side-mirrors",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 16,
+   "gain": 16,
+   "make": "Toyota",
+   "model": "Prius Prime",
+   "site": "www.toyotapartsnow.com",
+   "year": 2018
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "climate-control",
+    "window-switch"
+   ],
+   "classes": 4,
+   "gain": 16,
+   "make": "Toyota",
+   "model": "RAV4",
+   "site": "www.toyotapartsnow.com",
+   "year": 2016
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 15,
+   "gain": 15,
+   "make": "Toyota",
+   "model": "Prius Prime",
+   "site": "www.toyotapartsnow.com",
+   "year": 2019
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 15,
+   "make": "Toyota",
+   "model": "Tacoma",
+   "site": "www.toyotapartsnow.com",
+   "year": 1995
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 15,
+   "make": "Toyota",
+   "model": "Tacoma",
+   "site": "www.toyotapartsnow.com",
+   "year": 2002
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 14,
+   "make": "Toyota",
+   "model": "Yaris",
+   "site": "www.toyotapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 14,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 1992
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 14,
+   "make": "Toyota",
+   "model": "Tacoma",
+   "site": "www.toyotapartsnow.com",
+   "year": 2003
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 13,
+   "gain": 13,
+   "make": "Toyota",
+   "model": "Matrix",
+   "site": "www.toyotapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 13,
+   "gain": 13,
+   "make": "Toyota",
+   "model": "Matrix",
+   "site": "www.toyotapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "headlights",
+    "window-regulator"
+   ],
+   "classes": 12,
+   "gain": 12,
+   "make": "Toyota",
+   "model": "Camry Hybrid",
+   "site": "www.toyotapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-rear",
+    "door-rear",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 6,
+   "gain": 12,
+   "make": "Toyota",
+   "model": "Prius Plug-In",
+   "site": "www.toyotapartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "climate-control",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 4,
+   "gain": 12,
+   "make": "Toyota",
+   "model": "Paseo",
+   "site": "www.toyotapartsnow.com",
+   "year": 1997
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "door-front",
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 12,
+   "make": "Toyota",
+   "model": "Tundra",
+   "site": "www.toyotapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 12,
+   "make": "Lexus",
+   "model": "GX 470",
+   "site": "www.lexuspartsnow.com",
+   "year": 2004
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "climate-control",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 11,
+   "make": "Toyota",
+   "model": "Prius",
+   "site": "www.toyotapartsnow.com",
+   "year": 2021
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 11,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 1989
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 11,
+   "make": "Toyota",
+   "model": "Sienna",
+   "site": "www.toyotapartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 11,
+   "make": "Toyota",
+   "model": "Tacoma",
+   "site": "www.toyotapartsnow.com",
+   "year": 2004
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 5,
+   "gain": 10,
+   "make": "Scion",
+   "model": "xD",
+   "site": "www.toyotapartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 10,
+   "make": "Lexus",
+   "model": "CT 200h",
+   "site": "www.lexuspartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 10,
+   "make": "Lexus",
+   "model": "LS 460",
+   "site": "www.lexuspartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 10,
+   "make": "Toyota",
+   "model": "FJ Cruiser",
+   "site": "www.toyotapartsnow.com",
+   "year": 2007
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 10,
+   "make": "Toyota",
+   "model": "Sienna",
+   "site": "www.toyotapartsnow.com",
+   "year": 2016
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 10,
+   "make": "Toyota",
+   "model": "Sienna",
+   "site": "www.toyotapartsnow.com",
+   "year": 2018
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 2,
+   "gain": 10,
+   "make": "Toyota",
+   "model": "Venza",
+   "site": "www.toyotapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 10,
+   "make": "Toyota",
+   "model": "Yaris",
+   "site": "www.toyotapartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 9,
+   "make": "Toyota",
+   "model": "Sequoia",
+   "site": "www.toyotapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 9,
+   "make": "Scion",
+   "model": "iM",
+   "site": "www.toyotapartsnow.com",
+   "year": 2016
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "headlights"
+   ],
+   "classes": 3,
+   "gain": 9,
+   "make": "Toyota",
+   "model": "4Runner",
+   "site": "www.toyotapartsnow.com",
+   "year": 1988
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "headlights"
+   ],
+   "classes": 3,
+   "gain": 9,
+   "make": "Toyota",
+   "model": "Pickup",
+   "site": "www.toyotapartsnow.com",
+   "year": 1987
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 9,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 1988
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 8,
+   "make": "Lexus",
+   "model": "LS 460",
+   "site": "www.lexuspartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 8,
+   "make": "Lexus",
+   "model": "LS 460",
+   "site": "www.lexuspartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 8,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 2021
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "climate-control",
+    "window-switch"
+   ],
+   "classes": 2,
+   "gain": 8,
+   "make": "Toyota",
+   "model": "Echo",
+   "site": "www.toyotapartsnow.com",
+   "year": 2004
+  },
+  {
+   "cars": 8,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 8,
+   "make": "Toyota",
+   "model": "Tacoma",
+   "site": "www.toyotapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 7,
+   "gain": 7,
+   "make": "Toyota",
+   "model": "Sequoia",
+   "site": "www.toyotapartsnow.com",
+   "year": 2016
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-rear",
+    "door-rear",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 6,
+   "gain": 6,
+   "make": "Toyota",
+   "model": "Prius Plug-In",
+   "site": "www.toyotapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "headlights"
+   ],
+   "classes": 3,
+   "gain": 6,
+   "make": "Toyota",
+   "model": "4Runner",
+   "site": "www.toyotapartsnow.com",
+   "year": 1987
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 6,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 2020
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 6,
+   "make": "Toyota",
+   "model": "Corolla iM",
+   "site": "www.toyotapartsnow.com",
+   "year": 2017
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "headlights"
+   ],
+   "classes": 3,
+   "gain": 6,
+   "make": "Toyota",
+   "model": "Pickup",
+   "site": "www.toyotapartsnow.com",
+   "year": 1988
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 6,
+   "make": "Toyota",
+   "model": "Prius C",
+   "site": "www.toyotapartsnow.com",
+   "year": 2016
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 6,
+   "make": "Toyota",
+   "model": "Tercel",
+   "site": "www.toyotapartsnow.com",
+   "year": 1998
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 6,
+   "make": "Lexus",
+   "model": "GX 470",
+   "site": "www.lexuspartsnow.com",
+   "year": 2005
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 6,
+   "make": "Scion",
+   "model": "tC",
+   "site": "www.toyotapartsnow.com",
+   "year": 2016
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 6,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 2022
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 6,
+   "make": "Toyota",
+   "model": "Mirai",
+   "site": "www.toyotapartsnow.com",
+   "year": 2017
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 6,
+   "make": "Toyota",
+   "model": "Prius V",
+   "site": "www.toyotapartsnow.com",
+   "year": 2016
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 6,
+   "make": "Toyota",
+   "model": "Prius V",
+   "site": "www.toyotapartsnow.com",
+   "year": 2017
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 6,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 1987
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-rear",
+    "door-rear",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 5,
+   "make": "Toyota",
+   "model": "Prius Plug-In",
+   "site": "www.toyotapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "Toyota",
+   "model": "Highlander",
+   "site": "www.toyotapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "Toyota",
+   "model": "Highlander",
+   "site": "www.toyotapartsnow.com",
+   "year": 2016
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "Toyota",
+   "model": "Highlander",
+   "site": "www.toyotapartsnow.com",
+   "year": 2018
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "Toyota",
+   "model": "Mirai",
+   "site": "www.toyotapartsnow.com",
+   "year": 2018
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "Toyota",
+   "model": "Prius V",
+   "site": "www.toyotapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "Toyota",
+   "model": "Sienna",
+   "site": "www.toyotapartsnow.com",
+   "year": 2017
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "Toyota",
+   "model": "Tacoma",
+   "site": "www.toyotapartsnow.com",
+   "year": 2019
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "Toyota",
+   "model": "Tundra",
+   "site": "www.toyotapartsnow.com",
+   "year": 2016
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "Toyota",
+   "model": "Tundra",
+   "site": "www.toyotapartsnow.com",
+   "year": 2019
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 4,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 1987
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 4,
+   "make": "Toyota",
+   "model": "Tacoma",
+   "site": "www.toyotapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 4,
+   "make": "Toyota",
+   "model": "Tacoma",
+   "site": "www.toyotapartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 3,
+   "make": "Toyota",
+   "model": "Corolla iM",
+   "site": "www.toyotapartsnow.com",
+   "year": 2018
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 3,
+   "make": "Toyota",
+   "model": "Prius C",
+   "site": "www.toyotapartsnow.com",
+   "year": 2017
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 3,
+   "make": "Toyota",
+   "model": "Tundra",
+   "site": "www.toyotapartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 3,
+   "make": "Toyota",
+   "model": "Tacoma",
+   "site": "www.toyotapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 3,
+   "make": "Toyota",
+   "model": "Venza",
+   "site": "www.toyotapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Lexus",
+   "model": "CT 200h",
+   "site": "www.lexuspartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Lexus",
+   "model": "CT 200h",
+   "site": "www.lexuspartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Lexus",
+   "model": "CT 200h",
+   "site": "www.lexuspartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Lexus",
+   "model": "CT 200h",
+   "site": "www.lexuspartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Lexus",
+   "model": "GX 470",
+   "site": "www.lexuspartsnow.com",
+   "year": 2003
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Lexus",
+   "model": "GX 470",
+   "site": "www.lexuspartsnow.com",
+   "year": 2006
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Lexus",
+   "model": "GX 470",
+   "site": "www.lexuspartsnow.com",
+   "year": 2007
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Lexus",
+   "model": "HS 250h",
+   "site": "www.lexuspartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Lexus",
+   "model": "LS 460",
+   "site": "www.lexuspartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Lexus",
+   "model": "LS 460",
+   "site": "www.lexuspartsnow.com",
+   "year": 2016
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 2023
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Toyota",
+   "model": "Camry",
+   "site": "www.toyotapartsnow.com",
+   "year": 2024
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Toyota",
+   "model": "FJ Cruiser",
+   "site": "www.toyotapartsnow.com",
+   "year": 2008
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Toyota",
+   "model": "Highlander",
+   "site": "www.toyotapartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Toyota",
+   "model": "Highlander",
+   "site": "www.toyotapartsnow.com",
+   "year": 2019
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Toyota",
+   "model": "Mirai",
+   "site": "www.toyotapartsnow.com",
+   "year": 2023
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Toyota",
+   "model": "Sienna",
+   "site": "www.toyotapartsnow.com",
+   "year": 2019
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Toyota",
+   "model": "Tacoma",
+   "site": "www.toyotapartsnow.com",
+   "year": 2021
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Toyota",
+   "model": "Tundra",
+   "site": "www.toyotapartsnow.com",
+   "year": 2017
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 2,
+   "make": "Toyota",
+   "model": "4Runner",
+   "site": "www.toyotapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 2,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 1984
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 2,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 1986
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 1,
+   "make": "Toyota",
+   "model": "4Runner",
+   "site": "www.toyotapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 1,
+   "make": "Toyota",
+   "model": "4Runner",
+   "site": "www.toyotapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 1,
+   "make": "Toyota",
+   "model": "Corolla",
+   "site": "www.toyotapartsnow.com",
+   "year": 1985
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 1,
+   "make": "Toyota",
+   "model": "Cressida",
+   "site": "www.toyotapartsnow.com",
+   "year": 1989
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 1,
+   "make": "Toyota",
+   "model": "Cressida",
+   "site": "www.toyotapartsnow.com",
+   "year": 1990
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 283,
+   "gain": 0,
+   "make": "Lexus",
+   "model": "IS 350",
+   "site": "www.lexuspartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "headlights",
+    "side-mirrors",
+    "tail-lights"
+   ],
+   "classes": 232,
+   "gain": 0,
+   "make": "Lexus",
+   "model": "RX 350",
+   "site": "www.lexuspartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 137,
+   "gain": 0,
+   "make": "Lexus",
+   "model": "GS 430",
+   "site": "www.lexuspartsnow.com",
+   "year": 2007
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "headlights",
+    "side-mirrors",
+    "tail-lights"
+   ],
+   "classes": 137,
+   "gain": 0,
+   "make": "Lexus",
+   "model": "RX 450h",
+   "site": "www.lexuspartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 116,
+   "gain": 0,
+   "make": "Lexus",
+   "model": "IS 350",
+   "site": "www.lexuspartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "headlights",
+    "side-mirrors",
+    "tail-lights"
+   ],
+   "classes": 108,
+   "gain": 0,
+   "make": "Lexus",
+   "model": "RX 350",
+   "site": "www.lexuspartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "headlights",
+    "side-mirrors",
+    "tail-lights"
+   ],
+   "classes": 108,
+   "gain": 0,
+   "make": "Lexus",
+   "model": "RX 450h",
+   "site": "www.lexuspartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "headlights",
+    "side-mirrors",
+    "tail-lights"
+   ],
+   "classes": 102,
+   "gain": 0,
+   "make": "Lexus",
+   "model": "RX 450h",
+   "site": "www.lexuspartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 90,
+   "gain": 0,
+   "make": "Lexus",
+   "model": "IS 350",
+   "site": "www.lexuspartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 81,
+   "gain": 0,
+   "make": "Lexus",
+   "model": "GS 460",
+   "site": "www.lexuspartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 74,
+   "gain": 0,
+   "make": "Lexus",
+   "model": "GS 460",
+   "site": "www.lexuspartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "hood",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 57,
+   "gain": 0,
+   "make": "Lexus",
+   "model": "GS 450h",
+   "site": "www.lexuspartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 44,
+   "gain": 0,
+   "make": "Lexus",
+   "model": "GS 460",
+   "site": "www.lexuspartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 36,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Camry Hybrid",
+   "site": "www.toyotapartsnow.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 34,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Camry Hybrid",
+   "site": "www.toyotapartsnow.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "door-front",
+    "door-rear",
+    "fender",
+    "hood",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 28,
+   "gain": 0,
+   "make": "Lexus",
+   "model": "GS 450h",
+   "site": "www.lexuspartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "hood",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 26,
+   "gain": 0,
+   "make": "Lexus",
+   "model": "GS 430",
+   "site": "www.lexuspartsnow.com",
+   "year": 2004
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "hood",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 0,
+   "make": "Lexus",
+   "model": "GS 430",
+   "site": "www.lexuspartsnow.com",
+   "year": 2005
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "side-mirrors",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Prius Prime",
+   "site": "www.toyotapartsnow.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 15,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Prius",
+   "site": "www.toyotapartsnow.com",
+   "year": 2020
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 15,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Prius Prime",
+   "site": "www.toyotapartsnow.com",
+   "year": 2020
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 14,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Sequoia",
+   "site": "www.toyotapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Prius",
+   "site": "www.toyotapartsnow.com",
+   "year": 2022
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Prius Prime",
+   "site": "www.toyotapartsnow.com",
+   "year": 2021
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Prius Prime",
+   "site": "www.toyotapartsnow.com",
+   "year": 2022
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Sequoia",
+   "site": "www.toyotapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 7,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Sequoia",
+   "site": "www.toyotapartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 7,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Sequoia",
+   "site": "www.toyotapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "fender",
+    "headlights",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 7,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Sequoia",
+   "site": "www.toyotapartsnow.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "fender",
+    "headlights"
+   ],
+   "classes": 6,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "4Runner",
+   "site": "www.toyotapartsnow.com",
+   "year": 1989
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "side-mirrors",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 5,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Paseo",
+   "site": "www.toyotapartsnow.com",
+   "year": 1996
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "fender",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Sequoia",
+   "site": "www.toyotapartsnow.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "fender",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Sequoia",
+   "site": "www.toyotapartsnow.com",
+   "year": 2019
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "fender",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Sequoia",
+   "site": "www.toyotapartsnow.com",
+   "year": 2020
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "fender",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Sequoia",
+   "site": "www.toyotapartsnow.com",
+   "year": 2021
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "fender",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Sequoia",
+   "site": "www.toyotapartsnow.com",
+   "year": 2022
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "4Runner",
+   "site": "www.toyotapartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Avalon",
+   "site": "www.toyotapartsnow.com",
+   "year": 2019
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Avalon",
+   "site": "www.toyotapartsnow.com",
+   "year": 2020
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Avalon",
+   "site": "www.toyotapartsnow.com",
+   "year": 2021
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Avalon",
+   "site": "www.toyotapartsnow.com",
+   "year": 2022
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "FJ Cruiser",
+   "site": "www.toyotapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "FJ Cruiser",
+   "site": "www.toyotapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "FJ Cruiser",
+   "site": "www.toyotapartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Land Cruiser",
+   "site": "www.toyotapartsnow.com",
+   "year": 2008
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Land Cruiser",
+   "site": "www.toyotapartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Land Cruiser",
+   "site": "www.toyotapartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Land Cruiser",
+   "site": "www.toyotapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Land Cruiser",
+   "site": "www.toyotapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Prius C",
+   "site": "www.toyotapartsnow.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Prius C",
+   "site": "www.toyotapartsnow.com",
+   "year": 2019
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Lexus",
+   "model": "CT 200h",
+   "site": "www.lexuspartsnow.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Lexus",
+   "model": "CT 200h",
+   "site": "www.lexuspartsnow.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Lexus",
+   "model": "GX 470",
+   "site": "www.lexuspartsnow.com",
+   "year": 2008
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Lexus",
+   "model": "GX 470",
+   "site": "www.lexuspartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Lexus",
+   "model": "HS 250h",
+   "site": "www.lexuspartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Lexus",
+   "model": "LS 460",
+   "site": "www.lexuspartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Lexus",
+   "model": "LS 460",
+   "site": "www.lexuspartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Lexus",
+   "model": "LS 460",
+   "site": "www.lexuspartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Lexus",
+   "model": "LS 460",
+   "site": "www.lexuspartsnow.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "FJ Cruiser",
+   "site": "www.toyotapartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "FJ Cruiser",
+   "site": "www.toyotapartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "FJ Cruiser",
+   "site": "www.toyotapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Highlander",
+   "site": "www.toyotapartsnow.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Land Cruiser",
+   "site": "www.toyotapartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Land Cruiser",
+   "site": "www.toyotapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Land Cruiser",
+   "site": "www.toyotapartsnow.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Land Cruiser",
+   "site": "www.toyotapartsnow.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Land Cruiser",
+   "site": "www.toyotapartsnow.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Land Cruiser",
+   "site": "www.toyotapartsnow.com",
+   "year": 2019
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Land Cruiser",
+   "site": "www.toyotapartsnow.com",
+   "year": 2020
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Land Cruiser",
+   "site": "www.toyotapartsnow.com",
+   "year": 2021
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Mirai",
+   "site": "www.toyotapartsnow.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Mirai",
+   "site": "www.toyotapartsnow.com",
+   "year": 2019
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Mirai",
+   "site": "www.toyotapartsnow.com",
+   "year": 2020
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Mirai",
+   "site": "www.toyotapartsnow.com",
+   "year": 2021
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Mirai",
+   "site": "www.toyotapartsnow.com",
+   "year": 2022
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Mirai",
+   "site": "www.toyotapartsnow.com",
+   "year": 2024
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Mirai",
+   "site": "www.toyotapartsnow.com",
+   "year": 2025
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Sienna",
+   "site": "www.toyotapartsnow.com",
+   "year": 2020
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Tacoma",
+   "site": "www.toyotapartsnow.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Tacoma",
+   "site": "www.toyotapartsnow.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Tacoma",
+   "site": "www.toyotapartsnow.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Tacoma",
+   "site": "www.toyotapartsnow.com",
+   "year": 2020
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Tacoma",
+   "site": "www.toyotapartsnow.com",
+   "year": 2022
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Tacoma",
+   "site": "www.toyotapartsnow.com",
+   "year": 2023
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Tundra",
+   "site": "www.toyotapartsnow.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Tundra",
+   "site": "www.toyotapartsnow.com",
+   "year": 2020
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Tundra",
+   "site": "www.toyotapartsnow.com",
+   "year": 2021
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Venza",
+   "site": "www.toyotapartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Venza",
+   "site": "www.toyotapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "4Runner",
+   "site": "www.toyotapartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "4Runner",
+   "site": "www.toyotapartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "4Runner",
+   "site": "www.toyotapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Cressida",
+   "site": "www.toyotapartsnow.com",
+   "year": 1991
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-switch"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Toyota",
+   "model": "Cressida",
+   "site": "www.toyotapartsnow.com",
+   "year": 1992
+  }
+ ],
+ "unrouted_makes": {}
+}

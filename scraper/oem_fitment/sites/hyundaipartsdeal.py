@@ -78,6 +78,10 @@ SUBCATS = {
     "grille": r"radiator_grille|^grille|^(front_bumper|bumper_front)$",
     "trunk-lid": r"trunk_lid_back_panel|back_panel_trunk_lid|^trunk_lid$",
     "liftgate": r"^tail_gate$|^back_door$",
+    # tier C (§8): subs from the R2 years manifests (Hyundai and Kia)
+    "wiper-motor": r"^windshield_wiper(_rear)?$|^rear_wiper_washer$|wiper_motor",
+    "knuckle": r"^front_axle$|^rear_axle$|knuckle|carrier",
+    "strut": r"spring_strut|strut_front|strut_rear|shock_absorber",
     # tier W (ops/interchange.md "Wheels"): the years manifest lists chassis/wheel_cap
     # ("Wheel & Cap"); accessories/wheel_kit_alloy and wheel_locks are not read
     "wheels": r"^wheel_cap$",
@@ -138,6 +142,10 @@ PARTS = {
                   PNL + r"|Torsion|Bar\b|Spoiler|Lamp|Cylinder|Actuator|Cover|Bumper|Striker"),
     "liftgate": (r"^Panel Assy-Tail ?Gate|^Tail ?Gate Assy|^Panel Assy-Back Door|^Door Assy-Tail ?Gate",
                  PNL + r"|Glass|Spoiler|Lamp|Cylinder|Actuator|Cover|Bumper|Striker|Wiper|Motor|Switch|Strut|Lifter"),
+    # tier C: name rule pending (written after reading the trial's list rows)
+    "wiper-motor": (r"(?!x)x", ""),
+    "knuckle": (r"(?!x)x", ""),
+    "strut": (r"(?!x)x", ""),
     # tier W: 2005 XG350 chassis/wheel_cap (fetch.py 2026-11-09) prints "Wheel Assy-Aluminium"
     # beside "Wheel Assy-Temporary" (the spare), "Cap Assy-Wheel Hub", "Nut-Hub" and
     # "Clamp-Spare Tire". Road wheels only: a spare / temporary / compact word

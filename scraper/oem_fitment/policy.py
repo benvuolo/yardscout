@@ -67,9 +67,29 @@ EXTERIOR_HOLD_CATS = frozenset({"bumper-front", "bumper-rear", "grille", "headli
                                 "hood", "door-front", "door-rear", "liftgate", "tailgate", "trunk-lid"})
 
 
+# Per-namespace option holds (hub decision 2026-11-09, make breadth §11.4
+# Subaru resample): categories where an option we cannot see per row (heated
+# vs non-heated mirror; US vs non-US configurations the catalog does not
+# mark) splits the part. A cross-model Likely group in one of these is held
+# like an exterior group (held_option_cross_model), listed in
+# held_exterior.json for the owner checklist. Only removes claims.
+OPTION_HOLD_CATS: dict = {"subaru": frozenset({"side-mirrors", "gauge-cluster"})}
+# gauge-cluster added after the round-3 resample: 85021AJ19A and 85002AL05A
+# are Canada-market km/h clusters listed under US years with no market note.
+
+
+def held_cross_model_cat(ns: str, cat: str) -> str | None:
+    """Refusal code when a cross-model Likely group in (ns, cat) is held."""
+    if cat in EXTERIOR_HOLD_CATS:
+        return "held_exterior_cross_model"
+    if cat in OPTION_HOLD_CATS.get(ns, ()):
+        return "held_option_cross_model"
+    return None
+
+
 # Namespaces withheld from shipping (2026-11-09, ops/interchange.md): their
 # held groups are never released by the allowlist.
-WITHHELD_NS = frozenset({"subaru"})
+WITHHELD_NS = frozenset()   # subaru re-shipped 2026-11-09 (§11.4 round 4: 0 WRONG; hub confirmed)
 # §5.16 release allowlist: exact (ns, cat, pn, apps) entries let a held group
 # through the exterior hold; OEM_RELEASE_ALLOWLIST (tests only) points at
 # another file with the same layout.
@@ -88,6 +108,23 @@ def release_allowlist(path=None) -> set:
         if g.get("ns") in WITHHELD_NS:
             continue
         out.add((g["ns"], g["cat"], tuple(sorted(g["pn"])), tuple(tuple(a) for a in g["apps"])))
+    return out
+
+
+def release_notes(path=None) -> dict:
+    """{(ns, cat, pns, apps): reason text} for allowlist entries that carry a
+    "note" (2026-11-09, hub: a released group names the option split its
+    verification source states, e.g. a turbo-scoop hood). Same key as
+    release_allowlist(); the text replaces the generic reason in the note."""
+    import json
+    p = _Path(path) if path else RELEASE_ALLOWLIST_PATH
+    if not p.exists():
+        return {}
+    out = {}
+    for g in json.loads(p.read_text()).get("groups") or []:
+        if g.get("ns") in WITHHELD_NS or not g.get("note"):
+            continue
+        out[(g["ns"], g["cat"], tuple(sorted(g["pn"])), tuple(tuple(a) for a in g["apps"]))] = g["note"]
     return out
 
 

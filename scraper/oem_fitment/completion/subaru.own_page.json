@@ -1,0 +1,2179 @@
+{
+ "as_of": "2026-11-06T06:33:58Z",
+ "built_on": "oem-raw@75dc442",
+ "kind": "own_page",
+ "note": "R3 input (CURATION_SPEC 3.2 R3, 5.16): vehicle-years left out of Likely candidate classes because their own page was never read; crawl.py --complete reads those pages and the curator re-checks them. Never shipped.",
+ "ns": "subaru",
+ "rows": [
+  {
+   "cars": 87,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 140,
+   "gain": 12180,
+   "make": "Subaru",
+   "model": "Outback",
+   "site": "www.subarupartsdeal.com",
+   "year": 2002
+  },
+  {
+   "cars": 102,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 102,
+   "gain": 10404,
+   "make": "Subaru",
+   "model": "Outback",
+   "site": "www.subarupartsdeal.com",
+   "year": 2003
+  },
+  {
+   "cars": 117,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 86,
+   "gain": 10062,
+   "make": "Subaru",
+   "model": "Outback",
+   "site": "www.subarupartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 110,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "grille",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 82,
+   "gain": 9020,
+   "make": "Subaru",
+   "model": "Outback",
+   "site": "www.subarupartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 111,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 77,
+   "gain": 8547,
+   "make": "Subaru",
+   "model": "Outback",
+   "site": "www.subarupartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 110,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 72,
+   "gain": 7920,
+   "make": "Subaru",
+   "model": "Outback",
+   "site": "www.subarupartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 72,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 100,
+   "gain": 7200,
+   "make": "Subaru",
+   "model": "Outback",
+   "site": "www.subarupartsdeal.com",
+   "year": 2000
+  },
+  {
+   "cars": 54,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 129,
+   "gain": 6966,
+   "make": "Subaru",
+   "model": "Outback",
+   "site": "www.subarupartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 77,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 88,
+   "gain": 6776,
+   "make": "Subaru",
+   "model": "Outback",
+   "site": "www.subarupartsdeal.com",
+   "year": 2001
+  },
+  {
+   "cars": 121,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 51,
+   "gain": 6171,
+   "make": "Subaru",
+   "model": "Legacy",
+   "site": "www.subarupartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 62,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 97,
+   "gain": 6014,
+   "make": "Subaru",
+   "model": "Legacy",
+   "site": "www.subarupartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 108,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 49,
+   "gain": 5292,
+   "make": "Subaru",
+   "model": "Outback",
+   "site": "www.subarupartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 135,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "hood",
+    "side-mirrors"
+   ],
+   "classes": 39,
+   "gain": 5265,
+   "make": "Subaru",
+   "model": "Outback",
+   "site": "www.subarupartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 33,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 159,
+   "gain": 5247,
+   "make": "Subaru",
+   "model": "Impreza",
+   "site": "www.subarupartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 159,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "hood",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 33,
+   "gain": 5247,
+   "make": "Subaru",
+   "model": "Outback",
+   "site": "www.subarupartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 61,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 82,
+   "gain": 5002,
+   "make": "Subaru",
+   "model": "Outback",
+   "site": "www.subarupartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 88,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 56,
+   "gain": 4928,
+   "make": "Subaru",
+   "model": "Outback",
+   "site": "www.subarupartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 72,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 66,
+   "gain": 4752,
+   "make": "Subaru",
+   "model": "Outback",
+   "site": "www.subarupartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 95,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 48,
+   "gain": 4560,
+   "make": "Subaru",
+   "model": "Legacy",
+   "site": "www.subarupartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 53,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 82,
+   "gain": 4346,
+   "make": "Subaru",
+   "model": "Legacy",
+   "site": "www.subarupartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 46,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 89,
+   "gain": 4094,
+   "make": "Subaru",
+   "model": "Impreza",
+   "site": "www.subarupartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 115,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid"
+   ],
+   "classes": 34,
+   "gain": 3910,
+   "make": "Subaru",
+   "model": "Impreza",
+   "site": "www.subarupartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 76,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 49,
+   "gain": 3724,
+   "make": "Subaru",
+   "model": "Legacy",
+   "site": "www.subarupartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 45,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "grille",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 82,
+   "gain": 3690,
+   "make": "Subaru",
+   "model": "Legacy",
+   "site": "www.subarupartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 95,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 37,
+   "gain": 3515,
+   "make": "Subaru",
+   "model": "Legacy",
+   "site": "www.subarupartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 39,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 89,
+   "gain": 3471,
+   "make": "Subaru",
+   "model": "Legacy",
+   "site": "www.subarupartsdeal.com",
+   "year": 2003
+  },
+  {
+   "cars": 77,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 45,
+   "gain": 3465,
+   "make": "Subaru",
+   "model": "Impreza",
+   "site": "www.subarupartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 36,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 96,
+   "gain": 3456,
+   "make": "Subaru",
+   "model": "Legacy",
+   "site": "www.subarupartsdeal.com",
+   "year": 1998
+  },
+  {
+   "cars": 32,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 100,
+   "gain": 3200,
+   "make": "Subaru",
+   "model": "Legacy",
+   "site": "www.subarupartsdeal.com",
+   "year": 2000
+  },
+  {
+   "cars": 94,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 31,
+   "gain": 2914,
+   "make": "Subaru",
+   "model": "Impreza",
+   "site": "www.subarupartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 38,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "hood",
+    "side-mirrors",
+    "tail-lights"
+   ],
+   "classes": 76,
+   "gain": 2888,
+   "make": "Subaru",
+   "model": "Legacy",
+   "site": "www.subarupartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 66,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "trunk-lid"
+   ],
+   "classes": 43,
+   "gain": 2838,
+   "make": "Subaru",
+   "model": "Impreza",
+   "site": "www.subarupartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 78,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 36,
+   "gain": 2808,
+   "make": "Subaru",
+   "model": "Impreza",
+   "site": "www.subarupartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 40,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator",
+    "window-switch"
+   ],
+   "classes": 66,
+   "gain": 2640,
+   "make": "Subaru",
+   "model": "Legacy",
+   "site": "www.subarupartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 30,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 87,
+   "gain": 2610,
+   "make": "Subaru",
+   "model": "Impreza",
+   "site": "www.subarupartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 142,
+   "gain": 2130,
+   "make": "Subaru",
+   "model": "Baja",
+   "site": "www.subarupartsdeal.com",
+   "year": 2003
+  },
+  {
+   "cars": 28,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 75,
+   "gain": 2100,
+   "make": "Subaru",
+   "model": "Legacy",
+   "site": "www.subarupartsdeal.com",
+   "year": 2002
+  },
+  {
+   "cars": 77,
+   "cats": [
+    "bumper-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 26,
+   "gain": 2002,
+   "make": "Subaru",
+   "model": "Impreza",
+   "site": "www.subarupartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 28,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 67,
+   "gain": 1876,
+   "make": "Subaru",
+   "model": "Legacy",
+   "site": "www.subarupartsdeal.com",
+   "year": 1997
+  },
+  {
+   "cars": 38,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "door-rear",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 47,
+   "gain": 1786,
+   "make": "Subaru",
+   "model": "Legacy",
+   "site": "www.subarupartsdeal.com",
+   "year": 2001
+  },
+  {
+   "cars": 29,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 56,
+   "gain": 1624,
+   "make": "Subaru",
+   "model": "Legacy",
+   "site": "www.subarupartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 29,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 54,
+   "gain": 1566,
+   "make": "Subaru",
+   "model": "Legacy",
+   "site": "www.subarupartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 58,
+   "cats": [
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 24,
+   "gain": 1392,
+   "make": "Subaru",
+   "model": "Legacy",
+   "site": "www.subarupartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 53,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 1325,
+   "make": "Subaru",
+   "model": "Impreza",
+   "site": "www.subarupartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 23,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 54,
+   "gain": 1242,
+   "make": "Subaru",
+   "model": "Outback",
+   "site": "www.subarupartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 50,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "liftgate",
+    "tail-lights"
+   ],
+   "classes": 21,
+   "gain": 1050,
+   "make": "Subaru",
+   "model": "Legacy",
+   "site": "www.subarupartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 20,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 50,
+   "gain": 1000,
+   "make": "Subaru",
+   "model": "Outback",
+   "site": "www.subarupartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 24,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "fender",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 40,
+   "gain": 960,
+   "make": "Subaru",
+   "model": "Legacy",
+   "site": "www.subarupartsdeal.com",
+   "year": 1996
+  },
+  {
+   "cars": 40,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 24,
+   "gain": 960,
+   "make": "Subaru",
+   "model": "Impreza",
+   "site": "www.subarupartsdeal.com",
+   "year": 2002
+  },
+  {
+   "cars": 34,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 27,
+   "gain": 918,
+   "make": "Subaru",
+   "model": "XV Crosstrek",
+   "site": "www.subarupartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 16,
+   "cats": [
+    "bumper-front",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 50,
+   "gain": 800,
+   "make": "Subaru",
+   "model": "Legacy",
+   "site": "www.subarupartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 28,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "liftgate",
+    "tail-lights"
+   ],
+   "classes": 22,
+   "gain": 616,
+   "make": "Subaru",
+   "model": "Outback",
+   "site": "www.subarupartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 44,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 14,
+   "gain": 616,
+   "make": "Subaru",
+   "model": "Impreza",
+   "site": "www.subarupartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 45,
+   "gain": 540,
+   "make": "Subaru",
+   "model": "Legacy",
+   "site": "www.subarupartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 20,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 500,
+   "make": "Subaru",
+   "model": "Impreza",
+   "site": "www.subarupartsdeal.com",
+   "year": 2003
+  },
+  {
+   "cars": 34,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 12,
+   "gain": 408,
+   "make": "Subaru",
+   "model": "Impreza",
+   "site": "www.subarupartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "bumper-rear",
+    "door-front",
+    "fender",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 350,
+   "make": "Subaru",
+   "model": "Legacy",
+   "site": "www.subarupartsdeal.com",
+   "year": 1995
+  },
+  {
+   "cars": 20,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 320,
+   "make": "Subaru",
+   "model": "XV Crosstrek",
+   "site": "www.subarupartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 50,
+   "cats": [
+    "bumper-rear",
+    "gauge-cluster",
+    "grille",
+    "side-mirrors"
+   ],
+   "classes": 6,
+   "gain": 300,
+   "make": "Subaru",
+   "model": "Legacy",
+   "site": "www.subarupartsdeal.com",
+   "year": 1999
+  },
+  {
+   "cars": 98,
+   "cats": [
+    "door-front",
+    "liftgate"
+   ],
+   "classes": 3,
+   "gain": 294,
+   "make": "Subaru",
+   "model": "Impreza",
+   "site": "www.subarupartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 33,
+   "gain": 198,
+   "make": "Subaru",
+   "model": "Legacy",
+   "site": "www.subarupartsdeal.com",
+   "year": 2019
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 171,
+   "make": "Subaru",
+   "model": "Outback",
+   "site": "www.subarupartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 14,
+   "gain": 168,
+   "make": "Subaru",
+   "model": "Crosstrek",
+   "site": "www.subarupartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 33,
+   "gain": 165,
+   "make": "Subaru",
+   "model": "Outback",
+   "site": "www.subarupartsdeal.com",
+   "year": 2019
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 34,
+   "gain": 136,
+   "make": "Subaru",
+   "model": "Baja",
+   "site": "www.subarupartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 14,
+   "gain": 98,
+   "make": "Subaru",
+   "model": "Crosstrek",
+   "site": "www.subarupartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 32,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 2,
+   "gain": 64,
+   "make": "Subaru",
+   "model": "Forester",
+   "site": "www.subarupartsdeal.com",
+   "year": 1998
+  },
+  {
+   "cars": 30,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 2,
+   "gain": 60,
+   "make": "Subaru",
+   "model": "Forester",
+   "site": "www.subarupartsdeal.com",
+   "year": 1999
+  },
+  {
+   "cars": 29,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 2,
+   "gain": 58,
+   "make": "Subaru",
+   "model": "Forester",
+   "site": "www.subarupartsdeal.com",
+   "year": 2000
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 26,
+   "gain": 52,
+   "make": "Subaru",
+   "model": "Impreza WRX",
+   "site": "www.subarupartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 45,
+   "make": "Subaru",
+   "model": "Impreza",
+   "site": "www.subarupartsdeal.com",
+   "year": 2019
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-rear",
+    "fender",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights"
+   ],
+   "classes": 15,
+   "gain": 30,
+   "make": "Subaru",
+   "model": "Impreza WRX",
+   "site": "www.subarupartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 30,
+   "make": "Subaru",
+   "model": "Impreza",
+   "site": "www.subarupartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 28,
+   "gain": 28,
+   "make": "Subaru",
+   "model": "Baja",
+   "site": "www.subarupartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 2,
+   "gain": 24,
+   "make": "Subaru",
+   "model": "Impreza",
+   "site": "www.subarupartsdeal.com",
+   "year": 2000
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 2,
+   "gain": 22,
+   "make": "Subaru",
+   "model": "Impreza",
+   "site": "www.subarupartsdeal.com",
+   "year": 1999
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 18,
+   "make": "Subaru",
+   "model": "WRX",
+   "site": "www.subarupartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "liftgate",
+    "tail-lights"
+   ],
+   "classes": 3,
+   "gain": 15,
+   "make": "Subaru",
+   "model": "Crosstrek",
+   "site": "www.subarupartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "liftgate",
+    "tail-lights"
+   ],
+   "classes": 3,
+   "gain": 15,
+   "make": "Subaru",
+   "model": "Crosstrek",
+   "site": "www.subarupartsdeal.com",
+   "year": 2019
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 12,
+   "make": "Subaru",
+   "model": "WRX",
+   "site": "www.subarupartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 12,
+   "make": "Subaru",
+   "model": "WRX",
+   "site": "www.subarupartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "climate-control"
+   ],
+   "classes": 2,
+   "gain": 12,
+   "make": "Subaru",
+   "model": "Impreza",
+   "site": "www.subarupartsdeal.com",
+   "year": 2001
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 10,
+   "make": "Subaru",
+   "model": "Impreza",
+   "site": "www.subarupartsdeal.com",
+   "year": 1996
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "liftgate",
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 9,
+   "make": "Subaru",
+   "model": "Impreza",
+   "site": "www.subarupartsdeal.com",
+   "year": 2020
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "liftgate",
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 9,
+   "make": "Subaru",
+   "model": "Impreza",
+   "site": "www.subarupartsdeal.com",
+   "year": 2021
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 8,
+   "make": "Subaru",
+   "model": "WRX",
+   "site": "www.subarupartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Subaru",
+   "model": "Crosstrek",
+   "site": "www.subarupartsdeal.com",
+   "year": 2024
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Subaru",
+   "model": "Crosstrek",
+   "site": "www.subarupartsdeal.com",
+   "year": 2025
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "liftgate"
+   ],
+   "classes": 1,
+   "gain": 1,
+   "make": "Subaru",
+   "model": "Crosstrek",
+   "site": "www.subarupartsdeal.com",
+   "year": 2021
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "liftgate"
+   ],
+   "classes": 1,
+   "gain": 1,
+   "make": "Subaru",
+   "model": "Crosstrek",
+   "site": "www.subarupartsdeal.com",
+   "year": 2022
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 159,
+   "gain": 0,
+   "make": "Subaru",
+   "model": "Impreza WRX",
+   "site": "www.subarupartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 135,
+   "gain": 0,
+   "make": "Subaru",
+   "model": "Baja",
+   "site": "www.subarupartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 103,
+   "gain": 0,
+   "make": "Subaru",
+   "model": "Impreza WRX",
+   "site": "www.subarupartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 96,
+   "gain": 0,
+   "make": "Subaru",
+   "model": "Outback",
+   "site": "www.subarupartsdeal.com",
+   "year": 1998
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 92,
+   "gain": 0,
+   "make": "Subaru",
+   "model": "Impreza WRX",
+   "site": "www.subarupartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 89,
+   "gain": 0,
+   "make": "Subaru",
+   "model": "Impreza WRX",
+   "site": "www.subarupartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 87,
+   "gain": 0,
+   "make": "Subaru",
+   "model": "Impreza WRX",
+   "site": "www.subarupartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 83,
+   "gain": 0,
+   "make": "Subaru",
+   "model": "Outback",
+   "site": "www.subarupartsdeal.com",
+   "year": 1999
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 67,
+   "gain": 0,
+   "make": "Subaru",
+   "model": "Outback",
+   "site": "www.subarupartsdeal.com",
+   "year": 1997
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "climate-control",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 45,
+   "gain": 0,
+   "make": "Subaru",
+   "model": "Impreza WRX",
+   "site": "www.subarupartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "fender",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 40,
+   "gain": 0,
+   "make": "Subaru",
+   "model": "Outback",
+   "site": "www.subarupartsdeal.com",
+   "year": 1996
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 36,
+   "gain": 0,
+   "make": "Subaru",
+   "model": "Impreza WRX",
+   "site": "www.subarupartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 0,
+   "make": "Subaru",
+   "model": "Impreza WRX",
+   "site": "www.subarupartsdeal.com",
+   "year": 2003
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 24,
+   "gain": 0,
+   "make": "Subaru",
+   "model": "Impreza WRX",
+   "site": "www.subarupartsdeal.com",
+   "year": 2002
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-rear",
+    "fender",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 0,
+   "make": "Subaru",
+   "model": "Impreza WRX",
+   "site": "www.subarupartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-rear",
+    "fender",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights"
+   ],
+   "classes": 15,
+   "gain": 0,
+   "make": "Subaru",
+   "model": "Impreza WRX",
+   "site": "www.subarupartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Subaru",
+   "model": "WRX",
+   "site": "www.subarupartsdeal.com",
+   "year": 2019
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Subaru",
+   "model": "WRX",
+   "site": "www.subarupartsdeal.com",
+   "year": 2020
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "liftgate"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Subaru",
+   "model": "Crosstrek",
+   "site": "www.subarupartsdeal.com",
+   "year": 2020
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "liftgate"
+   ],
+   "classes": 1,
+   "gain": 0,
+   "make": "Subaru",
+   "model": "Crosstrek",
+   "site": "www.subarupartsdeal.com",
+   "year": 2023
+  }
+ ],
+ "unrouted_makes": {}
+}

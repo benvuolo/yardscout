@@ -147,3 +147,14 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
   - Missing: Honda/Nissan/Mazda/BMW catalog data, and wheels, AC compressor, PS pump.
   - GX vs Tundra accessories: GX 470 is not on the 2UZ alternator part-number list, so it shows as "Likely fit — verify part #". GX 460 (1UR-FE) has no engine family yet.
   - Proposed: label same-engine/different-model accessory donors "Same engine — part may differ". Waiting on the owner.
+- 17:10 UTC owner: "Yes relabel those, and start on Honda/Nissan and wheels".
+  - Relabel approved: same-engine/different-model accessory donors get "Same engine — part may differ" and are listed below the verified matches.
+  - Honda/Nissan and wheels: start. Shipping new cross-model groups still needs the owner's go.
+  - New interchange sessions:
+    - session_016ZzJfK5RFgko9f1gx7qjEa: relabel first (branch interchange/same-engine-label, hub merges), then Honda/Acura + Nissan/Infiniti R1/R3 + curation + §11.4 sample (0 WRONG bar).
+    - session_016ZzJfL4wG1wgpyYymW2Z28: wheels. Research the basis, propose to the hub, then build on branch interchange/wheels.
+  - Both were created without the repo attached and were told to add_repo first.
+- 17:30 UTC owner: "Great, again we're going for breadth here and data quality, its embarrasing to not have this when car-part.com has a gorgeous example. We will create the better version, with no external or third party costs".
+  - Hub policy under it: a new make or category ships once its CURATION_SPEC §11.4 sample has 0 WRONG. The hub confirms each and tells the owner as it goes live, so there's no per-namespace wait.
+  - Paid sources and licences stay out.
+  - Added session_016ZzJfKqBWhtUcqYMMseVgn (make breadth + Subaru) and session_016ZzJfKdkBXaVYDDQb9cy2J (categories + coverage matrix). See the ops/README exception.

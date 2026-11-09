@@ -52,7 +52,12 @@ NO_DEALER_CATALOG = {"volkswagen", "mazda", "mitsubishi", "bmw", "mercedesbenz",
 MAKE_PAGE_SCORE = 10**9
 
 
+SITE_MODULES = {"ecat.spectrapremium.com": "spectrapremium"}
+
+
 def module_for(site: str):
+    if site in SITE_MODULES:
+        return importlib.import_module(SITE_MODULES[site])
     return importlib.import_module(re.sub(r"[^a-z0-9]", "_", site.replace("www.", "").split(".")[0]))
 
 
@@ -184,11 +189,12 @@ def main() -> None:
                 net_streak = 0
                 page_incomplete = False
                 queued = {u for _, u in st["pending"]}
+                score = getattr(mod, "score", None) or (lambda u, *_: score_for(u, root, make_s, model_s))
                 for c in li["children"]:
                     if c not in done_lists and c not in queued:
-                        st["pending"].append([score_for(c, root, make_s, model_s), c])
+                        st["pending"].append([score(c), c])
                 if li["next"] and li["next"] not in done_lists and li["next"] not in queued:
-                    nsc = score_for(li["next"], root, make_s, model_s) if sc >= MAKE_PAGE_SCORE else sc
+                    nsc = score(li["next"]) if sc >= MAKE_PAGE_SCORE else sc
                     st["pending"].append([nsc, li["next"]])
                 for pu in li["products"]:
                     key = f"{cat}|{pu}"

@@ -402,7 +402,9 @@ class Curation:
           the class-wide pool: a Canada row on one year says nothing about
           another year's row).
         Only ever removes claims; an unparsed note restricts nothing here."""
-        if market and _market_excludes(notes):
+        if market and (_market_excludes(notes) or _export_only(notes)):
+            return True
+        if market and self.ns == "subaru" and _subaru_manual_only(notes):
             return True
         if _other_division(notes, T[0]):
             return True
@@ -1260,9 +1262,12 @@ class Curation:
     def likely_groups(self, brand):
         out = []
         self.likely_own_page_drops = Counter()   # cat -> vehicle-years left out (§5.16 own-page rule)
+        self.own_page_missing = defaultdict(lambda: defaultdict(set))  # T -> cat -> class keys (R3 input)
         self.held_exterior = []                  # §5.16 exterior hold (owner checklist)
-        self.likely_note_restricted = Counter()  # cat -> vehicle-years a class-wide note restricts away
+        self.likely_note_restricted = Counter()
+        self.likely_generation_cut = Counter()     # cat -> vehicle-years cut at a generation break  # cat -> vehicle-years a class-wide note restricts away
         self.release_allow = policy.release_allowlist()   # §5.16 exact owner-approved releases
+        self.release_notes = policy.release_notes()
         self.released_exterior = []
         for (key, cat), c in sorted(self.classes.items()):
             if self.kinds.get(cat) != "body" or cat in policy.PHASE3_CATS:
@@ -1275,7 +1280,7 @@ class Curation:
             # no claim. A window switch must also resolve to the driver
             # master slot: an unresolved side may be a passenger or
             # single-gang switch (4602531AD "1 gang", quantity 2).
-            cand, class_notes = [], []
+            cand, class_notes, dropped = [], [], []
             for T in sorted(self.class_Ts.get((key, cat), ())):
                 m = (self.cells_info.get((T, cat)) or {}).get("members", {}).get(key)
                 if not m or m["cover"] not in ("yes", "maybe"):
@@ -1287,9 +1292,15 @@ class Curation:
                     # §5.16 own-page rule: the product page's fitment table
                     # alone can be a platform rollup
                     self.likely_own_page_drops[cat] += 1
+                    dropped.append(T)
                     continue
                 cand.append((T, m))
                 class_notes += notes
+            # R3 own-page completion input: the left-out vehicle-years of a
+            # class that would span 2+ feed models if their own pages listed it
+            if dropped and len({(T[0], T[1]) for T in dropped} | {(T[0], T[1]) for T, _ in cand}) >= 2:
+                for T in dropped:
+                    self.own_page_missing[T][cat].add(key)
             # §5.6 model restriction, class-wide (2026-11-09): one own page
             # restricting the number to a make/model/body ('C - CHRYSLER' on
             # the 2006 300 page for mirror 1BY421R3AA) contradicts a twin's
@@ -1304,17 +1315,34 @@ class Curation:
                 slots |= set(m["slot"].slots)
             if len({(T[0], T[1]) for T in Ts}) < 2:
                 continue        # single-model: the same-model generation loop covers it
+            Ts2 = self._generation_cut(c, Ts)
+            if Ts2 != Ts:
+                self.likely_generation_cut[cat] += len(Ts) - len(Ts2)
+                Ts = Ts2
+                if len({(T[0], T[1]) for T in Ts}) < 2:
+                    continue
             reason, text = _likely_reason(whys)
+            cab = self._cab_only(c, cat, Ts)
+            if cab:
+                text = f"{text}; {cab}"
+                if len(_likely_note(brand, sorted(c.pns)[0], text, PACK_TEXT.get(c.packaging, ""))) > policy.NOTE_MAX_LEN:
+                    self.refuse("held_cab_qualifier", cat=cat, pn=sorted(c.pns)[0],
+                                evidence=[r.pointer for r in c.records], detail=cab)
+                    continue
             pns = sorted(c.pns)
             apps = _runs(Ts)
-            released = (self.ns, cat, tuple(pns), tuple(tuple(a) for a in apps)) in self.release_allow
+            rkey = (self.ns, cat, tuple(pns), tuple(tuple(a) for a in apps))
+            released = rkey in self.release_allow
+            if released and rkey in self.release_notes:
+                text = self.release_notes[rkey]     # the split its source states (hub 2026-11-09)
             if released:
                 self.released_exterior.append({"cat": cat, "pn": pns, "apps": apps})
-            if not released and cat in policy.EXTERIOR_HOLD_CATS and \
+            hold = policy.held_cross_model_cat(self.ns, cat)
+            if not released and hold and \
                     len({policy.base_model(T[0], T[1]) for T in Ts}) > 1:
                 # §5.16 exterior hold: only removes claims; kept for the owner checklist
                 urls = sorted({u for r in c.records for u in (r.product_url, r.list_url) if u})
-                self.refuse("held_exterior_cross_model", cat=cat, pn=pns[0], evidence=[r.pointer for r in c.records],
+                self.refuse(hold, cat=cat, pn=pns[0], evidence=[r.pointer for r in c.records],
                             detail=";".join(f"{a[0]} {a[1]} {a[2]}-{a[3]}" for a in apps))
                 self.held_exterior.append({"ns": self.ns, "cat": cat, "pn": pns, "apps": apps,
                                            "note": _likely_note(brand, pns[0], text, PACK_TEXT.get(c.packaging, "")),
@@ -1330,6 +1358,68 @@ class Curation:
                         "note": note, "keys": [key], "cars": sum(self.inv_counts.get(T, 0) for T in Ts),
                         "oldest_retrieved": stamps[0] if stamps else None})
         return out
+
+    def _gen_breaks(self, model: str):
+        """GENERATION_BREAKS for a feed model: longest leading-word key."""
+        G = getattr(self.js, "GENERATION_BREAKS", None) or {}
+        w = (model or "").lower().split()
+        for i in range(len(w), 0, -1):
+            if " ".join(w[:i]) in G:
+                return G[" ".join(w[:i])]
+        return None
+
+    def _generation_cut(self, c, Ts):
+        """Hub 2026-11-09 (GM 20945139: a GMT900 regulator whose product page
+        'Replaces' four older numbers, listed on the 1999-2000 Silverado
+        pages): a Likely group of a superseding number may not span a
+        hand-curated generation break (GENERATION_BREAKS) of any of its base
+        models. Supersession runs old -> new, so the vehicle-years before the
+        newest break crossed are left out (every model, so a twin such as the
+        2004 Sierra goes too). A number with no supersession keeps every
+        vehicle-year: each already has its own page (§5.16). Only removes claims."""
+        sup = any(r.replaces or r.replaced_by or r.list_replaced_by or r.via for r in c.records)
+        if not sup:
+            return Ts
+        cut = None
+        by = defaultdict(list)
+        for T in Ts:
+            by[policy.base_model(T[0], T[1])].append(T)
+        for bm, ts in by.items():
+            br = self._gen_breaks(ts[0][1]) or []
+            ys = [T[2] for T in ts]
+            crossed = [b for b in br if min(ys) < b <= max(ys)]
+            if crossed:
+                cut = max(cut or 0, max(crossed))
+        if cut is None:
+            return Ts
+        return [T for T in Ts if T[2] >= cut]
+
+    _CAB_RE = re.compile(r"\b(REGULAR CAB|EXTENDED CAB|CREW CAB|SUPER ?CAB|SUPER ?CREW|DOUBLE CAB|QUAD CAB|CREWMAX|ACCESS CAB|KING CAB)\b", re.I)
+
+    def _cab_only(self, c, cat, Ts) -> str:
+        """Hub 2026-11-09 (GM 15844876: Silverado fitment rows name extended
+        cab only): when every fitment row crediting a model names one cab
+        type, the group says '<model>: <cab> only' for it. '' when none does."""
+        out = []
+        for mk, md in sorted({(T[0], T[1]) for T in Ts}):
+            cabs, all_cab = set(), True
+            for T in Ts:
+                if (T[0], T[1]) != (mk, md):
+                    continue
+                for (cc, r, f, t) in self.t_rows.get((T, cat), []):
+                    if cc is not c:
+                        continue
+                    for tr in (f.trims or []):
+                        m = self._CAB_RE.search(tr)
+                        if not m:
+                            all_cab = False
+                        else:
+                            cabs.add(re.sub(r"\s+", " ", m.group(1).lower()))
+                    if not f.trims:
+                        all_cab = False
+            if all_cab and len(cabs) == 1:
+                out.append(f"{md}: {next(iter(cabs))} only")
+        return "; ".join(out)
 
     # ------------------------------------------------------------ report
     def report(self, doc, inv_counts: Counter):
@@ -1386,6 +1476,8 @@ class Curation:
                         "released_by_allowlist": len(getattr(self, "released_exterior", [])),
                         "likely_app_years_note_restricted": dict(sorted(
                             getattr(self, "likely_note_restricted", Counter()).items())),
+                        "likely_app_years_generation_cut": dict(sorted(
+                            getattr(self, "likely_generation_cut", Counter()).items())),
                         "blocked_sites": sorted(self.blocked),
                         "why_no_verified": _why_none(self), "gates": global_gates(self)},
             "funnel_cars": fz(funnel),
@@ -1434,6 +1526,35 @@ class Curation:
                         "with its current candidate state and its own pages carried no restricting note "
                         "(optimistic upper bound for ranking crawl work; never shipped)", "rows": rows}
 
+
+    def own_page_completion(self, inv_counts: Counter):
+        """R3 input for the §5.16 own-page rule (site-agnostic): one row per
+        vehicle-year whose own catalog page was never read for a category in
+        which a Likely candidate class names it. Each row carries the site
+        that navigates its make (the site whose records were seeded on that
+        make), so `crawl.py --complete` on any site reads only its own rows.
+        Ordered by cars on the lots x classes waiting, then name. Only reads
+        pages; a row whose page does not list the number stays out."""
+        seed_site = defaultdict(Counter)
+        for r in self.records:
+            seed_site[r.seed[0]][r.site] += 1
+        rows, unrouted = [], Counter()
+        for T, by_cat in self.own_page_missing.items():
+            sites = seed_site.get(T[0])
+            if not sites:
+                unrouted[T[0]] += 1
+                continue
+            site = sorted(sites.items(), key=lambda kv: (-kv[1], kv[0]))[0][0]
+            n = sum(len(v) for v in by_cat.values())
+            cars = inv_counts.get(T, 0)
+            rows.append({"site": site, "make": T[0], "model": T[1], "year": T[2], "cats": sorted(by_cat),
+                         "classes": n, "cars": cars, "gain": cars * n})
+        rows.sort(key=lambda r: (-r["gain"], -r["classes"], r["site"], r["make"], r["model"], r["year"]))
+        return {"ns": self.ns, "as_of": self.as_of, "kind": "own_page",
+                "note": "R3 input (CURATION_SPEC 3.2 R3, 5.16): vehicle-years left out of Likely candidate "
+                        "classes because their own page was never read; crawl.py --complete reads those "
+                        "pages and the curator re-checks them. Never shipped.",
+                "unrouted_makes": dict(sorted(unrouted.items())), "rows": rows}
 
     # ------------------------------------------- 5.18 Phase 2 (report only)
     def phase2_cond(self, T, cat, key):
@@ -1705,6 +1826,22 @@ def _market_excludes(notes) -> bool:
     return False
 
 
+_EXPORT_RE = re.compile(r"(?<!EXC )(?<!EXC\()\bEXPORT\b", re.I)
+
+
+def _export_only(notes) -> bool:
+    """Hub 2026-11-09 (GM 25876716 'CK1,2(DE2,Z5X)(EXPORT)'): a row whose
+    every option alternative names EXPORT is not for US feed cars, like a
+    foreign-market note. Alternatives split at ', ' (GM writes 'CK1,2(...)'
+    inside one). 'EXC EXPORT' keeps the row. Per row; only removes claims."""
+    for n in notes or []:
+        body = re.sub(r"^\s*Fitting Vehicle Options\s*:\s*", "", n or "", flags=re.I)
+        alts = [a for a in re.split(r",\s+", body) if a.strip()]
+        if alts and all(_EXPORT_RE.search(a) for a in alts):
+            return True
+    return False
+
+
 def _brand_codes_exclude(notes, make: str) -> bool:
     """moparpartsgiant option column brand codes ('C - CHRYSLER, F - BRAND
     AWD'): a row naming only other brands is not for T's make."""
@@ -1782,6 +1919,27 @@ def _subaru_body_excludes(notes, model: str) -> bool:
                 break
             allowed |= a
         if allowed is not None and fam not in allowed:
+            return True
+    return False
+
+
+_SUBARU_MANUAL = re.compile(r"^\d?MT$")
+
+
+def _subaru_manual_only(notes) -> bool:
+    """§5.6 (2026-11-09 Subaru resample): a 'Fitting Vehicle Options' note
+    whose every alternative requires a manual transmission (MT/5MT/6MT).
+    A yard listing does not show the transmission, and some manual
+    configurations were never sold in the US (2015 Legacy/Outback 6MT
+    gauge clusters 85002AL06A/AL07A: Canada only). Per row, like a market
+    note. Only removes claims."""
+    for n in notes or []:
+        mm = re.match(r"^\s*Fitting Vehicle Options\s*:\s*(.+)$", n or "", re.I)
+        if not mm:
+            continue
+        alts = [a.strip().lstrip("*") for a in _split_top(mm.group(1)) if a.strip()]
+        if alts and all(any(_SUBARU_MANUAL.match(q) for q in re.findall(r"[A-Z0-9#]+", a.partition(".")[2]))
+                        for a in alts):
             return True
     return False
 
@@ -1993,6 +2151,7 @@ def main(argv=None) -> int:
         write_json(out / "_report" / f"{ns}.json", rep)
         (out / "_report" / f"{ns}.md").write_text(report_md(rep))
         write_json(out / "_report" / f"{ns}.completion.json", completion)
+        write_json(out / "_report" / f"{ns}.own_page_completion.json", cur.own_page_completion(inv_counts))
         if a.propose_map:
             # §6: proposals for humans; `model_map.py merge` applies the draft
             label = f"oem-raw@{(src.commit or 'fixtures')[:7]}"

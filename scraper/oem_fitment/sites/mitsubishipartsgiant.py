@@ -83,6 +83,10 @@ CAT_PAGES = {
     "trunk-lid": r"^body-hardware/trunk-lid-components$",
     "tailgate": r"^body-hardware/(tailgate|tail-gate[a-z-]*)$",
     "liftgate": r"^body-hardware/(lift-gate[a-z-]*|liftgate[a-z-]*|back-door[a-z-]*)$",
+    # tier C (ops/interchange.md "Category breadth" §8): slugs from the R2 years manifests
+    "wiper-motor": r"^(electrical/wipers|body-hardware/wiper-washer-components(-body)?)$",
+    "knuckle": r"^suspension/(front-suspension|front-suspension-components|rear-suspension|rear-suspension-components|front-axle-carrier)$|^driveline-axles/(front-axle|front-axle-driveline|rear-axle)$",
+    "strut": r"^suspension/(struts-components|shocks-components|struts-suspension-components-front|front-suspension|front-suspension-components|rear-suspension|rear-suspension-components|ride-control-front|ride-control-rear)$",
 }
 
 # (include on the printed list name, exclude on list name AND name slug)
@@ -132,6 +136,10 @@ RULES = {
                  r"handle|hinge|cable|lock|latch|protector|molding|garnish|cushion|stopper|chain|link|support|cover|emblem|lamp|trim|strap|bumper"),
     "liftgate": (r"^(liftgate|lift gate|back door|back door panel|tailgate)$",
                  r"handle|hinge|cable|lock|latch|glass|weather|stay|strut|cylinder|motor|wiper|spoiler|lamp|trim|molding|garnish|emblem|switch|striker|link|cover|pad|finish|damper"),
+    # tier C: name rule pending (written after reading the trial's list rows)
+    "wiper-motor": (r"(?!x)x", ""),
+    "knuckle": (r"(?!x)x", ""),
+    "strut": (r"(?!x)x", ""),
 }
 
 # the product URL's name slug must also name the assembly
@@ -161,6 +169,10 @@ SLUG_RULES = {
     "trunk-lid": r"^trunk-lid$",
     "tailgate": r"^tail-?gate(-assembly)?$",
     "liftgate": r"^(lift-?gate|back-door|tail-?gate)(-panel|-assembly)?$",
+    # tier C: name rule pending (written after reading the trial's list rows)
+    "wiper-motor": r"(?!x)x",
+    "knuckle": r"(?!x)x",
+    "strut": r"(?!x)x",
 }
 
 # door shells: the product page's Mitsubishi name decides front vs rear

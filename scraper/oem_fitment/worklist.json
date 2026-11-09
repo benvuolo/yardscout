@@ -2125,7 +2125,11 @@
    ],
    "wheels": true,
    "version": 2,
-   "wheels_note": "2026-11-09: tier W (wheels) added; version raised so the site re-opens and crawls wheels only (A/B seeds are skipped through progress.json done keys)."
+   "wheels_note": "2026-11-09: tier W (wheels) added; version raised so the site re-opens and crawls wheels only (A/B seeds are skipped through progress.json done keys).",
+   "complete": {
+    "file": "completion/ford.own_page.json",
+    "version": 1
+   }
   },
   "www.gmpartsgiant.com": {
    "cars": 78432,
@@ -4604,7 +4608,11 @@
     }
    ],
    "wheels": true,
-   "wheels_note": "2026-11-09: tier W (wheels) added; the site is not done yet, so tier W follows A/B in the same crawl."
+   "wheels_note": "2026-11-09: tier W (wheels) added; the site is not done yet, so tier W follows A/B in the same crawl.",
+   "complete": {
+    "file": "completion/gm.own_page.json",
+    "version": 1
+   }
   },
   "www.nissanpartsdeal.com": {
    "cars": 29587,
@@ -5125,7 +5133,14 @@
      "cars": 94,
      "seed_year": 2004
     }
-   ]
+   ],
+   "complete": {
+    "file": "completion/nissan.own_page.json",
+    "version": 1
+   },
+   "tierC": true,
+   "version": 2,
+   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 2 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys)."
   },
   "www.hondapartsnow.com": {
    "cars": 24360,
@@ -5466,7 +5481,14 @@
      "cars": 114,
      "seed_year": 2008
     }
-   ]
+   ],
+   "complete": {
+    "file": "completion/honda.own_page.json",
+    "version": 1
+   },
+   "tierC": true,
+   "version": 2,
+   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 2 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys)."
   },
   "www.toyotapartsnow.com": {
    "cars": 23044,
@@ -6095,7 +6117,14 @@
      "cars": 55,
      "seed_year": 1995
     }
-   ]
+   ],
+   "complete": {
+    "file": "completion/toyota.own_page.json",
+    "version": 1
+   },
+   "tierC": true,
+   "version": 2,
+   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 2 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys)."
   },
   "www.hyundaipartsdeal.com": {
    "cars": 12247,
@@ -6523,7 +6552,11 @@
    ],
    "wheels": true,
    "version": 2,
-   "wheels_note": "2026-11-09: tier W (wheels) added; version raised so the done site re-opens and crawls wheels only (A/B seeds are skipped through progress.json done keys)."
+   "wheels_note": "2026-11-09: tier W (wheels) added; version raised so the done site re-opens and crawls wheels only (A/B seeds are skipped through progress.json done keys).",
+   "complete": {
+    "file": "completion/hmg.own_page.json",
+    "version": 1
+   }
   },
   "www.acurapartswarehouse.com": {
    "cars": 4098,
@@ -6672,7 +6705,14 @@
      "cars": 30,
      "seed_year": 2015
     }
-   ]
+   ],
+   "complete": {
+    "file": "completion/honda.own_page.json",
+    "version": 1
+   },
+   "tierC": true,
+   "version": 2,
+   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 2 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys)."
   },
   "www.jeeppartsdeal.com": {
    "cars": 42482,
@@ -7605,7 +7645,11 @@
    "version": 3,
    "version_note": "2026-11-05 v2: Dodge/Chrysler/Ram segments (copied from the moparpartsgiant worklist, same feed segments and seed years; Plymouth left out: no Plymouth fitment rows on this site). v1 (Jeep only) finished as raw/www.jeeppartsdeal.com.done, kept on oem-raw; v2 finishes as raw/www.jeeppartsdeal.com.v2.done (markers.py). Jeep seeds are skipped through progress.json done keys.",
    "wheels": true,
-   "wheels_note": "2026-11-09: tier W (wheels) added; version raised so the site re-opens and crawls wheels only (A/B seeds are skipped through progress.json done keys)."
+   "wheels_note": "2026-11-09: tier W (wheels) added; version raised so the site re-opens and crawls wheels only (A/B seeds are skipped through progress.json done keys).",
+   "complete": {
+    "file": "completion/mopar.own_page.json",
+    "version": 1
+   }
   },
   "www.kiapartsnow.com": {
    "cars": 9530,
@@ -8030,7 +8074,11 @@
      "cars": 45,
      "seed_year": 2017
     }
-   ]
+   ],
+   "complete": {
+    "file": "completion/hmg.own_page.json",
+    "version": 1
+   }
   },
   "www.infinitipartsdeal.com": {
    "cars": 3383,
@@ -8371,7 +8419,14 @@
      "cars": 17,
      "seed_year": 2004
     }
-   ]
+   ],
+   "complete": {
+    "file": "completion/nissan.own_page.json",
+    "version": 1
+   },
+   "tierC": true,
+   "version": 2,
+   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 2 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys)."
   },
   "www.subarupartsdeal.com": {
    "cars": 5542,
@@ -8676,7 +8731,11 @@
      "cars": 36,
      "seed_year": 2017
     }
-   ]
+   ],
+   "complete": {
+    "file": "completion/subaru.own_page.json",
+    "version": 1
+   }
   },
   "www.lexuspartsnow.com": {
    "cars": 3131,
@@ -8984,7 +9043,11 @@
    ],
    "wheels": true,
    "version": 2,
-   "wheels_note": "2026-11-09: tier W (wheels) added; version raised so the site re-opens and crawls wheels only (A/B seeds are skipped through progress.json done keys)."
+   "wheels_note": "2026-11-09: tier W (wheels) added; version raised so the site re-opens and crawls wheels only (A/B seeds are skipped through progress.json done keys).",
+   "complete": {
+    "file": "completion/toyota.own_page.json",
+    "version": 1
+   }
   },
   "www.audipartsgiant.com": {
    "cars": 2271,
@@ -9157,7 +9220,11 @@
      "cars": 15,
      "seed_year": 2016
     }
-   ]
+   ],
+   "complete": {
+    "file": "completion/vag.own_page.json",
+    "version": 1
+   }
   },
   "www.bmwpartsdeal.com": {
    "cars": 5353,
@@ -9690,7 +9757,11 @@
      "cars": 16,
      "seed_year": 2004
     }
-   ]
+   ],
+   "complete": {
+    "file": "completion/bmw.own_page.json",
+    "version": 1
+   }
   },
   "www.mazdapartsnow.com": {
    "cars": 6231,
@@ -10067,7 +10138,11 @@
      "cars": 17,
      "seed_year": 2017
     }
-   ]
+   ],
+   "complete": {
+    "file": "completion/mazda.own_page.json",
+    "version": 1
+   }
   },
   "www.mbpartsgiant.com": {
    "cars": 4710,
@@ -10675,7 +10750,11 @@
    ],
    "wheels": true,
    "version": 2,
-   "wheels_note": "2026-11-09: tier W (wheels) added; version raised so the done site re-opens and crawls wheels only (A/B seeds are skipped through progress.json done keys)."
+   "wheels_note": "2026-11-09: tier W (wheels) added; version raised so the done site re-opens and crawls wheels only (A/B seeds are skipped through progress.json done keys).",
+   "complete": {
+    "file": "completion/mb.own_page.json",
+    "version": 1
+   }
   },
   "www.mitsubishipartsgiant.com": {
    "cars": 2970,
@@ -10956,7 +11035,11 @@
      "cars": 26,
      "seed_year": 1992
     }
-   ]
+   ],
+   "complete": {
+    "file": "completion/mitsubishi.own_page.json",
+    "version": 1
+   }
   },
   "www.vwpartsgiant.com": {
    "cars": 6886,
@@ -11300,7 +11383,11 @@
    ],
    "wheels": true,
    "version": 2,
-   "wheels_note": "2026-11-09: tier W (wheels) added; version raised so the done site re-opens and crawls wheels only (A/B seeds are skipped through progress.json done keys)."
+   "wheels_note": "2026-11-09: tier W (wheels) added; version raised so the done site re-opens and crawls wheels only (A/B seeds are skipped through progress.json done keys).",
+   "complete": {
+    "file": "completion/vag.own_page.json",
+    "version": 1
+   }
   },
   "www.volvopartsgiant.com": {
    "cars": 2460,
@@ -11533,7 +11620,11 @@
      "cars": 15,
      "seed_year": 2012
     }
-   ]
+   ],
+   "complete": {
+    "file": "completion/volvo.own_page.json",
+    "version": 1
+   }
   }
  }
 }

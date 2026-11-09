@@ -197,6 +197,15 @@ check("subaru: W.(OBK...) qualifiers credit the Outback; SOBK/WOBK exclude the L
 check("subaru: engine/transmission codes restrict no model",
       not _C._subaru_body_excludes([F + "EZ30D"], "Legacy") and not _C._subaru_body_excludes([F + "AT.EJ25#"], "Outback"))
 check("subaru: other models (Impreza) are not body-restricted here", not _C._subaru_body_excludes([F + "S"], "Impreza"))
+# 2026-11-09 resample (make breadth): 85002AL06A '(S+OBK).25I.6MT' is a Canada-only 6MT
+# cluster; a manual-only number is not credited to feed cars. Mixed MT/CVT rows stay.
+check("subaru: manual-only option rows are excluded (85002AL06A, 85002AL07A)",
+      _C._subaru_manual_only([F + "(S+OBK).25I.6MT"]) and _C._subaru_manual_only([F + "(S+OBK).25IP.6MT"])
+      and _C._subaru_manual_only([F + "W.OBKLTD.MT"]))
+check("subaru: a row with any non-manual alternative is not manual-only",
+      not _C._subaru_manual_only([F + "XV.20IL.5MT, XV.20IL.CVT"])
+      and not _C._subaru_manual_only([F + "S +W.(BRI+L+GT+OBK+OBKCW) +W.OBKLTD.MT, *W.OBKLTD.AT"])
+      and not _C._subaru_manual_only(["MANUAL"]))
 # moparpartsgiant brand codes
 B = "Fitting Vehicle Options: 48 - SEDAN TYPE #8, C - CHRYSLER, F - BRAND AWD"
 check("mopar: a C - CHRYSLER row is not for a Dodge", _C._brand_codes_exclude([B], "Dodge"))

@@ -24,3 +24,29 @@ Temporary exception (2026-11-05, owner asked for full speed): two Parts
 sessions run at once. The model-block session writes PARTS_GAPS §22 and the
 facelift session §23, each with its own comment group in FACELIFT_BREAKS; both
 pull --rebase and rerun the parts tests before every push.
+
+Temporary exception (2026-11-09, owner: "we're going for breadth here and
+data quality … We will create the better version, with no external or third
+party costs"). Four Interchange sessions run at once, each in its own
+section of ops/interchange.md:
+- Honda/Acura + Nissan/Infiniti (R3 completion): session_016ZzJfMtLKpUFu8TiEFMrkF
+  (replaces session_016ZzJfK5RFgko9f1gx7qjEa, which had no push access; the
+  hub lands its same-engine relabel)
+- wheels: session_016ZzJfKi8ND3Ey2g66qhiZT, branch interchange/wheels
+  (replaces session_016ZzJfL4wG1wgpyYymW2Z28, no push access)
+- make breadth + Subaru: session_016ZzJfKqBWhtUcqYMMseVgn
+- category breadth + coverage matrix: session_016ZzJfHdWViThcgyPbNG4i7 (tier C;
+  continues session_016ZzJfKdkBXaVYDDQb9cy2J from its §8 handover)
+- aftermarket application catalogs (Depo, Cardone/ACI, Spectra, Four
+  Seasons): session_016ZzJfMnemMEFN88kPnYgxs
+Shared oem_fitment code: pull --rebase, run curation_tests + tests before
+every push. One crawl run at a time. Nothing ships to users without a §11.4
+sample with 0 WRONG and the hub's confirmation.
+
+Standing rule (2026-11-09, after a near-miss): any change to the hashed
+curation inputs (scraper/oem_fitment curate.py, policy.py, notes.py,
+positions.py, markers.py, model_map.json, release_allowlist.json) ships in
+the SAME push as re-curated groups/<ns>.json for every shipped namespace,
+with an identical-or-explained diff. Otherwise the next scan's V8 check drops
+every OEM namespace from users. A test enforces it.
+

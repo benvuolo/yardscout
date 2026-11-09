@@ -65,6 +65,11 @@ SUBCATS = {
     "trunk-lid": r"luggage_compartment|deck_lid|trunk",
     "tailgate": r"tail_?gate|pick_up_box|pickup_box",
     "liftgate": r"luggage_compartment_door|lift_?gate|back_door|tail_?gate",
+    # tier C (§8): subs from the R2 years manifest (sedans: front_knuckle_and_hub,
+    # front_suspension_struts_and_springs; trucks/older: front_suspension, rear_suspension)
+    "wiper-motor": r"wiper",
+    "knuckle": r"knuckle|spindle|^(front|rear)_suspension$|^front_rear_suspension$",
+    "strut": r"strut|shock|^(front|rear)_suspension$|^front_rear_suspension$",
     # tier W (ops/interchange.md "Wheels"): chassis/wheels and
     # wheels_brakes/wheels_related_parts, as the oem-raw years manifest lists them
     "wheels": r"^wheels(_related_parts)?$",
@@ -75,6 +80,8 @@ SUBCAT_EXCL = {
     "door-rear": r"trim|glass|lock|handle|speaker",
     "trunk-lid": r"trim|lock",
     "liftgate": r"trim|lock",
+    "wiper-motor": r"switch|control",
+    "strut": r"hood|lift_?gate|tail_?gate|luggage|trunk|engine|motion|transmission|damper_control",
 }
 
 # Ford base numbers per category (regex on the base after any body code).
@@ -104,12 +111,22 @@ BASE = {
     "trunk-lid": r"40110",
     "tailgate": r"40700",
     "liftgate": r"40010",
+    # tier C, bases read on the 2026-11-09 trial pages (F-150, F-250 Super Duty):
+    # 17508 "Motor Assy - Wiper"; 3K185/3K186 "Knuckle - Front Wheel", 3105/3106
+    # "Spindle" (truck knuckles); 18124 front / 18125 rear "Shock Absorber Assy",
+    # 18A092 "Strut - Loaded Assembly". No rear knuckle base was seen: none taken.
+    "wiper-motor": r"17508",
+    "knuckle": r"3K185|3K186|3105|3106",
+    "strut": r"18V?124|18V?125|18A092",
     "wheels": r"1007",
 }
 # Names that are never the assembly even when the base matches.
 NAME_EXCL = re.compile(r"\b(Glass|Lens|Bulb|Bezel|Cover - Mirror|Gasket|Seal|Kit - Seal|Pulley|Clutch|"
                        r"Bracket|Moulding|Applique|Emblem|Reinforcement|Support|Absorber|Isolator)\b", re.I)
 
+# strut rows are "Shock Absorber Assy" (NAME_EXCL drops "Absorber"); mounts,
+# insulators, brackets and bushing kits share the page
+STRUT_EXCL = re.compile(r"\b(Insulator|Bracket|Bushing|Mount|Mounting|Repair|Boot|Bumper|Seat|Spring - |Nut|Bolt)\b", re.I)
 WHEEL_EXCL = re.compile(r"\b(?:cap|cover|nut|bolt|stud|lock|weight|valve|sensor|ornament|emblem|insert|spare|temporary|compact|carrier|bearing|hub|kit|liner|flare|opening|molding|moulding|trim|balance|tire)", re.I)
 
 
@@ -128,7 +145,7 @@ def _rule(cat: str):
         """None when kept, else the manifest reason (template `.why` hook)."""
         if not rx.match(_base(r["pn"])):
             return "include_miss"
-        m = NAME_EXCL.search(f"{r['group']} | {r['main']}")
+        m = (STRUT_EXCL if cat == "strut" else NAME_EXCL).search(f"{r['group']} | {r['main']}")
         if m:
             return f"rule:{m.group(0).lower()}"
         if cat == "wheels":

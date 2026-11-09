@@ -50,6 +50,10 @@ CAT_PAGES = {
     "grille": r"^body-hardware/grille-components$",
     "trunk-lid": r"^body-hardware/trunk-lid-components$",
     "liftgate": r"^body-hardware/(lift-gate|liftgate[a-z-]*|lift-gate-body|tailgate[a-z-]*|tail-gate[a-z-]*)$",
+    # tier C (ops/interchange.md "Category breadth" §8): slugs from the R2 years manifests
+    "wiper-motor": r"^(electrical/wipers|body-hardware/wiper-washer-components(-body)?)$",
+    "knuckle": r"^suspension/(front-suspension|front-suspension-components|rear-suspension|rear-suspension-components|front-axle-carrier)$|^driveline-axles/(front-axle|front-axle-driveline|rear-axle)$",
+    "strut": r"^suspension/(struts-components|shocks-components|struts-suspension-components-front|front-suspension|front-suspension-components|rear-suspension|rear-suspension-components|ride-control-front|ride-control-rear)$",
     # tier W (ops/interchange.md "Wheels"): the years manifest lists suspension/wheels
     "wheels": r"^suspension/wheels$",
 }
@@ -83,6 +87,10 @@ RULES = {
     "grille": (r"^(upper |center |radiator )?grille( assembly)?$", ""),
     "trunk-lid": (r"^trunk lid$", ""),
     "liftgate": (r"^(lift ?gate|tail ?gate|hatch|rear hatch)$", ""),
+    # tier C: name rule pending (written after reading the trial's list rows)
+    "wiper-motor": (r"(?!x)x", ""),
+    "knuckle": (r"(?!x)x", ""),
+    "strut": (r"(?!x)x", ""),
     # tier W: 2008 Passat suspension/wheels (fetch.py 2026-11-09) prints "Wheel, Alloy"
     # beside "Spare Wheel", "Wheel Bolt", "Wheel Bolt Cap", "Wheel Lock Kit",
     # "Center Cap" and "Valve Stem"; anchored, so only road-wheel names match

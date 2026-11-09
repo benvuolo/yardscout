@@ -83,6 +83,10 @@ SUBCATS = {
     "grille": r"^radiator_grille$",
     "trunk-lid": r"^luggage_compartment_door_lock$",
     "liftgate": r"^back_door_panel_glass$",
+    # tier C (§8): subs from the R2 years manifest
+    "wiper-motor": r"^windshield_wiper$|^rear_wiper$",
+    "knuckle": r"^front_axle_arm_steering_knuckle$|^rear_axle_shaft_hub$",
+    "strut": r"^(front|rear)_spring_shock_absorber$",
     # tier W (ops/interchange.md "Wheels"): the years manifest lists it
     "wheels": r"^disc_wheel_wheel_cap$",
 }
@@ -134,6 +138,10 @@ RULES = {
                   r"trim|cushion|weatherstrip|lock|hinge|torsion|garnish|spoiler|lamp|emblem|stay|molding|moulding|inner|outer"),
     "liftgate": (rf"^panel\s+sub-{A},?\s*back\s+door|^door\s+sub-{A},?\s*back|^back\s+door\s+(panel\s+)?sub-{A}",
                  r"handle|hinge|lock|glass|weather|stay|motor|spoiler|lamp|trim|garnish|emblem|outer|outside|inner|board|cover"),
+    # tier C: name rule pending (written after reading the trial's list rows)
+    "wiper-motor": (r"(?!x)x", r"x^"),
+    "knuckle": (r"(?!x)x", r"x^"),
+    "strut": (r"(?!x)x", r"x^"),
     # tier W: Toyota naming "WHEEL, DISC" / "DISC WHEEL"; the same page also
     # carries caps, nuts and ornaments, and spare wheels are excluded
     "wheels": (rf"^wheel,?\s*disc\b|^disc\s+wheel\b|^wheel,?\s*(aluminum|alloy|steel)\b",

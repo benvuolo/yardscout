@@ -1,0 +1,5024 @@
+{
+ "as_of": "2026-11-05T17:56:52Z",
+ "kind": "own_page",
+ "note": "R3 input (CURATION_SPEC 3.2 R3, 5.16): vehicle-years left out of Likely candidate classes because their own page was never read; crawl.py --complete reads those pages and the curator re-checks them. Never shipped.",
+ "ns": "nissan",
+ "rows": [
+  {
+   "cars": 142,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 65,
+   "gain": 9230,
+   "make": "Infiniti",
+   "model": "G35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 157,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 47,
+   "gain": 7379,
+   "make": "Nissan",
+   "model": "Xterra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2002
+  },
+  {
+   "cars": 58,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 106,
+   "gain": 6148,
+   "make": "Infiniti",
+   "model": "G37",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 112,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 52,
+   "gain": 5824,
+   "make": "Infiniti",
+   "model": "JX35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 59,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 90,
+   "gain": 5310,
+   "make": "Infiniti",
+   "model": "G37",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 151,
+   "cats": [
+    "bumper-front",
+    "door-front",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 33,
+   "gain": 4983,
+   "make": "Nissan",
+   "model": "Titan",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 105,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 47,
+   "gain": 4935,
+   "make": "Nissan",
+   "model": "Xterra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2000
+  },
+  {
+   "cars": 142,
+   "cats": [
+    "bumper-front",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 34,
+   "gain": 4828,
+   "make": "Nissan",
+   "model": "Titan",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 794,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 4764,
+   "make": "Nissan",
+   "model": "Altima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 44,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 107,
+   "gain": 4708,
+   "make": "Infiniti",
+   "model": "G37",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 65,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 72,
+   "gain": 4680,
+   "make": "Infiniti",
+   "model": "G37",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 95,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 49,
+   "gain": 4655,
+   "make": "Nissan",
+   "model": "Xterra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2001
+  },
+  {
+   "cars": 125,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "gauge-cluster",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 36,
+   "gain": 4500,
+   "make": "Nissan",
+   "model": "Xterra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 173,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 26,
+   "gain": 4498,
+   "make": "Nissan",
+   "model": "Pathfinder",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 138,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 30,
+   "gain": 4140,
+   "make": "Nissan",
+   "model": "Pathfinder",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 646,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 3876,
+   "make": "Nissan",
+   "model": "Altima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 645,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 3870,
+   "make": "Nissan",
+   "model": "Altima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 111,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 32,
+   "gain": 3552,
+   "make": "Nissan",
+   "model": "Pathfinder",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 590,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 3540,
+   "make": "Nissan",
+   "model": "Altima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 49,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 71,
+   "gain": 3479,
+   "make": "Infiniti",
+   "model": "G37",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 68,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 51,
+   "gain": 3468,
+   "make": "Infiniti",
+   "model": "M35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 35,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 97,
+   "gain": 3395,
+   "make": "Infiniti",
+   "model": "FX35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 46,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 73,
+   "gain": 3358,
+   "make": "Infiniti",
+   "model": "FX35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 103,
+   "cats": [
+    "bumper-front",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 32,
+   "gain": 3296,
+   "make": "Nissan",
+   "model": "Armada",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 43,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 76,
+   "gain": 3268,
+   "make": "Infiniti",
+   "model": "G37",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 99,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "gauge-cluster",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 32,
+   "gain": 3168,
+   "make": "Nissan",
+   "model": "Xterra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2003
+  },
+  {
+   "cars": 483,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 2898,
+   "make": "Nissan",
+   "model": "Altima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 191,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "gauge-cluster",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 15,
+   "gain": 2865,
+   "make": "Nissan",
+   "model": "Pathfinder",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 96,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "gauge-cluster",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 28,
+   "gain": 2688,
+   "make": "Nissan",
+   "model": "Xterra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 96,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "gauge-cluster",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 28,
+   "gain": 2688,
+   "make": "Nissan",
+   "model": "Xterra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 119,
+   "cats": [
+    "bumper-front",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 22,
+   "gain": 2618,
+   "make": "Nissan",
+   "model": "Armada",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 58,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 45,
+   "gain": 2610,
+   "make": "Infiniti",
+   "model": "QX60",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 52,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 50,
+   "gain": 2600,
+   "make": "Nissan",
+   "model": "Frontier",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2001
+  },
+  {
+   "cars": 85,
+   "cats": [
+    "bumper-front",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 30,
+   "gain": 2550,
+   "make": "Nissan",
+   "model": "Armada",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 41,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 62,
+   "gain": 2542,
+   "make": "Infiniti",
+   "model": "FX35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 71,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "gauge-cluster",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 35,
+   "gain": 2485,
+   "make": "Nissan",
+   "model": "Frontier",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2002
+  },
+  {
+   "cars": 80,
+   "cats": [
+    "bumper-front",
+    "door-front",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 29,
+   "gain": 2320,
+   "make": "Nissan",
+   "model": "Titan",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 76,
+   "cats": [
+    "bumper-front",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 28,
+   "gain": 2128,
+   "make": "Nissan",
+   "model": "Armada",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 35,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 58,
+   "gain": 2030,
+   "make": "Infiniti",
+   "model": "M35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 69,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "gauge-cluster",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 29,
+   "gain": 2001,
+   "make": "Nissan",
+   "model": "Xterra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 995,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 1990,
+   "make": "Nissan",
+   "model": "Altima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 46,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 39,
+   "gain": 1794,
+   "make": "Nissan",
+   "model": "Frontier",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 27,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 64,
+   "gain": 1728,
+   "make": "Infiniti",
+   "model": "I30",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2001
+  },
+  {
+   "cars": 22,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 77,
+   "gain": 1694,
+   "make": "Infiniti",
+   "model": "FX35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 835,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 1670,
+   "make": "Nissan",
+   "model": "Altima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 102,
+   "cats": [
+    "bumper-front",
+    "door-front",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 15,
+   "gain": 1530,
+   "make": "Nissan",
+   "model": "Titan",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 80,
+   "cats": [
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 1520,
+   "make": "Nissan",
+   "model": "Frontier",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2000
+  },
+  {
+   "cars": 69,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "gauge-cluster",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 21,
+   "gain": 1449,
+   "make": "Nissan",
+   "model": "Pathfinder",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 56,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 1400,
+   "make": "Nissan",
+   "model": "Frontier",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 48,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "gauge-cluster",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 29,
+   "gain": 1392,
+   "make": "Nissan",
+   "model": "Frontier",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2003
+  },
+  {
+   "cars": 53,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 26,
+   "gain": 1378,
+   "make": "Nissan",
+   "model": "Pathfinder",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 22,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 60,
+   "gain": 1320,
+   "make": "Infiniti",
+   "model": "FX35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2003
+  },
+  {
+   "cars": 210,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 1260,
+   "make": "Nissan",
+   "model": "Maxima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 208,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 1248,
+   "make": "Nissan",
+   "model": "Maxima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 81,
+   "cats": [
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 15,
+   "gain": 1215,
+   "make": "Nissan",
+   "model": "Armada",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 55,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "gauge-cluster",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 22,
+   "gain": 1210,
+   "make": "Nissan",
+   "model": "Frontier",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 605,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 1210,
+   "make": "Nissan",
+   "model": "Altima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 35,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 33,
+   "gain": 1155,
+   "make": "Nissan",
+   "model": "Frontier",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 191,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 1146,
+   "make": "Nissan",
+   "model": "Maxima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 184,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 1104,
+   "make": "Nissan",
+   "model": "Maxima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 16,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 68,
+   "gain": 1088,
+   "make": "Infiniti",
+   "model": "G25",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 33,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 31,
+   "gain": 1023,
+   "make": "Nissan",
+   "model": "Frontier",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 32,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 31,
+   "gain": 992,
+   "make": "Infiniti",
+   "model": "QX56",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 22,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 43,
+   "gain": 946,
+   "make": "Nissan",
+   "model": "Frontier",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 468,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 936,
+   "make": "Nissan",
+   "model": "Altima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 465,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 930,
+   "make": "Nissan",
+   "model": "Sentra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 32,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 29,
+   "gain": 928,
+   "make": "Infiniti",
+   "model": "I35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2002
+  },
+  {
+   "cars": 20,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 45,
+   "gain": 900,
+   "make": "Infiniti",
+   "model": "M35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 147,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 882,
+   "make": "Infiniti",
+   "model": "G35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 219,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 876,
+   "make": "Nissan",
+   "model": "Versa",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 145,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 870,
+   "make": "Nissan",
+   "model": "Maxima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 427,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 854,
+   "make": "Nissan",
+   "model": "Sentra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 141,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 846,
+   "make": "Infiniti",
+   "model": "G35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 20,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 42,
+   "gain": 840,
+   "make": "Infiniti",
+   "model": "FX35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 168,
+   "cats": [
+    "fender",
+    "side-mirrors"
+   ],
+   "classes": 5,
+   "gain": 840,
+   "make": "Nissan",
+   "model": "Titan",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 137,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 822,
+   "make": "Infiniti",
+   "model": "G35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2003
+  },
+  {
+   "cars": 205,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 820,
+   "make": "Nissan",
+   "model": "Versa",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 17,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 48,
+   "gain": 816,
+   "make": "Infiniti",
+   "model": "FX35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 34,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 24,
+   "gain": 816,
+   "make": "Nissan",
+   "model": "Pathfinder",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 21,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 38,
+   "gain": 798,
+   "make": "Infiniti",
+   "model": "M45",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 372,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 744,
+   "make": "Nissan",
+   "model": "Rogue",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 49,
+   "cats": [
+    "fender",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 15,
+   "gain": 735,
+   "make": "Infiniti",
+   "model": "FX35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 43,
+   "cats": [
+    "door-front",
+    "headlights",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 17,
+   "gain": 731,
+   "make": "Nissan",
+   "model": "Frontier",
+   "site": "www.nissanpartsdeal.com",
+   "year": 1998
+  },
+  {
+   "cars": 22,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 33,
+   "gain": 726,
+   "make": "Infiniti",
+   "model": "I35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2003
+  },
+  {
+   "cars": 20,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "gauge-cluster",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 36,
+   "gain": 720,
+   "make": "Nissan",
+   "model": "Xterra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 26,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 27,
+   "gain": 702,
+   "make": "Nissan",
+   "model": "Altima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 1997
+  },
+  {
+   "cars": 351,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 702,
+   "make": "Nissan",
+   "model": "Rogue",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 50,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 14,
+   "gain": 700,
+   "make": "Nissan",
+   "model": "Pathfinder",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 116,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 696,
+   "make": "Nissan",
+   "model": "Maxima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 347,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 694,
+   "make": "Nissan",
+   "model": "Sentra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 325,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 650,
+   "make": "Nissan",
+   "model": "Altima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 54,
+   "gain": 648,
+   "make": "Infiniti",
+   "model": "G25",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 19,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 34,
+   "gain": 646,
+   "make": "Infiniti",
+   "model": "QX60",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 21,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 30,
+   "gain": 630,
+   "make": "Infiniti",
+   "model": "EX35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 24,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "gauge-cluster",
+    "headlights",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 600,
+   "make": "Nissan",
+   "model": "Frontier",
+   "site": "www.nissanpartsdeal.com",
+   "year": 1999
+  },
+  {
+   "cars": 149,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 596,
+   "make": "Nissan",
+   "model": "Versa",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 147,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 588,
+   "make": "Nissan",
+   "model": "Rogue",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 142,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 568,
+   "make": "Infiniti",
+   "model": "G35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 51,
+   "gain": 561,
+   "make": "Infiniti",
+   "model": "M45",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 34,
+   "gain": 510,
+   "make": "Infiniti",
+   "model": "QX80",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 62,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 8,
+   "gain": 496,
+   "make": "Nissan",
+   "model": "Juke",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 81,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 486,
+   "make": "Nissan",
+   "model": "Juke",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 120,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 480,
+   "make": "Nissan",
+   "model": "Versa",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 13,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 36,
+   "gain": 468,
+   "make": "Nissan",
+   "model": "Altima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 1994
+  },
+  {
+   "cars": 115,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 460,
+   "make": "Nissan",
+   "model": "Versa",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 230,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 460,
+   "make": "Nissan",
+   "model": "Altima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 221,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 442,
+   "make": "Nissan",
+   "model": "Rogue",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 8,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 54,
+   "gain": 432,
+   "make": "Infiniti",
+   "model": "QX56",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "gauge-cluster",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 39,
+   "gain": 429,
+   "make": "Nissan",
+   "model": "Frontier",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 208,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 416,
+   "make": "Nissan",
+   "model": "Sentra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 205,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 410,
+   "make": "Nissan",
+   "model": "Rogue",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 204,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 408,
+   "make": "Nissan",
+   "model": "Altima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2003
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 27,
+   "gain": 405,
+   "make": "Infiniti",
+   "model": "I35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 13,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "gauge-cluster",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 31,
+   "gain": 403,
+   "make": "Nissan",
+   "model": "Xterra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 40,
+   "gain": 400,
+   "make": "Nissan",
+   "model": "Frontier",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 39,
+   "gain": 390,
+   "make": "Infiniti",
+   "model": "Q40",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 189,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 378,
+   "make": "Nissan",
+   "model": "Sentra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 189,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 378,
+   "make": "Nissan",
+   "model": "Sentra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 34,
+   "gain": 374,
+   "make": "Infiniti",
+   "model": "QX60",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 60,
+   "gain": 360,
+   "make": "Infiniti",
+   "model": "FX45",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2003
+  },
+  {
+   "cars": 178,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 356,
+   "make": "Nissan",
+   "model": "Versa",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 176,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 352,
+   "make": "Infiniti",
+   "model": "G35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 174,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 348,
+   "make": "Nissan",
+   "model": "Murano",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 346,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 346,
+   "make": "Nissan",
+   "model": "Versa",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 57,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 342,
+   "make": "Nissan",
+   "model": "Juke",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 56,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 336,
+   "make": "Nissan",
+   "model": "Cube",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 84,
+   "cats": [
+    "door-front",
+    "door-rear"
+   ],
+   "classes": 4,
+   "gain": 336,
+   "make": "Infiniti",
+   "model": "M35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 37,
+   "gain": 333,
+   "make": "Infiniti",
+   "model": "M35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 83,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 332,
+   "make": "Nissan",
+   "model": "Rogue",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 165,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 330,
+   "make": "Nissan",
+   "model": "Versa",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 29,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "headlights",
+    "hood",
+    "trunk-lid"
+   ],
+   "classes": 11,
+   "gain": 319,
+   "make": "Infiniti",
+   "model": "I30",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2000
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 63,
+   "gain": 315,
+   "make": "Infiniti",
+   "model": "FX45",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 157,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 314,
+   "make": "Nissan",
+   "model": "Sentra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 13,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "gauge-cluster",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 24,
+   "gain": 312,
+   "make": "Nissan",
+   "model": "Frontier",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 34,
+   "gain": 306,
+   "make": "Infiniti",
+   "model": "EX35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 8,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 38,
+   "gain": 304,
+   "make": "Infiniti",
+   "model": "M37",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 149,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 298,
+   "make": "Nissan",
+   "model": "Sentra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 146,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 292,
+   "make": "Nissan",
+   "model": "Murano",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 97,
+   "gain": 291,
+   "make": "Infiniti",
+   "model": "FX45",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 96,
+   "gain": 288,
+   "make": "Infiniti",
+   "model": "FX45",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 8,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 36,
+   "gain": 288,
+   "make": "Infiniti",
+   "model": "M37",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 48,
+   "cats": [
+    "side-mirrors",
+    "tail-lights"
+   ],
+   "classes": 6,
+   "gain": 288,
+   "make": "Infiniti",
+   "model": "EX35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 31,
+   "gain": 279,
+   "make": "Nissan",
+   "model": "Altima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 1996
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "hood",
+    "liftgate"
+   ],
+   "classes": 18,
+   "gain": 270,
+   "make": "Infiniti",
+   "model": "FX35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 89,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 267,
+   "make": "Nissan",
+   "model": "Rogue",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 66,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 264,
+   "make": "Nissan",
+   "model": "Versa",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 131,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 262,
+   "make": "Nissan",
+   "model": "Altima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2002
+  },
+  {
+   "cars": 262,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 262,
+   "make": "Nissan",
+   "model": "Rogue",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "climate-control",
+    "door-front",
+    "gauge-cluster",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 17,
+   "gain": 255,
+   "make": "Nissan",
+   "model": "Xterra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 126,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 252,
+   "make": "Nissan",
+   "model": "Sentra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 123,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 246,
+   "make": "Nissan",
+   "model": "Sentra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2019
+  },
+  {
+   "cars": 61,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 244,
+   "make": "Nissan",
+   "model": "Cube",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 242,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 242,
+   "make": "Nissan",
+   "model": "Murano",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 118,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 236,
+   "make": "Nissan",
+   "model": "Altima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 58,
+   "gain": 232,
+   "make": "Infiniti",
+   "model": "M45",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 38,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 228,
+   "make": "Nissan",
+   "model": "Cube",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 226,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 226,
+   "make": "Nissan",
+   "model": "Versa",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 56,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 224,
+   "make": "Nissan",
+   "model": "Versa",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2019
+  },
+  {
+   "cars": 36,
+   "cats": [
+    "door-rear",
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 216,
+   "make": "Infiniti",
+   "model": "QX56",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 107,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 214,
+   "make": "Nissan",
+   "model": "Murano",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 34,
+   "gain": 204,
+   "make": "Infiniti",
+   "model": "QX50",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 97,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 194,
+   "make": "Nissan",
+   "model": "Juke",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 64,
+   "gain": 192,
+   "make": "Infiniti",
+   "model": "M56",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 64,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 192,
+   "make": "Nissan",
+   "model": "Rogue",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 31,
+   "gain": 186,
+   "make": "Nissan",
+   "model": "Altima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 1993
+  },
+  {
+   "cars": 60,
+   "cats": [
+    "hood",
+    "side-mirrors"
+   ],
+   "classes": 3,
+   "gain": 180,
+   "make": "Nissan",
+   "model": "Armada",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 175,
+   "make": "Infiniti",
+   "model": "FX37",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 29,
+   "gain": 174,
+   "make": "Infiniti",
+   "model": "EX35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 87,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 174,
+   "make": "Nissan",
+   "model": "Altima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 173,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 1,
+   "gain": 173,
+   "make": "Nissan",
+   "model": "Versa",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 34,
+   "gain": 170,
+   "make": "Infiniti",
+   "model": "FX35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "climate-control",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 17,
+   "gain": 170,
+   "make": "Nissan",
+   "model": "Frontier",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 42,
+   "gain": 168,
+   "make": "Infiniti",
+   "model": "FX50",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "climate-control",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 12,
+   "gain": 168,
+   "make": "Nissan",
+   "model": "Frontier",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 26,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 156,
+   "make": "Nissan",
+   "model": "Leaf",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 36,
+   "gain": 144,
+   "make": "Infiniti",
+   "model": "QX50",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 28,
+   "gain": 140,
+   "make": "Infiniti",
+   "model": "Q60",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 28,
+   "cats": [
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 140,
+   "make": "Nissan",
+   "model": "Titan",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 66,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 132,
+   "make": "Nissan",
+   "model": "Murano",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2003
+  },
+  {
+   "cars": 43,
+   "cats": [
+    "hood",
+    "side-mirrors"
+   ],
+   "classes": 3,
+   "gain": 129,
+   "make": "Nissan",
+   "model": "Armada",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 126,
+   "make": "Nissan",
+   "model": "Frontier",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 42,
+   "cats": [
+    "hood",
+    "side-mirrors"
+   ],
+   "classes": 3,
+   "gain": 126,
+   "make": "Nissan",
+   "model": "Armada",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 20,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 120,
+   "make": "Nissan",
+   "model": "Juke",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "fender",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 117,
+   "make": "Infiniti",
+   "model": "QX50",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 29,
+   "gain": 116,
+   "make": "Infiniti",
+   "model": "Q70",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 38,
+   "gain": 114,
+   "make": "Infiniti",
+   "model": "QX80",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 21,
+   "cats": [
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 105,
+   "make": "Nissan",
+   "model": "Armada",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 9,
+   "cats": [
+    "fender",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 99,
+   "make": "Infiniti",
+   "model": "QX60",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 32,
+   "cats": [
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 96,
+   "make": "Nissan",
+   "model": "Titan",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 46,
+   "gain": 92,
+   "make": "Infiniti",
+   "model": "FX50",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 30,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 90,
+   "make": "Nissan",
+   "model": "Murano",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 45,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 90,
+   "make": "Nissan",
+   "model": "Maxima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 29,
+   "cats": [
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 87,
+   "make": "Nissan",
+   "model": "Titan",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "bumper-rear",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 21,
+   "gain": 84,
+   "make": "Infiniti",
+   "model": "QX70",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 84,
+   "make": "Nissan",
+   "model": "Leaf",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 28,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 3,
+   "gain": 84,
+   "make": "Nissan",
+   "model": "Sentra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 1997
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 27,
+   "gain": 81,
+   "make": "Infiniti",
+   "model": "M35h",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 8,
+   "cats": [
+    "climate-control",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 10,
+   "gain": 80,
+   "make": "Nissan",
+   "model": "Xterra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 40,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 80,
+   "make": "Nissan",
+   "model": "Maxima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 13,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 78,
+   "make": "Nissan",
+   "model": "Juke",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 8,
+   "cats": [
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 72,
+   "make": "Nissan",
+   "model": "Frontier",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 24,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 3,
+   "gain": 72,
+   "make": "Nissan",
+   "model": "Sentra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 1998
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 23,
+   "gain": 69,
+   "make": "Infiniti",
+   "model": "EX35",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 34,
+   "gain": 68,
+   "make": "Infiniti",
+   "model": "Q70",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 66,
+   "make": "Nissan",
+   "model": "Cube",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 22,
+   "cats": [
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 66,
+   "make": "Nissan",
+   "model": "Titan",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 16,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 64,
+   "make": "Nissan",
+   "model": "Cube",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-rear",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 21,
+   "gain": 63,
+   "make": "Infiniti",
+   "model": "QX70",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-rear",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 21,
+   "gain": 63,
+   "make": "Infiniti",
+   "model": "QX70",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 62,
+   "gain": 62,
+   "make": "Infiniti",
+   "model": "FX45",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2008
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "door-rear",
+    "fender",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 20,
+   "gain": 60,
+   "make": "Infiniti",
+   "model": "QX80",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 20,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 3,
+   "gain": 60,
+   "make": "Nissan",
+   "model": "Sentra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 1996
+  },
+  {
+   "cars": 29,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 2,
+   "gain": 58,
+   "make": "Nissan",
+   "model": "Sentra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 1999
+  },
+  {
+   "cars": 13,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 52,
+   "make": "Nissan",
+   "model": "Kicks",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2020
+  },
+  {
+   "cars": 17,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 51,
+   "make": "Nissan",
+   "model": "Murano",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 17,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 51,
+   "make": "Nissan",
+   "model": "Rogue",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2019
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 48,
+   "make": "Infiniti",
+   "model": "Q45",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2002
+  },
+  {
+   "cars": 24,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 48,
+   "make": "Infiniti",
+   "model": "M37",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2011
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-rear",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights"
+   ],
+   "classes": 15,
+   "gain": 45,
+   "make": "Infiniti",
+   "model": "QX70",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 45,
+   "make": "Nissan",
+   "model": "Frontier",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "fender",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 44,
+   "make": "Infiniti",
+   "model": "QX60",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2019
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 42,
+   "make": "Nissan",
+   "model": "Murano",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 3,
+   "gain": 42,
+   "make": "Nissan",
+   "model": "Sentra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 1994
+  },
+  {
+   "cars": 21,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 42,
+   "make": "Nissan",
+   "model": "Versa",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2021
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 39,
+   "gain": 39,
+   "make": "Infiniti",
+   "model": "EX37",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 13,
+   "cats": [
+    "hood",
+    "side-mirrors"
+   ],
+   "classes": 3,
+   "gain": 39,
+   "make": "Nissan",
+   "model": "Armada",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 13,
+   "cats": [
+    "hood",
+    "side-mirrors"
+   ],
+   "classes": 3,
+   "gain": 39,
+   "make": "Nissan",
+   "model": "Armada",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 36,
+   "gain": 36,
+   "make": "Infiniti",
+   "model": "M56",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 36,
+   "gain": 36,
+   "make": "Infiniti",
+   "model": "QX50",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 12,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 3,
+   "gain": 36,
+   "make": "Nissan",
+   "model": "Sentra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 1995
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "hood",
+    "side-mirrors"
+   ],
+   "classes": 3,
+   "gain": 33,
+   "make": "Nissan",
+   "model": "Armada",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 11,
+   "cats": [
+    "side-mirrors"
+   ],
+   "classes": 3,
+   "gain": 33,
+   "make": "Nissan",
+   "model": "Pathfinder",
+   "site": "www.nissanpartsdeal.com",
+   "year": 1993
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 30,
+   "make": "Nissan",
+   "model": "Murano",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "side-mirrors"
+   ],
+   "classes": 3,
+   "gain": 30,
+   "make": "Nissan",
+   "model": "Pathfinder",
+   "site": "www.nissanpartsdeal.com",
+   "year": 1992
+  },
+  {
+   "cars": 10,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 30,
+   "make": "Nissan",
+   "model": "Rogue",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2020
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 29,
+   "gain": 29,
+   "make": "Infiniti",
+   "model": "Q70L",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 28,
+   "gain": 28,
+   "make": "Infiniti",
+   "model": "Q60",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 28,
+   "make": "Nissan",
+   "model": "Kicks",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2021
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 28,
+   "make": "Nissan",
+   "model": "Maxima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 14,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 28,
+   "make": "Nissan",
+   "model": "Versa",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2020
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 27,
+   "make": "Nissan",
+   "model": "Frontier",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 27,
+   "make": "Nissan",
+   "model": "Frontier",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2019
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 24,
+   "make": "Nissan",
+   "model": "Juke",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 24,
+   "make": "Nissan",
+   "model": "Cube",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 24,
+   "make": "Nissan",
+   "model": "Kicks",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 24,
+   "make": "Nissan",
+   "model": "Kicks",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2019
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "fender",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 22,
+   "make": "Infiniti",
+   "model": "QX60",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2020
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 3,
+   "gain": 21,
+   "make": "Nissan",
+   "model": "200SX",
+   "site": "www.nissanpartsdeal.com",
+   "year": 1997
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 3,
+   "gain": 21,
+   "make": "Nissan",
+   "model": "Sentra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 1993
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-rear",
+    "fender",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 20,
+   "gain": 20,
+   "make": "Infiniti",
+   "model": "QX80",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 3,
+   "gain": 18,
+   "make": "Nissan",
+   "model": "200SX",
+   "site": "www.nissanpartsdeal.com",
+   "year": 1998
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 16,
+   "make": "Infiniti",
+   "model": "Q45",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2005
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 16,
+   "make": "Nissan",
+   "model": "Kicks",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2022
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "climate-control",
+    "window-regulator"
+   ],
+   "classes": 5,
+   "gain": 15,
+   "make": "Nissan",
+   "model": "Xterra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 3,
+   "gain": 15,
+   "make": "Nissan",
+   "model": "200SX",
+   "site": "www.nissanpartsdeal.com",
+   "year": 1996
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "side-mirrors"
+   ],
+   "classes": 3,
+   "gain": 15,
+   "make": "Nissan",
+   "model": "Pathfinder",
+   "site": "www.nissanpartsdeal.com",
+   "year": 1991
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 12,
+   "make": "Nissan",
+   "model": "Kicks",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2023
+  },
+  {
+   "cars": 4,
+   "cats": [
+    "side-mirrors"
+   ],
+   "classes": 3,
+   "gain": 12,
+   "make": "Nissan",
+   "model": "Pathfinder",
+   "site": "www.nissanpartsdeal.com",
+   "year": 1989
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "fender",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 11,
+   "make": "Infiniti",
+   "model": "Q70L",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 10,
+   "make": "Nissan",
+   "model": "Maxima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2020
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "fender",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 9,
+   "make": "Infiniti",
+   "model": "Q70",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 9,
+   "make": "Nissan",
+   "model": "Frontier",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2020
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 8,
+   "make": "Infiniti",
+   "model": "Q45",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2003
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 8,
+   "make": "Nissan",
+   "model": "Kicks",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2024
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "fender",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 7,
+   "gain": 7,
+   "make": "Infiniti",
+   "model": "Q70",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2019
+  },
+  {
+   "cars": 7,
+   "cats": [
+    "hood"
+   ],
+   "classes": 1,
+   "gain": 7,
+   "make": "Nissan",
+   "model": "Titan",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2014
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 3,
+   "gain": 6,
+   "make": "Nissan",
+   "model": "200SX",
+   "site": "www.nissanpartsdeal.com",
+   "year": 1995
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 6,
+   "make": "Nissan",
+   "model": "Murano",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2019
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 6,
+   "make": "Nissan",
+   "model": "Murano",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2020
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 6,
+   "make": "Nissan",
+   "model": "Murano",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2021
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "side-mirrors"
+   ],
+   "classes": 3,
+   "gain": 6,
+   "make": "Nissan",
+   "model": "Pathfinder",
+   "site": "www.nissanpartsdeal.com",
+   "year": 1990
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 6,
+   "make": "Nissan",
+   "model": "Versa",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2024
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 6,
+   "make": "Nissan",
+   "model": "Xterra",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 6,
+   "cats": [
+    "hood"
+   ],
+   "classes": 1,
+   "gain": 6,
+   "make": "Nissan",
+   "model": "Titan",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2015
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "hood"
+   ],
+   "classes": 1,
+   "gain": 5,
+   "make": "Nissan",
+   "model": "Titan",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 4,
+   "make": "Infiniti",
+   "model": "Q45",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2004
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "Infiniti",
+   "model": "Q60",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "Nissan",
+   "model": "Versa",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2022
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "Nissan",
+   "model": "Versa",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2023
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "Nissan",
+   "model": "Versa",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2025
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Infiniti",
+   "model": "Q60",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2019
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 2,
+   "make": "Nissan",
+   "model": "Maxima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2022
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 73,
+   "gain": 0,
+   "make": "Infiniti",
+   "model": "FX45",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2007
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "liftgate",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 48,
+   "gain": 0,
+   "make": "Infiniti",
+   "model": "FX50",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 45,
+   "gain": 0,
+   "make": "Infiniti",
+   "model": "M45",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2009
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 38,
+   "gain": 0,
+   "make": "Infiniti",
+   "model": "M56",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "fender",
+    "gauge-cluster",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 37,
+   "gain": 0,
+   "make": "Infiniti",
+   "model": "M45",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2010
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 36,
+   "gain": 0,
+   "make": "Nissan",
+   "model": "Stanza",
+   "site": "www.nissanpartsdeal.com",
+   "year": 1994
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 36,
+   "gain": 0,
+   "make": "Nissan",
+   "model": "Stanza",
+   "site": "www.nissanpartsdeal.com",
+   "year": 1995
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 34,
+   "gain": 0,
+   "make": "Infiniti",
+   "model": "FX50",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2012
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 31,
+   "gain": 0,
+   "make": "Nissan",
+   "model": "Stanza",
+   "site": "www.nissanpartsdeal.com",
+   "year": 1993
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 31,
+   "gain": 0,
+   "make": "Nissan",
+   "model": "Stanza",
+   "site": "www.nissanpartsdeal.com",
+   "year": 1996
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "climate-control",
+    "headlights",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 27,
+   "gain": 0,
+   "make": "Nissan",
+   "model": "Stanza",
+   "site": "www.nissanpartsdeal.com",
+   "year": 1997
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 0,
+   "make": "Infiniti",
+   "model": "FX50",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "side-mirrors",
+    "tail-lights",
+    "trunk-lid",
+    "window-regulator"
+   ],
+   "classes": 25,
+   "gain": 0,
+   "make": "Infiniti",
+   "model": "M35h",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2013
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-rear",
+    "fender",
+    "hood",
+    "liftgate",
+    "tail-lights",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 0,
+   "make": "Infiniti",
+   "model": "QX80",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "fender",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 0,
+   "make": "Infiniti",
+   "model": "Q70",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2016
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "fender",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "Infiniti",
+   "model": "Q70",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "fender",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "Infiniti",
+   "model": "Q70L",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "fender",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "Infiniti",
+   "model": "Q70L",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2018
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 9,
+   "gain": 0,
+   "make": "Nissan",
+   "model": "Frontier",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2021
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-rear",
+    "window-regulator"
+   ],
+   "classes": 8,
+   "gain": 0,
+   "make": "Infiniti",
+   "model": "QX80",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2019
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-front",
+    "fender",
+    "hood",
+    "window-regulator"
+   ],
+   "classes": 7,
+   "gain": 0,
+   "make": "Infiniti",
+   "model": "Q70L",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2019
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-rear",
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 0,
+   "make": "Infiniti",
+   "model": "QX80",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2020
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-rear",
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 0,
+   "make": "Infiniti",
+   "model": "QX80",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2021
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-rear",
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 0,
+   "make": "Infiniti",
+   "model": "QX80",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2022
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-rear",
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 0,
+   "make": "Infiniti",
+   "model": "QX80",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2023
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "door-rear",
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 0,
+   "make": "Infiniti",
+   "model": "QX80",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2024
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 4,
+   "gain": 0,
+   "make": "Infiniti",
+   "model": "Q45",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2006
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Nissan",
+   "model": "Murano",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2022
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Nissan",
+   "model": "Murano",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2023
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 0,
+   "make": "Nissan",
+   "model": "Murano",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2024
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Infiniti",
+   "model": "Q60",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2017
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Infiniti",
+   "model": "Q60",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2020
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Infiniti",
+   "model": "Q60",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2021
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Infiniti",
+   "model": "Q60",
+   "site": "www.infinitipartsdeal.com",
+   "year": 2022
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "gauge-cluster"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Nissan",
+   "model": "200SX",
+   "site": "www.nissanpartsdeal.com",
+   "year": 1999
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Nissan",
+   "model": "Maxima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2019
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Nissan",
+   "model": "Maxima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2021
+  },
+  {
+   "cars": 0,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 0,
+   "make": "Nissan",
+   "model": "Maxima",
+   "site": "www.nissanpartsdeal.com",
+   "year": 2023
+  }
+ ],
+ "unrouted_makes": {}
+}

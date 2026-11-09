@@ -64024,7 +64024,7 @@
      2003
     ]
    ],
-   "cars": 38,
+   "cars": 37,
    "cat": "headlights",
    "id": "oem:vag:headlights:L:19353e8533",
    "kind": "body",
@@ -64051,7 +64051,7 @@
      2003
     ]
    ],
-   "cars": 38,
+   "cars": 37,
    "cat": "headlights",
    "id": "oem:vag:headlights:R:977c133a8e",
    "kind": "body",
@@ -64078,7 +64078,7 @@
      2003
     ]
    ],
-   "cars": 142,
+   "cars": 140,
    "cat": "gauge-cluster",
    "id": "oem:vag:gauge-cluster:C:ce122997d5",
    "kind": "body",
@@ -64105,7 +64105,7 @@
      2003
     ]
    ],
-   "cars": 142,
+   "cars": 140,
    "cat": "gauge-cluster",
    "id": "oem:vag:gauge-cluster:C:3208fc0615",
    "kind": "body",
@@ -64251,7 +64251,7 @@
   }
  ],
  "ns": "vag",
- "policy_sha256": "3842a15ed5308947ee820a6d9fe7355f31196736f6c0faac65e93fec6a485b8f",
+ "policy_sha256": "7bf95354d703fdf619abb84ba2533fbb7e58ba03efc5663cb1c9d01a23fcf0e2",
  "raw": {
   "commit": "c36da2eb98835c02f81c05e8c36b6a926634a332",
   "ref": "c36da2eb98835c02f81c05e8c36b6a926634a332",

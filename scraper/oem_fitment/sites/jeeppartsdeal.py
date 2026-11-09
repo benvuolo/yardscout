@@ -71,6 +71,10 @@ CAT_PAGES = {
     "grille": r"^body-hardware/(grille-components|bumper-components-front)$",
     "tailgate": r"^body-hardware/(tailgate|tail-gate[a-z-]*|swing-gate[a-z-]*)$",
     "liftgate": r"^body-hardware/(lift-gate|liftgate[a-z-]*|lift-gate-body)$",
+    # tier C (ops/interchange.md "Category breadth" §8): slugs from the R2 years manifests
+    "wiper-motor": r"^(electrical/wipers|body-hardware/wiper-washer-components(-body)?)$",
+    "knuckle": r"^suspension/(front-suspension|front-suspension-components|rear-suspension|rear-suspension-components|front-axle-carrier)$|^driveline-axles/(front-axle|front-axle-driveline|rear-axle)$",
+    "strut": r"^suspension/(struts-components|shocks-components|struts-suspension-components-front|front-suspension|front-suspension-components|rear-suspension|rear-suspension-components|ride-control-front|ride-control-rear)$",
 }
 
 D = r"\W+"  # Mopar "Noun - Qualifier" / "NOUN Qualifier"
@@ -124,6 +128,19 @@ RULES = {
                  r"hinge|latch|glass|handle|bumper|strap|check|support|cable|link|lock|striker|weather|carrier|trim|panel|cylinder|stop|actuator|module|switch|lamp|emblem|nameplate|molding|applique|cover|bar"),
     "liftgate": (rf"^(liftgate|lift\s+gate|door{D}liftgate)\b",
                  r"handle|bar|striker|latch|cylinder|link|weather|propeller|gas|hinge|glass|motor|wiper|spoiler|lamp|trim|molding|applique|switch|strut|cable|support|module|panel|actuator|lock|bumper|emblem|nameplate|camera|release|check|cover|shield|silencer|insulator|pad|garnish"),
+    # tier C, Mopar names on the 2026-11-09 trial pages: "Motor - Windshield
+    # Wiper", "Motor - Wiper", "Motor, Liftgate Wiper"; "Knuckle - Front" (not
+    # "KNUCKLE AND HUB", a different package, nor "Ball Join - Knuckle");
+    # "Strut - Front Suspension", "STRUT Front Suspension", "Absorber -
+    # Suspension", "SHOCK ABSORBER Suspension Rear". Exclusions read main AND
+    # aux: a motor row whose aux says "Wiper Linkage" is dropped (packaging
+    # not stated); "Absorber Package" and loaded-strut kits are kits.
+    "wiper-motor": (r"^motor\b[^|]*\bwiper\b|^wiper\s+motor\b",
+                    r"bezel|cover|pivot|washer|pump|hose|stop|bumper|switch|arm|blade|link|transmission|relay|module"),
+    "knuckle": (r"^knuckle\b",
+                r"ball|join|hub|bushing|seal|shaft|cap|shield|bearing"),
+    "strut": (r"^(strut|absorber|shock\s+absorber)\b",
+              r"mount|bracket|bushing|cover|grommet|retainer|plate|sleeve|stop|bumper|package|kit|seat|bearing|steering|boot|insulator|spring"),
     # tier W: road wheels only (Mopar "Wheel - Aluminum", "Wheel, Steel");
     # no spare / temporary / compact wheel, cap, cover, nut, lock or sensor
     "wheels": (rf"^wheel(\s+assembly)?({D}(aluminum|alloy|steel|chrome|painted|polished|forged|cast)\b|$|{D}front|{D}rear)",

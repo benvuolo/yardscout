@@ -540,6 +540,36 @@ with tempfile.TemporaryDirectory() as td:
     check("R3 rerun: nothing left, no request", rc == 0 and len(pages.gets()) == g1 and len(jl(raw / f"{TY}.jsonl")) == len(recs))
     check("R3 never marks .done", not (raw / f"{TY}.done").exists())
 
+# R3 completion, site-agnostic: worklist.json "complete" + --complete auto
+import markers  # noqa: E402
+with tempfile.TemporaryDirectory() as td:
+    root = Path(td)
+    wlx = json.loads(json.dumps(WORKLIST))
+    wlx["sites"][TY]["complete"] = {"file": "completion/own_page.json", "version": 2}
+    (root / "worklist.json").write_text(json.dumps(wlx))
+    (root / "completion").mkdir()
+    (root / "completion" / "own_page.json").write_text(json.dumps({"rows": [
+        {"site": GM, "make": "Chevrolet", "model": "Malibu", "year": 2030, "cats": ["alternator"]},
+        {"site": TY, "make": "Toyota", "model": "Camry", "year": 2030, "cats": ["alternator", "starter"]},
+        {"make": "Toyota", "model": "Camry", "year": 2031, "cats": ["alternator"]}]}))
+    pages = fresh_pages()
+    rc = run(root, "--site", TY, "--complete", "auto")
+    raw = root / "raw"
+    prog = json.loads((raw / f"{TY}.progress.json").read_text())
+    check("R3 auto: exits 0", rc == 0, rc)
+    check("R3 auto: rows of another site skipped, unsited rows read",
+          not any("Chevrolet" in k for k in prog["done"]) and "C|Toyota|Camry|2031|alternator" in prog["done"]
+          and not any(S.G in u for u in pages.gets()), prog["done"])
+    check("R3 auto: completion marker written, .done not", (raw / f"{TY}.c2.done").exists()
+          and not (raw / f"{TY}.done").exists())
+    rc = run(root, "--site", GM, "--complete", "auto")
+    check("R3 auto: a site without a complete entry refuses", rc == 2, rc)
+check("markers.mode", [markers.mode("s", e, lambda n, have=have: n in have) for e, have in [
+    ({}, set()), ({}, {"s.done"}), ({"complete": {"file": "f"}}, {"s.done"}),
+    ({"complete": {"file": "f"}}, {"s.done", "s.c1.done"}), ({"complete": {"file": "f", "version": 3}}, {"s.done", "s.c1.done"}),
+    ({"complete": {"file": "f"}}, {"s.done", "s.blocked"}), ({"complete": {"file": "f"}}, set())]]
+      == ["crawl", None, "complete", None, "complete", None, "crawl"])
+
 # helpers
 check("url_names_pn shapes", crawl.url_names_pn("/oem/toyota~starter~28100-90030", "28100-90030")
       and crawl.url_names_pn("/parts/ford-alternator-assy_f7pz-10346-karm.html", "F7PZ-10346-KARM")

@@ -57,11 +57,24 @@ SUBCATS = {
     "trunk-lid": r"trunk_lid",
     "tailgate": r"rear_body|tail_?gate|rear_gate",
     "liftgate": r"back_door_panel|back_door$",
+    # tier C (2026-11-09; 2012 Altima sedan: body_electrical/windshield_wiper,
+    # axle_suspension/front_axle, front_suspension, rear_suspension)
+    "wiper-motor": r"wiper",
+    "knuckle": r"^(front|rear)_axle$",
+    "strut": r"^(front|rear)_suspension$|shock_absorber",
 }
-SUBCAT_EXCL = {"radiator": r"hose"}
+SUBCAT_EXCL = {"radiator": r"hose", "wiper-motor": r"washer|headlamp"}
 
 VA = r"Value Advantage"
 PARTS = {
+    # tier C. "Drive Assy-Windshield Wiper" is motor + linkage: its product
+    # page says "Motor & Drive" (28800-ZX01A). "Strut Kit-Front Suspension,
+    # LH" and "Shock Absorber Kit-Rear" are the dampers (E-prefixed service
+    # numbers, kept). Rear axle housings are not knuckles and are not taken.
+    "wiper-motor": (r"^(Motor|Drive)(?: Assy)?-[^|]*Wiper", r"Headlamp|Washer|Arm|Blade|Link|Pivot|Cover|Bracket|Refill", VA),
+    "knuckle": (r"^Knuckle Spindle|^Spindle-Knuckle|^Knuckle(?: Assy)?-(?!Arm)", r"Nut|Bolt|Arm|Bush|Cover|Seal|Plate|Shield|Bearing", VA),
+    "strut": (r"^Strut(?: Assy| Kit)?-|^Shock Absorber(?: Assy| Kit)?-|^Absorber (?:Assy|Kit)-Shock",
+              r"Mount|Bearing|Insulator|Bush|Bracket|Cap|Seat|Bound|Bumper|Boot|Cover|Tube|Spring|Distance|Stopper|Nut|Bolt|Washer", VA),
     "alternator": (r"^(Generator|Alternator)\b", r"Pulley|Bracket|Fan|Regulator|Brush|Bearing|Cover", VA),
     "starter": (r"^Motor Assy-Starter|^Starter Motor|^Starter\b", r"Switch|Solenoid|Pinion|Gear", VA),
     "ac-compressor": (r"^Compressor(?: Assy)?-(Cooler|Air Con|A/C)|^Compressor Assy-Cooler", r"Clutch|Pulley|Coil|Valve|Switch", VA),

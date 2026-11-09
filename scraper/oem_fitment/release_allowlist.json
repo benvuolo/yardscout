@@ -2321,6 +2321,225 @@
   {
    "apps": [
     [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "headlights",
+   "id": "subaru~headlights~84001AL02A",
+   "ns": "subaru",
+   "pn": [
+    "84001AL02A"
+   ],
+   "sources": [
+    "https://www.headlightsdepot.com/sku-320-1127r-ac2.html",
+    "https://www.go-parts.com/su2503149-2015-2016-subaru-outback-headlight-assembly-right-passenger-side.html",
+    "https://auto-bodyparts.com/subaru-outback-head-lamp-assembly-right-halogen-black-bezel-capa-oem-84001al02a-2015-2017.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ]
+   ],
+   "cat": "headlights",
+   "id": "subaru~headlights~84001AL03A",
+   "ns": "subaru",
+   "pn": [
+    "84001AL03A"
+   ],
+   "sources": [
+    "https://www.headlightsdepot.com/sku-320-1127l-ac2.html",
+    "https://www.walmart.com/ip/5754813157"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Impreza",
+     2012,
+     2012
+    ],
+    [
+     "Subaru",
+     "XV Crosstrek",
+     2013,
+     2013
+    ]
+   ],
+   "cat": "headlights",
+   "id": "subaru~headlights~84001FJ080",
+   "ns": "subaru",
+   "pn": [
+    "84001FJ080"
+   ],
+   "sources": [
+    "https://www.headlightsdepot.com/sku-320-1123r-ac2.html",
+    "https://www.walmart.com/ip/670349833"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Impreza",
+     2012,
+     2012
+    ],
+    [
+     "Subaru",
+     "XV Crosstrek",
+     2013,
+     2013
+    ]
+   ],
+   "cat": "headlights",
+   "id": "subaru~headlights~84001FJ090",
+   "ns": "subaru",
+   "pn": [
+    "84001FJ090"
+   ],
+   "sources": [
+    "https://www.go-parts.com/su2502140-2012-2013-subaru-impreza-headlight-assembly-left-driver-side-sedan-wagon.html",
+    "https://www.go-parts.com/su2502140-2013-2014-subaru-xv-crosstrek-headlight-assembly-left-driver-side.html",
+    "https://www.headlightsdepot.com/sku-320-1123l-ac2.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "hood",
+   "id": "subaru~hood~57229AG04A9P",
+   "note": "Turbo hood (scoop cutout): Legacy GT / Outback XT only",
+   "ns": "subaru",
+   "pn": [
+    "57229AG04A9P"
+   ],
+   "sources": [
+    "https://paintedautoparts.com/subaru-legacy-outback-hood-w-turbo-legacy-outback-05-07-alum-oem-57229ag04a9p-2005-2009-pl-su1230122.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2011,
+     2013
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "hood",
+   "id": "subaru~hood~57229AJ00A9P",
+   "note": "Non-turbo hood (no scoop); the 2011-12 Legacy 2.5GT turbo uses a different hood",
+   "ns": "subaru",
+   "pn": [
+    "57229AJ00A9P"
+   ],
+   "sources": [
+    "https://paintedautoparts.com/subaru-legacy-hood-w-o-turbo-oem-57229aj00a9p-2010-2014.html",
+    "https://paintedautoparts.com/subaru-outback-hood-oem-57229aj00a9p-2010-2014.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2015,
+     2015
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2018,
+     2018
+    ]
+   ],
+   "cat": "hood",
+   "id": "subaru~hood~57229AL00B9P",
+   "ns": "subaru",
+   "pn": [
+    "57229AL00B9P"
+   ],
+   "sources": [
+    "https://paintedautoparts.com/subaru-outback-hood-aluminum-capa-oem-57229al00b9p-2015-2019.html",
+    "https://paintedautoparts.com/subaru-legacy-hood-aluminum-capa-oem-57229al00b9p-2015-2019.html",
+    "https://www.go-parts.com/1517-subaru-outback-hood-p-900188727.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Subaru",
+     "Impreza",
+     2012,
+     2012
+    ],
+    [
+     "Subaru",
+     "XV Crosstrek",
+     2013,
+     2013
+    ]
+   ],
+   "cat": "hood",
+   "id": "subaru~hood~57229FJ0009P",
+   "ns": "subaru",
+   "pn": [
+    "57229FJ0009P"
+   ],
+   "sources": [
+    "https://paintedautoparts.com/subaru-xv-crosstrek-crosstrek-hood-oem-57229fj0009p-2013-2017.html",
+    "https://www.go-parts.com/1215-subaru-impreza-hood-p-334368.html",
+    "https://www.go-parts.com/1315-subaru-xv-crosstrek-hood-p-334369.html"
+   ]
+  },
+  {
+   "apps": [
+    [
      "Volkswagen",
      "Golf",
      1996,
@@ -2614,5 +2833,6 @@
   }
  ],
  "note": "Exterior-hold release allowlist (CURATION_SPEC 5.16). A held Likely group is released only when (ns, cat, pn, apps) matches an entry exactly and the group still passes every other rule. Entries are added only on an owner go recorded in ops/hub.md. Hashed into policy_sha256 (policy.POLICY_INPUTS).",
- "owner_go": "2026-11-09 ~03:10 UTC, ops/hub.md (30723df): option 1, release all researched held groups in _report/held_exterior_release.json (agent RIGHT + at least one cited independent non-eBay source); subaru excluded while withheld"
+ "owner_go": "2026-11-09 ~03:10 UTC, ops/hub.md (30723df): option 1, release all researched held groups in _report/held_exterior_release.json (agent RIGHT + at least one cited independent non-eBay source); subaru excluded while withheld",
+ "owner_go_subaru": "2026-11-09 ~18:20 UTC hub confirmation (session_01LsgNuWEh1vdaDCtdP1jxMM): subaru re-shipped after §11.4 round 4 (0 WRONG); the 8 subaru entries of _report/held_exterior_release.json, each RIGHT in the make-breadth samples (rounds 1-4); notes on the two hoods name the turbo / non-turbo split their sources state"
 }
