@@ -145,3 +145,17 @@ Spectra notes for the hub:
 - Pages print no OE numbers (only Spectra part numbers and specs); the
   "Interchange #" search exists but was not probed. The dealer-catalog OE
   join is therefore not available from the pages we read.
+
+Second pass (2026-11-09, after the hub's HOLD on Spectra; same criteria):
+
+| source | result | verdict |
+|---|---|---|
+| CSF radiators (www.csfradiators.com) | connection reset on robots.txt | **unreachable** (not retried) |
+| OSC Cooling (www.osccoolingproducts.com) | proxy 502 on robots.txt (host not reachable) | **unreachable** |
+| Eagle Eye lamps (www.eagleeyelights.com) | domain parked (redirects to DropCatch) | **defunct** |
+| Koyorad (koyoradracing.com) | robots ok, no challenge; WooCommerce performance-radiator shop, few street applications | **low value**, not pursued |
+| Nissens (catalogue.nissens.com) | robots allow; catalogue now redirects to customerportal.nissens.com (login); EU-market data | **OUT** (no plain-GET application pages) |
+
+Spectra Premium is ON HOLD (hub, 2026-11-09 ~18:48 UTC): the reCAPTCHA marker in
+fetch.CHALLENGE_RE and the Legal Notice's no-reproduction clause go to the owner.
+Not allowlisted, fetch.py unchanged, not crawled.

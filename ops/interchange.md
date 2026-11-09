@@ -2506,7 +2506,13 @@ Unknown clauses refuse. Pages print no OE numbers, so no dealer OE join.
 3. then dispatch `oem-aftermarket-crawl.yml` with site
    `ecat.spectrapremium.com`.
 
-**Next:** crawl -> `groups_spectra` curation (one Likely group per Spectra
+**Hub, 2026-11-09 ~18:48 UTC: HOLD on Spectra.** Both points (captcha marker,
+no-reproduction clause) go to the owner; the hub relays the answer. Nothing
+allowlisted, fetch.py unchanged, no crawl. Second probe pass (CSF, OSC,
+Eagle Eye, Koyorad, Nissens): none usable (SOURCES.md). Session stopped
+here.
+
+**Next (only after the owner's answer):** crawl -> `groups_spectra` curation (one Likely group per Spectra
 pn x line; engine gate on Eng. Desg./liters; body gate on Body Type; refuse
 other notes) -> §11.4 sample per line -> hub -> branch
 interchange/aftermarket-1 for any app change. Nothing shipped.
