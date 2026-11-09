@@ -108,10 +108,17 @@ RULES = {
                  r"handle|hinge|cable|lock|latch|protector|molding|garnish|cushion|stopper|chain|link|support|cover|emblem|nameplate|spoiler|lamp|inner|trim"),
     "liftgate": (rf"^panel\s+sub-{ASSY},?\s*back\s+door|^back\s+door\s+(panel\s+)?sub-{ASSY}|^door\s+sub-{ASSY},?\s*back",
                  r"handle|hinge|cable|lock|latch|glass|weather|stay|cylinder|motor|wiper|spoiler|lamp|trim|molding|garnish|emblem|switch|striker|link|outside|outer|inner|board|cover|pad|finish"),
-    # tier C: name rule pending (written after reading the trial's list rows)
-    "wiper-motor": (r"(?!x)x", ""),
-    "knuckle": (r"(?!x)x", ""),
-    "strut": (r"(?!x)x", ""),
+    # tier C, names as printed on the 2007-2009 Camry pages (trial 2026-11-09):
+    # "Motor Assembly, Front Wiper" (85110; not "Motor & Pump Assembly", the
+    # washer pump), "Knuckle, Steering[, Left]" (43211/43212), "Carrier
+    # Sub-Assembly, Rear" (42304, the rear knuckle), "Absorber Assembly, Shock"
+    # / "Absorber Set, Shock" (48510-48540). Strut mounts, supports, rods are not.
+    "wiper-motor": (rf"^motor\s+{ASSY},?\s*(front|rear|windshield)?\s*wiper\b",
+                    r"washer|pump|link|arm|blade|cap|cover|relay|switch"),
+    "knuckle": (rf"^knuckle,?\s*steering\b|^carrier\s+(sub-)?{ASSY},?\s*rear(\s+axle)?\b",
+                r"differential|bearing|hub|bolt|nut|cover|seal|arm|rod|bush"),
+    "strut": (rf"^absorber\s+({ASSY}|set),?\s*shock\b",
+              r"support|mount|bumper|bound|cover|insulator|spring|cushion|kit|rod|bracket|cap|bearing|collar"),
 }
 
 # Toyota service numbers ending "-84" are remanufactured units (CURATION_SPEC
