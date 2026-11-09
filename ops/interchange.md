@@ -1704,3 +1704,55 @@ subaru, mopar, ford, vag, hmg and mb, with an extra hold rule:
   kept as local branch `backup/local-main-387774d`, not pushed. Origin main
   was used for everything here. Whoever owns that work should check whether
   it was pushed elsewhere.
+
+## 2026-11-09 Held parts research agent, phase 1 (session_016ZzJfLpnys4vyFfk33LoW3)
+
+Owner request (via hub): research whether each held exterior part really fits
+both vehicles. Verdicts are ADVISORY. Nothing was released; curation and the
+exterior hold are untouched.
+
+- **Scope:** top 5 pairings, 207 of 307 groups (Legacy/Outback 146,
+  DeVille/Seville 21, T&C/Caravan 14, F-150/F-250 14, C280/C320 12), collapsed
+  into 86 questions (pairing, years, category, side). Researched by 4 parallel
+  agents; I spot-checked the outliers myself and overrode per group where a
+  question mixed numbers.
+- **Result per group:** WRONG 147, UNSURE 43, RIGHT 17.
+  Legacy/Outback 120 / 18 / 8; DeVille/Seville 21 / 0 / 0; T&C/Caravan 0 / 8 / 6;
+  F-150/F-250 0 / 14 / 0; C280/C320 6 / 3 / 3 (W / U / R).
+- **Root cause (important for the pipeline):** the subarupartsdeal diagram
+  pages carry a "Fitting Vehicle Options" column that already separates the
+  models: S = Legacy sedan, W = Legacy wagon, OBK/SOBK/WOBK = Outback, P = Baja,
+  plus trim codes (e.g. `S.25I`). Our match treated every number on the page as
+  fitting every model on it. Verified directly on
+  2011 Outback fender (AJ00/01 = S, AJ06/07 = OBK) and 2015 Legacy head lamp
+  (84001AL00A/01A = `S.25I` only; AL02A/03A and 84002AL00A/01A = S+OBK). Any
+  Subaru group, held or shipped, built from these pages without reading
+  that column is suspect. (Needs a pipeline follow-up; not done here.)
+- **Other WRONG classes:** Baja parts rolled onto Legacy/Outback (84201AE30A/31A
+  colour-suffix tail lamps, 57704AE20A/21A bumpers, 57120AE08A/09A fenders,
+  91121AE36A/39A grilles); body styles that never existed (2010+ Outback trunk
+  lid, 2010+ US Legacy liftgate); DeVille vs Seville are different bodies (all 21);
+  W203 front bumper / grille changed at the 2005 facelift.
+- **RIGHT (17):** Subaru hoods 57220AE00B, 57229AG04A9P, 57229AJ00A9P,
+  57229AL00B9P; head lamps 84001AE14A/15A (Legacy GT trim only) and
+  84001AL02A/03A; Mopar head lamps 4857040/41AB; tail lamps 4857954/55AA and
+  68241334/35AA; W203 fenders 203-880-01/02-18-67 and hood 203-880-01-57-28.
+- **F-150/F-250:** all UNSURE. Every number fits one of the two 1997 F-250 bodies
+  (old-body HD vs new-body LD), and the yard data cannot tell them apart.
+- **Where:** artifact db `held_exterior_review`, fields `agent_verdict`,
+  `agent_reason`, `agent_sources`, `agent_at` (plus ns/cat/pn); no `answer` or
+  `note` field was written. Repo mirror:
+  `scraper/oem_fitment/groups/_report/held_exterior_agent_verdicts.json`.
+- **Artifact page (version 2):** each card shows the agent verdict, reason and links
+  (marked advisory), with an "Agent verdict" filter. Owner taps now use
+  `update()` when the doc exists (version 1 used a full `set()`, which would
+  have wiped the agent fields). Checked against a stubbed db in Chromium: 207
+  agent boxes, filter right = 17, not researched = 100, and a tap sends update.
+  Real db readback at view level: 207 docs, only agent fields + ns/cat/pn.
+- **Access limits honoured:** amayama/megazip 403, paintedautoparts/go-parts/
+  others 403 or robots disallowing ClaudeBot, RevolutionParts dealer sites
+  disallow ClaudeBot: cited from search snippets only, never fetched or
+  bypassed. Many sources are snippet-level; reasons say so where it matters.
+- **Remaining:** 100 groups / 50 questions over 27 pairings. Estimate about 1
+  agent-hour (4 parallel agents, about 10 minutes wall time) plus spot-checks.
+  Not started; awaiting hub/owner.

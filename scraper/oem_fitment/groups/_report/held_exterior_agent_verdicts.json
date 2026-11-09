@@ -1,0 +1,2334 @@
+{
+ "note": "ADVISORY research-agent verdicts for held exterior groups (phase 1: top 5 pairings). Not a release list; nothing here changes curation. Mirrors artifact db held_exterior_review agent_* fields.",
+ "phase": 1,
+ "count": 207,
+ "groups": [
+  {
+   "id": "subaru~bumper-front~57704AE18A",
+   "q": 0,
+   "verdict": "wrong",
+   "reason": "Diagram codes: AE18A=Legacy S/W (L,GT,Brighton); Outback uses AE19A>AE24A; AE20A='P'=Baja (Baja-only trims). Neither fits both.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_key_kit_bumper/front_bumper.html",
+    "https://paintedautoparts.com/subaru-legacy-outback-front-bumper-cover-primed-outback-oem-57704ae24a-2003-2004-pl-su1000141.html",
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-front~57704ae20a.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~bumper-front~57704AE20A",
+   "q": 0,
+   "verdict": "wrong",
+   "reason": "Diagram codes: AE18A=Legacy S/W (L,GT,Brighton); Outback uses AE19A>AE24A; AE20A='P'=Baja (Baja-only trims). Neither fits both.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_key_kit_bumper/front_bumper.html",
+    "https://paintedautoparts.com/subaru-legacy-outback-front-bumper-cover-primed-outback-oem-57704ae24a-2003-2004-pl-su1000141.html",
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-front~57704ae20a.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~bumper-front~57704AG02A",
+   "q": 1,
+   "verdict": "wrong",
+   "reason": "AG02A = Legacy S/W codes ('primed legacy' aftermarket); AG03A = SOBK/WOBK Outback-only fascia. Distinct per model.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/body_key_kit_bumper/front_bumper.html",
+    "https://paintedautoparts.com/subaru-legacy-outback-front-bumper-cover-primed-legacy-capa-oem-57704ag02a-2005-2007.html",
+    "https://paintedautoparts.com/subaru-legacy-outback-front-bumper-cover-primed-outback-oem-57704ag03a-2005-2007.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~bumper-front~57704AG03A",
+   "q": 1,
+   "verdict": "wrong",
+   "reason": "AG02A = Legacy S/W codes ('primed legacy' aftermarket); AG03A = SOBK/WOBK Outback-only fascia. Distinct per model.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/body_key_kit_bumper/front_bumper.html",
+    "https://paintedautoparts.com/subaru-legacy-outback-front-bumper-cover-primed-legacy-capa-oem-57704ag02a-2005-2007.html",
+    "https://paintedautoparts.com/subaru-legacy-outback-front-bumper-cover-primed-outback-oem-57704ag03a-2005-2007.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~bumper-front~57704AJ08A",
+   "q": 2,
+   "verdict": "wrong",
+   "reason": "AJ08A = STDSIA Legacy sedan front ('Legacy 2010-12' aftermarket); AJ09A = OBKSIA Outback front w/ textured lower. Distinct.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/body_key_kit_bumper/front_bumper.html",
+    "https://paintedautoparts.com/subaru-legacy-front-bumper-cover-prm-capa-oem-57704aj08a-2010-2012.html",
+    "https://paintedautoparts.com/subaru-outback-front-bumper-cover-upper-prm-lowr-text-oem-57704aj09a-2010-2012.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~bumper-front~57704AJ09A",
+   "q": 2,
+   "verdict": "wrong",
+   "reason": "AJ08A = STDSIA Legacy sedan front ('Legacy 2010-12' aftermarket); AJ09A = OBKSIA Outback front w/ textured lower. Distinct.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/body_key_kit_bumper/front_bumper.html",
+    "https://paintedautoparts.com/subaru-legacy-front-bumper-cover-prm-capa-oem-57704aj08a-2010-2012.html",
+    "https://paintedautoparts.com/subaru-outback-front-bumper-cover-upper-prm-lowr-text-oem-57704aj09a-2010-2012.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~bumper-front~57704AL00A",
+   "q": 3,
+   "verdict": "wrong",
+   "reason": "Part names say it: 57704AL00A 'FRONT-SDN' (Legacy sedan), 57704AL01A 'FRONT-OBK' (Outback). Distinct fascias.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-front-sdn~57704al00a.html",
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-front-obk~57704al01a.html",
+    "https://paintedautoparts.com/subaru-legacy-front-bumper-cover-primed-oem-57704al00a-2015-2017.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~bumper-front~57704AL01A",
+   "q": 3,
+   "verdict": "wrong",
+   "reason": "Part names say it: 57704AL00A 'FRONT-SDN' (Legacy sedan), 57704AL01A 'FRONT-OBK' (Outback). Distinct fascias.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-front-sdn~57704al00a.html",
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-front-obk~57704al01a.html",
+    "https://paintedautoparts.com/subaru-legacy-front-bumper-cover-primed-oem-57704al00a-2015-2017.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~bumper-rear~57704AE09A",
+   "q": 4,
+   "verdict": "wrong",
+   "reason": "Diagram: AE09A='S.(L+GT)' Legacy sedan, AE10A='W.(BRI+L+GT)' Legacy wagon. Outback uses AE11A/AE12A. Not Outback parts.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_key_kit_bumper/rear_bumper.html",
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-rear~57704ae09a.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~bumper-rear~57704AE10A",
+   "q": 4,
+   "verdict": "wrong",
+   "reason": "Diagram: AE09A='S.(L+GT)' Legacy sedan, AE10A='W.(BRI+L+GT)' Legacy wagon. Outback uses AE11A/AE12A. Not Outback parts.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_key_kit_bumper/rear_bumper.html",
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-rear~57704ae09a.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~bumper-rear~57704AE11A",
+   "q": 5,
+   "verdict": "wrong",
+   "reason": "Diagram: AE11A='W.OBK' Outback wagon, AE12A='S.SUS' Outback sedan. Legacy uses AE09A/AE10A. (2001 'Legacy' VIN may be an Outback.)",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_key_kit_bumper/rear_bumper.html",
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-rear~57704ae11a.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~bumper-rear~57704AE12A",
+   "q": 5,
+   "verdict": "wrong",
+   "reason": "Diagram: AE11A='W.OBK' Outback wagon, AE12A='S.SUS' Outback sedan. Legacy uses AE09A/AE10A. (2001 'Legacy' VIN may be an Outback.)",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_key_kit_bumper/rear_bumper.html",
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-rear~57704ae11a.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~bumper-rear~57704AE21A",
+   "q": 6,
+   "verdict": "wrong",
+   "reason": "57704AE21A is the Baja rear bumper (code 'P', trims Baja/Baja-B/Baja-S only); rolled up onto Legacy/Outback pages.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-rear~57704ae21a.html",
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_key_kit_bumper/rear_bumper.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~bumper-rear~57704AG09A",
+   "q": 7,
+   "verdict": "wrong",
+   "reason": "Four distinct rears: AG10A Legacy sedan, AG09A Legacy wagon, AG12A Outback sedan (SOBK), AG11A Outback wagon (WOBK).",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/body_key_kit_bumper/rear_bumper.html",
+    "https://paintedautoparts.com/subaru-legacy-outback-rear-bumper-cover-primed-legacy-wg-oem-57704ag09a-2005-2009-pl-su1100153.html",
+    "https://paintedautoparts.com/subaru-legacy-outback-rear-bumper-cover-primed-outback-oem-57704ag11a-2005-2009.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~bumper-rear~57704AG10A",
+   "q": 7,
+   "verdict": "wrong",
+   "reason": "Four distinct rears: AG10A Legacy sedan, AG09A Legacy wagon, AG12A Outback sedan (SOBK), AG11A Outback wagon (WOBK).",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/body_key_kit_bumper/rear_bumper.html",
+    "https://paintedautoparts.com/subaru-legacy-outback-rear-bumper-cover-primed-legacy-wg-oem-57704ag09a-2005-2009-pl-su1100153.html",
+    "https://paintedautoparts.com/subaru-legacy-outback-rear-bumper-cover-primed-outback-oem-57704ag11a-2005-2009.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~bumper-rear~57704AG11A",
+   "q": 7,
+   "verdict": "wrong",
+   "reason": "Four distinct rears: AG10A Legacy sedan, AG09A Legacy wagon, AG12A Outback sedan (SOBK), AG11A Outback wagon (WOBK).",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/body_key_kit_bumper/rear_bumper.html",
+    "https://paintedautoparts.com/subaru-legacy-outback-rear-bumper-cover-primed-legacy-wg-oem-57704ag09a-2005-2009-pl-su1100153.html",
+    "https://paintedautoparts.com/subaru-legacy-outback-rear-bumper-cover-primed-outback-oem-57704ag11a-2005-2009.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~bumper-rear~57704AG12A",
+   "q": 7,
+   "verdict": "wrong",
+   "reason": "Four distinct rears: AG10A Legacy sedan, AG09A Legacy wagon, AG12A Outback sedan (SOBK), AG11A Outback wagon (WOBK).",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/body_key_kit_bumper/rear_bumper.html",
+    "https://paintedautoparts.com/subaru-legacy-outback-rear-bumper-cover-primed-legacy-wg-oem-57704ag09a-2005-2009-pl-su1100153.html",
+    "https://paintedautoparts.com/subaru-legacy-outback-rear-bumper-cover-primed-outback-oem-57704ag11a-2005-2009.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~bumper-rear~57704AJ06A",
+   "q": 8,
+   "verdict": "wrong",
+   "reason": "AJ06A = SDNSIA Legacy sedan rear (PL SU1100165); AJ07A = OBKSIA Outback rear. No 2010+ Outback sedan/US Legacy wagon.",
+   "sources": [
+    "https://paintedautoparts.com/subaru-legacy-rear-bumper-cover-prm-capa-oem-57704aj06a-2010-2014.html",
+    "https://parts.natewade.com/p/Subaru_2011_Outback-25L-MT-COLD-WEATHER-WAGON/Bumper-Cover-Bumper-Face-OBKSIA-Rear/49258530/57704AJ07A.html",
+    "https://en.wikipedia.org/wiki/Subaru_Legacy_(fifth_generation)"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~bumper-rear~57704AJ07A",
+   "q": 8,
+   "verdict": "wrong",
+   "reason": "AJ06A = SDNSIA Legacy sedan rear (PL SU1100165); AJ07A = OBKSIA Outback rear. No 2010+ Outback sedan/US Legacy wagon.",
+   "sources": [
+    "https://paintedautoparts.com/subaru-legacy-rear-bumper-cover-prm-capa-oem-57704aj06a-2010-2014.html",
+    "https://parts.natewade.com/p/Subaru_2011_Outback-25L-MT-COLD-WEATHER-WAGON/Bumper-Cover-Bumper-Face-OBKSIA-Rear/49258530/57704AJ07A.html",
+    "https://en.wikipedia.org/wiki/Subaru_Legacy_(fifth_generation)"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~bumper-rear~57704AL10A",
+   "q": 9,
+   "verdict": "wrong",
+   "reason": "Part names: 57704AL10A 'REAR-SDN' (Legacy), 57704AL11A 'REAR-OBK' (Outback). Sedan vs wagon rear; cannot cross.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-rear-sdn~57704al10a.html",
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-rear-obk~57704al11a.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~bumper-rear~57704AL11A",
+   "q": 9,
+   "verdict": "wrong",
+   "reason": "Part names: 57704AL10A 'REAR-SDN' (Legacy), 57704AL11A 'REAR-OBK' (Outback). Sedan vs wagon rear; cannot cross.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-rear-sdn~57704al10a.html",
+    "https://www.subarupartsdeal.com/parts/subaru-bumper-face-rear-obk~57704al11a.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-front~60010AE08A",
+   "q": 10,
+   "verdict": "wrong",
+   "reason": "Diagram: RH front door AE08A = Legacy S/W (L,GT,Brighton); AE10A = Outback S.SUS/W.OBK + Baja. Distinct numbers.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-front~60010AE10A",
+   "q": 10,
+   "verdict": "wrong",
+   "reason": "Diagram: RH front door AE08A = Legacy S/W (L,GT,Brighton); AE10A = Outback S.SUS/W.OBK + Baja. Distinct numbers.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-front~60010AE09A",
+   "q": 11,
+   "verdict": "wrong",
+   "reason": "Diagram: LH front door AE09A = Legacy S/W (L,GT,Brighton); AE11A = Outback S.SUS/W.OBK + Baja. Distinct numbers.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-front~60010AE11A",
+   "q": 11,
+   "verdict": "wrong",
+   "reason": "Diagram: LH front door AE09A = Legacy S/W (L,GT,Brighton); AE11A = Outback S.SUS/W.OBK + Baja. Distinct numbers.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-front~60009AG10A9P",
+   "q": 12,
+   "verdict": "wrong",
+   "reason": "Diagram: AG10A/B = Legacy S/W (i,GT,GT Ltd); AG12A/B = SOBK/WOBK Outback. Distinct RH front doors (A/B = date split).",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-front~60009AG10B9P",
+   "q": 12,
+   "verdict": "wrong",
+   "reason": "Diagram: AG10A/B = Legacy S/W (i,GT,GT Ltd); AG12A/B = SOBK/WOBK Outback. Distinct RH front doors (A/B = date split).",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-front~60009AG12A9P",
+   "q": 12,
+   "verdict": "wrong",
+   "reason": "Diagram: AG10A/B = Legacy S/W (i,GT,GT Ltd); AG12A/B = SOBK/WOBK Outback. Distinct RH front doors (A/B = date split).",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-front~60009AG12B9P",
+   "q": 12,
+   "verdict": "wrong",
+   "reason": "Diagram: AG10A/B = Legacy S/W (i,GT,GT Ltd); AG12A/B = SOBK/WOBK Outback. Distinct RH front doors (A/B = date split).",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-front~60009AG11A9P",
+   "q": 13,
+   "verdict": "wrong",
+   "reason": "Diagram: AG11A/B = Legacy S/W; AG13A/B = SOBK/WOBK Outback. Distinct LH front doors (A/B = production-date split).",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-front~60009AG11B9P",
+   "q": 13,
+   "verdict": "wrong",
+   "reason": "Diagram: AG11A/B = Legacy S/W; AG13A/B = SOBK/WOBK Outback. Distinct LH front doors (A/B = production-date split).",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-front~60009AG13A9P",
+   "q": 13,
+   "verdict": "wrong",
+   "reason": "Diagram: AG11A/B = Legacy S/W; AG13A/B = SOBK/WOBK Outback. Distinct LH front doors (A/B = production-date split).",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-front~60009AG13B9P",
+   "q": 13,
+   "verdict": "wrong",
+   "reason": "Diagram: AG11A/B = Legacy S/W; AG13A/B = SOBK/WOBK Outback. Distinct LH front doors (A/B = production-date split).",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-front~60009AJ00A9P",
+   "q": 14,
+   "verdict": "wrong",
+   "reason": "Diagram: RH front door AJ00A = 'S' (Legacy sedan), AJ02A = 'OBK' (Outback). Distinct; door pads also differ S vs OBK.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-front~60009AJ02A9P",
+   "q": 14,
+   "verdict": "wrong",
+   "reason": "Diagram: RH front door AJ00A = 'S' (Legacy sedan), AJ02A = 'OBK' (Outback). Distinct; door pads also differ S vs OBK.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-front~60009AJ01A9P",
+   "q": 15,
+   "verdict": "wrong",
+   "reason": "Diagram: LH front door AJ01A = 'S' (Legacy sedan), AJ03A = 'OBK' (Outback). Distinct numbers per model.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-front~60009AJ03A9P",
+   "q": 15,
+   "verdict": "wrong",
+   "reason": "Diagram: LH front door AJ01A = 'S' (Legacy sedan), AJ03A = 'OBK' (Outback). Distinct numbers per model.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-front~60009AL00A9P",
+   "q": 16,
+   "verdict": "wrong",
+   "reason": "Diagram: AL00A/AL01A = 'S' (Legacy sedan; later AL10A/AL11A 'SLH'), AL02A/AL03A = 'OBK'. Outback is taller body.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://parts.wagnersubaru.com/p/Subaru_2017_Legacy/Door-Shell-Panel-Complete-Door-SLH-Left--Front-Door-Shell-is-a-Shell/69985705/60009AL11A9P.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-front~60009AL01A9P",
+   "q": 16,
+   "verdict": "wrong",
+   "reason": "Diagram: AL00A/AL01A = 'S' (Legacy sedan; later AL10A/AL11A 'SLH'), AL02A/AL03A = 'OBK'. Outback is taller body.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://parts.wagnersubaru.com/p/Subaru_2017_Legacy/Door-Shell-Panel-Complete-Door-SLH-Left--Front-Door-Shell-is-a-Shell/69985705/60009AL11A9P.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-front~60009AL02A9P",
+   "q": 16,
+   "verdict": "wrong",
+   "reason": "Diagram: AL00A/AL01A = 'S' (Legacy sedan; later AL10A/AL11A 'SLH'), AL02A/AL03A = 'OBK'. Outback is taller body.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://parts.wagnersubaru.com/p/Subaru_2017_Legacy/Door-Shell-Panel-Complete-Door-SLH-Left--Front-Door-Shell-is-a-Shell/69985705/60009AL11A9P.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-front~60009AL03A9P",
+   "q": 16,
+   "verdict": "wrong",
+   "reason": "Diagram: AL00A/AL01A = 'S' (Legacy sedan; later AL10A/AL11A 'SLH'), AL02A/AL03A = 'OBK'. Outback is taller body.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://parts.wagnersubaru.com/p/Subaru_2017_Legacy/Door-Shell-Panel-Complete-Door-SLH-Left--Front-Door-Shell-is-a-Shell/69985705/60009AL11A9P.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-rear~60410AE08A",
+   "q": 17,
+   "verdict": "wrong",
+   "reason": "Diagram: RH rear door AE08A = Legacy S/W; AE10A = Outback S.SUS/W.OBK (Baja own AE24A). Distinct numbers.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-rear~60410AE10A",
+   "q": 17,
+   "verdict": "wrong",
+   "reason": "Diagram: RH rear door AE08A = Legacy S/W; AE10A = Outback S.SUS/W.OBK (Baja own AE24A). Distinct numbers.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-rear~60410AE09A",
+   "q": 18,
+   "verdict": "wrong",
+   "reason": "Diagram: LH rear door AE09A = Legacy S/W; AE11A = Outback S.SUS/W.OBK (Baja own AE25A). Distinct numbers.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-rear~60410AE11A",
+   "q": 18,
+   "verdict": "wrong",
+   "reason": "Diagram: LH rear door AE09A = Legacy S/W; AE11A = Outback S.SUS/W.OBK (Baja own AE25A). Distinct numbers.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-rear~60409AG10A9P",
+   "q": 19,
+   "verdict": "wrong",
+   "reason": "Diagram: RH rear door AG10A = Legacy S/W; AG12A = SOBK/WOBK Outback. Distinct numbers.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-rear~60409AG12A9P",
+   "q": 19,
+   "verdict": "wrong",
+   "reason": "Diagram: RH rear door AG10A = Legacy S/W; AG12A = SOBK/WOBK Outback. Distinct numbers.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-rear~60409AG11A9P",
+   "q": 20,
+   "verdict": "wrong",
+   "reason": "Diagram: LH rear door AG11A = Legacy S/W; AG13A = SOBK/WOBK Outback. Distinct numbers.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-rear~60409AG13A9P",
+   "q": 20,
+   "verdict": "wrong",
+   "reason": "Diagram: LH rear door AG11A = Legacy S/W; AG13A = SOBK/WOBK Outback. Distinct numbers.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-rear~60409AJ00A9P",
+   "q": 21,
+   "verdict": "wrong",
+   "reason": "Diagram: RH rear door AJ00A = 'S' sedan (Legacy), AJ02A = 'OBK' wagon. No 2010+ Outback sedan; sedan vs wagon doors.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://en.wikipedia.org/wiki/Subaru_Legacy_(fifth_generation)"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-rear~60409AJ02A9P",
+   "q": 21,
+   "verdict": "wrong",
+   "reason": "Diagram: RH rear door AJ00A = 'S' sedan (Legacy), AJ02A = 'OBK' wagon. No 2010+ Outback sedan; sedan vs wagon doors.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://en.wikipedia.org/wiki/Subaru_Legacy_(fifth_generation)"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-rear~60409AJ01A9P",
+   "q": 22,
+   "verdict": "wrong",
+   "reason": "Diagram: LH rear door AJ01A = 'S' sedan (Legacy), AJ03A = 'OBK' wagon. No 2010+ Outback sedan; sedan vs wagon doors.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://en.wikipedia.org/wiki/Subaru_Legacy_(fifth_generation)"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-rear~60409AJ03A9P",
+   "q": 22,
+   "verdict": "wrong",
+   "reason": "Diagram: LH rear door AJ01A = 'S' sedan (Legacy), AJ03A = 'OBK' wagon. No 2010+ Outback sedan; sedan vs wagon doors.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html",
+    "https://en.wikipedia.org/wiki/Subaru_Legacy_(fifth_generation)"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-rear~60409AL00A9P",
+   "q": 23,
+   "verdict": "wrong",
+   "reason": "Diagram: AL00A/AL01A = 'S' Legacy sedan, AL02A/AL03A = 'OBK' Outback. Sedan vs wagon rear doors; distinct.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-rear~60409AL01A9P",
+   "q": 23,
+   "verdict": "wrong",
+   "reason": "Diagram: AL00A/AL01A = 'S' Legacy sedan, AL02A/AL03A = 'OBK' Outback. Sedan vs wagon rear doors; distinct.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-rear~60409AL02A9P",
+   "q": 23,
+   "verdict": "wrong",
+   "reason": "Diagram: AL00A/AL01A = 'S' Legacy sedan, AL02A/AL03A = 'OBK' Outback. Sedan vs wagon rear doors; distinct.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~door-rear~60409AL03A9P",
+   "q": 23,
+   "verdict": "wrong",
+   "reason": "Diagram: AL00A/AL01A = 'S' Legacy sedan, AL02A/AL03A = 'OBK' Outback. Sedan vs wagon rear doors; distinct.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-outback/door/front_door_panel_rear_or_slide_door_panel.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~fender~57120AE04A",
+   "q": 24,
+   "verdict": "wrong",
+   "reason": "AE04A = Legacy ('exc Outback', PL SU1241118); AE06A = Outback ('Outback', PL SU1241122). Distinct RH fenders.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_key_kit_bumper/fender.html",
+    "https://paintedautoparts.com/subaru-legacy-outback-fender-right-exc-outback-oem-57120ae04a-2000-2004.html",
+    "https://paintedautoparts.com/subaru-legacy-outback-fender-right-outback-oem-57120ae06a-2000-2004.html",
+    "https://nationalautobody.com/auto_parts/subaru/outback/fenders/outback_00_04_rt_front_fender_assy/su1241122"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~fender~57120AE06A",
+   "q": 24,
+   "verdict": "wrong",
+   "reason": "AE04A = Legacy ('exc Outback', PL SU1241118); AE06A = Outback ('Outback', PL SU1241122). Distinct RH fenders.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_key_kit_bumper/fender.html",
+    "https://paintedautoparts.com/subaru-legacy-outback-fender-right-exc-outback-oem-57120ae04a-2000-2004.html",
+    "https://paintedautoparts.com/subaru-legacy-outback-fender-right-outback-oem-57120ae06a-2000-2004.html",
+    "https://nationalautobody.com/auto_parts/subaru/outback/fenders/outback_00_04_rt_front_fender_assy/su1241122"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~fender~57120AE05A",
+   "q": 25,
+   "verdict": "wrong",
+   "reason": "AE05A = Legacy ('exc Outback', PL SU1240118); AE07A = Outback (PL SU1240122). Distinct LH fenders.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_key_kit_bumper/fender.html",
+    "https://paintedautoparts.com/subaru-legacy-outback-fender-lefront-exc-outback-oem-57120ae05a-2000-2004.html",
+    "https://paintedautoparts.com/subaru-legacy-outback-fender-lefront-outback-oem-57120ae07a-2000-2004.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~fender~57120AE07A",
+   "q": 25,
+   "verdict": "wrong",
+   "reason": "AE05A = Legacy ('exc Outback', PL SU1240118); AE07A = Outback (PL SU1240122). Distinct LH fenders.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_key_kit_bumper/fender.html",
+    "https://paintedautoparts.com/subaru-legacy-outback-fender-lefront-exc-outback-oem-57120ae05a-2000-2004.html",
+    "https://paintedautoparts.com/subaru-legacy-outback-fender-lefront-outback-oem-57120ae07a-2000-2004.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~fender~57120AE08A",
+   "q": 26,
+   "verdict": "wrong",
+   "reason": "57120AE08A is the Baja RH fender (diagram code 'P'); Legacy uses AE04A, Outback AE06A.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_key_kit_bumper/fender.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~fender~57120AE09A",
+   "q": 27,
+   "verdict": "wrong",
+   "reason": "57120AE09A is the Baja LH fender (diagram code 'P'); Legacy uses AE05A, Outback AE07A.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/body_key_kit_bumper/fender.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~fender~57110AG04A9P",
+   "q": 28,
+   "verdict": "wrong",
+   "reason": "Diagram: AG04A = Legacy S/W, AG06A = SOBK/WOBK Outback; aftermarket titles 'fender right legacy 57110AG04B9P'.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/body_key_kit_bumper/fender.html",
+    "https://paintedautoparts.com/subaru-legacy-outback-fender-right-legacy-oem-57110ag04b9p-2005-2007.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~fender~57110AG06A9P",
+   "q": 28,
+   "verdict": "wrong",
+   "reason": "Diagram: AG04A = Legacy S/W, AG06A = SOBK/WOBK Outback; aftermarket titles 'fender right legacy 57110AG04B9P'.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/body_key_kit_bumper/fender.html",
+    "https://paintedautoparts.com/subaru-legacy-outback-fender-right-legacy-oem-57110ag04b9p-2005-2007.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~fender~57110AG05A9P",
+   "q": 29,
+   "verdict": "wrong",
+   "reason": "Diagram: AG05A = Legacy S/W, AG07A = Outback; aftermarket 'fender left outback 57110AG07B9P' (PL SU1240125) vs legacy AG05B.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/body_key_kit_bumper/fender.html",
+    "https://paintedautoparts.com/subaru-legacy-outback-fender-left-outback-oem-57110ag07b9p-2005-2007.html",
+    "https://paintedautoparts.com/subaru-legacy-outback-fender-left-legacy-oem-57110ag05b9p-2005-2007.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~fender~57110AG07A9P",
+   "q": 29,
+   "verdict": "wrong",
+   "reason": "Diagram: AG05A = Legacy S/W, AG07A = Outback; aftermarket 'fender left outback 57110AG07B9P' (PL SU1240125) vs legacy AG05B.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2005-subaru-outback/body_key_kit_bumper/fender.html",
+    "https://paintedautoparts.com/subaru-legacy-outback-fender-left-outback-oem-57110ag07b9p-2005-2007.html",
+    "https://paintedautoparts.com/subaru-legacy-outback-fender-left-legacy-oem-57110ag05b9p-2005-2007.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~fender~57120AJ00A9P",
+   "q": 30,
+   "verdict": "wrong",
+   "reason": "Diagram: AJ00A = 'S' Legacy, AJ06A = 'OBK'. Aftermarket: Outback RH PL SU1241131 vs Legacy SU1241124. Distinct.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/body_key_kit_bumper/fender.html",
+    "https://www.go-parts.com/subaru-outback-fender.html",
+    "https://www.go-parts.com/1014-subaru-legacy-fender-right-passenger-p-900002479.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~fender~57120AJ06A9P",
+   "q": 30,
+   "verdict": "wrong",
+   "reason": "Diagram: AJ00A = 'S' Legacy, AJ06A = 'OBK'. Aftermarket: Outback RH PL SU1241131 vs Legacy SU1241124. Distinct.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/body_key_kit_bumper/fender.html",
+    "https://www.go-parts.com/subaru-outback-fender.html",
+    "https://www.go-parts.com/1014-subaru-legacy-fender-right-passenger-p-900002479.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~fender~57120AJ01A9P",
+   "q": 31,
+   "verdict": "wrong",
+   "reason": "Diagram: AJ01A = 'S' Legacy, AJ07A = 'OBK' (dealer: 'Fender-OBK Left'). Aftermarket Outback SU1240131 vs Legacy SU1240124.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/body_key_kit_bumper/fender.html",
+    "https://parts.autonationsubaruhuntvalley.com/p/Subaru_2014_Legacy/Fender-Complete-Fender-OBK-Left--Front--Plastic/49257161/57120AJ07A9P.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~fender~57120AJ07A9P",
+   "q": 31,
+   "verdict": "wrong",
+   "reason": "Diagram: AJ01A = 'S' Legacy, AJ07A = 'OBK' (dealer: 'Fender-OBK Left'). Aftermarket Outback SU1240131 vs Legacy SU1240124.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2011-subaru-outback/body_key_kit_bumper/fender.html",
+    "https://parts.autonationsubaruhuntvalley.com/p/Subaru_2014_Legacy/Fender-Complete-Fender-OBK-Left--Front--Plastic/49257161/57120AJ07A9P.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~fender~57120AL00A9P",
+   "q": 32,
+   "verdict": "wrong",
+   "reason": "Part names: 57120AL00A9P 'FENDER F RH SDN' (Legacy), 57120AL02A9P 'FENDER F RH OBK' (Outback). Distinct.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts/subaru-fender-f-rh-sdn~57120al00a9p.html",
+    "https://www.subarupartsdeal.com/parts/subaru-fender-f-rh-obk~57120al02a9p.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~fender~57120AL02A9P",
+   "q": 32,
+   "verdict": "wrong",
+   "reason": "Part names: 57120AL00A9P 'FENDER F RH SDN' (Legacy), 57120AL02A9P 'FENDER F RH OBK' (Outback). Distinct.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts/subaru-fender-f-rh-sdn~57120al00a9p.html",
+    "https://www.subarupartsdeal.com/parts/subaru-fender-f-rh-obk~57120al02a9p.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~fender~57120AL01A9P",
+   "q": 33,
+   "verdict": "wrong",
+   "reason": "Part names: 57120AL01A9P 'FENDER F LH SDN' (Legacy), 57120AL03A9P 'FENDER F LH OBK' (Outback). Distinct.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts/subaru-fender-f-lh-sdn~57120al01a9p.html",
+    "https://www.subarupartsdeal.com/parts/subaru-fender-f-lh-obk~57120al03a9p.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~fender~57120AL03A9P",
+   "q": 33,
+   "verdict": "wrong",
+   "reason": "Part names: 57120AL01A9P 'FENDER F LH SDN' (Legacy), 57120AL03A9P 'FENDER F LH OBK' (Outback). Distinct.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts/subaru-fender-f-lh-sdn~57120al01a9p.html",
+    "https://www.subarupartsdeal.com/parts/subaru-fender-f-lh-obk~57120al03a9p.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~grille~91121AE36A",
+   "q": 34,
+   "verdict": "wrong",
+   "reason": "AE36A/AE39A are Baja grilles (catalog roll-up); AE38A sold as 2003-04 Outback-only grille. No number shown to fit both 2004 Legacy and 2003 Outback.",
+   "sources": [
+    "https://www.go-parts.com/subaru-outback-grilles.html",
+    "https://www.subarupartsdeal.com/oem-subaru-baja-grille.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~grille~91121AE38A",
+   "q": 34,
+   "verdict": "wrong",
+   "reason": "AE36A/AE39A are Baja grilles (catalog roll-up); AE38A sold as 2003-04 Outback-only grille. No number shown to fit both 2004 Legacy and 2003 Outback.",
+   "sources": [
+    "https://www.go-parts.com/subaru-outback-grilles.html",
+    "https://www.subarupartsdeal.com/oem-subaru-baja-grille.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~grille~91121AE39A",
+   "q": 34,
+   "verdict": "wrong",
+   "reason": "AE36A/AE39A are Baja grilles (catalog roll-up); AE38A sold as 2003-04 Outback-only grille. No number shown to fit both 2004 Legacy and 2003 Outback.",
+   "sources": [
+    "https://www.go-parts.com/subaru-outback-grilles.html",
+    "https://www.subarupartsdeal.com/oem-subaru-baja-grille.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~grille~91121AG07A",
+   "q": 35,
+   "verdict": "wrong",
+   "reason": "AG07A->AG07C is the Outback ('Grille OBK', PL SU1200130); AG12A->AG12B is the Legacy grille (PL SU1200129). Distinct grilles per model.",
+   "sources": [
+    "https://parts.autonationsubaruhuntvalley.com/p/Subaru_2014_Legacy/Grille-OBK-Front-Grille/49308328/91121AG07C.html",
+    "https://centralalbertapaintsupply.ca/?p=115411",
+    "https://www.go-parts.com/0507-subaru-legacy-grille-assembly-p-900169305.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~grille~91121AG07B",
+   "q": 35,
+   "verdict": "wrong",
+   "reason": "AG07A->AG07C is the Outback ('Grille OBK', PL SU1200130); AG12A->AG12B is the Legacy grille (PL SU1200129). Distinct grilles per model.",
+   "sources": [
+    "https://parts.autonationsubaruhuntvalley.com/p/Subaru_2014_Legacy/Grille-OBK-Front-Grille/49308328/91121AG07C.html",
+    "https://centralalbertapaintsupply.ca/?p=115411",
+    "https://www.go-parts.com/0507-subaru-legacy-grille-assembly-p-900169305.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~grille~91121AG12A",
+   "q": 35,
+   "verdict": "wrong",
+   "reason": "AG07A->AG07C is the Outback ('Grille OBK', PL SU1200130); AG12A->AG12B is the Legacy grille (PL SU1200129). Distinct grilles per model.",
+   "sources": [
+    "https://parts.autonationsubaruhuntvalley.com/p/Subaru_2014_Legacy/Grille-OBK-Front-Grille/49308328/91121AG07C.html",
+    "https://centralalbertapaintsupply.ca/?p=115411",
+    "https://www.go-parts.com/0507-subaru-legacy-grille-assembly-p-900169305.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~grille~91121AJ03B",
+   "q": 36,
+   "verdict": "wrong",
+   "reason": "91121AJ03B = 2010-12 Legacy sedan grille (PL SU1200142); 91121AJ04B = 2010-12 Outback grille (PL SU1200143). Different grilles.",
+   "sources": [
+    "https://paintedautoparts.com/subaru-legacy-grille-black-w-chr-mldg-capa-oem-91121aj03b-2010-2012.html",
+    "https://paintedautoparts.com/subaru-outback-grille-assembly-oem-91121aj04b-2010-2012.html",
+    "https://partify.ca/products/subaru-legacy-oem-grille-chrome-black-sedan-91121aj03b"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~grille~91121AJ04B",
+   "q": 36,
+   "verdict": "wrong",
+   "reason": "91121AJ03B = 2010-12 Legacy sedan grille (PL SU1200142); 91121AJ04B = 2010-12 Outback grille (PL SU1200143). Different grilles.",
+   "sources": [
+    "https://paintedautoparts.com/subaru-legacy-grille-black-w-chr-mldg-capa-oem-91121aj03b-2010-2012.html",
+    "https://paintedautoparts.com/subaru-outback-grille-assembly-oem-91121aj04b-2010-2012.html",
+    "https://partify.ca/products/subaru-legacy-oem-grille-chrome-black-sedan-91121aj03b"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~grille~91121AL00A",
+   "q": 37,
+   "verdict": "wrong",
+   "reason": "91121AL00A = PL SU1200162, 2015-17 Legacy ONLY (go-parts, AutoNation lists Legacy only); 2015 Outback has its own grille. Not shared.",
+   "sources": [
+    "https://www.go-parts.com/1517-subaru-legacy-grille-assembly-p-900188324.html",
+    "https://parts.autonationsubaruhuntvalley.com/p/Subaru__Legacy-Turbo-4WD/Grille-Front/60019197/91121AL00A.html",
+    "https://parts.natewade.com/p/Subaru_2015_Forester-25L-CVT/Grille-Front/60019199/91121AL13A.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~grille~91121AL05A",
+   "q": 37,
+   "verdict": "wrong",
+   "reason": "91121AL00A = PL SU1200162, 2015-17 Legacy ONLY (go-parts, AutoNation lists Legacy only); 2015 Outback has its own grille. Not shared.",
+   "sources": [
+    "https://www.go-parts.com/1517-subaru-legacy-grille-assembly-p-900188324.html",
+    "https://parts.autonationsubaruhuntvalley.com/p/Subaru__Legacy-Turbo-4WD/Grille-Front/60019197/91121AL00A.html",
+    "https://parts.natewade.com/p/Subaru_2015_Forester-25L-CVT/Grille-Front/60019199/91121AL13A.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~grille~91121AL13A",
+   "q": 37,
+   "verdict": "wrong",
+   "reason": "91121AL00A = PL SU1200162, 2015-17 Legacy ONLY (go-parts, AutoNation lists Legacy only); 2015 Outback has its own grille. Not shared.",
+   "sources": [
+    "https://www.go-parts.com/1517-subaru-legacy-grille-assembly-p-900188324.html",
+    "https://parts.autonationsubaruhuntvalley.com/p/Subaru__Legacy-Turbo-4WD/Grille-Front/60019197/91121AL00A.html",
+    "https://parts.natewade.com/p/Subaru_2015_Forester-25L-CVT/Grille-Front/60019199/91121AL13A.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~headlights~84001AE12A",
+   "q": 38,
+   "verdict": "wrong",
+   "reason": "84001AE12A is the Legacy Brighton/L (and Baja Sport) headlamp, not the Outback lamp (Outback uses AE14A).",
+   "sources": [
+    "https://www.everydayautoparts.com/products/9221-0017R/00_04-Subaru-Legacy-BrightonslashL-Headlight-Assembly-RH-03_06-Subaru-Baja-Sport",
+    "https://www.headlightsdepot.com/headlight-halogen-nsf-right-passenger-fits-2000-2004-subaru-legacy-outback-2003-2006-baja-2004-2006-turbo-sku-320-1109r-af.html",
+    "https://subimods.com/products/oe-subaru-legacy-gt-00-04-outback-00-04-baja-03-06-without-sport-package-oem-style-headlights-set-chrome"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~headlights~84001AE14A",
+   "q": 38,
+   "verdict": "right",
+   "reason": "Aftermarket PL SU2503105 = 84001AE14A sold for 2000-04 Legacy GT and Outback. Legacy GT trim only; Brighton/L use AE12A.",
+   "sources": [
+    "https://www.everydayautoparts.com/products/9221-0017R/00_04-Subaru-Legacy-BrightonslashL-Headlight-Assembly-RH-03_06-Subaru-Baja-Sport",
+    "https://www.headlightsdepot.com/headlight-halogen-nsf-right-passenger-fits-2000-2004-subaru-legacy-outback-2003-2006-baja-2004-2006-turbo-sku-320-1109r-af.html",
+    "https://subimods.com/products/oe-subaru-legacy-gt-00-04-outback-00-04-baja-03-06-without-sport-package-oem-style-headlights-set-chrome"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~headlights~84001AE13A",
+   "q": 39,
+   "verdict": "wrong",
+   "reason": "84001AE13A is the Legacy Brighton/L (and Baja Sport) headlamp, not the Outback lamp (Outback uses AE15A).",
+   "sources": [
+    "https://www.everydayautoparts.com/products/9221-0017L/00_04-Subaru-Legacy-BrightonslashL-Headlight-Assembly-LH-03_06-Subaru-Baja-Sport",
+    "https://www.everydayautoparts.com/products/9221-0140L/00_04-Subaru-Legacy-GT-Combination-Headlight-Assembly-LH-00_04-Subaru-Outback-03_06-Subaru-Baja"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~headlights~84001AE15A",
+   "q": 39,
+   "verdict": "right",
+   "reason": "Aftermarket PL SU2502105 = 84001AE15A sold for 2000-04 Legacy GT and Outback. Legacy GT trim only; Brighton/L use AE13A.",
+   "sources": [
+    "https://www.everydayautoparts.com/products/9221-0017L/00_04-Subaru-Legacy-BrightonslashL-Headlight-Assembly-LH-03_06-Subaru-Baja-Sport",
+    "https://www.everydayautoparts.com/products/9221-0140L/00_04-Subaru-Legacy-GT-Combination-Headlight-Assembly-LH-00_04-Subaru-Outback-03_06-Subaru-Baja"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~headlights~84001AL00A",
+   "q": 40,
+   "verdict": "wrong",
+   "reason": "Catalog option column lists 84001AL00A only for S.25I (base Legacy sedan); Outback uses 84001AL02A.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_electronics/head_lamp.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~headlights~84001AL01A",
+   "q": 40,
+   "verdict": "wrong",
+   "reason": "Catalog option column lists 84001AL01A only for S.25I (base Legacy sedan); Outback uses 84001AL03A.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_electronics/head_lamp.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~headlights~84001AL02A",
+   "q": 40,
+   "verdict": "right",
+   "reason": "Option column: (S+OBK) halogen; CAPA halogen RH sold for 2015-17 Legacy/Outback (pair of AL03A, PL SU2502149).",
+   "sources": [
+    "https://www.headlightsdepot.com/sku-320-1127l-ac2.html",
+    "https://crashparts.com/headlight-fits-2015-2017-subaru-legacy-outback-2-5i-models-capa-certified-halogen-right-passenger-side-headlamp-assembly-with-chrome-bezel-sku-320-1127r-ac1.html",
+    "https://www.headlightsdepot.com/headlight-for-subaru-legacy-outback-15-17-halogen-headlamp-left-hand-driver-side-sku-sr061-b001l.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~headlights~84001AL03A",
+   "q": 40,
+   "verdict": "right",
+   "reason": "Option column: (S+OBK) halogen; aftermarket PL SU2502149 = 84001AL03A sold for 2015-17 Legacy and Outback.",
+   "sources": [
+    "https://www.headlightsdepot.com/sku-320-1127l-ac2.html",
+    "https://crashparts.com/headlight-fits-2015-2017-subaru-legacy-outback-2-5i-models-capa-certified-halogen-right-passenger-side-headlamp-assembly-with-chrome-bezel-sku-320-1127r-ac1.html",
+    "https://www.headlightsdepot.com/headlight-for-subaru-legacy-outback-15-17-halogen-headlamp-left-hand-driver-side-sku-sr061-b001l.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~headlights~84002AL00A",
+   "q": 40,
+   "verdict": "unsure",
+   "reason": "HID lamp listed (S+OBK) in the catalog option column only; no independent source found.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_electronics/head_lamp.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~headlights~84002AL01A",
+   "q": 40,
+   "verdict": "unsure",
+   "reason": "HID lamp listed (S+OBK) in the catalog option column only; no independent source found.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/body_electronics/head_lamp.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~hood~57220AE00B",
+   "q": 41,
+   "verdict": "right",
+   "reason": "57220AE00B (PL SU1230115) sold as 2000-04 Legacy/Outback hood w/o scoop (also Baja).",
+   "sources": [
+    "https://paintedautoparts.com/subaru-legacy-outback-hood-w-o-scoop-oem-57220ae00b-2000-2004-pl-su1230115.html",
+    "https://www.go-parts.com/0004-subaru-legacy-hood-p-334338.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~hood~57229AG03A9P",
+   "q": 42,
+   "verdict": "unsure",
+   "reason": "57229AG03A9P is named \"Hood Complete-NA\"; listings conflict on trims and none confirms Outback fit.",
+   "sources": [
+    "https://subarupartsdeal.com/oem-2005-subaru-legacy-hood.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~hood~57229AG04A9P",
+   "q": 42,
+   "verdict": "right",
+   "reason": "Aftermarket PL SU1230122 = 57229AG04A9P sold as 2005-09 Legacy/Outback turbo hood (Legacy GT / Outback XT).",
+   "sources": [
+    "https://paintedautoparts.com/subaru-legacy-outback-hood-w-turbo-legacy-outback-05-07-alum-oem-57229ag04a9p-2005-2009-pl-su1230122.html",
+    "https://partifyusa.com/products/subaru-legacy-outback-non-turbo-hood-su1230124",
+    "https://partifyusa.com/products/subaru-legacy-hood-without-hood-scoop-hole-su1230123"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~hood~57229AG05A9P",
+   "q": 42,
+   "verdict": "wrong",
+   "reason": "Dealer catalog (non-network) names 57229AG05A9P \"Hood Complete-OBK\": the Outback hood; Legacy NA uses AG03A9P.",
+   "sources": [
+    "https://parts.wagnersubaru.com/p/Subaru_2006_WRX-25L-TURBO-AT/Hood-Complete-OBK-Hood-Extension-Panel-Front/49257280/57229AG05A9P.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~hood~57229AJ00A9P",
+   "q": 43,
+   "verdict": "right",
+   "reason": "57229AJ00A9P (PL SU1230137) non-turbo hood sold for both 2010-14 Legacy and Outback.",
+   "sources": [
+    "https://paintedautoparts.com/subaru-legacy-hood-w-o-turbo-oem-57229aj00a9p-2010-2014.html",
+    "https://paintedautoparts.com/subaru-outback-hood-capa-oem-57229aj00a9p-2010-2014.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~hood~57229AJ01B9P",
+   "q": 44,
+   "verdict": "unsure",
+   "reason": "Turbo-scoop hood (PL SU1230138) for Legacy 2.5GT; 2010-14 US Outback had no turbo, so no Outback donor carries it. Would bolt on; unconfirmed.",
+   "sources": [
+    "https://paintedautoparts.com/subaru-legacy-hood-w-turbo-oem-57229aj01b9p-2010-2014-pl-su1230138.html",
+    "https://en.wikipedia.org/wiki/Subaru_Outback#Fourth_generation_(BR;_2009)"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~hood~57229AL00B9P",
+   "q": 45,
+   "verdict": "right",
+   "reason": "57229AL00B9P (PL SU1230147/148, superseded by AL00C9P) sold for both 2015-19 Legacy and Outback.",
+   "sources": [
+    "https://paintedautoparts.com/subaru-outback-hood-aluminum-capa-oem-57229al00b9p-2015-2019.html",
+    "https://paintedautoparts.com/subaru-legacy-hood-aluminum-capa-oem-57229al00b9p-2015-2019.html",
+    "https://parts.autonationsubaruhuntvalley.com/p/Subaru_2018_Legacy-36L/Hood-Complete-Hood-Panel-Front/78572179/57229AL00C9P.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~liftgate~60810AE03B",
+   "q": 46,
+   "verdict": "unsure",
+   "reason": "Only one eBay listing names 60810AE03B for both Legacy wagon and Outback; not independent enough.",
+   "sources": [
+    "https://www.ebay.com/p/1036674138"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~liftgate~60809AG10A9P",
+   "q": 47,
+   "verdict": "unsure",
+   "reason": "Legacy and Outback wagons shared the 2005-07 body, but no independent source names 60809AG10A9P/B9P for the Legacy wagon.",
+   "sources": [
+    "https://www.subarupartsplus.com/oem-parts/subaru-lift-gate-60809ag10b9p",
+    "https://www.partrequest.com/auto-parts-detail/2005-2009-subaru-legacy-outback-xt-trunk-hatch-lift-292826092504"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~liftgate~60809AJ10A9P",
+   "q": 48,
+   "verdict": "wrong",
+   "reason": "No 2010+ US Legacy wagon; 60809AJ10A9P/AJ11A9P are 2010-14 Outback liftgates. Legacy listing is a roll-up.",
+   "sources": [
+    "https://www.subarupartsplus.com/oem-parts/subaru-lift-gate-60809aj10a9p",
+    "https://en.wikipedia.org/wiki/Subaru_Legacy_(fifth_generation)"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~liftgate~60809AJ11A9P",
+   "q": 48,
+   "verdict": "wrong",
+   "reason": "No 2010+ US Legacy wagon; 60809AJ10A9P/AJ11A9P are 2010-14 Outback liftgates. Legacy listing is a roll-up.",
+   "sources": [
+    "https://www.subarupartsplus.com/oem-parts/subaru-lift-gate-60809aj10a9p",
+    "https://en.wikipedia.org/wiki/Subaru_Legacy_(fifth_generation)"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~liftgate~60809AL00A9P",
+   "q": 49,
+   "verdict": "wrong",
+   "reason": "2015 Legacy was sedan-only (no wagon); 60809AL00A9P/AL01A9P liftgates are Outback-only.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Subaru_Legacy_(sixth_generation)",
+    "https://en.wikipedia.org/wiki/Subaru_Outback#Fifth_generation_(BS;_2014)"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~liftgate~60809AL01A9P",
+   "q": 49,
+   "verdict": "wrong",
+   "reason": "2015 Legacy was sedan-only (no wagon); 60809AL00A9P/AL01A9P liftgates are Outback-only.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Subaru_Legacy_(sixth_generation)",
+    "https://en.wikipedia.org/wiki/Subaru_Outback#Fifth_generation_(BS;_2014)"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~tail-lights~84201AE10A",
+   "q": 50,
+   "verdict": "unsure",
+   "reason": "84201AE10A->AE10B appears to be the sedan body-mounted lamp; Outback sedan existed 2000-04 but no independent source confirms it shares it.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts/subaru-lamp-assembly-rear-combination-right~84201ae10b.html",
+    "https://ahparts.com/buy-used/2004-subaru-legacy-rear-driver-tail-lamp-light-on-body-84201ae11b/297840-1"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~tail-lights~84201AE11A",
+   "q": 51,
+   "verdict": "unsure",
+   "reason": "84201AE11A->AE11B is the sedan body-mounted LH lamp (ahparts 2004 Legacy); Outback-sedan sharing not independently confirmed.",
+   "sources": [
+    "https://ahparts.com/buy-used/2004-subaru-legacy-rear-driver-tail-lamp-light-on-body-84201ae11b/297840-1"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~tail-lights~84201AE12A",
+   "q": 52,
+   "verdict": "unsure",
+   "reason": "Mixed: AE16A wagon outer lamp (PL SU2805103) listed for Legacy and Outback wagon; AE12A body style unclear (listed as sedan lid-mount and as Outback wagon).",
+   "sources": [
+    "https://www.go-parts.com/su2805103-2000-2004-subaru-legacy-tail-light-rear-lamp-right-outer.html",
+    "https://parts.natewade.com/p/Subaru_2003_Legacy-25L-AT/Tail-Light-Lamp-Combination-R-Right--Rear-A-Tail-Light-For-a-Vehicle/49294446/84201AE16A.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~tail-lights~84201AE16A",
+   "q": 52,
+   "verdict": "unsure",
+   "reason": "Mixed: AE16A wagon outer lamp (PL SU2805103) listed for Legacy and Outback wagon; AE12A body style unclear (listed as sedan lid-mount and as Outback wagon).",
+   "sources": [
+    "https://www.go-parts.com/su2805103-2000-2004-subaru-legacy-tail-light-rear-lamp-right-outer.html",
+    "https://parts.natewade.com/p/Subaru_2003_Legacy-25L-AT/Tail-Light-Lamp-Combination-R-Right--Rear-A-Tail-Light-For-a-Vehicle/49294446/84201AE16A.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~tail-lights~84201AE13A",
+   "q": 53,
+   "verdict": "unsure",
+   "reason": "Mixed: AE17A wagon outer lamp (PL SU2804103) listed for both Legacy and Outback wagon; AE13A body style/fitment not independently confirmed.",
+   "sources": [
+    "https://www.go-parts.com/su2804103-2000-2004-subaru-legacy-tail-light-rear-lamp-left-outer.html",
+    "https://www.go-parts.com/su2804103-2000-2004-subaru-outback-tail-light-rear-lamp-left-outer.html",
+    "https://www.huntparts.ca/products/2000-2004-subaru-outback-legacy-tail-lamp-driver-side-outback-wgn-high-quality"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~tail-lights~84201AE17A",
+   "q": 53,
+   "verdict": "unsure",
+   "reason": "Mixed: AE17A wagon outer lamp (PL SU2804103) listed for both Legacy and Outback wagon; AE13A body style/fitment not independently confirmed.",
+   "sources": [
+    "https://www.go-parts.com/su2804103-2000-2004-subaru-legacy-tail-light-rear-lamp-left-outer.html",
+    "https://www.go-parts.com/su2804103-2000-2004-subaru-outback-tail-light-rear-lamp-left-outer.html",
+    "https://www.huntparts.ca/products/2000-2004-subaru-outback-legacy-tail-lamp-driver-side-outback-wgn-high-quality"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~tail-lights~84201AE10B",
+   "q": 54,
+   "verdict": "unsure",
+   "reason": "Not the Baja lamp family; sedan lamp per used-parts listings, Outback sedan sharing not independently confirmed.",
+   "sources": [
+    "https://parts.subaruonlineparts.com/oem-parts/subaru-tail-lamp-assembly-84201ae30ann",
+    "https://www.ebay.com/b/Tail-Light-Assemblies-for-2003-Subaru-Baja/33716/bn_93028295"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~tail-lights~84201AE12B",
+   "q": 54,
+   "verdict": "unsure",
+   "reason": "Not the Baja lamp family; body style and Outback fit not independently confirmed.",
+   "sources": [
+    "https://parts.subaruonlineparts.com/oem-parts/subaru-tail-lamp-assembly-84201ae30ann",
+    "https://www.ebay.com/b/Tail-Light-Assemblies-for-2003-Subaru-Baja/33716/bn_93028295"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~tail-lights~84201AE30AHA",
+   "q": 54,
+   "verdict": "wrong",
+   "reason": "84201AE30A/31A + colour suffix is the 2003-06 Baja tail lamp family, rolled up onto Legacy/Outback pages.",
+   "sources": [
+    "https://parts.subaruonlineparts.com/oem-parts/subaru-tail-lamp-assembly-84201ae30ann",
+    "https://www.ebay.com/b/Tail-Light-Assemblies-for-2003-Subaru-Baja/33716/bn_93028295"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~tail-lights~84201AE30AHE",
+   "q": 54,
+   "verdict": "wrong",
+   "reason": "84201AE30A/31A + colour suffix is the 2003-06 Baja tail lamp family, rolled up onto Legacy/Outback pages.",
+   "sources": [
+    "https://parts.subaruonlineparts.com/oem-parts/subaru-tail-lamp-assembly-84201ae30ann",
+    "https://www.ebay.com/b/Tail-Light-Assemblies-for-2003-Subaru-Baja/33716/bn_93028295"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~tail-lights~84201AE30APL",
+   "q": 54,
+   "verdict": "wrong",
+   "reason": "84201AE30A/31A + colour suffix is the 2003-06 Baja tail lamp family, rolled up onto Legacy/Outback pages.",
+   "sources": [
+    "https://parts.subaruonlineparts.com/oem-parts/subaru-tail-lamp-assembly-84201ae30ann",
+    "https://www.ebay.com/b/Tail-Light-Assemblies-for-2003-Subaru-Baja/33716/bn_93028295"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~tail-lights~84201AE30ATC",
+   "q": 54,
+   "verdict": "wrong",
+   "reason": "84201AE30A/31A + colour suffix is the 2003-06 Baja tail lamp family, rolled up onto Legacy/Outback pages.",
+   "sources": [
+    "https://parts.subaruonlineparts.com/oem-parts/subaru-tail-lamp-assembly-84201ae30ann",
+    "https://www.ebay.com/b/Tail-Light-Assemblies-for-2003-Subaru-Baja/33716/bn_93028295"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~tail-lights~84201AE30AVC",
+   "q": 54,
+   "verdict": "wrong",
+   "reason": "84201AE30A/31A + colour suffix is the 2003-06 Baja tail lamp family, rolled up onto Legacy/Outback pages.",
+   "sources": [
+    "https://parts.subaruonlineparts.com/oem-parts/subaru-tail-lamp-assembly-84201ae30ann",
+    "https://www.ebay.com/b/Tail-Light-Assemblies-for-2003-Subaru-Baja/33716/bn_93028295"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~tail-lights~84201AE11B",
+   "q": 55,
+   "verdict": "unsure",
+   "reason": "Not the Baja lamp family; sedan lamp per used-parts listings, Outback sedan sharing not independently confirmed.",
+   "sources": [
+    "https://parts.subaruonlineparts.com/oem-parts/subaru-tail-lamp-assembly-84201ae30ann",
+    "https://www.subarupartsdeal.com/parts/subaru-pb000842-lamp-ay-comb-r-l~84201ae31ann.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~tail-lights~84201AE13B",
+   "q": 55,
+   "verdict": "unsure",
+   "reason": "Not the Baja lamp family; body style and Outback fit not independently confirmed.",
+   "sources": [
+    "https://parts.subaruonlineparts.com/oem-parts/subaru-tail-lamp-assembly-84201ae30ann",
+    "https://www.subarupartsdeal.com/parts/subaru-pb000842-lamp-ay-comb-r-l~84201ae31ann.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~tail-lights~84201AE31AHA",
+   "q": 55,
+   "verdict": "wrong",
+   "reason": "84201AE30A/31A + colour suffix is the 2003-06 Baja tail lamp family, rolled up onto Legacy/Outback pages.",
+   "sources": [
+    "https://parts.subaruonlineparts.com/oem-parts/subaru-tail-lamp-assembly-84201ae30ann",
+    "https://www.subarupartsdeal.com/parts/subaru-pb000842-lamp-ay-comb-r-l~84201ae31ann.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~tail-lights~84201AE31AHE",
+   "q": 55,
+   "verdict": "wrong",
+   "reason": "84201AE30A/31A + colour suffix is the 2003-06 Baja tail lamp family, rolled up onto Legacy/Outback pages.",
+   "sources": [
+    "https://parts.subaruonlineparts.com/oem-parts/subaru-tail-lamp-assembly-84201ae30ann",
+    "https://www.subarupartsdeal.com/parts/subaru-pb000842-lamp-ay-comb-r-l~84201ae31ann.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~tail-lights~84201AE31APL",
+   "q": 55,
+   "verdict": "wrong",
+   "reason": "84201AE30A/31A + colour suffix is the 2003-06 Baja tail lamp family, rolled up onto Legacy/Outback pages.",
+   "sources": [
+    "https://parts.subaruonlineparts.com/oem-parts/subaru-tail-lamp-assembly-84201ae30ann",
+    "https://www.subarupartsdeal.com/parts/subaru-pb000842-lamp-ay-comb-r-l~84201ae31ann.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~tail-lights~84201AE31ATC",
+   "q": 55,
+   "verdict": "wrong",
+   "reason": "84201AE30A/31A + colour suffix is the 2003-06 Baja tail lamp family, rolled up onto Legacy/Outback pages.",
+   "sources": [
+    "https://parts.subaruonlineparts.com/oem-parts/subaru-tail-lamp-assembly-84201ae30ann",
+    "https://www.subarupartsdeal.com/parts/subaru-pb000842-lamp-ay-comb-r-l~84201ae31ann.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~tail-lights~84201AE31AVC",
+   "q": 55,
+   "verdict": "wrong",
+   "reason": "84201AE30A/31A + colour suffix is the 2003-06 Baja tail lamp family, rolled up onto Legacy/Outback pages.",
+   "sources": [
+    "https://parts.subaruonlineparts.com/oem-parts/subaru-tail-lamp-assembly-84201ae30ann",
+    "https://www.subarupartsdeal.com/parts/subaru-pb000842-lamp-ay-comb-r-l~84201ae31ann.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~tail-lights~84201AE30ALB",
+   "q": 56,
+   "verdict": "wrong",
+   "reason": "84201AE30A/31A + colour suffix is the 2003-06 Baja tail lamp family, rolled up onto Legacy/Outback pages.",
+   "sources": [
+    "https://parts.subaruonlineparts.com/oem-parts/subaru-tail-lamp-assembly-84201ae30ann",
+    "https://www.ebay.com/b/Tail-Light-Assemblies-for-2003-Subaru-Baja/33716/bn_93028295"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~tail-lights~84201AE30AWT",
+   "q": 56,
+   "verdict": "wrong",
+   "reason": "84201AE30A/31A + colour suffix is the 2003-06 Baja tail lamp family, rolled up onto Legacy/Outback pages.",
+   "sources": [
+    "https://parts.subaruonlineparts.com/oem-parts/subaru-tail-lamp-assembly-84201ae30ann",
+    "https://www.ebay.com/b/Tail-Light-Assemblies-for-2003-Subaru-Baja/33716/bn_93028295"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~tail-lights~84201AE31ALB",
+   "q": 57,
+   "verdict": "wrong",
+   "reason": "84201AE30A/31A + colour suffix is the 2003-06 Baja tail lamp family, rolled up onto Legacy/Outback pages.",
+   "sources": [
+    "https://parts.subaruonlineparts.com/oem-parts/subaru-tail-lamp-assembly-84201ae30ann"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~tail-lights~84201AE31AWT",
+   "q": 57,
+   "verdict": "wrong",
+   "reason": "84201AE30A/31A + colour suffix is the 2003-06 Baja tail lamp family, rolled up onto Legacy/Outback pages.",
+   "sources": [
+    "https://parts.subaruonlineparts.com/oem-parts/subaru-tail-lamp-assembly-84201ae30ann"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~tail-lights~84912AL05A",
+   "q": 58,
+   "verdict": "wrong",
+   "reason": "Sedan vs wagon: 84912AL05A/06A are Outback outer lamps (PL SU2804106); 84912AL09A/10A are Legacy sedan lamps.",
+   "sources": [
+    "https://carlights360.com/for-subaru-outback-tail-light-2015-2016-2017-driver-side-su2804106-84912al06a",
+    "https://www.subarupartsquick.com/oem-parts/subaru-tail-lamp-84912al09a",
+    "https://parts.wagnersubaru.com/p/Subaru_2014_Legacy/Tail-Light-Housing-Tail-Light-Lens-Lens-and-Body-Combination-Lamp-Left--Rear/60018391/84912AL10A.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~tail-lights~84912AL06A",
+   "q": 58,
+   "verdict": "wrong",
+   "reason": "Sedan vs wagon: 84912AL05A/06A are Outback outer lamps (PL SU2804106); 84912AL09A/10A are Legacy sedan lamps.",
+   "sources": [
+    "https://carlights360.com/for-subaru-outback-tail-light-2015-2016-2017-driver-side-su2804106-84912al06a",
+    "https://www.subarupartsquick.com/oem-parts/subaru-tail-lamp-84912al09a",
+    "https://parts.wagnersubaru.com/p/Subaru_2014_Legacy/Tail-Light-Housing-Tail-Light-Lens-Lens-and-Body-Combination-Lamp-Left--Rear/60018391/84912AL10A.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~tail-lights~84912AL09A",
+   "q": 58,
+   "verdict": "wrong",
+   "reason": "Sedan vs wagon: 84912AL05A/06A are Outback outer lamps (PL SU2804106); 84912AL09A/10A are Legacy sedan lamps.",
+   "sources": [
+    "https://carlights360.com/for-subaru-outback-tail-light-2015-2016-2017-driver-side-su2804106-84912al06a",
+    "https://www.subarupartsquick.com/oem-parts/subaru-tail-lamp-84912al09a",
+    "https://parts.wagnersubaru.com/p/Subaru_2014_Legacy/Tail-Light-Housing-Tail-Light-Lens-Lens-and-Body-Combination-Lamp-Left--Rear/60018391/84912AL10A.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~tail-lights~84912AL10A",
+   "q": 58,
+   "verdict": "wrong",
+   "reason": "Sedan vs wagon: 84912AL05A/06A are Outback outer lamps (PL SU2804106); 84912AL09A/10A are Legacy sedan lamps.",
+   "sources": [
+    "https://carlights360.com/for-subaru-outback-tail-light-2015-2016-2017-driver-side-su2804106-84912al06a",
+    "https://www.subarupartsquick.com/oem-parts/subaru-tail-lamp-84912al09a",
+    "https://parts.wagnersubaru.com/p/Subaru_2014_Legacy/Tail-Light-Housing-Tail-Light-Lens-Lens-and-Body-Combination-Lamp-Left--Rear/60018391/84912AL10A.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~trunk-lid~57501AE02A",
+   "q": 59,
+   "verdict": "unsure",
+   "reason": "Outback sedan existed 2000-04 so sharing is plausible, but no independent source found for 57501AE02A.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Subaru_Outback#Second_generation_(BH;_1999)"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~trunk-lid~57509AG00A9P",
+   "q": 60,
+   "verdict": "unsure",
+   "reason": "Outback sedan existed 2005-07, but the only independent hit ties 57509AG00A9P to a Legacy GT spoiler lid; Outback fit unconfirmed.",
+   "sources": [
+    "https://www.partrequest.com/auto-parts-detail/2005-2009-subaru-legacy-gt-trunk-deck-lid-spoiler-a-303337825943"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~trunk-lid~57509AJ00A9P",
+   "q": 61,
+   "verdict": "wrong",
+   "reason": "No 2010+ Outback sedan (BR Outback wagon only); 57509AJ trunk lids are Legacy sedan only.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Subaru_Outback#Fourth_generation_(BR;_2009)",
+    "https://en.wikipedia.org/wiki/Subaru_Legacy_(fifth_generation)"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~trunk-lid~57509AJ00B9P",
+   "q": 61,
+   "verdict": "wrong",
+   "reason": "No 2010+ Outback sedan (BR Outback wagon only); 57509AJ trunk lids are Legacy sedan only.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Subaru_Outback#Fourth_generation_(BR;_2009)",
+    "https://en.wikipedia.org/wiki/Subaru_Legacy_(fifth_generation)"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~trunk-lid~57509AJ02A9P",
+   "q": 61,
+   "verdict": "wrong",
+   "reason": "No 2010+ Outback sedan (BR Outback wagon only); 57509AJ trunk lids are Legacy sedan only.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Subaru_Outback#Fourth_generation_(BR;_2009)",
+    "https://en.wikipedia.org/wiki/Subaru_Legacy_(fifth_generation)"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~trunk-lid~57509AJ02B9P",
+   "q": 61,
+   "verdict": "wrong",
+   "reason": "No 2010+ Outback sedan (BR Outback wagon only); 57509AJ trunk lids are Legacy sedan only.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Subaru_Outback#Fourth_generation_(BR;_2009)",
+    "https://en.wikipedia.org/wiki/Subaru_Legacy_(fifth_generation)"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~trunk-lid~57509AJ00C9P",
+   "q": 62,
+   "verdict": "wrong",
+   "reason": "No 2010+ Outback sedan; 57509AJ00C9P/AJ02C9P trunk lids are Legacy sedan only.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Subaru_Outback#Fourth_generation_(BR;_2009)",
+    "https://en.wikipedia.org/wiki/Subaru_Legacy_(fifth_generation)"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~trunk-lid~57509AJ02C9P",
+   "q": 62,
+   "verdict": "wrong",
+   "reason": "No 2010+ Outback sedan; 57509AJ00C9P/AJ02C9P trunk lids are Legacy sedan only.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Subaru_Outback#Fourth_generation_(BR;_2009)",
+    "https://en.wikipedia.org/wiki/Subaru_Legacy_(fifth_generation)"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "subaru~trunk-lid~57509AL00A9P",
+   "q": 63,
+   "verdict": "wrong",
+   "reason": "No 2015/2018 Outback sedan; 57509AL00A9P trunk lid is Legacy sedan only.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Subaru_Outback#Fifth_generation_(BS;_2014)",
+    "https://en.wikipedia.org/wiki/Subaru_Legacy_(sixth_generation)"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "gm~headlights~19208051",
+   "q": 64,
+   "verdict": "wrong",
+   "reason": "2000-05 DeVille and 1998-04 Seville are different bodies: DeVille 04-05 headlamp GM2502240/GM2503240 vs Seville 98-04 GM2502198; Seville pages show DeVille trims (roll-up)",
+   "sources": [
+    "https://www.go-parts.com/cadillac-deville-headlights.html",
+    "https://partify.ca/products/cadillac-seville-driver-side-headlight-assembly-composite-gm2502198.oembed",
+    "https://gmpartsgiant.com/parts/cadillac-headlamp~25769515.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "gm~headlights~19208052",
+   "q": 64,
+   "verdict": "wrong",
+   "reason": "2000-05 DeVille and 1998-04 Seville are different bodies: DeVille 04-05 headlamp GM2502240/GM2503240 vs Seville 98-04 GM2502198; Seville pages show DeVille trims (roll-up)",
+   "sources": [
+    "https://www.go-parts.com/cadillac-deville-headlights.html",
+    "https://partify.ca/products/cadillac-seville-driver-side-headlight-assembly-composite-gm2502198.oembed",
+    "https://gmpartsgiant.com/parts/cadillac-headlamp~25769515.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "gm~headlights~19208053",
+   "q": 64,
+   "verdict": "wrong",
+   "reason": "2000-05 DeVille and 1998-04 Seville are different bodies: DeVille 04-05 headlamp GM2502240/GM2503240 vs Seville 98-04 GM2502198; Seville pages show DeVille trims (roll-up)",
+   "sources": [
+    "https://www.go-parts.com/cadillac-deville-headlights.html",
+    "https://partify.ca/products/cadillac-seville-driver-side-headlight-assembly-composite-gm2502198.oembed",
+    "https://gmpartsgiant.com/parts/cadillac-headlamp~25769515.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "gm~headlights~19208054",
+   "q": 64,
+   "verdict": "wrong",
+   "reason": "2000-05 DeVille and 1998-04 Seville are different bodies: DeVille 04-05 headlamp GM2502240/GM2503240 vs Seville 98-04 GM2502198; Seville pages show DeVille trims (roll-up)",
+   "sources": [
+    "https://www.go-parts.com/cadillac-deville-headlights.html",
+    "https://partify.ca/products/cadillac-seville-driver-side-headlight-assembly-composite-gm2502198.oembed",
+    "https://gmpartsgiant.com/parts/cadillac-headlamp~25769515.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "gm~headlights~19208058",
+   "q": 64,
+   "verdict": "wrong",
+   "reason": "2000-05 DeVille and 1998-04 Seville are different bodies: DeVille 04-05 headlamp GM2502240/GM2503240 vs Seville 98-04 GM2502198; Seville pages show DeVille trims (roll-up)",
+   "sources": [
+    "https://www.go-parts.com/cadillac-deville-headlights.html",
+    "https://partify.ca/products/cadillac-seville-driver-side-headlight-assembly-composite-gm2502198.oembed",
+    "https://gmpartsgiant.com/parts/cadillac-headlamp~25769515.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "gm~headlights~19208061",
+   "q": 64,
+   "verdict": "wrong",
+   "reason": "2000-05 DeVille and 1998-04 Seville are different bodies: DeVille 04-05 headlamp GM2502240/GM2503240 vs Seville 98-04 GM2502198; Seville pages show DeVille trims (roll-up)",
+   "sources": [
+    "https://www.go-parts.com/cadillac-deville-headlights.html",
+    "https://partify.ca/products/cadillac-seville-driver-side-headlight-assembly-composite-gm2502198.oembed",
+    "https://gmpartsgiant.com/parts/cadillac-headlamp~25769515.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "gm~headlights~19208062",
+   "q": 64,
+   "verdict": "wrong",
+   "reason": "2000-05 DeVille and 1998-04 Seville are different bodies: DeVille 04-05 headlamp GM2502240/GM2503240 vs Seville 98-04 GM2502198; Seville pages show DeVille trims (roll-up)",
+   "sources": [
+    "https://www.go-parts.com/cadillac-deville-headlights.html",
+    "https://partify.ca/products/cadillac-seville-driver-side-headlight-assembly-composite-gm2502198.oembed",
+    "https://gmpartsgiant.com/parts/cadillac-headlamp~25769515.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "gm~headlights~25723077",
+   "q": 64,
+   "verdict": "wrong",
+   "reason": "2000-05 DeVille and 1998-04 Seville are different bodies: DeVille 04-05 headlamp GM2502240/GM2503240 vs Seville 98-04 GM2502198; Seville pages show DeVille trims (roll-up)",
+   "sources": [
+    "https://www.go-parts.com/cadillac-deville-headlights.html",
+    "https://partify.ca/products/cadillac-seville-driver-side-headlight-assembly-composite-gm2502198.oembed",
+    "https://gmpartsgiant.com/parts/cadillac-headlamp~25769515.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "gm~headlights~25723544",
+   "q": 64,
+   "verdict": "wrong",
+   "reason": "2000-05 DeVille and 1998-04 Seville are different bodies: DeVille 04-05 headlamp GM2502240/GM2503240 vs Seville 98-04 GM2502198; Seville pages show DeVille trims (roll-up)",
+   "sources": [
+    "https://www.go-parts.com/cadillac-deville-headlights.html",
+    "https://partify.ca/products/cadillac-seville-driver-side-headlight-assembly-composite-gm2502198.oembed",
+    "https://gmpartsgiant.com/parts/cadillac-headlamp~25769515.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "gm~headlights~25769515",
+   "q": 64,
+   "verdict": "wrong",
+   "reason": "2000-05 DeVille and 1998-04 Seville are different bodies: DeVille 04-05 headlamp GM2502240/GM2503240 vs Seville 98-04 GM2502198; Seville pages show DeVille trims (roll-up)",
+   "sources": [
+    "https://www.go-parts.com/cadillac-deville-headlights.html",
+    "https://partify.ca/products/cadillac-seville-driver-side-headlight-assembly-composite-gm2502198.oembed",
+    "https://gmpartsgiant.com/parts/cadillac-headlamp~25769515.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "gm~headlights~25769516",
+   "q": 64,
+   "verdict": "wrong",
+   "reason": "2000-05 DeVille and 1998-04 Seville are different bodies: DeVille 04-05 headlamp GM2502240/GM2503240 vs Seville 98-04 GM2502198; Seville pages show DeVille trims (roll-up)",
+   "sources": [
+    "https://www.go-parts.com/cadillac-deville-headlights.html",
+    "https://partify.ca/products/cadillac-seville-driver-side-headlight-assembly-composite-gm2502198.oembed",
+    "https://gmpartsgiant.com/parts/cadillac-headlamp~25769515.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "gm~headlights~25769517",
+   "q": 64,
+   "verdict": "wrong",
+   "reason": "2000-05 DeVille and 1998-04 Seville are different bodies: DeVille 04-05 headlamp GM2502240/GM2503240 vs Seville 98-04 GM2502198; Seville pages show DeVille trims (roll-up)",
+   "sources": [
+    "https://www.go-parts.com/cadillac-deville-headlights.html",
+    "https://partify.ca/products/cadillac-seville-driver-side-headlight-assembly-composite-gm2502198.oembed",
+    "https://gmpartsgiant.com/parts/cadillac-headlamp~25769515.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "gm~headlights~25769518",
+   "q": 64,
+   "verdict": "wrong",
+   "reason": "2000-05 DeVille and 1998-04 Seville are different bodies: DeVille 04-05 headlamp GM2502240/GM2503240 vs Seville 98-04 GM2502198; Seville pages show DeVille trims (roll-up)",
+   "sources": [
+    "https://www.go-parts.com/cadillac-deville-headlights.html",
+    "https://partify.ca/products/cadillac-seville-driver-side-headlight-assembly-composite-gm2502198.oembed",
+    "https://gmpartsgiant.com/parts/cadillac-headlamp~25769515.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "gm~tail-lights~5978125",
+   "q": 65,
+   "verdict": "wrong",
+   "reason": "5978125/6 is the 1994-99 DeVille tail lamp; 1992-97 Seville is a different body using its own lamps (e.g. 16513925/16523467 outer lamps)",
+   "sources": [
+    "https://www.chevypartsdeal.com/parts-list/1997-cadillac-deville/headlights-lighting/tail-lamps",
+    "https://www.ebay.de/itm/406167431437",
+    "https://partify.ca/products/cadillac-deville-driver-side-tail-light-assembly-gm2800149.oembed"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "gm~tail-lights~5978126",
+   "q": 65,
+   "verdict": "wrong",
+   "reason": "5978125/6 is the 1994-99 DeVille tail lamp; 1992-97 Seville is a different body using its own lamps (e.g. 16513925/16523467 outer lamps)",
+   "sources": [
+    "https://www.chevypartsdeal.com/parts-list/1997-cadillac-deville/headlights-lighting/tail-lamps",
+    "https://www.ebay.de/itm/406167431437",
+    "https://partify.ca/products/cadillac-deville-driver-side-tail-light-assembly-gm2800149.oembed"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "gm~tail-lights~16524767",
+   "q": 66,
+   "verdict": "wrong",
+   "reason": "Group mixes Seville-only lamps (16524767/8, 1998-04 Seville) with DeVille-only lamps (25749113/4 = GM2800181, 2000-05 DeVille LED); different bodies, no shared tail lamp",
+   "sources": [
+    "https://www.chevypartsdeal.com/oem/gm~lamp-tail~16524767",
+    "https://carlights360.com/for-cadillac-deville-tail-light-2000-2005-driver-side-led-dot-certified-gm2800181-25749113/",
+    "https://www.go-parts.com/gm2800181-2000-2005-cadillac-deville-tail-light-rear-lamp-left-driver-side.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "gm~tail-lights~16524768",
+   "q": 66,
+   "verdict": "wrong",
+   "reason": "Group mixes Seville-only lamps (16524767/8, 1998-04 Seville) with DeVille-only lamps (25749113/4 = GM2800181, 2000-05 DeVille LED); different bodies, no shared tail lamp",
+   "sources": [
+    "https://www.chevypartsdeal.com/oem/gm~lamp-tail~16524767",
+    "https://carlights360.com/for-cadillac-deville-tail-light-2000-2005-driver-side-led-dot-certified-gm2800181-25749113/",
+    "https://www.go-parts.com/gm2800181-2000-2005-cadillac-deville-tail-light-rear-lamp-left-driver-side.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "gm~tail-lights~25749113",
+   "q": 66,
+   "verdict": "wrong",
+   "reason": "Group mixes Seville-only lamps (16524767/8, 1998-04 Seville) with DeVille-only lamps (25749113/4 = GM2800181, 2000-05 DeVille LED); different bodies, no shared tail lamp",
+   "sources": [
+    "https://www.chevypartsdeal.com/oem/gm~lamp-tail~16524767",
+    "https://carlights360.com/for-cadillac-deville-tail-light-2000-2005-driver-side-led-dot-certified-gm2800181-25749113/",
+    "https://www.go-parts.com/gm2800181-2000-2005-cadillac-deville-tail-light-rear-lamp-left-driver-side.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "gm~tail-lights~25749114",
+   "q": 66,
+   "verdict": "wrong",
+   "reason": "Group mixes Seville-only lamps (16524767/8, 1998-04 Seville) with DeVille-only lamps (25749113/4 = GM2800181, 2000-05 DeVille LED); different bodies, no shared tail lamp",
+   "sources": [
+    "https://www.chevypartsdeal.com/oem/gm~lamp-tail~16524767",
+    "https://carlights360.com/for-cadillac-deville-tail-light-2000-2005-driver-side-led-dot-certified-gm2800181-25749113/",
+    "https://www.go-parts.com/gm2800181-2000-2005-cadillac-deville-tail-light-rear-lamp-left-driver-side.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "gm~tail-lights~25751057",
+   "q": 66,
+   "verdict": "wrong",
+   "reason": "Group mixes Seville-only lamps (16524767/8, 1998-04 Seville) with DeVille-only lamps (25749113/4 = GM2800181, 2000-05 DeVille LED); different bodies, no shared tail lamp",
+   "sources": [
+    "https://www.chevypartsdeal.com/oem/gm~lamp-tail~16524767",
+    "https://carlights360.com/for-cadillac-deville-tail-light-2000-2005-driver-side-led-dot-certified-gm2800181-25749113/",
+    "https://www.go-parts.com/gm2800181-2000-2005-cadillac-deville-tail-light-rear-lamp-left-driver-side.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "gm~tail-lights~25751058",
+   "q": 66,
+   "verdict": "wrong",
+   "reason": "Group mixes Seville-only lamps (16524767/8, 1998-04 Seville) with DeVille-only lamps (25749113/4 = GM2800181, 2000-05 DeVille LED); different bodies, no shared tail lamp",
+   "sources": [
+    "https://www.chevypartsdeal.com/oem/gm~lamp-tail~16524767",
+    "https://carlights360.com/for-cadillac-deville-tail-light-2000-2005-driver-side-led-dot-certified-gm2800181-25749113/",
+    "https://www.go-parts.com/gm2800181-2000-2005-cadillac-deville-tail-light-rear-lamp-left-driver-side.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "mopar~headlights~4857040AB",
+   "q": 67,
+   "verdict": "right",
+   "reason": "PL CH2503109/CH2502109 = 4857040/41AB non-quad headlamp sold for 1996-99 Caravan, Grand Caravan, T&C, Voyager.",
+   "sources": [
+    "https://www.headlightsdepot.com/headlight-left-driver-side-non-quad-type-fits-1996-2000-chrysler-town-country-dodge-caravan-sku-cs041-b001l.html",
+    "https://www.go-parts.com/ch2502109-1996-1999-dodge-caravan-headlight-assembly-left-driver-side.html",
+    "https://www.koskowskiautoparts.com/products/dorman-1590450-headlight-assembly"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "mopar~headlights~4857041AB",
+   "q": 67,
+   "verdict": "right",
+   "reason": "PL CH2503109/CH2502109 = 4857040/41AB non-quad headlamp sold for 1996-99 Caravan, Grand Caravan, T&C, Voyager.",
+   "sources": [
+    "https://www.headlightsdepot.com/headlight-left-driver-side-non-quad-type-fits-1996-2000-chrysler-town-country-dodge-caravan-sku-cs041-b001l.html",
+    "https://www.go-parts.com/ch2502109-1996-1999-dodge-caravan-headlight-assembly-left-driver-side.html",
+    "https://www.koskowskiautoparts.com/products/dorman-1590450-headlight-assembly"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "mopar~headlights~4857150AC",
+   "q": 67,
+   "verdict": "unsure",
+   "reason": "Quad-lamp headlamp; Dorman cross-ref names only 1998-99 T&C; Caravan fit rests on retailer listings.",
+   "sources": [
+    "https://www.headlightsdepot.com/headlight-left-driver-side-non-quad-type-fits-1996-2000-chrysler-town-country-dodge-caravan-sku-cs041-b001l.html",
+    "https://www.go-parts.com/ch2502109-1996-1999-dodge-caravan-headlight-assembly-left-driver-side.html",
+    "https://www.koskowskiautoparts.com/products/dorman-1590450-headlight-assembly"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "mopar~headlights~4857151AC",
+   "q": 67,
+   "verdict": "unsure",
+   "reason": "Quad-lamp headlamp; Dorman cross-ref names only 1998-99 T&C; Caravan fit rests on retailer listings.",
+   "sources": [
+    "https://www.headlightsdepot.com/headlight-left-driver-side-non-quad-type-fits-1996-2000-chrysler-town-country-dodge-caravan-sku-cs041-b001l.html",
+    "https://www.go-parts.com/ch2502109-1996-1999-dodge-caravan-headlight-assembly-left-driver-side.html",
+    "https://www.koskowskiautoparts.com/products/dorman-1590450-headlight-assembly"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "mopar~headlights~4857700AB",
+   "q": 68,
+   "verdict": "unsure",
+   "reason": "4857700/01AB (CH2503129/CH2502129) fit 2001-07 Caravan/GC/T&C 113in WB, but 2005-07 T&C 119in uses chrome 4857990/91; V7107700/01AA value-line numbers unconfirmed",
+   "sources": [
+    "https://www.go-parts.com/ch2503129-2001-2007-dodge-caravan-headlight-assembly-right-passenger-side.html",
+    "https://www.headlightsdepot.com/headlight-halogen-chrome-left-driver-fits-2005-2007-chrysler-town-country-w-119-inch-wheelbase-sku-cs205-b001l.html",
+    "https://moparpartsgiant.com/parts/mopar-headlamp-headlamp~v7107700aa.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "mopar~headlights~4857701AB",
+   "q": 68,
+   "verdict": "unsure",
+   "reason": "4857700/01AB (CH2503129/CH2502129) fit 2001-07 Caravan/GC/T&C 113in WB, but 2005-07 T&C 119in uses chrome 4857990/91; V7107700/01AA value-line numbers unconfirmed",
+   "sources": [
+    "https://www.go-parts.com/ch2503129-2001-2007-dodge-caravan-headlight-assembly-right-passenger-side.html",
+    "https://www.headlightsdepot.com/headlight-halogen-chrome-left-driver-fits-2005-2007-chrysler-town-country-w-119-inch-wheelbase-sku-cs205-b001l.html",
+    "https://moparpartsgiant.com/parts/mopar-headlamp-headlamp~v7107700aa.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "mopar~headlights~V7107700AA",
+   "q": 68,
+   "verdict": "unsure",
+   "reason": "4857700/01AB (CH2503129/CH2502129) fit 2001-07 Caravan/GC/T&C 113in WB, but 2005-07 T&C 119in uses chrome 4857990/91; V7107700/01AA value-line numbers unconfirmed",
+   "sources": [
+    "https://www.go-parts.com/ch2503129-2001-2007-dodge-caravan-headlight-assembly-right-passenger-side.html",
+    "https://www.headlightsdepot.com/headlight-halogen-chrome-left-driver-fits-2005-2007-chrysler-town-country-w-119-inch-wheelbase-sku-cs205-b001l.html",
+    "https://moparpartsgiant.com/parts/mopar-headlamp-headlamp~v7107700aa.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "mopar~headlights~V7107701AA",
+   "q": 68,
+   "verdict": "unsure",
+   "reason": "4857700/01AB (CH2503129/CH2502129) fit 2001-07 Caravan/GC/T&C 113in WB, but 2005-07 T&C 119in uses chrome 4857990/91; V7107700/01AA value-line numbers unconfirmed",
+   "sources": [
+    "https://www.go-parts.com/ch2503129-2001-2007-dodge-caravan-headlight-assembly-right-passenger-side.html",
+    "https://www.headlightsdepot.com/headlight-halogen-chrome-left-driver-fits-2005-2007-chrysler-town-country-w-119-inch-wheelbase-sku-cs205-b001l.html",
+    "https://moparpartsgiant.com/parts/mopar-headlamp-headlamp~v7107700aa.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "mopar~headlights~4857700AC",
+   "q": 69,
+   "verdict": "unsure",
+   "reason": "Fits 2001-07 Caravan/GC/T&C 113in WB, but 2005-07 T&C 119in uses chrome 4857990/91; group lists 2005 T&C without wheelbase.",
+   "sources": [
+    "https://www.go-parts.com/ch2503129-2001-2007-dodge-grand-caravan-headlight-assembly-right-passenger-side.html",
+    "https://www.wheelerfleet.com/product/headlamp-asm/1484003",
+    "https://www.headlightsdepot.com/headlight-halogen-chrome-left-driver-fits-2005-2007-chrysler-town-country-w-119-inch-wheelbase-sku-cs205-b001l.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "mopar~headlights~4857701AC",
+   "q": 69,
+   "verdict": "unsure",
+   "reason": "Fits 2001-07 Caravan/GC/T&C 113in WB, but 2005-07 T&C 119in uses chrome 4857990/91; group lists 2005 T&C without wheelbase.",
+   "sources": [
+    "https://www.go-parts.com/ch2503129-2001-2007-dodge-grand-caravan-headlight-assembly-right-passenger-side.html",
+    "https://www.wheelerfleet.com/product/headlamp-asm/1484003",
+    "https://www.headlightsdepot.com/headlight-halogen-chrome-left-driver-fits-2005-2007-chrysler-town-country-w-119-inch-wheelbase-sku-cs205-b001l.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "mopar~tail-lights~4857954AA",
+   "q": 70,
+   "verdict": "right",
+   "reason": "4857954/55AA (superseded by 68241334/35AA; CH2801157/CH2800157, Dorman 1611234/5) fit 2004-07 T&C, Caravan and Grand Caravan",
+   "sources": [
+    "https://www.wheelerfleet.com/product/tail-lamp-asm/31872",
+    "https://www.go-parts.com/ch2800157-2004-2007-dodge-caravan-tail-light-rear-lamp-left-driver-side.html",
+    "https://www.autobarn.net/products/dorman-tail-light-assembly-pa-rb1611235"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "mopar~tail-lights~4857955AA",
+   "q": 70,
+   "verdict": "right",
+   "reason": "4857954/55AA (superseded by 68241334/35AA; CH2801157/CH2800157, Dorman 1611234/5) fit 2004-07 T&C, Caravan and Grand Caravan",
+   "sources": [
+    "https://www.wheelerfleet.com/product/tail-lamp-asm/31872",
+    "https://www.go-parts.com/ch2800157-2004-2007-dodge-caravan-tail-light-rear-lamp-left-driver-side.html",
+    "https://www.autobarn.net/products/dorman-tail-light-assembly-pa-rb1611235"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "mopar~tail-lights~68241334AA",
+   "q": 71,
+   "verdict": "right",
+   "reason": "68241334/35AA (replaces 4857954/55AA; CH2801157/CH2800157, Dorman 1611234/5) listed for 2004-07 T&C, Caravan and Grand Caravan",
+   "sources": [
+    "https://www.go-parts.com/ch2801157-2004-2007-dodge-caravan-tail-light-rear-lamp-right-passenger-side.html",
+    "https://www.autobarn.net/products/dorman-tail-light-assembly-pa-rb1611235",
+    "https://carlights360.com/for-chrysler-town-country-tail-light-assembly-2004-05-06-2007-capa-certified"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "mopar~tail-lights~68241335AA",
+   "q": 71,
+   "verdict": "right",
+   "reason": "68241334/35AA (replaces 4857954/55AA; CH2801157/CH2800157, Dorman 1611234/5) listed for 2004-07 T&C, Caravan and Grand Caravan",
+   "sources": [
+    "https://www.go-parts.com/ch2801157-2004-2007-dodge-caravan-tail-light-rear-lamp-right-passenger-side.html",
+    "https://www.autobarn.net/products/dorman-tail-light-assembly-pa-rb1611235",
+    "https://carlights360.com/for-chrysler-town-country-tail-light-assembly-2004-05-06-2007-capa-certified"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "ford~bumper-front~F2TZ-17757-A",
+   "q": 72,
+   "verdict": "unsure",
+   "reason": "F2TZ/F3TZ-17757 are 1992-96 OBS bumpers; fit 1997 F-250 HD (old body) only, not 1997 F-250 LD (new F-150 body). YardScout can't tell 1997 HD from LD.",
+   "sources": [
+    "https://haynes.com/en-us/tips-tutorials/complicated-history-ford-f-250-and-f-350-trucks-1996-1999",
+    "https://restorationperformance.com/product/1992-96-ford-f-series-truck-bronco-front-bumper-painted-w-o-pad-holes-f-150-f-250-f-350/",
+    "https://www.go-parts.com/9296-ford-f-series-pickup-front-bumper-p-346548.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "ford~bumper-front~F2TZ-17757-C",
+   "q": 72,
+   "verdict": "unsure",
+   "reason": "F2TZ/F3TZ-17757 are 1992-96 OBS bumpers; fit 1997 F-250 HD (old body) only, not 1997 F-250 LD (new F-150 body). YardScout can't tell 1997 HD from LD.",
+   "sources": [
+    "https://haynes.com/en-us/tips-tutorials/complicated-history-ford-f-250-and-f-350-trucks-1996-1999",
+    "https://restorationperformance.com/product/1992-96-ford-f-series-truck-bronco-front-bumper-painted-w-o-pad-holes-f-150-f-250-f-350/",
+    "https://www.go-parts.com/9296-ford-f-series-pickup-front-bumper-p-346548.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "ford~bumper-front~F3TZ-17757-ABCP",
+   "q": 72,
+   "verdict": "unsure",
+   "reason": "F2TZ/F3TZ-17757 are 1992-96 OBS bumpers; fit 1997 F-250 HD (old body) only, not 1997 F-250 LD (new F-150 body). YardScout can't tell 1997 HD from LD.",
+   "sources": [
+    "https://haynes.com/en-us/tips-tutorials/complicated-history-ford-f-250-and-f-350-trucks-1996-1999",
+    "https://restorationperformance.com/product/1992-96-ford-f-series-truck-bronco-front-bumper-painted-w-o-pad-holes-f-150-f-250-f-350/",
+    "https://www.go-parts.com/9296-ford-f-series-pickup-front-bumper-p-346548.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "ford~bumper-rear~F2TZ-17906-A",
+   "q": 73,
+   "verdict": "unsure",
+   "reason": "F2TZ-17906 rear bumpers are 1992-97 OBS styleside; would fit 1997 F-250 HD only, not the 1997 F-250 LD new body. HD/LD not distinguishable; no independent number match found.",
+   "sources": [
+    "https://haynes.com/en-us/tips-tutorials/complicated-history-ford-f-250-and-f-350-trucks-1996-1999",
+    "https://www.ford-trucks.com/forums/402481-what-is-the-difference.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "ford~bumper-rear~F2TZ-17906-B",
+   "q": 73,
+   "verdict": "unsure",
+   "reason": "F2TZ-17906 rear bumpers are 1992-97 OBS styleside; would fit 1997 F-250 HD only, not the 1997 F-250 LD new body. HD/LD not distinguishable; no independent number match found.",
+   "sources": [
+    "https://haynes.com/en-us/tips-tutorials/complicated-history-ford-f-250-and-f-350-trucks-1996-1999",
+    "https://www.ford-trucks.com/forums/402481-what-is-the-difference.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "ford~bumper-rear~XL3Z-17906-BBCP",
+   "q": 74,
+   "verdict": "unsure",
+   "reason": "XL3Z-17906-BB step bumper sold for 1997-2003 F-150/F-250 LD styleside (exc crew cab); fits 1997 F-250 LD only, not 1997 F-250 HD old body. YL3Z-CAB not independently confirmed.",
+   "sources": [
+    "https://paintedautoparts.com/ford-trucks-vans-ford-pu-new-f150-f250-ld-step-bumper-chr-w-o-sensor-styleside-exc-crew-cab-oem-xl3z17906bb-1997-2003.html",
+    "https://haynes.com/en-us/tips-tutorials/complicated-history-ford-f-250-and-f-350-trucks-1996-1999"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "ford~bumper-rear~YL3Z-17906-CABCP",
+   "q": 74,
+   "verdict": "unsure",
+   "reason": "XL3Z-17906-BB step bumper sold for 1997-2003 F-150/F-250 LD styleside (exc crew cab); fits 1997 F-250 LD only, not 1997 F-250 HD old body. YL3Z-CAB not independently confirmed.",
+   "sources": [
+    "https://paintedautoparts.com/ford-trucks-vans-ford-pu-new-f150-f250-ld-step-bumper-chr-w-o-sensor-styleside-exc-crew-cab-oem-xl3z17906bb-1997-2003.html",
+    "https://haynes.com/en-us/tips-tutorials/complicated-history-ford-f-250-and-f-350-trucks-1996-1999"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "ford~fender~F2TZ-16005-A",
+   "q": 75,
+   "verdict": "unsure",
+   "reason": "F2TZ-16005-A (RH, Partslink FO1241136) / F4TZ-16006-A are 1992-97 OBS fenders: fit 1997 F-250 HD only, not 1997 F-250 LD new body. HD vs LD not distinguishable.",
+   "sources": [
+    "https://www.ebay.com/p/6022156780",
+    "https://carpenterv12.store.commercebuild.com/trucks/body/sheet-metal/f2tz-16005-ax-tkfront-fender--rh",
+    "https://haynes.com/en-us/tips-tutorials/complicated-history-ford-f-250-and-f-350-trucks-1996-1999"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "ford~fender~F4TZ-16006-A",
+   "q": 75,
+   "verdict": "unsure",
+   "reason": "F2TZ-16005-A (RH, Partslink FO1241136) / F4TZ-16006-A are 1992-97 OBS fenders: fit 1997 F-250 HD only, not 1997 F-250 LD new body. HD vs LD not distinguishable.",
+   "sources": [
+    "https://www.ebay.com/p/6022156780",
+    "https://carpenterv12.store.commercebuild.com/trucks/body/sheet-metal/f2tz-16005-ax-tkfront-fender--rh",
+    "https://haynes.com/en-us/tips-tutorials/complicated-history-ford-f-250-and-f-350-trucks-1996-1999"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "ford~grille~F4TZ-8200-A",
+   "q": 76,
+   "verdict": "unsure",
+   "reason": "F4TZ-8200-A (Partslink FO1200173) is the 1992-97 OBS F-series grille; fits 1997 F-250 HD only, not 1997 F-250 LD (new body). HD vs LD not distinguishable.",
+   "sources": [
+    "https://www.partrequest.com/auto-parts-detail/1992-1997-ford-f-series-f150-f250-f350-front-grille-404788919993",
+    "https://centralalbertapaintsupply.ca/?p=141476",
+    "https://haynes.com/en-us/tips-tutorials/complicated-history-ford-f-250-and-f-350-trucks-1996-1999"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "ford~grille~F4TZ-8200-ACP",
+   "q": 76,
+   "verdict": "unsure",
+   "reason": "F4TZ-8200-A (Partslink FO1200173) is the 1992-97 OBS F-series grille; fits 1997 F-250 HD only, not 1997 F-250 LD (new body). HD vs LD not distinguishable.",
+   "sources": [
+    "https://www.partrequest.com/auto-parts-detail/1992-1997-ford-f-series-f150-f250-f350-front-grille-404788919993",
+    "https://centralalbertapaintsupply.ca/?p=141476",
+    "https://haynes.com/en-us/tips-tutorials/complicated-history-ford-f-250-and-f-350-trucks-1996-1999"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "ford~hood~F2TZ-16612-A",
+   "q": 77,
+   "verdict": "unsure",
+   "reason": "F2TZ-16612-A (Partslink FO1230121) is the 1992-97 OBS hood (F-150/250/350/Bronco); fits 1997 F-250 HD only, not 1997 F-250 LD new body. HD vs LD not distinguishable.",
+   "sources": [
+    "https://www.oerparts.com/shop/1992/ford/f-150/parts/body-panels/hoods/",
+    "https://carpenterv12.store.commercebuild.com/trucks/body/hood/f2tz-16612-ax-tkcf75-hood-1992-98-f-150350",
+    "https://haynes.com/en-us/tips-tutorials/complicated-history-ford-f-250-and-f-350-trucks-1996-1999"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "ford~tailgate~F2TZ-9940700-A",
+   "q": 78,
+   "verdict": "unsure",
+   "reason": "F2TZ-9940700-A (Partslink FO1900104) is the 1992-96/97 OBS styleside tailgate; fits 1997 F-250 HD only, not 1997 F-250 LD new body. HD vs LD not distinguishable.",
+   "sources": [
+    "https://centralalbertapaintsupply.ca/?p=146210",
+    "https://haynes.com/en-us/tips-tutorials/complicated-history-ford-f-250-and-f-350-trucks-1996-1999"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "ford~tailgate~F65Z-9940700-AX",
+   "q": 79,
+   "verdict": "unsure",
+   "reason": "F65Z-9940700-AX (FO1900113) fits 97-03 F-150/F-250 LD and 99-07 Super Duty styleside, so 2001 F-150 + 1999 F-250 OK; 1997 F-250 HD (old body) not. Mixed.",
+   "sources": [
+    "https://paintedautoparts.com/ford-trucks-vans-ford-pu-new-f150-f250-ld-tailgate-exc-flareside-crew-cab-capa-oem-f65z9940700ax-1997-2003.html",
+    "https://paintedautomotiveparts.com/ford-trucks-vans-ford-pu-f250-350-450-550-super-duty-tailgate-exc-w-super-duty-letter-capa-oem-f65z9940700ax-1999-2007.html",
+    "https://haynes.com/en-us/tips-tutorials/complicated-history-ford-f-250-and-f-350-trucks-1996-1999"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "mb~bumper-front~203-885-50-25",
+   "q": 80,
+   "verdict": "wrong",
+   "reason": "W203 front bumper changed at facelift: pre-FL sedan covers 203-885-00-25/13-25, FL 203-885-30-25; 203-885-50-25 series is cited as C55 AMG (2005-06) cover. Fits neither 2002 C320 nor base 2007 C280",
+   "sources": [
+    "https://paintedautoparts.com/mercedes-benz-c-class-sedan-wagon-203-front-bumper-cover-primed-w-o-washer-exc-sport-pkg-exc-c32-oem-2038850025-2001-2004-pl-mb1000145.html",
+    "https://paintedautoparts.com/mercedes-benz-c-class-sedan-wagon-203-front-bumper-cover-primed-c240-c280-c320-c350-w-o-washer-oem-2038853025-2005-2007-pl-mb1000210.html",
+    "https://mbworld.org/forums/c32-amg-c55-amg-w203/580149-c55-front-bumper-part-no-question.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "mb~bumper-front~203-885-51-25",
+   "q": 80,
+   "verdict": "wrong",
+   "reason": "W203 front bumper changed at facelift: pre-FL sedan covers 203-885-00-25/13-25, FL 203-885-30-25; 203-885-50-25 series is cited as C55 AMG (2005-06) cover. Fits neither 2002 C320 nor base 2007 C280",
+   "sources": [
+    "https://paintedautoparts.com/mercedes-benz-c-class-sedan-wagon-203-front-bumper-cover-primed-w-o-washer-exc-sport-pkg-exc-c32-oem-2038850025-2001-2004-pl-mb1000145.html",
+    "https://paintedautoparts.com/mercedes-benz-c-class-sedan-wagon-203-front-bumper-cover-primed-c240-c280-c320-c350-w-o-washer-oem-2038853025-2005-2007-pl-mb1000210.html",
+    "https://mbworld.org/forums/c32-amg-c55-amg-w203/580149-c55-front-bumper-part-no-question.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "mb~bumper-front~203-885-52-25",
+   "q": 80,
+   "verdict": "wrong",
+   "reason": "W203 front bumper changed at facelift: pre-FL sedan covers 203-885-00-25/13-25, FL 203-885-30-25; 203-885-50-25 series is cited as C55 AMG (2005-06) cover. Fits neither 2002 C320 nor base 2007 C280",
+   "sources": [
+    "https://paintedautoparts.com/mercedes-benz-c-class-sedan-wagon-203-front-bumper-cover-primed-w-o-washer-exc-sport-pkg-exc-c32-oem-2038850025-2001-2004-pl-mb1000145.html",
+    "https://paintedautoparts.com/mercedes-benz-c-class-sedan-wagon-203-front-bumper-cover-primed-c240-c280-c320-c350-w-o-washer-oem-2038853025-2005-2007-pl-mb1000210.html",
+    "https://mbworld.org/forums/c32-amg-c55-amg-w203/580149-c55-front-bumper-part-no-question.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "mb~bumper-front~203-885-53-25",
+   "q": 80,
+   "verdict": "wrong",
+   "reason": "W203 front bumper changed at facelift: pre-FL sedan covers 203-885-00-25/13-25, FL 203-885-30-25; 203-885-50-25 series is cited as C55 AMG (2005-06) cover. Fits neither 2002 C320 nor base 2007 C280",
+   "sources": [
+    "https://paintedautoparts.com/mercedes-benz-c-class-sedan-wagon-203-front-bumper-cover-primed-w-o-washer-exc-sport-pkg-exc-c32-oem-2038850025-2001-2004-pl-mb1000145.html",
+    "https://paintedautoparts.com/mercedes-benz-c-class-sedan-wagon-203-front-bumper-cover-primed-c240-c280-c320-c350-w-o-washer-oem-2038853025-2005-2007-pl-mb1000210.html",
+    "https://mbworld.org/forums/c32-amg-c55-amg-w203/580149-c55-front-bumper-part-no-question.html"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "mb~bumper-rear~203-885-16-25-27",
+   "q": 81,
+   "verdict": "unsure",
+   "reason": "No independent source found for 203-885-21-25 or the -16-25-27 variant years; facelift revised the rear end, so pre/post-FL interchange of the rear cover is unconfirmed",
+   "sources": [
+    "https://globalparts.co.uk/bumpers-reinforcements/A2038851625-IRS/mercedes-w203-rear-bumper-cover-trim-panel-iridium-silver-metallic-775",
+    "https://forums.mbclub.co.uk/threads/w203-c-class-facelift.4211/"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "mb~bumper-rear~203-885-21-25",
+   "q": 81,
+   "verdict": "unsure",
+   "reason": "No independent source found for 203-885-21-25 or the -16-25-27 variant years; facelift revised the rear end, so pre/post-FL interchange of the rear cover is unconfirmed",
+   "sources": [
+    "https://globalparts.co.uk/bumpers-reinforcements/A2038851625-IRS/mercedes-w203-rear-bumper-cover-trim-panel-iridium-silver-metallic-775",
+    "https://forums.mbclub.co.uk/threads/w203-c-class-facelift.4211/"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "mb~fender~203-880-01-18-67",
+   "q": 82,
+   "verdict": "right",
+   "reason": "Front wings 203-880-01-18 / 02-18 listed for W203 sedan 05/2000-08/2007, pre-facelift and facelift (dm-autoteile, Mecatechnic)",
+   "sources": [
+    "https://dm-autoteile.de/Set-Mercedes-W203-S203-left-right-wing-panel-holes-for-trim-00-07-also-for-Facelift",
+    "https://www.mecatechnic.com/en-GB/p/front-right-fender-for-mercedes-c-class-w203-052000-082007_MB08531"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "mb~fender~203-880-02-18-67",
+   "q": 82,
+   "verdict": "right",
+   "reason": "Front wings 203-880-01-18 / 02-18 listed for W203 sedan 05/2000-08/2007, pre-facelift and facelift (dm-autoteile, Mecatechnic)",
+   "sources": [
+    "https://dm-autoteile.de/Set-Mercedes-W203-S203-left-right-wing-panel-holes-for-trim-00-07-also-for-Facelift",
+    "https://www.mecatechnic.com/en-GB/p/front-right-fender-for-mercedes-c-class-w203-052000-082007_MB08531"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "mb~grille~203-880-02-23-7246",
+   "q": 83,
+   "verdict": "wrong",
+   "reason": "Grille 203-880-02-23 is facelift-only (04/2004-08/2007, Elegance/Avantgarde); pre-facelift 2000-03/2004 sedan uses 203-880-01-83, so 2002 C320 differs",
+   "sources": [
+    "https://www.mecatechnic.com/en-GB/p/grille-for-mercedes-benz-c-class-w203-sedan-and-s203-estate-04-2004-08-2007_MB08513",
+    "https://www.mecatechnic.com/en-GB/p/grille-for-mercedes-benz-c-class-w203-saloon-and-s203-estate-05-2000-03-2004_MB08511"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "mb~grille~203-880-02-23-9040",
+   "q": 83,
+   "verdict": "wrong",
+   "reason": "Grille 203-880-02-23 is facelift-only (04/2004-08/2007, Elegance/Avantgarde); pre-facelift 2000-03/2004 sedan uses 203-880-01-83, so 2002 C320 differs",
+   "sources": [
+    "https://www.mecatechnic.com/en-GB/p/grille-for-mercedes-benz-c-class-w203-sedan-and-s203-estate-04-2004-08-2007_MB08513",
+    "https://www.mecatechnic.com/en-GB/p/grille-for-mercedes-benz-c-class-w203-saloon-and-s203-estate-05-2000-03-2004_MB08511"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "mb~hood~203-880-01-57-28",
+   "q": 84,
+   "verdict": "right",
+   "reason": "Hood 203-880-01-57-28 listed for C-Class sedan/wagon 203, 2001-2007 excluding C55; covers 2002 C320 and 2007 C280",
+   "sources": [
+    "https://paintedautoparts.com/mercedes-benz-c-class-sd-wg-203-hood-exc-c55-oem-203880015728-2001-2007.html",
+    "https://globalparts.com.pl/en/bonnet-panels/A2038800157-BRS/mercedes-w203-hood-bonnet-trim-panel-covering"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  },
+  {
+   "id": "mb~trunk-lid~203-750-06-75-67",
+   "q": 85,
+   "verdict": "unsure",
+   "reason": "203-750-06-75 confirmed as a W203 sedan boot lid, but no independent source states years or pre/post-facelift fit; facelift changed tail lamps",
+   "sources": [
+    "https://globalparts.co.uk/bonnet-panels/A2037500675-JAS/mercedes-benz-c-class-w203-boot-trunk-lid-tailgate-jaspisblau-blue-345",
+    "https://britsbrosparts.co.za/product/mercedes-w203-bootlid/"
+   ],
+   "at": "2026-11-09T01:23:38Z"
+  }
+ ]
+}
