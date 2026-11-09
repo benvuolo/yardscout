@@ -2882,3 +2882,14 @@ each); nothing allowlisted or crawled.
   - §11.4: proposed to run per (site, category) once its crawl completes,
     with an independent verifier and `--max-lines 100000`. Waiting for the
     hub.
+- ~22:10 UTC: 1A strut shakeout. Independent verifier, 29 fetches, 10
+  groups: 1 WRONG, 7 RISK, 2 CORRECT.
+  - The WRONG was 1ASTS01913: "Front Wheel Drive Front Passenger Side" was
+    parsed as a bare front, which lost the side and the drive qualifier.
+  - Fixes (d2cc68da): use the last position phrase; every qualifier
+    refuses, engine included; refuse unqualified rows that have qualified
+    siblings; refuse plain strut rows on suspension-option models; refuse a
+    1A unit with several same-brand interchange numbers.
+  - 1A strut 69 → 8 groups; GSP 15 → 13. Rule 5 strictness and
+    generation-boundary handling are with the hub. The full §11.4 sample
+    still waits for crawl completion.
