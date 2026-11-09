@@ -13,6 +13,8 @@ Every request to a parts catalog in this program goes through here. It:
     verification re-reads the cache instead of the site.
 
 CLI:  python3 scraper/oem_fitment/fetch.py URL [--text] [--max-lines N]
+      (--max-lines defaults to 5000; a clipped page ends with an explicit
+      "[TRUNCATED at N of M lines]" line and carries text_truncated: true)
       prints JSON {url, status, cached, retrieved, cache_path, text?}
 Lib:  from fetch import get, text_lines
 """
@@ -380,12 +382,28 @@ def links(html: str, pattern: str) -> list[str]:
     return sorted(set(re.findall(r'href="(' + pattern + r')"', html)))
 
 
+TEXT_MAX_LINES = 5000
+
+
+def text_output(html: str, max_lines: int = TEXT_MAX_LINES) -> dict:
+    """--text payload. A page longer than max_lines is never clipped
+    silently (2026-11-09: the old 400-line default hid list rows at the
+    bottom of long pages from verifiers): the last line says where it was cut,
+    and text_truncated / text_lines_total say so too."""
+    lines = text_lines(html)
+    n = len(lines)
+    if max_lines is not None and max_lines >= 0 and n > max_lines:
+        return {"text": lines[:max_lines] + [f"[TRUNCATED at {max_lines} of {n} lines]"],
+                "text_lines_total": n, "text_truncated": True}
+    return {"text": lines, "text_lines_total": n, "text_truncated": False}
+
+
 if __name__ == "__main__":
     import argparse
     ap = argparse.ArgumentParser()
     ap.add_argument("url")
     ap.add_argument("--text", action="store_true")
-    ap.add_argument("--max-lines", type=int, default=400)
+    ap.add_argument("--max-lines", type=int, default=TEXT_MAX_LINES)
     a = ap.parse_args()
     try:
         d = get(a.url)
@@ -394,5 +412,5 @@ if __name__ == "__main__":
         sys.exit(2)
     out = {k: d[k] for k in ("url", "final_url", "status", "cached", "retrieved", "cache_path") if k in d}
     if a.text:
-        out["text"] = text_lines(d["html"])[: a.max_lines]
+        out.update(text_output(d["html"], a.max_lines))
     print(json.dumps(out, ensure_ascii=False))

@@ -2832,3 +2832,15 @@ each); nothing allowlisted or crawled.
   dispatch of "all" waits for the current runs to finish and for the hub's
   word. CR-Z model_map failure: fixed upstream in 1cf5dd03; it clears after
   the next scan.
+- **2026-11-09 ~21:05 UTC, fetch.py --text truncation (hub audit item).**
+  `--text` used to clip silently at 400 lines. It now defaults to
+  5000 (`fetch.TEXT_MAX_LINES`). A clipped page ends with
+  "[TRUNCATED at N of M lines]" and carries `text_truncated` /
+  `text_lines_total`. Test: tests/test_fetch_text.py (9 checks).
+  Audit of my §11.4 rounds (Subaru R1-R4, GM rules 1-3 sample, GM series
+  resample; 13 verifier transcripts): none ran fetch.py. They read
+  the sample files plus outside sources (WebSearch/WebFetch). The sample
+  builder passed own-page manifest rows whole and capped each record's
+  evidence_lines at 60. None of the 86 sampled items (Subaru 60, GM 26) has
+  a record over 60 lines, so nothing was hidden. No verdict changes; no
+  group pulled.
