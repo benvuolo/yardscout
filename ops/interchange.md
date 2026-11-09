@@ -2370,3 +2370,74 @@ hub, ship only on 0 WRONG plus hub confirmation.
     verifiers. Ships only on 0 WRONG plus hub go, with re-curated groups in
     the same push. The large gain (4.5k lot cars) comes when the GM
     completion pages are read.
+
+### 8. HANDOVER: category breadth, tier C (2026-11-09 ~18:25 UTC, session_016ZzJfKdkBXaVYDDQb9cy2J)
+
+Hub decisions (18:20 UTC):
+- Path E is shelved. Branch `interchange/path-e` stays unshipped, with its
+  root causes in §5.
+- Tier C runs on the body path, in this order: (1) wiper-motor, (2) knuckle
+  and strut.
+- Strict refusal applies: any option, tank, emissions, plant,
+  production-date, drive or body note on the vehicle's own list-page row
+  means no claim. Drive splits are never crossed.
+- Each category needs a §11.4 sample with 0 WRONG and the hub's confirm.
+  App changes go on `interchange/categories-<n>`.
+
+State:
+- Done: Honda, Acura, Nissan and Infiniti modules (d7c236e, 0fdaf09,
+  session_016ZzJfMtLKpUFu8TiEFMrkF). Their trial was clean (§7).
+- Not done:
+  - crawl.py `TIERS["C"] = ["wiper-motor", "knuckle", "strut"]`, plus a
+    per-site worklist gate. Copy the wheels pattern on
+    `interchange/wheels`: a `"tierC": true` flag and a version bump, so a
+    `.done` site re-opens for tier C only. Done keys are per tier.
+  - The `tiers = [...]` line for `all`. Wait for the wheels merge or
+    rebase on it; the line conflicts.
+  - policy.NOUN entries: wiper-motor `wiper`, knuckle
+    `knuckle|spindle|axle-hub|front-axle|suspension`, strut
+    `strut|shock|suspension`. Check them against SIBLING_IGNORE (the
+    unread_sibling_page rule).
+- Remaining sites (12): fordpartsgiant, gmpartsgiant, toyotapartsnow,
+  lexuspartsnow, hyundaipartsdeal, kiapartsnow, jeeppartsdeal,
+  vwpartsgiant, audipartsgiant, mbpartsgiant, mazdapartsnow,
+  mitsubishipartsgiant, volvopartsgiant, bmwpartsdeal. Skip
+  moparpartsgiant (blocked; jeeppartsdeal carries Dodge/Chrysler) and
+  subarupartsdeal (withheld).
+  - Page slugs are in the R2 year manifests (`raw/<site>.years.jsonl`,
+    field `subs`) on oem-raw. They can be grepped with no requests.
+    Found so far:
+    - Ford: `body_and_paint/windshield_wiper`, `rear_window_wiper_and_washer`,
+      `chassis/front_knuckle_and_hub`, `rear_knuckle_and_suspension_arms`,
+      `front_suspension_struts_and_springs`, `rear_springs_and_shock_absorbers`.
+    - GM: `.../wiper_system_windshield`, `front_axle_front_suspension_steering/suspension_front`,
+      `frames_springs_shocks_bumpers_fascias/suspension_rear`. Some years
+      have `strut_assembly_front`.
+    - Hyundai/Kia: `electrical/windshield_wiper(_rear)`, `chassis/front_spring_strut`,
+      `rear_spring_strut`, `rear_shock_absorber_spring`.
+    - Lexus (and likely Toyota): `electrical/windshield_wiper`, `rear_wiper`,
+      `power_train_chassis/front_axle_arm_steering_knuckle`,
+      `front_spring_shock_absorber`, `rear_spring_shock_absorber`.
+    - Jeep/VW/MB SimplePart: `electrical/wipers`, `body-hardware/wiper-washer-components`,
+      `suspension/struts-components`, `shocks-components`,
+      `front-suspension-components`, `front-suspension`.
+  - Row text must be read before the name rules are written. Ford's
+    existing NAME_EXCL drops "Absorber", so strut needs its own rule. Ford
+    base numbers for the new parts are unverified: read them from real
+    rows, never guess.
+  - Two GM list pages were fetched for 2007 Impala; they returned 200 but
+    the subs were wrong for that year. Pick a year whose manifest lists
+    the sub.
+- Trial per site: `crawl.py --site <s> --tier C --max-segments 2` against a
+  scratch root. Then let the 6-hourly schedule crawl; never dispatch while a
+  run is active.
+
+Other outputs of this session:
+- Coverage matrix: `coverage_matrix.py`, run in about 1 min (§1). Re-run it
+  after each category ships; it is the scoreboard.
+- V8 fix (ef6f340) and `curation_tests/test_groups_hash.py`: any edit to
+  policy.py, notes.py, positions.py or model_map.json must ship with
+  re-curated groups/<ns>.json.
+- Path E audit file: `groups/_report/pathE_audit_2026-11-09.json`. The
+  per-item reasons are a good checklist of notes that knuckle and strut
+  curation must refuse.
