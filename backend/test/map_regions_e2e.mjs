@@ -9,6 +9,8 @@
  *  - no floating pull-sheet pill over the map;
  *  - a cluster of yards at one spot opens a list in the sheet;
  *  - no "(Premium)" lot gets its own pin;
+ *  - no pin covers the You dot or its label (if nothing clears it, the dot
+ *    is drawn on top; counted in the summary);
  *  - first view (hub 2026-11-09): the nearest yard is its own named pin,
  *    drawn above the sheet, and the user's spot is on the map (unless the
  *    nearest yard needed a closer view than that allows; reported). Zooming out
@@ -82,7 +84,7 @@ try {
             const t0 = Date.now();
             while (!(window._yardsMap && _yardsMap.loaded()) && Date.now() - t0 < 20000) await new Promise(r => setTimeout(r, 100));
             await new Promise(r => setTimeout(r, 300));
-            const fails = [], stats = [];
+            const fails = [], stats = []; let youOverCount = 0;
             const ov = (a, b) => a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
             const vis = (el) => el && el.getClientRects().length && getComputedStyle(el).display !== 'none' && getComputedStyle(el).visibility !== 'hidden';
             const check = (label) => {
@@ -104,6 +106,15 @@ try {
               if (!vis(zc)) fails.push(`${label}: zoom buttons not visible`);
               else { const zr = zc.getBoundingClientRect(); if (rs.some(r => ov(r, zr))) fails.push(`${label}: a pin covers the zoom buttons`); }
               if (vis(document.getElementById('saved-pill'))) fails.push(`${label}: floating pull sheet pill over the map`);
+              // The You dot (and its label) is never under a pin; if no pin
+              // placement clears it, the dot is drawn on top (counted).
+              const youEl = document.querySelector('#yards-map .map-you');
+              if (youEl) {
+                const parts = [youEl, youEl.querySelector('span')].map(e => e.getBoundingClientRect());
+                const under = rs.some(r => parts.some(q => ov(r, q)));
+                if (under && !youEl.classList.contains('over')) fails.push(`${label}: a pin covers the You dot`);
+                if (youEl.classList.contains('over')) youOverCount++;
+              }
               const same = _pinGroups.filter(g => g.items.length > 1 && g.items.every(x => siteNear(x, g.items[0])));
               for (const g of same.slice(0, 2)) {
                 zoomToYards(g.items.map(x => x.key));
@@ -132,11 +143,12 @@ try {
             }
             for (const d of [2, 4, -2, -4]) { _yardsMap.jumpTo({ zoom: z0 + d }); check('zoom ' + (d > 0 ? '+' : '') + d); }
             _yardsMap.jumpTo({ zoom: z0 });
-            return { fails, stats };
+            return { fails, stats, youOver: youOverCount };
           }, { lat, lng, national: !!national, theme, big });
           const r = rec(name);
           r.checks += out.stats.length;
           out.fails.forEach(f => r.fails.push(`${cfg} ${f}`));
+          r.youOver = (r.youOver || 0) + out.youOver;
           out.stats.forEach(s => { if (s.nearest) r.nearest = s.nearest; r.pins.push(s.pins); r.clusters.push(s.clusters); r.same = Math.max(r.same, s.same); r.sites = s.sites; });
         }
       }
@@ -151,7 +163,7 @@ let total = 0;
 for (const [name, r] of results) {
   total += r.fails.length;
   const rng = (a) => a.length ? `${Math.min(...a)}–${Math.max(...a)}` : '0';
-  console.log(`${r.fails.length ? 'FAIL' : 'PASS'}  ${name}: ${r.checks} layouts, ${r.sites} yards in view, single pins ${rng(r.pins)}, clusters ${rng(r.clusters)}, same-spot clusters ${r.same}; first view: ${r.nearest || '-'}${r.fails.length ? ` — ${r.fails.length} problems:` : ''}`);
+  console.log(`${r.fails.length ? 'FAIL' : 'PASS'}  ${name}: ${r.checks} layouts, ${r.sites} yards in view, single pins ${rng(r.pins)}, clusters ${rng(r.clusters)}, same-spot clusters ${r.same}; first view: ${r.nearest || '-'}; You drawn over a pin ${r.youOver || 0}×${r.fails.length ? ` — ${r.fails.length} problems:` : ''}`);
   [...new Set(r.fails)].slice(0, 8).forEach(f => console.log('      ' + f));
 }
 console.log(total ? `\n${total} FAILED` : '\nALL PASS');

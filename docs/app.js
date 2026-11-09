@@ -5788,11 +5788,46 @@ function layoutPins() {
   // A pin taller than the open strip of map has no room: don't draw it (the
   // sheet still lists the yard), rather than push it over the controls.
   for (let i = groups.length - 1; i >= 0; i--) if (groups[i].rect.t < A.t - 0.5 || groups[i].rect.b > A.b + 0.5) groups.splice(i, 1);
+  const you = activeZipCoords && _projectFn({ lat: activeZipCoords.lat, lng: activeZipCoords.lng });
+  const youOn = you && you.x > A.l && you.x < A.W && you.y > A.t && you.y < A.b;
+  const youUp = youOn && you.y + 34 > A.b;
+  // The You dot is the reader's bearing: pins keep off it (flip to the other
+  // side of their point, or slide beside the dot); only if neither fits is
+  // the dot drawn over the pin.
+  let youOver = false;
+  if (youOn) {
+    const yr = youRect(you, youUp);
+    const ok = (g) => g.rect.l >= A.l - 0.5 && g.rect.r <= A.r + 0.5 && g.rect.t >= A.t - 0.5 && g.rect.b <= A.b + 0.5
+      && !hit(g.rect, yr) && !groups.some(o => o !== g && hit(o.rect, g.rect));
+    for (const g of groups) {
+      if (!hit(g.rect, yr)) continue;
+      const keep = { below: g.below, rect: g.rect, nudged: g.nudged };
+      g.below = !g.below; rectOf(g);
+      if (ok(g)) continue;
+      g.below = keep.below; rectOf(g);
+      const w = g.rect.r - g.rect.l, base = g.rect;
+      let placed = false;
+      for (const l of [yr.l - 6 - w, yr.r + 6]) {
+        g.rect = { l, r: l + w, t: base.t, b: base.b };
+        if (ok(g)) { g.nudged = true; placed = true; break; }
+      }
+      if (!placed) { g.below = keep.below; g.rect = keep.rect; g.nudged = keep.nudged; youOver = true; }
+    }
+  }
   _pinGroups = groups;
   watchPinSizes(layer);
-  const you = activeZipCoords && _projectFn({ lat: activeZipCoords.lat, lng: activeZipCoords.lng });
-  layer.innerHTML = `${you && you.x > A.l && you.x < A.W && you.y > A.t && you.y < A.b ? `<span class="map-you${you.y + 34 > A.b ? ' up' : ''}" style="left:${you.x}px;top:${you.y}px"><span>You</span></span>` : ''}
+  layer.innerHTML = `${youOn ? `<span class="map-you${youUp ? ' up' : ''}${youOver ? ' over' : ''}" style="left:${you.x}px;top:${you.y}px"><span>You</span></span>` : ''}
     ${groups.map((g, i) => `<span class="map-pin-at${g.nudged ? ' nudged' : ''}${g.below ? ' below' : ''}" data-g="${i}" style="left:${g.rect.l}px;top:${g.rect.t}px">${g.html}</span>`).join('')}`;
+}
+/* The You dot and its label, as a box on the map (for pins to keep off). */
+function youRect(p, up) {
+  const layer = pinLayer();
+  let m = layer.querySelector('.pin-measure');
+  if (!m) { m = document.createElement('div'); m.className = 'pin-measure'; m.setAttribute('aria-hidden', 'true'); layer.appendChild(m); }
+  m.innerHTML = '<span class="map-you"><span>You</span></span>';
+  const lb = m.querySelector('span span').getBoundingClientRect();
+  const half = Math.max(11, lb.width / 2), lh = lb.height || 18;
+  return up ? { l: p.x - half, r: p.x + half, t: p.y - 10 - lh, b: p.y + 11 } : { l: p.x - half, r: p.x + half, t: p.y - 11, b: p.y + 10 + lh };
 }
 /* A pin that changes size after it was placed (text size changed, fonts
  * arrived) gets the layout solved again; same size = no-op, so no loop. */
