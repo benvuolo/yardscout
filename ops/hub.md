@@ -182,3 +182,7 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
   - GSP North America: "Yes, use GSP". Site-scoped detector rule on the Spectra pattern (Shopify captcha-bootstrap form-protection script). Likely-only, with strict refusals; drive and trans never inferred.
   - 1A Auto: "Yes, use 1A Auto anyway". The owner accepts the risk from its personal/non-commercial licence. No rule-2 issue: robots OK, no challenge. Facts only.
   - Builder: source scout 2 (session_016ZzJfKZ49mzzQhu4KT7HkU). Ship bar unchanged.
+- ~20:20 UTC owner: "lets do it, also 1A im not selling the part fitment portion".
+  - 1A-derived fits stay in the free part of the Parts tab, never behind Pro (a test enforces it).
+  - No 1A prices, descriptions or images.
+  - The GSP detector rule (script-only "captcha" word tolerated; visible or strong markers still stop) was approved under the owner's GSP go.
