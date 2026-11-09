@@ -3,7 +3,7 @@
 Raw: `42683f9d86450b6bd00eb7fc7cc9640154607768` @ `42683f9d8645`; as of 2026-11-05T22:14:32Z.
 
 - records 1658, classes 1658, list rows 16468, year manifests 75, cells 7085
-- Verified groups 0, engine vg groups 0, Likely groups 1
+- Verified groups 0, engine vg groups 0, Likely groups 0
 - blocked sites: none
 
 ## Gates standing for the whole namespace
@@ -15,222 +15,223 @@ Raw: `42683f9d86450b6bd00eb7fc7cc9640154607768` @ `42683f9d8645`; as of 2026-11-
 
 | category | stage | reason | cars |
 |---|---|---|---|
-| ac-compressor | unmapped | - | 3093 |
-| ac-compressor | no_records | - | 56 |
-| ac-compressor | not_closed | no_list_manifest | 171 |
-| ac-compressor | not_closed | no_year_manifest | 1444 |
-| alternator | unmapped | - | 3093 |
-| alternator | no_records | - | 63 |
-| alternator | not_closed | no_list_manifest | 171 |
-| alternator | not_closed | no_year_manifest | 1437 |
-| bumper-front | unmapped | - | 3093 |
-| bumper-front | no_records | - | 230 |
-| bumper-front | not_closed | no_year_manifest | 1270 |
-| bumper-front | not_closed | unread_sibling_page | 171 |
-| bumper-rear | unmapped | - | 3093 |
-| bumper-rear | no_records | - | 132 |
-| bumper-rear | not_closed | no_year_manifest | 1368 |
-| bumper-rear | not_closed | unread_sibling_page | 171 |
-| fender | unmapped | - | 3093 |
+| ac-compressor | unmapped | - | 3109 |
+| ac-compressor | no_records | - | 59 |
+| ac-compressor | not_closed | no_list_manifest | 178 |
+| ac-compressor | not_closed | no_year_manifest | 1458 |
+| alternator | unmapped | - | 3109 |
+| alternator | no_records | - | 64 |
+| alternator | not_closed | no_list_manifest | 178 |
+| alternator | not_closed | no_year_manifest | 1453 |
+| bumper-front | unmapped | - | 3109 |
+| bumper-front | no_records | - | 241 |
+| bumper-front | not_closed | no_year_manifest | 1276 |
+| bumper-front | not_closed | unread_sibling_page | 178 |
+| bumper-rear | unmapped | - | 3109 |
+| bumper-rear | no_records | - | 137 |
+| bumper-rear | not_closed | no_year_manifest | 1380 |
+| bumper-rear | not_closed | unread_sibling_page | 178 |
+| fender | unmapped | - | 3109 |
 | fender | no_records | - | 53 |
-| fender | not_closed | no_year_manifest | 1447 |
-| fender | not_closed | uncrawled_chain_member | 10 |
-| fender | not_closed | unread_sibling_page | 146 |
-| fender | conditional | conditional:engine_unattested | 15 |
-| gauge-cluster | unmapped | - | 3093 |
-| gauge-cluster | no_records | - | 285 |
-| gauge-cluster | not_closed | no_year_manifest | 1219 |
-| gauge-cluster | not_closed | unread_sibling_page | 167 |
-| grille | unmapped | - | 3093 |
-| grille | no_records | - | 178 |
-| grille | not_closed | no_year_manifest | 1322 |
-| grille | not_closed | uncrawled_chain_member | 124 |
-| grille | split | option_split | 43 |
+| fender | not_closed | no_year_manifest | 1464 |
+| fender | not_closed | uncrawled_chain_member | 11 |
+| fender | not_closed | unread_sibling_page | 151 |
+| fender | conditional | conditional:engine_unattested | 16 |
+| gauge-cluster | unmapped | - | 3109 |
+| gauge-cluster | no_records | - | 287 |
+| gauge-cluster | not_closed | no_year_manifest | 1234 |
+| gauge-cluster | not_closed | unread_sibling_page | 174 |
+| grille | unmapped | - | 3109 |
+| grille | no_records | - | 184 |
+| grille | not_closed | no_year_manifest | 1333 |
+| grille | not_closed | uncrawled_chain_member | 128 |
+| grille | split | option_split | 46 |
 | grille | conditional | conditional:engine_unattested | 2 |
 | grille | conditional | conditional:trim | 2 |
-| headlights | unmapped | - | 3093 |
-| headlights | no_records | - | 130 |
-| headlights | not_closed | no_list_manifest | 171 |
-| headlights | not_closed | no_year_manifest | 1370 |
-| hood | unmapped | - | 3093 |
+| headlights | unmapped | - | 3109 |
+| headlights | no_records | - | 133 |
+| headlights | not_closed | no_list_manifest | 178 |
+| headlights | not_closed | no_year_manifest | 1384 |
+| hood | unmapped | - | 3109 |
 | hood | no_records | - | 80 |
-| hood | not_closed | no_year_manifest | 1420 |
-| hood | not_closed | uncrawled_chain_member | 145 |
+| hood | not_closed | no_year_manifest | 1437 |
+| hood | not_closed | uncrawled_chain_member | 151 |
 | hood | not_closed | unread_sibling_page | 7 |
-| hood | conditional | conditional:engine_unattested | 19 |
-| ignition-coils | unmapped | - | 3093 |
-| ignition-coils | no_records | - | 60 |
-| ignition-coils | not_closed | no_year_manifest | 1440 |
-| ignition-coils | not_closed | unread_sibling_page | 167 |
+| hood | conditional | conditional:engine_unattested | 20 |
+| ignition-coils | unmapped | - | 3109 |
+| ignition-coils | no_records | - | 61 |
+| ignition-coils | not_closed | no_year_manifest | 1456 |
+| ignition-coils | not_closed | unread_sibling_page | 174 |
 | ignition-coils | not_closed | unverified_product | 4 |
-| liftgate | unmapped | - | 3093 |
-| liftgate | no_records | - | 1015 |
-| liftgate | not_closed | no_year_manifest | 595 |
-| liftgate | not_closed | unread_sibling_page | 61 |
-| power-steering-pump | unmapped | - | 3093 |
-| power-steering-pump | no_records | - | 101 |
-| power-steering-pump | not_closed | no_list_manifest | 153 |
-| power-steering-pump | not_closed | no_year_manifest | 1417 |
-| radiator | unmapped | - | 3093 |
-| radiator | no_records | - | 70 |
-| radiator | not_closed | no_year_manifest | 1430 |
+| liftgate | unmapped | - | 3109 |
+| liftgate | no_records | - | 1037 |
+| liftgate | not_closed | no_year_manifest | 594 |
+| liftgate | not_closed | unread_sibling_page | 64 |
+| power-steering-pump | unmapped | - | 3109 |
+| power-steering-pump | no_records | - | 104 |
+| power-steering-pump | not_closed | no_list_manifest | 159 |
+| power-steering-pump | not_closed | no_year_manifest | 1432 |
+| radiator | unmapped | - | 3109 |
+| radiator | no_records | - | 73 |
+| radiator | not_closed | no_year_manifest | 1444 |
 | radiator | not_closed | uncrawled_chain_member | 6 |
-| radiator | not_closed | unread_sibling_page | 165 |
-| starter | unmapped | - | 3093 |
+| radiator | not_closed | unread_sibling_page | 172 |
+| starter | unmapped | - | 3109 |
 | starter | no_records | - | 44 |
-| starter | not_closed | no_list_manifest | 168 |
-| starter | not_closed | no_year_manifest | 1459 |
-| tail-lights | unmapped | - | 3093 |
-| tail-lights | no_records | - | 379 |
-| tail-lights | not_closed | no_list_manifest | 150 |
-| tail-lights | not_closed | no_year_manifest | 1142 |
-| throttle-body | unmapped | - | 3093 |
-| throttle-body | no_records | - | 429 |
-| throttle-body | not_closed | no_list_manifest | 157 |
-| throttle-body | not_closed | no_year_manifest | 1085 |
-| trunk-lid | unmapped | - | 3093 |
-| trunk-lid | no_records | - | 611 |
-| trunk-lid | not_closed | no_year_manifest | 929 |
-| trunk-lid | not_closed | unread_sibling_page | 131 |
-| window-regulator | unmapped | - | 3093 |
-| window-regulator | no_records | - | 117 |
-| window-regulator | not_closed | no_list_manifest | 147 |
-| window-regulator | not_closed | no_year_manifest | 1407 |
-| window-switch | unmapped | - | 3093 |
-| window-switch | no_records | - | 573 |
-| window-switch | not_closed | no_list_manifest | 103 |
-| window-switch | not_closed | no_year_manifest | 995 |
+| starter | not_closed | no_list_manifest | 174 |
+| starter | not_closed | no_year_manifest | 1477 |
+| tail-lights | unmapped | - | 3109 |
+| tail-lights | no_records | - | 384 |
+| tail-lights | not_closed | no_list_manifest | 155 |
+| tail-lights | not_closed | no_year_manifest | 1156 |
+| throttle-body | unmapped | - | 3109 |
+| throttle-body | no_records | - | 435 |
+| throttle-body | not_closed | no_list_manifest | 164 |
+| throttle-body | not_closed | no_year_manifest | 1096 |
+| trunk-lid | unmapped | - | 3109 |
+| trunk-lid | no_records | - | 618 |
+| trunk-lid | not_closed | no_year_manifest | 941 |
+| trunk-lid | not_closed | unread_sibling_page | 136 |
+| window-regulator | unmapped | - | 3109 |
+| window-regulator | no_records | - | 116 |
+| window-regulator | not_closed | no_list_manifest | 155 |
+| window-regulator | not_closed | no_year_manifest | 1424 |
+| window-switch | unmapped | - | 3109 |
+| window-switch | no_records | - | 587 |
+| window-switch | not_closed | no_list_manifest | 108 |
+| window-switch | not_closed | no_year_manifest | 1000 |
 
 ## Hypothetical funnel (closure assumed; never shipped)
 
 | category | stage | reason | cars |
 |---|---|---|---|
-| ac-compressor | unmapped | - | 3093 |
-| ac-compressor | no_records | - | 56 |
-| ac-compressor | split | option_split | 384 |
+| ac-compressor | unmapped | - | 3109 |
+| ac-compressor | no_records | - | 59 |
+| ac-compressor | split | option_split | 388 |
 | ac-compressor | conditional | conditional:engine | 5 |
-| ac-compressor | conditional | conditional:engine_unattested | 488 |
-| ac-compressor | conditional | conditional:model_other | 22 |
+| ac-compressor | conditional | conditional:engine_unattested | 503 |
+| ac-compressor | conditional | conditional:model_other | 21 |
 | ac-compressor | conditional | conditional:qualifier | 171 |
-| ac-compressor | conditional | conditional:trim | 545 |
-| alternator | unmapped | - | 3093 |
-| alternator | no_records | - | 63 |
-| alternator | split | option_split | 647 |
+| ac-compressor | conditional | conditional:trim | 548 |
+| alternator | unmapped | - | 3109 |
+| alternator | no_records | - | 64 |
+| alternator | split | option_split | 656 |
 | alternator | conditional | conditional:engine | 5 |
-| alternator | conditional | conditional:engine_unattested | 575 |
+| alternator | conditional | conditional:engine_unattested | 590 |
 | alternator | conditional | conditional:qualifier | 22 |
-| alternator | conditional | conditional:trim | 359 |
-| bumper-front | unmapped | - | 3093 |
-| bumper-front | no_records | - | 230 |
-| bumper-front | split | option_split | 1360 |
+| alternator | conditional | conditional:trim | 358 |
+| bumper-front | unmapped | - | 3109 |
+| bumper-front | no_records | - | 241 |
+| bumper-front | split | option_split | 1373 |
 | bumper-front | conditional | conditional:engine_unattested | 14 |
 | bumper-front | conditional | conditional:qualifier | 56 |
 | bumper-front | conditional | conditional:trim | 11 |
-| bumper-rear | unmapped | - | 3093 |
-| bumper-rear | no_records | - | 132 |
-| bumper-rear | split | no_candidates | 9 |
-| bumper-rear | split | option_split | 1412 |
-| bumper-rear | conditional | conditional:engine | 18 |
-| bumper-rear | conditional | conditional:engine_unattested | 8 |
-| bumper-rear | conditional | conditional:qualifier | 92 |
-| fender | unmapped | - | 3093 |
+| bumper-rear | unmapped | - | 3109 |
+| bumper-rear | no_records | - | 137 |
+| bumper-rear | split | no_candidates | 10 |
+| bumper-rear | split | option_split | 1428 |
+| bumper-rear | conditional | conditional:engine | 17 |
+| bumper-rear | conditional | conditional:engine_unattested | 9 |
+| bumper-rear | conditional | conditional:qualifier | 94 |
+| fender | unmapped | - | 3109 |
 | fender | no_records | - | 53 |
-| fender | split | option_split | 171 |
+| fender | split | option_split | 174 |
 | fender | split | slot_missing | 1 |
 | fender | conditional | conditional:body | 3 |
-| fender | conditional | conditional:engine_unattested | 1172 |
-| fender | conditional | conditional:model_other | 9 |
-| fender | conditional | conditional:trim | 262 |
-| gauge-cluster | unmapped | - | 3093 |
-| gauge-cluster | no_records | - | 285 |
-| gauge-cluster | split | no_candidates | 21 |
-| gauge-cluster | split | option_split | 741 |
+| fender | conditional | conditional:engine_unattested | 1189 |
+| fender | conditional | conditional:model_other | 10 |
+| fender | conditional | conditional:trim | 265 |
+| gauge-cluster | unmapped | - | 3109 |
+| gauge-cluster | no_records | - | 287 |
+| gauge-cluster | split | no_candidates | 23 |
+| gauge-cluster | split | option_split | 746 |
 | gauge-cluster | conditional | conditional:body | 11 |
-| gauge-cluster | conditional | conditional:engine_unattested | 235 |
-| gauge-cluster | conditional | conditional:qualifier | 109 |
-| gauge-cluster | conditional | conditional:trim | 269 |
-| grille | unmapped | - | 3093 |
-| grille | no_records | - | 178 |
-| grille | split | option_split | 1211 |
+| gauge-cluster | conditional | conditional:engine_unattested | 240 |
+| gauge-cluster | conditional | conditional:qualifier | 112 |
+| gauge-cluster | conditional | conditional:trim | 276 |
+| grille | unmapped | - | 3109 |
+| grille | no_records | - | 184 |
+| grille | split | option_split | 1224 |
 | grille | conditional | conditional:colour | 10 |
-| grille | conditional | conditional:engine_unattested | 212 |
+| grille | conditional | conditional:engine_unattested | 217 |
 | grille | conditional | conditional:trim | 60 |
-| headlights | unmapped | - | 3093 |
-| headlights | no_records | - | 130 |
-| headlights | split | option_split | 1464 |
+| headlights | unmapped | - | 3109 |
+| headlights | no_records | - | 133 |
+| headlights | split | option_split | 1483 |
 | headlights | split | position_missing | 1 |
+| headlights | split | slot_missing | 1 |
 | headlights | conditional | conditional:engine_unattested | 49 |
-| headlights | conditional | conditional:trim | 27 |
-| hood | unmapped | - | 3093 |
+| headlights | conditional | conditional:trim | 28 |
+| hood | unmapped | - | 3109 |
 | hood | no_records | - | 80 |
-| hood | split | option_split | 150 |
+| hood | split | option_split | 152 |
 | hood | conditional | conditional:body | 3 |
-| hood | conditional | conditional:engine_unattested | 920 |
-| hood | conditional | conditional:trim | 518 |
-| ignition-coils | unmapped | - | 3093 |
-| ignition-coils | no_records | - | 60 |
-| ignition-coils | split | option_split | 160 |
+| hood | conditional | conditional:engine_unattested | 937 |
+| hood | conditional | conditional:trim | 523 |
+| ignition-coils | unmapped | - | 3109 |
+| ignition-coils | no_records | - | 61 |
+| ignition-coils | split | option_split | 162 |
 | ignition-coils | conditional | conditional:body | 3 |
-| ignition-coils | conditional | conditional:engine | 95 |
-| ignition-coils | conditional | conditional:engine_unattested | 928 |
-| ignition-coils | conditional | conditional:model_other | 16 |
-| ignition-coils | conditional | conditional:trim | 409 |
-| liftgate | unmapped | - | 3093 |
-| liftgate | no_records | - | 1015 |
-| liftgate | split | option_split | 149 |
-| liftgate | conditional | conditional:body | 12 |
-| liftgate | conditional | conditional:engine_unattested | 174 |
-| liftgate | conditional | conditional:trim | 321 |
-| power-steering-pump | unmapped | - | 3093 |
-| power-steering-pump | no_records | - | 101 |
-| power-steering-pump | split | option_split | 1053 |
+| ignition-coils | conditional | conditional:engine | 100 |
+| ignition-coils | conditional | conditional:engine_unattested | 941 |
+| ignition-coils | conditional | conditional:model_other | 18 |
+| ignition-coils | conditional | conditional:trim | 410 |
+| liftgate | unmapped | - | 3109 |
+| liftgate | no_records | - | 1037 |
+| liftgate | split | option_split | 148 |
+| liftgate | conditional | conditional:body | 11 |
+| liftgate | conditional | conditional:engine_unattested | 172 |
+| liftgate | conditional | conditional:trim | 327 |
+| power-steering-pump | unmapped | - | 3109 |
+| power-steering-pump | no_records | - | 104 |
+| power-steering-pump | split | option_split | 1069 |
 | power-steering-pump | conditional | conditional:engine | 10 |
-| power-steering-pump | conditional | conditional:engine_unattested | 323 |
+| power-steering-pump | conditional | conditional:engine_unattested | 327 |
 | power-steering-pump | conditional | conditional:qualifier | 10 |
-| power-steering-pump | conditional | conditional:trim | 174 |
-| radiator | unmapped | - | 3093 |
-| radiator | no_records | - | 70 |
-| radiator | split | option_split | 583 |
-| radiator | conditional | conditional:body | 5 |
-| radiator | conditional | conditional:engine | 80 |
-| radiator | conditional | conditional:engine_unattested | 673 |
-| radiator | conditional | conditional:fuel | 3 |
+| power-steering-pump | conditional | conditional:trim | 175 |
+| radiator | unmapped | - | 3109 |
+| radiator | no_records | - | 73 |
+| radiator | split | option_split | 589 |
+| radiator | conditional | conditional:body | 4 |
+| radiator | conditional | conditional:engine | 83 |
+| radiator | conditional | conditional:engine_unattested | 685 |
+| radiator | conditional | conditional:fuel | 4 |
 | radiator | conditional | conditional:model_other | 6 |
 | radiator | conditional | conditional:production | 10 |
 | radiator | conditional | conditional:trim | 241 |
-| starter | unmapped | - | 3093 |
+| starter | unmapped | - | 3109 |
 | starter | no_records | - | 44 |
-| starter | split | option_split | 643 |
+| starter | split | option_split | 647 |
 | starter | conditional | conditional:engine | 5 |
-| starter | conditional | conditional:engine_unattested | 467 |
-| starter | conditional | conditional:trim | 512 |
-| tail-lights | unmapped | - | 3093 |
-| tail-lights | no_records | - | 379 |
-| tail-lights | split | option_split | 869 |
+| starter | conditional | conditional:engine_unattested | 480 |
+| starter | conditional | conditional:trim | 519 |
+| tail-lights | unmapped | - | 3109 |
+| tail-lights | no_records | - | 384 |
+| tail-lights | split | option_split | 885 |
 | tail-lights | split | slot_missing | 7 |
-| tail-lights | conditional | conditional:engine_unattested | 265 |
-| tail-lights | conditional | conditional:trim | 151 |
-| throttle-body | unmapped | - | 3093 |
-| throttle-body | no_records | - | 429 |
+| tail-lights | conditional | conditional:engine_unattested | 267 |
+| tail-lights | conditional | conditional:trim | 152 |
+| throttle-body | unmapped | - | 3109 |
+| throttle-body | no_records | - | 435 |
 | throttle-body | split | option_split | 85 |
-| throttle-body | conditional | conditional:engine_unattested | 636 |
-| throttle-body | conditional | conditional:trim | 521 |
-| trunk-lid | unmapped | - | 3093 |
-| trunk-lid | no_records | - | 611 |
-| trunk-lid | split | no_candidates | 16 |
-| trunk-lid | split | option_split | 252 |
-| trunk-lid | conditional | conditional:body | 12 |
-| trunk-lid | conditional | conditional:engine_unattested | 603 |
-| trunk-lid | conditional | conditional:trim | 177 |
-| window-regulator | unmapped | - | 3093 |
-| window-regulator | no_records | - | 117 |
-| window-regulator | split | packaging_incomplete | 10 |
-| window-regulator | split | packaging_split | 10 |
-| window-regulator | split | packaging_unstated | 1534 |
-| window-switch | unmapped | - | 3093 |
-| window-switch | no_records | - | 573 |
-| window-switch | split | option_split | 670 |
-| window-switch | split | position_missing | 421 |
+| throttle-body | conditional | conditional:engine_unattested | 646 |
+| throttle-body | conditional | conditional:trim | 529 |
+| trunk-lid | unmapped | - | 3109 |
+| trunk-lid | no_records | - | 618 |
+| trunk-lid | split | no_candidates | 17 |
+| trunk-lid | split | option_split | 255 |
+| trunk-lid | conditional | conditional:body | 13 |
+| trunk-lid | conditional | conditional:engine_unattested | 610 |
+| trunk-lid | conditional | conditional:trim | 182 |
+| window-regulator | unmapped | - | 3109 |
+| window-regulator | no_records | - | 116 |
+| window-regulator | split | packaging_incomplete | 9 |
+| window-regulator | split | packaging_split | 11 |
+| window-regulator | split | packaging_unstated | 1559 |
+| window-switch | unmapped | - | 3109 |
+| window-switch | no_records | - | 587 |
+| window-switch | split | option_split | 674 |
+| window-switch | split | position_missing | 427 |
 | window-switch | conditional | conditional:model_other | 7 |
 
 ## Contradictions with hand-curated groups (spec 7.6)
@@ -240,7 +241,7 @@ Raw: `42683f9d86450b6bd00eb7fc7cc9640154607768` @ `42683f9d8645`; as of 2026-11-
 ## Refusals by reason
 
 - evidence_mismatch: 2
-- held_exterior_cross_model: 21
+- held_exterior_cross_model: 18
 - systemic_evidence_failure: 1
 - universal_part_suspect: 14
 
@@ -248,8 +249,8 @@ Raw: `42683f9d86450b6bd00eb7fc7cc9640154607768` @ `42683f9d8645`; as of 2026-11-
 
 - `Without Lamp Wash`: 59
 - `With Lamp Washer`: 52
-- `Sedan/Wagon`: 44
 - `With Parktronic`: 43
+- `Sedan/Wagon`: 42
 - `With Park Sensor`: 34
 - `Without AMG`: 28
 - `Without Park Sensor`: 28
@@ -272,10 +273,10 @@ Raw: `42683f9d86450b6bd00eb7fc7cc9640154607768` @ `42683f9d8645`; as of 2026-11-
 - `With Bi-Xenon`: 10
 - `With Hitch`: 10
 - `Without Adaptive Cruise`: 10
-- `Without E63 AMG`: 10
 - `Without Hitch`: 10
 - `Without Park Sens`: 10
 - `Without Reverse Sensor`: 10
+- `With Adaptive Cruise`: 9
 
 ## Unmapped catalog models
 

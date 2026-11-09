@@ -2,7 +2,7 @@
  "draft": {
   "entries": [
    {
-    "basis": "catalog prints 'Commercial Chassis' (3 fitment rows, oem-raw@42683f9); normalize_model canon 'Commercial Chassis', 1 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints 'Commercial Chassis' (3 fitment rows, oem-raw@42683f9); normalize_model canon 'Commercial Chassis', 1 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Cadillac",
     "cat_model": "Commercial Chassis",
     "ns": "gm",
@@ -15,7 +15,7 @@
     ]
    },
    {
-    "basis": "catalog prints 'Aveo' (65 fitment rows, oem-raw@42683f9); normalize_model canon 'Aveo', 576 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints 'Aveo' (65 fitment rows, oem-raw@42683f9); normalize_model canon 'Aveo', 610 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Chevrolet",
     "cat_model": "Aveo",
     "ns": "gm",
@@ -28,7 +28,7 @@
     ]
    },
    {
-    "basis": "catalog prints 'Chevette' (1 fitment rows, oem-raw@42683f9); normalize_model canon 'Chevette', 5 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints 'Chevette' (1 fitment rows, oem-raw@42683f9); normalize_model canon 'Chevette', 6 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Chevrolet",
     "cat_model": "Chevette",
     "ns": "gm",
@@ -41,7 +41,7 @@
     ]
    },
    {
-    "basis": "catalog prints 'Citation' (4 fitment rows, oem-raw@42683f9); normalize_model canon 'Citation', 4 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints 'Citation' (4 fitment rows, oem-raw@42683f9); normalize_model canon 'Citation', 3 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Chevrolet",
     "cat_model": "Citation",
     "ns": "gm",
@@ -54,7 +54,7 @@
     ]
    },
    {
-    "basis": "catalog prints 'El Camino' (14 fitment rows, oem-raw@42683f9); normalize_model canon 'El Camino', 34 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints 'El Camino' (14 fitment rows, oem-raw@42683f9); normalize_model canon 'El Camino', 34 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Chevrolet",
     "cat_model": "El Camino",
     "ns": "gm",
@@ -67,7 +67,7 @@
     ]
    },
    {
-    "basis": "catalog prints 'Tracker' (24 fitment rows, oem-raw@42683f9); normalize_model canon 'Tracker', 114 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints 'Tracker' (24 fitment rows, oem-raw@42683f9); normalize_model canon 'Tracker', 117 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Chevrolet",
     "cat_model": "Tracker",
     "ns": "gm",
@@ -80,7 +80,7 @@
     ]
    },
    {
-    "basis": "catalog prints 'Omega' (4 fitment rows, oem-raw@42683f9); normalize_model canon 'Omega', 4 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints 'Omega' (4 fitment rows, oem-raw@42683f9); normalize_model canon 'Omega', 4 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Oldsmobile",
     "cat_model": "Omega",
     "ns": "gm",
@@ -93,7 +93,7 @@
     ]
    },
    {
-    "basis": "catalog prints 'G3' (39 fitment rows, oem-raw@42683f9); normalize_model canon 'G3', 23 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints 'G3' (39 fitment rows, oem-raw@42683f9); normalize_model canon 'G3', 24 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Pontiac",
     "cat_model": "G3",
     "ns": "gm",
@@ -106,7 +106,7 @@
     ]
    },
    {
-    "basis": "catalog prints 'G8' (2 fitment rows, oem-raw@42683f9); normalize_model canon 'G8', 26 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints 'G8' (2 fitment rows, oem-raw@42683f9); normalize_model canon 'G8', 27 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Pontiac",
     "cat_model": "G8",
     "ns": "gm",
@@ -119,7 +119,7 @@
     ]
    },
    {
-    "basis": "catalog prints 'LeMans' (1 fitment rows, oem-raw@42683f9); normalize_model canon 'LeMans', 5 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints 'LeMans' (1 fitment rows, oem-raw@42683f9); normalize_model canon 'LeMans', 4 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Pontiac",
     "cat_model": "LeMans",
     "ns": "gm",
@@ -132,7 +132,7 @@
     ]
    },
    {
-    "basis": "catalog prints 'Parisienne' (11 fitment rows, oem-raw@42683f9); normalize_model canon 'Parisienne', 4 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints 'Parisienne' (11 fitment rows, oem-raw@42683f9); normalize_model canon 'Parisienne', 4 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Pontiac",
     "cat_model": "Parisienne",
     "ns": "gm",
@@ -145,7 +145,7 @@
     ]
    },
    {
-    "basis": "catalog prints 'Phoenix' (4 fitment rows, oem-raw@42683f9); normalize_model canon 'Phoenix', 2 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints 'Phoenix' (4 fitment rows, oem-raw@42683f9); normalize_model canon 'Phoenix', 2 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Pontiac",
     "cat_model": "Phoenix",
     "ns": "gm",
@@ -159,11 +159,11 @@
    }
   ],
   "exclude": {
-   "gm|Chevrolet|Aveo5": "feed spelling or sub-model the catalog does not print as its own model (116 cars, under catalog squash 'aveo'); unmapped until a reviewed entry exists",
+   "gm|Chevrolet|Aveo5": "feed spelling or sub-model the catalog does not print as its own model (113 cars, under catalog squash 'aveo'); unmapped until a reviewed entry exists",
    "gm|Chevrolet|G3500": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash 'g3'); unmapped until a reviewed entry exists",
    "gm|GMC|G3500 Rally": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'g3'); unmapped until a reviewed entry exists",
-   "gm|GMC|G3500 Vandura": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash 'g3'); unmapped until a reviewed entry exists",
-   "gm|Geo|Tracker": "feed spelling or sub-model the catalog does not print as its own model (26 cars, under catalog squash 'tracker'); unmapped until a reviewed entry exists"
+   "gm|GMC|G3500 Vandura": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash 'g3'); unmapped until a reviewed entry exists",
+   "gm|Geo|Tracker": "feed spelling or sub-model the catalog does not print as its own model (27 cars, under catalog squash 'tracker'); unmapped until a reviewed entry exists"
   },
   "skipped": [
    {
@@ -539,7 +539,7 @@
   {
    "cat_make": "Chevrolet",
    "cat_model": "Aveo",
-   "feed_cars": 576,
+   "feed_cars": 610,
    "fitment_rows": 65,
    "ns": "gm",
    "proposed": {
@@ -550,7 +550,7 @@
    "squash_neighbours": [
     [
      "Aveo5",
-     116
+     113
     ]
    ]
   },
@@ -583,7 +583,7 @@
   {
    "cat_make": "Chevrolet",
    "cat_model": "Chevette",
-   "feed_cars": 5,
+   "feed_cars": 6,
    "fitment_rows": 1,
    "ns": "gm",
    "proposed": {
@@ -596,7 +596,7 @@
   {
    "cat_make": "Chevrolet",
    "cat_model": "Citation",
-   "feed_cars": 4,
+   "feed_cars": 3,
    "fitment_rows": 4,
    "ns": "gm",
    "proposed": {
@@ -718,7 +718,7 @@
   {
    "cat_make": "Chevrolet",
    "cat_model": "Tracker",
-   "feed_cars": 114,
+   "feed_cars": 117,
    "fitment_rows": 24,
    "ns": "gm",
    "proposed": {
@@ -741,11 +741,11 @@
    },
    "squash_neighbours": [
     [
-     "V10 Suburban",
+     "V10 Blazer",
      1
     ],
     [
-     "V10 Blazer",
+     "V10 Suburban",
      1
     ]
    ]
@@ -803,7 +803,7 @@
    "squash_neighbours": [
     [
      "G3500 Vandura",
-     3
+     2
     ],
     [
      "G3500 Rally",
@@ -970,7 +970,7 @@
   {
    "cat_make": "Pontiac",
    "cat_model": "G3",
-   "feed_cars": 23,
+   "feed_cars": 24,
    "fitment_rows": 39,
    "ns": "gm",
    "proposed": {
@@ -983,7 +983,7 @@
   {
    "cat_make": "Pontiac",
    "cat_model": "G8",
-   "feed_cars": 26,
+   "feed_cars": 27,
    "fitment_rows": 2,
    "ns": "gm",
    "proposed": {
@@ -1009,7 +1009,7 @@
   {
    "cat_make": "Pontiac",
    "cat_model": "LeMans",
-   "feed_cars": 5,
+   "feed_cars": 4,
    "fitment_rows": 1,
    "ns": "gm",
    "proposed": {

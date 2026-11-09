@@ -12,7 +12,7 @@
     "hood",
     "tail-lights"
    ],
-   "gain_pairs": 254370,
+   "gain_pairs": 247455,
    "make": "Toyota",
    "model": "Avalon",
    "year": 2000
@@ -28,7 +28,7 @@
     "tail-lights",
     "window-switch"
    ],
-   "gain_pairs": 228875,
+   "gain_pairs": 221551,
    "make": "Scion",
    "model": "xB",
    "year": 2006
@@ -42,7 +42,7 @@
     "hood",
     "tail-lights"
    ],
-   "gain_pairs": 217728,
+   "gain_pairs": 216801,
    "make": "Toyota",
    "model": "Avalon",
    "year": 2001
@@ -52,7 +52,7 @@
     "hood",
     "window-switch"
    ],
-   "gain_pairs": 212965,
+   "gain_pairs": 215604,
    "make": "Toyota",
    "model": "Sienna",
    "year": 2006
@@ -66,7 +66,7 @@
     "hood",
     "tail-lights"
    ],
-   "gain_pairs": 212160,
+   "gain_pairs": 208575,
    "make": "Toyota",
    "model": "Avalon",
    "year": 2002
@@ -80,7 +80,7 @@
     "hood",
     "window-switch"
    ],
-   "gain_pairs": 204875,
+   "gain_pairs": 200618,
    "make": "Toyota",
    "model": "Sienna",
    "year": 2000
@@ -96,7 +96,7 @@
     "tail-lights",
     "window-switch"
    ],
-   "gain_pairs": 196745,
+   "gain_pairs": 193705,
    "make": "Scion",
    "model": "xB",
    "year": 2005
@@ -110,10 +110,21 @@
     "hood",
     "window-switch"
    ],
-   "gain_pairs": 163296,
+   "gain_pairs": 160446,
    "make": "Scion",
    "model": "tC",
    "year": 2006
+  },
+  {
+   "cats": [
+    "bumper-rear",
+    "headlights",
+    "hood"
+   ],
+   "gain_pairs": 144555,
+   "make": "Toyota",
+   "model": "Avalon",
+   "year": 2003
   },
   {
    "cats": [
@@ -124,34 +135,10 @@
     "hood",
     "window-switch"
    ],
-   "gain_pairs": 143640,
+   "gain_pairs": 141750,
    "make": "Scion",
    "model": "tC",
    "year": 2005
-  },
-  {
-   "cats": [
-    "bumper-rear",
-    "headlights",
-    "hood"
-   ],
-   "gain_pairs": 140910,
-   "make": "Toyota",
-   "model": "Avalon",
-   "year": 2003
-  },
-  {
-   "cats": [
-    "door-rear",
-    "grille",
-    "headlights",
-    "hood",
-    "window-switch"
-   ],
-   "gain_pairs": 129172,
-   "make": "Toyota",
-   "model": "Matrix",
-   "year": 2003
   },
   {
    "cats": [
@@ -163,7 +150,7 @@
     "tail-lights",
     "window-switch"
    ],
-   "gain_pairs": 126880,
+   "gain_pairs": 131648,
    "make": "Toyota",
    "model": "Sienna",
    "year": 1999
@@ -176,10 +163,35 @@
     "hood",
     "window-switch"
    ],
-   "gain_pairs": 126509,
+   "gain_pairs": 126363,
    "make": "Toyota",
    "model": "Sienna",
    "year": 2001
+  },
+  {
+   "cats": [
+    "door-rear",
+    "grille",
+    "headlights",
+    "hood",
+    "window-switch"
+   ],
+   "gain_pairs": 125832,
+   "make": "Toyota",
+   "model": "Matrix",
+   "year": 2003
+  },
+  {
+   "cats": [
+    "door-rear",
+    "headlights",
+    "hood",
+    "window-switch"
+   ],
+   "gain_pairs": 123324,
+   "make": "Toyota",
+   "model": "Matrix",
+   "year": 2005
   },
   {
    "cats": [
@@ -191,32 +203,18 @@
     "tail-lights",
     "window-switch"
    ],
-   "gain_pairs": 120156,
+   "gain_pairs": 120042,
    "make": "Toyota",
    "model": "Sienna",
    "year": 1998
   },
   {
    "cats": [
-    "door-rear",
-    "headlights",
-    "hood",
-    "window-switch"
-   ],
-   "gain_pairs": 117520,
-   "make": "Toyota",
-   "model": "Matrix",
-   "year": 2005
-  },
-  {
-   "cats": [
-    "bumper-rear",
-    "headlights",
     "hood"
    ],
-   "gain_pairs": 105108,
+   "gain_pairs": 105120,
    "make": "Toyota",
-   "model": "Avalon",
+   "model": "Sienna",
    "year": 2004
   },
   {
@@ -230,18 +228,9 @@
     "tail-lights",
     "window-switch"
    ],
-   "gain_pairs": 104790,
+   "gain_pairs": 103446,
    "make": "Scion",
    "model": "xB",
-   "year": 2004
-  },
-  {
-   "cats": [
-    "hood"
-   ],
-   "gain_pairs": 104353,
-   "make": "Toyota",
-   "model": "Sienna",
    "year": 2004
   },
   {
@@ -251,19 +240,45 @@
     "fender",
     "hood"
    ],
-   "gain_pairs": 101007,
+   "gain_pairs": 100276,
    "make": "Toyota",
    "model": "Sienna",
    "year": 2002
   },
   {
    "cats": [
+    "bumper-rear",
+    "headlights",
     "hood"
    ],
-   "gain_pairs": 97440,
+   "gain_pairs": 99792,
+   "make": "Toyota",
+   "model": "Avalon",
+   "year": 2004
+  },
+  {
+   "cats": [
+    "hood"
+   ],
+   "gain_pairs": 98792,
    "make": "Toyota",
    "model": "Sienna",
    "year": 2005
+  },
+  {
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "headlights",
+    "hood",
+    "window-switch"
+   ],
+   "gain_pairs": 92640,
+   "make": "Toyota",
+   "model": "Avalon",
+   "year": 1998
   },
   {
    "cats": [
@@ -273,7 +288,7 @@
     "hood",
     "window-switch"
    ],
-   "gain_pairs": 93879,
+   "gain_pairs": 91728,
    "make": "Toyota",
    "model": "Matrix",
    "year": 2004
@@ -288,36 +303,31 @@
     "hood",
     "window-switch"
    ],
-   "gain_pairs": 90560,
-   "make": "Toyota",
-   "model": "Avalon",
-   "year": 1998
-  },
-  {
-   "cats": [
-    "bumper-front",
-    "bumper-rear",
-    "door-front",
-    "door-rear",
-    "headlights",
-    "hood",
-    "window-switch"
-   ],
-   "gain_pairs": 84140,
+   "gain_pairs": 88111,
    "make": "Toyota",
    "model": "Avalon",
    "year": 1999
   },
   {
    "cats": [
-    "bumper-front",
-    "bumper-rear",
     "door-front",
-    "fender",
-    "hood",
     "window-switch"
    ],
    "gain_pairs": 80652,
+   "make": "Toyota",
+   "model": "Corolla",
+   "year": 1999
+  },
+  {
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "fender",
+    "hood",
+    "window-switch"
+   ],
+   "gain_pairs": 76950,
    "make": "Scion",
    "model": "tC",
    "year": 2009
@@ -327,17 +337,7 @@
     "door-front",
     "window-switch"
    ],
-   "gain_pairs": 80602,
-   "make": "Toyota",
-   "model": "Corolla",
-   "year": 1999
-  },
-  {
-   "cats": [
-    "door-front",
-    "window-switch"
-   ],
-   "gain_pairs": 72352,
+   "gain_pairs": 73002,
    "make": "Toyota",
    "model": "Corolla",
    "year": 1998
@@ -351,7 +351,7 @@
     "hood",
     "window-switch"
    ],
-   "gain_pairs": 65712,
+   "gain_pairs": 65046,
    "make": "Scion",
    "model": "tC",
    "year": 2010
@@ -363,7 +363,7 @@
     "headlights",
     "hood"
    ],
-   "gain_pairs": 56463,
+   "gain_pairs": 53922,
    "make": "Toyota",
    "model": "Matrix",
    "year": 2006
@@ -374,21 +374,10 @@
     "tail-lights",
     "window-switch"
    ],
-   "gain_pairs": 52440,
+   "gain_pairs": 53105,
    "make": "Toyota",
    "model": "Sequoia",
    "year": 2003
-  },
-  {
-   "cats": [
-    "door-front",
-    "hood",
-    "window-switch"
-   ],
-   "gain_pairs": 48670,
-   "make": "Toyota",
-   "model": "Camry Solara",
-   "year": 1999
   },
   {
    "cats": [
@@ -397,99 +386,77 @@
     "fender",
     "hood"
    ],
-   "gain_pairs": 47915,
+   "gain_pairs": 50394,
    "make": "Toyota",
    "model": "Sienna",
    "year": 2003
   },
   {
    "cats": [
+    "door-front",
+    "hood",
+    "window-switch"
+   ],
+   "gain_pairs": 46560,
+   "make": "Toyota",
+   "model": "Camry Solara",
+   "year": 1999
+  },
+  {
+   "cats": [
     "bumper-front",
     "climate-control",
     "window-switch"
    ],
-   "gain_pairs": 46374,
+   "gain_pairs": 44745,
    "make": "Toyota",
    "model": "Tundra",
    "year": 2000
   },
   {
    "cats": [
-    "door-front",
-    "door-rear",
-    "headlights",
-    "hood"
-   ],
-   "gain_pairs": 44748,
-   "make": "Toyota",
-   "model": "Matrix",
-   "year": 2007
-  },
-  {
-   "cats": [
     "bumper-front",
     "climate-control",
     "window-switch"
    ],
-   "gain_pairs": 43890,
+   "gain_pairs": 44128,
    "make": "Toyota",
    "model": "Tundra",
    "year": 2001
   },
   {
    "cats": [
-    "climate-control",
-    "door-front",
-    "door-rear",
-    "fender",
-    "hood"
-   ],
-   "gain_pairs": 42780,
-   "make": "Scion",
-   "model": "xA",
-   "year": 2006
-  },
-  {
-   "cats": [
     "door-rear",
     "hood"
    ],
-   "gain_pairs": 41202,
+   "gain_pairs": 41638,
    "make": "Scion",
    "model": "xB",
    "year": 2008
   },
   {
    "cats": [
-    "bumper-front",
+    "door-front",
+    "door-rear",
+    "headlights",
+    "hood"
+   ],
+   "gain_pairs": 41410,
+   "make": "Toyota",
+   "model": "Matrix",
+   "year": 2007
+  },
+  {
+   "cats": [
     "climate-control",
-    "window-switch"
-   ],
-   "gain_pairs": 39984,
-   "make": "Toyota",
-   "model": "Tundra",
-   "year": 2002
-  },
-  {
-   "cats": [
     "door-front",
-    "tail-lights",
-    "window-switch"
-   ],
-   "gain_pairs": 38940,
-   "make": "Toyota",
-   "model": "Sequoia",
-   "year": 2004
-  },
-  {
-   "cats": [
-    "door-front",
+    "door-rear",
     "fender",
     "hood"
    ],
-   "gain_pairs": 38475,
-   "make": "Toyota",
-   "model": "Camry Solara",
+   "gain_pairs": 41230,
+   "make": "Scion",
+   "model": "xA",
    "year": 2006
   },
   {
@@ -498,28 +465,42 @@
     "tail-lights",
     "window-switch"
    ],
-   "gain_pairs": 37962,
+   "gain_pairs": 39840,
+   "make": "Toyota",
+   "model": "Sequoia",
+   "year": 2004
+  },
+  {
+   "cats": [
+    "door-front",
+    "tail-lights",
+    "window-switch"
+   ],
+   "gain_pairs": 39353,
    "make": "Toyota",
    "model": "Sequoia",
    "year": 2001
   },
   {
    "cats": [
-    "door-rear",
+    "door-front",
+    "fender",
     "hood"
    ],
-   "gain_pairs": 34804,
+   "gain_pairs": 38718,
    "make": "Toyota",
-   "model": "Highlander",
-   "year": 2003
+   "model": "Camry Solara",
+   "year": 2006
   },
   {
    "cats": [
-    "door-front"
+    "bumper-front",
+    "climate-control",
+    "window-switch"
    ],
-   "gain_pairs": 33936,
+   "gain_pairs": 37628,
    "make": "Toyota",
-   "model": "Sequoia",
+   "model": "Tundra",
    "year": 2002
   },
   {
@@ -527,52 +508,58 @@
     "climate-control",
     "window-switch"
    ],
-   "gain_pairs": 33792,
+   "gain_pairs": 36036,
    "make": "Toyota",
    "model": "Tundra",
    "year": 2003
   },
   {
    "cats": [
+    "door-rear",
+    "hood"
+   ],
+   "gain_pairs": 33966,
+   "make": "Toyota",
+   "model": "Highlander",
+   "year": 2003
+  },
+  {
+   "cats": [
     "door-front",
     "door-rear",
     "hood",
     "window-switch"
    ],
-   "gain_pairs": 33500,
+   "gain_pairs": 33859,
    "make": "Toyota",
    "model": "Avalon",
    "year": 1997
   },
   {
    "cats": [
+    "door-front"
+   ],
+   "gain_pairs": 33660,
+   "make": "Toyota",
+   "model": "Sequoia",
+   "year": 2002
+  },
+  {
+   "cats": [
     "door-rear",
     "hood"
    ],
-   "gain_pairs": 33400,
+   "gain_pairs": 32398,
    "make": "Toyota",
    "model": "Highlander",
    "year": 2002
   },
   {
    "cats": [
-    "climate-control",
-    "grille",
-    "headlights",
-    "hood",
-    "tail-lights"
-   ],
-   "gain_pairs": 32379,
-   "make": "Toyota",
-   "model": "Echo",
-   "year": 2000
-  },
-  {
-   "cats": [
     "door-front",
     "fender"
    ],
-   "gain_pairs": 31824,
+   "gain_pairs": 32390,
    "make": "Toyota",
    "model": "Camry Solara",
    "year": 2004
@@ -580,54 +567,29 @@
   {
    "cats": [
     "climate-control",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights"
+   ],
+   "gain_pairs": 31820,
+   "make": "Toyota",
+   "model": "Echo",
+   "year": 2000
+  },
+  {
+   "cats": [
+    "climate-control",
     "door-front",
     "door-rear",
     "fender",
     "hood",
     "window-switch"
    ],
-   "gain_pairs": 30647,
+   "gain_pairs": 28710,
    "make": "Scion",
    "model": "xA",
    "year": 2004
-  },
-  {
-   "cats": [
-    "door-front",
-    "door-rear",
-    "headlights",
-    "hood"
-   ],
-   "gain_pairs": 30268,
-   "make": "Toyota",
-   "model": "Matrix",
-   "year": 2008
-  },
-  {
-   "cats": [
-    "climate-control",
-    "door-front",
-    "door-rear",
-    "fender",
-    "hood"
-   ],
-   "gain_pairs": 29520,
-   "make": "Scion",
-   "model": "xA",
-   "year": 2005
-  },
-  {
-   "cats": [
-    "climate-control",
-    "grille",
-    "headlights",
-    "hood",
-    "tail-lights"
-   ],
-   "gain_pairs": 28368,
-   "make": "Toyota",
-   "model": "Echo",
-   "year": 2001
   },
   {
    "cats": [
@@ -636,20 +598,10 @@
     "grille",
     "hood"
    ],
-   "gain_pairs": 27630,
+   "gain_pairs": 28290,
    "make": "Scion",
    "model": "xB",
    "year": 2012
-  },
-  {
-   "cats": [
-    "door-rear",
-    "hood"
-   ],
-   "gain_pairs": 25584,
-   "make": "Scion",
-   "model": "xB",
-   "year": 2009
   },
   {
    "cats": [
@@ -659,27 +611,75 @@
     "hood",
     "tail-lights"
    ],
-   "gain_pairs": 24540,
+   "gain_pairs": 27900,
    "make": "Toyota",
    "model": "Echo",
-   "year": 2002
+   "year": 2001
   },
   {
    "cats": [
     "door-front",
-    "fender"
+    "door-rear",
+    "headlights",
+    "hood"
    ],
-   "gain_pairs": 23200,
+   "gain_pairs": 27820,
    "make": "Toyota",
-   "model": "Camry Solara",
-   "year": 2005
+   "model": "Matrix",
+   "year": 2008
   },
   {
    "cats": [
     "door-rear",
     "hood"
    ],
-   "gain_pairs": 23004,
+   "gain_pairs": 26950,
+   "make": "Scion",
+   "model": "xB",
+   "year": 2009
+  },
+  {
+   "cats": [
+    "climate-control",
+    "door-front",
+    "door-rear",
+    "fender",
+    "hood"
+   ],
+   "gain_pairs": 26730,
+   "make": "Scion",
+   "model": "xA",
+   "year": 2005
+  },
+  {
+   "cats": [
+    "door-front",
+    "fender"
+   ],
+   "gain_pairs": 24128,
+   "make": "Toyota",
+   "model": "Camry Solara",
+   "year": 2005
+  },
+  {
+   "cats": [
+    "climate-control",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights"
+   ],
+   "gain_pairs": 23490,
+   "make": "Toyota",
+   "model": "Echo",
+   "year": 2002
+  },
+  {
+   "cats": [
+    "door-rear",
+    "hood"
+   ],
+   "gain_pairs": 23296,
    "make": "Toyota",
    "model": "Highlander",
    "year": 2001
@@ -687,45 +687,11 @@
   {
    "cats": [
     "door-front",
-    "fender",
-    "hood"
-   ],
-   "gain_pairs": 22952,
-   "make": "Toyota",
-   "model": "Camry Solara",
-   "year": 2007
-  },
-  {
-   "cats": [
-    "bumper-rear",
-    "door-front",
-    "door-rear",
-    "hood"
-   ],
-   "gain_pairs": 21607,
-   "make": "Toyota",
-   "model": "Sequoia",
-   "year": 2005
-  },
-  {
-   "cats": [
-    "door-front",
-    "fender",
-    "hood"
-   ],
-   "gain_pairs": 21455,
-   "make": "Toyota",
-   "model": "Camry Solara",
-   "year": 2008
-  },
-  {
-   "cats": [
-    "door-front",
     "door-rear",
     "hood",
     "window-switch"
    ],
-   "gain_pairs": 21224,
+   "gain_pairs": 23010,
    "make": "Toyota",
    "model": "Avalon",
    "year": 1996
@@ -733,11 +699,22 @@
   {
    "cats": [
     "door-front",
+    "fender",
+    "hood"
+   ],
+   "gain_pairs": 22570,
+   "make": "Toyota",
+   "model": "Camry Solara",
+   "year": 2007
+  },
+  {
+   "cats": [
+    "door-front",
     "door-rear",
     "hood",
     "window-switch"
    ],
-   "gain_pairs": 20574,
+   "gain_pairs": 21700,
    "make": "Toyota",
    "model": "Avalon",
    "year": 1995
@@ -749,10 +726,21 @@
     "door-rear",
     "hood"
    ],
-   "gain_pairs": 18870,
+   "gain_pairs": 21648,
    "make": "Toyota",
    "model": "Sequoia",
-   "year": 2006
+   "year": 2005
+  },
+  {
+   "cats": [
+    "door-front",
+    "fender",
+    "hood"
+   ],
+   "gain_pairs": 21560,
+   "make": "Toyota",
+   "model": "Camry Solara",
+   "year": 2008
   },
   {
    "cats": [
@@ -764,10 +752,22 @@
     "headlights",
     "side-mirrors"
    ],
-   "gain_pairs": 18330,
+   "gain_pairs": 19104,
    "make": "Scion",
    "model": "xD",
    "year": 2008
+  },
+  {
+   "cats": [
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "hood"
+   ],
+   "gain_pairs": 18480,
+   "make": "Toyota",
+   "model": "Sequoia",
+   "year": 2006
   },
   {
    "cats": [
@@ -776,7 +776,7 @@
     "grille",
     "hood"
    ],
-   "gain_pairs": 17940,
+   "gain_pairs": 18070,
    "make": "Scion",
    "model": "xB",
    "year": 2011
@@ -786,20 +786,19 @@
     "door-front",
     "hood"
    ],
-   "gain_pairs": 17228,
+   "gain_pairs": 16188,
    "make": "Toyota",
    "model": "Camry Solara",
    "year": 2000
   },
   {
    "cats": [
-    "door-front",
-    "hood"
+    "climate-control"
    ],
-   "gain_pairs": 15120,
+   "gain_pairs": 15252,
    "make": "Toyota",
-   "model": "Camry Solara",
-   "year": 2001
+   "model": "Echo",
+   "year": 2003
   },
   {
    "cats": [
@@ -809,29 +808,30 @@
     "hood",
     "tail-lights"
    ],
-   "gain_pairs": 15092,
+   "gain_pairs": 15216,
    "make": "Toyota",
    "model": "Celica",
    "year": 2000
   },
   {
    "cats": [
-    "climate-control"
-   ],
-   "gain_pairs": 15060,
-   "make": "Toyota",
-   "model": "Echo",
-   "year": 2003
-  },
-  {
-   "cats": [
     "door-rear",
     "hood"
    ],
-   "gain_pairs": 14634,
+   "gain_pairs": 14248,
    "make": "Scion",
    "model": "xB",
    "year": 2010
+  },
+  {
+   "cats": [
+    "door-front",
+    "hood"
+   ],
+   "gain_pairs": 14148,
+   "make": "Toyota",
+   "model": "Camry Solara",
+   "year": 2001
   },
   {
    "cats": [
@@ -841,22 +841,10 @@
     "headlights",
     "hood"
    ],
-   "gain_pairs": 12803,
+   "gain_pairs": 13248,
    "make": "Toyota",
    "model": "Celica",
    "year": 2002
-  },
-  {
-   "cats": [
-    "door-rear",
-    "gauge-cluster",
-    "grille",
-    "hood"
-   ],
-   "gain_pairs": 12342,
-   "make": "Scion",
-   "model": "xB",
-   "year": 2013
   },
   {
    "cats": [
@@ -868,10 +856,22 @@
     "headlights",
     "side-mirrors"
    ],
-   "gain_pairs": 11580,
+   "gain_pairs": 12760,
    "make": "Scion",
    "model": "xD",
    "year": 2009
+  },
+  {
+   "cats": [
+    "door-rear",
+    "gauge-cluster",
+    "grille",
+    "hood"
+   ],
+   "gain_pairs": 12427,
+   "make": "Scion",
+   "model": "xB",
+   "year": 2013
   },
   {
    "cats": [
@@ -880,7 +880,7 @@
     "door-rear",
     "hood"
    ],
-   "gain_pairs": 10591,
+   "gain_pairs": 11160,
    "make": "Toyota",
    "model": "Sequoia",
    "year": 2007
@@ -891,7 +891,7 @@
     "grille",
     "hood"
    ],
-   "gain_pairs": 10528,
+   "gain_pairs": 10592,
    "make": "Scion",
    "model": "xB",
    "year": 2014
@@ -905,7 +905,7 @@
     "hood",
     "tail-lights"
    ],
-   "gain_pairs": 9044,
+   "gain_pairs": 9576,
    "make": "Toyota",
    "model": "Celica",
    "year": 2001
@@ -921,7 +921,7 @@
     "tail-lights",
     "window-switch"
    ],
-   "gain_pairs": 8904,
+   "gain_pairs": 8736,
    "make": "Toyota",
    "model": "Matrix",
    "year": 2009
@@ -937,37 +937,10 @@
     "tail-lights",
     "window-switch"
    ],
-   "gain_pairs": 7752,
+   "gain_pairs": 7616,
    "make": "Toyota",
    "model": "Matrix",
    "year": 2010
-  },
-  {
-   "cats": [
-    "alternator",
-    "bumper-front",
-    "door-rear",
-    "fender",
-    "grille",
-    "headlights",
-    "hood",
-    "ignition-coils",
-    "side-mirrors",
-    "starter"
-   ],
-   "gain_pairs": 7425,
-   "make": "Scion",
-   "model": "xD",
-   "year": 2012
-  },
-  {
-   "cats": [
-    "climate-control"
-   ],
-   "gain_pairs": 7280,
-   "make": "Toyota",
-   "model": "4Runner",
-   "year": 1998
   },
   {
    "cats": [
@@ -976,10 +949,19 @@
     "headlights",
     "hood"
    ],
-   "gain_pairs": 7182,
+   "gain_pairs": 7272,
    "make": "Toyota",
    "model": "Celica",
    "year": 2003
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 7236,
+   "make": "Toyota",
+   "model": "4Runner",
+   "year": 1998
   },
   {
    "cats": [
@@ -990,28 +972,10 @@
     "headlights",
     "side-mirrors"
    ],
-   "gain_pairs": 6960,
+   "gain_pairs": 7104,
    "make": "Scion",
    "model": "xD",
    "year": 2010
-  },
-  {
-   "cats": [
-    "climate-control"
-   ],
-   "gain_pairs": 6902,
-   "make": "Toyota",
-   "model": "4Runner",
-   "year": 2000
-  },
-  {
-   "cats": [
-    "climate-control"
-   ],
-   "gain_pairs": 6642,
-   "make": "Toyota",
-   "model": "4Runner",
-   "year": 1999
   },
   {
    "cats": [
@@ -1025,16 +989,52 @@
     "side-mirrors",
     "starter"
    ],
-   "gain_pairs": 6479,
+   "gain_pairs": 7044,
    "make": "Scion",
    "model": "xD",
    "year": 2013
   },
   {
    "cats": [
+    "alternator",
+    "bumper-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "ignition-coils",
+    "side-mirrors",
+    "starter"
+   ],
+   "gain_pairs": 6940,
+   "make": "Scion",
+   "model": "xD",
+   "year": 2012
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 6844,
+   "make": "Toyota",
+   "model": "4Runner",
+   "year": 2000
+  },
+  {
+   "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 6174,
+   "make": "Toyota",
+   "model": "4Runner",
+   "year": 1999
+  },
+  {
+   "cats": [
     "ignition-coils"
    ],
-   "gain_pairs": 6464,
+   "gain_pairs": 5985,
    "make": "Toyota",
    "model": "Corolla",
    "year": 1997
@@ -1051,7 +1051,7 @@
     "side-mirrors",
     "starter"
    ],
-   "gain_pairs": 4795,
+   "gain_pairs": 4858,
    "make": "Scion",
    "model": "xD",
    "year": 2011
@@ -1060,7 +1060,7 @@
    "cats": [
     "climate-control"
    ],
-   "gain_pairs": 4707,
+   "gain_pairs": 4626,
    "make": "Toyota",
    "model": "Echo",
    "year": 2005
@@ -1072,7 +1072,7 @@
     "headlights",
     "hood"
    ],
-   "gain_pairs": 4310,
+   "gain_pairs": 4360,
    "make": "Toyota",
    "model": "Celica",
    "year": 2005
@@ -1083,16 +1083,25 @@
     "grille",
     "hood"
    ],
-   "gain_pairs": 4128,
+   "gain_pairs": 3475,
    "make": "Scion",
    "model": "xB",
    "year": 2015
   },
   {
    "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 3315,
+   "make": "Toyota",
+   "model": "4Runner",
+   "year": 1997
+  },
+  {
+   "cats": [
     "door-front"
    ],
-   "gain_pairs": 3354,
+   "gain_pairs": 3175,
    "make": "Toyota",
    "model": "Tacoma",
    "year": 1998
@@ -1101,28 +1110,10 @@
    "cats": [
     "climate-control"
    ],
-   "gain_pairs": 3250,
-   "make": "Toyota",
-   "model": "4Runner",
-   "year": 1997
-  },
-  {
-   "cats": [
-    "climate-control"
-   ],
-   "gain_pairs": 2754,
+   "gain_pairs": 2788,
    "make": "Toyota",
    "model": "4Runner",
    "year": 1996
-  },
-  {
-   "cats": [
-    "door-front"
-   ],
-   "gain_pairs": 2700,
-   "make": "Toyota",
-   "model": "Tacoma",
-   "year": 2001
   },
   {
    "cats": [
@@ -1130,15 +1121,6 @@
    ],
    "gain_pairs": 2635,
    "make": "Toyota",
-   "model": "Echo",
-   "year": 2004
-  },
-  {
-   "cats": [
-    "climate-control"
-   ],
-   "gain_pairs": 2604,
-   "make": "Toyota",
    "model": "4Runner",
    "year": 1995
   },
@@ -1146,19 +1128,28 @@
    "cats": [
     "door-front"
    ],
-   "gain_pairs": 2584,
+   "gain_pairs": 2527,
    "make": "Toyota",
    "model": "Tacoma",
-   "year": 1999
+   "year": 2000
   },
   {
    "cats": [
     "door-front"
    ],
-   "gain_pairs": 2584,
+   "gain_pairs": 2527,
    "make": "Toyota",
    "model": "Tacoma",
-   "year": 2000
+   "year": 2001
+  },
+  {
+   "cats": [
+    "door-front"
+   ],
+   "gain_pairs": 2412,
+   "make": "Toyota",
+   "model": "Tacoma",
+   "year": 1999
   },
   {
    "cats": [
@@ -1167,16 +1158,25 @@
     "headlights",
     "hood"
    ],
-   "gain_pairs": 2255,
+   "gain_pairs": 2280,
    "make": "Toyota",
    "model": "Celica",
    "year": 2004
   },
   {
    "cats": [
+    "climate-control"
+   ],
+   "gain_pairs": 2076,
+   "make": "Toyota",
+   "model": "Echo",
+   "year": 2004
+  },
+  {
+   "cats": [
     "door-front"
    ],
-   "gain_pairs": 2100,
+   "gain_pairs": 2055,
    "make": "Toyota",
    "model": "Tacoma",
    "year": 1996
@@ -1185,7 +1185,7 @@
    "cats": [
     "door-front"
    ],
-   "gain_pairs": 2100,
+   "gain_pairs": 2055,
    "make": "Toyota",
    "model": "Tacoma",
    "year": 2002
@@ -1194,7 +1194,7 @@
    "cats": [
     "door-front"
    ],
-   "gain_pairs": 2100,
+   "gain_pairs": 1932,
    "make": "Toyota",
    "model": "Tacoma",
    "year": 2003
@@ -1205,10 +1205,10 @@
     "hood",
     "ignition-coils"
    ],
-   "gain_pairs": 2052,
+   "gain_pairs": 1890,
    "make": "Toyota",
    "model": "Tercel",
-   "year": 1996
+   "year": 1995
   },
   {
    "cats": [
@@ -1216,10 +1216,57 @@
     "hood",
     "ignition-coils"
    ],
-   "gain_pairs": 1998,
+   "gain_pairs": 1890,
    "make": "Toyota",
    "model": "Tercel",
+   "year": 1996
+  },
+  {
+   "cats": [
+    "ignition-coils"
+   ],
+   "gain_pairs": 1752,
+   "make": "Toyota",
+   "model": "Celica",
    "year": 1995
+  },
+  {
+   "cats": [
+    "fender",
+    "hood",
+    "ignition-coils"
+   ],
+   "gain_pairs": 1638,
+   "make": "Toyota",
+   "model": "Tercel",
+   "year": 1997
+  },
+  {
+   "cats": [
+    "door-front"
+   ],
+   "gain_pairs": 1551,
+   "make": "Toyota",
+   "model": "Tacoma",
+   "year": 1997
+  },
+  {
+   "cats": [
+    "door-front"
+   ],
+   "gain_pairs": 1551,
+   "make": "Toyota",
+   "model": "Tacoma",
+   "year": 2004
+  },
+  {
+   "cats": [
+    "ignition-coils"
+   ],
+   "gain_pairs": 1480,
+   "make": "Toyota",
+   "model": "Celica",
+   "year": 1994
   },
   {
    "cats": [
@@ -1233,7 +1280,7 @@
     "side-mirrors",
     "starter"
    ],
-   "gain_pairs": 1983,
+   "gain_pairs": 1354,
    "make": "Scion",
    "model": "xD",
    "year": 2014
@@ -1242,67 +1289,20 @@
    "cats": [
     "ignition-coils"
    ],
-   "gain_pairs": 1836,
-   "make": "Toyota",
-   "model": "Celica",
-   "year": 1995
-  },
-  {
-   "cats": [
-    "fender",
-    "hood",
-    "ignition-coils"
-   ],
-   "gain_pairs": 1800,
+   "gain_pairs": 1200,
    "make": "Toyota",
    "model": "Tercel",
-   "year": 1997
-  },
-  {
-   "cats": [
-    "door-front"
-   ],
-   "gain_pairs": 1584,
-   "make": "Toyota",
-   "model": "Tacoma",
-   "year": 2004
-  },
-  {
-   "cats": [
-    "ignition-coils"
-   ],
-   "gain_pairs": 1550,
-   "make": "Toyota",
-   "model": "Celica",
    "year": 1994
-  },
-  {
-   "cats": [
-    "door-front"
-   ],
-   "gain_pairs": 1450,
-   "make": "Toyota",
-   "model": "Tacoma",
-   "year": 1997
   },
   {
    "cats": [
     "alternator",
     "ignition-coils"
    ],
-   "gain_pairs": 1350,
+   "gain_pairs": 1200,
    "make": "Toyota",
    "model": "Yaris",
    "year": 2012
-  },
-  {
-   "cats": [
-    "ignition-coils"
-   ],
-   "gain_pairs": 1256,
-   "make": "Toyota",
-   "model": "Tercel",
-   "year": 1994
   },
   {
    "cats": [
@@ -1317,7 +1317,7 @@
     "tail-lights",
     "window-switch"
    ],
-   "gain_pairs": 1160,
+   "gain_pairs": 1144,
    "make": "Toyota",
    "model": "Matrix",
    "year": 2012
@@ -1326,7 +1326,7 @@
    "cats": [
     "ignition-coils"
    ],
-   "gain_pairs": 1106,
+   "gain_pairs": 1057,
    "make": "Toyota",
    "model": "Celica",
    "year": 1997
@@ -1336,7 +1336,7 @@
     "climate-control",
     "hood"
    ],
-   "gain_pairs": 960,
+   "gain_pairs": 930,
    "make": "Toyota",
    "model": "RAV4",
    "year": 1996
@@ -1346,7 +1346,7 @@
     "climate-control",
     "hood"
    ],
-   "gain_pairs": 960,
+   "gain_pairs": 930,
    "make": "Toyota",
    "model": "RAV4",
    "year": 1997
@@ -1355,7 +1355,7 @@
    "cats": [
     "ignition-coils"
    ],
-   "gain_pairs": 954,
+   "gain_pairs": 765,
    "make": "Toyota",
    "model": "Celica",
    "year": 1996
@@ -1364,7 +1364,7 @@
    "cats": [
     "ignition-coils"
    ],
-   "gain_pairs": 800,
+   "gain_pairs": 765,
    "make": "Toyota",
    "model": "Tercel",
    "year": 1991
@@ -1373,111 +1373,111 @@
    "cats": [
     "ignition-coils"
    ],
-   "gain_pairs": 800,
+   "gain_pairs": 765,
    "make": "Toyota",
    "model": "Tercel",
    "year": 1992
   },
   {
    "cats": [
-    "ignition-coils"
-   ],
-   "gain_pairs": 800,
-   "make": "Toyota",
-   "model": "Tercel",
-   "year": 1993
-  },
-  {
-   "cats": [
     "door-front"
    ],
-   "gain_pairs": 750,
+   "gain_pairs": 735,
    "make": "Toyota",
    "model": "Tacoma",
    "year": 1995
   },
   {
    "cats": [
-    "alternator",
     "ignition-coils"
    ],
-   "gain_pairs": 712,
-   "make": "Toyota",
-   "model": "Yaris",
-   "year": 2013
-  },
-  {
-   "cats": [
-    "alternator",
-    "ignition-coils"
-   ],
-   "gain_pairs": 637,
-   "make": "Toyota",
-   "model": "Yaris",
-   "year": 2014
-  },
-  {
-   "cats": [
-    "bumper-front",
-    "bumper-rear",
-    "door-front",
-    "door-rear",
-    "fender",
-    "grille",
-    "headlights",
-    "hood",
-    "tail-lights",
-    "window-switch"
-   ],
-   "gain_pairs": 590,
-   "make": "Toyota",
-   "model": "Matrix",
-   "year": 2011
-  },
-  {
-   "cats": [
-    "bumper-front",
-    "bumper-rear",
-    "door-front",
-    "door-rear",
-    "fender",
-    "grille",
-    "headlights",
-    "hood",
-    "tail-lights",
-    "window-switch"
-   ],
-   "gain_pairs": 590,
-   "make": "Toyota",
-   "model": "Matrix",
-   "year": 2013
-  },
-  {
-   "cats": [
-    "ignition-coils"
-   ],
-   "gain_pairs": 486,
+   "gain_pairs": 616,
    "make": "Toyota",
    "model": "Paseo",
    "year": 1992
   },
   {
    "cats": [
-    "alternator"
+    "ignition-coils"
    ],
-   "gain_pairs": 405,
+   "gain_pairs": 616,
+   "make": "Toyota",
+   "model": "Tercel",
+   "year": 1993
+  },
+  {
+   "cats": [
+    "alternator",
+    "ignition-coils"
+   ],
+   "gain_pairs": 602,
    "make": "Toyota",
    "model": "Yaris",
+   "year": 2013
+  },
+  {
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "window-switch"
+   ],
+   "gain_pairs": 582,
+   "make": "Toyota",
+   "model": "Matrix",
    "year": 2011
+  },
+  {
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "fender",
+    "grille",
+    "headlights",
+    "hood",
+    "tail-lights",
+    "window-switch"
+   ],
+   "gain_pairs": 582,
+   "make": "Toyota",
+   "model": "Matrix",
+   "year": 2013
+  },
+  {
+   "cats": [
+    "alternator",
+    "ignition-coils"
+   ],
+   "gain_pairs": 450,
+   "make": "Toyota",
+   "model": "Yaris",
+   "year": 2014
   },
   {
    "cats": [
     "window-switch"
    ],
-   "gain_pairs": 364,
+   "gain_pairs": 406,
    "make": "Toyota",
    "model": "Venza",
    "year": 2009
+  },
+  {
+   "cats": [
+    "alternator"
+   ],
+   "gain_pairs": 378,
+   "make": "Toyota",
+   "model": "Yaris",
+   "year": 2011
   },
   {
    "cats": [
@@ -1490,21 +1490,30 @@
   },
   {
    "cats": [
-    "ignition-coils"
+    "window-switch"
    ],
-   "gain_pairs": 326,
+   "gain_pairs": 352,
    "make": "Toyota",
-   "model": "Paseo",
-   "year": 1993
+   "model": "Venza",
+   "year": 2010
   },
   {
    "cats": [
     "window-switch"
    ],
-   "gain_pairs": 325,
+   "gain_pairs": 336,
    "make": "Toyota",
    "model": "Corolla",
    "year": 1992
+  },
+  {
+   "cats": [
+    "ignition-coils"
+   ],
+   "gain_pairs": 312,
+   "make": "Toyota",
+   "model": "Paseo",
+   "year": 1993
   },
   {
    "cats": [
@@ -1512,7 +1521,7 @@
     "hood",
     "ignition-coils"
    ],
-   "gain_pairs": 318,
+   "gain_pairs": 306,
    "make": "Toyota",
    "model": "Tercel",
    "year": 1998
@@ -1521,28 +1530,19 @@
    "cats": [
     "window-switch"
    ],
-   "gain_pairs": 300,
+   "gain_pairs": 306,
    "make": "Toyota",
    "model": "Venza",
-   "year": 2010
+   "year": 2011
   },
   {
    "cats": [
     "hood"
    ],
-   "gain_pairs": 273,
+   "gain_pairs": 266,
    "make": "Toyota",
    "model": "Camry",
    "year": 2018
-  },
-  {
-   "cats": [
-    "window-switch"
-   ],
-   "gain_pairs": 256,
-   "make": "Toyota",
-   "model": "Venza",
-   "year": 2011
   },
   {
    "cats": [
@@ -1550,7 +1550,7 @@
     "ignition-coils",
     "window-switch"
    ],
-   "gain_pairs": 222,
+   "gain_pairs": 234,
    "make": "Toyota",
    "model": "Prius Plug-In",
    "year": 2012
@@ -1559,7 +1559,7 @@
    "cats": [
     "hood"
    ],
-   "gain_pairs": 208,
+   "gain_pairs": 200,
    "make": "Toyota",
    "model": "Camry",
    "year": 2019
@@ -1568,7 +1568,27 @@
    "cats": [
     "ignition-coils"
    ],
-   "gain_pairs": 164,
+   "gain_pairs": 180,
+   "make": "Toyota",
+   "model": "Yaris",
+   "year": 2015
+  },
+  {
+   "cats": [
+    "door-rear",
+    "ignition-coils",
+    "window-switch"
+   ],
+   "gain_pairs": 162,
+   "make": "Toyota",
+   "model": "Prius Plug-In",
+   "year": 2014
+  },
+  {
+   "cats": [
+    "ignition-coils"
+   ],
+   "gain_pairs": 157,
    "make": "Toyota",
    "model": "Paseo",
    "year": 1994
@@ -1577,7 +1597,7 @@
    "cats": [
     "ignition-coils"
    ],
-   "gain_pairs": 162,
+   "gain_pairs": 156,
    "make": "Toyota",
    "model": "Paseo",
    "year": 1997
@@ -1587,29 +1607,29 @@
     "fender",
     "hood"
    ],
-   "gain_pairs": 156,
+   "gain_pairs": 144,
    "make": "Toyota",
    "model": "Camry",
    "year": 2021
   },
   {
    "cats": [
-    "fender",
-    "hood"
+    "window-switch"
    ],
-   "gain_pairs": 156,
+   "gain_pairs": 120,
    "make": "Toyota",
-   "model": "Camry",
-   "year": 2022
+   "model": "Venza",
+   "year": 2012
   },
   {
    "cats": [
-    "ignition-coils"
+    "fender",
+    "hood"
    ],
-   "gain_pairs": 144,
+   "gain_pairs": 114,
    "make": "Toyota",
-   "model": "Yaris",
-   "year": 2015
+   "model": "Camry",
+   "year": 2022
   },
   {
    "cats": [
@@ -1623,63 +1643,33 @@
   },
   {
    "cats": [
-    "window-switch"
-   ],
-   "gain_pairs": 111,
-   "make": "Toyota",
-   "model": "Venza",
-   "year": 2012
-  },
-  {
-   "cats": [
     "ignition-coils"
    ],
-   "gain_pairs": 98,
+   "gain_pairs": 94,
    "make": "Toyota",
    "model": "Yaris",
    "year": 2018
   },
   {
    "cats": [
-    "fender",
-    "hood"
-   ],
-   "gain_pairs": 86,
-   "make": "Toyota",
-   "model": "Camry",
-   "year": 2020
-  },
-  {
-   "cats": [
-    "fender",
-    "hood"
-   ],
-   "gain_pairs": 86,
-   "make": "Toyota",
-   "model": "Camry",
-   "year": 2023
-  },
-  {
-   "cats": [
     "door-rear",
     "ignition-coils",
     "window-switch"
    ],
-   "gain_pairs": 80,
+   "gain_pairs": 84,
    "make": "Toyota",
    "model": "Prius Plug-In",
    "year": 2013
   },
   {
    "cats": [
-    "door-rear",
-    "ignition-coils",
-    "window-switch"
+    "fender",
+    "hood"
    ],
    "gain_pairs": 80,
    "make": "Toyota",
-   "model": "Prius Plug-In",
-   "year": 2014
+   "model": "Camry",
+   "year": 2020
   },
   {
    "cats": [
@@ -1693,18 +1683,9 @@
   },
   {
    "cats": [
-    "window-switch"
-   ],
-   "gain_pairs": 72,
-   "make": "Toyota",
-   "model": "Cressida",
-   "year": 1989
-  },
-  {
-   "cats": [
     "ignition-coils"
    ],
-   "gain_pairs": 50,
+   "gain_pairs": 48,
    "make": "Toyota",
    "model": "Yaris",
    "year": 2016
@@ -1714,10 +1695,30 @@
     "fender",
     "hood"
    ],
-   "gain_pairs": 45,
+   "gain_pairs": 42,
+   "make": "Toyota",
+   "model": "Camry",
+   "year": 2023
+  },
+  {
+   "cats": [
+    "fender",
+    "hood"
+   ],
+   "gain_pairs": 42,
    "make": "Toyota",
    "model": "Camry",
    "year": 2024
+  },
+  {
+   "cats": [
+    "door-rear",
+    "ignition-coils"
+   ],
+   "gain_pairs": 42,
+   "make": "Toyota",
+   "model": "Prius Plug-In",
+   "year": 2015
   },
   {
    "cats": [
@@ -1731,13 +1732,12 @@
   },
   {
    "cats": [
-    "door-rear",
-    "ignition-coils"
+    "window-switch"
    ],
-   "gain_pairs": 41,
+   "gain_pairs": 37,
    "make": "Toyota",
-   "model": "Prius Plug-In",
-   "year": 2015
+   "model": "Cressida",
+   "year": 1989
   },
   {
    "cats": [
@@ -1777,6 +1777,15 @@
   },
   {
    "cats": [
+    "tail-lights"
+   ],
+   "gain_pairs": 21,
+   "make": "Toyota",
+   "model": "Camry",
+   "year": 1986
+  },
+  {
+   "cats": [
     "window-switch"
    ],
    "gain_pairs": 21,
@@ -1788,16 +1797,7 @@
    "cats": [
     "tail-lights"
    ],
-   "gain_pairs": 18,
-   "make": "Toyota",
-   "model": "Camry",
-   "year": 1986
-  },
-  {
-   "cats": [
-    "tail-lights"
-   ],
-   "gain_pairs": 14,
+   "gain_pairs": 16,
    "make": "Toyota",
    "model": "Camry",
    "year": 1984
@@ -1840,21 +1840,21 @@
   },
   {
    "cats": [
+    "tail-lights"
+   ],
+   "gain_pairs": 9,
+   "make": "Toyota",
+   "model": "Camry",
+   "year": 1985
+  },
+  {
+   "cats": [
     "window-switch"
    ],
    "gain_pairs": 9,
    "make": "Toyota",
    "model": "Camry Hybrid",
    "year": 2014
-  },
-  {
-   "cats": [
-    "tail-lights"
-   ],
-   "gain_pairs": 8,
-   "make": "Toyota",
-   "model": "Camry",
-   "year": 1985
   },
   {
    "cats": [
@@ -1885,24 +1885,6 @@
   },
   {
    "cats": [
-    "hood"
-   ],
-   "gain_pairs": 2,
-   "make": "Toyota",
-   "model": "Sequoia",
-   "year": 2013
-  },
-  {
-   "cats": [
-    "hood"
-   ],
-   "gain_pairs": 2,
-   "make": "Toyota",
-   "model": "Sequoia",
-   "year": 2016
-  },
-  {
-   "cats": [
     "climate-control"
    ],
    "gain_pairs": 1,
@@ -1918,6 +1900,24 @@
    "make": "Toyota",
    "model": "Prius Prime",
    "year": 2019
+  },
+  {
+   "cats": [
+    "hood"
+   ],
+   "gain_pairs": 1,
+   "make": "Toyota",
+   "model": "Sequoia",
+   "year": 2013
+  },
+  {
+   "cats": [
+    "hood"
+   ],
+   "gain_pairs": 1,
+   "make": "Toyota",
+   "model": "Sequoia",
+   "year": 2016
   }
  ]
 }

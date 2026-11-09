@@ -1766,3 +1766,44 @@ on a shared page was credited to every model on that page (the held-parts
 research found it: 2011 Outback fender AJ00/01 = S only, AJ06/07 = OBK only).
 groups/subaru.json is removed, so the next scan drops all 223 live subaru
 Likely groups. Tests now pin the 7 remaining namespaces.
+
+### 2026-11-09 option-column audit and fix (hub steps 2-3)
+
+Rule (curate.py `note_excludes`, used by `own_page` and, pooled class-wide,
+by Likely groups): a row whose own-page note restricts the number to another
+model, body or make does not count as listed for T. Cases:
+- another make's division;
+- Mopar brand codes ("C - CHRYSLER", "D - DODGE", "E - DODGE AWD"; 1,418 on
+  moparpartsgiant);
+- catalog or feed model names in notes, longest first ("Jetta; Sedan" on VW
+  pages shared with Golf; "Camry Hybrid; SE" on a Camry page);
+- subarupartsdeal "Fitting Vehicle Options" body codes on the
+  Legacy/Outback/Baja pages: S/W = Legacy, OBK/SOBK/WOBK = Outback, P/BAJA =
+  Baja. W.(OBK...) qualifiers count for the Outback; engine and transmission
+  codes stay unrestricted.
+
+One own page restricting a number now drops the twin that lists it bare: the
+2006 300 page says C - CHRYSLER for mirror 1BY421R3AA, the 2007 Charger page
+lists it plainly, so the Charger is dropped. This only removes claims. Model
+map: GMC Sierra HD, Ford Topaz, VW Golf R and Fiat 2000 are excluded (new
+feed names), and Chevrolet Suburban is unmapped (M6: 1 of 4 decodes is a GMC,
+a mislabelled listing).
+
+Shipped groups, re-curated on the same raw (oem-raw@42683f9). Every
+namespace's new claims are a subset of the shipped claims:
+| ns | groups | pair claims | cause |
+|---|---|---|---|
+| toyota | 781 -> 779 | 2412 -> 2408 | hybrid-only cluster notes (83800-0X850, 83800-33B50) |
+| gm | 301 -> 289 | 1292 -> 1170 | Suburban unmap (M6) and 3 note-restricted app-years |
+| mopar | 150 -> 140 | 756 -> 732 | Chrysler-only brand codes on 300/Charger mirrors etc. |
+| vag | 31 -> 6 | 92 -> 12 | notes naming Jetta, or Golf/GTI/R32, on shared pages |
+| mb | 1 -> 0 | 6 -> 0 | the one GLK/C-class cluster note-restricted |
+| ford, hmg | unchanged | unchanged | body/cab values are conditions inside one model (Ford "Passenger Power Mirror", HMG "Sedan - 4Door") |
+
+Subaru (withheld, not re-shipped): 223 -> 97 groups, 1126 -> 392 pair claims.
+Waiting for the hub.
+
+Gates passed: V12-V15 reproducible across two curate runs; measure parity
+6/6; V9 0 old-client flips; payload status "ok" for all 7 (mb 0 groups);
+curation_tests 15/15 (+18 regression checks); tests 29/29;
+scraper/test_*.py all pass; pf_guards_unit ALL PASS.

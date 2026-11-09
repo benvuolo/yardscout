@@ -3219,20 +3219,6 @@
    ]
   },
   {
-   "basis": "catalog prints 'Suburban' (331 fitment rows, oem-raw@d1108d0); normalize_model canon 'Suburban', 213 feed cars (inventory 2026-11-05); identity draft; ambig (Likely only): the feed name is coarser than the series the catalog splits",
-   "cat_make": "Chevrolet",
-   "cat_model": "Suburban",
-   "ns": "gm",
-   "targets": [
-    {
-     "ambig": "feed splits 'Suburban' by series (Suburban 1500, Suburban 2500, Suburban Hd); the catalog prints one model with the series only in its option column",
-     "make": "Chevrolet",
-     "model": "Suburban",
-     "trims": "*"
-    }
-   ]
-  },
-  {
    "basis": "catalog prints 'Tahoe' (276 fitment rows, oem-raw@d1108d0); normalize_model canon 'Tahoe', 2701 feed cars (inventory 2026-11-05); identity draft",
    "cat_make": "Chevrolet",
    "cat_model": "Tahoe",
@@ -10584,6 +10570,7 @@
   "ford|Ford|SSV Plug-In Hybrid": "catalog model with no feed cars as 'SSV Plug-In Hybrid' (inventory 2026-11-04); nothing to map",
   "ford|Ford|Sable": "feed spelling or sub-model the catalog does not print as its own model (6 cars, under catalog squash 'sable'); unmapped until a reviewed entry exists",
   "ford|Ford|Taurus Wagon": "feed spelling or sub-model the catalog does not print as its own model (12 cars, under catalog squash 'taurus'); unmapped until a reviewed entry exists",
+  "ford|Ford|Topaz": "feed 'Ford Topaz' (1 car) under catalog 'Topaz' (Mercury); a mislabelled listing (Tempo or Mercury Topaz) (interchange, 2026-11-09; unmapped, no claims, until a reviewed entry exists)",
   "ford|Ford|Transit Van": "feed spelling or sub-model the catalog does not print as its own model (12 cars, under catalog squash 'transit'); unmapped until a reviewed entry exists",
   "ford|Ford|Transit-150": "feed spelling or sub-model the catalog does not print as its own model (10 cars, under catalog squash 'transit'); unmapped until a reviewed entry exists",
   "ford|Ford|Transit-250": "feed spelling or sub-model the catalog does not print as its own model (24 cars, under catalog squash 'transit'); unmapped until a reviewed entry exists",
@@ -10667,6 +10654,7 @@
   "gm|Chevrolet|Silverado Classic 2500HD": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'silverado'); unmapped until a reviewed entry exists",
   "gm|Chevrolet|Silverado LD": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'silverado'); unmapped until a reviewed entry exists",
   "gm|Chevrolet|Sonoma": "feed spelling or sub-model the catalog does not print as its own model (15 cars, under catalog squash 'sonoma'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Suburban": "M6: of 4 cached vPIC decodes of feed 'Chevrolet Suburban' (221 cars) 1 names GMC (VIN 3GK, a mislabelled listing); over the 2% cap, so unmapped like Acura ILX (interchange, 2026-11-09; unmapped, no claims, until a reviewed entry exists)",
   "gm|Chevrolet|Suburban 10": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'suburban'); unmapped until a reviewed entry exists",
   "gm|Chevrolet|Suburban 1500": "feed spelling or sub-model the catalog does not print as its own model (1737 cars, under catalog squash 'suburban'); unmapped until a reviewed entry exists",
   "gm|Chevrolet|Suburban 2500": "feed spelling or sub-model the catalog does not print as its own model (73 cars, under catalog squash 'suburban'); unmapped until a reviewed entry exists",
@@ -10714,6 +10702,7 @@
   "gm|GMC|Sierra Classic 2500HD": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash 'sierra'); unmapped until a reviewed entry exists",
   "gm|GMC|Sierra Classic 3500": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash 'sierra'); unmapped until a reviewed entry exists",
   "gm|GMC|Sierra Denali 1500": "feed spelling or sub-model the catalog does not print as its own model (4 cars, under catalog squash 'sierra'); unmapped until a reviewed entry exists",
+  "gm|GMC|Sierra HD": "feed sub-model 'Sierra HD' (1 car) under catalog 'Sierra'; HD trucks differ from the 1500 (§23.6) (interchange, 2026-11-09; unmapped, no claims, until a reviewed entry exists)",
   "gm|GMC|Sierra Hybrid": "hybrid sub-model; how this catalog files hybrids is not reviewed yet (4 cars, under catalog squash 'sierra'); unmapped until a reviewed entry exists",
   "gm|GMC|Sierra K2500": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'sierra'); unmapped until a reviewed entry exists",
   "gm|GMC|Silverado 1500 Pickup": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'silverado'); unmapped until a reviewed entry exists",
@@ -10813,6 +10802,7 @@
   "mopar|Dodge|Ram Wagon 2500": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash 'ramwagon'); unmapped until a reviewed entry exists",
   "mopar|Dodge|Ram Wagon 3500": "feed spelling or sub-model the catalog does not print as its own model (7 cars, under catalog squash 'ramwagon'); unmapped until a reviewed entry exists",
   "mopar|Dodge|Viper": "catalog model with no feed cars as 'Viper' (inventory 2026-11-04); nothing to map",
+  "mopar|Fiat|2000": "feed 'Fiat 2000' (1 car, scan 2026-11-08) squashes under catalog '200' (Chrysler 200); not the same vehicle (interchange, 2026-11-09; unmapped, no claims, until a reviewed entry exists)",
   "mopar|Jeep|J20": "catalog model with no feed cars as 'J20' (inventory 2026-11-04); nothing to map",
   "mopar|Jeep|Nitro": "feed spelling or sub-model the catalog does not print as its own model (7 cars, under catalog squash 'nitro'); unmapped until a reviewed entry exists",
   "mopar|Jeep|Voyager": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash 'voyager'); unmapped until a reviewed entry exists",
@@ -10885,6 +10875,7 @@
   "vag|Volkswagen|Beetle (type 1)": "feed spelling or sub-model the catalog does not print as its own model (10 cars, under catalog squash 'beetle'); unmapped until a reviewed entry exists",
   "vag|Volkswagen|Golf Except Gti": "feed spelling or sub-model the catalog does not print as its own model (2 cars, under catalog squash 'golf'); unmapped until a reviewed entry exists",
   "vag|Volkswagen|Golf III": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'golf'); unmapped until a reviewed entry exists",
+  "vag|Volkswagen|Golf R": "feed sub-model 'Golf R' (1 car) under catalog 'Golf'; R bodywork and lamps differ (interchange, 2026-11-09; unmapped, no claims, until a reviewed entry exists)",
   "vag|Volkswagen|Golf Sportwagen": "feed spelling or sub-model the catalog does not print as its own model (13 cars, under catalog squash 'golf'); unmapped until a reviewed entry exists",
   "vag|Volkswagen|Jetta Except Gli": "feed spelling or sub-model the catalog does not print as its own model (14 cars, under catalog squash 'jetta'); unmapped until a reviewed entry exists",
   "vag|Volkswagen|Jetta GLI": "feed spelling or sub-model the catalog does not print as its own model (8 cars, under catalog squash 'jetta'); unmapped until a reviewed entry exists",

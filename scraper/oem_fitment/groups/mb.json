@@ -49597,62 +49597,13 @@
    "open:no_year_manifest"
   ]
  ],
- "classes": {
-  "mb:2049004507": {
-   "cat": "gauge-cluster",
-   "comp": null,
-   "evidence": [
-    "www.mbpartsgiant.com:records:L1023"
-   ],
-   "names": [
-    "Instrument Cluster"
-   ],
-   "pns": [
-    "204-900-45-07"
-   ],
-   "reman": false
-  }
- },
+ "classes": {},
  "curate_version": "1.0",
  "engine_cells": [],
  "groups": [],
- "likely": [
-  {
-   "apps": [
-    [
-     "Mercedes-Benz",
-     "C300",
-     2011,
-     2011
-    ],
-    [
-     "Mercedes-Benz",
-     "C350",
-     2011,
-     2011
-    ],
-    [
-     "Mercedes-Benz",
-     "GLK350",
-     2011,
-     2011
-    ]
-   ],
-   "cars": 65,
-   "cat": "gauge-cluster",
-   "id": "oem:mb:gauge-cluster:C:3def4a9f79",
-   "kind": "body",
-   "note": "Mercedes catalog lists #204-900-45-07 for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T15:32:56Z",
-   "pn": [
-    "204-900-45-07"
-   ],
-   "reason": "trim",
-   "tier": "likely"
-  }
- ],
+ "likely": [],
  "ns": "mb",
- "policy_sha256": "26723f1085163ddb5ccb4da16aaa43b7232b40d5196577a97ca7bcd8a8337493",
+ "policy_sha256": "da5f80482b2077fd5c1849e9f508eb2b75a4a80937eadec8f0318154235657f1",
  "raw": {
   "commit": "42683f9d86450b6bd00eb7fc7cc9640154607768",
   "ref": "42683f9d86450b6bd00eb7fc7cc9640154607768",

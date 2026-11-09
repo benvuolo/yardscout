@@ -6600,7 +6600,7 @@
    "Rainier",
    2004,
    "throttle-body",
-   "open:unverified_product"
+   "open:uncrawled_chain_member"
   ],
   [
    "Buick",
@@ -51621,2379 +51621,6 @@
   ],
   [
    "Chevrolet",
-   "Suburban",
-   1985,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1985,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1985,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1986,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1986,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1986,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1987,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1987,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1987,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1987,
-   "throttle-body",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1987,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1988,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1988,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1988,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1988,
-   "throttle-body",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1988,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1989,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1989,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1989,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1989,
-   "throttle-body",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1989,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1990,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1990,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1990,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1990,
-   "throttle-body",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1990,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1991,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1991,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1991,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1991,
-   "throttle-body",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1991,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1992,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1992,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1992,
-   "climate-control",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1992,
-   "fuel-pump-module",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1992,
-   "headlights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1992,
-   "side-mirrors",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1992,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1992,
-   "tail-lights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1992,
-   "throttle-body",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1992,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1993,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1993,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1993,
-   "climate-control",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1993,
-   "fuel-pump-module",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1993,
-   "headlights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1993,
-   "side-mirrors",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1993,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1993,
-   "tail-lights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1993,
-   "throttle-body",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1993,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1994,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1994,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1994,
-   "climate-control",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1994,
-   "fuel-pump-module",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1994,
-   "headlights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1994,
-   "side-mirrors",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1994,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1994,
-   "tail-lights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1994,
-   "throttle-body",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1994,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1995,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1995,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1995,
-   "climate-control",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1995,
-   "fuel-pump-module",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1995,
-   "headlights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1995,
-   "side-mirrors",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1995,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1995,
-   "tail-lights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1995,
-   "throttle-body",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1995,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1995,
-   "window-switch",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1996,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1996,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1996,
-   "climate-control",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1996,
-   "fuel-pump-module",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1996,
-   "headlights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1996,
-   "side-mirrors",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1996,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1996,
-   "tail-lights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1996,
-   "throttle-body",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1996,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1996,
-   "window-switch",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1997,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1997,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1997,
-   "climate-control",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1997,
-   "fuel-pump-module",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1997,
-   "headlights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1997,
-   "power-steering-pump",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1997,
-   "side-mirrors",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1997,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1997,
-   "tail-lights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1997,
-   "throttle-body",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1997,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1997,
-   "window-switch",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1998,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1998,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1998,
-   "climate-control",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1998,
-   "fuel-pump-module",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1998,
-   "headlights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1998,
-   "power-steering-pump",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1998,
-   "side-mirrors",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1998,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1998,
-   "tail-lights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1998,
-   "throttle-body",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1998,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1998,
-   "window-switch",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1999,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1999,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1999,
-   "climate-control",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1999,
-   "fuel-pump-module",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1999,
-   "headlights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1999,
-   "power-steering-pump",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1999,
-   "side-mirrors",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1999,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1999,
-   "tail-lights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1999,
-   "throttle-body",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1999,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1999,
-   "window-switch",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2000,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2000,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2000,
-   "climate-control",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2000,
-   "fuel-pump-module",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2000,
-   "headlights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2000,
-   "power-steering-pump",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2000,
-   "side-mirrors",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2000,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2000,
-   "tail-lights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2000,
-   "throttle-body",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2000,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2000,
-   "window-switch",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2001,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2001,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2001,
-   "climate-control",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2001,
-   "fuel-pump-module",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2001,
-   "headlights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2001,
-   "power-steering-pump",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2001,
-   "side-mirrors",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2001,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2001,
-   "tail-lights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2001,
-   "throttle-body",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2001,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2001,
-   "window-switch",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2002,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2002,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2002,
-   "climate-control",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2002,
-   "fuel-pump-module",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2002,
-   "headlights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2002,
-   "power-steering-pump",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2002,
-   "side-mirrors",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2002,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2002,
-   "tail-lights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2002,
-   "throttle-body",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2002,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2002,
-   "window-switch",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2003,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2003,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2003,
-   "climate-control",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2003,
-   "fuel-pump-module",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2003,
-   "headlights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2003,
-   "power-steering-pump",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2003,
-   "side-mirrors",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2003,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2003,
-   "tail-lights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2003,
-   "throttle-body",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2003,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2003,
-   "window-switch",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2004,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2004,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2004,
-   "climate-control",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2004,
-   "fuel-pump-module",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2004,
-   "headlights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2004,
-   "power-steering-pump",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2004,
-   "side-mirrors",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2004,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2004,
-   "tail-lights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2004,
-   "throttle-body",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2004,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2004,
-   "window-switch",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2005,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2005,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2005,
-   "climate-control",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2005,
-   "fuel-pump-module",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2005,
-   "headlights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2005,
-   "power-steering-pump",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2005,
-   "side-mirrors",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2005,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2005,
-   "throttle-body",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2005,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2005,
-   "window-switch",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2006,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2006,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2006,
-   "climate-control",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2006,
-   "fuel-pump-module",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2006,
-   "headlights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2006,
-   "power-steering-pump",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2006,
-   "side-mirrors",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2006,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2006,
-   "throttle-body",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2006,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2006,
-   "window-switch",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2007,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2007,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2007,
-   "climate-control",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2007,
-   "fuel-pump-module",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2007,
-   "headlights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2007,
-   "power-steering-pump",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2007,
-   "side-mirrors",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2007,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2007,
-   "tail-lights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2007,
-   "throttle-body",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2007,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2007,
-   "window-switch",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2008,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2008,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2008,
-   "climate-control",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2008,
-   "fuel-pump-module",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2008,
-   "headlights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2008,
-   "power-steering-pump",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2008,
-   "side-mirrors",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2008,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2008,
-   "tail-lights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2008,
-   "throttle-body",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2008,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2008,
-   "window-switch",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2009,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2009,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2009,
-   "climate-control",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2009,
-   "fuel-pump-module",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2009,
-   "headlights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2009,
-   "power-steering-pump",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2009,
-   "side-mirrors",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2009,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2009,
-   "tail-lights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2009,
-   "throttle-body",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2009,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2009,
-   "window-switch",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2010,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2010,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2010,
-   "climate-control",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2010,
-   "fuel-pump-module",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2010,
-   "headlights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2010,
-   "power-steering-pump",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2010,
-   "side-mirrors",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2010,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2010,
-   "tail-lights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2010,
-   "throttle-body",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2010,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2010,
-   "window-switch",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2011,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2011,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2011,
-   "climate-control",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2011,
-   "fuel-pump-module",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2011,
-   "headlights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2011,
-   "power-steering-pump",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2011,
-   "side-mirrors",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2011,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2011,
-   "tail-lights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2011,
-   "throttle-body",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2011,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2011,
-   "window-switch",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2012,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2012,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2012,
-   "climate-control",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2012,
-   "fuel-pump-module",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2012,
-   "headlights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2012,
-   "power-steering-pump",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2012,
-   "side-mirrors",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2012,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2012,
-   "tail-lights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2012,
-   "throttle-body",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2012,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2012,
-   "window-switch",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2013,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2013,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2013,
-   "climate-control",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2013,
-   "fuel-pump-module",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2013,
-   "headlights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2013,
-   "power-steering-pump",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2013,
-   "side-mirrors",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2013,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2013,
-   "tail-lights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2013,
-   "throttle-body",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2013,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2013,
-   "window-switch",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2014,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2014,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2014,
-   "climate-control",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2014,
-   "fuel-pump-module",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2014,
-   "headlights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2014,
-   "power-steering-pump",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2014,
-   "side-mirrors",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2014,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2014,
-   "tail-lights",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2014,
-   "throttle-body",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2014,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2014,
-   "window-switch",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2015,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2015,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2015,
-   "fuel-pump-module",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2015,
-   "side-mirrors",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2015,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2015,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2015,
-   "window-switch",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2016,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2016,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2016,
-   "fuel-pump-module",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2016,
-   "power-steering-pump",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2016,
-   "side-mirrors",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2016,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2016,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2016,
-   "window-switch",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2017,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2017,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2017,
-   "power-steering-pump",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2017,
-   "side-mirrors",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2017,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2017,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2017,
-   "window-switch",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2018,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2018,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2018,
-   "power-steering-pump",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2018,
-   "side-mirrors",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2018,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2018,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2018,
-   "window-switch",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2019,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2019,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2019,
-   "power-steering-pump",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2019,
-   "side-mirrors",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2019,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2019,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2019,
-   "window-switch",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2020,
-   "ac-compressor",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2020,
-   "alternator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2020,
-   "side-mirrors",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2020,
-   "starter",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2020,
-   "window-regulator",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2020,
-   "window-switch",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
    "Tahoe",
    1995,
    "ac-compressor",
@@ -95854,20 +93481,6 @@
    ],
    "reman": false
   },
-  "gm:15054698": {
-   "cat": "climate-control",
-   "comp": "assy",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L444"
-   ],
-   "names": [
-    "CONTROL, HEATER & A/C(NO SERVICEABLE BULBS)(INCLUDES 2-4)"
-   ],
-   "pns": [
-    "15054698"
-   ],
-   "reman": false
-  },
   "gm:15078222": {
    "cat": "side-mirrors",
    "comp": null,
@@ -96106,48 +93719,6 @@
    ],
    "reman": false
   },
-  "gm:15172247": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L73"
-   ],
-   "names": [
-    "MIRROR, OUTSIDE REAR VIEW(INCLUDES 1,2,4)(W/CHROME CAP)"
-   ],
-   "pns": [
-    "15172247"
-   ],
-   "reman": false
-  },
-  "gm:15172248": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L72"
-   ],
-   "names": [
-    "MIRROR, OUTSIDE REAR VIEW(INCLUDES 1,2,4)(W/CHROME CAP)"
-   ],
-   "pns": [
-    "15172248"
-   ],
-   "reman": false
-  },
-  "gm:15172249": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L74"
-   ],
-   "names": [
-    "MIRROR, (5M1) Rear View Mirror-Outside, MIRROR,OUTSIDE REAR VIEW(INCLUDES 1,2,4)(W/CHROME CAP)"
-   ],
-   "pns": [
-    "15172249"
-   ],
-   "reman": false
-  },
   "gm:15172549": {
    "cat": "window-regulator",
    "comp": "reg?",
@@ -96201,34 +93772,6 @@
    ],
    "pns": [
     "15193316"
-   ],
-   "reman": false
-  },
-  "gm:15206916": {
-   "cat": "window-regulator",
-   "comp": "reg",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L436"
-   ],
-   "names": [
-    "REGULATOR, REAR SIDE DOOR WINDOW(W/O MOTOR)"
-   ],
-   "pns": [
-    "15206916"
-   ],
-   "reman": false
-  },
-  "gm:15206917": {
-   "cat": "window-regulator",
-   "comp": "reg",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L437"
-   ],
-   "names": [
-    "REGULATOR, REAR SIDE DOOR WINDOW(W/O MOTOR)"
-   ],
-   "pns": [
-    "15206917"
    ],
    "reman": false
   },
@@ -97338,20 +94881,6 @@
    ],
    "reman": false
   },
-  "gm:19208467": {
-   "cat": "window-regulator",
-   "comp": "motor",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L438"
-   ],
-   "names": [
-    "MOTOR, REAR SIDE DOOR WINDOW REGULATOR"
-   ],
-   "pns": [
-    "19208467"
-   ],
-   "reman": false
-  },
   "gm:19210257": {
    "cat": "window-regulator",
    "comp": "assy",
@@ -97517,34 +95046,6 @@
    ],
    "pns": [
     "19301975"
-   ],
-   "reman": false
-  },
-  "gm:19301980": {
-   "cat": "window-regulator",
-   "comp": "reg",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L435"
-   ],
-   "names": [
-    "REGULATOR, REAR SIDE DOOR WINDOW(W/O MOTOR)"
-   ],
-   "pns": [
-    "19301980"
-   ],
-   "reman": false
-  },
-  "gm:19301981": {
-   "cat": "window-regulator",
-   "comp": "reg",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L434"
-   ],
-   "names": [
-    "REGULATOR, REAR SIDE DOOR WINDOW(W/O MOTOR)"
-   ],
-   "pns": [
-    "19301981"
    ],
    "reman": false
   },
@@ -98514,34 +96015,6 @@
    ],
    "reman": false
   },
-  "gm:25690121": {
-   "cat": "window-switch",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L2032"
-   ],
-   "names": [
-    "SWITCH, SIDE WINDOW(FRONT)(SHALE)(INCLUDES MIRROR SWITCH)(W/OUT EXPRESS UP)"
-   ],
-   "pns": [
-    "25690121"
-   ],
-   "reman": false
-  },
-  "gm:25690125": {
-   "cat": "window-switch",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1484"
-   ],
-   "names": [
-    "SWITCH, SIDE WINDOW(FRONT)(BLACK)(INCLUDES MIRROR SWITCH)(W/OUT EXPRESS UP)"
-   ],
-   "pns": [
-    "25690125"
-   ],
-   "reman": false
-  },
   "gm:25690133": {
    "cat": "window-switch",
    "comp": null,
@@ -99281,20 +96754,6 @@
    ],
    "pns": [
     "84512890"
-   ],
-   "reman": false
-  },
-  "gm:88937199": {
-   "cat": "window-regulator",
-   "comp": "motor",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L439"
-   ],
-   "names": [
-    "MOTOR, REAR SIDE DOOR WINDOW REGULATOR(CASTING NO. EA0377B)"
-   ],
-   "pns": [
-    "88937199"
    ],
    "reman": false
   },
@@ -107339,614 +104798,6 @@
   ],
   [
    "Chevrolet",
-   "Suburban",
-   1992,
-   "alternator",
-   "gm-vortec57",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1992,
-   "starter",
-   "gm-vortec57",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1993,
-   "alternator",
-   "gm-vortec57",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1993,
-   "starter",
-   "gm-vortec57",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1994,
-   "alternator",
-   "gm-vortec57",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1994,
-   "starter",
-   "gm-vortec57",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1995,
-   "alternator",
-   "gm-vortec57",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1995,
-   "starter",
-   "gm-vortec57",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1996,
-   "alternator",
-   "gm-vortec57",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1996,
-   "starter",
-   "gm-vortec57",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1997,
-   "alternator",
-   "gm-vortec57",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1997,
-   "starter",
-   "gm-vortec57",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1998,
-   "alternator",
-   "gm-vortec57",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1998,
-   "starter",
-   "gm-vortec57",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1999,
-   "alternator",
-   "gm-vortec57",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   1999,
-   "starter",
-   "gm-vortec57",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2000,
-   "alternator",
-   "gm-gen3-truck",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2000,
-   "alternator",
-   "gm-vortec-gen3",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2000,
-   "starter",
-   "gm-gen3-truck",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2000,
-   "starter",
-   "gm-vortec-gen3",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2001,
-   "alternator",
-   "gm-gen3-truck",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2001,
-   "alternator",
-   "gm-vortec-gen3",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2001,
-   "starter",
-   "gm-gen3-truck",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2001,
-   "starter",
-   "gm-vortec-gen3",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2002,
-   "alternator",
-   "gm-gen3-truck",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2002,
-   "alternator",
-   "gm-vortec-gen3",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2002,
-   "starter",
-   "gm-gen3-truck",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2002,
-   "starter",
-   "gm-vortec-gen3",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2003,
-   "alternator",
-   "gm-gen3-truck",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2003,
-   "alternator",
-   "gm-vortec-gen3",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2003,
-   "starter",
-   "gm-gen3-truck",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2003,
-   "starter",
-   "gm-vortec-gen3",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2004,
-   "alternator",
-   "gm-gen3-truck",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2004,
-   "alternator",
-   "gm-vortec-gen3",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2004,
-   "starter",
-   "gm-gen3-truck",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2004,
-   "starter",
-   "gm-vortec-gen3",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2005,
-   "alternator",
-   "gm-gen3-truck",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2005,
-   "alternator",
-   "gm-vortec-gen3",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2005,
-   "starter",
-   "gm-gen3-truck",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2005,
-   "starter",
-   "gm-vortec-gen3",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2006,
-   "alternator",
-   "gm-gen3-truck",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2006,
-   "alternator",
-   "gm-vortec-gen3",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2006,
-   "starter",
-   "gm-gen3-truck",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2006,
-   "starter",
-   "gm-vortec-gen3",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2007,
-   "alternator",
-   "gm-gen4-truck",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2007,
-   "alternator",
-   "gm-vortec-gen3",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2007,
-   "starter",
-   "gm-gen4-truck",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2007,
-   "starter",
-   "gm-vortec-gen3",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2008,
-   "alternator",
-   "gm-gen4-truck",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2008,
-   "alternator",
-   "gm-vortec-gen3",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2008,
-   "starter",
-   "gm-gen4-truck",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2008,
-   "starter",
-   "gm-vortec-gen3",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2009,
-   "alternator",
-   "gm-gen4-truck",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2009,
-   "alternator",
-   "gm-vortec-gen3",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2009,
-   "starter",
-   "gm-gen4-truck",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2009,
-   "starter",
-   "gm-vortec-gen3",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2010,
-   "alternator",
-   "gm-gen4-truck",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2010,
-   "alternator",
-   "gm-vortec-gen3",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2010,
-   "starter",
-   "gm-gen4-truck",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2010,
-   "starter",
-   "gm-vortec-gen3",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2011,
-   "alternator",
-   "gm-gen4-truck",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2011,
-   "alternator",
-   "gm-vortec-gen3",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2011,
-   "starter",
-   "gm-gen4-truck",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2011,
-   "starter",
-   "gm-vortec-gen3",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2012,
-   "alternator",
-   "gm-gen4-truck",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2012,
-   "alternator",
-   "gm-vortec-gen3",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2012,
-   "starter",
-   "gm-gen4-truck",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2012,
-   "starter",
-   "gm-vortec-gen3",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2013,
-   "alternator",
-   "gm-gen4-truck",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2013,
-   "alternator",
-   "gm-vortec-gen3",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2013,
-   "starter",
-   "gm-gen4-truck",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2013,
-   "starter",
-   "gm-vortec-gen3",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2014,
-   "alternator",
-   "gm-gen4-truck",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2014,
-   "alternator",
-   "gm-vortec-gen3",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2014,
-   "starter",
-   "gm-gen4-truck",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
-   "Suburban",
-   2014,
-   "starter",
-   "gm-vortec-gen3",
-   "open:ambig_target"
-  ],
-  [
-   "Chevrolet",
    "Tahoe",
    1995,
    "alternator",
@@ -113819,7 +110670,7 @@
      1995
     ]
    ],
-   "cars": 69,
+   "cars": 75,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:95b6d05e29",
    "kind": "body",
@@ -113846,7 +110697,7 @@
      1995
     ]
    ],
-   "cars": 69,
+   "cars": 75,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:0d8f2dd3b9",
    "kind": "body",
@@ -113879,7 +110730,7 @@
      2004
     ]
    ],
-   "cars": 224,
+   "cars": 231,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:284426c1ed",
    "kind": "body",
@@ -113906,7 +110757,7 @@
      2004
     ]
    ],
-   "cars": 79,
+   "cars": 85,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:8636ae0453",
    "kind": "body",
@@ -113939,7 +110790,7 @@
      2004
     ]
    ],
-   "cars": 224,
+   "cars": 231,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:3d7c80c6bf",
    "kind": "body",
@@ -113972,7 +110823,7 @@
      2004
     ]
    ],
-   "cars": 224,
+   "cars": 231,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:7926ffb775",
    "kind": "body",
@@ -114005,7 +110856,7 @@
      2004
     ]
    ],
-   "cars": 224,
+   "cars": 231,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:41f806d500",
    "kind": "body",
@@ -114038,7 +110889,7 @@
      2004
     ]
    ],
-   "cars": 224,
+   "cars": 231,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:54f9df9e40",
    "kind": "body",
@@ -114071,7 +110922,7 @@
      2004
     ]
    ],
-   "cars": 224,
+   "cars": 231,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:38ff8fd5f4",
    "kind": "body",
@@ -114098,7 +110949,7 @@
      2004
     ]
    ],
-   "cars": 192,
+   "cars": 200,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:59ed6a5d75",
    "kind": "body",
@@ -114125,7 +110976,7 @@
      2004
     ]
    ],
-   "cars": 192,
+   "cars": 200,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:652fb56ab6",
    "kind": "body",
@@ -114152,7 +111003,7 @@
      2004
     ]
    ],
-   "cars": 192,
+   "cars": 200,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:05ecfca394",
    "kind": "body",
@@ -114179,7 +111030,7 @@
      2004
     ]
    ],
-   "cars": 192,
+   "cars": 200,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:9c84b98436",
    "kind": "body",
@@ -114212,7 +111063,7 @@
      2005
     ]
    ],
-   "cars": 146,
+   "cars": 153,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:f27fc56e42",
    "kind": "body",
@@ -114245,7 +111096,7 @@
      2005
     ]
    ],
-   "cars": 146,
+   "cars": 153,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:a833a46aa4",
    "kind": "body",
@@ -114278,7 +111129,7 @@
      2005
     ]
    ],
-   "cars": 146,
+   "cars": 153,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:e3f8481383",
    "kind": "body",
@@ -114311,7 +111162,7 @@
      2005
     ]
    ],
-   "cars": 146,
+   "cars": 153,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:fc44a6e693",
    "kind": "body",
@@ -114338,7 +111189,7 @@
      2004
     ]
    ],
-   "cars": 188,
+   "cars": 193,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:b2d8565a44",
    "kind": "body",
@@ -114365,7 +111216,7 @@
      2003
     ]
    ],
-   "cars": 140,
+   "cars": 145,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:2343d02c7e",
    "kind": "body",
@@ -114392,7 +111243,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:a4f79ce762",
    "kind": "body",
@@ -114419,7 +111270,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:6a5582ba93",
    "kind": "body",
@@ -114446,7 +111297,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:d704228aa4",
    "kind": "body",
@@ -114473,7 +111324,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:cc3f3859c4",
    "kind": "body",
@@ -114500,7 +111351,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:5c295954d6",
    "kind": "body",
@@ -114527,7 +111378,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:ced876ba8c",
    "kind": "body",
@@ -114554,7 +111405,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:f982ed38e3",
    "kind": "body",
@@ -114581,7 +111432,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:f9b515aa0a",
    "kind": "body",
@@ -114608,7 +111459,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:27cf5048ed",
    "kind": "body",
@@ -114635,7 +111486,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:76be206794",
    "kind": "body",
@@ -114662,7 +111513,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:eb8353b34b",
    "kind": "body",
@@ -114689,7 +111540,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:aa2fbb57e8",
    "kind": "body",
@@ -114722,7 +111573,7 @@
      2003
     ]
    ],
-   "cars": 207,
+   "cars": 213,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:118574b478",
    "kind": "body",
@@ -114749,7 +111600,7 @@
      2011
     ]
    ],
-   "cars": 297,
+   "cars": 309,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:e939d882e5",
    "kind": "body",
@@ -114776,7 +111627,7 @@
      2011
     ]
    ],
-   "cars": 297,
+   "cars": 309,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:7969e446a0",
    "kind": "body",
@@ -114803,7 +111654,7 @@
      1999
     ]
    ],
-   "cars": 211,
+   "cars": 223,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:2e0b6175f2",
    "kind": "body",
@@ -114842,7 +111693,7 @@
      2000
     ]
    ],
-   "cars": 218,
+   "cars": 225,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:a059d20e17",
    "kind": "body",
@@ -114881,7 +111732,7 @@
      2000
     ]
    ],
-   "cars": 218,
+   "cars": 225,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:04d5fabd69",
    "kind": "body",
@@ -114908,7 +111759,7 @@
      2001
     ]
    ],
-   "cars": 121,
+   "cars": 126,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:81d40061ae",
    "kind": "body",
@@ -114935,7 +111786,7 @@
      2001
     ]
    ],
-   "cars": 121,
+   "cars": 126,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:b252ff368a",
    "kind": "body",
@@ -114962,7 +111813,7 @@
      2001
     ]
    ],
-   "cars": 121,
+   "cars": 126,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:c5ff5dfb68",
    "kind": "body",
@@ -114989,7 +111840,7 @@
      2001
     ]
    ],
-   "cars": 121,
+   "cars": 126,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:b9b7eacd79",
    "kind": "body",
@@ -114997,33 +111848,6 @@
    "oldest_retrieved": "2026-11-05T09:26:22Z",
    "pn": [
     "15053728"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chevrolet",
-     "Silverado",
-     1999,
-     1999
-    ],
-    [
-     "Chevrolet",
-     "Suburban",
-     2001,
-     2001
-    ]
-   ],
-   "cars": 49,
-   "cat": "climate-control",
-   "id": "oem:gm:climate-control:C:856dc5551f",
-   "kind": "body",
-   "note": "GM catalog lists #15054698 for both — regulator with motor; option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T02:15:00Z",
-   "pn": [
-    "15054698"
    ],
    "reason": "option",
    "tier": "likely"
@@ -115043,7 +111867,7 @@
      2000
     ]
    ],
-   "cars": 169,
+   "cars": 174,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:9d5ff742c4",
    "kind": "body",
@@ -115070,7 +111894,7 @@
      2000
     ]
    ],
-   "cars": 169,
+   "cars": 174,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:3e7ef24db9",
    "kind": "body",
@@ -115103,7 +111927,7 @@
      2001
     ]
    ],
-   "cars": 136,
+   "cars": 140,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:845a875270",
    "kind": "body",
@@ -115136,7 +111960,7 @@
      2001
     ]
    ],
-   "cars": 136,
+   "cars": 140,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:f96873c140",
    "kind": "body",
@@ -115169,7 +111993,7 @@
      2000
     ]
    ],
-   "cars": 203,
+   "cars": 209,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:c56743a878",
    "kind": "body",
@@ -115202,7 +112026,7 @@
      2000
     ]
    ],
-   "cars": 203,
+   "cars": 209,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:bb29252b2e",
    "kind": "body",
@@ -115229,7 +112053,7 @@
      2000
     ]
    ],
-   "cars": 169,
+   "cars": 174,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:f892e2f3f0",
    "kind": "body",
@@ -115256,7 +112080,7 @@
      2000
     ]
    ],
-   "cars": 169,
+   "cars": 174,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:45201874ec",
    "kind": "body",
@@ -115283,7 +112107,7 @@
      2000
     ]
    ],
-   "cars": 169,
+   "cars": 174,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:cfd8fa3357",
    "kind": "body",
@@ -115310,7 +112134,7 @@
      2000
     ]
    ],
-   "cars": 169,
+   "cars": 174,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:853aef6ffc",
    "kind": "body",
@@ -115337,7 +112161,7 @@
      2005
     ]
    ],
-   "cars": 180,
+   "cars": 183,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:cb6b83e442",
    "kind": "body",
@@ -115364,7 +112188,7 @@
      2005
     ]
    ],
-   "cars": 180,
+   "cars": 183,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:f419b556a7",
    "kind": "body",
@@ -115391,7 +112215,7 @@
      2004
     ]
    ],
-   "cars": 391,
+   "cars": 402,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:2336d93361",
    "kind": "body",
@@ -115418,7 +112242,7 @@
      1996
     ]
    ],
-   "cars": 49,
+   "cars": 51,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:8403682142",
    "kind": "body",
@@ -115445,7 +112269,7 @@
      1996
     ]
    ],
-   "cars": 49,
+   "cars": 51,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:5086fbf85c",
    "kind": "body",
@@ -115466,21 +112290,15 @@
      2000
     ],
     [
-     "Chevrolet",
-     "Suburban",
-     2001,
-     2001
-    ],
-    [
      "GMC",
      "Sierra",
      2004,
      2004
     ]
    ],
-   "cars": 104,
+   "cars": 80,
    "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:R:bd476d14b7",
+   "id": "oem:gm:side-mirrors:R:3ca1537c77",
    "kind": "body",
    "note": "GM catalog lists #15172059 for both — fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:20:49Z",
@@ -115499,107 +112317,20 @@
      2000
     ],
     [
-     "Chevrolet",
-     "Suburban",
-     2001,
-     2001
-    ],
-    [
      "GMC",
      "Sierra",
      2004,
      2004
     ]
    ],
-   "cars": 104,
+   "cars": 80,
    "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:L:477131c2ac",
+   "id": "oem:gm:side-mirrors:L:b90b4f315e",
    "kind": "body",
    "note": "GM catalog lists #15172060 for both — fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:20:53Z",
    "pn": [
     "15172060"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chevrolet",
-     "Silverado",
-     1999,
-     2000
-    ],
-    [
-     "Chevrolet",
-     "Suburban",
-     2001,
-     2001
-    ]
-   ],
-   "cars": 88,
-   "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:L:2b7232ba01",
-   "kind": "body",
-   "note": "GM catalog lists #15172247 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T01:20:42Z",
-   "pn": [
-    "15172247"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chevrolet",
-     "Silverado",
-     1999,
-     2000
-    ],
-    [
-     "Chevrolet",
-     "Suburban",
-     2001,
-     2001
-    ]
-   ],
-   "cars": 88,
-   "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:R:9c56ff1b84",
-   "kind": "body",
-   "note": "GM catalog lists #15172248 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T01:20:37Z",
-   "pn": [
-    "15172248"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chevrolet",
-     "Silverado",
-     1999,
-     2000
-    ],
-    [
-     "Chevrolet",
-     "Suburban",
-     2001,
-     2001
-    ]
-   ],
-   "cars": 88,
-   "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:R:5d9301de72",
-   "kind": "body",
-   "note": "GM catalog lists #15172249 for both — fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T01:20:45Z",
-   "pn": [
-    "15172249"
    ],
    "reason": "conditional",
    "tier": "likely"
@@ -115625,7 +112356,7 @@
      2001
     ]
    ],
-   "cars": 136,
+   "cars": 140,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:a0107bec86",
    "kind": "body",
@@ -115658,7 +112389,7 @@
      2001
     ]
    ],
-   "cars": 136,
+   "cars": 140,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:a187cbc123",
    "kind": "body",
@@ -115685,7 +112416,7 @@
      2000
     ]
    ],
-   "cars": 169,
+   "cars": 174,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:c572e952ab",
    "kind": "body",
@@ -115712,7 +112443,7 @@
      2000
     ]
    ],
-   "cars": 169,
+   "cars": 174,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:63c44e708d",
    "kind": "body",
@@ -115722,60 +112453,6 @@
     "15193316"
    ],
    "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chevrolet",
-     "Suburban",
-     2001,
-     2001
-    ],
-    [
-     "GMC",
-     "Sierra",
-     2004,
-     2004
-    ]
-   ],
-   "cars": 39,
-   "cat": "window-regulator",
-   "id": "oem:gm:window-regulator:RL:cae90c8337",
-   "kind": "body",
-   "note": "GM catalog lists #15206916 for both — regulator without motor; fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T02:13:43Z",
-   "pn": [
-    "15206916"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chevrolet",
-     "Suburban",
-     2001,
-     2001
-    ],
-    [
-     "GMC",
-     "Sierra",
-     2004,
-     2004
-    ]
-   ],
-   "cars": 39,
-   "cat": "window-regulator",
-   "id": "oem:gm:window-regulator:RR:f8ca5cc395",
-   "kind": "body",
-   "note": "GM catalog lists #15206917 for both — regulator without motor; fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T02:13:47Z",
-   "pn": [
-    "15206917"
-   ],
-   "reason": "conditional",
    "tier": "likely"
   },
   {
@@ -115799,7 +112476,7 @@
      2005
     ]
    ],
-   "cars": 146,
+   "cars": 153,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:7120ecd93f",
    "kind": "body",
@@ -115832,7 +112509,7 @@
      2005
     ]
    ],
-   "cars": 146,
+   "cars": 153,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:e3fdc8a8c6",
    "kind": "body",
@@ -115865,7 +112542,7 @@
      2005
     ]
    ],
-   "cars": 146,
+   "cars": 153,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:ea3844ab14",
    "kind": "body",
@@ -115898,7 +112575,7 @@
      2005
     ]
    ],
-   "cars": 146,
+   "cars": 153,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:507d68ce48",
    "kind": "body",
@@ -115931,7 +112608,7 @@
      2005
     ]
    ],
-   "cars": 146,
+   "cars": 153,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:83b1ba34d3",
    "kind": "body",
@@ -115964,7 +112641,7 @@
      2005
     ]
    ],
-   "cars": 146,
+   "cars": 153,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:4d4e235d87",
    "kind": "body",
@@ -115997,7 +112674,7 @@
      2011
     ]
    ],
-   "cars": 185,
+   "cars": 189,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:ab1b7482a9",
    "kind": "body",
@@ -116030,7 +112707,7 @@
      2011
     ]
    ],
-   "cars": 185,
+   "cars": 189,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:472377e0d5",
    "kind": "body",
@@ -116063,7 +112740,7 @@
      2011
     ]
    ],
-   "cars": 185,
+   "cars": 189,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:630a553a4f",
    "kind": "body",
@@ -116096,7 +112773,7 @@
      2011
     ]
    ],
-   "cars": 185,
+   "cars": 189,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:95e3a7c84d",
    "kind": "body",
@@ -116123,7 +112800,7 @@
      2001
     ]
    ],
-   "cars": 121,
+   "cars": 126,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:6b1c4d72ee",
    "kind": "body",
@@ -116150,7 +112827,7 @@
      2001
     ]
    ],
-   "cars": 121,
+   "cars": 126,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:5f4439bd3d",
    "kind": "body",
@@ -116177,7 +112854,7 @@
      1999
     ]
    ],
-   "cars": 211,
+   "cars": 223,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:0c39044d34",
    "kind": "body",
@@ -116204,7 +112881,7 @@
      1999
     ]
    ],
-   "cars": 211,
+   "cars": 223,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:48ada603e8",
    "kind": "body",
@@ -116231,7 +112908,7 @@
      2000
     ]
    ],
-   "cars": 169,
+   "cars": 174,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:c816dc99b9",
    "kind": "body",
@@ -116258,7 +112935,7 @@
      2001
     ]
    ],
-   "cars": 121,
+   "cars": 126,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:04de88b149",
    "kind": "body",
@@ -116285,7 +112962,7 @@
      2001
     ]
    ],
-   "cars": 121,
+   "cars": 126,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:92c97301e0",
    "kind": "body",
@@ -116312,7 +112989,7 @@
      1999
     ]
    ],
-   "cars": 211,
+   "cars": 223,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:34c3ff20c1",
    "kind": "body",
@@ -116339,7 +113016,7 @@
      1999
     ]
    ],
-   "cars": 211,
+   "cars": 223,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:ec19a90149",
    "kind": "body",
@@ -116366,7 +113043,7 @@
      2004
     ]
    ],
-   "cars": 391,
+   "cars": 402,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:6932605812",
    "kind": "body",
@@ -116393,7 +113070,7 @@
      2004
     ]
    ],
-   "cars": 391,
+   "cars": 402,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:9e7c0633d6",
    "kind": "body",
@@ -116420,7 +113097,7 @@
      2004
     ]
    ],
-   "cars": 391,
+   "cars": 402,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:ae084428cd",
    "kind": "body",
@@ -116447,7 +113124,7 @@
      2004
     ]
    ],
-   "cars": 391,
+   "cars": 402,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:1b3e5368ca",
    "kind": "body",
@@ -116474,7 +113151,7 @@
      2004
     ]
    ],
-   "cars": 391,
+   "cars": 402,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:6081dfecfd",
    "kind": "body",
@@ -116501,7 +113178,7 @@
      2004
     ]
    ],
-   "cars": 391,
+   "cars": 402,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:46ad1dd397",
    "kind": "body",
@@ -116528,7 +113205,7 @@
      2004
     ]
    ],
-   "cars": 391,
+   "cars": 402,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:25006d7344",
    "kind": "body",
@@ -116555,7 +113232,7 @@
      2004
     ]
    ],
-   "cars": 391,
+   "cars": 402,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:4a6ae8f87e",
    "kind": "body",
@@ -116582,7 +113259,7 @@
      2004
     ]
    ],
-   "cars": 391,
+   "cars": 402,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:86325fdb9d",
    "kind": "body",
@@ -116609,7 +113286,7 @@
      2004
     ]
    ],
-   "cars": 391,
+   "cars": 402,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:2d99b27265",
    "kind": "body",
@@ -116636,7 +113313,7 @@
      2004
     ]
    ],
-   "cars": 391,
+   "cars": 402,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:da31f1a5c6",
    "kind": "body",
@@ -116663,7 +113340,7 @@
      2004
     ]
    ],
-   "cars": 391,
+   "cars": 402,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:6821d83924",
    "kind": "body",
@@ -116690,7 +113367,7 @@
      2004
     ]
    ],
-   "cars": 391,
+   "cars": 402,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:ae4cd8c813",
    "kind": "body",
@@ -116717,7 +113394,7 @@
      2004
     ]
    ],
-   "cars": 391,
+   "cars": 402,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:7a132eed3a",
    "kind": "body",
@@ -116744,7 +113421,7 @@
      2007
     ]
    ],
-   "cars": 387,
+   "cars": 407,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:0e71950e4b",
    "kind": "body",
@@ -116777,7 +113454,7 @@
      2012
     ]
    ],
-   "cars": 99,
+   "cars": 98,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:4ce1b809ca",
    "kind": "body",
@@ -116810,7 +113487,7 @@
      2012
     ]
    ],
-   "cars": 99,
+   "cars": 98,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:2c2d7dcd21",
    "kind": "body",
@@ -116837,7 +113514,7 @@
      2005
     ]
    ],
-   "cars": 180,
+   "cars": 183,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:9dd6a7cc3a",
    "kind": "body",
@@ -116858,21 +113535,15 @@
      2000
     ],
     [
-     "Chevrolet",
-     "Suburban",
-     2001,
-     2001
-    ],
-    [
      "GMC",
      "Sierra",
      2004,
      2004
     ]
    ],
-   "cars": 104,
+   "cars": 80,
    "cat": "window-regulator",
-   "id": "oem:gm:window-regulator:FL:654a2535f0",
+   "id": "oem:gm:window-regulator:FL:617b3fbbd0",
    "kind": "body",
    "note": "GM catalog lists #15871124 for both — regulator without motor; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:21:38Z",
@@ -116891,21 +113562,15 @@
      2000
     ],
     [
-     "Chevrolet",
-     "Suburban",
-     2001,
-     2001
-    ],
-    [
      "GMC",
      "Sierra",
      2004,
      2004
     ]
    ],
-   "cars": 104,
+   "cars": 80,
    "cat": "window-regulator",
-   "id": "oem:gm:window-regulator:FR:094fcc48c4",
+   "id": "oem:gm:window-regulator:FR:ef14688d6b",
    "kind": "body",
    "note": "GM catalog lists #15871125 for both — fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:21:33Z",
@@ -116930,7 +113595,7 @@
      2007
     ]
    ],
-   "cars": 387,
+   "cars": 407,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:164820b5ca",
    "kind": "body",
@@ -116957,7 +113622,7 @@
      2007
     ]
    ],
-   "cars": 387,
+   "cars": 407,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:91a2833cb4",
    "kind": "body",
@@ -116984,7 +113649,7 @@
      2007
     ]
    ],
-   "cars": 387,
+   "cars": 407,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:23433c5fb9",
    "kind": "body",
@@ -117011,7 +113676,7 @@
      2007
     ]
    ],
-   "cars": 387,
+   "cars": 407,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:a983506e26",
    "kind": "body",
@@ -117038,7 +113703,7 @@
      2007
     ]
    ],
-   "cars": 387,
+   "cars": 407,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:dc6bf5274d",
    "kind": "body",
@@ -117065,7 +113730,7 @@
      2007
     ]
    ],
-   "cars": 387,
+   "cars": 407,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:c071f04987",
    "kind": "body",
@@ -117098,7 +113763,7 @@
      2011
     ]
    ],
-   "cars": 185,
+   "cars": 189,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:18d29ea169",
    "kind": "body",
@@ -117131,7 +113796,7 @@
      2011
     ]
    ],
-   "cars": 185,
+   "cars": 189,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:222a0dcc1d",
    "kind": "body",
@@ -117164,7 +113829,7 @@
      2011
     ]
    ],
-   "cars": 185,
+   "cars": 189,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:d45372c7f3",
    "kind": "body",
@@ -117197,7 +113862,7 @@
      2011
     ]
    ],
-   "cars": 185,
+   "cars": 189,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:2d6852d3db",
    "kind": "body",
@@ -117230,7 +113895,7 @@
      2011
     ]
    ],
-   "cars": 185,
+   "cars": 189,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:2c7248a511",
    "kind": "body",
@@ -117263,7 +113928,7 @@
      2011
     ]
    ],
-   "cars": 185,
+   "cars": 189,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:957af92ae3",
    "kind": "body",
@@ -117290,7 +113955,7 @@
      2007
     ]
    ],
-   "cars": 387,
+   "cars": 407,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:b61b466d55",
    "kind": "body",
@@ -117323,7 +113988,7 @@
      2004
     ]
    ],
-   "cars": 198,
+   "cars": 212,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:e62ce60f06",
    "kind": "body",
@@ -117356,7 +114021,7 @@
      2004
     ]
    ],
-   "cars": 198,
+   "cars": 212,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:76de98d2b8",
    "kind": "body",
@@ -117383,7 +114048,7 @@
      2007
     ]
    ],
-   "cars": 387,
+   "cars": 407,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:27daae1592",
    "kind": "body",
@@ -117410,7 +114075,7 @@
      2007
     ]
    ],
-   "cars": 387,
+   "cars": 407,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:21cd8c8bcb",
    "kind": "body",
@@ -117437,7 +114102,7 @@
      2007
     ]
    ],
-   "cars": 387,
+   "cars": 407,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:0607cca349",
    "kind": "body",
@@ -117464,7 +114129,7 @@
      2007
     ]
    ],
-   "cars": 387,
+   "cars": 407,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:8337c9b06b",
    "kind": "body",
@@ -117491,7 +114156,7 @@
      1995
     ]
    ],
-   "cars": 69,
+   "cars": 75,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:6153608cd1",
    "kind": "body",
@@ -117518,7 +114183,7 @@
      1995
     ]
    ],
-   "cars": 69,
+   "cars": 75,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:844e42ce75",
    "kind": "body",
@@ -117551,7 +114216,7 @@
      2005
     ]
    ],
-   "cars": 146,
+   "cars": 153,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:af7d23d3d1",
    "kind": "body",
@@ -117584,7 +114249,7 @@
      2005
     ]
    ],
-   "cars": 146,
+   "cars": 153,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:cda62ffc8f",
    "kind": "body",
@@ -117617,7 +114282,7 @@
      2005
     ]
    ],
-   "cars": 146,
+   "cars": 153,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:4154bffbb7",
    "kind": "body",
@@ -117650,7 +114315,7 @@
      2005
     ]
    ],
-   "cars": 146,
+   "cars": 153,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:80ec3bdb2a",
    "kind": "body",
@@ -117683,7 +114348,7 @@
      2005
     ]
    ],
-   "cars": 146,
+   "cars": 153,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:a92c71a4ca",
    "kind": "body",
@@ -117716,7 +114381,7 @@
      2005
     ]
    ],
-   "cars": 146,
+   "cars": 153,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:bae1b81a5b",
    "kind": "body",
@@ -117749,7 +114414,7 @@
      2005
     ]
    ],
-   "cars": 146,
+   "cars": 153,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:a3b9244238",
    "kind": "body",
@@ -117782,7 +114447,7 @@
      2005
     ]
    ],
-   "cars": 146,
+   "cars": 153,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:17037e4854",
    "kind": "body",
@@ -117803,21 +114468,15 @@
      2000
     ],
     [
-     "Chevrolet",
-     "Suburban",
-     2001,
-     2001
-    ],
-    [
      "GMC",
      "Sierra",
      2004,
      2004
     ]
    ],
-   "cars": 104,
+   "cars": 80,
    "cat": "window-regulator",
-   "id": "oem:gm:window-regulator:FL:a6d138a053",
+   "id": "oem:gm:window-regulator:FL:bad5dc4663",
    "kind": "body",
    "note": "GM catalog lists #19120846 for both — regulator without motor; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:21:17Z",
@@ -117836,21 +114495,15 @@
      2000
     ],
     [
-     "Chevrolet",
-     "Suburban",
-     2001,
-     2001
-    ],
-    [
      "GMC",
      "Sierra",
      2004,
      2004
     ]
    ],
-   "cars": 104,
+   "cars": 80,
    "cat": "window-regulator",
-   "id": "oem:gm:window-regulator:FR:b9b65c30d8",
+   "id": "oem:gm:window-regulator:FR:2e4219c9ba",
    "kind": "body",
    "note": "GM catalog lists #19120847 for both — regulator without motor; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:21:22Z",
@@ -117875,7 +114528,7 @@
      2000
     ]
    ],
-   "cars": 69,
+   "cars": 67,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:7c19e2c65b",
    "kind": "body",
@@ -117908,7 +114561,7 @@
      2002
     ]
    ],
-   "cars": 246,
+   "cars": 258,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL+FR+RL+RR+SL+SR:a702208886",
    "kind": "body",
@@ -117941,7 +114594,7 @@
      2002
     ]
    ],
-   "cars": 246,
+   "cars": 258,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL+FR+RL+RR+SL+SR:1bc70105c8",
    "kind": "body",
@@ -117968,7 +114621,7 @@
      2003
     ]
    ],
-   "cars": 140,
+   "cars": 145,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:dbdfdb5473",
    "kind": "body",
@@ -117995,7 +114648,7 @@
      2003
     ]
    ],
-   "cars": 140,
+   "cars": 145,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:7d5a53d0dd",
    "kind": "body",
@@ -118028,7 +114681,7 @@
      2011
     ]
    ],
-   "cars": 185,
+   "cars": 189,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:5b573a7074",
    "kind": "body",
@@ -118061,7 +114714,7 @@
      2011
     ]
    ],
-   "cars": 185,
+   "cars": 189,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:e8fad881ae",
    "kind": "body",
@@ -118094,7 +114747,7 @@
      2011
     ]
    ],
-   "cars": 185,
+   "cars": 189,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:5ca230db3e",
    "kind": "body",
@@ -118127,7 +114780,7 @@
      2011
     ]
    ],
-   "cars": 185,
+   "cars": 189,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:5d2b30e836",
    "kind": "body",
@@ -118135,33 +114788,6 @@
    "oldest_retrieved": "2026-11-05T07:22:13Z",
    "pn": [
     "19167715"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chevrolet",
-     "Suburban",
-     2001,
-     2001
-    ],
-    [
-     "GMC",
-     "Sierra",
-     2004,
-     2004
-    ]
-   ],
-   "cars": 39,
-   "cat": "window-regulator",
-   "id": "oem:gm:window-regulator:RR:c1730c80e5",
-   "kind": "body",
-   "note": "GM catalog lists #19208467 for both — window motor only; fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T02:13:52Z",
-   "pn": [
-    "19208467"
    ],
    "reason": "conditional",
    "tier": "likely"
@@ -118181,7 +114807,7 @@
      2006
     ]
    ],
-   "cars": 334,
+   "cars": 351,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:240964ac61",
    "kind": "body",
@@ -118208,7 +114834,7 @@
      2006
     ]
    ],
-   "cars": 334,
+   "cars": 351,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:cd35a5a66f",
    "kind": "body",
@@ -118235,7 +114861,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:16a94e6ebb",
    "kind": "body",
@@ -118262,7 +114888,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:d1918cea50",
    "kind": "body",
@@ -118289,7 +114915,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:1ab530e45f",
    "kind": "body",
@@ -118316,7 +114942,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:f83344420c",
    "kind": "body",
@@ -118343,7 +114969,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:600acef150",
    "kind": "body",
@@ -118370,7 +114996,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:af7f4a506a",
    "kind": "body",
@@ -118397,7 +115023,7 @@
      2007
     ]
    ],
-   "cars": 387,
+   "cars": 407,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:952c95c1ca",
    "kind": "body",
@@ -118424,7 +115050,7 @@
      2007
     ]
    ],
-   "cars": 387,
+   "cars": 407,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:e75c9aebc7",
    "kind": "body",
@@ -118451,7 +115077,7 @@
      2007
     ]
    ],
-   "cars": 387,
+   "cars": 407,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:8ae44ed0d6",
    "kind": "body",
@@ -118478,7 +115104,7 @@
      2007
     ]
    ],
-   "cars": 387,
+   "cars": 407,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:516dcb5dfa",
    "kind": "body",
@@ -118488,60 +115114,6 @@
     "19301975"
    ],
    "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chevrolet",
-     "Suburban",
-     2001,
-     2001
-    ],
-    [
-     "GMC",
-     "Sierra",
-     2004,
-     2004
-    ]
-   ],
-   "cars": 39,
-   "cat": "window-regulator",
-   "id": "oem:gm:window-regulator:RR:54c6342016",
-   "kind": "body",
-   "note": "GM catalog lists #19301980 for both — regulator without motor; option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T02:13:40Z",
-   "pn": [
-    "19301980"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chevrolet",
-     "Suburban",
-     2001,
-     2001
-    ],
-    [
-     "GMC",
-     "Sierra",
-     2004,
-     2004
-    ]
-   ],
-   "cars": 39,
-   "cat": "window-regulator",
-   "id": "oem:gm:window-regulator:RL:8d575f026f",
-   "kind": "body",
-   "note": "GM catalog lists #19301981 for both — regulator without motor; option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T02:13:35Z",
-   "pn": [
-    "19301981"
-   ],
-   "reason": "option",
    "tier": "likely"
   },
   {
@@ -118565,7 +115137,7 @@
      2004
     ]
    ],
-   "cars": 224,
+   "cars": 231,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:abbaf2d4bd",
    "kind": "body",
@@ -118592,7 +115164,7 @@
      2004
     ]
    ],
-   "cars": 391,
+   "cars": 402,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:4bc178f6eb",
    "kind": "body",
@@ -118619,7 +115191,7 @@
      2004
     ]
    ],
-   "cars": 391,
+   "cars": 402,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:775e9a961a",
    "kind": "body",
@@ -118646,7 +115218,7 @@
      2004
     ]
    ],
-   "cars": 391,
+   "cars": 402,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:70d865d615",
    "kind": "body",
@@ -118673,7 +115245,7 @@
      2004
     ]
    ],
-   "cars": 391,
+   "cars": 402,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:4bcf6eda65",
    "kind": "body",
@@ -118700,7 +115272,7 @@
      2007
     ]
    ],
-   "cars": 387,
+   "cars": 407,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:d21b988686",
    "kind": "body",
@@ -118727,7 +115299,7 @@
      2007
     ]
    ],
-   "cars": 387,
+   "cars": 407,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:0fcf26e738",
    "kind": "body",
@@ -118754,7 +115326,7 @@
      2007
     ]
    ],
-   "cars": 387,
+   "cars": 407,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:cb4777b3db",
    "kind": "body",
@@ -118787,7 +115359,7 @@
      2011
     ]
    ],
-   "cars": 185,
+   "cars": 189,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:a9d88ac6ef",
    "kind": "body",
@@ -118814,7 +115386,7 @@
      2008
     ]
    ],
-   "cars": 609,
+   "cars": 633,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:84e55d225c",
    "kind": "body",
@@ -118841,7 +115413,7 @@
      2008
     ]
    ],
-   "cars": 609,
+   "cars": 633,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:bf233115e8",
    "kind": "body",
@@ -118868,7 +115440,7 @@
      2008
     ]
    ],
-   "cars": 609,
+   "cars": 633,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:1880379fcf",
    "kind": "body",
@@ -118901,7 +115473,7 @@
      2007
     ]
    ],
-   "cars": 470,
+   "cars": 474,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:c3b2f309be",
    "kind": "body",
@@ -118934,7 +115506,7 @@
      2007
     ]
    ],
-   "cars": 470,
+   "cars": 474,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:9894b99607",
    "kind": "body",
@@ -118967,7 +115539,7 @@
      2007
     ]
    ],
-   "cars": 470,
+   "cars": 474,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:5596bbf598",
    "kind": "body",
@@ -118994,7 +115566,7 @@
      2007
     ]
    ],
-   "cars": 387,
+   "cars": 407,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:53f1305b86",
    "kind": "body",
@@ -119021,7 +115593,7 @@
      2007
     ]
    ],
-   "cars": 387,
+   "cars": 407,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:d20f5ba0ce",
    "kind": "body",
@@ -119054,7 +115626,7 @@
      2012
     ]
    ],
-   "cars": 127,
+   "cars": 128,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:b97887879c",
    "kind": "body",
@@ -119087,7 +115659,7 @@
      2012
     ]
    ],
-   "cars": 127,
+   "cars": 128,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:08557a0596",
    "kind": "body",
@@ -119114,7 +115686,7 @@
      2012
     ]
    ],
-   "cars": 100,
+   "cars": 101,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:4a9542e90f",
    "kind": "body",
@@ -119141,7 +115713,7 @@
      2011
     ]
    ],
-   "cars": 297,
+   "cars": 309,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:ec4d32fd22",
    "kind": "body",
@@ -119174,7 +115746,7 @@
      2012
     ]
    ],
-   "cars": 127,
+   "cars": 128,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:903947668a",
    "kind": "body",
@@ -119207,7 +115779,7 @@
      2012
     ]
    ],
-   "cars": 127,
+   "cars": 128,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:1f64c8c1c5",
    "kind": "body",
@@ -119234,7 +115806,7 @@
      2012
     ]
    ],
-   "cars": 1093,
+   "cars": 1142,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:a7060a69b4",
    "kind": "body",
@@ -119267,7 +115839,7 @@
      2012
     ]
    ],
-   "cars": 127,
+   "cars": 128,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:01a7051fcf",
    "kind": "body",
@@ -119300,7 +115872,7 @@
      2012
     ]
    ],
-   "cars": 127,
+   "cars": 128,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:f18c7b631b",
    "kind": "body",
@@ -119333,7 +115905,7 @@
      2012
     ]
    ],
-   "cars": 127,
+   "cars": 128,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:2cd88ab23e",
    "kind": "body",
@@ -119366,7 +115938,7 @@
      2012
     ]
    ],
-   "cars": 127,
+   "cars": 128,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:4c6a68876f",
    "kind": "body",
@@ -119393,7 +115965,7 @@
      2013
     ]
    ],
-   "cars": 289,
+   "cars": 294,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:d76084afa3",
    "kind": "body",
@@ -119426,7 +115998,7 @@
      2012
     ]
    ],
-   "cars": 127,
+   "cars": 128,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:0908bd1120",
    "kind": "body",
@@ -119459,7 +116031,7 @@
      2012
     ]
    ],
-   "cars": 127,
+   "cars": 128,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:c52ea9e5d2",
    "kind": "body",
@@ -119504,21 +116076,15 @@
      2012
     ],
     [
-     "Chevrolet",
-     "Suburban",
-     2001,
-     2001
-    ],
-    [
      "GMC",
      "Sierra",
      2004,
      2004
     ]
    ],
-   "cars": 296,
+   "cars": 272,
    "cat": "window-regulator",
-   "id": "oem:gm:window-regulator:FL:7641e9a1d5",
+   "id": "oem:gm:window-regulator:FL:c11f71989f",
    "kind": "body",
    "note": "GM catalog lists #20945138 for both — regulator with motor; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:21:09Z",
@@ -119561,21 +116127,15 @@
      2012
     ],
     [
-     "Chevrolet",
-     "Suburban",
-     2001,
-     2001
-    ],
-    [
      "GMC",
      "Sierra",
      2004,
      2004
     ]
    ],
-   "cars": 296,
+   "cars": 272,
    "cat": "window-regulator",
-   "id": "oem:gm:window-regulator:FR:fbc1d9912a",
+   "id": "oem:gm:window-regulator:FR:51523ac688",
    "kind": "body",
    "note": "GM catalog lists #20945139 for both — regulator with motor; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:21:13Z",
@@ -119606,7 +116166,7 @@
      2012
     ]
    ],
-   "cars": 127,
+   "cars": 128,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:4108335bfb",
    "kind": "body",
@@ -119639,7 +116199,7 @@
      2012
     ]
    ],
-   "cars": 127,
+   "cars": 128,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:ee85bf4df3",
    "kind": "body",
@@ -119666,7 +116226,7 @@
      2015
     ]
    ],
-   "cars": 518,
+   "cars": 539,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:b75453cf67",
    "kind": "body",
@@ -119693,7 +116253,7 @@
      2013
     ]
    ],
-   "cars": 289,
+   "cars": 294,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:40123e348a",
    "kind": "body",
@@ -119720,7 +116280,7 @@
      2003
     ]
    ],
-   "cars": 140,
+   "cars": 145,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:9a78e1bccc",
    "kind": "body",
@@ -119747,7 +116307,7 @@
      2003
     ]
    ],
-   "cars": 140,
+   "cars": 145,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:953cc860ea",
    "kind": "body",
@@ -119774,7 +116334,7 @@
      2004
     ]
    ],
-   "cars": 391,
+   "cars": 402,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:8543b702e3",
    "kind": "body",
@@ -119801,7 +116361,7 @@
      2004
     ]
    ],
-   "cars": 391,
+   "cars": 402,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:178a968699",
    "kind": "body",
@@ -119828,7 +116388,7 @@
      2004
     ]
    ],
-   "cars": 391,
+   "cars": 402,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:38a446cf61",
    "kind": "body",
@@ -119855,7 +116415,7 @@
      2004
     ]
    ],
-   "cars": 177,
+   "cars": 182,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:52fe27b413",
    "kind": "body",
@@ -119882,7 +116442,7 @@
      2004
     ]
    ],
-   "cars": 177,
+   "cars": 182,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:8aa81ace11",
    "kind": "body",
@@ -119909,7 +116469,7 @@
      2004
     ]
    ],
-   "cars": 177,
+   "cars": 182,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:446b3e2a87",
    "kind": "body",
@@ -119936,7 +116496,7 @@
      2004
     ]
    ],
-   "cars": 177,
+   "cars": 182,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:f010eeb531",
    "kind": "body",
@@ -119963,7 +116523,7 @@
      2004
     ]
    ],
-   "cars": 177,
+   "cars": 182,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:7707f063fe",
    "kind": "body",
@@ -119990,7 +116550,7 @@
      2004
     ]
    ],
-   "cars": 177,
+   "cars": 182,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:207376ce64",
    "kind": "body",
@@ -120017,7 +116577,7 @@
      2007
     ]
    ],
-   "cars": 387,
+   "cars": 407,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:f05878400c",
    "kind": "body",
@@ -120044,7 +116604,7 @@
      2007
     ]
    ],
-   "cars": 387,
+   "cars": 407,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:988cf1b5d9",
    "kind": "body",
@@ -120071,7 +116631,7 @@
      2007
     ]
    ],
-   "cars": 387,
+   "cars": 407,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:2a200f7e4f",
    "kind": "body",
@@ -120098,7 +116658,7 @@
      2007
     ]
    ],
-   "cars": 387,
+   "cars": 407,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:0e0fd58711",
    "kind": "body",
@@ -120131,7 +116691,7 @@
      2005
     ]
    ],
-   "cars": 146,
+   "cars": 153,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:515f4d0383",
    "kind": "body",
@@ -120164,7 +116724,7 @@
      2005
     ]
    ],
-   "cars": 146,
+   "cars": 153,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:0b922107aa",
    "kind": "body",
@@ -120197,7 +116757,7 @@
      2005
     ]
    ],
-   "cars": 146,
+   "cars": 153,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:be24a3e0a0",
    "kind": "body",
@@ -120230,7 +116790,7 @@
      2005
     ]
    ],
-   "cars": 146,
+   "cars": 153,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:2f29cacfae",
    "kind": "body",
@@ -120257,7 +116817,7 @@
      2004
     ]
    ],
-   "cars": 177,
+   "cars": 182,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:4150c115a6",
    "kind": "body",
@@ -120284,7 +116844,7 @@
      2004
     ]
    ],
-   "cars": 177,
+   "cars": 182,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:ed73a04832",
    "kind": "body",
@@ -120311,7 +116871,7 @@
      2007
     ]
    ],
-   "cars": 415,
+   "cars": 417,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:5142940e97",
    "kind": "body",
@@ -120338,7 +116898,7 @@
      2007
     ]
    ],
-   "cars": 415,
+   "cars": 417,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:fd64441e4d",
    "kind": "body",
@@ -120365,7 +116925,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:162b3e2f6d",
    "kind": "body",
@@ -120392,7 +116952,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:43ea77d07c",
    "kind": "body",
@@ -120419,7 +116979,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:c9f61f5b5c",
    "kind": "body",
@@ -120446,7 +117006,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:e6508dc7df",
    "kind": "body",
@@ -120473,7 +117033,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:4ba38a8bc4",
    "kind": "body",
@@ -120500,7 +117060,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:e690eaf3eb",
    "kind": "body",
@@ -120527,7 +117087,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:cd620a9cd9",
    "kind": "body",
@@ -120554,7 +117114,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:79c91d4197",
    "kind": "body",
@@ -120581,7 +117141,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:f2541a5a51",
    "kind": "body",
@@ -120598,33 +117158,6 @@
     [
      "Cadillac",
      "DeVille",
-     1998,
-     1998
-    ],
-    [
-     "Cadillac",
-     "Seville",
-     2003,
-     2003
-    ]
-   ],
-   "cars": 75,
-   "cat": "window-switch",
-   "id": "oem:gm:window-switch:DM:98d8810f8c",
-   "kind": "body",
-   "note": "GM catalog lists #25690121 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T10:26:27Z",
-   "pn": [
-    "25690121"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "DeVille",
      2004,
      2004
     ],
@@ -120635,34 +117168,7 @@
      2003
     ]
    ],
-   "cars": 144,
-   "cat": "window-switch",
-   "id": "oem:gm:window-switch:DM:afcece8f5d",
-   "kind": "body",
-   "note": "GM catalog lists #25690125 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T07:40:33Z",
-   "pn": [
-    "25690125"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "DeVille",
-     2004,
-     2004
-    ],
-    [
-     "Cadillac",
-     "Seville",
-     2003,
-     2003
-    ]
-   ],
-   "cars": 144,
+   "cars": 151,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:df9d6574df",
    "kind": "body",
@@ -120689,7 +117195,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:7b2b5c257d",
    "kind": "body",
@@ -120716,7 +117222,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:0dac7dce5f",
    "kind": "body",
@@ -120743,7 +117249,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:3dbe7fc35c",
    "kind": "body",
@@ -120770,7 +117276,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:cf44ff5eab",
    "kind": "body",
@@ -120797,7 +117303,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:8ef7fa96ac",
    "kind": "body",
@@ -120824,7 +117330,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:b8fa53031e",
    "kind": "body",
@@ -120851,7 +117357,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:adcd306db3",
    "kind": "body",
@@ -120878,7 +117384,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:b419e15c2e",
    "kind": "body",
@@ -120905,7 +117411,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:91c8a7cb2b",
    "kind": "body",
@@ -120932,7 +117438,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:9f2a0564eb",
    "kind": "body",
@@ -120959,7 +117465,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:f2c5da099c",
    "kind": "body",
@@ -120986,7 +117492,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:85f4c278f7",
    "kind": "body",
@@ -121013,7 +117519,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:4ea9e45c82",
    "kind": "body",
@@ -121040,7 +117546,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:03dae56bd5",
    "kind": "body",
@@ -121067,7 +117573,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:8fe6aaf11b",
    "kind": "body",
@@ -121094,7 +117600,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:b1352c6e37",
    "kind": "body",
@@ -121121,7 +117627,7 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 151,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:30c0a87ce1",
    "kind": "body",
@@ -121154,7 +117660,7 @@
      2007
     ]
    ],
-   "cars": 508,
+   "cars": 511,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:a9c159bc63",
    "kind": "body",
@@ -121181,7 +117687,7 @@
      2007
     ]
    ],
-   "cars": 443,
+   "cars": 447,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:10cdecac1b",
    "kind": "body",
@@ -121208,7 +117714,7 @@
      2007
     ]
    ],
-   "cars": 443,
+   "cars": 447,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:1c2738cce4",
    "kind": "body",
@@ -121247,7 +117753,7 @@
      2006
     ]
    ],
-   "cars": 234,
+   "cars": 237,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:53a5121102",
    "kind": "body",
@@ -121280,7 +117786,7 @@
      2007
     ]
    ],
-   "cars": 508,
+   "cars": 511,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:6caeda9959",
    "kind": "body",
@@ -121307,7 +117813,7 @@
      2007
     ]
    ],
-   "cars": 443,
+   "cars": 447,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:8fd2e9e8c1",
    "kind": "body",
@@ -121334,7 +117840,7 @@
      2007
     ]
    ],
-   "cars": 443,
+   "cars": 447,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:d9e75a9c63",
    "kind": "body",
@@ -121367,7 +117873,7 @@
      2007
     ]
    ],
-   "cars": 508,
+   "cars": 511,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:f1999aa961",
    "kind": "body",
@@ -121400,7 +117906,7 @@
      2007
     ]
    ],
-   "cars": 508,
+   "cars": 511,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:5d113bbac3",
    "kind": "body",
@@ -121427,7 +117933,7 @@
      2008
     ]
    ],
-   "cars": 609,
+   "cars": 633,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:f200a622d6",
    "kind": "body",
@@ -121454,7 +117960,7 @@
      2008
     ]
    ],
-   "cars": 609,
+   "cars": 633,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:078ef265fc",
    "kind": "body",
@@ -121481,7 +117987,7 @@
      2008
     ]
    ],
-   "cars": 609,
+   "cars": 633,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:7a3b59c45a",
    "kind": "body",
@@ -121508,7 +118014,7 @@
      2008
     ]
    ],
-   "cars": 609,
+   "cars": 633,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:a568ca529c",
    "kind": "body",
@@ -121541,7 +118047,7 @@
      2007
     ]
    ],
-   "cars": 508,
+   "cars": 511,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:155b4754b2",
    "kind": "body",
@@ -121574,7 +118080,7 @@
      2007
     ]
    ],
-   "cars": 508,
+   "cars": 511,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:90b0edc73d",
    "kind": "body",
@@ -121607,7 +118113,7 @@
      2007
     ]
    ],
-   "cars": 508,
+   "cars": 511,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:c55f9c4b4b",
    "kind": "body",
@@ -121634,7 +118140,7 @@
      2007
     ]
    ],
-   "cars": 443,
+   "cars": 447,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:9fa19b6486",
    "kind": "body",
@@ -121661,7 +118167,7 @@
      2007
     ]
    ],
-   "cars": 415,
+   "cars": 417,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:c764d0f7d4",
    "kind": "body",
@@ -121682,21 +118188,15 @@
      2000
     ],
     [
-     "Chevrolet",
-     "Suburban",
-     2001,
-     2001
-    ],
-    [
      "GMC",
      "Sierra",
      2004,
      2004
     ]
    ],
-   "cars": 104,
+   "cars": 80,
    "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:L:cd999dc144",
+   "id": "oem:gm:side-mirrors:L:dbbc6e03ff",
    "kind": "body",
    "note": "GM catalog lists #25876714 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:20:22Z",
@@ -121715,21 +118215,15 @@
      2000
     ],
     [
-     "Chevrolet",
-     "Suburban",
-     2001,
-     2001
-    ],
-    [
      "GMC",
      "Sierra",
      2004,
      2004
     ]
    ],
-   "cars": 104,
+   "cars": 80,
    "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:R:f4cc0ec534",
+   "id": "oem:gm:side-mirrors:R:c220e29b49",
    "kind": "body",
    "note": "GM catalog lists #25876715 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:20:17Z",
@@ -121748,21 +118242,15 @@
      2000
     ],
     [
-     "Chevrolet",
-     "Suburban",
-     2001,
-     2001
-    ],
-    [
      "GMC",
      "Sierra",
      2004,
      2004
     ]
    ],
-   "cars": 104,
+   "cars": 80,
    "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:R:2334b3de26",
+   "id": "oem:gm:side-mirrors:R:419e1cc4f1",
    "kind": "body",
    "note": "GM catalog lists #25876716 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:20:25Z",
@@ -121787,7 +118275,7 @@
      2008
     ]
    ],
-   "cars": 387,
+   "cars": 396,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:115cd20be1",
    "kind": "body",
@@ -121814,7 +118302,7 @@
      2008
     ]
    ],
-   "cars": 387,
+   "cars": 396,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:af1598be2c",
    "kind": "body",
@@ -121841,7 +118329,7 @@
      2008
     ]
    ],
-   "cars": 609,
+   "cars": 633,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:243df4d154",
    "kind": "body",
@@ -121868,7 +118356,7 @@
      2008
     ]
    ],
-   "cars": 609,
+   "cars": 633,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:de9d93fe8c",
    "kind": "body",
@@ -121895,7 +118383,7 @@
      2004
     ]
    ],
-   "cars": 391,
+   "cars": 402,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:6484422bec",
    "kind": "body",
@@ -121922,7 +118410,7 @@
      2004
     ]
    ],
-   "cars": 391,
+   "cars": 402,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:bf5778ec5c",
    "kind": "body",
@@ -121949,7 +118437,7 @@
      1996
     ]
    ],
-   "cars": 65,
+   "cars": 63,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:d316858901",
    "kind": "body",
@@ -121976,7 +118464,7 @@
      1996
     ]
    ],
-   "cars": 65,
+   "cars": 63,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:762e18e446",
    "kind": "body",
@@ -122003,7 +118491,7 @@
      1998
     ]
    ],
-   "cars": 123,
+   "cars": 133,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:00f17f69c1",
    "kind": "body",
@@ -122030,7 +118518,7 @@
      1998
     ]
    ],
-   "cars": 123,
+   "cars": 133,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:dd8cdf523e",
    "kind": "body",
@@ -122063,7 +118551,7 @@
      2020
     ]
    ],
-   "cars": 287,
+   "cars": 302,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:c26b6640c5",
    "kind": "body",
@@ -122096,7 +118584,7 @@
      2020
     ]
    ],
-   "cars": 287,
+   "cars": 302,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:beae76b046",
    "kind": "body",
@@ -122129,7 +118617,7 @@
      2020
     ]
    ],
-   "cars": 287,
+   "cars": 302,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:449ee3b062",
    "kind": "body",
@@ -122152,19 +118640,13 @@
     [
      "Chevrolet",
      "Malibu",
-     2016,
-     2016
-    ],
-    [
-     "Chevrolet",
-     "Malibu",
      2020,
      2020
     ]
    ],
-   "cars": 287,
+   "cars": 94,
    "cat": "window-switch",
-   "id": "oem:gm:window-switch:DM:c58cc8824b",
+   "id": "oem:gm:window-switch:DM:50b8ae8371",
    "kind": "body",
    "note": "GM catalog lists #84512890 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T08:34:20Z",
@@ -122172,33 +118654,6 @@
     "84512890"
    ],
    "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chevrolet",
-     "Suburban",
-     2001,
-     2001
-    ],
-    [
-     "GMC",
-     "Sierra",
-     2004,
-     2004
-    ]
-   ],
-   "cars": 39,
-   "cat": "window-regulator",
-   "id": "oem:gm:window-regulator:RL:53ce65b2d4",
-   "kind": "body",
-   "note": "GM catalog lists #88937199 for both — window motor only; fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T02:13:56Z",
-   "pn": [
-    "88937199"
-   ],
-   "reason": "conditional",
    "tier": "likely"
   },
   {
@@ -122222,7 +118677,7 @@
      1995
     ]
    ],
-   "cars": 84,
+   "cars": 89,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL+FR:fc32b8c33c",
    "kind": "body",
@@ -122249,7 +118704,7 @@
      2004
     ]
    ],
-   "cars": 391,
+   "cars": 402,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:a959bbf3c4",
    "kind": "body",
@@ -122276,7 +118731,7 @@
      2004
     ]
    ],
-   "cars": 391,
+   "cars": 402,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:14bc47e6d3",
    "kind": "body",
@@ -122303,7 +118758,7 @@
      2004
     ]
    ],
-   "cars": 391,
+   "cars": 402,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:dba3565557",
    "kind": "body",
@@ -122330,7 +118785,7 @@
      2004
     ]
    ],
-   "cars": 391,
+   "cars": 402,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:57a4b895c9",
    "kind": "body",
@@ -122357,7 +118812,7 @@
      2006
     ]
    ],
-   "cars": 334,
+   "cars": 351,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:1784eefa4e",
    "kind": "body",
@@ -122384,7 +118839,7 @@
      2006
     ]
    ],
-   "cars": 334,
+   "cars": 351,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:409fbd7f1c",
    "kind": "body",
@@ -122411,7 +118866,7 @@
      2004
     ]
    ],
-   "cars": 177,
+   "cars": 182,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:8ca180ddb0",
    "kind": "body",
@@ -122438,7 +118893,7 @@
      2004
     ]
    ],
-   "cars": 177,
+   "cars": 182,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:1882504ecd",
    "kind": "body",
@@ -122465,7 +118920,7 @@
      2004
     ]
    ],
-   "cars": 177,
+   "cars": 182,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:ecd521851e",
    "kind": "body",
@@ -122492,7 +118947,7 @@
      2004
     ]
    ],
-   "cars": 177,
+   "cars": 182,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:83797b6e24",
    "kind": "body",
@@ -122519,7 +118974,7 @@
      2016
     ]
    ],
-   "cars": 353,
+   "cars": 378,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:40fce38b64",
    "kind": "body",
@@ -122546,7 +119001,7 @@
      2016
     ]
    ],
-   "cars": 151,
+   "cars": 155,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:bdaf27ee2f",
    "kind": "body",
@@ -122573,7 +119028,7 @@
      2016
     ]
    ],
-   "cars": 151,
+   "cars": 155,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:8484eaad66",
    "kind": "body",
@@ -122587,7 +119042,7 @@
   }
  ],
  "ns": "gm",
- "policy_sha256": "26723f1085163ddb5ccb4da16aaa43b7232b40d5196577a97ca7bcd8a8337493",
+ "policy_sha256": "da5f80482b2077fd5c1849e9f508eb2b75a4a80937eadec8f0318154235657f1",
  "raw": {
   "commit": "42683f9d86450b6bd00eb7fc7cc9640154607768",
   "ref": "42683f9d86450b6bd00eb7fc7cc9640154607768",

@@ -2,7 +2,7 @@
  "draft": {
   "entries": [
    {
-    "basis": "catalog prints 'Taos' (14 fitment rows, oem-raw@42683f9); normalize_model canon 'Taos', 5 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints 'Taos' (14 fitment rows, oem-raw@42683f9); normalize_model canon 'Taos', 5 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Volkswagen",
     "cat_model": "Taos",
     "ns": "vag",
@@ -419,15 +419,6 @@
     "feed": [
      "Volkswagen",
      "EuroVan"
-    ],
-    "why": "no feed car under the canonical name"
-   },
-   {
-    "cat_make": "Volkswagen",
-    "cat_model": "Golf R",
-    "feed": [
-     "Volkswagen",
-     "Golf R"
     ],
     "why": "no feed car under the canonical name"
    },
@@ -1104,19 +1095,6 @@
   },
   {
    "cat_make": "Volkswagen",
-   "cat_model": "Golf R",
-   "feed_cars": 0,
-   "fitment_rows": 78,
-   "ns": "vag",
-   "proposed": {
-    "make": "Volkswagen",
-    "model": "Golf R",
-    "trims": "*"
-   },
-   "squash_neighbours": []
-  },
-  {
-   "cat_make": "Volkswagen",
    "cat_model": "Golf SportWagen",
    "feed_cars": 0,
    "fitment_rows": 60,
@@ -1188,7 +1166,7 @@
   {
    "cat_make": "Volkswagen",
    "cat_model": "Rabbit",
-   "feed_cars": 131,
+   "feed_cars": 136,
    "fitment_rows": 62,
    "ns": "vag",
    "proposed": {

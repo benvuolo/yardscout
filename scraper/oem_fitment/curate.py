@@ -370,7 +370,7 @@ class Curation:
         if self.t_list_rows.get((T, cat)):
             # a row restricted to another make's division ("Lincoln Division
             # Derivative" on a Ford page) is not listed for T (§5.6)
-            on = [lr for lr in rows if lr.matched and not _other_division(lr.notes, T[0])]
+            on = [lr for lr in rows if lr.matched and not self.note_excludes(lr.notes, T)]
             # §5.6: T's own manifest rows for that pn, matched or not: a second
             # row of the same number on T's page ('Japan Built') restricts it
             # even when the crawler did not match that row (review F9).
@@ -380,11 +380,57 @@ class Curation:
             src += [("note", n) for n in self.note_position_texts(notes, T)]     # §5.8
             return bool(on), notes, src, [lr.pointer for lr in on], "manifest"
         recs = [r for r in self.t_seed_records.get((T, cat), [])
-                if r.key == c.key and not _other_division(r.note_texts, T[0])]
+                if r.key == c.key and not self.note_excludes(r.note_texts, T)]
         notes = [n for r in recs for n in r.note_texts]
         src = [("location", x) for r in recs for x in r.list_location] + [("slug", r.list_url) for r in recs]
         src += [("note", n) for n in self.note_position_texts(notes, T)]
         return bool(recs), notes, src, [r.pointer for r in recs], "seed"
+
+    def note_excludes(self, notes, T) -> bool:
+        """§5.6 model restriction (2026-11-09): True when T's own-page row
+        restricts the number to another model, body or make, so it is not
+        listed for T. Option columns and notes on shared diagram pages name
+        the vehicle the number is for:
+        - another make's division ("Lincoln Division Derivative", Ford);
+        - Mopar brand codes ("C - CHRYSLER", "D - DODGE", "E - DODGE AWD");
+        - catalog model names of this namespace ("Jetta; Sedan" on a VW page
+          shared by Golf/Jetta; "Camry Hybrid; SE" on a Camry page);
+        - subarupartsdeal "Fitting Vehicle Options" body codes on the
+          Legacy/Outback/Baja pages (S/W = Legacy, OBK/SOBK/WOBK = Outback,
+          P/BAJA = Baja).
+        Only ever removes claims; an unparsed note restricts nothing here."""
+        if _other_division(notes, T[0]):
+            return True
+        if _brand_codes_exclude(notes, T[0]):
+            return True
+        if self.ns == "subaru" and _subaru_body_excludes(notes, T[1]):
+            return True
+        return self._model_names_exclude(notes, T)
+
+    def _model_names_exclude(self, notes, T) -> bool:
+        names = getattr(self, "_note_model_names", None)
+        if names is None:
+            # catalog model names, plus the feed models they map to ('Camry
+            # Hybrid' is a feed model; the catalog files it under Camry)
+            pool = set(getattr(self, "ns_models", set())) | {
+                md.lower() for ms in getattr(self, "class_feed_models", {}).values() for (_mk, md) in ms}
+            names = sorted({m for m in pool
+                            if len(m) >= 3 and m not in _MODEL_NAME_STOP and not m.isdigit()},
+                           key=lambda m: (-len(m), m))
+            self._note_model_names = names
+            self._note_model_rx = [(m, re.compile(r"(?<![A-Za-z0-9])" + re.escape(m) + r"(?![A-Za-z0-9])", re.I))
+                                   for m in names]
+        own = {T[1].lower()} | {cm.lower() for (_mk, cm) in self.t_sources.get(T, set())}
+        for n in notes or []:
+            text = n or ""
+            named = set()
+            for m, rx in self._note_model_rx:
+                if rx.search(text):
+                    named.add(m)
+                    text = rx.sub(" ", text)   # 'Camry Hybrid' is not also 'Camry'
+            if named and not (named & own):
+                return True
+        return False
 
     def note_position_texts(self, notes, T) -> list:
         """§5.8: notes feed position resolution through their POSITION
@@ -1210,6 +1256,7 @@ class Curation:
         out = []
         self.likely_own_page_drops = Counter()   # cat -> vehicle-years left out (§5.16 own-page rule)
         self.held_exterior = []                  # §5.16 exterior hold (owner checklist)
+        self.likely_note_restricted = Counter()  # cat -> vehicle-years a class-wide note restricts away
         for (key, cat), c in sorted(self.classes.items()):
             if self.kinds.get(cat) != "body" or cat in policy.PHASE3_CATS:
                 continue
@@ -1221,17 +1268,29 @@ class Curation:
             # no claim. A window switch must also resolve to the driver
             # master slot: an unresolved side may be a passenger or
             # single-gang switch (4602531AD "1 gang", quantity 2).
-            Ts, whys, slots = [], set(), set()
+            cand, class_notes = [], []
             for T in sorted(self.class_Ts.get((key, cat), ())):
                 m = (self.cells_info.get((T, cat)) or {}).get("members", {}).get(key)
                 if not m or m["cover"] not in ("yes", "maybe"):
                     continue
                 if cat == "window-switch" and (m["slot"].reason or m["slot"].slots != ("DM",)):
                     continue
-                if policy.LIKELY_REQUIRES_OWN_PAGE and not self.own_page(T, cat, c)[0]:
+                on, notes = self.own_page(T, cat, c)[:2]
+                if policy.LIKELY_REQUIRES_OWN_PAGE and not on:
                     # §5.16 own-page rule: the product page's fitment table
                     # alone can be a platform rollup
                     self.likely_own_page_drops[cat] += 1
+                    continue
+                cand.append((T, m))
+                class_notes += notes
+            # §5.6 model restriction, class-wide (2026-11-09): one own page
+            # restricting the number to a make/model/body ('C - CHRYSLER' on
+            # the 2006 300 page for mirror 1BY421R3AA) contradicts a twin's
+            # page that lists it bare (2007 Charger); fail closed for Likely
+            Ts, whys, slots = [], set(), set()
+            for T, m in cand:
+                if self.note_excludes(class_notes, T):
+                    self.likely_note_restricted[cat] += 1
                     continue
                 Ts.append(T)
                 whys |= set(m["why"])
@@ -1313,6 +1372,8 @@ class Curation:
                         "vg_groups": len(doc["vg"]), "likely_groups": len(doc["likely"]),
                         "likely_app_years_without_own_page": dict(sorted(
                             getattr(self, "likely_own_page_drops", Counter()).items())),
+                        "likely_app_years_note_restricted": dict(sorted(
+                            getattr(self, "likely_note_restricted", Counter()).items())),
                         "blocked_sites": sorted(self.blocked),
                         "why_no_verified": _why_none(self), "gates": global_gates(self)},
             "funnel_cars": fz(funnel),
@@ -1601,6 +1662,89 @@ PACK_TEXT = {"motor": "window motor only", "reg": "regulator without motor", "as
              "door-module": "whole door module panel with the regulator",
              "switch-module": "single switch module, not the full control panel"}
 _LIKELY_TAIL = "; verify the number on the part"
+
+
+# words that are catalog model names somewhere but also ordinary note words
+_MODEL_NAME_STOP = {"base", "sport", "limited", "classic", "touring", "sedan", "coupe", "wagon", "hybrid", "van",
+                    "cab", "plus", "premium", "custom", "deluxe", "special", "standard", "turbo", "diesel", "sx",
+                    "gt", "gl", "gls", "se", "le", "xle", "ex", "lx", "si", "rs", "ss", "st", "sl", "sle", "slt",
+                    "ls", "lt", "ltz", "xl", "xlt", "all", "cargo", "passenger", "pickup", "chassis", "cabrio",
+                    "convertible", "hatchback", "the", "and", "with", "without", "front", "rear", "left", "right"}
+_BRAND_CODE_RE = re.compile(r"(?:^|[,:]\s*)[A-Z0-9*]{1,3}\s+-\s+(CHRYSLER|DODGE|JEEP|RAM|PLYMOUTH|FIAT|EAGLE)\b")
+
+
+def _brand_codes_exclude(notes, make: str) -> bool:
+    """moparpartsgiant option column brand codes ('C - CHRYSLER, F - BRAND
+    AWD'): a row naming only other brands is not for T's make."""
+    named = {m.group(1).lower() for n in notes or [] for m in _BRAND_CODE_RE.finditer(n or "")}
+    return bool(named) and (make or "").lower() not in named
+
+
+def _split_top(text: str) -> list:
+    """Split a subarupartsdeal option expression at top-level ',' and ' +'."""
+    out, depth, cur, i = [], 0, "", 0
+    while i < len(text):
+        ch = text[i]
+        if ch == "(":
+            depth += 1
+        elif ch == ")":
+            depth -= 1
+        if depth == 0 and (ch == "," or (ch == "+" and cur.endswith(" "))):
+            out.append(cur.strip())
+            cur = ""
+        else:
+            cur += ch
+        i += 1
+    if cur.strip():
+        out.append(cur.strip())
+    return out
+
+
+def _subaru_alt_models(alt: str):
+    """Feed models one option alternative allows on the Legacy/Outback/Baja
+    pages, or None when it names no body/model (engine, transmission, trim)."""
+    alt = alt.strip().lstrip("*")
+    head, _, rest = alt.partition(".")
+    heads = re.findall(r"[A-Z0-9#/]+", head) if head.startswith("(") else [head.strip()]
+    quals = re.findall(r"[A-Z0-9#]+", rest)
+    allowed = set()
+    for h in heads:
+        if h in ("SOBK", "WOBK", "OBK") or h.startswith("OBK"):
+            allowed.add("outback")
+        elif h == "P" or h.startswith("BAJA"):
+            allowed.add("baja")
+        elif h in ("S", "W"):
+            obk = [q for q in quals if "OBK" in q]
+            if quals and len(obk) == len(quals):
+                allowed.add("outback")
+            elif obk:
+                allowed |= {"legacy", "outback"}
+            else:
+                allowed.add("legacy")   # S/W without OBK: the Legacy body (Outback not credited)
+        else:
+            return None
+    return allowed or None
+
+
+def _subaru_body_excludes(notes, model: str) -> bool:
+    m = (model or "").lower()
+    fam = "outback" if "outback" in m else "baja" if "baja" in m else "legacy" if "legacy" in m else None
+    if fam is None:
+        return False
+    for n in notes or []:
+        mm = re.match(r"^\s*Fitting Vehicle Options\s*:\s*(.+)$", n or "", re.I)
+        if not mm:
+            continue
+        allowed = set()
+        for alt in _split_top(mm.group(1)):
+            a = _subaru_alt_models(alt)
+            if a is None:
+                allowed = None
+                break
+            allowed |= a
+        if allowed is not None and fam not in allowed:
+            return True
+    return False
 
 
 _DIVISION_RE = re.compile(r"\b([A-Za-z]+)\s+Division\s+Derivative\b", re.I)

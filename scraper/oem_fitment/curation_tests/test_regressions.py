@@ -178,4 +178,51 @@ check("division: ... nor for a Ford", _C._other_division(_n, "Ford"))
 check("division: it is listed for the Lincoln", not _C._other_division(_n, "Lincoln"))
 check("division: no division note, no restriction", not _C._other_division(["With Heavy Duty Trailer Towing"], "Ford"))
 
+
+# ------------------------------- §5.6 model/body restriction in notes (2026-11-09)
+# subarupartsdeal "Fitting Vehicle Options" encodes the body: S = Legacy sedan,
+# W = wagon, OBK/SOBK/WOBK = Outback, P/BAJA = Baja (2011 Outback fender
+# 57120AJ00/01 = S only; 2015 headlamp 84001AL00A = S.25I only)
+F = "Fitting Vehicle Options: "
+check("subaru: S only is not for the Outback", _C._subaru_body_excludes([F + "S"], "Outback"))
+check("subaru: S.25I (Legacy sedan trim) is not for the Outback", _C._subaru_body_excludes([F + "S.25I"], "Outback"))
+check("subaru: OBK is for the Outback, not the Legacy",
+      not _C._subaru_body_excludes([F + "OBK"], "Outback") and _C._subaru_body_excludes([F + "OBK"], "Legacy"))
+check("subaru: Baja-only mirror rows are not for Legacy/Outback",
+      _C._subaru_body_excludes([F + "BAJA +P.S/S +BAJAB.MT"], "Legacy")
+      and _C._subaru_body_excludes([F + "P.BAJA"], "Outback") and not _C._subaru_body_excludes([F + "P.BAJA"], "Baja"))
+check("subaru: W.(OBK...) qualifiers credit the Outback; SOBK/WOBK exclude the Legacy",
+      not _C._subaru_body_excludes([F + "S.SUS# +W.(OBKLTD+OBK6+OBK6LB)"], "Outback")
+      and _C._subaru_body_excludes([F + "SOBK +WOBK.(I#+25GTLTD+R#), WOBK.(25GT+25GLI)"], "Legacy"))
+check("subaru: engine/transmission codes restrict no model",
+      not _C._subaru_body_excludes([F + "EZ30D"], "Legacy") and not _C._subaru_body_excludes([F + "AT.EJ25#"], "Outback"))
+check("subaru: other models (Impreza) are not body-restricted here", not _C._subaru_body_excludes([F + "S"], "Impreza"))
+# moparpartsgiant brand codes
+B = "Fitting Vehicle Options: 48 - SEDAN TYPE #8, C - CHRYSLER, F - BRAND AWD"
+check("mopar: a C - CHRYSLER row is not for a Dodge", _C._brand_codes_exclude([B], "Dodge"))
+check("mopar: ... but is for the Chrysler", not _C._brand_codes_exclude([B], "Chrysler"))
+check("mopar: E - DODGE AWD names Dodge", not _C._brand_codes_exclude(["49 - HATCHBACK TYPE #2, D - DODGE, E - DODGE AWD"], "Dodge"))
+check("mopar: engine codes name no brand", not _C._brand_codes_exclude(["EGA - 6 Cyl 3.3L OHV, EGH - 6 Cyl 3.8L OHV"], "Dodge"))
+# catalog/feed model names in notes (VW shared pages, Toyota hybrids)
+_cur = object.__new__(_C.Curation)
+_cur.ns = "vag"
+_cur.ns_models = {"golf", "jetta", "gti", "r32", "passat"}
+_cur.class_feed_models = {}
+_cur.t_sources = {}
+check("names: a 'Jetta; Sedan' note is not for a Golf",
+      _cur.note_excludes(["Jetta; Sedan; All; Diesel Engine; Auto Transmission"], ("Volkswagen", "Golf", 2003)))
+check("names: ... but is for the Jetta",
+      not _cur.note_excludes(["Jetta; Sedan; All; Diesel Engine"], ("Volkswagen", "Jetta", 2003)))
+check("names: 'Golf, GTI, R32; Power' is for the GTI", not _cur.note_excludes(["Golf, GTI, R32; Power; Left"], ("Volkswagen", "GTI", 2007)))
+check("names: a note naming no model restricts nothing", not _cur.note_excludes(["2 Door, Power"], ("Volkswagen", "Golf", 2003)))
+_t = object.__new__(_C.Curation)
+_t.ns, _t.ns_models, _t.t_sources = "toyota", {"camry", "corolla"}, {}
+_t.class_feed_models = {("x", "c"): {("Toyota", "Camry"), ("Toyota", "Camry Hybrid")}}
+check("names: 'Camry Hybrid; SE' is not for a gas Camry (longest name first)",
+      _t.note_excludes(["Camry Hybrid; SE; Without Audio-Avn/6 Speaker"], ("Toyota", "Camry", 2015)))
+check("names: ... but is for the Camry Hybrid",
+      not _t.note_excludes(["Camry Hybrid; SE; Without Audio-Avn/6 Speaker"], ("Toyota", "Camry Hybrid", 2015)))
+check("names: a note naming both keeps both",
+      not _t.note_excludes(["Camry Hybrid; Right; With HID;Camry; With HID; Right"], ("Toyota", "Camry", 2012)))
+
 done("test_regressions")

@@ -2,7 +2,7 @@
  "draft": {
   "entries": [
    {
-    "basis": "catalog prints 'Grand Voyager' (57 fitment rows, oem-raw@42683f9); normalize_model canon 'Grand Voyager', 8 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints 'Grand Voyager' (57 fitment rows, oem-raw@42683f9); normalize_model canon 'Grand Voyager', 8 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Chrysler",
     "cat_model": "Grand Voyager",
     "ns": "mopar",
@@ -15,7 +15,7 @@
     ]
    },
    {
-    "basis": "catalog prints 'Gladiator' (1 fitment rows, oem-raw@42683f9); normalize_model canon 'Gladiator', 1 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints 'Gladiator' (1 fitment rows, oem-raw@42683f9); normalize_model canon 'Gladiator', 1 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Jeep",
     "cat_model": "Gladiator",
     "ns": "mopar",
@@ -29,7 +29,7 @@
    }
   ],
   "exclude": {
-   "mopar|Plymouth|Grand Voyager": "feed spelling or sub-model the catalog does not print as its own model (54 cars, under catalog squash 'grandvoyager'); unmapped until a reviewed entry exists"
+   "mopar|Plymouth|Grand Voyager": "feed spelling or sub-model the catalog does not print as its own model (57 cars, under catalog squash 'grandvoyager'); unmapped until a reviewed entry exists"
   },
   "skipped": [
    {

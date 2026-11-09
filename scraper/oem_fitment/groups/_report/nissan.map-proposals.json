@@ -2,7 +2,7 @@
  "draft": {
   "entries": [
    {
-    "basis": "catalog prints '300ZX' (1 fitment rows, oem-raw@42683f9); normalize_model canon '300ZX', 54 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints '300ZX' (1 fitment rows, oem-raw@42683f9); normalize_model canon '300ZX', 54 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Nissan",
     "cat_model": "300ZX",
     "ns": "nissan",
@@ -15,7 +15,7 @@
     ]
    },
    {
-    "basis": "catalog prints 'Pulsar NX' (4 fitment rows, oem-raw@42683f9); normalize_model canon 'Pulsar NX', 3 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints 'Pulsar NX' (4 fitment rows, oem-raw@42683f9); normalize_model canon 'Pulsar NX', 2 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Nissan",
     "cat_model": "Pulsar NX",
     "ns": "nissan",
@@ -81,7 +81,7 @@
   {
    "cat_make": "Nissan",
    "cat_model": "Pulsar NX",
-   "feed_cars": 3,
+   "feed_cars": 2,
    "fitment_rows": 4,
    "ns": "nissan",
    "proposed": {

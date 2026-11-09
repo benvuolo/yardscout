@@ -5933,307 +5933,306 @@
  "funnel_cars": {
   "ac-compressor": {
    "no_records": {
-    "": 1325
+    "": 1326
    },
    "not_closed": {
-    "no_list_manifest": 3674,
-    "no_year_manifest": 15268,
+    "no_list_manifest": 3701,
+    "no_year_manifest": 15369,
     "unattested": 19,
-    "unverified_product": 24,
-    "variant_unread": 1286
+    "unverified_product": 26,
+    "variant_unread": 1309
    },
    "unmapped": {
-    "": 217
+    "": 211
    }
   },
   "alternator": {
    "no_records": {
-    "": 1107
+    "": 1115
    },
    "not_closed": {
-    "no_list_manifest": 3648,
-    "no_year_manifest": 15536,
+    "no_list_manifest": 3675,
+    "no_year_manifest": 15632,
     "unverified_product": 19,
-    "variant_unread": 1286
+    "variant_unread": 1309
    },
    "unmapped": {
-    "": 217
+    "": 211
    }
   },
   "bumper-front": {
    "no_records": {
-    "": 1981
+    "": 1991
    },
    "not_closed": {
-    "no_year_manifest": 14598,
-    "unread_sibling_page": 3731,
-    "variant_unread": 1286
+    "no_year_manifest": 14691,
+    "unread_sibling_page": 3759,
+    "variant_unread": 1309
    },
    "unmapped": {
-    "": 217
+    "": 211
    }
   },
   "bumper-rear": {
    "no_records": {
-    "": 2154
+    "": 2167
    },
    "not_closed": {
-    "no_year_manifest": 14425,
-    "unread_sibling_page": 3731,
-    "variant_unread": 1286
+    "no_year_manifest": 14515,
+    "unread_sibling_page": 3759,
+    "variant_unread": 1309
    },
    "unmapped": {
-    "": 217
+    "": 211
    }
   },
   "climate-control": {
    "no_records": {
-    "": 2589
+    "": 2600
    },
    "not_closed": {
-    "no_list_manifest": 3674,
-    "no_year_manifest": 14004,
-    "unread_sibling_page": 43,
-    "variant_unread": 1286
+    "no_list_manifest": 3701,
+    "no_year_manifest": 14095,
+    "unread_sibling_page": 45,
+    "variant_unread": 1309
    },
    "unmapped": {
-    "": 217
+    "": 211
    }
   },
   "door-front": {
    "no_records": {
-    "": 1999
+    "": 2003
    },
    "not_closed": {
-    "no_year_manifest": 14580,
-    "unread_sibling_page": 3731,
-    "variant_unread": 1286
+    "no_year_manifest": 14679,
+    "unread_sibling_page": 3759,
+    "variant_unread": 1309
    },
    "unmapped": {
-    "": 217
+    "": 211
    }
   },
   "door-rear": {
    "no_records": {
-    "": 2588
+    "": 2594
    },
    "not_closed": {
-    "no_year_manifest": 14056,
-    "unread_sibling_page": 3666,
-    "variant_unread": 1286
+    "no_year_manifest": 14152,
+    "unread_sibling_page": 3695,
+    "variant_unread": 1309
    },
    "unmapped": {
-    "": 217
+    "": 211
    }
   },
   "fender": {
    "no_records": {
-    "": 1847
+    "": 1849
    },
    "not_closed": {
-    "no_year_manifest": 14732,
-    "unread_sibling_page": 3731,
-    "variant_unread": 1286
+    "no_year_manifest": 14833,
+    "unread_sibling_page": 3759,
+    "variant_unread": 1309
    },
    "unmapped": {
-    "": 217
+    "": 211
    }
   },
   "fuel-pump-module": {
    "no_records": {
-    "": 2277
+    "": 2293
    },
    "not_closed": {
-    "no_list_manifest": 3664,
-    "no_year_manifest": 14326,
-    "unread_sibling_page": 43,
-    "variant_unread": 1286
+    "no_list_manifest": 3691,
+    "no_year_manifest": 14412,
+    "unread_sibling_page": 45,
+    "variant_unread": 1309
    },
    "unmapped": {
-    "": 217
+    "": 211
    }
   },
   "gauge-cluster": {
    "no_records": {
-    "": 2881
+    "": 2898
    },
    "not_closed": {
-    "no_year_manifest": 13698,
-    "suspect_variant": 86,
-    "unattested": 553,
-    "unread_sibling_page": 3092,
-    "variant_unread": 1286
+    "no_year_manifest": 13784,
+    "suspect_variant": 85,
+    "unattested": 560,
+    "unread_sibling_page": 3114,
+    "variant_unread": 1309
    },
    "unmapped": {
-    "": 217
+    "": 211
    }
   },
   "grille": {
    "no_records": {
-    "": 2812
+    "": 2825
    },
    "not_closed": {
-    "no_year_manifest": 13767,
+    "no_year_manifest": 13857,
     "suspect_variant": 4,
-    "unattested": 2177,
-    "uncrawled_chain_member": 1550,
-    "variant_unread": 1286
+    "unattested": 2185,
+    "uncrawled_chain_member": 1570,
+    "variant_unread": 1309
    },
    "unmapped": {
-    "": 217
+    "": 211
    }
   },
   "headlights": {
    "no_records": {
-    "": 1671
+    "": 1679
    },
    "not_closed": {
-    "no_list_manifest": 3674,
-    "no_year_manifest": 14922,
-    "unattested": 43,
-    "variant_unread": 1286
+    "no_list_manifest": 3701,
+    "no_year_manifest": 15016,
+    "unattested": 45,
+    "variant_unread": 1309
    },
    "unmapped": {
-    "": 217
+    "": 211
    }
   },
   "hood": {
    "no_records": {
-    "": 1955
+    "": 1960
    },
    "not_closed": {
-    "no_year_manifest": 14624,
-    "unread_sibling_page": 3731,
-    "variant_unread": 1286
+    "no_year_manifest": 14722,
+    "unread_sibling_page": 3759,
+    "variant_unread": 1309
    },
    "unmapped": {
-    "": 217
+    "": 211
    }
   },
   "ignition-coils": {
    "no_records": {
-    "": 391
+    "": 392
    },
    "not_closed": {
-    "no_year_manifest": 16188,
+    "no_year_manifest": 16290,
     "unattested": 10,
-    "uncrawled_chain_member": 1,
-    "unverified_product": 3720,
-    "variant_unread": 1286
+    "unverified_product": 3749,
+    "variant_unread": 1309
    },
    "unmapped": {
-    "": 217
+    "": 211
    }
   },
   "liftgate": {
    "no_records": {
-    "": 12725
+    "": 12805
    },
    "not_closed": {
-    "no_year_manifest": 7650,
-    "unattested": 965,
-    "uncrawled_chain_member": 206,
-    "variant_unread": 50
+    "no_year_manifest": 7711,
+    "unattested": 973,
+    "uncrawled_chain_member": 204,
+    "variant_unread": 57
    },
    "unmapped": {
-    "": 217
+    "": 211
    }
   },
   "power-steering-pump": {
    "no_records": {
-    "": 13349
+    "": 13482
    },
    "not_closed": {
-    "no_list_manifest": 1540,
-    "no_year_manifest": 6633,
-    "unread_sibling_page": 24,
-    "variant_unread": 50
+    "no_list_manifest": 1536,
+    "no_year_manifest": 6649,
+    "unread_sibling_page": 26,
+    "variant_unread": 57
    },
    "unmapped": {
-    "": 217
+    "": 211
    }
   },
   "radiator": {
    "no_records": {
-    "": 3518
+    "": 3526
    },
    "not_closed": {
-    "no_year_manifest": 13098,
-    "unread_sibling_page": 3694,
-    "variant_unread": 1286
+    "no_year_manifest": 13193,
+    "unread_sibling_page": 3722,
+    "variant_unread": 1309
    },
    "unmapped": {
-    "": 217
+    "": 211
    }
   },
   "side-mirrors": {
    "no_records": {
-    "": 1295
+    "": 1307
    },
    "not_closed": {
-    "no_list_manifest": 3604,
-    "no_year_manifest": 15368,
-    "unattested": 43,
-    "variant_unread": 1286
+    "no_list_manifest": 3628,
+    "no_year_manifest": 15461,
+    "unattested": 45,
+    "variant_unread": 1309
    },
    "unmapped": {
-    "": 217
+    "": 211
    }
   },
   "starter": {
    "no_records": {
-    "": 401
+    "": 404
    },
    "not_closed": {
-    "no_list_manifest": 3654,
-    "no_year_manifest": 16212,
-    "unverified_product": 43,
-    "variant_unread": 1286
+    "no_list_manifest": 3681,
+    "no_year_manifest": 16311,
+    "unverified_product": 45,
+    "variant_unread": 1309
    },
    "unmapped": {
-    "": 217
+    "": 211
    }
   },
   "tail-lights": {
    "no_records": {
-    "": 2410
+    "": 2419
    },
    "not_closed": {
-    "no_list_manifest": 3674,
-    "no_year_manifest": 14183,
-    "unattested": 43,
-    "variant_unread": 1286
+    "no_list_manifest": 3701,
+    "no_year_manifest": 14276,
+    "unattested": 45,
+    "variant_unread": 1309
    },
    "unmapped": {
-    "": 217
+    "": 211
    }
   },
   "throttle-body": {
    "no_records": {
-    "": 2328
+    "": 2333
    },
    "not_closed": {
-    "no_list_manifest": 3489,
-    "no_year_manifest": 14450,
-    "unattested": 43,
-    "variant_unread": 1286
+    "no_list_manifest": 3524,
+    "no_year_manifest": 14539,
+    "unattested": 45,
+    "variant_unread": 1309
    },
    "unmapped": {
-    "": 217
+    "": 211
    }
   },
   "trunk-lid": {
    "no_records": {
-    "": 9370
+    "": 9425
    },
    "not_closed": {
-    "no_year_manifest": 8243,
-    "unattested": 139,
-    "unread_sibling_page": 2608,
-    "variant_unread": 1236
+    "no_year_manifest": 8294,
+    "unattested": 142,
+    "unread_sibling_page": 2637,
+    "variant_unread": 1252
    },
    "unmapped": {
-    "": 217
+    "": 211
    }
   },
   "window-regulator": {
@@ -6241,27 +6240,27 @@
     "": 1169
    },
    "not_closed": {
-    "no_list_manifest": 3679,
-    "no_year_manifest": 15419,
-    "unread_sibling_page": 43,
-    "variant_unread": 1286
+    "no_list_manifest": 3705,
+    "no_year_manifest": 15522,
+    "unread_sibling_page": 45,
+    "variant_unread": 1309
    },
    "unmapped": {
-    "": 217
+    "": 211
    }
   },
   "window-switch": {
    "no_records": {
-    "": 2549
+    "": 2553
    },
    "not_closed": {
-    "no_list_manifest": 3642,
-    "no_year_manifest": 14076,
-    "unread_sibling_page": 43,
-    "variant_unread": 1286
+    "no_list_manifest": 3668,
+    "no_year_manifest": 14175,
+    "unread_sibling_page": 45,
+    "variant_unread": 1309
    },
    "unmapped": {
-    "": 217
+    "": 211
    }
   }
  },
@@ -6269,226 +6268,226 @@
   "by_cat": {
    "ac-compressor": {
     "conditional": {
-     "conditional:engine_unattested": 3835,
-     "conditional:option": 37
+     "conditional:engine_unattested": 3856,
+     "conditional:option": 38
     },
     "no_records": {
-     "": 1325
+     "": 1326
     },
     "split": {
-     "option_split": 16399
+     "option_split": 16530
     },
     "unmapped": {
-     "": 217
+     "": 211
     }
    },
    "alternator": {
     "conditional": {
-     "conditional:engine_unattested": 3844
+     "conditional:engine_unattested": 3853
     },
     "no_records": {
-     "": 1107
+     "": 1115
     },
     "split": {
-     "option_split": 16645
+     "option_split": 16782
     },
     "unmapped": {
-     "": 217
+     "": 211
     }
    },
    "bumper-front": {
     "conditional": {
-     "conditional:engine_unattested": 2523,
+     "conditional:engine_unattested": 2524,
      "conditional:fuel": 4,
-     "conditional:option": 35,
-     "conditional:package": 42
+     "conditional:option": 36,
+     "conditional:package": 43
     },
     "no_records": {
-     "": 1981
+     "": 1991
     },
     "split": {
-     "option_split": 17011
+     "option_split": 17152
     },
     "unmapped": {
-     "": 217
+     "": 211
     }
    },
    "bumper-rear": {
     "conditional": {
-     "conditional:engine_unattested": 2214,
-     "conditional:option": 560
+     "conditional:engine_unattested": 2212,
+     "conditional:option": 568
     },
     "no_records": {
-     "": 2154
+     "": 2167
     },
     "split": {
-     "option_split": 16668
+     "option_split": 16803
     },
     "unmapped": {
-     "": 217
+     "": 211
     }
    },
    "climate-control": {
     "conditional": {
-     "conditional:engine_unattested": 36
+     "conditional:engine_unattested": 35
     },
     "no_records": {
-     "": 2589
+     "": 2600
     },
     "split": {
-     "option_split": 18971
+     "option_split": 19115
     },
     "unmapped": {
-     "": 217
+     "": 211
     }
    },
    "door-front": {
     "conditional": {
-     "conditional:engine_unattested": 10276
+     "conditional:engine_unattested": 10320
     },
     "no_records": {
-     "": 1999
+     "": 2003
     },
     "split": {
-     "option_split": 9321
+     "option_split": 9427
     },
     "unmapped": {
-     "": 217
+     "": 211
     }
    },
    "door-rear": {
     "conditional": {
-     "conditional:engine_unattested": 8081
+     "conditional:engine_unattested": 8134
     },
     "no_records": {
-     "": 2588
+     "": 2594
     },
     "split": {
-     "option_split": 10626,
-     "slot_missing": 301
+     "option_split": 10714,
+     "slot_missing": 308
     },
     "unmapped": {
-     "": 217
+     "": 211
     }
    },
    "fender": {
     "conditional": {
-     "conditional:body": 266,
-     "conditional:engine_unattested": 14054
+     "conditional:body": 271,
+     "conditional:engine_unattested": 14147
     },
     "no_records": {
-     "": 1847
+     "": 1849
     },
     "split": {
-     "option_split": 5402,
-     "slot_missing": 27
+     "option_split": 5455,
+     "slot_missing": 28
     },
     "unmapped": {
-     "": 217
+     "": 211
     }
    },
    "fuel-pump-module": {
     "conditional": {
-     "conditional:engine_unattested": 3071
+     "conditional:engine_unattested": 3062
     },
     "no_records": {
-     "": 2277
+     "": 2293
     },
     "split": {
-     "option_split": 16248
+     "option_split": 16395
     },
     "unmapped": {
-     "": 217
+     "": 211
     }
    },
    "gauge-cluster": {
     "conditional": {
-     "conditional:engine_unattested": 137
+     "conditional:engine_unattested": 139
     },
     "no_records": {
-     "": 2881
+     "": 2898
     },
     "split": {
-     "no_candidates": 11,
-     "option_split": 18567
+     "no_candidates": 10,
+     "option_split": 18703
     },
     "unmapped": {
-     "": 217
+     "": 211
     }
    },
    "grille": {
     "conditional": {
-     "conditional:engine_unattested": 1035,
-     "conditional:package": 108
+     "conditional:engine_unattested": 1036,
+     "conditional:package": 110
     },
     "no_records": {
-     "": 2812
+     "": 2825
     },
     "split": {
      "no_candidates": 25,
-     "option_split": 17616
+     "option_split": 17754
     },
     "unmapped": {
-     "": 217
+     "": 211
     }
    },
    "headlights": {
     "conditional": {
-     "conditional:engine_unattested": 2985,
-     "conditional:option": 35
+     "conditional:engine_unattested": 2998,
+     "conditional:option": 36
     },
     "no_records": {
-     "": 1671
+     "": 1679
     },
     "split": {
-     "option_split": 16666,
+     "option_split": 16798,
      "slot_missing": 239
     },
     "unmapped": {
-     "": 217
+     "": 211
     }
    },
    "hood": {
     "conditional": {
-     "conditional:engine_unattested": 16087
+     "conditional:engine_unattested": 16204
     },
     "no_records": {
-     "": 1955
+     "": 1960
     },
     "split": {
-     "option_split": 3554
+     "option_split": 3586
     },
     "unmapped": {
-     "": 217
+     "": 211
     }
    },
    "ignition-coils": {
     "conditional": {
-     "conditional:engine_unattested": 6136,
-     "conditional:package": 1297
+     "conditional:engine_unattested": 6175,
+     "conditional:package": 1303
     },
     "no_records": {
-     "": 391
+     "": 392
     },
     "split": {
-     "option_split": 13772
+     "option_split": 13880
     },
     "unmapped": {
-     "": 217
+     "": 211
     }
    },
    "liftgate": {
     "conditional": {
-     "conditional:engine_unattested": 2325
+     "conditional:engine_unattested": 2360
     },
     "no_records": {
-     "": 12725
+     "": 12805
     },
     "split": {
-     "option_split": 6546
+     "option_split": 6585
     },
     "unmapped": {
-     "": 217
+     "": 211
     }
    },
    "power-steering-pump": {
@@ -6496,101 +6495,101 @@
      "conditional:engine_unattested": 2013
     },
     "no_records": {
-     "": 13349
+     "": 13482
     },
     "split": {
-     "option_split": 6234
+     "option_split": 6255
     },
     "unmapped": {
-     "": 217
+     "": 211
     }
    },
    "radiator": {
     "conditional": {
-     "conditional:engine_unattested": 1114
+     "conditional:engine_unattested": 1107
     },
     "no_records": {
-     "": 3518
+     "": 3526
     },
     "split": {
-     "no_candidates": 597,
-     "option_split": 16367
+     "no_candidates": 602,
+     "option_split": 16515
     },
     "unmapped": {
-     "": 217
+     "": 211
     }
    },
    "side-mirrors": {
     "conditional": {
-     "conditional:engine_unattested": 1060
+     "conditional:engine_unattested": 1068
     },
     "no_records": {
-     "": 1295
+     "": 1307
     },
     "split": {
-     "option_split": 19241
+     "option_split": 19375
     },
     "unmapped": {
-     "": 217
+     "": 211
     }
    },
    "starter": {
     "conditional": {
-     "conditional:engine_unattested": 1280
+     "conditional:engine_unattested": 1291
     },
     "no_records": {
-     "": 401
+     "": 404
     },
     "split": {
-     "option_split": 19915
+     "option_split": 20055
     },
     "unmapped": {
-     "": 217
+     "": 211
     }
    },
    "tail-lights": {
     "conditional": {
-     "conditional:engine_unattested": 1261
+     "conditional:engine_unattested": 1257
     },
     "no_records": {
-     "": 2410
+     "": 2419
     },
     "split": {
-     "option_split": 17925
+     "option_split": 18074
     },
     "unmapped": {
-     "": 217
+     "": 211
     }
    },
    "throttle-body": {
     "conditional": {
-     "conditional:engine_unattested": 4286
+     "conditional:engine_unattested": 4311
     },
     "no_records": {
-     "": 2328
+     "": 2333
     },
     "split": {
-     "option_split": 14982
+     "option_split": 15106
     },
     "unmapped": {
-     "": 217
+     "": 211
     }
    },
    "trunk-lid": {
     "conditional": {
-     "conditional:engine_unattested": 5861,
-     "conditional:option": 1383,
-     "conditional:package": 317
+     "conditional:engine_unattested": 5919,
+     "conditional:option": 1399,
+     "conditional:package": 327
     },
     "no_records": {
-     "": 9370
+     "": 9425
     },
     "split": {
-     "no_candidates": 139,
-     "option_split": 4526
+     "no_candidates": 142,
+     "option_split": 4538
     },
     "unmapped": {
-     "": 217
+     "": 211
     }
    },
    "window-regulator": {
@@ -6598,27 +6597,27 @@
      "": 1169
     },
     "split": {
-     "packaging_incomplete": 898,
-     "packaging_split": 12199,
-     "packaging_unstated": 7330
+     "packaging_incomplete": 897,
+     "packaging_split": 12325,
+     "packaging_unstated": 7359
     },
     "unmapped": {
-     "": 217
+     "": 211
     }
    },
    "window-switch": {
     "conditional": {
-     "conditional:engine_unattested": 304
+     "conditional:engine_unattested": 299
     },
     "no_records": {
-     "": 2549
+     "": 2553
     },
     "split": {
-     "option_split": 17094,
-     "position_missing": 1649
+     "option_split": 17241,
+     "position_missing": 1657
     },
     "unmapped": {
-     "": 217
+     "": 211
     }
    }
   },
@@ -6748,74 +6747,74 @@
  "model_map_report": {
   "M10": {
    "bmw": {
-    "cars": 5412,
-    "mapped_cars": 5087,
-    "mapped_share": 0.9399
+    "cars": 5436,
+    "mapped_cars": 5109,
+    "mapped_share": 0.9398
    },
    "ford": {
-    "cars": 60470,
-    "mapped_cars": 58219,
-    "mapped_share": 0.9628
+    "cars": 60873,
+    "mapped_cars": 58630,
+    "mapped_share": 0.9632
    },
    "gm": {
-    "cars": 78880,
-    "mapped_cars": 63689,
-    "mapped_share": 0.8074
+    "cars": 81637,
+    "mapped_cars": 65803,
+    "mapped_share": 0.806
    },
    "hmg": {
-    "cars": 21813,
-    "mapped_cars": 21596,
-    "mapped_share": 0.9901
+    "cars": 21961,
+    "mapped_cars": 21750,
+    "mapped_share": 0.9904
    },
    "honda": {
-    "cars": 28595,
-    "mapped_cars": 28194,
-    "mapped_share": 0.986
+    "cars": 28593,
+    "mapped_cars": 28197,
+    "mapped_share": 0.9862
    },
    "mazda": {
-    "cars": 6242,
-    "mapped_cars": 5837,
-    "mapped_share": 0.9351
+    "cars": 6246,
+    "mapped_cars": 5844,
+    "mapped_share": 0.9356
    },
    "mb": {
-    "cars": 4764,
-    "mapped_cars": 1671,
-    "mapped_share": 0.3508
+    "cars": 4804,
+    "mapped_cars": 1695,
+    "mapped_share": 0.3528
    },
    "mitsubishi": {
-    "cars": 3001,
-    "mapped_cars": 2898,
-    "mapped_share": 0.9657
+    "cars": 2984,
+    "mapped_cars": 2882,
+    "mapped_share": 0.9658
    },
    "mopar": {
-    "cars": 44063,
-    "mapped_cars": 41719,
-    "mapped_share": 0.9468
+    "cars": 44183,
+    "mapped_cars": 42051,
+    "mapped_share": 0.9517
    },
    "nissan": {
-    "cars": 33261,
-    "mapped_cars": 31925,
-    "mapped_share": 0.9598
+    "cars": 33444,
+    "mapped_cars": 32093,
+    "mapped_share": 0.9596
    },
    "subaru": {
-    "cars": 5581,
-    "mapped_cars": 5318,
-    "mapped_share": 0.9529
+    "cars": 5619,
+    "mapped_cars": 5364,
+    "mapped_share": 0.9546
    },
    "toyota": {
-    "cars": 26358,
-    "mapped_cars": 25647,
-    "mapped_share": 0.973
+    "cars": 26369,
+    "mapped_cars": 25671,
+    "mapped_share": 0.9735
    },
    "vag": {
-    "cars": 9193,
-    "mapped_cars": 8485,
-    "mapped_share": 0.923
+    "cars": 9228,
+    "mapped_cars": 8509,
+    "mapped_share": 0.9221
    },
    "volvo": {
-    "cars": 2466,
-    "mapped_cars": 2312,
-    "mapped_share": 0.9376
+    "cars": 2467,
+    "mapped_cars": 2321,
+    "mapped_share": 0.9408
    }
   },
   "M6": {
@@ -6824,36 +6823,34 @@
      "decoded": 106
     },
     "Acura|Integra": {
-     "decoded": 85
+     "decoded": 79
     },
     "Acura|Legend": {
      "decoded": 37
     },
     "Acura|MDX": {
-     "decoded": 901,
-     "make_mismatch": 2
+     "decoded": 903
     },
     "Acura|RDX": {
-     "decoded": 123
+     "decoded": 125
     },
     "Acura|RL": {
-     "decoded": 108
+     "decoded": 107
     },
     "Acura|RLX": {
      "decoded": 3
     },
     "Acura|RSX": {
-     "decoded": 109
+     "decoded": 110
     },
     "Acura|TL": {
-     "decoded": 1128,
-     "make_mismatch": 1
+     "decoded": 1128
     },
     "Acura|TLX": {
-     "decoded": 31
+     "decoded": 32
     },
     "Acura|TSX": {
-     "decoded": 143
+     "decoded": 145
     },
     "Acura|ZDX": {
      "decoded": 4
@@ -6862,31 +6859,31 @@
      "decoded": 1
     },
     "Audi|A3": {
-     "decoded": 101
+     "decoded": 102
     },
     "Audi|A3 Quattro": {
-     "decoded": 8
+     "decoded": 7
     },
     "Audi|A4": {
-     "decoded": 636
+     "decoded": 644
     },
     "Audi|A4 Quattro": {
-     "decoded": 103
+     "decoded": 104
     },
     "Audi|A5": {
-     "decoded": 53
+     "decoded": 56
     },
     "Audi|A5 Quattro": {
-     "decoded": 13
+     "decoded": 12
     },
     "Audi|A6": {
-     "decoded": 186
+     "decoded": 192
     },
     "Audi|A6 Quattro": {
      "decoded": 63
     },
     "Audi|A7 Quattro": {
-     "decoded": 9
+     "decoded": 8
     },
     "Audi|A8": {
      "decoded": 14
@@ -6895,31 +6892,31 @@
      "decoded": 8
     },
     "Audi|Allroad": {
-     "decoded": 12
+     "decoded": 13
     },
     "Audi|Allroad Quattro": {
-     "decoded": 11
+     "decoded": 10
     },
     "Audi|Cabriolet": {},
     "Audi|Q3": {
-     "decoded": 12
+     "decoded": 11
     },
     "Audi|Q3 Quattro": {
      "decoded": 3
     },
     "Audi|Q5": {
-     "decoded": 180,
-     "hybrid": 9
+     "decoded": 181,
+     "hybrid": 10
     },
     "Audi|Q5 Sportback": {},
     "Audi|Q7": {
-     "decoded": 153
+     "decoded": 155
     },
     "Audi|S3": {
      "decoded": 4
     },
     "Audi|S4": {
-     "decoded": 17
+     "decoded": 18
     },
     "Audi|S5": {
      "decoded": 9
@@ -6935,13 +6932,13 @@
      "decoded": 2
     },
     "Audi|TT": {
-     "decoded": 47
+     "decoded": 48
     },
     "Audi|TT Quattro": {
      "decoded": 9
     },
     "BMW|128i": {
-     "decoded": 28
+     "decoded": 31
     },
     "BMW|135i": {
      "decoded": 5
@@ -6951,7 +6948,7 @@
     },
     "BMW|230i": {},
     "BMW|318i": {
-     "decoded": 13
+     "decoded": 12
     },
     "BMW|318is": {
      "decoded": 4
@@ -6960,22 +6957,22 @@
      "decoded": 3
     },
     "BMW|320i": {
-     "decoded": 75
+     "decoded": 71
     },
     "BMW|320i xDrive": {
      "decoded": 9
     },
     "BMW|323ci": {
-     "decoded": 10
+     "decoded": 9
     },
     "BMW|323i": {
-     "decoded": 64
+     "decoded": 69
     },
     "BMW|325ci": {
-     "decoded": 98
+     "decoded": 96
     },
     "BMW|325i": {
-     "decoded": 350
+     "decoded": 347
     },
     "BMW|325is": {
      "decoded": 5
@@ -6997,29 +6994,29 @@
      "decoded": 2
     },
     "BMW|328i xDrive": {
-     "decoded": 57
+     "decoded": 55
     },
     "BMW|328is": {
      "decoded": 1
     },
     "BMW|328xi": {
-     "decoded": 74
+     "decoded": 77
     },
     "BMW|330ci": {
-     "decoded": 53
+     "decoded": 56
     },
     "BMW|330i": {
-     "decoded": 120
+     "decoded": 119
     },
     "BMW|330i GT xDrive": {},
     "BMW|330xi": {
-     "decoded": 31
+     "decoded": 33
     },
     "BMW|335d": {
      "decoded": 2
     },
     "BMW|335i": {
-     "decoded": 131
+     "decoded": 135
     },
     "BMW|335i xDrive": {
      "decoded": 8
@@ -7028,17 +7025,17 @@
      "decoded": 1
     },
     "BMW|335xi": {
-     "decoded": 11
+     "decoded": 12
     },
     "BMW|340i": {},
     "BMW|428i": {
-     "decoded": 10
+     "decoded": 11
     },
     "BMW|428i Gran Coupe": {
      "decoded": 1
     },
     "BMW|430i": {
-     "decoded": 3
+     "decoded": 2
     },
     "BMW|430i xDrive": {
      "decoded": 1
@@ -7047,7 +7044,7 @@
      "decoded": 1
     },
     "BMW|525i": {
-     "decoded": 140
+     "decoded": 141
     },
     "BMW|525xi": {
      "decoded": 14
@@ -7056,19 +7053,19 @@
      "decoded": 264
     },
     "BMW|528i xDrive": {
-     "decoded": 12
+     "decoded": 13
     },
     "BMW|528xi": {
      "decoded": 21
     },
     "BMW|530i": {
-     "decoded": 151
+     "decoded": 150
     },
     "BMW|530xi": {
-     "decoded": 30
+     "decoded": 29
     },
     "BMW|535i": {
-     "decoded": 142
+     "decoded": 141
     },
     "BMW|535i GT": {
      "decoded": 5
@@ -7080,13 +7077,13 @@
      "decoded": 19
     },
     "BMW|540i": {
-     "decoded": 22
+     "decoded": 23
     },
     "BMW|545i": {
-     "decoded": 21
+     "decoded": 22
     },
     "BMW|550i": {
-     "decoded": 57
+     "decoded": 60
     },
     "BMW|550i GT": {
      "decoded": 7
@@ -7113,29 +7110,29 @@
      "decoded": 1
     },
     "BMW|740i": {
-     "decoded": 37
+     "decoded": 39
     },
     "BMW|740iL": {
-     "decoded": 30
+     "decoded": 32
     },
     "BMW|745Li": {
-     "decoded": 33
+     "decoded": 34
     },
     "BMW|745i": {
      "decoded": 22
     },
     "BMW|750Li": {
-     "decoded": 99,
+     "decoded": 97,
      "hybrid": 1
     },
     "BMW|750Li xDrive": {
      "decoded": 2
     },
     "BMW|750i": {
-     "decoded": 51
+     "decoded": 49
     },
     "BMW|750iL": {
-     "decoded": 4
+     "decoded": 6
     },
     "BMW|760Li": {
      "decoded": 1
@@ -7155,7 +7152,7 @@
      "decoded": 3
     },
     "BMW|Alpina B7L": {
-     "decoded": 2
+     "decoded": 1
     },
     "BMW|Alpina B7L xDrive": {
      "decoded": 2
@@ -7170,10 +7167,10 @@
      "decoded": 2
     },
     "BMW|X1": {
-     "decoded": 90
+     "decoded": 91
     },
     "BMW|X3": {
-     "decoded": 400
+     "decoded": 404
     },
     "BMW|X4": {
      "decoded": 1
@@ -7182,13 +7179,13 @@
      "decoded": 536
     },
     "BMW|X6": {
-     "decoded": 11
+     "decoded": 10
     },
     "BMW|Z3": {
-     "decoded": 24
+     "decoded": 26
     },
     "BMW|Z4": {
-     "decoded": 29
+     "decoded": 28
     },
     "BMW|i3": {
      "decoded": 1
@@ -7200,47 +7197,47 @@
      "decoded": 2
     },
     "Buick|Century": {
-     "decoded": 565
+     "decoded": 601
     },
     "Buick|Electra": {
      "decoded": 5
     },
     "Buick|Enclave": {
-     "decoded": 958
+     "decoded": 985
     },
     "Buick|Encore": {
-     "decoded": 251
+     "decoded": 258
     },
     "Buick|Encore GX": {
-     "decoded": 7
+     "decoded": 6
     },
     "Buick|Envision": {
      "decoded": 23
     },
     "Buick|Envista": {
-     "decoded": 3
+     "decoded": 4
     },
     "Buick|LaCrosse": {
-     "decoded": 866
+     "decoded": 904
     },
     "Buick|LeSabre": {
-     "decoded": 898
+     "decoded": 954
     },
     "Buick|Lucerne": {
-     "decoded": 503
+     "decoded": 529
     },
     "Buick|Park Avenue": {
-     "decoded": 53
+     "decoded": 58
     },
     "Buick|Rainier": {
-     "decoded": 74
+     "decoded": 78
     },
     "Buick|Reatta": {},
     "Buick|Regal": {
-     "decoded": 468
+     "decoded": 487
     },
     "Buick|Rendezvous": {
-     "decoded": 290
+     "decoded": 321
     },
     "Buick|Riviera": {
      "decoded": 4
@@ -7253,72 +7250,73 @@
      "decoded": 10
     },
     "Buick|Terraza": {
-     "decoded": 39
+     "decoded": 41
     },
     "Buick|Verano": {
-     "decoded": 344
+     "decoded": 350
     },
     "Cadillac|ATS": {
-     "decoded": 122
+     "decoded": 125
     },
     "Cadillac|Allante": {},
     "Cadillac|Brougham": {
-     "decoded": 5
+     "decoded": 6
     },
     "Cadillac|CT5": {},
     "Cadillac|CT6": {
      "decoded": 2
     },
     "Cadillac|CTS": {
-     "decoded": 584
+     "decoded": 600,
+     "make_mismatch": 1
     },
     "Cadillac|DTS": {
-     "decoded": 37
+     "decoded": 39
     },
     "Cadillac|DeVille": {
-     "decoded": 183,
+     "decoded": 191,
      "make_mismatch": 1
     },
     "Cadillac|ELR": {
      "decoded": 1
     },
     "Cadillac|Eldorado": {
-     "decoded": 28
+     "decoded": 30
     },
     "Cadillac|Escalade": {
-     "decoded": 480,
-     "hybrid": 6
+     "decoded": 495,
+     "hybrid": 8
     },
     "Cadillac|Fleetwood": {
-     "decoded": 6
+     "decoded": 7
     },
     "Cadillac|SRX": {
-     "decoded": 566
+     "decoded": 582
     },
     "Cadillac|STS": {
-     "decoded": 67
+     "decoded": 70
     },
     "Cadillac|Seville": {
-     "decoded": 120
+     "decoded": 125
     },
     "Cadillac|XLR": {},
     "Cadillac|XT5": {
      "decoded": 11
     },
     "Cadillac|XTS": {
-     "decoded": 73
+     "decoded": 75
     },
     "Chevrolet|Astro": {
-     "decoded": 419
+     "decoded": 450
     },
     "Chevrolet|Avalanche": {
-     "decoded": 398
+     "decoded": 409
     },
     "Chevrolet|Beretta": {
      "decoded": 5
     },
     "Chevrolet|Blazer": {
-     "decoded": 530
+     "decoded": 576
     },
     "Chevrolet|Bolt EV": {
      "decoded": 2
@@ -7327,7 +7325,7 @@
      "decoded": 25
     },
     "Chevrolet|C1500": {
-     "decoded": 250
+     "decoded": 246
     },
     "Chevrolet|C20": {
      "decoded": 5
@@ -7340,26 +7338,26 @@
      "decoded": 3
     },
     "Chevrolet|C3500": {
-     "decoded": 42
+     "decoded": 40
     },
     "Chevrolet|Camaro": {
-     "decoded": 458
+     "decoded": 466
     },
     "Chevrolet|Caprice": {
-     "decoded": 70
+     "decoded": 73
     },
     "Chevrolet|Captiva Sport": {
-     "decoded": 245
+     "decoded": 259
     },
     "Chevrolet|Cavalier": {
-     "decoded": 173
+     "decoded": 182
     },
     "Chevrolet|Celebrity": {},
     "Chevrolet|Cobalt": {
-     "decoded": 1224
+     "decoded": 1295
     },
     "Chevrolet|Colorado": {
-     "decoded": 494
+     "decoded": 518
     },
     "Chevrolet|Corsica": {
      "decoded": 4
@@ -7368,159 +7366,156 @@
      "decoded": 12
     },
     "Chevrolet|Cruze": {
-     "decoded": 3623
+     "decoded": 3796
     },
     "Chevrolet|Equinox": {
-     "decoded": 3374
+     "decoded": 3491
     },
     "Chevrolet|Express": {
      "decoded": 1
     },
     "Chevrolet|G10": {
-     "decoded": 5
+     "decoded": 7
     },
     "Chevrolet|G20": {
-     "decoded": 45
+     "decoded": 44
     },
     "Chevrolet|G30": {
      "decoded": 7
     },
     "Chevrolet|HHR": {
-     "decoded": 779
+     "decoded": 819
     },
     "Chevrolet|Impala": {
-     "decoded": 3207
+     "decoded": 3422
     },
     "Chevrolet|K10": {
      "decoded": 1
     },
     "Chevrolet|K1500": {
-     "decoded": 281
+     "decoded": 291
     },
     "Chevrolet|K20": {
      "decoded": 2
     },
     "Chevrolet|K2500": {
-     "decoded": 94
+     "decoded": 97
     },
     "Chevrolet|K3500": {
      "decoded": 14
     },
     "Chevrolet|Lumina": {
-     "decoded": 48
+     "decoded": 53
     },
     "Chevrolet|Malibu": {
-     "decoded": 4312,
+     "decoded": 4500,
      "hybrid": 25
     },
     "Chevrolet|Metro": {},
     "Chevrolet|Monte Carlo": {
-     "decoded": 304
+     "decoded": 312
     },
     "Chevrolet|Orlando": {
-     "decoded": 12
+     "decoded": 11
     },
     "Chevrolet|P30": {
-     "decoded": 2
+     "decoded": 1
     },
     "Chevrolet|R30": {
-     "decoded": 4
+     "decoded": 3
     },
     "Chevrolet|R3500": {
      "decoded": 2
     },
     "Chevrolet|S-10": {
-     "decoded": 855,
+     "decoded": 879,
      "make_mismatch": 3
     },
     "Chevrolet|Silverado": {},
     "Chevrolet|Sonic": {
-     "decoded": 1040
+     "decoded": 1099
     },
     "Chevrolet|Spark": {
-     "decoded": 280
+     "decoded": 291
     },
     "Chevrolet|Spark EV": {
      "decoded": 3
     },
     "Chevrolet|Sprint": {},
-    "Chevrolet|Suburban": {
-     "decoded": 3
-    },
     "Chevrolet|Tahoe": {
-     "decoded": 2307,
+     "decoded": 2388,
      "hybrid": 1
     },
     "Chevrolet|Trailblazer": {
-     "decoded": 1631
+     "decoded": 1702
     },
     "Chevrolet|Traverse": {
-     "decoded": 1791
+     "decoded": 1865
     },
     "Chevrolet|Trax": {
-     "decoded": 243
+     "decoded": 251
     },
     "Chevrolet|Uplander": {
-     "decoded": 289
+     "decoded": 310
     },
     "Chevrolet|Venture": {
-     "decoded": 186
+     "decoded": 196
     },
     "Chevrolet|Volt": {
-     "decoded": 83
+     "decoded": 90
     },
     "Chrysler|200": {
-     "decoded": 1667
+     "decoded": 1668
     },
     "Chrysler|300": {
-     "decoded": 1322
+     "decoded": 1330
     },
     "Chrysler|300M": {
-     "decoded": 69
+     "decoded": 70
     },
     "Chrysler|Aspen": {
-     "decoded": 140
+     "decoded": 141
     },
     "Chrysler|Cirrus": {
      "decoded": 12
     },
     "Chrysler|Concorde": {
-     "decoded": 64
+     "decoded": 68
     },
     "Chrysler|Fifth Avenue": {},
     "Chrysler|Imperial": {},
     "Chrysler|LHS": {
-     "decoded": 20
+     "decoded": 17
     },
     "Chrysler|LeBaron": {
-     "decoded": 21
+     "decoded": 22
     },
     "Chrysler|New Yorker": {
      "decoded": 12
     },
     "Chrysler|PT Cruiser": {
-     "decoded": 995
+     "decoded": 1003
     },
     "Chrysler|Pacifica": {
-     "decoded": 406
+     "decoded": 403
     },
     "Chrysler|Sebring": {
-     "decoded": 796
+     "decoded": 792
     },
     "Chrysler|TC By Maserati": {
      "decoded": 3
     },
     "Chrysler|Town & Country": {
-     "decoded": 2288
+     "decoded": 2299
     },
     "Chrysler|Voyager": {
-     "decoded": 48
+     "decoded": 49
     },
     "Dodge|Aries": {
      "decoded": 1
     },
     "Dodge|Avenger": {
-     "decoded": 1166
+     "decoded": 1177
     },
     "Dodge|B150": {
      "decoded": 2
@@ -7529,10 +7524,10 @@
      "decoded": 1
     },
     "Dodge|B250": {
-     "decoded": 6
+     "decoded": 7
     },
     "Dodge|B2500": {
-     "decoded": 6
+     "decoded": 7
     },
     "Dodge|B350": {
      "decoded": 4
@@ -7541,86 +7536,86 @@
      "decoded": 8
     },
     "Dodge|Caliber": {
-     "decoded": 719
+     "decoded": 738
     },
     "Dodge|Caravan": {
-     "decoded": 749
+     "decoded": 804
     },
     "Dodge|Challenger": {
      "decoded": 148
     },
     "Dodge|Charger": {
-     "decoded": 1588
+     "decoded": 1604
     },
     "Dodge|D100": {
      "decoded": 4
     },
     "Dodge|D150": {
-     "decoded": 22
+     "decoded": 21
     },
     "Dodge|D350": {},
     "Dodge|Dakota": {
-     "decoded": 1445
+     "decoded": 1458
     },
     "Dodge|Dart": {
-     "decoded": 793
+     "decoded": 807
     },
     "Dodge|Daytona": {
      "decoded": 6
     },
     "Dodge|Diplomat": {},
     "Dodge|Durango": {
-     "decoded": 1398
+     "decoded": 1426
     },
     "Dodge|Dynasty": {
      "decoded": 2
     },
     "Dodge|Grand Caravan": {
-     "decoded": 2752
+     "decoded": 2766
     },
     "Dodge|Intrepid": {
-     "decoded": 72
+     "decoded": 73
     },
     "Dodge|Journey": {
-     "decoded": 1635
+     "decoded": 1663
     },
     "Dodge|Lancer": {},
     "Dodge|Magnum": {
-     "decoded": 228
+     "decoded": 227
     },
     "Dodge|Mini Ram": {
      "decoded": 3
     },
     "Dodge|Neon": {
-     "decoded": 268,
+     "decoded": 275,
      "make_mismatch": 1
     },
     "Dodge|Nitro": {
-     "decoded": 362
+     "decoded": 364
     },
     "Dodge|Ram 1500": {
-     "decoded": 3577
+     "decoded": 3568
     },
     "Dodge|Ram 2500": {
-     "decoded": 280
+     "decoded": 285
     },
     "Dodge|Ram 3500": {
-     "decoded": 33
+     "decoded": 34
     },
     "Dodge|Ram Van": {
-     "decoded": 169
+     "decoded": 171
     },
     "Dodge|Ram Van 1500": {
-     "decoded": 24
+     "decoded": 23
     },
     "Dodge|Ram Van 2500": {
-     "decoded": 10
+     "decoded": 9
     },
     "Dodge|Ram Van 3500": {
-     "decoded": 14
+     "decoded": 12
     },
     "Dodge|Ram Wagon": {
-     "decoded": 56
+     "decoded": 59
     },
     "Dodge|Ramcharger": {
      "decoded": 8
@@ -7633,7 +7628,7 @@
     },
     "Dodge|Spirit": {},
     "Dodge|Stratus": {
-     "decoded": 242
+     "decoded": 248
     },
     "Dodge|W100": {
      "decoded": 1
@@ -7648,50 +7643,50 @@
      "decoded": 2
     },
     "Ford|Aerostar": {
-     "decoded": 63
+     "decoded": 64
     },
     "Ford|Bronco": {
-     "decoded": 35
+     "decoded": 37
     },
     "Ford|Bronco II": {
      "decoded": 37
     },
     "Ford|C-Max": {
-     "decoded": 76
+     "decoded": 79
     },
     "Ford|Contour": {
-     "decoded": 54
+     "decoded": 52
     },
     "Ford|Crown Victoria": {
-     "decoded": 281
+     "decoded": 278
     },
     "Ford|E-150": {
-     "decoded": 686
+     "decoded": 683
     },
     "Ford|E-250": {
-     "decoded": 694
+     "decoded": 697
     },
     "Ford|E-450 Super Duty": {
      "decoded": 2
     },
     "Ford|E-Transit": {},
     "Ford|Edge": {
-     "decoded": 1626
+     "decoded": 1649
     },
     "Ford|Escape": {
-     "decoded": 4125
+     "decoded": 4147
     },
     "Ford|Escort": {
-     "decoded": 210
+     "decoded": 209
     },
     "Ford|Excursion": {
      "decoded": 81
     },
     "Ford|Expedition": {
-     "decoded": 2702
+     "decoded": 2716
     },
     "Ford|Explorer": {
-     "decoded": 3773
+     "decoded": 3784
     },
     "Ford|Explorer Sport": {
      "decoded": 77
@@ -7703,98 +7698,98 @@
      "decoded": 7786
     },
     "Ford|F-250": {
-     "decoded": 674
+     "decoded": 667
     },
     "Ford|F-250 Super Duty": {
-     "decoded": 514
+     "decoded": 526
     },
     "Ford|F-350": {
-     "decoded": 225
+     "decoded": 217
     },
     "Ford|F-350 Super Duty": {
-     "decoded": 217
+     "decoded": 214
     },
     "Ford|F-450 Super Duty": {
      "decoded": 25
     },
     "Ford|F-550 Super Duty": {
-     "decoded": 11
+     "decoded": 10
     },
     "Ford|Fiesta": {
-     "decoded": 1035
+     "decoded": 1030
     },
     "Ford|Five Hundred": {
-     "decoded": 327
+     "decoded": 330
     },
     "Ford|Flex": {
-     "decoded": 482
+     "decoded": 472
     },
     "Ford|Focus": {
-     "decoded": 5337
+     "decoded": 5361
     },
     "Ford|Freestar": {
-     "decoded": 206
+     "decoded": 212
     },
     "Ford|Freestyle": {
-     "decoded": 205
+     "decoded": 206
     },
     "Ford|Fusion": {
-     "decoded": 4214,
-     "hybrid": 160
+     "decoded": 4222,
+     "hybrid": 163
     },
     "Ford|Mustang": {
-     "decoded": 1044
+     "decoded": 1042
     },
     "Ford|Police Interceptor Sedan": {
-     "decoded": 16
+     "decoded": 18
     },
     "Ford|Police Interceptor Utility": {
-     "decoded": 50
+     "decoded": 52
     },
     "Ford|Probe": {
      "decoded": 11
     },
     "Ford|Ranger": {
-     "decoded": 1772
+     "decoded": 1771
     },
     "Ford|Taurus": {
-     "decoded": 2243
+     "decoded": 2256
     },
     "Ford|Taurus X": {
-     "decoded": 74
+     "decoded": 73
     },
     "Ford|Tempo": {
-     "decoded": 13
+     "decoded": 12
     },
     "Ford|Thunderbird": {
-     "decoded": 90
+     "decoded": 92
     },
     "Ford|Transit": {
      "decoded": 15
     },
     "Ford|Transit Connect": {
-     "decoded": 260
+     "decoded": 257
     },
     "Ford|Windstar": {
-     "decoded": 260
+     "decoded": 263
     },
     "GMC|Acadia": {
-     "decoded": 1466
+     "decoded": 1509
     },
     "GMC|C1500": {
-     "decoded": 59
+     "decoded": 60
     },
     "GMC|C2500": {
-     "decoded": 9
+     "decoded": 8
     },
     "GMC|C3500": {
-     "decoded": 5
+     "decoded": 4
     },
     "GMC|Canyon": {
-     "decoded": 106
+     "decoded": 113
     },
     "GMC|Envoy": {
-     "decoded": 708
+     "decoded": 725
     },
     "GMC|G1500": {
      "decoded": 1
@@ -7803,10 +7798,10 @@
      "decoded": 5
     },
     "GMC|Jimmy": {
-     "decoded": 149
+     "decoded": 151
     },
     "GMC|K1500": {
-     "decoded": 9
+     "decoded": 10
     },
     "GMC|K2500": {
      "decoded": 1
@@ -7815,28 +7810,28 @@
      "decoded": 2
     },
     "GMC|S-15": {
-     "decoded": 15
+     "decoded": 19
     },
     "GMC|Safari": {
-     "decoded": 140
+     "decoded": 144
     },
     "GMC|Savana": {
-     "decoded": 154
+     "decoded": 164
     },
     "GMC|Sierra": {},
     "GMC|Sonoma": {
-     "decoded": 196
+     "decoded": 209
     },
     "GMC|Suburban": {},
     "GMC|Terrain": {
-     "decoded": 1000
+     "decoded": 1006
     },
     "GMC|Yukon": {
-     "decoded": 940,
+     "decoded": 976,
      "hybrid": 1
     },
     "Honda|Accord": {
-     "decoded": 7734,
+     "decoded": 7687,
      "hybrid": 44,
      "make_mismatch": 1
     },
@@ -7845,7 +7840,7 @@
      "hybrid": 23
     },
     "Honda|CR-V": {
-     "decoded": 1558
+     "decoded": 1571
     },
     "Honda|CR-Z": {
      "decoded": 18
@@ -7854,8 +7849,8 @@
      "decoded": 5
     },
     "Honda|Civic": {
-     "decoded": 5676,
-     "hybrid": 295
+     "decoded": 5673,
+     "hybrid": 289
     },
     "Honda|Crosstour": {
      "decoded": 44
@@ -7867,46 +7862,46 @@
      "decoded": 308
     },
     "Honda|Fit": {
-     "decoded": 179
+     "decoded": 180
     },
     "Honda|HR-V": {
      "decoded": 24
     },
     "Honda|Insight": {
-     "decoded": 97
+     "decoded": 100
     },
     "Honda|Odyssey": {
-     "decoded": 3118
+     "decoded": 3128
     },
     "Honda|Pilot": {
-     "decoded": 1786
+     "decoded": 1785
     },
     "Honda|Prelude": {
-     "decoded": 41
+     "decoded": 42
     },
     "Honda|Ridgeline": {
-     "decoded": 196
+     "decoded": 195
     },
     "Hummer|H2": {
-     "decoded": 9
+     "decoded": 11
     },
     "Hummer|H3": {
-     "decoded": 99
+     "decoded": 98
     },
     "Hyundai|Accent": {
-     "decoded": 1011
+     "decoded": 1007
     },
     "Hyundai|Azera": {
-     "decoded": 129
+     "decoded": 125
     },
     "Hyundai|Elantra": {
-     "decoded": 2419
+     "decoded": 2447
     },
     "Hyundai|Elantra GT": {
-     "decoded": 95
+     "decoded": 97
     },
     "Hyundai|Elantra Touring": {
-     "decoded": 45
+     "decoded": 47
     },
     "Hyundai|Entourage": {
      "decoded": 42
@@ -7918,51 +7913,51 @@
      "decoded": 4
     },
     "Hyundai|Genesis": {
-     "decoded": 271
+     "decoded": 275
     },
     "Hyundai|Genesis Coupe": {
-     "decoded": 97
+     "decoded": 91
     },
     "Hyundai|Kona": {
-     "decoded": 18
+     "decoded": 20
     },
     "Hyundai|Palisade": {
      "decoded": 2
     },
     "Hyundai|Santa Fe": {
-     "decoded": 1016
+     "decoded": 1023
     },
     "Hyundai|Santa Fe Sport": {
-     "decoded": 102
+     "decoded": 104
     },
     "Hyundai|Santa Fe XL": {
-     "decoded": 15
+     "decoded": 14
     },
     "Hyundai|Scoupe": {
      "decoded": 1
     },
     "Hyundai|Sonata": {
-     "decoded": 3352,
-     "hybrid": 35
+     "decoded": 3386,
+     "hybrid": 37
     },
     "Hyundai|Sonata Hybrid": {
-     "decoded": 80,
+     "decoded": 81,
      "hybrid": 30
     },
     "Hyundai|Tiburon": {
      "decoded": 87
     },
     "Hyundai|Tucson": {
-     "decoded": 455
+     "decoded": 468
     },
     "Hyundai|Veloster": {
-     "decoded": 262
+     "decoded": 267
     },
     "Hyundai|Veloster N": {
      "decoded": 1
     },
     "Hyundai|Veracruz": {
-     "decoded": 73
+     "decoded": 69
     },
     "Hyundai|XG300": {},
     "Hyundai|XG350": {},
@@ -7988,13 +7983,13 @@
      "decoded": 13
     },
     "Infiniti|G25": {
-     "decoded": 24
+     "decoded": 25
     },
     "Infiniti|G35": {
-     "decoded": 811
+     "decoded": 808
     },
     "Infiniti|G37": {
-     "decoded": 288
+     "decoded": 287
     },
     "Infiniti|I30": {
      "decoded": 15
@@ -8003,19 +7998,19 @@
      "decoded": 32
     },
     "Infiniti|J30": {
-     "decoded": 13
+     "decoded": 12
     },
     "Infiniti|JX35": {
-     "decoded": 33
+     "decoded": 34
     },
     "Infiniti|M35": {
-     "decoded": 192
+     "decoded": 188
     },
     "Infiniti|M35h": {
      "decoded": 2
     },
     "Infiniti|M37": {
-     "decoded": 36
+     "decoded": 37
     },
     "Infiniti|M45": {
      "decoded": 40
@@ -8024,13 +8019,13 @@
      "decoded": 2
     },
     "Infiniti|Q40": {
-     "decoded": 6
+     "decoded": 8
     },
     "Infiniti|Q45": {
-     "decoded": 13
+     "decoded": 12
     },
     "Infiniti|Q50": {
-     "decoded": 121
+     "decoded": 119
     },
     "Infiniti|Q60": {
      "decoded": 9
@@ -8039,19 +8034,19 @@
      "decoded": 7
     },
     "Infiniti|Q70L": {
-     "decoded": 3
+     "decoded": 2
     },
     "Infiniti|QX4": {
-     "decoded": 92
+     "decoded": 91
     },
     "Infiniti|QX50": {
-     "decoded": 24
+     "decoded": 21
     },
     "Infiniti|QX56": {
-     "decoded": 240
+     "decoded": 246
     },
     "Infiniti|QX60": {
-     "decoded": 165
+     "decoded": 166
     },
     "Infiniti|QX70": {
      "decoded": 12
@@ -8060,19 +8055,19 @@
      "decoded": 20
     },
     "Jeep|Cherokee": {
-     "decoded": 775
+     "decoded": 784
     },
     "Jeep|Comanche": {
-     "decoded": 5
+     "decoded": 6
     },
     "Jeep|Commander": {
-     "decoded": 399
+     "decoded": 402
     },
     "Jeep|Compass": {
-     "decoded": 848
+     "decoded": 838
     },
     "Jeep|Grand Cherokee": {
-     "decoded": 2912
+     "decoded": 2917
     },
     "Jeep|Grand Cherokee L": {},
     "Jeep|Grand Wagoneer": {
@@ -8082,50 +8077,50 @@
      "decoded": 1
     },
     "Jeep|Liberty": {
-     "decoded": 1613
+     "decoded": 1617
     },
     "Jeep|Patriot": {
-     "decoded": 1201,
-     "make_mismatch": 2
+     "decoded": 1215,
+     "make_mismatch": 1
     },
     "Jeep|Renegade": {
      "decoded": 154
     },
     "Jeep|Wagoneer": {
-     "decoded": 6
+     "decoded": 5
     },
     "Jeep|Wrangler": {
      "decoded": 200
     },
     "Kia|Amanti": {
-     "decoded": 11
+     "decoded": 14
     },
     "Kia|Borrego": {
      "decoded": 52
     },
     "Kia|Cadenza": {
-     "decoded": 70
+     "decoded": 68
     },
     "Kia|Forte": {
-     "decoded": 975
+     "decoded": 989
     },
     "Kia|Forte Koup": {
-     "decoded": 68
+     "decoded": 70
     },
     "Kia|K4": {
      "decoded": 4
     },
     "Kia|K5": {
-     "decoded": 8
+     "decoded": 9
     },
     "Kia|K900": {
      "decoded": 6
     },
     "Kia|Niro": {
-     "decoded": 18
+     "decoded": 19
     },
     "Kia|Optima": {
-     "decoded": 1860,
+     "decoded": 1851,
      "hybrid": 8
     },
     "Kia|Optima Hybrid": {
@@ -8133,13 +8128,13 @@
      "hybrid": 1
     },
     "Kia|Rio": {
-     "decoded": 565
+     "decoded": 572
     },
     "Kia|Rondo": {
      "decoded": 140
     },
     "Kia|Sedona": {
-     "decoded": 463
+     "decoded": 462
     },
     "Kia|Seltos": {
      "decoded": 4
@@ -8148,19 +8143,19 @@
      "decoded": 16
     },
     "Kia|Sorento": {
-     "decoded": 1139
+     "decoded": 1156
     },
     "Kia|Soul": {
-     "decoded": 1422
+     "decoded": 1436
     },
     "Kia|Soul EV": {
      "decoded": 1
     },
     "Kia|Spectra": {
-     "decoded": 363
+     "decoded": 359
     },
     "Kia|Sportage": {
-     "decoded": 519
+     "decoded": 521
     },
     "Kia|Stinger": {
      "decoded": 4
@@ -8172,31 +8167,31 @@
      "decoded": 8
     },
     "Lexus|ES 300": {
-     "decoded": 439
+     "decoded": 426
     },
     "Lexus|ES 300h": {
      "decoded": 1
     },
     "Lexus|ES 330": {
-     "decoded": 211
+     "decoded": 213
     },
     "Lexus|ES 350": {
-     "decoded": 230
+     "decoded": 226
     },
     "Lexus|GS 300": {
-     "decoded": 180
+     "decoded": 181
     },
     "Lexus|GS 350": {
-     "decoded": 64
+     "decoded": 68
     },
     "Lexus|GS 400": {
-     "decoded": 24
+     "decoded": 23
     },
     "Lexus|GS 430": {
-     "decoded": 16
+     "decoded": 15
     },
     "Lexus|GS 450h": {
-     "decoded": 14
+     "decoded": 13
     },
     "Lexus|GS 460": {
      "decoded": 1
@@ -8211,101 +8206,101 @@
      "decoded": 1
     },
     "Lexus|IS 250": {
-     "decoded": 236
+     "decoded": 229
     },
     "Lexus|IS 300": {
-     "decoded": 57
+     "decoded": 58
     },
     "Lexus|IS 350": {
      "decoded": 36
     },
     "Lexus|LS 430": {
-     "decoded": 96
+     "decoded": 97
     },
     "Lexus|LS 460": {
-     "decoded": 80
+     "decoded": 76
     },
     "Lexus|RC 350": {},
     "Lexus|RX 300": {
-     "decoded": 306
+     "decoded": 307
     },
     "Lexus|RX 330": {
      "decoded": 117
     },
     "Lexus|RX 350": {
-     "decoded": 123
+     "decoded": 120
     },
     "Lexus|RX 400h": {
      "decoded": 52
     },
     "Lexus|RX 450h": {
-     "decoded": 8
+     "decoded": 9
     },
     "Lexus|SC 430": {
      "decoded": 14
     },
     "Lincoln|Aviator": {
-     "decoded": 94
+     "decoded": 104
     },
     "Lincoln|Blackwood": {
      "decoded": 2
     },
     "Lincoln|Continental": {
-     "decoded": 13
+     "decoded": 12
     },
     "Lincoln|LS": {
-     "decoded": 81
+     "decoded": 80
     },
     "Lincoln|MKC": {
-     "decoded": 22
+     "decoded": 21
     },
     "Lincoln|MKS": {
-     "decoded": 160
+     "decoded": 172
     },
     "Lincoln|MKT": {
-     "decoded": 68
+     "decoded": 65
     },
     "Lincoln|MKX": {
-     "decoded": 315
+     "decoded": 320
     },
     "Lincoln|MKZ": {
-     "decoded": 388,
-     "hybrid": 29
+     "decoded": 408,
+     "hybrid": 33
     },
     "Lincoln|Mark LT": {
-     "decoded": 32
+     "decoded": 33
     },
     "Lincoln|Mark VII": {
      "decoded": 12
     },
     "Lincoln|Mark VIII": {
-     "decoded": 28
+     "decoded": 26
     },
     "Lincoln|Nautilus": {
-     "decoded": 2
+     "decoded": 1
     },
     "Lincoln|Navigator": {
-     "decoded": 546
+     "decoded": 566
     },
     "Lincoln|Town Car": {
-     "decoded": 694
+     "decoded": 717
     },
     "Lincoln|Zephyr": {
-     "decoded": 59
+     "decoded": 68
     },
     "Mazda|323": {},
     "Mazda|626": {
-     "decoded": 87
+     "decoded": 92
     },
     "Mazda|929": {},
     "Mazda|B2000": {
-     "decoded": 14
+     "decoded": 16
     },
     "Mazda|B2500": {
      "decoded": 4
     },
     "Mazda|CX-3": {
-     "decoded": 2
+     "decoded": 3
     },
     "Mazda|CX-30": {
      "decoded": 10
@@ -8317,13 +8312,13 @@
      "decoded": 2
     },
     "Mazda|CX-7": {
-     "decoded": 339
+     "decoded": 333
     },
     "Mazda|CX-9": {
-     "decoded": 394
+     "decoded": 395
     },
     "Mazda|MPV": {
-     "decoded": 87
+     "decoded": 85
     },
     "Mazda|MX-3": {
      "decoded": 2
@@ -8333,35 +8328,35 @@
      "decoded": 40
     },
     "Mazda|Mazda3": {
-     "decoded": 1091
+     "decoded": 1090
     },
     "Mazda|Mazda5": {
-     "decoded": 172
+     "decoded": 177
     },
     "Mazda|Mazda6": {
-     "decoded": 893
+     "decoded": 884
     },
     "Mazda|Millenia": {
-     "decoded": 29
+     "decoded": 30
     },
     "Mazda|Navajo": {
      "decoded": 5
     },
     "Mazda|Protege": {
-     "decoded": 188
+     "decoded": 187
     },
     "Mazda|Protege5": {
-     "decoded": 50
+     "decoded": 51
     },
     "Mazda|RX-8": {
      "decoded": 27
     },
     "Mazda|Tribute": {
-     "decoded": 315
+     "decoded": 316
     },
     "Mercedes-Benz|190D": {},
     "Mercedes-Benz|190E": {
-     "decoded": 3
+     "decoded": 2
     },
     "Mercedes-Benz|260E": {
      "decoded": 2
@@ -8373,7 +8368,7 @@
      "decoded": 4
     },
     "Mercedes-Benz|300E": {
-     "decoded": 14
+     "decoded": 15
     },
     "Mercedes-Benz|300SD": {
      "decoded": 3
@@ -8406,25 +8401,25 @@
      "decoded": 1
     },
     "Mercedes-Benz|C220": {
-     "decoded": 3
+     "decoded": 4
     },
     "Mercedes-Benz|C230": {
-     "decoded": 113
+     "decoded": 111
     },
     "Mercedes-Benz|C240": {
-     "decoded": 59
+     "decoded": 58
     },
     "Mercedes-Benz|C250": {
-     "decoded": 92
+     "decoded": 93
     },
     "Mercedes-Benz|C280": {
-     "decoded": 16
+     "decoded": 20
     },
     "Mercedes-Benz|C300": {
-     "decoded": 194
+     "decoded": 195
     },
     "Mercedes-Benz|C320": {
-     "decoded": 23
+     "decoded": 22
     },
     "Mercedes-Benz|C350": {
      "decoded": 33
@@ -8439,58 +8434,58 @@
      "decoded": 1
     },
     "Mercedes-Benz|CL550": {
-     "decoded": 2
+     "decoded": 3
     },
     "Mercedes-Benz|CL600": {
      "decoded": 4
     },
     "Mercedes-Benz|CLA250": {
-     "decoded": 22
+     "decoded": 23
     },
     "Mercedes-Benz|CLK320": {
-     "decoded": 44
+     "decoded": 45
     },
     "Mercedes-Benz|CLK350": {
-     "decoded": 18
+     "decoded": 17
     },
     "Mercedes-Benz|CLK430": {
-     "decoded": 22
+     "decoded": 21
     },
     "Mercedes-Benz|CLK500": {
-     "decoded": 8
+     "decoded": 9
     },
     "Mercedes-Benz|CLK55 AMG": {
      "decoded": 1
     },
     "Mercedes-Benz|CLK550": {
-     "decoded": 1
+     "decoded": 2
     },
     "Mercedes-Benz|CLS500": {
-     "decoded": 13
+     "decoded": 14
     },
     "Mercedes-Benz|CLS550": {
-     "decoded": 17
+     "decoded": 20
     },
     "Mercedes-Benz|E300": {
      "decoded": 2
     },
     "Mercedes-Benz|E320": {
-     "decoded": 127
+     "decoded": 129
     },
     "Mercedes-Benz|E350": {
-     "decoded": 131
+     "decoded": 136
     },
     "Mercedes-Benz|E420": {
      "decoded": 1
     },
     "Mercedes-Benz|E430": {
-     "decoded": 7
+     "decoded": 9
     },
     "Mercedes-Benz|E500": {
-     "decoded": 20
+     "decoded": 22
     },
     "Mercedes-Benz|E55 AMG": {
-     "decoded": 3
+     "decoded": 2
     },
     "Mercedes-Benz|E550": {
      "decoded": 9
@@ -8508,7 +8503,7 @@
      "decoded": 10
     },
     "Mercedes-Benz|GLA250": {
-     "decoded": 2
+     "decoded": 1
     },
     "Mercedes-Benz|GLE350": {
      "decoded": 1
@@ -8517,10 +8512,10 @@
      "decoded": 30
     },
     "Mercedes-Benz|ML320": {
-     "decoded": 56
+     "decoded": 58
     },
     "Mercedes-Benz|ML350": {
-     "decoded": 91
+     "decoded": 90
     },
     "Mercedes-Benz|ML430": {
      "decoded": 10
@@ -8541,13 +8536,13 @@
      "decoded": 3
     },
     "Mercedes-Benz|R350": {
-     "decoded": 22
+     "decoded": 24
     },
     "Mercedes-Benz|R500": {
-     "decoded": 6
+     "decoded": 5
     },
     "Mercedes-Benz|S320": {
-     "decoded": 7
+     "decoded": 8
     },
     "Mercedes-Benz|S350": {
      "decoded": 1
@@ -8560,13 +8555,13 @@
      "decoded": 4
     },
     "Mercedes-Benz|S430": {
-     "decoded": 30
+     "decoded": 29
     },
     "Mercedes-Benz|S500": {
-     "decoded": 38
+     "decoded": 40
     },
     "Mercedes-Benz|S550": {
-     "decoded": 44
+     "decoded": 47
     },
     "Mercedes-Benz|S600": {
      "decoded": 5
@@ -8578,16 +8573,16 @@
      "decoded": 1
     },
     "Mercedes-Benz|SL500": {
-     "decoded": 12
+     "decoded": 13
     },
     "Mercedes-Benz|SL550": {
      "decoded": 1
     },
     "Mercedes-Benz|SLK230": {
-     "decoded": 17
+     "decoded": 16
     },
     "Mercedes-Benz|SLK280": {
-     "decoded": 4
+     "decoded": 3
     },
     "Mercedes-Benz|SLK300": {
      "decoded": 1
@@ -8596,48 +8591,46 @@
      "decoded": 8
     },
     "Mercedes-Benz|SLK350": {
-     "decoded": 5
+     "decoded": 6
     },
-    "Mercedes-Benz|Sprinter 3500": {
-     "decoded": 1
-    },
+    "Mercedes-Benz|Sprinter 3500": {},
     "Mercury|Capri": {
-     "decoded": 9
+     "decoded": 11
     },
     "Mercury|Cougar": {
-     "decoded": 77,
+     "decoded": 79,
      "make_mismatch": 1
     },
     "Mercury|Grand Marquis": {
-     "decoded": 783
+     "decoded": 817
     },
     "Mercury|Mariner": {
-     "decoded": 255
+     "decoded": 273
     },
     "Mercury|Milan": {
-     "decoded": 250,
-     "hybrid": 7
+     "decoded": 262,
+     "hybrid": 6
     },
     "Mercury|Montego": {
-     "decoded": 82
+     "decoded": 83
     },
     "Mercury|Monterey": {
-     "decoded": 30
+     "decoded": 31
     },
     "Mercury|Mountaineer": {
-     "decoded": 333
+     "decoded": 351
     },
     "Mercury|Mystique": {
      "decoded": 12
     },
     "Mercury|Sable": {
-     "decoded": 238
+     "decoded": 259
     },
     "Mercury|Topaz": {
      "decoded": 6
     },
     "Mercury|Tracer": {
-     "decoded": 17
+     "decoded": 15
     },
     "Mitsubishi|3000GT": {
      "decoded": 15
@@ -8646,118 +8639,118 @@
      "decoded": 29
     },
     "Mitsubishi|Eclipse": {
-     "decoded": 117
+     "decoded": 114
     },
     "Mitsubishi|Eclipse Cross": {
-     "decoded": 3
+     "decoded": 2
     },
     "Mitsubishi|Endeavor": {
-     "decoded": 166
+     "decoded": 164
     },
     "Mitsubishi|Expo": {
      "decoded": 2
     },
     "Mitsubishi|Galant": {
-     "decoded": 22
+     "decoded": 21
     },
     "Mitsubishi|Lancer": {
-     "decoded": 278,
+     "decoded": 277,
      "make_mismatch": 1
     },
     "Mitsubishi|Mighty Max": {
-     "decoded": 19
+     "decoded": 18
     },
     "Mitsubishi|Mirage": {
-     "decoded": 25
+     "decoded": 26
     },
     "Mitsubishi|Mirage G4": {
-     "decoded": 18
+     "decoded": 21
     },
     "Mitsubishi|Montero": {
      "decoded": 53
     },
     "Mitsubishi|Montero Sport": {
-     "decoded": 145
+     "decoded": 144
     },
     "Mitsubishi|Outlander": {
-     "decoded": 287
+     "decoded": 292
     },
     "Mitsubishi|Outlander Sport": {
-     "decoded": 157
+     "decoded": 155
     },
     "Nissan|200SX": {
      "decoded": 9
     },
     "Nissan|350Z": {
-     "decoded": 92
+     "decoded": 93
     },
     "Nissan|Altima": {
      "decoded": 7473,
      "make_mismatch": 1
     },
     "Nissan|Armada": {
-     "decoded": 585
+     "decoded": 588
     },
     "Nissan|Cube": {
-     "decoded": 111
+     "decoded": 110
     },
     "Nissan|Frontier": {
-     "decoded": 538
+     "decoded": 546
     },
     "Nissan|Juke": {
-     "decoded": 281
+     "decoded": 284
     },
     "Nissan|Kicks": {
-     "decoded": 29
+     "decoded": 31
     },
     "Nissan|Leaf": {
-     "decoded": 64
+     "decoded": 63
     },
     "Nissan|Maxima": {
-     "decoded": 1607
+     "decoded": 1609
     },
     "Nissan|Murano": {
-     "decoded": 1548
+     "decoded": 1561
     },
     "Nissan|NV": {
-     "decoded": 4
+     "decoded": 6
     },
     "Nissan|Pathfinder": {
-     "decoded": 1842
+     "decoded": 1851
     },
     "Nissan|Quest": {
-     "decoded": 502
+     "decoded": 506
     },
     "Nissan|Rogue": {
-     "decoded": 2098
+     "decoded": 2110
     },
     "Nissan|Sentra": {
-     "decoded": 3542
+     "decoded": 3565
     },
     "Nissan|Stanza": {
      "decoded": 4
     },
     "Nissan|Titan": {
-     "decoded": 659,
+     "decoded": 666,
      "make_mismatch": 1
     },
     "Nissan|Versa": {
-     "decoded": 1963
+     "decoded": 1970
     },
     "Nissan|Xterra": {
-     "decoded": 938
+     "decoded": 942
     },
     "Oldsmobile|88": {
-     "decoded": 13
+     "decoded": 11
     },
     "Oldsmobile|98": {
-     "decoded": 2
+     "decoded": 3
     },
     "Oldsmobile|Achieva": {
      "decoded": 6
     },
     "Oldsmobile|Alero": {
-     "decoded": 155
+     "decoded": 172
     },
     "Oldsmobile|Aurora": {},
     "Oldsmobile|Bravada": {
@@ -8768,50 +8761,52 @@
     },
     "Oldsmobile|Custom Cruiser": {},
     "Oldsmobile|Cutlass": {
-     "decoded": 1
+     "decoded": 3
     },
     "Oldsmobile|Delta 88": {
      "decoded": 14
     },
-    "Oldsmobile|Firenza": {},
-    "Oldsmobile|Intrigue": {
-     "decoded": 55
-    },
-    "Oldsmobile|Silhouette": {
-     "decoded": 38
-    },
-    "Oldsmobile|Toronado": {
-     "decoded": 5
-    },
-    "Pontiac|6000": {
+    "Oldsmobile|Firenza": {
      "decoded": 1
     },
-    "Pontiac|Aztek": {
+    "Oldsmobile|Intrigue": {
      "decoded": 58
     },
+    "Oldsmobile|Silhouette": {
+     "decoded": 41
+    },
+    "Oldsmobile|Toronado": {
+     "decoded": 6
+    },
+    "Pontiac|6000": {
+     "decoded": 2
+    },
+    "Pontiac|Aztek": {
+     "decoded": 60
+    },
     "Pontiac|Bonneville": {
-     "decoded": 138
+     "decoded": 143
     },
     "Pontiac|Fiero": {
-     "decoded": 15
+     "decoded": 14
     },
     "Pontiac|Firebird": {
-     "decoded": 103
+     "decoded": 106
     },
     "Pontiac|G5": {
-     "decoded": 126
+     "decoded": 132
     },
     "Pontiac|G6": {
-     "decoded": 945
+     "decoded": 994
     },
     "Pontiac|Grand Am": {
-     "decoded": 387
+     "decoded": 408
     },
     "Pontiac|Grand Prix": {
-     "decoded": 672
+     "decoded": 712
     },
     "Pontiac|Montana": {
-     "decoded": 100
+     "decoded": 107
     },
     "Pontiac|Pursuit": {
      "decoded": 12
@@ -8820,40 +8815,40 @@
      "decoded": 12
     },
     "Pontiac|Sunbird": {
-     "decoded": 13
+     "decoded": 12
     },
     "Pontiac|Sunfire": {
-     "decoded": 4
+     "decoded": 5
     },
     "Pontiac|Torrent": {
-     "decoded": 166
+     "decoded": 171
     },
     "Pontiac|Trans Sport": {
-     "decoded": 15
+     "decoded": 16
     },
     "Pontiac|Vibe": {
-     "decoded": 347
+     "decoded": 358
     },
     "Ram|1500": {
-     "decoded": 378
+     "decoded": 387
     },
     "Ram|1500 Classic": {
      "decoded": 12
     },
     "Ram|2500": {
-     "decoded": 24
+     "decoded": 25
     },
     "Ram|3500": {
-     "decoded": 1
+     "decoded": 3
     },
     "Ram|C/V": {
-     "decoded": 22
+     "decoded": 24
     },
     "Ram|Dakota": {
      "decoded": 7
     },
     "Ram|ProMaster 1500": {
-     "decoded": 22
+     "decoded": 23
     },
     "Ram|ProMaster 2500": {
      "decoded": 11
@@ -8862,17 +8857,17 @@
      "decoded": 4
     },
     "Ram|ProMaster City": {
-     "decoded": 32
+     "decoded": 33
     },
     "Saturn|Astra": {
-     "decoded": 46
+     "decoded": 45
     },
     "Saturn|Aura": {
-     "decoded": 311,
+     "decoded": 318,
      "hybrid": 3
     },
     "Saturn|ION": {
-     "decoded": 421
+     "decoded": 446
     },
     "Saturn|L100": {},
     "Saturn|L200": {},
@@ -8884,17 +8879,17 @@
     "Saturn|LW1": {},
     "Saturn|LW200": {},
     "Saturn|Outlook": {
-     "decoded": 144
+     "decoded": 147
     },
     "Saturn|Relay": {
-     "decoded": 19
+     "decoded": 20
     },
     "Saturn|Sky": {
-     "decoded": 4
+     "decoded": 3
     },
     "Saturn|VUE": {
-     "decoded": 745,
-     "hybrid": 13
+     "decoded": 797,
+     "hybrid": 15
     },
     "Scion|iM": {
      "decoded": 1
@@ -8903,10 +8898,10 @@
      "decoded": 609
     },
     "Scion|xA": {
-     "decoded": 99
+     "decoded": 96
     },
     "Scion|xB": {
-     "decoded": 472
+     "decoded": 470
     },
     "Scion|xD": {
      "decoded": 102
@@ -8915,23 +8910,23 @@
      "decoded": 14
     },
     "Subaru|Crosstrek": {
-     "decoded": 23
+     "decoded": 24
     },
     "Subaru|Forester": {
-     "decoded": 1163
+     "decoded": 1166
     },
     "Subaru|Impreza": {
-     "decoded": 821,
+     "decoded": 840,
      "make_mismatch": 1
     },
     "Subaru|Impreza WRX": {
      "decoded": 4
     },
     "Subaru|Legacy": {
-     "decoded": 865
+     "decoded": 858
     },
     "Subaru|Outback": {
-     "decoded": 1282
+     "decoded": 1297
     },
     "Subaru|SVX": {
      "decoded": 2
@@ -8944,38 +8939,38 @@
      "decoded": 8
     },
     "Subaru|XV Crosstrek": {
-     "decoded": 88
+     "decoded": 89
     },
     "Toyota|4Runner": {
-     "decoded": 467
+     "decoded": 466
     },
     "Toyota|Avalon": {
      "decoded": 1058,
-     "hybrid": 6
+     "hybrid": 7
     },
     "Toyota|Camry": {
-     "decoded": 6918,
-     "gas": 2236,
-     "hybrid": 240
+     "decoded": 6960,
+     "gas": 2265,
+     "hybrid": 237
     },
     "Toyota|Camry Hybrid": {
-     "decoded": 94,
-     "hybrid": 94
+     "decoded": 96,
+     "hybrid": 96
     },
     "Toyota|Camry Solara": {
-     "decoded": 458
+     "decoded": 456
     },
     "Toyota|Celica": {
-     "decoded": 182
+     "decoded": 181
     },
     "Toyota|Corolla": {
-     "decoded": 3138
+     "decoded": 3135
     },
     "Toyota|Corolla iM": {
      "decoded": 2
     },
     "Toyota|Cressida": {
-     "decoded": 5
+     "decoded": 4
     },
     "Toyota|Echo": {
      "decoded": 123
@@ -8984,35 +8979,35 @@
      "decoded": 4
     },
     "Toyota|Highlander": {
-     "decoded": 696,
-     "hybrid": 38
+     "decoded": 692,
+     "hybrid": 34
     },
     "Toyota|Land Cruiser": {
      "decoded": 4
     },
     "Toyota|MR2": {
-     "decoded": 6
-    },
-    "Toyota|MR2 Spyder": {
-     "decoded": 2
-    },
-    "Toyota|Matrix": {
-     "decoded": 379
-    },
-    "Toyota|Mirai": {
      "decoded": 5
     },
+    "Toyota|MR2 Spyder": {
+     "decoded": 1
+    },
+    "Toyota|Matrix": {
+     "decoded": 375
+    },
+    "Toyota|Mirai": {
+     "decoded": 6
+    },
     "Toyota|Paseo": {
-     "decoded": 7
+     "decoded": 8
     },
     "Toyota|Pickup": {
-     "decoded": 64
+     "decoded": 62
     },
     "Toyota|Previa": {
      "decoded": 38
     },
     "Toyota|Prius": {
-     "decoded": 1339
+     "decoded": 1363
     },
     "Toyota|Prius C": {
      "decoded": 58
@@ -9027,35 +9022,35 @@
      "decoded": 45
     },
     "Toyota|RAV4": {
-     "decoded": 745,
+     "decoded": 747,
      "make_mismatch": 1
     },
     "Toyota|Sequoia": {
-     "decoded": 364
+     "decoded": 363
     },
     "Toyota|Sienna": {
-     "decoded": 1454
+     "decoded": 1466
     },
     "Toyota|Supra": {
-     "decoded": 11
+     "decoded": 12
     },
     "Toyota|Tacoma": {
-     "decoded": 210
+     "decoded": 208
     },
     "Toyota|Tercel": {
-     "decoded": 76
+     "decoded": 73
     },
     "Toyota|Tundra": {
-     "decoded": 411
+     "decoded": 414
     },
     "Toyota|Van": {
      "decoded": 8
     },
     "Toyota|Venza": {
-     "decoded": 34
+     "decoded": 37
     },
     "Toyota|Yaris": {
-     "decoded": 351,
+     "decoded": 339,
      "make_mismatch": 1
     },
     "Volkswagen|Arteon": {
@@ -9065,50 +9060,50 @@
      "decoded": 14
     },
     "Volkswagen|Beetle": {
-     "decoded": 227
+     "decoded": 222
     },
     "Volkswagen|CC": {
      "decoded": 334
     },
     "Volkswagen|Cabrio": {
-     "decoded": 30
+     "decoded": 31
     },
     "Volkswagen|Cabriolet": {},
     "Volkswagen|Eos": {
-     "decoded": 100
+     "decoded": 103
     },
     "Volkswagen|Fox": {},
     "Volkswagen|GTI": {
-     "decoded": 32
+     "decoded": 33
     },
     "Volkswagen|Golf": {
-     "decoded": 122
+     "decoded": 120
     },
     "Volkswagen|Golf Alltrack": {
      "decoded": 3
     },
     "Volkswagen|Jetta": {
-     "decoded": 2248,
-     "hybrid": 11
+     "decoded": 2253,
+     "hybrid": 10
     },
     "Volkswagen|Passat": {
-     "decoded": 1123
+     "decoded": 1108
     },
     "Volkswagen|Phaeton": {},
     "Volkswagen|Routan": {
-     "decoded": 144
+     "decoded": 141
     },
     "Volkswagen|Scirocco": {},
     "Volkswagen|Tiguan": {
-     "decoded": 181
+     "decoded": 185
     },
     "Volkswagen|Touareg": {
      "decoded": 137,
-     "hybrid": 20
+     "hybrid": 18
     },
     "Volkswagen|Transporter": {},
     "Volkswagen|Vanagon": {
-     "decoded": 8
+     "decoded": 7
     },
     "Volvo|244": {},
     "Volvo|245": {},
@@ -9123,7 +9118,7 @@
      "decoded": 20
     },
     "Volvo|940": {
-     "decoded": 14
+     "decoded": 15
     },
     "Volvo|960": {
      "decoded": 6
@@ -9132,27 +9127,27 @@
      "decoded": 18
     },
     "Volvo|C70": {
-     "decoded": 48
+     "decoded": 47
     },
     "Volvo|S40": {
      "decoded": 198
     },
     "Volvo|S60": {
-     "decoded": 332
+     "decoded": 336
     },
     "Volvo|S60 Cross Country": {},
     "Volvo|S70": {
      "decoded": 2
     },
     "Volvo|S80": {
-     "decoded": 121
+     "decoded": 123
     },
     "Volvo|S90": {
      "decoded": 1
     },
     "Volvo|V40": {},
     "Volvo|V50": {
-     "decoded": 44
+     "decoded": 42
     },
     "Volvo|V60": {
      "decoded": 8
@@ -9165,13 +9160,13 @@
     },
     "Volvo|V90": {},
     "Volvo|XC60": {
-     "decoded": 118
+     "decoded": 117
     },
     "Volvo|XC70": {
-     "decoded": 140
+     "decoded": 142
     },
     "Volvo|XC90": {
-     "decoded": 440
+     "decoded": 441
     }
    },
    "note": "vPIC model is not in the published inventory; checked make mismatches and, for hybrid trim subsets, vPIC trim 'Gas'"
@@ -49478,6 +49473,7 @@
    "www.hyundaipartsdeal.com: only 0% of its 3795 fitment rows can be coverage: it prints an option column, and option-layout rows are never coverage (spec 5.5)",
    "www.kiapartsnow.com: only 0% of its 3733 fitment rows can be coverage: it prints an option column, and option-layout rows are never coverage (spec 5.5)"
   ],
+  "likely_app_years_note_restricted": {},
   "likely_app_years_without_own_page": {
    "bumper-front": 887,
    "bumper-rear": 1035,

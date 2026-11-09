@@ -2,7 +2,20 @@
  "draft": {
   "entries": [
    {
-    "basis": "catalog prints 'Passport' (7 fitment rows, oem-raw@42683f9); normalize_model canon 'Passport', 82 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints 'ILX' (158 fitment rows, oem-raw@42683f9); normalize_model canon 'ILX', 69 feed cars (inventory 2026-11-09); identity draft",
+    "cat_make": "Acura",
+    "cat_model": "ILX",
+    "ns": "honda",
+    "targets": [
+     {
+      "make": "Acura",
+      "model": "ILX",
+      "trims": "*"
+     }
+    ]
+   },
+   {
+    "basis": "catalog prints 'Passport' (7 fitment rows, oem-raw@42683f9); normalize_model canon 'Passport', 81 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Honda",
     "cat_model": "Passport",
     "ns": "honda",
@@ -17,15 +30,6 @@
   ],
   "exclude": {},
   "skipped": [
-   {
-    "cat_make": "Acura",
-    "cat_model": "ILX",
-    "feed": [
-     "Acura",
-     "ILX"
-    ],
-    "why": "2/64 vPIC decodes name another make (M6 over 2%)"
-   },
    {
     "cat_make": "Acura",
     "cat_model": "ILX Hybrid",
@@ -69,7 +73,7 @@
   {
    "cat_make": "Acura",
    "cat_model": "ILX",
-   "feed_cars": 71,
+   "feed_cars": 69,
    "fitment_rows": 158,
    "ns": "honda",
    "proposed": {
@@ -121,7 +125,7 @@
   {
    "cat_make": "Honda",
    "cat_model": "Passport",
-   "feed_cars": 82,
+   "feed_cars": 81,
    "fitment_rows": 7,
    "ns": "honda",
    "proposed": {

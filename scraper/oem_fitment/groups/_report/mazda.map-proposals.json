@@ -100,7 +100,7 @@
   {
    "cat_make": "Mazda",
    "cat_model": "B2200",
-   "feed_cars": 30,
+   "feed_cars": 31,
    "fitment_rows": 20,
    "ns": "mazda",
    "proposed": {
@@ -118,7 +118,7 @@
   {
    "cat_make": "Mazda",
    "cat_model": "B2300",
-   "feed_cars": 29,
+   "feed_cars": 28,
    "fitment_rows": 30,
    "ns": "mazda",
    "proposed": {
@@ -154,7 +154,7 @@
   {
    "cat_make": "Mazda",
    "cat_model": "B3000",
-   "feed_cars": 19,
+   "feed_cars": 20,
    "fitment_rows": 29,
    "ns": "mazda",
    "proposed": {
@@ -172,7 +172,7 @@
   {
    "cat_make": "Mazda",
    "cat_model": "B4000",
-   "feed_cars": 10,
+   "feed_cars": 11,
    "fitment_rows": 16,
    "ns": "mazda",
    "proposed": {
@@ -229,7 +229,7 @@
   {
    "cat_make": "Mazda",
    "cat_model": "MX-5 Miata",
-   "feed_cars": 108,
+   "feed_cars": 105,
    "fitment_rows": 58,
    "ns": "mazda",
    "proposed": {
@@ -242,7 +242,7 @@
   {
    "cat_make": "Mazda",
    "cat_model": "Miata",
-   "feed_cars": 108,
+   "feed_cars": 105,
    "fitment_rows": 51,
    "ns": "mazda",
    "proposed": {

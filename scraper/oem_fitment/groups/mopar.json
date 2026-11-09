@@ -45594,20 +45594,6 @@
    ],
    "reman": false
   },
-  "mopar:1BY421R3AA": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.moparpartsgiant.com:records:L614"
-   ],
-   "names": [
-    "MIRROR Outside, Rearview, Electric, Heated"
-   ],
-   "pns": [
-    "1BY421R3AA"
-   ],
-   "reman": false
-  },
   "mopar:1BY421RHAA": {
    "cat": "side-mirrors",
    "comp": null,
@@ -45664,20 +45650,6 @@
    ],
    "reman": false
   },
-  "mopar:1BY431R3AA": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.moparpartsgiant.com:records:L625"
-   ],
-   "names": [
-    "MIRROR Outside, Rearview, Electric, Heated"
-   ],
-   "pns": [
-    "1BY431R3AA"
-   ],
-   "reman": false
-  },
   "mopar:1BY431RHAA": {
    "cat": "side-mirrors",
    "comp": null,
@@ -45731,34 +45703,6 @@
    ],
    "pns": [
     "1BY431XRAA"
-   ],
-   "reman": false
-  },
-  "mopar:1CJ981BMAB": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.moparpartsgiant.com:records:L636"
-   ],
-   "names": [
-    "MIRROR Outside, Rearview, Electric, Heated"
-   ],
-   "pns": [
-    "1CJ981BMAB"
-   ],
-   "reman": false
-  },
-  "mopar:1CJ991BMAB": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.moparpartsgiant.com:records:L648"
-   ],
-   "names": [
-    "MIRROR Outside, Rearview, Electric, Heated"
-   ],
-   "pns": [
-    "1CJ991BMAB"
    ],
    "reman": false
   },
@@ -46645,36 +46589,6 @@
    ],
    "reman": false
   },
-  "mopar:5179962AA": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L34"
-   ],
-   "names": [
-    "Motor - Window Regulator",
-    "Window Motor"
-   ],
-   "pns": [
-    "5179962AA"
-   ],
-   "reman": false
-  },
-  "mopar:5179963AA": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L35"
-   ],
-   "names": [
-    "Motor - Window Regulator",
-    "Window Motor"
-   ],
-   "pns": [
-    "5179963AA"
-   ],
-   "reman": false
-  },
   "mopar:55077078AE": {
    "cat": "side-mirrors",
    "comp": null,
@@ -46825,36 +46739,6 @@
    ],
    "reman": false
   },
-  "mopar:56040691AD": {
-   "cat": "window-switch",
-   "comp": null,
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L466"
-   ],
-   "names": [
-    "Switch - Window And Door Lock",
-    "Window Switch"
-   ],
-   "pns": [
-    "56040691AD"
-   ],
-   "reman": false
-  },
-  "mopar:5GU34DX9AB": {
-   "cat": "window-switch",
-   "comp": null,
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L987"
-   ],
-   "names": [
-    "Switch - Window And Door Lock",
-    "Window Switch"
-   ],
-   "pns": [
-    "5GU34DX9AB"
-   ],
-   "reman": false
-  },
   "mopar:68004590AC": {
    "cat": "window-regulator",
    "comp": "reg?",
@@ -46972,36 +46856,6 @@
    ],
    "pns": [
     "68023519AA"
-   ],
-   "reman": false
-  },
-  "mopar:68027866AA": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L1466"
-   ],
-   "names": [
-    "Motor - Window Regulator",
-    "Window Motor"
-   ],
-   "pns": [
-    "68027866AA"
-   ],
-   "reman": false
-  },
-  "mopar:68027867AA": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L1467"
-   ],
-   "names": [
-    "Motor - Window Regulator",
-    "Window Motor"
-   ],
-   "pns": [
-    "68027867AA"
    ],
    "reman": false
   },
@@ -64022,7 +63876,7 @@
      2010
     ]
    ],
-   "cars": 657,
+   "cars": 676,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:f24ff80aae",
    "kind": "body",
@@ -64049,7 +63903,7 @@
      2010
     ]
    ],
-   "cars": 657,
+   "cars": 676,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:f5ec33afdb",
    "kind": "body",
@@ -64076,7 +63930,7 @@
      2010
     ]
    ],
-   "cars": 657,
+   "cars": 676,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:b5a16e22a2",
    "kind": "body",
@@ -64103,7 +63957,7 @@
      2010
     ]
    ],
-   "cars": 657,
+   "cars": 676,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:93170d1564",
    "kind": "body",
@@ -64130,7 +63984,7 @@
      2010
     ]
    ],
-   "cars": 657,
+   "cars": 676,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:219490a7ed",
    "kind": "body",
@@ -64157,7 +64011,7 @@
      2010
     ]
    ],
-   "cars": 657,
+   "cars": 676,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:b0eb521771",
    "kind": "body",
@@ -64184,7 +64038,7 @@
      2010
     ]
    ],
-   "cars": 657,
+   "cars": 676,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:a9dd5830a3",
    "kind": "body",
@@ -64211,7 +64065,7 @@
      2007
     ]
    ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:661dcdabf2",
    "kind": "body",
@@ -64238,34 +64092,7 @@
      2007
     ]
    ],
-   "cars": 658,
-   "cat": "side-mirrors",
-   "id": "oem:mopar:side-mirrors:R:7e2288c857",
-   "kind": "body",
-   "note": "Mopar catalog lists #1BY421R3AA for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T02:07:09Z",
-   "pn": [
-    "1BY421R3AA"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chrysler",
-     "300",
-     2006,
-     2006
-    ],
-    [
-     "Dodge",
-     "Charger",
-     2007,
-     2007
-    ]
-   ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:5a2c22eb3c",
    "kind": "body",
@@ -64292,7 +64119,7 @@
      2007
     ]
    ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:ca141f47a7",
    "kind": "body",
@@ -64319,7 +64146,7 @@
      2007
     ]
    ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:ce3b8f0552",
    "kind": "body",
@@ -64346,7 +64173,7 @@
      2007
     ]
    ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:420e7ed5ef",
    "kind": "body",
@@ -64373,34 +64200,7 @@
      2007
     ]
    ],
-   "cars": 658,
-   "cat": "side-mirrors",
-   "id": "oem:mopar:side-mirrors:L:e08bfb2968",
-   "kind": "body",
-   "note": "Mopar catalog lists #1BY431R3AA for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T02:07:53Z",
-   "pn": [
-    "1BY431R3AA"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chrysler",
-     "300",
-     2006,
-     2006
-    ],
-    [
-     "Dodge",
-     "Charger",
-     2007,
-     2007
-    ]
-   ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:23209f02d0",
    "kind": "body",
@@ -64427,7 +64227,7 @@
      2007
     ]
    ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:e18b83d856",
    "kind": "body",
@@ -64454,7 +64254,7 @@
      2007
     ]
    ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:6f9a814b61",
    "kind": "body",
@@ -64481,7 +64281,7 @@
      2007
     ]
    ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:c3fdf47e95",
    "kind": "body",
@@ -64489,60 +64289,6 @@
    "oldest_retrieved": "2026-11-05T02:08:17Z",
    "pn": [
     "1BY431XRAA"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chrysler",
-     "300",
-     2006,
-     2006
-    ],
-    [
-     "Dodge",
-     "Charger",
-     2007,
-     2007
-    ]
-   ],
-   "cars": 658,
-   "cat": "side-mirrors",
-   "id": "oem:mopar:side-mirrors:R:7ec1b4225a",
-   "kind": "body",
-   "note": "Mopar catalog lists #1CJ981BMAB for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T02:08:37Z",
-   "pn": [
-    "1CJ981BMAB"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chrysler",
-     "300",
-     2006,
-     2006
-    ],
-    [
-     "Dodge",
-     "Charger",
-     2007,
-     2007
-    ]
-   ],
-   "cars": 658,
-   "cat": "side-mirrors",
-   "id": "oem:mopar:side-mirrors:L:c0618189ae",
-   "kind": "body",
-   "note": "Mopar catalog lists #1CJ991BMAB for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T02:09:25Z",
-   "pn": [
-    "1CJ991BMAB"
    ],
    "reason": "option",
    "tier": "likely"
@@ -64560,17 +64306,11 @@
      "Avenger",
      2013,
      2013
-    ],
-    [
-     "Jeep",
-     "Patriot",
-     2014,
-     2014
     ]
    ],
-   "cars": 793,
+   "cars": 566,
    "cat": "window-switch",
-   "id": "oem:mopar:window-switch:DM:2e27e79b6c",
+   "id": "oem:mopar:window-switch:DM:7fc2e6a936",
    "kind": "body",
    "note": "Mopar catalog lists #4602780AD for both — fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T00:53:50Z",
@@ -64994,7 +64734,7 @@
      2006
     ]
    ],
-   "cars": 197,
+   "cars": 195,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:b498f1c24e",
    "kind": "body",
@@ -65021,7 +64761,7 @@
      2006
     ]
    ],
-   "cars": 197,
+   "cars": 195,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:e9db3b8f17",
    "kind": "body",
@@ -65048,7 +64788,7 @@
      2007
     ]
    ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:d42b263d21",
    "kind": "body",
@@ -65075,7 +64815,7 @@
      2007
     ]
    ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:f8e8b6c34d",
    "kind": "body",
@@ -65102,7 +64842,7 @@
      2007
     ]
    ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:2c7f778fb2",
    "kind": "body",
@@ -65129,7 +64869,7 @@
      2007
     ]
    ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:c4100c004c",
    "kind": "body",
@@ -65156,7 +64896,7 @@
      2007
     ]
    ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:269b87eb05",
    "kind": "body",
@@ -65222,7 +64962,7 @@
      2005
     ]
    ],
-   "cars": 640,
+   "cars": 653,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:5251c3a7a2",
    "kind": "body",
@@ -65261,7 +65001,7 @@
      2007
     ]
    ],
-   "cars": 792,
+   "cars": 805,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:d717246e93",
    "kind": "body",
@@ -65294,7 +65034,7 @@
      2005
     ]
    ],
-   "cars": 640,
+   "cars": 653,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:080df62d92",
    "kind": "body",
@@ -65333,7 +65073,7 @@
      2007
     ]
    ],
-   "cars": 792,
+   "cars": 805,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:01939bf43a",
    "kind": "body",
@@ -65366,7 +65106,7 @@
      2005
     ]
    ],
-   "cars": 640,
+   "cars": 653,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:4faf338d59",
    "kind": "body",
@@ -65399,7 +65139,7 @@
      2005
     ]
    ],
-   "cars": 600,
+   "cars": 613,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:f8543da95a",
    "kind": "body",
@@ -65438,7 +65178,7 @@
      2007
     ]
    ],
-   "cars": 792,
+   "cars": 805,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:781d7465ef",
    "kind": "body",
@@ -65471,7 +65211,7 @@
      2005
     ]
    ],
-   "cars": 640,
+   "cars": 653,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:fe6f7cbf30",
    "kind": "body",
@@ -65504,7 +65244,7 @@
      2005
     ]
    ],
-   "cars": 600,
+   "cars": 613,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:cdc050cbba",
    "kind": "body",
@@ -65543,7 +65283,7 @@
      2007
     ]
    ],
-   "cars": 792,
+   "cars": 805,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:22215926a0",
    "kind": "body",
@@ -65582,7 +65322,7 @@
      2007
     ]
    ],
-   "cars": 792,
+   "cars": 805,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:e568e575c3",
    "kind": "body",
@@ -65615,7 +65355,7 @@
      2005
     ]
    ],
-   "cars": 640,
+   "cars": 653,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:1e26f3a43b",
    "kind": "body",
@@ -65654,7 +65394,7 @@
      2007
     ]
    ],
-   "cars": 792,
+   "cars": 805,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:35542290b9",
    "kind": "body",
@@ -65693,7 +65433,7 @@
      2007
     ]
    ],
-   "cars": 792,
+   "cars": 805,
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FR:4a5a18dc86",
    "kind": "body",
@@ -65732,7 +65472,7 @@
      2007
     ]
    ],
-   "cars": 792,
+   "cars": 805,
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FL:6763f10c72",
    "kind": "body",
@@ -65771,7 +65511,7 @@
      2007
     ]
    ],
-   "cars": 792,
+   "cars": 805,
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FR:97e57cd35c",
    "kind": "body",
@@ -65810,7 +65550,7 @@
      2007
     ]
    ],
-   "cars": 792,
+   "cars": 805,
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FL:d5b60033f0",
    "kind": "body",
@@ -65903,7 +65643,7 @@
      2005
     ]
    ],
-   "cars": 496,
+   "cars": 495,
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:RR:51d39c99af",
    "kind": "body",
@@ -65963,7 +65703,7 @@
      2005
     ]
    ],
-   "cars": 496,
+   "cars": 495,
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:RL:8220c0c335",
    "kind": "body",
@@ -66023,7 +65763,7 @@
      2010
     ]
    ],
-   "cars": 657,
+   "cars": 676,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:6b8694a38e",
    "kind": "body",
@@ -66050,7 +65790,7 @@
      2010
     ]
    ],
-   "cars": 657,
+   "cars": 676,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:e58ba45bfe",
    "kind": "body",
@@ -66077,7 +65817,7 @@
      2010
     ]
    ],
-   "cars": 657,
+   "cars": 676,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:3ab94bdd3b",
    "kind": "body",
@@ -66104,7 +65844,7 @@
      2010
     ]
    ],
-   "cars": 657,
+   "cars": 676,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:4305f3ca73",
    "kind": "body",
@@ -66131,7 +65871,7 @@
      2010
     ]
    ],
-   "cars": 657,
+   "cars": 676,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:65c6f7da40",
    "kind": "body",
@@ -66158,7 +65898,7 @@
      2010
     ]
    ],
-   "cars": 657,
+   "cars": 676,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:85d056d14c",
    "kind": "body",
@@ -66185,7 +65925,7 @@
      2010
     ]
    ],
-   "cars": 657,
+   "cars": 676,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:3fb0a46e77",
    "kind": "body",
@@ -66212,7 +65952,7 @@
      2010
     ]
    ],
-   "cars": 657,
+   "cars": 676,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:33446a746d",
    "kind": "body",
@@ -66239,7 +65979,7 @@
      2010
     ]
    ],
-   "cars": 657,
+   "cars": 676,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:f318d8a49a",
    "kind": "body",
@@ -66266,7 +66006,7 @@
      2004
     ]
    ],
-   "cars": 157,
+   "cars": 165,
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:32dc100e76",
    "kind": "body",
@@ -66305,7 +66045,7 @@
      2007
     ]
    ],
-   "cars": 792,
+   "cars": 805,
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:26f117dc08",
    "kind": "body",
@@ -66344,7 +66084,7 @@
      2007
     ]
    ],
-   "cars": 792,
+   "cars": 805,
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:301c95cba9",
    "kind": "body",
@@ -66383,7 +66123,7 @@
      2007
     ]
    ],
-   "cars": 792,
+   "cars": 805,
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:739ffd19d7",
    "kind": "body",
@@ -66422,7 +66162,7 @@
      2007
     ]
    ],
-   "cars": 792,
+   "cars": 805,
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:c2a5a37ed4",
    "kind": "body",
@@ -66455,7 +66195,7 @@
      2005
     ]
    ],
-   "cars": 600,
+   "cars": 613,
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:de5f78a527",
    "kind": "body",
@@ -66465,60 +66205,6 @@
     "5136781AA"
    ],
    "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Dodge",
-     "Caliber",
-     2007,
-     2007
-    ],
-    [
-     "Jeep",
-     "Patriot",
-     2014,
-     2014
-    ]
-   ],
-   "cars": 562,
-   "cat": "window-regulator",
-   "id": "oem:mopar:window-regulator:FL+FR+RL+RR+SL+SR:e41c5ef0d6",
-   "kind": "body",
-   "note": "Mopar catalog lists #5179962AA for both — fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T00:53:30Z",
-   "pn": [
-    "5179962AA"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Dodge",
-     "Caliber",
-     2007,
-     2007
-    ],
-    [
-     "Jeep",
-     "Patriot",
-     2014,
-     2014
-    ]
-   ],
-   "cars": 562,
-   "cat": "window-regulator",
-   "id": "oem:mopar:window-regulator:FL+FR+RL+RR+SL+SR:0caa043b13",
-   "kind": "body",
-   "note": "Mopar catalog lists #5179963AA for both — fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T00:53:34Z",
-   "pn": [
-    "5179963AA"
-   ],
-   "reason": "conditional",
    "tier": "likely"
   },
   {
@@ -66623,7 +66309,7 @@
      2010
     ]
    ],
-   "cars": 657,
+   "cars": 676,
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:71e0e84111",
    "kind": "body",
@@ -66650,7 +66336,7 @@
      2010
     ]
    ],
-   "cars": 657,
+   "cars": 676,
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:21d0c4257d",
    "kind": "body",
@@ -66677,7 +66363,7 @@
      2010
     ]
    ],
-   "cars": 657,
+   "cars": 676,
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:61e5b7dc3b",
    "kind": "body",
@@ -66704,7 +66390,7 @@
      2010
     ]
    ],
-   "cars": 657,
+   "cars": 676,
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:1448d0447d",
    "kind": "body",
@@ -66731,7 +66417,7 @@
      2007
     ]
    ],
-   "cars": 658,
+   "cars": 655,
    "cat": "climate-control",
    "id": "oem:mopar:climate-control:C:c2059aa9c9",
    "kind": "body",
@@ -66801,60 +66487,6 @@
    "apps": [
     [
      "Dodge",
-     "Caliber",
-     2007,
-     2007
-    ],
-    [
-     "Jeep",
-     "Compass",
-     2007,
-     2007
-    ]
-   ],
-   "cars": 454,
-   "cat": "window-switch",
-   "id": "oem:mopar:window-switch:DM:7d09e1b1e5",
-   "kind": "body",
-   "note": "Mopar catalog lists #56040691AD for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T01:35:14Z",
-   "pn": [
-    "56040691AD"
-   ],
-   "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Dodge",
-     "Durango",
-     2003,
-     2003
-    ],
-    [
-     "Dodge",
-     "Ram 1500",
-     2002,
-     2002
-    ]
-   ],
-   "cars": 533,
-   "cat": "window-switch",
-   "id": "oem:mopar:window-switch:DM:b1bb999708",
-   "kind": "body",
-   "note": "Mopar catalog lists #5GU34DX9AB for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T02:43:16Z",
-   "pn": [
-    "5GU34DX9AB"
-   ],
-   "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Dodge",
      "Nitro",
      2007,
      2007
@@ -66866,7 +66498,7 @@
      2008
     ]
    ],
-   "cars": 381,
+   "cars": 384,
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FR:7a6551a190",
    "kind": "body",
@@ -66893,7 +66525,7 @@
      2008
     ]
    ],
-   "cars": 381,
+   "cars": 384,
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FL:b28eceec4d",
    "kind": "body",
@@ -66920,7 +66552,7 @@
      2008
     ]
    ],
-   "cars": 381,
+   "cars": 384,
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FL+FR+RL+RR+SL+SR:f0adace025",
    "kind": "body",
@@ -66947,7 +66579,7 @@
      2008
     ]
    ],
-   "cars": 381,
+   "cars": 384,
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FL+FR+RL+RR+SL+SR:04f8d17a22",
    "kind": "body",
@@ -66974,7 +66606,7 @@
      2013
     ]
    ],
-   "cars": 564,
+   "cars": 566,
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FL+FR+RL+RR+SL+SR:c52b35e0b5",
    "kind": "body",
@@ -67001,7 +66633,7 @@
      2013
     ]
    ],
-   "cars": 564,
+   "cars": 566,
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FL+FR+RL+RR+SL+SR:8acd6beaec",
    "kind": "body",
@@ -67028,7 +66660,7 @@
      2013
     ]
    ],
-   "cars": 564,
+   "cars": 566,
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:RR:50a583e4f3",
    "kind": "body",
@@ -67055,7 +66687,7 @@
      2013
     ]
    ],
-   "cars": 564,
+   "cars": 566,
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:RL:1d41d7f5d1",
    "kind": "body",
@@ -67065,60 +66697,6 @@
     "68023519AA"
    ],
    "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chrysler",
-     "Sebring",
-     2008,
-     2008
-    ],
-    [
-     "Dodge",
-     "Avenger",
-     2013,
-     2013
-    ]
-   ],
-   "cars": 564,
-   "cat": "window-regulator",
-   "id": "oem:mopar:window-regulator:FR:77fa464cc1",
-   "kind": "body",
-   "note": "Mopar catalog lists #68027866AA for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T04:06:51Z",
-   "pn": [
-    "68027866AA"
-   ],
-   "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chrysler",
-     "Sebring",
-     2008,
-     2008
-    ],
-    [
-     "Dodge",
-     "Avenger",
-     2013,
-     2013
-    ]
-   ],
-   "cars": 564,
-   "cat": "window-regulator",
-   "id": "oem:mopar:window-regulator:FL:d18b7c58ee",
-   "kind": "body",
-   "note": "Mopar catalog lists #68027867AA for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T04:06:59Z",
-   "pn": [
-    "68027867AA"
-   ],
-   "reason": "trim",
    "tier": "likely"
   },
   {
@@ -67136,7 +66714,7 @@
      2010
     ]
    ],
-   "cars": 657,
+   "cars": 676,
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FR:3b06976eea",
    "kind": "body",
@@ -67163,7 +66741,7 @@
      2010
     ]
    ],
-   "cars": 657,
+   "cars": 676,
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FL:9c1fae01dc",
    "kind": "body",
@@ -67190,7 +66768,7 @@
      2010
     ]
    ],
-   "cars": 657,
+   "cars": 676,
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FL+FR+RL+RR+SL+SR:ae8feaa9cc",
    "kind": "body",
@@ -67217,7 +66795,7 @@
      2010
     ]
    ],
-   "cars": 657,
+   "cars": 676,
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FL+FR+RL+RR+SL+SR:ce83a221db",
    "kind": "body",
@@ -67310,7 +66888,7 @@
      2011
     ]
    ],
-   "cars": 279,
+   "cars": 273,
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FR:216e741866",
    "kind": "body",
@@ -67337,7 +66915,7 @@
      2011
     ]
    ],
-   "cars": 279,
+   "cars": 273,
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FL:2889c4891f",
    "kind": "body",
@@ -67364,7 +66942,7 @@
      2011
     ]
    ],
-   "cars": 279,
+   "cars": 273,
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:RR:963d66daff",
    "kind": "body",
@@ -67391,7 +66969,7 @@
      2011
     ]
    ],
-   "cars": 279,
+   "cars": 273,
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:RL:3f5accb168",
    "kind": "body",
@@ -67418,7 +66996,7 @@
      2011
     ]
    ],
-   "cars": 279,
+   "cars": 273,
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FR:e87e25168f",
    "kind": "body",
@@ -67445,7 +67023,7 @@
      2011
     ]
    ],
-   "cars": 279,
+   "cars": 273,
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FL:e9f02e91e3",
    "kind": "body",
@@ -67472,7 +67050,7 @@
      2013
     ]
    ],
-   "cars": 203,
+   "cars": 202,
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FR:66e027efb8",
    "kind": "body",
@@ -67499,7 +67077,7 @@
      2013
     ]
    ],
-   "cars": 203,
+   "cars": 202,
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:FL:09a542ea65",
    "kind": "body",
@@ -67526,7 +67104,7 @@
      2013
     ]
    ],
-   "cars": 203,
+   "cars": 202,
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:RR:d5ce33c781",
    "kind": "body",
@@ -67553,7 +67131,7 @@
      2013
     ]
    ],
-   "cars": 203,
+   "cars": 202,
    "cat": "window-regulator",
    "id": "oem:mopar:window-regulator:RL:dc4f56d942",
    "kind": "body",
@@ -67580,7 +67158,7 @@
      2007
     ]
    ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:274e50b0e6",
    "kind": "body",
@@ -67607,7 +67185,7 @@
      2007
     ]
    ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:2d5843bce7",
    "kind": "body",
@@ -67634,7 +67212,7 @@
      2005
     ]
    ],
-   "cars": 496,
+   "cars": 495,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:ab1a0444e8",
    "kind": "body",
@@ -67661,7 +67239,7 @@
      2005
     ]
    ],
-   "cars": 496,
+   "cars": 495,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:df17bbe061",
    "kind": "body",
@@ -67688,7 +67266,7 @@
      2005
     ]
    ],
-   "cars": 496,
+   "cars": 495,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:6a5042d596",
    "kind": "body",
@@ -67715,7 +67293,7 @@
      2007
     ]
    ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:064bbd4180",
    "kind": "body",
@@ -67742,7 +67320,7 @@
      2007
     ]
    ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:be1ca6e6f3",
    "kind": "body",
@@ -67802,7 +67380,7 @@
      2007
     ]
    ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:8e0e079f06",
    "kind": "body",
@@ -67829,7 +67407,7 @@
      2007
     ]
    ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:7dcd2a7e6a",
    "kind": "body",
@@ -67856,7 +67434,7 @@
      2007
     ]
    ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:bb8eee5daa",
    "kind": "body",
@@ -67883,7 +67461,7 @@
      2005
     ]
    ],
-   "cars": 496,
+   "cars": 495,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:554c433480",
    "kind": "body",
@@ -67910,7 +67488,7 @@
      2007
     ]
    ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:f3bdd1c299",
    "kind": "body",
@@ -67970,7 +67548,7 @@
      2007
     ]
    ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:R:35a2b2b6be",
    "kind": "body",
@@ -67997,7 +67575,7 @@
      2007
     ]
    ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:818510b9c3",
    "kind": "body",
@@ -68024,7 +67602,7 @@
      2007
     ]
    ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:2a643bf224",
    "kind": "body",
@@ -68051,7 +67629,7 @@
      2005
     ]
    ],
-   "cars": 496,
+   "cars": 495,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:5ad669a226",
    "kind": "body",
@@ -68078,7 +67656,7 @@
      2005
     ]
    ],
-   "cars": 496,
+   "cars": 495,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:22649fe65d",
    "kind": "body",
@@ -68105,7 +67683,7 @@
      2005
     ]
    ],
-   "cars": 496,
+   "cars": 495,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:c9b8ff4c21",
    "kind": "body",
@@ -68132,7 +67710,7 @@
      2007
     ]
    ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L+R:71070d4f87",
    "kind": "body",
@@ -68159,7 +67737,7 @@
      2007
     ]
    ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:df9e495535",
    "kind": "body",
@@ -68219,7 +67797,7 @@
      2007
     ]
    ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:91b113bbfe",
    "kind": "body",
@@ -68246,7 +67824,7 @@
      2007
     ]
    ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:ded145f7b6",
    "kind": "body",
@@ -68273,7 +67851,7 @@
      2007
     ]
    ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:d5607116a3",
    "kind": "body",
@@ -68300,7 +67878,7 @@
      2005
     ]
    ],
-   "cars": 496,
+   "cars": 495,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:ce57e5cb82",
    "kind": "body",
@@ -68327,7 +67905,7 @@
      2007
     ]
    ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:9891bfb573",
    "kind": "body",
@@ -68387,7 +67965,7 @@
      2007
     ]
    ],
-   "cars": 658,
+   "cars": 655,
    "cat": "side-mirrors",
    "id": "oem:mopar:side-mirrors:L:5055d5c570",
    "kind": "body",
@@ -68401,7 +67979,7 @@
   }
  ],
  "ns": "mopar",
- "policy_sha256": "26723f1085163ddb5ccb4da16aaa43b7232b40d5196577a97ca7bcd8a8337493",
+ "policy_sha256": "da5f80482b2077fd5c1849e9f508eb2b75a4a80937eadec8f0318154235657f1",
  "raw": {
   "commit": "42683f9d86450b6bd00eb7fc7cc9640154607768",
   "ref": "42683f9d86450b6bd00eb7fc7cc9640154607768",

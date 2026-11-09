@@ -919,7 +919,7 @@
      "Mercedes-Benz",
      "Sprinter 2500"
     ],
-    "why": "1/16 vPIC decodes name another make (M6 over 2%)"
+    "why": "1/17 vPIC decodes name another make (M6 over 2%)"
    },
    {
     "cat_make": "Mercedes-Benz",
@@ -2260,7 +2260,7 @@
   {
    "cat_make": "Mercedes-Benz",
    "cat_model": "Sprinter 2500",
-   "feed_cars": 19,
+   "feed_cars": 20,
    "fitment_rows": 44,
    "ns": "mb",
    "proposed": {

@@ -2,7 +2,7 @@
  "draft": {
   "entries": [
    {
-    "basis": "catalog prints 'EXP' (1 fitment rows, oem-raw@42683f9); normalize_model canon 'EXP', 1 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints 'EXP' (1 fitment rows, oem-raw@42683f9); normalize_model canon 'EXP', 1 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Ford",
     "cat_model": "EXP",
     "ns": "ford",
@@ -15,7 +15,7 @@
     ]
    },
    {
-    "basis": "catalog prints 'Fairmont' (1 fitment rows, oem-raw@42683f9); normalize_model canon 'Fairmont', 4 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints 'Fairmont' (1 fitment rows, oem-raw@42683f9); normalize_model canon 'Fairmont', 4 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Ford",
     "cat_model": "Fairmont",
     "ns": "ford",
@@ -28,7 +28,7 @@
     ]
    },
    {
-    "basis": "catalog prints 'GT' (1 fitment rows, oem-raw@42683f9); normalize_model canon 'GT', 2 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints 'GT' (1 fitment rows, oem-raw@42683f9); normalize_model canon 'GT', 3 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Ford",
     "cat_model": "GT",
     "ns": "ford",
@@ -41,7 +41,7 @@
     ]
    },
    {
-    "basis": "catalog prints 'Granada' (1 fitment rows, oem-raw@42683f9); normalize_model canon 'Granada', 2 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints 'Granada' (1 fitment rows, oem-raw@42683f9); normalize_model canon 'Granada', 2 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Ford",
     "cat_model": "Granada",
     "ns": "ford",
@@ -54,7 +54,7 @@
     ]
    },
    {
-    "basis": "catalog prints 'Maverick' (1 fitment rows, oem-raw@42683f9); normalize_model canon 'Maverick', 11 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints 'Maverick' (1 fitment rows, oem-raw@42683f9); normalize_model canon 'Maverick', 11 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Ford",
     "cat_model": "Maverick",
     "ns": "ford",
@@ -67,7 +67,7 @@
     ]
    },
    {
-    "basis": "catalog prints 'Pinto' (1 fitment rows, oem-raw@42683f9); normalize_model canon 'Pinto', 6 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints 'Pinto' (1 fitment rows, oem-raw@42683f9); normalize_model canon 'Pinto', 8 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Ford",
     "cat_model": "Pinto",
     "ns": "ford",
@@ -80,7 +80,7 @@
     ]
    },
    {
-    "basis": "catalog prints 'Mark VI' (1 fitment rows, oem-raw@42683f9); normalize_model canon 'Mark VI', 4 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints 'Mark VI' (1 fitment rows, oem-raw@42683f9); normalize_model canon 'Mark VI', 4 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Lincoln",
     "cat_model": "Mark VI",
     "ns": "ford",
@@ -93,7 +93,7 @@
     ]
    },
    {
-    "basis": "catalog prints 'Marquis' (2 fitment rows, oem-raw@42683f9); normalize_model canon 'Marquis', 30 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints 'Marquis' (2 fitment rows, oem-raw@42683f9); normalize_model canon 'Marquis', 30 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Mercury",
     "cat_model": "Marquis",
     "ns": "ford",
@@ -106,7 +106,7 @@
     ]
    },
    {
-    "basis": "catalog prints 'Villager' (24 fitment rows, oem-raw@42683f9); normalize_model canon 'Villager', 80 feed cars (inventory 2026-11-06); identity draft",
+    "basis": "catalog prints 'Villager' (24 fitment rows, oem-raw@42683f9); normalize_model canon 'Villager', 83 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Mercury",
     "cat_model": "Villager",
     "ns": "ford",
@@ -236,19 +236,19 @@
    "squash_neighbours": [
     [
      "Explorer",
-     4579
+     4586
     ],
     [
      "Expedition",
-     3186
+     3203
     ],
     [
      "Explorer Sport Trac",
-     518
+     520
     ],
     [
      "Expedition EL",
-     114
+     115
     ],
     [
      "Explorer Sport",
@@ -256,7 +256,7 @@
     ],
     [
      "Expedition MAX",
-     26
+     25
     ],
     [
      "Express35",
@@ -282,7 +282,7 @@
    "squash_neighbours": [
     [
      "Ecosport",
-     73
+     72
     ]
    ]
   },
@@ -359,7 +359,7 @@
   {
    "cat_make": "Ford",
    "cat_model": "GT",
-   "feed_cars": 2,
+   "feed_cars": 3,
    "fitment_rows": 1,
    "ns": "ford",
    "proposed": {
@@ -398,7 +398,7 @@
   {
    "cat_make": "Ford",
    "cat_model": "Pinto",
-   "feed_cars": 6,
+   "feed_cars": 8,
    "fitment_rows": 1,
    "ns": "ford",
    "proposed": {
@@ -422,7 +422,7 @@
    "squash_neighbours": [
     [
      "Mark VIII",
-     30
+     28
     ],
     [
      "Mark VII",
@@ -485,7 +485,7 @@
   {
    "cat_make": "Mercury",
    "cat_model": "Villager",
-   "feed_cars": 80,
+   "feed_cars": 83,
    "fitment_rows": 24,
    "ns": "ford",
    "proposed": {
