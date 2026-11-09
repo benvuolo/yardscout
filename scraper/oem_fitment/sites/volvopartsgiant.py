@@ -80,6 +80,12 @@ CAT_PAGES = {
     "wiper-motor": r"^(electrical/wipers|body-hardware/wiper-washer-components(-body)?)$",
     "knuckle": r"^suspension/(front-suspension|front-suspension-components|rear-suspension|rear-suspension-components|front-axle-carrier)$|^driveline-axles/(front-axle|front-axle-driveline|rear-axle)$",
     "strut": r"^suspension/(struts-components|shocks-components|struts-suspension-components-front|front-suspension|front-suspension-components|rear-suspension|rear-suspension-components|ride-control-front|ride-control-rear)$",
+    # tier D wave 1 (ops/interchange.md §10): slugs from the R2 years manifests
+    "sunroof": r"^(body-hardware/sunroof(-body)?|electrical/sunroof)$",
+    "center-console": r"^body-hardware/(console|center-console|front-console|rear-console)$",
+    "door-panel": r"^interior-exterior-trim/interior-trim-(front-door|rear-door|door)$",
+    "blower-motor": r"^a-c-heating/blower-motor-fan$",
+    "fog-lights": r"^headlights-lighting/fog-lamps$",
 }
 
 RULES = {
@@ -135,6 +141,12 @@ RULES = {
     "wiper-motor": (r"^((front|rear|windshield|rear window) )?wiper motor( assembly)?$", ""),
     "knuckle": (r"^(steering )?knuckle( assembly)?$", ""),
     "strut": (r"^(front |rear )?(strut|shock absorber|shock)( assembly)?$", ""),
+    # tier D: name rule pending (written after reading the trial's list rows)
+    "sunroof": (r"(?!x)x", ""),
+    "center-console": (r"(?!x)x", ""),
+    "door-panel": (r"(?!x)x", ""),
+    "blower-motor": (r"(?!x)x", ""),
+    "fog-lights": (r"(?!x)x", ""),
 }
 
 PAINT = r"(-[a-z]+)*"  # paint names in bumper-cover slugs (bumper-cover-willow-green, bumper-cover-red-rear)
@@ -168,6 +180,12 @@ SLUG_RULES = {
     "wiper-motor": rf"^(rear-)?wiper-motor(-assembly)?{SIDE}$",
     "knuckle": rf"^(steering-)?knuckle{SIDE}$",
     "strut": rf"^(strut|shock-absorber|shock)(-assembly)?{SIDE}$",
+    # tier D: name rule pending (written after reading the trial's list rows)
+    "sunroof": r"(?!x)x",
+    "center-console": r"(?!x)x",
+    "door-panel": r"(?!x)x",
+    "blower-motor": r"(?!x)x",
+    "fog-lights": r"(?!x)x",
 }
 
 PRODUCT_RULES = {

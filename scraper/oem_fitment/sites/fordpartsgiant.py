@@ -73,6 +73,12 @@ SUBCATS = {
     # tier W (ops/interchange.md "Wheels"): chassis/wheels and
     # wheels_brakes/wheels_related_parts, as the oem-raw years manifest lists them
     "wheels": r"^wheels(_related_parts)?$",
+    # tier D wave 1 (§10): subs from the R2 years manifest
+    "sunroof": r"sunroof|moonroof|sun_roof",
+    "center-console": r"^console_floor$|^floor_console(_related_parts)?$",
+    "door-panel": r"door_trim_panels?$|^interior_trim_door_trim_(front|rear)$",
+    "blower-motor": r"heater_blower|blower",
+    "fog-lights": r"fog_lamps?(_related_parts)?$|^front_fog_lamps$",
 }
 SUBCAT_EXCL = {
     "side-mirrors": r"inside",
@@ -119,6 +125,12 @@ BASE = {
     "knuckle": r"3K185|3K186|3105|3106",
     "strut": r"18V?124|18V?125|18A092",
     "wheels": r"1007",
+    # tier D: name rule pending (written after reading the trial's list rows)
+    "sunroof": r"(?!x)x",
+    "center-console": r"(?!x)x",
+    "door-panel": r"(?!x)x",
+    "blower-motor": r"(?!x)x",
+    "fog-lights": r"(?!x)x",
 }
 # Names that are never the assembly even when the base matches.
 NAME_EXCL = re.compile(r"\b(Glass|Lens|Bulb|Bezel|Cover - Mirror|Gasket|Seal|Kit - Seal|Pulley|Clutch|"

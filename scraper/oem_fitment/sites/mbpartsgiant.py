@@ -69,6 +69,12 @@ CAT_PAGES = {
     "strut": r"^suspension/(struts-components|shocks-components|struts-suspension-components-front|front-suspension|front-suspension-components|rear-suspension|rear-suspension-components|ride-control-front|ride-control-rear)$",
     # tier W (ops/interchange.md "Wheels"): the years manifest lists suspension/wheels
     "wheels": r"^suspension/wheels$",
+    # tier D wave 1 (ops/interchange.md §10): slugs from the R2 years manifests
+    "sunroof": r"^(body-hardware/sunroof(-body)?|electrical/sunroof)$",
+    "center-console": r"^body-hardware/(console|center-console|front-console|rear-console)$",
+    "door-panel": r"^interior-exterior-trim/interior-trim-(front-door|rear-door|door)$",
+    "blower-motor": r"^a-c-heating/blower-motor-fan$",
+    "fog-lights": r"^headlights-lighting/fog-lamps$",
 }
 
 RULES = {
@@ -102,6 +108,12 @@ RULES = {
     # and "Wheel Alloy" beside "Wheel, Spare", "Wheel Cover", "Hub Cap", "Valve Stem"
     # and "Wheel Bolt"; anchored, so only road-wheel names match
     "wheels": (r"^wheel(,? (alloy|steel|aluminum|light alloy))?$|^(alloy|steel|aluminum|light alloy) wheel$", ""),
+    # tier D: name rule pending (written after reading the trial's list rows)
+    "sunroof": (r"(?!x)x", ""),
+    "center-console": (r"(?!x)x", ""),
+    "door-panel": (r"(?!x)x", ""),
+    "blower-motor": (r"(?!x)x", ""),
+    "fog-lights": (r"(?!x)x", ""),
 }
 
 PRODUCT_RULES = {

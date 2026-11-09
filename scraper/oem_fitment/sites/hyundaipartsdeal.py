@@ -85,6 +85,13 @@ SUBCATS = {
     # tier W (ops/interchange.md "Wheels"): the years manifest lists chassis/wheel_cap
     # ("Wheel & Cap"); accessories/wheel_kit_alloy and wheel_locks are not read
     "wheels": r"^wheel_cap$",
+    # tier D wave 1 (§10): subs from the R2 years manifests. "front_door_panel"
+    # is the door SHELL page (door-front); the trim board is "front_door_trim".
+    "sunroof": r"^sunroof$",
+    "center-console": r"^console$|^floor_console$|^console_floor$",
+    "door-panel": r"^(front|rear)_door_trim$",
+    "blower-motor": r"heater_blower",
+    "fog-lights": r"fog",
 }
 SUBCAT_EXCL = {
     "ac-compressor": r"duct|blower|evaporator|heater_unit",
@@ -163,6 +170,12 @@ PARTS = {
     "wheels": (r"^Wheel Assy-(Aluminium|Aluminum|Alloy|Steel|Chrome|Forged)\b|^Wheel Assy\s*\|",
                r"Cap|Cover|Nut|Bolt|Stud|Lock|Weight|Valve|Sensor|TPMS|Ornament|Emblem|Insert|Hub|Kit|Balance|Tire|"
                r"\b(?:Temporary|Temp|Spare|Compact|T-?Type|Space ?Saver)\b"),
+    # tier D: name rule pending (written after reading the trial's list rows)
+    "sunroof": (r"(?!x)x", ""),
+    "center-console": (r"(?!x)x", ""),
+    "door-panel": (r"(?!x)x", ""),
+    "blower-motor": (r"(?!x)x", ""),
+    "fog-lights": (r"(?!x)x", ""),
 }
 
 # Older catalogs spell "Assembly" where newer ones print "Assy".

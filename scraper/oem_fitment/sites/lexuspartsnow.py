@@ -90,6 +90,13 @@ SUBCATS = {
     "strut": r"^(front|rear)_spring_shock_absorber$",
     # tier W (ops/interchange.md "Wheels"): the years manifest lists it
     "wheels": r"^disc_wheel_wheel_cap$",
+    # tier D wave 1 (§10): console from the manifest; trim, roof and blower
+    # pages are named in the Toyota EPC style and are confirmed in the trial
+    "sunroof": r"sliding_roof|sun_?roof|moon_?roof",
+    "center-console": r"^console_box_bracket$",
+    "door-panel": r"door_trim|trim_board|inside_trim",
+    "blower-motor": r"blower",
+    "fog-lights": r"^fog_lamp$",
 }
 
 A = r"(?:assy|assembly)"
@@ -152,6 +159,12 @@ RULES = {
     # carries caps, nuts and ornaments, and spare wheels are excluded
     "wheels": (rf"^wheel,?\s*disc\b|^disc\s+wheel\b|^wheel,?\s*(aluminum|alloy|steel)\b",
                r"cap|cover|nut|bolt|stud|lock|weight|valve|sensor|ornament|emblem|insert|spare|temporary|compact|carrier|bearing|hub|kit|balance|tire"),
+    # tier D: name rule pending (written after reading the trial's list rows)
+    "sunroof": (r"(?!x)x", r"x^"),
+    "center-console": (r"(?!x)x", r"x^"),
+    "door-panel": (r"(?!x)x", r"x^"),
+    "blower-motor": (r"(?!x)x", r"x^"),
+    "fog-lights": (r"(?!x)x", r"x^"),
 }
 # excludes match at a word start ("ring" must not hit "steering")
 RULES = {k: (re.compile(inc, re.I), re.compile(rf"\b(?:{exc})", re.I)) for k, (inc, exc) in RULES.items()}

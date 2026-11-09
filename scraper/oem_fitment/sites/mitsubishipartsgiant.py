@@ -87,6 +87,12 @@ CAT_PAGES = {
     "wiper-motor": r"^(electrical/wipers|body-hardware/wiper-washer-components(-body)?)$",
     "knuckle": r"^suspension/(front-suspension|front-suspension-components|rear-suspension|rear-suspension-components|front-axle-carrier)$|^driveline-axles/(front-axle|front-axle-driveline|rear-axle)$",
     "strut": r"^suspension/(struts-components|shocks-components|struts-suspension-components-front|front-suspension|front-suspension-components|rear-suspension|rear-suspension-components|ride-control-front|ride-control-rear)$",
+    # tier D wave 1 (ops/interchange.md §10): slugs from the R2 years manifests
+    "sunroof": r"^(body-hardware/sunroof(-body)?|electrical/sunroof)$",
+    "center-console": r"^body-hardware/(console|center-console|front-console|rear-console)$",
+    "door-panel": r"^interior-exterior-trim/interior-trim-(front-door|rear-door|door)$",
+    "blower-motor": r"^a-c-heating/blower-motor-fan$",
+    "fog-lights": r"^headlights-lighting/fog-lamps$",
 }
 
 # (include on the printed list name, exclude on list name AND name slug)
@@ -143,6 +149,12 @@ RULES = {
     "wiper-motor": (r"^((front|rear) )?(wiper )?motor( assembly)?$", ""),
     "knuckle": (r"^(steering )?knuckle( assembly)?$", ""),
     "strut": (r"^(front |rear )?(strut|shock absorber|shock)( assembly)?$", ""),
+    # tier D: name rule pending (written after reading the trial's list rows)
+    "sunroof": (r"(?!x)x", ""),
+    "center-console": (r"(?!x)x", ""),
+    "door-panel": (r"(?!x)x", ""),
+    "blower-motor": (r"(?!x)x", ""),
+    "fog-lights": (r"(?!x)x", ""),
 }
 
 # the product URL's name slug must also name the assembly
@@ -176,6 +188,12 @@ SLUG_RULES = {
     "wiper-motor": r"^((front|rear)-)?(wiper-)?motor(-assembly)?(-driver-side|-passenger-side|-front|-rear)?$",
     "knuckle": r"^(steering-)?knuckle(-driver-side|-passenger-side|-front|-rear)?$",
     "strut": r"^(strut|shock-absorber|shock)(-assembly)?(-driver-side|-passenger-side|-front|-rear)?$",
+    # tier D: name rule pending (written after reading the trial's list rows)
+    "sunroof": r"(?!x)x",
+    "center-console": r"(?!x)x",
+    "door-panel": r"(?!x)x",
+    "blower-motor": r"(?!x)x",
+    "fog-lights": r"(?!x)x",
 }
 
 # door shells: the product page's Mitsubishi name decides front vs rear

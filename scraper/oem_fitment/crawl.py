@@ -53,12 +53,15 @@ TIERS = {
     # worklist entry says "tierC": true; done keys are per tier, so A/B work
     # is not redone when a finished site re-opens for tier C.
     "C": ["wiper-motor", "knuckle", "strut"],
+    # Tier D (owner 2026-11-09 ~23:00: "parts people go to junkyards for"),
+    # wave 1, ranked by the yards' price lists: only sites with "tierD": true.
+    "D": ["sunroof", "center-console", "door-panel", "blower-motor", "fog-lights"],
     # Wheels (ops/interchange.md "Wheels"): only sites whose worklist entry
     # says "wheels": true; done keys are per tier, so A/B work is not redone.
     "W": ["wheels"],
 }
 # worklist.json flag a site needs before a gated tier is crawled for it
-TIER_FLAG = {"C": "tierC", "W": "wheels"}
+TIER_FLAG = {"C": "tierC", "W": "wheels", "D": "tierD"}
 MAX_SEEDS = 3
 CHAIN_DEPTH = 4            # R4: replaces / replaced_by hops from a listed record
 CHAIN_TRIES = 3            # R4: network attempts per hop before it is given up (chain_given_up)
@@ -226,7 +229,7 @@ def main() -> None:
     deadline = time.time() + a.minutes * 60 if a.minutes else None
     site = a.site
     mod = module_for(site)
-    tiers = ["A", "B", "W", "C"] if a.tier == "all" else [a.tier]
+    tiers = ["A", "B", "W", "C", "D"] if a.tier == "all" else [a.tier]
     raw_dir = ROOT / "raw"
     raw_dir.mkdir(exist_ok=True)
     wl_all = json.loads((ROOT / "worklist.json").read_text()).get("sites", {})

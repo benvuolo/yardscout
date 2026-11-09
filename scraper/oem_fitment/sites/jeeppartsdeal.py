@@ -75,6 +75,12 @@ CAT_PAGES = {
     "wiper-motor": r"^(electrical/wipers|body-hardware/wiper-washer-components(-body)?)$",
     "knuckle": r"^suspension/(front-suspension|front-suspension-components|rear-suspension|rear-suspension-components|front-axle-carrier)$|^driveline-axles/(front-axle|front-axle-driveline|rear-axle)$",
     "strut": r"^suspension/(struts-components|shocks-components|struts-suspension-components-front|front-suspension|front-suspension-components|rear-suspension|rear-suspension-components|ride-control-front|ride-control-rear)$",
+    # tier D wave 1 (ops/interchange.md §10): slugs from the R2 years manifests
+    "sunroof": r"^(body-hardware/sunroof(-body)?|electrical/sunroof)$",
+    "center-console": r"^body-hardware/(console|center-console|front-console|rear-console)$",
+    "door-panel": r"^interior-exterior-trim/interior-trim-(front-door|rear-door|door)$",
+    "blower-motor": r"^a-c-heating/blower-motor-fan$",
+    "fog-lights": r"^headlights-lighting/fog-lamps$",
 }
 
 D = r"\W+"  # Mopar "Noun - Qualifier" / "NOUN Qualifier"
@@ -145,6 +151,12 @@ RULES = {
     # no spare / temporary / compact wheel, cap, cover, nut, lock or sensor
     "wheels": (rf"^wheel(\s+assembly)?({D}(aluminum|alloy|steel|chrome|painted|polished|forged|cast)\b|$|{D}front|{D}rear)",
                r"cap|cover|nut|bolt|stud|lock|weight|valve|sensor|ornament|emblem|insert|spare|temporary|compact|carrier|bearing|hub|kit|liner|flare|opening|molding|trim|balance|tire"),
+    # tier D: name rule pending (written after reading the trial's list rows)
+    "sunroof": (r"(?!x)x", ""),
+    "center-console": (r"(?!x)x", ""),
+    "door-panel": (r"(?!x)x", ""),
+    "blower-motor": (r"(?!x)x", ""),
+    "fog-lights": (r"(?!x)x", ""),
 }
 
 NOTES = {

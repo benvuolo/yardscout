@@ -125,6 +125,12 @@ SUBCATS = {
     # brakes_rear_axle_propeller_shaft_wheels_tires/wheels, wheels_wheel_covers and
     # wheels_hub_caps; spare_wheel, wheel_covers and the TPMS pages are not read
     "wheels": r"^wheels(_wheel_covers|_hub_caps)?$",
+    # tier D wave 1 (§10): subs from the R2 years manifest
+    "sunroof": r"^sunroof$",
+    "center-console": r"^console_floor(_upper|_lower|_front_extension|_rear)?$",
+    "door-panel": r"^door_trim_side_(front_driver|front_passenger|front|rear)$|^trim_(front_door_driver|front_door_passenger|rear_door)$",
+    "blower-motor": r"heater_blower|blower",
+    "fog-lights": r"^lamps_fog$",
 }
 SUBCAT_EXCL = {
     "window-regulator": r"trim|weatherstrip|glass_only|moldings",
@@ -205,6 +211,12 @@ PARTS = {
     "wheels": (N.format("WHEEL|WHEEL ASM|WHEEL,\\s*ALUMINUM|WHEEL,\\s*STEEL") + r"(?!\s+(COVER|TRIM|HOUSE|LINER|OPENING|NUT|BOLT|STUD|LOCK|CAP|WEIGHT|BEARING|SPEED|CYLINDER|ALIGN|DRIVE))",
                r"COVER|CAP|NUT|BOLT|STUD|LOCK|WEIGHT|VALVE|SENSOR|ORNAMENT|EMBLEM|INSERT|SPARE|TEMPORARY|COMPACT|CARRIER|BEARING|HUB|KIT|TRIM|RING|BALANCE|TIRE|STEERING|HOUSE|LINER|SKIN|CLAD",
                SUB + r"|^[^|]*,\s*(SPARE|TEMPORARY|COMPACT)\b[^|]*\||\|\s*[^|]*\b(SPARE|TEMPORARY|COMPACT|MINI SPARE|T-TYPE)\b[^|]*\|[^|]*$"),
+    # tier D: name rule pending (written after reading the trial's list rows)
+    "sunroof": (r"(?!x)x", "", SUB),
+    "center-console": (r"(?!x)x", "", SUB),
+    "door-panel": (r"(?!x)x", "", SUB),
+    "blower-motor": (r"(?!x)x", "", SUB),
+    "fog-lights": (r"(?!x)x", "", SUB),
 }
 
 def head(r: dict) -> str:

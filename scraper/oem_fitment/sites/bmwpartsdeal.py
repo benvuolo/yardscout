@@ -112,6 +112,12 @@ SUBCATS = {
     "wiper-motor": r"^wiper_system(_complete)?$|wiper_motor|^(single_parts_)?(windscreen|rear_window)_(wiper|cleaning)",
     "knuckle": r"^front_spring_strut_carrier_wheel_bearing$|^rear_axle_support_wheel_suspension$|^(?!repair)[a-z_]*wheel_carrier",
     "strut": r"^front_spring_strut_carrier_wheel_bearing$|^rear_spring_strut_mounting_parts$|^(?!repair)[a-z_]*(spring_strut|shock_absorber)[a-z_]*$",
+    # tier D wave 1 (§10): subs read on the 2006 325i / 2011 328i year pages
+    "sunroof": r"sliding_lifting_roof|sunroof|panorama",
+    "center-console": r"^(centre|center)_console$",
+    "door-panel": r"^door_trim_panel$|^door_trim_rear$",
+    "blower-motor": r"blower",
+    "fog-lights": r"^fog_lamp$|^fog_lights$",
 }
 
 RULES = {
@@ -150,6 +156,12 @@ RULES = {
                 r"spring|strut|bearing|bracket|axle|rubber|mount|bush|kit|repair|screw|bolt|nut|plate"),
     "strut": (r"^((left|right)\s+)?(front\s+)?((left|right)\s+)?spring\s+strut\b|^shock\s+absorber\b",
               r"auxiliary|rubber|mount|support|bearing|bracket|cap|kit|repair|set|stop|buffer|protect|roll-over|cover|tube|screw|bolt|nut"),
+    # tier D: name rule pending (written after reading the trial's list rows)
+    "sunroof": (r"(?!x)x", r"x^"),
+    "center-console": (r"(?!x)x", r"x^"),
+    "door-panel": (r"(?!x)x", r"x^"),
+    "blower-motor": (r"(?!x)x", r"x^"),
+    "fog-lights": (r"(?!x)x", r"x^"),
 }
 # excludes match at a word start ("ring" must not hit "steering")
 RULES = {k: (re.compile(inc, re.I), re.compile(rf"\b(?:{exc})", re.I)) for k, (inc, exc) in RULES.items()}
