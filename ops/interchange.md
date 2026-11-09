@@ -2091,3 +2091,40 @@ confirms; app changes go on branch interchange/categories-<n>.
    `model_engine_conflict` lint).
 2. Hub approval to add tier C = [wiper-motor, knuckle, strut] to crawl.py
    TIERS and the site-module rules (shared code).
+
+## Honda/Nissan (session_016ZzJfMtLKpUFu8TiEFMrkF, 2026-11-09; replaces session_016ZzJfK5RFgko9f1gx7qjEa)
+
+Owner, 2026-11-09: "start on Honda/Nissan and wheels"; "we're going for breadth
+here and data quality". Ship bar: CURATION_SPEC §11.4 sample with 0 WRONG per
+namespace, then hub confirmation, then groups/<ns>.json.
+
+- **R3 own-page completion, site-agnostic (main a31d3f6).** README "Own-page
+  completion, any site" has the 3 steps to enable a site.
+  - `curate.py` writes `_report/<ns>.own_page_completion.json`: the
+    vehicle-years the §5.16 own-page rule left out of a Likely candidate class
+    that spans 2+ feed models, per category, routed to the site seeded on that
+    make, ranked by cars x classes.
+  - `worklist.json` `"complete": {file, version}` + `markers.mode`: the
+    workflow runs `crawl.py --complete auto` once the site's worklist marker
+    exists, and the pass ends with `raw/<site>.cN.done`. Rows of other sites
+    are skipped. No new request types: the same navigation, fetch.py
+    allowlist, robots, pacing and permanent stop as the worklist crawl.
+  - Tests: tests/test_crawl_manifests.py 94/94 (auto mode, site filter,
+    marker, markers.mode table); curation_tests test_curate 103 (case 12:
+    unrouted vs routed row, ranking).
+- **Enabled:** hondapartsnow + acurapartswarehouse ->
+  `completion/honda.own_page.json` (25 rows, all Honda; 5,061 lot cars),
+  nissanpartsdeal + infinitipartsdeal -> `completion/nissan.own_page.json`
+  (320 rows: Nissan 201, Infiniti 119; 22,492 lot cars; 38 rows with 0 cars,
+  ranked last). Built on oem-raw@75dc442.
+- **Why Honda is only 25 rows:** of the 4,605 Honda app-year x category drops,
+  almost all belong to single-model classes (Accord-only across years and so
+  on). Those never make a Likely group (the same-model generation loop covers
+  them), so their pages are not queued. Acura has 0 rows for the same reason.
+- **Crawl:** not dispatched. At 17:45 UTC run 42666726212 (ford, lexus, jeep;
+  dispatched 17:39 from 7f1d535) was in progress. The next scheduled run
+  queues behind it, and its plan step selects the four sites in `complete`
+  mode.
+- **Next:** once `.c1.done` lands for the 4 sites, re-curate on the pinned sha,
+  run the §11.4 sample for honda and nissan (independent verifier), report to
+  the hub, and ship only after 0 WRONG and the hub's confirmation.
