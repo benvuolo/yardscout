@@ -2839,3 +2839,6 @@ each); nothing allowlisted or crawled.
   make breadth's truncation marker lands, `fetch.py --text` stops at 400 lines
   without warning. Verifiers must pass `--max-lines 100000` or read the cached
   HTML directly, so long list pages are not cut.
+- Audit note from the hub (~20:55 UTC), for the GSP and 1A §11.4 runs:
+  `fetch.py --text` cuts output at 400 lines unless `--max-lines` is passed.
+  Verifiers pass `--max-lines 100000` or read the cached pages directly.
