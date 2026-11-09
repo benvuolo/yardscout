@@ -2600,6 +2600,18 @@ Other outputs of this session:
 - Branch interchange/categories-2 (a6e5b04, stacked on categories-1, sw jh-v175, NOT merged):
   wave 1 app categories, body kind. Price tokens are exact rows (25-27/30 chains); notes cover
   colour, trim and option fitment.
+- Hub 22:58/23:04 UTC: option (c) APPROVED, and ship the 14 new categories now with same-gen donors only.
+  - main aee4fdc: tierD=1 placeholder flags on 14 sites (list pages only, confirmed in code).
+    crawl.local_guard refuses local runs while CI work is pending; --scratch-offline = cache only.
+  - crawl.tier_key: set "tierD": 2 together with the real rules, so the seeds are re-read
+    (done keys and list lines "D2"). Tier D curation reads only the "D2" lines.
+  - Branch interchange/categories-ship (380da21, sw jh-v176): categories-1 + categories-2 plus the
+    GROUP_HOLD_CATS hold (no OEM/aftermarket group for the 14 until each §11.4), 1A if_equipped/
+    cosmetic render, and kind wording. Sent to the hub for regression 23:50 UTC.
+  - Not run here (no Python playwright): interchange_e2e, pf_ux_e2e, part_finder_e2e.
+    Passed: ui_no_truncation (1296/0), pf_guards_unit, pf_new_cats_e2e, all unit suites.
+  - Next per site, once the CI placeholder pass has written its tier D list rows on oem-raw:
+    write rules from raw/<site>.lists.jsonl, set tierD 2, raise the version, then ci_audit.
 - Tier C priority: wiper-motor curation and §11.4 next, once honda/toyota/nissan have C data.
   Knuckle and strut audits are last.
 
