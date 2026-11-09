@@ -2510,3 +2510,30 @@ Unknown clauses refuse. Pages print no OE numbers, so no dealer OE join.
 pn x line; engine gate on Eng. Desg./liters; body gate on Body Type; refuse
 other notes) -> §11.4 sample per line -> hub -> branch
 interchange/aftermarket-1 for any app change. Nothing shipped.
+- **2026-11-09 ~19:00 UTC: three removal rules (hub-approved after the GM
+  series sample found live WRONGs).** curate.py; claims only go down.
+  1. Generation cut (`_generation_cut`): a Likely group of a superseding
+     number (product page Replaces / replaced-by / list replaced-by / chain)
+     may not cross a GENERATION_BREAKS break of any of its base models. The
+     vehicle-years before the newest break crossed are left out, twins
+     included. 20945139/38 (GMT900 front regulators that "Replace" the
+     GMT800 numbers) lose Silverado 1999-2000 and Sierra 2004.
+  2. EXPORT (`_export_only`, per row like the market rule): a row whose
+     every option alternative names EXPORT (GM Z5X/DE2 export mirrors) is
+     not listed for US feed cars. 27 GM groups go: DeVille/Seville, Astro/
+     Safari, S-10/Sonoma, Tahoe/Yukon 1999, Rainier/Trailblazer and
+     GMT900 export mirrors, a DeVille/Seville switch and a Rainier HVAC
+     panel, plus 25876716.
+  3. Cab note (`_cab_only`): when every fitment row crediting a model names
+     one cab type, the group says "<model>: <cab> only". It is held
+     (`held_cab_qualifier`) if the note would pass 160 characters; none is.
+     11 GM notes gain it (15844876/77 "Silverado: extended cab only";
+     Colorado/Canyon and Silverado rear doors "crew cab only").
+  - Result: gm 309 -> 279 (30 removed, 3 lose apps, 11 notes). The other 7
+    files are byte-identical. Full list:
+    `groups/_report/rules_2026-11-09_generation_export_cab.txt`.
+  - Tests for each rule both ways (test_curate). Gates: curation_tests
+    16/16, tests 29/29, scraper tests, pf_guards ALL PASS, measure parity
+    6/6, gm curate byte-identical twice, payload ok x8, test_groups_hash.
+  - The GM series branch stays off main until a resample on these rules has
+    0 WRONG.

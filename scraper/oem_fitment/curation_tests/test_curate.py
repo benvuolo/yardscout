@@ -619,4 +619,38 @@ check("23 jeeppartsdeal/window-switch is unconfirmed, so nothing is Verified",
       "category_unconfirmed" in I["elig"] and doc["groups"] == [])
 check("option hold: subaru gauge clusters held (Canada km/h clusters unmarked)",
       _P.held_cross_model_cat("subaru", "gauge-cluster") == "held_option_cross_model")
+# hub 2026-11-09 rules 1-3 (GM 20945139, 25876716, 15844876), both ways
+from types import SimpleNamespace as _NS
+_FO = "Fitting Vehicle Options: "
+check("EXPORT: an export-only option row is not for US cars (25876716, 10381000)",
+      C._export_only([_FO + "CK1,2(DE2,Z5X)(EXPORT)"]) and C._export_only([_FO + "KE(DR4,Z5X)(EXPORT)"]))
+check("EXPORT: a row with a non-export alternative, or EXC EXPORT, stays",
+      not C._export_only([_FO + "CK1,2(DE2,Z5X)(EXPORT), CK1,2(DL8)"])
+      and not C._export_only([_FO + "CK1,2(DL8)(EXC EXPORT)"]) and not C._export_only([_FO + "CK1,2(5B5)"]))
+_gc = C.Curation.__new__(C.Curation)
+_gc.js = _NS(GENERATION_BREAKS={"silverado": [2007, 2014], "sierra": [2007, 2014], "avalanche": [2007]})
+_rec = lambda rep: _NS(replaces=rep, replaced_by=[], list_replaced_by=[], via=None)
+_gTs = [("Chevrolet", "Silverado", 1999), ("Chevrolet", "Silverado", 2008), ("GMC", "Sierra", 2004),
+        ("Chevrolet", "Avalanche", 2007)]
+check("generation cut: a superseding number spanning a break keeps only the newest generation (twins too)",
+      _gc._generation_cut(_NS(records=[_rec(["15880567"])]), _gTs)
+      == [("Chevrolet", "Silverado", 2008), ("Chevrolet", "Avalanche", 2007)])
+check("generation cut: no supersession keeps every vehicle-year; no break crossed keeps every one",
+      _gc._generation_cut(_NS(records=[_rec([])]), _gTs) == _gTs
+      and _gc._generation_cut(_NS(records=[_rec(["X"])]), [("Chevrolet", "Silverado", 2008), ("Chevrolet", "Avalanche", 2010)])
+      == [("Chevrolet", "Silverado", 2008), ("Chevrolet", "Avalanche", 2010)])
+check("generation cut: the longest leading-word key is used ('silverado hd' before 'silverado')",
+      C.Curation._gen_breaks(_NS(js=_NS(GENERATION_BREAKS={"silverado": [2007], "silverado hd": [2001]})), "Silverado HD 2500")
+      == [2001])
+_cc = C.Curation.__new__(C.Curation)
+_k = object()
+_fr2 = lambda trims: _NS(trims=trims)
+_T1, _T2 = ("Chevrolet", "Silverado", 2008), ("Cadillac", "Escalade", 2007)
+_cc.t_rows = {(_T1, "window-regulator"): [(_k, None, _fr2(["1500 EXTENDED CAB LONG BOX", "2500 EXTENDED CAB STANDARD BOX"]), None)],
+              (_T2, "window-regulator"): [(_k, None, _fr2(["YUKON/DENALI/ESCALADE"]), None)]}
+check("cab note: every crediting row names one cab -> '<model>: <cab> only'; other models no note",
+      _cc._cab_only(_k, "window-regulator", [_T1, _T2]) == "Silverado: extended cab only")
+_cc.t_rows[(_T1, "window-regulator")].append((_k, None, _fr2(["1500 CREW CAB LONG BOX"]), None))
+check("cab note: two cab types, or a row without a cab, gives no note",
+      _cc._cab_only(_k, "window-regulator", [_T1, _T2]) == "")
 done("test_curate")
