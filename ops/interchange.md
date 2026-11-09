@@ -2299,3 +2299,241 @@ hub, ship only on 0 WRONG plus hub confirmation.
 - Payload identical to the pre-break build; oemStatus ok x7.
 - New `curation_tests/test_groups_hash.py` fails on any stale hash. Checked
   both ways.
+- **Tier C for the 4 Honda/Nissan sites (category-breadth request, 2026-11-09).**
+  Rules in d7c236e + 0fdaf09 (dict entries only; Infiniti reuses Nissan's).
+  Local trial `--tier C --max-segments 2`, scratch root, nothing on oem-raw:
+  0 errors, no refusals, all list pages read. Records: honda 43, acura 53,
+  nissan 23, infiniti 79. Curation notes:
+  - Nissan "Drive Assy-Windshield Wiper" is motor+linkage (its product page
+    says "Motor & Drive").
+  - Honda "Shock Absorber Assy." vs bare "Unit" is kept verbatim.
+  - Honda rear knuckles marked (2WD)/(4WD) need the drive gate.
+  - "N/A FOR USA" strut assemblies are dropped.
+  - Nissan rear axle housings are not knuckles.
+- 2026-11-09 18:00: ack of the hub rule. Any change to curate.py, policy.py,
+  notes.py, positions.py, markers.py, model_map.json or
+  release_allowlist.json ships in the same push as re-curated groups for
+  every shipped namespace. (a31d3f6 did not change the policy hash: it
+  touched no POLICY_INPUTS file.)
+
+### 7. Tier C: Honda/Acura/Nissan/Infiniti rules are in (session_016ZzJfMtLKpUFu8TiEFMrkF, d7c236e + 0fdaf09)
+- Trial runs (`--tier C --max-segments 2`, local scratch, nothing on
+  oem-raw): 0 errors, no refusals. Records: honda 43, acura 53, nissan 23,
+  infiniti 79.
+- For curation:
+  - Nissan "Drive Assy-Windshield Wiper" is motor plus linkage; "Motor
+    Assy" is the motor only.
+  - Honda sells "Shock Absorber Assy." and "Shock Absorber Unit"
+    separately; they must be split by packaging.
+  - Honda and Acura knuckle names carry (2WD)/(4WD): use the drive gate.
+  - Acura MDX "RR. Windshield Wiper" is the rear motor (slot R).
+  - "N/A FOR USA" rows are dropped.
+- Still open: crawl.py TIERS["C"] and the `all` tier list (both wait on the
+  wheels merge); rules for the other 12 sites; any dispatch. Knuckle and
+  strut curation must refuse option, drive, body and other notes the way
+  the path E audit showed (§5).
+
+### Make breadth, update 2026-11-09 ~18:25 UTC
+
+- **V8 near-miss (mine).** 1fe9425 (model_map.json) and fdc98da (policy.py)
+  changed the policy hash without re-curating the shipped groups, so the next
+  scan would have dropped all 7 OEM namespaces. No scan published in
+  between. Fixed by ef6f340 (category session; my identical fix was dropped
+  on rebase). I follow the standing rule from now on (ops/README.md).
+- **Subaru, hub rulings and rounds 3-4.**
+  - Round 3 (after the mirror hold, fdc98da: `policy.OPTION_HOLD_CATS`,
+    refusal `held_option_cross_model`): 2 WRONG. 85021AJ19A and 85002AL05A
+    are Canada-market km/h clusters (Hollander 257-54290 / 257-66945),
+    printed under US years with no market note.
+  - Gauge clusters held too (580692f, shipped groups re-curated, only the
+    hash differs). Subaru: 49 -> 34 groups (25 window regulators/motors,
+    9 climate controls; 4,449 lot cars).
+  - Round 4 (fresh seed, 30 of 34 + 8 held-release): **RIGHT 35, WRONG 0,
+    UNSURE 3** (61041AL00A, 61041AL02A: no outside source names them;
+    61188KG000: bare motor, no position). Ship-eligible; sent to the hub
+    for confirmation. Nothing committed for subaru yet.
+  - Lesson for every namespace (hub): a category where an unseen option
+    (heated, power-fold, turbo scoop, km/h vs mph) or an unmarked
+    non-US configuration splits the part needs a visible option note or a
+    hold. Check this in each namespace's sample.
+- **GM Silverado/Sierra 1500 series filter: branch `make-breadth-gm-series`,
+  not main.**
+  - model_map `series` (regexes on the option column; a row with no series
+    never maps). Feed "Silverado 1500" / "Sierra 1500" =
+    `^(?!.*CLASSIC)1500(?!\s*HD)` or `1/2 TON`; years 1999-2006 and
+    2008-2026 (2007 left out, both bodies sold).
+  - `_drop_catchall_twins`: the unknown-series feed "Silverado"/"Sierra"
+    leaves a group that holds the 1500 twin of the same catalog model and
+    year. Without it, 174 Silverado + Silverado 1500 groups appeared.
+  - On c36da2e: 0 new, 0 removed, 34 shipped GM groups change ("Silverado"
+    apps become "Silverado 1500"). §11.4 sample of 20 is with independent
+    verifiers. Ships only on 0 WRONG plus hub go, with re-curated groups in
+    the same push. The large gain (4.5k lot cars) comes when the GM
+    completion pages are read.
+
+### 8. HANDOVER: category breadth, tier C (2026-11-09 ~18:25 UTC, session_016ZzJfKdkBXaVYDDQb9cy2J)
+
+Hub decisions (18:20 UTC):
+- Path E is shelved. Branch `interchange/path-e` stays unshipped, with its
+  root causes in §5.
+- Tier C runs on the body path, in this order: (1) wiper-motor, (2) knuckle
+  and strut.
+- Strict refusal applies: any option, tank, emissions, plant,
+  production-date, drive or body note on the vehicle's own list-page row
+  means no claim. Drive splits are never crossed.
+- Each category needs a §11.4 sample with 0 WRONG and the hub's confirm.
+  App changes go on `interchange/categories-<n>`.
+
+State:
+- Done: Honda, Acura, Nissan and Infiniti modules (d7c236e, 0fdaf09,
+  session_016ZzJfMtLKpUFu8TiEFMrkF). Their trial was clean (§7).
+- Not done:
+  - crawl.py `TIERS["C"] = ["wiper-motor", "knuckle", "strut"]`, plus a
+    per-site worklist gate. Copy the wheels pattern on
+    `interchange/wheels`: a `"tierC": true` flag and a version bump, so a
+    `.done` site re-opens for tier C only. Done keys are per tier.
+  - The `tiers = [...]` line for `all`. Wait for the wheels merge or
+    rebase on it; the line conflicts.
+  - policy.NOUN entries: wiper-motor `wiper`, knuckle
+    `knuckle|spindle|axle-hub|front-axle|suspension`, strut
+    `strut|shock|suspension`. Check them against SIBLING_IGNORE (the
+    unread_sibling_page rule).
+- Remaining sites (14): fordpartsgiant, gmpartsgiant, toyotapartsnow,
+  lexuspartsnow, hyundaipartsdeal, kiapartsnow, jeeppartsdeal,
+  vwpartsgiant, audipartsgiant, mbpartsgiant, mazdapartsnow,
+  mitsubishipartsgiant, volvopartsgiant, bmwpartsdeal. Skip
+  moparpartsgiant (blocked; jeeppartsdeal carries Dodge/Chrysler) and
+  subarupartsdeal (withheld).
+  - Page slugs are in the R2 year manifests (`raw/<site>.years.jsonl`,
+    field `subs`) on oem-raw. They can be grepped with no requests.
+    Found so far:
+    - Ford: `body_and_paint/windshield_wiper`, `rear_window_wiper_and_washer`,
+      `chassis/front_knuckle_and_hub`, `rear_knuckle_and_suspension_arms`,
+      `front_suspension_struts_and_springs`, `rear_springs_and_shock_absorbers`.
+    - GM: `.../wiper_system_windshield`, `front_axle_front_suspension_steering/suspension_front`,
+      `frames_springs_shocks_bumpers_fascias/suspension_rear`. Some years
+      have `strut_assembly_front`.
+    - Hyundai/Kia: `electrical/windshield_wiper(_rear)`, `chassis/front_spring_strut`,
+      `rear_spring_strut`, `rear_shock_absorber_spring`.
+    - Lexus (and likely Toyota): `electrical/windshield_wiper`, `rear_wiper`,
+      `power_train_chassis/front_axle_arm_steering_knuckle`,
+      `front_spring_shock_absorber`, `rear_spring_shock_absorber`.
+    - Jeep/VW/MB SimplePart: `electrical/wipers`, `body-hardware/wiper-washer-components`,
+      `suspension/struts-components`, `shocks-components`,
+      `front-suspension-components`, `front-suspension`.
+  - Row text must be read before the name rules are written. Ford's
+    existing NAME_EXCL drops "Absorber", so strut needs its own rule. Ford
+    base numbers for the new parts are unverified: read them from real
+    rows, never guess.
+  - Two GM list pages were fetched for 2007 Impala; they returned 200 but
+    the subs were wrong for that year. Pick a year whose manifest lists
+    the sub.
+- Trial per site: `crawl.py --site <s> --tier C --max-segments 2` against a
+  scratch root. Then let the 6-hourly schedule crawl; never dispatch while a
+  run is active.
+
+Other outputs of this session:
+- Coverage matrix: `coverage_matrix.py`, run in about 1 min (§1). Re-run it
+  after each category ships; it is the scoreboard.
+- V8 fix (ef6f340) and `curation_tests/test_groups_hash.py`: any edit to
+  policy.py, notes.py, positions.py or model_map.json must ship with
+  re-curated groups/<ns>.json.
+- Path E audit file: `groups/_report/pathE_audit_2026-11-09.json`. The
+  per-item reasons are a good checklist of notes that knuckle and strut
+  curation must refuse.
+- **2026-11-09 ~18:45 UTC: subaru re-shipped (hub confirmed ~18:20).**
+  - groups/subaru.json: 42 Likely, curated on **oem-raw@75dc442** (where its
+    §11.4 sample was drawn). The other 7 namespaces stay on **c36da2e**.
+    Per-file raw refs are on purpose (hub): oemStatus shows each one's ref.
+  - The 42 = 34 rule-passing groups (25 window regulators/motors, 9 climate
+    controls) + the 8 held-release entries, now in release_allowlist.json
+    (`owner_go_subaru`). Sources are outside the dealer network; /p/ dealer
+    URLs were dropped.
+  - Allowlist entries can carry a `note` (policy.release_notes) that
+    replaces the generic reason. The hoods name the split their verifier's
+    source states: 57229AG04A9P "Turbo hood (scoop cutout): Legacy GT /
+    Outback XT only"; 57229AJ00A9P "Non-turbo hood (no scoop); the 2011-12
+    Legacy 2.5GT turbo uses a different hood".
+  - policy.WITHHELD_NS is empty. The withheld test now sets it explicitly.
+    test_payload / test_lazy_payload approve subaru.
+  - The 7 other files were re-curated in the same push; only policy_sha256
+    differs.
+  - Gates: curation_tests 16/16, tests 29/29, scraper/test_*.py all pass,
+    pf_guards_unit ALL PASS, measure parity ok, payload oemStatus ok x8
+    (0 Verified), second subaru curate byte-identical, test_groups_hash
+    passes.
+
+## Aftermarket breadth (session_016ZzJfMnemMEFN88kPnYgxs, 2026-11-09)
+
+Scope: more aftermarket application catalogs (owner: breadth + data
+quality, no third-party costs). Verdicts in `scraper/oem_fitment/SOURCES.md`
+"Aftermarket catalogs, probe 2026-11-09".
+
+**Probe results.** Depo OUT (challenge). Four Seasons OUT (403 challenge).
+SMP e-catalog OUT (403); ACI is an SMP brand, so OUT with it. Cardone OUT /
+unreachable (product grid client-side; sitemaps and terms robots-disallowed
+for us). Dorman, TYC, Denso stay out as decided. **Spectra Premium passes**
+(ecat.spectrapremium.com: robots allow all, no challenge on catalog pages,
+no anti-automation clause; Legal Notice has a no-reproduction clause for the
+hub to weigh).
+
+**Adapter (dde132d).** `aftermarket/spectrapremium.py`, vehicle-driven:
+worklist (year, make) -> get-models.json -> exact-normalized model match ->
+get-submodels.json (-> get-motorizations.json on comma ids) ->
+`/en/vehicles/<id>/parts?limit=50`. One record per vehicle: year, make,
+model, submodel, motorization (engine code), every part card (pn, line,
+application note, specs). Seed year per worklist segment first, then the
+other segment years >= 1995. Uses run.py (new `SITE_MODULES` map and an
+optional per-module `score` hook) and common.get, so pacing, cache, RFC 9309
+robots and the permanent stop are unchanged. Tests:
+`aftermarket/tests/test_spectrapremium.py` (20 checks, offline fixtures).
+
+Why vehicle pages: the part page prints applications without notes; the
+note lives only on the vehicle page. Real notes seen on 2012 Civic LX:
+radiator CU13221 "USA Built; Canadian Built" vs CU13257 "Japan Built"; fuel
+module SP8054M Federal vs SP8965M California emissions; A/C accumulator,
+evaporator and condenser split "Body Type: Coupe/Sedan". So curation will
+refuse plant / emissions / option / trans notes, map "Body Type" to the body
+gate, and pass only an allowlist of install-only clauses ("New", "with
+Clutch", "Sensor Only", "Qty Req.", "Failure to ... void warranty", ...).
+Unknown clauses refuse. Pages print no OE numbers, so no dealer OE join.
+
+**Blocked on the hub (asked 2026-11-09):**
+1. add `ecat.spectrapremium.com` to `fetch.ALLOWED`;
+2. `fetch.CHALLENGE_RE` matches "captcha" in the reCAPTCHA `<script src>`
+   tag on every ecat page (VIN form only); proposed narrow fix: ignore that
+   exact tag, every other marker still stops. Not changed by this session.
+3. then dispatch `oem-aftermarket-crawl.yml` with site
+   `ecat.spectrapremium.com`.
+
+**Next:** crawl -> `groups_spectra` curation (one Likely group per Spectra
+pn x line; engine gate on Eng. Desg./liters; body gate on Body Type; refuse
+other notes) -> §11.4 sample per line -> hub -> branch
+interchange/aftermarket-1 for any app change. Nothing shipped.
+- **2026-11-09 ~19:00 UTC: three removal rules (hub-approved after the GM
+  series sample found live WRONGs).** curate.py; claims only go down.
+  1. Generation cut (`_generation_cut`): a Likely group of a superseding
+     number (product page Replaces / replaced-by / list replaced-by / chain)
+     may not cross a GENERATION_BREAKS break of any of its base models. The
+     vehicle-years before the newest break crossed are left out, twins
+     included. 20945139/38 (GMT900 front regulators that "Replace" the
+     GMT800 numbers) lose Silverado 1999-2000 and Sierra 2004.
+  2. EXPORT (`_export_only`, per row like the market rule): a row whose
+     every option alternative names EXPORT (GM Z5X/DE2 export mirrors) is
+     not listed for US feed cars. 27 GM groups go: DeVille/Seville, Astro/
+     Safari, S-10/Sonoma, Tahoe/Yukon 1999, Rainier/Trailblazer and
+     GMT900 export mirrors, a DeVille/Seville switch and a Rainier HVAC
+     panel, plus 25876716.
+  3. Cab note (`_cab_only`): when every fitment row crediting a model names
+     one cab type, the group says "<model>: <cab> only". It is held
+     (`held_cab_qualifier`) if the note would pass 160 characters; none is.
+     11 GM notes gain it (15844876/77 "Silverado: extended cab only";
+     Colorado/Canyon and Silverado rear doors "crew cab only").
+  - Result: gm 309 -> 279 (30 removed, 3 lose apps, 11 notes). The other 7
+    files are byte-identical. Full list:
+    `groups/_report/rules_2026-11-09_generation_export_cab.txt`.
+  - Tests for each rule both ways (test_curate). Gates: curation_tests
+    16/16, tests 29/29, scraper tests, pf_guards ALL PASS, measure parity
+    6/6, gm curate byte-identical twice, payload ok x8, test_groups_hash.
+  - The GM series branch stays off main until a resample on these rules has
+    0 WRONG.

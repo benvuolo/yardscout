@@ -5132,7 +5132,10 @@
    "complete": {
     "file": "completion/nissan.own_page.json",
     "version": 1
-   }
+   },
+   "tierC": true,
+   "version": 2,
+   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 2 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys)."
   },
   "www.hondapartsnow.com": {
    "cars": 24360,
@@ -5477,7 +5480,10 @@
    "complete": {
     "file": "completion/honda.own_page.json",
     "version": 1
-   }
+   },
+   "tierC": true,
+   "version": 2,
+   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 2 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys)."
   },
   "www.toyotapartsnow.com": {
    "cars": 23044,
@@ -6692,7 +6698,10 @@
    "complete": {
     "file": "completion/honda.own_page.json",
     "version": 1
-   }
+   },
+   "tierC": true,
+   "version": 2,
+   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 2 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys)."
   },
   "www.jeeppartsdeal.com": {
    "cars": 42482,
@@ -8401,7 +8410,10 @@
    "complete": {
     "file": "completion/nissan.own_page.json",
     "version": 1
-   }
+   },
+   "tierC": true,
+   "version": 2,
+   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 2 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys)."
   },
   "www.subarupartsdeal.com": {
    "cars": 5542,

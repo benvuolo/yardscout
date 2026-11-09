@@ -59,6 +59,7 @@ ok(m("knuckle", "Knuckle, R. FR.") and m("knuckle", "Knuckle, L. FR.") and not m
    and not m("knuckle", "Joint, FR. Ball") and not m("knuckle", "Sensor Assy., R. FR."), "knuckle")
 ok(m("strut", "Shock Absorber Assy., R. FR.") and m("strut", "Shock Absorber Unit, RR.") and m("strut", "Shock Absorber Assy., RR. (MSDS)")
    and not m("strut", "Washer, Shock Absorber Mounting") and not m("strut", "Base, FR. Shock Absorber Mounting")
+   and not m("strut", "Shock Absorber Assy., RR. (N/A FOR USA: SEE COMPONENTS) (MSDS)")
    and not m("strut", "Spring, FR.") and not m("strut", "Bush, RR. Shock Absorber (LOWER)"), "strut")
 ok(re.search(H.CAT_PAGES["wiper-motor"], "front_windshield_wiper") and re.search(H.CAT_PAGES["knuckle"], "knuckle")
    and re.search(H.CAT_PAGES["strut"], "rear_shock_absorber") and not re.search(H.CAT_PAGES["wiper-motor"], "windshield_washer"), "tier C pages")

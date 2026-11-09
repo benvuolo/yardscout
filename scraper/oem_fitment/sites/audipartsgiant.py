@@ -79,6 +79,10 @@ CAT_PAGES = {
     "grille": r"^body-hardware/grille-components$",
     "trunk-lid": r"^body-hardware/trunk-lid-components$",
     "liftgate": r"^body-hardware/(lift-gate|liftgate[a-z-]*|tail-gate[a-z-]*|tailgate|back-door[a-z-]*)$",
+    # tier C (ops/interchange.md "Category breadth" §8): slugs from the R2 years manifests
+    "wiper-motor": r"^(electrical/wipers|body-hardware/wiper-washer-components(-body)?)$",
+    "knuckle": r"^suspension/(front-suspension|front-suspension-components|rear-suspension|rear-suspension-components|front-axle-carrier)$|^driveline-axles/(front-axle|front-axle-driveline|rear-axle)$",
+    "strut": r"^suspension/(struts-components|shocks-components|struts-suspension-components-front|front-suspension|front-suspension-components|rear-suspension|rear-suspension-components|ride-control-front|ride-control-rear)$",
 }
 
 RULES = {
@@ -123,6 +127,10 @@ RULES = {
     "trunk-lid": (r"^trunk lid$", r"stop|bumper|weatherstrip|hinge|strut|damper|lamp|cover|switch|lock|latch|trim|spoiler|garnish|molding|stay|cylinder|release"),
     "liftgate": (r"^(lift gate|liftgate|tail gate|tailgate|rear hatch)$",
                  r"handle|hinge|cable|lock|latch|glass|weather|stay|strut|cylinder|motor|wiper|spoiler|lamp|trim|molding|garnish|emblem|switch|striker|link|cover|pad|finish|damper|stop"),
+    # tier C: name rule pending (written after reading the trial's list rows)
+    "wiper-motor": (r"(?!x)x", ""),
+    "knuckle": (r"(?!x)x", ""),
+    "strut": (r"(?!x)x", ""),
 }
 
 SLUG_RULES = {
@@ -148,6 +156,10 @@ SLUG_RULES = {
     "grille": r"^(radiator-|center-)?grille(-assembly)?$",
     "trunk-lid": r"^trunk-lid$",
     "liftgate": rf"^(lift-?gate|tail-?gate|rear-hatch){SIDE}$",
+    # tier C: name rule pending (written after reading the trial's list rows)
+    "wiper-motor": r"(?!x)x",
+    "knuckle": r"(?!x)x",
+    "strut": r"(?!x)x",
 }
 
 NOTES = {

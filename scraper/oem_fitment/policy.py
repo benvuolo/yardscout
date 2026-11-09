@@ -89,7 +89,7 @@ def held_cross_model_cat(ns: str, cat: str) -> str | None:
 
 # Namespaces withheld from shipping (2026-11-09, ops/interchange.md): their
 # held groups are never released by the allowlist.
-WITHHELD_NS = frozenset({"subaru"})
+WITHHELD_NS = frozenset()   # subaru re-shipped 2026-11-09 (§11.4 round 4: 0 WRONG; hub confirmed)
 # §5.16 release allowlist: exact (ns, cat, pn, apps) entries let a held group
 # through the exterior hold; OEM_RELEASE_ALLOWLIST (tests only) points at
 # another file with the same layout.
@@ -108,6 +108,23 @@ def release_allowlist(path=None) -> set:
         if g.get("ns") in WITHHELD_NS:
             continue
         out.add((g["ns"], g["cat"], tuple(sorted(g["pn"])), tuple(tuple(a) for a in g["apps"])))
+    return out
+
+
+def release_notes(path=None) -> dict:
+    """{(ns, cat, pns, apps): reason text} for allowlist entries that carry a
+    "note" (2026-11-09, hub: a released group names the option split its
+    verification source states, e.g. a turbo-scoop hood). Same key as
+    release_allowlist(); the text replaces the generic reason in the note."""
+    import json
+    p = _Path(path) if path else RELEASE_ALLOWLIST_PATH
+    if not p.exists():
+        return {}
+    out = {}
+    for g in json.loads(p.read_text()).get("groups") or []:
+        if g.get("ns") in WITHHELD_NS or not g.get("note"):
+            continue
+        out[(g["ns"], g["cat"], tuple(sorted(g["pn"])), tuple(tuple(a) for a in g["apps"]))] = g["note"]
     return out
 
 

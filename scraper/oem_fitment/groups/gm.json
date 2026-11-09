@@ -11605,7 +11605,7 @@
    "Rainier",
    2004,
    "throttle-body",
-   "open:uncrawled_chain_member"
+   "open:unverified_product"
   ],
   [
    "Buick",
@@ -82310,6 +82310,2421 @@
   [
    "Chevrolet",
    "Silverado",
+   2024,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   1999,
+   "ac-compressor",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   1999,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   1999,
+   "climate-control",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   1999,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   1999,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   1999,
+   "fender",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   1999,
+   "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   1999,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   1999,
+   "headlights",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   1999,
+   "hood",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   1999,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   1999,
+   "power-steering-pump",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   1999,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   1999,
+   "side-mirrors",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   1999,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   1999,
+   "tail-lights",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   1999,
+   "tailgate",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   1999,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   1999,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   1999,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2000,
+   "ac-compressor",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2000,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2000,
+   "bumper-front",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2000,
+   "climate-control",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2000,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2000,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2000,
+   "fender",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2000,
+   "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2000,
+   "gauge-cluster",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2000,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2000,
+   "headlights",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2000,
+   "hood",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2000,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2000,
+   "power-steering-pump",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2000,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2000,
+   "side-mirrors",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2000,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2000,
+   "tail-lights",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2000,
+   "tailgate",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2000,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2000,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2000,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2001,
+   "ac-compressor",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2001,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2001,
+   "bumper-front",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2001,
+   "bumper-rear",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2001,
+   "climate-control",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2001,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2001,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2001,
+   "fender",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2001,
+   "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2001,
+   "gauge-cluster",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2001,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2001,
+   "headlights",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2001,
+   "hood",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2001,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2001,
+   "power-steering-pump",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2001,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2001,
+   "side-mirrors",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2001,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2001,
+   "tail-lights",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2001,
+   "tailgate",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2001,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2001,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2001,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2002,
+   "ac-compressor",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2002,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2002,
+   "bumper-rear",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2002,
+   "climate-control",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2002,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2002,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2002,
+   "fender",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2002,
+   "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2002,
+   "gauge-cluster",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2002,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2002,
+   "headlights",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2002,
+   "hood",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2002,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2002,
+   "power-steering-pump",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2002,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2002,
+   "side-mirrors",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2002,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2002,
+   "tail-lights",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2002,
+   "tailgate",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2002,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2002,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2002,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2003,
+   "ac-compressor",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2003,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2003,
+   "bumper-rear",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2003,
+   "climate-control",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2003,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2003,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2003,
+   "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2003,
+   "gauge-cluster",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2003,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2003,
+   "headlights",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2003,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2003,
+   "power-steering-pump",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2003,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2003,
+   "side-mirrors",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2003,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2003,
+   "tail-lights",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2003,
+   "tailgate",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2003,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2003,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2003,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2004,
+   "ac-compressor",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2004,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2004,
+   "bumper-rear",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2004,
+   "climate-control",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2004,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2004,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2004,
+   "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2004,
+   "gauge-cluster",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2004,
+   "headlights",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2004,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2004,
+   "power-steering-pump",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2004,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2004,
+   "side-mirrors",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2004,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2004,
+   "tail-lights",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2004,
+   "tailgate",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2004,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2004,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2004,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2005,
+   "ac-compressor",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2005,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2005,
+   "bumper-rear",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2005,
+   "climate-control",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2005,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2005,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2005,
+   "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2005,
+   "gauge-cluster",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2005,
+   "headlights",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2005,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2005,
+   "power-steering-pump",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2005,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2005,
+   "side-mirrors",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2005,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2005,
+   "tail-lights",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2005,
+   "tailgate",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2005,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2005,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2005,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2006,
+   "ac-compressor",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2006,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2006,
+   "bumper-rear",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2006,
+   "climate-control",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2006,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2006,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2006,
+   "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2006,
+   "gauge-cluster",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2006,
+   "headlights",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2006,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2006,
+   "power-steering-pump",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2006,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2006,
+   "side-mirrors",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2006,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2006,
+   "tail-lights",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2006,
+   "tailgate",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2006,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2006,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2006,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2008,
+   "ac-compressor",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2008,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2008,
+   "climate-control",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2008,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2008,
+   "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2008,
+   "gauge-cluster",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2008,
+   "headlights",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2008,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2008,
+   "power-steering-pump",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2008,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2008,
+   "side-mirrors",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2008,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2008,
+   "tail-lights",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2008,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2008,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2008,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2009,
+   "ac-compressor",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2009,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2009,
+   "climate-control",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2009,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2009,
+   "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2009,
+   "gauge-cluster",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2009,
+   "headlights",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2009,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2009,
+   "power-steering-pump",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2009,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2009,
+   "side-mirrors",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2009,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2009,
+   "tail-lights",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2009,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2009,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2009,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2010,
+   "ac-compressor",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2010,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2010,
+   "climate-control",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2010,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2010,
+   "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2010,
+   "gauge-cluster",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2010,
+   "headlights",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2010,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2010,
+   "power-steering-pump",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2010,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2010,
+   "side-mirrors",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2010,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2010,
+   "tail-lights",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2010,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2010,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2010,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2011,
+   "ac-compressor",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2011,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2011,
+   "climate-control",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2011,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2011,
+   "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2011,
+   "gauge-cluster",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2011,
+   "headlights",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2011,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2011,
+   "power-steering-pump",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2011,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2011,
+   "side-mirrors",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2011,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2011,
+   "tail-lights",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2011,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2011,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2011,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2012,
+   "ac-compressor",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2012,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2012,
+   "climate-control",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2012,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2012,
+   "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2012,
+   "gauge-cluster",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2012,
+   "headlights",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2012,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2012,
+   "power-steering-pump",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2012,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2012,
+   "side-mirrors",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2012,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2012,
+   "tail-lights",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2012,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2012,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2012,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2013,
+   "ac-compressor",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2013,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2013,
+   "climate-control",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2013,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2013,
+   "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2013,
+   "gauge-cluster",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2013,
+   "headlights",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2013,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2013,
+   "power-steering-pump",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2013,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2013,
+   "side-mirrors",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2013,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2013,
+   "tail-lights",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2013,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2013,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2013,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2014,
+   "ac-compressor",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2014,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2014,
+   "climate-control",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2014,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2014,
+   "headlights",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2014,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2014,
+   "side-mirrors",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2014,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2014,
+   "tail-lights",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2014,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2014,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2014,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2015,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2015,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2015,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2015,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2015,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2016,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2016,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2016,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2016,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2017,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2017,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2017,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2017,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2018,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2018,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2018,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2018,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2019,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2019,
+   "bumper-front",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2019,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2019,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2019,
+   "fender",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2019,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2019,
+   "hood",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2019,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2019,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2019,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2019,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2019,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2020,
+   "bumper-front",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2020,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2020,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2020,
+   "fender",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2020,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2020,
+   "hood",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2020,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2020,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2020,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2020,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2021,
+   "bumper-front",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2021,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2021,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2021,
+   "fender",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2021,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2021,
+   "hood",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2021,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2021,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2021,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2021,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2022,
+   "bumper-front",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2022,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2022,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2022,
+   "fender",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2022,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2022,
+   "hood",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2022,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2022,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2022,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2022,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2023,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2023,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2023,
+   "fender",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2023,
+   "hood",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2023,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2023,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2023,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2024,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2024,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2024,
+   "fender",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2024,
+   "hood",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2024,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2024,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
    2024,
    "window-switch",
    "open:ambig_target"
@@ -116918,6 +119333,2379 @@
   [
    "GMC",
    "Sierra",
+   2024,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   1999,
+   "ac-compressor",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   1999,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   1999,
+   "climate-control",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   1999,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   1999,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   1999,
+   "fender",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   1999,
+   "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   1999,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   1999,
+   "headlights",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   1999,
+   "hood",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   1999,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   1999,
+   "power-steering-pump",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   1999,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   1999,
+   "side-mirrors",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   1999,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   1999,
+   "tail-lights",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   1999,
+   "tailgate",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   1999,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   1999,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   1999,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2000,
+   "ac-compressor",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2000,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2000,
+   "climate-control",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2000,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2000,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2000,
+   "fender",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2000,
+   "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2000,
+   "gauge-cluster",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2000,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2000,
+   "headlights",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2000,
+   "hood",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2000,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2000,
+   "power-steering-pump",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2000,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2000,
+   "side-mirrors",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2000,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2000,
+   "tail-lights",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2000,
+   "tailgate",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2000,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2000,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2000,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2001,
+   "ac-compressor",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2001,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2001,
+   "bumper-front",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2001,
+   "bumper-rear",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2001,
+   "climate-control",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2001,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2001,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2001,
+   "fender",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2001,
+   "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2001,
+   "gauge-cluster",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2001,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2001,
+   "headlights",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2001,
+   "hood",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2001,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2001,
+   "power-steering-pump",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2001,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2001,
+   "side-mirrors",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2001,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2001,
+   "tail-lights",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2001,
+   "tailgate",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2001,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2001,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2001,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2002,
+   "ac-compressor",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2002,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2002,
+   "bumper-front",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2002,
+   "bumper-rear",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2002,
+   "climate-control",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2002,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2002,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2002,
+   "fender",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2002,
+   "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2002,
+   "gauge-cluster",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2002,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2002,
+   "headlights",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2002,
+   "hood",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2002,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2002,
+   "power-steering-pump",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2002,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2002,
+   "side-mirrors",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2002,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2002,
+   "tail-lights",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2002,
+   "tailgate",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2002,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2002,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2002,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2003,
+   "ac-compressor",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2003,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2003,
+   "bumper-front",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2003,
+   "bumper-rear",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2003,
+   "climate-control",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2003,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2003,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2003,
+   "fender",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2003,
+   "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2003,
+   "gauge-cluster",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2003,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2003,
+   "headlights",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2003,
+   "hood",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2003,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2003,
+   "power-steering-pump",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2003,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2003,
+   "side-mirrors",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2003,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2003,
+   "tail-lights",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2003,
+   "tailgate",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2003,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2003,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2003,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2004,
+   "ac-compressor",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2004,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2004,
+   "bumper-front",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2004,
+   "bumper-rear",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2004,
+   "climate-control",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2004,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2004,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2004,
+   "fender",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2004,
+   "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2004,
+   "gauge-cluster",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2004,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2004,
+   "headlights",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2004,
+   "hood",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2004,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2004,
+   "power-steering-pump",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2004,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2004,
+   "side-mirrors",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2004,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2004,
+   "tail-lights",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2004,
+   "tailgate",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2004,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2004,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2004,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2005,
+   "ac-compressor",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2005,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2005,
+   "bumper-front",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2005,
+   "bumper-rear",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2005,
+   "climate-control",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2005,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2005,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2005,
+   "fender",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2005,
+   "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2005,
+   "gauge-cluster",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2005,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2005,
+   "headlights",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2005,
+   "hood",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2005,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2005,
+   "power-steering-pump",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2005,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2005,
+   "side-mirrors",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2005,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2005,
+   "tail-lights",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2005,
+   "tailgate",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2005,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2005,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2005,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2006,
+   "ac-compressor",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2006,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2006,
+   "bumper-front",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2006,
+   "bumper-rear",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2006,
+   "climate-control",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2006,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2006,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2006,
+   "fender",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2006,
+   "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2006,
+   "gauge-cluster",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2006,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2006,
+   "headlights",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2006,
+   "hood",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2006,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2006,
+   "power-steering-pump",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2006,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2006,
+   "side-mirrors",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2006,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2006,
+   "tail-lights",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2006,
+   "tailgate",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2006,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2006,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2006,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2008,
+   "ac-compressor",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2008,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2008,
+   "climate-control",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2008,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2008,
+   "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2008,
+   "headlights",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2008,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2008,
+   "power-steering-pump",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2008,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2008,
+   "side-mirrors",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2008,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2008,
+   "tail-lights",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2008,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2008,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2008,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2009,
+   "ac-compressor",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2009,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2009,
+   "climate-control",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2009,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2009,
+   "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2009,
+   "headlights",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2009,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2009,
+   "power-steering-pump",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2009,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2009,
+   "side-mirrors",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2009,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2009,
+   "tail-lights",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2009,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2009,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2009,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2010,
+   "ac-compressor",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2010,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2010,
+   "climate-control",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2010,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2010,
+   "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2010,
+   "headlights",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2010,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2010,
+   "power-steering-pump",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2010,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2010,
+   "side-mirrors",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2010,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2010,
+   "tail-lights",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2010,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2010,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2010,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2011,
+   "ac-compressor",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2011,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2011,
+   "climate-control",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2011,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2011,
+   "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2011,
+   "headlights",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2011,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2011,
+   "power-steering-pump",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2011,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2011,
+   "side-mirrors",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2011,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2011,
+   "tail-lights",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2011,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2011,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2011,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2012,
+   "ac-compressor",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2012,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2012,
+   "climate-control",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2012,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2012,
+   "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2012,
+   "headlights",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2012,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2012,
+   "power-steering-pump",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2012,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2012,
+   "side-mirrors",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2012,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2012,
+   "tail-lights",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2012,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2012,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2012,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2013,
+   "ac-compressor",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2013,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2013,
+   "climate-control",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2013,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2013,
+   "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2013,
+   "headlights",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2013,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2013,
+   "power-steering-pump",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2013,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2013,
+   "side-mirrors",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2013,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2013,
+   "tail-lights",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2013,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2013,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2013,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2014,
+   "ac-compressor",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2014,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2014,
+   "climate-control",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2014,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2014,
+   "headlights",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2014,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2014,
+   "side-mirrors",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2014,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2014,
+   "tail-lights",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2014,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2014,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2014,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2015,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2015,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2015,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2015,
+   "throttle-body",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2015,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2016,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2016,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2016,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2016,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2017,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2017,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2017,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2017,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2018,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2018,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2018,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2018,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2019,
+   "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2019,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2019,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2019,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2019,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2019,
+   "window-regulator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2019,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2020,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2020,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2020,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2020,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2020,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2021,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2021,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2021,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2021,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2021,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2022,
+   "bumper-front",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2022,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2022,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2022,
+   "fender",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2022,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2022,
+   "hood",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2022,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2022,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2022,
+   "starter",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2022,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2023,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2023,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2023,
+   "fender",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2023,
+   "hood",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2023,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2023,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2023,
+   "window-switch",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2024,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2024,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2024,
+   "fender",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2024,
+   "hood",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2024,
+   "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2024,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
    2024,
    "window-switch",
    "open:ambig_target"
@@ -150986,90 +155774,6 @@
    ],
    "reman": false
   },
-  "gm:10381000": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1430"
-   ],
-   "names": [
-    "MIRROR, OUTSIDE REAR VIEW(INCLUDES 2,7)(PAINT TO MATCH)"
-   ],
-   "pns": [
-    "10381000"
-   ],
-   "reman": false
-  },
-  "gm:10381002": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1431"
-   ],
-   "names": [
-    "MIRROR, OUTSIDE REAR VIEW(INCLUDES 2,7)(PAINT TO MATCH)"
-   ],
-   "pns": [
-    "10381002"
-   ],
-   "reman": false
-  },
-  "gm:10381003": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1432"
-   ],
-   "names": [
-    "MIRROR, OUTSIDE REAR VIEW(INCLUDES 2,7)(PAINT TO MATCH)"
-   ],
-   "pns": [
-    "10381003"
-   ],
-   "reman": false
-  },
-  "gm:10381012": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1433"
-   ],
-   "names": [
-    "MIRROR, OUTSIDE REAR VIEW(INCLUDES 2,7)(PAINT TO MATCH)"
-   ],
-   "pns": [
-    "10381012"
-   ],
-   "reman": false
-  },
-  "gm:10381013": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1434"
-   ],
-   "names": [
-    "MIRROR, OUTSIDE REAR VIEW(INCLUDES 2,7)(PAINT TO MATCH)"
-   ],
-   "pns": [
-    "10381013"
-   ],
-   "reman": false
-  },
-  "gm:10381019": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1435"
-   ],
-   "names": [
-    "MIRROR, OUTSIDE REAR VIEW(INCLUDES 2,7)(PAINT TO MATCH)"
-   ],
-   "pns": [
-    "10381019"
-   ],
-   "reman": false
-  },
   "gm:10381042": {
    "cat": "side-mirrors",
    "comp": null,
@@ -151196,20 +155900,6 @@
    ],
    "reman": false
   },
-  "gm:15017250": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L2422"
-   ],
-   "names": [
-    "MIRROR, OUTSIDE REAR VIEW(INCLUDES 3-5)"
-   ],
-   "pns": [
-    "15017250"
-   ],
-   "reman": false
-  },
   "gm:15041706": {
    "cat": "window-regulator",
    "comp": "reg?",
@@ -151235,90 +155925,6 @@
    ],
    "pns": [
     "15041707"
-   ],
-   "reman": false
-  },
-  "gm:15053725": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1804"
-   ],
-   "names": [
-    "MIRROR, OUTSIDE REAR VIEW(INCLUDES 1)"
-   ],
-   "pns": [
-    "15053725"
-   ],
-   "reman": false
-  },
-  "gm:15053726": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1805"
-   ],
-   "names": [
-    "MIRROR, OUTSIDE REAR VIEW(INCLUDES 1)"
-   ],
-   "pns": [
-    "15053726"
-   ],
-   "reman": false
-  },
-  "gm:15053727": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1806"
-   ],
-   "names": [
-    "MIRROR, OUTSIDE REAR VIEW(INCLUDES 1)"
-   ],
-   "pns": [
-    "15053727"
-   ],
-   "reman": false
-  },
-  "gm:15053728": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1807"
-   ],
-   "names": [
-    "MIRROR, OUTSIDE REAR VIEW(INCLUDES 1)((M/W 12085536)(4-WAY MALE)(W/LEADS)(W/O TERMINAL POSITION ASSURANCE)(BLACK))"
-   ],
-   "pns": [
-    "15053728"
-   ],
-   "reman": false
-  },
-  "gm:15078222": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L983"
-   ],
-   "names": [
-    "MIRROR, OUTSIDE REAR VIEW"
-   ],
-   "pns": [
-    "15078222"
-   ],
-   "reman": false
-  },
-  "gm:15078226": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L984"
-   ],
-   "names": [
-    "MIRROR, OUTSIDE REAR VIEW(INCLUDES 5)"
-   ],
-   "pns": [
-    "15078226"
    ],
    "reman": false
   },
@@ -151784,20 +156390,6 @@
    ],
    "reman": false
   },
-  "gm:15744818": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L989"
-   ],
-   "names": [
-    "MIRROR, OUTSIDE REAR VIEW(INCLUDES 5)(PAINT TO MATCH)"
-   ],
-   "pns": [
-    "15744818"
-   ],
-   "reman": false
-  },
   "gm:15757375": {
    "cat": "side-mirrors",
    "comp": null,
@@ -151938,34 +156530,6 @@
    ],
    "reman": false
   },
-  "gm:15789784": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L353"
-   ],
-   "names": [
-    "MIRROR, OUTSIDE REAR VIEW(INCLUDES 4-8)(W/O HEATED MIRROR SYM ON GLASS)"
-   ],
-   "pns": [
-    "15789784"
-   ],
-   "reman": false
-  },
-  "gm:15789787": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L359"
-   ],
-   "names": [
-    "MIRROR, OUTSIDE REAR VIEW(INCLUDES 4-11)(W/O HEATED MIRROR SYM ON GLASS)"
-   ],
-   "pns": [
-    "15789787"
-   ],
-   "reman": false
-  },
   "gm:15789788": {
    "cat": "side-mirrors",
    "comp": null,
@@ -152033,20 +156597,6 @@
    ],
    "pns": [
     "15789792"
-   ],
-   "reman": false
-  },
-  "gm:15814151": {
-   "cat": "climate-control",
-   "comp": "assy",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L393"
-   ],
-   "names": [
-    "CONTROL, HEATER & A/C(INCLUDES 3-5)"
-   ],
-   "pns": [
-    "15814151"
    ],
    "reman": false
   },
@@ -153296,20 +157846,6 @@
    ],
    "reman": false
   },
-  "gm:20809994": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L114"
-   ],
-   "names": [
-    "MIRROR, OUTSIDE REAR VIEW(INCLUDES 1-3,5,8)(PEBBLE GRAINED FINISH)(MOLDED IN BLACK)"
-   ],
-   "pns": [
-    "20809994"
-   ],
-   "reman": false
-  },
   "gm:20830824": {
    "cat": "window-switch",
    "comp": null,
@@ -153968,20 +158504,6 @@
    ],
    "reman": false
   },
-  "gm:25644754": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1446"
-   ],
-   "names": [
-    "MIRROR, OUTSIDE REAR VIEW(INCLUDES 1,2,5)(PAINT TO MATCH)"
-   ],
-   "pns": [
-    "25644754"
-   ],
-   "reman": false
-  },
   "gm:25644756": {
    "cat": "side-mirrors",
    "comp": null,
@@ -153993,104 +158515,6 @@
    ],
    "pns": [
     "25644756"
-   ],
-   "reman": false
-  },
-  "gm:25644757": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1447"
-   ],
-   "names": [
-    "MIRROR, OUTSIDE REAR VIEW(INCLUDES 1,2,5)(PAINT TO MATCH)"
-   ],
-   "pns": [
-    "25644757"
-   ],
-   "reman": false
-  },
-  "gm:25661615": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1448"
-   ],
-   "names": [
-    "MIRROR, OUTSIDE REAR VIEW(INCLUDES 1,2,5)(PAINT TO MATCH)"
-   ],
-   "pns": [
-    "25661615"
-   ],
-   "reman": false
-  },
-  "gm:25661616": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1449"
-   ],
-   "names": [
-    "MIRROR, OUTSIDE REAR VIEW(INCLUDES 1,2,5)(PAINT TO MATCH)"
-   ],
-   "pns": [
-    "25661616"
-   ],
-   "reman": false
-  },
-  "gm:25680163": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1441"
-   ],
-   "names": [
-    "MIRROR, OUTSIDE REAR VIEW(INCLUDES 2,7)(PAINT TO MATCH)"
-   ],
-   "pns": [
-    "25680163"
-   ],
-   "reman": false
-  },
-  "gm:25690133": {
-   "cat": "window-switch",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1485"
-   ],
-   "names": [
-    "SWITCH, SIDE WINDOW(FRONT)(BLACK)"
-   ],
-   "pns": [
-    "25690133"
-   ],
-   "reman": false
-  },
-  "gm:25691531": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1450"
-   ],
-   "names": [
-    "MIRROR, OUTSIDE REAR VIEW(INCLUDES 1,2,5)(PAINT TO MATCH)"
-   ],
-   "pns": [
-    "25691531"
-   ],
-   "reman": false
-  },
-  "gm:25691532": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1451"
-   ],
-   "names": [
-    "MIRROR, OUTSIDE REAR VIEW(INCLUDES 1,2,5)(PAINT TO MATCH)"
-   ],
-   "pns": [
-    "25691532"
    ],
    "reman": false
   },
@@ -154388,20 +158812,6 @@
    ],
    "reman": false
   },
-  "gm:25779998": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1068"
-   ],
-   "names": [
-    "MIRROR, OUTSIDE REAR VIEW(INCLUDES 1-3,5-7,10)(PAINT TO MATCH)"
-   ],
-   "pns": [
-    "25779998"
-   ],
-   "reman": false
-  },
   "gm:25782166": {
    "cat": "side-mirrors",
    "comp": null,
@@ -154413,20 +158823,6 @@
    ],
    "pns": [
     "25782166"
-   ],
-   "reman": false
-  },
-  "gm:25782175": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1069"
-   ],
-   "names": [
-    "MIRROR, OUTSIDE REAR VIEW(INCLUDES 1-3,5-7,10)(CHROME)"
-   ],
-   "pns": [
-    "25782175"
    ],
    "reman": false
   },
@@ -154542,20 +158938,6 @@
    ],
    "reman": false
   },
-  "gm:25865452": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1072"
-   ],
-   "names": [
-    "MIRROR, OUTSIDE REAR VIEW(INCLUDES 1-3,5-7,10)(BLACK)"
-   ],
-   "pns": [
-    "25865452"
-   ],
-   "reman": false
-  },
   "gm:25876714": {
    "cat": "side-mirrors",
    "comp": null,
@@ -154581,20 +158963,6 @@
    ],
    "pns": [
     "25876715"
-   ],
-   "reman": false
-  },
-  "gm:25876716": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L69"
-   ],
-   "names": [
-    "MIRROR, OUTSIDE REAR VIEW(INCLUDES 2,5)"
-   ],
-   "pns": [
-    "25876716"
    ],
    "reman": false
   },
@@ -166939,6 +171307,342 @@
   ],
   [
    "Chevrolet",
+   "Silverado 1500",
+   1999,
+   "alternator",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   1999,
+   "ignition-coils",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   1999,
+   "starter",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2000,
+   "alternator",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2000,
+   "ignition-coils",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2000,
+   "starter",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2001,
+   "alternator",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2001,
+   "ignition-coils",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2001,
+   "starter",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2002,
+   "alternator",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2002,
+   "ignition-coils",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2002,
+   "starter",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2003,
+   "alternator",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2003,
+   "ignition-coils",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2003,
+   "starter",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2004,
+   "alternator",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2004,
+   "ignition-coils",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2004,
+   "starter",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2005,
+   "alternator",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2005,
+   "ignition-coils",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2005,
+   "starter",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2006,
+   "alternator",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2006,
+   "ignition-coils",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2006,
+   "starter",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2008,
+   "alternator",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2008,
+   "ignition-coils",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2008,
+   "starter",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2009,
+   "alternator",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2009,
+   "ignition-coils",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2009,
+   "starter",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2010,
+   "alternator",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2010,
+   "ignition-coils",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2010,
+   "starter",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2011,
+   "alternator",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2011,
+   "ignition-coils",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2011,
+   "starter",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2012,
+   "alternator",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2012,
+   "ignition-coils",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2012,
+   "starter",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2013,
+   "alternator",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2013,
+   "ignition-coils",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2013,
+   "starter",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
    "Sonic",
    2012,
    "alternator",
@@ -170812,6 +175516,342 @@
   [
    "GMC",
    "Sierra",
+   2013,
+   "starter",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   1999,
+   "alternator",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   1999,
+   "ignition-coils",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   1999,
+   "starter",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2000,
+   "alternator",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2000,
+   "ignition-coils",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2000,
+   "starter",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2001,
+   "alternator",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2001,
+   "ignition-coils",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2001,
+   "starter",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2002,
+   "alternator",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2002,
+   "ignition-coils",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2002,
+   "starter",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2003,
+   "alternator",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2003,
+   "ignition-coils",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2003,
+   "starter",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2004,
+   "alternator",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2004,
+   "ignition-coils",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2004,
+   "starter",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2005,
+   "alternator",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2005,
+   "ignition-coils",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2005,
+   "starter",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2006,
+   "alternator",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2006,
+   "ignition-coils",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2006,
+   "starter",
+   "gm-gen3-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2008,
+   "alternator",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2008,
+   "ignition-coils",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2008,
+   "starter",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2009,
+   "alternator",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2009,
+   "ignition-coils",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2009,
+   "starter",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2010,
+   "alternator",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2010,
+   "ignition-coils",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2010,
+   "starter",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2011,
+   "alternator",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2011,
+   "ignition-coils",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2011,
+   "starter",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2012,
+   "alternator",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2012,
+   "ignition-coils",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2012,
+   "starter",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2013,
+   "alternator",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2013,
+   "ignition-coils",
+   "gm-gen4-truck",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
    2013,
    "starter",
    "gm-gen4-truck",
@@ -176346,7 +181386,7 @@
    "apps": [
     [
      "GMC",
-     "Sierra",
+     "Sierra 1500",
      2004,
      2004
     ],
@@ -176357,176 +181397,14 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 211,
    "cat": "climate-control",
-   "id": "oem:gm:climate-control:C:2343d02c7e",
+   "id": "oem:gm:climate-control:C:f402021046",
    "kind": "body",
    "note": "GM catalog lists #10367042 for both — regulator with motor; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:41:22Z",
    "pn": [
     "10367042"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "DeVille",
-     2004,
-     2004
-    ],
-    [
-     "Cadillac",
-     "Seville",
-     2003,
-     2003
-    ]
-   ],
-   "cars": 150,
-   "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:R:a4f79ce762",
-   "kind": "body",
-   "note": "GM catalog lists #10381000 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T07:31:18Z",
-   "pn": [
-    "10381000"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "DeVille",
-     2004,
-     2004
-    ],
-    [
-     "Cadillac",
-     "Seville",
-     2003,
-     2003
-    ]
-   ],
-   "cars": 150,
-   "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:R:6a5582ba93",
-   "kind": "body",
-   "note": "GM catalog lists #10381002 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T07:31:25Z",
-   "pn": [
-    "10381002"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "DeVille",
-     2004,
-     2004
-    ],
-    [
-     "Cadillac",
-     "Seville",
-     2003,
-     2003
-    ]
-   ],
-   "cars": 150,
-   "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:L:d704228aa4",
-   "kind": "body",
-   "note": "GM catalog lists #10381003 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T07:31:33Z",
-   "pn": [
-    "10381003"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "DeVille",
-     2004,
-     2004
-    ],
-    [
-     "Cadillac",
-     "Seville",
-     2003,
-     2003
-    ]
-   ],
-   "cars": 150,
-   "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:R:cc3f3859c4",
-   "kind": "body",
-   "note": "GM catalog lists #10381012 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T07:31:41Z",
-   "pn": [
-    "10381012"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "DeVille",
-     2004,
-     2004
-    ],
-    [
-     "Cadillac",
-     "Seville",
-     2003,
-     2003
-    ]
-   ],
-   "cars": 150,
-   "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:L:5c295954d6",
-   "kind": "body",
-   "note": "GM catalog lists #10381013 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T07:31:49Z",
-   "pn": [
-    "10381013"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "DeVille",
-     2004,
-     2004
-    ],
-    [
-     "Cadillac",
-     "Seville",
-     2003,
-     2003
-    ]
-   ],
-   "cars": 150,
-   "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:L:ced876ba8c",
-   "kind": "body",
-   "note": "GM catalog lists #10381019 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T07:31:57Z",
-   "pn": [
-    "10381019"
    ],
    "reason": "option",
    "tier": "likely"
@@ -176784,33 +181662,6 @@
    "apps": [
     [
      "Chevrolet",
-     "Tahoe",
-     1999,
-     1999
-    ],
-    [
-     "GMC",
-     "Yukon",
-     1999,
-     1999
-    ]
-   ],
-   "cars": 222,
-   "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:R:2e0b6175f2",
-   "kind": "body",
-   "note": "GM catalog lists #15017250 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T13:01:34Z",
-   "pn": [
-    "15017250"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chevrolet",
      "S-10",
      2000,
      2000
@@ -176881,168 +181732,6 @@
    "oldest_retrieved": "2026-11-05T05:19:20Z",
    "pn": [
     "15041707"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chevrolet",
-     "Astro",
-     2000,
-     2000
-    ],
-    [
-     "GMC",
-     "Safari",
-     2000,
-     2001
-    ]
-   ],
-   "cars": 125,
-   "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:L:81d40061ae",
-   "kind": "body",
-   "note": "GM catalog lists #15053725 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T09:25:58Z",
-   "pn": [
-    "15053725"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chevrolet",
-     "Astro",
-     2000,
-     2000
-    ],
-    [
-     "GMC",
-     "Safari",
-     2000,
-     2001
-    ]
-   ],
-   "cars": 125,
-   "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:R:b252ff368a",
-   "kind": "body",
-   "note": "GM catalog lists #15053726 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T09:26:06Z",
-   "pn": [
-    "15053726"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chevrolet",
-     "Astro",
-     2000,
-     2000
-    ],
-    [
-     "GMC",
-     "Safari",
-     2000,
-     2001
-    ]
-   ],
-   "cars": 125,
-   "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:L:c5ff5dfb68",
-   "kind": "body",
-   "note": "GM catalog lists #15053727 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T09:26:14Z",
-   "pn": [
-    "15053727"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chevrolet",
-     "Astro",
-     2000,
-     2000
-    ],
-    [
-     "GMC",
-     "Safari",
-     2000,
-     2001
-    ]
-   ],
-   "cars": 125,
-   "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:R:b9b7eacd79",
-   "kind": "body",
-   "note": "GM catalog lists #15053728 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T09:26:22Z",
-   "pn": [
-    "15053728"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chevrolet",
-     "S-10",
-     2000,
-     2000
-    ],
-    [
-     "GMC",
-     "Sonoma",
-     2000,
-     2000
-    ]
-   ],
-   "cars": 173,
-   "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:R:9d5ff742c4",
-   "kind": "body",
-   "note": "GM catalog lists #15078222 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T05:17:36Z",
-   "pn": [
-    "15078222"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chevrolet",
-     "S-10",
-     2000,
-     2000
-    ],
-    [
-     "GMC",
-     "Sonoma",
-     2000,
-     2000
-    ]
-   ],
-   "cars": 173,
-   "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:R:3e7ef24db9",
-   "kind": "body",
-   "note": "GM catalog lists #15078226 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T05:17:44Z",
-   "pn": [
-    "15078226"
    ],
    "reason": "option",
    "tier": "likely"
@@ -177306,7 +181995,7 @@
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:cb6b83e442",
    "kind": "body",
-   "note": "GM catalog lists #15113351 for both — fits some configurations; verify the number on the part",
+   "note": "GM catalog lists #15113351 for both — fits some configurations; Colorado: crew cab only; Canyon: crew cab only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T07:21:41Z",
    "pn": [
     "15113351"
@@ -177333,7 +182022,7 @@
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:f419b556a7",
    "kind": "body",
-   "note": "GM catalog lists #15113352 for both — fits some configurations; verify the number on the part",
+   "note": "GM catalog lists #15113352 for both — fits some configurations; Colorado: crew cab only; Canyon: crew cab only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T07:21:33Z",
    "pn": [
     "15113352"
@@ -177426,20 +182115,20 @@
    "apps": [
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      1999,
      2000
     ],
     [
      "GMC",
-     "Sierra",
+     "Sierra 1500",
      2004,
      2004
     ]
    ],
-   "cars": 80,
+   "cars": 624,
    "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:R:3ca1537c77",
+   "id": "oem:gm:side-mirrors:R:c1d2aeb6e9",
    "kind": "body",
    "note": "GM catalog lists #15172059 for both — fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:20:49Z",
@@ -177453,20 +182142,20 @@
    "apps": [
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      1999,
      2000
     ],
     [
      "GMC",
-     "Sierra",
+     "Sierra 1500",
      2004,
      2004
     ]
    ],
-   "cars": 80,
+   "cars": 624,
    "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:L:b90b4f315e",
+   "id": "oem:gm:side-mirrors:L:1710b15ac2",
    "kind": "body",
    "note": "GM catalog lists #15172060 for both — fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:20:53Z",
@@ -178038,33 +182727,6 @@
    "apps": [
     [
      "Chevrolet",
-     "S-10",
-     2000,
-     2000
-    ],
-    [
-     "GMC",
-     "Sonoma",
-     2000,
-     2000
-    ]
-   ],
-   "cars": 173,
-   "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:R:c816dc99b9",
-   "kind": "body",
-   "note": "GM catalog lists #15744818 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T05:18:40Z",
-   "pn": [
-    "15744818"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chevrolet",
      "Astro",
      2000,
      2000
@@ -178348,60 +183010,6 @@
    ],
    "cars": 400,
    "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:R:25006d7344",
-   "kind": "body",
-   "note": "GM catalog lists #15789784 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T01:58:22Z",
-   "pn": [
-    "15789784"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Buick",
-     "Rainier",
-     2004,
-     2004
-    ],
-    [
-     "Chevrolet",
-     "Trailblazer",
-     2004,
-     2004
-    ]
-   ],
-   "cars": 400,
-   "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:R:4a6ae8f87e",
-   "kind": "body",
-   "note": "GM catalog lists #15789787 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T01:58:46Z",
-   "pn": [
-    "15789787"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Buick",
-     "Rainier",
-     2004,
-     2004
-    ],
-    [
-     "Chevrolet",
-     "Trailblazer",
-     2004,
-     2004
-    ]
-   ],
-   "cars": 400,
-   "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:86325fdb9d",
    "kind": "body",
    "note": "GM catalog lists #15789788 for both — option: fits some option packages; verify the number on the part",
@@ -178523,33 +183131,6 @@
   {
    "apps": [
     [
-     "Buick",
-     "Rainier",
-     2004,
-     2004
-    ],
-    [
-     "Chevrolet",
-     "Trailblazer",
-     2004,
-     2004
-    ]
-   ],
-   "cars": 400,
-   "cat": "climate-control",
-   "id": "oem:gm:climate-control:C:7a132eed3a",
-   "kind": "body",
-   "note": "GM catalog lists #15814151 for both — regulator with motor; option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T02:01:54Z",
-   "pn": [
-    "15814151"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
      "Chevrolet",
      "Cobalt",
      2007,
@@ -178584,22 +183165,22 @@
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2008,
      2008
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2012,
      2012
     ]
    ],
-   "cars": 98,
+   "cars": 389,
    "cat": "window-regulator",
-   "id": "oem:gm:window-regulator:RL:4ce1b809ca",
+   "id": "oem:gm:window-regulator:RL:c9a82b644c",
    "kind": "body",
-   "note": "GM catalog lists #15844876 for both — window motor only; fits some configurations; verify the number on the part",
+   "note": "GM catalog lists #15844876 for both — window motor only; fits some configurations; Silverado 1500: extended cab only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:29:13Z",
    "pn": [
     "15844876"
@@ -178617,22 +183198,22 @@
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2008,
      2008
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2012,
      2012
     ]
    ],
-   "cars": 98,
+   "cars": 389,
    "cat": "window-regulator",
-   "id": "oem:gm:window-regulator:RR:2c2d7dcd21",
+   "id": "oem:gm:window-regulator:RR:5bce78e25c",
    "kind": "body",
-   "note": "GM catalog lists #15844877 for both — window motor only; fits some configurations; verify the number on the part",
+   "note": "GM catalog lists #15844877 for both — window motor only; fits some configurations; Silverado 1500: extended cab only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:29:18Z",
    "pn": [
     "15844877"
@@ -178671,20 +183252,20 @@
    "apps": [
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      1999,
      2000
     ],
     [
      "GMC",
-     "Sierra",
+     "Sierra 1500",
      2004,
      2004
     ]
    ],
-   "cars": 80,
+   "cars": 624,
    "cat": "window-regulator",
-   "id": "oem:gm:window-regulator:FL:617b3fbbd0",
+   "id": "oem:gm:window-regulator:FL:287f483d49",
    "kind": "body",
    "note": "GM catalog lists #15871124 for both — regulator without motor; fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:21:38Z",
@@ -178698,20 +183279,20 @@
    "apps": [
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      1999,
      2000
     ],
     [
      "GMC",
-     "Sierra",
+     "Sierra 1500",
      2004,
      2004
     ]
    ],
-   "cars": 80,
+   "cars": 624,
    "cat": "window-regulator",
-   "id": "oem:gm:window-regulator:FR:ef14688d6b",
+   "id": "oem:gm:window-regulator:FR:70a2d13180",
    "kind": "body",
    "note": "GM catalog lists #15871125 for both — fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:21:33Z",
@@ -179040,7 +183621,7 @@
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:2c7248a511",
    "kind": "body",
-   "note": "GM catalog lists #15922916 for both — fits some configurations; verify the number on the part",
+   "note": "GM catalog lists #15922916 for both — fits some configurations; Colorado: crew cab only; Canyon: crew cab only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T07:21:49Z",
    "pn": [
     "15922916"
@@ -179073,7 +183654,7 @@
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:957af92ae3",
    "kind": "body",
-   "note": "GM catalog lists #15922917 for both — fits some configurations; verify the number on the part",
+   "note": "GM catalog lists #15922917 for both — fits some configurations; Colorado: crew cab only; Canyon: crew cab only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T07:21:57Z",
    "pn": [
     "15922917"
@@ -179712,20 +184293,20 @@
    "apps": [
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      1999,
      2000
     ],
     [
      "GMC",
-     "Sierra",
+     "Sierra 1500",
      2004,
      2004
     ]
    ],
-   "cars": 80,
+   "cars": 624,
    "cat": "window-regulator",
-   "id": "oem:gm:window-regulator:FL:bad5dc4663",
+   "id": "oem:gm:window-regulator:FL:bd048d509f",
    "kind": "body",
    "note": "GM catalog lists #19120846 for both — regulator without motor; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:21:17Z",
@@ -179739,20 +184320,20 @@
    "apps": [
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      1999,
      2000
     ],
     [
      "GMC",
-     "Sierra",
+     "Sierra 1500",
      2004,
      2004
     ]
    ],
-   "cars": 80,
+   "cars": 624,
    "cat": "window-regulator",
-   "id": "oem:gm:window-regulator:FR:2e4219c9ba",
+   "id": "oem:gm:window-regulator:FR:8d2920dfd4",
    "kind": "body",
    "note": "GM catalog lists #19120847 for both — regulator without motor; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:21:22Z",
@@ -179859,7 +184440,7 @@
    "apps": [
     [
      "GMC",
-     "Sierra",
+     "Sierra 1500",
      2004,
      2004
     ],
@@ -179870,9 +184451,9 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 211,
    "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:L:dbdfdb5473",
+   "id": "oem:gm:side-mirrors:L:6d656e9cf9",
    "kind": "body",
    "note": "GM catalog lists #19153377 for both — fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:36:23Z",
@@ -179886,7 +184467,7 @@
    "apps": [
     [
      "GMC",
-     "Sierra",
+     "Sierra 1500",
      2004,
      2004
     ],
@@ -179897,9 +184478,9 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 211,
    "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:R:7d5a53d0dd",
+   "id": "oem:gm:side-mirrors:R:73e37e2f21",
    "kind": "body",
    "note": "GM catalog lists #19153378 for both — fits some configurations; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:36:31Z",
@@ -180000,7 +184581,7 @@
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:5ca230db3e",
    "kind": "body",
-   "note": "GM catalog lists #19167714 for both — window motor only; fits some configurations; verify the number on the part",
+   "note": "GM catalog lists #19167714 for both — window motor only; fits some configurations; Colorado: crew cab only; Canyon: crew cab only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T07:22:05Z",
    "pn": [
     "19167714"
@@ -180033,7 +184614,7 @@
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:5d2b30e836",
    "kind": "body",
-   "note": "GM catalog lists #19167715 for both — window motor only; fits some configurations; verify the number on the part",
+   "note": "GM catalog lists #19167715 for both — window motor only; fits some configurations; Colorado: crew cab only; Canyon: crew cab only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T07:22:13Z",
    "pn": [
     "19167715"
@@ -180951,7 +185532,7 @@
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2008,
      2008
     ],
@@ -180962,9 +185543,9 @@
      2007
     ]
    ],
-   "cars": 477,
+   "cars": 684,
    "cat": "climate-control",
-   "id": "oem:gm:climate-control:C:c3b2f309be",
+   "id": "oem:gm:climate-control:C:aae9694494",
    "kind": "body",
    "note": "GM catalog lists #20787112 for both — regulator with motor; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:49:21Z",
@@ -180984,7 +185565,7 @@
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2008,
      2008
     ],
@@ -180995,9 +185576,9 @@
      2007
     ]
    ],
-   "cars": 477,
+   "cars": 684,
    "cat": "climate-control",
-   "id": "oem:gm:climate-control:C:9894b99607",
+   "id": "oem:gm:climate-control:C:03ebbb5dcf",
    "kind": "body",
    "note": "GM catalog lists #20787113 for both — regulator with motor; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:48:57Z",
@@ -181017,7 +185598,7 @@
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2008,
      2008
     ],
@@ -181028,9 +185609,9 @@
      2007
     ]
    ],
-   "cars": 477,
+   "cars": 684,
    "cat": "climate-control",
-   "id": "oem:gm:climate-control:C:5596bbf598",
+   "id": "oem:gm:climate-control:C:4deb060dcf",
    "kind": "body",
    "note": "GM catalog lists #20787114 for both — regulator with motor; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:49:05Z",
@@ -181104,20 +185685,20 @@
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2008,
      2008
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2012,
      2012
     ]
    ],
-   "cars": 128,
+   "cars": 419,
    "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:R:b97887879c",
+   "id": "oem:gm:side-mirrors:R:dbb7fb8e26",
    "kind": "body",
    "note": "GM catalog lists #20809948 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:27:10Z",
@@ -181137,52 +185718,25 @@
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2008,
      2008
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2012,
      2012
     ]
    ],
-   "cars": 128,
+   "cars": 419,
    "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:R:08557a0596",
+   "id": "oem:gm:side-mirrors:R:ffdc0241fa",
    "kind": "body",
    "note": "GM catalog lists #20809968 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:27:14Z",
    "pn": [
     "20809968"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chevrolet",
-     "Avalanche",
-     2007,
-     2007
-    ],
-    [
-     "Chevrolet",
-     "Silverado",
-     2012,
-     2012
-    ]
-   ],
-   "cars": 101,
-   "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:R:4a9542e90f",
-   "kind": "body",
-   "note": "GM catalog lists #20809994 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T01:27:26Z",
-   "pn": [
-    "20809994"
    ],
    "reason": "option",
    "tier": "likely"
@@ -181224,20 +185778,20 @@
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2008,
      2008
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2012,
      2012
     ]
    ],
-   "cars": 128,
+   "cars": 419,
    "cat": "window-switch",
-   "id": "oem:gm:window-switch:DM:903947668a",
+   "id": "oem:gm:window-switch:DM:d5841134b0",
    "kind": "body",
    "note": "GM catalog lists #20835552 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:30:05Z",
@@ -181257,20 +185811,20 @@
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2008,
      2008
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2012,
      2012
     ]
    ],
-   "cars": 128,
+   "cars": 419,
    "cat": "window-switch",
-   "id": "oem:gm:window-switch:DM:1f64c8c1c5",
+   "id": "oem:gm:window-switch:DM:7c40f97f24",
    "kind": "body",
    "note": "GM catalog lists #20835553 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:30:02Z",
@@ -181317,20 +185871,20 @@
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2008,
      2008
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2012,
      2012
     ]
    ],
-   "cars": 128,
+   "cars": 419,
    "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:L:01a7051fcf",
+   "id": "oem:gm:side-mirrors:L:3e6d74f43d",
    "kind": "body",
    "note": "GM catalog lists #20843116 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:27:30Z",
@@ -181350,20 +185904,20 @@
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2008,
      2008
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2012,
      2012
     ]
    ],
-   "cars": 128,
+   "cars": 419,
    "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:L:f18c7b631b",
+   "id": "oem:gm:side-mirrors:L:f7a9546875",
    "kind": "body",
    "note": "GM catalog lists #20843177 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:27:02Z",
@@ -181383,20 +185937,20 @@
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2008,
      2008
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2012,
      2012
     ]
    ],
-   "cars": 128,
+   "cars": 419,
    "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:L:2cd88ab23e",
+   "id": "oem:gm:side-mirrors:L:0e9a1c7070",
    "kind": "body",
    "note": "GM catalog lists #20862098 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:27:38Z",
@@ -181416,20 +185970,20 @@
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2008,
      2008
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2012,
      2012
     ]
    ],
-   "cars": 128,
+   "cars": 419,
    "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:R:4c6a68876f",
+   "id": "oem:gm:side-mirrors:R:fc6ef1542f",
    "kind": "body",
    "note": "GM catalog lists #20862099 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:27:33Z",
@@ -181476,20 +186030,20 @@
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2008,
      2008
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2012,
      2012
     ]
    ],
-   "cars": 128,
+   "cars": 419,
    "cat": "window-regulator",
-   "id": "oem:gm:window-regulator:FL:0908bd1120",
+   "id": "oem:gm:window-regulator:FL:8ed850ce7c",
    "kind": "body",
    "note": "GM catalog lists #20914715 for both — regulator without motor; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:28:37Z",
@@ -181509,20 +186063,20 @@
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2008,
      2008
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2012,
      2012
     ]
    ],
-   "cars": 128,
+   "cars": 419,
    "cat": "window-regulator",
-   "id": "oem:gm:window-regulator:FR:c52ea9e5d2",
+   "id": "oem:gm:window-regulator:FR:270e9141c3",
    "kind": "body",
    "note": "GM catalog lists #20914716 for both — regulator without motor; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:28:42Z",
@@ -181548,32 +186102,20 @@
     ],
     [
      "Chevrolet",
-     "Silverado",
-     1999,
-     2000
-    ],
-    [
-     "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2008,
      2008
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2012,
      2012
-    ],
-    [
-     "GMC",
-     "Sierra",
-     2004,
-     2004
     ]
    ],
-   "cars": 272,
+   "cars": 483,
    "cat": "window-regulator",
-   "id": "oem:gm:window-regulator:FL:c11f71989f",
+   "id": "oem:gm:window-regulator:FL:95a5e67317",
    "kind": "body",
    "note": "GM catalog lists #20945138 for both — regulator with motor; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:21:09Z",
@@ -181599,32 +186141,20 @@
     ],
     [
      "Chevrolet",
-     "Silverado",
-     1999,
-     2000
-    ],
-    [
-     "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2008,
      2008
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2012,
      2012
-    ],
-    [
-     "GMC",
-     "Sierra",
-     2004,
-     2004
     ]
    ],
-   "cars": 272,
+   "cars": 483,
    "cat": "window-regulator",
-   "id": "oem:gm:window-regulator:FR:51523ac688",
+   "id": "oem:gm:window-regulator:FR:e27cc3ca48",
    "kind": "body",
    "note": "GM catalog lists #20945139 for both — regulator with motor; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:21:13Z",
@@ -181644,22 +186174,22 @@
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2008,
      2008
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2012,
      2012
     ]
    ],
-   "cars": 128,
+   "cars": 419,
    "cat": "window-regulator",
-   "id": "oem:gm:window-regulator:RL:4108335bfb",
+   "id": "oem:gm:window-regulator:RL:91699b7f93",
    "kind": "body",
-   "note": "GM catalog lists #20945140 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #20945140 for both — regulator with motor; option: fits some option packages; Silverado 1500: crew cab only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:29:06Z",
    "pn": [
     "20945140"
@@ -181677,22 +186207,22 @@
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2008,
      2008
     ],
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      2012,
      2012
     ]
    ],
-   "cars": 128,
+   "cars": 419,
    "cat": "window-regulator",
-   "id": "oem:gm:window-regulator:RR:ee85bf4df3",
+   "id": "oem:gm:window-regulator:RR:e1eb9593b0",
    "kind": "body",
-   "note": "GM catalog lists #20945141 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #20945141 for both — regulator with motor; option: fits some option packages; Silverado 1500: crew cab only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:29:09Z",
    "pn": [
     "20945141"
@@ -181812,7 +186342,7 @@
    "apps": [
     [
      "GMC",
-     "Sierra",
+     "Sierra 1500",
      2004,
      2004
     ],
@@ -181823,9 +186353,9 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 211,
    "cat": "climate-control",
-   "id": "oem:gm:climate-control:C:9a78e1bccc",
+   "id": "oem:gm:climate-control:C:6046ae26ff",
    "kind": "body",
    "note": "GM catalog lists #21997350 for both — regulator with motor; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:41:38Z",
@@ -181839,7 +186369,7 @@
    "apps": [
     [
      "GMC",
-     "Sierra",
+     "Sierra 1500",
      2004,
      2004
     ],
@@ -181850,9 +186380,9 @@
      2003
     ]
    ],
-   "cars": 144,
+   "cars": 211,
    "cat": "climate-control",
-   "id": "oem:gm:climate-control:C:953cc860ea",
+   "id": "oem:gm:climate-control:C:7c8274c8e6",
    "kind": "body",
    "note": "GM catalog lists #21997352 for both — regulator with motor; option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:41:46Z",
@@ -182605,228 +187135,12 @@
    ],
    "cars": 150,
    "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:R:e6508dc7df",
-   "kind": "body",
-   "note": "GM catalog lists #25644754 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T07:33:25Z",
-   "pn": [
-    "25644754"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "DeVille",
-     2004,
-     2004
-    ],
-    [
-     "Cadillac",
-     "Seville",
-     2003,
-     2003
-    ]
-   ],
-   "cars": 150,
-   "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:4ba38a8bc4",
    "kind": "body",
    "note": "GM catalog lists #25644756 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T07:32:53Z",
    "pn": [
     "25644756"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "DeVille",
-     2004,
-     2004
-    ],
-    [
-     "Cadillac",
-     "Seville",
-     2003,
-     2003
-    ]
-   ],
-   "cars": 150,
-   "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:L:e690eaf3eb",
-   "kind": "body",
-   "note": "GM catalog lists #25644757 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T07:33:34Z",
-   "pn": [
-    "25644757"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "DeVille",
-     2004,
-     2004
-    ],
-    [
-     "Cadillac",
-     "Seville",
-     2003,
-     2003
-    ]
-   ],
-   "cars": 150,
-   "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:R:cd620a9cd9",
-   "kind": "body",
-   "note": "GM catalog lists #25661615 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T07:33:41Z",
-   "pn": [
-    "25661615"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "DeVille",
-     2004,
-     2004
-    ],
-    [
-     "Cadillac",
-     "Seville",
-     2003,
-     2003
-    ]
-   ],
-   "cars": 150,
-   "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:L:79c91d4197",
-   "kind": "body",
-   "note": "GM catalog lists #25661616 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T07:33:49Z",
-   "pn": [
-    "25661616"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "DeVille",
-     2004,
-     2004
-    ],
-    [
-     "Cadillac",
-     "Seville",
-     2003,
-     2003
-    ]
-   ],
-   "cars": 150,
-   "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:L:f2541a5a51",
-   "kind": "body",
-   "note": "GM catalog lists #25680163 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T07:32:45Z",
-   "pn": [
-    "25680163"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "DeVille",
-     2004,
-     2004
-    ],
-    [
-     "Cadillac",
-     "Seville",
-     2003,
-     2003
-    ]
-   ],
-   "cars": 150,
-   "cat": "window-switch",
-   "id": "oem:gm:window-switch:DM:df9d6574df",
-   "kind": "body",
-   "note": "GM catalog lists #25690133 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T07:40:41Z",
-   "pn": [
-    "25690133"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "DeVille",
-     2004,
-     2004
-    ],
-    [
-     "Cadillac",
-     "Seville",
-     2003,
-     2003
-    ]
-   ],
-   "cars": 150,
-   "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:R:7b2b5c257d",
-   "kind": "body",
-   "note": "GM catalog lists #25691531 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T07:33:57Z",
-   "pn": [
-    "25691531"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "DeVille",
-     2004,
-     2004
-    ],
-    [
-     "Cadillac",
-     "Seville",
-     2003,
-     2003
-    ]
-   ],
-   "cars": 150,
-   "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:L:0dac7dce5f",
-   "kind": "body",
-   "note": "GM catalog lists #25691532 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T07:34:05Z",
-   "pn": [
-    "25691532"
    ],
    "reason": "option",
    "tier": "likely"
@@ -183354,7 +187668,7 @@
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:53a5121102",
    "kind": "body",
-   "note": "GM catalog lists #25779767 for both — option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #25779767 for both — option: fits some option packages; Colorado: crew cab only; Canyon: crew cab only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T07:22:45Z",
    "pn": [
     "25779767"
@@ -183425,33 +187739,6 @@
   {
    "apps": [
     [
-     "Chevrolet",
-     "Avalanche",
-     2007,
-     2007
-    ],
-    [
-     "Chevrolet",
-     "Tahoe",
-     2007,
-     2007
-    ]
-   ],
-   "cars": 450,
-   "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:R:d9e75a9c63",
-   "kind": "body",
-   "note": "GM catalog lists #25779998 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T05:45:29Z",
-   "pn": [
-    "25779998"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
      "Cadillac",
      "Escalade",
      2007,
@@ -183478,39 +187765,6 @@
    "oldest_retrieved": "2026-11-05T05:44:49Z",
    "pn": [
     "25782166"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "Escalade",
-     2007,
-     2007
-    ],
-    [
-     "Chevrolet",
-     "Avalanche",
-     2007,
-     2007
-    ],
-    [
-     "Chevrolet",
-     "Tahoe",
-     2007,
-     2007
-    ]
-   ],
-   "cars": 514,
-   "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:R:5d113bbac3",
-   "kind": "body",
-   "note": "GM catalog lists #25782175 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T05:45:37Z",
-   "pn": [
-    "25782175"
    ],
    "reason": "option",
    "tier": "likely"
@@ -183692,12 +187946,6 @@
   {
    "apps": [
     [
-     "Cadillac",
-     "Escalade",
-     2007,
-     2007
-    ],
-    [
      "Chevrolet",
      "Avalanche",
      2007,
@@ -183710,9 +187958,9 @@
      2007
     ]
    ],
-   "cars": 514,
+   "cars": 450,
    "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:L:c55f9c4b4b",
+   "id": "oem:gm:side-mirrors:L:4ff0391279",
    "kind": "body",
    "note": "GM catalog lists #25831194 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:45:45Z",
@@ -183752,48 +188000,21 @@
   {
    "apps": [
     [
-     "Cadillac",
-     "Escalade",
-     2007,
-     2007
-    ],
-    [
      "Chevrolet",
-     "Tahoe",
-     2007,
-     2007
-    ]
-   ],
-   "cars": 420,
-   "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:R:c764d0f7d4",
-   "kind": "body",
-   "note": "GM catalog lists #25865452 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T05:46:01Z",
-   "pn": [
-    "25865452"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      1999,
      2000
     ],
     [
      "GMC",
-     "Sierra",
+     "Sierra 1500",
      2004,
      2004
     ]
    ],
-   "cars": 80,
+   "cars": 624,
    "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:L:dbbc6e03ff",
+   "id": "oem:gm:side-mirrors:L:3a01c2831b",
    "kind": "body",
    "note": "GM catalog lists #25876714 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:20:22Z",
@@ -183807,52 +188028,25 @@
    "apps": [
     [
      "Chevrolet",
-     "Silverado",
+     "Silverado 1500",
      1999,
      2000
     ],
     [
      "GMC",
-     "Sierra",
+     "Sierra 1500",
      2004,
      2004
     ]
    ],
-   "cars": 80,
+   "cars": 624,
    "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:R:c220e29b49",
+   "id": "oem:gm:side-mirrors:R:7259bee4ed",
    "kind": "body",
    "note": "GM catalog lists #25876715 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:20:17Z",
    "pn": [
     "25876715"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chevrolet",
-     "Silverado",
-     1999,
-     2000
-    ],
-    [
-     "GMC",
-     "Sierra",
-     2004,
-     2004
-    ]
-   ],
-   "cars": 80,
-   "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:R:419e1cc4f1",
-   "kind": "body",
-   "note": "GM catalog lists #25876716 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T01:20:25Z",
-   "pn": [
-    "25876716"
    ],
    "reason": "option",
    "tier": "likely"
@@ -184771,7 +188965,7 @@
   }
  ],
  "ns": "gm",
- "policy_sha256": "4d48628841b4ef87a3e954cb3ba0c8181a6f68caf4e4c23af4504be0a9a2b81a",
+ "policy_sha256": "060b3838bd9a50698dff5b2840ed07474095e26d6b0984cf8e7931bddec57710",
  "raw": {
   "commit": "c36da2eb98835c02f81c05e8c36b6a926634a332",
   "ref": "c36da2eb98835c02f81c05e8c36b6a926634a332",

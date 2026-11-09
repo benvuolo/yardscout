@@ -402,7 +402,7 @@ class Curation:
           the class-wide pool: a Canada row on one year says nothing about
           another year's row).
         Only ever removes claims; an unparsed note restricts nothing here."""
-        if market and _market_excludes(notes):
+        if market and (_market_excludes(notes) or _export_only(notes)):
             return True
         if market and self.ns == "subaru" and _subaru_manual_only(notes):
             return True
@@ -1264,8 +1264,10 @@ class Curation:
         self.likely_own_page_drops = Counter()   # cat -> vehicle-years left out (§5.16 own-page rule)
         self.own_page_missing = defaultdict(lambda: defaultdict(set))  # T -> cat -> class keys (R3 input)
         self.held_exterior = []                  # §5.16 exterior hold (owner checklist)
-        self.likely_note_restricted = Counter()  # cat -> vehicle-years a class-wide note restricts away
+        self.likely_note_restricted = Counter()
+        self.likely_generation_cut = Counter()     # cat -> vehicle-years cut at a generation break  # cat -> vehicle-years a class-wide note restricts away
         self.release_allow = policy.release_allowlist()   # §5.16 exact owner-approved releases
+        self.release_notes = policy.release_notes()
         self.released_exterior = []
         for (key, cat), c in sorted(self.classes.items()):
             if self.kinds.get(cat) != "body" or cat in policy.PHASE3_CATS:
@@ -1314,10 +1316,26 @@ class Curation:
             Ts = self._drop_catchall_twins(Ts)
             if len({(T[0], T[1]) for T in Ts}) < 2:
                 continue        # single-model: the same-model generation loop covers it
+            Ts2 = self._generation_cut(c, Ts)
+            if Ts2 != Ts:
+                self.likely_generation_cut[cat] += len(Ts) - len(Ts2)
+                Ts = Ts2
+                if len({(T[0], T[1]) for T in Ts}) < 2:
+                    continue
             reason, text = _likely_reason(whys)
+            cab = self._cab_only(c, cat, Ts)
+            if cab:
+                text = f"{text}; {cab}"
+                if len(_likely_note(brand, sorted(c.pns)[0], text, PACK_TEXT.get(c.packaging, ""))) > policy.NOTE_MAX_LEN:
+                    self.refuse("held_cab_qualifier", cat=cat, pn=sorted(c.pns)[0],
+                                evidence=[r.pointer for r in c.records], detail=cab)
+                    continue
             pns = sorted(c.pns)
             apps = _runs(Ts)
-            released = (self.ns, cat, tuple(pns), tuple(tuple(a) for a in apps)) in self.release_allow
+            rkey = (self.ns, cat, tuple(pns), tuple(tuple(a) for a in apps))
+            released = rkey in self.release_allow
+            if released and rkey in self.release_notes:
+                text = self.release_notes[rkey]     # the split its source states (hub 2026-11-09)
             if released:
                 self.released_exterior.append({"cat": cat, "pn": pns, "apps": apps})
             hold = policy.held_cross_model_cat(self.ns, cat)
@@ -1362,6 +1380,68 @@ class Curation:
                 continue
             out.append(T)
         return out
+
+    def _gen_breaks(self, model: str):
+        """GENERATION_BREAKS for a feed model: longest leading-word key."""
+        G = getattr(self.js, "GENERATION_BREAKS", None) or {}
+        w = (model or "").lower().split()
+        for i in range(len(w), 0, -1):
+            if " ".join(w[:i]) in G:
+                return G[" ".join(w[:i])]
+        return None
+
+    def _generation_cut(self, c, Ts):
+        """Hub 2026-11-09 (GM 20945139: a GMT900 regulator whose product page
+        'Replaces' four older numbers, listed on the 1999-2000 Silverado
+        pages): a Likely group of a superseding number may not span a
+        hand-curated generation break (GENERATION_BREAKS) of any of its base
+        models. Supersession runs old -> new, so the vehicle-years before the
+        newest break crossed are left out (every model, so a twin such as the
+        2004 Sierra goes too). A number with no supersession keeps every
+        vehicle-year: each already has its own page (§5.16). Only removes claims."""
+        sup = any(r.replaces or r.replaced_by or r.list_replaced_by or r.via for r in c.records)
+        if not sup:
+            return Ts
+        cut = None
+        by = defaultdict(list)
+        for T in Ts:
+            by[policy.base_model(T[0], T[1])].append(T)
+        for bm, ts in by.items():
+            br = self._gen_breaks(ts[0][1]) or []
+            ys = [T[2] for T in ts]
+            crossed = [b for b in br if min(ys) < b <= max(ys)]
+            if crossed:
+                cut = max(cut or 0, max(crossed))
+        if cut is None:
+            return Ts
+        return [T for T in Ts if T[2] >= cut]
+
+    _CAB_RE = re.compile(r"\b(REGULAR CAB|EXTENDED CAB|CREW CAB|SUPER ?CAB|SUPER ?CREW|DOUBLE CAB|QUAD CAB|CREWMAX|ACCESS CAB|KING CAB)\b", re.I)
+
+    def _cab_only(self, c, cat, Ts) -> str:
+        """Hub 2026-11-09 (GM 15844876: Silverado fitment rows name extended
+        cab only): when every fitment row crediting a model names one cab
+        type, the group says '<model>: <cab> only' for it. '' when none does."""
+        out = []
+        for mk, md in sorted({(T[0], T[1]) for T in Ts}):
+            cabs, all_cab = set(), True
+            for T in Ts:
+                if (T[0], T[1]) != (mk, md):
+                    continue
+                for (cc, r, f, t) in self.t_rows.get((T, cat), []):
+                    if cc is not c:
+                        continue
+                    for tr in (f.trims or []):
+                        m = self._CAB_RE.search(tr)
+                        if not m:
+                            all_cab = False
+                        else:
+                            cabs.add(re.sub(r"\s+", " ", m.group(1).lower()))
+                    if not f.trims:
+                        all_cab = False
+            if all_cab and len(cabs) == 1:
+                out.append(f"{md}: {next(iter(cabs))} only")
+        return "; ".join(out)
 
     # ------------------------------------------------------------ report
     def report(self, doc, inv_counts: Counter):
@@ -1418,6 +1498,8 @@ class Curation:
                         "released_by_allowlist": len(getattr(self, "released_exterior", [])),
                         "likely_app_years_note_restricted": dict(sorted(
                             getattr(self, "likely_note_restricted", Counter()).items())),
+                        "likely_app_years_generation_cut": dict(sorted(
+                            getattr(self, "likely_generation_cut", Counter()).items())),
                         "blocked_sites": sorted(self.blocked),
                         "why_no_verified": _why_none(self), "gates": global_gates(self)},
             "funnel_cars": fz(funnel),
@@ -1767,6 +1849,22 @@ def _market_excludes(notes) -> bool:
     for n in notes or []:
         alts = [a for a in re.split(r"\s/\s", n or "") if a.strip()]
         if alts and all(_MARKET_RE.search(a) and not _US_MARKET_RE.search(a) for a in alts):
+            return True
+    return False
+
+
+_EXPORT_RE = re.compile(r"(?<!EXC )(?<!EXC\()\bEXPORT\b", re.I)
+
+
+def _export_only(notes) -> bool:
+    """Hub 2026-11-09 (GM 25876716 'CK1,2(DE2,Z5X)(EXPORT)'): a row whose
+    every option alternative names EXPORT is not for US feed cars, like a
+    foreign-market note. Alternatives split at ', ' (GM writes 'CK1,2(...)'
+    inside one). 'EXC EXPORT' keeps the row. Per row; only removes claims."""
+    for n in notes or []:
+        body = re.sub(r"^\s*Fitting Vehicle Options\s*:\s*", "", n or "", flags=re.I)
+        alts = [a for a in re.split(r",\s+", body) if a.strip()]
+        if alts and all(_EXPORT_RE.search(a) for a in alts):
             return True
     return False
 

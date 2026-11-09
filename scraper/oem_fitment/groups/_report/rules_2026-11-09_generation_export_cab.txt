@@ -1,0 +1,45 @@
+gm REMOVED climate-control 15814151: Buick Rainier 2004, Chevrolet Trailblazer 2004
+gm REMOVED side-mirrors 10381000: Cadillac DeVille 2004, Cadillac Seville 2003
+gm REMOVED side-mirrors 10381002: Cadillac DeVille 2004, Cadillac Seville 2003
+gm REMOVED side-mirrors 10381003: Cadillac DeVille 2004, Cadillac Seville 2003
+gm REMOVED side-mirrors 10381012: Cadillac DeVille 2004, Cadillac Seville 2003
+gm REMOVED side-mirrors 10381013: Cadillac DeVille 2004, Cadillac Seville 2003
+gm REMOVED side-mirrors 10381019: Cadillac DeVille 2004, Cadillac Seville 2003
+gm REMOVED side-mirrors 15017250: Chevrolet Tahoe 1999, GMC Yukon 1999
+gm REMOVED side-mirrors 15053725: Chevrolet Astro 2000, GMC Safari 2000-2001
+gm REMOVED side-mirrors 15053726: Chevrolet Astro 2000, GMC Safari 2000-2001
+gm REMOVED side-mirrors 15053727: Chevrolet Astro 2000, GMC Safari 2000-2001
+gm REMOVED side-mirrors 15053728: Chevrolet Astro 2000, GMC Safari 2000-2001
+gm REMOVED side-mirrors 15078222: Chevrolet S-10 2000, GMC Sonoma 2000
+gm REMOVED side-mirrors 15078226: Chevrolet S-10 2000, GMC Sonoma 2000
+gm REMOVED side-mirrors 15744818: Chevrolet S-10 2000, GMC Sonoma 2000
+gm REMOVED side-mirrors 15789784: Buick Rainier 2004, Chevrolet Trailblazer 2004
+gm REMOVED side-mirrors 15789787: Buick Rainier 2004, Chevrolet Trailblazer 2004
+gm REMOVED side-mirrors 20809994: Chevrolet Avalanche 2007, Chevrolet Silverado 2012
+gm REMOVED side-mirrors 25644754: Cadillac DeVille 2004, Cadillac Seville 2003
+gm REMOVED side-mirrors 25644757: Cadillac DeVille 2004, Cadillac Seville 2003
+gm REMOVED side-mirrors 25661615: Cadillac DeVille 2004, Cadillac Seville 2003
+gm REMOVED side-mirrors 25661616: Cadillac DeVille 2004, Cadillac Seville 2003
+gm REMOVED side-mirrors 25680163: Cadillac DeVille 2004, Cadillac Seville 2003
+gm REMOVED side-mirrors 25691531: Cadillac DeVille 2004, Cadillac Seville 2003
+gm REMOVED side-mirrors 25691532: Cadillac DeVille 2004, Cadillac Seville 2003
+gm REMOVED side-mirrors 25779998: Chevrolet Avalanche 2007, Chevrolet Tahoe 2007
+gm REMOVED side-mirrors 25782175: Cadillac Escalade 2007, Chevrolet Avalanche 2007, Chevrolet Tahoe 2007
+gm APPS side-mirrors 25831194: Cadillac Escalade 2007, Chevrolet Avalanche 2007, Chevrolet Tahoe 2007 -> Chevrolet Avalanche 2007, Chevrolet Tahoe 2007
+gm REMOVED side-mirrors 25865452: Cadillac Escalade 2007, Chevrolet Tahoe 2007
+gm REMOVED side-mirrors 25876716: Chevrolet Silverado 1999-2000, GMC Sierra 2004
+gm NOTE window-regulator 15113351: GM catalog lists #15113351 for both — fits some configurations; Colorado: crew cab only; Canyon: crew cab only; verify the number on the part
+gm NOTE window-regulator 15113352: GM catalog lists #15113352 for both — fits some configurations; Colorado: crew cab only; Canyon: crew cab only; verify the number on the part
+gm NOTE window-regulator 15844876: GM catalog lists #15844876 for both — window motor only; fits some configurations; Silverado: extended cab only; verify the number on the part
+gm NOTE window-regulator 15844877: GM catalog lists #15844877 for both — window motor only; fits some configurations; Silverado: extended cab only; verify the number on the part
+gm NOTE window-regulator 15922916: GM catalog lists #15922916 for both — fits some configurations; Colorado: crew cab only; Canyon: crew cab only; verify the number on the part
+gm NOTE window-regulator 15922917: GM catalog lists #15922917 for both — fits some configurations; Colorado: crew cab only; Canyon: crew cab only; verify the number on the part
+gm NOTE window-regulator 19167714: GM catalog lists #19167714 for both — window motor only; fits some configurations; Colorado: crew cab only; Canyon: crew cab only; verify the number on the part
+gm NOTE window-regulator 19167715: GM catalog lists #19167715 for both — window motor only; fits some configurations; Colorado: crew cab only; Canyon: crew cab only; verify the number on the part
+gm APPS window-regulator 20945138: Cadillac Escalade 2007, Chevrolet Avalanche 2007, Chevrolet Silverado 1999-2000, Chevrolet Silverado 2008, Chevrolet Silverado 2012, GMC Sierra 2004 -> Cadillac Escalade 2007, Chevrolet Avalanche 2007, Chevrolet Silverado 2008, Chevrolet Silverado 2012
+gm APPS window-regulator 20945139: Cadillac Escalade 2007, Chevrolet Avalanche 2007, Chevrolet Silverado 1999-2000, Chevrolet Silverado 2008, Chevrolet Silverado 2012, GMC Sierra 2004 -> Cadillac Escalade 2007, Chevrolet Avalanche 2007, Chevrolet Silverado 2008, Chevrolet Silverado 2012
+gm NOTE window-regulator 20945140: GM catalog lists #20945140 for both — regulator with motor; option: fits some option packages; Silverado: crew cab only; verify the number on the part
+gm NOTE window-regulator 20945141: GM catalog lists #20945141 for both — regulator with motor; option: fits some option packages; Silverado: crew cab only; verify the number on the part
+gm REMOVED window-switch 25690133: Cadillac DeVille 2004, Cadillac Seville 2003
+gm NOTE window-switch 25779767: GM catalog lists #25779767 for both — option: fits some option packages; Colorado: crew cab only; Canyon: crew cab only; verify the number on the part
+{('gm', 'removed'): 30, ('gm', 'apps'): 3, ('gm', 'note'): 11}
