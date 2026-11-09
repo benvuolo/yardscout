@@ -5735,17 +5735,22 @@ function layoutPins() {
   };
   groups.forEach(rectOf);
   const hit = (a, b) => a.l < b.r + 4 && b.l < a.r + 4 && a.t < b.b + 4 && b.t < a.b + 4;
-  for (let guard = 0; guard < 80; guard++) {
-    let merged = false;
-    outer: for (let i = 0; i < groups.length; i++) for (let j = i + 1; j < groups.length; j++) {
-      if (!hit(groups[i].rect, groups[j].rect)) continue;
-      const a = groups[i], b = groups.splice(j, 1)[0];
-      // The bubble stays at its biggest yard (groups are built biggest first),
-      // so merging doesn't drift into the next pin.
-      a.items.push(...b.items); rectOf(a); merged = true; break outer;
+  // Merge until no two pins overlap. The bubble stays at its biggest yard
+  // (groups are built biggest first), so merging doesn't drift.
+  let merges = 0, merged = true;
+  while (merged && merges < 5000) {
+    merged = false;
+    for (let i = 0; i < groups.length; i++) {
+      for (let j = i + 1; j < groups.length; j++) {
+        if (!hit(groups[i].rect, groups[j].rect)) continue;
+        groups[i].items.push(...groups.splice(j, 1)[0].items);
+        rectOf(groups[i]); merged = true; merges++; j = i;   // re-check i against the rest
+      }
     }
-    if (!merged) break;
   }
+  // A pin taller than the open strip of map has no room: don't draw it (the
+  // sheet still lists the yard), rather than push it over the controls.
+  for (let i = groups.length - 1; i >= 0; i--) if (groups[i].rect.t < A.t - 0.5 || groups[i].rect.b > A.b + 0.5) groups.splice(i, 1);
   _pinGroups = groups;
   const you = activeZipCoords && _projectFn({ lat: activeZipCoords.lat, lng: activeZipCoords.lng });
   layer.innerHTML = `${you && you.x > 0 && you.x < A.W && you.y > A.t && you.y < A.b ? `<span class="map-you" style="left:${you.x}px;top:${you.y}px"><span>You</span></span>` : ''}
