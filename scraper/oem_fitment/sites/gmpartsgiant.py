@@ -181,10 +181,17 @@ PARTS = {
                  r"HANDLE|LATCH|CABLE|LOCK|HINGE|STRUT|LIFT ASSIST|PROTECTOR|LINER|STOP|SUPPORT|TRUNNION|ROD|CAP|TRIM|LAMP", SUB),
     "liftgate": (r"^(GATE|LIFTGATE|GATE ASM)\b[^|]*\|.*\bLIFT ?GATE\b|^(GATE|GATE ASM)\b[^|]*\|[^|]*\|\s*(GATE,\s*)?LIFT",
                  r"STRUT|HINGE|LATCH|LOCK|MOTOR|WINDOW|GLASS|SWITCH|HANDLE|ACTUATOR|LAMP|WIPER|APPLIQUE|SPOILER|CYLINDER|RELEASE|TRIM|PANEL", SUB),
-    # tier C: name rule pending (written after reading the trial's list rows)
-    "wiper-motor": (r"(?!x)x", "", SUB),
-    "knuckle": (r"(?!x)x", "", SUB),
-    "strut": (r"(?!x)x", "", SUB),
+    # tier C, from the 2014 Cruze / 2000-2012 Silverado trial rows: "MOTOR,WINDSHIELD
+    # WIPER" (the MODULE row "INCLUDES MOTOR & TRANSMISSION" is another package
+    # and is not taken), "KNUCKLE | STEERING", "ABSORBER | FRONT SHOCK" / "REAR
+    # SHOCK", "STRUT | FRONT SUSPENSION". ABSORBER KIT rows are kits; RPO codes
+    # in the remark are left for curation's option-note refusal.
+    "wiper-motor": (r"^MOTOR\b[^|]*\|[^|]*\|\s*(MOTOR( ASM)?,\s*)?(WINDSHIELD|REAR WINDOW|LIFTGATE|REAR)?\s*WIPER",
+                    r"WASHER|PUMP|MODULE|TRANSMISSION|SWITCH|ARM|BLADE|COVER|CAP|RELAY", SUB),
+    "knuckle": (r"^KNUCKLE\b[^|]*\|[^|]*\|\s*(KNUCKLE,?\s*)?(STEERING|REAR|FRONT)",
+                r"HUB|BEARING|SEAL|BOLT|NUT|SHIELD|SENSOR|BUSHING|KIT", SUB),
+    "strut": (r"^(ABSORBER|STRUT)\b[^|]*\|[^|]*\|\s*((ABSORBER|STRUT)( ASM)?,\s*)?(FRONT|REAR)?\s*(SHOCK|SUSPENSION|STRUT)",
+              r"KIT|MOUNT|BUMPER|BRACKET|BAR\b|ROD|ENERGY|IMPACT|STEERING|ENGINE|HOOD|GATE|LID|DOOR|CAB", SUB),
 }
 
 def head(r: dict) -> str:
