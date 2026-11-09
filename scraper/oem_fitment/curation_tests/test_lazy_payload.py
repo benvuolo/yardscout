@@ -83,7 +83,8 @@ check("no groups and no aftermarket files: no lazy files, no new keys, payload a
 # namespaces only (§11.5 review satisfied by that approval)
 # subaru withheld 2026-11-09: subarupartsdeal's "Fitting Vehicle Options" column
 # encodes model/body (S/W/OBK/P), which curation ignored (ops/interchange.md)
-APPROVED_NS = {"toyota", "gm", "mopar", "ford", "vag", "hmg", "mb"}
+# re-shipped 2026-11-09 after the make-breadth §11.4 round 4 (0 WRONG) and hub confirmation
+APPROVED_NS = {"toyota", "gm", "mopar", "ford", "vag", "hmg", "mb", "subaru"}
 _shipped = {p.stem for p in DEFAULT_DIR.glob("*.json")}
 check("the repo ships groups/<ns>.json only for the owner-approved namespaces (§11.5)",
       _shipped <= APPROVED_NS, str(sorted(_shipped - APPROVED_NS)))

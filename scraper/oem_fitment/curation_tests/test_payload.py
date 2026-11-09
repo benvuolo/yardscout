@@ -39,7 +39,7 @@ check("no groups files: the payload has no OEM keys at all",
 # owner decision 2026-11-06 (ops/hub.md): only these namespaces ship
 check("the repo ships groups/<ns>.json only for the owner-approved namespaces",
       {p.stem for p in (J.SCRIPT_DIR / "oem_fitment" / "groups").glob("*.json")}
-      <= {"toyota", "gm", "mopar", "ford", "vag", "hmg", "mb"})  # subaru withheld 2026-11-09
+      <= {"toyota", "gm", "mopar", "ford", "vag", "hmg", "mb", "subaru"})  # subaru re-shipped 2026-11-09 (§11.4 round 4, hub)
 real_default = J.build_interchange_payload()
 check("the default build equals the no-OEM build on the old keys", canon(real_default) == canon(base))
 

@@ -1266,6 +1266,7 @@ class Curation:
         self.held_exterior = []                  # §5.16 exterior hold (owner checklist)
         self.likely_note_restricted = Counter()  # cat -> vehicle-years a class-wide note restricts away
         self.release_allow = policy.release_allowlist()   # §5.16 exact owner-approved releases
+        self.release_notes = policy.release_notes()
         self.released_exterior = []
         for (key, cat), c in sorted(self.classes.items()):
             if self.kinds.get(cat) != "body" or cat in policy.PHASE3_CATS:
@@ -1316,7 +1317,10 @@ class Curation:
             reason, text = _likely_reason(whys)
             pns = sorted(c.pns)
             apps = _runs(Ts)
-            released = (self.ns, cat, tuple(pns), tuple(tuple(a) for a in apps)) in self.release_allow
+            rkey = (self.ns, cat, tuple(pns), tuple(tuple(a) for a in apps))
+            released = rkey in self.release_allow
+            if released and rkey in self.release_notes:
+                text = self.release_notes[rkey]     # the split its source states (hub 2026-11-09)
             if released:
                 self.released_exterior.append({"cat": cat, "pn": pns, "apps": apps})
             hold = policy.held_cross_model_cat(self.ns, cat)

@@ -330,9 +330,18 @@ _bad[0][3] += 1
 c_no, d_no = _with_allow([{"ns": "mopar", "cat": "headlights", "pn": ["5303999ZZ"], "apps": _bad}])
 check("12 allowlist: an entry whose apps differ by one year leaves it held",
       not any("5303999ZZ" in g["pn"] for g in d_no["likely"]) and any("5303999ZZ" in h["pn"] for h in c_no.held_exterior))
-c_ns, d_ns = _with_allow([{"ns": "subaru", "cat": "headlights", "pn": ["5303999ZZ"], "apps": _apps12}])
-check("12 allowlist: a withheld namespace's entry never releases (and the wrong ns does not match)",
-      not any("5303999ZZ" in g["pn"] for g in d_ns["likely"]) and _P.release_allowlist(_rel) == set())
+# subaru re-shipped 2026-11-09: the withheld mechanism is tested with it set again
+_wh = _P.WITHHELD_NS
+_P.WITHHELD_NS = frozenset({"subaru"})
+try:
+    c_ns, d_ns = _with_allow([{"ns": "subaru", "cat": "headlights", "pn": ["5303999ZZ"], "apps": _apps12}])
+    check("12 allowlist: a withheld namespace's entry never releases (and the wrong ns does not match)",
+          not any("5303999ZZ" in g["pn"] for g in d_ns["likely"]) and _P.release_allowlist(_rel) == set())
+finally:
+    _P.WITHHELD_NS = _wh
+check("12 allowlist notes: an entry's note is keyed like the release (hoods name the turbo split)",
+      any("Turbo hood" in v for v in _P.release_notes().values())
+      and set(_P.release_notes()) <= _P.release_allowlist())
 check("12 allowlist: the committed allowlist is part of the policy hash",
       "release_allowlist.json" in _P.POLICY_INPUTS)
 check("12 base model: Camry / Camry Hybrid and RX 350 / RX 450h stay together; Grand Caravan = Caravan",

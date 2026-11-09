@@ -2441,3 +2441,24 @@ Other outputs of this session:
 - Path E audit file: `groups/_report/pathE_audit_2026-11-09.json`. The
   per-item reasons are a good checklist of notes that knuckle and strut
   curation must refuse.
+- **2026-11-09 ~18:45 UTC: subaru re-shipped (hub confirmed ~18:20).**
+  - groups/subaru.json: 42 Likely, curated on **oem-raw@75dc442** (where its
+    §11.4 sample was drawn). The other 7 namespaces stay on **c36da2e**.
+    Per-file raw refs are on purpose (hub): oemStatus shows each one's ref.
+  - The 42 = 34 rule-passing groups (25 window regulators/motors, 9 climate
+    controls) + the 8 held-release entries, now in release_allowlist.json
+    (`owner_go_subaru`). Sources are outside the dealer network; /p/ dealer
+    URLs were dropped.
+  - Allowlist entries can carry a `note` (policy.release_notes) that
+    replaces the generic reason. The hoods name the split their verifier's
+    source states: 57229AG04A9P "Turbo hood (scoop cutout): Legacy GT /
+    Outback XT only"; 57229AJ00A9P "Non-turbo hood (no scoop); the 2011-12
+    Legacy 2.5GT turbo uses a different hood".
+  - policy.WITHHELD_NS is empty. The withheld test now sets it explicitly.
+    test_payload / test_lazy_payload approve subaru.
+  - The 7 other files were re-curated in the same push; only policy_sha256
+    differs.
+  - Gates: curation_tests 16/16, tests 29/29, scraper/test_*.py all pass,
+    pf_guards_unit ALL PASS, measure parity ok, payload oemStatus ok x8
+    (0 Verified), second subaru curate byte-identical, test_groups_hash
+    passes.
