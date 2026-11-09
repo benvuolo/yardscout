@@ -76,6 +76,18 @@ CREATE TABLE IF NOT EXISTS ario_vins (
     fetched_at   TEXT NOT NULL
 );
 
+-- Per-car photo lookups (2026-11-09): sources whose photo URL needs one
+-- request per car (Pull-A-Part's image service). Looked up once per car and
+-- kept: status 'photo' (url set) or 'none' (re-asked after a few days).
+CREATE TABLE IF NOT EXISTS photo_lookups (
+    source       TEXT NOT NULL,
+    car_key      TEXT NOT NULL,
+    status       TEXT NOT NULL,      -- 'photo' | 'none'
+    url          TEXT NOT NULL DEFAULT '',
+    checked_at   TEXT NOT NULL,
+    PRIMARY KEY (source, car_key)
+);
+
 -- Pull-N-Save photo checks: their image URL exists for every car and serves a
 -- "no image" placeholder when there is no photo, so each car's URL is checked
 -- once (headers only) and the result kept here: 'photo' or 'none'.
@@ -530,6 +542,36 @@ def store_pns_photo_checks(results: dict, checked_at: str) -> int:
             "ON CONFLICT(photo_key) DO UPDATE SET status = excluded.status, "
             "checked_at = excluded.checked_at WHERE pns_photo_checks.status != 'photo'",
             (key, status, checked_at))
+        n += cur.rowcount
+    conn.commit()
+    conn.close()
+    return n
+
+
+def load_photo_lookups(source: str) -> dict:
+    """{car_key: (status, url, checked_at)} for one source."""
+    conn = _connect()
+    rows = conn.execute("SELECT car_key, status, url, checked_at FROM photo_lookups WHERE source = ?",
+                        (source,)).fetchall()
+    conn.close()
+    return {k: (st, u, at) for k, st, u, at in rows}
+
+
+def store_photo_lookups(source: str, results: dict, checked_at: str) -> int:
+    """Upsert {car_key: (status, url)}; a 'photo' row is never downgraded."""
+    if not results:
+        return 0
+    conn = _connect()
+    cur = conn.cursor()
+    n = 0
+    for key, (status, url) in results.items():
+        if not key or status not in ("photo", "none"):
+            continue
+        cur.execute(
+            "INSERT INTO photo_lookups (source, car_key, status, url, checked_at) VALUES (?,?,?,?,?) "
+            "ON CONFLICT(source, car_key) DO UPDATE SET status = excluded.status, url = excluded.url, "
+            "checked_at = excluded.checked_at WHERE photo_lookups.status != 'photo'",
+            (source, key, status, url or "", checked_at))
         n += cur.rowcount
     conn.commit()
     conn.close()

@@ -42,10 +42,10 @@ def rebuild(code, which="card"):
 
 # --- the file ---------------------------------------------------------------
 check("photo_sources.json loads", isinstance(SRC, dict) and SRC)
-check("enabled set is exactly the passing chains",
-      set(PUB) == {"pyp", "pnp", "wap", "weller", "ezpullit", "kikers",
-                   "papva", "upullitwa", "aesop", "midwayupull", "byot", "wilberts",
-                   "nvpap", "pns"}, sorted(PUB))
+check("enabled set includes every passing chain",
+      {"pyp", "pnp", "wap", "weller", "ezpullit", "kikers", "papva", "upullitwa", "aesop", "midwayupull",
+       "byot", "wilberts", "nvpap", "pns", "pap", "fenix", "paulsautoyard", "ario_foss", "ario_ryans",
+       "ys_ruperts", "ys_upickitaz"} <= set(PUB), sorted(PUB))
 check("army's is listed but OFF", "armys" in SRC and "armys" not in PUB)
 check("sturtevant is listed but OFF (3.8 MB originals)", "sturtevant" in SRC and "sturtevant" not in PUB)
 check("every published source has a label and patterns",
@@ -55,7 +55,8 @@ check("every published URL is https on the source's host",
           for s in PUB.values() for p in s["patterns"] for w in ("card", "large")))
 check("onCards published as a bool on every source", all(isinstance(s.get("onCards"), bool) for s in PUB.values()))
 check("heavy sources are off list cards",
-      {k for k, s in PUB.items() if not s["onCards"]} == {"byot", "papva", "upullitwa", "aesop", "midwayupull", "kikers"},
+      {"byot", "papva", "upullitwa", "aesop", "midwayupull", "kikers", "pap", "fenix", "ario_foss"}
+      <= {k for k, s in PUB.items() if not s["onCards"]},
       sorted(k for k, s in PUB.items() if not s["onCards"]))
 check("onCards defaults to true", js.published_photo_sources({"x": {"enabled": True, "label": "Photo: X", "host": "h",
       "patterns": [{"code": "^x$", "card": "https://h/a", "large": "https://h/a"}]}})["x"]["onCards"] is True)

@@ -16319,6 +16319,111 @@ def fetch_pap_locations() -> list[dict]:
     return r.json()
 
 
+# Pull-A-Part photos (2026-11-09). pullapart.com's own inventory results
+# show each car's photo via its image service: GET
+# imageservice.pullapart.com/img/retrieveimage/?locID&ticketID&lineID
+# &programID=35&imageIndex=1 -> {"webPath": "https://papimages.blob.core.
+# windows.net/carinventory/{loc}/{yyyy}/{mm}/{ts}_{loc}_{ticket}_{line}.png"}
+# or "Error retrieving image". The path carries the upload timestamp, so it
+# can't be derived: one lookup per NEW car (newest first, at most
+# PAP_PHOTO_LOOKUP_MAX per scan, 10 s apart, honest YardScout UA), cached
+# for good in the history DB (photo_lookups). Code "q{loc}/{ts}/{ticket}/{line}".
+# Images are 640x640 PNG ~700 KB: car screen only (onCards false).
+PAP_IMAGE_SERVICE = "https://imageservice.pullapart.com/img/retrieveimage/"
+PAP_PHOTO_LOOKUP_MAX = int(os.environ.get("PAP_PHOTO_LOOKUP_MAX", "300"))
+PAP_PHOTO_DELAY_SEC = 10.0
+PAP_PHOTO_RECHECK_DAYS = 3
+PAP_PHOTO_JOIN_TIMEOUT_SEC = 3600
+_PAP_WEBPATH_RE = re.compile(
+    r"^https://papimages\.blob\.core\.windows\.net/carinventory/(\d{1,4})/(\d{4})/(\d{2})/"
+    r"((\d{4})(\d{2})\d{8})_(\d{1,4})_(\d{1,12})_(\d{1,4})\.png$")
+
+
+def _pap_photo_code_from_webpath(web_path: str, loc: str, ticket: str, line: str) -> str:
+    m = _PAP_WEBPATH_RE.match((web_path or "").strip())
+    if not m:
+        return ""
+    floc, yy, mm, ts, ts_y, ts_m, loc2, tk, ln = m.groups()
+    if not (floc == loc2 == loc and tk == ticket and ln == line and yy == ts_y and mm == ts_m):
+        return ""   # folder/name disagree with the car or each other: don't guess
+    return f"q{loc}/{ts}/{ticket}/{line}"
+
+
+def _pap_lookup_photo(session, loc: str, ticket: str, line: str):
+    """('photo', code) | ('none', '') | None (unknown: retry next scan)."""
+    try:
+        r = session.get(PAP_IMAGE_SERVICE, params={"locID": loc, "ticketID": ticket, "lineID": line,
+                                                   "programID": 35, "imageIndex": 1},
+                        headers={**YARDSCOUT_HEADERS, "Accept": "application/json"}, timeout=30)
+        if r.status_code != 200:
+            return None
+        try:
+            web = (r.json() or {}).get("webPath") or ""
+        except ValueError:
+            return ("none", "") if "Error retrieving image" in r.text else None
+    except Exception:  # noqa: BLE001
+        return None
+    if not web or "Error retrieving image" in web:
+        return ("none", "")
+    code = _pap_photo_code_from_webpath(web, loc, ticket, line)
+    return ("photo", code) if code else ("none", "")
+
+
+def _pap_apply_photo_lookups(vehicles: list, *, lookup=None, now=None, sleep=time.sleep) -> dict:
+    try:
+        import db as _db
+    except ImportError:
+        from scraper import db as _db  # pragma: no cover
+    now = now or datetime.now(timezone.utc)
+    known = _db.load_photo_lookups("pap")
+    recheck_before = (now - timedelta(days=PAP_PHOTO_RECHECK_DAYS)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    keyed = []
+    for v in vehicles:
+        parts = str(v.get("id") or "").split("-")
+        if len(parts) == 4 and parts[0] == "pap" and all(x.isdigit() for x in parts[1:]):
+            keyed.append((v, "-".join(parts[1:])))
+    keyed.sort(key=lambda t: t[0].get("dateAdded") or "", reverse=True)
+    todo = [k for _, k in keyed if k not in known]
+    todo += [k for _, k in keyed if known.get(k, ("",))[0] == "none" and known[k][2] < recheck_before]
+    todo = list(dict.fromkeys(todo))[:max(PAP_PHOTO_LOOKUP_MAX, 0)]
+    results, errors = {}, 0
+    if todo:
+        session = requests.Session()
+        lookup = lookup or (lambda k: _pap_lookup_photo(session, *k.split("-")))
+        for i, k in enumerate(todo):
+            if i:
+                sleep(PAP_PHOTO_DELAY_SEC)
+            res = lookup(k)
+            if res is None:
+                errors += 1
+                if errors >= 5:
+                    print("  [Pull-A-Part photos] 5 consecutive errors — stopping for this scan",
+                          file=sys.stderr)
+                    break
+                continue
+            errors = 0
+            results[k] = res
+        _db.store_photo_lookups("pap", results, now.strftime("%Y-%m-%dT%H:%M:%SZ"))
+        known = _db.load_photo_lookups("pap")
+    n = 0
+    for v, k in keyed:
+        st = known.get(k)
+        if st and st[0] == "photo" and st[1]:
+            v["_photo"] = st[1]
+            n += 1
+    pending = sum(1 for _, k in keyed if k not in known)
+    print(f"  [Pull-A-Part photos] looked up {len(results)} this scan; {n} cars with photos, "
+          f"{pending} not yet looked up", file=sys.stderr)
+    return {"looked_up": len(results), "photo": n, "pending": pending}
+
+
+def _pap_apply_photo_lookups_safe(vehicles: list) -> None:
+    try:
+        _pap_apply_photo_lookups(vehicles)
+    except Exception as e:  # noqa: BLE001 — photos are optional
+        print(f"  [Pull-A-Part photos] skipped: {e}", file=sys.stderr)
+
+
 def fetch_pap_inventory() -> list[dict]:
     """Fetch live inventory from every Pull-A-Part yard.
 
@@ -16966,6 +17071,83 @@ def _fenix_parse_date(date_raw: str) -> str:
     return f"{year}-{m.group(1)}-{m.group(2)}"
 
 
+# ---- per-car photo lookups (shared) ------------------------------------------
+def photo_lookup_pass(source: str, keyed: list, lookup, *, cap: int, delay: float,
+                      recheck_days: int = 3, now=None, sleep=time.sleep) -> dict:
+    """keyed: [(vehicle, car_key)]. Each car_key is looked up ONCE (newest
+    dateAdded first, at most `cap` per scan, `delay` s apart) via
+    lookup(car_key) -> ('photo', code) | ('none', '') | None (unknown: retry
+    next scan); results persist in the history DB (photo_lookups). 'none' is
+    re-asked once after `recheck_days`. Sets v['_photo'] from cached codes."""
+    try:
+        import db as _db
+    except ImportError:
+        from scraper import db as _db  # pragma: no cover
+    now = now or datetime.now(timezone.utc)
+    known = _db.load_photo_lookups(source)
+    before = (now - timedelta(days=recheck_days)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    keyed = sorted(keyed, key=lambda t: t[0].get("dateAdded") or "", reverse=True)
+    todo = [k for _, k in keyed if k not in known]
+    todo += [k for _, k in keyed if known.get(k, ("",))[0] == "none" and known[k][2] < before]
+    todo = list(dict.fromkeys(todo))[:max(cap, 0)]
+    results, errors = {}, 0
+    for i, k in enumerate(todo):
+        if i:
+            sleep(delay)
+        res = lookup(k)
+        if res is None:
+            errors += 1
+            if errors >= 5:
+                print(f"  [{source} photos] 5 consecutive errors — stopping for this scan", file=sys.stderr)
+                break
+            continue
+        errors = 0
+        results[k] = res
+    if results:
+        _db.store_photo_lookups(source, results, now.strftime("%Y-%m-%dT%H:%M:%SZ"))
+        known = _db.load_photo_lookups(source)
+    n = 0
+    for v, k in keyed:
+        st = known.get(k)
+        if st and st[0] == "photo" and st[1]:
+            v["_photo"] = st[1]
+            n += 1
+    pending = sum(1 for _, k in keyed if k not in known)
+    print(f"  [{source} photos] looked up {len(results)} this scan; {n} cars with photos, "
+          f"{pending} not yet looked up", file=sys.stderr)
+    return {"looked_up": len(results), "photo": n, "pending": pending}
+
+
+# Fenix photos (2026-11-09): the list shows a theme placeholder, but each
+# car's own page (/inventory/{stock}/) shows its photos at
+# /wp-content/uploads/{yyyy}/{mm}/{stock}_1.jpg (900x1200, ~75-230 KB),
+# filed under the upload month. One HEAD per NEW car (set-out month, then the
+# next month), cached; a 404 on both = no photo yet. Code "f{yyyy}{mm}{stock}".
+FENIX_PHOTO_LOOKUP_MAX = int(os.environ.get("FENIX_PHOTO_LOOKUP_MAX", "150"))
+FENIX_PHOTO_DELAY_SEC = 10.0
+
+
+def _fenix_lookup_photo(car_key: str):
+    stock, _, date_iso = car_key.partition("|")
+    if not (stock.isdigit() and re.match(r"\d{4}-\d{2}", date_iso)):
+        return ("none", "")
+    y, m = int(date_iso[:4]), int(date_iso[5:7])
+    nxt = (y + (m == 12), 1 if m == 12 else m + 1)
+    for i, (yy, mm) in enumerate(((y, m), nxt)):
+        if i:
+            time.sleep(FENIX_DELAY_SEC)
+        url = f"https://fenixupull.com/wp-content/uploads/{yy}/{mm:02d}/{stock}_1.jpg"
+        try:
+            r = requests.head(url, headers=YARDSCOUT_HEADERS, timeout=20, allow_redirects=False)
+        except Exception:  # noqa: BLE001
+            return None
+        if r.status_code == 200 and (r.headers.get("content-type") or "").startswith("image/"):
+            return ("photo", f"f{yy}{mm:02d}{stock}")
+        if r.status_code != 404:
+            return None
+    return ("none", "")
+
+
 def fetch_fenix_inventory() -> list[dict]:
     """Fetch live inventory from every Fenix U-Pull yard (paged HTML table).
 
@@ -17041,6 +17223,12 @@ def fetch_fenix_inventory() -> list[dict]:
               file=sys.stderr)
     seen: set[str] = set()
     unique = [v for v in all_vehicles if not (v["id"] in seen or seen.add(v["id"]))]
+    try:
+        photo_lookup_pass("fenix", [(v, v["id"].split("-", 1)[1] + "|" + (v.get("dateAdded") or ""))
+                                    for v in unique if v.get("dateAdded")],
+                          _fenix_lookup_photo, cap=FENIX_PHOTO_LOOKUP_MAX, delay=FENIX_PHOTO_DELAY_SEC)
+    except Exception as e:  # noqa: BLE001 — photos are optional
+        print(f"  [Fenix photos] skipped: {e}", file=sys.stderr)
     print(f"  [Fenix] {len(unique)} vehicles across "
           f"{len({v['_location'] for v in unique})} yards", file=sys.stderr)
     return unique
@@ -17654,6 +17842,7 @@ def fetch_ruperts_inventory() -> list[dict]:
             "model": _utpap_format_label(model),
             "row": row_n,
             "dateAdded": date_iso,
+            "_photo": _yardsmart_photo_code(block, "ruperts"),
             "_location": RUPERTS_YARD["name"],
             "_city": RUPERTS_YARD["city"],
             "_state": RUPERTS_YARD["state"],
@@ -19885,6 +20074,54 @@ YARDCONNECT_SITES: dict[str, dict] = {
 _YARDCONNECT_NONCE_RE = re.compile(
     r'yardconnectPublic\s*=\s*{[^}]*"nonce"\s*:\s*"([0-9a-f]+)"')
 _YARDCONNECT_ROW_RE = re.compile(r"<tr[^>]*>(.*?)</tr>", re.S)
+# YardSmart photos (2026-11-09): the row thumbnail is an Active Storage
+# "representation" (resize_to_fit 325x600, ~30 KB) on api.yardsmartapp.com.
+# Its signed blob id either never expires (exp null: most of Rupert's and
+# Chuck & Eddie's) or expires ~10 h after the page was served. Every scan
+# re-reads the page, so a fresh URL is republished every 4 h; one with less
+# than YARDSMART_MIN_HOURS_LEFT left (or an unknown variation) gets no code.
+# Code: "y{site}{v}{blob id minus its constant 28-char base64 prefix}--{digest}".
+# Full-size "blobs" (VinPlus: 4032x3024 ~4 MB originals) are never captured.
+YARDSMART_MIN_HOURS_LEFT = 6.0
+YARDSMART_SITE_IDS = {"upickitaz": "az", "upullitne": "ne", "genesis": "ge",
+                      "robertsons": "ro", "chuckeddies": "ce", "ruperts": "ru"}
+YARDSMART_VARIATIONS = {   # variation digest -> code digit (template in photo_sources.json)
+    "b0c21fdd98391a3d8083f052f5b3fabb2e2c9079": "1",   # resize_to_fit 325x600, jpg
+    "4f71ac7df5604255483bbb903f985fba07e9137c": "2",   # resize_to_fit 325x600, jpeg
+}
+_YARDSMART_BLOB_PREFIX = "eyJfcmFpbHMiOnsibWVzc2FnZSI6"   # base64 of '{"_rails":{"message":'
+_YARDSMART_REP_RE = re.compile(
+    r"https:(?:\\?/){2}api\.yardsmartapp\.com(?:\\?/)rails(?:\\?/)active_storage(?:\\?/)"
+    r"representations(?:\\?/)redirect(?:\\?/)([A-Za-z0-9=_-]{30,400})--([0-9a-f]{40})(?:\\?/)"
+    r"[A-Za-z0-9=_-]{20,400}--([0-9a-f]{40})(?:\\?/)")
+
+
+def _yardsmart_photo_code(block: str, source: str, now: datetime | None = None) -> str:
+    sid = YARDSMART_SITE_IDS.get(source)
+    m = _YARDSMART_REP_RE.search(block or "") if sid else None
+    if not m:
+        return ""
+    blob, digest, var_digest = m.groups()
+    v = YARDSMART_VARIATIONS.get(var_digest)
+    if not v or not blob.startswith(_YARDSMART_BLOB_PREFIX):
+        return ""
+    try:
+        import base64
+        meta = json.loads(base64.b64decode(blob + "=" * (-len(blob) % 4)))["_rails"]
+    except Exception:  # noqa: BLE001
+        return ""
+    exp = meta.get("exp")
+    if exp is not None:
+        try:
+            left = (datetime.fromisoformat(str(exp).replace("Z", "+00:00"))
+                    - (now or datetime.now(timezone.utc))).total_seconds() / 3600
+        except ValueError:
+            return ""
+        if left < YARDSMART_MIN_HOURS_LEFT:
+            return ""
+    return f"y{sid}{v}{blob[len(_YARDSMART_BLOB_PREFIX):]}--{digest}"
+
+
 _YARDCONNECT_STOCK_RE = re.compile(r'data-stock-number="([^"]+)"')
 _YARDCONNECT_TH_RE = re.compile(r"<th[^>]*>(.*?)</th>", re.S)
 # <th> label (lowercased, squeezed) -> cell key. Anything else is kept
@@ -20028,6 +20265,7 @@ def fetch_yardconnect_site(source: str) -> list[dict]:
                 "dateAdded": date_iso,
                 **({"_color": color_s.title()} if color_s else {}),
                 **({"_engine": engine_s} if engine_s else {}),
+                "_photo": _yardsmart_photo_code(block, source),
                 "_location": yard["name"],
                 "_city": yard["city"],
                 "_state": yard["state"],
@@ -21576,7 +21814,30 @@ def fetch_ario_legacy_inventory() -> list[dict]:
 # VINs: fetched once per stock via get-inventory-item, newest cars first,
 # ARIO_VIN_MAX_PER_RUN per scan (600 ≈ 20 min at 2 s), persisted in the history DB (ario_vins),
 # seeded from the legacy Bubble feed when the table is empty. Photos
-# (image_url) are deliberately ignored — no-photos policy.
+# (image_url): since 2026-11-09 the FIRST URL is captured as a photo code
+# when it is the yard's own Ario/YMS storage or Paul's photo CDN
+# (_ario_photo_code); Copart auction photos and anything else are skipped.
+# Ario list items' image_url (comma-separated). Accepted hosts (2026-11-09):
+# Ario's YMS storage, path keyed by the yard's own slug -> "a{slug}/{STK}/{file}";
+# Paul's Auto Yard photo CDN -> "c{path}". cs.copart.com (auction photos,
+# Copart's) and anything else -> no code.
+_ARIO_YMS_RE = re.compile(
+    r"^https://tlcgcwhkzwvdbdoceyse\.supabase\.co/storage/v1/object/public/yms-inventory-images/"
+    r"([a-z0-9-]{3,80})/([A-Za-z0-9]{1,24})/([0-9]{10,16}_[0-9]{1,3})\.jpg$")
+_ARIO_PAULS_RE = re.compile(r"^https://d1vnbry5hm94g5\.cloudfront\.net/((?:[A-Z0-9]{3}/){4}[A-Z0-9])\.jpg$")
+
+
+def _ario_photo_code(image_url, slug: str) -> str:
+    first = (image_url or "").split(",")[0].strip() if isinstance(image_url, str) else ""
+    m = _ARIO_YMS_RE.match(first)
+    if m and m.group(1) == slug:
+        return f"a{m.group(1)}/{m.group(2)}/{m.group(3)}"
+    m = _ARIO_PAULS_RE.match(first)
+    if m:
+        return "c" + m.group(1)
+    return ""
+
+
 ARIO_LIVE_FN = "https://zqfzqcyteuemzbnwtmcr.supabase.co/functions/v1"
 ARIO_LIVE_KEY = "sb_publishable_njLlN9YEWSrEvkZ4ZS2fdQ_l7vkJI-C"
 ARIO_LIVE_PAGE = int(os.environ.get("ARIO_LIVE_PAGE", "40"))  # the page itself asks for 25/40
@@ -21812,6 +22073,7 @@ def _ario_live_items_to_vehicles(items: list[dict], *, yard: dict, source: str,
             "_source": source,
             "_ario_item_id": str(it.get("id") or ""),
             "_ario_slug": yard["slug"],
+            "_photo": _ario_photo_code(it.get("image_url"), yard["slug"]),
         })
     return vehicles
 
@@ -27274,10 +27536,21 @@ def main():
             print("Scanning Pull-A-Part (incl. former U-Pull-&-Pay yards)...", file=sys.stderr)
             pap_vehicles = fetch_pap_inventory()
 
+        # Pull-A-Part photo lookups run beside the independents (one paced
+        # request per NEW car; cached) so they add no wall-clock to the scan.
+        pap_photo_thread = None
+        if pap_vehicles:
+            import threading
+            pap_photo_thread = threading.Thread(
+                target=_pap_apply_photo_lookups_safe, args=(pap_vehicles,), daemon=True)
+            pap_photo_thread.start()
+
         indep_vehicles: list[dict] = []
         if indep_fut is not None:
             indep_vehicles = indep_fut.result()
             indep_pool.shutdown()
+        if pap_photo_thread is not None:
+            pap_photo_thread.join(timeout=PAP_PHOTO_JOIN_TIMEOUT_SEC)
 
         all_vehicles = (pnp_vehicles + tap_vehicles + utpap_vehicles
                         + pyp_vehicles + pap_vehicles + indep_vehicles)
