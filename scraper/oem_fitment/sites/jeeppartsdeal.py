@@ -126,10 +126,19 @@ RULES = {
                  r"hinge|latch|glass|handle|bumper|strap|check|support|cable|link|lock|striker|weather|carrier|trim|panel|cylinder|stop|actuator|module|switch|lamp|emblem|nameplate|molding|applique|cover|bar"),
     "liftgate": (rf"^(liftgate|lift\s+gate|door{D}liftgate)\b",
                  r"handle|bar|striker|latch|cylinder|link|weather|propeller|gas|hinge|glass|motor|wiper|spoiler|lamp|trim|molding|applique|switch|strut|cable|support|module|panel|actuator|lock|bumper|emblem|nameplate|camera|release|check|cover|shield|silencer|insulator|pad|garnish"),
-    # tier C: name rule pending (written after reading the trial's list rows)
-    "wiper-motor": (r"(?!x)x", ""),
-    "knuckle": (r"(?!x)x", ""),
-    "strut": (r"(?!x)x", ""),
+    # tier C, Mopar names on the 2026-11-09 trial pages: "Motor - Windshield
+    # Wiper", "Motor - Wiper", "Motor, Liftgate Wiper"; "Knuckle - Front" (not
+    # "KNUCKLE AND HUB", a different package, nor "Ball Join - Knuckle");
+    # "Strut - Front Suspension", "STRUT Front Suspension", "Absorber -
+    # Suspension", "SHOCK ABSORBER Suspension Rear". Exclusions read main AND
+    # aux: a motor row whose aux says "Wiper Linkage" is dropped (packaging
+    # not stated); "Absorber Package" and loaded-strut kits are kits.
+    "wiper-motor": (r"^motor\b[^|]*\bwiper\b|^wiper\s+motor\b",
+                    r"bezel|cover|pivot|washer|pump|hose|stop|bumper|switch|arm|blade|link|transmission|relay|module"),
+    "knuckle": (r"^knuckle\b",
+                r"ball|join|hub|bushing|seal|shaft|cap|shield|bearing"),
+    "strut": (r"^(strut|absorber|shock\s+absorber)\b",
+              r"mount|bracket|bushing|cover|grommet|retainer|plate|sleeve|stop|bumper|package|kit|seat|bearing|steering|boot|insulator|spring"),
 }
 
 NOTES = {
