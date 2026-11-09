@@ -2506,7 +2506,13 @@ Unknown clauses refuse. Pages print no OE numbers, so no dealer OE join.
 3. then dispatch `oem-aftermarket-crawl.yml` with site
    `ecat.spectrapremium.com`.
 
-**Next:** crawl -> `groups_spectra` curation (one Likely group per Spectra
+**Hub, 2026-11-09 ~18:48 UTC: HOLD on Spectra.** Both points (captcha marker,
+no-reproduction clause) go to the owner; the hub relays the answer. Nothing
+allowlisted, fetch.py unchanged, no crawl. Second probe pass (CSF, OSC,
+Eagle Eye, Koyorad, Nissens): none usable (SOURCES.md). Session stopped
+here.
+
+**Next (only after the owner's answer):** crawl -> `groups_spectra` curation (one Likely group per Spectra
 pn x line; engine gate on Eng. Desg./liters; body gate on Body Type; refuse
 other notes) -> §11.4 sample per line -> hub -> branch
 interchange/aftermarket-1 for any app change. Nothing shipped.
@@ -2537,6 +2543,57 @@ interchange/aftermarket-1 for any app change. Nothing shipped.
     6/6, gm curate byte-identical twice, payload ok x8, test_groups_hash.
   - The GM series branch stays off main until a resample on these rules has
     0 WRONG.
+## 2026-11-09 Same-engine relabel + Honda/Nissan start (session_016ZzJfK5RFgko9f1gx7qjEa)
+
+Owner go via hub ("Yes relabel those, and start on Honda/Nissan").
+
+### Task A: "Same engine — part may differ" (branch interchange/same-engine-label)
+- `docs/app.js` engine path: a donor whose ONLY link to the seeker is the
+  hand engine family (no hand/OEM vg names both cars, no aftermarket unit
+  list names both) and that is a different base model (make or squashed
+  model differs) gets `src: 'same-engine'`. Chip "Same engine — part may
+  differ", tooltip: same engine, different model, accessories often differ,
+  match the number on both cars. Engine assemblies are excluded.
+- vg-joined donors that can't be Verified (engine unconfirmed, ambig) stay
+  part-number-backed Likely. An aftermarket list naming both cars lifts a
+  same-engine row to the aftermarket chip.
+- Sort: same-engine rows after all others in both sort orders. Counts row:
+  "N verified · N likely · N same engine". Cards keep `pf-likely` (+
+  `pf-same-engine`), so "Verified fits only" hides them.
+- Plain hand Likely tooltip reworded; "very likely fits" is gone.
+- No gate, data or free/Pro change. sw jh-v169. Neutral `.pf-tier-same` chip.
+- Tests: pf_guards_unit ALL PASS (+17 same-engine checks; 10 of them fail on
+  the old app.js); part_finder_e2e 1 failure, the known E46 M3 data case
+  (its sort check now allows the same-engine group last); pf_ux_e2e pass
+  (counts parser takes the optional third count); interchange_e2e pass;
+  ui_no_truncation: see below.
+- GX 470 2005 alternator near 78744 (Austin): 0 verified · 0 likely · 64
+  same engine (all Tundra/Sequoia; no GX/LX donor in range). No overflow at
+  390 px. Shots: backend/test/shots_same_engine/ (light/dark × free/Pro).
+
+### Task B: Honda/Acura, Nissan/Infiniti, step 1 (read-only)
+oem-raw@75dc442. All four sites `.done`; honda also `.retried503`.
+| site | records | list rows (R1) | year manifests | errors |
+|---|---|---|---|---|
+| hondapartsnow | 1465 | 342 lines | 50 | 3 |
+| acurapartswarehouse | 748 | none | none | 3 |
+| nissanpartsdeal | 3911 | none | none | 9 |
+| infinitipartsdeal | 1775 | none | none | 27 |
+Local curate (`curate.py --ns honda --ns nissan --raw-ref origin/oem-raw`):
+honda 0 Likely (8,746 list rows, but they cover seed years only:
+likely_app_years_without_own_page e.g. side-mirrors 1,411, window-regulator
+924); nissan 0 Likely (no manifests at all; side-mirrors 2,203,
+window-regulator 2,981 app-years without own page). Also: no audit record in
+audits.json for any of the four sites, and all four print an option column
+(never coverage, spec 5.5), so Verified stays impossible there.
+Next: R3 completion run over the completion worklists (honda.completion.json /
+nissan.completion.json), plus R1 manifests on acura/nissan/infiniti.
+
+### Blocked (this session)
+- `git push` refused by the git proxy: benvuolo/yardscout is not in this
+  session's authorized repo set; the add_repo call was denied. The `gh` token
+  is invalid, so no workflow dispatch either. The branch and this note exist
+  only in this container until access is fixed.
 
 ## Wheels (session_016ZzJfL4wG1wgpyYymW2Z28, 2026-11-09; branch interchange/wheels, applied and pushed by the hub)
 
@@ -2577,3 +2634,14 @@ Owner: "Yes relabel those, and start on Honda/Nissan and wheels". The hub approv
   - Worklist: `wheels: true` on all four. VW, MB and Hyundai go to version 2 to re-open their done sites. GM is not done, so tier W follows its A/B crawl.
   - Kia reuses Hyundai's PARTS and SUBCATS, so its rules exist, but it is not flagged: not asked yet. It is a one-line worklist change if the hub wants it.
   - Tests: test_wheels_rules covers the real row names and the subcat/page regexes. oem_fitment tests 30/30; curation_tests all PASS.
+- Main merged in twice (e0e6c90, then again for d2a54d6). Resolution, as the hub asked:
+  - crawl.py: tiers A, B, W, C, with TIER_FLAG `W: wheels`.
+  - Site modules: tier C and wheels entries side by side.
+  - Worklist: `complete` and `wheels` keys side by side. No wheels site has tierC, so the versions don't collide.
+  - pf_guards_unit: main's same-engine block, closed, then the wheels block.
+  - interchange.json: main's file plus the regenerated wheels entry (verified identical apart from wheels).
+  - sw.js: jh-v172.
+- Kia on tier W (worklist version 2). It uses Hyundai's rules: the 2013 Optima chassis/wheel_cap page, read through fetch.py, uses the same names.
+- Fix found on that page: every road wheel's Fit Note lists the car's options, including "TEMPORARY - STEEL WHEEL & TIRE (MINI)". The first Hyundai rule searched the whole row for spare words, so it dropped all 5 Optima road wheels. The spare check now reads only the part's own name and remark. Optima: 4 alloy + 1 steel kept; 2 "Wheel Assy-Temporary" dropped.
+- Curation note: the PartsGiant Fit Note is car options, not the part's identity. Don't read spare words in it as a spare.
+- test_model_map (curation_tests) fails identically on origin/main: Honda "Cr-Z" feed spelling, M3/M5. It belongs to the Honda/Nissan session; I haven't touched it.
