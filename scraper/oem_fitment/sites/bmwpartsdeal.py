@@ -139,10 +139,17 @@ RULES = {
     "grille": (r"^(kidney\s+)?grille\b|^front\s+grille\b", r"seal|bracket|moulding|trim|insert|frame\s+only|emblem|badge"),
     "trunk-lid": (r"^(trunk\s+lid|tailgate)\b|^boot\s+lid\b", r"hinge|(lid|tailgate)\s+lock|lock\s+(cylinder|actuator|drive)|stop|buffer|seal|gasket|cap|strut|spring|holder|handle|trim|cable|light|lamp|spoiler"),
     "liftgate": (r"^tailgate\b|^rear\s+lid\b", r"hinge|(lid|tailgate)\s+lock|lock\s+(cylinder|actuator|drive)|stop|buffer|seal|gasket|cap|strut|spring|holder|handle|trim|cable|light|lamp|spoiler|glass|wiper"),
-    # tier C: name rule pending (written after reading the trial's list rows)
-    "wiper-motor": (r"(?!x)x", r"x^"),
-    "knuckle": (r"(?!x)x", r"x^"),
-    "strut": (r"(?!x)x", r"x^"),
+    # tier C, E90 trial rows (2006 325i, 2011 328i): "Carrier, left/right"
+    # (front wheel carrier 31-21), "Wheel carrier, rear left" (33-32), "Left
+    # front spring strut" (31-31), "Shock Absorber, Rear" (33-52). The E90 sells
+    # the windshield wiper only as "Wiper System, Complete" (motor + linkage):
+    # another package, not taken; only rows named "wiper motor" are.
+    "wiper-motor": (r"^((rear\s+window|front|rear)\s+)?wiper\s+motor\b|^drive,?\s+(rear\s+window\s+)?wiper",
+                    r"system|bracket|cover|cap|arm|blade|seal|holder|relay|cable|repair|kit|linkage|gear"),
+    "knuckle": (r"^(wheel\s+)?carrier(\s+rear)?\b(?!\s+(rear\s+)?axle)",
+                r"spring|strut|bearing|bracket|axle|rubber|mount|bush|kit|repair|screw|bolt|nut|plate"),
+    "strut": (r"^((left|right)\s+)?(front\s+)?((left|right)\s+)?spring\s+strut\b|^shock\s+absorber\b",
+              r"auxiliary|rubber|mount|support|bearing|bracket|cap|kit|repair|set|stop|buffer|protect|roll-over|cover|tube|screw|bolt|nut"),
 }
 # excludes match at a word start ("ring" must not hit "steering")
 RULES = {k: (re.compile(inc, re.I), re.compile(rf"\b(?:{exc})", re.I)) for k, (inc, exc) in RULES.items()}
@@ -159,8 +166,13 @@ def name_of(row: dict) -> str:
     return row["main"]
 
 
+# BMW's "spring strut" is the strut unit (tier C); the shared "Springs"
+# exclusion must not read it as a spring. Exclusion checks only.
+SPRING_STRUT = re.compile(r"\bspring\s+strut\b", re.I)
+
+
 def head(row: dict) -> str:
-    return QUALIFIER.sub(" ", name_of(row))
+    return SPRING_STRUT.sub("strut", QUALIFIER.sub(" ", name_of(row)))
 
 
 def _rule(cat: str):
