@@ -230,6 +230,22 @@ check("rule 5: Honda 33551SDAA32 == 33551-SDA-A32", not R.merged_variants(
 check("rule 5: real Honda mirror variants refuse", R.merged_variants(
     [{"brand": "Honda", "pn": "76200-S84-A21ZF"}, {"brand": "Honda", "pn": "76200-S4K-A41ZF"}]))
 
+
+# ---- emitted category ids are the app's (hub 2026-11-09)
+sys.path.insert(0, str(HERE.parents[2]))
+sys.path.insert(0, str(HERE.parents[1]))
+import junkyard_scraper as JS  # noqa: E402
+import crawl as CR  # noqa: E402
+cm = set(re.findall(r'^\s{4}"([a-z0-9-]+)": \{"label"', (HERE.parents[1] / "coverage_matrix.py").read_text(), re.M))
+PENDING_WAVE2 = {"door-handle-int", "backup-camera", "tailgate-handle"}   # ops/interchange.md §10, wave 2
+known = set(JS.INTERCHANGE_PART_CATEGORIES) | {c for v in CR.TIERS.values() for c in v} | cm | PENDING_WAVE2
+emitted = {R.CAT_OUT.get(c, c) for c in oneaauto.CATEGORIES} | {R.CAT_OUT.get(c, c) for c in gsp.CATEGORIES}
+check(f"every emitted category id is an app/tier/pending id (unknown: {sorted(emitted - known)})", emitted <= known)
+lamp = R.build([d_rec("1AH9", "headlight", "Honda Accord Passenger Side Headlight Assembly", years=(2003, 2005))],
+               Names(), "www.1aauto.com", gens=GENS, facelifts={})["groups"][0]
+check("headlight groups emit cat 'headlights' and an id to match", lamp["cat"] == "headlights"
+      and lamp["id"].startswith("am:1a:headlights:"))
+
 # ---- facts only; owner's free-fitment rule
 out = json.dumps(B([A0, u1, u4], Names(), "www.1aauto.com"))
 check("1A output carries no price / description / image / interchange numbers",

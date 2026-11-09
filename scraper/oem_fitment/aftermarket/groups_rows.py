@@ -58,6 +58,11 @@ CAT_LABEL = {"headlight": "headlight", "tail-light": "tail light", "fog-light": 
              "throttle-body": "throttle body", "fuel-pump-module": "fuel pump module",
              "power-steering-pump": "power steering pump", "radiator": "radiator"}
 SIDES = ("left", "right")
+# crawl category -> the app's existing category id (hub 2026-11-09). Every
+# emitted id must exist in junkyard_scraper.INTERCHANGE_PART_CATEGORIES,
+# crawl.TIERS, coverage_matrix, or category breadth's pending wave (test).
+CAT_OUT = {"headlight": "headlights", "tail-light": "tail-lights", "mirror": "side-mirrors",
+           "fog-light": "fog-lights"}
 
 
 # ------------------------------------------------------------- positions ---
@@ -374,7 +379,8 @@ def build(records: list, names: GA.Names, site: str, src: str = "", complete: di
                 + "Drive, transmission, trim and suspension (sport / electronic) are not stated; match them."
                 + (f" If equipped: {', '.join(opts)}." if opts else "")
                 + (" Color or finish may differ; it may need paint." if cosm else ""))
-        groups.append({"id": f"am:{meta['short']}:{cat}:{unit}" + (f":{pos.replace(' ', '-')}" if pos else ""), "cat": cat, "tier": "likely",
+        ocat = CAT_OUT.get(cat, cat)
+        groups.append({"id": f"am:{meta['short']}:{ocat}:{unit}" + (f":{pos.replace(' ', '-')}" if pos else ""), "cat": ocat, "tier": "likely",
                        "src": "aftermarket", "label": f"{meta['label']} {where.strip()}".strip(),
                        "unit": unit, "position": pos, "apps": apps, "cross_model": len(models) > 1,
                        "body_gated": False, "retrieved": retrieved.get((cat, unit), ""),
