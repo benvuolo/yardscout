@@ -445,10 +445,11 @@ const SCREENS = [
         coupe: /mustang|camaro|350z|370z|miata coupe|tc$/i, convertible: /miata|convertible|roadster/i };
       const bodyOf = (m) => Object.keys(KNOWN).find(k => KNOWN[k].test(m)) || '';
       const vOf = (c) => liveInventory.find(x => vehicleKey(x) === c.dataset.vkey);
-      // Fixture: the middle card is marked as a heavy source (badge only;
-      // its photo never shows on a card). Photos and colours are the cars' own.
+      // Fixtures: the first card is marked as a light car-screen-only source
+      // ("Photo inside"), the second as a heavy source ("Photo at yard · tap to
+      // load"); neither image shows on a card. Colours are the cars' own.
       window.__fxBody = [];
-      cards.forEach((c, k) => { const e = own(c); if (k === 1) e[0] = 'tSTK12345'; e[5] = k < n - 1 ? bodyOf(vOf(c).model) : ''; window.__fxBody.push(e[5] || 'car'); vehicleExtras[c.dataset.eid] = e; });
+      cards.forEach((c, k) => { const e = own(c); if (k === 0) e[0] = 'https://www.kikersupullit.com/inventory-feed/photos/stock-12345.jpg'; if (k === 1) e[0] = 'tSTK12345'; e[5] = k < n - 1 ? bodyOf(vOf(c).model) : ''; window.__fxBody.push(e[5] || 'car'); vehicleExtras[c.dataset.eid] = e; });
       window.__mixFirst = all[i].dataset.eid;
       renderLive();
       const grid = [...document.querySelectorAll('#live-grid .car-card[data-eid]')];
@@ -460,7 +461,9 @@ const SCREENS = [
       const boxes = four.map(c => c.firstElementChild);
       const want = [['photo-box', 'has-illo'], ...cards.map(() => ['photo-illo'])];
       boxes.forEach((b, k) => { if (!want[k].every(x => b.classList.contains(x))) throw new Error(`card ${k}: ${b.className}`); });
-      if (!boxes[2].querySelector('.illo-badge') || boxes[1].querySelector('.illo-badge') || (boxes[3] && boxes[3].querySelector('.illo-badge'))) throw new Error('photo-at-yard badge on the wrong card');
+      const badge = (b) => (b && b.querySelector('.illo-badge') || {}).textContent || '';
+      if (!/Photo inside/.test(badge(boxes[1])) || !/Photo at yard · tap to load/.test(badge(boxes[2])) || (boxes[3] && badge(boxes[3]))) throw new Error('badges wrong: ' + boxes.map(badge).join(' | '));
+      if (document.querySelector('#live-grid .car-card img[src*="kikersupullit"]')) throw new Error('car-screen-only photo on a card');
       window.__fxBody.forEach((b, k) => { if (!boxes[k + 1].innerHTML.includes(`#illo-${b}"`)) throw new Error(`card ${k + 1}: body ${b} not drawn`); });
       if (document.querySelector('#live-grid .car-card img[src*="sturtevant"]')) throw new Error('heavy photo on a card');
       grid[at].scrollIntoView({ block: 'start' }); window.scrollBy(0, -70);

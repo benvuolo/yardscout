@@ -5,8 +5,8 @@
  *  - otherwise a drawing: body style from the car's published "body" extra
  *    (one of 8 classes; anything else or missing = generic car, never a guess
  *    from the name), painted the listed colour (unknown = neutral), with the
- *    year/make/model; badged "Photo at yard" when a real photo exists but not
- *    on cards (heavy or onCards false).
+ *    year/make/model; badged "Photo inside" when a light car-screen-only
+ *    source has a photo, "Photo at yard · tap to load" for a heavy source.
  * Run: node backend/test/illo_unit.mjs */
 import fs from 'node:fs';
 import vm from 'node:vm';
@@ -56,9 +56,9 @@ check('card with an on-card photo: the real photo, drawing underneath', /<img sr
 h = T.cardPhotoHtml(car(2), 'k2');
 check('no photo: drawing, body style, paint, name (escaped), no badge', /photo-illo/.test(h) && /#illo-pickup/.test(h) && /--paint:#B3261E/.test(h) && /2014 Nissan Rogue &lt;S&gt;/.test(h) && !/<img/.test(h) && !/illo-badge/.test(h), h);
 h = T.cardPhotoHtml(car(3), 'k3');
-check('heavy source: drawing + "Photo at yard" badge, the image is never on the card', /photo-illo/.test(h) && /Photo at yard/.test(h) && !/<img/.test(h) && !/big\.example/.test(h), h);
+check('heavy source: drawing + "Photo at yard · tap to load" badge, the image is never on the card', /photo-illo/.test(h) && /Photo at yard &middot; tap to load/.test(h) && !/Photo inside/.test(h) && !/<img/.test(h) && !/big\.example/.test(h), h);
 h = T.cardPhotoHtml(car(4), 'k4');
-check('onCards false source: drawing + badge; unknown body and colour: generic, neutral', /photo-illo/.test(h) && /Photo at yard/.test(h) && /#illo-car"/.test(h) && !/--paint/.test(h), h);
+check('onCards false (light) source: drawing + "Photo inside" badge; unknown body and colour: generic, neutral', /photo-illo/.test(h) && /Photo inside/.test(h) && !/Photo at yard/.test(h) && !/<img/.test(h) && /#illo-car"/.test(h) && !/--paint/.test(h), h);
 T.set({});
 h = T.cardPhotoHtml(car(5), 'k5');
 check('extras not loaded yet: generic neutral drawing in the same box', /photo-illo/.test(h) && /#illo-car"/.test(h) && !/--paint/.test(h) && /card-photo/.test(h), h);

@@ -1008,14 +1008,16 @@ function illoBody(ex) {
   const b = ex && ex[extraIdx.body];
   return typeof b === 'string' && ILLO_BODIES.has(b) ? b : 'car';
 }
-/* opts.photo: a real photo exists but not on cards (heavy or onCards false). */
+/* opts.photo: a real photo exists but not on cards: 'inside' (a light
+ * car-screen-only source) or 'heavy' (tap to load on the car screen). */
 function illoBoxHtml(v, ex, cls, opts = {}) {
   const body = illoBody(ex), paint = paintHex(ex && ex[extraIdx.color]);
   const name = `${v.year} ${v.make} ${v.model}`;
+  const badge = opts.photo === 'heavy' ? 'Photo at yard &middot; tap to load' : opts.photo ? 'Photo inside' : '';
   return `<div class="photo-box photo-illo ${cls || ''}" role="img" aria-label="Drawing of a ${escapeHtml(name)}${opts.photo ? '. A photo is on the car screen' : ''}"${paint ? ` style="--paint:${paint}"` : ''}>
       <svg class="illo-car" viewBox="0 0 200 90" aria-hidden="true" focusable="false"><use href="#illo-${body}"/></svg>
       <span class="illo-cap" aria-hidden="true">${escapeHtml(name)}</span>
-      ${opts.photo ? `<span class="illo-badge" aria-hidden="true">${ICON_CAMERA} Photo at yard</span>` : ''}
+      ${badge ? `<span class="illo-badge" aria-hidden="true">${ICON_CAMERA} ${badge}</span>` : ''}
     </div>`;
 }
 const ICON_CAMERA = '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a2 2 0 0 1 2-2h2l2-2h6l2 2h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="3.5"/></svg>';
@@ -1026,7 +1028,7 @@ function cardPhotoHtml(v, key) {
   const ex = extrasFor(v);
   const info = ex && ex[extraIdx.photo] ? photoInfo(ex[extraIdx.photo]) : null;
   if (info && info.onCards) return photoBoxHtml(info, key, `${v.year} ${v.make} ${v.model}`, 'card-photo', illoSvgHtml(ex));
-  return illoBoxHtml(v, ex, 'card-photo', { photo: !!info });
+  return illoBoxHtml(v, ex, 'card-photo', { photo: info ? (info.heavy ? 'heavy' : 'inside') : '' });
 }
 function illoSvgHtml(ex) {
   const paint = paintHex(ex && ex[extraIdx.color]);
