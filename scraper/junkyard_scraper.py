@@ -26028,6 +26028,37 @@ def _resolve_trans(v: dict, vp: dict | None, entry: dict) -> tuple[str, str]:
     return trans, src
 
 
+# Body style for photo-less card silhouettes (design request 2026-11-09):
+# from the cached vPIC BodyClass only, never from the model name. One of
+# sedan/coupe/hatchback/wagon/suv/pickup/van/convertible, else "" (generic).
+_BODY_STYLE_BY_VPIC = {
+    "sedan/saloon": "sedan", "coupe": "coupe", "hatchback/liftback/notchback": "hatchback",
+    "wagon": "wagon", "sport utility vehicle [suv]/multipurpose vehicle [mpv]": "suv",
+    "sport utility vehicle (suv)/multi-purpose vehicle (mpv)": "suv",
+    "crossover utility vehicle [cuv]": "suv", "crossover utility vehicle (cuv)": "suv",
+    "pickup": "pickup",
+    "sport utility truck [sut]": "pickup",   # Explorer Sport Trac / Avalanche: a pickup bed
+    "sport utility truck (sut)": "pickup",
+    "minivan": "van", "van": "van", "cargo van": "van", "step van/walk-in van": "van",
+    "convertible/cabriolet": "convertible", "roadster": "convertible",
+}
+
+
+def body_style_from_vpic(vp: dict | None, make: str = "") -> str:
+    """Silhouette class from the decode's bodyClass; '' when unknown, not one
+    of the eight, or when the decode's make contradicts the car's make across
+    corporate families (a scrambled row's VIN must not draw another car)."""
+    if not vp:
+        return ""
+    style = _BODY_STYLE_BY_VPIC.get((vp.get("bodyClass") or "").strip().lower(), "")
+    if style and make and vp.get("make") and not _decode_make_agrees(make, vp["make"]):
+        a, b = _make_key(make), _make_key(normalize_make(vp["make"]))
+        fa = _MAKE_FAMILY_OF.get(a)
+        if fa is None or fa != _MAKE_FAMILY_OF.get(b):
+            return ""
+    return style
+
+
 def output_json(vehicles: list[dict], only_matches: bool = True):
     output = []
     for v in vehicles:
@@ -26082,6 +26113,7 @@ def output_json(vehicles: list[dict], only_matches: bool = True):
         vp = v.get("_vpic")
         vp = vp if isinstance(vp, dict) and vp else None
         entry["trans"], entry["transSrc"] = _resolve_trans(v, vp, entry)
+        entry["body"] = body_style_from_vpic(vp, entry.get("make", ""))
         if vp:
             # Chain feeds rarely carry specs; the VIN decode fills them in.
             if not entry["engine"]:
@@ -26272,7 +26304,7 @@ def compact_inventory_v2(entries: list[dict]) -> dict:
         # without enrichment. transSrc is non-empty exactly when trans is,
         # so the trailing-empty trim below never strands it.
         ex = [e.get("photo", ""), e.get("color", ""), e.get("engine", ""),
-              e.get("trans", ""), e.get("transSrc", "")]
+              e.get("trans", ""), e.get("transSrc", ""), e.get("body", "")]
         while ex and not ex[-1]:
             ex.pop()
         if ex:
@@ -26351,7 +26383,7 @@ def _write_extras_and_shards(payload: dict, extras: dict) -> None:
     published = published_photo_sources(sources)
     EXTRAS_FILE.write_text(json.dumps(
         {"version": 1, "scrapedAt": payload["scrapedAt"],
-         "extraFields": ["photo", "color", "engine", "trans", "transSrc"],
+         "extraFields": ["photo", "color", "engine", "trans", "transSrc", "body"],
          "photoSources": published,
          "extras": extras}, separators=(",", ":")))
     _write_inventory_shards(payload, extras, photo_sources=published)
