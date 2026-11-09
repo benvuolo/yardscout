@@ -35,7 +35,8 @@ section of ops/interchange.md:
 - wheels: session_016ZzJfKi8ND3Ey2g66qhiZT, branch interchange/wheels
   (replaces session_016ZzJfL4wG1wgpyYymW2Z28, no push access)
 - make breadth + Subaru: session_016ZzJfKqBWhtUcqYMMseVgn
-- category breadth + coverage matrix: session_016ZzJfKdkBXaVYDDQb9cy2J
+- category breadth + coverage matrix: session_016ZzJfHdWViThcgyPbNG4i7 (tier C;
+  continues session_016ZzJfKdkBXaVYDDQb9cy2J from its §8 handover)
 Shared oem_fitment code: pull --rebase, run curation_tests + tests before
 every push. One crawl run at a time. Nothing ships to users without a §11.4
 sample with 0 WRONG and the hub's confirmation.
