@@ -728,6 +728,11 @@ ob = js.output_json([{"id": 40, "vin": "X", "year": 2010, "make": "Ford", "model
 pb = js.compact_inventory_v2([dict(ob[0], location="Y", city="C", state="AZ", lat=1.0, lng=2.0)])
 check("extras carry body at index 5", pb["_extras"].get("40", [None] * 6)[5:6] == ["suv"], str(pb["_extras"]))
 
+# 2026-11-09: one feed car spelled "Cr-Z" split the Honda CR-Z key and made
+# the OEM curation model_map validator (M3/M5) refuse to run for every session.
+check("Honda 'Cr-Z' / 'CRZ' -> 'CR-Z'",
+      js.normalize_model("Cr-Z", "Honda") == "CR-Z" and js.normalize_model("CRZ", "Honda") == "CR-Z")
+
 check("app and worker mirror tables agree (same keys, same values modulo case)",
       all(set(APP.get(m, {})) == set(SRV.get(m, {})) and
           all(APP[m][k].lower() == SRV[m][k] for k in APP.get(m, {})) for m in set(APP) | set(SRV)),

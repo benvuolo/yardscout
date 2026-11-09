@@ -292,3 +292,6 @@ Truck-Tractor, Limousine, Motorcycle, Bus -> "". Blank when the decode's
 make contradicts the row's make across corporate families. On the
 2026-11-09 data: 281,687 / 338,652 cars (83.2%) non-empty. No scan
 dispatched; the next scheduled scan publishes it.
+
+## 2026-11-09 Honda "Cr-Z" spelling (hub)
+The auto-scan 77423a1 published one car as "Cr-Z", which split the CR-Z key. scraper/oem_fitment's model_map validator (M3/M5) then refused every curate run, blocking OEM fixes. Added "crz": "CR-Z" to _MODEL_CANON, plus a check in test_model_normalization. The next scan republishes the inventory with "CR-Z". Watches are untouched (rule 6).

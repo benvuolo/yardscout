@@ -24483,7 +24483,7 @@ _MODEL_CANON = {
     "chevyvan": "Chevy Van", "clclass": "CL-Class", "clkclass": "CLK-Class",
     "clsclass": "CLS-Class", "glclass": "GL-Class", "glkclass": "GLK-Class",
     "slclass": "SL-Class",
-    "crv": "CR-V", "ct200h": "CT 200h", "cts": "CTS", "cube": "Cube",
+    "crv": "CR-V", "crz": "CR-Z", "ct200h": "CT 200h", "cts": "CTS", "cube": "Cube",
     "cx7": "CX-7", "cx9": "CX-9", "dart": "Dart", "dts": "DTS",
     "echo": "Echo", "edge": "Edge", "eightyeight": "Eighty-Eight",
     "elantragt": "Elantra GT", "eos": "Eos", "escaladeext": "Escalade EXT",
