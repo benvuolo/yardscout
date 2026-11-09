@@ -1,6 +1,6 @@
 # OEM curation report: bmw
 
-Raw: `3b4677ae1df7` @ `3b4677ae1df7`; as of 2026-11-05T10:07:33Z.
+Raw: `1351c33fcfbb` @ `1351c33fcfbb`; as of 2026-11-05T10:07:33Z.
 
 - records 1746, classes 1746, list rows 0, year manifests 0, cells 7561
 - Verified groups 0, engine vg groups 0, Likely groups 0

@@ -53349,16 +53349,428 @@
    "open:no_year_manifest"
   ]
  ],
- "classes": {},
+ "classes": {
+  "mb:1634011702": {
+   "cat": "wheels",
+   "comp": null,
+   "evidence": [
+    "www.mbpartsgiant.com:records:L1718"
+   ],
+   "names": [
+    "Wheel, Alloy"
+   ],
+   "pns": [
+    "163-401-17-02"
+   ],
+   "reman": false
+  },
+  "mb:1634013402": {
+   "cat": "wheels",
+   "comp": null,
+   "evidence": [
+    "www.mbpartsgiant.com:records:L1719"
+   ],
+   "names": [
+    "Wheel, Alloy"
+   ],
+   "pns": [
+    "163-401-34-02"
+   ],
+   "reman": false
+  },
+  "mb:2204000102": {
+   "cat": "wheels",
+   "comp": null,
+   "evidence": [
+    "www.mbpartsgiant.com:records:L1853"
+   ],
+   "names": [
+    "Wheel"
+   ],
+   "pns": [
+    "220-400-01-02"
+   ],
+   "reman": false
+  },
+  "mb:66031240": {
+   "cat": "wheels",
+   "comp": null,
+   "evidence": [
+    "www.mbpartsgiant.com:records:L1857"
+   ],
+   "names": [
+    "Wheel"
+   ],
+   "pns": [
+    "6-6-03-1240"
+   ],
+   "reman": false
+  },
+  "mb:66031241": {
+   "cat": "wheels",
+   "comp": null,
+   "evidence": [
+    "www.mbpartsgiant.com:records:L1858"
+   ],
+   "names": [
+    "Wheel"
+   ],
+   "pns": [
+    "6-6-03-1241"
+   ],
+   "reman": false
+  },
+  "mb:66470546": {
+   "cat": "wheels",
+   "comp": null,
+   "evidence": [
+    "www.mbpartsgiant.com:records:L1854"
+   ],
+   "names": [
+    "Wheel"
+   ],
+   "pns": [
+    "6-6-47-0546"
+   ],
+   "reman": false
+  },
+  "mb:66471421": {
+   "cat": "wheels",
+   "comp": null,
+   "evidence": [
+    "www.mbpartsgiant.com:records:L1720"
+   ],
+   "names": [
+    "Wheel, Alloy"
+   ],
+   "pns": [
+    "6-6-47-1421"
+   ],
+   "reman": false
+  },
+  "mb:66471841": {
+   "cat": "wheels",
+   "comp": null,
+   "evidence": [
+    "www.mbpartsgiant.com:records:L1855"
+   ],
+   "names": [
+    "Wheel"
+   ],
+   "pns": [
+    "6-6-47-1841"
+   ],
+   "reman": false
+  },
+  "mb:66471842": {
+   "cat": "wheels",
+   "comp": null,
+   "evidence": [
+    "www.mbpartsgiant.com:records:L1856"
+   ],
+   "names": [
+    "Wheel"
+   ],
+   "pns": [
+    "6-6-47-1842"
+   ],
+   "reman": false
+  },
+  "mb:66474207": {
+   "cat": "wheels",
+   "comp": null,
+   "evidence": [
+    "www.mbpartsgiant.com:records:L1743"
+   ],
+   "names": [
+    "Wheel Alloy"
+   ],
+   "pns": [
+    "6-6-47-4207"
+   ],
+   "reman": false
+  }
+ },
  "curate_version": "1.0",
  "engine_cells": [],
  "groups": [],
- "likely": [],
+ "likely": [
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "ML320",
+     2000,
+     2000
+    ],
+    [
+     "Mercedes-Benz",
+     "ML500",
+     2003,
+     2003
+    ]
+   ],
+   "cars": 24,
+   "cat": "wheels",
+   "id": "oem:mb:wheels:C:32e71f7b7d",
+   "kind": "body",
+   "note": "Mercedes catalog lists #163-401-17-02 for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T20:56:18Z",
+   "pn": [
+    "163-401-17-02"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "ML320",
+     2000,
+     2000
+    ],
+    [
+     "Mercedes-Benz",
+     "ML500",
+     2003,
+     2003
+    ]
+   ],
+   "cars": 24,
+   "cat": "wheels",
+   "id": "oem:mb:wheels:C:fc2f1c8b31",
+   "kind": "body",
+   "note": "Mercedes catalog lists #163-401-34-02 for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T20:56:26Z",
+   "pn": [
+    "163-401-34-02"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "S430",
+     2002,
+     2003
+    ],
+    [
+     "Mercedes-Benz",
+     "S500",
+     2002,
+     2002
+    ]
+   ],
+   "cars": 18,
+   "cat": "wheels",
+   "id": "oem:mb:wheels:C:70db3d39c0",
+   "kind": "body",
+   "note": "Mercedes catalog lists #220-400-01-02 for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:45:04Z",
+   "pn": [
+    "220-400-01-02"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "S430",
+     2002,
+     2004
+    ],
+    [
+     "Mercedes-Benz",
+     "S500",
+     2002,
+     2002
+    ]
+   ],
+   "cars": 25,
+   "cat": "wheels",
+   "id": "oem:mb:wheels:C:1e11e9d2b3",
+   "kind": "body",
+   "note": "Mercedes catalog lists #6-6-03-1240 for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:45:36Z",
+   "pn": [
+    "6-6-03-1240"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "S430",
+     2002,
+     2004
+    ],
+    [
+     "Mercedes-Benz",
+     "S500",
+     2002,
+     2002
+    ]
+   ],
+   "cars": 25,
+   "cat": "wheels",
+   "id": "oem:mb:wheels:C:ed9ba65ee9",
+   "kind": "body",
+   "note": "Mercedes catalog lists #6-6-03-1241 for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:45:44Z",
+   "pn": [
+    "6-6-03-1241"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "S430",
+     2002,
+     2004
+    ],
+    [
+     "Mercedes-Benz",
+     "S500",
+     2002,
+     2002
+    ]
+   ],
+   "cars": 25,
+   "cat": "wheels",
+   "id": "oem:mb:wheels:C:d9aa679df7",
+   "kind": "body",
+   "note": "Mercedes catalog lists #6-6-47-0546 for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:45:12Z",
+   "pn": [
+    "6-6-47-0546"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "ML320",
+     2000,
+     2000
+    ],
+    [
+     "Mercedes-Benz",
+     "ML500",
+     2003,
+     2003
+    ]
+   ],
+   "cars": 24,
+   "cat": "wheels",
+   "id": "oem:mb:wheels:C:08d74b06ef",
+   "kind": "body",
+   "note": "Mercedes catalog lists #6-6-47-1421 for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T20:56:34Z",
+   "pn": [
+    "6-6-47-1421"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "S430",
+     2002,
+     2004
+    ],
+    [
+     "Mercedes-Benz",
+     "S500",
+     2002,
+     2002
+    ]
+   ],
+   "cars": 25,
+   "cat": "wheels",
+   "id": "oem:mb:wheels:C:6805bbac83",
+   "kind": "body",
+   "note": "Mercedes catalog lists #6-6-47-1841 for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:45:20Z",
+   "pn": [
+    "6-6-47-1841"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "S430",
+     2002,
+     2004
+    ],
+    [
+     "Mercedes-Benz",
+     "S500",
+     2002,
+     2002
+    ]
+   ],
+   "cars": 25,
+   "cat": "wheels",
+   "id": "oem:mb:wheels:C:2cc7f9fd64",
+   "kind": "body",
+   "note": "Mercedes catalog lists #6-6-47-1842 for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:45:28Z",
+   "pn": [
+    "6-6-47-1842"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "ML350",
+     2007,
+     2008
+    ],
+    [
+     "Mercedes-Benz",
+     "ML500",
+     2006,
+     2006
+    ]
+   ],
+   "cars": 28,
+   "cat": "wheels",
+   "id": "oem:mb:wheels:C:5c71ada41d",
+   "kind": "body",
+   "note": "Mercedes catalog lists #6-6-47-4207 for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:04:03Z",
+   "pn": [
+    "6-6-47-4207"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  }
+ ],
  "ns": "mb",
- "policy_sha256": "ad35d5f7de72cd56cff9b08c54ada70478f601d4c5d6aff7d3bf3555e1e53bd1",
+ "policy_sha256": "9f78842939480725f6d776e08ef4994695ed01f080cfb6eec172be10602d488c",
  "raw": {
-  "commit": "3b4677ae1df7eb3b60765ce402d5a79167561981",
-  "ref": "3b4677ae1df7",
+  "commit": "1351c33fcfbb97862fa5aa9265dd92f7350c1ebc",
+  "ref": "1351c33fcfbb",
   "sites": {
    "www.mbpartsgiant.com": {
     "blocked": false,

@@ -91827,21 +91827,6 @@
    ],
    "reman": false
   },
-  "mopar:5105691AB": {
-   "cat": "wheels",
-   "comp": null,
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L4662"
-   ],
-   "names": [
-    "Wheel, Alloy",
-    "Wheel-Aluminum"
-   ],
-   "pns": [
-    "5105691AB"
-   ],
-   "reman": false
-  },
   "mopar:5113257AN": {
    "cat": "side-mirrors",
    "comp": null,
@@ -116547,33 +116532,6 @@
   {
    "apps": [
     [
-     "Chrysler",
-     "Sebring",
-     2008,
-     2008
-    ],
-    [
-     "Dodge",
-     "Avenger",
-     2013,
-     2013
-    ]
-   ],
-   "cars": 563,
-   "cat": "wheels",
-   "id": "oem:mopar:wheels:C:d6a0dea33c",
-   "kind": "body",
-   "note": "Mopar catalog lists #5105691AB for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-09T18:21:14Z",
-   "pn": [
-    "5105691AB"
-   ],
-   "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
      "Dodge",
      "Grand Caravan",
      2010,
@@ -121310,10 +121268,10 @@
   }
  ],
  "ns": "mopar",
- "policy_sha256": "ad35d5f7de72cd56cff9b08c54ada70478f601d4c5d6aff7d3bf3555e1e53bd1",
+ "policy_sha256": "9f78842939480725f6d776e08ef4994695ed01f080cfb6eec172be10602d488c",
  "raw": {
-  "commit": "3b4677ae1df7eb3b60765ce402d5a79167561981",
-  "ref": "3b4677ae1df7",
+  "commit": "1351c33fcfbb97862fa5aa9265dd92f7350c1ebc",
+  "ref": "1351c33fcfbb",
   "sites": {
    "www.jeeppartsdeal.com": {
     "blocked": false,

@@ -1,5 +1,5 @@
 {
- "as_of": "2026-11-09T22:33:32Z",
+ "as_of": "2026-11-09T22:52:54Z",
  "cells": [
   [
    "Hyundai",
@@ -5200,7 +5200,7 @@
    "Azera",
    2014,
    "strut",
-   "open:uncrawled_chain_member"
+   "open:unverified_product"
   ],
   [
    "Hyundai",
@@ -20509,7 +20509,7 @@
    "Sonata",
    2004,
    "strut",
-   "open:uncrawled_chain_member"
+   "open:unverified_product"
   ],
   [
    "Hyundai",
@@ -32303,6 +32303,13 @@
    "Kia",
    "Amanti",
    2004,
+   "strut",
+   "open:unattested"
+  ],
+  [
+   "Kia",
+   "Amanti",
+   2004,
    "tail-lights",
    "open:no_list_manifest"
   ],
@@ -32330,6 +32337,13 @@
   [
    "Kia",
    "Amanti",
+   2004,
+   "wiper-motor",
+   "open:unattested"
+  ],
+  [
+   "Kia",
+   "Amanti",
    2005,
    "ac-compressor",
    "open:no_year_manifest"
@@ -32429,6 +32443,13 @@
    "Kia",
    "Amanti",
    2005,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Amanti",
+   2005,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -32451,6 +32472,13 @@
    "Amanti",
    2005,
    "window-regulator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Amanti",
+   2005,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -32583,6 +32611,13 @@
    "Kia",
    "Amanti",
    2006,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Amanti",
+   2006,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -32619,6 +32654,13 @@
    "Amanti",
    2006,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Amanti",
+   2006,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -32780,6 +32822,13 @@
    "Amanti",
    2007,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Amanti",
+   2007,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -32946,6 +32995,13 @@
   [
    "Kia",
    "Amanti",
+   2008,
+   "wiper-motor",
+   "open:no_list_manifest"
+  ],
+  [
+   "Kia",
+   "Amanti",
    2009,
    "ac-compressor",
    "open:no_year_manifest"
@@ -33102,6 +33158,13 @@
    "Amanti",
    2009,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Amanti",
+   2009,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -33241,6 +33304,13 @@
    "Kia",
    "Borrego",
    2008,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Borrego",
+   2008,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -33263,6 +33333,13 @@
    "Borrego",
    2008,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Borrego",
+   2008,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -33367,6 +33444,13 @@
    "Kia",
    "Borrego",
    2009,
+   "knuckle",
+   "open:unattested"
+  ],
+  [
+   "Kia",
+   "Borrego",
+   2009,
    "liftgate",
    "open:no_list_manifest"
   ],
@@ -33397,6 +33481,13 @@
    2009,
    "starter",
    "open:no_list_manifest"
+  ],
+  [
+   "Kia",
+   "Borrego",
+   2009,
+   "strut",
+   "open:unattested"
   ],
   [
    "Kia",
@@ -33429,6 +33520,13 @@
   [
    "Kia",
    "Borrego",
+   2009,
+   "wiper-motor",
+   "open:unattested"
+  ],
+  [
+   "Kia",
+   "Borrego",
    2010,
    "ac-compressor",
    "open:no_year_manifest"
@@ -33563,6 +33661,13 @@
    "Kia",
    "Borrego",
    2010,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Borrego",
+   2010,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -33585,6 +33690,13 @@
    "Borrego",
    2010,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Borrego",
+   2010,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -33724,6 +33836,13 @@
    "Kia",
    "Borrego",
    2011,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Borrego",
+   2011,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -33746,6 +33865,13 @@
    "Borrego",
    2011,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Borrego",
+   2011,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -33885,6 +34011,13 @@
    "Kia",
    "Borrego",
    2012,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Borrego",
+   2012,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -33907,6 +34040,13 @@
    "Borrego",
    2012,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Borrego",
+   2012,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -34033,6 +34173,13 @@
    "Cadenza",
    2013,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Cadenza",
+   2013,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -34173,7 +34320,7 @@
    "Cadenza",
    2014,
    "knuckle",
-   "open:no_list_manifest"
+   "open:unverified_product"
   ],
   [
    "Kia",
@@ -34195,6 +34342,13 @@
    2014,
    "starter",
    "open:no_list_manifest"
+  ],
+  [
+   "Kia",
+   "Cadenza",
+   2014,
+   "strut",
+   "open:unverified_product"
   ],
   [
    "Kia",
@@ -34234,6 +34388,13 @@
   [
    "Kia",
    "Cadenza",
+   2014,
+   "wiper-motor",
+   "open:unattested"
+  ],
+  [
+   "Kia",
+   "Cadenza",
    2015,
    "ac-compressor",
    "open:no_year_manifest"
@@ -34355,6 +34516,13 @@
    "Cadenza",
    2015,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Cadenza",
+   2015,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -34522,6 +34690,13 @@
    "Kia",
    "Cadenza",
    2016,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Cadenza",
+   2016,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -34683,6 +34858,13 @@
    "Kia",
    "Cadenza",
    2017,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Cadenza",
+   2017,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -34705,6 +34887,13 @@
    "Cadenza",
    2017,
    "window-regulator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Cadenza",
+   2017,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -34810,7 +34999,7 @@
    "Cadenza",
    2018,
    "knuckle",
-   "open:no_list_manifest"
+   "open:unverified_product"
   ],
   [
    "Kia",
@@ -34832,6 +35021,13 @@
    2018,
    "starter",
    "open:no_list_manifest"
+  ],
+  [
+   "Kia",
+   "Cadenza",
+   2018,
+   "strut",
+   "open:uncrawled_chain_member"
   ],
   [
    "Kia",
@@ -34864,6 +35060,13 @@
   [
    "Kia",
    "Cadenza",
+   2018,
+   "wiper-motor",
+   "open:unattested"
+  ],
+  [
+   "Kia",
+   "Cadenza",
    2019,
    "ac-compressor",
    "open:no_year_manifest"
@@ -34991,6 +35194,13 @@
    "Kia",
    "Cadenza",
    2019,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Cadenza",
+   2019,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -35013,6 +35223,13 @@
    "Cadenza",
    2019,
    "window-regulator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Cadenza",
+   2019,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -35083,6 +35300,13 @@
    "Cadenza",
    2020,
    "window-regulator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Cadenza",
+   2020,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -37007,6 +37231,13 @@
    "Kia",
    "Forte",
    2019,
+   "knuckle",
+   "open:unverified_product"
+  ],
+  [
+   "Kia",
+   "Forte",
+   2019,
    "radiator",
    "open:no_list_manifest"
   ],
@@ -37023,6 +37254,13 @@
    2019,
    "starter",
    "open:no_list_manifest"
+  ],
+  [
+   "Kia",
+   "Forte",
+   2019,
+   "strut",
+   "open:unattested"
   ],
   [
    "Kia",
@@ -37069,6 +37307,13 @@
   [
    "Kia",
    "Forte",
+   2019,
+   "wiper-motor",
+   "open:unattested"
+  ],
+  [
+   "Kia",
+   "Forte",
    2020,
    "ac-compressor",
    "open:no_year_manifest"
@@ -37168,6 +37413,13 @@
    "Kia",
    "Forte",
    2020,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Forte",
+   2020,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -37183,6 +37435,13 @@
    "Forte",
    2020,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Forte",
+   2020,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -37225,6 +37484,13 @@
    "Forte",
    2020,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Forte",
+   2020,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -37329,6 +37595,13 @@
    "Kia",
    "Forte",
    2021,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Forte",
+   2021,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -37344,6 +37617,13 @@
    "Forte",
    2021,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Forte",
+   2021,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -37391,6 +37671,13 @@
   [
    "Kia",
    "Forte",
+   2021,
+   "wiper-motor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Forte",
    2022,
    "alternator",
    "open:no_year_manifest"
@@ -37441,6 +37728,13 @@
    "Kia",
    "Forte",
    2022,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Forte",
+   2022,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -37456,6 +37750,13 @@
    "Forte",
    2022,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Forte",
+   2022,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -37491,6 +37792,13 @@
    "Forte",
    2022,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Forte",
+   2022,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -37546,6 +37854,13 @@
    "Kia",
    "Forte",
    2023,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Forte",
+   2023,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -37561,6 +37876,13 @@
    "Forte",
    2023,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Forte",
+   2023,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -37596,6 +37918,13 @@
    "Forte",
    2023,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Forte",
+   2023,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -37651,6 +37980,13 @@
    "Kia",
    "Forte",
    2024,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Forte",
+   2024,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -37666,6 +38002,13 @@
    "Forte",
    2024,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Forte",
+   2024,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -37701,6 +38044,13 @@
    "Forte",
    2024,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Forte",
+   2024,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -37995,7 +38345,7 @@
    "Forte Koup",
    2010,
    "knuckle",
-   "open:no_list_manifest"
+   "open:uncrawled_chain_member"
   ],
   [
    "Kia",
@@ -38030,7 +38380,7 @@
    "Forte Koup",
    2010,
    "strut",
-   "open:no_list_manifest"
+   "open:suspect_variant"
   ],
   [
    "Kia",
@@ -38079,7 +38429,7 @@
    "Forte Koup",
    2010,
    "wiper-motor",
-   "open:no_list_manifest"
+   "open:unattested"
   ],
   [
    "Kia",
@@ -38562,7 +38912,7 @@
    "Forte Koup",
    2013,
    "knuckle",
-   "open:no_list_manifest"
+   "open:uncrawled_chain_member"
   ],
   [
    "Kia",
@@ -38597,7 +38947,7 @@
    "Forte Koup",
    2013,
    "strut",
-   "open:no_list_manifest"
+   "open:suspect_variant"
   ],
   [
    "Kia",
@@ -38646,7 +38996,7 @@
    "Forte Koup",
    2013,
    "wiper-motor",
-   "open:no_list_manifest"
+   "open:unattested"
   ],
   [
    "Kia",
@@ -38751,7 +39101,7 @@
    "Forte Koup",
    2014,
    "knuckle",
-   "open:no_list_manifest"
+   "open:unattested"
   ],
   [
    "Kia",
@@ -38786,7 +39136,7 @@
    "Forte Koup",
    2014,
    "strut",
-   "open:no_list_manifest"
+   "open:uncrawled_chain_member"
   ],
   [
    "Kia",
@@ -38835,7 +39185,7 @@
    "Forte Koup",
    2014,
    "wiper-motor",
-   "open:no_list_manifest"
+   "open:unattested"
   ],
   [
    "Kia",
@@ -39548,6 +39898,13 @@
    "Kia",
    "Optima",
    2000,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Optima",
+   2000,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -39695,6 +40052,13 @@
    "Kia",
    "Optima",
    2001,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Optima",
+   2001,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -39842,6 +40206,13 @@
    "Kia",
    "Optima",
    2002,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Optima",
+   2002,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -39989,6 +40360,13 @@
    "Kia",
    "Optima",
    2003,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Optima",
+   2003,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -40136,6 +40514,13 @@
    "Kia",
    "Optima",
    2004,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Kia",
+   "Optima",
+   2004,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -40283,6 +40668,13 @@
    "Kia",
    "Optima",
    2005,
+   "strut",
+   "open:unverified_product"
+  ],
+  [
+   "Kia",
+   "Optima",
+   2005,
    "tail-lights",
    "open:no_list_manifest"
   ],
@@ -40317,6 +40709,13 @@
   [
    "Kia",
    "Optima",
+   2005,
+   "wiper-motor",
+   "open:unattested"
+  ],
+  [
+   "Kia",
+   "Optima",
    2006,
    "ac-compressor",
    "open:no_list_manifest"
@@ -40417,7 +40816,7 @@
    "Optima",
    2006,
    "strut",
-   "open:no_list_manifest"
+   "open:unattested"
   ],
   [
    "Kia",
@@ -40445,7 +40844,7 @@
    "Optima",
    2006,
    "wiper-motor",
-   "open:no_list_manifest"
+   "open:unattested"
   ],
   [
    "Kia",
@@ -42538,7 +42937,7 @@
    "Optima",
    2019,
    "knuckle",
-   "open:no_list_manifest"
+   "open:unverified_product"
   ],
   [
    "Kia",
@@ -42566,7 +42965,7 @@
    "Optima",
    2019,
    "strut",
-   "open:no_list_manifest"
+   "open:unattested"
   ],
   [
    "Kia",
@@ -42615,189 +43014,189 @@
    "Optima",
    2019,
    "wiper-motor",
-   "open:no_list_manifest"
+   "open:unattested"
   ],
   [
    "Kia",
    "Optima",
    2020,
    "ac-compressor",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Kia",
    "Optima",
    2020,
    "alternator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Kia",
    "Optima",
    2020,
    "bumper-front",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Kia",
    "Optima",
    2020,
    "bumper-rear",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Kia",
    "Optima",
    2020,
    "climate-control",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Kia",
    "Optima",
    2020,
    "door-front",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Kia",
    "Optima",
    2020,
    "door-rear",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Kia",
    "Optima",
    2020,
    "fender",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Kia",
    "Optima",
    2020,
    "fuel-pump-module",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Kia",
    "Optima",
    2020,
    "gauge-cluster",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Kia",
    "Optima",
    2020,
    "grille",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Kia",
    "Optima",
    2020,
    "headlights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Kia",
    "Optima",
    2020,
    "hood",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Kia",
    "Optima",
    2020,
    "ignition-coils",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Kia",
    "Optima",
    2020,
    "knuckle",
-   "open:no_year_manifest"
+   "open:unverified_product"
   ],
   [
    "Kia",
    "Optima",
    2020,
    "radiator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Kia",
    "Optima",
    2020,
    "side-mirrors",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Kia",
    "Optima",
    2020,
    "starter",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Kia",
    "Optima",
    2020,
    "strut",
-   "open:no_year_manifest"
+   "open:unattested"
   ],
   [
    "Kia",
    "Optima",
    2020,
    "tail-lights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Kia",
    "Optima",
    2020,
    "throttle-body",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Kia",
    "Optima",
    2020,
    "trunk-lid",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Kia",
    "Optima",
    2020,
    "wheels",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Kia",
    "Optima",
    2020,
    "window-regulator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Kia",
    "Optima",
    2020,
    "window-switch",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Kia",
    "Optima",
    2020,
    "wiper-motor",
-   "open:no_year_manifest"
+   "open:unattested"
   ],
   [
    "Kia",
@@ -57833,7 +58232,7 @@
    "Sportage",
    2009,
    "knuckle",
-   "open:no_list_manifest"
+   "open:uncrawled_chain_member"
   ],
   [
    "Kia",
@@ -57875,7 +58274,7 @@
    "Sportage",
    2009,
    "strut",
-   "open:no_list_manifest"
+   "open:unverified_product"
   ],
   [
    "Kia",
@@ -57917,7 +58316,7 @@
    "Sportage",
    2009,
    "wiper-motor",
-   "open:no_list_manifest"
+   "open:unattested"
   ],
   [
    "Kia",
@@ -58022,7 +58421,7 @@
    "Sportage",
    2010,
    "knuckle",
-   "open:no_list_manifest"
+   "open:uncrawled_chain_member"
   ],
   [
    "Kia",
@@ -58064,7 +58463,7 @@
    "Sportage",
    2010,
    "strut",
-   "open:no_list_manifest"
+   "open:unverified_product"
   ],
   [
    "Kia",
@@ -58106,7 +58505,7 @@
    "Sportage",
    2010,
    "wiper-motor",
-   "open:no_list_manifest"
+   "open:unattested"
   ],
   [
    "Kia",
@@ -59303,7 +59702,7 @@
    "Sportage",
    2017,
    "knuckle",
-   "open:no_list_manifest"
+   "open:unattested"
   ],
   [
    "Kia",
@@ -59338,7 +59737,7 @@
    "Sportage",
    2017,
    "strut",
-   "open:no_list_manifest"
+   "open:uncrawled_chain_member"
   ],
   [
    "Kia",
@@ -59380,7 +59779,7 @@
    "Sportage",
    2017,
    "wiper-motor",
-   "open:no_list_manifest"
+   "open:unverified_product"
   ],
   [
    "Kia",
@@ -59485,7 +59884,7 @@
    "Sportage",
    2018,
    "knuckle",
-   "open:no_list_manifest"
+   "open:unattested"
   ],
   [
    "Kia",
@@ -59520,7 +59919,7 @@
    "Sportage",
    2018,
    "strut",
-   "open:no_list_manifest"
+   "open:uncrawled_chain_member"
   ],
   [
    "Kia",
@@ -59562,7 +59961,7 @@
    "Sportage",
    2018,
    "wiper-motor",
-   "open:no_list_manifest"
+   "open:unverified_product"
   ],
   [
    "Kia",
@@ -59667,7 +60066,7 @@
    "Sportage",
    2019,
    "knuckle",
-   "open:no_list_manifest"
+   "open:unattested"
   ],
   [
    "Kia",
@@ -59702,7 +60101,7 @@
    "Sportage",
    2019,
    "strut",
-   "open:no_list_manifest"
+   "open:uncrawled_chain_member"
   ],
   [
    "Kia",
@@ -59744,7 +60143,7 @@
    "Sportage",
    2019,
    "wiper-motor",
-   "open:no_list_manifest"
+   "open:unverified_product"
   ],
   [
    "Kia",
@@ -66156,7 +66555,7 @@
    2020,
    "alternator",
    "hk-theta-gdi",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Kia",
@@ -66164,7 +66563,7 @@
    2020,
    "ignition-coils",
    "hk-theta-gdi",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Kia",
@@ -66172,7 +66571,7 @@
    2020,
    "starter",
    "hk-theta-gdi",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Kia",
@@ -68517,10 +68916,10 @@
   }
  ],
  "ns": "hmg",
- "policy_sha256": "ad35d5f7de72cd56cff9b08c54ada70478f601d4c5d6aff7d3bf3555e1e53bd1",
+ "policy_sha256": "9f78842939480725f6d776e08ef4994695ed01f080cfb6eec172be10602d488c",
  "raw": {
-  "commit": "3b4677ae1df7eb3b60765ce402d5a79167561981",
-  "ref": "3b4677ae1df7",
+  "commit": "1351c33fcfbb97862fa5aa9265dd92f7350c1ebc",
+  "ref": "1351c33fcfbb",
   "sites": {
    "www.hyundaipartsdeal.com": {
     "blocked": false,
@@ -68535,12 +68934,12 @@
    "www.kiapartsnow.com": {
     "blocked": false,
     "done": true,
-    "lists": 273,
-    "lists_sha256": "b2ed297f0806f6e591e74b5b850ac053a067b2c457ef6e24c0be98137e2bcb0e",
-    "records": 3629,
-    "records_sha256": "35fa0b839c8985c38888c7d8fe1cc2fdd52cd142cbbbbf6a590d2eb2ffa73cfd",
-    "years": 117,
-    "years_sha256": "f25ab5a962480d6c10e9bd2fc1eceb8eb810a3f61f40b539a03c616756b74a3c"
+    "lists": 405,
+    "lists_sha256": "db68b81f02cf263cdb67ce28e0a6f0b66b2cf55b69cdbcacae08502c68121f97",
+    "records": 3667,
+    "records_sha256": "98572c1ba56385cc9d92ca7487565609008e169e77d0acdc2d033ce04ad0185f",
+    "years": 142,
+    "years_sha256": "903b90c86e8efb0a286be3881a924738cd489f7cc12227dbfb5df76bdd7ddcc4"
    }
   }
  },

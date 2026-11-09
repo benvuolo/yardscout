@@ -1,6 +1,6 @@
 # OEM curation report: ford
 
-Raw: `3b4677ae1df7` @ `3b4677ae1df7`; as of 2026-11-09T20:24:52Z.
+Raw: `1351c33fcfbb` @ `1351c33fcfbb`; as of 2026-11-09T20:24:52Z.
 
 - records 7799, classes 7799, list rows 77788, year manifests 702, cells 12485
 - Verified groups 0, engine vg groups 0, Likely groups 81

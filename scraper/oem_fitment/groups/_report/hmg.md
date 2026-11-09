@@ -1,8 +1,8 @@
 # OEM curation report: hmg
 
-Raw: `3b4677ae1df7` @ `3b4677ae1df7`; as of 2026-11-09T22:33:32Z.
+Raw: `1351c33fcfbb` @ `1351c33fcfbb`; as of 2026-11-09T22:52:54Z.
 
-- records 7681, classes 7470, list rows 30960, year manifests 260, cells 8620
+- records 7719, classes 7500, list rows 34263, year manifests 285, cells 8677
 - Verified groups 0, engine vg groups 0, Likely groups 6
 - blocked sites: none
 
@@ -11,7 +11,7 @@ Raw: `3b4677ae1df7` @ `3b4677ae1df7`; as of 2026-11-09T22:33:32Z.
 - no (site, category) of this namespace has passed the audit gate (audits.json has no record; spec 11.4, E5/V7)
 - engine cells not audited as reliable on www.hyundaipartsdeal.com, www.kiapartsnow.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE
 - www.hyundaipartsdeal.com: only 0% of its 4544 fitment rows can be coverage: it prints an option column, and option-layout rows are never coverage (spec 5.5)
-- www.kiapartsnow.com: only 0% of its 4426 fitment rows can be coverage: it prints an option column, and option-layout rows are never coverage (spec 5.5)
+- www.kiapartsnow.com: only 0% of its 4468 fitment rows can be coverage: it prints an option column, and option-layout rows are never coverage (spec 5.5)
 
 ## Funnel (lot cars per category, first open reason)
 
@@ -19,102 +19,102 @@ Raw: `3b4677ae1df7` @ `3b4677ae1df7`; as of 2026-11-09T22:33:32Z.
 |---|---|---|---|
 | ac-compressor | unmapped | - | 211 |
 | ac-compressor | no_records | - | 1316 |
-| ac-compressor | not_closed | no_list_manifest | 7867 |
-| ac-compressor | not_closed | no_year_manifest | 11089 |
+| ac-compressor | not_closed | no_list_manifest | 7894 |
+| ac-compressor | not_closed | no_year_manifest | 11062 |
 | ac-compressor | not_closed | unattested | 19 |
 | ac-compressor | not_closed | unverified_product | 25 |
 | ac-compressor | not_closed | variant_unread | 1429 |
 | alternator | unmapped | - | 211 |
 | alternator | no_records | - | 1117 |
-| alternator | not_closed | no_list_manifest | 7863 |
-| alternator | not_closed | no_year_manifest | 11317 |
+| alternator | not_closed | no_list_manifest | 7890 |
+| alternator | not_closed | no_year_manifest | 11290 |
 | alternator | not_closed | unverified_product | 19 |
 | alternator | not_closed | variant_unread | 1429 |
 | bumper-front | unmapped | - | 211 |
 | bumper-front | no_records | - | 1982 |
-| bumper-front | not_closed | no_list_manifest | 4092 |
-| bumper-front | not_closed | no_year_manifest | 10495 |
+| bumper-front | not_closed | no_list_manifest | 4119 |
+| bumper-front | not_closed | no_year_manifest | 10468 |
 | bumper-front | not_closed | unread_sibling_page | 3747 |
 | bumper-front | not_closed | variant_unread | 1429 |
 | bumper-rear | unmapped | - | 211 |
 | bumper-rear | no_records | - | 2158 |
-| bumper-rear | not_closed | no_list_manifest | 3952 |
-| bumper-rear | not_closed | no_year_manifest | 10459 |
+| bumper-rear | not_closed | no_list_manifest | 3979 |
+| bumper-rear | not_closed | no_year_manifest | 10432 |
 | bumper-rear | not_closed | unread_sibling_page | 3747 |
 | bumper-rear | not_closed | variant_unread | 1429 |
 | climate-control | unmapped | - | 211 |
 | climate-control | no_records | - | 2596 |
-| climate-control | not_closed | no_list_manifest | 7762 |
-| climate-control | not_closed | no_year_manifest | 9914 |
+| climate-control | not_closed | no_list_manifest | 7789 |
+| climate-control | not_closed | no_year_manifest | 9887 |
 | climate-control | not_closed | unread_sibling_page | 44 |
 | climate-control | not_closed | variant_unread | 1429 |
 | door-front | unmapped | - | 211 |
 | door-front | no_records | - | 2003 |
-| door-front | not_closed | no_list_manifest | 3713 |
-| door-front | not_closed | no_year_manifest | 10853 |
+| door-front | not_closed | no_list_manifest | 3740 |
+| door-front | not_closed | no_year_manifest | 10826 |
 | door-front | not_closed | unread_sibling_page | 3747 |
 | door-front | not_closed | variant_unread | 1429 |
 | door-rear | unmapped | - | 211 |
 | door-rear | no_records | - | 2592 |
-| door-rear | not_closed | no_list_manifest | 3609 |
-| door-rear | not_closed | no_year_manifest | 10431 |
+| door-rear | not_closed | no_list_manifest | 3636 |
+| door-rear | not_closed | no_year_manifest | 10404 |
 | door-rear | not_closed | unread_sibling_page | 3684 |
 | door-rear | not_closed | variant_unread | 1429 |
 | fender | unmapped | - | 211 |
 | fender | no_records | - | 1853 |
-| fender | not_closed | no_list_manifest | 3713 |
-| fender | not_closed | no_year_manifest | 11003 |
+| fender | not_closed | no_list_manifest | 3740 |
+| fender | not_closed | no_year_manifest | 10976 |
 | fender | not_closed | unread_sibling_page | 3747 |
 | fender | not_closed | variant_unread | 1429 |
 | fuel-pump-module | unmapped | - | 211 |
 | fuel-pump-module | no_records | - | 2288 |
-| fuel-pump-module | not_closed | no_list_manifest | 7449 |
-| fuel-pump-module | not_closed | no_year_manifest | 10569 |
+| fuel-pump-module | not_closed | no_list_manifest | 7476 |
+| fuel-pump-module | not_closed | no_year_manifest | 10542 |
 | fuel-pump-module | not_closed | unread_sibling_page | 44 |
 | fuel-pump-module | not_closed | variant_unread | 1395 |
 | gauge-cluster | unmapped | - | 211 |
 | gauge-cluster | no_records | - | 2895 |
-| gauge-cluster | not_closed | no_list_manifest | 3898 |
-| gauge-cluster | not_closed | no_year_manifest | 9776 |
+| gauge-cluster | not_closed | no_list_manifest | 3925 |
+| gauge-cluster | not_closed | no_year_manifest | 9749 |
 | gauge-cluster | not_closed | suspect_variant | 84 |
 | gauge-cluster | not_closed | unattested | 559 |
 | gauge-cluster | not_closed | unread_sibling_page | 3104 |
 | gauge-cluster | not_closed | variant_unread | 1429 |
 | grille | unmapped | - | 211 |
 | grille | no_records | - | 2817 |
-| grille | not_closed | no_list_manifest | 4092 |
-| grille | not_closed | no_year_manifest | 9660 |
+| grille | not_closed | no_list_manifest | 4119 |
+| grille | not_closed | no_year_manifest | 9633 |
 | grille | not_closed | suspect_variant | 4 |
 | grille | not_closed | unattested | 2181 |
 | grille | not_closed | uncrawled_chain_member | 1562 |
 | grille | not_closed | variant_unread | 1429 |
 | headlights | unmapped | - | 211 |
 | headlights | no_records | - | 1673 |
-| headlights | not_closed | no_list_manifest | 7762 |
-| headlights | not_closed | no_year_manifest | 10837 |
+| headlights | not_closed | no_list_manifest | 7789 |
+| headlights | not_closed | no_year_manifest | 10810 |
 | headlights | not_closed | unattested | 44 |
 | headlights | not_closed | variant_unread | 1429 |
 | hood | unmapped | - | 211 |
 | hood | no_records | - | 1961 |
-| hood | not_closed | no_list_manifest | 3659 |
-| hood | not_closed | no_year_manifest | 10949 |
+| hood | not_closed | no_list_manifest | 3686 |
+| hood | not_closed | no_year_manifest | 10922 |
 | hood | not_closed | unread_sibling_page | 3747 |
 | hood | not_closed | variant_unread | 1429 |
 | ignition-coils | unmapped | - | 211 |
 | ignition-coils | no_records | - | 390 |
-| ignition-coils | not_closed | no_list_manifest | 4113 |
-| ignition-coils | not_closed | no_year_manifest | 12066 |
+| ignition-coils | not_closed | no_list_manifest | 4140 |
+| ignition-coils | not_closed | no_year_manifest | 12039 |
 | ignition-coils | not_closed | unattested | 10 |
 | ignition-coils | not_closed | unverified_product | 3737 |
 | ignition-coils | not_closed | variant_unread | 1429 |
 | knuckle | unmapped | - | 211 |
-| knuckle | no_records | - | 5153 |
-| knuckle | not_closed | no_list_manifest | 538 |
-| knuckle | not_closed | no_year_manifest | 8677 |
+| knuckle | no_records | - | 5032 |
+| knuckle | not_closed | no_list_manifest | 298 |
+| knuckle | not_closed | no_year_manifest | 8689 |
 | knuckle | not_closed | suspect_variant | 4 |
-| knuckle | not_closed | unattested | 2203 |
-| knuckle | not_closed | uncrawled_chain_member | 1060 |
-| knuckle | not_closed | unverified_product | 2681 |
+| knuckle | not_closed | unattested | 2315 |
+| knuckle | not_closed | uncrawled_chain_member | 1175 |
+| knuckle | not_closed | unverified_product | 2803 |
 | knuckle | not_closed | variant_unread | 1429 |
 | liftgate | unmapped | - | 211 |
 | liftgate | no_records | - | 12801 |
@@ -131,53 +131,54 @@ Raw: `3b4677ae1df7` @ `3b4677ae1df7`; as of 2026-11-09T22:33:32Z.
 | power-steering-pump | not_closed | variant_unread | 177 |
 | radiator | unmapped | - | 211 |
 | radiator | no_records | - | 3515 |
-| radiator | not_closed | no_list_manifest | 3536 |
-| radiator | not_closed | no_year_manifest | 9589 |
+| radiator | not_closed | no_list_manifest | 3563 |
+| radiator | not_closed | no_year_manifest | 9562 |
 | radiator | not_closed | unread_sibling_page | 3710 |
 | radiator | not_closed | variant_unread | 1395 |
 | side-mirrors | unmapped | - | 211 |
 | side-mirrors | no_records | - | 1301 |
-| side-mirrors | not_closed | no_list_manifest | 7730 |
-| side-mirrors | not_closed | no_year_manifest | 11241 |
+| side-mirrors | not_closed | no_list_manifest | 7757 |
+| side-mirrors | not_closed | no_year_manifest | 11214 |
 | side-mirrors | not_closed | unattested | 44 |
 | side-mirrors | not_closed | variant_unread | 1429 |
 | starter | unmapped | - | 211 |
 | starter | no_records | - | 403 |
-| starter | not_closed | no_list_manifest | 7903 |
-| starter | not_closed | no_year_manifest | 11966 |
+| starter | not_closed | no_list_manifest | 7930 |
+| starter | not_closed | no_year_manifest | 11939 |
 | starter | not_closed | unverified_product | 44 |
 | starter | not_closed | variant_unread | 1429 |
 | strut | unmapped | - | 211 |
-| strut | no_records | - | 3006 |
-| strut | not_closed | no_list_manifest | 472 |
-| strut | not_closed | no_year_manifest | 10062 |
-| strut | not_closed | suspect_variant | 256 |
-| strut | not_closed | unattested | 2830 |
-| strut | not_closed | uncrawled_chain_member | 3527 |
-| strut | not_closed | unverified_product | 163 |
+| strut | no_records | - | 2682 |
+| strut | not_closed | no_list_manifest | 210 |
+| strut | not_closed | no_year_manifest | 10200 |
+| strut | not_closed | suspect_variant | 292 |
+| strut | not_closed | unattested | 3055 |
+| strut | not_closed | uncrawled_chain_member | 3485 |
+| strut | not_closed | unverified_product | 392 |
 | strut | not_closed | variant_unread | 1429 |
 | tail-lights | unmapped | - | 211 |
 | tail-lights | no_records | - | 2415 |
-| tail-lights | not_closed | no_list_manifest | 7458 |
-| tail-lights | not_closed | no_year_manifest | 10399 |
+| tail-lights | not_closed | no_list_manifest | 7485 |
+| tail-lights | not_closed | no_year_manifest | 10372 |
 | tail-lights | not_closed | unattested | 44 |
 | tail-lights | not_closed | variant_unread | 1429 |
 | throttle-body | unmapped | - | 211 |
 | throttle-body | no_records | - | 2334 |
-| throttle-body | not_closed | no_list_manifest | 7305 |
-| throttle-body | not_closed | no_year_manifest | 10633 |
+| throttle-body | not_closed | no_list_manifest | 7332 |
+| throttle-body | not_closed | no_year_manifest | 10606 |
 | throttle-body | not_closed | unattested | 44 |
 | throttle-body | not_closed | variant_unread | 1429 |
 | trunk-lid | unmapped | - | 211 |
 | trunk-lid | no_records | - | 9405 |
-| trunk-lid | not_closed | no_list_manifest | 1918 |
-| trunk-lid | not_closed | no_year_manifest | 6363 |
+| trunk-lid | not_closed | no_list_manifest | 1945 |
+| trunk-lid | not_closed | no_year_manifest | 6336 |
 | trunk-lid | not_closed | unattested | 141 |
 | trunk-lid | not_closed | unread_sibling_page | 2632 |
 | trunk-lid | not_closed | variant_unread | 1286 |
 | wheels | unmapped | - | 211 |
 | wheels | no_records | - | 815 |
-| wheels | not_closed | no_year_manifest | 11646 |
+| wheels | not_closed | no_list_manifest | 27 |
+| wheels | not_closed | no_year_manifest | 11619 |
 | wheels | not_closed | suspect_variant | 163 |
 | wheels | not_closed | unattested | 5967 |
 | wheels | not_closed | uncrawled_chain_member | 1188 |
@@ -185,23 +186,23 @@ Raw: `3b4677ae1df7` @ `3b4677ae1df7`; as of 2026-11-09T22:33:32Z.
 | wheels | not_closed | variant_unread | 1429 |
 | window-regulator | unmapped | - | 211 |
 | window-regulator | no_records | - | 1169 |
-| window-regulator | not_closed | no_list_manifest | 7486 |
-| window-regulator | not_closed | no_year_manifest | 11617 |
+| window-regulator | not_closed | no_list_manifest | 7513 |
+| window-regulator | not_closed | no_year_manifest | 11590 |
 | window-regulator | not_closed | unread_sibling_page | 44 |
 | window-regulator | not_closed | variant_unread | 1429 |
 | window-switch | unmapped | - | 211 |
 | window-switch | no_records | - | 2554 |
-| window-switch | not_closed | no_list_manifest | 7413 |
-| window-switch | not_closed | no_year_manifest | 10305 |
+| window-switch | not_closed | no_list_manifest | 7440 |
+| window-switch | not_closed | no_year_manifest | 10278 |
 | window-switch | not_closed | unread_sibling_page | 44 |
 | window-switch | not_closed | variant_unread | 1429 |
 | wiper-motor | unmapped | - | 211 |
-| wiper-motor | no_records | - | 2105 |
-| wiper-motor | not_closed | no_list_manifest | 606 |
-| wiper-motor | not_closed | no_year_manifest | 10757 |
-| wiper-motor | not_closed | unattested | 4585 |
+| wiper-motor | no_records | - | 1857 |
+| wiper-motor | not_closed | no_list_manifest | 350 |
+| wiper-motor | not_closed | no_year_manifest | 10813 |
+| wiper-motor | not_closed | unattested | 4987 |
 | wiper-motor | not_closed | uncrawled_chain_member | 421 |
-| wiper-motor | not_closed | unverified_product | 1842 |
+| wiper-motor | not_closed | unverified_product | 1888 |
 | wiper-motor | not_closed | variant_unread | 1429 |
 
 ## Hypothetical funnel (closure assumed; never shipped)
@@ -279,9 +280,9 @@ Raw: `3b4677ae1df7` @ `3b4677ae1df7`; as of 2026-11-09T22:33:32Z.
 | ignition-coils | conditional | conditional:engine_unattested | 6186 |
 | ignition-coils | conditional | conditional:package | 1303 |
 | knuckle | unmapped | - | 211 |
-| knuckle | no_records | - | 5153 |
-| knuckle | split | no_candidates | 525 |
-| knuckle | split | option_split | 16067 |
+| knuckle | no_records | - | 5032 |
+| knuckle | split | no_candidates | 585 |
+| knuckle | split | option_split | 16128 |
 | liftgate | unmapped | - | 211 |
 | liftgate | no_records | - | 12801 |
 | liftgate | split | option_split | 6583 |
@@ -304,8 +305,8 @@ Raw: `3b4677ae1df7` @ `3b4677ae1df7`; as of 2026-11-09T22:33:32Z.
 | starter | split | option_split | 20047 |
 | starter | conditional | conditional:engine_unattested | 1295 |
 | strut | unmapped | - | 211 |
-| strut | no_records | - | 3006 |
-| strut | split | option_split | 17918 |
+| strut | no_records | - | 2682 |
+| strut | split | option_split | 18242 |
 | strut | conditional | conditional:engine_unattested | 821 |
 | tail-lights | unmapped | - | 211 |
 | tail-lights | no_records | - | 2415 |
@@ -338,10 +339,10 @@ Raw: `3b4677ae1df7` @ `3b4677ae1df7`; as of 2026-11-09T22:33:32Z.
 | window-switch | split | position_missing | 1647 |
 | window-switch | conditional | conditional:engine_unattested | 304 |
 | wiper-motor | unmapped | - | 211 |
-| wiper-motor | no_records | - | 2105 |
-| wiper-motor | split | no_candidates | 130 |
-| wiper-motor | split | option_split | 8261 |
-| wiper-motor | conditional | conditional:engine_unattested | 11249 |
+| wiper-motor | no_records | - | 1857 |
+| wiper-motor | split | no_candidates | 186 |
+| wiper-motor | split | option_split | 8322 |
+| wiper-motor | conditional | conditional:engine_unattested | 11380 |
 
 ## Contradictions with hand-curated groups (spec 7.6)
 
@@ -350,7 +351,7 @@ Raw: `3b4677ae1df7` @ `3b4677ae1df7`; as of 2026-11-09T22:33:32Z.
 ## Refusals by reason
 
 - cross_category_supersession: 124
-- disputed_class: 211
+- disputed_class: 219
 - rule_drift: 10
 - universal_part_suspect: 3
 - wheel_compact_spare: 3
@@ -358,7 +359,7 @@ Raw: `3b4677ae1df7` @ `3b4677ae1df7`; as of 2026-11-09T22:33:32Z.
 
 ## Unknown note clauses (top 30)
 
-- `Package Quantity: 1`: 781
+- `Package Quantity: 1`: 843
 - `SPEEDOMETER TYPE - MPH(KMPH)`: 571
 - `Require Quantity: 4`: 566
 - `TIRE PRESSURE MONITORG SYS - HIGH LINE`: 449
@@ -373,6 +374,7 @@ Raw: `3b4677ae1df7` @ `3b4677ae1df7`; as of 2026-11-09T22:33:32Z.
 - `AUTO CRUISE CONTROL - CONVENTIONAL`: 235
 - `SMART KEY-FR DR`: 219
 - `AUTO CRUISE CONTROL - SMART`: 210
+- `Require Quantity: 2`: 209
 - `MODEL YEAR PACKAGE - 14MY`: 207
 - `FOB KEY`: 204
 - `PARKG BRK CONTROL-EPB`: 198
@@ -387,7 +389,6 @@ Raw: `3b4677ae1df7` @ `3b4677ae1df7`; as of 2026-11-09T22:33:32Z.
 - `AUTONOMOUS EMERGENCY BRAKING - PEDESTRIAN`: 157
 - `MDPS-BLAC-COLUMN`: 154
 - `AIR VENTILATION SEAT`: 148
-- `TUN'G MODE - SPORTY SUSPENSION`: 148
 
 ## Unmapped catalog models
 

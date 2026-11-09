@@ -69,8 +69,21 @@ ok({float(m.group(1)) for m in W.finditer("Part Notes: 15x6 WJW")} == {6.0}
    "width read from '15x6', '20x8', '16 X 6.5'; none from '16 Inch' (round 2: 1SZ98PAKAA, 1DP88SZ0AB)")
 ok("wheel_width_conflict" in src and "wheel_spare_description" in src, "width conflict and spare description wired")
 
-ok(policy.WHEELS_AUDITED_NS == frozenset({"mopar"}) and "wheels_not_audited" in src,
-   "wheels publish only in audited namespaces (mopar, 2026-11-09)")
+ok(policy.WHEELS_AUDITED_NS == frozenset({"mopar", "mb", "vag"}) and "wheels_not_audited" in src,
+   "wheels publish only in audited namespaces (mopar, mb, vag; 2026-11-09)")
+
+# MB / VW census (2026-11-09)
+B = policy.WHEEL_BODY_RE
+ok({m.group(1).lower() for m in B.finditer("Wagon, 5 Spoke, With Grooved Spokes, 17X7")} == {"wagon"}
+   and {m.group(1).lower() for m in B.finditer('17", 5 Double Spokes, Type 1;Coupe')} == {"coupe"},
+   "body words read: Jetta 'Wagon' vs Beetle 'Coupe' (1J0-601-025-AB-Z31)")
+SP = policy.WHEEL_SPOKE_RE
+ok({m.group(1) for m in SP.finditer('17", 10 Spoke')} == {"10"} and {m.group(1) for m in SP.finditer('17", 8 Spoke, Porto')} == {"8"}
+   and {m.group(1) for m in SP.finditer("5 Double Spokes")} == {"5"}, "spoke counts read (5K0-601-025-AN-8Z8)")
+AX = policy.WHEEL_AXLE_RE
+ok(bool(AX.search("Front, Type #11, 7.5X17")) and bool(AX.search("Rear")) and not AX.search("Frontier")
+   and not AX.search("Steel Wheels, 16x6.5"), "axle-limited notes seen; 'Frontier' is not")
+ok(all(x in src for x in ["wheel_axle_limited", "wheel_body_conflict", "wheel_design_conflict"]), "MB/VW rules wired")
 
 print("OK" if not fails else f"{len(fails)} FAIL")
 sys.exit(1 if fails else 0)

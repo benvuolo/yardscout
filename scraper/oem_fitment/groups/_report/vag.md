@@ -1,9 +1,9 @@
 # OEM curation report: vag
 
-Raw: `3b4677ae1df7` @ `3b4677ae1df7`; as of 2026-11-09T22:20:57Z.
+Raw: `1351c33fcfbb` @ `1351c33fcfbb`; as of 2026-11-09T22:20:57Z.
 
 - records 2775, classes 2717, list rows 39388, year manifests 186, cells 9265
-- Verified groups 0, engine vg groups 0, Likely groups 16
+- Verified groups 0, engine vg groups 0, Likely groups 19
 - blocked sites: none
 
 ## Gates standing for the whole namespace
@@ -372,7 +372,9 @@ Raw: `3b4677ae1df7` @ `3b4677ae1df7`; as of 2026-11-09T22:20:57Z.
 - rule_drift: 2
 - systemic_evidence_failure: 2
 - universal_part_suspect: 6
-- wheels_not_audited: 6
+- wheel_body_conflict: 1
+- wheel_design_conflict: 1
+- wheel_size_conflict: 1
 
 ## Unknown note clauses (top 30)
 
