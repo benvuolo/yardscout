@@ -2488,6 +2488,11 @@ Other outputs of this session:
   scraper/test_*.py 26/26.
 - Next (whoever continues):
   - Watch the crawl logs on oem-raw for `.blocked`/`.paused`. MB and GM are the slow ones.
+  - Hub 19:47 UTC: let the schedule crawl W+C. Runs 42666726212 (wheels: ford/jeep/lexus)
+    and 42684614492 (gm/vw/mb/hyundai/kia) are queued or running. Never dispatch alongside them.
+  - The policy/positions change ships in ONE push with all 9 namespaces re-curated
+    (identical or explained) and test_groups_hash green. interchange/wheels-curation also has a
+    pending policy.py change: whoever pushes second rebases and re-curates.
   - Then the curation build (design above). Per category, a §11.4 sample (60, independent
     session, 0 WRONG) and the hub's confirm before any app change on
     `interchange/categories-<n>`.
