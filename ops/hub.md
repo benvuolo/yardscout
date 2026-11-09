@@ -178,3 +178,7 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
   - Spectra Premium reopened. The site is allowlisted, and the detector exemption is site-scoped and narrow: only the inert reCAPTCHA api.js include on pages that also carry catalog markup. Any real challenge, 403/429/503 or missing body still means a permanent stop. Tests go both ways, and other sites' detection stays unchanged.
   - Data use is facts only; we publish our own groups.
   - Ship bar unchanged: §11.4 sample with 0 WRONG plus hub confirmation. Session: session_016ZzJfMnemMEFN88kPnYgxs.
+- ~20:15 UTC owner decisions (question dialog):
+  - GSP North America: "Yes, use GSP". Site-scoped detector rule on the Spectra pattern (Shopify captcha-bootstrap form-protection script). Likely-only, with strict refusals; drive and trans never inferred.
+  - 1A Auto: "Yes, use 1A Auto anyway". The owner accepts the risk from its personal/non-commercial licence. No rule-2 issue: robots OK, no challenge. Facts only.
+  - Builder: source scout 2 (session_016ZzJfKZ49mzzQhu4KT7HkU). Ship bar unchanged.
