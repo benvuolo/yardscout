@@ -151805,6 +151805,62 @@
    ],
    "reman": false
   },
+  "gm:16526225": {
+   "cat": "headlights",
+   "comp": null,
+   "evidence": [
+    "www.gmpartsgiant.com:records:L2856"
+   ],
+   "names": [
+    "HEADLAMP, (W/ FOG & FRONT SIDE MARKER & PARKING & TURN SIGNAL LAMP)(INCLUDES 4-13,19-25)(W/BULB)"
+   ],
+   "pns": [
+    "16526225"
+   ],
+   "reman": false
+  },
+  "gm:16526226": {
+   "cat": "headlights",
+   "comp": null,
+   "evidence": [
+    "www.gmpartsgiant.com:records:L2859"
+   ],
+   "names": [
+    "HEADLAMP, (W/ FOG & FRONT SIDE MARKER & PARKING & TURN SIGNAL LAMP)(INCLUDES 4-13,19-25)"
+   ],
+   "pns": [
+    "16526226"
+   ],
+   "reman": false
+  },
+  "gm:16526227": {
+   "cat": "headlights",
+   "comp": null,
+   "evidence": [
+    "www.gmpartsgiant.com:records:L2857"
+   ],
+   "names": [
+    "HEADLAMP, (W/PARKING & FRONT SIDE MARKER & TURN SIGNAL LAMP)(INCLUDES 4-13,19-24)(W/ADJUSTER,BULBS,BRACKET,FILLER,PIVOT)"
+   ],
+   "pns": [
+    "16526227"
+   ],
+   "reman": false
+  },
+  "gm:16526228": {
+   "cat": "headlights",
+   "comp": null,
+   "evidence": [
+    "www.gmpartsgiant.com:records:L2858"
+   ],
+   "names": [
+    "HEADLAMP, (W/PARKING & FRONT SIDE MARKER & TURN SIGNAL LAMP)(INCLUDES 4-13,19-24)(W/ADJUSTER,BULBS,BRACKET,FILLER,PIVOT)"
+   ],
+   "pns": [
+    "16526228"
+   ],
+   "reman": false
+  },
   "gm:16625870": {
    "cat": "window-regulator",
    "comp": "reg?",
@@ -152099,6 +152155,62 @@
    ],
    "reman": false
   },
+  "gm:19179358": {
+   "cat": "tail-lights",
+   "comp": null,
+   "evidence": [
+    "www.gmpartsgiant.com:records:L1274"
+   ],
+   "names": [
+    "LAMP, TAIL(INCLUDES 16)(MAY REQ BULB 9441839 & HARNESS 12100675)"
+   ],
+   "pns": [
+    "19179358"
+   ],
+   "reman": false
+  },
+  "gm:19179679": {
+   "cat": "tail-lights",
+   "comp": null,
+   "evidence": [
+    "www.gmpartsgiant.com:records:L1275"
+   ],
+   "names": [
+    "LAMP, TAIL(INCLUDES 16)(MAY NEED TO ORDER HARNESS(12100675)& BULB(09441839) WHEN REPLG 15113580)"
+   ],
+   "pns": [
+    "19179679"
+   ],
+   "reman": false
+  },
+  "gm:19206745": {
+   "cat": "tail-lights",
+   "comp": null,
+   "evidence": [
+    "www.gmpartsgiant.com:records:L2799"
+   ],
+   "names": [
+    "LAMP, TAIL(INCLUDES 22)(MAY HAVE TO ORDER 12335926,09441839,09442003 AS NECESS)(DEALER MAY NEED TO REUSE EXISTING RUBBER/GASKET OR TRIM NEW SEAL TO SIZE TO SNAP BULB HOLDER ONTO THE LAMP ASM IF NECESSARY.)"
+   ],
+   "pns": [
+    "19206745"
+   ],
+   "reman": false
+  },
+  "gm:19206746": {
+   "cat": "tail-lights",
+   "comp": null,
+   "evidence": [
+    "www.gmpartsgiant.com:records:L2800"
+   ],
+   "names": [
+    "LAMP, TAIL(INCLUDES 22)(MAY HAVE TO ORDER 12335927,09441839,09442003 AS NECESS)(DEALER MAY NEED TO REUSE EXISTING RUBBER/GASKET OR TRIM NEW SEAL TO SIZE TO SNAP BULB HOLDER ONTO THE LAMP ASM IF NECESSARY.)"
+   ],
+   "pns": [
+    "19206746"
+   ],
+   "reman": false
+  },
   "gm:19210257": {
    "cat": "window-regulator",
    "comp": "assy",
@@ -152124,6 +152236,34 @@
    ],
    "pns": [
     "19210258"
+   ],
+   "reman": false
+  },
+  "gm:19244638": {
+   "cat": "headlights",
+   "comp": null,
+   "evidence": [
+    "www.gmpartsgiant.com:records:L1194"
+   ],
+   "names": [
+    "HEADLAMP, (W/PARKING & TURN SIGNAL LAMP)(INCLUDES 9,10)(DEALER MAY HAVE TO RE-USE OLD BULB AND SOCKET OR ORDER PARTS; BULB 09441732, BULB 09421330, BULB 09442003, BULB 12450182, SOCKET 12456483/84.)"
+   ],
+   "pns": [
+    "19244638"
+   ],
+   "reman": false
+  },
+  "gm:19244639": {
+   "cat": "headlights",
+   "comp": null,
+   "evidence": [
+    "www.gmpartsgiant.com:records:L1195"
+   ],
+   "names": [
+    "HEADLAMP, (W/PARKING & TURN SIGNAL LAMP)(INCLUDES 9,10)(DEALER MAY HAVE TO RE-USE OLD BULB AND SOCKET OR ORDER PARTS; BULB 09441732, BULB 09421330, BULB 09442003, BULB 12450182, SOCKET 12456483/84.)"
+   ],
+   "pns": [
+    "19244639"
    ],
    "reman": false
   },
@@ -152376,6 +152516,34 @@
    ],
    "pns": [
     "19369867"
+   ],
+   "reman": false
+  },
+  "gm:19417443": {
+   "cat": "tail-lights",
+   "comp": null,
+   "evidence": [
+    "www.gmpartsgiant.com:records:L1377"
+   ],
+   "names": [
+    "LAMP, TAIL(INCLUDES 10,13)(NO BULBS OR HARNESS INCLUDED)"
+   ],
+   "pns": [
+    "19417443"
+   ],
+   "reman": false
+  },
+  "gm:19417444": {
+   "cat": "tail-lights",
+   "comp": null,
+   "evidence": [
+    "www.gmpartsgiant.com:records:L1378"
+   ],
+   "names": [
+    "LAMP, TAIL(INCLUDES 10,13)(NO BULBS OR HARNESS INCLUDED)"
+   ],
+   "pns": [
+    "19417444"
    ],
    "reman": false
   },
@@ -152785,6 +152953,34 @@
    ],
    "reman": false
   },
+  "gm:20964008": {
+   "cat": "headlights",
+   "comp": null,
+   "evidence": [
+    "www.gmpartsgiant.com:records:L512"
+   ],
+   "names": [
+    "HEADLAMP, (INCLUDES 9,10,12-19)(MATING CONNECT W/LEADS USE 12101854)(W/BRACKET)(AMBER TURN SIGNAL BULB & SMOKED OUTER LENS. IF THE ORIGINAL ASSEMBLYHAS CLEAR BULB & AMBER TURN SIGNAL & A CLEAR OUTER LENS USE 22740621)"
+   ],
+   "pns": [
+    "20964008"
+   ],
+   "reman": false
+  },
+  "gm:20964009": {
+   "cat": "headlights",
+   "comp": null,
+   "evidence": [
+    "www.gmpartsgiant.com:records:L513"
+   ],
+   "names": [
+    "HEADLAMP, (INCLUDES 9,10,12-19)(USE TOGETHER WITH MATING CONNECT 12101854)(AMBER TURN SIGNAL BULB & SMOKED OUTER LENS. IF THE ORIGINAL ASSEMBLYHAS CLEAR BULB & AMBER TURN SIGNAL & A CLEAR OUTER LENS USE 22740620)"
+   ],
+   "pns": [
+    "20964009"
+   ],
+   "reman": false
+  },
   "gm:21997350": {
    "cat": "climate-control",
    "comp": "assy",
@@ -153076,6 +153272,34 @@
    ],
    "pns": [
     "22730703"
+   ],
+   "reman": false
+  },
+  "gm:22853025": {
+   "cat": "headlights",
+   "comp": null,
+   "evidence": [
+    "www.gmpartsgiant.com:records:L1058"
+   ],
+   "names": [
+    "HEADLAMP, (W/PARKING & FRONT SIDE MARKER & TURN SIGNAL LAMP)(INCLUDES 4,5,14-17)"
+   ],
+   "pns": [
+    "22853025"
+   ],
+   "reman": false
+  },
+  "gm:22853026": {
+   "cat": "headlights",
+   "comp": null,
+   "evidence": [
+    "www.gmpartsgiant.com:records:L1059"
+   ],
+   "names": [
+    "HEADLAMP, (W/PARKING & FRONT SIDE MARKER & TURN SIGNAL LAMP)(INCLUDES 4,5,14-17)"
+   ],
+   "pns": [
+    "22853026"
    ],
    "reman": false
   },
@@ -153916,6 +154140,62 @@
    ],
    "pns": [
     "5483149"
+   ],
+   "reman": false
+  },
+  "gm:5978023": {
+   "cat": "tail-lights",
+   "comp": null,
+   "evidence": [
+    "www.gmpartsgiant.com:records:L1800"
+   ],
+   "names": [
+    "LAMP, TAIL"
+   ],
+   "pns": [
+    "5978023"
+   ],
+   "reman": false
+  },
+  "gm:5978024": {
+   "cat": "tail-lights",
+   "comp": null,
+   "evidence": [
+    "www.gmpartsgiant.com:records:L1801"
+   ],
+   "names": [
+    "LAMP, TAIL"
+   ],
+   "pns": [
+    "5978024"
+   ],
+   "reman": false
+  },
+  "gm:5978195": {
+   "cat": "tail-lights",
+   "comp": null,
+   "evidence": [
+    "www.gmpartsgiant.com:records:L979"
+   ],
+   "names": [
+    "LAMP, TAIL(INCLUDES 22)"
+   ],
+   "pns": [
+    "5978195"
+   ],
+   "reman": false
+  },
+  "gm:5978196": {
+   "cat": "tail-lights",
+   "comp": null,
+   "evidence": [
+    "www.gmpartsgiant.com:records:L978"
+   ],
+   "names": [
+    "LAMP, TAIL(INCLUDES 22)"
+   ],
+   "pns": [
+    "5978196"
    ],
    "reman": false
   },
@@ -178258,6 +178538,114 @@
   {
    "apps": [
     [
+     "GMC",
+     "Jimmy",
+     1998,
+     1998
+    ],
+    [
+     "GMC",
+     "Sonoma",
+     2000,
+     2000
+    ]
+   ],
+   "cars": 82,
+   "cat": "headlights",
+   "id": "oem:gm:headlights:L:4ffd5f17fa",
+   "kind": "body",
+   "note": "GM catalog lists #16526225 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T22:00:28Z",
+   "pn": [
+    "16526225"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "GMC",
+     "Jimmy",
+     1998,
+     1998
+    ],
+    [
+     "GMC",
+     "Sonoma",
+     2000,
+     2000
+    ]
+   ],
+   "cars": 82,
+   "cat": "headlights",
+   "id": "oem:gm:headlights:R:b219c88e37",
+   "kind": "body",
+   "note": "GM catalog lists #16526226 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T22:00:52Z",
+   "pn": [
+    "16526226"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "GMC",
+     "Jimmy",
+     1998,
+     1998
+    ],
+    [
+     "GMC",
+     "Sonoma",
+     2000,
+     2000
+    ]
+   ],
+   "cars": 82,
+   "cat": "headlights",
+   "id": "oem:gm:headlights:L:3e8cedcb83",
+   "kind": "body",
+   "note": "GM catalog lists #16526227 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T22:00:36Z",
+   "pn": [
+    "16526227"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "GMC",
+     "Jimmy",
+     1998,
+     1998
+    ],
+    [
+     "GMC",
+     "Sonoma",
+     2000,
+     2000
+    ]
+   ],
+   "cars": 82,
+   "cat": "headlights",
+   "id": "oem:gm:headlights:R:fd25d6d821",
+   "kind": "body",
+   "note": "GM catalog lists #16526228 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T22:00:44Z",
+   "pn": [
+    "16526228"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
      "Chevrolet",
      "Camaro",
      1995,
@@ -178910,6 +179298,114 @@
    "apps": [
     [
      "Chevrolet",
+     "Blazer",
+     2001,
+     2001
+    ],
+    [
+     "GMC",
+     "Jimmy",
+     1998,
+     1998
+    ]
+   ],
+   "cars": 133,
+   "cat": "tail-lights",
+   "id": "oem:gm:tail-lights:L:96652d4d51",
+   "kind": "body",
+   "note": "GM catalog lists #19179358 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T06:49:24Z",
+   "pn": [
+    "19179358"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Blazer",
+     2001,
+     2001
+    ],
+    [
+     "GMC",
+     "Jimmy",
+     1998,
+     1998
+    ]
+   ],
+   "cars": 133,
+   "cat": "tail-lights",
+   "id": "oem:gm:tail-lights:R:9b1e9653f4",
+   "kind": "body",
+   "note": "GM catalog lists #19179679 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T06:49:32Z",
+   "pn": [
+    "19179679"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Venture",
+     2004,
+     2004
+    ],
+    [
+     "Pontiac",
+     "Montana",
+     2004,
+     2004
+    ]
+   ],
+   "cars": 85,
+   "cat": "tail-lights",
+   "id": "oem:gm:tail-lights:L:0bd0a6f6bf",
+   "kind": "body",
+   "note": "GM catalog lists #19206745 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T21:43:43Z",
+   "pn": [
+    "19206745"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Venture",
+     2004,
+     2004
+    ],
+    [
+     "Pontiac",
+     "Montana",
+     2004,
+     2004
+    ]
+   ],
+   "cars": 85,
+   "cat": "tail-lights",
+   "id": "oem:gm:tail-lights:R:6578f8b4c3",
+   "kind": "body",
+   "note": "GM catalog lists #19206746 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T21:43:51Z",
+   "pn": [
+    "19206746"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
      "Equinox",
      2005,
      2005
@@ -178956,6 +179452,72 @@
    "oldest_retrieved": "2026-11-05T05:11:44Z",
    "pn": [
     "19210258"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Buick",
+     "Century",
+     2003,
+     2003
+    ],
+    [
+     "Buick",
+     "Regal",
+     2000,
+     2000
+    ],
+    [
+     "Buick",
+     "Regal",
+     2003,
+     2004
+    ]
+   ],
+   "cars": 231,
+   "cat": "headlights",
+   "id": "oem:gm:headlights:R:202fc8af16",
+   "kind": "body",
+   "note": "GM catalog lists #19244638 for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T06:18:39Z",
+   "pn": [
+    "19244638"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Buick",
+     "Century",
+     2003,
+     2003
+    ],
+    [
+     "Buick",
+     "Regal",
+     2000,
+     2000
+    ],
+    [
+     "Buick",
+     "Regal",
+     2003,
+     2004
+    ]
+   ],
+   "cars": 231,
+   "cat": "headlights",
+   "id": "oem:gm:headlights:L:2a09df2b5c",
+   "kind": "body",
+   "note": "GM catalog lists #19244639 for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T06:18:47Z",
+   "pn": [
+    "19244639"
    ],
    "reason": "conditional",
    "tier": "likely"
@@ -179450,6 +180012,72 @@
     "19369867"
    ],
    "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Colorado",
+     2005,
+     2005
+    ],
+    [
+     "GMC",
+     "Canyon",
+     2005,
+     2005
+    ],
+    [
+     "GMC",
+     "Canyon",
+     2011,
+     2011
+    ]
+   ],
+   "cars": 189,
+   "cat": "tail-lights",
+   "id": "oem:gm:tail-lights:R:fee2814027",
+   "kind": "body",
+   "note": "GM catalog lists #19417443 for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T07:19:09Z",
+   "pn": [
+    "19417443"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Colorado",
+     2005,
+     2005
+    ],
+    [
+     "GMC",
+     "Canyon",
+     2005,
+     2005
+    ],
+    [
+     "GMC",
+     "Canyon",
+     2011,
+     2011
+    ]
+   ],
+   "cars": 189,
+   "cat": "tail-lights",
+   "id": "oem:gm:tail-lights:L:61c33204e8",
+   "kind": "body",
+   "note": "GM catalog lists #19417444 for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T07:19:17Z",
+   "pn": [
+    "19417444"
+   ],
+   "reason": "conditional",
    "tier": "likely"
   },
   {
@@ -180382,6 +181010,60 @@
   {
    "apps": [
     [
+     "Chevrolet",
+     "Cobalt",
+     2007,
+     2007
+    ],
+    [
+     "Pontiac",
+     "G5",
+     2007,
+     2007
+    ]
+   ],
+   "cars": 407,
+   "cat": "headlights",
+   "id": "oem:gm:headlights:L:27c1dcc8ca",
+   "kind": "body",
+   "note": "GM catalog lists #20964008 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T03:12:15Z",
+   "pn": [
+    "20964008"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Cobalt",
+     2007,
+     2007
+    ],
+    [
+     "Pontiac",
+     "G5",
+     2007,
+     2007
+    ]
+   ],
+   "cars": 407,
+   "cat": "headlights",
+   "id": "oem:gm:headlights:R:145e25dcf2",
+   "kind": "body",
+   "note": "GM catalog lists #20964009 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T03:12:23Z",
+   "pn": [
+    "20964009"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
      "GMC",
      "Sierra",
      2004,
@@ -180966,6 +181648,60 @@
    "oldest_retrieved": "2026-11-05T08:45:40Z",
    "pn": [
     "22730703"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Avalanche",
+     2007,
+     2007
+    ],
+    [
+     "Chevrolet",
+     "Tahoe",
+     2007,
+     2007
+    ]
+   ],
+   "cars": 447,
+   "cat": "headlights",
+   "id": "oem:gm:headlights:L:67636b51fb",
+   "kind": "body",
+   "note": "GM catalog lists #22853025 for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T05:43:37Z",
+   "pn": [
+    "22853025"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Avalanche",
+     2007,
+     2007
+    ],
+    [
+     "Chevrolet",
+     "Tahoe",
+     2007,
+     2007
+    ]
+   ],
+   "cars": 447,
+   "cat": "headlights",
+   "id": "oem:gm:headlights:R:25f8643ae9",
+   "kind": "body",
+   "note": "GM catalog lists #22853026 for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T05:43:45Z",
+   "pn": [
+    "22853026"
    ],
    "reason": "conditional",
    "tier": "likely"
@@ -182648,6 +183384,138 @@
    "apps": [
     [
      "Chevrolet",
+     "Astro",
+     2000,
+     2000
+    ],
+    [
+     "GMC",
+     "Safari",
+     1997,
+     1997
+    ],
+    [
+     "GMC",
+     "Safari",
+     2000,
+     2001
+    ]
+   ],
+   "cars": 140,
+   "cat": "tail-lights",
+   "id": "oem:gm:tail-lights:L:a49f839f7c",
+   "kind": "body",
+   "note": "GM catalog lists #5978023 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T09:25:10Z",
+   "pn": [
+    "5978023"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Astro",
+     2000,
+     2000
+    ],
+    [
+     "GMC",
+     "Safari",
+     1997,
+     1997
+    ],
+    [
+     "GMC",
+     "Safari",
+     2000,
+     2001
+    ]
+   ],
+   "cars": 140,
+   "cat": "tail-lights",
+   "id": "oem:gm:tail-lights:R:6229804867",
+   "kind": "body",
+   "note": "GM catalog lists #5978024 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T09:25:18Z",
+   "pn": [
+    "5978024"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "S-10",
+     2000,
+     2000
+    ],
+    [
+     "GMC",
+     "Sonoma",
+     1996,
+     1996
+    ],
+    [
+     "GMC",
+     "Sonoma",
+     2000,
+     2000
+    ]
+   ],
+   "cars": 190,
+   "cat": "tail-lights",
+   "id": "oem:gm:tail-lights:L:e4269447bd",
+   "kind": "body",
+   "note": "GM catalog lists #5978195 for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T05:16:40Z",
+   "pn": [
+    "5978195"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "S-10",
+     2000,
+     2000
+    ],
+    [
+     "GMC",
+     "Sonoma",
+     1996,
+     1996
+    ],
+    [
+     "GMC",
+     "Sonoma",
+     2000,
+     2000
+    ]
+   ],
+   "cars": 190,
+   "cat": "tail-lights",
+   "id": "oem:gm:tail-lights:R:8172e5c761",
+   "kind": "body",
+   "note": "GM catalog lists #5978196 for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T05:16:32Z",
+   "pn": [
+    "5978196"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
      "Equinox",
      2018,
      2018
@@ -183156,7 +184024,7 @@
   }
  ],
  "ns": "gm",
- "policy_sha256": "b555fd09c64ff21a2faa0632b8359bdc6ec68743f12f5726568e7615ff52ed01",
+ "policy_sha256": "3842a15ed5308947ee820a6d9fe7355f31196736f6c0faac65e93fec6a485b8f",
  "raw": {
   "commit": "c36da2eb98835c02f81c05e8c36b6a926634a332",
   "ref": "c36da2eb98835c02f81c05e8c36b6a926634a332",

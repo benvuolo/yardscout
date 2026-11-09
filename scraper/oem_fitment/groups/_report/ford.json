@@ -104775,56 +104775,6 @@
   },
   {
    "cat": "bumper-front",
-   "detail": "Ford Expedition 2000-2000;Ford F-150 2001-2001",
-   "evidence": [
-    "www.fordpartsgiant.com:records:L3705"
-   ],
-   "pn": "XL3Z-17757-AA",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "bumper-front",
-   "detail": "Ford Expedition 2000-2000;Ford F-150 2001-2001",
-   "evidence": [
-    "www.fordpartsgiant.com:records:L3706"
-   ],
-   "pn": "XL3Z-17757-AACP",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "bumper-front",
-   "detail": "Ford Expedition 2003-2003;Lincoln Navigator 2004-2004",
-   "evidence": [
-    "www.fordpartsgiant.com:records:L4298"
-   ],
-   "pn": "2L1Z-17757-BA",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "bumper-front",
-   "detail": "Ford Expedition 2003-2003;Lincoln Navigator 2004-2004",
-   "evidence": [
-    "www.fordpartsgiant.com:records:L4299"
-   ],
-   "pn": "2L1Z-17757-BACP",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "bumper-front",
-   "detail": "Ford Expedition 2007-2007;Lincoln Navigator 2007-2007",
-   "evidence": [
-    "www.fordpartsgiant.com:records:L4929"
-   ],
-   "pn": "7L1Z-17757-A",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "bumper-front",
    "detail": "Ford F-150 1995-1995;Ford F-250 1997-1997",
    "evidence": [
     "www.fordpartsgiant.com:records:L5416"
@@ -104865,16 +104815,6 @@
   },
   {
    "cat": "bumper-front",
-   "detail": "Ford Flex 2009-2009;Lincoln MKS 2009-2009",
-   "evidence": [
-    "www.fordpartsgiant.com:records:L5379"
-   ],
-   "pn": "8A8Z-17757-A",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "bumper-front",
    "detail": "Ford Fusion 2008-2008;Lincoln MKZ 2008-2008",
    "evidence": [
     "www.fordpartsgiant.com:records:L4582"
@@ -104890,26 +104830,6 @@
     "www.fordpartsgiant.com:records:L4583"
    ],
    "pn": "6E5Z-17757-AACP",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "bumper-front",
-   "detail": "Ford Fusion 2012-2012;Lincoln MKZ 2010-2012;Mercury Milan 2010-2010",
-   "evidence": [
-    "www.fordpartsgiant.com:records:L3955"
-   ],
-   "pn": "AE5Z-17757-A",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "bumper-front",
-   "detail": "Ford Fusion 2012-2012;Lincoln MKZ 2010-2012;Mercury Milan 2010-2010",
-   "evidence": [
-    "www.fordpartsgiant.com:records:L3956"
-   ],
-   "pn": "AE5Z-17757-ACP",
    "reason": "held_exterior_cross_model",
    "t": null
   },
@@ -107028,26 +106948,6 @@
   },
   {
    "cat": "bumper-rear",
-   "detail": "Ford Edge 2013-2013;Lincoln MKX 2011-2011",
-   "evidence": [
-    "www.fordpartsgiant.com:records:L4043"
-   ],
-   "pn": "BT4Z-17906-A",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "bumper-rear",
-   "detail": "Ford Edge 2013-2013;Lincoln MKX 2011-2011",
-   "evidence": [
-    "www.fordpartsgiant.com:records:L4044"
-   ],
-   "pn": "BT4Z-17906-ACP",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "bumper-rear",
    "detail": "Ford Expedition 2003-2003;Lincoln Navigator 2004-2004",
    "evidence": [
     "www.fordpartsgiant.com:records:L4316"
@@ -107143,46 +107043,6 @@
     "www.fordpartsgiant.com:records:L3715"
    ],
    "pn": "YL3Z-17906-CABCP",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "bumper-rear",
-   "detail": "Ford Fusion 2008-2008;Lincoln MKZ 2008-2008",
-   "evidence": [
-    "www.fordpartsgiant.com:records:L4590"
-   ],
-   "pn": "6E5Z-17906-AA",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "bumper-rear",
-   "detail": "Ford Fusion 2012-2012;Lincoln MKZ 2010-2012;Mercury Milan 2010-2010",
-   "evidence": [
-    "www.fordpartsgiant.com:records:L3957"
-   ],
-   "pn": "AE5Z-17906-A",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "bumper-rear",
-   "detail": "Ford Fusion 2012-2012;Lincoln MKZ 2010-2012;Mercury Milan 2010-2010",
-   "evidence": [
-    "www.fordpartsgiant.com:records:L3958"
-   ],
-   "pn": "AE5Z-17906-ACP",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "bumper-rear",
-   "detail": "Ford Fusion 2014-2014;Ford Fusion 2017-2017;Lincoln MKZ 2014-2014",
-   "evidence": [
-    "www.fordpartsgiant.com:records:L4098"
-   ],
-   "pn": "DG9Z-17906-A",
    "reason": "held_exterior_cross_model",
    "t": null
   },
@@ -108636,26 +108496,6 @@
     "www.fordpartsgiant.com:records:L5415"
    ],
    "pn": "F4TZ-16006-A",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "fender",
-   "detail": "Ford Fusion 2012-2012;Mercury Milan 2010-2010",
-   "evidence": [
-    "www.fordpartsgiant.com:records:L3945"
-   ],
-   "pn": "AE5Z-16005-A",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "fender",
-   "detail": "Ford Fusion 2012-2012;Mercury Milan 2010-2010",
-   "evidence": [
-    "www.fordpartsgiant.com:records:L3946"
-   ],
-   "pn": "AE5Z-16006-A",
    "reason": "held_exterior_cross_model",
    "t": null
   },
@@ -113669,66 +113509,6 @@
   },
   {
    "cat": "tail-lights",
-   "detail": "Ford Explorer 1999-1999;Mercury Mountaineer 2000-2000",
-   "evidence": [
-    "www.fordpartsgiant.com:records:L1094"
-   ],
-   "pn": "F87Z-13405-AC",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "tail-lights",
-   "detail": "Ford Explorer 1999-1999;Mercury Mountaineer 2000-2000",
-   "evidence": [
-    "www.fordpartsgiant.com:records:L1095"
-   ],
-   "pn": "F87Z-13405-AB",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "tail-lights",
-   "detail": "Ford Explorer 1999-1999;Mercury Mountaineer 2000-2000",
-   "evidence": [
-    "www.fordpartsgiant.com:records:L1096"
-   ],
-   "pn": "F87Z-13404-AC",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "tail-lights",
-   "detail": "Ford Explorer 1999-1999;Mercury Mountaineer 2000-2000",
-   "evidence": [
-    "www.fordpartsgiant.com:records:L1097"
-   ],
-   "pn": "F87Z-13404-AB",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "tail-lights",
-   "detail": "Ford Explorer 1999-1999;Mercury Mountaineer 2000-2000",
-   "evidence": [
-    "www.fordpartsgiant.com:records:L1098"
-   ],
-   "pn": "F87Z-13404-ACCP",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "tail-lights",
-   "detail": "Ford Explorer 1999-1999;Mercury Mountaineer 2000-2000",
-   "evidence": [
-    "www.fordpartsgiant.com:records:L1099"
-   ],
-   "pn": "F87Z-13405-ACCP",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "tail-lights",
    "evidence": [
     "www.fordpartsgiant.com:records:L2271"
    ],
@@ -114861,10 +114641,10 @@
    "window-regulator": 2969,
    "window-switch": 124
   },
-  "likely_groups": 59,
+  "likely_groups": 81,
   "list_rows": 77788,
   "records": 7173,
-  "released_by_allowlist": 0,
+  "released_by_allowlist": 22,
   "verified_groups": 0,
   "vg_groups": 0,
   "why_no_verified": "no (site, category) of this namespace has passed the audit gate (audits.json has no record; spec 11.4, E5/V7); engine cells not audited as reliable on www.fordpartsgiant.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE; www.fordpartsgiant.com: only 1% of its 14302 fitment rows can be coverage: it prints an option column, and option-layout rows are never coverage (spec 5.5)",

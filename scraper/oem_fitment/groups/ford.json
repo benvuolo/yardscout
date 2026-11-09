@@ -82659,6 +82659,34 @@
    ],
    "reman": false
   },
+  "ford:2L1Z17757BA": {
+   "cat": "bumper-front",
+   "comp": null,
+   "evidence": [
+    "www.fordpartsgiant.com:records:L4298"
+   ],
+   "names": [
+    "Bumper Assy - Front"
+   ],
+   "pns": [
+    "2L1Z-17757-BA"
+   ],
+   "reman": false
+  },
+  "ford:2L1Z17757BACP": {
+   "cat": "bumper-front",
+   "comp": null,
+   "evidence": [
+    "www.fordpartsgiant.com:records:L4299"
+   ],
+   "names": [
+    "Bumper Assy - Front"
+   ],
+   "pns": [
+    "2L1Z-17757-BACP"
+   ],
+   "reman": false
+  },
   "ford:5F9Z14529BAC": {
    "cat": "window-switch",
    "comp": null,
@@ -82953,6 +82981,34 @@
    ],
    "reman": false
   },
+  "ford:6E5Z17906AA": {
+   "cat": "bumper-rear",
+   "comp": null,
+   "evidence": [
+    "www.fordpartsgiant.com:records:L4590"
+   ],
+   "names": [
+    "Bumper Asy - Rear"
+   ],
+   "pns": [
+    "6E5Z-17906-AA"
+   ],
+   "reman": false
+  },
+  "ford:7L1Z17757A": {
+   "cat": "bumper-front",
+   "comp": null,
+   "evidence": [
+    "www.fordpartsgiant.com:records:L4929"
+   ],
+   "names": [
+    "Bumper"
+   ],
+   "pns": [
+    "7L1Z-17757-A"
+   ],
+   "reman": false
+  },
   "ford:8A5Z14529AB": {
    "cat": "window-switch",
    "comp": null,
@@ -82964,6 +83020,20 @@
    ],
    "pns": [
     "8A5Z-14529-AB"
+   ],
+   "reman": false
+  },
+  "ford:8A8Z17757A": {
+   "cat": "bumper-front",
+   "comp": null,
+   "evidence": [
+    "www.fordpartsgiant.com:records:L5379"
+   ],
+   "names": [
+    "Bumper"
+   ],
+   "pns": [
+    "8A8Z-17757-A"
    ],
    "reman": false
   },
@@ -83107,6 +83177,90 @@
    ],
    "reman": false
   },
+  "ford:AE5Z16005A": {
+   "cat": "fender",
+   "comp": null,
+   "evidence": [
+    "www.fordpartsgiant.com:records:L3945"
+   ],
+   "names": [
+    "Fender Assy - Front"
+   ],
+   "pns": [
+    "AE5Z-16005-A"
+   ],
+   "reman": false
+  },
+  "ford:AE5Z16006A": {
+   "cat": "fender",
+   "comp": null,
+   "evidence": [
+    "www.fordpartsgiant.com:records:L3946"
+   ],
+   "names": [
+    "Fender Assy - Front"
+   ],
+   "pns": [
+    "AE5Z-16006-A"
+   ],
+   "reman": false
+  },
+  "ford:AE5Z17757A": {
+   "cat": "bumper-front",
+   "comp": null,
+   "evidence": [
+    "www.fordpartsgiant.com:records:L3955"
+   ],
+   "names": [
+    "Bumper Assy - Front"
+   ],
+   "pns": [
+    "AE5Z-17757-A"
+   ],
+   "reman": false
+  },
+  "ford:AE5Z17757ACP": {
+   "cat": "bumper-front",
+   "comp": null,
+   "evidence": [
+    "www.fordpartsgiant.com:records:L3956"
+   ],
+   "names": [
+    "Bumper Assy - Front"
+   ],
+   "pns": [
+    "AE5Z-17757-ACP"
+   ],
+   "reman": false
+  },
+  "ford:AE5Z17906A": {
+   "cat": "bumper-rear",
+   "comp": null,
+   "evidence": [
+    "www.fordpartsgiant.com:records:L3957"
+   ],
+   "names": [
+    "Bumper Assy - Rear"
+   ],
+   "pns": [
+    "AE5Z-17906-A"
+   ],
+   "reman": false
+  },
+  "ford:AE5Z17906ACP": {
+   "cat": "bumper-rear",
+   "comp": null,
+   "evidence": [
+    "www.fordpartsgiant.com:records:L3958"
+   ],
+   "names": [
+    "Bumper Assy - Rear"
+   ],
+   "pns": [
+    "AE5Z-17906-ACP"
+   ],
+   "reman": false
+  },
   "ford:BE5Z10849AC": {
    "cat": "gauge-cluster",
    "comp": null,
@@ -83135,6 +83289,34 @@
    ],
    "reman": false
   },
+  "ford:BT4Z17906A": {
+   "cat": "bumper-rear",
+   "comp": null,
+   "evidence": [
+    "www.fordpartsgiant.com:records:L4043"
+   ],
+   "names": [
+    "Bumper Assy - Rear"
+   ],
+   "pns": [
+    "BT4Z-17906-A"
+   ],
+   "reman": false
+  },
+  "ford:BT4Z17906ACP": {
+   "cat": "bumper-rear",
+   "comp": null,
+   "evidence": [
+    "www.fordpartsgiant.com:records:L4044"
+   ],
+   "names": [
+    "Bumper Assy - Rear"
+   ],
+   "pns": [
+    "BT4Z-17906-ACP"
+   ],
+   "reman": false
+  },
   "ford:CV6Z5423394B": {
    "cat": "window-regulator",
    "comp": "motor",
@@ -83160,6 +83342,20 @@
    ],
    "pns": [
     "CV6Z-5423395-B"
+   ],
+   "reman": false
+  },
+  "ford:DG9Z17906A": {
+   "cat": "bumper-rear",
+   "comp": null,
+   "evidence": [
+    "www.fordpartsgiant.com:records:L4098"
+   ],
+   "names": [
+    "Beam Asy"
+   ],
+   "pns": [
+    "DG9Z-17906-A"
    ],
    "reman": false
   },
@@ -83275,6 +83471,90 @@
    ],
    "reman": false
   },
+  "ford:F87Z13404AB": {
+   "cat": "tail-lights",
+   "comp": null,
+   "evidence": [
+    "www.fordpartsgiant.com:records:L1097"
+   ],
+   "names": [
+    "Lamp Assy - Rear, Stop And Flasher"
+   ],
+   "pns": [
+    "F87Z-13404-AB"
+   ],
+   "reman": false
+  },
+  "ford:F87Z13404AC": {
+   "cat": "tail-lights",
+   "comp": null,
+   "evidence": [
+    "www.fordpartsgiant.com:records:L1096"
+   ],
+   "names": [
+    "Lamp Assy - Rear, Stop And Flasher"
+   ],
+   "pns": [
+    "F87Z-13404-AC"
+   ],
+   "reman": false
+  },
+  "ford:F87Z13404ACCP": {
+   "cat": "tail-lights",
+   "comp": null,
+   "evidence": [
+    "www.fordpartsgiant.com:records:L1098"
+   ],
+   "names": [
+    "Lamp Assy - Rear, Stop And Flasher"
+   ],
+   "pns": [
+    "F87Z-13404-ACCP"
+   ],
+   "reman": false
+  },
+  "ford:F87Z13405AB": {
+   "cat": "tail-lights",
+   "comp": null,
+   "evidence": [
+    "www.fordpartsgiant.com:records:L1095"
+   ],
+   "names": [
+    "Lamp Assy - Rear, Stop And Flasher"
+   ],
+   "pns": [
+    "F87Z-13405-AB"
+   ],
+   "reman": false
+  },
+  "ford:F87Z13405AC": {
+   "cat": "tail-lights",
+   "comp": null,
+   "evidence": [
+    "www.fordpartsgiant.com:records:L1094"
+   ],
+   "names": [
+    "Lamp Assy - Rear, Stop And Flasher"
+   ],
+   "pns": [
+    "F87Z-13405-AC"
+   ],
+   "reman": false
+  },
+  "ford:F87Z13405ACCP": {
+   "cat": "tail-lights",
+   "comp": null,
+   "evidence": [
+    "www.fordpartsgiant.com:records:L1099"
+   ],
+   "names": [
+    "Lamp Assy - Rear, Stop And Flasher"
+   ],
+   "pns": [
+    "F87Z-13405-ACCP"
+   ],
+   "reman": false
+  },
   "ford:F87Z17682AAA": {
    "cat": "side-mirrors",
    "comp": null,
@@ -83356,6 +83636,34 @@
    ],
    "pns": [
     "F8XZ-19980-AA"
+   ],
+   "reman": false
+  },
+  "ford:XL3Z17757AA": {
+   "cat": "bumper-front",
+   "comp": null,
+   "evidence": [
+    "www.fordpartsgiant.com:records:L3705"
+   ],
+   "names": [
+    "Bumper"
+   ],
+   "pns": [
+    "XL3Z-17757-AA"
+   ],
+   "reman": false
+  },
+  "ford:XL3Z17757AACP": {
+   "cat": "bumper-front",
+   "comp": null,
+   "evidence": [
+    "www.fordpartsgiant.com:records:L3706"
+   ],
+   "names": [
+    "Bumper"
+   ],
+   "pns": [
+    "XL3Z-17757-AACP"
    ],
    "reman": false
   },
@@ -94482,6 +94790,60 @@
    "apps": [
     [
      "Ford",
+     "Expedition",
+     2003,
+     2003
+    ],
+    [
+     "Lincoln",
+     "Navigator",
+     2004,
+     2004
+    ]
+   ],
+   "cars": 572,
+   "cat": "bumper-front",
+   "id": "oem:ford:bumper-front:C:580b60e8f2",
+   "kind": "body",
+   "note": "Ford catalog lists #2L1Z-17757-BA for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T00:19:56Z",
+   "pn": [
+    "2L1Z-17757-BA"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Expedition",
+     2003,
+     2003
+    ],
+    [
+     "Lincoln",
+     "Navigator",
+     2004,
+     2004
+    ]
+   ],
+   "cars": 572,
+   "cat": "bumper-front",
+   "id": "oem:ford:bumper-front:C:eea3e7b6aa",
+   "kind": "body",
+   "note": "Ford catalog lists #2L1Z-17757-BACP for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T00:20:04Z",
+   "pn": [
+    "2L1Z-17757-BACP"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ford",
      "Five Hundred",
      2005,
      2005
@@ -95072,6 +95434,60 @@
   {
    "apps": [
     [
+     "Ford",
+     "Fusion",
+     2008,
+     2008
+    ],
+    [
+     "Lincoln",
+     "MKZ",
+     2008,
+     2008
+    ]
+   ],
+   "cars": 385,
+   "cat": "bumper-rear",
+   "id": "oem:ford:bumper-rear:C:ae5b223866",
+   "kind": "body",
+   "note": "Ford catalog lists #6E5Z-17906-AA for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T01:10:25Z",
+   "pn": [
+    "6E5Z-17906-AA"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Expedition",
+     2007,
+     2007
+    ],
+    [
+     "Lincoln",
+     "Navigator",
+     2007,
+     2007
+    ]
+   ],
+   "cars": 257,
+   "cat": "bumper-front",
+   "id": "oem:ford:bumper-front:C:601502a849",
+   "kind": "body",
+   "note": "Ford catalog lists #7L1Z-17757-A for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T03:14:51Z",
+   "pn": [
+    "7L1Z-17757-A"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
      "Lincoln",
      "MKS",
      2009,
@@ -95092,6 +95508,33 @@
    "oldest_retrieved": "2026-11-05T11:14:19Z",
    "pn": [
     "8A5Z-14529-AB"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Flex",
+     2009,
+     2009
+    ],
+    [
+     "Lincoln",
+     "MKS",
+     2009,
+     2009
+    ]
+   ],
+   "cars": 224,
+   "cat": "bumper-front",
+   "id": "oem:ford:bumper-front:C:4ee47f3ec0",
+   "kind": "body",
+   "note": "Ford catalog lists #8A8Z-17757-A for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T04:58:53Z",
+   "pn": [
+    "8A8Z-17757-A"
    ],
    "reason": "conditional",
    "tier": "likely"
@@ -95375,6 +95818,192 @@
      2012
     ],
     [
+     "Mercury",
+     "Milan",
+     2010,
+     2010
+    ]
+   ],
+   "cars": 811,
+   "cat": "fender",
+   "id": "oem:ford:fender:R:a2c1c7f709",
+   "kind": "body",
+   "note": "Ford catalog lists #AE5Z-16005-A for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T23:14:57Z",
+   "pn": [
+    "AE5Z-16005-A"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Fusion",
+     2012,
+     2012
+    ],
+    [
+     "Mercury",
+     "Milan",
+     2010,
+     2010
+    ]
+   ],
+   "cars": 811,
+   "cat": "fender",
+   "id": "oem:ford:fender:L:a814ecddf7",
+   "kind": "body",
+   "note": "Ford catalog lists #AE5Z-16006-A for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T23:15:05Z",
+   "pn": [
+    "AE5Z-16006-A"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Fusion",
+     2012,
+     2012
+    ],
+    [
+     "Lincoln",
+     "MKZ",
+     2010,
+     2012
+    ],
+    [
+     "Mercury",
+     "Milan",
+     2010,
+     2010
+    ]
+   ],
+   "cars": 1003,
+   "cat": "bumper-front",
+   "id": "oem:ford:bumper-front:C:f078f08633",
+   "kind": "body",
+   "note": "Ford catalog lists #AE5Z-17757-A for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T23:16:17Z",
+   "pn": [
+    "AE5Z-17757-A"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Fusion",
+     2012,
+     2012
+    ],
+    [
+     "Lincoln",
+     "MKZ",
+     2010,
+     2012
+    ],
+    [
+     "Mercury",
+     "Milan",
+     2010,
+     2010
+    ]
+   ],
+   "cars": 1003,
+   "cat": "bumper-front",
+   "id": "oem:ford:bumper-front:C:f5ddb56a94",
+   "kind": "body",
+   "note": "Ford catalog lists #AE5Z-17757-ACP for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T23:16:25Z",
+   "pn": [
+    "AE5Z-17757-ACP"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Fusion",
+     2012,
+     2012
+    ],
+    [
+     "Lincoln",
+     "MKZ",
+     2010,
+     2012
+    ],
+    [
+     "Mercury",
+     "Milan",
+     2010,
+     2010
+    ]
+   ],
+   "cars": 1003,
+   "cat": "bumper-rear",
+   "id": "oem:ford:bumper-rear:C:280f9df4b7",
+   "kind": "body",
+   "note": "Ford catalog lists #AE5Z-17906-A for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T23:16:41Z",
+   "pn": [
+    "AE5Z-17906-A"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Fusion",
+     2012,
+     2012
+    ],
+    [
+     "Lincoln",
+     "MKZ",
+     2010,
+     2012
+    ],
+    [
+     "Mercury",
+     "Milan",
+     2010,
+     2010
+    ]
+   ],
+   "cars": 1003,
+   "cat": "bumper-rear",
+   "id": "oem:ford:bumper-rear:C:2ab606ebcb",
+   "kind": "body",
+   "note": "Ford catalog lists #AE5Z-17906-ACP for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T23:16:49Z",
+   "pn": [
+    "AE5Z-17906-ACP"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Fusion",
+     2012,
+     2012
+    ],
+    [
      "Lincoln",
      "MKZ",
      2011,
@@ -95418,6 +96047,60 @@
     "BE5Z-10849-BC"
    ],
    "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Edge",
+     2013,
+     2013
+    ],
+    [
+     "Lincoln",
+     "MKX",
+     2011,
+     2011
+    ]
+   ],
+   "cars": 393,
+   "cat": "bumper-rear",
+   "id": "oem:ford:bumper-rear:C:f557171499",
+   "kind": "body",
+   "note": "Ford catalog lists #BT4Z-17906-A for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T23:29:53Z",
+   "pn": [
+    "BT4Z-17906-A"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Edge",
+     2013,
+     2013
+    ],
+    [
+     "Lincoln",
+     "MKX",
+     2011,
+     2011
+    ]
+   ],
+   "cars": 393,
+   "cat": "bumper-rear",
+   "id": "oem:ford:bumper-rear:C:ea96245317",
+   "kind": "body",
+   "note": "Ford catalog lists #BT4Z-17906-ACP for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T23:30:01Z",
+   "pn": [
+    "BT4Z-17906-ACP"
+   ],
+   "reason": "conditional",
    "tier": "likely"
   },
   {
@@ -95472,6 +96155,39 @@
     "CV6Z-5423395-B"
    ],
    "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Fusion",
+     2014,
+     2014
+    ],
+    [
+     "Ford",
+     "Fusion",
+     2017,
+     2017
+    ],
+    [
+     "Lincoln",
+     "MKZ",
+     2014,
+     2014
+    ]
+   ],
+   "cars": 755,
+   "cat": "bumper-rear",
+   "id": "oem:ford:bumper-rear:C:dc56b30291",
+   "kind": "body",
+   "note": "Ford catalog lists #DG9Z-17906-A for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T23:39:02Z",
+   "pn": [
+    "DG9Z-17906-A"
+   ],
+   "reason": "trim",
    "tier": "likely"
   },
   {
@@ -95723,6 +96439,168 @@
      1999
     ],
     [
+     "Mercury",
+     "Mountaineer",
+     2000,
+     2000
+    ]
+   ],
+   "cars": 209,
+   "cat": "tail-lights",
+   "id": "oem:ford:tail-lights:R:cf933b8977",
+   "kind": "body",
+   "note": "Ford catalog lists #F87Z-13404-AB for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T04:10:05Z",
+   "pn": [
+    "F87Z-13404-AB"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Explorer",
+     1999,
+     1999
+    ],
+    [
+     "Mercury",
+     "Mountaineer",
+     2000,
+     2000
+    ]
+   ],
+   "cars": 209,
+   "cat": "tail-lights",
+   "id": "oem:ford:tail-lights:R:88919bda5c",
+   "kind": "body",
+   "note": "Ford catalog lists #F87Z-13404-AC for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T04:09:57Z",
+   "pn": [
+    "F87Z-13404-AC"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Explorer",
+     1999,
+     1999
+    ],
+    [
+     "Mercury",
+     "Mountaineer",
+     2000,
+     2000
+    ]
+   ],
+   "cars": 209,
+   "cat": "tail-lights",
+   "id": "oem:ford:tail-lights:R:d9a2ca1e61",
+   "kind": "body",
+   "note": "Ford catalog lists #F87Z-13404-ACCP for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T04:10:13Z",
+   "pn": [
+    "F87Z-13404-ACCP"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Explorer",
+     1999,
+     1999
+    ],
+    [
+     "Mercury",
+     "Mountaineer",
+     2000,
+     2000
+    ]
+   ],
+   "cars": 209,
+   "cat": "tail-lights",
+   "id": "oem:ford:tail-lights:L:c23d1bd8f3",
+   "kind": "body",
+   "note": "Ford catalog lists #F87Z-13405-AB for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T04:09:49Z",
+   "pn": [
+    "F87Z-13405-AB"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Explorer",
+     1999,
+     1999
+    ],
+    [
+     "Mercury",
+     "Mountaineer",
+     2000,
+     2000
+    ]
+   ],
+   "cars": 209,
+   "cat": "tail-lights",
+   "id": "oem:ford:tail-lights:L:90df8727a2",
+   "kind": "body",
+   "note": "Ford catalog lists #F87Z-13405-AC for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T04:09:41Z",
+   "pn": [
+    "F87Z-13405-AC"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Explorer",
+     1999,
+     1999
+    ],
+    [
+     "Mercury",
+     "Mountaineer",
+     2000,
+     2000
+    ]
+   ],
+   "cars": 209,
+   "cat": "tail-lights",
+   "id": "oem:ford:tail-lights:L:8c914fba71",
+   "kind": "body",
+   "note": "Ford catalog lists #F87Z-13405-ACCP for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T04:10:21Z",
+   "pn": [
+    "F87Z-13405-ACCP"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Explorer",
+     1999,
+     1999
+    ],
+    [
      "Ford",
      "Explorer Sport",
      2001,
@@ -95916,6 +96794,60 @@
     ]
    ],
    "cars": 832,
+   "cat": "bumper-front",
+   "id": "oem:ford:bumper-front:C:b81bc749ee",
+   "kind": "body",
+   "note": "Ford catalog lists #XL3Z-17757-AA for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T22:35:03Z",
+   "pn": [
+    "XL3Z-17757-AA"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Expedition",
+     2000,
+     2000
+    ],
+    [
+     "Ford",
+     "F-150",
+     2001,
+     2001
+    ]
+   ],
+   "cars": 832,
+   "cat": "bumper-front",
+   "id": "oem:ford:bumper-front:C:8c6ab82e43",
+   "kind": "body",
+   "note": "Ford catalog lists #XL3Z-17757-AACP for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T22:35:11Z",
+   "pn": [
+    "XL3Z-17757-AACP"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Expedition",
+     2000,
+     2000
+    ],
+    [
+     "Ford",
+     "F-150",
+     2001,
+     2001
+    ]
+   ],
+   "cars": 832,
    "cat": "gauge-cluster",
    "id": "oem:ford:gauge-cluster:C:b569ca1107",
    "kind": "body",
@@ -95956,7 +96888,7 @@
   }
  ],
  "ns": "ford",
- "policy_sha256": "b555fd09c64ff21a2faa0632b8359bdc6ec68743f12f5726568e7615ff52ed01",
+ "policy_sha256": "3842a15ed5308947ee820a6d9fe7355f31196736f6c0faac65e93fec6a485b8f",
  "raw": {
   "commit": "c36da2eb98835c02f81c05e8c36b6a926634a332",
   "ref": "c36da2eb98835c02f81c05e8c36b6a926634a332",

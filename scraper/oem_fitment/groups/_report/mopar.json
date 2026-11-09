@@ -245765,66 +245765,6 @@
   },
   {
    "cat": "fender",
-   "detail": "Chrysler Town & Country 1998-1998;Dodge Caravan 1999-1999;Dodge Grand Caravan 2000-2000",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L3557"
-   ],
-   "pn": "4882290AA",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "fender",
-   "detail": "Chrysler Town & Country 1998-1998;Dodge Caravan 1999-1999;Dodge Grand Caravan 2000-2000",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L3558"
-   ],
-   "pn": "4882291AA",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "fender",
-   "detail": "Chrysler Town & Country 2001-2001;Chrysler Town & Country 2005-2005;Chrysler Voyager 2003-2003;Dodge Caravan 2005-2005;Dodge Grand Caravan 2005-2005;Dodge Grand Caravan 2007-2007",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L3531"
-   ],
-   "pn": "5018442AB",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "fender",
-   "detail": "Chrysler Town & Country 2001-2001;Chrysler Town & Country 2005-2005;Chrysler Voyager 2003-2003;Dodge Caravan 2005-2005;Dodge Grand Caravan 2005-2005;Dodge Grand Caravan 2007-2007",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L3532"
-   ],
-   "pn": "5018443AB",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "fender",
-   "detail": "Dodge Dakota 2000-2000;Dodge Durango 2003-2003",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L3513"
-   ],
-   "pn": "55255031AF",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "fender",
-   "detail": "Dodge Dakota 2000-2000;Dodge Durango 2003-2003",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L3514"
-   ],
-   "pn": "55255030AF",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "fender",
    "detail": "bumper-front",
    "evidence": [],
    "pn": "mopar:4854674AA",
@@ -246914,16 +246854,6 @@
   },
   {
    "cat": "grille",
-   "detail": "Dodge Dakota 2000-2000;Dodge Durango 2003-2003",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L3520"
-   ],
-   "pn": "55056092",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "grille",
    "detail": "bumper-front",
    "evidence": [],
    "pn": "mopar:1AG01TZZAB",
@@ -247620,26 +247550,6 @@
   },
   {
    "cat": "headlights",
-   "detail": "Chrysler Concorde 2002-2002;Chrysler LHS 2000-2000",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L2697"
-   ],
-   "pn": "4780014AE",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
-   "detail": "Chrysler Concorde 2002-2002;Chrysler LHS 2000-2000",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L2698"
-   ],
-   "pn": "4780015AE",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
    "detail": "Chrysler Town & Country 2001-2001;Chrysler Town & Country 2005-2005;Chrysler Voyager 2003-2003",
    "evidence": [
     "www.moparpartsgiant.com:records:L945"
@@ -247700,86 +247610,6 @@
   },
   {
    "cat": "headlights",
-   "detail": "Dodge Dakota 2000-2000;Dodge Durango 2003-2003",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L1570"
-   ],
-   "pn": "55055110AI",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
-   "detail": "Dodge Dakota 2000-2000;Dodge Durango 2003-2003",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L1571"
-   ],
-   "pn": "55055111AI",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
-   "detail": "Ram 1500 2012-2012;Ram 2500 2011-2011",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L2089"
-   ],
-   "pn": "68001484AI",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
-   "detail": "Ram 1500 2012-2012;Ram 2500 2011-2011",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L2090"
-   ],
-   "pn": "55277409AG",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
-   "detail": "Ram 1500 2012-2012;Ram 2500 2011-2011",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L2091"
-   ],
-   "pn": "68001485AI",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
-   "detail": "Ram 1500 2012-2012;Ram 2500 2011-2011",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L2092"
-   ],
-   "pn": "55277410AG",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
-   "detail": "Ram 1500 2012-2012;Ram 2500 2011-2011",
-   "evidence": [
-    "www.moparpartsgiant.com:records:L1533"
-   ],
-   "pn": "68001484AE",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
-   "detail": "Ram 1500 2012-2012;Ram 2500 2011-2011",
-   "evidence": [
-    "www.moparpartsgiant.com:records:L1534"
-   ],
-   "pn": "68001485AE",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
    "detail": "Ram 1500 2012-2012;Ram 2500 2011-2011",
    "evidence": [
     "www.moparpartsgiant.com:records:L1536"
@@ -247795,26 +247625,6 @@
     "www.moparpartsgiant.com:records:L1537"
    ],
    "pn": "2AME77410A",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
-   "detail": "Ram 1500 2012-2012;Ram 2500 2011-2011",
-   "evidence": [
-    "www.moparpartsgiant.com:records:L1538"
-   ],
-   "pn": "55277409AE",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
-   "detail": "Ram 1500 2012-2012;Ram 2500 2011-2011",
-   "evidence": [
-    "www.moparpartsgiant.com:records:L1539"
-   ],
-   "pn": "55277410AE",
    "reason": "held_exterior_cross_model",
    "t": null
   },
@@ -248265,41 +248075,11 @@
   },
   {
    "cat": "hood",
-   "detail": "Chrysler Town & Country 1998-1998;Dodge Caravan 1999-1999;Dodge Grand Caravan 2000-2000",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L3555"
-   ],
-   "pn": "5139668AA",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "hood",
-   "detail": "Chrysler Town & Country 2005-2005;Dodge Caravan 2005-2005;Dodge Grand Caravan 2005-2005",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L3530"
-   ],
-   "pn": "4860455AC",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "hood",
    "detail": "Chrysler Town & Country 2014-2014;Ram C/V 2013-2013",
    "evidence": [
     "www.jeeppartsdeal.com:records:L3352"
    ],
    "pn": "4589880AG",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "hood",
-   "detail": "Dodge Dakota 2000-2000;Dodge Durango 2003-2003",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L3512"
-   ],
-   "pn": "55274716AD",
    "reason": "held_exterior_cross_model",
    "t": null
   },
@@ -252925,136 +252705,6 @@
   },
   {
    "cat": "tail-lights",
-   "detail": "Chrysler Concorde 2002-2002;Chrysler LHS 2000-2000",
-   "evidence": [
-    "www.moparpartsgiant.com:records:L2518"
-   ],
-   "pn": "4780058AG",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "tail-lights",
-   "detail": "Chrysler Concorde 2002-2002;Chrysler LHS 2000-2000",
-   "evidence": [
-    "www.moparpartsgiant.com:records:L2519"
-   ],
-   "pn": "4780059AG",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "tail-lights",
-   "detail": "Chrysler Town & Country 1998-1999;Dodge Caravan 1999-1999;Dodge Durango 2003-2003;Dodge Grand Caravan 2000-2000",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L1667"
-   ],
-   "pn": "2AME76244A",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "tail-lights",
-   "detail": "Chrysler Town & Country 1998-1999;Dodge Caravan 1999-1999;Dodge Durango 2003-2003;Dodge Grand Caravan 2000-2000",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L1668"
-   ],
-   "pn": "2AME76245A",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "tail-lights",
-   "detail": "Chrysler Town & Country 1999-1999;Dodge Caravan 1999-1999;Dodge Durango 2003-2003;Dodge Grand Caravan 2000-2000",
-   "evidence": [
-    "www.moparpartsgiant.com:records:L976"
-   ],
-   "pn": "4576244",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "tail-lights",
-   "detail": "Chrysler Town & Country 2005-2005;Dodge Caravan 2005-2005;Dodge Grand Caravan 2004-2005;Dodge Grand Caravan 2007-2007",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L1625"
-   ],
-   "pn": "68241334AA",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "tail-lights",
-   "detail": "Chrysler Town & Country 2005-2005;Dodge Caravan 2005-2005;Dodge Grand Caravan 2004-2005;Dodge Grand Caravan 2007-2007",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L1626"
-   ],
-   "pn": "68241335AA",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "tail-lights",
-   "detail": "Chrysler Town & Country 2005-2005;Dodge Caravan 2005-2005;Dodge Grand Caravan 2004-2006",
-   "evidence": [
-    "www.moparpartsgiant.com:records:L949"
-   ],
-   "pn": "4857955AA",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "tail-lights",
-   "detail": "Chrysler Town & Country 2005-2005;Dodge Caravan 2005-2005;Dodge Grand Caravan 2004-2006",
-   "evidence": [
-    "www.moparpartsgiant.com:records:L950"
-   ],
-   "pn": "4857954AA",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "tail-lights",
-   "detail": "Ram 1500 2012-2012;Ram 2500 2011-2011",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L2093"
-   ],
-   "pn": "55277414AF",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "tail-lights",
-   "detail": "Ram 1500 2012-2012;Ram 2500 2011-2011",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L2094"
-   ],
-   "pn": "55277415AF",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "tail-lights",
-   "detail": "Ram 1500 2012-2012;Ram 2500 2011-2011",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L2095"
-   ],
-   "pn": "55277415AB",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "tail-lights",
-   "detail": "Ram 1500 2012-2012;Ram 2500 2011-2011",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L2096"
-   ],
-   "pn": "55277414AB",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "tail-lights",
    "detail": "headlights",
    "evidence": [],
    "pn": "mopar:4857700AB",
@@ -253912,16 +253562,6 @@
    ],
    "pn": "5103597AA",
    "reason": "disputed_class",
-   "t": null
-  },
-  {
-   "cat": "tailgate",
-   "detail": "Ram 1500 2012-2012;Ram 2500 2011-2011",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L3848"
-   ],
-   "pn": "68105727AR",
-   "reason": "held_exterior_cross_model",
    "t": null
   },
   {
@@ -256447,10 +256087,10 @@
    "window-regulator": 2920,
    "window-switch": 60
   },
-  "likely_groups": 245,
+  "likely_groups": 281,
   "list_rows": 78527,
   "records": 7856,
-  "released_by_allowlist": 0,
+  "released_by_allowlist": 36,
   "verified_groups": 0,
   "vg_groups": 0,
   "why_no_verified": "no (site, category) of this namespace has passed the audit gate (audits.json has no record; spec 11.4, E5/V7); engine cells not audited as reliable on www.moparpartsgiant.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE; www.moparpartsgiant.com: only 3% of its 7351 fitment rows can be coverage: its option column holds trims (option_column_is_trims), which count only after a namespace audit (spec 5.2); blocked by the crawl breaker: www.moparpartsgiant.com (their cells never close, C9)",

@@ -34129,46 +34129,6 @@
    "t": null
   },
   {
-   "cat": "bumper-front",
-   "detail": "Volkswagen Golf 1996-1996;Volkswagen Jetta 1997-1997",
-   "evidence": [
-    "www.vwpartsgiant.com:records:L1130"
-   ],
-   "pn": "1HM-807-217-D-GRU",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "fender",
-   "detail": "Volkswagen Golf 1996-1996;Volkswagen Jetta 1997-1997",
-   "evidence": [
-    "www.vwpartsgiant.com:records:L1127"
-   ],
-   "pn": "1HM-821-021-D",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "fender",
-   "detail": "Volkswagen Golf 1996-1996;Volkswagen Jetta 1997-1997",
-   "evidence": [
-    "www.vwpartsgiant.com:records:L1128"
-   ],
-   "pn": "1HM-821-021-E",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "fender",
-   "detail": "Volkswagen Golf 1996-1996;Volkswagen Jetta 1997-1997",
-   "evidence": [
-    "www.vwpartsgiant.com:records:L1129"
-   ],
-   "pn": "1HM-821-022-B",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
    "cat": "fuel-pump-module",
    "detail": "records disagree on fitment",
    "evidence": [
@@ -34241,16 +34201,6 @@
    "cat": "headlights",
    "detail": "Volkswagen Cabrio 2001-2001;Volkswagen Golf 2003-2003",
    "evidence": [
-    "www.vwpartsgiant.com:records:L516"
-   ],
-   "pn": "1J0-941-017-B",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
-   "detail": "Volkswagen Cabrio 2001-2001;Volkswagen Golf 2003-2003",
-   "evidence": [
     "www.vwpartsgiant.com:records:L517"
    ],
    "pn": "1J0-941-017-C",
@@ -34261,59 +34211,9 @@
    "cat": "headlights",
    "detail": "Volkswagen Cabrio 2001-2001;Volkswagen Golf 2003-2003",
    "evidence": [
-    "www.vwpartsgiant.com:records:L519"
-   ],
-   "pn": "1J0-941-018-B",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
-   "detail": "Volkswagen Cabrio 2001-2001;Volkswagen Golf 2003-2003",
-   "evidence": [
     "www.vwpartsgiant.com:records:L520"
    ],
    "pn": "1J0-941-018-C",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
-   "detail": "Volkswagen GTI 2007-2007;Volkswagen GTI 2009-2009;Volkswagen Jetta 2006-2006",
-   "evidence": [
-    "www.vwpartsgiant.com:records:L11"
-   ],
-   "pn": "1K6-941-005-S",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
-   "detail": "Volkswagen GTI 2007-2007;Volkswagen GTI 2009-2009;Volkswagen Jetta 2006-2006",
-   "evidence": [
-    "www.vwpartsgiant.com:records:L12"
-   ],
-   "pn": "1K6-941-006-S",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
-   "detail": "Volkswagen GTI 2007-2007;Volkswagen GTI 2009-2009;Volkswagen Jetta 2006-2006",
-   "evidence": [
-    "www.vwpartsgiant.com:records:L13"
-   ],
-   "pn": "1K6-941-039-B",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
-   "detail": "Volkswagen GTI 2007-2007;Volkswagen GTI 2009-2009;Volkswagen Jetta 2006-2006",
-   "evidence": [
-    "www.vwpartsgiant.com:records:L14"
-   ],
-   "pn": "1K6-941-040-B",
    "reason": "held_exterior_cross_model",
    "t": null
   },
@@ -34898,10 +34798,10 @@
    "trunk-lid": 338,
    "window-regulator": 3401
   },
-  "likely_groups": 6,
+  "likely_groups": 16,
   "list_rows": 20061,
   "records": 2376,
-  "released_by_allowlist": 0,
+  "released_by_allowlist": 10,
   "verified_groups": 0,
   "vg_groups": 0,
   "why_no_verified": "no (site, category) of this namespace has passed the audit gate (audits.json has no record; spec 11.4, E5/V7); engine cells not audited as reliable on www.audipartsgiant.com, www.vwpartsgiant.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE",

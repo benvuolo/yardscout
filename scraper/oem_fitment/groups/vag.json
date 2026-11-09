@@ -59867,6 +59867,90 @@
    ],
    "reman": false
   },
+  "vag:1HM807217DGRU": {
+   "cat": "bumper-front",
+   "comp": null,
+   "evidence": [
+    "www.vwpartsgiant.com:records:L1130"
+   ],
+   "names": [
+    "Bumper Cover"
+   ],
+   "pns": [
+    "1HM-807-217-D-GRU"
+   ],
+   "reman": false
+  },
+  "vag:1HM821021D": {
+   "cat": "fender",
+   "comp": null,
+   "evidence": [
+    "www.vwpartsgiant.com:records:L1127"
+   ],
+   "names": [
+    "Fender"
+   ],
+   "pns": [
+    "1HM-821-021-D"
+   ],
+   "reman": false
+  },
+  "vag:1HM821021E": {
+   "cat": "fender",
+   "comp": null,
+   "evidence": [
+    "www.vwpartsgiant.com:records:L1128"
+   ],
+   "names": [
+    "Fender"
+   ],
+   "pns": [
+    "1HM-821-021-E"
+   ],
+   "reman": false
+  },
+  "vag:1HM821022B": {
+   "cat": "fender",
+   "comp": null,
+   "evidence": [
+    "www.vwpartsgiant.com:records:L1129"
+   ],
+   "names": [
+    "Fender"
+   ],
+   "pns": [
+    "1HM-821-022-B"
+   ],
+   "reman": false
+  },
+  "vag:1J0941017B": {
+   "cat": "headlights",
+   "comp": null,
+   "evidence": [
+    "www.vwpartsgiant.com:records:L516"
+   ],
+   "names": [
+    "Headlamp Assembly"
+   ],
+   "pns": [
+    "1J0-941-017-B"
+   ],
+   "reman": false
+  },
+  "vag:1J0941018B": {
+   "cat": "headlights",
+   "comp": null,
+   "evidence": [
+    "www.vwpartsgiant.com:records:L519"
+   ],
+   "names": [
+    "Headlamp Assembly"
+   ],
+   "pns": [
+    "1J0-941-018-B"
+   ],
+   "reman": false
+  },
   "vag:1J5920906J": {
    "cat": "gauge-cluster",
    "comp": null,
@@ -59892,6 +59976,62 @@
    ],
    "pns": [
     "1J5-920-906-N"
+   ],
+   "reman": false
+  },
+  "vag:1K6941005S": {
+   "cat": "headlights",
+   "comp": null,
+   "evidence": [
+    "www.vwpartsgiant.com:records:L11"
+   ],
+   "names": [
+    "Headlamp Assembly"
+   ],
+   "pns": [
+    "1K6-941-005-S"
+   ],
+   "reman": false
+  },
+  "vag:1K6941006S": {
+   "cat": "headlights",
+   "comp": null,
+   "evidence": [
+    "www.vwpartsgiant.com:records:L12"
+   ],
+   "names": [
+    "Headlamp Assembly"
+   ],
+   "pns": [
+    "1K6-941-006-S"
+   ],
+   "reman": false
+  },
+  "vag:1K6941039B": {
+   "cat": "headlights",
+   "comp": null,
+   "evidence": [
+    "www.vwpartsgiant.com:records:L13"
+   ],
+   "names": [
+    "Headlamp Assembly"
+   ],
+   "pns": [
+    "1K6-941-039-B"
+   ],
+   "reman": false
+  },
+  "vag:1K6941040B": {
+   "cat": "headlights",
+   "comp": null,
+   "evidence": [
+    "www.vwpartsgiant.com:records:L14"
+   ],
+   "names": [
+    "Headlamp Assembly"
+   ],
+   "pns": [
+    "1K6-941-040-B"
    ],
    "reman": false
   }
@@ -63766,6 +63906,168 @@
     [
      "Volkswagen",
      "Golf",
+     1996,
+     1996
+    ],
+    [
+     "Volkswagen",
+     "Jetta",
+     1997,
+     1997
+    ]
+   ],
+   "cars": 9,
+   "cat": "bumper-front",
+   "id": "oem:vag:bumper-front:C:f54ee6d420",
+   "kind": "body",
+   "note": "VW/Audi catalog lists #1HM-807-217-D-GRU for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T00:36:32Z",
+   "pn": [
+    "1HM-807-217-D-GRU"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Volkswagen",
+     "Golf",
+     1996,
+     1996
+    ],
+    [
+     "Volkswagen",
+     "Jetta",
+     1997,
+     1997
+    ]
+   ],
+   "cars": 9,
+   "cat": "fender",
+   "id": "oem:vag:fender:L:b3e76255fe",
+   "kind": "body",
+   "note": "VW/Audi catalog lists #1HM-821-021-D for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T00:36:00Z",
+   "pn": [
+    "1HM-821-021-D"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Volkswagen",
+     "Golf",
+     1996,
+     1996
+    ],
+    [
+     "Volkswagen",
+     "Jetta",
+     1997,
+     1997
+    ]
+   ],
+   "cars": 9,
+   "cat": "fender",
+   "id": "oem:vag:fender:L:889bcbf180",
+   "kind": "body",
+   "note": "VW/Audi catalog lists #1HM-821-021-E for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T00:36:08Z",
+   "pn": [
+    "1HM-821-021-E"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Volkswagen",
+     "Golf",
+     1996,
+     1996
+    ],
+    [
+     "Volkswagen",
+     "Jetta",
+     1997,
+     1997
+    ]
+   ],
+   "cars": 9,
+   "cat": "fender",
+   "id": "oem:vag:fender:R:1cefe0fde1",
+   "kind": "body",
+   "note": "VW/Audi catalog lists #1HM-821-022-B for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T00:36:17Z",
+   "pn": [
+    "1HM-821-022-B"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Volkswagen",
+     "Cabrio",
+     2001,
+     2001
+    ],
+    [
+     "Volkswagen",
+     "Golf",
+     2003,
+     2003
+    ]
+   ],
+   "cars": 38,
+   "cat": "headlights",
+   "id": "oem:vag:headlights:L:19353e8533",
+   "kind": "body",
+   "note": "VW/Audi catalog lists #1J0-941-017-B for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T22:14:28Z",
+   "pn": [
+    "1J0-941-017-B"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Volkswagen",
+     "Cabrio",
+     2001,
+     2001
+    ],
+    [
+     "Volkswagen",
+     "Golf",
+     2003,
+     2003
+    ]
+   ],
+   "cars": 38,
+   "cat": "headlights",
+   "id": "oem:vag:headlights:R:977c133a8e",
+   "kind": "body",
+   "note": "VW/Audi catalog lists #1J0-941-018-B for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T22:14:52Z",
+   "pn": [
+    "1J0-941-018-B"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Volkswagen",
+     "Golf",
      2003,
      2003
     ],
@@ -63814,10 +64116,142 @@
    ],
    "reason": "trim",
    "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Volkswagen",
+     "GTI",
+     2007,
+     2007
+    ],
+    [
+     "Volkswagen",
+     "GTI",
+     2009,
+     2009
+    ],
+    [
+     "Volkswagen",
+     "Jetta",
+     2006,
+     2006
+    ]
+   ],
+   "cars": 241,
+   "cat": "headlights",
+   "id": "oem:vag:headlights:L:adde97394c",
+   "kind": "body",
+   "note": "VW/Audi catalog lists #1K6-941-005-S for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T01:35:22Z",
+   "pn": [
+    "1K6-941-005-S"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Volkswagen",
+     "GTI",
+     2007,
+     2007
+    ],
+    [
+     "Volkswagen",
+     "GTI",
+     2009,
+     2009
+    ],
+    [
+     "Volkswagen",
+     "Jetta",
+     2006,
+     2006
+    ]
+   ],
+   "cars": 241,
+   "cat": "headlights",
+   "id": "oem:vag:headlights:R:bcb41367ed",
+   "kind": "body",
+   "note": "VW/Audi catalog lists #1K6-941-006-S for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T01:35:26Z",
+   "pn": [
+    "1K6-941-006-S"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Volkswagen",
+     "GTI",
+     2007,
+     2007
+    ],
+    [
+     "Volkswagen",
+     "GTI",
+     2009,
+     2009
+    ],
+    [
+     "Volkswagen",
+     "Jetta",
+     2006,
+     2006
+    ]
+   ],
+   "cars": 241,
+   "cat": "headlights",
+   "id": "oem:vag:headlights:L:75af5dff99",
+   "kind": "body",
+   "note": "VW/Audi catalog lists #1K6-941-039-B for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T01:35:30Z",
+   "pn": [
+    "1K6-941-039-B"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Volkswagen",
+     "GTI",
+     2007,
+     2007
+    ],
+    [
+     "Volkswagen",
+     "GTI",
+     2009,
+     2009
+    ],
+    [
+     "Volkswagen",
+     "Jetta",
+     2006,
+     2006
+    ]
+   ],
+   "cars": 241,
+   "cat": "headlights",
+   "id": "oem:vag:headlights:R:eb77bee21a",
+   "kind": "body",
+   "note": "VW/Audi catalog lists #1K6-941-040-B for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T01:35:34Z",
+   "pn": [
+    "1K6-941-040-B"
+   ],
+   "reason": "trim",
+   "tier": "likely"
   }
  ],
  "ns": "vag",
- "policy_sha256": "b555fd09c64ff21a2faa0632b8359bdc6ec68743f12f5726568e7615ff52ed01",
+ "policy_sha256": "3842a15ed5308947ee820a6d9fe7355f31196736f6c0faac65e93fec6a485b8f",
  "raw": {
   "commit": "c36da2eb98835c02f81c05e8c36b6a926634a332",
   "ref": "c36da2eb98835c02f81c05e8c36b6a926634a332",

@@ -85842,6 +85842,36 @@
    ],
    "reman": false
   },
+  "mopar:2AME76244A": {
+   "cat": "tail-lights",
+   "comp": null,
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L1667"
+   ],
+   "names": [
+    "Combination Lamp",
+    "Lamp - Tail Stop Turn"
+   ],
+   "pns": [
+    "2AME76244A"
+   ],
+   "reman": false
+  },
+  "mopar:2AME76245A": {
+   "cat": "tail-lights",
+   "comp": null,
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L1668"
+   ],
+   "names": [
+    "Combination Lamp",
+    "Lamp - Tail Stop Turn"
+   ],
+   "pns": [
+    "2AME76245A"
+   ],
+   "reman": false
+  },
   "mopar:2AME77347A": {
    "cat": "tail-lights",
    "comp": null,
@@ -86095,6 +86125,20 @@
    ],
    "pns": [
     "4574607AF"
+   ],
+   "reman": false
+  },
+  "mopar:4576244": {
+   "cat": "tail-lights",
+   "comp": null,
+   "evidence": [
+    "www.moparpartsgiant.com:records:L976"
+   ],
+   "names": [
+    "LAMP Tail Stop Turn"
+   ],
+   "pns": [
+    "4576244"
    ],
    "reman": false
   },
@@ -86394,6 +86438,64 @@
    ],
    "pns": [
     "4773925"
+   ],
+   "reman": false
+  },
+  "mopar:4780014AE": {
+   "cat": "headlights",
+   "comp": null,
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L2697"
+   ],
+   "names": [
+    "Headlamp",
+    "Headlamp Assembly"
+   ],
+   "pns": [
+    "4780014AE"
+   ],
+   "reman": false
+  },
+  "mopar:4780015AE": {
+   "cat": "headlights",
+   "comp": null,
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L2698"
+   ],
+   "names": [
+    "Headlamp",
+    "Headlamp Assembly"
+   ],
+   "pns": [
+    "4780015AE"
+   ],
+   "reman": false
+  },
+  "mopar:4780058AG": {
+   "cat": "tail-lights",
+   "comp": null,
+   "evidence": [
+    "www.moparpartsgiant.com:records:L2518"
+   ],
+   "names": [
+    "LAMP Tail Stop Turn"
+   ],
+   "pns": [
+    "4780058AG"
+   ],
+   "reman": false
+  },
+  "mopar:4780059AG": {
+   "cat": "tail-lights",
+   "comp": null,
+   "evidence": [
+    "www.moparpartsgiant.com:records:L2519"
+   ],
+   "names": [
+    "LAMP Tail Stop Turn"
+   ],
+   "pns": [
+    "4780059AG"
    ],
    "reman": false
   },
@@ -86709,6 +86811,78 @@
    ],
    "reman": false
   },
+  "mopar:4857954AA": {
+   "cat": "tail-lights",
+   "comp": null,
+   "evidence": [
+    "www.moparpartsgiant.com:records:L950"
+   ],
+   "names": [
+    "LAMP Tail Stop Turn"
+   ],
+   "pns": [
+    "4857954AA"
+   ],
+   "reman": false
+  },
+  "mopar:4857955AA": {
+   "cat": "tail-lights",
+   "comp": null,
+   "evidence": [
+    "www.moparpartsgiant.com:records:L949"
+   ],
+   "names": [
+    "LAMP Tail Stop Turn"
+   ],
+   "pns": [
+    "4857955AA"
+   ],
+   "reman": false
+  },
+  "mopar:4860455AC": {
+   "cat": "hood",
+   "comp": null,
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L3530"
+   ],
+   "names": [
+    "HOOD"
+   ],
+   "pns": [
+    "4860455AC"
+   ],
+   "reman": false
+  },
+  "mopar:4882290AA": {
+   "cat": "fender",
+   "comp": null,
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L3557"
+   ],
+   "names": [
+    "Fender",
+    "Fender-Front"
+   ],
+   "pns": [
+    "4882290AA"
+   ],
+   "reman": false
+  },
+  "mopar:4882291AA": {
+   "cat": "fender",
+   "comp": null,
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L3558"
+   ],
+   "names": [
+    "Fender",
+    "Fender-Front"
+   ],
+   "pns": [
+    "4882291AA"
+   ],
+   "reman": false
+  },
   "mopar:4894401AB": {
    "cat": "side-mirrors",
    "comp": null,
@@ -86968,6 +87142,36 @@
    ],
    "pns": [
     "5012545AA"
+   ],
+   "reman": false
+  },
+  "mopar:5018442AB": {
+   "cat": "fender",
+   "comp": null,
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L3531"
+   ],
+   "names": [
+    "Fender",
+    "Fender-Front"
+   ],
+   "pns": [
+    "5018442AB"
+   ],
+   "reman": false
+  },
+  "mopar:5018443AB": {
+   "cat": "fender",
+   "comp": null,
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L3532"
+   ],
+   "names": [
+    "Fender",
+    "Fender-Front"
+   ],
+   "pns": [
+    "5018443AB"
    ],
    "reman": false
   },
@@ -87388,6 +87592,65 @@
    ],
    "reman": false
   },
+  "mopar:5139668AA": {
+   "cat": "hood",
+   "comp": null,
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L3555"
+   ],
+   "names": [
+    "Hood"
+   ],
+   "pns": [
+    "5139668AA"
+   ],
+   "reman": false
+  },
+  "mopar:55055110AI": {
+   "cat": "headlights",
+   "comp": null,
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L1570"
+   ],
+   "names": [
+    "Headlamp Assembly",
+    "Lamp - Headlamp Parking And Turn"
+   ],
+   "pns": [
+    "55055110AI"
+   ],
+   "reman": false
+  },
+  "mopar:55055111AI": {
+   "cat": "headlights",
+   "comp": null,
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L1571"
+   ],
+   "names": [
+    "Headlamp Assembly",
+    "Lamp - Headlamp Parking And Turn"
+   ],
+   "pns": [
+    "55055111AI"
+   ],
+   "reman": false
+  },
+  "mopar:55056092": {
+   "cat": "grille",
+   "comp": null,
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L3520"
+   ],
+   "names": [
+    "Grille",
+    "Grille - Radiator"
+   ],
+   "pns": [
+    "55056092"
+   ],
+   "reman": false
+  },
   "mopar:55057280AF": {
    "cat": "climate-control",
    "comp": "assy",
@@ -87715,6 +87978,50 @@
    ],
    "reman": false
   },
+  "mopar:55255030AF": {
+   "cat": "fender",
+   "comp": null,
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L3514"
+   ],
+   "names": [
+    "Fender",
+    "Fender Assembly"
+   ],
+   "pns": [
+    "55255030AF"
+   ],
+   "reman": false
+  },
+  "mopar:55255031AF": {
+   "cat": "fender",
+   "comp": null,
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L3513"
+   ],
+   "names": [
+    "Fender",
+    "Fender Assembly"
+   ],
+   "pns": [
+    "55255031AF"
+   ],
+   "reman": false
+  },
+  "mopar:55274716AD": {
+   "cat": "hood",
+   "comp": null,
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L3512"
+   ],
+   "names": [
+    "Hood"
+   ],
+   "pns": [
+    "55274716AD"
+   ],
+   "reman": false
+  },
   "mopar:55275733AF": {
    "cat": "hood",
    "comp": null,
@@ -87829,6 +88136,122 @@
    ],
    "pns": [
     "55276209AD"
+   ],
+   "reman": false
+  },
+  "mopar:55277409AE": {
+   "cat": "headlights",
+   "comp": null,
+   "evidence": [
+    "www.moparpartsgiant.com:records:L1538"
+   ],
+   "names": [
+    "LAMP Headlamp Park And Turn"
+   ],
+   "pns": [
+    "55277409AE"
+   ],
+   "reman": false
+  },
+  "mopar:55277409AG": {
+   "cat": "headlights",
+   "comp": null,
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L2090"
+   ],
+   "names": [
+    "Headlamp - Headlamp Parking And Turn",
+    "Headlamp Assembly"
+   ],
+   "pns": [
+    "55277409AG"
+   ],
+   "reman": false
+  },
+  "mopar:55277410AE": {
+   "cat": "headlights",
+   "comp": null,
+   "evidence": [
+    "www.moparpartsgiant.com:records:L1539"
+   ],
+   "names": [
+    "LAMP Headlamp Park And Turn"
+   ],
+   "pns": [
+    "55277410AE"
+   ],
+   "reman": false
+  },
+  "mopar:55277410AG": {
+   "cat": "headlights",
+   "comp": null,
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L2092"
+   ],
+   "names": [
+    "Headlamp - Headlamp Parking And Turn",
+    "Headlamp Assembly"
+   ],
+   "pns": [
+    "55277410AG"
+   ],
+   "reman": false
+  },
+  "mopar:55277414AB": {
+   "cat": "tail-lights",
+   "comp": null,
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L2096"
+   ],
+   "names": [
+    "LAMP Tail Stop Backup"
+   ],
+   "pns": [
+    "55277414AB"
+   ],
+   "reman": false
+  },
+  "mopar:55277414AF": {
+   "cat": "tail-lights",
+   "comp": null,
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L2093"
+   ],
+   "names": [
+    "Lamp - Tail Stop Backup",
+    "Tail Lamp"
+   ],
+   "pns": [
+    "55277414AF"
+   ],
+   "reman": false
+  },
+  "mopar:55277415AB": {
+   "cat": "tail-lights",
+   "comp": null,
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L2095"
+   ],
+   "names": [
+    "LAMP Tail Stop Backup"
+   ],
+   "pns": [
+    "55277415AB"
+   ],
+   "reman": false
+  },
+  "mopar:55277415AF": {
+   "cat": "tail-lights",
+   "comp": null,
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L2094"
+   ],
+   "names": [
+    "Lamp - Tail Stop Backup",
+    "Tail Lamp"
+   ],
+   "pns": [
+    "55277415AF"
    ],
    "reman": false
   },
@@ -88054,6 +88477,64 @@
    ],
    "pns": [
     "5HC981W7AF"
+   ],
+   "reman": false
+  },
+  "mopar:68001484AE": {
+   "cat": "headlights",
+   "comp": null,
+   "evidence": [
+    "www.moparpartsgiant.com:records:L1533"
+   ],
+   "names": [
+    "LAMP Headlamp Park And Turn"
+   ],
+   "pns": [
+    "68001484AE"
+   ],
+   "reman": false
+  },
+  "mopar:68001484AI": {
+   "cat": "headlights",
+   "comp": null,
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L2089"
+   ],
+   "names": [
+    "Headlamp - Headlamp Parking And Turn",
+    "Headlamp Assembly"
+   ],
+   "pns": [
+    "68001484AI"
+   ],
+   "reman": false
+  },
+  "mopar:68001485AE": {
+   "cat": "headlights",
+   "comp": null,
+   "evidence": [
+    "www.moparpartsgiant.com:records:L1534"
+   ],
+   "names": [
+    "LAMP Headlamp Park And Turn"
+   ],
+   "pns": [
+    "68001485AE"
+   ],
+   "reman": false
+  },
+  "mopar:68001485AI": {
+   "cat": "headlights",
+   "comp": null,
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L2091"
+   ],
+   "names": [
+    "Headlamp - Headlamp Parking And Turn",
+    "Headlamp Assembly"
+   ],
+   "pns": [
+    "68001485AI"
    ],
    "reman": false
   },
@@ -88492,6 +88973,20 @@
    ],
    "reman": false
   },
+  "mopar:68105727AR": {
+   "cat": "tailgate",
+   "comp": null,
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L3848"
+   ],
+   "names": [
+    "Tailgate"
+   ],
+   "pns": [
+    "68105727AR"
+   ],
+   "reman": false
+  },
   "mopar:68143986AA": {
    "cat": "window-regulator",
    "comp": "reg?",
@@ -88549,6 +89044,36 @@
    ],
    "pns": [
     "68143989AA"
+   ],
+   "reman": false
+  },
+  "mopar:68241334AA": {
+   "cat": "tail-lights",
+   "comp": null,
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L1625"
+   ],
+   "names": [
+    "Combination Lamp",
+    "Lamp - Tail Stop Turn"
+   ],
+   "pns": [
+    "68241334AA"
+   ],
+   "reman": false
+  },
+  "mopar:68241335AA": {
+   "cat": "tail-lights",
+   "comp": null,
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L1626"
+   ],
+   "names": [
+    "Combination Lamp",
+    "Lamp - Tail Stop Turn"
+   ],
+   "pns": [
+    "68241335AA"
    ],
    "reman": false
   },
@@ -107540,6 +108065,84 @@
   {
    "apps": [
     [
+     "Chrysler",
+     "Town & Country",
+     1998,
+     1999
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     1999,
+     1999
+    ],
+    [
+     "Dodge",
+     "Durango",
+     2003,
+     2003
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2000,
+     2000
+    ]
+   ],
+   "cars": 281,
+   "cat": "tail-lights",
+   "id": "oem:mopar:tail-lights:R:f7baf09a39",
+   "kind": "body",
+   "note": "Mopar catalog lists #2AME76244A for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T04:44:39Z",
+   "pn": [
+    "2AME76244A"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     1998,
+     1999
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     1999,
+     1999
+    ],
+    [
+     "Dodge",
+     "Durango",
+     2003,
+     2003
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2000,
+     2000
+    ]
+   ],
+   "cars": 281,
+   "cat": "tail-lights",
+   "id": "oem:mopar:tail-lights:L:e95ade9e0a",
+   "kind": "body",
+   "note": "Mopar catalog lists #2AME76245A for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T04:44:47Z",
+   "pn": [
+    "2AME76245A"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
      "Dodge",
      "Ram 1500",
      2002,
@@ -108057,6 +108660,45 @@
     "4574607AF"
    ],
    "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     1999,
+     1999
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     1999,
+     1999
+    ],
+    [
+     "Dodge",
+     "Durango",
+     2003,
+     2003
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2000,
+     2000
+    ]
+   ],
+   "cars": 263,
+   "cat": "tail-lights",
+   "id": "oem:mopar:tail-lights:R:a7ea4bb9f2",
+   "kind": "body",
+   "note": "Mopar catalog lists #4576244 for both — older catalog-only number; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T03:22:05Z",
+   "pn": [
+    "4576244"
+   ],
+   "reason": "older",
    "tier": "likely"
   },
   {
@@ -108675,6 +109317,114 @@
    "apps": [
     [
      "Chrysler",
+     "Concorde",
+     2002,
+     2002
+    ],
+    [
+     "Chrysler",
+     "LHS",
+     2000,
+     2000
+    ]
+   ],
+   "cars": 33,
+   "cat": "headlights",
+   "id": "oem:mopar:headlights:R:904e071e5b",
+   "kind": "body",
+   "note": "Mopar catalog lists #4780014AE for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T08:17:46Z",
+   "pn": [
+    "4780014AE"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Concorde",
+     2002,
+     2002
+    ],
+    [
+     "Chrysler",
+     "LHS",
+     2000,
+     2000
+    ]
+   ],
+   "cars": 33,
+   "cat": "headlights",
+   "id": "oem:mopar:headlights:L:dc36f2cd88",
+   "kind": "body",
+   "note": "Mopar catalog lists #4780015AE for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T08:17:54Z",
+   "pn": [
+    "4780015AE"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Concorde",
+     2002,
+     2002
+    ],
+    [
+     "Chrysler",
+     "LHS",
+     2000,
+     2000
+    ]
+   ],
+   "cars": 33,
+   "cat": "tail-lights",
+   "id": "oem:mopar:tail-lights:R:07aea892e2",
+   "kind": "body",
+   "note": "Mopar catalog lists #4780058AG for both — older catalog-only number; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T08:48:57Z",
+   "pn": [
+    "4780058AG"
+   ],
+   "reason": "older",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Concorde",
+     2002,
+     2002
+    ],
+    [
+     "Chrysler",
+     "LHS",
+     2000,
+     2000
+    ]
+   ],
+   "cars": 33,
+   "cat": "tail-lights",
+   "id": "oem:mopar:tail-lights:L:0b28832f10",
+   "kind": "body",
+   "note": "Mopar catalog lists #4780059AG for both — older catalog-only number; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T08:49:05Z",
+   "pn": [
+    "4780059AG"
+   ],
+   "reason": "older",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
      "300M",
      2000,
      2000
@@ -109285,6 +110035,171 @@
    "oldest_retrieved": "2026-11-06T03:40:45Z",
    "pn": [
     "4806871AL"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2004,
+     2006
+    ]
+   ],
+   "cars": 854,
+   "cat": "tail-lights",
+   "id": "oem:mopar:tail-lights:R:68d1b3d471",
+   "kind": "body",
+   "note": "Mopar catalog lists #4857954AA for both — older catalog-only number; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T03:16:53Z",
+   "pn": [
+    "4857954AA"
+   ],
+   "reason": "older",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2004,
+     2006
+    ]
+   ],
+   "cars": 854,
+   "cat": "tail-lights",
+   "id": "oem:mopar:tail-lights:L:af4a481a85",
+   "kind": "body",
+   "note": "Mopar catalog lists #4857955AA for both — older catalog-only number; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T03:16:45Z",
+   "pn": [
+    "4857955AA"
+   ],
+   "reason": "older",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005
+    ]
+   ],
+   "cars": 613,
+   "cat": "hood",
+   "id": "oem:mopar:hood:C:62c7438697",
+   "kind": "body",
+   "note": "Mopar catalog lists #4860455AC for both — older catalog-only number; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T11:22:55Z",
+   "pn": [
+    "4860455AC"
+   ],
+   "reason": "older",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     1998,
+     1998
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     1999,
+     1999
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2000,
+     2000
+    ]
+   ],
+   "cars": 121,
+   "cat": "fender",
+   "id": "oem:mopar:fender:R:d49f927614",
+   "kind": "body",
+   "note": "Mopar catalog lists #4882290AA for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T11:28:59Z",
+   "pn": [
+    "4882290AA"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     1998,
+     1998
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     1999,
+     1999
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2000,
+     2000
+    ]
+   ],
+   "cars": 121,
+   "cat": "fender",
+   "id": "oem:mopar:fender:L:e6ccfc9fb1",
+   "kind": "body",
+   "note": "Mopar catalog lists #4882291AA for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T11:29:08Z",
+   "pn": [
+    "4882291AA"
    ],
    "reason": "trim",
    "tier": "likely"
@@ -109977,6 +110892,108 @@
     "5012545AA"
    ],
    "reason": "older",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2001,
+     2001
+    ],
+    [
+     "Chrysler",
+     "Town & Country",
+     2005,
+     2005
+    ],
+    [
+     "Chrysler",
+     "Voyager",
+     2003,
+     2003
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2007,
+     2007
+    ]
+   ],
+   "cars": 860,
+   "cat": "fender",
+   "id": "oem:mopar:fender:R:fb2f4b88ea",
+   "kind": "body",
+   "note": "Mopar catalog lists #5018442AB for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T11:23:51Z",
+   "pn": [
+    "5018442AB"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2001,
+     2001
+    ],
+    [
+     "Chrysler",
+     "Town & Country",
+     2005,
+     2005
+    ],
+    [
+     "Chrysler",
+     "Voyager",
+     2003,
+     2003
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2007,
+     2007
+    ]
+   ],
+   "cars": 860,
+   "cat": "fender",
+   "id": "oem:mopar:fender:L:e2cd119ed4",
+   "kind": "body",
+   "note": "Mopar catalog lists #5018443AB for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T11:24:09Z",
+   "pn": [
+    "5018443AB"
+   ],
+   "reason": "trim",
    "tier": "likely"
   },
   {
@@ -110877,6 +111894,120 @@
    "apps": [
     [
      "Chrysler",
+     "Town & Country",
+     1998,
+     1998
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     1999,
+     1999
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2000,
+     2000
+    ]
+   ],
+   "cars": 121,
+   "cat": "hood",
+   "id": "oem:mopar:hood:C:8b01c3b9d3",
+   "kind": "body",
+   "note": "Mopar catalog lists #5139668AA for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T11:28:35Z",
+   "pn": [
+    "5139668AA"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Dodge",
+     "Dakota",
+     2000,
+     2000
+    ],
+    [
+     "Dodge",
+     "Durango",
+     2003,
+     2003
+    ]
+   ],
+   "cars": 336,
+   "cat": "headlights",
+   "id": "oem:mopar:headlights:R:bd9e148cf5",
+   "kind": "body",
+   "note": "Mopar catalog lists #55055110AI for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T04:27:19Z",
+   "pn": [
+    "55055110AI"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Dodge",
+     "Dakota",
+     2000,
+     2000
+    ],
+    [
+     "Dodge",
+     "Durango",
+     2003,
+     2003
+    ]
+   ],
+   "cars": 336,
+   "cat": "headlights",
+   "id": "oem:mopar:headlights:L:5e7af80b77",
+   "kind": "body",
+   "note": "Mopar catalog lists #55055111AI for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T04:27:27Z",
+   "pn": [
+    "55055111AI"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Dodge",
+     "Dakota",
+     2000,
+     2000
+    ],
+    [
+     "Dodge",
+     "Durango",
+     2003,
+     2003
+    ]
+   ],
+   "cars": 336,
+   "cat": "grille",
+   "id": "oem:mopar:grille:C:74117d40ba",
+   "kind": "body",
+   "note": "Mopar catalog lists #55056092 for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T11:16:57Z",
+   "pn": [
+    "55056092"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
      "Aspen",
      2007,
      2007
@@ -111477,6 +112608,87 @@
    "apps": [
     [
      "Dodge",
+     "Dakota",
+     2000,
+     2000
+    ],
+    [
+     "Dodge",
+     "Durango",
+     2003,
+     2003
+    ]
+   ],
+   "cars": 336,
+   "cat": "fender",
+   "id": "oem:mopar:fender:R:f10ada6ea3",
+   "kind": "body",
+   "note": "Mopar catalog lists #55255030AF for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T11:15:45Z",
+   "pn": [
+    "55255030AF"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Dodge",
+     "Dakota",
+     2000,
+     2000
+    ],
+    [
+     "Dodge",
+     "Durango",
+     2003,
+     2003
+    ]
+   ],
+   "cars": 336,
+   "cat": "fender",
+   "id": "oem:mopar:fender:L:700bed8f30",
+   "kind": "body",
+   "note": "Mopar catalog lists #55255031AF for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T11:15:37Z",
+   "pn": [
+    "55255031AF"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Dodge",
+     "Dakota",
+     2000,
+     2000
+    ],
+    [
+     "Dodge",
+     "Durango",
+     2003,
+     2003
+    ]
+   ],
+   "cars": 336,
+   "cat": "hood",
+   "id": "oem:mopar:hood:C:dcecd664a2",
+   "kind": "body",
+   "note": "Mopar catalog lists #55274716AD for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T11:15:21Z",
+   "pn": [
+    "55274716AD"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Dodge",
      "Ram 1500",
      2002,
      2002
@@ -111685,6 +112897,222 @@
    "oldest_retrieved": "2026-11-06T10:15:42Z",
    "pn": [
     "55276209AD"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ]
+   ],
+   "cars": 82,
+   "cat": "headlights",
+   "id": "oem:mopar:headlights:L:a55cfaec10",
+   "kind": "body",
+   "note": "Mopar catalog lists #55277409AE for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T05:16:24Z",
+   "pn": [
+    "55277409AE"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ]
+   ],
+   "cars": 82,
+   "cat": "headlights",
+   "id": "oem:mopar:headlights:L:bba8b1c596",
+   "kind": "body",
+   "note": "Mopar catalog lists #55277409AG for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T06:15:44Z",
+   "pn": [
+    "55277409AG"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ]
+   ],
+   "cars": 82,
+   "cat": "headlights",
+   "id": "oem:mopar:headlights:R:8b8966eecd",
+   "kind": "body",
+   "note": "Mopar catalog lists #55277410AE for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T05:16:32Z",
+   "pn": [
+    "55277410AE"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ]
+   ],
+   "cars": 82,
+   "cat": "headlights",
+   "id": "oem:mopar:headlights:R:b55616b1a1",
+   "kind": "body",
+   "note": "Mopar catalog lists #55277410AG for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T06:16:00Z",
+   "pn": [
+    "55277410AG"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ]
+   ],
+   "cars": 82,
+   "cat": "tail-lights",
+   "id": "oem:mopar:tail-lights:L+R:a73fce7bcf",
+   "kind": "body",
+   "note": "Mopar catalog lists #55277414AB for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T06:16:48Z",
+   "pn": [
+    "55277414AB"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ]
+   ],
+   "cars": 82,
+   "cat": "tail-lights",
+   "id": "oem:mopar:tail-lights:R:9a44f506a8",
+   "kind": "body",
+   "note": "Mopar catalog lists #55277414AF for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T06:16:24Z",
+   "pn": [
+    "55277414AF"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ]
+   ],
+   "cars": 82,
+   "cat": "tail-lights",
+   "id": "oem:mopar:tail-lights:L:bbae4c9220",
+   "kind": "body",
+   "note": "Mopar catalog lists #55277415AB for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T06:16:40Z",
+   "pn": [
+    "55277415AB"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ]
+   ],
+   "cars": 82,
+   "cat": "tail-lights",
+   "id": "oem:mopar:tail-lights:L:60f872e79e",
+   "kind": "body",
+   "note": "Mopar catalog lists #55277415AF for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T06:16:32Z",
+   "pn": [
+    "55277415AF"
    ],
    "reason": "trim",
    "tier": "likely"
@@ -112090,6 +113518,114 @@
    "oldest_retrieved": "2026-11-06T10:18:46Z",
    "pn": [
     "5HC981W7AF"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ]
+   ],
+   "cars": 82,
+   "cat": "headlights",
+   "id": "oem:mopar:headlights:R:85dcfec5c8",
+   "kind": "body",
+   "note": "Mopar catalog lists #68001484AE for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T05:15:44Z",
+   "pn": [
+    "68001484AE"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ]
+   ],
+   "cars": 82,
+   "cat": "headlights",
+   "id": "oem:mopar:headlights:R:638b70ff6f",
+   "kind": "body",
+   "note": "Mopar catalog lists #68001484AI for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T06:15:36Z",
+   "pn": [
+    "68001484AI"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ]
+   ],
+   "cars": 82,
+   "cat": "headlights",
+   "id": "oem:mopar:headlights:L:bd75f40f24",
+   "kind": "body",
+   "note": "Mopar catalog lists #68001485AE for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T05:15:52Z",
+   "pn": [
+    "68001485AE"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ]
+   ],
+   "cars": 82,
+   "cat": "headlights",
+   "id": "oem:mopar:headlights:L:4bfc6b3902",
+   "kind": "body",
+   "note": "Mopar catalog lists #68001485AI for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T06:15:52Z",
+   "pn": [
+    "68001485AI"
    ],
    "reason": "trim",
    "tier": "likely"
@@ -112916,6 +114452,33 @@
   {
    "apps": [
     [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ]
+   ],
+   "cars": 82,
+   "cat": "tailgate",
+   "id": "oem:mopar:tailgate:C:a0714f6eb5",
+   "kind": "body",
+   "note": "Mopar catalog lists #68105727AR for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T12:31:58Z",
+   "pn": [
+    "68105727AR"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
      "Chrysler",
      "300",
      2011,
@@ -113017,6 +114580,84 @@
    "oldest_retrieved": "2026-11-06T03:59:07Z",
    "pn": [
     "68143989AA"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2004,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2007,
+     2007
+    ]
+   ],
+   "cars": 805,
+   "cat": "tail-lights",
+   "id": "oem:mopar:tail-lights:R:439428bd86",
+   "kind": "body",
+   "note": "Mopar catalog lists #68241334AA for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T04:36:55Z",
+   "pn": [
+    "68241334AA"
+   ],
+   "reason": "trim",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2004,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2007,
+     2007
+    ]
+   ],
+   "cars": 805,
+   "cat": "tail-lights",
+   "id": "oem:mopar:tail-lights:L:edc947c2c0",
+   "kind": "body",
+   "note": "Mopar catalog lists #68241335AA for both — trim-limited; verify the number on the part",
+   "oldest_retrieved": "2026-11-06T04:37:03Z",
+   "pn": [
+    "68241335AA"
    ],
    "reason": "trim",
    "tier": "likely"
@@ -114127,7 +115768,7 @@
   }
  ],
  "ns": "mopar",
- "policy_sha256": "b555fd09c64ff21a2faa0632b8359bdc6ec68743f12f5726568e7615ff52ed01",
+ "policy_sha256": "3842a15ed5308947ee820a6d9fe7355f31196736f6c0faac65e93fec6a485b8f",
  "raw": {
   "commit": "c36da2eb98835c02f81c05e8c36b6a926634a332",
   "ref": "c36da2eb98835c02f81c05e8c36b6a926634a332",

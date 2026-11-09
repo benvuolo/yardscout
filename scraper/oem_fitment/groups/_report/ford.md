@@ -3,7 +3,7 @@
 Raw: `c36da2eb98835c02f81c05e8c36b6a926634a332` @ `c36da2eb9883`; as of 2026-11-07T00:35:31Z.
 
 - records 7173, classes 7173, list rows 77788, year manifests 313, cells 11794
-- Verified groups 0, engine vg groups 0, Likely groups 59
+- Verified groups 0, engine vg groups 0, Likely groups 81
 - blocked sites: none
 
 ## Gates standing for the whole namespace
@@ -460,7 +460,7 @@ Raw: `c36da2eb98835c02f81c05e8c36b6a926634a332` @ `c36da2eb9883`; as of 2026-11-
 ## Refusals by reason
 
 - cross_category_supersession: 1072
-- held_exterior_cross_model: 80
+- held_exterior_cross_model: 58
 - recrawl_resolved: 2
 - rule_drift: 68
 - universal_part_suspect: 13

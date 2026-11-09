@@ -185742,26 +185742,6 @@
   },
   {
    "cat": "headlights",
-   "detail": "Buick Century 2003-2003;Buick Regal 2000-2000;Buick Regal 2003-2004",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1194"
-   ],
-   "pn": "19244638",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
-   "detail": "Buick Century 2003-2003;Buick Regal 2000-2000;Buick Regal 2003-2004",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1195"
-   ],
-   "pn": "19244639",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
    "detail": "Cadillac DeVille 2004-2004;Cadillac Seville 2003-2003",
    "evidence": [
     "www.gmpartsgiant.com:records:L1408"
@@ -185892,46 +185872,6 @@
   },
   {
    "cat": "headlights",
-   "detail": "Chevrolet Avalanche 2007-2007;Chevrolet Tahoe 2007-2007",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1058"
-   ],
-   "pn": "22853025",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
-   "detail": "Chevrolet Avalanche 2007-2007;Chevrolet Tahoe 2007-2007",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1059"
-   ],
-   "pn": "22853026",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
-   "detail": "Chevrolet Cobalt 2007-2007;Pontiac G5 2007-2007",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L512"
-   ],
-   "pn": "20964008",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
-   "detail": "Chevrolet Cobalt 2007-2007;Pontiac G5 2007-2007",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L513"
-   ],
-   "pn": "20964009",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
    "detail": "Chevrolet Tahoe 1999-1999;GMC Yukon 1999-1999",
    "evidence": [
     "www.gmpartsgiant.com:records:L2419"
@@ -185947,46 +185887,6 @@
     "www.gmpartsgiant.com:records:L2420"
    ],
    "pn": "15738658",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
-   "detail": "GMC Jimmy 1998-1998;GMC Sonoma 2000-2000",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L2856"
-   ],
-   "pn": "16526225",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
-   "detail": "GMC Jimmy 1998-1998;GMC Sonoma 2000-2000",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L2857"
-   ],
-   "pn": "16526227",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
-   "detail": "GMC Jimmy 1998-1998;GMC Sonoma 2000-2000",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L2858"
-   ],
-   "pn": "16526228",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
-   "detail": "GMC Jimmy 1998-1998;GMC Sonoma 2000-2000",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L2859"
-   ],
-   "pn": "16526226",
    "reason": "held_exterior_cross_model",
    "t": null
   },
@@ -186818,46 +186718,6 @@
   },
   {
    "cat": "tail-lights",
-   "detail": "Chevrolet Astro 2000-2000;GMC Safari 1997-1997;GMC Safari 2000-2001",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1800"
-   ],
-   "pn": "5978023",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "tail-lights",
-   "detail": "Chevrolet Astro 2000-2000;GMC Safari 1997-1997;GMC Safari 2000-2001",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1801"
-   ],
-   "pn": "5978024",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "tail-lights",
-   "detail": "Chevrolet Blazer 2001-2001;GMC Jimmy 1998-1998",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1274"
-   ],
-   "pn": "19179358",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "tail-lights",
-   "detail": "Chevrolet Blazer 2001-2001;GMC Jimmy 1998-1998",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1275"
-   ],
-   "pn": "19179679",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "tail-lights",
    "detail": "Chevrolet Cobalt 2007-2007;Pontiac G5 2007-2007",
    "evidence": [
     "www.gmpartsgiant.com:records:L514"
@@ -186880,69 +186740,9 @@
    "cat": "tail-lights",
    "detail": "Chevrolet Colorado 2005-2005;GMC Canyon 2005-2005;GMC Canyon 2011-2011",
    "evidence": [
-    "www.gmpartsgiant.com:records:L1377"
-   ],
-   "pn": "19417443",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "tail-lights",
-   "detail": "Chevrolet Colorado 2005-2005;GMC Canyon 2005-2005;GMC Canyon 2011-2011",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L1378"
-   ],
-   "pn": "19417444",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "tail-lights",
-   "detail": "Chevrolet Colorado 2005-2005;GMC Canyon 2005-2005;GMC Canyon 2011-2011",
-   "evidence": [
     "www.gmpartsgiant.com:records:L1379"
    ],
    "pn": "15105522",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "tail-lights",
-   "detail": "Chevrolet S-10 2000-2000;GMC Sonoma 1996-1996;GMC Sonoma 2000-2000",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L978"
-   ],
-   "pn": "5978196",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "tail-lights",
-   "detail": "Chevrolet S-10 2000-2000;GMC Sonoma 1996-1996;GMC Sonoma 2000-2000",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L979"
-   ],
-   "pn": "5978195",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "tail-lights",
-   "detail": "Chevrolet Venture 2004-2004;Pontiac Montana 2004-2004",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L2799"
-   ],
-   "pn": "19206745",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "tail-lights",
-   "detail": "Chevrolet Venture 2004-2004;Pontiac Montana 2004-2004",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L2800"
-   ],
-   "pn": "19206746",
    "reason": "held_exterior_cross_model",
    "t": null
   },
@@ -187427,10 +187227,10 @@
    "window-regulator": 6753,
    "window-switch": 721
   },
-  "likely_groups": 289,
+  "likely_groups": 309,
   "list_rows": 95531,
   "records": 5875,
-  "released_by_allowlist": 0,
+  "released_by_allowlist": 20,
   "verified_groups": 0,
   "vg_groups": 0,
   "why_no_verified": "no (site, category) of this namespace has passed the audit gate (audits.json has no record; spec 11.4, E5/V7); engine cells not audited as reliable on www.gmpartsgiant.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE; www.gmpartsgiant.com: only 0% of its 17867 fitment rows can be coverage: its option column holds trims (option_column_is_trims), which count only after a namespace audit (spec 5.2)",

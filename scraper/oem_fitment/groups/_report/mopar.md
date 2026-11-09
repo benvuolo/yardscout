@@ -3,7 +3,7 @@
 Raw: `c36da2eb98835c02f81c05e8c36b6a926634a332` @ `c36da2eb9883`; as of 2026-11-06T20:19:29Z.
 
 - records 7856, classes 7047, list rows 78527, year manifests 317, cells 12219
-- Verified groups 0, engine vg groups 0, Likely groups 245
+- Verified groups 0, engine vg groups 0, Likely groups 281
 - blocked sites: www.moparpartsgiant.com
 
 ## Gates standing for the whole namespace
@@ -556,7 +556,7 @@ Raw: `c36da2eb98835c02f81c05e8c36b6a926634a332` @ `c36da2eb9883`; as of 2026-11-
 - cross_category_supersession: 357
 - disputed_class: 809
 - exclude_at_curation: 2
-- held_exterior_cross_model: 99
+- held_exterior_cross_model: 63
 - recrawl_resolved: 4
 - rule_drift: 63
 - universal_part_suspect: 33
