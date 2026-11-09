@@ -195,3 +195,6 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
 - ~23:00 UTC owner: "in terms of priority, think of parts people go to junkyards for. It wont be brake pads, its more likely other items."
   - Hub ordering: (1) cross-model depth on the existing body/lighting/interior/electronics categories for the high-volume makes (Honda/Nissan, make breadth); (2) new tier D categories: fog lights, center console, door panel, door handles int/ext, door lock actuator, blower motor, rear seat, sunroof, tailgate handle/camera; (3) Spectra radiator/AC/fuel; (4) strut/knuckle/CV audits last (they keep crawling).
   - 1A Auto widens to junkyard-demand lines where its fitment is clean.
+- ~23:15 UTC: merged wheels-ship-3, giving 41 audited cross-model wheels groups (mopar 28 / 9,047 cars, mb 10 / 243, vag 3 / 117). New rules: body words identical, spoke counts agree, Front/Rear notes refuse. Verified: oemStatus ok x8, test_groups_hash, pf_guards.
+- Phoenix map tweak merged (sw jh-v174).
+- Category breadth is preparing interchange/categories-ship: 14 new Parts-tab categories with same-model-generation donors only, no aftermarket/OEM groups yet. The hub runs the regression before merging.
