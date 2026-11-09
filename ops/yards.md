@@ -209,6 +209,76 @@ Sweep follow-ups (mine):
     Albuquerque 5.6 km.
   - The app shows the new pins after the next scan.
 
+## 2026-11-09 photos round 5 (open every car) + yard pins
+
+**Photos.** Owner: "Can we get them from the thumbnails within the lists?
+Could we open a car and then grab the photos?" I opened a car on every
+"no photo" site in a real browser (Playwright: pick a make, click the first
+car, record image and XHR requests).
+
+**Found and captured (all URLs only, kill switch per source):**
+- **iPull-uPull** (`ipull`): opening a car shows its photo from the site's
+  catalog folder. File names vary, so the URL comes from the same search API
+  the site's own page calls (VinPlus API, tenant `ipull_upull_auto_parts`):
+  ~47 requests per scan at 2 s. 3,248 of 4,208 cars. Images ~1920×1440,
+  ~585 KB, onCards false.
+- **US Auto Supply** (`usautosupply`): its own `inventory-photos/{STK}.jpg`,
+  from the VinPlus row. 1,073 cars; 2048×1536, ~250–500 KB.
+- **VinPlus and Army's**: their YardSmart full-size blobs (~4 MB) render
+  through YardSmart's OWN 325×600 resize endpoint (the same signed blob id
+  plus the platform's public variation), ~45 KB. One source per brand
+  (`ys_vinplus_va`…`vn`). Only Bessler's, Bluegrass, Chesterfield and
+  Pick Ur Part have photos; Go Pull-It, San Antonio, Joliet, Tri-State, 195
+  and Prestige list none on their own sites.
+- **Rupert's, Chuck & Eddie's, Robertson's**: the table row shows a generic
+  icon; the photo sits in the page's hidden grid card for the same stock
+  number. Now read from there.
+- **YardSmart expiry, measured over three scans:** signed ids expire at one
+  fixed time of day (~10:20 UTC), not N hours after issue. Codes are now
+  published while ≥ 1 h remains; the app hides a lapsed one until the next
+  scan. A scan in the hour before 10:20 publishes fewer YardSmart photos
+  (VinPlus 6,070 at 08:45Z → 3,799 at 10:06Z).
+- **Sturtevant**: only the 3.8 MB camera original exists, so it is
+  published with `heavy: true, approxKB: 3800` (tap to load, never on
+  cards). The new field was sent to design.
+
+**Opened, still no per-car photo anywhere on the site:** Budget (both
+sites), Cagle's, Indy, Bevell's, OKC, U-Pull and Save, C&C, Hwy 82,
+Sunshine, Barry's, Tear-A-Part, Jalopy Jungle, the CRUSH table sites,
+St. Cloud ("No photo" on every row), EZ Pull N Pay, Parts Galore, Harry's,
+Utah PAP, and the Ario tenants with empty image_url.
+
+**Coverage, scan 42588733706 (2026-11-09T10:06Z): 174,626 of 338,797
+(51.5%).** 175,563 (51.8%) at 08:45Z, outside the YardSmart expiry hour.
+Base this morning was 147,254 (43.5%).
+- LKQ 66,498; Pick-n-Pull 47,417; Wrench-A-Part 9,647.
+- Ario 9,427; BYOT 5,318; Pick-A-Part VA 4,848; Wilbert's 4,384.
+- VinPlus 3,799–6,070; iPull 3,248; Nevada PAP 2,529.
+- U-Pick-It AZ 2,339; U-Pull-It WA 1,848; Pull-A-Part 1,775 (growing
+  ~300/scan); U-Pull-It IA/NE 1,720; Paul's 1,505; Weller 1,372;
+  US Auto Supply 1,073.
+- AESOP 928; Pasco 910; Rupert's 766; Midway 760; Sturtevant 741 (heavy);
+  Fenix 691 (growing); Kiker's 656; Genesis 237; Pull-N-Save 94 (paused);
+  Chuck & Eddie's 64; Robertson's 18; Army's 14.
+
+`vehicle_extras.json` is 23.3 MB (gzip 4.2 MB). Most of the growth since
+round 4 is another session's `body` column (e39635cf).
+
+**Yard pins** (c5fe7570, 01ab6c72; live from those scans):
+- Re-pinned to the address on the yard's own site, each a Census exact
+  match: Tear-A-Part SLC and Ogden, Utah PAP Ogden (all three were city
+  centroids; Tear-A-Part Ogden stacked on UPAP Ogden), Rupert's (1489
+  Richmond Hwy; the old pin was 16.7 km off, on the ZIP centroid of an
+  address the site doesn't list), Ace, Sturtevant, 195 Used, AESOP, CP's,
+  BYOT Baton Rouge, BYOT Bryan (9 km), Buddy's (3.6 km), Polk County
+  (3.4 km), Chesterfield Southside (2.9 km), Kiker's (2.7 km).
+- Nationwide: all 299 US pins are in their labelled state (Census reverse
+  lookup); no two different chains' yards within 30 m; 85 homepage
+  addresses from 61 sites agree within 2 km otherwise.
+- Still on town/ZIP centroids (no geocoder resolves the house number):
+  Kennewick, Hwy 82, Marion County, BYOT Waco, C&C.
+- Test: `test_yard_coords.py`.
+
 ## 2026-11-09 photo completeness audit (round 4): yards' public sites
 
 Owner: "Can we ensure we get every photo if there is one on the yard's
