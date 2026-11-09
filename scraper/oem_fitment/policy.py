@@ -73,7 +73,9 @@ EXTERIOR_HOLD_CATS = frozenset({"bumper-front", "bumper-rear", "grille", "headli
 # mark) splits the part. A cross-model Likely group in one of these is held
 # like an exterior group (held_option_cross_model), listed in
 # held_exterior.json for the owner checklist. Only removes claims.
-OPTION_HOLD_CATS: dict = {"subaru": frozenset({"side-mirrors"})}
+OPTION_HOLD_CATS: dict = {"subaru": frozenset({"side-mirrors", "gauge-cluster"})}
+# gauge-cluster added after the round-3 resample: 85021AJ19A and 85002AL05A
+# are Canada-market km/h clusters listed under US years with no market note.
 
 
 def held_cross_model_cat(ns: str, cat: str) -> str | None:

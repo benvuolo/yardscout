@@ -34,6 +34,12 @@ class Target:
     years: tuple | None
     merge: bool
     ambig: str
+    # row-level series filter (make breadth 2026-11-09): regexes; a fitment
+    # row maps to this target only when one of its trims (the option column)
+    # matches one. A row with no trims never maps (fail closed). GM prints
+    # one 'Silverado' with the series ('1500 REGULAR CAB', '... 1/2 TON')
+    # only in that column.
+    series: tuple = ()
 
     def covers_year(self, y: int) -> bool:
         return self.years is None or self.years[0] <= y <= self.years[1]
@@ -63,7 +69,7 @@ class ModelMap:
                 tr = t.get("trims", "*")
                 tg = Target(e["ns"], e["cat_make"], e["cat_model"], t["make"], t["model"],
                             "*" if tr == "*" else tuple(tr), tuple(t["years"]) if t.get("years") else None,
-                            bool(t.get("merge")), t.get("ambig") or "")
+                            bool(t.get("merge")), t.get("ambig") or "", tuple(t.get("series") or ()))
                 self.by_cat[(e["ns"], e["cat_make"], e["cat_model"])].append(tg)
                 self.by_feed[(e["ns"], t["make"], t["model"])].append(tg)
         self.exclude = dict(doc.get("exclude") or {})
