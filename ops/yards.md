@@ -209,6 +209,29 @@ Sweep follow-ups (mine):
     Albuquerque 5.6 km.
   - The app shows the new pins after the next scan.
 
+## 2026-11-09 photo completeness audit (round 4): yards' public sites
+
+Owner: "Can we ensure we get every photo if there is one on the yard's
+website?" Base: 147,254 of 338,900 cars (43.5%). This round looked at what
+each site SHOWS, not only our feeds. Same rules: no bypasses, robots/terms,
+URLs only, per-source kill switch; Pull-N-Save checks stay paused.
+
+| Source | Lot cars | Photo on the site? Where | URL | Extra requests per scan | Verdict |
+|---|---|---|---|---|---|
+| Pull-A-Part | 42,699 | Yes: the inventory results call `imageservice.pullapart.com/img/retrieveimage/` per car → `papimages.blob.core.windows.net/carinventory/...png` (their Azure) | Stable; path holds an upload timestamp, so not derivable | ≤300 lookups (1 per NEW car, cached forever; newest first, 10 s; no robots on that host), in a thread beside the independents | **Captured** (`pap`, onCards false: 640×640 PNG ~700 KB, octet-stream). Backlog clears gradually (~1,800/day) |
+| Ario tenants (EZ Pull N Pay, Foss, Paul's, UAPI, RG, Ryan's, Youngstown, Auto Parts U Pull, … ~45k) | ~45,000 | Per tenant: list `image_url` (already fetched). 40-car samples: Ryan's 40/40, Paul's 31/39, Foss 15/40, Auto Parts U Pull 8/37 (Copart auction photos), EZ / UAPI / RG / Youngstown 0/40 | Stable | 0 | **Captured** where on Ario's YMS storage (path = the yard's slug; `ario_<chain>`, onCards false, 1280×720 ~270 KB) or Paul's CDN (`paulsautoyard`, ~115 KB). **Copart photos skipped** (another company's). Tenants with empty `image_url` show none on their site |
+| U-Pick-It AZ, U-Pull-It IA/NE, Robertson's, Genesis, Chuck & Eddie's, Rupert's (yardconnect / YardSmart) | ~9,000 | Yes: row thumbnail = YardSmart "representation" (resize 325×600, ~30 KB) | Rupert's / Chuck & Eddie's mostly never expire; the rest expire **10.0 h** after the page is served (measured 2026-11-09) | 0 (same page) | **Captured** (`ys_<site>`), republished every 4-hourly scan; a code with <6 h left is not written |
+| VinPlus tenants (Go Pull-It, San Antonio PnP, Chesterfield, Pickers, 195, Bessler's, Joliet, US Auto Supply, Prestige, Pick Ur Part, RTP, Pipes, Raceway, Bluegrass; ~22k) | ~22,000 | Yes, but only YardSmart full-size **blobs**: 4032×3024 camera originals, ~4.2 MB, expiring ~10 h | Expiring | 0 | **Off**: too heavy for a phone (same reason as Sturtevant); no resized variant is offered |
+| Fenix U-Pull | 5,752 | List shows the theme placeholder; each car's page `/inventory/{stock}/` shows photos at `/wp-content/uploads/{yyyy}/{mm}/{stock}_1.jpg` | Stable | ≤150 HEADs (1 per NEW car, cached; set-out month then next month; 10 s) | **Captured** (`fenix`, onCards false, 900×1200 ~75–230 KB). Sample: 8/10 at the set-out month |
+| Pull-N-Save | 11,500 | Yes (own app host) | Stable | 0 while paused | **Paused** (owner): only already-verified photos publish |
+| Harry's | 4,294 | No per-car image on the list pages (checked 3 pages via the existing fetch) | — | — | None on site |
+| Jalopy Jungle (x5), Buddy's, Marion County, 662, Polk County, U-Pull-It TN, Trusty, M&M, CP's (CRUSH table sites) | ~17,000 | No image column, no per-car page | — | — | None on site |
+| St. Cloud | 262 | Photo column exists; 10/10 sampled rows "No photo" | — | — | Not captured yet; re-check if photos appear |
+| Sturtevant | 741 | Yes (own) | Stable | 0 | Off: 4032×3024 ~3.8 MB originals |
+| iPull-uPull (+ Canada CSV), Budget, Cagle's, Indy, Bevell's, OKC, U-Pull and Save (JSON has no image field), Parts Galore, C&C, Hwy 82, Sunshine, Barry's, Route 34, Utah PAP (XML), Tear-A-Part | ~35,000 | No per-car image on list pages or in the data; no per-car pages found | — | — | None on site |
+| Ace | 2,557 | Not checkable from CI (Cloudflare blocks datacenter IPs) | — | — | Unknown |
+| Army's | 238 | Full-size blobs, expiring | — | — | Off |
+
 ## 2026-11-08 daily ops email: frozen and missing yards
 
 0. **Utah Pic-A-Part - Orem (Premium)** (owner asked "is this right?"):
