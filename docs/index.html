@@ -250,6 +250,10 @@
   <!-- YARDS DIRECTORY TAB -->
   <div id="tab-yards" class="tab-content">
     <div class="stats-bar" id="yards-stats-bar"></div>
+    <div class="yards-view-switch" role="group" aria-label="Show yards as">
+      <button type="button" class="yv-btn" data-view="list" aria-pressed="true">List</button>
+      <button type="button" class="yv-btn" data-view="map" aria-pressed="false">Map</button>
+    </div>
     <button type="button" class="btn week-nearby-btn" id="week-nearby-btn">What landed this week near you</button>
     <!-- Same drawer pattern as the Live tab: a full-width Filters handle +
          a labeled .controls panel, so the two tabs feel identical and the
@@ -301,6 +305,13 @@
           </div>
         </div>
       </div>
+    </div>
+    <!-- Lot Map: yards as pins (free keyless tiles: OpenFreeMap + MapLibre,
+         loaded only when the map opens; a schematic map when they can't load). -->
+    <div id="yards-map-wrap" hidden>
+      <div id="yards-map" role="region" aria-label="Map of nearby yards"></div>
+      <p class="yards-map-note" id="yards-map-note"></p>
+      <div id="yards-map-sheet" aria-live="polite"></div>
     </div>
     <div class="price-compare-bar" id="price-compare-bar">
       <div class="compare-input-wrap">
@@ -661,6 +672,16 @@
     <div class="cd-body" id="car-detail-body"></div>
   </div>
   <div class="cd-actions" id="car-detail-actions"></div>
+</div>
+
+<!-- WALK THE YARD: one yard's cars grouped by row, in row-number order. -->
+<div id="yard-rows" role="dialog" aria-modal="true" aria-labelledby="yard-rows-title" aria-hidden="true">
+  <div class="cd-top">
+    <button type="button" id="yard-rows-back" class="cd-back" aria-label="Back to yards"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg><span>Back</span></button>
+  </div>
+  <div class="cd-scroll" id="yard-rows-scroll">
+    <div class="cd-body" id="yard-rows-body"></div>
+  </div>
 </div>
 
 <!-- PHOTO VIEWER: the chain's own image, hotlinked; credit + source + removal request -->
