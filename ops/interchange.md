@@ -1670,3 +1670,37 @@ subaru, mopar, ford, vag, hmg and mb, with an extra hold rule:
     ("Likely fit — verify part #").
   - Seen in passing (app copy, not this workstream): the headlights hint reads
     "headlightss rarely cross model lines" (pluralisation typo in app.js).
+
+## 2026-11-09 Held exterior checklist published (owner decision 2026-11-09)
+
+- **Artifact:** "Held Parts Checklist", private,
+  https://claude.ai/artifact/5VTFUU3DrM5nWemcK11Mpr (phone-first).
+- **Source:** `scraper/oem_fitment/groups/_report/held_exterior.json` on
+  main@5ab4786, 307 groups (subaru 156, gm 56, ford 40, mb 21, mopar 19,
+  vag 15). Data built by `tools/held_exterior_checklist_data.py` (run from
+  the repo root): one card per group with category, part number, vehicles and
+  years, catalog note, catalog flag (option/trim/conditional/older) and both
+  record URLs. Sections are base-model pairings, most groups first
+  (Legacy/Outback 146, DeVille/Seville 21, Town & Country/Caravan 14,
+  F-150/F-250 14, C280/C320 12, ...).
+- **Answers (artifact db):** collection `held_exterior_review`, one document
+  per group, doc id `<ns>~<cat>~<pn>` (e.g. `ford~bumper-front~2L1Z-17757-BA`).
+  Fields: `answer` ("right" | "wrong" | "unsure" | null), `note`, `ns`,
+  `cat`, `pn` [..], `at` (ISO time), `by` (viewer id). Access rule: read
+  "view", write "admin" (owner/editors only; verified that an `interact`
+  write is refused). Read back with
+  `ArtifactData list url=<above> collection=held_exterior_review`.
+- **Verified at publish:** collection empty; no answers applied.
+- **Plan, not done yet:** a later step reads only `answer == "right"`
+  documents, maps each id back to its held_exterior.json group (ns, cat,
+  pn), and releases exactly those groups through the existing curate path
+  (an explicit owner-approved allowlist consulted by the exterior hold in
+  `curate.py`, not a policy relaxation), with a curation test that asserts
+  only listed groups pass the hold and all others stay held. Wrong / Not sure
+  / unanswered stay held. Same gates as 2026-11-06 (validate, measure.py,
+  curation_tests, tests, scraper tests, pf_guards) before commit.
+- Housekeeping: this container's local `main` had 50 commits not on origin
+  (tip 387774d "ops: Terapeak part list and outreach drafts into the repo");
+  kept as local branch `backup/local-main-387774d`, not pushed. Origin main
+  was used for everything here. Whoever owns that work should check whether
+  it was pushed elsewhere.
