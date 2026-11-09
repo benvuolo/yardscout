@@ -5,6 +5,7 @@ the fetch.py cache only and are skipped when it is absent.
 Run: python3 scraper/oem_fitment/tests/test_hondapartsnow.py"""
 from __future__ import annotations
 
+import re
 import sys
 from pathlib import Path
 
@@ -51,6 +52,16 @@ ok(m("window-regulator", "Regulator Assy., R. FR. Door (MANUAL)") and not m("win
 ok(m("power-steering-pump", "Pump Assy., Power Steering (L4)") and not m("power-steering-pump", "Pulley, Power Steering Pump"), "ps pump")
 ok(m("ignition-coils", "Coil, Plug Hole") and "Plug" not in H.head({"main": "Coil, Plug Hole"}), "coil kept past COMMON_EXCLUDE")
 ok(m("fender", "Fender, R. FR. (DOT)") and not m("fender", "Fender, R. FR. (INNER)"), "fender vs inner fender")
+# tier C, names from the 2005 Accord DX pages (2026-11-09)
+ok(m("wiper-motor", "Motor, FR. Wiper") and not m("wiper-motor", "Link, FR. Wiper")
+   and not m("wiper-motor", "Arm, Windshield Wiper (DRIVER SIDE)") and not m("wiper-motor", "Cap, FR. Wiper Arm (12MM)"), "wiper motor")
+ok(m("knuckle", "Knuckle, R. FR.") and m("knuckle", "Knuckle, L. FR.") and not m("knuckle", "Ring, FR. Knuckle")
+   and not m("knuckle", "Joint, FR. Ball") and not m("knuckle", "Sensor Assy., R. FR."), "knuckle")
+ok(m("strut", "Shock Absorber Assy., R. FR.") and m("strut", "Shock Absorber Unit, RR.") and m("strut", "Shock Absorber Assy., RR. (MSDS)")
+   and not m("strut", "Washer, Shock Absorber Mounting") and not m("strut", "Base, FR. Shock Absorber Mounting")
+   and not m("strut", "Spring, FR.") and not m("strut", "Bush, RR. Shock Absorber (LOWER)"), "strut")
+ok(re.search(H.CAT_PAGES["wiper-motor"], "front_windshield_wiper") and re.search(H.CAT_PAGES["knuckle"], "knuckle")
+   and re.search(H.CAT_PAGES["strut"], "rear_shock_absorber") and not re.search(H.CAT_PAGES["wiper-motor"], "windshield_washer"), "tier C pages")
 ok(m("bumper-front", "[Freight Parts] Face, FR. Bumper (DOT)") and not m("bumper-front", "Spoiler, FR. Bumper Lip"), "bumper")
 ok(m("grille", "Grille, FR.") and not m("grille", "Base, FR. Grille *B92P*"), "grille")
 ok(H.is_reman("06311-R40-505RM", "Alternator, Core Id (104210-5890) (RMD)") and not H.is_reman("31100-R40-A01", "Alternator Assy."), "reman")

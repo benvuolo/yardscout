@@ -76,6 +76,11 @@ CAT_PAGES = {
     "trunk-lid": r"^trunk_lid$",
     "tailgate": r"^(lower_)?tailgate$",
     "liftgate": r"^tailgate$",
+    # tier C (2026-11-09; 2005 Accord: front_windshield_wiper, knuckle,
+    # front_shock_absorber, rear_shock_absorber)
+    "wiper-motor": r"^((front|rear)_)?(windshield_)?wiper(_|$)",
+    "knuckle": r"^((front|rear)_)?knuckle(_|$)|^rear_(lower_arm|trailing_arm)(_|$)",
+    "strut": r"^(front|rear)_(shock_absorber|damper|strut)s?(_|$)",
 }
 # Honda calls both a pickup bed gate and an SUV/van/hatch rear hatch "Tailgate".
 # Our categories split them: pickups -> tailgate, everything else -> liftgate.
@@ -84,6 +89,15 @@ PICKUPS = {"Ridgeline"}
 SIDE = r"(?:[rl]\.\s*)?"
 # (include, exclude) over oem_name(); explicit per category, case-insensitive.
 RULES = {
+    # tier C: names as printed on the 2005 Accord pages ("Motor, FR. Wiper",
+    # "Knuckle, R. FR.", "Shock Absorber Assy., R. FR." next to the bare
+    # damper "Shock Absorber Unit, FR."; both kept, the name says which)
+    "wiper-motor": (r"^motor(\s+assy\.?)?,\s*(fr\.?|rr\.?|front|rear)?\s*(windshield\s+)?wiper\b|^wiper\s+motor\b",
+                    r"washer|headlight|cap|cover|bracket|rubber|link|arm|blade|pivot|switch|relay|seal|collar"),
+    "knuckle": (rf"^knuckle(\s+(assy|sub-assy)\.?)?,\s*{SIDE}(fr|rr)\.?",
+                r"ring|boot|dust|seal|guard|plate|cover|sensor|bolt|nut|pin"),
+    "strut": (r"^shock\s+absorber\s+(assy|unit|set)\.?|^damper\s+(assy|unit)\.?|^strut\s+(assy|unit)\.?",
+              r"mount|bush|base|bracket|washer|collar|rubber|cover|boot|bump|seat|cap|nut|bolt|plate|sleeve|stopper|insulator"),
     "alternator": (r"^alternator(\s+assy\.?|\s*\(|,\s*core id|$)",
                    r"belt|bracket|pulley|brush|bearing|frame|cover|rotor|stator|holder|regulator|rectifier|terminal|insulator|bush|stay|fan|nut|tensioner"),
     "starter": (r"^starter(\s+motor)?(\s+assy\.?|\s*\(|,\s*core id|$)",
