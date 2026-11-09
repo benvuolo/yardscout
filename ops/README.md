@@ -39,3 +39,11 @@ section of ops/interchange.md:
 Shared oem_fitment code: pull --rebase, run curation_tests + tests before
 every push. One crawl run at a time. Nothing ships to users without a §11.4
 sample with 0 WRONG and the hub's confirmation.
+
+Standing rule (2026-11-09, after a near-miss): any change to the hashed
+curation inputs (scraper/oem_fitment curate.py, policy.py, notes.py,
+positions.py, markers.py, model_map.json, release_allowlist.json) ships in
+the SAME push as re-curated groups/<ns>.json for every shipped namespace,
+with an identical-or-explained diff. Otherwise the next scan's V8 check drops
+every OEM namespace from users. A test enforces it.
+
