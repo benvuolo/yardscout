@@ -1,9 +1,9 @@
 # OEM curation report: mopar
 
-Raw: `3b4677ae1df7` @ `3b4677ae1df7`; as of 2026-11-09T19:24:53Z.
+Raw: `1351c33fcfbb` @ `1351c33fcfbb`; as of 2026-11-09T19:24:53Z.
 
 - records 8390, classes 7581, list rows 80300, year manifests 460, cells 12822
-- Verified groups 0, engine vg groups 0, Likely groups 310
+- Verified groups 0, engine vg groups 0, Likely groups 309
 - blocked sites: www.moparpartsgiant.com
 
 ## Gates standing for the whole namespace
@@ -564,10 +564,12 @@ Raw: `3b4677ae1df7` @ `3b4677ae1df7`; as of 2026-11-09T19:24:53Z.
 - recrawl_resolved: 5
 - rule_drift: 66
 - universal_part_suspect: 33
+- wheel_axle_limited: 2
+- wheel_body_conflict: 1
 - wheel_compact_spare: 6
 - wheel_model_other: 2
 - wheel_size_conflict: 3
-- wheel_size_unstated: 44
+- wheel_size_unstated: 42
 - wheel_spare_description: 3
 - wheel_width_conflict: 2
 

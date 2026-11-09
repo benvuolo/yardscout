@@ -1,6 +1,6 @@
 # OEM curation report: mitsubishi
 
-Raw: `3b4677ae1df7` @ `3b4677ae1df7`; as of 2026-11-05T09:25:16Z.
+Raw: `1351c33fcfbb` @ `1351c33fcfbb`; as of 2026-11-05T09:25:16Z.
 
 - records 452, classes 452, list rows 0, year manifests 0, cells 1474
 - Verified groups 0, engine vg groups 0, Likely groups 0

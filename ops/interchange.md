@@ -3044,3 +3044,9 @@ each); nothing allowlisted or crawled.
   - Result: mb 10 groups / 243 cars, vag 3 / 117, all census OK, no new groups. Mopar 29 -> 28: 5105691AB (Sebring 2008 note adds "Convertible", Avenger 2013 doesn't) is refused by the body rule. Conservative.
   - Not shipped yet: WHEELS_AUDITED_NS still {mopar}; needs hub confirmation, then one push (policy + all namespaces re-curated + payload).
   - hmg (Hyundai/Kia) waits for its crawl (run 42684614492) to finish.
+- 2026-11-09 ~23:40 UTC, MB + VW single push (hub-confirmed): WHEELS_AUDITED_NS = {mopar, mb, vag}.
+  - Re-curated `--ns all` on oem-raw@1351c33f with the current inventory.
+  - Diff vs main: mb +10 wheels, vag +3 wheels, mopar -1 wheels (5105691AB, body rule). Every other namespace's groups identical.
+  - All 41 shipped wheels groups are census OK.
+  - Payload: only data/oem/wheels.json changes in content (41 groups); oemStatus mb 10, mopar 309, vag 19.
+  - Gates: curation_tests 17/17 (incl. test_groups_hash), oem_fitment tests 39/39, pf_guards_unit ALL PASS, scraper/test_*.py pass, pf_ux_e2e + interchange_e2e pass, part_finder_e2e only the E46 M3 case.

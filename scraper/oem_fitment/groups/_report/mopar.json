@@ -242671,8 +242671,8 @@
   "year_manifest_bad": 35
  },
  "raw": {
-  "commit": "3b4677ae1df7eb3b60765ce402d5a79167561981",
-  "ref": "3b4677ae1df7",
+  "commit": "1351c33fcfbb97862fa5aa9265dd92f7350c1ebc",
+  "ref": "1351c33fcfbb",
   "sites": {
    "www.jeeppartsdeal.com": {
     "blocked": false,
@@ -254246,6 +254246,16 @@
   },
   {
    "cat": "wheels",
+   "detail": "-; convertible",
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L4662"
+   ],
+   "pn": "5105691AB",
+   "reason": "wheel_body_conflict",
+   "t": null
+  },
+  {
+   "cat": "wheels",
    "detail": "300 2013: ['19']; Charger 2013: ['18']",
    "evidence": [
     "www.jeeppartsdeal.com:records:L4639"
@@ -254518,16 +254528,6 @@
    "cat": "wheels",
    "detail": "Chrysler Town & Country 2010",
    "evidence": [
-    "www.jeeppartsdeal.com:records:L4587"
-   ],
-   "pn": "ZX30DSLAD",
-   "reason": "wheel_size_unstated",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "Chrysler Town & Country 2010",
-   "evidence": [
     "www.jeeppartsdeal.com:records:L4588"
    ],
    "pn": "1SQ07SZ7AA",
@@ -254542,6 +254542,16 @@
    ],
    "pn": "1AN31PAKAC",
    "reason": "wheel_size_unstated",
+   "t": null
+  },
+  {
+   "cat": "wheels",
+   "detail": "Chrysler Town & Country 2010: Front or Rear [WNB], Painted Face ; Fitting Vehicle Options: 53 - 119 WB, Y - CHRYSLER ; Require Quantity: 2 ; Package Q",
+   "evidence": [
+    "www.jeeppartsdeal.com:records:L4587"
+   ],
+   "pn": "ZX30DSLAD",
+   "reason": "wheel_axle_limited",
    "t": null
   },
   {
@@ -254596,12 +254606,12 @@
   },
   {
    "cat": "wheels",
-   "detail": "Dodge Challenger 2010",
+   "detail": "Dodge Challenger 2010: Front or Rear [WP2] ; Fitting Vehicle Options: 22 - 2-DR SEDAN TYPE #2, D - DODGE ; Require Quantity: 2 ; Package Quanti",
    "evidence": [
     "www.jeeppartsdeal.com:records:L4685"
    ],
    "pn": "1DP88SZ0AA",
-   "reason": "wheel_size_unstated",
+   "reason": "wheel_axle_limited",
    "t": null
   },
   {
@@ -256778,7 +256788,7 @@
    "window-regulator": 2920,
    "window-switch": 60
   },
-  "likely_groups": 310,
+  "likely_groups": 309,
   "list_rows": 80300,
   "records": 8390,
   "released_by_allowlist": 36,
