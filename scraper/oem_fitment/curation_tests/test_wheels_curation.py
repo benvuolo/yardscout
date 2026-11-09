@@ -48,5 +48,19 @@ src = (ROOT / "curate.py").read_text()
 ok(re.search(r'wheel_compact_spare', src) is not None and "WHEEL_NOTES_ARE_OPTIONS" in src,
    "curate.verify refuses wheel_compact_spare and honours WHEEL_NOTES_ARE_OPTIONS")
 
+# group-level basis (§11.4 round 1, 2026-11-09): stated diameter must agree, no spare
+# note, no other numbered model; Toyota/Lexus wheels stay within one exact model
+D = policy.WHEEL_DIAMETER_RE
+ok({m.group(1) for m in D.finditer("17x6.5")} == {"17"} and {m.group(1) for m in D.finditer("16 Inch")} == {"16"}
+   and {m.group(1) for m in D.finditer('16", WDJ')} == {"16"} and {m.group(1) for m in D.finditer("Steel Wheels, 16x6.5\"")} == {"16"},
+   "diameter read from '17x6.5', '16 Inch', '16\"'")
+ok(not D.search("Code WFU") and not D.search("2500, 3500"), "no diameter in a bare sales code or model list")
+ok(set(policy.MODEL_NUMBER_RE.findall("3500, WD4, WF1")) - set(policy.MODEL_NUMBER_RE.findall("Ram 2500")) == {"3500"},
+   "'3500' on a Ram 2500 page names another model (52121267AC)")
+ok(bool(policy.WHEEL_SPARE_NOTE_RE.search("Spare Wheel ... With Full Size Spare, 17 Inch")), "spare note seen (5105032AA)")
+ok("toyota" in policy.WHEEL_SAME_MODEL_ONLY_NS, "Toyota/Lexus wheels groups stay within one exact model (chassis codes)")
+ok(all(x in src for x in ["wheel_size_unstated", "wheel_size_conflict", "wheel_model_other", "wheel_spare_note",
+                          "wheel_cross_model_chassis"]), "curate.wheel_group_refusal codes wired")
+
 print("OK" if not fails else f"{len(fails)} FAIL")
 sys.exit(1 if fails else 0)
