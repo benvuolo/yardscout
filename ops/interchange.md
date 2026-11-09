@@ -2398,7 +2398,7 @@ State:
     `knuckle|spindle|axle-hub|front-axle|suspension`, strut
     `strut|shock|suspension`. Check them against SIBLING_IGNORE (the
     unread_sibling_page rule).
-- Remaining sites (12): fordpartsgiant, gmpartsgiant, toyotapartsnow,
+- Remaining sites (14): fordpartsgiant, gmpartsgiant, toyotapartsnow,
   lexuspartsnow, hyundaipartsdeal, kiapartsnow, jeeppartsdeal,
   vwpartsgiant, audipartsgiant, mbpartsgiant, mazdapartsnow,
   mitsubishipartsgiant, volvopartsgiant, bmwpartsdeal. Skip
