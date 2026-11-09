@@ -85,10 +85,13 @@ RULES = {
     "grille": (r"^(upper |center |radiator )?grille( assembly)?$", ""),
     "trunk-lid": (r"^trunk lid$", ""),
     "liftgate": (r"^(lift ?gate|tail ?gate|hatch|rear hatch)$", ""),
-    # tier C: name rule pending (written after reading the trial's list rows)
-    "wiper-motor": (r"(?!x)x", ""),
-    "knuckle": (r"(?!x)x", ""),
-    "strut": (r"(?!x)x", ""),
+    # tier C, names on the 2026-11-09 trial pages (Jetta, Passat): exact names
+    # only, as for the other VW rules: "Wiper Motor", "Knuckle", "Strut",
+    # "Shock Absorber" / "Shock". "Spindle" (1K0-505-435, rear stub axle) is
+    # not taken: the name does not say it is the knuckle.
+    "wiper-motor": (r"^((front|rear|windshield|rear window) )?wiper motor( assembly)?$", ""),
+    "knuckle": (r"^(steering )?knuckle( assembly)?$", ""),
+    "strut": (r"^(front |rear )?(strut|shock absorber|shock)( assembly)?$", ""),
 }
 
 NOTES = {
