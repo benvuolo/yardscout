@@ -2925,3 +2925,23 @@ each); nothing allowlisted or crawled.
   - First slice: GSP 12 groups, 1A strut 8.
   - Waiting for crawl completion per (site, category) before the full §11.4
     sample. The hub pings this session.
+### Wheels curation, first pass (session_016ZzJfKi8ND3Ey2g66qhiZT, 2026-11-09 ~20:00 UTC; branch interchange/wheels-curation)
+
+- Raw used: oem-raw@4a733550 (tier W partly crawled for Ford, the Jeep site and Lexus; run 42666726212 still going). Records: Ford 435, Jeep site 541, Lexus 233.
+- Scratch curate run. It isn't committed: the committed model_map fails M3/M5 on the new "Cr-Z" feed spelling, so I passed `--inventory` an inventory_live.json from fba7905 (13:38 UTC, before the spelling appeared).
+- Real list manifests vs the crawl rules:
+  - Lexus is clean: 177 "(For Spare)" rows dropped.
+  - Ford's crawl rule kept designated spares: the "Wheel Assy - Spare" / "17\" Mini Steel Spare Wheel" text is in the row's extra field, which the rule doesn't read.
+  - Mopar's crawl rule kept "[TBK] Compact Spare" rows.
+- Curation fix (a210d2e): `wheel_compact_spare` refusal.
+  - A compact / mini / temporary / T-type mention refuses every record of that (site, pn).
+  - Notes aren't read where they list the car's options: Hyundai/Kia Fit Note, Toyota/Lexus info. "&SPARE TIRE-REINFORCED TEMPORARY(T165/90D18)" sits on 19\" RX road wheels.
+  - Full-size spares that are the road-wheel number stay. Lexus "Wheel, Disc" and "(For Spare)" print the same number on the same page; Mopar "Spare Wheel, 16x6.5" next to "Steel Wheels, 16x6.5\"".
+  - Refused: Mopar 6 numbers, Ford 15, Toyota 0. Only one of them had formed a group: 4721567AB, 2010 T&C / Grand Caravan, WRONG without the fix.
+- Scratch result after the fix:
+  - mopar: 83 Likely wheels groups, 31,674 lot cars.
+  - toyota: 52 groups, 3,048 cars.
+  - ford: 0 (its option column means its fitment rows are never coverage).
+  - Every group is `reason: option`, Likely.
+- The policy.py change moves the policy hash, so every committed namespace fails V8 until re-curated. It should land together with the re-curate that ships wheels.
+- §11.4 audit: not started. It needs ~100 fetch.py reads on the Jeep site and Lexus, which run 42666726212 is crawling now. Fetching in parallel would double the request rate on those sites (503 risk, which stops a site for good). It starts when that run ends.
