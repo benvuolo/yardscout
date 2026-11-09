@@ -2502,8 +2502,12 @@ Other outputs of this session:
       the yards' price lists.
     - ac-compressor and fuel-pump-module have no CAND_EXCL. Add the proposed exclusions
       (clutch/line/hose/mech; relay/filter/driver module/line) and check them on the lists.
-    - App: body-gated aftermarket rows carry a 6th element (body). `_am_group_entry` unpacks 5,
-      so add body support or those rows get dropped.
+    - App (format per main 51417c4): a gated Spectra row is [make, model, lo, hi, engine, gates]
+      with gates a DICT, {"body": "Sedan"|"Coupe"|...} and/or {"drive": "awd"|"4wd"|"fwd"|"rwd"}
+      (the same values as the parts-table drive gate). Ungated rows stay 5 elements.
+      `_am_group_entry` unpacks 5 today: add gates support or gated rows get dropped. Hub rule:
+      the drive gate never infers drive. A confirmed drivetrain matches; otherwise the row
+      shows "if equipped", as today.
   - Audit integrity (hub, 20:55 UTC): `fetch.py --text` silently cuts output at 400 lines.
     Until the truncation-marker fix lands, every §11.4 verifier brief must say: pass
     `--max-lines 100000`, or read the cached HTML directly. Strut and knuckle list pages are long.
