@@ -30,6 +30,8 @@ from __future__ import annotations
 import argparse
 import importlib
 import json
+import os
+import subprocess
 import re
 import sys
 import time
@@ -216,18 +218,67 @@ def _load_completion(path: str, site: str | None = None) -> list[dict]:
     return out
 
 
+def tier_key(tier: str, wl_site: dict) -> str:
+    """Done-key prefix for a tier's seeds: the tier, plus the worklist flag's
+    pass number when the flag is an int > 1 ("tierD": 2 -> "D2"). A
+    placeholder pass (hub option c: match-nothing rules, list pages only)
+    marks its seeds done; raising the pass number re-reads them with the real
+    rules, which a version bump alone would not (done keys persist)."""
+    f = wl_site.get(TIER_FLAG[tier]) if tier in TIER_FLAG else None
+    n = f if isinstance(f, int) and not isinstance(f, bool) else 1
+    return tier if n <= 1 else f"{tier}{n}"
+
+
+def ci_pending(site: str, wl_site: dict, repo: Path) -> str | None:
+    """What the CI crawl still has to do for the site (markers.mode over the
+    oem-raw branch: "crawl" / "complete"), or None. Raises when the branch
+    state cannot be read (no git, no origin/oem-raw)."""
+    out = subprocess.run(["git", "-C", str(repo), "ls-tree", "--name-only", "origin/oem-raw", "raw/"],
+                         capture_output=True, text=True, timeout=60)
+    if out.returncode:
+        raise RuntimeError(f"cannot read origin/oem-raw: {out.stderr.strip()[:200]}")
+    names = set(out.stdout.split())
+    return markers.mode(site, wl_site, lambda n: f"raw/{n}" in names)
+
+
+def local_guard(site: str, scratch_offline: bool) -> None:
+    """Hub rule (2026-11-09): a local run never crawls a domain the CI crawl has
+    work pending on: two crawlers double the paced per-domain rate, and a
+    refusal stops a site for good. CI runs (GITHUB_ACTIONS) are exempt;
+    --scratch-offline makes the run cache-only (fetch.OFFLINE)."""
+    if os.environ.get("GITHUB_ACTIONS") == "true":
+        return
+    import fetch
+    if site not in fetch.ALLOWED:
+        return  # fetch refuses every request to it anyway (fixture sites in tests)
+    if scratch_offline:
+        fetch.OFFLINE = True
+        return
+    wl_site = (json.loads((ROOT / "worklist.json").read_text()).get("sites") or {}).get(site) or {}
+    try:
+        pending = ci_pending(site, wl_site, ROOT)
+    except Exception as e:  # noqa: BLE001 - unknown state refuses, never crawls
+        sys.exit(f"{site}: local run refused, CI state unknown ({e}). Pass --scratch-offline for a cache-only run.")
+    if pending is not None:
+        sys.exit(f"{site}: local run refused, the CI crawl has work pending ({pending}). "
+                 "Pass --scratch-offline for a cache-only run.")
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--site", required=True)
     ap.add_argument("--tier", default="all")
     ap.add_argument("--max-segments", type=int, default=0)
     ap.add_argument("--minutes", type=float, default=0, help="stop cleanly after this long (checkpointed runs)")
+    ap.add_argument("--scratch-offline", action="store_true",
+                    help="local run: cache only, no request (required while the CI crawl has work pending on the site)")
     ap.add_argument("--complete", metavar="WORKLIST",
                     help="R3 completion mode: [{make, model, year, cats}] rows (feed names), in order; "
                          "'auto' = the site's worklist.json \"complete\" file, finishing with raw/<site>.cN.done")
     a = ap.parse_args()
     deadline = time.time() + a.minutes * 60 if a.minutes else None
     site = a.site
+    local_guard(site, a.scratch_offline)
     mod = module_for(site)
     tiers = ["A", "B", "W", "C", "D"] if a.tier == "all" else [a.tier]
     raw_dir = ROOT / "raw"
@@ -702,10 +753,13 @@ def main() -> None:
                         sys.exit(10)
                     year = seeds.pop(0)
                     tried.append(year)
-                    key = f"{tier}|{make}|{model}|{year}"
+                    key = f"{tier_key(tier, wl_site)}|{make}|{model}|{year}"
                     if key in done:
                         continue
-                    navigated, failed = visit(tier, make, model, year, cats, seg["segment"], covered)
+                    # lines carry the pass key ("D" placeholder pass, "D2" real
+                    # rules), so curation reads only the pass written with rules
+                    navigated, failed = visit(tier_key(tier, wl_site), make, model, year, cats,
+                                              seg["segment"], covered)
                     if not navigated:
                         if not failed:
                             done.add(key)  # navigation miss (no catalog for this year): done

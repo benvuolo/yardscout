@@ -41,6 +41,10 @@ STATE = ROOT / ".state"
 CACHE = ROOT / "cache"
 PER_DOMAIN_GAP = 8.0  # 2026-11-05: was 4.0; moparpartsgiant (403) and vwpartsgiant (503) refused at ~3.5 req/s network-wide
 GLOBAL_GAP = 0.5
+# Cache-only mode (crawl.py --scratch-offline): a page not in the cache raises
+# NetworkError without any request. Local trials use it while the CI crawl has
+# work pending on the domain (hub 2026-11-09: never two crawlers on one site).
+OFFLINE = False
 TIMEOUT = 40
 
 ALLOWED = {
@@ -344,6 +348,8 @@ def get(url: str) -> dict:
         d["cached"] = True
         d["cache_path"] = str(cp)
         return d
+    if OFFLINE:
+        raise NetworkError(f"offline (cache only): {url} not cached")
     if _breaker(u.netloc).exists():
         raise Refused(f"{u.netloc} stopped earlier: {_breaker(u.netloc).read_text().strip()}")
     if not _robots_ok(url):

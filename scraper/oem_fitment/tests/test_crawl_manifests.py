@@ -72,6 +72,9 @@ def jl(p: Path) -> list[dict]:
 
 
 crawl.TIERS = {"A": ["alternator", "starter", "side-mirrors", "headlights"], "B": []}
+# fixture pages served in place of fetch.get (no request is ever made), so the
+# local-run guard against live CI work does not apply (tests/test_crawl_guard.py)
+crawl.local_guard = lambda site, scratch_offline: None
 
 with tempfile.TemporaryDirectory() as td:
     root = Path(td)

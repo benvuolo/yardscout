@@ -2124,14 +2124,16 @@
     }
    ],
    "wheels": true,
-   "version": 3,
+   "version": 4,
    "wheels_note": "2026-11-09: tier W (wheels) added; version raised so the site re-opens and crawls wheels only (A/B seeds are skipped through progress.json done keys).",
    "complete": {
     "file": "completion/ford.own_page.json",
     "version": 1
    },
    "tierC": true,
-   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 3 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys)."
+   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 3 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys).",
+   "tierD": 1,
+   "tierD_note": "2026-11-09: tier D wave 1 with placeholder rules (hub option c): version 4 re-opens the site; the CI crawl reads the tier D list pages only and records every row (raw/<site>.lists.jsonl); no product page is fetched until real rules land, then \"tierD\" goes to 2 (done keys and list lines \"D2\", crawl.tier_key) and the version is raised so the seeds are re-read with them."
   },
   "www.gmpartsgiant.com": {
    "cars": 78432,
@@ -4616,7 +4618,9 @@
     "version": 1
    },
    "tierC": true,
-   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; the site is not done yet, so tier C follows A/B in the same crawl (no version change)."
+   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; the site is not done yet, so tier C follows A/B in the same crawl (no version change).",
+   "tierD": 1,
+   "tierD_note": "2026-11-09: tier D wave 1 (sunroof, center-console, door-panel, blower-motor, fog-lights) with placeholder rules (hub option c): the CI crawl reads the list pages only and records every row; no product page is fetched until real rules land and \"tierD\" goes to 2 (done keys \"D2\"). Site not done yet: no version change."
   },
   "www.nissanpartsdeal.com": {
    "cars": 29587,
@@ -6127,8 +6131,10 @@
     "version": 1
    },
    "tierC": true,
-   "version": 2,
-   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 2 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys)."
+   "version": 3,
+   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 2 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys).",
+   "tierD": 1,
+   "tierD_note": "2026-11-09: tier D wave 1 with placeholder rules (hub option c): version 3 re-opens the site; the CI crawl reads the tier D list pages only and records every row (raw/<site>.lists.jsonl); no product page is fetched until real rules land, then \"tierD\" goes to 2 (done keys and list lines \"D2\", crawl.tier_key) and the version is raised so the seeds are re-read with them."
   },
   "www.hyundaipartsdeal.com": {
    "cars": 12247,
@@ -6555,14 +6561,16 @@
     }
    ],
    "wheels": true,
-   "version": 3,
+   "version": 4,
    "wheels_note": "2026-11-09: tier W (wheels) added; version raised so the done site re-opens and crawls wheels only (A/B seeds are skipped through progress.json done keys).",
    "complete": {
     "file": "completion/hmg.own_page.json",
     "version": 1
    },
    "tierC": true,
-   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 3 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys)."
+   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 3 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys).",
+   "tierD": 1,
+   "tierD_note": "2026-11-09: tier D wave 1 with placeholder rules (hub option c): version 4 re-opens the site; the CI crawl reads the tier D list pages only and records every row (raw/<site>.lists.jsonl); no product page is fetched until real rules land, then \"tierD\" goes to 2 (done keys and list lines \"D2\", crawl.tier_key) and the version is raised so the seeds are re-read with them."
   },
   "www.acurapartswarehouse.com": {
    "cars": 4098,
@@ -7648,7 +7656,7 @@
      "seed_year": 2004
     }
    ],
-   "version": 5,
+   "version": 6,
    "version_note": "2026-11-05 v2: Dodge/Chrysler/Ram segments (copied from the moparpartsgiant worklist, same feed segments and seed years; Plymouth left out: no Plymouth fitment rows on this site). v1 (Jeep only) finished as raw/www.jeeppartsdeal.com.done, kept on oem-raw; v2 finishes as raw/www.jeeppartsdeal.com.v2.done (markers.py). Jeep seeds are skipped through progress.json done keys.",
    "wheels": true,
    "wheels_note": "2026-11-09: tier W (wheels) added; version raised so the site re-opens and crawls wheels only (A/B seeds are skipped through progress.json done keys).",
@@ -7657,7 +7665,9 @@
     "version": 1
    },
    "tierC": true,
-   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 4 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys)."
+   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 4 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys).",
+   "tierD": 1,
+   "tierD_note": "2026-11-09: tier D wave 1 with placeholder rules (hub option c): version 6 re-opens the site; the CI crawl reads the tier D list pages only and records every row (raw/<site>.lists.jsonl); no product page is fetched until real rules land, then \"tierD\" goes to 2 (done keys and list lines \"D2\", crawl.tier_key) and the version is raised so the seeds are re-read with them."
   },
   "www.kiapartsnow.com": {
    "cars": 9530,
@@ -8087,11 +8097,13 @@
     "file": "completion/hmg.own_page.json",
     "version": 1
    },
-   "version": 3,
+   "version": 4,
    "tierC": true,
    "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 2 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys).",
    "wheels": true,
-   "wheels_note": "2026-11-09: tier W (wheels) added; uses the Hyundai rules (2013 Optima chassis/wheel_cap read through fetch.py: same names). Version raised so the done site re-opens and crawls wheels only."
+   "wheels_note": "2026-11-09: tier W (wheels) added; uses the Hyundai rules (2013 Optima chassis/wheel_cap read through fetch.py: same names). Version raised so the done site re-opens and crawls wheels only.",
+   "tierD": 1,
+   "tierD_note": "2026-11-09: tier D wave 1 with placeholder rules (hub option c): version 4 re-opens the site; the CI crawl reads the tier D list pages only and records every row (raw/<site>.lists.jsonl); no product page is fetched until real rules land, then \"tierD\" goes to 2 (done keys and list lines \"D2\", crawl.tier_key) and the version is raised so the seeds are re-read with them."
   },
   "www.infinitipartsdeal.com": {
    "cars": 3383,
@@ -9055,14 +9067,16 @@
     }
    ],
    "wheels": true,
-   "version": 3,
+   "version": 4,
    "wheels_note": "2026-11-09: tier W (wheels) added; version raised so the site re-opens and crawls wheels only (A/B seeds are skipped through progress.json done keys).",
    "complete": {
     "file": "completion/toyota.own_page.json",
     "version": 1
    },
    "tierC": true,
-   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 3 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys)."
+   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 3 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys).",
+   "tierD": 1,
+   "tierD_note": "2026-11-09: tier D wave 1 with placeholder rules (hub option c): version 4 re-opens the site; the CI crawl reads the tier D list pages only and records every row (raw/<site>.lists.jsonl); no product page is fetched until real rules land, then \"tierD\" goes to 2 (done keys and list lines \"D2\", crawl.tier_key) and the version is raised so the seeds are re-read with them."
   },
   "www.audipartsgiant.com": {
    "cars": 2271,
@@ -9241,8 +9255,10 @@
     "version": 1
    },
    "tierC": true,
-   "version": 2,
-   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 2 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys)."
+   "version": 3,
+   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 2 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys).",
+   "tierD": 1,
+   "tierD_note": "2026-11-09: tier D wave 1 with placeholder rules (hub option c): version 3 re-opens the site; the CI crawl reads the tier D list pages only and records every row (raw/<site>.lists.jsonl); no product page is fetched until real rules land, then \"tierD\" goes to 2 (done keys and list lines \"D2\", crawl.tier_key) and the version is raised so the seeds are re-read with them."
   },
   "www.bmwpartsdeal.com": {
    "cars": 5353,
@@ -9781,8 +9797,10 @@
     "version": 1
    },
    "tierC": true,
-   "version": 2,
-   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 2 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys)."
+   "version": 3,
+   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 2 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys).",
+   "tierD": 1,
+   "tierD_note": "2026-11-09: tier D wave 1 with placeholder rules (hub option c): version 3 re-opens the site; the CI crawl reads the tier D list pages only and records every row (raw/<site>.lists.jsonl); no product page is fetched until real rules land, then \"tierD\" goes to 2 (done keys and list lines \"D2\", crawl.tier_key) and the version is raised so the seeds are re-read with them."
   },
   "www.mazdapartsnow.com": {
    "cars": 6231,
@@ -10165,8 +10183,10 @@
     "version": 1
    },
    "tierC": true,
-   "version": 2,
-   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 2 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys)."
+   "version": 3,
+   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 2 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys).",
+   "tierD": 1,
+   "tierD_note": "2026-11-09: tier D wave 1 with placeholder rules (hub option c): version 3 re-opens the site; the CI crawl reads the tier D list pages only and records every row (raw/<site>.lists.jsonl); no product page is fetched until real rules land, then \"tierD\" goes to 2 (done keys and list lines \"D2\", crawl.tier_key) and the version is raised so the seeds are re-read with them."
   },
   "www.mbpartsgiant.com": {
    "cars": 4710,
@@ -10773,14 +10793,16 @@
     }
    ],
    "wheels": true,
-   "version": 3,
+   "version": 4,
    "wheels_note": "2026-11-09: tier W (wheels) added; version raised so the done site re-opens and crawls wheels only (A/B seeds are skipped through progress.json done keys).",
    "complete": {
     "file": "completion/mb.own_page.json",
     "version": 1
    },
    "tierC": true,
-   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 3 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys)."
+   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 3 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys).",
+   "tierD": 1,
+   "tierD_note": "2026-11-09: tier D wave 1 with placeholder rules (hub option c): version 4 re-opens the site; the CI crawl reads the tier D list pages only and records every row (raw/<site>.lists.jsonl); no product page is fetched until real rules land, then \"tierD\" goes to 2 (done keys and list lines \"D2\", crawl.tier_key) and the version is raised so the seeds are re-read with them."
   },
   "www.mitsubishipartsgiant.com": {
    "cars": 2970,
@@ -11067,8 +11089,10 @@
     "version": 1
    },
    "tierC": true,
-   "version": 2,
-   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 2 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys)."
+   "version": 3,
+   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 2 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys).",
+   "tierD": 1,
+   "tierD_note": "2026-11-09: tier D wave 1 with placeholder rules (hub option c): version 3 re-opens the site; the CI crawl reads the tier D list pages only and records every row (raw/<site>.lists.jsonl); no product page is fetched until real rules land, then \"tierD\" goes to 2 (done keys and list lines \"D2\", crawl.tier_key) and the version is raised so the seeds are re-read with them."
   },
   "www.vwpartsgiant.com": {
    "cars": 6886,
@@ -11411,14 +11435,16 @@
     }
    ],
    "wheels": true,
-   "version": 3,
+   "version": 4,
    "wheels_note": "2026-11-09: tier W (wheels) added; version raised so the done site re-opens and crawls wheels only (A/B seeds are skipped through progress.json done keys).",
    "complete": {
     "file": "completion/vag.own_page.json",
     "version": 1
    },
    "tierC": true,
-   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 3 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys)."
+   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 3 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys).",
+   "tierD": 1,
+   "tierD_note": "2026-11-09: tier D wave 1 with placeholder rules (hub option c): version 4 re-opens the site; the CI crawl reads the tier D list pages only and records every row (raw/<site>.lists.jsonl); no product page is fetched until real rules land, then \"tierD\" goes to 2 (done keys and list lines \"D2\", crawl.tier_key) and the version is raised so the seeds are re-read with them."
   },
   "www.volvopartsgiant.com": {
    "cars": 2460,
@@ -11657,8 +11683,10 @@
     "version": 1
    },
    "tierC": true,
-   "version": 2,
-   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 2 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys)."
+   "version": 3,
+   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 2 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys).",
+   "tierD": 1,
+   "tierD_note": "2026-11-09: tier D wave 1 with placeholder rules (hub option c): version 3 re-opens the site; the CI crawl reads the tier D list pages only and records every row (raw/<site>.lists.jsonl); no product page is fetched until real rules land, then \"tierD\" goes to 2 (done keys and list lines \"D2\", crawl.tier_key) and the version is raised so the seeds are re-read with them."
   }
  }
 }
