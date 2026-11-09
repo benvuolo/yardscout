@@ -1756,3 +1756,13 @@ exterior hold are untouched.
 - **Remaining:** 100 groups / 50 questions over 27 pairings. Estimate about 1
   agent-hour (4 parallel agents, about 10 minutes wall time) plus spot-checks.
   Not started; awaiting hub/owner.
+
+## 2026-11-09 subaru withheld (hub, urgent accuracy)
+
+subarupartsdeal's diagram pages have a "Fitting Vehicle Options" column that
+encodes model/body: S = Legacy sedan, W = wagon, OBK/SOBK/WOBK = Outback,
+P = Baja, plus trim codes such as S.25I. Curation ignored it, so every number
+on a shared page was credited to every model on that page (the held-parts
+research found it: 2011 Outback fender AJ00/01 = S only, AJ06/07 = OBK only).
+groups/subaru.json is removed, so the next scan drops all 223 live subaru
+Likely groups. Tests now pin the 7 remaining namespaces.
