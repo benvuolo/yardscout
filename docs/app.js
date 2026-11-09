@@ -5556,6 +5556,8 @@ function setSheetState(st) {
   // The open part of the map changed: re-solve the pins after the slide.
   clearTimeout(setSheetState._t);
   setSheetState._t = setTimeout(() => { if (yardsView === 'map') { liftMapControls(); layoutPins(); } }, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 240);
+  // and once more when the slide has really finished (timers can beat it)
+  if (!sh.__te) { sh.__te = true; sh.addEventListener('transitionend', (e) => { if (e.target === sh && yardsView === 'map') { liftMapControls(); layoutPins(); } }); }
 }
 /* Keep the map's credit line and its bottom controls above the sheet when the
  * sheet spans the map (phones); a side-docked sheet (wide screens) leaves them. */
@@ -5641,7 +5643,7 @@ function layoutMapMode() {
   const tr = tabs ? tabs.getBoundingClientRect() : null;
   const bottomLimit = tr && getComputedStyle(tabs).position === 'fixed' ? tr.top : window.innerHeight;
   const top = wrap.getBoundingClientRect().top;
-  wrap.style.height = Math.max(320, Math.floor(bottomLimit - top - 8)) + 'px';
+  wrap.style.height = Math.max(220, Math.floor(bottomLimit - top - 8)) + 'px';   // short phones: never under the tab bar
   liftMapControls();
   if (_yardsMap) _yardsMap.resize();
 }
@@ -5711,7 +5713,11 @@ function pinArea() {
   const box = document.getElementById('yards-map'), c = box.getBoundingClientRect();
   let top = 4, bottom = c.height - 4;
   const over = (sel) => { const el = document.querySelector(sel); if (!el || !el.getClientRects().length) return null; const r = el.getBoundingClientRect(); return r.height ? r : null; };
-  for (const r of [over('#yards-map-wrap .yards-map-legend'), over('#yards-map .maplibregl-ctrl-top-right .maplibregl-ctrl-group'), over('#yards-map-wrap .yards-map-note:not(:empty)')]) if (r) top = Math.max(top, r.bottom - c.top + 6);
+  for (const r of [over('#yards-map-wrap .yards-map-legend'), over('#yards-map-wrap .yards-map-note:not(:empty)')]) if (r) top = Math.max(top, r.bottom - c.top + 6);
+  // The zoom buttons only fill the top-right corner: pins keep off them
+  // (layoutPins), rather than the whole top band being closed.
+  const zc = over('#yards-map .maplibregl-ctrl-top-right .maplibregl-ctrl-group');
+  const ctl = zc ? { l: zc.left - c.left, r: zc.right - c.left, t: zc.top - c.top, b: zc.bottom - c.top } : null;
   let left = 4;
   const at = over('#yards-map .maplibregl-ctrl-attrib'), sh = over('#yards-map-sheet');
   if (at) bottom = Math.min(bottom, at.top - c.top - 6);
@@ -5721,7 +5727,9 @@ function pinArea() {
     if (sh.left <= c.left + 24 && sh.right >= c.right - 24) bottom = Math.min(bottom, sh.top - c.top - 6);
     else if (sh.left <= c.left + 24) left = Math.max(left, sh.right - c.left + 6);
   }
-  return { l: left, r: c.width - 4, t: top, b: Math.max(top + 44, bottom), W: c.width, H: c.height };
+  // No floor: with the sheet pulled up there may be no open map at all, and
+  // then no pin is drawn (the sheet lists every yard).
+  return { l: left, r: c.width - 4, t: top, b: Math.max(top, bottom), W: c.width, H: c.height, ctl };
 }
 function measurePin(html) {
   const layer = pinLayer();
@@ -5787,12 +5795,75 @@ function layoutPins() {
   }
   // A pin taller than the open strip of map has no room: don't draw it (the
   // sheet still lists the yard), rather than push it over the controls.
+  // Pins over the zoom buttons slide left of them, or flip below their
+  // point; if neither fits, the pin isn't drawn (the sheet still lists it).
+  if (A.ctl) {
+    const fits = (g) => g.rect.l >= A.l - 0.5 && g.rect.t >= A.t - 0.5 && g.rect.b <= A.b + 0.5 && !hit(g.rect, A.ctl) && !groups.some(o => o !== g && hit(o.rect, g.rect));
+    for (let i = groups.length - 1; i >= 0; i--) {
+      const g = groups[i];
+      if (!hit(g.rect, A.ctl)) continue;
+      const keep = { below: g.below, rect: g.rect, nudged: g.nudged };
+      const w = g.rect.r - g.rect.l;
+      g.rect = { l: A.ctl.l - 6 - w, r: A.ctl.l - 6, t: keep.rect.t, b: keep.rect.b }; g.nudged = true;
+      if (fits(g)) continue;
+      g.below = !keep.below; rectOf(g);
+      if (fits(g)) continue;
+      groups.splice(i, 1);
+    }
+  }
   for (let i = groups.length - 1; i >= 0; i--) if (groups[i].rect.t < A.t - 0.5 || groups[i].rect.b > A.b + 0.5) groups.splice(i, 1);
+  const you = activeZipCoords && _projectFn({ lat: activeZipCoords.lat, lng: activeZipCoords.lng });
+  const youOn = you && you.x > A.l && you.x < A.W && you.y > A.t && you.y < A.b;
+  const youLbl = youOn ? youLabelSize() : null;
+  // Label under the dot unless there's more room above; never past the map's
+  // edge (the pin layer clips): if neither side has room, the dot shows alone.
+  let youUp = false, youNoLabel = false;
+  if (youOn) {
+    const below = A.b - (you.y + 12), above = (you.y - 12) - A.t;
+    youUp = below < youLbl.h && above > below;
+    const room = youUp ? (you.y - 12) : (A.H - (you.y + 12));
+    youNoLabel = room < youLbl.h + 2;
+  }
+  // The You dot is the reader's bearing: pins keep off it (flip to the other
+  // side of their point, or slide beside the dot); only if neither fits is
+  // the dot drawn over the pin.
+  let youOver = false;
+  if (youOn) {
+    const yr = youRect(you, youUp, youLbl);
+    const ok = (g) => g.rect.l >= A.l - 0.5 && g.rect.r <= A.r + 0.5 && g.rect.t >= A.t - 0.5 && g.rect.b <= A.b + 0.5
+      && !hit(g.rect, yr) && !(A.ctl && hit(g.rect, A.ctl)) && !groups.some(o => o !== g && hit(o.rect, g.rect));
+    for (const g of groups) {
+      if (!hit(g.rect, yr)) continue;
+      const keep = { below: g.below, rect: g.rect, nudged: g.nudged };
+      g.below = !g.below; rectOf(g);
+      if (ok(g)) continue;
+      g.below = keep.below; rectOf(g);
+      const w = g.rect.r - g.rect.l, base = g.rect;
+      let placed = false;
+      for (const l of [yr.l - 6 - w, yr.r + 6]) {
+        g.rect = { l, r: l + w, t: base.t, b: base.b };
+        if (ok(g)) { g.nudged = true; placed = true; break; }
+      }
+      if (!placed) { g.below = keep.below; g.rect = keep.rect; g.nudged = keep.nudged; youOver = true; }
+    }
+  }
   _pinGroups = groups;
   watchPinSizes(layer);
-  const you = activeZipCoords && _projectFn({ lat: activeZipCoords.lat, lng: activeZipCoords.lng });
-  layer.innerHTML = `${you && you.x > A.l && you.x < A.W && you.y > A.t && you.y < A.b ? `<span class="map-you${you.y + 34 > A.b ? ' up' : ''}" style="left:${you.x}px;top:${you.y}px"><span>You</span></span>` : ''}
+  layer.innerHTML = `${youOn ? `<span class="map-you${youUp ? ' up' : ''}${youOver ? ' over' : ''}${youNoLabel ? ' no-label' : ''}" style="left:${you.x}px;top:${you.y}px"><span data-you="${youLbl.h}">You</span></span>` : ''}
     ${groups.map((g, i) => `<span class="map-pin-at${g.nudged ? ' nudged' : ''}${g.below ? ' below' : ''}" data-g="${i}" style="left:${g.rect.l}px;top:${g.rect.t}px">${g.html}</span>`).join('')}`;
+}
+/* The You dot and its label, as a box on the map (for pins to keep off). */
+function youLabelSize() {
+  const layer = pinLayer();
+  let m = layer.querySelector('.pin-measure');
+  if (!m) { m = document.createElement('div'); m.className = 'pin-measure'; m.setAttribute('aria-hidden', 'true'); layer.appendChild(m); }
+  m.innerHTML = '<span class="map-you"><span>You</span></span>';
+  const lb = m.querySelector('span span').getBoundingClientRect();
+  return { w: lb.width, h: lb.height || 18 };
+}
+function youRect(p, up, lb) {
+  const half = Math.max(11, lb.w / 2), lh = lb.h;
+  return up ? { l: p.x - half, r: p.x + half, t: p.y - 10 - lh, b: p.y + 11 } : { l: p.x - half, r: p.x + half, t: p.y - 11, b: p.y + 10 + lh };
 }
 /* A pin that changes size after it was placed (text size changed, fonts
  * arrived) gets the layout solved again; same size = no-op, so no loop. */
@@ -5800,11 +5871,19 @@ var _pinRO = null;
 function watchPinSizes(layer) {
   if (!window.ResizeObserver) return;
   if (!_pinRO) _pinRO = new ResizeObserver((entries) => {
-    const off = entries.some(e => { const g = _pinGroups[+e.target.dataset.g]; const r = e.target.getBoundingClientRect(); return g && g.sz && (Math.abs(r.width - g.sz.w) > 1 || Math.abs(r.height - g.sz.h) > 1); });
+    const off = entries.some(e => {
+      const r = e.target.getBoundingClientRect();
+      if (e.target.dataset.you) return Math.abs(r.height - +e.target.dataset.you) > 1;   // You label grew or shrank
+      const g = _pinGroups[+e.target.dataset.g]; return g && g.sz && (Math.abs(r.width - g.sz.w) > 1 || Math.abs(r.height - g.sz.h) > 1);
+    });
     if (off) requestAnimationFrame(layoutPins);
   });
   _pinRO.disconnect();
-  requestAnimationFrame(() => layer.querySelectorAll('.map-pin-at').forEach(el => _pinRO.observe(el)));
+  requestAnimationFrame(() => {
+    layer.querySelectorAll('.map-pin-at').forEach(el => _pinRO.observe(el));
+    const yl = layer.querySelector('.map-you > span');
+    if (yl) _pinRO.observe(yl);
+  });
 }
 /* During a pan the pins follow the map; overlaps are re-solved when it stops. */
 function followPins() {

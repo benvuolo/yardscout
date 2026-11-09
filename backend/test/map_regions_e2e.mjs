@@ -9,6 +9,11 @@
  *  - no floating pull-sheet pill over the map;
  *  - a cluster of yards at one spot opens a list in the sheet;
  *  - no "(Premium)" lot gets its own pin;
+ *  - the sheet never runs under the tab bar (short phone screens);
+ *  - the You label is never cut off by the map edge (also with the sheet
+ *    pulled up and with a yard's card open);
+ *  - no pin covers the You dot or its label (if nothing clears it, the dot
+ *    is drawn on top; counted in the summary);
  *  - first view (hub 2026-11-09): the nearest yard is its own named pin,
  *    drawn above the sheet, and the user's spot is on the map (unless the
  *    nearest yard needed a closer view than that allows; reported). Zooming out
@@ -46,15 +51,18 @@ const REGIONS = [
   ['Denver', 39.74, -104.99], ['Northeast corridor', 40.35, -74.65], ['Salt Lake', 40.76, -111.89],
   ['Ogden', 41.223, -111.973],
 ].filter(r => !process.env.REGIONS || process.env.REGIONS.split(',').some(x => r[0].toLowerCase().startsWith(x.toLowerCase())));
-const WIDTHS = (process.env.WIDTHS || '320,390,768,1280').split(',').map(Number);
+// width, or WIDTHxHEIGHT: 390x664 is iPhone 13 Safari with its bars showing,
+// 375x553 iPhone SE Safari (Playwright's device sizes).
+const WIDTHS = (process.env.WIDTHS || '320,390,768,1280,390x664,375x553').split(',');
 
 const results = new Map();   // region -> {checks, fails:[], pins:Set, clusters:Set, same:0}
 const rec = (r) => { if (!results.has(r)) results.set(r, { checks: 0, fails: [], pins: [], clusters: [], same: 0 }); return results.get(r); };
 
 const browser = await chromium.launch();
 try {
-  for (const width of WIDTHS) {
-    const page = await browser.newPage({ viewport: { width, height: width >= 768 ? 900 : 844 } });
+  for (const size of WIDTHS) {
+    const [width, hgt] = size.split('x').map(Number);
+    const page = await browser.newPage({ viewport: { width, height: hgt || (width >= 768 ? 900 : 844) } });
     await page.route(/^https?:\/\/(?!127\.0\.0\.1|unpkg\.com|tiles\.openfreemap\.org)/, r => r.abort());
     // Full-file data path: every region's cars are in from the start.
     await page.route(/data\/inv\/manifest\.json/, r => r.fulfill({ status: 404, body: '' }));
@@ -69,7 +77,7 @@ try {
     for (const [name, lat, lng, national] of REGIONS) {
       for (const theme of ['light', 'dark']) {
         for (const big of [false, true]) {
-          const cfg = `${width}/${theme}/${big ? '200%' : '100%'}`;
+          const cfg = `${size}/${theme}/${big ? '200%' : '100%'}`;
           const out = await page.evaluate(async ({ lat, lng, national, theme, big }) => {
             document.documentElement.dataset.theme = theme; applyThemeColor();
             if (national) { localStorage.setItem('jh_pro', '1'); applyProGates(); document.getElementById('live-radius').value = ''; }
@@ -82,11 +90,11 @@ try {
             const t0 = Date.now();
             while (!(window._yardsMap && _yardsMap.loaded()) && Date.now() - t0 < 20000) await new Promise(r => setTimeout(r, 100));
             await new Promise(r => setTimeout(r, 300));
-            const fails = [], stats = [];
+            const fails = [], stats = []; let youOverCount = 0;
             const ov = (a, b) => a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
             const vis = (el) => el && el.getClientRects().length && getComputedStyle(el).display !== 'none' && getComputedStyle(el).visibility !== 'hidden';
             const check = (label) => {
-              layoutPins(); liftMapControls();
+              liftMapControls(); layoutPins();
               const pins = [...document.querySelectorAll('#yards-map .pin-layer .map-pin')];
               const rs = pins.map(p => p.getBoundingClientRect());
               for (let i = 0; i < rs.length; i++) for (let j = i + 1; j < rs.length; j++) if (ov(rs[i], rs[j])) fails.push(`${label}: pins overlap (${pins[i].textContent.trim().slice(0, 30)} / ${pins[j].textContent.trim().slice(0, 30)})`);
@@ -99,11 +107,25 @@ try {
               const covers = [...pins, document.getElementById('saved-pill'), document.getElementById('yards-map-sheet')].filter(vis).map(e => e.getBoundingClientRect());
               if (inSheet) { const c = document.querySelector('#yards-map-sheet.with-credit .ms-credit'); if (!vis(c)) fails.push(`${label}: credit line missing (sheet)`); }
               else if (!vis(at)) fails.push(`${label}: credit line not visible`);
-              else { const ar = at.getBoundingClientRect(); if (ar.top < box.top - 1 || ar.bottom > box.bottom + 1) fails.push(`${label}: credit line outside the map`); if (covers.some(r => ov(r, ar))) fails.push(`${label}: something covers the credit line`); }
+              else { const ar = at.getBoundingClientRect(); if (ar.top < box.top - 1 || ar.bottom > box.bottom + 1) fails.push(`${label}: credit line outside the map`); if (covers.some(r => ov(r, ar))) fails.push(`${label}: something covers the credit line` + (" " + [...pins, document.getElementById("saved-pill"), document.getElementById("yards-map-sheet")].filter(vis).filter(e => ov(e.getBoundingClientRect(), ar)).map(e => e.id || e.textContent.trim().slice(0, 24)).join(", "))); }
               const zc = document.querySelector('#yards-map .maplibregl-ctrl-group');
               if (!vis(zc)) fails.push(`${label}: zoom buttons not visible`);
               else { const zr = zc.getBoundingClientRect(); if (rs.some(r => ov(r, zr))) fails.push(`${label}: a pin covers the zoom buttons`); }
               if (vis(document.getElementById('saved-pill'))) fails.push(`${label}: floating pull sheet pill over the map`);
+              { const tb = document.querySelector('.tabs'), sh = document.getElementById('yards-map-sheet').getBoundingClientRect();
+                if (tb && getComputedStyle(tb).position === 'fixed' && sh.bottom > tb.getBoundingClientRect().top + 1) fails.push(`${label}: the sheet runs under the tab bar`); }
+              // The You dot (and its label) is never under a pin; if no pin
+              // placement clears it, the dot is drawn on top (counted).
+              const youEl = document.querySelector('#yards-map .map-you');
+              if (youEl) {
+                const parts = [youEl, youEl.querySelector('span')].map(e => e.getBoundingClientRect());
+                const under = rs.some(r => parts.some(q => ov(r, q)));
+                if (under && !youEl.classList.contains('over')) fails.push(`${label}: a pin covers the You dot`);
+                if (youEl.classList.contains('over')) youOverCount++;
+                // never clipped by the map's edge (the pin layer clips)
+                const lb = youEl.querySelector('span'), mb2 = document.getElementById('yards-map').getBoundingClientRect();
+                if (lb && lb.getClientRects().length) { const q = lb.getBoundingClientRect(); if (q.top < mb2.top - 0.5 || q.bottom > mb2.bottom + 0.5 || q.left < mb2.left - 0.5 || q.right > mb2.right + 0.5) fails.push(`${label}: the You label is cut off by the map edge`); }
+              }
               const same = _pinGroups.filter(g => g.items.length > 1 && g.items.every(x => siteNear(x, g.items[0])));
               for (const g of same.slice(0, 2)) {
                 zoomToYards(g.items.map(x => x.key));
@@ -132,11 +154,20 @@ try {
             }
             for (const d of [2, 4, -2, -4]) { _yardsMap.jumpTo({ zoom: z0 + d }); check('zoom ' + (d > 0 ? '+' : '') + d); }
             _yardsMap.jumpTo({ zoom: z0 });
-            return { fails, stats };
+            // the sheet pulled up, and a yard's card open: less open map
+            for (const st of ['full', 'card']) {
+              if (st === 'card' && _mapSites[0]) selectMapYard(_mapSites[0].key); else setSheetState(st);
+              await new Promise(r => setTimeout(r, 400));
+              check('sheet ' + st);
+            }
+            selectMapYard(null);
+            _yardsMap.jumpTo({ zoom: z0 });
+            return { fails, stats, youOver: youOverCount };
           }, { lat, lng, national: !!national, theme, big });
           const r = rec(name);
           r.checks += out.stats.length;
           out.fails.forEach(f => r.fails.push(`${cfg} ${f}`));
+          r.youOver = (r.youOver || 0) + out.youOver;
           out.stats.forEach(s => { if (s.nearest) r.nearest = s.nearest; r.pins.push(s.pins); r.clusters.push(s.clusters); r.same = Math.max(r.same, s.same); r.sites = s.sites; });
         }
       }
@@ -151,7 +182,7 @@ let total = 0;
 for (const [name, r] of results) {
   total += r.fails.length;
   const rng = (a) => a.length ? `${Math.min(...a)}–${Math.max(...a)}` : '0';
-  console.log(`${r.fails.length ? 'FAIL' : 'PASS'}  ${name}: ${r.checks} layouts, ${r.sites} yards in view, single pins ${rng(r.pins)}, clusters ${rng(r.clusters)}, same-spot clusters ${r.same}; first view: ${r.nearest || '-'}${r.fails.length ? ` — ${r.fails.length} problems:` : ''}`);
+  console.log(`${r.fails.length ? 'FAIL' : 'PASS'}  ${name}: ${r.checks} layouts, ${r.sites} yards in view, single pins ${rng(r.pins)}, clusters ${rng(r.clusters)}, same-spot clusters ${r.same}; first view: ${r.nearest || '-'}; You drawn over a pin ${r.youOver || 0}×${r.fails.length ? ` — ${r.fails.length} problems:` : ''}`);
   [...new Set(r.fails)].slice(0, 8).forEach(f => console.log('      ' + f));
 }
 console.log(total ? `\n${total} FAILED` : '\nALL PASS');

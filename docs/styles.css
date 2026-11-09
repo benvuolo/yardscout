@@ -3283,7 +3283,7 @@ button.saved-item-name { max-width: 100%; min-width: 0; overflow-wrap: anywhere;
 /* ===== Map view: full-height map with a bottom sheet (Round 9) ===== */
 html.map-lock, html.map-lock body { overflow: hidden; overscroll-behavior: none; }
 #tab-yards.yards-map-mode #yards-stats-bar { display: none; }
-#yards-map-wrap { position: relative; display: flex; flex-direction: column; min-height: 320px; margin-bottom: 0; }
+#yards-map-wrap { position: relative; display: flex; flex-direction: column; min-height: 220px; margin-bottom: 0; }
 #yards-map-wrap #yards-map { flex: 1 1 auto; height: auto; min-height: 0; }
 #yards-map-wrap .yards-map-legend {
   position: absolute; z-index: 3; top: 8px; left: 8px; max-width: calc(100% - 80px); margin: 0;
@@ -3306,6 +3306,11 @@ html.map-lock, html.map-lock body { overflow: hidden; overscroll-behavior: none;
 .map-sheet[data-state="min"] { height: auto; min-height: 0; }
 .map-sheet[data-state="min"] .ms-body { display: none; }
 @media (prefers-reduced-motion: reduce) { .map-sheet { transition: none; } }
+/* Short screens (phone Safari with its bars showing): the resting sheet is
+   the title and one yard, so the map keeps room for named pins. */
+@media (max-height: 760px) and (max-width: 899px) {
+  .map-sheet[data-state="peek"] { height: min(38%, 7.25rem); min-height: 0; }
+}
 .ms-handle {
   flex: none; display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%;
   min-height: var(--tap); padding: 8px var(--s4) 6px; border: 0; border-bottom: 1px solid var(--border);
@@ -3342,6 +3347,8 @@ html.map-lock, html.map-lock body { overflow: hidden; overscroll-behavior: none;
 .pin-layer .map-pin-at.below .map-pin.has-watch::after { border-bottom-color: var(--accent); }
 .pin-layer .map-you { position: absolute; margin: -8px 0 0 -8px; }
 .map-you.up span { top: auto; bottom: 18px; }   /* no room under the dot: label above it */
+.map-you.no-label span { display: none; }   /* no room either side inside the map: the dot alone */
+.pin-layer .map-you.over { z-index: 3; }   /* no pin placement clears it: the dot stays on top */
 .pin-measure { position: absolute; left: -9999px; top: 0; visibility: hidden; }
 /* The sheet header holds the handle and, in map mode, the pull sheet button. */
 .ms-head { display: flex; align-items: stretch; border-bottom: 1px solid var(--border); }
