@@ -225,4 +225,27 @@ check("names: ... but is for the Camry Hybrid",
 check("names: a note naming both keeps both",
       not _t.note_excludes(["Camry Hybrid; Right; With HID;Camry; With HID; Right"], ("Toyota", "Camry", 2012)))
 
+
+# ---------------------- Subaru Outback-family codes and market notes (hub 2026-11-09)
+# the research sample's 4 WRONG: 2000-04 BE/BH numbers whose option column
+# names only Outback codes, credited to 'Legacy' by the product page
+for _pn, _n in (("72311AE06A", [F + "*W.OBKLTD.AT"]),
+                ("72311AE08D", [F + "OBK6 +SUS6 +OBK6S"]),
+                ("91031AE41AFR", ["C4", F + "W.OBKLTD.AT"]),
+                ("91031AE43BGA", [F + "OBK6 +SUS6 +OBK6S +OBK6LB +OBKLTD +SUSLTD"])):
+    check(f"subaru {_pn}: Outback-only codes are not for the Legacy (incl. Legacy Wagon)",
+          _C._subaru_body_excludes(_n, "Legacy") and _C._subaru_body_excludes(_n, "Legacy Wagon"))
+    check(f"subaru {_pn}: ... and are for the Outback", not _C._subaru_body_excludes(_n, "Outback"))
+check("subaru: S.SUS6 +W.OBK6 (Outback sedan + wagon) is Outback-only",
+      _C._subaru_body_excludes([F + "S.SUS6 +W.OBK6"], "Legacy") and not _C._subaru_body_excludes([F + "S.SUS6 +W.OBK6"], "Outback"))
+check("subaru: S +W.(L+OBK) still credits the Legacy", not _C._subaru_body_excludes([F + "S +W.(L+OBK)"], "Legacy"))
+check("market: 'FOR CANADA' / 'FOR CANADA,CHILE' (72311AE08D 2002-03 rows) are not for US cars",
+      _C._market_excludes(["FOR CANADA"]) and _C._market_excludes(["FOR CANADA,CHILE"]))
+check("market: Korea/Taiwan-spec-only notes are not for US cars",
+      _C._market_excludes(["KOREA SPEC&PREMIUM PACKAGE&W/SEAT HEATER / TAIWAN SPEC&PREMIUM PACKAGE&W/SEAT HEATER"]))
+check("market: a note with a non-market alternative keeps the row",
+      not _C._market_excludes(["CANADA SPEC / CANADA SPEC&W/SEAT HEATER / SEAT HEATER-WITH(DRIVER & PASSENGER)"]))
+check("market: plant notes are not markets", not _C._market_excludes(["Japan Built"]) and not _C._market_excludes(["US Built"]))
+check("market: a US note keeps the row", not _C._market_excludes(["FOR USA, CANADA"]))
+
 done("test_regressions")

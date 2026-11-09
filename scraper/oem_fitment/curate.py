@@ -386,7 +386,7 @@ class Curation:
         src += [("note", n) for n in self.note_position_texts(notes, T)]
         return bool(recs), notes, src, [r.pointer for r in recs], "seed"
 
-    def note_excludes(self, notes, T) -> bool:
+    def note_excludes(self, notes, T, market: bool = True) -> bool:
         """§5.6 model restriction (2026-11-09): True when T's own-page row
         restricts the number to another model, body or make, so it is not
         listed for T. Option columns and notes on shared diagram pages name
@@ -398,7 +398,12 @@ class Curation:
         - subarupartsdeal "Fitting Vehicle Options" body codes on the
           Legacy/Outback/Baja pages (S/W = Legacy, OBK/SOBK/WOBK = Outback,
           P/BAJA = Baja).
+        - foreign-market notes ('FOR CANADA'; per row only, market=False in
+          the class-wide pool: a Canada row on one year says nothing about
+          another year's row).
         Only ever removes claims; an unparsed note restricts nothing here."""
+        if market and _market_excludes(notes):
+            return True
         if _other_division(notes, T[0]):
             return True
         if _brand_codes_exclude(notes, T[0]):
@@ -1257,6 +1262,8 @@ class Curation:
         self.likely_own_page_drops = Counter()   # cat -> vehicle-years left out (§5.16 own-page rule)
         self.held_exterior = []                  # §5.16 exterior hold (owner checklist)
         self.likely_note_restricted = Counter()  # cat -> vehicle-years a class-wide note restricts away
+        self.release_allow = policy.release_allowlist()   # §5.16 exact owner-approved releases
+        self.released_exterior = []
         for (key, cat), c in sorted(self.classes.items()):
             if self.kinds.get(cat) != "body" or cat in policy.PHASE3_CATS:
                 continue
@@ -1289,7 +1296,7 @@ class Curation:
             # page that lists it bare (2007 Charger); fail closed for Likely
             Ts, whys, slots = [], set(), set()
             for T, m in cand:
-                if self.note_excludes(class_notes, T):
+                if self.note_excludes(class_notes, T, market=False):
                     self.likely_note_restricted[cat] += 1
                     continue
                 Ts.append(T)
@@ -1300,7 +1307,11 @@ class Curation:
             reason, text = _likely_reason(whys)
             pns = sorted(c.pns)
             apps = _runs(Ts)
-            if cat in policy.EXTERIOR_HOLD_CATS and len({policy.base_model(T[0], T[1]) for T in Ts}) > 1:
+            released = (self.ns, cat, tuple(pns), tuple(tuple(a) for a in apps)) in self.release_allow
+            if released:
+                self.released_exterior.append({"cat": cat, "pn": pns, "apps": apps})
+            if not released and cat in policy.EXTERIOR_HOLD_CATS and \
+                    len({policy.base_model(T[0], T[1]) for T in Ts}) > 1:
                 # §5.16 exterior hold: only removes claims; kept for the owner checklist
                 urls = sorted({u for r in c.records for u in (r.product_url, r.list_url) if u})
                 self.refuse("held_exterior_cross_model", cat=cat, pn=pns[0], evidence=[r.pointer for r in c.records],
@@ -1372,6 +1383,7 @@ class Curation:
                         "vg_groups": len(doc["vg"]), "likely_groups": len(doc["likely"]),
                         "likely_app_years_without_own_page": dict(sorted(
                             getattr(self, "likely_own_page_drops", Counter()).items())),
+                        "released_by_allowlist": len(getattr(self, "released_exterior", [])),
                         "likely_app_years_note_restricted": dict(sorted(
                             getattr(self, "likely_note_restricted", Counter()).items())),
                         "blocked_sites": sorted(self.blocked),
@@ -1673,6 +1685,26 @@ _MODEL_NAME_STOP = {"base", "sport", "limited", "classic", "touring", "sedan", "
 _BRAND_CODE_RE = re.compile(r"(?:^|[,:]\s*)[A-Z0-9*]{1,3}\s+-\s+(CHRYSLER|DODGE|JEEP|RAM|PLYMOUTH|FIAT|EAGLE)\b")
 
 
+_MARKETS = (r"CANADA|CANADIAN|CHILE|EUROPE|EUROPEAN|EUR|EC|AUSTRALIA|AUSTRALIAN|AUS|JAPAN|JPN|JAPANESE|GENERAL|GEN|"
+            r"MEXICO|MEXICAN|KOREA|KOREAN|TAIWAN|CHINA|CHINESE|MIDDLE\s+EAST|GCC|UK|U\.K\.|NEW\s+ZEALAND|NZ|"
+            r"ASIA|AFRICA|SOUTH\s+AFRICA|LATIN\s+AMERICA|PUERTO\s+RICO|RUSSIA|ISRAEL|PHILIPPINES|THAILAND|INDONESIA")
+_MARKET_RE = re.compile(r"(?:\bFOR\s+(?:" + _MARKETS + r")\b|\b(?:" + _MARKETS + r")\s*(?:SPEC|MODEL|MKT|MARKET)\b)", re.I)
+_US_MARKET_RE = re.compile(r"\b(USA|U\.S\.A?\.?|US\s+SPEC|FOR\s+US|FEDERAL|CALIFORNIA|50\s*STATE)\b", re.I)
+
+
+def _market_excludes(notes) -> bool:
+    """Every feed car is a US car. A row whose note names only foreign
+    markets ('FOR CANADA', 'FOR CANADA,CHILE', 'KOREA SPEC&...') is not
+    listed for it (hub 2026-11-09: Subaru 72311AE08D). Alternatives split at
+    ' / '; any alternative without a foreign market, or naming the US,
+    keeps the row."""
+    for n in notes or []:
+        alts = [a for a in re.split(r"\s/\s", n or "") if a.strip()]
+        if alts and all(_MARKET_RE.search(a) and not _US_MARKET_RE.search(a) for a in alts):
+            return True
+    return False
+
+
 def _brand_codes_exclude(notes, make: str) -> bool:
     """moparpartsgiant option column brand codes ('C - CHRYSLER, F - BRAND
     AWD'): a row naming only other brands is not for T's make."""
@@ -1700,27 +1732,34 @@ def _split_top(text: str) -> list:
     return out
 
 
+_SUBARU_OBK = re.compile(r"^(OBK|SUS|SOBK|WOBK)")          # Outback family (SUS = Outback sport-utility sedan)
+_SUBARU_NONBODY = re.compile(r"^(AT|MT|\d?[AM]T|EJ\w*|EZ\w*|FB\w*|FA\w*|\d+\w*)$")   # transmission / engine codes
+
+
 def _subaru_alt_models(alt: str):
     """Feed models one option alternative allows on the Legacy/Outback/Baja
-    pages, or None when it names no body/model (engine, transmission, trim)."""
+    pages, or None when it names no body/model (engine, transmission, trim).
+    Outback-family codes (OBK*, SUS*, SOBK, WOBK) mean the Outback in every
+    generation, including the 2000-04 'Legacy Outback' years (hub
+    2026-11-09: 72311AE06A '*W.OBKLTD.AT', 91031AE43BGA 'OBK6 +SUS6 ...')."""
     alt = alt.strip().lstrip("*")
     head, _, rest = alt.partition(".")
     heads = re.findall(r"[A-Z0-9#/]+", head) if head.startswith("(") else [head.strip()]
-    quals = re.findall(r"[A-Z0-9#]+", rest)
+    quals = [q for q in re.findall(r"[A-Z0-9#]+", rest) if not _SUBARU_NONBODY.match(q)]
     allowed = set()
     for h in heads:
-        if h in ("SOBK", "WOBK", "OBK") or h.startswith("OBK"):
+        if _SUBARU_OBK.match(h):
             allowed.add("outback")
         elif h == "P" or h.startswith("BAJA"):
             allowed.add("baja")
         elif h in ("S", "W"):
-            obk = [q for q in quals if "OBK" in q]
+            obk = [q for q in quals if _SUBARU_OBK.match(q)]
             if quals and len(obk) == len(quals):
                 allowed.add("outback")
             elif obk:
                 allowed |= {"legacy", "outback"}
             else:
-                allowed.add("legacy")   # S/W without OBK: the Legacy body (Outback not credited)
+                allowed.add("legacy")   # S/W without Outback codes: the Legacy body
         else:
             return None
     return allowed or None
