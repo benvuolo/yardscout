@@ -282,3 +282,13 @@ inv/manifest.json and models.json: 81 makes / 2,053 pairs. The app on main
 (design, 8bbac6d) filters pickers to span +-1. 2003 Chevrolet: 62 of 211
 names. Limits: one span per model, no gaps (Caprice [1966, 2017]); a typo
 year only widens (Impala min 1901 from an undecoded listing).
+
+## 2026-11-09 — body style in vehicle_extras (design request)
+
+`extraFields` gains "body" (index 5), from the cached vPIC bodyClass only
+(`body_style_from_vpic`): sedan/coupe/hatchback/wagon/suv/pickup/van/
+convertible, else "". SUT -> pickup, Step Van -> van; Incomplete, Truck,
+Truck-Tractor, Limousine, Motorcycle, Bus -> "". Blank when the decode's
+make contradicts the row's make across corporate families. On the
+2026-11-09 data: 281,687 / 338,652 cars (83.2%) non-empty. No scan
+dispatched; the next scheduled scan publishes it.

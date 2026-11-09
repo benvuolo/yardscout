@@ -709,6 +709,25 @@ check("models.json carries modelYears", mj3["modelYears"] == ply["modelYears"])
 cy = js.enrich_vehicles([{"id": 30, "vin": "", "year": 2003, "make": "Chevrolet", "model": "Impala"}])
 check("enrich sets _spanYear from the listing year without a decode", cy[0].get("_spanYear") == 2003, str(cy[0].get("_spanYear")))
 
+# ---- body style for photo-less silhouettes (vehicle_extras index 5) --------
+print("body style from vPIC bodyClass:")
+BS = js.body_style_from_vpic
+for bc, want in [("Sedan/Saloon", "sedan"), ("Coupe", "coupe"), ("Hatchback/Liftback/Notchback", "hatchback"),
+                 ("Wagon", "wagon"), ("Sport Utility Vehicle [SUV]/Multipurpose Vehicle [MPV]", "suv"),
+                 ("Crossover Utility Vehicle [CUV]", "suv"), ("Pickup", "pickup"), ("Sport Utility Truck [SUT]", "pickup"),
+                 ("Minivan", "van"), ("Van", "van"), ("Cargo Van", "van"), ("Convertible/Cabriolet", "convertible"),
+                 ("Roadster", "convertible"), ("Incomplete - Cutaway", ""), ("Truck-Tractor", ""),
+                 ("Motorcycle - Sport", ""), ("Limousine", ""), ("", "")]:
+    check(f"bodyClass {bc!r} -> {want!r}", BS({"make": "FORD", "bodyClass": bc}, "Ford") == want)
+check("no decode -> ''", BS(None, "Ford") == "")
+check("same-family decode make keeps the style (Chrysler row, DODGE VIN)", BS({"make": "DODGE", "bodyClass": "Minivan"}, "Chrysler") == "van")
+check("cross-family decode make -> '' (scrambled row)", BS({"make": "TOYOTA", "bodyClass": "Sport Utility Vehicle [SUV]/Multipurpose Vehicle [MPV]"}, "Audi") == "")
+ob = js.output_json([{"id": 40, "vin": "X", "year": 2010, "make": "Ford", "model": "Escape",
+                      "_vpic": {"make": "FORD", "model": "Escape", "bodyClass": "Sport Utility Vehicle [SUV]/Multipurpose Vehicle [MPV]"}}],
+                    only_matches=False)
+pb = js.compact_inventory_v2([dict(ob[0], location="Y", city="C", state="AZ", lat=1.0, lng=2.0)])
+check("extras carry body at index 5", pb["_extras"].get("40", [None] * 6)[5:6] == ["suv"], str(pb["_extras"]))
+
 check("app and worker mirror tables agree (same keys, same values modulo case)",
       all(set(APP.get(m, {})) == set(SRV.get(m, {})) and
           all(APP[m][k].lower() == SRV[m][k] for k in APP.get(m, {})) for m in set(APP) | set(SRV)),

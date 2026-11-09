@@ -241,7 +241,7 @@
       "enabled": true,
       "label": "Photo: Ryan's Pick-a-Part",
       "host": "tlcgcwhkzwvdbdoceyse.supabase.co",
-      "onCards": false,
+      "onCards": true,
       "patterns": [
         {
           "code": "^a(ryans-pick-a-part-detroit)/([A-Za-z0-9]{1,24})/([0-9]{10,16}_[0-9]{1,3})$",
@@ -255,7 +255,7 @@
       "enabled": true,
       "label": "Photo: EZ Pull N Pay",
       "host": "tlcgcwhkzwvdbdoceyse.supabase.co",
-      "onCards": false,
+      "onCards": true,
       "patterns": [
         {
           "code": "^a(ez-pull-n-pay-atlanta|ez-pull-n-pay-stockbridge|ez-pull-n-pay-warner-robins|ez-pull-n-pay-columbus|ez-pull-n-pay-montgomery|ez-pull-n-pay-decatur|ez-pull-n-pay-birmingham)/([A-Za-z0-9]{1,24})/([0-9]{10,16}_[0-9]{1,3})$",
@@ -269,7 +269,7 @@
       "enabled": true,
       "label": "Photo: Foss U-Pull-It",
       "host": "tlcgcwhkzwvdbdoceyse.supabase.co",
-      "onCards": false,
+      "onCards": true,
       "patterns": [
         {
           "code": "^a(foss-winston-salem|foss-jacksonville|foss-la-grange|foss-recycling|foss-wilson|foss-havelock)/([A-Za-z0-9]{1,24})/([0-9]{10,16}_[0-9]{1,3})$",
@@ -283,7 +283,7 @@
       "enabled": true,
       "label": "Photo: UAPI",
       "host": "tlcgcwhkzwvdbdoceyse.supabase.co",
-      "onCards": false,
+      "onCards": true,
       "patterns": [
         {
           "code": "^a(uapi|uapi-south-shreveport|uapi-bossier-city|uapi-monroe|uapi-alexandria|uapi-texarkana)/([A-Za-z0-9]{1,24})/([0-9]{10,16}_[0-9]{1,3})$",
@@ -297,7 +297,7 @@
       "enabled": true,
       "label": "Photo: Auto Parts U Pull",
       "host": "tlcgcwhkzwvdbdoceyse.supabase.co",
-      "onCards": false,
+      "onCards": true,
       "patterns": [
         {
           "code": "^a(auto-parts-u-pull-shelby-nc|auto-parts-u-pull-nc)/([A-Za-z0-9]{1,24})/([0-9]{10,16}_[0-9]{1,3})$",
@@ -311,7 +311,7 @@
       "enabled": true,
       "label": "Photo: L and L U-Pull Auto Parts",
       "host": "tlcgcwhkzwvdbdoceyse.supabase.co",
-      "onCards": false,
+      "onCards": true,
       "patterns": [
         {
           "code": "^a(l-and-l-u-pull)/([A-Za-z0-9]{1,24})/([0-9]{10,16}_[0-9]{1,3})$",
@@ -325,7 +325,7 @@
       "enabled": true,
       "label": "Photo: A & A Auto Recycling",
       "host": "tlcgcwhkzwvdbdoceyse.supabase.co",
-      "onCards": false,
+      "onCards": true,
       "patterns": [
         {
           "code": "^a(a-a-auto-recycling)/([A-Za-z0-9]{1,24})/([0-9]{10,16}_[0-9]{1,3})$",
@@ -339,7 +339,7 @@
       "enabled": true,
       "label": "Photo: Samson Auto Salvage",
       "host": "tlcgcwhkzwvdbdoceyse.supabase.co",
-      "onCards": false,
+      "onCards": true,
       "patterns": [
         {
           "code": "^a(samson-auto-salvage)/([A-Za-z0-9]{1,24})/([0-9]{10,16}_[0-9]{1,3})$",
@@ -353,7 +353,7 @@
       "enabled": true,
       "label": "Photo: RG Pick-a-Part",
       "host": "tlcgcwhkzwvdbdoceyse.supabase.co",
-      "onCards": false,
+      "onCards": true,
       "patterns": [
         {
           "code": "^a(rg-pick-a-part-anthony-tx)/([A-Za-z0-9]{1,24})/([0-9]{10,16}_[0-9]{1,3})$",
@@ -367,7 +367,7 @@
       "enabled": true,
       "label": "Photo: Youngstown U-Pull-It",
       "host": "tlcgcwhkzwvdbdoceyse.supabase.co",
-      "onCards": false,
+      "onCards": true,
       "patterns": [
         {
           "code": "^a(youngstown-u-pull-it-youngstown-oh)/([A-Za-z0-9]{1,24})/([0-9]{10,16}_[0-9]{1,3})$",
@@ -381,7 +381,7 @@
       "enabled": true,
       "label": "Photo: Roberts Parts-U-Pick",
       "host": "tlcgcwhkzwvdbdoceyse.supabase.co",
-      "onCards": false,
+      "onCards": true,
       "patterns": [
         {
           "code": "^a(roberts-parts-u-pick-moffett-ok)/([A-Za-z0-9]{1,24})/([0-9]{10,16}_[0-9]{1,3})$",
@@ -395,7 +395,7 @@
       "enabled": true,
       "label": "Photo: Baughman's U-Pull-It",
       "host": "tlcgcwhkzwvdbdoceyse.supabase.co",
-      "onCards": false,
+      "onCards": true,
       "patterns": [
         {
           "code": "^a(baughmans-u-pull-it-york-pa)/([A-Za-z0-9]{1,24})/([0-9]{10,16}_[0-9]{1,3})$",
@@ -409,7 +409,7 @@
       "enabled": true,
       "label": "Photo: A-1 Crashed Cars U-Pull-It",
       "host": "tlcgcwhkzwvdbdoceyse.supabase.co",
-      "onCards": false,
+      "onCards": true,
       "patterns": [
         {
           "code": "^a(a-1-crashed-cars-south-sioux-city-ne)/([A-Za-z0-9]{1,24})/([0-9]{10,16}_[0-9]{1,3})$",
@@ -423,7 +423,7 @@
       "enabled": true,
       "label": "Photo: Eichelberger's U-Pull-It",
       "host": "tlcgcwhkzwvdbdoceyse.supabase.co",
-      "onCards": false,
+      "onCards": true,
       "patterns": [
         {
           "code": "^a(eichelbergers-u-pull-it-spring-grove)/([A-Za-z0-9]{1,24})/([0-9]{10,16}_[0-9]{1,3})$",
@@ -437,7 +437,7 @@
       "enabled": true,
       "label": "Photo: U Pull Auto Parts",
       "host": "tlcgcwhkzwvdbdoceyse.supabase.co",
-      "onCards": false,
+      "onCards": true,
       "patterns": [
         {
           "code": "^a(u-pull-auto-parts-pocatello-id)/([A-Za-z0-9]{1,24})/([0-9]{10,16}_[0-9]{1,3})$",
@@ -451,7 +451,7 @@
       "enabled": true,
       "label": "Photo: H and H Salvage",
       "host": "tlcgcwhkzwvdbdoceyse.supabase.co",
-      "onCards": false,
+      "onCards": true,
       "patterns": [
         {
           "code": "^a(h-and-h-salvage-amarillo-tx)/([A-Za-z0-9]{1,24})/([0-9]{10,16}_[0-9]{1,3})$",
@@ -465,7 +465,7 @@
       "enabled": true,
       "label": "Photo: Cash-N-Carry Pull-Your-Part",
       "host": "tlcgcwhkzwvdbdoceyse.supabase.co",
-      "onCards": false,
+      "onCards": true,
       "patterns": [
         {
           "code": "^a(cash-n-carry-pull-your-part-savannah-ga)/([A-Za-z0-9]{1,24})/([0-9]{10,16}_[0-9]{1,3})$",
@@ -479,7 +479,7 @@
       "enabled": true,
       "label": "Photo: Milliron Auto Parts",
       "host": "tlcgcwhkzwvdbdoceyse.supabase.co",
-      "onCards": false,
+      "onCards": true,
       "patterns": [
         {
           "code": "^a(milliron-auto-parts-mansfield-oh)/([A-Za-z0-9]{1,24})/([0-9]{10,16}_[0-9]{1,3})$",
@@ -493,7 +493,7 @@
       "enabled": true,
       "label": "Photo: Smith Auto Self Serve",
       "host": "tlcgcwhkzwvdbdoceyse.supabase.co",
-      "onCards": false,
+      "onCards": true,
       "patterns": [
         {
           "code": "^a(smith-auto-inc-self-serve-pawnee-city-ne)/([A-Za-z0-9]{1,24})/([0-9]{10,16}_[0-9]{1,3})$",
@@ -507,7 +507,7 @@
       "enabled": true,
       "label": "Photo: Grandpa John's Pick & Pull",
       "host": "tlcgcwhkzwvdbdoceyse.supabase.co",
-      "onCards": false,
+      "onCards": true,
       "patterns": [
         {
           "code": "^a(grandpa-johns-pick-and-pull-green-bay-wi)/([A-Za-z0-9]{1,24})/([0-9]{10,16}_[0-9]{1,3})$",
@@ -521,7 +521,7 @@
       "enabled": true,
       "label": "Photo: Parts YoU Pull",
       "host": "tlcgcwhkzwvdbdoceyse.supabase.co",
-      "onCards": false,
+      "onCards": true,
       "patterns": [
         {
           "code": "^a(parts-you-pull-amite-la)/([A-Za-z0-9]{1,24})/([0-9]{10,16}_[0-9]{1,3})$",
@@ -535,7 +535,7 @@
       "enabled": true,
       "label": "Photo: Colorado Auto & Parts",
       "host": "tlcgcwhkzwvdbdoceyse.supabase.co",
-      "onCards": false,
+      "onCards": true,
       "patterns": [
         {
           "code": "^a(colorado-auto-and-parts-englewood-co)/([A-Za-z0-9]{1,24})/([0-9]{10,16}_[0-9]{1,3})$",
@@ -549,7 +549,7 @@
       "enabled": true,
       "label": "Photo: Aero Auto Salvage",
       "host": "tlcgcwhkzwvdbdoceyse.supabase.co",
-      "onCards": false,
+      "onCards": true,
       "patterns": [
         {
           "code": "^a(aero-auto-parts-llc-shreveport-la)/([A-Za-z0-9]{1,24})/([0-9]{10,16}_[0-9]{1,3})$",
@@ -563,7 +563,7 @@
       "enabled": true,
       "label": "Photo: Paul's Auto Yard",
       "host": "tlcgcwhkzwvdbdoceyse.supabase.co",
-      "onCards": false,
+      "onCards": true,
       "patterns": [
         {
           "code": "^a(pauls-auto-yard-westville-in|pauls-auto-yard-lake-station-in|pauls-auto-yard-merrillville|pauls-auto-yard-demotte)/([A-Za-z0-9]{1,24})/([0-9]{10,16}_[0-9]{1,3})$",
@@ -699,7 +699,7 @@
       "enabled": true,
       "label": "Photo: Fenix U-Pull",
       "host": "fenixupull.com",
-      "onCards": false,
+      "onCards": true,
       "patterns": [
         {
           "code": "^f(\\d{4})(\\d{2})(\\d{6,12})$",
