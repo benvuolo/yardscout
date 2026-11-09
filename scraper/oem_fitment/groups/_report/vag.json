@@ -34027,8 +34027,8 @@
   "unverified_product": 29
  },
  "raw": {
-  "commit": "3b4677ae1df7eb3b60765ce402d5a79167561981",
-  "ref": "3b4677ae1df7",
+  "commit": "1351c33fcfbb97862fa5aa9265dd92f7350c1ebc",
+  "ref": "1351c33fcfbb",
   "sites": {
    "www.audipartsgiant.com": {
     "blocked": false,
@@ -34935,62 +34935,32 @@
   },
   {
    "cat": "wheels",
-   "detail": "vag: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.vwpartsgiant.com:records:L1289"
-   ],
-   "pn": "1J0-601-025-AB-Z31",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "vag: no passed §11.4 wheels audit yet",
+   "detail": "GTI 2007: ['17', '18']; GTI 2010: ['17']; Golf 2012: ['17']",
    "evidence": [
     "www.vwpartsgiant.com:records:L1360"
    ],
    "pn": "1K0-601-025-BB-8Z8",
-   "reason": "wheels_not_audited",
+   "reason": "wheel_size_conflict",
    "t": null
   },
   {
    "cat": "wheels",
-   "detail": "vag: no passed §11.4 wheels audit yet",
+   "detail": "coupe; wagon",
    "evidence": [
-    "www.vwpartsgiant.com:records:L1381"
+    "www.vwpartsgiant.com:records:L1289"
    ],
-   "pn": "1K0-601-025-BA-FZZ",
-   "reason": "wheels_not_audited",
+   "pn": "1J0-601-025-AB-Z31",
+   "reason": "wheel_body_conflict",
    "t": null
   },
   {
    "cat": "wheels",
-   "detail": "vag: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.vwpartsgiant.com:records:L1384"
-   ],
-   "pn": "1K0-601-025-N-8Z8",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "vag: no passed §11.4 wheels audit yet",
+   "detail": "spokes ['10', '8']",
    "evidence": [
     "www.vwpartsgiant.com:records:L1389"
    ],
    "pn": "5K0-601-025-AN-8Z8",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "vag: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.vwpartsgiant.com:records:L1390"
-   ],
-   "pn": "5K0-601-025-H-88Z",
-   "reason": "wheels_not_audited",
+   "reason": "wheel_design_conflict",
    "t": null
   },
   {
@@ -35098,7 +35068,7 @@
    "wheels": 714,
    "window-regulator": 3401
   },
-  "likely_groups": 16,
+  "likely_groups": 19,
   "list_rows": 39388,
   "records": 2775,
   "released_by_allowlist": 10,

@@ -1,5 +1,5 @@
 {
- "as_of": "2026-11-09T21:57:34Z",
+ "as_of": "2026-11-09T22:35:02Z",
  "cells": [
   [
    "Buick",
@@ -81352,6 +81352,20 @@
    "Chevrolet",
    "Malibu",
    2017,
+   "door-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   2017,
+   "door-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   2017,
    "fender",
    "open:no_year_manifest"
   ],
@@ -81471,6 +81485,20 @@
    "Chevrolet",
    "Malibu",
    2018,
+   "door-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   2018,
+   "door-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   2018,
    "fender",
    "open:no_year_manifest"
   ],
@@ -81583,6 +81611,27 @@
    "Chevrolet",
    "Malibu",
    2019,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   2019,
+   "door-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   2019,
+   "door-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   2019,
    "fender",
    "open:no_year_manifest"
   ],
@@ -81591,6 +81640,13 @@
    "Malibu",
    2019,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   2019,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -81688,6 +81744,27 @@
    "Chevrolet",
    "Malibu",
    2020,
+   "bumper-rear",
+   "open:no_list_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   2020,
+   "door-front",
+   "open:no_list_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   2020,
+   "door-rear",
+   "open:no_list_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   2020,
    "fender",
    "open:no_list_manifest"
   ],
@@ -81697,6 +81774,13 @@
    2020,
    "fuel-pump-module",
    "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   2020,
+   "grille",
+   "open:no_list_manifest"
   ],
   [
    "Chevrolet",
@@ -81800,6 +81884,27 @@
    "Chevrolet",
    "Malibu",
    2021,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   2021,
+   "door-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   2021,
+   "door-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   2021,
    "fender",
    "open:no_year_manifest"
   ],
@@ -81808,6 +81913,13 @@
    "Malibu",
    2021,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   2021,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -81905,6 +82017,27 @@
    "Chevrolet",
    "Malibu",
    2022,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   2022,
+   "door-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   2022,
+   "door-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   2022,
    "fender",
    "open:no_year_manifest"
   ],
@@ -81913,6 +82046,13 @@
    "Malibu",
    2022,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   2022,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -82003,6 +82143,27 @@
    "Chevrolet",
    "Malibu",
    2023,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   2023,
+   "door-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   2023,
+   "door-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   2023,
    "fender",
    "open:no_year_manifest"
   ],
@@ -82011,6 +82172,13 @@
    "Malibu",
    2023,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   2023,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -82032,6 +82200,13 @@
    "Malibu",
    2023,
    "ignition-coils",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   2023,
+   "radiator",
    "open:no_year_manifest"
   ],
   [
@@ -82094,6 +82269,27 @@
    "Chevrolet",
    "Malibu",
    2024,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   2024,
+   "door-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   2024,
+   "door-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   2024,
    "fender",
    "open:no_year_manifest"
   ],
@@ -82102,6 +82298,13 @@
    "Malibu",
    2024,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   2024,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -82123,6 +82326,13 @@
    "Malibu",
    2024,
    "ignition-coils",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   2024,
+   "radiator",
    "open:no_year_manifest"
   ],
   [
@@ -156889,6 +157099,20 @@
    "Pontiac",
    "Firebird",
    1993,
+   "bumper-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Pontiac",
+   "Firebird",
+   1993,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Pontiac",
+   "Firebird",
+   1993,
    "fuel-pump-module",
    "open:no_year_manifest"
   ],
@@ -156973,6 +157197,20 @@
    "Pontiac",
    "Firebird",
    1994,
+   "bumper-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Pontiac",
+   "Firebird",
+   1994,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Pontiac",
+   "Firebird",
+   1994,
    "climate-control",
    "open:no_year_manifest"
   ],
@@ -156981,6 +157219,13 @@
    "Firebird",
    1994,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Pontiac",
+   "Firebird",
+   1994,
+   "gauge-cluster",
    "open:no_year_manifest"
   ],
   [
@@ -157064,6 +157309,20 @@
    "Pontiac",
    "Firebird",
    1995,
+   "bumper-front",
+   "open:no_list_manifest"
+  ],
+  [
+   "Pontiac",
+   "Firebird",
+   1995,
+   "bumper-rear",
+   "open:no_list_manifest"
+  ],
+  [
+   "Pontiac",
+   "Firebird",
+   1995,
    "climate-control",
    "open:unread_sibling_page"
   ],
@@ -157073,6 +157332,13 @@
    1995,
    "fuel-pump-module",
    "open:unread_sibling_page"
+  ],
+  [
+   "Pontiac",
+   "Firebird",
+   1995,
+   "gauge-cluster",
+   "open:no_list_manifest"
   ],
   [
    "Pontiac",
@@ -157162,6 +157428,20 @@
    "Pontiac",
    "Firebird",
    1996,
+   "bumper-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Pontiac",
+   "Firebird",
+   1996,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Pontiac",
+   "Firebird",
+   1996,
    "climate-control",
    "open:no_year_manifest"
   ],
@@ -157169,6 +157449,13 @@
    "Pontiac",
    "Firebird",
    1996,
+   "gauge-cluster",
+   "open:no_year_manifest"
+  ],
+  [
+   "Pontiac",
+   "Firebird",
+   1996,
    "headlights",
    "open:no_year_manifest"
   ],
@@ -157253,6 +157540,27 @@
    "Pontiac",
    "Firebird",
    1997,
+   "bumper-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Pontiac",
+   "Firebird",
+   1997,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Pontiac",
+   "Firebird",
+   1997,
+   "gauge-cluster",
+   "open:no_year_manifest"
+  ],
+  [
+   "Pontiac",
+   "Firebird",
+   1997,
    "headlights",
    "open:no_year_manifest"
   ],
@@ -157331,6 +157639,13 @@
    "Firebird",
    1998,
    "alternator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Pontiac",
+   "Firebird",
+   1998,
+   "bumper-rear",
    "open:no_year_manifest"
   ],
   [
@@ -157394,6 +157709,13 @@
    "Firebird",
    1999,
    "ac-compressor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Pontiac",
+   "Firebird",
+   1999,
+   "bumper-rear",
    "open:no_year_manifest"
   ],
   [
@@ -157450,6 +157772,13 @@
    "Firebird",
    2000,
    "ac-compressor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Pontiac",
+   "Firebird",
+   2000,
+   "bumper-rear",
    "open:no_year_manifest"
   ],
   [
@@ -157506,6 +157835,13 @@
    "Firebird",
    2001,
    "ac-compressor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Pontiac",
+   "Firebird",
+   2001,
+   "bumper-rear",
    "open:no_year_manifest"
   ],
   [
@@ -157562,6 +157898,13 @@
    "Firebird",
    2002,
    "ac-compressor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Pontiac",
+   "Firebird",
+   2002,
+   "bumper-rear",
    "open:no_year_manifest"
   ],
   [
@@ -206295,20 +206638,20 @@
   }
  ],
  "ns": "gm",
- "policy_sha256": "ad35d5f7de72cd56cff9b08c54ada70478f601d4c5d6aff7d3bf3555e1e53bd1",
+ "policy_sha256": "9f78842939480725f6d776e08ef4994695ed01f080cfb6eec172be10602d488c",
  "raw": {
-  "commit": "3b4677ae1df7eb3b60765ce402d5a79167561981",
-  "ref": "3b4677ae1df7",
+  "commit": "1351c33fcfbb97862fa5aa9265dd92f7350c1ebc",
+  "ref": "1351c33fcfbb",
   "sites": {
    "www.gmpartsgiant.com": {
     "blocked": false,
     "done": false,
     "lists": 3281,
     "lists_sha256": "6b6328210a6a0135c948d40c63f884fa8c36ad29257a0c11a387498534f0e196",
-    "records": 6882,
-    "records_sha256": "7780da89c822b7ba274ef807966073a59bfc84ea624a42d73e70cffef020cc9c",
-    "years": 578,
-    "years_sha256": "4564635a9eb7e3ce9fc6d9a2831a79fb0a5a2239802f7633a833e108272b3a45"
+    "records": 6942,
+    "records_sha256": "dd3a2201a9325d2501251053d2b4d5d26fff2be998a3f26f1e5ddd6cba793662",
+    "years": 588,
+    "years_sha256": "8da798e371e15849c7bfb6fbe7f3090ecf8e92e251d6e84e7cccc2cf8dd93eb7"
    }
   }
  },

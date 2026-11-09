@@ -1,6 +1,6 @@
 # OEM curation report: subaru
 
-Raw: `3b4677ae1df7` @ `3b4677ae1df7`; as of 2026-11-06T06:33:58Z.
+Raw: `1351c33fcfbb` @ `1351c33fcfbb`; as of 2026-11-06T06:33:58Z.
 
 - records 2101, classes 2101, list rows 21183, year manifests 62, cells 2640
 - Verified groups 0, engine vg groups 0, Likely groups 42
