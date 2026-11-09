@@ -50,6 +50,10 @@ CAT_PAGES = {
     "trunk-lid": r"^body-hardware/trunk-lid-components$",
     "tailgate": r"^body-hardware/tail-gate-body$",
     "liftgate": r"^body-hardware/(back-door-body|lift-gate-body)$",
+    # tier C (ops/interchange.md "Category breadth" §8): slugs from the R2 years manifests
+    "wiper-motor": r"^(electrical/wipers|body-hardware/wiper-washer-components(-body)?)$",
+    "knuckle": r"^suspension/(front-suspension|front-suspension-components|rear-suspension|rear-suspension-components|front-axle-carrier)$|^driveline-axles/(front-axle|front-axle-driveline|rear-axle)$",
+    "strut": r"^suspension/(struts-components|shocks-components|struts-suspension-components-front|front-suspension|front-suspension-components|rear-suspension|rear-suspension-components|ride-control-front|ride-control-rear)$",
 }
 
 ASSY = r"(?:assy|assembly)"
@@ -104,6 +108,10 @@ RULES = {
                  r"handle|hinge|cable|lock|latch|protector|molding|garnish|cushion|stopper|chain|link|support|cover|emblem|nameplate|spoiler|lamp|inner|trim"),
     "liftgate": (rf"^panel\s+sub-{ASSY},?\s*back\s+door|^back\s+door\s+(panel\s+)?sub-{ASSY}|^door\s+sub-{ASSY},?\s*back",
                  r"handle|hinge|cable|lock|latch|glass|weather|stay|cylinder|motor|wiper|spoiler|lamp|trim|molding|garnish|emblem|switch|striker|link|outside|outer|inner|board|cover|pad|finish"),
+    # tier C: name rule pending (written after reading the trial's list rows)
+    "wiper-motor": (r"(?!x)x", ""),
+    "knuckle": (r"(?!x)x", ""),
+    "strut": (r"(?!x)x", ""),
 }
 
 # Toyota service numbers ending "-84" are remanufactured units (CURATION_SPEC

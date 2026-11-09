@@ -76,6 +76,10 @@ CAT_PAGES = {
     # Volvo builds no pickups: its "Tail Gate" pages are the wagon/SUV hatch
     # (1995 850 body-hardware/tail-gate holds "Lift Gate" 9203493), so they feed liftgate
     "liftgate": r"^body-hardware/(lift-gate|liftgate[a-z-]*|tail-gate[a-z-]*|tailgate|back-door[a-z-]*)$",
+    # tier C (ops/interchange.md "Category breadth" §8): slugs from the R2 years manifests
+    "wiper-motor": r"^(electrical/wipers|body-hardware/wiper-washer-components(-body)?)$",
+    "knuckle": r"^suspension/(front-suspension|front-suspension-components|rear-suspension|rear-suspension-components|front-axle-carrier)$|^driveline-axles/(front-axle|front-axle-driveline|rear-axle)$",
+    "strut": r"^suspension/(struts-components|shocks-components|struts-suspension-components-front|front-suspension|front-suspension-components|rear-suspension|rear-suspension-components|ride-control-front|ride-control-rear)$",
 }
 
 RULES = {
@@ -124,6 +128,10 @@ RULES = {
                  r"handle|hinge|cable|lock|latch|protector|molding|garnish|cushion|stopper|chain|link|support|cover|emblem|lamp|trim|strap|bumper"),
     "liftgate": (r"^(lift gate|liftgate|tail gate|tailgate|back door)$",
                  r"handle|hinge|cable|lock|latch|glass|weather|stay|strut|cylinder|motor|wiper|spoiler|lamp|trim|molding|garnish|emblem|switch|striker|link|cover|pad|finish|damper|stop"),
+    # tier C: name rule pending (written after reading the trial's list rows)
+    "wiper-motor": (r"(?!x)x", ""),
+    "knuckle": (r"(?!x)x", ""),
+    "strut": (r"(?!x)x", ""),
 }
 
 PAINT = r"(-[a-z]+)*"  # paint names in bumper-cover slugs (bumper-cover-willow-green, bumper-cover-red-rear)
@@ -153,6 +161,10 @@ SLUG_RULES = {
     "trunk-lid": r"^(trunk-)?lid$",
     "tailgate": rf"^tail-?gate(-assembly)?{SIDE}$",
     "liftgate": rf"^(lift-?gate|tail-?gate|back-door){SIDE}$",
+    # tier C: name rule pending (written after reading the trial's list rows)
+    "wiper-motor": r"(?!x)x",
+    "knuckle": r"(?!x)x",
+    "strut": r"(?!x)x",
 }
 
 PRODUCT_RULES = {

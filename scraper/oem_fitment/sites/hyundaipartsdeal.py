@@ -78,6 +78,10 @@ SUBCATS = {
     "grille": r"radiator_grille|^grille|^(front_bumper|bumper_front)$",
     "trunk-lid": r"trunk_lid_back_panel|back_panel_trunk_lid|^trunk_lid$",
     "liftgate": r"^tail_gate$|^back_door$",
+    # tier C (§8): subs from the R2 years manifests (Hyundai and Kia)
+    "wiper-motor": r"^windshield_wiper(_rear)?$|^rear_wiper_washer$|wiper_motor",
+    "knuckle": r"^front_axle$|^rear_axle$|knuckle|carrier",
+    "strut": r"spring_strut|strut_front|strut_rear|shock_absorber",
 }
 SUBCAT_EXCL = {
     "ac-compressor": r"duct|blower|evaporator|heater_unit",
@@ -135,6 +139,10 @@ PARTS = {
                   PNL + r"|Torsion|Bar\b|Spoiler|Lamp|Cylinder|Actuator|Cover|Bumper|Striker"),
     "liftgate": (r"^Panel Assy-Tail ?Gate|^Tail ?Gate Assy|^Panel Assy-Back Door|^Door Assy-Tail ?Gate",
                  PNL + r"|Glass|Spoiler|Lamp|Cylinder|Actuator|Cover|Bumper|Striker|Wiper|Motor|Switch|Strut|Lifter"),
+    # tier C: name rule pending (written after reading the trial's list rows)
+    "wiper-motor": (r"(?!x)x", ""),
+    "knuckle": (r"(?!x)x", ""),
+    "strut": (r"(?!x)x", ""),
 }
 
 # Older catalogs spell "Assembly" where newer ones print "Assy".

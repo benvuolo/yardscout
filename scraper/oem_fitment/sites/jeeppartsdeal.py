@@ -69,6 +69,10 @@ CAT_PAGES = {
     "grille": r"^body-hardware/(grille-components|bumper-components-front)$",
     "tailgate": r"^body-hardware/(tailgate|tail-gate[a-z-]*|swing-gate[a-z-]*)$",
     "liftgate": r"^body-hardware/(lift-gate|liftgate[a-z-]*|lift-gate-body)$",
+    # tier C (ops/interchange.md "Category breadth" §8): slugs from the R2 years manifests
+    "wiper-motor": r"^(electrical/wipers|body-hardware/wiper-washer-components(-body)?)$",
+    "knuckle": r"^suspension/(front-suspension|front-suspension-components|rear-suspension|rear-suspension-components|front-axle-carrier)$|^driveline-axles/(front-axle|front-axle-driveline|rear-axle)$",
+    "strut": r"^suspension/(struts-components|shocks-components|struts-suspension-components-front|front-suspension|front-suspension-components|rear-suspension|rear-suspension-components|ride-control-front|ride-control-rear)$",
 }
 
 D = r"\W+"  # Mopar "Noun - Qualifier" / "NOUN Qualifier"
@@ -122,6 +126,10 @@ RULES = {
                  r"hinge|latch|glass|handle|bumper|strap|check|support|cable|link|lock|striker|weather|carrier|trim|panel|cylinder|stop|actuator|module|switch|lamp|emblem|nameplate|molding|applique|cover|bar"),
     "liftgate": (rf"^(liftgate|lift\s+gate|door{D}liftgate)\b",
                  r"handle|bar|striker|latch|cylinder|link|weather|propeller|gas|hinge|glass|motor|wiper|spoiler|lamp|trim|molding|applique|switch|strut|cable|support|module|panel|actuator|lock|bumper|emblem|nameplate|camera|release|check|cover|shield|silencer|insulator|pad|garnish"),
+    # tier C: name rule pending (written after reading the trial's list rows)
+    "wiper-motor": (r"(?!x)x", ""),
+    "knuckle": (r"(?!x)x", ""),
+    "strut": (r"(?!x)x", ""),
 }
 
 NOTES = {

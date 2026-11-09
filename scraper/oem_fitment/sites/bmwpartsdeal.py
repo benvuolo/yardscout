@@ -107,6 +107,11 @@ SUBCATS = {
     "grille": r"^exterior_trim_grille_seals$",
     "trunk-lid": r"^single_components_for_trunk_lid$",
     "liftgate": r"^single_components_for_tailgate$",
+    # tier C (§8): subs read on the 2006 325i / 2011 328i (E90) year pages. The
+    # front strut page also holds the wheel carrier; repair-kit pages are kits.
+    "wiper-motor": r"^wiper_system(_complete)?$|wiper_motor|^(single_parts_)?(windscreen|rear_window)_(wiper|cleaning)",
+    "knuckle": r"^front_spring_strut_carrier_wheel_bearing$|^rear_axle_support_wheel_suspension$|^(?!repair)[a-z_]*wheel_carrier",
+    "strut": r"^front_spring_strut_carrier_wheel_bearing$|^rear_spring_strut_mounting_parts$|^(?!repair)[a-z_]*(spring_strut|shock_absorber)[a-z_]*$",
 }
 
 RULES = {
@@ -134,6 +139,10 @@ RULES = {
     "grille": (r"^(kidney\s+)?grille\b|^front\s+grille\b", r"seal|bracket|moulding|trim|insert|frame\s+only|emblem|badge"),
     "trunk-lid": (r"^(trunk\s+lid|tailgate)\b|^boot\s+lid\b", r"hinge|(lid|tailgate)\s+lock|lock\s+(cylinder|actuator|drive)|stop|buffer|seal|gasket|cap|strut|spring|holder|handle|trim|cable|light|lamp|spoiler"),
     "liftgate": (r"^tailgate\b|^rear\s+lid\b", r"hinge|(lid|tailgate)\s+lock|lock\s+(cylinder|actuator|drive)|stop|buffer|seal|gasket|cap|strut|spring|holder|handle|trim|cable|light|lamp|spoiler|glass|wiper"),
+    # tier C: name rule pending (written after reading the trial's list rows)
+    "wiper-motor": (r"(?!x)x", r"x^"),
+    "knuckle": (r"(?!x)x", r"x^"),
+    "strut": (r"(?!x)x", r"x^"),
 }
 # excludes match at a word start ("ring" must not hit "steering")
 RULES = {k: (re.compile(inc, re.I), re.compile(rf"\b(?:{exc})", re.I)) for k, (inc, exc) in RULES.items()}

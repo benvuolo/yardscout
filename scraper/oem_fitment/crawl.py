@@ -49,7 +49,13 @@ TIERS = {
     "B": ["gauge-cluster", "ignition-coils", "radiator", "door-front", "door-rear",
           "hood", "fender", "bumper-front", "bumper-rear", "grille", "trunk-lid",
           "tailgate", "liftgate"],
+    # Tier C (ops/interchange.md "Category breadth" §8): only sites whose
+    # worklist entry says "tierC": true; done keys are per tier, so A/B work
+    # is not redone when a finished site re-opens for tier C.
+    "C": ["wiper-motor", "knuckle", "strut"],
 }
+# worklist.json flag a site needs before a gated tier is crawled for it
+TIER_FLAG = {"C": "tierC"}
 MAX_SEEDS = 3
 CHAIN_DEPTH = 4            # R4: replaces / replaced_by hops from a listed record
 CHAIN_TRIES = 3            # R4: network attempts per hop before it is given up (chain_given_up)
@@ -217,7 +223,7 @@ def main() -> None:
     deadline = time.time() + a.minutes * 60 if a.minutes else None
     site = a.site
     mod = module_for(site)
-    tiers = ["A", "B"] if a.tier == "all" else [a.tier]
+    tiers = ["A", "B", "C"] if a.tier == "all" else [a.tier]
     raw_dir = ROOT / "raw"
     raw_dir.mkdir(exist_ok=True)
     wl_all = json.loads((ROOT / "worklist.json").read_text()).get("sites", {})
@@ -674,6 +680,8 @@ def main() -> None:
         if a.max_segments:
             wl = wl[: a.max_segments]
         for tier in tiers:
+            if tier in TIER_FLAG and not wl_site.get(TIER_FLAG[tier]):
+                continue  # no rules for this tier in the site's module
             cats = TIERS[tier]
             for seg in wl:
                 make, model = seg["make"], seg["model"]

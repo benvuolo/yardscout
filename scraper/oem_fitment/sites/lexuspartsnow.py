@@ -83,6 +83,10 @@ SUBCATS = {
     "grille": r"^radiator_grille$",
     "trunk-lid": r"^luggage_compartment_door_lock$",
     "liftgate": r"^back_door_panel_glass$",
+    # tier C (§8): subs from the R2 years manifest
+    "wiper-motor": r"^windshield_wiper$|^rear_wiper$",
+    "knuckle": r"^front_axle_arm_steering_knuckle$|^rear_axle_shaft_hub$",
+    "strut": r"^(front|rear)_spring_shock_absorber$",
 }
 
 A = r"(?:assy|assembly)"
@@ -132,6 +136,10 @@ RULES = {
                   r"trim|cushion|weatherstrip|lock|hinge|torsion|garnish|spoiler|lamp|emblem|stay|molding|moulding|inner|outer"),
     "liftgate": (rf"^panel\s+sub-{A},?\s*back\s+door|^door\s+sub-{A},?\s*back|^back\s+door\s+(panel\s+)?sub-{A}",
                  r"handle|hinge|lock|glass|weather|stay|motor|spoiler|lamp|trim|garnish|emblem|outer|outside|inner|board|cover"),
+    # tier C: name rule pending (written after reading the trial's list rows)
+    "wiper-motor": (r"(?!x)x", r"x^"),
+    "knuckle": (r"(?!x)x", r"x^"),
+    "strut": (r"(?!x)x", r"x^"),
 }
 # excludes match at a word start ("ring" must not hit "steering")
 RULES = {k: (re.compile(inc, re.I), re.compile(rf"\b(?:{exc})", re.I)) for k, (inc, exc) in RULES.items()}

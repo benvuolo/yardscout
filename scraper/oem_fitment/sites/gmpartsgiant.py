@@ -117,12 +117,19 @@ SUBCATS = {
     "trunk-lid": r"rear_compartment|deck_lid|trunk",
     "tailgate": r"tailgate|end_gate|pickup_box|box_",
     "liftgate": r"lift_?gate|end_gate|rear_door_hardware|body_rear_end",
+    # tier C (§8): subs from the R2 years manifest
+    "wiper-motor": r"wiper_system|wiper_motor|module_assembly_windshield_wiper",
+    "knuckle": r"^suspension_front$|^suspension_rear$|^suspension_front_rear$|knuckle",
+    "strut": r"^suspension_front$|^suspension_rear$|^suspension_front_rear$|strut_assembly|absorber_(front|rear)_shock|shock_absorber|shocks",
 }
 SUBCAT_EXCL = {
     "window-regulator": r"trim|weatherstrip|glass_only|moldings",
     "window-switch": r"steering|ignition|instrument_panel_lamp",
     "door-front": r"trim|weatherstrip",
     "door-rear": r"trim|weatherstrip",
+    "wiper-motor": r"switch|electrical",
+    "knuckle": r"brake|drum",
+    "strut": r"liftgate|bumper|hood|stabilizer_bar$",
 }
 
 # (include, exclude_head, exclude_full); see _partsgiant.Config.parts.
@@ -174,6 +181,10 @@ PARTS = {
                  r"HANDLE|LATCH|CABLE|LOCK|HINGE|STRUT|LIFT ASSIST|PROTECTOR|LINER|STOP|SUPPORT|TRUNNION|ROD|CAP|TRIM|LAMP", SUB),
     "liftgate": (r"^(GATE|LIFTGATE|GATE ASM)\b[^|]*\|.*\bLIFT ?GATE\b|^(GATE|GATE ASM)\b[^|]*\|[^|]*\|\s*(GATE,\s*)?LIFT",
                  r"STRUT|HINGE|LATCH|LOCK|MOTOR|WINDOW|GLASS|SWITCH|HANDLE|ACTUATOR|LAMP|WIPER|APPLIQUE|SPOILER|CYLINDER|RELEASE|TRIM|PANEL", SUB),
+    # tier C: name rule pending (written after reading the trial's list rows)
+    "wiper-motor": (r"(?!x)x", "", SUB),
+    "knuckle": (r"(?!x)x", "", SUB),
+    "strut": (r"(?!x)x", "", SUB),
 }
 
 def head(r: dict) -> str:

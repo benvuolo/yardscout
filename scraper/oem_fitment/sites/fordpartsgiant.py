@@ -65,6 +65,11 @@ SUBCATS = {
     "trunk-lid": r"luggage_compartment|deck_lid|trunk",
     "tailgate": r"tail_?gate|pick_up_box|pickup_box",
     "liftgate": r"luggage_compartment_door|lift_?gate|back_door|tail_?gate",
+    # tier C (§8): subs from the R2 years manifest (sedans: front_knuckle_and_hub,
+    # front_suspension_struts_and_springs; trucks/older: front_suspension, rear_suspension)
+    "wiper-motor": r"wiper",
+    "knuckle": r"knuckle|spindle|^(front|rear)_suspension$|^front_rear_suspension$",
+    "strut": r"strut|shock|^(front|rear)_suspension$|^front_rear_suspension$",
 }
 SUBCAT_EXCL = {
     "side-mirrors": r"inside",
@@ -72,6 +77,8 @@ SUBCAT_EXCL = {
     "door-rear": r"trim|glass|lock|handle|speaker",
     "trunk-lid": r"trim|lock",
     "liftgate": r"trim|lock",
+    "wiper-motor": r"switch|control",
+    "strut": r"hood|lift_?gate|tail_?gate|luggage|trunk|engine|motion|transmission|damper_control",
 }
 
 # Ford base numbers per category (regex on the base after any body code).
@@ -101,6 +108,10 @@ BASE = {
     "trunk-lid": r"40110",
     "tailgate": r"40700",
     "liftgate": r"40010",
+    # tier C: name rule pending (written after reading the trial's list rows)
+    "wiper-motor": r"(?!x)x",
+    "knuckle": r"(?!x)x",
+    "strut": r"(?!x)x",
 }
 # Names that are never the assembly even when the base matches.
 NAME_EXCL = re.compile(r"\b(Glass|Lens|Bulb|Bezel|Cover - Mirror|Gasket|Seal|Kit - Seal|Pulley|Clutch|"
