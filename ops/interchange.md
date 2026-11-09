@@ -2504,6 +2504,9 @@ Other outputs of this session:
       (clutch/line/hose/mech; relay/filter/driver module/line) and check them on the lists.
     - App: body-gated aftermarket rows carry a 6th element (body). `_am_group_entry` unpacks 5,
       so add body support or those rows get dropped.
+  - Audit integrity (hub, 20:55 UTC): `fetch.py --text` silently cuts output at 400 lines.
+    Until the truncation-marker fix lands, every §11.4 verifier brief must say: pass
+    `--max-lines 100000`, or read the cached HTML directly. Strut and knuckle list pages are long.
   - Then the curation build (design above). Per category, a §11.4 sample (60, independent
     session, 0 WRONG) and the hub's confirm before any app change on
     `interchange/categories-<n>`.
