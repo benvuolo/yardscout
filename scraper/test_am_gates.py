@@ -231,6 +231,10 @@ liveInventory = [car('x1', 'Accord', '')]; EX = {};
 { const res = new Map();
   pfAmRows(S, [{ ...G([['Honda', 'Accord*', 2003, 2007, '']]), ifEquipped: ['Fog lamp package'], cosmetic: true }], res, 0, null);
   out.ife = res.get('x1') ? { tier: res.get('x1').tier, warns: res.get('x1').warns } : null; }
+{ const res = new Map();
+  pfAmRows(S, [{ ...G([['Honda', 'Accord*', 2003, 2007, '']]), note: 'Mirror. If equipped: power, heated. Color or finish may differ; it may need paint.',
+                 ifEquipped: ['power', 'heated'], cosmetic: true, option: true }], res, 0, null);
+  out.ifeDup = res.get('x1') ? { tier: res.get('x1').tier, warns: res.get('x1').warns } : null; }
 console.log(JSON.stringify(out));
 """])
     p = subprocess.run([node, "-e", harness], capture_output=True, text=True, timeout=60)
@@ -277,6 +281,11 @@ console.log(JSON.stringify(out));
               bool(r) and r["tier"] == "likely"
               and any("If equipped: Fog lamp package" in w for w in r["warns"])
               and any("may need paint" in w for w in r["warns"]), str(r))
+        r = o["ifeDup"]
+        check("1A note already saying 'If equipped' / 'paint': shown once, not repeated; row stays Likely",
+              bool(r) and r["tier"] == "likely"
+              and sum("If equipped" in w for w in r["warns"]) == 1
+              and sum("paint" in w for w in r["warns"]) == 1, str(r))
         check("category rowWarn rides every aftermarket row",
               all(any("trans-cooler" in w for w in ws) for ws in o["sedanGate"].values()))
 

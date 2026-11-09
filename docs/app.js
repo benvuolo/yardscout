@@ -7604,10 +7604,12 @@ function pfAmRows(s, groups, results, radius, fam) {
       }
       // 1A rows: options the unit needs and a cosmetic part's paint — said on
       // the row, the row stays Likely and nothing is added to ranking
-      if (Array.isArray(g.ifEquipped) && g.ifEquipped.length) {
+      // (skipped when the unit's own note already says it: no repeated line)
+      const gNote = String(g.note || '');
+      if (Array.isArray(g.ifEquipped) && g.ifEquipped.length && !/if equipped/i.test(gNote)) {
         warns.push(escapeHtml(`If equipped: ${g.ifEquipped.join(', ')} — check the donor has it`));
       }
-      if (g.cosmetic) warns.push('may need paint — match the colour or plan to paint it');
+      if (g.cosmetic && !/paint/i.test(gNote)) warns.push('may need paint — match the colour or plan to paint it');
       if (pfCat && pfCat.rowWarn) warns.push(escapeHtml(pfCat.rowWarn));
       if (g.trans && !tr) warns.push(`this unit is for ${g.trans === 'AT' ? 'automatic' : 'manual'}-transmission cars — check the transmission`);
       results.set(v.id, { v, d, tier: 'likely', src: 'aftermarket', srcLine, warns });
