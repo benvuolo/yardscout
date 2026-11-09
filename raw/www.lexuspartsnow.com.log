@@ -784,3 +784,105 @@
 18:11:43 chain-unlinked wheels 1 numbers named by 42611-50500, no catalog link: 42611-50730
 18:11:43 chain-unlinked wheels 1 numbers named by 42611-50510, no catalog link: 4261A-50210
 18:11:43 time budget reached records=2688
+18:12:04 start site=www.lexuspartsnow.com mode=worklist tiers=['A', 'B', 'W'] records=2688 list_lines=510 year_lines=92 url_index=13454
+18:12:04 seg done tier=A Lexus ES 300 [1992, 2008] seeds=[2002] records=2688 errors=32
+18:12:04 seg done tier=A Lexus RX 300 [1999, 2008] seeds=[2000] records=2688 errors=32
+18:12:04 seg done tier=A Lexus IS 250 [2006, 2015] seeds=[2007] records=2688 errors=32
+18:12:04 seg done tier=A Lexus ES 350 [1997, 2018] seeds=[2007] records=2688 errors=32
+18:12:04 seg done tier=A Lexus ES 330 [2004, 2006] seeds=[2004] records=2688 errors=32
+18:12:04 seg done tier=A Lexus GS 300 [1993, 2006] seeds=[2006] records=2688 errors=32
+18:12:04 seg done tier=A Lexus RX 350 [2004, 2016] seeds=[2007] records=2688 errors=32
+18:12:04 seg done tier=A Lexus RX 330 [2004, 2006] seeds=[2004] records=2688 errors=32
+18:12:04 seg done tier=A Lexus LS 400 [1990, 2005] seeds=[1996] records=2688 errors=32
+18:12:04 seg done tier=A Lexus LS 430 [2001, 2006] seeds=[2001] records=2688 errors=32
+18:12:04 seg done tier=A Lexus IS [2004, 2016] seeds=[2007] records=2688 errors=32
+18:12:04 seg done tier=A Lexus LS 460 [1996, 2016] seeds=[2007] records=2688 errors=32
+18:12:04 seg done tier=A Lexus GS [1998, 2018] seeds=[2006] records=2688 errors=32
+18:12:04 seg done tier=A Lexus ES [1990, 2015] seeds=[2007] records=2688 errors=32
+18:12:04 seg done tier=A Lexus GS 350 [1995, 2015] seeds=[2007] records=2688 errors=32
+18:12:04 seg done tier=A Lexus IS 300 [2001, 2005] seeds=[2001] records=2688 errors=32
+18:12:04 seg done tier=A Lexus RX 400h [2006, 2008] seeds=[2006] records=2688 errors=32
+18:12:04 seg done tier=A Lexus IS 350 [2006, 2014] seeds=[2006] records=2688 errors=32
+18:12:04 seg done tier=A Lexus RX [2004, 2008] seeds=[2005] records=2688 errors=32
+18:12:04 seg done tier=A Lexus RX [1999, 2003] seeds=[2001] records=2688 errors=32
+18:12:04 seg done tier=A Lexus GS 400 [1998, 2002] seeds=[1998] records=2688 errors=32
+18:12:04 seg done tier=A Lexus LS [1990, 2012] seeds=[1998] records=2688 errors=32
+18:12:04 seg done tier=A Lexus SC 400 [1992, 1999] seeds=[1992] records=2688 errors=32
+18:12:04 seg done tier=A Lexus GS 430 [2001, 2006] seeds=[2006] records=2688 errors=32
+18:12:04 seg done tier=A Lexus SC 430 [2002, 2005] seeds=[2002] records=2688 errors=32
+18:12:04 seg done tier=B Lexus ES 300 [1992, 2008] seeds=[2002] records=2688 errors=32
+18:12:04 seg done tier=B Lexus RX 300 [1999, 2008] seeds=[2000] records=2688 errors=32
+18:12:04 seg done tier=B Lexus IS 250 [2006, 2015] seeds=[2007] records=2688 errors=32
+18:12:04 seg done tier=B Lexus ES 350 [1997, 2018] seeds=[2007] records=2688 errors=32
+18:12:04 seg done tier=B Lexus ES 330 [2004, 2006] seeds=[2004] records=2688 errors=32
+18:12:04 seg done tier=B Lexus GS 300 [1993, 2006] seeds=[2006] records=2688 errors=32
+18:12:04 seg done tier=B Lexus RX 350 [2004, 2016] seeds=[2007] records=2688 errors=32
+18:12:04 seg done tier=B Lexus RX 330 [2004, 2006] seeds=[2004] records=2688 errors=32
+18:12:04 seg done tier=B Lexus LS 400 [1990, 2005] seeds=[1996] records=2688 errors=32
+18:12:04 seg done tier=B Lexus LS 430 [2001, 2006] seeds=[2001] records=2688 errors=32
+18:12:04 seg done tier=B Lexus IS [2004, 2016] seeds=[2007] records=2688 errors=32
+18:12:04 seg done tier=B Lexus LS 460 [1996, 2016] seeds=[2007] records=2688 errors=32
+18:12:04 seg done tier=B Lexus GS [1998, 2018] seeds=[2006] records=2688 errors=32
+18:12:04 seg done tier=B Lexus ES [1990, 2015] seeds=[2007] records=2688 errors=32
+18:12:04 seg done tier=B Lexus GS 350 [1995, 2015] seeds=[2007] records=2688 errors=32
+18:12:04 seg done tier=B Lexus IS 300 [2001, 2005] seeds=[2001] records=2688 errors=32
+18:12:04 seg done tier=B Lexus RX 400h [2006, 2008] seeds=[2006] records=2688 errors=32
+18:12:04 seg done tier=B Lexus IS 350 [2006, 2014] seeds=[2006] records=2688 errors=32
+18:12:04 seg done tier=B Lexus RX [2004, 2008] seeds=[2005] records=2688 errors=32
+18:12:04 seg done tier=B Lexus RX [1999, 2003] seeds=[2001] records=2688 errors=32
+18:12:04 seg done tier=B Lexus GS 400 [1998, 2002] seeds=[1998] records=2688 errors=32
+18:12:04 seg done tier=B Lexus LS [1990, 2012] seeds=[1998] records=2688 errors=32
+18:12:04 seg done tier=B Lexus SC 400 [1992, 1999] seeds=[1992] records=2688 errors=32
+18:12:04 seg done tier=B Lexus GS 430 [2001, 2006] seeds=[2006] records=2688 errors=32
+18:12:04 seg done tier=B Lexus SC 430 [2002, 2005] seeds=[2002] records=2688 errors=32
+18:12:04 seg done tier=W Lexus ES 300 [1992, 2008] seeds=[2002] records=2688 errors=32
+18:12:04 seg done tier=W Lexus RX 300 [1999, 2008] seeds=[2000] records=2688 errors=32
+18:12:04 seg done tier=W Lexus IS 250 [2006, 2015] seeds=[2007] records=2688 errors=32
+18:12:04 seg done tier=W Lexus ES 350 [1997, 2018] seeds=[2007] records=2688 errors=32
+18:12:04 seg done tier=W Lexus ES 330 [2004, 2006] seeds=[2004] records=2688 errors=32
+18:12:04 seg done tier=W Lexus GS 300 [1993, 2006] seeds=[2006] records=2688 errors=32
+18:12:04 seg done tier=W Lexus RX 350 [2004, 2016] seeds=[2007] records=2688 errors=32
+18:12:04 seg done tier=W Lexus RX 330 [2004, 2006] seeds=[2004] records=2688 errors=32
+18:12:04 seg done tier=W Lexus LS 400 [1990, 2005] seeds=[1996] records=2688 errors=32
+18:12:04 seg done tier=W Lexus LS 430 [2001, 2006] seeds=[2001] records=2688 errors=32
+18:12:04 seg done tier=W Lexus IS [2004, 2016] seeds=[2007] records=2688 errors=32
+18:12:04 seg done tier=W Lexus LS 460 [1996, 2016] seeds=[2007] records=2688 errors=32
+18:12:05 nav-fail Lexus GS 2006: ValueError: no model page for Lexus GS (lexus-['gs'])
+18:12:05 seg done tier=W Lexus GS [1998, 2018] seeds=[2006] records=2688 errors=33
+18:12:12 nav-fail Lexus ES 2007: ValueError: no model page for Lexus ES (lexus-['es'])
+18:12:12 seg done tier=W Lexus ES [1990, 2015] seeds=[2007] records=2688 errors=34
+18:13:09 chain-unlinked wheels 1 numbers named by 4261A-30010, no catalog link: 4261A-30113
+18:13:09 chain-unlinked wheels 1 numbers named by 4261A-30020, no catalog link: 4261A-30113
+18:13:09 chain-unlinked wheels 1 numbers named by 4261A-30030, no catalog link: 4261A-30301
+18:13:09 chain-unlinked wheels 1 numbers named by 4261A-30040, no catalog link: 4261A-30301
+18:13:09 nav-fail Lexus GS 350 2003: ValueError: no 2003 catalog for Lexus GS 350 (lexus-['gs350'])
+18:13:09 seg done tier=W Lexus GS 350 [1995, 2015] seeds=[2007, 2003] records=2692 errors=35
+18:14:53 chain-unlinked wheels 1 numbers named by 42611-53011, no catalog link: 42611-53450
+18:14:53 chain-unlinked wheels 1 numbers named by 42611-53020, no catalog link: 42611-53450
+18:14:53 chain-unlinked wheels 1 numbers named by 42611-53040, no catalog link: 4261A-53460
+18:14:53 chain-unlinked wheels 1 numbers named by 42611-53050, no catalog link: 42611-53071
+18:14:53 chain-unlinked wheels 1 numbers named by 42611-53060, no catalog link: 42611-53061
+18:14:53 chain-unlinked wheels 1 numbers named by 42611-53070, no catalog link: 42611-53071
+18:14:53 chain-unlinked wheels 1 numbers named by 42611-53080, no catalog link: 4261A-53460
+18:14:53 chain-unlinked wheels 1 numbers named by 42611-53090, no catalog link: 42611-53091
+18:14:53 seg done tier=W Lexus IS 300 [2001, 2005] seeds=[2001] records=2702 errors=35
+18:15:49 seg done tier=W Lexus RX 400h [2006, 2008] seeds=[2006] records=2706 errors=35
+18:17:40 chain-unlinked wheels 1 numbers named by 42611-53330, no catalog link: 42611-53343
+18:17:40 chain-unlinked wheels 1 numbers named by 42611-53340, no catalog link: 42611-53343
+18:19:57 seg done tier=W Lexus IS 350 [2006, 2014] seeds=[2006, 2011, 2014] records=2726 errors=35
+18:20:05 nav-fail Lexus RX 2005: ValueError: no model page for Lexus RX (lexus-['rx'])
+18:20:05 seg done tier=W Lexus RX [2004, 2008] seeds=[2005] records=2726 errors=36
+18:20:05 nav-fail Lexus RX 2001: ValueError: no model page for Lexus RX (lexus-['rx'])
+18:20:05 seg done tier=W Lexus RX [1999, 2003] seeds=[2001] records=2726 errors=37
+18:20:29 nav-fail Lexus GS 400 2001: ValueError: no 2001 catalog for Lexus GS 400 (lexus-['gs400'])
+18:20:29 seg done tier=W Lexus GS 400 [1998, 2002] seeds=[1998, 2001] records=2726 errors=38
+18:20:36 nav-fail Lexus LS 1998: ValueError: no model page for Lexus LS (lexus-['ls'])
+18:20:36 seg done tier=W Lexus LS [1990, 2012] seeds=[1998] records=2726 errors=39
+18:21:17 chain-unlinked wheels 1 numbers named by 42611-24240, no catalog link: 42611-24230
+18:22:12 chain-unlinked wheels 1 numbers named by 42611-24390, no catalog link: 42611-24370
+18:22:12 seg done tier=W Lexus SC 400 [1992, 1999] seeds=[1992, 1998] records=2733 errors=39
+18:23:48 chain-unlinked wheels 1 numbers named by 42611-3A211, no catalog link: 42611-3A210
+18:23:48 seg done tier=W Lexus GS 430 [2001, 2006] seeds=[2006, 2003] records=2740 errors=39
+18:24:28 chain-unlinked wheels 1 numbers named by 42611-24420, no catalog link: 42611-24530
+18:24:28 seg done tier=W Lexus SC 430 [2002, 2005] seeds=[2002] records=2742 errors=39
+18:24:28 finished records=2742 errors=39 chain_records=3 chain_unlinked=462 chain_failed=0 chain_given_up=0
