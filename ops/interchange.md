@@ -2756,3 +2756,34 @@ Owner: "Yes relabel those, and start on Honda/Nissan and wheels". The hub approv
 - Fix found on that page: every road wheel's Fit Note lists the car's options, including "TEMPORARY - STEEL WHEEL & TIRE (MINI)". The first Hyundai rule searched the whole row for spare words, so it dropped all 5 Optima road wheels. The spare check now reads only the part's own name and remark. Optima: 4 alloy + 1 steel kept; 2 "Wheel Assy-Temporary" dropped.
 - Curation note: the PartsGiant Fit Note is car options, not the part's identity. Don't read spare words in it as a spare.
 - test_model_map (curation_tests) fails identically on origin/main: Honda "Cr-Z" feed spelling, M3/M5. It belongs to the Honda/Nissan session; I haven't touched it.
+
+## Source scout 2 (session_016ZzJfKZ49mzzQhu4KT7HkU, 2026-11-09)
+
+Verdicts in `scraper/oem_fitment/SOURCES.md` "Source scout 2 (2026-11-09)".
+About 28 hosts probed gently (robots read first, 5-6 s apart, a few GETs
+each); nothing allowlisted or crawled.
+
+- **Passes, pending hub:** GSP North America (gspnorthamerica.com). It has
+  server-rendered per-part "Applications" tables (cv-axle first, strut
+  second), specs, and no published terms ("Coming soon...").
+  - Needs a site-scoped rule for Shopify's form `captcha-bootstrap` script.
+  - Data caveat: the tables drop engine, drive and trans qualifiers.
+  - Adapter plan written; not built.
+- **Owner decision:** 1A Auto. Its licence is personal and non-commercial,
+  with a no-reproduction clause; no anti-automation clause was found;
+  fitment rendering not confirmed.
+- **OUT:**
+  - anti-automation clause: Monroe and Moog (DRiV/Tenneco), Mevotech;
+  - robots `Disallow: /`: TRW/ZF;
+  - challenge or 403: KYB, Bilstein, ACDelco/gmparts, ShowMeTheParts,
+    Opticat (Walker), BBB;
+  - lookup on a refused platform: FCS.
+  RockAuto is out because a captcha marker is on every page and its terms
+  sit under robots-disallowed `/info/`.
+- **Not qualified:** UAC (POST-only AJAX; no POST sent), LKQ Online (JS
+  shell), GPD (stub).
+- **Unreachable:** Gabriel, fordparts.com, parts.toyota.com, WAI.
+- **Unresolved:** Delphi (catalog probably client-side).
+- **Next:** the hub confirms the GSP rule and the allowlist, and sends 1A
+  Auto to the owner. Then build `aftermarket/gspnorthamerica.py` with
+  offline fixtures and crawl cv-axle.

@@ -212,3 +212,117 @@ Tests: `tests/test_fetch_challenge.py`:
 Data use (hub): store application facts only, as for DB Electrical.
 Publish only our derived groups, labelled "Spectra Premium" + unit number,
 with notes in our own words. No page text, images or descriptions.
+
+## Source scout 2 (2026-11-09)
+
+Interchange source-scout session (session_016ZzJfKZ49mzzQhu4KT7HkU). Brief: more FREE
+per-part application catalogs that pass rule 2. Method: a scratch copy of
+`probe.py`'s request pattern (program UA, robots first, 5-6 s apart, at most a
+handful of GETs per host) that reads robots with the RFC 9309 rules of
+`aftermarket/common.py` (all `*` groups merged, wildcards, longest match) and
+tests `fetch.CHALLENGE_RE` + `fetch.HUMAN_RE` on the first 20 KB. A host
+stopped for good on 403/429/503 or any marker. Terms were read in full where
+reachable and searched for automated/robots/scrape/crawl/spider/data-mining/
+reproduction clauses. Nothing was added to `fetch.ALLOWED`; nothing was crawled.
+Sources already decided in the sections above were not re-probed.
+
+### Verdicts
+
+| source | categories it would feed | robots (RFC 9309) | challenge | terms (quoted) | per-part lists as GET | verdict |
+|---|---|---|---|---|---|---|
+| **GSP North America** (gspnorthamerica.com; Shopify) | cv-axle (NCV…), knuckle-side hubs (excluded by "hub only"), steering/suspension, ride control (strut) | `*`: only Shopify defaults (`/admin`, `/cart`, `/checkout`, `/account`, `/orders`, `/services`, …); `/products/*` and the product sitemaps allowed; no crawl-delay | none as an interstitial. **But** every HTML page carries Shopify's form-protection script `<script id="captcha-bootstrap">` (contact/account forms) at byte ~32 K, and the JSON variant of `/` had it inside 20 KB. `fetch.challenged()` would stop the domain whenever a page's head shrinks below that | `/policies/terms-of-service` body is literally "Coming soon..."; no terms published, so no anti-automation or no-reproduction clause | **yes**: `/products/<handle>` server-renders `<table class="product-applications__table">` with Year Range / Make / Model / Submodel / Position; specs (spline counts, lengths, ABS ring) server-rendered too; ~20k products in 20 product sitemaps | **PASS, pending hub** (site-scoped marker rule like Spectra's; data-quality caveat below) |
+| 1A Auto (www.1aauto.com) | broad (mirrors, regulators, lamps, struts, handles, wiper motors…) | `*` allows catalog; disallows `/search`, `/*Fld=`, `/*sort=`, `/cart`, …; `Crawl-Delay: 1` | none on home, terms, `/catalog/parts` | Terms of use: "1A Auto grants you a limited, revocable, non-exclusive, non-transferable license to view, download, and print the Site Content solely for your personal, non-commercial use … Any other use of the Site Content, including but not limited to modification, reproduction, redistribution, republication … without the prior written consent of 1A Auto, is strictly prohibited." No automated-access clause found | not confirmed (sample category URL 404; no product page reached) | **owner decision** (personal/non-commercial licence + no-reproduction). Also a retailer catalog, not a maker's |
+| Monroe (www.monroe.com) / DRiV-Tenneco | strut | `*` allows / (disallows `/data/`) | none | Terms & conditions: prohibited are "any collection and use of any product listings or descriptions; any derivative use of this Website or its contents; or any use of data mining, robots, or similar data gathering and extraction tools" | not checked | **OUT** (anti-automation clause) |
+| Moog (www.moogparts.com) / DRiV | knuckle, steering | as Monroe | none | identical clause to Monroe | not checked | **OUT** (anti-automation clause) |
+| Mevotech (www.mevotech.com) | knuckle, suspension | robots.txt 404 (all allowed) | none | Terms of use PDF (2020-09): may not "systematically collect from the Website and use any Mevotech Content, including the use of any data mining, robots, or similar data gathering and extraction methods" | not checked | **OUT** (anti-automation clause) |
+| TRW (www.trwaftermarket.com → aftermarket.zf.com) | suspension, steering | aftermarket.zf.com: `User-agent: *` / `Disallow: /` | — | not read (robots) | — | **OUT** (robots disallows all) |
+| KYB (www.kyb.com) | strut | allows (disallows `/wp-json/`) | **yes**: home HTTP 403 "Just a moment..." | not reached | — | **OUT** (challenge) |
+| Bilstein (www.bilstein.com) | strut (B4) | `/robots.txt` serves the HTML home page (no robots file); that page contains "reCAPTCHA" (consent-manager config) | marker present | not reached | not checked | **OUT** (challenge marker; not pursued) |
+| Gabriel (www.gabriel.com) | strut | proxy 502 twice | — | — | — | **unreachable** |
+| ACDelco (www.acdelco.com), GM Parts (www.gmparts.com) | all GM | robots.txt HTTP 403 | refusal | — | — | **OUT** (403) |
+| Motorcraft (www.fordparts.com) | all Ford | robots.txt timed out twice | — | — | — | **unreachable** (not retried further) |
+| Genuine Toyota (parts.toyota.com) | all Toyota | proxy 502 twice | — | — | — | **unreachable** |
+| ShowMeTheParts (www.showmetheparts.com), the catalog platform behind many brand finders (FCS uses it in an iframe) | many | robots.txt HTTP 403 | refusal | — | — | **OUT** (403) |
+| Opticat (walkerproducts.opticatonline.com), platform behind Walker Products' lookup | MAF, sensors, throttle body (Walker) | — | **yes**: HTTP 403 challenge | — | — | **OUT** (challenge); Walker's own site has no application lookup |
+| FCS Automotive (fcsautoparts.com) | strut (complete assemblies) | robots has no rules | none | Terms: licence "for personal, non-commercial transitory viewing only … you may not: modify or copy the materials; use the materials for any commercial purpose" | no: the light-duty lookup is a ShowMeTheParts iframe (403); only a heavy-duty XLSX | **OUT** (lookup is on a refused platform; restrictive licence) |
+| UAC (www.uacparts.com) | ac-compressor, condensers, evaporators, blower-wheel chart | robots.txt 404 (all allowed) | none | only credit-card and ordering-system terms (customer contracts); no site terms of use found | **no**: the vehicle application catalog (AwesomeMVC cascading selects) and every result list are POST-only AJAX; GETs on `/VA_*AjaxDropdown/GetItems` answer HTTP 500; `/Catalog/SearchIndex?search=` renders an empty shell | **not qualified** (no plain-GET application data). Hub may ask the owner whether POSTs to a public dropdown API are acceptable; this session did not send any |
+| Delphi (www.delphiautoparts.com) | fuel-pump-module, sensors | `*` allows / | none | Terms of use read (23 KB text): no automated/robots/scrape/data-mining clause found | not resolved: `/parts-catalog` serves a "No Results Found" shell; results appear to load client-side (not confirmed) | **unresolved**, low priority |
+| BBB Industries (www.bbbind.com) | power-steering, alternators, calipers | robots.txt HTTP 403 | refusal | — | — | **OUT** (403) |
+| WAI Global (www.wai-gbl.com) | alternators/starters, wiper motors | proxy 502 | — | — | — | **unreachable** |
+| GPD Global Parts (www.globalparts.co) | ac-compressor, radiator | allow / | none | — | home is a 114-byte stub | **no catalog** at that host |
+| Unity (www.unityautoparts.com) | — | — | — | — | the domain is Unity Group (India), not the US strut maker | **wrong host**, not pursued |
+| LKQ Online (www.lkqonline.com) | used OE parts | `*` allows catalog (disallows checkout/user/cms) | none | not read | no: home is a 5 KB JS shell | **not qualified** (no server-rendered content seen) |
+| RockAuto (www.rockauto.com) | everything | `*`: `Disallow: /info/`, `/cgi-bin/` | **marker**: the home page matches `captcha` (the image security code on its account/password forms). Under `fetch.challenged()` the domain stops on the first page. First two attempts on the home page: connection error | not reached; its help/legal pages sit under `/info/`, which robots disallows for us | catalog is a per-vehicle tree, not per-part "fits" lists | **OUT**: challenge marker on every page plus terms unreadable under robots. This is the concrete reason behind the decision record's "not used" |
+
+### GSP North America: what the data looks like
+
+- Sample `NCV36167XD` (title "17-22 Honda CR-V (1.5, 2.4) CV Axle Assembly - Front Left"):
+  four rows: 2017-2018, 2019-2019, 2019-2019, 2020-2022 Honda CR-V,
+  Submodel "-", Position "Front Left".
+- **Qualifiers are dropped.** Submodel is "-" and the table has no engine,
+  drive or transmission column. The engines appear only in the title, as
+  "(1.5, 2.4)". The duplicate 2019 row shows that some distinguishing
+  attribute was collapsed away. AWD/FWD and auto/manual axle splits are
+  therefore invisible.
+- Sample `NS90049`: "1996-2002 Land Rover Range Rover", Submodel "-".
+- Specs are server-rendered: inboard/outboard spline counts, compressed and
+  extended lengths, ABS tone ring, axle-nut thread. These help a twin check:
+  two units with equal specs are physically alike.
+- No OE numbers on the page.
+
+Yield estimate, CV axle: GSP is a full-line CV maker (NCV10xxx-NCV7xxxx
+covers Asian, domestic and Euro makes). Most cars on our lots are FWD or AWD,
+so the potential cv-axle coverage is broad. The dropped qualifiers limit what
+can ship. A cv-axle group can be Likely only where:
+- every row of the unit has Submodel "-" or a submodel we can gate on;
+- no duplicate (years, make, model, position) row appears;
+- the title's engine list matches our engine.
+
+Units whose rows contain duplicates refuse. An AWD/FWD split must never be
+inferred. Strut ("Ride Control") yield is not yet sampled.
+
+### Adapter plan: `aftermarket/gspnorthamerica.py` (not built; waits for the hub)
+
+Same contract as `dbelectrical.py` (`SITE`, `STATUS`, `CATEGORIES`,
+`listing()`, `product()`, `get = common.get`). It runs through `run.py`, so
+fetch.py pacing, cache, robots and the permanent stop are unchanged.
+
+- **Navigation (no search URLs):** `/sitemap.xml`, then the
+  `sitemap_products_N.xml` files (GET XML, robots-allowed), then the product
+  handles. Keep only handles with a category prefix:
+  - `ncv` = cv-axle;
+  - the ride-control/strut prefixes, after one sample confirms them.
+  Unknown prefixes are skipped. `score()` orders the worklist by
+  lot-weighted make/model taken from the sitemap image titles where printed,
+  otherwise by sitemap order.
+- **Product page parse:**
+  - `<table class="product-applications__table">`: one application per
+    printed row (years, make, model, submodel, position), verbatim.
+  - `GSP Part Number:`: the unit number.
+  - `<title>`: the engine list in parentheses, verbatim.
+  - The Specifications block: spline counts, lengths, ABS ring, nut thread.
+  - Duplicate rows are kept as printed, with a `duplicate_rows` count.
+  - No OE join; `replaces` is empty.
+  - Never read: the `.json` variant, prices, images, descriptions.
+- **Curation rules (groups_am):**
+  - Likely only.
+  - Refuse a unit when:
+    - it has a duplicate (years, make, model, submodel, position) row;
+    - a Submodel cell names a trim we cannot gate on;
+    - the title's engines do not include the car's engine.
+  - Never infer drive or transmission. A position must be printed.
+- **Challenge detector (hub decision first):** every page carries Shopify's
+  `<script id="captcha-bootstrap">` (forms only), at ~32 KB, so it moves
+  around the 20 KB window. Proposed site-scoped rule, built on the Spectra
+  (a)-(e) pattern:
+  - HTTP 200;
+  - for a product path, the `product-applications__table` or the GSP
+    Part Number block is present; for a sitemap path, valid sitemap XML;
+  - exactly one `captcha-bootstrap` script;
+  - with that one script removed, no CHALLENGE_RE or HUMAN_RE match.
+  Anything else stops the domain. Tests both ways, as in
+  `tests/test_fetch_challenge.py`.
+- **Data use:** application facts and specs only. Publish derived groups
+  labelled "GSP" plus the unit number. No page text.
+- **Size:** about 20k handles, of which perhaps 3-5k are cv-axle. At 4 s/site
+  that is 4-6 h of crawl in 28-minute slices.
