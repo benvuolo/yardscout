@@ -3000,3 +3000,13 @@ each); nothing allowlisted or crawled.
   - Wiper motors and fog lights: not sampled yet.
   - 1A interchange tables carry OE numbers (a possible OE join). All of this
     is with the hub; nothing added to the crawl yet.
+- 2026-11-09 22:56: R3 has not crawled yet. Run 42684614492 (19:34) was
+  dispatched with an explicit site list (gm, vw, mb, hyundai, kia) and left
+  out these 4. Scheduled run 42712787314 (22:32, sites=all) is pending
+  behind it; its plan step picks the 4 up in complete mode.
+- Tier D (category-breadth request, plumbing 8dbbe67) is held until R3
+  finishes on these sites. A local trial overlapping a CI crawl doubles the
+  request rate per site, and hondapartsnow has already used its one 503 retry.
+  Order after R3: slug map, scratch `--tier D --max-segments 2` trial, every
+  row read, strict rules (colour words kept, airbag rows excluded), product
+  trial, ci_audit, flag one version above every flagged tier.
