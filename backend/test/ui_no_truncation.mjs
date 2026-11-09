@@ -569,6 +569,31 @@ const SCREENS = [
     }, mode);
     await settle(page, 800);
   }, async (page) => { await page.evaluate(() => { _mapSheetLoc = null; setYardsView('list'); }); await resetUi(page); }]),
+  // Listed far past the typical stay (owner report, Pull-N-Save Springville):
+  // the bar gives way to a neutral notice on the card and the car screen.
+  // One car's set-out date is moved 200 days back for the test, then restored.
+  ...[['long-listed-card', false], ['long-listed-detail', true]].map(([name, detail]) => [name, async (page) => {
+    await tab(page, 'live');
+    await page.evaluate((detail) => {
+      const card = document.querySelector('#live-grid .car-card[data-vkey]');
+      const v = liveInventory.find(x => vehicleKey(x) === card.dataset.vkey);
+      window.__llOrig = [v, v.dateAdded];
+      const d = new Date(Date.now() - 200 * 86400000);
+      v.dateAdded = d.toISOString().slice(0, 10);
+      renderLive();
+      const c2 = document.querySelector(`#live-grid .car-card[data-vkey="${CSS.escape(vehicleKey(v))}"]`);
+      if (!c2 || !c2.querySelector('.long-listed')) throw new Error('no notice on the card');
+      if (c2.querySelector('.stay-meter')) throw new Error('overfull bar still on the card');
+      if (!/Listed \d+ days, longer than usual here/.test(c2.textContent)) throw new Error('notice wording');
+      if (detail) {
+        openCarDetail(vehicleKey(v));
+        const b = document.getElementById('car-detail-body');
+        if (!b.querySelector('.long-listed') || b.querySelector('.stay-meter')) throw new Error('car screen: notice/bar wrong');
+        b.querySelector('.long-listed').scrollIntoView({ block: 'center' });
+      } else c2.scrollIntoView({ block: 'start' });
+    }, detail);
+    await settle(page, 500);
+  }, async (page) => { await page.evaluate(() => { if (window.__llOrig) { window.__llOrig[0].dateAdded = window.__llOrig[1]; window.__llOrig = null; } if (carDetailKey) hideCarDetail(); renderLive(); }); await resetUi(page); }]),
   ['photo-viewer', async (page) => {
     await tab(page, 'live');
     await page.evaluate(() => { const k = photoCarKey('p'); openCarDetail(k); openPhotoViewer(k); });

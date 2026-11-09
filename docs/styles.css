@@ -3203,3 +3203,7 @@ button.saved-item-name { max-width: 100%; min-width: 0; overflow-wrap: anywhere;
 .yr-item.is-checked .yr-check { min-height: var(--tap); flex-direction: row; gap: 6px; }
 .yr-item.is-checked .yr-check .ico { width: 18px; height: 18px; }
 .yr-item.is-checked { padding-block: 6px; }
+
+/* Listed far past the typical stay: a neutral note, never an alarm. */
+.long-listed { margin: var(--s2) 0 0; padding: var(--s2) var(--s3); border: 1px solid var(--border); border-left: 3px solid var(--border-dark); border-radius: var(--r-sm); background: var(--surface2); font-size: var(--t-sm); line-height: 1.45; color: var(--text); }
+.cd-stay-long .long-listed { margin: 0; }

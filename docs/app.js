@@ -3350,7 +3350,8 @@ function renderCarDetail() {
   const where = [place ? escapeHtml(place) : '', d != null ? `${Math.round(d)}\u00a0mi${zip ? ' from ' + escapeHtml(zip) : ' away'}` : ''].filter(Boolean).join(' &middot; ');
   const dir = carDirectionsUrl(v);
   let stay = '';
-  if (lc.avg && lc.daysOn != null) {
+  if (lc.longListed) stay = `<section class="cd-stay cd-stay-long">${longListedHtml(lc.daysOn)}</section>`;
+  else if (lc.avg && lc.daysOn != null) {
     const f = (lc.daysOn + 1) / lc.avg;
     const word = lc.daysOn > 2 * lc.avg ? 'Past typical' : f >= 0.8 ? 'Leaving soon' : f >= 0.34 ? 'Mid-stay' : 'Fresh';
     const cls = f >= 0.8 ? 'late' : f >= 0.34 ? 'mid' : 'fresh';
@@ -3889,6 +3890,18 @@ function renderLivePending() {
 
 /* Crush-risk clock for one car (estimate, never a prediction): day count on
  * the lot vs this yard's departure history. Shared by the card and detail. */
+/* A car listed far past the typical stay (over 2x the figure in use, or
+ * 120+ days when there is no figure) gets a calm notice instead of an
+ * overfull bar: the yard still lists it, but lists can fall behind. The car
+ * is never hidden. */
+const LONG_LISTED_DAYS = 120;
+function isLongListed(daysOn, avg) {
+  if (daysOn == null || !Number.isFinite(daysOn)) return false;
+  return avg ? daysOn > 2 * avg : daysOn >= LONG_LISTED_DAYS;
+}
+function longListedHtml(daysOn, cls) {
+  return `<p class="long-listed${cls ? ' ' + cls : ''}" role="note">Listed ${daysOn.toLocaleString()} days, longer than usual here. Yards\u2019 lists can fall behind; call before going for this one.</p>`;
+}
 function carLotClock(v) {
   // Crush-risk signal from yard departure history: factual day count vs the
   // yard's historical average — an estimate, never a prediction.
@@ -3913,7 +3926,9 @@ function carLotClock(v) {
       lotClock = `<span class="${leavingSoon ? 'lot-clock-soon' : ''}" title="${title}">Day ${daysOn + 1} of ~${avg} typical</span>${fastTag}`;
     }
   }
-  return { daysOn, avg: ls && daysOn != null ? ls.avg : null, lotClock, leavingSoon };
+  const longListed = isLongListed(daysOn, ls ? ls.avg : null);
+  if (longListed) { lotClock = ''; leavingSoon = false; }
+  return { daysOn, avg: ls && daysOn != null && !longListed ? ls.avg : null, lotClock, leavingSoon, longListed };
 }
 
 /* Value + parts for one car: the card's value line, and the parts list the
@@ -4381,7 +4396,7 @@ function renderLive() {
     const fm = freshnessMultiplier(v.dateAdded);
     const fl = freshnessLabel(v.dateAdded);
 
-    const { lotClock, leavingSoon, daysOn, avg: lotAvg } = carLotClock(v);
+    const { lotClock, leavingSoon, daysOn, avg: lotAvg, longListed } = carLotClock(v);
 
     // Scan stamp so a screenshot carries when this list was true. The
     // inventory has no per-yard scan time (yard_health.json isn't loaded
@@ -4431,6 +4446,7 @@ function renderLive() {
             ${specLine ? `<div class="car-spec-line">${specLine}</div>` : ''}
             <div class="live-card-location">${ICON.pin} <span class="loc-name">${escapeHtml(v.location)}</span>${d != null ? ' <span class="dist">&middot; ' + Math.round(d) + '\u00a0mi</span>' : ''}${saleBadgeHtml(v.location)}</div>
             <div class="car-meta">${stayMeterHtml(daysOn, lotAvg)}<span class="car-meta-text">${whenBits.join(' &middot; ')}${vm.warn}</span></div>
+            ${longListed ? longListedHtml(daysOn, 'card-long') : ''}
           </div>
           ${manualBadge || statusBadge ? `<div class="car-badges">${manualBadge}${statusBadge}</div>` : ''}
         </div>
