@@ -2315,3 +2315,20 @@ hub, ship only on 0 WRONG plus hub confirmation.
   release_allowlist.json ships in the same push as re-curated groups for
   every shipped namespace. (a31d3f6 did not change the policy hash: it
   touched no POLICY_INPUTS file.)
+
+### 7. Tier C: Honda/Acura/Nissan/Infiniti rules are in (session_016ZzJfMtLKpUFu8TiEFMrkF, d7c236e + 0fdaf09)
+- Trial runs (`--tier C --max-segments 2`, local scratch, nothing on
+  oem-raw): 0 errors, no refusals. Records: honda 43, acura 53, nissan 23,
+  infiniti 79.
+- For curation:
+  - Nissan "Drive Assy-Windshield Wiper" is motor plus linkage; "Motor
+    Assy" is the motor only.
+  - Honda sells "Shock Absorber Assy." and "Shock Absorber Unit"
+    separately; they must be split by packaging.
+  - Honda and Acura knuckle names carry (2WD)/(4WD): use the drive gate.
+  - Acura MDX "RR. Windshield Wiper" is the rear motor (slot R).
+  - "N/A FOR USA" rows are dropped.
+- Still open: crawl.py TIERS["C"] and the `all` tier list (both wait on the
+  wheels merge); rules for the other 12 sites; any dispatch. Knuckle and
+  strut curation must refuse option, drive, body and other notes the way
+  the path E audit showed (§5).
