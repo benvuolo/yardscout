@@ -119,3 +119,7 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
   15:00 UTC cron sends the new recap. Check after deploy:
   `POST /v1/admin/digest/run` is NOT a dry run in prod (it sends), so verify
   with the Monday cron logs / ops daily email instead.
+
+## 2026-11-09 ~03:10 UTC owner decisions: held exterior release and heavy photos
+- Held exterior groups: the owner chose option 1, "Do 1". Release all 96 groups in scraper/oem_fitment/groups/_report/held_exterior_release.json: still held, agent RIGHT, and at least one cited independent non-eBay source. Agent RIGHT plus one source is enough; owner checklist taps are not required. The groups still have to pass every curate rule. Subaru entries stay out while Subaru is withheld. Claims read "Likely fits — check the part number".
+- Heavy photos (VinPlus ~22k, Sturtevant, Army's 4 MB originals): the owner wants them included. They are published per scan with a heavy flag, and the app shows them on the car screen as tap-to-load.
