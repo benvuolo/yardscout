@@ -3050,3 +3050,9 @@ each); nothing allowlisted or crawled.
   - All 41 shipped wheels groups are census OK.
   - Payload: only data/oem/wheels.json changes in content (41 groups); oemStatus mb 10, mopar 309, vag 19.
   - Gates: curation_tests 17/17 (incl. test_groups_hash), oem_fitment tests 39/39, pf_guards_unit ALL PASS, scraper/test_*.py pass, pf_ux_e2e + interchange_e2e pass, part_finder_e2e only the E46 M3 case.
+- ~00:20 UTC, category breadth: the render for `if_equipped` and `cosmetic`
+  is on interchange/categories-ship. Nothing is merged yet. GROUP_HOLD_CATS
+  holds every new category's groups until its §11.4 passes and the hub
+  confirms. At clearance, headlights, tail-lights, side-mirrors and
+  window-regulator must be added to `_AM_CATS`; that's a category-breadth
+  change.
