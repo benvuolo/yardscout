@@ -186,3 +186,4 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
   - 1A-derived fits stay in the free part of the Parts tab, never behind Pro (a test enforces it).
   - No 1A prices, descriptions or images.
   - The GSP detector rule (script-only "captcha" word tolerated; visible or strong markers still stop) was approved under the owner's GSP go.
+- ~20:40 UTC: oem-aftermarket-crawl.yml now runs a matrix over every live aftermarket site (scout, 33655227; schedule 53 */6, input "all"). Hub cancelled the serial Spectra and 1A runs and dispatched "all": run 42694329196 has Spectra, GSP and 1A Auto in parallel. DB Electrical is .done.
