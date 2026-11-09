@@ -293,6 +293,18 @@ SPLIT_CONDITIONS = frozenset({"plant", "trim", "option", "engine", "emissions", 
 PHASE3_CATS = {"ac-compressor", "fuel-pump-module", "throttle-body", "power-steering-pump",
                "radiator"}
 
+# Path E (hub-approved 2026-11-09, ops/interchange.md "Category breadth"):
+# engine-gated Likely groups (curate.engine_gated_groups). Each app carries
+# the engine its fitment rows print; the client admits a car only when its
+# decode agrees. Not body kinds, so the body Likely loop never sees them.
+ENGINE_GATED_CATS = frozenset({"ac-compressor", "fuel-pump-module"})
+# fuels never claimed: electric A/C compressors and different fuel systems
+ENGINE_GATED_NEVER_FUELS = frozenset({"hybrid", "phev", "cng", "diesel"})
+# model_engine_conflict: with at least this many decoded lot cars for a
+# vehicle-year and none carrying a listed engine, the vehicle-year is dropped
+# (lexuspartsnow 22030-31040: GS200t / GS430 printed as 3.5L V6)
+MODEL_ENGINE_CONFLICT_MIN = 3
+
 
 def cat_policy(cat: str) -> dict:
     return CATEGORY_POLICY.get(cat, DEFAULT_CATEGORY_POLICY)

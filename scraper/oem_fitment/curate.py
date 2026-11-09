@@ -82,6 +82,7 @@ class Options:
     model_map: MM.ModelMap | None = None
     model_map_path: Path | None = None
     inventory: dict | None = None
+    extras: dict | None = None              # vehicle_extras.json (decoded engines; path E lint)
     status_table: dict | None = None        # CATEGORY_STATUS override (tests)
     engine_reliable: dict | None = None     # ENGINE_CELLS_RELIABLE override (tests)
     sibling_ignore: dict | None = None
@@ -134,6 +135,7 @@ class Curation:
         self.inv_counts = Counter((r[3], r[4], r[2]) for r in inv["vehicles"]) if inv else Counter()
         kinds = getattr(self.js, "INTERCHANGE_PART_CATEGORIES", {}) if self.js else {}
         self.kinds = {k: v.get("kind") for k, v in kinds.items()}
+        self.decoded = _decoded_engines(inv, opts.extras)
 
     def refuse(self, reason, t=None, cat=None, pn=None, evidence=None, detail=None):
         self.refusals.append({"reason": reason, "t": list(t) if t else None, "cat": cat, "pn": pn,
@@ -1075,15 +1077,16 @@ class Curation:
         for g in vg:
             sigs[g["id"].rsplit(":", 1)[-1]] = g["sig"]
         likely = self.likely_groups(brand)
+        likely_engine = self.engine_gated_groups(brand)
         used = {k for g in groups + vg for s in g["sig"] for _, ks in s[1] for k in ks}
-        used |= {k for g in likely for k in g.get("keys", [])}
+        used |= {k for g in likely + likely_engine for k in g.get("keys", [])}
         classes = {}
         for (key, cat), c in sorted(self.classes.items()):
             if key in used:
                 classes[key] = {"pns": sorted(c.pns), "cat": cat, "comp": c.packaging or None, "reman": c.reman,
                                 "names": sorted({n for r in c.records for n in r.oem_names}),
                                 "evidence": sorted(r.pointer for r in c.records)}
-        for g in likely:
+        for g in likely + likely_engine:
             g.pop("keys", None)
         doc = {
             "schema": policy.SCHEMA, "ns": self.ns, "curate_version": policy.CURATE_VERSION,
@@ -1091,6 +1094,8 @@ class Curation:
             "raw": {"ref": self.src.ref or "fixtures", "commit": self.src.commit or "fixtures",
                     "sites": {s: {k: v for k, v in m.items()} for s, m in sorted(self.raw_meta.items())}},
             "classes": classes, "groups": groups, "vg": vg, "likely": likely,
+            # path E (ops/interchange.md "Category breadth"): engine-gated Likely
+            "likely_engine": likely_engine,
             "sigs": {h: sigs[h] for h in sorted(sigs)},
             "cells": sorted(cells),
             # §7.6: per-family states of engine-category cells (never shipped)
@@ -1338,6 +1343,69 @@ class Curation:
             out.append({"id": f"oem:{self.ns}:{cat}:{slot}:{_sha1([pns, apps])[:10]}", "cat": cat,
                         "tier": "likely", "kind": "body", "apps": apps, "pn": pns, "reason": reason,
                         "note": note, "keys": [key], "cars": sum(self.inv_counts.get(T, 0) for T in Ts),
+                        "oldest_retrieved": stamps[0] if stamps else None})
+        return out
+
+    def engine_gated_groups(self, brand):
+        """Path E (hub-approved 2026-11-09, ops/interchange.md "Category
+        breadth"): Likely groups for engine-dependent categories
+        (policy.ENGINE_GATED_CATS). One class (part number) per group; each
+        app carries the engine its own fitment rows print, and the client
+        admits a car only when its decode agrees (undecoded: "match your
+        engine"). Same membership, own-page and note rules as the body loop,
+        plus, failing closed per vehicle-year:
+        - an unparsed engine cell drops the vehicle-year (engine_unparsed);
+        - hybrid/plug-in/CNG/diesel/fuel-cell engines are never claimed;
+        - a gas engine whose same-displacement fuel twin is in T's engine
+          universe but not listed is dropped (engine_fuel_twin);
+        - model_engine_conflict: T's decoded lot cars (at least
+          policy.MODEL_ENGINE_CONFLICT_MIN) never carry any listed engine
+          (catalog model names from a chassis code: 22030-31040 lists the
+          GS200t and GS430 as 3.5L V6)."""
+        out = []
+        self.engine_gated_lint = Counter()
+        for (key, cat), c in sorted(self.classes.items()):
+            if cat not in policy.ENGINE_GATED_CATS:
+                continue
+            if not c.verified or "universal_part_suspect" in c.problems:
+                continue
+            cand, class_notes = [], []
+            for T in sorted(self.class_Ts.get((key, cat), ())):
+                m = (self.cells_info.get((T, cat)) or {}).get("members", {}).get(key)
+                if not m or m["cover"] not in ("yes", "maybe"):
+                    continue
+                on, notes = self.own_page(T, cat, c)[:2]
+                if policy.LIKELY_REQUIRES_OWN_PAGE and not on:
+                    self.engine_gated_lint["no_own_page"] += 1
+                    continue
+                cand.append((T, m))
+                class_notes += notes
+            by_eng = defaultdict(list)          # engine label -> [T]
+            whys = set()
+            for T, m in cand:
+                if self.note_excludes(class_notes, T, market=False):
+                    self.engine_gated_lint["note_restricted"] += 1
+                    continue
+                engs = _gated_engines(self, T, cat, c)
+                if engs is None:
+                    continue
+                whys |= set(m["why"])
+                for e in engs:
+                    by_eng[e].append(T)
+            apps = []
+            for e, Ts in sorted(by_eng.items()):
+                apps += [a + [e] for a in _runs(Ts)]
+            if not apps:
+                continue
+            apps.sort()
+            pns = sorted(c.pns)
+            reason, text = _likely_reason(whys) if whys else ("engine", "match your engine")
+            note = _likely_note(brand, pns[0], "match the engine; " + text, PACK_TEXT.get(c.packaging, ""))
+            stamps = sorted(r.retrieved for r in c.records if _ts(r.retrieved))
+            Tset = {T for Ts in by_eng.values() for T in Ts}
+            out.append({"id": f"oem:{self.ns}:{cat}:E:{_sha1([pns, apps])[:10]}", "cat": cat,
+                        "tier": "likely", "kind": "engine-gated", "apps": apps, "pn": pns, "reason": reason,
+                        "note": note, "keys": [key], "cars": sum(self.inv_counts.get(T, 0) for T in Tset),
                         "oldest_retrieved": stamps[0] if stamps else None})
         return out
 
@@ -1675,6 +1743,66 @@ def _stage_of(reason: str) -> str:
     if reason in ("category_unconfirmed", "engine_cells_unreliable", "kind_not_phase1"):
         return "gated"
     return "blocked"
+
+
+def _decoded_engines(inv, extras) -> dict:
+    """(make, model, year) -> Counter of (cyl, liters) decoded on the lot
+    (vehicle_extras.json engine text, parsed like the client's pfParseEngine)."""
+    out = defaultdict(Counter)
+    if not inv or not extras:
+        return out
+    ex = extras.get("extras") or {}
+    F = {k: i for i, k in enumerate(inv.get("fields") or [])}
+    if "id" not in F:
+        return out
+    for r in inv["vehicles"]:
+        e = ex.get(str(r[F["id"]]))
+        eng = e[2] if e and len(e) > 2 else ""
+        lm = re.search(r"(\d+\.\d+)\s*l", str(eng).lower())
+        cm = re.search(r"(\d+)[\s-]*cyl", str(eng).lower())
+        if lm and cm:
+            out[(r[3], r[4], r[2])][(int(cm.group(1)), round(float(lm.group(1)), 1))] += 1
+    return out
+
+
+def _engine_label(k) -> str:
+    return f"{k[1]:.1f}L {k[0]}-cyl"
+
+
+def _gated_engines(cur, T, cat, c):
+    """Path E engine set for class c on T: sorted engine labels, or None when
+    T is dropped (counted in cur.engine_gated_lint)."""
+    rows = [f for cc, r, f, t in cur.t_rows.get((T, cat), []) if cc is c]
+    keys = set()
+    for f in rows:
+        keys |= f.engine_keys()
+    if not keys or any(not isinstance(k[0], int) for k in keys):
+        cur.engine_gated_lint["engine_unparsed"] += 1
+        return None
+    U = cur.engineu.get(T, frozenset())
+    ok = set()
+    for k in keys:
+        if k[2] in policy.ENGINE_GATED_NEVER_FUELS:
+            cur.engine_gated_lint["engine_fuel_excluded"] += 1
+            continue
+        twins = {u for u in U if isinstance(u[0], int) and u[0] == k[0] and abs(u[1] - k[1]) <= 0.05
+                 and u[2] != k[2] and u not in keys}
+        if twins:
+            cur.engine_gated_lint["engine_fuel_twin"] += 1
+            continue
+        ok.add((k[0], round(k[1], 1)))
+    if not ok:
+        return None
+    dec = cur.decoded.get(T) or Counter()
+    if sum(dec.values()) >= policy.MODEL_ENGINE_CONFLICT_MIN and \
+            not any(abs(d[1] - k[1]) <= 0.05 and d[0] == k[0] for d in dec for k in ok):
+        cur.engine_gated_lint["model_engine_conflict"] += 1
+        cur.refuse("model_engine_conflict", t=T, cat=cat, pn=sorted(c.pns)[0],
+                   evidence=[r.pointer for r in c.records],
+                   detail=",".join(_engine_label(k) for k in sorted(ok)) + " vs decoded " +
+                   ",".join(_engine_label(k) for k in sorted(dec)))
+        return None
+    return sorted(_engine_label(k) for k in ok)
 
 
 def _runs(Ts) -> list:
@@ -2023,6 +2151,8 @@ def main(argv=None) -> int:
     nss = sorted(policy.NAMESPACES) if (not a.ns or "all" in a.ns) else a.ns
     mm = MM.ModelMap(MM.load(a.model_map))
     inv = MM.load_inventory(a.inventory)
+    ex_p = Path(a.inventory).with_name("vehicle_extras.json")
+    extras = json.loads(ex_p.read_text()) if ex_p.exists() else None
     errs, warns, mrep = MM.validate(mm, inv, js, policy.NAMESPACES)
     if errs:
         print("model_map.json fails validation; curate refuses to run:", *errs, sep="\n  ", file=sys.stderr)
@@ -2037,7 +2167,7 @@ def main(argv=None) -> int:
     no_ns = [s for s in src.sites() if s not in policy.SITE_NS]
     for ns in nss:
         opts = Options(as_of=a.as_of, fixtures=a.fixtures, model_map=mm, model_map_path=Path(a.model_map),
-                       inventory=inv, js=js)
+                       inventory=inv, extras=extras, js=js)
         cur, doc = curate(ns, src, opts)
         results[ns] = cur
         if not cur.raw_meta:
