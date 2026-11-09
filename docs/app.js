@@ -5273,6 +5273,13 @@ function saveYardChecks(all) {
   _yardChecksMem = all;
   try { localStorage.setItem('ys_yard_checks', JSON.stringify(all)); } catch (e) { /* storage off: this session only */ }
 }
+/* Row-view button wording (owner 2026-11-09: "Check" and "+ Add" were unclear). */
+function rowSeenLabel(done, name) {
+  return done ? { text: 'Seen', aria: `Seen: ${name}. Tap to unmark` } : { text: 'Seen', aria: `Mark seen: ${name}` };
+}
+function rowPullLabel(on, name) {
+  return on ? { text: 'On pull sheet', aria: `On your pull sheet: ${name}. Tap to remove` } : { text: 'Pull sheet', aria: `Add to pull sheet: ${name}` };
+}
 const _rowsOpen = new Set();   // all-checked rows the user re-opened
 const rowSortKey = (r) => {
   const s = String(r || '').trim();
@@ -5338,8 +5345,8 @@ function yardRowItemHtml(v, flags) {
       </button>
       ${unlocked && val && val.profitLine ? `<div class="yr-value">${val.profitLine}</div>` : ''}
       <div class="yr-act">
-        <button type="button" class="yr-check" data-vkey="${escapeHtml(key)}" aria-pressed="${done}" aria-label="${done ? 'Checked. Tap to uncheck' : 'Mark checked'}: ${escapeHtml(`${v.year} ${v.make} ${v.model}`)}">${ICON.check}<span>${done ? 'Checked' : 'Check'}</span></button>
-        ${(() => { const on = !!savedCars[key]; return `<button type="button" class="btn ${on ? 'btn-on' : 'btn-accent'} heart-btn yr-add" data-vkey="${escapeHtml(key)}" aria-pressed="${on}" aria-label="${on ? 'On your pull sheet. Remove' : 'Add to pull sheet'}">${on ? ICON.check + '<span>On sheet</span>' : ICON.plus + '<span>Add</span>'}</button>`; })()}
+        ${(() => { const L = rowSeenLabel(done, `${v.year} ${v.make} ${v.model}`); return `<button type="button" class="yr-check" data-vkey="${escapeHtml(key)}" aria-pressed="${done}" aria-label="${escapeHtml(L.aria)}">${ICON.check}<span>${L.text}</span></button>`; })()}
+        ${(() => { const on = !!savedCars[key]; const L = rowPullLabel(on, `${v.year} ${v.make} ${v.model}`); return `<button type="button" class="btn ${on ? 'btn-on' : 'btn-accent'} heart-btn yr-add" data-vkey="${escapeHtml(key)}" aria-pressed="${on}" aria-label="${escapeHtml(L.aria)}">${on ? ICON.check : ICON.plus}<span>${L.text}</span></button>`; })()}
       </div>
     </li>`;
 }
@@ -5375,8 +5382,9 @@ function renderYardRows() {
     <div class="yr-chips" role="group" aria-label="Show">
       ${chip('all', 'All cars')}${chip('pull', 'Pull sheet')}${chip('watch', 'Watch matches')}${chip('fresh', 'New this week')}
     </div>
-    ${(() => { const c = shown.filter(i => i.checked).length; return `<div class="yr-progress" role="status"><span><b>${c.toLocaleString()}</b> of <b>${shown.length.toLocaleString()}</b> checked</span>${c ? '<button type="button" class="yr-reset">Reset checks</button>' : ''}<span class="yr-bar" aria-hidden="true"><i style="width:${shown.length ? Math.round(100 * c / shown.length) : 0}%"></i></span></div>`; })()}
+    ${(() => { const c = shown.filter(i => i.checked).length; return `<div class="yr-progress" role="status"><span><b>${c.toLocaleString()}</b> of <b>${shown.length.toLocaleString()}</b> seen</span>${c ? '<button type="button" class="yr-reset">Reset seen</button>' : ''}<span class="yr-bar" aria-hidden="true"><i style="width:${shown.length ? Math.round(100 * c / shown.length) : 0}%"></i></span></div>`; })()}
     ${isPro() ? '' : proBoxHtml('See what each car’s parts are worth', 'yard-rows-value', '', 'yr-pro')}
+    ${(() => { let off = false; try { off = localStorage.getItem('ys_rows_tip_off') === '1'; } catch (e) { off = !!window.__rowsTipOff; } return off || window.__rowsTipOff ? '' : `<div class="yr-tip" role="note"><p><b>Seen</b> &mdash; tap as you walk past a car. <b>+&nbsp;Pull sheet</b> &mdash; saves it to come back to.</p><button type="button" class="yr-tip-x" aria-label="Dismiss tip">Got it</button></div>`; })()}
     <p class="yr-hint">Rows in number order. Yards move cars and the row is what the yard listed, so check the plate at the row end.</p>
     ${rows.map(r => {
       const list = byRow.get(r).sort((a, b) => (a.checked - b.checked) || (b.pull - a.pull) || (b.watch - a.watch) || (parseYardDate(b.v.dateAdded) - parseYardDate(a.v.dateAdded)));
@@ -5385,10 +5393,10 @@ function renderYardRows() {
       if (sum.done && !_rowsOpen.has(rowId)) {
         return `<section class="yr-row yr-row-done"><button type="button" class="yr-row-toggle" data-row="${escapeHtml(rowId)}" aria-expanded="false">
           <span class="yr-row-plate">${r ? `<small>Row</small>${escapeHtml(r)}` : '<small>Row</small>?'}</span>
-          <span class="yr-row-count">${ICON.check} ${r ? 'Row ' + escapeHtml(r) + ' &middot; ' : 'Row not listed &middot; '}all checked (${sum.total})</span><span class="yr-row-chev" aria-hidden="true">&rsaquo;</span></button></section>`;
+          <span class="yr-row-count">${ICON.check} ${r ? 'Row ' + escapeHtml(r) + ' &middot; ' : 'Row not listed &middot; '}all seen (${sum.total})</span><span class="yr-row-chev" aria-hidden="true">&rsaquo;</span></button></section>`;
       }
       return `<section class="yr-row${sum.done ? ' yr-row-open' : ''}" aria-label="${r ? 'Row ' + escapeHtml(r) : 'Row not listed'}">
-        <h3 class="yr-row-head"><span class="yr-row-plate">${r ? `<small>Row</small>${escapeHtml(r)}` : '<small>Row</small>?'}</span><span class="yr-row-count">${r ? '' : 'Row not listed &middot; '}${list.length} car${list.length === 1 ? '' : 's'}${sum.checked ? ` &middot; ${sum.checked} checked` : ''}${list.some(i => i.pull) ? ' &middot; <em>pull sheet</em>' : ''}${list.some(i => i.watch) ? ' &middot; <em>watch match</em>' : ''}</span>${sum.done ? `<button type="button" class="yr-row-toggle yr-row-fold" data-row="${escapeHtml(rowId)}" aria-expanded="true">Fold</button>` : ''}</h3>
+        <h3 class="yr-row-head"><span class="yr-row-plate">${r ? `<small>Row</small>${escapeHtml(r)}` : '<small>Row</small>?'}</span><span class="yr-row-count">${r ? '' : 'Row not listed &middot; '}${list.length} car${list.length === 1 ? '' : 's'}${sum.checked ? ` &middot; ${sum.checked} seen` : ''}${list.some(i => i.pull) ? ' &middot; <em>pull sheet</em>' : ''}${list.some(i => i.watch) ? ' &middot; <em>watch match</em>' : ''}</span>${sum.done ? `<button type="button" class="yr-row-toggle yr-row-fold" data-row="${escapeHtml(rowId)}" aria-expanded="true">Fold</button>` : ''}</h3>
         <ul class="yr-list">${list.map(i => yardRowItemHtml(i.v, i)).join('')}</ul>
       </section>`;
     }).join('')}`;
@@ -5445,6 +5453,7 @@ document.getElementById('yard-rows').addEventListener('click', e => {
   }
   const tog = e.target.closest('.yr-row-toggle');
   if (tog) { const id = tog.dataset.row; if (_rowsOpen.has(id)) _rowsOpen.delete(id); else _rowsOpen.add(id); renderYardRows(); return; }
+  if (e.target.closest('.yr-tip-x')) { window.__rowsTipOff = true; try { localStorage.setItem('ys_rows_tip_off', '1'); } catch (err) { /* session only */ } renderYardRows(); return; }
   const reset = e.target.closest('.yr-reset');
   if (reset) {
     if (!confirm('Clear the checks for this yard? Your pull sheet and watches stay as they are.')) return;

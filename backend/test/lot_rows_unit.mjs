@@ -19,8 +19,8 @@ const fnText = (name) => {
 };
 const ttl = lines.find(l => l.startsWith('const CHECK_TTL_MS = '));
 const ctx = vm.createContext({});
-vm.runInContext([lines.slice(start, fnEnd + 1).join('\n'), ttl, fnText('checksPrune'), fnText('checksToggle'), fnText('rowCheckSummary'),
-  'globalThis.__c = compareRows; globalThis.__k = { checksPrune, checksToggle, rowCheckSummary, CHECK_TTL_MS };'].join('\n'), ctx);
+vm.runInContext([lines.slice(start, fnEnd + 1).join('\n'), ttl, fnText('checksPrune'), fnText('checksToggle'), fnText('rowCheckSummary'), fnText('rowSeenLabel'), fnText('rowPullLabel'),
+  'globalThis.__c = compareRows; globalThis.__k = { checksPrune, checksToggle, rowCheckSummary, rowSeenLabel, rowPullLabel, CHECK_TTL_MS };'].join('\n'), ctx);
 const cmp = ctx.__c;
 const K = ctx.__k;
 
@@ -55,6 +55,9 @@ check('row summary: 2 of 4 checked, not done', r.checked === 2 && r.total === 4 
 r = K.rowCheckSummary(['a', 'b'], { a: true, b: true });
 check('row summary: all checked -> collapses', r.done && r.checked === 2);
 check('an empty row never counts as done', !K.rowCheckSummary([], {}).done);
+// Button wording (owner: "Check" and "+ Add" were unclear).
+check('Seen button: "Seen" both ways; aria says mark / unmark', K.rowSeenLabel(false, 'Car').text === 'Seen' && /Mark seen: Car/.test(K.rowSeenLabel(false, 'Car').aria) && /Tap to unmark/.test(K.rowSeenLabel(true, 'Car').aria));
+check('Pull-sheet button: "Pull sheet" / "On pull sheet"', K.rowPullLabel(false, 'Car').text === 'Pull sheet' && K.rowPullLabel(true, 'Car').text === 'On pull sheet' && /Add to pull sheet: Car/.test(K.rowPullLabel(false, 'Car').aria) && /Tap to remove/.test(K.rowPullLabel(true, 'Car').aria));
 
 console.log(fails ? `\n${fails} FAILED` : '\nALL PASS');
 process.exit(fails ? 1 : 0);

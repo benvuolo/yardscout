@@ -3225,3 +3225,26 @@ button.saved-item-name { max-width: 100%; min-width: 0; overflow-wrap: anywhere;
 .map-pin { width: max-content; }
 .map-pin-at { width: max-content; }
 .map-pin.nudged::after { display: none; }
+
+/* Row view buttons, clearer (owner 2026-11-09): "Seen" (green outline, filled
+   when seen) and "+ Pull sheet"; icon over label so long labels wrap, never cut. */
+.yr-act { width: 6.5rem; }
+.yr-check { width: 100%; min-height: 3.5rem; border-color: var(--accent2); color: var(--text); }
+.yr-check .ico { opacity: 1; color: var(--accent2); }
+.yr-check[aria-pressed="true"] { background: var(--accent2); border-color: var(--accent2); color: var(--bg); }
+.yr-check[aria-pressed="true"] .ico { color: var(--bg); }
+.yr-add { width: 100%; flex-direction: column; gap: 2px; padding: 6px var(--s2); line-height: 1.2; text-align: center; }
+.yr-add span { overflow-wrap: anywhere; }
+.yr-item.is-checked .yr-check { min-height: var(--tap); flex-direction: row; gap: 6px; }
+.yr-tip { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2) var(--s3); margin: 0 0 var(--s3); padding: var(--s3); border: 1px solid var(--border); border-left: 3px solid var(--accent2); border-radius: var(--r); background: var(--surface); font-size: var(--t-sm); }
+.yr-tip p { flex: 1 1 14em; margin: 0; line-height: 1.45; }
+.yr-tip-x { min-height: var(--tap); padding: 0 var(--s3); border: 1px solid var(--border-dark); border-radius: var(--r-pill); background: none; color: var(--text); font: 600 var(--t-sm)/1.2 var(--font-ui); cursor: pointer; }
+/* Narrow list or large text: the buttons move under the car, side by side
+   (an em-based container query follows the user's text size). */
+.yr-list { container-type: inline-size; }
+@container (max-width: 20em) {
+  .yr-item { grid-template-columns: minmax(0, 1fr); }
+  .yr-act { grid-column: 1; grid-row: auto; width: auto; flex-direction: row; }
+  .yr-act > * { flex: 1 1 0; min-width: 0; }
+  .yr-value { grid-row: auto; }
+}
