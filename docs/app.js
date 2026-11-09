@@ -5742,7 +5742,9 @@ function measurePin(html) {
 const siteNear = (a, b) => Math.abs(a.lat - b.lat) < 0.002 && Math.abs(a.lng - b.lng) < 0.002;
 function groupHtml(g) {
   if (g.items.length === 1) return yardPinHtml({ location: g.items[0].key }, g.items[0].m);
-  const same = g.items.every(s => siteNear(s, g.items[0]));
+  // Yards at one spot, or packed so tight the map is fully zoomed in: the
+  // bubble lists them (it can't zoom any closer).
+  const same = g.items.every(s => siteNear(s, g.items[0])) || !!(_yardsMap && _yardsMap.getZoom() >= 13.5);
   return clusterPinHtml(g.items.map(s => ({ y: { location: s.key }, m: s.m })), same);
 }
 function layoutPins() {
@@ -6018,7 +6020,8 @@ async function renderYardsMap() {
 /* A tapped cluster: yards at one spot (or fully zoomed in) list in the sheet;
  * otherwise zoom to them. */
 function zoomToYards(keys) {
-  const sites = _mapSites.filter(s => keys.includes(s.key));
+  // nearest first, so a bubble that can't be split leads with the closest yard
+  const sites = _mapSites.filter(s => keys.includes(s.key)).sort((a, b) => (a.dist ?? 1e9) - (b.dist ?? 1e9));
   if (!sites.length) return;
   const same = sites.every(s => siteNear(s, sites[0]));
   if (same || !_yardsMap || !window.maplibregl || _yardsMap.getZoom() >= 13.5) {
