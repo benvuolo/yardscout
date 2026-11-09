@@ -97,7 +97,7 @@
           "large": "{1}"
         }
       ],
-      "note": "OFF: YardSmart signed URLs expire within hours (3/3 sampled returned 404)."
+      "note": "Superseded by ys_armys (resized thumbnail via YardSmart's own resize endpoint)."
     },
     "papva": {
       "enabled": true,
@@ -209,7 +209,7 @@
       "note": "Own app host; 200x200 PNG ~100 KB. Codes only for cars whose URL was checked as a real photo (not the 3,474 B placeholder) - see _pns_apply_photo_checks."
     },
     "sturtevant": {
-      "enabled": false,
+      "enabled": true,
       "label": "Photo: Sturtevant Auto",
       "host": "inventory.sturtevantauto.com",
       "patterns": [
@@ -219,7 +219,10 @@
           "large": "https://inventory.sturtevantauto.com/InventoryPhotos/{1}.JPG"
         }
       ],
-      "note": "OFF: the only size is the camera original (4032x3024, ~3.8 MB) - too heavy for a phone card."
+      "note": "Own CRUSH app; only the camera original exists (4032x3024 ~3.8 MB, no smaller variant): heavy, tap to load.",
+      "heavy": true,
+      "approxKB": 3800,
+      "onCards": false
     },
     "paulsautoyard": {
       "enabled": true,
@@ -705,6 +708,201 @@
         }
       ],
       "note": "Own site: the car's detail-page photo (900x1200 JPEG ~75-230 KB); URL checked once per car (HEAD), cached."
+    },
+    "ys_vinplus_va": {
+      "enabled": true,
+      "label": "Photo: Bessler's U Pull & Save",
+      "host": "api.yardsmartapp.com",
+      "patterns": [
+        {
+          "code": "^yva1([A-Za-z0-9=_-]{2,372})--([0-9a-f]{40})$",
+          "card": "https://api.yardsmartapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6{1}--{2}/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtDUlFGcEFsZ0MiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b0c21fdd98391a3d8083f052f5b3fabb2e2c9079/i.jpg",
+          "large": "https://api.yardsmartapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6{1}--{2}/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtDUlFGcEFsZ0MiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b0c21fdd98391a3d8083f052f5b3fabb2e2c9079/i.jpg"
+        }
+      ],
+      "note": "VinPlus listing photo (YardSmart blob, ~4 MB original) shown via YardSmart's own 325x600 resize (~45 KB). Signed id expires ~10 h; republished every scan."
+    },
+    "ys_vinplus_vb": {
+      "enabled": true,
+      "label": "Photo: Bluegrass U Pull & Save",
+      "host": "api.yardsmartapp.com",
+      "patterns": [
+        {
+          "code": "^yvb1([A-Za-z0-9=_-]{2,372})--([0-9a-f]{40})$",
+          "card": "https://api.yardsmartapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6{1}--{2}/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtDUlFGcEFsZ0MiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b0c21fdd98391a3d8083f052f5b3fabb2e2c9079/i.jpg",
+          "large": "https://api.yardsmartapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6{1}--{2}/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtDUlFGcEFsZ0MiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b0c21fdd98391a3d8083f052f5b3fabb2e2c9079/i.jpg"
+        }
+      ],
+      "note": "VinPlus listing photo (YardSmart blob, ~4 MB original) shown via YardSmart's own 325x600 resize (~45 KB). Signed id expires ~10 h; republished every scan."
+    },
+    "ys_vinplus_vc": {
+      "enabled": true,
+      "label": "Photo: Raceway Pik-A-Part",
+      "host": "api.yardsmartapp.com",
+      "patterns": [
+        {
+          "code": "^yvc1([A-Za-z0-9=_-]{2,372})--([0-9a-f]{40})$",
+          "card": "https://api.yardsmartapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6{1}--{2}/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtDUlFGcEFsZ0MiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b0c21fdd98391a3d8083f052f5b3fabb2e2c9079/i.jpg",
+          "large": "https://api.yardsmartapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6{1}--{2}/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtDUlFGcEFsZ0MiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b0c21fdd98391a3d8083f052f5b3fabb2e2c9079/i.jpg"
+        }
+      ],
+      "note": "VinPlus listing photo (YardSmart blob, ~4 MB original) shown via YardSmart's own 325x600 resize (~45 KB). Signed id expires ~10 h; republished every scan."
+    },
+    "ys_vinplus_vd": {
+      "enabled": true,
+      "label": "Photo: RTP Pick-A-Part",
+      "host": "api.yardsmartapp.com",
+      "patterns": [
+        {
+          "code": "^yvd1([A-Za-z0-9=_-]{2,372})--([0-9a-f]{40})$",
+          "card": "https://api.yardsmartapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6{1}--{2}/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtDUlFGcEFsZ0MiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b0c21fdd98391a3d8083f052f5b3fabb2e2c9079/i.jpg",
+          "large": "https://api.yardsmartapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6{1}--{2}/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtDUlFGcEFsZ0MiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b0c21fdd98391a3d8083f052f5b3fabb2e2c9079/i.jpg"
+        }
+      ],
+      "note": "VinPlus listing photo (YardSmart blob, ~4 MB original) shown via YardSmart's own 325x600 resize (~45 KB). Signed id expires ~10 h; republished every scan."
+    },
+    "ys_vinplus_ve": {
+      "enabled": true,
+      "label": "Photo: Pickers",
+      "host": "api.yardsmartapp.com",
+      "patterns": [
+        {
+          "code": "^yve1([A-Za-z0-9=_-]{2,372})--([0-9a-f]{40})$",
+          "card": "https://api.yardsmartapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6{1}--{2}/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtDUlFGcEFsZ0MiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b0c21fdd98391a3d8083f052f5b3fabb2e2c9079/i.jpg",
+          "large": "https://api.yardsmartapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6{1}--{2}/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtDUlFGcEFsZ0MiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b0c21fdd98391a3d8083f052f5b3fabb2e2c9079/i.jpg"
+        }
+      ],
+      "note": "VinPlus listing photo (YardSmart blob, ~4 MB original) shown via YardSmart's own 325x600 resize (~45 KB). Signed id expires ~10 h; republished every scan."
+    },
+    "ys_vinplus_vf": {
+      "enabled": true,
+      "label": "Photo: Pipes U-Pull-It",
+      "host": "api.yardsmartapp.com",
+      "patterns": [
+        {
+          "code": "^yvf1([A-Za-z0-9=_-]{2,372})--([0-9a-f]{40})$",
+          "card": "https://api.yardsmartapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6{1}--{2}/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtDUlFGcEFsZ0MiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b0c21fdd98391a3d8083f052f5b3fabb2e2c9079/i.jpg",
+          "large": "https://api.yardsmartapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6{1}--{2}/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtDUlFGcEFsZ0MiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b0c21fdd98391a3d8083f052f5b3fabb2e2c9079/i.jpg"
+        }
+      ],
+      "note": "VinPlus listing photo (YardSmart blob, ~4 MB original) shown via YardSmart's own 325x600 resize (~45 KB). Signed id expires ~10 h; republished every scan."
+    },
+    "ys_vinplus_vg": {
+      "enabled": true,
+      "label": "Photo: Joliet U-Pull-It",
+      "host": "api.yardsmartapp.com",
+      "patterns": [
+        {
+          "code": "^yvg1([A-Za-z0-9=_-]{2,372})--([0-9a-f]{40})$",
+          "card": "https://api.yardsmartapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6{1}--{2}/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtDUlFGcEFsZ0MiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b0c21fdd98391a3d8083f052f5b3fabb2e2c9079/i.jpg",
+          "large": "https://api.yardsmartapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6{1}--{2}/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtDUlFGcEFsZ0MiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b0c21fdd98391a3d8083f052f5b3fabb2e2c9079/i.jpg"
+        }
+      ],
+      "note": "VinPlus listing photo (YardSmart blob, ~4 MB original) shown via YardSmart's own 325x600 resize (~45 KB). Signed id expires ~10 h; republished every scan."
+    },
+    "ys_vinplus_vh": {
+      "enabled": true,
+      "label": "Photo: San Antonio Pick-N-Pull (Independent)",
+      "host": "api.yardsmartapp.com",
+      "patterns": [
+        {
+          "code": "^yvh1([A-Za-z0-9=_-]{2,372})--([0-9a-f]{40})$",
+          "card": "https://api.yardsmartapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6{1}--{2}/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtDUlFGcEFsZ0MiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b0c21fdd98391a3d8083f052f5b3fabb2e2c9079/i.jpg",
+          "large": "https://api.yardsmartapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6{1}--{2}/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtDUlFGcEFsZ0MiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b0c21fdd98391a3d8083f052f5b3fabb2e2c9079/i.jpg"
+        }
+      ],
+      "note": "VinPlus listing photo (YardSmart blob, ~4 MB original) shown via YardSmart's own 325x600 resize (~45 KB). Signed id expires ~10 h; republished every scan."
+    },
+    "ys_vinplus_vi": {
+      "enabled": true,
+      "label": "Photo: 195 Used Auto Parts",
+      "host": "api.yardsmartapp.com",
+      "patterns": [
+        {
+          "code": "^yvi1([A-Za-z0-9=_-]{2,372})--([0-9a-f]{40})$",
+          "card": "https://api.yardsmartapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6{1}--{2}/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtDUlFGcEFsZ0MiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b0c21fdd98391a3d8083f052f5b3fabb2e2c9079/i.jpg",
+          "large": "https://api.yardsmartapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6{1}--{2}/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtDUlFGcEFsZ0MiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b0c21fdd98391a3d8083f052f5b3fabb2e2c9079/i.jpg"
+        }
+      ],
+      "note": "VinPlus listing photo (YardSmart blob, ~4 MB original) shown via YardSmart's own 325x600 resize (~45 KB). Signed id expires ~10 h; republished every scan."
+    },
+    "ys_vinplus_vj": {
+      "enabled": true,
+      "label": "Photo: Pick Ur Part Auto Salvage",
+      "host": "api.yardsmartapp.com",
+      "patterns": [
+        {
+          "code": "^yvj1([A-Za-z0-9=_-]{2,372})--([0-9a-f]{40})$",
+          "card": "https://api.yardsmartapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6{1}--{2}/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtDUlFGcEFsZ0MiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b0c21fdd98391a3d8083f052f5b3fabb2e2c9079/i.jpg",
+          "large": "https://api.yardsmartapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6{1}--{2}/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtDUlFGcEFsZ0MiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b0c21fdd98391a3d8083f052f5b3fabb2e2c9079/i.jpg"
+        }
+      ],
+      "note": "VinPlus listing photo (YardSmart blob, ~4 MB original) shown via YardSmart's own 325x600 resize (~45 KB). Signed id expires ~10 h; republished every scan."
+    },
+    "ys_vinplus_vk": {
+      "enabled": true,
+      "label": "Photo: US Auto Supply",
+      "host": "api.yardsmartapp.com",
+      "patterns": [
+        {
+          "code": "^yvk1([A-Za-z0-9=_-]{2,372})--([0-9a-f]{40})$",
+          "card": "https://api.yardsmartapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6{1}--{2}/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtDUlFGcEFsZ0MiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b0c21fdd98391a3d8083f052f5b3fabb2e2c9079/i.jpg",
+          "large": "https://api.yardsmartapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6{1}--{2}/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtDUlFGcEFsZ0MiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b0c21fdd98391a3d8083f052f5b3fabb2e2c9079/i.jpg"
+        }
+      ],
+      "note": "VinPlus listing photo (YardSmart blob, ~4 MB original) shown via YardSmart's own 325x600 resize (~45 KB). Signed id expires ~10 h; republished every scan."
+    },
+    "ys_vinplus_vl": {
+      "enabled": true,
+      "label": "Photo: Go Pull-It",
+      "host": "api.yardsmartapp.com",
+      "patterns": [
+        {
+          "code": "^yvl1([A-Za-z0-9=_-]{2,372})--([0-9a-f]{40})$",
+          "card": "https://api.yardsmartapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6{1}--{2}/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtDUlFGcEFsZ0MiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b0c21fdd98391a3d8083f052f5b3fabb2e2c9079/i.jpg",
+          "large": "https://api.yardsmartapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6{1}--{2}/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtDUlFGcEFsZ0MiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b0c21fdd98391a3d8083f052f5b3fabb2e2c9079/i.jpg"
+        }
+      ],
+      "note": "VinPlus listing photo (YardSmart blob, ~4 MB original) shown via YardSmart's own 325x600 resize (~45 KB). Signed id expires ~10 h; republished every scan."
+    },
+    "ys_vinplus_vm": {
+      "enabled": true,
+      "label": "Photo: Prestige Pull-Your-Part",
+      "host": "api.yardsmartapp.com",
+      "patterns": [
+        {
+          "code": "^yvm1([A-Za-z0-9=_-]{2,372})--([0-9a-f]{40})$",
+          "card": "https://api.yardsmartapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6{1}--{2}/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtDUlFGcEFsZ0MiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b0c21fdd98391a3d8083f052f5b3fabb2e2c9079/i.jpg",
+          "large": "https://api.yardsmartapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6{1}--{2}/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtDUlFGcEFsZ0MiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b0c21fdd98391a3d8083f052f5b3fabb2e2c9079/i.jpg"
+        }
+      ],
+      "note": "VinPlus listing photo (YardSmart blob, ~4 MB original) shown via YardSmart's own 325x600 resize (~45 KB). Signed id expires ~10 h; republished every scan."
+    },
+    "ys_vinplus_vn": {
+      "enabled": true,
+      "label": "Photo: Chesterfield Auto Parts",
+      "host": "api.yardsmartapp.com",
+      "patterns": [
+        {
+          "code": "^yvn1([A-Za-z0-9=_-]{2,372})--([0-9a-f]{40})$",
+          "card": "https://api.yardsmartapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6{1}--{2}/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtDUlFGcEFsZ0MiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b0c21fdd98391a3d8083f052f5b3fabb2e2c9079/i.jpg",
+          "large": "https://api.yardsmartapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6{1}--{2}/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtDUlFGcEFsZ0MiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b0c21fdd98391a3d8083f052f5b3fabb2e2c9079/i.jpg"
+        }
+      ],
+      "note": "VinPlus listing photo (YardSmart blob, ~4 MB original) shown via YardSmart's own 325x600 resize (~45 KB). Signed id expires ~10 h; republished every scan."
+    },
+    "ys_armys": {
+      "enabled": true,
+      "label": "Photo: Army's Auto Wrecking",
+      "host": "api.yardsmartapp.com",
+      "patterns": [
+        {
+          "code": "^yam1([A-Za-z0-9=_-]{2,372})--([0-9a-f]{40})$",
+          "card": "https://api.yardsmartapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6{1}--{2}/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtDUlFGcEFsZ0MiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b0c21fdd98391a3d8083f052f5b3fabb2e2c9079/i.jpg",
+          "large": "https://api.yardsmartapp.com/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6{1}--{2}/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RW5KbGMybDZaVjkwYjE5bWFYUmJCMmtDUlFGcEFsZ0MiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b0c21fdd98391a3d8083f052f5b3fabb2e2c9079/i.jpg"
+        }
+      ],
+      "note": "Army's listing photo (YardSmart blob) via YardSmart's own 325x600 resize. Expiring id republished every scan."
     }
   }
 }

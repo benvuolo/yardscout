@@ -47,7 +47,10 @@ check("enabled set includes every passing chain",
        "byot", "wilberts", "nvpap", "pns", "pap", "fenix", "paulsautoyard", "ario_foss", "ario_ryans",
        "ys_ruperts", "ys_upickitaz"} <= set(PUB), sorted(PUB))
 check("army's is listed but OFF", "armys" in SRC and "armys" not in PUB)
-check("sturtevant is listed but OFF (3.8 MB originals)", "sturtevant" in SRC and "sturtevant" not in PUB)
+check("sturtevant published as heavy (tap to load, ~3.8 MB)",
+      PUB.get("sturtevant", {}).get("heavy") is True and PUB["sturtevant"].get("approxKB") == 3800
+      and PUB["sturtevant"]["onCards"] is False, PUB.get("sturtevant"))
+check("only sturtevant is heavy", [k for k, s in PUB.items() if s.get("heavy")] == ["sturtevant"])
 check("every published source has a label and patterns",
       all(s["label"].startswith("Photo: ") and s["patterns"] for s in PUB.values()))
 check("every published URL is https on the source's host",
@@ -97,7 +100,6 @@ REJECT = [
     "https://evil.example/p.jpg", "p", "pabc", "N054E0D16D12847DAA3F888E2EE3B8C39",
     "https://www.kikersupullit.com.evil.example/inventory-feed/photos/a.jpg",
     "javascript:alert(1)",
-    "tSTK049735",            # Sturtevant: off
     "uzz99/A1/A1_1",         # URG folder no enabled source owns
     "sSTK134723",            # Pull-N-Save without the -n suffix
 ]

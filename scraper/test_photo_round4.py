@@ -108,12 +108,22 @@ check("YardSmart: 2 h left -> none",
       js._yardsmart_photo_code(rep(blob("2026-11-09T02:00:00.000Z")), "upullitne", now=NOW) == "")
 check("YardSmart: unknown variation -> none",
       js._yardsmart_photo_code(rep(blob(None), var="f" * 40), "ruperts", now=NOW) == "")
-check("YardSmart: unknown site -> none", js._yardsmart_photo_code(rep(blob(None)), "armys", now=NOW) == "")
+check("YardSmart: unknown site -> none", js._yardsmart_photo_code(rep(blob(None)), "nosuchsite", now=NOW) == "")
 check("YardSmart: JSON-escaped slashes",
       js._yardsmart_photo_code(rep(blob(None)).replace("/", "\\/"), "ruperts", now=NOW).startswith("yru1"))
-check("YardSmart: full-size blobs never captured", js._yardsmart_photo_code(
-    '<img src="https://api.yardsmartapp.com/rails/active_storage/blobs/redirect/x--' + D + '/a.jpg">',
-    "ruperts", now=NOW) == "")
+bc = js._yardsmart_photo_code(
+    "https://api.yardsmartapp.com/rails/active_storage/blobs/redirect/" + blob("2026-11-09T10:00:00.000Z")
+    + "--" + D + "/IMG_0721.jpeg", sid="vl", now=NOW)
+check("YardSmart blob (VinPlus) -> resized-thumbnail code", bc.startswith("yvl1"), bc)
+k, url = build(bc)
+check("YardSmart blob: credited per brand, rendered via representations (never the original)",
+      k == "ys_vinplus_vl" and "/representations/redirect/" in url and "/blobs/" not in url, (k, url))
+check("YardSmart blob: expired -> none", js._yardsmart_photo_code(
+    "https://api.yardsmartapp.com/rails/active_storage/blobs/redirect/" + blob("2026-11-09T01:00:00.000Z")
+    + "--" + D + "/a.jpg", sid="vl", now=NOW) == "")
+check("Army's blob -> thumbnail code", js._yardsmart_photo_code(
+    "https://api.yardsmartapp.com/rails/active_storage/blobs/redirect/" + blob(None) + "--" + D + "/a.jpg",
+    "armys", now=NOW).startswith("yam1"))
 
 # --- shared lookup cache -------------------------------------------------------------
 with tempfile.TemporaryDirectory() as td:

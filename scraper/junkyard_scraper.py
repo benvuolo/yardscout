@@ -141,6 +141,14 @@ def published_photo_sources(sources: dict) -> dict:
             # onCards: false = too heavy for list cards (car screen + viewer only).
             out[key] = {"label": src["label"], "host": src.get("host", ""),
                         "onCards": src.get("onCards") is not False, "patterns": pats}
+            # heavy: the yard offers ONLY a large original; the app must not
+            # load it on its own (car screen: "Photo available - tap to load
+            # (~approxKB KB)"; never on cards).
+            if src.get("heavy") is True:
+                out[key]["heavy"] = True
+                out[key]["onCards"] = False
+                if isinstance(src.get("approxKB"), int):
+                    out[key]["approxKB"] = src["approxKB"]
     return out
 
 
@@ -19269,6 +19277,9 @@ def fetch_vinplus_inventory() -> list[dict]:
                     "dateAdded": date_s,
                     "_color": str(row.get("color") or "").strip().title(),
                     **({"_engine": engine} if engine else {}),
+                    "_photo": _yardsmart_photo_code(
+                        str(row.get("imageUrl") or ""),
+                        sid=VINPLUS_BRAND_SIDS.get(yard["name"].split(" - ")[0])),
                     "_location": yard["name"],
                     "_city": yard["city"],
                     "_state": yard["state"],
@@ -20081,10 +20092,25 @@ _YARDCONNECT_ROW_RE = re.compile(r"<tr[^>]*>(.*?)</tr>", re.S)
 # re-reads the page, so a fresh URL is republished every 4 h; one with less
 # than YARDSMART_MIN_HOURS_LEFT left (or an unknown variation) gets no code.
 # Code: "y{site}{v}{blob id minus its constant 28-char base64 prefix}--{digest}".
-# Full-size "blobs" (VinPlus: 4032x3024 ~4 MB originals) are never captured.
+# Full-size "blobs" (VinPlus, Army's: 4032x3024 ~4 MB originals) are shown
+# through YardSmart's OWN resize endpoint instead (round 5, 2026-11-09): the
+# same signed blob id + the platform's public 325x600 variation = a ~45 KB
+# thumbnail, verified on VinPlus samples. The original is never linked.
 YARDSMART_MIN_HOURS_LEFT = 6.0
 YARDSMART_SITE_IDS = {"upickitaz": "az", "upullitne": "ne", "genesis": "ge",
-                      "robertsons": "ro", "chuckeddies": "ce", "ruperts": "ru"}
+                      "robertsons": "ro", "chuckeddies": "ce", "ruperts": "ru",
+                      "armys": "am"}
+# VinPlus yards by brand (credit); fixed ids, mirrored in photo_sources.json.
+VINPLUS_BRAND_SIDS = {
+    "Bessler's U Pull & Save": "va", "Bluegrass U Pull & Save": "vb", "Raceway Pik-A-Part": "vc",
+    "RTP Pick-A-Part": "vd", "Pickers": "ve", "Pipes U-Pull-It": "vf", "Joliet U-Pull-It": "vg",
+    "San Antonio Pick-N-Pull (Independent)": "vh", "195 Used Auto Parts": "vi",
+    "Pick Ur Part Auto Salvage": "vj", "US Auto Supply": "vk", "Go Pull-It": "vl",
+    "Prestige Pull-Your-Part": "vm", "Chesterfield Auto Parts": "vn",
+}
+_YARDSMART_BLOB_RE = re.compile(
+    r"https:(?:\\?/){2}api\.yardsmartapp\.com(?:\\?/)rails(?:\\?/)active_storage(?:\\?/)"
+    r"blobs(?:\\?/)redirect(?:\\?/)([A-Za-z0-9=_-]{30,400})--([0-9a-f]{40})(?:\\?/)")
 YARDSMART_VARIATIONS = {   # variation digest -> code digit (template in photo_sources.json)
     "b0c21fdd98391a3d8083f052f5b3fabb2e2c9079": "1",   # resize_to_fit 325x600, jpg
     "4f71ac7df5604255483bbb903f985fba07e9137c": "2",   # resize_to_fit 325x600, jpeg
@@ -20096,12 +20122,20 @@ _YARDSMART_REP_RE = re.compile(
     r"[A-Za-z0-9=_-]{20,400}--([0-9a-f]{40})(?:\\?/)")
 
 
-def _yardsmart_photo_code(block: str, source: str, now: datetime | None = None) -> str:
-    sid = YARDSMART_SITE_IDS.get(source)
-    m = _YARDSMART_REP_RE.search(block or "") if sid else None
-    if not m:
+def _yardsmart_photo_code(block: str, source: str | None = None, now: datetime | None = None,
+                          *, sid: str | None = None) -> str:
+    sid = sid or YARDSMART_SITE_IDS.get(source or "")
+    if not sid:
         return ""
-    blob, digest, var_digest = m.groups()
+    m = _YARDSMART_REP_RE.search(block or "")
+    if m:
+        blob, digest, var_digest = m.groups()
+    else:
+        mb = _YARDSMART_BLOB_RE.search(block or "")
+        if not mb:
+            return ""
+        blob, digest = mb.groups()
+        var_digest = "b0c21fdd98391a3d8083f052f5b3fabb2e2c9079"   # 325x600 resize
     v = YARDSMART_VARIATIONS.get(var_digest)
     if not v or not blob.startswith(_YARDSMART_BLOB_PREFIX):
         return ""
@@ -23937,7 +23971,9 @@ def fetch_armys_inventory() -> list[dict]:
         if imgs and isinstance(imgs[0], dict):
             src = imgs[0].get("url") or imgs[0].get("src") or ""
             if isinstance(src, str) and src.startswith("https://"):
-                v["_photo"] = src
+                # YardSmart full-size blob -> its resized thumbnail (see
+                # _yardsmart_photo_code); expiring ids are republished each scan.
+                v["_photo"] = _yardsmart_photo_code(src, "armys")
     print(f"  [Army's Auto Wrecking] {len(vehicles)} vehicles ({dated} with set dates)",
           file=sys.stderr)
     return vehicles
