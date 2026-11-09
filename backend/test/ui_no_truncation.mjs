@@ -594,7 +594,48 @@ const SCREENS = [
     });
     await settle(page, 500);
   }, async (page) => { await page.evaluate(() => { if (window.__llOrig) { window.__llOrig[0].dateAdded = window.__llOrig[1]; window.__llOrig = null; } hideYardRows(); }); await resetUi(page); }],
-  ...[['yards-map', 'gl'], ['yards-map-sheet', 'sheet'], ['yards-map-schematic', 'schematic'], ['yards-map-watch', 'watch']].map(([name, mode]) => [name, async (page) => {
+  // Yards list: a yard's Premium lot rides on the main yard's card (centre moved
+  // to Ogden, UT for the test, then restored).
+  ['yards-premium-list', async (page) => {
+    await tab(page, 'yards');
+    await page.waitForFunction(() => liveInventory.some(v => /^Utah Pic-A-Part - Ogden \(Premium\)/.test(v.location)) && liveInventory.some(v => v.location === 'Utah Pic-A-Part - Ogden'), null, { timeout: 120000 });
+    await page.evaluate(() => {
+      window.__zc = activeZipCoords; activeZipCoords = { lat: 41.223, lng: -111.97 };
+      setYardsView('list'); renderYards();
+      const cards = [...document.querySelectorAll('#yards-grid .yard-card')];
+      if (cards.some(c => /\(Premium\)\s*$/i.test(c.dataset.loc))) throw new Error('a Premium lot still has its own card');
+      const c = cards.find(c => c.querySelector('.yard-premium'));
+      if (!c || !/Premium lot · [\d,]+ cars/.test(c.querySelector('.yard-premium').textContent)) throw new Error('no Premium lot line: ' + cards.map(x => x.dataset.loc).slice(0, 12).join(' | '));
+      if (!/\(Premium\)/.test(c.querySelector('.yard-premium .yard-walk-btn').dataset.loc)) throw new Error('premium buttons not pointed at the Premium lot');
+      c.scrollIntoView({ block: 'start' }); window.scrollBy(0, -80);
+    });
+    await settle(page, 400);
+  }, async (page) => { await page.evaluate(() => { activeZipCoords = window.__zc; renderYards(); }); await resetUi(page); }],
+  // A yard with a Premium lot is one site: one pin and both lots in its card.
+  // Uses Utah Pic-A-Part (main + Premium share an address) when in the data.
+  ['yards-map-premium', async (page) => {
+    await tab(page, 'yards');
+    await page.waitForFunction(() => liveInventory.some(v => /^Utah Pic-A-Part - Ogden \(Premium\)/.test(v.location)) && liveInventory.some(v => v.location === 'Utah Pic-A-Part - Ogden'), null, { timeout: 120000 });
+    // The live map centred on Ogden, UT (the owner's report), then restored.
+    await page.evaluate(async () => { window.__zc = activeZipCoords; activeZipCoords = { lat: 41.223, lng: -111.97 }; setYardsView('map'); await renderYardsMap(); });
+    await page.waitForFunction(() => window._yardsMap && _yardsMap.loaded() && document.querySelector('#yards-map .map-pin'), null, { timeout: 30000 });
+    await page.evaluate(async () => {
+      if (_mapSites.some(s => /\(Premium\)/i.test(s.key))) throw new Error('a Premium lot got its own pin');
+      const st = _mapSites.find(s => s.key === 'Utah Pic-A-Part - Ogden');
+      if (!st || st.lots.length !== 2) throw new Error('Ogden main + Premium not merged');
+      if (document.querySelector('#yards-map .map-pin[data-loc*="(Premium)"]')) throw new Error('Premium pin drawn');
+      selectMapYard(st.key);
+      await new Promise(r => setTimeout(r, 400));
+      const card = document.getElementById('ms-body');
+      if (!/Main lot · [\d,]+ cars/.test(card.textContent) || !/Premium lot · [\d,]+ cars/.test(card.textContent)) throw new Error('lots not listed');
+      if (card.querySelectorAll('.map-walk').length !== 2) throw new Error('each lot needs its own Walk the rows');
+      // Same-spot yards: a cluster whose yards share a point lists them (no endless zoom).
+      const same = _pinGroups.find(g => g.items.length > 1 && g.items.every(x => siteNear(x, g.items[0])));
+      if (same) { zoomToYards(same.items.map(x => x.key)); if (!/yards here/.test(document.getElementById('ms-title').textContent)) throw new Error('same-spot cluster did not list its yards'); selectMapYard(st.key); }
+    });
+    await settle(page, 600);
+  }, async (page) => { await page.evaluate(async () => { _mapSheetLoc = null; activeZipCoords = window.__zc; setYardsView('list'); }); await resetUi(page); }],
+  ...[['yards-map', 'gl'], ['yards-map-sheet', 'sheet'], ['yards-map-full', 'full'], ['yards-map-schematic', 'schematic'], ['yards-map-watch', 'watch']].map(([name, mode]) => [name, async (page) => {
     await tab(page, 'yards');
     if (mode === 'watch') await page.evaluate(() => {
       // A watch for a model on a nearby lot: its yard's pin gets the bell badge.
@@ -603,8 +644,9 @@ const SCREENS = [
       window.__mapWatch = new Date().toISOString() + '~mapwatch';
       saveWatchlist([...loadWatchlist(), { make: v.make, model: v.model, yrMin: null, yrMax: null, matchOnly: false, radiusMi: 100, addedAt: window.__mapWatch }]);
     });
-    await page.evaluate((mode) => { setYardsView('map'); if (mode === 'watch') renderSchematicMap((getYardsView().shown || []).filter(y => y.lat != null), ''); }, mode);
+    await page.evaluate(async () => { setYardsView('map'); await renderYardsMap(); });
     if (mode === 'watch') {
+      await page.waitForFunction(() => window._yardsMap && _yardsMap.loaded() && document.querySelector('#yards-map .map-pin'), null, { timeout: 30000 });
       await page.evaluate(() => {
         const w = document.querySelector('#yards-map .map-pin.has-watch');
         if (!w || !w.querySelector('.pin-watch svg')) throw new Error('no bell badge on a pin with a watch match');
@@ -618,15 +660,58 @@ const SCREENS = [
       await page.waitForFunction(() => window._yardsMap && _yardsMap.loaded() && document.querySelector('#yards-map .map-pin'), null, { timeout: 30000 });
       await page.waitForFunction(() => _yardsMap.areTilesLoaded(), null, { timeout: 30000 }).catch(() => {});
     }
-    await page.evaluate((mode) => {
+    await page.evaluate(async (mode) => {
       if (!document.querySelector('#yards-map .map-pin')) throw new Error('no pins');
       if (mode === 'gl' && !/OpenStreetMap/.test(document.querySelector('#yards-map').textContent)) throw new Error('no map attribution');
-      if (mode !== 'gl') {
+      // Map mode: the page doesn't scroll; the map fills to the tab bar and the
+      // bottom sheet is the one scrolling surface.
+      if (!document.documentElement.classList.contains('map-lock')) throw new Error('page not locked in map mode');
+      const sheet = document.getElementById('yards-map-sheet');
+      if (!sheet || !/\d+ yards? near you/.test(document.getElementById('ms-title').textContent)) throw new Error('no sheet title');
+      if (!sheet.querySelector('.ms-row')) throw new Error('no yard rows in the sheet');
+      if (mode === 'full') {
+        document.getElementById('ms-handle').click();
+        if (sheet.dataset.state !== 'full' || document.getElementById('ms-handle').getAttribute('aria-expanded') !== 'true') throw new Error('handle did not expand');
+      } else if (mode === 'sheet' || mode === 'schematic') {
         const pin = document.querySelector('#yards-map .map-pin:not(.map-cluster)');
-        selectMapYard(pin.dataset.loc);
-        if (!document.querySelector('#yards-map-sheet .map-walk')) throw new Error('no yard sheet');
-        document.getElementById('yards-map-sheet').scrollIntoView({ block: 'end' });
-      } else window.scrollTo(0, document.getElementById('yards-map').getBoundingClientRect().top + scrollY - 140);
+        if (pin) { pin.click(); if (!sheet.querySelector('.map-walk') || !sheet.querySelector('.ms-back')) throw new Error('no yard card in the sheet'); }
+        else { selectMapYard(_mapSites[0].key); if (!sheet.querySelector('.map-walk')) throw new Error('no yard card in the sheet'); }
+      }
+      // Pins: no two overlap, none is drawn whose point is outside the open map,
+      // and the credit line stays visible; at the fitted zoom and 2 and 4 steps in.
+      const pinCheck = (label) => {
+        const pins = [...document.querySelectorAll('#yards-map .pin-layer .map-pin')].map(p => p.getBoundingClientRect());
+        for (let i = 0; i < pins.length; i++) for (let j = i + 1; j < pins.length; j++) {
+          const a = pins[i], b = pins[j];
+          if (a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom) throw new Error(`${label}: two pins overlap`);
+        }
+        const A = pinArea(), box = document.getElementById('yards-map').getBoundingClientRect();
+        _pinGroups.forEach(g => { const p = _projectFn(g.items[0]); if (p.x < 0 || p.x > A.W || p.y < A.t || p.y > A.b) throw new Error(`${label}: a pin drawn with its point off the open map`); });
+        const inSheet = document.querySelector('#yards-map.credit-in-sheet');
+        if (inSheet) {
+          const c = document.querySelector('#yards-map-sheet.with-credit .ms-credit');
+          if (!c || !c.getClientRects().length || !/OpenStreetMap/.test(c.textContent)) throw new Error(`${label}: credit line not shown in the sheet`);
+        }
+        const at = !inSheet && document.querySelector('#yards-map .maplibregl-ctrl-attrib');
+        if (at) {
+          const ar = at.getBoundingClientRect();
+          if (!ar.height || ar.bottom > box.bottom + 1) throw new Error(`${label}: attribution not visible ` + JSON.stringify({ ar: [ar.top, ar.bottom, ar.height], box: [box.top, box.bottom], lift: document.getElementById('yards-map').style.getPropertyValue('--sheet-lift'), sheet: document.getElementById('yards-map-sheet').getBoundingClientRect().top }));
+          const covers = [...document.querySelectorAll('#yards-map .map-pin, #saved-pill, #yards-map-sheet')].filter(e => e.getClientRects().length).map(e => e.getBoundingClientRect());
+          if (covers.some(r => r.left < ar.right && ar.left < r.right && r.top < ar.bottom && ar.top < r.bottom)) throw new Error(`${label}: something covers the attribution`);
+        }
+        const ctl = document.querySelector('#yards-map .maplibregl-ctrl-group');
+        if (ctl) { const cr = ctl.getBoundingClientRect(); if (pins.some(r => r.left < cr.right && cr.left < r.right && r.top < cr.bottom && cr.top < r.bottom)) throw new Error(`${label}: a pin covers the zoom buttons`); }
+        if (getComputedStyle(document.getElementById('saved-pill')).display !== 'none' && document.documentElement.classList.contains('map-lock')) throw new Error('floating pull sheet pill shown over the map');
+      };
+      await new Promise(r => setTimeout(r, 400));   // the sheet's slide, then the pins re-solve
+      pinCheck('fitted');
+      if (window._yardsMap && mode === 'gl') {
+        const z0 = _yardsMap.getZoom();
+        for (const d of [2, 4]) { _yardsMap.jumpTo({ zoom: z0 + d }); layoutPins(); pinCheck('zoom +' + d); }
+        _yardsMap.jumpTo({ zoom: z0 }); layoutPins();
+      }
+      const mr = document.getElementById('yards-map-wrap').getBoundingClientRect(), tabs = document.querySelector('.tabs').getBoundingClientRect();
+      if (getComputedStyle(document.querySelector('.tabs')).position === 'fixed' && Math.abs(tabs.top - mr.bottom) > 24) throw new Error(`map does not reach the tab bar: ${mr.bottom} vs ${tabs.top}`);
     }, mode);
     await settle(page, 800);
   }, async (page) => { await page.evaluate(() => { _mapSheetLoc = null; if (window.__mapWatch) { saveWatchlist(loadWatchlist().filter(e => e.addedAt !== window.__mapWatch)); window.__mapWatch = null; } setYardsView('list'); }); await resetUi(page); }]),
@@ -834,8 +919,19 @@ async function checkAll(page, screen, width) {
     for (const z of ZOOMS) {
       if (z !== 1) await page.evaluate(ZOOM_FN, true);
       await settle(page, 120);
+      // Map screens: let MapLibre finish redrawing after a theme/text-size
+      // change (its pins are re-checked every frame) before measuring; under
+      // CPU load the fixed settle above can be too short.
+      await page.evaluate(async () => {
+        if (!document.querySelector('#tab-yards.yards-map-mode #yards-map')) return;
+        const t0 = Date.now();
+        while (window._yardsMap && !_yardsMap.loaded() && Date.now() - t0 < 4000) await new Promise(r => setTimeout(r, 50));
+        for (let i = 0; i < 4; i++) await new Promise(r => requestAnimationFrame(r));
+        await new Promise(r => setTimeout(r, 250));
+      });
       const rows = await page.evaluate(CHECK_FN);
       if (process.env.DEBUG_IMG) console.log(screen, await page.evaluate(() => [...document.querySelectorAll('.photo-box img')].slice(0, 3).map(i => [i.src.slice(0, 90), i.complete, i.naturalWidth, i.closest('.photo-box').className])));
+      if (process.env.DEBUG_PINS && rows.some(r => /yards-map/.test(r.el || ''))) console.log(screen, width, theme, z, JSON.stringify(await page.evaluate(() => { const c = document.getElementById('yards-map').getBoundingClientRect(); return { map: [Math.round(c.top), Math.round(c.bottom)], pins: [...document.querySelectorAll('#yards-map .map-pin')].map(p => { const r = p.getBoundingClientRect(); return [p.textContent.trim().slice(0, 18), Math.round(r.top), Math.round(r.bottom), p.style.transform, getComputedStyle(p).fontSize]; }) }; })));
       if (process.env.DEBUG_WIDE && rows.length) console.log(screen, width, theme, z, await page.evaluate(() => [...document.querySelectorAll('body *')].filter(e => e.getBoundingClientRect().right > innerWidth + 1 && e.getClientRects().length).slice(0, 8).map(e => e.tagName + '.' + e.className + ' ' + Math.round(e.getBoundingClientRect().width))));
       record(screen, `${width}/${theme}/${z * 100}%`, rows);
       passes++;
