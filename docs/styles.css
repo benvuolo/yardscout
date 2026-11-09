@@ -73,6 +73,7 @@
     --ink-btn: #1C1C1A;
     --on-ink: #FBFAF6;
     --on-accent: #FFFFFF;
+    --illo-bg: #ECEAE3; --illo-neutral: #C9C6BD; --illo-line: rgba(28,28,26,.30); --illo-glass: #A9BBC8; --illo-tire: #2B2B28; --illo-hub: #9A978F; --illo-shadow: rgba(28,28,26,.12);
     color-scheme: light;
   }
   /* Dark theme: same paper-and-ink logic, inverted — night shift at the
@@ -120,6 +121,7 @@
     --ink-btn: #F4F2EC;
     --on-ink: #1C1C1A;
     --on-accent: #1C1C1A;
+    --illo-bg: #2E2E2B; --illo-neutral: #5F5E59; --illo-line: rgba(255,255,255,.34); --illo-glass: #56697A; --illo-tire: #111110; --illo-hub: #77756F; --illo-shadow: rgba(0,0,0,.35);
     color-scheme: dark;
     }
   }
@@ -164,6 +166,7 @@
     --ink-btn: #F4F2EC;
     --on-ink: #1C1C1A;
     --on-accent: #1C1C1A;
+    --illo-bg: #2E2E2B; --illo-neutral: #5F5E59; --illo-line: rgba(255,255,255,.34); --illo-glass: #56697A; --illo-tire: #111110; --illo-hub: #77756F; --illo-shadow: rgba(0,0,0,.35);
     color-scheme: dark;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -2915,7 +2918,8 @@ a { color: var(--accent); }
 .header-row { flex: 1 1 0; min-width: 0; }
 .wordmark { min-width: 0; }
 /* A card whose photo fails to load shows no photo box at all. */
-.card-photo.photo-failed { display: none; }
+/* A failed card photo leaves the drawing under it (no hole, no shift). */
+.card-photo.photo-failed:not(.has-illo) { display: none; }
 .pf-yard-price { font-family: var(--font-ui); font-weight: 700; }
 .pf-row-card .card-photo { max-height: 12rem; }
 .header-row { flex: 1 1 0; min-width: min-content; }
@@ -3008,3 +3012,34 @@ a { color: var(--accent); }
 }
 .photo-box.photo-heavy:hover .photo-heavy-msg { border-color: var(--accent); }
 .photo-box.photo-heavy:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+
+/* ---- Vehicle illustration (no list photo): a flat side-profile drawing in
+   the same 4:3 slot, painted the listed colour, with the car's name in
+   small type. Light and dark via the --illo-* tokens. */
+.il-body { fill: var(--paint, var(--illo-neutral)); stroke: var(--illo-line); stroke-width: 1.2; stroke-linejoin: round; }
+.il-glass { fill: var(--illo-glass); }
+.il-line { fill: none; stroke: var(--illo-line); stroke-width: 1.2; }
+.il-arch { fill: var(--illo-bg); }
+.il-tire { fill: var(--illo-tire); }
+.il-hub { fill: var(--illo-hub); }
+.il-shadow { fill: var(--illo-shadow); }
+.photo-box.photo-illo, .photo-box.has-illo { background: var(--illo-bg); }
+.photo-illo::before, .has-illo::before { content: none; }
+.photo-box.photo-illo { display: flex; flex-direction: column; justify-content: flex-end; cursor: default; overflow: visible; max-height: none; }
+.illo-car { position: absolute; left: 13%; top: 46%; width: 74%; height: auto; transform: translateY(-50%); }
+.photo-box img { z-index: 1; }
+.photo-illo .illo-cap {
+  position: relative; align-self: center; max-width: calc(100% - 2 * var(--s4)); margin: 0 var(--s4) var(--s4); padding: 0; text-align: center;
+  font: 600 var(--t-xs)/1.35 var(--font-mono); letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-dim);
+}
+.photo-illo .illo-badge {
+  position: absolute; top: var(--s3); right: var(--s3); display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px var(--s2); border-radius: var(--r-pill); background: var(--surface); border: 1px solid var(--border);
+  font: 600 var(--t-xs)/1.3 var(--font-ui); color: var(--text);
+}
+.photo-illo .illo-badge .ico { width: 14px; height: 14px; flex: none; }
+.photo-box.photo-heavy.has-illo .illo-car { opacity: 0.55; }
+.photo-box.photo-heavy.has-illo .photo-heavy-msg { margin-top: auto; }
+/* Pull-sheet car names wrap inside the row (a long single word such as
+   "Trailblazer" at 200% text on a 320px phone ran off the sheet). */
+button.saved-item-name { max-width: 100%; min-width: 0; overflow-wrap: anywhere; }

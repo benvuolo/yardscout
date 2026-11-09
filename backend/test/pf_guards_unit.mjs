@@ -137,6 +137,7 @@ function pfRevealResults() {}
 var ICON = { bell: '' };
 function freeDeliveryNote() { return ''; }
 function proBoxHtml() { return ''; }
+function cardPhotoHtml() { return ''; }
 var PRO_PUSH_LINE = '';
 `;
 const ctx = vm.createContext({ console, Promise, Map, Set, Math, String, Number, JSON, Infinity });
