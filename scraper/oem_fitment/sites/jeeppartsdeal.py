@@ -45,6 +45,8 @@ MODEL_SLUGS = {
 }
 
 CAT_PAGES = {
+    # tier W (ops/interchange.md "Wheels"): the years manifest lists suspension/wheels
+    "wheels": r"^suspension/wheels$",
     "alternator": r"^charging-starting/alternator$",
     "starter": r"^charging-starting/starter$",
     "ac-compressor": r"^a-c-heating/(a-c-compressor|a-c-condenser-compressor-lines)$",
@@ -139,6 +141,10 @@ RULES = {
                 r"ball|join|hub|bushing|seal|shaft|cap|shield|bearing"),
     "strut": (r"^(strut|absorber|shock\s+absorber)\b",
               r"mount|bracket|bushing|cover|grommet|retainer|plate|sleeve|stop|bumper|package|kit|seat|bearing|steering|boot|insulator|spring"),
+    # tier W: road wheels only (Mopar "Wheel - Aluminum", "Wheel, Steel");
+    # no spare / temporary / compact wheel, cap, cover, nut, lock or sensor
+    "wheels": (rf"^wheel(\s+assembly)?({D}(aluminum|alloy|steel|chrome|painted|polished|forged|cast)\b|$|{D}front|{D}rear)",
+               r"cap|cover|nut|bolt|stud|lock|weight|valve|sensor|ornament|emblem|insert|spare|temporary|compact|carrier|bearing|hub|kit|liner|flare|opening|molding|trim|balance|tire"),
 }
 
 NOTES = {

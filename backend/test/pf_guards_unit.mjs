@@ -42,7 +42,7 @@ function extractConst(name) {
   return line || null;
 }
 
-const REAL_FNS = ['escapeHtml', 'normalizeVinForDedupe', 'pfSquash', 'pfSquashModel',
+const REAL_FNS = ['escapeHtml', 'pfYardPriceHtml', 'normalizeVinForDedupe', 'pfSquash', 'pfSquashModel',
   'pfAppMatches', 'pfGenWindows', 'pfGenWindow', 'pfParseEngine', 'pfEngineVerdict',
   'pfParseFits', 'pfPartRow', 'pfTierChip', 'pfEngineQuoteVariants', 'pfRunSearch',
   // Pull Sheet round 4: the donor card + sort the rows are rendered through
@@ -121,6 +121,8 @@ function canonicalModel(mk, md) { return md; }
 function isPro() { return false; }
 function pfVonlyRowHtml() { return ''; }
 function yardPartQuote() { return { status: 'in-store' }; }
+var __priceList = null;
+function yardPriceList() { return __priceList; }
 function onlinePriceHtml() { return ''; }
 function formatPrice(n) { return '$' + n; }
 function pfDateLabel() { return ''; }
@@ -710,6 +712,58 @@ print(json.dumps([G.engine_agrees(G.parse_engine(a), G.parse_engine(b)) for a, b
     /<strong>1<\/strong> verified &middot; <strong>1<\/strong> likely &middot; <strong>2<\/strong> same engine/.test(hc), hc);
   check('same-engine: no same-engine count when there are none',
     !/same engine/.test(ctx2.pfVonlyRowHtml(1, 3, 'fit')));
+}
+{
+  // (11) Wheels (ops/interchange.md "Wheels"): the shipped category is a
+  // same-model-generation Likely search with the lug/size check on every
+  // row; the yard price reads "each" and no savings line compares one wheel
+  // with a set-of-4 value.
+  const real = JSON.parse(fs.readFileSync(new URL('../../docs/data/interchange.json', import.meta.url), 'utf8'));
+  const wc = real.categories.find(c => c.id === 'wheels');
+  check('interchange.json ships a wheels category (body kind, perEach, rowWarn)',
+    !!wc && wc.kind === 'body' && wc.perEach === true && /lugs/.test(wc.rowWarn || ''), JSON.stringify(wc));
+  check('no platform group or main-file OEM group claims a cross-model wheel fit',
+    !real.platformGroups.some(g => g.cat === 'wheels') && !(real.oemGroups || []).some(g => g.cat === 'wheels'));
+  check('wheels notes carry the yard checks (TPMS, lug nuts, spares, curb rash, tire size)',
+    ['TPMS', 'lug', 'spare', 'curb rash', 'tire size'].every(k => (wc.notes || []).join(' ').includes(k)));
+  const steer = { name: 'Steering Wheel (no airbag)', low: 20, high: 40 };
+  const set = { name: '17"/18" Alloy Wheels (set)', low: 200, high: 400, fits: '2007–2011' };
+  const trim = { name: 'Red Line Trim + Wheels', low: 50, high: 90 };
+  check('pfPartRow(wheels) finds the wheel-set row, never the steering wheel or a trim kit',
+    ctx.pfPartRow({ topParts: [steer, trim, set] }, wc) === set
+    && ctx.pfPartRow({ topParts: [steer, trim] }, wc) === null);
+  const gens = { modelGenerations: [['Toyota', 'Camry', [[2007, 2011], [2012, 2017]]]] };
+  const inv = [car(1, 2010, 'Toyota', 'Camry', { topParts: [set] }), car(2, 2013, 'Toyota', 'Camry'),
+    car(3, 2010, 'Toyota', 'Avalon', { topParts: [set] }), car(4, 2008, 'Toyota', 'Camry')];
+  const saved = { isPro: ctx.isPro, q: ctx.yardPartQuote, o: ctx.onlinePriceHtml };
+  ctx.isPro = () => true;
+  ctx.yardPartQuote = () => ({ status: 'priced', part: 'WHEEL ALUMINUM', price: 31.99, core: 0 });
+  ctx.onlinePriceHtml = (p, c, v, unit = '') => `<span class="pf-ebay">$200–$400${unit}</span>`;
+  const r = run({ ...real, ...gens, platformGroups: real.platformGroups, oemGroups: [] }, inv,
+    { year: 2009, make: 'Toyota', model: 'Camry' }, wc);
+  const names = Object.keys(r.rows).sort();
+  check('wheels: same-generation Camry donors only (no Avalon, no 2013)',
+    JSON.stringify(names) === JSON.stringify(['2008 Toyota Camry', '2010 Toyota Camry']), JSON.stringify(names));
+  check('wheels: every donor Likely, with the lug-count check on the row',
+    Object.values(r.rows).every(x => x.tier === 'likely' && x.warn.includes('count the lugs')), JSON.stringify(r.rows));
+  check('wheels: yard price reads "each" with the yard row (size tier) inline, and no savings line', r.html.includes('Yard: $31.99 each <span class="pf-price-row"') && r.html.includes('(WHEEL ALUMINUM)') && !r.html.includes('pf-save'));
+  check('wheels: the online value says it is for a set of 4 (the yard price is per wheel)', r.html.includes('$200–$400 for a set of 4</span>'), '');
+  check('wheels: header reads "carrying fitting wheels" (no "a" before a plural label)',
+    r.html.includes('carrying fitting wheels') && !r.html.includes('a fitting wheels'), (r.html.match(/carrying[^<]{0,40}/) || [''])[0]);
+  // size-tiered yard list: the line shows the whole per-wheel range, never only the cheapest tier
+  ctx.yardPartQuote = () => ({ status: 'priced', part: 'WHEEL ALUM UNDER 16"', price: 28.99, core: 14 });
+  ctx.__priceList = [{ part: 'WHEEL ALUM UNDER 16"', price: 28.99, core: 14 }, { part: 'WHEEL ALUM OVER 16"', price: 39.99, core: 14 },
+    { part: 'WHEEL STEEL', price: 19.99, core: 0 }, { part: 'STEERING WHEEL', price: 24.99, core: 0 }];
+  const rt = run({ ...real, ...gens, platformGroups: real.platformGroups, oemGroups: [] }, inv,
+    { year: 2009, make: 'Toyota', model: 'Camry' }, wc);
+  check('wheels: a size-tiered yard shows the per-wheel range by size with both row names',
+    rt.html.includes('Yard: $28.99\u2013$39.99 each by size') && rt.html.includes('(WHEEL ALUM UNDER 16&quot; \u2026 WHEEL ALUM OVER 16&quot;)')
+    && !rt.html.includes('$19.99') && !rt.html.includes('$24.99'), (rt.html.match(/Yard:[^\n]{0,160}/) || [''])[0]);
+  ctx.__priceList = null;
+  ctx.yardPartQuote = () => ({ status: 'priced', part: 'WHEEL ALUMINUM', price: 31.99, core: 0 });
+  const rm = run(base([], gens), inv, { year: 2009, make: 'Toyota', model: 'Camry' }, cat());
+  check('other categories: no "each" on the yard price', rm.html.includes('Yard: $31.99') && !rm.html.includes('Yard: $31.99 each'), '');
+  Object.assign(ctx, { isPro: saved.isPro, yardPartQuote: saved.q, onlinePriceHtml: saved.o });
 }
 
 console.log(failures ? `\n${failures} FAILURES` : '\nALL PASS');

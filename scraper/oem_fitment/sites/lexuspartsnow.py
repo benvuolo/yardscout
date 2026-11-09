@@ -88,6 +88,8 @@ SUBCATS = {
     # the rear axle carrier is printed on the rear spring/shock page (2007 RX 350)
     "knuckle": r"^front_axle_arm_steering_knuckle$|^rear_axle_shaft_hub$|^rear_spring_shock_absorber$",
     "strut": r"^(front|rear)_spring_shock_absorber$",
+    # tier W (ops/interchange.md "Wheels"): the years manifest lists it
+    "wheels": r"^disc_wheel_wheel_cap$",
 }
 
 A = r"(?:assy|assembly)"
@@ -146,6 +148,10 @@ RULES = {
                 r"differential|bearing|hub|bolt|nut|cover|seal|arm|rod|bush"),
     "strut": (rf"^absorber\s+({A}|set),?\s*shock\b",
               r"support|mount|bumper|bound|cover|insulator|spring|cushion|kit|rod|bracket|cap|bearing|collar"),
+    # tier W: Toyota naming "WHEEL, DISC" / "DISC WHEEL"; the same page also
+    # carries caps, nuts and ornaments, and spare wheels are excluded
+    "wheels": (rf"^wheel,?\s*disc\b|^disc\s+wheel\b|^wheel,?\s*(aluminum|alloy|steel)\b",
+               r"cap|cover|nut|bolt|stud|lock|weight|valve|sensor|ornament|emblem|insert|spare|temporary|compact|carrier|bearing|hub|kit|balance|tire"),
 }
 # excludes match at a word start ("ring" must not hit "steering")
 RULES = {k: (re.compile(inc, re.I), re.compile(rf"\b(?:{exc})", re.I)) for k, (inc, exc) in RULES.items()}

@@ -2667,3 +2667,54 @@ nissan.completion.json), plus R1 manifests on acura/nissan/infiniti.
     test_model_map (live Cr-Z row; clears after the rescan) and
     test_jeeppartsdeal (asserts worklist version 2; the tier C session
     raised it to 4).
+
+## Wheels (session_016ZzJfL4wG1wgpyYymW2Z28, 2026-11-09; branch interchange/wheels, applied and pushed by the hub)
+
+Owner: "Yes relabel those, and start on Honda/Nissan and wheels". The hub approved the proposal on these bases:
+- (b) Shipped on this branch.
+  - What: a `wheels` body category, same model + same generation donors only, always Likely.
+  - Row check: "count the lugs; read the size on the back (e.g. 17x7J), offset and hub bore". 2WD/4WD and HD versions can differ in bolt pattern within a generation.
+  - Notes: TPMS ("most 2008+ cars have one"), lug nuts and lock key, no compact spares, curb rash, and tire size gives the diameter.
+  - Price: one ALLOY wheel, rim only. It reads "Yard: $X each (YARD ROW NAME)" so the size tier is visible. There's no savings line, because online values are for a set of 4.
+  - Price-token coverage: 24 of 30 yard lists. Combos, sets, steel, dually and scrap rows never match.
+  - Wheels stay an `option` row in the car-card parts table: $0 to ranking.
+  - Example: 2009 Camry near 85003 → 27 Likely donors.
+- (a) OEM wheel part numbers: crawl tier "W" (crawl.py TIERS["W"]=["wheels"]). It runs only for worklist sites with "wheels": true.
+  - Rules exist for fordpartsgiant (base 1007, subcats wheels/wheels_related_parts), jeeppartsdeal (suspension/wheels; worklist v3) and lexuspartsnow (disc_wheel_wheel_cap, "WHEEL, DISC").
+  - Spare, temporary, compact wheels, caps, nuts, locks, weights, valves and TPMS sensors are excluded.
+  - Audit risk: Toyota/Lexus spares are also "WHEEL, DISC". Curation must check remarks or own pages for T-type spares.
+  - Groups publish only after a §11.4 sample with 0 WRONG and hub confirmation.
+- (c) Spec matching (bolt pattern / bore / offset): NO. No source passes rule 2 with a stated basis. vPIC has no bolt pattern.
+- Not yet covered: GM, VW, MB, Hyundai rules, the no-manifest makes, and Honda/Acura/Nissan/Infiniti (another session). Mopar's moparpartsgiant is blocked, and Subaru is withheld.
+- Tests: pf_guards_unit ALL PASS; test_interchange pass (30 categories); oem_fitment tests 30/30; curation_tests pass; scraper/test_*.py pass.
+- Patch transfer: the originating session couldn't push. The hub applied its diff on 533b3c1. Unicode escapes in app.js were restored, and the wheels entry in interchange.json was regenerated with build_interchange_payload().
+
+### Wheels, continued (session_016ZzJfKi8ND3Ey2g66qhiZT, 2026-11-09)
+
+- (b) merge fixes, commit 52d9aa2:
+  - Header reads "carrying fitting wheels" (no "a" before a plural label). The browse note no longer doubles a plural ("wheelss").
+  - The online value on a wheel row reads "for a set of 4", because the yard price is per wheel.
+  - Size-tiered yard lists show the full per-wheel range with both row names, e.g. "Yard: $28.99–$37.99 each by size (WHEEL ALUM UNDER 16" … WHEEL ALUM OVER 17")". The old code quoted only the cheapest tier, which is the wrong price for a 16–17" Camry wheel.
+  - Seven lists price wheels by size: ace, chesterfield, chuckeddies, p195, pnpsa, pns, usauto. Every row the wheel tokens match there is an alloy-wheel size tier (checked against all `*_pricing.json`).
+  - pf_guards_unit has a check for each of the three changes.
+  - Screenshots: `ops/screens/wheels_2009_camry_85003_390_{light,dark}{,_row,_priced}.png`. 2009 Camry near 85003: 27 Likely donors, 22 of them with a yard price.
+- (a) tier W rules for GM, VW, MB and Hyundai, commit 3177cbb. Each was checked on one real wheels list page, read through fetch.py on 2026-11-09; all four answered 200.
+  - gmpartsgiant: subs `wheels`, `wheels_wheel_covers`, `wheels_hub_caps`. Noun WHEEL.
+    - The 2016 Trax row "WHEEL, Rear or Spare" (18X7) is kept: it is a full-size road wheel, and the group text is the illustration heading.
+    - Dropped: a "WHEEL, Spare…" heading, or a remark (including inside parentheses) that says spare, temporary or compact.
+  - vwpartsgiant / mbpartsgiant: `suspension/wheels`, anchored names. "Wheel, Alloy" and "Wheel Alloy" are kept. "Spare Wheel", "Wheel, Spare", bolts, bolt caps, lock kits, center caps, hub caps, covers and valve stems miss the include. MB lists accessory wheels (6-6-03-xxxx) as "Wheel, Alloy": their product pages decide fitment.
+  - hyundaipartsdeal: `chassis/wheel_cap`. "Wheel Assy-Aluminium" / "-Steel" are kept. "Wheel Assy-Temporary", caps, hub nuts and spare-tire clamps/pads are dropped, as is any row that says spare, temporary or compact.
+  - Worklist: `wheels: true` on all four. VW, MB and Hyundai go to version 2 to re-open their done sites. GM is not done, so tier W follows its A/B crawl.
+  - Kia reuses Hyundai's PARTS and SUBCATS, so its rules exist, but it is not flagged: not asked yet. It is a one-line worklist change if the hub wants it.
+  - Tests: test_wheels_rules covers the real row names and the subcat/page regexes. oem_fitment tests 30/30; curation_tests all PASS.
+- Main merged in twice (e0e6c90, then again for d2a54d6). Resolution, as the hub asked:
+  - crawl.py: tiers A, B, W, C, with TIER_FLAG `W: wheels`.
+  - Site modules: tier C and wheels entries side by side.
+  - Worklist: `complete` and `wheels` keys side by side. No wheels site has tierC, so the versions don't collide.
+  - pf_guards_unit: main's same-engine block, closed, then the wheels block.
+  - interchange.json: main's file plus the regenerated wheels entry (verified identical apart from wheels).
+  - sw.js: jh-v172.
+- Kia on tier W (worklist version 2). It uses Hyundai's rules: the 2013 Optima chassis/wheel_cap page, read through fetch.py, uses the same names.
+- Fix found on that page: every road wheel's Fit Note lists the car's options, including "TEMPORARY - STEEL WHEEL & TIRE (MINI)". The first Hyundai rule searched the whole row for spare words, so it dropped all 5 Optima road wheels. The spare check now reads only the part's own name and remark. Optima: 4 alloy + 1 steel kept; 2 "Wheel Assy-Temporary" dropped.
+- Curation note: the PartsGiant Fit Note is car options, not the part's identity. Don't read spare words in it as a spare.
+- test_model_map (curation_tests) fails identically on origin/main: Honda "Cr-Z" feed spelling, M3/M5. It belongs to the Honda/Nissan session; I haven't touched it.

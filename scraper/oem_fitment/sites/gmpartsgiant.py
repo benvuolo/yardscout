@@ -121,6 +121,10 @@ SUBCATS = {
     "wiper-motor": r"wiper_system|wiper_motor|module_assembly_windshield_wiper",
     "knuckle": r"^suspension_front$|^suspension_rear$|^suspension_front_rear$|knuckle",
     "strut": r"^suspension_front$|^suspension_rear$|^suspension_front_rear$|strut_assembly|absorber_(front|rear)_shock|shock_absorber|shocks",
+    # tier W (ops/interchange.md "Wheels"): the years manifest lists
+    # brakes_rear_axle_propeller_shaft_wheels_tires/wheels, wheels_wheel_covers and
+    # wheels_hub_caps; spare_wheel, wheel_covers and the TPMS pages are not read
+    "wheels": r"^wheels(_wheel_covers|_hub_caps)?$",
 }
 SUBCAT_EXCL = {
     "window-regulator": r"trim|weatherstrip|glass_only|moldings",
@@ -192,6 +196,15 @@ PARTS = {
                 r"HUB|BEARING|SEAL|BOLT|NUT|SHIELD|SENSOR|BUSHING|KIT", SUB),
     "strut": (r"^(ABSORBER|STRUT)\b[^|]*\|[^|]*\|\s*((ABSORBER|STRUT)( ASM)?,\s*)?(FRONT|REAR)?\s*(SHOCK|SUSPENSION|STRUT)",
               r"KIT|MOUNT|BUMPER|BRACKET|BAR\b|ROD|ENERGY|IMPACT|STEERING|ENGINE|HOOD|GATE|LID|DOOR|CAB", SUB),
+    # tier W: 2016 Trax .../wheels (fetch.py 2026-11-09) prints group "WHEEL, Rear or
+    # Spare", remark "WHEEL (PKG),(11.7876 KG)(...)(18X7)": the noun is WHEEL and
+    # the group text after the comma is the illustration heading. A full-size
+    # road wheel that also serves as the spare ("Rear or Spare") is kept; a row
+    # whose heading is only a spare ("WHEEL, Spare ..."), or whose remark says
+    # spare / temporary / compact anywhere (also inside the parentheses), is not.
+    "wheels": (N.format("WHEEL|WHEEL ASM|WHEEL,\\s*ALUMINUM|WHEEL,\\s*STEEL") + r"(?!\s+(COVER|TRIM|HOUSE|LINER|OPENING|NUT|BOLT|STUD|LOCK|CAP|WEIGHT|BEARING|SPEED|CYLINDER|ALIGN|DRIVE))",
+               r"COVER|CAP|NUT|BOLT|STUD|LOCK|WEIGHT|VALVE|SENSOR|ORNAMENT|EMBLEM|INSERT|SPARE|TEMPORARY|COMPACT|CARRIER|BEARING|HUB|KIT|TRIM|RING|BALANCE|TIRE|STEERING|HOUSE|LINER|SKIN|CLAD",
+               SUB + r"|^[^|]*,\s*(SPARE|TEMPORARY|COMPACT)\b[^|]*\||\|\s*[^|]*\b(SPARE|TEMPORARY|COMPACT|MINI SPARE|T-TYPE)\b[^|]*\|[^|]*$"),
 }
 
 def head(r: dict) -> str:

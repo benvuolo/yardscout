@@ -72,9 +72,10 @@ ok(nav_err("Dodge", "Ram Van", 2001), "1999-2003 vans are 1500/2500/3500")
 _wl = json.loads((Path(__file__).resolve().parent.parent / "worklist.json").read_text())["sites"][J.SITE]
 _mk = {s["make"] for s in _wl["segments"]}
 # v2 added Dodge/Chrysler/Ram; later versions re-open the done site for new
-# tiers only (tier C: v4, ops/interchange.md "Category breadth")
+# tiers only (tier C and tier W wheels, ops/interchange.md)
 ok(_wl.get("version", 1) >= 2 and _mk == {"Jeep", "Dodge", "Chrysler", "Ram"}, f"worklist v2+ makes {_mk}")
 ok(_wl.get("tierC") is True, "worklist tierC flag set (tier C rules in this module)")
+ok(_wl.get("wheels") is True, "worklist wheels flag set (tier W rules in this module)")
 ok(all(s["make"] in J.URL_MAKE for s in _wl["segments"]), "every worklist make has a URL make")
 ok(all(s["site"] == J.SITE for s in _wl["segments"]), "segments name this site")
 ok(_wl["segments"][0]["make"] == "Jeep", "Jeep (v1, done) segments stay first and unchanged")

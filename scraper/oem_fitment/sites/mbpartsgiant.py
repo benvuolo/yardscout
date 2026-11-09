@@ -67,6 +67,8 @@ CAT_PAGES = {
     "wiper-motor": r"^(electrical/wipers|body-hardware/wiper-washer-components(-body)?)$",
     "knuckle": r"^suspension/(front-suspension|front-suspension-components|rear-suspension|rear-suspension-components|front-axle-carrier)$|^driveline-axles/(front-axle|front-axle-driveline|rear-axle)$",
     "strut": r"^suspension/(struts-components|shocks-components|struts-suspension-components-front|front-suspension|front-suspension-components|rear-suspension|rear-suspension-components|ride-control-front|ride-control-rear)$",
+    # tier W (ops/interchange.md "Wheels"): the years manifest lists suspension/wheels
+    "wheels": r"^suspension/wheels$",
 }
 
 RULES = {
@@ -96,6 +98,10 @@ RULES = {
     "wiper-motor": (r"^((front|rear|windshield|rear window) )?wiper motor( assembly)?$", ""),
     "knuckle": (r"^(steering )?knuckle( assembly)?$", ""),
     "strut": (r"^(front |rear )?(strut|shock absorber|shock)( assembly)?$", ""),
+    # tier W: 2008 C350 suspension/wheels (fetch.py 2026-11-09) prints "Wheel, Alloy"
+    # and "Wheel Alloy" beside "Wheel, Spare", "Wheel Cover", "Hub Cap", "Valve Stem"
+    # and "Wheel Bolt"; anchored, so only road-wheel names match
+    "wheels": (r"^wheel(,? (alloy|steel|aluminum|light alloy))?$|^(alloy|steel|aluminum|light alloy) wheel$", ""),
 }
 
 PRODUCT_RULES = {
