@@ -154,3 +154,7 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
     - session_016ZzJfK5RFgko9f1gx7qjEa: relabel first (branch interchange/same-engine-label, hub merges), then Honda/Acura + Nissan/Infiniti R1/R3 + curation + §11.4 sample (0 WRONG bar).
     - session_016ZzJfL4wG1wgpyYymW2Z28: wheels. Research the basis, propose to the hub, then build on branch interchange/wheels.
   - Both were created without the repo attached and were told to add_repo first.
+- 17:30 UTC owner: "Great, again we're going for breadth here and data quality, its embarrasing to not have this when car-part.com has a gorgeous example. We will create the better version, with no external or third party costs".
+  - Hub policy under it: a new make or category ships once its CURATION_SPEC §11.4 sample has 0 WRONG. The hub confirms each and tells the owner as it goes live, so there's no per-namespace wait.
+  - Paid sources and licences stay out.
+  - Added session_016ZzJfKqBWhtUcqYMMseVgn (make breadth + Subaru) and session_016ZzJfKdkBXaVYDDQb9cy2J (categories + coverage matrix). See the ops/README exception.

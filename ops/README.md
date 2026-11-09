@@ -24,3 +24,15 @@ Temporary exception (2026-11-05, owner asked for full speed): two Parts
 sessions run at once. The model-block session writes PARTS_GAPS §22 and the
 facelift session §23, each with its own comment group in FACELIFT_BREAKS; both
 pull --rebase and rerun the parts tests before every push.
+
+Temporary exception (2026-11-09, owner: "we're going for breadth here and
+data quality … We will create the better version, with no external or third
+party costs"). Four Interchange sessions run at once, each in its own
+section of ops/interchange.md:
+- same-engine relabel + Honda/Nissan: session_016ZzJfK5RFgko9f1gx7qjEa
+- wheels: session_016ZzJfL4wG1wgpyYymW2Z28
+- make breadth + Subaru: session_016ZzJfKqBWhtUcqYMMseVgn
+- category breadth + coverage matrix: session_016ZzJfKdkBXaVYDDQb9cy2J
+Shared oem_fitment code: pull --rebase, run curation_tests + tests before
+every push. One crawl run at a time. Nothing ships to users without a §11.4
+sample with 0 WRONG and the hub's confirmation.
