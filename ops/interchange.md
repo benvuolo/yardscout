@@ -2594,3 +2594,23 @@ nissan.completion.json), plus R1 manifests on acura/nissan/infiniti.
   session's authorized repo set; the add_repo call was denied. The `gh` token
   is invalid, so no workflow dispatch either. The branch and this note exist
   only in this container until access is fixed.
+- **2026-11-09 ~19:00 UTC, state when this session paused:**
+  - **Curate is blocked for everyone** by inventory 77423a1: one feed car is
+    spelled "Honda Cr-Z", so model_map M3 fails. Fix:
+    `"crz": "CR-Z"` in junkyard_scraper `_MODEL_CANON` + rescan
+    (Data-quality, ops/data.md). The scan payload is unaffected.
+  - **GM series filter** (branch `make-breadth-gm-series`, c1f13ec, rules
+    1-3 merged, all 8 re-curated under the branch hash). Fresh resample of
+    20 of the 32 changed groups: **RIGHT 16, WRONG 0, UNSURE 4**
+    (15844876/77 rear-door motors, 20862099 towing mirror for the 2007
+    Avalanche, 20787113). Sent to the hub; ships on its confirmation once
+    curate runs again (re-curate all 8 in the same push).
+  - **Live note bug, fix on branch `make-breadth-pack-note` (8f16996):** 69
+    shipped climate-control groups say "regulator with motor" (gm 24,
+    mopar 24, subaru 9, ford 7, toyota 5). `_pack_text` limits packaging
+    words to their category. Claims unchanged. Needs a re-curate of all 8
+    and then a push.
+  - **Next:** when `.c1.done` lands per site: re-curate, then a §11.4
+    sample per namespace (bmw, mb, vag, volvo, mazda, mitsubishi, hmg,
+    toyota/lexus, ford, mopar), checking unseen-option splits (heated,
+    power-fold, turbo, km/h, export) in each sample.
