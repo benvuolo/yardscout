@@ -134,3 +134,16 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
 - Today, Monday, the 15:00Z cron sends the first weekly recap with the Pro teaser (alerts/recap-teaser). Check it in the next daily ops email.
 - Manual filter (owner asked 11-09): it was dropped 2026-10-27 because it emptied most searches. Today 3,658 cars in the extras are confirmed manual (vin 3118, vin_code 463, listing 43, engine 25, trim 8, model 1). Proposed: a free "Manual (N nearby)" chip with honest copy, and "manual only" as a Pro watch option. Waiting on the owner.
 - 08:46Z scan (51e4c23c) published the re-pinned coordinates. Ogden: Tear-A-Part 41.2444,-111.9962; Utah Pic-A-Part and its Premium lot 41.2369,-111.9917. Nationwide, no two different yards share a spot (304 yards, 302 spots; only the Premium lots pair with their main yard). map_regions_e2e rerun on main + cb8b36a8: 10/10 PASS, Salt Lake same-spot clusters 0.
+
+## 2026-11-09 ~17:30 UTC banner + map first view shipped (web); open items
+- Owner said "ship it". Merged design/promo-map-fit (f3f1cae3) as 86d29797, sw jh-v168, live. Regression on the merged tree all passed: units, app_promo_e2e, map_regions_e2e, ui_no_truncation 1296/0, pf_ux, interchange, tab_retap.
+- Sent to the design session, in this order:
+  1. Desktop photos. The credit is covered by the image (`.photo-box img { z-index:1 }`), and wide grey letterbox bars appear in the 3-column grid. Owner report: "images are large/wonky" on the computer.
+  2. The You dot is hidden under a bubble (Atlanta).
+  3. First view on short Safari viewports (390×664): only the nearest yard is drawn, without You.
+- ops_monitor: chain freezes with no full weekday 14–22Z block since are "quiet", not issues (ca2a07c0).
+- Owner asked about the Parts tab:
+  - Headlights: same-model generation for every car, plus 87 OEM groups across 30 models.
+  - Missing: Honda/Nissan/Mazda/BMW catalog data, and wheels, AC compressor, PS pump.
+  - GX vs Tundra accessories: GX 470 is not on the 2UZ alternator part-number list, so it shows as "Likely fit — verify part #". GX 460 (1UR-FE) has no engine family yet.
+  - Proposed: label same-engine/different-model accessory donors "Same engine — part may differ". Waiting on the owner.
