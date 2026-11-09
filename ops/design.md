@@ -144,18 +144,24 @@ sheet" in the UI only (jh_saved and watch storage untouched, rule 6); map deferr
 - Tests: app_promo_e2e (new, 174), map_regions_e2e 11 regions / 1,056 layouts, ui_no_truncation 1,296, units.
 - Known: Atlanta first view, a "2 yards" bubble can cover the You dot. Waiting on hub review/merge.
 
-### Round 9c: photos on the computer (2026-11-09, branch design/photo-desktop daa3049, NOT merged)
+### Round 9c: photos on the computer (2026-11-09; merged by hub)
 - Owner: "on the computer, the images are large/wonky". Credit was under the photo (cards read "-Pull"):
   credit now above the photo, bottom-left (clear of ROW52-style watermarks). >=700px: card and car-screen
   photo boxes 3:2, no 16rem cap (no wide grey bars), cards even; never cropped, margins show a blur of the
   same loaded photo. Phones keep 4:3. jh-v170. Tests: photo_layout_e2e (new, fixture photos, 554),
   ui_no_truncation 1,296, units. WebKit not installed here: Safari/iPad-on-Mac unchecked.
 
-### Round 9d: You dot + short phone screens (2026-11-09, branch design/you-dot d9cff7d, NOT merged)
+### Round 9d: You dot + short phone screens (2026-11-09; merged by hub as design/you-dot-v2 56df682, jh-v173; then design/phoenix-cluster 5c28d32, jh-v174: an unsplittable bubble lists its yards nearest-first)
 - Pins keep off the You dot (flip / slide; else dot on top). Short Safari screens (390x664, 375x553):
   pins slide around the zoom buttons instead of closing the top band, one-row sheet peek at <=760px tall,
   map min height 220px so the sheet never runs under the tab bar. jh-v169 (second of 9c/9d to merge
   needs jh-v171). Tests: map_regions_e2e 11 regions x 6 sizes (1,584 layouts), ui_no_truncation, units.
+
+### Round 9e: Walk the rows on desktop (2026-11-09, branch design/rows-desktop 9a1e341, NOT merged)
+- Sanity pass at 1024/1440/1920 with today's data: 672px column, no sideways scroll. Row thumbs get the
+  photo fill (PYP 16:9 photos left beige bands), 112px at >=900px; thumbs and photo boxes isolate their
+  stacking (fill layers had painted over the sticky row header). jh-v175. photo_layout_e2e 578 (adds rows
+  checks; fails without the fix), ui_no_truncation 1,296, units. WebKit still unchecked.
 
 ## Earlier state (2026-11-06, exploration)
 
