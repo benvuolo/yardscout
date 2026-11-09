@@ -451,6 +451,16 @@ WHEEL_DIAMETER_RE = re.compile(r"\b(1[3-9]|2[0-4])(?:\.\d)?\s*(?:x\s*\d|\"|''|-?
 # the 2000 Cherokee vs "15x7" on the Wranglers; "20x9, Code WP2" vs "20x8, Code
 # WP2"): every width a page states must agree too.
 WHEEL_WIDTH_RE = re.compile(r"\b(?:1[3-9]|2[0-4])\s*x\s*(\d{1,2}(?:\.\d{1,2})?)", re.I)
+# MB / VW census 2026-11-09 (1 WRONG, 1 UNSURE, staggered pairs): body words in
+# the own-page notes must be the same on every app's page ("Wagon, 5 Spoke ...
+# 17X7" on the 2003 Jetta vs "Coupe" on the 2003 Beetle was WRONG); stated spoke
+# counts must agree ("17\", 10 Spoke" GTI vs "17\", 8 Spoke, Porto" Golf); a
+# note limiting the wheel to the front or rear axle (staggered W204 C-Class
+# sets) refuses the group, since the finder has no axle field for wheels yet.
+WHEEL_BODY_RE = re.compile(r"\b(wagon|estate|variant|avant|coupe|convertible|cabrio(?:let)?|roadster|sedan|"
+                           r"hatchback|sportwagen|sport\s*wagon|suv|van|cab)\b", re.I)
+WHEEL_SPOKE_RE = re.compile(r"\b(\d{1,2})[\s-]*(?:double[\s-]*|twin[\s-]*|split[\s-]*)?spokes?\b", re.I)
+WHEEL_AXLE_RE = re.compile(r"(?<![A-Za-z])(front|rear)(?![A-Za-z])", re.I)
 WHEEL_SPARE_NOTE_RE = re.compile(r"\bspare\b", re.I)
 MODEL_NUMBER_RE = re.compile(r"\b(1500|2500|3500|4500|5500)\b")
 WHEEL_NOTES_ARE_OPTIONS = frozenset({"www.hyundaipartsdeal.com", "www.kiapartsnow.com",

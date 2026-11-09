@@ -1390,6 +1390,7 @@ class Curation:
             if policy.WHEEL_SPARE_NOTE_RE.search(r.description or ""):
                 return "wheel_spare_description", f"{r.pn}: {r.description[:80]}"
         sizes, widths = {}, set()
+        bodies, spokes = [], set()
         for T in Ts:
             notes = [n or "" for n in self.own_page(T, cat, c)[1]]
             text = " ; ".join(notes)
@@ -1399,6 +1400,10 @@ class Curation:
             other = set(policy.MODEL_NUMBER_RE.findall(text)) - own_num
             if other:
                 return "wheel_model_other", f"{T[0]} {T[1]} {T[2]}: names {sorted(other)}"
+            if policy.WHEEL_AXLE_RE.search(text):
+                return "wheel_axle_limited", f"{T[0]} {T[1]} {T[2]}: {text[:120]}"
+            bodies.append(frozenset(m.group(1).lower() for m in policy.WHEEL_BODY_RE.finditer(text)))
+            spokes |= {m.group(1) for m in policy.WHEEL_SPOKE_RE.finditer(text)}
             d = {m.group(1) for m in policy.WHEEL_DIAMETER_RE.finditer(text)}
             if not d:
                 return "wheel_size_unstated", f"{T[0]} {T[1]} {T[2]}"
@@ -1409,6 +1414,10 @@ class Curation:
             return "wheel_size_conflict", "; ".join(f"{T[1]} {T[2]}: {sorted(v)}" for T, v in sizes.items())
         if len(widths) > 1:
             return "wheel_width_conflict", f"widths {sorted(widths)}"
+        if len(set(bodies)) > 1:
+            return "wheel_body_conflict", "; ".join(sorted("/".join(sorted(b)) or "-" for b in set(bodies)))
+        if len(spokes) > 1:
+            return "wheel_design_conflict", f"spokes {sorted(spokes)}"
         return None
 
     def _drop_catchall_twins(self, Ts):
