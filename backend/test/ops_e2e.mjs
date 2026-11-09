@@ -9,6 +9,8 @@
  * admin auth.
  */
 
+import { fullBusinessDaysBetween } from '../src/ops_monitor.js';
+
 const BASE = process.env.YS_TEST_BASE || 'http://127.0.0.1:8795';
 const MOCK = process.env.YS_MOCK_BASE || 'http://127.0.0.1:8798';
 const ADMIN = { 'x-admin-secret': 'dev-admin-secret-change-me' };
@@ -133,8 +135,14 @@ const before = (await opsSent()).length;
 r = await dailyRun({ dryRun: true });
 const d = r.data;
 const text = d.email?.text || '';
+// "Big Chain" froze ~1.3 days before the run. Depending on the weekday the
+// test runs, that window may hold no full business day (e.g. a Monday
+// morning): then it is listed as quiet, not as an issue. Expect whichever is true.
+const bigChain = (d.yardHealth?.chainFrozen || []).find((c) => c.chain === 'Big Chain');
+const bigQuiet = !!bigChain && fullBusinessDaysBetween(Date.parse(bigChain.since), Date.parse(d.yardHealth.scrapedAt)) === 0;
+const NISSUES = bigQuiet ? 3 : 4;
 check('daily dry run: 200 + not sent', r.status === 200 && d.dryRun === true && d.sent === false && (await opsSent()).length === before, JSON.stringify(d).slice(0, 300));
-check('daily subject + verdict', /^\[YardScout daily\] 4 issues · 3 yards · 1,541 cars$/.test(d.email?.subject || ''), d.email?.subject);
+check('daily subject + verdict', d.email?.subject === `[YardScout daily] ${NISSUES} issues · 3 yards · 1,541 cars`, d.email?.subject);
 check('daily: scan commit time + age', !!d.scan?.lastCommitAt && d.scan.ageHours >= 0 && d.scan.ageHours < 1, JSON.stringify(d.scan));
 check('daily: live yard + vehicle counts', d.inventory?.yards === 3 && d.inventory?.vehicles === 1541 && d.inventory?.publicVehicles === 1541, JSON.stringify(d.inventory));
 check('daily: dormant yards listed', JSON.stringify(d.yardHealth?.dormant?.map((y) => y.name).sort()) === JSON.stringify(['Dormant Yard - Orem', 'Ghost Yard - Lehi']), JSON.stringify(d.yardHealth));
@@ -144,21 +152,26 @@ check('daily: renamed/retired yards not listed anywhere', !JSON.stringify(d.yard
 check('daily: blocked yard listed as missing with its reason', d.yardHealth?.missing?.length === 1 && d.yardHealth.missing[0].name === 'Blocked Yard - Toledo' && /blocked/.test(d.yardHealth.missing[0].reason), JSON.stringify(d.yardHealth?.missing));
 check('daily: chain-wide freeze flagged same day (5 of 6 Big Chain yards stuck; Tiny Chain below the minimum)',
   JSON.stringify(d.yardHealth?.chainFrozen?.map((c) => [c.chain, c.stuck, c.total])) === JSON.stringify([['Big Chain', 5, 6]]), JSON.stringify(d.yardHealth?.chainFrozen));
-check('daily: chain freeze is an open issue with the chain name', d.openConditions?.some((c) => c.id === 'chain-frozen:Big Chain' && /5 of 6 yards/.test(c.title)), JSON.stringify(d.openConditions));
-check('daily: chain freeze in the email text', /CHAIN FEED FROZEN \(same-day\): Big Chain — 5 of 6 yards/.test(d.email?.text || ''));
+if (bigQuiet) {
+  check('daily: quiet chain (no full business day since) is NOT an open issue', !d.openConditions?.some((c) => c.id === 'chain-frozen:Big Chain'), JSON.stringify(d.openConditions));
+  check('daily: quiet chain listed as quiet in the email text', /Quiet since the last business day \(normal over a weekend or overnight, not an issue\): Big Chain — 5 of 6 yards/.test(text) && !/CHAIN FEED FROZEN/.test(text));
+} else {
+  check('daily: chain freeze is an open issue with the chain name', d.openConditions?.some((c) => c.id === 'chain-frozen:Big Chain' && /5 of 6 yards/.test(c.title)), JSON.stringify(d.openConditions));
+  check('daily: chain freeze in the email text', /CHAIN FEED FROZEN \(same-day\): Big Chain — 5 of 6 yards/.test(text));
+}
 check('daily: missing yard counted as an open issue', d.openConditions?.some((c) => c.id === 'yards-missing' && /Blocked Yard - Toledo/.test(c.title)), JSON.stringify(d.openConditions));
 check('daily: per-channel 24 h sends', d.channels?.['email:auth']?.ok === 1 && d.channels?.['email:auth']?.fail === 3 && d.channels?.['email:ops']?.ok === 4, JSON.stringify(d.channels));
 check('daily: audience counts', d.audience && ['proDevices', 'freeDevices', 'emailWatchers'].every((k) => Number.isInteger(d.audience[k])), JSON.stringify(d.audience));
 check('daily: usage loads', d.usage && !d.usage.error && Number.isInteger(d.usage.devices?.total) && typeof d.usage.funnel === 'object', JSON.stringify(d.usage));
-check('daily: open conditions', d.openConditions?.length === 4, JSON.stringify(d.openConditions));
-for (const sec of ['Verdict: 4 issues', 'OPEN ISSUES (4)', 'MISSING from the scan', 'Blocked Yard - Toledo', 'SCAN', 'Last commit:', 'Live: 3 yards · 1,541 vehicles', 'Watchdog:',
+check('daily: open conditions', d.openConditions?.length === NISSUES, JSON.stringify(d.openConditions));
+for (const sec of [`Verdict: ${NISSUES} issues`, `OPEN ISSUES (${NISSUES})`, 'MISSING from the scan', 'Blocked Yard - Toledo', 'SCAN', 'Last commit:', 'Live: 3 yards · 1,541 vehicles', 'Watchdog:',
   'YARD HEALTH', 'Dormant Yard - Orem', 'Frozen Yard - Provo', 'Re-serving last copy', 'Carried Yard - Bartow', 'SENDS, last 24 h', 'email:auth', 'Resend today (UTC): 5 / 100', 'USAGE', 'App devices:', 'Funnel (all platforms)', 'Purchases']) {
   check(`daily text has "${sec}"`, text.includes(sec));
 }
 check('daily text leaks no user email', !/tester\d@users/.test(text));
 const html = d.email?.html || '';
 check('daily html part present', html.startsWith('<!doctype html>') && html.length > 2000, String(html.length));
-for (const sec of ['YardScout daily', 'Open issues', 'Scan', 'Yard health', 'Alerts sent', 'Users', 'Funnel', '4 issues', 'missing from the scan', 're-serving last copy', 'Carried Yard - Bartow']) {
+for (const sec of ['YardScout daily', 'Open issues', 'Scan', 'Yard health', 'Alerts sent', 'Users', 'Funnel', `${NISSUES} issues`, 'missing from the scan', 're-serving last copy', 'Carried Yard - Bartow']) {
   check(`daily html has "${sec}"`, html.includes(sec));
 }
 check('daily html leaks no user email', !/tester\d@users/.test(html));

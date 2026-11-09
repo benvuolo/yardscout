@@ -49,6 +49,24 @@ const FROZEN_WEEKDAYS = 3;
 const CHAIN_MIN_YARDS = 5;
 const CHAIN_STUCK_SCANS = 6;      // one day of 4-hourly scans
 const CHAIN_FROZEN_SHARE = 0.8;
+/* Business days that passed in full between two instants: a weekday whose
+ * whole 14:00-22:00 UTC block (9 am-5 pm ET, 6 am-2 pm PT, when yards set
+ * cars out) lies inside the window. A chain unchanged only across a weekend
+ * or overnight has none: 2026-11-09's Monday email (13:07 UTC, data scraped
+ * 05:00 ET) listed 9 chains "frozen" since Saturday that were just quiet.
+ * Exported for the unit test. */
+const BIZ_START_H = 14, BIZ_END_H = 22;
+export function fullBusinessDaysBetween(fromMs, toMs) {
+  if (!(toMs > fromMs)) return 0;
+  let n = 0;
+  const d = new Date(fromMs); d.setUTCHours(0, 0, 0, 0);
+  for (; d.getTime() <= toMs; d.setUTCDate(d.getUTCDate() + 1)) {
+    const w = d.getUTCDay();
+    if (w === 0 || w === 6) continue;
+    if (d.getTime() + BIZ_START_H * H >= fromMs && d.getTime() + BIZ_END_H * H <= toMs) n++;
+  }
+  return n;
+}
 function weekdaysBetween(fromMs, toMs) {
   if (!(toMs > fromMs)) return 0;
   let n = 0;
@@ -443,9 +461,10 @@ function yardFlags(h) {
   missing.sort((a, b) => b.missingScans - a.missingScans);
   const chainFrozen = [...chains.values()]
     .filter((c) => c.total >= CHAIN_MIN_YARDS && c.stuck / c.total >= CHAIN_FROZEN_SHARE)
-    // Same-day detection stays, but a stuck window with no weekday in it is
-    // labelled as possibly just a quiet weekend (yards rarely post Sat/Sun).
-    .map((c) => ({ ...c, weekendOnly: !!c.since && weekdaysBetween(Date.parse(c.since), scraped) === 0 }))
+    // Same-day detection stays, but a chain unchanged only across a weekend
+    // or overnight (no full business day since) is "quiet": listed for
+    // information, not an issue. It becomes one once a business day passes.
+    .map((c) => ({ ...c, quiet: !!c.since && fullBusinessDaysBetween(Date.parse(c.since), scraped) === 0 }))
     .sort((a, b) => b.total - a.total);
   return { scrapedAt: h.scrapedAt || null, yards: Object.keys(h.yards).length, dormant, frozen, carried, missing, chainFrozen };
 }
@@ -521,9 +540,11 @@ function composeDaily(r) {
     L.push(`  Dormant, no new car in 120+ d: ${yh.dormant.length}${yh.dormant.length ? ' — ' + nameList(yh.dormant, (y) => `${y.name} (newest ${y.newestDateAdded})`) : ''}`);
     L.push(`  MISSING from the scan (users can't see them): ${yh.missing.length}${yh.missing.length ? ' — ' + nameList(yh.missing, (y) => `${y.name} (${y.reason}; ${y.missingScans} scans)`) : ''}`);
     L.push(`  Re-serving last copy (fetch returned nothing): ${yh.carried.length}${yh.carried.length ? ' — ' + nameList(yh.carried, (y) => `${y.name} (since ${String(y.lastChangedAt).slice(5, 10)})`) : ''}`);
-    if (yh.chainFrozen && yh.chainFrozen.length) {
-      L.push(`  CHAIN FEED FROZEN (same-day): ${yh.chainFrozen.map((c) => `${c.chain} — ${c.stuck} of ${c.total} yards unchanged since ${String(c.since || '').slice(5, 16)}${c.weekendOnly ? ' (weekend: may just be quiet)' : ''}`).join('; ')}`);
-    }
+    const chainLine = (c) => `${c.chain} — ${c.stuck} of ${c.total} yards unchanged since ${String(c.since || '').slice(5, 16)}`;
+    const frozenChains = (yh.chainFrozen || []).filter((c) => !c.quiet);
+    const quietChains = (yh.chainFrozen || []).filter((c) => c.quiet);
+    if (frozenChains.length) L.push(`  CHAIN FEED FROZEN (same-day): ${frozenChains.map(chainLine).join('; ')}`);
+    if (quietChains.length) L.push(`  Quiet since the last business day (normal over a weekend or overnight, not an issue): ${quietChains.map(chainLine).join('; ')}`);
     L.push(`  Frozen, unchanged 3+ weekdays at the source: ${yh.frozen.length}${yh.frozen.length ? ' — ' + nameList(yh.frozen, (y) => `${y.name} (${String(y.lastChangedAt).slice(5, 10)})`) : ''}`);
   } else {
     L.push(`YARD HEALTH: could not load yard_health.json (${(yh && yh.error) || 'unknown'})`);
@@ -703,9 +724,16 @@ export function composeDailyHtml(r) {
       parts.push(`<div style="font-size:14px;margin:10px 0 2px;color:${C.bad};"><strong>${yh.missing.length}</strong> missing from the scan <span style="color:${C.dim};">(users can't see these yards at all)</span></div>`);
       parts.push(hList(yh.missing.map((y) => `${esc(y.name)} <span style="color:${C.dim};">· ${esc(y.reason)} · gone ${y.missingScans} scans${y.count ? ` · had ${fmtInt(y.count)} cars` : ''}</span>`)));
     }
-    if (yh.chainFrozen && yh.chainFrozen.length) {
+    const chainItem = (c) => `${esc(c.chain)} <span style="color:${C.dim};">· ${c.stuck} of ${c.total} yards · since ${esc(String(c.since || '').slice(5, 16))}</span>`;
+    const frozenChains = (yh.chainFrozen || []).filter((c) => !c.quiet);
+    const quietChains = (yh.chainFrozen || []).filter((c) => c.quiet);
+    if (frozenChains.length) {
       parts.push(`<div style="font-size:14px;margin:10px 0 2px;color:${C.bad};"><strong>Chain feed frozen</strong> <span style="color:${C.dim};">(most of a chain's yards unchanged for a day: their system, not ours)</span></div>`);
-      parts.push(hList(yh.chainFrozen.map((c) => `${esc(c.chain)} <span style="color:${C.dim};">· ${c.stuck} of ${c.total} yards · since ${esc(String(c.since || '').slice(5, 16))}</span>`)));
+      parts.push(hList(frozenChains.map(chainItem)));
+    }
+    if (quietChains.length) {
+      parts.push(`<div style="font-size:14px;margin:10px 0 2px;"><strong>${quietChains.length}</strong> chain${quietChains.length === 1 ? '' : 's'} quiet since the last business day <span style="color:${C.dim};">(normal over a weekend or overnight, not an issue)</span></div>`);
+      parts.push(hList(quietChains.map(chainItem)));
     }
     if (yh.carried.length) {
       parts.push(`<div style="font-size:14px;margin:10px 0 2px;color:${C.bad};"><strong>${yh.carried.length}</strong> re-serving last copy <span style="color:${C.dim};">(our fetch returned nothing — check the adapter or the source)</span></div>`);
@@ -965,7 +993,8 @@ export async function buildDailyReport(env, { now = Date.now() } = {}) {
   }
   if (yardHealth && yardHealth.chainFrozen && yardHealth.chainFrozen.length) {
     for (const c of yardHealth.chainFrozen) {
-      conds.push({ id: 'chain-frozen:' + c.chain, title: `${c.chain}'s feed looks frozen: ${c.stuck} of ${c.total} yards unchanged since ${String(c.since || '').slice(0, 16)}${c.weekendOnly ? ' (weekend: may just be quiet)' : ''}` });
+      if (c.quiet) continue;   // weekend / overnight lull: listed in YARD HEALTH, not an issue
+      conds.push({ id: 'chain-frozen:' + c.chain, title: `${c.chain}'s feed looks frozen: ${c.stuck} of ${c.total} yards unchanged since ${String(c.since || '').slice(0, 16)}` });
     }
   }
   if (watchCheck && !watchCheck.error && watchCheck.newlyOrphaned.length) {
