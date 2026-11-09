@@ -72,5 +72,18 @@ ok("wheel_width_conflict" in src and "wheel_spare_description" in src, "width co
 ok(policy.WHEELS_AUDITED_NS == frozenset({"mopar"}) and "wheels_not_audited" in src,
    "wheels publish only in audited namespaces (mopar, 2026-11-09)")
 
+# MB / VW census (2026-11-09)
+B = policy.WHEEL_BODY_RE
+ok({m.group(1).lower() for m in B.finditer("Wagon, 5 Spoke, With Grooved Spokes, 17X7")} == {"wagon"}
+   and {m.group(1).lower() for m in B.finditer('17", 5 Double Spokes, Type 1;Coupe')} == {"coupe"},
+   "body words read: Jetta 'Wagon' vs Beetle 'Coupe' (1J0-601-025-AB-Z31)")
+SP = policy.WHEEL_SPOKE_RE
+ok({m.group(1) for m in SP.finditer('17", 10 Spoke')} == {"10"} and {m.group(1) for m in SP.finditer('17", 8 Spoke, Porto')} == {"8"}
+   and {m.group(1) for m in SP.finditer("5 Double Spokes")} == {"5"}, "spoke counts read (5K0-601-025-AN-8Z8)")
+AX = policy.WHEEL_AXLE_RE
+ok(bool(AX.search("Front, Type #11, 7.5X17")) and bool(AX.search("Rear")) and not AX.search("Frontier")
+   and not AX.search("Steel Wheels, 16x6.5"), "axle-limited notes seen; 'Frontier' is not")
+ok(all(x in src for x in ["wheel_axle_limited", "wheel_body_conflict", "wheel_design_conflict"]), "MB/VW rules wired")
+
 print("OK" if not fails else f"{len(fails)} FAIL")
 sys.exit(1 if fails else 0)

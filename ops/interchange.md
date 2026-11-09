@@ -2962,3 +2962,14 @@ each); nothing allowlisted or crawled.
   - New WHEELS_AUDITED_NS = {mopar}. hmg (17), mb (14) and vag (5) wheels groups from today's tier W crawl are refused `wheels_not_audited` until their own §11.4 round.
   - Payload: new lazy file docs/data/oem/wheels.json (29 groups). interchange.json changes only builtAt, oemStatus and the oemLazy index.
   - pf_guards_unit: the wheels block now loads an empty wheels lazy file. New check: a shipped wheels group adds the cross-model donor as Likely.
+- 2026-11-09 ~23:20 UTC, MB + VW wheels §11.4 census (separate verifier, 37 reads via fetch.py --max-lines 20000, 0 refusals; raw cdc18a67): 19 groups, 17 OK / 1 WRONG / 1 UNSURE.
+  - WRONG: 1J0-601-025-AB-Z31. Jetta 2003 "Wagon, ... 17X7" vs Beetle 2003 "Coupe"; the Jetta row is wagon-only.
+  - UNSURE: 5K0-601-025-AN-8Z8. GTI "17\", 10 Spoke" vs Golf "17\", 8 Spoke, Porto".
+  - Also flagged: front-only / rear-only staggered W204 C-Class wheels.
+  - Fix (group rules; they only remove claims):
+    - body words in the own-page notes must be identical on every app page (wheel_body_conflict);
+    - stated spoke counts must agree (wheel_design_conflict);
+    - a Front/Rear axle note refuses the group (wheel_axle_limited): the finder has no axle field for wheels.
+  - Result: mb 10 groups / 243 cars, vag 3 / 117, all census OK, no new groups. Mopar 29 -> 28: 5105691AB (Sebring 2008 note adds "Convertible", Avenger 2013 doesn't) is refused by the body rule. Conservative.
+  - Not shipped yet: WHEELS_AUDITED_NS still {mopar}; needs hub confirmation, then one push (policy + all namespaces re-curated + payload).
+  - hmg (Hyundai/Kia) waits for its crawl (run 42684614492) to finish.
