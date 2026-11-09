@@ -159,3 +159,8 @@ Second pass (2026-11-09, after the hub's HOLD on Spectra; same criteria):
 Spectra Premium is ON HOLD (hub, 2026-11-09 ~18:48 UTC): the reCAPTCHA marker in
 fetch.CHALLENGE_RE and the Legal Notice's no-reproduction clause go to the owner.
 Not allowlisted, fetch.py unchanged, not crawled.
+
+**Spectra Premium: OUT (owner decision relayed by the hub, 2026-11-09 ~19:41 UTC:
+"no email needed").** No outreach. `fetch.py` and `fetch.ALLOWED` stay
+unchanged. `aftermarket/spectrapremium.py` stays on main unused; it may not
+be run against the site unless the owner reverses this.

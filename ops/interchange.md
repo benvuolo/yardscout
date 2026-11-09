@@ -2552,7 +2552,12 @@ allowlisted, fetch.py unchanged, no crawl. Second probe pass (CSF, OSC,
 Eagle Eye, Koyorad, Nissens): none usable (SOURCES.md). Session stopped
 here.
 
-**Next (only after the owner's answer):** crawl -> `groups_spectra` curation (one Likely group per Spectra
+**Owner decision (relayed by the hub, ~19:41 UTC): "no email needed".**
+Spectra stays OUT and gets no outreach. fetch.py and fetch.ALLOWED are
+unchanged. The adapter stays on main, unused. No aftermarket source passed
+this round. Session closed.
+
+**(Superseded) plan had Spectra been allowed:** crawl -> `groups_spectra` curation (one Likely group per Spectra
 pn x line; engine gate on Eng. Desg./liters; body gate on Body Type; refuse
 other notes) -> §11.4 sample per line -> hub -> branch
 interchange/aftermarket-1 for any app change. Nothing shipped.
