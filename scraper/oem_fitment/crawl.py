@@ -226,7 +226,7 @@ def main() -> None:
     deadline = time.time() + a.minutes * 60 if a.minutes else None
     site = a.site
     mod = module_for(site)
-    tiers = ["A", "B", "C", "W"] if a.tier == "all" else [a.tier]
+    tiers = ["A", "B", "W", "C"] if a.tier == "all" else [a.tier]
     raw_dir = ROOT / "raw"
     raw_dir.mkdir(exist_ok=True)
     wl_all = json.loads((ROOT / "worklist.json").read_text()).get("sites", {})

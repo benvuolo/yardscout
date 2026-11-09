@@ -8078,7 +8078,10 @@
    "complete": {
     "file": "completion/hmg.own_page.json",
     "version": 1
-   }
+   },
+   "wheels": true,
+   "version": 2,
+   "wheels_note": "2026-11-09: tier W (wheels) added; uses the Hyundai rules (2013 Optima chassis/wheel_cap read through fetch.py: same names). Version raised so the done site re-opens and crawls wheels only."
   },
   "www.infinitipartsdeal.com": {
    "cars": 3383,

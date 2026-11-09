@@ -148,11 +148,13 @@ PARTS = {
     "strut": (r"(?!x)x", ""),
     # tier W: 2005 XG350 chassis/wheel_cap (fetch.py 2026-11-09) prints "Wheel Assy-Aluminium"
     # beside "Wheel Assy-Temporary" (the spare), "Cap Assy-Wheel Hub", "Nut-Hub" and
-    # "Clamp-Spare Tire". Road wheels only: a spare / temporary / compact word
-    # anywhere on the row (name, remark, fit note) drops it.
+    # "Clamp-Spare Tire". Road wheels only: a spare / temporary / compact word in
+    # the part's own name or remark drops it. The Fit Note is NOT read for this:
+    # it lists the car's options, and road wheels print "TEMPORARY - STEEL WHEEL
+    # & TIRE (MINI)" there (2013 Optima 529102T650, Require Quantity 4).
     "wheels": (r"^Wheel Assy-(Aluminium|Aluminum|Alloy|Steel|Chrome|Forged)\b|^Wheel Assy\s*\|",
-               r"Cap|Cover|Nut|Bolt|Stud|Lock|Weight|Valve|Sensor|TPMS|Ornament|Emblem|Insert|Hub|Kit|Balance|Tire",
-               r"\b(Temporary|Temp|Spare|Compact|T-?Type|Space ?Saver)\b"),
+               r"Cap|Cover|Nut|Bolt|Stud|Lock|Weight|Valve|Sensor|TPMS|Ornament|Emblem|Insert|Hub|Kit|Balance|Tire|"
+               r"\b(?:Temporary|Temp|Spare|Compact|T-?Type|Space ?Saver)\b"),
 }
 
 # Older catalogs spell "Assembly" where newer ones print "Assy".

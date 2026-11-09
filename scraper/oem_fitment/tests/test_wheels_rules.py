@@ -25,8 +25,7 @@ ok(crawl.TIERS.get("W") == ["wheels"], "crawl tier W = [wheels]")
 wl = json.loads((ROOT / "worklist.json").read_text())["sites"]
 on = sorted(s for s, e in wl.items() if e.get("wheels"))
 ok(on == ["www.fordpartsgiant.com", "www.gmpartsgiant.com", "www.hyundaipartsdeal.com", "www.jeeppartsdeal.com",
-          "www.lexuspartsnow.com", "www.mbpartsgiant.com", "www.vwpartsgiant.com"], f"wheels sites {on}")
-ok(not any(wl[s].get("wheels") for s in wl if "kia" in s), "Kia not on tier W (reuses Hyundai rules; not asked yet)")
+          "www.kiapartsnow.com", "www.lexuspartsnow.com", "www.mbpartsgiant.com", "www.vwpartsgiant.com"], f"wheels sites {on}")
 ok(not any(wl[s].get("wheels") for s in wl if re.search(r"honda|acura|nissan|infiniti|mopar|subaru", s)),
    "no wheels tier on Honda/Acura/Nissan/Infiniti (other session), Mopar (blocked), Subaru (withheld)")
 
@@ -86,7 +85,16 @@ for n in ["Wheel Assy-Aluminium", "Wheel Assy-Steel"]:
 for n in ["Wheel Assy-Temporary", "Cap Assy-Aluminium Wheel Hub", "Cap Assy-Wheel Hub", "Nut-Hub",
           "Clamp-Spare Tire", "Pad-Spare Tire", "Wheel Assy-Steel(Spare)", "Sensor Assy-Tpms"]:
     ok(not pg_keep(H.CFG, "wheels", n), f"hyundai drops {n!r}")
-ok(not pg_keep(H.CFG, "wheels", "Wheel Assy-Steel", info=["Fit Note: Spare"]), "hyundai drops a steel wheel noted as spare")
+# real 2013 Optima (kiapartsnow, same rules) road wheel: the Fit Note lists the
+# car's options, including its mini spare; the row is a road wheel (Require Quantity 4)
+OPT_NOTE = ("Fit Note: 225 TIRE - 225/45 R18 / AL WHEEL 7.5J * 18 - B TYPE / FR BRAKE - DISC-17 INCH / "
+            "TEMPORARY - STEEL WHEEL & TIRE (MINI) / TIRE PRESSURE MONITORG SYS - LOW LINE")
+ok(pg_keep(H.CFG, "wheels", "Wheel Assy-Aluminium", info=[OPT_NOTE, "Require Quantity: 4"]),
+   "hyundai/kia keep a road wheel whose Fit Note mentions the car's temporary spare")
+ok(not pg_keep(H.CFG, "wheels", "Wheel Assy-Temporary", info=[OPT_NOTE]), "hyundai/kia drop 'Wheel Assy-Temporary'")
+from sites import kiapartsnow as K  # noqa: E402
+ok(K.CFG.parts["wheels"] is H.PARTS["wheels"] and K.CFG.subcats["wheels"] == H.SUBCATS["wheels"],
+   "kia reads the Hyundai wheels rules")
 ok(re.search(H.SUBCATS["wheels"], "wheel_cap") and not re.search(H.SUBCATS["wheels"], "wheel_kit_alloy"),
    "hyundai wheels subcat chassis/wheel_cap only")
 
