@@ -435,8 +435,8 @@ CATS = {c["id"]: c for c in _p0["categories"]}
 PC = js.INTERCHANGE_PART_CATEGORIES
 
 check("payload ships schemaVersion 2", _p0["schemaVersion"] == 2)
-check("29 categories ship (25 P0 + 4 intake/P1 lights-up)",
-      len(CATS) == 29, str(len(CATS)))
+check("30 categories ship (25 P0 + 4 intake/P1 lights-up + wheels)",
+      len(CATS) == 30, str(len(CATS)))
 _P0_NEW = ["engine-assembly", "ignition-coils", "transmission-auto", "ecm",
            "radio", "front-seats", "door-front", "fender", "hood",
            "bumper-front", "grille", "trunk-lid", "liftgate"]
@@ -1141,6 +1141,66 @@ check("§23.6 HD donor never verified against a 1500 seeker",
             (2005, "Chevrolet", "Silverado 2500HD")) != "verified"
       and _tier("gm-gen3-truck", "alternator", (2005, "Chevrolet", "Silverado 1500"),
                 (2004, "GMC", "Sierra 1500")) == "verified")
+
+# --- Wheels (ops/interchange.md "Wheels") ---------------------------------
+import json
+import re
+from pathlib import Path
+ROOT = Path(__file__).resolve().parent.parent
+_W = js.INTERCHANGE_PART_CATEGORIES["wheels"]
+_WPAY = next(c for c in js.build_interchange_payload()["categories"] if c["id"] == "wheels")
+check("wheels: body kind, perEach exported, every price token a plain string",
+      _W["kind"] == "body" and _WPAY.get("perEach") is True
+      and all(isinstance(t, str) for t in _W["priceTokens"]))
+check("wheels: no platform family names a wheel (no cross-model claim)",
+      js._category_for_part_name("Steering wheel") != "wheels"
+      and not any(c == "wheels" for c in
+                  (js._category_for_part_name(g["part"])
+                   for f in js.PLATFORM_FAMILIES.values() for g in f["shared"])))
+
+
+def _wheel_rows(path):
+    d = json.loads(Path(path).read_text())
+    out = []
+
+    def walk(o, k=None):
+        if isinstance(o, dict):
+            if "description" in o and "price" in o:
+                out.append(str(o["description"]))
+                return
+            if "price" in o and k and not isinstance(o.get("price"), dict):
+                out.append(str(k))
+                return
+            for kk, v in o.items():
+                walk(v, kk)
+        elif isinstance(o, list):
+            for v in o:
+                walk(v)
+    walk(d)
+    return out
+
+
+def _first_tier(rows, toks):
+    """Mirror of the app's ordered quote (yardPartQuote): the first token
+    with any hit wins; '=' demands the exact row name."""
+    for t in toks:
+        ex = t.startswith("=")
+        n = t[1:] if ex else t
+        hits = [r for r in rows if (r.lower().strip() == n if ex else n in r.lower())]
+        if hits:
+            return hits
+    return []
+
+
+_BAD = re.compile(r"tire|casing(?! ?no)|set\b|dual|1 ton|2 ton|8 ?lug|heavy|steel|\bstl\b|scrap|mtr cyc|"
+                  r"cap|cover|spacer|bearing|steer", re.I)
+_priced = 0
+for _p in sorted((ROOT / "docs" / "data").glob("*_pricing.json")):
+    _hits = _first_tier(_wheel_rows(_p), [t.lower() for t in _W["priceTokens"]])
+    _priced += bool(_hits)
+    check(f"wheels price rows at {_p.stem} are alloy rim-only rows",
+          not any(_BAD.search(re.sub(r"(?i)no (casing|tire)", "", h)) for h in _hits), str(_hits))
+check("wheels: most yard lists price an alloy wheel", _priced >= 20, str(_priced))
 
 print()
 if FAILS:

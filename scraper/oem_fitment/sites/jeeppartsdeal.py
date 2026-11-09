@@ -45,6 +45,8 @@ MODEL_SLUGS = {
 }
 
 CAT_PAGES = {
+    # tier W (ops/interchange.md "Wheels"): the years manifest lists suspension/wheels
+    "wheels": r"^suspension/wheels$",
     "alternator": r"^charging-starting/alternator$",
     "starter": r"^charging-starting/starter$",
     "ac-compressor": r"^a-c-heating/(a-c-compressor|a-c-condenser-compressor-lines)$",
@@ -122,6 +124,10 @@ RULES = {
                  r"hinge|latch|glass|handle|bumper|strap|check|support|cable|link|lock|striker|weather|carrier|trim|panel|cylinder|stop|actuator|module|switch|lamp|emblem|nameplate|molding|applique|cover|bar"),
     "liftgate": (rf"^(liftgate|lift\s+gate|door{D}liftgate)\b",
                  r"handle|bar|striker|latch|cylinder|link|weather|propeller|gas|hinge|glass|motor|wiper|spoiler|lamp|trim|molding|applique|switch|strut|cable|support|module|panel|actuator|lock|bumper|emblem|nameplate|camera|release|check|cover|shield|silencer|insulator|pad|garnish"),
+    # tier W: road wheels only (Mopar "Wheel - Aluminum", "Wheel, Steel");
+    # no spare / temporary / compact wheel, cap, cover, nut, lock or sensor
+    "wheels": (rf"^wheel(\s+assembly)?({D}(aluminum|alloy|steel|chrome|painted|polished|forged|cast)\b|$|{D}front|{D}rear)",
+               r"cap|cover|nut|bolt|stud|lock|weight|valve|sensor|ornament|emblem|insert|spare|temporary|compact|carrier|bearing|hub|kit|liner|flare|opening|molding|trim|balance|tire"),
 }
 
 NOTES = {

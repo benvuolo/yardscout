@@ -2122,7 +2122,10 @@
      "cars": 66,
      "seed_year": 1981
     }
-   ]
+   ],
+   "wheels": true,
+   "version": 2,
+   "wheels_note": "2026-11-09: tier W (wheels) added; version raised so the site re-opens and crawls wheels only (A/B seeds are skipped through progress.json done keys)."
   },
   "www.gmpartsgiant.com": {
    "cars": 78432,
@@ -7594,8 +7597,10 @@
      "seed_year": 2004
     }
    ],
-   "version": 2,
-   "version_note": "2026-11-05 v2: Dodge/Chrysler/Ram segments (copied from the moparpartsgiant worklist, same feed segments and seed years; Plymouth left out: no Plymouth fitment rows on this site). v1 (Jeep only) finished as raw/www.jeeppartsdeal.com.done, kept on oem-raw; v2 finishes as raw/www.jeeppartsdeal.com.v2.done (markers.py). Jeep seeds are skipped through progress.json done keys."
+   "version": 3,
+   "version_note": "2026-11-05 v2: Dodge/Chrysler/Ram segments (copied from the moparpartsgiant worklist, same feed segments and seed years; Plymouth left out: no Plymouth fitment rows on this site). v1 (Jeep only) finished as raw/www.jeeppartsdeal.com.done, kept on oem-raw; v2 finishes as raw/www.jeeppartsdeal.com.v2.done (markers.py). Jeep seeds are skipped through progress.json done keys.",
+   "wheels": true,
+   "wheels_note": "2026-11-09: tier W (wheels) added; version raised so the site re-opens and crawls wheels only (A/B seeds are skipped through progress.json done keys)."
   },
   "www.kiapartsnow.com": {
    "cars": 9530,
@@ -8971,7 +8976,10 @@
      "cars": 16,
      "seed_year": 2002
     }
-   ]
+   ],
+   "wheels": true,
+   "version": 2,
+   "wheels_note": "2026-11-09: tier W (wheels) added; version raised so the site re-opens and crawls wheels only (A/B seeds are skipped through progress.json done keys)."
   },
   "www.audipartsgiant.com": {
    "cars": 2271,

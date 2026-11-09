@@ -71,7 +71,9 @@ ok(nav_err("Dodge", "Caravan/Grand Caravan", 2005), "combined feed name is not o
 ok(nav_err("Dodge", "Ram Van", 2001), "1999-2003 vans are 1500/2500/3500")
 _wl = json.loads((Path(__file__).resolve().parent.parent / "worklist.json").read_text())["sites"][J.SITE]
 _mk = {s["make"] for s in _wl["segments"]}
-ok(_wl.get("version") == 2 and _mk == {"Jeep", "Dodge", "Chrysler", "Ram"}, f"worklist v2 makes {_mk}")
+# v2 added Dodge/Chrysler/Ram; v3 (2026-11-09) re-opens the site for tier W (wheels) only
+ok(_wl.get("version") == 3 and _wl.get("wheels") is True and _mk == {"Jeep", "Dodge", "Chrysler", "Ram"},
+   f"worklist v3 (wheels) makes {_mk}")
 ok(all(s["make"] in J.URL_MAKE for s in _wl["segments"]), "every worklist make has a URL make")
 ok(all(s["site"] == J.SITE for s in _wl["segments"]), "segments name this site")
 ok(_wl["segments"][0]["make"] == "Jeep", "Jeep (v1, done) segments stay first and unchanged")

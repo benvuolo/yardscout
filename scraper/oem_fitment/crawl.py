@@ -48,6 +48,9 @@ TIERS = {
     "B": ["gauge-cluster", "ignition-coils", "radiator", "door-front", "door-rear",
           "hood", "fender", "bumper-front", "bumper-rear", "grille", "trunk-lid",
           "tailgate", "liftgate"],
+    # Wheels (ops/interchange.md "Wheels"): only sites whose worklist entry
+    # says "wheels": true; done keys are per tier, so A/B work is not redone.
+    "W": ["wheels"],
 }
 MAX_SEEDS = 3
 CHAIN_DEPTH = 4            # R4: replaces / replaced_by hops from a listed record
@@ -212,7 +215,7 @@ def main() -> None:
     deadline = time.time() + a.minutes * 60 if a.minutes else None
     site = a.site
     mod = module_for(site)
-    tiers = ["A", "B"] if a.tier == "all" else [a.tier]
+    tiers = ["A", "B", "W"] if a.tier == "all" else [a.tier]
     raw_dir = ROOT / "raw"
     raw_dir.mkdir(exist_ok=True)
     wl_all = json.loads((ROOT / "worklist.json").read_text()).get("sites", {})
@@ -651,6 +654,8 @@ def main() -> None:
         if a.max_segments:
             wl = wl[: a.max_segments]
         for tier in tiers:
+            if tier == "W" and not wl_site.get("wheels"):
+                continue  # no wheel rules for this site's module
             cats = TIERS[tier]
             for seg in wl:
                 make, model = seg["make"], seg["model"]

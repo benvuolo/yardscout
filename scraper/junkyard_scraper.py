@@ -9247,6 +9247,50 @@ INTERCHANGE_PART_CATEGORIES: dict[str, dict] = {
                   "tow-hitch cutouts differ by trim — count the holes "
                   "before you pull."],
         "rowWarn": "match paint code + sensor/hitch cutouts"},
+    # Wheels (owner 2026-11-09: "start on ... wheels"; ops/interchange.md
+    # "Wheels"). Same-model generation donors only, always Likely: no
+    # platform group names a wheel, and the OEM wheel crawl's groups ship
+    # only after the owner's go. Wheels stay an `option` row in the car-card
+    # parts table ($0 to ranking); this category only finds donors.
+    # tokens locate the donor's own wheel-set option row ("17\"/18\" Alloy
+    # Wheels (set)", "TRD Wheels (set)") without "steering wheel" or the
+    # "Red Line Trim + Wheels" trim kits.
+    # priceTokens: one ALLOY wheel, rim only, each spelling its own tier.
+    # Left out on purpose: tire+wheel combos and sets, dually / 1-ton /
+    # 8-lug / heavy-truck and motorcycle rows, "scrap as-is", and steel
+    # rows (a steel price is not the price of an alloy wheel; a steel-only
+    # list reads "not listed, ask at the counter").
+    # perEach: yard rows price ONE wheel while the donor's value row is a
+    # set of 4, so the finder shows "each" and no savings line.
+    "wheels": {
+        "label": "Wheels", "kind": "body",
+        "tokens": ["alloy wheels", "wheels ("], "priceTokens": [
+            "=wheel aluminum", "=aluminum wheel", "=wheel-alum.",
+            "=alum rim - any", "=wheel aluminum/chrom",
+            "wheel rim only: aluminum", "wheel (aluminum", "wheel - aluminum",
+            "wheel-aluminum", "wheel - alum.", "wheel aluminum/ chrome 4-6 lug",
+            "wheel alum no casing", "\"- wheel aluminum", "\"+wheel aluminum",
+            "wheel alum 1", "wheel alum under", "wheel alum over",
+            "wheel alm - ", "rim aluminum", "rim  aluminum"],
+        "notes": [
+            "Count the lugs first: 2WD/4WD and heavy-duty versions of one "
+            "model can use a different bolt pattern. Then read the size on "
+            "the back of a spoke (e.g. 17x7J, ET45 = offset) and check the "
+            "hub bore.",
+            "The donor's tire size (e.g. 225/45R17) gives the diameter at a "
+            "glance. Skip compact spares. Check for curb rash, bends, cracks "
+            "and plugged valve holes.",
+            "Most 2008+ cars have a TPMS sensor in each wheel: keep it "
+            "(sensors resell) and match your car's sensor frequency. Bring a "
+            "lug socket; locking lug nuts need the key (glovebox or "
+            "console). Some yards price center caps separately.",
+            "Yard price = one alloy wheel, no tire. The yard's own row is "
+            "shown next to it: where the list prices by size, check the size "
+            "tier against your wheel (a 15\" row doesn't price an 18\" "
+            "wheel). Online values are for a set of 4.",
+        ],
+        "rowWarn": "count the lugs; read the size on the back (e.g. 17x7J), offset and hub bore",
+        "perEach": True},
 }
 
 # Default caveat lines — families override where the family has a sharper one.
@@ -14146,7 +14190,8 @@ def build_interchange_payload(lazy_out: dict | None = None) -> dict:
          "tokens": pc["tokens"], "priceTokens": pc["priceTokens"],
          **({"notes": pc["notes"]} if pc.get("notes") else {}),
          **({"rowWarn": pc["rowWarn"]} if pc.get("rowWarn") else {}),
-         **({"noValue": True} if pc.get("noValue") else {})}
+         **({"noValue": True} if pc.get("noValue") else {}),
+         **({"perEach": True} if pc.get("perEach") else {})}
         for cid, pc in INTERCHANGE_PART_CATEGORIES.items()
     ]
     fams = []

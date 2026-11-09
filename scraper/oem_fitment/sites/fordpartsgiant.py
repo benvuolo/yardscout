@@ -65,6 +65,9 @@ SUBCATS = {
     "trunk-lid": r"luggage_compartment|deck_lid|trunk",
     "tailgate": r"tail_?gate|pick_up_box|pickup_box",
     "liftgate": r"luggage_compartment_door|lift_?gate|back_door|tail_?gate",
+    # tier W (ops/interchange.md "Wheels"): chassis/wheels and
+    # wheels_brakes/wheels_related_parts, as the oem-raw years manifest lists them
+    "wheels": r"^wheels(_related_parts)?$",
 }
 SUBCAT_EXCL = {
     "side-mirrors": r"inside",
@@ -101,10 +104,13 @@ BASE = {
     "trunk-lid": r"40110",
     "tailgate": r"40700",
     "liftgate": r"40010",
+    "wheels": r"1007",
 }
 # Names that are never the assembly even when the base matches.
 NAME_EXCL = re.compile(r"\b(Glass|Lens|Bulb|Bezel|Cover - Mirror|Gasket|Seal|Kit - Seal|Pulley|Clutch|"
                        r"Bracket|Moulding|Applique|Emblem|Reinforcement|Support|Absorber|Isolator)\b", re.I)
+
+WHEEL_EXCL = re.compile(r"\b(?:cap|cover|nut|bolt|stud|lock|weight|valve|sensor|ornament|emblem|insert|spare|temporary|compact|carrier|bearing|hub|kit|liner|flare|opening|molding|moulding|trim|balance|tire)", re.I)
 
 
 def _base(pn: str) -> str:
@@ -125,6 +131,12 @@ def _rule(cat: str):
         m = NAME_EXCL.search(f"{r['group']} | {r['main']}")
         if m:
             return f"rule:{m.group(0).lower()}"
+        if cat == "wheels":
+            # wheel assemblies only: no spare / temporary / compact wheel,
+            # cap, cover, nut, lock, weight, valve or TPMS sensor
+            m = WHEEL_EXCL.search(f"{r['group']} | {r['main']} | {r.get('remark') or ''}")
+            if m:
+                return f"rule:{m.group(0).lower()}"
         if cat == "window-switch":
             # driver master switch only: not the passenger/rear single switch
             m = re.search(r"Single|Location: Passenger Side(?!/)|Location: Rear|\bRear\b", text)

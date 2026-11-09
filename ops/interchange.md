@@ -1913,3 +1913,24 @@ All verdicts are ADVISORY. Nothing was shipped and nothing reads the allowlist y
   re-shipped and they still match. Gates: V12-V15, parity 6/6, V9 0 flips,
   payload ok x7 (0 Verified), curation_tests 15/15, tests 29/29,
   scraper/test_*.py, pf_guards_unit.
+
+## Wheels (session_016ZzJfL4wG1wgpyYymW2Z28, 2026-11-09; branch interchange/wheels, applied and pushed by the hub)
+
+Owner: "Yes relabel those, and start on Honda/Nissan and wheels". The hub approved the proposal on these bases:
+- (b) Shipped on this branch.
+  - What: a `wheels` body category, same model + same generation donors only, always Likely.
+  - Row check: "count the lugs; read the size on the back (e.g. 17x7J), offset and hub bore". 2WD/4WD and HD versions can differ in bolt pattern within a generation.
+  - Notes: TPMS ("most 2008+ cars have one"), lug nuts and lock key, no compact spares, curb rash, and tire size gives the diameter.
+  - Price: one ALLOY wheel, rim only. It reads "Yard: $X each (YARD ROW NAME)" so the size tier is visible. There's no savings line, because online values are for a set of 4.
+  - Price-token coverage: 24 of 30 yard lists. Combos, sets, steel, dually and scrap rows never match.
+  - Wheels stay an `option` row in the car-card parts table: $0 to ranking.
+  - Example: 2009 Camry near 85003 → 27 Likely donors.
+- (a) OEM wheel part numbers: crawl tier "W" (crawl.py TIERS["W"]=["wheels"]). It runs only for worklist sites with "wheels": true.
+  - Rules exist for fordpartsgiant (base 1007, subcats wheels/wheels_related_parts), jeeppartsdeal (suspension/wheels; worklist v3) and lexuspartsnow (disc_wheel_wheel_cap, "WHEEL, DISC").
+  - Spare, temporary, compact wheels, caps, nuts, locks, weights, valves and TPMS sensors are excluded.
+  - Audit risk: Toyota/Lexus spares are also "WHEEL, DISC". Curation must check remarks or own pages for T-type spares.
+  - Groups publish only after a §11.4 sample with 0 WRONG and hub confirmation.
+- (c) Spec matching (bolt pattern / bore / offset): NO. No source passes rule 2 with a stated basis. vPIC has no bolt pattern.
+- Not yet covered: GM, VW, MB, Hyundai rules, the no-manifest makes, and Honda/Acura/Nissan/Infiniti (another session). Mopar's moparpartsgiant is blocked, and Subaru is withheld.
+- Tests: pf_guards_unit ALL PASS; test_interchange pass (30 categories); oem_fitment tests 30/30; curation_tests pass; scraper/test_*.py pass.
+- Patch transfer: the originating session couldn't push. The hub applied its diff on 533b3c1. Unicode escapes in app.js were restored, and the wheels entry in interchange.json was regenerated with build_interchange_payload().

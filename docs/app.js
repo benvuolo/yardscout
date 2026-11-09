@@ -7279,7 +7279,7 @@ function pfRunBrowse(s) {
       const v = r.v;
       const quote = yardPartQuote(v.location, quoteVariants);
       const priceHtml = quote.status === 'priced'
-        ? `<span class="pf-yard-price" title="${escapeHtml(quote.part)} — from the yard\u2019s own published price list">Yard: $${quote.price.toFixed(2)}${quote.core > 0 ? ` <span style="font-weight:400;color:var(--text-dim);">+ $${quote.core.toFixed(2)} core</span>` : ''}</span>`
+        ? `<span class="pf-yard-price" title="${escapeHtml(quote.part)} — from the yard\u2019s own published price list">Yard: $${quote.price.toFixed(2)}${pfCat.perEach ? ` each <span class="pf-price-row" style="font-weight:400;color:var(--text-dim);">(${escapeHtml(quote.part)})</span>` : ''}${quote.core > 0 ? ` <span style="font-weight:400;color:var(--text-dim);">+ $${quote.core.toFixed(2)} core</span>` : ''}</span>`
         : `<span class="pf-ebay">${quote.status === 'not-listed' ? 'not on the yard\u2019s published list — ask at the counter' : 'yard posts prices in-store only'}</span>`;
       const worthHtml = (!pfCat.noValue && r.hit)
         ? (unlocked
@@ -7288,7 +7288,7 @@ function pfRunBrowse(s) {
         : '';
       // Buyer's savings line — only when BOTH sides are real: a published
       // yard price and a value band (Pro; free users would back the band out).
-      const saveHtml = (unlocked && !pfCat.noValue && r.hit && quote.status === 'priced' && r.hit.high - quote.price > 0)
+      const saveHtml = (unlocked && !pfCat.noValue && !pfCat.perEach && r.hit && quote.status === 'priced' && r.hit.high - quote.price > 0)
         ? `<span class="pf-save" title="What you\u2019d save over buying this part used online — if the part on this car is good">Save ~${formatPrice(Math.max(0, Math.round(r.hit.low - quote.price)))}&ndash;${formatPrice(Math.round(r.hit.high - quote.price))}</span>`
         : '';
       return pfDonorCardHtml(r, 'pf-browse' + (r.badge ? ' pf-vin' : ''), r.badge, `${worthHtml}${priceHtml}${saveHtml}`);
@@ -7483,7 +7483,7 @@ function pfWatchClick(btn) {
   else if (r === 'no-zip') alert('Set your zip code up top first, so the watch knows where "near you" is.');
 }
 /* Start screen tiles: the common carry-out parts, one tap each. */
-const PF_TILES = ['alternator', 'starter', 'headlights', 'tail-lights', 'side-mirrors', 'front-seats', 'window-regulator', 'gauge-cluster'];
+const PF_TILES = ['alternator', 'starter', 'headlights', 'tail-lights', 'side-mirrors', 'front-seats', 'window-regulator', 'gauge-cluster', 'wheels'];
 function pfRenderTiles() {
   const box = document.getElementById('pf-tiles');
   if (!box || !interchangeData) return;
@@ -7840,7 +7840,7 @@ function pfRunSearch() {
     const v = r.v;
     const quote = yardPartQuote(v.location, quoteVariants);
     const priceHtml = quote.status === 'priced'
-      ? `<span class="pf-yard-price" title="${escapeHtml(quote.part)} — from the yard\u2019s own published price list">Yard: $${quote.price.toFixed(2)}${quote.core > 0 ? ` <span style="font-weight:400;color:var(--text-dim);">+ $${quote.core.toFixed(2)} core</span>` : ''}</span>`
+      ? `<span class="pf-yard-price" title="${escapeHtml(quote.part)} — from the yard\u2019s own published price list">Yard: $${quote.price.toFixed(2)}${pfCat.perEach ? ` each <span class="pf-price-row" style="font-weight:400;color:var(--text-dim);">(${escapeHtml(quote.part)})</span>` : ''}${quote.core > 0 ? ` <span style="font-weight:400;color:var(--text-dim);">+ $${quote.core.toFixed(2)} core</span>` : ''}</span>`
       : `<span class="pf-ebay">${quote.status === 'not-listed' ? 'not on the yard\u2019s published list — ask at the counter' : 'yard posts prices in-store only'}</span>`;
     // noValue categories (engine assemblies, transmissions) ship no value
     // band by charter — you can't carry one out, so "worth" is misleading.
@@ -7852,7 +7852,9 @@ function pfRunSearch() {
       : '';
     // Buyer's savings line — both sides real, Pro only (free users would
     // back the blurred band out of price + savings).
-    const saveHtml = (unlocked && partRow && quote.status === 'priced' && partRow.high - quote.price > 0)
+    // perEach (wheels): the yard row prices ONE wheel, the value row a set
+    // of 4, so a savings line would compare a set against a single wheel.
+    const saveHtml = (unlocked && partRow && !pfCat.perEach && quote.status === 'priced' && partRow.high - quote.price > 0)
       ? `<span class="pf-save" title="What you\u2019d save over buying this part used online — if the part on this car is good">Save ~${formatPrice(Math.max(0, Math.round(partRow.low - quote.price)))}&ndash;${formatPrice(Math.round(partRow.high - quote.price))}</span>`
       : '';
     return pfDonorCardHtml(r, r.tier === 'verified' ? 'pf-verified' : 'pf-likely', pfTierChip(r.tier, r.src), `${ebayHtml}${priceHtml}${saveHtml}`);
