@@ -141,13 +141,23 @@ with sync_playwright() as pw:
         chips = page.locator("#pf-results .pf-tier").count()
         check(f"{slug}: every row carries a tier chip",
               chips == rows.count(), f"{chips} chips / {rows.count()} rows")
-        # Sorted by distance then confidence — distances must be
-        # non-decreasing down the list.
-        dists = page.eval_on_selector_all(
-            "#pf-results .pf-row-card .dist",
-            "els => els.map(e => parseInt(e.textContent))")
-        check(f"{slug}: rows sorted by distance",
-              all(a <= b for a, b in zip(dists, dists[1:])), str(dists[:8]))
+        # Sorted by distance then confidence, except that "Same engine —
+        # part may differ" rows (2026-11-09) list after every other row:
+        # distances are non-decreasing within each group, and no other row
+        # follows a same-engine row.
+        cards = page.eval_on_selector_all(
+            "#pf-results .pf-row-card",
+            "els => els.map(e => [e.classList.contains('pf-same-engine') ? 1 : 0,"
+            " parseInt((e.querySelector('.dist') || {}).textContent)])")
+        grp = [g for g, _ in cards]
+        check(f"{slug}: same-engine rows list after the others",
+              grp == sorted(grp), str(grp[:12]))
+        ok_sort = all(a[1] <= b[1] for a, b in zip(cards, cards[1:])
+                      if a[0] == b[0])
+        check(f"{slug}: rows sorted by distance within each group",
+              ok_sort, str(cards[:8]))
+        n_same = sum(grp)
+        print(f"     same-engine rows={n_same}")
         page.evaluate("document.getElementById('pf-results')"
                       ".scrollIntoView({block:'start'})")
         page.wait_for_timeout(250)

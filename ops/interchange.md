@@ -1913,3 +1913,55 @@ All verdicts are ADVISORY. Nothing was shipped and nothing reads the allowlist y
   re-shipped and they still match. Gates: V12-V15, parity 6/6, V9 0 flips,
   payload ok x7 (0 Verified), curation_tests 15/15, tests 29/29,
   scraper/test_*.py, pf_guards_unit.
+
+## 2026-11-09 Same-engine relabel + Honda/Nissan start (session_016ZzJfK5RFgko9f1gx7qjEa)
+
+Owner go via hub ("Yes relabel those, and start on Honda/Nissan").
+
+### Task A: "Same engine — part may differ" (branch interchange/same-engine-label)
+- `docs/app.js` engine path: a donor whose ONLY link to the seeker is the
+  hand engine family (no hand/OEM vg names both cars, no aftermarket unit
+  list names both) and that is a different base model (make or squashed
+  model differs) gets `src: 'same-engine'`. Chip "Same engine — part may
+  differ", tooltip: same engine, different model, accessories often differ,
+  match the number on both cars. Engine assemblies are excluded.
+- vg-joined donors that can't be Verified (engine unconfirmed, ambig) stay
+  part-number-backed Likely. An aftermarket list naming both cars lifts a
+  same-engine row to the aftermarket chip.
+- Sort: same-engine rows after all others in both sort orders. Counts row:
+  "N verified · N likely · N same engine". Cards keep `pf-likely` (+
+  `pf-same-engine`), so "Verified fits only" hides them.
+- Plain hand Likely tooltip reworded; "very likely fits" is gone.
+- No gate, data or free/Pro change. sw jh-v169. Neutral `.pf-tier-same` chip.
+- Tests: pf_guards_unit ALL PASS (+17 same-engine checks; 10 of them fail on
+  the old app.js); part_finder_e2e 1 failure, the known E46 M3 data case
+  (its sort check now allows the same-engine group last); pf_ux_e2e pass
+  (counts parser takes the optional third count); interchange_e2e pass;
+  ui_no_truncation: see below.
+- GX 470 2005 alternator near 78744 (Austin): 0 verified · 0 likely · 64
+  same engine (all Tundra/Sequoia; no GX/LX donor in range). No overflow at
+  390 px. Shots: backend/test/shots_same_engine/ (light/dark × free/Pro).
+
+### Task B: Honda/Acura, Nissan/Infiniti, step 1 (read-only)
+oem-raw@75dc442. All four sites `.done`; honda also `.retried503`.
+| site | records | list rows (R1) | year manifests | errors |
+|---|---|---|---|---|
+| hondapartsnow | 1465 | 342 lines | 50 | 3 |
+| acurapartswarehouse | 748 | none | none | 3 |
+| nissanpartsdeal | 3911 | none | none | 9 |
+| infinitipartsdeal | 1775 | none | none | 27 |
+Local curate (`curate.py --ns honda --ns nissan --raw-ref origin/oem-raw`):
+honda 0 Likely (8,746 list rows, but they cover seed years only:
+likely_app_years_without_own_page e.g. side-mirrors 1,411, window-regulator
+924); nissan 0 Likely (no manifests at all; side-mirrors 2,203,
+window-regulator 2,981 app-years without own page). Also: no audit record in
+audits.json for any of the four sites, and all four print an option column
+(never coverage, spec 5.5), so Verified stays impossible there.
+Next: R3 completion run over the completion worklists (honda.completion.json /
+nissan.completion.json), plus R1 manifests on acura/nissan/infiniti.
+
+### Blocked (this session)
+- `git push` refused by the git proxy: benvuolo/yardscout is not in this
+  session's authorized repo set; the add_repo call was denied. The `gh` token
+  is invalid, so no workflow dispatch either. The branch and this note exist
+  only in this container until access is fixed.
