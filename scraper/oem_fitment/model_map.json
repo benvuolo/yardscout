@@ -2631,6 +2631,19 @@
    ]
   },
   {
+   "basis": "catalog prints 'Aveo' (114 fitment rows, oem-raw@75dc442); normalize_model canon 'Aveo', 606 feed cars (inventory 2026-11-09); identity draft; reviewed 2026-11-09 make breadth: one catalog model, one feed model, no squash collision",
+   "cat_make": "Chevrolet",
+   "cat_model": "Aveo",
+   "ns": "gm",
+   "targets": [
+    {
+     "make": "Chevrolet",
+     "model": "Aveo",
+     "trims": "*"
+    }
+   ]
+  },
+  {
    "basis": "catalog prints 'Beretta' (1 fitment rows, oem-raw@d1108d0); normalize_model canon 'Beretta', 9 feed cars (inventory 2026-11-05); identity draft",
    "cat_make": "Chevrolet",
    "cat_model": "Beretta",
@@ -8918,6 +8931,19 @@
    ]
   },
   {
+   "basis": "catalog prints 'LS400' (87 fitment rows, oem-raw@75dc442); normalize_model canon 'LS 400', 120 feed cars (inventory 2026-11-09); identity draft; reviewed 2026-11-09 make breadth: one catalog model, one feed model, no squash collision",
+   "cat_make": "Lexus",
+   "cat_model": "LS400",
+   "ns": "toyota",
+   "targets": [
+    {
+     "make": "Lexus",
+     "model": "LS 400",
+     "trims": "*"
+    }
+   ]
+  },
+  {
    "basis": "catalog prints 'LS430' (3 fitment rows, oem-raw@d1108d0); normalize_model canon 'LS 430', 110 feed cars (inventory 2026-11-05); identity draft",
    "cat_make": "Lexus",
    "cat_model": "LS430",
@@ -9017,6 +9043,19 @@
     {
      "make": "Lexus",
      "model": "RX 450h",
+     "trims": "*"
+    }
+   ]
+  },
+  {
+   "basis": "catalog prints 'SC400' (95 fitment rows, oem-raw@75dc442); normalize_model canon 'SC 400', 20 feed cars (inventory 2026-11-09); identity draft; reviewed 2026-11-09 make breadth: one catalog model, one feed model, no squash collision",
+   "cat_make": "Lexus",
+   "cat_model": "SC400",
+   "ns": "toyota",
+   "targets": [
+    {
+     "make": "Lexus",
+     "model": "SC 400",
      "trims": "*"
     }
    ]
@@ -10601,6 +10640,7 @@
   "gm|Chevrolet|Astro Passenger": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'astro'); unmapped until a reviewed entry exists",
   "gm|Chevrolet|Avalanche 1500": "feed spelling or sub-model the catalog does not print as its own model (297 cars, under catalog squash 'avalanche'); unmapped until a reviewed entry exists",
   "gm|Chevrolet|Avalanche 2500": "feed spelling or sub-model the catalog does not print as its own model (3 cars, under catalog squash 'avalanche'); unmapped until a reviewed entry exists",
+  "gm|Chevrolet|Aveo5": "feed sub-model 'Aveo5' (hatchback, 113 cars) under catalog 'Aveo'; the catalog does not print it as its own model; unmapped, no claims, until a reviewed entry exists (make breadth 2026-11-09)",
   "gm|Chevrolet|BLAZER-JIMMY (full size)": "feed spelling or sub-model the catalog does not print as its own model (1 cars, under catalog squash 'blazer'); unmapped until a reviewed entry exists",
   "gm|Chevrolet|Blazer S10": "feed spelling or sub-model the catalog does not print as its own model (44 cars, under catalog squash 'blazer'); unmapped until a reviewed entry exists",
   "gm|Chevrolet|Blazer S10/Jimmy S15": "feed spelling or sub-model the catalog does not print as its own model (141 cars, under catalog squash 'blazer'); unmapped until a reviewed entry exists",

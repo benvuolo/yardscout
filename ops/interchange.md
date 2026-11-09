@@ -2128,3 +2128,124 @@ namespace, then hub confirmation, then groups/<ns>.json.
 - **Next:** once `.c1.done` lands for the 4 sites, re-curate on the pinned sha,
   run the §11.4 sample for honda and nissan (independent verifier), report to
   the hub, and ship only after 0 WRONG and the hub's confirmation.
+
+## Make breadth (session_016ZzJfKqBWhtUcqYMMseVgn, 2026-11-09)
+
+Owner, 2026-11-09: "start on Honda/Nissan and wheels"; "we're going for breadth
+here and data quality". Scope: every make except Honda/Acura/Nissan/Infiniti.
+Ship bar: §11.4 sample with 0 WRONG, then hub confirmation.
+
+### Diagnosis (oem-raw@75dc442, main curate rules; scratch funnel script, not committed)
+
+Body classes (one OEM number in one category) by the step where they stop.
+"single" = the fitment table names one feed model only (the same-model loop
+covers these; not a defect). "own page" = 2+ feed models in fitment, but
+fewer than 2 have their own catalog page reading the number (§5.16). Groups
+counted before the allowlist release.
+
+| ns | body classes | single | own page | unverified | cover no | note-restricted | held ext. | groups |
+|---|---|---|---|---|---|---|---|---|
+| toyota | 5330 | 3551 | 1166 | 16 | 14 | 0 | 0 | 583 |
+| gm | 5393 | 3004 | 1594 | 397 | 58 | 1 | 50 | 289 |
+| mopar | 5751 | 3613 | 1168 | 537 | 67 | 22 | 99 | 245 |
+| ford | 6109 | 3194 | 2113 | 621 | 34 | 8 | 80 | 59 |
+| hmg | 5574 | 5084 | 439 | 14 | 31 | 0 | 0 | 6 |
+| vag | 1873 | 1025 | 758 | 9 | 37 | 24 | 14 | 6 |
+| mb | 1354 | 363 | 939 | 5 | 28 | 1 | 18 | 0 |
+| bmw | 1541 | 419 | 957 | 144 | 21 | 0 | 0 | 0 |
+| volvo | 865 | 572 | 271 | 4 | 18 | 0 | 0 | 0 |
+| mazda | 1150 | 1090 | 58 | 1 | 1 | 0 | 0 | 0 |
+| mitsubishi | 359 | 320 | 32 | 1 | 6 | 0 | 0 | 0 |
+| subaru | 1784 | 620 | 1014 | 32 | 21 | 6 | 26 | 65 |
+
+Findings:
+1. **The own-page rule is the main limit for every low namespace.** The crawl
+   reads 1-3 seed years per segment, so a twin's own page is rarely read.
+   bmw/volvo/mazda/mitsubishi/kia/audi/toyotapartsnow have no list manifests;
+   their own-page proxy is only the seed. Fix: R3 completion (below).
+2. **hmg, mazda, mitsubishi are mostly single-model** (91%, 95%, 89%):
+   Hyundai/Kia/Mazda parts rarely cross models. Their ceiling is low
+   whatever the crawl does.
+3. **Unverified** classes are mostly correct refusals: ford RHD 538, gm
+   kit/set pairs 193 + RHD 113, mopar disputed duplicate records 502, bmw
+   universal-part cap 144 (BMW fitment tables list many badges).
+4. **Model-map gaps (feed cars that never get a claim):**
+   - gm: feed "Silverado 1500" (3,267 cars), "Sierra 1500" (1,247),
+     "Silverado 2500"/"2500HD", "Express 2500" (571) are excluded. The
+     catalog prints "Silverado"/"Sierra"/"Express", with the series only in
+     the option column. Mapping them needs a row-level series filter
+     (1500 vs 2500HD); not done, an identity map would over-claim. Chevrolet
+     Aveo (606 cars) has neither a target nor an exclude.
+   - mb: the feed holds class names, "C-Class" 955, "E-Class" 620, "M-Class"
+     381, "S-Class" 269, ... (~2,500 cars). Catalog models are badges (C300).
+     A class name can be any badge, so a map would be ambiguous (Likely only
+     with every badge agreeing). Not done.
+   - vag: "New Beetle" 360 cars (catalog "Beetle"), unmapped; subaru: "B9
+     Tribeca" 88 (catalog "Tribeca"); toyota: Lexus "LS 400" 120, "SC 400" 20.
+   These need reviewed model_map entries (M1-M10).
+   - Done: Chevrolet Aveo (606 cars), Lexus LS 400 (120), SC 400 (20):
+     identity entries, with Aveo5 excluded (M5). Validator clean, no change
+     to today's groups; they gain claims once the completion pages are read.
+
+### Subaru §11.4 resample on the fixed rules
+
+- Round 1 (30 stratified of 65 Likely groups + the 8 held-release entries; 4
+  independent verifiers, second source outside the dealer network): RIGHT 32,
+  **WRONG 1**, UNSURE 5. WRONG: 85002AL06A gauge cluster, option code
+  `(S+OBK).25I.6MT`. The 2015 Legacy/Outback 6MT was Canada-only.
+- Rule fix (a5d81da): `_subaru_manual_only`. A row whose every option
+  alternative requires MT/5MT/6MT is not credited, per row, like a market
+  note. Removes 4 groups: 85002AL06A, 85002AL07A, 85021AJ13A, 85021AJ18A
+  (65 -> 61). Unit-tested in test_regressions.
+- Round 2 (fresh seed, 30 of 61 + 8 held): 29 items are unchanged groups and
+  keep their round-1 verdicts (28 RIGHT, 1 UNSURE). The 9 new ones were
+  verified independently: RIGHT 4, **WRONG 1**, UNSURE 4. Total RIGHT 32 /
+  WRONG 1 / UNSURE 5. **Subaru is not ship-eligible; it stays withheld.**
+  - WRONG: 91036FJ100, RH mirror for the 2012 Impreza / 2013 XV Crosstrek. It
+    is the non-heated unit (Partslink SU1321128), but the 2013 US XV
+    Crosstrek had heated mirrors standard (Subaru US brochure). The XV page
+    lists it under `*XV.20IP`, a configuration not sold in the US.
+  - The same pattern applies to round-1 RIGHT 91036FJ110 (the LH non-heated
+    mirror, also `*XV.20IP`). Its verifier found one aftermarket snippet; by
+    the round-2 reasoning it is also suspect.
+  - No catalog field marks non-US configurations. The `*` prefix does not
+    predict them: starred XV climate controls and headlamps verified RIGHT.
+    So there is no per-row rule like the manual-only one. **Hub decision
+    needed:** e.g. hold Subaru cross-model side-mirror groups (Impreza/XV
+    heated, signal and non-heated variants differ by market), then resample.
+  - UNSURE (no source outside the dealer network): 85002AL02A, 85003AL03A,
+    85021AG64A, 85021AJ14A (gauge clusters); 61041AL02A; 61188KG000 (bare
+    motor, no position); 91036FJ160, 91036FJ170 (signal mirrors, XV only
+    per Partslink).
+  - Notes for the 8 held-release groups: the turbo hood 57229AG04A9P and the
+    non-turbo hood 57229AJ00A9P carry no trim note. Both verified RIGHT for
+    both models, but a GT/XT owner gets no warning.
+  - Verdicts with sources: scratch only (this container). Summary here.
+
+### R3 own-page completion enabled (0995702)
+
+The Honda/Nissan session's mechanism (a31d3f6), reused unchanged:
+`completion/<ns>.own_page.json` from curate on oem-raw@75dc442, plus a
+`complete` entry in worklist.json for 15 sites. moparpartsgiant (403,
+stopped) is not enabled; its 487 Dodge/Chrysler rows are routed to
+jeeppartsdeal (`rerouted_from` on each row).
+
+| ns | rows (vehicle-years) | lot cars | sites |
+|---|---|---|---|
+| gm | 1446 | 52,822 | gmpartsgiant (starts after its worklist .done) |
+| ford | 695 | 43,572 | fordpartsgiant |
+| mopar | 657 | 30,107 | jeeppartsdeal |
+| toyota | 507 | 21,305 | toyotapartsnow 401, lexuspartsnow 106 |
+| hmg | 112 | 7,558 | kia 65, hyundai 47 |
+| vag | 537 | 6,699 | audi 366, vw 171 |
+| bmw | 507 | 4,107 | bmwpartsdeal |
+| mazda | 114 | 4,252 | mazdapartsnow |
+| subaru | 110 | 3,835 | subarupartsdeal |
+| volvo | 170 | 1,686 | volvopartsgiant |
+| mb | 524 | 1,640 | mbpartsgiant |
+| mitsubishi | 70 | 857 | mitsubishipartsgiant |
+
+Not dispatched by me; the 6-hourly schedule picks sites up in `complete`
+mode once each has its worklist marker. Next: once `.c1.done` lands per site,
+re-curate on a pinned sha, run the §11.4 sample per namespace, report to the
+hub, ship only on 0 WRONG plus hub confirmation.
