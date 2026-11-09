@@ -5562,7 +5562,8 @@ function liftMapControls() {
   box.classList.remove('credit-in-sheet'); sh.classList.remove('with-credit');
   if (at && _yardsMap) {
     const h = at.getBoundingClientRect().height || 24;
-    if (lift + h > b.height - 8) { box.classList.add('credit-in-sheet'); sh.classList.add('with-credit'); }
+    // Also when it wraps past ~2 lines (large text): it would eat the open map.
+    if (lift + h > b.height - 8 || (lift && h > 48)) { box.classList.add('credit-in-sheet'); sh.classList.add('with-credit'); }
   }
 }
 function mapSheetRowHtml(y, m) {
@@ -5701,8 +5702,16 @@ function pinArea() {
   let top = 4, bottom = c.height - 4;
   const over = (sel) => { const el = document.querySelector(sel); if (!el || !el.getClientRects().length) return null; const r = el.getBoundingClientRect(); return r.height ? r : null; };
   for (const r of [over('#yards-map-wrap .yards-map-legend'), over('#yards-map .maplibregl-ctrl-top-right .maplibregl-ctrl-group'), over('#yards-map-wrap .yards-map-note:not(:empty)')]) if (r) top = Math.max(top, r.bottom - c.top + 6);
-  for (const r of [over('#yards-map .maplibregl-ctrl-attrib'), over('#yards-map-sheet')]) if (r) bottom = Math.min(bottom, r.top - c.top - 6);
-  return { l: 4, r: c.width - 4, t: top, b: Math.max(top + 44, bottom), W: c.width, H: c.height };
+  let left = 4;
+  const at = over('#yards-map .maplibregl-ctrl-attrib'), sh = over('#yards-map-sheet');
+  if (at) bottom = Math.min(bottom, at.top - c.top - 6);
+  if (sh) {
+    // A sheet across the map (phones) closes the bottom; a sheet docked at
+    // the side (wide screens) closes the left instead.
+    if (sh.left <= c.left + 24 && sh.right >= c.right - 24) bottom = Math.min(bottom, sh.top - c.top - 6);
+    else if (sh.left <= c.left + 24) left = Math.max(left, sh.right - c.left + 6);
+  }
+  return { l: left, r: c.width - 4, t: top, b: Math.max(top + 44, bottom), W: c.width, H: c.height };
 }
 function measurePin(html) {
   const layer = pinLayer();
@@ -5721,20 +5730,36 @@ function groupHtml(g) {
 function layoutPins() {
   const layer = pinLayer();
   if (!_projectFn) return;
+  // The key is only needed when a pin carries the watch bell; pins say "N cars" themselves.
+  const legend = document.querySelector('#yards-map-wrap .yards-map-legend');
+  if (legend) legend.style.display = _mapSites.some(s => s.m.watch) ? '' : 'none';
   const A = pinArea();
   const groups = [];
   for (const s of [..._mapSites].sort((a, b) => b.m.cars - a.m.cars)) {
     const p = _projectFn(s);
-    if (!p || p.x < 0 || p.x > A.W || p.y < A.t || p.y > A.b) continue;   // point not in the open map: not drawn
+    if (!p || p.x < A.l || p.x > A.W || p.y < A.t || p.y > A.b) continue;   // point not in the open map: not drawn
     groups.push({ items: [s], x: p.x, y: p.y });
   }
   const rectOf = (g) => {
-    const html = groupHtml(g), sz = measurePin(html);
-    let left = Math.min(Math.max(g.x - sz.w / 2, A.l), A.r - sz.w), top = Math.min(Math.max(g.y - 6 - sz.h, A.t), A.b - sz.h);
-    g.html = html; g.rect = { l: left, t: top, r: left + sz.w, b: top + sz.h }; g.nudged = Math.abs(left - (g.x - sz.w / 2)) > 1 || Math.abs(top - (g.y - 6 - sz.h)) > 1;
+    const html = g.html && g.htmlFor === g.items.length ? g.html : groupHtml(g), sz = g.htmlFor === g.items.length ? g.sz : measurePin(html);
+    const want = g.below ? g.y + 6 : g.y - 6 - sz.h;   // pin above its point, or flipped below it
+    let left = Math.min(Math.max(g.x - sz.w / 2, A.l), A.r - sz.w), top = Math.min(Math.max(want, A.t), A.b - sz.h);
+    g.html = html; g.sz = sz; g.htmlFor = g.items.length;
+    g.rect = { l: left, t: top, r: left + sz.w, b: top + sz.h }; g.nudged = Math.abs(left - (g.x - sz.w / 2)) > 1 || Math.abs(top - want) > 1;
   };
   groups.forEach(rectOf);
   const hit = (a, b) => a.l < b.r + 4 && b.l < a.r + 4 && a.t < b.b + 4 && b.t < a.b + 4;
+  // Two single pins that collide: first try the lower one below its point
+  // (tail on top). Only if that also collides do they merge into a bubble.
+  const tryFlip = (gi, gj) => {
+    if (gi.items.length > 1 || gj.items.length > 1) return false;
+    const low = gi.y >= gj.y ? gi : gj;
+    if (low.below) return false;
+    low.below = true; rectOf(low);
+    if (!low.nudged && !groups.some(o => o !== low && hit(o.rect, low.rect))) return true;
+    low.below = false; rectOf(low);
+    return false;
+  };
   // Merge until no two pins overlap. The bubble stays at its biggest yard
   // (groups are built biggest first), so merging doesn't drift.
   let merges = 0, merged = true;
@@ -5743,7 +5768,9 @@ function layoutPins() {
     for (let i = 0; i < groups.length; i++) {
       for (let j = i + 1; j < groups.length; j++) {
         if (!hit(groups[i].rect, groups[j].rect)) continue;
+        if (tryFlip(groups[i], groups[j])) { merged = true; merges++; continue; }
         groups[i].items.push(...groups.splice(j, 1)[0].items);
+        groups[i].below = false;
         rectOf(groups[i]); merged = true; merges++; j = i;   // re-check i against the rest
       }
     }
@@ -5752,9 +5779,22 @@ function layoutPins() {
   // sheet still lists the yard), rather than push it over the controls.
   for (let i = groups.length - 1; i >= 0; i--) if (groups[i].rect.t < A.t - 0.5 || groups[i].rect.b > A.b + 0.5) groups.splice(i, 1);
   _pinGroups = groups;
+  watchPinSizes(layer);
   const you = activeZipCoords && _projectFn({ lat: activeZipCoords.lat, lng: activeZipCoords.lng });
-  layer.innerHTML = `${you && you.x > 0 && you.x < A.W && you.y > A.t && you.y < A.b ? `<span class="map-you" style="left:${you.x}px;top:${you.y}px"><span>You</span></span>` : ''}
-    ${groups.map((g, i) => `<span class="map-pin-at${g.nudged ? ' nudged' : ''}" data-g="${i}" style="left:${g.rect.l}px;top:${g.rect.t}px">${g.html}</span>`).join('')}`;
+  layer.innerHTML = `${you && you.x > A.l && you.x < A.W && you.y > A.t && you.y < A.b ? `<span class="map-you${you.y + 34 > A.b ? ' up' : ''}" style="left:${you.x}px;top:${you.y}px"><span>You</span></span>` : ''}
+    ${groups.map((g, i) => `<span class="map-pin-at${g.nudged ? ' nudged' : ''}${g.below ? ' below' : ''}" data-g="${i}" style="left:${g.rect.l}px;top:${g.rect.t}px">${g.html}</span>`).join('')}`;
+}
+/* A pin that changes size after it was placed (text size changed, fonts
+ * arrived) gets the layout solved again; same size = no-op, so no loop. */
+var _pinRO = null;
+function watchPinSizes(layer) {
+  if (!window.ResizeObserver) return;
+  if (!_pinRO) _pinRO = new ResizeObserver((entries) => {
+    const off = entries.some(e => { const g = _pinGroups[+e.target.dataset.g]; const r = e.target.getBoundingClientRect(); return g && g.sz && (Math.abs(r.width - g.sz.w) > 1 || Math.abs(r.height - g.sz.h) > 1); });
+    if (off) requestAnimationFrame(layoutPins);
+  });
+  _pinRO.disconnect();
+  requestAnimationFrame(() => layer.querySelectorAll('.map-pin-at').forEach(el => _pinRO.observe(el)));
 }
 /* During a pan the pins follow the map; overlaps are re-solved when it stops. */
 function followPins() {
@@ -5768,6 +5808,47 @@ function followPins() {
     el.style.transform = `translate(${dx}px, ${dy}px)`;
   });
 }
+/* First view: the user's spot and the nearest yards, as named pins. Fit to
+ * the yards within 25 mi (at most the nearest 3; at least the nearest 2),
+ * then, if the nearest yard still shares a bubble, fit to fewer yards and
+ * zoom in until it stands alone. Zooming out clusters as usual. */
+const FIRST_VIEW_MI = 25;
+function firstMapSet() {
+  const near = [..._mapSites].filter(s => s.dist != null).sort((a, b) => a.dist - b.dist);
+  if (!near.length) return _mapSites.slice();
+  const inR = near.filter(s => s.dist <= FIRST_VIEW_MI);
+  return near.slice(0, Math.min(3, Math.max(2, inR.length)));
+}
+function nearestStandsAlone(key) {
+  return _pinGroups.some(g => g.items.length === 1 && g.items[0].key === key);
+}
+function firstMapView(lib, el) {
+  const w = el.clientWidth || 360, you = activeZipCoords;
+  const fit = (set, maxZoom, withYou = true) => {
+    const pts = set.map(s => [s.lng, s.lat]);
+    if (you && withYou) pts.push([you.lng, you.lat]);
+    if (!pts.length) return;
+    const b = new lib.LngLatBounds(pts[0], pts[0]);
+    pts.forEach(p => b.extend(p));
+    const A = pinArea(), open = A.b - A.t;
+    // Room above each point for its pin; a short open strip (big text, small
+    // phone) keeps the points in its lower part instead of failing the fit.
+    const top = A.t + Math.min(56, Math.max(8, open - 48)), bottom = Math.max(8, A.H - A.b + Math.min(44, open / 4));   // room for the "You" label under its dot
+    _yardsMap.fitBounds(b, { padding: { top, bottom, left: A.l + Math.min(90, w / 4), right: Math.min(90, w / 4) }, maxZoom, duration: 0 });
+    layoutPins();
+  };
+  let set = firstMapSet();
+  fit(set, 13);
+  const first = set.length && set[0].dist != null ? set[0] : null;
+  if (!first) return;
+  while (!nearestStandsAlone(first.key) && set.length > 1) { set = set.slice(0, -1); fit(set, 13); }
+  for (let z = Math.max(13, Math.ceil(_yardsMap.getZoom())); !nearestStandsAlone(first.key) && z <= 14; z++) fit([first], z + 1);
+  // Last resort (yards packed tight, or the nearest one far away): the named
+  // pin wins over keeping the user's spot in view.
+  _firstViewNoYou = false;
+  for (let z = 12; !nearestStandsAlone(first.key) && z <= 15; z++) { fit([first], z, false); _firstViewNoYou = true; }
+}
+var _firstViewNoYou = false;
 function renderSchematicMap(yards, note) {
   const el = document.getElementById('yards-map');
   if (_yardsMap) { try { _yardsMap.remove(); } catch (e) { /* gone */ } _yardsMap = null; }
@@ -5782,9 +5863,9 @@ function renderSchematicMap(yards, note) {
   el.innerHTML = '';
   document.getElementById('yards-map-note').textContent = note;
   _projectFn = (p) => {
-    const A = pinArea(), padX = 70, top = A.t + 50, bot = A.b - 10;
-    const sx = (A.W - 2 * padX) / w, sy = (bot - top) / h, s = Math.min(sx, sy);
-    const ox = padX + ((A.W - 2 * padX) - w * s) / 2, oy = top + ((bot - top) - h * s) / 2;
+    const A = pinArea(), padX = 70, top = A.t + 50, bot = A.b - 40, L = A.l + padX, R = A.r - padX;   // room for the You label
+    const sx = (R - L) / w, sy = (bot - top) / h, s = Math.min(sx, sy);
+    const ox = L + ((R - L) - w * s) / 2, oy = top + ((bot - top) - h * s) / 2;
     return { x: ox + (p.lng - minLn) * k * s, y: oy + (maxLa - p.lat) * s };
   };
   layoutPins();
@@ -5826,7 +5907,11 @@ async function renderYardsMap() {
       if (!_yardsMap.isStyleLoaded()) { _yardsMap.__failed = true; renderSchematicMap(yards, 'Map tiles couldn’t load, so yards are shown by position only. The row view works offline.'); }
     });
     _yardsMap.__style = style;
-    _yardsMap.once('load', () => { if (_yardsMap) { _yardsMap.resize(); layoutPins(); } });
+    // The first fit can run before the map has its size and controls: redo the
+    // first view once it loads, unless the person has already moved the map.
+    let touched = false;
+    _yardsMap.on('movestart', (e) => { if (e && e.originalEvent) touched = true; });
+    _yardsMap.once('load', () => { if (_yardsMap) { _yardsMap.resize(); liftMapControls(); if (!touched && yardsView === 'map') firstMapView(lib, el); else layoutPins(); } });
     if (window.ResizeObserver) new ResizeObserver(() => { if (_yardsMap && el.clientWidth) { _yardsMap.resize(); layoutPins(); } }).observe(el);
     requestAnimationFrame(() => _yardsMap && _yardsMap.resize());
     let queued = false;
@@ -5837,12 +5922,8 @@ async function renderYardsMap() {
   }
   document.getElementById('yards-map-note').textContent = '';
   _projectFn = (p) => _yardsMap && _yardsMap.project([p.lng, p.lat]);
-  const b = new lib.LngLatBounds([activeZipCoords.lng, activeZipCoords.lat], [activeZipCoords.lng, activeZipCoords.lat]);
-  _mapSites.forEach(s => b.extend([s.lng, s.lat]));
   liftMapControls();
-  const A = pinArea(), w = el.clientWidth || 360;
-  _yardsMap.fitBounds(b, { padding: { top: A.t + 56, bottom: Math.max(24, A.H - A.b + 16), left: Math.min(90, w / 4), right: Math.min(90, w / 4) }, maxZoom: 11, duration: 0 });
-  layoutPins();
+  firstMapView(lib, el);
   layoutMapMode();
 }
 /* A tapped cluster: yards at one spot (or fully zoomed in) list in the sheet;
@@ -5861,7 +5942,7 @@ function zoomToYards(keys) {
   const lib = window.maplibregl, b = new lib.LngLatBounds([sites[0].lng, sites[0].lat], [sites[0].lng, sites[0].lat]);
   sites.forEach(s => b.extend([s.lng, s.lat]));
   const A = pinArea();
-  _yardsMap.fitBounds(b, { padding: { top: A.t + 70, bottom: Math.max(40, A.H - A.b + 30), left: 90, right: 90 }, maxZoom: 15, duration: matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 300 });
+  _yardsMap.fitBounds(b, { padding: { top: A.t + 70, bottom: Math.max(40, A.H - A.b + 30), left: A.l + 90, right: 90 }, maxZoom: 15, duration: matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 300 });
 }
 function setYardsView(view) {
   yardsView = view === 'map' ? 'map' : 'list';
@@ -9223,18 +9304,26 @@ if (!IS_NATIVE && 'serviceWorker' in navigator) {
   // hidden for good once swiped away and never appears outside Safari, so
   // this is the one pointer a phone visitor reliably sees. Dismiss sticks.
   try { localStorage.setItem('jh_visits', String(parseInt(localStorage.getItem('jh_visits') || '0', 10) + 1)); } catch (e) { /* private mode */ }
+  showAppPromo(platform);
+})();
+function showAppPromo(platform) {
   const el = document.getElementById('app-promo');
   if (!el) return;
   const link = document.getElementById('app-promo-link');
   link.href = platform === 'android' ? PLAY_URL : APP_STORE_URL;
-  link.textContent = platform === 'android' ? 'Get the Android app' : 'Get the iPhone app';
-  document.querySelector('#app-promo .app-promo-text strong').textContent = platform === 'android' ? 'YardScout is on Google Play' : 'YardScout is on the App Store';
+  link.textContent = 'Get the app';
+  link.setAttribute('aria-label', platform === 'android' ? 'Get the app on Google Play' : 'Get the app on the App Store');
+  document.querySelector('#app-promo .app-promo-text strong').textContent = platform === 'android' ? 'YardScout for Android' : 'YardScout for iPhone';
   el.style.display = '';
-  document.getElementById('app-promo-close').addEventListener('click', () => {
-    localStorage.setItem('ys_app_promo', '1');
-    el.style.display = 'none';
-  });
-})();
+  const x = document.getElementById('app-promo-close');
+  if (!x.__wired) {
+    x.__wired = true;
+    x.addEventListener('click', () => {
+      localStorage.setItem('ys_app_promo', '1');
+      el.style.display = 'none';
+    });
+  }
+}
 
 /* ===== STORE BADGES (header + footer) =====
  * Persistent, quiet store presence to complement the mobile-only promo above:

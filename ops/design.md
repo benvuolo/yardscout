@@ -133,6 +133,17 @@ sheet" in the UI only (jh_saved and watch storage untouched, rule 6); map deferr
 - Known: dense metros mostly show count bubbles at the fitted zoom; a shorter pin label is the
   lever if the owner wants more named pins. iOS status-bar tap to top not checked on a device.
 
+### Round 9b: compact app banner + map first view (2026-11-09, branch design/promo-map-fit, NOT merged)
+- Hub, from live jh-v167 (+ owner: "make the x so it's not its own line item"): banner was ~285px with the
+  X on its own row and covered the map sheet; the map's first view near Ogden fit the whole 100 mi range,
+  so the 6 Utah yards became one bubble at the sheet edge.
+- Banner: one row (name, short line, "Get the app", X top-right), 62px at 320-768; hidden in the map view.
+- Map: first view = yards within 25 mi (nearest 2-3) + your spot; fewer/closer until the nearest yard is a
+  named pin; last resort zooms past your spot. Colliding single pins flip below their point before merging;
+  side-docked sheet closes the left of the pin area; long credit moves into the sheet; key only with bells.
+- Tests: app_promo_e2e (new, 174), map_regions_e2e 11 regions / 1,056 layouts, ui_no_truncation 1,296, units.
+- Known: Atlanta first view, a "2 yards" bubble can cover the You dot. Waiting on hub review/merge.
+
 ## Earlier state (2026-11-06, exploration)
 
 - Branch: `design/redesign-2026-11` (exploration only; nothing merged).
