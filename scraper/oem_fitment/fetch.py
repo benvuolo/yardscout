@@ -60,6 +60,9 @@ ALLOWED = {
     # Spectra Premium e-catalog (owner 2026-11-09 "use spectra if it doesnt
     # break anything"; site-scoped detector rule below; SOURCES.md)
     "ecat.spectrapremium.com",
+    # 1A Auto retailer catalog (owner 2026-11-09 "Yes, use 1A Auto anyway",
+    # relayed by the hub; robots Crawl-Delay 1 < our gap; old challenge rule)
+    "www.1aauto.com",
 }
 # robots.txt Crawl-delay or a gentler pace where a site asks for it
 DOMAIN_GAP = {"www.tycamericas.com": 10.0, "www.subarupartsdeal.com": 5.0}

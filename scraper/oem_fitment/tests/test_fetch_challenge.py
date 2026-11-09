@@ -40,14 +40,15 @@ bodies = ["<html>ok</html>", VEH, PART, "<title>Just a moment...</title>", "x" *
           "x" * 19990 + "captcha", '{"a": 1}', "<div class=cf-chl></div>", "Attention Required! | Cloudflare",
           "unusual traffic"]
 same = True
-for host in ("www.dbelectrical.com", "www.toyotapartsnow.com", "www.tycamericas.com", "spectrapremium.com",
+for host in ("www.dbelectrical.com", "www.toyotapartsnow.com", "www.tycamericas.com", "www.1aauto.com", "spectrapremium.com",
              "www.spectrapremium.com"):
     for st in (200, 301, 403, 404, 429, 500, 503):
         for b in bodies:
             if fetch.challenged(host, VP, st, b) != old_rule(st, b):
                 same = False
                 print("  differs:", host, st, b[:40])
-check("other sites: challenged() == old rule on 350 inputs", same)
+check("other sites: challenged() == old rule on 420 inputs", same)
+check("www.1aauto.com is allowlisted (old rule)", "www.1aauto.com" in fetch.ALLOWED)
 check("real Spectra page on another host still stops (scope is the exact netloc)",
       fetch.challenged("www.dbelectrical.com", VP, 200, VEH))
 check("ecat.spectrapremium.com is allowlisted", SP in fetch.ALLOWED)
