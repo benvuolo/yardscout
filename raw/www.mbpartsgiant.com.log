@@ -1725,3 +1725,187 @@
 21:28:26 chain-unlinked wheels 1 numbers named by 6-6-03-1473-64, no catalog link: 6-6-03-1473
 21:28:26 chain-unlinked wheels 1 numbers named by 212-401-47-02-7X23, no catalog link: 212-401-19-00-7X23
 21:28:59 time budget reached records=1816
+21:29:11 start site=www.mbpartsgiant.com mode=worklist tiers=['A', 'B', 'W', 'C'] records=1816 list_lines=759 year_lines=196 url_index=5150
+21:29:11 seg done tier=A Mercedes-Benz C-Class [2008, 2014] seeds=[2008] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz C-Class [2001, 2007] seeds=[2005] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz E-Class [2003, 2009] seeds=[2003] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz S-Class [1974, 2015] seeds=[2000] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz M-Class [1995, 2005] seeds=[1999] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz E-Class [1994, 2002] seeds=[2001] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz C300 [2008, 2022] seeds=[2011] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz M-Class [2006, 2011] seeds=[2006] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz E350 [2006, 2014] seeds=[2006] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz E320 [1995, 2008] seeds=[2003] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz GL-Class [2007, 2015] seeds=[2007] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz C230 [1997, 2007] seeds=[2006] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz CLK-Class [1998, 2008] seeds=[2004] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz C250 [2012, 2015] seeds=[2012] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz ML350 [2003, 2013] seeds=[2008] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz C-Class [1978, 2000] seeds=[1998] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz E-Class [2010, 2016] seeds=[2010] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz 300 [1960, 1993] seeds=[1992] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz GL450 [2007, 2015] seeds=[2007] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz ML320 [1998, 2009] seeds=[2000] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz C240 [2001, 2005] seeds=[2003] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz CLK [1999, 2009] seeds=[2007] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz R-Class [2006, 2012] seeds=[2006] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz S550 [2007, 2013] seeds=[2007] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz SLK [1998, 2008] seeds=[2001] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz SLK-Class [1998, 2013] seeds=[1998] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz CLK320 [1998, 2005] seeds=[2005] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz S500 [1995, 2006] seeds=[2001] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz CLS-Class [2006, 2012] seeds=[2006] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz C350 [2006, 2015] seeds=[2008] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz GLK350 [2010, 2014] seeds=[2011] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz S430 [2000, 2006] seeds=[2002] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz GLK-Class [2010, 2015] seeds=[2010] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz CLA-Class [2014, 2021] seeds=[2014] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz CLK430 [1999, 2003] seeds=[2002] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz R350 [2006, 2012] seeds=[2006] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz CLA250 [2014, 2019] seeds=[2014] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz ML500 [2002, 2006] seeds=[2003] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz C320 [2001, 2011] seeds=[2002] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz SL-Class [1992, 2015] seeds=[2003] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz CL-Class [1999, 2010] seeds=[2002] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz E500 [2003, 2006] seeds=[2004] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz Sprinter 2500 [2010, 2016] seeds=[2012] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz CLK350 [2006, 2009] seeds=[2006] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz 190 [1964, 1993] seeds=[1991] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz SLK230 [1998, 2003] seeds=[2002] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz 300-Class [1981, 1991] seeds=[1987] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz CLS550 [2007, 2014] seeds=[2007] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz C280 [1975, 2007] seeds=[2007] records=1816 errors=15
+21:29:11 seg done tier=A Mercedes-Benz 300E [1986, 1992] seeds=[1988] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz C-Class [2008, 2014] seeds=[2008] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz C-Class [2001, 2007] seeds=[2005] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz E-Class [2003, 2009] seeds=[2003] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz S-Class [1974, 2015] seeds=[2000] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz M-Class [1995, 2005] seeds=[1999] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz E-Class [1994, 2002] seeds=[2001] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz C300 [2008, 2022] seeds=[2011] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz M-Class [2006, 2011] seeds=[2006] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz E350 [2006, 2014] seeds=[2006] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz E320 [1995, 2008] seeds=[2003] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz GL-Class [2007, 2015] seeds=[2007] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz C230 [1997, 2007] seeds=[2006] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz CLK-Class [1998, 2008] seeds=[2004] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz C250 [2012, 2015] seeds=[2012] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz ML350 [2003, 2013] seeds=[2008] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz C-Class [1978, 2000] seeds=[1998] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz E-Class [2010, 2016] seeds=[2010] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz 300 [1960, 1993] seeds=[1992] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz GL450 [2007, 2015] seeds=[2007] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz ML320 [1998, 2009] seeds=[2000] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz C240 [2001, 2005] seeds=[2003] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz CLK [1999, 2009] seeds=[2007] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz R-Class [2006, 2012] seeds=[2006] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz S550 [2007, 2013] seeds=[2007] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz SLK [1998, 2008] seeds=[2001] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz SLK-Class [1998, 2013] seeds=[1998] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz CLK320 [1998, 2005] seeds=[2005] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz S500 [1995, 2006] seeds=[2001] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz CLS-Class [2006, 2012] seeds=[2006] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz C350 [2006, 2015] seeds=[2008] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz GLK350 [2010, 2014] seeds=[2011] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz S430 [2000, 2006] seeds=[2002] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz GLK-Class [2010, 2015] seeds=[2010] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz CLA-Class [2014, 2021] seeds=[2014] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz CLK430 [1999, 2003] seeds=[2002] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz R350 [2006, 2012] seeds=[2006] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz CLA250 [2014, 2019] seeds=[2014] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz ML500 [2002, 2006] seeds=[2003] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz C320 [2001, 2011] seeds=[2002] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz SL-Class [1992, 2015] seeds=[2003] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz CL-Class [1999, 2010] seeds=[2002] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz E500 [2003, 2006] seeds=[2004] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz Sprinter 2500 [2010, 2016] seeds=[2012] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz CLK350 [2006, 2009] seeds=[2006] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz 190 [1964, 1993] seeds=[1991] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz SLK230 [1998, 2003] seeds=[2002] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz 300-Class [1981, 1991] seeds=[1987] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz CLS550 [2007, 2014] seeds=[2007] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz C280 [1975, 2007] seeds=[2007] records=1816 errors=15
+21:29:11 seg done tier=B Mercedes-Benz 300E [1986, 1992] seeds=[1988] records=1816 errors=15
+21:29:11 seg done tier=W Mercedes-Benz C-Class [2008, 2014] seeds=[2008] records=1816 errors=15
+21:29:11 seg done tier=W Mercedes-Benz C-Class [2001, 2007] seeds=[2005] records=1816 errors=15
+21:29:11 seg done tier=W Mercedes-Benz E-Class [2003, 2009] seeds=[2003] records=1816 errors=15
+21:29:11 seg done tier=W Mercedes-Benz S-Class [1974, 2015] seeds=[2000] records=1816 errors=15
+21:29:11 seg done tier=W Mercedes-Benz M-Class [1995, 2005] seeds=[1999] records=1816 errors=15
+21:29:11 seg done tier=W Mercedes-Benz E-Class [1994, 2002] seeds=[2001] records=1816 errors=15
+21:29:11 seg done tier=W Mercedes-Benz C300 [2008, 2022] seeds=[2011] records=1816 errors=15
+21:29:11 seg done tier=W Mercedes-Benz M-Class [2006, 2011] seeds=[2006] records=1816 errors=15
+21:29:11 seg done tier=W Mercedes-Benz E350 [2006, 2014] seeds=[2006] records=1816 errors=15
+21:29:11 seg done tier=W Mercedes-Benz E320 [1995, 2008] seeds=[2003] records=1816 errors=15
+21:29:11 seg done tier=W Mercedes-Benz GL-Class [2007, 2015] seeds=[2007] records=1816 errors=15
+21:29:11 seg done tier=W Mercedes-Benz C230 [1997, 2007] seeds=[2006] records=1816 errors=15
+21:29:11 seg done tier=W Mercedes-Benz CLK-Class [1998, 2008] seeds=[2004] records=1816 errors=15
+21:29:11 seg done tier=W Mercedes-Benz C250 [2012, 2015] seeds=[2012] records=1816 errors=15
+21:29:11 seg done tier=W Mercedes-Benz ML350 [2003, 2013] seeds=[2008] records=1816 errors=15
+21:29:11 seg done tier=W Mercedes-Benz C-Class [1978, 2000] seeds=[1998] records=1816 errors=15
+21:29:11 seg done tier=W Mercedes-Benz E-Class [2010, 2016] seeds=[2010] records=1816 errors=15
+21:32:00 chain-unlinked wheels 1 numbers named by 6-6-47-0014-67, no catalog link: 6-6-47-0014
+21:32:00 chain-unlinked wheels 1 numbers named by 6-6-47-0015, no catalog link: 6-6-47-0015-67
+21:32:00 chain-unlinked wheels 1 numbers named by 6-6-47-0016, no catalog link: 124-401-14-02
+21:33:12 chain-unlinked wheels 2 numbers named by 6-6-47-0019, no catalog link: 124-401-07-02, 124-401-08-02
+21:33:12 chain-unlinked wheels 2 numbers named by 6-6-47-0203, no catalog link: 201-400-04-25, 126-400-06-25
+21:33:12 nav-fail Mercedes-Benz 300 1973: NavError: Mercedes-Benz 300 1973: no catalog badge page for this year
+21:33:12 seg done tier=W Mercedes-Benz 300 [1960, 1993] seeds=[1992, 1973] records=1823 errors=16
+21:33:12 seg done tier=W Mercedes-Benz GL450 [2007, 2015] seeds=[2007, 2012, 2011] records=1823 errors=16
+21:33:20 nav-fail Mercedes-Benz ML320 2004: NavError: HTTP 404 for https://www.mbpartsgiant.com/2004-mercedes_benz-ml320-parts
+21:33:20 seg done tier=W Mercedes-Benz ML320 [1998, 2009] seeds=[2000, 2004] records=1823 errors=17
+21:33:44 chain-unlinked wheels 1 numbers named by 6-6-03-1028, no catalog link: 6-6-03-1028-64
+21:33:44 seg done tier=W Mercedes-Benz C240 [2001, 2005] seeds=[2003, 2004, 2002] records=1824 errors=17
+21:34:48 chain-unlinked wheels 2 numbers named by 6-6-47-4503, no catalog link: 6-6-47-4503-64, 209-401-44-02-9765
+21:34:48 chain-unlinked wheels 1 numbers named by 6-6-03-0084, no catalog link: 209-401-49-02
+21:34:48 chain-unlinked wheels 1 numbers named by 6-6-03-0085-64, no catalog link: 6-6-03-0085
+21:35:04 seg done tier=W Mercedes-Benz CLK [1999, 2009] seeds=[2007, 2003, 2002] records=1828 errors=17
+21:36:56 seg done tier=W Mercedes-Benz R-Class [2006, 2012] seeds=[2006, 2010, 2009] records=1828 errors=17
+21:37:52 chain-unlinked wheels 1 numbers named by 6-6-47-4430, no catalog link: 221-401-21-02-9765
+21:37:52 chain-unlinked wheels 1 numbers named by 6-6-47-4395, no catalog link: 216-401-05-02
+21:37:52 chain-unlinked wheels 1 numbers named by 6-6-47-4396, no catalog link: 216-401-06-02
+21:37:52 seg done tier=W Mercedes-Benz S550 [2007, 2013] seeds=[2007] records=1833 errors=17
+21:40:00 chain-unlinked wheels 1 numbers named by 6-6-47-0509, no catalog link: 170-401-02-02
+21:40:00 chain-unlinked wheels 1 numbers named by 6-6-47-0510, no catalog link: 170-401-03-02
+21:40:00 chain-unlinked wheels 1 numbers named by 6-6-47-1333, no catalog link: 170-401-15-02
+21:40:00 chain-unlinked wheels 1 numbers named by 6-6-47-1392, no catalog link: 170-401-07-02
+21:40:00 chain-unlinked wheels 1 numbers named by 6-6-47-1482, no catalog link: 170-401-12-02
+21:41:52 chain-unlinked wheels 1 numbers named by 6-6-47-0602, no catalog link: 171-401-01-02
+21:41:52 chain-unlinked wheels 1 numbers named by 6-6-47-0603, no catalog link: 171-401-02-02
+21:41:52 chain-unlinked wheels 1 numbers named by 6-6-03-1097, no catalog link: 171-401-18-02-7756
+21:41:52 chain-unlinked wheels 2 numbers named by 6-6-03-1377, no catalog link: 6-6-03-1368, 209-400-10-02
+21:42:08 seg done tier=W Mercedes-Benz SLK [1998, 2008] seeds=[2001, 2007] records=1847 errors=17
+21:43:12 seg done tier=W Mercedes-Benz SLK-Class [1998, 2013] seeds=[1998, 2006, 2007] records=1847 errors=17
+21:44:08 chain-unlinked wheels 1 numbers named by 6-6-47-0521, no catalog link: 208-401-00-02
+21:44:08 seg done tier=W Mercedes-Benz CLK320 [1998, 2005] seeds=[2005, 2001, 2003] records=1850 errors=17
+21:44:41 chain-unlinked wheels 2 numbers named by 6-6-03-1012, no catalog link: 6-6-03-1012-67, 220-401-08-02
+21:44:41 chain-unlinked wheels 2 numbers named by 6-6-03-1013-67, no catalog link: 220-401-09-02, 6-6-03-1013
+21:45:44 chain-unlinked wheels 1 numbers named by 6-6-47-0546, no catalog link: 220-401-12-02
+21:45:44 chain-unlinked wheels 1 numbers named by 6-6-47-1841, no catalog link: 220-401-28-02
+21:45:44 chain-unlinked wheels 1 numbers named by 6-6-47-1842, no catalog link: 220-401-27-02
+21:45:44 chain-unlinked wheels 1 numbers named by 6-6-03-1240, no catalog link: 220-401-36-02
+21:45:44 chain-unlinked wheels 1 numbers named by 6-6-03-1241, no catalog link: 220-401-37-02
+21:45:44 seg done tier=W Mercedes-Benz S500 [1995, 2006] seeds=[2001, 2000, 2002] records=1858 errors=17
+21:48:00 chain-unlinked wheels 1 numbers named by 6-6-47-4489, no catalog link: 219-401-30-02
+21:48:00 chain-unlinked wheels 1 numbers named by 6-6-47-4306, no catalog link: 219-401-08-02
+21:48:00 chain-unlinked wheels 1 numbers named by 6-6-03-1115, no catalog link: 219-401-13-02
+21:49:12 chain-unlinked wheels 1 numbers named by 6-6-03-1080, no catalog link: 219-401-36-02
+21:49:12 chain-unlinked wheels 1 numbers named by 6-6-03-1081, no catalog link: 219-401-37-02
+21:49:53 seg done tier=W Mercedes-Benz CLS-Class [2006, 2012] seeds=[2006, 2010, 2009] records=1869 errors=17
+21:49:53 seg done tier=W Mercedes-Benz C350 [2006, 2015] seeds=[2008, 2011, 2012] records=1869 errors=17
+21:51:12 chain-unlinked wheels 1 numbers named by 204-401-21-02-9765, no catalog link: 204-401-21-02
+21:51:12 chain-unlinked wheels 1 numbers named by 204-401-52-02-9709, no catalog link: 204-401-52-02
+21:51:12 chain-unlinked wheels 1 numbers named by 204-401-53-02, no catalog link: 204-401-53-02-9709
+21:51:12 chain-unlinked wheels 1 numbers named by 204-401-24-02-9765, no catalog link: 204-401-24-02
+21:51:12 chain-unlinked wheels 1 numbers named by 204-401-25-02-9765, no catalog link: 204-401-25-02
+21:51:12 seg done tier=W Mercedes-Benz GLK350 [2010, 2014] seeds=[2011] records=1877 errors=17
+21:52:01 seg done tier=W Mercedes-Benz S430 [2000, 2006] seeds=[2002, 2004, 2003] records=1877 errors=17
+21:54:01 chain-unlinked wheels 1 numbers named by 204-401-12-04-64-9765, no catalog link: 204-401-12-04-9765
+21:54:01 chain-unlinked wheels 1 numbers named by 204-401-28-00-7X21, no catalog link: 204-401-02-04-7X21
+21:54:48 seg done tier=W Mercedes-Benz GLK-Class [2010, 2015] seeds=[2010, 2013, 2014] records=1886 errors=17
+21:56:56 chain-unlinked wheels 2 numbers named by 246-401-03-00-9765, no catalog link: 246-401-03-00-7X10, 246-401-11-02-9765
+21:56:56 chain-unlinked wheels 1 numbers named by 176-401-03-02-7X21, no catalog link: 176-401-03-02-64-7X21
+21:56:56 chain-unlinked wheels 1 numbers named by 176-401-02-00-7X23, no catalog link: 176-401-07-02-7X23
+21:58:24 chain-unlinked wheels 1 numbers named by 176-401-07-00-65-7X21, no catalog link: 176-401-07-00-7X21
+21:58:24 chain-unlinked wheels 2 numbers named by 246-401-04-00-7X21, no catalog link: 246-401-04-00-64-7X21, 246-401-12-02-7X21
+21:59:05 seg done tier=W Mercedes-Benz CLA-Class [2014, 2021] seeds=[2014, 2018, 2019] records=1902 errors=17
+21:59:20 time budget reached records=1902
