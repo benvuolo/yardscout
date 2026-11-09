@@ -90,10 +90,13 @@ RULES = {
     "trunk-lid": (r"^trunk lid$", ""),
     "tailgate": (r"^tail ?gate$", ""),
     "liftgate": (r"^lift ?gate$", ""),
-    # tier C: name rule pending (written after reading the trial's list rows)
-    "wiper-motor": (r"(?!x)x", ""),
-    "knuckle": (r"(?!x)x", ""),
-    "strut": (r"(?!x)x", ""),
+    # tier C, Mazda3/Mazda6 trial rows (exact names): "Wiper Motor", and a bare
+    # "Motor" on the wiper pages (the product page must say wiper, below);
+    # "Knuckle"; "Strut", "Shock Absorber", "Shock". "Damper" / "Dynamic Damper"
+    # are not struts.
+    "wiper-motor": (r"^((front|rear) )?(wiper )?motor( assembly)?$", ""),
+    "knuckle": (r"^(steering )?knuckle( assembly)?$", ""),
+    "strut": (r"^(front |rear )?(strut|shock absorber|shock)( assembly)?$", ""),
 }
 
 PRODUCT_RULES = {
@@ -106,6 +109,8 @@ PRODUCT_RULES = {
     "door-front": r"\bfront door\b",
     "door-rear": r"\brear door\b",
     "window-switch": r"Position: Driver Side",
+    # tier C: a bare "Motor" on a wiper page must be the wiper's, not the washer's
+    "wiper-motor": r"^(?!.*\bwasher\b).*\bwiper\b",
 }
 
 NOTES = {
