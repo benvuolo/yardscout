@@ -2462,3 +2462,51 @@ Other outputs of this session:
     pf_guards_unit ALL PASS, measure parity ok, payload oemStatus ok x8
     (0 Verified), second subaru curate byte-identical, test_groups_hash
     passes.
+
+## Aftermarket breadth (session_016ZzJfMnemMEFN88kPnYgxs, 2026-11-09)
+
+Scope: more aftermarket application catalogs (owner: breadth + data
+quality, no third-party costs). Verdicts in `scraper/oem_fitment/SOURCES.md`
+"Aftermarket catalogs, probe 2026-11-09".
+
+**Probe results.** Depo OUT (challenge). Four Seasons OUT (403 challenge).
+SMP e-catalog OUT (403); ACI is an SMP brand, so OUT with it. Cardone OUT /
+unreachable (product grid client-side; sitemaps and terms robots-disallowed
+for us). Dorman, TYC, Denso stay out as decided. **Spectra Premium passes**
+(ecat.spectrapremium.com: robots allow all, no challenge on catalog pages,
+no anti-automation clause; Legal Notice has a no-reproduction clause for the
+hub to weigh).
+
+**Adapter (dde132d).** `aftermarket/spectrapremium.py`, vehicle-driven:
+worklist (year, make) -> get-models.json -> exact-normalized model match ->
+get-submodels.json (-> get-motorizations.json on comma ids) ->
+`/en/vehicles/<id>/parts?limit=50`. One record per vehicle: year, make,
+model, submodel, motorization (engine code), every part card (pn, line,
+application note, specs). Seed year per worklist segment first, then the
+other segment years >= 1995. Uses run.py (new `SITE_MODULES` map and an
+optional per-module `score` hook) and common.get, so pacing, cache, RFC 9309
+robots and the permanent stop are unchanged. Tests:
+`aftermarket/tests/test_spectrapremium.py` (20 checks, offline fixtures).
+
+Why vehicle pages: the part page prints applications without notes; the
+note lives only on the vehicle page. Real notes seen on 2012 Civic LX:
+radiator CU13221 "USA Built; Canadian Built" vs CU13257 "Japan Built"; fuel
+module SP8054M Federal vs SP8965M California emissions; A/C accumulator,
+evaporator and condenser split "Body Type: Coupe/Sedan". So curation will
+refuse plant / emissions / option / trans notes, map "Body Type" to the body
+gate, and pass only an allowlist of install-only clauses ("New", "with
+Clutch", "Sensor Only", "Qty Req.", "Failure to ... void warranty", ...).
+Unknown clauses refuse. Pages print no OE numbers, so no dealer OE join.
+
+**Blocked on the hub (asked 2026-11-09):**
+1. add `ecat.spectrapremium.com` to `fetch.ALLOWED`;
+2. `fetch.CHALLENGE_RE` matches "captcha" in the reCAPTCHA `<script src>`
+   tag on every ecat page (VIN form only); proposed narrow fix: ignore that
+   exact tag, every other marker still stops. Not changed by this session.
+3. then dispatch `oem-aftermarket-crawl.yml` with site
+   `ecat.spectrapremium.com`.
+
+**Next:** crawl -> `groups_spectra` curation (one Likely group per Spectra
+pn x line; engine gate on Eng. Desg./liters; body gate on Body Type; refuse
+other notes) -> §11.4 sample per line -> hub -> branch
+interchange/aftermarket-1 for any app change. Nothing shipped.
