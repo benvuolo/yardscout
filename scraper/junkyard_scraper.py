@@ -18879,6 +18879,29 @@ IPULL_YARDS = {  # keyed by the CSV's "Yard City" column
 }
 
 
+# iPull-uPull photos (2026-11-09, round 5): opening a car on ipullupull.com
+# shows its photo from the site's own catalog folder:
+# /wp-content/uploads/ipullupull-catalog/{STOCK}/{STOCK}-1.jpg (1920x1440
+# ~585 KB) with a WordPress 768x576 copy (~100 KB) beside it. The path is the
+# stock number, but ~16% of cars have none, so one HEAD per NEW car checks
+# the 768 copy (cached; robots allows all; 10 s). Code "i{STOCK}".
+IPULL_PHOTO_LOOKUP_MAX = int(os.environ.get("IPULL_PHOTO_LOOKUP_MAX", "200"))
+IPULL_PHOTO_DELAY_SEC = 10.0
+
+
+def _ipull_lookup_photo(stock: str):
+    if not re.fullmatch(r"[A-Z]{2,4}\d{4,8}", stock or ""):
+        return ("none", "")
+    url = (f"https://ipullupull.com/wp-content/uploads/ipullupull-catalog/{stock}/{stock}-1-768x576.jpg")
+    try:
+        r = requests.head(url, headers=YARDSCOUT_HEADERS, timeout=20, allow_redirects=False)
+    except Exception:  # noqa: BLE001
+        return None
+    if r.status_code == 200 and (r.headers.get("content-type") or "").startswith("image/"):
+        return ("photo", "i" + stock)
+    return ("none", "") if r.status_code == 404 else None
+
+
 def fetch_ipull_inventory() -> list[dict]:
     """Fetch iPull-uPull's 4-yard chain inventory (nonce GET + one CSV POST)."""
     import csv
@@ -18953,6 +18976,12 @@ def fetch_ipull_inventory() -> list[dict]:
               f"{sorted(unknown_yards)}", file=sys.stderr)
     seen: set[str] = set()
     unique = [v for v in vehicles if not (v["id"] in seen or seen.add(v["id"]))]
+    try:
+        photo_lookup_pass("ipull", [(v, v["id"].split("-", 1)[1].upper()) for v in unique
+                                    if v["id"].startswith("ipull-")],
+                          _ipull_lookup_photo, cap=IPULL_PHOTO_LOOKUP_MAX, delay=IPULL_PHOTO_DELAY_SEC)
+    except Exception as e:  # noqa: BLE001 — photos are optional
+        print(f"  [iPull-uPull photos] skipped: {e}", file=sys.stderr)
     print(f"  [iPull-uPull] {len(unique)} vehicles across "
           f"{len({v['_location'] for v in unique})} yards", file=sys.stderr)
     return unique

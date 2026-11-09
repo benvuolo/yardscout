@@ -81,6 +81,16 @@ with mock.patch.object(js.requests, "head", side_effect=[H(404), H(404)]):
 with mock.patch.object(js.requests, "head", return_value=H(503)):
     check("Fenix: server error -> unknown (retry)", js._fenix_lookup_photo("2|2026-11-01") is None)
 
+# --- iPull-uPull (round 5) ----------------------------------------------------------
+check("iPull code -> 768 card + full large",
+      build("iFRE118566") == ("ipull", "https://ipullupull.com/wp-content/uploads/ipullupull-catalog/FRE118566/FRE118566-1-768x576.jpg")
+      and build("iFRE118566", "large")[1].endswith("/FRE118566/FRE118566-1.jpg"))
+with mock.patch.object(js.requests, "head", return_value=H(200)):
+    check("iPull: 768 copy exists -> photo", js._ipull_lookup_photo("FRE118566") == ("photo", "iFRE118566"))
+with mock.patch.object(js.requests, "head", return_value=H(404)):
+    check("iPull: 404 -> none", js._ipull_lookup_photo("SAC053985") == ("none", ""))
+check("iPull: odd stock -> none, no request", js._ipull_lookup_photo("../x") == ("none", ""))
+
 # --- YardSmart ----------------------------------------------------------------------
 def blob(exp):
     raw = json.dumps({"_rails": {"message": "BAhpBA2Paw==", "exp": exp, "pur": "blob_id"}}, separators=(",", ":"))

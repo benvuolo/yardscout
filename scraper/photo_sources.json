@@ -903,6 +903,19 @@
         }
       ],
       "note": "Army's listing photo (YardSmart blob) via YardSmart's own 325x600 resize. Expiring id republished every scan."
+    },
+    "ipull": {
+      "enabled": true,
+      "label": "Photo: iPull-uPull",
+      "host": "ipullupull.com",
+      "patterns": [
+        {
+          "code": "^i([A-Z]{2,4}\\d{4,8})$",
+          "card": "https://ipullupull.com/wp-content/uploads/ipullupull-catalog/{1}/{1}-1-768x576.jpg",
+          "large": "https://ipullupull.com/wp-content/uploads/ipullupull-catalog/{1}/{1}-1.jpg"
+        }
+      ],
+      "note": "Own site catalog photo (what a user sees on opening a car). Card 768x576 ~100 KB; large 1920x1440 ~585 KB. Checked once per car (HEAD), cached."
     }
   }
 }
