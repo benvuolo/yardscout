@@ -94612,7 +94612,7 @@
      2001
     ]
    ],
-   "cars": 142,
+   "cars": 141,
    "cat": "window-regulator",
    "id": "oem:ford:window-regulator:FR:4c526d5ba9",
    "kind": "body",
@@ -94639,7 +94639,7 @@
      2001
     ]
    ],
-   "cars": 142,
+   "cars": 141,
    "cat": "window-regulator",
    "id": "oem:ford:window-regulator:FL:c97c297ec1",
    "kind": "body",
@@ -94666,7 +94666,7 @@
      2001
     ]
    ],
-   "cars": 142,
+   "cars": 141,
    "cat": "headlights",
    "id": "oem:ford:headlights:R:e3fa83b077",
    "kind": "body",
@@ -94693,7 +94693,7 @@
      2001
     ]
    ],
-   "cars": 142,
+   "cars": 141,
    "cat": "headlights",
    "id": "oem:ford:headlights:R:3333ddb41d",
    "kind": "body",
@@ -94720,7 +94720,7 @@
      2001
     ]
    ],
-   "cars": 142,
+   "cars": 141,
    "cat": "headlights",
    "id": "oem:ford:headlights:L:c34bb49527",
    "kind": "body",
@@ -94747,7 +94747,7 @@
      2001
     ]
    ],
-   "cars": 142,
+   "cars": 141,
    "cat": "headlights",
    "id": "oem:ford:headlights:L:4863292fb4",
    "kind": "body",
@@ -94774,7 +94774,7 @@
      2001
     ]
    ],
-   "cars": 142,
+   "cars": 141,
    "cat": "climate-control",
    "id": "oem:ford:climate-control:C:9921744f31",
    "kind": "body",
@@ -94888,7 +94888,7 @@
      2005
     ]
    ],
-   "cars": 288,
+   "cars": 287,
    "cat": "window-switch",
    "id": "oem:ford:window-switch:DM:460711e66c",
    "kind": "body",
@@ -94948,7 +94948,7 @@
      2005
     ]
    ],
-   "cars": 288,
+   "cars": 287,
    "cat": "window-regulator",
    "id": "oem:ford:window-regulator:FR:7a0a547b3a",
    "kind": "body",
@@ -94981,7 +94981,7 @@
      2005
     ]
    ],
-   "cars": 288,
+   "cars": 287,
    "cat": "window-regulator",
    "id": "oem:ford:window-regulator:RR:7ea5004ecc",
    "kind": "body",
@@ -95014,7 +95014,7 @@
      2005
     ]
    ],
-   "cars": 288,
+   "cars": 287,
    "cat": "window-regulator",
    "id": "oem:ford:window-regulator:RL:3c83a57b5a",
    "kind": "body",
@@ -95338,7 +95338,7 @@
      2015
     ]
    ],
-   "cars": 415,
+   "cars": 416,
    "cat": "window-regulator",
    "id": "oem:ford:window-regulator:FL+FR+RL+RR+SL+SR:7c70e98fa5",
    "kind": "body",
@@ -95365,7 +95365,7 @@
      2015
     ]
    ],
-   "cars": 415,
+   "cars": 416,
    "cat": "window-regulator",
    "id": "oem:ford:window-regulator:FL+FR+RL+RR+SL+SR:83783498ca",
    "kind": "body",
@@ -95392,7 +95392,7 @@
      2015
     ]
    ],
-   "cars": 415,
+   "cars": 416,
    "cat": "window-regulator",
    "id": "oem:ford:window-regulator:FL+FR+RL+RR+SL+SR:bf72cf6844",
    "kind": "body",
@@ -95419,7 +95419,7 @@
      2015
     ]
    ],
-   "cars": 415,
+   "cars": 416,
    "cat": "window-regulator",
    "id": "oem:ford:window-regulator:FL+FR+RL+RR+SL+SR:ec3a8e03bc",
    "kind": "body",
@@ -95446,7 +95446,7 @@
      2008
     ]
    ],
-   "cars": 385,
+   "cars": 386,
    "cat": "bumper-rear",
    "id": "oem:ford:bumper-rear:C:ae5b223866",
    "kind": "body",
@@ -95473,7 +95473,7 @@
      2007
     ]
    ],
-   "cars": 257,
+   "cars": 256,
    "cat": "bumper-front",
    "id": "oem:ford:bumper-front:C:601502a849",
    "kind": "body",
@@ -95527,7 +95527,7 @@
      2009
     ]
    ],
-   "cars": 224,
+   "cars": 225,
    "cat": "bumper-front",
    "id": "oem:ford:bumper-front:C:4ee47f3ec0",
    "kind": "body",
@@ -95554,7 +95554,7 @@
      2008
     ]
    ],
-   "cars": 231,
+   "cars": 230,
    "cat": "climate-control",
    "id": "oem:ford:climate-control:C:a484f27b2c",
    "kind": "body",
@@ -95581,7 +95581,7 @@
      2008
     ]
    ],
-   "cars": 231,
+   "cars": 230,
    "cat": "climate-control",
    "id": "oem:ford:climate-control:C:0ff36dd140",
    "kind": "body",
@@ -95824,7 +95824,7 @@
      2010
     ]
    ],
-   "cars": 811,
+   "cars": 812,
    "cat": "fender",
    "id": "oem:ford:fender:R:a2c1c7f709",
    "kind": "body",
@@ -95851,7 +95851,7 @@
      2010
     ]
    ],
-   "cars": 811,
+   "cars": 812,
    "cat": "fender",
    "id": "oem:ford:fender:L:a814ecddf7",
    "kind": "body",
@@ -96064,7 +96064,7 @@
      2011
     ]
    ],
-   "cars": 393,
+   "cars": 395,
    "cat": "bumper-rear",
    "id": "oem:ford:bumper-rear:C:f557171499",
    "kind": "body",
@@ -96091,7 +96091,7 @@
      2011
     ]
    ],
-   "cars": 393,
+   "cars": 395,
    "cat": "bumper-rear",
    "id": "oem:ford:bumper-rear:C:ea96245317",
    "kind": "body",
@@ -96178,7 +96178,7 @@
      2014
     ]
    ],
-   "cars": 755,
+   "cars": 754,
    "cat": "bumper-rear",
    "id": "oem:ford:bumper-rear:C:dc56b30291",
    "kind": "body",
@@ -96211,7 +96211,7 @@
      2000
     ]
    ],
-   "cars": 253,
+   "cars": 252,
    "cat": "side-mirrors",
    "id": "oem:ford:side-mirrors:R:7ed40dec1f",
    "kind": "body",
@@ -96244,7 +96244,7 @@
      2000
     ]
    ],
-   "cars": 253,
+   "cars": 252,
    "cat": "side-mirrors",
    "id": "oem:ford:side-mirrors:R:0fe0d90d2d",
    "kind": "body",
@@ -96277,7 +96277,7 @@
      2000
     ]
    ],
-   "cars": 253,
+   "cars": 252,
    "cat": "side-mirrors",
    "id": "oem:ford:side-mirrors:L:1429fba2a1",
    "kind": "body",
@@ -96310,7 +96310,7 @@
      2000
     ]
    ],
-   "cars": 253,
+   "cars": 252,
    "cat": "side-mirrors",
    "id": "oem:ford:side-mirrors:L:41527a0f7d",
    "kind": "body",
@@ -96337,7 +96337,7 @@
      2001
     ]
    ],
-   "cars": 142,
+   "cars": 141,
    "cat": "window-regulator",
    "id": "oem:ford:window-regulator:FR:1cb61a3728",
    "kind": "body",
@@ -96391,7 +96391,7 @@
      2008
     ]
    ],
-   "cars": 113,
+   "cars": 114,
    "cat": "side-mirrors",
    "id": "oem:ford:side-mirrors:L:546813b74d",
    "kind": "body",
@@ -96418,7 +96418,7 @@
      2008
     ]
    ],
-   "cars": 113,
+   "cars": 114,
    "cat": "side-mirrors",
    "id": "oem:ford:side-mirrors:L:55ab53205c",
    "kind": "body",
@@ -96613,7 +96613,7 @@
      2000
     ]
    ],
-   "cars": 253,
+   "cars": 252,
    "cat": "side-mirrors",
    "id": "oem:ford:side-mirrors:R:2cb98ff300",
    "kind": "body",
@@ -96646,7 +96646,7 @@
      2000
     ]
    ],
-   "cars": 253,
+   "cars": 252,
    "cat": "side-mirrors",
    "id": "oem:ford:side-mirrors:R:853bd3fb9b",
    "kind": "body",
@@ -96679,7 +96679,7 @@
      2000
     ]
    ],
-   "cars": 253,
+   "cars": 252,
    "cat": "side-mirrors",
    "id": "oem:ford:side-mirrors:L:49dce87df8",
    "kind": "body",
@@ -96712,7 +96712,7 @@
      2000
     ]
    ],
-   "cars": 253,
+   "cars": 252,
    "cat": "side-mirrors",
    "id": "oem:ford:side-mirrors:L:b97fd9fb33",
    "kind": "body",
@@ -96739,7 +96739,7 @@
      2001
     ]
    ],
-   "cars": 142,
+   "cars": 141,
    "cat": "window-regulator",
    "id": "oem:ford:window-regulator:FR:5cb52175dc",
    "kind": "body",
@@ -96766,7 +96766,7 @@
      1998
     ]
    ],
-   "cars": 128,
+   "cars": 130,
    "cat": "climate-control",
    "id": "oem:ford:climate-control:C:72c7053cc8",
    "kind": "body",
@@ -96793,7 +96793,7 @@
      2001
     ]
    ],
-   "cars": 832,
+   "cars": 833,
    "cat": "bumper-front",
    "id": "oem:ford:bumper-front:C:b81bc749ee",
    "kind": "body",
@@ -96820,7 +96820,7 @@
      2001
     ]
    ],
-   "cars": 832,
+   "cars": 833,
    "cat": "bumper-front",
    "id": "oem:ford:bumper-front:C:8c6ab82e43",
    "kind": "body",
@@ -96847,7 +96847,7 @@
      2001
     ]
    ],
-   "cars": 832,
+   "cars": 833,
    "cat": "gauge-cluster",
    "id": "oem:ford:gauge-cluster:C:b569ca1107",
    "kind": "body",
@@ -96874,7 +96874,7 @@
      2001
     ]
    ],
-   "cars": 832,
+   "cars": 833,
    "cat": "gauge-cluster",
    "id": "oem:ford:gauge-cluster:C:31847f949f",
    "kind": "body",
@@ -96888,7 +96888,7 @@
   }
  ],
  "ns": "ford",
- "policy_sha256": "3842a15ed5308947ee820a6d9fe7355f31196736f6c0faac65e93fec6a485b8f",
+ "policy_sha256": "c2dbb224e39162a66b41454476919f8a5c4eb4815b4ee7a019c8f077bf82d1d6",
  "raw": {
   "commit": "c36da2eb98835c02f81c05e8c36b6a926634a332",
   "ref": "c36da2eb98835c02f81c05e8c36b6a926634a332",

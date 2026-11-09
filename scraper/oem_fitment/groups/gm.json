@@ -36403,6 +36403,601 @@
   ],
   [
    "Chevrolet",
+   "Aveo",
+   2004,
+   "ac-compressor",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2004,
+   "alternator",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2004,
+   "climate-control",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2004,
+   "fuel-pump-module",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2004,
+   "headlights",
+   "open:unattested"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2004,
+   "power-steering-pump",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2004,
+   "side-mirrors",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2004,
+   "starter",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2004,
+   "tail-lights",
+   "open:unattested"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2004,
+   "throttle-body",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2004,
+   "window-regulator",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2004,
+   "window-switch",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2005,
+   "ac-compressor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2005,
+   "alternator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2005,
+   "headlights",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2005,
+   "power-steering-pump",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2005,
+   "side-mirrors",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2005,
+   "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2005,
+   "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2005,
+   "window-regulator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2006,
+   "ac-compressor",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2006,
+   "alternator",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2006,
+   "climate-control",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2006,
+   "fuel-pump-module",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2006,
+   "headlights",
+   "open:unattested"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2006,
+   "power-steering-pump",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2006,
+   "side-mirrors",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2006,
+   "starter",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2006,
+   "tail-lights",
+   "open:unattested"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2006,
+   "throttle-body",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2006,
+   "window-regulator",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2006,
+   "window-switch",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2007,
+   "ac-compressor",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2007,
+   "alternator",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2007,
+   "climate-control",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2007,
+   "fuel-pump-module",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2007,
+   "headlights",
+   "open:unattested"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2007,
+   "power-steering-pump",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2007,
+   "side-mirrors",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2007,
+   "starter",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2007,
+   "tail-lights",
+   "open:unattested"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2007,
+   "throttle-body",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2007,
+   "window-regulator",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2007,
+   "window-switch",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2008,
+   "ac-compressor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2008,
+   "alternator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2008,
+   "headlights",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2008,
+   "power-steering-pump",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2008,
+   "side-mirrors",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2008,
+   "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2008,
+   "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2008,
+   "window-regulator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2009,
+   "ac-compressor",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2009,
+   "alternator",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2009,
+   "climate-control",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2009,
+   "fuel-pump-module",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2009,
+   "headlights",
+   "open:unattested"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2009,
+   "ignition-coils",
+   "open:no_list_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2009,
+   "power-steering-pump",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2009,
+   "side-mirrors",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2009,
+   "starter",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2009,
+   "tail-lights",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2009,
+   "throttle-body",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2009,
+   "window-regulator",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2009,
+   "window-switch",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2010,
+   "ac-compressor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2010,
+   "alternator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2010,
+   "headlights",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2010,
+   "ignition-coils",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2010,
+   "power-steering-pump",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2010,
+   "side-mirrors",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2010,
+   "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2010,
+   "tail-lights",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2010,
+   "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2010,
+   "window-regulator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2011,
+   "ac-compressor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2011,
+   "alternator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2011,
+   "headlights",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2011,
+   "ignition-coils",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2011,
+   "power-steering-pump",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2011,
+   "side-mirrors",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2011,
+   "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2011,
+   "tail-lights",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2011,
+   "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2011,
+   "window-regulator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
    "Beretta",
    1987,
    "fuel-pump-module",
@@ -159208,6 +159803,158 @@
   ],
   [
    "Chevrolet",
+   "Aveo",
+   2004,
+   "alternator",
+   "gm-aveo",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2004,
+   "starter",
+   "gm-aveo",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2005,
+   "alternator",
+   "gm-aveo",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2005,
+   "starter",
+   "gm-aveo",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2006,
+   "alternator",
+   "gm-aveo",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2006,
+   "starter",
+   "gm-aveo",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2007,
+   "alternator",
+   "gm-aveo",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2007,
+   "starter",
+   "gm-aveo",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2008,
+   "alternator",
+   "gm-aveo",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2008,
+   "starter",
+   "gm-aveo",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2009,
+   "alternator",
+   "gm-aveo",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2009,
+   "ignition-coils",
+   "gm-aveo",
+   "open:no_list_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2009,
+   "starter",
+   "gm-aveo",
+   "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2010,
+   "alternator",
+   "gm-aveo",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2010,
+   "ignition-coils",
+   "gm-aveo",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2010,
+   "starter",
+   "gm-aveo",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2011,
+   "alternator",
+   "gm-aveo",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2011,
+   "ignition-coils",
+   "gm-aveo",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Aveo",
+   2011,
+   "starter",
+   "gm-aveo",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
    "Blazer",
    1995,
    "alternator",
@@ -175124,7 +175871,7 @@
      2004
     ]
    ],
-   "cars": 231,
+   "cars": 228,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:284426c1ed",
    "kind": "body",
@@ -175151,7 +175898,7 @@
      2004
     ]
    ],
-   "cars": 85,
+   "cars": 84,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:8636ae0453",
    "kind": "body",
@@ -175184,7 +175931,7 @@
      2004
     ]
    ],
-   "cars": 231,
+   "cars": 228,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:3d7c80c6bf",
    "kind": "body",
@@ -175217,7 +175964,7 @@
      2004
     ]
    ],
-   "cars": 231,
+   "cars": 228,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:7926ffb775",
    "kind": "body",
@@ -175250,7 +175997,7 @@
      2004
     ]
    ],
-   "cars": 231,
+   "cars": 228,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:41f806d500",
    "kind": "body",
@@ -175283,7 +176030,7 @@
      2004
     ]
    ],
-   "cars": 231,
+   "cars": 228,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:54f9df9e40",
    "kind": "body",
@@ -175316,7 +176063,7 @@
      2004
     ]
    ],
-   "cars": 231,
+   "cars": 228,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:38ff8fd5f4",
    "kind": "body",
@@ -175343,7 +176090,7 @@
      2004
     ]
    ],
-   "cars": 200,
+   "cars": 197,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:59ed6a5d75",
    "kind": "body",
@@ -175370,7 +176117,7 @@
      2004
     ]
    ],
-   "cars": 200,
+   "cars": 197,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:652fb56ab6",
    "kind": "body",
@@ -175397,7 +176144,7 @@
      2004
     ]
    ],
-   "cars": 200,
+   "cars": 197,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:05ecfca394",
    "kind": "body",
@@ -175424,7 +176171,7 @@
      2004
     ]
    ],
-   "cars": 200,
+   "cars": 197,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:9c84b98436",
    "kind": "body",
@@ -175457,7 +176204,7 @@
      2005
     ]
    ],
-   "cars": 153,
+   "cars": 152,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:f27fc56e42",
    "kind": "body",
@@ -175490,7 +176237,7 @@
      2005
     ]
    ],
-   "cars": 153,
+   "cars": 152,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:a833a46aa4",
    "kind": "body",
@@ -175523,7 +176270,7 @@
      2005
     ]
    ],
-   "cars": 153,
+   "cars": 152,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:e3f8481383",
    "kind": "body",
@@ -175556,7 +176303,7 @@
      2005
     ]
    ],
-   "cars": 153,
+   "cars": 152,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:fc44a6e693",
    "kind": "body",
@@ -175610,7 +176357,7 @@
      2003
     ]
    ],
-   "cars": 145,
+   "cars": 144,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:2343d02c7e",
    "kind": "body",
@@ -175637,7 +176384,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:a4f79ce762",
    "kind": "body",
@@ -175664,7 +176411,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:6a5582ba93",
    "kind": "body",
@@ -175691,7 +176438,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:d704228aa4",
    "kind": "body",
@@ -175718,7 +176465,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:cc3f3859c4",
    "kind": "body",
@@ -175745,7 +176492,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:5c295954d6",
    "kind": "body",
@@ -175772,7 +176519,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:ced876ba8c",
    "kind": "body",
@@ -175799,7 +176546,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:f982ed38e3",
    "kind": "body",
@@ -175826,7 +176573,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:f9b515aa0a",
    "kind": "body",
@@ -175853,7 +176600,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:27cf5048ed",
    "kind": "body",
@@ -175880,7 +176627,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:76be206794",
    "kind": "body",
@@ -175907,7 +176654,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:eb8353b34b",
    "kind": "body",
@@ -175934,7 +176681,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:aa2fbb57e8",
    "kind": "body",
@@ -175967,7 +176714,7 @@
      2003
     ]
    ],
-   "cars": 213,
+   "cars": 210,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:118574b478",
    "kind": "body",
@@ -176048,7 +176795,7 @@
      1999
     ]
    ],
-   "cars": 223,
+   "cars": 222,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:2e0b6175f2",
    "kind": "body",
@@ -176087,7 +176834,7 @@
      2000
     ]
    ],
-   "cars": 225,
+   "cars": 224,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:a059d20e17",
    "kind": "body",
@@ -176126,7 +176873,7 @@
      2000
     ]
    ],
-   "cars": 225,
+   "cars": 224,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:04d5fabd69",
    "kind": "body",
@@ -176153,7 +176900,7 @@
      2001
     ]
    ],
-   "cars": 126,
+   "cars": 125,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:81d40061ae",
    "kind": "body",
@@ -176180,7 +176927,7 @@
      2001
     ]
    ],
-   "cars": 126,
+   "cars": 125,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:b252ff368a",
    "kind": "body",
@@ -176207,7 +176954,7 @@
      2001
     ]
    ],
-   "cars": 126,
+   "cars": 125,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:c5ff5dfb68",
    "kind": "body",
@@ -176234,7 +176981,7 @@
      2001
     ]
    ],
-   "cars": 126,
+   "cars": 125,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:b9b7eacd79",
    "kind": "body",
@@ -176261,7 +177008,7 @@
      2000
     ]
    ],
-   "cars": 174,
+   "cars": 173,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:9d5ff742c4",
    "kind": "body",
@@ -176288,7 +177035,7 @@
      2000
     ]
    ],
-   "cars": 174,
+   "cars": 173,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:3e7ef24db9",
    "kind": "body",
@@ -176321,7 +177068,7 @@
      2001
     ]
    ],
-   "cars": 140,
+   "cars": 139,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:845a875270",
    "kind": "body",
@@ -176354,7 +177101,7 @@
      2001
     ]
    ],
-   "cars": 140,
+   "cars": 139,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:f96873c140",
    "kind": "body",
@@ -176387,7 +177134,7 @@
      2000
     ]
    ],
-   "cars": 209,
+   "cars": 208,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:c56743a878",
    "kind": "body",
@@ -176420,7 +177167,7 @@
      2000
     ]
    ],
-   "cars": 209,
+   "cars": 208,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:bb29252b2e",
    "kind": "body",
@@ -176447,7 +177194,7 @@
      2000
     ]
    ],
-   "cars": 174,
+   "cars": 173,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:f892e2f3f0",
    "kind": "body",
@@ -176474,7 +177221,7 @@
      2000
     ]
    ],
-   "cars": 174,
+   "cars": 173,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:45201874ec",
    "kind": "body",
@@ -176501,7 +177248,7 @@
      2000
     ]
    ],
-   "cars": 174,
+   "cars": 173,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:cfd8fa3357",
    "kind": "body",
@@ -176528,7 +177275,7 @@
      2000
     ]
    ],
-   "cars": 174,
+   "cars": 173,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:853aef6ffc",
    "kind": "body",
@@ -176609,7 +177356,7 @@
      2004
     ]
    ],
-   "cars": 402,
+   "cars": 400,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:2336d93361",
    "kind": "body",
@@ -176750,7 +177497,7 @@
      2001
     ]
    ],
-   "cars": 140,
+   "cars": 139,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:a0107bec86",
    "kind": "body",
@@ -176783,7 +177530,7 @@
      2001
     ]
    ],
-   "cars": 140,
+   "cars": 139,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:a187cbc123",
    "kind": "body",
@@ -176810,7 +177557,7 @@
      2000
     ]
    ],
-   "cars": 174,
+   "cars": 173,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:c572e952ab",
    "kind": "body",
@@ -176837,7 +177584,7 @@
      2000
     ]
    ],
-   "cars": 174,
+   "cars": 173,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:63c44e708d",
    "kind": "body",
@@ -176870,7 +177617,7 @@
      2005
     ]
    ],
-   "cars": 153,
+   "cars": 152,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:7120ecd93f",
    "kind": "body",
@@ -176903,7 +177650,7 @@
      2005
     ]
    ],
-   "cars": 153,
+   "cars": 152,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:e3fdc8a8c6",
    "kind": "body",
@@ -176936,7 +177683,7 @@
      2005
     ]
    ],
-   "cars": 153,
+   "cars": 152,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:ea3844ab14",
    "kind": "body",
@@ -176969,7 +177716,7 @@
      2005
     ]
    ],
-   "cars": 153,
+   "cars": 152,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:507d68ce48",
    "kind": "body",
@@ -177002,7 +177749,7 @@
      2005
     ]
    ],
-   "cars": 153,
+   "cars": 152,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:83b1ba34d3",
    "kind": "body",
@@ -177035,7 +177782,7 @@
      2005
     ]
    ],
-   "cars": 153,
+   "cars": 152,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:4d4e235d87",
    "kind": "body",
@@ -177194,7 +177941,7 @@
      2001
     ]
    ],
-   "cars": 126,
+   "cars": 125,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:6b1c4d72ee",
    "kind": "body",
@@ -177221,7 +177968,7 @@
      2001
     ]
    ],
-   "cars": 126,
+   "cars": 125,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:5f4439bd3d",
    "kind": "body",
@@ -177248,7 +177995,7 @@
      1999
     ]
    ],
-   "cars": 223,
+   "cars": 222,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:0c39044d34",
    "kind": "body",
@@ -177275,7 +178022,7 @@
      1999
     ]
    ],
-   "cars": 223,
+   "cars": 222,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:48ada603e8",
    "kind": "body",
@@ -177302,7 +178049,7 @@
      2000
     ]
    ],
-   "cars": 174,
+   "cars": 173,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:c816dc99b9",
    "kind": "body",
@@ -177329,7 +178076,7 @@
      2001
     ]
    ],
-   "cars": 126,
+   "cars": 125,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:04de88b149",
    "kind": "body",
@@ -177356,7 +178103,7 @@
      2001
     ]
    ],
-   "cars": 126,
+   "cars": 125,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:92c97301e0",
    "kind": "body",
@@ -177383,7 +178130,7 @@
      1999
     ]
    ],
-   "cars": 223,
+   "cars": 222,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:34c3ff20c1",
    "kind": "body",
@@ -177410,7 +178157,7 @@
      1999
     ]
    ],
-   "cars": 223,
+   "cars": 222,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:ec19a90149",
    "kind": "body",
@@ -177437,7 +178184,7 @@
      2004
     ]
    ],
-   "cars": 402,
+   "cars": 400,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:6932605812",
    "kind": "body",
@@ -177464,7 +178211,7 @@
      2004
     ]
    ],
-   "cars": 402,
+   "cars": 400,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:9e7c0633d6",
    "kind": "body",
@@ -177491,7 +178238,7 @@
      2004
     ]
    ],
-   "cars": 402,
+   "cars": 400,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:ae084428cd",
    "kind": "body",
@@ -177518,7 +178265,7 @@
      2004
     ]
    ],
-   "cars": 402,
+   "cars": 400,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:1b3e5368ca",
    "kind": "body",
@@ -177545,7 +178292,7 @@
      2004
     ]
    ],
-   "cars": 402,
+   "cars": 400,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:6081dfecfd",
    "kind": "body",
@@ -177572,7 +178319,7 @@
      2004
     ]
    ],
-   "cars": 402,
+   "cars": 400,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:46ad1dd397",
    "kind": "body",
@@ -177599,7 +178346,7 @@
      2004
     ]
    ],
-   "cars": 402,
+   "cars": 400,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:25006d7344",
    "kind": "body",
@@ -177626,7 +178373,7 @@
      2004
     ]
    ],
-   "cars": 402,
+   "cars": 400,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:4a6ae8f87e",
    "kind": "body",
@@ -177653,7 +178400,7 @@
      2004
     ]
    ],
-   "cars": 402,
+   "cars": 400,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:86325fdb9d",
    "kind": "body",
@@ -177680,7 +178427,7 @@
      2004
     ]
    ],
-   "cars": 402,
+   "cars": 400,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:2d99b27265",
    "kind": "body",
@@ -177707,7 +178454,7 @@
      2004
     ]
    ],
-   "cars": 402,
+   "cars": 400,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:da31f1a5c6",
    "kind": "body",
@@ -177734,7 +178481,7 @@
      2004
     ]
    ],
-   "cars": 402,
+   "cars": 400,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:6821d83924",
    "kind": "body",
@@ -177761,7 +178508,7 @@
      2004
     ]
    ],
-   "cars": 402,
+   "cars": 400,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:ae4cd8c813",
    "kind": "body",
@@ -177788,7 +178535,7 @@
      2004
     ]
    ],
-   "cars": 402,
+   "cars": 400,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:7a132eed3a",
    "kind": "body",
@@ -177815,7 +178562,7 @@
      2007
     ]
    ],
-   "cars": 407,
+   "cars": 406,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:0e71950e4b",
    "kind": "body",
@@ -177989,7 +178736,7 @@
      2007
     ]
    ],
-   "cars": 407,
+   "cars": 406,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:164820b5ca",
    "kind": "body",
@@ -178016,7 +178763,7 @@
      2007
     ]
    ],
-   "cars": 407,
+   "cars": 406,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:91a2833cb4",
    "kind": "body",
@@ -178043,7 +178790,7 @@
      2007
     ]
    ],
-   "cars": 407,
+   "cars": 406,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:23433c5fb9",
    "kind": "body",
@@ -178070,7 +178817,7 @@
      2007
     ]
    ],
-   "cars": 407,
+   "cars": 406,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:a983506e26",
    "kind": "body",
@@ -178097,7 +178844,7 @@
      2007
     ]
    ],
-   "cars": 407,
+   "cars": 406,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:dc6bf5274d",
    "kind": "body",
@@ -178124,7 +178871,7 @@
      2007
     ]
    ],
-   "cars": 407,
+   "cars": 406,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:c071f04987",
    "kind": "body",
@@ -178349,7 +179096,7 @@
      2007
     ]
    ],
-   "cars": 407,
+   "cars": 406,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:b61b466d55",
    "kind": "body",
@@ -178382,7 +179129,7 @@
      2004
     ]
    ],
-   "cars": 212,
+   "cars": 211,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:e62ce60f06",
    "kind": "body",
@@ -178415,7 +179162,7 @@
      2004
     ]
    ],
-   "cars": 212,
+   "cars": 211,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:76de98d2b8",
    "kind": "body",
@@ -178442,7 +179189,7 @@
      2007
     ]
    ],
-   "cars": 407,
+   "cars": 406,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:27daae1592",
    "kind": "body",
@@ -178469,7 +179216,7 @@
      2007
     ]
    ],
-   "cars": 407,
+   "cars": 406,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:21cd8c8bcb",
    "kind": "body",
@@ -178496,7 +179243,7 @@
      2007
     ]
    ],
-   "cars": 407,
+   "cars": 406,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:0607cca349",
    "kind": "body",
@@ -178523,7 +179270,7 @@
      2007
     ]
    ],
-   "cars": 407,
+   "cars": 406,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:8337c9b06b",
    "kind": "body",
@@ -178718,7 +179465,7 @@
      2005
     ]
    ],
-   "cars": 153,
+   "cars": 152,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:af7d23d3d1",
    "kind": "body",
@@ -178751,7 +179498,7 @@
      2005
     ]
    ],
-   "cars": 153,
+   "cars": 152,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:cda62ffc8f",
    "kind": "body",
@@ -178784,7 +179531,7 @@
      2005
     ]
    ],
-   "cars": 153,
+   "cars": 152,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:4154bffbb7",
    "kind": "body",
@@ -178817,7 +179564,7 @@
      2005
     ]
    ],
-   "cars": 153,
+   "cars": 152,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:80ec3bdb2a",
    "kind": "body",
@@ -178850,7 +179597,7 @@
      2005
     ]
    ],
-   "cars": 153,
+   "cars": 152,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:a92c71a4ca",
    "kind": "body",
@@ -178883,7 +179630,7 @@
      2005
     ]
    ],
-   "cars": 153,
+   "cars": 152,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:bae1b81a5b",
    "kind": "body",
@@ -178916,7 +179663,7 @@
      2005
     ]
    ],
-   "cars": 153,
+   "cars": 152,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:a3b9244238",
    "kind": "body",
@@ -178949,7 +179696,7 @@
      2005
     ]
    ],
-   "cars": 153,
+   "cars": 152,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:17037e4854",
    "kind": "body",
@@ -179063,7 +179810,7 @@
      2002
     ]
    ],
-   "cars": 258,
+   "cars": 257,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL+FR+RL+RR+SL+SR:a702208886",
    "kind": "body",
@@ -179096,7 +179843,7 @@
      2002
     ]
    ],
-   "cars": 258,
+   "cars": 257,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL+FR+RL+RR+SL+SR:1bc70105c8",
    "kind": "body",
@@ -179123,7 +179870,7 @@
      2003
     ]
    ],
-   "cars": 145,
+   "cars": 144,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:dbdfdb5473",
    "kind": "body",
@@ -179150,7 +179897,7 @@
      2003
     ]
    ],
-   "cars": 145,
+   "cars": 144,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:7d5a53d0dd",
    "kind": "body",
@@ -179309,7 +180056,7 @@
      1998
     ]
    ],
-   "cars": 133,
+   "cars": 131,
    "cat": "tail-lights",
    "id": "oem:gm:tail-lights:L:96652d4d51",
    "kind": "body",
@@ -179336,7 +180083,7 @@
      1998
     ]
    ],
-   "cars": 133,
+   "cars": 131,
    "cat": "tail-lights",
    "id": "oem:gm:tail-lights:R:9b1e9653f4",
    "kind": "body",
@@ -179363,7 +180110,7 @@
      2004
     ]
    ],
-   "cars": 85,
+   "cars": 84,
    "cat": "tail-lights",
    "id": "oem:gm:tail-lights:L:0bd0a6f6bf",
    "kind": "body",
@@ -179390,7 +180137,7 @@
      2004
     ]
    ],
-   "cars": 85,
+   "cars": 84,
    "cat": "tail-lights",
    "id": "oem:gm:tail-lights:R:6578f8b4c3",
    "kind": "body",
@@ -179477,7 +180224,7 @@
      2004
     ]
    ],
-   "cars": 231,
+   "cars": 228,
    "cat": "headlights",
    "id": "oem:gm:headlights:R:202fc8af16",
    "kind": "body",
@@ -179510,7 +180257,7 @@
      2004
     ]
    ],
-   "cars": 231,
+   "cars": 228,
    "cat": "headlights",
    "id": "oem:gm:headlights:L:2a09df2b5c",
    "kind": "body",
@@ -179537,7 +180284,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:16a94e6ebb",
    "kind": "body",
@@ -179564,7 +180311,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:d1918cea50",
    "kind": "body",
@@ -179591,7 +180338,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:1ab530e45f",
    "kind": "body",
@@ -179618,7 +180365,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:f83344420c",
    "kind": "body",
@@ -179645,7 +180392,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:600acef150",
    "kind": "body",
@@ -179672,7 +180419,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:af7f4a506a",
    "kind": "body",
@@ -179699,7 +180446,7 @@
      2007
     ]
    ],
-   "cars": 407,
+   "cars": 406,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:952c95c1ca",
    "kind": "body",
@@ -179726,7 +180473,7 @@
      2007
     ]
    ],
-   "cars": 407,
+   "cars": 406,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:e75c9aebc7",
    "kind": "body",
@@ -179753,7 +180500,7 @@
      2007
     ]
    ],
-   "cars": 407,
+   "cars": 406,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:8ae44ed0d6",
    "kind": "body",
@@ -179780,7 +180527,7 @@
      2007
     ]
    ],
-   "cars": 407,
+   "cars": 406,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:516dcb5dfa",
    "kind": "body",
@@ -179813,7 +180560,7 @@
      2004
     ]
    ],
-   "cars": 231,
+   "cars": 228,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:abbaf2d4bd",
    "kind": "body",
@@ -179840,7 +180587,7 @@
      2004
     ]
    ],
-   "cars": 402,
+   "cars": 400,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:4bc178f6eb",
    "kind": "body",
@@ -179867,7 +180614,7 @@
      2004
     ]
    ],
-   "cars": 402,
+   "cars": 400,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:775e9a961a",
    "kind": "body",
@@ -179894,7 +180641,7 @@
      2004
     ]
    ],
-   "cars": 402,
+   "cars": 400,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:70d865d615",
    "kind": "body",
@@ -179921,7 +180668,7 @@
      2004
     ]
    ],
-   "cars": 402,
+   "cars": 400,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:4bcf6eda65",
    "kind": "body",
@@ -179948,7 +180695,7 @@
      2007
     ]
    ],
-   "cars": 407,
+   "cars": 406,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:d21b988686",
    "kind": "body",
@@ -179975,7 +180722,7 @@
      2007
     ]
    ],
-   "cars": 407,
+   "cars": 406,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:0fcf26e738",
    "kind": "body",
@@ -180002,7 +180749,7 @@
      2007
     ]
    ],
-   "cars": 407,
+   "cars": 406,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:cb4777b3db",
    "kind": "body",
@@ -180128,7 +180875,7 @@
      2008
     ]
    ],
-   "cars": 633,
+   "cars": 631,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:84e55d225c",
    "kind": "body",
@@ -180155,7 +180902,7 @@
      2008
     ]
    ],
-   "cars": 633,
+   "cars": 631,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:bf233115e8",
    "kind": "body",
@@ -180182,7 +180929,7 @@
      2008
     ]
    ],
-   "cars": 633,
+   "cars": 631,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:1880379fcf",
    "kind": "body",
@@ -180215,7 +180962,7 @@
      2007
     ]
    ],
-   "cars": 474,
+   "cars": 477,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:c3b2f309be",
    "kind": "body",
@@ -180248,7 +180995,7 @@
      2007
     ]
    ],
-   "cars": 474,
+   "cars": 477,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:9894b99607",
    "kind": "body",
@@ -180281,7 +181028,7 @@
      2007
     ]
    ],
-   "cars": 474,
+   "cars": 477,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:5596bbf598",
    "kind": "body",
@@ -180308,7 +181055,7 @@
      2007
     ]
    ],
-   "cars": 407,
+   "cars": 406,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:53f1305b86",
    "kind": "body",
@@ -180335,7 +181082,7 @@
      2007
     ]
    ],
-   "cars": 407,
+   "cars": 406,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:d20f5ba0ce",
    "kind": "body",
@@ -180548,7 +181295,7 @@
      2012
     ]
    ],
-   "cars": 1142,
+   "cars": 1136,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:a7060a69b4",
    "kind": "body",
@@ -180968,7 +181715,7 @@
      2015
     ]
    ],
-   "cars": 539,
+   "cars": 536,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:b75453cf67",
    "kind": "body",
@@ -181022,7 +181769,7 @@
      2007
     ]
    ],
-   "cars": 407,
+   "cars": 406,
    "cat": "headlights",
    "id": "oem:gm:headlights:L:27c1dcc8ca",
    "kind": "body",
@@ -181049,7 +181796,7 @@
      2007
     ]
    ],
-   "cars": 407,
+   "cars": 406,
    "cat": "headlights",
    "id": "oem:gm:headlights:R:145e25dcf2",
    "kind": "body",
@@ -181076,7 +181823,7 @@
      2003
     ]
    ],
-   "cars": 145,
+   "cars": 144,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:9a78e1bccc",
    "kind": "body",
@@ -181103,7 +181850,7 @@
      2003
     ]
    ],
-   "cars": 145,
+   "cars": 144,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:953cc860ea",
    "kind": "body",
@@ -181130,7 +181877,7 @@
      2004
     ]
    ],
-   "cars": 402,
+   "cars": 400,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:8543b702e3",
    "kind": "body",
@@ -181157,7 +181904,7 @@
      2004
     ]
    ],
-   "cars": 402,
+   "cars": 400,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:178a968699",
    "kind": "body",
@@ -181184,7 +181931,7 @@
      2004
     ]
    ],
-   "cars": 402,
+   "cars": 400,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:38a446cf61",
    "kind": "body",
@@ -181211,7 +181958,7 @@
      2004
     ]
    ],
-   "cars": 182,
+   "cars": 181,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:52fe27b413",
    "kind": "body",
@@ -181238,7 +181985,7 @@
      2004
     ]
    ],
-   "cars": 182,
+   "cars": 181,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:8aa81ace11",
    "kind": "body",
@@ -181265,7 +182012,7 @@
      2004
     ]
    ],
-   "cars": 182,
+   "cars": 181,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:446b3e2a87",
    "kind": "body",
@@ -181292,7 +182039,7 @@
      2004
     ]
    ],
-   "cars": 182,
+   "cars": 181,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:f010eeb531",
    "kind": "body",
@@ -181319,7 +182066,7 @@
      2004
     ]
    ],
-   "cars": 182,
+   "cars": 181,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:7707f063fe",
    "kind": "body",
@@ -181346,7 +182093,7 @@
      2004
     ]
    ],
-   "cars": 182,
+   "cars": 181,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:207376ce64",
    "kind": "body",
@@ -181373,7 +182120,7 @@
      2007
     ]
    ],
-   "cars": 407,
+   "cars": 406,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:f05878400c",
    "kind": "body",
@@ -181400,7 +182147,7 @@
      2007
     ]
    ],
-   "cars": 407,
+   "cars": 406,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:988cf1b5d9",
    "kind": "body",
@@ -181427,7 +182174,7 @@
      2007
     ]
    ],
-   "cars": 407,
+   "cars": 406,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:2a200f7e4f",
    "kind": "body",
@@ -181454,7 +182201,7 @@
      2007
     ]
    ],
-   "cars": 407,
+   "cars": 406,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:0e0fd58711",
    "kind": "body",
@@ -181487,7 +182234,7 @@
      2005
     ]
    ],
-   "cars": 153,
+   "cars": 152,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:515f4d0383",
    "kind": "body",
@@ -181520,7 +182267,7 @@
      2005
     ]
    ],
-   "cars": 153,
+   "cars": 152,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:0b922107aa",
    "kind": "body",
@@ -181553,7 +182300,7 @@
      2005
     ]
    ],
-   "cars": 153,
+   "cars": 152,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:be24a3e0a0",
    "kind": "body",
@@ -181586,7 +182333,7 @@
      2005
     ]
    ],
-   "cars": 153,
+   "cars": 152,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:2f29cacfae",
    "kind": "body",
@@ -181613,7 +182360,7 @@
      2004
     ]
    ],
-   "cars": 182,
+   "cars": 181,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:4150c115a6",
    "kind": "body",
@@ -181640,7 +182387,7 @@
      2004
     ]
    ],
-   "cars": 182,
+   "cars": 181,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:ed73a04832",
    "kind": "body",
@@ -181667,7 +182414,7 @@
      2007
     ]
    ],
-   "cars": 447,
+   "cars": 450,
    "cat": "headlights",
    "id": "oem:gm:headlights:L:67636b51fb",
    "kind": "body",
@@ -181694,7 +182441,7 @@
      2007
     ]
    ],
-   "cars": 447,
+   "cars": 450,
    "cat": "headlights",
    "id": "oem:gm:headlights:R:25f8643ae9",
    "kind": "body",
@@ -181721,7 +182468,7 @@
      2007
     ]
    ],
-   "cars": 417,
+   "cars": 420,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:5142940e97",
    "kind": "body",
@@ -181748,7 +182495,7 @@
      2007
     ]
    ],
-   "cars": 417,
+   "cars": 420,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:fd64441e4d",
    "kind": "body",
@@ -181775,7 +182522,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:162b3e2f6d",
    "kind": "body",
@@ -181802,7 +182549,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:43ea77d07c",
    "kind": "body",
@@ -181829,7 +182576,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:c9f61f5b5c",
    "kind": "body",
@@ -181856,7 +182603,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:e6508dc7df",
    "kind": "body",
@@ -181883,7 +182630,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:4ba38a8bc4",
    "kind": "body",
@@ -181910,7 +182657,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:e690eaf3eb",
    "kind": "body",
@@ -181937,7 +182684,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:cd620a9cd9",
    "kind": "body",
@@ -181964,7 +182711,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:79c91d4197",
    "kind": "body",
@@ -181991,7 +182738,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:f2541a5a51",
    "kind": "body",
@@ -182018,7 +182765,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:df9d6574df",
    "kind": "body",
@@ -182045,7 +182792,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:7b2b5c257d",
    "kind": "body",
@@ -182072,7 +182819,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:0dac7dce5f",
    "kind": "body",
@@ -182099,7 +182846,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:3dbe7fc35c",
    "kind": "body",
@@ -182126,7 +182873,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:cf44ff5eab",
    "kind": "body",
@@ -182153,7 +182900,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:8ef7fa96ac",
    "kind": "body",
@@ -182180,7 +182927,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:b8fa53031e",
    "kind": "body",
@@ -182207,7 +182954,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:adcd306db3",
    "kind": "body",
@@ -182234,7 +182981,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:b419e15c2e",
    "kind": "body",
@@ -182261,7 +183008,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:91c8a7cb2b",
    "kind": "body",
@@ -182288,7 +183035,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:9f2a0564eb",
    "kind": "body",
@@ -182315,7 +183062,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:f2c5da099c",
    "kind": "body",
@@ -182342,7 +183089,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:85f4c278f7",
    "kind": "body",
@@ -182369,7 +183116,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:4ea9e45c82",
    "kind": "body",
@@ -182396,7 +183143,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:03dae56bd5",
    "kind": "body",
@@ -182423,7 +183170,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:8fe6aaf11b",
    "kind": "body",
@@ -182450,7 +183197,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:b1352c6e37",
    "kind": "body",
@@ -182477,7 +183224,7 @@
      2003
     ]
    ],
-   "cars": 151,
+   "cars": 150,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:30c0a87ce1",
    "kind": "body",
@@ -182510,7 +183257,7 @@
      2007
     ]
    ],
-   "cars": 511,
+   "cars": 514,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:a9c159bc63",
    "kind": "body",
@@ -182537,7 +183284,7 @@
      2007
     ]
    ],
-   "cars": 447,
+   "cars": 450,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:10cdecac1b",
    "kind": "body",
@@ -182564,7 +183311,7 @@
      2007
     ]
    ],
-   "cars": 447,
+   "cars": 450,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:1c2738cce4",
    "kind": "body",
@@ -182603,7 +183350,7 @@
      2006
     ]
    ],
-   "cars": 237,
+   "cars": 236,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:53a5121102",
    "kind": "body",
@@ -182636,7 +183383,7 @@
      2007
     ]
    ],
-   "cars": 511,
+   "cars": 514,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:6caeda9959",
    "kind": "body",
@@ -182663,7 +183410,7 @@
      2007
     ]
    ],
-   "cars": 447,
+   "cars": 450,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:8fd2e9e8c1",
    "kind": "body",
@@ -182690,7 +183437,7 @@
      2007
     ]
    ],
-   "cars": 447,
+   "cars": 450,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:d9e75a9c63",
    "kind": "body",
@@ -182723,7 +183470,7 @@
      2007
     ]
    ],
-   "cars": 511,
+   "cars": 514,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:f1999aa961",
    "kind": "body",
@@ -182756,7 +183503,7 @@
      2007
     ]
    ],
-   "cars": 511,
+   "cars": 514,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:5d113bbac3",
    "kind": "body",
@@ -182783,7 +183530,7 @@
      2008
     ]
    ],
-   "cars": 633,
+   "cars": 631,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:f200a622d6",
    "kind": "body",
@@ -182810,7 +183557,7 @@
      2008
     ]
    ],
-   "cars": 633,
+   "cars": 631,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:078ef265fc",
    "kind": "body",
@@ -182837,7 +183584,7 @@
      2008
     ]
    ],
-   "cars": 633,
+   "cars": 631,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:7a3b59c45a",
    "kind": "body",
@@ -182864,7 +183611,7 @@
      2008
     ]
    ],
-   "cars": 633,
+   "cars": 631,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:a568ca529c",
    "kind": "body",
@@ -182897,7 +183644,7 @@
      2007
     ]
    ],
-   "cars": 511,
+   "cars": 514,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:155b4754b2",
    "kind": "body",
@@ -182930,7 +183677,7 @@
      2007
     ]
    ],
-   "cars": 511,
+   "cars": 514,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:90b0edc73d",
    "kind": "body",
@@ -182963,7 +183710,7 @@
      2007
     ]
    ],
-   "cars": 511,
+   "cars": 514,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:c55f9c4b4b",
    "kind": "body",
@@ -182990,7 +183737,7 @@
      2007
     ]
    ],
-   "cars": 447,
+   "cars": 450,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:9fa19b6486",
    "kind": "body",
@@ -183017,7 +183764,7 @@
      2007
     ]
    ],
-   "cars": 417,
+   "cars": 420,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:c764d0f7d4",
    "kind": "body",
@@ -183125,7 +183872,7 @@
      2008
     ]
    ],
-   "cars": 396,
+   "cars": 395,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:115cd20be1",
    "kind": "body",
@@ -183152,7 +183899,7 @@
      2008
     ]
    ],
-   "cars": 396,
+   "cars": 395,
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:af1598be2c",
    "kind": "body",
@@ -183179,7 +183926,7 @@
      2008
     ]
    ],
-   "cars": 633,
+   "cars": 631,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:243df4d154",
    "kind": "body",
@@ -183206,7 +183953,7 @@
      2008
     ]
    ],
-   "cars": 633,
+   "cars": 631,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:de9d93fe8c",
    "kind": "body",
@@ -183233,7 +183980,7 @@
      2004
     ]
    ],
-   "cars": 402,
+   "cars": 400,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:6484422bec",
    "kind": "body",
@@ -183260,7 +184007,7 @@
      2004
     ]
    ],
-   "cars": 402,
+   "cars": 400,
    "cat": "climate-control",
    "id": "oem:gm:climate-control:C:bf5778ec5c",
    "kind": "body",
@@ -183341,7 +184088,7 @@
      1998
     ]
    ],
-   "cars": 133,
+   "cars": 131,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:00f17f69c1",
    "kind": "body",
@@ -183368,7 +184115,7 @@
      1998
     ]
    ],
-   "cars": 133,
+   "cars": 131,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:dd8cdf523e",
    "kind": "body",
@@ -183401,7 +184148,7 @@
      2001
     ]
    ],
-   "cars": 140,
+   "cars": 139,
    "cat": "tail-lights",
    "id": "oem:gm:tail-lights:L:a49f839f7c",
    "kind": "body",
@@ -183434,7 +184181,7 @@
      2001
     ]
    ],
-   "cars": 140,
+   "cars": 139,
    "cat": "tail-lights",
    "id": "oem:gm:tail-lights:R:6229804867",
    "kind": "body",
@@ -183467,7 +184214,7 @@
      2000
     ]
    ],
-   "cars": 190,
+   "cars": 189,
    "cat": "tail-lights",
    "id": "oem:gm:tail-lights:L:e4269447bd",
    "kind": "body",
@@ -183500,7 +184247,7 @@
      2000
     ]
    ],
-   "cars": 190,
+   "cars": 189,
    "cat": "tail-lights",
    "id": "oem:gm:tail-lights:R:8172e5c761",
    "kind": "body",
@@ -183686,7 +184433,7 @@
      2004
     ]
    ],
-   "cars": 402,
+   "cars": 400,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:a959bbf3c4",
    "kind": "body",
@@ -183713,7 +184460,7 @@
      2004
     ]
    ],
-   "cars": 402,
+   "cars": 400,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:14bc47e6d3",
    "kind": "body",
@@ -183740,7 +184487,7 @@
      2004
     ]
    ],
-   "cars": 402,
+   "cars": 400,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RL:dba3565557",
    "kind": "body",
@@ -183767,7 +184514,7 @@
      2004
     ]
    ],
-   "cars": 402,
+   "cars": 400,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:RR:57a4b895c9",
    "kind": "body",
@@ -183848,7 +184595,7 @@
      2004
     ]
    ],
-   "cars": 182,
+   "cars": 181,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:8ca180ddb0",
    "kind": "body",
@@ -183875,7 +184622,7 @@
      2004
     ]
    ],
-   "cars": 182,
+   "cars": 181,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:1882504ecd",
    "kind": "body",
@@ -183902,7 +184649,7 @@
      2004
     ]
    ],
-   "cars": 182,
+   "cars": 181,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:ecd521851e",
    "kind": "body",
@@ -183929,7 +184676,7 @@
      2004
     ]
    ],
-   "cars": 182,
+   "cars": 181,
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:83797b6e24",
    "kind": "body",
@@ -183956,7 +184703,7 @@
      2016
     ]
    ],
-   "cars": 378,
+   "cars": 377,
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:40fce38b64",
    "kind": "body",
@@ -184024,7 +184771,7 @@
   }
  ],
  "ns": "gm",
- "policy_sha256": "3842a15ed5308947ee820a6d9fe7355f31196736f6c0faac65e93fec6a485b8f",
+ "policy_sha256": "c2dbb224e39162a66b41454476919f8a5c4eb4815b4ee7a019c8f077bf82d1d6",
  "raw": {
   "commit": "c36da2eb98835c02f81c05e8c36b6a926634a332",
   "ref": "c36da2eb98835c02f81c05e8c36b6a926634a332",
