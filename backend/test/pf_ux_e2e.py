@@ -141,11 +141,13 @@ with sync_playwright() as pw:
         # total, not the capped DOM.
         head_total = int(page.locator("#pf-results .pf-results-head strong")
                          .inner_text().split()[0].replace(",", ""))
-        c_ver, c_lik = (int(x.replace(",", "")) for x in
-                        txt.replace(" verified", "").replace(" likely", "")
-                        .split(" · "))
+        # "N verified · N likely" plus, since 2026-11-09, an optional
+        # "· N same engine" count (engine-family-only, other-model donors).
+        parts = [int(x.split()[0].replace(",", "")) for x in txt.split(" · ")]
+        c_ver, c_lik = parts[0], parts[1]
+        c_same = parts[2] if len(parts) > 2 else 0
         check(f"{w} counts sum to the head's donor total",
-              c_ver + c_lik == head_total,
+              c_ver + c_lik + c_same == head_total,
               f"txt='{txt}' head={head_total}")
         check(f"{w} the showcase fitment chip carries verified rows",
               c_ver > 0 and n_ver > 0, f"c_ver={c_ver} rendered={n_ver}")
