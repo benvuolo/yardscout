@@ -3056,3 +3056,4 @@ each); nothing allowlisted or crawled.
   confirms. At clearance, headlights, tail-lights, side-mirrors and
   window-regulator must be added to `_AM_CATS`; that's a category-breadth
   change.
+- 23:30 UTC check-in: GSP cv-axle 1,043 units → 40 groups (9 sitemaps pending); 1A strut 616 → 141 (lamp lines start on the next run). Nothing finished or blocked.
