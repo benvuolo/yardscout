@@ -166,3 +166,10 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
   - Not crawled; fetch.py unchanged.
 - 18:47 UTC: make-breadth pushed rules 1-3 (7192563). GM went 309→279 (30 removed, 3 lose apps, 11 gain cab notes). These were live wrong or uncertain claims: GMT800/900 regulators and EXPORT-coded mirrors. Hub verified oemStatus ok x8 and test_groups_hash.
 - 18:40 UTC: same-engine relabel merged (080e1061, sw jh-v171).
+- ~19:35 UTC:
+  - Wheels merged (b71585bc, sw jh-v172). Conflicts with tier C were resolved by keeping tier C's name rules plus the tier W entries. Worklist versions where both flags apply: jeep v5, kia v3; ford/hyundai/lexus/vw v3.
+  - Tier W crawl dispatched for gm/vw/mb/hyundai/kia (42684614492), queued behind 42666726212.
+  - Relabel live (jh-v171) and verified on the GX 470 alternator search. Photo fix live (jh-v170).
+  - Make breadth pushed the climate-control note fix (661d537) and the GM 1500 series filter (c5d7f44/f9423ed). oemStatus verified ok x8.
+  - CR-Z normalizer fix 1cf5dd03. test_model_map stays red on the published inventory's "Cr-Z" until the next scan.
+  - You-dot map fix (design/you-dot d9cff7d → sw jh-v173): regression running.
