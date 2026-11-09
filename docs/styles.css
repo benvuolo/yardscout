@@ -3123,15 +3123,23 @@ button.saved-item-name { max-width: 100%; min-width: 0; overflow-wrap: anywhere;
 .yards-map-note:empty { display: none; }
 .yards-map-schematic .map-pin-at { position: absolute; transform: translate(-50%, -100%); }
 .map-pin {
-  position: relative; display: inline-flex; align-items: center; gap: 4px; min-width: var(--tap); min-height: var(--tap);
-  justify-content: center; padding: 0 10px; border: 2px solid var(--surface); border-radius: var(--r-pill);
-  background: var(--ink-btn); color: var(--on-ink); font: 800 var(--t-sm)/1 var(--font-mono);
-  box-shadow: 0 2px 6px rgba(0,0,0,.28); cursor: pointer;
+  position: relative; display: inline-flex; flex-direction: column; align-items: center; justify-content: center;
+  min-width: var(--tap); min-height: var(--tap); max-width: 7.5rem; padding: 4px 8px;
+  border: 2px solid var(--surface); border-radius: var(--r); background: var(--ink-btn); color: var(--on-ink);
+  font: 700 var(--t-xs)/1.25 var(--font-ui); text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,.28); cursor: pointer;
 }
 .map-pin::after { content: ''; position: absolute; left: 50%; bottom: -7px; margin-left: -6px; border: 6px solid transparent; border-top-color: var(--ink-btn); border-bottom: 0; }
+.map-pin .pin-name { display: block; max-width: 100%; overflow-wrap: anywhere; }
+.map-pin .pin-cars { display: block; font: 600 11px/1.3 var(--font-mono); opacity: 0.9; }
+.map-pin.map-cluster { border-style: dashed; }
 .map-pin.has-watch { background: var(--accent); color: var(--on-accent); }
 .map-pin.has-watch::after { border-top-color: var(--accent); }
-.map-pin i { font-style: normal; padding: 1px 6px; border-radius: var(--r-pill); background: var(--surface); color: var(--accent-on-soft); font-size: var(--t-xs); }
+.map-pin .pin-watch {
+  position: absolute; top: -10px; right: -10px; display: inline-flex; align-items: center; gap: 2px;
+  padding: 1px 6px; border-radius: var(--r-pill); background: var(--surface); color: var(--text);
+  border: 1px solid var(--border-dark); font: 700 11px/1.4 var(--font-ui); font-style: normal;
+}
+.map-pin .pin-watch .ico { width: 11px; height: 11px; }
 .map-pin.on { outline: 3px solid var(--accent2); outline-offset: 2px; }
 .map-you { display: block; width: 16px; height: 16px; border-radius: 50%; background: #2F6FEB; border: 3px solid #fff; box-shadow: 0 0 0 2px rgba(47,111,235,.35); }
 .yards-map-schematic .map-you { position: absolute; margin: -8px 0 0 -8px; }
@@ -3209,3 +3217,11 @@ button.saved-item-name { max-width: 100%; min-width: 0; overflow-wrap: anywhere;
 .cd-stay-long .long-listed { margin: 0; }
 .yr-long { display: block; margin-top: var(--s1); font-size: var(--t-xs); }
 .yr-item.is-checked .yr-long { display: none; }
+.yr-tag-photo { display: inline-flex; align-items: center; gap: 4px; background: var(--surface2); color: var(--text); }
+.yr-tag-photo .ico { width: 12px; height: 12px; }
+.yards-map-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin: 0 0 var(--s2); font-size: var(--t-xs); color: var(--text-dim); }
+.legend-bell { display: inline-flex; align-items: center; gap: 4px; }
+.legend-bell .ico { width: 13px; height: 13px; }
+.map-pin { width: max-content; }
+.map-pin-at { width: max-content; }
+.map-pin.nudged::after { display: none; }

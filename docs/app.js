@@ -5316,7 +5316,11 @@ function yardRowItemHtml(v, flags) {
   const val = (v.hasMatch && v.topParts && v.topParts.length) ? carValueParts(v, unlocked, false) : null;
   const ex = extrasFor(v);
   const color = ex && ex[extraIdx.color] ? String(ex[extraIdx.color]).replace(/^\[|\]$/g, '').replace(/^Field-/, '') : '';
+  const pinfo = ex && ex[extraIdx.photo] ? photoInfo(ex[extraIdx.photo]) : null;
+  const photoTag = pinfo && !pinfo.onCards
+    ? `<span class="yr-tag yr-tag-photo">${ICON_CAMERA} ${pinfo.heavy ? 'Photo at yard &middot; tap to load' : 'Photo on car page'}</span>` : '';
   const tags = [
+    photoTag,
     flags.pull ? '<span class="yr-tag yr-tag-pull">On pull sheet</span>' : '',
     flags.watch ? '<span class="yr-tag yr-tag-watch">Watch match</span>' : '',
     flags.fresh ? '<span class="yr-tag yr-tag-new">New</span>' : '',
@@ -5465,10 +5469,15 @@ var _mapLibP = null, _yardsMap = null, _yardsMapMarkers = [], yardsView = 'list'
 function loadMapLib() {
   if (window.maplibregl) return Promise.resolve(window.maplibregl);
   if (_mapLibP) return _mapLibP;
-  _mapLibP = new Promise((resolve, reject) => {
+  // The stylesheet must be in before the map is built (it positions the
+  // canvas and markers); wait for both.
+  const cssP = new Promise((res) => {
     const css = document.createElement('link');
     css.rel = 'stylesheet'; css.href = `https://unpkg.com/maplibre-gl@${MAPLIBRE_VER}/dist/maplibre-gl.css`;
+    css.onload = res; css.onerror = res; setTimeout(res, 8000);
     document.head.appendChild(css);
+  });
+  _mapLibP = new Promise((resolve, reject) => {
     const s = document.createElement('script');
     s.src = `https://unpkg.com/maplibre-gl@${MAPLIBRE_VER}/dist/maplibre-gl.js`;
     s.async = true;
@@ -5476,14 +5485,29 @@ function loadMapLib() {
     s.onload = () => { clearTimeout(t); window.maplibregl ? resolve(window.maplibregl) : reject(new Error('no maplibregl')); };
     s.onerror = () => { clearTimeout(t); reject(new Error('map library failed to load')); };
     document.head.appendChild(s);
-  }).catch(e => { _mapLibP = null; throw e; });
+  }).then(lib => cssP.then(() => lib)).catch(e => { _mapLibP = null; throw e; });
   return _mapLibP;
 }
 const mapDark = () => document.documentElement.dataset.theme === 'dark'
   || (document.documentElement.dataset.theme !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
+/* "Pull-A-Part · Ogden": the chain and the place, from the yard's own name. */
+function yardShortLabel(loc) {
+  const parts = String(loc || '').split(' - ');
+  if (parts.length < 2) return loc;
+  const chain = parts[0].trim(), place = parts.slice(1).join(' - ').trim();
+  return `${chain} \u00b7 ${place}`;
+}
 function yardPinHtml(y, m) {
-  const label = `${y.location}: ${m.cars} cars, ${m.fresh} new this week${m.watch ? `, ${m.watch} watch match${m.watch === 1 ? '' : 'es'}` : ''}`;
-  return `<button type="button" class="map-pin${m.watch ? ' has-watch' : ''}${_mapSheetLoc === y.location ? ' on' : ''}" data-loc="${escapeHtml(y.location)}" aria-label="${escapeHtml(label)}"><b>${m.cars.toLocaleString()}</b>${m.watch ? `<i>${m.watch}</i>` : ''}</button>`;
+  const label = `${y.location}: ${m.cars.toLocaleString()} cars on the lot, ${m.fresh.toLocaleString()} new this week${m.watch ? `, ${m.watch} car${m.watch === 1 ? '' : 's'} match${m.watch === 1 ? 'es' : ''} your watches` : ''}`;
+  return `<button type="button" class="map-pin${m.watch ? ' has-watch' : ''}${_mapSheetLoc === y.location ? ' on' : ''}" data-loc="${escapeHtml(y.location)}" aria-label="${escapeHtml(label)}">
+      <span class="pin-name">${escapeHtml(yardShortLabel(y.location))}</span><span class="pin-cars">${m.cars.toLocaleString()} cars</span>
+      ${m.watch ? `<i class="pin-watch">${ICON.bell}${m.watch}</i>` : ''}</button>`;
+}
+function clusterPinHtml(items) {
+  const cars = items.reduce((n, i) => n + i.m.cars, 0), watch = items.reduce((n, i) => n + i.m.watch, 0);
+  return `<button type="button" class="map-pin map-cluster${watch ? ' has-watch' : ''}" data-locs="${escapeHtml(JSON.stringify(items.map(i => i.y.location)))}" aria-label="${items.length} yards here, ${cars.toLocaleString()} cars${watch ? `, ${watch} matching your watches` : ''}. Show them">
+      <span class="pin-name">${items.length} yards</span><span class="pin-cars">${cars.toLocaleString()} cars</span>
+      ${watch ? `<i class="pin-watch">${ICON.bell}${watch}</i>` : ''}</button>`;
 }
 function renderMapSheet() {
   const box = document.getElementById('yards-map-sheet');
@@ -5529,13 +5553,14 @@ function renderSchematicMap(yards, note) {
   _mapYards = pts.map(y => ({ y, m: yardMarks(y.location) }));
   for (const it of [..._mapYards].sort((a, b) => b.m.cars - a.m.cars)) {
     const p = pos(it.y), px = p.x * W / 100, py = p.y * H / 100;
-    const g = groups.find(g => Math.hypot(g.px - px, g.py - py) < 56);
+    const g = groups.find(g => Math.abs(g.px - px) < 104 && Math.abs(g.py - py) < 54);
     if (g) g.items.push(it); else groups.push({ px, py, p, items: [it] });
   }
   el.innerHTML = `${c ? `<span class="map-you" style="left:${pos(c).x}%;top:${pos(c).y}%"><span>You</span></span>` : ''}
     ${groups.map(g => `<span class="map-pin-at" style="left:${g.p.x}%;top:${g.p.y}%">${g.items.length === 1 ? yardPinHtml(g.items[0].y, g.items[0].m)
-      : `<button type="button" class="map-pin map-cluster${g.items.some(i => i.m.watch) ? ' has-watch' : ''}" data-locs="${escapeHtml(JSON.stringify(g.items.map(i => i.y.location)))}" aria-label="${g.items.length} yards here. Show them"><b>${g.items.length} yards</b></button>`}</span>`).join('')}`;
+      : clusterPinHtml(g.items)}</span>`).join('')}`;
   document.getElementById('yards-map-note').textContent = note;
+  requestAnimationFrame(() => { keepPinsInside(); watchPinSizes(); });
 }
 async function renderYardsMap() {
   const el = document.getElementById('yards-map');
@@ -5586,7 +5611,9 @@ async function renderYardsMap() {
   if (!_yardsMap.__moveHooked) { _yardsMap.on('moveend', placeMapMarkers); _yardsMap.__moveHooked = true; }
   const b = new lib.LngLatBounds([activeZipCoords.lng, activeZipCoords.lat], [activeZipCoords.lng, activeZipCoords.lat]);
   yards.forEach(y => b.extend([y.lng, y.lat]));
-  _yardsMap.fitBounds(b, { padding: 48, maxZoom: 11, duration: 0 });
+  // Room for the labelled pins at the sides, so none starts cut off.
+  const w = el.clientWidth || 360;
+  _yardsMap.fitBounds(b, { padding: { top: 80, bottom: 40, left: Math.min(100, w / 4), right: Math.min(100, w / 4) }, maxZoom: 11, duration: 0 });
   placeMapMarkers();
 }
 /* Pins that would overlap on screen merge into one "N yards" bubble; tapping
@@ -5602,7 +5629,7 @@ function placeMapMarkers() {
   const groups = [];
   for (const it of [..._mapYards].sort((a, b) => b.m.cars - a.m.cars)) {
     const pt = map.project([it.y.lng, it.y.lat]);
-    const g = groups.find(g => Math.hypot(g.x - pt.x, g.y - pt.y) < 56);
+    const g = groups.find(g => Math.abs(g.x - pt.x) < 104 && Math.abs(g.y - pt.y) < 54);
     if (g) g.items.push(it); else groups.push({ x: pt.x, y: pt.y, items: [it] });
   }
   for (const g of groups) {
@@ -5610,14 +5637,35 @@ function placeMapMarkers() {
     wrap.className = 'map-pin-at';
     let at;
     if (g.items.length === 1) { const { y, m } = g.items[0]; wrap.innerHTML = yardPinHtml(y, m); at = [y.lng, y.lat]; }
-    else {
-      const cars = g.items.reduce((n, i) => n + i.m.cars, 0), watch = g.items.reduce((n, i) => n + i.m.watch, 0);
-      const locs = g.items.map(i => i.y.location);
-      wrap.innerHTML = `<button type="button" class="map-pin map-cluster${watch ? ' has-watch' : ''}" data-locs="${escapeHtml(JSON.stringify(locs))}" aria-label="${g.items.length} yards here, ${cars.toLocaleString()} cars. Zoom in"><b>${g.items.length} yards</b></button>`;
-      at = [g.items[0].y.lng, g.items[0].y.lat];
-    }
+    else { wrap.innerHTML = clusterPinHtml(g.items); at = [g.items[0].y.lng, g.items[0].y.lat]; }
     _yardsMapMarkers.push(new lib.Marker({ element: wrap, anchor: 'bottom', offset: [0, -6] }).setLngLat(at).addTo(map));
   }
+  requestAnimationFrame(() => { keepPinsInside(); watchPinSizes(); });
+}
+/* Keep every pin wholly inside the map box (no label cut at an edge): a pin
+ * that would cross an edge is shifted in and loses its pointer. Re-run when a
+ * pin changes size (OS text size) via one ResizeObserver per map render. */
+var _pinRO = null;
+function keepPinsInside() {
+  const box = document.getElementById('yards-map');
+  if (!box) return;
+  const c = box.getBoundingClientRect();
+  if (!c.width) return;
+  for (const pin of box.querySelectorAll('.map-pin')) {
+    pin.style.transform = ''; pin.classList.remove('nudged');
+    const r = pin.getBoundingClientRect();
+    let dx = 0, dy = 0;
+    if (r.left < c.left + 4) dx = c.left + 4 - r.left; else if (r.right > c.right - 4) dx = c.right - 4 - r.right;
+    if (r.top < c.top + 4) dy = c.top + 4 - r.top; else if (r.bottom > c.bottom - 4) dy = c.bottom - 4 - r.bottom;
+    if (dx || dy) { pin.style.transform = `translate(${Math.round(dx)}px, ${Math.round(dy)}px)`; pin.classList.add('nudged'); }
+  }
+}
+function watchPinSizes() {
+  if (!window.ResizeObserver) return;
+  if (_pinRO) _pinRO.disconnect();
+  _pinRO = new ResizeObserver(() => requestAnimationFrame(keepPinsInside));
+  document.querySelectorAll('#yards-map .map-pin').forEach(p => _pinRO.observe(p));
+  _pinRO.observe(document.getElementById('yards-map'));
 }
 function zoomToYards(locs) {
   const lib = window.maplibregl, pts = _mapYards.filter(i => locs.includes(i.y.location));
@@ -7912,8 +7960,27 @@ document.getElementById('yards-filter-state').addEventListener('change', renderY
 
 /* ===== PROFIT BREAKDOWN ===== */
 /* ===== TABS ===== */
+/* Re-tap the tab you're on: first close a screen pushed over it (photo,
+ * car screen, Walk the rows, the map's yard sheet), then scroll its list to
+ * the top. Instant when the user prefers reduced motion. Returns what it did. */
+function tabRetap() {
+  if (document.querySelector('#photo-viewer.open')) { closePhotoViewer(); return 'closed-photo'; }
+  if (document.querySelector('#car-detail.open')) { closeCarDetail(); return 'closed-car'; }
+  if (document.querySelector('#yard-rows.open')) { closeYardRows(); return 'closed-rows'; }
+  if (typeof yardsView !== 'undefined' && yardsView === 'map' && _mapSheetLoc && document.getElementById('tab-yards').classList.contains('active')) {
+    selectMapYard(null); return 'closed-sheet';
+  }
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+  return 'top';
+}
 document.querySelectorAll('.tab').forEach(tab => {
-  tab.addEventListener('click', () => {
+  tab.addEventListener('click', (e) => {
+    // A real tap on the tab already showing (not a programmatic switch).
+    if (e.isTrusted !== false && tab.classList.contains('active') && document.getElementById('tab-' + tab.dataset.tab).classList.contains('active')) {
+      tabRetap();
+      return;
+    }
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
     tab.classList.add('active');

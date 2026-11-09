@@ -548,6 +548,32 @@ const SCREENS = [
     await page.evaluate(() => { saveYardChecks({}); try { localStorage.removeItem('ys_yard_checks'); } catch (e) {} hideYardRows(); });
     await resetUi(page);
   }]),
+  // Row-view thumbnails follow the cards: real list photo when the source may
+  // show on cards, the drawing otherwise, and a "Photo on car page" / heavy
+  // tag when the photo is car-screen only (two fixture codes in row 1).
+  ['yard-rows-thumbs', async (page) => {
+    await tab(page, 'yards');
+    await page.evaluate(() => {
+      setYardsView('list'); renderYards();
+      const loc = document.querySelector('#yards-grid .yard-card[data-loc]').dataset.loc;
+      const cars = liveInventory.filter(x => x.location === loc && x.row).sort((a, b) => compareRows(a.row, b.row));
+      const r1 = cars.filter(v => v.row === cars[0].row);
+      window.__thOrig = r1.slice(0, 2).map(v => [String(v.id), vehicleExtras[String(v.id)]]);
+      const set = (v, code) => { const e = (vehicleExtras[String(v.id)] || []).slice(); e[0] = code; vehicleExtras[String(v.id)] = e; };
+      set(r1[0], 'https://www.kikersupullit.com/inventory-feed/photos/stock-12345.jpg');
+      set(r1[1], 'tSTK12345');
+      openYardRows(loc);
+      const box = document.getElementById('yard-rows-body');
+      const item = (v) => box.querySelector(`.yr-item[data-vkey="${CSS.escape(vehicleKey(v))}"]`);
+      if (!/Photo on car page/.test(item(r1[0]).querySelector('.yr-tag-photo').textContent) || item(r1[0]).querySelector('.yr-thumb img')) throw new Error('car-screen-only source: tag or thumb wrong');
+      if (!/tap to load/.test(item(r1[1]).querySelector('.yr-tag-photo').textContent) || item(r1[1]).querySelector('.yr-thumb img')) throw new Error('heavy source: tag or thumb wrong');
+      const real = [...box.querySelectorAll('.yr-item')].find(li => li.querySelector('.yr-thumb img'));
+      if (real && real.querySelector('.yr-thumb img').getAttribute('loading') !== 'lazy') throw new Error('row thumb not lazy');
+      const v = liveInventory.find(x => vehicleKey(x) === (real || {}).dataset?.vkey);
+      if (real && !(photoInfo(extrasFor(v)[0]) || {}).onCards) throw new Error('a car-screen-only photo shown as a row thumb');
+    });
+    await settle(page, 600);
+  }, async (page) => { await page.evaluate(() => { for (const [k, e] of window.__thOrig || []) { if (e === undefined) delete vehicleExtras[k]; else vehicleExtras[k] = e; } window.__thOrig = null; hideYardRows(); }); await resetUi(page); }],
   // The long-listed notice in the row view (one car's date moved back 200 days).
   ['yard-rows-long', async (page) => {
     await tab(page, 'yards');
@@ -565,10 +591,25 @@ const SCREENS = [
     });
     await settle(page, 500);
   }, async (page) => { await page.evaluate(() => { if (window.__llOrig) { window.__llOrig[0].dateAdded = window.__llOrig[1]; window.__llOrig = null; } hideYardRows(); }); await resetUi(page); }],
-  ...[['yards-map', 'gl'], ['yards-map-sheet', 'sheet'], ['yards-map-schematic', 'schematic']].map(([name, mode]) => [name, async (page) => {
+  ...[['yards-map', 'gl'], ['yards-map-sheet', 'sheet'], ['yards-map-schematic', 'schematic'], ['yards-map-watch', 'watch']].map(([name, mode]) => [name, async (page) => {
     await tab(page, 'yards');
-    await page.evaluate(() => setYardsView('map'));
-    if (mode === 'schematic') {
+    if (mode === 'watch') await page.evaluate(() => {
+      // A watch for a model on a nearby lot: its yard's pin gets the bell badge.
+      const y = (getYardsView().shown || [])[0];
+      const v = liveInventory.find(x => x.location === y.location && x.model);
+      window.__mapWatch = new Date().toISOString() + '~mapwatch';
+      saveWatchlist([...loadWatchlist(), { make: v.make, model: v.model, yrMin: null, yrMax: null, matchOnly: false, radiusMi: 100, addedAt: window.__mapWatch }]);
+    });
+    await page.evaluate((mode) => { setYardsView('map'); if (mode === 'watch') renderSchematicMap((getYardsView().shown || []).filter(y => y.lat != null), ''); }, mode);
+    if (mode === 'watch') {
+      await page.evaluate(() => {
+        const w = document.querySelector('#yards-map .map-pin.has-watch');
+        if (!w || !w.querySelector('.pin-watch svg')) throw new Error('no bell badge on a pin with a watch match');
+        if (!/(match(es)?|matching) your watches/.test(w.getAttribute('aria-label'))) throw new Error('watch aria-label: ' + w.getAttribute('aria-label'));
+        if (![...document.querySelectorAll('#yards-map .map-pin:not(.map-cluster)')].every(p => / cars$/.test(p.querySelector('.pin-cars').textContent))) throw new Error('a single-yard pin without "N cars"');
+        if (!/Pins show cars on the lot/.test(document.querySelector('.yards-map-legend').textContent)) throw new Error('no legend');
+      });
+    } else if (mode === 'schematic') {
       await page.evaluate(() => renderSchematicMap((getYardsView().shown || []).filter(y => y.lat != null), 'Map tiles couldn\u2019t load, so yards are shown by position only. The row view works offline.'));
     } else {
       await page.waitForFunction(() => window._yardsMap && _yardsMap.loaded() && document.querySelector('#yards-map .map-pin'), null, { timeout: 30000 });
@@ -585,7 +626,7 @@ const SCREENS = [
       } else window.scrollTo(0, document.getElementById('yards-map').getBoundingClientRect().top + scrollY - 140);
     }, mode);
     await settle(page, 800);
-  }, async (page) => { await page.evaluate(() => { _mapSheetLoc = null; setYardsView('list'); }); await resetUi(page); }]),
+  }, async (page) => { await page.evaluate(() => { _mapSheetLoc = null; if (window.__mapWatch) { saveWatchlist(loadWatchlist().filter(e => e.addedAt !== window.__mapWatch)); window.__mapWatch = null; } setYardsView('list'); }); await resetUi(page); }]),
   // Listed far past the typical stay (owner report, Pull-N-Save Springville):
   // the bar gives way to a neutral notice on the card and the car screen.
   // One car's set-out date is moved 200 days back for the test, then restored.
