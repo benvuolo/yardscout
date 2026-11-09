@@ -52,7 +52,7 @@ NO_DEALER_CATALOG = {"volkswagen", "mazda", "mitsubishi", "bmw", "mercedesbenz",
 MAKE_PAGE_SCORE = 10**9
 
 
-SITE_MODULES = {"ecat.spectrapremium.com": "spectrapremium"}
+SITE_MODULES = {"ecat.spectrapremium.com": "spectrapremium", "www.1aauto.com": "oneaauto"}
 
 
 def module_for(site: str):
