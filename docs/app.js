@@ -5210,6 +5210,54 @@ document.getElementById('yards-search').addEventListener('input', () => renderYa
  * quick add-to-pull-sheet button and opens the car screen. Runs entirely
  * from the inventory already on the phone, so it works with poor signal. */
 let yardRowsLoc = null, yardRowsFilter = 'all', yardRowsOpener = null;
+/* "Checked" while walking: on this device only, per yard, in localStorage
+ * ({yard: {vehicleKey: checkedAtMs}}). A check lapses after 24 h or once the
+ * car has left the inventory, so they never pile up across trips. Never
+ * touches the pull sheet or watches. Works (for the session) without storage. */
+const CHECK_TTL_MS = 24 * 3600 * 1000;
+let _yardChecksMem = {};
+function checksPrune(all, now, liveKeysByYard) {
+  const out = {};
+  for (const [loc, m] of Object.entries(all && typeof all === 'object' ? all : {})) {
+    if (!m || typeof m !== 'object') continue;
+    const live = liveKeysByYard ? liveKeysByYard(loc) : null;
+    const keep = {};
+    for (const [k, t] of Object.entries(m)) {
+      if (typeof t !== 'number' || !(now - t < CHECK_TTL_MS) || t > now + 60000) continue;
+      if (live && !live.has(k)) continue;
+      keep[k] = t;
+    }
+    if (Object.keys(keep).length) out[loc] = keep;
+  }
+  return out;
+}
+function checksToggle(all, loc, key, now) {
+  const next = { ...(all || {}) };
+  const m = { ...(next[loc] || {}) };
+  if (m[key]) delete m[key]; else m[key] = now;
+  if (Object.keys(m).length) next[loc] = m; else delete next[loc];
+  return next;
+}
+/* Per-row summary for the current filter: checked count, total, all done. */
+function rowCheckSummary(keys, checked) {
+  const n = keys.filter(k => checked[k]).length;
+  return { checked: n, total: keys.length, done: keys.length > 0 && n === keys.length };
+}
+function loadYardChecks() {
+  let raw = null;
+  try { raw = JSON.parse(localStorage.getItem('ys_yard_checks') || 'null'); } catch (e) { raw = null; }
+  const src = raw && typeof raw === 'object' ? raw : _yardChecksMem;
+  const byYard = new Map();
+  for (const v of liveInventory) { if (!byYard.has(v.location)) byYard.set(v.location, new Set()); byYard.get(v.location).add(vehicleKey(v)); }
+  const pruned = checksPrune(src, Date.now(), (loc) => byYard.get(loc) || new Set());
+  saveYardChecks(pruned);
+  return pruned;
+}
+function saveYardChecks(all) {
+  _yardChecksMem = all;
+  try { localStorage.setItem('ys_yard_checks', JSON.stringify(all)); } catch (e) { /* storage off: this session only */ }
+}
+const _rowsOpen = new Set();   // all-checked rows the user re-opened
 const rowSortKey = (r) => {
   const s = String(r || '').trim();
   const m = /^(\D*?)\s*(\d+)(.*)$/.exec(s);
@@ -5247,6 +5295,7 @@ function yardRowThumb(v) {
 }
 function yardRowItemHtml(v, flags) {
   const key = vehicleKey(v);
+  const done = !!flags.checked;
   const unlocked = isPro();
   const val = (v.hasMatch && v.topParts && v.topParts.length) ? carValueParts(v, unlocked, false) : null;
   const ex = extrasFor(v);
@@ -5256,7 +5305,7 @@ function yardRowItemHtml(v, flags) {
     flags.watch ? '<span class="yr-tag yr-tag-watch">Watch match</span>' : '',
     flags.fresh ? '<span class="yr-tag yr-tag-new">New</span>' : '',
   ].join('');
-  return `<li class="yr-item${flags.pull ? ' is-pull' : ''}${flags.watch ? ' is-watch' : ''}" data-vkey="${escapeHtml(key)}">
+  return `<li class="yr-item${flags.pull ? ' is-pull' : ''}${flags.watch ? ' is-watch' : ''}${done ? ' is-checked' : ''}" data-vkey="${escapeHtml(key)}">
       <button type="button" class="yr-open car-open" data-vkey="${escapeHtml(key)}" aria-label="Open the ${escapeHtml(`${v.year} ${v.make} ${v.model}`)}">
         ${yardRowThumb(v)}
         <span class="yr-main">
@@ -5267,7 +5316,10 @@ function yardRowItemHtml(v, flags) {
         </span>
       </button>
       ${unlocked && val && val.profitLine ? `<div class="yr-value">${val.profitLine}</div>` : ''}
-      <div class="yr-act">${(() => { const on = !!savedCars[key]; return `<button type="button" class="btn ${on ? 'btn-on' : 'btn-accent'} heart-btn yr-add" data-vkey="${escapeHtml(key)}" aria-pressed="${on}" aria-label="${on ? 'On your pull sheet. Remove' : 'Add to pull sheet'}">${on ? ICON.check + '<span>On sheet</span>' : ICON.plus + '<span>Add</span>'}</button>`; })()}</div>
+      <div class="yr-act">
+        <button type="button" class="yr-check" data-vkey="${escapeHtml(key)}" aria-pressed="${done}" aria-label="${done ? 'Checked. Tap to uncheck' : 'Mark checked'}: ${escapeHtml(`${v.year} ${v.make} ${v.model}`)}">${ICON.check}<span>${done ? 'Checked' : 'Check'}</span></button>
+        ${(() => { const on = !!savedCars[key]; return `<button type="button" class="btn ${on ? 'btn-on' : 'btn-accent'} heart-btn yr-add" data-vkey="${escapeHtml(key)}" aria-pressed="${on}" aria-label="${on ? 'On your pull sheet. Remove' : 'Add to pull sheet'}">${on ? ICON.check + '<span>On sheet</span>' : ICON.plus + '<span>Add</span>'}</button>`; })()}
+      </div>
     </li>`;
 }
 function renderYardRows() {
@@ -5279,7 +5331,8 @@ function renderYardRows() {
     return;
   }
   const watches = loadWatchlist();
-  const items = cars.map(v => ({ v, pull: !!savedCars[vehicleKey(v)], watch: watches.length ? watchMatchesFor(v, watches) : false, fresh: isNew(v.dateAdded) }));
+  const checks = loadYardChecks()[loc] || {};
+  const items = cars.map(v => ({ v, pull: !!savedCars[vehicleKey(v)], watch: watches.length ? watchMatchesFor(v, watches) : false, fresh: isNew(v.dateAdded), checked: !!checks[vehicleKey(v)] }));
   const n = { all: items.length, pull: items.filter(i => i.pull).length, watch: items.filter(i => i.watch).length, fresh: items.filter(i => i.fresh).length };
   if (yardRowsFilter !== 'all' && !n[yardRowsFilter]) yardRowsFilter = 'all';
   const shown = items.filter(i => yardRowsFilter === 'all' || i[yardRowsFilter]);
@@ -5301,12 +5354,20 @@ function renderYardRows() {
     <div class="yr-chips" role="group" aria-label="Show">
       ${chip('all', 'All cars')}${chip('pull', 'Pull sheet')}${chip('watch', 'Watch matches')}${chip('fresh', 'New this week')}
     </div>
+    ${(() => { const c = shown.filter(i => i.checked).length; return `<div class="yr-progress" role="status"><span><b>${c.toLocaleString()}</b> of <b>${shown.length.toLocaleString()}</b> checked</span>${c ? '<button type="button" class="yr-reset">Reset checks</button>' : ''}<span class="yr-bar" aria-hidden="true"><i style="width:${shown.length ? Math.round(100 * c / shown.length) : 0}%"></i></span></div>`; })()}
     ${isPro() ? '' : proBoxHtml('See what each car’s parts are worth', 'yard-rows-value', '', 'yr-pro')}
     <p class="yr-hint">Rows in number order. Yards move cars and the row is what the yard listed, so check the plate at the row end.</p>
     ${rows.map(r => {
-      const list = byRow.get(r).sort((a, b) => (b.pull - a.pull) || (b.watch - a.watch) || (parseYardDate(b.v.dateAdded) - parseYardDate(a.v.dateAdded)));
-      return `<section class="yr-row" aria-label="${r ? 'Row ' + escapeHtml(r) : 'Row not listed'}">
-        <h3 class="yr-row-head"><span class="yr-row-plate">${r ? `<small>Row</small>${escapeHtml(r)}` : '<small>Row</small>?'}</span><span class="yr-row-count">${r ? '' : 'Row not listed &middot; '}${list.length} car${list.length === 1 ? '' : 's'}${list.some(i => i.pull) ? ' &middot; <em>pull sheet</em>' : ''}${list.some(i => i.watch) ? ' &middot; <em>watch match</em>' : ''}</span></h3>
+      const list = byRow.get(r).sort((a, b) => (a.checked - b.checked) || (b.pull - a.pull) || (b.watch - a.watch) || (parseYardDate(b.v.dateAdded) - parseYardDate(a.v.dateAdded)));
+      const sum = rowCheckSummary(list.map(i => vehicleKey(i.v)), Object.fromEntries(list.map(i => [vehicleKey(i.v), i.checked])));
+      const rowId = loc + '|' + r;
+      if (sum.done && !_rowsOpen.has(rowId)) {
+        return `<section class="yr-row yr-row-done"><button type="button" class="yr-row-toggle" data-row="${escapeHtml(rowId)}" aria-expanded="false">
+          <span class="yr-row-plate">${r ? `<small>Row</small>${escapeHtml(r)}` : '<small>Row</small>?'}</span>
+          <span class="yr-row-count">${ICON.check} ${r ? 'Row ' + escapeHtml(r) + ' &middot; ' : 'Row not listed &middot; '}all checked (${sum.total})</span><span class="yr-row-chev" aria-hidden="true">&rsaquo;</span></button></section>`;
+      }
+      return `<section class="yr-row${sum.done ? ' yr-row-open' : ''}" aria-label="${r ? 'Row ' + escapeHtml(r) : 'Row not listed'}">
+        <h3 class="yr-row-head"><span class="yr-row-plate">${r ? `<small>Row</small>${escapeHtml(r)}` : '<small>Row</small>?'}</span><span class="yr-row-count">${r ? '' : 'Row not listed &middot; '}${list.length} car${list.length === 1 ? '' : 's'}${sum.checked ? ` &middot; ${sum.checked} checked` : ''}${list.some(i => i.pull) ? ' &middot; <em>pull sheet</em>' : ''}${list.some(i => i.watch) ? ' &middot; <em>watch match</em>' : ''}</span>${sum.done ? `<button type="button" class="yr-row-toggle yr-row-fold" data-row="${escapeHtml(rowId)}" aria-expanded="true">Fold</button>` : ''}</h3>
         <ul class="yr-list">${list.map(i => yardRowItemHtml(i.v, i)).join('')}</ul>
       </section>`;
     }).join('')}`;
@@ -5352,6 +5413,24 @@ document.addEventListener('keydown', (e) => {
 document.getElementById('yard-rows').addEventListener('click', e => {
   const chip = e.target.closest('.yr-chip');
   if (chip) { yardRowsFilter = chip.dataset.filter; renderYardRows(); return; }
+  const chk = e.target.closest('.yr-check');
+  if (chk) {
+    e.preventDefault();
+    saveYardChecks(checksToggle(loadYardChecks(), yardRowsLoc, chk.dataset.vkey, Date.now()));
+    renderYardRows();
+    const again = document.querySelector(`#yard-rows .yr-check[data-vkey="${CSS.escape(chk.dataset.vkey)}"]`);
+    if (again) again.focus({ preventScroll: true });
+    return;
+  }
+  const tog = e.target.closest('.yr-row-toggle');
+  if (tog) { const id = tog.dataset.row; if (_rowsOpen.has(id)) _rowsOpen.delete(id); else _rowsOpen.add(id); renderYardRows(); return; }
+  const reset = e.target.closest('.yr-reset');
+  if (reset) {
+    if (!confirm('Clear the checks for this yard? Your pull sheet and watches stay as they are.')) return;
+    const all = loadYardChecks(); delete all[yardRowsLoc]; saveYardChecks(all);
+    for (const id of [..._rowsOpen]) if (id.startsWith(yardRowsLoc + '|')) _rowsOpen.delete(id);
+    renderYardRows(); return;
+  }
   const heart = e.target.closest('.heart-btn');
   if (heart) { e.preventDefault(); toggleSaved(heart.dataset.vkey); renderYardRows(); return; }
   const open = e.target.closest('.car-open');

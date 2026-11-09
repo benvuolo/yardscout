@@ -512,6 +512,42 @@ const SCREENS = [
     });
     await resetUi(page);
   }]),
+  // Checking cars off mid-walk: row 1 all checked (collapsed), row 2 partly,
+  // the progress header; checks never touch the pull sheet or watches.
+  ...[['yard-rows-checked', 'top'], ['yard-rows-checked-mid', 'mid']].map(([name, at]) => [name, async (page) => {
+    await tab(page, 'yards');
+    await page.evaluate((at) => {
+      setYardsView('list'); renderYards();
+      document.querySelector('#yards-grid .yard-card[data-loc] .yard-walk-btn').click();
+      const before = JSON.stringify([savedCars, loadWatchlist()]);
+      const secs = [...document.querySelectorAll('#yard-rows-body .yr-row')];
+      const keysOf = (sec) => [...sec.querySelectorAll('.yr-check')].map(b => b.dataset.vkey);
+      let all = loadYardChecks();
+      const r1 = keysOf(secs[0]), r2 = keysOf(secs[1]);
+      for (const k of r1) all = checksToggle(all, yardRowsLoc, k, Date.now());
+      for (const k of r2.slice(0, Math.max(1, Math.floor(r2.length / 2)))) all = checksToggle(all, yardRowsLoc, k, Date.now());
+      saveYardChecks(all); renderYardRows();
+      // one real tap through the handler (row 3's first car)
+      const s3 = document.querySelectorAll('#yard-rows-body .yr-row')[2];
+      s3.querySelector('.yr-check').click();
+      const box = document.getElementById('yard-rows-body');
+      const done = box.querySelector('.yr-row-done .yr-row-toggle');
+      if (!done || !/all checked \(\d+\)/.test(done.textContent)) throw new Error('row 1 did not collapse: ' + (done && done.textContent));
+      if (!box.querySelector('.yr-item.is-checked') || !box.querySelector('.yr-item:not(.is-checked)')) throw new Error('no mix of checked and unchecked cars');
+      const prog = box.querySelector('.yr-progress').textContent.replace(/\s+/g, ' ');
+      const n = r1.length + Math.max(1, Math.floor(r2.length / 2)) + 1;
+      if (!new RegExp(`\\b${n} of [\\d,]+ checked`).test(prog)) throw new Error('progress header: ' + prog);
+      if (JSON.stringify([savedCars, loadWatchlist()]) !== before) throw new Error('checking touched the pull sheet or watches');
+      if (!box.querySelector('.yr-reset')) throw new Error('no reset');
+      const sc = document.getElementById('yard-rows-scroll');
+      const target = at === 'top' ? box.querySelector('.yr-progress') : box.querySelector('.yr-row:not(.yr-row-done) .yr-item.is-checked').previousElementSibling || box.querySelector('.yr-item.is-checked');
+      sc.scrollTop += target.getBoundingClientRect().top - sc.getBoundingClientRect().top - (at === 'top' ? 12 : 120);
+    }, at);
+    await settle(page, 600);
+  }, async (page) => {
+    await page.evaluate(() => { saveYardChecks({}); try { localStorage.removeItem('ys_yard_checks'); } catch (e) {} hideYardRows(); });
+    await resetUi(page);
+  }]),
   ...[['yards-map', 'gl'], ['yards-map-sheet', 'sheet'], ['yards-map-schematic', 'schematic']].map(([name, mode]) => [name, async (page) => {
     await tab(page, 'yards');
     await page.evaluate(() => setYardsView('map'));

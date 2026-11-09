@@ -3107,7 +3107,7 @@ button.saved-item-name { max-width: 100%; min-width: 0; overflow-wrap: anywhere;
 .yr-parts { font-size: var(--t-sm); line-height: 1.4; color: var(--text); overflow-wrap: anywhere; }
 .yr-value { grid-column: 1 / -1; grid-row: 2; font-size: var(--t-sm); }
 .yr-value .profit-line { margin-top: 0; }
-.yr-act { grid-column: 2; grid-row: 1; align-self: start; }
+.yr-act { grid-column: 2; grid-row: 1; align-self: start; display: flex; flex-direction: column; align-items: stretch; gap: var(--s2); }
 .yr-add { min-height: var(--tap); min-width: var(--tap); padding: 0 var(--s3); gap: 6px; font-size: var(--t-sm); }
 .yard-actions .yard-walk-btn { order: -1; }
 
@@ -3159,3 +3159,47 @@ button.saved-item-name { max-width: 100%; min-width: 0; overflow-wrap: anywhere;
 .map-sheet-pick { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s1) var(--s3); width: 100%; min-height: var(--tap); padding: var(--s2) var(--s3); border: 1px solid var(--border); border-radius: var(--r-sm); background: var(--bg); color: var(--text); font: 600 var(--t-sm)/1.35 var(--font-ui); text-align: left; cursor: pointer; }
 .map-sheet-pick span { min-width: 0; overflow-wrap: anywhere; }
 .map-sheet-pick b { font-family: var(--font-mono); }
+
+/* ---- Lot Map: checking off cars while walking ---- */
+.yr-check {
+  display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  min-width: 3.5rem; min-height: 3.5rem; padding: 4px var(--s2);
+  border: 2px solid var(--border-dark); border-radius: var(--r); background: var(--bg);
+  color: var(--text); font: 700 var(--t-xs)/1.2 var(--font-ui); cursor: pointer;
+}
+.yr-check .ico { width: 22px; height: 22px; opacity: 0.35; }
+.yr-check[aria-pressed="true"] { background: var(--accent2); border-color: var(--accent2); color: var(--bg); }
+.yr-check[aria-pressed="true"] .ico { opacity: 1; }
+.yr-check:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+.yr-item.is-checked { border-style: dashed; border-color: var(--border-dark); box-shadow: none; }
+.yr-item.is-checked .yr-thumb { opacity: 0.45; filter: grayscale(1); }
+.yr-item.is-checked .yr-name, .yr-item.is-checked .yr-parts, .yr-item.is-checked .yr-sub, .yr-item.is-checked .yr-value { color: var(--text-dim); }
+.yr-item.is-checked .yr-name { text-decoration: line-through; text-decoration-thickness: 2px; }
+.yr-progress {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2) var(--s3);
+  margin: 0 0 var(--s3); padding: var(--s3); border: 1px solid var(--border); border-radius: var(--r); background: var(--surface);
+  font-size: var(--t-sm);
+}
+.yr-progress b { font-family: var(--font-mono); font-size: var(--t-md); }
+.yr-progress > span:first-child { flex: 1 1 auto; }
+.yr-reset { min-height: var(--tap); padding: 0 var(--s3); border: 1px solid var(--border-dark); border-radius: var(--r-pill); background: none; color: var(--text); font: 600 var(--t-sm)/1.2 var(--font-ui); cursor: pointer; }
+.yr-bar { flex: 1 1 100%; height: 6px; border-radius: 3px; background: var(--surface2); overflow: hidden; }
+.yr-bar i { display: block; height: 100%; background: var(--accent2); }
+.yr-row-done { margin-bottom: var(--s2); }
+.yr-row-toggle:not(.yr-row-fold) {
+  display: flex; align-items: center; gap: var(--s3); width: 100%; min-height: var(--tap); padding: var(--s2);
+  border: 1px dashed var(--border-dark); border-radius: var(--r); background: var(--surface2); color: var(--text-dim);
+  font: 600 var(--t-sm)/1.35 var(--font-ui); text-align: left; cursor: pointer;
+}
+.yr-row-toggle .yr-row-plate { background: var(--surface); color: var(--text); border: 2px solid var(--border-dark); }
+.yr-row-toggle .yr-row-count { flex: 1 1 auto; min-width: 0; display: block; color: var(--accent2); overflow-wrap: anywhere; }
+.yr-row-toggle .yr-row-count .ico { width: 16px; height: 16px; vertical-align: -2px; margin-right: 4px; }
+.yr-row-chev { flex: none; font-size: 1.5em; line-height: 1; }
+.yr-row-fold { margin-left: auto; min-height: var(--tap); padding: 0 var(--s3); border: 1px solid var(--border-dark); border-radius: var(--r-pill); background: none; color: var(--text); font: 600 var(--t-xs)/1.2 var(--font-ui); cursor: pointer; }
+/* A checked car shrinks to its name line so a walked row gets short. */
+.yr-item.is-checked .yr-parts, .yr-item.is-checked .yr-value, .yr-item.is-checked .yr-tags, .yr-item.is-checked .yr-sub { display: none; }
+.yr-item.is-checked .yr-thumb { width: 56px; }
+.yr-item.is-checked .yr-add { display: none; }
+.yr-item.is-checked .yr-check { min-height: var(--tap); flex-direction: row; gap: 6px; }
+.yr-item.is-checked .yr-check .ico { width: 18px; height: 18px; }
+.yr-item.is-checked { padding-block: 6px; }
