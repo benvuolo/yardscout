@@ -1,6 +1,6 @@
 # OEM curation report: hmg
 
-Raw: `42683f9d86450b6bd00eb7fc7cc9640154607768` @ `42683f9d8645`; as of 2026-11-06T00:42:44Z.
+Raw: `c36da2eb98835c02f81c05e8c36b6a926634a332` @ `c36da2eb9883`; as of 2026-11-06T00:42:44Z.
 
 - records 6450, classes 6266, list rows 18066, year manifests 55, cells 7444
 - Verified groups 0, engine vg groups 0, Likely groups 6

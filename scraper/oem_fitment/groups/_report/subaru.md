@@ -1,9 +1,9 @@
 # OEM curation report: subaru
 
-Raw: `42683f9d86450b6bd00eb7fc7cc9640154607768` @ `42683f9d8645`; as of 2026-11-06T06:33:58Z.
+Raw: `c36da2eb98835c02f81c05e8c36b6a926634a332` @ `c36da2eb9883`; as of 2026-11-06T06:33:58Z.
 
 - records 2101, classes 2101, list rows 21183, year manifests 62, cells 2640
-- Verified groups 0, engine vg groups 0, Likely groups 97
+- Verified groups 0, engine vg groups 0, Likely groups 65
 - blocked sites: none
 
 ## Gates standing for the whole namespace
@@ -299,14 +299,14 @@ Raw: `42683f9d86450b6bd00eb7fc7cc9640154607768` @ `42683f9d8645`; as of 2026-11-
 ## Refusals by reason
 
 - cross_category_supersession: 226
-- held_exterior_cross_model: 27
+- held_exterior_cross_model: 26
 - recrawl_resolved: 1
 
 ## Unknown note clauses (top 30)
 
 - `Production Date: 199105 - 199204`: 86
 - `NO PAINTED`: 80
-- `Production Date: 200201 - 200306`: 69
+- `Production Date: 200201 - 200306`: 68
 - `Production Date: 200311 - 200505`: 66
 - `Production Date: 200301 - 200402`: 60
 - `PAINT FOR USAGE`: 59

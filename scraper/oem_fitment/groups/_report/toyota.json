@@ -7978,11 +7978,11 @@
   },
   "bumper-front": {
    "no_records": {
-    "": 4943
+    "": 4941
    },
    "not_closed": {
     "no_list_manifest": 1,
-    "no_year_manifest": 19834,
+    "no_year_manifest": 19836,
     "unread_sibling_page": 892
    },
    "unmapped": {
@@ -8004,11 +8004,11 @@
   },
   "climate-control": {
    "no_records": {
-    "": 10371
+    "": 10369
    },
    "not_closed": {
     "no_list_manifest": 153,
-    "no_year_manifest": 14906,
+    "no_year_manifest": 14908,
     "unread_sibling_page": 240
    },
    "unmapped": {
@@ -8030,11 +8030,11 @@
   },
   "door-rear": {
    "no_records": {
-    "": 4242
+    "": 4241
    },
    "not_closed": {
     "no_list_manifest": 1,
-    "no_year_manifest": 20545,
+    "no_year_manifest": 20546,
     "unread_sibling_page": 882
    },
    "unmapped": {
@@ -8043,11 +8043,11 @@
   },
   "fender": {
    "no_records": {
-    "": 6726
+    "": 6727
    },
    "not_closed": {
     "no_list_manifest": 1,
-    "no_year_manifest": 18051,
+    "no_year_manifest": 18050,
     "unread_sibling_page": 892
    },
    "unmapped": {
@@ -8069,11 +8069,11 @@
   },
   "gauge-cluster": {
    "no_records": {
-    "": 13673
+    "": 13670
    },
    "not_closed": {
     "no_list_manifest": 1,
-    "no_year_manifest": 11104,
+    "no_year_manifest": 11107,
     "unread_sibling_page": 892
    },
    "unmapped": {
@@ -8082,11 +8082,11 @@
   },
   "grille": {
    "no_records": {
-    "": 6134
+    "": 6131
    },
    "not_closed": {
     "no_list_manifest": 1,
-    "no_year_manifest": 18643,
+    "no_year_manifest": 18646,
     "unattested": 467,
     "uncrawled_chain_member": 425
    },
@@ -8096,11 +8096,11 @@
   },
   "headlights": {
    "no_records": {
-    "": 4931
+    "": 4930
    },
    "not_closed": {
     "no_list_manifest": 649,
-    "no_year_manifest": 19850,
+    "no_year_manifest": 19851,
     "unread_sibling_page": 240
    },
    "unmapped": {
@@ -8109,11 +8109,11 @@
   },
   "hood": {
    "no_records": {
-    "": 2132
+    "": 2131
    },
    "not_closed": {
     "no_list_manifest": 1,
-    "no_year_manifest": 22645,
+    "no_year_manifest": 22646,
     "unread_sibling_page": 892
    },
    "unmapped": {
@@ -8150,11 +8150,11 @@
   },
   "power-steering-pump": {
    "no_records": {
-    "": 15928
+    "": 15929
    },
    "not_closed": {
     "no_list_manifest": 505,
-    "no_year_manifest": 9104,
+    "no_year_manifest": 9103,
     "unread_sibling_page": 133
    },
    "unmapped": {
@@ -8176,11 +8176,11 @@
   },
   "side-mirrors": {
    "no_records": {
-    "": 3193
+    "": 3194
    },
    "not_closed": {
     "no_list_manifest": 651,
-    "no_year_manifest": 21586,
+    "no_year_manifest": 21585,
     "suspect_variant": 26,
     "uncrawled_chain_member": 134,
     "unread_sibling_page": 80
@@ -8206,11 +8206,11 @@
   },
   "tail-lights": {
    "no_records": {
-    "": 7519
+    "": 7518
    },
    "not_closed": {
     "no_list_manifest": 432,
-    "no_year_manifest": 17479,
+    "no_year_manifest": 17480,
     "unattested": 140,
     "uncrawled_chain_member": 100
    },
@@ -8220,11 +8220,11 @@
   },
   "throttle-body": {
    "no_records": {
-    "": 3408
+    "": 3407
    },
    "not_closed": {
     "no_list_manifest": 564,
-    "no_year_manifest": 21458,
+    "no_year_manifest": 21459,
     "unread_sibling_page": 218,
     "unverified_product": 22
    },
@@ -8290,9 +8290,9 @@
    "ac-compressor": {
     "conditional": {
      "conditional:body": 2,
-     "conditional:engine": 1187,
+     "conditional:engine": 1186,
      "conditional:engine_unattested": 1178,
-     "conditional:notes_not_own_page": 2655,
+     "conditional:notes_not_own_page": 2656,
      "conditional:option_layout": 482,
      "conditional:qualifier": 1200,
      "conditional:trim": 2910
@@ -8316,7 +8316,7 @@
     },
     "conditional": {
      "conditional:engine_unattested": 764,
-     "conditional:notes_not_own_page": 3310,
+     "conditional:notes_not_own_page": 3309,
      "conditional:option_layout": 360,
      "conditional:production": 62,
      "conditional:trim": 191
@@ -8328,7 +8328,7 @@
      "reman_only": 135
     },
     "split": {
-     "option_split": 18089
+     "option_split": 18090
     },
     "unmapped": {
      "": 699
@@ -8347,16 +8347,16 @@
      "conditional:notes_not_own_page": 1276,
      "conditional:option_layout": 67,
      "conditional:package": 44,
-     "conditional:trim": 3573
+     "conditional:trim": 3571
     },
     "eligible": {
-     "": 527
+     "": 528
     },
     "no_records": {
-     "": 4943
+     "": 4941
     },
     "split": {
-     "option_split": 14105
+     "option_split": 14108
     },
     "unmapped": {
      "": 699
@@ -8373,17 +8373,17 @@
      "conditional:body": 306,
      "conditional:engine": 786,
      "conditional:engine_unattested": 1280,
-     "conditional:notes_not_own_page": 1967,
-     "conditional:trim": 4719
+     "conditional:notes_not_own_page": 1965,
+     "conditional:trim": 4717
     },
     "eligible": {
-     "": 479
+     "": 480
     },
     "no_records": {
      "": 2972
     },
     "split": {
-     "option_split": 12838
+     "option_split": 12841
     },
     "unmapped": {
      "": 699
@@ -8393,19 +8393,19 @@
     "conditional": {
      "conditional:engine_unattested": 272,
      "conditional:engine_unparsed": 90,
-     "conditional:notes_not_own_page": 1053,
-     "conditional:option": 446,
-     "conditional:trim": 3023
+     "conditional:notes_not_own_page": 1054,
+     "conditional:option": 447,
+     "conditional:trim": 3021
     },
     "eligible": {
      "": 283
     },
     "no_records": {
-     "": 10371
+     "": 10369
     },
     "split": {
      "no_candidates": 229,
-     "option_split": 9903
+     "option_split": 9905
     },
     "unmapped": {
      "": 699
@@ -8418,13 +8418,13 @@
     "conditional": {
      "conditional:engine": 391,
      "conditional:engine_unattested": 2085,
-     "conditional:notes_not_own_page": 2720,
+     "conditional:notes_not_own_page": 2718,
      "conditional:option_layout": 21,
      "conditional:plant": 57,
-     "conditional:trim": 4251
+     "conditional:trim": 4252
     },
     "eligible": {
-     "": 843
+     "": 844
     },
     "no_records": {
      "": 2642
@@ -8444,16 +8444,16 @@
      "conditional:engine_unattested": 1794,
      "conditional:notes_not_own_page": 1810,
      "conditional:option": 258,
-     "conditional:trim": 5595
+     "conditional:trim": 5596
     },
     "eligible": {
-     "": 473
+     "": 474
     },
     "no_records": {
-     "": 4242
+     "": 4241
     },
     "split": {
-     "option_split": 10451,
+     "option_split": 10450,
      "slot_missing": 415
     },
     "unmapped": {
@@ -8467,16 +8467,16 @@
     "conditional": {
      "conditional:engine": 266,
      "conditional:engine_unattested": 1947,
-     "conditional:notes_not_own_page": 2344,
+     "conditional:notes_not_own_page": 2342,
      "conditional:option_layout": 362,
      "conditional:package": 132,
-     "conditional:trim": 5958
+     "conditional:trim": 5959
     },
     "eligible": {
      "": 573
     },
     "no_records": {
-     "": 6726
+     "": 6727
     },
     "split": {
      "option_split": 6709,
@@ -8520,11 +8520,11 @@
      "": 74
     },
     "no_records": {
-     "": 13673
+     "": 13670
     },
     "split": {
      "no_candidates": 247,
-     "option_split": 11405
+     "option_split": 11408
     },
     "unmapped": {
      "": 699
@@ -8535,17 +8535,17 @@
      "conditional:engine": 34,
      "conditional:engine_unattested": 389,
      "conditional:engine_unparsed": 90,
-     "conditional:notes_not_own_page": 804,
-     "conditional:trim": 2334
+     "conditional:notes_not_own_page": 805,
+     "conditional:trim": 2333
     },
     "eligible": {
      "": 436
     },
     "no_records": {
-     "": 6134
+     "": 6131
     },
     "split": {
-     "option_split": 15449
+     "option_split": 15452
     },
     "unmapped": {
      "": 699
@@ -8556,23 +8556,23 @@
      "chain_member_conditional": 172
     },
     "conditional": {
-     "conditional:engine": 323,
+     "conditional:engine": 322,
      "conditional:engine_unattested": 104,
      "conditional:engine_unparsed": 90,
-     "conditional:notes_not_own_page": 1455,
+     "conditional:notes_not_own_page": 1456,
      "conditional:option": 306,
      "conditional:plant": 130,
      "conditional:qualifier": 3,
-     "conditional:trim": 3431
+     "conditional:trim": 3430
     },
     "eligible": {
-     "": 846
+     "": 847
     },
     "no_records": {
-     "": 4931
+     "": 4930
     },
     "split": {
-     "option_split": 13808,
+     "option_split": 13809,
      "slot_missing": 71
     },
     "unmapped": {
@@ -8591,16 +8591,16 @@
      "conditional:option": 106,
      "conditional:package": 132,
      "conditional:plant": 252,
-     "conditional:trim": 10255
+     "conditional:trim": 10257
     },
     "eligible": {
-     "": 1349
+     "": 1350
     },
     "no_records": {
-     "": 2132
+     "": 2131
     },
     "split": {
-     "option_split": 4206
+     "option_split": 4204
     },
     "unmapped": {
      "": 699
@@ -8644,11 +8644,11 @@
    "power-steering-pump": {
     "conditional": {
      "conditional:engine_unattested": 1060,
-     "conditional:notes_not_own_page": 2459,
+     "conditional:notes_not_own_page": 2458,
      "conditional:option_layout": 1783
     },
     "no_records": {
-     "": 15928
+     "": 15929
     },
     "split": {
      "option_split": 4440
@@ -8661,7 +8661,7 @@
     "conditional": {
      "conditional:engine": 121,
      "conditional:engine_unattested": 640,
-     "conditional:notes_not_own_page": 362,
+     "conditional:notes_not_own_page": 361,
      "conditional:trans": 217,
      "conditional:trim": 508
     },
@@ -8669,7 +8669,7 @@
      "": 2598
     },
     "split": {
-     "option_split": 21224
+     "option_split": 21225
     },
     "unmapped": {
      "": 699
@@ -8685,10 +8685,10 @@
      "": 48
     },
     "no_records": {
-     "": 3193
+     "": 3194
     },
     "split": {
-     "option_split": 21711,
+     "option_split": 21710,
      "slot_missing": 22
     },
     "unmapped": {
@@ -8702,8 +8702,8 @@
     "conditional": {
      "conditional:engine": 205,
      "conditional:engine_unattested": 1045,
-     "conditional:notes_not_own_page": 4217,
-     "conditional:option_layout": 1235,
+     "conditional:notes_not_own_page": 4216,
+     "conditional:option_layout": 1236,
      "conditional:plant": 387,
      "conditional:trim": 574
     },
@@ -8725,20 +8725,20 @@
      "conditional:engine": 107,
      "conditional:engine_unattested": 672,
      "conditional:engine_unparsed": 90,
-     "conditional:notes_not_own_page": 851,
+     "conditional:notes_not_own_page": 852,
      "conditional:plant": 908,
      "conditional:position": 110,
-     "conditional:trim": 4174
+     "conditional:trim": 4175
     },
     "eligible": {
      "": 399
     },
     "no_records": {
-     "": 7519
+     "": 7518
     },
     "split": {
      "no_candidates": 38,
-     "option_split": 10461,
+     "option_split": 10460,
      "slot_missing": 341
     },
     "unmapped": {
@@ -8749,7 +8749,7 @@
     "conditional": {
      "conditional:engine": 932,
      "conditional:engine_unattested": 961,
-     "conditional:notes_not_own_page": 1687,
+     "conditional:notes_not_own_page": 1688,
      "conditional:plant": 272,
      "conditional:qualifier": 801,
      "conditional:trim": 3255,
@@ -8759,7 +8759,7 @@
      "kind_not_phase1": 571
     },
     "no_records": {
-     "": 3408
+     "": 3407
     },
     "split": {
      "option_split": 13648
@@ -8810,8 +8810,8 @@
     },
     "split": {
      "packaging_incomplete": 908,
-     "packaging_split": 12765,
-     "packaging_unstated": 10072,
+     "packaging_split": 12767,
+     "packaging_unstated": 10070,
      "position_missing": 330
     },
     "unmapped": {
@@ -8822,11 +8822,11 @@
     "conditional": {
      "conditional:engine": 871,
      "conditional:engine_unattested": 38,
-     "conditional:notes_not_own_page": 2454,
+     "conditional:notes_not_own_page": 2453,
      "conditional:option": 25,
      "conditional:plant": 391,
      "conditional:position": 205,
-     "conditional:trim": 4682
+     "conditional:trim": 4683
     },
     "eligible": {
      "": 143
@@ -9166,8 +9166,8 @@
     "mapped_share": 0.9398
    },
    "ford": {
-    "cars": 60873,
-    "mapped_cars": 58630,
+    "cars": 60872,
+    "mapped_cars": 58629,
     "mapped_share": 0.9632
    },
    "gm": {
@@ -9182,8 +9182,8 @@
    },
    "honda": {
     "cars": 28593,
-    "mapped_cars": 28197,
-    "mapped_share": 0.9862
+    "mapped_cars": 28196,
+    "mapped_share": 0.9861
    },
    "mazda": {
     "cars": 6246,
@@ -9201,8 +9201,8 @@
     "mapped_share": 0.9658
    },
    "mopar": {
-    "cars": 44183,
-    "mapped_cars": 42051,
+    "cars": 44182,
+    "mapped_cars": 42050,
     "mapped_share": 0.9517
    },
    "nissan": {
@@ -9801,7 +9801,7 @@
      "decoded": 819
     },
     "Chevrolet|Impala": {
-     "decoded": 3422
+     "decoded": 3423
     },
     "Chevrolet|K10": {
      "decoded": 1
@@ -9822,7 +9822,7 @@
      "decoded": 53
     },
     "Chevrolet|Malibu": {
-     "decoded": 4500,
+     "decoded": 4498,
      "hybrid": 25
     },
     "Chevrolet|Metro": {},
@@ -9920,7 +9920,7 @@
      "decoded": 3
     },
     "Chrysler|Town & Country": {
-     "decoded": 2299
+     "decoded": 2298
     },
     "Chrysler|Voyager": {
      "decoded": 49
@@ -9950,7 +9950,7 @@
      "decoded": 8
     },
     "Dodge|Caliber": {
-     "decoded": 738
+     "decoded": 739
     },
     "Dodge|Caravan": {
      "decoded": 804
@@ -9959,7 +9959,7 @@
      "decoded": 148
     },
     "Dodge|Charger": {
-     "decoded": 1604
+     "decoded": 1605
     },
     "Dodge|D100": {
      "decoded": 4
@@ -9972,7 +9972,7 @@
      "decoded": 1458
     },
     "Dodge|Dart": {
-     "decoded": 807
+     "decoded": 806
     },
     "Dodge|Daytona": {
      "decoded": 6
@@ -10001,7 +10001,7 @@
      "decoded": 3
     },
     "Dodge|Neon": {
-     "decoded": 275,
+     "decoded": 274,
      "make_mismatch": 1
     },
     "Dodge|Nitro": {
@@ -10085,10 +10085,10 @@
     },
     "Ford|E-Transit": {},
     "Ford|Edge": {
-     "decoded": 1649
+     "decoded": 1647
     },
     "Ford|Escape": {
-     "decoded": 4147
+     "decoded": 4145
     },
     "Ford|Escort": {
      "decoded": 209
@@ -10100,7 +10100,7 @@
      "decoded": 2716
     },
     "Ford|Explorer": {
-     "decoded": 3784
+     "decoded": 3785
     },
     "Ford|Explorer Sport": {
      "decoded": 77
@@ -10130,7 +10130,7 @@
      "decoded": 10
     },
     "Ford|Fiesta": {
-     "decoded": 1030
+     "decoded": 1029
     },
     "Ford|Five Hundred": {
      "decoded": 330
@@ -10139,7 +10139,7 @@
      "decoded": 472
     },
     "Ford|Focus": {
-     "decoded": 5361
+     "decoded": 5364
     },
     "Ford|Freestar": {
      "decoded": 212
@@ -10148,7 +10148,7 @@
      "decoded": 206
     },
     "Ford|Fusion": {
-     "decoded": 4222,
+     "decoded": 4224,
      "hybrid": 163
     },
     "Ford|Mustang": {
@@ -10164,7 +10164,7 @@
      "decoded": 11
     },
     "Ford|Ranger": {
-     "decoded": 1771
+     "decoded": 1770
     },
     "Ford|Taurus": {
      "decoded": 2256
@@ -10254,7 +10254,7 @@
      "hybrid": 23
     },
     "Honda|CR-V": {
-     "decoded": 1571
+     "decoded": 1570
     },
     "Honda|CR-Z": {
      "decoded": 18
@@ -10285,10 +10285,10 @@
      "decoded": 100
     },
     "Honda|Odyssey": {
-     "decoded": 3128
+     "decoded": 3127
     },
     "Honda|Pilot": {
-     "decoded": 1785
+     "decoded": 1786
     },
     "Honda|Prelude": {
      "decoded": 42
@@ -11099,14 +11099,14 @@
      "decoded": 93
     },
     "Nissan|Altima": {
-     "decoded": 7473,
+     "decoded": 7472,
      "make_mismatch": 1
     },
     "Nissan|Armada": {
      "decoded": 588
     },
     "Nissan|Cube": {
-     "decoded": 110
+     "decoded": 109
     },
     "Nissan|Frontier": {
      "decoded": 546
@@ -11139,7 +11139,7 @@
      "decoded": 2110
     },
     "Nissan|Sentra": {
-     "decoded": 3565
+     "decoded": 3566
     },
     "Nissan|Stanza": {
      "decoded": 4
@@ -11359,12 +11359,12 @@
      "decoded": 466
     },
     "Toyota|Avalon": {
-     "decoded": 1058,
+     "decoded": 1059,
      "hybrid": 7
     },
     "Toyota|Camry": {
      "decoded": 6960,
-     "gas": 2265,
+     "gas": 2266,
      "hybrid": 237
     },
     "Toyota|Camry Hybrid": {
@@ -11372,13 +11372,13 @@
      "hybrid": 96
     },
     "Toyota|Camry Solara": {
-     "decoded": 456
+     "decoded": 455
     },
     "Toyota|Celica": {
      "decoded": 181
     },
     "Toyota|Corolla": {
-     "decoded": 3135
+     "decoded": 3134
     },
     "Toyota|Corolla iM": {
      "decoded": 2
@@ -11387,7 +11387,7 @@
      "decoded": 4
     },
     "Toyota|Echo": {
-     "decoded": 123
+     "decoded": 124
     },
     "Toyota|FJ Cruiser": {
      "decoded": 4
@@ -98153,8 +98153,8 @@
   "unverified_product": 20
  },
  "raw": {
-  "commit": "42683f9d86450b6bd00eb7fc7cc9640154607768",
-  "ref": "42683f9d86450b6bd00eb7fc7cc9640154607768",
+  "commit": "c36da2eb98835c02f81c05e8c36b6a926634a332",
+  "ref": "c36da2eb98835c02f81c05e8c36b6a926634a332",
   "sites": {
    "www.lexuspartsnow.com": {
     "blocked": false,
@@ -99222,9 +99222,11 @@
  ],
  "sites_without_namespace": [
   "www.fordpartsgiant.com.lists",
+  "www.fordpartsgiant.com.lists.2",
   "www.fordpartsgiant.com.years",
   "www.gmpartsgiant.com.lists",
   "www.gmpartsgiant.com.lists.2",
+  "www.gmpartsgiant.com.lists.3",
   "www.gmpartsgiant.com.years",
   "www.hondapartsnow.com.lists",
   "www.hondapartsnow.com.years",
@@ -99254,27 +99256,28 @@
   ],
   "likely_app_years_note_restricted": {},
   "likely_app_years_without_own_page": {
-   "bumper-front": 908,
-   "bumper-rear": 563,
-   "climate-control": 463,
-   "door-front": 936,
-   "door-rear": 743,
-   "fender": 742,
-   "gauge-cluster": 476,
-   "grille": 1037,
-   "headlights": 1710,
-   "hood": 439,
-   "liftgate": 83,
-   "side-mirrors": 8511,
-   "tail-lights": 746,
+   "bumper-front": 938,
+   "bumper-rear": 567,
+   "climate-control": 465,
+   "door-front": 944,
+   "door-rear": 755,
+   "fender": 754,
+   "gauge-cluster": 584,
+   "grille": 1039,
+   "headlights": 1796,
+   "hood": 442,
+   "liftgate": 98,
+   "side-mirrors": 8825,
+   "tail-lights": 754,
    "tow-mirrors": 6,
-   "trunk-lid": 357,
+   "trunk-lid": 390,
    "window-regulator": 3235,
    "window-switch": 357
   },
-  "likely_groups": 779,
+  "likely_groups": 583,
   "list_rows": 25651,
   "records": 6214,
+  "released_by_allowlist": 0,
   "verified_groups": 0,
   "vg_groups": 0,
   "why_no_verified": "no (site, category) of this namespace has passed the audit gate (audits.json has no record; spec 11.4, E5/V7); engine cells not audited as reliable on www.lexuspartsnow.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE; www.lexuspartsnow.com: only 0% of its 4959 fitment rows can be coverage: it prints an option column, and option-layout rows are never coverage (spec 5.5)",
@@ -99301,46 +99304,46 @@
   "051 W(ELECTRIC HEATER CONTROL MIRROR)": 1,
   "056 OUTSIDE RR VIEW MIRROR-HEATED COLOR": 1,
   "062 / KOREA SPEC&PREMIUM PLUS PACKAGE": 1,
-  "062 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "062 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
+  "062 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "062 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 2,
   "062 / KOREA SPEC&ULTRA LUXURY PACKAGE": 1,
   "062 / SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
   "062 / SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
   "062 / SPORT PACKAGE&W(MEMORY MIRROR)": 6,
-  "062 / TAIWAN SPEC&LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "062 / TAIWAN SPEC&PREMIUM PACKAGE&W(MEMORY MIRROR)": 4,
+  "062 / TAIWAN SPEC&LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "062 / TAIWAN SPEC&PREMIUM PACKAGE&W(MEMORY MIRROR)": 2,
   "062 / TAIWAN SPEC&PREMIUM PLUS PACKAGE": 1,
-  "062 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "062 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
+  "062 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "062 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 2,
   "062 / TAIWAN SPEC&ULTRA LUXURY PACKAGE": 1,
   "062 / WITH&W(MEMORY MIRROR)": 4,
   "062 / WITH(PACKAGE OPTION 1)&W(MEMORY MIRROR)": 4,
   "074 / KOREA SPEC&LUXURY PACKAGE": 2,
-  "074 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "074 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
+  "074 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "074 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 2,
   "074 / LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER&EMV & NAVIGATION SYSTEM-WITH(HDD NAVIGATION)": 2,
   "074 / SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
   "074 / SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
-  "074 / TAIWAN SPEC&LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "074 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "074 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
-  "077 / KOREA SPEC&F SPORT": 6,
-  "077 / KOREA SPEC&LUXURY PACKAGE": 4,
+  "074 / TAIWAN SPEC&LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "074 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "074 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 2,
+  "077 / KOREA SPEC&F SPORT": 2,
+  "077 / KOREA SPEC&LUXURY PACKAGE": 2,
   "077 / KOREA SPEC&PREMIUM PLUS PACKAGE": 2,
-  "077 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "077 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
+  "077 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "077 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 2,
   "077 / KOREA SPEC&ULTRA LUXURY PACKAGE": 2,
   "077 / LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER&EMV & NAVIGATION SYSTEM-WITH(HDD NAVIGATION)": 6,
   "077 / OUTSIDE REAR VIEW MIRROR-AUTOMATIC ANTI-GLARE & W/SIDE CAMERA&INSIDE REAR VIEW MIRROR-AUTOMATIC ANTI-GLARE": 2,
   "077 / SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
   "077 / SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
-  "077 / TAIWAN SPEC&LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
+  "077 / TAIWAN SPEC&LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
   "077 / TAIWAN SPEC&PREMIUM PLUS PACKAGE": 2,
-  "077 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "077 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
+  "077 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "077 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 2,
   "077 / TAIWAN SPEC&ULTRA LUXURY PACKAGE": 2,
   "078 / OUTSIDE REAR VIEW MIRROR-AUTOMATIC ANTI-GLARE & W/SIDE CAMERA&INSIDE REAR VIEW MIRROR-AUTOMATIC ANTI-GLARE": 2,
-  "083 / KOREA SPEC&F SPORT": 6,
+  "083 / KOREA SPEC&F SPORT": 2,
   "0A17 Code": 1,
   "0A18 Code": 1,
   "1# / BLACK": 1,
@@ -99348,46 +99351,46 @@
   "130A": 1,
   "150A": 1,
   "1C0 / SPORT PACKAGE&W(MEMORY MIRROR)": 6,
-  "1C0 / TAIWAN SPEC&PREMIUM PACKAGE&W(MEMORY MIRROR)": 4,
+  "1C0 / TAIWAN SPEC&PREMIUM PACKAGE&W(MEMORY MIRROR)": 2,
   "1C0 / WITH&W(MEMORY MIRROR)": 4,
   "1C0 / WITH(PACKAGE OPTION 1)&W(MEMORY MIRROR)": 4,
   "1C8 W(ELECTRIC HEATER CONTROL MIRROR)": 1,
   "1D7 OUTSIDE RR VIEW MIRROR-HEATED COLOR": 1,
   "1E0 / SPORT PACKAGE&W(MEMORY MIRROR)": 6,
-  "1E0 / TAIWAN SPEC&PREMIUM PACKAGE&W(MEMORY MIRROR)": 4,
+  "1E0 / TAIWAN SPEC&PREMIUM PACKAGE&W(MEMORY MIRROR)": 2,
   "1E0 / WITH&W(MEMORY MIRROR)": 4,
   "1E0 / WITH(PACKAGE OPTION 1)&W(MEMORY MIRROR)": 4,
   "1G0 / KOREA SPEC&LUXURY PACKAGE": 2,
   "1G0 / KOREA SPEC&PREMIUM PLUS PACKAGE": 2,
-  "1G0 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "1G0 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
+  "1G0 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "1G0 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 2,
   "1G0 / KOREA SPEC&ULTRA LUXURY PACKAGE": 2,
   "1G0 / LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER&EMV & NAVIGATION SYSTEM-WITH(HDD NAVIGATION)": 2,
   "1G0 / SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
   "1G0 / SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
-  "1G0 / TAIWAN SPEC&LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
+  "1G0 / TAIWAN SPEC&LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
   "1G0 / TAIWAN SPEC&PREMIUM PLUS PACKAGE": 2,
-  "1G0 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "1G0 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
+  "1G0 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "1G0 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 2,
   "1G0 / TAIWAN SPEC&ULTRA LUXURY PACKAGE": 2,
-  "1G1 / KOREA SPEC&LUXURY PACKAGE": 4,
+  "1G1 / KOREA SPEC&LUXURY PACKAGE": 2,
   "1G1 / KOREA SPEC&PREMIUM PLUS PACKAGE": 2,
-  "1G1 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "1G1 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
+  "1G1 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "1G1 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 2,
   "1G1 / KOREA SPEC&ULTRA LUXURY PACKAGE": 2,
   "1G1 / LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER&EMV & NAVIGATION SYSTEM-WITH(HDD NAVIGATION)": 6,
   "1G1 / OUTSIDE REAR VIEW MIRROR-AUTOMATIC ANTI-GLARE & W/SIDE CAMERA&INSIDE REAR VIEW MIRROR-AUTOMATIC ANTI-GLARE": 2,
   "1G1 / SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
   "1G1 / SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
-  "1G1 / TAIWAN SPEC&LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
+  "1G1 / TAIWAN SPEC&LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
   "1G1 / TAIWAN SPEC&PREMIUM PLUS PACKAGE": 2,
-  "1G1 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "1G1 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
+  "1G1 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "1G1 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 2,
   "1G1 / TAIWAN SPEC&ULTRA LUXURY PACKAGE": 2,
-  "1H9 / KOREA SPEC&F SPORT": 6,
-  "1H9 / KOREA SPEC&LUXURY PACKAGE": 4,
+  "1H9 / KOREA SPEC&F SPORT": 2,
+  "1H9 / KOREA SPEC&LUXURY PACKAGE": 2,
   "1H9 / LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER&EMV & NAVIGATION SYSTEM-WITH(HDD NAVIGATION)": 6,
-  "1J4 / KOREA SPEC&F SPORT": 6,
+  "1J4 / KOREA SPEC&F SPORT": 2,
   "2 Wheel Drive": 3,
   "2#": 1,
   "2.4 & 2.7L": 7,
@@ -99396,17 +99399,17 @@
   "2.4L With Trac. Ctrl.": 4,
   "2.4L Without Trac. Ctrl.": 4,
   "202 / KOREA SPEC&PREMIUM PLUS PACKAGE": 1,
-  "202 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "202 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
+  "202 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "202 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 2,
   "202 / KOREA SPEC&ULTRA LUXURY PACKAGE": 1,
   "202 / SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
   "202 / SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
   "202 / SPORT PACKAGE&W(MEMORY MIRROR)": 6,
-  "202 / TAIWAN SPEC&LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "202 / TAIWAN SPEC&PREMIUM PACKAGE&W(MEMORY MIRROR)": 4,
+  "202 / TAIWAN SPEC&LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "202 / TAIWAN SPEC&PREMIUM PACKAGE&W(MEMORY MIRROR)": 2,
   "202 / TAIWAN SPEC&PREMIUM PLUS PACKAGE": 1,
-  "202 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "202 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
+  "202 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "202 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 2,
   "202 / TAIWAN SPEC&ULTRA LUXURY PACKAGE": 1,
   "202 / WITH&W(MEMORY MIRROR)": 4,
   "202 / WITH(PACKAGE OPTION 1)&W(MEMORY MIRROR)": 4,
@@ -99414,10 +99417,10 @@
   "21": 64,
   "21.. ATM": 77,
   "212 / BLACK": 1,
-  "212 / KOREA SPEC&LUXURY PACKAGE": 4,
+  "212 / KOREA SPEC&LUXURY PACKAGE": 2,
   "212 / KOREA SPEC&PREMIUM PLUS PACKAGE": 2,
-  "212 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "212 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
+  "212 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "212 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 2,
   "212 / KOREA SPEC&ULTRA LUXURY PACKAGE": 2,
   "212 / LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER&EMV & NAVIGATION SYSTEM-WITH(HDD NAVIGATION)": 6,
   "212 / OUTSIDE REAR VIEW MIRROR-*AREM & AUTOMATIC ANTI-GLARE & MEMORY": 1,
@@ -99425,14 +99428,14 @@
   "212 / OUTSIDE REAR VIEW MIRROR-AUTOMATIC ANTI-GLARE & W/SIDE CAMERA&INSIDE REAR VIEW MIRROR-AUTOMATIC ANTI-GLARE": 2,
   "212 / SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
   "212 / SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
-  "212 / TAIWAN SPEC&LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
+  "212 / TAIWAN SPEC&LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
   "212 / TAIWAN SPEC&PREMIUM PLUS PACKAGE": 2,
-  "212 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "212 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
+  "212 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "212 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 2,
   "212 / TAIWAN SPEC&ULTRA LUXURY PACKAGE": 2,
   "214 / OUTSIDE REAR VIEW MIRROR-AUTOMATIC ANTI-GLARE & W/SIDE CAMERA&INSIDE REAR VIEW MIRROR-AUTOMATIC ANTI-GLARE": 2,
-  "217 / KOREA SPEC&F SPORT": 6,
-  "217 / KOREA SPEC&LUXURY PACKAGE": 4,
+  "217 / KOREA SPEC&F SPORT": 2,
+  "217 / KOREA SPEC&LUXURY PACKAGE": 2,
   "217 / LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER&EMV & NAVIGATION SYSTEM-WITH(HDD NAVIGATION)": 6,
   "217 / OUTSIDE REAR VIEW MIRROR-AUTOMATIC ANTI-GLARE & W/SIDE CAMERA&INSIDE REAR VIEW MIRROR-AUTOMATIC ANTI-GLARE": 2,
   "25": 10,
@@ -99449,17 +99452,17 @@
   "3GRFSE.. GRS19#": 2,
   "3Q3 OUTSIDE RR VIEW MIRROR-HEATED COLOR": 2,
   "3Q3 OUTSIDE RR VIEW MIRROR-HEATED(EC)": 1,
-  "3R1 / KOREA SPEC&F SPORT": 6,
-  "3R1 / KOREA SPEC&LUXURY PACKAGE": 4,
-  "3R1 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "3R1 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
+  "3R1 / KOREA SPEC&F SPORT": 2,
+  "3R1 / KOREA SPEC&LUXURY PACKAGE": 2,
+  "3R1 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "3R1 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 2,
   "3R1 / LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER&EMV & NAVIGATION SYSTEM-WITH(HDD NAVIGATION)": 6,
   "3R1 / OUTSIDE REAR VIEW MIRROR-AUTOMATIC ANTI-GLARE & W/SIDE CAMERA&INSIDE REAR VIEW MIRROR-AUTOMATIC ANTI-GLARE": 2,
   "3R1 / SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
   "3R1 / SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
-  "3R1 / TAIWAN SPEC&LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "3R1 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "3R1 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
+  "3R1 / TAIWAN SPEC&LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "3R1 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "3R1 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 2,
   "3R4 / KOREA SPEC&PREMIUM PLUS PACKAGE": 2,
   "3R4 / KOREA SPEC&ULTRA LUXURY PACKAGE": 2,
   "3R4 / TAIWAN SPEC&PREMIUM PLUS PACKAGE": 2,
@@ -99474,17 +99477,17 @@
   "4.0L With X-Runner": 1,
   "4.0L Without X-Runner": 2,
   "4N7 W(ELECTRIC HEATER CONTROL MIRROR)": 2,
-  "4P7 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "4P7 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
+  "4P7 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "4P7 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 2,
   "4P7 / SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
   "4P7 / SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
-  "4P7 / TAIWAN SPEC&LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "4P7 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "4P7 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
+  "4P7 / TAIWAN SPEC&LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "4P7 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "4P7 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 2,
   "4Q2 OUTSIDE RR VIEW MIRROR-HEATED COLOR": 2,
   "4Q2 OUTSIDE RR VIEW MIRROR-HEATED(EC)": 1,
   "4R4 / SPORT PACKAGE&W(MEMORY MIRROR)": 6,
-  "4R4 / TAIWAN SPEC&PREMIUM PACKAGE&W(MEMORY MIRROR)": 4,
+  "4R4 / TAIWAN SPEC&PREMIUM PACKAGE&W(MEMORY MIRROR)": 2,
   "4R4 / WITH&W(MEMORY MIRROR)": 4,
   "4R4 / WITH(PACKAGE OPTION 1)&W(MEMORY MIRROR)": 4,
   "4S6 / SPORT PACKAGE&W(MEMORY MIRROR)": 2,
@@ -99494,40 +99497,40 @@
   "4T0 / TAIWAN SPEC&PREMIUM PLUS PACKAGE": 2,
   "4T0 / TAIWAN SPEC&ULTRA LUXURY PACKAGE": 2,
   "4T1 / KOREA SPEC&PREMIUM PLUS PACKAGE": 2,
-  "4T1 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "4T1 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
+  "4T1 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "4T1 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 2,
   "4T1 / KOREA SPEC&ULTRA LUXURY PACKAGE": 2,
   "4T1 / SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
   "4T1 / SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
-  "4T1 / TAIWAN SPEC&LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
+  "4T1 / TAIWAN SPEC&LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
   "4T1 / TAIWAN SPEC&PREMIUM PLUS PACKAGE": 2,
-  "4T1 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "4T1 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
+  "4T1 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "4T1 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 2,
   "4T1 / TAIWAN SPEC&ULTRA LUXURY PACKAGE": 2,
   "4T8 FRONT FOG LAMP-WITH": 1,
   "4U7 / OUTSIDE REAR VIEW MIRROR-AUTOMATIC ANTI-GLARE & W/SIDE CAMERA&INSIDE REAR VIEW MIRROR-AUTOMATIC ANTI-GLARE": 2,
-  "4V3 / KOREA SPEC&LUXURY PACKAGE": 4,
+  "4V3 / KOREA SPEC&LUXURY PACKAGE": 2,
   "4V3 / LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER&EMV & NAVIGATION SYSTEM-WITH(HDD NAVIGATION)": 6,
   "4WD Type 5": 3,
   "578 W(ELECTRIC HEATER CONTROL MIRROR)": 1,
   "6CD CHANGER": 5,
   "6DVD": 5,
   "6T1 / SPORT PACKAGE&W(MEMORY MIRROR)": 6,
-  "6T1 / TAIWAN SPEC&PREMIUM PACKAGE&W(MEMORY MIRROR)": 4,
+  "6T1 / TAIWAN SPEC&PREMIUM PACKAGE&W(MEMORY MIRROR)": 2,
   "6T1 / WITH&W(MEMORY MIRROR)": 4,
   "6T1 / WITH(PACKAGE OPTION 1)&W(MEMORY MIRROR)": 4,
   "6T3 / SPORT PACKAGE&W(MEMORY MIRROR)": 6,
-  "6T3 / TAIWAN SPEC&PREMIUM PACKAGE&W(MEMORY MIRROR)": 4,
+  "6T3 / TAIWAN SPEC&PREMIUM PACKAGE&W(MEMORY MIRROR)": 2,
   "6T3 / WITH&W(MEMORY MIRROR)": 4,
   "6T3 / WITH(PACKAGE OPTION 1)&W(MEMORY MIRROR)": 4,
-  "6U3 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "6U3 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
+  "6U3 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "6U3 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 2,
   "6U3 / SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
   "6U3 / SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
   "6U3 / SPORT PACKAGE&W(MEMORY MIRROR)": 2,
-  "6U3 / TAIWAN SPEC&LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "6U3 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "6U3 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
+  "6U3 / TAIWAN SPEC&LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "6U3 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "6U3 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 2,
   "6U3 / WITH(PACKAGE OPTION 1)&W(MEMORY MIRROR)": 2,
   "778 / KOREA SPEC&PREMIUM PLUS PACKAGE": 2,
   "778 / KOREA SPEC&ULTRA LUXURY PACKAGE": 2,
@@ -99537,33 +99540,33 @@
   "8L5 UNPAINTED": 3,
   "8L5 UNPAINTED & W(OVER FENDER)": 3,
   "8P8 / KOREA SPEC&PREMIUM PLUS PACKAGE": 1,
-  "8P8 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "8P8 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
+  "8P8 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "8P8 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 2,
   "8P8 / KOREA SPEC&ULTRA LUXURY PACKAGE": 1,
   "8P8 / SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
   "8P8 / SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
-  "8P8 / TAIWAN SPEC&LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
+  "8P8 / TAIWAN SPEC&LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
   "8P8 / TAIWAN SPEC&PREMIUM PLUS PACKAGE": 1,
-  "8P8 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "8P8 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
+  "8P8 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "8P8 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 2,
   "8P8 / TAIWAN SPEC&ULTRA LUXURY PACKAGE": 1,
-  "8R6 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "8R6 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
+  "8R6 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "8R6 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 2,
   "8R6 / SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
   "8R6 / SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
   "8R6 / SPORT PACKAGE&W(MEMORY MIRROR)": 6,
-  "8R6 / TAIWAN SPEC&LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "8R6 / TAIWAN SPEC&PREMIUM PACKAGE&W(MEMORY MIRROR)": 4,
-  "8R6 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "8R6 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
+  "8R6 / TAIWAN SPEC&LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "8R6 / TAIWAN SPEC&PREMIUM PACKAGE&W(MEMORY MIRROR)": 2,
+  "8R6 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "8R6 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 2,
   "8R6 / WITH&W(MEMORY MIRROR)": 4,
   "8R6 / WITH(PACKAGE OPTION 1)&W(MEMORY MIRROR)": 4,
   "8R7 / SPORT PACKAGE&W(MEMORY MIRROR)": 6,
-  "8R7 / TAIWAN SPEC&PREMIUM PACKAGE&W(MEMORY MIRROR)": 4,
+  "8R7 / TAIWAN SPEC&PREMIUM PACKAGE&W(MEMORY MIRROR)": 2,
   "8R7 / WITH&W(MEMORY MIRROR)": 4,
   "8R7 / WITH(PACKAGE OPTION 1)&W(MEMORY MIRROR)": 4,
   "8R8 / SPORT PACKAGE&W(MEMORY MIRROR)": 6,
-  "8R8 / TAIWAN SPEC&PREMIUM PACKAGE&W(MEMORY MIRROR)": 4,
+  "8R8 / TAIWAN SPEC&PREMIUM PACKAGE&W(MEMORY MIRROR)": 2,
   "8R8 / WITH&W(MEMORY MIRROR)": 4,
   "8R8 / WITH(PACKAGE OPTION 1)&W(MEMORY MIRROR)": 4,
   "8S6 FRONT FOG LAMP-WITH": 1,
@@ -99571,27 +99574,27 @@
   "8SPEAKER / KOREA SPEC&AUDIO-NAVI.AM/FM": 1,
   "8SPEAKER / TAIWAN SPEC&AUDIO-NAVI.AM/FM": 1,
   "8U0 / KOREA SPEC&PREMIUM PLUS PACKAGE": 2,
-  "8U0 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "8U0 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
+  "8U0 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "8U0 / KOREA SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 2,
   "8U0 / KOREA SPEC&ULTRA LUXURY PACKAGE": 2,
   "8U0 / SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
   "8U0 / SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
-  "8U0 / TAIWAN SPEC&LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
+  "8U0 / TAIWAN SPEC&LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
   "8U0 / TAIWAN SPEC&PREMIUM PLUS PACKAGE": 2,
-  "8U0 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 4,
-  "8U0 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 4,
+  "8U0 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
+  "8U0 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 2,
   "8U0 / TAIWAN SPEC&ULTRA LUXURY PACKAGE": 2,
-  "8U1 / KOREA SPEC&F SPORT": 6,
-  "8U1 / KOREA SPEC&LUXURY PACKAGE": 4,
+  "8U1 / KOREA SPEC&F SPORT": 2,
+  "8U1 / KOREA SPEC&LUXURY PACKAGE": 2,
   "8U1 / LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER&EMV & NAVIGATION SYSTEM-WITH(HDD NAVIGATION)": 6,
-  "8U9 / KOREA SPEC&LUXURY PACKAGE": 4,
+  "8U9 / KOREA SPEC&LUXURY PACKAGE": 2,
   "8U9 / LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER&EMV & NAVIGATION SYSTEM-WITH(HDD NAVIGATION)": 6,
   "8U9 / OUTSIDE REAR VIEW MIRROR-AUTOMATIC ANTI-GLARE & W/SIDE CAMERA&INSIDE REAR VIEW MIRROR-AUTOMATIC ANTI-GLARE": 2,
-  "8V3 / KOREA SPEC&F SPORT": 6,
-  "8V3 / KOREA SPEC&LUXURY PACKAGE": 4,
+  "8V3 / KOREA SPEC&F SPORT": 2,
+  "8V3 / KOREA SPEC&LUXURY PACKAGE": 2,
   "8V3 / LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER&EMV & NAVIGATION SYSTEM-WITH(HDD NAVIGATION)": 6,
-  "9AL / KOREA SPEC&F SPORT": 6,
-  "9AL / KOREA SPEC&LUXURY PACKAGE": 4,
+  "9AL / KOREA SPEC&F SPORT": 2,
+  "9AL / KOREA SPEC&LUXURY PACKAGE": 2,
   "AC": 4,
   "AGATE SS.": 2,
   "AM/FM": 5,
@@ -99613,12 +99616,11 @@
   "BLACK OPAL MC.": 10,
   "BLACKSH RED MC.": 2,
   "BLOND M.M.": 14,
-  "BLUISH PEARL CS.": 58,
+  "BLUISH PEARL CS.": 46,
   "BORDEAUX MC.": 5,
   "BRAND NAME MARK-LEXUS(GOLD)": 1,
   "BRAND NAME MARK-LEXUS(GOLD) / BRAND NAME MARK-LEXUS(GOLD)": 1,
   "BRAND NAME MARK-LEXUS(GOLD) / PLATED": 1,
-  "BRAZIL OR KOREA OR TAIWAN SPEC": 18,
   "BRAZIL OR TAIWAN SPEC": 5,
   "BRAZIL SPEC": 3,
   "BRAZIL SPEC / KOREA SPEC": 1,
@@ -99678,7 +99680,7 @@
   "CANADA SPEC&VERSION F&EMV & NAVIGATION SYSTEM-WITH(HDD NAVIGATION) / CANADA SPEC&F PACKAGE&EMV & NAVIGATION SYSTEM-WITH(HDD NAVIGATION) / FB PACKAGE&EMV & NAVIGATION SYSTEM-WITH(HDD NAVIGATION)": 1,
   "CANADA SPEC&VERSION F&PRE-COLLISION SYSTEM-WITH(*PSB & *PBA)": 1,
   "CANADA SPEC&WITHOUT(POWER BACK DOOR) / WITHOUT(POWER BACK DOOR)": 1,
-  "CATTLEYA M.M.": 25,
+  "CATTLEYA M.M.": 12,
   "CENTRAL AMERICA SPEC": 1,
   "CENTRAL AMERICA SPEC & W(CLEARANCE SONAR)": 1,
   "CLEARANCE & BACK SONAR-WITH": 26,
@@ -99712,7 +99714,7 @@
   "DEPTH=27": 1,
   "DISCHARGE HEADLAMP": 8,
   "DK RED MC": 1,
-  "DK.BLUE MC. CC.": 64,
+  "DK.BLUE MC. CC.": 52,
   "DK.BLUE MM": 2,
   "DK.RED MC.CC.": 9,
   "DK.TAUPE ME.OP.": 1,
@@ -99737,7 +99739,7 @@
   "FAN & COUPLING-TOWING PACKAGE(DOP)": 2,
   "FB PACKAGE / F PACKAGE": 2,
   "FB PACKAGE&CLEARANCE & BACK SONAR-WITH": 2,
-  "FIRE AGATE M.M.": 39,
+  "FIRE AGATE M.M.": 33,
   "FLAXEN MM": 2,
   "FOG LAMP-WITH 12V 130A": 3,
   "FOG LAMP-WITH&WITH(DAYTIME RUNNING LIGHT SYSTEM)-WITH(OFF SWITCH) 12V 130A": 3,
@@ -99760,26 +99762,26 @@
   "GREEN EXTENSION / PREMIUM PACKAGE(USA)&HEADLAMP-DISCHARGE": 2,
   "GREEN ME.OP.": 1,
   "GRS19#": 8,
-  "GRS190": 19,
-  "GRS191": 34,
+  "GRS190": 16,
+  "GRS191": 32,
   "GRS195": 16,
   "GRS196": 14,
   "GSE2#": 3,
   "GSE2#.. 6FC": 1,
   "GSE2#.. ATM": 59,
-  "GSE20": 103,
+  "GSE20": 88,
   "GSE20.. 6F": 2,
   "GSE20.. ATM": 12,
   "GSE21": 2,
   "GSE25": 1,
   "GSU3#.. JPP": 60,
   "GSU3#.. NAP": 6,
-  "GSU35.. JPP": 27,
+  "GSU35.. JPP": 5,
   "GT": 7,
   "GT-S": 5,
   "GYL1#.. JPP": 106,
   "GYL1#.. NAP": 33,
-  "GYL15.. JPP": 24,
+  "GYL15.. JPP": 20,
   "HALOGEN SEALED": 1,
   "HARISON TOSHIBA": 1,
   "HEAD LAMP CLEANER-WITH / PAINT REQ.": 4,
@@ -99839,17 +99841,16 @@
   "KA3 UNPAINTED & W(OVER FENDER)": 1,
   "KD4": 1,
   "KOREA SPEC / KOREA SPEC&FB PACKAGE": 1,
-  "KOREA SPEC / KOREA SPEC&INTERMITTENT WIPER-AUTO(RAIN SENSOR)": 14,
+  "KOREA SPEC / KOREA SPEC&INTERMITTENT WIPER-AUTO(RAIN SENSOR)": 9,
   "KOREA SPEC / TAIWAN SPEC": 9,
   "KOREA SPEC&AUDIO-NAVI": 1,
   "KOREA SPEC&BACK MONITOR (REAR TELEVISION CAMERA)-WITH": 2,
-  "KOREA SPEC&BACK MONITOR-WITH": 2,
   "KOREA SPEC&CLEARANCE & BACK SONAR-WITH": 3,
   "KOREA SPEC&CLEARANCE & BACK SONAR-WITH&BACK MONITOR (REAR TELEVISION CAMERA)-WITH": 1,
   "KOREA SPEC&EMV & NAVIGATION SYSTEM-W(05EMV & 05NAVIGATION)": 2,
   "KOREA SPEC&EMV & NAVIGATION SYSTEM-WITH(GPS NAVIGATION)": 2,
   "KOREA SPEC&F PACKAGE / NO PAINT REQ.": 1,
-  "KOREA SPEC&F PACKAGE&FRONT SEAT-F SPORTS PACKAGE (LEATHER, POWER SEAT)": 48,
+  "KOREA SPEC&F PACKAGE&FRONT SEAT-F SPORTS PACKAGE (LEATHER, POWER SEAT)": 26,
   "KOREA SPEC&F PACKAGE&HEADLAMP-DISCHAGE & AFS WITH(AUTO LEVELING)": 1,
   "KOREA SPEC&F PACKAGE&HEADLAMP-DISCHAGE & AFS WITH(AUTO LEVELING)&CLEARANCE & BACK SONAR-WITH": 1,
   "KOREA SPEC&F SPORT&HEADLAMP-DISCHAGE & WITH(AUTO LEVELING)": 2,
@@ -99857,24 +99858,22 @@
   "KOREA SPEC&FB PACKAGE&HEADLAMP-DISCHAGE & AFS WITH(AUTO LEVELING)&CLEARANCE & BACK SONAR-WITH / PAINT REQ.": 1,
   "KOREA SPEC&HEAD LAMP CLEANER-WITH": 1,
   "KOREA SPEC&HEAD LAMP CLEANER-WITH&CLEARANCE & BACK SONAR-WITH": 2,
-  "KOREA SPEC&HEAD LAMP-DISCHARGE / KOREA SPEC&HEADLAMP-DISCHARGE / KOREA SPEC&PREMIUM PACKAGE&HEADLAMP-DISCHARGE": 2,
-  "KOREA SPEC&HEADLAMP-DISCHAGE & AFS WITH(AUTO LEVELING)": 11,
+  "KOREA SPEC&HEADLAMP-DISCHAGE & AFS WITH(AUTO LEVELING)": 9,
   "KOREA SPEC&HEADLAMP-DISCHAGE & AFS WITH(AUTO LEVELING)&CLEARANCE & BACK SONAR-WITH": 1,
   "KOREA SPEC&HEADLAMP-DISCHAGE WITH(AUTO LEVELING) KOREA SPEC": 1,
   "KOREA SPEC&HEADLAMP-DISCHAGE WITH(AUTO LEVELING) KOREA SPEC&CLEARANCE & BACK SONAR-WITH": 1,
-  "KOREA SPEC&HEADLAMP-DISCHARGE": 4,
   "KOREA SPEC&HEADLAMP-DISCHARGE WITH/AUTO LEVELING KOREA&HEAD LAMP CLEANER-WITH / PAINT REQ.": 3,
   "KOREA SPEC&HEADLAMP-DISCHARGE WITH/AUTO LEVELING KOREA&HEAD LAMP CLEANER-WITH&CLEARANCE & BACK SONAR-WITH / PAINT REQ.": 3,
   "KOREA SPEC&LUXURY PACKAGE / KOREA SPEC": 1,
-  "KOREA SPEC&LUXURY PACKAGE / KOREA SPEC&SPORT PACKAGE / KOREA SPEC&HEADLAMP-DISCHARGE WITH/AUTO LEVELING KOREA": 4,
+  "KOREA SPEC&LUXURY PACKAGE / KOREA SPEC&SPORT PACKAGE / KOREA SPEC&HEADLAMP-DISCHARGE WITH/AUTO LEVELING KOREA": 2,
   "KOREA SPEC&LUXURY PACKAGE&EMV & NAVIGATION SYSTEM-WITH(DVD NAVIGATION)": 1,
-  "KOREA SPEC&LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 56,
-  "KOREA SPEC&LUXURY PACKAGE&HEADLAMP-DISCHAGE & WITH(AUTO LEVELING)": 10,
-  "KOREA SPEC&LUXURY PACKAGE&POWER WINDOW-W(WOOD BASE) & PASSENGER=AUTO DOWN ONLY / KOREA SPEC&F SPORT&POWER WINDOW-W(*308 SWITCH BASE)&*PSD=AUTO DOWN ONLY": 2,
+  "KOREA SPEC&LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 28,
+  "KOREA SPEC&LUXURY PACKAGE&HEADLAMP-DISCHAGE & WITH(AUTO LEVELING)": 8,
+  "KOREA SPEC&LUXURY PACKAGE&POWER WINDOW-W(WOOD BASE) & PASSENGER=AUTO DOWN ONLY / KOREA SPEC&F SPORT&POWER WINDOW-W(*308 SWITCH BASE)&*PSD=AUTO DOWN ONLY": 1,
   "KOREA SPEC&POWRE BACK DOOR-WITH / KOREA SPEC": 1,
   "KOREA SPEC&PREMIUM PACKAGE&HEAD LAMP-DISCHARGE / KOREA SPEC&HEAD LAMP-DISCHARGE / PREMIUM PACKAGE&HEAD LAMP-DISCHARGE / TAIWAN SPEC&PREMIUM PACKAGE&HEAD LAMP-DISCHARGE / TAIWAN SPEC&HEAD LAMP-DISCHARGE": 2,
   "KOREA SPEC&PREMIUM PACKAGE&SEAT HEATER-WITH(DRIVER & PASSENGER)": 1,
-  "KOREA SPEC&PREMIUM PACKAGE&W(MEMORY MIRROR)": 44,
+  "KOREA SPEC&PREMIUM PACKAGE&W(MEMORY MIRROR)": 20,
   "KOREA SPEC&PREMIUM PACKAGE&W/SEAT HEATER / KOREA SPEC&PREMIUM PACKAGE&SEAT HEATER-WITH(DRIVER & PASSENGER) / TAIWAN SPEC&PREMIUM PACKAGE&W/SEAT HEATER": 1,
   "KOREA SPEC&PREMIUM PACKAGE&W/SEAT HEATER / TAIWAN SPEC&PREMIUM PACKAGE&W/SEAT HEATER": 1,
   "KOREA SPEC&PREMIUM PACKAGE(USA)&EASY-ACCESS POWER SYSTEM-WITH": 14,
@@ -99882,20 +99881,18 @@
   "KOREA SPEC&PREMIUM PACKAGE(USA)&SEAT HEATER-WITH(DRIVER & PASSENGER)": 1,
   "KOREA SPEC&REAR SPOILER-WITH / TAIWAN SPEC&REAR SPOILER-WITH": 3,
   "KOREA SPEC&REAR SPOILER-WITH&WITH(BACK MONITOR) / TAIWAN SPEC&REAR SPOILER-WITH&WITH(BACK MONITOR)": 3,
-  "KOREA SPEC&ULTRAPREMIUM PACKAGE&ART WORKS&HEADLAMP-DISCHARGE & SECOND LINE / KOREA SPEC&PREMIUM PACKAGE&ART WORKS&HEADLAMP-DISCHARGE & SECOND LINE": 2,
-  "KOREA SPEC&ULTRAPREMIUM PACKAGE&HEADLAMP-DISCHARGE / KOREA SPEC&PREMIUM PACKAGE&HEADLAMP-DISCHARGE": 4,
   "KOREA SPEC&VERSION F": 1,
   "KOREA SPEC&VERSION F / KOREA SPEC&FB PACKAGE / KOREA SPEC&F PACKAGE": 1,
   "KOREA SPEC&VERSION F&EMV & NAVIGATION SYSTEM-WITH(DVD NAVIGATION) / KOREA SPEC&F PACKAGE&EMV & NAVIGATION SYSTEM-WITH(DVD NAVIGATION)": 1,
   "KOREA SPEC&WITH(BACK MONITOR) / TAIWAN SPEC&WITH(BACK MONITOR)": 3,
   "L": 13,
   "L Model": 4,
-  "LAPIS LAZULI MC.": 62,
+  "LAPIS LAZULI MC.": 49,
   "LCI": 1,
   "LE ECO Models": 2,
   "LEVER REMOTE CONTROL": 1,
   "LEVER REMOTE CONTROL MIRROR": 2,
-  "LT.OLIVE M.M.": 46,
+  "LT.OLIVE M.M.": 42,
   "LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 56,
   "Label: 16400-0H130": 1,
   "Label: 16400-0H131": 1,
@@ -99931,8 +99928,8 @@
   "MCV20.. USA": 5,
   "MCV31": 1,
   "MD. GRAY ME.": 1,
-  "MD.GREEN M.M.": 52,
-  "MERCURY GRAY MC.": 75,
+  "MD.GREEN M.M.": 38,
+  "MERCURY GRAY MC.": 61,
   "METALLIC PAINTED": 1,
   "MHU38": 3,
   "Man Transmission": 1,
@@ -99980,7 +99977,7 @@
   "Olive": 10,
   "On Eng": 1,
   "P/S": 1,
-  "PAINT REQ.": 142,
+  "PAINT REQ.": 132,
   "PAINT REQ. / PAINT REQ.": 2,
   "PLATED": 23,
   "PNC 81555=TYPE A": 2,
@@ -100046,7 +100043,7 @@
   "Part Name Code: 53801": 30,
   "Part Name Code: 53802": 31,
   "Part Name Code: 55900": 2,
-  "Part Name Code: 55902B": 5,
+  "Part Name Code: 55902B": 3,
   "Part Name Code: 64401": 71,
   "Part Name Code: 67001": 30,
   "Part Name Code: 67002": 30,
@@ -100062,25 +100059,25 @@
   "Part Name Code: 69830A": 1,
   "Part Name Code: 69840A": 1,
   "Part Name Code: 77020A": 15,
-  "Part Name Code: 81110": 25,
-  "Part Name Code: 81135": 127,
-  "Part Name Code: 81150": 25,
-  "Part Name Code: 81175": 135,
+  "Part Name Code: 81110": 23,
+  "Part Name Code: 81135": 112,
+  "Part Name Code: 81150": 23,
+  "Part Name Code: 81175": 119,
   "Part Name Code: 81550": 10,
-  "Part Name Code: 81551D": 29,
+  "Part Name Code: 81551D": 26,
   "Part Name Code: 81560": 10,
-  "Part Name Code: 81561D": 29,
+  "Part Name Code: 81561D": 26,
   "Part Name Code: 83100": 191,
-  "Part Name Code: 84820": 24,
+  "Part Name Code: 84820": 23,
   "Part Name Code: 85710E": 27,
   "Part Name Code: 85710F": 19,
   "Part Name Code: 85720C": 2,
   "Part Name Code: 85720D": 25,
   "Part Name Code: 85720E": 19,
-  "Part Name Code: 87901B": 263,
-  "Part Name Code: 87906B": 257,
-  "Part Name Code: 87910": 579,
-  "Part Name Code: 87940": 550,
+  "Part Name Code: 87901B": 236,
+  "Part Name Code: 87906B": 230,
+  "Part Name Code: 87910": 529,
+  "Part Name Code: 87940": 496,
   "Part Name Code: 88310": 5,
   "Part Name Code: 88320": 38,
   "Part Name Code: 88370": 3,
@@ -100104,14 +100101,13 @@
   "Production Date: 01/2005-05/2005": 4,
   "Production Date: 01/2005-07/2005": 4,
   "Production Date: 01/2005-07/2006": 17,
-  "Production Date: 01/2005-08/2005": 2,
+  "Production Date: 01/2005-08/2005": 1,
   "Production Date: 01/2005-09/2005": 2,
   "Production Date: 01/2005-10/2006": 2,
   "Production Date: 01/2006-01/2007": 9,
   "Production Date: 01/2006-06/2007": 1,
   "Production Date: 01/2007-05/2007": 1,
-  "Production Date: 01/2007-07/2007": 21,
-  "Production Date: 02/1998-08/1999": 1,
+  "Production Date: 01/2007-07/2007": 17,
   "Production Date: 02/2003-01/2006": 4,
   "Production Date: 02/2003-04/2003": 1,
   "Production Date: 02/2003-04/2004": 1,
@@ -100128,7 +100124,6 @@
   "Production Date: 03/2006-06/2007": 1,
   "Production Date: 03/2006-07/2007": 17,
   "Production Date: 03/2006-08/2007": 4,
-  "Production Date: 03/2006-12/2006": 4,
   "Production Date: 03/2009-08/2011": 1,
   "Production Date: 03/2012-08/2012": 1,
   "Production Date: 03/2012-09/2015": 10,
@@ -100171,7 +100166,7 @@
   "Production Date: 08/1998-01/2000": 4,
   "Production Date: 08/1998-07/2000": 12,
   "Production Date: 08/1998-08/1999": 5,
-  "Production Date: 08/1999-07/2000": 8,
+  "Production Date: 08/1999-07/2000": 4,
   "Production Date: 08/1999-07/2001": 4,
   "Production Date: 08/1999-10/1999": 2,
   "Production Date: 08/2000-07/2001": 2,
@@ -100182,7 +100177,7 @@
   "Production Date: 08/2004-01/2006": 10,
   "Production Date: 08/2005-05/2007": 1,
   "Production Date: 08/2005-06/2006": 9,
-  "Production Date: 08/2005-07/2006": 2,
+  "Production Date: 08/2005-07/2006": 1,
   "Production Date: 08/2005-08/2007": 3,
   "Production Date: 08/2005-12/2005": 2,
   "Production Date: 08/2006-07/2007": 7,
@@ -100208,8 +100203,6 @@
   "Production Date: 08/2011-09/2015": 1,
   "Production Date: 08/2011-10/2011": 12,
   "Production Date: 08/2011-11/2011": 3,
-  "Production Date: 08/2012-08/2013": 4,
-  "Production Date: 08/2013-08/2014": 4,
   "Production Date: 09/2001-07/2003": 1,
   "Production Date: 09/2003-09/2004": 9,
   "Production Date: 09/2003-12/2003": 2,
@@ -100245,10 +100238,10 @@
   "Production Date: from 04/2013": 4,
   "Production Date: from 05/2001": 1,
   "Production Date: from 06/2004": 4,
-  "Production Date: from 07/2000": 38,
+  "Production Date: from 07/2000": 34,
   "Production Date: from 07/2001": 1,
   "Production Date: from 08/1998": 4,
-  "Production Date: from 08/1999": 5,
+  "Production Date: from 08/1999": 4,
   "Production Date: from 08/2010": 1,
   "Production Date: from 08/2012": 2,
   "Production Date: from 09/1997": 1,
@@ -100281,11 +100274,11 @@
   "SEAT HEATER-WITH": 1,
   "SEAT HEATER-WITH / PAINT REQ.": 1,
   "SHELL M.M.": 14,
-  "SHELL ME.": 10,
+  "SHELL ME.": 8,
   "SILVER GR.SF": 2,
   "SILVER ME": 7,
   "SILVER ME.OP.": 1,
-  "SILVERY BLUE ME.": 57,
+  "SILVERY BLUE ME.": 50,
   "SLE": 1,
   "SLEEK ECRU ME.": 21,
   "SPECIAL EDITION(USA)": 7,
@@ -100297,7 +100290,7 @@
   "SPORTS PACKAGE&COLD SPEC&REAR WINDOW DEFOGGER-WITH": 1,
   "SPORTS PACKAGE&REAR WINDOW DEFOGGER-WITH": 1,
   "SPORTS PACKAGE&REAR WINDOW DEFOGGER-WITH&AIR CONDITIONER-MANUAL(B/RESI COMP/VARI)": 1,
-  "STARLIGHT BLACK GF.": 63,
+  "STARLIGHT BLACK GF.": 49,
   "STARTING SYSTEM-PUSH BUTTON": 2,
   "SU. WHITE PM.": 2,
   "SU.WHITE PM": 20,
@@ -100312,9 +100305,8 @@
   "Std & Deluxe": 1,
   "Steel": 1,
   "TAIWAN SPEC&CLEARANCE SONER-WITH / PAINT REQ.": 1,
-  "TAIWAN SPEC&HEADLAMP-DISCHARGE & WITH(AFS)": 4,
   "TAIWAN SPEC&HEADLAMP-RD4 LO:DISCHARGE WITH(AFS)&WITH(HEAD LAMP CLEANER)": 2,
-  "TAIWAN SPEC&LUXURY PACKAGE / TAIWAN SPEC&SPORT PACKAGE / TAIWAN SPEC&HEADLAMP-DISCHARGE WITH/AUTO LEVELING": 4,
+  "TAIWAN SPEC&LUXURY PACKAGE / TAIWAN SPEC&SPORT PACKAGE / TAIWAN SPEC&HEADLAMP-DISCHARGE WITH/AUTO LEVELING": 2,
   "TAIWAN SPEC&PREMIUM PACKAGE&HEAD LAMP-DISCHARGE&W(ADAPTIVE FR-LIGHTING SYSTEM) / TAIWAN SPEC&HEAD LAMP-DISCHARGE&W(ADAPTIVE FR-LIGHTING SYSTEM) / USA DEPENDANCY SPEC&PREMIUM PACKAGE&HEAD LAMP-DISCHARGE&W(ADAPTIVE FR-LIGHTING SYSTEM) / USA DEPENDANCY SPEC&SPORT PACKAGE&HEAD LAMP-DISCHARGE&W(ADAPTIVE FR-LIGHTING SYSTEM) / USA DEPENDANCY SPEC&PREMIUM PACKAGE&HEADLAMP-DISCHARGE&W(ADAPTIVE FR-LIGHTING SYSTEM) / USA DEPENDANCY SPEC&SPORT PACKAGE&HEADLAMP-DISCHARGE&W(ADAPTIVE FR-LIGHTING SYSTEM)": 2,
   "TELEVISION & VTR-REAR MONITOR(RSE)": 2,
   "TOURING EDITION(USA/CANADA/HAWAII/P.RICO)": 2,
@@ -100363,7 +100355,7 @@
   "USF41": 1,
   "UZS160": 16,
   "UZS161": 1,
-  "UZS190": 106,
+  "UZS190": 101,
   "Unheated": 16,
   "Unpainted": 2,
   "Vent Control Knob": 1,
@@ -100395,7 +100387,7 @@
   "W/DVD NAVIGATION": 3,
   "WARM GRAY ME.": 1,
   "WARM GRAY PEARL ME.": 1,
-  "WHITE NOVA GF.": 16,
+  "WHITE NOVA GF.": 8,
   "WHITE PM": 1,
   "WHITE PM.": 7,
   "WINDOSHIELD DEICER-WITH 12V 130A": 3,

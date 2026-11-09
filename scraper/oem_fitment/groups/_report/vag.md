@@ -1,6 +1,6 @@
 # OEM curation report: vag
 
-Raw: `42683f9d86450b6bd00eb7fc7cc9640154607768` @ `42683f9d8645`; as of 2026-11-06T01:15:49Z.
+Raw: `c36da2eb98835c02f81c05e8c36b6a926634a332` @ `c36da2eb9883`; as of 2026-11-06T01:15:49Z.
 
 - records 2376, classes 2318, list rows 20061, year manifests 76, cells 8544
 - Verified groups 0, engine vg groups 0, Likely groups 6

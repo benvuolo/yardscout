@@ -1861,3 +1861,44 @@ All verdicts are ADVISORY. Nothing was shipped and nothing reads the allowlist y
   buttons. Checked against a stubbed db in Chromium: 288 live cards, 143
   superseded, 424 agent boxes, and a tap sends update. Db readback at view level:
   424 docs, 0 owner answers, all 288 held groups covered.
+
+### 2026-11-09 round 2 (hub: Subaru rules, release allowlist, fresh raw)
+
+1. **Subaru rules (98f09c6).** Outback-family option codes (OBK*, SUS*, SOBK,
+   WOBK; AT/MT/engine codes ignored) credit only the Outback in every
+   generation, including the 2000-04 "Legacy Outback" years. A row whose
+   every note alternative names only foreign markets (FOR CANADA, CANADA /
+   KOREA / TAIWAN SPEC ...) is not listed for US feed cars. This applies per
+   row and is not pooled class-wide. The research sample's 4 WRONG
+   (72311AE06A, 72311AE08D, 91031AE41AFR, 91031AE43BGA) are unit-tested.
+   Subaru re-curated: 97 -> 65 groups (392 -> 242 pairs); still withheld, the
+   research session re-samples first.
+2. **Release allowlist (05a2598): built, shipped EMPTY.**
+   `release_allowlist.json` is hashed into policy_sha256. An entry releases
+   a held group only on an exact (ns, cat, pn, apps) match after every
+   other rule; withheld namespaces never release. It is tested: an exact
+   entry releases, apps off by one year stay held, subaru is refused.
+   **Not populated:** the 96 groups in `_report/held_exterior_release.json`
+   are agent-verified and advisory, and this file's earlier plan says "release
+   only on the owner's go". ops/hub.md has no owner decision after
+   2026-11-06, and the agent's Subaru sample just failed at 4/20. Filling it
+   is one commit (copy the 96 entries, set `owner_go`, re-curate) once the
+   owner's go is recorded in ops/hub.md.
+3. **Fresh raw (groups committed, curated on oem-raw@c36da2e).** Same rules
+   on old vs new raw separate the causes. The fresh data only adds; every
+   removal comes from today's rules:
+   | ns | shipped -> new rules (old raw) -> fresh raw | pair claims |
+   |---|---|---|
+   | toyota | 779 -> 583 -> 583 | 2408 -> 1860 (-548, all market notes: CANADA/KOREA/TAIWAN SPEC, mostly Lexus mirrors) |
+   | mopar | 140 -> 140 -> 245 | 732 -> 1146 (+414 fresh) |
+   | ford | 48 -> 48 -> 59 | 144 -> 174 (+30 fresh) |
+   | gm, vag, hmg, mb | unchanged (289, 6, 6, 0) | unchanged |
+   New Mopar coverage (jeeppartsdeal v2 finished, `.v2.done`, its Dodge
+   pages navigated): apps Dodge 199 -> 305, Chrysler 125 -> 216, Ram 0 -> 53;
+   cars covered 78,309 -> 100,359.
+   Gates: V12-V15 reproducible across two curate runs; measure parity 6/6;
+   V9 0 old-client flips; payload "ok" for all 7, 0 Verified;
+   curation_tests 15/15 (test_audit_store's independent hash list now
+   includes release_allowlist.json); tests 29/29; scraper/test_*.py all
+   pass; pf_guards_unit ALL PASS. `_report/*` regenerated, including
+   held_exterior.json.

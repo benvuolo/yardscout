@@ -1,5 +1,5 @@
 {
- "count": 160,
+ "count": 287,
  "groups": [
   {
    "apps": [
@@ -80,6 +80,471 @@
    "urls": [
     "https://www.fordpartsgiant.com/parts-list/2003-ford-expedition/body_and_paint/rear_bumper.html",
     "https://www.fordpartsgiant.com/parts/ford-bumper-asy-rear_2l1z-17906-ba.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Five Hundred",
+     2005,
+     2005
+    ],
+    [
+     "Ford",
+     "Taurus",
+     2008,
+     2008
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Ford catalog lists #5G1Z-17757-AA for both — fits some configurations; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "5G1Z-17757-AA"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2005-ford-five_hundred/body_and_paint/radiator_grille_and_front_bumper.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper-asy-front_5g1z-17757-aa.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Fusion",
+     2008,
+     2008
+    ],
+    [
+     "Lincoln",
+     "MKZ",
+     2008,
+     2008
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Ford catalog lists #6E5Z-17757-AA for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "6E5Z-17757-AA"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2008-ford-fusion/body_and_paint/radiator_grille_and_front_bumper.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper-asy-front_6e5z-17757-aa.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Fusion",
+     2008,
+     2008
+    ],
+    [
+     "Lincoln",
+     "MKZ",
+     2008,
+     2008
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Ford catalog lists #6E5Z-17757-AACP for both — fits some configurations; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "6E5Z-17757-AACP"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2008-ford-fusion/body_and_paint/radiator_grille_and_front_bumper.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper-asy-front_6e5z-17757-aacp.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Fusion",
+     2008,
+     2008
+    ],
+    [
+     "Lincoln",
+     "MKZ",
+     2008,
+     2008
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Ford catalog lists #6E5Z-17906-AA for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "6E5Z-17906-AA"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2008-ford-fusion/body_and_paint/rear_bumper.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper-asy-rear_6e5z-17906-aa.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Lincoln",
+     "MKZ",
+     2008,
+     2008
+    ],
+    [
+     "Lincoln",
+     "MKZ",
+     2010,
+     2011
+    ],
+    [
+     "Mercury",
+     "Milan",
+     2010,
+     2010
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Ford catalog lists #6H6Z-5420124-AA for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "6H6Z-5420124-AA"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2008-ford-fusion/body_and_paint/front_doors_hinges_weatherstrips.html",
+    "https://www.fordpartsgiant.com/parts/ford-door-front-rear_6h6z-5420124-aa.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Expedition",
+     2007,
+     2007
+    ],
+    [
+     "Lincoln",
+     "Navigator",
+     2007,
+     2007
+    ]
+   ],
+   "cat": "fender",
+   "note": "Ford catalog lists #7L1Z-16005-A for both — fits some configurations; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "7L1Z-16005-A"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2007-ford-expedition/body_and_paint/dash_panel_and_front_fenders.html",
+    "https://www.fordpartsgiant.com/parts/ford-fender-asy-front_7l1z-16005-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Expedition",
+     2007,
+     2007
+    ],
+    [
+     "Lincoln",
+     "Navigator",
+     2007,
+     2007
+    ]
+   ],
+   "cat": "fender",
+   "note": "Ford catalog lists #7L1Z-16006-A for both — fits some configurations; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "7L1Z-16006-A"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2007-ford-expedition/body_and_paint/dash_panel_and_front_fenders.html",
+    "https://www.fordpartsgiant.com/parts/ford-fender-asy-front_7l1z-16006-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Expedition",
+     2007,
+     2007
+    ],
+    [
+     "Lincoln",
+     "Navigator",
+     2007,
+     2007
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Ford catalog lists #7L1Z-17757-A for both — fits some configurations; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "7L1Z-17757-A"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2007-ford-expedition/body_and_paint/radiator_grille_and_front_bumper.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper-asy-front_7l1z-17757-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Expedition",
+     2007,
+     2007
+    ],
+    [
+     "Lincoln",
+     "Navigator",
+     2007,
+     2007
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Ford catalog lists #7L1Z-17906-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "7L1Z-17906-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2007-ford-expedition/body_and_paint/rear_bumper.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper-asy-rear_7l1z-17906-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Expedition",
+     2007,
+     2007
+    ],
+    [
+     "Lincoln",
+     "Navigator",
+     2007,
+     2007
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Ford catalog lists #7L1Z-17906-B for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "7L1Z-17906-B"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2007-ford-expedition/body_and_paint/rear_bumper.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper-asy-rear_7l1z-17906-b.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Expedition",
+     2007,
+     2007
+    ],
+    [
+     "Lincoln",
+     "Navigator",
+     2007,
+     2007
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Ford catalog lists #7L1Z-17906-C for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "7L1Z-17906-C"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2007-ford-expedition/body_and_paint/rear_bumper.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper-asy-rear_7l1z-17906-c.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Expedition",
+     2007,
+     2007
+    ],
+    [
+     "Lincoln",
+     "Navigator",
+     2007,
+     2007
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Ford catalog lists #7L1Z-17906-D for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "7L1Z-17906-D"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2007-ford-expedition/body_and_paint/rear_bumper.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper-asy-rear_7l1z-17906-d.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Expedition",
+     2007,
+     2007
+    ],
+    [
+     "Lincoln",
+     "Navigator",
+     2007,
+     2007
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Ford catalog lists #7L1Z-4024630-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "7L1Z-4024630-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2007-ford-expedition/body_and_paint/rear_doors_hinges_weatherstrips.html",
+    "https://www.fordpartsgiant.com/parts/ford-door-assy-rear-less-hinges_7l1z-4024630-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Expedition",
+     2007,
+     2007
+    ],
+    [
+     "Lincoln",
+     "Navigator",
+     2007,
+     2007
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Ford catalog lists #7L1Z-4024631-A for both — option: fits some option packages; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "7L1Z-4024631-A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2007-ford-expedition/body_and_paint/rear_doors_hinges_weatherstrips.html",
+    "https://www.fordpartsgiant.com/parts/ford-door-assy-rear-less-hinges_7l1z-4024631-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Expedition",
+     2007,
+     2007
+    ],
+    [
+     "Lincoln",
+     "Navigator",
+     2007,
+     2007
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Ford catalog lists #7L1Z-7824630-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "7L1Z-7824630-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2007-ford-expedition/body_and_paint/rear_doors_hinges_weatherstrips.html",
+    "https://www.fordpartsgiant.com/parts/ford-door-assy-rear-less-hinges_7l1z-7824630-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Expedition",
+     2007,
+     2007
+    ],
+    [
+     "Lincoln",
+     "Navigator",
+     2007,
+     2007
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Ford catalog lists #7L1Z-7824631-A for both — option: fits some option packages; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "7L1Z-7824631-A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2007-ford-expedition/body_and_paint/rear_doors_hinges_weatherstrips.html",
+    "https://www.fordpartsgiant.com/parts/ford-door-assy-rear-less-hinges_7l1z-7824631-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Flex",
+     2009,
+     2009
+    ],
+    [
+     "Lincoln",
+     "MKS",
+     2009,
+     2009
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Ford catalog lists #8A8Z-17757-A for both — fits some configurations; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "8A8Z-17757-A"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2009-ford-flex/body_and_paint/radiator_grille_and_front_bumper.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper-asy-front_8a8z-17757-a.html"
    ]
   },
   {
@@ -193,10 +658,43 @@
   {
    "apps": [
     [
+     "Lincoln",
+     "MKZ",
+     2010,
+     2011
+    ],
+    [
+     "Mercury",
+     "Milan",
+     2010,
+     2010
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Ford catalog lists #9E5Z-5420125-B for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "9E5Z-5420125-B"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2010-mercury-milan/body_and_paint/front_doors_hinges_weatherstrips.html",
+    "https://www.fordpartsgiant.com/parts/ford-door-front-rear_9e5z-5420125-b.html"
+   ]
+  },
+  {
+   "apps": [
+    [
      "Ford",
      "Fusion",
      2008,
      2008
+    ],
+    [
+     "Lincoln",
+     "MKZ",
+     2010,
+     2011
     ],
     [
      "Mercury",
@@ -215,6 +713,60 @@
    "urls": [
     "https://www.fordpartsgiant.com/parts-list/2008-ford-fusion/body_and_paint/front_doors_hinges_weatherstrips.html",
     "https://www.fordpartsgiant.com/parts/ford-door-front-rear_9e5z-5420125-c.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Lincoln",
+     "MKZ",
+     2010,
+     2011
+    ],
+    [
+     "Mercury",
+     "Milan",
+     2010,
+     2010
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Ford catalog lists #9E5Z-5424630-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "9E5Z-5424630-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2010-mercury-milan/body_and_paint/rear_doors_hinges_weatherstrips.html",
+    "https://www.fordpartsgiant.com/parts/ford-door-assy-rear-less-hinges_9e5z-5424630-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Lincoln",
+     "MKZ",
+     2010,
+     2011
+    ],
+    [
+     "Mercury",
+     "Milan",
+     2010,
+     2010
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Ford catalog lists #9E5Z-5424631-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "9E5Z-5424631-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2010-mercury-milan/body_and_paint/rear_doors_hinges_weatherstrips.html",
+    "https://www.fordpartsgiant.com/parts/ford-door-assy-rear-less-hinges_9e5z-5424631-a.html"
    ]
   },
   {
@@ -280,6 +832,12 @@
      2012
     ],
     [
+     "Lincoln",
+     "MKZ",
+     2010,
+     2012
+    ],
+    [
      "Mercury",
      "Milan",
      2010,
@@ -304,6 +862,12 @@
      "Ford",
      "Fusion",
      2012,
+     2012
+    ],
+    [
+     "Lincoln",
+     "MKZ",
+     2010,
      2012
     ],
     [
@@ -334,6 +898,12 @@
      2012
     ],
     [
+     "Lincoln",
+     "MKZ",
+     2010,
+     2012
+    ],
+    [
      "Mercury",
      "Milan",
      2010,
@@ -361,6 +931,12 @@
      2012
     ],
     [
+     "Lincoln",
+     "MKZ",
+     2010,
+     2012
+    ],
+    [
      "Mercury",
      "Milan",
      2010,
@@ -377,6 +953,525 @@
    "urls": [
     "https://www.fordpartsgiant.com/parts-list/2012-ford-fusion/body_and_paint/rear_bumper.html",
     "https://www.fordpartsgiant.com/parts/ford-bumper-asy-rear_ae5z-17906-acp.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Taurus",
+     2011,
+     2011
+    ],
+    [
+     "Lincoln",
+     "MKS",
+     2009,
+     2009
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Ford catalog lists #AG1Z-17906-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "AG1Z-17906-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2011-ford-taurus/body_and_paint/rear_bumper.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper-asy-rear_ag1z-17906-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Edge",
+     2013,
+     2013
+    ],
+    [
+     "Lincoln",
+     "MKX",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Ford catalog lists #BA1Z-17D957-APTM for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "BA1Z-17D957-APTM"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2013-ford-edge/body_and_paint/radiator_grille_and_front_bumper.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper-asy-front_ba1z-17d957-aptm.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Edge",
+     2013,
+     2013
+    ],
+    [
+     "Lincoln",
+     "MKX",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Ford catalog lists #BA1Z-17D957-BPTM for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "BA1Z-17D957-BPTM"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2013-ford-edge/body_and_paint/radiator_grille_and_front_bumper.html",
+    "https://www.fordpartsgiant.com/parts/ford-cover_ba1z-17d957-bptm.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Edge",
+     2013,
+     2013
+    ],
+    [
+     "Lincoln",
+     "MKX",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "grille",
+   "note": "Ford catalog lists #BA1Z-8200-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "BA1Z-8200-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2013-ford-edge/body_and_paint/radiator_grille_and_front_bumper.html",
+    "https://www.fordpartsgiant.com/parts/ford-grille-radiator_ba1z-8200-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Edge",
+     2013,
+     2013
+    ],
+    [
+     "Lincoln",
+     "MKX",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "grille",
+   "note": "Ford catalog lists #BA1Z-8200-B for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "BA1Z-8200-B"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2013-ford-edge/body_and_paint/radiator_grille_and_front_bumper.html",
+    "https://www.fordpartsgiant.com/parts/ford-grille-radiator_ba1z-8200-b.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Fusion",
+     2012,
+     2012
+    ],
+    [
+     "Lincoln",
+     "MKZ",
+     2011,
+     2012
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Ford catalog lists #BE5Z-5420124-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "BE5Z-5420124-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2012-ford-fusion/body_and_paint/front_doors_hinges_weatherstrips.html",
+    "https://www.fordpartsgiant.com/parts/ford-door-front-rear_be5z-5420124-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Fusion",
+     2012,
+     2012
+    ],
+    [
+     "Lincoln",
+     "MKZ",
+     2011,
+     2012
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Ford catalog lists #BE5Z-5420125-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "BE5Z-5420125-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2012-ford-fusion/body_and_paint/front_doors_hinges_weatherstrips.html",
+    "https://www.fordpartsgiant.com/parts/ford-door-front-rear_be5z-5420125-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Fusion",
+     2012,
+     2012
+    ],
+    [
+     "Lincoln",
+     "MKZ",
+     2011,
+     2012
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Ford catalog lists #BE5Z-5420125-B for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "BE5Z-5420125-B"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2012-ford-fusion/body_and_paint/front_doors_hinges_weatherstrips.html",
+    "https://www.fordpartsgiant.com/parts/ford-door-front-rear_be5z-5420125-b.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Fusion",
+     2012,
+     2012
+    ],
+    [
+     "Lincoln",
+     "MKZ",
+     2011,
+     2012
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Ford catalog lists #BE5Z-5424630-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "BE5Z-5424630-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2012-ford-fusion/body_and_paint/rear_doors_hinges_weatherstrips.html",
+    "https://www.fordpartsgiant.com/parts/ford-door-asy-rear-le_be5z-5424630-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Fusion",
+     2012,
+     2012
+    ],
+    [
+     "Lincoln",
+     "MKZ",
+     2011,
+     2012
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Ford catalog lists #BE5Z-5424631-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "BE5Z-5424631-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2012-ford-fusion/body_and_paint/rear_doors_hinges_weatherstrips.html",
+    "https://www.fordpartsgiant.com/parts/ford-door-asy-rear-le_be5z-5424631-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Edge",
+     2013,
+     2013
+    ],
+    [
+     "Lincoln",
+     "MKX",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Ford catalog lists #BT4Z-17906-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "BT4Z-17906-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2013-ford-edge/body_and_paint/rear_bumper.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper-asy-rear_bt4z-17906-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Edge",
+     2013,
+     2013
+    ],
+    [
+     "Lincoln",
+     "MKX",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Ford catalog lists #BT4Z-17906-ACP for both — fits some configurations; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "BT4Z-17906-ACP"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2013-ford-edge/body_and_paint/rear_bumper.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper-asy-rear_bt4z-17906-acp.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Edge",
+     2013,
+     2013
+    ],
+    [
+     "Lincoln",
+     "MKX",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Ford catalog lists #BT4Z-7820124-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "BT4Z-7820124-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2013-ford-edge/body_and_paint/front_doors_hinges_weatherstrips.html",
+    "https://www.fordpartsgiant.com/parts/ford-door-asy-front_bt4z-7820124-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Edge",
+     2013,
+     2013
+    ],
+    [
+     "Lincoln",
+     "MKX",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Ford catalog lists #BT4Z-7820125-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "BT4Z-7820125-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2013-ford-edge/body_and_paint/front_doors_hinges_weatherstrips.html",
+    "https://www.fordpartsgiant.com/parts/ford-door-asy-front_bt4z-7820125-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Edge",
+     2013,
+     2013
+    ],
+    [
+     "Lincoln",
+     "MKX",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Ford catalog lists #BT4Z-7820125-B for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "BT4Z-7820125-B"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2013-ford-edge/body_and_paint/front_doors_hinges_weatherstrips.html",
+    "https://www.fordpartsgiant.com/parts/ford-door-asy-front_bt4z-7820125-b.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Edge",
+     2013,
+     2013
+    ],
+    [
+     "Lincoln",
+     "MKX",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Ford catalog lists #BT4Z-7824630-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "BT4Z-7824630-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2013-ford-edge/body_and_paint/rear_doors_hinges_weatherstrips.html",
+    "https://www.fordpartsgiant.com/parts/ford-door-assy-rear-less-hinges_bt4z-7824630-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Edge",
+     2013,
+     2013
+    ],
+    [
+     "Lincoln",
+     "MKX",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Ford catalog lists #BT4Z-7824631-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "BT4Z-7824631-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2013-ford-edge/body_and_paint/rear_doors_hinges_weatherstrips.html",
+    "https://www.fordpartsgiant.com/parts/ford-door-assy-rear-less-hinges_bt4z-7824631-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Fusion",
+     2014,
+     2014
+    ],
+    [
+     "Ford",
+     "Fusion",
+     2017,
+     2017
+    ],
+    [
+     "Lincoln",
+     "MKZ",
+     2014,
+     2014
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Ford catalog lists #DG9Z-17906-A for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "DG9Z-17906-A"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2014-ford-fusion/body_and_paint/rear_bumper.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper_dg9z-17906-a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "F-150",
+     1990,
+     1990
+    ],
+    [
+     "Ford",
+     "F-350",
+     1990,
+     1990
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Ford catalog lists #E7TZ-17906-D for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "E7TZ-17906-D"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/1990-ford-f_150--6_cyl_3_8l-3at_c6/speedometer_bumpers_mirrors_wipers/rear_bumper_parts.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper-asy-rear_e7tz-17906-d.html"
    ]
   },
   {
@@ -809,6 +1904,12 @@
      "F-250",
      1999,
      1999
+    ],
+    [
+     "Ford",
+     "F-350 Super Duty",
+     2004,
+     2004
     ]
    ],
    "cat": "tailgate",
@@ -1091,6 +2192,33 @@
    "urls": [
     "https://www.fordpartsgiant.com/parts-list/2001-ford-f_150--6_cyl_4_2l-4at_4r100/speedometer_bumpers_mirrors_wipers/rear_bumper_parts.html",
     "https://www.fordpartsgiant.com/parts/ford-bumper-assy-rear_yl3z-17906-cabcp.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Lincoln",
+     "Town Car",
+     2000,
+     2000
+    ],
+    [
+     "Mercury",
+     "Grand Marquis",
+     2000,
+     2000
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Ford catalog lists #YW1Z-17757-AA for both — trim-limited; verify the number on the part",
+   "ns": "ford",
+   "pn": [
+    "YW1Z-17757-AA"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.fordpartsgiant.com/parts-list/2000-mercury-grand_marquis--8_cyl_4_6l-4at_4r70w/speedometer_bumpers_mirrors_wipers/bumper_front.html",
+    "https://www.fordpartsgiant.com/parts/ford-bumper-asy-front_yw1z-17757-aa.html"
    ]
   },
   {
@@ -3088,6 +4216,87 @@
   {
    "apps": [
     [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #2AME77409A for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "2AME77409A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/2012-ram-1500/electrical/lamps_front.html",
+    "https://www.moparpartsgiant.com/parts/mopar-headlamp-headlamp-park-and-turn~2ame77409a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #2AME77410A for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "2AME77410A"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/2012-ram-1500/electrical/lamps_front.html",
+    "https://www.moparpartsgiant.com/parts/mopar-headlamp-headlamp-park-and-turn~2ame77410a.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Concorde",
+     2002,
+     2002
+    ],
+    [
+     "Chrysler",
+     "LHS",
+     2000,
+     2000
+    ]
+   ],
+   "cat": "bumper-front",
+   "note": "Mopar catalog lists #4574828 for both — fits some configurations; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4574828"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~front-bumper-cover~4574828",
+    "https://www.jeeppartsdeal.com/parts-list/2002-chrysler-concorde/body-hardware/bumper-components-front"
+   ]
+  },
+  {
+   "apps": [
+    [
      "Chrysler",
      "Town & Country",
      1999,
@@ -3127,10 +4336,760 @@
   {
    "apps": [
     [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Mopar catalog lists #4589872AE for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4589872AE"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~door-rear~4589872ae",
+    "https://www.jeeppartsdeal.com/parts-list/2012-ram-1500/body-hardware/door-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Mopar catalog lists #4589873AE for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4589873AE"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~door-rear~4589873ae",
+    "https://www.jeeppartsdeal.com/parts-list/2012-ram-1500/body-hardware/door-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2014,
+     2014
+    ],
+    [
+     "Ram",
+     "C/V",
+     2013,
+     2013
+    ]
+   ],
+   "cat": "hood",
+   "note": "Mopar catalog lists #4589880AG for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4589880AG"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~hood~4589880ag",
+    "https://www.jeeppartsdeal.com/parts-list/2014-chrysler-town-country/body-hardware/hood-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     1998,
+     1998
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     1999,
+     1999
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2000,
+     2000
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Mopar catalog lists #4717428AD for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4717428AD"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~door-front~4717428ad",
+    "https://www.jeeppartsdeal.com/parts-list/1999-dodge-caravan/body-hardware/door-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     1998,
+     1998
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     1999,
+     1999
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2000,
+     2000
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Mopar catalog lists #4717429AD for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4717429AD"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~door-front~4717429ad",
+    "https://www.jeeppartsdeal.com/parts-list/1999-dodge-caravan/body-hardware/door-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2001,
+     2001
+    ],
+    [
+     "Chrysler",
+     "Voyager",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Mopar catalog lists #4717716AE for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4717716AE"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~door-front~4717716ae",
+    "https://www.jeeppartsdeal.com/parts-list/2001-chrysler-town-country/body-hardware/door-components"
+   ]
+  },
+  {
+   "apps": [
+    [
      "Chrysler",
      "Town & Country",
      2005,
      2005
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2007,
+     2007
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Mopar catalog lists #4717716AF for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4717716AF"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~door-front~4717716af",
+    "https://www.jeeppartsdeal.com/parts-list/2005-dodge-caravan/body-hardware/door-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2001,
+     2001
+    ],
+    [
+     "Chrysler",
+     "Voyager",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Mopar catalog lists #4717717AE for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4717717AE"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~door-front~4717717ae",
+    "https://www.jeeppartsdeal.com/parts-list/2001-chrysler-town-country/body-hardware/door-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2007,
+     2007
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Mopar catalog lists #4717717AF for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4717717AF"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~door-front~4717717af",
+    "https://www.jeeppartsdeal.com/parts-list/2005-dodge-caravan/body-hardware/door-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Concorde",
+     1995,
+     1996
+    ],
+    [
+     "Dodge",
+     "Intrepid",
+     1995,
+     1995
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #4746436 for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4746436"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/1995-dodge-intrepid/electrical/lamps_front.html",
+    "https://www.moparpartsgiant.com/parts/mopar-headlamp-less-bulb-socket~4746436.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Concorde",
+     1995,
+     1996
+    ],
+    [
+     "Dodge",
+     "Intrepid",
+     1995,
+     1995
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #4746437 for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4746437"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/1995-dodge-intrepid/electrical/lamps_front.html",
+    "https://www.moparpartsgiant.com/parts/mopar-headlamp-less-bulb-socket~4746437.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Concorde",
+     1995,
+     1996
+    ],
+    [
+     "Dodge",
+     "Intrepid",
+     1995,
+     1995
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #4746452 for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4746452"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/1995-dodge-intrepid/electrical/lamps_front.html",
+    "https://www.moparpartsgiant.com/parts/mopar-headlamp~4746452.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Concorde",
+     1995,
+     1996
+    ],
+    [
+     "Dodge",
+     "Intrepid",
+     1995,
+     1995
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #4746453 for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4746453"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/1995-dodge-intrepid/electrical/lamps_front.html",
+    "https://www.moparpartsgiant.com/parts/mopar-h-lp-less-bulb-socket~4746453.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Concorde",
+     1995,
+     1996
+    ],
+    [
+     "Dodge",
+     "Intrepid",
+     1995,
+     1995
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #4746466 for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4746466"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/1995-dodge-intrepid/electrical/lamps_front.html",
+    "https://www.moparpartsgiant.com/parts/mopar-headlamp-asm-l-bulbs-soc~4746466.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Concorde",
+     1995,
+     1996
+    ],
+    [
+     "Dodge",
+     "Intrepid",
+     1995,
+     1995
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #4762058 for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4762058"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/1995-dodge-intrepid/electrical/lamps_front.html",
+    "https://www.moparpartsgiant.com/parts/mopar-lamp-asm~4762058.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Concorde",
+     1995,
+     1996
+    ],
+    [
+     "Dodge",
+     "Intrepid",
+     1995,
+     1995
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #4762059 for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4762059"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/1995-dodge-intrepid/electrical/lamps_front.html",
+    "https://www.moparpartsgiant.com/parts/mopar-lamp-assy-assy-h-lp~4762059.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Concorde",
+     1995,
+     1996
+    ],
+    [
+     "Dodge",
+     "Intrepid",
+     1995,
+     1995
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #4778258 for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4778258"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/1995-dodge-intrepid/electrical/lamps_front.html",
+    "https://www.moparpartsgiant.com/parts/mopar-headlamp-asm-l-bulbs-soc~4778258.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Concorde",
+     1995,
+     1996
+    ],
+    [
+     "Dodge",
+     "Intrepid",
+     1995,
+     1995
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #4778259 for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4778259"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/1995-dodge-intrepid/electrical/lamps_front.html",
+    "https://www.moparpartsgiant.com/parts/mopar-h-lp-assy-l-bulbs-sockets~4778259.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Concorde",
+     2002,
+     2002
+    ],
+    [
+     "Chrysler",
+     "LHS",
+     2000,
+     2000
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #4780014AE for both — fits some configurations; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4780014AE"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~passenger-side-headlight-assembly~4780014ae",
+    "https://www.jeeppartsdeal.com/parts-list/2002-chrysler-concorde/headlights-lighting/headlamp-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Concorde",
+     2002,
+     2002
+    ],
+    [
+     "Chrysler",
+     "LHS",
+     2000,
+     2000
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #4780015AE for both — fits some configurations; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4780015AE"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~driver-and-passenger-headlights-replacement~4780015ae",
+    "https://www.jeeppartsdeal.com/parts-list/2002-chrysler-concorde/headlights-lighting/headlamp-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Concorde",
+     2002,
+     2002
+    ],
+    [
+     "Chrysler",
+     "LHS",
+     2000,
+     2000
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Mopar catalog lists #4780058AG for both — older catalog-only number; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4780058AG"
+   ],
+   "reason": "older",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/2002-chrysler-concorde/electrical/lamps_rear.html",
+    "https://www.moparpartsgiant.com/parts/mopar-lamp-tail-stop-turn~4780058ag.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Concorde",
+     2002,
+     2002
+    ],
+    [
+     "Chrysler",
+     "LHS",
+     2000,
+     2000
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Mopar catalog lists #4780059AG for both — older catalog-only number; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4780059AG"
+   ],
+   "reason": "older",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/2002-chrysler-concorde/electrical/lamps_rear.html",
+    "https://www.moparpartsgiant.com/parts/mopar-lamp-tail-stop-turn~4780059ag.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Sebring",
+     2004,
+     2004
+    ],
+    [
+     "Dodge",
+     "Stratus",
+     2006,
+     2006
+    ]
+   ],
+   "cat": "hood",
+   "note": "Mopar catalog lists #4814749AG for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4814749AG"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~hood~4814749ag",
+    "https://www.jeeppartsdeal.com/parts-list/2004-chrysler-sebring/body-hardware/hood-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Concorde",
+     1995,
+     1996
+    ],
+    [
+     "Dodge",
+     "Intrepid",
+     1995,
+     1995
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #4856562 for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4856562"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/1995-dodge-intrepid/electrical/lamps_front.html",
+    "https://www.moparpartsgiant.com/parts/mopar-headlamp~4856562.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Concorde",
+     1995,
+     1996
+    ],
+    [
+     "Dodge",
+     "Intrepid",
+     1995,
+     1995
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #4856563 for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4856563"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/1995-dodge-intrepid/electrical/lamps_front.html",
+    "https://www.moparpartsgiant.com/parts/mopar-headlamp-less-bulb-socket~4856563.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2001,
+     2001
+    ],
+    [
+     "Chrysler",
+     "Town & Country",
+     2005,
+     2005
+    ],
+    [
+     "Chrysler",
+     "Voyager",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #4857700AB for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4857700AB"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/2005-dodge-caravan/electrical/lamps_front.html",
+    "https://www.moparpartsgiant.com/parts/mopar-headlamp-headlamp~4857700ab.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2005,
+     2005
+    ],
+    [
+     "Chrysler",
+     "Voyager",
+     2003,
+     2003
     ],
     [
      "Dodge",
@@ -3168,8 +5127,47 @@
     [
      "Chrysler",
      "Town & Country",
+     2001,
+     2001
+    ],
+    [
+     "Chrysler",
+     "Town & Country",
      2005,
      2005
+    ],
+    [
+     "Chrysler",
+     "Voyager",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #4857701AB for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4857701AB"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/2005-dodge-caravan/electrical/lamps_front.html",
+    "https://www.moparpartsgiant.com/parts/mopar-lamp-headlamp~4857701ab.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2005,
+     2005
+    ],
+    [
+     "Chrysler",
+     "Voyager",
+     2003,
+     2003
     ],
     [
      "Dodge",
@@ -3271,6 +5269,882 @@
   {
    "apps": [
     [
+     "Chrysler",
+     "Town & Country",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "hood",
+   "note": "Mopar catalog lists #4860455AC for both — older catalog-only number; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4860455AC"
+   ],
+   "reason": "older",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~hood-panel~4860455ac",
+    "https://www.jeeppartsdeal.com/parts-list/2005-dodge-caravan/body-hardware/hood-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     1998,
+     1998
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     1999,
+     1999
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2000,
+     2000
+    ]
+   ],
+   "cat": "fender",
+   "note": "Mopar catalog lists #4882290AA for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4882290AA"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~fender-front~4882290aa",
+    "https://www.jeeppartsdeal.com/parts-list/1999-dodge-caravan/body-hardware/fender-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     1998,
+     1998
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     1999,
+     1999
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2000,
+     2000
+    ]
+   ],
+   "cat": "fender",
+   "note": "Mopar catalog lists #4882291AA for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4882291AA"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~fender-front~4882291aa",
+    "https://www.jeeppartsdeal.com/parts-list/1999-dodge-caravan/body-hardware/fender-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2014,
+     2014
+    ],
+    [
+     "Ram",
+     "C/V",
+     2013,
+     2013
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Mopar catalog lists #4894916AK for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4894916AK"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~door-front~4894916ak",
+    "https://www.jeeppartsdeal.com/parts-list/2014-chrysler-town-country/body-hardware/door-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2014,
+     2014
+    ],
+    [
+     "Ram",
+     "C/V",
+     2013,
+     2013
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Mopar catalog lists #4894917AK for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "4894917AK"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~door-front~4894917ak",
+    "https://www.jeeppartsdeal.com/parts-list/2014-chrysler-town-country/body-hardware/door-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Concorde",
+     2002,
+     2002
+    ],
+    [
+     "Chrysler",
+     "LHS",
+     2000,
+     2000
+    ]
+   ],
+   "cat": "fender",
+   "note": "Mopar catalog lists #5003060AD for both — fits some configurations; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "5003060AD"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~fender-fender~5003060ad",
+    "https://www.jeeppartsdeal.com/parts-list/2002-chrysler-concorde/body-hardware/fender-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Concorde",
+     2002,
+     2002
+    ],
+    [
+     "Chrysler",
+     "LHS",
+     2000,
+     2000
+    ]
+   ],
+   "cat": "fender",
+   "note": "Mopar catalog lists #5003061AD for both — fits some configurations; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "5003061AD"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~fender-fender~5003061ad",
+    "https://www.jeeppartsdeal.com/parts-list/2002-chrysler-concorde/body-hardware/fender-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Concorde",
+     2002,
+     2002
+    ],
+    [
+     "Chrysler",
+     "LHS",
+     2000,
+     2000
+    ]
+   ],
+   "cat": "hood",
+   "note": "Mopar catalog lists #5003088AD for both — fits some configurations; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "5003088AD"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~hood-panel-assembly~5003088ad",
+    "https://www.jeeppartsdeal.com/parts-list/2002-chrysler-concorde/body-hardware/hood-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "300M",
+     2002,
+     2002
+    ],
+    [
+     "Chrysler",
+     "Concorde",
+     2002,
+     2002
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Mopar catalog lists #5003226AG for both — fits some configurations; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "5003226AG"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~door-front~5003226ag",
+    "https://www.jeeppartsdeal.com/parts-list/2002-chrysler-concorde/body-hardware/door-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "300M",
+     2002,
+     2002
+    ],
+    [
+     "Chrysler",
+     "Concorde",
+     2002,
+     2002
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Mopar catalog lists #5003227AG for both — fits some configurations; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "5003227AG"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~door-front~5003227ag",
+    "https://www.jeeppartsdeal.com/parts-list/2002-chrysler-concorde/body-hardware/door-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "300M",
+     2002,
+     2002
+    ],
+    [
+     "Chrysler",
+     "Concorde",
+     2002,
+     2002
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Mopar catalog lists #5003236AJ for both — fits some configurations; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "5003236AJ"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~door-rear~5003236aj",
+    "https://www.jeeppartsdeal.com/parts-list/2002-chrysler-concorde/body-hardware/door-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "300M",
+     2002,
+     2002
+    ],
+    [
+     "Chrysler",
+     "Concorde",
+     2002,
+     2002
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Mopar catalog lists #5003237AJ for both — fits some configurations; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "5003237AJ"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~door-rear~5003237aj",
+    "https://www.jeeppartsdeal.com/parts-list/2002-chrysler-concorde/body-hardware/door-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2001,
+     2001
+    ],
+    [
+     "Chrysler",
+     "Voyager",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "liftgate",
+   "note": "Mopar catalog lists #5018441AC for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "5018441AC"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~liftgate~5018441ac",
+    "https://www.jeeppartsdeal.com/parts-list/2001-chrysler-town-country/body-hardware/lift-gate"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2001,
+     2001
+    ],
+    [
+     "Chrysler",
+     "Town & Country",
+     2005,
+     2005
+    ],
+    [
+     "Chrysler",
+     "Voyager",
+     2003,
+     2003
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2007,
+     2007
+    ]
+   ],
+   "cat": "fender",
+   "note": "Mopar catalog lists #5018442AB for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "5018442AB"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~fender-front~5018442ab",
+    "https://www.jeeppartsdeal.com/parts-list/2005-dodge-caravan/body-hardware/fender-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2001,
+     2001
+    ],
+    [
+     "Chrysler",
+     "Town & Country",
+     2005,
+     2005
+    ],
+    [
+     "Chrysler",
+     "Voyager",
+     2003,
+     2003
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2007,
+     2007
+    ]
+   ],
+   "cat": "fender",
+   "note": "Mopar catalog lists #5018443AB for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "5018443AB"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~fender-front~5018443ab",
+    "https://www.jeeppartsdeal.com/parts-list/2005-dodge-caravan/body-hardware/fender-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Sebring",
+     2004,
+     2004
+    ],
+    [
+     "Dodge",
+     "Stratus",
+     2006,
+     2006
+    ]
+   ],
+   "cat": "fender",
+   "note": "Mopar catalog lists #5018848AB for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "5018848AB"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~fender-front~5018848ab",
+    "https://www.jeeppartsdeal.com/parts-list/2004-chrysler-sebring/body-hardware/fender-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Sebring",
+     2004,
+     2004
+    ],
+    [
+     "Dodge",
+     "Stratus",
+     2006,
+     2006
+    ]
+   ],
+   "cat": "fender",
+   "note": "Mopar catalog lists #5018849AB for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "5018849AB"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~fender-front~5018849ab",
+    "https://www.jeeppartsdeal.com/parts-list/2004-chrysler-sebring/body-hardware/fender-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2008,
+     2008
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2010,
+     2010
+    ]
+   ],
+   "cat": "liftgate",
+   "note": "Mopar catalog lists #5054266AD for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "5054266AD"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~liftgate~5054266ad",
+    "https://www.jeeppartsdeal.com/parts-list/2010-dodge-grand-caravan/body-hardware/lift-gate"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     1998,
+     1998
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     1999,
+     1999
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2000,
+     2000
+    ]
+   ],
+   "cat": "liftgate",
+   "note": "Mopar catalog lists #5096151AA for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "5096151AA"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~liftgate~5096151aa",
+    "https://www.jeeppartsdeal.com/parts-list/1999-dodge-caravan/body-hardware/lift-gate"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Concorde",
+     2002,
+     2002
+    ],
+    [
+     "Chrysler",
+     "LHS",
+     2000,
+     2000
+    ]
+   ],
+   "cat": "grille",
+   "note": "Mopar catalog lists #5103109AA for both — fits some configurations; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "5103109AA"
+   ],
+   "reason": "conditional",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~grille-radiator~5103109aa",
+    "https://www.jeeppartsdeal.com/parts-list/2002-chrysler-concorde/body-hardware/grille-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "300",
+     2006,
+     2006
+    ],
+    [
+     "Dodge",
+     "Magnum",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Mopar catalog lists #5134171AD for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "5134171AD"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~door-front~5134171ad",
+    "https://www.jeeppartsdeal.com/parts-list/2006-chrysler-300/body-hardware/door-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "300",
+     2006,
+     2006
+    ],
+    [
+     "Dodge",
+     "Magnum",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Mopar catalog lists #5134176AD for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "5134176AD"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~door-rear~5134176ad",
+    "https://www.jeeppartsdeal.com/parts-list/2006-chrysler-300/body-hardware/door-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "300",
+     2006,
+     2006
+    ],
+    [
+     "Dodge",
+     "Magnum",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "door-rear",
+   "note": "Mopar catalog lists #5134177AD for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "5134177AD"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~door-rear~5134177ad",
+    "https://www.jeeppartsdeal.com/parts-list/2006-chrysler-300/body-hardware/door-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005
+    ]
+   ],
+   "cat": "liftgate",
+   "note": "Mopar catalog lists #5135945AA for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "5135945AA"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~liftgate~5135945aa",
+    "https://www.jeeppartsdeal.com/parts-list/2005-dodge-caravan/body-hardware/lift-gate"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2007,
+     2007
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Mopar catalog lists #5139122AB for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "5139122AB"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~fascia-rear~5139122ab",
+    "https://www.jeeppartsdeal.com/parts-list/2005-dodge-caravan/body-hardware/bumper-components-rear"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2007,
+     2007
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Mopar catalog lists #5139123AA for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "5139123AA"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~rear-bumper-cover-assembly~5139123aa",
+    "https://www.jeeppartsdeal.com/parts-list/2005-dodge-caravan/body-hardware/bumper-components-rear"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2005,
+     2005
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2007,
+     2007
+    ]
+   ],
+   "cat": "bumper-rear",
+   "note": "Mopar catalog lists #5139124AA for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "5139124AA"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~rear-bumper-cover~5139124aa",
+    "https://www.jeeppartsdeal.com/parts-list/2005-dodge-caravan/body-hardware/bumper-components-rear"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     1998,
+     1998
+    ],
+    [
+     "Dodge",
+     "Caravan",
+     1999,
+     1999
+    ],
+    [
+     "Dodge",
+     "Grand Caravan",
+     2000,
+     2000
+    ]
+   ],
+   "cat": "hood",
+   "note": "Mopar catalog lists #5139668AA for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "5139668AA"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~hood~5139668aa",
+    "https://www.jeeppartsdeal.com/parts-list/1999-dodge-caravan/body-hardware/hood-components"
+   ]
+  },
+  {
+   "apps": [
+    [
      "Dodge",
      "Dakota",
      2000,
@@ -3320,6 +6194,552 @@
    "urls": [
     "https://www.jeeppartsdeal.com/oem/mopar~lamp-headlamp-park-and-turn~55055111ai",
     "https://www.jeeppartsdeal.com/parts-list/2000-dodge-dakota/headlights-lighting/headlamp-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Dodge",
+     "Dakota",
+     2000,
+     2000
+    ],
+    [
+     "Dodge",
+     "Durango",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "grille",
+   "note": "Mopar catalog lists #55056092 for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "55056092"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~grille-radiator~55056092",
+    "https://www.jeeppartsdeal.com/parts-list/2000-dodge-dakota/body-hardware/grille-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Dodge",
+     "Dakota",
+     2000,
+     2000
+    ],
+    [
+     "Dodge",
+     "Durango",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "fender",
+   "note": "Mopar catalog lists #55255030AF for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "55255030AF"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~fender~55255030af",
+    "https://www.jeeppartsdeal.com/parts-list/2000-dodge-dakota/body-hardware/fender-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Dodge",
+     "Dakota",
+     2000,
+     2000
+    ],
+    [
+     "Dodge",
+     "Durango",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "fender",
+   "note": "Mopar catalog lists #55255031AF for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "55255031AF"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~fender~55255031af",
+    "https://www.jeeppartsdeal.com/parts-list/2000-dodge-dakota/body-hardware/fender-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Dodge",
+     "Dakota",
+     2000,
+     2000
+    ],
+    [
+     "Dodge",
+     "Durango",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "hood",
+   "note": "Mopar catalog lists #55274716AD for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "55274716AD"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~hood-panel-assembly~55274716ad",
+    "https://www.jeeppartsdeal.com/parts-list/2000-dodge-dakota/body-hardware/hood-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #55277409AE for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "55277409AE"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/2012-ram-1500/electrical/lamps_front.html",
+    "https://www.moparpartsgiant.com/parts/mopar-headlamp-headlamp-park-and-turn~55277409ae.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #55277409AG for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "55277409AG"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~headlamp-headlamp-park-and-turn~55277409ag",
+    "https://www.jeeppartsdeal.com/parts-list/2012-ram-1500/headlights-lighting/headlamp-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #55277410AE for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "55277410AE"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/2012-ram-1500/electrical/lamps_front.html",
+    "https://www.moparpartsgiant.com/parts/mopar-headlamp-headlamp-park-and-turn~55277410ae.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #55277410AG for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "55277410AG"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~headlamp-headlamp-park-and-turn~55277410ag",
+    "https://www.jeeppartsdeal.com/parts-list/2012-ram-1500/headlights-lighting/headlamp-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Mopar catalog lists #55277414AB for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "55277414AB"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~lamp-tail-stop-backup~55277414ab",
+    "https://www.jeeppartsdeal.com/parts-list/2012-ram-1500/headlights-lighting/tail-lamps"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Mopar catalog lists #55277414AF for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "55277414AF"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~lamp-tail-stop-backup~55277414af",
+    "https://www.jeeppartsdeal.com/parts-list/2012-ram-1500/headlights-lighting/tail-lamps"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Mopar catalog lists #55277415AB for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "55277415AB"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~lamp-tail-stop-backup~55277415ab",
+    "https://www.jeeppartsdeal.com/parts-list/2012-ram-1500/headlights-lighting/tail-lamps"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "tail-lights",
+   "note": "Mopar catalog lists #55277415AF for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "55277415AF"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~lamp-tail-stop-backup~55277415af",
+    "https://www.jeeppartsdeal.com/parts-list/2012-ram-1500/headlights-lighting/tail-lamps"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #68001484AE for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "68001484AE"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/2012-ram-1500/electrical/lamps_front.html",
+    "https://www.moparpartsgiant.com/parts/mopar-headlamp-headlamp-park-and-turn~68001484ae.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #68001484AI for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "68001484AI"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~headlamp-headlamp-park-and-turn~68001484ai",
+    "https://www.jeeppartsdeal.com/parts-list/2012-ram-1500/headlights-lighting/headlamp-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #68001485AE for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "68001485AE"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/2012-ram-1500/electrical/lamps_front.html",
+    "https://www.moparpartsgiant.com/parts/mopar-headlamp-headlamp-park-and-turn~68001485ae.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #68001485AI for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "68001485AI"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~headlamp-headlamp-park-and-turn~68001485ai",
+    "https://www.jeeppartsdeal.com/parts-list/2012-ram-1500/headlights-lighting/headlamp-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2014,
+     2014
+    ],
+    [
+     "Ram",
+     "C/V",
+     2013,
+     2013
+    ]
+   ],
+   "cat": "liftgate",
+   "note": "Mopar catalog lists #68078085AE for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "68078085AE"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~liftgate~68078085ae",
+    "https://www.jeeppartsdeal.com/parts-list/2014-chrysler-town-country/body-hardware/lift-gate"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "tailgate",
+   "note": "Mopar catalog lists #68105727AR for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "68105727AR"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~tailgate~68105727ar",
+    "https://www.jeeppartsdeal.com/parts-list/2012-ram-1500/body-hardware/tail-gate"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Mopar catalog lists #68144728AF for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "68144728AF"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~door-front~68144728af",
+    "https://www.jeeppartsdeal.com/parts-list/2012-ram-1500/body-hardware/door-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ],
+    [
+     "Ram",
+     "2500",
+     2022,
+     2022
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Mopar catalog lists #68144729AF for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "68144729AF"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~door-front~68144729af",
+    "https://www.jeeppartsdeal.com/parts-list/2012-ram-1500/body-hardware/door-components"
    ]
   },
   {
@@ -3398,6 +6818,300 @@
    "urls": [
     "https://www.jeeppartsdeal.com/oem/mopar~lamp-tail-stop-turn~68241335aa",
     "https://www.jeeppartsdeal.com/parts-list/2005-dodge-caravan/headlights-lighting/combination-lamps"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ],
+    [
+     "Ram",
+     "2500",
+     2022,
+     2022
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Mopar catalog lists #68534364AA for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "68534364AA"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~door-front~68534364aa",
+    "https://www.jeeppartsdeal.com/parts-list/2012-ram-1500/body-hardware/door-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Ram",
+     "1500",
+     2012,
+     2012
+    ],
+    [
+     "Ram",
+     "2500",
+     2011,
+     2011
+    ],
+    [
+     "Ram",
+     "2500",
+     2022,
+     2022
+    ]
+   ],
+   "cat": "door-front",
+   "note": "Mopar catalog lists #68534365AA for both — trim-limited; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "68534365AA"
+   ],
+   "reason": "trim",
+   "urls": [
+    "https://www.jeeppartsdeal.com/oem/mopar~door-front~68534365aa",
+    "https://www.jeeppartsdeal.com/parts-list/2012-ram-1500/body-hardware/door-components"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Concorde",
+     1995,
+     1996
+    ],
+    [
+     "Dodge",
+     "Intrepid",
+     1995,
+     1995
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #V7106562AA for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "V7106562AA"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/1995-dodge-intrepid/electrical/lamps_front.html",
+    "https://www.moparpartsgiant.com/parts/mopar-headlamp~v7106562aa.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Concorde",
+     1995,
+     1996
+    ],
+    [
+     "Dodge",
+     "Intrepid",
+     1995,
+     1995
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #V7106563AA for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "V7106563AA"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/1995-dodge-intrepid/electrical/lamps_front.html",
+    "https://www.moparpartsgiant.com/parts/mopar-headlamp~v7106563aa.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2001,
+     2001
+    ],
+    [
+     "Chrysler",
+     "Town & Country",
+     2005,
+     2005
+    ],
+    [
+     "Chrysler",
+     "Voyager",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #V7107700AA for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "V7107700AA"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/2005-dodge-caravan/electrical/lamps_front.html",
+    "https://www.moparpartsgiant.com/parts/mopar-headlamp-headlamp~v7107700aa.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Town & Country",
+     2001,
+     2001
+    ],
+    [
+     "Chrysler",
+     "Town & Country",
+     2005,
+     2005
+    ],
+    [
+     "Chrysler",
+     "Voyager",
+     2003,
+     2003
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #V7107701AA for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "V7107701AA"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/2005-dodge-caravan/electrical/lamps_front.html",
+    "https://www.moparpartsgiant.com/parts/mopar-headlamp-headlamp~v7107701aa.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Concorde",
+     1995,
+     1996
+    ],
+    [
+     "Dodge",
+     "Intrepid",
+     1995,
+     1995
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #V7108256AA for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "V7108256AA"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/1995-dodge-intrepid/electrical/lamps_front.html",
+    "https://www.moparpartsgiant.com/parts/mopar-headlamp~v7108256aa.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Concorde",
+     1995,
+     1996
+    ],
+    [
+     "Dodge",
+     "Intrepid",
+     1995,
+     1995
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #V7108257AA for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "V7108257AA"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/1995-dodge-intrepid/electrical/lamps_front.html",
+    "https://www.moparpartsgiant.com/parts/mopar-headlamp~v7108257aa.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Concorde",
+     1995,
+     1996
+    ],
+    [
+     "Dodge",
+     "Intrepid",
+     1995,
+     1995
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #V7108260AA for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "V7108260AA"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/1995-dodge-intrepid/electrical/lamps_front.html",
+    "https://www.moparpartsgiant.com/parts/mopar-headlamp~v7108260aa.html"
+   ]
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Concorde",
+     1995,
+     1996
+    ],
+    [
+     "Dodge",
+     "Intrepid",
+     1995,
+     1995
+    ]
+   ],
+   "cat": "headlights",
+   "note": "Mopar catalog lists #V7108261AA for both — option: fits some option packages; verify the number on the part",
+   "ns": "mopar",
+   "pn": [
+    "V7108261AA"
+   ],
+   "reason": "option",
+   "urls": [
+    "https://www.moparpartsgiant.com/parts-list/1995-dodge-intrepid/electrical/lamps_front.html",
+    "https://www.moparpartsgiant.com/parts/mopar-headlamp~v7108261aa.html"
    ]
   },
   {
@@ -4118,33 +7832,6 @@
    "urls": [
     "https://www.subarupartsdeal.com/parts-list/2012-subaru-impreza-wagon/body_electronics/lamp_rear.html",
     "https://www.subarupartsdeal.com/parts/subaru-lens-body-rear-combination-lamp-left~84912fj070.html"
-   ]
-  },
-  {
-   "apps": [
-    [
-     "Subaru",
-     "Legacy",
-     2004,
-     2004
-    ],
-    [
-     "Subaru",
-     "Outback",
-     2003,
-     2003
-    ]
-   ],
-   "cat": "grille",
-   "note": "Subaru catalog lists #91121AE38A for both — option: fits some option packages; verify the number on the part",
-   "ns": "subaru",
-   "pn": [
-    "91121AE38A"
-   ],
-   "reason": "option",
-   "urls": [
-    "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/outer_accessories/front_grille.html",
-    "https://www.subarupartsdeal.com/parts/subaru-front-grille-assembly~91121ae38a.html"
    ]
   },
   {

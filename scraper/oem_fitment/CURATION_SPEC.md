@@ -295,7 +295,7 @@ Rules:
 ```json
 {
  "schema": 1, "ns": "toyota", "curate_version": "1.0", "as_of": "2026-11-05T01:23:03Z",
- "policy_sha256": "<sha256 of policy.py + notes.py + positions.py + model_map.json>",
+ "policy_sha256": "<sha256 of policy.py + notes.py + positions.py + model_map.json + release_allowlist.json>",
  "raw": {"ref": "origin/oem-raw", "commit": "f2652c3...",
          "sites": {"www.toyotapartsnow.com": {"records_sha256": "...", "lists_sha256": "...", "years_sha256": "...",
                    "records": 363, "lists": 0, "years": 0, "done": false, "blocked": false}}},

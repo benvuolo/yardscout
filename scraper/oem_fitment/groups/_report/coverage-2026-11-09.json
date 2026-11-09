@@ -1,372 +1,372 @@
 {
  "after_oem_status": {
-  "ford": "ok 42683f9d 48 groups (0 verified, 48 likely)",
-  "gm": "ok 42683f9d 289 groups (0 verified, 289 likely)",
-  "hmg": "ok 42683f9d 6 groups (0 verified, 6 likely)",
-  "mb": "ok 42683f9d 0 groups (0 verified, 0 likely)",
-  "mopar": "ok 42683f9d 140 groups (0 verified, 140 likely)",
-  "toyota": "ok 42683f9d 779 groups (0 verified, 779 likely)",
-  "vag": "ok 42683f9d 6 groups (0 verified, 6 likely)"
+  "ford": "ok c36da2eb 59 groups (0 verified, 59 likely)",
+  "gm": "ok c36da2eb 289 groups (0 verified, 289 likely)",
+  "hmg": "ok c36da2eb 6 groups (0 verified, 6 likely)",
+  "mb": "ok c36da2eb 0 groups (0 verified, 0 likely)",
+  "mopar": "ok c36da2eb 245 groups (0 verified, 245 likely)",
+  "toyota": "ok c36da2eb 583 groups (0 verified, 583 likely)",
+  "vag": "ok c36da2eb 6 groups (0 verified, 6 likely)"
  },
- "cars": 338654,
+ "cars": 338652,
  "categories": {
   "airbox": {
    "after_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376397210,
+    "pairs_likely": 376395456,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "after_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376397210,
+    "pairs_likely": 376395456,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376397210,
+    "pairs_likely": 376395456,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376397210,
+    "pairs_likely": 376395456,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    }
   },
   "alternator": {
    "after_new": {
-    "cars": 338654,
-    "engine_unknown_seekers": 56548,
+    "cars": 338652,
+    "engine_unknown_seekers": 56550,
     "kind": "engine",
-    "m_car": 119031,
+    "m_car": 119026,
     "m_car_share": 0.3515,
-    "m_local": 114511,
+    "m_local": 114507,
     "m_local_share": 0.3381,
     "m_pairs": 0.174,
-    "pairs_likely": 835580160,
-    "pairs_verified": 176032322,
-    "seekers": 232845
+    "pairs_likely": 835575626,
+    "pairs_verified": 176022768,
+    "seekers": 232842
    },
    "after_old": {
-    "cars": 338654,
-    "engine_unknown_seekers": 56548,
+    "cars": 338652,
+    "engine_unknown_seekers": 56550,
     "kind": "engine",
-    "m_car": 119031,
+    "m_car": 119026,
     "m_car_share": 0.3515,
-    "m_local": 114512,
+    "m_local": 114508,
     "m_local_share": 0.3381,
     "m_pairs": 0.1741,
-    "pairs_likely": 835529679,
-    "pairs_verified": 176082803,
-    "seekers": 232845
+    "pairs_likely": 835525144,
+    "pairs_verified": 176073250,
+    "seekers": 232842
    },
    "before_new": {
-    "cars": 338654,
-    "engine_unknown_seekers": 56548,
+    "cars": 338652,
+    "engine_unknown_seekers": 56550,
     "kind": "engine",
-    "m_car": 119031,
+    "m_car": 119026,
     "m_car_share": 0.3515,
-    "m_local": 114511,
+    "m_local": 114507,
     "m_local_share": 0.3381,
     "m_pairs": 0.174,
-    "pairs_likely": 835580160,
-    "pairs_verified": 176032322,
-    "seekers": 232845
+    "pairs_likely": 835575626,
+    "pairs_verified": 176022768,
+    "seekers": 232842
    },
    "before_old": {
-    "cars": 338654,
-    "engine_unknown_seekers": 56548,
+    "cars": 338652,
+    "engine_unknown_seekers": 56550,
     "kind": "engine",
-    "m_car": 119031,
+    "m_car": 119026,
     "m_car_share": 0.3515,
-    "m_local": 114512,
+    "m_local": 114508,
     "m_local_share": 0.3381,
     "m_pairs": 0.1741,
-    "pairs_likely": 835529679,
-    "pairs_verified": 176082803,
-    "seekers": 232845
+    "pairs_likely": 835525144,
+    "pairs_verified": 176073250,
+    "seekers": 232842
    }
   },
   "bumper-front": {
    "after_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376618813,
+    "pairs_likely": 376642863,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "after_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376467327,
+    "pairs_likely": 376465573,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376467327,
+    "pairs_likely": 376465573,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376467327,
+    "pairs_likely": 376465573,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    }
   },
   "bumper-rear": {
    "after_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376550902,
+    "pairs_likely": 376574952,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "after_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376397210,
+    "pairs_likely": 376395456,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376397210,
+    "pairs_likely": 376395456,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376397210,
+    "pairs_likely": 376395456,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    }
   },
   "climate-control": {
    "after_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 149,
     "m_car_share": 0.0004,
     "m_local": 140,
     "m_local_share": 0.0004,
     "m_pairs": 0.0001,
-    "pairs_likely": 387396171,
+    "pairs_likely": 387451414,
     "pairs_verified": 22052,
-    "seekers": 338654
+    "seekers": 338652
    },
    "after_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 149,
     "m_car_share": 0.0004,
     "m_local": 140,
     "m_local_share": 0.0004,
     "m_pairs": 0.0001,
-    "pairs_likely": 385934651,
+    "pairs_likely": 385931622,
     "pairs_verified": 22052,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 149,
     "m_car_share": 0.0004,
     "m_local": 140,
     "m_local_share": 0.0004,
     "m_pairs": 0.0001,
-    "pairs_likely": 385934651,
+    "pairs_likely": 385931622,
     "pairs_verified": 22052,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 149,
     "m_car_share": 0.0004,
     "m_local": 140,
     "m_local_share": 0.0004,
     "m_pairs": 0.0001,
-    "pairs_likely": 385934651,
+    "pairs_likely": 385931622,
     "pairs_verified": 22052,
-    "seekers": 338654
+    "seekers": 338652
    }
   },
   "door-front": {
    "after_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376556906,
+    "pairs_likely": 376580956,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "after_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376397210,
+    "pairs_likely": 376395456,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376397210,
+    "pairs_likely": 376395456,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376397210,
+    "pairs_likely": 376395456,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    }
   },
   "door-rear": {
    "after_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376553436,
+    "pairs_likely": 376534402,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "after_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376397210,
+    "pairs_likely": 376395456,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376397210,
+    "pairs_likely": 376395456,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376397210,
+    "pairs_likely": 376395456,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    }
   },
   "ecm": {
    "after_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "combo",
     "m_car": 0,
     "m_car_share": 0.0,
@@ -379,7 +379,7 @@
     "seekers": 0
    },
    "after_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "combo",
     "m_car": 0,
     "m_car_share": 0.0,
@@ -392,7 +392,7 @@
     "seekers": 0
    },
    "before_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "combo",
     "m_car": 0,
     "m_car_share": 0.0,
@@ -405,7 +405,7 @@
     "seekers": 0
    },
    "before_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "combo",
     "m_car": 0,
     "m_car_share": 0.0,
@@ -420,519 +420,519 @@
   },
   "engine-assembly": {
    "after_new": {
-    "cars": 338654,
-    "engine_unknown_seekers": 56498,
+    "cars": 338652,
+    "engine_unknown_seekers": 56499,
     "kind": "engine",
-    "m_car": 216425,
+    "m_car": 216422,
     "m_car_share": 0.6391,
-    "m_local": 209796,
+    "m_local": 209792,
     "m_local_share": 0.6195,
     "m_pairs": 0.6562,
-    "pairs_likely": 348659813,
-    "pairs_verified": 665571656,
-    "seekers": 233056
+    "pairs_likely": 348653327,
+    "pairs_verified": 665569167,
+    "seekers": 233054
    },
    "after_old": {
-    "cars": 338654,
-    "engine_unknown_seekers": 56498,
+    "cars": 338652,
+    "engine_unknown_seekers": 56499,
     "kind": "engine",
-    "m_car": 216425,
+    "m_car": 216422,
     "m_car_share": 0.6391,
-    "m_local": 209796,
+    "m_local": 209792,
     "m_local_share": 0.6195,
     "m_pairs": 0.6564,
-    "pairs_likely": 348456441,
-    "pairs_verified": 665775028,
-    "seekers": 233056
+    "pairs_likely": 348449956,
+    "pairs_verified": 665772538,
+    "seekers": 233054
    },
    "before_new": {
-    "cars": 338654,
-    "engine_unknown_seekers": 56498,
+    "cars": 338652,
+    "engine_unknown_seekers": 56499,
     "kind": "engine",
-    "m_car": 216425,
+    "m_car": 216422,
     "m_car_share": 0.6391,
-    "m_local": 209796,
+    "m_local": 209792,
     "m_local_share": 0.6195,
     "m_pairs": 0.6562,
-    "pairs_likely": 348659813,
-    "pairs_verified": 665571656,
-    "seekers": 233056
+    "pairs_likely": 348653327,
+    "pairs_verified": 665569167,
+    "seekers": 233054
    },
    "before_old": {
-    "cars": 338654,
-    "engine_unknown_seekers": 56498,
+    "cars": 338652,
+    "engine_unknown_seekers": 56499,
     "kind": "engine",
-    "m_car": 216425,
+    "m_car": 216422,
     "m_car_share": 0.6391,
-    "m_local": 209796,
+    "m_local": 209792,
     "m_local_share": 0.6195,
     "m_pairs": 0.6564,
-    "pairs_likely": 348456441,
-    "pairs_verified": 665775028,
-    "seekers": 233056
+    "pairs_likely": 348449956,
+    "pairs_verified": 665772538,
+    "seekers": 233054
    }
   },
   "fender": {
    "after_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376612753,
+    "pairs_likely": 376619499,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "after_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376457967,
+    "pairs_likely": 376456213,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376457967,
+    "pairs_likely": 376456213,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376457967,
+    "pairs_likely": 376456213,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    }
   },
   "front-seats": {
    "after_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376506755,
+    "pairs_likely": 376505001,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "after_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376506755,
+    "pairs_likely": 376505001,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376506755,
+    "pairs_likely": 376505001,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376506755,
+    "pairs_likely": 376505001,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    }
   },
   "gauge-cluster": {
    "after_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 149,
     "m_car_share": 0.0004,
     "m_local": 140,
     "m_local_share": 0.0004,
     "m_pairs": 0.0001,
-    "pairs_likely": 384918122,
+    "pairs_likely": 385383477,
     "pairs_verified": 22052,
-    "seekers": 338654
+    "seekers": 338652
    },
    "after_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 149,
     "m_car_share": 0.0004,
     "m_local": 140,
     "m_local_share": 0.0004,
     "m_pairs": 0.0001,
-    "pairs_likely": 384492740,
+    "pairs_likely": 384490393,
     "pairs_verified": 22052,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 149,
     "m_car_share": 0.0004,
     "m_local": 140,
     "m_local_share": 0.0004,
     "m_pairs": 0.0001,
-    "pairs_likely": 384492740,
+    "pairs_likely": 384490393,
     "pairs_verified": 22052,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 149,
     "m_car_share": 0.0004,
     "m_local": 140,
     "m_local_share": 0.0004,
     "m_pairs": 0.0001,
-    "pairs_likely": 384492740,
+    "pairs_likely": 384490393,
     "pairs_verified": 22052,
-    "seekers": 338654
+    "seekers": 338652
    }
   },
   "grille": {
    "after_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 53,
     "m_car_share": 0.0002,
     "m_local": 41,
     "m_local_share": 0.0001,
     "m_pairs": 0.0,
-    "pairs_likely": 376883323,
+    "pairs_likely": 376907373,
     "pairs_verified": 2756,
-    "seekers": 338654
+    "seekers": 338652
    },
    "after_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 53,
     "m_car_share": 0.0002,
     "m_local": 41,
     "m_local_share": 0.0001,
     "m_pairs": 0.0,
-    "pairs_likely": 376731931,
+    "pairs_likely": 376730177,
     "pairs_verified": 2756,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 53,
     "m_car_share": 0.0002,
     "m_local": 41,
     "m_local_share": 0.0001,
     "m_pairs": 0.0,
-    "pairs_likely": 376731931,
+    "pairs_likely": 376730177,
     "pairs_verified": 2756,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 53,
     "m_car_share": 0.0002,
     "m_local": 41,
     "m_local_share": 0.0001,
     "m_pairs": 0.0,
-    "pairs_likely": 376731931,
+    "pairs_likely": 376730177,
     "pairs_verified": 2756,
-    "seekers": 338654
+    "seekers": 338652
    }
   },
   "headlights": {
    "after_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 5058,
     "m_car_share": 0.0149,
     "m_local": 5030,
     "m_local_share": 0.0149,
     "m_pairs": 0.0417,
-    "pairs_likely": 375532818,
+    "pairs_likely": 375529801,
     "pairs_verified": 16359010,
-    "seekers": 338654
+    "seekers": 338652
    },
    "after_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 5058,
     "m_car_share": 0.0149,
     "m_local": 5030,
     "m_local_share": 0.0149,
     "m_pairs": 0.0418,
-    "pairs_likely": 375406416,
+    "pairs_likely": 375403387,
     "pairs_verified": 16366960,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 5058,
     "m_car_share": 0.0149,
     "m_local": 5030,
     "m_local_share": 0.0149,
     "m_pairs": 0.0418,
-    "pairs_likely": 375414366,
+    "pairs_likely": 375411337,
     "pairs_verified": 16359010,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 5058,
     "m_car_share": 0.0149,
     "m_local": 5030,
     "m_local_share": 0.0149,
     "m_pairs": 0.0418,
-    "pairs_likely": 375406416,
+    "pairs_likely": 375403387,
     "pairs_verified": 16366960,
-    "seekers": 338654
+    "seekers": 338652
    }
   },
   "hood": {
    "after_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376587855,
+    "pairs_likely": 376611067,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "after_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376430693,
+    "pairs_likely": 376428939,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376430693,
+    "pairs_likely": 376428939,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376430693,
+    "pairs_likely": 376428939,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    }
   },
   "ignition-coils": {
    "after_new": {
-    "cars": 338654,
-    "engine_unknown_seekers": 56498,
+    "cars": 338652,
+    "engine_unknown_seekers": 56499,
     "kind": "engine",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 1014231469,
+    "pairs_likely": 1014222494,
     "pairs_verified": 0,
-    "seekers": 233056
+    "seekers": 233054
    },
    "after_old": {
-    "cars": 338654,
-    "engine_unknown_seekers": 56498,
+    "cars": 338652,
+    "engine_unknown_seekers": 56499,
     "kind": "engine",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 1014231469,
+    "pairs_likely": 1014222494,
     "pairs_verified": 0,
-    "seekers": 233056
+    "seekers": 233054
    },
    "before_new": {
-    "cars": 338654,
-    "engine_unknown_seekers": 56498,
+    "cars": 338652,
+    "engine_unknown_seekers": 56499,
     "kind": "engine",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 1014231469,
+    "pairs_likely": 1014222494,
     "pairs_verified": 0,
-    "seekers": 233056
+    "seekers": 233054
    },
    "before_old": {
-    "cars": 338654,
-    "engine_unknown_seekers": 56498,
+    "cars": 338652,
+    "engine_unknown_seekers": 56499,
     "kind": "engine",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 1014231469,
+    "pairs_likely": 1014222494,
     "pairs_verified": 0,
-    "seekers": 233056
+    "seekers": 233054
    }
   },
   "intake-manifold": {
    "after_new": {
-    "cars": 338654,
-    "engine_unknown_seekers": 56498,
+    "cars": 338652,
+    "engine_unknown_seekers": 56499,
     "kind": "engine",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 1014231469,
+    "pairs_likely": 1014222494,
     "pairs_verified": 0,
-    "seekers": 233056
+    "seekers": 233054
    },
    "after_old": {
-    "cars": 338654,
-    "engine_unknown_seekers": 56498,
+    "cars": 338652,
+    "engine_unknown_seekers": 56499,
     "kind": "engine",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 1014231469,
+    "pairs_likely": 1014222494,
     "pairs_verified": 0,
-    "seekers": 233056
+    "seekers": 233054
    },
    "before_new": {
-    "cars": 338654,
-    "engine_unknown_seekers": 56498,
+    "cars": 338652,
+    "engine_unknown_seekers": 56499,
     "kind": "engine",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 1014231469,
+    "pairs_likely": 1014222494,
     "pairs_verified": 0,
-    "seekers": 233056
+    "seekers": 233054
    },
    "before_old": {
-    "cars": 338654,
-    "engine_unknown_seekers": 56498,
+    "cars": 338652,
+    "engine_unknown_seekers": 56499,
     "kind": "engine",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 1014231469,
+    "pairs_likely": 1014222494,
     "pairs_verified": 0,
-    "seekers": 233056
+    "seekers": 233054
    }
   },
   "liftgate": {
    "after_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 5130,
     "m_car_share": 0.0151,
     "m_local": 5120,
     "m_local_share": 0.0151,
     "m_pairs": 0.0661,
-    "pairs_likely": 367502955,
+    "pairs_likely": 367501201,
     "pairs_verified": 26020957,
-    "seekers": 338654
+    "seekers": 338652
    },
    "after_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 5130,
     "m_car_share": 0.0151,
     "m_local": 5120,
     "m_local_share": 0.0151,
     "m_pairs": 0.0661,
-    "pairs_likely": 367480562,
+    "pairs_likely": 367478808,
     "pairs_verified": 26026058,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 5130,
     "m_car_share": 0.0151,
     "m_local": 5120,
     "m_local_share": 0.0151,
     "m_pairs": 0.0661,
-    "pairs_likely": 367485663,
+    "pairs_likely": 367483909,
     "pairs_verified": 26020957,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 5130,
     "m_car_share": 0.0151,
     "m_local": 5120,
     "m_local_share": 0.0151,
     "m_pairs": 0.0661,
-    "pairs_likely": 367480562,
+    "pairs_likely": 367478808,
     "pairs_verified": 26026058,
-    "seekers": 338654
+    "seekers": 338652
    }
   },
   "radio": {
    "after_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "exact",
     "m_car": 0,
     "m_car_share": 0.0,
@@ -945,7 +945,7 @@
     "seekers": 0
    },
    "after_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "exact",
     "m_car": 0,
     "m_car_share": 0.0,
@@ -958,7 +958,7 @@
     "seekers": 0
    },
    "before_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "exact",
     "m_car": 0,
     "m_car_share": 0.0,
@@ -971,7 +971,7 @@
     "seekers": 0
    },
    "before_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "exact",
     "m_car": 0,
     "m_car_share": 0.0,
@@ -986,311 +986,311 @@
   },
   "side-mirrors": {
    "after_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 3394,
     "m_car_share": 0.01,
     "m_local": 3393,
     "m_local_share": 0.01,
     "m_pairs": 0.0295,
-    "pairs_likely": 378922344,
+    "pairs_likely": 378991928,
     "pairs_verified": 11512449,
-    "seekers": 338654
+    "seekers": 338652
    },
    "after_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 3394,
     "m_car_share": 0.01,
     "m_local": 3393,
     "m_local_share": 0.01,
     "m_pairs": 0.0296,
-    "pairs_likely": 377258479,
+    "pairs_likely": 377256131,
     "pairs_verified": 11515842,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 3394,
     "m_car_share": 0.01,
     "m_local": 3393,
     "m_local_share": 0.01,
     "m_pairs": 0.0296,
-    "pairs_likely": 377261872,
+    "pairs_likely": 377259524,
     "pairs_verified": 11512449,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 3394,
     "m_car_share": 0.01,
     "m_local": 3393,
     "m_local_share": 0.01,
     "m_pairs": 0.0296,
-    "pairs_likely": 377258479,
+    "pairs_likely": 377256131,
     "pairs_verified": 11515842,
-    "seekers": 338654
+    "seekers": 338652
    }
   },
   "starter": {
    "after_new": {
-    "cars": 338654,
-    "engine_unknown_seekers": 56498,
+    "cars": 338652,
+    "engine_unknown_seekers": 56499,
     "kind": "engine",
-    "m_car": 34360,
+    "m_car": 34362,
     "m_car_share": 0.1015,
-    "m_local": 32479,
+    "m_local": 32482,
     "m_local_share": 0.0959,
     "m_pairs": 0.0374,
-    "pairs_likely": 976288593,
-    "pairs_verified": 37942876,
-    "seekers": 233056
+    "pairs_likely": 976272044,
+    "pairs_verified": 37950450,
+    "seekers": 233054
    },
    "after_old": {
-    "cars": 338654,
-    "engine_unknown_seekers": 56498,
+    "cars": 338652,
+    "engine_unknown_seekers": 56499,
     "kind": "engine",
-    "m_car": 34360,
+    "m_car": 34362,
     "m_car_share": 0.1015,
-    "m_local": 32479,
+    "m_local": 32482,
     "m_local_share": 0.0959,
     "m_pairs": 0.0374,
-    "pairs_likely": 976282097,
-    "pairs_verified": 37949372,
-    "seekers": 233056
+    "pairs_likely": 976265549,
+    "pairs_verified": 37956945,
+    "seekers": 233054
    },
    "before_new": {
-    "cars": 338654,
-    "engine_unknown_seekers": 56498,
+    "cars": 338652,
+    "engine_unknown_seekers": 56499,
     "kind": "engine",
-    "m_car": 34360,
+    "m_car": 34362,
     "m_car_share": 0.1015,
-    "m_local": 32479,
+    "m_local": 32482,
     "m_local_share": 0.0959,
     "m_pairs": 0.0374,
-    "pairs_likely": 976288593,
-    "pairs_verified": 37942876,
-    "seekers": 233056
+    "pairs_likely": 976272044,
+    "pairs_verified": 37950450,
+    "seekers": 233054
    },
    "before_old": {
-    "cars": 338654,
-    "engine_unknown_seekers": 56498,
+    "cars": 338652,
+    "engine_unknown_seekers": 56499,
     "kind": "engine",
-    "m_car": 34360,
+    "m_car": 34362,
     "m_car_share": 0.1015,
-    "m_local": 32479,
+    "m_local": 32482,
     "m_local_share": 0.0959,
     "m_pairs": 0.0374,
-    "pairs_likely": 976282097,
-    "pairs_verified": 37949372,
-    "seekers": 233056
+    "pairs_likely": 976265549,
+    "pairs_verified": 37956945,
+    "seekers": 233054
    }
   },
   "tail-lights": {
    "after_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 382511662,
+    "pairs_likely": 382534436,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "after_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 382481776,
+    "pairs_likely": 382478746,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 382481776,
+    "pairs_likely": 382478746,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 382481776,
+    "pairs_likely": 382478746,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    }
   },
   "tailgate": {
    "after_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 2722,
     "m_car_share": 0.008,
     "m_local": 2686,
     "m_local_share": 0.0079,
     "m_pairs": 0.0054,
-    "pairs_likely": 375752087,
+    "pairs_likely": 375750333,
     "pairs_verified": 2029278,
-    "seekers": 338654
+    "seekers": 338652
    },
    "after_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 2722,
     "m_car_share": 0.008,
     "m_local": 2686,
     "m_local_share": 0.0079,
     "m_pairs": 0.0054,
-    "pairs_likely": 375748305,
+    "pairs_likely": 375746551,
     "pairs_verified": 2033060,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 2722,
     "m_car_share": 0.008,
     "m_local": 2686,
     "m_local_share": 0.0079,
     "m_pairs": 0.0054,
-    "pairs_likely": 375752087,
+    "pairs_likely": 375750333,
     "pairs_verified": 2029278,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 2722,
     "m_car_share": 0.008,
     "m_local": 2686,
     "m_local_share": 0.0079,
     "m_pairs": 0.0054,
-    "pairs_likely": 375748305,
+    "pairs_likely": 375746551,
     "pairs_verified": 2033060,
-    "seekers": 338654
+    "seekers": 338652
    }
   },
   "third-row-seat": {
    "after_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
-    "m_car": 11913,
+    "m_car": 11914,
     "m_car_share": 0.0352,
-    "m_local": 11894,
+    "m_local": 11895,
     "m_local_share": 0.0351,
     "m_pairs": 0.0971,
-    "pairs_likely": 360384429,
-    "pairs_verified": 38759094,
-    "seekers": 338654
+    "pairs_likely": 360379683,
+    "pairs_verified": 38762481,
+    "seekers": 338652
    },
    "after_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
-    "m_car": 11913,
+    "m_car": 11914,
     "m_car_share": 0.0352,
-    "m_local": 11894,
+    "m_local": 11895,
     "m_local_share": 0.0351,
     "m_pairs": 0.0971,
-    "pairs_likely": 360377635,
-    "pairs_verified": 38765888,
-    "seekers": 338654
+    "pairs_likely": 360372888,
+    "pairs_verified": 38769276,
+    "seekers": 338652
    },
    "before_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
-    "m_car": 11913,
+    "m_car": 11914,
     "m_car_share": 0.0352,
-    "m_local": 11894,
+    "m_local": 11895,
     "m_local_share": 0.0351,
     "m_pairs": 0.0971,
-    "pairs_likely": 360384429,
-    "pairs_verified": 38759094,
-    "seekers": 338654
+    "pairs_likely": 360379683,
+    "pairs_verified": 38762481,
+    "seekers": 338652
    },
    "before_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
-    "m_car": 11913,
+    "m_car": 11914,
     "m_car_share": 0.0352,
-    "m_local": 11894,
+    "m_local": 11895,
     "m_local_share": 0.0351,
     "m_pairs": 0.0971,
-    "pairs_likely": 360377635,
-    "pairs_verified": 38765888,
-    "seekers": 338654
+    "pairs_likely": 360372888,
+    "pairs_verified": 38769276,
+    "seekers": 338652
    }
   },
   "tow-mirrors": {
    "after_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 2084,
     "m_car_share": 0.0062,
     "m_local": 2064,
     "m_local_share": 0.0061,
     "m_pairs": 0.0058,
-    "pairs_likely": 376979123,
+    "pairs_likely": 376977369,
     "pairs_verified": 2212864,
-    "seekers": 338654
+    "seekers": 338652
    },
    "after_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 2084,
     "m_car_share": 0.0062,
     "m_local": 2064,
     "m_local_share": 0.0061,
     "m_pairs": 0.0058,
-    "pairs_likely": 376977491,
+    "pairs_likely": 376975737,
     "pairs_verified": 2214496,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 2084,
     "m_car_share": 0.0062,
     "m_local": 2064,
     "m_local_share": 0.0061,
     "m_pairs": 0.0058,
-    "pairs_likely": 376979123,
+    "pairs_likely": 376977369,
     "pairs_verified": 2212864,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 2084,
     "m_car_share": 0.0062,
     "m_local": 2064,
     "m_local_share": 0.0061,
     "m_pairs": 0.0058,
-    "pairs_likely": 376977491,
+    "pairs_likely": 376975737,
     "pairs_verified": 2214496,
-    "seekers": 338654
+    "seekers": 338652
    }
   },
   "transmission-auto": {
    "after_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "combo",
     "m_car": 0,
     "m_car_share": 0.0,
@@ -1303,7 +1303,7 @@
     "seekers": 0
    },
    "after_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "combo",
     "m_car": 0,
     "m_car_share": 0.0,
@@ -1316,7 +1316,7 @@
     "seekers": 0
    },
    "before_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "combo",
     "m_car": 0,
     "m_car_share": 0.0,
@@ -1329,7 +1329,7 @@
     "seekers": 0
    },
    "before_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "combo",
     "m_car": 0,
     "m_car_share": 0.0,
@@ -1344,152 +1344,152 @@
   },
   "trunk-lid": {
    "after_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376585564,
+    "pairs_likely": 376583810,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "after_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376448538,
+    "pairs_likely": 376446784,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376448538,
+    "pairs_likely": 376446784,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 376448538,
+    "pairs_likely": 376446784,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    }
   },
   "window-regulator": {
    "after_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 389163653,
+    "pairs_likely": 389207210,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "after_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 386788177,
+    "pairs_likely": 386785148,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 386788177,
+    "pairs_likely": 386785148,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 386788177,
+    "pairs_likely": 386785148,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    }
   },
   "window-switch": {
    "after_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 387374525,
+    "pairs_likely": 387371496,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "after_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 386781821,
+    "pairs_likely": 386778792,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_new": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 386781821,
+    "pairs_likely": 386778792,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    },
    "before_old": {
-    "cars": 338654,
+    "cars": 338652,
     "kind": "body",
     "m_car": 0,
     "m_car_share": 0.0,
     "m_local": 0,
     "m_local_share": 0.0,
     "m_pairs": 0.0,
-    "pairs_likely": 386781821,
+    "pairs_likely": 386778792,
     "pairs_verified": 0,
-    "seekers": 338654
+    "seekers": 338652
    }
   }
  },
@@ -1559,9 +1559,33 @@
     "sample": []
    },
    "new_cross_model_likely": {
-    "car_pairs": 123844,
-    "key_pairs": 28,
+    "car_pairs": 148718,
+    "key_pairs": 30,
     "sample": [
+     [
+      [
+       "Dodge",
+       "Ram 1500",
+       2002
+      ],
+      [
+       "Dodge",
+       "Ram 2500",
+       2003
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Ram 2500",
+       2003
+      ],
+      [
+       "Dodge",
+       "Ram 1500",
+       2002
+      ]
+     ],
      [
       [
        "Lexus",
@@ -1921,9 +1945,33 @@
     "sample": []
    },
    "new_cross_model_likely": {
-    "car_pairs": 125588,
-    "key_pairs": 30,
+    "car_pairs": 150462,
+    "key_pairs": 32,
     "sample": [
+     [
+      [
+       "Dodge",
+       "Ram 1500",
+       2002
+      ],
+      [
+       "Dodge",
+       "Ram 2500",
+       2003
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Ram 2500",
+       2003
+      ],
+      [
+       "Dodge",
+       "Ram 1500",
+       2002
+      ]
+     ],
      [
       [
        "Lexus",
@@ -2307,21 +2355,9 @@
     "sample": []
    },
    "new_cross_model_likely": {
-    "car_pairs": 1441570,
-    "key_pairs": 74,
+    "car_pairs": 1499674,
+    "key_pairs": 98,
     "sample": [
-     [
-      [
-       "Buick",
-       "Century",
-       2003
-      ],
-      [
-       "Buick",
-       "Regal",
-       2004
-      ]
-     ],
      [
       [
        "Buick",
@@ -2361,13 +2397,13 @@
      [
       [
        "Cadillac",
-       "DeVille",
-       1998
+       "Eldorado",
+       2000
       ],
       [
        "Cadillac",
-       "Eldorado",
-       2000
+       "DeVille",
+       1998
       ]
      ],
      [
@@ -2391,6 +2427,18 @@
       [
        "Chevrolet",
        "Tahoe",
+       2007
+      ]
+     ],
+     [
+      [
+       "Chevrolet",
+       "Cobalt",
+       2007
+      ],
+      [
+       "Pontiac",
+       "G5",
        2007
       ]
      ],
@@ -2402,20 +2450,8 @@
       ],
       [
        "GMC",
-       "Jimmy",
-       1998
-      ]
-     ],
-     [
-      [
-       "Chevrolet",
-       "Silverado",
-       2008
-      ],
-      [
-       "Chevrolet",
-       "Tahoe",
-       2007
+       "Sonoma",
+       2000
       ]
      ],
      [
@@ -2433,13 +2469,13 @@
      [
       [
        "Chevrolet",
-       "Trailblazer",
-       2004
+       "Tahoe",
+       2007
       ],
       [
-       "Buick",
-       "Rainier",
-       2004
+       "Chevrolet",
+       "Silverado",
+       2008
       ]
      ],
      [
@@ -2462,19 +2498,127 @@
       ],
       [
        "Dodge",
-       "Charger",
-       2007
+       "Magnum",
+       2005
       ]
      ],
      [
       [
        "Chrysler",
-       "300",
-       2006
+       "300M",
+       2002
+      ],
+      [
+       "Chrysler",
+       "Concorde",
+       2002
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Aspen",
+       2007
       ],
       [
        "Dodge",
-       "Magnum",
+       "Durango",
+       2005
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Concorde",
+       2002
+      ],
+      [
+       "Chrysler",
+       "LHS",
+       2000
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Concorde",
+       2002
+      ],
+      [
+       "Chrysler",
+       "Sebring",
+       2004
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "LHS",
+       2000
+      ],
+      [
+       "Chrysler",
+       "Concorde",
+       2002
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "LHS",
+       2000
+      ],
+      [
+       "Dodge",
+       "Intrepid",
+       2004
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Sebring",
+       2004
+      ],
+      [
+       "Chrysler",
+       "Concorde",
+       2002
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Sebring",
+       2004
+      ],
+      [
+       "Dodge",
+       "Intrepid",
+       2004
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Town & Country",
+       1999
+      ],
+      [
+       "Dodge",
+       "Caravan",
+       1999
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Town & Country",
+       2005
+      ],
+      [
+       "Dodge",
+       "Caravan",
        2005
       ]
      ],
@@ -2488,6 +2632,18 @@
        "Dodge",
        "Grand Caravan",
        2004
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Town & Country",
+       2005
+      ],
+      [
+       "Dodge",
+       "Grand Caravan",
+       2005
       ]
      ],
      [
@@ -2517,54 +2673,6 @@
      [
       [
        "Dodge",
-       "Caliber",
-       2007
-      ],
-      [
-       "Jeep",
-       "Compass",
-       2007
-      ]
-     ],
-     [
-      [
-       "Dodge",
-       "Caravan",
-       1999
-      ],
-      [
-       "Chrysler",
-       "Town & Country",
-       1999
-      ]
-     ],
-     [
-      [
-       "Dodge",
-       "Caravan",
-       2005
-      ],
-      [
-       "Chrysler",
-       "Town & Country",
-       2005
-      ]
-     ],
-     [
-      [
-       "Dodge",
-       "Caravan",
-       2005
-      ],
-      [
-       "Dodge",
-       "Grand Caravan",
-       2007
-      ]
-     ],
-     [
-      [
-       "Dodge",
        "Charger",
        2007
       ],
@@ -2577,32 +2685,8 @@
      [
       [
        "Dodge",
-       "Charger",
-       2007
-      ],
-      [
-       "Dodge",
-       "Magnum",
-       2005
-      ]
-     ],
-     [
-      [
-       "Dodge",
        "Grand Caravan",
        2004
-      ],
-      [
-       "Chrysler",
-       "Town & Country",
-       2005
-      ]
-     ],
-     [
-      [
-       "Dodge",
-       "Grand Caravan",
-       2005
       ],
       [
        "Dodge",
@@ -2614,7 +2698,7 @@
       [
        "Dodge",
        "Grand Caravan",
-       2007
+       2005
       ],
       [
        "Chrysler",
@@ -2644,6 +2728,42 @@
        "Chrysler",
        "Town & Country",
        2008
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Intrepid",
+       2004
+      ],
+      [
+       "Chrysler",
+       "300M",
+       2002
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Intrepid",
+       2004
+      ],
+      [
+       "Chrysler",
+       "LHS",
+       2000
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Magnum",
+       2005
+      ],
+      [
+       "Chrysler",
+       "300",
+       2006
       ]
      ],
      [
@@ -2671,27 +2791,15 @@
       ]
      ],
      [
-      [
-       "Ford",
-       "Explorer Sport Trac",
-       2001
-      ],
       [
        "Ford",
        "Explorer Sport",
        2001
-      ]
-     ],
-     [
-      [
-       "Ford",
-       "Five Hundred",
-       2005
       ],
       [
-       "Mercury",
-       "Montego",
-       2005
+       "Ford",
+       "Explorer Sport Trac",
+       2001
       ]
      ],
      [
@@ -2708,14 +2816,14 @@
      ],
      [
       [
-       "Ford",
-       "Taurus X",
-       2008
+       "GMC",
+       "Canyon",
+       2005
       ],
       [
-       "Ford",
-       "Taurus",
-       2008
+       "Chevrolet",
+       "Colorado",
+       2005
       ]
      ],
      [
@@ -2733,24 +2841,12 @@
      [
       [
        "GMC",
-       "Sierra",
-       2004
+       "Jimmy",
+       1998
       ],
-      [
-       "GMC",
-       "Yukon",
-       2003
-      ]
-     ],
-     [
       [
        "GMC",
        "Sonoma",
-       2000
-      ],
-      [
-       "Chevrolet",
-       "S-10",
        2000
       ]
      ],
@@ -2768,6 +2864,18 @@
      ],
      [
       [
+       "GMC",
+       "Yukon",
+       2003
+      ],
+      [
+       "GMC",
+       "Sierra",
+       2004
+      ]
+     ],
+     [
+      [
        "Jeep",
        "Compass",
        2007
@@ -2776,18 +2884,6 @@
        "Dodge",
        "Caliber",
        2007
-      ]
-     ],
-     [
-      [
-       "Mercury",
-       "Montego",
-       2005
-      ],
-      [
-       "Ford",
-       "Five Hundred",
-       2005
       ]
      ],
      [
@@ -2816,62 +2912,14 @@
      ],
      [
       [
-       "Toyota",
-       "Camry Hybrid",
-       2007
-      ],
-      [
-       "Toyota",
-       "Camry",
-       2007
-      ]
-     ],
-     [
-      [
-       "Toyota",
-       "Camry Hybrid",
+       "Ram",
+       "2500",
        2011
       ],
       [
-       "Toyota",
-       "Camry",
-       2011
-      ]
-     ],
-     [
-      [
-       "Toyota",
-       "Camry Hybrid",
+       "Ram",
+       "1500",
        2012
-      ],
-      [
-       "Toyota",
-       "Camry",
-       2012
-      ]
-     ],
-     [
-      [
-       "Toyota",
-       "Camry Hybrid",
-       2015
-      ],
-      [
-       "Toyota",
-       "Camry",
-       2015
-      ]
-     ],
-     [
-      [
-       "Toyota",
-       "Camry",
-       2007
-      ],
-      [
-       "Toyota",
-       "Camry Hybrid",
-       2007
       ]
      ],
      [
@@ -2933,9 +2981,33 @@
     "sample": []
    },
    "new_cross_model_likely": {
-    "car_pairs": 131472,
-    "key_pairs": 32,
+    "car_pairs": 156346,
+    "key_pairs": 34,
     "sample": [
+     [
+      [
+       "Dodge",
+       "Ram 1500",
+       2002
+      ],
+      [
+       "Dodge",
+       "Ram 2500",
+       2003
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Ram 2500",
+       2003
+      ],
+      [
+       "Dodge",
+       "Ram 1500",
+       2002
+      ]
+     ],
      [
       [
        "Hyundai",
@@ -3343,8 +3415,8 @@
     "sample": []
    },
    "new_cross_model_likely": {
-    "car_pairs": 128112,
-    "key_pairs": 28,
+    "car_pairs": 117306,
+    "key_pairs": 22,
     "sample": [
      [
       [
@@ -3535,78 +3607,6 @@
       [
        "Lexus",
        "IS 250",
-       2007
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "RX 330",
-       2004
-      ],
-      [
-       "Lexus",
-       "RX 350",
-       2007
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "RX 330",
-       2004
-      ],
-      [
-       "Lexus",
-       "RX 400h",
-       2006
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "RX 350",
-       2007
-      ],
-      [
-       "Lexus",
-       "RX 330",
-       2004
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "RX 350",
-       2007
-      ],
-      [
-       "Lexus",
-       "RX 400h",
-       2006
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "RX 400h",
-       2006
-      ],
-      [
-       "Lexus",
-       "RX 330",
-       2004
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "RX 400h",
-       2006
-      ],
-      [
-       "Lexus",
-       "RX 350",
        2007
       ]
      ],
@@ -3755,11 +3755,35 @@
     "sample": []
    },
    "new_cross_model_likely": {
-    "car_pairs": 126572,
-    "key_pairs": 30,
+    "car_pairs": 140616,
+    "key_pairs": 26,
     "sample": [
      [
       [
+       "Dodge",
+       "Ram 1500",
+       2002
+      ],
+      [
+       "Dodge",
+       "Ram 2500",
+       2003
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Ram 2500",
+       2003
+      ],
+      [
+       "Dodge",
+       "Ram 1500",
+       2002
+      ]
+     ],
+     [
+      [
        "Lexus",
        "ES 300",
        2002
@@ -3995,78 +4019,6 @@
       [
        "Lexus",
        "IS 250",
-       2007
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "RX 330",
-       2004
-      ],
-      [
-       "Lexus",
-       "RX 350",
-       2007
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "RX 330",
-       2004
-      ],
-      [
-       "Lexus",
-       "RX 400h",
-       2006
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "RX 350",
-       2007
-      ],
-      [
-       "Lexus",
-       "RX 330",
-       2004
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "RX 350",
-       2007
-      ],
-      [
-       "Lexus",
-       "RX 400h",
-       2006
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "RX 400h",
-       2006
-      ],
-      [
-       "Lexus",
-       "RX 330",
-       2004
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "RX 400h",
-       2006
-      ],
-      [
-       "Lexus",
-       "RX 350",
        2007
       ]
      ],
@@ -4166,11 +4118,143 @@
     "sample": []
    },
    "new_cross_model_likely": {
-    "car_pairs": 397984,
-    "key_pairs": 22,
+    "car_pairs": 856024,
+    "key_pairs": 40,
     "sample": [
      [
       [
+       "Chrysler",
+       "Concorde",
+       2002
+      ],
+      [
+       "Chrysler",
+       "LHS",
+       2000
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "LHS",
+       2000
+      ],
+      [
+       "Chrysler",
+       "Concorde",
+       2002
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Sebring",
+       2004
+      ],
+      [
+       "Dodge",
+       "Stratus",
+       2006
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Town & Country",
+       2005
+      ],
+      [
+       "Dodge",
+       "Caravan",
+       2005
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Town & Country",
+       2005
+      ],
+      [
+       "Dodge",
+       "Grand Caravan",
+       2005
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Caravan",
+       2005
+      ],
+      [
+       "Chrysler",
+       "Town & Country",
+       2005
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Caravan",
+       2005
+      ],
+      [
+       "Dodge",
+       "Grand Caravan",
+       2005
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Grand Caravan",
+       2005
+      ],
+      [
+       "Chrysler",
+       "Town & Country",
+       2005
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Grand Caravan",
+       2005
+      ],
+      [
+       "Dodge",
+       "Caravan",
+       2005
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Stratus",
+       2006
+      ],
+      [
+       "Chrysler",
+       "Sebring",
+       2004
+      ]
+     ],
+     [
+      [
+       "Ford",
+       "Crown Victoria",
+       1997
+      ],
+      [
+       "Mercury",
+       "Grand Marquis",
+       1997
+      ]
+     ],
+     [
+      [
        "Ford",
        "Expedition",
        2000
@@ -4191,6 +4275,30 @@
        "Ford",
        "Expedition",
        2000
+      ]
+     ],
+     [
+      [
+       "Ford",
+       "Fusion",
+       2012
+      ],
+      [
+       "Lincoln",
+       "MKZ",
+       2011
+      ]
+     ],
+     [
+      [
+       "Ford",
+       "Fusion",
+       2012
+      ],
+      [
+       "Lincoln",
+       "MKZ",
+       2012
       ]
      ],
      [
@@ -4359,6 +4467,66 @@
        "Lexus",
        "RX 330",
        2004
+      ]
+     ],
+     [
+      [
+       "Lincoln",
+       "MKZ",
+       2010
+      ],
+      [
+       "Mercury",
+       "Milan",
+       2010
+      ]
+     ],
+     [
+      [
+       "Lincoln",
+       "MKZ",
+       2011
+      ],
+      [
+       "Ford",
+       "Fusion",
+       2012
+      ]
+     ],
+     [
+      [
+       "Lincoln",
+       "MKZ",
+       2012
+      ],
+      [
+       "Ford",
+       "Fusion",
+       2012
+      ]
+     ],
+     [
+      [
+       "Mercury",
+       "Grand Marquis",
+       1997
+      ],
+      [
+       "Ford",
+       "Crown Victoria",
+       1997
+      ]
+     ],
+     [
+      [
+       "Mercury",
+       "Milan",
+       2010
+      ],
+      [
+       "Lincoln",
+       "MKZ",
+       2010
       ]
      ],
      [
@@ -4456,9 +4624,33 @@
     "sample": []
    },
    "new_cross_model_likely": {
-    "car_pairs": 123752,
-    "key_pairs": 24,
+    "car_pairs": 148626,
+    "key_pairs": 26,
     "sample": [
+     [
+      [
+       "Dodge",
+       "Ram 1500",
+       2002
+      ],
+      [
+       "Dodge",
+       "Ram 2500",
+       2003
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Ram 2500",
+       2003
+      ],
+      [
+       "Dodge",
+       "Ram 1500",
+       2002
+      ]
+     ],
      [
       [
        "Lexus",
@@ -4770,7 +4962,7 @@
     "sample": []
    },
    "new_cross_model_likely": {
-    "car_pairs": 111978,
+    "car_pairs": 111990,
     "key_pairs": 26,
     "sample": [
      [
@@ -5108,11 +5300,59 @@
     "sample": []
    },
    "new_cross_model_likely": {
-    "car_pairs": 128948,
+    "car_pairs": 153446,
     "key_pairs": 34,
     "sample": [
      [
       [
+       "Dodge",
+       "Caravan",
+       1999
+      ],
+      [
+       "Dodge",
+       "Grand Caravan",
+       2000
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Grand Caravan",
+       2000
+      ],
+      [
+       "Dodge",
+       "Caravan",
+       1999
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Ram 1500",
+       2002
+      ],
+      [
+       "Dodge",
+       "Ram 2500",
+       2003
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Ram 2500",
+       2003
+      ],
+      [
+       "Dodge",
+       "Ram 1500",
+       2002
+      ]
+     ],
+     [
+      [
        "Lexus",
        "ES 300",
        2002
@@ -5366,18 +5606,6 @@
      [
       [
        "Lexus",
-       "RX 330",
-       2004
-      ],
-      [
-       "Lexus",
-       "RX 400h",
-       2006
-      ]
-     ],
-     [
-      [
-       "Lexus",
        "RX 350",
        2007
       ],
@@ -5385,42 +5613,6 @@
        "Lexus",
        "RX 330",
        2004
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "RX 350",
-       2007
-      ],
-      [
-       "Lexus",
-       "RX 400h",
-       2006
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "RX 400h",
-       2006
-      ],
-      [
-       "Lexus",
-       "RX 330",
-       2004
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "RX 400h",
-       2006
-      ],
-      [
-       "Lexus",
-       "RX 350",
-       2007
       ]
      ],
      [
@@ -5715,8 +5907,8 @@
     "sample": []
    },
    "new_cross_model_likely": {
-    "car_pairs": 1614704,
-    "key_pairs": 122,
+    "car_pairs": 1685166,
+    "key_pairs": 154,
     "sample": [
      [
       [
@@ -5727,19 +5919,7 @@
       [
        "Buick",
        "Regal",
-       2000
-      ]
-     ],
-     [
-      [
-       "Buick",
-       "Century",
        2003
-      ],
-      [
-       "Buick",
-       "Regal",
-       2004
       ]
      ],
      [
@@ -5756,14 +5936,62 @@
      ],
      [
       [
+       "Buick",
+       "Regal",
+       2000
+      ],
+      [
+       "Buick",
+       "Century",
+       2003
+      ]
+     ],
+     [
+      [
+       "Buick",
+       "Regal",
+       2003
+      ],
+      [
+       "Buick",
+       "Century",
+       2003
+      ]
+     ],
+     [
+      [
        "Cadillac",
        "DeVille",
-       1998
+       2004
       ],
       [
        "Cadillac",
        "Seville",
-       1996
+       2003
+      ]
+     ],
+     [
+      [
+       "Cadillac",
+       "Seville",
+       2003
+      ],
+      [
+       "Cadillac",
+       "DeVille",
+       2004
+      ]
+     ],
+     [
+      [
+       "Chevrolet",
+       "Astro",
+       2000
+      ],
+      [
+       "GMC",
+       "Safari",
+       2001
       ]
      ],
      [
@@ -5776,78 +6004,6 @@
        "Cadillac",
        "Escalade",
        2007
-      ]
-     ],
-     [
-      [
-       "Chevrolet",
-       "Avalanche",
-       2007
-      ],
-      [
-       "Chevrolet",
-       "Silverado",
-       2008
-      ]
-     ],
-     [
-      [
-       "Chevrolet",
-       "Avalanche",
-       2007
-      ],
-      [
-       "Chevrolet",
-       "Silverado",
-       2012
-      ]
-     ],
-     [
-      [
-       "Chevrolet",
-       "Avalanche",
-       2007
-      ],
-      [
-       "Chevrolet",
-       "Tahoe",
-       2007
-      ]
-     ],
-     [
-      [
-       "Chevrolet",
-       "Cavalier",
-       2003
-      ],
-      [
-       "Pontiac",
-       "Sunfire",
-       1999
-      ]
-     ],
-     [
-      [
-       "Chevrolet",
-       "Colorado",
-       2005
-      ],
-      [
-       "GMC",
-       "Canyon",
-       2005
-      ]
-     ],
-     [
-      [
-       "Chevrolet",
-       "Colorado",
-       2005
-      ],
-      [
-       "GMC",
-       "Canyon",
-       2011
       ]
      ],
      [
@@ -5866,6 +6022,18 @@
       [
        "Chevrolet",
        "Silverado",
+       1999
+      ],
+      [
+       "GMC",
+       "Sierra",
+       2004
+      ]
+     ],
+     [
+      [
+       "Chevrolet",
+       "Silverado",
        2008
       ],
       [
@@ -5889,18 +6057,6 @@
      [
       [
        "Chevrolet",
-       "Trailblazer",
-       2004
-      ],
-      [
-       "Buick",
-       "Rainier",
-       2004
-      ]
-     ],
-     [
-      [
-       "Chevrolet",
        "Uplander",
        2008
       ],
@@ -5912,25 +6068,73 @@
      ],
      [
       [
+       "Chevrolet",
+       "Venture",
+       2004
+      ],
+      [
+       "Chevrolet",
+       "Uplander",
+       2008
+      ]
+     ],
+     [
+      [
+       "Chevrolet",
+       "Venture",
+       2004
+      ],
+      [
+       "Pontiac",
+       "Montana",
+       2004
+      ]
+     ],
+     [
+      [
        "Chrysler",
        "300",
        2006
       ],
       [
        "Dodge",
-       "Charger",
-       2007
+       "Magnum",
+       2005
       ]
      ],
      [
       [
        "Chrysler",
-       "Town & Country",
-       1998
+       "300M",
+       2002
       ],
       [
-       "Dodge",
-       "Grand Caravan",
+       "Chrysler",
+       "Concorde",
+       2002
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Concorde",
+       2002
+      ],
+      [
+       "Chrysler",
+       "300M",
+       2002
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "LHS",
+       2000
+      ],
+      [
+       "Chrysler",
+       "300M",
        2000
       ]
      ],
@@ -5942,14 +6146,14 @@
       ],
       [
        "Dodge",
-       "Grand Caravan",
-       2004
+       "Caravan",
+       2005
       ]
      ],
      [
       [
-       "Dodge",
-       "Caravan",
+       "Chrysler",
+       "Town & Country",
        2005
       ],
       [
@@ -5960,26 +6164,50 @@
      ],
      [
       [
+       "Chrysler",
+       "Voyager",
+       2003
+      ],
+      [
        "Dodge",
        "Caravan",
        2005
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Voyager",
+       2003
       ],
       [
        "Dodge",
        "Grand Caravan",
-       2007
+       2004
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Voyager",
+       2003
+      ],
+      [
+       "Dodge",
+       "Grand Caravan",
+       2005
       ]
      ],
      [
       [
        "Dodge",
-       "Charger",
-       2007
+       "Caravan",
+       2005
       ],
       [
        "Chrysler",
-       "300",
-       2006
+       "Voyager",
+       2003
       ]
      ],
      [
@@ -5997,13 +6225,13 @@
      [
       [
        "Dodge",
-       "Grand Caravan",
-       2000
+       "Durango",
+       2003
       ],
       [
-       "Chrysler",
-       "Town & Country",
-       1998
+       "Dodge",
+       "Dakota",
+       2000
       ]
      ],
      [
@@ -6013,33 +6241,9 @@
        2004
       ],
       [
-       "Dodge",
-       "Caravan",
-       2005
-      ]
-     ],
-     [
-      [
-       "Dodge",
-       "Grand Caravan",
-       2005
-      ],
-      [
        "Chrysler",
-       "Town & Country",
-       2005
-      ]
-     ],
-     [
-      [
-       "Dodge",
-       "Grand Caravan",
-       2005
-      ],
-      [
-       "Dodge",
-       "Caravan",
-       2005
+       "Voyager",
+       2003
       ]
      ],
      [
@@ -6064,18 +6268,6 @@
        "Dodge",
        "Caravan",
        2005
-      ]
-     ],
-     [
-      [
-       "Dodge",
-       "Grand Caravan",
-       2010
-      ],
-      [
-       "Chrysler",
-       "Town & Country",
-       2008
       ]
      ],
      [
@@ -6092,38 +6284,38 @@
      ],
      [
       [
-       "Ford",
-       "Explorer Sport",
-       2001
+       "Dodge",
+       "Ram 1500",
+       2002
       ],
       [
-       "Ford",
-       "Explorer",
-       1999
+       "Dodge",
+       "Ram 2500",
+       2003
       ]
      ],
      [
       [
        "Ford",
-       "Explorer Sport",
-       2001
+       "Five Hundred",
+       2005
       ],
       [
        "Mercury",
-       "Mountaineer",
-       2000
+       "Montego",
+       2005
       ]
      ],
      [
       [
-       "Ford",
-       "Explorer",
-       1999
+       "GMC",
+       "Canyon",
+       2005
       ],
       [
-       "Mercury",
-       "Mountaineer",
-       2000
+       "Chevrolet",
+       "Colorado",
+       2005
       ]
      ],
      [
@@ -6147,7 +6339,31 @@
       [
        "Chevrolet",
        "Silverado",
-       2000
+       1999
+      ]
+     ],
+     [
+      [
+       "GMC",
+       "Sonoma",
+       1996
+      ],
+      [
+       "GMC",
+       "Jimmy",
+       1998
+      ]
+     ],
+     [
+      [
+       "GMC",
+       "Yukon",
+       2003
+      ],
+      [
+       "GMC",
+       "Sierra",
+       2004
       ]
      ],
      [
@@ -6158,8 +6374,8 @@
       ],
       [
        "Lexus",
-       "GS 430",
-       2006
+       "GS 350",
+       2007
       ]
      ],
      [
@@ -6183,30 +6399,6 @@
       [
        "Lexus",
        "GS 300",
-       2006
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "GS 430",
-       2006
-      ],
-      [
-       "Lexus",
-       "GS 350",
-       2007
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "IS 250",
-       2007
-      ],
-      [
-       "Lexus",
-       "IS 350",
        2006
       ]
      ],
@@ -6225,13 +6417,25 @@
      [
       [
        "Lexus",
+       "IS 350",
+       2012
+      ],
+      [
+       "Lexus",
+       "IS 250",
+       2013
+      ]
+     ],
+     [
+      [
+       "Lexus",
        "RX 330",
        2004
       ],
       [
        "Lexus",
-       "RX 350",
-       2007
+       "RX 400h",
+       2006
       ]
      ],
      [
@@ -6242,8 +6446,8 @@
       ],
       [
        "Lexus",
-       "RX 330",
-       2004
+       "RX 400h",
+       2006
       ]
      ],
      [
@@ -6254,32 +6458,20 @@
       ],
       [
        "Lexus",
-       "RX 330",
-       2004
-      ]
-     ],
-     [
-      [
-       "Mercury",
-       "Mountaineer",
-       2000
-      ],
-      [
-       "Ford",
-       "Explorer",
-       1999
+       "RX 350",
+       2007
       ]
      ],
      [
       [
        "Pontiac",
-       "G5",
-       2007
+       "Sunfire",
+       1999
       ],
       [
        "Chevrolet",
-       "Cobalt",
-       2007
+       "Cavalier",
+       2003
       ]
      ],
      [
@@ -6296,14 +6488,14 @@
      ],
      [
       [
-       "Toyota",
-       "Camry Hybrid",
-       2011
+       "Saturn",
+       "Outlook",
+       2008
       ],
       [
-       "Toyota",
-       "Camry",
-       2011
+       "GMC",
+       "Acadia",
+       2012
       ]
      ],
      [
@@ -6366,9 +6558,33 @@
     "sample": []
    },
    "new_cross_model_likely": {
-    "car_pairs": 18610,
-    "key_pairs": 18,
+    "car_pairs": 43484,
+    "key_pairs": 20,
     "sample": [
+     [
+      [
+       "Dodge",
+       "Ram 1500",
+       2002
+      ],
+      [
+       "Dodge",
+       "Ram 2500",
+       2003
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Ram 2500",
+       2003
+      ],
+      [
+       "Dodge",
+       "Ram 1500",
+       2002
+      ]
+     ],
      [
       [
        "Lexus",
@@ -6950,8 +7166,8 @@
     "sample": []
    },
    "new_cross_model_likely": {
-    "car_pairs": 2328544,
-    "key_pairs": 222,
+    "car_pairs": 2374030,
+    "key_pairs": 246,
     "sample": [
      [
       [
@@ -6967,14 +7183,38 @@
      ],
      [
       [
+       "Buick",
+       "Regal",
+       2004
+      ],
+      [
+       "Buick",
+       "Century",
+       2003
+      ]
+     ],
+     [
+      [
        "Cadillac",
        "Escalade",
        2007
       ],
       [
        "Chevrolet",
-       "Silverado",
-       2000
+       "Avalanche",
+       2007
+      ]
+     ],
+     [
+      [
+       "Cadillac",
+       "Escalade",
+       2007
+      ],
+      [
+       "Chevrolet",
+       "Tahoe",
+       2007
       ]
      ],
      [
@@ -6998,7 +7238,7 @@
       [
        "GMC",
        "Safari",
-       1997
+       2001
       ]
      ],
      [
@@ -7010,43 +7250,31 @@
       [
        "Chevrolet",
        "Silverado",
-       2012
-      ]
-     ],
-     [
-      [
-       "Chevrolet",
-       "Camaro",
-       1995
-      ],
-      [
-       "Pontiac",
-       "Firebird",
-       1995
-      ]
-     ],
-     [
-      [
-       "Chevrolet",
-       "Cavalier",
-       2003
-      ],
-      [
-       "Pontiac",
-       "Sunfire",
        1999
       ]
      ],
      [
       [
        "Chevrolet",
-       "Colorado",
-       2005
+       "Blazer",
+       2001
       ],
       [
        "GMC",
-       "Canyon",
-       2005
+       "Jimmy",
+       1998
+      ]
+     ],
+     [
+      [
+       "Chevrolet",
+       "Cobalt",
+       2007
+      ],
+      [
+       "Pontiac",
+       "G5",
+       2007
       ]
      ],
      [
@@ -7064,6 +7292,18 @@
      [
       [
        "Chevrolet",
+       "Malibu",
+       2020
+      ],
+      [
+       "Chevrolet",
+       "Equinox",
+       2018
+      ]
+     ],
+     [
+      [
+       "Chevrolet",
        "Silverado",
        1999
       ],
@@ -7077,43 +7317,7 @@
       [
        "Chevrolet",
        "Silverado",
-       2000
-      ],
-      [
-       "Chevrolet",
-       "Avalanche",
-       2007
-      ]
-     ],
-     [
-      [
-       "Chevrolet",
-       "Silverado",
        2008
-      ],
-      [
-       "Cadillac",
-       "Escalade",
-       2007
-      ]
-     ],
-     [
-      [
-       "Chevrolet",
-       "Silverado",
-       2008
-      ],
-      [
-       "Chevrolet",
-       "Avalanche",
-       2007
-      ]
-     ],
-     [
-      [
-       "Chevrolet",
-       "Silverado",
-       2012
       ],
       [
        "GMC",
@@ -7124,13 +7328,73 @@
      [
       [
        "Chevrolet",
-       "Trailblazer",
-       2004
+       "Trax",
+       2016
       ],
       [
        "Buick",
-       "Rainier",
-       2004
+       "Encore",
+       2015
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "300",
+       2006
+      ],
+      [
+       "Dodge",
+       "Charger",
+       2007
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "300",
+       2011
+      ],
+      [
+       "Dodge",
+       "Charger",
+       2013
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Concorde",
+       2002
+      ],
+      [
+       "Chrysler",
+       "300M",
+       2002
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Town & Country",
+       1998
+      ],
+      [
+       "Dodge",
+       "Caravan",
+       1999
+      ]
+     ],
+     [
+      [
+       "Chrysler",
+       "Town & Country",
+       1999
+      ],
+      [
+       "Dodge",
+       "Grand Caravan",
+       2000
       ]
      ],
      [
@@ -7142,7 +7406,7 @@
       [
        "Dodge",
        "Grand Caravan",
-       2005
+       2004
       ]
      ],
      [
@@ -7166,7 +7430,7 @@
       [
        "Chrysler",
        "Town & Country",
-       1998
+       1999
       ]
      ],
      [
@@ -7178,19 +7442,7 @@
       [
        "Dodge",
        "Grand Caravan",
-       2005
-      ]
-     ],
-     [
-      [
-       "Dodge",
-       "Durango",
-       2013
-      ],
-      [
-       "Jeep",
-       "Grand Cherokee",
-       2011
+       2007
       ]
      ],
      [
@@ -7202,7 +7454,31 @@
       [
        "Chrysler",
        "Town & Country",
-       1999
+       1998
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Grand Caravan",
+       2004
+      ],
+      [
+       "Dodge",
+       "Caravan",
+       2005
+      ]
+     ],
+     [
+      [
+       "Dodge",
+       "Grand Caravan",
+       2005
+      ],
+      [
+       "Chrysler",
+       "Town & Country",
+       2005
       ]
      ],
      [
@@ -7212,8 +7488,8 @@
        2007
       ],
       [
-       "Dodge",
-       "Caravan",
+       "Chrysler",
+       "Town & Country",
        2005
       ]
      ],
@@ -7232,49 +7508,37 @@
      [
       [
        "Dodge",
-       "Magnum",
-       2005
+       "Intrepid",
+       2004
       ],
       [
-       "Dodge",
-       "Charger",
-       2007
+       "Chrysler",
+       "300M",
+       2002
       ]
      ],
      [
-      [
-       "Ford",
-       "Explorer Sport",
-       2001
-      ],
       [
        "Ford",
        "Explorer Sport Trac",
        2001
-      ]
-     ],
-     [
-      [
-       "Ford",
-       "Five Hundred",
-       2005
       ],
       [
-       "Mercury",
-       "Montego",
-       2005
+       "Ford",
+       "Explorer Sport",
+       2001
       ]
      ],
      [
       [
        "Ford",
        "Focus",
-       2012
+       2015
       ],
       [
        "Ford",
-       "C-Max",
-       2013
+       "Transit Connect",
+       2015
       ]
      ],
      [
@@ -7286,18 +7550,6 @@
       [
        "Ford",
        "Five Hundred",
-       2005
-      ]
-     ],
-     [
-      [
-       "Ford",
-       "Taurus X",
-       2008
-      ],
-      [
-       "Mercury",
-       "Montego",
        2005
       ]
      ],
@@ -7316,20 +7568,8 @@
      [
       [
        "GMC",
-       "Jimmy",
-       1998
-      ],
-      [
-       "GMC",
-       "Sonoma",
-       1996
-      ]
-     ],
-     [
-      [
-       "GMC",
        "Safari",
-       2000
+       1997
       ],
       [
        "Chevrolet",
@@ -7344,16 +7584,40 @@
        2004
       ],
       [
-       "Chevrolet",
-       "Silverado",
-       2012
+       "Cadillac",
+       "Escalade",
+       2007
       ]
      ],
      [
       [
        "Lexus",
-       "GS 300",
+       "ES 300",
+       2002
+      ],
+      [
+       "Lexus",
+       "RX 330",
+       2004
+      ]
+     ],
+     [
+      [
+       "Lexus",
+       "GS 430",
        2006
+      ],
+      [
+       "Lexus",
+       "IS 250",
+       2007
+      ]
+     ],
+     [
+      [
+       "Lexus",
+       "IS 250",
+       2007
       ],
       [
        "Lexus",
@@ -7369,39 +7633,15 @@
       ],
       [
        "Lexus",
-       "RX 330",
-       2004
+       "GS 430",
+       2006
       ]
      ],
      [
-      [
-       "Lexus",
-       "IS 350",
-       2006
-      ],
       [
        "Lexus",
        "IS 250",
        2007
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "IS 350",
-       2006
-      ],
-      [
-       "Lexus",
-       "LS 460",
-       2007
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "IS 350",
-       2006
       ],
       [
        "Lexus",
@@ -7417,42 +7657,6 @@
       ],
       [
        "Lexus",
-       "LS 460",
-       2007
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "LS 460",
-       2007
-      ],
-      [
-       "Lexus",
-       "IS 250",
-       2007
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "RX 330",
-       2004
-      ],
-      [
-       "Lexus",
-       "ES 300",
-       2002
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "RX 330",
-       2004
-      ],
-      [
-       "Lexus",
        "GS 350",
        2007
       ]
@@ -7460,12 +7664,24 @@
      [
       [
        "Lexus",
-       "RX 350",
+       "LS 460",
        2007
       ],
       [
        "Lexus",
-       "RX 400h",
+       "GS 430",
+       2006
+      ]
+     ],
+     [
+      [
+       "Lexus",
+       "LS 460",
+       2007
+      ],
+      [
+       "Lexus",
+       "IS 350",
        2006
       ]
      ],
@@ -7479,18 +7695,6 @@
        "Lexus",
        "ES 300",
        2002
-      ]
-     ],
-     [
-      [
-       "Lexus",
-       "RX 400h",
-       2006
-      ],
-      [
-       "Lexus",
-       "RX 350",
-       2007
       ]
      ],
      [
@@ -7507,14 +7711,14 @@
      ],
      [
       [
-       "Oldsmobile",
-       "Alero",
-       2001
-      ],
-      [
        "Pontiac",
-       "Bonneville",
-       2002
+       "Torrent",
+       2006
+      ],
+      [
+       "Chevrolet",
+       "Equinox",
+       2005
       ]
      ],
      [
@@ -7545,12 +7749,24 @@
       [
        "Toyota",
        "Camry",
-       2015
+       2007
       ],
       [
        "Toyota",
        "Camry Hybrid",
-       2015
+       2007
+      ]
+     ],
+     [
+      [
+       "Toyota",
+       "Camry",
+       2012
+      ],
+      [
+       "Toyota",
+       "Camry Hybrid",
+       2012
       ]
      ]
     ]
@@ -8596,320 +8812,336 @@
    }
   }
  },
- "inventory_scraped_at": "2026-11-09T01:23:33Z",
+ "inventory_scraped_at": "2026-11-09T02:41:17Z",
  "method": "CURATION_SPEC.md §10.1: every lot car is a seeker for its own (make, model, year) and, on engine kinds, its decoded engine family; donors are the other lot cars; tiers from a Python port of docs/app.js pfRunSearch (view old = main today, view new = P0 guards + Phase 1 OEM keys)",
  "oem_funnel": {
   "blocked_by": {
-   "chain_member_conditional:chain_member_conditional": 337,
-   "conditional:conditional:body": 203,
+   "conditional:conditional:colour": 72,
+   "conditional:conditional:engine": 38,
    "conditional:conditional:engine_unattested": 45,
-   "conditional:conditional:fitted_not_listed": 175,
-   "conditional:conditional:model_other": 7,
-   "conditional:conditional:option": 8,
-   "conditional:conditional:option_layout": 140,
-   "conditional:conditional:trim": 1939,
-   "no_records": 1911578,
-   "not_closed:ambig_target": 86176,
-   "not_closed:list_manifest_bad": 1176,
-   "not_closed:no_list_manifest": 192777,
-   "not_closed:no_year_manifest": 4069750,
+   "conditional:conditional:model_other": 491,
+   "conditional:conditional:option": 24,
+   "conditional:conditional:position": 17,
+   "conditional:conditional:trim": 1042,
+   "gated:category_unconfirmed": 20,
+   "no_records": 2013206,
+   "not_closed:ambig_target": 139663,
+   "not_closed:list_manifest_bad": 1246,
+   "not_closed:no_list_manifest": 476592,
+   "not_closed:no_year_manifest": 4441129,
+   "not_closed:site_blocked": 4896,
    "not_closed:stale": 130,
-   "not_closed:suspect_variant": 2663,
-   "not_closed:unattested": 44397,
-   "not_closed:uncrawled_chain_member": 35732,
-   "not_closed:unread_sibling_page": 183409,
-   "not_closed:unverified_product": 58975,
-   "not_closed:variant_unread": 71579,
-   "not_closed:year_manifest_bad": 69117,
-   "split:no_candidates": 371,
-   "split:option_split": 2081,
-   "split:packaging_unstated": 973,
-   "split:position_conflict": 2,
-   "unmapped": 470342
+   "not_closed:suspect_variant": 2940,
+   "not_closed:unattested": 51574,
+   "not_closed:uncrawled_chain_member": 37268,
+   "not_closed:unread_sibling_page": 280665,
+   "not_closed:unverified_product": 57432,
+   "not_closed:variant_unread": 79675,
+   "not_closed:year_manifest_bad": 83305,
+   "split:no_candidates": 272,
+   "split:option_split": 788,
+   "split:packaging_unstated": 667,
+   "split:slot_missing": 7,
+   "unmapped": 680473
   },
   "by_cat": {
    "ac-compressor": {
     "no_records": {
-     "": 35761
+     "": 28978
     },
     "not_closed": {
-     "ambig_target": 7000,
-     "no_list_manifest": 16184,
-     "no_year_manifest": 229632,
+     "ambig_target": 7071,
+     "list_manifest_bad": 7,
+     "no_list_manifest": 30219,
+     "no_year_manifest": 221045,
+     "site_blocked": 67,
      "stale": 26,
-     "suspect_variant": 305,
-     "unattested": 283,
-     "uncrawled_chain_member": 3499,
-     "unread_sibling_page": 543,
-     "unverified_product": 6412,
-     "variant_unread": 3087,
-     "year_manifest_bad": 3139
-    },
-    "split": {
-     "no_candidates": 47
+     "suspect_variant": 230,
+     "unattested": 296,
+     "uncrawled_chain_member": 2680,
+     "unread_sibling_page": 2563,
+     "unverified_product": 5632,
+     "variant_unread": 3469,
+     "year_manifest_bad": 3632
     },
     "unmapped": {
-     "": 27926
+     "": 27927
     }
    },
    "alternator": {
     "no_records": {
-     "": 29370
+     "": 26179
     },
     "not_closed": {
      "ambig_target": 6293,
-     "no_list_manifest": 16190,
-     "no_year_manifest": 236701,
-     "suspect_variant": 987,
-     "unattested": 71,
+     "list_manifest_bad": 7,
+     "no_list_manifest": 30280,
+     "no_year_manifest": 224711,
+     "site_blocked": 40,
+     "suspect_variant": 578,
+     "unattested": 47,
      "uncrawled_chain_member": 764,
-     "unread_sibling_page": 1859,
-     "unverified_product": 7275,
-     "variant_unread": 3087,
-     "year_manifest_bad": 3321
+     "unread_sibling_page": 3872,
+     "unverified_product": 6032,
+     "variant_unread": 3469,
+     "year_manifest_bad": 3643
     },
     "unmapped": {
-     "": 27926
+     "": 27927
     }
    },
    "bumper-front": {
     "no_records": {
-     "": 71383
+     "": 59122
     },
     "not_closed": {
-     "ambig_target": 298,
+     "ambig_target": 5055,
      "list_manifest_bad": 98,
-     "no_list_manifest": 218,
-     "no_year_manifest": 144366,
-     "unread_sibling_page": 17132,
-     "variant_unread": 3087,
-     "year_manifest_bad": 3533
+     "no_list_manifest": 13193,
+     "no_year_manifest": 194143,
+     "unread_sibling_page": 26350,
+     "variant_unread": 3469,
+     "year_manifest_bad": 4485
     },
     "unmapped": {
-     "": 12092
+     "": 27927
     }
    },
    "bumper-rear": {
     "no_records": {
-     "": 62541
+     "": 50741
     },
     "not_closed": {
-     "ambig_target": 414,
+     "ambig_target": 4620,
      "list_manifest_bad": 98,
-     "no_list_manifest": 248,
-     "no_year_manifest": 152999,
-     "unread_sibling_page": 17132,
-     "variant_unread": 3087,
-     "year_manifest_bad": 3596
+     "no_list_manifest": 12647,
+     "no_year_manifest": 203482,
+     "unread_sibling_page": 26344,
+     "variant_unread": 3469,
+     "year_manifest_bad": 4514
     },
     "unmapped": {
-     "": 12092
+     "": 27927
     }
    },
    "climate-control": {
     "no_records": {
-     "": 92452
+     "": 88116
     },
     "not_closed": {
-     "ambig_target": 7103,
-     "no_list_manifest": 15226,
-     "no_year_manifest": 175273,
-     "unread_sibling_page": 9165,
-     "variant_unread": 3087,
-     "year_manifest_bad": 1917
+     "ambig_target": 7116,
+     "no_list_manifest": 27600,
+     "no_year_manifest": 166187,
+     "unread_sibling_page": 9525,
+     "variant_unread": 3449,
+     "year_manifest_bad": 2227
     },
     "unmapped": {
-     "": 24817
+     "": 24818
     }
    },
    "door-front": {
     "no_records": {
-     "": 73046
+     "": 55285
     },
     "not_closed": {
-     "ambig_target": 143,
+     "ambig_target": 6573,
      "list_manifest_bad": 98,
-     "no_list_manifest": 178,
-     "no_year_manifest": 134395,
-     "unread_sibling_page": 15418,
-     "variant_unread": 3087,
-     "year_manifest_bad": 3546
+     "no_list_manifest": 12655,
+     "no_year_manifest": 188657,
+     "unread_sibling_page": 24630,
+     "variant_unread": 3469,
+     "year_manifest_bad": 4344
     },
     "unmapped": {
-     "": 8264
+     "": 24099
     }
    },
    "door-rear": {
     "no_records": {
-     "": 76673
+     "": 73198
     },
     "not_closed": {
-     "ambig_target": 143,
+     "ambig_target": 3214,
      "list_manifest_bad": 98,
-     "no_list_manifest": 119,
-     "no_year_manifest": 132108,
-     "unread_sibling_page": 15088,
-     "variant_unread": 3087,
-     "year_manifest_bad": 2595
+     "no_list_manifest": 11909,
+     "no_year_manifest": 176526,
+     "unread_sibling_page": 24054,
+     "variant_unread": 3469,
+     "year_manifest_bad": 3243
     },
     "unmapped": {
-     "": 8264
+     "": 24099
     }
    },
    "fender": {
     "conditional": {
      "conditional:engine_unattested": 16,
-     "conditional:trim": 296
+     "conditional:trim": 304
     },
     "no_records": {
-     "": 84785
+     "": 84249
     },
     "not_closed": {
-     "ambig_target": 298,
+     "ambig_target": 4521,
      "list_manifest_bad": 98,
-     "no_list_manifest": 179,
-     "no_year_manifest": 130897,
-     "unattested": 5181,
-     "uncrawled_chain_member": 2572,
-     "unread_sibling_page": 5841,
-     "unverified_product": 3219,
-     "variant_unread": 3087,
-     "year_manifest_bad": 3639
+     "no_list_manifest": 11010,
+     "no_year_manifest": 171793,
+     "site_blocked": 379,
+     "unattested": 6261,
+     "uncrawled_chain_member": 3394,
+     "unread_sibling_page": 11683,
+     "unverified_product": 4049,
+     "variant_unread": 3449,
+     "year_manifest_bad": 4488
     },
     "split": {
+     "no_candidates": 214,
      "option_split": 7
     },
     "unmapped": {
-     "": 12092
+     "": 27927
     }
    },
    "fuel-pump-module": {
     "no_records": {
-     "": 68660
+     "": 64924
     },
     "not_closed": {
-     "ambig_target": 6562,
-     "no_list_manifest": 14807,
-     "no_year_manifest": 198461,
-     "unread_sibling_page": 11114,
-     "variant_unread": 3087,
-     "year_manifest_bad": 1532
+     "ambig_target": 6578,
+     "list_manifest_bad": 7,
+     "no_list_manifest": 28923,
+     "no_year_manifest": 187172,
+     "unread_sibling_page": 11493,
+     "variant_unread": 3469,
+     "year_manifest_bad": 1654
     },
     "unmapped": {
-     "": 24817
+     "": 24818
     }
    },
    "gauge-cluster": {
     "no_records": {
-     "": 122485
+     "": 139603
     },
     "not_closed": {
-     "ambig_target": 259,
+     "ambig_target": 3602,
      "list_manifest_bad": 98,
-     "no_list_manifest": 52,
-     "no_year_manifest": 93397,
+     "no_list_manifest": 11938,
+     "no_year_manifest": 116541,
      "suspect_variant": 85,
      "unattested": 560,
-     "unread_sibling_page": 16483,
-     "variant_unread": 3087,
-     "year_manifest_bad": 3609
+     "unread_sibling_page": 25522,
+     "variant_unread": 3449,
+     "year_manifest_bad": 4517
     },
     "unmapped": {
-     "": 12092
+     "": 27927
     }
    },
    "grille": {
     "conditional": {
+     "conditional:colour": 72,
+     "conditional:engine": 20,
      "conditional:engine_unattested": 2,
-     "conditional:trim": 57
+     "conditional:model_other": 484,
+     "conditional:position": 17,
+     "conditional:trim": 338
+    },
+    "gated": {
+     "category_unconfirmed": 20
     },
     "no_records": {
-     "": 112451
+     "": 102227
     },
     "not_closed": {
-     "ambig_target": 298,
+     "ambig_target": 4800,
      "list_manifest_bad": 98,
-     "no_list_manifest": 131,
-     "no_year_manifest": 103583,
-     "suspect_variant": 4,
-     "unattested": 9099,
-     "uncrawled_chain_member": 4438,
-     "unread_sibling_page": 1115,
-     "unverified_product": 2232,
-     "variant_unread": 3087,
-     "year_manifest_bad": 3375
+     "no_list_manifest": 12447,
+     "no_year_manifest": 152253,
+     "suspect_variant": 405,
+     "unattested": 10156,
+     "uncrawled_chain_member": 4855,
+     "unread_sibling_page": 5530,
+     "unverified_product": 3786,
+     "variant_unread": 3449,
+     "year_manifest_bad": 4331
     },
     "split": {
-     "option_split": 145
+     "no_candidates": 41,
+     "option_split": 584
     },
     "unmapped": {
-     "": 12092
+     "": 27927
     }
    },
    "headlights": {
     "no_records": {
-     "": 57108
+     "": 53923
     },
     "not_closed": {
-     "ambig_target": 6962,
-     "no_list_manifest": 15917,
-     "no_year_manifest": 208312,
-     "unattested": 790,
-     "uncrawled_chain_member": 953,
-     "unread_sibling_page": 9154,
+     "ambig_target": 7295,
+     "list_manifest_bad": 7,
+     "no_list_manifest": 29246,
+     "no_year_manifest": 196338,
+     "site_blocked": 140,
+     "suspect_variant": 12,
+     "unattested": 770,
+     "uncrawled_chain_member": 973,
+     "unread_sibling_page": 9515,
      "unverified_product": 51,
-     "variant_unread": 2784,
-     "year_manifest_bad": 3747
-    },
-    "split": {
-     "no_candidates": 140
+     "variant_unread": 3166,
+     "year_manifest_bad": 4479
     },
     "unmapped": {
-     "": 27926
+     "": 27927
     }
    },
    "hood": {
     "conditional": {
+     "conditional:engine": 18,
      "conditional:engine_unattested": 27,
-     "conditional:trim": 163
+     "conditional:option": 16,
+     "conditional:trim": 171
     },
     "no_records": {
-     "": 62086
+     "": 51407
     },
     "not_closed": {
-     "ambig_target": 298,
+     "ambig_target": 4471,
      "list_manifest_bad": 98,
-     "no_list_manifest": 179,
-     "no_year_manifest": 153634,
-     "unattested": 5718,
-     "uncrawled_chain_member": 2679,
-     "unread_sibling_page": 6380,
-     "unverified_product": 2165,
-     "variant_unread": 3087,
-     "year_manifest_bad": 3601
+     "no_list_manifest": 11725,
+     "no_year_manifest": 203913,
+     "suspect_variant": 401,
+     "unattested": 7521,
+     "uncrawled_chain_member": 2477,
+     "unread_sibling_page": 12002,
+     "unverified_product": 3727,
+     "variant_unread": 3449,
+     "year_manifest_bad": 4492
     },
     "unmapped": {
-     "": 12092
+     "": 27927
     }
    },
    "ignition-coils": {
     "no_records": {
-     "": 25237
+     "": 24390
     },
     "not_closed": {
-     "ambig_target": 160,
+     "ambig_target": 5595,
      "list_manifest_bad": 98,
-     "no_list_manifest": 7116,
-     "no_year_manifest": 184806,
+     "no_list_manifest": 14967,
+     "no_year_manifest": 228120,
      "unattested": 69,
-     "uncrawled_chain_member": 2173,
-     "unread_sibling_page": 1666,
-     "unverified_product": 13224,
-     "variant_unread": 3087,
-     "year_manifest_bad": 2479
+     "uncrawled_chain_member": 2298,
+     "unread_sibling_page": 8566,
+     "unverified_product": 15392,
+     "variant_unread": 3469,
+     "year_manifest_bad": 2951
     },
     "unmapped": {
-     "": 12092
+     "": 27927
     }
    },
    "liftgate": {
@@ -8917,61 +9149,62 @@
      "conditional:trim": 2
     },
     "no_records": {
-     "": 164102
+     "": 193169
     },
     "not_closed": {
-     "ambig_target": 143,
+     "ambig_target": 4599,
      "list_manifest_bad": 98,
-     "no_list_manifest": 79,
-     "no_year_manifest": 53061,
+     "no_list_manifest": 4913,
+     "no_year_manifest": 74582,
      "unattested": 2529,
      "uncrawled_chain_member": 559,
-     "unread_sibling_page": 9956,
+     "unread_sibling_page": 15234,
      "unverified_product": 2,
-     "variant_unread": 1835,
-     "year_manifest_bad": 2633
+     "variant_unread": 1855,
+     "year_manifest_bad": 3257
     },
     "split": {
      "no_candidates": 7
     },
     "unmapped": {
-     "": 11765
+     "": 27600
     }
    },
    "power-steering-pump": {
     "no_records": {
-     "": 114433
+     "": 111947
     },
     "not_closed": {
-     "ambig_target": 6892,
-     "no_list_manifest": 9636,
-     "no_year_manifest": 163505,
-     "unread_sibling_page": 8922,
-     "variant_unread": 412,
-     "year_manifest_bad": 2118
+     "ambig_target": 6935,
+     "list_manifest_bad": 7,
+     "no_list_manifest": 19008,
+     "no_year_manifest": 155580,
+     "unread_sibling_page": 9301,
+     "variant_unread": 586,
+     "year_manifest_bad": 2551
     },
     "unmapped": {
-     "": 27926
+     "": 27927
     }
    },
    "radiator": {
     "no_records": {
-     "": 54994
+     "": 38410
     },
     "not_closed": {
-     "ambig_target": 459,
+     "ambig_target": 7263,
      "list_manifest_bad": 98,
-     "no_list_manifest": 2122,
-     "no_year_manifest": 158704,
-     "unattested": 2661,
-     "uncrawled_chain_member": 6212,
-     "unread_sibling_page": 6447,
-     "unverified_product": 1775,
-     "variant_unread": 3087,
-     "year_manifest_bad": 3556
+     "no_list_manifest": 13995,
+     "no_year_manifest": 211979,
+     "unattested": 2856,
+     "uncrawled_chain_member": 7793,
+     "unread_sibling_page": 13664,
+     "unverified_product": 2017,
+     "variant_unread": 3469,
+     "year_manifest_bad": 4371
     },
     "unmapped": {
-     "": 12092
+     "": 27927
     }
    },
    "side-mirrors": {
@@ -8979,135 +9212,137 @@
      "conditional:option": 8
     },
     "no_records": {
-     "": 33649
+     "": 31698
     },
     "not_closed": {
      "ambig_target": 7432,
-     "no_list_manifest": 16213,
-     "no_year_manifest": 229622,
+     "no_list_manifest": 30456,
+     "no_year_manifest": 215739,
+     "site_blocked": 80,
      "suspect_variant": 26,
-     "unattested": 113,
+     "unattested": 99,
      "uncrawled_chain_member": 416,
-     "unread_sibling_page": 8042,
-     "unverified_product": 1932,
-     "variant_unread": 3087,
-     "year_manifest_bad": 3636
-    },
-    "split": {
-     "no_candidates": 45,
-     "position_conflict": 2
+     "unread_sibling_page": 10388,
+     "variant_unread": 3469,
+     "year_manifest_bad": 4409
     },
     "unmapped": {
-     "": 24817
+     "": 24818
     }
    },
    "starter": {
     "no_records": {
-     "": 32851
+     "": 31516
     },
     "not_closed": {
-     "ambig_target": 6989,
-     "no_list_manifest": 16193,
-     "no_year_manifest": 234701,
+     "ambig_target": 7010,
+     "list_manifest_bad": 7,
+     "no_list_manifest": 30188,
+     "no_year_manifest": 221306,
+     "site_blocked": 13,
      "stale": 26,
-     "suspect_variant": 862,
+     "suspect_variant": 773,
      "unattested": 129,
-     "uncrawled_chain_member": 560,
-     "unread_sibling_page": 1874,
-     "unverified_product": 7580,
-     "variant_unread": 3087,
-     "year_manifest_bad": 1066
+     "uncrawled_chain_member": 577,
+     "unread_sibling_page": 3806,
+     "unverified_product": 6026,
+     "variant_unread": 3469,
+     "year_manifest_bad": 1069
     },
     "unmapped": {
-     "": 27926
+     "": 27927
     }
    },
    "tail-lights": {
     "conditional": {
-     "conditional:body": 203,
      "conditional:model_other": 7,
-     "conditional:option_layout": 140,
-     "conditional:trim": 1409
+     "conditional:trim": 215
     },
     "no_records": {
-     "": 60203
+     "": 55452
     },
     "not_closed": {
      "ambig_target": 7316,
-     "no_list_manifest": 15990,
-     "no_year_manifest": 204962,
+     "list_manifest_bad": 7,
+     "no_list_manifest": 29706,
+     "no_year_manifest": 194745,
+     "site_blocked": 1670,
      "stale": 26,
-     "suspect_variant": 115,
-     "unattested": 936,
-     "uncrawled_chain_member": 3454,
-     "unread_sibling_page": 59,
-     "unverified_product": 3902,
-     "variant_unread": 3087,
-     "year_manifest_bad": 3284
+     "suspect_variant": 42,
+     "unattested": 929,
+     "uncrawled_chain_member": 3123,
+     "unread_sibling_page": 2085,
+     "unverified_product": 3197,
+     "variant_unread": 3469,
+     "year_manifest_bad": 3771
     },
     "split": {
-     "no_candidates": 87,
-     "option_split": 738
+     "no_candidates": 10,
+     "option_split": 138,
+     "slot_missing": 7
     },
     "unmapped": {
-     "": 27926
+     "": 27927
     }
    },
    "tailgate": {
     "no_records": {
-     "": 104372
+     "": 203524
     },
     "not_closed": {
-     "ambig_target": 298,
-     "no_year_manifest": 10842,
-     "unattested": 8405,
-     "uncrawled_chain_member": 690,
+     "ambig_target": 1796,
+     "no_list_manifest": 150,
+     "no_year_manifest": 14777,
+     "site_blocked": 379,
+     "unattested": 9938,
+     "uncrawled_chain_member": 691,
+     "unread_sibling_page": 611,
+     "unverified_product": 408,
      "variant_unread": 1778,
-     "year_manifest_bad": 1261
+     "year_manifest_bad": 1445
     },
     "unmapped": {
-     "": 4494
+     "": 22461
     }
    },
    "throttle-body": {
-    "chain_member_conditional": {
-     "chain_member_conditional": 337
-    },
     "conditional": {
-     "conditional:fitted_not_listed": 175,
      "conditional:trim": 12
     },
     "no_records": {
-     "": 69407
+     "": 67652
     },
     "not_closed": {
      "ambig_target": 6372,
-     "no_list_manifest": 12027,
-     "no_year_manifest": 201996,
-     "suspect_variant": 279,
-     "unattested": 1268,
-     "uncrawled_chain_member": 1033,
-     "unread_sibling_page": 218,
-     "unverified_product": 6251,
+     "list_manifest_bad": 7,
+     "no_list_manifest": 20894,
+     "no_year_manifest": 194431,
+     "site_blocked": 1663,
+     "suspect_variant": 351,
+     "unattested": 1277,
+     "uncrawled_chain_member": 1046,
+     "unread_sibling_page": 2157,
+     "unverified_product": 4570,
      "variant_unread": 3087,
-     "year_manifest_bad": 2265
+     "year_manifest_bad": 2337
     },
     "split": {
-     "option_split": 1191
+     "option_split": 59
     },
     "unmapped": {
-     "": 27926
+     "": 27927
     }
    },
    "tow-mirrors": {
     "no_records": {
-     "": 117705
+     "": 117703
     },
     "not_closed": {
      "ambig_target": 219,
-     "no_list_manifest": 1126,
-     "no_year_manifest": 6463,
-     "variant_unread": 838
+     "no_list_manifest": 1174,
+     "no_year_manifest": 6345,
+     "variant_unread": 838,
+     "year_manifest_bad": 70
     },
     "unmapped": {
      "": 5074
@@ -9115,64 +9350,71 @@
    },
    "trunk-lid": {
     "no_records": {
-     "": 102506
+     "": 184812
     },
     "not_closed": {
      "list_manifest_bad": 98,
-     "no_list_manifest": 123,
-     "no_year_manifest": 76784,
-     "unattested": 5985,
-     "uncrawled_chain_member": 3053,
-     "unread_sibling_page": 5623,
-     "variant_unread": 2192,
-     "year_manifest_bad": 1700
+     "no_list_manifest": 7025,
+     "no_year_manifest": 92134,
+     "site_blocked": 54,
+     "unattested": 7528,
+     "uncrawled_chain_member": 2922,
+     "unread_sibling_page": 6548,
+     "unverified_product": 42,
+     "variant_unread": 2554,
+     "year_manifest_bad": 2198
     },
     "unmapped": {
-     "": 9960
+     "": 27927
     }
    },
    "window-regulator": {
     "no_records": {
-     "": 29305
+     "": 27060
     },
     "not_closed": {
      "ambig_target": 6835,
-     "no_list_manifest": 16517,
-     "no_year_manifest": 238054,
+     "list_manifest_bad": 7,
+     "no_list_manifest": 30862,
+     "no_year_manifest": 224963,
+     "site_blocked": 397,
      "stale": 26,
-     "unattested": 33,
-     "uncrawled_chain_member": 1888,
-     "unread_sibling_page": 4915,
-     "unverified_product": 2562,
-     "variant_unread": 3087,
-     "year_manifest_bad": 1678
+     "suspect_variant": 18,
+     "unattested": 42,
+     "uncrawled_chain_member": 1911,
+     "unread_sibling_page": 5635,
+     "unverified_product": 2108,
+     "variant_unread": 3469,
+     "year_manifest_bad": 1915
     },
     "split": {
-     "no_candidates": 45,
-     "packaging_unstated": 973
+     "packaging_unstated": 667
     },
     "unmapped": {
-     "": 27926
+     "": 27927
     }
    },
    "window-switch": {
     "no_records": {
-     "": 54013
+     "": 47921
     },
     "not_closed": {
-     "ambig_target": 6990,
-     "no_list_manifest": 16007,
-     "no_year_manifest": 212492,
+     "ambig_target": 7082,
+     "list_manifest_bad": 7,
+     "no_list_manifest": 29462,
+     "no_year_manifest": 203667,
+     "site_blocked": 14,
      "stale": 26,
+     "suspect_variant": 19,
      "unattested": 567,
      "uncrawled_chain_member": 789,
-     "unread_sibling_page": 9263,
+     "unread_sibling_page": 9587,
      "unverified_product": 393,
-     "variant_unread": 3087,
-     "year_manifest_bad": 2291
+     "variant_unread": 3469,
+     "year_manifest_bad": 2912
     },
     "unmapped": {
-     "": 27926
+     "": 27927
     }
    }
   },
@@ -9442,27 +9684,27 @@
      "www.bmwpartsdeal.com: only 0% of its 11623 fitment rows can be coverage: it prints an option column, and option-layout rows are never coverage (spec 5.5)"
     ],
     "likely_groups": 0,
-    "raw": "42683f9d86450b6bd00eb7fc7cc9640154607768",
+    "raw": "c36da2eb98835c02f81c05e8c36b6a926634a332",
     "verified_groups": 0,
     "vg_groups": 0
    },
    "ford": {
-    "as_of": "2026-11-06T07:12:44Z",
+    "as_of": "2026-11-07T00:35:31Z",
     "completion_top": [],
     "funnel_cars": {
      "ac-compressor": {
       "no_records": {
-       "": 8844
+       "": 8840
       },
       "not_closed": {
        "ambig_target": 410,
-       "no_list_manifest": 9095,
-       "no_year_manifest": 35915,
+       "no_list_manifest": 10580,
+       "no_year_manifest": 33943,
        "unattested": 81,
        "uncrawled_chain_member": 59,
        "unverified_product": 257,
        "variant_unread": 1778,
-       "year_manifest_bad": 2191
+       "year_manifest_bad": 2681
       },
       "unmapped": {
        "": 2243
@@ -9470,16 +9712,16 @@
      },
      "alternator": {
       "no_records": {
-       "": 7218
+       "": 7217
       },
       "not_closed": {
-       "no_list_manifest": 9095,
-       "no_year_manifest": 37740,
+       "no_list_manifest": 10580,
+       "no_year_manifest": 35936,
        "suspect_variant": 51,
        "uncrawled_chain_member": 127,
        "unverified_product": 178,
        "variant_unread": 1778,
-       "year_manifest_bad": 2443
+       "year_manifest_bad": 2762
       },
       "unmapped": {
        "": 2243
@@ -9487,15 +9729,15 @@
      },
      "bumper-front": {
       "no_records": {
-       "": 12031
+       "": 7316
       },
       "not_closed": {
-       "ambig_target": 298,
-       "no_list_manifest": 150,
-       "no_year_manifest": 32668,
-       "unread_sibling_page": 9095,
+       "ambig_target": 358,
+       "no_list_manifest": 319,
+       "no_year_manifest": 34640,
+       "unread_sibling_page": 10658,
        "variant_unread": 1778,
-       "year_manifest_bad": 2610
+       "year_manifest_bad": 3560
       },
       "unmapped": {
        "": 2243
@@ -9503,15 +9745,15 @@
      },
      "bumper-rear": {
       "no_records": {
-       "": 9846
+       "": 3853
       },
       "not_closed": {
-       "ambig_target": 414,
-       "no_list_manifest": 168,
-       "no_year_manifest": 34684,
-       "unread_sibling_page": 9095,
+       "ambig_target": 519,
+       "no_list_manifest": 319,
+       "no_year_manifest": 37941,
+       "unread_sibling_page": 10658,
        "variant_unread": 1778,
-       "year_manifest_bad": 2645
+       "year_manifest_bad": 3561
       },
       "unmapped": {
        "": 2243
@@ -9519,15 +9761,15 @@
      },
      "climate-control": {
       "no_records": {
-       "": 22999
+       "": 22993
       },
       "not_closed": {
        "ambig_target": 170,
-       "no_list_manifest": 8178,
-       "no_year_manifest": 23823,
+       "no_list_manifest": 9376,
+       "no_year_manifest": 22326,
        "unread_sibling_page": 397,
        "variant_unread": 1778,
-       "year_manifest_bad": 1285
+       "year_manifest_bad": 1589
       },
       "unmapped": {
        "": 2243
@@ -9535,15 +9777,15 @@
      },
      "door-front": {
       "no_records": {
-       "": 26016
+       "": 21437
       },
       "not_closed": {
-       "ambig_target": 143,
-       "no_list_manifest": 110,
-       "no_year_manifest": 18865,
-       "unread_sibling_page": 9095,
+       "ambig_target": 203,
+       "no_list_manifest": 319,
+       "no_year_manifest": 20821,
+       "unread_sibling_page": 10658,
        "variant_unread": 1778,
-       "year_manifest_bad": 2623
+       "year_manifest_bad": 3413
       },
       "unmapped": {
        "": 2243
@@ -9551,15 +9793,15 @@
      },
      "door-rear": {
       "no_records": {
-       "": 25199
+       "": 20956
       },
       "not_closed": {
-       "ambig_target": 143,
-       "no_list_manifest": 51,
-       "no_year_manifest": 20861,
-       "unread_sibling_page": 8839,
+       "ambig_target": 203,
+       "no_list_manifest": 248,
+       "no_year_manifest": 22887,
+       "unread_sibling_page": 10156,
        "variant_unread": 1778,
-       "year_manifest_bad": 1759
+       "year_manifest_bad": 2401
       },
       "unmapped": {
        "": 2243
@@ -9567,17 +9809,17 @@
      },
      "fender": {
       "no_records": {
-       "": 16041
+       "": 10364
       },
       "not_closed": {
-       "ambig_target": 298,
-       "no_list_manifest": 95,
-       "no_year_manifest": 28633,
-       "unattested": 3872,
-       "uncrawled_chain_member": 2004,
-       "unverified_product": 3219,
+       "ambig_target": 408,
+       "no_list_manifest": 292,
+       "no_year_manifest": 31598,
+       "unattested": 4952,
+       "uncrawled_chain_member": 2257,
+       "unverified_product": 3449,
        "variant_unread": 1778,
-       "year_manifest_bad": 2690
+       "year_manifest_bad": 3531
       },
       "unmapped": {
        "": 2243
@@ -9585,15 +9827,15 @@
      },
      "fuel-pump-module": {
       "no_records": {
-       "": 24653
+       "": 24649
       },
       "not_closed": {
        "ambig_target": 92,
-       "no_list_manifest": 8468,
-       "no_year_manifest": 22629,
+       "no_list_manifest": 9953,
+       "no_year_manifest": 21032,
        "unread_sibling_page": 397,
        "variant_unread": 1778,
-       "year_manifest_bad": 613
+       "year_manifest_bad": 728
       },
       "unmapped": {
        "": 2243
@@ -9601,15 +9843,15 @@
      },
      "gauge-cluster": {
       "no_records": {
-       "": 31892
+       "": 26999
       },
       "not_closed": {
-       "ambig_target": 259,
-       "no_list_manifest": 51,
-       "no_year_manifest": 12892,
-       "unread_sibling_page": 9095,
+       "ambig_target": 319,
+       "no_list_manifest": 275,
+       "no_year_manifest": 15029,
+       "unread_sibling_page": 10658,
        "variant_unread": 1778,
-       "year_manifest_bad": 2663
+       "year_manifest_bad": 3571
       },
       "unmapped": {
        "": 2243
@@ -9617,17 +9859,17 @@
      },
      "grille": {
       "no_records": {
-       "": 16977
+       "": 11438
       },
       "not_closed": {
-       "ambig_target": 298,
-       "no_list_manifest": 51,
-       "no_year_manifest": 27808,
-       "unattested": 6113,
-       "uncrawled_chain_member": 750,
-       "unverified_product": 2232,
+       "ambig_target": 358,
+       "no_list_manifest": 234,
+       "no_year_manifest": 30586,
+       "unattested": 7170,
+       "uncrawled_chain_member": 936,
+       "unverified_product": 2552,
        "variant_unread": 1778,
-       "year_manifest_bad": 2623
+       "year_manifest_bad": 3577
       },
       "unmapped": {
        "": 2243
@@ -9635,16 +9877,16 @@
      },
      "headlights": {
       "no_records": {
-       "": 14573
+       "": 14568
       },
       "not_closed": {
        "ambig_target": 409,
-       "no_list_manifest": 8830,
-       "no_year_manifest": 30147,
+       "no_list_manifest": 10204,
+       "no_year_manifest": 28047,
        "unattested": 216,
        "uncrawled_chain_member": 181,
        "variant_unread": 1475,
-       "year_manifest_bad": 2799
+       "year_manifest_bad": 3529
       },
       "unmapped": {
        "": 2243
@@ -9652,17 +9894,17 @@
      },
      "hood": {
       "no_records": {
-       "": 13006
+       "": 6356
       },
       "not_closed": {
-       "ambig_target": 298,
-       "no_list_manifest": 95,
-       "no_year_manifest": 31708,
-       "unattested": 5718,
-       "uncrawled_chain_member": 1214,
-       "unverified_product": 2163,
+       "ambig_target": 358,
+       "no_list_manifest": 319,
+       "no_year_manifest": 35627,
+       "unattested": 7521,
+       "uncrawled_chain_member": 744,
+       "unverified_product": 2393,
        "variant_unread": 1778,
-       "year_manifest_bad": 2650
+       "year_manifest_bad": 3533
       },
       "unmapped": {
        "": 2243
@@ -9670,16 +9912,16 @@
      },
      "ignition-coils": {
       "no_records": {
-       "": 11511
+       "": 8841
       },
       "not_closed": {
-       "ambig_target": 160,
-       "no_list_manifest": 349,
-       "no_year_manifest": 34011,
-       "uncrawled_chain_member": 344,
-       "unverified_product": 8751,
+       "ambig_target": 220,
+       "no_list_manifest": 319,
+       "no_year_manifest": 34624,
+       "uncrawled_chain_member": 469,
+       "unverified_product": 10189,
        "variant_unread": 1778,
-       "year_manifest_bad": 1726
+       "year_manifest_bad": 2189
       },
       "unmapped": {
        "": 2243
@@ -9687,14 +9929,15 @@
      },
      "liftgate": {
       "no_records": {
-       "": 35805
+       "": 32400
       },
       "not_closed": {
-       "ambig_target": 143,
-       "no_year_manifest": 9598,
-       "unread_sibling_page": 9095,
+       "ambig_target": 203,
+       "no_list_manifest": 168,
+       "no_year_manifest": 10623,
+       "unread_sibling_page": 10628,
        "variant_unread": 1778,
-       "year_manifest_bad": 2211
+       "year_manifest_bad": 2829
       },
       "unmapped": {
        "": 2243
@@ -9702,14 +9945,14 @@
      },
      "power-steering-pump": {
       "no_records": {
-       "": 32196
+       "": 32195
       },
       "not_closed": {
-       "no_list_manifest": 5256,
-       "no_year_manifest": 19039,
+       "no_list_manifest": 6349,
+       "no_year_manifest": 17514,
        "unread_sibling_page": 240,
        "variant_unread": 355,
-       "year_manifest_bad": 1544
+       "year_manifest_bad": 1976
       },
       "unmapped": {
        "": 2243
@@ -9717,17 +9960,17 @@
      },
      "radiator": {
       "no_records": {
-       "": 15117
+       "": 12378
       },
       "not_closed": {
-       "ambig_target": 459,
-       "no_list_manifest": 264,
-       "no_year_manifest": 29312,
-       "unattested": 1523,
-       "uncrawled_chain_member": 5797,
-       "unverified_product": 1775,
+       "ambig_target": 519,
+       "no_list_manifest": 319,
+       "no_year_manifest": 29565,
+       "unattested": 1718,
+       "uncrawled_chain_member": 6977,
+       "unverified_product": 1963,
        "variant_unread": 1778,
-       "year_manifest_bad": 2605
+       "year_manifest_bad": 3412
       },
       "unmapped": {
        "": 2243
@@ -9735,15 +9978,15 @@
      },
      "side-mirrors": {
       "no_records": {
-       "": 7818
+       "": 7817
       },
       "not_closed": {
        "ambig_target": 456,
-       "no_list_manifest": 9095,
-       "no_year_manifest": 36395,
+       "no_list_manifest": 10580,
+       "no_year_manifest": 34138,
        "unread_sibling_page": 397,
        "variant_unread": 1778,
-       "year_manifest_bad": 2691
+       "year_manifest_bad": 3463
       },
       "unmapped": {
        "": 2243
@@ -9751,12 +9994,12 @@
      },
      "starter": {
       "no_records": {
-       "": 17899
+       "": 17898
       },
       "not_closed": {
        "ambig_target": 17,
-       "no_list_manifest": 9095,
-       "no_year_manifest": 29289,
+       "no_list_manifest": 10580,
+       "no_year_manifest": 27804,
        "suspect_variant": 95,
        "unattested": 27,
        "uncrawled_chain_member": 30,
@@ -9770,16 +10013,16 @@
      },
      "tail-lights": {
       "no_records": {
-       "": 12700
+       "": 12695
       },
       "not_closed": {
        "ambig_target": 459,
-       "no_list_manifest": 9095,
-       "no_year_manifest": 31867,
+       "no_list_manifest": 10503,
+       "no_year_manifest": 29978,
        "unattested": 182,
        "uncrawled_chain_member": 215,
        "variant_unread": 1778,
-       "year_manifest_bad": 2334
+       "year_manifest_bad": 2819
       },
       "unmapped": {
        "": 2243
@@ -9787,15 +10030,16 @@
      },
      "tailgate": {
       "no_records": {
-       "": 37036
+       "": 35179
       },
       "not_closed": {
-       "ambig_target": 298,
-       "no_year_manifest": 9247,
-       "unattested": 8405,
+       "ambig_target": 358,
+       "no_year_manifest": 9296,
+       "unattested": 9938,
        "uncrawled_chain_member": 690,
+       "unread_sibling_page": 30,
        "variant_unread": 1778,
-       "year_manifest_bad": 1176
+       "year_manifest_bad": 1360
       },
       "unmapped": {
        "": 2243
@@ -9803,15 +10047,15 @@
      },
      "throttle-body": {
       "no_records": {
-       "": 27179
+       "": 27177
       },
       "not_closed": {
-       "no_list_manifest": 5048,
-       "no_year_manifest": 23061,
+       "no_list_manifest": 6208,
+       "no_year_manifest": 21832,
        "unattested": 48,
        "uncrawled_chain_member": 178,
        "variant_unread": 1778,
-       "year_manifest_bad": 1338
+       "year_manifest_bad": 1408
       },
       "unmapped": {
        "": 2243
@@ -9819,13 +10063,14 @@
      },
      "tow-mirrors": {
       "no_records": {
-       "": 52612
+       "": 52611
       },
       "not_closed": {
        "ambig_target": 219,
        "no_list_manifest": 647,
-       "no_year_manifest": 4314,
-       "variant_unread": 838
+       "no_year_manifest": 4244,
+       "variant_unread": 838,
+       "year_manifest_bad": 70
       },
       "unmapped": {
        "": 2243
@@ -9833,15 +10078,16 @@
      },
      "trunk-lid": {
       "no_records": {
-       "": 35698
+       "": 33373
       },
       "not_closed": {
-       "no_list_manifest": 51,
-       "no_year_manifest": 12304,
-       "unattested": 5831,
-       "uncrawled_chain_member": 2391,
+       "no_list_manifest": 151,
+       "no_year_manifest": 12576,
+       "unattested": 7374,
+       "uncrawled_chain_member": 2260,
+       "unverified_product": 42,
        "variant_unread": 940,
-       "year_manifest_bad": 1415
+       "year_manifest_bad": 1913
       },
       "unmapped": {
        "": 2243
@@ -9849,15 +10095,15 @@
      },
      "window-regulator": {
       "no_records": {
-       "": 17123
+       "": 17121
       },
       "not_closed": {
        "ambig_target": 17,
-       "no_list_manifest": 9095,
-       "no_year_manifest": 29492,
+       "no_list_manifest": 10580,
+       "no_year_manifest": 27774,
        "unread_sibling_page": 397,
        "variant_unread": 1778,
-       "year_manifest_bad": 728
+       "year_manifest_bad": 962
       },
       "unmapped": {
        "": 2243
@@ -9865,17 +10111,17 @@
      },
      "window-switch": {
       "no_records": {
-       "": 11445
+       "": 11442
       },
       "not_closed": {
        "ambig_target": 154,
-       "no_list_manifest": 9095,
-       "no_year_manifest": 34415,
+       "no_list_manifest": 10580,
+       "no_year_manifest": 32311,
        "unattested": 226,
        "uncrawled_chain_member": 100,
        "unverified_product": 71,
        "variant_unread": 1778,
-       "year_manifest_bad": 1346
+       "year_manifest_bad": 1967
       },
       "unmapped": {
        "": 2243
@@ -9885,28 +10131,30 @@
     "gates": [
      "no (site, category) of this namespace has passed the audit gate (audits.json has no record; spec 11.4, E5/V7)",
      "engine cells not audited as reliable on www.fordpartsgiant.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE",
-     "www.fordpartsgiant.com: only 1% of its 12046 fitment rows can be coverage: it prints an option column, and option-layout rows are never coverage (spec 5.5)"
+     "www.fordpartsgiant.com: only 1% of its 14302 fitment rows can be coverage: it prints an option column, and option-layout rows are never coverage (spec 5.5)"
     ],
-    "likely_groups": 48,
-    "raw": "42683f9d86450b6bd00eb7fc7cc9640154607768",
+    "likely_groups": 59,
+    "raw": "c36da2eb98835c02f81c05e8c36b6a926634a332",
     "verified_groups": 0,
     "vg_groups": 0
    },
    "gm": {
-    "as_of": "2026-11-06T07:20:17Z",
+    "as_of": "2026-11-09T02:38:43Z",
     "completion_top": [],
     "funnel_cars": {
      "ac-compressor": {
       "no_records": {
-       "": 5554
+       "": 3433
       },
       "not_closed": {
-       "ambig_target": 6590,
-       "no_year_manifest": 51778,
+       "ambig_target": 6661,
+       "no_list_manifest": 12265,
+       "no_year_manifest": 41180,
        "unattested": 34,
        "uncrawled_chain_member": 799,
        "unverified_product": 1042,
-       "year_manifest_bad": 6
+       "variant_unread": 382,
+       "year_manifest_bad": 7
       },
       "unmapped": {
        "": 15834
@@ -9914,13 +10162,43 @@
      },
      "alternator": {
       "no_records": {
-       "": 5665
+       "": 4561
       },
       "not_closed": {
        "ambig_target": 6293,
-       "no_year_manifest": 52008,
+       "no_list_manifest": 12318,
+       "no_year_manifest": 40411,
        "unread_sibling_page": 1831,
-       "year_manifest_bad": 6
+       "variant_unread": 382,
+       "year_manifest_bad": 7
+      },
+      "unmapped": {
+       "": 15834
+      }
+     },
+     "bumper-front": {
+      "no_records": {
+       "": 18587
+      },
+      "not_closed": {
+       "ambig_target": 4697,
+       "no_list_manifest": 12359,
+       "no_year_manifest": 29778,
+       "variant_unread": 382
+      },
+      "unmapped": {
+       "": 15834
+      }
+     },
+     "bumper-rear": {
+      "no_records": {
+       "": 20338
+      },
+      "not_closed": {
+       "ambig_target": 4101,
+       "no_list_manifest": 11717,
+       "no_year_manifest": 29265,
+       "variant_unread": 382
       },
       "unmapped": {
        "": 15834
@@ -9928,12 +10206,60 @@
      },
      "climate-control": {
       "no_records": {
-       "": 17734
+       "": 16760
       },
       "not_closed": {
-       "ambig_target": 6933,
-       "no_year_manifest": 39553,
-       "unread_sibling_page": 1583
+       "ambig_target": 6946,
+       "no_list_manifest": 10541,
+       "no_year_manifest": 29605,
+       "unread_sibling_page": 1583,
+       "variant_unread": 362,
+       "year_manifest_bad": 6
+      },
+      "unmapped": {
+       "": 15834
+      }
+     },
+     "door-front": {
+      "no_records": {
+       "": 14736
+      },
+      "not_closed": {
+       "ambig_target": 6370,
+       "no_list_manifest": 11747,
+       "no_year_manifest": 32562,
+       "variant_unread": 382,
+       "year_manifest_bad": 6
+      },
+      "unmapped": {
+       "": 15834
+      }
+     },
+     "door-rear": {
+      "no_records": {
+       "": 21658
+      },
+      "not_closed": {
+       "ambig_target": 3011,
+       "no_list_manifest": 11366,
+       "no_year_manifest": 29380,
+       "variant_unread": 382,
+       "year_manifest_bad": 6
+      },
+      "unmapped": {
+       "": 15834
+      }
+     },
+     "fender": {
+      "no_records": {
+       "": 27206
+      },
+      "not_closed": {
+       "ambig_target": 4113,
+       "no_list_manifest": 9982,
+       "no_year_manifest": 24134,
+       "variant_unread": 362,
+       "year_manifest_bad": 6
       },
       "unmapped": {
        "": 15834
@@ -9941,13 +10267,43 @@
      },
      "fuel-pump-module": {
       "no_records": {
-       "": 7874
+       "": 6719
       },
       "not_closed": {
-       "ambig_target": 6470,
-       "no_list_manifest": 1,
-       "no_year_manifest": 49584,
-       "unread_sibling_page": 1874
+       "ambig_target": 6486,
+       "no_list_manifest": 12347,
+       "no_year_manifest": 37988,
+       "unread_sibling_page": 1874,
+       "variant_unread": 382,
+       "year_manifest_bad": 7
+      },
+      "unmapped": {
+       "": 15834
+      }
+     },
+     "gauge-cluster": {
+      "no_records": {
+       "": 35703
+      },
+      "not_closed": {
+       "ambig_target": 3283,
+       "no_list_manifest": 11390,
+       "no_year_manifest": 15065,
+       "variant_unread": 362
+      },
+      "unmapped": {
+       "": 15834
+      }
+     },
+     "grille": {
+      "no_records": {
+       "": 19474
+      },
+      "not_closed": {
+       "ambig_target": 4442,
+       "no_list_manifest": 11675,
+       "no_year_manifest": 29850,
+       "variant_unread": 362
       },
       "unmapped": {
        "": 15834
@@ -9955,15 +10311,62 @@
      },
      "headlights": {
       "no_records": {
-       "": 11595
+       "": 9940
       },
       "not_closed": {
-       "ambig_target": 6553,
-       "no_year_manifest": 45774,
-       "unattested": 302,
-       "uncrawled_chain_member": 694,
+       "ambig_target": 6886,
+       "no_list_manifest": 11669,
+       "no_year_manifest": 35045,
+       "unattested": 282,
+       "uncrawled_chain_member": 714,
        "unread_sibling_page": 828,
        "unverified_product": 51,
+       "variant_unread": 382,
+       "year_manifest_bad": 6
+      },
+      "unmapped": {
+       "": 15834
+      }
+     },
+     "hood": {
+      "no_records": {
+       "": 23266
+      },
+      "not_closed": {
+       "ambig_target": 4113,
+       "no_list_manifest": 10992,
+       "no_year_manifest": 27064,
+       "variant_unread": 362,
+       "year_manifest_bad": 6
+      },
+      "unmapped": {
+       "": 15834
+      }
+     },
+     "ignition-coils": {
+      "no_records": {
+       "": 5982
+      },
+      "not_closed": {
+       "ambig_target": 5375,
+       "no_list_manifest": 13809,
+       "no_year_manifest": 40248,
+       "variant_unread": 382,
+       "year_manifest_bad": 7
+      },
+      "unmapped": {
+       "": 15834
+      }
+     },
+     "liftgate": {
+      "no_records": {
+       "": 43884
+      },
+      "not_closed": {
+       "ambig_target": 4396,
+       "no_list_manifest": 4227,
+       "no_year_manifest": 13270,
+       "variant_unread": 20,
        "year_manifest_bad": 6
       },
       "unmapped": {
@@ -9972,12 +10375,29 @@
      },
      "power-steering-pump": {
       "no_records": {
-       "": 18689
+       "": 17659
       },
       "not_closed": {
-       "ambig_target": 6892,
-       "no_year_manifest": 38703,
+       "ambig_target": 6935,
+       "no_list_manifest": 8061,
+       "no_year_manifest": 31454,
        "unread_sibling_page": 1513,
+       "variant_unread": 174,
+       "year_manifest_bad": 7
+      },
+      "unmapped": {
+       "": 15834
+      }
+     },
+     "radiator": {
+      "no_records": {
+       "": 10309
+      },
+      "not_closed": {
+       "ambig_target": 6744,
+       "no_list_manifest": 12915,
+       "no_year_manifest": 35447,
+       "variant_unread": 382,
        "year_manifest_bad": 6
       },
       "unmapped": {
@@ -9986,13 +10406,15 @@
      },
      "side-mirrors": {
       "no_records": {
-       "": 4040
+       "": 3039
       },
       "not_closed": {
        "ambig_target": 6976,
-       "no_year_manifest": 52906,
+       "no_list_manifest": 12466,
+       "no_year_manifest": 41058,
        "unread_sibling_page": 1875,
-       "year_manifest_bad": 6
+       "variant_unread": 382,
+       "year_manifest_bad": 7
       },
       "unmapped": {
        "": 15834
@@ -10000,13 +10422,15 @@
      },
      "starter": {
       "no_records": {
-       "": 3088
+       "": 2266
       },
       "not_closed": {
-       "ambig_target": 6972,
-       "no_year_manifest": 53863,
+       "ambig_target": 6993,
+       "no_list_manifest": 12196,
+       "no_year_manifest": 42085,
        "unread_sibling_page": 1874,
-       "year_manifest_bad": 6
+       "variant_unread": 382,
+       "year_manifest_bad": 7
       },
       "unmapped": {
        "": 15834
@@ -10014,15 +10438,30 @@
      },
      "tail-lights": {
       "no_records": {
-       "": 6712
+       "": 5376
       },
       "not_closed": {
        "ambig_target": 6857,
-       "no_year_manifest": 50353,
-       "unattested": 391,
-       "uncrawled_chain_member": 1330,
+       "no_list_manifest": 12238,
+       "no_year_manifest": 39069,
+       "unattested": 384,
+       "uncrawled_chain_member": 1337,
        "unverified_product": 154,
+       "variant_unread": 382,
        "year_manifest_bad": 6
+      },
+      "unmapped": {
+       "": 15834
+      }
+     },
+     "tailgate": {
+      "no_records": {
+       "": 62806
+      },
+      "not_closed": {
+       "ambig_target": 1438,
+       "no_list_manifest": 110,
+       "no_year_manifest": 1449
       },
       "unmapped": {
        "": 15834
@@ -10030,11 +10469,12 @@
      },
      "throttle-body": {
       "no_records": {
-       "": 25119
+       "": 24477
       },
       "not_closed": {
        "ambig_target": 6372,
-       "no_year_manifest": 32433,
+       "no_list_manifest": 7404,
+       "no_year_manifest": 25671,
        "unattested": 1047,
        "uncrawled_chain_member": 577,
        "unverified_product": 249,
@@ -10044,18 +10484,33 @@
        "": 15834
       }
      },
+     "trunk-lid": {
+      "no_records": {
+       "": 43770
+      },
+      "not_closed": {
+       "no_list_manifest": 6802,
+       "no_year_manifest": 14869,
+       "variant_unread": 362
+      },
+      "unmapped": {
+       "": 15834
+      }
+     },
      "window-regulator": {
       "no_records": {
-       "": 2445
+       "": 1907
       },
       "not_closed": {
        "ambig_target": 6818,
-       "no_year_manifest": 54667,
+       "no_list_manifest": 12479,
+       "no_year_manifest": 42343,
        "unattested": 33,
        "uncrawled_chain_member": 671,
        "unread_sibling_page": 979,
        "unverified_product": 184,
-       "year_manifest_bad": 6
+       "variant_unread": 382,
+       "year_manifest_bad": 7
       },
       "unmapped": {
        "": 15834
@@ -10063,15 +10518,17 @@
      },
      "window-switch": {
       "no_records": {
-       "": 8839
+       "": 7410
       },
       "not_closed": {
-       "ambig_target": 6836,
-       "no_year_manifest": 48255,
+       "ambig_target": 6928,
+       "no_list_manifest": 11670,
+       "no_year_manifest": 37540,
        "unattested": 139,
        "uncrawled_chain_member": 651,
        "unread_sibling_page": 755,
        "unverified_product": 322,
+       "variant_unread": 382,
        "year_manifest_bad": 6
       },
       "unmapped": {
@@ -10082,10 +10539,10 @@
     "gates": [
      "no (site, category) of this namespace has passed the audit gate (audits.json has no record; spec 11.4, E5/V7)",
      "engine cells not audited as reliable on www.gmpartsgiant.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE",
-     "www.gmpartsgiant.com: only 0% of its 11390 fitment rows can be coverage: its option column holds trims (option_column_is_trims), which count only after a namespace audit (spec 5.2)"
+     "www.gmpartsgiant.com: only 0% of its 17867 fitment rows can be coverage: its option column holds trims (option_column_is_trims), which count only after a namespace audit (spec 5.2)"
     ],
     "likely_groups": 289,
-    "raw": "42683f9d86450b6bd00eb7fc7cc9640154607768",
+    "raw": "c36da2eb98835c02f81c05e8c36b6a926634a332",
     "verified_groups": 0,
     "vg_groups": 0
    },
@@ -10433,7 +10890,7 @@
      "www.kiapartsnow.com: only 0% of its 3733 fitment rows can be coverage: it prints an option column, and option-layout rows are never coverage (spec 5.5)"
     ],
     "likely_groups": 6,
-    "raw": "42683f9d86450b6bd00eb7fc7cc9640154607768",
+    "raw": "c36da2eb98835c02f81c05e8c36b6a926634a332",
     "verified_groups": 0,
     "vg_groups": 0
    },
@@ -10446,11 +10903,11 @@
        "": 2030
       },
       "not_closed": {
-       "no_year_manifest": 25254,
+       "no_year_manifest": 25253,
        "year_manifest_bad": 913
       },
       "unmapped": {
-       "": 396
+       "": 397
       }
      },
      "alternator": {
@@ -10458,23 +10915,23 @@
        "": 2927
       },
       "not_closed": {
-       "no_year_manifest": 24427,
+       "no_year_manifest": 24426,
        "year_manifest_bad": 843
       },
       "unmapped": {
-       "": 396
+       "": 397
       }
      },
      "bumper-front": {
       "no_records": {
-       "": 7063
+       "": 7062
       },
       "not_closed": {
        "no_year_manifest": 20211,
        "year_manifest_bad": 923
       },
       "unmapped": {
-       "": 396
+       "": 397
       }
      },
      "bumper-rear": {
@@ -10482,11 +10939,11 @@
        "": 5117
       },
       "not_closed": {
-       "no_year_manifest": 22157,
+       "no_year_manifest": 22156,
        "year_manifest_bad": 923
       },
       "unmapped": {
-       "": 396
+       "": 397
       }
      },
      "climate-control": {
@@ -10494,107 +10951,107 @@
        "": 10851
       },
       "not_closed": {
-       "no_year_manifest": 16743,
+       "no_year_manifest": 16742,
        "year_manifest_bad": 603
       },
       "unmapped": {
-       "": 396
+       "": 397
       }
      },
      "door-front": {
       "no_records": {
-       "": 2882
+       "": 2881
       },
       "not_closed": {
        "no_year_manifest": 24392,
        "year_manifest_bad": 923
       },
       "unmapped": {
-       "": 396
+       "": 397
       }
      },
      "door-rear": {
       "no_records": {
-       "": 5422
+       "": 5421
       },
       "not_closed": {
        "no_year_manifest": 21939,
        "year_manifest_bad": 836
       },
       "unmapped": {
-       "": 396
+       "": 397
       }
      },
      "fender": {
       "no_records": {
-       "": 20538
+       "": 20537
       },
       "not_closed": {
        "no_year_manifest": 6738,
        "year_manifest_bad": 921
       },
       "unmapped": {
-       "": 396
+       "": 397
       }
      },
      "fuel-pump-module": {
       "no_records": {
-       "": 5456
+       "": 5455
       },
       "not_closed": {
        "no_year_manifest": 21851,
        "year_manifest_bad": 890
       },
       "unmapped": {
-       "": 396
+       "": 397
       }
      },
      "gauge-cluster": {
       "no_records": {
-       "": 18666
+       "": 18665
       },
       "not_closed": {
        "no_year_manifest": 8613,
        "year_manifest_bad": 918
       },
       "unmapped": {
-       "": 396
+       "": 397
       }
      },
      "grille": {
       "no_records": {
-       "": 22986
+       "": 22985
       },
       "not_closed": {
        "no_year_manifest": 4459,
        "year_manifest_bad": 752
       },
       "unmapped": {
-       "": 396
+       "": 397
       }
      },
      "headlights": {
       "no_records": {
-       "": 6870
+       "": 6869
       },
       "not_closed": {
        "no_year_manifest": 20414,
        "year_manifest_bad": 913
       },
       "unmapped": {
-       "": 396
+       "": 397
       }
      },
      "hood": {
       "no_records": {
-       "": 5924
+       "": 5923
       },
       "not_closed": {
        "no_year_manifest": 21350,
        "year_manifest_bad": 923
       },
       "unmapped": {
-       "": 396
+       "": 397
       }
      },
      "ignition-coils": {
@@ -10602,11 +11059,11 @@
        "": 3222
       },
       "not_closed": {
-       "no_year_manifest": 24250,
+       "no_year_manifest": 24249,
        "year_manifest_bad": 725
       },
       "unmapped": {
-       "": 396
+       "": 397
       }
      },
      "liftgate": {
@@ -10614,11 +11071,11 @@
        "": 22777
       },
       "not_closed": {
-       "no_year_manifest": 4998,
+       "no_year_manifest": 4997,
        "year_manifest_bad": 422
       },
       "unmapped": {
-       "": 396
+       "": 397
       }
      },
      "power-steering-pump": {
@@ -10626,11 +11083,11 @@
        "": 5472
       },
       "not_closed": {
-       "no_year_manifest": 22157,
+       "no_year_manifest": 22156,
        "year_manifest_bad": 568
       },
       "unmapped": {
-       "": 396
+       "": 397
       }
      },
      "radiator": {
@@ -10638,11 +11095,11 @@
        "": 3232
       },
       "not_closed": {
-       "no_year_manifest": 24042,
+       "no_year_manifest": 24041,
        "year_manifest_bad": 923
       },
       "unmapped": {
-       "": 396
+       "": 397
       }
      },
      "side-mirrors": {
@@ -10650,11 +11107,11 @@
        "": 3068
       },
       "not_closed": {
-       "no_year_manifest": 24219,
+       "no_year_manifest": 24218,
        "year_manifest_bad": 910
       },
       "unmapped": {
-       "": 396
+       "": 397
       }
      },
      "starter": {
@@ -10662,59 +11119,59 @@
        "": 2863
       },
       "not_closed": {
-       "no_year_manifest": 24499,
+       "no_year_manifest": 24498,
        "year_manifest_bad": 835
       },
       "unmapped": {
-       "": 396
+       "": 397
       }
      },
      "tail-lights": {
       "no_records": {
-       "": 7487
+       "": 7486
       },
       "not_closed": {
        "no_year_manifest": 19795,
        "year_manifest_bad": 915
       },
       "unmapped": {
-       "": 396
+       "": 397
       }
      },
      "tailgate": {
       "no_records": {
-       "": 27970
+       "": 27969
       },
       "not_closed": {
        "no_year_manifest": 142,
        "year_manifest_bad": 85
       },
       "unmapped": {
-       "": 396
+       "": 397
       }
      },
      "throttle-body": {
       "no_records": {
-       "": 3433
+       "": 3432
       },
       "not_closed": {
        "no_year_manifest": 23872,
        "year_manifest_bad": 892
       },
       "unmapped": {
-       "": 396
+       "": 397
       }
      },
      "trunk-lid": {
       "no_records": {
-       "": 13656
+       "": 13655
       },
       "not_closed": {
        "no_year_manifest": 14256,
        "year_manifest_bad": 285
       },
       "unmapped": {
-       "": 396
+       "": 397
       }
      },
      "window-regulator": {
@@ -10722,11 +11179,11 @@
        "": 891
       },
       "not_closed": {
-       "no_year_manifest": 26391,
+       "no_year_manifest": 26390,
        "year_manifest_bad": 915
       },
       "unmapped": {
-       "": 396
+       "": 397
       }
      },
      "window-switch": {
@@ -10734,11 +11191,11 @@
        "": 5242
       },
       "not_closed": {
-       "no_year_manifest": 22045,
+       "no_year_manifest": 22044,
        "year_manifest_bad": 910
       },
       "unmapped": {
-       "": 396
+       "": 397
       }
      }
     },
@@ -10749,7 +11206,7 @@
      "www.hondapartsnow.com: only 0% of its 5844 fitment rows can be coverage: it prints an option column, and option-layout rows are never coverage (spec 5.5)"
     ],
     "likely_groups": 0,
-    "raw": "42683f9d86450b6bd00eb7fc7cc9640154607768",
+    "raw": "c36da2eb98835c02f81c05e8c36b6a926634a332",
     "verified_groups": 0,
     "vg_groups": 0
    },
@@ -11039,7 +11496,7 @@
      "engine cells not audited as reliable on www.mazdapartsnow.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE"
     ],
     "likely_groups": 0,
-    "raw": "42683f9d86450b6bd00eb7fc7cc9640154607768",
+    "raw": "c36da2eb98835c02f81c05e8c36b6a926634a332",
     "verified_groups": 0,
     "vg_groups": 0
    },
@@ -11298,7 +11755,7 @@
      "engine cells not audited as reliable on www.mbpartsgiant.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE"
     ],
     "likely_groups": 0,
-    "raw": "42683f9d86450b6bd00eb7fc7cc9640154607768",
+    "raw": "c36da2eb98835c02f81c05e8c36b6a926634a332",
     "verified_groups": 0,
     "vg_groups": 0
    },
@@ -11588,151 +12045,152 @@
      "engine cells not audited as reliable on www.mitsubishipartsgiant.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE"
     ],
     "likely_groups": 0,
-    "raw": "42683f9d86450b6bd00eb7fc7cc9640154607768",
+    "raw": "c36da2eb98835c02f81c05e8c36b6a926634a332",
     "verified_groups": 0,
     "vg_groups": 0
    },
    "mopar": {
-    "as_of": "2026-11-06T07:21:04Z",
+    "as_of": "2026-11-06T20:19:29Z",
     "completion_top": [
      {
       "cats": [
+       "bumper-front",
+       "door-front",
+       "door-rear",
+       "fender",
        "grille",
-       "headlights",
-       "ignition-coils",
-       "liftgate"
+       "hood",
+       "tail-lights"
       ],
-      "gain_pairs": 934097,
-      "make": "Jeep",
-      "model": "Patriot",
-      "year": 2014
-     },
-     {
-      "cats": [
-       "grille",
-       "headlights",
-       "ignition-coils",
-       "liftgate"
-      ],
-      "gain_pairs": 702740,
-      "make": "Jeep",
-      "model": "Patriot",
-      "year": 2012
-     },
-     {
-      "cats": [
-       "grille",
-       "ignition-coils",
-       "liftgate"
-      ],
-      "gain_pairs": 562289,
-      "make": "Jeep",
-      "model": "Patriot",
+      "gain_pairs": 863127,
+      "make": "Dodge",
+      "model": "Dart",
       "year": 2015
      },
      {
       "cats": [
-       "grille",
-       "ignition-coils",
-       "liftgate"
-      ],
-      "gain_pairs": 547884,
-      "make": "Jeep",
-      "model": "Patriot",
-      "year": 2016
-     },
-     {
-      "cats": [
-       "grille",
-       "headlights",
-       "liftgate"
-      ],
-      "gain_pairs": 476892,
-      "make": "Jeep",
-      "model": "Patriot",
-      "year": 2011
-     },
-     {
-      "cats": [
-       "door-rear",
-       "ignition-coils",
-       "liftgate"
-      ],
-      "gain_pairs": 413780,
-      "make": "Jeep",
-      "model": "Compass",
-      "year": 2014
-     },
-     {
-      "cats": [
-       "climate-control",
        "door-front",
-       "door-rear",
        "fender",
        "hood",
-       "liftgate",
-       "tail-lights"
-      ],
-      "gain_pairs": 410451,
-      "make": "Jeep",
-      "model": "Commander",
-      "year": 2006
-     },
-     {
-      "cats": [
-       "grille",
-       "headlights",
-       "ignition-coils",
        "liftgate"
       ],
-      "gain_pairs": 395342,
-      "make": "Jeep",
-      "model": "Patriot",
-      "year": 2013
-     },
-     {
-      "cats": [
-       "climate-control",
-       "door-front",
-       "door-rear",
-       "fender",
-       "headlights",
-       "hood",
-       "liftgate",
-       "tail-lights"
-      ],
-      "gain_pairs": 392504,
-      "make": "Jeep",
-      "model": "Commander",
+      "gain_pairs": 813904,
+      "make": "Dodge",
+      "model": "Caliber",
       "year": 2007
      },
      {
       "cats": [
+       "door-front",
        "door-rear",
+       "hood"
+      ],
+      "gain_pairs": 804650,
+      "make": "Dodge",
+      "model": "Avenger",
+      "year": 2012
+     },
+     {
+      "cats": [
+       "door-front",
+       "door-rear"
+      ],
+      "gain_pairs": 797888,
+      "make": "Dodge",
+      "model": "Avenger",
+      "year": 2013
+     },
+     {
+      "cats": [
+       "door-front",
+       "door-rear",
+       "hood"
+      ],
+      "gain_pairs": 751842,
+      "make": "Dodge",
+      "model": "Avenger",
+      "year": 2008
+     },
+     {
+      "cats": [
+       "bumper-front",
+       "door-front",
+       "door-rear"
+      ],
+      "gain_pairs": 722775,
+      "make": "Dodge",
+      "model": "Dart",
+      "year": 2013
+     },
+     {
+      "cats": [
+       "door-front",
+       "door-rear",
+       "hood"
+      ],
+      "gain_pairs": 660230,
+      "make": "Dodge",
+      "model": "Avenger",
+      "year": 2010
+     },
+     {
+      "cats": [
+       "bumper-front",
+       "door-front",
+       "door-rear",
+       "fender",
+       "grille",
        "hood",
-       "ignition-coils",
+       "tail-lights"
+      ],
+      "gain_pairs": 659352,
+      "make": "Dodge",
+      "model": "Dart",
+      "year": 2016
+     },
+     {
+      "cats": [
+       "grille",
+       "headlights",
        "liftgate"
       ],
-      "gain_pairs": 373455,
+      "gain_pairs": 658458,
       "make": "Jeep",
-      "model": "Compass",
-      "year": 2016
+      "model": "Patriot",
+      "year": 2014
+     },
+     {
+      "cats": [
+       "bumper-front",
+       "door-front",
+       "door-rear",
+       "grille",
+       "hood",
+       "tail-lights"
+      ],
+      "gain_pairs": 565212,
+      "make": "Dodge",
+      "model": "Dart",
+      "year": 2014
      }
     ],
     "funnel_cars": {
      "ac-compressor": {
       "no_records": {
-       "": 8311
+       "": 3653
       },
       "not_closed": {
-       "no_year_manifest": 25996,
+       "list_manifest_bad": 7,
+       "no_list_manifest": 285,
+       "no_year_manifest": 29980,
+       "site_blocked": 67,
        "stale": 26,
-       "suspect_variant": 305,
-       "uncrawled_chain_member": 2362,
-       "unverified_product": 5004
-      },
-      "split": {
-       "no_candidates": 47
+       "suspect_variant": 230,
+       "unattested": 13,
+       "uncrawled_chain_member": 1543,
+       "unread_sibling_page": 2020,
+       "unverified_product": 4224,
+       "year_manifest_bad": 2
       },
       "unmapped": {
        "": 2132
@@ -11740,15 +12198,19 @@
      },
      "alternator": {
       "no_records": {
-       "": 3355
+       "": 1269
       },
       "not_closed": {
-       "no_list_manifest": 26,
-       "no_year_manifest": 30952,
-       "suspect_variant": 862,
-       "unattested": 27,
+       "list_manifest_bad": 7,
+       "no_list_manifest": 313,
+       "no_year_manifest": 32364,
+       "site_blocked": 40,
+       "suspect_variant": 453,
+       "unattested": 3,
        "uncrawled_chain_member": 140,
-       "unverified_product": 6689
+       "unread_sibling_page": 2013,
+       "unverified_product": 5446,
+       "year_manifest_bad": 2
       },
       "unmapped": {
        "": 2132
@@ -11756,10 +12218,13 @@
      },
      "bumper-front": {
       "no_records": {
-       "": 35341
+       "": 9212
       },
       "not_closed": {
-       "no_year_manifest": 6710
+       "no_list_manifest": 447,
+       "no_year_manifest": 24734,
+       "unread_sibling_page": 7655,
+       "year_manifest_bad": 2
       },
       "unmapped": {
        "": 2132
@@ -11767,10 +12232,13 @@
      },
      "bumper-rear": {
       "no_records": {
-       "": 33330
+       "": 7186
       },
       "not_closed": {
-       "no_year_manifest": 8721
+       "no_list_manifest": 531,
+       "no_year_manifest": 26682,
+       "unread_sibling_page": 7649,
+       "year_manifest_bad": 2
       },
       "unmapped": {
        "": 2132
@@ -11778,12 +12246,12 @@
      },
      "climate-control": {
       "no_records": {
-       "": 15041
+       "": 11687
       },
       "not_closed": {
-       "no_list_manifest": 635,
-       "no_year_manifest": 20282,
-       "unread_sibling_page": 6093
+       "no_list_manifest": 1270,
+       "no_year_manifest": 22640,
+       "unread_sibling_page": 6453
       },
       "unmapped": {
        "": 2132
@@ -11791,10 +12259,13 @@
      },
      "door-front": {
       "no_records": {
-       "": 34244
+       "": 6327
       },
       "not_closed": {
-       "no_year_manifest": 7807
+       "no_list_manifest": 521,
+       "no_year_manifest": 27551,
+       "unread_sibling_page": 7649,
+       "year_manifest_bad": 2
       },
       "unmapped": {
        "": 2132
@@ -11802,21 +12273,35 @@
      },
      "door-rear": {
       "no_records": {
-       "": 33829
+       "": 12941
       },
       "not_closed": {
-       "no_year_manifest": 8222
+       "no_list_manifest": 227,
+       "no_year_manifest": 21233,
+       "unread_sibling_page": 7649
       },
       "unmapped": {
        "": 2132
       }
      },
      "fender": {
+      "conditional": {
+       "conditional:trim": 8
+      },
       "no_records": {
-       "": 34195
+       "": 12130
       },
       "not_closed": {
-       "no_year_manifest": 7856
+       "no_list_manifest": 652,
+       "no_year_manifest": 21654,
+       "site_blocked": 379,
+       "uncrawled_chain_member": 569,
+       "unread_sibling_page": 5842,
+       "unverified_product": 600,
+       "year_manifest_bad": 2
+      },
+      "split": {
+       "no_candidates": 214
       },
       "unmapped": {
        "": 2132
@@ -11824,11 +12309,13 @@
      },
      "fuel-pump-module": {
       "no_records": {
-       "": 6479
+       "": 3903
       },
       "not_closed": {
-       "no_year_manifest": 27828,
-       "unread_sibling_page": 7744
+       "list_manifest_bad": 7,
+       "no_list_manifest": 285,
+       "no_year_manifest": 29732,
+       "unread_sibling_page": 8123
       },
       "unmapped": {
        "": 2132
@@ -11836,21 +12323,43 @@
      },
      "gauge-cluster": {
       "no_records": {
-       "": 39744
+       "": 26057
       },
       "not_closed": {
-       "no_year_manifest": 2307
+       "no_list_manifest": 272,
+       "no_year_manifest": 8245,
+       "unread_sibling_page": 7476
       },
       "unmapped": {
        "": 2132
       }
      },
      "grille": {
+      "conditional": {
+       "conditional:colour": 72,
+       "conditional:engine": 20,
+       "conditional:model_other": 484,
+       "conditional:position": 17,
+       "conditional:trim": 281
+      },
+      "gated": {
+       "category_unconfirmed": 20
+      },
       "no_records": {
-       "": 36647
+       "": 12490
       },
       "not_closed": {
-       "no_year_manifest": 5404
+       "no_list_manifest": 458,
+       "no_year_manifest": 21445,
+       "suspect_variant": 401,
+       "uncrawled_chain_member": 231,
+       "unread_sibling_page": 4415,
+       "unverified_product": 1234,
+       "year_manifest_bad": 2
+      },
+      "split": {
+       "no_candidates": 41,
+       "option_split": 439
       },
       "unmapped": {
        "": 2132
@@ -11858,26 +12367,39 @@
      },
      "headlights": {
       "no_records": {
-       "": 8932
+       "": 7410
       },
       "not_closed": {
-       "no_year_manifest": 25402,
+       "list_manifest_bad": 7,
+       "no_list_manifest": 286,
+       "no_year_manifest": 26255,
+       "site_blocked": 140,
+       "suspect_variant": 12,
        "uncrawled_chain_member": 34,
-       "unread_sibling_page": 7543
-      },
-      "split": {
-       "no_candidates": 140
+       "unread_sibling_page": 7904,
+       "year_manifest_bad": 2
       },
       "unmapped": {
        "": 2132
       }
      },
      "hood": {
+      "conditional": {
+       "conditional:engine": 18,
+       "conditional:option": 16,
+       "conditional:trim": 8
+      },
       "no_records": {
-       "": 33869
+       "": 6577
       },
       "not_closed": {
-       "no_year_manifest": 8182
+       "no_list_manifest": 330,
+       "no_year_manifest": 27476,
+       "suspect_variant": 401,
+       "uncrawled_chain_member": 268,
+       "unread_sibling_page": 5622,
+       "unverified_product": 1332,
+       "year_manifest_bad": 2
       },
       "unmapped": {
        "": 2132
@@ -11885,11 +12407,14 @@
      },
      "ignition-coils": {
       "no_records": {
-       "": 5132
+       "": 972
       },
       "not_closed": {
-       "no_list_manifest": 6683,
-       "no_year_manifest": 30236
+       "no_list_manifest": 755,
+       "no_year_manifest": 32691,
+       "unread_sibling_page": 6900,
+       "unverified_product": 730,
+       "year_manifest_bad": 2
       },
       "unmapped": {
        "": 2132
@@ -11897,10 +12422,12 @@
      },
      "liftgate": {
       "no_records": {
-       "": 35186
+       "": 23773
       },
       "not_closed": {
-       "no_year_manifest": 6865
+       "no_list_manifest": 439,
+       "no_year_manifest": 14093,
+       "unread_sibling_page": 3745
       },
       "unmapped": {
        "": 2132
@@ -11908,12 +12435,13 @@
      },
      "power-steering-pump": {
       "no_records": {
-       "": 6396
+       "": 4940
       },
       "not_closed": {
-       "no_list_manifest": 225,
-       "no_year_manifest": 28958,
-       "unread_sibling_page": 6472
+       "list_manifest_bad": 7,
+       "no_list_manifest": 443,
+       "no_year_manifest": 29809,
+       "unread_sibling_page": 6851
       },
       "unmapped": {
        "": 2132
@@ -11921,11 +12449,15 @@
      },
      "radiator": {
       "no_records": {
-       "": 26878
+       "": 2724
       },
       "not_closed": {
-       "no_list_manifest": 1774,
-       "no_year_manifest": 13399
+       "no_list_manifest": 677,
+       "no_year_manifest": 30975,
+       "uncrawled_chain_member": 401,
+       "unread_sibling_page": 7217,
+       "unverified_product": 54,
+       "year_manifest_bad": 2
       },
       "unmapped": {
        "": 2132
@@ -11936,18 +12468,14 @@
        "conditional:option": 8
       },
       "no_records": {
-       "": 5128
+       "": 4178
       },
       "not_closed": {
-       "no_list_manifest": 280,
-       "no_year_manifest": 29430,
-       "unattested": 27,
-       "unread_sibling_page": 5199,
-       "unverified_product": 1932
-      },
-      "split": {
-       "no_candidates": 45,
-       "position_conflict": 2
+       "no_list_manifest": 572,
+       "no_year_manifest": 29654,
+       "site_blocked": 80,
+       "unattested": 13,
+       "unread_sibling_page": 7545
       },
       "unmapped": {
        "": 2132
@@ -11955,15 +12483,19 @@
      },
      "starter": {
       "no_records": {
-       "": 2973
+       "": 2461
       },
       "not_closed": {
-       "no_list_manifest": 18,
-       "no_year_manifest": 31336,
+       "list_manifest_bad": 7,
+       "no_list_manifest": 332,
+       "no_year_manifest": 31205,
+       "site_blocked": 13,
        "stale": 26,
-       "suspect_variant": 443,
-       "uncrawled_chain_member": 152,
-       "unverified_product": 7103
+       "suspect_variant": 354,
+       "uncrawled_chain_member": 169,
+       "unread_sibling_page": 1932,
+       "unverified_product": 5549,
+       "year_manifest_bad": 2
       },
       "unmapped": {
        "": 2132
@@ -11971,47 +12503,62 @@
      },
      "tail-lights": {
       "conditional": {
-       "conditional:body": 203,
-       "conditional:option_layout": 140,
-       "conditional:trim": 1401
+       "conditional:trim": 207
       },
       "no_records": {
-       "": 12868
+       "": 9461
       },
       "not_closed": {
-       "no_list_manifest": 27,
-       "no_year_manifest": 21439,
+       "list_manifest_bad": 7,
+       "no_list_manifest": 97,
+       "no_year_manifest": 24393,
+       "site_blocked": 1670,
        "stale": 26,
-       "suspect_variant": 115,
-       "uncrawled_chain_member": 1397,
-       "unverified_product": 3748
+       "suspect_variant": 42,
+       "uncrawled_chain_member": 1059,
+       "unread_sibling_page": 2026,
+       "unverified_product": 3043,
+       "year_manifest_bad": 2
       },
       "split": {
-       "no_candidates": 87,
-       "option_split": 600
+       "no_candidates": 10,
+       "slot_missing": 7
+      },
+      "unmapped": {
+       "": 2132
+      }
+     },
+     "tailgate": {
+      "no_records": {
+       "": 38204
+      },
+      "not_closed": {
+       "no_list_manifest": 40,
+       "no_year_manifest": 2437,
+       "site_blocked": 379,
+       "uncrawled_chain_member": 1,
+       "unread_sibling_page": 581,
+       "unverified_product": 408
       },
       "unmapped": {
        "": 2132
       }
      },
      "throttle-body": {
-      "chain_member_conditional": {
-       "chain_member_conditional": 337
-      },
-      "conditional": {
-       "conditional:fitted_not_listed": 175
-      },
       "no_records": {
-       "": 3472
+       "": 2363
       },
       "not_closed": {
-       "no_list_manifest": 152,
-       "no_year_manifest": 30861,
-       "suspect_variant": 279,
-       "unverified_product": 5643
-      },
-      "split": {
-       "option_split": 1132
+       "list_manifest_bad": 7,
+       "no_list_manifest": 455,
+       "no_year_manifest": 31286,
+       "site_blocked": 1663,
+       "suspect_variant": 351,
+       "unattested": 9,
+       "uncrawled_chain_member": 13,
+       "unread_sibling_page": 1939,
+       "unverified_product": 3962,
+       "year_manifest_bad": 2
       },
       "unmapped": {
        "": 2132
@@ -12019,11 +12566,24 @@
      },
      "tow-mirrors": {
       "no_records": {
-       "": 39510
+       "": 39509
       },
       "not_closed": {
-       "no_list_manifest": 479,
-       "no_year_manifest": 2062
+       "no_list_manifest": 527,
+       "no_year_manifest": 2014
+      },
+      "unmapped": {
+       "": 2132
+      }
+     },
+     "trunk-lid": {
+      "no_records": {
+       "": 40863
+      },
+      "not_closed": {
+       "no_year_manifest": 208,
+       "site_blocked": 54,
+       "unread_sibling_page": 925
       },
       "unmapped": {
        "": 2132
@@ -12031,19 +12591,23 @@
      },
      "window-regulator": {
       "no_records": {
-       "": 4166
+       "": 2461
       },
       "not_closed": {
-       "no_list_manifest": 377,
-       "no_year_manifest": 30387,
+       "list_manifest_bad": 7,
+       "no_list_manifest": 758,
+       "no_year_manifest": 31339,
+       "site_blocked": 397,
        "stale": 26,
-       "uncrawled_chain_member": 949,
-       "unread_sibling_page": 2785,
-       "unverified_product": 2343
+       "suspect_variant": 18,
+       "unattested": 9,
+       "uncrawled_chain_member": 972,
+       "unread_sibling_page": 3505,
+       "unverified_product": 1889,
+       "year_manifest_bad": 2
       },
       "split": {
-       "no_candidates": 45,
-       "packaging_unstated": 973
+       "packaging_unstated": 667
       },
       "unmapped": {
        "": 2132
@@ -12051,12 +12615,16 @@
      },
      "window-switch": {
       "no_records": {
-       "": 13472
+       "": 8813
       },
       "not_closed": {
-       "no_year_manifest": 20862,
+       "list_manifest_bad": 7,
+       "no_list_manifest": 300,
+       "no_year_manifest": 24856,
+       "site_blocked": 14,
        "stale": 26,
-       "unread_sibling_page": 7691
+       "suspect_variant": 19,
+       "unread_sibling_page": 8015
       },
       "unmapped": {
        "": 2132
@@ -12066,10 +12634,11 @@
     "gates": [
      "no (site, category) of this namespace has passed the audit gate (audits.json has no record; spec 11.4, E5/V7)",
      "engine cells not audited as reliable on www.moparpartsgiant.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE",
-     "www.moparpartsgiant.com: only 2% of its 4357 fitment rows can be coverage: its option column holds trims (option_column_is_trims), which count only after a namespace audit (spec 5.2)"
+     "www.moparpartsgiant.com: only 3% of its 7351 fitment rows can be coverage: its option column holds trims (option_column_is_trims), which count only after a namespace audit (spec 5.2)",
+     "blocked by the crawl breaker: www.moparpartsgiant.com (their cells never close, C9)"
     ],
-    "likely_groups": 140,
-    "raw": "42683f9d86450b6bd00eb7fc7cc9640154607768",
+    "likely_groups": 245,
+    "raw": "c36da2eb98835c02f81c05e8c36b6a926634a332",
     "verified_groups": 0,
     "vg_groups": 0
    },
@@ -12101,10 +12670,10 @@
      },
      "bumper-front": {
       "no_records": {
-       "": 2686
+       "": 2685
       },
       "not_closed": {
-       "no_year_manifest": 29407
+       "no_year_manifest": 29408
       },
       "unmapped": {
        "": 1351
@@ -12112,10 +12681,10 @@
      },
      "bumper-rear": {
       "no_records": {
-       "": 2610
+       "": 2609
       },
       "not_closed": {
-       "no_year_manifest": 29483
+       "no_year_manifest": 29484
       },
       "unmapped": {
        "": 1351
@@ -12178,10 +12747,10 @@
      },
      "gauge-cluster": {
       "no_records": {
-       "": 2613
+       "": 2612
       },
       "not_closed": {
-       "no_year_manifest": 29480
+       "no_year_manifest": 29481
       },
       "unmapped": {
        "": 1351
@@ -12189,10 +12758,10 @@
      },
      "grille": {
       "no_records": {
-       "": 13161
+       "": 13163
       },
       "not_closed": {
-       "no_year_manifest": 18932
+       "no_year_manifest": 18930
       },
       "unmapped": {
        "": 1351
@@ -12200,10 +12769,10 @@
      },
      "headlights": {
       "no_records": {
-       "": 2692
+       "": 2691
       },
       "not_closed": {
-       "no_year_manifest": 29401
+       "no_year_manifest": 29402
       },
       "unmapped": {
        "": 1351
@@ -12211,10 +12780,10 @@
      },
      "hood": {
       "no_records": {
-       "": 1393
+       "": 1392
       },
       "not_closed": {
-       "no_year_manifest": 30700
+       "no_year_manifest": 30701
       },
       "unmapped": {
        "": 1351
@@ -12222,10 +12791,10 @@
      },
      "ignition-coils": {
       "no_records": {
-       "": 2403
+       "": 2404
       },
       "not_closed": {
-       "no_year_manifest": 29690
+       "no_year_manifest": 29689
       },
       "unmapped": {
        "": 1351
@@ -12233,10 +12802,10 @@
      },
      "liftgate": {
       "no_records": {
-       "": 20873
+       "": 20874
       },
       "not_closed": {
-       "no_year_manifest": 11220
+       "no_year_manifest": 11219
       },
       "unmapped": {
        "": 1351
@@ -12288,10 +12857,10 @@
      },
      "tail-lights": {
       "no_records": {
-       "": 2520
+       "": 2519
       },
       "not_closed": {
-       "no_year_manifest": 29573
+       "no_year_manifest": 29574
       },
       "unmapped": {
        "": 1351
@@ -12321,10 +12890,10 @@
      },
      "trunk-lid": {
       "no_records": {
-       "": 12657
+       "": 12656
       },
       "not_closed": {
-       "no_year_manifest": 19436
+       "no_year_manifest": 19437
       },
       "unmapped": {
        "": 1351
@@ -12343,10 +12912,10 @@
      },
      "window-switch": {
       "no_records": {
-       "": 1683
+       "": 1682
       },
       "not_closed": {
-       "no_year_manifest": 30410
+       "no_year_manifest": 30411
       },
       "unmapped": {
        "": 1351
@@ -12361,7 +12930,7 @@
      "www.nissanpartsdeal.com: only 0% of its 4633 fitment rows can be coverage: it prints an option column, and option-layout rows are never coverage (spec 5.5)"
     ],
     "likely_groups": 0,
-    "raw": "42683f9d86450b6bd00eb7fc7cc9640154607768",
+    "raw": "c36da2eb98835c02f81c05e8c36b6a926634a332",
     "verified_groups": 0,
     "vg_groups": 0
    },
@@ -12726,8 +13295,8 @@
      "engine cells not audited as reliable on www.subarupartsdeal.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE",
      "www.subarupartsdeal.com: only 0% of its 4217 fitment rows can be coverage: its option column holds trims (option_column_is_trims), which count only after a namespace audit (spec 5.2)"
     ],
-    "likely_groups": 97,
-    "raw": "42683f9d86450b6bd00eb7fc7cc9640154607768",
+    "likely_groups": 65,
+    "raw": "c36da2eb98835c02f81c05e8c36b6a926634a332",
     "verified_groups": 0,
     "vg_groups": 0
    },
@@ -12759,7 +13328,7 @@
        "tail-lights",
        "window-switch"
       ],
-      "gain_pairs": 221551,
+      "gain_pairs": 221672,
       "make": "Scion",
       "model": "xB",
       "year": 2006
@@ -12811,7 +13380,7 @@
        "hood",
        "window-switch"
       ],
-      "gain_pairs": 200618,
+      "gain_pairs": 200497,
       "make": "Toyota",
       "model": "Sienna",
       "year": 2000
@@ -12827,7 +13396,7 @@
        "tail-lights",
        "window-switch"
       ],
-      "gain_pairs": 193705,
+      "gain_pairs": 193800,
       "make": "Scion",
       "model": "xB",
       "year": 2005
@@ -12904,11 +13473,11 @@
      },
      "bumper-front": {
       "no_records": {
-       "": 4943
+       "": 4941
       },
       "not_closed": {
        "no_list_manifest": 1,
-       "no_year_manifest": 19834,
+       "no_year_manifest": 19836,
        "unread_sibling_page": 892
       },
       "unmapped": {
@@ -12930,11 +13499,11 @@
      },
      "climate-control": {
       "no_records": {
-       "": 10371
+       "": 10369
       },
       "not_closed": {
        "no_list_manifest": 153,
-       "no_year_manifest": 14906,
+       "no_year_manifest": 14908,
        "unread_sibling_page": 240
       },
       "unmapped": {
@@ -12956,11 +13525,11 @@
      },
      "door-rear": {
       "no_records": {
-       "": 4242
+       "": 4241
       },
       "not_closed": {
        "no_list_manifest": 1,
-       "no_year_manifest": 20545,
+       "no_year_manifest": 20546,
        "unread_sibling_page": 882
       },
       "unmapped": {
@@ -12969,11 +13538,11 @@
      },
      "fender": {
       "no_records": {
-       "": 6726
+       "": 6727
       },
       "not_closed": {
        "no_list_manifest": 1,
-       "no_year_manifest": 18051,
+       "no_year_manifest": 18050,
        "unread_sibling_page": 892
       },
       "unmapped": {
@@ -12995,11 +13564,11 @@
      },
      "gauge-cluster": {
       "no_records": {
-       "": 13673
+       "": 13670
       },
       "not_closed": {
        "no_list_manifest": 1,
-       "no_year_manifest": 11104,
+       "no_year_manifest": 11107,
        "unread_sibling_page": 892
       },
       "unmapped": {
@@ -13008,11 +13577,11 @@
      },
      "grille": {
       "no_records": {
-       "": 6134
+       "": 6131
       },
       "not_closed": {
        "no_list_manifest": 1,
-       "no_year_manifest": 18643,
+       "no_year_manifest": 18646,
        "unattested": 467,
        "uncrawled_chain_member": 425
       },
@@ -13022,11 +13591,11 @@
      },
      "headlights": {
       "no_records": {
-       "": 4931
+       "": 4930
       },
       "not_closed": {
        "no_list_manifest": 649,
-       "no_year_manifest": 19850,
+       "no_year_manifest": 19851,
        "unread_sibling_page": 240
       },
       "unmapped": {
@@ -13035,11 +13604,11 @@
      },
      "hood": {
       "no_records": {
-       "": 2132
+       "": 2131
       },
       "not_closed": {
        "no_list_manifest": 1,
-       "no_year_manifest": 22645,
+       "no_year_manifest": 22646,
        "unread_sibling_page": 892
       },
       "unmapped": {
@@ -13076,11 +13645,11 @@
      },
      "power-steering-pump": {
       "no_records": {
-       "": 15928
+       "": 15929
       },
       "not_closed": {
        "no_list_manifest": 505,
-       "no_year_manifest": 9104,
+       "no_year_manifest": 9103,
        "unread_sibling_page": 133
       },
       "unmapped": {
@@ -13102,11 +13671,11 @@
      },
      "side-mirrors": {
       "no_records": {
-       "": 3193
+       "": 3194
       },
       "not_closed": {
        "no_list_manifest": 651,
-       "no_year_manifest": 21586,
+       "no_year_manifest": 21585,
        "suspect_variant": 26,
        "uncrawled_chain_member": 134,
        "unread_sibling_page": 80
@@ -13132,11 +13701,11 @@
      },
      "tail-lights": {
       "no_records": {
-       "": 7519
+       "": 7518
       },
       "not_closed": {
        "no_list_manifest": 432,
-       "no_year_manifest": 17479,
+       "no_year_manifest": 17480,
        "unattested": 140,
        "uncrawled_chain_member": 100
       },
@@ -13146,11 +13715,11 @@
      },
      "throttle-body": {
       "no_records": {
-       "": 3408
+       "": 3407
       },
       "not_closed": {
        "no_list_manifest": 564,
-       "no_year_manifest": 21458,
+       "no_year_manifest": 21459,
        "unread_sibling_page": 218,
        "unverified_product": 22
       },
@@ -13216,8 +13785,8 @@
      "engine cells not audited as reliable on www.lexuspartsnow.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE",
      "www.lexuspartsnow.com: only 0% of its 4959 fitment rows can be coverage: it prints an option column, and option-layout rows are never coverage (spec 5.5)"
     ],
-    "likely_groups": 779,
-    "raw": "42683f9d86450b6bd00eb7fc7cc9640154607768",
+    "likely_groups": 583,
+    "raw": "c36da2eb98835c02f81c05e8c36b6a926634a332",
     "verified_groups": 0,
     "vg_groups": 0
    },
@@ -13579,7 +14148,7 @@
      "engine cells not audited as reliable on www.audipartsgiant.com, www.vwpartsgiant.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE"
     ],
     "likely_groups": 6,
-    "raw": "42683f9d86450b6bd00eb7fc7cc9640154607768",
+    "raw": "c36da2eb98835c02f81c05e8c36b6a926634a332",
     "verified_groups": 0,
     "vg_groups": 0
    },
@@ -13858,7 +14427,7 @@
      "engine cells not audited as reliable on www.volvopartsgiant.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE"
     ],
     "likely_groups": 0,
-    "raw": "42683f9d86450b6bd00eb7fc7cc9640154607768",
+    "raw": "c36da2eb98835c02f81c05e8c36b6a926634a332",
     "verified_groups": 0,
     "vg_groups": 0
    }
@@ -13866,31 +14435,34 @@
   "hypothetical_by_cat": {
    "by_cat": {
     "ac-compressor": {
+     "chain_member_conditional": {
+      "chain_member_conditional": 9
+     },
      "conditional": {
       "conditional:body": 2,
       "conditional:colour": 1,
-      "conditional:engine": 2619,
-      "conditional:engine_unattested": 65938,
-      "conditional:engine_unparsed": 25,
+      "conditional:engine": 2593,
+      "conditional:engine_unattested": 67332,
+      "conditional:engine_unparsed": 21,
       "conditional:model_other": 21,
-      "conditional:notes_not_own_page": 4868,
-      "conditional:option": 172,
+      "conditional:notes_not_own_page": 4716,
+      "conditional:option": 273,
       "conditional:option_layout": 482,
-      "conditional:qualifier": 11233,
-      "conditional:trim": 8657
+      "conditional:qualifier": 11281,
+      "conditional:trim": 8457
      },
      "gated": {
-      "kind_not_phase1": 191
+      "kind_not_phase1": 198
      },
      "no_records": {
-      "": 35761
+      "": 28978
      },
      "split": {
-      "no_candidates": 256,
-      "option_split": 175692
+      "no_candidates": 249,
+      "option_split": 181302
      },
      "unmapped": {
-      "": 27926
+      "": 27927
      }
     },
     "alternator": {
@@ -13899,28 +14471,29 @@
      },
      "conditional": {
       "conditional:colour": 62,
-      "conditional:engine": 2154,
-      "conditional:engine_unattested": 56491,
-      "conditional:engine_unparsed": 3,
-      "conditional:notes_not_own_page": 3822,
+      "conditional:engine": 2158,
+      "conditional:engine_unattested": 56760,
+      "conditional:engine_unparsed": 20,
+      "conditional:fitted_not_listed": 7,
+      "conditional:notes_not_own_page": 3548,
       "conditional:option": 188,
       "conditional:option_layout": 360,
       "conditional:production": 160,
-      "conditional:qualifier": 4263,
-      "conditional:trim": 5272
+      "conditional:qualifier": 4183,
+      "conditional:trim": 5912
      },
      "no_records": {
-      "": 29370
+      "": 26179
      },
      "reman_only": {
       "reman_only": 135
      },
      "split": {
-      "no_candidates": 99,
-      "option_split": 203393
+      "no_candidates": 102,
+      "option_split": 205995
      },
      "unmapped": {
-      "": 27926
+      "": 27927
      }
     },
     "bumper-front": {
@@ -13933,29 +14506,31 @@
      "conditional": {
       "conditional:body": 146,
       "conditional:colour": 176,
-      "conditional:engine": 278,
-      "conditional:engine_unattested": 32808,
+      "conditional:engine": 2761,
+      "conditional:engine_unattested": 38422,
       "conditional:fuel": 4,
-      "conditional:notes_not_own_page": 1337,
+      "conditional:model_other": 12,
+      "conditional:notes_not_own_page": 2116,
       "conditional:option": 250,
       "conditional:option_layout": 67,
       "conditional:package": 87,
       "conditional:plant": 17,
-      "conditional:qualifier": 495,
-      "conditional:trim": 8024
+      "conditional:production": 14,
+      "conditional:qualifier": 771,
+      "conditional:trim": 10283
      },
      "eligible": {
-      "": 527
+      "": 960
      },
      "no_records": {
-      "": 71383
+      "": 59122
      },
      "split": {
-      "no_candidates": 129,
-      "option_split": 124065
+      "no_candidates": 374,
+      "option_split": 190011
      },
      "unmapped": {
-      "": 12092
+      "": 27927
      }
     },
     "bumper-rear": {
@@ -13967,54 +14542,60 @@
      },
      "conditional": {
       "conditional:body": 662,
-      "conditional:colour": 6,
-      "conditional:engine": 914,
-      "conditional:engine_unattested": 39046,
-      "conditional:notes_not_own_page": 2627,
-      "conditional:option": 676,
-      "conditional:qualifier": 404,
-      "conditional:trim": 7862
+      "conditional:colour": 119,
+      "conditional:engine": 981,
+      "conditional:engine_unattested": 42589,
+      "conditional:model_other": 2,
+      "conditional:notes_not_own_page": 3474,
+      "conditional:option": 692,
+      "conditional:qualifier": 2717,
+      "conditional:trim": 10058
      },
      "eligible": {
-      "": 479
+      "": 538
      },
      "no_records": {
-      "": 62541
+      "": 50741
      },
      "split": {
-      "no_candidates": 99,
-      "option_split": 124476
+      "no_candidates": 741,
+      "option_split": 192278
      },
      "unmapped": {
-      "": 12092
+      "": 27927
      }
     },
     "climate-control": {
+     "blocked": {
+      "unverified_member": 9
+     },
      "conditional": {
       "conditional:body": 65,
       "conditional:colour": 238,
-      "conditional:engine": 43,
-      "conditional:engine_unattested": 29592,
-      "conditional:engine_unparsed": 106,
+      "conditional:engine": 92,
+      "conditional:engine_unattested": 29434,
+      "conditional:engine_unparsed": 90,
+      "conditional:fitted_not_listed": 37,
       "conditional:model_other": 1,
-      "conditional:notes_not_own_page": 3005,
-      "conditional:option": 2035,
+      "conditional:notes_not_own_page": 2802,
+      "conditional:option": 2116,
       "conditional:option_layout": 165,
       "conditional:package": 23,
-      "conditional:trim": 8159
+      "conditional:qualifier": 9,
+      "conditional:trim": 8004
      },
      "eligible": {
       "": 283
      },
      "no_records": {
-      "": 92452
+      "": 88116
      },
      "split": {
-      "no_candidates": 610,
-      "option_split": 167446
+      "no_candidates": 580,
+      "option_split": 172156
      },
      "unmapped": {
-      "": 24817
+      "": 24818
      }
     },
     "door-front": {
@@ -14022,338 +14603,393 @@
       "chain_member_conditional": 135
      },
      "conditional": {
-      "conditional:body": 171,
-      "conditional:engine": 391,
-      "conditional:engine_unattested": 61126,
-      "conditional:notes_not_own_page": 3593,
-      "conditional:option": 250,
+      "conditional:body": 261,
+      "conditional:engine": 2000,
+      "conditional:engine_unattested": 92714,
+      "conditional:notes_not_own_page": 6613,
+      "conditional:option": 439,
       "conditional:option_layout": 21,
       "conditional:plant": 57,
       "conditional:production": 48,
-      "conditional:qualifier": 4358,
-      "conditional:trim": 12516
+      "conditional:qualifier": 14348,
+      "conditional:trim": 27433,
+      "conditional:unknown": 7
      },
      "eligible": {
-      "": 1193
+      "": 2819
      },
      "no_records": {
-      "": 73046
+      "": 55285
      },
      "split": {
-      "no_candidates": 2440,
-      "option_split": 65190,
-      "position_missing": 315,
-      "slot_missing": 5061
+      "no_candidates": 3379,
+      "option_split": 82398,
+      "position_missing": 388,
+      "slot_missing": 7366
      },
      "unmapped": {
-      "": 8264
+      "": 24099
      }
     },
     "door-rear": {
      "conditional": {
-      "conditional:body": 171,
+      "conditional:body": 603,
       "conditional:engine": 561,
-      "conditional:engine_unattested": 57234,
-      "conditional:notes_not_own_page": 3763,
+      "conditional:engine_unattested": 73175,
+      "conditional:fitted_not_listed": 351,
+      "conditional:notes_not_own_page": 8198,
       "conditional:option": 1164,
-      "conditional:qualifier": 13843,
-      "conditional:trim": 12200
+      "conditional:option_layout": 634,
+      "conditional:qualifier": 33949,
+      "conditional:trim": 20426
      },
      "eligible": {
-      "": 1538
+      "": 2870
+     },
+     "grouped": {
+      "": 37
      },
      "no_records": {
-      "": 76673
+      "": 73198
      },
      "split": {
-      "no_candidates": 1441,
-      "option_split": 59100,
-      "position_missing": 315,
-      "slot_missing": 1908
+      "no_candidates": 3885,
+      "option_split": 70704,
+      "position_missing": 408,
+      "slot_missing": 5548
      },
      "unmapped": {
-      "": 8264
+      "": 24099
      }
     },
     "fender": {
      "chain_member_conditional": {
-      "chain_member_conditional": 359
+      "chain_member_conditional": 901
      },
      "conditional": {
-      "conditional:body": 320,
-      "conditional:engine": 278,
-      "conditional:engine_unattested": 62027,
+      "conditional:body": 593,
+      "conditional:engine": 2556,
+      "conditional:engine_unattested": 90535,
       "conditional:model_other": 10,
-      "conditional:notes_not_own_page": 3385,
+      "conditional:notes_not_own_page": 5783,
+      "conditional:option": 159,
       "conditional:option_layout": 362,
       "conditional:package": 132,
       "conditional:production": 70,
-      "conditional:trim": 20448
+      "conditional:qualifier": 6247,
+      "conditional:trim": 30920
      },
      "eligible": {
-      "": 950
+      "": 1728
+     },
+     "grouped": {
+      "": 33
      },
      "no_records": {
-      "": 84785
+      "": 84249
      },
      "split": {
-      "no_candidates": 990,
-      "option_split": 63881,
-      "slot_missing": 2118
+      "no_candidates": 2513,
+      "option_split": 76577,
+      "position_missing": 12,
+      "slot_missing": 2535
      },
      "unmapped": {
-      "": 12092
+      "": 27927
      }
     },
     "fuel-pump-module": {
+     "blocked": {
+      "unverified_member": 9
+     },
      "conditional": {
       "conditional:emissions": 14,
-      "conditional:engine": 440,
-      "conditional:engine_unattested": 41369,
-      "conditional:fuel": 67,
+      "conditional:engine": 841,
+      "conditional:engine_unattested": 41051,
+      "conditional:engine_unparsed": 33,
+      "conditional:fitted_not_listed": 31,
+      "conditional:fuel": 44,
       "conditional:model_other": 82,
-      "conditional:notes_not_own_page": 5297,
-      "conditional:option": 82,
+      "conditional:notes_not_own_page": 3533,
+      "conditional:option": 3,
       "conditional:option_layout": 306,
+      "conditional:package": 2,
       "conditional:plant": 57,
-      "conditional:qualifier": 9129,
-      "conditional:trim": 10575
+      "conditional:qualifier": 9041,
+      "conditional:trim": 10634
      },
      "gated": {
       "kind_not_phase1": 66
      },
      "no_records": {
-      "": 68660
+      "": 64924
      },
      "split": {
-      "no_candidates": 413,
-      "option_split": 167666
+      "no_candidates": 400,
+      "option_split": 173149
      },
      "unmapped": {
-      "": 24817
+      "": 24818
      }
     },
     "gauge-cluster": {
      "conditional": {
       "conditional:body": 67,
-      "conditional:engine": 539,
-      "conditional:engine_unattested": 7237,
-      "conditional:notes_not_own_page": 85,
+      "conditional:engine": 928,
+      "conditional:engine_unattested": 9582,
+      "conditional:notes_not_own_page": 626,
       "conditional:option": 45,
       "conditional:production": 289,
       "conditional:qualifier": 112,
-      "conditional:trim": 2716
+      "conditional:trim": 3149
      },
      "eligible": {
-      "": 74
+      "": 104
      },
      "no_records": {
-      "": 122485
+      "": 139603
      },
      "split": {
-      "no_candidates": 1649,
-      "option_split": 104817
+      "no_candidates": 3618,
+      "option_split": 147792
      },
      "unmapped": {
-      "": 12092
+      "": 27927
      }
     },
     "grille": {
+     "chain_member_conditional": {
+      "chain_member_conditional": 419
+     },
      "conditional": {
-      "conditional:body": 30,
-      "conditional:colour": 34,
-      "conditional:engine": 46,
-      "conditional:engine_unattested": 13610,
+      "conditional:body": 437,
+      "conditional:colour": 140,
+      "conditional:engine": 847,
+      "conditional:engine_unattested": 18771,
       "conditional:engine_unparsed": 90,
-      "conditional:notes_not_own_page": 1866,
-      "conditional:option": 307,
+      "conditional:model_other": 484,
+      "conditional:notes_not_own_page": 2933,
+      "conditional:option": 821,
       "conditional:package": 110,
-      "conditional:trim": 5157
+      "conditional:position": 17,
+      "conditional:production": 44,
+      "conditional:qualifier": 2685,
+      "conditional:trim": 11561
      },
      "eligible": {
-      "": 669
+      "": 774
      },
      "no_records": {
-      "": 112451
+      "": 102227
      },
      "split": {
-      "no_candidates": 1389,
-      "option_split": 104356
+      "no_candidates": 1950,
+      "option_split": 161605
      },
      "unmapped": {
-      "": 12092
+      "": 27927
      }
     },
     "headlights": {
      "chain_member_conditional": {
-      "chain_member_conditional": 385
+      "chain_member_conditional": 394
      },
      "conditional": {
-      "conditional:engine": 582,
-      "conditional:engine_unattested": 51605,
+      "conditional:engine": 599,
+      "conditional:engine_unattested": 51955,
       "conditional:engine_unparsed": 90,
-      "conditional:notes_not_own_page": 3301,
-      "conditional:option": 1653,
-      "conditional:option_layout": 85,
+      "conditional:fitted_not_listed": 15,
+      "conditional:notes_not_own_page": 3151,
+      "conditional:option": 1662,
+      "conditional:option_layout": 13,
       "conditional:package": 61,
       "conditional:plant": 130,
-      "conditional:production": 450,
-      "conditional:qualifier": 12780,
-      "conditional:trim": 10353,
+      "conditional:production": 473,
+      "conditional:qualifier": 12898,
+      "conditional:trim": 10701,
       "conditional:unknown": 264
      },
      "eligible": {
-      "": 1079
+      "": 1093
      },
      "no_records": {
-      "": 57108
+      "": 53923
      },
      "split": {
-      "no_candidates": 744,
-      "option_split": 163006,
+      "no_candidates": 718,
+      "option_split": 165004,
       "position_conflict": 6,
-      "position_missing": 517,
-      "slot_missing": 1719
+      "position_missing": 880,
+      "slot_missing": 1885
      },
      "unmapped": {
-      "": 27926
+      "": 27927
      }
     },
     "hood": {
+     "blocked": {
+      "unverified_member": 255
+     },
      "chain_member_conditional": {
-      "chain_member_conditional": 395
+      "chain_member_conditional": 870
      },
      "conditional": {
-      "conditional:body": 59,
-      "conditional:engine": 776,
-      "conditional:engine_unattested": 100879,
-      "conditional:engine_unparsed": 90,
-      "conditional:notes_not_own_page": 5839,
-      "conditional:option": 111,
+      "conditional:body": 262,
+      "conditional:engine": 3644,
+      "conditional:engine_unattested": 140190,
+      "conditional:engine_unparsed": 105,
+      "conditional:notes_not_own_page": 12066,
+      "conditional:option": 2285,
+      "conditional:option_layout": 629,
       "conditional:package": 132,
       "conditional:plant": 252,
-      "conditional:trim": 32585
+      "conditional:production": 58,
+      "conditional:qualifier": 3755,
+      "conditional:trim": 44406,
+      "conditional:unknown": 8
      },
      "eligible": {
-      "": 1674
+      "": 2154
+     },
+     "grouped": {
+      "": 33
      },
      "no_records": {
-      "": 62086
+      "": 51407
      },
      "split": {
-      "no_candidates": 352,
-      "option_split": 34885
+      "no_candidates": 690,
+      "option_split": 42714
      },
      "unmapped": {
-      "": 12092
+      "": 27927
      }
     },
     "ignition-coils": {
+     "blocked": {
+      "unverified_member": 233
+     },
+     "chain_member_conditional": {
+      "chain_member_conditional": 169
+     },
      "conditional": {
-      "conditional:body": 3,
-      "conditional:engine": 4505,
-      "conditional:engine_unattested": 53731,
-      "conditional:engine_unparsed": 28,
+      "conditional:body": 206,
+      "conditional:engine": 3778,
+      "conditional:engine_unattested": 72125,
+      "conditional:engine_unparsed": 49,
       "conditional:model_other": 18,
-      "conditional:notes_not_own_page": 8522,
-      "conditional:package": 8528,
-      "conditional:trim": 16128
+      "conditional:notes_not_own_page": 7064,
+      "conditional:option": 526,
+      "conditional:option_layout": 29,
+      "conditional:package": 9786,
+      "conditional:qualifier": 2524,
+      "conditional:trim": 11476
      },
      "eligible": {
-      "": 251
+      "": 18
      },
      "no_records": {
-      "": 25237
+      "": 24390
      },
      "split": {
-      "no_candidates": 212,
-      "option_split": 122952
+      "no_candidates": 225,
+      "option_split": 173299
      },
      "unmapped": {
-      "": 12092
+      "": 27927
      }
     },
     "liftgate": {
      "conditional": {
       "conditional:body": 275,
-      "conditional:engine_unattested": 20315,
-      "conditional:notes_not_own_page": 2804,
-      "conditional:option": 1152,
-      "conditional:production": 52,
-      "conditional:qualifier": 37,
-      "conditional:trim": 9184
+      "conditional:engine": 1554,
+      "conditional:engine_unattested": 33754,
+      "conditional:notes_not_own_page": 4452,
+      "conditional:option": 1280,
+      "conditional:production": 66,
+      "conditional:qualifier": 8416,
+      "conditional:trim": 15304
      },
      "eligible": {
-      "": 616
+      "": 1534
      },
      "no_records": {
-      "": 164102
+      "": 193169
      },
      "split": {
-      "no_candidates": 8384,
-      "option_split": 28085
+      "no_candidates": 10183,
+      "option_split": 30819
      },
      "unmapped": {
-      "": 11765
+      "": 27600
      }
     },
     "power-steering-pump": {
      "conditional": {
       "conditional:colour": 444,
-      "conditional:engine": 694,
-      "conditional:engine_unattested": 60564,
-      "conditional:notes_not_own_page": 6637,
+      "conditional:engine": 1482,
+      "conditional:engine_unattested": 60360,
+      "conditional:engine_unparsed": 32,
+      "conditional:notes_not_own_page": 5295,
       "conditional:option": 284,
-      "conditional:option_layout": 1783,
-      "conditional:qualifier": 7157,
-      "conditional:trim": 5443,
+      "conditional:option_layout": 1792,
+      "conditional:qualifier": 7123,
+      "conditional:trim": 5671,
       "conditional:unknown": 349
      },
      "no_records": {
-      "": 114433
+      "": 111947
      },
      "reman_only": {
       "reman_only": 34
      },
      "split": {
-      "no_candidates": 417,
-      "option_split": 107679
+      "no_candidates": 453,
+      "option_split": 110649
      },
      "unmapped": {
-      "": 27926
+      "": 27927
      }
     },
     "radiator": {
+     "blocked": {
+      "unverified_member": 54
+     },
      "conditional": {
-      "conditional:body": 46,
-      "conditional:colour": 32,
-      "conditional:engine": 1275,
-      "conditional:engine_unattested": 29103,
+      "conditional:body": 124,
+      "conditional:colour": 1012,
+      "conditional:engine": 1943,
+      "conditional:engine_unattested": 37973,
       "conditional:fuel": 4,
       "conditional:model_other": 52,
-      "conditional:notes_not_own_page": 2708,
-      "conditional:production": 17,
-      "conditional:qualifier": 9,
+      "conditional:notes_not_own_page": 5128,
+      "conditional:option": 836,
+      "conditional:production": 169,
+      "conditional:qualifier": 2716,
       "conditional:trans": 278,
-      "conditional:trim": 7112
+      "conditional:trim": 10292,
+      "conditional:unknown": 17
+     },
+     "gated": {
+      "kind_not_phase1": 9
      },
      "no_records": {
-      "": 54994
+      "": 38410
      },
      "split": {
-      "no_candidates": 1508,
-      "option_split": 142977
+      "no_candidates": 1979,
+      "option_split": 204919
      },
      "unmapped": {
-      "": 12092
+      "": 27927
      }
     },
     "side-mirrors": {
      "conditional": {
       "conditional:body": 42,
-      "conditional:colour": 191,
+      "conditional:colour": 199,
       "conditional:engine": 10,
-      "conditional:engine_unattested": 12106,
+      "conditional:engine_unattested": 12296,
       "conditional:notes_not_own_page": 160,
       "conditional:option": 1114,
       "conditional:qualifier": 696,
@@ -14363,48 +14999,53 @@
       "": 48
      },
      "no_records": {
-      "": 33649
+      "": 31698
      },
      "split": {
-      "no_candidates": 108,
-      "option_split": 249561,
+      "no_candidates": 114,
+      "option_split": 251299,
       "position_conflict": 2,
-      "position_missing": 219,
-      "slot_missing": 3617
+      "position_missing": 227,
+      "slot_missing": 3615
      },
      "unmapped": {
-      "": 24817
+      "": 24818
      }
     },
     "starter": {
+     "blocked": {
+      "unverified_member": 9
+     },
      "chain_member_conditional": {
       "chain_member_conditional": 48
      },
      "conditional": {
       "conditional:colour": 43,
-      "conditional:engine": 969,
-      "conditional:engine_unattested": 51642,
-      "conditional:engine_unparsed": 6,
-      "conditional:notes_not_own_page": 4658,
+      "conditional:engine": 509,
+      "conditional:engine_unattested": 51443,
+      "conditional:engine_unparsed": 27,
+      "conditional:listed_not_fitted": 7,
+      "conditional:notes_not_own_page": 4701,
       "conditional:option": 551,
-      "conditional:option_layout": 1235,
+      "conditional:option_layout": 1263,
       "conditional:plant": 387,
-      "conditional:qualifier": 12704,
+      "conditional:qualifier": 12623,
       "conditional:trans": 9,
-      "conditional:trim": 6070
+      "conditional:trim": 5798,
+      "conditional:trim_unknown": 6
      },
      "no_records": {
-      "": 32851
+      "": 31516
      },
      "reman_only": {
       "reman_only": 84
      },
      "split": {
-      "no_candidates": 532,
-      "option_split": 194129
+      "no_candidates": 542,
+      "option_split": 196349
      },
      "unmapped": {
-      "": 27926
+      "": 27927
      }
     },
     "tail-lights": {
@@ -14412,88 +15053,92 @@
       "unverified_member": 138
      },
      "chain_member_conditional": {
-      "chain_member_conditional": 532
+      "chain_member_conditional": 516
      },
      "conditional": {
       "conditional:body": 489,
       "conditional:colour": 54,
-      "conditional:engine": 1053,
-      "conditional:engine_unattested": 54682,
-      "conditional:engine_unparsed": 106,
-      "conditional:model_other": 7,
-      "conditional:notes_not_own_page": 3093,
+      "conditional:engine": 2654,
+      "conditional:engine_unattested": 53472,
+      "conditional:engine_unparsed": 117,
+      "conditional:model_other": 19,
+      "conditional:notes_not_own_page": 3175,
       "conditional:option": 287,
-      "conditional:option_layout": 140,
+      "conditional:option_layout": 153,
       "conditional:package": 45,
       "conditional:plant": 908,
       "conditional:position": 110,
       "conditional:production": 133,
-      "conditional:qualifier": 1204,
-      "conditional:trim": 17707
+      "conditional:qualifier": 681,
+      "conditional:trim": 18814
      },
      "eligible": {
-      "": 728
+      "": 820
      },
      "no_records": {
-      "": 60203
+      "": 55452
      },
      "split": {
-      "no_candidates": 345,
-      "option_split": 160105,
-      "position_missing": 1421,
-      "slot_missing": 2428
+      "no_candidates": 233,
+      "option_split": 163664,
+      "position_missing": 1548,
+      "slot_missing": 2433
      },
      "unmapped": {
-      "": 27926
+      "": 27927
      }
     },
     "tailgate": {
      "conditional": {
-      "conditional:engine_unattested": 3908,
-      "conditional:trim": 513
+      "conditional:engine_unattested": 4529,
+      "conditional:notes_not_own_page": 444,
+      "conditional:option": 78,
+      "conditional:qualifier": 167,
+      "conditional:trim": 2981,
+      "conditional:unknown": 7
      },
      "no_records": {
-      "": 104372
+      "": 203524
      },
      "split": {
-      "no_candidates": 9327,
-      "option_split": 9526
+      "no_candidates": 11775,
+      "option_split": 11992
      },
      "unmapped": {
-      "": 4494
+      "": 22461
      }
     },
     "throttle-body": {
      "chain_member_conditional": {
-      "chain_member_conditional": 570
+      "chain_member_conditional": 580
      },
      "conditional": {
       "conditional:colour": 43,
-      "conditional:engine": 2321,
-      "conditional:engine_unattested": 53139,
-      "conditional:engine_unparsed": 6,
+      "conditional:engine": 2302,
+      "conditional:engine_unattested": 52526,
+      "conditional:engine_unparsed": 19,
       "conditional:fitted_not_listed": 175,
-      "conditional:notes_not_own_page": 4881,
-      "conditional:option": 205,
-      "conditional:option_layout": 45,
-      "conditional:package": 6,
+      "conditional:notes_not_own_page": 5231,
+      "conditional:option": 259,
+      "conditional:option_layout": 49,
+      "conditional:package": 157,
       "conditional:plant": 272,
-      "conditional:qualifier": 15876,
-      "conditional:trim": 10563,
+      "conditional:qualifier": 15981,
+      "conditional:trim": 10674,
       "conditional:unknown": 135
      },
      "gated": {
       "kind_not_phase1": 571
      },
      "no_records": {
-      "": 69407
+      "": 67652
      },
      "split": {
-      "no_candidates": 1052,
-      "option_split": 146651
+      "no_candidates": 904,
+      "option_split": 148385
      },
      "unmapped": {
-      "": 27926
+      "": 27927
      }
     },
     "tow-mirrors": {
@@ -14502,13 +15147,13 @@
       "conditional:engine_unattested": 61,
       "conditional:notes_not_own_page": 45,
       "conditional:package": 42,
-      "conditional:trim": 7
+      "conditional:trim": 4
      },
      "no_records": {
-      "": 117705
+      "": 117703
      },
      "split": {
-      "option_split": 5488,
+      "option_split": 5491,
       "position_conflict": 606,
       "slot_missing": 2367
      },
@@ -14519,24 +15164,24 @@
     "trunk-lid": {
      "conditional": {
       "conditional:body": 318,
-      "conditional:engine_unattested": 23059,
+      "conditional:engine_unattested": 35016,
       "conditional:model_other": 78,
-      "conditional:notes_not_own_page": 1171,
-      "conditional:option": 1493,
-      "conditional:option_layout": 347,
+      "conditional:notes_not_own_page": 1379,
+      "conditional:option": 1534,
+      "conditional:option_layout": 947,
       "conditional:package": 327,
-      "conditional:qualifier": 275,
-      "conditional:trim": 7234
+      "conditional:qualifier": 1809,
+      "conditional:trim": 7393
      },
      "no_records": {
-      "": 102506
+      "": 184812
      },
      "split": {
-      "no_candidates": 5694,
-      "option_split": 55562
+      "no_candidates": 7058,
+      "option_split": 65244
      },
      "unmapped": {
-      "": 9960
+      "": 27927
      }
     },
     "window-regulator": {
@@ -14549,18 +15194,18 @@
       "": 256
      },
      "no_records": {
-      "": 29305
+      "": 27060
      },
      "split": {
-      "no_candidates": 236,
-      "packaging_incomplete": 10065,
-      "packaging_split": 55872,
-      "packaging_unstated": 207640,
+      "no_candidates": 245,
+      "packaging_incomplete": 9989,
+      "packaging_split": 55911,
+      "packaging_unstated": 209923,
       "position_missing": 1068,
-      "slot_missing": 26
+      "slot_missing": 13
      },
      "unmapped": {
-      "": 27926
+      "": 27927
      }
     },
     "window-switch": {
@@ -14568,29 +15213,29 @@
       "conditional:body": 117,
       "conditional:colour": 1394,
       "conditional:engine": 871,
-      "conditional:engine_unattested": 15299,
+      "conditional:engine_unattested": 15479,
       "conditional:model_other": 133,
-      "conditional:notes_not_own_page": 2624,
+      "conditional:notes_not_own_page": 2623,
       "conditional:option": 128,
       "conditional:plant": 391,
       "conditional:position": 205,
       "conditional:production": 30,
       "conditional:qualifier": 2707,
-      "conditional:trim": 7071
+      "conditional:trim": 6910
      },
      "eligible": {
       "": 143
      },
      "no_records": {
-      "": 54013
+      "": 47921
      },
      "split": {
-      "no_candidates": 2991,
-      "option_split": 157653,
-      "position_missing": 60148
+      "no_candidates": 2758,
+      "option_split": 161835,
+      "position_missing": 62270
      },
      "unmapped": {
-      "": 27926
+      "": 27927
      }
     }
    },

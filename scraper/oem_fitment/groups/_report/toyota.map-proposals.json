@@ -2,7 +2,7 @@
  "draft": {
   "entries": [
    {
-    "basis": "catalog prints 'LS400' (87 fitment rows, oem-raw@42683f9); normalize_model canon 'LS 400', 119 feed cars (inventory 2026-11-09); identity draft",
+    "basis": "catalog prints 'LS400' (87 fitment rows, oem-raw@c36da2e); normalize_model canon 'LS 400', 119 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Lexus",
     "cat_model": "LS400",
     "ns": "toyota",
@@ -15,7 +15,7 @@
     ]
    },
    {
-    "basis": "catalog prints 'LX470' (2 fitment rows, oem-raw@42683f9); normalize_model canon 'LX 470', 5 feed cars (inventory 2026-11-09); identity draft",
+    "basis": "catalog prints 'LX470' (2 fitment rows, oem-raw@c36da2e); normalize_model canon 'LX 470', 5 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Lexus",
     "cat_model": "LX470",
     "ns": "toyota",
@@ -28,7 +28,7 @@
     ]
    },
    {
-    "basis": "catalog prints 'SC300' (95 fitment rows, oem-raw@42683f9); normalize_model canon 'SC 300', 9 feed cars (inventory 2026-11-09); identity draft",
+    "basis": "catalog prints 'SC300' (95 fitment rows, oem-raw@c36da2e); normalize_model canon 'SC 300', 9 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Lexus",
     "cat_model": "SC300",
     "ns": "toyota",
@@ -41,7 +41,7 @@
     ]
    },
    {
-    "basis": "catalog prints 'SC400' (95 fitment rows, oem-raw@42683f9); normalize_model canon 'SC 400', 20 feed cars (inventory 2026-11-09); identity draft",
+    "basis": "catalog prints 'SC400' (95 fitment rows, oem-raw@c36da2e); normalize_model canon 'SC 400', 20 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Lexus",
     "cat_model": "SC400",
     "ns": "toyota",
@@ -54,7 +54,7 @@
     ]
    },
    {
-    "basis": "catalog prints 'C-HR' (3 fitment rows, oem-raw@42683f9); normalize_model canon 'C-HR', 12 feed cars (inventory 2026-11-09); identity draft",
+    "basis": "catalog prints 'C-HR' (3 fitment rows, oem-raw@c36da2e); normalize_model canon 'C-HR', 12 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Toyota",
     "cat_model": "C-HR",
     "ns": "toyota",
@@ -67,7 +67,7 @@
     ]
    },
    {
-    "basis": "catalog prints 'T100' (55 fitment rows, oem-raw@42683f9); normalize_model canon 'T100', 56 feed cars (inventory 2026-11-09); identity draft",
+    "basis": "catalog prints 'T100' (55 fitment rows, oem-raw@c36da2e); normalize_model canon 'T100', 56 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Toyota",
     "cat_model": "T100",
     "ns": "toyota",
@@ -551,5 +551,5 @@
    "squash_neighbours": []
   }
  ],
- "raw": "42683f9d86450b6bd00eb7fc7cc9640154607768"
+ "raw": "c36da2eb98835c02f81c05e8c36b6a926634a332"
 }

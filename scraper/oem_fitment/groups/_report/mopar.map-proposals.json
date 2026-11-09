@@ -2,7 +2,20 @@
  "draft": {
   "entries": [
    {
-    "basis": "catalog prints 'Grand Voyager' (57 fitment rows, oem-raw@42683f9); normalize_model canon 'Grand Voyager', 8 feed cars (inventory 2026-11-09); identity draft",
+    "basis": "catalog prints 'Crossfire' (61 fitment rows, oem-raw@c36da2e); normalize_model canon 'Crossfire', 50 feed cars (inventory 2026-11-09); identity draft",
+    "cat_make": "Chrysler",
+    "cat_model": "Crossfire",
+    "ns": "mopar",
+    "targets": [
+     {
+      "make": "Chrysler",
+      "model": "Crossfire",
+      "trims": "*"
+     }
+    ]
+   },
+   {
+    "basis": "catalog prints 'Grand Voyager' (76 fitment rows, oem-raw@c36da2e); normalize_model canon 'Grand Voyager', 8 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Chrysler",
     "cat_model": "Grand Voyager",
     "ns": "mopar",
@@ -15,7 +28,59 @@
     ]
    },
    {
-    "basis": "catalog prints 'Gladiator' (1 fitment rows, oem-raw@42683f9); normalize_model canon 'Gladiator', 1 feed cars (inventory 2026-11-09); identity draft",
+    "basis": "catalog prints '600' (11 fitment rows, oem-raw@c36da2e); normalize_model canon '600', 6 feed cars (inventory 2026-11-09); identity draft",
+    "cat_make": "Dodge",
+    "cat_model": "600",
+    "ns": "mopar",
+    "targets": [
+     {
+      "make": "Dodge",
+      "model": "600",
+      "trims": "*"
+     }
+    ]
+   },
+   {
+    "basis": "catalog prints 'Monaco' (1 fitment rows, oem-raw@c36da2e); normalize_model canon 'Monaco', 4 feed cars (inventory 2026-11-09); identity draft",
+    "cat_make": "Dodge",
+    "cat_model": "Monaco",
+    "ns": "mopar",
+    "targets": [
+     {
+      "make": "Dodge",
+      "model": "Monaco",
+      "trims": "*"
+     }
+    ]
+   },
+   {
+    "basis": "catalog prints 'Sprinter 2500' (147 fitment rows, oem-raw@c36da2e); normalize_model canon 'Sprinter 2500', 21 feed cars (inventory 2026-11-09); identity draft",
+    "cat_make": "Dodge",
+    "cat_model": "Sprinter 2500",
+    "ns": "mopar",
+    "targets": [
+     {
+      "make": "Dodge",
+      "model": "Sprinter 2500",
+      "trims": "*"
+     }
+    ]
+   },
+   {
+    "basis": "catalog prints 'Sprinter 3500' (146 fitment rows, oem-raw@c36da2e); normalize_model canon 'Sprinter 3500', 7 feed cars (inventory 2026-11-09); identity draft",
+    "cat_make": "Dodge",
+    "cat_model": "Sprinter 3500",
+    "ns": "mopar",
+    "targets": [
+     {
+      "make": "Dodge",
+      "model": "Sprinter 3500",
+      "trims": "*"
+     }
+    ]
+   },
+   {
+    "basis": "catalog prints 'Gladiator' (2 fitment rows, oem-raw@c36da2e); normalize_model canon 'Gladiator', 1 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Jeep",
     "cat_model": "Gladiator",
     "ns": "mopar",
@@ -33,6 +98,42 @@
   },
   "skipped": [
    {
+    "cat_make": "Chrysler",
+    "cat_model": "E Class",
+    "feed": [
+     "Chrysler",
+     "E Class"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Chrysler",
+    "cat_model": "Executive Limousine",
+    "feed": [
+     "Chrysler",
+     "Executive Limousine"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Chrysler",
+    "cat_model": "Executive Sedan",
+    "feed": [
+     "Chrysler",
+     "Executive Sedan"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Chrysler",
+    "cat_model": "Laser",
+    "feed": [
+     "Chrysler",
+     "Laser"
+    ],
+    "why": "no feed car under the canonical name"
+   },
+   {
     "cat_make": "Ram",
     "cat_model": "4500",
     "feed": [
@@ -49,6 +150,15 @@
      "5500"
     ],
     "why": "no feed car under the canonical name"
+   },
+   {
+    "cat_make": "Ram",
+    "cat_model": "ProMaster EV",
+    "feed": [
+     "Ram",
+     "ProMaster EV"
+    ],
+    "why": "no feed car under the canonical name"
    }
   ]
  },
@@ -56,9 +166,61 @@
  "proposals": [
   {
    "cat_make": "Chrysler",
+   "cat_model": "Crossfire",
+   "feed_cars": 50,
+   "fitment_rows": 61,
+   "ns": "mopar",
+   "proposed": {
+    "make": "Chrysler",
+    "model": "Crossfire",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Chrysler",
+   "cat_model": "E Class",
+   "feed_cars": 0,
+   "fitment_rows": 3,
+   "ns": "mopar",
+   "proposed": {
+    "make": "Chrysler",
+    "model": "E Class",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Chrysler",
+   "cat_model": "Executive Limousine",
+   "feed_cars": 0,
+   "fitment_rows": 4,
+   "ns": "mopar",
+   "proposed": {
+    "make": "Chrysler",
+    "model": "Executive Limousine",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Chrysler",
+   "cat_model": "Executive Sedan",
+   "feed_cars": 0,
+   "fitment_rows": 6,
+   "ns": "mopar",
+   "proposed": {
+    "make": "Chrysler",
+    "model": "Executive Sedan",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Chrysler",
    "cat_model": "Grand Voyager",
    "feed_cars": 8,
-   "fitment_rows": 57,
+   "fitment_rows": 76,
    "ns": "mopar",
    "proposed": {
     "make": "Chrysler",
@@ -68,10 +230,75 @@
    "squash_neighbours": []
   },
   {
+   "cat_make": "Chrysler",
+   "cat_model": "Laser",
+   "feed_cars": 0,
+   "fitment_rows": 6,
+   "ns": "mopar",
+   "proposed": {
+    "make": "Chrysler",
+    "model": "Laser",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Dodge",
+   "cat_model": "600",
+   "feed_cars": 6,
+   "fitment_rows": 11,
+   "ns": "mopar",
+   "proposed": {
+    "make": "Dodge",
+    "model": "600",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Dodge",
+   "cat_model": "Monaco",
+   "feed_cars": 4,
+   "fitment_rows": 1,
+   "ns": "mopar",
+   "proposed": {
+    "make": "Dodge",
+    "model": "Monaco",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Dodge",
+   "cat_model": "Sprinter 2500",
+   "feed_cars": 21,
+   "fitment_rows": 147,
+   "ns": "mopar",
+   "proposed": {
+    "make": "Dodge",
+    "model": "Sprinter 2500",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
+   "cat_make": "Dodge",
+   "cat_model": "Sprinter 3500",
+   "feed_cars": 7,
+   "fitment_rows": 146,
+   "ns": "mopar",
+   "proposed": {
+    "make": "Dodge",
+    "model": "Sprinter 3500",
+    "trims": "*"
+   },
+   "squash_neighbours": []
+  },
+  {
    "cat_make": "Jeep",
    "cat_model": "Gladiator",
    "feed_cars": 1,
-   "fitment_rows": 1,
+   "fitment_rows": 2,
    "ns": "mopar",
    "proposed": {
     "make": "Jeep",
@@ -84,7 +311,7 @@
    "cat_make": "Ram",
    "cat_model": "4500",
    "feed_cars": 0,
-   "fitment_rows": 28,
+   "fitment_rows": 52,
    "ns": "mopar",
    "proposed": {
     "make": "Ram",
@@ -97,7 +324,7 @@
    "cat_make": "Ram",
    "cat_model": "5500",
    "feed_cars": 0,
-   "fitment_rows": 28,
+   "fitment_rows": 52,
    "ns": "mopar",
    "proposed": {
     "make": "Ram",
@@ -105,7 +332,20 @@
     "trims": "*"
    },
    "squash_neighbours": []
+  },
+  {
+   "cat_make": "Ram",
+   "cat_model": "ProMaster EV",
+   "feed_cars": 0,
+   "fitment_rows": 2,
+   "ns": "mopar",
+   "proposed": {
+    "make": "Ram",
+    "model": "ProMaster EV",
+    "trims": "*"
+   },
+   "squash_neighbours": []
   }
  ],
- "raw": "42683f9d86450b6bd00eb7fc7cc9640154607768"
+ "raw": "c36da2eb98835c02f81c05e8c36b6a926634a332"
 }

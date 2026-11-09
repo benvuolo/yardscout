@@ -2,7 +2,7 @@
  "draft": {
   "entries": [
    {
-    "basis": "catalog prints 'Taos' (14 fitment rows, oem-raw@42683f9); normalize_model canon 'Taos', 5 feed cars (inventory 2026-11-09); identity draft",
+    "basis": "catalog prints 'Taos' (14 fitment rows, oem-raw@c36da2e); normalize_model canon 'Taos', 5 feed cars (inventory 2026-11-09); identity draft",
     "cat_make": "Volkswagen",
     "cat_model": "Taos",
     "ns": "vag",
@@ -1226,5 +1226,5 @@
    ]
   }
  ],
- "raw": "42683f9d86450b6bd00eb7fc7cc9640154607768"
+ "raw": "c36da2eb98835c02f81c05e8c36b6a926634a332"
 }

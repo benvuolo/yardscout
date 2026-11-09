@@ -22,7 +22,7 @@ TOY = "www.toyotapartsnow.com"
 
 # the tree hash as the spec defines it, computed here independently
 h = hashlib.sha256()
-for name in ("policy.py", "notes.py", "positions.py", "model_map.json"):
+for name in ("policy.py", "notes.py", "positions.py", "model_map.json", "release_allowlist.json"):
     h.update((OEM / name).read_bytes())
 S0 = h.hexdigest()
 
