@@ -2519,6 +2519,20 @@ Other outputs of this session:
     - Merges only after the Spectra and GSP/1A §11.4 samples pass and the hub confirms. When
       merging, re-check sw.js (jh-v173 on the branch) and the test_interchange category count.
     - Tier C wiper-motor/knuckle categories are not on it yet; they follow the OEM curation.
+    - Checked with both sessions (21:20 UTC):
+      - Spectra emits radiator, ac-compressor, ac-condenser, evaporator (renamed from
+        ac-evaporator, bde30ea), heater-core, throttle-body, fuel-pump-module and ignition-coils.
+      - fuel-tank (2 groups) is NOT on the branch: small. Add later if wanted.
+      - Body values: Sedan, Coupe, Hatchback, Wagon, Convertible, Van, Minivan, Pickup, Suv,
+        Sport Utility, Cab Chassis, Standard/Extended/Crew Cab Pickup.
+        - Cab styles: the decode can rule them out but only the listing confirms them.
+        - "Cab Chassis": always "if equipped", never excluded (cutaway vans decode as vans).
+      - GSP/1A emit cv-axle, plus 1A strut, throttle-body, fuel-pump-module and radiator.
+        1A also has knuckle, wiper-motor, door-handle-ext, door-lock-actuator, blower-motor,
+        maf-sensor and power-steering-pump. These need their own app categories later.
+      - 1A groups carry `position` (front/rear, left/right) only in label and note.
+      - 1A is never Pro-gated (owner). test_groups_rows checks pfAmRows and friends have no
+        Pro branch; it passes on the branch.
   - Then the curation build (design above). Per category, a §11.4 sample (60, independent
     session, 0 WRONG) and the hub's confirm before any app change on
     `interchange/categories-<n>`.
