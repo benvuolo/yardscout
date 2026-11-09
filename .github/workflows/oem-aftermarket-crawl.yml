@@ -7,12 +7,18 @@
 # ever used to join to dealer-catalog OEM numbers, never as "verified" alone.
 name: OEM aftermarket crawl
 
+# Plan job lists every aftermarket adapter (aftermarket/*.py with SITE and
+# STATUS = "ok") that is not .done/.blocked on oem-raw; one matrix job per
+# site (different domains, each paced by fetch.py), max-parallel 3. Each job
+# writes only aftermarket/raw/<site>.*, and checkpoints rebase-and-retry onto
+# oem-raw, so parallel jobs do not clobber each other. One run at a time
+# workflow-wide (concurrency group below).
 on:
   workflow_dispatch:
     inputs:
       site:
-        description: "Aftermarket site domain"
-        default: "www.dbelectrical.com"
+        description: "Aftermarket site domain(s), comma-separated, or all"
+        default: "all"
   schedule:
     - cron: "53 */6 * * *"
 
@@ -24,11 +30,32 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      sites: ${{ steps.list.outputs.sites }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: list
+        env:
+          WANT: ${{ github.event.inputs.site || 'all' }}
+        run: |
+          git fetch -q origin oem-raw:oem-raw 2>/dev/null || true
+          python3 scraper/oem_fitment/aftermarket/plan_sites.py --want "$WANT" --branch oem-raw >> "$GITHUB_OUTPUT"
+          cat "$GITHUB_OUTPUT"
+
   crawl:
+    needs: plan
+    if: needs.plan.outputs.sites != '[]'
     runs-on: ubuntu-latest
     timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        site: ${{ fromJSON(needs.plan.outputs.sites) }}
     env:
-      SITE: ${{ github.event.inputs.site || 'www.dbelectrical.com' }}
+      SITE: ${{ matrix.site }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
