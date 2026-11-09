@@ -2332,3 +2332,41 @@ hub, ship only on 0 WRONG plus hub confirmation.
   wheels merge); rules for the other 12 sites; any dispatch. Knuckle and
   strut curation must refuse option, drive, body and other notes the way
   the path E audit showed (§5).
+
+### Make breadth, update 2026-11-09 ~18:25 UTC
+
+- **V8 near-miss (mine).** 1fe9425 (model_map.json) and fdc98da (policy.py)
+  changed the policy hash without re-curating the shipped groups, so the next
+  scan would have dropped all 7 OEM namespaces. No scan published in
+  between. Fixed by ef6f340 (category session; my identical fix was dropped
+  on rebase). I follow the standing rule from now on (ops/README.md).
+- **Subaru, hub rulings and rounds 3-4.**
+  - Round 3 (after the mirror hold, fdc98da: `policy.OPTION_HOLD_CATS`,
+    refusal `held_option_cross_model`): 2 WRONG. 85021AJ19A and 85002AL05A
+    are Canada-market km/h clusters (Hollander 257-54290 / 257-66945),
+    printed under US years with no market note.
+  - Gauge clusters held too (580692f, shipped groups re-curated, only the
+    hash differs). Subaru: 49 -> 34 groups (25 window regulators/motors,
+    9 climate controls; 4,449 lot cars).
+  - Round 4 (fresh seed, 30 of 34 + 8 held-release): **RIGHT 35, WRONG 0,
+    UNSURE 3** (61041AL00A, 61041AL02A: no outside source names them;
+    61188KG000: bare motor, no position). Ship-eligible; sent to the hub
+    for confirmation. Nothing committed for subaru yet.
+  - Lesson for every namespace (hub): a category where an unseen option
+    (heated, power-fold, turbo scoop, km/h vs mph) or an unmarked
+    non-US configuration splits the part needs a visible option note or a
+    hold. Check this in each namespace's sample.
+- **GM Silverado/Sierra 1500 series filter: branch `make-breadth-gm-series`,
+  not main.**
+  - model_map `series` (regexes on the option column; a row with no series
+    never maps). Feed "Silverado 1500" / "Sierra 1500" =
+    `^(?!.*CLASSIC)1500(?!\s*HD)` or `1/2 TON`; years 1999-2006 and
+    2008-2026 (2007 left out, both bodies sold).
+  - `_drop_catchall_twins`: the unknown-series feed "Silverado"/"Sierra"
+    leaves a group that holds the 1500 twin of the same catalog model and
+    year. Without it, 174 Silverado + Silverado 1500 groups appeared.
+  - On c36da2e: 0 new, 0 removed, 34 shipped GM groups change ("Silverado"
+    apps become "Silverado 1500"). §11.4 sample of 20 is with independent
+    verifiers. Ships only on 0 WRONG plus hub go, with re-curated groups in
+    the same push. The large gain (4.5k lot cars) comes when the GM
+    completion pages are read.
