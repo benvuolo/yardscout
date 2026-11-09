@@ -2441,6 +2441,46 @@ Other outputs of this session:
 - Path E audit file: `groups/_report/pathE_audit_2026-11-09.json`. The
   per-item reasons are a good checklist of notes that knuckle and strut
   curation must refuse.
+
+### 9. Tier C crawl plumbing and rules (session_016ZzJfHdWViThcgyPbNG4i7, 2026-11-09 ~19:20 UTC)
+- crawl.py (ffe62f5): `TIERS["C"] = wiper-motor, knuckle, strut`. `TIER_FLAG = {"C": "tierC"}`:
+  a site crawls tier C only if its worklist entry has `"tierC": true`. `all` = A, B, C.
+  When interchange/wheels merges: `tiers = ["A","B","W","C"]`. Add `"W": "wheels"` to
+  TIER_FLAG (or keep wheels' own check). The version must be one above both
+  (the hub has the rule).
+- Method per site:
+  1. Slugs come from the R2 years manifest, or from year pages read in a local trial for
+     the 7 sites with no manifest (toyota, kia, audi, mazda, mitsubishi, volvo, bmw).
+  2. Placeholder rules that match nothing go in first. The trial lists every row.
+  3. Name rules are written from those rows.
+  4. A `--tier C --max-segments 2` trial runs against a scratch root, then `ci_audit`.
+  5. The flag goes in last (`tierC_note`; version one past main and wheels for done sites).
+- Flagged on main, trial clean (0 evidence mismatches, 0 category suspects):
+
+| site | version | trial records | notes for curation |
+|---|---|---|---|
+| honda, acura, nissan, infiniti | 2 | §7 | §7 |
+| toyota | 2 | 45 | 85110 motor; 43211/2 knuckle + 42304/5 rear carrier; 485x0 shocks |
+| ford | 3 | 48 | bases 17508; 3K185/6, 3105/6 (spindle); 18124/5, 18A092. Packages: "Shock Absorber Assy" vs "Shock Absorber Kit" (product page) vs "Strut - Loaded Assembly" |
+| bmw | 2 | 18 | E90 front wiper only as "Wiper System, Complete" (not taken). "spring strut" kept past the shared Springs exclusion via head() |
+| jeep | 4 | 26 | 68088535AC "Knuckle And Hub" superseded by AD "Knuckle - Front" (packaging differs across chain). 2AMST022AA = Mopar accessory shock series: never group. Motor rows whose aux says "Wiper Linkage" dropped |
+| vw | 3 | 28 | exact names. 1K0-505-435/436-AE are "Spindle" on their product pages: group as knuckle only if stated |
+| kia, hyundai | 2, 3 | 59, 47 | "Motor & Link Assy" not taken. Sonata "Wiper Motor, LH" (two motors) |
+| lexus | 3 | 46 | rear carrier read on rear_spring_shock_absorber |
+| gm | (not done, no bump) | 128 | MODULE (motor + transmission) not taken. Shocks carry RPO codes and "W/UPPER MOUNT" / "EXCEPT CIRCUIT BOARD" qualifiers |
+| volvo | 2 | 58 | "Wiper Motor, Driver/Passenger Side" (two motors) |
+
+- Rules in, trial pending: mb (the first trial hit the 25-min cap after one segment; re-running).
+  Rules not yet written: audi, mazda, mitsubishi.
+- Curation design (not started, needs the crawl): new CATEGORY_POLICY entries.
+  - knuckle/strut: slots FL/FR/RL/RR, axes side+door, front pair required.
+  - wiper-motor: front/rear slot. Needs a new "end" axis in positions.py, plus a
+    left/right sub-slot for twin motors.
+  - packaging(): strut assy/unit/kit/loaded; wiper motor vs module/linkage; knuckle vs knuckle+hub.
+  - NOUN entries + SIBLING_IGNORE.
+  - All of this is hashed (policy.py, positions.py), so re-curate all shipped
+    namespaces in the same push. Use `--inventory` from 7192563 until the CR-Z rescan.
+  - Strict note refusal per the hub's 18:20 decision. Path E audit file is the checklist.
 - **2026-11-09 ~18:45 UTC: subaru re-shipped (hub confirmed ~18:20).**
   - groups/subaru.json: 42 Likely, curated on **oem-raw@75dc442** (where its
     §11.4 sample was drawn). The other 7 namespaces stay on **c36da2e**.
