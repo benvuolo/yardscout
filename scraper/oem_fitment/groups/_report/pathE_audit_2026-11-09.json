@@ -1,0 +1,1463 @@
+{
+ "auditor": "independent subagent",
+ "items": [
+  {
+   "cat": "ac-compressor",
+   "pn": "5005441AJ",
+   "a": [
+    "Dodge",
+    "Caravan",
+    2005,
+    2005,
+    "3.3L 6-cyl"
+   ],
+   "b": [
+    "Dodge",
+    "Grand Caravan",
+    2004,
+    2005,
+    "3.3L 6-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "Both listed with 3.3L on product page, but list page note for this pn is '3.3 & 3.8L, With Rear AC': rear-A/C-only option part; not determinable for an ordinary Caravan/Grand Caravan.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~air-conditioning~5005441aj",
+    "https://www.jeeppartsdeal.com/parts-list/2005-dodge-caravan/a-c-heating/a-c-compressor"
+   ]
+  },
+  {
+   "cat": "ac-compressor",
+   "pn": "55111418AD",
+   "a": [
+    "Dodge",
+    "Challenger",
+    2010,
+    2010,
+    "3.5L 6-cyl"
+   ],
+   "b": [
+    "Dodge",
+    "Charger",
+    2007,
+    2007,
+    "3.5L 6-cyl"
+   ],
+   "verdict": "RIGHT",
+   "reason": "Page lists 2009-2010 Challenger SE and 2007-2010 Charger with 6 Cyl 3.5L; list notes '2008-13, 3.5L' (Challenger) and '3.5L' (Charger 2007). Compressor assembly. Caveat: 2007 Charger list also shows 55111035AB 'Charger, Magnum, 300; 3.5L' without a distinguishing note.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~air-conditioning~55111418ad",
+    "https://www.jeeppartsdeal.com/parts-list/2010-dodge-challenger/a-c-heating/a-c-compressor"
+   ]
+  },
+  {
+   "cat": "ac-compressor",
+   "pn": "89018903",
+   "a": [
+    "Oldsmobile",
+    "Alero",
+    2001,
+    2001,
+    "3.4L 6-cyl"
+   ],
+   "b": [
+    "Pontiac",
+    "Grand Am",
+    2004,
+    2004,
+    "3.4L 6-cyl"
+   ],
+   "verdict": "RIGHT",
+   "reason": "Page lists 1999-2004 Alero and 1999-2005 Grand Am with 6 Cyl 3.4L; V5 compressor with clutch; list option N(LA1,C60) = 3.4L + A/C, no restriction.",
+   "sources": [
+    "https://www.gmpartsgiant.com/parts/gm-compresso-89018903.html",
+    "https://www.gmpartsgiant.com/parts-list/2004-pontiac-grand_am/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html"
+   ]
+  },
+  {
+   "cat": "ac-compressor",
+   "pn": "55111424AD",
+   "a": [
+    "Chrysler",
+    "Town & Country",
+    2008,
+    2008,
+    "4.0L 6-cyl"
+   ],
+   "b": [
+    "Dodge",
+    "Grand Caravan",
+    2010,
+    2010,
+    "4.0L 6-cyl"
+   ],
+   "verdict": "RIGHT",
+   "reason": "Page lists 2008-2010 Town & Country and Grand Caravan with 4.0L; 2008 T&C list note '4.0L' only; compressor.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~air-conditioning~55111424ad",
+    "https://www.jeeppartsdeal.com/parts-list/2008-chrysler-town-country/a-c-heating/a-c-compressor"
+   ]
+  },
+  {
+   "cat": "ac-compressor",
+   "pn": "55056288AF",
+   "a": [
+    "Chrysler",
+    "Aspen",
+    2007,
+    2007,
+    "4.7L 8-cyl"
+   ],
+   "b": [
+    "Dodge",
+    "Durango",
+    2005,
+    2005,
+    "4.7L 8-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "Both listed with 4.7L, but 2005 Durango list note '3.7 & 4.7L, With Rear Heat' (55056287AD is the Without Rear Heat part): option-restricted, not determinable for an ordinary car.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~air-conditioning~55056288af",
+    "https://www.jeeppartsdeal.com/parts-list/2005-dodge-durango/a-c-heating/a-c-compressor"
+   ]
+  },
+  {
+   "cat": "ac-compressor",
+   "pn": "55111424AB",
+   "a": [
+    "Chrysler",
+    "Town & Country",
+    2008,
+    2008,
+    "4.0L 6-cyl"
+   ],
+   "b": [
+    "Dodge",
+    "Grand Caravan",
+    2010,
+    2010,
+    "4.0L 6-cyl"
+   ],
+   "verdict": "RIGHT",
+   "reason": "Page lists 2008-2010 T&C and Grand Caravan 4.0L; note 'All Models; 4.0L'; superseded by 55111424AD (same interchange).",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~compres0r-air-conditioning~55111424ab",
+    "https://www.jeeppartsdeal.com/parts-list/2008-chrysler-town-country/a-c-heating/a-c-compressor"
+   ]
+  },
+  {
+   "cat": "ac-compressor",
+   "pn": "RL016695AA",
+   "a": [
+    "Chrysler",
+    "Sebring",
+    2000,
+    2000,
+    "2.4L 4-cyl"
+   ],
+   "b": [
+    "Dodge",
+    "Stratus",
+    1999,
+    1999,
+    "2.0L 4-cyl"
+   ],
+   "verdict": "RIGHT",
+   "reason": "Page lists 1996-2000 Sebring JX/JXi (convertible, the only 2000 Sebring with 2.4L) with 2.4L and 1995-2000 Stratus with 2.0L; no notes; compressor (RL reman number). 2000 Sebring list page did not load (redirected), judged from product page.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~compres0r-air-conditioning~rl016695aa"
+   ]
+  },
+  {
+   "cat": "ac-compressor",
+   "pn": "RL677144AB",
+   "a": [
+    "Dodge",
+    "Caravan",
+    1999,
+    1999,
+    "3.8L 6-cyl"
+   ],
+   "b": [
+    "Dodge",
+    "Grand Caravan",
+    2000,
+    2000,
+    "3.8L 6-cyl"
+   ],
+   "verdict": "RIGHT",
+   "reason": "Page lists 1996-2000 Caravan and Grand Caravan with 3.8L; note covers with and without rear AC. SWB Caravan 3.8L corroborated by cars.com 1999 Caravan LE 113in 3.8L listing.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~compres0r-air-conditioning~rl677144ab",
+    "https://www.jeeppartsdeal.com/parts-list/2000-dodge-grand-caravan/a-c-heating/a-c-compressor",
+    "https://www.cars.com/research/dodge-caravan-1999/trims"
+   ]
+  },
+  {
+   "cat": "ac-compressor",
+   "pn": "89019373",
+   "a": [
+    "Chevrolet",
+    "Astro",
+    2000,
+    2000,
+    "4.3L 6-cyl"
+   ],
+   "b": [
+    "GMC",
+    "Safari",
+    1997,
+    1997,
+    "4.3L 6-cyl"
+   ],
+   "verdict": "RIGHT",
+   "reason": "Page lists 1996-2005 Astro and Safari 4.3L; H6 compressor with clutch; single compressor on 2000 Astro list, no option codes.",
+   "sources": [
+    "https://www.gmpartsgiant.com/parts/gm-compresso-89019373.html",
+    "https://www.gmpartsgiant.com/parts-list/2000-chevrolet-astro-2wd/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html"
+   ]
+  },
+  {
+   "cat": "ac-compressor",
+   "pn": "55056095AB",
+   "a": [
+    "Dodge",
+    "Durango",
+    2003,
+    2003,
+    "5.9L 8-cyl"
+   ],
+   "b": [
+    "Dodge",
+    "Ram 2500",
+    2003,
+    2003,
+    "8.0L 10-cyl"
+   ],
+   "verdict": "RIGHT",
+   "reason": "Page lists 2002-2003 Durango 5.9L and 2003 Ram 2500 8.0L V10; 2003 Ram 2500 list note '2003, 8.0L'; 2003 Durango list note 'Without 4.7L, With/Without Rear Air'.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~compres0r-air-conditioning~55056095ab",
+    "https://www.jeeppartsdeal.com/parts-list/2003-dodge-ram-2500/a-c-heating/a-c-compressor"
+   ]
+  },
+  {
+   "cat": "ac-compressor",
+   "pn": "55111417AG",
+   "a": [
+    "Chrysler",
+    "Town & Country",
+    2008,
+    2008,
+    "3.3L 6-cyl"
+   ],
+   "b": [
+    "Dodge",
+    "Grand Caravan",
+    2010,
+    2010,
+    "3.8L 6-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "Both listed, but list note for 3.3L is 'With Rear AC' (55111416AD is 3.3L Without Rear AC): vehicle a (T&C 3.3L) is option-restricted. 3.8L (b) unrestricted.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~air-conditioning~55111417ag",
+    "https://www.jeeppartsdeal.com/parts-list/2010-dodge-grand-caravan/a-c-heating/a-c-compressor"
+   ]
+  },
+  {
+   "cat": "ac-compressor",
+   "pn": "55111410AF",
+   "a": [
+    "Chrysler",
+    "Sebring",
+    2008,
+    2008,
+    "2.4L 4-cyl"
+   ],
+   "b": [
+    "Dodge",
+    "Journey",
+    2012,
+    2012,
+    "2.4L 4-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "Both listed with 2.4L, but 2012 Journey list note '2011-20, Without Rear AC, 2.4L': rear-A/C Journeys excluded; b not determinable for an ordinary car.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~compresor-air-conditioning~55111410af",
+    "https://www.jeeppartsdeal.com/parts-list/2012-dodge-journey/a-c-heating/a-c-compressor"
+   ]
+  },
+  {
+   "cat": "ac-compressor",
+   "pn": "19130448",
+   "a": [
+    "Chevrolet",
+    "Venture",
+    2004,
+    2004,
+    "3.4L 6-cyl"
+   ],
+   "b": [
+    "Pontiac",
+    "Montana",
+    2004,
+    2004,
+    "3.4L 6-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "Both listed with 3.4L, but list page option U(LA1,C69); 19258827 is U(LA1)(EXC C69). 19130448 is only for vans with RPO C69 (rear A/C per a marketplace listing; definition not confirmed from GM).",
+   "sources": [
+    "https://www.gmpartsgiant.com/parts/gm-compresso-19130448.html",
+    "https://www.gmpartsgiant.com/parts-list/2004-chevrolet-venture/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html",
+    "https://cn.ebay.com/b/Genuine-OEM-Air-Conditioning-Heating-for-Chevrolet-Venture/33542/bn_33552655"
+   ]
+  },
+  {
+   "cat": "ac-compressor",
+   "pn": "68103198AE",
+   "a": [
+    "Chrysler",
+    "200",
+    2015,
+    2015,
+    "3.6L 6-cyl"
+   ],
+   "b": [
+    "Jeep",
+    "Cherokee",
+    2015,
+    2015,
+    "3.2L 6-cyl"
+   ],
+   "verdict": "RIGHT",
+   "reason": "Page lists 2015-2017 Chrysler 200 3.6L and 2014-2022 Cherokee 3.2L; 2015 200 list note '3.6L', Cherokee list note '3.2L'; compressor.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~air-conditioning~68103198ae",
+    "https://www.jeeppartsdeal.com/parts-list/2015-chrysler-200/a-c-heating/a-c-compressor"
+   ]
+  },
+  {
+   "cat": "ac-compressor",
+   "pn": "55111034AC",
+   "a": [
+    "Chrysler",
+    "300",
+    2006,
+    2006,
+    "2.7L 6-cyl"
+   ],
+   "b": [
+    "Dodge",
+    "Charger",
+    2007,
+    2007,
+    "2.7L 6-cyl"
+   ],
+   "verdict": "RIGHT",
+   "reason": "Page lists 2006-2010 Chrysler 300 and Charger 2.7L; 2007 Charger list note '2.7L'.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~air-conditioning~55111034ac",
+    "https://www.jeeppartsdeal.com/parts-list/2007-dodge-charger/a-c-heating/a-c-compressor"
+   ]
+  },
+  {
+   "cat": "ac-compressor",
+   "pn": "4758322AC",
+   "a": [
+    "Chrysler",
+    "300M",
+    2002,
+    2002,
+    "3.5L 6-cyl"
+   ],
+   "b": [
+    "Chrysler",
+    "Concorde",
+    2002,
+    2002,
+    "2.7L 6-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "Concorde row merges engines 2.7/3.2/3.5, but list notes are '3.2L, 3.5L' (2004 Intrepid) and '3.5L' (2002 Concorde); 2.7L uses 4698723AD. Vehicle b (Concorde 2.7L) wrong.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~compres0r-air-conditioning~4758322ac",
+    "https://www.jeeppartsdeal.com/parts-list/2004-dodge-intrepid/a-c-heating/a-c-compressor",
+    "https://www.jeeppartsdeal.com/parts-list/2002-chrysler-concorde/a-c-heating/a-c-compressor"
+   ]
+  },
+  {
+   "cat": "ac-compressor",
+   "pn": "5058228AI",
+   "a": [
+    "Dodge",
+    "Caliber",
+    2007,
+    2007,
+    "2.4L 4-cyl"
+   ],
+   "b": [
+    "Jeep",
+    "Compass",
+    2007,
+    2007,
+    "2.4L 4-cyl"
+   ],
+   "verdict": "RIGHT",
+   "reason": "Page lists 2007-2008 Caliber and Compass with 2.4L; note '2007-09'; compressor.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~compresor-air-conditioning~5058228ai",
+    "https://www.jeeppartsdeal.com/parts-list/2007-dodge-caliber/a-c-heating/a-c-compressor"
+   ]
+  },
+  {
+   "cat": "ac-compressor",
+   "pn": "19433085",
+   "a": [
+    "Chevrolet",
+    "Silverado",
+    2000,
+    2000,
+    "4.8L 8-cyl"
+   ],
+   "b": [
+    "GMC",
+    "Savana",
+    2005,
+    2005,
+    "4.8L 8-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "Listed, but GM restricts: 'W/10PA17C TYPE COMPRESSOR' and options (LM7,LR4,LQ4,C60,OSG)(2ND DES); 89019357 is the H6-type alternative for the same truck. Which a 2000 Silverado 4.8L takes depends on the original compressor type: not determinable.",
+   "sources": [
+    "https://www.gmpartsgiant.com/parts/gm-compressor-asm-a-c-19433085.html",
+    "https://www.gmpartsgiant.com/parts-list/2000-chevrolet-silverado-1500_2wd/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html"
+   ]
+  },
+  {
+   "cat": "ac-compressor",
+   "pn": "19258826",
+   "a": [
+    "Cadillac",
+    "DeVille",
+    2004,
+    2004,
+    "4.6L 8-cyl"
+   ],
+   "b": [
+    "Cadillac",
+    "Seville",
+    2003,
+    2003,
+    "4.6L 8-cyl"
+   ],
+   "verdict": "RIGHT",
+   "reason": "Page lists 1998-2005 DeVille and 1998-2004 Seville 4.6L; option 'K' (all K-body). Minor: DeVille list also has 19130452 for KD(J55,VB6)(EXC JH6), apparently special packages.",
+   "sources": [
+    "https://www.gmpartsgiant.com/parts/gm-compresso-19258826.html",
+    "https://www.gmpartsgiant.com/parts-list/2004-cadillac-deville/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_mounting.html"
+   ]
+  },
+  {
+   "cat": "ac-compressor",
+   "pn": "25825339",
+   "a": [
+    "Buick",
+    "Rainier",
+    2004,
+    2004,
+    "4.2L 6-cyl"
+   ],
+   "b": [
+    "Chevrolet",
+    "Trailblazer",
+    2004,
+    2004,
+    "4.2L 6-cyl"
+   ],
+   "verdict": "RIGHT",
+   "reason": "Page lists 2004-2007 Rainier and 2002-2007 Trailblazer 4.2L; option ST1(LL8) = 4.2L.",
+   "sources": [
+    "https://www.gmpartsgiant.com/parts/gm-compressor-25825339.html",
+    "https://www.gmpartsgiant.com/parts-list/2004-chevrolet-trailblazer-2wd/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html"
+   ]
+  },
+  {
+   "cat": "ac-compressor",
+   "pn": "5U2Z-19V703-JD",
+   "a": [
+    "Ford",
+    "Aerostar",
+    1995,
+    1995,
+    "3.0L 6-cyl"
+   ],
+   "b": [
+    "Ford",
+    "Aerostar",
+    1995,
+    1995,
+    "4.0L 6-cyl"
+   ],
+   "verdict": "RIGHT",
+   "reason": "Page lists 1990-1997 Aerostar with 3.0L and 4.0L; 'New loaded compressor assembly. Includes clutch, coil, pulley'; no restricting note.",
+   "sources": [
+    "https://www.fordpartsgiant.com/parts/ford-compressor-asy_5u2z-19v703-jd.html",
+    "https://www.fordpartsgiant.com/parts-list/1995-ford-aerostar--6_cyl_3_0l-4at_4r44e/air_conditioner_radio_shock_absorbers/compressor.html"
+   ]
+  },
+  {
+   "cat": "ac-compressor",
+   "pn": "88310-42140-84",
+   "a": [
+    "Toyota",
+    "RAV4",
+    2002,
+    2002,
+    "2.0L 4-cyl"
+   ],
+   "b": [
+    "Toyota",
+    "RAV4",
+    2002,
+    2002,
+    "2.4L 4-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "Toyota row 2001-2005 RAV4 merges 2.0L/2.4L, but 2002 US RAV4 had only the 2.0L (2.4L 2AZ-FE arrived 2004, per web sources); vehicle b does not exist. Note also has serial break 'Aca2# 00080511'.",
+   "sources": [
+    "https://www.toyotapartsnow.com/oem/toyota~compressor-w-clutch~88310-42140-84",
+    "https://www.toyotapartsnow.com/parts-list/2002-toyota-rav4/a-c-heating/a-c-compressor",
+    "https://www.carwhere.com/specs/toyota/rav4/2002"
+   ]
+  },
+  {
+   "cat": "ac-compressor",
+   "pn": "F87Z-19703-BA",
+   "a": [
+    "Ford",
+    "Ranger",
+    2000,
+    2000,
+    "2.5L 4-cyl"
+   ],
+   "b": [
+    "Ford",
+    "Ranger",
+    2000,
+    2000,
+    "3.0L 6-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "Group 'DEALER INSTALLED AIR CONDITIONING', manufacturer note 'Compressor/clutch kit, 3.0L': dealer-installed A/C kit, 3.0L only. Vehicle a (2.5L) wrong; factory-A/C trucks not covered.",
+   "sources": [
+    "https://www.fordpartsgiant.com/parts/ford-compressor-asy_f87z-19703-ba.html",
+    "https://www.fordpartsgiant.com/parts-list/2000-ford-ranger--4_cyl_2_5l-4at_4r44e/air_conditioner_radio_shock_absorbers/compressor.html"
+   ]
+  },
+  {
+   "cat": "ac-compressor",
+   "pn": "68102839AE",
+   "a": [
+    "Dodge",
+    "Dart",
+    2013,
+    2013,
+    "2.0L 4-cyl"
+   ],
+   "b": [
+    "Dodge",
+    "Dart",
+    2013,
+    2013,
+    "2.4L 4-cyl"
+   ],
+   "verdict": "RIGHT",
+   "reason": "Page lists 2013-2014 Dart with 2.0L and 2.4L; note 'Without Turbo' (1.4T uses 68081094AD); both claimed engines are non-turbo.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~compres0r-air-conditioning~68102839ae",
+    "https://www.jeeppartsdeal.com/parts-list/2013-dodge-dart/a-c-heating/a-c-compressor"
+   ]
+  },
+  {
+   "cat": "ac-compressor",
+   "pn": "191-820-805",
+   "a": [
+    "Volkswagen",
+    "Golf",
+    1990,
+    1990,
+    "1.8L 4-cyl"
+   ],
+   "b": [
+    "Volkswagen",
+    "Golf",
+    1990,
+    1990,
+    "2.0L 4-cyl"
+   ],
+   "verdict": "UNSURE",
+   "reason": "Page lists 1985-1992 Golf with 1.8L and 2.0L, but list note 'Without Clutch' (and $79 price): a bare compressor body, not the clutch-equipped unit a puller removes; clutch/pulley interchange between engines not shown.",
+   "sources": [
+    "https://www.vwpartsgiant.com/genuine/volkswagen~compressor~191820805",
+    "https://www.vwpartsgiant.com/parts-list/1990-volkswagen-golf/a-c-heating/a-c-compressor"
+   ]
+  },
+  {
+   "cat": "ac-compressor",
+   "pn": "89019357",
+   "a": [
+    "Chevrolet",
+    "Silverado",
+    1999,
+    2000,
+    "4.8L 8-cyl"
+   ],
+   "b": [
+    "Chevrolet",
+    "Silverado",
+    1999,
+    2000,
+    "8.1L 8-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "Silverado row lists 8.1L for 1999-2002, but options are (LM7,LQ4,LR4,...) only (5.3/6.0/4.8) and 8.1L did not exist in 1999-2000 Silverado; also restricted to H6-type 1st design (19433085 is the 10PA17C alternative).",
+   "sources": [
+    "https://www.gmpartsgiant.com/parts/gm-compresso-89019357.html",
+    "https://www.gmpartsgiant.com/parts-list/2000-chevrolet-silverado-1500_2wd/body_mounting_air_conditioning_audio_entertainment/a_c_compressor_assembly.html"
+   ]
+  },
+  {
+   "cat": "ac-compressor",
+   "pn": "89019365",
+   "a": [
+    "Chevrolet",
+    "Astro",
+    1994,
+    1994,
+    "2.5L 4-cyl"
+   ],
+   "b": [
+    "Chevrolet",
+    "Astro",
+    1994,
+    1994,
+    "4.3L 6-cyl"
+   ],
+   "verdict": "UNSURE",
+   "reason": "GM row 1990-1994 Astro merges 2.5L and 4.3L. Sources disagree on whether the 2.5L was offered after 1990; Wikipedia could not be read (fetcher refused). Cannot confirm a 1994 Astro 2.5L exists.",
+   "sources": [
+    "https://www.gmpartsgiant.com/parts/gm-compresso-89019365.html",
+    "https://blog.consumerguide.com/?p=72621"
+   ]
+  },
+  {
+   "cat": "ac-compressor",
+   "pn": "55056287AD",
+   "a": [
+    "Dodge",
+    "Durango",
+    2005,
+    2005,
+    "3.7L 6-cyl"
+   ],
+   "b": [
+    "Dodge",
+    "Durango",
+    2005,
+    2005,
+    "4.7L 8-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "List note '3.7 & 4.7L, Without Rear Heat' (55056288AF for With Rear Heat): option-restricted for both vehicles.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~compres0r-air-conditioning~55056287ad",
+    "https://www.jeeppartsdeal.com/parts-list/2005-dodge-durango/a-c-heating/a-c-compressor"
+   ]
+  },
+  {
+   "cat": "ac-compressor",
+   "pn": "55111413AB",
+   "a": [
+    "Jeep",
+    "Commander",
+    2006,
+    2006,
+    "3.7L 6-cyl"
+   ],
+   "b": [
+    "Jeep",
+    "Commander",
+    2006,
+    2006,
+    "4.7L 8-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "List note '3.7L, With Rear AC;4.7L, With Rear AC'; 55116834AD is the Without Rear AC part: option-restricted.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~compresor-air-conditioning~55111413ab",
+    "https://www.jeeppartsdeal.com/parts-list/2006-jeep-commander/a-c-heating/a-c-compressor"
+   ]
+  },
+  {
+   "cat": "ac-compressor",
+   "pn": "1K0-820-808-H",
+   "a": [
+    "Volkswagen",
+    "Jetta",
+    2014,
+    2015,
+    "1.4L 4-cyl"
+   ],
+   "b": [
+    "Volkswagen",
+    "Jetta",
+    2014,
+    2015,
+    "1.8L 4-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "Row merges 1.4/1.8/2.0/2.0D, but 2014 Jetta list note 'Jetta; 2.0L; With Turbo' (5C0-820-803-G for 2.0L without turbo). Neither 1.4L hybrid nor 1.8L is covered by the note.",
+   "sources": [
+    "https://www.vwpartsgiant.com/genuine/volkswagen~compressor~1k0820808h",
+    "https://www.vwpartsgiant.com/parts-list/2014-volkswagen-jetta/a-c-heating/a-c-compressor"
+   ]
+  },
+  {
+   "cat": "fuel-pump-module",
+   "pn": "RL093455AD",
+   "a": [
+    "Chrysler",
+    "Sebring",
+    2004,
+    2004,
+    "2.4L 4-cyl"
+   ],
+   "b": [
+    "Dodge",
+    "Stratus",
+    2006,
+    2006,
+    "2.4L 4-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "List notes '2.4L; Convertible, Without Flexible Fuel; Sedan, 2.4L': sedan/convertible only. 2004 Sebring also came as a 2.4L coupe (Mitsubishi platform), excluded; claim has no body gate.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~fuel-pump-module-level-unit~rl093455ad",
+    "https://www.jeeppartsdeal.com/parts-list/2004-chrysler-sebring/air-fuel-delivery/fuel-supply"
+   ]
+  },
+  {
+   "cat": "fuel-pump-module",
+   "pn": "19179420",
+   "a": [
+    "Chevrolet",
+    "C1500",
+    1997,
+    1997,
+    "7.4L 8-cyl"
+   ],
+   "b": [
+    "Chevrolet",
+    "K2500",
+    1998,
+    1998,
+    "5.7L 8-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "GM option CK1,2(03-53)(L56,L65) = 6.5L diesel only, code VRB; diesel sender. Neither 7.4L (a) nor 5.7L (b) is covered.",
+   "sources": [
+    "https://www.gmpartsgiant.com/parts/gm-sender-19179420.html",
+    "https://www.gmpartsgiant.com/parts-list/1997-chevrolet-c1500/fuel_system_exhaust_emission_system/fuel_supply_system_rear.html"
+   ]
+  },
+  {
+   "cat": "fuel-pump-module",
+   "pn": "77020-06306",
+   "a": [
+    "Toyota",
+    "Camry",
+    2012,
+    2012,
+    "2.5L 4-cyl"
+   ],
+   "b": [
+    "Toyota",
+    "Camry Hybrid",
+    2012,
+    2012,
+    "2.5L 4-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "No page note, but 77020-06306 supersedes 77020-06302 'Tube Assy, Fuel Suction W/Pump & Gage' 'USA PZEV', options ASV50 SE/XLE/LE + AVV50 (hybrid). Non-PZEV 2.5L takes 77020-06286. Hybrid OK; ordinary Camry 2.5L (a) not determinable.",
+   "sources": [
+    "https://www.toyotapartsnow.com/oem/toyota~fuel-suction-tube-assembly-w-pump-gage~77020-06306",
+    "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/air-fuel-delivery/fuel-supply"
+   ]
+  },
+  {
+   "cat": "fuel-pump-module",
+   "pn": "42021AL02A",
+   "a": [
+    "Subaru",
+    "Legacy",
+    2015,
+    2015,
+    "2.5L 4-cyl"
+   ],
+   "b": [
+    "Subaru",
+    "Outback",
+    2015,
+    2015,
+    "2.5L 4-cyl"
+   ],
+   "verdict": "RIGHT",
+   "reason": "Page lists 2015-2017 Legacy and Outback 2.5L H4; options FB25 (25B) on both the Legacy and Outback lists; pump assembly.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts/subaru-pump-assembly-fuel~42021al02a.html",
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-outback/engine_mounting_cooling/fuel_tank.html"
+   ]
+  },
+  {
+   "cat": "fuel-pump-module",
+   "pn": "15762973",
+   "a": [
+    "Chevrolet",
+    "S-10",
+    2000,
+    2000,
+    "4.3L 6-cyl"
+   ],
+   "b": [
+    "GMC",
+    "Sonoma",
+    2000,
+    2000,
+    "4.3L 6-cyl"
+   ],
+   "verdict": "UNSURE",
+   "reason": "Page lists 2000-2001 S10 and Sonoma 4.3L, but name is 'SENDER,FUEL(*KIT1)' / 'Sender Assembly, Fuel' while the same list page has 19369929 'MODULE ... (SENDER & PUMP)' for L35 4.3L. Cannot confirm this pn includes the pump.",
+   "sources": [
+    "https://www.gmpartsgiant.com/parts/gm-sender-15762973.html",
+    "https://www.gmpartsgiant.com/parts-list/2000-chevrolet-s10-2wd/fuel_system_exhaust_emission_system/fuel_tank_sender.html"
+   ]
+  },
+  {
+   "cat": "fuel-pump-module",
+   "pn": "68004095AE",
+   "a": [
+    "Dodge",
+    "Nitro",
+    2007,
+    2007,
+    "3.7L 6-cyl"
+   ],
+   "b": [
+    "Jeep",
+    "Liberty",
+    2008,
+    2008,
+    "3.7L 6-cyl"
+   ],
+   "verdict": "RIGHT",
+   "reason": "Page lists 2007-2011 Nitro and 2008-2012 Liberty 3.7L; Module - Fuel Pump/Level Unit; no notes on the 2007 Nitro or 2008 Liberty lists. Caveat: both lists also show 68004936AE with no distinguishing note.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~module-fuel-pump-level-unit~68004095ae",
+    "https://www.jeeppartsdeal.com/parts-list/2008-jeep-liberty/air-fuel-delivery/fuel-supply",
+    "https://www.jeeppartsdeal.com/parts-list/2007-dodge-nitro/air-fuel-delivery/fuel-supply"
+   ]
+  },
+  {
+   "cat": "fuel-pump-module",
+   "pn": "68004936AE",
+   "a": [
+    "Dodge",
+    "Nitro",
+    2007,
+    2007,
+    "4.0L 6-cyl"
+   ],
+   "b": [
+    "Jeep",
+    "Liberty",
+    2008,
+    2008,
+    "3.7L 6-cyl"
+   ],
+   "verdict": "UNSURE",
+   "reason": "Listed for 2007-2011 Nitro (3.7/4.0) and 2008-2011 Liberty 3.7, but the 2008 Liberty list labels it 'Sending Unit' at a different ref than module 68004095AE, and the page also fits JS sedans (Sebring/Avenger/200 flex), which have an unrelated tank. Mopar store calls it a pump/level-unit kit. Identity and fitment inconsistent.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~module-fuel-pump-level-unit~68004936ae",
+    "https://www.jeeppartsdeal.com/parts-list/2008-jeep-liberty/air-fuel-delivery/fuel-supply",
+    "https://store.mopar.com/oem-parts/mopar-fuel-pump-level-unit-module-kit-68004936ae"
+   ]
+  },
+  {
+   "cat": "fuel-pump-module",
+   "pn": "5136021AE",
+   "a": [
+    "Dodge",
+    "Charger",
+    2007,
+    2007,
+    "5.7L 8-cyl"
+   ],
+   "b": [
+    "Dodge",
+    "Magnum",
+    2005,
+    2005,
+    "5.7L 8-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "List note 'Left Side, 18 Gallon'; LX cars have two modules (5161808AC Left Side With SRT8, etc.). Tank-size and side restriction: not determinable for an ordinary Charger/Magnum 5.7L.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~fuel-pump-level-unit-module~5136021ae",
+    "https://www.jeeppartsdeal.com/parts-list/2006-chrysler-300/air-fuel-delivery/fuel-supply",
+    "https://www.americanmuscle.com/charger-fuel-pump-module-for-18-gallon-tanks-driver-side-j2-fpm-0158.html"
+   ]
+  },
+  {
+   "cat": "fuel-pump-module",
+   "pn": "42021AL03A",
+   "a": [
+    "Subaru",
+    "Legacy",
+    2015,
+    2015,
+    "3.6L 6-cyl"
+   ],
+   "b": [
+    "Subaru",
+    "Outback",
+    2015,
+    2015,
+    "3.6L 6-cyl"
+   ],
+   "verdict": "RIGHT",
+   "reason": "Page lists 2015-2017 Legacy and Outback 3.6L H6; option 36D on both lists; pump assembly.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts/subaru-pump-assembly-fuel~42021al03a.html",
+    "https://www.subarupartsdeal.com/parts-list/2015-subaru-outback/engine_mounting_cooling/fuel_tank.html"
+   ]
+  },
+  {
+   "cat": "fuel-pump-module",
+   "pn": "19111412",
+   "a": [
+    "Chevrolet",
+    "Camaro",
+    1995,
+    1995,
+    "3.8L 6-cyl"
+   ],
+   "b": [
+    "Pontiac",
+    "Firebird",
+    1995,
+    1995,
+    "5.7L 8-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "'SENDER,FUEL(W/O PUMP)': sender only, no pump (the pump is a separate 19179523/19179524).",
+   "sources": [
+    "https://www.gmpartsgiant.com/parts/gm-sender-19111412.html",
+    "https://www.gmpartsgiant.com/parts-list/1995-chevrolet-camaro/fuel_system_exhaust_emission_system/fuel_tank_and_mounting.html"
+   ]
+  },
+  {
+   "cat": "fuel-pump-module",
+   "pn": "68004475AF",
+   "a": [
+    "Chrysler",
+    "Sebring",
+    2008,
+    2008,
+    "3.5L 6-cyl"
+   ],
+   "b": [
+    "Dodge",
+    "Avenger",
+    2013,
+    2013,
+    "2.7L 6-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "2013 Avenger list note 'Federal, 2.4L'; neither 3.5L (a) nor 2.7L (b) is covered. 2013 Avenger had no 2.7L (2.4/3.6).",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~module-fuel-pump-level-unit~68004475af",
+    "https://www.jeeppartsdeal.com/parts-list/2013-dodge-avenger/air-fuel-delivery/fuel-supply"
+   ]
+  },
+  {
+   "cat": "fuel-pump-module",
+   "pn": "1K0-919-051-DA",
+   "a": [
+    "Volkswagen",
+    "GTI",
+    2009,
+    2009,
+    "2.0L 4-cyl"
+   ],
+   "b": [
+    "Volkswagen",
+    "Jetta",
+    2014,
+    2015,
+    "2.0L 4-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "2014 Jetta list notes 'Sedan, Gas Engines Without Hybrid, Without Turbocharger' and 'Wagon, 2.5L': the Jetta 2.0L claim includes 2.0T GLI and 2.0 TDI, both excluded. Also GTI 2009 is turbo-only, which conflicts with the Jetta note.",
+   "sources": [
+    "https://www.vwpartsgiant.com/genuine/volkswagen~fuel-pump~1k0919051da",
+    "https://www.vwpartsgiant.com/parts-list/2014-volkswagen-jetta/air-fuel-delivery/fuel-supply"
+   ]
+  },
+  {
+   "cat": "fuel-pump-module",
+   "pn": "1HM-919-051-M",
+   "a": [
+    "Volkswagen",
+    "Cabrio",
+    2001,
+    2001,
+    "2.0L 4-cyl"
+   ],
+   "b": [
+    "Volkswagen",
+    "Jetta",
+    1997,
+    1997,
+    "2.8L 6-cyl"
+   ],
+   "verdict": "RIGHT",
+   "reason": "Page lists 1995-2002 Cabrio 2.0L and 1993-1999 Jetta 2.0L/2.8L; no notes; aftermarket 1HM919051M listings cover Jetta 2.8L V6 and Cabrio 2.0L.",
+   "sources": [
+    "https://www.vwpartsgiant.com/genuine/volkswagen~fuel-pump~1hm919051m",
+    "https://www.am-autoparts.com/products/fuel-pump/AM-20828822.html"
+   ]
+  },
+  {
+   "cat": "fuel-pump-module",
+   "pn": "RL135549AC",
+   "a": [
+    "Chrysler",
+    "Aspen",
+    2007,
+    2007,
+    "4.7L 8-cyl"
+   ],
+   "b": [
+    "Dodge",
+    "Durango",
+    2005,
+    2005,
+    "3.7L 6-cyl"
+   ],
+   "verdict": "RIGHT",
+   "reason": "Page lists 2007 Aspen 4.7L and 2004-2007 Durango 3.7L; the only module on the 2007 Aspen fuel list; no notes (RL reman number).",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~fuel-pump-module-level-unit~rl135549ac",
+    "https://www.jeeppartsdeal.com/parts-list/2007-chrysler-aspen/air-fuel-delivery/fuel-supply"
+   ]
+  },
+  {
+   "cat": "fuel-pump-module",
+   "pn": "23220-0V040",
+   "a": [
+    "Toyota",
+    "Camry",
+    2012,
+    2012,
+    "2.5L 4-cyl"
+   ],
+   "b": [
+    "Toyota",
+    "Camry Hybrid",
+    2012,
+    2012,
+    "2.5L 4-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "Pump with filter (in-tank pump, acceptable), but note 'To 3/12' for both Camry 2.5L and Camry Hybrid; 23220-0V150 is 'From 3/12'. Production-date split: not determinable for a 2012 car.",
+   "sources": [
+    "https://www.toyotapartsnow.com/oem/toyota~fuel-pump-assembly~23220-0v040",
+    "https://www.toyotapartsnow.com/parts-list/2012-toyota-camry/air-fuel-delivery/fuel-supply"
+   ]
+  },
+  {
+   "cat": "fuel-pump-module",
+   "pn": "19179523",
+   "a": [
+    "Chevrolet",
+    "Camaro",
+    1995,
+    1995,
+    "3.4L 6-cyl"
+   ],
+   "b": [
+    "Pontiac",
+    "Firebird",
+    1995,
+    1995,
+    "3.4L 6-cyl"
+   ],
+   "verdict": "RIGHT",
+   "reason": "In-tank electric pump (package; sender is separate) for 1993-1995 Camaro/Firebird 3.4L; option F(L32). LT1 uses 19179524.",
+   "sources": [
+    "https://www.gmpartsgiant.com/parts/gm-sender-19179523.html",
+    "https://www.gmpartsgiant.com/parts-list/1995-chevrolet-camaro/fuel_system_exhaust_emission_system/fuel_tank_and_mounting.html"
+   ]
+  },
+  {
+   "cat": "fuel-pump-module",
+   "pn": "15129825",
+   "a": [
+    "Chevrolet",
+    "S-10",
+    2000,
+    2000,
+    "2.2L 4-cyl"
+   ],
+   "b": [
+    "GMC",
+    "Sonoma",
+    2000,
+    2000,
+    "2.2L 4-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "GM option S1(03-53)(L43)(EXC K53) and fitment '4 Cyl 2.2L Flex': flex-fuel 2.2L only. LN2 2.2L uses 19369940.",
+   "sources": [
+    "https://www.gmpartsgiant.com/parts/gm-module-15129825.html",
+    "https://www.gmpartsgiant.com/parts-list/2000-chevrolet-s10-2wd/fuel_system_exhaust_emission_system/fuel_tank_sender.html"
+   ]
+  },
+  {
+   "cat": "fuel-pump-module",
+   "pn": "42021XA00A",
+   "a": [
+    "Subaru",
+    "Legacy",
+    2008,
+    2008,
+    "3.0L 6-cyl"
+   ],
+   "b": [
+    "Subaru",
+    "Tribeca",
+    2010,
+    2011,
+    "3.0L 6-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "Option 30D (EZ30); the Tribeca 3.0L ended after 2007 (3.6L from 2008), so a 2010-2011 Tribeca 3.0L does not exist; row merges 2006-2012 and 3.0/3.6.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts/subaru-pump-assembly-fuel~42021xa00a.html"
+   ]
+  },
+  {
+   "cat": "fuel-pump-module",
+   "pn": "68102700AE",
+   "a": [
+    "Dodge",
+    "Challenger",
+    2010,
+    2010,
+    "3.5L 6-cyl"
+   ],
+   "b": [
+    "Dodge",
+    "Charger",
+    2013,
+    2013,
+    "5.7L 8-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "2013 Charger list note 'Primary, 3.6L'; vehicle b (5.7L) is not covered (merged row).",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~module-fuel-pump-level-unit~68102700ae",
+    "https://www.jeeppartsdeal.com/parts-list/2013-dodge-charger/air-fuel-delivery/fuel-supply"
+   ]
+  },
+  {
+   "cat": "fuel-pump-module",
+   "pn": "42021AE03A",
+   "a": [
+    "Subaru",
+    "Legacy",
+    2002,
+    2003,
+    "3.0L 6-cyl"
+   ],
+   "b": [
+    "Subaru",
+    "Outback",
+    2003,
+    2003,
+    "3.0L 6-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "Option EZ30D; the Legacy row copies Outback H6 trims ('Flat6', 'SUS Flat6'), as does a Baja row (Baja had no H6). In the US the 2001-2003 3.0L H6 came only in the Outback, so 'Legacy 3.0L' (a) conflicts with the engine.",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts/subaru-pump-assembly-fuel~42021ae03a.html"
+   ]
+  },
+  {
+   "cat": "fuel-pump-module",
+   "pn": "30794624",
+   "a": [
+    "Volvo",
+    "V70",
+    2007,
+    2007,
+    "2.4L 5-cyl"
+   ],
+   "b": [
+    "Volvo",
+    "V70",
+    2007,
+    2007,
+    "2.5L 5-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "List note 'C70, S70, V70; 2WD; Steel Fuel Tank; Without Turbo' (30792879 With Turbo). The 2007 V70 2.5L is the 2.5T turbo: b excluded; also 2WD-only.",
+   "sources": [
+    "https://www.volvopartsgiant.com/genuine/volvo~fuel-pump~30794624",
+    "https://www.volvopartsgiant.com/parts-list/2007-volvo-v70/air-fuel-delivery/fuel-supply"
+   ]
+  },
+  {
+   "cat": "fuel-pump-module",
+   "pn": "1760A508",
+   "a": [
+    "Mitsubishi",
+    "Outlander Sport",
+    2015,
+    2015,
+    "2.0L 4-cyl"
+   ],
+   "b": [
+    "Mitsubishi",
+    "Outlander Sport",
+    2015,
+    2015,
+    "2.4L 4-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "List note 'FWD, All': FWD only; AWC Outlander Sport excluded and the claim has no drive gate.",
+   "sources": [
+    "https://www.mitsubishipartsgiant.com/genuine/mitsubishi~fuel-pump-assembly~1760a508",
+    "https://www.mitsubishipartsgiant.com/parts-list/2015-mitsubishi-outlander_sport/air-fuel-delivery/fuel-supply"
+   ]
+  },
+  {
+   "cat": "fuel-pump-module",
+   "pn": "LFB6-13-35XB",
+   "a": [
+    "Mazda",
+    "Mazda5",
+    2008,
+    2008,
+    "2.3L 4-cyl"
+   ],
+   "b": [
+    "Mazda",
+    "Mazda5",
+    2008,
+    2008,
+    "2.5L 4-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "Row merges 2006-2010 and 2012-2015 Mazda5 with 2.3/2.5; the 2008 Mazda5 had only the 2.3L (2.5L from 2012). Vehicle b does not exist.",
+   "sources": [
+    "https://www.mazdapartsnow.com/genuine/mazda~fuel-pump~lfb61335xb"
+   ]
+  },
+  {
+   "cat": "fuel-pump-module",
+   "pn": "8D0-906-089-A",
+   "a": [
+    "Audi",
+    "A4",
+    2001,
+    2001,
+    "1.8L 4-cyl"
+   ],
+   "b": [
+    "Audi",
+    "A4",
+    2001,
+    2001,
+    "2.8L 6-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "List note 'Without Quattro'; quattro A4s excluded and the claim has no drive gate.",
+   "sources": [
+    "https://www.audipartsgiant.com/genuine/audi~fuel-pump-assembly~8d0906089a",
+    "https://www.audipartsgiant.com/parts-list/2001-audi-a4/air-fuel-delivery/fuel-system-components"
+   ]
+  },
+  {
+   "cat": "fuel-pump-module",
+   "pn": "17040-ET00A",
+   "a": [
+    "Nissan",
+    "Sentra",
+    2012,
+    2012,
+    "2.0L 4-cyl"
+   ],
+   "b": [
+    "Nissan",
+    "Sentra",
+    2012,
+    2012,
+    "2.5L 4-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "Options 'CAL. MR20DE, FED. MR20DE': 2.0L only. The 2.5L QR25DE (SE-R/Spec V) is not covered (merged row).",
+   "sources": [
+    "https://www.nissanpartsdeal.com/parts/nissan-pump-compl-fuel~17040-et00a.html"
+   ]
+  },
+  {
+   "cat": "fuel-pump-module",
+   "pn": "PEAR-13-35X",
+   "a": [
+    "Mazda",
+    "Mazda3",
+    2014,
+    2014,
+    "2.0L 4-cyl"
+   ],
+   "b": [
+    "Mazda",
+    "Mazda3",
+    2014,
+    2014,
+    "2.5L 4-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "List note 'Fuel Pump Components, Mexico Built'; PE18-13-35X is for Japan-built cars: plant restriction, not determinable.",
+   "sources": [
+    "https://www.mazdapartsnow.com/genuine/mazda~fuel-pump~pear1335x",
+    "https://www.mazdapartsnow.com/parts-list/2014-mazda-3/air-fuel-delivery/fuel-supply"
+   ]
+  },
+  {
+   "cat": "fuel-pump-module",
+   "pn": "5012273AF",
+   "a": [
+    "Dodge",
+    "Dakota",
+    2000,
+    2000,
+    "3.9L 6-cyl"
+   ],
+   "b": [
+    "Dodge",
+    "Dakota",
+    2000,
+    2000,
+    "5.9L 8-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "List note '22 Gallon Tank'; 5014884AG is the 24 Gallon Tank module for the same 2000 Dakota: tank-size restriction.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~module-fuel-pump-level-unit~5012273af",
+    "https://www.jeeppartsdeal.com/parts-list/2000-dodge-dakota/air-fuel-delivery/fuel-supply"
+   ]
+  },
+  {
+   "cat": "fuel-pump-module",
+   "pn": "91174465",
+   "a": [
+    "Chevrolet",
+    "Metro",
+    2000,
+    2000,
+    "1.0L 3-cyl"
+   ],
+   "b": [
+    "Chevrolet",
+    "Metro",
+    2000,
+    2000,
+    "1.3L 4-cyl"
+   ],
+   "verdict": "RIGHT",
+   "reason": "In-tank electric pump with filter for 1998-2001 Metro 1.0L/1.3L; no option codes on the 2000 Metro list.",
+   "sources": [
+    "https://www.gmpartsgiant.com/parts/gm-pump-91174465.html",
+    "https://www.gmpartsgiant.com/parts-list/2000-chevrolet-metro/fuel_system_exhaust_emission_system/fuel_supply_system.html"
+   ]
+  },
+  {
+   "cat": "fuel-pump-module",
+   "pn": "F75Z-9H307-AC",
+   "a": [
+    "Ford",
+    "F-250",
+    1997,
+    1997,
+    "4.6L 8-cyl"
+   ],
+   "b": [
+    "Ford",
+    "F-250",
+    1997,
+    1997,
+    "5.4L 8-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "Ford note 'Pump and sender assy, 120in W/B, 4x2, 5.4L / 139in W/B Supercab, 5.4L': 5.4L only with specific wheelbase/drive; 4.6L (a) not covered, and b is restricted by wheelbase.",
+   "sources": [
+    "https://www.fordpartsgiant.com/parts/ford-sender-and-pump-assy_f75z-9h307-ac.html",
+    "https://www.fordpartsgiant.com/parts-list/1997-ford-f_250--8_cyl_5_8l-5mt/fuel_system_manifolds/fuel_pump_senders_in_tank.html"
+   ]
+  },
+  {
+   "cat": "fuel-pump-module",
+   "pn": "5014884AG",
+   "a": [
+    "Dodge",
+    "Dakota",
+    2000,
+    2000,
+    "2.5L 4-cyl"
+   ],
+   "b": [
+    "Dodge",
+    "Dakota",
+    2000,
+    2000,
+    "5.9L 8-cyl"
+   ],
+   "verdict": "WRONG",
+   "reason": "List note '24 Gallon Tank' (5012273AF is the 22-gallon module): tank-size restriction.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~module-fuel-pump-level-unit~5014884ag",
+    "https://www.jeeppartsdeal.com/parts-list/2000-dodge-dakota/air-fuel-delivery/fuel-supply"
+   ]
+  }
+ ],
+ "totals": {
+  "ac-compressor": {
+   "RIGHT": 15,
+   "WRONG": 13,
+   "UNSURE": 2
+  },
+  "fuel-pump-module": {
+   "RIGHT": 7,
+   "WRONG": 21,
+   "UNSURE": 2
+  }
+ },
+ "refusals": [
+  "en.wikipedia.org"
+ ],
+ "notes": "All 60 product pages were read live through scraper/oem_fitment/fetch.py (HTTP 200, no catalog refusals); their fitment tables match the raw records at c36da2eb98. Part Notes and GM/Ford option codes are on the list pages (raw list_url), and 41 of those were re-fetched through fetch.py and confirmed; 15 extra list pages were fetched for the other vehicle of an item. en.wikipedia.org (not a catalog) was stopped by fetch.py's challenge regex on an HTTP 200 response, probably a false positive; it was not retried, and the breaker file scraper/oem_fitment/.state/blocked_en.wikipedia.org.txt now exists."
+}
