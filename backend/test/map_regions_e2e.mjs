@@ -14,7 +14,9 @@
  *    pulled up and with a yard's card open);
  *  - no pin covers the You dot or its label (if nothing clears it, the dot
  *    is drawn on top; counted in the summary);
- *  - first view (hub 2026-11-09): the nearest yard is its own named pin,
+ *  - first view (hub 2026-11-09): the nearest yard is its own named pin
+ *    (exception: yards too packed to split at full zoom; then its bubble
+ *    lists it first; counted),
  *    drawn above the sheet, and the user's spot is on the map (unless the
  *    nearest yard needed a closer view than that allows; reported). Zooming out
  *    from there (-2, -4) still clusters under the same rules.
@@ -90,7 +92,7 @@ try {
             const t0 = Date.now();
             while (!(window._yardsMap && _yardsMap.loaded()) && Date.now() - t0 < 20000) await new Promise(r => setTimeout(r, 100));
             await new Promise(r => setTimeout(r, 300));
-            const fails = [], stats = []; let youOverCount = 0;
+            const fails = [], stats = []; let youOverCount = 0, packedFirst = 0;
             const ov = (a, b) => a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
             const vis = (el) => el && el.getClientRects().length && getComputedStyle(el).display !== 'none' && getComputedStyle(el).visibility !== 'hidden';
             const check = (label) => {
@@ -142,7 +144,23 @@ try {
               const sheetSpans = document.getElementById('yards-map-sheet').getBoundingClientRect().width > document.getElementById('yards-map').getBoundingClientRect().width - 48;
               const pin = near && [...document.querySelectorAll('#yards-map .pin-layer .map-pin')].find(p => p.dataset.loc === near.key && !p.classList.contains('map-cluster'));
               if (!near) fails.push('first view: no nearest yard');
-              else if (!pin) fails.push(`first view: nearest yard ${near.key} (${Math.round(near.dist)} mi) is not its own pin`);
+              else if (!pin) {
+                // Accepted exception (hub 2026-11-09): yards packed so tight that even
+                // the closest zoom can't give the nearest its own pin (Phoenix: three
+                // yards within ~1 km, smallest phone at 200% text). Then it must be in
+                // a bubble that lists it first.
+                const g = _pinGroups.find(x => x.items.some(i => i.key === near.key));
+                const maxed = _yardsMap.getZoom() >= _yardsMap.getMaxZoom() - 0.1;
+                let leads = false;
+                if (g && g.items.length > 1 && maxed) {
+                  zoomToYards(g.items.map(i => i.key));
+                  const first = document.querySelector('#ms-body .ms-row');
+                  leads = /yards here/.test(document.getElementById('ms-title').textContent) && first && first.dataset.loc === near.key;
+                  selectMapYard(null);
+                }
+                if (leads) packedFirst++;
+                else fails.push(`first view: nearest yard ${near.key} (${Math.round(near.dist)} mi) is not its own pin` + (g && g.items.length > 1 ? (maxed ? ' (its bubble does not list it first)' : ` (in a ${g.items.length}-yard bubble at zoom ${_yardsMap.getZoom().toFixed(1)}, not fully zoomed in)`) : ''));
+              }
               else if (sheetSpans && pin.getBoundingClientRect().bottom > sheetTop + 0.5) fails.push(`first view: nearest yard pin under the sheet`);
               const youEl = document.querySelector('#yards-map .map-you');
               if (!youEl) { if (!_firstViewNoYou) fails.push('first view: the user\'s spot is not on the map'); }
@@ -162,12 +180,12 @@ try {
             }
             selectMapYard(null);
             _yardsMap.jumpTo({ zoom: z0 });
-            return { fails, stats, youOver: youOverCount };
+            return { fails, stats, youOver: youOverCount, packedFirst };
           }, { lat, lng, national: !!national, theme, big });
           const r = rec(name);
           r.checks += out.stats.length;
           out.fails.forEach(f => r.fails.push(`${cfg} ${f}`));
-          r.youOver = (r.youOver || 0) + out.youOver;
+          r.youOver = (r.youOver || 0) + out.youOver; r.packed = (r.packed || 0) + out.packedFirst;
           out.stats.forEach(s => { if (s.nearest) r.nearest = s.nearest; r.pins.push(s.pins); r.clusters.push(s.clusters); r.same = Math.max(r.same, s.same); r.sites = s.sites; });
         }
       }
@@ -182,7 +200,7 @@ let total = 0;
 for (const [name, r] of results) {
   total += r.fails.length;
   const rng = (a) => a.length ? `${Math.min(...a)}–${Math.max(...a)}` : '0';
-  console.log(`${r.fails.length ? 'FAIL' : 'PASS'}  ${name}: ${r.checks} layouts, ${r.sites} yards in view, single pins ${rng(r.pins)}, clusters ${rng(r.clusters)}, same-spot clusters ${r.same}; first view: ${r.nearest || '-'}; You drawn over a pin ${r.youOver || 0}×${r.fails.length ? ` — ${r.fails.length} problems:` : ''}`);
+  console.log(`${r.fails.length ? 'FAIL' : 'PASS'}  ${name}: ${r.checks} layouts, ${r.sites} yards in view, single pins ${rng(r.pins)}, clusters ${rng(r.clusters)}, same-spot clusters ${r.same}; first view: ${r.nearest || '-'}; You drawn over a pin ${r.youOver || 0}×${r.packed ? `; nearest listed first in a packed bubble ${r.packed}×` : ''}${r.fails.length ? ` — ${r.fails.length} problems:` : ''}`);
   [...new Set(r.fails)].slice(0, 8).forEach(f => console.log('      ' + f));
 }
 console.log(total ? `\n${total} FAILED` : '\nALL PASS');
