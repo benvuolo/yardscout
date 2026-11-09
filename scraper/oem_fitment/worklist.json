@@ -2126,7 +2126,10 @@
    "complete": {
     "file": "completion/ford.own_page.json",
     "version": 1
-   }
+   },
+   "tierC": true,
+   "version": 3,
+   "tierC_note": "2026-11-09: tier C (wiper-motor, knuckle, strut) added; version 3 (one past main and interchange/wheels) so the done site re-opens and crawls tier C only (A/B/W seeds are skipped through progress.json done keys)."
   },
   "www.gmpartsgiant.com": {
    "cars": 78432,
