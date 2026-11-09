@@ -1913,3 +1913,181 @@ All verdicts are ADVISORY. Nothing was shipped and nothing reads the allowlist y
   re-shipped and they still match. Gates: V12-V15, parity 6/6, V9 0 flips,
   payload ok x7 (0 Verified), curation_tests 15/15, tests 29/29,
   scraper/test_*.py, pf_guards_unit.
+
+## Category breadth (session_016ZzJfKdkBXaVYDDQb9cy2J, 2026-11-09)
+
+Owner (2026-11-09 ~17:30 UTC): "we're going for breadth here and data
+quality ... We will create the better version, with no external or third
+party costs". Scope: new Parts-tab categories. Not touched: wheels, Honda/
+Nissan, other makes, release workflows, fetch.py.
+
+### 1. Coverage matrix (the breadth scoreboard)
+
+- Script `scraper/oem_fitment/coverage_matrix.py` (about 1 min), report
+  `groups/_report/coverage_matrix.json`. Inputs: today's
+  docs/data/inventory_live.json (338,797 cars), docs/data/interchange.json and
+  docs/data/oem/*.json as users get them now.
+- **beyond** = car has a lot donor through a part-number group (hand
+  platform group, OEM group, aftermarket unit) or an engine-family vg that is
+  NOT the same model in the same generation. **same-gen only** = no such donor,
+  but another car of its model and generation is on a lot. Key-level, VIN
+  guards not applied (upper bound). Engine kinds also report
+  `engine_family_likely_pct` (same engine, other model; no part number): 63%
+  for every engine category.
+- **Demand** = how many of the 30 chain price lists (docs/data/*_pricing.json)
+  sell the part. Gap score = cars not "beyond" x that share. The ops email's
+  "Most searched parts (7 d)" on 2026-11-09 was hood 3, gauge-cluster 2,
+  alternator 1 (6 searches; recorded, too few to weigh). Coverage requests
+  were not read: the admin endpoint needs the secret, and no digest email
+  exists.
+- Read the table with care. Demand ties are close (22-28 of 30 for most
+  candidates), so ranks 8-24 are within noise of the token choices. Existing
+  categories use their shipped priceTokens, and some are broad ("mirror",
+  "radio" match glass and speakers), so their demand is overstated.
+
+| # | category | kind | beyond % | same-gen only % | price lists | gap score | Ford | Chevr | Nissa | Honda | Dodge | Toyot |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | radio | exact | 0.0 | 99.0 | 30/30 | 338k | 0 | 0 | 0 | 0 | 0 | 0 |
+| 2 | tow-mirrors | body | 0.6 | 98.4 | 30/30 | 336k | 0 | 1 | 5 | 0 | 0 | 0 |
+| 3 | gauge-cluster | body | 1.5 | 97.5 | 30/30 | 333k | 3 | 0 | 0 | 0 | 2 | 7 |
+| 4 | tail-lights | body | 2.2 | 96.8 | 30/30 | 331k | 1 | 1 | 0 | 0 | 8 | 3 |
+| 5 | intake-manifold | engine | 0.0 | 99.0 | 29/30 | 327k | 0 | 0 | 0 | 0 | 0 | 0 |
+| 6 | side-mirrors | body | 3.8 | 95.2 | 30/30 | 325k | 6 | 4 | 0 | 0 | 10 | 6 |
+| 7 | headlights | body | 4.0 | 95.0 | 30/30 | 325k | 10 | 2 | 0 | 0 | 3 | 7 |
+| 8 | wiper-motor | candidate | 0.0 | 99.0 | 28/30 | 315k | 0 | 0 | 0 | 0 | 0 | 0 |
+| 9 | ac-compressor | candidate | 0.0 | 99.0 | 27/30 | 304k | 0 | 0 | 0 | 0 | 0 | 0 |
+| 10 | knuckle | candidate | 0.0 | 99.0 | 27/30 | 304k | 0 | 0 | 0 | 0 | 0 | 0 |
+| 11 | bumper-rear | body | 1.4 | 97.6 | 27/30 | 300k | 4 | 0 | 0 | 0 | 2 | 6 |
+| 12 | bumper-front | body | 1.6 | 97.4 | 27/30 | 299k | 4 | 0 | 0 | 0 | 2 | 7 |
+| 13 | ignition-coils | engine | 0.0 | 99.0 | 26/30 | 293k | 0 | 0 | 0 | 0 | 0 | 0 |
+| 14 | airbox | body | 0.0 | 99.0 | 26/30 | 293k | 0 | 0 | 0 | 0 | 0 | 0 |
+| 15 | fuel-pump-module | candidate | 0.0 | 99.0 | 26/30 | 293k | 0 | 0 | 0 | 0 | 0 | 0 |
+| 16 | strut | candidate | 0.0 | 99.0 | 26/30 | 293k | 0 | 0 | 0 | 0 | 0 | 0 |
+| 17 | hood | body | 1.1 | 97.9 | 26/30 | 290k | 0 | 0 | 0 | 0 | 5 | 7 |
+| 18 | fender | body | 1.3 | 97.7 | 26/30 | 289k | 1 | 0 | 0 | 0 | 6 | 6 |
+| 19 | power-steering-pump | candidate | 0.0 | 99.0 | 25/30 | 282k | 0 | 0 | 0 | 0 | 0 | 0 |
+| 20 | abs-module | candidate | 0.0 | 99.0 | 25/30 | 282k | 0 | 0 | 0 | 0 | 0 | 0 |
+| 21 | throttle-body | candidate | 0.0 | 99.0 | 24/30 | 270k | 0 | 0 | 0 | 0 | 0 | 0 |
+| 22 | blower-motor | candidate | 0.0 | 99.0 | 24/30 | 270k | 0 | 0 | 0 | 0 | 0 | 0 |
+| 23 | maf-sensor | candidate | 0.0 | 99.0 | 24/30 | 270k | 0 | 0 | 0 | 0 | 0 | 0 |
+| 24 | steering-column | candidate | 0.0 | 99.0 | 24/30 | 270k | 0 | 0 | 0 | 0 | 0 | 0 |
+| 25 | window-regulator | body | 6.0 | 92.9 | 25/30 | 265k | 6 | 7 | 0 | 0 | 13 | 7 |
+| 26 | door-lock-actuator | candidate | 0.0 | 99.0 | 23/30 | 259k | 0 | 0 | 0 | 0 | 0 | 0 |
+| 27 | door-rear | body | 0.6 | 98.4 | 23/30 | 258k | 0 | 0 | 0 | 0 | 0 | 6 |
+| 28 | door-front | body | 0.9 | 98.1 | 23/30 | 257k | 0 | 0 | 0 | 0 | 2 | 7 |
+| 29 | third-row-seat | body | 3.5 | 95.5 | 23/30 | 250k | 5 | 9 | 0 | 0 | 0 | 0 |
+| 30 | radiator | candidate | 0.0 | 99.0 | 22/30 | 248k | 0 | 0 | 0 | 0 | 0 | 0 |
+| 31 | starter | engine | 20.5 | 78.5 | 27/30 | 242k | 5 | 7 | 65 | 5 | 72 | 0 |
+| 32 | alternator | engine | 30.5 | 68.5 | 30/30 | 235k | 19 | 31 | 26 | 44 | 56 | 48 |
+| 33 | transmission-auto | combo | 0.0 | 99.0 | 20/30 | 225k | 0 | 0 | 0 | 0 | 0 | 0 |
+| 34 | ecm | combo | 0.0 | 99.0 | 19/30 | 214k | 0 | 0 | 0 | 0 | 0 | 0 |
+| 35 | tailgate | body | 0.8 | 98.2 | 19/30 | 212k | 0 | 4 | 0 | 0 | 0 | 0 |
+| 36 | climate-control | body | 3.8 | 95.2 | 19/30 | 206k | 2 | 3 | 0 | 0 | 10 | 8 |
+| 37 | front-seats | body | 0.0 | 99.0 | 18/30 | 203k | 0 | 0 | 0 | 0 | 0 | 0 |
+| 38 | door-handle-ext | candidate | 0.0 | 99.0 | 17/30 | 191k | 0 | 0 | 0 | 0 | 0 | 0 |
+| 39 | cv-axle | candidate | 0.0 | 99.0 | 17/30 | 191k | 0 | 0 | 0 | 0 | 0 | 0 |
+| 40 | window-switch | body | 3.4 | 95.6 | 17/30 | 185k | 2 | 4 | 0 | 0 | 3 | 6 |
+| 41 | engine-assembly | engine | 0.0 | 99.0 | 16/30 | 180k | 0 | 0 | 0 | 0 | 0 | 0 |
+| 42 | trunk-lid | body | 0.5 | 98.5 | 16/30 | 179k | 0 | 0 | 0 | 0 | 0 | 6 |
+| 43 | grille | body | 0.9 | 98.1 | 16/30 | 178k | 0 | 0 | 0 | 0 | 3 | 7 |
+| 44 | center-console | candidate | 0.0 | 99.0 | 15/30 | 169k | 0 | 0 | 0 | 0 | 0 | 0 |
+| 45 | liftgate | body | 1.6 | 97.4 | 7/30 | 77k | 0 | 4 | 0 | 0 | 0 | 0 |
+| 46 | rear-seat | candidate | 0.0 | 99.0 | 6/30 | 67k | 0 | 0 | 0 | 0 | 0 | 0 |
+
+(Make columns: beyond % for the six largest makes; per-make same-gen and
+every make are in the JSON.)
+
+Findings:
+- **Every category is under 7% beyond except alternator (30.5%) and starter
+  (20.5%).** Those two come from hand vg and aftermarket units. Body OEM
+  Likely groups add 1-6% per category.
+- **OEM Likely groups exist only for body kinds** (curate.py skips non-body
+  in the Likely loop, and `kind_not_phase1` for PHASE3_CATS). Verified needs
+  closed cells, and none are closed (no_year_manifest dominates the funnel).
+  So OEM data adds nothing to engine categories today. ignition-coils and
+  intake-manifold are 0% beyond, though raw holds 532 coil records, 404 of
+  them listing two or more models.
+- **Five candidates are already crawled on all 20 sites** (tier A/B, never
+  curated: CURATION_SPEC §7.7 Phase 3): ac-compressor 1,328 records (741
+  listing 2+ models), fuel-pump-module 1,501 (885), radiator 1,511 (741),
+  power-steering-pump 840 (509), throttle-body 820 (562).
+
+### 2. Batch 1 proposal (top 5 candidates by matrix rank). Nothing shipped.
+
+Ranks 8, 9, 10, 15 and 16: wiper-motor, ac-compressor, knuckle,
+fuel-pump-module, strut. They need two different paths.
+
+**Path E (engine-gated Likely; ac-compressor, fuel-pump-module): raw
+exists, so no crawl is needed. Needs a hub decision.** The Likely loop is
+body-only. For these parts a same-model, same-generation donor is not safe
+either: V6 and I4 compressors differ. Proposal: a Likely group is built
+from one number's own fitment rows, and a car belongs to it only when (a)
+its key matches a row and (b) its decoded engine (liters + cylinders)
+agrees with that row's engine cell. Undecoded cars get "match your engine",
+the same as aftermarket units. Same-gen donors also need the engine to
+agree. The example that shows why: the Lexus throttle body 22030-31040
+page prints "2016 Lexus GS200t | 6 Cyl 3.5L | 2GRFSE" and "GS430 | 6 Cyl
+3.5L". Those model names come from the chassis code; the GS200t is a 2.0T
+and the GS430 a V8. So the engine cell, not the model name, has to decide,
+and a model whose decoded engines never include the row's engine is
+dropped (a new lint: `model_engine_conflict`).
+- ac-compressor. Include: the compressor assembly, with clutch if it is
+  sold that way. Exclude: clutch, pulley, coil, valves, lines, switches, and
+  kits without a compressor. Reman: kept as its own identity (Toyota -84,
+  Hyundai "Reman Compressor", R-prefix); new and reman never merge, and the
+  existing `reman_dropped` rule applies. Hybrids and EVs (electric
+  compressors) are not engine-decoded, so they are excluded unless the
+  decode says hybrid on both cars. rowWarn: "Match the engine and the
+  compressor's part number on its label; rear-A/C and towing packages can
+  use another unit." At the yard: "Bring a line wrench. Pull only from a
+  system that is already empty; never open a charged one (venting
+  refrigerant is illegal)."
+  priceTokens: a/c compressor, ac compressor, compressor (a/c, compressor,
+  a/c; never clutch. Raw example: Mopar 5264371 lists 1991-93
+  Imperial/LeBaron/New Yorker/T&C/Caravan 3.0/3.3/3.8. Under path E each
+  donor's engine must match.
+- fuel-pump-module. Include: the in-tank module or pump assembly (GM
+  "MODULE ASM, FUEL PUMP", Mopar "Module, Fuel Pump" / "Level Unit" package).
+  Exclude: strainer, filter, sender-only, lock ring, seal. Conditionals: tank
+  size, FFV, AWD saddle tanks, and wheelbase notes, through the existing
+  note classifier. Gate: drive. rowWarn: "Match tank size, flex-fuel and
+  the module's plug; check the strainer." priceTokens: fuel pump, fuel
+  sending, fuel sender.
+- The other three already crawled (power-steering-pump 509, throttle-body
+  562, radiator 741 multi-model numbers) follow on the same path once batch
+  1 passes. ignition-coils too: it is already a Parts-tab engine category
+  with 0% beyond.
+
+**Path B (body Likely path as built; wiper-motor, knuckle, strut): needs a
+new crawl tier C.** That means navigation patterns plus include/exclude
+rules in all 20 site modules, a trial `--max-segments 2` per site, then the
+6-hourly Actions crawl. That is about 3-5 runs before raw is complete.
+- wiper-motor. Include: front windshield wiper motor, with or without
+  linkage where the catalog sells them as one (packaging motor vs
+  motor+linkage, never mixed). Slots F and R; a rear liftgate motor is its
+  own slot. Exclude: arms, blades, linkage only, switches, washer pumps,
+  headlamp wiper motors. rowWarn: "Front motor; some years sell it with the
+  linkage. Match the plug and the crank arm." priceTokens: wiper motor,
+  windshield wiper motor, never headlamp, switch, arm, blade or transmission.
+- knuckle. Include: a bare steering knuckle/spindle (front L/R; rear
+  knuckle/carrier is its own slot). Exclude: hub/bearing, ABS sensor, ball
+  joints, bolts. With hub: its own packaging. Gates: drive (AWD), and
+  brake-size qualifiers as conditionals. rowWarn: "Match the drive and the
+  brake size; most yards price it with the hub, so check what you are
+  paying for." priceTokens: knuckle, spindle (never bearing).
+- strut. Include: the strut assembly (bare, or complete with spring, as
+  separate packaging), front and rear L/R. Exclude: mounts, springs alone,
+  boots, bump stops. Sport, air and electronic-damping suspensions are
+  flagged option, or the body gate. rowWarn: "Struts wear out; check for
+  leaks. Sport and air suspensions use different units." priceTokens: strut
+  and spring, strut assembly, =strut, strut (, loaded strut.
+
+Each category gets the §11.4 sample (30 closures + 30 pairs, independent
+verification) before it is ship-eligible with 0 WRONG; then the hub
+confirms; app changes go on branch interchange/categories-<n>.
+
+### Next (not started; waiting on the hub)
+1. Hub decision on path E (engine-gated Likely, plus the
+   `model_engine_conflict` lint).
+2. Hub approval to add tier C = [wiper-motor, knuckle, strut] to crawl.py
+   TIERS and the site-module rules (shared code).
