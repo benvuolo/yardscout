@@ -650,3 +650,137 @@
 00:05:45 chain-unlinked grille 1 numbers named by 53111-24040, no catalog link: 53111-24900
 00:06:09 seg done tier=B Lexus SC 430 [2002, 2005] seeds=[2002] records=2509 errors=26
 00:06:09 finished records=2509 errors=26 chain_records=2 chain_unlinked=393 chain_failed=0 chain_given_up=0
+17:40:30 start site=www.lexuspartsnow.com mode=worklist tiers=['A', 'B', 'W'] records=2509 list_lines=488 year_lines=64 url_index=13109
+17:40:30 seg done tier=A Lexus ES 300 [1992, 2008] seeds=[2002] records=2509 errors=26
+17:40:30 seg done tier=A Lexus RX 300 [1999, 2008] seeds=[2000] records=2509 errors=26
+17:40:30 seg done tier=A Lexus IS 250 [2006, 2015] seeds=[2007] records=2509 errors=26
+17:40:30 seg done tier=A Lexus ES 350 [1997, 2018] seeds=[2007] records=2509 errors=26
+17:40:30 seg done tier=A Lexus ES 330 [2004, 2006] seeds=[2004] records=2509 errors=26
+17:40:30 seg done tier=A Lexus GS 300 [1993, 2006] seeds=[2006] records=2509 errors=26
+17:40:30 seg done tier=A Lexus RX 350 [2004, 2016] seeds=[2007] records=2509 errors=26
+17:40:30 seg done tier=A Lexus RX 330 [2004, 2006] seeds=[2004] records=2509 errors=26
+17:40:30 seg done tier=A Lexus LS 400 [1990, 2005] seeds=[1996] records=2509 errors=26
+17:40:30 seg done tier=A Lexus LS 430 [2001, 2006] seeds=[2001] records=2509 errors=26
+17:40:30 seg done tier=A Lexus IS [2004, 2016] seeds=[2007] records=2509 errors=26
+17:40:30 seg done tier=A Lexus LS 460 [1996, 2016] seeds=[2007] records=2509 errors=26
+17:40:30 seg done tier=A Lexus GS [1998, 2018] seeds=[2006] records=2509 errors=26
+17:40:30 seg done tier=A Lexus ES [1990, 2015] seeds=[2007] records=2509 errors=26
+17:40:30 seg done tier=A Lexus GS 350 [1995, 2015] seeds=[2007] records=2509 errors=26
+17:40:30 seg done tier=A Lexus IS 300 [2001, 2005] seeds=[2001] records=2509 errors=26
+17:40:30 seg done tier=A Lexus RX 400h [2006, 2008] seeds=[2006] records=2509 errors=26
+17:40:30 seg done tier=A Lexus IS 350 [2006, 2014] seeds=[2006] records=2509 errors=26
+17:40:30 seg done tier=A Lexus RX [2004, 2008] seeds=[2005] records=2509 errors=26
+17:40:30 seg done tier=A Lexus RX [1999, 2003] seeds=[2001] records=2509 errors=26
+17:40:30 seg done tier=A Lexus GS 400 [1998, 2002] seeds=[1998] records=2509 errors=26
+17:40:30 seg done tier=A Lexus LS [1990, 2012] seeds=[1998] records=2509 errors=26
+17:40:30 seg done tier=A Lexus SC 400 [1992, 1999] seeds=[1992] records=2509 errors=26
+17:40:30 seg done tier=A Lexus GS 430 [2001, 2006] seeds=[2006] records=2509 errors=26
+17:40:30 seg done tier=A Lexus SC 430 [2002, 2005] seeds=[2002] records=2509 errors=26
+17:40:30 seg done tier=B Lexus ES 300 [1992, 2008] seeds=[2002] records=2509 errors=26
+17:40:30 seg done tier=B Lexus RX 300 [1999, 2008] seeds=[2000] records=2509 errors=26
+17:40:30 seg done tier=B Lexus IS 250 [2006, 2015] seeds=[2007] records=2509 errors=26
+17:40:30 seg done tier=B Lexus ES 350 [1997, 2018] seeds=[2007] records=2509 errors=26
+17:40:30 seg done tier=B Lexus ES 330 [2004, 2006] seeds=[2004] records=2509 errors=26
+17:40:30 seg done tier=B Lexus GS 300 [1993, 2006] seeds=[2006] records=2509 errors=26
+17:40:30 seg done tier=B Lexus RX 350 [2004, 2016] seeds=[2007] records=2509 errors=26
+17:40:30 seg done tier=B Lexus RX 330 [2004, 2006] seeds=[2004] records=2509 errors=26
+17:40:30 seg done tier=B Lexus LS 400 [1990, 2005] seeds=[1996] records=2509 errors=26
+17:40:30 seg done tier=B Lexus LS 430 [2001, 2006] seeds=[2001] records=2509 errors=26
+17:40:30 seg done tier=B Lexus IS [2004, 2016] seeds=[2007] records=2509 errors=26
+17:40:30 seg done tier=B Lexus LS 460 [1996, 2016] seeds=[2007] records=2509 errors=26
+17:40:30 seg done tier=B Lexus GS [1998, 2018] seeds=[2006] records=2509 errors=26
+17:40:30 seg done tier=B Lexus ES [1990, 2015] seeds=[2007] records=2509 errors=26
+17:40:30 seg done tier=B Lexus GS 350 [1995, 2015] seeds=[2007] records=2509 errors=26
+17:40:30 seg done tier=B Lexus IS 300 [2001, 2005] seeds=[2001] records=2509 errors=26
+17:40:30 seg done tier=B Lexus RX 400h [2006, 2008] seeds=[2006] records=2509 errors=26
+17:40:30 seg done tier=B Lexus IS 350 [2006, 2014] seeds=[2006] records=2509 errors=26
+17:40:30 seg done tier=B Lexus RX [2004, 2008] seeds=[2005] records=2509 errors=26
+17:40:30 seg done tier=B Lexus RX [1999, 2003] seeds=[2001] records=2509 errors=26
+17:40:30 seg done tier=B Lexus GS 400 [1998, 2002] seeds=[1998] records=2509 errors=26
+17:40:30 seg done tier=B Lexus LS [1990, 2012] seeds=[1998] records=2509 errors=26
+17:40:30 seg done tier=B Lexus SC 400 [1992, 1999] seeds=[1992] records=2509 errors=26
+17:40:30 seg done tier=B Lexus GS 430 [2001, 2006] seeds=[2006] records=2509 errors=26
+17:40:30 seg done tier=B Lexus SC 430 [2002, 2005] seeds=[2002] records=2509 errors=26
+17:41:19 chain-unlinked wheels 1 numbers named by 42611-33390, no catalog link: 42611-33600
+17:42:31 chain-unlinked wheels 1 numbers named by 42611-33010, no catalog link: 42611-33011
+17:42:31 chain-unlinked wheels 1 numbers named by 42611-33180, no catalog link: 42611-33130
+17:42:31 chain-unlinked wheels 1 numbers named by 42611-33280, no catalog link: 42611-33270
+17:42:31 nav-fail Lexus ES 300 2004: ValueError: no 2004 catalog for Lexus ES 300 (lexus-['es300'])
+17:42:31 seg done tier=W Lexus ES 300 [1992, 2008] seeds=[2002, 1999, 2004] records=2519 errors=27
+17:43:19 chain-unlinked wheels 1 numbers named by 42611-48020, no catalog link: 42611-48150
+17:43:19 nav-fail Lexus RX 300 2006: ValueError: no 2006 catalog for Lexus RX 300 (lexus-['rx300'])
+17:43:19 seg done tier=W Lexus RX 300 [1999, 2008] seeds=[2000, 2006] records=2522 errors=28
+17:45:11 chain-unlinked wheels 1 numbers named by 42611-53150, no catalog link: 42611-53362
+17:45:11 chain-unlinked wheels 1 numbers named by 42611-53160, no catalog link: 42611-53250
+17:45:11 chain-unlinked wheels 1 numbers named by 42611-53170, no catalog link: 42611-53260
+17:45:11 chain-unlinked wheels 1 numbers named by 42611-53240, no catalog link: 42611-53382
+17:45:11 chain-unlinked wheels 1 numbers named by 42611-53290, no catalog link: 42611-53382
+17:48:39 chain-unlinked wheels 1 numbers named by 4261A-53291, no catalog link: 4261A-53290
+17:48:39 chain-unlinked wheels 1 numbers named by 4261A-53311, no catalog link: 4261A-53310
+17:48:39 chain-unlinked wheels 1 numbers named by 4261A-53341, no catalog link: 4261A-53340
+17:48:39 chain-unlinked wheels 1 numbers named by 4261A-53321, no catalog link: 4261A-53320
+17:48:39 chain-unlinked wheels 1 numbers named by 42611-53390, no catalog link: 42611-53460
+17:48:39 chain-unlinked wheels 1 numbers named by 42611-53421, no catalog link: 42611-53420
+17:50:23 chain-unlinked wheels 1 numbers named by 4261A-53090, no catalog link: 4261A-53101
+17:50:23 seg done tier=W Lexus IS 250 [2006, 2015] seeds=[2007, 2015] records=2568 errors=28
+17:51:36 nav-fail Lexus ES 350 2006: ValueError: no 2006 catalog for Lexus ES 350 (lexus-['es350'])
+17:51:36 seg done tier=W Lexus ES 350 [1997, 2018] seeds=[2007, 2006] records=2574 errors=29
+17:52:31 chain-unlinked wheels 1 numbers named by 42611-33450, no catalog link: 42611-33610
+17:52:31 seg done tier=W Lexus ES 330 [2004, 2006] seeds=[2004] records=2578 errors=29
+17:53:27 chain-unlinked wheels 1 numbers named by 42611-30A40, no catalog link: 42611-30C82
+17:53:27 chain-unlinked wheels 1 numbers named by 42611-30A41, no catalog link: 42611-30C82
+17:53:27 chain-unlinked wheels 1 numbers named by 42611-30A50, no catalog link: 4261A-30461
+17:53:27 chain-unlinked wheels 1 numbers named by 42611-30B10, no catalog link: 4261A-30461
+17:55:03 chain-unlinked wheels 1 numbers named by 42611-3A070, no catalog link: 42611-3A072
+17:55:03 chain-unlinked wheels 1 numbers named by 42611-3A071, no catalog link: 42611-3A072
+17:55:35 chain-unlinked wheels 1 numbers named by 42611-30761, no catalog link: 42611-30760
+17:55:35 seg done tier=W Lexus GS 300 [1993, 2006] seeds=[2006, 1999, 1996] records=2594 errors=29
+17:58:39 chain-unlinked wheels 1 numbers named by 42611-48202, no catalog link: 42611-48780
+17:58:39 chain-unlinked wheels 1 numbers named by 42611-48211, no catalog link: 42611-AH022
+17:58:39 chain-unlinked wheels 1 numbers named by 42611-48212, no catalog link: 42611-AH022
+17:58:39 chain-unlinked wheels 1 numbers named by 42611-48231, no catalog link: 42611-AH032
+17:58:39 chain-unlinked wheels 1 numbers named by 42611-48232, no catalog link: 42611-AH032
+17:58:39 chain-unlinked wheels 1 numbers named by 42611-48241, no catalog link: 42611-48242
+17:58:49 chain-unlinked wheels 1 numbers named by 42611-48590, no catalog link: 42611-0E020
+17:58:49 chain-unlinked wheels 1 numbers named by 42611-48201, no catalog link: 42611-48410
+17:58:49 chain-unlinked wheels 1 numbers named by 42611-48221, no catalog link: 42611-48220
+17:58:49 chain-unlinked wheels 2 numbers named by 42611-48401, no catalog link: 42611-48440, 42611-48190
+17:59:27 listed after chain wheels 42611-48401: line 2619 (recrawl_of 2614)
+18:00:15 chain-unlinked wheels 2 numbers named by 42611-48401, no catalog link: 42611-48440, 42611-48190
+18:00:15 chain-unlinked wheels 3 numbers named by 42611-AH012, no catalog link: 42611-AH010, 42611-48180, 42611-48330
+18:00:15 chain-unlinked wheels 2 numbers named by 42611-AH022, no catalog link: 42611-48210, 42611-AH020
+18:00:15 chain-unlinked wheels 2 numbers named by 42611-AH032, no catalog link: 42611-48230, 42611-AH030
+18:03:03 chain-unlinked wheels 1 numbers named by 42611-48640, no catalog link: 42611-48671
+18:03:03 chain-unlinked wheels 1 numbers named by 42611-48660, no catalog link: 42611-48671
+18:03:03 chain-unlinked wheels 1 numbers named by 42611-48690, no catalog link: 42611-0E230
+18:03:03 chain-unlinked wheels 1 numbers named by 42611-48700, no catalog link: 42611-0E230
+18:03:03 chain-unlinked wheels 1 numbers named by 42611-48720, no catalog link: 42611-48722
+18:03:03 chain-unlinked wheels 1 numbers named by 4261A-48070, no catalog link: 4261A-48082
+18:03:03 chain-unlinked wheels 1 numbers named by 4261A-48080, no catalog link: 4261A-48082
+18:03:03 chain-unlinked wheels 1 numbers named by 4261A-48110, no catalog link: 4261A-0E060
+18:04:47 chain-unlinked wheels 2 numbers named by 42611-0E220, no catalog link: 42611-0E040, 42611-0E060
+18:04:47 chain-unlinked wheels 2 numbers named by 42611-0E230, no catalog link: 42611-0E050, 42611-0E070
+18:04:47 chain-unlinked wheels 1 numbers named by 4261A-0E040, no catalog link: 4261A-0E020
+18:04:47 nav-fail Lexus RX 350 2006: ValueError: no 2006 catalog for Lexus RX 350 (lexus-['rx350'])
+18:04:47 seg done tier=W Lexus RX 350 [2004, 2016] seeds=[2007, 2012, 2006] records=2655 errors=30
+18:06:16 chain-unlinked wheels 1 numbers named by 42611-48200, no catalog link: 42611-48410
+18:06:47 seg done tier=W Lexus RX 330 [2004, 2006] seeds=[2004] records=2665 errors=30
+18:07:43 chain-unlinked wheels 1 numbers named by 42611-50160, no catalog link: 42611-50150
+18:07:43 chain-unlinked wheels 1 numbers named by 42611-50140, no catalog link: 42611-50130
+18:08:16 chain-unlinked wheels 1 numbers named by 42611-50180, no catalog link: 42611-50190
+18:08:16 nav-fail Lexus LS 400 2001: ValueError: no 2001 catalog for Lexus LS 400 (lexus-['ls400'])
+18:08:16 seg done tier=W Lexus LS 400 [1990, 2005] seeds=[1996, 2000, 2001] records=2671 errors=31
+18:09:20 chain-unlinked wheels 1 numbers named by 42611-50280, no catalog link: 42611-50360
+18:10:07 chain-unlinked wheels 1 numbers named by 42611-50390, no catalog link: 42611-50380
+18:10:07 chain-unlinked wheels 1 numbers named by 42611-50430, no catalog link: 42611-50420
+18:10:07 chain-unlinked wheels 1 numbers named by 42611-50370, no catalog link: 4261A-50100
+18:10:07 chain-unlinked wheels 1 numbers named by 42611-50410, no catalog link: 4261A-50110
+18:10:07 seg done tier=W Lexus LS 430 [2001, 2006] seeds=[2001, 2006] records=2680 errors=31
+18:10:15 nav-fail Lexus IS 2007: ValueError: no model page for Lexus IS (lexus-['is'])
+18:10:15 seg done tier=W Lexus IS [2004, 2016] seeds=[2007] records=2680 errors=32
+18:11:43 chain-unlinked wheels 1 numbers named by 42611-50470, no catalog link: 42611-50730
+18:11:43 chain-unlinked wheels 1 numbers named by 42611-50530, no catalog link: 4261A-50210
+18:11:43 chain-unlinked wheels 1 numbers named by 42611-50490, no catalog link: 42611-50730
+18:11:43 chain-unlinked wheels 1 numbers named by 42611-50500, no catalog link: 42611-50730
+18:11:43 chain-unlinked wheels 1 numbers named by 42611-50510, no catalog link: 4261A-50210
+18:11:43 time budget reached records=2688
