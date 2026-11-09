@@ -17787,13 +17787,16 @@ def refresh_upullitne_pricing_file() -> Path:
 # carries a unique data-stock-number (the id basis). CAVEAT: the all-makes
 # query takes ~35-45s server-side — timeout=120 with one retry. robots.txt:
 # Crawl-Delay 3, no disallows; one request per scan. Price list at
-# /parts-list/ (~470 parts: name, price, core, labor-ignored). Address:
-# 11000 Houser Dr, Fredericksburg VA 22408 (Nominatim resolves the 22408
-# centroid; Houser Dr itself is not in OSM).
+# /parts-list/ (~470 parts: name, price, core, labor-ignored). Address (the
+# site's own, 2026-11-09): 1489 Richmond Hwy, Fredericksburg VA 22405.
 RUPERTS_INVENTORY_URL = ("https://rupertsupullit.com/search-our-inventory/"
                          "?make=all&model=all&year_start=1963&year_end=2026")
+# 2026-11-09: re-pinned. The site's own address is 1489 Richmond Hwy,
+# Fredericksburg VA 22405 (US-1, formerly Jefferson Davis Hwy - the Census
+# geocoder matches that name exactly); the old pin was the 22408 ZIP centroid
+# of an address the site doesn't list (11000 Houser Dr), ~17 km south.
 RUPERTS_YARD = {"name": "Rupert's U-Pull-It - Fredericksburg", "city": "Fredericksburg",
-                "state": "VA", "lat": 38.2453, "lng": -77.4653}
+                "state": "VA", "lat": 38.3936, "lng": -77.4324}
 
 _RUPERTS_ROW_RE = re.compile(r"<tr[^>]*>\s*((?:<td[^>]*>.*?</td>\s*)+)</tr>", re.S)
 _RUPERTS_STOCK_RE = re.compile(r'data-stock-number="([^"]+)"')
@@ -18544,7 +18547,7 @@ ACE_FALLBACK_MAKES = (
     "SCION", "SUBARU", "SUZUKI", "TOYOTA", "VOLKSWAGEN", "VOLVO",
 )
 ACE_YARD = {"name": "Ace Pick-A-Part - Jacksonville", "city": "Jacksonville",
-            "state": "FL", "lat": 30.4560, "lng": -81.6424}
+            "state": "FL", "lat": 30.4066, "lng": -81.6501}  # 9152 N Main St: Census geocoder exact address match (2026-11-09)
 _ACE_MAKES_RE = re.compile(r'<select[^>]*id="search_make"[^>]*>(.*?)</select>', re.S)
 _ACE_OPTION_RE = re.compile(r'<option value="([^"]+)"')
 _ACE_ROW_RE = re.compile(r"<tr[^>]*>\s*((?:<td[^>]*>.*?</td>\s*)+)</tr>", re.S)
@@ -18715,7 +18718,7 @@ def refresh_ace_pricing_file() -> Path:
 STURTEVANT_URL = "https://inventory.sturtevantauto.com/"
 STURTEVANT_DELAY_SEC = 2.0
 STURTEVANT_YARD = {"name": "Sturtevant Auto - Sturtevant", "city": "Sturtevant",
-                   "state": "WI", "lat": 42.6981, "lng": -87.8945}
+                   "state": "WI", "lat": 42.7491, "lng": -87.9535}  # 2145 NE Frontage Rd: Census geocoder exact address match (2026-11-09)
 _STURTEVANT_MAKES_RE = re.compile(r"<select[^>]*>(.*?)</select>", re.S)
 _STURTEVANT_OPTION_RE = re.compile(r'<option value="([^"]+)"')
 _STURTEVANT_ROW_RE = re.compile(r"<tr[^>]*>\s*((?:<td[^>]*>.*?</td>\s*)+)</tr>", re.S)
@@ -19187,7 +19190,7 @@ VINPLUS_TENANTS = {
     },
     "195_used_auto_parts": {
         "": {"code": "hwy195", "name": "195 Used Auto Parts",
-             "city": "Killeen", "state": "TX", "lat": 31.0647, "lng": -97.7219},
+             "city": "Killeen", "state": "TX", "lat": 31.0179, "lng": -97.7537},  # 12077 SH 195: Census geocoder exact address match (2026-11-09)
     },
     "pick_ur_part": {
         "": {"code": "pickurpart", "name": "Pick Ur Part Auto Salvage",
@@ -19251,7 +19254,7 @@ VINPLUS_TENANTS = {
                      "city": "Richmond", "state": "VA", "lat": 37.5067, "lng": -77.4912,
                      "source": "chesterfield", "id_prefix": "chesterfield-"},
         "southside": {"code": "cfsouthside", "name": "Chesterfield Auto Parts - Southside",
-                      "city": "Midlothian", "state": "VA", "lat": 37.4367, "lng": -77.6046,
+                      "city": "Midlothian", "state": "VA", "lat": 37.4504, "lng": -77.6321,  # site address, Census exact (2026-11-09 audit): 12910 Genito Rd
                       "source": "chesterfield", "id_prefix": "chesterfield-"},
         "fort_lee": {"code": "cffortlee", "name": "Chesterfield Auto Parts - Fort Lee",
                      "city": "Prince George", "state": "VA", "lat": 37.2465, "lng": -77.3674,
@@ -19765,7 +19768,7 @@ IIS_UPULL_SITES: dict[str, dict] = {
         "yards": {
             "Tulsa U-Pull": {"code": "tulsa", "name": "AESOP U-Pull - Tulsa",
                              "city": "Tulsa", "state": "OK",
-                             "lat": 36.1716, "lng": -95.8327},
+                             "lat": 36.1915, "lng": -95.8237},  # 13802 E Apache St: Census geocoder exact address match (2026-11-09)
         },
     },
     # Midway U-Pull (midwayupull.com) — Muncie (6345 Kansas Ave, Kansas City
@@ -22710,7 +22713,7 @@ CRUSH_MVC_SITES: dict[str, dict] = {
             # number is not in OSM); close enough for the map pin.
             {"yard_id": None, "code": "lakeland",
              "name": "Polk County Pick and Pay - Lakeland", "city": "Lakeland",
-             "state": "FL", "lat": 28.1094, "lng": -81.9736},
+             "state": "FL", "lat": 28.1400, "lng": -81.9735},  # site address, Census exact (2026-11-09 audit): 7623 US Hwy 98N
         ],
     },
     # --- 2026-10-27 hunt: more CRUSH MVC tenants (same app, /Home/Inventory
@@ -22724,7 +22727,7 @@ CRUSH_MVC_SITES: dict[str, dict] = {
             # 5740 W US-60 (US-60 segment at Brookline; parcel not in OSM)
             {"yard_id": None, "code": "springfield",
              "name": "Buddy's Upull - Springfield", "city": "Brookline",
-             "state": "MO", "lat": 37.1425, "lng": -93.4353},
+             "state": "MO", "lat": 37.1601, "lng": -93.4012},  # site address, Census exact (2026-11-09 audit): 5740 W US Hwy 60
         ],
     },
     "upullitap": {
@@ -22776,7 +22779,7 @@ CRUSH_MVC_SITES: dict[str, dict] = {
             # 2430 S Dixie Hwy (not in OSM; Dalton centroid)
             {"yard_id": None, "code": "dalton",
              "name": "CP's U-Pull-It - Dalton", "city": "Dalton",
-             "state": "GA", "lat": 34.7692, "lng": -84.9702},
+             "state": "GA", "lat": 34.7289, "lng": -84.9788},  # Census geocoder exact address match (2026-11-09)
         ],
     },
 }
@@ -23074,7 +23077,7 @@ BYOT_YARDS = [
     # segment in zip 77808, not the parcel.
     {"code": "bryan", "location": 1183, "slug": "bryan-college-station",
      "name": "BYOT Auto Parts - Bryan/College Station", "city": "Bryan",
-     "state": "TX", "lat": 30.7168, "lng": -96.3408},
+     "state": "TX", "lat": 30.6651, "lng": -96.4135},  # site address, Census exact (2026-11-09 audit): 3738 E State Hwy 21
     # 7516 Shady Ln, Beaumont TX 77713 (exact OSM POI)
     {"code": "beaumont", "location": 1218, "slug": "beaumont",
      "name": "BYOT Auto Parts - Beaumont", "city": "Beaumont", "state": "TX",
@@ -23083,7 +23086,7 @@ BYOT_YARDS = [
     # frontage-road number isn't in OSM; pin is Nominatim's Port Allen centroid.
     {"code": "batonrouge", "location": 1259, "slug": "baton-rouge",
      "name": "BYOT Auto Parts - Baton Rouge", "city": "Port Allen", "state": "LA",
-     "lat": 30.4534, "lng": -91.2101},
+     "lat": 30.4518, "lng": -91.2635},  # 4007 I-10: Census geocoder exact address match (2026-11-09)
     # 908 S Roach St, Jackson MS 39201 (exact OSM address)
     {"code": "jackson", "location": 1289, "slug": "jackson-ms",
      "name": "BYOT Auto Parts - Jackson", "city": "Jackson", "state": "MS",
@@ -23560,7 +23563,7 @@ def refresh_wilberts_pricing_file() -> Path:
 # W Fairfield Dr street segment in 32505 (Nominatim), ~200 m accuracy.
 KIKERS_INVENTORY_URL = "https://www.kikersupullit.com/inventory"
 KIKERS_YARD = {"name": "Kiker's U-Pull-It - Pensacola", "city": "Pensacola",
-               "state": "FL", "lat": 30.4338, "lng": -87.2777}
+               "state": "FL", "lat": 30.4436, "lng": -87.2516}  # site address, Census exact (2026-11-09 audit): 3010 W Fairfield Dr
 _KIKERS_CARD_RE = re.compile(r'<article class="rc-card"([^>]*)>(.*?)</article>', re.S)
 _KIKERS_ATTR_RE = re.compile(r'(data-[a-z-]+)="([^"]*)"')
 _KIKERS_IMG_RE = re.compile(r'<img src="([^"]+)"')
@@ -25978,9 +25981,13 @@ def save_seen(seen: dict):
 # Fixed coordinates for Utah-chain yards (PnP provides lat/lng in its own feed).
 # Matched by location-name prefix so "(Premium)" variants resolve too.
 YARD_COORDS = {
-    "Tear-A-Part - Salt Lake City": (40.7608, -111.8910),
-    "Tear-A-Part - Ogden": (41.2230, -111.9738),
-    "Utah Pic-A-Part - Ogden": (41.2230, -111.9738),
+    # 2026-11-09: these three were city centroids (Tear-A-Part Ogden stacked on
+    # Utah Pic-A-Part Ogden). Street addresses from the yards' own sites,
+    # Census geocoder exact matches (Nominatim agrees within 311 m / 37 m;
+    # for 12th St it only resolves the street, 1.7 km off).
+    "Tear-A-Part - Salt Lake City": (40.7550, -111.9391),   # 652 S Redwood Rd
+    "Tear-A-Part - Ogden": (41.2444, -111.9962),            # 763 W 12th St
+    "Utah Pic-A-Part - Ogden": (41.2369, -111.9917),        # 555 W 17th St
     "Utah Pic-A-Part - Orem": (40.2924, -111.7324),  # 255 S Geneva Rd; OSM way/531732584, Census geocode 130 m (2026-11-04)
 }
 
