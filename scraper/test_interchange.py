@@ -435,8 +435,13 @@ CATS = {c["id"]: c for c in _p0["categories"]}
 PC = js.INTERCHANGE_PART_CATEGORIES
 
 check("payload ships schemaVersion 2", _p0["schemaVersion"] == 2)
-check("30 categories ship (25 P0 + 4 intake/P1 lights-up + wheels)",
-      len(CATS) == 30, str(len(CATS)))
+check("39 categories ship (25 P0 + 4 intake/P1 lights-up + wheels + 9 aftermarket-layer)",
+      len(CATS) == 39, str(len(CATS)))
+# 2026-11-09 aftermarket-layer categories (scraper/test_am_gates.py checks
+# their kinds, tokens and the gated app rows)
+check("aftermarket-layer categories present",
+      all(c in CATS for c in ("radiator", "ac-compressor", "ac-condenser", "heater-core", "evaporator",
+                              "throttle-body", "fuel-pump-module", "cv-axle", "strut")))
 _P0_NEW = ["engine-assembly", "ignition-coils", "transmission-auto", "ecm",
            "radio", "front-seats", "door-front", "fender", "hood",
            "bumper-front", "grille", "trunk-lid", "liftgate"]

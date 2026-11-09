@@ -9291,6 +9291,136 @@ INTERCHANGE_PART_CATEGORIES: dict[str, dict] = {
         ],
         "rowWarn": "count the lugs; read the size on the back (e.g. 17x7J), offset and hub bore",
         "perEach": True},
+    # 2026-11-09 category breadth (ops/interchange.md §9): parts the aftermarket
+    # unit lists (Spectra Premium, GSP/1A) cover. Donors come ONLY from those
+    # unit groups (Likely, unit named) and same-model-generation cars; no
+    # engine-family path ("path E" failed its audit 34/60) and no platform
+    # group. Kinds: combo = same generation x engine chip (engine/transmission
+    # split these parts); exact = same generation only; body = strut, which
+    # OEM catalog groups (tier C) will join after their own audit.
+    # priceTokens are EXACT rows mined from the yards' published lists
+    # (coverage_matrix.chain_price_lists, 2026-11-09): the client quotes the
+    # cheapest substring hit, so a bare "radiator" would price a radiator cap,
+    # "fuel pump" a mechanical pump and "strut" a hood strut.
+    "radiator": {
+        "label": "Radiator", "kind": "combo",
+        "tokens": [], "priceTokens": [
+            "=radiator", "=radiator car", "=radiator- car", "=radiator truck", "=radiatr-trk/suv/van",
+            "=radiator aluminum", "=radiator alum", "=radiator (aluminium)", "=radiator  aluminum/plastic tank",
+            "=radiator copper", "=copper radiator", "=radiator (brass)", "=brass radiator",
+            "=radiator  (metal tanks)", "=radiator (w/o shroud)", "=radiator (w/o shrd) truck",
+            "=radiator (no cooling fan)"],
+        "notes": [
+            "Radiators split within one model by engine, by transmission "
+            "(automatics carry a cooler in the tank) and by towing package. "
+            "Match the core size, the inlet and outlet positions and the "
+            "trans-cooler fittings to your car.",
+            "Check the plastic tanks for hairline cracks at the seams and the "
+            "core for bent or corroded fins before you pull."],
+        "rowWarn": "check the trans-cooler fittings on the tank and the inlet/outlet positions"},
+    "ac-compressor": {
+        "label": "A/C compressor", "kind": "combo",
+        "tokens": ["a/c compressor"], "priceTokens": [
+            "=a/c compressor", "=ac compressor", "=a/c compressor (all)"],
+        "notes": [
+            "Compressors split by engine and changed within some engine "
+            "families. Match the pulley grooves, the mounting bolt pattern "
+            "and the electrical connector.",
+            "Spin the clutch by hand: it should turn smoothly with no "
+            "grinding. A compressor from a car whose system was left open is "
+            "a gamble."],
+        "rowWarn": "match the pulley, the mounting pattern and the connector"},
+    "ac-condenser": {
+        "label": "A/C condenser", "kind": "exact",
+        "tokens": [], "priceTokens": [
+            "=a/c condenser", "=ac condenser", "=a/c condensor", "=ac condensor"],
+        "notes": [
+            "Condensers can differ between body styles of one model and "
+            "between engines. Match the size, the line fittings and the "
+            "receiver-drier mount.",
+            "Front-mounted: check for stone damage, bent fins and oily spots "
+            "(leaks)."],
+        "rowWarn": "match the line fittings and the receiver-drier mount"},
+    "heater-core": {
+        "label": "Heater core", "kind": "exact",
+        "tokens": [], "priceTokens": ["=heater core"],
+        "notes": [
+            "Heater cores sit inside the HVAC box behind the dash on most "
+            "cars: plan on removing the dash or the box. Cars with dual- or "
+            "automatic climate can use a different core.",
+            "Look for green crust or a sweet smell at the pipes (a leaker)."],
+        "rowWarn": "match the pipe positions; most need the dash or HVAC box out"},
+    "evaporator": {
+        "label": "A/C evaporator", "kind": "exact",
+        "tokens": [], "priceTokens": ["=a/c evaporator", "=ac evaporator"],
+        "notes": [
+            "The evaporator lives inside the HVAC box: plan on removing it. "
+            "Rear-A/C vans and SUVs have a second evaporator that is a "
+            "different part.",
+            "An evaporator from a car whose system was left open can be "
+            "corroded inside; check the fins and fittings."],
+        "rowWarn": "front evaporator only; match the fittings"},
+    "throttle-body": {
+        "label": "Throttle body", "kind": "combo",
+        "tokens": ["electronic throttle body"], "priceTokens": [
+            "=throttle body", "=throttle body assy", "=throttle body assm.",
+            "=throttle body (bare)", "=throttle body electronic",
+            "=throttle body (electric)", "=throttle body electr",
+            "=throttle body with sensor"],
+        "notes": [
+            "Throttle bodies split by engine and by cable vs drive-by-wire "
+            "(electronic) years. Match the part number and the connector.",
+            "Some electronic throttle bodies need a relearn after install."],
+        "rowWarn": "match the part number; cable and electronic units differ"},
+    "fuel-pump-module": {
+        "label": "Fuel pump (in-tank module)", "kind": "combo",
+        "tokens": ["fuel pump module"], "priceTokens": [
+            "=fuel pump elec. in tank w/send", "=fuel pump w/ send", "=fuel pump w/send unit",
+            "=fuel tank send pump", "=fuel pump elec. in tank", "=fuel pump electric",
+            "=fuel pump (electric)", "=fuel pump (elec)", "=fuel pump"],
+        "notes": [
+            "Modules split by engine, by fuel tank size, by flex-fuel and on "
+            "some cars by California emissions. Match the part number on the "
+            "module flange.",
+            "Reuse the lock ring and seal only if undamaged; the pump itself "
+            "can't be tested at the yard."],
+        "rowWarn": "match the module part number; check the emissions label (Federal vs California)"},
+    "cv-axle": {
+        "label": "CV axle (half shaft)", "kind": "combo",
+        "tokens": [], "priceTokens": [
+            "=c-v axle", "=cv axle", "=cv axle shaft - bare", "=axle - cv type",
+            "=axle shaft - cv type", "=axle shaft-c/v type", "=axle c.v.",
+            "=cv half shaft axle", "=axle half shaft", "=axle/c-v shaft",
+            "=c-v axle frnt  drive", "=c-v axle front drive", "=c-v axle frnt drive",
+            "=c-v axle front  drive", "=cv axle front  drive",
+            "=axle (f.w.d.) cv type-no spindle", "=axle shaft fwd", "=axle shaft fwd cv ax"],
+        "notes": [
+            "Left and right axles differ, and so do automatic and manual, "
+            "2WD and AWD, and engine sizes. Match the side, the spline count "
+            "and the length.",
+            "Torn boots let grit into the joint: pass on an axle with a "
+            "split or greasy boot."],
+        "rowWarn": "match the side, the spline count and the transmission"},
+    "strut": {
+        "label": "Strut / shock absorber", "kind": "body",
+        "tokens": ["strut assembly", "shock absorber"], "priceTokens": [
+            "=strut", "=strut assembly", "=strut assembly (no spindle)", "=strut (no spindle)",
+            "=strut w/o spring", "=strut no spring", "=strut- no spring",
+            "=strut-without spring coil", "=strut - without spring coil", "=strut with out spring",
+            "=strut and spring", "=strut with coil spring", "=strut w/coil spring",
+            "=strut w/spring", "=strut w/ spring", "=strut with spring",
+            "=suspension strut", "=shock absorber", "=shock absorber (regular)",
+            "=shock absorber std", "=shock (suspension)", "=shock - standard",
+            "=shock absorber no spring", "=shock no spring"],
+        "notes": [
+            "Struts and shocks split front and rear, left and right, by "
+            "drivetrain (AWD) and by suspension package (sport, towing, "
+            "air/adaptive). Match the part number on the body.",
+            "Struts wear in pairs. Push the shaft in: it should return "
+            "smoothly, with no oil on the body. Compressing a strut spring "
+            "needs a spring compressor; a loaded strut (with spring) is the "
+            "safer pull."],
+        "rowWarn": "match front/rear and side; air, adaptive and sport units differ"},
 }
 
 # Default caveat lines — families override where the family has a sharper one.
@@ -14717,8 +14847,40 @@ _OEM_BRANDS = {"toyota": "Toyota", "mopar": "Mopar", "gm": "GM", "ford": "Ford",
 # Verified. Any malformed group drops the whole file (fail closed).
 # ---------------------------------------------------------------------------
 OEM_AM_DIR_NAME = "aftermarket"
-_AM_CATS = ("alternator", "starter")
+_AM_CATS = ("alternator", "starter", "radiator", "ac-compressor", "ac-condenser", "heater-core",
+            "evaporator", "throttle-body", "fuel-pump-module", "cv-axle", "strut")
 _AM_LABELS = {"dbelectrical": "DB Electrical"}
+
+
+# Gated aftermarket app rows (2026-11-09, ops/interchange.md §9): a 6th element
+# limits the row to a body style and/or drivetrain the unit list states. The
+# client (pfAmGate in docs/app.js) applies it like the parts table's body and
+# drive gates: a confirming decode or listing keeps the donor, a decode naming
+# another body/drive drops it, anything else is "if equipped". Never inferred.
+_AM_DRIVES = ("awd", "4wd", "fwd", "rwd")
+
+
+def _am_app_gates(x) -> dict | None:
+    """{"body": str} and/or {"drive": one of _AM_DRIVES}; a bare string is the
+    older body-only form. Anything else is refused (the group is dropped)."""
+    if x is None or x == "" or x == {}:
+        return None
+    if isinstance(x, str):
+        x = {"body": x}
+    if not isinstance(x, dict) or not x or set(x) - {"body", "drive"}:
+        raise ValueError(f"app gates {x!r}")
+    out = {}
+    if "body" in x:
+        b = x["body"]
+        if not isinstance(b, str) or not b.strip() or len(b) > 40 or re.search(r"[<>]", b):
+            raise ValueError(f"app body gate {b!r}")
+        out["body"] = b.strip()
+    if "drive" in x:
+        d = x["drive"]
+        if not isinstance(d, str) or d.lower() not in _AM_DRIVES:
+            raise ValueError(f"app drive gate {d!r}")
+        out["drive"] = d.lower()
+    return out
 
 
 def _am_group_entry(g: dict, site: str) -> dict:
@@ -14733,14 +14895,17 @@ def _am_group_entry(g: dict, site: str) -> dict:
         raise ValueError("note refused (markup, a Verified claim, or over 600 chars)")
     apps, seen = [], set()
     for a in g.get("apps") or []:
-        mk, md, lo, hi, eng = a
+        if not isinstance(a, (list, tuple)) or len(a) not in (5, 6):
+            raise ValueError(f"malformed app {a!r}")
+        mk, md, lo, hi, eng = a[:5]
         if not (isinstance(mk, str) and isinstance(md, str) and mk and md and isinstance(lo, int)
                 and isinstance(hi, int) and 1940 <= lo <= hi <= 2030 and isinstance(eng, str)):
             raise ValueError(f"malformed app {a!r}")
-        k = (mk, md, lo, hi, eng)
+        gates = _am_app_gates(a[5]) if len(a) == 6 else None
+        k = (mk, md, lo, hi, eng, json.dumps(gates, sort_keys=True))
         if k not in seen:
             seen.add(k)
-            apps.append([mk, md, lo, hi, eng])
+            apps.append([mk, md, lo, hi, eng] + ([gates] if gates else []))
     if not apps:
         raise ValueError("no apps")
     amps = g.get("amps")
