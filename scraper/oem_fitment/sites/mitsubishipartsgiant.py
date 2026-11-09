@@ -136,10 +136,13 @@ RULES = {
                  r"handle|hinge|cable|lock|latch|protector|molding|garnish|cushion|stopper|chain|link|support|cover|emblem|lamp|trim|strap|bumper"),
     "liftgate": (r"^(liftgate|lift gate|back door|back door panel|tailgate)$",
                  r"handle|hinge|cable|lock|latch|glass|weather|stay|strut|cylinder|motor|wiper|spoiler|lamp|trim|molding|garnish|emblem|switch|striker|link|cover|pad|finish|damper"),
-    # tier C: name rule pending (written after reading the trial's list rows)
-    "wiper-motor": (r"(?!x)x", ""),
-    "knuckle": (r"(?!x)x", ""),
-    "strut": (r"(?!x)x", ""),
+    # tier C, Lancer/Outlander trial rows (exact names, name AND slug):
+    # "Wiper Motor" / "Motor" (slugs wiper-motor, front-motor), "Knuckle",
+    # "Strut", "Shock Absorber". "Damper" rows are strut bumpers / dust covers
+    # (their slugs say so) and "Carrier" is the differential: not taken.
+    "wiper-motor": (r"^((front|rear) )?(wiper )?motor( assembly)?$", ""),
+    "knuckle": (r"^(steering )?knuckle( assembly)?$", ""),
+    "strut": (r"^(front |rear )?(strut|shock absorber|shock)( assembly)?$", ""),
 }
 
 # the product URL's name slug must also name the assembly
@@ -169,10 +172,10 @@ SLUG_RULES = {
     "trunk-lid": r"^trunk-lid$",
     "tailgate": r"^tail-?gate(-assembly)?$",
     "liftgate": r"^(lift-?gate|back-door|tail-?gate)(-panel|-assembly)?$",
-    # tier C: name rule pending (written after reading the trial's list rows)
-    "wiper-motor": r"(?!x)x",
-    "knuckle": r"(?!x)x",
-    "strut": r"(?!x)x",
+    # tier C (slugs read on the trial rows)
+    "wiper-motor": r"^((front|rear)-)?(wiper-)?motor(-assembly)?(-driver-side|-passenger-side|-front|-rear)?$",
+    "knuckle": r"^(steering-)?knuckle(-driver-side|-passenger-side|-front|-rear)?$",
+    "strut": r"^(strut|shock-absorber|shock)(-assembly)?(-driver-side|-passenger-side|-front|-rear)?$",
 }
 
 # door shells: the product page's Mitsubishi name decides front vs rear
