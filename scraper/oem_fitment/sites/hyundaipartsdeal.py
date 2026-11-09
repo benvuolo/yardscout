@@ -143,12 +143,13 @@ PARTS = {
     # Wiper" / "Motor Assy-Rear Wiper" (not "Motor & Link Assy", motor plus
     # linkage); "Knuckle-Front Axle, LH", "Carrier Assy-Rear Axle, LH"; "Strut
     # Assy-Fr, LH", "Shock Absorber Assy-Front, LH" / "-Rear". "Damper
-    # Assy-Dynamic" is not a strut; "Strut, LH" on the rear axle page is a brake part.
+    # Assy-Dynamic" is not a strut; a bare "Strut Assy" (2006
+    # Sonata 54611-3K680) is kept, its side comes from the product page; "Strut, LH" on the rear axle page is a brake part.
     "wiper-motor": (r"^Motor Assy-(Windshield|Front|Rear|Back|Tail ?Gate|Liftgate)?\s*Wiper",
                     r"Link|Washer|Pump|Arm|Blade|Cover|Cap|Pivot|Crank|Relay|Switch"),
     "knuckle": (r"^Knuckle(?: Assy)?-(Front|Fr|Steering)|^Carrier Assy-(Rear|Rr) Axle|^Knuckle-Rear|^Carrier-Rear Axle",
                 r"Hub|Bearing|Bolt|Nut|Cover|Seal|Shield|Bush|Arm|Sensor|Ring"),
-    "strut": (r"^Strut Assy-|^Shock Absorber Assy-|^Strut & Spring Assy|^Shock Absorber & Spring",
+    "strut": (r"^Strut Assy(-|$)|^Shock Absorber Assy-|^Strut & Spring Assy|^Shock Absorber & Spring",
               r"Mount|Insulator|Bearing|Spring Pad|Pad|Seat|Bumper|Stopper|Cap|Cover|Dust|Kit|Bracket|Nut|Bolt|Dynamic|Bar|Rod"),
 }
 
