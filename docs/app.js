@@ -958,22 +958,79 @@ function photoSizeText(kb) {
   const mb = kb / 1000;
   return '~' + (mb < 10 ? mb.toFixed(1).replace(/\.0$/, '') : Math.round(mb)) + '\u00a0MB';
 }
-function photoBoxHtml(info, key, title, cls) {
+function photoBoxHtml(info, key, title, cls, under) {
   const rawKey = key;
   key = escapeHtml(key);
   if (!info) return `<div class="photo-box photo-none ${cls || ''}" aria-hidden="true"><span>No photo from this yard</span></div>`;
   if (info.heavy && !heavyPhotosLoaded.has(rawKey)) {
-    return `<button type="button" class="photo-box photo-heavy ${cls || ''}" data-photo-load="${key}" aria-label="Load the photo of the ${escapeHtml(title)} (${photoSizeText(info.approxKB)})">
-      <span class="photo-heavy-msg">Photo available &mdash; tap to load (${photoSizeText(info.approxKB)})</span>
+    return `<button type="button" class="photo-box photo-heavy ${under ? 'has-illo ' : ''}${cls || ''}" data-photo-load="${key}" aria-label="Load the photo of the ${escapeHtml(title)} (${photoSizeText(info.approxKB)})">
+      ${under || ''}<span class="photo-heavy-msg">Photo available &mdash; tap to load (${photoSizeText(info.approxKB)})</span>
       <span class="photo-credit">${escapeHtml(info.label)}</span>
     </button>`;
   }
   // A heavy source has only the original: load `large` (on that tap) and show it.
   const src = info.heavy ? info.large : info.url;
-  return `<button type="button" class="photo-box ${cls || ''}" data-photo-vkey="${key}" aria-label="View photo of the ${escapeHtml(title)}">
-      <img src="${escapeHtml(src)}" alt="" ${info.heavy ? '' : 'loading="lazy" '}decoding="async" width="${info.w}" height="${info.h}" onerror="this.closest('.photo-box').classList.add('photo-failed')">
+  return `<button type="button" class="photo-box ${under ? 'has-illo ' : ''}${cls || ''}" data-photo-vkey="${key}" aria-label="View photo of the ${escapeHtml(title)}">
+      ${under || ''}<img src="${escapeHtml(src)}" alt="" ${info.heavy ? '' : 'loading="lazy" '}decoding="async" width="${info.w}" height="${info.h}" onerror="this.closest('.photo-box').classList.add('photo-failed')">
       <span class="photo-credit">${escapeHtml(info.label)}</span>
     </button>`;
+}
+/* Positions in a car's extras row, by the published extraFields names
+ * (photo, color, engine, trans, transSrc, body); defaults match today's order. */
+let extraIdx = { photo: 0, color: 1, engine: 2, trans: 3, transSrc: 4, body: 5 };
+function setExtraFields(f) {
+  if (!Array.isArray(f)) return;
+  const next = { ...extraIdx };
+  f.forEach((name, i) => { if (typeof name === 'string') next[name] = i; });
+  extraIdx = next;
+}
+/* ===== VEHICLE ILLUSTRATION =====
+ * Cars with no list photo get a flat drawing in the same 4:3 slot: the body
+ * style from the car's own VIN decode (published "body"; never guessed from
+ * the name; unknown = a generic car), painted the colour the yard listed
+ * (unknown = neutral). It is plainly a drawing, never passed off as a photo. */
+const ILLO_BODIES = new Set(['sedan', 'coupe', 'hatchback', 'wagon', 'suv', 'pickup', 'van', 'convertible']);
+const PAINTS = [
+  [/champagne|beige|cream|sand/, '#D8C9A3'], [/gold/, '#C6A55A'], [/tan/, '#C4AC86'],
+  [/maroon|burgundy|wine/, '#6E2330'], [/red/, '#B3261E'], [/orange|copper/, '#D2692A'],
+  [/yellow/, '#E2BF3B'], [/green/, '#2F6A47'], [/teal|turquoise/, '#2C7A7B'],
+  [/blue|navy/, '#2F5D9E'], [/purple|violet/, '#5B3F8C'], [/brown|bronze/, '#6A4A33'],
+  [/charcoal|graphite|gunmetal/, '#4B4D50'], [/gr[ae]y/, '#7A7D80'], [/silver/, '#B9BCC0'],
+  [/pearl|white/, '#F2F1EC'], [/black/, '#23231F'],
+];
+function paintHex(color) {
+  const c = String(color || '').toLowerCase().replace(/[\[\]]/g, '').replace(/^field-/, '').trim();
+  if (!c || /unknown|other|multi|n\/a/.test(c)) return '';
+  for (const [rx, hex] of PAINTS) if (rx.test(c)) return hex;
+  return '';
+}
+function illoBody(ex) {
+  const b = ex && ex[extraIdx.body];
+  return typeof b === 'string' && ILLO_BODIES.has(b) ? b : 'car';
+}
+/* opts.photo: a real photo exists but not on cards (heavy or onCards false). */
+function illoBoxHtml(v, ex, cls, opts = {}) {
+  const body = illoBody(ex), paint = paintHex(ex && ex[extraIdx.color]);
+  const name = `${v.year} ${v.make} ${v.model}`;
+  return `<div class="photo-box photo-illo ${cls || ''}" role="img" aria-label="Drawing of a ${escapeHtml(name)}${opts.photo ? '. A photo is on the car screen' : ''}"${paint ? ` style="--paint:${paint}"` : ''}>
+      <svg class="illo-car" viewBox="0 0 200 90" aria-hidden="true" focusable="false"><use href="#illo-${body}"/></svg>
+      <span class="illo-cap" aria-hidden="true">${escapeHtml(name)}</span>
+      ${opts.photo ? `<span class="illo-badge" aria-hidden="true">${ICON_CAMERA} Photo at yard</span>` : ''}
+    </div>`;
+}
+const ICON_CAMERA = '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a2 2 0 0 1 2-2h2l2-2h6l2 2h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="3.5"/></svg>';
+/* The card's photo slot: the real photo when it may show on cards (the
+ * drawing sits under it, so a photo that fails to load leaves the drawing,
+ * not a hole); otherwise the drawing, badged when a photo exists. */
+function cardPhotoHtml(v, key) {
+  const ex = extrasFor(v);
+  const info = ex && ex[extraIdx.photo] ? photoInfo(ex[extraIdx.photo]) : null;
+  if (info && info.onCards) return photoBoxHtml(info, key, `${v.year} ${v.make} ${v.model}`, 'card-photo', illoSvgHtml(ex));
+  return illoBoxHtml(v, ex, 'card-photo', { photo: !!info });
+}
+function illoSvgHtml(ex) {
+  const paint = paintHex(ex && ex[extraIdx.color]);
+  return `<svg class="illo-car illo-under" viewBox="0 0 200 90" aria-hidden="true" focusable="false"${paint ? ` style="--paint:${paint}"` : ''}><use href="#illo-${illoBody(ex)}"/></svg>`;
 }
 function extrasFor(v) {
   return (vehicleExtras && vehicleExtras[String(v.id)]) || null;
@@ -1029,6 +1086,7 @@ function loadVehicleExtrasFile() {
       // A shard session that took over meanwhile owns vehicleExtras.
       if (_inv && _inv.shown) return;
       setPublishedPhotoSources(d.photoSources);
+      setExtraFields(d.extraFields);
       vehicleExtras = d.extras;
       hydratePhotos();
     })
@@ -1214,14 +1272,17 @@ document.getElementById('sale-strip').addEventListener('click', e => {
 
 /* Insert photos into already-rendered cards (extras arrived after render). */
 function hydratePhotos() {
-  document.querySelectorAll('#live-grid .car-card[data-eid]').forEach(card => {
-    if (card.querySelector('.photo-box')) return;
-    const ex = vehicleExtras && vehicleExtras[card.dataset.eid];
-    const info = ex && ex[0] ? photoInfo(ex[0]) : null;
-    if (!info || !info.onCards) return;
-    const title = (card.querySelector('.car-name') || {}).textContent || 'car';
-    card.insertAdjacentHTML('afterbegin', photoBoxHtml(info, card.dataset.vkey || '', title.trim(), 'card-photo'));
-  });
+  // Cards drew a plain drawing before the extras arrived: redraw the slot in
+  // place (same 4:3 box, so nothing below moves).
+  const boxes = [...document.querySelectorAll('.car-card[data-vkey] > .photo-illo.card-photo, .pf-row-card[data-vkey] > .photo-illo.card-photo')];
+  if (boxes.length && vehicleExtras) {
+    const want = new Set(boxes.map(b => b.parentElement.dataset.vkey)), byKey = new Map();
+    for (const v of liveInventory) { const k = vehicleKey(v); if (want.has(k)) byKey.set(k, v); }
+    for (const box of boxes) {
+      const key = box.parentElement.dataset.vkey, v = byKey.get(key);
+      if (v && extrasFor(v)) box.outerHTML = cardPhotoHtml(v, key);
+    }
+  }
   // The car screen drew a placeholder before the extras arrived: redraw once.
   if (carDetailKey && document.querySelector('#car-detail .photo-box.photo-none')) {
     const v = liveInventory.find(x => vehicleKey(x) === carDetailKey);
@@ -3310,7 +3371,7 @@ function renderCarDetail() {
   const scan = liveScrapedAt ? `<span class="scan-stamp">scanned ${escapeHtml(scrapedShort())}</span>` : '';
   const pinfo = ex && ex[0] ? photoInfo(ex[0]) : null;
   box.innerHTML = `
-    ${photoBoxHtml(pinfo, key, `${v.year} ${v.make} ${v.model}`, 'cd-photo')}
+    ${photoBoxHtml(pinfo, key, `${v.year} ${v.make} ${v.model}`, 'cd-photo', pinfo && pinfo.heavy ? illoSvgHtml(ex) : '')}
     <p class="eyebrow">${dateStr ? 'Set out ' + dateStr : 'Set-out date unknown'}${isNew(v.dateAdded) ? ' &middot; <span class="eyebrow-new">New</span>' : ''}</p>
     <h2 class="cd-name" id="car-detail-title">${escapeHtml(`${v.year} ${v.make} ${v.model}`)}</h2>
     ${specs.length ? `<p class="cd-spec">${specs.join(' &middot; ')}</p>` : ''}
@@ -4360,7 +4421,7 @@ function renderLive() {
     // car screen a tap away.
     return `
       <article class="car-card ${cardClass}" style="${cardStyle}" data-eid="${escapeHtml(String(v.id))}" data-vkey="${escapeHtml(key)}">
-        ${photo && photo.onCards ? photoBoxHtml(photo, key, `${v.year} ${v.make} ${v.model}`, 'card-photo') : ''}
+        ${cardPhotoHtml(v, key)}
         <div class="cc-head">
           ${rowPlateHtml(v.row)}
           <div class="cc-id">
@@ -6612,7 +6673,7 @@ function pfDonorCardHtml(r, cls, chip, valueHtml) {
   const photo = ex && ex[0] ? photoInfo(ex[0]) : null;
   const dateLbl = pfDateLabel(v.dateAdded);
   return `<div class="pf-row-card ${cls}" data-vkey="${escapeHtml(key)}">
-      ${photo && photo.onCards ? photoBoxHtml(photo, key, `${v.year} ${v.make} ${v.model}`, 'card-photo') : ''}
+      ${cardPhotoHtml(v, key)}
       <div class="cc-head">
         ${rowPlateHtml(v.row)}
         <div class="cc-id">

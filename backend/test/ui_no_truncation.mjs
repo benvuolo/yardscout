@@ -413,6 +413,61 @@ const SCREENS = [
     }
     await settle(page, 800);
   }, async (page) => { await page.evaluate(() => { heavyPhotosLoaded.clear(); }); }]),
+  // Cards without a list photo draw the car (body style from the published
+  // "body" extra, paint from the listed colour). Until the scan publishes
+  // "body", the three cards after a real-photo card get fixture body styles
+  // (suv; pickup marked as a heavy source, so badged; unknown = generic).
+  ['cards-mixed', async (page) => {
+    await tab(page, 'live');
+    // A natural stretch of the list: a car with its own photo (Pick-n-Pull),
+    // then cars with no list photo whose yard lists their colour (iPull-uPull).
+    await page.evaluate(() => {
+      // A card with its own real photo, then the next three cards: their own
+      // colour, a fixture body style, and one marked as a heavy source.
+      const all = [...document.querySelectorAll('#live-grid .car-card[data-eid]')];
+      const hasImg = (c) => c.firstElementChild && c.firstElementChild.querySelector('img');
+      const painted = (c) => { const col = String((vehicleExtras[c.dataset.eid] || [])[1] || ''); return !!col && !/unknown|other/i.test(col); };
+      // Prefer a stretch whose next cars list a paint colour (shows the tint).
+      const run = (k, n) => all.slice(k + 1, k + 1 + n).length === n && all.slice(k + 1, k + 1 + n).every(x => !hasImg(x) && painted(x));
+      let n = 3, i = all.findIndex((c, k) => hasImg(c) && run(k, 3));
+      if (i < 0) { n = 2; i = all.findIndex((c, k) => hasImg(c) && run(k, 2)); }
+      if (i < 0) throw new Error('no real-photo card followed by photo-less cars with a colour');
+      const cards = all.slice(i + 1, i + 1 + n);
+      window.__fxOrig = cards.map(c => [c.dataset.eid, vehicleExtras[c.dataset.eid]]);
+      const own = (c) => (vehicleExtras[c.dataset.eid] || []).slice();
+      // Test fixture only (the app never infers body from a name): the real
+      // body style of a few well-known models, else blank (generic drawing).
+      const KNOWN = { sedan: /^(3\d\d|5\d\d)i|camry|accord|civic sedan|corolla|altima|sentra|malibu|impala|fusion|taurus|tl$|es ?3\d\d|a4$|jetta|passat|elantra|sonata|optima|maxima|charger|300$/i,
+        suv: /^x[1-7]$|rogue|cr-?v|rav4|escape|explorer|pilot|highlander|tahoe|suburban|equinox|4runner|grand cherokee|cherokee|murano|pathfinder|tucson|santa fe|edge|expedition|durango|mdx|rx ?3\d\d/i,
+        pickup: /f-?150|silverado|sierra|ram|tacoma|tundra|frontier|ranger|colorado|titan|dakota/i,
+        van: /odyssey|sienna|caravan|town & country|quest|sedona|transit|express|savana|econoline/i,
+        hatchback: /fit$|yaris|versa note|golf|prius|mazda3 hatch|soul/i, wagon: /outback|forester|v70|wagon/i,
+        coupe: /mustang|camaro|350z|370z|miata coupe|tc$/i, convertible: /miata|convertible|roadster/i };
+      const bodyOf = (m) => Object.keys(KNOWN).find(k => KNOWN[k].test(m)) || '';
+      const vOf = (c) => liveInventory.find(x => vehicleKey(x) === c.dataset.vkey);
+      // Fixture: the middle card is marked as a heavy source (badge only;
+      // its photo never shows on a card). Photos and colours are the cars' own.
+      window.__fxBody = [];
+      cards.forEach((c, k) => { const e = own(c); if (k === 1) e[0] = 'tSTK12345'; e[5] = k < n - 1 ? bodyOf(vOf(c).model) : ''; window.__fxBody.push(e[5] || 'car'); vehicleExtras[c.dataset.eid] = e; });
+      window.__mixFirst = all[i].dataset.eid;
+      renderLive();
+      const grid = [...document.querySelectorAll('#live-grid .car-card[data-eid]')];
+      const at = grid.findIndex(c => c.dataset.eid === window.__mixFirst);
+      const four = grid.slice(at, at + 1 + n);
+      const top = four[0].getBoundingClientRect().top + scrollY - 12, bot = four[n].getBoundingClientRect().bottom + scrollY + 12;
+      window.__shotClip = { x: 0, y: Math.max(0, top), width: innerWidth, height: bot - top };
+      if (typeof cardPhotoHtml === 'undefined') return;   // an older app (before shots): no checks
+      const boxes = four.map(c => c.firstElementChild);
+      const want = [['photo-box', 'has-illo'], ...cards.map(() => ['photo-illo'])];
+      boxes.forEach((b, k) => { if (!want[k].every(x => b.classList.contains(x))) throw new Error(`card ${k}: ${b.className}`); });
+      if (!boxes[2].querySelector('.illo-badge') || boxes[1].querySelector('.illo-badge') || (boxes[3] && boxes[3].querySelector('.illo-badge'))) throw new Error('photo-at-yard badge on the wrong card');
+      window.__fxBody.forEach((b, k) => { if (!boxes[k + 1].innerHTML.includes(`#illo-${b}"`)) throw new Error(`card ${k + 1}: body ${b} not drawn`); });
+      if (document.querySelector('#live-grid .car-card img[src*="sturtevant"]')) throw new Error('heavy photo on a card');
+      grid[at].scrollIntoView({ block: 'start' }); window.scrollBy(0, -70);
+    });
+    await page.waitForFunction(() => [...document.querySelectorAll('#live-grid .car-card img')].slice(0, 1).every(im => im.complete), null, { timeout: 15000 }).catch(() => {});
+    await settle(page, 1200);
+  }, async (page) => { await page.evaluate(() => { window.__shotClip = null; const sel = document.getElementById('live-filter-location'); sel.value = ''; for (const [k, v] of window.__fxOrig || []) { if (v === undefined) delete vehicleExtras[k]; else vehicleExtras[k] = v; } renderLive(); }); await resetUi(page); }],
   ['photo-viewer', async (page) => {
     await tab(page, 'live');
     await page.evaluate(() => { const k = photoCarKey('p'); openCarDetail(k); openPhotoViewer(k); });
@@ -599,7 +654,16 @@ async function checkAll(page, screen, width) {
       passes++;
       if (SHOTS && z === 1 && (width === 390 || width === 1280) && (theme === 'light' || width === 390)) {
         fs.mkdirSync(SHOTS, { recursive: true });
-        await page.screenshot({ path: path.join(SHOTS, `${width === 390 ? 'phone' : 'desk'}-${screen}${theme === 'dark' ? '-dark' : ''}.png`) });
+        // A screen may ask for a taller clip (page coordinates) for review shots.
+        const clip = await page.evaluate(() => {
+          if (!window.__shotClip) return null;
+          // Fixed chrome (nav, closed sheets) would land mid-list in a tall shot.
+          window.__clipHidden = [...document.querySelectorAll('body *')].filter(e => { const p = getComputedStyle(e).position; return p === 'fixed' || p === 'sticky'; });
+          for (const e of window.__clipHidden) e.style.setProperty('visibility', 'hidden', 'important');
+          return window.__shotClip;
+        });
+        await page.screenshot({ path: path.join(SHOTS, `${width === 390 ? 'phone' : 'desk'}-${screen}${theme === 'dark' ? '-dark' : ''}.png`), ...(clip ? { clip, fullPage: true } : {}) });
+        if (clip) await page.evaluate(() => { for (const e of window.__clipHidden || []) e.style.removeProperty('visibility'); });
       }
       if (z !== 1) await page.evaluate(ZOOM_FN, false);
     }
