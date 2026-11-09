@@ -3,6 +3,7 @@
 Each case asserts the groups and the exact open reason. R = real lines from
 oem-raw (fixtures/real, provenance.json); manifests (R1/R2) are synthetic
 fixtures that follow the spec exactly, because the crawler has written none."""
+from collections import Counter
 import copy
 from pathlib import Path
 import tempfile
@@ -277,6 +278,18 @@ check("12 own-page rule: Caliber (product page only) is not in Likely",
       not any(a[:2] == ["Dodge", "Caliber"] for g in doc["likely"] for a in g["apps"]))
 check("12 own-page rule: the left-out vehicle-years are counted",
       sum(cur.likely_own_page_drops.values()) > 0, str(dict(cur.likely_own_page_drops)))
+# R3 own-page completion input: Caliber's own headlights page goes on the
+# worklist, routed to the site seeded on its make's pages (none here: the
+# only seeds are Jeep), so it is counted as unrouted, never guessed
+_opc = cur.own_page_completion(Counter({CAL: 3}))
+check("12 R3 input: Caliber headlights waits, unrouted (no seed on a Dodge page)",
+      _opc["rows"] == [] and _opc["unrouted_makes"] == {"Dodge": 1} and not [(r["make"], r["model"], r["year"], r["cats"]) for r in _opc["rows"]] == [("Dodge", "Caliber", 2009, ["headlights"])],
+      str(_opc)[:300])
+cur.records[0].seed = ("Dodge",) + tuple(cur.records[0].seed[1:])
+_opc3 = cur.own_page_completion(Counter({CAL: 3}))
+check("12 R3 input: routed by the seed site of the make, ranked by cars x classes",
+      [(r["site"], r["make"], r["model"], r["year"], r["cats"], r["gain"]) for r in _opc3["rows"]]
+      == [(JEEP, "Dodge", "Caliber", 2009, ["headlights"], 3)], str(_opc3)[:300])
 # the crawler records a number once per site; a later page that lists it
 # shows up in the R1 list manifest
 lm_cal = list_manifest(JEEP, CAL, "headlights", "headlights-lighting/headlamps",

@@ -1260,6 +1260,7 @@ class Curation:
     def likely_groups(self, brand):
         out = []
         self.likely_own_page_drops = Counter()   # cat -> vehicle-years left out (§5.16 own-page rule)
+        self.own_page_missing = defaultdict(lambda: defaultdict(set))  # T -> cat -> class keys (R3 input)
         self.held_exterior = []                  # §5.16 exterior hold (owner checklist)
         self.likely_note_restricted = Counter()  # cat -> vehicle-years a class-wide note restricts away
         self.release_allow = policy.release_allowlist()   # §5.16 exact owner-approved releases
@@ -1275,7 +1276,7 @@ class Curation:
             # no claim. A window switch must also resolve to the driver
             # master slot: an unresolved side may be a passenger or
             # single-gang switch (4602531AD "1 gang", quantity 2).
-            cand, class_notes = [], []
+            cand, class_notes, dropped = [], [], []
             for T in sorted(self.class_Ts.get((key, cat), ())):
                 m = (self.cells_info.get((T, cat)) or {}).get("members", {}).get(key)
                 if not m or m["cover"] not in ("yes", "maybe"):
@@ -1287,9 +1288,15 @@ class Curation:
                     # §5.16 own-page rule: the product page's fitment table
                     # alone can be a platform rollup
                     self.likely_own_page_drops[cat] += 1
+                    dropped.append(T)
                     continue
                 cand.append((T, m))
                 class_notes += notes
+            # R3 own-page completion input: the left-out vehicle-years of a
+            # class that would span 2+ feed models if their own pages listed it
+            if dropped and len({(T[0], T[1]) for T in dropped} | {(T[0], T[1]) for T, _ in cand}) >= 2:
+                for T in dropped:
+                    self.own_page_missing[T][cat].add(key)
             # §5.6 model restriction, class-wide (2026-11-09): one own page
             # restricting the number to a make/model/body ('C - CHRYSLER' on
             # the 2006 300 page for mirror 1BY421R3AA) contradicts a twin's
@@ -1434,6 +1441,35 @@ class Curation:
                         "with its current candidate state and its own pages carried no restricting note "
                         "(optimistic upper bound for ranking crawl work; never shipped)", "rows": rows}
 
+
+    def own_page_completion(self, inv_counts: Counter):
+        """R3 input for the §5.16 own-page rule (site-agnostic): one row per
+        vehicle-year whose own catalog page was never read for a category in
+        which a Likely candidate class names it. Each row carries the site
+        that navigates its make (the site whose records were seeded on that
+        make), so `crawl.py --complete` on any site reads only its own rows.
+        Ordered by cars on the lots x classes waiting, then name. Only reads
+        pages; a row whose page does not list the number stays out."""
+        seed_site = defaultdict(Counter)
+        for r in self.records:
+            seed_site[r.seed[0]][r.site] += 1
+        rows, unrouted = [], Counter()
+        for T, by_cat in self.own_page_missing.items():
+            sites = seed_site.get(T[0])
+            if not sites:
+                unrouted[T[0]] += 1
+                continue
+            site = sorted(sites.items(), key=lambda kv: (-kv[1], kv[0]))[0][0]
+            n = sum(len(v) for v in by_cat.values())
+            cars = inv_counts.get(T, 0)
+            rows.append({"site": site, "make": T[0], "model": T[1], "year": T[2], "cats": sorted(by_cat),
+                         "classes": n, "cars": cars, "gain": cars * n})
+        rows.sort(key=lambda r: (-r["gain"], -r["classes"], r["site"], r["make"], r["model"], r["year"]))
+        return {"ns": self.ns, "as_of": self.as_of, "kind": "own_page",
+                "note": "R3 input (CURATION_SPEC 3.2 R3, 5.16): vehicle-years left out of Likely candidate "
+                        "classes because their own page was never read; crawl.py --complete reads those "
+                        "pages and the curator re-checks them. Never shipped.",
+                "unrouted_makes": dict(sorted(unrouted.items())), "rows": rows}
 
     # ------------------------------------------- 5.18 Phase 2 (report only)
     def phase2_cond(self, T, cat, key):
@@ -1993,6 +2029,7 @@ def main(argv=None) -> int:
         write_json(out / "_report" / f"{ns}.json", rep)
         (out / "_report" / f"{ns}.md").write_text(report_md(rep))
         write_json(out / "_report" / f"{ns}.completion.json", completion)
+        write_json(out / "_report" / f"{ns}.own_page_completion.json", cur.own_page_completion(inv_counts))
         if a.propose_map:
             # §6: proposals for humans; `model_map.py merge` applies the draft
             label = f"oem-raw@{(src.commit or 'fixtures')[:7]}"

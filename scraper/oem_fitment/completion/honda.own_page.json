@@ -1,0 +1,375 @@
+{
+ "as_of": "2026-11-05T21:30:02Z",
+ "kind": "own_page",
+ "note": "R3 input (CURATION_SPEC 3.2 R3, 5.16): vehicle-years left out of Likely candidate classes because their own page was never read; crawl.py --complete reads those pages and the curator re-checks them. Never shipped.",
+ "ns": "honda",
+ "rows": [
+  {
+   "cars": 727,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "headlights",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 13086,
+   "make": "Honda",
+   "model": "Accord",
+   "site": "www.hondapartsnow.com",
+   "year": 2004
+  },
+  {
+   "cars": 715,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "headlights",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 12870,
+   "make": "Honda",
+   "model": "Accord",
+   "site": "www.hondapartsnow.com",
+   "year": 2005
+  },
+  {
+   "cars": 715,
+   "cats": [
+    "door-front",
+    "door-rear",
+    "headlights",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 16,
+   "gain": 11440,
+   "make": "Honda",
+   "model": "Accord",
+   "site": "www.hondapartsnow.com",
+   "year": 2007
+  },
+  {
+   "cars": 560,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "grille",
+    "headlights",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 19,
+   "gain": 10640,
+   "make": "Honda",
+   "model": "Accord",
+   "site": "www.hondapartsnow.com",
+   "year": 2006
+  },
+  {
+   "cars": 750,
+   "cats": [
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 7,
+   "gain": 5250,
+   "make": "Honda",
+   "model": "Accord",
+   "site": "www.hondapartsnow.com",
+   "year": 2003
+  },
+  {
+   "cars": 88,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 12,
+   "gain": 1056,
+   "make": "Honda",
+   "model": "Accord",
+   "site": "www.hondapartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 454,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 908,
+   "make": "Honda",
+   "model": "Accord",
+   "site": "www.hondapartsnow.com",
+   "year": 2009
+  },
+  {
+   "cars": 64,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 704,
+   "make": "Honda",
+   "model": "Accord",
+   "site": "www.hondapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 352,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 704,
+   "make": "Honda",
+   "model": "Accord",
+   "site": "www.hondapartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 274,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 548,
+   "make": "Honda",
+   "model": "Accord",
+   "site": "www.hondapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 223,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 446,
+   "make": "Honda",
+   "model": "Accord",
+   "site": "www.hondapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 13,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "headlights",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 18,
+   "gain": 234,
+   "make": "Honda",
+   "model": "Accord Hybrid",
+   "site": "www.hondapartsnow.com",
+   "year": 2005
+  },
+  {
+   "cars": 37,
+   "cats": [
+    "door-front",
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 111,
+   "make": "Honda",
+   "model": "Accord",
+   "site": "www.hondapartsnow.com",
+   "year": 2017
+  },
+  {
+   "cars": 25,
+   "cats": [
+    "door-front",
+    "window-regulator"
+   ],
+   "classes": 3,
+   "gain": 75,
+   "make": "Honda",
+   "model": "Accord",
+   "site": "www.hondapartsnow.com",
+   "year": 2016
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "grille",
+    "headlights",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 65,
+   "make": "Honda",
+   "model": "Accord Hybrid",
+   "site": "www.hondapartsnow.com",
+   "year": 2007
+  },
+  {
+   "cars": 23,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 46,
+   "make": "Honda",
+   "model": "Crosstour",
+   "site": "www.hondapartsnow.com",
+   "year": 2012
+  },
+  {
+   "cars": 3,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "door-rear",
+    "grille",
+    "headlights",
+    "window-regulator"
+   ],
+   "classes": 13,
+   "gain": 39,
+   "make": "Honda",
+   "model": "Accord Hybrid",
+   "site": "www.hondapartsnow.com",
+   "year": 2006
+  },
+  {
+   "cars": 15,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 30,
+   "make": "Honda",
+   "model": "Crosstour",
+   "site": "www.hondapartsnow.com",
+   "year": 2013
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 12,
+   "gain": 24,
+   "make": "Honda",
+   "model": "Accord Hybrid",
+   "site": "www.hondapartsnow.com",
+   "year": 2014
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "bumper-front",
+    "bumper-rear",
+    "door-front",
+    "hood",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 11,
+   "gain": 11,
+   "make": "Honda",
+   "model": "Accord Hybrid",
+   "site": "www.hondapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 10,
+   "make": "Honda",
+   "model": "Crosstour",
+   "site": "www.hondapartsnow.com",
+   "year": 2010
+  },
+  {
+   "cars": 5,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 10,
+   "make": "Honda",
+   "model": "Crosstour",
+   "site": "www.hondapartsnow.com",
+   "year": 2015
+  },
+  {
+   "cars": 1,
+   "cats": [
+    "door-front",
+    "side-mirrors",
+    "window-regulator"
+   ],
+   "classes": 6,
+   "gain": 6,
+   "make": "Honda",
+   "model": "Accord Hybrid",
+   "site": "www.hondapartsnow.com",
+   "year": 2017
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "Honda",
+   "model": "Crosstour",
+   "site": "www.hondapartsnow.com",
+   "year": 2011
+  },
+  {
+   "cars": 2,
+   "cats": [
+    "window-regulator"
+   ],
+   "classes": 2,
+   "gain": 4,
+   "make": "Honda",
+   "model": "Crosstour",
+   "site": "www.hondapartsnow.com",
+   "year": 2014
+  }
+ ],
+ "unrouted_makes": {}
+}

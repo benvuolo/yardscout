@@ -67,9 +67,10 @@ jobs:
           sys.path.insert(0, "scraper/oem_fitment")
           import markers
           wl = json.loads(Path("scraper/oem_fitment/worklist.json").read_text()).get("sites", {})
-          sites = [s for s in sites
-                   if not on_branch("raw/" + markers.done_name(s, wl.get(s)))
-                   and not any(on_branch(f"raw/{s}.{m}") for m in ("blocked", "paused"))]
+          # markers.mode: "crawl" until the worklist's .done, then "complete"
+          # while an R3 completion pass ("complete" in worklist.json) has no
+          # raw/<site>.cN.done; .blocked / .paused stop both for good
+          sites = [s for s in sites if markers.mode(s, wl.get(s), lambda n: on_branch("raw/" + n))]
           print("sites=" + json.dumps(sites))
           PY
           cat "$GITHUB_OUTPUT"
@@ -130,9 +131,24 @@ jobs:
               echo "::error::could not push checkpoint"; exit 1 )
           }
           cd scraper/oem_fitment
+          # worklist crawl until .done; then the R3 completion pass if the
+          # site's worklist entry has "complete" (markers.mode, as in plan)
+          MODE=$(python3 - <<'PY'
+          import json, os, sys
+          from pathlib import Path
+          import markers
+          s = os.environ["SITE"]
+          wl = json.loads(Path("worklist.json").read_text()).get("sites", {}).get(s)
+          print(markers.mode(s, wl, lambda n: Path("raw", n).exists()) or "none")
+          PY
+          )
+          echo "mode: $MODE"
+          if [ "$MODE" = "none" ]; then exit 0; fi
+          ARGS=""
+          if [ "$MODE" = "complete" ]; then ARGS="--complete auto"; fi
           for i in $(seq 1 10); do
             set +e
-            python3 crawl.py --site "$SITE" --minutes 30
+            python3 crawl.py --site "$SITE" --minutes 30 $ARGS
             rc=$?
             set -e
             tail -2 "raw/$SITE.log" 2>/dev/null || true

@@ -160,6 +160,24 @@ before R4 existed). Progress keys are `C|make|model|year|cat`; lines carry
 for seeds crawled before they existed (products already seen are not
 fetched again), and to redo the pages in progress `list_fail`.
 
+Own-page completion, any site (2026-11-09). `curate.py` writes
+`groups/_report/<ns>.own_page_completion.json`: every vehicle-year that the
+§5.16 own-page rule left out of a Likely candidate class spanning 2+ feed
+models, with the categories, ranked by cars x classes waiting, and a `site`
+per row (the site whose records were seeded on that make; makes with no
+seed site are counted in `unrouted_makes`). To enable it for a site:
+1. curate the namespace on a pinned raw sha, copy that file to
+   `completion/<ns>.own_page.json` and commit it;
+2. add `"complete": {"file": "completion/<ns>.own_page.json", "version": 1}`
+   to the site's `worklist.json` entry (several sites of one namespace can
+   share the file: each reads only its own rows);
+3. nothing else. Once the site has its worklist marker (`.done` / `.vN.done`),
+   the workflow (`markers.mode`) runs `crawl.py --complete auto`, which reads
+   the file, writes R1/R2 lines for every row, and finishes with
+   `raw/<site>.cN.done` when no row or chain hop is owed. A new file means a
+   new `version`; done `C|` keys skip pages already read. `.blocked` /
+   `.paused` stop it like any crawl.
+
 ## Raw files (crawl.py writes raw/)
 
 Each `.jsonl` is append-only. When a file reaches `crawl.PART_BYTES` (40 MB)

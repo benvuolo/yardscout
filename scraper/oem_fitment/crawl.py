@@ -3,6 +3,7 @@
 
     python3 scraper/oem_fitment/crawl.py --site www.toyotapartsnow.com [--tier A|B|all] [--max-segments N]
     python3 scraper/oem_fitment/crawl.py --site S --complete groups/_report/<ns>.completion.json [--minutes 28]
+    python3 scraper/oem_fitment/crawl.py --site S --complete auto [--minutes 28]   # worklist.json "complete"
 
 A site module (scraper/oem_fitment/sites/<module>.py, see README.md) supplies
 navigation and parsing; this runner supplies order, resume, coverage seeding
@@ -188,7 +189,8 @@ class RawFile:
         return rawparts.rows(self.paths())
 
 
-def _load_completion(path: str) -> list[dict]:
+def _load_completion(path: str, site: str | None = None) -> list[dict]:
+    """Completion rows; a row carrying "site" is read only by that site."""
     p = Path(path)
     if not p.is_absolute() and not p.exists():
         p = ROOT / path
@@ -196,6 +198,8 @@ def _load_completion(path: str) -> list[dict]:
     rows = data.get("rows", data.get("worklist")) if isinstance(data, dict) else data
     out = []
     for r in rows or []:
+        if site and r.get("site") and r["site"] != site:
+            continue
         out.append({"make": r["make"], "model": r["model"], "year": int(r["year"]), "cats": list(r["cats"])})
     return out
 
@@ -207,7 +211,8 @@ def main() -> None:
     ap.add_argument("--max-segments", type=int, default=0)
     ap.add_argument("--minutes", type=float, default=0, help="stop cleanly after this long (checkpointed runs)")
     ap.add_argument("--complete", metavar="WORKLIST",
-                    help="R3 completion mode: [{make, model, year, cats}] rows (feed names), in order")
+                    help="R3 completion mode: [{make, model, year, cats}] rows (feed names), in order; "
+                         "'auto' = the site's worklist.json \"complete\" file, finishing with raw/<site>.cN.done")
     a = ap.parse_args()
     deadline = time.time() + a.minutes * 60 if a.minutes else None
     site = a.site
@@ -218,6 +223,13 @@ def main() -> None:
     wl_all = json.loads((ROOT / "worklist.json").read_text()).get("sites", {})
     wl_site = wl_all.get(site) or {}
     done_marker = markers.done_name(site, wl_site)
+    complete_marker = None
+    if a.complete == "auto":
+        conf = markers.complete_conf(wl_site)
+        if not conf:
+            print(f"{site}: --complete auto but worklist.json has no complete entry for it")
+            sys.exit(2)
+        a.complete, complete_marker = conf["file"], markers.complete_name(site, wl_site)
     if (raw_dir / f"{site}.blocked").exists():
         print(f"{site} is blocked: {(raw_dir / f'{site}.blocked').read_text().strip()}")
         sys.exit(3)
@@ -628,8 +640,9 @@ def main() -> None:
                 sys.exit(10)
             save()
         if a.complete:
-            rows = _load_completion(a.complete)
+            rows = _load_completion(a.complete, site)
             log(f"completion worklist {a.complete}: {len(rows)} rows")
+            open_rows = 0
             for r in rows:
                 todo = [c for c in r["cats"] if f"C|{r['make']}|{r['model']}|{r['year']}|{c}" not in done]
                 if not todo:
@@ -643,9 +656,19 @@ def main() -> None:
                     done.update(f"C|{r['make']}|{r['model']}|{r['year']}|{c}" for c in todo)
                 else:
                     log(f"completion row {r['make']} {r['model']} {r['year']} had network failures; left open")
+                    open_rows += 1
                 save()
+            if chains_owed():
+                drain_chains(budget=True)
+                retry_chains()
             save()
-            log(f"completion finished records={prog['records']} errors={prog['errors']}")
+            log(f"completion finished records={prog['records']} errors={prog['errors']} open_rows={open_rows} "
+                f"chains_owed={chains_owed()}")
+            if complete_marker:
+                if open_rows or chains_owed():
+                    log(f"{complete_marker} not written: rows or chain hops still owed (next run retries)")
+                else:
+                    (raw_dir / complete_marker).write_text(time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()))
             return
         wl = wl_site["segments"]
         if a.max_segments:
