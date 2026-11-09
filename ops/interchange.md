@@ -2299,3 +2299,19 @@ hub, ship only on 0 WRONG plus hub confirmation.
 - Payload identical to the pre-break build; oemStatus ok x7.
 - New `curation_tests/test_groups_hash.py` fails on any stale hash. Checked
   both ways.
+- **Tier C for the 4 Honda/Nissan sites (category-breadth request, 2026-11-09).**
+  Rules in d7c236e + 0fdaf09 (dict entries only; Infiniti reuses Nissan's).
+  Local trial `--tier C --max-segments 2`, scratch root, nothing on oem-raw:
+  0 errors, no refusals, all list pages read. Records: honda 43, acura 53,
+  nissan 23, infiniti 79. Curation notes:
+  - Nissan "Drive Assy-Windshield Wiper" is motor+linkage (its product page
+    says "Motor & Drive").
+  - Honda "Shock Absorber Assy." vs bare "Unit" is kept verbatim.
+  - Honda rear knuckles marked (2WD)/(4WD) need the drive gate.
+  - "N/A FOR USA" strut assemblies are dropped.
+  - Nissan rear axle housings are not knuckles.
+- 2026-11-09 18:00: ack of the hub rule. Any change to curate.py, policy.py,
+  notes.py, positions.py, markers.py, model_map.json or
+  release_allowlist.json ships in the same push as re-curated groups for
+  every shipped namespace. (a31d3f6 did not change the policy hash: it
+  touched no POLICY_INPUTS file.)
