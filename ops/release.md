@@ -1,4 +1,4 @@
-# Release workstream — status (updated 2026-11-07)
+# Release workstream — status (updated 2026-11-09)
 
 Owns: version bumps and store submissions via `release-ios.yml` and
 `release-android.yml`, `fastlane/metadata/`, release notes.
@@ -10,6 +10,7 @@ Procedure: `RELEASING.md`. **Dispatch only after the owner says "ship".**
 |---|---|---|
 | 1.12.10 | build 26, live (READY_FOR_SALE) | — |
 | 1.12.11 | — | versionCode 33, Play production, in review |
+| 1.12.14 | SHIPPED 2026-11-09 14:24 UTC (owner: "Ship the latest"). Round 9 map merged to main (4c1b482e, sw jh-v167). iOS build 36, submit=true, run 42634279207: the workflow withdraws 1.12.13 build 34 from review (WAITING_FOR_REVIEW since 11-07 04:40, built at jh-v155 without the price-copy fix) and submits 1.12.14. Build 35 is TestFlight only. | versionCode 37 (blank = +1), Play production, run 42634274314 |
 | 1.12.13 | SHIPPED 2026-11-07 (owner: "push this to prod"). design/pull-sheet merged to main (4331322, sw jh-v154), then the coverage-count fix (sw jh-v155). Build 33 was submitted and then replaced by build 34 (with the fix), WAITING_FOR_REVIEW since 04:40 UTC. 1.12.12 was withdrawn and never reached iOS users; 1.12.13 includes it. | versionCode 35, then 36 (with the fix): Play production, completed, rollout 100% |
 | 1.12.12 | build 27, submitted 2026-11-05 19:42 UTC, WAITING_FOR_REVIEW, auto-release on approval | versionCode 34, Play production, status completed, rollout 100% (Google review pending) |
 
