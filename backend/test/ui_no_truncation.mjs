@@ -594,7 +594,7 @@ const SCREENS = [
     });
     await settle(page, 500);
   }, async (page) => { await page.evaluate(() => { if (window.__llOrig) { window.__llOrig[0].dateAdded = window.__llOrig[1]; window.__llOrig = null; } hideYardRows(); }); await resetUi(page); }],
-  ...[['yards-map', 'gl'], ['yards-map-sheet', 'sheet'], ['yards-map-schematic', 'schematic'], ['yards-map-watch', 'watch']].map(([name, mode]) => [name, async (page) => {
+  ...[['yards-map', 'gl'], ['yards-map-sheet', 'sheet'], ['yards-map-full', 'full'], ['yards-map-schematic', 'schematic'], ['yards-map-watch', 'watch']].map(([name, mode]) => [name, async (page) => {
     await tab(page, 'yards');
     if (mode === 'watch') await page.evaluate(() => {
       // A watch for a model on a nearby lot: its yard's pin gets the bell badge.
@@ -621,12 +621,22 @@ const SCREENS = [
     await page.evaluate((mode) => {
       if (!document.querySelector('#yards-map .map-pin')) throw new Error('no pins');
       if (mode === 'gl' && !/OpenStreetMap/.test(document.querySelector('#yards-map').textContent)) throw new Error('no map attribution');
-      if (mode !== 'gl') {
+      // Map mode: the page doesn't scroll; the map fills to the tab bar and the
+      // bottom sheet is the one scrolling surface.
+      if (!document.documentElement.classList.contains('map-lock')) throw new Error('page not locked in map mode');
+      const sheet = document.getElementById('yards-map-sheet');
+      if (!sheet || !/\d+ yards? near you/.test(document.getElementById('ms-title').textContent)) throw new Error('no sheet title');
+      if (!sheet.querySelector('.ms-row')) throw new Error('no yard rows in the sheet');
+      if (mode === 'full') {
+        document.getElementById('ms-handle').click();
+        if (sheet.dataset.state !== 'full' || document.getElementById('ms-handle').getAttribute('aria-expanded') !== 'true') throw new Error('handle did not expand');
+      } else if (mode === 'sheet' || mode === 'schematic') {
         const pin = document.querySelector('#yards-map .map-pin:not(.map-cluster)');
-        selectMapYard(pin.dataset.loc);
-        if (!document.querySelector('#yards-map-sheet .map-walk')) throw new Error('no yard sheet');
-        document.getElementById('yards-map-sheet').scrollIntoView({ block: 'end' });
-      } else window.scrollTo(0, document.getElementById('yards-map').getBoundingClientRect().top + scrollY - 140);
+        pin.click();
+        if (!sheet.querySelector('.map-walk') || !sheet.querySelector('.ms-back')) throw new Error('no yard card in the sheet');
+      }
+      const mr = document.getElementById('yards-map-wrap').getBoundingClientRect(), tabs = document.querySelector('.tabs').getBoundingClientRect();
+      if (getComputedStyle(document.querySelector('.tabs')).position === 'fixed' && Math.abs(tabs.top - mr.bottom) > 24) throw new Error(`map does not reach the tab bar: ${mr.bottom} vs ${tabs.top}`);
     }, mode);
     await settle(page, 800);
   }, async (page) => { await page.evaluate(() => { _mapSheetLoc = null; if (window.__mapWatch) { saveWatchlist(loadWatchlist().filter(e => e.addedAt !== window.__mapWatch)); window.__mapWatch = null; } setYardsView('list'); }); await resetUi(page); }]),
@@ -834,8 +844,19 @@ async function checkAll(page, screen, width) {
     for (const z of ZOOMS) {
       if (z !== 1) await page.evaluate(ZOOM_FN, true);
       await settle(page, 120);
+      // Map screens: let MapLibre finish redrawing after a theme/text-size
+      // change (its pins are re-checked every frame) before measuring; under
+      // CPU load the fixed settle above can be too short.
+      await page.evaluate(async () => {
+        if (!document.querySelector('#tab-yards.yards-map-mode #yards-map')) return;
+        const t0 = Date.now();
+        while (window._yardsMap && !_yardsMap.loaded() && Date.now() - t0 < 4000) await new Promise(r => setTimeout(r, 50));
+        for (let i = 0; i < 4; i++) await new Promise(r => requestAnimationFrame(r));
+        await new Promise(r => setTimeout(r, 250));
+      });
       const rows = await page.evaluate(CHECK_FN);
       if (process.env.DEBUG_IMG) console.log(screen, await page.evaluate(() => [...document.querySelectorAll('.photo-box img')].slice(0, 3).map(i => [i.src.slice(0, 90), i.complete, i.naturalWidth, i.closest('.photo-box').className])));
+      if (process.env.DEBUG_PINS && rows.some(r => /yards-map/.test(r.el || ''))) console.log(screen, width, theme, z, JSON.stringify(await page.evaluate(() => { const c = document.getElementById('yards-map').getBoundingClientRect(); return { map: [Math.round(c.top), Math.round(c.bottom)], pins: [...document.querySelectorAll('#yards-map .map-pin')].map(p => { const r = p.getBoundingClientRect(); return [p.textContent.trim().slice(0, 18), Math.round(r.top), Math.round(r.bottom), p.style.transform, getComputedStyle(p).fontSize]; }) }; })));
       if (process.env.DEBUG_WIDE && rows.length) console.log(screen, width, theme, z, await page.evaluate(() => [...document.querySelectorAll('body *')].filter(e => e.getBoundingClientRect().right > innerWidth + 1 && e.getClientRects().length).slice(0, 8).map(e => e.tagName + '.' + e.className + ' ' + Math.round(e.getBoundingClientRect().width))));
       record(screen, `${width}/${theme}/${z * 100}%`, rows);
       passes++;

@@ -309,10 +309,14 @@
     <!-- Lot Map: yards as pins (free keyless tiles: OpenFreeMap + MapLibre,
          loaded only when the map opens; a schematic map when they can't load). -->
     <div id="yards-map-wrap" hidden>
-      <p class="yards-map-legend">Pins show cars on the lot &middot; <span class="legend-bell"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg> matches your watches</span></p>
       <div id="yards-map" role="region" aria-label="Map of nearby yards"></div>
+      <p class="yards-map-legend">Pins show cars on the lot &middot; <span class="legend-bell"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg> matches your watches</span></p>
       <p class="yards-map-note" id="yards-map-note"></p>
-      <div id="yards-map-sheet" aria-live="polite"></div>
+      <!-- Bottom sheet over the map: nearby yards (peek / expanded) or one yard's card. -->
+      <section id="yards-map-sheet" class="map-sheet" data-state="peek" aria-label="Yards on the map">
+        <button type="button" class="ms-handle" id="ms-handle" aria-expanded="false" aria-controls="ms-body"><span class="ms-grip" aria-hidden="true"></span><span class="ms-title" id="ms-title">Yards near you</span></button>
+        <div class="ms-body" id="ms-body"></div>
+      </section>
     </div>
     <div class="price-compare-bar" id="price-compare-bar">
       <div class="compare-input-wrap">

@@ -5015,7 +5015,7 @@ function populateYardFilters(inRange) {
 }
 
 function renderYards() {
-  if (yardsView === 'map') setTimeout(renderYardsMap, 0);
+  if (yardsView === 'map') setTimeout(() => { layoutMapMode(); renderYardsMap(); }, 0);
   const grid = document.getElementById('yards-grid');
   const statsBar = document.getElementById('yards-stats-bar');
   // This tab's Within select and zip mirror the Live tab's (one stored
@@ -5518,16 +5518,42 @@ function clusterPinHtml(items) {
       <span class="pin-name">${items.length} yards</span><span class="pin-cars">${cars.toLocaleString()} cars</span>
       ${watch ? `<i class="pin-watch">${ICON.bell}${watch}</i>` : ''}</button>`;
 }
+/* ---- Map bottom sheet: nearby yards (peek / expanded) or one yard's card ---- */
+var _sheetState = 'peek';
+function setSheetState(st) {
+  const sh = document.getElementById('yards-map-sheet');
+  if (!sh) return;
+  _sheetState = st;
+  sh.dataset.state = st;
+  document.getElementById('ms-handle').setAttribute('aria-expanded', String(st === 'full'));
+}
+function mapSheetRowHtml(y, m) {
+  return `<li><button type="button" class="ms-row${_mapSheetLoc === y.location ? ' on' : ''}" data-loc="${escapeHtml(y.location)}">
+      <span class="ms-row-name">${escapeHtml(yardShortLabel(y.location))}</span>
+      <span class="ms-row-meta">${y.dist != null ? `${Math.round(y.dist)}\u00a0mi &middot; ` : ''}${m.cars.toLocaleString()} cars &middot; ${m.fresh.toLocaleString()} new this week</span>
+      ${m.watch ? `<span class="ms-row-watch">${ICON.bell} ${m.watch.toLocaleString()} match${m.watch === 1 ? 'es' : ''} your watches</span>` : ''}
+    </button></li>`;
+}
 function renderMapSheet() {
-  const box = document.getElementById('yards-map-sheet');
-  if (!_mapSheetLoc) { box.innerHTML = '<p class="yards-map-tip">Tap a pin to see the yard.</p>'; return; }
-  const y = (getYardsView().shown || []).find(x => x.location === _mapSheetLoc);
-  if (!y) { box.innerHTML = ''; return; }
+  const body = document.getElementById('ms-body'), title = document.getElementById('ms-title');
+  if (!body) return;
+  const yards = (getYardsView().shown || []);
+  if (!_mapSheetLoc) {
+    title.textContent = `${yards.length.toLocaleString()} yard${yards.length === 1 ? '' : 's'} near you`;
+    body.innerHTML = yards.length
+      ? `<ul class="ms-list">${yards.map(y => mapSheetRowHtml(y, yardMarks(y.location))).join('')}</ul>`
+      : '<p class="yards-map-tip">No yards in range. Widen the distance in Filters.</p>';
+    return;
+  }
+  const y = yards.find(x => x.location === _mapSheetLoc);
+  if (!y) { _mapSheetLoc = null; renderMapSheet(); return; }
   const m = yardMarks(y.location);
   const place = [y.city, y.state].filter(Boolean).join(', ');
-  box.innerHTML = `<div class="map-sheet-card">
+  title.textContent = yardShortLabel(y.location);
+  body.innerHTML = `<div class="map-sheet-card">
+      <button type="button" class="ms-back">&lsaquo; All yards</button>
       <h3>${escapeHtml(y.location)}</h3>
-      <p class="map-sheet-place">${escapeHtml(place)}${y.dist != null ? ` &middot; ${Math.round(y.dist)} mi` : ''}</p>
+      <p class="map-sheet-place">${escapeHtml(place)}${y.dist != null ? ` &middot; ${Math.round(y.dist)}\u00a0mi` : ''}</p>
       <ul class="map-sheet-stats">
         <li><b>${m.cars.toLocaleString()}</b> cars</li>
         <li><b>${m.fresh.toLocaleString()}</b> new this week</li>
@@ -5540,11 +5566,65 @@ function renderMapSheet() {
       </div>
     </div>`;
 }
-function selectMapYard(loc) {
-  _mapSheetLoc = loc;
-  document.querySelectorAll('#yards-map .map-pin').forEach(p => p.classList.toggle('on', p.dataset.loc === loc));
+function selectMapYard(loc, opts = {}) {
+  _mapSheetLoc = loc || null;
+  document.querySelectorAll('#yards-map .map-pin').forEach(p => p.classList.toggle('on', !!loc && p.dataset.loc === loc));
   renderMapSheet();
+  setSheetState(loc ? 'card' : 'peek');
+  document.getElementById('ms-body').scrollTop = 0;
+  if (loc && opts.center && _yardsMap) {
+    const y = _mapYards.find(i => i.y.location === loc);
+    const sh = document.getElementById('yards-map-sheet');
+    if (y) _yardsMap.easeTo({ center: [y.y.lng, y.y.lat], zoom: Math.max(_yardsMap.getZoom(), 10), offset: [0, -(sh ? sh.offsetHeight : 0) / 2], duration: matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 350 });
+  }
 }
+/* Map mode fills the space between the Filters bar and the tab bar; the page
+ * itself stops scrolling (the sheet is the one scrolling surface). */
+function layoutMapMode() {
+  const wrap = document.getElementById('yards-map-wrap');
+  const on = yardsView === 'map' && document.getElementById('tab-yards').classList.contains('active');
+  document.documentElement.classList.toggle('map-lock', on);
+  if (!on || wrap.hidden) return;
+  window.scrollTo(0, 0);
+  const tabs = document.querySelector('.tabs');
+  const tr = tabs ? tabs.getBoundingClientRect() : null;
+  const bottomLimit = tr && getComputedStyle(tabs).position === 'fixed' ? tr.top : window.innerHeight;
+  const top = wrap.getBoundingClientRect().top;
+  wrap.style.height = Math.max(320, Math.floor(bottomLimit - top - 8)) + 'px';
+  if (_yardsMap) _yardsMap.resize();
+}
+window.addEventListener('resize', () => { if (yardsView === 'map') layoutMapMode(); });
+if (window.ResizeObserver) {
+  const ro = new ResizeObserver(() => { if (yardsView === 'map') requestAnimationFrame(layoutMapMode); });
+  ['yards-controls', 'yards-filter-toggle', 'yards-stats-bar'].forEach(id => { const el = document.getElementById(id); if (el) ro.observe(el); });
+  const sw = document.querySelector('.yards-view-switch'); if (sw) ro.observe(sw);
+  const hd = document.querySelector('header'); if (hd) ro.observe(hd);
+}
+/* The handle: tap toggles peek <-> full; drag up/down to expand/collapse. */
+(() => {
+  const h = document.getElementById('ms-handle');
+  if (!h) return;
+  let y0 = null, moved = false;
+  h.addEventListener('pointerdown', (e) => { y0 = e.clientY; moved = false; try { h.setPointerCapture(e.pointerId); } catch (err) { /* old browsers */ } });
+  h.addEventListener('pointermove', (e) => { if (y0 != null && Math.abs(e.clientY - y0) > 8) moved = true; });
+  h.addEventListener('pointerup', (e) => {
+    if (y0 == null) return;
+    const dy = e.clientY - y0; y0 = null;
+    if (!moved) return;
+    if (dy < -24) setSheetState('full');
+    else if (dy > 24) { if (_sheetState === 'full') setSheetState(_mapSheetLoc ? 'card' : 'peek'); else setSheetState('min'); }
+  });
+  h.addEventListener('click', () => {
+    if (moved) { moved = false; return; }
+    setSheetState(_sheetState === 'full' ? (_mapSheetLoc ? 'card' : 'peek') : 'full');
+  });
+})();
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Escape' || yardsView !== 'map' || !document.getElementById('tab-yards').classList.contains('active')) return;
+  if (document.querySelector('#car-detail.open, #yard-rows.open, #photo-viewer.open, #upgrade-sheet.open')) return;
+  if (_sheetState === 'full') setSheetState(_mapSheetLoc ? 'card' : 'peek');
+  else if (_mapSheetLoc) selectMapYard(null);
+});
 function renderSchematicMap(yards, note) {
   const el = document.getElementById('yards-map');
   if (_yardsMap) { try { _yardsMap.remove(); } catch (e) { /* gone */ } _yardsMap = null; }
@@ -5617,13 +5697,21 @@ async function renderYardsMap() {
   }
   document.getElementById('yards-map-note').textContent = '';
   _mapYards = yards.map(y => ({ y, m: yardMarks(y.location) }));
-  if (!_yardsMap.__moveHooked) { _yardsMap.on('moveend', placeMapMarkers); _yardsMap.__moveHooked = true; }
+  if (!_yardsMap.__moveHooked) {
+    _yardsMap.on('moveend', placeMapMarkers);
+    // Any redraw (resize, pan, tiles) may move the pins: re-check once per frame.
+    let queued = false;
+    _yardsMap.on('render', () => { if (queued) return; queued = true; requestAnimationFrame(() => { queued = false; keepPinsInside(); }); });
+    _yardsMap.__moveHooked = true;
+  }
   const b = new lib.LngLatBounds([activeZipCoords.lng, activeZipCoords.lat], [activeZipCoords.lng, activeZipCoords.lat]);
   yards.forEach(y => b.extend([y.lng, y.lat]));
   // Room for the labelled pins at the sides, so none starts cut off.
   const w = el.clientWidth || 360;
-  _yardsMap.fitBounds(b, { padding: { top: 80, bottom: 40, left: Math.min(100, w / 4), right: Math.min(100, w / 4) }, maxZoom: 11, duration: 0 });
+  const shH = (document.getElementById('yards-map-sheet') || {}).offsetHeight || 0;
+  _yardsMap.fitBounds(b, { padding: { top: 80, bottom: shH + 24, left: Math.min(100, w / 4), right: Math.min(100, w / 4) }, maxZoom: 11, duration: 0 });
   placeMapMarkers();
+  layoutMapMode();
 }
 /* Pins that would overlap on screen merge into one "N yards" bubble; tapping
  * it zooms to those yards. Recomputed after every pan/zoom. */
@@ -5662,7 +5750,9 @@ function keepPinsInside() {
   if (!c.width) return;
   for (const pin of box.querySelectorAll('.map-pin')) {
     pin.style.transform = ''; pin.classList.remove('nudged');
-    const r = pin.getBoundingClientRect();
+    // The pin plus its watch badge (which sits over the pin's corner).
+    const rs = [pin.getBoundingClientRect(), ...[...pin.querySelectorAll('.pin-watch')].map(b => b.getBoundingClientRect())];
+    const r = { left: Math.min(...rs.map(x => x.left)), right: Math.max(...rs.map(x => x.right)), top: Math.min(...rs.map(x => x.top)), bottom: Math.max(...rs.map(x => x.bottom)) };
     let dx = 0, dy = 0;
     if (r.left < c.left + 4) dx = c.left + 4 - r.left; else if (r.right > c.right - 4) dx = c.right - 4 - r.right;
     if (r.top < c.top + 4) dy = c.top + 4 - r.top; else if (r.bottom > c.bottom - 4) dy = c.bottom - 4 - r.bottom;
@@ -5681,7 +5771,9 @@ function zoomToYards(locs) {
   if (!pts.length) return;
   if (!lib || !_yardsMap) {   // schematic map: list the yards in the sheet
     _mapSheetLoc = null;
-    document.getElementById('yards-map-sheet').innerHTML = `<div class="map-sheet-card"><h3>${pts.length} yards here</h3><ul class="map-sheet-list">${pts.map(i => `<li><button type="button" class="map-sheet-pick" data-loc="${escapeHtml(i.y.location)}"><span>${escapeHtml(i.y.location)}</span><b>${i.m.cars.toLocaleString()} cars</b></button></li>`).join('')}</ul></div>`;
+    document.getElementById('ms-title').textContent = `${pts.length} yards here`;
+    document.getElementById('ms-body').innerHTML = `<button type="button" class="ms-back">&lsaquo; All yards</button><ul class="ms-list">${pts.map(i => mapSheetRowHtml(i.y, i.m)).join('')}</ul>`;
+    setSheetState('card');
     return;
   }
   const b = new lib.LngLatBounds([pts[0].y.lng, pts[0].y.lat], [pts[0].y.lng, pts[0].y.lat]);
@@ -5694,6 +5786,7 @@ function setYardsView(view) {
   document.querySelectorAll('.yv-btn').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === yardsView)));
   document.getElementById('tab-yards').classList.toggle('yards-map-mode', yardsView === 'map');
   document.getElementById('yards-map-wrap').hidden = yardsView !== 'map';
+  layoutMapMode();
   if (yardsView === 'map') { renderYardsMap(); if (_yardsMap) setTimeout(() => _yardsMap && _yardsMap.resize(), 50); }
   try { sessionStorage.setItem('ys_yards_view', yardsView); } catch (e) { /* private mode */ }
 }
@@ -5706,8 +5799,10 @@ document.getElementById('yards-map-wrap').addEventListener('click', e => {
   if (cl) { e.preventDefault(); e.stopPropagation(); zoomToYards(JSON.parse(cl.dataset.locs)); return; }
   const pin = e.target.closest('.map-pin');
   if (pin) { e.preventDefault(); e.stopPropagation(); selectMapYard(pin.dataset.loc); return; }
-  const pick = e.target.closest('.map-sheet-pick');
-  if (pick) { selectMapYard(pick.dataset.loc); return; }
+  const back = e.target.closest('.ms-back');
+  if (back) { selectMapYard(null); return; }
+  const row = e.target.closest('.ms-row');
+  if (row) { selectMapYard(row.dataset.loc, { center: true }); return; }
   const walk = e.target.closest('.map-walk');
   if (walk) { openYardRows(walk.dataset.loc, walk); return; }
   const cars = e.target.closest('.map-cars');
@@ -7976,8 +8071,10 @@ function tabRetap() {
   if (document.querySelector('#photo-viewer.open')) { closePhotoViewer(); return 'closed-photo'; }
   if (document.querySelector('#car-detail.open')) { closeCarDetail(); return 'closed-car'; }
   if (document.querySelector('#yard-rows.open')) { closeYardRows(); return 'closed-rows'; }
-  if (typeof yardsView !== 'undefined' && yardsView === 'map' && _mapSheetLoc && document.getElementById('tab-yards').classList.contains('active')) {
-    selectMapYard(null); return 'closed-sheet';
+  if (typeof yardsView !== 'undefined' && yardsView === 'map' && document.getElementById('tab-yards').classList.contains('active')) {
+    if (_mapSheetLoc) { selectMapYard(null); return 'closed-sheet'; }
+    if (_sheetState === 'full' || _sheetState === 'min') { setSheetState('peek'); document.getElementById('ms-body').scrollTop = 0; return 'sheet-peek'; }
+    document.getElementById('ms-body').scrollTop = 0; return 'top';
   }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
@@ -7995,6 +8092,7 @@ document.querySelectorAll('.tab').forEach(tab => {
     tab.classList.add('active');
     document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
     if (tab.dataset.tab === 'yards') renderYards();
+    layoutMapMode();
     if (tab.dataset.tab === 'live') renderLive();
     if (tab.dataset.tab === 'parts') initPartsTab();
     if (tab.dataset.tab === 'alerts') renderAlerts();
