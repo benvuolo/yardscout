@@ -3104,6 +3104,9 @@ function updateSavedPill() {
   const pill = document.getElementById('saved-pill');
   pill.style.display = n ? '' : 'none';
   document.getElementById('saved-count').textContent = n;
+  // Map mode: the pull sheet button lives in the bottom sheet's header.
+  const mp = document.getElementById('ms-pull');
+  if (mp) { mp.hidden = !n; document.getElementById('ms-pull-n').textContent = n; }
   if (!n) closeSavedSheet();
 }
 
@@ -3161,6 +3164,7 @@ function closeSavedSheet() {
   document.getElementById('saved-backdrop').classList.remove('open');
 }
 document.getElementById('saved-pill').addEventListener('click', openSavedSheet);
+document.getElementById('ms-pull').addEventListener('click', openSavedSheet);
 document.getElementById('saved-backdrop').addEventListener('click', closeSavedSheet);
 document.getElementById('saved-clear').addEventListener('click', () => {
   if (!confirm('Clear your pull sheet?')) return;
@@ -3645,6 +3649,8 @@ function applyThemeColor() {
       if (IS_ANDROID && SB.setBackgroundColor) SB.setBackgroundColor({ color: dark ? '#1C1C1A' : '#F4F2EC' }).catch(() => {});
     }
   } catch (e) { /* plugin absent in older shells */ }
+  // The map's tiles follow the theme (light / dark style).
+  try { if (typeof yardsView !== 'undefined' && yardsView === 'map' && window._yardsMap && _yardsMap.__style && _yardsMap.__style !== `https://tiles.openfreemap.org/styles/${mapDark() ? 'dark' : 'positron'}`) renderYardsMap(); } catch (e) { /* map not ready */ }
 }
 function toggleTheme() {
   const next = effectiveTheme() === 'dark' ? 'light' : 'dark';
@@ -5131,7 +5137,13 @@ function renderYards() {
     return;
   }
 
-  grid.innerHTML = shown.map(y => {
+  // A yard's "(Premium)" lot shares its address: show it on the main yard's
+  // card (its own count and buttons) instead of as a separate card.
+  const premOf = new Map();
+  const baseLocs = new Set(shown.map(y => y.location));
+  for (const y of shown) { const k = siteKey(y.location); if (k !== y.location && baseLocs.has(k)) premOf.set(k, y); }
+  grid.innerHTML = shown.filter(y => !(siteKey(y.location) !== y.location && baseLocs.has(siteKey(y.location)))).map(y => {
+    const prem = premOf.get(y.location);
     const chain = CHAIN_PRICE_PAGES.find(c => c[0].test(y.location));
     const place = [y.city, y.state].filter(Boolean).join(', ');
     const distTxt = y.dist != null ? ` <span class="dist">&middot; ${Math.round(y.dist)}\u00a0mi</span>` : '';
@@ -5148,6 +5160,8 @@ function renderYards() {
             <div class="car-name">${escapeHtml(y.location)}</div>
             <div class="live-card-location">${ICON.pin} <span class="loc-name">${escapeHtml(place) || 'Location unknown'}</span>${distTxt}${saleBadgeHtml(y.location)}</div>
             <div class="car-meta">${y.count.toLocaleString()} cars on the lot &middot; ${y.newCount.toLocaleString()} new this week</div>
+            ${prem ? `<div class="yard-premium"><p><b>Premium lot</b> &middot; ${prem.count.toLocaleString()} cars &middot; ${prem.newCount.toLocaleString()} new this week</p>
+              <div class="yard-premium-acts"><button type="button" class="btn yard-walk-btn" data-loc="${escapeHtml(prem.location)}">Walk premium rows</button><button type="button" class="btn btn-quiet yard-view-btn" data-loc="${escapeHtml(prem.location)}">View premium cars</button></div></div>` : ''}
             <div class="lot-clock" title="Based on historical arrival-to-departure data — an estimate, not a schedule">${life}</div>
             <div class="lot-clock" title="Chain-published rule — individual locations can differ; torches and jacks are banned everywhere. Confirm at the gate before a long drive.">${ICON.tag} Tools: ${chainToolPolicy(y.location)}</div>
             ${yardDormant(y.location)
@@ -5208,9 +5222,11 @@ document.getElementById('yards-grid').addEventListener('click', e => {
   const card = e.target.closest('.yard-card');
   if (!card) return;
   if (e.target.closest('.yard-prices-btn')) { openYardPrices(card.dataset.loc); return; }
-  if (e.target.closest('.yard-view-btn')) { viewYardInLive(card.dataset.loc); return; }
+  const vb = e.target.closest('.yard-view-btn');
+  if (vb) { viewYardInLive(vb.dataset.loc || card.dataset.loc); return; }
   if (e.target.closest('.yard-week-btn, .yard-share-btn')) return;   // their own handlers
-  openYardRows(card.dataset.loc, card);
+  const wb = e.target.closest('.yard-walk-btn');
+  openYardRows((wb && wb.dataset.loc) || card.dataset.loc, card);
 });
 document.getElementById('yards-grid').addEventListener('keydown', e => {
   if (e.key !== 'Enter') return;
@@ -5474,7 +5490,7 @@ document.getElementById('yard-rows').addEventListener('click', e => {
  * no WebGL), the yards are drawn on a plain schematic map instead. */
 const MAPLIBRE_VER = '4.7.1';
 // var, not let: renderYards() can run before this line during boot.
-var _mapLibP = null, _yardsMap = null, _yardsMapMarkers = [], yardsView = 'list', _mapSheetLoc = null;
+var _mapLibP = null, _yardsMap = null, yardsView = 'list', _mapSheetLoc = null;
 function loadMapLib() {
   if (window.maplibregl) return Promise.resolve(window.maplibregl);
   if (_mapLibP) return _mapLibP;
@@ -5512,9 +5528,9 @@ function yardPinHtml(y, m) {
       <span class="pin-name">${escapeHtml(yardShortLabel(y.location))}</span><span class="pin-cars">${m.cars.toLocaleString()} cars</span>
       ${m.watch ? `<i class="pin-watch">${ICON.bell}${m.watch}</i>` : ''}</button>`;
 }
-function clusterPinHtml(items) {
+function clusterPinHtml(items, sameSpot) {
   const cars = items.reduce((n, i) => n + i.m.cars, 0), watch = items.reduce((n, i) => n + i.m.watch, 0);
-  return `<button type="button" class="map-pin map-cluster${watch ? ' has-watch' : ''}" data-locs="${escapeHtml(JSON.stringify(items.map(i => i.y.location)))}" aria-label="${items.length} yards here, ${cars.toLocaleString()} cars${watch ? `, ${watch} matching your watches` : ''}. Show them">
+  return `<button type="button" class="map-pin map-cluster${watch ? ' has-watch' : ''}" data-locs="${escapeHtml(JSON.stringify(items.map(i => i.y.location)))}" aria-label="${items.length} yards here, ${cars.toLocaleString()} cars${watch ? `, ${watch} matching your watches` : ''}. ${sameSpot ? 'List them' : 'Zoom in'}">
       <span class="pin-name">${items.length} yards</span><span class="pin-cars">${cars.toLocaleString()} cars</span>
       ${watch ? `<i class="pin-watch">${ICON.bell}${watch}</i>` : ''}</button>`;
 }
@@ -5526,6 +5542,28 @@ function setSheetState(st) {
   _sheetState = st;
   sh.dataset.state = st;
   document.getElementById('ms-handle').setAttribute('aria-expanded', String(st === 'full'));
+  if (yardsView === 'map') { liftMapControls(); layoutPins(); }
+  // The open part of the map changed: re-solve the pins after the slide.
+  clearTimeout(setSheetState._t);
+  setSheetState._t = setTimeout(() => { if (yardsView === 'map') { liftMapControls(); layoutPins(); } }, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 240);
+}
+/* Keep the map's credit line and its bottom controls above the sheet when the
+ * sheet spans the map (phones); a side-docked sheet (wide screens) leaves them. */
+function liftMapControls() {
+  const box = document.getElementById('yards-map'), sh = document.getElementById('yards-map-sheet');
+  if (!box || !sh) return;
+  const b = box.getBoundingClientRect(), r = sh.getBoundingClientRect();
+  const spans = r.width && r.left <= b.left + 24 && r.right >= b.right - 24;
+  const lift = spans ? Math.max(0, b.bottom - r.top) : 0;
+  box.style.setProperty('--sheet-lift', lift + 'px');
+  // No room above the sheet for the map's credit line (sheet expanded, or
+  // large text on a small phone): show the same credit at the foot of the sheet.
+  const at = box.querySelector('.maplibregl-ctrl-attrib');
+  box.classList.remove('credit-in-sheet'); sh.classList.remove('with-credit');
+  if (at && _yardsMap) {
+    const h = at.getBoundingClientRect().height || 24;
+    if (lift + h > b.height - 8) { box.classList.add('credit-in-sheet'); sh.classList.add('with-credit'); }
+  }
 }
 function mapSheetRowHtml(y, m) {
   return `<li><button type="button" class="ms-row${_mapSheetLoc === y.location ? ' on' : ''}" data-loc="${escapeHtml(y.location)}">
@@ -5537,33 +5575,35 @@ function mapSheetRowHtml(y, m) {
 function renderMapSheet() {
   const body = document.getElementById('ms-body'), title = document.getElementById('ms-title');
   if (!body) return;
-  const yards = (getYardsView().shown || []);
+  const sites = _mapSites.length ? _mapSites : buildSites(getYardsView().shown || []);
   if (!_mapSheetLoc) {
-    title.textContent = `${yards.length.toLocaleString()} yard${yards.length === 1 ? '' : 's'} near you`;
-    body.innerHTML = yards.length
-      ? `<ul class="ms-list">${yards.map(y => mapSheetRowHtml(y, yardMarks(y.location))).join('')}</ul>`
+    title.textContent = `${sites.length.toLocaleString()} yard${sites.length === 1 ? '' : 's'} near you`;
+    body.innerHTML = sites.length
+      ? `<ul class="ms-list">${sites.map(st => mapSheetRowHtml(st, st.m)).join('')}</ul>`
       : '<p class="yards-map-tip">No yards in range. Widen the distance in Filters.</p>';
     return;
   }
-  const y = yards.find(x => x.location === _mapSheetLoc);
-  if (!y) { _mapSheetLoc = null; renderMapSheet(); return; }
-  const m = yardMarks(y.location);
-  const place = [y.city, y.state].filter(Boolean).join(', ');
-  title.textContent = yardShortLabel(y.location);
+  const st = sites.find(x => x.key === _mapSheetLoc);
+  if (!st) { _mapSheetLoc = null; renderMapSheet(); return; }
+  const place = [st.city, st.state].filter(Boolean).join(', ');
+  const acts = (loc) => `<div class="map-sheet-actions">
+        <button type="button" class="btn btn-accent btn-lg map-walk" data-loc="${escapeHtml(loc)}">Walk the rows</button>
+        <button type="button" class="btn btn-quiet map-cars" data-loc="${escapeHtml(loc)}">View cars</button>
+      </div>`;
+  title.textContent = yardShortLabel(st.key);
   body.innerHTML = `<div class="map-sheet-card">
       <button type="button" class="ms-back">&lsaquo; All yards</button>
-      <h3>${escapeHtml(y.location)}</h3>
-      <p class="map-sheet-place">${escapeHtml(place)}${y.dist != null ? ` &middot; ${Math.round(y.dist)}\u00a0mi` : ''}</p>
+      <h3>${escapeHtml(st.key)}</h3>
+      <p class="map-sheet-place">${escapeHtml(place)}${st.dist != null ? ` &middot; ${Math.round(st.dist)}\u00a0mi` : ''}</p>
       <ul class="map-sheet-stats">
-        <li><b>${m.cars.toLocaleString()}</b> cars</li>
-        <li><b>${m.fresh.toLocaleString()}</b> new this week</li>
-        <li><b>${m.watch.toLocaleString()}</b> watch match${m.watch === 1 ? '' : 'es'}</li>
-        ${m.pull ? `<li><b>${m.pull}</b> on your pull sheet</li>` : ''}
+        <li><b>${st.m.cars.toLocaleString()}</b> cars</li>
+        <li><b>${st.m.fresh.toLocaleString()}</b> new this week</li>
+        <li><b>${st.m.watch.toLocaleString()}</b> watch match${st.m.watch === 1 ? '' : 'es'}</li>
+        ${st.m.pull ? `<li><b>${st.m.pull}</b> on your pull sheet</li>` : ''}
       </ul>
-      <div class="map-sheet-actions">
-        <button type="button" class="btn btn-accent btn-lg map-walk" data-loc="${escapeHtml(y.location)}">Walk the rows</button>
-        <button type="button" class="btn btn-quiet map-cars" data-loc="${escapeHtml(y.location)}">View cars</button>
-      </div>
+      ${st.lots.length > 1
+        ? st.lots.map(l => `<section class="ms-lot"><h4>${l.premium ? 'Premium lot' : 'Main lot'} &middot; ${l.m.cars.toLocaleString()} cars</h4>${acts(l.y.location)}</section>`).join('')
+        : acts(st.lots[0].y.location)}
     </div>`;
 }
 function selectMapYard(loc, opts = {}) {
@@ -5573,9 +5613,9 @@ function selectMapYard(loc, opts = {}) {
   setSheetState(loc ? 'card' : 'peek');
   document.getElementById('ms-body').scrollTop = 0;
   if (loc && opts.center && _yardsMap) {
-    const y = _mapYards.find(i => i.y.location === loc);
+    const y = _mapSites.find(i => i.key === loc);
     const sh = document.getElementById('yards-map-sheet');
-    if (y) _yardsMap.easeTo({ center: [y.y.lng, y.y.lat], zoom: Math.max(_yardsMap.getZoom(), 10), offset: [0, -(sh ? sh.offsetHeight : 0) / 2], duration: matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 350 });
+    if (y) _yardsMap.easeTo({ center: [y.lng, y.lat], zoom: Math.max(_yardsMap.getZoom(), 10), offset: [0, -(sh ? sh.offsetHeight : 0) / 2], duration: matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 350 });
   }
 }
 /* Map mode fills the space between the Filters bar and the tab bar; the page
@@ -5591,6 +5631,7 @@ function layoutMapMode() {
   const bottomLimit = tr && getComputedStyle(tabs).position === 'fixed' ? tr.top : window.innerHeight;
   const top = wrap.getBoundingClientRect().top;
   wrap.style.height = Math.max(320, Math.floor(bottomLimit - top - 8)) + 'px';
+  liftMapControls();
   if (_yardsMap) _yardsMap.resize();
 }
 window.addEventListener('resize', () => { if (yardsView === 'map') layoutMapMode(); });
@@ -5625,36 +5666,129 @@ document.addEventListener('keydown', (e) => {
   if (_sheetState === 'full') setSheetState(_mapSheetLoc ? 'card' : 'peek');
   else if (_mapSheetLoc) selectMapYard(null);
 });
+/* ---- Sites: a yard and its "(Premium)" lot share an address, so they are
+ * one place on the map (one pin, combined count, both lots in its card). */
+function siteKey(loc) { return String(loc || '').replace(/\s*\(premium\)\s*$/i, ''); }
+function buildSites(yards) {
+  const by = new Map();
+  for (const y of yards) {
+    if (y.lat == null || y.lng == null) continue;
+    const k = siteKey(y.location), prem = k !== y.location;
+    let s = by.get(k);
+    if (!s) { s = { key: k, location: k, lat: y.lat, lng: y.lng, dist: y.dist, city: y.city, state: y.state, lots: [], m: { cars: 0, fresh: 0, watch: 0, pull: 0 } }; by.set(k, s); }
+    const m = yardMarks(y.location);
+    s.lots.push({ y, m, premium: prem });
+    for (const f of ['cars', 'fresh', 'watch', 'pull']) s.m[f] += m[f];
+    if (!prem) { s.lat = y.lat; s.lng = y.lng; s.dist = y.dist; s.city = y.city; s.state = y.state; }
+  }
+  for (const s of by.values()) s.lots.sort((a, b) => a.premium - b.premium);
+  return [...by.values()].sort((a, b) => (a.dist ?? 1e9) - (b.dist ?? 1e9));
+}
+var _mapSites = [];
+/* ---- The pin layer (shared by the live map and the schematic): pins are
+ * placed from each site's projected point, measured, and merged until no two
+ * overlap; only sites whose point lies in the open part of the map (clear of
+ * the legend, zoom buttons, credit line and sheet) are drawn. */
+var _pinGroups = [], _projectFn = null;
+function pinLayer() {
+  const box = document.getElementById('yards-map');
+  let layer = box.querySelector(':scope > .pin-layer');
+  if (!layer) { layer = document.createElement('div'); layer.className = 'pin-layer'; box.appendChild(layer); }
+  return layer;
+}
+function pinArea() {
+  const box = document.getElementById('yards-map'), c = box.getBoundingClientRect();
+  let top = 4, bottom = c.height - 4;
+  const over = (sel) => { const el = document.querySelector(sel); if (!el || !el.getClientRects().length) return null; const r = el.getBoundingClientRect(); return r.height ? r : null; };
+  for (const r of [over('#yards-map-wrap .yards-map-legend'), over('#yards-map .maplibregl-ctrl-top-right .maplibregl-ctrl-group'), over('#yards-map-wrap .yards-map-note:not(:empty)')]) if (r) top = Math.max(top, r.bottom - c.top + 6);
+  for (const r of [over('#yards-map .maplibregl-ctrl-attrib'), over('#yards-map-sheet')]) if (r) bottom = Math.min(bottom, r.top - c.top - 6);
+  return { l: 4, r: c.width - 4, t: top, b: Math.max(top + 44, bottom), W: c.width, H: c.height };
+}
+function measurePin(html) {
+  const layer = pinLayer();
+  let m = layer.querySelector('.pin-measure');
+  if (!m) { m = document.createElement('div'); m.className = 'pin-measure'; m.setAttribute('aria-hidden', 'true'); layer.appendChild(m); }
+  m.innerHTML = html;
+  const el = m.firstElementChild;
+  return { w: el.offsetWidth, h: el.offsetHeight };
+}
+const siteNear = (a, b) => Math.abs(a.lat - b.lat) < 0.002 && Math.abs(a.lng - b.lng) < 0.002;
+function groupHtml(g) {
+  if (g.items.length === 1) return yardPinHtml({ location: g.items[0].key }, g.items[0].m);
+  const same = g.items.every(s => siteNear(s, g.items[0]));
+  return clusterPinHtml(g.items.map(s => ({ y: { location: s.key }, m: s.m })), same);
+}
+function layoutPins() {
+  const layer = pinLayer();
+  if (!_projectFn) return;
+  const A = pinArea();
+  const groups = [];
+  for (const s of [..._mapSites].sort((a, b) => b.m.cars - a.m.cars)) {
+    const p = _projectFn(s);
+    if (!p || p.x < 0 || p.x > A.W || p.y < A.t || p.y > A.b) continue;   // point not in the open map: not drawn
+    groups.push({ items: [s], x: p.x, y: p.y });
+  }
+  const rectOf = (g) => {
+    const html = groupHtml(g), sz = measurePin(html);
+    let left = Math.min(Math.max(g.x - sz.w / 2, A.l), A.r - sz.w), top = Math.min(Math.max(g.y - 6 - sz.h, A.t), A.b - sz.h);
+    g.html = html; g.rect = { l: left, t: top, r: left + sz.w, b: top + sz.h }; g.nudged = Math.abs(left - (g.x - sz.w / 2)) > 1 || Math.abs(top - (g.y - 6 - sz.h)) > 1;
+  };
+  groups.forEach(rectOf);
+  const hit = (a, b) => a.l < b.r + 4 && b.l < a.r + 4 && a.t < b.b + 4 && b.t < a.b + 4;
+  for (let guard = 0; guard < 80; guard++) {
+    let merged = false;
+    outer: for (let i = 0; i < groups.length; i++) for (let j = i + 1; j < groups.length; j++) {
+      if (!hit(groups[i].rect, groups[j].rect)) continue;
+      const a = groups[i], b = groups.splice(j, 1)[0];
+      // The bubble stays at its biggest yard (groups are built biggest first),
+      // so merging doesn't drift into the next pin.
+      a.items.push(...b.items); rectOf(a); merged = true; break outer;
+    }
+    if (!merged) break;
+  }
+  _pinGroups = groups;
+  const you = activeZipCoords && _projectFn({ lat: activeZipCoords.lat, lng: activeZipCoords.lng });
+  layer.innerHTML = `${you && you.x > 0 && you.x < A.W && you.y > A.t && you.y < A.b ? `<span class="map-you" style="left:${you.x}px;top:${you.y}px"><span>You</span></span>` : ''}
+    ${groups.map((g, i) => `<span class="map-pin-at${g.nudged ? ' nudged' : ''}" data-g="${i}" style="left:${g.rect.l}px;top:${g.rect.t}px">${g.html}</span>`).join('')}`;
+}
+/* During a pan the pins follow the map; overlaps are re-solved when it stops. */
+function followPins() {
+  if (!_projectFn || !_pinGroups.length) return;
+  const layer = pinLayer();
+  _pinGroups.forEach((g, i) => {
+    const el = layer.querySelector(`.map-pin-at[data-g="${i}"]`);
+    if (!el) return;
+    const s = g.items[0], p = _projectFn(s);
+    const dx = p.x - g.x, dy = p.y - g.y;
+    el.style.transform = `translate(${dx}px, ${dy}px)`;
+  });
+}
 function renderSchematicMap(yards, note) {
   const el = document.getElementById('yards-map');
   if (_yardsMap) { try { _yardsMap.remove(); } catch (e) { /* gone */ } _yardsMap = null; }
-  const pts = yards.filter(y => y.lat != null && y.lng != null);
+  _mapSites = buildSites(yards);
   const c = activeZipCoords;
-  const all = c ? [...pts, { lat: c.lat, lng: c.lng }] : pts;
+  const all = c ? [..._mapSites, { lat: c.lat, lng: c.lng }] : _mapSites;
   const la = all.map(p => p.lat), ln = all.map(p => p.lng);
   const minLa = Math.min(...la), maxLa = Math.max(...la), minLn = Math.min(...ln), maxLn = Math.max(...ln);
   const k = Math.cos(((minLa + maxLa) / 2) * Math.PI / 180);
-  const w = Math.max((maxLn - minLn) * k, 0.05), h = Math.max(maxLa - minLa, 0.05), span = Math.max(w, h * 1.33);
-  const pos = (p) => ({ x: 8 + 84 * (((p.lng - minLn) * k) + (span - w) / 2) / span, y: 8 + 84 * (((maxLa - p.lat)) + (span / 1.33 - h) / 2) / (span / 1.33) });
+  const w = Math.max((maxLn - minLn) * k, 0.05), h = Math.max(maxLa - minLa, 0.05);
   el.className = 'yards-map-schematic';
-  // Same merging as the live map: pins closer than ~56px share one bubble.
-  const W = el.clientWidth || 360, H = el.clientHeight || 320, groups = [];
-  _mapYards = pts.map(y => ({ y, m: yardMarks(y.location) }));
-  for (const it of [..._mapYards].sort((a, b) => b.m.cars - a.m.cars)) {
-    const p = pos(it.y), px = p.x * W / 100, py = p.y * H / 100;
-    const g = groups.find(g => Math.abs(g.px - px) < 104 && Math.abs(g.py - py) < 54);
-    if (g) g.items.push(it); else groups.push({ px, py, p, items: [it] });
-  }
-  el.innerHTML = `${c ? `<span class="map-you" style="left:${pos(c).x}%;top:${pos(c).y}%"><span>You</span></span>` : ''}
-    ${groups.map(g => `<span class="map-pin-at" style="left:${g.p.x}%;top:${g.p.y}%">${g.items.length === 1 ? yardPinHtml(g.items[0].y, g.items[0].m)
-      : clusterPinHtml(g.items)}</span>`).join('')}`;
+  el.innerHTML = '';
   document.getElementById('yards-map-note').textContent = note;
-  requestAnimationFrame(() => { keepPinsInside(); watchPinSizes(); });
+  _projectFn = (p) => {
+    const A = pinArea(), padX = 70, top = A.t + 50, bot = A.b - 10;
+    const sx = (A.W - 2 * padX) / w, sy = (bot - top) / h, s = Math.min(sx, sy);
+    const ox = padX + ((A.W - 2 * padX) - w * s) / 2, oy = top + ((bot - top) - h * s) / 2;
+    return { x: ox + (p.lng - minLn) * k * s, y: oy + (maxLa - p.lat) * s };
+  };
+  layoutPins();
 }
 async function renderYardsMap() {
   const el = document.getElementById('yards-map');
   if (!activeZipCoords) { el.className = ''; el.innerHTML = ''; document.getElementById('yards-map-note').textContent = 'Set your zip code to see yards near you on the map.'; return; }
   const yards = (getYardsView().shown || []).filter(y => y.lat != null && y.lng != null);
+  _mapSites = buildSites(yards);
   renderMapSheet();
   let lib;
   try {
@@ -5687,105 +5821,49 @@ async function renderYardsMap() {
       if (!_yardsMap.isStyleLoaded()) { _yardsMap.__failed = true; renderSchematicMap(yards, 'Map tiles couldn’t load, so yards are shown by position only. The row view works offline.'); }
     });
     _yardsMap.__style = style;
-    // The box can change size while the map is created (tab switch, fonts):
-    // re-measure once it's live.
-    _yardsMap.once('load', () => { if (_yardsMap) { _yardsMap.resize(); placeMapMarkers(); } });
-    if (window.ResizeObserver) new ResizeObserver(() => { if (_yardsMap && el.clientWidth) _yardsMap.resize(); }).observe(el);
+    _yardsMap.once('load', () => { if (_yardsMap) { _yardsMap.resize(); layoutPins(); } });
+    if (window.ResizeObserver) new ResizeObserver(() => { if (_yardsMap && el.clientWidth) { _yardsMap.resize(); layoutPins(); } }).observe(el);
     requestAnimationFrame(() => _yardsMap && _yardsMap.resize());
+    let queued = false;
+    _yardsMap.on('move', () => { if (queued) return; queued = true; requestAnimationFrame(() => { queued = false; followPins(); }); });
+    _yardsMap.on('moveend', layoutPins);
   } else if (_yardsMap.__style !== style) {
     _yardsMap.setStyle(style); _yardsMap.__style = style;
   }
   document.getElementById('yards-map-note').textContent = '';
-  _mapYards = yards.map(y => ({ y, m: yardMarks(y.location) }));
-  if (!_yardsMap.__moveHooked) {
-    _yardsMap.on('moveend', placeMapMarkers);
-    // Any redraw (resize, pan, tiles) may move the pins: re-check once per frame.
-    let queued = false;
-    _yardsMap.on('render', () => { if (queued) return; queued = true; requestAnimationFrame(() => { queued = false; keepPinsInside(); }); });
-    _yardsMap.__moveHooked = true;
-  }
+  _projectFn = (p) => _yardsMap && _yardsMap.project([p.lng, p.lat]);
   const b = new lib.LngLatBounds([activeZipCoords.lng, activeZipCoords.lat], [activeZipCoords.lng, activeZipCoords.lat]);
-  yards.forEach(y => b.extend([y.lng, y.lat]));
-  // Room for the labelled pins at the sides, so none starts cut off.
-  const w = el.clientWidth || 360;
-  const shH = (document.getElementById('yards-map-sheet') || {}).offsetHeight || 0;
-  _yardsMap.fitBounds(b, { padding: { top: 80, bottom: shH + 24, left: Math.min(100, w / 4), right: Math.min(100, w / 4) }, maxZoom: 11, duration: 0 });
-  placeMapMarkers();
+  _mapSites.forEach(s => b.extend([s.lng, s.lat]));
+  liftMapControls();
+  const A = pinArea(), w = el.clientWidth || 360;
+  _yardsMap.fitBounds(b, { padding: { top: A.t + 56, bottom: Math.max(24, A.H - A.b + 16), left: Math.min(90, w / 4), right: Math.min(90, w / 4) }, maxZoom: 11, duration: 0 });
+  layoutPins();
   layoutMapMode();
 }
-/* Pins that would overlap on screen merge into one "N yards" bubble; tapping
- * it zooms to those yards. Recomputed after every pan/zoom. */
-var _mapYards = [];
-function placeMapMarkers() {
-  const lib = window.maplibregl, map = _yardsMap;
-  if (!lib || !map) return;
-  for (const mk of _yardsMapMarkers) mk.remove();
-  _yardsMapMarkers = [];
-  const you = document.createElement('span'); you.className = 'map-you'; you.innerHTML = '<span>You</span>';
-  _yardsMapMarkers.push(new lib.Marker({ element: you }).setLngLat([activeZipCoords.lng, activeZipCoords.lat]).addTo(map));
-  const groups = [];
-  for (const it of [..._mapYards].sort((a, b) => b.m.cars - a.m.cars)) {
-    const pt = map.project([it.y.lng, it.y.lat]);
-    const g = groups.find(g => Math.abs(g.x - pt.x) < 104 && Math.abs(g.y - pt.y) < 54);
-    if (g) g.items.push(it); else groups.push({ x: pt.x, y: pt.y, items: [it] });
-  }
-  for (const g of groups) {
-    const wrap = document.createElement('span');
-    wrap.className = 'map-pin-at';
-    let at;
-    if (g.items.length === 1) { const { y, m } = g.items[0]; wrap.innerHTML = yardPinHtml(y, m); at = [y.lng, y.lat]; }
-    else { wrap.innerHTML = clusterPinHtml(g.items); at = [g.items[0].y.lng, g.items[0].y.lat]; }
-    _yardsMapMarkers.push(new lib.Marker({ element: wrap, anchor: 'bottom', offset: [0, -6] }).setLngLat(at).addTo(map));
-  }
-  requestAnimationFrame(() => { keepPinsInside(); watchPinSizes(); });
-}
-/* Keep every pin wholly inside the map box (no label cut at an edge): a pin
- * that would cross an edge is shifted in and loses its pointer. Re-run when a
- * pin changes size (OS text size) via one ResizeObserver per map render. */
-var _pinRO = null;
-function keepPinsInside() {
-  const box = document.getElementById('yards-map');
-  if (!box) return;
-  const c = box.getBoundingClientRect();
-  if (!c.width) return;
-  for (const pin of box.querySelectorAll('.map-pin')) {
-    pin.style.transform = ''; pin.classList.remove('nudged');
-    // The pin plus its watch badge (which sits over the pin's corner).
-    const rs = [pin.getBoundingClientRect(), ...[...pin.querySelectorAll('.pin-watch')].map(b => b.getBoundingClientRect())];
-    const r = { left: Math.min(...rs.map(x => x.left)), right: Math.max(...rs.map(x => x.right)), top: Math.min(...rs.map(x => x.top)), bottom: Math.max(...rs.map(x => x.bottom)) };
-    let dx = 0, dy = 0;
-    if (r.left < c.left + 4) dx = c.left + 4 - r.left; else if (r.right > c.right - 4) dx = c.right - 4 - r.right;
-    if (r.top < c.top + 4) dy = c.top + 4 - r.top; else if (r.bottom > c.bottom - 4) dy = c.bottom - 4 - r.bottom;
-    if (dx || dy) { pin.style.transform = `translate(${Math.round(dx)}px, ${Math.round(dy)}px)`; pin.classList.add('nudged'); }
-  }
-}
-function watchPinSizes() {
-  if (!window.ResizeObserver) return;
-  if (_pinRO) _pinRO.disconnect();
-  _pinRO = new ResizeObserver(() => requestAnimationFrame(keepPinsInside));
-  document.querySelectorAll('#yards-map .map-pin').forEach(p => _pinRO.observe(p));
-  _pinRO.observe(document.getElementById('yards-map'));
-}
-function zoomToYards(locs) {
-  const lib = window.maplibregl, pts = _mapYards.filter(i => locs.includes(i.y.location));
-  if (!pts.length) return;
-  if (!lib || !_yardsMap) {   // schematic map: list the yards in the sheet
+/* A tapped cluster: yards at one spot (or fully zoomed in) list in the sheet;
+ * otherwise zoom to them. */
+function zoomToYards(keys) {
+  const sites = _mapSites.filter(s => keys.includes(s.key));
+  if (!sites.length) return;
+  const same = sites.every(s => siteNear(s, sites[0]));
+  if (same || !_yardsMap || !window.maplibregl || _yardsMap.getZoom() >= 13.5) {
     _mapSheetLoc = null;
-    document.getElementById('ms-title').textContent = `${pts.length} yards here`;
-    document.getElementById('ms-body').innerHTML = `<button type="button" class="ms-back">&lsaquo; All yards</button><ul class="ms-list">${pts.map(i => mapSheetRowHtml(i.y, i.m)).join('')}</ul>`;
+    document.getElementById('ms-title').textContent = `${sites.length} yards here`;
+    document.getElementById('ms-body').innerHTML = `<button type="button" class="ms-back">&lsaquo; All yards</button><ul class="ms-list">${sites.map(s => mapSheetRowHtml(s, s.m)).join('')}</ul>`;
     setSheetState('card');
     return;
   }
-  const b = new lib.LngLatBounds([pts[0].y.lng, pts[0].y.lat], [pts[0].y.lng, pts[0].y.lat]);
-  pts.forEach(i => b.extend([i.y.lng, i.y.lat]));
-  if (_yardsMap.getZoom() >= 14.5) { selectMapYard(locs[0]); return; }
-  _yardsMap.fitBounds(b, { padding: 80, maxZoom: 15, duration: 300 });
+  const lib = window.maplibregl, b = new lib.LngLatBounds([sites[0].lng, sites[0].lat], [sites[0].lng, sites[0].lat]);
+  sites.forEach(s => b.extend([s.lng, s.lat]));
+  const A = pinArea();
+  _yardsMap.fitBounds(b, { padding: { top: A.t + 70, bottom: Math.max(40, A.H - A.b + 30), left: 90, right: 90 }, maxZoom: 15, duration: matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 300 });
 }
 function setYardsView(view) {
   yardsView = view === 'map' ? 'map' : 'list';
   document.querySelectorAll('.yv-btn').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === yardsView)));
   document.getElementById('tab-yards').classList.toggle('yards-map-mode', yardsView === 'map');
   document.getElementById('yards-map-wrap').hidden = yardsView !== 'map';
+  if (yardsView === 'map') { _mapSheetLoc = null; setSheetState('peek'); }
   layoutMapMode();
   if (yardsView === 'map') { renderYardsMap(); if (_yardsMap) setTimeout(() => _yardsMap && _yardsMap.resize(), 50); }
   try { sessionStorage.setItem('ys_yards_view', yardsView); } catch (e) { /* private mode */ }

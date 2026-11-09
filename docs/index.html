@@ -314,8 +314,12 @@
       <p class="yards-map-note" id="yards-map-note"></p>
       <!-- Bottom sheet over the map: nearby yards (peek / expanded) or one yard's card. -->
       <section id="yards-map-sheet" class="map-sheet" data-state="peek" aria-label="Yards on the map">
-        <button type="button" class="ms-handle" id="ms-handle" aria-expanded="false" aria-controls="ms-body"><span class="ms-grip" aria-hidden="true"></span><span class="ms-title" id="ms-title">Yards near you</span></button>
+        <div class="ms-head">
+          <button type="button" class="ms-handle" id="ms-handle" aria-expanded="false" aria-controls="ms-body"><span class="ms-grip" aria-hidden="true"></span><span class="ms-title" id="ms-title">Yards near you</span></button>
+          <button type="button" class="ms-pull" id="ms-pull" hidden aria-label="Open your pull sheet"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><path d="m3.5 6 1 1 2-2M3.5 12l1 1 2-2M3.5 18l1 1 2-2"/></svg><span>Pull sheet</span> <b id="ms-pull-n">0</b></button>
+        </div>
         <div class="ms-body" id="ms-body"></div>
+        <p class="ms-credit">Map: <a href="https://openfreemap.org" target="_blank" rel="noopener">OpenFreeMap</a> <a href="https://www.openmaptiles.org/" target="_blank" rel="noopener">&copy; OpenMapTiles</a> Data from <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a></p>
       </section>
     </div>
     <div class="price-compare-bar" id="price-compare-bar">
