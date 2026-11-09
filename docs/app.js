@@ -7063,6 +7063,13 @@ function pfPopulateModels() {
 
 /* Part combobox: tap-to-browse the full category list, type to narrow —
  * same pattern as the price-compare input. */
+/* How a category finds donors, in the suggestion list (spec §3 classes):
+ * engine = engine family; combo = same generation + engine; exact = same
+ * generation only; body = body / interior (platform groups + generation). */
+function pfKindText(kind) {
+  return kind === 'engine' ? 'engine-driven' : kind === 'combo' ? 'by generation + engine'
+    : kind === 'exact' ? 'same generation only' : 'body / interior';
+}
 const pfPartInput = document.getElementById('pf-part');
 /* The part field is a one-line textarea that grows, so a long part name
  * ("ECM / PCM (engine computer)") wraps instead of being cut off at large
@@ -7085,7 +7092,7 @@ function pfRenderPartSuggest() {
   pfPartSuggest.innerHTML = cats.length
     ? cats.map(c => `<div class="compare-suggest-item" role="option" data-cat="${c.id}">
         <span>${escapeHtml(c.label)}</span>
-        <span class="csi-count">${c.kind === 'engine' ? 'engine-driven' : 'body / interior'}</span>
+        <span class="csi-count">${pfKindText(c.kind)}</span>
       </div>`).join('')
     : '<div class="compare-suggest-empty">No matching part — interchange currently covers the parts in this list. More families land as they\u2019re verified.' + pfAskHtml('part') + '</div>';
   pfPartSuggest.style.display = '';
@@ -7595,6 +7602,12 @@ function pfAmRows(s, groups, results, radius, fam) {
       if (gateUnconfirmed) {
         warns.push(escapeHtml(`if equipped: this unit is listed for ${[...new Set(rows.map(a => pfAmGateText(a[5])))].join(' or ')} only — this donor's body style/drivetrain isn't confirmed, check the car`));
       }
+      // 1A rows: options the unit needs and a cosmetic part's paint — said on
+      // the row, the row stays Likely and nothing is added to ranking
+      if (Array.isArray(g.ifEquipped) && g.ifEquipped.length) {
+        warns.push(escapeHtml(`If equipped: ${g.ifEquipped.join(', ')} — check the donor has it`));
+      }
+      if (g.cosmetic) warns.push('may need paint — match the colour or plan to paint it');
       if (pfCat && pfCat.rowWarn) warns.push(escapeHtml(pfCat.rowWarn));
       if (g.trans && !tr) warns.push(`this unit is for ${g.trans === 'AT' ? 'automatic' : 'manual'}-transmission cars — check the transmission`);
       results.set(v.id, { v, d, tier: 'likely', src: 'aftermarket', srcLine, warns });
@@ -7672,7 +7685,7 @@ function pfRenderTiles() {
   const box = document.getElementById('pf-tiles');
   if (!box || !interchangeData) return;
   const cats = PF_TILES.map(id => interchangeData.categories.find(c => c.id === id)).filter(Boolean);
-  box.innerHTML = cats.map(c => `<button type="button" class="pf-tile${pfCat && pfCat.id === c.id ? ' on' : ''}" role="listitem" data-cat="${escapeHtml(c.id)}" aria-pressed="${!!(pfCat && pfCat.id === c.id)}"><span class="pf-tile-name">${escapeHtml(c.label)}</span><span class="pf-tile-kind">${c.kind === 'engine' ? 'matched by engine' : 'matched by body'}</span></button>`).join('');
+  box.innerHTML = cats.map(c => `<button type="button" class="pf-tile${pfCat && pfCat.id === c.id ? ' on' : ''}" role="listitem" data-cat="${escapeHtml(c.id)}" aria-pressed="${!!(pfCat && pfCat.id === c.id)}"><span class="pf-tile-name">${escapeHtml(c.label)}</span><span class="pf-tile-kind">${c.kind === 'engine' ? 'matched by engine' : c.kind === 'body' ? 'matched by body' : 'matched by generation'}</span></button>`).join('');
 }
 function pfUpdateWhereSum() {
   const el = document.getElementById('pf-where-sum');

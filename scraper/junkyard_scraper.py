@@ -14821,6 +14821,10 @@ def _attach_oem_layer_inner(payload: dict, before: dict, lazy_out: dict | None =
         payload["oemGroups"], payload["oemVg"] = [], {}
         payload["oemStatus"] = dict(sorted(status.items()))
         return
+    # held categories ship same-generation donors only (GROUP_HOLD_CATS)
+    groups = [g for g in groups if g["cat"] not in GROUP_HOLD_CATS]
+    vg = {fam: kept for fam, cats in vg.items()
+          if (kept := {c: v for c, v in cats.items() if c not in GROUP_HOLD_CATS})}
     payload["oemGroups"] = groups
     payload["oemVg"] = vg
     payload["oemStatus"] = dict(sorted(status.items()))
@@ -15001,10 +15005,21 @@ def _am_group_entry(g: dict, site: str) -> dict:
     trans = g.get("trans")
     if trans not in (None, "AT", "MT"):
         raise ValueError(f"trans {trans!r}")
+    # 1A Auto rows (hub 2026-11-09): options the unit needs ("if equipped",
+    # shown on the row, never ranked) and a cosmetic flag ("may need paint")
+    ife = g.get("if_equipped") or []
+    if not isinstance(ife, list) or len(ife) > 6 or any(
+            not isinstance(o, str) or not o.strip() or len(o) > 60 or re.search(r"[<>]", o) for o in ife):
+        raise ValueError(f"if_equipped {ife!r}")
+    cosmetic = g.get("cosmetic", False)
+    if not isinstance(cosmetic, bool):
+        raise ValueError(f"cosmetic {cosmetic!r}")
     return {"id": str(g["id"]), "cat": cat, "tier": "likely", "src": "aftermarket",
             "label": _AM_LABELS.get(site, site), "unit": str(g.get("unit") or ""),
             **({"amps": int(amps)} if isinstance(amps, (int, float)) and amps else {}),
             **({"trans": trans} if trans else {}),
+            **({"ifEquipped": [o.strip() for o in ife]} if ife else {}),
+            **({"cosmetic": True} if cosmetic else {}),
             "note": note, "apps": apps}
 
 
@@ -15077,6 +15092,16 @@ def _lazy_trim(doc: dict, budget: int) -> tuple[list, int]:
     return dropped, n_am
 
 
+# Categories that ship with same-model-generation donors only (hub 2026-11-09
+# 23:04 UTC): no OEM catalog or aftermarket group for them reaches the payload
+# until that source passes its own §11.4 sample for the category and the hub
+# confirms; then the category leaves this set in the same push.
+GROUP_HOLD_CATS = frozenset({
+    "radiator", "ac-compressor", "ac-condenser", "heater-core", "evaporator", "throttle-body",
+    "fuel-pump-module", "cv-axle", "strut",
+    "sunroof", "center-console", "door-panel", "blower-motor", "fog-lights"})
+
+
 def _attach_lazy_layers(payload: dict, lazy_out: dict) -> None:
     """Group the lazy entries by category into lazy_out["files"] ({cat:
     doc}), index them in payload["oemLazy"], then run V11 on the main file.
@@ -15087,10 +15112,20 @@ def _attach_lazy_layers(payload: dict, lazy_out: dict) -> None:
         if am["status"]:
             payload["amStatus"] = dict(sorted(am["status"].items()))
         by_cat: dict = {}
+        held = 0
         for g in lazy_out.get("oem") or []:
+            if g["cat"] in GROUP_HOLD_CATS:
+                held += 1
+                continue
             by_cat.setdefault(g["cat"], {"oemGroups": [], "amGroups": []})["oemGroups"].append(g)
         for g in am["groups"]:
+            if g["cat"] in GROUP_HOLD_CATS:
+                held += 1
+                continue
             by_cat.setdefault(g["cat"], {"oemGroups": [], "amGroups": []})["amGroups"].append(g)
+        if held:
+            print(f"[interchange] {held} OEM/aftermarket groups held back (GROUP_HOLD_CATS: "
+                  "same-generation donors only until each source's §11.4)", file=sys.stderr)
         V = _oem_validator() if by_cat else None
         files, index = {}, {}
         for cat in sorted(by_cat):

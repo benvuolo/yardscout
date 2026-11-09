@@ -54,7 +54,7 @@ const NEW_CONSTS = ['PF_VIN_YEAR_CHARS', 'PF_VIN_TRANSLIT', 'PF_VIN_WEIGHTS'];
 // still run there; the Phase 1 checks then fail, as they should.
 const P1_FNS = ['pfOemLazyLoad', 'pfOemSourceText', 'pfAmSourceText', 'pfAmParseEngine',
   'pfAmEngineAgrees', 'pfAmCarTrans', 'pfAmRows'];
-const P1_CONSTS = ['PF_OEM_LIKELY_HEAD', 'PF_AM_HEAD'];
+const P1_CONSTS = ['PF_OEM_LIKELY_HEAD', 'PF_AM_HEAD', 'PF_AM_HEAD_PART'];
 
 let code = '';
 for (const fn of REAL_FNS) {
@@ -79,6 +79,14 @@ for (const c of P1_CONSTS) {
   check(`app.js has const ${c}`, !!s);
   code += (s || `const ${c} = '';`) + '\n';
 }
+// Gated aftermarket app rows (2026-11-09): the AM-GATE block (pfAmGate and its
+// helpers, multi-line consts) comes in whole; scraper/test_am_gates.py tests it.
+{
+  const m = src.match(/\/\* AM-GATE BEGIN[\s\S]*?\/\* AM-GATE END \*\//);
+  check('app.js carries the AM-GATE block', !!m);
+  if (m) { new vm.Script(m[0]); code += m[0] + '\n'; }
+  else code += 'function pfAmGateParse() { return null; } function pfAmGate() { return "confirm"; } function pfAmGateText() { return ""; }\n';
+}
 for (const fn of P1_FNS) {
   const s = extractFn(fn);
   check(`app.js has top-level function ${fn}`, !!s);
@@ -97,6 +105,7 @@ var __seeker = { year: 0, make: '', model: '' };
 function pfSeeker() { return __seeker; }
 var activeZipCoords = { lat: 40, lng: -111 };
 var interchangeData = null, liveInventory = [], pfCat = null, pfChosenFam = null;
+var extraIdx = { photo: 0, color: 1, engine: 2, trans: 3, transSrc: 4, body: 5 };
 var _pfGenMap = null, pfVerifiedOnly = false, __extras = {};
 var pfOemLazyData = {}, pfOemLazyWait = {}, DATA_BASE = '', __files = {}, __fetched = [];
 function fetch(url) {

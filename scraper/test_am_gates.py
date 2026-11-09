@@ -70,6 +70,56 @@ try:
 except ValueError:
     check("refuses a 7-element row", True)
 
+# 1A fields: if_equipped (options) and cosmetic (paint)
+g1 = _grp([["Honda", "Accord", 2003, 2007, "2.4L"]])
+g1.update({"if_equipped": ["Fog lamp package", " Heated mirrors "], "cosmetic": True})
+e = js._am_group_entry(g1, "1a")
+check("1A if_equipped / cosmetic pass through (trimmed)",
+      e.get("ifEquipped") == ["Fog lamp package", "Heated mirrors"] and e.get("cosmetic") is True, str(e))
+e = js._am_group_entry(_grp([["Honda", "Accord", 2003, 2007, "2.4L"]]), "1a")
+check("no if_equipped / cosmetic: no keys emitted", "ifEquipped" not in e and "cosmetic" not in e)
+for bad, why in (({"if_equipped": "Fog"}, "if_equipped not a list"), ({"if_equipped": ["<b>x</b>"]}, "markup"),
+                 ({"if_equipped": ["x"] * 7}, "over 6 options"), ({"cosmetic": "yes"}, "cosmetic not bool")):
+    gb = _grp([["Honda", "Accord", 2003, 2007, "2.4L"]])
+    gb.update(bad)
+    try:
+        js._am_group_entry(gb, "1a")
+        check(f"refuses {why}", False)
+    except ValueError:
+        check(f"refuses {why}", True)
+
+# ---------------------------------------------- 5. groups held for new categories
+# hub 2026-11-09 23:04: the 14 new categories ship with same-generation donors
+# only; no OEM or aftermarket group for them reaches the payload or a lazy file
+check("GROUP_HOLD_CATS covers the 14 new categories",
+      {"radiator", "ac-compressor", "ac-condenser", "heater-core", "evaporator", "throttle-body",
+       "fuel-pump-module", "cv-axle", "strut", "sunroof", "center-console", "door-panel",
+       "blower-motor", "fog-lights"} <= js.GROUP_HOLD_CATS)
+_real_load = js._load_am_layer
+_fake_am = [dict(js._am_group_entry(_grp([["Honda", "Accord", 2003, 2007, "2.4L"]]), "spectra"), id="am:h1"),
+            dict(js._am_group_entry({**_grp([["Honda", "Accord", 2003, 2007, "2.4L"]]), "cat": "alternator"},
+                                    "dbelectrical"), id="am:ok1")]
+js._load_am_layer = lambda now=None: {"groups": _fake_am, "status": {"spectra": "ok"}}
+_fake_oem = [{"id": "oem:toyota:x1", "cat": "fog-lights", "ns": "toyota", "tier": "likely", "src": "oem",
+              "label": "Toyota catalog", "note": "n", "pn": ["1"], "apps": [["Toyota", "Camry", 2007, 2009, ""]]}]
+_pl = {"builtAt": "2026-11-09T00:00:00Z", "oemStatus": {}}
+_lo = {"oem": _fake_oem}
+js._attach_lazy_layers(_pl, _lo)
+js._load_am_layer = _real_load
+_cats_out = set(_lo.get("files", {}))
+check("held categories get no lazy file (no OEM / aftermarket group ships for them)",
+      not (_cats_out & js.GROUP_HOLD_CATS), str(sorted(_cats_out)))
+check("a category outside the hold still gets its aftermarket file", "alternator" in _cats_out, str(sorted(_cats_out)))
+check("the lazy index never names a held category",
+      not (set((_pl.get("oemLazy") or {}).get("cats", {})) & js.GROUP_HOLD_CATS))
+_main = js.build_interchange_payload()
+check("main payload: no oemGroups / platformGroups / oemVg entry for a held category",
+      not [g for g in _main.get("oemGroups") or [] if g["cat"] in js.GROUP_HOLD_CATS]
+      and not [g for g in _main.get("platformGroups") or [] if g["cat"] in js.GROUP_HOLD_CATS]
+      and not [c for cats in (_main.get("oemVg") or {}).values() for c in cats if c in js.GROUP_HOLD_CATS])
+check("main payload ships every held category as a Parts-tab category (same-generation donors)",
+      js.GROUP_HOLD_CATS <= {c["id"] for c in _main["categories"]})
+
 # ------------------------------------------------------------- 4. categories
 NEW = {"radiator": "combo", "ac-compressor": "combo", "ac-condenser": "exact", "heater-core": "exact",
        "evaporator": "exact", "throttle-body": "combo", "fuel-pump-module": "combo", "cv-axle": "combo",
@@ -176,6 +226,11 @@ const dcars = [car('awd', 'CR-V', 'AWD/All-Wheel Drive'), car('fwd', 'CR-V', 'FW
                car('nod', 'CR-V', '')];
 S.model = 'CR-V';
 out.driveGate = run([['Honda', 'CR-V', 2002, 2006, '', { drive: 'awd' }]], dcars, {});
+S.model = 'Accord';
+liveInventory = [car('x1', 'Accord', '')]; EX = {};
+{ const res = new Map();
+  pfAmRows(S, [{ ...G([['Honda', 'Accord*', 2003, 2007, '']]), ifEquipped: ['Fog lamp package'], cosmetic: true }], res, 0, null);
+  out.ife = res.get('x1') ? { tier: res.get('x1').tier, warns: res.get('x1').warns } : null; }
 console.log(JSON.stringify(out));
 """])
     p = subprocess.run([node, "-e", harness], capture_output=True, text=True, timeout=60)
@@ -217,6 +272,11 @@ console.log(JSON.stringify(out));
         r = o["driveGate"]
         check("drive-gated unit: AWD decode offered, FWD decode dropped, no decode if equipped",
               "awd" in r and not warned(r, "awd") and "fwd" not in r and "nod" in r and warned(r, "nod"))
+        r = o["ife"]
+        check("1A if_equipped renders 'If equipped: <options>' and cosmetic 'may need paint'; row stays Likely",
+              bool(r) and r["tier"] == "likely"
+              and any("If equipped: Fog lamp package" in w for w in r["warns"])
+              and any("may need paint" in w for w in r["warns"]), str(r))
         check("category rowWarn rides every aftermarket row",
               all(any("trans-cooler" in w for w in ws) for ws in o["sedanGate"].values()))
 
