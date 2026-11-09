@@ -2470,8 +2470,27 @@ Other outputs of this session:
 | gm | (not done, no bump) | 128 | MODULE (motor + transmission) not taken. Shocks carry RPO codes and "W/UPPER MOUNT" / "EXCEPT CIRCUIT BOARD" qualifiers |
 | volvo | 2 | 58 | "Wiper Motor, Driver/Passenger Side" (two motors) |
 
-- Rules in, trial pending: mb (the first trial hit the 25-min cap after one segment; re-running).
-  Rules not yet written: audi, mazda, mitsubishi.
+| mb | 3 | 67 | exact names; W204 sells no bare wiper motor ("Linkage Assembly"). "Carrier"/"Housing Support" not taken. Slow: ~10 min/segment |
+| mazda | 2 | 26 | exact names; bare wiper-page "Motor" (BBN9-67-450A, BP4K-67-450A) dropped: product pages say only "Motor" |
+| mitsubishi | 2 | 22 | name AND slug; "Damper" = strut bumper/dust cover, "Carrier" = differential (slugs) |
+| audi | 2 | 86 | name AND slug; "Carrier" = differential. 8K1-955-023-E "Wiper Motor Assembly" is "Bracket" on its page: dropped |
+
+- **All 18 crawlable sites are flagged (2026-11-09 ~19:50 UTC, 0f37c7e).** moparpartsgiant (blocked)
+  and subarupartsdeal (withheld) are not flagged. The wheels merge (56dfae8) re-raised
+  versions one above both (jeep 5, kia 3). TIER_FLAG = {"C": "tierC", "W": "wheels"}.
+  No .vN.done exists for any raised version yet, so the next scheduled run (cron :23
+  every 6 h) crawls W and C. Nothing was dispatched from this session.
+- Wiper product check on audi, mazda and mitsubishi (`PRODUCT_RULES["wiper-motor"]`):
+  the product page must say "wiper" and must not name a washer, bracket, frame or
+  linkage. A list-page "Motor" alone is never enough.
+- Known suite state: curation_tests test_model_map fails on the live Cr-Z feed row
+  (hub: it clears after the rescan). Every other suite passes: tests 31/31,
+  scraper/test_*.py 26/26.
+- Next (whoever continues):
+  - Watch the crawl logs on oem-raw for `.blocked`/`.paused`. MB and GM are the slow ones.
+  - Then the curation build (design above). Per category, a §11.4 sample (60, independent
+    session, 0 WRONG) and the hub's confirm before any app change on
+    `interchange/categories-<n>`.
 - Curation design (not started, needs the crawl): new CATEGORY_POLICY entries.
   - knuckle/strut: slots FL/FR/RL/RR, axes side+door, front pair required.
   - wiper-motor: front/rear slot. Needs a new "end" axis in positions.py, plus a
