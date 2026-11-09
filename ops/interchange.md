@@ -2988,3 +2988,15 @@ each); nothing allowlisted or crawled.
   - New WHEELS_AUDITED_NS = {mopar}. hmg (17), mb (14) and vag (5) wheels groups from today's tier W crawl are refused `wheels_not_audited` until their own §11.4 round.
   - Payload: new lazy file docs/data/oem/wheels.json (29 groups). interchange.json changes only builtAt, oemStatus and the oemLazy index.
   - pf_guards_unit: the wheels block now loads an empty wheels lazy file. New check: a shipped wheels group adds the cross-model donor as Likely.
+- ~23:10 UTC: owner priority, junkyard-demand lines. Probed 1A (18 fetches,
+  no refusals). All lines are server-rendered.
+  - Viable now: headlights, tail lights (plain rows; "Sedan" rows wait for
+    a[5]), blower motors. They need side-only positions plus a
+    FACELIFT_BREAKS guard on lamps.
+  - Mirrors and door handles need a qualifier grammar (body / option /
+    cosmetic).
+  - Regulators need a rule-5 change for alternate spellings.
+  - Lock actuators: trim-qualified, so low yield.
+  - Wiper motors and fog lights: not sampled yet.
+  - 1A interchange tables carry OE numbers (a possible OE join). All of this
+    is with the hub; nothing added to the crawl yet.
