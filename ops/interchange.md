@@ -1807,3 +1807,57 @@ Gates passed: V12-V15 reproducible across two curate runs; measure parity
 6/6; V9 0 old-client flips; payload status "ok" for all 7 (mb 0 groups);
 curation_tests 15/15 (+18 regression checks); tests 29/29;
 scraper/test_*.py all pass; pf_guards_unit ALL PASS.
+
+## 2026-11-09 Held parts research agent, phase 2 (session_016ZzJfLpnys4vyFfk33LoW3)
+
+Hub request (owner approval quoted by the hub: "Yes do everything you think").
+All verdicts are ADVISORY. Nothing was shipped and nothing reads the allowlist yet.
+
+- **Curation used:** `curate.py --ns all --raw-ref origin/oem-raw --write-groups`
+  on main f0a4b5f into a scratch folder. origin/oem-raw was **16ecb3d**, 76 commits
+  newer than the 42683f9 behind main's committed reports. That run holds 288
+  exterior groups: mopar 99, ford 80, gm 50, subaru 27, mb 18, vag 14. Main's
+  committed `_report/held_exterior.json` (42683f9) holds 160, and all 160 are among
+  the 288. I did not commit the regenerated reports; the curation session owns them.
+- **1. Subaru spot-check (20 of the 97 re-curated Likely groups):**
+  RIGHT 15, WRONG 4, UNSURE 1. **Fails the 0-WRONG bar.** All four WRONGs are
+  2000-04 (BE/BH) numbers where the option column lists only Outback codes:
+  72311AE06A (`W.OBKLTD.AT`), 72311AE08D (`S.SUS6 +W.OBK6`, plus the note
+  "FOR CANADA,CHILE"), 91031AE41AFR (`W.OBKLTD.AT`) and 91031AE43BGA
+  (`OBK6 +SUS6 +OBK6S +OBK6LB +OBKLTD +SUSLTD`). For 2000-04 the "Legacy" and
+  "Outback" pages are one catalog, and the product page lists "Legacy" with
+  Outback trims, because the Outback was sold then as "Legacy Outback".
+  Fixable rules: (a) a 2000-04 number whose option codes are all OBK*/SUS*/
+  WOBK/SOBK is Outback-only; (b) a market note (FOR CANADA, CHILE, EUROPE, ...)
+  should drop or flag the number for US cars. I verified 72311AE08D against the
+  raw record on oem-raw. UNSURE: 85021AG59A, where the option column covers both
+  but outside evidence names only the Outback.
+  Caveats on RIGHTs: 61188KG000 is the LH motor only (the group's side setting is
+  too broad); gauge clusters need VIN/key programming.
+- **2. Remaining held groups:** 217 not covered by phase 1, 107 questions, 4
+  agents. Per group: RIGHT 87, WRONG 32, UNSURE 98 (after my overrides). A RIGHT
+  needs a cited source outside the PartsGiant/SimplePart network, and eBay alone
+  does not count. Trim, wheelbase or body splits YardScout cannot see are UNSURE
+  (q1019, 1062, 1067, 1099, 1100 and 1105 were downgraded; phase-1 84001AE14A/15A
+  were downgraded for the same reason). Seven carried-over groups had their
+  vehicle list changed; they keep UNSURE with a note. The 136 phase-1 docs that
+  are no longer held are flagged `agent_superseded`.
+  The 288 held groups now stand at RIGHT 96, WRONG 63, UNSURE 129.
+  Main WRONGs: Concorde/Intrepid head lamps, the 119-inch-only T&C rear covers,
+  Edge vs MKX front cover and grille (MKX parts), Century vs Regal tail lamps,
+  Cobalt sedan lamps against the G5 coupe, Escalade/Denali lamps against Tahoe/Yukon,
+  and the C300 "Without AMG" covers against the C350.
+- **3. Allowlist:** `scraper/oem_fitment/groups/_report/held_exterior_release.json`
+  has 96 groups (still held, agent RIGHT, at least one independent source); 63 of
+  them are also in main's committed held list. Not consumed by anything. Release
+  only on the owner's go, via the curate allowlist plan in the 2026-11-09 section
+  above.
+- **Repo mirror:** `_report/held_exterior_agent_verdicts_phase2.json`, which also
+  holds the Subaru sample.
+  `tools/held_exterior_checklist_data.py` now takes a held-list path plus the
+  previous data file and keeps superseded groups (`sup`).
+- **Artifact version 3** (same URL): page data rebuilt from the 288-group list.
+  Superseded groups sit in a collapsed "No longer held" section with no answer
+  buttons. Checked against a stubbed db in Chromium: 288 live cards, 143
+  superseded, 424 agent boxes, and a tap sends update. Db readback at view level:
+  424 docs, 0 owner answers, all 288 held groups covered.

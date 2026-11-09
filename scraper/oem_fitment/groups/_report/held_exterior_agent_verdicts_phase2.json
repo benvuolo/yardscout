@@ -1,0 +1,2741 @@
+{
+ "note": "ADVISORY research-agent verdicts, phase 2 (held groups not covered by phase 1, corrected curation on main f0a4b5f, oem-raw 16ecb3d). Mirrors artifact db agent_* fields.",
+ "count": 217,
+ "groups": [
+  {
+   "id": "gm~headlights~19244638",
+   "q": 1000,
+   "verdict": "right",
+   "reason": "Aftermarket listings tie OEM 19244638/19244639 (Partslink GM2503182/GM2502182) to 1997-2005 Century and 1997-2004 Regal; corner-lamp variants exist",
+   "sources": [
+    "https://www.go-parts.com/headlight-assembly-for-buick-century-1997-2005-regal-1997-2004-right-passenger-and-left-driver-halogen-with-corner-light-bulb-complete-replacement-pairset-p-992747.html",
+    "https://stockwiseauto.com/tyc-20-5197-01-9-headlight-assembly",
+    "https://www.finditparts.com/products/5745595/dorman-1590096"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "gm~headlights~19244639",
+   "q": 1000,
+   "verdict": "right",
+   "reason": "Aftermarket listings tie OEM 19244638/19244639 (Partslink GM2503182/GM2502182) to 1997-2005 Century and 1997-2004 Regal; corner-lamp variants exist",
+   "sources": [
+    "https://www.go-parts.com/headlight-assembly-for-buick-century-1997-2005-regal-1997-2004-right-passenger-and-left-driver-halogen-with-corner-light-bulb-complete-replacement-pairset-p-992747.html",
+    "https://stockwiseauto.com/tyc-20-5197-01-9-headlight-assembly",
+    "https://www.finditparts.com/products/5745595/dorman-1590096"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "gm~tail-lights~19149887",
+   "q": 1001,
+   "verdict": "wrong",
+   "reason": "Regal-only tail lamp (passenger mate 19149888); the Century uses 19149889/19149890",
+   "sources": [
+    "https://autopartsprime.com/sc/2000-buick-regal-tail-lights",
+    "https://www.chevypartsdeal.com/oem/gm~lamp-asm-tail~19149887"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "gm~tail-lights~19149889",
+   "q": 1001,
+   "verdict": "wrong",
+   "reason": "Century-only tail lamp, Partslink GM2800141, 1997-2005 Century; not a Regal part",
+   "sources": [
+    "https://brushautoparts.com/products/1997-2005-buick-century-driver-left-tail-light-brake-lamp-oem-rear-19149889",
+    "https://carlights360.com/for-buick-century-tail-light-assembly-unit-1997-2005-pair-driver-and-passenger-side-dot-certified-for-gm2800141-gm2801141"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "gm~tail-lights~16525607",
+   "q": 1002,
+   "verdict": "unsure",
+   "reason": "Only PartsGiant-network pages found; no independent cross-reference or variant explanation",
+   "sources": [
+    "https://www.gmpartsgiant.com/oem-2000-chevrolet-astro-back_up_light.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "gm~tail-lights~16525608",
+   "q": 1002,
+   "verdict": "unsure",
+   "reason": "Only PartsGiant-network pages found; no independent cross-reference",
+   "sources": [
+    "https://www.gmpartsgiant.com/parts/gm-lamp-16525608.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "gm~tail-lights~5978023",
+   "q": 1002,
+   "verdict": "right",
+   "reason": "OEM 5978023 = Partslink GM2800113, listed for 1985-2005 Astro and Safari (shared van body)",
+   "sources": [
+    "https://www.go-parts.com/gm2800113-1985-2005-gmc-safari-tail-light-rear-lamp-left-driver-side.html",
+    "https://brushautoparts.com/products/1985-2005-chevy-astro-driver-left-tail-light-oem-brake-lamp-rear-05978023"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "gm~tail-lights~5978024",
+   "q": 1002,
+   "verdict": "right",
+   "reason": "Right-side mate of 5978023 (Partslink GM2801112), Astro/Safari 1985-2005",
+   "sources": [
+    "https://www.go-parts.com/gm2800113-1985-2005-gmc-safari-tail-light-rear-lamp-left-driver-side.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "gm~headlights~22853025",
+   "q": 1003,
+   "verdict": "right",
+   "reason": "GMT900 Avalanche uses the Tahoe/Suburban front; 22853025/26 sold as Avalanche 2007-2013 / Tahoe 2007-2014 headlamps",
+   "sources": [
+    "https://www.go-parts.com/headlight-assembly-for-chevrolet-avalanche-2007-2013tahoe-2007-2014-right-passenger-and-left-driver-6-piece-kit-halogen-with-bumper-grille-fog-lights-cover-grille-assembly-replacement-p-983482.html",
+    "https://www.group1autoparts.com/oem-parts/gm-driver-side-headlamp-22853025",
+    "https://www.autopartsprime.com/p/2007-chevrolet-avalanche-headlight"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "gm~headlights~22853026",
+   "q": 1003,
+   "verdict": "right",
+   "reason": "GMT900 Avalanche uses the Tahoe/Suburban front; 22853025/26 sold as Avalanche 2007-2013 / Tahoe 2007-2014 headlamps",
+   "sources": [
+    "https://www.go-parts.com/headlight-assembly-for-chevrolet-avalanche-2007-2013tahoe-2007-2014-right-passenger-and-left-driver-6-piece-kit-halogen-with-bumper-grille-fog-lights-cover-grille-assembly-replacement-p-983482.html",
+    "https://www.group1autoparts.com/oem-parts/gm-driver-side-headlamp-22853025",
+    "https://www.autopartsprime.com/p/2007-chevrolet-avalanche-headlight"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "gm~tail-lights~19179358",
+   "q": 1004,
+   "verdict": "right",
+   "reason": "19179358 (LH) / 19179679 (RH) listed for 1995-2005 S-10 Blazer and 1995-2001 Jimmy (also Bravada)",
+   "sources": [
+    "https://www.headlightsdepot.com/tail-light-driver-left-side-fits-1995-2005-chevrolet-blazer-1995-2001-gmc-jimmy-1996-2001-oldsmobile-bravada-sku-gm190-u000l.html",
+    "https://www.autopartsearch.com/catalog-6/itemdetail/2001_oldsmobile_bravada/AA93-1319805",
+    "https://autopartsprime.com/gm/lamp-asm-tail/oe-19179679"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "gm~tail-lights~19179679",
+   "q": 1004,
+   "verdict": "right",
+   "reason": "19179358 (LH) / 19179679 (RH) listed for 1995-2005 S-10 Blazer and 1995-2001 Jimmy (also Bravada)",
+   "sources": [
+    "https://www.headlightsdepot.com/tail-light-driver-left-side-fits-1995-2005-chevrolet-blazer-1995-2001-gmc-jimmy-1996-2001-oldsmobile-bravada-sku-gm190-u000l.html",
+    "https://www.autopartsearch.com/catalog-6/itemdetail/2001_oldsmobile_bravada/AA93-1319805",
+    "https://autopartsprime.com/gm/lamp-asm-tail/oe-19179679"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "gm~headlights~20964008",
+   "q": 1005,
+   "verdict": "right",
+   "reason": "Partslink GM2502282/GM2503282 (OEM 20964008/20964009) listed for Cobalt and 2007-2010 G5; smoked-lens variant, check lens",
+   "sources": [
+    "https://www.go-parts.com/gm2502282-2007-2010-pontiac-g5-headlight-assembly-left-driver-side.html",
+    "https://www.walmart.com/ip/6718654792",
+    "https://www.headlightsdepot.com/sku-335-1136l-acn7.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "gm~headlights~20964009",
+   "q": 1005,
+   "verdict": "right",
+   "reason": "Partslink GM2502282/GM2503282 (OEM 20964008/20964009) listed for Cobalt and 2007-2010 G5; smoked-lens variant, check lens",
+   "sources": [
+    "https://www.go-parts.com/gm2502282-2007-2010-pontiac-g5-headlight-assembly-left-driver-side.html",
+    "https://www.walmart.com/ip/6718654792",
+    "https://www.headlightsdepot.com/sku-335-1136l-acn7.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "gm~tail-lights~19418414",
+   "q": 1006,
+   "verdict": "wrong",
+   "reason": "19418414/19418415 are Cobalt SEDAN tail lamps (Partslink GM2800190/GM2801190); the 2007 US G5 was coupe-only",
+   "sources": [
+    "https://www.headlightsdepot.com/tail-light-right-passenger-fits-2005-2010-chevrolet-cobalt-4door-sedan-sku-gm376-b000r.html",
+    "https://www.cars.com/research/pontiac-g5-2008",
+    "https://www.autoblog.com/buy/2008-Pontiac-G5/review/"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "gm~tail-lights~19418415",
+   "q": 1006,
+   "verdict": "wrong",
+   "reason": "19418414/19418415 are Cobalt SEDAN tail lamps (Partslink GM2800190/GM2801190); the 2007 US G5 was coupe-only",
+   "sources": [
+    "https://www.headlightsdepot.com/tail-light-right-passenger-fits-2005-2010-chevrolet-cobalt-4door-sedan-sku-gm376-b000r.html",
+    "https://www.cars.com/research/pontiac-g5-2008",
+    "https://www.autoblog.com/buy/2008-Pontiac-G5/review/"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "gm~tail-lights~15105522",
+   "q": 1007,
+   "verdict": "unsure",
+   "reason": "Only PartsGiant listings (Colorado); no independent source naming it for Canyon",
+   "sources": [
+    "https://www.gmpartsgiant.com/parts/chevrolet-lamp~15105522.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "gm~tail-lights~19417443",
+   "q": 1007,
+   "verdict": "right",
+   "reason": "Interchange listings tie 19417443/19417444 to Partslink GM2801164/GM2800164 for 2004-2012 Colorado and Canyon",
+   "sources": [
+    "https://www.go-parts.com/gmc-canyon-tail-lights-2-199.html",
+    "https://autopartsprime.com/gm/lamp-asm-tail/oe-19417443"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "gm~tail-lights~19417444",
+   "q": 1007,
+   "verdict": "right",
+   "reason": "LH mate of 19417443; same Colorado/Canyon 2004-2012 interchange",
+   "sources": [
+    "https://www.go-parts.com/gmc-canyon-tail-lights-2-199.html",
+    "https://autopartsprime.com/gm/lamp-asm-tail/oe-19417444"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "gm~tail-lights~5978195",
+   "q": 1008,
+   "verdict": "right",
+   "reason": "5978195/5978196 (Partslink GM2800124) listed for 1994-2004 S-10 and Sonoma pickups (fleetside)",
+   "sources": [
+    "https://www.rareelectrical.com/i-26914021-new-left-tail-light-assembly-compatible-with-1994-2004-chevrolet-s10-gmc-s-15-sonoma-pickup.html",
+    "https://www.go-parts.com/gm2800124-1994-2002-chevrolet-s10-tail-light-rear-lamp-left-driver-side.html",
+    "https://autopartsprime.com/gm/lamp-tail/oe-5978195"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "gm~tail-lights~5978196",
+   "q": 1008,
+   "verdict": "right",
+   "reason": "5978195/5978196 (Partslink GM2800124) listed for 1994-2004 S-10 and Sonoma pickups (fleetside)",
+   "sources": [
+    "https://www.rareelectrical.com/i-26914021-new-left-tail-light-assembly-compatible-with-1994-2004-chevrolet-s10-gmc-s-15-sonoma-pickup.html",
+    "https://www.go-parts.com/gm2800124-1994-2002-chevrolet-s10-tail-light-rear-lamp-left-driver-side.html",
+    "https://autopartsprime.com/gm/lamp-tail/oe-5978195"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "gm~headlights~15738657",
+   "q": 1009,
+   "verdict": "wrong",
+   "reason": "15738657/58 = Partslink GM2502217: Escalade/Yukon Denali composite headlamp 1999-2000; a regular 1999 Tahoe or Yukon has different lamps",
+   "sources": [
+    "https://www.headlightsdepot.com/headlight-halogen-right-passenger-side-fits-1999-2000-cadillac-escalade-1992-2000-gmc-yukon-denali-sku-335-1121r-af.html",
+    "https://www.go-parts.com/gm2502217-1999-2000-cadillac-escalade-headlight-assembly-left-driver-side.html",
+    "https://www.walmart.com/ip/677479586"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "gm~headlights~15738658",
+   "q": 1009,
+   "verdict": "wrong",
+   "reason": "15738657/58 = Partslink GM2502217: Escalade/Yukon Denali composite headlamp 1999-2000; a regular 1999 Tahoe or Yukon has different lamps",
+   "sources": [
+    "https://www.headlightsdepot.com/headlight-halogen-right-passenger-side-fits-1999-2000-cadillac-escalade-1992-2000-gmc-yukon-denali-sku-335-1121r-af.html",
+    "https://www.go-parts.com/gm2502217-1999-2000-cadillac-escalade-headlight-assembly-left-driver-side.html",
+    "https://www.walmart.com/ip/677479586"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "gm~tail-lights~19206745",
+   "q": 1010,
+   "verdict": "right",
+   "reason": "19206745/46 = Partslink GM2800134/GM2801134, listed for 1997-2005 Venture and 1999-2005 Montana",
+   "sources": [
+    "https://carlights360.com/for-chevy-venture-tail-light-assembly-1997-2005-driver-and-passenger-side-pair-set-gm2800134-gm2801134-19206745-19206746",
+    "https://www.everydayautoparts.com/products/1222-0027L/97_05-Chevrolet-Venture-Tail-Light-Unit-LH-97_98-Pontiac-Trans-Sport-99_05-Montana-97_04",
+    "https://www.autopartsprime.com/gm/lamp-asm-tail/oe-19206745"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "gm~tail-lights~19206746",
+   "q": 1010,
+   "verdict": "right",
+   "reason": "19206745/46 = Partslink GM2800134/GM2801134, listed for 1997-2005 Venture and 1999-2005 Montana",
+   "sources": [
+    "https://carlights360.com/for-chevy-venture-tail-light-assembly-1997-2005-driver-and-passenger-side-pair-set-gm2800134-gm2801134-19206745-19206746",
+    "https://www.everydayautoparts.com/products/1222-0027L/97_05-Chevrolet-Venture-Tail-Light-Unit-LH-97_98-Pontiac-Trans-Sport-99_05-Montana-97_04",
+    "https://www.autopartsprime.com/gm/lamp-asm-tail/oe-19206745"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~door-front~5134171AD",
+   "q": 1011,
+   "verdict": "unsure",
+   "reason": "Forum says Magnum and 2005-10 300 share all four doors, but no independent source names 5134171AD for both; only the PartsGiant-network catalog lists it.",
+   "sources": [
+    "https://pol1.lr.ggtyler.dev/r/dodgemagnum/comments/1hoxpw3/rt_body_swap",
+    "https://www.go-parts.com/chrysler-300-door-handles.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~door-rear~5134176AD",
+   "q": 1012,
+   "verdict": "unsure",
+   "reason": "Forum says 300/Magnum rear doors match; handles/glass listed for both. Catalog also puts the rear shell on the 2006 Charger (different body), so it may be a roll-up. No independent number.",
+   "sources": [
+    "https://pol1.lr.ggtyler.dev/r/dodgemagnum/comments/1hoxpw3/rt_body_swap",
+    "https://www.jeeppartsdeal.com/oem/mopar~door-rear~5134176ad"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~door-rear~5134177AD",
+   "q": 1012,
+   "verdict": "unsure",
+   "reason": "Forum says 300/Magnum rear doors match; handles/glass listed for both. Catalog also puts the rear shell on the 2006 Charger (different body), so it may be a roll-up. No independent number.",
+   "sources": [
+    "https://pol1.lr.ggtyler.dev/r/dodgemagnum/comments/1hoxpw3/rt_body_swap",
+    "https://www.jeeppartsdeal.com/oem/mopar~door-rear~5134176ad"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~door-front~5003226AG",
+   "q": 1013,
+   "verdict": "unsure",
+   "reason": "Only network catalog (jeeppartsdeal: 2002-04 300M + Concorde, single shell on Concorde page, no options) lists 5003226AG/27AG; no independent door-shell source found.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~door-front~5003226ag",
+    "https://www.jeeppartsdeal.com/parts-list/2002-chrysler-concorde/body-hardware/door-components"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~door-front~5003227AG",
+   "q": 1013,
+   "verdict": "unsure",
+   "reason": "Only network catalog (jeeppartsdeal: 2002-04 300M + Concorde, single shell on Concorde page, no options) lists 5003226AG/27AG; no independent door-shell source found.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~door-front~5003226ag",
+    "https://www.jeeppartsdeal.com/parts-list/2002-chrysler-concorde/body-hardware/door-components"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~door-rear~5003236AJ",
+   "q": 1014,
+   "verdict": "unsure",
+   "reason": "Rear shells 5003236AJ/37AJ listed for 300M/Concorde/LHS only by network catalogs; no independent source; no known physical difference.",
+   "sources": [
+    "https://www.moparpartsgiant.com/parts/mopar-door-rear~5003236ah.html",
+    "https://www.jeeppartsdeal.com/parts-list/2002-chrysler-concorde/body-hardware/door-components"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~door-rear~5003237AJ",
+   "q": 1014,
+   "verdict": "unsure",
+   "reason": "Rear shells 5003236AJ/37AJ listed for 300M/Concorde/LHS only by network catalogs; no independent source; no known physical difference.",
+   "sources": [
+    "https://www.moparpartsgiant.com/parts/mopar-door-rear~5003236ah.html",
+    "https://www.jeeppartsdeal.com/parts-list/2002-chrysler-concorde/body-hardware/door-components"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~bumper-front~4574828",
+   "q": 1015,
+   "verdict": "unsure",
+   "reason": "2002 Concorde took the LHS fascias. CAPA CH1000388C fits 99-01 LHS + 02-04 Concorde, but 4574828 is tied only to CH1000258 (Concorde 02-04). Equivalence not shown.",
+   "sources": [
+    "https://partify.ca/products/chrysler-concorde-lhs-capa-certified-front-bumper-ch1000388c",
+    "https://en.wikipedia.org/wiki/Chrysler_LHS",
+    "https://paintedautoparts.com/chrysler-concorde-front-bumper-cover-prm-oem-4574828-2002-2004-pl-ch1000258.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~fender~5003060AD",
+   "q": 1016,
+   "verdict": "unsure",
+   "reason": "CAPA CH1240222C = 5003061AD is listed for 1998-2004 Concorde only. No independent source names it (or the RH 5003060AD) for the 1999-2001 LHS.",
+   "sources": [
+    "https://centralalbertapaintsupply.ca/?p=133661"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~fender~5003061AD",
+   "q": 1016,
+   "verdict": "unsure",
+   "reason": "CAPA CH1240222C = 5003061AD is listed for 1998-2004 Concorde only. No independent source names it (or the RH 5003060AD) for the 1999-2001 LHS.",
+   "sources": [
+    "https://centralalbertapaintsupply.ca/?p=133661"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~grille~5103109AA",
+   "q": 1017,
+   "verdict": "unsure",
+   "reason": "2002 Concorde adopted the LHS front fascias, so a shared grille is plausible. Only PartsGiant-network pages list 5103109AA for both; no independent number found.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Chrysler_LHS",
+    "https://www.jeeppartsdeal.com/oem/mopar~grille-radiator~5103109aa"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~headlights~4780014AE",
+   "q": 1018,
+   "verdict": "right",
+   "reason": "Aftermarket lists CH2503148 = 4780014AE for both 1999-2001 LHS and 2002-2004 Concorde (RH). 4780015AE is the LH mate (CH2502). Concorde took the LHS front for 2002.",
+   "sources": [
+    "https://carlights360.com/for-chrysler-lhs-headlight-assembly-1999-2000-2001-passenger-side-halogen-ch2503148-4780014ae",
+    "https://carlights360.com/for-chrysler-concorde-headlight-assembly-2002-2003-2004-passenger-side-halogen-ch2503148-4780014ae",
+    "https://en.wikipedia.org/wiki/Chrysler_LHS"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~headlights~4780015AE",
+   "q": 1018,
+   "verdict": "right",
+   "reason": "Aftermarket lists CH2503148 = 4780014AE for both 1999-2001 LHS and 2002-2004 Concorde (RH). 4780015AE is the LH mate (CH2502). Concorde took the LHS front for 2002.",
+   "sources": [
+    "https://carlights360.com/for-chrysler-lhs-headlight-assembly-1999-2000-2001-passenger-side-halogen-ch2503148-4780014ae",
+    "https://carlights360.com/for-chrysler-concorde-headlight-assembly-2002-2003-2004-passenger-side-halogen-ch2503148-4780014ae",
+    "https://en.wikipedia.org/wiki/Chrysler_LHS"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~hood~5003088AD",
+   "q": 1019,
+   "verdict": "unsure",
+   "reason": "No source ties this number itself to both cars (CAPA hood inference only). (was agent RIGHT)",
+   "sources": [
+    "https://partify.ca/products/chrysler-concorde-lhs-capa-certified-hood-ch1230216c",
+    "https://en.wikipedia.org/wiki/Chrysler_Concorde"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~tail-lights~4780058AG",
+   "q": 1020,
+   "verdict": "right",
+   "reason": "Aftermarket guide: the RH tail lamp (4780058AH, superseding AG) fits ONLY 1999-2001 LHS and 2002-2004 Concorde. 4780059 is the LH mate. 98-01 Concorde lamps differ.",
+   "sources": [
+    "https://www.go-parts.com/garage/tail-light-chrysler-concorde-chrysler-lhs-1999-2004"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~tail-lights~4780059AG",
+   "q": 1020,
+   "verdict": "right",
+   "reason": "Aftermarket guide: the RH tail lamp (4780058AH, superseding AG) fits ONLY 1999-2001 LHS and 2002-2004 Concorde. 4780059 is the LH mate. 98-01 Concorde lamps differ.",
+   "sources": [
+    "https://www.go-parts.com/garage/tail-light-chrysler-concorde-chrysler-lhs-1999-2004"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~headlights~4746436",
+   "q": 1021,
+   "verdict": "wrong",
+   "reason": "93-97 Concorde headlamps are shared with Eagle Vision only (e.g. CH2502111 96-97); Intrepid uses its own lamp (CH2502107/CH2503107). Page is a roll-up of all LH lamps.",
+   "sources": [
+    "https://partifyusa.com/products/chrysler-concorde-eagle-vision-driver-side-headlight-assembly-composite-ch2502111",
+    "https://www.go-parts.com/garage/headlight-assembly-chrysler-concorde-eagle-vision-1993-1997",
+    "https://www.go-parts.com/ch2502107-1993-1997-dodge-intrepid-headlight-assembly-left-driver-side.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~headlights~4746437",
+   "q": 1021,
+   "verdict": "wrong",
+   "reason": "93-97 Concorde headlamps are shared with Eagle Vision only (e.g. CH2502111 96-97); Intrepid uses its own lamp (CH2502107/CH2503107). Page is a roll-up of all LH lamps.",
+   "sources": [
+    "https://partifyusa.com/products/chrysler-concorde-eagle-vision-driver-side-headlight-assembly-composite-ch2502111",
+    "https://www.go-parts.com/garage/headlight-assembly-chrysler-concorde-eagle-vision-1993-1997",
+    "https://www.go-parts.com/ch2502107-1993-1997-dodge-intrepid-headlight-assembly-left-driver-side.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~headlights~4746452",
+   "q": 1021,
+   "verdict": "wrong",
+   "reason": "93-97 Concorde headlamps are shared with Eagle Vision only (e.g. CH2502111 96-97); Intrepid uses its own lamp (CH2502107/CH2503107). Page is a roll-up of all LH lamps.",
+   "sources": [
+    "https://partifyusa.com/products/chrysler-concorde-eagle-vision-driver-side-headlight-assembly-composite-ch2502111",
+    "https://www.go-parts.com/garage/headlight-assembly-chrysler-concorde-eagle-vision-1993-1997",
+    "https://www.go-parts.com/ch2502107-1993-1997-dodge-intrepid-headlight-assembly-left-driver-side.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~headlights~4746453",
+   "q": 1021,
+   "verdict": "wrong",
+   "reason": "93-97 Concorde headlamps are shared with Eagle Vision only (e.g. CH2502111 96-97); Intrepid uses its own lamp (CH2502107/CH2503107). Page is a roll-up of all LH lamps.",
+   "sources": [
+    "https://partifyusa.com/products/chrysler-concorde-eagle-vision-driver-side-headlight-assembly-composite-ch2502111",
+    "https://www.go-parts.com/garage/headlight-assembly-chrysler-concorde-eagle-vision-1993-1997",
+    "https://www.go-parts.com/ch2502107-1993-1997-dodge-intrepid-headlight-assembly-left-driver-side.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~headlights~4746466",
+   "q": 1021,
+   "verdict": "wrong",
+   "reason": "93-97 Concorde headlamps are shared with Eagle Vision only (e.g. CH2502111 96-97); Intrepid uses its own lamp (CH2502107/CH2503107). Page is a roll-up of all LH lamps.",
+   "sources": [
+    "https://partifyusa.com/products/chrysler-concorde-eagle-vision-driver-side-headlight-assembly-composite-ch2502111",
+    "https://www.go-parts.com/garage/headlight-assembly-chrysler-concorde-eagle-vision-1993-1997",
+    "https://www.go-parts.com/ch2502107-1993-1997-dodge-intrepid-headlight-assembly-left-driver-side.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~headlights~4762058",
+   "q": 1021,
+   "verdict": "wrong",
+   "reason": "Concorde/Vision lamp (go-parts guide: 4762058/59 = 94-95, 4856562/63 = 96-97 Concorde/Vision); not an Intrepid lamp.",
+   "sources": [
+    "https://www.go-parts.com/garage/headlight-assembly-chrysler-concorde-eagle-vision-1993-1997"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~headlights~4762059",
+   "q": 1021,
+   "verdict": "wrong",
+   "reason": "Concorde/Vision lamp (go-parts guide: 4762058/59 = 94-95, 4856562/63 = 96-97 Concorde/Vision); not an Intrepid lamp.",
+   "sources": [
+    "https://www.go-parts.com/garage/headlight-assembly-chrysler-concorde-eagle-vision-1993-1997"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~headlights~4778258",
+   "q": 1021,
+   "verdict": "wrong",
+   "reason": "93-97 Concorde headlamps are shared with Eagle Vision only (e.g. CH2502111 96-97); Intrepid uses its own lamp (CH2502107/CH2503107). Page is a roll-up of all LH lamps.",
+   "sources": [
+    "https://partifyusa.com/products/chrysler-concorde-eagle-vision-driver-side-headlight-assembly-composite-ch2502111",
+    "https://www.go-parts.com/garage/headlight-assembly-chrysler-concorde-eagle-vision-1993-1997",
+    "https://www.go-parts.com/ch2502107-1993-1997-dodge-intrepid-headlight-assembly-left-driver-side.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~headlights~4778259",
+   "q": 1021,
+   "verdict": "wrong",
+   "reason": "93-97 Concorde headlamps are shared with Eagle Vision only (e.g. CH2502111 96-97); Intrepid uses its own lamp (CH2502107/CH2503107). Page is a roll-up of all LH lamps.",
+   "sources": [
+    "https://partifyusa.com/products/chrysler-concorde-eagle-vision-driver-side-headlight-assembly-composite-ch2502111",
+    "https://www.go-parts.com/garage/headlight-assembly-chrysler-concorde-eagle-vision-1993-1997",
+    "https://www.go-parts.com/ch2502107-1993-1997-dodge-intrepid-headlight-assembly-left-driver-side.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~headlights~4856562",
+   "q": 1021,
+   "verdict": "wrong",
+   "reason": "Concorde/Vision lamp (go-parts guide: 4762058/59 = 94-95, 4856562/63 = 96-97 Concorde/Vision); not an Intrepid lamp.",
+   "sources": [
+    "https://www.go-parts.com/garage/headlight-assembly-chrysler-concorde-eagle-vision-1993-1997"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~headlights~4856563",
+   "q": 1021,
+   "verdict": "wrong",
+   "reason": "Concorde/Vision lamp (go-parts guide: 4762058/59 = 94-95, 4856562/63 = 96-97 Concorde/Vision); not an Intrepid lamp.",
+   "sources": [
+    "https://www.go-parts.com/garage/headlight-assembly-chrysler-concorde-eagle-vision-1993-1997"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~headlights~V7106562AA",
+   "q": 1021,
+   "verdict": "wrong",
+   "reason": "93-97 Concorde headlamps are shared with Eagle Vision only (e.g. CH2502111 96-97); Intrepid uses its own lamp (CH2502107/CH2503107). Page is a roll-up of all LH lamps.",
+   "sources": [
+    "https://partifyusa.com/products/chrysler-concorde-eagle-vision-driver-side-headlight-assembly-composite-ch2502111",
+    "https://www.go-parts.com/garage/headlight-assembly-chrysler-concorde-eagle-vision-1993-1997",
+    "https://www.go-parts.com/ch2502107-1993-1997-dodge-intrepid-headlight-assembly-left-driver-side.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~headlights~V7106563AA",
+   "q": 1021,
+   "verdict": "wrong",
+   "reason": "93-97 Concorde headlamps are shared with Eagle Vision only (e.g. CH2502111 96-97); Intrepid uses its own lamp (CH2502107/CH2503107). Page is a roll-up of all LH lamps.",
+   "sources": [
+    "https://partifyusa.com/products/chrysler-concorde-eagle-vision-driver-side-headlight-assembly-composite-ch2502111",
+    "https://www.go-parts.com/garage/headlight-assembly-chrysler-concorde-eagle-vision-1993-1997",
+    "https://www.go-parts.com/ch2502107-1993-1997-dodge-intrepid-headlight-assembly-left-driver-side.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~headlights~V7108256AA",
+   "q": 1021,
+   "verdict": "wrong",
+   "reason": "93-97 Concorde headlamps are shared with Eagle Vision only (e.g. CH2502111 96-97); Intrepid uses its own lamp (CH2502107/CH2503107). Page is a roll-up of all LH lamps.",
+   "sources": [
+    "https://partifyusa.com/products/chrysler-concorde-eagle-vision-driver-side-headlight-assembly-composite-ch2502111",
+    "https://www.go-parts.com/garage/headlight-assembly-chrysler-concorde-eagle-vision-1993-1997",
+    "https://www.go-parts.com/ch2502107-1993-1997-dodge-intrepid-headlight-assembly-left-driver-side.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~headlights~V7108257AA",
+   "q": 1021,
+   "verdict": "wrong",
+   "reason": "93-97 Concorde headlamps are shared with Eagle Vision only (e.g. CH2502111 96-97); Intrepid uses its own lamp (CH2502107/CH2503107). Page is a roll-up of all LH lamps.",
+   "sources": [
+    "https://partifyusa.com/products/chrysler-concorde-eagle-vision-driver-side-headlight-assembly-composite-ch2502111",
+    "https://www.go-parts.com/garage/headlight-assembly-chrysler-concorde-eagle-vision-1993-1997",
+    "https://www.go-parts.com/ch2502107-1993-1997-dodge-intrepid-headlight-assembly-left-driver-side.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~headlights~V7108260AA",
+   "q": 1021,
+   "verdict": "wrong",
+   "reason": "93-97 Concorde headlamps are shared with Eagle Vision only (e.g. CH2502111 96-97); Intrepid uses its own lamp (CH2502107/CH2503107). Page is a roll-up of all LH lamps.",
+   "sources": [
+    "https://partifyusa.com/products/chrysler-concorde-eagle-vision-driver-side-headlight-assembly-composite-ch2502111",
+    "https://www.go-parts.com/garage/headlight-assembly-chrysler-concorde-eagle-vision-1993-1997",
+    "https://www.go-parts.com/ch2502107-1993-1997-dodge-intrepid-headlight-assembly-left-driver-side.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~headlights~V7108261AA",
+   "q": 1021,
+   "verdict": "wrong",
+   "reason": "93-97 Concorde headlamps are shared with Eagle Vision only (e.g. CH2502111 96-97); Intrepid uses its own lamp (CH2502107/CH2503107). Page is a roll-up of all LH lamps.",
+   "sources": [
+    "https://partifyusa.com/products/chrysler-concorde-eagle-vision-driver-side-headlight-assembly-composite-ch2502111",
+    "https://www.go-parts.com/garage/headlight-assembly-chrysler-concorde-eagle-vision-1993-1997",
+    "https://www.go-parts.com/ch2502107-1993-1997-dodge-intrepid-headlight-assembly-left-driver-side.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~fender~5018848AB",
+   "q": 1022,
+   "verdict": "unsure",
+   "reason": "5018848AB/49AB = CH1241229/CH1240229 sedan fenders, Sebring & Stratus SDN 2001-06 (fits). But 2004 Sebring coupe is Mitsubishi-based, different fender: split coupe vs sedan/conv.",
+   "sources": [
+    "https://auto-bodyparts.com/dodge-stratus-sd-fender-right-oem-5018848ab-2001-2006.html",
+    "https://paintedautoparts.com/chrysler-sebring-sd-fender-right-oem-5018848ab-2001-2006.html",
+    "https://en.wikipedia.org/wiki/Chrysler_Sebring"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~fender~5018849AB",
+   "q": 1022,
+   "verdict": "unsure",
+   "reason": "5018848AB/49AB = CH1241229/CH1240229 sedan fenders, Sebring & Stratus SDN 2001-06 (fits). But 2004 Sebring coupe is Mitsubishi-based, different fender: split coupe vs sedan/conv.",
+   "sources": [
+    "https://auto-bodyparts.com/dodge-stratus-sd-fender-right-oem-5018848ab-2001-2006.html",
+    "https://paintedautoparts.com/chrysler-sebring-sd-fender-right-oem-5018848ab-2001-2006.html",
+    "https://en.wikipedia.org/wiki/Chrysler_Sebring"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~hood~4814749AG",
+   "q": 1023,
+   "verdict": "unsure",
+   "reason": "4814749AG listed for Stratus SDN, Sebring SDN and Sebring conv 2001-06 (fits), but 2004 Sebring coupe (Mitsubishi-based) uses a different hood: split coupe vs sedan/conv.",
+   "sources": [
+    "https://paintedautoparts.com/dodge-stratus-sd-hood-oem-4814749ag-2001-2006.html",
+    "https://paintedautoparts.com/chrysler-sebring-sd-hood-oem-4814749ag-2001-2006.html",
+    "https://paintedautoparts.com/chrysler-sebring-conv-hood-oem-4814749ag-2001-2006.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~door-front~4717716AE",
+   "q": 1024,
+   "verdict": "unsure",
+   "reason": "Only one front shell pair on the 2001 T&C page (no options) but no independent source naming 4717716AE/17AE for T&C and Voyager; retailer data says 2002-04, check 2001.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/parts-list/2001-chrysler-town-country/body-hardware/door-components",
+    "https://www.moparpartsgiant.com/parts/mopar-door-front~4717716ae.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~door-front~4717717AE",
+   "q": 1024,
+   "verdict": "unsure",
+   "reason": "Only one front shell pair on the 2001 T&C page (no options) but no independent source naming 4717716AE/17AE for T&C and Voyager; retailer data says 2002-04, check 2001.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/parts-list/2001-chrysler-town-country/body-hardware/door-components",
+    "https://www.moparpartsgiant.com/parts/mopar-door-front~4717716ae.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~liftgate~5018441AC",
+   "q": 1025,
+   "verdict": "unsure",
+   "reason": "5018441AC is the only liftgate shell on the 2001 T&C page; no independent source naming it for T&C and Voyager; power vs manual liftgate shell difference not ruled out.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/parts-list/2001-chrysler-town-country/body-hardware/lift-gate",
+    "https://www.carid.com/dodge-grand-caravan-trunks-tailgates/"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~fender~5018442AB",
+   "q": 1026,
+   "verdict": "right",
+   "reason": "5018442/5018443 (AA->AB) = CH1241228/CH1240228, listed for 2001-07 T&C and 2001-07 Caravan/Grand Caravan; Voyager on same RS body. Fits all listed years.",
+   "sources": [
+    "https://paintedautoparts.com/dodge-trucks-vans-town-country-fender-right-oem-5018442aa-2001-2007.html",
+    "https://paintedautoparts.com/dodge-trucks-vans-caravan-fender-right-oem-5018442aa-2001-2007.html",
+    "https://www.go-parts.com/0107-plymouth-voyager-fender-left-driver-p-900002674.html",
+    "https://centralalbertapaintsupply.ca/?p=133779"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~fender~5018443AB",
+   "q": 1026,
+   "verdict": "right",
+   "reason": "5018442/5018443 (AA->AB) = CH1241228/CH1240228, listed for 2001-07 T&C and 2001-07 Caravan/Grand Caravan; Voyager on same RS body. Fits all listed years.",
+   "sources": [
+    "https://paintedautoparts.com/dodge-trucks-vans-town-country-fender-right-oem-5018442aa-2001-2007.html",
+    "https://paintedautoparts.com/dodge-trucks-vans-caravan-fender-right-oem-5018442aa-2001-2007.html",
+    "https://www.go-parts.com/0107-plymouth-voyager-fender-left-driver-p-900002674.html",
+    "https://centralalbertapaintsupply.ca/?p=133779"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~bumper-rear~5139122AB",
+   "q": 1027,
+   "verdict": "wrong",
+   "reason": "All three covers (CH1100314/315/316) are 119in-WB only, with sensor/chrome/stow splits. The 113in SWB Caravan uses CH1100218. Wrong for 2005 Caravan; T&C 2005 had both WBs.",
+   "sources": [
+    "https://paintedautoparts.com/dodge-trucks-vans-town-country-rear-b-cover-prm-w-lwr-lid-119-wb-exhaust-on-left-wo-chr-mldg-w-sensr-w-stow-oem-5139123aa-2005-2007.html",
+    "https://www.revemoto.com/collections/dodge-caravan-painted-bumpers?page=2",
+    "https://paintedautoparts.com/dodge-trucks-vans-caravan-rear-b-cover-prm-w-lwr-lid-119-wb-exhaust-on-left-w-chr-mldg-wo-sensr-oem-5139124aa-2005-2007.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~bumper-rear~5139123AA",
+   "q": 1027,
+   "verdict": "wrong",
+   "reason": "All three covers (CH1100314/315/316) are 119in-WB only, with sensor/chrome/stow splits. The 113in SWB Caravan uses CH1100218. Wrong for 2005 Caravan; T&C 2005 had both WBs.",
+   "sources": [
+    "https://paintedautoparts.com/dodge-trucks-vans-town-country-rear-b-cover-prm-w-lwr-lid-119-wb-exhaust-on-left-wo-chr-mldg-w-sensr-w-stow-oem-5139123aa-2005-2007.html",
+    "https://www.revemoto.com/collections/dodge-caravan-painted-bumpers?page=2",
+    "https://paintedautoparts.com/dodge-trucks-vans-caravan-rear-b-cover-prm-w-lwr-lid-119-wb-exhaust-on-left-w-chr-mldg-wo-sensr-oem-5139124aa-2005-2007.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~bumper-rear~5139124AA",
+   "q": 1027,
+   "verdict": "wrong",
+   "reason": "All three covers (CH1100314/315/316) are 119in-WB only, with sensor/chrome/stow splits. The 113in SWB Caravan uses CH1100218. Wrong for 2005 Caravan; T&C 2005 had both WBs.",
+   "sources": [
+    "https://paintedautoparts.com/dodge-trucks-vans-town-country-rear-b-cover-prm-w-lwr-lid-119-wb-exhaust-on-left-wo-chr-mldg-w-sensr-w-stow-oem-5139123aa-2005-2007.html",
+    "https://www.revemoto.com/collections/dodge-caravan-painted-bumpers?page=2",
+    "https://paintedautoparts.com/dodge-trucks-vans-caravan-rear-b-cover-prm-w-lwr-lid-119-wb-exhaust-on-left-w-chr-mldg-wo-sensr-oem-5139124aa-2005-2007.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~door-front~4717428AD",
+   "q": 1028,
+   "verdict": "unsure",
+   "reason": "An aftermarket door shell (CH1300111/CH1301111) maps to 4717429AD/4717428AD for 2000 Caravan, and a door skin fits 96-00 T&C/Caravan/Voyager. No source names the number for T&C.",
+   "sources": [
+    "https://autoparts.com/c/door-shell/v/dodge-caravan-2000/19758_40_284",
+    "https://www.millsupply.com/859631r.php?p=7724541"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~door-front~4717429AD",
+   "q": 1028,
+   "verdict": "unsure",
+   "reason": "An aftermarket door shell (CH1300111/CH1301111) maps to 4717429AD/4717428AD for 2000 Caravan, and a door skin fits 96-00 T&C/Caravan/Voyager. No source names the number for T&C.",
+   "sources": [
+    "https://autoparts.com/c/door-shell/v/dodge-caravan-2000/19758_40_284",
+    "https://www.millsupply.com/859631r.php?p=7724541"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~door-front~4717716AF",
+   "q": 1029,
+   "verdict": "unsure",
+   "reason": "RS-van front doors are likely common across brands and WBs, but only PartsGiant-network pages list 4717716AF/4717717AF. Suffixes split by year (AC/AD/AE/AF), so verify the number.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~door-front~4717716af"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~door-front~4717717AF",
+   "q": 1029,
+   "verdict": "unsure",
+   "reason": "RS-van front doors are likely common across brands and WBs, but only PartsGiant-network pages list 4717716AF/4717717AF. Suffixes split by year (AC/AD/AE/AF), so verify the number.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~door-front~4717716af"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~fender~4882290AA",
+   "q": 1030,
+   "verdict": "right",
+   "reason": "Partslink CH124x205 family: CH1241205 = 4882290AA for 1996-2000 T&C and CH1240205 for 1996-2000 Caravan. Same NS front fender on all brands.",
+   "sources": [
+    "https://centralalbertapaintsupply.ca/?p=133756",
+    "https://partify.ca/products/dodge-caravan-driver-side-fender-ch1240205"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~fender~4882291AA",
+   "q": 1030,
+   "verdict": "right",
+   "reason": "Partslink CH124x205 family: CH1241205 = 4882290AA for 1996-2000 T&C and CH1240205 for 1996-2000 Caravan. Same NS front fender on all brands.",
+   "sources": [
+    "https://centralalbertapaintsupply.ca/?p=133756",
+    "https://partify.ca/products/dodge-caravan-driver-side-fender-ch1240205"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~hood~4860455AC",
+   "q": 1031,
+   "verdict": "right",
+   "reason": "4860455AC is superseded by 4860455AG = CH1230214, listed for both 2001-2007 Town & Country and 2001-2007 Caravan.",
+   "sources": [
+    "https://paintedautoparts.com/dodge-trucks-vans-town-country-hood-capa-oem-4860455ag-2001-2007.html",
+    "https://paintedautoparts.com/dodge-trucks-vans-caravan-hood-capa-oem-4860455ag-2001-2007.html",
+    "https://centralalbertapaintsupply.ca/?p=133440"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~hood~5139668AA",
+   "q": 1032,
+   "verdict": "right",
+   "reason": "CAPA CH1230195C (OE 5139668AA, replaces 4674627AB) is listed for 1996-2000 Town & Country and 1996-2000 Caravan.",
+   "sources": [
+    "https://www.huntparts.ca/products/1996-2000-chrysler-town-country-hood-capa",
+    "https://centralalbertapaintsupply.ca/?p=133422"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~liftgate~5054266AD",
+   "q": 1033,
+   "verdict": "unsure",
+   "reason": "No independent source for 5054266AD. RT-van liftgates split power vs manual (lift supports and actuators are listed separately), so a trim split is possible.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~liftgate~5054266ad"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~liftgate~5096151AA",
+   "q": 1034,
+   "verdict": "unsure",
+   "reason": "No independent listing for 5096151AA found. A shared NS liftgate is plausible, but power/manual and trim splits are not verified.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~liftgate~5096151aa"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~liftgate~5135945AA",
+   "q": 1035,
+   "verdict": "unsure",
+   "reason": "Only dealer-catalog pages list 5135945AA for T&C/Caravan/GC 2004-06 (AB for 2007). Power vs manual liftgate split not resolved independently.",
+   "sources": [
+    "https://autopartsprime.com/p/dodge-caravan-liftgates",
+    "https://www.finditparts.com/products/5169936/dorman-81021"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~tail-lights~2AME76244A",
+   "q": 1036,
+   "verdict": "right",
+   "reason": "2AME76244A/45A (ex 4576244/45) = CH2801125/CH2800125, listed for 1996-2000 T&C/Caravan/Voyager AND 1998-2003 Durango; Durango shares minivan tail lamps.",
+   "sources": [
+    "https://www.headlightsdepot.com/tail-light-passenger-right-side-assembly-fits-1996-2000-town-country-voyager-grand-voyager-caravan-1998-2003-durango-sku-cs048-u000r.html",
+    "https://www.go-parts.com/ch2801125-1998-2003-dodge-durango-tail-light-rear-lamp-right-passenger-side.html",
+    "https://www.go-parts.com/ch2801125-1996-2000-dodge-caravan-tail-light-rear-lamp-right-passenger-side.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~tail-lights~2AME76245A",
+   "q": 1036,
+   "verdict": "right",
+   "reason": "2AME76244A/45A (ex 4576244/45) = CH2801125/CH2800125, listed for 1996-2000 T&C/Caravan/Voyager AND 1998-2003 Durango; Durango shares minivan tail lamps.",
+   "sources": [
+    "https://www.headlightsdepot.com/tail-light-passenger-right-side-assembly-fits-1996-2000-town-country-voyager-grand-voyager-caravan-1998-2003-durango-sku-cs048-u000r.html",
+    "https://www.go-parts.com/ch2801125-1998-2003-dodge-durango-tail-light-rear-lamp-right-passenger-side.html",
+    "https://www.go-parts.com/ch2801125-1996-2000-dodge-caravan-tail-light-rear-lamp-right-passenger-side.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~tail-lights~4576244",
+   "q": 1037,
+   "verdict": "right",
+   "reason": "4576244 (superseded by 2AME76244A) = CH2801125 RH tail lamp, 1996-2000 T&C/Caravan/Voyager and 1998-2003 Durango.",
+   "sources": [
+    "https://www.headlightsdepot.com/tail-light-passenger-right-side-assembly-fits-1996-2000-town-country-voyager-grand-voyager-caravan-1998-2003-durango-sku-cs048-u000r.html",
+    "https://www.go-parts.com/ch2801125-1998-2003-dodge-durango-tail-light-rear-lamp-right-passenger-side.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~door-front~4894916AK",
+   "q": 1038,
+   "verdict": "unsure",
+   "reason": "Fleet seller lists 4894917 shell for Grand Caravan 08-16 and Ram C/V 12-15 but not T&C (list says may be incomplete); no independent T&C source; 4894916AK unconfirmed.",
+   "sources": [
+    "https://www.wheelerfleet.com/product/frt-l-h-door/39007",
+    "https://www.jeeppartsdeal.com/oem/mopar~door-front~4894917ak"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~door-front~4894917AK",
+   "q": 1038,
+   "verdict": "unsure",
+   "reason": "Fleet seller lists 4894917 shell for Grand Caravan 08-16 and Ram C/V 12-15 but not T&C (list says may be incomplete); no independent T&C source; 4894916AK unconfirmed.",
+   "sources": [
+    "https://www.wheelerfleet.com/product/frt-l-h-door/39007",
+    "https://www.jeeppartsdeal.com/oem/mopar~door-front~4894917ak"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~hood~4589880AG",
+   "q": 1039,
+   "verdict": "unsure",
+   "reason": "Likely RIGHT: 4589880AG = CH1230288, independently listed for 2011-16 T&C and 2011-20 Grand Caravan; Ram C/V (GC cargo) named only by network catalogs.",
+   "sources": [
+    "https://paintedautoparts.com/dodge-trucks-vans-town-country-hood-alum-oem-4589880ag-2011-2016-pl-ch1230288.html",
+    "https://partify.ca/collections/all-products/products/dodge-grand-caravan-hood-ch1230288",
+    "https://www.jeeppartsdeal.com/oem/mopar~hood~4589880ag"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~liftgate~68078085AE",
+   "q": 1040,
+   "verdict": "unsure",
+   "reason": "68078085AE liftgate: only supersession info from retailers, no independent application naming T&C and Ram C/V; power-liftgate/C-V cargo variants not ruled out.",
+   "sources": [
+    "https://www.carparts.com/details/liftgate/mopar/mop68078085ae",
+    "https://www.jeeppartsdeal.com/oem/mopar~liftgate~68078085ae"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~fender~55255030AF",
+   "q": 1041,
+   "verdict": "right",
+   "reason": "55255030AF/31AF = CH1241212/CH1240212, front fenders for 1997-2004 Dakota and 1998-2003 Durango (antenna/emblem-hole variants exist).",
+   "sources": [
+    "https://www.go-parts.com/9803-dodge-durango-fender-right-passenger-p-900171476.html",
+    "https://partify.ca/products/dodge-dakota-durango-capa-certified-driver-side-fender-with-emblem-holes-ch1240212c",
+    "https://paintedautoparts.com/dodge-trucks-vans-dakota-pu-fender-right-oem-55255030af-1997-2004.html",
+    "https://paintedautoparts.com/dodge-trucks-vans-durango-fender-right-oem-55255030af-1998-2003.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~fender~55255031AF",
+   "q": 1041,
+   "verdict": "right",
+   "reason": "55255030AF/31AF = CH1241212/CH1240212, front fenders for 1997-2004 Dakota and 1998-2003 Durango (antenna/emblem-hole variants exist).",
+   "sources": [
+    "https://www.go-parts.com/9803-dodge-durango-fender-right-passenger-p-900171476.html",
+    "https://partify.ca/products/dodge-dakota-durango-capa-certified-driver-side-fender-with-emblem-holes-ch1240212c",
+    "https://paintedautoparts.com/dodge-trucks-vans-dakota-pu-fender-right-oem-55255030af-1997-2004.html",
+    "https://paintedautoparts.com/dodge-trucks-vans-durango-fender-right-oem-55255030af-1998-2003.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~grille~55056092",
+   "q": 1042,
+   "verdict": "right",
+   "reason": "55056092 = CH1200199 (Sherman 329-99) chrome/black grille, listed for 97-04 Dakota and 98-03 Durango. Bolt-on both; finish is trim-dependent (painted CH1200200 on others).",
+   "sources": [
+    "https://www.carid.com/sherman/grille-value-line-mpn-329-99.html",
+    "https://www.go-parts.com/9704-dodge-dakota-grille-assembly-p-319511.html",
+    "https://partifyusa.com/products/dodge-durango-grille-chrome-black-ch1200199"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~headlights~55055110AI",
+   "q": 1043,
+   "verdict": "right",
+   "reason": "55055110AI/11AI = CH2503122/CH2502122 halogen headlamps for 1998-2004 Dakota and 1998-2003 Durango.",
+   "sources": [
+    "https://www.walmart.com/ip/3113801418",
+    "https://www.go-parts.com/ch2503122-1998-2004-dodge-dakota-headlight-assembly-right-passenger-side.html",
+    "https://www.go-parts.com/ch2502122-1998-2004-dodge-dakota-headlight-assembly-left-driver-side.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~headlights~55055111AI",
+   "q": 1043,
+   "verdict": "right",
+   "reason": "55055110AI/11AI = CH2503122/CH2502122 halogen headlamps for 1998-2004 Dakota and 1998-2003 Durango.",
+   "sources": [
+    "https://www.walmart.com/ip/3113801418",
+    "https://www.go-parts.com/ch2503122-1998-2004-dodge-dakota-headlight-assembly-right-passenger-side.html",
+    "https://www.go-parts.com/ch2502122-1998-2004-dodge-dakota-headlight-assembly-left-driver-side.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~hood~55274716AD",
+   "q": 1044,
+   "verdict": "right",
+   "reason": "55274716AD hood listed for 1998-2003 Durango (painted-parts seller) and on recycler 2004 Dakota hoods marked Dakota/Durango; aftermarket CH1230234 is 97-04 Dakota + 98-03 Durango.",
+   "sources": [
+    "https://schramauto.com/parts/DODGE/DAKOTA/QJM126/2004/HOOD/5812251",
+    "https://paintedautoparts.com/dodge-trucks-vans-durango-hood-oem-55274716ad-1998-2003.html",
+    "https://partify.ca/products/1997-2004-dodge-dakota-durango-hood-replacement-design-ch1230234"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~bumper-rear~F4UZ-17906-C",
+   "q": 1045,
+   "verdict": "unsure",
+   "reason": "Econoline 1992-2014 body shared, but no independent source names F4UZ-17906-C; rear bumpers split by sensor/finish options and number superseded (7C2Z-17906-F/H).",
+   "sources": [
+    "https://www.go-parts.com/9202-ford-e-150-econoline-rear-bumper-assembly-p-900271710.html",
+    "https://www.fordpartsgiant.com/oem-2006-ford-e_250-bumper.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~liftgate~F2UZ-1540010-A",
+   "q": 1046,
+   "verdict": "unsure",
+   "reason": "Same 1992-2014 Econoline rear-door body, but no independent source; A is 'less window opening' and later superseded (9C2Z-1540010-C/D), glass vs solid door options split.",
+   "sources": [
+    "https://www.fordpartsdeal.com/oem/ford~tailgate-and-hinge-assy~f2uz-1540010-a",
+    "https://fordpartsgiant.com/parts/ford-door-asy-rear_9c2z-1540010-c.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~liftgate~F2UZ-1540010-B",
+   "q": 1046,
+   "verdict": "unsure",
+   "reason": "Same 1992-2014 Econoline rear-door body, but no independent source; A is 'less window opening' and later superseded (9C2Z-1540010-C/D), glass vs solid door options split.",
+   "sources": [
+    "https://www.fordpartsdeal.com/oem/ford~tailgate-and-hinge-assy~f2uz-1540010-a",
+    "https://fordpartsgiant.com/parts/ford-door-asy-rear_9c2z-1540010-c.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~bumper-front~BA1Z-17D957-APTM",
+   "q": 1047,
+   "verdict": "wrong",
+   "reason": "BA1Z-17D957 covers are MKX fascias; 2011-14 Edge uses its own BT4Z-17D957 covers (upper BPTM = Partslink FO1014107, lower APTM/CPTM FO1015110/111). Catalog roll-up.",
+   "sources": [
+    "https://paintedautoparts.com/ford-trucks-vans-edge-front-bumper-cover-primed-upper-capa-oem-bt4z17d957bptm-2011-2014-pl-fo1014107c.html",
+    "https://paintedautoparts.com/ford-trucks-vans-edge-front-bumper-cover-lower-prm-oem-bt4z17d957cptm-2011-2014-pl-fo1015111.html",
+    "https://www.go-parts.com/1115-lincoln-mkx-front-bumper-cover-upper-p-900211307.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~bumper-front~BA1Z-17D957-BPTM",
+   "q": 1047,
+   "verdict": "wrong",
+   "reason": "BA1Z-17D957 covers are MKX fascias; 2011-14 Edge uses its own BT4Z-17D957 covers (upper BPTM = Partslink FO1014107, lower APTM/CPTM FO1015110/111). Catalog roll-up.",
+   "sources": [
+    "https://paintedautoparts.com/ford-trucks-vans-edge-front-bumper-cover-primed-upper-capa-oem-bt4z17d957bptm-2011-2014-pl-fo1014107c.html",
+    "https://paintedautoparts.com/ford-trucks-vans-edge-front-bumper-cover-lower-prm-oem-bt4z17d957cptm-2011-2014-pl-fo1015111.html",
+    "https://www.go-parts.com/1115-lincoln-mkx-front-bumper-cover-upper-p-900211307.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~bumper-rear~BT4Z-17906-A",
+   "q": 1048,
+   "verdict": "right",
+   "reason": "BT4Z-17906-A is the rear steel reinforcement; Go-Parts lists OEM BT4Z17906A for Edge 2007-14 and MKX 2007-15, salvage yards list it off 2013/2014 MKX. ACP = certified variant.",
+   "sources": [
+    "https://www.go-parts.com/0715-lincoln-mkx-rear-bumper-reinforcement-p-338969.html",
+    "https://www.morrisrose.com/parts/LINCOLN/MKX/D8034/2014/BUMPER_REIN_REAR/908372",
+    "https://www.go-parts.com/0714-ford-edge-rear-bumper-reinforcement-p-338968.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~bumper-rear~BT4Z-17906-ACP",
+   "q": 1048,
+   "verdict": "right",
+   "reason": "BT4Z-17906-A is the rear steel reinforcement; Go-Parts lists OEM BT4Z17906A for Edge 2007-14 and MKX 2007-15, salvage yards list it off 2013/2014 MKX. ACP = certified variant.",
+   "sources": [
+    "https://www.go-parts.com/0715-lincoln-mkx-rear-bumper-reinforcement-p-338969.html",
+    "https://www.morrisrose.com/parts/LINCOLN/MKX/D8034/2014/BUMPER_REIN_REAR/908372",
+    "https://www.go-parts.com/0714-ford-edge-rear-bumper-reinforcement-p-338968.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~door-front~BT4Z-7820124-A",
+   "q": 1049,
+   "verdict": "unsure",
+   "reason": "Edge/MKX 2011-14 doors are likely shared (BT4Z numbers listed for both), but only eBay/seller listings and network catalogs name them; no independent catalog confirmation.",
+   "sources": [
+    "https://www.ebay.de/itm/356057202653",
+    "https://www.go-parts.com/garage/door-interior-trim-panel-ford-edge-lincoln-mkx-2007-2018"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~door-front~BT4Z-7820125-A",
+   "q": 1049,
+   "verdict": "unsure",
+   "reason": "Edge/MKX 2011-14 doors are likely shared (BT4Z numbers listed for both), but only eBay/seller listings and network catalogs name them; no independent catalog confirmation.",
+   "sources": [
+    "https://www.ebay.de/itm/356057202653",
+    "https://www.go-parts.com/garage/door-interior-trim-panel-ford-edge-lincoln-mkx-2007-2018"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~door-front~BT4Z-7820125-B",
+   "q": 1049,
+   "verdict": "unsure",
+   "reason": "Edge/MKX 2011-14 doors are likely shared (BT4Z numbers listed for both), but only eBay/seller listings and network catalogs name them; no independent catalog confirmation.",
+   "sources": [
+    "https://www.ebay.de/itm/356057202653",
+    "https://www.go-parts.com/garage/door-interior-trim-panel-ford-edge-lincoln-mkx-2007-2018"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~door-rear~BT4Z-7824630-A",
+   "q": 1050,
+   "verdict": "unsure",
+   "reason": "Rear door shell BT4Z-7824630-A sold as 'Edge and MKX 2011-2015' only by an eBay seller; no independent catalog. Likely shared but unconfirmed.",
+   "sources": [
+    "https://www.ebay.de/itm/356057202653"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~door-rear~BT4Z-7824631-A",
+   "q": 1050,
+   "verdict": "unsure",
+   "reason": "Rear door shell BT4Z-7824630-A sold as 'Edge and MKX 2011-2015' only by an eBay seller; no independent catalog. Likely shared but unconfirmed.",
+   "sources": [
+    "https://www.ebay.de/itm/356057202653"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~grille~BA1Z-8200-A",
+   "q": 1051,
+   "verdict": "wrong",
+   "reason": "BA1Z-8200-A/B are the right/left halves of the Lincoln MKX split grille (ford.com lists it as Lincoln); 2013 Edge has a different one-piece Ford grille. Physical difference.",
+   "sources": [
+    "https://www.ford.com/product/front-grille-p4000114749",
+    "https://www.go-parts.com/1115-lincoln-mkx-grille-assy-p-900209693.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~grille~BA1Z-8200-B",
+   "q": 1051,
+   "verdict": "wrong",
+   "reason": "BA1Z-8200-A/B are the right/left halves of the Lincoln MKX split grille (ford.com lists it as Lincoln); 2013 Edge has a different one-piece Ford grille. Physical difference.",
+   "sources": [
+    "https://www.ford.com/product/front-grille-p4000114749",
+    "https://www.go-parts.com/1115-lincoln-mkx-grille-assy-p-900209693.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~door-front~8L8Z-7820125-A",
+   "q": 1052,
+   "verdict": "unsure",
+   "reason": "Mariner page lists 8L8Z-7820125-A (less keypad) beside Mariner-coded 8E6Z doors with keypad; no independent source, and keypad/no-keypad split varies by trim.",
+   "sources": [
+    "https://www.fordpartsgiant.com/parts-list/2008-mercury-mariner-gas/body_and_paint/front_doors_hinges_weatherstrips.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~door-rear~8L8Z-7824630-A",
+   "q": 1053,
+   "verdict": "unsure",
+   "reason": "2008 Mariner catalog page shows only the 8L8Z rear doors, and Dorman lists rear-door hardware for both, but no independent source names the door shell for the Mariner.",
+   "sources": [
+    "https://www.fordpartsgiant.com/parts-list/2008-mercury-mariner-gas/body_and_paint/rear_doors_hinges_weatherstrips.html",
+    "https://www.fordpartsgiant.com/parts/ford-door-assy-rear-less-hinges_8l8z-7824631-a.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~door-rear~8L8Z-7824631-A",
+   "q": 1053,
+   "verdict": "unsure",
+   "reason": "2008 Mariner catalog page shows only the 8L8Z rear doors, and Dorman lists rear-door hardware for both, but no independent source names the door shell for the Mariner.",
+   "sources": [
+    "https://www.fordpartsgiant.com/parts-list/2008-mercury-mariner-gas/body_and_paint/rear_doors_hinges_weatherstrips.html",
+    "https://www.fordpartsgiant.com/parts/ford-door-assy-rear-less-hinges_8l8z-7824631-a.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~liftgate~8L8Z-7840010-A",
+   "q": 1054,
+   "verdict": "unsure",
+   "reason": "Mariner page lists only 8L8Z-7840010-A gate shell, but Mariner has its own liftgate trim/appliqué; no independent source names the shell for both.",
+   "sources": [
+    "https://www.fordpartsgiant.com/parts-list/2008-mercury-mariner-gas/body_and_paint/luggage_compartment_door.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~bumper-front~XL3Z-17757-AA",
+   "q": 1055,
+   "verdict": "right",
+   "reason": "XL3Z-17757-AA chrome front bar: Painted Auto Parts lists it for 1999-2002 Expedition; Partslink FO1002356 listed for Expedition 99-02 and F-150 99-03. AACP = certified copy.",
+   "sources": [
+    "https://paintedautoparts.com/ford-trucks-vans-expedition-front-bumper-chrome-oem-xl3z17757aa-1999-2002.html",
+    "https://www.truckid.com/replace/front-bumper-standard-line-mpn-fo1002236.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~bumper-front~XL3Z-17757-AACP",
+   "q": 1055,
+   "verdict": "right",
+   "reason": "XL3Z-17757-AA chrome front bar: Painted Auto Parts lists it for 1999-2002 Expedition; Partslink FO1002356 listed for Expedition 99-02 and F-150 99-03. AACP = certified copy.",
+   "sources": [
+    "https://paintedautoparts.com/ford-trucks-vans-expedition-front-bumper-chrome-oem-xl3z17757aa-1999-2002.html",
+    "https://www.truckid.com/replace/front-bumper-standard-line-mpn-fo1002236.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~hood~F65Z-16612-AL",
+   "q": 1056,
+   "verdict": "unsure",
+   "reason": "F65Z-16612-AL (FO1230174) fits 97-03 F-150 and 97-02 Expedition, but 1997 F-250 was sold as both new-body light duty and old-body F-250 HD; only the LD takes this hood.",
+   "sources": [
+    "https://paintedautoparts.com/ford-trucks-vans-expedition-hood-steel-oem-f65z16612al-1997-2002.html",
+    "https://centralalbertapaintsupply.ca/product/fo1230174c-hood-1997-2003-ford-f-series-light-duty-pickup-f65z16612al",
+    "https://www.tractorsupply.com/tsc/product/husky-liners-hood-protector-1997-2002-ford-expedition-1997-2003-ford-f-150-1997-1999-ford-f-250"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~bumper-front~2L1Z-17757-BA",
+   "q": 1057,
+   "verdict": "right",
+   "reason": "2L1Z-17757-BA is the front impact bar; Go-Parts lists OEM 2L1Z17757BA for 2003-06 Expedition and Partslink FO1006241 covers 2003-06 Expedition and Navigator. BACP = certified.",
+   "sources": [
+    "https://partify.ca/products/ford-expedition-lincoln-navigator-front-bumper-reinforcement-fo1006241",
+    "https://www.go-parts.com/0714-ford-expedition-front-bumper-reinforcement-p-900172567.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~bumper-front~2L1Z-17757-BACP",
+   "q": 1057,
+   "verdict": "right",
+   "reason": "2L1Z-17757-BA is the front impact bar; Go-Parts lists OEM 2L1Z17757BA for 2003-06 Expedition and Partslink FO1006241 covers 2003-06 Expedition and Navigator. BACP = certified.",
+   "sources": [
+    "https://partify.ca/products/ford-expedition-lincoln-navigator-front-bumper-reinforcement-fo1006241",
+    "https://www.go-parts.com/0714-ford-expedition-front-bumper-reinforcement-p-900172567.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~bumper-front~7L1Z-17757-A",
+   "q": 1058,
+   "verdict": "right",
+   "reason": "7L1Z-17757-A front impact bar superseded by CL1Z-17757-B; Go-Parts lists that for Expedition and Navigator 2007-17, Partslink FO1006250 covers both 2007-14.",
+   "sources": [
+    "https://partify.ca/products/ford-expedition-lincoln-navigator-front-bumper-reinforcement-fo1006250",
+    "https://www.go-parts.com/lincoln-navigator-bumper-reinforcement.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~bumper-rear~2L1Z-17906-BA",
+   "q": 1059,
+   "verdict": "unsure",
+   "reason": "Rear reinforcement listed for Exp/Nav, but the 2005 Navigator page ties 2L1Z-17906-BA to heavy-duty trailer tow, 8/03-11/04 only; tow-package split, no independent source.",
+   "sources": [
+    "https://fordpartsgiant.com/parts-list/2005-lincoln-navigator/body_and_paint/rear_bumper.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~bumper-rear~7L1Z-17906-A",
+   "q": 1060,
+   "verdict": "unsure",
+   "reason": "Rear rebars split by wheelbase and tow package: ford.com shows 7L1Z17906C = regular wagon w/ HD tow, 7L1Z17906B = extended wagon. YardScout can't tell EL/L or tow pkg apart.",
+   "sources": [
+    "https://www.ford.com/product/rear-bumper-assembly-p4000056119",
+    "https://www.ford.com/product/rear-bumper-assembly-p4000135531"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~bumper-rear~7L1Z-17906-B",
+   "q": 1060,
+   "verdict": "unsure",
+   "reason": "Rear rebars split by wheelbase and tow package: ford.com shows 7L1Z17906C = regular wagon w/ HD tow, 7L1Z17906B = extended wagon. YardScout can't tell EL/L or tow pkg apart.",
+   "sources": [
+    "https://www.ford.com/product/rear-bumper-assembly-p4000056119",
+    "https://www.ford.com/product/rear-bumper-assembly-p4000135531"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~bumper-rear~7L1Z-17906-C",
+   "q": 1060,
+   "verdict": "unsure",
+   "reason": "Rear rebars split by wheelbase and tow package: ford.com shows 7L1Z17906C = regular wagon w/ HD tow, 7L1Z17906B = extended wagon. YardScout can't tell EL/L or tow pkg apart.",
+   "sources": [
+    "https://www.ford.com/product/rear-bumper-assembly-p4000056119",
+    "https://www.ford.com/product/rear-bumper-assembly-p4000135531"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~bumper-rear~7L1Z-17906-D",
+   "q": 1060,
+   "verdict": "unsure",
+   "reason": "Rear rebars split by wheelbase and tow package: ford.com shows 7L1Z17906C = regular wagon w/ HD tow, 7L1Z17906B = extended wagon. YardScout can't tell EL/L or tow pkg apart.",
+   "sources": [
+    "https://www.ford.com/product/rear-bumper-assembly-p4000056119",
+    "https://www.ford.com/product/rear-bumper-assembly-p4000135531"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~door-rear~7L1Z-4024630-A",
+   "q": 1061,
+   "verdict": "unsure",
+   "reason": "Wheelbase split: 7L1Z-78246xx = Regular Wagon, 7L1Z-40246xx = Extended Wagon (Expedition EL/Navigator L). Shared across brands per catalog only; no independent source.",
+   "sources": [
+    "https://www.fordpartsgiant.com/parts-list/2007-lincoln-navigator/body_and_paint/rear_doors_hinges_weatherstrips.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~door-rear~7L1Z-4024631-A",
+   "q": 1061,
+   "verdict": "unsure",
+   "reason": "Wheelbase split: 7L1Z-78246xx = Regular Wagon, 7L1Z-40246xx = Extended Wagon (Expedition EL/Navigator L). Shared across brands per catalog only; no independent source.",
+   "sources": [
+    "https://www.fordpartsgiant.com/parts-list/2007-lincoln-navigator/body_and_paint/rear_doors_hinges_weatherstrips.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~door-rear~7L1Z-7824630-A",
+   "q": 1061,
+   "verdict": "unsure",
+   "reason": "Wheelbase split: 7L1Z-78246xx = Regular Wagon, 7L1Z-40246xx = Extended Wagon (Expedition EL/Navigator L). Shared across brands per catalog only; no independent source.",
+   "sources": [
+    "https://www.fordpartsgiant.com/parts-list/2007-lincoln-navigator/body_and_paint/rear_doors_hinges_weatherstrips.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~door-rear~7L1Z-7824631-A",
+   "q": 1061,
+   "verdict": "unsure",
+   "reason": "Wheelbase split: 7L1Z-78246xx = Regular Wagon, 7L1Z-40246xx = Extended Wagon (Expedition EL/Navigator L). Shared across brands per catalog only; no independent source.",
+   "sources": [
+    "https://www.fordpartsgiant.com/parts-list/2007-lincoln-navigator/body_and_paint/rear_doors_hinges_weatherstrips.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~fender~7L1Z-16005-A",
+   "q": 1062,
+   "verdict": "unsure",
+   "reason": "Fits both, but some Expedition trims need the version with wheel-molding holes; trim not distinguishable. (was agent RIGHT)",
+   "sources": [
+    "https://paintedautoparts.com/lincoln-navigator-fender-right-w-o-wheel-mldg-oem-fl1z16005a-2007-2014.html",
+    "https://paintedautoparts.com/ford-trucks-vans-expedition-fender-right-wo-wheel-mldg-oem-fl1z16005a-2007-2014.html",
+    "https://www.go-parts.com/lincoln-navigator-fender.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~fender~7L1Z-16006-A",
+   "q": 1062,
+   "verdict": "unsure",
+   "reason": "Fits both, but some Expedition trims need the version with wheel-molding holes; trim not distinguishable. (was agent RIGHT)",
+   "sources": [
+    "https://paintedautoparts.com/lincoln-navigator-fender-right-w-o-wheel-mldg-oem-fl1z16005a-2007-2014.html",
+    "https://paintedautoparts.com/ford-trucks-vans-expedition-fender-right-wo-wheel-mldg-oem-fl1z16005a-2007-2014.html",
+    "https://www.go-parts.com/lincoln-navigator-fender.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~tail-lights~F87Z-13404-AB",
+   "q": 1063,
+   "verdict": "right",
+   "reason": "F87Z-13404/13405-AC (AB superseded, ACCP certified) = Partslink FO2801120 etc., sold for 1998-2001 Explorer 4-door and Mountaineer. Not 2001 Explorer Sport.",
+   "sources": [
+    "https://www.go-parts.com/fo2801120-1998-2001-mercury-mountaineer-tail-light-rear-lamp-right-passenger-side.html",
+    "https://www.walmart.com/ip/5681963013",
+    "https://www.walmart.com/ip/5084556262"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~tail-lights~F87Z-13404-AC",
+   "q": 1063,
+   "verdict": "right",
+   "reason": "F87Z-13404/13405-AC (AB superseded, ACCP certified) = Partslink FO2801120 etc., sold for 1998-2001 Explorer 4-door and Mountaineer. Not 2001 Explorer Sport.",
+   "sources": [
+    "https://www.go-parts.com/fo2801120-1998-2001-mercury-mountaineer-tail-light-rear-lamp-right-passenger-side.html",
+    "https://www.walmart.com/ip/5681963013",
+    "https://www.walmart.com/ip/5084556262"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~tail-lights~F87Z-13404-ACCP",
+   "q": 1063,
+   "verdict": "right",
+   "reason": "F87Z-13404/13405-AC (AB superseded, ACCP certified) = Partslink FO2801120 etc., sold for 1998-2001 Explorer 4-door and Mountaineer. Not 2001 Explorer Sport.",
+   "sources": [
+    "https://www.go-parts.com/fo2801120-1998-2001-mercury-mountaineer-tail-light-rear-lamp-right-passenger-side.html",
+    "https://www.walmart.com/ip/5681963013",
+    "https://www.walmart.com/ip/5084556262"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~tail-lights~F87Z-13405-AB",
+   "q": 1063,
+   "verdict": "right",
+   "reason": "F87Z-13404/13405-AC (AB superseded, ACCP certified) = Partslink FO2801120 etc., sold for 1998-2001 Explorer 4-door and Mountaineer. Not 2001 Explorer Sport.",
+   "sources": [
+    "https://www.go-parts.com/fo2801120-1998-2001-mercury-mountaineer-tail-light-rear-lamp-right-passenger-side.html",
+    "https://www.walmart.com/ip/5681963013",
+    "https://www.walmart.com/ip/5084556262"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~tail-lights~F87Z-13405-AC",
+   "q": 1063,
+   "verdict": "right",
+   "reason": "F87Z-13404/13405-AC (AB superseded, ACCP certified) = Partslink FO2801120 etc., sold for 1998-2001 Explorer 4-door and Mountaineer. Not 2001 Explorer Sport.",
+   "sources": [
+    "https://www.go-parts.com/fo2801120-1998-2001-mercury-mountaineer-tail-light-rear-lamp-right-passenger-side.html",
+    "https://www.walmart.com/ip/5681963013",
+    "https://www.walmart.com/ip/5084556262"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~tail-lights~F87Z-13405-ACCP",
+   "q": 1063,
+   "verdict": "right",
+   "reason": "F87Z-13404/13405-AC (AB superseded, ACCP certified) = Partslink FO2801120 etc., sold for 1998-2001 Explorer 4-door and Mountaineer. Not 2001 Explorer Sport.",
+   "sources": [
+    "https://www.go-parts.com/fo2801120-1998-2001-mercury-mountaineer-tail-light-rear-lamp-right-passenger-side.html",
+    "https://www.walmart.com/ip/5681963013",
+    "https://www.walmart.com/ip/5084556262"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~bumper-rear~E7TZ-17906-D",
+   "q": 1064,
+   "verdict": "unsure",
+   "reason": "E7TZ-17906-D rear step bumper is listed for 1987-91 F-series/Bronco by network catalogs only; F-350 dually/chassis-cab and Styleside/Flareside differ. No independent source.",
+   "sources": [
+    "https://fordpartsgiant.com/parts/ford-bumper-asy-rear_e7tz-17906-d.html",
+    "https://fordpartsgiant.com/oem-1990-ford-f_super_duty-bumper.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~bumper-front~5G1Z-17757-AA",
+   "q": 1065,
+   "verdict": "unsure",
+   "reason": "5G1Z-17757-AA front bar shown as replaced by 8G1Z-17757-A (2008 Taurus number) in the network catalog only; no independent Partslink/interchange found for both.",
+   "sources": [
+    "https://www.fordpartsdeal.com/oem/ford~bumper-assembly-front~8g1z-17757-a",
+    "https://www.partrequest.com/auto-parts-detail/does-not-include-bumper-front-bumper-reinforcement-166553690886"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~bumper-front~8A8Z-17757-A",
+   "q": 1066,
+   "verdict": "right",
+   "reason": "8A8Z-17757-A front impact bar superseded by DG1Z-17757-A; Partslink FO1006255 (OEM DG1Z17757A) fits 2009-12 MKS and 2009-19 Flex.",
+   "sources": [
+    "https://partify.ca/products/ford-flex-taurus-lincoln-mks-mkt-capa-certified-front-bumper-reinforcement-fo1006255c",
+    "https://www.fordpartsgiant.com/parts/lincoln-bumper-asy-front_8a8z-17757-a.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~bumper-front~6E5Z-17757-AA",
+   "q": 1067,
+   "verdict": "unsure",
+   "reason": "Sources conflict: one Go-Parts page lists Fusion/Milan only, others add MKZ. (was agent RIGHT)",
+   "sources": [
+    "https://centralalbertapaintsupply.ca/?p=75025",
+    "https://www.go-parts.com/0609-ford-fusion-front-bumper-reinforcement-p-339241.html",
+    "https://www.go-parts.com/0609-lincoln-mkz-front-bumper-reinforcement-p-339242.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~bumper-front~6E5Z-17757-AACP",
+   "q": 1067,
+   "verdict": "unsure",
+   "reason": "Sources conflict: one Go-Parts page lists Fusion/Milan only, others add MKZ. (was agent RIGHT)",
+   "sources": [
+    "https://centralalbertapaintsupply.ca/?p=75025",
+    "https://www.go-parts.com/0609-ford-fusion-front-bumper-reinforcement-p-339241.html",
+    "https://www.go-parts.com/0609-lincoln-mkz-front-bumper-reinforcement-p-339242.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~bumper-rear~6E5Z-17906-AA",
+   "q": 1068,
+   "verdict": "right",
+   "reason": "6E5Z-17906-AA rear impact bar = Partslink FO1106341; Go-Parts lists it for 2006-09 Fusion and 2007-09 MKZ.",
+   "sources": [
+    "https://www.go-parts.com/0609-lincoln-mkz-rear-bumper-reinforcement-p-339058.html",
+    "https://www.go-parts.com/0609-ford-fusion-rear-bumper-reinforcement-p-339057.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~bumper-rear~DG9Z-17906-A",
+   "q": 1069,
+   "verdict": "right",
+   "reason": "DG9Z-17906-A rear impact bar = Partslink FO1106365; Go-Parts lists it for 2013-2020 Fusion and Lincoln MKZ; salvage yards list it off Fusion and MKZ.",
+   "sources": [
+    "https://www.go-parts.com/1316-ford-fusion-rear-bumper-reinforcement-p-339690.html",
+    "https://www.morrisrose.com/parts/LINCOLN/MKZ/BB2138/2015/BUMPER_REIN_REAR/1554953",
+    "https://paintedautoparts.com/ford-fusion-rear-bumper-reinf-capa-oem-dg9z17906a-2013-2016.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~door-front~BE5Z-5420124-A",
+   "q": 1070,
+   "verdict": "unsure",
+   "reason": "BE5Z-5420124/5-A front shells are sold on eBay as 'Fusion 11-12 / MKZ 07-12', but no independent catalog; MKZ also has Lincoln-coded (6H6Z/9H6Z) doors.",
+   "sources": [
+    "https://www.ebay.com/itm/334881368043"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~door-front~BE5Z-5420125-A",
+   "q": 1070,
+   "verdict": "unsure",
+   "reason": "BE5Z-5420124/5-A front shells are sold on eBay as 'Fusion 11-12 / MKZ 07-12', but no independent catalog; MKZ also has Lincoln-coded (6H6Z/9H6Z) doors.",
+   "sources": [
+    "https://www.ebay.com/itm/334881368043"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~door-front~BE5Z-5420125-B",
+   "q": 1070,
+   "verdict": "unsure",
+   "reason": "BE5Z-5420124/5-A front shells are sold on eBay as 'Fusion 11-12 / MKZ 07-12', but no independent catalog; MKZ also has Lincoln-coded (6H6Z/9H6Z) doors.",
+   "sources": [
+    "https://www.ebay.com/itm/334881368043"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~door-rear~BE5Z-5424630-A",
+   "q": 1071,
+   "verdict": "unsure",
+   "reason": "BE5Z-5424630/1-A rear shells: Fusion/MKZ sharing plausible but only network catalogs/sellers name them for both.",
+   "sources": [
+    "https://www.fordpartsgiant.com/parts/ford-door-front-rear_be5z-5420125-b.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~door-rear~BE5Z-5424631-A",
+   "q": 1071,
+   "verdict": "unsure",
+   "reason": "BE5Z-5424630/1-A rear shells: Fusion/MKZ sharing plausible but only network catalogs/sellers name them for both.",
+   "sources": [
+    "https://www.fordpartsgiant.com/parts/ford-door-front-rear_be5z-5420125-b.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~bumper-front~AE5Z-17757-A",
+   "q": 1072,
+   "verdict": "right",
+   "reason": "AE5Z-17757-A front impact bar = Partslink FO1006256; Go-Parts lists it for 2010-12 Fusion, MKZ and Milan; Central Alberta lists it for Milan 2010-11.",
+   "sources": [
+    "https://www.go-parts.com/1012-lincoln-mkz-front-bumper-reinforcement-p-338878.html",
+    "https://centralalbertapaintsupply.ca/?p=75029",
+    "https://www.go-parts.com/1012-ford-fusion-front-bumper-reinforcement-p-338876.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~bumper-front~AE5Z-17757-ACP",
+   "q": 1072,
+   "verdict": "right",
+   "reason": "AE5Z-17757-A front impact bar = Partslink FO1006256; Go-Parts lists it for 2010-12 Fusion, MKZ and Milan; Central Alberta lists it for Milan 2010-11.",
+   "sources": [
+    "https://www.go-parts.com/1012-lincoln-mkz-front-bumper-reinforcement-p-338878.html",
+    "https://centralalbertapaintsupply.ca/?p=75029",
+    "https://www.go-parts.com/1012-ford-fusion-front-bumper-reinforcement-p-338876.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~bumper-rear~AE5Z-17906-A",
+   "q": 1073,
+   "verdict": "right",
+   "reason": "AE5Z-17906-A rear impact bar = Partslink FO1106351; Go-Parts lists it for 2010-12 MKZ and Fusion, Central Alberta for MKZ 2010-12. ACP = certified copy.",
+   "sources": [
+    "https://www.go-parts.com/1012-lincoln-mkz-rear-bumper-reinforcement-p-338906.html",
+    "https://centralalbertapaintsupply.ca/?p=309911",
+    "https://www.go-parts.com/1012-ford-fusion-rear-bumper-reinforcement-p-338904.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~bumper-rear~AE5Z-17906-ACP",
+   "q": 1073,
+   "verdict": "right",
+   "reason": "AE5Z-17906-A rear impact bar = Partslink FO1106351; Go-Parts lists it for 2010-12 MKZ and Fusion, Central Alberta for MKZ 2010-12. ACP = certified copy.",
+   "sources": [
+    "https://www.go-parts.com/1012-lincoln-mkz-rear-bumper-reinforcement-p-338906.html",
+    "https://centralalbertapaintsupply.ca/?p=309911",
+    "https://www.go-parts.com/1012-ford-fusion-rear-bumper-reinforcement-p-338904.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~door-front~9E5Z-5420125-C",
+   "q": 1074,
+   "verdict": "unsure",
+   "reason": "A salvage-yard 2008 Milan front door lists 9E5Z5420125C, but a 2010 Milan door lists other numbers; MKZ 2010-11 fitment is only in the network catalog.",
+   "sources": [
+    "https://www.autopartsearch.com/catalog-6/itemdetail/2009_mercury_milan/IL32-197234",
+    "https://www.autopartsearch.com/catalog-6/itemdetail/2009_mercury_milan/IL32-489798"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~fender~AE5Z-16005-A",
+   "q": 1075,
+   "verdict": "right",
+   "reason": "AE5Z-16005-A/16006-A (Partslink FO1241274/FO1240274) are listed by Painted Auto Parts for both 2010-12 Fusion and 2010-11 Milan.",
+   "sources": [
+    "https://paintedautoparts.com/ford-fusion-fender-right-passenger-side-capa-oem-ae5z16005a-2010-2012-pl-fo1241274c.html",
+    "https://paintedautoparts.com/mercury-milan-fender-right-passenger-side-capa-oem-ae5z16005a-2010-2011-pl-fo1241274c.html",
+    "https://auto-bodyparts.com/mercury-milan-hybrid-fender-lefront-driver-side-capa-oem-ae5z16006a-2010-2011-pl-fo1240274c.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~fender~AE5Z-16006-A",
+   "q": 1075,
+   "verdict": "right",
+   "reason": "AE5Z-16005-A/16006-A (Partslink FO1241274/FO1240274) are listed by Painted Auto Parts for both 2010-12 Fusion and 2010-11 Milan.",
+   "sources": [
+    "https://paintedautoparts.com/ford-fusion-fender-right-passenger-side-capa-oem-ae5z16005a-2010-2012-pl-fo1241274c.html",
+    "https://paintedautoparts.com/mercury-milan-fender-right-passenger-side-capa-oem-ae5z16005a-2010-2011-pl-fo1241274c.html",
+    "https://auto-bodyparts.com/mercury-milan-hybrid-fender-lefront-driver-side-capa-oem-ae5z16006a-2010-2011-pl-fo1240274c.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~bumper-rear~AG1Z-17906-A",
+   "q": 1076,
+   "verdict": "unsure",
+   "reason": "AG1Z-17906-A replaces MKS 8A5Z-17906-A; Taurus/MKS shared bar from 7/5/11 is BG1Z17906A (FO1106368). No independent source names AG1Z for 2011 Taurus; build-date split.",
+   "sources": [
+    "https://partify.ca/products/ford-police-interceptor-sedan-taurus-sho-lincoln-mks-rear-bumper-reinforcement-from-7-5-11-fo1106368",
+    "https://www.fordpartsgiant.com/parts/lincoln-bumper-asy-rear_ag1z-17906-a.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "gm~headlights~16526225",
+   "q": 1077,
+   "verdict": "right",
+   "reason": "1998-2004 Jimmy/Sonoma GMC headlamps: 16526225/26 with fog, 16526227/28 (Partslink GM2502174) without fog; both trucks listed",
+   "sources": [
+    "https://www.go-parts.com/gm2502174-1998-2004-gmc-sonoma-headlight-assembly-left-driver-side.html",
+    "https://www.everydayautoparts.com/products/1221-0028l",
+    "https://www.gmpartsnow.com/oem-parts/gm-driver-side-headlamp-combination-assembly-16526225"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "gm~headlights~16526226",
+   "q": 1077,
+   "verdict": "right",
+   "reason": "1998-2004 Jimmy/Sonoma GMC headlamps: 16526225/26 with fog, 16526227/28 (Partslink GM2502174) without fog; both trucks listed",
+   "sources": [
+    "https://www.go-parts.com/gm2502174-1998-2004-gmc-sonoma-headlight-assembly-left-driver-side.html",
+    "https://www.everydayautoparts.com/products/1221-0028l",
+    "https://www.gmpartsnow.com/oem-parts/gm-driver-side-headlamp-combination-assembly-16526225"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "gm~headlights~16526227",
+   "q": 1077,
+   "verdict": "right",
+   "reason": "1998-2004 Jimmy/Sonoma GMC headlamps: 16526225/26 with fog, 16526227/28 (Partslink GM2502174) without fog; both trucks listed",
+   "sources": [
+    "https://www.go-parts.com/gm2502174-1998-2004-gmc-sonoma-headlight-assembly-left-driver-side.html",
+    "https://www.everydayautoparts.com/products/1221-0028l",
+    "https://www.gmpartsnow.com/oem-parts/gm-driver-side-headlamp-combination-assembly-16526225"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "gm~headlights~16526228",
+   "q": 1077,
+   "verdict": "right",
+   "reason": "1998-2004 Jimmy/Sonoma GMC headlamps: 16526225/26 with fog, 16526227/28 (Partslink GM2502174) without fog; both trucks listed",
+   "sources": [
+    "https://www.go-parts.com/gm2502174-1998-2004-gmc-sonoma-headlight-assembly-left-driver-side.html",
+    "https://www.everydayautoparts.com/products/1221-0028l",
+    "https://www.gmpartsnow.com/oem-parts/gm-driver-side-headlamp-combination-assembly-16526225"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~door-front~6H6Z-5420124-AA",
+   "q": 1078,
+   "verdict": "unsure",
+   "reason": "6H6Z-5420124-AA is a Lincoln (Zephyr/MKZ)-coded front door; that a 2010 Milan takes it comes only from the network catalog. No independent confirmation.",
+   "sources": [
+    "https://www.fordpartsgiant.com/parts-list/2008-ford-fusion/body_and_paint/front_doors_hinges_weatherstrips.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~door-front~9E5Z-5420125-B",
+   "q": 1079,
+   "verdict": "unsure",
+   "reason": "9E5Z-5420125-B for MKZ 2010-11 and Milan 2010: only the network catalog names both; the 2010 Milan salvage listing shows different door numbers.",
+   "sources": [
+    "https://www.autopartsearch.com/catalog-6/itemdetail/2009_mercury_milan/IL32-489798"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~door-rear~9E5Z-5424630-A",
+   "q": 1080,
+   "verdict": "unsure",
+   "reason": "9E5Z-5424630/1-A rear shells for MKZ 2010-11 and Milan 2010: plausibly shared CD3 doors, but no independent source names them for both.",
+   "sources": [
+    "https://www.fordpartsgiant.com/parts-list/2010-mercury-milan/body_and_paint/rear_doors_hinges_weatherstrips.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~door-rear~9E5Z-5424631-A",
+   "q": 1080,
+   "verdict": "unsure",
+   "reason": "9E5Z-5424630/1-A rear shells for MKZ 2010-11 and Milan 2010: plausibly shared CD3 doors, but no independent source names them for both.",
+   "sources": [
+    "https://www.fordpartsgiant.com/parts-list/2010-mercury-milan/body_and_paint/rear_doors_hinges_weatherstrips.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "ford~bumper-front~YW1Z-17757-AA",
+   "q": 1081,
+   "verdict": "unsure",
+   "reason": "YW1Z-17757-AA is the 98-02 Panther front impact bar; Partslink FO1006213 covers Crown Vic/Town Car/Grand Marquis 98-02, but no source ties that to YW1Z. Likely RIGHT.",
+   "sources": [
+    "https://partify.ca/fr/products/ford-crown-victoria-lincoln-town-car-mercury-grand-marquis-front-bumper-reinforcement-fo1006213",
+    "https://www.fordpartsgiant.com/parts/mercury-bumper-asy-front_yw1z-17757-aa.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mb~bumper-front~204-880-38-40-9999",
+   "q": 1082,
+   "verdict": "wrong",
+   "reason": "Note 'Without AMG, With Lamp Washer' = Luxury styling; C350 2011 came only as Sport with AMG aprons",
+   "sources": [
+    "https://www.mbpartsgiant.com/parts-list/2011-mercedes_benz-c300/body-hardware/bumper-components-front",
+    "https://edmunds.com/mercedes-benz/c-class/2011/review"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mb~bumper-front~204-885-00-25-9999",
+   "q": 1082,
+   "verdict": "wrong",
+   "reason": "Note 'Without AMG, Without Lamp Wash' = Luxury styling; not on Sport-only C350",
+   "sources": [
+    "https://www.mbpartsgiant.com/parts-list/2011-mercedes_benz-c300/body-hardware/bumper-components-front",
+    "https://edmunds.com/mercedes-benz/c-class/2011/review"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mb~bumper-front~204-885-76-25-9999",
+   "q": 1082,
+   "verdict": "unsure",
+   "reason": "'With AMG, With Lamp Washer' plausibly fits C300 Sport and C350, but no independent source names the number",
+   "sources": [
+    "https://www.mbpartsgiant.com/parts-list/2011-mercedes_benz-c300/body-hardware/bumper-components-front"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mb~bumper-rear~211-880-15-83",
+   "q": 1083,
+   "verdict": "unsure",
+   "reason": "Both covers are WAGON-only (notes 'Wagon, Without AMG' / 'Wagon, With AMG'); E350/E500 sedans differ; split by body and AMG pkg; no independent source",
+   "sources": [
+    "https://www.mbpartsgiant.com/parts-list/2006-mercedes_benz-e350/body-hardware/bumper-components-rear"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mb~bumper-rear~211-885-14-25",
+   "q": 1083,
+   "verdict": "unsure",
+   "reason": "Both covers are WAGON-only (notes 'Wagon, Without AMG' / 'Wagon, With AMG'); E350/E500 sedans differ; split by body and AMG pkg; no independent source",
+   "sources": [
+    "https://www.mbpartsgiant.com/parts-list/2006-mercedes_benz-e350/body-hardware/bumper-components-rear"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mb~liftgate~211-740-03-05-28",
+   "q": 1084,
+   "verdict": "unsure",
+   "reason": "W211 wagon liftgate; E350 and E500 4MATIC wagons existed, but sedans have none (body split) and no independent source names 211-740-03-05-28",
+   "sources": [
+    "https://www.mbpartsgiant.com/parts-list/2006-mercedes_benz-e350/body-hardware/lift-gate"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mb~bumper-front~220-880-03-40",
+   "q": 1085,
+   "verdict": "unsure",
+   "reason": "Catalog splits W220 front covers by Sport Package (220-885-03-25) and lamp washer (220-880-02-40 vs 03-40); no independent source for S430+S500",
+   "sources": [
+    "https://www.mbpartsgiant.com/parts-list/2001-mercedes_benz-s500/body-hardware/bumper-components-front"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mb~bumper-front~220-885-03-25",
+   "q": 1085,
+   "verdict": "unsure",
+   "reason": "Catalog splits W220 front covers by Sport Package (220-885-03-25) and lamp washer (220-880-02-40 vs 03-40); no independent source for S430+S500",
+   "sources": [
+    "https://www.mbpartsgiant.com/parts-list/2001-mercedes_benz-s500/body-hardware/bumper-components-front"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mb~bumper-rear~220-885-05-25",
+   "q": 1086,
+   "verdict": "unsure",
+   "reason": "Catalog note 'S430, S500, With Sport Package': option-only cover; no independent source found naming 220-885-05-25",
+   "sources": [
+    "https://www.mbpartsgiant.com/parts-list/2001-mercedes_benz-s500/body-hardware/bumper-components-rear"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~door-front~68144728AF",
+   "q": 1087,
+   "verdict": "unsure",
+   "reason": "Mopar eStore lists 68144728AF on Ram 2500 pages, and listings say 09-23 1500/2500. The door is cab-specific (reg/crew vs quad/mega notes), and YardScout can't tell cab types apart.",
+   "sources": [
+    "https://store.mopar.com/oem-parts/mopar-front-door-right-68144728af",
+    "https://www.partrequest.com/auto-parts-detail/passenger-right-front-door-68144728ae-fits-09-23-ra-404814531383"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~door-front~68144729AF",
+   "q": 1088,
+   "verdict": "unsure",
+   "reason": "Mopar eStore lists 68144729AF on 2014-2022 Ram 2500 pages; the 2019+ HD kept the DS-style cab. The door is cab-specific (reg/crew), so it may not fit a quad or mega cab.",
+   "sources": [
+    "https://store.mopar.com/oem-parts/mopar-front-door-left-68144729af",
+    "https://store.mopar.com/v-2022-ram-2500--tradesman--6-7l-l6-diesel/doors-door-mirrors-and-related-parts--front-door",
+    "https://www.ebay.de/itm/376081653033"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~door-front~68534364AA",
+   "q": 1088,
+   "verdict": "unsure",
+   "reason": "New unsided DOOR-FRONT number. The catalog lists 2011-18 1500, 1500 Classic, and 2011-22 2500/3500; no independent source, and cab type is unknown.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~door-front~68534364aa"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~door-front~68534365AA",
+   "q": 1088,
+   "verdict": "unsure",
+   "reason": "Same as 68534364AA: new unsided number, catalog-only, cab type unknown.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~door-front~68534364aa"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~door-rear~4589872AE",
+   "q": 1089,
+   "verdict": "unsure",
+   "reason": "Rear door shells are cab-specific. 1500 is quad or crew; 2011 2500 is crew or mega. 4589872/3 is probably crew-cab only, and YardScout can't tell the cab.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~door-rear~4589872ae",
+    "https://www.ramforum.com/threads/interchangeable-body-parts.198284/post-2774917"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~door-rear~4589873AE",
+   "q": 1089,
+   "verdict": "unsure",
+   "reason": "Rear door shells are cab-specific. 1500 is quad or crew; 2011 2500 is crew or mega. 4589872/3 is probably crew-cab only, and YardScout can't tell the cab.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/oem/mopar~door-rear~4589872ae",
+    "https://www.ramforum.com/threads/interchangeable-body-parts.198284/post-2774917"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~headlights~2AME77409A",
+   "q": 1090,
+   "verdict": "unsure",
+   "reason": "2AME-prefixed number; no independent source found for it on either model.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/parts-select/2012-ram-1500-headlight"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~headlights~2AME77410A",
+   "q": 1090,
+   "verdict": "unsure",
+   "reason": "2AME-prefixed number; no independent source found for it on either model.",
+   "sources": [
+    "https://www.jeeppartsdeal.com/parts-select/2012-ram-1500-headlight"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~headlights~55277409AE",
+   "q": 1090,
+   "verdict": "right",
+   "reason": "AmericanTrucks lists the AG/AI number (superseding AE) for 09-12 Ram 1500 and 10-12 Ram 2500. Quad vs non-quad is a visible option.",
+   "sources": [
+    "https://www.americantrucks.com/mopar-ram1500-headlight-assembly-55277410ag.html",
+    "https://www.americantrucks.com/mopar-ram2500-headlight-assembly-55277410ag.html",
+    "https://www.americantrucks.com/mopar-ram1500-headlight-lens-housing-68001485ai.html",
+    "https://www.americantrucks.com/mopar-ram2500-headlight-lens-housing-68001485ai.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~headlights~55277409AG",
+   "q": 1090,
+   "verdict": "right",
+   "reason": "AmericanTrucks lists the AG/AI number (superseding AE) for 09-12 Ram 1500 and 10-12 Ram 2500. Quad vs non-quad is a visible option.",
+   "sources": [
+    "https://www.americantrucks.com/mopar-ram1500-headlight-assembly-55277410ag.html",
+    "https://www.americantrucks.com/mopar-ram2500-headlight-assembly-55277410ag.html",
+    "https://www.americantrucks.com/mopar-ram1500-headlight-lens-housing-68001485ai.html",
+    "https://www.americantrucks.com/mopar-ram2500-headlight-lens-housing-68001485ai.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~headlights~55277410AE",
+   "q": 1090,
+   "verdict": "right",
+   "reason": "AmericanTrucks lists the AG/AI number (superseding AE) for 09-12 Ram 1500 and 10-12 Ram 2500. Quad vs non-quad is a visible option.",
+   "sources": [
+    "https://www.americantrucks.com/mopar-ram1500-headlight-assembly-55277410ag.html",
+    "https://www.americantrucks.com/mopar-ram2500-headlight-assembly-55277410ag.html",
+    "https://www.americantrucks.com/mopar-ram1500-headlight-lens-housing-68001485ai.html",
+    "https://www.americantrucks.com/mopar-ram2500-headlight-lens-housing-68001485ai.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~headlights~55277410AG",
+   "q": 1090,
+   "verdict": "right",
+   "reason": "AmericanTrucks lists the AG/AI number (superseding AE) for 09-12 Ram 1500 and 10-12 Ram 2500. Quad vs non-quad is a visible option.",
+   "sources": [
+    "https://www.americantrucks.com/mopar-ram1500-headlight-assembly-55277410ag.html",
+    "https://www.americantrucks.com/mopar-ram2500-headlight-assembly-55277410ag.html",
+    "https://www.americantrucks.com/mopar-ram1500-headlight-lens-housing-68001485ai.html",
+    "https://www.americantrucks.com/mopar-ram2500-headlight-lens-housing-68001485ai.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~headlights~68001484AE",
+   "q": 1090,
+   "verdict": "right",
+   "reason": "AmericanTrucks lists the AG/AI number (superseding AE) for 09-12 Ram 1500 and 10-12 Ram 2500. Quad vs non-quad is a visible option.",
+   "sources": [
+    "https://www.americantrucks.com/mopar-ram1500-headlight-assembly-55277410ag.html",
+    "https://www.americantrucks.com/mopar-ram2500-headlight-assembly-55277410ag.html",
+    "https://www.americantrucks.com/mopar-ram1500-headlight-lens-housing-68001485ai.html",
+    "https://www.americantrucks.com/mopar-ram2500-headlight-lens-housing-68001485ai.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~headlights~68001484AI",
+   "q": 1090,
+   "verdict": "right",
+   "reason": "AmericanTrucks lists the AG/AI number (superseding AE) for 09-12 Ram 1500 and 10-12 Ram 2500. Quad vs non-quad is a visible option.",
+   "sources": [
+    "https://www.americantrucks.com/mopar-ram1500-headlight-assembly-55277410ag.html",
+    "https://www.americantrucks.com/mopar-ram2500-headlight-assembly-55277410ag.html",
+    "https://www.americantrucks.com/mopar-ram1500-headlight-lens-housing-68001485ai.html",
+    "https://www.americantrucks.com/mopar-ram2500-headlight-lens-housing-68001485ai.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~headlights~68001485AE",
+   "q": 1090,
+   "verdict": "right",
+   "reason": "AmericanTrucks lists the AG/AI number (superseding AE) for 09-12 Ram 1500 and 10-12 Ram 2500. Quad vs non-quad is a visible option.",
+   "sources": [
+    "https://www.americantrucks.com/mopar-ram1500-headlight-assembly-55277410ag.html",
+    "https://www.americantrucks.com/mopar-ram2500-headlight-assembly-55277410ag.html",
+    "https://www.americantrucks.com/mopar-ram1500-headlight-lens-housing-68001485ai.html",
+    "https://www.americantrucks.com/mopar-ram2500-headlight-lens-housing-68001485ai.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~headlights~68001485AI",
+   "q": 1090,
+   "verdict": "right",
+   "reason": "AmericanTrucks lists the AG/AI number (superseding AE) for 09-12 Ram 1500 and 10-12 Ram 2500. Quad vs non-quad is a visible option.",
+   "sources": [
+    "https://www.americantrucks.com/mopar-ram1500-headlight-assembly-55277410ag.html",
+    "https://www.americantrucks.com/mopar-ram2500-headlight-assembly-55277410ag.html",
+    "https://www.americantrucks.com/mopar-ram1500-headlight-lens-housing-68001485ai.html",
+    "https://www.americantrucks.com/mopar-ram2500-headlight-lens-housing-68001485ai.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~tail-lights~55277414AB",
+   "q": 1091,
+   "verdict": "right",
+   "reason": "AmericanTrucks lists 55277414AF on both its Ram 1500 and Ram 2500 sites (AF supersedes AB). Halogen lamps only; LED lamps differ (option).",
+   "sources": [
+    "https://americantrucks.com/mopar-ram1500-tail-light-housing-55277414af.html",
+    "https://www.americantrucks.com/mopar-ram2500-tail-light-housing-55277414af.html",
+    "https://www.americantrucks.com/mopar-ram2500-tail-light-housing-55277415af.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~tail-lights~55277414AF",
+   "q": 1091,
+   "verdict": "right",
+   "reason": "AmericanTrucks lists 55277414AF on both its Ram 1500 and Ram 2500 sites (AF supersedes AB). Halogen lamps only; LED lamps differ (option).",
+   "sources": [
+    "https://americantrucks.com/mopar-ram1500-tail-light-housing-55277414af.html",
+    "https://www.americantrucks.com/mopar-ram2500-tail-light-housing-55277414af.html",
+    "https://www.americantrucks.com/mopar-ram2500-tail-light-housing-55277415af.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~tail-lights~55277415AB",
+   "q": 1091,
+   "verdict": "right",
+   "reason": "AmericanTrucks lists 55277414AF on both its Ram 1500 and Ram 2500 sites (AF supersedes AB). Halogen lamps only; LED lamps differ (option).",
+   "sources": [
+    "https://americantrucks.com/mopar-ram1500-tail-light-housing-55277414af.html",
+    "https://www.americantrucks.com/mopar-ram2500-tail-light-housing-55277414af.html",
+    "https://www.americantrucks.com/mopar-ram2500-tail-light-housing-55277415af.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~tail-lights~55277415AF",
+   "q": 1091,
+   "verdict": "right",
+   "reason": "AmericanTrucks lists 55277414AF on both its Ram 1500 and Ram 2500 sites (AF supersedes AB). Halogen lamps only; LED lamps differ (option).",
+   "sources": [
+    "https://americantrucks.com/mopar-ram1500-tail-light-housing-55277414af.html",
+    "https://www.americantrucks.com/mopar-ram2500-tail-light-housing-55277414af.html",
+    "https://www.americantrucks.com/mopar-ram2500-tail-light-housing-55277415af.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "mopar~tailgate~68105727AR",
+   "q": 1092,
+   "verdict": "right",
+   "reason": "Partify: OEM tailgate shell 68105727AP fits Ram 1500 2009-18, 2500 2010-18, 3500 and 1500 Classic. AR is the current suffix of the same shell.",
+   "sources": [
+    "https://partifyusa.com/products/dodge-ram-1500-1500-classic-2500-3500-oem-tailgate-shell-68105727ap",
+    "https://paintedautoparts.com/dodge-trucks-vans-dodge-pu-r2500-3500-tailgate-capa-oem-68105727ag-2010-2018.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "subaru~door-front~60009FJ0219P",
+   "q": 1093,
+   "verdict": "unsure",
+   "reason": "Doors likely shared (same GP body), but no independent source names 60009FJ0219P; only neighbor 60009FJ0329P seen",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts/subaru-pnl-compl-dr-f-lh~60009fj0329p.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "subaru~door-front~60009FJ0319P",
+   "q": 1094,
+   "verdict": "unsure",
+   "reason": "60009FJ0319P superseded by 60009FJ0329P (network page lists 2012-16 Impreza/2013-15 XV); no independent source",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts/subaru-pnl-compl-dr-f-lh~60009fj0329p.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "subaru~headlights~84001FJ080",
+   "q": 1095,
+   "verdict": "right",
+   "reason": "Partslink SU2503140 / OEM 84001FJ080 sold for 2012-13 Impreza and 2013-14 XV Crosstrek halogen (pre-09/2013 build)",
+   "sources": [
+    "https://www.walmart.com/ip/670349833",
+    "https://www.headlightsdepot.com/sku-320-1123r-ac2.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "subaru~headlights~84001FJ140",
+   "q": 1095,
+   "verdict": "unsure",
+   "reason": "Option code *S.20IL (Limited) only; no independent source names it for the 2013 XV",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2012-subaru-impreza-sedan/body_electronics/head_lamp.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "subaru~headlights~84001FJ090",
+   "q": 1096,
+   "verdict": "right",
+   "reason": "LH mate of 84001FJ080 (Partslink SU2502140), listed for 2012-13 Impreza and 2013-14 XV Crosstrek halogen",
+   "sources": [
+    "https://www.headlightsdepot.com/sku-sr051-b101r.html",
+    "https://www.walmart.com/ip/439948405"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "subaru~headlights~84001FJ150",
+   "q": 1096,
+   "verdict": "unsure",
+   "reason": "Option code *S.20IL (Limited) only; no independent source for XV",
+   "sources": [
+    "https://www.subarupartsdeal.com/parts-list/2012-subaru-impreza-sedan/body_electronics/head_lamp.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "subaru~hood~57229FJ0009P",
+   "q": 1097,
+   "verdict": "right",
+   "reason": "57229FJ0009P (Partslink SU1230143) sold as the hood for 2012-2016 Impreza and 2013-2017 XV Crosstrek (not WRX)",
+   "sources": [
+    "https://paintedautoparts.com/subaru-xv-crosstrek-crosstrek-hood-oem-57229fj0009p-2013-2017.html",
+    "https://www.go-parts.com/1215-subaru-impreza-hood-p-334368.html",
+    "https://www.go-parts.com/1315-subaru-xv-crosstrek-hood-p-334369.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "subaru~liftgate~60809FJ0109P",
+   "q": 1098,
+   "verdict": "unsure",
+   "reason": "Hatch rear gate; salvage listings suggest Impreza/XV share it, but no independent page read names 60809FJ0109P for both. Impreza sedan has none",
+   "sources": [
+    "https://www.morrisrose.com/parts/SUBARU/XV_CROSSTREK/8789BI/2013/DECKLID_TAILGATE/1002556710"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "subaru~tail-lights~84912FJ060",
+   "q": 1099,
+   "verdict": "unsure",
+   "reason": "Fits Impreza 5-door and XV only (hatch); Impreza sedan lamp differs. Needs the body gate. (was agent RIGHT)",
+   "sources": [
+    "https://www.go-parts.com/12-14-subaru-impreza-tail-light-right-passenger-p-260751.html",
+    "https://www.go-parts.com/subaru-xv-crosstrek-tail-lights.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "subaru~tail-lights~84912FJ070",
+   "q": 1100,
+   "verdict": "unsure",
+   "reason": "Fits Impreza 5-door and XV only (hatch); Impreza sedan lamp differs. Needs the body gate. (was agent RIGHT)",
+   "sources": [
+    "https://www.go-parts.com/subaru-xv-crosstrek-tail-lights.html",
+    "https://www.go-parts.com/12-14-subaru-impreza-tail-light-right-passenger-p-260751.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "vag~headlights~1J0-941-017-B",
+   "q": 1101,
+   "verdict": "right",
+   "reason": "Partslink VW2502113 (OEM 1J0941017B) listed for 1999-2002 Golf and Cabrio LH; same Mk4 lamp",
+   "sources": [
+    "https://www.go-parts.com/vw2502113-1999-2002-volkswagen-golf-headlight-assembly-left-driver-side.html",
+    "https://www.nationalautobody.com/auto_parts/volkswagen/cabrio/headlights/cabrio_99_02_lt_headlamp_assy_composite/p1290_1"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "vag~headlights~1J0-941-017-C",
+   "q": 1101,
+   "verdict": "unsure",
+   "reason": "VW Classic Parts marks 1J0941017C 'Mexico models only'; US 2003 Golf fit not confirmed",
+   "sources": [
+    "https://volkswagen-classic-parts.com/catalog/en_uk/part/1J0941017C"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "vag~headlights~1J0-941-018-B",
+   "q": 1101,
+   "verdict": "right",
+   "reason": "RH mate (Partslink VW2503113) for Golf and Cabrio 1999-2002",
+   "sources": [
+    "https://www.go-parts.com/vw2502113-1999-2002-volkswagen-golf-headlight-assembly-left-driver-side.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "vag~headlights~1J0-941-018-C",
+   "q": 1101,
+   "verdict": "unsure",
+   "reason": "Retailer snippet: Cabrio to VIN 898000 and Golf Mk4 to VIN 057050 only (early cars); 2003 Golf not covered",
+   "sources": [
+    "https://www.europaparts.com/headlight-assembly-1j0941018c.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "vag~bumper-front~1HM-807-217-D-GRU",
+   "q": 1102,
+   "verdict": "right",
+   "reason": "oemwolf (VW EPC data) lists 1HM807217D GRU for USA Golf and Jetta 1993-1999 (and Cabrio)",
+   "sources": [
+    "https://oemwolf.com/oem-parts/1hm807217dgru.html",
+    "https://oemwolf.com/oem-parts/1hm807217d.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "vag~fender~1HM-821-021-D",
+   "q": 1103,
+   "verdict": "right",
+   "reason": "oemwolf lists 1HM821021D, 1HM821021E and 1HM821022B for USA Golf and Jetta 1993-1998 (1999 to VIN 1H-X-245000)",
+   "sources": [
+    "https://oemwolf.com/oem-parts/1hm821021d.html",
+    "https://oemwolf.com/oem-parts/1hm821021e.html",
+    "https://oemwolf.com/oem-parts/1hm821022b.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "vag~fender~1HM-821-021-E",
+   "q": 1103,
+   "verdict": "right",
+   "reason": "oemwolf lists 1HM821021D, 1HM821021E and 1HM821022B for USA Golf and Jetta 1993-1998 (1999 to VIN 1H-X-245000)",
+   "sources": [
+    "https://oemwolf.com/oem-parts/1hm821021d.html",
+    "https://oemwolf.com/oem-parts/1hm821021e.html",
+    "https://oemwolf.com/oem-parts/1hm821022b.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "vag~fender~1HM-821-022-B",
+   "q": 1103,
+   "verdict": "right",
+   "reason": "oemwolf lists 1HM821021D, 1HM821021E and 1HM821022B for USA Golf and Jetta 1993-1998 (1999 to VIN 1H-X-245000)",
+   "sources": [
+    "https://oemwolf.com/oem-parts/1hm821021d.html",
+    "https://oemwolf.com/oem-parts/1hm821021e.html",
+    "https://oemwolf.com/oem-parts/1hm821022b.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "vag~headlights~1K6-941-005-S",
+   "q": 1104,
+   "verdict": "right",
+   "reason": "Mk5 halogen 1K6941005S/006S and bi-xenon 1K6941039B/040B sold for 2006-09 GTI and 2005-10 Jetta",
+   "sources": [
+    "https://www.vividracing.com/tyc-genera-headlight-assembly-1k6941005-p-151680889.html",
+    "https://urotuning.com/products/headlight-assembly-oe-halogen-left-vw-mk5-golf-jetta-1k6941005s-tyc",
+    "https://parkautomotorsports.ca/products/hld-headlight-assembly-front-left-vw-mk5-golf-jetta-1k6941039b",
+    "https://www.headlightsdepot.com/2005-2010-volkswagen-gti-golf-jetta-06-10-rabbit-hid-driver-left-headlight-assembly-sku-341-1124l-ush3.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "vag~headlights~1K6-941-006-S",
+   "q": 1104,
+   "verdict": "right",
+   "reason": "Mk5 halogen 1K6941005S/006S and bi-xenon 1K6941039B/040B sold for 2006-09 GTI and 2005-10 Jetta",
+   "sources": [
+    "https://www.vividracing.com/tyc-genera-headlight-assembly-1k6941005-p-151680889.html",
+    "https://urotuning.com/products/headlight-assembly-oe-halogen-left-vw-mk5-golf-jetta-1k6941005s-tyc",
+    "https://parkautomotorsports.ca/products/hld-headlight-assembly-front-left-vw-mk5-golf-jetta-1k6941039b",
+    "https://www.headlightsdepot.com/2005-2010-volkswagen-gti-golf-jetta-06-10-rabbit-hid-driver-left-headlight-assembly-sku-341-1124l-ush3.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "vag~headlights~1K6-941-039-B",
+   "q": 1104,
+   "verdict": "right",
+   "reason": "Mk5 halogen 1K6941005S/006S and bi-xenon 1K6941039B/040B sold for 2006-09 GTI and 2005-10 Jetta",
+   "sources": [
+    "https://www.vividracing.com/tyc-genera-headlight-assembly-1k6941005-p-151680889.html",
+    "https://urotuning.com/products/headlight-assembly-oe-halogen-left-vw-mk5-golf-jetta-1k6941005s-tyc",
+    "https://parkautomotorsports.ca/products/hld-headlight-assembly-front-left-vw-mk5-golf-jetta-1k6941039b",
+    "https://www.headlightsdepot.com/2005-2010-volkswagen-gti-golf-jetta-06-10-rabbit-hid-driver-left-headlight-assembly-sku-341-1124l-ush3.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "vag~headlights~1K6-941-040-B",
+   "q": 1104,
+   "verdict": "right",
+   "reason": "Mk5 halogen 1K6941005S/006S and bi-xenon 1K6941039B/040B sold for 2006-09 GTI and 2005-10 Jetta",
+   "sources": [
+    "https://www.vividracing.com/tyc-genera-headlight-assembly-1k6941005-p-151680889.html",
+    "https://urotuning.com/products/headlight-assembly-oe-halogen-left-vw-mk5-golf-jetta-1k6941005s-tyc",
+    "https://parkautomotorsports.ca/products/hld-headlight-assembly-front-left-vw-mk5-golf-jetta-1k6941039b",
+    "https://www.headlightsdepot.com/2005-2010-volkswagen-gti-golf-jetta-06-10-rabbit-hid-driver-left-headlight-assembly-sku-341-1124l-ush3.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "vag~hood~1K0-823-031-J",
+   "q": 1105,
+   "verdict": "unsure",
+   "reason": "Rests on supersession data with contradictory dates (1K0823031L -> J). (was agent RIGHT)",
+   "sources": [
+    "https://oemwolf.com/oem-parts/1k0823031l.html",
+    "https://oemwolf.com/oem-parts/1k0823031j.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  },
+  {
+   "id": "vag~hood~5K0-823-031-G",
+   "q": 1106,
+   "verdict": "unsure",
+   "reason": "5K0823031G fits Golf/GTI and Jetta SportWagen 2010-14 only, NOT the Jetta sedan (seller note); 2014 Jetta split sedan vs SportWagen",
+   "sources": [
+    "https://paintedautoparts.com/volkswagen-jetta-wg-hood-oem-5k0823031g-2010-2014.html",
+    "https://www.walmart.com/ip/5087031971",
+    "https://www.go-parts.com/1014-volkswagen-jetta-hood-p-334585.html"
+   ],
+   "at": "2026-11-09T02:36:34Z"
+  }
+ ],
+ "subaru_spot_check": {
+  "bar": "0 WRONG in a 20-group sample of the 97 re-curated Subaru Likely groups",
+  "result": {
+   "RIGHT": 15,
+   "WRONG": 4,
+   "UNSURE": 1
+  },
+  "items": [
+   {
+    "id": "oem:subaru:window-regulator:FR:8320b0ed7c",
+    "pn": [
+     "61041AL00A"
+    ],
+    "apps": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015",
+    "verdict": "RIGHT",
+    "reason": "Subaru's own catalog lists 61041AL00A FR reg+motor for 2015 Outback and 2015-17 Legacy; diagram option column covers S and OBK trims (AL02A/AL04A on other trims); front door glass shared.",
+    "sources": [
+     "https://parts.subaru.com/p/Subaru_2015_Outback/Regulator-and-Motor-Right--Front/60016542/61041AL00A.html",
+     "https://parts.subaru.com/p/Subaru_2016_Legacy/Window-Regulator-Regulator-and-Motor-Right--Front/60016542/61041AL00A.html",
+     "https://www.subarupartsdeal.com/parts-list/2015-subaru-outback/door/door_parts_glass_regulator.html"
+    ]
+   },
+   {
+    "id": "oem:subaru:window-regulator:RR:c61223d269",
+    "pn": [
+     "61042AL00A"
+    ],
+    "apps": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015",
+    "verdict": "RIGHT",
+    "reason": "A-Premium APWR1333 interchange 61042AL00A for 2015-2019 Legacy and Outback (rear right); diagram lists it with no option restriction.",
+    "sources": [
+     "https://a-premium.com/product/Rear-Passenger-Power-Window-Regulator-Assembly-with-Motor-for-2015-Subaru-Legacy-v4U816zdIH",
+     "https://parts.coloradosubaru.com/oem-parts/subaru-window-regulator-61042al00a",
+     "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/door/door_parts_glass_regulator.html"
+    ]
+   },
+   {
+    "id": "oem:subaru:window-regulator:FL+FR:d3510d5ccf",
+    "pn": [
+     "61188AE00A"
+    ],
+    "apps": "Subaru Legacy 2001-2003;Subaru Outback 2003-2003",
+    "verdict": "RIGHT",
+    "reason": "Motor only (superseded by 61188AE00B); Subaru's own catalog lists 00B for 2003 Legacy and 2004 Outback; Cardone interchange lists AE00A/AE00B for Legacy/Outback. No option restriction.",
+    "sources": [
+     "https://parts.subaru.com/p/Subaru_2003_Legacy/Power-Window-Motor-Front/49262223/61188AE00B.html",
+     "https://parts.subaru.com/p/Subaru_2004_Outback/Window-Motor-Motor-Regulator-Front/49262223/61188AE00B.html",
+     "https://www.ebay.com/itm/157998871700"
+    ]
+   },
+   {
+    "id": "oem:subaru:window-regulator:FL+FR+RL+RR+SL+SR:3f26f73028",
+    "pn": [
+     "61188KG000"
+    ],
+    "apps": "Subaru Impreza 2012-2012;Subaru XV Crosstrek 2013-2013",
+    "verdict": "RIGHT",
+    "reason": "Subaru catalog lists 61188KG000 for 2013 Impreza and 2014-16 Crosstrek. CAVEAT: it is the LH 'Type P' motor (RH = 61188KG010), so the all-doors side gate is too broad.",
+    "sources": [
+     "https://parts.subaru.com/p/Subaru_2013_Impreza/Window-Motor-Motor-Type-Regulator-Left--Passenger/49262242/61188KG000.html",
+     "https://parts.subaru.com/p/Subaru_2014_Crosstrek/Window-Motor-Motor-Type-Regulator-Left--Passenger/49262242/61188KG000.html",
+     "https://www.subarupartsdeal.com/parts-list/2013-subaru-xv_crosstrek/door/door_parts_glass_regulator.html"
+    ]
+   },
+   {
+    "id": "oem:subaru:window-regulator:RR:616fb00389",
+    "pn": [
+     "62188AE00A"
+    ],
+    "apps": "Subaru Legacy 2001-2003;Subaru Outback 2003-2003",
+    "verdict": "RIGHT",
+    "reason": "Rear-right motor only (superseded by 62188AE00B), used on BE/BH Legacy, Outback and Baja; eBay OEM listing 00-04 Legacy Outback; no option restriction on diagram.",
+    "sources": [
+     "https://www.ebay.co.uk/itm/224013164701",
+     "https://parts.colonialsubaruct.com/p/Subaru__/Power-Window-Motor-Right--Rear/49263064/62188AE00A.html",
+     "https://parts.subaru.com/p/subaru_2006_Baja/Power-Window-Motor-Right--Rear/49263065/62188AE00B.html"
+    ]
+   },
+   {
+    "id": "oem:subaru:window-regulator:RR:c4cbff57cb",
+    "pn": [
+     "62222FJ000"
+    ],
+    "apps": "Subaru Impreza 2012-2012;Subaru XV Crosstrek 2013-2013",
+    "verdict": "RIGHT",
+    "reason": "Subaru catalog lists 62222FJ000 rear-right regulator for Impreza 2012+ and Crosstrek; XV uses the Impreza 5-door body; diagram has no option restriction.",
+    "sources": [
+     "https://parts.subaru.com/p/subaru_2020_Impreza/Window-Regulator-Right--Rear-Regulator-CP-RRHWindow-Regulator/49263216/62222FJ000.html",
+     "https://parts.subaru.com/p/Subaru_2017_Crosstrek/Window-Regulator-Right--Rear-Regulator-CP-RRH/49263216/62222FJ000.html",
+     "https://www.ebay.com/itm/135521077038"
+    ]
+   },
+   {
+    "id": "oem:subaru:climate-control:C:ae988db822",
+    "pn": [
+     "72311AE06A"
+    ],
+    "apps": "Subaru Legacy 2001-2001;Subaru Outback 2001-2001",
+    "verdict": "WRONG",
+    "reason": "Option column for 72311AE06A says only W.OBKLTD.AT (Outback Limited wagon, AT, built 12/99-9/00); plain Legacy uses 72311AE06B/C. Rule: option codes all OBK*/SUS* = Outback only.",
+    "sources": [
+     "https://www.subarupartsdeal.com/parts-list/2001-subaru-legacy/heater_air_conditioner/heater_control.html",
+     "https://www.subarupartsdeal.com/parts-list/2001-subaru-outback/heater_air_conditioner/heater_control.html"
+    ]
+   },
+   {
+    "id": "oem:subaru:climate-control:C:12605c0697",
+    "pn": [
+     "72311AE08D"
+    ],
+    "apps": "Subaru Legacy 2002-2004;Subaru Outback 2003-2003",
+    "verdict": "WRONG",
+    "reason": "72311AE08D note 'FOR CANADA'; options S.SUS6+W.OBK6 (Outback H6 sedan/wagon only); USA unit is 72311AE11D. Rules: option codes Outback-only; note names a non-US market.",
+    "sources": [
+     "https://www.subarupartsdeal.com/parts-list/2002-subaru-legacy/heater_air_conditioner/heater_control.html",
+     "https://www.subarupartsdeal.com/parts-list/2004-subaru-legacy/heater_air_conditioner/heater_control.html",
+     "https://www.subarupartsdeal.com/parts-list/2003-subaru-outback/heater_air_conditioner/heater_control.html"
+    ]
+   },
+   {
+    "id": "oem:subaru:climate-control:C:991a451755",
+    "pn": [
+     "72311AL10A"
+    ],
+    "apps": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015",
+    "verdict": "RIGHT",
+    "reason": "Subaru's own 2015 Outback page for 72311AL10A (AUTO) says fits Legacy and Outback; eBay OEM 15-18 Legacy Outback units; shared dash; no option restriction.",
+    "sources": [
+     "https://parts.subaru.com/p/Subaru_2015_Outback/Heater-Control-AUTO/60017732/72311AL10A.html",
+     "https://www.ebay.com/p/9040106701",
+     "https://www.subarupartsdeal.com/parts-list/2015-subaru-legacy/heater_air_conditioner/heater_control.html"
+    ]
+   },
+   {
+    "id": "oem:subaru:climate-control:C:c2cbfc66f7",
+    "pn": [
+     "72311AL20A"
+    ],
+    "apps": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015",
+    "verdict": "RIGHT",
+    "reason": "72311AL20A/20B manual control (no auto temp) listed for Legacy and Outback 2015-19 by aletoparts and Subaru Parts Plus; diagram shows no option restriction.",
+    "sources": [
+     "https://aletoparts.com/detail/climate-control-subaru-legacy-15-19-manual/",
+     "https://aletoparts.com/detail/climate-control-subaru-legacy-15-17-manual/",
+     "https://www.subarupartsplus.com/c/air-conditioning-heat/ac-heater-controls?page=8"
+    ]
+   },
+   {
+    "id": "oem:subaru:climate-control:C:d394abb7da",
+    "pn": [
+     "72311FJ130"
+    ],
+    "apps": "Subaru Impreza 2012-2012;Subaru XV Crosstrek 2013-2013",
+    "verdict": "RIGHT",
+    "reason": "72311FJ130 single-auto control listed for 2012-13 Impreza and 2013 XV Crosstrek (Subaru Direct Wholesale, Subaru catalog); option column: S/W.20IL, W.20SL, XV.20IL.",
+    "sources": [
+     "https://www.subarudirectwholesale.com/oem-parts/subaru-heater-control-72311fj130",
+     "https://parts.subaru.com/p/Subaru_2012_Impreza/HVAC-Temperature-Control-Panel/49281216/72311FJ130.html",
+     "https://www.ebay.com/p/1311312011"
+    ]
+   },
+   {
+    "id": "oem:subaru:gauge-cluster:C:7e5712da13",
+    "pn": [
+     "85002AL00A"
+    ],
+    "apps": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015",
+    "verdict": "RIGHT",
+    "reason": "SubaruParts.com lists 85002AL00A for 2015-16 Legacy and Outback 2.5i without EyeSight; option (S+OBK).25I.CVT. Cluster needs VIN/immobilizer programming.",
+    "sources": [
+     "https://www.subaruparts.com/oem-parts/subaru-cluster-assembly-85002al00a",
+     "https://www.ebay.com/itm/295344334016",
+     "https://www.subarupartsdeal.com/parts-list/2015-subaru-outback/body_electronics/meter.html"
+    ]
+   },
+   {
+    "id": "oem:subaru:gauge-cluster:C:65f100747f",
+    "pn": [
+     "85003AL00A"
+    ],
+    "apps": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015",
+    "verdict": "RIGHT",
+    "reason": "85003AL00A EyeSight cluster, option (S+OBK).(25IPEYE+25ILEYE). Used-part sellers list it from Legacy and Outback; sibling 85002AL01A seen from both. Thinner than others.",
+    "sources": [
+     "https://www.ebay.com/itm/356938845671",
+     "https://www.subaruparts.com/v-2015-subaru-outback--2-5i-limited--2-5l-h4-gas/body--cluster-and-switches",
+     "https://aletoparts.com/detail/instrument-cluster-subaru-outback-15-15-126k/",
+     "https://aletoparts.com/detail/subaru-legacy-15-19-instrument-cluster-center-display/"
+    ]
+   },
+   {
+    "id": "oem:subaru:gauge-cluster:C:82a785367f",
+    "pn": [
+     "85021AG59A"
+    ],
+    "apps": "Subaru Legacy 2005-2005;Subaru Outback 2005-2005",
+    "verdict": "UNSURE",
+    "reason": "Option column S.4AT+W.4AT+WOBK.4AT covers both, but independent evidence names 85021AG59A only for Outback (2.5L 4AT); none for Legacy found.",
+    "sources": [
+     "https://www.subaruparts.com/v-2005-subaru-outback--i--2-5l-h4-gas/body--cluster-and-switches",
+     "https://www.subarupartsdeal.com/parts-list/2005-subaru-legacy/body_electronics/meter.html"
+    ]
+   },
+   {
+    "id": "oem:subaru:gauge-cluster:C:b85217abdb",
+    "pn": [
+     "85021AJ13A"
+    ],
+    "apps": "Subaru Legacy 2011-2011;Subaru Outback 2011-2011",
+    "verdict": "RIGHT",
+    "reason": "85021AJ13A = 2011 2.5i 6MT (LegacyGT list, no OBK tag). RevolutionParts catalogs list it on 2011 Outback and Legacy pages; option OBK.25IP.6MT, S.25I#.6MT.",
+    "sources": [
+     "https://www.subaruparts.com/v-2011-subaru-outback--2-5i-premium--2-5l-h4-gas/electrical--instruments-and-gauges",
+     "https://parts.subaruonlineparts.com/v-2011-subaru-legacy--2-5gt--2-5l-h4-gas/electrical--headlamp-components",
+     "https://www.legacygt.com/topic/142514-usdm-gauge-cluster-pn-master-list/"
+    ]
+   },
+   {
+    "id": "oem:subaru:side-mirrors:R:f766799c2f",
+    "pn": [
+     "91031AE41AFR"
+    ],
+    "apps": "Subaru Legacy 2001-2001;Subaru Outback 2001-2001",
+    "verdict": "WRONG",
+    "reason": "91031AE41AFR (Green Gray M, note C4) option column says only W.OBKLTD.AT, built 12/99-5/01: Outback Limited wagon only. Rule: option codes all OBK* = Outback only.",
+    "sources": [
+     "https://www.subarupartsdeal.com/parts-list/2001-subaru-legacy/outer_accessories/rear_view_mirror.html",
+     "https://www.subarupartsdeal.com/parts-list/2001-subaru-outback/outer_accessories/rear_view_mirror.html"
+    ]
+   },
+   {
+    "id": "oem:subaru:side-mirrors:R:5a926c634c",
+    "pn": [
+     "91031AE43BGA"
+    ],
+    "apps": "Subaru Legacy 2004-2004;Subaru Outback 2004-2004",
+    "verdict": "WRONG",
+    "reason": "91031AE43BGA (Champagne Gold Opal) option column lists only OBK6, SUS6, OBK6S, OBK6LB, OBKLTD, SUSLTD: Outback wagon/sedan only. Rule: option codes all OBK*/SUS* = Outback only.",
+    "sources": [
+     "https://www.subarupartsdeal.com/parts-list/2004-subaru-legacy/outer_accessories/rear_view_mirror.html",
+     "https://www.subarupartsdeal.com/parts-list/2004-subaru-outback/outer_accessories/rear_view_mirror.html"
+    ]
+   },
+   {
+    "id": "oem:subaru:side-mirrors:L:550786a522",
+    "pn": [
+     "91036AL10A"
+    ],
+    "apps": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015",
+    "verdict": "RIGHT",
+    "reason": "91036AL10A (now AL10B) LH mirror, non-heated/no signal, Partslink SU1320141 for 2015-17 Legacy and Outback (to 3/2017 build); option (S+OBK).25I etc.",
+    "sources": [
+     "https://www.ebay.com/p/9021016373",
+     "https://www.amazon.com/Mirror-Compatible-2015-2017-Outback-Paintable/dp/B08HMYDGJ4",
+     "https://parts.subaru.com/p/Subaru_2015_Outback/Door-Mirror-Housing-Door-Mirror-Unit-Rear-View-Mirror-Left-A-Complete-Door-Mirror-Assembly/69874890/91036AL10B.html"
+    ]
+   },
+   {
+    "id": "oem:subaru:side-mirrors:L:1504010c68",
+    "pn": [
+     "91036AL20A"
+    ],
+    "apps": "Subaru Legacy 2015-2015;Subaru Outback 2015-2015",
+    "verdict": "RIGHT",
+    "reason": "91036AL20A (now AL20B) LH heated mirror with signal, no BSD, SU1320142, sold for 2015-17 Legacy and Outback (Quirk, Parts Nation, eBay OEM). Option column covers S+OBK.",
+    "sources": [
+     "https://www.quirkparts.com/oem-parts/subaru-oem-new-2015-2017-subaru-legacy-outback-mirror-left-hand-driver-side-91036al20b-91036al20b",
+     "https://www.ebay.com/itm/192411720289",
+     "https://partsnation.com/door-mirror-compatible-replacement-for-15-17-subaru-legacy-outback-2-5l-premium-only-heated-with-signal-lamp-without-blind-spot-unpainted-left-hand-driver-91036al20b/"
+    ]
+   },
+   {
+    "id": "oem:subaru:side-mirrors:R:94275258a2",
+    "pn": [
+     "91036FJ100"
+    ],
+    "apps": "Subaru Impreza 2012-2012;Subaru XV Crosstrek 2013-2013",
+    "verdict": "RIGHT",
+    "reason": "91036FJ100 (now FJ102) RH mirror, no heat/turn lamp, listed for 2012-14 Impreza and 2013-14 XV Crosstrek. Option: Impreza 20I/20IP, *XV.20IP only (most US XVs are heated).",
+    "sources": [
+     "https://www.subarudirectwholesale.com/oem-parts/subaru-door-mirror-unit-right-hand-91036fj102",
+     "https://parts.allamericansubaru.com/p/Subaru__Crosstrek/Door-Mirror-Unit-Rearview-Mirror-Unit-LHR-Right/70292395/91036FJ102.html",
+     "https://www.subarupartsdeal.com/parts-list/2013-subaru-xv_crosstrek/outer_accessories/rear_view_mirror.html"
+    ]
+   }
+  ]
+ }
+}
