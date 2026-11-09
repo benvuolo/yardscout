@@ -174,3 +174,7 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
   - CR-Z normalizer fix 1cf5dd03. test_model_map stays red on the published inventory's "Cr-Z" until the next scan.
   - You-dot map fix (design/you-dot d9cff7d → sw jh-v173): regression running.
 - ~19:45 UTC owner on Spectra Premium: "no email needed". Hub reading: no outreach, so Spectra stays out. fetch.py's challenge detector is unchanged and the site is not allowlisted, because using it would mean loosening the bot-check stop and accepting their no-reproduction clause. That needs an explicit owner "use Spectra" (rule 2). The aftermarket session is stopping.
+- ~19:47 UTC owner: "use spectra if it doesnt break anything".
+  - Spectra Premium reopened. The site is allowlisted, and the detector exemption is site-scoped and narrow: only the inert reCAPTCHA api.js include on pages that also carry catalog markup. Any real challenge, 403/429/503 or missing body still means a permanent stop. Tests go both ways, and other sites' detection stays unchanged.
+  - Data use is facts only; we publish our own groups.
+  - Ship bar unchanged: §11.4 sample with 0 WRONG plus hub confirmation. Session: session_016ZzJfMnemMEFN88kPnYgxs.
