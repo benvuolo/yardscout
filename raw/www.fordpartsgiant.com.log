@@ -7976,3 +7976,345 @@
 19:43:18 seg done tier=W Mercury Grand Marquis [1972, 1997] seeds=[1997, 1984, 1985] records=7718 errors=47
 19:44:37 seg done tier=W Lincoln Navigator [1998, 2002] seeds=[2000, 1998] records=7722 errors=47
 19:44:37 time budget reached records=7722
+19:44:50 start site=www.fordpartsgiant.com mode=worklist tiers=['A', 'B', 'W'] records=7722 list_lines=3571 year_lines=551 url_index=24294
+19:44:50 seg done tier=A Ford F-150 [1997, 2003] seeds=[2001] records=7722 errors=47
+19:44:50 seg done tier=A Ford F-150 [2004, 2008] seeds=[2004] records=7722 errors=47
+19:44:50 seg done tier=A Ford Focus [2012, 2014] seeds=[2012] records=7722 errors=47
+19:44:50 seg done tier=A Ford Fusion [2010, 2012] seeds=[2012] records=7722 errors=47
+19:44:50 seg done tier=A Ford Edge [2007, 2024] seeds=[2013] records=7722 errors=47
+19:44:50 seg done tier=A Ford Fusion [2013, 2016] seeds=[2014] records=7722 errors=47
+19:44:50 seg done tier=A Ford Escape [2008, 2012] seeds=[2008] records=7722 errors=47
+19:44:50 seg done tier=A Ford Escape [2013, 2016] seeds=[2013] records=7722 errors=47
+19:44:50 seg done tier=A Ford Explorer [2002, 2005] seeds=[2002] records=7722 errors=47
+19:44:50 seg done tier=A Ford Taurus [2000, 2007] seeds=[2003] records=7722 errors=47
+19:44:50 seg done tier=A Ford Expedition [2003, 2006] seeds=[2003] records=7722 errors=47
+19:44:50 seg done tier=A Ford Ranger [1998, 2011] seeds=[2000] records=7722 errors=47
+19:44:50 seg done tier=A Ford Fiesta [1978, 2019] seeds=[2011] records=7722 errors=47
+19:44:50 seg done tier=A Ford Focus [2008, 2011] seeds=[2010] records=7722 errors=47
+19:44:50 seg done tier=A Ford F-150 [2009, 2012] seeds=[2010] records=7722 errors=47
+19:44:50 seg done tier=A Ford Fusion [2006, 2009] seeds=[2008] records=7722 errors=47
+19:44:50 seg done tier=A Ford Focus [2015, 2018] seeds=[2015] records=7722 errors=47
+19:44:50 seg done tier=A Ford Expedition [1997, 2002] seeds=[2000] records=7722 errors=47
+19:44:50 seg done tier=A Ford Explorer [2006, 2010] seeds=[2006] records=7722 errors=47
+19:44:50 seg done tier=A Ford Explorer [1995, 2001] seeds=[1999] records=7722 errors=47
+19:44:50 seg done tier=A Ford Focus [2005, 2007] seeds=[2007] records=7722 errors=47
+19:44:50 seg done tier=A Ford Explorer [2011, 2015] seeds=[2013] records=7722 errors=47
+19:44:50 seg done tier=A Ford Mustang [1999, 2004] seeds=[2000] records=7722 errors=47
+19:44:50 seg done tier=A Mercury Grand Marquis [1998, 2011] seeds=[2000] records=7722 errors=47
+19:44:50 seg done tier=A Ford Expedition [2007, 2017] seeds=[2007] records=7722 errors=47
+19:44:50 seg done tier=A Ford E-250 [1978, 2014] seeds=[2006] records=7722 errors=47
+19:44:50 seg done tier=A Ford E-150 [1969, 2014] seeds=[1999] records=7722 errors=47
+19:44:50 seg done tier=A Ford Escape [2005, 2007] seeds=[2005] records=7722 errors=47
+19:44:50 seg done tier=A Ford Crown Victoria [1998, 2011] seeds=[2008] records=7722 errors=47
+19:44:50 seg done tier=A Ford Focus [2000, 2004] seeds=[2003] records=7722 errors=47
+19:44:50 seg done tier=A Ford Ranger [1993, 1997] seeds=[1997] records=7722 errors=47
+19:44:50 seg done tier=A Ford Mustang [2005, 2009] seeds=[2006] records=7722 errors=47
+19:44:50 seg done tier=A Ford E-350 [1970, 2021] seeds=[2006] records=7722 errors=47
+19:44:50 seg done tier=A Ford F-250 Super Duty [1980, 2024] seeds=[2008] records=7722 errors=47
+19:44:50 seg done tier=A Ford Flex [2009, 2019] seeds=[2009] records=7722 errors=47
+19:44:50 seg done tier=A Ford Escape [2001, 2004] seeds=[2003] records=7722 errors=47
+19:44:50 seg done tier=A Ford F-150 [1992, 1996] seeds=[1995] records=7722 errors=47
+19:44:50 seg done tier=A Ford Explorer Sport Trac [2001, 2017] seeds=[2001] records=7722 errors=47
+19:44:50 seg done tier=A Ford Taurus [2013, 2019] seeds=[2013] records=7722 errors=47
+19:44:50 seg done tier=A Ford Taurus [2010, 2012] seeds=[2011] records=7722 errors=47
+19:44:50 seg done tier=A Ford Five Hundred [2005, 2007] seeds=[2005] records=7722 errors=47
+19:44:50 seg done tier=A Ford F-250 [1962, 1998] seeds=[1997] records=7722 errors=47
+19:44:50 seg done tier=A Lincoln Town Car [2003, 2011] seeds=[2003] records=7722 errors=47
+19:44:50 seg done tier=A Ford F-250 [1999, 2007] seeds=[1999] records=7722 errors=47
+19:44:50 seg done tier=A Ford Escape [2017, 2019] seeds=[2017] records=7722 errors=47
+19:44:50 seg done tier=A Ford F-150 [2013, 2014] seeds=[2013] records=7722 errors=47
+19:44:50 seg done tier=A Mercury Mariner [2005, 2011] seeds=[2008] records=7722 errors=47
+19:44:50 seg done tier=A Lincoln Navigator [2003, 2006] seeds=[2004] records=7722 errors=47
+19:44:50 seg done tier=A Mercury Milan [2006, 2011] seeds=[2010] records=7722 errors=47
+19:44:50 seg done tier=A Ford Mustang [1994, 1998] seeds=[1998] records=7722 errors=47
+19:44:50 seg done tier=A Ford Escort [1983, 2003] seeds=[1998] records=7722 errors=47
+19:44:50 seg done tier=A Ford Ranger [1978, 1992] seeds=[1992] records=7722 errors=47
+19:44:50 seg done tier=A Lincoln Town Car [1998, 2002] seeds=[2000] records=7722 errors=47
+19:44:50 seg done tier=A Lincoln MKX [2007, 2010] seeds=[2007] records=7722 errors=47
+19:44:50 seg done tier=A Ford F-150 [1987, 1991] seeds=[1990] records=7722 errors=47
+19:44:50 seg done tier=A Ford Freestar [2004, 2007] seeds=[2004] records=7722 errors=47
+19:44:50 seg done tier=A Ford Freestyle [2005, 2007] seeds=[2005] records=7722 errors=47
+19:44:50 seg done tier=A Ford F-350 Super Duty [1999, 2021] seeds=[2004] records=7722 errors=47
+19:44:50 seg done tier=A Ford Mustang [2010, 2014] seeds=[2010] records=7722 errors=47
+19:44:50 seg done tier=A Ford Taurus [1996, 1999] seeds=[1999] records=7722 errors=47
+19:44:50 seg done tier=A Ford Transit Connect [2010, 2013] seeds=[2010] records=7722 errors=47
+19:44:50 seg done tier=A Ford Fusion [2017, 2018] seeds=[2017] records=7722 errors=47
+19:44:50 seg done tier=A Lincoln Town Car [1969, 1997] seeds=[1997] records=7722 errors=47
+19:44:50 seg done tier=A Lincoln LS [2000, 2006] seeds=[2005] records=7722 errors=47
+19:44:50 seg done tier=A Ford Windstar [2001, 2003] seeds=[2003] records=7722 errors=47
+19:44:50 seg done tier=A Mercury Sable [2000, 2005] seeds=[2003] records=7722 errors=47
+19:44:50 seg done tier=A Lincoln MKS [2009, 2016] seeds=[2009] records=7722 errors=47
+19:44:50 seg done tier=A Ford Taurus [2008, 2009] seeds=[2008] records=7722 errors=47
+19:44:50 seg done tier=A Mercury Mountaineer [2002, 2005] seeds=[2002] records=7722 errors=47
+19:44:50 seg done tier=A Lincoln MKZ [2010, 2012] seeds=[2012] records=7722 errors=47
+19:44:50 seg done tier=A Lincoln MKZ [1996, 2009] seeds=[2008] records=7722 errors=47
+19:44:50 seg done tier=A Lincoln Navigator [2007, 2016] seeds=[2007] records=7722 errors=47
+19:44:50 seg done tier=A Mercury Grand Marquis [1972, 1997] seeds=[1997] records=7722 errors=47
+19:44:50 seg done tier=A Lincoln Navigator [1998, 2002] seeds=[2000] records=7722 errors=47
+19:44:50 seg done tier=A Ford F-250 [2008, 2016] seeds=[2008] records=7722 errors=47
+19:44:50 seg done tier=A Ford Explorer [1991, 1994] seeds=[1994] records=7722 errors=47
+19:44:50 seg done tier=A Mercury Mountaineer [2006, 2010] seeds=[2007] records=7722 errors=47
+19:44:50 seg done tier=A Ford Fusion Hybrid [2010, 2019] seeds=[2010] records=7722 errors=47
+19:44:50 seg done tier=A Ford F-350 [1960, 1998] seeds=[1990] records=7722 errors=47
+19:44:50 seg done tier=A Ford Thunderbird [1961, 2004] seeds=[1997] records=7722 errors=47
+19:44:50 seg done tier=A Lincoln Continental [1964, 2017] seeds=[2000] records=7722 errors=47
+19:44:50 seg done tier=A Ford F-150 [1966, 1986] seeds=[1986] records=7722 errors=47
+19:44:50 seg done tier=A Ford F-350 [1999, 2007] seeds=[2004] records=7722 errors=47
+19:44:50 seg done tier=A Lincoln MKX [2011, 2015] seeds=[2011] records=7722 errors=47
+19:44:50 seg done tier=A Ford Explorer [2016, 2017] seeds=[2016] records=7722 errors=47
+19:44:50 seg done tier=A Ford Crown Victoria [1982, 1997] seeds=[1997] records=7722 errors=47
+19:44:50 seg done tier=A Lincoln MKZ [2013, 2016] seeds=[2014] records=7722 errors=47
+19:44:50 seg done tier=A Ford Escape Hybrid [2005, 2011] seeds=[2008] records=7722 errors=47
+19:44:50 seg done tier=A Mercury Cougar [1967, 2002] seeds=[1999] records=7722 errors=47
+19:44:50 seg done tier=A Lincoln Aviator [2003, 2020] seeds=[2004] records=7722 errors=47
+19:44:50 seg done tier=A Ford F-150 [2015, 2020] seeds=[2016] records=7722 errors=47
+19:44:50 seg done tier=A Ford Expedition EL [2007, 2017] seeds=[2008] records=7722 errors=47
+19:44:50 seg done tier=A Mercury Montego [1971, 2007] seeds=[2005] records=7722 errors=47
+19:44:50 seg done tier=A Ford Econoline [1963, 2013] seeds=[2006] records=7722 errors=47
+19:44:50 seg done tier=A Ford Excursion [2000, 2005] seeds=[2000] records=7722 errors=47
+19:44:50 seg done tier=A Ford F-150 Heritage [2004, 2011] seeds=[2004] records=7722 errors=47
+19:44:50 seg done tier=A Ford E-350 Super Duty [1999, 2015] seeds=[2006] records=7722 errors=47
+19:44:50 seg done tier=A Mercury Mountaineer [1997, 2001] seeds=[2000] records=7722 errors=47
+19:44:50 seg done tier=A Ford Taurus X [2008, 2009] seeds=[2008] records=7722 errors=47
+19:44:50 seg done tier=A Ford Explorer Sport [2001, 2014] seeds=[2001] records=7722 errors=47
+19:44:50 seg done tier=A Ford C-Max [2013, 2017] seeds=[2013] records=7722 errors=47
+19:44:50 seg done tier=A Ford Windstar [1999, 2000] seeds=[2000] records=7722 errors=47
+19:44:50 seg done tier=A Ford Transit Connect [2014, 2022] seeds=[2015] records=7722 errors=47
+19:44:50 seg done tier=A Ford Fusion [2019, 2024] seeds=[2019] records=7722 errors=47
+19:44:50 seg done tier=A Mercury Villager [1993, 2002] seeds=[1997] records=7722 errors=47
+19:44:50 seg done tier=A Lincoln MKT [2010, 2019] seeds=[2010] records=7722 errors=47
+19:44:50 seg done tier=A Ford Ecosport [2018, 2022] seeds=[2018] records=7722 errors=47
+19:44:50 seg done tier=A Ford Aerostar [1986, 1997] seeds=[1995] records=7722 errors=47
+19:44:50 seg done tier=A Ford Contour [1995, 2000] seeds=[1998] records=7722 errors=47
+19:44:50 seg done tier=A Ford Mustang [1965, 1993] seeds=[1989] records=7722 errors=47
+19:44:50 seg done tier=A Ford Taurus [1992, 1995] seeds=[1995] records=7722 errors=47
+19:44:50 seg done tier=A Ford F-100 [1961, 1986] seeds=[1981] records=7722 errors=47
+19:44:50 seg done tier=B Ford F-150 [1997, 2003] seeds=[2001] records=7722 errors=47
+19:44:50 seg done tier=B Ford F-150 [2004, 2008] seeds=[2004] records=7722 errors=47
+19:44:50 seg done tier=B Ford Focus [2012, 2014] seeds=[2012] records=7722 errors=47
+19:44:50 seg done tier=B Ford Fusion [2010, 2012] seeds=[2012] records=7722 errors=47
+19:44:50 seg done tier=B Ford Edge [2007, 2024] seeds=[2013] records=7722 errors=47
+19:44:50 seg done tier=B Ford Fusion [2013, 2016] seeds=[2014] records=7722 errors=47
+19:44:50 seg done tier=B Ford Escape [2008, 2012] seeds=[2008] records=7722 errors=47
+19:44:50 seg done tier=B Ford Escape [2013, 2016] seeds=[2013] records=7722 errors=47
+19:44:50 seg done tier=B Ford Explorer [2002, 2005] seeds=[2002] records=7722 errors=47
+19:44:50 seg done tier=B Ford Taurus [2000, 2007] seeds=[2003] records=7722 errors=47
+19:44:50 seg done tier=B Ford Expedition [2003, 2006] seeds=[2003] records=7722 errors=47
+19:44:50 seg done tier=B Ford Ranger [1998, 2011] seeds=[2000] records=7722 errors=47
+19:44:50 seg done tier=B Ford Fiesta [1978, 2019] seeds=[2011] records=7722 errors=47
+19:44:50 seg done tier=B Ford Focus [2008, 2011] seeds=[2010] records=7722 errors=47
+19:44:50 seg done tier=B Ford F-150 [2009, 2012] seeds=[2010] records=7722 errors=47
+19:44:50 seg done tier=B Ford Fusion [2006, 2009] seeds=[2008] records=7722 errors=47
+19:44:50 seg done tier=B Ford Focus [2015, 2018] seeds=[2015] records=7722 errors=47
+19:44:50 seg done tier=B Ford Expedition [1997, 2002] seeds=[2000] records=7722 errors=47
+19:44:50 seg done tier=B Ford Explorer [2006, 2010] seeds=[2006] records=7722 errors=47
+19:44:50 seg done tier=B Ford Explorer [1995, 2001] seeds=[1999] records=7722 errors=47
+19:44:50 seg done tier=B Ford Focus [2005, 2007] seeds=[2007] records=7722 errors=47
+19:44:50 seg done tier=B Ford Explorer [2011, 2015] seeds=[2013] records=7722 errors=47
+19:44:50 seg done tier=B Ford Mustang [1999, 2004] seeds=[2000] records=7722 errors=47
+19:44:50 seg done tier=B Mercury Grand Marquis [1998, 2011] seeds=[2000] records=7722 errors=47
+19:44:50 seg done tier=B Ford Expedition [2007, 2017] seeds=[2007] records=7722 errors=47
+19:44:50 seg done tier=B Ford E-250 [1978, 2014] seeds=[2006] records=7722 errors=47
+19:44:50 seg done tier=B Ford E-150 [1969, 2014] seeds=[1999] records=7722 errors=47
+19:44:50 seg done tier=B Ford Escape [2005, 2007] seeds=[2005] records=7722 errors=47
+19:44:50 seg done tier=B Ford Crown Victoria [1998, 2011] seeds=[2008] records=7722 errors=47
+19:44:50 seg done tier=B Ford Focus [2000, 2004] seeds=[2003] records=7722 errors=47
+19:44:50 seg done tier=B Ford Ranger [1993, 1997] seeds=[1997] records=7722 errors=47
+19:44:50 seg done tier=B Ford Mustang [2005, 2009] seeds=[2006] records=7722 errors=47
+19:44:50 seg done tier=B Ford E-350 [1970, 2021] seeds=[2006] records=7722 errors=47
+19:44:50 seg done tier=B Ford F-250 Super Duty [1980, 2024] seeds=[2008] records=7722 errors=47
+19:44:50 seg done tier=B Ford Flex [2009, 2019] seeds=[2009] records=7722 errors=47
+19:44:50 seg done tier=B Ford Escape [2001, 2004] seeds=[2003] records=7722 errors=47
+19:44:50 seg done tier=B Ford F-150 [1992, 1996] seeds=[1995] records=7722 errors=47
+19:44:50 seg done tier=B Ford Explorer Sport Trac [2001, 2017] seeds=[2001] records=7722 errors=47
+19:44:50 seg done tier=B Ford Taurus [2013, 2019] seeds=[2013] records=7722 errors=47
+19:44:50 seg done tier=B Ford Taurus [2010, 2012] seeds=[2011] records=7722 errors=47
+19:44:50 seg done tier=B Ford Five Hundred [2005, 2007] seeds=[2005] records=7722 errors=47
+19:44:50 seg done tier=B Ford F-250 [1962, 1998] seeds=[1997] records=7722 errors=47
+19:44:50 seg done tier=B Lincoln Town Car [2003, 2011] seeds=[2003] records=7722 errors=47
+19:44:50 seg done tier=B Ford F-250 [1999, 2007] seeds=[1999] records=7722 errors=47
+19:44:50 seg done tier=B Ford Escape [2017, 2019] seeds=[2017] records=7722 errors=47
+19:44:50 seg done tier=B Ford F-150 [2013, 2014] seeds=[2013] records=7722 errors=47
+19:44:50 seg done tier=B Mercury Mariner [2005, 2011] seeds=[2008] records=7722 errors=47
+19:44:50 seg done tier=B Lincoln Navigator [2003, 2006] seeds=[2004] records=7722 errors=47
+19:44:50 seg done tier=B Mercury Milan [2006, 2011] seeds=[2010] records=7722 errors=47
+19:44:50 seg done tier=B Ford Mustang [1994, 1998] seeds=[1998] records=7722 errors=47
+19:44:50 seg done tier=B Ford Escort [1983, 2003] seeds=[1998] records=7722 errors=47
+19:44:50 seg done tier=B Ford Ranger [1978, 1992] seeds=[1992] records=7722 errors=47
+19:44:50 seg done tier=B Lincoln Town Car [1998, 2002] seeds=[2000] records=7722 errors=47
+19:44:50 seg done tier=B Lincoln MKX [2007, 2010] seeds=[2007] records=7722 errors=47
+19:44:50 seg done tier=B Ford F-150 [1987, 1991] seeds=[1990] records=7722 errors=47
+19:44:50 seg done tier=B Ford Freestar [2004, 2007] seeds=[2004] records=7722 errors=47
+19:44:50 seg done tier=B Ford Freestyle [2005, 2007] seeds=[2005] records=7722 errors=47
+19:44:50 seg done tier=B Ford F-350 Super Duty [1999, 2021] seeds=[2004] records=7722 errors=47
+19:44:50 seg done tier=B Ford Mustang [2010, 2014] seeds=[2010] records=7722 errors=47
+19:44:50 seg done tier=B Ford Taurus [1996, 1999] seeds=[1999] records=7722 errors=47
+19:44:50 seg done tier=B Ford Transit Connect [2010, 2013] seeds=[2010] records=7722 errors=47
+19:44:50 seg done tier=B Ford Fusion [2017, 2018] seeds=[2017] records=7722 errors=47
+19:44:50 seg done tier=B Lincoln Town Car [1969, 1997] seeds=[1997] records=7722 errors=47
+19:44:50 seg done tier=B Lincoln LS [2000, 2006] seeds=[2005] records=7722 errors=47
+19:44:50 seg done tier=B Ford Windstar [2001, 2003] seeds=[2003] records=7722 errors=47
+19:44:50 seg done tier=B Mercury Sable [2000, 2005] seeds=[2003] records=7722 errors=47
+19:44:50 seg done tier=B Lincoln MKS [2009, 2016] seeds=[2009] records=7722 errors=47
+19:44:50 seg done tier=B Ford Taurus [2008, 2009] seeds=[2008] records=7722 errors=47
+19:44:50 seg done tier=B Mercury Mountaineer [2002, 2005] seeds=[2002] records=7722 errors=47
+19:44:50 seg done tier=B Lincoln MKZ [2010, 2012] seeds=[2012] records=7722 errors=47
+19:44:50 seg done tier=B Lincoln MKZ [1996, 2009] seeds=[2008] records=7722 errors=47
+19:44:50 seg done tier=B Lincoln Navigator [2007, 2016] seeds=[2007] records=7722 errors=47
+19:44:50 seg done tier=B Mercury Grand Marquis [1972, 1997] seeds=[1997] records=7722 errors=47
+19:44:50 seg done tier=B Lincoln Navigator [1998, 2002] seeds=[2000] records=7722 errors=47
+19:44:50 seg done tier=B Ford F-250 [2008, 2016] seeds=[2008] records=7722 errors=47
+19:44:50 seg done tier=B Ford Explorer [1991, 1994] seeds=[1994] records=7722 errors=47
+19:44:50 seg done tier=B Mercury Mountaineer [2006, 2010] seeds=[2007] records=7722 errors=47
+19:44:50 seg done tier=B Ford Fusion Hybrid [2010, 2019] seeds=[2010] records=7722 errors=47
+19:44:50 seg done tier=B Ford F-350 [1960, 1998] seeds=[1990] records=7722 errors=47
+19:44:50 seg done tier=B Ford Thunderbird [1961, 2004] seeds=[1997] records=7722 errors=47
+19:44:50 seg done tier=B Lincoln Continental [1964, 2017] seeds=[2000] records=7722 errors=47
+19:44:50 seg done tier=B Ford F-150 [1966, 1986] seeds=[1986] records=7722 errors=47
+19:44:50 seg done tier=B Ford F-350 [1999, 2007] seeds=[2004] records=7722 errors=47
+19:44:50 seg done tier=B Lincoln MKX [2011, 2015] seeds=[2011] records=7722 errors=47
+19:44:50 seg done tier=B Ford Explorer [2016, 2017] seeds=[2016] records=7722 errors=47
+19:44:50 seg done tier=B Ford Crown Victoria [1982, 1997] seeds=[1997] records=7722 errors=47
+19:44:50 seg done tier=B Lincoln MKZ [2013, 2016] seeds=[2014] records=7722 errors=47
+19:44:50 seg done tier=B Ford Escape Hybrid [2005, 2011] seeds=[2008] records=7722 errors=47
+19:44:50 seg done tier=B Mercury Cougar [1967, 2002] seeds=[1999] records=7722 errors=47
+19:44:50 seg done tier=B Lincoln Aviator [2003, 2020] seeds=[2004] records=7722 errors=47
+19:44:50 seg done tier=B Ford F-150 [2015, 2020] seeds=[2016] records=7722 errors=47
+19:44:50 seg done tier=B Ford Expedition EL [2007, 2017] seeds=[2008] records=7722 errors=47
+19:44:50 seg done tier=B Mercury Montego [1971, 2007] seeds=[2005] records=7722 errors=47
+19:44:50 seg done tier=B Ford Econoline [1963, 2013] seeds=[2006] records=7722 errors=47
+19:44:50 seg done tier=B Ford Excursion [2000, 2005] seeds=[2000] records=7722 errors=47
+19:44:50 seg done tier=B Ford F-150 Heritage [2004, 2011] seeds=[2004] records=7722 errors=47
+19:44:50 seg done tier=B Ford E-350 Super Duty [1999, 2015] seeds=[2006] records=7722 errors=47
+19:44:50 seg done tier=B Mercury Mountaineer [1997, 2001] seeds=[2000] records=7722 errors=47
+19:44:50 seg done tier=B Ford Taurus X [2008, 2009] seeds=[2008] records=7722 errors=47
+19:44:50 seg done tier=B Ford Explorer Sport [2001, 2014] seeds=[2001] records=7722 errors=47
+19:44:50 seg done tier=B Ford C-Max [2013, 2017] seeds=[2013] records=7722 errors=47
+19:44:50 seg done tier=B Ford Windstar [1999, 2000] seeds=[2000] records=7722 errors=47
+19:44:50 seg done tier=B Ford Transit Connect [2014, 2022] seeds=[2015] records=7722 errors=47
+19:44:50 seg done tier=B Ford Fusion [2019, 2024] seeds=[2019] records=7722 errors=47
+19:44:50 seg done tier=B Mercury Villager [1993, 2002] seeds=[1997] records=7722 errors=47
+19:44:50 seg done tier=B Lincoln MKT [2010, 2019] seeds=[2010] records=7722 errors=47
+19:44:50 seg done tier=B Ford Ecosport [2018, 2022] seeds=[2018] records=7722 errors=47
+19:44:50 seg done tier=B Ford Aerostar [1986, 1997] seeds=[1995] records=7722 errors=47
+19:44:50 seg done tier=B Ford Contour [1995, 2000] seeds=[1998] records=7722 errors=47
+19:44:50 seg done tier=B Ford Mustang [1965, 1993] seeds=[1989] records=7722 errors=47
+19:44:50 seg done tier=B Ford Taurus [1992, 1995] seeds=[1995] records=7722 errors=47
+19:44:50 seg done tier=B Ford F-100 [1961, 1986] seeds=[1981] records=7722 errors=47
+19:44:50 seg done tier=W Ford F-150 [1997, 2003] seeds=[2001] records=7722 errors=47
+19:44:50 seg done tier=W Ford F-150 [2004, 2008] seeds=[2004] records=7722 errors=47
+19:44:50 seg done tier=W Ford Focus [2012, 2014] seeds=[2012] records=7722 errors=47
+19:44:50 seg done tier=W Ford Fusion [2010, 2012] seeds=[2012] records=7722 errors=47
+19:44:50 seg done tier=W Ford Edge [2007, 2024] seeds=[2013] records=7722 errors=47
+19:44:50 seg done tier=W Ford Fusion [2013, 2016] seeds=[2014] records=7722 errors=47
+19:44:50 seg done tier=W Ford Escape [2008, 2012] seeds=[2008] records=7722 errors=47
+19:44:50 seg done tier=W Ford Escape [2013, 2016] seeds=[2013] records=7722 errors=47
+19:44:50 seg done tier=W Ford Explorer [2002, 2005] seeds=[2002] records=7722 errors=47
+19:44:50 seg done tier=W Ford Taurus [2000, 2007] seeds=[2003] records=7722 errors=47
+19:44:50 seg done tier=W Ford Expedition [2003, 2006] seeds=[2003] records=7722 errors=47
+19:44:50 seg done tier=W Ford Ranger [1998, 2011] seeds=[2000] records=7722 errors=47
+19:44:50 seg done tier=W Ford Fiesta [1978, 2019] seeds=[2011] records=7722 errors=47
+19:44:50 seg done tier=W Ford Focus [2008, 2011] seeds=[2010] records=7722 errors=47
+19:44:50 seg done tier=W Ford F-150 [2009, 2012] seeds=[2010] records=7722 errors=47
+19:44:50 seg done tier=W Ford Fusion [2006, 2009] seeds=[2008] records=7722 errors=47
+19:44:50 seg done tier=W Ford Focus [2015, 2018] seeds=[2015] records=7722 errors=47
+19:44:50 seg done tier=W Ford Expedition [1997, 2002] seeds=[2000] records=7722 errors=47
+19:44:50 seg done tier=W Ford Explorer [2006, 2010] seeds=[2006] records=7722 errors=47
+19:44:50 seg done tier=W Ford Explorer [1995, 2001] seeds=[1999] records=7722 errors=47
+19:44:50 seg done tier=W Ford Focus [2005, 2007] seeds=[2007] records=7722 errors=47
+19:44:50 seg done tier=W Ford Explorer [2011, 2015] seeds=[2013] records=7722 errors=47
+19:44:50 seg done tier=W Ford Mustang [1999, 2004] seeds=[2000] records=7722 errors=47
+19:44:50 seg done tier=W Mercury Grand Marquis [1998, 2011] seeds=[2000] records=7722 errors=47
+19:44:50 seg done tier=W Ford Expedition [2007, 2017] seeds=[2007] records=7722 errors=47
+19:44:50 seg done tier=W Ford E-250 [1978, 2014] seeds=[2006] records=7722 errors=47
+19:44:50 seg done tier=W Ford E-150 [1969, 2014] seeds=[1999] records=7722 errors=47
+19:44:50 seg done tier=W Ford Escape [2005, 2007] seeds=[2005] records=7722 errors=47
+19:44:50 seg done tier=W Ford Crown Victoria [1998, 2011] seeds=[2008] records=7722 errors=47
+19:44:50 seg done tier=W Ford Focus [2000, 2004] seeds=[2003] records=7722 errors=47
+19:44:50 seg done tier=W Ford Ranger [1993, 1997] seeds=[1997] records=7722 errors=47
+19:44:50 seg done tier=W Ford Mustang [2005, 2009] seeds=[2006] records=7722 errors=47
+19:44:50 seg done tier=W Ford E-350 [1970, 2021] seeds=[2006] records=7722 errors=47
+19:44:50 seg done tier=W Ford F-250 Super Duty [1980, 2024] seeds=[2008] records=7722 errors=47
+19:44:50 seg done tier=W Ford Flex [2009, 2019] seeds=[2009] records=7722 errors=47
+19:44:50 seg done tier=W Ford Escape [2001, 2004] seeds=[2003] records=7722 errors=47
+19:44:50 seg done tier=W Ford F-150 [1992, 1996] seeds=[1995] records=7722 errors=47
+19:44:50 seg done tier=W Ford Explorer Sport Trac [2001, 2017] seeds=[2001] records=7722 errors=47
+19:44:50 seg done tier=W Ford Taurus [2013, 2019] seeds=[2013] records=7722 errors=47
+19:44:50 seg done tier=W Ford Taurus [2010, 2012] seeds=[2011] records=7722 errors=47
+19:44:50 seg done tier=W Ford Five Hundred [2005, 2007] seeds=[2005] records=7722 errors=47
+19:44:50 seg done tier=W Ford F-250 [1962, 1998] seeds=[1997] records=7722 errors=47
+19:44:50 seg done tier=W Lincoln Town Car [2003, 2011] seeds=[2003] records=7722 errors=47
+19:44:50 seg done tier=W Ford F-250 [1999, 2007] seeds=[1999] records=7722 errors=47
+19:44:50 seg done tier=W Ford Escape [2017, 2019] seeds=[2017] records=7722 errors=47
+19:44:50 seg done tier=W Ford F-150 [2013, 2014] seeds=[2013] records=7722 errors=47
+19:44:50 seg done tier=W Mercury Mariner [2005, 2011] seeds=[2008] records=7722 errors=47
+19:44:50 seg done tier=W Lincoln Navigator [2003, 2006] seeds=[2004] records=7722 errors=47
+19:44:50 seg done tier=W Mercury Milan [2006, 2011] seeds=[2010] records=7722 errors=47
+19:44:50 seg done tier=W Ford Mustang [1994, 1998] seeds=[1998] records=7722 errors=47
+19:44:50 seg done tier=W Ford Escort [1983, 2003] seeds=[1998] records=7722 errors=47
+19:44:50 seg done tier=W Ford Ranger [1978, 1992] seeds=[1992] records=7722 errors=47
+19:44:50 seg done tier=W Lincoln Town Car [1998, 2002] seeds=[2000] records=7722 errors=47
+19:44:50 seg done tier=W Lincoln MKX [2007, 2010] seeds=[2007] records=7722 errors=47
+19:44:50 seg done tier=W Ford F-150 [1987, 1991] seeds=[1990] records=7722 errors=47
+19:44:50 seg done tier=W Ford Freestar [2004, 2007] seeds=[2004] records=7722 errors=47
+19:44:50 seg done tier=W Ford Freestyle [2005, 2007] seeds=[2005] records=7722 errors=47
+19:44:50 seg done tier=W Ford F-350 Super Duty [1999, 2021] seeds=[2004] records=7722 errors=47
+19:44:50 seg done tier=W Ford Mustang [2010, 2014] seeds=[2010] records=7722 errors=47
+19:44:50 seg done tier=W Ford Taurus [1996, 1999] seeds=[1999] records=7722 errors=47
+19:44:50 seg done tier=W Ford Transit Connect [2010, 2013] seeds=[2010] records=7722 errors=47
+19:44:50 seg done tier=W Ford Fusion [2017, 2018] seeds=[2017] records=7722 errors=47
+19:44:50 seg done tier=W Lincoln Town Car [1969, 1997] seeds=[1997] records=7722 errors=47
+19:44:50 seg done tier=W Lincoln LS [2000, 2006] seeds=[2005] records=7722 errors=47
+19:44:50 seg done tier=W Ford Windstar [2001, 2003] seeds=[2003] records=7722 errors=47
+19:44:50 seg done tier=W Mercury Sable [2000, 2005] seeds=[2003] records=7722 errors=47
+19:44:50 seg done tier=W Lincoln MKS [2009, 2016] seeds=[2009] records=7722 errors=47
+19:44:50 seg done tier=W Ford Taurus [2008, 2009] seeds=[2008] records=7722 errors=47
+19:44:50 seg done tier=W Mercury Mountaineer [2002, 2005] seeds=[2002] records=7722 errors=47
+19:44:50 seg done tier=W Lincoln MKZ [2010, 2012] seeds=[2012] records=7722 errors=47
+19:44:50 seg done tier=W Lincoln MKZ [1996, 2009] seeds=[2008] records=7722 errors=47
+19:44:50 seg done tier=W Lincoln Navigator [2007, 2016] seeds=[2007] records=7722 errors=47
+19:44:50 seg done tier=W Mercury Grand Marquis [1972, 1997] seeds=[1997] records=7722 errors=47
+19:44:50 seg done tier=W Lincoln Navigator [1998, 2002] seeds=[2000] records=7722 errors=47
+19:45:39 chain-unlinked wheels 1 numbers named by DC3Z-1007-B, no catalog link: DC3Z-1007-D
+19:45:56 seg done tier=W Ford F-250 [2008, 2016] seeds=[2008, 2013, 2010] records=7727 errors=47
+19:47:07 seg done tier=W Ford Explorer [1991, 1994] seeds=[1994, 1992, 1993] records=7727 errors=47
+19:48:12 chain-unlinked wheels 1 numbers named by 7L2Z-1007-C, no catalog link: 7L2Z-1007-F
+19:48:12 seg done tier=W Mercury Mountaineer [2006, 2010] seeds=[2007] records=7733 errors=47
+19:49:02 seg done tier=W Ford Fusion Hybrid [2010, 2019] seeds=[2010, 2015, 2016] records=7733 errors=47
+19:49:31 nav-fail Ford F-350 1979: ValueError: no site mapping for Ford F-350 1979
+19:49:31 seg done tier=W Ford F-350 [1960, 1998] seeds=[1990, 1979] records=7733 errors=48
+19:51:23 seg done tier=W Ford Thunderbird [1961, 2004] seeds=[1997, 1982, 1981] records=7735 errors=48
+19:52:52 seg done tier=W Lincoln Continental [1964, 2017] seeds=[2000, 1988, 1989] records=7738 errors=48
+19:53:15 nav-fail Ford F-150 1976: ValueError: no 1976 catalog for Ford F-150 (ford-['f_150'])
+19:53:15 seg done tier=W Ford F-150 [1966, 1986] seeds=[1986, 1976] records=7738 errors=49
+19:53:55 seg done tier=W Ford F-350 [1999, 2007] seeds=[2004, 2003, 2002] records=7738 errors=49
+19:54:51 seg done tier=W Lincoln MKX [2011, 2015] seeds=[2011, 2014, 2015] records=7739 errors=49
+19:56:03 seg done tier=W Ford Explorer [2016, 2017] seeds=[2016] records=7746 errors=49
+19:56:35 nav-fail Ford Crown Victoria 1987: ValueError: no 1987 catalog for Ford Crown Victoria (ford-['crown_victoria'])
+19:56:35 seg done tier=W Ford Crown Victoria [1982, 1997] seeds=[1997, 1987] records=7747 errors=50
+19:57:31 seg done tier=W Lincoln MKZ [2013, 2016] seeds=[2014] records=7752 errors=50
+19:58:19 seg done tier=W Ford Escape Hybrid [2005, 2011] seeds=[2008, 2009, 2007] records=7752 errors=50
+20:00:27 seg done tier=W Mercury Cougar [1967, 2002] seeds=[1999, 1983, 1982] records=7756 errors=50
+20:01:15 nav-fail Lincoln Aviator 2013: ValueError: no 2013 catalog for Lincoln Aviator (lincoln-['aviator'])
+20:01:15 seg done tier=W Lincoln Aviator [2003, 2020] seeds=[2004, 2013] records=7759 errors=51
+20:03:23 chain-unlinked wheels 1 numbers named by FL3Z-1007-M, no catalog link: FL3Z-1007-F
+20:03:23 seg done tier=W Ford F-150 [2015, 2020] seeds=[2016] records=7773 errors=51
+20:03:57 chain-unlinked wheels 1 numbers named by 6L3Z-1007-M, no catalog link: 6L3Z-1007-AA
+20:04:23 seg done tier=W Ford Expedition EL [2007, 2017] seeds=[2008, 2013, 2016] records=7776 errors=51
+20:04:45 nav-fail Mercury Montego 1989: ValueError: no 1989 catalog for Mercury Montego (mercury-['montego'])
+20:04:45 seg done tier=W Mercury Montego [1971, 2007] seeds=[2005, 1989] records=7776 errors=52
+20:05:00 seg done tier=W Ford Econoline [1963, 2013] seeds=[2006, 1988, 1987] records=7776 errors=52
+20:06:59 seg done tier=W Ford Excursion [2000, 2005] seeds=[2000, 2003, 2002] records=7777 errors=52
+20:07:07 nav-fail Ford F-150 Heritage 2004: ValueError: no parts-list or trim links on https://www.fordpartsgiant.com/2004-ford-f_150-f_150_heritage_old_style-parts.html
+20:07:07 seg done tier=W Ford F-150 Heritage [2004, 2011] seeds=[2004] records=7777 errors=53
+20:07:34 chain-unlinked wheels 1 numbers named by 8C2Z-1007-A, no catalog link: AC2Z-1007-A
+20:07:56 seg done tier=W Ford E-350 Super Duty [1999, 2015] seeds=[2006, 2008, 2007] records=7779 errors=53
+20:09:39 seg done tier=W Mercury Mountaineer [1997, 2001] seeds=[2000, 1999, 1998] records=7779 errors=53
+20:10:11 seg done tier=W Ford Taurus X [2008, 2009] seeds=[2008] records=7780 errors=53
+20:10:51 nav-fail Ford Explorer Sport 2009: ValueError: no 2009 catalog for Ford Explorer Sport (ford-['explorer_sport'])
+20:10:51 seg done tier=W Ford Explorer Sport [2001, 2014] seeds=[2001, 2009] records=7782 errors=54
+20:11:55 seg done tier=W Ford C-Max [2013, 2017] seeds=[2013, 2017] records=7785 errors=54
+20:12:59 seg done tier=W Ford Windstar [1999, 2000] seeds=[2000] records=7788 errors=54
+20:14:12 chain-unlinked wheels 1 numbers named by DT1Z-1007-G, no catalog link: DT1Z-1007
+20:14:12 seg done tier=W Ford Transit Connect [2014, 2022] seeds=[2015] records=7795 errors=54
+20:14:51 time budget reached records=7798
