@@ -1160,3 +1160,13 @@
 13:34:51 chain-unlinked window-regulator 1 numbers named by 80731-AR000, no catalog link: 80731-AR001
 13:34:51 chain-unlinked window-regulator 1 numbers named by 80730-AR000, no catalog link: 80730-AR001
 13:44:51 time budget reached records=2413
+13:45:12 start site=www.infinitipartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2413 list_lines=1319 year_lines=145 url_index=7618
+13:45:12 completion worklist completion/nissan.own_page.json: 119 rows
+13:45:29 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_face_fr_bumper-k60201nl1b.html: ValueError: no partInfo in store
+13:45:53 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_face_rear_bumpr-k60401vp1c.html: ValueError: no partInfo in store
+13:46:49 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g35_coupe_grill-f2310jl000.html: ValueError: no partInfo in store
+13:46:58 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g35_coupe_grill-f2310jl000.html: ValueError: no partInfo in store
+13:48:33 nav-fail Infiniti QX60 2020: ValueError: no parts-list or trim links on https://www.infinitipartsdeal.com/2020-infiniti-qx60-parts.html
+14:14:37 list-fail https://www.infinitipartsdeal.com/parts-list/2017-infiniti-q70l/body_front_roof_floor/hood_panel_hinge_fitting.html: ValueError: no __INITIAL_STORE__ on page
+14:14:45 list-fail https://www.infinitipartsdeal.com/parts-list/2017-infiniti-q70l/body_side_rear/front_door_window_regulator.html: ValueError: HTTP 502 for https://www.infinitipartsdeal.com/parts-list/2017-infiniti-q70l/body_side_rear/front_door_window_regulator.html
+14:15:41 time budget reached records=2431
