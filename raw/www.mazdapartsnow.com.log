@@ -870,3 +870,28 @@
 15:47:07 chain-unlinked window-regulator 1 numbers named by GHP9-59-590A, no catalog link: GHP9-59-590
 15:47:47 chain-unlinked window-regulator 1 numbers named by GHP9-72-590A, no catalog link: GHP9-72-590
 15:47:47 time budget reached records=1742
+15:48:05 start site=www.mazdapartsnow.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=1742 list_lines=505 year_lines=81 url_index=4862
+15:48:05 completion worklist completion/mazda.own_page.json: 114 rows
+15:49:59 chain-unlinked window-regulator 1 numbers named by D651-58-590B, no catalog link: D651-58-590A
+15:49:59 chain-unlinked window-regulator 1 numbers named by D651-59-590B, no catalog link: D651-59-590A
+15:51:50 chain-unlinked window-regulator 1 numbers named by BHN9-58-590, no catalog link: BHN9-58-590A
+15:51:50 chain-unlinked window-regulator 1 numbers named by BHN9-59-590, no catalog link: BHN9-59-590A
+15:51:50 chain-unlinked window-regulator 1 numbers named by BJS7-59-590A, no catalog link: BJS7-59-590
+15:52:38 chain-unlinked window-regulator 1 numbers named by BHN9-72-590A, no catalog link: BHN9-72-590
+15:52:38 chain-unlinked window-regulator 1 numbers named by BHN9-73-590A, no catalog link: BHN9-73-590
+15:52:38 chain-unlinked window-regulator 1 numbers named by BJS7-72-590A, no catalog link: BJS7-72-590
+15:52:38 chain-unlinked window-regulator 1 numbers named by BJS7-73-590A, no catalog link: BJS7-73-590
+15:57:27 chain-unlinked window-regulator 4 numbers named by F151-58-590E, no catalog link: F151-58-590D, F151-58-590C, F151-58-590A, F151-58-590B
+15:57:27 chain-unlinked window-regulator 4 numbers named by F151-59-590E, no catalog link: F151-59-590A, F151-59-590C, F151-59-590D, F151-59-590B
+16:02:46 nav-fail Mazda CX-3 2016: NavError: HTTP 404 for https://www.mazdapartsnow.com/2016-mazda-cx-3-parts
+16:09:02 nav-fail Mazda CX-3 2018: NavError: HTTP 404 for https://www.mazdapartsnow.com/2018-mazda-cx-3-parts
+16:12:46 nav-fail Mazda MX-6 1989: NavError: HTTP 404 for https://www.mazdapartsnow.com/1989-mazda-mx-6-parts
+16:12:54 nav-fail Mazda MX-6 1990: NavError: HTTP 404 for https://www.mazdapartsnow.com/1990-mazda-mx-6-parts
+16:13:03 nav-fail Mazda MX-6 1991: NavError: HTTP 404 for https://www.mazdapartsnow.com/1991-mazda-mx-6-parts
+16:13:10 nav-fail Mazda MX-6 1992: NavError: HTTP 404 for https://www.mazdapartsnow.com/1992-mazda-mx-6-parts
+16:13:42 nav-fail Mazda CX-3 2017: NavError: HTTP 404 for https://www.mazdapartsnow.com/2017-mazda-cx-3-parts
+16:13:50 nav-fail Mazda CX-3 2019: NavError: HTTP 404 for https://www.mazdapartsnow.com/2019-mazda-cx-3-parts
+16:13:58 nav-fail Mazda CX-3 2020: NavError: HTTP 404 for https://www.mazdapartsnow.com/2020-mazda-cx-3-parts
+16:14:06 nav-fail Mazda CX-3 2021: NavError: HTTP 404 for https://www.mazdapartsnow.com/2021-mazda-cx-3-parts
+16:17:34 nav-fail Mazda MX-6 1988: NavError: HTTP 404 for https://www.mazdapartsnow.com/1988-mazda-mx-6-parts
+16:18:22 completion finished records=1747 errors=24 open_rows=0 chains_owed=0
