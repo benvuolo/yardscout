@@ -1127,3 +1127,19 @@
 12:41:30 chain-unlinked gauge-cluster 1 numbers named by 24820-3EV0B, no catalog link: 24820-3WY0B
 12:41:30 chain-unlinked gauge-cluster 1 numbers named by 24820-3EV1B, no catalog link: 24820-3WY1B
 12:42:10 time budget reached records=2322
+12:42:29 start site=www.infinitipartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2322 list_lines=972 year_lines=113 url_index=7014
+12:42:29 completion worklist completion/nissan.own_page.json: 119 rows
+12:45:33 chain-unlinked door-rear 1 numbers named by HBA0M-5UBMA, no catalog link: H210M-5UBMA
+12:50:05 chain-unlinked headlights 1 numbers named by 26060-1CF0E, no catalog link: 26060-1CF1A
+12:50:05 chain-unlinked headlights 1 numbers named by 26010-1CF0E, no catalog link: 26010-1CF1A
+12:59:50 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_face_fr_bumper-k60201nl1b.html: ValueError: no partInfo in store
+13:00:37 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_face_rear_bumpr-k60401vp1c.html: ValueError: no partInfo in store
+13:02:53 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g35_coupe_grill-f2310jl000.html: ValueError: no partInfo in store
+13:03:01 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g35_coupe_grill-f2310jl000.html: ValueError: no partInfo in store
+13:04:29 chain-unlinked tail-lights 1 numbers named by 26555-JJ61A, no catalog link: 26555-JJ51D
+13:04:29 chain-unlinked tail-lights 1 numbers named by 26550-JJ61A, no catalog link: 26550-JJ51D
+13:10:53 chain-unlinked headlights 1 numbers named by 26060-4AP0A, no catalog link: 26060-4AP0B
+13:10:53 chain-unlinked headlights 1 numbers named by 26060-4AP1A, no catalog link: 26060-4AP1B
+13:10:53 chain-unlinked headlights 1 numbers named by 26010-4AP0A, no catalog link: 26010-4AP0B
+13:10:53 chain-unlinked headlights 1 numbers named by 26010-4AP1A, no catalog link: 26010-4AP1B
+13:12:53 time budget reached records=2383
