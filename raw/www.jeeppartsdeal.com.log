@@ -7682,3 +7682,18 @@
 13:37:16 chain-unlinked side-mirrors 1 numbers named by 1FX361YBAD, no catalog link: 1FX361YBAC
 13:37:16 chain-unlinked side-mirrors 1 numbers named by 55079042AC, no catalog link: 55079042AD
 13:39:24 time budget reached records=6488
+13:39:45 start site=www.jeeppartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=6488 list_lines=3453 year_lines=508 url_index=30240
+13:39:45 completion worklist completion/mopar.own_page.json: 657 rows
+13:45:30 chain-unlinked side-mirrors 2 numbers named by 4806158AD, no catalog link: 4806158AB, 4806158AC
+13:45:30 chain-unlinked side-mirrors 2 numbers named by 4806159AD, no catalog link: 4806159AC, 4806159AB
+13:45:30 chain-unlinked side-mirrors 1 numbers named by 1AQ531XRAD, no catalog link: 1AQ531XRAA
+13:45:30 chain-unlinked side-mirrors 1 numbers named by 1BY431R3AB, no catalog link: 1BY431R3AA
+13:45:30 chain-unlinked side-mirrors 1 numbers named by 1BY431RHAB, no catalog link: 1BY431RHAA
+13:48:18 chain-unlinked side-mirrors 2 numbers named by 4857876AC, no catalog link: 4857876AB, 4857876AA
+13:48:18 chain-unlinked side-mirrors 1 numbers named by 4857877AC, no catalog link: 4857877AB
+13:53:36 chain-unlinked side-mirrors 4 numbers named by 55076876AG, no catalog link: 55076876AE, 55076876AC, 55076876AD, 55076876AF
+14:00:48 chain-unlinked side-mirrors 2 numbers named by 1AN411W7AJ, no catalog link: 1AN411W7AH, 1AN411W7AI
+14:00:48 chain-unlinked side-mirrors 4 numbers named by 1AN411SCAJ, no catalog link: 1AN411SCAH, 1AN411SCAI, 1AN411SCAG, 1AN411SCAF
+14:08:21 chain-unlinked window-regulator 4 numbers named by 5066430AC, no catalog link: 5066430AA, 5066430AB, 55256418AI, 55256418AF
+14:08:21 chain-unlinked window-regulator 5 numbers named by 5066431AC, no catalog link: 5066431AB, 55256419AJ, 55256419AH, 5066431AA, 55256419AF
+14:10:28 time budget reached records=6529
