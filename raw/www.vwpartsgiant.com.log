@@ -1513,3 +1513,8 @@
 08:21:06 chain-unlinked climate-control 6 numbers named by 5G0-907-426-BJ-WZU, no catalog link: 5G0-907-426-R-WZU, 5G0-907-426-BA-WZU, 5G0-907-426-N-WZU, 5G0-907-426-AA-WZU, 5G0-907-426-AD-WZU, 5G0-907-426-AN-WZU
 08:22:58 nav-fail Volkswagen Golf Alltrack 2017: NavError: HTTP 404 for https://www.vwpartsgiant.com/2017-volkswagen-golf-alltrack-parts
 08:49:14 time budget reached records=1771
+08:49:25 start site=www.vwpartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C'] records=1771 list_lines=1679 year_lines=301 url_index=11310
+08:49:25 completion worklist completion/vag.own_page.json: 171 rows
+09:06:08 nav-fail Volkswagen Golf Alltrack 2018: NavError: HTTP 404 for https://www.vwpartsgiant.com/2018-volkswagen-golf-alltrack-parts
+09:11:44 nav-fail Volkswagen Golf Alltrack 2019: NavError: HTTP 404 for https://www.vwpartsgiant.com/2019-volkswagen-golf-alltrack-parts
+09:19:28 time budget reached records=1780
