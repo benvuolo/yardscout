@@ -28,8 +28,8 @@ sheet" in the UI only (jh_saved and watch storage untouched, rule 6); map deferr
   screens at 320/375/390/430/768/1280, light+dark, 100%+200% text: no
   ellipsis/line-clamp, no text wider than its box or clipped, no sideways
   scroll, fields fit their text, 44px targets, WCAG AA contrast.
-- Deferred: combined part-or-car search box (step 5 second half), B's
-  walk-by-row yard view, map.
+- Deferred: combined part-or-car search box (step 5 second half). (B's walk-by-row yard view and the
+  map have since shipped: Rounds 8 and 9.)
 - Not run here: python e2e scripts (backend/test/*_e2e.py need the Python
   playwright package, not installed in this container).
 - Next: hub builds TestFlight from the branch for the owner. Merge to main
@@ -142,7 +142,7 @@ sheet" in the UI only (jh_saved and watch storage untouched, rule 6); map deferr
   named pin; last resort zooms past your spot. Colliding single pins flip below their point before merging;
   side-docked sheet closes the left of the pin area; long credit moves into the sheet; key only with bells.
 - Tests: app_promo_e2e (new, 174), map_regions_e2e 11 regions / 1,056 layouts, ui_no_truncation 1,296, units.
-- Known: Atlanta first view, a "2 yards" bubble can cover the You dot. Waiting on hub review/merge.
+- Known (fixed in 9d): Atlanta first view, a "2 yards" bubble could cover the You dot.
 
 ### Round 9c: photos on the computer (2026-11-09; merged by hub)
 - Owner: "on the computer, the images are large/wonky". Credit was under the photo (cards read "-Pull"):
@@ -173,6 +173,21 @@ sheet" in the UI only (jh_saved and watch storage untouched, rule 6); map deferr
   and fit search; plural labels drop "a". Checker fails a dash/lowercase line 2. jh-v177.
 - Branch names: v2/v3 exist because a force-push to rewrite a rebased branch is refused in this session;
   cherry-picked onto current main instead.
+
+### Round 9g: Parts polish and test hygiene (2026-11-10; all merged by hub)
+- Aftermarket donor cards (cbfafb4, jh-v179): only the checks to make at the car stay inline (engine,
+  amperage, body, drivetrain, splines/length, transmission); the listing's provenance ("listed for each of
+  these vehicles", "not the carmaker's catalog", "Only the years shown", "No other unit", "Engines shown
+  are", the rebuilder's fit notes) moves behind "Why it fits"; the unit stays visible on that line. App
+  classifies sentences (pfAmSplitNote, fail-safe: unknown stays inline). GSP CV card at 390: ~12 -> 7 lines.
+  Tests: am_notes_unit (all 1,448 notes, no word lost), ui_no_truncation pf-am-cv (max 8 lines at 390).
+- interchange_e2e free-card checks: the demand badge ("Usually still there"/"Gets picked over fast") is
+  turnover, not a price; free on purpose. Card surfaces check prices only; sell words stay Pro on the car
+  screen; positive check that the badge carries no price (test-only).
+- ui_no_truncation fixtures made data-independent (e91f429): long-listed backdates 3x the yard's typical
+  + 30 days (Newark's typical reached 101, so 200 days no longer qualified); cards-mixed clears the photo of
+  the unmarked cards (a car-screen-only photo correctly badges "Photo on car page"). App was right both times.
+- Backlog: combined part-or-car search box (proposal to the hub first; design round, screenshots before merge).
 
 ## Earlier state (2026-11-06, exploration)
 
