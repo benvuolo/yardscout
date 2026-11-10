@@ -1337,3 +1337,122 @@
 07:02:39 chain-unlinked strut 1 numbers named by E4302-CB10A, no catalog link: 54302-CB125
 07:02:39 chain-unlinked strut 1 numbers named by 54302-CB026, no catalog link: E4302-CB00J
 07:03:03 time budget reached records=4234
+07:03:21 start site=www.nissanpartsdeal.com mode=worklist tiers=['A', 'B', 'W', 'C'] records=4234 list_lines=130 year_lines=25 url_index=2323
+07:03:21 seg done tier=A Nissan Altima [2013, 2015] seeds=[2013] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Altima [2010, 2012] seeds=[2012] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Altima [2007, 2009] seeds=[2008] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Sentra [2013, 2015] seeds=[2014] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Rogue [2011, 2013] seeds=[2013] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Xterra [2000, 2015] seeds=[2004] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Maxima [2009, 2014] seeds=[2011] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Altima [2005, 2006] seeds=[2006] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Versa [2007, 2011] seeds=[2009] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Murano [2009, 2014] seeds=[2009] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Sentra [1984, 2006] seeds=[2006] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Pathfinder [2013, 2020] seeds=[2014] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Sentra [2010, 2012] seeds=[2012] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Pathfinder [2005, 2012] seeds=[2006] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Titan [2004, 2016] seeds=[2004] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Murano [1998, 2007] seeds=[2007] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Rogue [2008, 2010] seeds=[2010] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Versa [2012, 2014] seeds=[2012] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Sentra [2007, 2009] seeds=[2008] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Armada [2004, 2015] seeds=[2006] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Altima [2016, 2018] seeds=[2016] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Sentra [2016, 2019] seeds=[2016] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Versa [2015, 2019] seeds=[2015] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Maxima [2004, 2008] seeds=[2004] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Pathfinder [1987, 2004] seeds=[2001] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Altima [2002, 2004] seeds=[2003] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Rogue [2014, 2016] seeds=[2016] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Frontier [1998, 2004] seeds=[2000] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Maxima [2000, 2003] seeds=[2000] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Juke [2011, 2017] seeds=[2011] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Versa Note [2014, 2020] seeds=[2015] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Quest [2004, 2009] seeds=[2007] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Altima [1993, 2001] seeds=[2001] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Frontier [2005, 2020] seeds=[2005] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Maxima [1984, 1999] seeds=[1997] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Quest [2011, 2017] seeds=[2012] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Pickup [1976, 1997] seeds=[1995] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Cube [2009, 2014] seeds=[2009] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Rogue [2017, 2020] seeds=[2017] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Rogue Select [2014, 2015] seeds=[2014] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Quest [1993, 2002] seeds=[2000] records=4234 errors=11
+07:03:21 seg done tier=A Nissan Maxima [2016, 2022] seeds=[2016] records=4234 errors=11
+07:03:21 seg done tier=A Nissan 350Z [2003, 2008] seeds=[2004] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Altima [2013, 2015] seeds=[2013] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Altima [2010, 2012] seeds=[2012] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Altima [2007, 2009] seeds=[2008] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Sentra [2013, 2015] seeds=[2014] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Rogue [2011, 2013] seeds=[2013] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Xterra [2000, 2015] seeds=[2004] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Maxima [2009, 2014] seeds=[2011] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Altima [2005, 2006] seeds=[2006] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Versa [2007, 2011] seeds=[2009] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Murano [2009, 2014] seeds=[2009] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Sentra [1984, 2006] seeds=[2006] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Pathfinder [2013, 2020] seeds=[2014] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Sentra [2010, 2012] seeds=[2012] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Pathfinder [2005, 2012] seeds=[2006] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Titan [2004, 2016] seeds=[2004] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Murano [1998, 2007] seeds=[2007] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Rogue [2008, 2010] seeds=[2010] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Versa [2012, 2014] seeds=[2012] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Sentra [2007, 2009] seeds=[2008] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Armada [2004, 2015] seeds=[2006] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Altima [2016, 2018] seeds=[2016] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Sentra [2016, 2019] seeds=[2016] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Versa [2015, 2019] seeds=[2015] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Maxima [2004, 2008] seeds=[2004] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Pathfinder [1987, 2004] seeds=[2001] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Altima [2002, 2004] seeds=[2003] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Rogue [2014, 2016] seeds=[2016] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Frontier [1998, 2004] seeds=[2000] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Maxima [2000, 2003] seeds=[2000] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Juke [2011, 2017] seeds=[2011] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Versa Note [2014, 2020] seeds=[2015] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Quest [2004, 2009] seeds=[2007] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Altima [1993, 2001] seeds=[2001] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Frontier [2005, 2020] seeds=[2005] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Maxima [1984, 1999] seeds=[1997] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Quest [2011, 2017] seeds=[2012] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Pickup [1976, 1997] seeds=[1995] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Cube [2009, 2014] seeds=[2009] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Rogue [2017, 2020] seeds=[2017] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Rogue Select [2014, 2015] seeds=[2014] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Quest [1993, 2002] seeds=[2000] records=4234 errors=11
+07:03:21 seg done tier=B Nissan Maxima [2016, 2022] seeds=[2016] records=4234 errors=11
+07:03:21 seg done tier=B Nissan 350Z [2003, 2008] seeds=[2004] records=4234 errors=11
+07:03:21 seg done tier=C Nissan Altima [2013, 2015] seeds=[2013] records=4234 errors=11
+07:03:21 seg done tier=C Nissan Altima [2010, 2012] seeds=[2012] records=4234 errors=11
+07:03:21 seg done tier=C Nissan Altima [2007, 2009] seeds=[2008] records=4234 errors=11
+07:03:21 seg done tier=C Nissan Sentra [2013, 2015] seeds=[2014] records=4234 errors=11
+07:03:21 seg done tier=C Nissan Rogue [2011, 2013] seeds=[2013] records=4234 errors=11
+07:03:21 seg done tier=C Nissan Xterra [2000, 2015] seeds=[2004] records=4234 errors=11
+07:03:21 seg done tier=C Nissan Maxima [2009, 2014] seeds=[2011] records=4234 errors=11
+07:03:21 seg done tier=C Nissan Altima [2005, 2006] seeds=[2006] records=4234 errors=11
+07:03:21 seg done tier=C Nissan Versa [2007, 2011] seeds=[2009] records=4234 errors=11
+07:03:21 seg done tier=C Nissan Murano [2009, 2014] seeds=[2009] records=4234 errors=11
+07:03:21 seg done tier=C Nissan Sentra [1984, 2006] seeds=[2006] records=4234 errors=11
+07:03:21 seg done tier=C Nissan Pathfinder [2013, 2020] seeds=[2014] records=4234 errors=11
+07:03:21 seg done tier=C Nissan Sentra [2010, 2012] seeds=[2012] records=4234 errors=11
+07:03:21 seg done tier=C Nissan Pathfinder [2005, 2012] seeds=[2006] records=4234 errors=11
+07:03:21 seg done tier=C Nissan Titan [2004, 2016] seeds=[2004] records=4234 errors=11
+07:03:21 seg done tier=C Nissan Murano [1998, 2007] seeds=[2007] records=4234 errors=11
+07:06:01 seg done tier=C Nissan Rogue [2008, 2010] seeds=[2010, 2009, 2008] records=4234 errors=11
+07:07:37 chain-unlinked knuckle 1 numbers named by 40015-1HK0A, no catalog link: 40015-9LA0C
+07:07:37 chain-unlinked knuckle 1 numbers named by 40014-1HK0A, no catalog link: 40014-9LA0C
+07:08:25 chain-unlinked strut 1 numbers named by E4303-3AN0C, no catalog link: E4303-9KF0B
+07:08:25 chain-unlinked strut 1 numbers named by E4302-3AN0C, no catalog link: E4302-9KF0B
+07:08:41 chain-unlinked strut 1 numbers named by E6210-3AN0C, no catalog link: E6210-9KZ2A
+07:08:57 seg done tier=C Nissan Versa [2012, 2014] seeds=[2012] records=4243 errors=11
+07:12:47 seg done tier=C Nissan Sentra [2007, 2009] seeds=[2008] records=4250 errors=11
+07:14:46 chain-unlinked strut 1 numbers named by 56110-ZC025, no catalog link: E6110-ZZ50A
+07:14:46 chain-unlinked strut 1 numbers named by 56110-ZC085, no catalog link: E6110-ZZ50B
+07:15:34 chain-unlinked strut 1 numbers named by 56200-ZC01A, no catalog link: 56200-ZV65A
+07:15:34 chain-unlinked strut 1 numbers named by 56200-ZC00A, no catalog link: 56200-ZZ90A
+07:15:34 chain-unlinked strut 1 numbers named by 56200-ZC01B, no catalog link: 56200-ZV65A
+07:15:34 chain-unlinked strut 1 numbers named by 56200-7S603, no catalog link: 56200-ZV62A
+07:15:34 seg done tier=C Nissan Armada [2004, 2015] seeds=[2006] records=4263 errors=11
+07:15:50 STOPPED: www.nissanpartsdeal.com refused or challenged (HTTP 503); domain stopped for this program
