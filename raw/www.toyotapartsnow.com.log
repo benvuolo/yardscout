@@ -2467,3 +2467,17 @@
 18:22:39 chain-unlinked window-regulator 1 numbers named by 85720-16091, no catalog link: 85720-16090
 18:29:11 chain-unlinked climate-control 1 numbers named by 55900-47191, no catalog link: 55900-47190
 18:30:15 time budget reached records=4743
+18:30:42 start site=www.toyotapartsnow.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=4743 list_lines=1607 year_lines=239 url_index=18385
+18:30:42 completion worklist completion/toyota.own_page.json: 401 rows
+18:36:35 chain-unlinked window-regulator 2 numbers named by 85720-52220, no catalog link: 85720-52180, 85720-30460
+18:36:43 chain-unlinked window-regulator 1 numbers named by 69803-52120, no catalog link: 69803-52121
+18:36:43 chain-unlinked window-regulator 1 numbers named by 69804-52130, no catalog link: 69804-52131
+18:37:22 chain-unlinked window-regulator 1 numbers named by 85710-42120, no catalog link: 85710-47060
+18:38:34 chain-unlinked climate-control 1 numbers named by 55900-0R030, no catalog link: 55900-42370
+18:39:23 chain-unlinked window-regulator 1 numbers named by 69802-30280, no catalog link: 69802-42040
+18:40:20 chain-unlinked window-switch 1 numbers named by 84820-0R030, no catalog link: 84820-42200
+18:50:02 chain-unlinked door-front 1 numbers named by 67001-35430, no catalog link: 67001-89197
+18:53:24 chain-unlinked window-regulator 1 numbers named by 69810-04080, no catalog link: 69810-04050
+18:53:24 chain-unlinked window-regulator 1 numbers named by 69820-04080, no catalog link: 69820-04050
+18:53:24 chain-unlinked window-regulator 1 numbers named by 85710-28020, no catalog link: 85710-35080
+19:00:51 time budget reached records=4769
