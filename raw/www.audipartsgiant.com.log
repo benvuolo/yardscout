@@ -289,3 +289,93 @@
 02:30:49 chain-unlinked strut 2 numbers named by 4M0-513-035-AB, no catalog link: 4M0-513-035-S, 4M0-513-035-T
 02:30:49 chain-unlinked strut 1 numbers named by 4M0-616-031-AE, no catalog link: 4M0-616-031-S
 02:31:13 time budget reached records=1234
+02:31:25 start site=www.audipartsgiant.com mode=worklist tiers=['A', 'B', 'W', 'C'] records=1234 list_lines=121 year_lines=10 url_index=1492
+02:31:25 seg done tier=A Audi A4 [1996, 2019] seeds=[2008] records=1234 errors=14
+02:31:25 seg done tier=A Audi A6 [1997, 2017] seeds=[2008] records=1234 errors=14
+02:31:25 seg done tier=A Audi Q5 [2009, 2022] seeds=[2012] records=1234 errors=14
+02:31:25 seg done tier=A Audi Q7 [2007, 2017] seeds=[2008] records=1234 errors=14
+02:31:25 seg done tier=A Audi A3 [2006, 2019] seeds=[2006] records=1234 errors=14
+02:31:25 seg done tier=A Audi A4 Quattro [1997, 2016] seeds=[2009] records=1234 errors=14
+02:31:25 seg done tier=A Audi A5 [2009, 2022] seeds=[2010] records=1234 errors=14
+02:31:25 seg done tier=A Audi A6 Quattro [2000, 2015] seeds=[2006] records=1234 errors=14
+02:31:25 seg done tier=A Audi TT [2000, 2008] seeds=[2001] records=1234 errors=14
+02:31:25 seg done tier=A Audi S4 [2000, 2021] seeds=[2005] records=1234 errors=14
+02:31:25 seg done tier=A Audi A8 [1997, 2011] seeds=[2006] records=1234 errors=14
+02:31:25 seg done tier=A Audi Allroad [2001, 2015] seeds=[2005] records=1234 errors=14
+02:31:25 seg done tier=A Audi A5 Quattro [2009, 2012] seeds=[2011] records=1234 errors=14
+02:31:25 seg done tier=A Audi Q3 [2015, 2021] seeds=[2016] records=1234 errors=14
+02:31:25 seg done tier=B Audi A4 [1996, 2019] seeds=[2008] records=1234 errors=14
+02:31:25 seg done tier=B Audi A6 [1997, 2017] seeds=[2008] records=1234 errors=14
+02:31:25 seg done tier=B Audi Q5 [2009, 2022] seeds=[2012] records=1234 errors=14
+02:31:25 seg done tier=B Audi Q7 [2007, 2017] seeds=[2008] records=1234 errors=14
+02:31:25 seg done tier=B Audi A3 [2006, 2019] seeds=[2006] records=1234 errors=14
+02:31:25 seg done tier=B Audi A4 Quattro [1997, 2016] seeds=[2009] records=1234 errors=14
+02:31:25 seg done tier=B Audi A5 [2009, 2022] seeds=[2010] records=1234 errors=14
+02:31:25 seg done tier=B Audi A6 Quattro [2000, 2015] seeds=[2006] records=1234 errors=14
+02:31:25 seg done tier=B Audi TT [2000, 2008] seeds=[2001] records=1234 errors=14
+02:31:25 seg done tier=B Audi S4 [2000, 2021] seeds=[2005] records=1234 errors=14
+02:31:25 seg done tier=B Audi A8 [1997, 2011] seeds=[2006] records=1234 errors=14
+02:31:25 seg done tier=B Audi Allroad [2001, 2015] seeds=[2005] records=1234 errors=14
+02:31:25 seg done tier=B Audi A5 Quattro [2009, 2012] seeds=[2011] records=1234 errors=14
+02:31:25 seg done tier=B Audi Q3 [2015, 2021] seeds=[2016] records=1234 errors=14
+02:31:25 seg done tier=C Audi A4 [1996, 2019] seeds=[2008] records=1234 errors=14
+02:31:25 seg done tier=C Audi A6 [1997, 2017] seeds=[2008] records=1234 errors=14
+02:31:25 seg done tier=C Audi Q5 [2009, 2022] seeds=[2012] records=1234 errors=14
+02:31:25 seg done tier=C Audi Q7 [2007, 2017] seeds=[2008] records=1234 errors=14
+02:33:01 chain-unlinked knuckle 1 numbers named by 1K0-505-434, no catalog link: 1K0-505-436-AD
+02:33:17 chain-unlinked strut 1 numbers named by 1K0-513-029-HP, no catalog link: 1K0-513-029-HD
+02:33:57 chain-unlinked strut 1 numbers named by 1K0-513-029-HM, no catalog link: 1K0-513-029-HB
+02:33:57 chain-unlinked strut 1 numbers named by 1K0-513-029-HQ, no catalog link: 1K0-513-029-HE
+02:35:57 chain-unlinked knuckle 1 numbers named by 5Q0-505-435-J, no catalog link: 5Q0-505-435-H
+02:35:57 chain-unlinked knuckle 1 numbers named by 5Q0-505-436-J, no catalog link: 5Q0-505-436-H
+02:36:21 chain-unlinked strut 1 numbers named by 8V0-413-031-AB, no catalog link: 8V0-413-031-H
+02:37:49 chain-unlinked strut 2 numbers named by 8V0-513-021-N, no catalog link: 8V0-513-021-J, 8V0-513-021-AA
+02:38:37 chain-unlinked strut 1 numbers named by 5Q0-413-031-HD, no catalog link: 5Q0-413-031-GK
+02:38:37 chain-unlinked strut 1 numbers named by 8V0-413-029-P, no catalog link: 8V0-413-029-K
+02:38:37 chain-unlinked strut 1 numbers named by 8V0-413-031-AC, no catalog link: 8V0-413-031-J
+02:38:45 nav-fail Audi A3 2014: NavError: HTTP 404 for https://www.audipartsgiant.com/2014-audi-a3-parts
+02:38:45 seg done tier=C Audi A3 [2006, 2019] seeds=[2006, 2017, 2014] records=1267 errors=15
+02:40:05 chain-unlinked knuckle 1 numbers named by 8K0-407-253-R, no catalog link: 8K0-407-253-G
+02:40:05 chain-unlinked knuckle 1 numbers named by 8K0-407-254-R, no catalog link: 8K0-407-254-G
+02:40:29 chain-unlinked knuckle 2 numbers named by 8K0-505-431-AE, no catalog link: 8K0-505-433-B, 8K0-505-431-AA
+02:40:29 chain-unlinked knuckle 1 numbers named by 8K0-505-432-AE, no catalog link: 8K0-505-432-AA
+02:41:01 chain-unlinked strut 1 numbers named by 8K0-413-029-N, no catalog link: 8K0-413-029-K
+02:41:01 chain-unlinked strut 1 numbers named by 8K0-413-030-N, no catalog link: 8K0-413-030-K
+02:42:45 chain-unlinked strut 2 numbers named by 8E0-413-031-CL, no catalog link: 8E0-413-031-BH, 8E0-413-031-BP
+02:42:45 chain-unlinked strut 1 numbers named by 8E0-413-031-CM, no catalog link: 8E0-413-031-BS
+02:43:01 chain-unlinked strut 2 numbers named by 8E0-513-036-AJ, no catalog link: 8H0-513-033, 8E0-513-033-M
+02:43:01 chain-unlinked strut 1 numbers named by 8E0-513-036-AL, no catalog link: 8E0-513-033-N
+02:43:17 chain-unlinked strut 1 numbers named by 8E0-513-036-AK, no catalog link: 8E0-513-033-A
+02:43:41 chain-unlinked strut 2 numbers named by 8E0-413-031-CK, no catalog link: 8E0-413-031-BG, 8E0-413-031-BN
+02:45:01 seg done tier=C Audi A4 Quattro [1997, 2016] seeds=[2009, 2006, 2011] records=1284 errors=15
+02:47:09 chain-unlinked strut 1 numbers named by 8F0-513-025-A, no catalog link: 8F0-513-025
+02:47:09 chain-unlinked strut 1 numbers named by 8F0-513-026-A, no catalog link: 8F0-513-026
+02:47:57 nav-fail Audi A5 2018: NavError: Audi A5 2018: no catalog model for this year
+02:47:57 seg done tier=C Audi A5 [2009, 2022] seeds=[2010, 2018] records=1296 errors=16
+02:48:21 chain-unlinked wiper-motor 2 numbers named by 4F9-955-711-B, no catalog link: 4F9-955-711, 4F9-955-711-A
+02:49:09 chain-unlinked knuckle 1 numbers named by 4F0-407-253-H, no catalog link: 4F0-407-253-F
+02:49:09 chain-unlinked knuckle 1 numbers named by 4F0-407-254-H, no catalog link: 4F0-407-254-F
+02:51:41 chain-unlinked knuckle 2 numbers named by 4B0-505-433-A, no catalog link: 4B0-505-435-A, 4B3-505-433
+02:51:41 chain-unlinked knuckle 2 numbers named by 4B0-505-434-A, no catalog link: 4B0-505-436-A, 4B3-505-434
+02:52:45 chain-unlinked strut 1 numbers named by 4B0-412-031-BN, no catalog link: 4B3-413-031-E
+02:54:29 seg done tier=C Audi A6 Quattro [2000, 2015] seeds=[2006, 2004, 2014] records=1314 errors=16
+02:55:49 chain-unlinked knuckle 1 numbers named by 8N0-407-255-E, no catalog link: 8N0-407-255-B
+02:55:49 chain-unlinked knuckle 1 numbers named by 8N0-407-256-E, no catalog link: 8N0-407-256-B
+02:56:13 chain-unlinked strut 1 numbers named by 8N0-413-031-M, no catalog link: 8N0-413-031-D
+02:58:21 chain-unlinked knuckle 3 numbers named by 3C0-505-433-L, no catalog link: 3C0-505-433-F, 3C0-505-433-H, 3C0-505-433-K
+02:58:21 chain-unlinked knuckle 3 numbers named by 3C0-505-434-L, no catalog link: 3C0-505-434-F, 3C0-505-434-K, 3C0-505-434-H
+02:59:09 chain-unlinked strut 2 numbers named by 8J0-413-031-R, no catalog link: 8J0-413-031-H, 8J0-413-031-M
+02:59:09 chain-unlinked strut 2 numbers named by 8J0-413-031-S, no catalog link: 8J0-413-031-K, 8J0-413-031-P
+02:59:09 chain-unlinked strut 2 numbers named by 8J0-413-031-T, no catalog link: 8J0-413-031-J, 8J0-413-031-N
+03:00:13 chain-unlinked strut 2 numbers named by 8J0-513-025-F, no catalog link: 8J0-513-025-A, 8J0-513-025-C
+03:00:21 nav-fail Audi TT 2007: NavError: HTTP 404 for https://www.audipartsgiant.com/2007-audi-tt-parts
+03:00:21 seg done tier=C Audi TT [2000, 2008] seeds=[2001, 2008, 2007] records=1338 errors=17
+03:01:33 chain-unlinked knuckle 1 numbers named by 8E0-505-433-C, no catalog link: 8E0-505-433-A
+03:01:33 chain-unlinked knuckle 1 numbers named by 8E0-505-434-C, no catalog link: 8E0-505-434-A
+03:01:49 chain-unlinked strut 1 numbers named by 8E0-413-031-CP, no catalog link: 8E0-413-031-CA
+03:01:57 chain-unlinked strut 1 numbers named by 8E0-513-036-AH, no catalog link: 8E0-513-033-L
+03:02:21 chain-unlinked strut 1 numbers named by 8E0-513-036-AE, no catalog link: 8E0-513-033
+03:02:21 chain-unlinked strut 1 numbers named by 8E0-513-036-AF, no catalog link: 8E0-513-033-G
+03:02:53 chain-unlinked strut 3 numbers named by 8E0-413-031-CC, no catalog link: 8E0-413-031-BF, 8E0-413-031-CB, 8E0-413-031-BE
+03:02:53 chain-unlinked strut 1 numbers named by 8E0-413-031-CN, no catalog link: 8E0-413-031-BT
+03:02:53 time budget reached records=1347
