@@ -1361,3 +1361,108 @@
 17:51:31 chain-unlinked trunk-lid 1 numbers named by 64401-53310, no catalog link: 64401-53311
 17:51:31 chain-unlinked trunk-lid 1 numbers named by 64401-53320, no catalog link: 64401-53321
 17:59:38 time budget reached records=3563
+17:59:56 start site=www.lexuspartsnow.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=3563 list_lines=1335 year_lines=216 url_index=17303
+17:59:56 completion worklist completion/toyota.own_page.json: 106 rows
+18:03:32 chain-unlinked hood 1 numbers named by 53301-53041, no catalog link: 53301-53091
+18:14:52 nav-fail Lexus GS 460 2008: ValueError: no model page for Lexus GS 460 (lexus-['gs_460'])
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87910-48610-C0, no catalog link: 87910-0E920
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87910-48542-C0, no catalog link: 87910-0E919
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87910-48542-B3, no catalog link: 87910-0E919
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87910-48610-A0, no catalog link: 87910-0E920
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87910-48610-B1, no catalog link: 87910-0E920
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87910-48610-B2, no catalog link: 87910-0E920
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87910-48610-C1, no catalog link: 87910-0E920
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87910-48610-D0, no catalog link: 87910-0E920
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87910-48610-E0, no catalog link: 87910-0E920
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87910-48610-E1, no catalog link: 87910-0E920
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87910-48610-J0, no catalog link: 87910-0E920
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87910-48620-A0, no catalog link: 87910-0E921
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87910-48620-B0, no catalog link: 87910-0E921
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87910-48620-B1, no catalog link: 87910-0E921
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87910-48620-C0, no catalog link: 87910-0E921
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87910-48620-C1, no catalog link: 87910-0E921
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87910-48620-D0, no catalog link: 87910-0E921
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87910-48620-E0, no catalog link: 87910-0E921
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87910-48620-E1, no catalog link: 87910-0E921
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87910-48620-J0, no catalog link: 87910-0E921
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87940-48590-A0, no catalog link: 87940-0E920
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87940-48590-B1, no catalog link: 87940-0E920
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87940-48590-B2, no catalog link: 87940-0E920
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87940-48590-C0, no catalog link: 87940-0E920
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87940-48590-C1, no catalog link: 87940-0E920
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87940-48590-D0, no catalog link: 87940-0E920
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87940-48590-E0, no catalog link: 87940-0E920
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87940-48590-E1, no catalog link: 87940-0E920
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87940-48590-J0, no catalog link: 87940-0E920
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87940-48600-A0, no catalog link: 87940-0E921
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87940-48600-B0, no catalog link: 87940-0E921
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87940-48600-B1, no catalog link: 87940-0E921
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87940-48600-C0, no catalog link: 87940-0E921
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87940-48600-C1, no catalog link: 87940-0E921
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87940-48600-D0, no catalog link: 87940-0E921
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87940-48600-E0, no catalog link: 87940-0E921
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87940-48600-E1, no catalog link: 87940-0E921
+18:18:36 chain-unlinked side-mirrors 1 numbers named by 87940-48600-J0, no catalog link: 87940-0E110-J0
+18:21:08 product-fail https://www.lexuspartsnow.com/parts/lexus-mirror-assy-outer-r~87940-0e100-e1.html: ValueError: no __INITIAL_STORE__ on page
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87910-0E110-A1, no catalog link: 87910-0E920
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87940-0E092-C1, no catalog link: 87940-0E919
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87940-0E100-A0, no catalog link: 87940-0E920
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87940-0E100-A1, no catalog link: 87940-0E920
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87940-0E100-B1, no catalog link: 87940-0E920
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87940-0E100-B2, no catalog link: 87940-0E920
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87940-0E100-C1, no catalog link: 87940-0E920
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87940-0E100-D0, no catalog link: 87940-0E920
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87940-0E100-E0, no catalog link: 87940-0E920
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87940-0E100-J0, no catalog link: 87940-0E920
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87940-0E110-A0, no catalog link: 87940-0E921
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87940-0E110-B1, no catalog link: 87940-0E921
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87940-0E110-C0, no catalog link: 87940-0E921
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87940-0E110-C1, no catalog link: 87940-0E921
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87940-0E110-D0, no catalog link: 87940-0E921
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87940-0E110-E0, no catalog link: 87940-0E921
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87940-0E110-E1, no catalog link: 87940-0E921
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87910-0E102-B3, no catalog link: 87910-0E919
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87910-0E110-C0, no catalog link: 87910-0E920
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87910-0E110-A0, no catalog link: 87910-0E920
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87910-0E120-D0, no catalog link: 87910-0E921
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87910-0E102-C0, no catalog link: 87910-0E919
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87910-0E110-B1, no catalog link: 87910-0E920
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87910-0E110-B2, no catalog link: 87910-0E920
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87910-0E110-C1, no catalog link: 87910-0E920
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87910-0E110-D0, no catalog link: 87910-0E920
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87910-0E110-E0, no catalog link: 87910-0E920
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87910-0E110-E1, no catalog link: 87910-0E920
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87910-0E110-J0, no catalog link: 87910-0E920
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87910-0E120-A0, no catalog link: 87910-0E921
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87910-0E120-B0, no catalog link: 87910-0E921
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87910-0E120-B1, no catalog link: 87910-0E921
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87910-0E120-C0, no catalog link: 87910-0E921
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87910-0E120-C1, no catalog link: 87910-0E921
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87910-0E120-E0, no catalog link: 87910-0E921
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87910-0E120-E1, no catalog link: 87910-0E921
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87910-0E120-J0, no catalog link: 87910-0E921
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87940-0E100-C0, no catalog link: 87940-0E920
+18:22:28 chain-unlinked side-mirrors 1 numbers named by 87940-0E110-B0, no catalog link: 87940-0E921
+18:22:44 nav-fail Lexus GS 450h 2008: ValueError: no model page for Lexus GS 450h (lexus-['gs_450h'])
+18:25:26 nav-fail Lexus GS 450h 2009: ValueError: no model page for Lexus GS 450h (lexus-['gs_450h'])
+18:27:09 nav-fail Lexus HS 250h 2010: ValueError: no model page for Lexus HS 250h (lexus-['hs_250h'])
+18:27:16 nav-fail Lexus GX 470 2004: ValueError: no model page for Lexus GX 470 (lexus-['gx_470'])
+18:27:24 nav-fail Lexus CT 200h 2012: ValueError: no model page for Lexus CT 200h (lexus-['ct_200h'])
+18:27:56 chain-unlinked window-regulator 1 numbers named by 85710-50101, no catalog link: 85710-50104
+18:27:56 chain-unlinked window-regulator 1 numbers named by 85720-50101, no catalog link: 85720-50104
+18:28:22 chain-unlinked window-regulator 1 numbers named by 85710-50111, no catalog link: 85710-50114
+18:28:22 chain-unlinked window-regulator 1 numbers named by 85720-50111, no catalog link: 85720-50114
+18:29:17 chain-unlinked window-regulator 1 numbers named by 85710-50103, no catalog link: 85710-50104
+18:29:17 chain-unlinked window-regulator 1 numbers named by 85720-50103, no catalog link: 85720-50104
+18:29:40 chain-unlinked window-regulator 1 numbers named by 85710-50113, no catalog link: 85710-50114
+18:29:40 chain-unlinked window-regulator 1 numbers named by 85720-50113, no catalog link: 85720-50114
+18:29:40 nav-fail Lexus GX 470 2005: ValueError: no model page for Lexus GX 470 (lexus-['gx_470'])
+18:29:40 nav-fail Lexus CT 200h 2011: ValueError: no model page for Lexus CT 200h (lexus-['ct_200h'])
+18:29:40 nav-fail Lexus CT 200h 2013: ValueError: no model page for Lexus CT 200h (lexus-['ct_200h'])
+18:29:40 nav-fail Lexus CT 200h 2014: ValueError: no model page for Lexus CT 200h (lexus-['ct_200h'])
+18:29:40 nav-fail Lexus CT 200h 2015: ValueError: no model page for Lexus CT 200h (lexus-['ct_200h'])
+18:29:40 nav-fail Lexus GX 470 2003: ValueError: no model page for Lexus GX 470 (lexus-['gx_470'])
+18:29:40 nav-fail Lexus GX 470 2006: ValueError: no model page for Lexus GX 470 (lexus-['gx_470'])
+18:29:40 nav-fail Lexus GX 470 2007: ValueError: no model page for Lexus GX 470 (lexus-['gx_470'])
+18:29:40 nav-fail Lexus HS 250h 2011: ValueError: no model page for Lexus HS 250h (lexus-['hs_250h'])
+18:30:04 time budget reached records=3641
