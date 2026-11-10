@@ -426,6 +426,8 @@ class Curation:
             return True
         if self.ns == "subaru" and _subaru_body_excludes(notes, T[1]):
             return True
+        if self.ns == "toyota" and _lexus_chassis_excludes(notes, T):
+            return True
         return self._model_names_exclude(notes, T)
 
     def _model_names_exclude(self, notes, T) -> bool:
@@ -2102,6 +2104,52 @@ def _production_excludes(notes, year: int) -> bool:
         if not ok:
             return True
     return False
+
+
+# Lexus chassis codes (2026-11-10 live audit: lexuspartsnow rows carry the
+# chassis a number is for, e.g. 'GRS19#' = V6 GS, 'MCU3#.. JPP' = RX 330, and
+# curation credited them to other engines: GS 430 2006 from GRS19# headlamp rows,
+# RX 350 2007 from MCU3# rows). US chassis families per feed model; a model not
+# listed here is not gated.
+_LEXUS_CHASSIS = {
+    "GS 300": ("JZS160", "JZS161", "GRS190", "GRS195"), "GS 400": ("UZS160",),
+    "GS 430": ("UZS161", "UZS190"), "GS 350": ("GRS191", "GRS196", "GRL10", "GRL15", "GRL12", "GRL16"),
+    "GS 460": ("URS190",), "GS 450h": ("GWS191", "GWL10"),
+    "IS 300": ("JCE10", "JCE15", "ASE30", "GSE37"), "IS 250": ("GSE20", "GSE25", "GSE30", "GSE35"),
+    "IS 350": ("GSE21", "GSE26", "GSE31", "GSE36"), "IS F": ("USE20",),
+    "RX 300": ("MCU10", "MCU15"), "RX 330": ("MCU33", "MCU38"),
+    "RX 350": ("GSU30", "GSU31", "GSU35", "GSU36", "GGL10", "GGL15", "GGL16", "GGL25"),
+    "RX 400h": ("MHU33", "MHU38"), "RX 450h": ("GYL10", "GYL15", "GYL16", "GYL25"),
+    "ES 300": ("VCV10", "MCV10", "MCV20", "MCV30"), "ES 330": ("MCV31",), "ES 350": ("GSV40", "GSV60"),
+    "LS 400": ("UCF10", "UCF11", "UCF20", "UCF21"), "LS 430": ("UCF30", "UCF31"),
+    "LS 460": ("USF40", "USF41", "USF45", "USF46"),
+    "SC 300": ("JZZ31",), "SC 400": ("UZZ30", "UZZ31"), "SC 430": ("UZZ40",),
+    "GX 470": ("UZJ120",), "GX 460": ("GRJ150",), "LX 470": ("UZJ100",), "LX 570": ("URJ200",),
+}
+_CHASSIS_TOKEN = re.compile(r"(?<![A-Z0-9])([A-Z]{3}\d[0-9#]{0,3})(?![A-Z0-9])")
+
+
+def _chassis_match(code: str, chassis: str) -> bool:
+    code = code.rstrip("#")
+    return chassis.startswith(code) if len(code) <= len(chassis) else code.startswith(chassis)
+
+
+def _lexus_chassis_excludes(notes, T) -> bool:
+    """True when a note names Lexus chassis codes and none is T's (per note;
+    pooled class-wide like the Subaru body codes). Only removes claims."""
+    if T[0] != "Lexus":
+        return False
+    fam = _LEXUS_CHASSIS.get(T[1])
+    if not fam:
+        return False
+    for n in notes or []:
+        codes = [c for c in _CHASSIS_TOKEN.findall(n or "") if c[:3] in _LEXUS_CHASSIS_PREFIXES]
+        if codes and not any(_chassis_match(c, ch) for c in codes for ch in fam):
+            return True
+    return False
+
+
+_LEXUS_CHASSIS_PREFIXES = frozenset(ch[:3] for fam in _LEXUS_CHASSIS.values() for ch in fam)
 
 
 _DIVISION_RE = re.compile(r"\b([A-Za-z]+)\s+Division\s+Derivative\b", re.I)
