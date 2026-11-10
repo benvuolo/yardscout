@@ -1627,3 +1627,26 @@
 13:14:00 start site=www.bmwpartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2133 list_lines=1685 year_lines=220 url_index=0
 13:14:00 completion worklist completion/bmw.own_page.json: 507 rows
 13:45:29 time budget reached records=2133
+13:45:51 start site=www.bmwpartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2133 list_lines=1901 year_lines=239 url_index=0
+13:45:51 completion worklist completion/bmw.own_page.json: 507 rows
+14:02:08 chain-unlinked fender 1 numbers named by 41-35-8-122-236, no catalog link: 41-35-2-255-040
+14:11:20 product-fail https://www.bmwpartsdeal.com/parts/bmw-accessories_outer_tail_lamp_left-63217252093.html: ValueError: no partInfo in store
+14:11:20 product-fail https://www.bmwpartsdeal.com/parts/bmw-accessories_outer_tail_lamp_right-63217252094.html: ValueError: no partInfo in store
+14:11:20 product-fail https://www.bmwpartsdeal.com/parts/bmw-accessories_tailgate_tail_lamp_left-63217252783.html: ValueError: no partInfo in store
+14:11:20 product-fail https://www.bmwpartsdeal.com/parts/bmw-accessories_tailgate_tail_lamp_right-63217252784.html: ValueError: no partInfo in store
+14:12:08 chain-unlinked bumper-front 1 numbers named by 51-11-8-125-303, no catalog link: 51-11-8-173-098
+14:12:24 chain-unlinked climate-control 1 numbers named by 64-11-6-901-314, no catalog link: 64-11-6-901-307
+14:12:33 chain-unlinked door-front 2 numbers named by 41-51-8-215-309, no catalog link: 41-51-8-184-183, 41-51-8-184-181
+14:12:33 chain-unlinked door-front 2 numbers named by 41-51-8-215-310, no catalog link: 41-51-8-184-182, 41-51-8-184-184
+14:12:43 chain-unlinked fender 1 numbers named by 41-35-8-157-625, no catalog link: 41-35-8-157-623
+14:12:43 chain-unlinked fender 1 numbers named by 41-35-8-157-626, no catalog link: 41-35-8-157-624
+14:12:43 chain-unlinked fender 1 numbers named by 41-35-8-269-095, no catalog link: 41-35-8-240-003
+14:12:43 chain-unlinked fender 1 numbers named by 41-35-8-269-096, no catalog link: 41-35-8-240-004
+14:12:48 chain-unlinked headlights 1 numbers named by 63-12-8-376-277, no catalog link: 63-12-8-361-313
+14:12:48 chain-unlinked headlights 1 numbers named by 63-12-8-376-278, no catalog link: 63-12-8-361-314
+14:12:48 chain-unlinked headlights 1 numbers named by 63-12-8-386-957, no catalog link: 63-12-8-381-339
+14:12:56 chain-unlinked side-mirrors 1 numbers named by 51-16-8-266-468, no catalog link: 51-16-8-191-306
+14:13:12 chain-unlinked trunk-lid 3 numbers named by 41-62-8-230-560, no catalog link: 41-62-8-185-075, 41-62-8-223-201, 41-00-8-185-076
+14:17:36 chain-unlinked tail-lights 1 numbers named by 63-21-7-174-403, no catalog link: 63-21-4-428-213
+14:17:36 chain-unlinked tail-lights 1 numbers named by 63-21-7-174-404, no catalog link: 63-21-4-428-214
+14:18:33 time budget reached records=2143
