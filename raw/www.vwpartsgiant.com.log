@@ -1518,3 +1518,6 @@
 09:06:08 nav-fail Volkswagen Golf Alltrack 2018: NavError: HTTP 404 for https://www.vwpartsgiant.com/2018-volkswagen-golf-alltrack-parts
 09:11:44 nav-fail Volkswagen Golf Alltrack 2019: NavError: HTTP 404 for https://www.vwpartsgiant.com/2019-volkswagen-golf-alltrack-parts
 09:19:28 time budget reached records=1780
+09:19:41 start site=www.vwpartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C'] records=1780 list_lines=1825 year_lines=346 url_index=11381
+09:19:41 completion worklist completion/vag.own_page.json: 171 rows
+09:21:49 completion finished records=1780 errors=24 open_rows=0 chains_owed=0
