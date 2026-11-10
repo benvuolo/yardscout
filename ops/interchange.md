@@ -3560,3 +3560,4 @@ each); nothing allowlisted or crawled.
   - On resume: check `.c1.done`, re-curate on a pinned sha, run the §11.4
     sample (verifiers pass `--max-lines 100000`), hub confirmation, ship;
     then tier D on unblocked sites.
+- 14:30 UTC: the source-scout-2 session is idle at the hub's request (owner usage). No scheduled check-ins of its own are pending. It resumes only when the hub messages it.
