@@ -902,3 +902,37 @@
 06:34:13 seg done tier=B Subaru Impreza Wagon [1993, 2007] seeds=[2005] records=2102 errors=6
 06:34:13 seg done tier=B Subaru Impreza [2017, 2022] seeds=[2017] records=2102 errors=6
 06:34:13 finished records=2102 errors=6 chain_records=1 chain_unlinked=439 chain_failed=0 chain_given_up=0
+06:17:06 start site=www.subarupartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C'] records=2102 list_lines=700 year_lines=62 url_index=7366
+06:17:06 completion worklist completion/subaru.own_page.json: 110 rows
+06:21:48 chain-unlinked side-mirrors 3 numbers named by 91031AG01BNN, no catalog link: 91031AG01BBH, 91031AG01BTE, 91031AG01BU3
+06:21:48 chain-unlinked side-mirrors 2 numbers named by 91031AG03BNN, no catalog link: 91031AG03BFW, 91031AG03BU3
+06:21:48 chain-unlinked side-mirrors 3 numbers named by 91031AG00BNN, no catalog link: 91031AG00BTE, 91031AG00BU3, 91031AG00BBH
+06:21:48 chain-unlinked side-mirrors 6 numbers named by 91031AG02BNN, no catalog link: 91031AG02BBH, 91031AG02BU3, 91031AG02BFW, 91031AG02BHZ, 91031AG02BTE, 91031AG02BGA
+06:27:14 chain-unlinked side-mirrors 1 numbers named by 91031AG02ANN, no catalog link: 91031AG02ADJ
+06:29:23 chain-unlinked headlights 1 numbers named by 84001AJ21A, no catalog link: 84001AJ21B
+06:29:23 chain-unlinked headlights 1 numbers named by 84001AJ23A, no catalog link: 84001AJ23B
+06:29:23 chain-unlinked headlights 1 numbers named by 84001AJ20A, no catalog link: 84001AJ20B
+06:29:23 chain-unlinked headlights 1 numbers named by 84001AJ22A, no catalog link: 84001AJ22B
+06:29:48 chain-unlinked side-mirrors 1 numbers named by 91036AJ13B, no catalog link: 91036AJ13C
+06:29:48 chain-unlinked side-mirrors 1 numbers named by 91036AJ15B, no catalog link: 91036AJ15C
+06:29:48 chain-unlinked side-mirrors 1 numbers named by 91036AJ14B, no catalog link: 91036AJ14C
+06:29:48 chain-unlinked side-mirrors 1 numbers named by 91036AJ12B, no catalog link: 91036AJ12C
+06:30:19 chain-unlinked window-switch 1 numbers named by 83071AJ21A, no catalog link: 83071AJ21C
+06:30:19 chain-unlinked window-switch 1 numbers named by 83071AJ22A, no catalog link: 83071AJ22B
+06:31:31 chain-unlinked headlights 1 numbers named by 84001AJ01E, no catalog link: 84001AJ01G
+06:31:31 chain-unlinked headlights 1 numbers named by 84001AJ00E, no catalog link: 84001AJ00G
+06:34:18 chain-unlinked side-mirrors 1 numbers named by 91031AE31ARD, no catalog link: 91031AE91ANN
+06:34:18 chain-unlinked side-mirrors 1 numbers named by 91031AE30ARD, no catalog link: 91031AE90ANN
+06:39:48 chain-unlinked headlights 1 numbers named by 84001AJ01B, no catalog link: 84001AJ01G
+06:39:48 chain-unlinked headlights 1 numbers named by 84001AJ01D, no catalog link: 84001AJ01G
+06:39:48 chain-unlinked headlights 1 numbers named by 84001AJ00B, no catalog link: 84001AJ00G
+06:39:48 chain-unlinked headlights 1 numbers named by 84001AJ00D, no catalog link: 84001AJ00G
+06:40:04 chain-unlinked side-mirrors 1 numbers named by 91036AJ13A, no catalog link: 91036AJ13C
+06:40:04 chain-unlinked side-mirrors 1 numbers named by 91036AJ15A, no catalog link: 91036AJ15C
+06:40:04 chain-unlinked side-mirrors 1 numbers named by 91036AJ12A, no catalog link: 91036AJ12C
+06:40:04 chain-unlinked side-mirrors 1 numbers named by 91036AJ14A, no catalog link: 91036AJ14C
+06:41:32 chain-unlinked headlights 1 numbers named by 84001AG11A, no catalog link: 84001AG11B
+06:41:32 chain-unlinked headlights 1 numbers named by 84001AG10A, no catalog link: 84001AG10B
+06:43:38 chain-unlinked headlights 1 numbers named by 84001AJ01A, no catalog link: 84001AJ01G
+06:43:38 chain-unlinked headlights 1 numbers named by 84001AJ00A, no catalog link: 84001AJ00G
+06:47:48 time budget reached records=2147
