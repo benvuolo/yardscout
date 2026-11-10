@@ -115,8 +115,6 @@ def gsp_rows(r: dict):
     # multi-model unit it puts engines on models that never had them (§11.4
     # audit 2026-11-10: TL/CL "3.0", ML320 "5.5", FX35 "3.7"). So title engines
     # go on rows only when the unit covers one make/model; otherwise no engine.
-    if len(models) > 1:
-        engines = [""]
     rows = []
     for a in r.get("applications", []):
         rp = norm_position(a.get("position", ""))
@@ -241,6 +239,27 @@ def oneaauto_rows(r: dict):
     return refuse, pos, rows
 
 
+# ------------------------------------------------- lot-observed engines (GSP) ---
+def load_observed() -> dict:
+    """(make, squash(model), year) -> {liters} from the cars on our lots: the
+    VIN decode's engine in docs/data/vehicle_extras.json (field 'engine')."""
+    inv_p = GA.REPO / "docs" / "data" / "inventory_live.json"
+    ex_p = GA.REPO / "docs" / "data" / "vehicle_extras.json"
+    try:
+        inv, ex = json.loads(inv_p.read_text()), json.loads(ex_p.read_text())
+    except (OSError, ValueError):
+        return {}
+    F = {k: i for i, k in enumerate(inv["fields"])}
+    ei = ex["extraFields"].index("engine")
+    out = defaultdict(set)
+    for v in inv["vehicles"]:
+        e = ex["extras"].get(str(v[F["id"]]))
+        lit = GA.parse_engine(e[ei])[0] if e and len(e) > ei else None
+        if lit and v[F["year"]]:
+            out[(v[F["make"]] or "", GA.squash(v[F["model"]]), int(v[F["year"]]))].add(round(lit, 1))
+    return dict(out)
+
+
 # ------------------------------------------------------ donor drive gate (d) ---
 # Hub 2026-11-10, rule (d). Basis (physical, not fitment): a CV axle exists
 # only at a DRIVEN corner. The gate reads the DONOR's own VIN decode
@@ -334,8 +353,9 @@ def split(units: dict) -> bool:
 
 # ------------------------------------------------------------------ build ---
 def build(records: list, names: GA.Names, site: str, src: str = "", complete: dict | None = None,
-          gens: dict | None = None, facelifts: dict | None = None) -> dict:
+          gens: dict | None = None, facelifts: dict | None = None, observed: dict | None = None) -> dict:
     gens = load_generations() if gens is None else gens
+    obs = (load_observed() if observed is None else observed) if site == "gspnorthamerica.com" else None
     fl = load_facelifts() if facelifts is None else facelifts
     meta = SITES[site]
     rowfn = gsp_rows if meta["short"] == "gsp" else oneaauto_rows
@@ -412,7 +432,18 @@ def build(records: list, names: GA.Names, site: str, src: str = "", complete: di
             if refuse:
                 continue
             for y in range(a["years"][0], a["years"][1] + 1):
-                for e in engines:
+                labels = engines
+                if obs is not None:
+                    # §11.4 round 2: GSP's title list is unit-wide and can miss or
+                    # contradict a listed model's engines. Per model-year, keep
+                    # only the title engines that cars of that model-year on the
+                    # lots actually have; none (or no decoded car) -> drop the year.
+                    seen_l = obs.get((mk, GA.squash(md), y), set()) | obs.get((a["make"], GA.squash(a["model"]), y), set())
+                    labels = [e for e in engines if e and round(float(e[:-1]), 1) in seen_l]
+                    if not labels:
+                        refused_rows["no_lot_car_with_title_engine" if seen_l else "no_decoded_lot_car"] += 1
+                        continue
+                for e in labels:
                     accepted[(cat, unit, cpos)].append((mk, md, y, e, brand))
             retrieved[(cat, unit)] = r.get("retrieved", "")
             unit_meta[(cat, unit)] = (mt.get("options", ()), mt.get("cosmetic", False))
@@ -437,7 +468,11 @@ def build(records: list, names: GA.Names, site: str, src: str = "", complete: di
                 f"vehicles in {meta['label']}'s own application list; aftermarket data, not the carmaker's "
                 f"catalog. No other unit of the same brand is listed for the same {where or ''}position on these "
                 f"cars. " + ("Match the engine. " if eng else "No engine is stated; check the engine. ")
-                + "Drive, transmission, trim and suspension (sport / electronic) are not stated; match them."
+                + ("Transmission, trim and suspension (sport / electronic) are not stated; match them."
+                   if cat == "cv-axle" and pos else
+                   "Drive, transmission, trim and suspension (sport / electronic) are not stated; match them.")
+                + (" Engines shown are the title's engines that cars of that model and year on the lots have."
+                   if obs is not None else "")
                 + (f" If equipped: {', '.join(opts)}." if opts else "")
                 + (" Color or finish may differ; it may need paint." if cosm else ""))
         ocat = CAT_OUT.get(cat, cat)

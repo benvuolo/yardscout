@@ -34,6 +34,12 @@ class Names:  # offline stand-in for groups_am.Names (lot names = feed names)
         return (make, model, True)
 
 
+class AllObs(dict):  # offline: every engine size "seen" on the lots, unless a test says otherwise
+    def get(self, k, default=None):
+        return {round(x / 10, 1) for x in range(5, 90)}
+
+
+R.load_observed = lambda: AllObs()
 FX = HERE / "fixtures"
 GENS = {"honda|accord": [[1990, 1993], [1994, 1997], [1998, 2002], [2003, 2007], [2008, 2012]],
         "honda|crv": [[2017, 2022]], "honda|pilot": [[2016, 2022]]}
@@ -66,7 +72,8 @@ check("clean unit -> one Likely aftermarket group per position", d["summary"]["g
       and g["src"] == "aftermarket" and g["position"] == "front left" and g["id"] == "am:gsp:cv-axle:NCV1:front-left")
 check("title engines go on every app, no drive/trans", g["apps"] == [["Honda", "CR-V", 2017, 2022, "1.5L"],
                                                                   ["Honda", "CR-V", 2017, 2022, "2.4L"]])
-check("note: our words, says to check drive/trans", "trim and suspension" in g["note"] and "Drive, transmission" in g["note"]
+check("cv-axle note leaves drive to the app's own check-drive line (D1)", "trim and suspension" in g["note"]
+      and "drive" not in g["note"].lower() and "Transmission" in g["note"]
       and "GSP NCV1" in g["note"])
 other = gsp_rec("NCV2", [(2019, 2019, "Honda", "CR-V", "")])
 d = B([clean, other], Names(), "gspnorthamerica.com")
@@ -92,9 +99,21 @@ for name, rec, why in [
     check(f"GSP refuses: {name}", not d["groups"] and any(k.endswith(":" + why) for k in d["summary"]["refused_units"]))
 
 mm = gsp_rec("X6", [(1999, 2003, "Acura", "TL", ""), (1998, 2002, "Honda", "Accord", "")], engines=("3.0",))
-d = R.build([mm], Names(), "gspnorthamerica.com")
-check("multi-model GSP unit: no title engine on any row (TL never had the 3.0)",
-      d["groups"] and all(a[4] == "" for a in d["groups"][0]["apps"]) and "No engine is stated" in d["groups"][0]["note"])
+OBS = {("Acura", "tl", y): {3.2} for y in range(1999, 2004)}
+OBS.update({("Honda", "accord", y): {2.3, 3.0} for y in range(1998, 2003)})
+d = R.build([mm], Names(), "gspnorthamerica.com", observed=OBS)
+check("title engine kept only where lot cars of that model-year have it (Accord 3.0 yes, TL 3.0 no)",
+      d["groups"] and {(a[1], a[4]) for a in d["groups"][0]["apps"]} == {("Accord", "3.0L")}
+      and d["refused_rows"].get("no_lot_car_with_title_engine") == 5)
+ct = gsp_rec("X11", [(2017, 2020, "Cadillac", "CT6", "")], engines=("2.0", "4.2"))
+OBS2 = {("Cadillac", "ct6", 2017): {2.0, 3.6}, ("Cadillac", "ct6", 2018): {2.0, 3.0},
+        ("Cadillac", "ct6", 2019): {2.0, 4.2}, ("Cadillac", "ct6", 2020): {4.2}}
+apps = sorted(map(tuple, R.build([ct], Names(), "gspnorthamerica.com", observed=OBS2)["groups"][0]["apps"]))
+check("per-year engines: CT6 4.2L only from 2019 (lot-observed), 2.0L through 2019",
+      apps == [("Cadillac", "CT6", 2017, 2019, "2.0L"), ("Cadillac", "CT6", 2019, 2020, "4.2L")])
+nd = R.build([gsp_rec("X12", [(2010, 2011, "Honda", "Fit", "")], engines=("1.5",))], Names(), "gspnorthamerica.com",
+             observed={})
+check("no decoded lot car for the model-year -> row dropped", not nd["groups"] and nd["refused_rows"].get("no_decoded_lot_car") == 2)
 sm1 = gsp_rec("X7", [(2017, 2022, "Honda", "CR-V", "")], engines=("1.5", "2.4"))
 check("single-model GSP unit keeps its title engines", {a[4] for a in R.build([sm1], Names(), "gspnorthamerica.com")["groups"][0]["apps"]}
       == {"1.5L", "2.4L"})

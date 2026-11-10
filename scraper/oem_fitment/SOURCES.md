@@ -465,3 +465,13 @@ evidence than any aftermarket list.
 - **Unit-level generation guard:** a unit whose rows for one make/model,
   taken together, span more than one generation is refused (M37 + Q60,
   A3 8V + 8Y).
+- **Engines, after §11.4 round 2 (2026-11-10).** This replaces the
+  multi-model no-engine rule. For each row and year, the engines kept are the
+  title's engines that cars of that make/model/year on our lots decode to
+  (VIN decode, `docs/data/vehicle_extras.json`). A year with no overlap
+  (e.g. GL "3.5", CX-9 "2.3", CT6 4.2L before 2019) or with no decoded lot
+  car is dropped. This only removes claims: every emitted engine is in GSP's
+  own title and on GSP's own row.
+- **Note:** cv-axle notes no longer say "drive". The app's
+  "drivetrain not confirmed" line (gate d) then shows on undecoded donors
+  (round-2 finding D1).
