@@ -685,6 +685,9 @@ class Curation:
             return P.Resolution(("DM",), why or res.reason, res.side, res.door)
         if cat == "climate-control":
             return P.Resolution(("CSW",) if c.packaging == "switch-module" else ("C",), res.reason)
+        if cat == "wiper-motor" and c.packaging == "linkage":
+            # Ford "Linkage Assy - Wiper": a linkage, not a motor
+            return P.Resolution((), "out_of_category", res.side, res.door)
         del ctx
         return res
 
@@ -926,6 +929,12 @@ class Curation:
             else:
                 if any(not self.comparable(cat, a, b) for i, a in enumerate(keys) for b in keys[i + 1:]):
                     reasons.append("option_split")
+                if cat in _ONE_PACK_CATS:
+                    packs = {members[k]["klass"].packaging for k in keys}
+                    if "module" in packs:
+                        reasons.append("packaging_unstated")
+                    elif len(packs) > 1:
+                        reasons.append("packaging_split")
         # chain crossing slots / packaging
         for (a, b) in self.edges.get(cat, ()):
             if a in members and b in members:
@@ -1338,6 +1347,12 @@ class Curation:
                 Ts = Ts2
                 if len({(T[0], T[1]) for T in Ts}) < 2:
                     continue
+            if cat in policy.STRICT_NOTE_CATS:
+                why_s = self._strict_refusal(c, cat, [(T, m) for T, m in cand if T in set(Ts)], slots)
+                if why_s:
+                    self.refuse(why_s[0], cat=cat, pn=sorted(c.pns)[0],
+                                evidence=[r.pointer for r in c.records], detail=why_s[1])
+                    continue
             reason, text = _likely_reason(whys)
             text = policy.GROUP_NOTES.get((self.ns, cat, sorted(c.pns)[0]), text)
             cab = self._cab_only(c, cat, Ts)
@@ -1378,7 +1393,7 @@ class Curation:
                                 detail=why_w[1])
                     continue
             slot = "+".join(sorted(slots)) or "C"
-            note = _likely_note(brand, pns[0], text, _pack_text(cat, c.packaging))
+            note = _likely_note(brand, pns[0], text, _pack_text(cat, c.packaging, slot))
             # its own evidence date: build-time expiry drops a Likely group
             # whose oldest record passes 120 days (review F18)
             stamps = sorted(r.retrieved for r in c.records if _ts(r.retrieved))
@@ -1387,6 +1402,26 @@ class Curation:
                         "note": note, "keys": [key], "cars": sum(self.inv_counts.get(T, 0) for T in Ts),
                         "oldest_retrieved": stamps[0] if stamps else None})
         return out
+
+    def _strict_refusal(self, c, cat, cand, slots):
+        """(code, detail) for a strict-note category (policy.STRICT_NOTE_CATS,
+        hub 2026-11-09 18:20) when an app's own-page note is anything but a
+        position, or the class does not sit in exactly one clean slot with
+        one stated packaging; else None. Only removes claims."""
+        if c.packaging in ("module", "linkage", ""):
+            return "packaging_unstated", c.packaging or "none"
+        bad = sorted({m["slot"].reason for _, m in cand if m["slot"].reason})
+        if bad or len(slots) != 1:
+            return "strict_position", ";".join(bad) or "+".join(sorted(slots))
+        for T, _ in cand:
+            notes = self.own_page(T, cat, c)[1]
+            ctx = N.NoteContext(T[2], frozenset(m.lower() for _, m in self.t_sources.get(T, set())),
+                                self.ns_models_f)
+            v = N.classify(notes, ctx)
+            extra = sorted(v.classes - policy.STRICT_NOTE_ALLOWED)
+            if extra:
+                return "strict_note", f"{T[0]} {T[1]} {T[2]}: {','.join(extra)}"
+        return None
 
     def wheel_group_refusal(self, Ts, cat, c):
         """(code, detail) when a wheels Likely group lacks a stated, agreeing
@@ -1917,12 +1952,23 @@ PACK_TEXT = {"motor": "window motor only", "reg": "regulator without motor", "as
              "switch-module": "single switch module, not the full control panel"}
 _PACK_CATS = {"window-regulator": ("motor", "reg", "assy", "door-module"),
               "climate-control": ("switch-module",)}
+# categories whose slot members must all share one packaging (tier C wiper)
+_ONE_PACK_CATS = {"wiper-motor"}
 
 
-def _pack_text(cat: str, packaging: str) -> str:
+_WIPER_END = {"F": "windshield wiper motor", "R": "rear wiper motor",
+              "FL": "driver-side windshield wiper motor (twin-motor)",
+              "FR": "passenger-side windshield wiper motor (twin-motor)"}
+_WIPER_PACK = {"motor": "", "drive": " with linkage", "kit": " kit", "motor-ecb": " without circuit board"}
+
+
+def _pack_text(cat: str, packaging: str, slot: str = "") -> str:
     """Packaging words for a Likely note, only in the category they describe
     (2026-11-09 GM resample: climate-control panels with packaging 'assy'
-    read 'regulator with motor'; a full control panel needs no words)."""
+    read 'regulator with motor'; a full control panel needs no words).
+    wiper-motor names its end and packaging ("rear wiper motor with linkage")."""
+    if cat == "wiper-motor":
+        return _WIPER_END[slot] + _WIPER_PACK[packaging] if slot in _WIPER_END and packaging in _WIPER_PACK else ""
     return PACK_TEXT.get(packaging, "") if packaging in _PACK_CATS.get(cat, ()) else ""
 
 

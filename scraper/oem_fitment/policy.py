@@ -310,8 +310,23 @@ CATEGORY_POLICY: dict[str, dict] = {
                                       ["FL", "FR", "SL", "SR"]]},
     "window-switch": {"slots": ["DM"], "axes": ["side"], "required": [["DM"]]},
     "climate-control": {"slots": ["C", "CSW"], "axes": [], "required": [["C"], ["CSW"], ["C", "CSW"]]},
+    # tier C (2026-11-10, ops/interchange.md §10 wiper handover): F windshield,
+    # R rear window / liftgate / back door. A twin-motor windshield (Hyundai
+    # "..., LH", Volvo Driver/Passenger Side) is FL + FR inside F. Exact-set
+    # match: a lone sided front motor (FL without FR) closes nothing, so a
+    # mounting-side word on a single motor only removes claims.
+    "wiper-motor": {"slots": ["F", "FL", "FR", "R"], "axes": ["end", "side"],
+                    "required": [["F"], ["F", "R"], ["FL", "FR"], ["FL", "FR", "R"]]},
 }
 DEFAULT_CATEGORY_POLICY = {"slots": ["C"], "axes": [], "required": [["C"]]}
+# Tier C strict note refusal (hub decision 2026-11-09 18:20 UTC,
+# ops/interchange.md §8): in these categories a Likely group is refused when
+# any app's own list-page row carries a note of any class but POSITION
+# (option, tank/fuel, emissions, plant, production date, drive, body, trim,
+# package, years, or a clause the lexicon does not know), and when any app's
+# record does not resolve to exactly one clean slot.
+STRICT_NOTE_CATS = frozenset({"wiper-motor"})
+STRICT_NOTE_ALLOWED = frozenset({"POSITION"})
 # §5.14: colour collapse is off in Phase 1 for every category.
 COLOR_COLLAPSE: dict[str, bool] = {}
 
@@ -367,6 +382,7 @@ NOUN: dict[str, str] = {
     "trunk-lid": r"trunk|deck-?_?lid",
     "tailgate": r"tail-?_?gate|rear-?_?gate",
     "liftgate": r"lift-?_?gate|back-door",
+    "wiper-motor": r"wiper",
 }
 # {site: {cat: {sub_slug: basis}}}. Empty: no page has been exempted yet.
 SIBLING_IGNORE: dict[str, dict[str, dict[str, str]]] = {}

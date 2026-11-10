@@ -30,6 +30,14 @@ DOOR_S = re.compile(r"\bslid(e|ing)\b", re.I)
 MOUNT_BODY = re.compile(r"\bon\s+(body|side\s+panel|quarter\s+panel)\b", re.I)
 MOUNT_LID = re.compile(r"\bon\s+(trunk\s+lid|deck\s*lid|back\s+door|lift\s*gate|tail\s*gate)\b", re.I)
 
+# wiper-motor end axis (tier C, 2026-11-10). F = windshield, R = rear window,
+# liftgate, back door or tailgate. A rear word wins over "windshield": Honda
+# and Acura print "Motor, RR. Windshield Wiper" for the rear-glass motor.
+# An explicit front word together with a rear word is a conflict.
+END_FX = re.compile(r"\b(front|fr|frt)\b", re.I)
+END_W = re.compile(r"\b(windshield|windscreen|w/shield)\b", re.I)
+END_R = re.compile(r"\b(rear|rr|liftgate|lift\s+gate|tailgate|tail\s+gate|back\s*door|back\s+(window|glass)"
+                   r"|rear\s+window|quarter\s+window)\b", re.I)
 MIRROR_CATS = {"side-mirrors", "tow-mirrors"}
 LAMP_CATS = {"headlights", "tail-lights"}
 
@@ -88,6 +96,30 @@ def door_of_slug(url: str) -> str | None:
     return None
 
 
+def end_of_text(text: str) -> str | None:
+    """wiper-motor end: 'F', 'R', 'X' (both an explicit front and a rear
+    word) or None."""
+    t = text or ""
+    fx, w, r = bool(END_FX.search(t)), bool(END_W.search(t)), bool(END_R.search(t))
+    if r and fx:
+        return "X"
+    if r:
+        return "R"
+    return "F" if (fx or w) else None
+
+
+def end_of_slug(url: str) -> str | None:
+    """wiper-motor end from the list URL's last segment ("rear_window_wiper",
+    "windshield_wiper_rear"); used only when no other source states an end
+    (resolve). Rear only: a windshield page can carry the rear motor
+    (oem-raw@796a77b: fordpartsgiant windshield_front_wiper and
+    windshield_wiper_motor_washer list "Rear" motors, hyundaipartsdeal
+    windshield_wiper lists "Motor Assy-Rear Wiper"), while no rear page
+    listed a front motor. "wipers" / "wiper-washer-components" give none."""
+    seg = (url or "").rstrip("/").rsplit("/", 1)[-1].lower().replace(".html", "").replace("_", " ").replace("-", " ")
+    return "R" if end_of_text(seg) == "R" else None
+
+
 def mount_of(text: str) -> str | None:
     b, l = bool(MOUNT_BODY.search(text or "")), bool(MOUNT_LID.search(text or ""))
     if b and l:
@@ -121,6 +153,8 @@ def resolve(cat: str, sources: list[tuple[str, str]]) -> Resolution:
     door, d_conf = _agree(doors)
     mount, m_conf = _agree(mounts)
     all_slots = tuple(pol["slots"])
+    if "end" in axes:
+        return _resolve_end(cat, sources, side, s_conf)
     if not axes:
         if s_conf or side in ("L", "R", "B"):
             return Resolution(all_slots[:1], "unexpected_position", side, None)
@@ -133,6 +167,25 @@ def resolve(cat: str, sources: list[tuple[str, str]]) -> Resolution:
     if side is None or ("door" in axes and door is None):
         return Resolution(_slots(cat, side, door), "position_missing", side, door, mount)
     return Resolution(_slots(cat, side, door), None, side, door, mount)
+
+
+def _resolve_end(cat: str, sources, side, s_conf) -> Resolution:
+    """wiper-motor: end from position / location / name / note text; the list
+    slug only when none of those states one. Rear motors carry no side; a
+    front motor with a side is one of a twin pair (FL / FR). Ambiguity
+    blocks every slot the record could occupy."""
+    all_slots = tuple(policy.cat_policy(cat)["slots"])
+    ends = [end_of_text(t) for k, t in sources if k != "slug" and t]
+    end, e_conf = _agree(ends)
+    if end is None and not e_conf:
+        end, e_conf = _agree([end_of_slug(t) for k, t in sources if k == "slug" and t])
+    if s_conf or e_conf or side == "B" or (end == "R" and side is not None):
+        return Resolution(all_slots, "position_conflict", side, end)
+    if end is None:
+        return Resolution(all_slots, "position_missing", side, None)
+    if end == "R":
+        return Resolution(("R",), None, None, "R")
+    return Resolution(({"L": "FL", "R": "FR"}.get(side, "F"),), None, side, "F")
 
 
 def _slots(cat: str, side: str | None, door: str | None) -> tuple:
@@ -182,6 +235,8 @@ def packaging(cat: str, ns: str, pn: str, names: list[str]) -> str:
         if any(re.search(r"control\s+sub-?\s*ass(y|embly)", n, re.I) for n in names):
             return "switch-module"
         return "assy"
+    if cat == "wiper-motor":
+        return wiper_packaging(names)
     if cat != "window-regulator":
         return ""
     text = " | ".join(names)
@@ -220,3 +275,33 @@ def regulator_slot_ok(members: list[tuple[str, str]], chains: dict[str, int]) ->
     if packs == {"reg"} or packs == {"motor"}:
         return "packaging_incomplete"
     return "packaging_split"
+
+
+# ------------------------------------------------- wiper-motor packaging
+# (tier C, 2026-11-10; ops/interchange.md §10 wiper handover). Members of one
+# slot must share one packaging; groups never mix them.
+WIPER_LINKAGE_ONLY = re.compile(r"^\s*(linkage|link|pivot)\b", re.I)
+WIPER_MODULE = re.compile(r"\bmodule\b|system,?\s*complete|motor\s*(&|and)\s*link\b", re.I)
+WIPER_DRIVE = re.compile(r"^\s*drive\b|motor\s+(and|&|w/|with)\s+linkage|linkage\s+(and|&)\s+motor", re.I)
+WIPER_KIT = re.compile(r"\b(kit|package|pkg)\b", re.I)
+WIPER_ECB = re.compile(r"except\s+circuit\s+board", re.I)
+
+
+def wiper_packaging(names: list[str]) -> str:
+    """linkage (not a motor: out of the category) | module | drive (motor +
+    linkage: Nissan/Infiniti "Drive Assy", Ford "Motor And Linkage Assy") |
+    kit (Jeep "MOTOR KIT"/"MOTOR PACKAGE") | motor-ecb (GM "EXCEPT CIRCUIT
+    BOARD") | motor. Rules run on the OEM name fields only."""
+    names = [n for n in names if n]
+    text = " | ".join(names)
+    if names and all(WIPER_LINKAGE_ONLY.match(n) and not re.search(r"\bmotor\b", n, re.I) for n in names):
+        return "linkage"
+    if WIPER_MODULE.search(text):
+        return "module"
+    if WIPER_DRIVE.search(text):
+        return "drive"
+    if WIPER_KIT.search(text):
+        return "kit"
+    if WIPER_ECB.search(text):
+        return "motor-ecb"
+    return "motor"
