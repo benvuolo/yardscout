@@ -1034,3 +1034,144 @@
 04:35:34 listed after chain strut 48540-A9160: line 2905 (recrawl_of 2895)
 04:35:34 listed after chain strut 48540-A9150: line 2906 (recrawl_of 2896)
 04:35:34 time budget reached records=2906
+04:35:49 start site=www.lexuspartsnow.com mode=worklist tiers=['A', 'B', 'W', 'C'] records=2906 list_lines=587 year_lines=126 url_index=14621
+04:35:49 seg done tier=A Lexus ES 300 [1992, 2008] seeds=[2002] records=2906 errors=42
+04:35:49 seg done tier=A Lexus RX 300 [1999, 2008] seeds=[2000] records=2906 errors=42
+04:35:49 seg done tier=A Lexus IS 250 [2006, 2015] seeds=[2007] records=2906 errors=42
+04:35:49 seg done tier=A Lexus ES 350 [1997, 2018] seeds=[2007] records=2906 errors=42
+04:35:49 seg done tier=A Lexus ES 330 [2004, 2006] seeds=[2004] records=2906 errors=42
+04:35:49 seg done tier=A Lexus GS 300 [1993, 2006] seeds=[2006] records=2906 errors=42
+04:35:49 seg done tier=A Lexus RX 350 [2004, 2016] seeds=[2007] records=2906 errors=42
+04:35:49 seg done tier=A Lexus RX 330 [2004, 2006] seeds=[2004] records=2906 errors=42
+04:35:49 seg done tier=A Lexus LS 400 [1990, 2005] seeds=[1996] records=2906 errors=42
+04:35:49 seg done tier=A Lexus LS 430 [2001, 2006] seeds=[2001] records=2906 errors=42
+04:35:49 seg done tier=A Lexus IS [2004, 2016] seeds=[2007] records=2906 errors=42
+04:35:49 seg done tier=A Lexus LS 460 [1996, 2016] seeds=[2007] records=2906 errors=42
+04:35:49 seg done tier=A Lexus GS [1998, 2018] seeds=[2006] records=2906 errors=42
+04:35:49 seg done tier=A Lexus ES [1990, 2015] seeds=[2007] records=2906 errors=42
+04:35:49 seg done tier=A Lexus GS 350 [1995, 2015] seeds=[2007] records=2906 errors=42
+04:35:49 seg done tier=A Lexus IS 300 [2001, 2005] seeds=[2001] records=2906 errors=42
+04:35:49 seg done tier=A Lexus RX 400h [2006, 2008] seeds=[2006] records=2906 errors=42
+04:35:49 seg done tier=A Lexus IS 350 [2006, 2014] seeds=[2006] records=2906 errors=42
+04:35:49 seg done tier=A Lexus RX [2004, 2008] seeds=[2005] records=2906 errors=42
+04:35:49 seg done tier=A Lexus RX [1999, 2003] seeds=[2001] records=2906 errors=42
+04:35:49 seg done tier=A Lexus GS 400 [1998, 2002] seeds=[1998] records=2906 errors=42
+04:35:49 seg done tier=A Lexus LS [1990, 2012] seeds=[1998] records=2906 errors=42
+04:35:49 seg done tier=A Lexus SC 400 [1992, 1999] seeds=[1992] records=2906 errors=42
+04:35:49 seg done tier=A Lexus GS 430 [2001, 2006] seeds=[2006] records=2906 errors=42
+04:35:49 seg done tier=A Lexus SC 430 [2002, 2005] seeds=[2002] records=2906 errors=42
+04:35:49 seg done tier=B Lexus ES 300 [1992, 2008] seeds=[2002] records=2906 errors=42
+04:35:49 seg done tier=B Lexus RX 300 [1999, 2008] seeds=[2000] records=2906 errors=42
+04:35:49 seg done tier=B Lexus IS 250 [2006, 2015] seeds=[2007] records=2906 errors=42
+04:35:49 seg done tier=B Lexus ES 350 [1997, 2018] seeds=[2007] records=2906 errors=42
+04:35:49 seg done tier=B Lexus ES 330 [2004, 2006] seeds=[2004] records=2906 errors=42
+04:35:49 seg done tier=B Lexus GS 300 [1993, 2006] seeds=[2006] records=2906 errors=42
+04:35:49 seg done tier=B Lexus RX 350 [2004, 2016] seeds=[2007] records=2906 errors=42
+04:35:49 seg done tier=B Lexus RX 330 [2004, 2006] seeds=[2004] records=2906 errors=42
+04:35:49 seg done tier=B Lexus LS 400 [1990, 2005] seeds=[1996] records=2906 errors=42
+04:35:49 seg done tier=B Lexus LS 430 [2001, 2006] seeds=[2001] records=2906 errors=42
+04:35:49 seg done tier=B Lexus IS [2004, 2016] seeds=[2007] records=2906 errors=42
+04:35:49 seg done tier=B Lexus LS 460 [1996, 2016] seeds=[2007] records=2906 errors=42
+04:35:49 seg done tier=B Lexus GS [1998, 2018] seeds=[2006] records=2906 errors=42
+04:35:49 seg done tier=B Lexus ES [1990, 2015] seeds=[2007] records=2906 errors=42
+04:35:49 seg done tier=B Lexus GS 350 [1995, 2015] seeds=[2007] records=2906 errors=42
+04:35:49 seg done tier=B Lexus IS 300 [2001, 2005] seeds=[2001] records=2906 errors=42
+04:35:49 seg done tier=B Lexus RX 400h [2006, 2008] seeds=[2006] records=2906 errors=42
+04:35:49 seg done tier=B Lexus IS 350 [2006, 2014] seeds=[2006] records=2906 errors=42
+04:35:49 seg done tier=B Lexus RX [2004, 2008] seeds=[2005] records=2906 errors=42
+04:35:49 seg done tier=B Lexus RX [1999, 2003] seeds=[2001] records=2906 errors=42
+04:35:49 seg done tier=B Lexus GS 400 [1998, 2002] seeds=[1998] records=2906 errors=42
+04:35:49 seg done tier=B Lexus LS [1990, 2012] seeds=[1998] records=2906 errors=42
+04:35:49 seg done tier=B Lexus SC 400 [1992, 1999] seeds=[1992] records=2906 errors=42
+04:35:49 seg done tier=B Lexus GS 430 [2001, 2006] seeds=[2006] records=2906 errors=42
+04:35:49 seg done tier=B Lexus SC 430 [2002, 2005] seeds=[2002] records=2906 errors=42
+04:35:49 seg done tier=W Lexus ES 300 [1992, 2008] seeds=[2002] records=2906 errors=42
+04:35:49 seg done tier=W Lexus RX 300 [1999, 2008] seeds=[2000] records=2906 errors=42
+04:35:49 seg done tier=W Lexus IS 250 [2006, 2015] seeds=[2007] records=2906 errors=42
+04:35:49 seg done tier=W Lexus ES 350 [1997, 2018] seeds=[2007] records=2906 errors=42
+04:35:49 seg done tier=W Lexus ES 330 [2004, 2006] seeds=[2004] records=2906 errors=42
+04:35:49 seg done tier=W Lexus GS 300 [1993, 2006] seeds=[2006] records=2906 errors=42
+04:35:49 seg done tier=W Lexus RX 350 [2004, 2016] seeds=[2007] records=2906 errors=42
+04:35:49 seg done tier=W Lexus RX 330 [2004, 2006] seeds=[2004] records=2906 errors=42
+04:35:49 seg done tier=W Lexus LS 400 [1990, 2005] seeds=[1996] records=2906 errors=42
+04:35:49 seg done tier=W Lexus LS 430 [2001, 2006] seeds=[2001] records=2906 errors=42
+04:35:49 seg done tier=W Lexus IS [2004, 2016] seeds=[2007] records=2906 errors=42
+04:35:49 seg done tier=W Lexus LS 460 [1996, 2016] seeds=[2007] records=2906 errors=42
+04:35:49 seg done tier=W Lexus GS [1998, 2018] seeds=[2006] records=2906 errors=42
+04:35:49 seg done tier=W Lexus ES [1990, 2015] seeds=[2007] records=2906 errors=42
+04:35:49 seg done tier=W Lexus GS 350 [1995, 2015] seeds=[2007] records=2906 errors=42
+04:35:49 seg done tier=W Lexus IS 300 [2001, 2005] seeds=[2001] records=2906 errors=42
+04:35:49 seg done tier=W Lexus RX 400h [2006, 2008] seeds=[2006] records=2906 errors=42
+04:35:49 seg done tier=W Lexus IS 350 [2006, 2014] seeds=[2006] records=2906 errors=42
+04:35:49 seg done tier=W Lexus RX [2004, 2008] seeds=[2005] records=2906 errors=42
+04:35:49 seg done tier=W Lexus RX [1999, 2003] seeds=[2001] records=2906 errors=42
+04:35:49 seg done tier=W Lexus GS 400 [1998, 2002] seeds=[1998] records=2906 errors=42
+04:35:49 seg done tier=W Lexus LS [1990, 2012] seeds=[1998] records=2906 errors=42
+04:35:49 seg done tier=W Lexus SC 400 [1992, 1999] seeds=[1992] records=2906 errors=42
+04:35:49 seg done tier=W Lexus GS 430 [2001, 2006] seeds=[2006] records=2906 errors=42
+04:35:49 seg done tier=W Lexus SC 430 [2002, 2005] seeds=[2002] records=2906 errors=42
+04:35:49 seg done tier=C Lexus ES 300 [1992, 2008] seeds=[2002] records=2906 errors=42
+04:35:49 seg done tier=C Lexus RX 300 [1999, 2008] seeds=[2000] records=2906 errors=42
+04:35:49 seg done tier=C Lexus IS 250 [2006, 2015] seeds=[2007] records=2906 errors=42
+04:35:49 seg done tier=C Lexus ES 350 [1997, 2018] seeds=[2007] records=2906 errors=42
+04:35:49 seg done tier=C Lexus ES 330 [2004, 2006] seeds=[2004] records=2906 errors=42
+04:35:49 seg done tier=C Lexus GS 300 [1993, 2006] seeds=[2006] records=2906 errors=42
+04:35:49 seg done tier=C Lexus RX 350 [2004, 2016] seeds=[2007] records=2906 errors=42
+04:38:13 seg done tier=C Lexus RX 330 [2004, 2006] seeds=[2004] records=2910 errors=42
+04:39:10 chain-unlinked knuckle 1 numbers named by 43211-50050, no catalog link: 43211-50030
+04:39:10 chain-unlinked knuckle 1 numbers named by 43212-50050, no catalog link: 43212-50030
+04:39:57 chain-unlinked strut 1 numbers named by 48510-59085, no catalog link: 48510-59106
+04:40:05 chain-unlinked strut 1 numbers named by 48530-59095, no catalog link: 48530-59097
+04:40:05 nav-fail Lexus LS 400 2002: ValueError: no 2002 catalog for Lexus LS 400 (lexus-['ls400'])
+04:40:05 seg done tier=C Lexus LS 400 [1990, 2005] seeds=[1996, 2002] records=2917 errors=43
+04:41:01 chain-unlinked knuckle 1 numbers named by 43201-50010, no catalog link: 43201-50020
+04:41:01 chain-unlinked knuckle 1 numbers named by 43202-50010, no catalog link: 43202-50020
+04:41:57 chain-unlinked strut 1 numbers named by 48510-59355, no catalog link: 48510-80306
+04:41:57 chain-unlinked strut 1 numbers named by 48510-59365, no catalog link: 48510-80307
+04:42:13 chain-unlinked strut 1 numbers named by 48530-59405, no catalog link: 48530-80130
+04:42:13 chain-unlinked strut 1 numbers named by 48530-59415, no catalog link: 48530-80241
+04:42:13 seg done tier=C Lexus LS 430 [2001, 2006] seeds=[2001] records=2926 errors=43
+04:42:21 nav-fail Lexus IS 2007: ValueError: no model page for Lexus IS (lexus-['is'])
+04:42:21 seg done tier=C Lexus IS [2004, 2016] seeds=[2007] records=2926 errors=44
+04:44:21 nav-fail Lexus LS 460 2001: ValueError: no 2001 catalog for Lexus LS 460 (lexus-['ls460'])
+04:44:21 seg done tier=C Lexus LS 460 [1996, 2016] seeds=[2007, 2001] records=2934 errors=45
+04:44:29 nav-fail Lexus GS 2006: ValueError: no model page for Lexus GS (lexus-['gs'])
+04:44:29 seg done tier=C Lexus GS [1998, 2018] seeds=[2006] records=2934 errors=46
+04:44:37 nav-fail Lexus ES 2007: ValueError: no model page for Lexus ES (lexus-['es'])
+04:44:37 seg done tier=C Lexus ES [1990, 2015] seeds=[2007] records=2934 errors=47
+04:45:09 chain-unlinked wiper-motor 1 numbers named by 85110-30590, no catalog link: 85110-30550
+04:48:53 chain-unlinked strut 1 numbers named by 48520-80182, no catalog link: 48520-80172
+04:48:53 chain-unlinked strut 2 numbers named by 48520-80183, no catalog link: 48520-80150, 48520-80181
+04:48:53 chain-unlinked strut 1 numbers named by 48510-80435, no catalog link: 48510-80425
+04:48:53 chain-unlinked strut 2 numbers named by 48510-80436, no catalog link: 48510-80391, 48510-80434
+04:49:25 nav-fail Lexus GS 350 2003: ValueError: no 2003 catalog for Lexus GS 350 (lexus-['gs350'])
+04:49:25 seg done tier=C Lexus GS 350 [1995, 2015] seeds=[2007, 2003] records=2963 errors=48
+04:52:13 chain-unlinked strut 1 numbers named by 48530-59565, no catalog link: 48530-59575
+04:52:13 seg done tier=C Lexus IS 300 [2001, 2005] seeds=[2001] records=2976 errors=48
+04:53:33 chain-unlinked strut 1 numbers named by 48520-49875, no catalog link: 48520-49895
+04:53:33 chain-unlinked strut 1 numbers named by 48510-49805, no catalog link: 48510-49825
+04:54:05 seg done tier=C Lexus RX 400h [2006, 2008] seeds=[2006] records=2982 errors=48
+04:55:41 chain-unlinked wiper-motor 1 numbers named by 85110-60390, no catalog link: 85110-26210
+04:58:21 chain-unlinked strut 1 numbers named by 48510-80492, no catalog link: 48510-80597
+04:58:21 chain-unlinked strut 1 numbers named by 48520-59585, no catalog link: 48520-59695
+04:58:29 seg done tier=C Lexus IS 350 [2006, 2014] seeds=[2006, 2011] records=2996 errors=48
+04:58:37 nav-fail Lexus RX 2005: ValueError: no model page for Lexus RX (lexus-['rx'])
+04:58:37 seg done tier=C Lexus RX [2004, 2008] seeds=[2005] records=2996 errors=49
+04:58:37 nav-fail Lexus RX 2001: ValueError: no model page for Lexus RX (lexus-['rx'])
+04:58:37 seg done tier=C Lexus RX [1999, 2003] seeds=[2001] records=2996 errors=50
+04:59:33 nav-fail Lexus GS 400 2001: ValueError: no 2001 catalog for Lexus GS 400 (lexus-['gs400'])
+04:59:33 seg done tier=C Lexus GS 400 [1998, 2002] seeds=[1998, 2001] records=2996 errors=51
+04:59:41 nav-fail Lexus LS 1998: ValueError: no model page for Lexus LS (lexus-['ls'])
+04:59:41 seg done tier=C Lexus LS [1990, 2012] seeds=[1998] records=2996 errors=52
+05:00:13 chain-unlinked wiper-motor 1 numbers named by 85110-24060, no catalog link: 85110-24100
+05:01:25 chain-unlinked strut 1 numbers named by 48510-29115, no catalog link: 48510-24150
+05:01:33 chain-unlinked strut 1 numbers named by 48530-29205, no catalog link: 48530-24140
+05:01:33 seg done tier=C Lexus SC 400 [1992, 1999] seeds=[1992] records=3003 errors=52
+05:03:33 chain-unlinked strut 1 numbers named by 48510-80020, no catalog link: 48510-80236
+05:03:33 chain-unlinked strut 1 numbers named by 48510-80070, no catalog link: 48510-80237
+05:03:49 chain-unlinked strut 1 numbers named by 48530-39725, no catalog link: 48530-80239
+05:03:49 chain-unlinked strut 1 numbers named by 48530-39865, no catalog link: 48530-80240
+05:03:49 seg done tier=C Lexus GS 430 [2001, 2006] seeds=[2006, 2003] records=3007 errors=52
+05:05:17 chain-unlinked strut 1 numbers named by 48510-80022, no catalog link: 48510-80238
+05:05:25 seg done tier=C Lexus SC 430 [2002, 2005] seeds=[2002] records=3012 errors=52
+05:05:25 finished records=3012 errors=52 chain_records=7 chain_unlinked=546 chain_failed=0 chain_given_up=0
