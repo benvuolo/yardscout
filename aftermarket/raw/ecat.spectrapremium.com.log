@@ -1884,3 +1884,30 @@
 2026-11-10T13:05:31Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-models.json?year=2008&make=Kia products=0 children=9 next=n records=5349 new_requests=7165
 2026-11-10T13:05:47Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=2008&make=Kia&model=Sorento&_score=192.000 products=4 children=0 next=n records=5350 new_requests=7167
 2026-11-10T13:05:47Z time budget reached records=5350
+2026-11-10T20:08:31Z start site=ecat.spectrapremium.com cats=['vehicle'] max_products=0 minutes=28.0
+2026-11-10T20:09:12Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=2008&make=Kia&model=Sorento&_score=192.000 products=4 children=0 next=n records=5353 new_requests=7171
+2026-11-10T20:09:20Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-models.json?year=2009&make=Buick products=0 children=3 next=n records=5353 new_requests=7172
+2026-11-10T20:09:44Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=2013&make=Buick&model=Enclave&_score=191.667 products=2 children=0 next=n records=5355 new_requests=7175
+2026-11-10T20:10:08Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=2009&make=Buick&model=Enclave&_score=191.667 products=2 children=0 next=n records=5357 new_requests=7178
+2026-11-10T20:10:32Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=2008&make=Ford&model=Taurus&_score=191.000 products=2 children=0 next=n records=5359 new_requests=7181
+2026-11-10T20:11:28Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=2008&make=Audi&model=Q7&_score=191.000 products=6 children=1 next=n records=5365 new_requests=7188
+2026-11-10T20:11:52Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=139936,306517&_score=191.000 products=2 children=0 next=n records=5367 new_requests=7191
+2026-11-10T20:11:59Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-models.json?year=2002&make=Mercury products=0 children=5 next=n records=5367 new_requests=7192
+2026-11-10T20:12:40Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=2012&make=Nissan&model=Quest&_score=190.000 products=4 children=0 next=n records=5371 new_requests=7197
+2026-11-10T20:13:12Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=2002&make=Pontiac&model=Bonneville&_score=190.000 products=3 children=0 next=n records=5374 new_requests=7201
+2026-11-10T20:13:28Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=2002&make=Mercury&model=Mountaineer&_score=190.000 products=1 children=1 next=n records=5375 new_requests=7203
+2026-11-10T20:13:52Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=105615,187524&_score=190.000 products=2 children=0 next=n records=5377 new_requests=7206
+2026-11-10T20:14:08Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=2005&make=Toyota&model=Prius&_score=189.625 products=1 children=0 next=n records=5378 new_requests=7208
+2026-11-10T20:14:32Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=2011&make=Toyota&model=Prius&_score=189.625 products=2 children=0 next=n records=5380 new_requests=7211
+2026-11-10T20:15:12Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=2009&make=Ford&model=Edge&_score=189.200 products=4 children=0 next=n records=5384 new_requests=7216
+2026-11-10T20:16:16Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=2017&make=Ford&model=Edge&_score=189.200 products=7 children=0 next=n records=5391 new_requests=7224
+2026-11-10T20:16:56Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=2010&make=GMC&model=Terrain&_score=189.167 products=4 children=0 next=n records=5395 new_requests=7229
+2026-11-10T20:17:04Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=2014&make=GMC&model=Terrain&_score=189.167 products=0 children=6 next=n records=5395 new_requests=7230
+2026-11-10T20:17:28Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=242773,243617&_score=189.167 products=2 children=0 next=n records=5397 new_requests=7233
+2026-11-10T20:17:52Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=242251,241459&_score=189.167 products=2 children=0 next=n records=5399 new_requests=7236
+2026-11-10T20:18:16Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=243223,243011&_score=189.167 products=2 children=0 next=n records=5401 new_requests=7239
+2026-11-10T20:18:40Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=241393,241356&_score=189.167 products=2 children=0 next=n records=5403 new_requests=7242
+2026-11-10T20:19:04Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=243626,243708&_score=189.167 products=2 children=0 next=n records=5405 new_requests=7245
+2026-11-10T20:19:28Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=242430,242576&_score=189.167 products=2 children=0 next=n records=5407 new_requests=7248
+2026-11-10T20:19:36Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-models.json?year=2017&make=Jeep products=0 children=5 next=n records=5407 new_requests=7249
+2026-11-10T20:20:00Z STOPPED: ecat.spectrapremium.com refused or challenged (HTTP 200); domain stopped for this program
