@@ -1416,6 +1416,23 @@ class Curation:
         bad = sorted({m["slot"].reason for _, m in cand if m["slot"].reason})
         if bad or len(slots) != 1:
             return "strict_position", ";".join(bad) or "+".join(sorted(slots))
+        # §11.4 seed 811023 (G06, mopar 55154863AC "MOTOR Windshield wiper"):
+        # a row or name of the same number calling it a pivot or linkage means
+        # the packaging is not a bare motor
+        if c.packaging != "drive":
+            texts = [r.other_names for r in c.records] + \
+                [f"{lr.main} | {lr.aux}" for lr in self.list_rows
+                 if lr.cat == cat and policy.pn_key(self.ns, lr.pn) == c.key]
+            hit = next((t for t in texts if t and re.search(r"\b(pivot|linkage|link)\b", t, re.I)), None)
+            if hit:
+                return "packaging_conflict", hit[:80]
+        # §11.4 seed 811023 (G13 2017 Compass two rear motors, G19/G22 2009 G37
+        # sedan vs coupe, G10 2013 Charger R/T): another number in the same slot
+        # of any app's cell means the car's number depends on its configuration
+        for T, _ in cand:
+            for k, m in ((self.cells_info.get((T, cat)) or {}).get("members") or {}).items():
+                if k != c.key and set(m["slot"].slots) & slots and not self.comparable(cat, c.key, k):
+                    return "strict_slot_split", f"{T[0]} {T[1]} {T[2]}: also {k}"
         names = " | ".join(n for r in c.records for n in r.oem_names)
         if re.search(policy.WIPER_OPTION_RE, names, re.I):
             return "strict_option_name", names[:80]
@@ -2393,6 +2410,12 @@ def hand_payload(js) -> dict | None:
         js.OEM_GROUPS_DIR = saved
 
 
+def _sha256_file(path) -> str | None:
+    import hashlib
+    p = Path(path or "")
+    return hashlib.sha256(p.read_bytes()).hexdigest() if p.is_file() else None
+
+
 def model_bodies(inv, js, decodes_path) -> dict:
     """{(make, model): {body style}} and {(make, model, year): {body style}}
     over the inventory's VINs, from the vPIC
@@ -2467,6 +2490,10 @@ def main(argv=None) -> int:
         problems = V.structural(doc, V.context_from(js, mm))
         rep, completion = cur.report(doc, inv_counts)
         rep["model_map_report"] = mrep
+        # curation inputs outside the policy hash, pinned by content (hub 2026-11-10):
+        # a changed decodes or inventory file must never change shipped groups unseen
+        rep["inputs"] = {"inventory": a.inventory, "inventory_sha256": _sha256_file(a.inventory),
+                         "decodes": a.decodes, "decodes_sha256": _sha256_file(a.decodes)}
         rep["sites_without_namespace"] = no_ns
         # §7.6, the same test the payload builder runs (it demotes; this reports)
         rep["contradictions"] = js._oem_contradictions(hand, {ns: doc}) if hand else []

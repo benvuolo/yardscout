@@ -66,19 +66,24 @@ import curate as CU
 
 
 class _R:
-    def __init__(self, names):
+    def __init__(self, names, other=""):
         self.oem_names = list(names)
+        self.other_names = other
 
 
 class _K:
-    def __init__(self, packaging, names=("Motor Assy-Windshield Wiper",)):
+    def __init__(self, packaging, names=("Motor Assy-Windshield Wiper",), other="", key="K1"):
         self.packaging = packaging
-        self.records = [_R(names)]
+        self.records = [_R(names, other)]
+        self.key = key
 
 
 def _stub(cells, notes, bodies=None, names=("Motor Assy-Windshield Wiper",)):
     cur = object.__new__(CU.Curation)
     cur.model_bodies = bodies or {}
+    cur.list_rows = []
+    cur.ns = "x"
+    cur.comparable = lambda cat, a, b: a == b
     cur.cells_info = cells
     cur.t_sources = {}
     cur.ns_models_f = frozenset()
@@ -140,4 +145,15 @@ check("Ford smart motor from the row note -> motor-ctl",
 check("Ford plain motor note -> motor",
       P.packaging(W, "ford", "x", ["Motor Assy - Wiper"], ["Rear wiper motor"]) == "motor")
 check("note words: motor-ctl", CU._pack_text(W, "motor-ctl", "F") == "windshield wiper motor with integral control module")
+cs = {(T, W): {"slots": {"F": []}, "members": {"K1": m_ok, "K2": m_ok}} for T in (TA, TB)}
+cur5 = _stub(cs, {})
+r = cur5._strict_refusal(_K("motor"), W, [(TA, m_ok), (TB, m_ok)], {"F"})
+check("another number in the same slot of an app's cell -> strict_slot_split (G13/G19/G10)",
+      bool(r) and r[0] == "strict_slot_split", str(r))
+cur5.comparable = lambda cat, a, b: True
+check("a superseded number in the same slot is fine",
+      cur5._strict_refusal(_K("motor"), W, [(TA, m_ok), (TB, m_ok)], {"F"}) is None)
+r = cur._strict_refusal(_K("motor", ("MOTOR Windshield wiper",), "Pivot - Wiper"), W, [(TA, m_ok), (TB, m_ok)], {"F"})
+check("other name 'Pivot - Wiper' on a bare-motor class -> packaging_conflict (G06)",
+      bool(r) and r[0] == "packaging_conflict", str(r))
 done("test_wiper_motor")
