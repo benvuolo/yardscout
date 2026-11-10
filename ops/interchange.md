@@ -3549,6 +3549,11 @@ each); nothing allowlisted or crawled.
     re-curate + rebuilt payload + test_groups_hash.
   - Blocked sites (rule 2, not retried): moparpartsgiant,
     mbpartsgiant, nissanpartsdeal, subarupartsdeal.
+
+### Honda/Nissan, continued (session_016ZzJfMtLKpUFu8TiEFMrkF)
+
+Earlier Honda/Nissan bullets (tier C trial, the 503 block, check-ins) are scattered under other sections because they were appended at the file's end; search for "Honda/Nissan".
+
 - 2026-11-10 14:29: **idle on the hub's instruction** (owner at 3% of weekly
   usage). Deleted the 15:44 check-in (trig_01F9K2UtoPuGezWPnKCPnZkk); no
   other scheduled task of this session remains. Status when stopped:
