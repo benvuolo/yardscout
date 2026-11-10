@@ -13207,3 +13207,11 @@
 13:16:22 chain-unlinked headlights 1 numbers named by 8T5Z-13008-A, no catalog link: 8T5Z-13008-C
 13:16:22 chain-unlinked headlights 1 numbers named by 8T5Z-13008-B, no catalog link: 8T5Z-13008-D
 13:17:11 time budget reached records=9455
+13:17:37 start site=www.fordpartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=9455 list_lines=5676 year_lines=1056 url_index=33908
+13:17:37 completion worklist completion/ford.own_page.json: 695 rows
+13:18:41 chain-unlinked climate-control 1 numbers named by 1L7Z-19980-AA, no catalog link: EL7Z-19980-ARM
+13:30:41 chain-unlinked climate-control 1 numbers named by 4F2Z-19980-DA, no catalog link: 6F2Z-19980-DA
+13:31:29 chain-unlinked window-regulator 1 numbers named by 3F2Z-7823394-BA, no catalog link: 6F2Z-7823394-BA
+13:38:33 chain-unlinked side-mirrors 1 numbers named by 5L7Z-17682-EAA, no catalog link: 6L7Z-17682-BA
+13:38:33 chain-unlinked side-mirrors 1 numbers named by 5L7Z-17683-CAA, no catalog link: 6L7Z-17683-AA
+13:47:54 time budget reached records=9472
