@@ -1143,3 +1143,20 @@
 13:10:53 chain-unlinked headlights 1 numbers named by 26010-4AP0A, no catalog link: 26010-4AP0B
 13:10:53 chain-unlinked headlights 1 numbers named by 26010-4AP1A, no catalog link: 26010-4AP1B
 13:12:53 time budget reached records=2383
+13:13:15 start site=www.infinitipartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2383 list_lines=1126 year_lines=126 url_index=7469
+13:13:15 completion worklist completion/nissan.own_page.json: 119 rows
+13:14:35 chain-unlinked gauge-cluster 1 numbers named by 24820-5ZM1B, no catalog link: 24820-5ZM5B
+13:14:35 chain-unlinked gauge-cluster 1 numbers named by 24820-5ZM1A, no catalog link: 24820-5ZM5B
+13:14:35 chain-unlinked gauge-cluster 1 numbers named by 24820-5ZM1C, no catalog link: 24820-5ZM6D
+13:14:35 chain-unlinked gauge-cluster 1 numbers named by 24820-5ZM1D, no catalog link: 24820-5ZM6D
+13:25:23 chain-unlinked gauge-cluster 1 numbers named by 24820-4AM1A, no catalog link: 24820-6AK4B
+13:25:23 chain-unlinked gauge-cluster 1 numbers named by 24820-4AM1B, no catalog link: 24820-4AM7B
+13:25:23 chain-unlinked gauge-cluster 1 numbers named by 24820-4AM1C, no catalog link: 24820-6AK4C
+13:26:27 chain-unlinked side-mirrors 1 numbers named by 96302-4AM0B, no catalog link: 96302-4AM0C
+13:26:27 chain-unlinked side-mirrors 1 numbers named by 96301-4AM0B, no catalog link: 96301-4AM0C
+13:28:11 chain-unlinked headlights 1 numbers named by 26060-1CE1A, no catalog link: 26060-1CE0B
+13:28:11 chain-unlinked headlights 1 numbers named by 26010-1CE1A, no catalog link: 26010-1CE0B
+13:30:03 chain-unlinked headlights 1 numbers named by 26060-1CA1A, no catalog link: 26060-1CA0B
+13:34:51 chain-unlinked window-regulator 1 numbers named by 80731-AR000, no catalog link: 80731-AR001
+13:34:51 chain-unlinked window-regulator 1 numbers named by 80730-AR000, no catalog link: 80730-AR001
+13:44:51 time budget reached records=2413
