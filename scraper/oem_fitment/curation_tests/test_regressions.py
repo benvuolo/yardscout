@@ -257,4 +257,18 @@ check("market: a note with a non-market alternative keeps the row",
 check("market: plant notes are not markets", not _C._market_excludes(["Japan Built"]) and not _C._market_excludes(["US Built"]))
 check("market: a US note keeps the row", not _C._market_excludes(["FOR USA, CANADA"]))
 
+# 2026-11-10 make breadth: Hyundai/Kia body gate (Forte / Forte Koup share one catalog)
+_FV = "Fitting Vehicle Options: "
+check("hmg body: a sedan-only door row is not for the Forte Koup; a coupe-only row not for the Forte",
+      _C._hmg_body_excludes([_FV + "[Sedan - 4Door 5P], [Sedan - 5Door 5P]"], ("Kia", "Forte Koup", 2010))
+      and _C._hmg_body_excludes([_FV + "[Coupe - 2Door 5P]"], ("Kia", "Forte", 2010))
+      and _C._hmg_body_excludes([_FV + "[Sedan - 5Door 5P]"], ("Kia", "Forte", 2015)))
+check("hmg body: matching bodies, unrestricted rows and ungated names keep the row",
+      not _C._hmg_body_excludes([_FV + "[Sedan - 4Door 5P], [Sedan - 5Door 5P]"], ("Kia", "Forte", 2010))
+      and not _C._hmg_body_excludes([_FV + "[Coupe - 2Door 5P]"], ("Kia", "Forte Koup", 2010))
+      and not _C._hmg_body_excludes(["Fit Note: HIGH GRADE"], ("Kia", "Forte Koup", 2010))
+      and not _C._hmg_body_excludes([_FV + "[Sedan - 3Door 5P]"], ("Hyundai", "Accent", 2010)))
+check("hmg body: plain Santa Fe 2013-18 is fail-closed on body rows; other years ungated",
+      _C._hmg_body_excludes([_FV + "[Wagon - 5Door 5P]"], ("Hyundai", "Santa Fe", 2015))
+      and not _C._hmg_body_excludes([_FV + "[Wagon - 5Door 5P]"], ("Hyundai", "Santa Fe", 2008)))
 done("test_regressions")

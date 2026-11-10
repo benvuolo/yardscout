@@ -422,6 +422,8 @@ class Curation:
             return True
         if self.ns == "subaru" and _subaru_body_excludes(notes, T[1]):
             return True
+        if self.ns == "hmg" and _hmg_body_excludes(notes, T):
+            return True
         return self._model_names_exclude(notes, T)
 
     def _model_names_exclude(self, notes, T) -> bool:
@@ -2061,6 +2063,44 @@ def _subaru_manual_only(notes) -> bool:
         alts = [a.strip().lstrip("*") for a in _split_top(mm.group(1)) if a.strip()]
         if alts and all(any(_SUBARU_MANUAL.match(q) for q in re.findall(r"[A-Z0-9#]+", a.partition(".")[2]))
                         for a in alts):
+            return True
+    return False
+
+
+# Hyundai/Kia body gate (CLAUDE.md rule 3; 2026-11-10 make breadth: kiapartsnow
+# files Forte and Forte Koup under one catalog, with the body only in the option
+# column '[Sedan - 4Door 5P]' / '[Sedan - 5Door 5P]' / '[Coupe - 2Door 5P]', so a
+# sedan door was credited to the Koup). Feed name -> body tokens it can be;
+# names without a sibling body in the feed (Accent, Sonata...) are not gated.
+_HMG_BODY = {
+    ("Kia", "Forte"): {"Sedan - 4Door"}, ("Kia", "Forte Koup"): {"Coupe - 2Door"},
+    ("Kia", "Forte5"): {"Sedan - 5Door"},
+    ("Kia", "Rio"): {"Sedan - 4Door"}, ("Kia", "Rio5"): {"Sedan - 5Door"},
+    ("Kia", "Spectra"): {"Sedan - 4Door"}, ("Kia", "Spectra5"): {"Sedan - 5Door"},
+    ("Hyundai", "Elantra"): {"Sedan - 4Door"}, ("Hyundai", "Elantra Coupe"): {"Coupe - 2Door"},
+    ("Hyundai", "Elantra GT"): {"Sedan - 5Door"}, ("Hyundai", "Elantra Touring"): {"Wagon - 5Door"},
+    ("Hyundai", "Elantra Wagon"): {"Wagon - 5Door"},
+    ("Hyundai", "Genesis"): {"Sedan - 4Door"}, ("Hyundai", "Genesis Coupe"): {"Coupe - 2Door"},
+    ("Hyundai", "Santa Fe Sport"): {"Wagon - 5Door"}, ("Hyundai", "Santa Fe XL"): {"Wagon - Long"},
+}
+_HMG_BODY_UNKNOWN = {("Hyundai", "Santa Fe"): (2013, 2018)}   # Sport or LWB: the feed name does not say
+_HMG_BODY_RE = re.compile(r"\b(Sedan|Coupe|Wagon|PickUp) - (\w+)")
+
+
+def _hmg_body_excludes(notes, T) -> bool:
+    """True when T's own-page row names only bodies T cannot be (per note)."""
+    mk, md, y = T
+    allowed = _HMG_BODY.get((mk, md))
+    unk = _HMG_BODY_UNKNOWN.get((mk, md))
+    if unk and unk[0] <= y <= unk[1]:
+        allowed = set()
+    if allowed is None:
+        return False
+    for n in notes or []:
+        if not re.match(r"^\s*Fitting Vehicle Options\s*:", n or "", re.I):
+            continue
+        bodies = {f"{a} - {b}" for a, b in _HMG_BODY_RE.findall(n)}
+        if bodies and not (bodies & allowed):
             return True
     return False
 
