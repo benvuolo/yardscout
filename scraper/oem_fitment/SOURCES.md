@@ -488,3 +488,26 @@ evidence than any aftermarket list.
       refused.
   - cv-axle notes now carry GSP's own physical check for the puller:
     inboard/outboard spline counts and compressed length.
+
+
+## Hosting platforms and crawl pacing (2026-11-10)
+
+All 20 crawled catalog sites are one hosting platform, SimplePart
+(`platforms.py` `PLATFORM`). The evidence is the served markers the source
+scout recorded (section 2, probe.py, 2026-11-05), not the domain names:
+- the same robots.txt rule set for `*`;
+- the same client-rendered terms shell at `/service/<make>-terms_and_conditions`;
+- footers that link the other stores as sister stores;
+- one of the two SimplePart store templates on every store.
+
+Six per-site CI jobs at the per-site pace drew three HTTP 503s within six
+minutes on 2026-11-10 (07:10-07:16; mbpartsgiant, nissanpartsdeal,
+subarupartsdeal), as concurrent runs did on 2026-11-05. Since then:
+- the crawl runs one CI job per platform, which crawls its sites in turn;
+- fetch.py adds a platform-wide gap (`PLATFORM_GAP`, 8 s) on top of the
+  per-site gap, so the whole platform gets the single-site pace used before
+  2026-11-05;
+- every refusal is logged with its timestamp and recent request counts in
+  `raw/<site>.refusals.jsonl`.
+
+No new requests were made to these hosts to build this table.
