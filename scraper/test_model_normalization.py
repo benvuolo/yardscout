@@ -732,6 +732,10 @@ check("extras carry body at index 5", pb["_extras"].get("40", [None] * 6)[5:6] =
 # the OEM curation model_map validator (M3/M5) refuse to run for every session.
 check("Honda 'Cr-Z' / 'CRZ' -> 'CR-Z'",
       js.normalize_model("Cr-Z", "Honda") == "CR-Z" and js.normalize_model("CRZ", "Honda") == "CR-Z")
+# 2026-11-10: one feed car spelled "J-10" split the Jeep J10 key (curate M3/M5).
+check("Jeep 'J-10' / 'J10' / 'J10 Pickup' -> 'J10'",
+      js.normalize_model("J-10", "Jeep") == "J10" and js.normalize_model("J10", "Jeep") == "J10"
+      and js.normalize_model("J10 Pickup", "Jeep") == "J10")
 
 check("app and worker mirror tables agree (same keys, same values modulo case)",
       all(set(APP.get(m, {})) == set(SRV.get(m, {})) and

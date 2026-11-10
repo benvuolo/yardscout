@@ -25058,7 +25058,7 @@ _MODEL_CANON_BY_MAKE: dict[str, dict[str, str]] = {
         "commanderxh": "Commander", "commanderxk": "Commander",
         "cherokeekl": "Cherokee", "cherokeexj": "Cherokee",
         "wranglerjk": "Wrangler", "cj7": "CJ7", "cj5": "CJ5", "cjseries": "CJ Series",
-        "pucomanche": "Comanche", "j10pickup": "J10",
+        "pucomanche": "Comanche", "j10pickup": "J10", "j10": "J10",   # 2026-11-10: feed "J-10" split the J10 key
     },
     "kia": {
         "niro": "Niro", "soulev": "Soul EV", "spectra5": "Spectra5",
