@@ -2179,3 +2179,102 @@
 09:56:57 chain-unlinked wiper-motor 1 numbers named by 85110-34020, no catalog link: 85110-34010
 09:59:05 seg done tier=C Toyota T100 [1993, 1998] seeds=[1995] records=4461 errors=11
 09:59:05 finished records=4461 errors=11 chain_records=28 chain_unlinked=384 chain_failed=0 chain_given_up=0
+15:24:54 start site=www.toyotapartsnow.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=4461 list_lines=583 year_lines=70 url_index=6226
+15:24:54 completion worklist completion/toyota.own_page.json: 401 rows
+15:25:20 chain-unlinked bumper-rear 2 numbers named by 52159-06950, no catalog link: 52159-06925, 52159-06909
+15:25:20 chain-unlinked bumper-rear 2 numbers named by 52159-06951, no catalog link: 52159-06912, 52159-06911
+15:25:20 chain-unlinked bumper-rear 1 numbers named by 52159-06952, no catalog link: 52159-06946
+15:25:27 chain-unlinked climate-control 1 numbers named by 55900-06280, no catalog link: 55900-33B00
+15:25:27 chain-unlinked climate-control 1 numbers named by 55900-06290, no catalog link: 55900-33C60
+15:25:27 chain-unlinked climate-control 1 numbers named by 55900-06330, no catalog link: 55900-33C90
+15:25:35 chain-unlinked door-rear 2 numbers named by 67003-06071, no catalog link: 67003-06070, 67003-33170
+15:25:35 chain-unlinked door-rear 3 numbers named by 67004-06071, no catalog link: 67004-06070, 67004-33171, 67004-33170
+15:28:39 chain-unlinked grille 4 numbers named by 53101-33270-C0, no catalog link: 53101-33180-B1, 53101-33180-C0, 53101-33180-J0, 53111-33230-C0
+15:28:39 chain-unlinked grille 1 numbers named by 53111-06090-D0, no catalog link: 53111-33230-D0
+15:28:39 chain-unlinked grille 1 numbers named by 53111-06090-E0, no catalog link: 53111-33230-E0
+15:28:39 chain-unlinked grille 1 numbers named by 53111-06090-H0, no catalog link: 53111-33230-H0
+15:28:39 chain-unlinked grille 1 numbers named by 53111-06090-J0, no catalog link: 53111-33230-J0
+15:28:39 chain-unlinked grille 1 numbers named by 53111-06090-J1, no catalog link: 53111-33230-J1
+15:29:19 chain-unlinked headlights 5 numbers named by 81110-06C10, no catalog link: 81110-06451, 81110-06450, 81110-06452, 81130-06450, 81130-06451
+15:29:19 chain-unlinked headlights 3 numbers named by 81110-06B90, no catalog link: 81110-06202, 81110-06201, 81110-06200
+15:29:19 chain-unlinked headlights 3 numbers named by 81110-06C00, no catalog link: 81110-06211, 81110-06210, 81110-06212
+15:29:19 chain-unlinked headlights 3 numbers named by 81150-06B90, no catalog link: 81150-06202, 81150-06200, 81150-06201
+15:29:19 chain-unlinked headlights 3 numbers named by 81150-06C00, no catalog link: 81150-06212, 81150-06211, 81150-06210
+15:29:19 chain-unlinked headlights 5 numbers named by 81150-06C10, no catalog link: 81170-06450, 81170-06451, 81150-06450, 81150-06452, 81150-06451
+15:30:07 chain-unlinked side-mirrors 14 numbers named by 87910-06925, no catalog link: 87910-06190-B2, 87910-06190-A0, 87910-06190-C0, 87910-06190-D0, 87910-06190-G1, 87910-06190-J1, 87910-06190-E1, 87910-06190-B1, 87910-06190-B0, 87910-06190-J2, 87910-06190-E0, 87910-06190-H0, 87910-06190-J0, 87910-06190-G0
+15:30:07 chain-unlinked side-mirrors 15 numbers named by 87910-06926, no catalog link: 87910-06200-E1, 87910-06200-B1, 87910-06200-J0, 87910-06200-H0, 87910-06200-G0, 87910-06200-A1, 87910-06200-G1, 87910-06200-J1, 87910-06200-C0, 87910-06200-E0, 87910-06200-J2, 87910-06200-B0, 87910-06200-A0, 87910-06200-D0, 87910-06200-B2
+15:30:07 chain-unlinked side-mirrors 14 numbers named by 87940-06924, no catalog link: 87940-06190-J2, 87940-06190-J1, 87940-06190-G0, 87940-06190-B2, 87940-06190-G1, 87940-06190-J0, 87940-06190-A0, 87940-06190-H0, 87940-06190-E1, 87940-06190-B0, 87940-06190-C0, 87940-06190-E0, 87940-06190-D0, 87940-06190-B1
+15:30:07 chain-unlinked side-mirrors 1 numbers named by 87940-33630-C0, no catalog link: 87940-33620-C0
+15:30:07 chain-unlinked side-mirrors 1 numbers named by 87910-33670-A0, no catalog link: 87910-33660-A0
+15:30:07 chain-unlinked side-mirrors 2 numbers named by 87910-33670-B2, no catalog link: 87910-33660-B2, 87910-33660-B0
+15:30:07 chain-unlinked side-mirrors 1 numbers named by 87910-33670-D0, no catalog link: 87910-33660-D0
+15:30:07 chain-unlinked side-mirrors 1 numbers named by 87910-33670-E0, no catalog link: 87910-33660-E0
+15:30:07 chain-unlinked side-mirrors 1 numbers named by 87910-33670-G0, no catalog link: 87910-33660-G0
+15:30:07 chain-unlinked side-mirrors 1 numbers named by 87910-33670-H0, no catalog link: 87910-33660-H0
+15:30:07 chain-unlinked side-mirrors 1 numbers named by 87910-33670-J0, no catalog link: 87910-33660-J0
+15:30:07 chain-unlinked side-mirrors 1 numbers named by 87910-33670-J1, no catalog link: 87910-33660-J1
+15:30:07 chain-unlinked side-mirrors 15 numbers named by 87940-06925, no catalog link: 87940-06200-B2, 87940-06200-E1, 87940-06200-G1, 87940-06200-A0, 87940-06200-A1, 87940-06200-B1, 87940-06200-J2, 87940-06200-C0, 87940-06200-D0, 87940-06200-E0, 87940-06200-G0, 87940-06200-B0, 87940-06200-H0, 87940-06200-J0, 87940-06200-J1
+15:30:07 chain-unlinked side-mirrors 1 numbers named by 87940-33630-B2, no catalog link: 87940-33620-B2
+15:30:07 chain-unlinked side-mirrors 1 numbers named by 87940-33630-D0, no catalog link: 87940-33620-D0
+15:30:07 chain-unlinked side-mirrors 1 numbers named by 87940-33630-E0, no catalog link: 87940-33620-E0
+15:30:07 chain-unlinked side-mirrors 1 numbers named by 87940-33630-G0, no catalog link: 87940-33620-G0
+15:30:07 chain-unlinked side-mirrors 1 numbers named by 87940-33630-H0, no catalog link: 87940-33620-H0
+15:30:07 chain-unlinked side-mirrors 1 numbers named by 87940-33630-J0, no catalog link: 87940-33620-J0
+15:30:07 chain-unlinked side-mirrors 1 numbers named by 87940-33630-J1, no catalog link: 87940-33620-J1
+15:30:39 chain-unlinked window-regulator 1 numbers named by 85710-AE010, no catalog link: 85710-35180
+15:30:39 chain-unlinked window-regulator 1 numbers named by 85720-AE010, no catalog link: 85720-35140
+15:30:39 chain-unlinked window-regulator 1 numbers named by 85720-06091, no catalog link: 85720-06090
+15:30:39 chain-unlinked window-regulator 1 numbers named by 85720-33161, no catalog link: 85720-33160
+15:30:55 chain-unlinked window-switch 4 numbers named by 84820-06070, no catalog link: 84820-06071, 84820-52250, 84820-33270, 84820-52310
+15:30:55 chain-unlinked window-switch 2 numbers named by 84820-06061, no catalog link: 84820-33250, 84820-06060
+15:30:55 chain-unlinked window-switch 2 numbers named by 84040-06020, no catalog link: 84040-33100, 84040-06030
+15:31:43 chain-unlinked door-front 1 numbers named by 67002-33160, no catalog link: 67002-33170
+15:33:19 chain-unlinked grille 1 numbers named by 53101-33240-G0, no catalog link: 53101-33230-G0
+15:33:19 chain-unlinked grille 1 numbers named by 53114-33900, no catalog link: 53114-33010
+15:33:19 chain-unlinked grille 1 numbers named by 53101-33240-B0, no catalog link: 53101-33280-B0
+15:33:51 chain-unlinked side-mirrors 1 numbers named by 87910-33670-E1, no catalog link: 87910-33660-E1
+15:33:51 chain-unlinked side-mirrors 1 numbers named by 87910-33670-G1, no catalog link: 87910-33660-G1
+15:33:51 chain-unlinked side-mirrors 1 numbers named by 87940-33630-E1, no catalog link: 87940-33620-E1
+15:33:51 chain-unlinked side-mirrors 1 numbers named by 87940-33630-G1, no catalog link: 87940-33620-G1
+15:34:24 chain-unlinked trunk-lid 1 numbers named by 64401-33391, no catalog link: 64401-33421
+15:34:32 chain-unlinked window-regulator 1 numbers named by 85710-0T011, no catalog link: 85710-0T010
+15:34:32 chain-unlinked window-regulator 1 numbers named by 85720-02450, no catalog link: 85720-0T010
+15:35:27 chain-unlinked climate-control 3 numbers named by 55900-06271, no catalog link: 55900-33B51, 55900-06270, 55900-33B52
+15:35:27 chain-unlinked climate-control 2 numbers named by 55900-06162, no catalog link: 55900-33641, 55900-06161
+15:35:27 chain-unlinked climate-control 3 numbers named by 55900-06172, no catalog link: 55900-06171, 55900-33B32, 55900-33B31
+15:35:51 chain-unlinked gauge-cluster 1 numbers named by 83800-06G40, no catalog link: 83800-33870
+15:37:13 chain-unlinked trunk-lid 1 numbers named by 64401-06281, no catalog link: 64401-06280
+15:39:20 chain-unlinked climate-control 2 numbers named by 55900-06072, no catalog link: 55900-06071, 55900-06070
+15:40:07 chain-unlinked window-regulator 1 numbers named by 69801-AA032, no catalog link: 69801-AA031
+15:40:07 chain-unlinked window-regulator 1 numbers named by 69802-AA032, no catalog link: 69802-AA031
+15:40:07 chain-unlinked window-regulator 1 numbers named by 85710-33170, no catalog link: 85710-33130
+15:40:07 chain-unlinked window-regulator 1 numbers named by 85720-33170, no catalog link: 85720-33120
+15:40:23 chain-unlinked window-switch 1 numbers named by 84820-33240, no catalog link: 84820-33180
+15:40:23 chain-unlinked window-switch 1 numbers named by 84820-AE012, no catalog link: 84820-AE010
+15:41:03 chain-unlinked gauge-cluster 1 numbers named by 83800-06F10, no catalog link: 83800-33C30
+15:41:19 chain-unlinked side-mirrors 1 numbers named by 87940-33630-B0, no catalog link: 87940-33620-B0
+15:41:43 chain-unlinked bumper-rear 1 numbers named by 52159-02911, no catalog link: 52159-02947
+15:41:51 chain-unlinked door-front 2 numbers named by 67002-02220, no catalog link: 67002-1A660, 67002-12A10
+15:41:51 chain-unlinked door-front 1 numbers named by 67001-02220, no catalog link: 67001-02181
+15:41:59 chain-unlinked side-mirrors 17 numbers named by 87910-02915, no catalog link: 87910-02390-D0, 87910-02390-C0, 87910-02391-H0, 87910-02391-J1, 87910-02391-E0, 87910-02390-D1, 87910-02391-A0, 87910-02391-J0, 87910-02391-B1, 87910-02391-B2, 87910-02391-D0, 87910-02390-A0, 87910-02390-J0, 87910-02390-B1, 87910-02391-G0, 87910-02390-B0, 87910-02390-G0
+15:41:59 chain-unlinked side-mirrors 11 numbers named by 87940-02915, no catalog link: 87940-02391-B1, 87940-02391-H0, 87940-02391-D1, 87940-02390-D1, 87940-02390-B1, 87940-02390-C0, 87940-02390-D0, 87940-02391-B2, 87940-02391-J1, 87940-02390-A0, 87940-02391-D0
+15:42:07 chain-unlinked tail-lights 1 numbers named by 81560-02200, no catalog link: 81561-02200
+15:42:24 chain-unlinked window-regulator 1 numbers named by 69810-02170, no catalog link: 69810-12610
+15:42:24 chain-unlinked window-regulator 1 numbers named by 69810-02340, no catalog link: 69810-02160
+15:42:24 chain-unlinked window-regulator 1 numbers named by 69820-02170, no catalog link: 69820-12590
+15:42:24 chain-unlinked window-regulator 1 numbers named by 69820-02350, no catalog link: 69820-02160
+15:42:31 chain-unlinked window-regulator 1 numbers named by 69840-02140, no catalog link: 69840-12400
+15:42:40 chain-unlinked window-switch 1 numbers named by 84820-12491, no catalog link: 84820-12490
+15:43:27 chain-unlinked headlights 1 numbers named by 81110-06050, no catalog link: 81130-06050
+15:43:27 chain-unlinked headlights 1 numbers named by 81150-06050, no catalog link: 81170-06050
+15:43:44 chain-unlinked window-regulator 1 numbers named by 85720-AA020, no catalog link: 85720-33050
+15:43:44 chain-unlinked window-regulator 3 numbers named by 85710-AA030, no catalog link: 85710-30300, 85710-AA040, 85710-AA020
+15:43:51 chain-unlinked window-regulator 1 numbers named by 69803-AA010, no catalog link: 69803-33010
+15:43:51 chain-unlinked window-regulator 1 numbers named by 69804-AA010, no catalog link: 69804-33010
+15:43:51 chain-unlinked window-regulator 1 numbers named by 69830-AA040, no catalog link: 69830-AA010
+15:43:51 chain-unlinked window-regulator 1 numbers named by 69840-AA040, no catalog link: 69840-AA010
+15:43:51 chain-unlinked window-regulator 2 numbers named by 85720-AA030, no catalog link: 85720-33060, 85720-AA040
+15:43:59 chain-unlinked window-switch 1 numbers named by 84820-AA011, no catalog link: 84820-AA010
+15:43:59 chain-unlinked window-switch 1 numbers named by 84820-AC010, no catalog link: 84820-AA020
+15:48:00 chain-unlinked window-regulator 3 numbers named by 85720-0R050, no catalog link: 85720-42110, 85720-06080, 85720-47060
+15:54:55 time budget reached records=4522
