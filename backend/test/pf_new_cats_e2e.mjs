@@ -34,9 +34,10 @@ const NEW = { radiator: 'radiator', 'ac-compressor': 'a/c compressor', 'ac-conde
   'fuel-pump-module': 'fuel pump', 'cv-axle': 'cv axle', strut: 'strut', sunroof: 'sunroof',
   'center-console': 'console', 'door-panel': 'door panel', 'blower-motor': 'blower motor', 'fog-lights': 'fog' };
 
-// released per source (junkyard_scraper.AM_RELEASED["spectrapremium"])
+// released per source (junkyard_scraper.AM_RELEASED: "spectrapremium" for
+// these 7, "gspnorthamerica" for cv-axle, §11.4 round 4 2026-11-10)
 const SPECTRA = new Set(['radiator', 'ac-compressor', 'ac-condenser', 'heater-core', 'evaporator',
-  'throttle-body', 'fuel-pump-module']);
+  'throttle-body', 'fuel-pump-module', 'cv-axle']);
 const SHOTS = process.env.PF_SHOT_DIR || '';
 const cats = new Set(JSON.parse(fs.readFileSync(path.join(DOCS, 'data/interchange.json'), 'utf8')).categories.map(c => c.id));
 const missing = Object.keys(NEW).filter(c => !cats.has(c));

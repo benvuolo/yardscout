@@ -107,18 +107,25 @@ for _p in (DEFAULT_DIR / "aftermarket").glob("*.json"):
     if _p.stem == "spectrapremium":
         if not re.match(r"oem-raw@[0-9a-f]{8}:", str(_doc.get("raw") or "")):
             _bad.append(("spectrapremium raw not pinned", _doc.get("raw")))
+    # + hub 2026-11-10: gspnorthamerica.json (cv-axle, §11.4 round 4, 0 WRONG):
+    # raw and lot snapshot pinned to full commits, lot files' sha256 recorded
+    if _p.stem == "gspnorthamerica":
+        _ls = _doc.get("lot_snapshot") or {}
+        if not re.match(r"[0-9a-f]{40}@", str(_doc.get("raw") or "")) or not re.fullmatch(
+                r"[0-9a-f]{40}", str(_ls.get("ref") or "")) or len((_ls.get("sha256") or {})) != 2:
+            _bad.append(("gspnorthamerica raw/lot snapshot not pinned", _doc.get("raw")))
     for _g in _doc["groups"]:
         for _a in _g["apps"]:
             if _a[0] in _GA.SHIP_OFF_MAKES:
                 _bad.append((_g["id"], _a[0]))
-            elif _p.stem == "spectrapremium":
-                if _g["cat"] not in J.AM_RELEASED.get("spectrapremium", ()):
+            elif _p.stem in ("spectrapremium", "gspnorthamerica"):
+                if _g["cat"] not in J.AM_RELEASED.get(_p.stem, ()):
                     _bad.append((_g["id"], _g["cat"]))
             elif (_mns.get(_a[0]), _g["cat"]) not in _GA.SHIP_PAIRS:
                 _bad.append((_g["id"], _a[0]))
-check("groups/aftermarket ships only dbelectrical.json (owner-approved pairs) and spectrapremium.json "
-      "(its released categories, pinned raw); never a gap make",
-      set(_am) <= {"dbelectrical.json", "spectrapremium.json"} and not _bad, str((_am, _bad[:3])))
+check("groups/aftermarket ships only dbelectrical.json (owner-approved pairs), spectrapremium.json and "
+      "gspnorthamerica.json (their released categories, pinned inputs); never a gap make",
+      set(_am) <= {"dbelectrical.json", "spectrapremium.json", "gspnorthamerica.json"} and not _bad, str((_am, _bad[:3])))
 
 # ---------------------------------------------------------------- OEM split
 def likely_entry(i, cat="headlights"):

@@ -14942,7 +14942,7 @@ _OEM_BRANDS = {"toyota": "Toyota", "mopar": "Mopar", "gm": "GM", "ford": "Ford",
 OEM_AM_DIR_NAME = "aftermarket"
 _AM_CATS = ("alternator", "starter", "radiator", "ac-compressor", "ac-condenser", "heater-core",
             "evaporator", "throttle-body", "fuel-pump-module", "cv-axle", "strut", "ignition-coils")
-_AM_LABELS = {"dbelectrical": "DB Electrical", "spectrapremium": "Spectra Premium"}
+_AM_LABELS = {"dbelectrical": "DB Electrical", "spectrapremium": "Spectra Premium", "gspnorthamerica": "GSP"}
 
 
 # Gated aftermarket app rows (2026-11-09, ops/interchange.md §9): a 6th element
@@ -15014,12 +15014,18 @@ def _am_group_entry(g: dict, site: str) -> dict:
     cosmetic = g.get("cosmetic", False)
     if not isinstance(cosmetic, bool):
         raise ValueError(f"cosmetic {cosmetic!r}")
+    # cv-axle (hub gate (d), 2026-11-10): the driven axle the unit is for; the
+    # client drops a donor whose own decode says that axle isn't driven
+    axle = g.get("driven_axle")
+    if axle not in (None, "", "front", "rear"):
+        raise ValueError(f"driven_axle {axle!r}")
     return {"id": str(g["id"]), "cat": cat, "tier": "likely", "src": "aftermarket",
             "label": _AM_LABELS.get(site, site), "unit": str(g.get("unit") or ""),
             **({"amps": int(amps)} if isinstance(amps, (int, float)) and amps else {}),
             **({"trans": trans} if trans else {}),
             **({"ifEquipped": [o.strip() for o in ife]} if ife else {}),
             **({"cosmetic": True} if cosmetic else {}),
+            **({"drivenAxle": axle} if axle else {}),
             "note": note, "apps": apps}
 
 
@@ -15102,6 +15108,10 @@ AM_RELEASED = {
     # §11.4 round 2, 2026-11-10: 0 WRONG in all categories; hub confirm 02:38 UTC
     "spectrapremium": frozenset({"radiator", "ac-compressor", "ac-condenser", "heater-core", "evaporator",
                                  "throttle-body", "fuel-pump-module", "ignition-coils"}),
+    # GSP North America cv-axle: §11.4 round 4, 2026-11-10 (independent agent,
+    # seed 31337004): 0 WRONG, every RISK covered by a shown line; hub confirm
+    # pending at commit time (ops/interchange.md "Source scout 2")
+    "gspnorthamerica": frozenset({"cv-axle"}),
 }
 
 

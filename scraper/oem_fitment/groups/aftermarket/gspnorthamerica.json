@@ -1,0 +1,2146 @@
+{
+ "audited_groups_sha256": "9d8b3cef50a1308de73abd31957106585f58d9efc63415727129303fe30ad5ab",
+ "decision": "\u00a711.4 round 4 2026-11-10 (independent agent, seed 31337004): 0 WRONG, every RISK covered by a shown line; ops/interchange.md 'Source scout 2'",
+ "groups": [
+  {
+   "apps": [
+    [
+     "Buick",
+     "LeSabre",
+     2000,
+     2005,
+     "3.8L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV10028:front-right",
+   "label": "GSP front right",
+   "note": "GSP NCV10028 (front right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 34, outboard splines 33, compressed length 658 mm.",
+   "retrieved": "2026-11-10T04:13:21Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV10028"
+  },
+  {
+   "apps": [
+    [
+     "Cadillac",
+     "CTS",
+     2003,
+     2003,
+     "3.2L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "rear",
+   "id": "am:gsp:cv-axle:NCV10033:rear-right",
+   "label": "GSP rear right",
+   "note": "GSP NCV10033 (rear right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same rear right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 27, outboard splines 30, compressed length 844 mm.",
+   "retrieved": "2026-11-10T04:17:37Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV10033"
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Captiva Sport",
+     2012,
+     2015,
+     "2.4L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV10133:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV10133 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 34, outboard splines 30, compressed length 659 mm.",
+   "retrieved": "2026-11-10T03:59:29Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV10133"
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Captiva Sport",
+     2012,
+     2015,
+     "2.4L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV10134:front-right",
+   "label": "GSP front right",
+   "note": "GSP NCV10134 (front right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 27, outboard splines 30, compressed length 548 mm.",
+   "retrieved": "2026-11-10T03:57:05Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV10134"
+  },
+  {
+   "apps": [
+    [
+     "Saturn",
+     "ION",
+     2003,
+     2003,
+     "2.2L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV10168:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV10168 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 34, outboard splines 33, compressed length 593 mm.",
+   "retrieved": "2026-11-10T04:22:49Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV10168"
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Equinox",
+     2021,
+     2022,
+     "1.5L"
+    ],
+    [
+     "GMC",
+     "Terrain",
+     2021,
+     2021,
+     "1.5L"
+    ],
+    [
+     "GMC",
+     "Terrain",
+     2023,
+     2023,
+     "1.5L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV10179:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV10179 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 34, outboard splines 30, compressed length 675 mm.",
+   "retrieved": "2026-11-10T03:52:57Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV10179"
+  },
+  {
+   "apps": [
+    [
+     "Buick",
+     "Century",
+     1997,
+     1999,
+     "3.1L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV10233:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV10233 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 35, outboard splines 33, compressed length 555 mm.",
+   "retrieved": "2026-11-10T04:12:33Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV10233"
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Malibu Limited",
+     2016,
+     2016,
+     "2.5L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV10279:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV10279 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 34, outboard splines 30, compressed length 659 mm.",
+   "retrieved": "2026-11-10T03:49:21Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV10279"
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Sonic",
+     2020,
+     2020,
+     "1.4L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV10298:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV10298 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 34, outboard splines 25, compressed length 641 mm.",
+   "retrieved": "2026-11-10T03:46:58Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV10298"
+  },
+  {
+   "apps": [
+    [
+     "Cadillac",
+     "Allante",
+     1993,
+     1993,
+     "4.6L"
+    ],
+    [
+     "Cadillac",
+     "Eldorado",
+     1994,
+     1995,
+     "4.6L"
+    ],
+    [
+     "Cadillac",
+     "Seville",
+     1994,
+     1995,
+     "4.6L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV10560:front",
+   "label": "GSP front",
+   "note": "GSP NCV10560 (front CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 41, outboard splines 33, compressed length 537 mm.",
+   "retrieved": "2026-11-10T04:14:01Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV10560"
+  },
+  {
+   "apps": [
+    [
+     "Lincoln",
+     "MKZ",
+     2007,
+     2010,
+     "3.5L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "rear",
+   "id": "am:gsp:cv-axle:NCV11006:rear-right",
+   "label": "GSP rear right",
+   "note": "GSP NCV11006 (rear right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same rear right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 25, outboard splines 28, compressed length 828 mm.",
+   "retrieved": "2026-11-10T03:36:26Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV11006"
+  },
+  {
+   "apps": [
+    [
+     "Lincoln",
+     "MKC",
+     2016,
+     2019,
+     "2.0L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "rear",
+   "id": "am:gsp:cv-axle:NCV11168:rear",
+   "label": "GSP rear",
+   "note": "GSP NCV11168 (rear CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same rear position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 25, outboard splines 27, compressed length 819 mm.",
+   "retrieved": "2026-11-10T01:27:38Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV11168"
+  },
+  {
+   "apps": [
+    [
+     "Lincoln",
+     "MKZ",
+     2014,
+     2015,
+     "2.0L"
+    ],
+    [
+     "Lincoln",
+     "MKZ",
+     2014,
+     2015,
+     "3.7L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "rear",
+   "id": "am:gsp:cv-axle:NCV11192:rear",
+   "label": "GSP rear",
+   "note": "GSP NCV11192 (rear CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same rear position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 25, outboard splines 27, compressed length 822 mm.",
+   "retrieved": "2026-11-10T01:18:07Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV11192"
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Ecosport",
+     2022,
+     2022,
+     "2.0L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV11254:front-right",
+   "label": "GSP front right",
+   "note": "GSP NCV11254 (front right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 35, outboard splines 25, compressed length 922 mm.",
+   "retrieved": "2026-11-10T01:12:23Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV11254"
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Ecosport",
+     2018,
+     2022,
+     "2.0L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "rear",
+   "id": "am:gsp:cv-axle:NCV11270:rear",
+   "label": "GSP rear",
+   "note": "GSP NCV11270 (rear CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same rear position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 25, outboard splines 25, compressed length 784 mm.",
+   "retrieved": "2026-11-10T01:17:35Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV11270"
+  },
+  {
+   "apps": [
+    [
+     "Ford",
+     "Ecosport",
+     2022,
+     2022,
+     "2.0L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV11311:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV11311 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 35, outboard splines 25.",
+   "retrieved": "2026-11-10T05:13:19Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV11311"
+  },
+  {
+   "apps": [
+    [
+     "Lincoln",
+     "MKZ",
+     2010,
+     2010,
+     "3.5L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV11558:front-right",
+   "label": "GSP front right",
+   "note": "GSP NCV11558 (front right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 28, outboard splines 28, compressed length 550 mm.",
+   "retrieved": "2026-11-10T01:07:35Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV11558"
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Pacifica",
+     2007,
+     2008,
+     "4.0L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "rear",
+   "id": "am:gsp:cv-axle:NCV12015:rear-left",
+   "label": "GSP rear left",
+   "note": "GSP NCV12015 (rear left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same rear left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 25, outboard splines 32, compressed length 852 mm.",
+   "retrieved": "2026-11-10T02:26:14Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV12015"
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Pacifica",
+     2004,
+     2006,
+     "3.5L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "rear",
+   "id": "am:gsp:cv-axle:NCV12030:rear-left",
+   "label": "GSP rear left",
+   "note": "GSP NCV12030 (rear left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same rear left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 25, outboard splines 26, compressed length 849 mm.",
+   "retrieved": "2026-11-10T02:25:42Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV12030"
+  },
+  {
+   "apps": [
+    [
+     "Dodge",
+     "Journey",
+     2009,
+     2010,
+     "3.5L"
+    ],
+    [
+     "Dodge",
+     "Journey",
+     2011,
+     2019,
+     "3.6L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "rear",
+   "id": "am:gsp:cv-axle:NCV12108:rear-right",
+   "label": "GSP rear right",
+   "note": "GSP NCV12108 (rear right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same rear right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 25, outboard splines 32, compressed length 872 mm.",
+   "retrieved": "2026-11-10T01:41:38Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV12108"
+  },
+  {
+   "apps": [
+    [
+     "Dodge",
+     "Journey",
+     2009,
+     2010,
+     "3.5L"
+    ],
+    [
+     "Dodge",
+     "Journey",
+     2011,
+     2019,
+     "3.6L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "rear",
+   "id": "am:gsp:cv-axle:NCV12109:rear-left",
+   "label": "GSP rear left",
+   "note": "GSP NCV12109 (rear left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same rear left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 25, outboard splines 32, compressed length 771 mm.",
+   "retrieved": "2026-11-10T01:40:18Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV12109"
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Pacifica",
+     2007,
+     2008,
+     "4.0L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "rear",
+   "id": "am:gsp:cv-axle:NCV12121:rear-right",
+   "label": "GSP rear right",
+   "note": "GSP NCV12121 (rear right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same rear right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 25, outboard splines 32, compressed length 913 mm.",
+   "retrieved": "2026-11-10T02:24:06Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV12121"
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "LHS",
+     1994,
+     1994,
+     "3.5L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV12513:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV12513 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 27, outboard splines 33, compressed length 698 mm.",
+   "retrieved": "2026-11-10T01:33:30Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV12513"
+  },
+  {
+   "apps": [
+    [
+     "Chrysler",
+     "Concorde",
+     1993,
+     1993,
+     "3.3L"
+    ],
+    [
+     "Chrysler",
+     "Concorde",
+     1995,
+     1995,
+     "3.3L"
+    ],
+    [
+     "Chrysler",
+     "Concorde",
+     1995,
+     1995,
+     "3.5L"
+    ],
+    [
+     "Chrysler",
+     "LHS",
+     1994,
+     1994,
+     "3.5L"
+    ],
+    [
+     "Dodge",
+     "Intrepid",
+     1993,
+     1995,
+     "3.3L"
+    ],
+    [
+     "Dodge",
+     "Intrepid",
+     1994,
+     1995,
+     "3.5L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV12518:front-right",
+   "label": "GSP front right",
+   "note": "GSP NCV12518 (front right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 27, outboard splines 33, compressed length 537 mm.",
+   "retrieved": "2026-11-10T01:37:46Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV12518"
+  },
+  {
+   "apps": [
+    [
+     "Buick",
+     "LaCrosse",
+     2018,
+     2018,
+     "2.5L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV16002:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV16002 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 34, outboard splines 30, compressed length 680 mm.",
+   "retrieved": "2026-11-10T01:29:38Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV16002"
+  },
+  {
+   "apps": [
+    [
+     "Buick",
+     "Enclave",
+     2018,
+     2018,
+     "3.6L"
+    ],
+    [
+     "Buick",
+     "Enclave",
+     2020,
+     2020,
+     "3.6L"
+    ],
+    [
+     "Chevrolet",
+     "Traverse",
+     2018,
+     2018,
+     "3.6L"
+    ],
+    [
+     "Chevrolet",
+     "Traverse",
+     2020,
+     2021,
+     "3.6L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV16011:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV16011 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 27, outboard splines 33, compressed length 747 mm.",
+   "retrieved": "2026-11-10T01:30:26Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV16011"
+  },
+  {
+   "apps": [
+    [
+     "Buick",
+     "Verano",
+     2013,
+     2013,
+     "2.0L"
+    ],
+    [
+     "Buick",
+     "Verano",
+     2015,
+     2016,
+     "2.0L"
+    ],
+    [
+     "Buick",
+     "Verano",
+     2012,
+     2017,
+     "2.4L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV17000:front-right",
+   "label": "GSP front right",
+   "note": "GSP NCV17000 (front right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 27, outboard splines 30, compressed length 599 mm.",
+   "retrieved": "2026-11-10T01:30:42Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV17000"
+  },
+  {
+   "apps": [
+    [
+     "Toyota",
+     "Prius",
+     2019,
+     2019,
+     "1.8L"
+    ],
+    [
+     "Toyota",
+     "Prius",
+     2021,
+     2021,
+     "1.8L"
+    ],
+    [
+     "Toyota",
+     "Prius Prime",
+     2018,
+     2019,
+     "1.8L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV19001K:front-right",
+   "label": "GSP front right",
+   "note": "GSP NCV19001K (front right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 24, outboard splines 26, compressed length 949 mm.",
+   "retrieved": "2026-11-10T02:21:59Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV19001K"
+  },
+  {
+   "apps": [
+    [
+     "Audi",
+     "Allroad",
+     2013,
+     2013,
+     "2.0L"
+    ],
+    [
+     "Audi",
+     "Allroad",
+     2015,
+     2015,
+     "2.0L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "rear",
+   "id": "am:gsp:cv-axle:NCV23032:rear",
+   "label": "GSP rear",
+   "note": "GSP NCV23032 (rear CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same rear position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: outboard splines 42, compressed length 626 mm.",
+   "retrieved": "2026-11-10T03:11:00Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV23032"
+  },
+  {
+   "apps": [
+    [
+     "Audi",
+     "A8 Quattro",
+     2010,
+     2010,
+     "4.2L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV23904:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV23904 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: outboard splines 38, compressed length 613 mm.",
+   "retrieved": "2026-11-10T03:05:08Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV23904"
+  },
+  {
+   "apps": [
+    [
+     "BMW",
+     "328i GT xDrive",
+     2015,
+     2016,
+     "2.0L"
+    ],
+    [
+     "BMW",
+     "328i xDrive",
+     2015,
+     2015,
+     "2.0L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "rear",
+   "id": "am:gsp:cv-axle:NCV27028:rear-left",
+   "label": "GSP rear left",
+   "note": "GSP NCV27028 (rear left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same rear left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 27, outboard splines 28, compressed length 750 mm.",
+   "retrieved": "2026-11-10T02:46:30Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV27028"
+  },
+  {
+   "apps": [
+    [
+     "BMW",
+     "318ti",
+     1996,
+     1996,
+     "1.9L"
+    ],
+    [
+     "BMW",
+     "318ti",
+     1999,
+     1999,
+     "1.9L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "rear",
+   "id": "am:gsp:cv-axle:NCV27059:rear",
+   "label": "GSP rear",
+   "note": "GSP NCV27059 (rear CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same rear position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: outboard splines 27, compressed length 585 mm.",
+   "retrieved": "2026-11-10T02:47:50Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV27059"
+  },
+  {
+   "apps": [
+    [
+     "BMW",
+     "X1",
+     2012,
+     2015,
+     "2.0L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "rear",
+   "id": "am:gsp:cv-axle:NCV27074:rear-left",
+   "label": "GSP rear left",
+   "note": "GSP NCV27074 (rear left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same rear left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: outboard splines 30, compressed length 617 mm.",
+   "retrieved": "2026-11-10T02:46:46Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV27074"
+  },
+  {
+   "apps": [
+    [
+     "BMW",
+     "X1",
+     2013,
+     2015,
+     "2.0L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "rear",
+   "id": "am:gsp:cv-axle:NCV27089:rear-right",
+   "label": "GSP rear right",
+   "note": "GSP NCV27089 (rear right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same rear right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: outboard splines 30, compressed length 683 mm.",
+   "retrieved": "2026-11-10T02:42:22Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV27089"
+  },
+  {
+   "apps": [
+    [
+     "Honda",
+     "Accord Crosstour",
+     2010,
+     2011,
+     "3.5L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV36028:front-right",
+   "label": "GSP front right",
+   "note": "GSP NCV36028 (front right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 29, outboard splines 30, compressed length 655 mm.",
+   "retrieved": "2026-11-10T02:16:07Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV36028"
+  },
+  {
+   "apps": [
+    [
+     "Honda",
+     "CR-V",
+     2002,
+     2006,
+     "2.4L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV36123:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV36123 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 27, outboard splines 28, compressed length 663 mm.",
+   "retrieved": "2026-11-10T02:13:43Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV36123"
+  },
+  {
+   "apps": [
+    [
+     "Honda",
+     "Accord Crosstour",
+     2010,
+     2011,
+     "3.5L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV36192:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV36192 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 29, outboard splines 30, compressed length 725 mm.",
+   "retrieved": "2026-11-10T02:05:52Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV36192"
+  },
+  {
+   "apps": [
+    [
+     "Honda",
+     "Clarity",
+     2018,
+     2018,
+     "1.5L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV36207:front-right",
+   "label": "GSP front right",
+   "note": "GSP NCV36207 (front right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 27, outboard splines 30, compressed length 632 mm.",
+   "retrieved": "2026-11-10T02:01:11Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV36207"
+  },
+  {
+   "apps": [
+    [
+     "Acura",
+     "Integra",
+     2023,
+     2024,
+     "1.5L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV36237:front-right",
+   "label": "GSP front right",
+   "note": "GSP NCV36237 (front right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 27, outboard splines 28, compressed length 626 mm.",
+   "retrieved": "2026-11-10T01:57:35Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV36237"
+  },
+  {
+   "apps": [
+    [
+     "Hyundai",
+     "Azera",
+     2008,
+     2009,
+     "3.3L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV37017:front-right",
+   "label": "GSP front right",
+   "note": "GSP NCV37017 (front right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 28, outboard splines 30, compressed length 587 mm.",
+   "retrieved": "2026-11-10T02:30:46Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV37017"
+  },
+  {
+   "apps": [
+    [
+     "Hyundai",
+     "Santa Fe Sport",
+     2013,
+     2015,
+     "2.0L"
+    ],
+    [
+     "Hyundai",
+     "Santa Fe Sport",
+     2017,
+     2018,
+     "2.0L"
+    ],
+    [
+     "Hyundai",
+     "Santa Fe Sport",
+     2013,
+     2018,
+     "2.4L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV37071:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV37071 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 28, outboard splines 30, compressed length 680 mm.",
+   "retrieved": "2026-11-10T02:27:02Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV37071"
+  },
+  {
+   "apps": [
+    [
+     "Hyundai",
+     "Genesis",
+     2015,
+     2016,
+     "3.8L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV37139:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV37139 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 28, outboard splines 30, compressed length 568 mm.",
+   "retrieved": "2026-11-09T23:48:07Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV37139"
+  },
+  {
+   "apps": [
+    [
+     "Hyundai",
+     "Genesis",
+     2015,
+     2016,
+     "3.8L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV37147:front-right",
+   "label": "GSP front right",
+   "note": "GSP NCV37147 (front right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 27, outboard splines 30, compressed length 610 mm.",
+   "retrieved": "2026-11-09T23:43:59Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV37147"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Sportage",
+     2023,
+     2023,
+     "2.5L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV37174:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV37174 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 27, outboard splines 30, compressed length 683 mm.",
+   "retrieved": "2026-11-09T23:46:39Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV37174"
+  },
+  {
+   "apps": [
+    [
+     "Hyundai",
+     "Genesis",
+     2012,
+     2014,
+     "3.8L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "rear",
+   "id": "am:gsp:cv-axle:NCV37187:rear-left",
+   "label": "GSP rear left",
+   "note": "GSP NCV37187 (rear left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same rear left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 28, outboard splines 30, compressed length 795 mm.",
+   "retrieved": "2026-11-09T23:49:35Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV37187"
+  },
+  {
+   "apps": [
+    [
+     "Hyundai",
+     "Sonata",
+     2001,
+     2001,
+     "2.5L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV37514:front-right",
+   "label": "GSP front right",
+   "note": "GSP NCV37514 (front right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 26, outboard splines 27, compressed length 620 mm.",
+   "retrieved": "2026-11-09T23:42:31Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV37514"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "FX37",
+     2013,
+     2013,
+     "3.7L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "rear",
+   "id": "am:gsp:cv-axle:NCV39007:rear-left",
+   "label": "GSP rear left",
+   "note": "GSP NCV39007 (rear left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same rear left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: outboard splines 32, compressed length 689 mm.",
+   "retrieved": "2026-11-10T00:52:05Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV39007"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "FX37",
+     2013,
+     2013,
+     "3.7L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "rear",
+   "id": "am:gsp:cv-axle:NCV39008:rear-right",
+   "label": "GSP rear right",
+   "note": "GSP NCV39008 (rear right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same rear right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: outboard splines 32, compressed length 721 mm.",
+   "retrieved": "2026-11-10T00:53:25Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV39008"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "FX37",
+     2013,
+     2013,
+     "3.7L"
+    ],
+    [
+     "Infiniti",
+     "QX70",
+     2015,
+     2017,
+     "3.7L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV39011:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV39011 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: outboard splines 27, compressed length 682 mm.",
+   "retrieved": "2026-11-10T00:52:13Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV39011"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "FX50",
+     2009,
+     2009,
+     "5.0L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV39015:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV39015 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: outboard splines 27, compressed length 688 mm.",
+   "retrieved": "2026-11-10T00:50:29Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV39015"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "FX50",
+     2009,
+     2009,
+     "5.0L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "rear",
+   "id": "am:gsp:cv-axle:NCV39016:rear-left",
+   "label": "GSP rear left",
+   "note": "GSP NCV39016 (rear left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same rear left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: outboard splines 32, compressed length 671 mm.",
+   "retrieved": "2026-11-10T00:49:49Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV39016"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "FX50",
+     2009,
+     2009,
+     "5.0L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "rear",
+   "id": "am:gsp:cv-axle:NCV39017:rear-right",
+   "label": "GSP rear right",
+   "note": "GSP NCV39017 (rear right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same rear right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: outboard splines 32, compressed length 716 mm.",
+   "retrieved": "2026-11-10T00:50:53Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV39017"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "M56",
+     2011,
+     2011,
+     "5.6L"
+    ],
+    [
+     "Infiniti",
+     "Q70",
+     2014,
+     2015,
+     "3.7L"
+    ],
+    [
+     "Infiniti",
+     "Q70",
+     2017,
+     2017,
+     "3.7L"
+    ],
+    [
+     "Infiniti",
+     "Q70",
+     2019,
+     2019,
+     "3.7L"
+    ],
+    [
+     "Infiniti",
+     "Q70L",
+     2015,
+     2016,
+     "3.7L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV39072:front-right",
+   "label": "GSP front right",
+   "note": "GSP NCV39072 (front right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 25, outboard splines 27, compressed length 620 mm.",
+   "retrieved": "2026-11-10T00:49:25Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV39072"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "M56",
+     2011,
+     2011,
+     "5.6L"
+    ],
+    [
+     "Infiniti",
+     "Q70L",
+     2015,
+     2015,
+     "3.7L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV39077:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV39077 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: outboard splines 27, compressed length 657 mm.",
+   "retrieved": "2026-11-10T00:51:33Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV39077"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "M37",
+     2011,
+     2013,
+     "3.7L"
+    ],
+    [
+     "Infiniti",
+     "Q70",
+     2014,
+     2015,
+     "3.7L"
+    ],
+    [
+     "Infiniti",
+     "Q70",
+     2017,
+     2017,
+     "3.7L"
+    ],
+    [
+     "Infiniti",
+     "Q70L",
+     2016,
+     2016,
+     "3.7L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "rear",
+   "id": "am:gsp:cv-axle:NCV39083:rear-right",
+   "label": "GSP rear right",
+   "note": "GSP NCV39083 (rear right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same rear right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 33, outboard splines 32.",
+   "retrieved": "2026-11-10T05:23:35Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV39083"
+  },
+  {
+   "apps": [
+    [
+     "Honda",
+     "Passport",
+     1998,
+     2001,
+     "3.2L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV40053:front",
+   "label": "GSP front",
+   "note": "GSP NCV40053 (front CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 17, outboard splines 17, compressed length 609 mm.",
+   "retrieved": "2026-11-09T23:32:23Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV40053"
+  },
+  {
+   "apps": [
+    [
+     "Mazda",
+     "323",
+     1987,
+     1987,
+     "1.6L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV47001:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV47001 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 24, outboard splines 24, compressed length 611 mm.",
+   "retrieved": "2026-11-10T00:12:17Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV47001"
+  },
+  {
+   "apps": [
+    [
+     "Mazda",
+     "CX-30",
+     2020,
+     2024,
+     "2.5L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "rear",
+   "id": "am:gsp:cv-axle:NCV47120:rear-left",
+   "label": "GSP rear left",
+   "note": "GSP NCV47120 (rear left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same rear left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 22, outboard splines 26, compressed length 806 mm.",
+   "retrieved": "2026-11-10T00:05:14Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV47120"
+  },
+  {
+   "apps": [
+    [
+     "Mazda",
+     "CX-30",
+     2020,
+     2024,
+     "2.5L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "rear",
+   "id": "am:gsp:cv-axle:NCV47121:rear-right",
+   "label": "GSP rear right",
+   "note": "GSP NCV47121 (rear right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same rear right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 22, outboard splines 26, compressed length 846 mm.",
+   "retrieved": "2026-11-10T00:04:25Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV47121"
+  },
+  {
+   "apps": [
+    [
+     "Lincoln",
+     "Zephyr",
+     2006,
+     2006,
+     "3.0L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV47578:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV47578 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 31, outboard splines 28, compressed length 589 mm.",
+   "retrieved": "2026-11-09T22:52:56Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV47578"
+  },
+  {
+   "apps": [
+    [
+     "Lincoln",
+     "Zephyr",
+     2006,
+     2006,
+     "3.0L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV47579:front-right",
+   "label": "GSP front right",
+   "note": "GSP NCV47579 (front right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 28, outboard splines 28, compressed length 524 mm.",
+   "retrieved": "2026-11-09T22:53:20Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV47579"
+  },
+  {
+   "apps": [
+    [
+     "Mazda",
+     "CX-7",
+     2007,
+     2009,
+     "2.3L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV47591:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV47591 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 31, outboard splines 31, compressed length 634 mm.",
+   "retrieved": "2026-11-09T23:58:39Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV47591"
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "ML55 AMG",
+     2001,
+     2001,
+     "5.5L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV48501:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV48501 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 37, outboard splines 30, compressed length 635 mm.",
+   "retrieved": "2026-11-10T00:27:22Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV48501"
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "ML55 AMG",
+     2001,
+     2001,
+     "5.5L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV48502:front-right",
+   "label": "GSP front right",
+   "note": "GSP NCV48502 (front right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 37, outboard splines 30, compressed length 963 mm.",
+   "retrieved": "2026-11-10T00:30:13Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV48502"
+  },
+  {
+   "apps": [
+    [
+     "Mercedes-Benz",
+     "ML55 AMG",
+     2001,
+     2001,
+     "5.5L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "rear",
+   "id": "am:gsp:cv-axle:NCV48991:rear",
+   "label": "GSP rear",
+   "note": "GSP NCV48991 (rear CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same rear position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 32, outboard splines 30, compressed length 792 mm.",
+   "retrieved": "2026-11-10T00:24:57Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV48991"
+  },
+  {
+   "apps": [
+    [
+     "BMW",
+     "X1",
+     2016,
+     2018,
+     "2.0L"
+    ],
+    [
+     "BMW",
+     "X2",
+     2018,
+     2018,
+     "2.0L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV49013:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV49013 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 28, outboard splines 31, compressed length 538 mm.",
+   "retrieved": "2026-11-10T00:14:58Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV49013"
+  },
+  {
+   "apps": [
+    [
+     "Mitsubishi",
+     "Eclipse Cross",
+     2019,
+     2020,
+     "1.5L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV51092:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV51092 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 27, outboard splines 28, compressed length 651 mm.",
+   "retrieved": "2026-11-10T00:40:13Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV51092"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Pathfinder",
+     2005,
+     2012,
+     "4.0L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "rear",
+   "id": "am:gsp:cv-axle:NCV53010:rear",
+   "label": "GSP rear",
+   "note": "GSP NCV53010 (rear CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same rear position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: outboard splines 32, compressed length 666 mm.",
+   "retrieved": "2026-11-09T23:25:16Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV53010"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Murano",
+     2015,
+     2015,
+     "3.5L"
+    ],
+    [
+     "Nissan",
+     "Murano",
+     2017,
+     2018,
+     "3.5L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV53095:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV53095 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 29, outboard splines 32, compressed length 679 mm.",
+   "retrieved": "2026-11-09T23:21:00Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV53095"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Maxima",
+     2016,
+     2018,
+     "3.5L"
+    ],
+    [
+     "Nissan",
+     "Maxima",
+     2020,
+     2020,
+     "3.5L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV53096:front-right",
+   "label": "GSP front right",
+   "note": "GSP NCV53096 (front right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 29, outboard splines 32, compressed length 1011 mm.",
+   "retrieved": "2026-11-09T23:24:04Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV53096"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2011,
+     2011,
+     "4.0L"
+    ],
+    [
+     "Nissan",
+     "Pathfinder",
+     2005,
+     2007,
+     "4.0L"
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2006,
+     2015,
+     "4.0L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV53127:front",
+   "label": "GSP front",
+   "note": "GSP NCV53127 (front CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 27, outboard splines 29, compressed length 632 mm.",
+   "retrieved": "2026-11-09T23:25:56Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV53127"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Maxima",
+     2016,
+     2018,
+     "3.5L"
+    ],
+    [
+     "Nissan",
+     "Maxima",
+     2020,
+     2020,
+     "3.5L"
+    ],
+    [
+     "Nissan",
+     "Maxima",
+     2022,
+     2022,
+     "3.5L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV53136:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV53136 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 29, outboard splines 32, compressed length 656 mm.",
+   "retrieved": "2026-11-09T23:24:44Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV53136"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     2025,
+     2025,
+     "2.5L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV53138:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV53138 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 27, outboard splines 32, compressed length 694 mm.",
+   "retrieved": "2026-11-09T23:19:40Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV53138"
+  },
+  {
+   "apps": [
+    [
+     "Lexus",
+     "RX 400h",
+     2006,
+     2008,
+     "3.3L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "rear",
+   "id": "am:gsp:cv-axle:NCV69004:rear",
+   "label": "GSP rear",
+   "note": "GSP NCV69004 (rear CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same rear position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: outboard splines 26, compressed length 664 mm.",
+   "retrieved": "2026-11-09T23:33:43Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV69004"
+  },
+  {
+   "apps": [
+    [
+     "Toyota",
+     "Prius",
+     2019,
+     2019,
+     "1.8L"
+    ],
+    [
+     "Toyota",
+     "Prius",
+     2021,
+     2021,
+     "1.8L"
+    ],
+    [
+     "Toyota",
+     "Prius Prime",
+     2018,
+     2019,
+     "1.8L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV69093:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV69093 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 24, outboard splines 26, compressed length 650 mm.",
+   "retrieved": "2026-11-09T21:38:50Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV69093"
+  },
+  {
+   "apps": [
+    [
+     "Toyota",
+     "Avalon",
+     2002,
+     2004,
+     "3.0L"
+    ],
+    [
+     "Toyota",
+     "Sienna",
+     2002,
+     2003,
+     "3.0L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV69194:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV69194 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 24, outboard splines 30.",
+   "retrieved": "2026-11-10T04:42:17Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV69194"
+  },
+  {
+   "apps": [
+    [
+     "Toyota",
+     "RAV4",
+     1996,
+     2000,
+     "2.0L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "rear",
+   "id": "am:gsp:cv-axle:NCV69449:rear-left",
+   "label": "GSP rear left",
+   "note": "GSP NCV69449 (rear left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same rear left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: outboard splines 26, compressed length 630 mm.",
+   "retrieved": "2026-11-09T21:21:06Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV69449"
+  },
+  {
+   "apps": [
+    [
+     "Toyota",
+     "RAV4",
+     1996,
+     2000,
+     "2.0L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "rear",
+   "id": "am:gsp:cv-axle:NCV69450:rear-right",
+   "label": "GSP rear right",
+   "note": "GSP NCV69450 (rear right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same rear right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: outboard splines 26, compressed length 675 mm.",
+   "retrieved": "2026-11-09T21:21:54Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV69450"
+  },
+  {
+   "apps": [
+    [
+     "Volkswagen",
+     "Beetle",
+     2019,
+     2019,
+     "2.0L"
+    ],
+    [
+     "Volkswagen",
+     "Passat",
+     2019,
+     2022,
+     "2.0L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV72018:front-right",
+   "label": "GSP front right",
+   "note": "GSP NCV72018 (front right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 26, outboard splines 36, compressed length 898 mm.",
+   "retrieved": "2026-11-09T22:19:23Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV72018"
+  },
+  {
+   "apps": [
+    [
+     "Volkswagen",
+     "Passat",
+     2017,
+     2017,
+     "1.8L"
+    ],
+    [
+     "Volkswagen",
+     "Passat",
+     2019,
+     2022,
+     "2.0L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV72134:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV72134 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 26, outboard splines 36, compressed length 598 mm.",
+   "retrieved": "2026-11-09T22:16:03Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV72134"
+  },
+  {
+   "apps": [
+    [
+     "Audi",
+     "A6",
+     2013,
+     2015,
+     "2.0L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV72169:front",
+   "label": "GSP front",
+   "note": "GSP NCV72169 (front CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: outboard splines 42, compressed length 496 mm.",
+   "retrieved": "2026-11-09T22:29:39Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV72169"
+  },
+  {
+   "apps": [
+    [
+     "Volvo",
+     "XC90",
+     2005,
+     2005,
+     "2.5L"
+    ],
+    [
+     "Volvo",
+     "XC90",
+     2007,
+     2014,
+     "3.2L"
+    ],
+    [
+     "Volvo",
+     "XC90",
+     2005,
+     2010,
+     "4.4L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "rear",
+   "id": "am:gsp:cv-axle:NCV73021:rear",
+   "label": "GSP rear",
+   "note": "GSP NCV73021 (rear CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same rear position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 26, outboard splines 36, compressed length 794 mm.",
+   "retrieved": "2026-11-09T22:39:04Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV73021"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Sephia",
+     1994,
+     1994,
+     "1.6L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV75000:front-right",
+   "label": "GSP front right",
+   "note": "GSP NCV75000 (front right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 24, outboard splines 26, compressed length 889 mm.",
+   "retrieved": "2026-11-09T22:05:02Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV75000"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Optima",
+     2010,
+     2010,
+     "2.4L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV75036:front-right",
+   "label": "GSP front right",
+   "note": "GSP NCV75036 (front right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 27, outboard splines 27, compressed length 974 mm.",
+   "retrieved": "2026-11-09T22:06:22Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV75036"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Soul",
+     2010,
+     2010,
+     "2.0L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV75038:front-right",
+   "label": "GSP front right",
+   "note": "GSP NCV75038 (front right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 27, outboard splines 27, compressed length 975 mm.",
+   "retrieved": "2026-11-09T22:05:34Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV75038"
+  },
+  {
+   "apps": [
+    [
+     "Hyundai",
+     "Ioniq",
+     2017,
+     2020,
+     "1.6L"
+    ],
+    [
+     "Kia",
+     "Niro",
+     2017,
+     2020,
+     "1.6L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV75082:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV75082 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 28, outboard splines 27, compressed length 587 mm.",
+   "retrieved": "2026-11-09T21:44:22Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV75082"
+  },
+  {
+   "apps": [
+    [
+     "Genesis",
+     "G80",
+     2017,
+     2018,
+     "3.8L"
+    ],
+    [
+     "Genesis",
+     "G80",
+     2018,
+     2018,
+     "5.0L"
+    ],
+    [
+     "Genesis",
+     "G90",
+     2017,
+     2017,
+     "5.0L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV75160:front-right",
+   "label": "GSP front right",
+   "note": "GSP NCV75160 (front right CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front right position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 27, outboard splines 30.",
+   "retrieved": "2026-11-10T05:20:07Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV75160"
+  },
+  {
+   "apps": [
+    [
+     "Genesis",
+     "G80",
+     2017,
+     2018,
+     "3.8L"
+    ],
+    [
+     "Genesis",
+     "G80",
+     2018,
+     2018,
+     "5.0L"
+    ],
+    [
+     "Genesis",
+     "G90",
+     2017,
+     2017,
+     "5.0L"
+    ]
+   ],
+   "cat": "cv-axle",
+   "driven_axle": "front",
+   "id": "am:gsp:cv-axle:NCV75161:front-left",
+   "label": "GSP front left",
+   "note": "GSP NCV75161 (front left CV axle) is listed for each of these vehicles in GSP's own application list; aftermarket data, not the carmaker's catalog. No other unit of the same brand is listed for the same front left position on these cars. Match the engine. Transmission, trim and suspension (sport / electronic) are not stated; match them. Engines shown are the title's engines that cars of that model and year on the lots have. Before pulling, check the donor's axle matches: inboard splines 28, outboard splines 30.",
+   "retrieved": "2026-11-10T05:19:59Z",
+   "src": "aftermarket",
+   "tier": "likely",
+   "unit": "NCV75161"
+  }
+ ],
+ "lot_snapshot": {
+  "ref": "91b0b5ddf20a73913149372fbb2d15e6d76c1772",
+  "sha256": {
+   "docs/data/inventory_live.json": "04a1e66a632737c29b4c43b4ebaea48a4084f23f83eea8ca8c232cc3db48e907",
+   "docs/data/vehicle_extras.json": "92b1de01764f0d31c6d1f620ef029143c92d44e8c68a80e1bf799c9b4ee324df"
+  }
+ },
+ "raw": "624a95bac95f7bc8759cf8bda2872371cb84ea2a@624a95ba",
+ "schema": 1,
+ "sha256": "236ad3b83231af2b8769da165d3f0a8fbea176c97e827cab0baf976010575c74",
+ "site": "gspnorthamerica.com",
+ "skipped": {
+  "gap_make_apps": 6
+ },
+ "src": "aftermarket",
+ "tier": "likely"
+}
