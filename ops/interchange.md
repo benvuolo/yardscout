@@ -3079,3 +3079,38 @@ each); nothing allowlisted or crawled.
   one job left (gmpartsgiant, cap about 02:16). Scheduled run 42712787314
   (sites=all) is pending behind it. No .c1.done, .blocked or .paused for the
   4 sites. Next check about 03:28.
+
+### Aftermarket breadth: Spectra crawl, curation, §11.4 (2026-11-09/10)
+
+- **Crawl.** oem-aftermarket-crawl matrix (hub), Spectra depth-first by lot
+  value (518b146). No detector stop. 1,505 vehicle records on oem-raw by
+  ~02:00 UTC 11-10.
+- **Curation.** `aftermarket/groups_spectra.py` writes to
+  `aftermarket/curated/spectrapremium.json`; not shipped, not under groups/.
+  Rules:
+  - notes are classified clause by clause; refused: plant, region,
+    emissions, single transmission, duty, position, sizes, body codes and
+    anything unknown;
+  - "Body Type" -> body gate; "Drive Type" -> drive gate (hub);
+  - FLEX: only beside the same GAS unit, never on fuel lines (hub);
+  - every config of a key must agree (see round 1).
+  Tests: `tests/test_groups_spectra.py` (58).
+- **§11.4 round 1: FAILED, 10 WRONG of 347 page checks** (independent
+  agent, 106 groups).
+  - One real wrong part: 2014 Fusion 2.0L fuel module, gas SP2500M vs
+    hybrid SP2515M.
+  - Root cause: non-gas configs were dropped before the consistency check.
+    They share the gas car's key, which a lot decode can't split.
+  - Fix 98e5997: every config of the key, whatever its fuel, must list the
+    same unit; fuel lines drop keys that have any non-gas config.
+  - Of the rest: 3 hybrid and 1 FLEX row are covered by the same fix;
+    3 diesel rows were my brief's mistake.
+- **After the fix:** 628 groups, 151 cross-model (1,505 vehicles).
+- **Coverage (upper bound, 1,002-vehicle build, % of 338k lot cars with
+  a donor beyond same model + generation; baseline 0%):** coils 7.9,
+  throttle 5.5, compressor 3.1, heater 3.1, radiator 2.3, evaporator 2.1,
+  condenser 1.7, fuel module 1.0, tank 0.5.
+- **App side:** category-breadth branch `interchange/categories-1`
+  (e4d6373), not merged; gates as a dict in a[5].
+- **Next:** §11.4 round 2 (fresh seed, all configs of one row per group)
+  -> hub.
