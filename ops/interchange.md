@@ -3218,3 +3218,13 @@ each); nothing allowlisted or crawled.
   - A new category for Spectra (e.g. fuel-tank) also needs an app category
     (category-breadth) and an AM_RELEASED entry.
   - Raw had 1,998 vehicles at merge; the crawl continues.
+- 05:36 UTC check-in, two milestones:
+  - **1A Auto BLOCKED.** HTTP 503 at 04:30:07Z, after 3,481 requests at
+    8 s pacing (oem-raw e53caf75, `.blocked`). This is a permanent stop per
+    rule 2 with no retry, and the breaker is also written in this container.
+    Data: 1,193 strut units → 271 groups, not shipped. The lamp, blower,
+    mirror and handle lines never started. A §11.4 re-read isn't possible;
+    options (out / owner outreach / raw-only verifier) are with the hub.
+  - **GSP cv-axle FINISHED.** 3,887 units → 151 Likely groups. The full
+    §11.4 sample (30 groups + 30 donor pairs, independent verifier, product
+    pages only, `--max-lines 100000`) is running.
