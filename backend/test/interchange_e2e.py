@@ -105,7 +105,7 @@ with sync_playwright() as pw:
     head = page.locator("#pf-results .pf-results-head").inner_text()
     check("tailgate browse: honest header (all cars + add your car)",
           "Showing all cars with this part near you" in head
-          and "add your car" in head, head[:160])
+          and "add your car" in head.lower(), head[:160])
     check("tailgate browse: no fit-tier chips (no claims without a car)",
           page.locator("#pf-results .pf-tier").count() == 0)
     body = page.locator("#pf-results").inner_text()
@@ -143,7 +143,7 @@ with sync_playwright() as pw:
           page.locator("#pf-results").inner_text()[:120])
     body = page.locator("#pf-results").inner_text()
     check("engine browse: header counts cars + add-your-car pointer",
-          "carrying a" in body and "add your car" in body, body[:200])
+          "cars near you with a" in body and "add your car" in body.lower(), body[:200])
     check("engine browse: VIN-confirmed badge on decoded donors",
           page.locator("#pf-results .pf-tier-verified").count() > 0)
     check("engine browse: no resale band on engines", "worth" not in body,
