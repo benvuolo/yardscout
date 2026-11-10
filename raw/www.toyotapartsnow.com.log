@@ -2422,3 +2422,31 @@
 17:28:08 chain-unlinked side-mirrors 1 numbers named by 87940-0C271-J0, no catalog link: 87940-0C270-J0
 17:28:49 chain-unlinked window-regulator 1 numbers named by 85710-0C101, no catalog link: 85710-0C100
 17:29:12 time budget reached records=4669
+17:29:29 start site=www.toyotapartsnow.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=4669 list_lines=1268 year_lines=172 url_index=15298
+17:29:29 completion worklist completion/toyota.own_page.json: 401 rows
+17:30:34 chain-unlinked window-regulator 1 numbers named by 69810-12382, no catalog link: 69810-12380
+17:30:34 chain-unlinked window-regulator 1 numbers named by 69820-12382, no catalog link: 69820-12380
+17:30:34 chain-unlinked window-regulator 1 numbers named by 69810-02051, no catalog link: 69810-02050
+17:30:42 chain-unlinked window-regulator 3 numbers named by 85710-12260, no catalog link: 85710-12091, 85710-02030, 85710-12090
+17:30:42 chain-unlinked window-regulator 3 numbers named by 85720-12260, no catalog link: 85720-12091, 85720-02030, 85720-12090
+17:33:38 chain-unlinked door-front 1 numbers named by 67001-89202, no catalog link: 67001-35120
+17:35:54 chain-unlinked door-front 4 numbers named by 67001-04071, no catalog link: 67001-35380, 67001-89190, 67001-35060, 67001-04070
+17:35:54 chain-unlinked door-front 3 numbers named by 67001-04081, no catalog link: 67001-04080, 67001-35390, 67001-35070
+17:35:54 chain-unlinked door-front 1 numbers named by 67002-35100, no catalog link: 67002-89193
+17:36:02 chain-unlinked door-front 3 numbers named by 67002-04051, no catalog link: 67002-04050, 67002-35360, 67002-35040
+17:36:02 chain-unlinked door-front 3 numbers named by 67002-04061, no catalog link: 67002-04060, 67002-35060, 67002-89191
+17:36:02 chain-unlinked door-front 1 numbers named by 67002-35450, no catalog link: 67002-35140
+17:36:02 chain-unlinked door-front 3 numbers named by 67002-35420, no catalog link: 67002-35130, 67002-04100, 67002-04101
+17:40:10 chain-unlinked side-mirrors 1 numbers named by 87940-0C271-D1, no catalog link: 87940-0C270-D1
+17:45:54 chain-unlinked window-regulator 3 numbers named by 69801-0E051, no catalog link: 69801-48040, 69801-48041, 69801-0E050
+17:45:54 chain-unlinked window-regulator 3 numbers named by 69802-0E051, no catalog link: 69802-48051, 69802-48050, 69802-0E050
+17:53:46 chain-unlinked grille 1 numbers named by 53111-89130, no catalog link: 53111-89131
+17:53:46 chain-unlinked grille 1 numbers named by 53111-89135, no catalog link: 53111-89131
+17:53:46 chain-unlinked grille 1 numbers named by 53111-35060, no catalog link: 53111-04010
+17:53:46 chain-unlinked grille 1 numbers named by 53111-35080, no catalog link: 53111-04030
+17:53:46 chain-unlinked grille 1 numbers named by 53111-35130, no catalog link: 53111-04040
+17:53:46 chain-unlinked grille 3 numbers named by 53111-35151, no catalog link: 53111-35140, 53111-04050, 53111-35150
+17:56:18 chain-unlinked window-regulator 1 numbers named by 69801-35091, no catalog link: 69801-35090
+17:56:18 chain-unlinked window-regulator 1 numbers named by 69802-35101, no catalog link: 69802-35100
+17:56:26 chain-unlinked window-regulator 1 numbers named by 85720-35080, no catalog link: 85720-35120
+17:59:48 time budget reached records=4714
