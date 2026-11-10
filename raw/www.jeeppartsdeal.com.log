@@ -7574,3 +7574,28 @@
 07:42:17 nav-fail Dodge Sprinter 2500 2002: NavError: https://www.jeeppartsdeal.com/catalog/2002-dodge-sprinter-2500-parts redirected to https://www.jeeppartsdeal.com/dodge-sprinter-2500-parts
 07:42:17 seg done tier=C Dodge Sprinter 2500 [2002, 2008] seeds=[2004, 2007, 2002] records=6064 errors=124
 07:42:17 finished records=6064 errors=124 chain_records=137 chain_unlinked=10808 chain_failed=3 chain_given_up=0
+11:30:37 start site=www.jeeppartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=6064 list_lines=2935 year_lines=458 url_index=28818
+11:30:37 completion worklist completion/mopar.own_page.json: 657 rows
+11:34:14 chain-unlinked side-mirrors 2 numbers named by 1AN411VGAF, no catalog link: 1AN411VGAE, 1AN411VGAC
+11:36:22 chain-unlinked headlights 1 numbers named by 5113338AF, no catalog link: 5113338AG
+11:36:22 chain-unlinked headlights 1 numbers named by 5113339AF, no catalog link: 5113339AG
+11:41:48 chain-unlinked side-mirrors 2 numbers named by 1AN401BGAD, no catalog link: 1AN401BGAC, 1AN401BGAB
+11:47:50 chain-unlinked side-mirrors 1 numbers named by 1AN411BFAE, no catalog link: 1AN411BFAC
+11:48:54 chain-unlinked climate-control 13 numbers named by 55111031AH, no catalog link: 4596497AF, 4596497AG, 4596497AJ, 55111031AF, 4596497AD, 4596497AH, 4596497AI, 55111031AB, 55111031AD, 55111031AG, 55111031AE, 4596497AE, 55111031AC
+11:50:30 chain-unlinked side-mirrors 2 numbers named by 4806336AE, no catalog link: 4806336AD, 4806336AC
+11:50:30 chain-unlinked side-mirrors 2 numbers named by 4806337AE, no catalog link: 4806337AC, 4806337AD
+11:53:10 chain-unlinked bumper-rear 1 numbers named by 4806188AB, no catalog link: 4806188AA
+11:55:26 chain-unlinked side-mirrors 1 numbers named by 1AQ521S2AB, no catalog link: 1AQ521S2AD
+11:55:26 chain-unlinked side-mirrors 1 numbers named by 4805978AI, no catalog link: 4805978AL
+11:55:26 chain-unlinked side-mirrors 1 numbers named by 1CJ981XRAA, no catalog link: 1CJ981XRAC
+11:55:26 chain-unlinked side-mirrors 1 numbers named by 1AQ531XRAB, no catalog link: 1AQ531XRAD
+11:55:26 chain-unlinked side-mirrors 1 numbers named by 4806161AC, no catalog link: 4806161AF
+11:58:06 chain-unlinked bumper-rear 1 numbers named by 5073625AE, no catalog link: 5073625AD
+11:59:58 chain-unlinked grille 2 numbers named by 5GR97DX8AF, no catalog link: 5GR97DX8AE, 5GR97DX8AD
+11:59:58 chain-unlinked grille 1 numbers named by 5GR97WS2AF, no catalog link: 5GR97WS2AD
+11:59:58 chain-unlinked grille 2 numbers named by 5HC981BTAF, no catalog link: 5HC98WBTAE, 5HC98WB7AE
+11:59:58 chain-unlinked grille 1 numbers named by 5HC981DRAF, no catalog link: 5HC98ZDRAE
+11:59:58 chain-unlinked grille 1 numbers named by 5HC981X8AF, no catalog link: 5HC98DX8AE
+12:00:38 chain-unlinked hood 4 numbers named by 5029419AG, no catalog link: 5029419AD, 5029419AC, 5029419AE, 5029419AF
+12:01:18 chain-unlinked side-mirrors 1 numbers named by 55077492AG, no catalog link: 55077492AK
+12:01:50 time budget reached records=6183
