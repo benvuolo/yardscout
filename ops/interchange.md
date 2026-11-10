@@ -2807,6 +2807,25 @@ Other outputs of this session:
        positions only become clean where the position or remark states the end.
     3. Twin-motor (FL/FR) sites (Hyundai "LH", Volvo Driver/Passenger): no group yet. Each needs both
        halves on its own page.
+  - **STOP, wiper-motor session (2026-11-10 ~14:30 UTC; hub: owner at 3% weekly usage, go idle).**
+    - Branch interchange/categories-wiper @277ef00, PUSHED, rebased on cbfafb4. The hub runs the regression
+      and merges on green.
+      - 28182ba: category, GROUP_HOLD_CATS, sw jh-v180, tests.
+      - 5a20bc6: OEM_RELEASED per-namespace release (empty, fail closed), _oem_held, tests.
+      - 277ef00: payload rebuilt; diff vs main = categories 44 -> 45 only.
+    - Tests on 277ef00:
+      - scraper test_*.py 27/27;
+      - curation_tests: all pass except test_model_map (J-10 only);
+      - pf_guards ALL PASS; pf_new_cats_e2e 162 ok / 0 FAIL.
+    - ui_no_truncation NOT completed on 277ef00 (stopped on the hub's instruction).
+      - Before the rebase: 320/375/390 had no truncation failures. 430 was cut off by my own timeout,
+        giving setup/harness errors only.
+      - 430/768/1280 were not run on the final tree.
+    - Release path for the 21 sampled groups (§11.4 round 2, oem-raw@796a77b): make breadth's per-namespace
+      advances add (ns, "wiper-motor") to OEM_RELEASED with their samples.
+    - Open:
+      - per-app body gate + if_equipped for OEM Likely apps (separate change);
+      - yield items 1-3 above.
 
 ## Aftermarket breadth (session_016ZzJfMnemMEFN88kPnYgxs, 2026-11-09)
 
