@@ -435,8 +435,11 @@ CATS = {c["id"]: c for c in _p0["categories"]}
 PC = js.INTERCHANGE_PART_CATEGORIES
 
 check("payload ships schemaVersion 2", _p0["schemaVersion"] == 2)
-check("44 categories ship (25 P0 + 4 intake/P1 lights-up + wheels + 9 aftermarket-layer + 5 tier D)",
-      len(CATS) == 44, str(len(CATS)))
+check("45 categories ship (25 P0 + 4 intake/P1 lights-up + wheels + 9 aftermarket-layer + 5 tier D + wiper)",
+      len(CATS) == 45, str(len(CATS)))
+check("tier C wiper-motor present, body kind, exact price rows only",
+      CATS.get("wiper-motor", {}).get("kind") == "body"
+      and CATS["wiper-motor"].get("priceTokens") == ["=wiper motor", "=windshield wiper motor"])
 check("tier D wave 1 categories present, body kind",
       all(CATS.get(c, {}).get("kind") == "body" for c in
           ("sunroof", "center-console", "door-panel", "blower-motor", "fog-lights")))

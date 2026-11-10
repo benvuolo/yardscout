@@ -107,6 +107,7 @@ check("GROUP_HOLD_CATS covers the 14 new categories",
       {"radiator", "ac-compressor", "ac-condenser", "heater-core", "evaporator", "throttle-body",
        "fuel-pump-module", "cv-axle", "strut", "sunroof", "center-console", "door-panel",
        "blower-motor", "fog-lights"} <= js.GROUP_HOLD_CATS)
+check("GROUP_HOLD_CATS holds wiper-motor (hub 2026-11-10)", "wiper-motor" in js.GROUP_HOLD_CATS)
 _real_load = js._load_am_layer
 # hub 2026-11-10: release is per SOURCE (AM_RELEASED). am:h1 is a radiator group
 # from a source NOT released (gsp): held. am:sp1 is a Spectra radiator group:
@@ -144,6 +145,31 @@ check("main payload: no oemGroups / platformGroups / oemVg entry for a held cate
       and not [c for cats in (_main.get("oemVg") or {}).values() for c in cats if c in js.GROUP_HOLD_CATS])
 check("main payload ships every held category as a Parts-tab category (same-generation donors)",
       js.GROUP_HOLD_CATS <= {c["id"] for c in _main["categories"]})
+
+# hub 2026-11-10: OEM release is per NAMESPACE (OEM_RELEASED), fail closed
+check("OEM_RELEASED is empty today (no namespace released in a held category)", js.OEM_RELEASED == frozenset())
+check("_oem_held: a held category with no release is held", js._oem_held("wiper-motor", "mopar"))
+check("_oem_held: a group without a namespace is held", js._oem_held("wiper-motor", None) and js._oem_held("wiper-motor", ""))
+check("_oem_held: a category outside the hold is never held", not js._oem_held("window-regulator", "mopar"))
+_saved_rel = js.OEM_RELEASED
+js.OEM_RELEASED = frozenset({("mopar", "wiper-motor")})
+check("_oem_held: the released (ns, cat) ships", not js._oem_held("wiper-motor", "mopar"))
+check("_oem_held: another namespace in the same category stays held", js._oem_held("wiper-motor", "toyota"))
+check("_oem_held: the released namespace stays held in other held categories", js._oem_held("strut", "mopar"))
+_fake_oem2 = [{"id": "oem:mopar:wiper-motor:R:a1", "cat": "wiper-motor", "ns": "mopar", "tier": "likely", "src": "oem",
+               "label": "Mopar catalog", "note": "n", "pn": ["1"], "apps": [["Dodge", "Caravan", 1999, 1999, ""]]},
+              {"id": "oem:toyota:wiper-motor:F:b2", "cat": "wiper-motor", "ns": "toyota", "tier": "likely", "src": "oem",
+               "label": "Toyota catalog", "note": "n", "pn": ["2"], "apps": [["Toyota", "Camry", 2007, 2009, ""]]},
+              {"id": "oem:x:wiper-motor:F:c3", "cat": "wiper-motor", "tier": "likely", "src": "oem",
+               "label": "x", "note": "n", "pn": ["3"], "apps": [["Toyota", "Camry", 2007, 2009, ""]]}]
+js._load_am_layer = lambda now=None: {"groups": [], "status": {}, "site_of": {}}
+_pl2, _lo2 = {"builtAt": "2026-11-09T00:00:00Z", "oemStatus": {}}, {"oem": _fake_oem2}
+js._attach_lazy_layers(_pl2, _lo2)
+js._load_am_layer = _real_load
+js.OEM_RELEASED = _saved_rel
+_w = [g["id"] for g in (_lo2.get("files", {}).get("wiper-motor") or {}).get("oemGroups", [])]
+check("lazy file: only the released namespace's wiper group ships; toyota and a namespace-less group stay held",
+      _w == ["oem:mopar:wiper-motor:R:a1"], str(_w))
 
 # ------------------------------------------------------------- 4. categories
 NEW = {"radiator": "combo", "ac-compressor": "combo", "ac-condenser": "exact", "heater-core": "exact",
