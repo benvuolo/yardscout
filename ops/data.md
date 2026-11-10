@@ -295,3 +295,11 @@ dispatched; the next scheduled scan publishes it.
 
 ## 2026-11-09 Honda "Cr-Z" spelling (hub)
 The auto-scan 77423a1 published one car as "Cr-Z", which split the CR-Z key. scraper/oem_fitment's model_map validator (M3/M5) then refused every curate run, blocking OEM fixes. Added "crz": "CR-Z" to _MODEL_CANON, plus a check in test_model_normalization. The next scan republishes the inventory with "CR-Z". Watches are untouched (rule 6).
+
+## 2026-11-10 ~01:50 UTC (hub): scan no longer reverts merged interchange payloads
+- Incident: scan run 42724288950 checked out 00dc804 at 23:55 and committed at 01:12. The "scan wins" rebase rule put its stale interchange payload over two newer merges (categories-ship ef5d52e6, wheels-ship-hmg e0ea686c).
+  - Live dropped from 44 categories to 30, and from 50 wheels groups to 41 (no hmg).
+  - The hub restored it at ec594131 by rebuilding on main.
+- Fix in scan.yml, "Commit and push inventory": after every rebase, if scraper/ or the payload changed on main since the scan's checkout (SCAN_BASE), the step clears __pycache__ and reruns write_interchange_payload() on the rebased tree (main's code and groups + this scan's inventory), then amends the scan commit. If the rebuild fails, main's payload is kept and a warning is logged.
+- Simulated in a scratch repo with a stub payload writer and all four cases correct: code changed mid-scan, rebuild fails, ops-only change, main didn't move.
+- Still to watch: other generated docs/data files built from code (not only the scan) still take the scan's copy on conflict. None is known to be code-built today besides the interchange payload.

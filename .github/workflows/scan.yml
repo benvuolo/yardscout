@@ -85,6 +85,9 @@ jobs:
           # Don't name docs/data/inv/ separately: a pathspec that matches
           # nothing (first scan, shard write failed) would fail this step.
           git add docs/data/
+          # The commit this scan's code and curated groups came from (see the
+          # payload rebuild after each rebase below).
+          SCAN_BASE=$(git rev-parse HEAD)
           if git diff --staged --quiet; then
             echo "No inventory changes."
           else
@@ -108,6 +111,26 @@ jobs:
                 git checkout --theirs -- docs/data/
                 git add docs/data/
                 GIT_EDITOR=true git rebase --continue
+              fi
+              # The interchange payload (docs/data/interchange.json + oem/*.json)
+              # is built from CODE and curated groups, not only from this scan's
+              # inventory. If main changed scraper/ or the payload while we
+              # scanned, our copy is stale, and "scan wins" above would revert a
+              # merged payload change (2026-11-10: the 01:12 scan, started at
+              # 00dc804, dropped categories-ship's 14 categories and the hmg
+              # wheels groups from the live app). Rebuild it from the rebased
+              # tree: main's code and groups + this scan's inventory. If the
+              # rebuild fails, keep main's payload rather than ours.
+              if ! git diff --quiet "$SCAN_BASE" HEAD~1 -- scraper/ docs/data/interchange.json docs/data/oem/; then
+                echo "main changed interchange inputs during the scan; rebuilding the payload"
+                # No stale bytecode from the scan's own (older) code.
+                find scraper -name __pycache__ -type d -prune -exec rm -rf {} + 2>/dev/null || true
+                if ! (cd scraper && python -c "import junkyard_scraper as J; J.write_interchange_payload()"); then
+                  echo "::warning::interchange payload rebuild failed; keeping main's payload"
+                  git checkout HEAD~1 -- docs/data/interchange.json docs/data/oem/
+                fi
+                git add docs/data/interchange.json docs/data/oem/
+                git diff --staged --quiet || git commit --amend --no-edit
               fi
               if git push; then
                 pushed=yes
