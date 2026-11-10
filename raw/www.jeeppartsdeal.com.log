@@ -6194,3 +6194,356 @@
 05:45:28 chain-unlinked strut 2 numbers named by 52855336AD, no catalog link: 52855336AB, 52855336AC
 05:45:28 seg done tier=C Dodge Durango [2004, 2009] seeds=[2005] records=5608 errors=102
 05:45:28 time budget reached records=5608
+05:45:45 start site=www.jeeppartsdeal.com mode=worklist tiers=['A', 'B', 'W', 'C'] records=5608 list_lines=2457 year_lines=384 url_index=25506
+05:45:45 seg done tier=A Jeep Patriot [2007, 2017] seeds=[2014] records=5608 errors=102
+05:45:45 seg done tier=A Jeep Grand Cherokee [1999, 2004] seeds=[2004] records=5608 errors=102
+05:45:45 seg done tier=A Jeep Liberty [1998, 2007] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=A Jeep Grand Cherokee [2005, 2010] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=A Jeep Liberty [2008, 2012] seeds=[2008] records=5608 errors=102
+05:45:45 seg done tier=A Jeep Compass [2011, 2016] seeds=[2014] records=5608 errors=102
+05:45:45 seg done tier=A Jeep Grand Cherokee [2011, 2021] seeds=[2011] records=5608 errors=102
+05:45:45 seg done tier=A Jeep Cherokee [2014, 2022] seeds=[2015] records=5608 errors=102
+05:45:45 seg done tier=A Jeep Commander [2006, 2010] seeds=[2006] records=5608 errors=102
+05:45:45 seg done tier=A Jeep Grand Cherokee [1993, 1998] seeds=[1997] records=5608 errors=102
+05:45:45 seg done tier=A Jeep Cherokee [1978, 2001] seeds=[2000] records=5608 errors=102
+05:45:45 seg done tier=A Jeep Compass [2007, 2010] seeds=[2007] records=5608 errors=102
+05:45:45 seg done tier=A Jeep Renegade [2015, 2022] seeds=[2017] records=5608 errors=102
+05:45:45 seg done tier=A Jeep Compass [2017, 2024] seeds=[2017] records=5608 errors=102
+05:45:45 seg done tier=A Jeep Wrangler [1997, 2006] seeds=[1997] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Ram 1500 [1971, 2018] seeds=[2002] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Grand Caravan [2008, 2024] seeds=[2010] records=5608 errors=102
+05:45:45 seg done tier=A Chrysler 200 [1979, 2022] seeds=[2015] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Journey [2009, 2020] seeds=[2012] records=5608 errors=102
+05:45:45 seg done tier=A Chrysler Town & Country [2008, 2016] seeds=[2008] records=5608 errors=102
+05:45:45 seg done tier=A Chrysler 300 [1999, 2021] seeds=[2006] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Avenger [1995, 2014] seeds=[2013] records=5608 errors=102
+05:45:45 seg done tier=A Chrysler PT Cruiser [2001, 2010] seeds=[2006] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Charger [1971, 2010] seeds=[2007] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Dakota [1997, 2004] seeds=[2000] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Caravan [1984, 2020] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=A Chrysler Town & Country [1992, 2007] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Dart [1960, 2016] seeds=[2013] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Caliber [2007, 2012] seeds=[2007] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Grand Caravan [2001, 2007] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Charger [2011, 2023] seeds=[2013] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Durango [2004, 2009] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Durango [1998, 2003] seeds=[2003] records=5608 errors=102
+05:45:45 seg done tier=A Chrysler Sebring [2007, 2011] seeds=[2008] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Dakota [2005, 2011] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=A Chrysler Pacifica [2004, 2008] seeds=[2006] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Nitro [2007, 2011] seeds=[2007] records=5608 errors=102
+05:45:45 seg done tier=A Ram 1500 [2009, 2022] seeds=[2012] records=5608 errors=102
+05:45:45 seg done tier=A Chrysler Sebring [2001, 2006] seeds=[2004] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Durango [2011, 2023] seeds=[2013] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Neon [2000, 2005] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Ram Pickup [1988, 2011] seeds=[2004] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Stratus [1996, 2008] seeds=[2006] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Dakota [1987, 1996] seeds=[1992] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Magnum [1978, 2008] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Ram Van [1966, 2003] seeds=[1999] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Grand Caravan [1988, 2000] seeds=[2000] records=5608 errors=102
+05:45:45 seg done tier=A Chrysler Aspen [2007, 2009] seeds=[2007] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Ram 2500 [1979, 2002] seeds=[2001] records=5608 errors=102
+05:45:45 seg done tier=A Dodge 1500 Pickup [1995, 2023] seeds=[2002] records=5608 errors=102
+05:45:45 seg done tier=A Chrysler 300C [2005, 2018] seeds=[2006] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Ram 2500 [2003, 2009] seeds=[2003] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Challenger [2009, 2014] seeds=[2010] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Intrepid [1993, 2004] seeds=[2004] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Caravan/Grand Caravan [1996, 2008] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=A Chrysler Concorde [1993, 2004] seeds=[2002] records=5608 errors=102
+05:45:45 seg done tier=A Chrysler Sebring [1992, 2000] seeds=[2000] records=5608 errors=102
+05:45:45 seg done tier=A Dodge D1500 [1995, 2015] seeds=[2004] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Ram [2002, 2008] seeds=[2002] records=5608 errors=102
+05:45:45 seg done tier=A Chrysler 300M [1999, 2005] seeds=[2002] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Ram [1961, 2001] seeds=[2001] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Ram Wagon [1981, 2002] seeds=[1994] records=5608 errors=102
+05:45:45 seg done tier=A Chrysler Voyager [1999, 2021] seeds=[2003] records=5608 errors=102
+05:45:45 seg done tier=A Chrysler Pacifica [2017, 2022] seeds=[2017] records=5608 errors=102
+05:45:45 seg done tier=A Chrysler Caravan [1999, 2018] seeds=[2012] records=5608 errors=102
+05:45:45 seg done tier=A Chrysler Crossfire [2004, 2008] seeds=[2004] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Challenger [2015, 2023] seeds=[2015] records=5608 errors=102
+05:45:45 seg done tier=A Chrysler LeBaron [1980, 1995] seeds=[1995] records=5608 errors=102
+05:45:45 seg done tier=A Chrysler LHS [1994, 2001] seeds=[2000] records=5608 errors=102
+05:45:45 seg done tier=A Dodge D150 [1964, 1998] seeds=[1985] records=5608 errors=102
+05:45:45 seg done tier=A Ram ProMaster City [2015, 2022] seeds=[2015] records=5608 errors=102
+05:45:45 seg done tier=A Chrysler New Yorker [1970, 1996] seeds=[1990] records=5608 errors=102
+05:45:45 seg done tier=A Ram 2500 [2011, 2024] seeds=[2011] records=5608 errors=102
+05:45:45 seg done tier=A Ram C/V [2012, 2015] seeds=[2013] records=5608 errors=102
+05:45:45 seg done tier=A Ram ProMaster 1500 [2014, 2024] seeds=[2014] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Ram Van 1500 [1986, 2003] seeds=[2001] records=5608 errors=102
+05:45:45 seg done tier=A Dodge Sprinter 2500 [2002, 2008] seeds=[2004] records=5608 errors=102
+05:45:45 seg done tier=B Jeep Patriot [2007, 2017] seeds=[2014] records=5608 errors=102
+05:45:45 seg done tier=B Jeep Grand Cherokee [1999, 2004] seeds=[2004] records=5608 errors=102
+05:45:45 seg done tier=B Jeep Liberty [1998, 2007] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=B Jeep Grand Cherokee [2005, 2010] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=B Jeep Liberty [2008, 2012] seeds=[2008] records=5608 errors=102
+05:45:45 seg done tier=B Jeep Compass [2011, 2016] seeds=[2014] records=5608 errors=102
+05:45:45 seg done tier=B Jeep Grand Cherokee [2011, 2021] seeds=[2011] records=5608 errors=102
+05:45:45 seg done tier=B Jeep Cherokee [2014, 2022] seeds=[2015] records=5608 errors=102
+05:45:45 seg done tier=B Jeep Commander [2006, 2010] seeds=[2006] records=5608 errors=102
+05:45:45 seg done tier=B Jeep Grand Cherokee [1993, 1998] seeds=[1997] records=5608 errors=102
+05:45:45 seg done tier=B Jeep Cherokee [1978, 2001] seeds=[2000] records=5608 errors=102
+05:45:45 seg done tier=B Jeep Compass [2007, 2010] seeds=[2007] records=5608 errors=102
+05:45:45 seg done tier=B Jeep Renegade [2015, 2022] seeds=[2017] records=5608 errors=102
+05:45:45 seg done tier=B Jeep Compass [2017, 2024] seeds=[2017] records=5608 errors=102
+05:45:45 seg done tier=B Jeep Wrangler [1997, 2006] seeds=[1997] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Ram 1500 [1971, 2018] seeds=[2002] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Grand Caravan [2008, 2024] seeds=[2010] records=5608 errors=102
+05:45:45 seg done tier=B Chrysler 200 [1979, 2022] seeds=[2015] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Journey [2009, 2020] seeds=[2012] records=5608 errors=102
+05:45:45 seg done tier=B Chrysler Town & Country [2008, 2016] seeds=[2008] records=5608 errors=102
+05:45:45 seg done tier=B Chrysler 300 [1999, 2021] seeds=[2006] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Avenger [1995, 2014] seeds=[2013] records=5608 errors=102
+05:45:45 seg done tier=B Chrysler PT Cruiser [2001, 2010] seeds=[2006] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Charger [1971, 2010] seeds=[2007] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Dakota [1997, 2004] seeds=[2000] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Caravan [1984, 2020] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=B Chrysler Town & Country [1992, 2007] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Dart [1960, 2016] seeds=[2013] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Caliber [2007, 2012] seeds=[2007] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Grand Caravan [2001, 2007] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Charger [2011, 2023] seeds=[2013] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Durango [2004, 2009] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Durango [1998, 2003] seeds=[2003] records=5608 errors=102
+05:45:45 seg done tier=B Chrysler Sebring [2007, 2011] seeds=[2008] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Dakota [2005, 2011] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=B Chrysler Pacifica [2004, 2008] seeds=[2006] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Nitro [2007, 2011] seeds=[2007] records=5608 errors=102
+05:45:45 seg done tier=B Ram 1500 [2009, 2022] seeds=[2012] records=5608 errors=102
+05:45:45 seg done tier=B Chrysler Sebring [2001, 2006] seeds=[2004] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Durango [2011, 2023] seeds=[2013] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Neon [2000, 2005] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Ram Pickup [1988, 2011] seeds=[2004] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Stratus [1996, 2008] seeds=[2006] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Dakota [1987, 1996] seeds=[1992] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Magnum [1978, 2008] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Ram Van [1966, 2003] seeds=[1999] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Grand Caravan [1988, 2000] seeds=[2000] records=5608 errors=102
+05:45:45 seg done tier=B Chrysler Aspen [2007, 2009] seeds=[2007] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Ram 2500 [1979, 2002] seeds=[2001] records=5608 errors=102
+05:45:45 seg done tier=B Dodge 1500 Pickup [1995, 2023] seeds=[2002] records=5608 errors=102
+05:45:45 seg done tier=B Chrysler 300C [2005, 2018] seeds=[2006] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Ram 2500 [2003, 2009] seeds=[2003] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Challenger [2009, 2014] seeds=[2010] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Intrepid [1993, 2004] seeds=[2004] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Caravan/Grand Caravan [1996, 2008] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=B Chrysler Concorde [1993, 2004] seeds=[2002] records=5608 errors=102
+05:45:45 seg done tier=B Chrysler Sebring [1992, 2000] seeds=[2000] records=5608 errors=102
+05:45:45 seg done tier=B Dodge D1500 [1995, 2015] seeds=[2004] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Ram [2002, 2008] seeds=[2002] records=5608 errors=102
+05:45:45 seg done tier=B Chrysler 300M [1999, 2005] seeds=[2002] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Ram [1961, 2001] seeds=[2001] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Ram Wagon [1981, 2002] seeds=[1994] records=5608 errors=102
+05:45:45 seg done tier=B Chrysler Voyager [1999, 2021] seeds=[2003] records=5608 errors=102
+05:45:45 seg done tier=B Chrysler Pacifica [2017, 2022] seeds=[2017] records=5608 errors=102
+05:45:45 seg done tier=B Chrysler Caravan [1999, 2018] seeds=[2012] records=5608 errors=102
+05:45:45 seg done tier=B Chrysler Crossfire [2004, 2008] seeds=[2004] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Challenger [2015, 2023] seeds=[2015] records=5608 errors=102
+05:45:45 seg done tier=B Chrysler LeBaron [1980, 1995] seeds=[1995] records=5608 errors=102
+05:45:45 seg done tier=B Chrysler LHS [1994, 2001] seeds=[2000] records=5608 errors=102
+05:45:45 seg done tier=B Dodge D150 [1964, 1998] seeds=[1985] records=5608 errors=102
+05:45:45 seg done tier=B Ram ProMaster City [2015, 2022] seeds=[2015] records=5608 errors=102
+05:45:45 seg done tier=B Chrysler New Yorker [1970, 1996] seeds=[1990] records=5608 errors=102
+05:45:45 seg done tier=B Ram 2500 [2011, 2024] seeds=[2011] records=5608 errors=102
+05:45:45 seg done tier=B Ram C/V [2012, 2015] seeds=[2013] records=5608 errors=102
+05:45:45 seg done tier=B Ram ProMaster 1500 [2014, 2024] seeds=[2014] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Ram Van 1500 [1986, 2003] seeds=[2001] records=5608 errors=102
+05:45:45 seg done tier=B Dodge Sprinter 2500 [2002, 2008] seeds=[2004] records=5608 errors=102
+05:45:45 seg done tier=W Jeep Patriot [2007, 2017] seeds=[2014] records=5608 errors=102
+05:45:45 seg done tier=W Jeep Grand Cherokee [1999, 2004] seeds=[2004] records=5608 errors=102
+05:45:45 seg done tier=W Jeep Liberty [1998, 2007] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=W Jeep Grand Cherokee [2005, 2010] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=W Jeep Liberty [2008, 2012] seeds=[2008] records=5608 errors=102
+05:45:45 seg done tier=W Jeep Compass [2011, 2016] seeds=[2014] records=5608 errors=102
+05:45:45 seg done tier=W Jeep Grand Cherokee [2011, 2021] seeds=[2011] records=5608 errors=102
+05:45:45 seg done tier=W Jeep Cherokee [2014, 2022] seeds=[2015] records=5608 errors=102
+05:45:45 seg done tier=W Jeep Commander [2006, 2010] seeds=[2006] records=5608 errors=102
+05:45:45 seg done tier=W Jeep Grand Cherokee [1993, 1998] seeds=[1997] records=5608 errors=102
+05:45:45 seg done tier=W Jeep Cherokee [1978, 2001] seeds=[2000] records=5608 errors=102
+05:45:45 seg done tier=W Jeep Compass [2007, 2010] seeds=[2007] records=5608 errors=102
+05:45:45 seg done tier=W Jeep Renegade [2015, 2022] seeds=[2017] records=5608 errors=102
+05:45:45 seg done tier=W Jeep Compass [2017, 2024] seeds=[2017] records=5608 errors=102
+05:45:45 seg done tier=W Jeep Wrangler [1997, 2006] seeds=[1997] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Ram 1500 [1971, 2018] seeds=[2002] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Grand Caravan [2008, 2024] seeds=[2010] records=5608 errors=102
+05:45:45 seg done tier=W Chrysler 200 [1979, 2022] seeds=[2015] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Journey [2009, 2020] seeds=[2012] records=5608 errors=102
+05:45:45 seg done tier=W Chrysler Town & Country [2008, 2016] seeds=[2008] records=5608 errors=102
+05:45:45 seg done tier=W Chrysler 300 [1999, 2021] seeds=[2006] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Avenger [1995, 2014] seeds=[2013] records=5608 errors=102
+05:45:45 seg done tier=W Chrysler PT Cruiser [2001, 2010] seeds=[2006] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Charger [1971, 2010] seeds=[2007] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Dakota [1997, 2004] seeds=[2000] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Caravan [1984, 2020] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=W Chrysler Town & Country [1992, 2007] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Dart [1960, 2016] seeds=[2013] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Caliber [2007, 2012] seeds=[2007] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Grand Caravan [2001, 2007] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Charger [2011, 2023] seeds=[2013] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Durango [2004, 2009] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Durango [1998, 2003] seeds=[2003] records=5608 errors=102
+05:45:45 seg done tier=W Chrysler Sebring [2007, 2011] seeds=[2008] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Dakota [2005, 2011] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=W Chrysler Pacifica [2004, 2008] seeds=[2006] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Nitro [2007, 2011] seeds=[2007] records=5608 errors=102
+05:45:45 seg done tier=W Ram 1500 [2009, 2022] seeds=[2012] records=5608 errors=102
+05:45:45 seg done tier=W Chrysler Sebring [2001, 2006] seeds=[2004] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Durango [2011, 2023] seeds=[2013] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Neon [2000, 2005] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Ram Pickup [1988, 2011] seeds=[2004] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Stratus [1996, 2008] seeds=[2006] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Dakota [1987, 1996] seeds=[1992] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Magnum [1978, 2008] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Ram Van [1966, 2003] seeds=[1999] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Grand Caravan [1988, 2000] seeds=[2000] records=5608 errors=102
+05:45:45 seg done tier=W Chrysler Aspen [2007, 2009] seeds=[2007] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Ram 2500 [1979, 2002] seeds=[2001] records=5608 errors=102
+05:45:45 seg done tier=W Dodge 1500 Pickup [1995, 2023] seeds=[2002] records=5608 errors=102
+05:45:45 seg done tier=W Chrysler 300C [2005, 2018] seeds=[2006] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Ram 2500 [2003, 2009] seeds=[2003] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Challenger [2009, 2014] seeds=[2010] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Intrepid [1993, 2004] seeds=[2004] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Caravan/Grand Caravan [1996, 2008] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=W Chrysler Concorde [1993, 2004] seeds=[2002] records=5608 errors=102
+05:45:45 seg done tier=W Chrysler Sebring [1992, 2000] seeds=[2000] records=5608 errors=102
+05:45:45 seg done tier=W Dodge D1500 [1995, 2015] seeds=[2004] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Ram [2002, 2008] seeds=[2002] records=5608 errors=102
+05:45:45 seg done tier=W Chrysler 300M [1999, 2005] seeds=[2002] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Ram [1961, 2001] seeds=[2001] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Ram Wagon [1981, 2002] seeds=[1994] records=5608 errors=102
+05:45:45 seg done tier=W Chrysler Voyager [1999, 2021] seeds=[2003] records=5608 errors=102
+05:45:45 seg done tier=W Chrysler Pacifica [2017, 2022] seeds=[2017] records=5608 errors=102
+05:45:45 seg done tier=W Chrysler Caravan [1999, 2018] seeds=[2012] records=5608 errors=102
+05:45:45 seg done tier=W Chrysler Crossfire [2004, 2008] seeds=[2004] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Challenger [2015, 2023] seeds=[2015] records=5608 errors=102
+05:45:45 seg done tier=W Chrysler LeBaron [1980, 1995] seeds=[1995] records=5608 errors=102
+05:45:45 seg done tier=W Chrysler LHS [1994, 2001] seeds=[2000] records=5608 errors=102
+05:45:45 seg done tier=W Dodge D150 [1964, 1998] seeds=[1985] records=5608 errors=102
+05:45:45 seg done tier=W Ram ProMaster City [2015, 2022] seeds=[2015] records=5608 errors=102
+05:45:45 seg done tier=W Chrysler New Yorker [1970, 1996] seeds=[1990] records=5608 errors=102
+05:45:45 seg done tier=W Ram 2500 [2011, 2024] seeds=[2011] records=5608 errors=102
+05:45:45 seg done tier=W Ram C/V [2012, 2015] seeds=[2013] records=5608 errors=102
+05:45:45 seg done tier=W Ram ProMaster 1500 [2014, 2024] seeds=[2014] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Ram Van 1500 [1986, 2003] seeds=[2001] records=5608 errors=102
+05:45:45 seg done tier=W Dodge Sprinter 2500 [2002, 2008] seeds=[2004] records=5608 errors=102
+05:45:45 seg done tier=C Jeep Patriot [2007, 2017] seeds=[2014] records=5608 errors=102
+05:45:45 seg done tier=C Jeep Grand Cherokee [1999, 2004] seeds=[2004] records=5608 errors=102
+05:45:45 seg done tier=C Jeep Liberty [1998, 2007] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=C Jeep Grand Cherokee [2005, 2010] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=C Jeep Liberty [2008, 2012] seeds=[2008] records=5608 errors=102
+05:45:45 seg done tier=C Jeep Compass [2011, 2016] seeds=[2014] records=5608 errors=102
+05:45:45 seg done tier=C Jeep Grand Cherokee [2011, 2021] seeds=[2011] records=5608 errors=102
+05:45:45 seg done tier=C Jeep Cherokee [2014, 2022] seeds=[2015] records=5608 errors=102
+05:45:45 seg done tier=C Jeep Commander [2006, 2010] seeds=[2006] records=5608 errors=102
+05:45:45 seg done tier=C Jeep Grand Cherokee [1993, 1998] seeds=[1997] records=5608 errors=102
+05:45:45 seg done tier=C Jeep Cherokee [1978, 2001] seeds=[2000] records=5608 errors=102
+05:45:45 seg done tier=C Jeep Compass [2007, 2010] seeds=[2007] records=5608 errors=102
+05:45:45 seg done tier=C Jeep Renegade [2015, 2022] seeds=[2017] records=5608 errors=102
+05:45:45 seg done tier=C Jeep Compass [2017, 2024] seeds=[2017] records=5608 errors=102
+05:45:45 seg done tier=C Jeep Wrangler [1997, 2006] seeds=[1997] records=5608 errors=102
+05:45:45 seg done tier=C Dodge Ram 1500 [1971, 2018] seeds=[2002] records=5608 errors=102
+05:45:45 seg done tier=C Dodge Grand Caravan [2008, 2024] seeds=[2010] records=5608 errors=102
+05:45:45 seg done tier=C Chrysler 200 [1979, 2022] seeds=[2015] records=5608 errors=102
+05:45:45 seg done tier=C Dodge Journey [2009, 2020] seeds=[2012] records=5608 errors=102
+05:45:45 seg done tier=C Chrysler Town & Country [2008, 2016] seeds=[2008] records=5608 errors=102
+05:45:45 seg done tier=C Chrysler 300 [1999, 2021] seeds=[2006] records=5608 errors=102
+05:45:45 seg done tier=C Dodge Avenger [1995, 2014] seeds=[2013] records=5608 errors=102
+05:45:45 seg done tier=C Chrysler PT Cruiser [2001, 2010] seeds=[2006] records=5608 errors=102
+05:45:45 seg done tier=C Dodge Charger [1971, 2010] seeds=[2007] records=5608 errors=102
+05:45:45 seg done tier=C Dodge Dakota [1997, 2004] seeds=[2000] records=5608 errors=102
+05:45:45 seg done tier=C Dodge Caravan [1984, 2020] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=C Chrysler Town & Country [1992, 2007] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=C Dodge Dart [1960, 2016] seeds=[2013] records=5608 errors=102
+05:45:45 seg done tier=C Dodge Caliber [2007, 2012] seeds=[2007] records=5608 errors=102
+05:45:45 seg done tier=C Dodge Grand Caravan [2001, 2007] seeds=[2005] records=5608 errors=102
+05:45:45 seg done tier=C Dodge Charger [2011, 2023] seeds=[2013] records=5608 errors=102
+05:45:45 seg done tier=C Dodge Durango [2004, 2009] seeds=[2005] records=5608 errors=102
+05:46:02 chain-unlinked wiper-motor 1 numbers named by 55076648AD, no catalog link: 55076648AC
+05:47:14 chain-unlinked knuckle 1 numbers named by 52106947AD, no catalog link: 52106947AC
+05:47:46 chain-unlinked strut 3 numbers named by 52106822AE, no catalog link: 52106822AC, 52106822AB, 52106822AD
+05:49:46 chain-unlinked strut 1 numbers named by 5014143AC, no catalog link: 5014143AB
+05:49:54 seg done tier=C Dodge Durango [1998, 2003] seeds=[2003, 1999] records=5624 errors=102
+05:50:58 chain-unlinked knuckle 1 numbers named by 4766037AD, no catalog link: 4766037AC
+05:50:58 chain-unlinked knuckle 1 numbers named by 4766038AD, no catalog link: 4766038AC
+05:51:30 chain-unlinked knuckle 2 numbers named by 5085532AE, no catalog link: 5085532AC, 5085532AD
+05:51:30 chain-unlinked knuckle 2 numbers named by 5085533AE, no catalog link: 5085533AC, 5085533AD
+05:52:42 chain-unlinked strut 2 numbers named by 68026142AC, no catalog link: 68026142AB, 68026142AA
+05:52:42 chain-unlinked strut 2 numbers named by 68026143AC, no catalog link: 68026143AA, 68026143AB
+05:52:50 chain-unlinked strut 1 numbers named by 68026140AC, no catalog link: 68026140AA
+05:52:58 chain-unlinked strut 2 numbers named by 68026145AA, no catalog link: 4766049AB, 4766049AC
+05:53:06 chain-unlinked strut 2 numbers named by 68026148AD, no catalog link: 68026148AC, 68026148AB
+05:53:14 chain-unlinked strut 1 numbers named by 68026149AC, no catalog link: 68026149AB
+05:53:14 chain-unlinked strut 2 numbers named by 68026158AC, no catalog link: 68026158AA, 68026158AB
+05:53:14 chain-unlinked strut 2 numbers named by 68026159AC, no catalog link: 68026159AB, 68026159AA
+05:53:38 listed after chain strut 68026149AA: line 5646 (recrawl_of 5642)
+05:53:38 listed after chain strut 68026140AB: line 5647 (recrawl_of 5639)
+05:53:46 listed after chain strut 4766048AC: line 5649 (recrawl_of 5640)
+05:53:54 listed after chain strut 68026148AA: line 5651 (recrawl_of 5641)
+05:53:54 chain-unlinked strut 1 numbers named by 68026528AB, no catalog link: 68026528AC
+05:53:54 chain-unlinked strut 1 numbers named by 68026150AA, no catalog link: 68026150AC
+05:53:54 chain-unlinked strut 1 numbers named by 68026151AA, no catalog link: 68026151AC
+05:54:10 chain-unlinked strut 3 numbers named by 4766053AF, no catalog link: 4766053AE, 4766053AD, 4766053AC
+05:54:10 chain-unlinked strut 3 numbers named by 5272677AH, no catalog link: 5272677AE, 5272677AF, 5272677AG
+05:55:06 chain-unlinked strut 2 numbers named by 5105790AG, no catalog link: 5105790AD, 5105790AF
+05:55:22 nav-fail Chrysler Sebring 2011: NavError: HTTP 404 for https://www.jeeppartsdeal.com/catalog/2011-chrysler-sebring-parts
+05:55:22 seg done tier=C Chrysler Sebring [2007, 2011] seeds=[2008, 2011] records=5659 errors=103
+05:56:34 chain-unlinked knuckle 2 numbers named by 52855116AC, no catalog link: 52855116AB, 52855116AA
+05:56:34 chain-unlinked knuckle 2 numbers named by 52855117AC, no catalog link: 52855117AA, 52855117AB
+05:57:14 chain-unlinked strut 17 numbers named by 5174563AF, no catalog link: 5175435AD, 5174564AD, 5175437AE, 5174563AD, 5174564AC, 5175437AC, 5175437AA, 5174563AC, 5174564AF, 5175437AF, 5174563AE, 5175435AC, 5175437AD, 5175435AF, 5174564AE, 5175435AE, 5175437AB
+05:57:38 seg done tier=C Dodge Dakota [2005, 2011] seeds=[2005] records=5668 errors=103
+05:57:45 nav-fail Chrysler Pacifica 2006: NavError: no parts-list links on https://www.jeeppartsdeal.com/catalog/2006-chrysler-pacifica-parts
+05:57:45 seg done tier=C Chrysler Pacifica [2004, 2008] seeds=[2006] records=5668 errors=104
+05:59:30 chain-unlinked strut 1 numbers named by 68003952AC, no catalog link: 68003952AB
+05:59:38 chain-unlinked strut 1 numbers named by 68003954AC, no catalog link: 68003954AB
+05:59:38 chain-unlinked strut 1 numbers named by 52125307AA, no catalog link: 52125307AE
+05:59:54 chain-unlinked strut 1 numbers named by 52125307AB, no catalog link: 52125307AE
+05:59:54 chain-unlinked strut 1 numbers named by 52109912AD, no catalog link: 52109912AC
+05:59:54 seg done tier=C Dodge Nitro [2007, 2011] seeds=[2007] records=5675 errors=104
+06:00:18 chain-unlinked wiper-motor 1 numbers named by 68050422AC, no catalog link: 68050422AD
+06:01:30 chain-unlinked knuckle 5 numbers named by 68044701AD, no catalog link: 68044701AC, 52106551AB, 68044701AA, 68044701AB, 68037601AA
+06:01:30 chain-unlinked knuckle 5 numbers named by 68044703AD, no catalog link: 52106553AC, 68044703AA, 68044703AB, 68037603AA, 68044703AC
+06:01:30 chain-unlinked knuckle 5 numbers named by 68044700AD, no catalog link: 52106550AB, 68044700AB, 68044700AA, 68037600AA, 68044700AC
+06:01:30 chain-unlinked knuckle 5 numbers named by 68044704AD, no catalog link: 68044704AA, 68044704AC, 68037604AA, 68044704AB, 52106552AC
+06:02:02 chain-unlinked strut 6 numbers named by 68040880AH, no catalog link: 68040880AC, 68040880AE, 68040880AG, 68040880AF, 68040880AD, 68040880AI
+06:02:10 chain-unlinked strut 2 numbers named by 52853460AF, no catalog link: 52853460AC, 52853460AE
+06:02:10 listed after chain strut 52853460AF: line 5685 (recrawl_of 5684)
+06:02:18 chain-unlinked strut 2 numbers named by 52853460AF, no catalog link: 52853460AC, 52853460AE
+06:02:18 chain-unlinked strut 4 numbers named by 52855791AD, no catalog link: 52853457AD, 52855791AC, 52853457AC, 52855791AB
+06:02:18 seg done tier=C Ram 1500 [2009, 2022] seeds=[2012] records=5686 errors=104
+06:02:42 chain-unlinked wiper-motor 1 numbers named by 5101863AB, no catalog link: 5101863AA
+06:03:46 chain-unlinked knuckle 1 numbers named by 4782902AB, no catalog link: 4764510AB
+06:03:46 chain-unlinked knuckle 1 numbers named by 4782903AB, no catalog link: 4764511AB
+06:04:50 chain-unlinked knuckle 1 numbers named by 4764586AB, no catalog link: 4764586AA
+06:04:50 chain-unlinked knuckle 1 numbers named by 4764587AB, no catalog link: 4764587AA
+06:05:30 chain-unlinked strut 1 numbers named by 4895039AB, no catalog link: 4895039AA
+06:05:54 chain-unlinked strut 1 numbers named by 4879888AC, no catalog link: 4879888AB
+06:06:58 chain-unlinked strut 1 numbers named by 4895029AB, no catalog link: 4895029AA
+06:06:58 chain-unlinked strut 1 numbers named by 4895052AB, no catalog link: 4895052AA
+06:06:58 seg done tier=C Chrysler Sebring [2001, 2006] seeds=[2004] records=5713 errors=104
+06:07:30 chain-unlinked wiper-motor 1 numbers named by 68190045AC, no catalog link: 68190045AA
+06:08:50 chain-unlinked knuckle 2 numbers named by 4877102AD, no catalog link: 4877102AB, 4877102AA
+06:08:58 chain-unlinked knuckle 2 numbers named by 4877103AD, no catalog link: 4877103AA, 4877103AB
+06:09:22 chain-unlinked strut 5 numbers named by 68069851AE, no catalog link: 68069851AA, 68069851AB, 68087976AB, 68069851AD, 68069851AC
+06:09:22 chain-unlinked strut 1 numbers named by 68087979AD, no catalog link: 68087979AC
+06:09:54 chain-unlinked strut 1 numbers named by 68069846AH, no catalog link: 68069846AE
+06:10:02 chain-unlinked strut 2 numbers named by 68406603AA, no catalog link: 68069843AG, 68069843AH
+06:10:10 chain-unlinked strut 4 numbers named by 68087613AJ, no catalog link: 68087613AE, 68087613AG, 68087613AH, 68087613AI
+06:12:50 chain-unlinked strut 2 numbers named by 68299143AE, no catalog link: 68299143AC, 68299143AD
+06:12:50 chain-unlinked strut 2 numbers named by 68299141AE, no catalog link: 68299141AD, 68299141AC
+06:12:50 chain-unlinked strut 3 numbers named by 68299142AE, no catalog link: 68299142AD, 68299142AC, 68299142AB
+06:12:50 chain-unlinked strut 2 numbers named by 68299145AE, no catalog link: 68299145AD, 68299145AC
+06:12:50 chain-unlinked strut 2 numbers named by 68299140AE, no catalog link: 68299140AD, 68299140AC
+06:12:50 chain-unlinked strut 3 numbers named by 68299144AE, no catalog link: 68299144AB, 68299144AC, 68299144AD
+06:13:38 chain-unlinked strut 2 numbers named by 68330536AA, no catalog link: 68299125AA, 68330536AB
+06:13:38 chain-unlinked strut 1 numbers named by 68330538AA, no catalog link: 68299127AA
+06:13:46 chain-unlinked strut 1 numbers named by 68330539AB, no catalog link: 68299128AA
+06:13:54 chain-unlinked strut 1 numbers named by 68404922AB, no catalog link: 68382426AB
+06:14:02 chain-unlinked strut 1 numbers named by 68404923AB, no catalog link: 68382428AB
+06:14:18 seg done tier=C Dodge Durango [2011, 2023] seeds=[2013, 2020] records=5744 errors=104
+06:15:30 chain-unlinked knuckle 1 numbers named by 4656939AC, no catalog link: 4656939AB
+06:15:30 chain-unlinked knuckle 1 numbers named by 4656938AC, no catalog link: 4656938AB
+06:16:34 chain-unlinked strut 2 numbers named by 4656174AE, no catalog link: 4656174AD, 4656559AA
+06:17:38 chain-unlinked strut 1 numbers named by 4656354AD, no catalog link: 4656560AA
+06:17:38 chain-unlinked strut 1 numbers named by 4656355AD, no catalog link: 4656561AA
+06:17:38 seg done tier=C Dodge Neon [2000, 2005] seeds=[2005] records=5763 errors=104
+06:17:38 time budget reached records=5763
