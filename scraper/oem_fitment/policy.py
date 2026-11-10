@@ -461,6 +461,17 @@ WHEEL_BODY_RE = re.compile(r"\b(wagon|estate|variant|avant|coupe|convertible|cab
                            r"hatchback|sportwagen|sport\s*wagon|suv|van|cab)\b", re.I)
 WHEEL_SPOKE_RE = re.compile(r"\b(\d{1,2})[\s-]*(?:double[\s-]*|twin[\s-]*|split[\s-]*)?spokes?\b", re.I)
 WHEEL_AXLE_RE = re.compile(r"(?<![A-Za-z])(front|rear)(?![A-Za-z])", re.I)
+# Hyundai / Kia census 2026-11-10 (8 WRONG, all 2010-13 Forte / Forte Koup):
+# Forte and Forte Koup share one catalog page, and only the row's "Fitting
+# Vehicle Options" body code ([Coupe - 2Door 5P], [Sedan - 4Door 5P], [Sedan -
+# 5Door 5P]) separates them. In a cross-model group, a row whose body codes are
+# fewer than the body codes printed on its own page refuses the group
+# (wheel_body_option). A row "Production Date: 02/2009-08/2010" must be able to
+# cover the app's model year (first year .. last year + 1), else the group is
+# refused (wheel_production_date).
+WHEEL_BODY_OPTION_RE = re.compile(r"\b((?:coupe|sedan|hatchback|wagon|convertible|van|pick-?up|suv|cab)\s*-\s*\d\s*door(?:\s*\d\s*p)?)",
+                                  re.I)
+WHEEL_PRODUCTION_RE = re.compile(r"production\s+date\s*:\s*\d{1,2}/(\d{4})(?:\s*-\s*\d{1,2}/(\d{4}))?", re.I)
 WHEEL_SPARE_NOTE_RE = re.compile(r"\bspare\b", re.I)
 MODEL_NUMBER_RE = re.compile(r"\b(1500|2500|3500|4500|5500)\b")
 WHEEL_NOTES_ARE_OPTIONS = frozenset({"www.hyundaipartsdeal.com", "www.kiapartsnow.com",

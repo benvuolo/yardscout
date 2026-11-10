@@ -85,5 +85,16 @@ ok(bool(AX.search("Front, Type #11, 7.5X17")) and bool(AX.search("Rear")) and no
    and not AX.search("Steel Wheels, 16x6.5"), "axle-limited notes seen; 'Frontier' is not")
 ok(all(x in src for x in ["wheel_axle_limited", "wheel_body_conflict", "wheel_design_conflict"]), "MB/VW rules wired")
 
+# Hyundai / Kia census (2026-11-10)
+BO = policy.WHEEL_BODY_OPTION_RE
+ok({m.group(1) for m in BO.finditer("Fitting Vehicle Options: [Coupe - 2Door 5P] 2.0L")} == {"Coupe - 2Door 5P"}
+   and {m.group(1) for m in BO.finditer("[Sedan - 4Door 5P], [Sedan - 5Door 5P]")} == {"Sedan - 4Door 5P", "Sedan - 5Door 5P"},
+   "body option codes read (529091M550, 529101M650)")
+PD = policy.WHEEL_PRODUCTION_RE
+m = PD.search("Production Date: 02/2009-08/2010")
+ok(m is not None and (m.group(1), m.group(2)) == ("2009", "2010") and PD.search("Production Date: 06/2009").group(2) is None,
+   "production dates read (529101M250, 529101M450)")
+ok("wheel_body_option" in src and "wheel_production_date" in src, "Hyundai/Kia rules wired")
+
 print("OK" if not fails else f"{len(fails)} FAIL")
 sys.exit(1 if fails else 0)

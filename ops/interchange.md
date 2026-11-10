@@ -3114,3 +3114,10 @@ each); nothing allowlisted or crawled.
   (e4d6373), not merged; gates as a dict in a[5].
 - **Next:** §11.4 round 2 (fresh seed, all configs of one row per group)
   -> hub.
+- 2026-11-10 ~01:10 UTC, Hyundai/Kia (hmg) wheels §11.4 census (separate verifier, 24 reads, 0 refusals; raw 112c4593): 17 groups, 9 OK / 8 WRONG, all 8 on 2010-13 Forte / Forte Koup.
+  - Root causes: the shared catalog's row "Fitting Vehicle Options" body code ([Coupe - 2Door 5P] / [Sedan - 4Door 5P] / [Sedan - 5Door 5P]) separates the models (7 groups); a row "Production Date" range excluded the app year (2 groups).
+  - Fix:
+    - wheel_body_option: in a cross-model group, a row or product page whose body codes are fewer than its own page's body codes refuses the group;
+    - wheel_production_date: the row dates must cover the app model year (first .. last + 1).
+  - Result: hmg 9 groups / 1,784 lot cars, exactly the census-OK set. mopar / mb / vag unchanged (28 / 10 / 3).
+  - hmg is not in WHEELS_AUDITED_NS until the hub confirms.
