@@ -1624,3 +1624,6 @@
 13:05:24 chain-unlinked door-rear 1 numbers named by 41-52-7-202-090, no catalog link: 41-52-7-042-958
 13:05:56 chain-unlinked hood 1 numbers named by 41-61-7-200-442, no catalog link: 41-61-7-138-471
 13:13:39 time budget reached records=2133
+13:14:00 start site=www.bmwpartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2133 list_lines=1685 year_lines=220 url_index=0
+13:14:00 completion worklist completion/bmw.own_page.json: 507 rows
+13:45:29 time budget reached records=2133
