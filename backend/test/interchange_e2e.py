@@ -258,8 +258,14 @@ with sync_playwright() as pw:
     # part NAMES are free; every price/value stays Pro. Proven on every
     # surface that shows a car: live card, car screen, pull sheet, watch hits.
     # The one free "sample" car per view (shown in full on purpose) is skipped.
-    VALUE_RE = (r"\$\s?\d|Used online|online: ~|Yard: \$|Save ~|save ~|worth \$"
-                r"|Picked over fast|Steady turnover|Usually still there")
+    # PRICE_RE: prices and values, Pro-only on every surface. VALUE_RE adds the
+    # per-part sell-speed words, Pro-only on the car screen. The free CARD's
+    # demand badge ("Usually still there" / "Gets picked over fast") is yard
+    # turnover, not a price: shown to free on purpose (f6ff215c, owner rule
+    # "part names free, prices/values Pro"), so card surfaces use PRICE_RE and
+    # a positive check proves the badge carries no price.
+    PRICE_RE = r"\$\s?\d|Used online|online: ~|Yard: \$|Save ~|save ~|worth \$"
+    VALUE_RE = PRICE_RE + r"|[Pp]icked over fast|Steady turnover|Usually still there"
     VALUE_SEL = ".part-cost, .part-price, .part-save, .sell-badge, .range-text, .range-extra, .pf-save"
     page.click(".tab[data-tab='live']")
     page.wait_for_timeout(500)
@@ -272,13 +278,18 @@ with sync_playwright() as pw:
       const named = withParts.filter(c => /to check: \\S/.test(c.querySelector('.parts-summary').textContent));
       const leaks = cards.filter(c => rx.test(c.innerText) || c.querySelector(sel))
         .map(c => [(c.innerText.match(new RegExp(re, 'g')) || []).join('|'), (c.querySelector(sel) || {}).className]);
-      return { cards: cards.length, withParts: withParts.length, named: named.length, leaks,
+      const badges = cards.map(c => c.querySelector('.demand-badge')).filter(Boolean)
+        .map(b => ({ text: b.textContent.trim(), price: rx.test(b.textContent) || /\\d/.test(b.textContent) }));
+      return { cards: cards.length, withParts: withParts.length, named: named.length, leaks, badges,
                key: withParts.length ? withParts[0].dataset.vkey : null,
                keys: withParts.slice(0, 3).map(c => c.dataset.vkey) };
-    }""", [VALUE_RE, VALUE_SEL])
+    }""", [PRICE_RE, VALUE_SEL])
     check("free live cards: part names shown on the card",
           free["withParts"] > 0 and free["named"] == free["withParts"], str(free)[:300])
     check("free live cards: no price/value strings", not free["leaks"], str(free["leaks"][:2]))
+    check("free live cards: a demand badge, when shown, is a turnover label with no price",
+          all(b["text"] in ("Usually still there", "Gets picked over fast") and not b["price"] for b in free["badges"]),
+          str(free["badges"][:3]))
     # car screen
     page.evaluate("(k) => openCarDetail(k)", free["key"])
     page.wait_for_selector("#car-detail.open #car-detail-body .part-name")
@@ -348,7 +359,7 @@ with sync_playwright() as pw:
       const s = document.getElementById('saved-sheet');
       return { parts: s.querySelectorAll('.saved-item-parts').length,
                leak: new RegExp(re).test(s.innerText) || !!s.querySelector(sel) };
-    }""", [VALUE_RE, VALUE_SEL, free["keys"]])
+    }""", [PRICE_RE, VALUE_SEL, free["keys"]])
     check("free pull sheet: part names, no price/value strings",
           sheet["parts"] > 0 and not sheet["leak"], str(sheet))
     page.evaluate("closeSavedSheet()")
@@ -363,7 +374,7 @@ with sync_playwright() as pw:
       return { named: [...g.querySelectorAll('.parts-summary')].filter(b => /to check: \\S/.test(b.textContent)).length,
                leak: new RegExp(re).test(g.innerText) || !!g.querySelector(sel),
                why: [(g.innerText.match(new RegExp(re, 'g')) || []).join('|'), (g.querySelector(sel) || {}).className] };
-    }""", [VALUE_RE, VALUE_SEL])
+    }""", [PRICE_RE, VALUE_SEL])
     check("free watch hits: part names, no price/value strings",
           hits["named"] > 0 and not hits["leak"], str(hits))
     ctx.close()
