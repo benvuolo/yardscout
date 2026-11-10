@@ -7585,6 +7585,31 @@ function pfAmGate(gates, model, bodyClass, driveType) {
   if (vs.includes('exclude')) return 'exclude';
   return vs.every(x => x === 'confirm') ? 'confirm' : 'unconfirmed';
 }
+/* Driven-axle donor gate (hub gate (d), 2026-11-10; Python reference
+ * aftermarket/groups_rows.axle_donor_verdict): a front-axle unit needs a
+ * donor whose own decode drives the front wheels, a rear-axle unit the rear.
+ * AWD/4WD pass; front: only FWD passes, only RWD / only 4x2-2WD / RWD+4x2
+ * exclude; rear: RWD (or RWD+4x2) passes, only FWD excludes; anything else
+ * (blank, mixed, unrecognised, rear + 4x2 only) stays 'check'. */
+function pfAmDriveClasses(driveType) {
+  const dt = String(driveType || '').toLowerCase();
+  const toks = { ...PF_AM_DRIVE, '2wd': ['2wd', '4x2'] };
+  return new Set(Object.keys(toks).filter(c => toks[c].some(t => pfAmWord(t, dt))));
+}
+function pfAmAxleVerdict(axle, driveType) {
+  const c = pfAmDriveClasses(driveType);
+  const only = (...xs) => c.size === xs.length && xs.every(x => c.has(x));
+  if (c.has('awd') || c.has('4wd')) return 'pass';
+  if (axle === 'front') {
+    if (only('fwd')) return 'pass';
+    if (only('rwd') || only('2wd') || only('rwd', '2wd')) return 'exclude';
+  }
+  if (axle === 'rear') {
+    if (only('rwd') || only('rwd', '2wd')) return 'pass';
+    if (only('fwd')) return 'exclude';
+  }
+  return 'check';
+}
 function pfAmGateText(gates) {
   const g = pfAmGateParse(gates);
   if (!g) return '';
@@ -7625,6 +7650,8 @@ function pfAmRows(s, groups, results, radius, fam) {
         .filter(([, gv]) => gv !== 'exclude');
       const rows = gated.map(([a]) => a);
       if (!rows.length) continue;
+      const axleV = g.drivenAxle ? pfAmAxleVerdict(g.drivenAxle, v.vpicDriveType) : 'pass';
+      if (axleV === 'exclude') continue;  // the decode says this donor doesn't drive that axle
       const gateUnconfirmed = !gated.some(([, gv]) => gv === 'confirm');
       const eng = ex ? ex[2] : '';
       const verdicts = rows.map(a => (a[4] ? pfAmEngineAgrees(a[4], eng) : null));
@@ -7654,6 +7681,9 @@ function pfAmRows(s, groups, results, radius, fam) {
         warns.push(escapeHtml(`If equipped: ${g.ifEquipped.join(', ')} — check the donor has it`));
       }
       if (g.cosmetic && !/paint/i.test(gNote)) warns.push('may need paint — match the colour or plan to paint it');
+      if (axleV === 'check' && !/drive/i.test(gNote)) {
+        warns.push(escapeHtml(`drivetrain not confirmed — check this donor drives its ${g.drivenAxle} wheels`));
+      }
       if (pfCat && pfCat.rowWarn) warns.push(escapeHtml(pfCat.rowWarn));
       if (g.trans && !tr) warns.push(`this unit is for ${g.trans === 'AT' ? 'automatic' : 'manual'}-transmission cars — check the transmission`);
       results.set(v.id, { v, d, tier: 'likely', src: 'aftermarket', srcLine, warns });

@@ -88,6 +88,18 @@ for bad, why in (({"if_equipped": "Fog"}, "if_equipped not a list"), ({"if_equip
     except ValueError:
         check(f"refuses {why}", True)
 
+# cv-axle driven_axle (hub gate (d), 2026-11-10)
+ga = _grp([["Honda", "Accord", 2003, 2007, "2.4L"]])
+ga["driven_axle"] = "front"
+check("driven_axle passes through as drivenAxle", js._am_group_entry(ga, "gsp").get("drivenAxle") == "front")
+check("no driven_axle: no key", "drivenAxle" not in js._am_group_entry(_grp([["Honda", "Accord", 2003, 2007, ""]]), "gsp"))
+ga["driven_axle"] = "middle"
+try:
+    js._am_group_entry(ga, "gsp")
+    check("refuses an unknown driven_axle", False)
+except ValueError:
+    check("refuses an unknown driven_axle", True)
+
 # ---------------------------------------------- 5. groups held for new categories
 # hub 2026-11-09 23:04: the 14 new categories ship with same-generation donors
 # only; no OEM or aftermarket group for them reaches the payload or a lazy file
@@ -248,6 +260,19 @@ liveInventory = [car('x1', 'Accord', '')]; EX = {};
   pfAmRows(S, [{ ...G([['Honda', 'Accord*', 2003, 2007, '']]), note: 'Mirror. If equipped: power, heated. Color or finish may differ; it may need paint.',
                  ifEquipped: ['power', 'heated'], cosmetic: true, option: true }], res, 0, null);
   out.ifeDup = res.get('x1') ? { tier: res.get('x1').tier, warns: res.get('x1').warns } : null; }
+// driven-axle gate: the scout's table (groups_rows.axle_donor_verdict)
+out.axle = {};
+for (const dt of ['FWD/Front-Wheel Drive', 'Front-Wheel Drive', 'RWD/Rear-Wheel Drive', 'Rear-Wheel Drive',
+                  'AWD/All-Wheel Drive', '4WD/4-Wheel Drive/4x4', '4x4', '4x2', '2WD',
+                  'RWD/Rear-Wheel Drive 4x2', '', 'Part-time', 'FWD/RWD']) {
+  out.axle[dt] = [pfAmAxleVerdict('front', dt), pfAmAxleVerdict('rear', dt)];
+}
+S.model = 'Accord';
+{ const res = new Map();
+  liveInventory = [car('afwd', 'Accord', 'FWD/Front-Wheel Drive'), car('arwd', 'Accord', 'RWD/Rear-Wheel Drive'),
+                   car('anone', 'Accord', ''), car('aawd', 'Accord', 'AWD/All-Wheel Drive')]; EX = {};
+  pfAmRows(S, [{ ...G([['Honda', 'Accord*', 2003, 2007, '']]), note: 'GSP front left axle.', drivenAxle: 'front' }], res, 0, null);
+  out.axleRows = Object.fromEntries([...res].map(([k, r]) => [k, r.warns])); }
 console.log(JSON.stringify(out));
 """])
     p = subprocess.run([node, "-e", harness], capture_output=True, text=True, timeout=60)
@@ -299,6 +324,23 @@ console.log(JSON.stringify(out));
               bool(r) and r["tier"] == "likely"
               and sum("If equipped" in w for w in r["warns"]) == 1
               and sum("paint" in w for w in r["warns"]) == 1, str(r))
+        want_axle = {
+            "FWD/Front-Wheel Drive": ["pass", "exclude"], "Front-Wheel Drive": ["pass", "exclude"],
+            "RWD/Rear-Wheel Drive": ["exclude", "pass"], "Rear-Wheel Drive": ["exclude", "pass"],
+            "AWD/All-Wheel Drive": ["pass", "pass"], "4WD/4-Wheel Drive/4x4": ["pass", "pass"], "4x4": ["pass", "pass"],
+            "4x2": ["exclude", "check"], "2WD": ["exclude", "check"],
+            "RWD/Rear-Wheel Drive 4x2": ["exclude", "pass"],
+            "": ["check", "check"], "Part-time": ["check", "check"], "FWD/RWD": ["check", "check"]}
+        bad = {k: (o["axle"].get(k), v) for k, v in want_axle.items() if o["axle"].get(k) != v}
+        check("pfAmAxleVerdict matches the scout's corner x drive table (13 drive strings x front/rear)",
+              not bad, str(bad))
+        r = o["axleRows"]
+        check("front-axle unit: FWD and AWD donors offered, RWD donor dropped",
+              "afwd" in r and "aawd" in r and "arwd" not in r, str(sorted(r)))
+        check("front-axle unit: undecoded donor kept with a 'check drive' line",
+              "anone" in r and any("drivetrain not confirmed" in w for w in r["anone"]))
+        check("front-axle unit: a confirmed FWD donor gets no 'check drive' line",
+              not any("drivetrain not confirmed" in w for w in r.get("afwd", [])))
         check("category rowWarn rides every aftermarket row",
               all(any("trans-cooler" in w for w in ws) for ws in o["sedanGate"].values()))
 

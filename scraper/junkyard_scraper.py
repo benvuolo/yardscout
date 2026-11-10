@@ -15014,12 +15014,18 @@ def _am_group_entry(g: dict, site: str) -> dict:
     cosmetic = g.get("cosmetic", False)
     if not isinstance(cosmetic, bool):
         raise ValueError(f"cosmetic {cosmetic!r}")
+    # cv-axle (hub gate (d), 2026-11-10): the driven axle the unit is for; the
+    # client drops a donor whose own decode says that axle isn't driven
+    axle = g.get("driven_axle")
+    if axle not in (None, "", "front", "rear"):
+        raise ValueError(f"driven_axle {axle!r}")
     return {"id": str(g["id"]), "cat": cat, "tier": "likely", "src": "aftermarket",
             "label": _AM_LABELS.get(site, site), "unit": str(g.get("unit") or ""),
             **({"amps": int(amps)} if isinstance(amps, (int, float)) and amps else {}),
             **({"trans": trans} if trans else {}),
             **({"ifEquipped": [o.strip() for o in ife]} if ife else {}),
             **({"cosmetic": True} if cosmetic else {}),
+            **({"drivenAxle": axle} if axle else {}),
             "note": note, "apps": apps}
 
 
