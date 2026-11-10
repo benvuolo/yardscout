@@ -836,3 +836,22 @@
 15:04:41 nav-fail Audi A8 Quattro 2009: NavError: HTTP 404 for https://www.audipartsgiant.com/2009-audi-a8-quattro-parts
 15:08:57 nav-fail Audi A3 Quattro 2020: NavError: HTTP 404 for https://www.audipartsgiant.com/2020-audi-a3-quattro-parts
 15:12:49 time budget reached records=1602
+22:05:19 start site=www.audipartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=1602 list_lines=2199 year_lines=275 url_index=9557
+22:05:19 completion worklist completion/vag.own_page.json: 366 rows
+22:10:02 nav-fail Audi TT Quattro 2006: NavError: HTTP 404 for https://www.audipartsgiant.com/2006-audi-tt-quattro-parts
+22:10:10 nav-fail Audi A8 Quattro 1999: NavError: HTTP 404 for https://www.audipartsgiant.com/1999-audi-a8-quattro-parts
+22:10:19 nav-fail Audi TT Quattro 2008: NavError: HTTP 404 for https://www.audipartsgiant.com/2008-audi-tt-quattro-parts
+22:10:27 nav-fail Audi Allroad Quattro 2001: NavError: HTTP 404 for https://www.audipartsgiant.com/2001-audi-allroad-quattro-parts
+22:11:39 nav-fail Audi Q5 Sportback 2021: NavError: HTTP 404 for https://www.audipartsgiant.com/2021-audi-q5-sportback-parts
+22:12:03 chain-unlinked bumper-front 1 numbers named by 8J0-807-105-A-GRU, no catalog link: 8J0-807-105-C-GRU
+22:12:03 chain-unlinked bumper-front 1 numbers named by 8J0-807-105-GRU, no catalog link: 8J0-807-105-B-GRU
+22:12:11 chain-unlinked bumper-rear 1 numbers named by 8J0-807-303-D-GRU, no catalog link: 8J0-807-303-B-GRU
+22:12:11 chain-unlinked bumper-rear 1 numbers named by 8J0-807-303-E-GRU, no catalog link: 8J0-807-303-C-GRU
+22:12:27 chain-unlinked gauge-cluster 1 numbers named by 8J0-920-990-F, no catalog link: 8J0-920-990-FX
+22:13:07 chain-unlinked trunk-lid 1 numbers named by 8J7-827-023-B, no catalog link: 8J7-827-023
+22:16:27 nav-fail Audi Q5 Sportback 2023: NavError: HTTP 404 for https://www.audipartsgiant.com/2023-audi-q5-sportback-parts
+22:16:35 nav-fail Audi Q5 Sportback 2024: NavError: HTTP 404 for https://www.audipartsgiant.com/2024-audi-q5-sportback-parts
+22:21:39 chain-unlinked climate-control 3 numbers named by 8W0-820-043-BR-5PR, no catalog link: 8W0-820-043-G-5PR, 8W0-820-043-AP-5PR, 8W0-820-043-T-5PR
+22:29:47 nav-fail Audi A8 Quattro 1998: NavError: HTTP 404 for https://www.audipartsgiant.com/1998-audi-a8-quattro-parts
+22:29:55 nav-fail Audi Q5 Sportback 2025: NavError: HTTP 404 for https://www.audipartsgiant.com/2025-audi-q5-sportback-parts
+22:35:31 time budget reached records=1605
