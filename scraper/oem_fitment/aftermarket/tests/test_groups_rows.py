@@ -99,6 +99,30 @@ sm1 = gsp_rec("X7", [(2017, 2022, "Honda", "CR-V", "")], engines=("1.5", "2.4"))
 check("single-model GSP unit keeps its title engines", {a[4] for a in R.build([sm1], Names(), "gspnorthamerica.com")["groups"][0]["apps"]}
       == {"1.5L", "2.4L"})
 
+# ---- donor drive gate (d), hub 2026-11-10: every corner x every drive value
+CASES = {  # drive_type (vPIC wording) -> (front, rear)
+    "FWD/Front-Wheel Drive": ("pass", "exclude"), "Front-Wheel Drive": ("pass", "exclude"),
+    "RWD/Rear-Wheel Drive": ("exclude", "pass"), "Rear-Wheel Drive": ("exclude", "pass"),
+    "AWD/All-Wheel Drive": ("pass", "pass"), "4WD/4-Wheel Drive/4x4": ("pass", "pass"),
+    "4x4": ("pass", "pass"), "4x2": ("exclude", "check"), "2WD": ("exclude", "check"),
+    "RWD/Rear-Wheel Drive 4x2": ("exclude", "pass"), "": ("check", "check"), "Part-time": ("check", "check"),
+    "FWD/RWD": ("check", "check"),
+}
+bad = [(dt, ax) for dt, (f, r) in CASES.items() for ax, want in (("front", f), ("rear", r))
+       if R.axle_donor_verdict(ax, dt) != want]
+check(f"drive gate (d): corner x drive table, {len(CASES) * 2} cases (failures: {bad})", not bad)
+check("drive gate (d): unknown axle is never excluded", R.axle_donor_verdict("", "RWD") == "check")
+ga = R.build([gsp_rec("X8", [(2017, 2022, "Honda", "CR-V", "")], engines=("1.5",), pos="Rear Left")],
+             Names(), "gspnorthamerica.com")["groups"][0]
+check("cv-axle groups carry driven_axle from the corner", ga["driven_axle"] == "rear")
+# ---- unit-level generation guard
+mg = gsp_rec("X9", [(1998, 2002, "Honda", "Accord", ""), (2003, 2007, "Honda", "Accord", "")], engines=("2.4",))
+d = R.build([mg], Names(), "gspnorthamerica.com")
+check("a unit whose rows for one model span two generations is refused",
+      not d["groups"] and d["summary"]["refused_units"].get("cv-axle:unit_spans_generations") == 1)
+one = gsp_rec("X10", [(2003, 2004, "Honda", "Accord", ""), (2005, 2007, "Honda", "Accord", "")], engines=("2.4",))
+check("rows inside one generation pass", R.build([one], Names(), "gspnorthamerica.com")["groups"] != [])
+
 # ---- 1A Auto
 d = B([A0], Names(), "www.1aauto.com")
 g = d["groups"][0] if d["groups"] else {}

@@ -443,3 +443,25 @@ No free, permitted aftermarket lamp/mirror source was found. Headlights,
 tail lights and side mirrors are already in tier A of the dealer-catalog
 OEM crawl (`crawl.TIERS["A"]`), which is carmaker data and stronger
 evidence than any aftermarket list.
+
+### GSP cv-axle: rules after its first §11.4 (hub, 2026-11-10)
+
+- **Engines:** the title's engine list covers the whole unit. It goes on rows
+  only when the unit covers one make/model. Multi-model units carry no
+  engine, and their note says to check it. (The audit found impossible
+  engines, e.g. TL "3.0", ML320 "5.5", FX35 "3.7".)
+- **Donor drive gate (d).** Basis: a CV axle exists only at a driven corner.
+  This is physical, not invented fitment. Each cv-axle group carries
+  `driven_axle` ("front" / "rear"). The gate reads the donor's own VIN decode
+  (vPIC DriveType); there is no make table.
+  - Front axle: a donor decoded only RWD, or only 4x2/2WD, is excluded. A
+    4x2 that is really FWD gets hidden too: a missed donor, never a wrong
+    one.
+  - Rear axle: a donor decoded only FWD is excluded.
+  - AWD/4WD pass. A blank or mixed decode keeps "check drive".
+  - Reference: `groups_rows.axle_donor_verdict`, with the corner × drive
+    table in `tests/test_groups_rows.py`. The app mirrors it in pfAmRows
+    (category breadth).
+- **Unit-level generation guard:** a unit whose rows for one make/model,
+  taken together, span more than one generation is refused (M37 + Q60,
+  A3 8V + 8Y).

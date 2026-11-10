@@ -241,6 +241,43 @@ def oneaauto_rows(r: dict):
     return refuse, pos, rows
 
 
+# ------------------------------------------------------ donor drive gate (d) ---
+# Hub 2026-11-10, rule (d). Basis (physical, not fitment): a CV axle exists
+# only at a DRIVEN corner. The gate reads the DONOR's own VIN decode
+# (vPIC DriveType); there is no make-level table. Tokens match docs/app.js
+# PF_AM_DRIVE so the app's mirror (pfAmAxleVerdict) classes drives the same way.
+DRIVE_TOKENS = {"4wd": ("4wd", "4x4", "four-wheel"), "awd": ("awd", "all-wheel"),
+                "rwd": ("rwd", "rear-wheel"), "fwd": ("fwd", "front-wheel"), "2wd": ("2wd", "4x2")}
+
+
+def drive_classes(drive_type: str) -> set:
+    dt = (drive_type or "").lower()
+    return {c for c, toks in DRIVE_TOKENS.items()
+            if any(re.search(rf"(^|[^a-z0-9]){re.escape(t)}($|[^a-z0-9])", dt) for t in toks)}
+
+
+def axle_donor_verdict(axle: str, drive_type: str) -> str:
+    """'pass' | 'exclude' | 'check' (unknown: keep "check drive").
+    front axle: exclude a donor decoded only RWD or only 4x2/2WD (a 4x2 that is
+      in fact FWD is hidden too: never a wrong donor, at worst a missed one);
+    rear axle: exclude a donor decoded only FWD (4x2 stays 'check');
+    AWD / 4WD pass; blank, mixed or unrecognised stays 'check'."""
+    cls = drive_classes(drive_type)
+    if cls & {"awd", "4wd"}:
+        return "pass"
+    if axle == "front":
+        if cls == {"fwd"}:
+            return "pass"
+        if cls in ({"rwd"}, {"2wd"}, {"rwd", "2wd"}):
+            return "exclude"
+    if axle == "rear":
+        if cls == {"rwd"} or cls == {"rwd", "2wd"}:
+            return "pass"
+        if cls == {"fwd"}:
+            return "exclude"
+    return "check"
+
+
 # ------------------------------------------------------------- generations ---
 MAX_SPAN_NO_GEN = 6  # model years, inclusive, for a model with no generation entry
 
@@ -326,6 +363,22 @@ def build(records: list, names: GA.Names, site: str, src: str = "", complete: di
             refused_units[f"{cat}:{refuse.split(':')[0]}"] += 1
             if refuse.startswith("title_token:"):
                 refused_rows["title_token " + refuse.split(":", 1)[1]] += 1
+        # unit-level generation guard (hub 2026-11-10): a unit whose rows for one
+        # make/model, taken together, span more than one generation is a coarse
+        # merge (M37 + Q60, A3 8V + 8Y): refuse the unit; its rows still claim
+        if refuse is None:
+            by_model = defaultdict(list)
+            for a, *_rest in rows:
+                by_model[(a["make"], a["model"])].append(a["years"])
+            for (mk0, md0), yrs in by_model.items():
+                c0 = names.canon(mk0, md0)
+                if c0 is None:
+                    continue
+                lo0, hi0 = min(y[0] for y in yrs), max(y[1] for y in yrs)
+                if not span_ok(gens, c0[0], [c0[1], md0], lo0, hi0):
+                    refuse = "unit_spans_generations"
+                    refused_units[f"{cat}:unit_spans_generations"] += 1
+                    break
         qualified_models = {(a["make"], a["model"]) for a, _rp, _e, why, mt in rows
                             if why or mt.get("options") or mt.get("body")}
         for a, rp, engines, why, mt in rows:
@@ -393,7 +446,8 @@ def build(records: list, names: GA.Names, site: str, src: str = "", complete: di
                        "unit": unit, "position": pos, "apps": apps, "cross_model": len(models) > 1,
                        "body_gated": False, "retrieved": retrieved.get((cat, unit), ""),
                        "pro_gated": False, "if_equipped": list(opts), "option": bool(opts),
-                       "cosmetic": bool(cosm), "note": note})
+                       "cosmetic": bool(cosm), "note": note,
+                       **({"driven_axle": pos.split(" ")[0]} if cat == "cv-axle" and pos else {})})
     doc = {"schema": SCHEMA, "src": "aftermarket", "site": site, "raw": src, "tier": "likely",
            "crawl_complete": complete or {}, "groups": groups,
            "summary": {"unit_records": len(seen), "groups": len(groups),
