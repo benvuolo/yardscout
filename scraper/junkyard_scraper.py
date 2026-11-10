@@ -15105,8 +15105,19 @@ AM_RELEASED = {
 }
 
 
+# Every aftermarket source ships ONLY the categories it was audited for, held
+# or not (fail closed; category-breadth review 2026-11-10): a new file under
+# groups/aftermarket/, or a known source emitting a new category (e.g. GSP
+# ignition coils, which OEM-wise are not held), ships nothing until it has its
+# own §11.4 and an entry here or in AM_RELEASED.
+_AM_SITE_CATS = {
+    "dbelectrical": frozenset({"alternator", "starter"}),   # owner 2026-11-06 (ops/hub.md)
+    **AM_RELEASED,
+}
+
+
 def _am_held(cat: str, site: str) -> bool:
-    return cat in GROUP_HOLD_CATS and cat not in AM_RELEASED.get(site, frozenset())
+    return cat not in _AM_SITE_CATS.get(site, frozenset())
 
 
 # Categories that ship with same-model-generation donors only (hub 2026-11-09

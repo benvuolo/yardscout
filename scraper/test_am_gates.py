@@ -367,6 +367,16 @@ check("Spectra fuel-tank group is dropped (refused, never shipped)",
       not any("am:spp:fuel-tank:F1" in v for v in am_ids.values())
       and "fuel-tank" not in files and "ok" in (payload.get("amStatus") or {}).get("spectrapremium", ""),
       str(payload.get("amStatus")))
+# fail closed per source for EVERY category (category-breadth review 2026-11-10)
+coil_other = [_am_g("am:gsp:ignition-coils:G1", "ignition-coils", "G1", APPS)]
+alt_db = [dict(_am_g("am:dbe:alternator:400-1", "alternator", "400-1", APPS), amps=90)]
+alt_new = [_am_g("am:new:alternator:N1", "alternator", "N1", APPS)]
+_p2, files2 = _run_release({"gsp": coil_other, "dbelectrical": alt_db, "newsite": alt_new}, [])
+ids2 = {g["id"] for d in files2.values() for g in d.get("amGroups", [])}
+check("a non-released source's ignition-coils group (coils not held) gets no lazy file",
+      "am:gsp:ignition-coils:G1" not in ids2 and "ignition-coils" not in files2, str(sorted(ids2)))
+check("dbelectrical alternator still ships", "am:dbe:alternator:400-1" in ids2, str(sorted(ids2)))
+check("an unknown source's alternator group ships nothing", "am:new:alternator:N1" not in ids2)
 check("lazy index counts the Spectra rows", (payload.get("oemLazy") or {}).get("cats", {}).get("radiator", {}).get("am") == 1)
 
 print()
