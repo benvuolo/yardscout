@@ -2495,3 +2495,8 @@
 19:26:56 chain-unlinked window-regulator 1 numbers named by 69810-32050, no catalog link: 69810-03010
 19:26:56 chain-unlinked window-regulator 1 numbers named by 69820-32050, no catalog link: 69820-03010
 19:31:12 time budget reached records=4800
+19:31:17 start site=www.toyotapartsnow.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=4800 list_lines=1942 year_lines=323 url_index=21259
+19:31:17 completion worklist completion/toyota.own_page.json: 401 rows
+20:00:48 chain-unlinked window-regulator 1 numbers named by 85710-0E040, no catalog link: 85710-0T030
+20:00:48 chain-unlinked window-regulator 1 numbers named by 85720-0E060, no catalog link: 85720-0T030
+20:01:23 time budget reached records=4851
