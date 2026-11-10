@@ -13177,3 +13177,33 @@
 12:41:31 chain-unlinked side-mirrors 1 numbers named by AT4Z-17683-BAPTM, no catalog link: 9T4Z-17683-BAPTM
 12:43:15 chain-unlinked climate-control 1 numbers named by 6G1Z-19980-B, no catalog link: 6G1Z-19980-D
 12:44:43 time budget reached records=9405
+12:45:08 start site=www.fordpartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=9405 list_lines=5494 year_lines=1037 url_index=33476
+12:45:08 completion worklist completion/ford.own_page.json: 695 rows
+12:53:03 chain-unlinked bumper-rear 1 numbers named by 1C3Z-17906-CA, no catalog link: 1C3Z-17906-DA
+12:53:03 chain-unlinked bumper-rear 1 numbers named by YC3Z-17906-EA, no catalog link: YC3Z-17906-GA
+12:53:03 chain-unlinked bumper-rear 1 numbers named by YC3Z-17906-GACP, no catalog link: YC3Z-17906-DACP
+12:53:09 chain-unlinked climate-control 1 numbers named by 6C3Z-19980-AA, no catalog link: 7C3Z-19980-GA
+12:55:41 chain-unlinked window-regulator 1 numbers named by 6C3Z-2523200-AA, no catalog link: 8C3Z-2523200-B
+12:55:57 chain-unlinked window-switch 1 numbers named by YF1Z-14529-ABA, no catalog link: YF1Z-14529-AA
+12:55:57 chain-unlinked window-switch 1 numbers named by 5C3Z-14529-AAA, no catalog link: 2C3Z-14529-AA
+12:58:13 chain-unlinked headlights 1 numbers named by DG1Z-13008-AA, no catalog link: DG1Z-13008-AB
+12:58:13 chain-unlinked headlights 1 numbers named by DG1Z-13008-W, no catalog link: DG1Z-13008-X
+12:58:13 chain-unlinked headlights 1 numbers named by DG1Z-13008-L, no catalog link: DG1Z-13008-J
+12:58:13 chain-unlinked headlights 1 numbers named by DG1Z-13008-M, no catalog link: DG1Z-13008-K
+12:58:29 chain-unlinked side-mirrors 2 numbers named by AG1Z-17682-E, no catalog link: AG1Z-17K707-AC, AG1Z-17K707-E
+12:58:29 chain-unlinked side-mirrors 1 numbers named by AG1Z-17683-F, no catalog link: AG1Z-17K707-BD
+12:58:53 chain-unlinked window-regulator 1 numbers named by AG1Z-5423394-C, no catalog link: AG1Z-5423394-B
+12:58:53 chain-unlinked window-regulator 1 numbers named by AG1Z-5423395-C, no catalog link: AG1Z-5423395-B
+13:00:53 chain-unlinked window-regulator 1 numbers named by 2L1Z-7823395-AA, no catalog link: 6L1Z-7823395-A
+13:00:53 chain-unlinked window-regulator 1 numbers named by 2L1Z-7823394-AA, no catalog link: 6L1Z-7823394-A
+13:00:53 chain-unlinked window-regulator 1 numbers named by 4L1Z-7823209-AD, no catalog link: 6L1Z-7823209-AA
+13:00:53 chain-unlinked window-regulator 1 numbers named by 4L1Z-7823208-AC, no catalog link: 6L1Z-7823208-AA
+13:01:03 chain-unlinked window-regulator 1 numbers named by 2L1Z-7823394-AB, no catalog link: 6L1Z-7823394-B
+13:01:03 chain-unlinked window-regulator 1 numbers named by 2L1Z-7823395-AB, no catalog link: 6L1Z-7823395-B
+13:06:05 chain-unlinked window-regulator 1 numbers named by DG9Z-9923394-A, no catalog link: DG9Z-14B291-WT
+13:06:05 chain-unlinked window-regulator 1 numbers named by DG9Z-9923394-B, no catalog link: DG9Z-14B291-WT
+13:16:22 chain-unlinked headlights 1 numbers named by 8G1Z-13008-B, no catalog link: 8G1Z-13008-F
+13:16:22 chain-unlinked headlights 1 numbers named by 8G1Z-13008-D, no catalog link: 8G1Z-13008-F
+13:16:22 chain-unlinked headlights 1 numbers named by 8T5Z-13008-A, no catalog link: 8T5Z-13008-C
+13:16:22 chain-unlinked headlights 1 numbers named by 8T5Z-13008-B, no catalog link: 8T5Z-13008-D
+13:17:11 time budget reached records=9455
