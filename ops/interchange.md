@@ -3284,3 +3284,32 @@ each); nothing allowlisted or crawled.
   - Tier C finished: honda `.v2.done` (1,942 records), acura (951),
     infiniti (2,133).
   - R3 for those three runs in pending run 42775878285.
+- **2026-11-10 ~12:30 UTC: GSP cv-axle SHIPPED.**
+  - The hub merged it at 491c846e (sw jh-v178) after the full regression;
+    88 groups (59 front, 29 rear).
+  - The source-scout-2 session is stopping here. Handover:
+    - **Shipped:** GSP cv-axle only, via
+      `AM_RELEASED["gspnorthamerica"]`, file
+      `groups/aftermarket/gspnorthamerica.json`. The pins are raw
+      oem-raw@624a95ba and lot 91b0b5dd.
+    - **Re-curation:**
+      `aftermarket/groups_rows.py --site gspnorthamerica.com --raw-ref
+      <full sha> --lot-ref <full sha> --ship <file>`. Then a fresh §11.4
+      (new seed, independent agent, `--max-lines 100000`, the drive gate
+      checked against the real pfAmRows), the hub's confirm, and a payload
+      rebuild in the same push. A new inventory changes output only through
+      that path.
+    - **GSP crawl is done** for cv-axle (`.done`). The ride-control / strut
+      line has not been sampled or added to `gspnorthamerica.CATEGORIES`.
+    - **1A Auto is OUT:** HTTP 503 at 2026-11-10T04:30Z, so `.blocked` and
+      the breaker stay. 1,193 raw strut units sit unused on oem-raw.
+      Outreach is the owner's call; don't email or retry. The
+      junkyard-demand lines (lamps, blower, mirrors, handles, regulators)
+      were never crawled. The grammar for them is built and tested in
+      `groups_rows.py`.
+    - **Lamp/mirror sources:** none passes (SOURCES.md). The route is the
+      dealer-catalog tier A (headlights, tail-lights, side-mirrors), which
+      belongs to the Honda/Nissan and category sessions.
+    - **Rule references:** SOURCES.md "Source scout 2" and the sections
+      after it (detector rule, curation rules, gate (d), engine rules,
+      round-3 fixes).
