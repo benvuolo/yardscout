@@ -692,4 +692,11 @@ check("pack text: a climate-control 'assy' gets no regulator words; regulators a
 check("group notes: 20862099 names the towing/standard split; keys are (ns, cat, pn)",
       "towing" in _P.GROUP_NOTES[("gm", "side-mirrors", "20862099")]
       and all(len(k) == 3 for k in _P.GROUP_NOTES))
+check("hmg variants: Forte Koup / Optima Hybrid / Soul EV are their own base model for the holds; Camry Hybrid is not",
+      _P.hold_base_model("hmg", "Kia", "Forte Koup") != _P.hold_base_model("hmg", "Kia", "Forte")
+      and _P.hold_base_model("hmg", "Kia", "Optima Hybrid") != _P.hold_base_model("hmg", "Kia", "Optima")
+      and _P.hold_base_model("hmg", "Kia", "Soul EV") != _P.hold_base_model("hmg", "Kia", "Soul")
+      and _P.hold_base_model("hmg", "Hyundai", "Santa Fe") == _P.hold_base_model("hmg", "Hyundai", "Santa Fe")
+      and _P.hold_base_model("toyota", "Toyota", "Camry Hybrid") == _P.hold_base_model("toyota", "Toyota", "Camry")
+      and _P.held_cross_model_cat("hmg", "side-mirrors") == "held_option_cross_model")
 done("test_curate")

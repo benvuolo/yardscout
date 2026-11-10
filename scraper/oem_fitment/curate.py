@@ -1357,7 +1357,7 @@ class Curation:
                 self.released_exterior.append({"cat": cat, "pn": pns, "apps": apps})
             hold = policy.held_cross_model_cat(self.ns, cat)
             if not released and hold and \
-                    len({policy.base_model(T[0], T[1]) for T in Ts}) > 1:
+                    len({policy.hold_base_model(self.ns, T[0], T[1]) for T in Ts}) > 1:
                 # §5.16 exterior hold: only removes claims; kept for the owner checklist
                 urls = sorted({u for r in c.records for u in (r.product_url, r.list_url) if u})
                 self.refuse(hold, cat=cat, pn=pns[0], evidence=[r.pointer for r in c.records],

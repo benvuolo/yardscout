@@ -73,9 +73,28 @@ EXTERIOR_HOLD_CATS = frozenset({"bumper-front", "bumper-rear", "grille", "headli
 # mark) splits the part. A cross-model Likely group in one of these is held
 # like an exterior group (held_option_cross_model), listed in
 # held_exterior.json for the owner checklist. Only removes claims.
-OPTION_HOLD_CATS: dict = {"subaru": frozenset({"side-mirrors", "gauge-cluster"})}
+OPTION_HOLD_CATS: dict = {"subaru": frozenset({"side-mirrors", "gauge-cluster"}),
+                          "hmg": frozenset({"side-mirrors"})}
 # gauge-cluster added after the round-3 resample: 85021AJ19A and 85002AL05A
 # are Canada-market km/h clusters listed under US years with no market note.
+
+
+# Hyundai/Kia variants the catalog files under the base model but whose
+# exterior and mirror parts often differ in ways the catalog does not mark
+# (2026-11-10 make breadth §11.4 hmg round 2: Forte/Forte Koup headlamp and rear
+# cover, Optima/Optima Hybrid 2016 tail lamp WRONG; Koup mirrors and fenders
+# listed separately by aftermarket). For the cross-model hold they count as
+# their own base model; side mirrors are held for them too.
+HMG_VARIANT_WORDS = frozenset({"koup", "coupe", "hybrid", "ev", "xl", "sport", "gt", "touring", "wagon"})
+
+
+def hold_base_model(ns: str, make: str, model: str) -> tuple:
+    """base_model() for the exterior / option holds: in hmg a variant word
+    (HMG_VARIANT_WORDS) keeps the variant apart from the base model."""
+    words = (model or "").lower().split()
+    if ns == "hmg" and len(words) > 1 and any(w in HMG_VARIANT_WORDS for w in words[1:]):
+        return ((make or "").lower(), " ".join(words))
+    return base_model(make, model)
 
 
 def held_cross_model_cat(ns: str, cat: str) -> str | None:
