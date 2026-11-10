@@ -210,3 +210,25 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
   - Regression: everything passes except part_finder_e2e's known E46 M3 case (0 M3s on lots).
 - Wheels hmg: the §11.4 census found 8 WRONG, all 2010-13 Forte/Koup (body-code and production-date). The rule fix ships exactly the 9 census-OK groups (1,784 lot cars). Hub CONFIRMED hmg 9; the single push is based on ef5d52e6 under the usual gates.
 - U-Pull-R 00:13 check: no reply from Glenn; the scan still shows 0 cars (captcha).
+
+## 2026-11-10 ~01:00–04:00 UTC hmg wheels, scan revert fixed, Phoenix + headings, Spectra live
+- Wheels hmg merged (e0ea686c): 9 audited Hyundai/Kia groups; wheels.json 50 (mopar 28, mb 10, hmg 9, vag 3).
+  - 39 tier C hmg strut groups sit in groups/hmg.json, held by GROUP_HOLD_CATS (verified: not in any lazy file or the payload).
+- INCIDENT, fixed:
+  - Scan run 42724288950 (checkout 00dc804 at 23:55, commit 01:12) put its stale interchange payload over categories-ship and wheels-hmg. Live dropped from 44 to 30 categories and from 50 to 41 wheels groups.
+  - Restored at ec594131 (live 01:49).
+  - Fixed at 838ca475: scan.yml rebuilds the payload on the rebased tree whenever main's scraper/ or payload changed during the scan. Simulated in 4 cases. ops/data.md has the details.
+  - A check after the 04:00 scan is scheduled for 05:40 (trig_01XWZbqvWoTTpekUTtHaXzea).
+- Completion-first (make breadth, fa624032): markers.mode runs own-page completion before a re-opened category pass on sites with a previous marker. Effective from run 26.
+- design/firstview-settle-v3 merged (4c748386, sw jh-v177, live 03:47):
+  - Phoenix first view settles: 375x553 passed 10/10 reruns (main was 1/3 failing); map_regions 11/11.
+  - Parts headings: the headline is on its own line and there's no em-dash line.
+  - ui_no_truncation 1296/0.
+- Spectra Premium release merged (13c0c898, live 03:47):
+  - §11.4 round 2: fresh seed, independent agent, 597 vehicle pages, 0 WRONG in all 9 categories; hub confirmed.
+  - 613 groups pinned to oem-raw@ac4d1f0d: radiator 95, A/C compressor 98, A/C condenser 63, heater core 75, evaporator 53, throttle body 76, fuel pump module 86, ignition coils 67.
+  - Per-source fail-closed release (_AM_SITE_CATS): OEM and other sources stay held.
+  - Live check: a 2012 Equinox 2.4L radiator search shows Spectra CU13103 with no catalog row and 0 page errors.
+  - Gated coverage beyond same model+gen: coils 11.1%, throttle body 7.6%, heater core 5.7%, A/C compressor 4.9%, condenser 4.0%, evaporator 3.4%, radiator 3.3%, fuel pump 1.3% of 338k lot cars.
+- Not done: cancelling the stale aftermarket run 42714835085 to move 1A lamp lines ~3 h earlier was refused by the permission classifier. The normal order applies, and 1A lighting starts ~07:40.
+- Pending: GM wheels (tier W lands in more than a day); Honda/Nissan R3 after tier C; make-breadth completion from run 26; category tier D after the placeholder pass; GSP/1A §11.4 when their categories finish.
