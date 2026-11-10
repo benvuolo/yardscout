@@ -61,4 +61,51 @@ check("a lone sided front motor closes nothing", {"FL"} not in req and {"FL", "R
 check("rear alone closes nothing", {"R"} not in req)
 check("F with a twin half is not a configuration", not any({"F", "FL"} <= s for s in req))
 check("NOUN wiper-motor", policy.NOUN.get(W) == r"wiper")
+# Likely-group strict refusal (hub 2026-11-09 18:20) and the note words
+import curate as CU
+
+
+class _K:
+    def __init__(self, packaging):
+        self.packaging = packaging
+
+
+def _stub(cells, notes):
+    cur = object.__new__(CU.Curation)
+    cur.cells_info = cells
+    cur.t_sources = {}
+    cur.ns_models_f = frozenset()
+    cur.own_page = lambda T, cat, c: (True, notes.get(T, []), [], [], "manifest")
+    return cur
+
+
+TA, TB = ("Kia", "Forte", 2012), ("Kia", "Soul", 2012)
+m_ok = {"slot": P.Resolution(("F",), None, None, "F")}
+m_miss = {"slot": P.Resolution(("F", "FL", "FR", "R"), "position_missing")}
+m_fl = {"slot": P.Resolution(("FL",), None, "L", "F")}
+cells_f = {(T, W): {"slots": {"F": []}} for T in (TA, TB)}
+cur = _stub(cells_f, {})
+check("clean motor, one slot, no notes -> group allowed",
+      cur._strict_refusal(_K("motor"), W, [(TA, m_ok), (TB, m_ok)], {"F"}) is None)
+check("module packaging -> refused", cur._strict_refusal(_K("module"), W, [(TA, m_ok), (TB, m_ok)], {"F"})[0]
+      == "packaging_unstated")
+check("unresolved position on one app -> refused",
+      cur._strict_refusal(_K("motor"), W, [(TA, m_ok), (TB, m_miss)], {"F"})[0] == "strict_position")
+check("two slots in one group -> refused",
+      cur._strict_refusal(_K("motor"), W, [(TA, m_ok), (TB, m_ok)], {"F", "R"})[0] == "strict_position")
+check("lone FL (single motor printed 'Front Driver Side') -> refused",
+      cur._strict_refusal(_K("motor"), W, [(TA, m_fl), (TB, m_fl)], {"FL"})[0] == "strict_position")
+cur2 = _stub({(T, W): {"slots": {"FL": [], "FR": []}} for T in (TA, TB)}, {})
+check("FL with FR on every app's page -> allowed",
+      cur2._strict_refusal(_K("motor"), W, [(TA, m_fl), (TB, m_fl)], {"FL"}) is None)
+for note in ["Production Date: 09/1996-07/2001", "Sedan", "Fitting Vehicle Options: VQ35DE", "Japan Built"]:
+    cur3 = _stub(cells_f, {TB: [note]})
+    r = cur3._strict_refusal(_K("motor"), W, [(TA, m_ok), (TB, m_ok)], {"F"})
+    check(f"own-page note {note!r} -> strict_note", bool(r) and r[0] == "strict_note", str(r))
+check("note words: rear motor with linkage",
+      CU._pack_text(W, "drive", "R") == "rear wiper motor with linkage")
+check("note words: windshield motor", CU._pack_text(W, "motor", "F") == "windshield wiper motor")
+check("note words: no words for an unknown slot", CU._pack_text(W, "motor", "F+R") == "")
+check("other categories keep their words",
+      CU._pack_text("window-regulator", "motor") == "window motor only" and CU._pack_text("radiator", "") == "")
 done("test_wiper_motor")

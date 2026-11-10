@@ -1413,6 +1413,13 @@ class Curation:
         bad = sorted({m["slot"].reason for _, m in cand if m["slot"].reason})
         if bad or len(slots) != 1:
             return "strict_position", ";".join(bad) or "+".join(sorted(slots))
+        if slots & {"FL", "FR"}:
+            # a twin-motor half only when every app's cell holds both halves:
+            # Honda/Ford print "Front Driver Side" on single motors
+            for T, _ in cand:
+                have = set((self.cells_info.get((T, cat)) or {}).get("slots") or {})
+                if not {"FL", "FR"} <= have:
+                    return "strict_position", f"{T[0]} {T[1]} {T[2]}: lone {'+'.join(sorted(slots))}"
         for T, _ in cand:
             notes = self.own_page(T, cat, c)[1]
             ctx = N.NoteContext(T[2], frozenset(m.lower() for _, m in self.t_sources.get(T, set())),
