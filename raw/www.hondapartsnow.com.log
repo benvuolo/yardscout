@@ -1104,3 +1104,61 @@
 04:03:50 chain-unlinked strut 1 numbers named by 52611-S5B-N02, no catalog link: 52611-S5B-N01
 04:03:50 seg done tier=C Honda Civic Hybrid [2003, 2010] seeds=[2008, 2004] records=1942 errors=4
 04:03:50 finished records=1942 errors=4 chain_records=2 chain_unlinked=667 chain_failed=0 chain_given_up=0
+10:01:07 start site=www.hondapartsnow.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=1942 list_lines=686 year_lines=156 url_index=5659
+10:01:07 completion worklist completion/honda.own_page.json: 25 rows
+10:01:47 chain-unlinked bumper-front 1 numbers named by 04711-SDA-A90ZZ, no catalog link: 71101-SDA-A00ZZ
+10:01:55 chain-unlinked bumper-rear 1 numbers named by 04715-SDA-A90ZZ, no catalog link: 71501-SDA-A00ZZ
+10:02:03 chain-unlinked door-front 3 numbers named by 67010-SDA-A80ZZ, no catalog link: 67010-SDA-A90ZZ, 67010-SDA-A00ZZ, 67010-SDA-A10ZZ
+10:02:03 chain-unlinked door-front 1 numbers named by 67010-SDC-A80ZZ, no catalog link: 67010-SDC-A90ZZ
+10:02:03 chain-unlinked door-front 3 numbers named by 67050-SDA-A80ZZ, no catalog link: 67050-SDA-A00ZZ, 67050-SDA-A10ZZ, 67050-SDA-A90ZZ
+10:02:03 chain-unlinked door-front 1 numbers named by 67050-SDC-A80ZZ, no catalog link: 67050-SDC-A90ZZ
+10:02:19 chain-unlinked door-rear 7 numbers named by 67510-SDA-A80ZZ, no catalog link: 67510-SDA-A91ZZ, 67510-SDA-A00ZZ, 67510-SDC-A00ZZ, 67510-SDC-A90ZZ, 67510-SDA-A10ZZ, 67510-SDC-A80ZZ, 67510-SDA-A90ZZ
+10:02:19 chain-unlinked door-rear 7 numbers named by 67550-SDA-A80ZZ, no catalog link: 67550-SDA-A91ZZ, 67550-SDA-A10ZZ, 67550-SDA-A90ZZ, 67550-SDC-A90ZZ, 67550-SDA-A00ZZ, 67550-SDC-A80ZZ, 67550-SDC-A00ZZ
+10:02:51 chain-unlinked side-mirrors 2 numbers named by 76200-SDA-A03, no catalog link: 76200-SDA-A02, 76200-SDA-A01
+10:02:51 chain-unlinked side-mirrors 2 numbers named by 76250-SDA-A03, no catalog link: 76250-SDA-A01, 76250-SDA-A02
+10:03:15 chain-unlinked side-mirrors 1 numbers named by 76200-SDA-A13ZJ, no catalog link: 76200-SDA-A12ZJ
+10:03:15 chain-unlinked side-mirrors 1 numbers named by 76250-SDA-A13ZJ, no catalog link: 76250-SDA-A12ZJ
+10:03:15 chain-unlinked side-mirrors 2 numbers named by 76200-SDA-A13ZD, no catalog link: 76200-SDA-A12ZD, 76200-SDA-A11ZD
+10:03:15 chain-unlinked side-mirrors 2 numbers named by 76200-SDA-A13ZE, no catalog link: 76200-SDA-A11ZE, 76200-SDA-A12ZE
+10:03:15 chain-unlinked side-mirrors 2 numbers named by 76200-SDA-A13ZA, no catalog link: 76200-SDA-A11ZA, 76200-SDA-A12ZA
+10:03:15 chain-unlinked side-mirrors 2 numbers named by 76200-SDA-A13ZB, no catalog link: 76200-SDA-A12ZB, 76200-SDA-A11ZB
+10:03:15 chain-unlinked side-mirrors 2 numbers named by 76200-SDA-A13ZF, no catalog link: 76200-SDA-A12ZF, 76200-SDA-A11ZF
+10:03:15 chain-unlinked side-mirrors 2 numbers named by 76200-SDA-A13ZG, no catalog link: 76200-SDA-A11ZG, 76200-SDA-A12ZG
+10:03:15 chain-unlinked side-mirrors 2 numbers named by 76200-SDA-A13ZH, no catalog link: 76200-SDA-A11ZH, 76200-SDA-A12ZH
+10:03:15 chain-unlinked side-mirrors 2 numbers named by 76250-SDA-A13ZF, no catalog link: 76250-SDA-A12ZF, 76250-SDA-A11ZF
+10:03:15 chain-unlinked side-mirrors 2 numbers named by 76250-SDA-A13ZD, no catalog link: 76250-SDA-A11ZD, 76250-SDA-A12ZD
+10:03:15 chain-unlinked side-mirrors 2 numbers named by 76250-SDA-A13ZE, no catalog link: 76250-SDA-A11ZE, 76250-SDA-A12ZE
+10:03:15 chain-unlinked side-mirrors 2 numbers named by 76250-SDA-A13ZA, no catalog link: 76250-SDA-A12ZA, 76250-SDA-A11ZA
+10:03:15 chain-unlinked side-mirrors 2 numbers named by 76250-SDA-A13ZB, no catalog link: 76250-SDA-A11ZB, 76250-SDA-A12ZB
+10:03:15 chain-unlinked side-mirrors 2 numbers named by 76250-SDA-A13ZG, no catalog link: 76250-SDA-A11ZG, 76250-SDA-A12ZG
+10:03:15 chain-unlinked side-mirrors 2 numbers named by 76250-SDA-A13ZH, no catalog link: 76250-SDA-A12ZH, 76250-SDA-A11ZH
+10:03:23 chain-unlinked window-regulator 1 numbers named by 72210-SDA-A02, no catalog link: 72210-SDA-A01
+10:03:23 chain-unlinked window-regulator 1 numbers named by 72250-SDA-A02, no catalog link: 72250-SDA-A01
+10:03:31 chain-unlinked window-regulator 1 numbers named by 72710-SDC-A01, no catalog link: 72710-SDA-A01
+10:07:31 chain-unlinked side-mirrors 2 numbers named by 76200-SDA-A23ZD, no catalog link: 76200-SDA-A21ZD, 76200-SDA-A22ZD
+10:07:31 chain-unlinked side-mirrors 2 numbers named by 76200-SDA-A23ZA, no catalog link: 76200-SDA-A22ZA, 76200-SDA-A21ZA
+10:07:31 chain-unlinked side-mirrors 2 numbers named by 76200-SDA-A23ZF, no catalog link: 76200-SDA-A21ZF, 76200-SDA-A22ZF
+10:07:31 chain-unlinked side-mirrors 2 numbers named by 76250-SDA-A23ZA, no catalog link: 76250-SDA-A22ZA, 76250-SDA-A21ZA
+10:07:31 chain-unlinked side-mirrors 2 numbers named by 76250-SDA-A23ZD, no catalog link: 76250-SDA-A21ZD, 76250-SDA-A22ZD
+10:07:31 chain-unlinked side-mirrors 2 numbers named by 76250-SDA-A23ZF, no catalog link: 76250-SDA-A21ZF, 76250-SDA-A22ZF
+10:08:35 chain-unlinked bumper-front 5 numbers named by 04711-SDL-A90ZZ, no catalog link: 04711-SDA-A80ZZ, 04711-SDR-A90ZZ, 71101-SDL-A00ZZ, 04711-SDC-A90ZZ, 71101-SDA-A10ZZ
+10:08:43 chain-unlinked bumper-rear 6 numbers named by 04715-SDB-A80ZZ, no catalog link: 04715-SDB-305ZZ, 04715-SDA-A80ZZ, 71501-SDA-A10ZZ, 71501-SDL-A00ZZ, 04715-SDB-A90ZZ, 71501-SDB-A00ZZ
+10:09:23 chain-unlinked grille 1 numbers named by 71121-SDA-A10ZA, no catalog link: 71121-SDC-A10ZA
+10:10:35 chain-unlinked side-mirrors 2 numbers named by 76200-SDA-A23ZE, no catalog link: 76200-SDA-A21ZE, 76200-SDA-A22ZE
+10:10:35 chain-unlinked side-mirrors 2 numbers named by 76250-SDA-A23ZE, no catalog link: 76250-SDA-A21ZE, 76250-SDA-A22ZE
+10:14:43 chain-unlinked side-mirrors 1 numbers named by 76200-T2G-A42ZB, no catalog link: 76200-T2G-A41ZB
+10:14:43 chain-unlinked side-mirrors 1 numbers named by 76200-T2G-A42ZC, no catalog link: 76200-T2G-A41ZC
+10:14:43 chain-unlinked side-mirrors 1 numbers named by 76200-T2G-A42ZG, no catalog link: 76200-T2G-A41ZG
+10:14:43 chain-unlinked side-mirrors 1 numbers named by 76200-T2G-A42ZA, no catalog link: 76200-T2G-A41ZA
+10:14:43 chain-unlinked side-mirrors 1 numbers named by 76200-T2G-A42ZD, no catalog link: 76200-T2G-A41ZD
+10:15:07 chain-unlinked window-regulator 1 numbers named by 72750-T2A-A03, no catalog link: 72750-T2A-A02
+10:15:07 chain-unlinked window-regulator 2 numbers named by 72710-T2A-A03, no catalog link: 72710-T2A-A01, 72710-T2A-A02
+10:15:55 chain-unlinked window-regulator 1 numbers named by 72210-TA0-A02, no catalog link: 72210-TA0-A01
+10:15:55 chain-unlinked window-regulator 1 numbers named by 72250-TA0-A12, no catalog link: 72250-TA0-A11
+10:16:11 chain-unlinked window-regulator 1 numbers named by 72210-TA0-A12, no catalog link: 72210-TA0-A11
+10:21:23 nav-fail Honda Accord Hybrid 2005: ValueError: trim_pick chose no trim on https://www.hondapartsnow.com/2005-honda-accord-parts.html
+10:23:47 nav-fail Honda Accord Hybrid 2007: ValueError: trim_pick chose no trim on https://www.hondapartsnow.com/2007-honda-accord-parts.html
+10:25:07 nav-fail Honda Accord Hybrid 2006: ValueError: trim_pick chose no trim on https://www.hondapartsnow.com/2006-honda-accord-parts.html
+10:28:19 nav-fail Honda Accord Hybrid 2015: ValueError: trim_pick chose no trim on https://www.hondapartsnow.com/2015-honda-accord-parts.html
+10:30:11 nav-fail Honda Accord Hybrid 2017: ValueError: trim_pick chose no trim on https://www.hondapartsnow.com/2017-honda-accord-parts.html
+10:31:07 time budget reached records=1965
