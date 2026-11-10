@@ -1458,3 +1458,34 @@
 22:20:09 chain-unlinked strut 1 numbers named by 5QM-413-023-AC, no catalog link: 5QM-413-023
 22:20:57 seg done tier=C Volkswagen Golf [2015, 2018] seeds=[2016] records=1677 errors=21
 22:20:57 finished records=1677 errors=21 chain_records=2 chain_unlinked=1514 chain_failed=0 chain_given_up=0
+07:17:14 start site=www.vwpartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C'] records=1677 list_lines=1204 year_lines=186 url_index=10730
+07:17:14 completion worklist completion/vag.own_page.json: 171 rows
+07:17:38 chain-unlinked climate-control 5 numbers named by 1K0-907-044-BN, no catalog link: 1K0-907-044-AC, 1K0-907-044-BA, 1K0-907-044-BJ, 1K0-907-044-BE, 1K0-907-044-AG
+07:18:10 chain-unlinked gauge-cluster 2 numbers named by 1K0-920-951-C, no catalog link: 1K0-920-951-CX-Z02, 1K0-920-951-CX
+07:18:10 chain-unlinked gauge-cluster 2 numbers named by 1K0-920-971-C, no catalog link: 1K0-920-971-CX, 1K0-920-971-CX-Z05
+07:18:10 chain-unlinked gauge-cluster 1 numbers named by 1K0-920-971-D, no catalog link: 1K0-920-971-DX
+07:18:50 chain-unlinked side-mirrors 1 numbers named by 1K1-857-507-DJ-9B9, no catalog link: 1K1-857-507-BG-9B9
+07:18:50 chain-unlinked side-mirrors 1 numbers named by 1K1-857-508-DB-9B9, no catalog link: 1K1-857-508-BG-9B9
+07:18:59 chain-unlinked window-regulator 1 numbers named by 1K0-959-701-L-MX1, no catalog link: 1K0-959-701-K-006
+07:18:59 chain-unlinked window-regulator 1 numbers named by 1K0-959-702-L-MX1, no catalog link: 1K0-959-702-K-011
+07:19:07 chain-unlinked window-regulator 2 numbers named by 1K5-839-401-H, no catalog link: 1K5-839-401, 1K5-839-401-A
+07:19:07 chain-unlinked window-regulator 1 numbers named by 1K5-839-402-H, no catalog link: 1K5-839-402-A
+07:19:07 chain-unlinked window-regulator 1 numbers named by 1K0-959-703-D-L02, no catalog link: 1K0-959-703-D
+07:19:07 chain-unlinked window-regulator 1 numbers named by 1K0-959-704-D-L02, no catalog link: 1K0-959-704-D
+07:20:52 chain-unlinked climate-control 2 numbers named by 1K1-820-045-B, no catalog link: 1K1-820-045, 1K1-820-046-A
+07:23:27 chain-unlinked gauge-cluster 1 numbers named by 1J0-920-905-J, no catalog link: 1J0-920-900-J
+07:26:15 chain-unlinked window-regulator 1 numbers named by 1K0-959-701-L-MX3, no catalog link: 1K0-959-701-K-A06
+07:26:15 chain-unlinked window-regulator 1 numbers named by 1K0-959-702-L-MX3, no catalog link: 1K0-959-702-K-A11
+07:29:27 chain-unlinked climate-control 2 numbers named by 3AA-907-044-CF-ZJU, no catalog link: 3AA-907-044-AR-ZJU, 3AA-907-044-BL-ZJU
+07:36:39 chain-unlinked climate-control 5 numbers named by 7N0-907-426-CM-ZJU, no catalog link: 7N0-907-426-BG-ZJU, 7N0-907-426-AB-ZJU, 7N0-907-426-BT-ZJU, 7N0-907-426-AM-ZJU, 7N0-907-426-K-ZJU
+07:40:39 chain-unlinked window-regulator 2 numbers named by 1J3-837-730-BA, no catalog link: 1J3-837-730-N, 1J3-837-730-AP
+07:40:55 chain-unlinked window-regulator 2 numbers named by 1J4-839-730-L, no catalog link: 1J4-839-730-D, 1J4-839-730-J
+07:43:19 chain-unlinked gauge-cluster 1 numbers named by 1J0-920-925-D, no catalog link: 1J0-920-920-D
+07:44:07 chain-unlinked climate-control 6 numbers named by 561-907-044-AF-IKY, no catalog link: 561-907-044-AB-IKY, 561-907-044-D-IKY, 561-907-044-R-IKY, 561-907-044-IKY, 561-907-044-H-IKY, 561-907-044-M-IKY
+07:44:07 chain-unlinked climate-control 4 numbers named by 561-907-426-F-ZJU, no catalog link: 561-907-426-ZJU, 561-907-426-D-ZJU, 561-907-426-H-ZJU, 561-907-426-B-ZJU
+07:44:07 chain-unlinked climate-control 4 numbers named by 561-907-426-G-ZJU, no catalog link: 561-907-426-E-ZJU, 561-907-426-A-ZJU, 561-907-426-C-ZJU, 561-907-426-J-ZJU
+07:45:35 chain-unlinked climate-control 5 numbers named by 1K0-907-044-BM, no catalog link: 1K0-907-044-AT, 1K0-907-044-BH, 1K0-907-044-AB, 1K0-907-044-AF, 1K0-907-044-BD
+07:47:03 chain-unlinked climate-control 3 numbers named by 561-907-044-BD-IKY, no catalog link: 561-907-044-AR-IKY, 561-907-044-AP-IKY, 561-907-044-AM-IKY
+07:47:43 chain-unlinked climate-control 5 numbers named by 5K0-907-044-HA-ZJU, no catalog link: 5K0-907-044-ER-ZJU, 5K0-907-044-BS-ZJU, 5K0-907-044-DT-ZJU, 5K0-907-044-GJ-ZJU, 5K0-907-044-BC-ZJU
+07:47:43 chain-unlinked climate-control 4 numbers named by 7N0-907-426-CP-ZJU, no catalog link: 7N0-907-426-BJ-ZJU, 7N0-907-426-CB-ZJU, 7N0-907-426-M-ZJU, 7N0-907-426-AP-ZJU
+07:48:39 time budget reached records=1713
