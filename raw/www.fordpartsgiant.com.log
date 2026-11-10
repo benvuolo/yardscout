@@ -13160,3 +13160,20 @@
 12:03:12 chain-unlinked climate-control 1 numbers named by ET4Z-19980-G, no catalog link: ET4Z-19980-P
 12:03:12 chain-unlinked climate-control 1 numbers named by DT4Z-19980-H, no catalog link: ET4Z-19980-N
 12:11:53 time budget reached records=9355
+12:12:18 start site=www.fordpartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=9355 list_lines=5327 year_lines=1014 url_index=33090
+12:12:18 completion worklist completion/ford.own_page.json: 695 rows
+12:12:54 chain-unlinked window-regulator 1 numbers named by BM5Z-5423200-B, no catalog link: WLRA-136
+12:12:54 chain-unlinked window-regulator 1 numbers named by BM5Z-5423201-B, no catalog link: WLRA-79
+12:12:54 chain-unlinked window-regulator 2 numbers named by CM5Z-5823200-B, no catalog link: WLRA-156, WLRA-145
+12:12:54 chain-unlinked window-regulator 2 numbers named by CM5Z-5823201-B, no catalog link: WLRA-147, WLRA-157
+12:13:06 chain-unlinked window-regulator 1 numbers named by BM5Z-5827000-A, no catalog link: WLRA-67
+12:13:06 chain-unlinked window-regulator 1 numbers named by BM5Z-5827000-B, no catalog link: WLRA-68
+12:13:06 chain-unlinked window-regulator 1 numbers named by BM5Z-5827001-A, no catalog link: WLRA-70
+12:13:06 chain-unlinked window-regulator 1 numbers named by BM5Z-5827001-B, no catalog link: WLRA-71
+12:13:06 chain-unlinked window-regulator 1 numbers named by CM5Z-5827000-A, no catalog link: WLRA-69
+12:13:06 chain-unlinked window-regulator 1 numbers named by CM5Z-5827001-A, no catalog link: WLRA-72
+12:15:23 chain-unlinked side-mirrors 1 numbers named by F5TZ-17682-A, no catalog link: 3L2Z-17682-BAA
+12:41:31 chain-unlinked side-mirrors 1 numbers named by AT4Z-17682-BAPTM, no catalog link: 9T4Z-17682-BAPTM
+12:41:31 chain-unlinked side-mirrors 1 numbers named by AT4Z-17683-BAPTM, no catalog link: 9T4Z-17683-BAPTM
+12:43:15 chain-unlinked climate-control 1 numbers named by 6G1Z-19980-B, no catalog link: 6G1Z-19980-D
+12:44:43 time budget reached records=9405
