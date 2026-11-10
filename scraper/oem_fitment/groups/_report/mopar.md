@@ -1,6 +1,6 @@
 # OEM curation report: mopar
 
-Raw: `1351c33fcfbb` @ `1351c33fcfbb`; as of 2026-11-09T19:24:53Z.
+Raw: `dca9cd845f26` @ `dca9cd845f26`; as of 2026-11-09T19:24:53Z.
 
 - records 8390, classes 7581, list rows 80300, year manifests 460, cells 12822
 - Verified groups 0, engine vg groups 0, Likely groups 309

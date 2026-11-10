@@ -1,6 +1,6 @@
 # OEM curation report: toyota
 
-Raw: `1351c33fcfbb` @ `1351c33fcfbb`; as of 2026-11-09T18:24:28Z.
+Raw: `dca9cd845f26` @ `dca9cd845f26`; as of 2026-11-09T18:24:28Z.
 
 - records 6446, classes 6402, list rows 27712, year manifests 113, cells 9002
 - Verified groups 0, engine vg groups 0, Likely groups 583

@@ -1,5 +1,5 @@
 {
- "as_of": "2026-11-09T22:52:54Z",
+ "as_of": "2026-11-09T23:14:56Z",
  "audit_sample": {
   "closures": [],
   "note": "no eligible closure or Verified pair to sample",
@@ -5936,8 +5936,8 @@
     "": 1316
    },
    "not_closed": {
-    "no_list_manifest": 7894,
-    "no_year_manifest": 11062,
+    "no_list_manifest": 7922,
+    "no_year_manifest": 11034,
     "unattested": 19,
     "unverified_product": 25,
     "variant_unread": 1429
@@ -5951,8 +5951,8 @@
     "": 1117
    },
    "not_closed": {
-    "no_list_manifest": 7890,
-    "no_year_manifest": 11290,
+    "no_list_manifest": 7918,
+    "no_year_manifest": 11262,
     "unverified_product": 19,
     "variant_unread": 1429
    },
@@ -5965,8 +5965,8 @@
     "": 1982
    },
    "not_closed": {
-    "no_list_manifest": 4119,
-    "no_year_manifest": 10468,
+    "no_list_manifest": 4147,
+    "no_year_manifest": 10440,
     "unread_sibling_page": 3747,
     "variant_unread": 1429
    },
@@ -5979,8 +5979,8 @@
     "": 2158
    },
    "not_closed": {
-    "no_list_manifest": 3979,
-    "no_year_manifest": 10432,
+    "no_list_manifest": 4007,
+    "no_year_manifest": 10404,
     "unread_sibling_page": 3747,
     "variant_unread": 1429
    },
@@ -5993,8 +5993,8 @@
     "": 2596
    },
    "not_closed": {
-    "no_list_manifest": 7789,
-    "no_year_manifest": 9887,
+    "no_list_manifest": 7817,
+    "no_year_manifest": 9859,
     "unread_sibling_page": 44,
     "variant_unread": 1429
    },
@@ -6007,8 +6007,8 @@
     "": 2003
    },
    "not_closed": {
-    "no_list_manifest": 3740,
-    "no_year_manifest": 10826,
+    "no_list_manifest": 3768,
+    "no_year_manifest": 10798,
     "unread_sibling_page": 3747,
     "variant_unread": 1429
    },
@@ -6021,8 +6021,8 @@
     "": 2592
    },
    "not_closed": {
-    "no_list_manifest": 3636,
-    "no_year_manifest": 10404,
+    "no_list_manifest": 3664,
+    "no_year_manifest": 10376,
     "unread_sibling_page": 3684,
     "variant_unread": 1429
    },
@@ -6035,8 +6035,8 @@
     "": 1853
    },
    "not_closed": {
-    "no_list_manifest": 3740,
-    "no_year_manifest": 10976,
+    "no_list_manifest": 3768,
+    "no_year_manifest": 10948,
     "unread_sibling_page": 3747,
     "variant_unread": 1429
    },
@@ -6049,8 +6049,8 @@
     "": 2288
    },
    "not_closed": {
-    "no_list_manifest": 7476,
-    "no_year_manifest": 10542,
+    "no_list_manifest": 7504,
+    "no_year_manifest": 10514,
     "unread_sibling_page": 44,
     "variant_unread": 1395
    },
@@ -6063,8 +6063,8 @@
     "": 2895
    },
    "not_closed": {
-    "no_list_manifest": 3925,
-    "no_year_manifest": 9749,
+    "no_list_manifest": 3953,
+    "no_year_manifest": 9721,
     "suspect_variant": 84,
     "unattested": 559,
     "unread_sibling_page": 3104,
@@ -6079,8 +6079,8 @@
     "": 2817
    },
    "not_closed": {
-    "no_list_manifest": 4119,
-    "no_year_manifest": 9633,
+    "no_list_manifest": 4147,
+    "no_year_manifest": 9605,
     "suspect_variant": 4,
     "unattested": 2181,
     "uncrawled_chain_member": 1562,
@@ -6095,8 +6095,8 @@
     "": 1673
    },
    "not_closed": {
-    "no_list_manifest": 7789,
-    "no_year_manifest": 10810,
+    "no_list_manifest": 7817,
+    "no_year_manifest": 10782,
     "unattested": 44,
     "variant_unread": 1429
    },
@@ -6109,8 +6109,8 @@
     "": 1961
    },
    "not_closed": {
-    "no_list_manifest": 3686,
-    "no_year_manifest": 10922,
+    "no_list_manifest": 3714,
+    "no_year_manifest": 10894,
     "unread_sibling_page": 3747,
     "variant_unread": 1429
    },
@@ -6123,8 +6123,8 @@
     "": 390
    },
    "not_closed": {
-    "no_list_manifest": 4140,
-    "no_year_manifest": 12039,
+    "no_list_manifest": 4168,
+    "no_year_manifest": 12011,
     "unattested": 10,
     "unverified_product": 3737,
     "variant_unread": 1429
@@ -6135,15 +6135,15 @@
   },
   "knuckle": {
    "no_records": {
-    "": 5032
+    "": 4373
    },
    "not_closed": {
-    "no_list_manifest": 298,
-    "no_year_manifest": 8689,
+    "no_list_manifest": 157,
+    "no_year_manifest": 9001,
     "suspect_variant": 4,
-    "unattested": 2315,
-    "uncrawled_chain_member": 1175,
-    "unverified_product": 2803,
+    "unattested": 2834,
+    "uncrawled_chain_member": 841,
+    "unverified_product": 3106,
     "variant_unread": 1429
    },
    "unmapped": {
@@ -6155,8 +6155,8 @@
     "": 12801
    },
    "not_closed": {
-    "no_list_manifest": 2346,
-    "no_year_manifest": 5248,
+    "no_list_manifest": 2374,
+    "no_year_manifest": 5220,
     "unattested": 972,
     "uncrawled_chain_member": 201,
     "variant_unread": 177
@@ -6170,8 +6170,8 @@
     "": 13494
    },
    "not_closed": {
-    "no_list_manifest": 3192,
-    "no_year_manifest": 4857,
+    "no_list_manifest": 3220,
+    "no_year_manifest": 4829,
     "unread_sibling_page": 25,
     "variant_unread": 177
    },
@@ -6184,8 +6184,8 @@
     "": 3515
    },
    "not_closed": {
-    "no_list_manifest": 3563,
-    "no_year_manifest": 9562,
+    "no_list_manifest": 3591,
+    "no_year_manifest": 9534,
     "unread_sibling_page": 3710,
     "variant_unread": 1395
    },
@@ -6198,8 +6198,8 @@
     "": 1301
    },
    "not_closed": {
-    "no_list_manifest": 7757,
-    "no_year_manifest": 11214,
+    "no_list_manifest": 7785,
+    "no_year_manifest": 11186,
     "unattested": 44,
     "variant_unread": 1429
    },
@@ -6212,8 +6212,8 @@
     "": 403
    },
    "not_closed": {
-    "no_list_manifest": 7930,
-    "no_year_manifest": 11939,
+    "no_list_manifest": 7958,
+    "no_year_manifest": 11911,
     "unverified_product": 44,
     "variant_unread": 1429
    },
@@ -6223,15 +6223,15 @@
   },
   "strut": {
    "no_records": {
-    "": 2682
+    "": 1828
    },
    "not_closed": {
-    "no_list_manifest": 210,
-    "no_year_manifest": 10200,
+    "no_list_manifest": 68,
+    "no_year_manifest": 10738,
     "suspect_variant": 292,
-    "unattested": 3055,
-    "uncrawled_chain_member": 3485,
-    "unverified_product": 392,
+    "unattested": 3173,
+    "uncrawled_chain_member": 3727,
+    "unverified_product": 490,
     "variant_unread": 1429
    },
    "unmapped": {
@@ -6243,8 +6243,8 @@
     "": 2415
    },
    "not_closed": {
-    "no_list_manifest": 7485,
-    "no_year_manifest": 10372,
+    "no_list_manifest": 7513,
+    "no_year_manifest": 10344,
     "unattested": 44,
     "variant_unread": 1429
    },
@@ -6286,8 +6286,8 @@
     "": 815
    },
    "not_closed": {
-    "no_list_manifest": 27,
-    "no_year_manifest": 11619,
+    "no_list_manifest": 55,
+    "no_year_manifest": 11591,
     "suspect_variant": 163,
     "unattested": 5967,
     "uncrawled_chain_member": 1188,
@@ -6303,8 +6303,8 @@
     "": 1169
    },
    "not_closed": {
-    "no_list_manifest": 7513,
-    "no_year_manifest": 11590,
+    "no_list_manifest": 7541,
+    "no_year_manifest": 11562,
     "unread_sibling_page": 44,
     "variant_unread": 1429
    },
@@ -6317,8 +6317,8 @@
     "": 2554
    },
    "not_closed": {
-    "no_list_manifest": 7440,
-    "no_year_manifest": 10278,
+    "no_list_manifest": 7468,
+    "no_year_manifest": 10250,
     "unread_sibling_page": 44,
     "variant_unread": 1429
    },
@@ -6328,14 +6328,14 @@
   },
   "wiper-motor": {
    "no_records": {
-    "": 1857
+    "": 930
    },
    "not_closed": {
-    "no_list_manifest": 350,
-    "no_year_manifest": 10813,
-    "unattested": 4987,
-    "uncrawled_chain_member": 421,
-    "unverified_product": 1888,
+    "no_list_manifest": 227,
+    "no_year_manifest": 11350,
+    "unattested": 5474,
+    "uncrawled_chain_member": 446,
+    "unverified_product": 1889,
     "variant_unread": 1429
    },
    "unmapped": {
@@ -6557,11 +6557,11 @@
    },
    "knuckle": {
     "no_records": {
-     "": 5032
+     "": 4373
     },
     "split": {
-     "no_candidates": 585,
-     "option_split": 16128
+     "no_candidates": 700,
+     "option_split": 16672
     },
     "unmapped": {
      "": 211
@@ -6640,13 +6640,13 @@
    },
    "strut": {
     "conditional": {
-     "conditional:engine_unattested": 821
+     "conditional:engine_unattested": 761
     },
     "no_records": {
-     "": 2682
+     "": 1828
     },
     "split": {
-     "option_split": 18242
+     "option_split": 19156
     },
     "unmapped": {
      "": 211
@@ -6742,14 +6742,14 @@
    },
    "wiper-motor": {
     "conditional": {
-     "conditional:engine_unattested": 11380
+     "conditional:engine_unattested": 12103
     },
     "no_records": {
-     "": 1857
+     "": 930
     },
     "split": {
-     "no_candidates": 186,
-     "option_split": 8322
+     "no_candidates": 241,
+     "option_split": 8471
     },
     "unmapped": {
      "": 211
@@ -46546,28 +46546,28 @@
  ],
  "ns": "hmg",
  "open_reasons_cells": {
-  "no_list_manifest": 1515,
-  "no_year_manifest": 6198,
+  "no_list_manifest": 1551,
+  "no_year_manifest": 6248,
   "suspect_variant": 14,
-  "unattested": 245,
-  "uncrawled_chain_member": 72,
+  "unattested": 270,
+  "uncrawled_chain_member": 77,
   "unread_sibling_page": 316,
-  "unverified_product": 81,
+  "unverified_product": 98,
   "variant_unread": 236
  },
  "raw": {
-  "commit": "1351c33fcfbb97862fa5aa9265dd92f7350c1ebc",
-  "ref": "1351c33fcfbb",
+  "commit": "dca9cd845f26337a4047b9176cc17929ffc984a3",
+  "ref": "dca9cd845f26",
   "sites": {
    "www.hyundaipartsdeal.com": {
     "blocked": false,
     "done": true,
-    "lists": 822,
-    "lists_sha256": "134491cb54a7e45aacf3e3e94eb48949b6b66dfdeaae400dc1ff161fcbdf8a8b",
-    "records": 4055,
-    "records_sha256": "1f594733f6333b7c153557f37d6c5585468eaf0dc3ae63f6f70616b908e87bc8",
-    "years": 143,
-    "years_sha256": "d43af06b2b8aa65804a70ae6dc14d0d827c1773917886ff720a683d5440c9363"
+    "lists": 942,
+    "lists_sha256": "8a1e6c361c05a2cca39e5fc2d5ae70189c46e81fbfd4382b970a459a5ab7534b",
+    "records": 4242,
+    "records_sha256": "9c98136d63d34fe45e2b91aa7321f749797f2c9187b956c81460cb717695b598",
+    "years": 165,
+    "years_sha256": "1ebca4ee6af2bcfb88b5199298a522533121086500e263029b6468a31f94915a"
    },
    "www.kiapartsnow.com": {
     "blocked": false,
@@ -48753,6 +48753,72 @@
    "t": null
   },
   {
+   "cat": "knuckle",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.hyundaipartsdeal.com:records:L4100",
+    "www.kiapartsnow.com:records:L3553"
+   ],
+   "pn": "51715-2S000",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "knuckle",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.hyundaipartsdeal.com:records:L4101",
+    "www.kiapartsnow.com:records:L3554"
+   ],
+   "pn": "51716-2S000",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "knuckle",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.hyundaipartsdeal.com:records:L4127",
+    "www.kiapartsnow.com:records:L3648"
+   ],
+   "pn": "52710-G3AA0",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "knuckle",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.hyundaipartsdeal.com:records:L4128",
+    "www.kiapartsnow.com:records:L3649"
+   ],
+   "pn": "52720-G3AA0",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "knuckle",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.hyundaipartsdeal.com:records:L4188",
+    "www.kiapartsnow.com:records:L3614"
+   ],
+   "pn": "52710-D3100",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "knuckle",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.hyundaipartsdeal.com:records:L4190",
+    "www.kiapartsnow.com:records:L3616"
+   ],
+   "pn": "52720-D3100",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
    "cat": "power-steering-pump",
    "detail": "records disagree on fitment",
    "evidence": [
@@ -49578,6 +49644,94 @@
   },
   {
    "cat": "strut",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.hyundaipartsdeal.com:records:L4106",
+    "www.kiapartsnow.com:records:L3572"
+   ],
+   "pn": "54651-2S050",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "strut",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.hyundaipartsdeal.com:records:L4107",
+    "www.kiapartsnow.com:records:L3573"
+   ],
+   "pn": "54651-2S100",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "strut",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.hyundaipartsdeal.com:records:L4110",
+    "www.kiapartsnow.com:records:L3577"
+   ],
+   "pn": "54661-2S050",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "strut",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.hyundaipartsdeal.com:records:L4111",
+    "www.kiapartsnow.com:records:L3578"
+   ],
+   "pn": "54661-2S100",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "strut",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.hyundaipartsdeal.com:records:L4112",
+    "www.kiapartsnow.com:records:L3562"
+   ],
+   "pn": "55311-2S011",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "strut",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.hyundaipartsdeal.com:records:L4117",
+    "www.kiapartsnow.com:records:L3565"
+   ],
+   "pn": "55311-2S411",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "strut",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.hyundaipartsdeal.com:records:L4228",
+    "www.kiapartsnow.com:records:L3642"
+   ],
+   "pn": "55311-38600",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "strut",
+   "detail": "records disagree on fitment",
+   "evidence": [
+    "www.hyundaipartsdeal.com:records:L4229",
+    "www.kiapartsnow.com:records:L3644"
+   ],
+   "pn": "55311-38900",
+   "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "strut",
    "evidence": [
     "www.hyundaipartsdeal.com:records:L3926"
    ],
@@ -49903,6 +50057,106 @@
   },
   {
    "cat": "wheels",
+   "detail": "Forte 2010: row ['coupe - 2door 5p'] of page ['coupe - 2door 5p', 'sedan - 4door 5p', 'sedan - 5door 5p']",
+   "evidence": [
+    "www.kiapartsnow.com:records:L3117"
+   ],
+   "pn": "529101M550",
+   "reason": "wheel_body_option",
+   "t": null
+  },
+  {
+   "cat": "wheels",
+   "detail": "Forte 2010: row ['coupe - 2door 5p'] of page ['coupe - 2door 5p', 'sedan - 4door 5p', 'sedan - 5door 5p']",
+   "evidence": [
+    "www.kiapartsnow.com:records:L3118"
+   ],
+   "pn": "529101M460",
+   "reason": "wheel_body_option",
+   "t": null
+  },
+  {
+   "cat": "wheels",
+   "detail": "Forte 2010: row ['coupe - 2door 5p'] of page ['coupe - 2door 5p', 'sedan - 4door 5p', 'sedan - 5door 5p']",
+   "evidence": [
+    "www.kiapartsnow.com:records:L3119"
+   ],
+   "pn": "529091M550",
+   "reason": "wheel_body_option",
+   "t": null
+  },
+  {
+   "cat": "wheels",
+   "detail": "Forte 2010: row ['coupe - 2door 5p'] of page ['coupe - 2door 5p', 'sedan - 4door 5p', 'sedan - 5door 5p']",
+   "evidence": [
+    "www.kiapartsnow.com:records:L3123"
+   ],
+   "pn": "529101M360",
+   "reason": "wheel_body_option",
+   "t": null
+  },
+  {
+   "cat": "wheels",
+   "detail": "Forte 2010: row ['coupe - 2door 5p'] of page ['coupe - 2door 5p', 'sedan - 4door 5p', 'sedan - 5door 5p']",
+   "evidence": [
+    "www.kiapartsnow.com:records:L3124"
+   ],
+   "pn": "529101M450",
+   "reason": "wheel_body_option",
+   "t": null
+  },
+  {
+   "cat": "wheels",
+   "detail": "Forte 2010: row ['sedan - 4door 5p', 'sedan - 5door 5p'] of page ['coupe - 2door 5p', 'sedan - 4door 5p', 'sedan - 5door 5p']",
+   "evidence": [
+    "www.kiapartsnow.com:records:L3125"
+   ],
+   "pn": "529101M650",
+   "reason": "wheel_body_option",
+   "t": null
+  },
+  {
+   "cat": "wheels",
+   "detail": "Forte 2010: row ['sedan - 5door 5p'] of page ['coupe - 2door 5p', 'sedan - 4door 5p', 'sedan - 5door 5p']",
+   "evidence": [
+    "www.kiapartsnow.com:records:L3126"
+   ],
+   "pn": "529101M750",
+   "reason": "wheel_body_option",
+   "t": null
+  },
+  {
+   "cat": "wheels",
+   "detail": "Forte Koup 2013: production [(2009, 2010)]",
+   "evidence": [
+    "www.kiapartsnow.com:records:L3121"
+   ],
+   "pn": "529101M250",
+   "reason": "wheel_production_date",
+   "t": null
+  },
+  {
+   "cat": "wheels",
+   "detail": "Optima 2005: production [(2002, 2003)]",
+   "evidence": [
+    "www.kiapartsnow.com:records:L3187"
+   ],
+   "pn": "529102F400",
+   "reason": "wheel_production_date",
+   "t": null
+  },
+  {
+   "cat": "wheels",
+   "detail": "Sonata 2009: production [(2013, 2014)]",
+   "evidence": [
+    "www.hyundaipartsdeal.com:records:L3404"
+   ],
+   "pn": "52910-4R160",
+   "reason": "wheel_production_date",
+   "t": null
+  },
+  {
+   "cat": "wheels",
    "detail": "a record of this number names a compact / temporary spare",
    "evidence": [
     "www.hyundaipartsdeal.com:records:L3424"
@@ -49929,196 +50183,6 @@
    ],
    "pn": "529102F401",
    "reason": "wheel_compact_spare",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "hmg: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.hyundaipartsdeal.com:records:L3404"
-   ],
-   "pn": "52910-4R160",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "hmg: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.kiapartsnow.com:records:L3112"
-   ],
-   "pn": "52910A7350",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "hmg: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.kiapartsnow.com:records:L3113"
-   ],
-   "pn": "52910A7450",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "hmg: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.kiapartsnow.com:records:L3114"
-   ],
-   "pn": "52910A7850",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "hmg: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.kiapartsnow.com:records:L3115"
-   ],
-   "pn": "529103X050",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "hmg: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.kiapartsnow.com:records:L3116"
-   ],
-   "pn": "52910A7150",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "hmg: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.kiapartsnow.com:records:L3117"
-   ],
-   "pn": "529101M550",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "hmg: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.kiapartsnow.com:records:L3118"
-   ],
-   "pn": "529101M460",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "hmg: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.kiapartsnow.com:records:L3119"
-   ],
-   "pn": "529091M550",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "hmg: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.kiapartsnow.com:records:L3120"
-   ],
-   "pn": "529101M150",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "hmg: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.kiapartsnow.com:records:L3121"
-   ],
-   "pn": "529101M250",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "hmg: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.kiapartsnow.com:records:L3122"
-   ],
-   "pn": "529101M350",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "hmg: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.kiapartsnow.com:records:L3123"
-   ],
-   "pn": "529101M360",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "hmg: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.kiapartsnow.com:records:L3124"
-   ],
-   "pn": "529101M450",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "hmg: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.kiapartsnow.com:records:L3125"
-   ],
-   "pn": "529101M650",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "hmg: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.kiapartsnow.com:records:L3126"
-   ],
-   "pn": "529101M750",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "hmg: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.kiapartsnow.com:records:L3127"
-   ],
-   "pn": "529101M850",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "hmg: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.kiapartsnow.com:records:L3128"
-   ],
-   "pn": "529101M060",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "hmg: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.kiapartsnow.com:records:L3187"
-   ],
-   "pn": "529102F400",
-   "reason": "wheels_not_audited",
    "t": null
   },
   {
@@ -50326,6 +50390,7 @@
   "www.gmpartsgiant.com.lists.2",
   "www.gmpartsgiant.com.lists.3",
   "www.gmpartsgiant.com.lists.4",
+  "www.gmpartsgiant.com.lists.5",
   "www.gmpartsgiant.com.years",
   "www.hondapartsnow.com.lists",
   "www.hondapartsnow.com.years",
@@ -50348,12 +50413,12 @@
  ],
  "summary": {
   "blocked_sites": [],
-  "cells": 8677,
-  "classes": 7500,
+  "cells": 8810,
+  "classes": 7673,
   "gates": [
    "no (site, category) of this namespace has passed the audit gate (audits.json has no record; spec 11.4, E5/V7)",
    "engine cells not audited as reliable on www.hyundaipartsdeal.com, www.kiapartsnow.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE",
-   "www.hyundaipartsdeal.com: only 0% of its 4544 fitment rows can be coverage: it prints an option column, and option-layout rows are never coverage (spec 5.5)",
+   "www.hyundaipartsdeal.com: only 0% of its 4762 fitment rows can be coverage: it prints an option column, and option-layout rows are never coverage (spec 5.5)",
    "www.kiapartsnow.com: only 0% of its 4468 fitment rows can be coverage: it prints an option column, and option-layout rows are never coverage (spec 5.5)"
   ],
   "likely_app_years_generation_cut": {
@@ -50373,19 +50438,20 @@
    "hood": 373,
    "liftgate": 297,
    "side-mirrors": 3067,
+   "strut": 2613,
    "tail-lights": 1831,
    "trunk-lid": 266,
    "wheels": 1492,
    "window-regulator": 2388
   },
-  "likely_groups": 6,
-  "list_rows": 34263,
-  "records": 7719,
+  "likely_groups": 54,
+  "list_rows": 37438,
+  "records": 7906,
   "released_by_allowlist": 0,
   "verified_groups": 0,
   "vg_groups": 0,
-  "why_no_verified": "no (site, category) of this namespace has passed the audit gate (audits.json has no record; spec 11.4, E5/V7); engine cells not audited as reliable on www.hyundaipartsdeal.com, www.kiapartsnow.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE; www.hyundaipartsdeal.com: only 0% of its 4544 fitment rows can be coverage: it prints an option column, and option-layout rows are never coverage (spec 5.5); www.kiapartsnow.com: only 0% of its 4468 fitment rows can be coverage: it prints an option column, and option-layout rows are never coverage (spec 5.5)",
-  "year_manifests": 285
+  "why_no_verified": "no (site, category) of this namespace has passed the audit gate (audits.json has no record; spec 11.4, E5/V7); engine cells not audited as reliable on www.hyundaipartsdeal.com, www.kiapartsnow.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE; www.hyundaipartsdeal.com: only 0% of its 4762 fitment rows can be coverage: it prints an option column, and option-layout rows are never coverage (spec 5.5); www.kiapartsnow.com: only 0% of its 4468 fitment rows can be coverage: it prints an option column, and option-layout rows are never coverage (spec 5.5)",
+  "year_manifests": 307
  },
  "unknown_note_clauses": {
   "05/2013-08/2014": 2,
@@ -50396,8 +50462,9 @@
   "09/2008-12/2009": 3,
   "09/2013": 1,
   "09/2014-10/2014": 2,
+  "1.6L GAMMA.. DCT - 7 Speed 4WD": 1,
   "1.6L GAMMA.. DOHC - TCI/GDI": 6,
-  "1.6L GAMMA.. DOHC - TCI/GDI.. DCT - 7 Speed 2WD": 2,
+  "1.6L GAMMA.. DOHC - TCI/GDI.. DCT - 7 Speed 2WD": 10,
   "1.6L GAMMA.. DOHC - TCI/GDI.. DCT - 7 Speed 4WD": 2,
   "1.6L.. MPI-DOHC.. 4AT 2WD": 1,
   "1.6L.. MPI-DOHC.. 5MT 2WD": 2,
@@ -50409,15 +50476,18 @@
   "195 TIRE - 195/65 R15": 4,
   "2.0L Beta.. 5MT 2WD": 3,
   "2.0L Beta.. 5MT 4WD": 6,
-  "2.0L NU.. 6AT 2WD": 13,
-  "2.0L NU.. 6AT 4WD": 4,
+  "2.0L NU": 1,
+  "2.0L NU.. 6AT 2WD": 16,
+  "2.0L NU.. 6AT 4WD": 8,
   "2.0L NU.. 6MT 2WD": 18,
-  "2.0L NU.. DOHC - GDI.. 6AT 2WD": 1,
-  "2.0L NU.. DOHC - GDI.. 6AT 4WD": 3,
-  "2.0L NU.. DOHC - GDI.. 6MT 2WD": 3,
+  "2.0L NU.. CVT 2WD": 2,
+  "2.0L NU.. DOHC - GDI.. 6AT 2WD": 5,
+  "2.0L NU.. DOHC - GDI.. 6AT 4WD": 7,
+  "2.0L NU.. DOHC - GDI.. 6MT 2WD": 5,
   "2.0L NU.. DOHC - MPI.. 6MT 2WD": 6,
   "2.0L NU.. DOHC - MPI.. CVT 2WD": 8,
   "2.0L Theta 2": 4,
+  "2.0L Theta 2.. 6AT 2WD": 2,
   "2.0L Theta 2.. DOHC - TCI/GDI": 8,
   "2.0L Theta 2.. DOHC - TCI/GDI.. 6AT 2WD": 4,
   "2.0L Theta FR.. 6MT 2WD": 7,
@@ -50427,30 +50497,33 @@
   "2.4L Theta 2": 52,
   "2.4L Theta 2.. 5AT 2WD": 2,
   "2.4L Theta 2.. 5MT 2WD": 4,
-  "2.4L Theta 2.. 6AT 2WD": 8,
-  "2.4L Theta 2.. 6AT 4WD": 10,
-  "2.4L Theta 2.. 6MT 2WD": 3,
-  "2.4L Theta 2.. DOHC - GDI": 31,
-  "2.4L Theta 2.. DOHC - GDI.. 6AT 2WD": 6,
-  "2.4L Theta 2.. DOHC - GDI.. 6AT 4WD": 7,
+  "2.4L Theta 2.. 6AT 2WD": 18,
+  "2.4L Theta 2.. 6AT 4WD": 22,
+  "2.4L Theta 2.. 6MT 2WD": 5,
+  "2.4L Theta 2.. DOHC - GDI": 33,
+  "2.4L Theta 2.. DOHC - GDI.. 6AT 2WD": 10,
+  "2.4L Theta 2.. DOHC - GDI.. 6AT 4WD": 9,
   "2.4L Theta 2.. DOHC - GDI.. 6MT 2WD": 6,
   "2.7L Delta.. 4AT 2WD": 2,
   "2.7L Delta.. 4AT 4WD": 17,
   "2.7L MU.. 4AT 4WD": 10,
   "2.7L MU.. 5MT 2WD": 2,
   "2.7L MU.. 5MT 4WD": 6,
-  "205 TIRE - 205/55 R16": 4,
+  "205 TIRE - 205/55 R16": 6,
+  "205 TIRE - 205/55 R16 / GRADE - GLS": 2,
   "205 TIRE - 205/65 R16": 42,
   "215 TIRE - 215/45 R17": 2,
   "215 TIRE - 215/55 R17": 29,
   "225 TIRE - 225/40 R19 : 245/40 R19": 4,
-  "225 TIRE - 225/45 R17": 30,
+  "225 TIRE - 225/45 R17": 32,
+  "225 TIRE - 225/45 R17 / GRADE - GLS / GRADE - GLS": 2,
   "225 TIRE - 225/45 R18": 15,
   "225 TIRE - 225/45 R18 : 245/45 R18 (ALL SEASON)": 2,
   "235 TIRE - 235/45 R18": 7,
   "235 TIRE - 235/55 R19": 2,
   "235 TIRE - 235/60 R18": 2,
   "235 TIRE - 235/65 R17": 2,
+  "245 TIRE - 245/45 R19": 6,
   "3 Door Sedan.. Low Grade.. 1.6L": 6,
   "3 Door Sedan.. Middle Grade": 13,
   "3 Door Sedan.. Middle Grade.. 1.5L": 15,
@@ -50531,8 +50604,8 @@
   "A.Q.S": 1,
   "A/T \"P\" RANGE DR UNLOCK SYS": 32,
   "A/T-0.9KW": 2,
-  "ABS": 43,
-  "ABS (ANTI LOCK BRK SYS)": 287,
+  "ABS": 44,
+  "ABS (ANTI LOCK BRK SYS)": 303,
   "ABS (ANTI LOCK BRK SYS) / FR SUSP TYPE - MACPH. W/COIL SPRING + H / MODEL YEAR PACKAGE - 14MY": 6,
   "ABS (ANTI LOCK BRK SYS) / RR BRAKE - DISC-15 INCH": 4,
   "ABS / GAS": 4,
@@ -50548,13 +50621,13 @@
   "AEB (AUTONOMOUS EMERGENCY BRAKING) / VEHICLE PACKAGE - SPORTS": 23,
   "AEB (AUTONOMOUS EMERGENCY BRAKING) / VEHICLE PACKAGE - SPORTY": 19,
   "AEB (AUTONOMOUS EMERGENCY BRAKING) / VEHICLE PACKAGE - ULTIMATE": 8,
-  "AIR CON": 17,
-  "AIR CON / ABS": 4,
+  "AIR CON": 19,
+  "AIR CON / ABS": 8,
   "AIR CON / SUSPENSION-HARD 'B'TYPE": 2,
   "AIR CON-DUAL FULL AUTO": 1,
-  "AIR CON-FULL AUTO": 12,
-  "AIR CON-FULL AUTO / ABS": 2,
-  "AIR CON-FULL AUTO / AIR CON / AIR CON-FULL AUTO / ROOF-SUN": 1,
+  "AIR CON-FULL AUTO": 15,
+  "AIR CON-FULL AUTO / ABS": 4,
+  "AIR CON-FULL AUTO / AIR CON / AIR CON-FULL AUTO / ROOF-SUN": 2,
   "AIR CON-MANUAL (DCC)": 4,
   "AIR CON-MANUAL (DCC) / AUTO LIGHT": 3,
   "AIR CON-MANUAL (HCC)": 3,
@@ -50676,6 +50749,9 @@
   "BODY CONTROL MODULE - BCM(ETACS) / DRIVER SIDE - ADVANCED": 2,
   "BODY CONTROL MODULE - BCM(ETACS) / MODEL YEAR PACKAGE - 14MY": 1,
   "BRAKE-FR(DISC B TYPE)": 10,
+  "BRAZIL LEV": 2,
+  "BRAZIL LEV / EMISSION REGULATION - FED. 11": 2,
+  "BRAZIL LEV / EMISSION REGULATION - FED. 15": 2,
   "BUMPER-5 MILE": 9,
   "BUMPER-5 MILE / BODY COLOR": 1,
   "BUMPER-5 MILE / RAD. GRILLE-A TYPE": 1,
@@ -50767,7 +50843,8 @@
   "DAYOU": 4,
   "DBC (DOWNHILL BRAKE CONTROL)": 30,
   "DCT - 6 Speed 2WD": 4,
-  "DCT - 7 Speed 2WD": 2,
+  "DCT - 7 Speed 2WD": 6,
+  "DCT - 7 Speed 4WD": 4,
   "DEAD LOCK": 88,
   "DEAD LOCK / CURTAIN A/BAG": 3,
   "DEAD LOCK / INSIDE HNDL OVER RIDE - DR'S & PA'S SIDE": 2,
@@ -50838,10 +50915,10 @@
   "EMISSION REGULATION - EC 2005": 12,
   "EMISSION REGULATION - EC 2005 / ABS (ANTI LOCK BRK SYS)": 4,
   "EMISSION REGULATION - EURO 2": 4,
-  "EMISSION REGULATION - EURO 3": 12,
-  "EMISSION REGULATION - EURO 4": 14,
+  "EMISSION REGULATION - EURO 3": 16,
+  "EMISSION REGULATION - EURO 4": 18,
   "EMISSION REGULATION - EURO 4 / ABS (ANTI LOCK BRK SYS)": 2,
-  "EMISSION REGULATION - EURO 5": 10,
+  "EMISSION REGULATION - EURO 5": 14,
   "EMISSION REGULATION - EURO 5 / ABS (ANTI LOCK BRK SYS)": 2,
   "EMISSION REGULATION - FED. 07": 4,
   "EMISSION REGULATION - LEV-3 ULEV 70": 1,
@@ -50858,8 +50935,9 @@
   "EMISSION(FED. 2006)": 2,
   "ENGINE PACKAGE - VGT REGULAR ENG": 6,
   "ENGINE PACKAGE - VGT REGULAR ENG / FR COOLER - MANUAL A/CON": 5,
-  "ESC (ELECTRONIC STABILITY CONTROL)": 427,
+  "ESC (ELECTRONIC STABILITY CONTROL)": 441,
   "ESC (ELECTRONIC STABILITY CONTROL) / ABS (ANTI LOCK BRK SYS)": 6,
+  "ESC (ELECTRONIC STABILITY CONTROL) / BRAKE PAD - NON-EUROPEAN / BRAKE PAD - NON-EUROPEAN": 2,
   "ESP(ELECTRONIC STABILITY PRM)": 28,
   "ESP(ELECTRONIC STABILITY PRM) / ABS": 4,
   "ESP(ELECTRONIC STABILITY PRM) / BRAKE-FR(DISC B TYPE)": 4,
@@ -50921,9 +50999,10 @@
   "FR BLIND SPOT MONITOR'G SYS / MODEL YEAR PACKAGE - 11MY": 6,
   "FR BLIND SPOT MONITOR'G SYS / S/ABSORBER TYPE - AIR": 2,
   "FR BLIND SPOT MONITOR'G SYS / VEHICLE PACKAGE - SPECIAL EDITION": 2,
-  "FR BRAKE - DISC-15 INCH": 4,
+  "FR BRAKE - DISC-15 INCH": 6,
   "FR BRAKE - DISC-16 INCH": 10,
-  "FR BRAKE - DISC-17 INCH": 35,
+  "FR BRAKE - DISC-16 INCH / RR SUSP TYPE - TORSION AXLE": 2,
+  "FR BRAKE - DISC-17 INCH": 39,
   "FR BRAKE - DISC-17 INCH / AL WHEEL 6.5J * 16 - A TYPE": 14,
   "FR BRAKE - DISC-17 INCH / AL WHEEL 7.0J * 17 - A TYPE": 1,
   "FR BRAKE - DISC-17 INCH / AL WHEEL 7.0J * 17 - B TYPE": 2,
@@ -50971,6 +51050,7 @@
   "FR T/SIG LIGHTING SOURCE - LED(LIGHT EMITTING DIODE) / AUTONOMOUS EMERGENCY BRAKING - PEDESTRIAN": 3,
   "FR T/SIG LIGHTING SOURCE - LED(LIGHT EMITTING DIODE) / B TYPE - BLACK+CR COAT'G": 2,
   "FR T/SIG LIGHTING SOURCE - LED(LIGHT EMITTING DIODE) / VEHICLE PACKAGE - SPORTS": 2,
+  "FR WIPER-2 SPEED": 4,
   "FRONT RADAR": 3,
   "FUEL TERRITORIAL QUALITY - CHINA": 2,
   "FULL CAP-13\"": 2,
@@ -51005,6 +51085,8 @@
   "Fit Note: 205 TIRE - 205/45 R16 / AL WHEEL 6.5J * 16 - A TYPE / FULL SIZE WHL COVER - A TYPE / MODEL YEAR PACKAGE - 07MY / TIRE PRESSURE MONITORG SYS - LOW LINE / TIRE SOURCE - KUM HO / TPMS (TIRE PRESSURE MONITORG SYS) INDICATOR": 1,
   "Fit Note: 205 TIRE - 205/50 R16": 2,
   "Fit Note: 205 TIRE - 205/50 R16 / FR COOLER - MANUAL A/CON": 2,
+  "Fit Note: 205 TIRE - 205/55 R16": 3,
+  "Fit Note: 205 TIRE - 205/55 R16 / 215 TIRE - 215/45 R17": 1,
   "Fit Note: 205 TIRE - 205/55 R16 / AL WHEEL 6.0J * 16 - A TYPE / FR BRAKE - DISC-16 INCH / TEMPORARY - STEEL WHEEL & TIRE (MINI) / TIRE MATERIAL - SILICA / TIRE PRESSURE MONITORG SYS - LOW LINE / TIRE SOURCE - HAN KOOK": 3,
   "Fit Note: 205 TIRE - 205/55 R16 / AL WHEEL 6.0J * 16 - B TYPE / FR BRAKE - DISC-16 INCH / TEMPORARY - STEEL WHEEL & TIRE (MINI) / TIRE MATERIAL - SILICA / TIRE PRESSURE MONITORG SYS - LOW LINE / TIRE SOURCE - HAN KOOK": 6,
   "Fit Note: 205 TIRE - 205/55 R16 / AL WHEEL 6.0J * 16 - C TYPE / FR BRAKE - DISC-16 INCH / TEMPORARY - STEEL WHEEL & TIRE (MINI) / TIRE MATERIAL - SILICA / TIRE PRESSURE MONITORG SYS - LOW LINE / TIRE SOURCE - HAN KOOK": 3,
@@ -51026,7 +51108,7 @@
   "Fit Note: 205 TIRE - 205/65 R16 / FR BRAKE - DISC-17 INCH / STEEL WHEEL - 6.5J * 16 / TEMPORARY - STEEL WHEEL & TIRE (MINI) / TIRE PRESSURE MONITORG SYS - LOW LINE": 1,
   "Fit Note: 215 TIRE - 215/40 R18 / 215 TIRE - 215/45 R17 / 225 TIRE - 225/40 R18 / MODEL YEAR PACKAGE - 15MY / TUN'G MODE - SPORTY SUSPENSION": 16,
   "Fit Note: 215 TIRE - 215/40 R18 / 215 TIRE - 215/45 R17 / TUN'G MODE - SPORTY SUSPENSION": 14,
-  "Fit Note: 215 TIRE - 215/45 R17": 3,
+  "Fit Note: 215 TIRE - 215/45 R17": 5,
   "Fit Note: 215 TIRE - 215/45 R17 / AL WHEEL 7.0J * 17 - A TYPE / FR BRAKE - DISC-16 INCH / TEMPORARY - STEEL WHEEL & TIRE (MINI) / TIRE MATERIAL - SILICA / TIRE PRESSURE MONITORG SYS - LOW LINE / TIRE SOURCE - GOOD YEAR": 6,
   "Fit Note: 215 TIRE - 215/45 R17 / AL WHEEL 7.0J * 17 - B TYPE / FR BRAKE - DISC-16 INCH / TEMPORARY - STEEL WHEEL & TIRE (MINI) / TIRE MATERIAL - SILICA / TIRE PRESSURE MONITORG SYS - LOW LINE / TIRE SOURCE - GOOD YEAR": 6,
   "Fit Note: 215 TIRE - 215/45 R17 / AL WHEEL 7.0J * 17 - C TYPE / FR BRAKE - DISC-16 INCH / TEMPORARY - STEEL WHEEL & TIRE (MINI) / TIRE MATERIAL - SILICA / TIRE PRESSURE MONITORG SYS - LOW LINE / TIRE SOURCE - GOOD YEAR": 3,
@@ -51054,6 +51136,7 @@
   "Fit Note: 225 TIRE - 225/60 R16 / 235 TIRE - 235/55 R17 / CLUSTER TYPE - SUPER VISION / ESC (ELECTRONIC STABILITY CONTROL) / MODEL YEAR PACKAGE - 09MY / TCS(TRACTION CONTROL SYSTEM) / TIRE PRESSURE MONITORG SYS - HIGH LINE": 1,
   "Fit Note: 225 TIRE - 225/60 R16 / CLUSTER TYPE - SUPER VISION / ESC (ELECTRONIC STABILITY CONTROL) / MODEL YEAR PACKAGE - 09MY / TCS(TRACTION CONTROL SYSTEM) / TIRE PRESSURE MONITORG SYS - HIGH LINE": 1,
   "Fit Note: 225 TIRE - 225/60 R16 / CLUSTER TYPE - SUPER VISION / ESC (ELECTRONIC STABILITY CONTROL) / MODEL YEAR PACKAGE - 09MY / TCS(TRACTION CONTROL SYSTEM) / TIRE PRESSURE MONITORG SYS - LOW LINE": 2,
+  "Fit Note: 225 TIRE - 225/60 R17": 14,
   "Fit Note: 225 TIRE - 225/60 R17 / AL WHEEL 7.0J * 17 - A TYPE / FR BRAKE - DISC-16 INCH / PARKG BRK CONTROL-EPB / TEMPORARY - STEEL WHEEL & TIRE (MINI) / TEMPORARY - TIRE MOBILITY KIT (TMK) / TIRE MATERIAL - LRR / TIRE PRESSURE MONITORG SYS - HIGH LINE / TIRE SOURCE - KUM HO": 4,
   "Fit Note: 225 TIRE - 225/70 R16 / AL WHEEL 6.5J * 16 - A TYPE / TEMPORARY - STEEL WHEEL & TIRE (MINI) / TIRE SOURCE - HAN KOOK / TIRE SOURCE - KUM HO": 2,
   "Fit Note: 225 TIRE - 225/70 R16 / STEEL WHEEL - 6.5J * 16 / TEMPORARY - STEEL WHEEL & TIRE (MINI) / TIRE SOURCE - HAN KOOK / TIRE SOURCE - KUM HO": 1,
@@ -51163,7 +51246,7 @@
   "Fit Note: A/BAG TELLTALE LAMP / AUTO DEFOG SYSTEM / BLOWER - PWM SPEED / FR COOLER - DUAL FULL AUTO A/CON / PTC HEATER_INT TYPE (GASOLINE) / SEAT BELT REMINDER": 4,
   "Fit Note: A/BAG TELLTALE LAMP / BLOWER - PWM SPEED / FR COOLER - MANUAL A/CON / PTC HEATER_INT TYPE (GASOLINE) / SEAT BELT REMINDER": 4,
   "Fit Note: ABS": 102,
-  "Fit Note: ABS (ANTI LOCK BRK SYS)": 95,
+  "Fit Note: ABS (ANTI LOCK BRK SYS)": 115,
   "Fit Note: ABS (ANTI LOCK BRK SYS) / ACTIVE ECO / CLUSTER TYPE - CONVENTIONAL / DRIVER SIDE - ADVANCED / ESC (ELECTRONIC STABILITY CONTROL) / ISG - STARTER TYPE / MDPS-DC-COLUMN / SPEEDOMETER TYPE - MPH(KMPH) / TEMPERATURE UNIT - F / TIRE PRESSURE MONITORG SYS - LOW LINE": 16,
   "Fit Note: ABS (ANTI LOCK BRK SYS) / ACTIVE ECO / DRIVER SIDE - ADVANCED / ESC (ELECTRONIC STABILITY CONTROL) / ISG - STARTER TYPE / MDPS-DC-COLUMN / SPEEDOMETER TYPE - MPH(KMPH) / TEMPERATURE UNIT - F / TIRE PRESSURE MONITORG SYS - LOW LINE": 12,
   "Fit Note: ABS (ANTI LOCK BRK SYS) / AL WHEEL 7.5J * 18 - A TYPE / AL WHEEL 7.5J * 18 - B TYPE / BRAZIL LEV / CHILE / EMISSION REGULATION - EURO 3 / EMISSION REGULATION - EURO 4 / EMISSION REGULATION - EURO 5 / ESC (ELECTRONIC STABILITY CONTROL) / O.B.D(ON-BOARD DIAGNOSTICS) - B.O.B.D 2 / O.B.D(ON-BOARD DIAGNOSTICS) - K.O.B.D / PARKG BRK CONTROL-EPB / TAIWAN": 2,
@@ -51216,20 +51299,20 @@
   "Fit Note: ABS (ANTI LOCK BRK SYS) / RR SUSP TYPE - MULTI LINK & TRAIL'G ARM": 2,
   "Fit Note: ABS (ANTI LOCK BRK SYS) / RR SUSP TYPE - MULTI LINK & TRAIL'G ARM / RR SUSP TYPE - TORSION AXLE": 2,
   "Fit Note: ABS (ANTI LOCK BRK SYS) / SPEEDOMETER TYPE - MPH(KMPH) / TIRE PRESSURE MONITORG SYS - LOW LINE": 4,
-  "Fit Note: ABS / ABS": 8,
+  "Fit Note: ABS / ABS": 12,
   "Fit Note: ABS / SPORTY PACKAGE": 4,
   "Fit Note: ACTIVE ECO / BLIND SPOT DETECTION SYSTEM - RADAR TYPE / CLUSTER TYPE - CONVENTIONAL+3.5\" MONO TFT LCD INFO / DRIVE MODE SELECT / EVP(ELECTRIC VACUUM PUMP) W/CONTROLLER / HID (DYNAMIC BENDING) / ISG - STARTER TYPE / LDWS(LANE DEPARTURE WARN'G SYSTEM) / MODEL YEAR PACKAGE - 18MY / MODEL YEAR PACKAGE - 19MY / PARKG BRK CONTROL-EPB / SMART HIGH BEAM(HBA) / SPEEDOMETER TYPE - MPH(KMPH)": 2,
   "Fit Note: ACTIVE ECO / BLIND SPOT DETECTION SYSTEM - RADAR TYPE / CLUSTER TYPE - SUPER VISION 4.2\" TFT LCD INFO / DRIVE MODE SELECT / EVP(ELECTRIC VACUUM PUMP) W/CONTROLLER / HID (DYNAMIC BENDING) / ISG - STARTER TYPE / LDWS(LANE DEPARTURE WARN'G SYSTEM) / MODEL YEAR PACKAGE - 18MY / MODEL YEAR PACKAGE - 19MY / PARKG BRK CONTROL-EPB / SMART HIGH BEAM(HBA) / SPEEDOMETER TYPE - MPH(KMPH)": 2,
   "Fit Note: ACTIVE ECO / CLUSTER TYPE - SUPER VISION / ECO INDICATOR / ESC (ELECTRONIC STABILITY CONTROL) / ISG - STARTER TYPE / M/T SHIFT INDICATOR / MDPS / SPEEDOMETER TYPE - MPH(KMPH) / TIRE PRESSURE MONITORG SYS - LOW LINE": 7,
   "Fit Note: ACTIVE HOOD SYSTEM - 2 CORNER POP-UP": 1,
   "Fit Note: AIR BAG-SIDE": 6,
-  "Fit Note: AIR CON": 35,
+  "Fit Note: AIR CON": 36,
   "Fit Note: AIR CON / AIR CON": 1,
-  "Fit Note: AIR CON / AIR CON-FULL AUTO": 12,
+  "Fit Note: AIR CON / AIR CON-FULL AUTO": 14,
   "Fit Note: AIR CON / AIR CON-FULL AUTO / AIR CON-MANUAL (HCC)": 2,
   "Fit Note: AIR CON / AUTO LIGHT": 2,
   "Fit Note: AIR CON / GT PACKAGE": 6,
-  "Fit Note: AIR CON / ROOF-SUN": 1,
+  "Fit Note: AIR CON / ROOF-SUN": 2,
   "Fit Note: AIR CON-DUAL FULL AUTO / AUTO LIGHT": 1,
   "Fit Note: AIR CON-FULL AUTO": 15,
   "Fit Note: AIR CON-FULL AUTO / AIR CON-MANUAL (HCC)": 2,
@@ -51261,7 +51344,7 @@
   "Fit Note: AL WHEEL 6.0J * 15 - B TYPE": 1,
   "Fit Note: AL WHEEL 6.0J * 16 - A TYPE": 4,
   "Fit Note: AL WHEEL 6.0J * 16 - B TYPE": 1,
-  "Fit Note: AL WHEEL 6.5J * 16 - A TYPE": 29,
+  "Fit Note: AL WHEEL 6.5J * 16 - A TYPE": 31,
   "Fit Note: AL WHEEL 6.5J * 16 - A TYPE / FR BRAKE - DISC-16 INCH / TEMPORARY - STEEL WHEEL & TIRE (MINI) / TEMPORARY - TIRE MOBILITY KIT (TMK) / TIRE PRESSURE MONITORG SYS - LOW LINE / TPMS (TIRE PRESSURE MONITORG SYS) INDICATOR": 2,
   "Fit Note: AL WHEEL 6.5J * 16 - A TYPE / FR BRAKE - DISC-17 INCH / TEMPORARY - STEEL WHEEL & TIRE (MINI) / TEMPORARY - TIRE MOBILITY KIT (TMK) / TIRE PRESSURE MONITORG SYS - LOW LINE": 2,
   "Fit Note: AL WHEEL 6.5J * 16 - A TYPE / FR BRAKE - DISC-17 INCH / TEMPORARY - TIRE MOBILITY KIT (TMK) / TIRE PRESSURE MONITORG SYS - HIGH LINE": 2,
@@ -51277,7 +51360,7 @@
   "Fit Note: AL WHEEL 6.5J * 16 - C TYPE": 4,
   "Fit Note: AL WHEEL 6.5J * 16 - C TYPE / FR BRAKE - DISC-17 INCH / TEMPORARY - STEEL WHEEL & TIRE (MINI) / TEMPORARY - TIRE MOBILITY KIT (TMK) / TIRE PRESSURE MONITORG SYS - HIGH LINE": 2,
   "Fit Note: AL WHEEL 6.5J * 16 - D TYPE / FR BRAKE - DISC-17 INCH / TEMPORARY - TIRE MOBILITY KIT (TMK) / TIRE PRESSURE MONITORG SYS - HIGH LINE": 1,
-  "Fit Note: AL WHEEL 6.5J * 17 - A TYPE": 11,
+  "Fit Note: AL WHEEL 6.5J * 17 - A TYPE": 13,
   "Fit Note: AL WHEEL 6.5J * 17 - A TYPE / FR BRAKE - DISC-17 INCH / TEMPORARY - STEEL WHEEL & TIRE (MINI) / TEMPORARY - TIRE MOBILITY KIT (TMK) / TIRE PRESSURE MONITORG SYS - HIGH LINE": 1,
   "Fit Note: AL WHEEL 6.5J * 17 - A TYPE / FR BRAKE - DISC-17 INCH / TEMPORARY - STEEL WHEEL & TIRE (MINI) / TEMPORARY - TIRE MOBILITY KIT (TMK) / TIRE PRESSURE MONITORG SYS - LOW LINE": 1,
   "Fit Note: AL WHEEL 6.5J * 17 - A TYPE / FULL SIZE WHL COVER - A TYPE / HUB CAP - A TYPE / TEMPORARY - STEEL WHEEL & TIRE (MINI) / TEMPORARY - TIRE MOBILITY KIT (TMK) / TIRE PRESSURE MONITORG SYS - LOW LINE": 1,
@@ -51830,7 +51913,7 @@
   "Fit Note: D/LOCK ILLUMI.": 1,
   "Fit Note: DEAD LOCK": 6,
   "Fit Note: DEAD LOCK / INSIDE HNDL OVER RIDE - DR'S & PA'S SIDE / P/WINDOW DR'S - AUTO UP/DOWN & SAFETY / P/WINDOW PA'S - AUTO UP/DOWN & SAFETY / SIDE AIR BAG-FR - FR(THORAX & PELVIS) / SMART KEY-FR DR / TYPE - FOLDING": 6,
-  "Fit Note: DISC": 3,
+  "Fit Note: DISC": 4,
   "Fit Note: DISTANCE TO EMPTY(D.T.E)": 1,
   "Fit Note: DISTANCE TO EMPTY(D.T.E) / FOB KEY": 6,
   "Fit Note: DOUBLE PIPE IHX": 4,
@@ -51899,7 +51982,7 @@
   "Fit Note: EMISSION REGULATION - CAL. 10 / EMISSION REGULATION - CAL. 10": 1,
   "Fit Note: EMISSION REGULATION - CAL. 10 / EMISSION REGULATION - CAL. 11 / EMISSION REGULATION - FED. 10 / EMISSION REGULATION - FED. 11 / EVAP. GAS CONTROL - ULEV": 1,
   "Fit Note: EMISSION REGULATION - CAL. 10 / EMISSION REGULATION - CAL. 11 / EVAP. GAS CONTROL - ULEV": 1,
-  "Fit Note: EMISSION REGULATION - CAL. 11": 2,
+  "Fit Note: EMISSION REGULATION - CAL. 11": 4,
   "Fit Note: EMISSION REGULATION - CAL. 11 / EMISSION REGULATION - CAL. 12 / EMISSION REGULATION - CAL. 13 / EMISSION REGULATION - FED. 11 / EMISSION REGULATION - FED. 12 / EMISSION REGULATION - FED. 13 / EVAP. GAS CONTROL - LEV-2 / EVAP. GAS CONTROL - PZEV": 1,
   "Fit Note: EMISSION REGULATION - CAL. 11 / EMISSION REGULATION - FED. 10 / EVAP. GAS CONTROL - EURO-3": 1,
   "Fit Note: EMISSION REGULATION - CAL. 11 / EMISSION REGULATION - FED. 11": 1,
@@ -51970,8 +52053,9 @@
   "Fit Note: FOB KEY / MUFFLER TAIL TRIM - SINGLE / R W/O BUTTON / VEHICLE PACKAGE - GT LINE / VIN LABEL-ANTI THEFT": 1,
   "Fit Note: FOB KEY / P/WINDOW DR'S - AUTO UP/DOWN & SAFETY / SMART KEY-FR DR / TYPE - FOLDING / TYPE - SEPARATION": 6,
   "Fit Note: FOB KEY / RR PARK'G ASSIST SYSTEM(RPAS)": 9,
+  "Fit Note: FR BRAKE - DISC-15 INCH": 6,
   "Fit Note: FR BRAKE - DISC-15 INCH / TEMPORARY - STEEL WHEEL & TIRE (MINI)": 1,
-  "Fit Note: FR BRAKE - DISC-16 INCH": 8,
+  "Fit Note: FR BRAKE - DISC-16 INCH": 10,
   "Fit Note: FR BRAKE - DISC-16 INCH / STEEL WHEEL - 6.0J * 15 / TEMPORARY - STEEL WHEEL & TIRE (MINI) / TEMPORARY - TIRE MOBILITY KIT (TMK) / TIRE PRESSURE MONITORG SYS - LOW LINE / TPMS (TIRE PRESSURE MONITORG SYS) INDICATOR": 2,
   "Fit Note: FR BRAKE - DISC-16 INCH / STEEL WHEEL - 6.5J * 16 / TEMPORARY - STEEL WHEEL & TIRE (MINI) / TEMPORARY - TIRE MOBILITY KIT (TMK) / TIRE PRESSURE MONITORG SYS - LOW LINE / TPMS (TIRE PRESSURE MONITORG SYS) INDICATOR": 2,
   "Fit Note: FR BRAKE - DISC-16 INCH / TEMPORARY - STEEL WHEEL & TIRE (MINI)": 1,
@@ -52027,6 +52111,7 @@
   "Fit Note: FR SIDE MARK - FR / HID (ADAPTIVE FR LIGHT SYSTEM) / LEVELING DEVICE - AUTO(DYNAMIC)": 2,
   "Fit Note: FR SUSP TYPE - MACPH. W/COIL SPRING + H": 76,
   "Fit Note: FR SUSP TYPE - MACPH. W/COIL SPRING + H / FR SUSP TYPE - MACPH. W/COIL SPRING + H": 6,
+  "Fit Note: FR WIPER - INTERMITTENT(VARIABLE)": 4,
   "Fit Note: FR WIPER - INTERMITTENT(VARIABLE) / FR WIPER-2 SPEED": 4,
   "Fit Note: FR WIPER - INTERMITTENT(VARIABLE) / FR WIPER-2 SPEED / MIST FUNCTION": 1,
   "Fit Note: FUEL TERRITORIAL QUALITY - CHINA": 1,
@@ -52045,7 +52130,7 @@
   "Fit Note: GARNISH-SIDE - TWO TONE COLOR": 2,
   "Fit Note: GARNISH-SIDE - TWO TONE COLOR / RR PARK'G ASSIST SYSTEM(RPAS)": 1,
   "Fit Note: GAS": 16,
-  "Fit Note: GAS SHOCK ABSORBER-RR": 8,
+  "Fit Note: GAS SHOCK ABSORBER-RR": 9,
   "Fit Note: GENERAL - BI-FUNCTION": 4,
   "Fit Note: GENERAL - BI-FUNCTION / HIGH BEAM - HALOGEN BULB / LEVELING DEVICE - AUTO(STATIC) / LIGHTING SOURCE - LED (INDIRECTION TYPE) / LOW BEAM - LED": 2,
   "Fit Note: GENERAL - CONVENTIONAL": 2,
@@ -52053,7 +52138,8 @@
   "Fit Note: GENERAL - LOW BEAM + HIGH BEAM": 4,
   "Fit Note: GENERAL - LOW BEAM + HIGH BEAM / HIGH BEAM - HALOGEN BULB / LEVELING DEVICE - AUTO(STATIC) / LIGHTING SOURCE - LED (INDIRECTION TYPE) / LOW BEAM - HALOGEN BULB": 2,
   "Fit Note: GRADE - GL": 28,
-  "Fit Note: GRADE - GL / GRADE - GLS": 8,
+  "Fit Note: GRADE - GL / GRADE - GL": 2,
+  "Fit Note: GRADE - GL / GRADE - GLS": 11,
   "Fit Note: GRADE - GL / GRADE - GLS / GRADE - TOP / MODEL YEAR PACKAGE - 16MY": 2,
   "Fit Note: GRADE - GL / GRADE - GLS / SUSPENSION SPEC - DOMESTIC / TUN'G MODE - SPORTY SUSPENSION": 12,
   "Fit Note: GRADE - GL / GRADE - GLS / TUN'G MODE - SPORTY SUSPENSION": 6,
@@ -52188,15 +52274,15 @@
   "Fit Note: MODEL YEAR PACKAGE - 13MY / MODEL YEAR PACKAGE - 13MY": 3,
   "Fit Note: MODEL YEAR PACKAGE - 13MY / MODEL YEAR PACKAGE - 14MY": 2,
   "Fit Note: MODEL YEAR PACKAGE - 14MY": 74,
-  "Fit Note: MODEL YEAR PACKAGE - 15MY": 11,
-  "Fit Note: MODEL YEAR PACKAGE - 15MY / MODEL YEAR PACKAGE - 15MY": 2,
-  "Fit Note: MODEL YEAR PACKAGE - 15MY / MODEL YEAR PACKAGE - 16MY": 2,
+  "Fit Note: MODEL YEAR PACKAGE - 15MY": 27,
+  "Fit Note: MODEL YEAR PACKAGE - 15MY / MODEL YEAR PACKAGE - 15MY": 16,
+  "Fit Note: MODEL YEAR PACKAGE - 15MY / MODEL YEAR PACKAGE - 16MY": 20,
   "Fit Note: MODEL YEAR PACKAGE - 16MY": 27,
   "Fit Note: MODEL YEAR PACKAGE - 16MY / MODEL YEAR PACKAGE - 17MY / RR COMBI LAMP - LED(W/BULB T/SIGNAL)TYPE": 16,
   "Fit Note: MODEL YEAR PACKAGE - 16MY / MODEL YEAR PACKAGE - 17MY / S/ABSORBER TYPE - CONVENTIONAL VALVE / S/ABSORBER TYPE - H.P.D": 1,
   "Fit Note: MODEL YEAR PACKAGE - 16MY / MODEL YEAR PACKAGE - 17MY / S/ABSORBER TYPE - H.P.D": 1,
   "Fit Note: MODEL YEAR PACKAGE - 16MY / PANORAMA SUNROOF - POWER-ONE TOUCH SAFET": 1,
-  "Fit Note: MODEL YEAR PACKAGE - 17MY": 8,
+  "Fit Note: MODEL YEAR PACKAGE - 17MY": 16,
   "Fit Note: MODEL YEAR PACKAGE - 17MY / MODEL YEAR PACKAGE - 18MY": 39,
   "Fit Note: MODEL YEAR PACKAGE - 17MY / MODEL YEAR PACKAGE - 18MY / MODEL YEAR PACKAGE - 19MY / PARKG BRK CONTROL-EPB": 2,
   "Fit Note: MODEL YEAR PACKAGE - 17MY / MODEL YEAR PACKAGE - 18MY / REFRIGERATOR - ALTERNATIVE / W/ ATF WARMER": 3,
@@ -52204,7 +52290,8 @@
   "Fit Note: MODEL YEAR PACKAGE - 17MY / MODEL YEAR PACKAGE - 18MY / S/ABSORBER TYPE - H.P.D": 2,
   "Fit Note: MODEL YEAR PACKAGE - 18MY": 42,
   "Fit Note: MODEL YEAR PACKAGE - 18MY / MODEL YEAR PACKAGE - 19MY / PARKG BRK CONTROL-EPB": 2,
-  "Fit Note: MODEL YEAR PACKAGE - 19MY": 10,
+  "Fit Note: MODEL YEAR PACKAGE - 19MY": 14,
+  "Fit Note: MODEL YEAR PACKAGE - 19MY / SINGLE TILT'G & SLID'G - POWER-TOUCH SAFETY": 2,
   "Fit Note: MPH(KMH)": 11,
   "Fit Note: MRR-DR'S IMS": 2,
   "Fit Note: MRR-O/SIDE(BODY COLOR) / MRR-PA'S BLUE GLASS / MRR-PA'S ELEC:HTR CONV": 1,
@@ -52258,14 +52345,14 @@
   "Fit Note: PARK'G ASSIST SYSTEM / PARK'G ASSIST SYSTEM": 3,
   "Fit Note: PARK'G ASSIST SYSTEM / RR PARK'G ASSIST SYSTEM(RPAS) / SMART KEY-FR DR / VEHICLE PACKAGE - SPORTY": 4,
   "Fit Note: PARK'G ASSIST SYSTEM / SMART KEY-FR DR / VEHICLE PACKAGE - SPORTY": 2,
-  "Fit Note: PARKG BRK CONTROL-EPB": 17,
+  "Fit Note: PARKG BRK CONTROL-EPB": 19,
   "Fit Note: PASS'S SIDE - ELECTRIC HTD-CONV": 85,
   "Fit Note: PASS'S SIDE - ELECTRIC HTD-CONV / SIDE REPEATER LAMP (O/S MRR)": 1,
   "Fit Note: PASS'S SIDE - ELECTRIC-CONV": 13,
   "Fit Note: PASS'S SIDE - LEVER-CONV": 2,
   "Fit Note: PASS'S SIDE - LEVER-CONV / SIDE REPEATER LAMP (O/S MRR)": 1,
   "Fit Note: PASSENGER SIDE - ADVANCED": 6,
-  "Fit Note: PHEV PACK": 1,
+  "Fit Note: PHEV PACK": 3,
   "Fit Note: POWER WINDOW(FR)": 11,
   "Fit Note: POWER WINDOW(FR) / POWER WINDOW(FR+RR)": 2,
   "Fit Note: POWER WINDOW(FR) / POWER WINDOW(FR+RR) / SAFETY WINDOW - FR DR(DRIVER'S)": 2,
@@ -52313,12 +52400,16 @@
   "Fit Note: RR SPOILER - W/O HMSL / RR SPOILER - W/O HMSL (B TYPE)": 2,
   "Fit Note: RR SPOILER - W/O HMSL / RR SPOILER W/ HMSL - A TYPE": 1,
   "Fit Note: RR SPOILER W/ HMSL - A TYPE": 8,
-  "Fit Note: RR WIPER - INTERMITTENT(NON VARIABLE)": 15,
+  "Fit Note: RR SUSP TYPE - MULTI LINK & TRAIL'G ARM": 6,
+  "Fit Note: RR SUSP TYPE - MULTI LINK & TRAIL'G ARM / RR SUSP TYPE - MULTI LINK & TRAIL'G ARM": 1,
+  "Fit Note: RR SUSP TYPE - TORSION AXLE": 2,
+  "Fit Note: RR SUSP TYPE - TORSION AXLE / RR SUSP TYPE - TORSION AXLE": 1,
+  "Fit Note: RR WIPER - INTERMITTENT(NON VARIABLE)": 16,
   "Fit Note: RR WIPER SYSTEM - 1 SPEED": 2,
   "Fit Note: RTY+P/BTN TYPE": 5,
   "Fit Note: S/ABSORBER TYPE - ADVANCED VALVE": 6,
   "Fit Note: S/ABSORBER TYPE - D.F.D / S/ABSORBER TYPE - H.P.D / VEHICLE PACKAGE - SPORTY": 12,
-  "Fit Note: S/ABSORBER TYPE - H.P.D": 103,
+  "Fit Note: S/ABSORBER TYPE - H.P.D": 133,
   "Fit Note: S/ABSORBER TYPE - H.P.D / S/ABSORBER TYPE - H.P.D": 9,
   "Fit Note: S/ABSORBER TYPE - H.P.D / TUN'G MODE - SPORTY SUSPENSION": 37,
   "Fit Note: S/ABSORBER TYPE - H.P.D / VEHICLE PACKAGE - SPORTY": 6,
@@ -52340,6 +52431,7 @@
   "Fit Note: SINGLE TILT'G & SLID'G - POWER-TOUCH SAFETY": 2,
   "Fit Note: SMART KEY-FR DR": 14,
   "Fit Note: SMART KEY-TRUNK LID(T/GATE)": 1,
+  "Fit Note: SMART PARKING ASSIST SYSTEM - B TYPE(12 CHANNEL)": 2,
   "Fit Note: SPEAKER BRAND - PREMIUM": 1,
   "Fit Note: SPEAKER-UP GRADE / WINDOW-POWER": 1,
   "Fit Note: SPEEDOMETER TYPE - MPH(KMPH)": 36,
@@ -52373,12 +52465,12 @@
   "Fit Note: TEMPERATURE UNIT 'F'": 4,
   "Fit Note: TIRE AIR PRESSURE WARN'G": 4,
   "Fit Note: TIRE AIR PRESSURE WARN'G / WHL-7.0JJ*16(AL)'A'TYPE": 1,
-  "Fit Note: TIRE PRESSURE MONITORG SYS - LOW LINE": 4,
+  "Fit Note: TIRE PRESSURE MONITORG SYS - LOW LINE": 6,
   "Fit Note: TIRE-SPARE": 4,
   "Fit Note: TPMS (TIRE PRESSURE MONITORG SYS) INDICATOR": 5,
   "Fit Note: TRIM-DR(DLX TYPE-CLOTH)": 15,
   "Fit Note: TRIP COMPUTER": 9,
-  "Fit Note: TUN'G MODE - SPORTY SUSPENSION": 15,
+  "Fit Note: TUN'G MODE - SPORTY SUSPENSION": 25,
   "Fit Note: TWO TURN UNLOCK'G - DRIVER ONLY": 50,
   "Fit Note: TYPE - 5 MILE": 4,
   "Fit Note: TYPE - 5 MILE / TYPE - 5 MILE": 1,
@@ -52391,7 +52483,7 @@
   "Fit Note: VEHICLE PACKAGE - FAMILY": 3,
   "Fit Note: VEHICLE PACKAGE - R-SPEC(HEAD LAMP)": 11,
   "Fit Note: VEHICLE PACKAGE - SPECIAL VEHICLE TRANSFORM": 2,
-  "Fit Note: VEHICLE PACKAGE - SPORTS": 60,
+  "Fit Note: VEHICLE PACKAGE - SPORTS": 70,
   "Fit Note: VEHICLE PACKAGE - ULTIMATE": 1,
   "Fit Note: W/ ATF WARMER": 4,
   "Fit Note: W/ HEATED": 14,
@@ -52439,8 +52531,15 @@
   "GARNISH-SIDE - TWO TONE COLOR / FR SIDE MARK - FR": 1,
   "GARNISH-SIDE - TWO TONE COLOR / HIGH GRADE": 8,
   "GENERAL - LOW BEAM + HIGH BEAM": 6,
-  "GRADE - GL": 9,
-  "GRADE - GLS": 26,
+  "GRADE - GL": 19,
+  "GRADE - GL / 205 TIRE - 205/55 R16": 2,
+  "GRADE - GL / 215 TIRE - 215/45 R17": 2,
+  "GRADE - GL / VEHICLE PACKAGE - SPORTS": 2,
+  "GRADE - GLS": 46,
+  "GRADE - GLS / GRADE - GL": 2,
+  "GRADE - GLS / GRADE - GL / GRADE - GLS": 2,
+  "GRADE - GLS / RR SUSP TYPE - MULTI LINK & TRAIL'G ARM": 2,
+  "GRADE - GLS / RR SUSP TYPE - TORSION AXLE": 2,
   "GRAIN - HIGH GLOSSY": 15,
   "GRAIN - HIGH GLOSSY / VEHICLE PACKAGE - SPORTS": 1,
   "GRAIN - HYDRO GRAPHICS": 22,
@@ -52480,19 +52579,19 @@
   "High Grade.. 2.0L": 4,
   "High Grade.. 2.0L.. .. 5MT 2WD": 1,
   "High Grade.. 2.4L": 2,
-  "High Grade.. 2.4L.. .. 4AT 2WD": 5,
-  "High Grade.. 2.7L": 29,
-  "High Grade.. 2.7L.. .. 4AT 2WD": 2,
-  "High Grade.. 2.7L.. .. 4AT 4WD": 2,
+  "High Grade.. 2.4L.. .. 4AT 2WD": 8,
+  "High Grade.. 2.7L": 32,
+  "High Grade.. 2.7L.. .. 4AT 2WD": 3,
+  "High Grade.. 2.7L.. .. 4AT 4WD": 4,
   "High Grade.. 2.7L.. .. 6MT 2WD": 2,
   "High Grade.. 3.5L": 13,
   "High Grade.. 3.5L.. .. 5AT 2WD": 2,
   "High Grade.. 3.5L.. .. 5AT 4WD": 2,
-  "High Grade.. 4AT 2WD": 13,
-  "High Grade.. 4AT 4WD": 18,
+  "High Grade.. 4AT 2WD": 14,
+  "High Grade.. 4AT 4WD": 21,
   "High Grade.. 5AT 2WD": 10,
   "High Grade.. 5AT 4WD": 10,
-  "High Grade.. 5MT 2WD": 5,
+  "High Grade.. 5MT 2WD": 7,
   "High Grade.. 6MT 2WD": 7,
   "High Grade.. Usa": 1,
   "I.M.S": 345,
@@ -52594,6 +52693,7 @@
   "MDPS-BLAC-RACK": 32,
   "MDPS-BLAC-RACK / MODEL YEAR PACKAGE - 17MY": 3,
   "MFR - CLEAR": 2,
+  "MIST FUNCTION": 1,
   "MLD'G - BLACK": 27,
   "MLD'G - BLACK + CR COAT'G": 56,
   "MLD'G - BLACK / MLD'G - BLACK": 2,
@@ -52642,14 +52742,14 @@
   "MODEL YEAR PACKAGE - 14MY / STEEL WHEEL - 6.5J * 16": 3,
   "MODEL YEAR PACKAGE - 14MY / TIRE PRESSURE MONITORG SYS - LOW LINE": 1,
   "MODEL YEAR PACKAGE - 14MY / VEHICLE PACKAGE - SPORTS": 5,
-  "MODEL YEAR PACKAGE - 15MY": 59,
+  "MODEL YEAR PACKAGE - 15MY": 61,
   "MODEL YEAR PACKAGE - 15MY / AL WHEEL 7.5J * 18 - A TYPE": 2,
   "MODEL YEAR PACKAGE - 15MY / AL WHEEL 7.5J * 19 - A TYPE": 2,
   "MODEL YEAR PACKAGE - 15MY / C TYPE - BLACK COAT'G + CR COAT'G": 3,
   "MODEL YEAR PACKAGE - 15MY / C TYPE - BODY COLOR+CR COAT'G": 2,
   "MODEL YEAR PACKAGE - 15MY / CENTER TRIM - TPO (THERMO PLASTIC OLEFIN)": 3,
   "MODEL YEAR PACKAGE - 15MY / MODEL YEAR PACKAGE - 15MY": 1,
-  "MODEL YEAR PACKAGE - 16MY": 242,
+  "MODEL YEAR PACKAGE - 16MY": 268,
   "MODEL YEAR PACKAGE - 16MY / A TYPE - BODY COLOR": 1,
   "MODEL YEAR PACKAGE - 16MY / A TYPE - CR COAT'G": 2,
   "MODEL YEAR PACKAGE - 16MY / AL WHEEL 7.5J * 19 - A TYPE": 1,
@@ -52700,16 +52800,16 @@
   "MUFFLER MAIN ASSY - SINGLE-BLACK PAINT": 9,
   "MUFFLER MAIN ASSY - SINGLE-CR COAT'G": 3,
   "Manual Transaxle": 2,
-  "Middle Grade": 57,
-  "Middle Grade.. 2.4L": 9,
-  "Middle Grade.. 2.4L.. .. 4AT 2WD": 10,
-  "Middle Grade.. 2.4L.. .. 5MT 2WD": 2,
-  "Middle Grade.. 2.7L": 1,
-  "Middle Grade.. 2.7L.. .. 4AT 2WD": 5,
-  "Middle Grade.. 2.7L.. .. 4AT 4WD": 2,
-  "Middle Grade.. 4AT 2WD": 10,
-  "Middle Grade.. 4AT 4WD": 2,
-  "Middle Grade.. 5MT 2WD": 17,
+  "Middle Grade": 60,
+  "Middle Grade.. 2.4L": 13,
+  "Middle Grade.. 2.4L.. .. 4AT 2WD": 13,
+  "Middle Grade.. 2.4L.. .. 5MT 2WD": 3,
+  "Middle Grade.. 2.7L": 2,
+  "Middle Grade.. 2.7L.. .. 4AT 2WD": 7,
+  "Middle Grade.. 2.7L.. .. 4AT 4WD": 3,
+  "Middle Grade.. 4AT 2WD": 13,
+  "Middle Grade.. 4AT 4WD": 4,
+  "Middle Grade.. 5MT 2WD": 20,
   "Middle Grade.. 5MT 4WD": 7,
   "Middle Grade.. Canada": 2,
   "Middle Grade.. Usa": 4,
@@ -52728,6 +52828,7 @@
   "Need Painting(Body Color)": 5,
   "Need Painting(EB)": 1,
   "Need Painting(V2G, EB, CA)": 10,
+  "O.B.D(ON-BOARD DIAGNOSTICS) - B.O.B.D 2": 4,
   "O/S RR VIEW MRR LABEL - ARABIC LANGUAGE": 27,
   "O/S RR VIEW MRR LABEL - ARABIC LANGUAGE / GRADE - GL": 4,
   "O/S RR VIEW MRR LABEL - ARABIC LANGUAGE / GRADE - GLS": 3,
@@ -52765,10 +52866,11 @@
   "PARK'G ASSIST SYSTEM / MODEL YEAR PACKAGE - 17MY": 2,
   "PARK'G ASSIST SYSTEM / PARK'G ASSIST SYSTEM": 3,
   "PARK'G ASSIST SYSTEM / VEHICLE PACKAGE - R-SPEC(HEAD LAMP)": 6,
-  "PARKG BRK CONTROL-EPB": 198,
+  "PARKG BRK CONTROL - HAND TYPE / RR SUSP TYPE - MULTI LINK & TRAIL'G ARM": 2,
+  "PARKG BRK CONTROL-EPB": 218,
   "PARKG BRK CONTROL-EPB / CLUSTER TYPE - CONVENTIONAL": 6,
   "PARKG BRK CONTROL-EPB / FR BRAKE - DISC-16 INCH": 4,
-  "PARKG BRK CONTROL-EPB / FR BRAKE - DISC-17 INCH": 8,
+  "PARKG BRK CONTROL-EPB / FR BRAKE - DISC-17 INCH": 10,
   "PARKG BRK CONTROL-EPB / MODEL YEAR PACKAGE - 16MY": 10,
   "PARKG BRK CONTROL-EPB / MODEL YEAR PACKAGE - 17MY": 10,
   "PARKG BRK CONTROL-EPB / PARKG BRK CONTROL-EPB": 2,
@@ -52779,10 +52881,11 @@
   "PASS'S SIDE - ELECTRIC-CONV": 26,
   "PASS'S SIDE - ELECTRIC-CONV / GRADE - GLS": 1,
   "PASS'S SIDE - LEVER-CONV": 8,
-  "PHEV PACK": 15,
+  "PHEV PACK": 19,
   "PHEV PACK / B TYPE - CR COAT'G": 1,
   "PHEV PACK / PARKG BRK CONTROL-EPB": 1,
   "PHEV PACK / PHEV PACK": 1,
+  "PHEV(Plug-In Hybrid Electric Vehicle)": 6,
   "POLICE OPERATION CAR": 10,
   "POLICE OPERATION CAR / GARNISH-SIDE - TWO TONE COLOR": 2,
   "POSITION LAMP TYPE - SEPARATED": 22,
@@ -52800,6 +52903,10 @@
   "POWER SEAT(IMS) / CENTER TRIM - CLOTH(A TYPE)": 1,
   "POWER WINDOW(FR)": 17,
   "POWER WINDOW(FR+RR)": 81,
+  "POWER-ONE TOUCH SAFETY": 18,
+  "POWER-ONE TOUCH SAFETY / RR SUSP TYPE - MULTI LINK & TRAIL'G ARM": 6,
+  "POWER-ONE TOUCH SAFETY / RR SUSP TYPE - TORSION AXLE": 6,
+  "POWER-ONE TOUCH SAFETY / VEHICLE PACKAGE - SPORTS": 6,
   "PRESS (FR DR)": 5,
   "PRODUCT PLANT - ALABAMA PLANT 1": 8,
   "PRODUCT PLANT - ALABAMA PLANT 1 / MODEL YEAR PACKAGE - 18MY": 6,
@@ -52809,7 +52916,7 @@
   "PROJECTION-LOW BEAM-A TYPE": 2,
   "PTC HEATER_INT TYPE (GASOLINE)": 1,
   "PVC": 2,
-  "Package Quantity: 1": 843,
+  "Package Quantity: 1": 899,
   "Part Name Code: 25310": 2,
   "Part Name Code: 27301": 5,
   "Part Name Code: 27310": 1,
@@ -52896,9 +53003,9 @@
   "Production Date: 01/1995-06/1998": 1,
   "Production Date: 01/2000-08/2000": 1,
   "Production Date: 01/2002-01/2004": 1,
-  "Production Date: 01/2003-02/2006": 5,
-  "Production Date: 01/2003-03/2003": 2,
-  "Production Date: 01/2003-06/2003": 2,
+  "Production Date: 01/2003-02/2006": 7,
+  "Production Date: 01/2003-03/2003": 4,
+  "Production Date: 01/2003-06/2003": 3,
   "Production Date: 01/2003-11/2003": 4,
   "Production Date: 01/2003-11/2005": 2,
   "Production Date: 01/2004-11/2005": 1,
@@ -52929,9 +53036,10 @@
   "Production Date: 01/2010-01/2013": 3,
   "Production Date: 01/2010-03/2010": 2,
   "Production Date: 01/2010-08/2013": 1,
+  "Production Date: 01/2011": 2,
   "Production Date: 01/2011-01/2013": 1,
   "Production Date: 01/2011-01/2014": 8,
-  "Production Date: 01/2011-05/2011": 2,
+  "Production Date: 01/2011-05/2011": 4,
   "Production Date: 01/2011-08/2012": 5,
   "Production Date: 01/2011-09/2011": 2,
   "Production Date: 01/2012-02/2015": 2,
@@ -52944,7 +53052,9 @@
   "Production Date: 01/2013-09/2013": 1,
   "Production Date: 01/2013-12/2015": 5,
   "Production Date: 01/2014-01/2016": 6,
-  "Production Date: 01/2014-12/2015": 3,
+  "Production Date: 01/2014-05/2015": 2,
+  "Production Date: 01/2014-11/2015": 2,
+  "Production Date: 01/2014-12/2015": 7,
   "Production Date: 01/2015-05/2016": 1,
   "Production Date: 01/2015-08/2015": 2,
   "Production Date: 01/2015-08/2016": 2,
@@ -52955,8 +53065,10 @@
   "Production Date: 01/2017-06/2019": 2,
   "Production Date: 01/2017-07/2018": 2,
   "Production Date: 01/2017-09/2018": 10,
+  "Production Date: 01/2018-01/2019": 1,
   "Production Date: 01/2018-07/2020": 3,
   "Production Date: 01/2018-12/2020": 2,
+  "Production Date: 01/2019-06/2020": 3,
   "Production Date: 02/2000-03/2006": 1,
   "Production Date: 02/2001-05/2001": 2,
   "Production Date: 02/2002-07/2002": 3,
@@ -53001,10 +53113,11 @@
   "Production Date: 02/2011-01/2013": 3,
   "Production Date: 02/2011-01/2014": 2,
   "Production Date: 02/2011-05/2011": 2,
-  "Production Date: 02/2011-05/2012": 2,
+  "Production Date: 02/2011-05/2012": 4,
   "Production Date: 02/2011-05/2014": 1,
   "Production Date: 02/2011-08/2013": 2,
   "Production Date: 02/2011-10/2013": 2,
+  "Production Date: 02/2011-12/2011": 1,
   "Production Date: 02/2012-01/2015": 1,
   "Production Date: 02/2012-08/2012": 2,
   "Production Date: 02/2012-09/2012": 2,
@@ -53023,7 +53136,7 @@
   "Production Date: 02/2014-02/2015": 1,
   "Production Date: 02/2014-03/2017": 4,
   "Production Date: 02/2014-12/2014": 3,
-  "Production Date: 02/2014-12/2015": 2,
+  "Production Date: 02/2014-12/2015": 4,
   "Production Date: 02/2015-01/2017": 1,
   "Production Date: 02/2015-07/2015": 1,
   "Production Date: 02/2015-10/2015": 4,
@@ -53069,6 +53182,7 @@
   "Production Date: 03/2009-11/2010": 2,
   "Production Date: 03/2010-03/2013": 3,
   "Production Date: 03/2010-04/2014": 1,
+  "Production Date: 03/2010-08/2013": 1,
   "Production Date: 03/2010-09/2010": 1,
   "Production Date: 03/2010-12/2010": 7,
   "Production Date: 03/2011": 5,
@@ -53106,6 +53220,7 @@
   "Production Date: 03/2013-12/2013": 1,
   "Production Date: 03/2013-12/2014": 5,
   "Production Date: 03/2013-12/2015": 3,
+  "Production Date: 03/2014-01/2016": 6,
   "Production Date: 03/2014-02/2015": 4,
   "Production Date: 03/2014-07/2015": 1,
   "Production Date: 03/2014-08/2016": 2,
@@ -53113,6 +53228,7 @@
   "Production Date: 03/2015-02/2018": 13,
   "Production Date: 03/2015-05/2016": 1,
   "Production Date: 03/2015-05/2017": 2,
+  "Production Date: 03/2015-08/2015": 2,
   "Production Date: 03/2015-08/2016": 2,
   "Production Date: 03/2015-12/2015": 2,
   "Production Date: 03/2015-12/2017": 2,
@@ -53122,11 +53238,12 @@
   "Production Date: 03/2016-05/2016": 2,
   "Production Date: 03/2016-06/2016": 1,
   "Production Date: 03/2016-09/2018": 21,
-  "Production Date: 03/2016-12/2017": 3,
+  "Production Date: 03/2016-12/2017": 4,
   "Production Date: 03/2017-02/2018": 2,
   "Production Date: 03/2017-07/2018": 3,
   "Production Date: 03/2017-08/2018": 3,
   "Production Date: 03/2017-11/2017": 2,
+  "Production Date: 03/2018-01/2019": 2,
   "Production Date: 03/2018-06/2019": 1,
   "Production Date: 03/2018-08/2018": 1,
   "Production Date: 03/2018-09/2019": 8,
@@ -53194,6 +53311,7 @@
   "Production Date: 04/2010-07/2010": 9,
   "Production Date: 04/2010-07/2013": 2,
   "Production Date: 04/2010-08/2010": 2,
+  "Production Date: 04/2010-08/2013": 1,
   "Production Date: 04/2010-10/2013": 17,
   "Production Date: 04/2010-11/2010": 4,
   "Production Date: 04/2010-12/2010": 6,
@@ -53206,12 +53324,12 @@
   "Production Date: 04/2012-02/2014": 3,
   "Production Date: 04/2012-05/2012": 2,
   "Production Date: 04/2012-06/2012": 8,
-  "Production Date: 04/2012-09/2012": 3,
+  "Production Date: 04/2012-09/2012": 5,
   "Production Date: 04/2012-09/2013": 2,
   "Production Date: 04/2012-10/2013": 10,
   "Production Date: 04/2012-11/2012": 1,
   "Production Date: 04/2012-11/2013": 4,
-  "Production Date: 04/2012-12/2014": 9,
+  "Production Date: 04/2012-12/2014": 12,
   "Production Date: 04/2013-01/2016": 1,
   "Production Date: 04/2013-05/2013": 2,
   "Production Date: 04/2013-05/2014": 12,
@@ -53236,6 +53354,7 @@
   "Production Date: 04/2015-05/2016": 4,
   "Production Date: 04/2015-06/2015": 2,
   "Production Date: 04/2015-06/2017": 2,
+  "Production Date: 04/2015-07/2018": 1,
   "Production Date: 04/2015-08/2016": 1,
   "Production Date: 04/2015-09/2015": 4,
   "Production Date: 04/2015-09/2018": 36,
@@ -53248,8 +53367,9 @@
   "Production Date: 04/2016-06/2016": 2,
   "Production Date: 04/2016-07/2018": 2,
   "Production Date: 04/2016-09/2018": 1,
+  "Production Date: 04/2016-12/2017": 3,
   "Production Date: 04/2017-04/2019": 1,
-  "Production Date: 04/2017-06/2020": 34,
+  "Production Date: 04/2017-06/2020": 37,
   "Production Date: 04/2017-08/2017": 4,
   "Production Date: 04/2017-09/2017": 2,
   "Production Date: 04/2017-09/2019": 51,
@@ -53305,15 +53425,18 @@
   "Production Date: 05/2010-05/2012": 1,
   "Production Date: 05/2010-06/2012": 4,
   "Production Date: 05/2010-08/2010": 3,
+  "Production Date: 05/2010-08/2013": 2,
   "Production Date: 05/2010-09/2013": 2,
   "Production Date: 05/2010-10/2013": 2,
   "Production Date: 05/2010-11/2010": 2,
   "Production Date: 05/2011": 2,
   "Production Date: 05/2011-02/2013": 1,
   "Production Date: 05/2011-03/2012": 1,
+  "Production Date: 05/2011-04/2012": 2,
   "Production Date: 05/2011-05/2012": 6,
   "Production Date: 05/2011-06/2011": 12,
   "Production Date: 05/2011-07/2011": 4,
+  "Production Date: 05/2011-07/2013": 2,
   "Production Date: 05/2011-08/2013": 7,
   "Production Date: 05/2011-08/2014": 1,
   "Production Date: 05/2011-09/2014": 3,
@@ -53328,7 +53451,7 @@
   "Production Date: 05/2012-08/2013": 1,
   "Production Date: 05/2012-09/2013": 2,
   "Production Date: 05/2012-10/2013": 15,
-  "Production Date: 05/2012-12/2014": 2,
+  "Production Date: 05/2012-12/2014": 5,
   "Production Date: 05/2013-04/2014": 1,
   "Production Date: 05/2013-05/2014": 8,
   "Production Date: 05/2013-09/2014": 7,
@@ -53359,6 +53482,7 @@
   "Production Date: 06/2001-09/2005": 2,
   "Production Date: 06/2001-10/2001": 2,
   "Production Date: 06/2001-11/2003": 1,
+  "Production Date: 06/2001-11/2005": 1,
   "Production Date: 06/2002-06/2004": 5,
   "Production Date: 06/2002-06/2005": 2,
   "Production Date: 06/2002-06/2006": 20,
@@ -53366,15 +53490,16 @@
   "Production Date: 06/2002-10/2002": 3,
   "Production Date: 06/2002-11/2002": 3,
   "Production Date: 06/2002-11/2003": 1,
-  "Production Date: 06/2003-02/2006": 1,
+  "Production Date: 06/2003-02/2006": 2,
   "Production Date: 06/2003-03/2004": 3,
   "Production Date: 06/2003-09/2005": 2,
   "Production Date: 06/2003-11/2005": 2,
   "Production Date: 06/2004-02/2005": 1,
-  "Production Date: 06/2004-02/2006": 2,
+  "Production Date: 06/2004-02/2006": 3,
   "Production Date: 06/2004-06/2005": 2,
   "Production Date: 06/2004-06/2006": 6,
   "Production Date: 06/2004-10/2004": 1,
+  "Production Date: 06/2004-11/2005": 1,
   "Production Date: 06/2004-11/2006": 3,
   "Production Date: 06/2005-03/2006": 3,
   "Production Date: 06/2005-06/2006": 4,
@@ -53446,13 +53571,14 @@
   "Production Date: 06/2011-10/2014": 1,
   "Production Date: 06/2011-11/2011": 12,
   "Production Date: 06/2011-12/2013": 4,
-  "Production Date: 06/2012-01/2016": 30,
+  "Production Date: 06/2012-01/2016": 38,
   "Production Date: 06/2012-07/2012": 2,
   "Production Date: 06/2012-09/2013": 2,
   "Production Date: 06/2012-10/2013": 9,
   "Production Date: 06/2012-11/2012": 4,
+  "Production Date: 06/2012-11/2013": 2,
   "Production Date: 06/2012-12/2012": 1,
-  "Production Date: 06/2012-12/2015": 2,
+  "Production Date: 06/2012-12/2015": 4,
   "Production Date: 06/2013-01/2015": 2,
   "Production Date: 06/2013-02/2015": 1,
   "Production Date: 06/2013-03/2014": 1,
@@ -53484,8 +53610,8 @@
   "Production Date: 07/2000-04/2001": 3,
   "Production Date: 07/2000-05/2001": 2,
   "Production Date: 07/2000-05/2002": 12,
-  "Production Date: 07/2000-06/2001": 4,
-  "Production Date: 07/2000-06/2004": 1,
+  "Production Date: 07/2000-06/2001": 5,
+  "Production Date: 07/2000-06/2004": 3,
   "Production Date: 07/2000-07/2002": 8,
   "Production Date: 07/2000-07/2003": 19,
   "Production Date: 07/2000-07/2004": 2,
@@ -53605,17 +53731,20 @@
   "Production Date: 07/2012-01/2015": 1,
   "Production Date: 07/2012-05/2014": 3,
   "Production Date: 07/2012-10/2013": 1,
+  "Production Date: 07/2013-01/2015": 2,
   "Production Date: 07/2013-01/2016": 2,
   "Production Date: 07/2013-05/2014": 2,
   "Production Date: 07/2013-09/2014": 6,
   "Production Date: 07/2013-12/2015": 1,
   "Production Date: 07/2014": 1,
-  "Production Date: 07/2014-01/2016": 13,
+  "Production Date: 07/2014-01/2016": 15,
   "Production Date: 07/2014-02/2015": 2,
+  "Production Date: 07/2014-12/2015": 4,
   "Production Date: 07/2015-02/2018": 1,
   "Production Date: 07/2015-03/2018": 2,
+  "Production Date: 07/2015-10/2016": 2,
   "Production Date: 07/2015-12/2015": 2,
-  "Production Date: 07/2015-12/2017": 2,
+  "Production Date: 07/2015-12/2017": 3,
   "Production Date: 07/2016-06/2019": 20,
   "Production Date: 07/2016-09/2016": 8,
   "Production Date: 07/2016-09/2018": 3,
@@ -53624,6 +53753,7 @@
   "Production Date: 07/2017-10/2020": 8,
   "Production Date: 07/2017-12/2018": 1,
   "Production Date: 07/2017-12/2020": 29,
+  "Production Date: 07/2018-09/2018": 1,
   "Production Date: 07/2018-09/2019": 5,
   "Production Date: 08/1994-03/1996": 1,
   "Production Date: 08/1994-05/1997": 1,
@@ -53710,6 +53840,7 @@
   "Production Date: 08/2012-10/2015": 8,
   "Production Date: 08/2012-12/2013": 4,
   "Production Date: 08/2012-12/2014": 1,
+  "Production Date: 08/2013-01/2014": 2,
   "Production Date: 08/2013-01/2016": 1,
   "Production Date: 08/2013-02/2015": 6,
   "Production Date: 08/2013-03/2014": 3,
@@ -53730,6 +53861,7 @@
   "Production Date: 08/2014-02/2018": 62,
   "Production Date: 08/2014-03/2015": 8,
   "Production Date: 08/2014-09/2015": 2,
+  "Production Date: 08/2015-04/2016": 2,
   "Production Date: 08/2015-08/2016": 1,
   "Production Date: 08/2016-06/2019": 1,
   "Production Date: 08/2017-06/2020": 3,
@@ -53824,22 +53956,24 @@
   "Production Date: 09/2007-05/2008": 5,
   "Production Date: 09/2007-12/2008": 5,
   "Production Date: 09/2008": 1,
-  "Production Date: 09/2008-02/2011": 1,
+  "Production Date: 09/2008-02/2011": 4,
   "Production Date: 09/2008-03/2010": 1,
   "Production Date: 09/2008-05/2010": 1,
-  "Production Date: 09/2008-05/2012": 21,
+  "Production Date: 09/2008-05/2012": 23,
   "Production Date: 09/2008-07/2009": 2,
   "Production Date: 09/2008-07/2010": 1,
   "Production Date: 09/2008-10/2008": 2,
   "Production Date: 09/2008-11/2010": 2,
   "Production Date: 09/2008-12/2008": 7,
   "Production Date: 09/2008-12/2010": 5,
+  "Production Date: 09/2008-12/2011": 2,
   "Production Date: 09/2009-02/2011": 2,
   "Production Date: 09/2009-03/2011": 4,
   "Production Date: 09/2009-06/2010": 3,
   "Production Date: 09/2009-08/2010": 1,
   "Production Date: 09/2009-10/2009": 3,
   "Production Date: 09/2009-12/2010": 7,
+  "Production Date: 09/2010-01/2012": 4,
   "Production Date: 09/2010-01/2013": 3,
   "Production Date: 09/2010-01/2014": 9,
   "Production Date: 09/2010-02/2011": 1,
@@ -53855,6 +53989,7 @@
   "Production Date: 09/2011-10/2012": 1,
   "Production Date: 09/2011-11/2013": 1,
   "Production Date: 09/2012-01/2013": 5,
+  "Production Date: 09/2012-01/2015": 5,
   "Production Date: 09/2012-05/2013": 1,
   "Production Date: 09/2012-10/2013": 1,
   "Production Date: 09/2012-12/2012": 1,
@@ -53868,7 +54003,10 @@
   "Production Date: 09/2013-11/2015": 29,
   "Production Date: 09/2014": 6,
   "Production Date: 09/2014-02/2015": 2,
+  "Production Date: 09/2014-03/2016": 1,
   "Production Date: 09/2014-05/2016": 2,
+  "Production Date: 09/2014-11/2015": 1,
+  "Production Date: 09/2014-12/2015": 1,
   "Production Date: 09/2014-12/2017": 8,
   "Production Date: 09/2015-02/2016": 1,
   "Production Date: 09/2015-02/2018": 1,
@@ -53991,12 +54129,13 @@
   "Production Date: 10/2009-02/2011": 1,
   "Production Date: 10/2009-03/2010": 1,
   "Production Date: 10/2009-03/2013": 1,
-  "Production Date: 10/2009-04/2010": 13,
+  "Production Date: 10/2009-04/2010": 14,
+  "Production Date: 10/2009-05/2010": 4,
   "Production Date: 10/2009-05/2011": 6,
   "Production Date: 10/2009-06/2010": 3,
   "Production Date: 10/2009-06/2011": 4,
   "Production Date: 10/2009-08/2011": 4,
-  "Production Date: 10/2009-08/2013": 18,
+  "Production Date: 10/2009-08/2013": 20,
   "Production Date: 10/2009-09/2012": 3,
   "Production Date: 10/2009-10/2011": 1,
   "Production Date: 10/2009-10/2012": 2,
@@ -54054,6 +54193,7 @@
   "Production Date: 10/2015-06/2017": 1,
   "Production Date: 10/2015-07/2016": 10,
   "Production Date: 10/2016-06/2017": 4,
+  "Production Date: 10/2016-12/2017": 2,
   "Production Date: 10/2017-06/2020": 11,
   "Production Date: 10/2018-06/2020": 2,
   "Production Date: 11/1993-01/1995": 1,
@@ -54119,14 +54259,16 @@
   "Production Date: 11/2009-02/2011": 4,
   "Production Date: 11/2009-06/2010": 3,
   "Production Date: 11/2009-07/2010": 3,
+  "Production Date: 11/2010-01/2011": 3,
   "Production Date: 11/2010-01/2013": 7,
   "Production Date: 11/2010-01/2015": 8,
   "Production Date: 11/2010-02/2012": 3,
-  "Production Date: 11/2010-05/2011": 3,
+  "Production Date: 11/2010-05/2011": 5,
   "Production Date: 11/2010-05/2012": 1,
   "Production Date: 11/2010-06/2011": 4,
   "Production Date: 11/2010-06/2013": 2,
   "Production Date: 11/2010-08/2013": 1,
+  "Production Date: 11/2010-09/2012": 1,
   "Production Date: 11/2011-02/2015": 2,
   "Production Date: 11/2011-05/2014": 14,
   "Production Date: 11/2011-09/2013": 6,
@@ -54144,7 +54286,7 @@
   "Production Date: 11/2013-10/2014": 2,
   "Production Date: 11/2013-12/2013": 2,
   "Production Date: 11/2013-12/2014": 11,
-  "Production Date: 11/2013-12/2015": 29,
+  "Production Date: 11/2013-12/2015": 31,
   "Production Date: 11/2014-01/2017": 3,
   "Production Date: 11/2014-02/2017": 2,
   "Production Date: 11/2014-03/2018": 59,
@@ -54208,7 +54350,7 @@
   "Production Date: 12/2007-10/2009": 3,
   "Production Date: 12/2007-11/2009": 1,
   "Production Date: 12/2007-11/2010": 2,
-  "Production Date: 12/2008-01/2012": 16,
+  "Production Date: 12/2008-01/2012": 18,
   "Production Date: 12/2008-04/2009": 2,
   "Production Date: 12/2008-04/2010": 8,
   "Production Date: 12/2008-04/2012": 1,
@@ -54216,6 +54358,7 @@
   "Production Date: 12/2008-06/2010": 4,
   "Production Date: 12/2008-07/2009": 6,
   "Production Date: 12/2008-07/2011": 1,
+  "Production Date: 12/2008-09/2010": 4,
   "Production Date: 12/2008-12/2011": 2,
   "Production Date: 12/2009-02/2010": 3,
   "Production Date: 12/2009-02/2011": 1,
@@ -54251,14 +54394,16 @@
   "Production Date: 12/2011-11/2013": 2,
   "Production Date: 12/2012": 3,
   "Production Date: 12/2012-01/2013": 1,
+  "Production Date: 12/2012-02/2014": 2,
   "Production Date: 12/2012-03/2013": 2,
   "Production Date: 12/2012-03/2015": 1,
   "Production Date: 12/2012-05/2013": 1,
   "Production Date: 12/2012-05/2014": 6,
   "Production Date: 12/2012-07/2013": 1,
   "Production Date: 12/2012-08/2013": 2,
+  "Production Date: 12/2012-11/2015": 3,
   "Production Date: 12/2012-12/2014": 5,
-  "Production Date: 12/2012-12/2015": 39,
+  "Production Date: 12/2012-12/2015": 44,
   "Production Date: 12/2013-01/2014": 1,
   "Production Date: 12/2013-01/2015": 1,
   "Production Date: 12/2013-02/2015": 4,
@@ -54315,7 +54460,7 @@
   "REGULATION & UNIQUE SPEC - CHINA SPEC / EHPS": 10,
   "REGULATION & UNIQUE SPEC - CHINA SPEC / S/ABSORBER TYPE - AIR": 4,
   "REGULATION & UNIQUE SPEC - CHINA SPEC / VEHICLE PACKAGE - SPECIAL EDITION": 2,
-  "ROOF-SUN": 6,
+  "ROOF-SUN": 8,
   "ROOF-SUN / ABS": 4,
   "ROOF-SUN / BRAKE-FR(DISC B TYPE)": 4,
   "ROOF-SUN / ROOF-SUN": 4,
@@ -54354,12 +54499,12 @@
   "RR SPOILER W/ HMSL - A TYPE": 6,
   "RR SPOILER W/ HMSL - A TYPE / ULSAN PLANT 1 - WELDING LINE 1": 3,
   "RR SPOILER W/ HMSL - A TYPE / ULSAN PLANT 1 - WELDING LINE 2": 3,
-  "RR SUSP TYPE - MULTI LINK & TRAIL'G ARM": 9,
+  "RR SUSP TYPE - MULTI LINK & TRAIL'G ARM": 23,
   "RR SUSP TYPE - TORSION AXLE": 8,
   "RR SUSP TYPE - TORSION AXLE / MODEL YEAR PACKAGE - 18MY": 1,
   "RR WIPER - INTERMITTENT(NON VARIABLE) / RR WIPER - INTERMITTENT(NON VARIABLE)": 1,
   "Require Quantity: 11": 1,
-  "Require Quantity: 2": 209,
+  "Require Quantity: 2": 265,
   "Require Quantity: 3": 22,
   "Require Quantity: 4": 566,
   "Require Quantity: 5": 29,
@@ -54367,7 +54512,12 @@
   "Require Quantity: 8": 2,
   "S/ABSORBER TYPE - AIR": 60,
   "S/ABSORBER TYPE - CONVENTIONAL VALVE": 6,
-  "S/ABSORBER TYPE - H.P.D": 25,
+  "S/ABSORBER TYPE - H.P.D": 55,
+  "S/ABSORBER TYPE - H.P.D / 225 TIRE - 225/60 R17": 5,
+  "S/ABSORBER TYPE - H.P.D / 245 TIRE - 245/45 R19": 2,
+  "S/ABSORBER TYPE - H.P.D / MODEL YEAR PACKAGE - 16MY": 2,
+  "S/ABSORBER TYPE - H.P.D / S/ABSORBER TYPE - H.P.D": 1,
+  "S/ABSORBER TYPE - H.P.D / VEHICLE PACKAGE - SPORTS": 9,
   "S/ABSORBER TYPE - MONOTUBE": 4,
   "S/MARKER & REFLEX REFLECTOR": 28,
   "S/MARKER & REFLEX REFLECTOR / BODY COLOR": 1,
@@ -54439,6 +54589,10 @@
   "SMART KEY-FR DR / RR SPOILER W/ HMSL - A TYPE": 7,
   "SMART KEY-FR DR / SMART KEY-FR DR": 15,
   "SMART KEY-TRUNK LID(T/GATE)": 7,
+  "SMART PARKING ASSIST SYSTEM - A TYPE(10 CHANNEL)": 8,
+  "SMART PARKING ASSIST SYSTEM - A TYPE(10 CHANNEL) / MODEL YEAR PACKAGE - 15MY": 4,
+  "SMART PARKING ASSIST SYSTEM - A TYPE(10 CHANNEL) / MODEL YEAR PACKAGE - 16MY": 4,
+  "SMART PARKING ASSIST SYSTEM - A TYPE(10 CHANNEL) / PARKG BRK CONTROL-EPB": 4,
   "SMART PARKING ASSIST SYSTEM - B TYPE(12 CHANNEL)": 12,
   "SMART PARKING ASSIST SYSTEM - B TYPE(12 CHANNEL) / AL WHEEL 8.5J*19 : 9.0J*19 - A TYPE": 6,
   "SOFT PAINT": 1,
@@ -54548,9 +54702,10 @@
   "TIRE PRESSURE MONITORG SYS - HIGH LINE / MODEL YEAR PACKAGE - 16MY": 9,
   "TIRE PRESSURE MONITORG SYS - HIGH LINE / PARKG BRK CONTROL-EPB": 1,
   "TIRE PRESSURE MONITORG SYS - HIGH LINE / STEEL WHEEL - 5.5J * 14": 1,
-  "TIRE PRESSURE MONITORG SYS - LOW LINE": 244,
+  "TIRE PRESSURE MONITORG SYS - LOW LINE": 246,
   "TIRE PRESSURE MONITORG SYS - LOW LINE / 225 TIRE - 225/40 R19 : 245/40 R19": 4,
   "TIRE PRESSURE MONITORG SYS - LOW LINE / 225 TIRE - 225/45 R18 : 245/45 R18 (ALL SEASON)": 4,
+  "TIRE PRESSURE MONITORG SYS - LOW LINE / ABS (ANTI LOCK BRK SYS)": 2,
   "TIRE PRESSURE MONITORG SYS - LOW LINE / AL WHEEL 5.5J * 14 - A TYPE": 1,
   "TIRE PRESSURE MONITORG SYS - LOW LINE / AL WHEEL 5.5J * 15 - A TYPE": 1,
   "TIRE PRESSURE MONITORG SYS - LOW LINE / AL WHEEL 6.0J * 16 - A TYPE": 2,
@@ -54580,7 +54735,7 @@
   "TRIP COMPUTER / MPH(KMH)": 3,
   "TRIP COMPUTER / TRIP COMPUTER": 3,
   "TRIP ODOMETER - TFT LCD": 8,
-  "TUN'G MODE - SPORTY SUSPENSION": 148,
+  "TUN'G MODE - SPORTY SUSPENSION": 155,
   "TUN'G MODE - SPORTY SUSPENSION / 215 TIRE - 215/55 R17": 12,
   "TUN'G MODE - SPORTY SUSPENSION / 225 TIRE - 225/45 R18": 24,
   "TUN'G MODE - SPORTY SUSPENSION / FR SUSP TYPE - MACPH. W/COIL SPRING + H": 21,
@@ -54632,7 +54787,8 @@
   "VEHICLE PACKAGE - SPECIAL EDITION / TUN'G MODE - SPORTY SUSPENSION": 2,
   "VEHICLE PACKAGE - SPECIAL EDITION / VEHICLE PACKAGE - SPECIAL EDITION": 2,
   "VEHICLE PACKAGE - SPECIAL VEHICLE TRANSFORM": 8,
-  "VEHICLE PACKAGE - SPORTS": 300,
+  "VEHICLE PACKAGE - SPORTS": 321,
+  "VEHICLE PACKAGE - SPORTS / 245 TIRE - 245/45 R19": 6,
   "VEHICLE PACKAGE - SPORTS / A TYPE - BLACK+CR COAT'G": 4,
   "VEHICLE PACKAGE - SPORTS / A TYPE - BODY COLOR": 2,
   "VEHICLE PACKAGE - SPORTS / A TYPE - CR COAT'G": 4,
@@ -54655,8 +54811,12 @@
   "VEHICLE PACKAGE - SPORTS / MUFFLER MAIN ASSY - SINGLE-CR COAT'G": 1,
   "VEHICLE PACKAGE - SPORTS / PARKG BRK CONTROL-EPB": 1,
   "VEHICLE PACKAGE - SPORTS / RR R/R TYPE - SEPARATED": 2,
+  "VEHICLE PACKAGE - SPORTS / RR SUSP TYPE - MULTI LINK & TRAIL'G ARM": 2,
+  "VEHICLE PACKAGE - SPORTS / RR SUSP TYPE - TORSION AXLE": 2,
+  "VEHICLE PACKAGE - SPORTS / S/ABSORBER TYPE - H.P.D": 6,
+  "VEHICLE PACKAGE - SPORTS / S/ABSORBER TYPE - H.P.D / S/ABSORBER TYPE - H.P.D": 4,
   "VEHICLE PACKAGE - SPORTS / SMART KEY-FR DR": 3,
-  "VEHICLE PACKAGE - SPORTS / VEHICLE PACKAGE - SPORTS": 17,
+  "VEHICLE PACKAGE - SPORTS / VEHICLE PACKAGE - SPORTS": 26,
   "VEHICLE PACKAGE - SPORTY": 89,
   "VEHICLE PACKAGE - ULTIMATE": 110,
   "VEHICLE PACKAGE - ULTIMATE / MODEL YEAR PACKAGE - 16MY": 1,

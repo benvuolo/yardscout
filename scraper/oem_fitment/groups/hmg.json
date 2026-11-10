@@ -1,5 +1,5 @@
 {
- "as_of": "2026-11-09T22:52:54Z",
+ "as_of": "2026-11-09T23:14:56Z",
  "cells": [
   [
    "Hyundai",
@@ -8168,7 +8168,7 @@
    "Elantra",
    2010,
    "knuckle",
-   "open:uncrawled_chain_member"
+   "open:unattested"
   ],
   [
    "Hyundai",
@@ -10212,7 +10212,7 @@
    "Elantra GT",
    2013,
    "knuckle",
-   "open:no_list_manifest"
+   "open:unattested"
   ],
   [
    "Hyundai",
@@ -10241,6 +10241,13 @@
    2013,
    "starter",
    "open:no_list_manifest"
+  ],
+  [
+   "Hyundai",
+   "Elantra GT",
+   2013,
+   "strut",
+   "open:unattested"
   ],
   [
    "Hyundai",
@@ -10280,6 +10287,13 @@
   [
    "Hyundai",
    "Elantra GT",
+   2013,
+   "wiper-motor",
+   "open:unattested"
+  ],
+  [
+   "Hyundai",
+   "Elantra GT",
    2014,
    "ac-compressor",
    "open:no_year_manifest"
@@ -10414,6 +10428,13 @@
    "Hyundai",
    "Elantra GT",
    2014,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Elantra GT",
+   2014,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -10436,6 +10457,13 @@
    "Elantra GT",
    2014,
    "window-regulator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Elantra GT",
+   2014,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -10554,6 +10582,13 @@
    "Hyundai",
    "Elantra GT",
    2015,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Elantra GT",
+   2015,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -10576,6 +10611,13 @@
    "Elantra GT",
    2015,
    "window-regulator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Elantra GT",
+   2015,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -10694,6 +10736,13 @@
    "Hyundai",
    "Elantra GT",
    2016,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Elantra GT",
+   2016,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -10716,6 +10765,13 @@
    "Elantra GT",
    2016,
    "window-regulator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Elantra GT",
+   2016,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -10834,6 +10890,13 @@
    "Hyundai",
    "Elantra GT",
    2017,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Elantra GT",
+   2017,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -10856,6 +10919,13 @@
    "Elantra GT",
    2017,
    "window-regulator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Elantra GT",
+   2017,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -10989,6 +11059,13 @@
    "Elantra GT",
    2018,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Elantra GT",
+   2018,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -11129,7 +11206,7 @@
    "Elantra GT",
    2019,
    "knuckle",
-   "open:no_list_manifest"
+   "open:unverified_product"
   ],
   [
    "Hyundai",
@@ -11158,6 +11235,13 @@
    2019,
    "starter",
    "open:no_list_manifest"
+  ],
+  [
+   "Hyundai",
+   "Elantra GT",
+   2019,
+   "strut",
+   "open:unattested"
   ],
   [
    "Hyundai",
@@ -11199,7 +11283,7 @@
    "Elantra GT",
    2019,
    "wiper-motor",
-   "open:no_list_manifest"
+   "open:unverified_product"
   ],
   [
    "Hyundai",
@@ -11332,6 +11416,13 @@
    "Elantra GT",
    2020,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Elantra GT",
+   2020,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -11506,6 +11597,13 @@
    "Hyundai",
    "Elantra Touring",
    2008,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Elantra Touring",
+   2008,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -11535,6 +11633,13 @@
    "Elantra Touring",
    2008,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Elantra Touring",
+   2008,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -11674,6 +11779,13 @@
    "Hyundai",
    "Elantra Touring",
    2009,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Elantra Touring",
+   2009,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -11703,6 +11815,13 @@
    "Elantra Touring",
    2009,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Elantra Touring",
+   2009,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -11842,6 +11961,13 @@
    "Hyundai",
    "Elantra Touring",
    2010,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Elantra Touring",
+   2010,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -11871,6 +11997,13 @@
    "Elantra Touring",
    2010,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Elantra Touring",
+   2010,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -12010,6 +12143,13 @@
    "Hyundai",
    "Elantra Touring",
    2011,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Elantra Touring",
+   2011,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -12039,6 +12179,13 @@
    "Elantra Touring",
    2011,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Elantra Touring",
+   2011,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -12144,7 +12291,7 @@
    "Elantra Touring",
    2012,
    "knuckle",
-   "open:no_list_manifest"
+   "open:unattested"
   ],
   [
    "Hyundai",
@@ -12173,6 +12320,13 @@
    2012,
    "starter",
    "open:unverified_product"
+  ],
+  [
+   "Hyundai",
+   "Elantra Touring",
+   2012,
+   "strut",
+   "open:uncrawled_chain_member"
   ],
   [
    "Hyundai",
@@ -12208,6 +12362,13 @@
    2012,
    "window-switch",
    "open:unread_sibling_page"
+  ],
+  [
+   "Hyundai",
+   "Elantra Touring",
+   2012,
+   "wiper-motor",
+   "open:unattested"
   ],
   [
    "Hyundai",
@@ -14166,6 +14327,13 @@
    "Hyundai",
    "Genesis Coupe",
    2008,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Genesis Coupe",
+   2008,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -14195,6 +14363,13 @@
    "Genesis Coupe",
    2008,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Genesis Coupe",
+   2008,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -14320,6 +14495,13 @@
    "Hyundai",
    "Genesis Coupe",
    2009,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Genesis Coupe",
+   2009,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -14349,6 +14531,13 @@
    "Genesis Coupe",
    2009,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Genesis Coupe",
+   2009,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -14446,6 +14635,13 @@
    "Hyundai",
    "Genesis Coupe",
    2010,
+   "knuckle",
+   "open:unattested"
+  ],
+  [
+   "Hyundai",
+   "Genesis Coupe",
+   2010,
    "power-steering-pump",
    "open:no_list_manifest"
   ],
@@ -14474,6 +14670,13 @@
    "Hyundai",
    "Genesis Coupe",
    2010,
+   "strut",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Hyundai",
+   "Genesis Coupe",
+   2010,
    "tail-lights",
    "open:no_list_manifest"
   ],
@@ -14504,6 +14707,13 @@
    2010,
    "window-switch",
    "open:no_list_manifest"
+  ],
+  [
+   "Hyundai",
+   "Genesis Coupe",
+   2010,
+   "wiper-motor",
+   "open:unattested"
   ],
   [
    "Hyundai",
@@ -14628,6 +14838,13 @@
    "Hyundai",
    "Genesis Coupe",
    2011,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Genesis Coupe",
+   2011,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -14657,6 +14874,13 @@
    "Genesis Coupe",
    2011,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Genesis Coupe",
+   2011,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -14782,6 +15006,13 @@
    "Hyundai",
    "Genesis Coupe",
    2012,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Genesis Coupe",
+   2012,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -14816,6 +15047,13 @@
   [
    "Hyundai",
    "Genesis Coupe",
+   2012,
+   "wiper-motor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Genesis Coupe",
    2013,
    "alternator",
    "open:no_year_manifest"
@@ -14886,6 +15124,13 @@
   [
    "Hyundai",
    "Genesis Coupe",
+   2013,
+   "wiper-motor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Genesis Coupe",
    2014,
    "alternator",
    "open:no_year_manifest"
@@ -14951,6 +15196,13 @@
    "Genesis Coupe",
    2014,
    "window-regulator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Genesis Coupe",
+   2014,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -15026,6 +15278,13 @@
   [
    "Hyundai",
    "Genesis Coupe",
+   2015,
+   "wiper-motor",
+   "open:no_list_manifest"
+  ],
+  [
+   "Hyundai",
+   "Genesis Coupe",
    2016,
    "alternator",
    "open:no_year_manifest"
@@ -15091,6 +15350,13 @@
    "Genesis Coupe",
    2016,
    "window-regulator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Genesis Coupe",
+   2016,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -16266,6 +16532,13 @@
    "Hyundai",
    "Santa Fe",
    2005,
+   "knuckle",
+   "open:unattested"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe",
+   2005,
    "liftgate",
    "open:unattested"
   ],
@@ -16302,7 +16575,7 @@
    "Santa Fe",
    2005,
    "strut",
-   "open:no_list_manifest"
+   "open:uncrawled_chain_member"
   ],
   [
    "Hyundai",
@@ -16344,7 +16617,7 @@
    "Santa Fe",
    2005,
    "wiper-motor",
-   "open:no_list_manifest"
+   "open:unattested"
   ],
   [
    "Hyundai",
@@ -17414,6 +17687,13 @@
    "Hyundai",
    "Santa Fe",
    2013,
+   "knuckle",
+   "open:unattested"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe",
+   2013,
    "liftgate",
    "open:unattested"
   ],
@@ -17442,6 +17722,13 @@
    "Hyundai",
    "Santa Fe",
    2013,
+   "strut",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe",
+   2013,
    "tail-lights",
    "open:no_list_manifest"
   ],
@@ -17469,6 +17756,13 @@
   [
    "Hyundai",
    "Santa Fe",
+   2013,
+   "wiper-motor",
+   "open:unattested"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe",
    2014,
    "ac-compressor",
    "open:no_year_manifest"
@@ -17568,6 +17862,13 @@
    "Hyundai",
    "Santa Fe",
    2014,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe",
+   2014,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -17596,6 +17897,13 @@
    "Hyundai",
    "Santa Fe",
    2014,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe",
+   2014,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -17618,6 +17926,13 @@
    "Santa Fe",
    2014,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe",
+   2014,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -17722,6 +18037,13 @@
    "Hyundai",
    "Santa Fe",
    2015,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe",
+   2015,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -17744,6 +18066,13 @@
    "Santa Fe",
    2015,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe",
+   2015,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -17777,6 +18106,13 @@
   [
    "Hyundai",
    "Santa Fe",
+   2015,
+   "wiper-motor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe",
    2016,
    "ac-compressor",
    "open:no_year_manifest"
@@ -17834,6 +18170,13 @@
    "Hyundai",
    "Santa Fe",
    2016,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe",
+   2016,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -17855,6 +18198,13 @@
    "Hyundai",
    "Santa Fe",
    2016,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe",
+   2016,
    "wheels",
    "open:no_year_manifest"
   ],
@@ -17870,6 +18220,13 @@
    "Santa Fe",
    2016,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe",
+   2016,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -17932,6 +18289,13 @@
    "Hyundai",
    "Santa Fe",
    2017,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe",
+   2017,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -17953,6 +18317,13 @@
    "Hyundai",
    "Santa Fe",
    2017,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe",
+   2017,
    "wheels",
    "open:no_year_manifest"
   ],
@@ -17968,6 +18339,13 @@
    "Santa Fe",
    2017,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe",
+   2017,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -18030,6 +18408,13 @@
    "Hyundai",
    "Santa Fe",
    2018,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe",
+   2018,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -18051,6 +18436,13 @@
    "Hyundai",
    "Santa Fe",
    2018,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe",
+   2018,
    "wheels",
    "open:no_year_manifest"
   ],
@@ -18066,6 +18458,13 @@
    "Santa Fe",
    2018,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe",
+   2018,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -18268,6 +18667,13 @@
    "Hyundai",
    "Santa Fe Sport",
    2013,
+   "knuckle",
+   "open:unattested"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe Sport",
+   2013,
    "liftgate",
    "open:unattested"
   ],
@@ -18296,6 +18702,13 @@
    "Hyundai",
    "Santa Fe Sport",
    2013,
+   "strut",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe Sport",
+   2013,
    "tail-lights",
    "open:no_list_manifest"
   ],
@@ -18326,6 +18739,13 @@
    2013,
    "window-switch",
    "open:no_list_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe Sport",
+   2013,
+   "wiper-motor",
+   "open:unattested"
   ],
   [
    "Hyundai",
@@ -18429,6 +18849,13 @@
    "Hyundai",
    "Santa Fe Sport",
    2014,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe Sport",
+   2014,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -18451,6 +18878,13 @@
    "Santa Fe Sport",
    2014,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe Sport",
+   2014,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -18486,6 +18920,13 @@
    "Santa Fe Sport",
    2014,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe Sport",
+   2014,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -18590,6 +19031,13 @@
    "Hyundai",
    "Santa Fe Sport",
    2015,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe Sport",
+   2015,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -18612,6 +19060,13 @@
    "Santa Fe Sport",
    2015,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe Sport",
+   2015,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -18652,6 +19107,13 @@
   [
    "Hyundai",
    "Santa Fe Sport",
+   2015,
+   "wiper-motor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe Sport",
    2016,
    "ac-compressor",
    "open:no_year_manifest"
@@ -18709,6 +19171,13 @@
    "Hyundai",
    "Santa Fe Sport",
    2016,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe Sport",
+   2016,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -18731,6 +19200,13 @@
    "Santa Fe Sport",
    2016,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe Sport",
+   2016,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -18764,6 +19240,13 @@
   [
    "Hyundai",
    "Santa Fe Sport",
+   2016,
+   "wiper-motor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe Sport",
    2017,
    "ac-compressor",
    "open:no_list_manifest"
@@ -18821,6 +19304,13 @@
    "Hyundai",
    "Santa Fe Sport",
    2017,
+   "knuckle",
+   "open:no_list_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe Sport",
+   2017,
    "liftgate",
    "open:no_list_manifest"
   ],
@@ -18843,6 +19333,13 @@
    "Santa Fe Sport",
    2017,
    "starter",
+   "open:no_list_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe Sport",
+   2017,
+   "strut",
    "open:no_list_manifest"
   ],
   [
@@ -18876,6 +19373,13 @@
   [
    "Hyundai",
    "Santa Fe Sport",
+   2017,
+   "wiper-motor",
+   "open:no_list_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe Sport",
    2018,
    "ac-compressor",
    "open:no_year_manifest"
@@ -18927,6 +19431,13 @@
    "Santa Fe Sport",
    2018,
    "ignition-coils",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe Sport",
+   2018,
+   "knuckle",
    "open:no_year_manifest"
   ],
   [
@@ -18961,6 +19472,13 @@
    "Hyundai",
    "Santa Fe Sport",
    2018,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe Sport",
+   2018,
    "throttle-body",
    "open:no_year_manifest"
   ],
@@ -18983,6 +19501,13 @@
    "Santa Fe Sport",
    2018,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe Sport",
+   2018,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -19045,6 +19570,13 @@
    "Hyundai",
    "Santa Fe XL",
    2019,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe XL",
+   2019,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -19066,6 +19598,13 @@
    "Hyundai",
    "Santa Fe XL",
    2019,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe XL",
+   2019,
    "wheels",
    "open:no_year_manifest"
   ],
@@ -19081,6 +19620,13 @@
    "Santa Fe XL",
    2019,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Santa Fe XL",
+   2019,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -22952,7 +23498,7 @@
    "Sonata",
    2018,
    "knuckle",
-   "open:no_list_manifest"
+   "open:unverified_product"
   ],
   [
    "Hyundai",
@@ -22980,7 +23526,7 @@
    "Sonata",
    2018,
    "strut",
-   "open:no_list_manifest"
+   "open:unattested"
   ],
   [
    "Hyundai",
@@ -23023,6 +23569,13 @@
    2018,
    "window-switch",
    "open:no_list_manifest"
+  ],
+  [
+   "Hyundai",
+   "Sonata",
+   2018,
+   "wiper-motor",
+   "open:unattested"
   ],
   [
    "Hyundai",
@@ -23202,6 +23755,13 @@
   [
    "Hyundai",
    "Sonata",
+   2019,
+   "wiper-motor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Sonata",
    2020,
    "fuel-pump-module",
    "open:no_year_manifest"
@@ -23357,6 +23917,13 @@
    "Hyundai",
    "Sonata Hybrid",
    2011,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Sonata Hybrid",
+   2011,
    "tail-lights",
    "open:no_year_manifest"
   ],
@@ -23505,6 +24072,13 @@
    "Sonata Hybrid",
    2012,
    "side-mirrors",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Sonata Hybrid",
+   2012,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -23652,7 +24226,7 @@
    "Sonata Hybrid",
    2013,
    "knuckle",
-   "open:no_list_manifest"
+   "open:unverified_product"
   ],
   [
    "Hyundai",
@@ -23667,6 +24241,13 @@
    2013,
    "side-mirrors",
    "open:no_list_manifest"
+  ],
+  [
+   "Hyundai",
+   "Sonata Hybrid",
+   2013,
+   "strut",
+   "open:uncrawled_chain_member"
   ],
   [
    "Hyundai",
@@ -23715,7 +24296,7 @@
    "Sonata Hybrid",
    2013,
    "wiper-motor",
-   "open:no_list_manifest"
+   "open:unattested"
   ],
   [
    "Hyundai",
@@ -23820,6 +24401,13 @@
    "Sonata Hybrid",
    2014,
    "side-mirrors",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Sonata Hybrid",
+   2014,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -23974,6 +24562,13 @@
    "Sonata Hybrid",
    2015,
    "side-mirrors",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Sonata Hybrid",
+   2015,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -24106,6 +24701,13 @@
    "Hyundai",
    "Sonata Hybrid",
    2016,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Sonata Hybrid",
+   2016,
    "trunk-lid",
    "open:no_year_manifest"
   ],
@@ -24128,6 +24730,13 @@
    "Sonata Hybrid",
    2016,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Sonata Hybrid",
+   2016,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -24198,7 +24807,7 @@
    "Sonata Hybrid",
    2017,
    "knuckle",
-   "open:no_list_manifest"
+   "open:unverified_product"
   ],
   [
    "Hyundai",
@@ -24206,6 +24815,13 @@
    2017,
    "radiator",
    "open:unread_sibling_page"
+  ],
+  [
+   "Hyundai",
+   "Sonata Hybrid",
+   2017,
+   "strut",
+   "open:uncrawled_chain_member"
   ],
   [
    "Hyundai",
@@ -24238,6 +24854,13 @@
   [
    "Hyundai",
    "Sonata Hybrid",
+   2017,
+   "wiper-motor",
+   "open:unattested"
+  ],
+  [
+   "Hyundai",
+   "Sonata Hybrid",
    2018,
    "door-front",
    "open:no_year_manifest"
@@ -24274,6 +24897,13 @@
    "Hyundai",
    "Sonata Hybrid",
    2018,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Sonata Hybrid",
+   2018,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -24282,6 +24912,13 @@
    "Sonata Hybrid",
    2018,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Sonata Hybrid",
+   2018,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -24323,6 +24960,13 @@
    "Hyundai",
    "Sonata Hybrid",
    2019,
+   "strut",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Sonata Hybrid",
+   2019,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -24331,6 +24975,13 @@
    "Sonata Hybrid",
    2019,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Sonata Hybrid",
+   2019,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -26920,6 +27571,13 @@
    "Hyundai",
    "Tucson",
    2009,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2009,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -27102,6 +27760,13 @@
    "Hyundai",
    "Tucson",
    2010,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2010,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -27117,6 +27782,13 @@
    "Tucson",
    2010,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2010,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -27152,6 +27824,13 @@
    "Tucson",
    2010,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2010,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -27256,6 +27935,13 @@
    "Hyundai",
    "Tucson",
    2011,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2011,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -27271,6 +27957,13 @@
    "Tucson",
    2011,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2011,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -27306,6 +27999,13 @@
    "Tucson",
    2011,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2011,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -27410,6 +28110,13 @@
    "Hyundai",
    "Tucson",
    2012,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2012,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -27425,6 +28132,13 @@
    "Tucson",
    2012,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2012,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -27460,6 +28174,13 @@
    "Tucson",
    2012,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2012,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -27564,6 +28285,13 @@
    "Hyundai",
    "Tucson",
    2013,
+   "knuckle",
+   "open:unverified_product"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2013,
    "liftgate",
    "open:unattested"
   ],
@@ -27580,6 +28308,13 @@
    2013,
    "starter",
    "open:no_list_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2013,
+   "strut",
+   "open:unverified_product"
   ],
   [
    "Hyundai",
@@ -27615,6 +28350,13 @@
    2013,
    "window-switch",
    "open:no_list_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2013,
+   "wiper-motor",
+   "open:unattested"
   ],
   [
    "Hyundai",
@@ -27718,6 +28460,13 @@
    "Hyundai",
    "Tucson",
    2014,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2014,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -27733,6 +28482,13 @@
    "Tucson",
    2014,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2014,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -27768,6 +28524,13 @@
    "Tucson",
    2014,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2014,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -27872,6 +28635,13 @@
    "Hyundai",
    "Tucson",
    2015,
+   "knuckle",
+   "open:unverified_product"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2015,
    "liftgate",
    "open:unattested"
   ],
@@ -27888,6 +28658,13 @@
    2015,
    "starter",
    "open:no_list_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2015,
+   "strut",
+   "open:unattested"
   ],
   [
    "Hyundai",
@@ -27923,6 +28700,13 @@
    2015,
    "window-switch",
    "open:no_list_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2015,
+   "wiper-motor",
+   "open:unattested"
   ],
   [
    "Hyundai",
@@ -28026,6 +28810,13 @@
    "Hyundai",
    "Tucson",
    2016,
+   "knuckle",
+   "open:unverified_product"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2016,
    "liftgate",
    "open:unattested"
   ],
@@ -28054,6 +28845,13 @@
    "Hyundai",
    "Tucson",
    2016,
+   "strut",
+   "open:uncrawled_chain_member"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2016,
    "tail-lights",
    "open:no_list_manifest"
   ],
@@ -28088,6 +28886,13 @@
   [
    "Hyundai",
    "Tucson",
+   2016,
+   "wiper-motor",
+   "open:unattested"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
    2017,
    "ac-compressor",
    "open:no_year_manifest"
@@ -28187,6 +28992,13 @@
    "Hyundai",
    "Tucson",
    2017,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2017,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -28209,6 +29021,13 @@
    "Tucson",
    2017,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2017,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -28244,6 +29063,13 @@
    "Tucson",
    2017,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2017,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -28348,6 +29174,13 @@
    "Hyundai",
    "Tucson",
    2018,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2018,
    "liftgate",
    "open:no_year_manifest"
   ],
@@ -28370,6 +29203,13 @@
    "Tucson",
    2018,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2018,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -28410,6 +29250,13 @@
   [
    "Hyundai",
    "Tucson",
+   2018,
+   "wiper-motor",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
    2019,
    "alternator",
    "open:no_year_manifest"
@@ -28460,6 +29307,13 @@
    "Hyundai",
    "Tucson",
    2019,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2019,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -28468,6 +29322,13 @@
    "Tucson",
    2019,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2019,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -28489,6 +29350,13 @@
    "Tucson",
    2019,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2019,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -28544,6 +29412,13 @@
    "Hyundai",
    "Tucson",
    2020,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2020,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -28552,6 +29427,13 @@
    "Tucson",
    2020,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2020,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -28573,6 +29455,13 @@
    "Tucson",
    2020,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2020,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -28628,6 +29517,13 @@
    "Hyundai",
    "Tucson",
    2021,
+   "knuckle",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2021,
    "radiator",
    "open:no_year_manifest"
   ],
@@ -28636,6 +29532,13 @@
    "Tucson",
    2021,
    "starter",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2021,
+   "strut",
    "open:no_year_manifest"
   ],
   [
@@ -28657,6 +29560,13 @@
    "Tucson",
    2021,
    "window-switch",
+   "open:no_year_manifest"
+  ],
+  [
+   "Hyundai",
+   "Tucson",
+   2021,
+   "wiper-motor",
    "open:no_year_manifest"
   ],
   [
@@ -30323,7 +31233,7 @@
    "Veracruz",
    2007,
    "knuckle",
-   "open:no_list_manifest"
+   "open:unattested"
   ],
   [
    "Hyundai",
@@ -30391,6 +31301,13 @@
   [
    "Hyundai",
    "Veracruz",
+   2007,
+   "wiper-motor",
+   "open:unattested"
+  ],
+  [
+   "Hyundai",
+   "Veracruz",
    2008,
    "ac-compressor",
    "open:no_year_manifest"
@@ -30729,336 +31646,350 @@
    "Veracruz",
    2010,
    "ac-compressor",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2010,
    "alternator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2010,
    "bumper-front",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2010,
    "bumper-rear",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2010,
    "climate-control",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2010,
    "door-front",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2010,
    "door-rear",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2010,
    "fender",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2010,
    "fuel-pump-module",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2010,
    "gauge-cluster",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2010,
    "grille",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2010,
    "headlights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2010,
    "hood",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2010,
    "ignition-coils",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2010,
    "knuckle",
-   "open:no_year_manifest"
+   "open:unattested"
   ],
   [
    "Hyundai",
    "Veracruz",
    2010,
    "liftgate",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2010,
    "power-steering-pump",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2010,
    "radiator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2010,
    "side-mirrors",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2010,
    "starter",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2010,
    "tail-lights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2010,
    "wheels",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2010,
    "window-regulator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2010,
    "window-switch",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Hyundai",
+   "Veracruz",
+   2010,
+   "wiper-motor",
+   "open:unattested"
   ],
   [
    "Hyundai",
    "Veracruz",
    2011,
    "ac-compressor",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2011,
    "alternator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2011,
    "bumper-front",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2011,
    "bumper-rear",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2011,
    "climate-control",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2011,
    "door-front",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2011,
    "door-rear",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2011,
    "fender",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2011,
    "fuel-pump-module",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2011,
    "gauge-cluster",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2011,
    "grille",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2011,
    "headlights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2011,
    "hood",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2011,
    "ignition-coils",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2011,
    "knuckle",
-   "open:no_year_manifest"
+   "open:unattested"
   ],
   [
    "Hyundai",
    "Veracruz",
    2011,
    "liftgate",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2011,
    "power-steering-pump",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2011,
    "radiator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2011,
    "side-mirrors",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2011,
    "starter",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2011,
    "tail-lights",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2011,
    "wheels",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2011,
    "window-regulator",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
    "Veracruz",
    2011,
    "window-switch",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Hyundai",
+   "Veracruz",
+   2011,
+   "wiper-motor",
+   "open:unattested"
   ],
   [
    "Hyundai",
@@ -32157,7 +33088,7 @@
    "XG350",
    2005,
    "strut",
-   "open:no_list_manifest"
+   "open:unverified_product"
   ],
   [
    "Hyundai",
@@ -32199,7 +33130,7 @@
    "XG350",
    2005,
    "wiper-motor",
-   "open:no_list_manifest"
+   "open:uncrawled_chain_member"
   ],
   [
    "Kia",
@@ -58421,7 +59352,7 @@
    "Sportage",
    2010,
    "knuckle",
-   "open:uncrawled_chain_member"
+   "open:unverified_product"
   ],
   [
    "Kia",
@@ -58610,7 +59541,7 @@
    "Sportage",
    2011,
    "knuckle",
-   "open:uncrawled_chain_member"
+   "open:unverified_product"
   ],
   [
    "Kia",
@@ -58645,7 +59576,7 @@
    "Sportage",
    2011,
    "strut",
-   "open:uncrawled_chain_member"
+   "open:unverified_product"
   ],
   [
    "Kia",
@@ -59520,7 +60451,7 @@
    "Sportage",
    2016,
    "knuckle",
-   "open:unattested"
+   "open:unverified_product"
   ],
   [
    "Kia",
@@ -59702,7 +60633,7 @@
    "Sportage",
    2017,
    "knuckle",
-   "open:unattested"
+   "open:unverified_product"
   ],
   [
    "Kia",
@@ -59884,7 +60815,7 @@
    "Sportage",
    2018,
    "knuckle",
-   "open:unattested"
+   "open:unverified_product"
   ],
   [
    "Kia",
@@ -60066,7 +60997,7 @@
    "Sportage",
    2019,
    "knuckle",
-   "open:unattested"
+   "open:unverified_product"
   ],
   [
    "Kia",
@@ -60742,6 +61673,678 @@
   ]
  ],
  "classes": {
+  "hmg:529101M060": {
+   "cat": "wheels",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3128"
+   ],
+   "names": [
+    "Wheel Assy-Steel"
+   ],
+   "pns": [
+    "529101M060"
+   ],
+   "reman": false
+  },
+  "hmg:529101M150": {
+   "cat": "wheels",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3120"
+   ],
+   "names": [
+    "Wheel Assy-Aluminium"
+   ],
+   "pns": [
+    "529101M150"
+   ],
+   "reman": false
+  },
+  "hmg:529101M350": {
+   "cat": "wheels",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3122"
+   ],
+   "names": [
+    "Wheel Assy-Aluminium"
+   ],
+   "pns": [
+    "529101M350"
+   ],
+   "reman": false
+  },
+  "hmg:529101M850": {
+   "cat": "wheels",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3127"
+   ],
+   "names": [
+    "Wheel Assy-Aluminium"
+   ],
+   "pns": [
+    "529101M850"
+   ],
+   "reman": false
+  },
+  "hmg:529103X050": {
+   "cat": "wheels",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3115"
+   ],
+   "names": [
+    "Wheel Assy-Steel"
+   ],
+   "pns": [
+    "529103X050"
+   ],
+   "reman": false
+  },
+  "hmg:52910A7150": {
+   "cat": "wheels",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3116"
+   ],
+   "names": [
+    "Wheel Assy-Steel"
+   ],
+   "pns": [
+    "52910A7150"
+   ],
+   "reman": false
+  },
+  "hmg:52910A7350": {
+   "cat": "wheels",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3112"
+   ],
+   "names": [
+    "Wheel Assy-Aluminium"
+   ],
+   "pns": [
+    "52910A7350"
+   ],
+   "reman": false
+  },
+  "hmg:52910A7450": {
+   "cat": "wheels",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3113"
+   ],
+   "names": [
+    "Wheel Assy-Aluminium"
+   ],
+   "pns": [
+    "52910A7450"
+   ],
+   "reman": false
+  },
+  "hmg:52910A7850": {
+   "cat": "wheels",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3114"
+   ],
+   "names": [
+    "Wheel Assy-Aluminium"
+   ],
+   "pns": [
+    "52910A7850"
+   ],
+   "reman": false
+  },
+  "hmg:546511M100": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3431"
+   ],
+   "names": [
+    "Shock Absorber Assy-Front, LH"
+   ],
+   "pns": [
+    "546511M100"
+   ],
+   "reman": false
+  },
+  "hmg:546511M200": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3432"
+   ],
+   "names": [
+    "Shock Absorber Assy-Front, LH"
+   ],
+   "pns": [
+    "546511M200"
+   ],
+   "reman": false
+  },
+  "hmg:546511M310": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3433"
+   ],
+   "names": [
+    "Shock Absorber Assy-Front, LH"
+   ],
+   "pns": [
+    "546511M310"
+   ],
+   "reman": false
+  },
+  "hmg:546511M320": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3434"
+   ],
+   "names": [
+    "Shock Absorber Assy-Front, LH"
+   ],
+   "pns": [
+    "546511M320"
+   ],
+   "reman": false
+  },
+  "hmg:546511M360": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3435"
+   ],
+   "names": [
+    "Shock Absorber Assy-Front, LH"
+   ],
+   "pns": [
+    "546511M360"
+   ],
+   "reman": false
+  },
+  "hmg:546511M520": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3436"
+   ],
+   "names": [
+    "Shock Absorber Assy-Front, LH"
+   ],
+   "pns": [
+    "546511M520"
+   ],
+   "reman": false
+  },
+  "hmg:54651A7200": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3407"
+   ],
+   "names": [
+    "Strut Assy-Fr, LH"
+   ],
+   "pns": [
+    "54651A7200"
+   ],
+   "reman": false
+  },
+  "hmg:54651A7210": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3408"
+   ],
+   "names": [
+    "Strut Assy-Fr, LH"
+   ],
+   "pns": [
+    "54651A7210"
+   ],
+   "reman": false
+  },
+  "hmg:54651A7300": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3409"
+   ],
+   "names": [
+    "Strut Assy-Fr, LH"
+   ],
+   "pns": [
+    "54651A7300"
+   ],
+   "reman": false
+  },
+  "hmg:54651A7600": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3410"
+   ],
+   "names": [
+    "Strut Assy-Fr, LH"
+   ],
+   "pns": [
+    "54651A7600"
+   ],
+   "reman": false
+  },
+  "hmg:54651A7650": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3411"
+   ],
+   "names": [
+    "Strut Assy-Fr, LH"
+   ],
+   "pns": [
+    "54651A7650"
+   ],
+   "reman": false
+  },
+  "hmg:546611M100": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3437"
+   ],
+   "names": [
+    "Shock Absorber Assy-Front, RH"
+   ],
+   "pns": [
+    "546611M100"
+   ],
+   "reman": false
+  },
+  "hmg:546611M200": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3438"
+   ],
+   "names": [
+    "Shock Absorber Assy-Front, RH"
+   ],
+   "pns": [
+    "546611M200"
+   ],
+   "reman": false
+  },
+  "hmg:546611M310": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3439"
+   ],
+   "names": [
+    "Shock Absorber Assy-Front, RH"
+   ],
+   "pns": [
+    "546611M310"
+   ],
+   "reman": false
+  },
+  "hmg:546611M320": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3440"
+   ],
+   "names": [
+    "Shock Absorber Assy-Front, RH"
+   ],
+   "pns": [
+    "546611M320"
+   ],
+   "reman": false
+  },
+  "hmg:546611M360": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3441"
+   ],
+   "names": [
+    "Shock Absorber Assy-Front, RH"
+   ],
+   "pns": [
+    "546611M360"
+   ],
+   "reman": false
+  },
+  "hmg:546611M520": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3442"
+   ],
+   "names": [
+    "Shock Absorber Assy-Front, RH"
+   ],
+   "pns": [
+    "546611M520"
+   ],
+   "reman": false
+  },
+  "hmg:54661A7200": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3412"
+   ],
+   "names": [
+    "Strut Assy-Fr, RH"
+   ],
+   "pns": [
+    "54661A7200"
+   ],
+   "reman": false
+  },
+  "hmg:54661A7210": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3413"
+   ],
+   "names": [
+    "Strut Assy-Fr, RH"
+   ],
+   "pns": [
+    "54661A7210"
+   ],
+   "reman": false
+  },
+  "hmg:54661A7300": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3414"
+   ],
+   "names": [
+    "Strut Assy-Fr, RH"
+   ],
+   "pns": [
+    "54661A7300"
+   ],
+   "reman": false
+  },
+  "hmg:54661A7600": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3415"
+   ],
+   "names": [
+    "Strut Assy-Fr, RH"
+   ],
+   "pns": [
+    "54661A7600"
+   ],
+   "reman": false
+  },
+  "hmg:54661A7650": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3416"
+   ],
+   "names": [
+    "Strut Assy-Fr, RH"
+   ],
+   "pns": [
+    "54661A7650"
+   ],
+   "reman": false
+  },
+  "hmg:553001M100": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3422"
+   ],
+   "names": [
+    "Shock Absorber Assy-Rear"
+   ],
+   "pns": [
+    "553001M100"
+   ],
+   "reman": false
+  },
+  "hmg:553001M200": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3423"
+   ],
+   "names": [
+    "Shock Absorber Assy-Rear"
+   ],
+   "pns": [
+    "553001M200"
+   ],
+   "reman": false
+  },
+  "hmg:553001M310": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3424"
+   ],
+   "names": [
+    "Shock Absorber Assy-Rear"
+   ],
+   "pns": [
+    "553001M310"
+   ],
+   "reman": false
+  },
+  "hmg:553001M320": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3425"
+   ],
+   "names": [
+    "Shock Absorber Assy-Rear"
+   ],
+   "pns": [
+    "553001M320"
+   ],
+   "reman": false
+  },
+  "hmg:553001M350": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3426"
+   ],
+   "names": [
+    "Shock Absorber Assy-Rear"
+   ],
+   "pns": [
+    "553001M350"
+   ],
+   "reman": false
+  },
+  "hmg:553001M360": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3421"
+   ],
+   "names": [
+    "Shock Absorber Assy-Rear"
+   ],
+   "pns": [
+    "553001M360"
+   ],
+   "reman": false
+  },
+  "hmg:553001M510": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3427"
+   ],
+   "names": [
+    "Shock Absorber Assy-Rear"
+   ],
+   "pns": [
+    "553001M510"
+   ],
+   "reman": false
+  },
+  "hmg:553001M520": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3428"
+   ],
+   "names": [
+    "Shock Absorber Assy-Rear"
+   ],
+   "pns": [
+    "553001M520"
+   ],
+   "reman": false
+  },
+  "hmg:553001M550": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3429"
+   ],
+   "names": [
+    "Shock Absorber Assy-Rear"
+   ],
+   "pns": [
+    "553001M550"
+   ],
+   "reman": false
+  },
+  "hmg:553001M570": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3430"
+   ],
+   "names": [
+    "Shock Absorber Assy-Rear"
+   ],
+   "pns": [
+    "553001M570"
+   ],
+   "reman": false
+  },
+  "hmg:55300A7020": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3402"
+   ],
+   "names": [
+    "Shock Absorber Assy-Rear"
+   ],
+   "pns": [
+    "55300A7020"
+   ],
+   "reman": false
+  },
+  "hmg:55300A7300": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3401"
+   ],
+   "names": [
+    "Shock Absorber Assy-Rear"
+   ],
+   "pns": [
+    "55300A7300"
+   ],
+   "reman": false
+  },
+  "hmg:55300A7400": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3403"
+   ],
+   "names": [
+    "Shock Absorber Assy-Rear"
+   ],
+   "pns": [
+    "55300A7400"
+   ],
+   "reman": false
+  },
+  "hmg:55300A7600": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3400"
+   ],
+   "names": [
+    "Shock Absorber Assy-Rear"
+   ],
+   "pns": [
+    "55300A7600"
+   ],
+   "reman": false
+  },
+  "hmg:55300A7650": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3404"
+   ],
+   "names": [
+    "Shock Absorber Assy-Rear"
+   ],
+   "pns": [
+    "55300A7650"
+   ],
+   "reman": false
+  },
+  "hmg:55300A7660": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3405"
+   ],
+   "names": [
+    "Shock Absorber Assy-Rear"
+   ],
+   "pns": [
+    "55300A7660"
+   ],
+   "reman": false
+  },
+  "hmg:55300A7670": {
+   "cat": "strut",
+   "comp": null,
+   "evidence": [
+    "www.kiapartsnow.com:records:L3406"
+   ],
+   "names": [
+    "Shock Absorber Assy-Rear"
+   ],
+   "pns": [
+    "55300A7670"
+   ],
+   "reman": false
+  },
   "hmg:76003C1000": {
    "cat": "door-front",
    "comp": null,
@@ -65307,7 +66910,7 @@
    2010,
    "alternator",
    "hk-mu-lambda",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
@@ -65315,7 +66918,7 @@
    2010,
    "ignition-coils",
    "hk-mu-lambda",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
@@ -65323,7 +66926,7 @@
    2010,
    "starter",
    "hk-mu-lambda",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
@@ -65331,7 +66934,7 @@
    2011,
    "alternator",
    "hk-mu-lambda",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
@@ -65339,7 +66942,7 @@
    2011,
    "ignition-coils",
    "hk-mu-lambda",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
@@ -65347,7 +66950,7 @@
    2011,
    "starter",
    "hk-mu-lambda",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Hyundai",
@@ -68755,6 +70358,1458 @@
   {
    "apps": [
     [
+     "Kia",
+     "Forte",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013
+    ]
+   ],
+   "cars": 241,
+   "cat": "wheels",
+   "id": "oem:hmg:wheels:C:bf6ad6fc14",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #529101M060 for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T20:41:54Z",
+   "pn": [
+    "529101M060"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013
+    ]
+   ],
+   "cars": 241,
+   "cat": "wheels",
+   "id": "oem:hmg:wheels:C:70880b132a",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #529101M150 for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T20:40:18Z",
+   "pn": [
+    "529101M150"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013
+    ]
+   ],
+   "cars": 241,
+   "cat": "wheels",
+   "id": "oem:hmg:wheels:C:2e0261a4e6",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #529101M350 for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T20:40:34Z",
+   "pn": [
+    "529101M350"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013
+    ]
+   ],
+   "cars": 241,
+   "cat": "wheels",
+   "id": "oem:hmg:wheels:C:c7bbfa91ec",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #529101M850 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T20:41:46Z",
+   "pn": [
+    "529101M850"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014
+    ]
+   ],
+   "cars": 164,
+   "cat": "wheels",
+   "id": "oem:hmg:wheels:C:4265267866",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #529103X050 for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T20:39:22Z",
+   "pn": [
+    "529103X050"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014
+    ]
+   ],
+   "cars": 164,
+   "cat": "wheels",
+   "id": "oem:hmg:wheels:C:8eace2eb65",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #52910A7150 for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T20:39:30Z",
+   "pn": [
+    "52910A7150"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014
+    ]
+   ],
+   "cars": 164,
+   "cat": "wheels",
+   "id": "oem:hmg:wheels:C:43f72fb0b8",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #52910A7350 for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T20:38:58Z",
+   "pn": [
+    "52910A7350"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014
+    ]
+   ],
+   "cars": 164,
+   "cat": "wheels",
+   "id": "oem:hmg:wheels:C:f60d871cef",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #52910A7450 for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T20:39:07Z",
+   "pn": [
+    "52910A7450"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014
+    ]
+   ],
+   "cars": 164,
+   "cat": "wheels",
+   "id": "oem:hmg:wheels:C:ac98150892",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #52910A7850 for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T20:39:14Z",
+   "pn": [
+    "52910A7850"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013
+    ]
+   ],
+   "cars": 241,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:dc246fd668",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #546511M100 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:47:49Z",
+   "pn": [
+    "546511M100"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013
+    ]
+   ],
+   "cars": 241,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:36728f18d3",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #546511M200 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:47:56Z",
+   "pn": [
+    "546511M200"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013
+    ]
+   ],
+   "cars": 241,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:07bda0a0e5",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #546511M310 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:48:04Z",
+   "pn": [
+    "546511M310"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013
+    ]
+   ],
+   "cars": 241,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:4807541a1d",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #546511M320 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:48:12Z",
+   "pn": [
+    "546511M320"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013
+    ]
+   ],
+   "cars": 241,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:12aa5e048f",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #546511M360 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:48:19Z",
+   "pn": [
+    "546511M360"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013
+    ]
+   ],
+   "cars": 241,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:abcc8da54b",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #546511M520 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:48:28Z",
+   "pn": [
+    "546511M520"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014
+    ]
+   ],
+   "cars": 164,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:bb6c2ca96c",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #54651A7200 for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:43:49Z",
+   "pn": [
+    "54651A7200"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014
+    ]
+   ],
+   "cars": 164,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:88034982a8",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #54651A7210 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:43:55Z",
+   "pn": [
+    "54651A7210"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014
+    ]
+   ],
+   "cars": 164,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:8fa8bb0f6f",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #54651A7300 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:44:03Z",
+   "pn": [
+    "54651A7300"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014
+    ]
+   ],
+   "cars": 164,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:750be2c5c0",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #54651A7600 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:44:12Z",
+   "pn": [
+    "54651A7600"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014
+    ]
+   ],
+   "cars": 164,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:f2ff2dde72",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #54651A7650 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:44:22Z",
+   "pn": [
+    "54651A7650"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013
+    ]
+   ],
+   "cars": 241,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:f2135495e7",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #546611M100 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:48:35Z",
+   "pn": [
+    "546611M100"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013
+    ]
+   ],
+   "cars": 241,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:c637e8fc23",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #546611M200 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:48:45Z",
+   "pn": [
+    "546611M200"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013
+    ]
+   ],
+   "cars": 241,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:a267ddf374",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #546611M310 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:48:53Z",
+   "pn": [
+    "546611M310"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013
+    ]
+   ],
+   "cars": 241,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:697a00cd93",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #546611M320 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:48:59Z",
+   "pn": [
+    "546611M320"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013
+    ]
+   ],
+   "cars": 241,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:32d5abb875",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #546611M360 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:49:07Z",
+   "pn": [
+    "546611M360"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013
+    ]
+   ],
+   "cars": 241,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:3d5a25d1fe",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #546611M520 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:49:16Z",
+   "pn": [
+    "546611M520"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014
+    ]
+   ],
+   "cars": 164,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:4095fde0bb",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #54661A7200 for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:44:27Z",
+   "pn": [
+    "54661A7200"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014
+    ]
+   ],
+   "cars": 164,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:a65a56ee82",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #54661A7210 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:44:35Z",
+   "pn": [
+    "54661A7210"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014
+    ]
+   ],
+   "cars": 164,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:0e75c37dff",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #54661A7300 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:44:44Z",
+   "pn": [
+    "54661A7300"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014
+    ]
+   ],
+   "cars": 164,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:fd7b69ac33",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #54661A7600 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:44:51Z",
+   "pn": [
+    "54661A7600"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014
+    ]
+   ],
+   "cars": 164,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:8176c1c4e6",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #54661A7650 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:45:00Z",
+   "pn": [
+    "54661A7650"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013
+    ]
+   ],
+   "cars": 241,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:cca2bc2a95",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #553001M100 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:46:28Z",
+   "pn": [
+    "553001M100"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013
+    ]
+   ],
+   "cars": 241,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:aaa7fdd0d2",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #553001M200 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:46:36Z",
+   "pn": [
+    "553001M200"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013
+    ]
+   ],
+   "cars": 241,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:7505368e51",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #553001M310 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:46:43Z",
+   "pn": [
+    "553001M310"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013
+    ]
+   ],
+   "cars": 241,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:bb98391df8",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #553001M320 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:46:52Z",
+   "pn": [
+    "553001M320"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013
+    ]
+   ],
+   "cars": 241,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:a6fcb43b35",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #553001M350 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:46:59Z",
+   "pn": [
+    "553001M350"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013
+    ]
+   ],
+   "cars": 241,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:6b61bcf74c",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #553001M360 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:46:19Z",
+   "pn": [
+    "553001M360"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013
+    ]
+   ],
+   "cars": 241,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:5c51b8ceb1",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #553001M510 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:47:07Z",
+   "pn": [
+    "553001M510"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013
+    ]
+   ],
+   "cars": 241,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:98838a2421",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #553001M520 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:47:16Z",
+   "pn": [
+    "553001M520"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013
+    ]
+   ],
+   "cars": 241,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:1d56bf6d57",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #553001M550 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:47:23Z",
+   "pn": [
+    "553001M550"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013
+    ]
+   ],
+   "cars": 241,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:956cedb4f2",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #553001M570 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:47:31Z",
+   "pn": [
+    "553001M570"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014
+    ]
+   ],
+   "cars": 164,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:dd392c7403",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #55300A7020 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:42:59Z",
+   "pn": [
+    "55300A7020"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014
+    ]
+   ],
+   "cars": 164,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:bb7d70abfa",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #55300A7300 for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:42:52Z",
+   "pn": [
+    "55300A7300"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014
+    ]
+   ],
+   "cars": 164,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:64c9847dca",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #55300A7400 for both — fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:43:08Z",
+   "pn": [
+    "55300A7400"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014
+    ]
+   ],
+   "cars": 164,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:fc11451430",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #55300A7600 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:42:44Z",
+   "pn": [
+    "55300A7600"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014
+    ]
+   ],
+   "cars": 164,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:132bf1e7cd",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #55300A7650 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:43:17Z",
+   "pn": [
+    "55300A7650"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014
+    ]
+   ],
+   "cars": 164,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:4484eb94b5",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #55300A7660 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:43:23Z",
+   "pn": [
+    "55300A7660"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014
+    ]
+   ],
+   "cars": 164,
+   "cat": "strut",
+   "id": "oem:hmg:strut:C:d791a799c7",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #55300A7670 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:43:31Z",
+   "pn": [
+    "55300A7670"
+   ],
+   "reason": "option",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
      "Hyundai",
      "Sonata",
      2015,
@@ -68916,20 +71971,20 @@
   }
  ],
  "ns": "hmg",
- "policy_sha256": "9f78842939480725f6d776e08ef4994695ed01f080cfb6eec172be10602d488c",
+ "policy_sha256": "00333e78ff3dabc9ca00e0c3aab8d9fbb6a787d19e3e219b1e713286373ef94f",
  "raw": {
-  "commit": "1351c33fcfbb97862fa5aa9265dd92f7350c1ebc",
-  "ref": "1351c33fcfbb",
+  "commit": "dca9cd845f26337a4047b9176cc17929ffc984a3",
+  "ref": "dca9cd845f26",
   "sites": {
    "www.hyundaipartsdeal.com": {
     "blocked": false,
     "done": true,
-    "lists": 822,
-    "lists_sha256": "134491cb54a7e45aacf3e3e94eb48949b6b66dfdeaae400dc1ff161fcbdf8a8b",
-    "records": 4055,
-    "records_sha256": "1f594733f6333b7c153557f37d6c5585468eaf0dc3ae63f6f70616b908e87bc8",
-    "years": 143,
-    "years_sha256": "d43af06b2b8aa65804a70ae6dc14d0d827c1773917886ff720a683d5440c9363"
+    "lists": 942,
+    "lists_sha256": "8a1e6c361c05a2cca39e5fc2d5ae70189c46e81fbfd4382b970a459a5ab7534b",
+    "records": 4242,
+    "records_sha256": "9c98136d63d34fe45e2b91aa7321f749797f2c9187b956c81460cb717695b598",
+    "years": 165,
+    "years_sha256": "1ebca4ee6af2bcfb88b5199298a522533121086500e263029b6468a31f94915a"
    },
    "www.kiapartsnow.com": {
     "blocked": false,
