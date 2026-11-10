@@ -3406,3 +3406,22 @@ each); nothing allowlisted or crawled.
     - **Rule references:** SOURCES.md "Source scout 2" and the sections
       after it (detector rule, curation rules, gate (d), engine rules,
       round-3 fixes).
+- **2026-11-10 ~13:30 UTC: production-date live fix shipped (3444cc7).**
+  - All 39 shipped groups the rule changes were checked by 2 independent
+    verifiers: 25 WRONG / 9 RIGHT / 5 UNSURE as shipped.
+  - Rule (a), `curate._production_excludes`, now applies to every
+    namespace: a row's production window must overlap 07/y-1..06/y by
+    5+ months. It drops all 29 vehicle-years judged not to fit and 16
+    that do (accepted losses: early-launch 2006 GS/RX 400h, supersessions,
+    2010 Milan Hybrid). Variant (b) kept 9 wrong years.
+  - Wheels are exempt (`PROD_RULE_SKIP_CATS`); their own whole-group rule
+    is stricter.
+  - Result: toyota 583 -> 557, ford 81 -> 74, hmg 54 -> 52 (held struts).
+    Diff list: `_report/production_dates_2026-11-10_diff.txt`.
+  - Platform pacing (f603b03) was merged by the hub; the next scheduled
+    crawl uses the single SimplePart job.
+  - **Open, live:** Lexus chassis/engine codes (MCU/GSU/MHU, GRS/UZS,
+    GSE20/21, MCV30/31) on lexuspartsnow rows are ignored, so some shipped
+    Lexus groups credit the wrong engine (e.g. RX 350 2007 from 3.3L-only
+    rows). Proposed a chassis-code gate to the hub; measure and sample
+    first.
