@@ -1170,3 +1170,14 @@
 14:14:37 list-fail https://www.infinitipartsdeal.com/parts-list/2017-infiniti-q70l/body_front_roof_floor/hood_panel_hinge_fitting.html: ValueError: no __INITIAL_STORE__ on page
 14:14:45 list-fail https://www.infinitipartsdeal.com/parts-list/2017-infiniti-q70l/body_side_rear/front_door_window_regulator.html: ValueError: HTTP 502 for https://www.infinitipartsdeal.com/parts-list/2017-infiniti-q70l/body_side_rear/front_door_window_regulator.html
 14:15:41 time budget reached records=2431
+14:16:04 start site=www.infinitipartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2431 list_lines=1508 year_lines=170 url_index=7703
+14:16:04 completion worklist completion/nissan.own_page.json: 119 rows
+14:17:24 nav-fail Infiniti QX80 2020: ValueError: no parts-list or trim links on https://www.infinitipartsdeal.com/2020-infiniti-qx80-parts.html
+14:17:32 nav-fail Infiniti QX80 2021: ValueError: no parts-list or trim links on https://www.infinitipartsdeal.com/2021-infiniti-qx80-parts.html
+14:17:40 nav-fail Infiniti QX80 2022: ValueError: no parts-list or trim links on https://www.infinitipartsdeal.com/2022-infiniti-qx80-parts.html
+14:17:48 nav-fail Infiniti QX80 2023: ValueError: no parts-list or trim links on https://www.infinitipartsdeal.com/2023-infiniti-qx80-parts.html
+14:17:56 nav-fail Infiniti QX80 2024: ValueError: no parts-list or trim links on https://www.infinitipartsdeal.com/2024-infiniti-qx80-parts.html
+14:18:46 nav-fail Infiniti Q60 2020: ValueError: no parts-list or trim links on https://www.infinitipartsdeal.com/2020-infiniti-q60-parts.html
+14:18:52 nav-fail Infiniti Q60 2021: ValueError: no parts-list or trim links on https://www.infinitipartsdeal.com/2021-infiniti-q60-parts.html
+14:19:00 nav-fail Infiniti Q60 2022: ValueError: no parts-list or trim links on https://www.infinitipartsdeal.com/2022-infiniti-q60-parts.html
+14:19:00 completion finished records=2431 errors=104 open_rows=0 chains_owed=0
