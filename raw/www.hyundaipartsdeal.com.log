@@ -1590,3 +1590,8 @@
 23:14:56 chain-unlinked strut 1 numbers named by 55311-2L500, no catalog link: 55311-2L600
 23:14:56 seg done tier=C Hyundai Elantra Touring [2009, 2012] seeds=[2012] records=4242 errors=1
 23:14:56 finished records=4242 errors=1 chain_records=9 chain_unlinked=198 chain_failed=0 chain_given_up=0
+02:57:58 start site=www.hyundaipartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C'] records=4242 list_lines=942 year_lines=165 url_index=11318
+02:57:58 completion worklist completion/hmg.own_page.json: 47 rows
+03:03:26 chain-unlinked window-regulator 1 numbers named by 83450-2W000, no catalog link: 83450-B8000
+03:03:26 chain-unlinked window-regulator 1 numbers named by 83460-2W000, no catalog link: 83460-B8000
+03:28:14 time budget reached records=4248
