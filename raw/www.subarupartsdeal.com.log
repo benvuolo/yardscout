@@ -936,3 +936,16 @@
 06:43:38 chain-unlinked headlights 1 numbers named by 84001AJ01A, no catalog link: 84001AJ01G
 06:43:38 chain-unlinked headlights 1 numbers named by 84001AJ00A, no catalog link: 84001AJ00G
 06:47:48 time budget reached records=2147
+06:48:06 start site=www.subarupartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C'] records=2147 list_lines=881 year_lines=76 url_index=7930
+06:48:06 completion worklist completion/subaru.own_page.json: 110 rows
+07:07:26 chain-unlinked side-mirrors 1 numbers named by 91031FE511NN, no catalog link: 91031FE510VO
+07:07:26 chain-unlinked side-mirrors 1 numbers named by 91031FE501NN, no catalog link: 91031FE501VO
+07:08:16 chain-unlinked climate-control 1 numbers named by 72311FG000, no catalog link: 72311FG002
+07:08:16 chain-unlinked climate-control 1 numbers named by 72311FG010, no catalog link: 72311FG011
+07:08:16 chain-unlinked climate-control 1 numbers named by 72311FG040, no catalog link: 72311FG042
+07:08:16 chain-unlinked climate-control 1 numbers named by 72311FG041, no catalog link: 72311FG042
+07:08:56 chain-unlinked headlights 1 numbers named by 84001FG250, no catalog link: 84001FG251
+07:08:56 chain-unlinked headlights 1 numbers named by 84001FG330, no catalog link: 84001FG331
+07:08:56 chain-unlinked headlights 1 numbers named by 84001FG240, no catalog link: 84001FG241
+07:08:56 chain-unlinked headlights 1 numbers named by 84001FG320, no catalog link: 84001FG321
+07:15:45 STOPPED: www.subarupartsdeal.com refused or challenged (HTTP 503); domain stopped for this program
