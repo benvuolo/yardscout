@@ -3168,3 +3168,5 @@ each); nothing allowlisted or crawled.
 - **Next:** the hub's confirm, then branch interchange/aftermarket-1
   (spectrapremium.json + _AM_LABELS + coils in _AM_CATS). The category
   release is category-breadth's. Each re-curation needs a fresh sample.
+- 2026-11-10 02:45 UTC, GM wheels: no tier W records yet. GM's job in run 42684614492 ended with tier A done (344 seeds) and tier B at 257. Run 42712787314 continues it at about 15 B seeds per 70 min, so B finishes in ~7 h and W (~344 seeds) then takes more than a day at that pace. The GM wheels round starts when tier W output lands; check-in scheduled.
+- Live check 01:49 UTC: yardscout.io data/oem/wheels.json serves 50 groups, interchange.json 44 categories (after the 01:12 scan revert was repaired by ec59413 / 838ca47).
