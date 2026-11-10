@@ -232,3 +232,20 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
   - Gated coverage beyond same model+gen: coils 11.1%, throttle body 7.6%, heater core 5.7%, A/C compressor 4.9%, condenser 4.0%, evaporator 3.4%, radiator 3.3%, fuel pump 1.3% of 338k lot cars.
 - Not done: cancelling the stale aftermarket run 42714835085 to move 1A lamp lines ~3 h earlier was refused by the permission classifier. The normal order applies, and 1A lighting starts ~07:40.
 - Pending: GM wheels (tier W lands in more than a day); Honda/Nissan R3 after tier C; make-breadth completion from run 26; category tier D after the placeholder pass; GSP/1A §11.4 when their categories finish.
+
+## 2026-11-10 ~07:00–12:30 UTC 503 cluster, platform pacing, GSP cv-axle live
+- 503 cluster: 07:10–07:16 mbpartsgiant, nissanpartsdeal and subarupartsdeal got a 503 each and went .blocked. Run 25 had 6 SimplePart jobs live at once (max-parallel 6). All 20 dealer stores are one platform (SOURCES.md §2).
+  - Fix merged at f603b035 (make breadth): one CI job per platform, round-robin site turns, an 8 s platform-wide gap in fetch.py, and a refusal log (raw/<site>.refusals.jsonl).
+  - platform_crawl.py skips a site after an unexpected crawl exit or 2 net-failure exits; turns end 10 min inside the job timeout.
+  - Run 26 (42775878285) started 10:00 on the old workflow and couldn't be cancelled; no new .blocked as of 12:12.
+  - OWNER DECISION PENDING: one retry each for mbpartsgiant and nissanpartsdeal after the pacing fix (subaru already used its retry).
+- 1A Auto: 503-blocked at 04:30 and OUT (raw kept, unused; the stored-copy verifier was refused; outreach is the owner's call). No other permitted free lamp/mirror source (SOURCES.md); lamp depth comes from the OEM catalogs.
+- GSP cv-axle merged (eb09d422 + 491c846e, sw jh-v178, live 12:23).
+  - §11.4 needed 4 rounds: round 1 found union engines; round 3 had 2 WRONG (Santa Fe Sport vs LWB). Fixes: per-year strict engine coverage, sibling-name guard, spline/length checks in the note.
+  - Round 4: 0 WRONG.
+  - 88 groups (59 front, 29 rear) with the donor-side driven-axle gate (d) in the app.
+  - Live check: a 2021 Terrain search from Tulsa shows a 2022 Equinox via NCV10179.
+  - Follow-up to design: move provenance sentences behind "Why it fits" (cards are long).
+- HMG own-page breadth: option 3. Keep the shipped groups; make-breadth-hmg-body is parked (round 1: 9 WRONG; round 2: 3 WRONG + 16 UNSURE on variant pairs).
+- LIVE-ACCURACY: production-date windows. Shipped toyota/lexus (26 dropped + 6 trimmed) and ford (7 dropped) rest on own-page rows whose production window misses the claimed year (e.g. IS 83800-53580, RX 83800-0E011, GS 81070-30B82). Make breadth is running a 39-item 2-verifier check, then ships rule (b) (07..06 OR calendar span) or (a) in one re-curated push. Priority over new breadth.
+- The scan.yml payload-rebuild fix worked in production (the 05:23 scan rebuilt and kept 44 categories / 50 wheels / Spectra).
