@@ -1175,3 +1175,38 @@
 05:05:17 chain-unlinked strut 1 numbers named by 48510-80022, no catalog link: 48510-80238
 05:05:25 seg done tier=C Lexus SC 430 [2002, 2005] seeds=[2002] records=3012 errors=52
 05:05:25 finished records=3012 errors=52 chain_records=7 chain_unlinked=546 chain_failed=0 chain_given_up=0
+15:14:43 start site=www.lexuspartsnow.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=3012 list_lines=687 year_lines=152 url_index=15381
+15:14:43 completion worklist completion/toyota.own_page.json: 106 rows
+15:15:33 chain-unlinked bumper-rear 1 numbers named by 52159-53918, no catalog link: 52159-53926
+15:24:12 chain-unlinked side-mirrors 1 numbers named by 87910-53400-E1, no catalog link: 87910-53401-E1
+15:24:12 chain-unlinked side-mirrors 1 numbers named by 87910-53400-J0, no catalog link: 87910-53401-J0
+15:24:12 chain-unlinked side-mirrors 1 numbers named by 87910-53400-J1, no catalog link: 87910-53401-J1
+15:24:12 chain-unlinked side-mirrors 1 numbers named by 87910-53410-A0, no catalog link: 87910-53551-A0
+15:24:12 chain-unlinked side-mirrors 1 numbers named by 87910-53410-B0, no catalog link: 87910-53551-B0
+15:24:12 chain-unlinked side-mirrors 1 numbers named by 87910-53410-E0, no catalog link: 87910-53551-E0
+15:24:12 chain-unlinked side-mirrors 1 numbers named by 87910-53410-E1, no catalog link: 87910-53551-E1
+15:24:12 chain-unlinked side-mirrors 1 numbers named by 87910-53410-J0, no catalog link: 87910-53551-J0
+15:24:12 chain-unlinked side-mirrors 1 numbers named by 87910-53410-J1, no catalog link: 87910-53551-J1
+15:24:12 chain-unlinked side-mirrors 1 numbers named by 87940-53400-E1, no catalog link: 87940-53401-E1
+15:24:12 chain-unlinked side-mirrors 1 numbers named by 87940-53400-J0, no catalog link: 87940-53401-J0
+15:24:12 chain-unlinked side-mirrors 1 numbers named by 87940-53400-J1, no catalog link: 87940-53401-J1
+15:24:12 chain-unlinked side-mirrors 1 numbers named by 87940-53410-A0, no catalog link: 87940-53561-A0
+15:24:12 chain-unlinked side-mirrors 1 numbers named by 87940-53410-B0, no catalog link: 87940-53561-B0
+15:24:12 chain-unlinked side-mirrors 1 numbers named by 87940-53410-E1, no catalog link: 87940-53411-E1
+15:24:12 chain-unlinked side-mirrors 1 numbers named by 87940-53410-J0, no catalog link: 87940-53561-J0
+15:24:12 chain-unlinked side-mirrors 1 numbers named by 87940-53410-J1, no catalog link: 87940-53561-J1
+15:30:28 chain-unlinked headlights 1 numbers named by 81130-0E040, no catalog link: 81145-0E030
+15:30:28 chain-unlinked headlights 1 numbers named by 81170-0E040, no catalog link: 81185-0E030
+15:30:28 chain-unlinked headlights 1 numbers named by 81130-0E031, no catalog link: 81145-0E031
+15:30:28 chain-unlinked headlights 1 numbers named by 81170-0E031, no catalog link: 81185-0E031
+15:35:24 chain-unlinked side-mirrors 1 numbers named by 87901-33080-C1, no catalog link: 87901-33080-C2
+15:40:36 chain-unlinked side-mirrors 1 numbers named by 87910-53550-E1, no catalog link: 87910-53551-E1
+15:40:36 chain-unlinked side-mirrors 1 numbers named by 87910-53550-J0, no catalog link: 87910-53551-J0
+15:40:36 chain-unlinked side-mirrors 1 numbers named by 87910-53550-J1, no catalog link: 87910-53551-J1
+15:40:36 chain-unlinked side-mirrors 1 numbers named by 87940-53560-J0, no catalog link: 87940-53561-J0
+15:40:36 chain-unlinked side-mirrors 1 numbers named by 87940-53560-J1, no catalog link: 87940-53561-J1
+15:46:53 chain-unlinked side-mirrors 1 numbers named by 87940-53480-B0, no catalog link: 87940-53571-B0
+15:46:53 chain-unlinked side-mirrors 1 numbers named by 87910-53470-K0, no catalog link: 87910-53471-K0
+15:46:53 chain-unlinked side-mirrors 1 numbers named by 87910-53480-B0, no catalog link: 87910-53571-B0
+15:47:48 chain-unlinked trunk-lid 1 numbers named by 64401-53201, no catalog link: 64401-53200
+15:48:21 time budget reached records=3150
