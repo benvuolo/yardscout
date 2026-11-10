@@ -3274,3 +3274,13 @@ each); nothing allowlisted or crawled.
       at the shipped 54 until then.
   - **Lesson for every namespace:** variant names (Koup, Hybrid, EV, XL,
     Sport) and production-date windows need checking before sampling.
+- 2026-11-10 09:41 check-in:
+  - **nissanpartsdeal .blocked**: HTTP 503 at 07:15:50 during tier C, run
+    42712787314. subarupartsdeal got a 503 at 07:15:45, so these were
+    clustered 503s across the network (as on 11-05). No `.retried503` on
+    nissan. Any retry is the hub's/owner's call; nothing was changed or
+    worked around. Effect: the 201 Nissan R3 rows cannot be crawled. The
+    Nissan side keeps seed-proxy own-page evidence only.
+  - Tier C finished: honda `.v2.done` (1,942 records), acura (951),
+    infiniti (2,133).
+  - R3 for those three runs in pending run 42775878285.
