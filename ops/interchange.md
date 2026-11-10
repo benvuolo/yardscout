@@ -3125,3 +3125,12 @@ each); nothing allowlisted or crawled.
   (e4d6373), not merged; gates as a dict in a[5].
 - **Next:** §11.4 round 2 (fresh seed, all configs of one row per group)
   -> hub.
+- **2026-11-10 01:15 UTC check-in.** No `raw/*.c1.done` yet. Completion has
+  read pages only on hyundai (48), kia (59) and vw (50), before their tier C
+  bump. All 15 completion sites wait behind re-opened worklist passes: the
+  tier C vN flags and the tier D placeholder pass (aee4fdc). markers.mode
+  runs completion only after the current worklist marker. Asked the hub
+  whether completion should go first on gm/ford/mopar/toyota (that would be
+  a markers.py change; not touched). The live inventory has been rescanned:
+  test_model_map OK, so curate uses inventory_live.json again (no
+  `--inventory` workaround). Next check-in ~07:15 UTC.
