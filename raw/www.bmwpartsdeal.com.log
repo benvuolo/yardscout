@@ -1573,3 +1573,26 @@
 11:35:40 chain-unlinked side-mirrors 1 numbers named by 51-16-7-283-611, no catalog link: 51-16-7-206-909
 11:35:40 chain-unlinked side-mirrors 1 numbers named by 51-16-7-283-612, no catalog link: 51-16-7-206-910
 11:35:56 time budget reached records=2124
+11:36:24 start site=www.bmwpartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2124 list_lines=1041 year_lines=161 url_index=0
+11:36:24 completion worklist completion/bmw.own_page.json: 507 rows
+11:41:47 product-fail https://www.bmwpartsdeal.com/parts/bmw-accessories_outer_tail_lamp_left-63217252093.html: ValueError: no partInfo in store
+11:41:51 product-fail https://www.bmwpartsdeal.com/parts/bmw-accessories_outer_tail_lamp_right-63217252094.html: ValueError: no partInfo in store
+11:41:55 product-fail https://www.bmwpartsdeal.com/parts/bmw-accessories_tailgate_tail_lamp_left-63217252783.html: ValueError: no partInfo in store
+11:42:03 product-fail https://www.bmwpartsdeal.com/parts/bmw-accessories_tailgate_tail_lamp_right-63217252784.html: ValueError: no partInfo in store
+11:44:51 chain-unlinked headlights 1 numbers named by 63-12-7-045-696, no catalog link: 63-12-7-044-676
+11:44:51 chain-unlinked headlights 1 numbers named by 63-12-7-045-695, no catalog link: 63-12-7-044-675
+11:44:59 chain-unlinked side-mirrors 1 numbers named by 51-16-7-189-581, no catalog link: 51-16-7-168-307
+11:44:59 chain-unlinked side-mirrors 1 numbers named by 51-16-7-189-584, no catalog link: 51-16-7-168-308
+11:44:59 chain-unlinked side-mirrors 1 numbers named by 51-16-7-189-591, no catalog link: 51-16-7-168-365
+11:44:59 chain-unlinked side-mirrors 1 numbers named by 51-16-7-189-594, no catalog link: 51-16-7-168-366
+11:45:47 chain-unlinked gauge-cluster 3 numbers named by 62-10-9-194-883, no catalog link: 62-11-9-153-749, 62-10-9-168-858, 62-10-9-177-253
+11:45:47 chain-unlinked gauge-cluster 5 numbers named by 62-11-6-958-594, no catalog link: 62-11-6-937-612, 62-11-6-945-627, 62-11-6-942-938, 62-11-6-944-120, 62-10-6-947-357
+11:45:55 chain-unlinked headlights 1 numbers named by 63-12-7-166-117, no catalog link: 63-11-6-933-187
+11:45:55 chain-unlinked headlights 1 numbers named by 63-12-7-166-118, no catalog link: 63-11-6-933-188
+11:45:55 chain-unlinked headlights 1 numbers named by 63-12-7-166-119, no catalog link: 63-11-6-933-177
+11:45:55 chain-unlinked headlights 1 numbers named by 63-12-7-166-120, no catalog link: 63-11-6-933-178
+11:53:23 chain-unlinked climate-control 1 numbers named by 64-11-6-915-282, no catalog link: 64116916656
+11:57:15 chain-unlinked gauge-cluster 2 numbers named by 62-10-6-805-241, no catalog link: 62-10-9-342-804, 62-10-9-328-813
+11:57:15 chain-unlinked gauge-cluster 1 numbers named by 62-10-9-312-036, no catalog link: 62108795124
+11:58:03 chain-unlinked window-regulator 1 numbers named by 67-62-7-258-534, no catalog link: 51357382135
+12:08:51 time budget reached records=2131
