@@ -2664,6 +2664,65 @@ Other outputs of this session:
        app category entry (exact price tokens: "=wiper motor", "=windshield wiper motor",
        "=wiper motor front", "=wiper motor rear"…, mined from coverage_matrix.chain_price_lists) on
        interchange/categories-<n>, together with its groups.
+  - **Handover state, 2026-11-10 12:30 UTC (session_016ZzJfHdWViThcgyPbNG4i7 stops here; hub starts a
+    fresh wiper-motor session):**
+    - ORDER: branch AFTER make breadth's production-date push (hashed input, `--ns all` re-curation)
+      lands on main, or rebase onto it. Two re-curations must not race.
+    - Tier C data on oem-raw (seg-done lines, 12:20 UTC):
+
+      | Site | Segs |
+      |---|---|
+      | ford | 460 |
+      | jeep | 320 |
+      | hyundai | 212 |
+      | toyota | 196 |
+      | bmw | 113 |
+      | honda | 75 |
+      | kia | 75 |
+      | mazda | 60 |
+      | vw | 58 |
+      | infiniti | 47 |
+      | nissan | 45 (PARTIAL, blocked 503 07:15) |
+      | mitsubishi | 37 |
+      | lexus | 31 |
+      | mb | 31 (PARTIAL, blocked 503 07:10) |
+      | audi | 26 |
+      | volvo | 25 |
+      | acura | 17 |
+
+      gm: tier C follows A/B (not reached). subaru withheld/blocked, mopar blocked. Hub
+      cause: 6 SimplePart jobs at once in run 25, fixed by platform pacing f603b035. Retry for
+      mb/nissan is with the owner; subaru stays stopped.
+    - Tier D placeholder (tierD=1, list pages only): rows so far only on hyundai (69 segs). The other
+      13 flagged sites follow after their c1.done (completion-first, hub 01:15). Per site, once its D
+      lines exist:
+      1. read raw/<site>.lists.jsonl rows with tier "D";
+      2. replace the placeholder (?!x)x rules in sites/<site>.py ("tier D: name rule pending") with
+         strict rules: colour/trim words kept, airbag rows excluded;
+      3. set worklist "tierD": 2 and raise the version (crawl.tier_key → "D2" re-reads);
+      4. ci_audit;
+      5. curation then reads only "D2" lines.
+
+      honda/acura/nissan/infiniti tier D belong to session_016ZzJfMtLKpUFu8TiEFMrkF (nissan now
+      blocked).
+    - Open items:
+      (a) wiper-motor curation + §11.4 (plan above).
+      (b) Tier D wave 1 rules per site as rows land.
+      (c) Tier D wave 2 (door-handle-ext/int, door-lock-actuator, backup-camera, tailgate-handle):
+          slugs and plumbing not started.
+      (d) rear-seat airbag rule (research first; any airbag → never included).
+      (e) knuckle/strut curation, last (path E audit checklist:
+          groups/_report/pathE_audit_2026-11-09.json). Notes:
+          - Ford kit / assy / loaded-strut packaging;
+          - Jeep 68088535AC "Knuckle And Hub" → AD bare;
+          - 2AMST022AA accessory shock: never group;
+          - VW "Spindle" naming;
+          - hmg body/production gates (make breadth).
+      (f) GROUP_HOLD_CATS releases:
+          - only per source after its §11.4 + hub confirm (_AM_SITE_CATS / AM_RELEASED);
+          - Spectra (7 cats + coils) and GSP (cv-axle) are released;
+          - OEM is held in all 14.
+      (g) Tiles: propose junkyard-demand tile changes with the next category batch (hub).
   - Next per site, once the CI placeholder pass has written its tier D list rows on oem-raw:
     write rules from raw/<site>.lists.jsonl, set tierD 2, raise the version, then ci_audit.
 - Tier C priority: wiper-motor curation and §11.4 next, once honda/toyota/nissan have C data.
