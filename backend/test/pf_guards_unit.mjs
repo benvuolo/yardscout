@@ -751,8 +751,8 @@ print(json.dumps([G.engine_agrees(G.parse_engine(a), G.parse_engine(b)) for a, b
     Object.values(r.rows).every(x => x.tier === 'likely' && x.warn.includes('count the lugs')), JSON.stringify(r.rows));
   check('wheels: yard price reads "each" with the yard row (size tier) inline, and no savings line', r.html.includes('Yard: $31.99 each <span class="pf-price-row"') && r.html.includes('(WHEEL ALUMINUM)') && !r.html.includes('pf-save'));
   check('wheels: the online value says it is for a set of 4 (the yard price is per wheel)', r.html.includes('$200–$400 for a set of 4</span>'), '');
-  check('wheels: header reads "carrying fitting wheels" (no "a" before a plural label)',
-    r.html.includes('carrying fitting wheels') && !r.html.includes('a fitting wheels'), (r.html.match(/carrying[^<]{0,40}/) || [''])[0]);
+  check('wheels: header reads "carry fitting wheels" (no "a" before a plural label)',
+    /carr(y|ies) fitting wheels/.test(r.html) && !r.html.includes('a fitting wheels'), (r.html.match(/carr[^<]{0,40}/) || [''])[0]);
   // size-tiered yard list: the line shows the whole per-wheel range, never only the cheapest tier
   ctx.yardPartQuote = () => ({ status: 'priced', part: 'WHEEL ALUM UNDER 16"', price: 28.99, core: 14 });
   ctx.__priceList = [{ part: 'WHEEL ALUM UNDER 16"', price: 28.99, core: 14 }, { part: 'WHEEL ALUM OVER 16"', price: 39.99, core: 14 },
