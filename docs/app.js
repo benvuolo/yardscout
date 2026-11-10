@@ -7726,7 +7726,7 @@ function pfAmRows(s, groups, results, radius, fam) {
       }
       if (pfCat && pfCat.rowWarn) warns.push(escapeHtml(pfCat.rowWarn));
       if (g.trans && !tr) warns.push(`this unit is for ${g.trans === 'AT' ? 'automatic' : 'manual'}-transmission cars — check the transmission`);
-      results.set(v.id, { v, d, tier: 'likely', src: 'aftermarket', srcLine, srcMore: split.more ? escapeHtml(split.more) : '', warns });
+      results.set(v.id, { v, d, tier: 'likely', src: 'aftermarket', srcLine, srcMore: split.more ? escapeHtml(split.more) : '', srcUnit: escapeHtml(`${g.label || ''} ${g.unit || ''}`.trim()), warns });
     }
   }
   return hit;
@@ -7771,7 +7771,7 @@ function pfDonorCardHtml(r, cls, chip, valueHtml) {
           <div class="pf-meta">${escapeHtml(v.location)}${r.d != null ? ` &middot; <span class="dist">${Math.round(r.d)}\u00a0mi</span>` : ''}${dateLbl ? ` &middot; set out ${dateLbl}` : ' &middot; set-out date unknown'}${saleBadgeHtml(v.location)}</div>
         </div>
       </div>
-      ${r.srcLine ? `<details class="pf-src-more"><summary>Why it fits <span class="chev-r" aria-hidden="true"></span></summary><div class="pf-note pf-src">Source: ${r.srcLine}</div>${r.srcMore ? `<div class="pf-note pf-src-more-text">${r.srcMore}</div>` : ''}</details>` : ''}
+      ${r.srcLine ? `<details class="pf-src-more"><summary>Why it fits${r.srcUnit ? ` <span class="pf-src-unit">&middot; ${r.srcUnit}</span>` : ''} <span class="chev-r" aria-hidden="true"></span></summary><div class="pf-note pf-src">Source: ${r.srcLine}</div>${r.srcMore ? `<div class="pf-note pf-src-more-text">${r.srcMore}</div>` : ''}</details>` : ''}
       ${valueHtml ? `<div class="pf-value">${valueHtml}</div>` : ''}
       ${r.warns && r.warns.length ? `<div class="pf-warn">${r.warns.join(' &middot; ')}</div>` : ''}
       <div class="cc-actions">${pullBtnHtml(key)}<button type="button" class="btn btn-quiet car-open" data-vkey="${escapeHtml(key)}">Details</button></div>
