@@ -2610,6 +2610,12 @@ Other outputs of this session:
     cosmetic render, and kind wording. Sent to the hub for regression 23:50 UTC.
   - Not run here (no Python playwright): interchange_e2e, pf_ux_e2e, part_finder_e2e.
     Passed: ui_no_truncation (1296/0), pf_guards_unit, pf_new_cats_e2e, all unit suites.
+  - 2026-11-10 00:56 UTC: categories-ship merged by the hub (ef5d52e6, sw jh-v176; interchange.json
+    has 44 categories). Tiles unchanged (hub): propose tile changes with the next batch.
+  - Crawl state 00:58 UTC: run 24 (dispatched 19:34, head b71585b) is still in progress (GM).
+    Run 25 is pending (scheduled 22:32, head 435f911) and predates the tierD flags (aee4fdc), so
+    it crawls tier C only. The tier D placeholder pass starts with the first scheduled run after
+    25. Tier C data so far: vw, hyundai, kia.
   - Next per site, once the CI placeholder pass has written its tier D list rows on oem-raw:
     write rules from raw/<site>.lists.jsonl, set tierD 2, raise the version, then ci_audit.
 - Tier C priority: wiper-motor curation and §11.4 next, once honda/toyota/nissan have C data.
