@@ -9291,6 +9291,225 @@ INTERCHANGE_PART_CATEGORIES: dict[str, dict] = {
         ],
         "rowWarn": "count the lugs; read the size on the back (e.g. 17x7J), offset and hub bore",
         "perEach": True},
+    # 2026-11-09 category breadth (ops/interchange.md §9): parts the aftermarket
+    # unit lists (Spectra Premium, GSP/1A) cover. Donors come ONLY from those
+    # unit groups (Likely, unit named) and same-model-generation cars; no
+    # engine-family path ("path E" failed its audit 34/60) and no platform
+    # group. Kinds: combo = same generation x engine chip (engine/transmission
+    # split these parts); exact = same generation only; body = strut, which
+    # OEM catalog groups (tier C) will join after their own audit.
+    # priceTokens are EXACT rows mined from the yards' published lists
+    # (coverage_matrix.chain_price_lists, 2026-11-09): the client quotes the
+    # cheapest substring hit, so a bare "radiator" would price a radiator cap,
+    # "fuel pump" a mechanical pump and "strut" a hood strut.
+    "radiator": {
+        "label": "Radiator", "kind": "combo",
+        "tokens": [], "priceTokens": [
+            "=radiator", "=radiator car", "=radiator- car", "=radiator truck", "=radiatr-trk/suv/van",
+            "=radiator aluminum", "=radiator alum", "=radiator (aluminium)", "=radiator  aluminum/plastic tank",
+            "=radiator copper", "=copper radiator", "=radiator (brass)", "=brass radiator",
+            "=radiator  (metal tanks)", "=radiator (w/o shroud)", "=radiator (w/o shrd) truck",
+            "=radiator (no cooling fan)"],
+        "notes": [
+            "Radiators split within one model by engine, by transmission "
+            "(automatics carry a cooler in the tank) and by towing package. "
+            "Match the core size, the inlet and outlet positions and the "
+            "trans-cooler fittings to your car.",
+            "Check the plastic tanks for hairline cracks at the seams and the "
+            "core for bent or corroded fins before you pull."],
+        "rowWarn": "check the trans-cooler fittings on the tank and the inlet/outlet positions"},
+    "ac-compressor": {
+        "label": "A/C compressor", "kind": "combo",
+        "tokens": ["a/c compressor"], "priceTokens": [
+            "=a/c compressor", "=ac compressor", "=a/c compressor (all)"],
+        "notes": [
+            "Compressors split by engine and changed within some engine "
+            "families. Match the pulley grooves, the mounting bolt pattern "
+            "and the electrical connector.",
+            "Spin the clutch by hand: it should turn smoothly with no "
+            "grinding. A compressor from a car whose system was left open is "
+            "a gamble."],
+        "rowWarn": "match the pulley, the mounting pattern and the connector"},
+    "ac-condenser": {
+        "label": "A/C condenser", "kind": "exact",
+        "tokens": [], "priceTokens": [
+            "=a/c condenser", "=ac condenser", "=a/c condensor", "=ac condensor"],
+        "notes": [
+            "Condensers can differ between body styles of one model and "
+            "between engines. Match the size, the line fittings and the "
+            "receiver-drier mount.",
+            "Front-mounted: check for stone damage, bent fins and oily spots "
+            "(leaks)."],
+        "rowWarn": "match the line fittings and the receiver-drier mount"},
+    "heater-core": {
+        "label": "Heater core", "kind": "exact",
+        "tokens": [], "priceTokens": ["=heater core"],
+        "notes": [
+            "Heater cores sit inside the HVAC box behind the dash on most "
+            "cars: plan on removing the dash or the box. Cars with dual- or "
+            "automatic climate can use a different core.",
+            "Look for green crust or a sweet smell at the pipes (a leaker)."],
+        "rowWarn": "match the pipe positions; most need the dash or HVAC box out"},
+    "evaporator": {
+        "label": "A/C evaporator", "kind": "exact",
+        "tokens": [], "priceTokens": ["=a/c evaporator", "=ac evaporator"],
+        "notes": [
+            "The evaporator lives inside the HVAC box: plan on removing it. "
+            "Rear-A/C vans and SUVs have a second evaporator that is a "
+            "different part.",
+            "An evaporator from a car whose system was left open can be "
+            "corroded inside; check the fins and fittings."],
+        "rowWarn": "front evaporator only; match the fittings"},
+    "throttle-body": {
+        "label": "Throttle body", "kind": "combo",
+        "tokens": ["electronic throttle body"], "priceTokens": [
+            "=throttle body", "=throttle body assy", "=throttle body assm.",
+            "=throttle body (bare)", "=throttle body electronic",
+            "=throttle body (electric)", "=throttle body electr",
+            "=throttle body with sensor"],
+        "notes": [
+            "Throttle bodies split by engine and by cable vs drive-by-wire "
+            "(electronic) years. Match the part number and the connector.",
+            "Some electronic throttle bodies need a relearn after install."],
+        "rowWarn": "match the part number; cable and electronic units differ"},
+    "fuel-pump-module": {
+        "label": "Fuel pump (in-tank module)", "kind": "combo",
+        "tokens": ["fuel pump module"], "priceTokens": [
+            "=fuel pump elec. in tank w/send", "=fuel pump w/ send", "=fuel pump w/send unit",
+            "=fuel tank send pump", "=fuel pump elec. in tank", "=fuel pump electric",
+            "=fuel pump (electric)", "=fuel pump (elec)", "=fuel pump"],
+        "notes": [
+            "Modules split by engine, by fuel tank size, by flex-fuel and on "
+            "some cars by California emissions. Match the part number on the "
+            "module flange.",
+            "Reuse the lock ring and seal only if undamaged; the pump itself "
+            "can't be tested at the yard."],
+        "rowWarn": "match the module part number; check the emissions label (Federal vs California)"},
+    "cv-axle": {
+        "label": "CV axle (half shaft)", "kind": "combo",
+        "tokens": [], "priceTokens": [
+            "=c-v axle", "=cv axle", "=cv axle shaft - bare", "=axle - cv type",
+            "=axle shaft - cv type", "=axle shaft-c/v type", "=axle c.v.",
+            "=cv half shaft axle", "=axle half shaft", "=axle/c-v shaft",
+            "=c-v axle frnt  drive", "=c-v axle front drive", "=c-v axle frnt drive",
+            "=c-v axle front  drive", "=cv axle front  drive",
+            "=axle (f.w.d.) cv type-no spindle", "=axle shaft fwd", "=axle shaft fwd cv ax"],
+        "notes": [
+            "Left and right axles differ, and so do automatic and manual, "
+            "2WD and AWD, and engine sizes. Match the side, the spline count "
+            "and the length.",
+            "Torn boots let grit into the joint: pass on an axle with a "
+            "split or greasy boot."],
+        "rowWarn": "match the side, the spline count and the transmission"},
+    "strut": {
+        "label": "Strut / shock absorber", "kind": "body",
+        "tokens": ["strut assembly", "shock absorber"], "priceTokens": [
+            "=strut", "=strut assembly", "=strut assembly (no spindle)", "=strut (no spindle)",
+            "=strut w/o spring", "=strut no spring", "=strut- no spring",
+            "=strut-without spring coil", "=strut - without spring coil", "=strut with out spring",
+            "=strut and spring", "=strut with coil spring", "=strut w/coil spring",
+            "=strut w/spring", "=strut w/ spring", "=strut with spring",
+            "=suspension strut", "=shock absorber", "=shock absorber (regular)",
+            "=shock absorber std", "=shock (suspension)", "=shock - standard",
+            "=shock absorber no spring", "=shock no spring"],
+        "notes": [
+            "Struts and shocks split front and rear, left and right, by "
+            "drivetrain (AWD) and by suspension package (sport, towing, "
+            "air/adaptive). Match the part number on the body.",
+            "Struts wear in pairs. Push the shaft in: it should return "
+            "smoothly, with no oil on the body. Compressing a strut spring "
+            "needs a spring compressor; a loaded strut (with spring) is the "
+            "safer pull."],
+        "rowWarn": "match front/rear and side; air, adaptive and sport units differ"},
+    # 2026-11-09 tier D wave 1 (owner: "parts people go to junkyards for";
+    # ops/interchange.md §10). Body kind: same-model-generation donors now,
+    # OEM catalog groups after their own §11.4. Several are options (sunroof,
+    # fog lights): a same-generation donor may not have one, so every row says
+    # check first. Interior parts are colour- and trim-specific. priceTokens
+    # are EXACT rows from the yards' lists (2026-11-09); bare substrings
+    # would quote a shade, a bezel, a console lid or a resistor.
+    "sunroof": {
+        "label": "Sunroof (glass / motor)", "kind": "body",
+        "tokens": ["sunroof glass + motor", "sunroof assembly", "sunroof motor + glass",
+                   "panoramic sunroof assembly", "panoramic roof assembly"],
+        "priceTokens": [
+            "=sunroof assy", "=sunroof assembly", "=sun roof assembly", "=sun roof assy",
+            "=sunroof assm.", "=sun roof assm.", "=sunroof complete", "=sunroof assym comp.",
+            "=sunroof assy+motor", "=sunroof w/motor", "=sunroof assembly electric",
+            "=sunroof assy-power", "=sun roof (power)", "=sunroof - power", "=sunroof electric",
+            "=sunroof/cover/shade assembly w/motor", "=top - sunroof frame with glass",
+            "=sunroof glass", "=sun roof glass", "=sunroof glass only", "=glass - sunroof",
+            "=glass sunroof", "=roof glass (sun roof)", "=top - sunroof glass only",
+            "=sunroof motor", "=sun roof motor", "=sunroof mtr", "=motor - sun roof",
+            "=top motor, sunroof", "=sunroof motor assembly", "=sunroof"],
+        "notes": [
+            "A sunroof is an option: look up at the donor's roof before you "
+            "drive. Standard and panoramic roofs, and power and manual units, "
+            "are different parts.",
+            "Pull the glass and the motor together if you can. Check the "
+            "glass for chips and the tracks for broken guides; a clogged "
+            "drain tube means water damage inside."],
+        "rowWarn": "check the donor has a sunroof; standard, panoramic and manual units differ"},
+    "center-console": {
+        "label": "Center console", "kind": "body",
+        "tokens": ["center console ("],
+        "priceTokens": [
+            "=center console", "=console (center)", "=console floor", "=console (any)",
+            "=console ( any)", "=console", "=console bare", "=center console small",
+            "=center console large", "=console (small)", "=console (sm)", "=console small",
+            "=console - small", "=console (med)", "=console medium", "=console (large)",
+            "=console (lg)", "=console large", "=console - large", "=console (xlarge)",
+            "=console short", "=console long"],
+        "notes": [
+            "Consoles split by colour, by trim (leather, wood, shifter type) "
+            "and by automatic vs manual, and some carry climate or seat "
+            "switches. Match the colour and the shifter opening.",
+            "Check the lid hinge and latch: a broken lid is the common "
+            "failure. Overhead consoles are a different part."],
+        "rowWarn": "match the colour and the shifter opening (automatic vs manual)"},
+    "door-panel": {
+        "label": "Door panel (interior trim)", "kind": "body",
+        "tokens": ["door panels / interior trim", "interior door panels"],
+        "priceTokens": [
+            "=interior door panel", "=door panel (interior)", "=door panel (interior) g2",
+            "=int. door panel", "=int door panel", "=door trim panel", "=door trim panel(w/o acce)",
+            "=door panel", "=door panel complete", "=door panel bare", "=door panel (bare)",
+            "=door panel - bare", "=door panel front (bare)", "=door panel w/o switc",
+            "=door panel- no switches", "=interior door panel with master switch"],
+        "notes": [
+            "Door panels split by colour, by trim (cloth, leather, wood) and "
+            "by power vs manual windows, and front panels differ from rear. "
+            "Match the colour, the switch cut-outs and the speaker size.",
+            "Clips break on removal: bring a trim tool and spare clips. "
+            "Leave the switches and speakers in unless the yard prices them "
+            "separately."],
+        "rowWarn": "match the colour, the switch cut-outs and front vs rear"},
+    "blower-motor": {
+        "label": "Blower motor (heater fan)", "kind": "body",
+        "tokens": ["blower motor"],
+        "priceTokens": [
+            "=heater blower motor", "=blower motor", "=a/c blower motor", "=blower motor-heater",
+            "=motor - blower w/fan", "=motor blower w/o fan", "=blower motor w housi"],
+        "notes": [
+            "Blower motors split by climate system (manual vs automatic) and "
+            "on some cars by front vs rear (vans and SUVs with rear air). "
+            "Match the connector and the fan wheel.",
+            "Spin the fan by hand: it should turn freely and quietly. The "
+            "resistor or control module is a separate part."],
+        "rowWarn": "match the connector and the fan wheel; rear-air units differ"},
+    "fog-lights": {
+        "label": "Fog lights", "kind": "body",
+        "tokens": ["fog lights + bezels", "oem fog lights"],
+        "priceTokens": [
+            "=fog light", "=fog lamp", "=foglight", "=foglamp", "=fog lights",
+            "=fog lamp (each)", "=fog lamps each", "=fog lamp-each"],
+        "notes": [
+            "Fog lights are often a trim option, and facelifts change the "
+            "lamp and the bumper opening. Check the donor has them and "
+            "match left and right.",
+            "Check the lens for cracks and the housing for water inside. "
+            "Bezels and brackets are often separate."],
+        "rowWarn": "check the donor has fog lights; match the side and the bumper opening"},
 }
 
 # Default caveat lines — families override where the family has a sharper one.
@@ -14602,6 +14821,10 @@ def _attach_oem_layer_inner(payload: dict, before: dict, lazy_out: dict | None =
         payload["oemGroups"], payload["oemVg"] = [], {}
         payload["oemStatus"] = dict(sorted(status.items()))
         return
+    # held categories ship same-generation donors only (GROUP_HOLD_CATS)
+    groups = [g for g in groups if g["cat"] not in GROUP_HOLD_CATS]
+    vg = {fam: kept for fam, cats in vg.items()
+          if (kept := {c: v for c, v in cats.items() if c not in GROUP_HOLD_CATS})}
     payload["oemGroups"] = groups
     payload["oemVg"] = vg
     payload["oemStatus"] = dict(sorted(status.items()))
@@ -14717,8 +14940,40 @@ _OEM_BRANDS = {"toyota": "Toyota", "mopar": "Mopar", "gm": "GM", "ford": "Ford",
 # Verified. Any malformed group drops the whole file (fail closed).
 # ---------------------------------------------------------------------------
 OEM_AM_DIR_NAME = "aftermarket"
-_AM_CATS = ("alternator", "starter")
+_AM_CATS = ("alternator", "starter", "radiator", "ac-compressor", "ac-condenser", "heater-core",
+            "evaporator", "throttle-body", "fuel-pump-module", "cv-axle", "strut")
 _AM_LABELS = {"dbelectrical": "DB Electrical"}
+
+
+# Gated aftermarket app rows (2026-11-09, ops/interchange.md §9): a 6th element
+# limits the row to a body style and/or drivetrain the unit list states. The
+# client (pfAmGate in docs/app.js) applies it like the parts table's body and
+# drive gates: a confirming decode or listing keeps the donor, a decode naming
+# another body/drive drops it, anything else is "if equipped". Never inferred.
+_AM_DRIVES = ("awd", "4wd", "fwd", "rwd")
+
+
+def _am_app_gates(x) -> dict | None:
+    """{"body": str} and/or {"drive": one of _AM_DRIVES}; a bare string is the
+    older body-only form. Anything else is refused (the group is dropped)."""
+    if x is None or x == "" or x == {}:
+        return None
+    if isinstance(x, str):
+        x = {"body": x}
+    if not isinstance(x, dict) or not x or set(x) - {"body", "drive"}:
+        raise ValueError(f"app gates {x!r}")
+    out = {}
+    if "body" in x:
+        b = x["body"]
+        if not isinstance(b, str) or not b.strip() or len(b) > 40 or re.search(r"[<>]", b):
+            raise ValueError(f"app body gate {b!r}")
+        out["body"] = b.strip()
+    if "drive" in x:
+        d = x["drive"]
+        if not isinstance(d, str) or d.lower() not in _AM_DRIVES:
+            raise ValueError(f"app drive gate {d!r}")
+        out["drive"] = d.lower()
+    return out
 
 
 def _am_group_entry(g: dict, site: str) -> dict:
@@ -14733,24 +14988,38 @@ def _am_group_entry(g: dict, site: str) -> dict:
         raise ValueError("note refused (markup, a Verified claim, or over 600 chars)")
     apps, seen = [], set()
     for a in g.get("apps") or []:
-        mk, md, lo, hi, eng = a
+        if not isinstance(a, (list, tuple)) or len(a) not in (5, 6):
+            raise ValueError(f"malformed app {a!r}")
+        mk, md, lo, hi, eng = a[:5]
         if not (isinstance(mk, str) and isinstance(md, str) and mk and md and isinstance(lo, int)
                 and isinstance(hi, int) and 1940 <= lo <= hi <= 2030 and isinstance(eng, str)):
             raise ValueError(f"malformed app {a!r}")
-        k = (mk, md, lo, hi, eng)
+        gates = _am_app_gates(a[5]) if len(a) == 6 else None
+        k = (mk, md, lo, hi, eng, json.dumps(gates, sort_keys=True))
         if k not in seen:
             seen.add(k)
-            apps.append([mk, md, lo, hi, eng])
+            apps.append([mk, md, lo, hi, eng] + ([gates] if gates else []))
     if not apps:
         raise ValueError("no apps")
     amps = g.get("amps")
     trans = g.get("trans")
     if trans not in (None, "AT", "MT"):
         raise ValueError(f"trans {trans!r}")
+    # 1A Auto rows (hub 2026-11-09): options the unit needs ("if equipped",
+    # shown on the row, never ranked) and a cosmetic flag ("may need paint")
+    ife = g.get("if_equipped") or []
+    if not isinstance(ife, list) or len(ife) > 6 or any(
+            not isinstance(o, str) or not o.strip() or len(o) > 60 or re.search(r"[<>]", o) for o in ife):
+        raise ValueError(f"if_equipped {ife!r}")
+    cosmetic = g.get("cosmetic", False)
+    if not isinstance(cosmetic, bool):
+        raise ValueError(f"cosmetic {cosmetic!r}")
     return {"id": str(g["id"]), "cat": cat, "tier": "likely", "src": "aftermarket",
             "label": _AM_LABELS.get(site, site), "unit": str(g.get("unit") or ""),
             **({"amps": int(amps)} if isinstance(amps, (int, float)) and amps else {}),
             **({"trans": trans} if trans else {}),
+            **({"ifEquipped": [o.strip() for o in ife]} if ife else {}),
+            **({"cosmetic": True} if cosmetic else {}),
             "note": note, "apps": apps}
 
 
@@ -14823,6 +15092,16 @@ def _lazy_trim(doc: dict, budget: int) -> tuple[list, int]:
     return dropped, n_am
 
 
+# Categories that ship with same-model-generation donors only (hub 2026-11-09
+# 23:04 UTC): no OEM catalog or aftermarket group for them reaches the payload
+# until that source passes its own §11.4 sample for the category and the hub
+# confirms; then the category leaves this set in the same push.
+GROUP_HOLD_CATS = frozenset({
+    "radiator", "ac-compressor", "ac-condenser", "heater-core", "evaporator", "throttle-body",
+    "fuel-pump-module", "cv-axle", "strut",
+    "sunroof", "center-console", "door-panel", "blower-motor", "fog-lights"})
+
+
 def _attach_lazy_layers(payload: dict, lazy_out: dict) -> None:
     """Group the lazy entries by category into lazy_out["files"] ({cat:
     doc}), index them in payload["oemLazy"], then run V11 on the main file.
@@ -14833,10 +15112,20 @@ def _attach_lazy_layers(payload: dict, lazy_out: dict) -> None:
         if am["status"]:
             payload["amStatus"] = dict(sorted(am["status"].items()))
         by_cat: dict = {}
+        held = 0
         for g in lazy_out.get("oem") or []:
+            if g["cat"] in GROUP_HOLD_CATS:
+                held += 1
+                continue
             by_cat.setdefault(g["cat"], {"oemGroups": [], "amGroups": []})["oemGroups"].append(g)
         for g in am["groups"]:
+            if g["cat"] in GROUP_HOLD_CATS:
+                held += 1
+                continue
             by_cat.setdefault(g["cat"], {"oemGroups": [], "amGroups": []})["amGroups"].append(g)
+        if held:
+            print(f"[interchange] {held} OEM/aftermarket groups held back (GROUP_HOLD_CATS: "
+                  "same-generation donors only until each source's §11.4)", file=sys.stderr)
         V = _oem_validator() if by_cat else None
         files, index = {}, {}
         for cat in sorted(by_cat):
