@@ -2450,3 +2450,20 @@
 17:56:18 chain-unlinked window-regulator 1 numbers named by 69802-35101, no catalog link: 69802-35100
 17:56:26 chain-unlinked window-regulator 1 numbers named by 85720-35080, no catalog link: 85720-35120
 17:59:48 time budget reached records=4714
+18:00:15 start site=www.toyotapartsnow.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=4714 list_lines=1433 year_lines=201 url_index=16736
+18:00:15 completion worklist completion/toyota.own_page.json: 401 rows
+18:07:36 chain-unlinked climate-control 4 numbers named by 55910-35121, no catalog link: 55910-35120, 55910-35212, 55910-35210, 55910-35211
+18:14:56 chain-unlinked window-regulator 2 numbers named by 69801-12272, no catalog link: 69801-12270, 69801-12271
+18:15:36 chain-unlinked window-regulator 3 numbers named by 69803-12213, no catalog link: 69803-12211, 69803-12210, 69803-12212
+18:19:03 chain-unlinked headlights 1 numbers named by 81110-0C100, no catalog link: 81110-0C101
+18:19:03 chain-unlinked headlights 1 numbers named by 81150-0C090, no catalog link: 81150-0C091
+18:19:03 chain-unlinked headlights 1 numbers named by 81150-0C100, no catalog link: 81150-0C101
+18:19:03 chain-unlinked headlights 1 numbers named by 81110-0C080, no catalog link: 81110-0C081
+18:19:03 chain-unlinked headlights 1 numbers named by 81150-0C080, no catalog link: 81150-0C081
+18:19:03 chain-unlinked headlights 1 numbers named by 81110-0C090, no catalog link: 81110-0C091
+18:22:31 chain-unlinked window-regulator 1 numbers named by 85710-16100, no catalog link: 85710-16080
+18:22:31 chain-unlinked window-regulator 1 numbers named by 85720-16100, no catalog link: 85720-16080
+18:22:39 chain-unlinked window-regulator 1 numbers named by 85710-16091, no catalog link: 85710-16090
+18:22:39 chain-unlinked window-regulator 1 numbers named by 85720-16091, no catalog link: 85720-16090
+18:29:11 chain-unlinked climate-control 1 numbers named by 55900-47191, no catalog link: 55900-47190
+18:30:15 time budget reached records=4743
