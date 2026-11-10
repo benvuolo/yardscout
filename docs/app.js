@@ -7618,6 +7618,41 @@ function pfAmGateText(gates) {
   if (g.drive) bits.push(String(g.drive).toUpperCase());
   return bits.join(', ');
 }
+/* An aftermarket unit's curated note mixes what to check at the car with
+ * where the listing comes from. The checks stay on the card; the provenance
+ * moves behind "Why it fits". Nothing is dropped: inline + more = the note.
+ * Anything not recognised as provenance stays inline (fail safe). */
+const PF_AM_PROVENANCE = [
+  /^[^;]*?\b(?:is listed for each of these vehicles|lists these vehicles)\b[^;]*;\s*/i,
+  /\baftermarket (?:application )?data, not the carmaker's catalog\.?\s*/i,
+  /\bOnly the years shown were checked\.?\s*/i,
+  /\bNo other unit of the same brand is listed for the same [^.]*? position on these cars\.?\s*/i,
+  /\bEngines shown are [^.]*\.\s*/i,
+];
+function pfAmSplitNote(note) {
+  let rest = String(note || '');
+  const more = [];
+  for (const rx of PF_AM_PROVENANCE) {
+    const m = rest.match(rx);
+    if (!m) continue;
+    const t = m[0].trim().replace(/;$/, '.');
+    more.push(t.charAt(0).toUpperCase() + t.slice(1));
+    rest = rest.slice(0, m.index) + rest.slice(m.index + m[0].length);
+  }
+  // the rebuilder's own fit notes (vehicle lists, pulley sizes) are reference:
+  // behind the fold, unless they name a transmission the note doesn't already
+  const fi = rest.search(/\b[A-Z][\w ]*? fit notes:/);
+  if (fi >= 0) {
+    const fit = rest.slice(fi).trim();
+    const head = rest.slice(0, fi);
+    if (/transmission only/i.test(fit) && !/transmission only/i.test(head)) {
+      // keep it on the card
+    } else { more.push(fit); rest = head; }
+  }
+  rest = rest.replace(/\s+/g, ' ').replace(/^[\s;,.]+/, '').trim();
+  if (rest) rest = rest.charAt(0).toUpperCase() + rest.slice(1);
+  return { inline: rest, more: more.join(' ') };
+}
 /* AM-GATE END */
 function pfAmRows(s, groups, results, radius, fam) {
   let hit = 0;
@@ -7668,7 +7703,12 @@ function pfAmRows(s, groups, results, radius, fam) {
         if (prev.src === 'same-engine') prev.src = 'aftermarket';
         continue;
       }
-      const warns = [escapeHtml(g.note), escapeHtml(yours)];
+      const split = pfAmSplitNote(g.note);
+      // the line naming the seeker's car already says "match your engine":
+      // a bare "Match the engine" sentence in the note would say it twice
+      let inl = split.inline.replace(/^Match the engine[.;]\s*/i, '');
+      if (inl) inl = inl.charAt(0).toUpperCase() + inl.slice(1);
+      const warns = [inl ? escapeHtml(inl) : '', escapeHtml(yours)].filter(Boolean);
       if (!verdicts.includes(true)) warns.push('engine not confirmed — check under the hood before pulling');
       if (gateUnconfirmed) {
         warns.push(escapeHtml(`if equipped: this unit is listed for ${[...new Set(rows.map(a => pfAmGateText(a[5])))].join(' or ')} only — this donor's body style/drivetrain isn't confirmed, check the car`));
@@ -7686,7 +7726,7 @@ function pfAmRows(s, groups, results, radius, fam) {
       }
       if (pfCat && pfCat.rowWarn) warns.push(escapeHtml(pfCat.rowWarn));
       if (g.trans && !tr) warns.push(`this unit is for ${g.trans === 'AT' ? 'automatic' : 'manual'}-transmission cars — check the transmission`);
-      results.set(v.id, { v, d, tier: 'likely', src: 'aftermarket', srcLine, warns });
+      results.set(v.id, { v, d, tier: 'likely', src: 'aftermarket', srcLine, srcMore: split.more ? escapeHtml(split.more) : '', srcUnit: escapeHtml(`${g.label || ''} ${g.unit || ''}`.trim()), warns });
     }
   }
   return hit;
@@ -7731,7 +7771,7 @@ function pfDonorCardHtml(r, cls, chip, valueHtml) {
           <div class="pf-meta">${escapeHtml(v.location)}${r.d != null ? ` &middot; <span class="dist">${Math.round(r.d)}\u00a0mi</span>` : ''}${dateLbl ? ` &middot; set out ${dateLbl}` : ' &middot; set-out date unknown'}${saleBadgeHtml(v.location)}</div>
         </div>
       </div>
-      ${r.srcLine ? `<details class="pf-src-more"><summary>Why it fits <span class="chev-r" aria-hidden="true"></span></summary><div class="pf-note pf-src">Source: ${r.srcLine}</div></details>` : ''}
+      ${r.srcLine ? `<details class="pf-src-more"><summary>Why it fits${r.srcUnit ? ` <span class="pf-src-unit">&middot; ${r.srcUnit}</span>` : ''} <span class="chev-r" aria-hidden="true"></span></summary><div class="pf-note pf-src">Source: ${r.srcLine}</div>${r.srcMore ? `<div class="pf-note pf-src-more-text">${r.srcMore}</div>` : ''}</details>` : ''}
       ${valueHtml ? `<div class="pf-value">${valueHtml}</div>` : ''}
       ${r.warns && r.warns.length ? `<div class="pf-warn">${r.warns.join(' &middot; ')}</div>` : ''}
       <div class="cc-actions">${pullBtnHtml(key)}<button type="button" class="btn btn-quiet car-open" data-vkey="${escapeHtml(key)}">Details</button></div>

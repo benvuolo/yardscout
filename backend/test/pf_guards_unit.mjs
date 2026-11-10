@@ -556,8 +556,12 @@ const lazyIdx = cats => ({ oemLazy: { schema: 1, path: 'data/oem/', cats } });
     ok?.tier === 'likely' && ok.chip === LIKELY_OEM_CHIP, JSON.stringify(r.rows) + r.html.slice(0, 300));
   check('aftermarket: source names the aftermarket unit and its amperage',
     ok?.src === 'Source: aftermarket unit: DB Electrical 400-24098 (110 A unit)', ok && ok.src);
-  check('aftermarket: row keeps the unit note and says which engine of yours the unit lists',
-    ok?.warn.includes('aftermarket application data, not the carmaker&#39;s catalog') || ok?.warn.includes('not the carmaker'), ok && ok.warn);
+  // 2026-11-10 (hub): the note's checks stay inline; its provenance moved
+  // behind "Why it fits" on the same card (nothing dropped).
+  check('aftermarket: row keeps the note\'s check inline (engine + amperage)',
+    ok?.warn.includes('Match the engine and the amperage on the tag'), ok && ok.warn);
+  check('aftermarket: the note\'s provenance is on the card behind "Why it fits", not inline',
+    /pf-src-more-text">[^<]*not the carmaker/.test(r.html) && !(ok?.warn || '').includes('not the carmaker'), ok && ok.warn);
   check('aftermarket: row says the unit lists your engine (1.6L 4-cyl)', ok?.warn.includes('with the 1.6L 4-cyl — match your engine'), ok && ok.warn);
   check('aftermarket: donor whose decode says another engine (2.0L) is left out', !r.rows['2006 MINI Cooper'], JSON.stringify(r.rows['2006 MINI Cooper']));
   check('aftermarket: undecoded donor kept with "engine not confirmed"',

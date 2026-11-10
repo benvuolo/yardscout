@@ -2923,7 +2923,9 @@ a { color: var(--accent); }
 .pf-src-more { margin-top: var(--s2); }
 .pf-src-more > summary { list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: var(--s2); min-height: var(--tap); font-size: var(--t-sm); font-weight: 700; color: var(--accent); }
 .pf-src-more > summary::-webkit-details-marker { display: none; }
-.pf-src-more .pf-src { padding: var(--s2) var(--s3); border-radius: var(--r-sm); background: var(--surface2); color: var(--text); }
+.pf-src-more .pf-src, .pf-src-more .pf-src-more-text { padding: var(--s2) var(--s3); border-radius: var(--r-sm); background: var(--surface2); color: var(--text); }
+.pf-src-more .pf-src-more-text { margin-top: var(--s2); overflow-wrap: anywhere; }
+.pf-src-more .pf-src-unit { font-weight: 600; color: var(--text); overflow-wrap: anywhere; }   /* the unit to check stays visible */
 .pf-row-card .pf-value { margin-top: var(--s2); }
 .pf-row-card .pf-warn { margin-top: var(--s2); color: var(--gold); }
 .pf-row-card .cc-actions { margin-top: var(--s3); }
