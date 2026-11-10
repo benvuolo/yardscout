@@ -1400,6 +1400,29 @@ class Curation:
             other = set(policy.MODEL_NUMBER_RE.findall(text)) - own_num
             if other:
                 return "wheel_model_other", f"{T[0]} {T[1]} {T[2]}: names {sorted(other)}"
+            # rows of this number on T's own page vs every wheel row of that page
+            prow = [lr for lr in self.t_list_rows.get((T, cat), []) if policy.pn_key(self.ns, lr.pn) == c.key]
+            norm = lambda x: re.sub(r"\s+", " ", x.lower()).strip()
+            if len({(t[0], t[1]) for t in Ts}) > 1 and prow:
+                page_b = {norm(m.group(1)) for lr in self.t_list_rows.get((T, cat), []) for n in lr.notes
+                          for m in policy.WHEEL_BODY_OPTION_RE.finditer(n or "")}
+                pn_b = {norm(m.group(1)) for lr in prow for n in lr.notes
+                        for m in policy.WHEEL_BODY_OPTION_RE.finditer(n or "")}
+                # the product page's fitment rows count too (529101M550: list row
+                # bare, product page "Coupe - 2Door 5P" only)
+                pn_b |= {norm(m.group(1)) for r in c.records for f in r.rows
+                         for m in policy.WHEEL_BODY_OPTION_RE.finditer(f.raw or "")}
+                if pn_b and page_b - pn_b:
+                    return "wheel_body_option", f"{T[1]} {T[2]}: row {sorted(pn_b)} of page {sorted(page_b)}"
+            spans = []
+            for lr in prow:
+                rs = [m for n in lr.notes for m in policy.WHEEL_PRODUCTION_RE.finditer(n or "")]
+                if not rs:
+                    spans = None
+                    break
+                spans += [(int(m.group(1)), int(m.group(2) or m.group(1))) for m in rs]
+            if spans and not any(a <= T[2] <= b + 1 for a, b in spans):
+                return "wheel_production_date", f"{T[1]} {T[2]}: production {sorted(set(spans))}"
             if policy.WHEEL_AXLE_RE.search(text):
                 return "wheel_axle_limited", f"{T[0]} {T[1]} {T[2]}: {text[:120]}"
             bodies.append(frozenset(m.group(1).lower() for m in policy.WHEEL_BODY_RE.finditer(text)))
