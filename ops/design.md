@@ -163,7 +163,7 @@ sheet" in the UI only (jh_saved and watch storage untouched, rule 6); map deferr
   stacking (fill layers had painted over the sticky row header). jh-v175. photo_layout_e2e 578 (adds rows
   checks; fails without the fix), ui_no_truncation 1,296, units. WebKit still unchecked.
 
-### Round 9f: map first view made deterministic + Parts headings (2026-11-10, branch design/firstview-settle-v3 fd0b8c0, in hub regression)
+### Round 9f: map first view made deterministic + Parts headings (2026-11-10; merged by hub at 4c748386, jh-v177; next free sw v178)
 - Phoenix 375x553/200% flake: first view decided at zoom 13, then a map resize grew the open area ~5px, a
   Pull-N-Save point entered and merged with Pull-A-Part. Now the first view stays live until the map is
   moved (re-decided on any re-layout that bubbles the nearest yard below max zoom; capped), resizes go
