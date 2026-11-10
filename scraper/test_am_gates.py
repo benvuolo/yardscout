@@ -107,6 +107,7 @@ check("GROUP_HOLD_CATS covers the 14 new categories",
       {"radiator", "ac-compressor", "ac-condenser", "heater-core", "evaporator", "throttle-body",
        "fuel-pump-module", "cv-axle", "strut", "sunroof", "center-console", "door-panel",
        "blower-motor", "fog-lights"} <= js.GROUP_HOLD_CATS)
+check("GROUP_HOLD_CATS holds wiper-motor (hub 2026-11-10)", "wiper-motor" in js.GROUP_HOLD_CATS)
 _real_load = js._load_am_layer
 # hub 2026-11-10: release is per SOURCE (AM_RELEASED). am:h1 is a radiator group
 # from a source NOT released (gsp): held. am:sp1 is a Spectra radiator group:

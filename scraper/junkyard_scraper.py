@@ -9510,6 +9510,22 @@ INTERCHANGE_PART_CATEGORIES: dict[str, dict] = {
             "Check the lens for cracks and the housing for water inside. "
             "Bezels and brackets are often separate."],
         "rowWarn": "check the donor has fog lights; match the side and the bumper opening"},
+    "wiper-motor": {
+        # tier C (2026-11-10, ops/interchange.md §10): same-generation donors
+        # only until each namespace's OEM groups pass their advance sample
+        # (GROUP_HOLD_CATS). Exact price rows: "wiper motor" (20 chains) and
+        # "windshield wiper motor" (6); "wiper motor w/ trans" (motor +
+        # linkage) and wiper arm/blade/switch/transmission rows are other parts.
+        "label": "Wiper motor (windshield / rear)", "kind": "body",
+        "tokens": ["wiper motor"],
+        "priceTokens": ["=wiper motor", "=windshield wiper motor"],
+        "notes": [
+            "Front and rear motors differ: the group note names windshield or "
+            "rear. 'With linkage', 'kit', 'without circuit board' or 'with "
+            "integral control module' mean another assembly, so check what is "
+            "bolted to it. Twin-motor windshields (driver/passenger) are "
+            "separate parts."],
+        "rowWarn": "rear motors fit only bodies with a rear wiper (hatch, wagon, SUV, van): check the donor has one"},
 }
 
 # Default caveat lines — families override where the family has a sharper one.
@@ -15137,7 +15153,9 @@ def _am_held(cat: str, site: str) -> bool:
 GROUP_HOLD_CATS = frozenset({
     "radiator", "ac-compressor", "ac-condenser", "heater-core", "evaporator", "throttle-body",
     "fuel-pump-module", "cv-axle", "strut",
-    "sunroof", "center-console", "door-panel", "blower-motor", "fog-lights"})
+    "sunroof", "center-console", "door-panel", "blower-motor", "fog-lights",
+    # tier C wiper-motor (hub 2026-11-10): held until each namespace's advance sample
+    "wiper-motor"})
 
 
 def _attach_lazy_layers(payload: dict, lazy_out: dict) -> None:

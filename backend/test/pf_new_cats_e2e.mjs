@@ -32,7 +32,9 @@ const check = (name, ok, detail = '') => {
 const NEW = { radiator: 'radiator', 'ac-compressor': 'a/c compressor', 'ac-condenser': 'condenser',
   'heater-core': 'heater core', evaporator: 'evaporator', 'throttle-body': 'throttle body',
   'fuel-pump-module': 'fuel pump', 'cv-axle': 'cv axle', strut: 'strut', sunroof: 'sunroof',
-  'center-console': 'console', 'door-panel': 'door panel', 'blower-motor': 'blower motor', 'fog-lights': 'fog' };
+  'center-console': 'console', 'door-panel': 'door panel', 'blower-motor': 'blower motor', 'fog-lights': 'fog',
+  // tier C (2026-11-10): wiper-motor, groups held
+  'wiper-motor': 'wiper motor' };
 
 // released per source (junkyard_scraper.AM_RELEASED: "spectrapremium" for
 // these 7, "gspnorthamerica" for cv-axle, §11.4 round 4 2026-11-10)
