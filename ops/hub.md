@@ -198,3 +198,15 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
 - ~23:15 UTC: merged wheels-ship-3, giving 41 audited cross-model wheels groups (mopar 28 / 9,047 cars, mb 10 / 243, vag 3 / 117). New rules: body words identical, spoke counts agree, Front/Rear notes refuse. Verified: oemStatus ok x8, test_groups_hash, pf_guards.
 - Phoenix map tweak merged (sw jh-v174).
 - Category breadth is preparing interchange/categories-ship: 14 new Parts-tab categories with same-model-generation donors only, no aftermarket/OEM groups yet. The hub runs the regression before merging.
+
+## 2026-11-10 ~01:00 UTC desktop rows + 14 new part categories live
+- Merged design/rows-desktop to main (b22c744a, sw jh-v175). It went live at 00:20. Desktop Walk the rows now has 112x84 thumbs with the soft fill, and photos stay under the sticky row header (checked live at 1280px).
+  - Regression: units, photo_layout, app_promo, tab_retap and ui_no_truncation (1296/0) all pass.
+  - map_regions_e2e: an intermittent Phoenix 375x553/200% first-view failure (the nearest yard ends up in a 2-yard bubble at zoom 13). It reproduces on main (1 of 3 reruns), so it's not from this branch. Handed to design, branching from b22c744a, sw v177.
+- Merged interchange/categories-ship to main (ef5d52e6, sw jh-v176). It went live at 00:56.
+  - The 14 new categories offer same-generation donors only; GROUP_HOLD_CATS holds their OEM/aftermarket groups.
+  - interchange.json was regenerated in the merge: only `categories` changed (30→44); oemStatus is ok x8 with unchanged group counts.
+  - Live check: all 14 are findable in the part search at 390px, with 0 page errors.
+  - Regression: everything passes except part_finder_e2e's known E46 M3 case (0 M3s on lots).
+- Wheels hmg: the §11.4 census found 8 WRONG, all 2010-13 Forte/Koup (body-code and production-date). The rule fix ships exactly the 9 census-OK groups (1,784 lot cars). Hub CONFIRMED hmg 9; the single push is based on ef5d52e6 under the usual gates.
+- U-Pull-R 00:13 check: no reply from Glenn; the scan still shows 0 cars (captcha).
