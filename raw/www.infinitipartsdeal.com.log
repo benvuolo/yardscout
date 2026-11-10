@@ -1041,3 +1041,67 @@
 11:35:02 chain-unlinked window-regulator 1 numbers named by 82721-1LA0A, no catalog link: 82721-1LA0B
 11:35:02 chain-unlinked window-regulator 1 numbers named by 82720-1LA0A, no catalog link: 82720-1LA0B
 11:39:02 time budget reached records=2202
+11:39:20 start site=www.infinitipartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2202 list_lines=648 year_lines=82 url_index=5762
+11:39:20 completion worklist completion/nissan.own_page.json: 119 rows
+11:40:16 chain-unlinked bumper-front 1 numbers named by FBM22-1CA0H, no catalog link: 62022-1CA0H
+11:40:16 chain-unlinked bumper-front 1 numbers named by FBM22-1CG0H, no catalog link: 62022-1CG0H
+11:40:24 chain-unlinked bumper-rear 1 numbers named by HEM22-1CH0H, no catalog link: 85022-1CH0H
+11:40:24 chain-unlinked bumper-rear 1 numbers named by HEM22-1CA0H, no catalog link: 85022-1CA0H
+11:40:32 chain-unlinked door-front 1 numbers named by HMA0A-1CAMA, no catalog link: H010A-1CAMA
+11:40:32 chain-unlinked door-front 1 numbers named by HMA0M-1CAMA, no catalog link: H010M-1CAMA
+11:40:40 chain-unlinked door-rear 1 numbers named by HBA0A-1CAMA, no catalog link: H210A-1CAMA
+11:40:40 chain-unlinked door-rear 1 numbers named by HBA0M-1CAMA, no catalog link: H210M-1CAMA
+11:40:48 chain-unlinked fender 1 numbers named by FCA01-1CAMA, no catalog link: F3101-1CAMA
+11:40:48 chain-unlinked fender 1 numbers named by FCA00-1CAMA, no catalog link: F3100-1CAMA
+11:42:00 chain-unlinked headlights 1 numbers named by 26060-1CA0A, no catalog link: 26060-1CA1A
+11:42:00 chain-unlinked headlights 1 numbers named by 26060-1CE0A, no catalog link: 26060-1CE1A
+11:42:00 chain-unlinked headlights 1 numbers named by 26010-1CA0A, no catalog link: 26010-1CA1A
+11:42:00 chain-unlinked headlights 1 numbers named by 26010-1CE0A, no catalog link: 26010-1CE1A
+11:42:00 chain-unlinked headlights 1 numbers named by 26060-1CA0C, no catalog link: 26060-1CA1A
+11:42:00 chain-unlinked headlights 1 numbers named by 26060-1CE0C, no catalog link: 26060-1CE1A
+11:42:00 chain-unlinked headlights 1 numbers named by 26010-1CA0C, no catalog link: 26010-1CA1A
+11:42:00 chain-unlinked headlights 1 numbers named by 26010-1CE0C, no catalog link: 26010-1CE1A
+11:42:08 chain-unlinked hood 1 numbers named by FEA0M-1CAMA, no catalog link: F510M-1CAMA
+11:42:56 chain-unlinked window-regulator 1 numbers named by 80721-1CA0B, no catalog link: 80721-1CA0C
+11:42:56 chain-unlinked window-regulator 1 numbers named by 80720-1CA0B, no catalog link: 80720-1CA0C
+11:46:00 chain-unlinked headlights 1 numbers named by 26060-1CA0E, no catalog link: 26060-1CA1A
+11:46:00 chain-unlinked headlights 1 numbers named by 26060-1CE0E, no catalog link: 26060-1CE1A
+11:46:00 chain-unlinked headlights 1 numbers named by 26060-1CF0C, no catalog link: 26060-1CF1A
+11:46:00 chain-unlinked headlights 1 numbers named by 26010-1CA0E, no catalog link: 26010-1CA1A
+11:46:00 chain-unlinked headlights 1 numbers named by 26010-1CE0E, no catalog link: 26010-1CE1A
+11:46:00 chain-unlinked headlights 1 numbers named by 26010-1CF0C, no catalog link: 26010-1CF1A
+11:46:32 chain-unlinked liftgate 1 numbers named by KMA00-1CB1A, no catalog link: 90100-1CB1A
+11:46:32 chain-unlinked liftgate 1 numbers named by KMA00-1CB1B, no catalog link: 90100-1CB1B
+11:52:32 chain-unlinked window-regulator 1 numbers named by 80731-2Y901, no catalog link: 80731-2Y90A
+11:52:32 chain-unlinked window-regulator 1 numbers named by 80730-2Y001, no catalog link: 80730-2Y00A
+11:52:56 chain-unlinked window-regulator 1 numbers named by 80731-89909, no catalog link: 80731-8991D
+11:52:56 chain-unlinked window-regulator 1 numbers named by 80730-89909, no catalog link: 80730-8991D
+11:54:00 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_sedan_grille-f23101nf1a.html: ValueError: no partInfo in store
+11:55:28 chain-unlinked door-front 1 numbers named by 80101-3JA1A, no catalog link: H0101-3JAAA
+11:55:28 chain-unlinked door-front 1 numbers named by 80100-3JA1A, no catalog link: H0100-3JAAA
+11:55:52 chain-unlinked door-rear 1 numbers named by 82100-3JC1A, no catalog link: H2100-3JCAA
+11:59:28 chain-unlinked headlights 1 numbers named by 26060-9NG3B, no catalog link: 26060-9NG6B
+11:59:28 chain-unlinked headlights 1 numbers named by 26010-9NG3B, no catalog link: 26010-9NG6B
+12:03:52 chain-unlinked bumper-front 1 numbers named by FBM22-1BA0H, no catalog link: 62022-1BA0H
+12:03:52 chain-unlinked bumper-front 1 numbers named by FBM22-1BA1H, no catalog link: 62022-1BA1H
+12:04:00 chain-unlinked bumper-rear 1 numbers named by HEM22-1BA0H, no catalog link: 85022-1BA0H
+12:04:00 chain-unlinked bumper-rear 1 numbers named by HEM22-1BA4H, no catalog link: 85022-1BA4H
+12:04:24 chain-unlinked grille 1 numbers named by 62070-1BA1A, no catalog link: 62070-1BA1B
+12:05:36 chain-unlinked liftgate 1 numbers named by KMA00-1BA9C, no catalog link: 90100-1BA9C
+12:06:08 chain-unlinked window-regulator 1 numbers named by 82721-1BA0A, no catalog link: 82721-1BA0B
+12:06:08 chain-unlinked window-regulator 1 numbers named by 82720-1BA0A, no catalog link: 82720-1BA0B
+12:09:04 chain-unlinked door-front 1 numbers named by H010A-1LAAA, no catalog link: H010A-5ZAMB
+12:09:04 chain-unlinked door-front 1 numbers named by H010A-5ZAMA, no catalog link: H010A-5ZAMB
+12:09:04 chain-unlinked door-front 1 numbers named by H010M-1LAAA, no catalog link: H010M-5ZAMB
+12:09:04 chain-unlinked door-front 1 numbers named by H010M-5ZAMA, no catalog link: H010M-5ZAMB
+12:09:28 chain-unlinked gauge-cluster 1 numbers named by 24820-3ZD0A, no catalog link: 24820-3ZD5E
+12:09:28 chain-unlinked gauge-cluster 1 numbers named by 24820-5ZA1A, no catalog link: 24820-5ZA6E
+12:09:36 chain-unlinked grille 1 numbers named by 62310-5ZA0A, no catalog link: 62310-5ZA1A
+12:09:36 chain-unlinked grille 1 numbers named by 62310-1ZR0A, no catalog link: 62310-1ZR4A
+12:09:36 chain-unlinked grille 1 numbers named by 62310-1ZR1A, no catalog link: 62310-1ZR4A
+12:09:36 chain-unlinked grille 1 numbers named by F2310-1A61A, no catalog link: F2310-1A63A
+12:10:08 chain-unlinked side-mirrors 1 numbers named by 96302-1V91A, no catalog link: 96302-1V91D
+12:10:08 chain-unlinked side-mirrors 1 numbers named by 96302-1V91B, no catalog link: 96302-1V91D
+12:10:08 chain-unlinked side-mirrors 1 numbers named by 96301-1V91A, no catalog link: 96301-1V91D
+12:10:08 chain-unlinked side-mirrors 1 numbers named by 96301-1V91B, no catalog link: 96301-1V91D
+12:10:32 time budget reached records=2286
