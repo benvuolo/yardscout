@@ -2,8 +2,12 @@
  *
  * The 14 new Parts-tab categories (aftermarket layer + tier D wave 1) must be
  * findable by name in the part search, open a search without a page error,
- * show no unit or catalog group row (every group source for them is held:
- * GROUP_HOLD_CATS), and neither the start tiles nor a suggestion row may
+ * show no catalog group row (OEM sources stay held: GROUP_HOLD_CATS), and
+ * no unit row either, except the 7 categories released for Spectra Premium
+ * (AM_RELEASED, hub 2026-11-10), which may show its aftermarket rows. A
+ * radiator search for a 2012 Equinox 2.4L must show the Spectra unit row
+ * (CU13103) without overflow at 390 and 320 px (screenshots saved to
+ * $PF_SHOT_DIR when set). Neither the start tiles nor a suggestion row may
  * overflow. Needs docs/data/interchange.json built with the new categories
  * (junkyard_scraper.write_interchange_payload). Serves docs/ locally.
  *
@@ -30,6 +34,10 @@ const NEW = { radiator: 'radiator', 'ac-compressor': 'a/c compressor', 'ac-conde
   'fuel-pump-module': 'fuel pump', 'cv-axle': 'cv axle', strut: 'strut', sunroof: 'sunroof',
   'center-console': 'console', 'door-panel': 'door panel', 'blower-motor': 'blower motor', 'fog-lights': 'fog' };
 
+// released per source (junkyard_scraper.AM_RELEASED["spectrapremium"])
+const SPECTRA = new Set(['radiator', 'ac-compressor', 'ac-condenser', 'heater-core', 'evaporator',
+  'throttle-body', 'fuel-pump-module']);
+const SHOTS = process.env.PF_SHOT_DIR || '';
 const cats = new Set(JSON.parse(fs.readFileSync(path.join(DOCS, 'data/interchange.json'), 'utf8')).categories.map(c => c.id));
 const missing = Object.keys(NEW).filter(c => !cats.has(c));
 if (missing.length) { console.log(`SKIP docs/data/interchange.json lacks ${missing}: build it first`); process.exit(0); }
@@ -83,9 +91,68 @@ for (const width of [390, 360, 320]) {
     await page.click(sel);
     await page.waitForTimeout(400);
     const res = await page.locator('#pf-results').innerText();
-    check(`${width}px: ${cid} shows no unit or catalog group row (groups held)`,
-      !res.includes('Aftermarket match') && !res.includes('factory parts catalog'), res.slice(0, 160));
+    if (SPECTRA.has(cid)) {
+      check(`${width}px: ${cid} shows no catalog group row (OEM held; Spectra released)`,
+        !res.includes('factory parts catalog'), res.slice(0, 160));
+    } else {
+      check(`${width}px: ${cid} shows no unit or catalog group row (groups held)`,
+        !res.includes('Aftermarket match') && !res.includes('factory parts catalog'), res.slice(0, 160));
+    }
   }
+  // a released category with a Spectra unit row for a real lot car
+  await page.fill('#pf-part', '');
+  await page.type('#pf-part', 'radiator');
+  await page.waitForSelector("#pf-part-suggest .compare-suggest-item[data-cat='radiator']", { timeout: 5000 });
+  await page.dispatchEvent("#pf-part-suggest .compare-suggest-item[data-cat='radiator']", 'mousedown');
+  await page.selectOption('#pf-year', '2012');
+  await page.selectOption('#pf-make', 'Chevrolet');
+  await page.waitForTimeout(200);
+  await page.selectOption('#pf-model', 'Equinox');
+  await page.click('#pf-go');
+  await page.waitForTimeout(700);
+  const chips = page.locator('#pf-engine .pf-chip');
+  for (let i = 0; i < await chips.count(); i++) {
+    if ((await chips.nth(i).innerText()).includes('2.4')) { await chips.nth(i).click(); break; }
+  }
+  await page.waitForTimeout(700);
+  const rres = await page.locator('#pf-results').innerText();
+  check(`${width}px: 2012 Equinox 2.4L radiator shows the Spectra Premium CU13103 row`,
+    rres.includes('Spectra Premium') && rres.includes('CU13103'), rres.slice(0, 300));
+  check(`${width}px: no catalog group row on the radiator search`, !rres.includes('factory parts catalog'));
+  // the new rows: Spectra unit rows, visible overflow only (a child clipped by an
+  // overflow:hidden ancestor inside the card, e.g. the photo placeholder, is not)
+  bad = await page.$$eval('#pf-results .pf-row-card', els => els.filter(e => e.innerText.includes('Spectra Premium'))
+    .filter(e => e.scrollWidth > e.clientWidth + 1 || [...e.querySelectorAll('*')].some(k => {
+      for (let a = k.parentElement; a && a !== e; a = a.parentElement) if (getComputedStyle(a).overflowX !== 'visible') return false;
+      return k.getBoundingClientRect().right > e.getBoundingClientRect().right + 1;
+    })).map(e => e.innerText.slice(0, 60)));
+  check(`${width}px: Spectra unit rows do not overflow`, !bad.length, JSON.stringify(bad));
+  const wide = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1);
+  check(`${width}px: no horizontal page scroll`, !wide);
+  if (SHOTS && (width === 390 || width === 320)) {
+    await page.locator('#pf-results').screenshot({ path: path.join(SHOTS, `pf_radiator_spectra_${width}.png`) });
+  }
+  // ignition-coils (engine kind, released for Spectra): the engine path shows the unit row
+  await page.fill('#pf-part', '');
+  await page.type('#pf-part', 'ignition coil');
+  await page.waitForSelector("#pf-part-suggest .compare-suggest-item[data-cat='ignition-coils']", { timeout: 5000 });
+  await page.dispatchEvent("#pf-part-suggest .compare-suggest-item[data-cat='ignition-coils']", 'mousedown');
+  await page.selectOption('#pf-year', '2012');
+  await page.selectOption('#pf-make', 'Chevrolet');
+  await page.waitForTimeout(200);
+  await page.selectOption('#pf-model', 'Equinox');
+  await page.click('#pf-go');
+  await page.waitForTimeout(700);
+  const cchips = page.locator('#pf-engine .pf-chip');
+  for (let i = 0; i < await cchips.count(); i++) {
+    if ((await cchips.nth(i).innerText()).includes('2.4')) { await cchips.nth(i).click(); break; }
+  }
+  await page.waitForTimeout(700);
+  const cres = await page.locator('#pf-results').innerText();
+  check(`${width}px: 2012 Equinox 2.4L ignition coil shows the Spectra Premium C-706 row`,
+    cres.includes('Spectra Premium') && cres.includes('C-706'), cres.slice(0, 300));
+  check(`${width}px: no horizontal page scroll on the coil search`,
+    !(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1)));
   check(`${width}px: no page errors`, !errors.length, errors.slice(0, 3).join('; '));
   await ctx.close();
 }

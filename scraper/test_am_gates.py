@@ -96,10 +96,16 @@ check("GROUP_HOLD_CATS covers the 14 new categories",
        "fuel-pump-module", "cv-axle", "strut", "sunroof", "center-console", "door-panel",
        "blower-motor", "fog-lights"} <= js.GROUP_HOLD_CATS)
 _real_load = js._load_am_layer
-_fake_am = [dict(js._am_group_entry(_grp([["Honda", "Accord", 2003, 2007, "2.4L"]]), "spectra"), id="am:h1"),
+# hub 2026-11-10: release is per SOURCE (AM_RELEASED). am:h1 is a radiator group
+# from a source NOT released (gsp): held. am:sp1 is a Spectra radiator group:
+# released, so radiator gets a lazy file carrying only am:sp1.
+_fake_am = [dict(js._am_group_entry(_grp([["Honda", "Accord", 2003, 2007, "2.4L"]]), "gsp"), id="am:h1"),
+            dict(js._am_group_entry(_grp([["Honda", "Accord", 2003, 2007, "2.4L"]]), "spectrapremium"), id="am:sp1"),
             dict(js._am_group_entry({**_grp([["Honda", "Accord", 2003, 2007, "2.4L"]]), "cat": "alternator"},
                                     "dbelectrical"), id="am:ok1")]
-js._load_am_layer = lambda now=None: {"groups": _fake_am, "status": {"spectra": "ok"}}
+js._load_am_layer = lambda now=None: {"groups": _fake_am, "status": {"gsp": "ok", "spectrapremium": "ok"},
+                                      "site_of": {"am:h1": "gsp", "am:sp1": "spectrapremium",
+                                                  "am:ok1": "dbelectrical"}}
 _fake_oem = [{"id": "oem:toyota:x1", "cat": "fog-lights", "ns": "toyota", "tier": "likely", "src": "oem",
               "label": "Toyota catalog", "note": "n", "pn": ["1"], "apps": [["Toyota", "Camry", 2007, 2009, ""]]}]
 _pl = {"builtAt": "2026-11-09T00:00:00Z", "oemStatus": {}}
@@ -107,11 +113,18 @@ _lo = {"oem": _fake_oem}
 js._attach_lazy_layers(_pl, _lo)
 js._load_am_layer = _real_load
 _cats_out = set(_lo.get("files", {}))
-check("held categories get no lazy file (no OEM / aftermarket group ships for them)",
-      not (_cats_out & js.GROUP_HOLD_CATS), str(sorted(_cats_out)))
+_released_out = {c for c in _cats_out if c in js.AM_RELEASED["spectrapremium"]}
+check("held categories get no lazy file, except a category released for the source that has a group in it",
+      (_cats_out & js.GROUP_HOLD_CATS) == {"radiator"} == _released_out, str(sorted(_cats_out)))
+_rad = _lo.get("files", {}).get("radiator", {})
+check("released Spectra radiator group gets the radiator lazy file; the non-released source's group does not",
+      [g["id"] for g in _rad.get("amGroups", [])] == ["am:sp1"] and not _rad.get("oemGroups"),
+      str([g["id"] for g in _rad.get("amGroups", [])]))
+check("the held OEM fog-lights group gets no lazy file", "fog-lights" not in _cats_out)
 check("a category outside the hold still gets its aftermarket file", "alternator" in _cats_out, str(sorted(_cats_out)))
-check("the lazy index never names a held category",
-      not (set((_pl.get("oemLazy") or {}).get("cats", {})) & js.GROUP_HOLD_CATS))
+check("the lazy index names no held category except the released radiator (aftermarket only)",
+      (set((_pl.get("oemLazy") or {}).get("cats", {})) & js.GROUP_HOLD_CATS) <= {"radiator"}
+      and (_pl.get("oemLazy") or {}).get("cats", {}).get("radiator", {}).get("oem", 0) == 0)
 _main = js.build_interchange_payload()
 check("main payload: no oemGroups / platformGroups / oemVg entry for a held category",
       not [g for g in _main.get("oemGroups") or [] if g["cat"] in js.GROUP_HOLD_CATS]
@@ -288,6 +301,83 @@ console.log(JSON.stringify(out));
               and sum("paint" in w for w in r["warns"]) == 1, str(r))
         check("category rowWarn rides every aftermarket row",
               all(any("trans-cooler" in w for w in ws) for ws in o["sedanGate"].values()))
+
+# 5. Per-SOURCE release from GROUP_HOLD_CATS (hub 2026-11-10): Spectra ships in
+# its released held categories; an OEM group in the same category, a Spectra
+# group in a held category not on its list, and a fuel-tank group do not.
+import tempfile  # noqa: E402
+sys.path.insert(0, str(HERE / "oem_fitment" / "aftermarket"))
+import groups_spectra as GS  # noqa: E402
+
+check("AM_RELEASED['spectrapremium'] == groups_spectra.SHIP_CATS (the categories its §11.4 cleared)",
+      js.AM_RELEASED.get("spectrapremium") == frozenset(GS.SHIP_CATS))
+check("fuel-tank is not an aftermarket category", "fuel-tank" not in js._AM_CATS)
+check("released held categories are still in GROUP_HOLD_CATS (release is per source)",
+      {"radiator", "ac-compressor", "ac-condenser", "heater-core", "evaporator", "throttle-body",
+       "fuel-pump-module"} <= js.GROUP_HOLD_CATS)
+
+
+def _am_g(gid, cat, unit, apps):
+    return {"id": gid, "cat": cat, "tier": "likely", "src": "aftermarket", "label": "x", "unit": unit,
+            "retrieved": "2026-11-09T20:00:00Z", "apps": apps,
+            "note": f"Spectra Premium {unit} is listed for each of these vehicles; aftermarket application data."}
+
+
+def _run_release(files: dict, oem: list):
+    old = js.OEM_GROUPS_DIR
+    with tempfile.TemporaryDirectory() as td:
+        (Path(td) / js.OEM_AM_DIR_NAME).mkdir()
+        for stem, groups in files.items():
+            (Path(td) / js.OEM_AM_DIR_NAME / f"{stem}.json").write_text(json.dumps(
+                {"schema": 1, "src": "aftermarket", "tier": "likely", "raw": "test", "groups": groups}))
+        js.OEM_GROUPS_DIR = td
+        try:
+            payload, lazy = {"builtAt": "2026-11-10T00:00:00Z", "oemStatus": {}}, {"oem": oem}
+            js._attach_lazy_layers(payload, lazy)
+        finally:
+            js.OEM_GROUPS_DIR = old
+    return payload, lazy.get("files") or {}
+
+
+APPS = [["Honda", "Civic", 2012, 2015, "1.8L 4-cyl"], ["Acura", "ILX", 2013, 2015, "2.4L 4-cyl"]]
+sp = [_am_g("am:spp:radiator:CU13221", "radiator", "CU13221", APPS),
+      _am_g("am:spp:ignition-coils:C-900", "ignition-coils", "C-900", APPS),
+      _am_g("am:spp:ac-condenser:7-3965", "ac-condenser", "7-3965", [APPS[0] + [{"body": "Sedan"}]]),
+      _am_g("am:spp:cv-axle:X1", "cv-axle", "X1", APPS),            # held, NOT on Spectra's list
+      _am_g("am:spp:fuel-tank:F1", "fuel-tank", "F1", APPS)]        # no Parts-tab category
+other = [_am_g("am:oth:radiator:R9", "radiator", "R9", APPS)]       # another aftermarket source
+oem = [{"id": "oem:toyota:radiator:1640031", "cat": "radiator", "tier": "likely", "src": "oem",
+        "apps": [["Toyota", "Camry", 2012, 2014]], "note": "x"}]
+payload, files = _run_release({"spectrapremium": sp, "othersite": other}, oem)
+am_ids = {c: {g["id"] for g in d.get("amGroups", [])} for c, d in files.items()}
+oem_ids = {c: {g["id"] for g in d.get("oemGroups", [])} for c, d in files.items()}
+check("Spectra group in a released held category (radiator) reaches the lazy file",
+      "am:spp:radiator:CU13221" in am_ids.get("radiator", set()), str(am_ids))
+check("Spectra ignition-coils group reaches the lazy file", "am:spp:ignition-coils:C-900" in am_ids.get("ignition-coils", set()))
+check("Spectra body-gated condenser row reaches the lazy file with its gate",
+      any(a[5:] == [{"body": "Sedan"}] for g in files.get("ac-condenser", {}).get("amGroups", [])
+          for a in g["apps"]))
+check("OEM group in the same released category stays held",
+      not any("oem:toyota:radiator:1640031" in v for v in oem_ids.values()))
+check("another aftermarket source in the same category stays held",
+      not any("am:oth:radiator:R9" in v for v in am_ids.values()))
+check("Spectra group in a held category NOT on its release list (cv-axle) stays held",
+      "cv-axle" not in files and not any("am:spp:cv-axle:X1" in v for v in am_ids.values()))
+check("Spectra fuel-tank group is dropped (refused, never shipped)",
+      not any("am:spp:fuel-tank:F1" in v for v in am_ids.values())
+      and "fuel-tank" not in files and "ok" in (payload.get("amStatus") or {}).get("spectrapremium", ""),
+      str(payload.get("amStatus")))
+# fail closed per source for EVERY category (category-breadth review 2026-11-10)
+coil_other = [_am_g("am:gsp:ignition-coils:G1", "ignition-coils", "G1", APPS)]
+alt_db = [dict(_am_g("am:dbe:alternator:400-1", "alternator", "400-1", APPS), amps=90)]
+alt_new = [_am_g("am:new:alternator:N1", "alternator", "N1", APPS)]
+_p2, files2 = _run_release({"gsp": coil_other, "dbelectrical": alt_db, "newsite": alt_new}, [])
+ids2 = {g["id"] for d in files2.values() for g in d.get("amGroups", [])}
+check("a non-released source's ignition-coils group (coils not held) gets no lazy file",
+      "am:gsp:ignition-coils:G1" not in ids2 and "ignition-coils" not in files2, str(sorted(ids2)))
+check("dbelectrical alternator still ships", "am:dbe:alternator:400-1" in ids2, str(sorted(ids2)))
+check("an unknown source's alternator group ships nothing", "am:new:alternator:N1" not in ids2)
+check("lazy index counts the Spectra rows", (payload.get("oemLazy") or {}).get("cats", {}).get("radiator", {}).get("am") == 1)
 
 print()
 if failures:
