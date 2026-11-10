@@ -3193,3 +3193,4 @@ each); nothing allowlisted or crawled.
   - No .blocked or .paused. R3 (`.c1.done`) runs on each site after its
     `.v2.done`.
   - Acura has 0 completion rows, so its next run writes `.c1.done` at once.
+- 03:34 UTC check-in: GSP cv-axle 2,938 units (8 sitemaps pending); 1A strut 1,163 (642 pages pending). Run 42714835085 dates from before the reorder (435f9119), so lamp lines start with the next run (~07:40), or sooner if the hub re-dispatches (offered). Nothing blocked.
