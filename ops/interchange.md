@@ -3250,3 +3250,27 @@ each); nothing allowlisted or crawled.
 - ~08:20 UTC: GSP round 3 FAILED, 2 WRONG (NCV37071: yard 'Santa Fe' = Sport; lot engines joined to the LWB row). Fixed (a8d8d437): strict lot-engine coverage on multi-model units, sibling-name guard, spline/length check in notes. Rebuilt on the same pins: 89 groups. Round 4 running (seed 31337004, 30 + 30).
 - ~09:00 UTC: GSP cv-axle §11.4 round 4 PASSED (0 WRONG; 12 + 16 RISK, all covered by shown lines; drive gate 0 deviations). Release candidate on branch interchange/gsp-cv-axle-release @ 0201a501 (b800ec8 + main): 88 groups pinned (raw 624a95ba, lot 91b0b5dd), AM_RELEASED gspnorthamerica={cv-axle}, payload rebuilt, all suites pass. Waiting for the hub's regression test, confirm and merge.
 - ~09:10 UTC: hub CONFIRMED GSP cv-axle on round 4, including the two length-only RISKs (Q70/M37x, Q70L 2015). The hub is regression-testing 0201a501 + main and merges on green (sw jh-v178, AM_RELEASED comment updated in its merge). No pushes to the branch meanwhile.
+- **2026-11-10 ~08:40 UTC.**
+  - **Run 25:** completion read pages on 12 sites; hyundai and kia
+    `.c1.done`. mbpartsgiant, nissanpartsdeal and subarupartsdeal are
+    `.blocked` (HTTP 503 at 07:10-07:16, with 6 SimplePart jobs live).
+    Not retried (rule 2).
+  - **Per-platform pacing** (hub task): branch
+    `make-breadth-platform-pacing` (bf777d7). platforms.py has all 20 sites
+    on SimplePart, from recorded served markers, with no new requests. The
+    workflow runs one job per platform in round-robin site turns; fetch.py
+    adds an 8 s platform-wide gap; refusals go to
+    raw/<site>.refusals.jsonl. tests/test_platforms.py. Waiting for the
+    hub's review.
+  - **HMG** (curated on a24900b), branch `make-breadth-hmg-body`. NOT
+    shipped:
+    - Round 1: 9 WRONG of 30. Fixed by a body gate (own-page notes and
+      fitment rows) and production-date windows.
+    - Round 2: 11 R / 3 W / 16 U. All three WRONGs are exterior parts
+      across a variant pair (Forte/Koup, Optima/Hybrid 2016). Fixed by a
+      variant-aware hold (`policy.hold_base_model`) plus an hmg side-mirror
+      hold: 124 groups, 103 added (gauge clusters, regulators, climate).
+    - Asked the hub whether to resample, hold more, or park hmg. hmg stays
+      at the shipped 54 until then.
+  - **Lesson for every namespace:** variant names (Koup, Hybrid, EV, XL,
+    Sport) and production-date windows need checking before sampling.
