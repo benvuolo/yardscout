@@ -13108,3 +13108,55 @@
 11:37:09 chain-unlinked tail-lights 1 numbers named by AL3Z-13404-AB, no catalog link: BL3Z-13404-AA
 11:37:09 chain-unlinked tail-lights 1 numbers named by AL3Z-13405-AB, no catalog link: BL3Z-13405-AA
 11:39:16 time budget reached records=9332
+11:39:43 start site=www.fordpartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=9332 list_lines=5102 year_lines=998 url_index=32630
+11:39:43 completion worklist completion/ford.own_page.json: 695 rows
+11:40:08 chain-unlinked climate-control 1 numbers named by 9L8Z-19980-A, no catalog link: AL8Z-19980-A
+11:40:08 chain-unlinked climate-control 1 numbers named by 9L8Z-19980-B, no catalog link: AL8Z-19980-B
+11:40:08 chain-unlinked climate-control 1 numbers named by 9L8Z-19980-C, no catalog link: AL8Z-19980-G
+11:40:08 chain-unlinked climate-control 1 numbers named by 9L8Z-19980-D, no catalog link: AL8Z-19980-H
+11:40:40 chain-unlinked side-mirrors 1 numbers named by 9L8Z-17682-EA, no catalog link: 8L8Z-17682-EA
+11:40:48 chain-unlinked window-regulator 1 numbers named by 8L8Z-7823200-A, no catalog link: AL8Z-7823200-A
+11:40:48 chain-unlinked window-regulator 1 numbers named by 8L8Z-7823201-A, no catalog link: AL8Z-7823201-A
+11:46:32 chain-unlinked climate-control 1 numbers named by 7T4Z-19980-B, no catalog link: 8T4Z-19980-C
+11:46:56 chain-unlinked side-mirrors 1 numbers named by 7A1Z-17682-AA, no catalog link: 7A1Z-17682-AB
+11:46:56 chain-unlinked side-mirrors 1 numbers named by 7T4Z-17682-AA, no catalog link: 7T4Z-17682-AB
+11:46:56 chain-unlinked side-mirrors 1 numbers named by 7T4Z-17682-CB, no catalog link: 7T4Z-17682-CC
+11:46:56 chain-unlinked side-mirrors 1 numbers named by 7T4Z-17683-CB, no catalog link: 7T4Z-17683-CC
+11:46:56 chain-unlinked side-mirrors 1 numbers named by 7A1Z-17682-BA, no catalog link: 7A1Z-17682-BB
+11:46:56 chain-unlinked side-mirrors 1 numbers named by 7A1Z-17683-AA, no catalog link: 7A1Z-17683-AB
+11:46:56 chain-unlinked side-mirrors 1 numbers named by 7A1Z-17683-BA, no catalog link: 7A1Z-17683-BB
+11:46:56 chain-unlinked side-mirrors 1 numbers named by 7T4Z-17682-BB, no catalog link: 7T4Z-17682-BC
+11:46:56 chain-unlinked side-mirrors 1 numbers named by 7T4Z-17683-AA, no catalog link: 7T4Z-17683-AB
+11:46:56 chain-unlinked side-mirrors 1 numbers named by 7T4Z-17683-BB, no catalog link: 7T4Z-17683-BC
+11:48:00 chain-unlinked climate-control 1 numbers named by 7C3Z-19980-D, no catalog link: 9C3Z-19980-G
+11:48:00 chain-unlinked climate-control 1 numbers named by 7C3Z-19980-E, no catalog link: 9C3Z-19980-H
+11:48:00 chain-unlinked climate-control 1 numbers named by 7C3Z-19980-F, no catalog link: 9C3Z-19980-J
+11:49:04 chain-unlinked side-mirrors 1 numbers named by 7C3Z-17682-CA, no catalog link: 8C3Z-17682-AB
+11:49:04 chain-unlinked side-mirrors 1 numbers named by 7C3Z-17682-CB, no catalog link: 8C3Z-17682-AB
+11:49:04 chain-unlinked side-mirrors 1 numbers named by 7C3Z-17682-FA, no catalog link: 8C3Z-17682-BB
+11:49:04 chain-unlinked side-mirrors 1 numbers named by 7C3Z-17682-FB, no catalog link: 8C3Z-17682-BB
+11:49:04 chain-unlinked side-mirrors 1 numbers named by 7C3Z-17683-CA, no catalog link: 8C3Z-17683-AB
+11:49:04 chain-unlinked side-mirrors 1 numbers named by 7C3Z-17683-CB, no catalog link: 8C3Z-17683-AB
+11:49:04 chain-unlinked side-mirrors 1 numbers named by 7C3Z-17683-FA, no catalog link: 8C3Z-17683-BB
+11:49:04 chain-unlinked side-mirrors 1 numbers named by 7C3Z-17683-FB, no catalog link: 8C3Z-17683-BB
+11:49:04 chain-unlinked side-mirrors 1 numbers named by 7C3Z-17683-LB, no catalog link: 8C3Z-17683-CB
+11:49:04 chain-unlinked side-mirrors 1 numbers named by 7C3Z-17682-BA, no catalog link: 9C3Z-17682-BA
+11:49:04 chain-unlinked side-mirrors 1 numbers named by 7C3Z-17682-LA, no catalog link: 8C3Z-17682-CB
+11:49:04 chain-unlinked side-mirrors 1 numbers named by 7C3Z-17682-LB, no catalog link: 8C3Z-17682-CB
+11:49:04 chain-unlinked side-mirrors 1 numbers named by 7C3Z-17682-MA, no catalog link: 8C3Z-17682-DB
+11:49:04 chain-unlinked side-mirrors 1 numbers named by 7C3Z-17682-MB, no catalog link: 8C3Z-17682-DB
+11:49:04 chain-unlinked side-mirrors 1 numbers named by 7C3Z-17683-LA, no catalog link: 8C3Z-17683-CB
+11:49:04 chain-unlinked side-mirrors 1 numbers named by 7C3Z-17683-MA, no catalog link: 8C3Z-17683-DB
+11:49:04 chain-unlinked side-mirrors 1 numbers named by 7C3Z-17683-MB, no catalog link: 8C3Z-17683-DB
+11:49:04 chain-unlinked side-mirrors 1 numbers named by 8C3Z-17682-DA, no catalog link: 8C3Z-17682-DB
+11:49:04 chain-unlinked side-mirrors 1 numbers named by 8C3Z-17683-DA, no catalog link: 8C3Z-17683-DB
+11:49:36 chain-unlinked window-regulator 1 numbers named by 8C3Z-2523201-C, no catalog link: 6C3Z-2523201-BC
+11:49:36 chain-unlinked window-regulator 1 numbers named by 8C3Z-2523200-A, no catalog link: 8C3Z-2523200-B
+11:49:36 chain-unlinked window-regulator 2 numbers named by 8C3Z-2523200-C, no catalog link: 6C3Z-2523200-BA, 6C3Z-2523200-BC
+11:49:36 chain-unlinked window-regulator 1 numbers named by 8C3Z-2523201-A, no catalog link: 8C3Z-2523201-B
+12:03:12 chain-unlinked climate-control 1 numbers named by EA1Z-19980-C, no catalog link: EA1Z-19980-E
+12:03:12 chain-unlinked climate-control 1 numbers named by EA1Z-19980-A, no catalog link: EA1Z-19980-D
+12:03:12 chain-unlinked climate-control 1 numbers named by ET4Z-19980-F, no catalog link: ET4Z-19980-N
+12:03:12 chain-unlinked climate-control 1 numbers named by ET4Z-19980-G, no catalog link: ET4Z-19980-P
+12:03:12 chain-unlinked climate-control 1 numbers named by DT4Z-19980-H, no catalog link: ET4Z-19980-N
+12:11:53 time budget reached records=9355
