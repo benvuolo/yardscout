@@ -761,3 +761,34 @@
 13:37:23 chain-unlinked tail-lights 1 numbers named by 4D0-945-096-B, no catalog link: 4D0-945-218-B
 13:37:32 chain-unlinked trunk-lid 1 numbers named by 4D0-827-023-Q, no catalog link: 4D0-827-023-P
 13:39:40 time budget reached records=1569
+13:40:09 start site=www.audipartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=1569 list_lines=1647 year_lines=173 url_index=8814
+13:40:09 completion worklist completion/vag.own_page.json: 366 rows
+13:40:33 nav-fail Audi A8 Quattro 2004: NavError: HTTP 404 for https://www.audipartsgiant.com/2004-audi-a8-quattro-parts
+13:42:33 nav-fail Audi TT Quattro 2002: NavError: HTTP 404 for https://www.audipartsgiant.com/2002-audi-tt-quattro-parts
+13:47:05 nav-fail Audi A8 Quattro 2008: NavError: HTTP 404 for https://www.audipartsgiant.com/2008-audi-a8-quattro-parts
+13:47:13 nav-fail Audi A8 Quattro 2010: NavError: HTTP 404 for https://www.audipartsgiant.com/2010-audi-a8-quattro-parts
+13:48:25 nav-fail Audi Q3 Quattro 2015: NavError: HTTP 404 for https://www.audipartsgiant.com/2015-audi-q3-quattro-parts
+13:48:33 nav-fail Audi TT Quattro 2000: NavError: HTTP 404 for https://www.audipartsgiant.com/2000-audi-tt-quattro-parts
+13:55:06 nav-fail Audi TT Quattro 2009: NavError: HTTP 404 for https://www.audipartsgiant.com/2009-audi-tt-quattro-parts
+13:56:49 nav-fail Audi Q5 Sportback 2022: NavError: HTTP 404 for https://www.audipartsgiant.com/2022-audi-q5-sportback-parts
+13:58:34 nav-fail Audi TT Quattro 2010: NavError: HTTP 404 for https://www.audipartsgiant.com/2010-audi-tt-quattro-parts
+13:58:41 nav-fail Audi A3 Quattro 2016: NavError: HTTP 404 for https://www.audipartsgiant.com/2016-audi-a3-quattro-parts
+13:58:49 nav-fail Audi A7 Quattro 2014: NavError: HTTP 404 for https://www.audipartsgiant.com/2014-audi-a7-quattro-parts
+14:00:18 nav-fail Audi A7 Quattro 2012: NavError: HTTP 404 for https://www.audipartsgiant.com/2012-audi-a7-quattro-parts
+14:00:26 nav-fail Audi A3 Quattro 2011: NavError: HTTP 404 for https://www.audipartsgiant.com/2011-audi-a3-quattro-parts
+14:00:34 nav-fail Audi A3 Quattro 2013: NavError: HTTP 404 for https://www.audipartsgiant.com/2013-audi-a3-quattro-parts
+14:02:01 chain-unlinked climate-control 1 numbers named by 8W0-820-043-BM-5PR, no catalog link: 8W0-820-043-CA-5PR
+14:02:01 chain-unlinked climate-control 1 numbers named by 8W0-820-043-AM-5PR, no catalog link: 8W0-820-043-Q-5PR
+14:02:42 chain-unlinked window-regulator 3 numbers named by 8W6-837-461-D, no catalog link: 8W6-837-461-C, 8W6-837-461-B, 8W6-837-461-A
+14:02:42 chain-unlinked window-regulator 3 numbers named by 8W6-837-462-D, no catalog link: 8W6-837-462-A, 8W6-837-462-B, 8W6-837-462-C
+14:02:42 chain-unlinked window-regulator 3 numbers named by 8W7-837-461-D, no catalog link: 8W7-837-461-C, 8W7-837-461-B, 8W7-837-461-A
+14:02:42 chain-unlinked window-regulator 3 numbers named by 8W7-837-462-D, no catalog link: 8W7-837-462-C, 8W7-837-462-A, 8W7-837-462-B
+14:03:54 chain-unlinked window-regulator 1 numbers named by 4G8-837-461-B, no catalog link: 4G8-837-461-A
+14:03:54 chain-unlinked window-regulator 1 numbers named by 4G8-837-462-B, no catalog link: 4G8-837-462-A
+14:04:11 chain-unlinked window-regulator 2 numbers named by 4G8-839-461-C, no catalog link: 4G8-839-461-A, 4G8-839-461-B
+14:04:42 nav-fail Audi A8 Quattro 2011: NavError: HTTP 404 for https://www.audipartsgiant.com/2011-audi-a8-quattro-parts
+14:04:49 nav-fail Audi A7 Quattro 2016: NavError: HTTP 404 for https://www.audipartsgiant.com/2016-audi-a7-quattro-parts
+14:04:57 nav-fail Audi A8 Quattro 2012: NavError: HTTP 404 for https://www.audipartsgiant.com/2012-audi-a8-quattro-parts
+14:08:18 chain-unlinked gauge-cluster 1 numbers named by 8T0-920-981-N, no catalog link: 8T0-920-981-NX
+14:08:18 chain-unlinked gauge-cluster 1 numbers named by 8T0-920-981-T, no catalog link: 8T0-920-981-TX
+14:11:14 time budget reached records=1594
