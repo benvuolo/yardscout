@@ -421,3 +421,25 @@ We never load, run or submit anything.
 - **Notes:** each says to match engine, drive, transmission, trim and
   suspension. The hub accepts the remaining same-engine sport-trim risk
   (e.g. the 2007-08 TL Type-S) as Likely on that basis.
+
+### Lamp / mirror sources after 1A Auto's stop (2026-11-10)
+
+1A Auto: HTTP 503 at 2026-11-10T04:30:07Z, after 3,481 requests at 8 s
+pacing. It is permanently stopped (rule 2) and OUT for now (hub). Its raw
+data stays unused on oem-raw. Outreach is the owner's call.
+
+| source | result | verdict |
+|---|---|---|
+| Depo (depoautolamp.com) | recorded above: home page is a challenge; not re-probed | **OUT** (challenge) |
+| TYC Americas (tycamericas.com) | recorded in `aftermarket/tycamericas.py`: D365 storefront renders lists client-side from another domain's API; search disallowed; not re-probed | **OUT** (no server-rendered lists) |
+| TYC Taiwan (www.tyc.com.tw) | robots 404, no challenge; the home page HTML links only a questionnaire, and no catalog is server-rendered | **no catalog** |
+| CAPA (www.capacertified.org) | robots.txt HTTP 403 | **OUT** (refusal) |
+| Kool Vue (www.koolvue.com) | domain parked at a broker behind a Cloudflare challenge | **defunct / OUT** |
+| Spyder (www.spyderauto.com) | robots `Disallow: /` | **OUT** (robots) |
+| Anzo (anzousa.com, Shopify) | it has a server-rendered "Fitment: Make Model Year Trim Notes" table, but the Terms of Service forbid using the site "to spam, phish, pharm, pretext, spider, crawl, or scrape" | **OUT** (anti-automation clause) |
+| LKQ Corp (www.lkqcorp.com) | corporate site, no catalog | **no catalog** |
+
+No free, permitted aftermarket lamp/mirror source was found. Headlights,
+tail lights and side mirrors are already in tier A of the dealer-catalog
+OEM crawl (`crawl.TIERS["A"]`), which is carmaker data and stronger
+evidence than any aftermarket list.
