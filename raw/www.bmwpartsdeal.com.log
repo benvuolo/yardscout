@@ -1227,3 +1227,156 @@
 03:31:36 chain-unlinked strut 1 numbers named by 31-31-6-786-032, no catalog link: 31-31-6-784-002
 03:32:08 seg done tier=C BMW 128i [2008, 2013] seeds=[2010] records=2085 errors=66
 03:34:08 time budget reached records=2085
+03:34:21 start site=www.bmwpartsdeal.com mode=worklist tiers=['A', 'B', 'W', 'C'] records=2085 list_lines=314 year_lines=86 url_index=0
+03:34:21 seg done tier=A BMW 328i [1995, 2016] seeds=[2011] records=2085 errors=66
+03:34:21 seg done tier=A BMW 325i [1988, 2006] seeds=[2006] records=2085 errors=66
+03:34:21 seg done tier=A BMW X5 [2007, 2013] seeds=[2008] records=2085 errors=66
+03:34:21 seg done tier=A BMW X3 [2004, 2010] seeds=[2006] records=2085 errors=66
+03:34:21 seg done tier=A BMW 528i [1979, 2016] seeds=[2008] records=2085 errors=66
+03:34:21 seg done tier=A BMW X5 [2000, 2006] seeds=[2005] records=2085 errors=66
+03:34:21 seg done tier=A BMW 525i [1989, 2007] seeds=[2007] records=2085 errors=66
+03:34:21 seg done tier=A BMW 530i [1994, 2021] seeds=[2006] records=2085 errors=66
+03:34:21 seg done tier=A BMW 3 Series [1983, 2016] seeds=[2008] records=2085 errors=66
+03:34:21 seg done tier=A BMW 535i [1985, 2016] seeds=[2011] records=2085 errors=66
+03:34:21 seg done tier=A BMW 330i [2001, 2018] seeds=[2006] records=2085 errors=66
+03:34:21 seg done tier=A BMW 335i [2007, 2016] seeds=[2007] records=2085 errors=66
+03:34:21 seg done tier=A BMW X3 [2011, 2017] seeds=[2013] records=2085 errors=66
+03:34:21 seg done tier=A BMW 325ci [2000, 2006] seeds=[2002] records=2085 errors=66
+03:34:21 seg done tier=A BMW 750Li [2006, 2015] seeds=[2006] records=2085 errors=66
+03:34:21 seg done tier=A BMW 320i [1978, 2018] seeds=[2014] records=2085 errors=66
+03:34:21 seg done tier=A BMW X1 [2012, 2015] seeds=[2013] records=2085 errors=66
+03:34:21 seg done tier=A BMW 328xi [2007, 2015] seeds=[2007] records=2085 errors=66
+03:34:21 seg done tier=A BMW 325xi [2001, 2006] seeds=[2002] records=2085 errors=66
+03:34:21 seg done tier=A BMW 323i [1998, 2012] seeds=[2000] records=2085 errors=66
+03:34:21 seg done tier=A BMW 550i [2006, 2016] seeds=[2008] records=2085 errors=66
+03:34:21 seg done tier=A BMW 5 Series [1985, 2016] seeds=[2007] records=2085 errors=66
+03:34:21 seg done tier=A BMW 328i xDrive [2009, 2015] seeds=[2011] records=2085 errors=66
+03:34:21 seg done tier=A BMW 750i [2000, 2013] seeds=[2008] records=2085 errors=66
+03:34:21 seg done tier=A BMW 330ci [2001, 2006] seeds=[2001] records=2085 errors=66
+03:34:21 seg done tier=A BMW 745Li [2002, 2005] seeds=[2004] records=2085 errors=66
+03:34:21 seg done tier=A BMW Z3 [1996, 2002] seeds=[2000] records=2085 errors=66
+03:34:21 seg done tier=A BMW 740i [1993, 2016] seeds=[1998] records=2085 errors=66
+03:34:21 seg done tier=A BMW 745i [2002, 2005] seeds=[2003] records=2085 errors=66
+03:34:21 seg done tier=A BMW 540i [1994, 2003] seeds=[2000] records=2085 errors=66
+03:34:21 seg done tier=A BMW 330xi [2001, 2006] seeds=[2006] records=2085 errors=66
+03:34:21 seg done tier=A BMW 530xi [2006, 2007] seeds=[2007] records=2085 errors=66
+03:34:21 seg done tier=A BMW Z4 [2003, 2008] seeds=[2003] records=2085 errors=66
+03:34:21 seg done tier=A BMW 128i [2008, 2013] seeds=[2010] records=2085 errors=66
+03:34:21 seg done tier=A BMW 740iL [1995, 2001] seeds=[2001] records=2085 errors=66
+03:34:21 seg done tier=A BMW 650i [2006, 2014] seeds=[2006] records=2085 errors=66
+03:34:21 seg done tier=A BMW 545i [2004, 2005] seeds=[2004] records=2085 errors=66
+03:34:21 seg done tier=A BMW 645ci [2004, 2005] seeds=[2005] records=2085 errors=66
+03:34:21 seg done tier=A BMW 535xi [2008, 2008] seeds=[2008] records=2085 errors=66
+03:34:21 seg done tier=A BMW 318i [1984, 1998] seeds=[1997] records=2085 errors=66
+03:34:21 seg done tier=A BMW 528xi [2008, 2013] seeds=[2008] records=2085 errors=66
+03:34:21 seg done tier=A BMW 535i xDrive [2009, 2016] seeds=[2011] records=2085 errors=66
+03:34:21 seg done tier=A BMW 525xi [2006, 2007] seeds=[2007] records=2085 errors=66
+03:34:21 seg done tier=A BMW 7 Series [1983, 2013] seeds=[2004] records=2085 errors=66
+03:34:21 seg done tier=B BMW 328i [1995, 2016] seeds=[2011] records=2085 errors=66
+03:34:21 seg done tier=B BMW 325i [1988, 2006] seeds=[2006] records=2085 errors=66
+03:34:21 seg done tier=B BMW X5 [2007, 2013] seeds=[2008] records=2085 errors=66
+03:34:21 seg done tier=B BMW X3 [2004, 2010] seeds=[2006] records=2085 errors=66
+03:34:21 seg done tier=B BMW 528i [1979, 2016] seeds=[2008] records=2085 errors=66
+03:34:21 seg done tier=B BMW X5 [2000, 2006] seeds=[2005] records=2085 errors=66
+03:34:21 seg done tier=B BMW 525i [1989, 2007] seeds=[2007] records=2085 errors=66
+03:34:21 seg done tier=B BMW 530i [1994, 2021] seeds=[2006] records=2085 errors=66
+03:34:21 seg done tier=B BMW 3 Series [1983, 2016] seeds=[2008] records=2085 errors=66
+03:34:21 seg done tier=B BMW 535i [1985, 2016] seeds=[2011] records=2085 errors=66
+03:34:21 seg done tier=B BMW 330i [2001, 2018] seeds=[2006] records=2085 errors=66
+03:34:21 seg done tier=B BMW 335i [2007, 2016] seeds=[2007] records=2085 errors=66
+03:34:21 seg done tier=B BMW X3 [2011, 2017] seeds=[2013] records=2085 errors=66
+03:34:21 seg done tier=B BMW 325ci [2000, 2006] seeds=[2002] records=2085 errors=66
+03:34:21 seg done tier=B BMW 750Li [2006, 2015] seeds=[2006] records=2085 errors=66
+03:34:21 seg done tier=B BMW 320i [1978, 2018] seeds=[2014] records=2085 errors=66
+03:34:21 seg done tier=B BMW X1 [2012, 2015] seeds=[2013] records=2085 errors=66
+03:34:21 seg done tier=B BMW 328xi [2007, 2015] seeds=[2007] records=2085 errors=66
+03:34:21 seg done tier=B BMW 325xi [2001, 2006] seeds=[2002] records=2085 errors=66
+03:34:21 seg done tier=B BMW 323i [1998, 2012] seeds=[2000] records=2085 errors=66
+03:34:21 seg done tier=B BMW 550i [2006, 2016] seeds=[2008] records=2085 errors=66
+03:34:21 seg done tier=B BMW 5 Series [1985, 2016] seeds=[2007] records=2085 errors=66
+03:34:21 seg done tier=B BMW 328i xDrive [2009, 2015] seeds=[2011] records=2085 errors=66
+03:34:21 seg done tier=B BMW 750i [2000, 2013] seeds=[2008] records=2085 errors=66
+03:34:21 seg done tier=B BMW 330ci [2001, 2006] seeds=[2001] records=2085 errors=66
+03:34:21 seg done tier=B BMW 745Li [2002, 2005] seeds=[2004] records=2085 errors=66
+03:34:21 seg done tier=B BMW Z3 [1996, 2002] seeds=[2000] records=2085 errors=66
+03:34:21 seg done tier=B BMW 740i [1993, 2016] seeds=[1998] records=2085 errors=66
+03:34:21 seg done tier=B BMW 745i [2002, 2005] seeds=[2003] records=2085 errors=66
+03:34:21 seg done tier=B BMW 540i [1994, 2003] seeds=[2000] records=2085 errors=66
+03:34:21 seg done tier=B BMW 330xi [2001, 2006] seeds=[2006] records=2085 errors=66
+03:34:21 seg done tier=B BMW 530xi [2006, 2007] seeds=[2007] records=2085 errors=66
+03:34:21 seg done tier=B BMW Z4 [2003, 2008] seeds=[2003] records=2085 errors=66
+03:34:21 seg done tier=B BMW 128i [2008, 2013] seeds=[2010] records=2085 errors=66
+03:34:21 seg done tier=B BMW 740iL [1995, 2001] seeds=[2001] records=2085 errors=66
+03:34:21 seg done tier=B BMW 650i [2006, 2014] seeds=[2006] records=2085 errors=66
+03:34:21 seg done tier=B BMW 545i [2004, 2005] seeds=[2004] records=2085 errors=66
+03:34:21 seg done tier=B BMW 645ci [2004, 2005] seeds=[2005] records=2085 errors=66
+03:34:21 seg done tier=B BMW 535xi [2008, 2008] seeds=[2008] records=2085 errors=66
+03:34:21 seg done tier=B BMW 318i [1984, 1998] seeds=[1997] records=2085 errors=66
+03:34:21 seg done tier=B BMW 528xi [2008, 2013] seeds=[2008] records=2085 errors=66
+03:34:21 seg done tier=B BMW 535i xDrive [2009, 2016] seeds=[2011] records=2085 errors=66
+03:34:21 seg done tier=B BMW 525xi [2006, 2007] seeds=[2007] records=2085 errors=66
+03:34:21 seg done tier=B BMW 7 Series [1983, 2013] seeds=[2004] records=2085 errors=66
+03:34:21 seg done tier=C BMW 328i [1995, 2016] seeds=[2011] records=2085 errors=66
+03:34:21 seg done tier=C BMW 325i [1988, 2006] seeds=[2006] records=2085 errors=66
+03:34:21 seg done tier=C BMW X5 [2007, 2013] seeds=[2008] records=2085 errors=66
+03:34:21 seg done tier=C BMW X3 [2004, 2010] seeds=[2006] records=2085 errors=66
+03:34:21 seg done tier=C BMW 528i [1979, 2016] seeds=[2008] records=2085 errors=66
+03:34:21 seg done tier=C BMW X5 [2000, 2006] seeds=[2005] records=2085 errors=66
+03:34:21 seg done tier=C BMW 525i [1989, 2007] seeds=[2007] records=2085 errors=66
+03:34:21 seg done tier=C BMW 530i [1994, 2021] seeds=[2006] records=2085 errors=66
+03:34:21 seg done tier=C BMW 3 Series [1983, 2016] seeds=[2008] records=2085 errors=66
+03:34:21 seg done tier=C BMW 535i [1985, 2016] seeds=[2011] records=2085 errors=66
+03:34:21 seg done tier=C BMW 330i [2001, 2018] seeds=[2006] records=2085 errors=66
+03:34:21 seg done tier=C BMW 335i [2007, 2016] seeds=[2007] records=2085 errors=66
+03:34:21 seg done tier=C BMW X3 [2011, 2017] seeds=[2013] records=2085 errors=66
+03:34:21 seg done tier=C BMW 325ci [2000, 2006] seeds=[2002] records=2085 errors=66
+03:34:21 seg done tier=C BMW 750Li [2006, 2015] seeds=[2006] records=2085 errors=66
+03:34:21 seg done tier=C BMW 320i [1978, 2018] seeds=[2014] records=2085 errors=66
+03:34:21 seg done tier=C BMW X1 [2012, 2015] seeds=[2013] records=2085 errors=66
+03:34:21 seg done tier=C BMW 328xi [2007, 2015] seeds=[2007] records=2085 errors=66
+03:34:21 seg done tier=C BMW 325xi [2001, 2006] seeds=[2002] records=2085 errors=66
+03:34:21 seg done tier=C BMW 323i [1998, 2012] seeds=[2000] records=2085 errors=66
+03:34:21 seg done tier=C BMW 550i [2006, 2016] seeds=[2008] records=2085 errors=66
+03:34:21 seg done tier=C BMW 5 Series [1985, 2016] seeds=[2007] records=2085 errors=66
+03:34:21 seg done tier=C BMW 328i xDrive [2009, 2015] seeds=[2011] records=2085 errors=66
+03:34:21 seg done tier=C BMW 750i [2000, 2013] seeds=[2008] records=2085 errors=66
+03:34:21 seg done tier=C BMW 330ci [2001, 2006] seeds=[2001] records=2085 errors=66
+03:34:21 seg done tier=C BMW 745Li [2002, 2005] seeds=[2004] records=2085 errors=66
+03:34:21 seg done tier=C BMW Z3 [1996, 2002] seeds=[2000] records=2085 errors=66
+03:34:21 seg done tier=C BMW 740i [1993, 2016] seeds=[1998] records=2085 errors=66
+03:34:21 seg done tier=C BMW 745i [2002, 2005] seeds=[2003] records=2085 errors=66
+03:34:21 seg done tier=C BMW 540i [1994, 2003] seeds=[2000] records=2085 errors=66
+03:34:21 seg done tier=C BMW 330xi [2001, 2006] seeds=[2006] records=2085 errors=66
+03:34:21 seg done tier=C BMW 530xi [2006, 2007] seeds=[2007] records=2085 errors=66
+03:34:21 seg done tier=C BMW Z4 [2003, 2008] seeds=[2003] records=2085 errors=66
+03:34:21 seg done tier=C BMW 128i [2008, 2013] seeds=[2010] records=2085 errors=66
+03:34:21 seg done tier=C BMW 740iL [1995, 2001] seeds=[2001] records=2085 errors=66
+03:35:57 chain-unlinked strut 2 numbers named by 33-52-6-786-530, no catalog link: 33-52-6-762-799, 33-52-6-767-733
+03:36:29 chain-unlinked strut 2 numbers named by 33-52-6-786-529, no catalog link: 33-52-6-766-773, 33-52-6-768-925
+03:38:13 chain-unlinked strut 1 numbers named by 37-11-6-863-123, no catalog link: 37-11-6-798-405
+03:38:13 chain-unlinked strut 1 numbers named by 37-11-6-863-124, no catalog link: 37-11-6-798-406
+03:39:09 chain-unlinked strut 2 numbers named by 37-11-6-863-125, no catalog link: 37-11-6-850-961, 37-11-6-859-779
+03:39:09 chain-unlinked strut 2 numbers named by 37-11-6-863-126, no catalog link: 37-11-6-850-962, 37-11-6-859-780
+03:39:17 nav-fail BMW 650i 2011: ValueError: no 2011 catalog for BMW 650i (bmw-['650i'])
+03:39:17 seg done tier=C BMW 650i [2006, 2014] seeds=[2006, 2013, 2011] records=2102 errors=67
+03:40:05 chain-unlinked strut 1 numbers named by 31-31-6-766-993, no catalog link: 31-31-6-760-969
+03:40:05 chain-unlinked strut 1 numbers named by 31-31-6-766-994, no catalog link: 31-31-6-760-970
+03:40:21 chain-unlinked strut 1 numbers named by 33-52-6-766-995, no catalog link: 33-52-6-766-606
+03:40:21 seg done tier=C BMW 545i [2004, 2005] seeds=[2004] records=2105 errors=67
+03:42:37 seg done tier=C BMW 645ci [2004, 2005] seeds=[2005, 2004] records=2105 errors=67
+03:43:49 chain-unlinked strut 1 numbers named by 31-31-6-786-517, no catalog link: 31-30-6-772-219
+03:43:49 chain-unlinked strut 1 numbers named by 31-31-6-786-518, no catalog link: 31-30-6-772-220
+03:44:05 seg done tier=C BMW 535xi [2008, 2008] seeds=[2008] records=2107 errors=67
+03:45:17 chain-unlinked strut 3 numbers named by 31-31-1-091-773, no catalog link: 31-31-1-091-091, 31-31-1-090-713, 31-31-1-090-711
+03:45:17 chain-unlinked strut 3 numbers named by 31-31-1-091-774, no catalog link: 31-31-1-090-714, 31-31-1-090-712, 31-31-1-091-092
+03:45:57 chain-unlinked strut 1 numbers named by 31-31-1-091-101, no catalog link: 31-31-1-091-063
+03:45:57 chain-unlinked strut 1 numbers named by 31-31-1-091-102, no catalog link: 31-31-1-091-064
+03:46:21 nav-fail BMW 318i 1988: ValueError: no 1988 catalog for BMW 318i (bmw-['318i'])
+03:46:21 seg done tier=C BMW 318i [1984, 1998] seeds=[1997, 1988] records=2114 errors=68
+03:47:01 nav-fail BMW 528xi 2011: ValueError: no 2011 catalog for BMW 528xi (bmw-['528xi'])
+03:47:01 seg done tier=C BMW 528xi [2008, 2013] seeds=[2008, 2011] records=2114 errors=69
+03:50:45 seg done tier=C BMW 535i xDrive [2009, 2016] seeds=[2011, 2010, 2009] records=2119 errors=69
+03:51:57 seg done tier=C BMW 525xi [2006, 2007] seeds=[2007, 2006] records=2119 errors=69
+03:52:05 nav-fail BMW 7 Series 2004: ValueError: no 2004 catalog for BMW 7 Series (bmw-['7_series'])
+03:52:05 seg done tier=C BMW 7 Series [1983, 2013] seeds=[2004] records=2119 errors=70
+03:52:05 finished records=2119 errors=70 chain_records=0 chain_unlinked=248 chain_failed=0 chain_given_up=0
