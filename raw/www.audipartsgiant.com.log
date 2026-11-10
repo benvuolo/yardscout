@@ -379,3 +379,71 @@
 03:02:53 chain-unlinked strut 3 numbers named by 8E0-413-031-CC, no catalog link: 8E0-413-031-BF, 8E0-413-031-CB, 8E0-413-031-BE
 03:02:53 chain-unlinked strut 1 numbers named by 8E0-413-031-CN, no catalog link: 8E0-413-031-BT
 03:02:53 time budget reached records=1347
+03:03:06 start site=www.audipartsgiant.com mode=worklist tiers=['A', 'B', 'W', 'C'] records=1347 list_lines=261 year_lines=25 url_index=2334
+03:03:06 seg done tier=A Audi A4 [1996, 2019] seeds=[2008] records=1347 errors=17
+03:03:06 seg done tier=A Audi A6 [1997, 2017] seeds=[2008] records=1347 errors=17
+03:03:06 seg done tier=A Audi Q5 [2009, 2022] seeds=[2012] records=1347 errors=17
+03:03:06 seg done tier=A Audi Q7 [2007, 2017] seeds=[2008] records=1347 errors=17
+03:03:06 seg done tier=A Audi A3 [2006, 2019] seeds=[2006] records=1347 errors=17
+03:03:06 seg done tier=A Audi A4 Quattro [1997, 2016] seeds=[2009] records=1347 errors=17
+03:03:06 seg done tier=A Audi A5 [2009, 2022] seeds=[2010] records=1347 errors=17
+03:03:06 seg done tier=A Audi A6 Quattro [2000, 2015] seeds=[2006] records=1347 errors=17
+03:03:06 seg done tier=A Audi TT [2000, 2008] seeds=[2001] records=1347 errors=17
+03:03:06 seg done tier=A Audi S4 [2000, 2021] seeds=[2005] records=1347 errors=17
+03:03:06 seg done tier=A Audi A8 [1997, 2011] seeds=[2006] records=1347 errors=17
+03:03:06 seg done tier=A Audi Allroad [2001, 2015] seeds=[2005] records=1347 errors=17
+03:03:06 seg done tier=A Audi A5 Quattro [2009, 2012] seeds=[2011] records=1347 errors=17
+03:03:06 seg done tier=A Audi Q3 [2015, 2021] seeds=[2016] records=1347 errors=17
+03:03:06 seg done tier=B Audi A4 [1996, 2019] seeds=[2008] records=1347 errors=17
+03:03:06 seg done tier=B Audi A6 [1997, 2017] seeds=[2008] records=1347 errors=17
+03:03:06 seg done tier=B Audi Q5 [2009, 2022] seeds=[2012] records=1347 errors=17
+03:03:06 seg done tier=B Audi Q7 [2007, 2017] seeds=[2008] records=1347 errors=17
+03:03:06 seg done tier=B Audi A3 [2006, 2019] seeds=[2006] records=1347 errors=17
+03:03:06 seg done tier=B Audi A4 Quattro [1997, 2016] seeds=[2009] records=1347 errors=17
+03:03:06 seg done tier=B Audi A5 [2009, 2022] seeds=[2010] records=1347 errors=17
+03:03:06 seg done tier=B Audi A6 Quattro [2000, 2015] seeds=[2006] records=1347 errors=17
+03:03:06 seg done tier=B Audi TT [2000, 2008] seeds=[2001] records=1347 errors=17
+03:03:06 seg done tier=B Audi S4 [2000, 2021] seeds=[2005] records=1347 errors=17
+03:03:06 seg done tier=B Audi A8 [1997, 2011] seeds=[2006] records=1347 errors=17
+03:03:06 seg done tier=B Audi Allroad [2001, 2015] seeds=[2005] records=1347 errors=17
+03:03:06 seg done tier=B Audi A5 Quattro [2009, 2012] seeds=[2011] records=1347 errors=17
+03:03:06 seg done tier=B Audi Q3 [2015, 2021] seeds=[2016] records=1347 errors=17
+03:03:06 seg done tier=C Audi A4 [1996, 2019] seeds=[2008] records=1347 errors=17
+03:03:06 seg done tier=C Audi A6 [1997, 2017] seeds=[2008] records=1347 errors=17
+03:03:06 seg done tier=C Audi Q5 [2009, 2022] seeds=[2012] records=1347 errors=17
+03:03:06 seg done tier=C Audi Q7 [2007, 2017] seeds=[2008] records=1347 errors=17
+03:03:06 seg done tier=C Audi A3 [2006, 2019] seeds=[2006] records=1347 errors=17
+03:03:06 seg done tier=C Audi A4 Quattro [1997, 2016] seeds=[2009] records=1347 errors=17
+03:03:06 seg done tier=C Audi A5 [2009, 2022] seeds=[2010] records=1347 errors=17
+03:03:06 seg done tier=C Audi A6 Quattro [2000, 2015] seeds=[2006] records=1347 errors=17
+03:03:06 seg done tier=C Audi TT [2000, 2008] seeds=[2001] records=1347 errors=17
+03:03:06 seg done tier=C Audi S4 [2000, 2021] seeds=[2005] records=1347 errors=17
+03:03:54 chain-unlinked knuckle 2 numbers named by 4E0-505-435-C, no catalog link: 4E0-505-435-A, 4E9-505-435-A
+03:03:54 chain-unlinked knuckle 2 numbers named by 4E0-505-436-C, no catalog link: 4E0-505-436-A, 4E9-505-436-A
+03:04:34 chain-unlinked knuckle 2 numbers named by 4E0-407-253-Q, no catalog link: 4E0-407-253-M, 4E0-407-253-L
+03:04:34 chain-unlinked knuckle 2 numbers named by 4E0-407-254-Q, no catalog link: 4E0-407-254-M, 4E0-407-254-L
+03:04:34 chain-unlinked knuckle 3 numbers named by 4E0-407-253-R, no catalog link: 4E0-407-253-J, 4E0-407-253-N, 4E0-407-253-G
+03:04:34 chain-unlinked knuckle 3 numbers named by 4E0-407-254-R, no catalog link: 4E0-407-254-G, 4E0-407-254-J, 4E0-407-254-N
+03:05:14 chain-unlinked strut 1 numbers named by 4E0-616-039-AL, no catalog link: 4E0-616-039-AF
+03:05:14 chain-unlinked strut 2 numbers named by 4E0-616-039-AN, no catalog link: 4E0-616-039-AJ, 4E0-616-039-AG
+03:05:14 chain-unlinked strut 1 numbers named by 4E0-616-040-AL, no catalog link: 4E0-616-040-AF
+03:05:14 chain-unlinked strut 2 numbers named by 4E0-616-040-AN, no catalog link: 4E0-616-040-AG, 4E0-616-040-AJ
+03:05:46 chain-unlinked strut 2 numbers named by 4E0-616-001-R, no catalog link: 4E0-616-001-N, 4E0-616-001-E
+03:05:46 chain-unlinked strut 2 numbers named by 4E0-616-001-S, no catalog link: 4E0-616-001-P, 4E0-616-001-F
+03:05:46 chain-unlinked strut 2 numbers named by 4E0-616-002-R, no catalog link: 4E0-616-002-E, 4E0-616-002-N
+03:05:46 chain-unlinked strut 2 numbers named by 4E0-616-002-S, no catalog link: 4E0-616-002-F, 4E0-616-002-P
+03:09:46 chain-unlinked strut 4 numbers named by 4D0-513-031-L, no catalog link: 4D0-513-031-R, 4D0-513-031-K, 4D0-513-031-T, 4D0-513-031-N
+03:09:46 chain-unlinked strut 1 numbers named by 4D0-513-031-S, no catalog link: 4D0-513-031-Q
+03:09:54 seg done tier=C Audi A8 [1997, 2011] seeds=[2006, 2004, 2003] records=1372 errors=17
+03:11:30 chain-unlinked knuckle 1 numbers named by 4Z7-505-435-B, no catalog link: 4Z7-505-435-A
+03:11:30 chain-unlinked knuckle 1 numbers named by 4Z7-505-436-B, no catalog link: 4Z7-505-436-A
+03:11:38 chain-unlinked strut 2 numbers named by 4Z7-413-031-A, no catalog link: 4Z7-413-032, 4Z7-413-031
+03:11:54 chain-unlinked strut 1 numbers named by 4Z7-513-031-A, no catalog link: 4Z7-513-031
+03:11:54 chain-unlinked strut 1 numbers named by 4Z7-513-032-A, no catalog link: 4Z7-513-032
+03:12:18 nav-fail Audi Allroad 2011: NavError: Audi Allroad 2011: no catalog model for this year
+03:12:18 seg done tier=C Audi Allroad [2001, 2015] seeds=[2005, 2011] records=1380 errors=18
+03:14:26 seg done tier=C Audi A5 Quattro [2009, 2012] seeds=[2011] records=1386 errors=18
+03:14:50 chain-unlinked wiper-motor 1 numbers named by 4G9-955-711-C, no catalog link: 8U0-955-711-A
+03:17:30 chain-unlinked knuckle 1 numbers named by 5QF-505-435-H, no catalog link: 5QF-505-435-F
+03:18:26 seg done tier=C Audi Q3 [2015, 2021] seeds=[2016, 2020] records=1392 errors=18
+03:18:26 finished records=1392 errors=18 chain_records=0 chain_unlinked=248 chain_failed=0 chain_given_up=0
