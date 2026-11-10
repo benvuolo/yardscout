@@ -1820,3 +1820,198 @@
 09:16:00 chain-unlinked strut 5 numbers named by 48520-80101, no catalog link: 48520-29675, 48520-80046, 48520-80102, 48520-29665, 48520-80047
 09:16:17 seg done tier=C Toyota Celica [2000, 2005] seeds=[2000] records=4263 errors=8
 09:16:17 time budget reached records=4263
+09:16:28 start site=www.toyotapartsnow.com mode=worklist tiers=['A', 'B', 'W', 'C'] records=4263 list_lines=422 year_lines=50 url_index=4604
+09:16:28 seg done tier=A Toyota Camry [2007, 2009] seeds=[2007] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Camry [2002, 2004] seeds=[2002] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Prius [2001, 2019] seeds=[2008] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Sienna [2004, 2010] seeds=[2004] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Camry [2005, 2006] seeds=[2005] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Camry [1997, 1999] seeds=[1999] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Corolla [1998, 2002] seeds=[2001] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Camry [2000, 2001] seeds=[2000] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Corolla [2005, 2008] seeds=[2005] records=4263 errors=8
+09:16:28 seg done tier=A Scion tC [2005, 2016] seeds=[2006] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Camry [2010, 2011] seeds=[2011] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Highlander [2001, 2007] seeds=[2006] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Corolla [2009, 2010] seeds=[2010] records=4263 errors=8
+09:16:28 seg done tier=A Scion xB [2004, 2015] seeds=[2006] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Avalon [2000, 2004] seeds=[2000] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Camry Solara [1999, 2008] seeds=[2006] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Camry [1984, 1996] seeds=[1996] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Corolla [2003, 2004] seeds=[2003] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Sienna [1998, 2003] seeds=[2000] records=4263 errors=8
+09:16:28 seg done tier=A Toyota RAV4 [2006, 2012] seeds=[2007] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Sequoia [2001, 2007] seeds=[2002] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Avalon [2005, 2012] seeds=[2006] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Corolla [1970, 1997] seeds=[1997] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Camry [2012, 2014] seeds=[2012] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Yaris [2006, 2011] seeds=[2007] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Matrix [2003, 2008] seeds=[2003] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Tundra [2000, 2006] seeds=[2006] records=4263 errors=8
+09:16:28 seg done tier=A Toyota 4Runner [1996, 2002] seeds=[1998] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Corolla [2011, 2013] seeds=[2013] records=4263 errors=8
+09:16:28 seg done tier=A Toyota RAV4 [2001, 2005] seeds=[2002] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Avalon [1995, 1999] seeds=[1998] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Corolla [2014, 2016] seeds=[2014] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Sienna [2011, 2019] seeds=[2011] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Echo [2000, 2005] seeds=[2000] records=4263 errors=8
+09:16:28 seg done tier=A Toyota 4Runner [2003, 2008] seeds=[2003] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Tacoma [1995, 2004] seeds=[1998] records=4263 errors=8
+09:16:28 seg done tier=A Toyota RAV4 [1996, 2000] seeds=[1998] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Highlander [2008, 2013] seeds=[2008] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Celica [2000, 2005] seeds=[2000] records=4263 errors=8
+09:16:28 seg done tier=A Scion xA [2004, 2006] seeds=[2006] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Camry [2015, 2017] seeds=[2015] records=4263 errors=8
+09:16:28 seg done tier=A Scion xD [2008, 2014] seeds=[2008] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Tundra [2007, 2013] seeds=[2007] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Camry Hybrid [2007, 2026] seeds=[2007] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Tercel [1980, 1999] seeds=[1996] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Pickup [1965, 2009] seeds=[1994] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Tacoma [2005, 2015] seeds=[2009] records=4263 errors=8
+09:16:28 seg done tier=A Toyota 4Runner [1990, 1995] seeds=[1995] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Matrix [2009, 2013] seeds=[2009] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Prius C [2012, 2017] seeds=[2013] records=4263 errors=8
+09:16:28 seg done tier=A Toyota Corolla [2017, 2019] seeds=[2017] records=4263 errors=8
+09:16:28 seg done tier=A Toyota T100 [1993, 1998] seeds=[1995] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Camry [2007, 2009] seeds=[2007] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Camry [2002, 2004] seeds=[2002] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Prius [2001, 2019] seeds=[2008] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Sienna [2004, 2010] seeds=[2004] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Camry [2005, 2006] seeds=[2005] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Camry [1997, 1999] seeds=[1999] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Corolla [1998, 2002] seeds=[2001] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Camry [2000, 2001] seeds=[2000] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Corolla [2005, 2008] seeds=[2005] records=4263 errors=8
+09:16:28 seg done tier=B Scion tC [2005, 2016] seeds=[2006] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Camry [2010, 2011] seeds=[2011] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Highlander [2001, 2007] seeds=[2006] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Corolla [2009, 2010] seeds=[2010] records=4263 errors=8
+09:16:28 seg done tier=B Scion xB [2004, 2015] seeds=[2006] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Avalon [2000, 2004] seeds=[2000] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Camry Solara [1999, 2008] seeds=[2006] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Camry [1984, 1996] seeds=[1996] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Corolla [2003, 2004] seeds=[2003] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Sienna [1998, 2003] seeds=[2000] records=4263 errors=8
+09:16:28 seg done tier=B Toyota RAV4 [2006, 2012] seeds=[2007] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Sequoia [2001, 2007] seeds=[2002] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Avalon [2005, 2012] seeds=[2006] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Corolla [1970, 1997] seeds=[1997] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Camry [2012, 2014] seeds=[2012] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Yaris [2006, 2011] seeds=[2007] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Matrix [2003, 2008] seeds=[2003] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Tundra [2000, 2006] seeds=[2006] records=4263 errors=8
+09:16:28 seg done tier=B Toyota 4Runner [1996, 2002] seeds=[1998] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Corolla [2011, 2013] seeds=[2013] records=4263 errors=8
+09:16:28 seg done tier=B Toyota RAV4 [2001, 2005] seeds=[2002] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Avalon [1995, 1999] seeds=[1998] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Corolla [2014, 2016] seeds=[2014] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Sienna [2011, 2019] seeds=[2011] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Echo [2000, 2005] seeds=[2000] records=4263 errors=8
+09:16:28 seg done tier=B Toyota 4Runner [2003, 2008] seeds=[2003] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Tacoma [1995, 2004] seeds=[1998] records=4263 errors=8
+09:16:28 seg done tier=B Toyota RAV4 [1996, 2000] seeds=[1998] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Highlander [2008, 2013] seeds=[2008] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Celica [2000, 2005] seeds=[2000] records=4263 errors=8
+09:16:28 seg done tier=B Scion xA [2004, 2006] seeds=[2006] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Camry [2015, 2017] seeds=[2015] records=4263 errors=8
+09:16:28 seg done tier=B Scion xD [2008, 2014] seeds=[2008] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Tundra [2007, 2013] seeds=[2007] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Camry Hybrid [2007, 2026] seeds=[2007] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Tercel [1980, 1999] seeds=[1996] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Pickup [1965, 2009] seeds=[1994] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Tacoma [2005, 2015] seeds=[2009] records=4263 errors=8
+09:16:28 seg done tier=B Toyota 4Runner [1990, 1995] seeds=[1995] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Matrix [2009, 2013] seeds=[2009] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Prius C [2012, 2017] seeds=[2013] records=4263 errors=8
+09:16:28 seg done tier=B Toyota Corolla [2017, 2019] seeds=[2017] records=4263 errors=8
+09:16:28 seg done tier=B Toyota T100 [1993, 1998] seeds=[1995] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Camry [2007, 2009] seeds=[2007] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Camry [2002, 2004] seeds=[2002] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Prius [2001, 2019] seeds=[2008] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Sienna [2004, 2010] seeds=[2004] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Camry [2005, 2006] seeds=[2005] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Camry [1997, 1999] seeds=[1999] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Corolla [1998, 2002] seeds=[2001] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Camry [2000, 2001] seeds=[2000] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Corolla [2005, 2008] seeds=[2005] records=4263 errors=8
+09:16:28 seg done tier=C Scion tC [2005, 2016] seeds=[2006] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Camry [2010, 2011] seeds=[2011] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Highlander [2001, 2007] seeds=[2006] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Corolla [2009, 2010] seeds=[2010] records=4263 errors=8
+09:16:28 seg done tier=C Scion xB [2004, 2015] seeds=[2006] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Avalon [2000, 2004] seeds=[2000] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Camry Solara [1999, 2008] seeds=[2006] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Camry [1984, 1996] seeds=[1996] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Corolla [2003, 2004] seeds=[2003] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Sienna [1998, 2003] seeds=[2000] records=4263 errors=8
+09:16:28 seg done tier=C Toyota RAV4 [2006, 2012] seeds=[2007] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Sequoia [2001, 2007] seeds=[2002] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Avalon [2005, 2012] seeds=[2006] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Corolla [1970, 1997] seeds=[1997] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Camry [2012, 2014] seeds=[2012] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Yaris [2006, 2011] seeds=[2007] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Matrix [2003, 2008] seeds=[2003] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Tundra [2000, 2006] seeds=[2006] records=4263 errors=8
+09:16:28 seg done tier=C Toyota 4Runner [1996, 2002] seeds=[1998] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Corolla [2011, 2013] seeds=[2013] records=4263 errors=8
+09:16:28 seg done tier=C Toyota RAV4 [2001, 2005] seeds=[2002] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Avalon [1995, 1999] seeds=[1998] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Corolla [2014, 2016] seeds=[2014] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Sienna [2011, 2019] seeds=[2011] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Echo [2000, 2005] seeds=[2000] records=4263 errors=8
+09:16:28 seg done tier=C Toyota 4Runner [2003, 2008] seeds=[2003] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Tacoma [1995, 2004] seeds=[1998] records=4263 errors=8
+09:16:28 seg done tier=C Toyota RAV4 [1996, 2000] seeds=[1998] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Highlander [2008, 2013] seeds=[2008] records=4263 errors=8
+09:16:28 seg done tier=C Toyota Celica [2000, 2005] seeds=[2000] records=4263 errors=8
+09:17:16 seg done tier=C Scion xA [2004, 2006] seeds=[2006] records=4264 errors=8
+09:20:20 seg done tier=C Toyota Camry [2015, 2017] seeds=[2015] records=4279 errors=8
+09:21:40 seg done tier=C Scion xD [2008, 2014] seeds=[2008] records=4283 errors=8
+09:24:20 seg done tier=C Toyota Tundra [2007, 2013] seeds=[2007] records=4296 errors=8
+09:24:21 product-fail https://www.toyotapartsnow.com/oem/toyota~shock-absorber-assembly-rear-right~48530-09m20: NavError: no part number on https://www.toyotapartsnow.com/oem/toyota~shock-absorber-assembly-rear-right~48530-09m20
+09:26:52 chain-unlinked wiper-motor 1 numbers named by 85110-33432, no catalog link: 85110-33430
+09:27:48 chain-unlinked knuckle 1 numbers named by 43211-06260, no catalog link: 43211-33130
+09:27:48 chain-unlinked knuckle 1 numbers named by 43212-06260, no catalog link: 43212-33130
+09:27:48 chain-unlinked knuckle 1 numbers named by 43211-06250, no catalog link: 43211-33120
+09:27:48 chain-unlinked knuckle 1 numbers named by 43212-06250, no catalog link: 43212-33120
+09:30:45 chain-unlinked strut 1 numbers named by 48510-8Z566, no catalog link: 48510-8Z321
+09:30:45 chain-unlinked strut 1 numbers named by 48510-8Z567, no catalog link: 48510-8Z322
+09:30:45 chain-unlinked strut 1 numbers named by 48510-8Z568, no catalog link: 48510-8Z325
+09:30:45 chain-unlinked strut 1 numbers named by 48510-8Z570, no catalog link: 48510-8Z458
+09:30:45 chain-unlinked strut 1 numbers named by 48510-8Z571, no catalog link: 48510-8Z324
+09:30:45 chain-unlinked strut 1 numbers named by 48520-8Z397, no catalog link: 48520-8Z182
+09:30:45 chain-unlinked strut 1 numbers named by 48520-8Z398, no catalog link: 48520-8Z185
+09:30:45 chain-unlinked strut 1 numbers named by 48520-8Z400, no catalog link: 48520-8Z305
+09:30:45 chain-unlinked strut 1 numbers named by 48520-8Z401, no catalog link: 48520-8Z184
+09:31:32 chain-unlinked strut 1 numbers named by 48530-80609, no catalog link: 48530-80539
+09:31:32 chain-unlinked strut 1 numbers named by 48530-80813, no catalog link: 48530-80809
+09:31:56 seg done tier=C Toyota Camry Hybrid [2007, 2026] seeds=[2007, 2017, 2018] records=4335 errors=9
+09:32:28 chain-unlinked wiper-motor 1 numbers named by 85110-16610, no catalog link: 85110-16541
+09:32:28 chain-unlinked wiper-motor 1 numbers named by 85110-16640, no catalog link: 85110-16620
+09:33:25 chain-unlinked knuckle 1 numbers named by 43211-59025, no catalog link: 43211-16040
+09:33:25 chain-unlinked knuckle 2 numbers named by 43212-59025, no catalog link: 43212-16040, 43212-16100
+09:34:28 chain-unlinked strut 1 numbers named by 48520-19315, no catalog link: 48520-19485
+09:34:28 chain-unlinked strut 1 numbers named by 48510-19625, no catalog link: 48510-19805
+09:34:28 chain-unlinked strut 1 numbers named by 48520-19295, no catalog link: 48520-19475
+09:35:09 chain-unlinked strut 1 numbers named by 48530-19575, no catalog link: 48530-19576
+09:35:09 chain-unlinked strut 1 numbers named by 48530-19885, no catalog link: 48530-80013
+09:37:16 chain-unlinked strut 7 numbers named by 48510-16680, no catalog link: 48510-16141, 48510-16240, 48510-16120, 48510-16121, 48510-16230, 48510-16140, 48510-16100
+09:37:16 chain-unlinked strut 4 numbers named by 48510-16690, no catalog link: 48510-16070, 48510-16151, 48510-16150, 48510-16250
+09:38:04 chain-unlinked strut 1 numbers named by 48530-16H00, no catalog link: 48530-16010
+09:38:04 chain-unlinked strut 1 numbers named by 48540-16H00, no catalog link: 48540-16010
+09:38:12 nav-fail Toyota Tercel 1982: NavError: HTTP 404 for https://www.toyotapartsnow.com/catalog/1982-toyota-tercel-parts
+09:38:12 seg done tier=C Toyota Tercel [1980, 1999] seeds=[1996, 1985, 1982] records=4368 errors=10
+09:38:36 chain-unlinked wiper-motor 2 numbers named by 85110-35100, no catalog link: 85110-35130, 85110-89144
+09:39:25 chain-unlinked knuckle 1 numbers named by 43211-35130, no catalog link: 43211-35120
+09:39:25 chain-unlinked knuckle 1 numbers named by 43212-35090, no catalog link: 43212-35080
+09:40:36 chain-unlinked knuckle 1 numbers named by 43211-35070, no catalog link: 43211-35100
+09:40:36 chain-unlinked knuckle 1 numbers named by 43212-35040, no catalog link: 43212-35060
+09:41:24 nav-fail Toyota Pickup 1981: NavError: HTTP 404 for https://www.toyotapartsnow.com/catalog/1981-toyota-pickup-parts
+09:41:24 seg done tier=C Toyota Pickup [1965, 2009] seeds=[1994, 1984, 1981] records=4378 errors=11
+09:44:53 seg done tier=C Toyota Tacoma [2005, 2015] seeds=[2009] records=4398 errors=11
+09:45:57 chain-unlinked strut 3 numbers named by 48511-39687, no catalog link: 48511-39686, 48511-80004, 48511-09021
+09:46:13 chain-unlinked strut 3 numbers named by 48531-80499, no catalog link: 48531-80407, 48531-39985, 48531-09010
+09:46:37 chain-unlinked wiper-motor 1 numbers named by 85110-35090, no catalog link: 85110-89143
+09:47:25 chain-unlinked strut 1 numbers named by 48531-80102, no catalog link: 48531-80509
+09:47:25 seg done tier=C Toyota 4Runner [1990, 1995] seeds=[1995, 1991] records=4405 errors=11
+09:47:25 time budget reached records=4405
