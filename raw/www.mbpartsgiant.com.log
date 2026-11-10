@@ -2091,3 +2091,204 @@
 22:21:07 seg done tier=W Mercedes-Benz C280 [1975, 2007] seeds=[2007, 1991] records=1953 errors=20
 22:21:56 seg done tier=W Mercedes-Benz 300E [1986, 1992] seeds=[1988, 1990, 1989] records=1953 errors=20
 22:21:56 finished records=1953 errors=20 chain_records=2 chain_unlinked=587 chain_failed=0 chain_given_up=0
+05:00:36 start site=www.mbpartsgiant.com mode=worklist tiers=['A', 'B', 'W', 'C'] records=1953 list_lines=888 year_lines=332 url_index=5329
+05:00:36 seg done tier=A Mercedes-Benz C-Class [2008, 2014] seeds=[2008] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz C-Class [2001, 2007] seeds=[2005] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz E-Class [2003, 2009] seeds=[2003] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz S-Class [1974, 2015] seeds=[2000] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz M-Class [1995, 2005] seeds=[1999] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz E-Class [1994, 2002] seeds=[2001] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz C300 [2008, 2022] seeds=[2011] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz M-Class [2006, 2011] seeds=[2006] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz E350 [2006, 2014] seeds=[2006] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz E320 [1995, 2008] seeds=[2003] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz GL-Class [2007, 2015] seeds=[2007] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz C230 [1997, 2007] seeds=[2006] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz CLK-Class [1998, 2008] seeds=[2004] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz C250 [2012, 2015] seeds=[2012] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz ML350 [2003, 2013] seeds=[2008] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz C-Class [1978, 2000] seeds=[1998] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz E-Class [2010, 2016] seeds=[2010] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz 300 [1960, 1993] seeds=[1992] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz GL450 [2007, 2015] seeds=[2007] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz ML320 [1998, 2009] seeds=[2000] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz C240 [2001, 2005] seeds=[2003] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz CLK [1999, 2009] seeds=[2007] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz R-Class [2006, 2012] seeds=[2006] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz S550 [2007, 2013] seeds=[2007] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz SLK [1998, 2008] seeds=[2001] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz SLK-Class [1998, 2013] seeds=[1998] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz CLK320 [1998, 2005] seeds=[2005] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz S500 [1995, 2006] seeds=[2001] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz CLS-Class [2006, 2012] seeds=[2006] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz C350 [2006, 2015] seeds=[2008] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz GLK350 [2010, 2014] seeds=[2011] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz S430 [2000, 2006] seeds=[2002] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz GLK-Class [2010, 2015] seeds=[2010] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz CLA-Class [2014, 2021] seeds=[2014] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz CLK430 [1999, 2003] seeds=[2002] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz R350 [2006, 2012] seeds=[2006] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz CLA250 [2014, 2019] seeds=[2014] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz ML500 [2002, 2006] seeds=[2003] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz C320 [2001, 2011] seeds=[2002] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz SL-Class [1992, 2015] seeds=[2003] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz CL-Class [1999, 2010] seeds=[2002] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz E500 [2003, 2006] seeds=[2004] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz Sprinter 2500 [2010, 2016] seeds=[2012] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz CLK350 [2006, 2009] seeds=[2006] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz 190 [1964, 1993] seeds=[1991] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz SLK230 [1998, 2003] seeds=[2002] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz 300-Class [1981, 1991] seeds=[1987] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz CLS550 [2007, 2014] seeds=[2007] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz C280 [1975, 2007] seeds=[2007] records=1953 errors=20
+05:00:36 seg done tier=A Mercedes-Benz 300E [1986, 1992] seeds=[1988] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz C-Class [2008, 2014] seeds=[2008] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz C-Class [2001, 2007] seeds=[2005] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz E-Class [2003, 2009] seeds=[2003] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz S-Class [1974, 2015] seeds=[2000] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz M-Class [1995, 2005] seeds=[1999] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz E-Class [1994, 2002] seeds=[2001] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz C300 [2008, 2022] seeds=[2011] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz M-Class [2006, 2011] seeds=[2006] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz E350 [2006, 2014] seeds=[2006] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz E320 [1995, 2008] seeds=[2003] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz GL-Class [2007, 2015] seeds=[2007] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz C230 [1997, 2007] seeds=[2006] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz CLK-Class [1998, 2008] seeds=[2004] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz C250 [2012, 2015] seeds=[2012] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz ML350 [2003, 2013] seeds=[2008] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz C-Class [1978, 2000] seeds=[1998] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz E-Class [2010, 2016] seeds=[2010] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz 300 [1960, 1993] seeds=[1992] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz GL450 [2007, 2015] seeds=[2007] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz ML320 [1998, 2009] seeds=[2000] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz C240 [2001, 2005] seeds=[2003] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz CLK [1999, 2009] seeds=[2007] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz R-Class [2006, 2012] seeds=[2006] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz S550 [2007, 2013] seeds=[2007] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz SLK [1998, 2008] seeds=[2001] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz SLK-Class [1998, 2013] seeds=[1998] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz CLK320 [1998, 2005] seeds=[2005] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz S500 [1995, 2006] seeds=[2001] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz CLS-Class [2006, 2012] seeds=[2006] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz C350 [2006, 2015] seeds=[2008] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz GLK350 [2010, 2014] seeds=[2011] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz S430 [2000, 2006] seeds=[2002] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz GLK-Class [2010, 2015] seeds=[2010] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz CLA-Class [2014, 2021] seeds=[2014] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz CLK430 [1999, 2003] seeds=[2002] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz R350 [2006, 2012] seeds=[2006] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz CLA250 [2014, 2019] seeds=[2014] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz ML500 [2002, 2006] seeds=[2003] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz C320 [2001, 2011] seeds=[2002] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz SL-Class [1992, 2015] seeds=[2003] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz CL-Class [1999, 2010] seeds=[2002] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz E500 [2003, 2006] seeds=[2004] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz Sprinter 2500 [2010, 2016] seeds=[2012] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz CLK350 [2006, 2009] seeds=[2006] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz 190 [1964, 1993] seeds=[1991] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz SLK230 [1998, 2003] seeds=[2002] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz 300-Class [1981, 1991] seeds=[1987] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz CLS550 [2007, 2014] seeds=[2007] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz C280 [1975, 2007] seeds=[2007] records=1953 errors=20
+05:00:36 seg done tier=B Mercedes-Benz 300E [1986, 1992] seeds=[1988] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz C-Class [2008, 2014] seeds=[2008] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz C-Class [2001, 2007] seeds=[2005] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz E-Class [2003, 2009] seeds=[2003] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz S-Class [1974, 2015] seeds=[2000] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz M-Class [1995, 2005] seeds=[1999] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz E-Class [1994, 2002] seeds=[2001] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz C300 [2008, 2022] seeds=[2011] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz M-Class [2006, 2011] seeds=[2006] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz E350 [2006, 2014] seeds=[2006] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz E320 [1995, 2008] seeds=[2003] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz GL-Class [2007, 2015] seeds=[2007] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz C230 [1997, 2007] seeds=[2006] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz CLK-Class [1998, 2008] seeds=[2004] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz C250 [2012, 2015] seeds=[2012] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz ML350 [2003, 2013] seeds=[2008] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz C-Class [1978, 2000] seeds=[1998] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz E-Class [2010, 2016] seeds=[2010] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz 300 [1960, 1993] seeds=[1992] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz GL450 [2007, 2015] seeds=[2007] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz ML320 [1998, 2009] seeds=[2000] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz C240 [2001, 2005] seeds=[2003] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz CLK [1999, 2009] seeds=[2007] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz R-Class [2006, 2012] seeds=[2006] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz S550 [2007, 2013] seeds=[2007] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz SLK [1998, 2008] seeds=[2001] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz SLK-Class [1998, 2013] seeds=[1998] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz CLK320 [1998, 2005] seeds=[2005] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz S500 [1995, 2006] seeds=[2001] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz CLS-Class [2006, 2012] seeds=[2006] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz C350 [2006, 2015] seeds=[2008] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz GLK350 [2010, 2014] seeds=[2011] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz S430 [2000, 2006] seeds=[2002] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz GLK-Class [2010, 2015] seeds=[2010] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz CLA-Class [2014, 2021] seeds=[2014] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz CLK430 [1999, 2003] seeds=[2002] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz R350 [2006, 2012] seeds=[2006] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz CLA250 [2014, 2019] seeds=[2014] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz ML500 [2002, 2006] seeds=[2003] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz C320 [2001, 2011] seeds=[2002] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz SL-Class [1992, 2015] seeds=[2003] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz CL-Class [1999, 2010] seeds=[2002] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz E500 [2003, 2006] seeds=[2004] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz Sprinter 2500 [2010, 2016] seeds=[2012] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz CLK350 [2006, 2009] seeds=[2006] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz 190 [1964, 1993] seeds=[1991] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz SLK230 [1998, 2003] seeds=[2002] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz 300-Class [1981, 1991] seeds=[1987] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz CLS550 [2007, 2014] seeds=[2007] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz C280 [1975, 2007] seeds=[2007] records=1953 errors=20
+05:00:36 seg done tier=W Mercedes-Benz 300E [1986, 1992] seeds=[1988] records=1953 errors=20
+05:05:16 chain-unlinked knuckle 1 numbers named by 204-332-01-01, no catalog link: 209-332-00-01
+05:05:16 chain-unlinked knuckle 1 numbers named by 204-332-02-01, no catalog link: 209-332-01-01
+05:05:16 chain-unlinked knuckle 1 numbers named by 204-332-33-01, no catalog link: 204-332-23-01
+05:05:16 chain-unlinked knuckle 1 numbers named by 204-332-34-01, no catalog link: 204-332-24-01
+05:05:40 chain-unlinked knuckle 1 numbers named by 204-350-03-41, no catalog link: 204-350-31-08
+05:05:40 chain-unlinked knuckle 1 numbers named by 204-350-04-41, no catalog link: 204-350-32-08
+05:08:12 chain-unlinked strut 1 numbers named by 204-320-13-30, no catalog link: 204-323-28-00-64
+05:08:12 chain-unlinked strut 1 numbers named by 204-323-09-00, no catalog link: 204-323-09-00-64
+05:08:12 chain-unlinked strut 1 numbers named by 204-323-10-00, no catalog link: 204-323-10-00-64
+05:08:12 chain-unlinked strut 2 numbers named by 204-323-26-00-64, no catalog link: 204-320-01-30, 204-323-26-00
+05:08:12 chain-unlinked strut 3 numbers named by 204-323-29-00-64, no catalog link: 204-323-29-00, 204-320-43-30, 204-320-14-30
+05:08:12 chain-unlinked strut 2 numbers named by 204-323-30-00-64, no catalog link: 204-323-30-00, 204-320-05-30
+05:08:44 chain-unlinked strut 1 numbers named by 204-320-29-30, no catalog link: 204-326-31-00
+05:08:44 chain-unlinked strut 2 numbers named by 204-326-02-00, no catalog link: 204-326-28-00, 204-326-28-00-28
+05:08:44 chain-unlinked strut 1 numbers named by 204-326-05-00, no catalog link: 204-326-29-00
+05:08:44 chain-unlinked strut 1 numbers named by 204-326-32-00, no catalog link: 204-320-30-30
+05:09:48 chain-unlinked strut 1 numbers named by 204-320-32-30-64, no catalog link: 204-320-32-30
+05:09:48 chain-unlinked strut 2 numbers named by 204-320-47-30-64, no catalog link: 204-320-44-30, 204-320-47-30
+05:10:04 chain-unlinked strut 1 numbers named by 204-326-69-00, no catalog link: 204-326-68-00
+05:16:52 chain-unlinked strut 1 numbers named by 204-320-54-30-64, no catalog link: 204-320-54-30
+05:16:52 chain-unlinked strut 2 numbers named by 204-323-24-00-64, no catalog link: 204-320-07-30, 204-323-24-00
+05:16:52 chain-unlinked strut 1 numbers named by 204-323-36-00, no catalog link: 204-323-36-00-64
+05:16:52 chain-unlinked strut 1 numbers named by 207-323-13-00-64, no catalog link: 207-323-13-00
+05:16:52 chain-unlinked strut 1 numbers named by 207-323-14-00, no catalog link: 207-323-14-00-64
+05:17:48 chain-unlinked strut 1 numbers named by 204-326-06-00, no catalog link: 204-326-36-00
+05:17:48 chain-unlinked strut 1 numbers named by 204-326-09-00, no catalog link: 204-326-09-00-64
+05:17:48 chain-unlinked strut 3 numbers named by 204-326-14-04, no catalog link: 204-326-04-04, 204-326-16-00, 204-326-38-00
+05:18:12 chain-unlinked strut 2 numbers named by 204-323-28-00-64, no catalog link: 204-323-28-00, 204-320-42-30
+05:19:00 chain-unlinked strut 1 numbers named by 204-320-55-30-64, no catalog link: 204-320-55-30
+05:19:00 chain-unlinked strut 1 numbers named by 204-320-60-30, no catalog link: 204-320-60-30-64
+05:24:04 seg done tier=C Mercedes-Benz C-Class [2008, 2014] seeds=[2008, 2012, 2011] records=1997 errors=20
+05:25:32 chain-unlinked wiper-motor 2 numbers named by 203-820-53-42, no catalog link: 203-820-46-42, 203-820-05-42
+05:26:20 chain-unlinked knuckle 1 numbers named by 203-330-07-20, no catalog link: 203-330-03-20
+05:26:20 chain-unlinked knuckle 1 numbers named by 203-330-08-20, no catalog link: 203-330-04-20
+05:26:44 chain-unlinked knuckle 2 numbers named by 203-350-39-08, no catalog link: 203-350-35-08, 203-350-13-08
+05:26:44 chain-unlinked knuckle 2 numbers named by 203-350-40-08, no catalog link: 203-350-14-08, 203-350-34-08
+05:29:16 chain-unlinked strut 1 numbers named by 203-320-60-30-64, no catalog link: 203-320-60-30
+05:29:16 chain-unlinked strut 2 numbers named by 203-320-70-30-64, no catalog link: 203-320-70-30, 203-320-36-30
+05:29:16 chain-unlinked strut 7 numbers named by 203-320-53-30-64, no catalog link: 203-320-33-30, 203-320-53-30-90, 203-320-13-30, 203-320-65-30, 203-320-90-30, 203-320-67-30, 203-320-53-30
+05:29:16 chain-unlinked strut 1 numbers named by 203-320-57-30-64, no catalog link: 203-320-57-30
+05:29:16 chain-unlinked strut 1 numbers named by 203-320-58-30-64, no catalog link: 203-320-58-30
+05:29:16 chain-unlinked strut 3 numbers named by 209-320-16-30-64, no catalog link: 203-320-44-30, 203-320-69-30, 209-320-16-30
+05:29:48 chain-unlinked strut 1 numbers named by 203-326-10-00, no catalog link: 203-326-10-00-28
+05:29:48 chain-unlinked strut 3 numbers named by 203-326-17-00, no catalog link: 203-326-07-00, 203-320-01-31, 203-320-02-31
+05:30:04 chain-unlinked strut 2 numbers named by 203-320-71-30-64, no catalog link: 203-320-71-30, 203-320-38-30
+05:30:04 chain-unlinked strut 1 numbers named by 203-320-59-30-64, no catalog link: 203-320-59-30
+05:30:20 chain-unlinked strut 5 numbers named by 203-326-29-00, no catalog link: 203-320-03-31, 203-326-23-00-64, 203-326-23-00, 203-326-15-00, 203-320-07-31
+05:31:16 chain-unlinked strut 1 numbers named by 203-320-83-30-64, no catalog link: 203-320-83-30
+05:31:16 chain-unlinked strut 1 numbers named by 203-320-75-30-64, no catalog link: 203-320-75-30
+05:31:24 time budget reached records=2018
