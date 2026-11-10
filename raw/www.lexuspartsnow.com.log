@@ -1210,3 +1210,45 @@
 15:46:53 chain-unlinked side-mirrors 1 numbers named by 87910-53480-B0, no catalog link: 87910-53571-B0
 15:47:48 chain-unlinked trunk-lid 1 numbers named by 64401-53201, no catalog link: 64401-53200
 15:48:21 time budget reached records=3150
+15:48:48 start site=www.lexuspartsnow.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=3150 list_lines=795 year_lines=160 url_index=15844
+15:48:48 completion worklist completion/toyota.own_page.json: 106 rows
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87910-0E011-B2, no catalog link: 87910-0E900
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87910-0E011-B3, no catalog link: 87910-0E900
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87910-0E011-C1, no catalog link: 87910-0E900
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87910-0E011-D0, no catalog link: 87910-0E900
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87910-0E011-E2, no catalog link: 87910-0E900
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87910-0E011-E3, no catalog link: 87910-0E900
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87940-0E011-B3, no catalog link: 87940-0E900
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87940-0E011-B2, no catalog link: 87940-0E900
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87940-0E011-C1, no catalog link: 87940-0E900
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87940-0E011-D0, no catalog link: 87940-0E900
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87940-0E011-E2, no catalog link: 87940-0E900
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87940-0E011-E3, no catalog link: 87940-0E900
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87910-0E011-C0, no catalog link: 87910-0E900
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87910-0E011-A0, no catalog link: 87910-0E900
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87910-0E011-B0, no catalog link: 87910-0E900
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87910-0E011-B1, no catalog link: 87910-0E900
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87910-0E011-E0, no catalog link: 87910-0E900
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87910-0E011-G0, no catalog link: 87910-0E900
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87910-0E011-G1, no catalog link: 87910-0E900
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87910-0E011-G2, no catalog link: 87910-0E900
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87910-0E011-J0, no catalog link: 87910-0E900
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87910-0E011-J1, no catalog link: 87910-0E900
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87940-0E011-B0, no catalog link: 87940-0E900
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87940-0E011-A0, no catalog link: 87940-0E900
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87940-0E011-B1, no catalog link: 87940-0E900
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87940-0E011-C0, no catalog link: 87940-0E900
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87940-0E011-E0, no catalog link: 87940-0E900
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87940-0E011-G0, no catalog link: 87940-0E900
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87940-0E011-G1, no catalog link: 87940-0E900
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87940-0E011-G2, no catalog link: 87940-0E900
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87940-0E011-J0, no catalog link: 87940-0E900
+15:59:21 chain-unlinked side-mirrors 1 numbers named by 87940-0E011-J1, no catalog link: 87940-0E900
+16:07:44 product-fail https://www.lexuspartsnow.com/parts/lexus-mirror-assy-outer-rear-view-lh~87940-3a150-a1.html: ValueError: no __INITIAL_STORE__ on page
+16:07:52 product-fail https://www.lexuspartsnow.com/parts/lexus-mirror-assy-outer-rear-view-lh~87940-3a150-b1.html: ValueError: HTTP 502 for https://www.lexuspartsnow.com/parts/lexus-mirror-assy-outer-rear-view-lh~87940-3a150-b1.html
+16:08:09 chain-unlinked side-mirrors 1 numbers named by 87910-3A160-B0, no catalog link: 87910-3A160-B2
+16:08:09 chain-unlinked side-mirrors 1 numbers named by 87910-3A160-A1, no catalog link: 87910-3A290-A0
+16:08:09 chain-unlinked side-mirrors 1 numbers named by 87910-3A160-B1, no catalog link: 87910-3A290-B0
+16:08:09 chain-unlinked side-mirrors 1 numbers named by 87940-3A090-B1, no catalog link: 87940-3A200-B0
+16:08:09 chain-unlinked side-mirrors 1 numbers named by 87940-3A090-A1, no catalog link: 87940-3A200-A0
+16:19:29 time budget reached records=3216
