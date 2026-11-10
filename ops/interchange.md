@@ -3228,3 +3228,13 @@ each); nothing allowlisted or crawled.
   - **GSP cv-axle FINISHED.** 3,887 units → 151 Likely groups. The full
     §11.4 sample (30 groups + 30 donor pairs, independent verifier, product
     pages only, `--max-lines 100000`) is running.
+- ~06:10 UTC: GSP cv-axle §11.4, 30 groups + 30 pairs, independent
+  verifier, 53 fetches.
+  - Result: 0 WRONG; 11 + 12 RISK.
+  - Main finding: the title's unit-level engine list was put on every row,
+    giving impossible engines (TL "3.0", ML320 "5.5", FX35 "3.7").
+  - Fixed (b678323e): title engines only on single-model units. Result: 151
+    → 184 groups, 298 apps.
+  - The verdict covers the old build. A fresh §11.4 on the new build was
+    proposed. Drive-gate (AWD-only corners) and unit-level generation
+    merges are with the hub. cv-axle stays held.
