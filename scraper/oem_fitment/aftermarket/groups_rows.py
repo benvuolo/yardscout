@@ -554,6 +554,46 @@ def build(records: list, names: GA.Names, site: str, src: str = "", complete: di
     return doc
 
 
+# Shipping (hub 2026-11-10): per-source release, categories that passed §11.4
+# and the hub confirmed. Must equal junkyard_scraper.AM_RELEASED[<file stem>].
+SHIP_CATS = {"gspnorthamerica.com": ("cv-axle",)}
+SHIP_KEYS = ("id", "cat", "tier", "src", "label", "unit", "note", "apps", "retrieved")
+SHIP_OPTIONAL = ("driven_axle", "if_equipped", "cosmetic")
+DECISION = {"gspnorthamerica.com": "§11.4 round 4 2026-11-10 (independent agent, seed 31337004): 0 WRONG, "
+                                   "every RISK covered by a shown line; ops/interchange.md 'Source scout 2'"}
+
+
+def ship(doc: dict) -> dict:
+    """groups/aftermarket/<stem>.json: released categories only, payload keys
+    only, pinned raw + lot snapshot recorded."""
+    site = doc["site"]
+    cats = SHIP_CATS.get(site, ())
+    gs = []
+    gap = 0
+    for g in doc["groups"]:
+        if g["cat"] not in cats:
+            continue
+        # gap makes stay off (groups_am.SHIP_OFF_MAKES; same rule as every
+        # aftermarket file): they could not be audited against an OEM catalog
+        apps = [a for a in g["apps"] if a[0] not in GA.SHIP_OFF_MAKES]
+        gap += len(g["apps"]) - len(apps)
+        if not apps:
+            continue
+        e = {k: g[k] for k in SHIP_KEYS}
+        e["apps"] = apps
+        e.update({k: g[k] for k in SHIP_OPTIONAL if g.get(k)})
+        gs.append(e)
+    skipped = Counter(g["cat"] for g in doc["groups"] if g["cat"] not in cats)
+    out = {"schema": SCHEMA, "src": "aftermarket", "site": site, "tier": "likely", "raw": doc["raw"],
+           "lot_snapshot": doc.get("lot_snapshot", {}), "audited_groups_sha256": doc["sha256"],
+           "decision": DECISION.get(site, ""),
+           "skipped": {**{f"cat_not_released:{c}": n for c, n in sorted(skipped.items())},
+                       **({"gap_make_apps": gap} if gap else {})},
+           "groups": sorted(gs, key=lambda g: g["id"])}
+    out["sha256"] = hashlib.sha256(json.dumps(out["groups"], sort_keys=True).encode()).hexdigest()
+    return out
+
+
 def load(site: str, raw: str | None, raw_ref: str | None):
     path = f"aftermarket/raw/{site}"
     if raw_ref:
@@ -600,7 +640,10 @@ def main(argv=None) -> int:
     ap.add_argument("--out")
     ap.add_argument("--report")
     ap.add_argument("--lot-ref", help="git commit to read the lot files from (release builds pin this)")
+    ap.add_argument("--ship", help="write the shipped groups file here (needs full 40-hex --raw-ref and --lot-ref)")
     a = ap.parse_args(argv)
+    if a.ship and not (re.fullmatch(r"[0-9a-f]{40}", a.raw_ref or "") and re.fullmatch(r"[0-9a-f]{40}", a.lot_ref or "")):
+        ap.error("--ship needs full 40-hex --raw-ref and --lot-ref (pinned build)")
     recs, src, complete = load(a.site, a.raw, a.raw_ref)
     texts, lot_meta = lot_snapshot(a.lot_ref)
     lot = None
@@ -615,6 +658,8 @@ def main(argv=None) -> int:
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(doc, indent=1, sort_keys=True) + "\n")
     Path(a.report or HERE / "curated" / f"{f}.md").write_text(report_md(doc))
+    if a.ship:
+        Path(a.ship).write_text(json.dumps(ship(doc), indent=1, sort_keys=True) + "\n")
     print(json.dumps(doc["summary"], indent=1))
     return 0
 

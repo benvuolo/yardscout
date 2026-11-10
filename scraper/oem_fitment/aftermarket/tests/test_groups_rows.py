@@ -330,6 +330,19 @@ check("more than 6 options -> unit refused (app limit)", not R.build([many], Nam
 check("option labels fit the app's shape (<=60 chars, no markup)",
       all(len(lab) <= 60 and "<" not in lab for _, lab in R.OPTION_Q))
 
+# ---- release (hub 2026-11-10): shipped categories == AM_RELEASED, gap makes off, pinned
+check("GSP SHIP_CATS equals junkyard_scraper.AM_RELEASED['gspnorthamerica']",
+      set(R.SHIP_CATS["gspnorthamerica.com"]) == set(JS.AM_RELEASED.get("gspnorthamerica", ())))
+_sh = R.ship({"site": "gspnorthamerica.com", "raw": "x", "sha256": "y", "lot_snapshot": {},
+              "groups": [{"id": "a", "cat": "cv-axle", "tier": "likely", "src": "aftermarket", "label": "GSP", "unit": "U",
+                          "note": "n", "retrieved": "r", "driven_axle": "front",
+                          "apps": [["Isuzu", "Rodeo", 2001, 2002, "3.2L"], ["Honda", "CR-V", 2017, 2018, "1.5L"]]},
+                         {"id": "b", "cat": "strut", "tier": "likely", "src": "aftermarket", "label": "GSP", "unit": "V",
+                          "note": "n", "retrieved": "r", "apps": [["Honda", "Civic", 2010, 2011, ""]]}]})
+check("ship(): released cats only, gap-make apps dropped, driven_axle kept",
+      [g["id"] for g in _sh["groups"]] == ["a"] and _sh["groups"][0]["apps"] == [["Honda", "CR-V", 2017, 2018, "1.5L"]]
+      and _sh["groups"][0]["driven_axle"] == "front" and _sh["skipped"] == {"cat_not_released:strut": 1, "gap_make_apps": 1})
+
 # ---- facts only; owner's free-fitment rule
 out = json.dumps(B([A0, u1, u4], Names(), "www.1aauto.com"))
 check("1A output carries no price / description / image / interchange numbers",
