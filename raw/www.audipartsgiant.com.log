@@ -578,3 +578,67 @@
 10:30:51 chain-unlinked window-regulator 1 numbers named by 4F0-959-801-F, no catalog link: 4F0-959-801-C
 10:30:51 chain-unlinked window-regulator 1 numbers named by 4F0-959-802-F, no catalog link: 4F0-959-802-C
 10:32:43 time budget reached records=1444
+10:32:55 start site=www.audipartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=1444 list_lines=513 year_lines=46 url_index=4855
+10:32:55 completion worklist completion/vag.own_page.json: 366 rows
+10:34:24 chain-unlinked tail-lights 1 numbers named by 8E9-945-093-A, no catalog link: 8E9-945-093
+10:34:24 chain-unlinked tail-lights 1 numbers named by 8E9-945-094-A, no catalog link: 8E9-945-094
+10:34:24 chain-unlinked tail-lights 1 numbers named by 8E9-945-095-F, no catalog link: 8E9-945-095-D
+10:34:24 chain-unlinked tail-lights 1 numbers named by 8E9-945-096-F, no catalog link: 8E9-945-096-D
+10:39:44 chain-unlinked climate-control 2 numbers named by 8K1-820-043-BB-XZF, no catalog link: 8K1-820-043-AD-XZF, 8K1-820-043-AJ-XZF
+10:43:12 chain-unlinked bumper-rear 1 numbers named by 8R0-807-303-B-GRU, no catalog link: 8R0-807-303-A-GRU
+10:43:20 chain-unlinked climate-control 3 numbers named by 8T1-820-043-AL-XZF, no catalog link: 8T1-820-043-S-XZF, 8T1-820-043-AD-XZF, 8T1-820-043-M-XZF
+10:43:44 chain-unlinked tail-lights 1 numbers named by 8R0-945-095-B, no catalog link: 8R0-945-095-A
+10:43:44 chain-unlinked tail-lights 1 numbers named by 8R0-945-096-B, no catalog link: 8R0-945-096-A
+10:43:52 chain-unlinked window-regulator 3 numbers named by 8R0-837-461-K, no catalog link: 8R0-837-461-J, 8R0-837-461-G, 8R0-837-461-D
+10:43:52 chain-unlinked window-regulator 3 numbers named by 8R0-837-462-K, no catalog link: 8R0-837-462-D, 8R0-837-462-G, 8R0-837-462-J
+10:44:00 chain-unlinked window-regulator 2 numbers named by 8R0-839-461-E, no catalog link: 8R0-839-461-B, 8R0-839-461-D
+10:44:00 chain-unlinked window-regulator 2 numbers named by 8R0-839-462-E, no catalog link: 8R0-839-462-D, 8R0-839-462-B
+10:44:32 chain-unlinked climate-control 2 numbers named by 4F1-820-043-AJ-1HA, no catalog link: 4F1-820-043-J-1HA, 4F1-820-043-S-1HA
+10:46:40 chain-unlinked fender 2 numbers named by 8T0-821-105-H, no catalog link: 8T0-821-105, 8T0-821-105-A
+10:46:40 chain-unlinked fender 2 numbers named by 8T0-821-106-H, no catalog link: 8T0-821-106, 8T0-821-106-A
+10:46:48 chain-unlinked gauge-cluster 1 numbers named by 8T0-920-983-A, no catalog link: 8T0-920-983-AX
+10:46:56 chain-unlinked gauge-cluster 1 numbers named by 8T0-920-983-D, no catalog link: 8T0-920-983-DX
+10:46:56 chain-unlinked gauge-cluster 1 numbers named by 8T0-920-983-F, no catalog link: 8T0-920-983-FX
+10:46:56 chain-unlinked gauge-cluster 1 numbers named by 8T0-920-983-J, no catalog link: 8T0-920-983-JX
+10:47:04 chain-unlinked grille 1 numbers named by 8T0-853-651-E-1QP, no catalog link: 8T0-853-651-B-1QP
+10:47:04 chain-unlinked grille 1 numbers named by 8T0-853-651-E-T94, no catalog link: 8T0-853-651-B-T94
+10:47:12 chain-unlinked headlights 2 numbers named by 8T0-941-029-AM, no catalog link: 8T0-941-029-AF, 8T0-941-029-N
+10:47:12 chain-unlinked headlights 2 numbers named by 8T0-941-029-AQ, no catalog link: 8T0-941-029-S, 8T0-941-029-AJ
+10:47:12 chain-unlinked headlights 2 numbers named by 8T0-941-030-AM, no catalog link: 8T0-941-030-N, 8T0-941-030-AF
+10:47:12 chain-unlinked headlights 2 numbers named by 8T0-941-030-AQ, no catalog link: 8T0-941-030-AJ, 8T0-941-030-S
+10:47:20 chain-unlinked hood 3 numbers named by 8T0-823-029-D, no catalog link: 8T0-823-029-A, 8T0-823-029-C, 8T0-823-029-B
+10:47:28 chain-unlinked tail-lights 1 numbers named by 8T0-945-095-E, no catalog link: 8T0-945-095-C
+10:47:28 chain-unlinked tail-lights 1 numbers named by 8T0-945-096-E, no catalog link: 8T0-945-096-C
+10:47:36 chain-unlinked trunk-lid 1 numbers named by 8F0-827-023-D, no catalog link: 8F0-827-023-C
+10:47:44 chain-unlinked window-regulator 2 numbers named by 8F0-837-461-D, no catalog link: 8F0-837-461-C, 8F0-837-461-B
+10:47:44 chain-unlinked window-regulator 2 numbers named by 8F0-837-462-D, no catalog link: 8F0-837-462-B, 8F0-837-462-C
+10:47:44 chain-unlinked window-regulator 1 numbers named by 8T0-837-461-D, no catalog link: 8T0-837-461-C
+10:47:44 chain-unlinked window-regulator 1 numbers named by 8T0-837-462-D, no catalog link: 8T0-837-462-C
+10:52:56 chain-unlinked window-regulator 2 numbers named by 8R0-837-461-H, no catalog link: 8R0-837-461-B, 8R0-837-461-F
+10:52:56 chain-unlinked window-regulator 2 numbers named by 8R0-837-462-H, no catalog link: 8R0-837-462-F, 8R0-837-462-B
+10:56:16 chain-unlinked climate-control 3 numbers named by 8P0-820-043-AE-5PR, no catalog link: 8P0-820-043-AA-5PR, 8P0-820-043-H-5PR, 8P0-820-043-M-5PR
+10:56:16 chain-unlinked climate-control 3 numbers named by 8P0-820-043-AF-5PR, no catalog link: 8P0-820-043-N-5PR, 8P0-820-043-AB-5PR, 8P0-820-043-J-5PR
+10:56:16 chain-unlinked climate-control 3 numbers named by 8P0-820-043-AG-5PR, no catalog link: 8P0-820-043-P-5PR, 8P0-820-043-AC-5PR, 8P0-820-043-K-5PR
+10:56:16 chain-unlinked climate-control 3 numbers named by 8P0-820-043-AH-5PR, no catalog link: 8P0-820-043-Q-5PR, 8P0-820-043-AD-5PR, 8P0-820-043-L-5PR
+10:56:32 chain-unlinked fender 2 numbers named by 8P0-821-105-F, no catalog link: 8P0-821-105-C, 8P0-821-105-D
+10:56:32 chain-unlinked fender 2 numbers named by 8P0-821-106-F, no catalog link: 8P0-821-106-D, 8P0-821-106-C
+10:56:56 chain-unlinked gauge-cluster 2 numbers named by 8P0-920-951-MX, no catalog link: 8P0-920-951-JX, 8P0-920-951-FX
+10:56:56 chain-unlinked gauge-cluster 2 numbers named by 8P0-920-981-N, no catalog link: 8P0-920-981-HX, 8P0-920-981-NX
+10:57:04 chain-unlinked gauge-cluster 1 numbers named by 8P0-920-951-X, no catalog link: 8P0-920-950-QX
+10:57:28 chain-unlinked grille 1 numbers named by 8P4-853-651-D-VMZ, no catalog link: 8P4-853-651-D-3FZ
+10:58:00 chain-unlinked hood 1 numbers named by 8P4-823-029-B, no catalog link: 8P4-823-029
+10:58:08 chain-unlinked liftgate 2 numbers named by 8P4-827-023-J, no catalog link: 8P4-827-023-A, 8P4-827-023-E
+10:58:08 chain-unlinked liftgate 2 numbers named by 8P4-827-023-L, no catalog link: 8P4-827-023-C, 8P4-827-023-G
+10:58:16 chain-unlinked tail-lights 1 numbers named by 8P4-945-093-C, no catalog link: 8P4-945-093-A
+10:58:16 chain-unlinked tail-lights 1 numbers named by 8P4-945-094-C, no catalog link: 8P4-945-094-A
+10:58:16 chain-unlinked tail-lights 2 numbers named by 8P4-945-095-H, no catalog link: 8P4-945-095-A, 8P4-945-095-D
+10:58:16 chain-unlinked tail-lights 2 numbers named by 8P4-945-096-H, no catalog link: 8P4-945-096-A, 8P4-945-096-D
+10:58:24 chain-unlinked window-regulator 3 numbers named by 8P4-837-461-C, no catalog link: 8P4-837-461-A, 8P4-837-461, 8P4-837-461-B
+10:58:24 chain-unlinked window-regulator 3 numbers named by 8P4-837-462-C, no catalog link: 8P4-837-462, 8P4-837-462-B, 8P4-837-462-A
+10:58:24 chain-unlinked window-regulator 2 numbers named by 8P0-959-801-G, no catalog link: 8P0-959-801-E, 8P0-959-801-H
+10:58:24 chain-unlinked window-regulator 2 numbers named by 8P0-959-802-G, no catalog link: 8P0-959-802-E, 8P0-959-802-H
+10:58:32 chain-unlinked window-regulator 2 numbers named by 8P4-839-461-B, no catalog link: 8P4-839-461, 8P4-839-461-A
+10:58:32 chain-unlinked window-regulator 2 numbers named by 8P4-839-462-B, no catalog link: 8P4-839-462, 8P4-839-462-A
+10:58:32 chain-unlinked window-regulator 1 numbers named by 8P4-959-801-D, no catalog link: 8P4-959-801-B
+10:58:32 chain-unlinked window-regulator 1 numbers named by 8P4-959-802-D, no catalog link: 8P4-959-802-B
+11:04:16 time budget reached records=1456
