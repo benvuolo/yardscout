@@ -11,7 +11,9 @@
  *  - wide screens (>=700px): card photo boxes are 3:2, a 3:2 photo fills its
  *    box edge to edge, and every card's photo slot in a grid row is the same
  *    height (photo or drawing);
- *  - the car screen photo follows the same rules.
+ *  - the car screen photo follows the same rules;
+ *  - Walk the rows: thumbs get the fill, and a thumb scrolled under the sticky
+ *    row header never paints over it.
  * Run: node backend/test/photo_layout_e2e.mjs   (Playwright pre-installed). */
 import http from 'node:http';
 import fs from 'node:fs';
@@ -136,6 +138,39 @@ try {
         ok(c.fit === 'contain', `${tag}: photo cropped`);
         ok(c.filled || (c.gapX <= 1.5 && c.gapY <= 1.5), `${tag}: grey bars with no fill`);
       }
+      // Walk the rows: thumbs have the fill (no bands), and a thumb scrolled under
+      // the sticky row header never paints over it (it did with the fill layers).
+      await page.evaluate(() => { hideCarDetail && hideCarDetail(); });
+      const rowsOut = await page.evaluate(async (y) => {
+        openYardRows(y);
+        await new Promise(r => setTimeout(r, 900));
+        const thumbs = [...document.querySelectorAll('#yard-rows .yr-thumb')].slice(0, 8);
+        for (const t of thumbs) { t.scrollIntoView({ block: 'center' }); await new Promise(r => setTimeout(r, 80)); }
+        await new Promise(r => setTimeout(r, 500));
+        const loaded = thumbs.filter(t => { const i = t.querySelector('img'); return i && i.complete && i.naturalWidth; });
+        const unfilled = loaded.filter(t => !t.classList.contains('ph-filled')).length;
+        // put a thumb right under the sticky header of its row
+        const head = document.querySelector('#yard-rows .yr-row-head'), t = loaded[1] || loaded[0];
+        let covered = null;
+        if (head && t) {
+          const sc = (function f(el) { while (el && el !== document.body) { const o = getComputedStyle(el).overflowY; if ((o === 'auto' || o === 'scroll') && el.scrollHeight > el.clientHeight) return el; el = el.parentElement; } return document.scrollingElement; })(t);
+          const hr = head.getBoundingClientRect(), tr = t.getBoundingClientRect();
+          sc.scrollTop += (tr.top - hr.top) - 4;
+          await new Promise(r => setTimeout(r, 200));
+          const h2 = document.querySelector('#yard-rows .yr-row-head[style], #yard-rows .yr-row-head');
+          const heads = [...document.querySelectorAll('#yard-rows .yr-row-head')].filter(h => { const r = h.getBoundingClientRect(); return r.top >= -1 && r.top < 200 && r.height; });
+          const hh = heads[0] || h2, r = hh.getBoundingClientRect();
+          // probe where the thumb now sits under the header
+          const tr2 = t.getBoundingClientRect(), px = (Math.max(tr2.left, r.left) + Math.min(tr2.right, r.right)) / 2, py = (Math.max(tr2.top, r.top) + Math.min(tr2.bottom, r.bottom)) / 2;
+          const e = document.elementFromPoint(px, py);
+          covered = !(e && hh.contains(e)) ? (e ? e.tagName + '.' + e.className : 'none') : false;
+        }
+        hideYardRows && hideYardRows();
+        return { loaded: loaded.length, unfilled, covered };
+      }, YARD);
+      ok(rowsOut.loaded >= 2, `${cfg}: only ${rowsOut.loaded} row thumbs loaded`);
+      ok(rowsOut.unfilled === 0, `${cfg}: ${rowsOut.unfilled} row thumbs without the fill`);
+      ok(rowsOut.covered === false, `${cfg}: the sticky row header is covered by ${rowsOut.covered}`);
       console.log(`${cfg}: ${cards.length} card photos (${[...shapes].join(', ')}), ${rows.length} card rows, car screen ${cd.map(c => `${c.w.toFixed(0)}x${c.h.toFixed(0)} ${c.nat}`).join('')}`);
       if (process.env.SHOTS) { await page.screenshot({ path: `${process.env.SHOTS}/photo-car-${cfg.replace('/', '-')}.png` }); }
       await page.close();

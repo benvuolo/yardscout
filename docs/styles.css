@@ -3126,7 +3126,16 @@ button.saved-item-name { max-width: 100%; min-width: 0; overflow-wrap: anywhere;
   background: var(--illo-bg); overflow: hidden;
 }
 .yr-thumb .illo-car { position: absolute; left: 6%; width: 88%; top: 50%; transform: translateY(-50%); }
-.yr-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; z-index: 1; }
+.yr-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; z-index: 2; }
+/* Same soft fill as the big photos: no beige bands (or the drawing behind
+   peeking out) around a 16:9 or portrait photo. */
+/* Own stacking context: the layers inside never rise over the sticky row header. */
+.yr-thumb, .photo-box { isolation: isolate; }
+.yr-thumb .ph-fill { position: absolute; inset: -8px; z-index: 1; background: center / cover no-repeat; filter: blur(8px) brightness(0.8); opacity: 0; }
+.yr-thumb.ph-filled .ph-fill { opacity: 1; }
+/* Wide screens: rows are tall (two stacked buttons), so the thumb can be a
+   useful size. */
+@media (min-width: 900px) { .yr-thumb { width: 112px; } .yr-item.is-checked .yr-thumb { width: 56px; } }
 .yr-main { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .yr-name { font-weight: 800; font-size: var(--t-md); line-height: 1.25; overflow-wrap: anywhere; }
 .yr-sub { font-size: var(--t-sm); color: var(--text-dim); }
