@@ -2278,3 +2278,53 @@
 15:43:59 chain-unlinked window-switch 1 numbers named by 84820-AC010, no catalog link: 84820-AA020
 15:48:00 chain-unlinked window-regulator 3 numbers named by 85720-0R050, no catalog link: 85720-42110, 85720-06080, 85720-47060
 15:54:55 time budget reached records=4522
+15:55:10 start site=www.toyotapartsnow.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=4522 list_lines=734 year_lines=84 url_index=9574
+15:55:10 completion worklist completion/toyota.own_page.json: 401 rows
+15:55:19 chain-unlinked door-front 1 numbers named by 67001-0C061, no catalog link: 67001-0C060
+15:55:19 chain-unlinked door-front 1 numbers named by 67002-0C061, no catalog link: 67002-0C060
+15:56:15 chain-unlinked side-mirrors 15 numbers named by 87910-0C904, no catalog link: 87910-0C090-B0, 87910-0C060-G1, 87910-0C060-J2, 87910-0C090-A0, 87910-0C090-D0, 87910-0C060-B0, 87910-0C060-J0, 87910-0C090-C0, 87910-0C060-A1, 87910-0C060-E0, 87910-0C060-D1, 87910-0C060-J1, 87910-0C060-B1, 87910-0C090-G0, 87910-0C060-G0
+15:56:15 chain-unlinked side-mirrors 16 numbers named by 87940-0C903, no catalog link: 87940-0C070-B1, 87940-0C070-A0, 87940-0C160-C0, 87940-0C070-G0, 87940-0C070-A1, 87940-0C070-D0, 87940-0C070-J0, 87940-0C070-G1, 87940-0C070-D1, 87940-0C070-J1, 87940-0C160-D0, 87940-0C070-B0, 87940-0C070-E0, 87940-0C160-A0, 87940-0C070-J2, 87940-0C160-B0
+15:56:25 chain-unlinked side-mirrors 15 numbers named by 87910-0C903, no catalog link: 87910-0C160-A0, 87910-0C160-B0, 87910-0C160-C0, 87910-0C070-E0, 87910-0C070-B2, 87910-0C070-G0, 87910-0C160-D0, 87910-0C070-J0, 87910-0C070-D1, 87910-0C070-J1, 87910-0C070-B0, 87910-0C070-G1, 87910-0C070-D0, 87910-0C160-G0, 87910-0C070-J2
+15:56:25 chain-unlinked side-mirrors 9 numbers named by 87910-0C907, no catalog link: 87910-34080-G0, 87910-0C130-B2, 87910-0C130-B0, 87910-0C130-E0, 87910-0C130-G0, 87910-34080-A0, 87910-0C130-J0, 87910-34080-B0, 87910-34080-C0
+15:56:25 chain-unlinked side-mirrors 15 numbers named by 87940-0C904, no catalog link: 87940-0C060-G0, 87940-0C060-A1, 87940-0C060-C0, 87940-0C090-D0, 87940-0C060-B1, 87940-0C060-E0, 87940-0C060-J1, 87940-0C060-J0, 87940-0C090-B0, 87940-0C060-D1, 87940-0C090-A0, 87940-0C090-C0, 87940-0C090-G0, 87940-0C060-J2, 87940-0C060-B0
+15:56:25 chain-unlinked side-mirrors 9 numbers named by 87940-0C906, no catalog link: 87940-34080-B1, 87940-34080-B0, 87940-0C120-B0, 87940-0C120-E0, 87940-0C120-G0, 87940-34080-G0, 87940-0C120-D0, 87940-0C120-J0, 87940-0C120-G1
+16:00:23 chain-unlinked headlights 1 numbers named by 81130-0C030, no catalog link: 81130-0C031
+16:00:23 chain-unlinked headlights 1 numbers named by 81170-0C030, no catalog link: 81170-0C031
+16:01:27 chain-unlinked side-mirrors 1 numbers named by 87910-0C170-C0, no catalog link: 87910-0C908
+16:01:27 chain-unlinked side-mirrors 1 numbers named by 87940-0C170-C0, no catalog link: 87940-0C907
+16:01:27 chain-unlinked side-mirrors 1 numbers named by 87940-0C170-A0, no catalog link: 87940-0C907
+16:02:08 chain-unlinked door-rear 1 numbers named by 67004-47070, no catalog link: 67004-47090
+16:02:08 chain-unlinked door-rear 1 numbers named by 67003-47070, no catalog link: 67003-47090
+16:02:57 chain-unlinked window-regulator 4 numbers named by 85710-12490, no catalog link: 85710-60300, 85710-75010, 85710-30400, 85710-47040
+16:02:57 chain-unlinked window-regulator 5 numbers named by 85710-47130, no catalog link: 85710-47080, 85710-47090, 85710-72020, 85710-47120, 85710-47070
+16:02:57 chain-unlinked window-regulator 5 numbers named by 85720-47130, no catalog link: 85720-47090, 85720-47070, 85720-72020, 85720-47120, 85720-47080
+16:02:57 chain-unlinked window-regulator 5 numbers named by 85720-12490, no catalog link: 85720-48070, 85720-47040, 85720-60280, 85720-75010, 85720-30340
+16:04:39 chain-unlinked door-front 1 numbers named by 67001-02240, no catalog link: 67001-02201
+16:04:39 chain-unlinked door-front 1 numbers named by 67002-02240, no catalog link: 67002-02201
+16:04:55 chain-unlinked side-mirrors 6 numbers named by 87910-02400, no catalog link: 87910-02400-B0, 87910-02400-A0, 87910-02400-C0, 87910-02400-J0, 87910-02400-E0, 87910-02400-D1
+16:04:55 chain-unlinked side-mirrors 18 numbers named by 87910-02914, no catalog link: 87910-02411-D1, 87910-02410-J1, 87910-02411-J3, 87910-02410-E0, 87910-02411-B2, 87910-02411-A0, 87910-02411-E0, 87910-02411-B3, 87910-02410-A0, 87910-02410-C0, 87910-02411-B0, 87910-02410-J0, 87910-02411-J0, 87910-02411-C0, 87910-02411-J1, 87910-02410-B0, 87910-02411-F0, 87910-02410-D1
+16:04:55 chain-unlinked side-mirrors 8 numbers named by 87940-02400, no catalog link: 87940-02400-A0, 87940-02400-C0, 87940-02400-D1, 87940-02400-B0, 87940-02400-E0, 87940-02400-J0, 87910-02400-J1, 87940-02400-J1
+16:04:55 chain-unlinked side-mirrors 14 numbers named by 87940-02914, no catalog link: 87940-02410-B0, 87940-02410-A0, 87940-02410-E0, 87940-02410-J0, 87940-02411-D1, 87940-02410-J1, 87940-02411-E0, 87940-02411-B0, 87940-02411-A0, 87940-02410-C0, 87940-02411-J3, 87940-02411-J1, 87940-02411-B3, 87940-02411-J0
+16:05:35 chain-unlinked tail-lights 1 numbers named by 81550-02322, no catalog link: 81550-02320
+16:05:35 chain-unlinked tail-lights 2 numbers named by 81560-02322, no catalog link: 81560-02320, 81560-02321
+16:05:43 chain-unlinked window-regulator 1 numbers named by 69810-01090, no catalog link: 69810-01060
+16:05:43 chain-unlinked window-regulator 1 numbers named by 69820-01080, no catalog link: 69820-01060
+16:13:19 chain-unlinked window-regulator 1 numbers named by 85720-06281, no catalog link: 85720-06280
+16:13:19 chain-unlinked window-regulator 1 numbers named by 85710-06261, no catalog link: 85710-06260
+16:17:20 chain-unlinked tail-lights 1 numbers named by 81560-02210, no catalog link: 81561-02210
+16:19:43 chain-unlinked side-mirrors 4 numbers named by 87910-0C908, no catalog link: 87910-0C170-A0, 87910-0C170-E0, 87910-0C170-B1, 87910-0C170-J0
+16:19:43 chain-unlinked side-mirrors 1 numbers named by 87940-0C907, no catalog link: 87940-0C170-J0
+16:21:59 chain-unlinked door-front 1 numbers named by 67002-0C030, no catalog link: 67002-0C010
+16:21:59 chain-unlinked door-front 1 numbers named by 67001-0C030, no catalog link: 67001-0C010
+16:21:59 chain-unlinked door-front 2 numbers named by 67001-0C080, no catalog link: 67001-0C040, 67001-0C020
+16:21:59 chain-unlinked door-front 2 numbers named by 67002-0C080, no catalog link: 67002-0C040, 67002-0C020
+16:22:15 chain-unlinked side-mirrors 1 numbers named by 87910-0C100, no catalog link: 87910-0C150
+16:22:15 chain-unlinked side-mirrors 7 numbers named by 87910-0C901, no catalog link: 87910-0C050-B1, 87910-0C050-A0, 87910-0C050-C1, 87910-0C050-B0, 87910-0C050-D0, 87910-0C050-G0, 87910-0C050-D1
+16:22:15 chain-unlinked side-mirrors 5 numbers named by 87910-0C902, no catalog link: 87910-0C120-G0, 87910-0C120-A0, 87910-0C120-D0, 87910-0C120-C0, 87910-0C120-B0
+16:22:15 chain-unlinked side-mirrors 7 numbers named by 87940-0C901, no catalog link: 87940-0C050-A0, 87940-0C050-D1, 87940-0C050-D0, 87940-0C050-B1, 87940-0C050-G0, 87940-0C050-B0, 87940-0C050-C1
+16:22:15 chain-unlinked side-mirrors 6 numbers named by 87940-0C902, no catalog link: 87940-0C110-D0, 87940-0C110-G0, 87940-0C110-A0, 87940-0C110-J0, 87940-0C110-B0, 87940-0C110-C0
+16:23:27 chain-unlinked fender 1 numbers named by 53801-0C041, no catalog link: 53801-0C040
+16:23:27 chain-unlinked fender 1 numbers named by 53802-0C041, no catalog link: 53802-0C040
+16:23:27 chain-unlinked fender 2 numbers named by 53801-0C031, no catalog link: 53801-0C030, 53801-0C010
+16:23:27 chain-unlinked fender 2 numbers named by 53802-0C031, no catalog link: 53802-0C030, 53802-0C010
+16:25:11 time budget reached records=4567
