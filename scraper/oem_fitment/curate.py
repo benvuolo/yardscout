@@ -376,6 +376,7 @@ class Curation:
 
     def own_page(self, T, cat, c: Klass):
         """(on_page, notes, position sources, pointers) for class c on T."""
+        self._cat_ctx = cat     # the production-date rule skips PROD_RULE_SKIP_CATS (wheels: own stricter rule)
         rows = [lr for lr in self.t_list_rows.get((T, cat), []) if policy.pn_key(self.ns, lr.pn) == c.key]
         if self.t_list_rows.get((T, cat)):
             # a row restricted to another make's division ("Lincoln Division
@@ -415,6 +416,9 @@ class Curation:
         if market and (_market_excludes(notes) or _export_only(notes)):
             return True
         if market and self.ns == "subaru" and _subaru_manual_only(notes):
+            return True
+        if market and getattr(self, "_cat_ctx", None) not in PROD_RULE_SKIP_CATS \
+                and _production_excludes(notes, T[2]):
             return True
         if _other_division(notes, T[0]):
             return True
@@ -2061,6 +2065,41 @@ def _subaru_manual_only(notes) -> bool:
         alts = [a.strip().lstrip("*") for a in _split_top(mm.group(1)) if a.strip()]
         if alts and all(any(_SUBARU_MANUAL.match(q) for q in re.findall(r"[A-Z0-9#]+", a.partition(".")[2]))
                         for a in alts):
+            return True
+    return False
+
+
+_PROD_RE = re.compile(r"Production Date\s*:\s*(\d{1,2})/(\d{4})\s*-\s*(?:(\d{1,2})/(\d{4}))?", re.I)
+_PROD_MIN_MONTHS = 5
+# wheels have their own, stricter whole-group production-date refusal
+# (wheel_production_date); a per-row cut first would let a group that rule
+# refuses through, so the per-row rule never adds a claim there
+PROD_RULE_SKIP_CATS = frozenset({"wheels"})
+
+
+def _production_excludes(notes, year: int) -> bool:
+    """Production-date windows (2026-11-10, live-accuracy audit of 39 shipped
+    toyota/ford groups: 29 vehicle-years credited outside the window of the
+    row that lists them, e.g. Lexus IS 2007 cluster 83800-53580 'Production
+    Date: 09/2005-06/2006', RX 330 2004 cluster 83800-0E011 '09/2004-02/2006').
+    A row whose every window overlaps the model year, taken as 07/(year-1) -
+    06/year, by fewer than 5 months is not listed for that year. An open end
+    runs on. Per row. Verified against 51 independently judged vehicle-years:
+    drops all 29 that do not fit, keeps 0 that do not; it also drops 16 that do
+    (early-launch builds such as the 2006 GS from 01/2005, supersessions),
+    accepted as losses (hub rule (a)). Only removes claims."""
+    lo, hi = (year - 1) * 12 + 7, year * 12 + 6
+    for n in notes or []:
+        wins = _PROD_RE.findall(n or "")
+        if not wins:
+            continue
+        ok = False
+        for m1, y1, m2, y2 in wins:
+            a = int(y1) * 12 + int(m1)
+            b = int(y2) * 12 + int(m2) if y2 else 10 ** 9
+            if min(b, hi) - max(a, lo) + 1 >= _PROD_MIN_MONTHS:
+                ok = True
+        if not ok:
             return True
     return False
 

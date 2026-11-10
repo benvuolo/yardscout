@@ -87538,20 +87538,6 @@
    ],
    "reman": false
   },
-  "ford:5F9Z14529BAE": {
-   "cat": "window-switch",
-   "comp": null,
-   "evidence": [
-    "www.fordpartsgiant.com:records:L1957"
-   ],
-   "names": [
-    "Switch - Window Control - Double"
-   ],
-   "pns": [
-    "5F9Z-14529-BAE"
-   ],
-   "reman": false
-  },
   "ford:5F9Z19980EA": {
    "cat": "climate-control",
    "comp": "assy",
@@ -87902,62 +87888,6 @@
    ],
    "reman": false
   },
-  "ford:AE5Z10849AA": {
-   "cat": "gauge-cluster",
-   "comp": null,
-   "evidence": [
-    "www.fordpartsgiant.com:records:L5797"
-   ],
-   "names": [
-    "Instrument Cluster"
-   ],
-   "pns": [
-    "AE5Z-10849-AA"
-   ],
-   "reman": false
-  },
-  "ford:AE5Z10849AB": {
-   "cat": "gauge-cluster",
-   "comp": null,
-   "evidence": [
-    "www.fordpartsgiant.com:records:L5798"
-   ],
-   "names": [
-    "Instrument Cluster"
-   ],
-   "pns": [
-    "AE5Z-10849-AB"
-   ],
-   "reman": false
-  },
-  "ford:AE5Z10849BA": {
-   "cat": "gauge-cluster",
-   "comp": null,
-   "evidence": [
-    "www.fordpartsgiant.com:records:L5799"
-   ],
-   "names": [
-    "Instrument Cluster"
-   ],
-   "pns": [
-    "AE5Z-10849-BA"
-   ],
-   "reman": false
-  },
-  "ford:AE5Z10849BB": {
-   "cat": "gauge-cluster",
-   "comp": null,
-   "evidence": [
-    "www.fordpartsgiant.com:records:L5832"
-   ],
-   "names": [
-    "Instrument Cluster"
-   ],
-   "pns": [
-    "AE5Z-10849-BB"
-   ],
-   "reman": false
-  },
   "ford:AE5Z10849LA": {
    "cat": "gauge-cluster",
    "comp": null,
@@ -87972,20 +87902,6 @@
    ],
    "reman": false
   },
-  "ford:AE5Z10849LB": {
-   "cat": "gauge-cluster",
-   "comp": null,
-   "evidence": [
-    "www.fordpartsgiant.com:records:L5808"
-   ],
-   "names": [
-    "Instrument Cluster"
-   ],
-   "pns": [
-    "AE5Z-10849-LB"
-   ],
-   "reman": false
-  },
   "ford:AE5Z10849MA": {
    "cat": "gauge-cluster",
    "comp": null,
@@ -87997,20 +87913,6 @@
    ],
    "pns": [
     "AE5Z-10849-MA"
-   ],
-   "reman": false
-  },
-  "ford:AE5Z10849MB": {
-   "cat": "gauge-cluster",
-   "comp": null,
-   "evidence": [
-    "www.fordpartsgiant.com:records:L5809"
-   ],
-   "names": [
-    "Instrument Cluster"
-   ],
-   "pns": [
-    "AE5Z-10849-MB"
    ],
    "reman": false
   },
@@ -99638,7 +99540,7 @@
      2004
     ]
    ],
-   "cars": 573,
+   "cars": 572,
    "cat": "bumper-front",
    "id": "oem:ford:bumper-front:C:580b60e8f2",
    "kind": "body",
@@ -99665,7 +99567,7 @@
      2004
     ]
    ],
-   "cars": 573,
+   "cars": 572,
    "cat": "bumper-front",
    "id": "oem:ford:bumper-front:C:eea3e7b6aa",
    "kind": "body",
@@ -99692,7 +99594,7 @@
      2005
     ]
    ],
-   "cars": 204,
+   "cars": 203,
    "cat": "window-switch",
    "id": "oem:ford:window-switch:DM:bca0897258",
    "kind": "body",
@@ -99713,46 +99615,13 @@
      2005
     ],
     [
-     "Ford",
-     "Taurus X",
-     2008,
-     2008
-    ],
-    [
      "Mercury",
      "Montego",
      2005,
      2005
     ]
    ],
-   "cars": 286,
-   "cat": "window-switch",
-   "id": "oem:ford:window-switch:DM:460711e66c",
-   "kind": "body",
-   "note": "Ford catalog lists #5F9Z-14529-BAE for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T07:25:25Z",
-   "pn": [
-    "5F9Z-14529-BAE"
-   ],
-   "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Ford",
-     "Five Hundred",
-     2005,
-     2005
-    ],
-    [
-     "Mercury",
-     "Montego",
-     2005,
-     2005
-    ]
-   ],
-   "cars": 204,
+   "cars": 203,
    "cat": "climate-control",
    "id": "oem:ford:climate-control:C:9c75a7dc22",
    "kind": "body",
@@ -99878,7 +99747,7 @@
      2005
     ]
    ],
-   "cars": 204,
+   "cars": 203,
    "cat": "side-mirrors",
    "id": "oem:ford:side-mirrors:R:d4b49debc3",
    "kind": "body",
@@ -99905,7 +99774,7 @@
      2005
     ]
    ],
-   "cars": 204,
+   "cars": 203,
    "cat": "side-mirrors",
    "id": "oem:ford:side-mirrors:R:77b3110876",
    "kind": "body",
@@ -99932,7 +99801,7 @@
      2005
     ]
    ],
-   "cars": 204,
+   "cars": 203,
    "cat": "side-mirrors",
    "id": "oem:ford:side-mirrors:R:289f2594de",
    "kind": "body",
@@ -99959,7 +99828,7 @@
      2005
     ]
    ],
-   "cars": 204,
+   "cars": 203,
    "cat": "side-mirrors",
    "id": "oem:ford:side-mirrors:L:c19e7a2467",
    "kind": "body",
@@ -99986,7 +99855,7 @@
      2005
     ]
    ],
-   "cars": 204,
+   "cars": 203,
    "cat": "side-mirrors",
    "id": "oem:ford:side-mirrors:L:4ab0ebfd14",
    "kind": "body",
@@ -100013,7 +99882,7 @@
      2005
     ]
    ],
-   "cars": 204,
+   "cars": 203,
    "cat": "side-mirrors",
    "id": "oem:ford:side-mirrors:L:0b34b5a997",
    "kind": "body",
@@ -100040,7 +99909,7 @@
      2005
     ]
    ],
-   "cars": 204,
+   "cars": 203,
    "cat": "climate-control",
    "id": "oem:ford:climate-control:C:b5bd47b6b6",
    "kind": "body",
@@ -100067,7 +99936,7 @@
      2005
     ]
    ],
-   "cars": 204,
+   "cars": 203,
    "cat": "climate-control",
    "id": "oem:ford:climate-control:C:2303ac87db",
    "kind": "body",
@@ -100094,7 +99963,7 @@
      2005
     ]
    ],
-   "cars": 204,
+   "cars": 203,
    "cat": "window-regulator",
    "id": "oem:ford:window-regulator:FR:a7f2df176a",
    "kind": "body",
@@ -100121,7 +99990,7 @@
      2005
     ]
    ],
-   "cars": 204,
+   "cars": 203,
    "cat": "window-regulator",
    "id": "oem:ford:window-regulator:FL:c394cfe148",
    "kind": "body",
@@ -100148,7 +100017,7 @@
      2005
     ]
    ],
-   "cars": 204,
+   "cars": 203,
    "cat": "window-regulator",
    "id": "oem:ford:window-regulator:FL:2356112536",
    "kind": "body",
@@ -100175,7 +100044,7 @@
      2015
     ]
    ],
-   "cars": 417,
+   "cars": 416,
    "cat": "window-regulator",
    "id": "oem:ford:window-regulator:FL+FR+RL+RR+SL+SR:7c70e98fa5",
    "kind": "body",
@@ -100202,7 +100071,7 @@
      2015
     ]
    ],
-   "cars": 417,
+   "cars": 416,
    "cat": "window-regulator",
    "id": "oem:ford:window-regulator:FL+FR+RL+RR+SL+SR:83783498ca",
    "kind": "body",
@@ -100229,7 +100098,7 @@
      2015
     ]
    ],
-   "cars": 417,
+   "cars": 416,
    "cat": "window-regulator",
    "id": "oem:ford:window-regulator:FL+FR+RL+RR+SL+SR:bf72cf6844",
    "kind": "body",
@@ -100256,7 +100125,7 @@
      2015
     ]
    ],
-   "cars": 417,
+   "cars": 416,
    "cat": "window-regulator",
    "id": "oem:ford:window-regulator:FL+FR+RL+RR+SL+SR:ec3a8e03bc",
    "kind": "body",
@@ -100310,7 +100179,7 @@
      2007
     ]
    ],
-   "cars": 257,
+   "cars": 256,
    "cat": "bumper-front",
    "id": "oem:ford:bumper-front:C:601502a849",
    "kind": "body",
@@ -100337,7 +100206,7 @@
      2010
     ]
    ],
-   "cars": 89,
+   "cars": 90,
    "cat": "window-switch",
    "id": "oem:ford:window-switch:DM:17f11f69db",
    "kind": "body",
@@ -100391,7 +100260,7 @@
      2008
     ]
    ],
-   "cars": 228,
+   "cars": 229,
    "cat": "climate-control",
    "id": "oem:ford:climate-control:C:a484f27b2c",
    "kind": "body",
@@ -100418,7 +100287,7 @@
      2008
     ]
    ],
-   "cars": 228,
+   "cars": 229,
    "cat": "climate-control",
    "id": "oem:ford:climate-control:C:0ff36dd140",
    "kind": "body",
@@ -100426,114 +100295,6 @@
    "oldest_retrieved": "2026-11-05T11:21:16Z",
    "pn": [
     "8G1Z-19980-F"
-   ],
-   "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Lincoln",
-     "MKZ",
-     2010,
-     2010
-    ],
-    [
-     "Mercury",
-     "Milan",
-     2010,
-     2010
-    ]
-   ],
-   "cars": 163,
-   "cat": "gauge-cluster",
-   "id": "oem:ford:gauge-cluster:C:e47f327f85",
-   "kind": "body",
-   "note": "Ford catalog lists #AE5Z-10849-AA for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T06:30:36Z",
-   "pn": [
-    "AE5Z-10849-AA"
-   ],
-   "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Lincoln",
-     "MKZ",
-     2010,
-     2010
-    ],
-    [
-     "Mercury",
-     "Milan",
-     2010,
-     2010
-    ]
-   ],
-   "cars": 163,
-   "cat": "gauge-cluster",
-   "id": "oem:ford:gauge-cluster:C:8304fff2ad",
-   "kind": "body",
-   "note": "Ford catalog lists #AE5Z-10849-AB for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T06:30:44Z",
-   "pn": [
-    "AE5Z-10849-AB"
-   ],
-   "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Lincoln",
-     "MKZ",
-     2010,
-     2010
-    ],
-    [
-     "Mercury",
-     "Milan",
-     2010,
-     2010
-    ]
-   ],
-   "cars": 163,
-   "cat": "gauge-cluster",
-   "id": "oem:ford:gauge-cluster:C:56f4679f8f",
-   "kind": "body",
-   "note": "Ford catalog lists #AE5Z-10849-BA for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T06:30:52Z",
-   "pn": [
-    "AE5Z-10849-BA"
-   ],
-   "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Lincoln",
-     "MKZ",
-     2010,
-     2010
-    ],
-    [
-     "Mercury",
-     "Milan",
-     2010,
-     2010
-    ]
-   ],
-   "cars": 163,
-   "cat": "gauge-cluster",
-   "id": "oem:ford:gauge-cluster:C:15dd63af7a",
-   "kind": "body",
-   "note": "Ford catalog lists #AE5Z-10849-BB for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T06:35:16Z",
-   "pn": [
-    "AE5Z-10849-BB"
    ],
    "reason": "trim",
    "tier": "likely"
@@ -100582,66 +100343,12 @@
    ],
    "cars": 163,
    "cat": "gauge-cluster",
-   "id": "oem:ford:gauge-cluster:C:1e24e40a01",
-   "kind": "body",
-   "note": "Ford catalog lists #AE5Z-10849-LB for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T06:32:04Z",
-   "pn": [
-    "AE5Z-10849-LB"
-   ],
-   "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Lincoln",
-     "MKZ",
-     2010,
-     2010
-    ],
-    [
-     "Mercury",
-     "Milan",
-     2010,
-     2010
-    ]
-   ],
-   "cars": 163,
-   "cat": "gauge-cluster",
    "id": "oem:ford:gauge-cluster:C:b8e5079f5b",
    "kind": "body",
    "note": "Ford catalog lists #AE5Z-10849-MA for both — trim-limited; verify the number on the part",
    "oldest_retrieved": "2026-11-06T06:36:04Z",
    "pn": [
     "AE5Z-10849-MA"
-   ],
-   "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Lincoln",
-     "MKZ",
-     2010,
-     2010
-    ],
-    [
-     "Mercury",
-     "Milan",
-     2010,
-     2010
-    ]
-   ],
-   "cars": 163,
-   "cat": "gauge-cluster",
-   "id": "oem:ford:gauge-cluster:C:2f61282d2a",
-   "kind": "body",
-   "note": "Ford catalog lists #AE5Z-10849-MB for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T06:32:12Z",
-   "pn": [
-    "AE5Z-10849-MB"
    ],
    "reason": "trim",
    "tier": "likely"
@@ -100661,7 +100368,7 @@
      2010
     ]
    ],
-   "cars": 814,
+   "cars": 815,
    "cat": "fender",
    "id": "oem:ford:fender:R:a2c1c7f709",
    "kind": "body",
@@ -100688,7 +100395,7 @@
      2010
     ]
    ],
-   "cars": 814,
+   "cars": 815,
    "cat": "fender",
    "id": "oem:ford:fender:L:a814ecddf7",
    "kind": "body",
@@ -100721,7 +100428,7 @@
      2010
     ]
    ],
-   "cars": 1004,
+   "cars": 1005,
    "cat": "bumper-front",
    "id": "oem:ford:bumper-front:C:f078f08633",
    "kind": "body",
@@ -100754,7 +100461,7 @@
      2010
     ]
    ],
-   "cars": 1004,
+   "cars": 1005,
    "cat": "bumper-front",
    "id": "oem:ford:bumper-front:C:f5ddb56a94",
    "kind": "body",
@@ -100787,7 +100494,7 @@
      2010
     ]
    ],
-   "cars": 1004,
+   "cars": 1005,
    "cat": "bumper-rear",
    "id": "oem:ford:bumper-rear:C:280f9df4b7",
    "kind": "body",
@@ -100820,7 +100527,7 @@
      2010
     ]
    ],
-   "cars": 1004,
+   "cars": 1005,
    "cat": "bumper-rear",
    "id": "oem:ford:bumper-rear:C:2ab606ebcb",
    "kind": "body",
@@ -100847,7 +100554,7 @@
      2012
     ]
    ],
-   "cars": 841,
+   "cars": 842,
    "cat": "gauge-cluster",
    "id": "oem:ford:gauge-cluster:C:a98d008eb1",
    "kind": "body",
@@ -100874,7 +100581,7 @@
      2012
     ]
    ],
-   "cars": 841,
+   "cars": 842,
    "cat": "gauge-cluster",
    "id": "oem:ford:gauge-cluster:C:d681066fec",
    "kind": "body",
@@ -100901,7 +100608,7 @@
      2011
     ]
    ],
-   "cars": 395,
+   "cars": 396,
    "cat": "bumper-rear",
    "id": "oem:ford:bumper-rear:C:f557171499",
    "kind": "body",
@@ -100928,7 +100635,7 @@
      2011
     ]
    ],
-   "cars": 395,
+   "cars": 396,
    "cat": "bumper-rear",
    "id": "oem:ford:bumper-rear:C:ea96245317",
    "kind": "body",
@@ -100955,7 +100662,7 @@
      2012
     ]
    ],
-   "cars": 1093,
+   "cars": 1097,
    "cat": "window-regulator",
    "id": "oem:ford:window-regulator:FR:dfec425b50",
    "kind": "body",
@@ -100982,7 +100689,7 @@
      2012
     ]
    ],
-   "cars": 1093,
+   "cars": 1097,
    "cat": "window-regulator",
    "id": "oem:ford:window-regulator:FL:08dc2c924f",
    "kind": "body",
@@ -101015,7 +100722,7 @@
      2014
     ]
    ],
-   "cars": 754,
+   "cars": 755,
    "cat": "bumper-rear",
    "id": "oem:ford:bumper-rear:C:dc56b30291",
    "kind": "body",
@@ -101201,7 +100908,7 @@
      1997
     ]
    ],
-   "cars": 95,
+   "cars": 96,
    "cat": "gauge-cluster",
    "id": "oem:ford:gauge-cluster:C:88041035f8",
    "kind": "body",
@@ -101228,7 +100935,7 @@
      2008
     ]
    ],
-   "cars": 115,
+   "cars": 116,
    "cat": "side-mirrors",
    "id": "oem:ford:side-mirrors:L:546813b74d",
    "kind": "body",
@@ -101255,7 +100962,7 @@
      2008
     ]
    ],
-   "cars": 115,
+   "cars": 116,
    "cat": "side-mirrors",
    "id": "oem:ford:side-mirrors:L:55ab53205c",
    "kind": "body",
@@ -101630,7 +101337,7 @@
      2001
     ]
    ],
-   "cars": 829,
+   "cars": 834,
    "cat": "bumper-front",
    "id": "oem:ford:bumper-front:C:b81bc749ee",
    "kind": "body",
@@ -101657,7 +101364,7 @@
      2001
     ]
    ],
-   "cars": 829,
+   "cars": 834,
    "cat": "bumper-front",
    "id": "oem:ford:bumper-front:C:8c6ab82e43",
    "kind": "body",
@@ -101684,7 +101391,7 @@
      2001
     ]
    ],
-   "cars": 829,
+   "cars": 834,
    "cat": "gauge-cluster",
    "id": "oem:ford:gauge-cluster:C:b569ca1107",
    "kind": "body",
@@ -101711,7 +101418,7 @@
      2001
     ]
    ],
-   "cars": 829,
+   "cars": 834,
    "cat": "gauge-cluster",
    "id": "oem:ford:gauge-cluster:C:31847f949f",
    "kind": "body",

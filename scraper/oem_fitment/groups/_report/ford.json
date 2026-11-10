@@ -6959,453 +6959,453 @@
  "funnel_cars": {
   "ac-compressor": {
    "no_records": {
-    "": 8843
+    "": 8861
    },
    "not_closed": {
-    "ambig_target": 411,
-    "no_list_manifest": 11060,
-    "no_year_manifest": 31350,
+    "ambig_target": 410,
+    "no_list_manifest": 11075,
+    "no_year_manifest": 31396,
     "unattested": 81,
     "uncrawled_chain_member": 62,
-    "unverified_product": 253,
-    "variant_unread": 2323,
-    "year_manifest_bad": 4214
+    "unverified_product": 252,
+    "variant_unread": 2325,
+    "year_manifest_bad": 4221
    },
    "unmapped": {
-    "": 2233
+    "": 2235
    }
   },
   "alternator": {
    "no_records": {
-    "": 7203
+    "": 7211
    },
    "not_closed": {
-    "no_list_manifest": 11059,
-    "no_year_manifest": 33101,
+    "no_list_manifest": 11074,
+    "no_year_manifest": 33156,
     "suspect_variant": 51,
-    "uncrawled_chain_member": 126,
-    "unverified_product": 180,
-    "variant_unread": 2323,
-    "year_manifest_bad": 4554
+    "uncrawled_chain_member": 128,
+    "unverified_product": 178,
+    "variant_unread": 2325,
+    "year_manifest_bad": 4560
    },
    "unmapped": {
-    "": 2233
+    "": 2235
    }
   },
   "bumper-front": {
    "no_records": {
-    "": 7314
+    "": 7315
    },
    "not_closed": {
     "ambig_target": 358,
     "no_list_manifest": 752,
-    "no_year_manifest": 31897,
-    "unread_sibling_page": 10655,
-    "variant_unread": 2323,
-    "year_manifest_bad": 5298
+    "no_year_manifest": 31955,
+    "unread_sibling_page": 10669,
+    "variant_unread": 2325,
+    "year_manifest_bad": 5309
    },
    "unmapped": {
-    "": 2233
+    "": 2235
    }
   },
   "bumper-rear": {
    "no_records": {
-    "": 3853
+    "": 3854
    },
    "not_closed": {
     "ambig_target": 519,
-    "no_list_manifest": 668,
-    "no_year_manifest": 34921,
-    "unread_sibling_page": 10655,
-    "variant_unread": 2323,
-    "year_manifest_bad": 5658
+    "no_list_manifest": 669,
+    "no_year_manifest": 34979,
+    "unread_sibling_page": 10669,
+    "variant_unread": 2325,
+    "year_manifest_bad": 5668
    },
    "unmapped": {
-    "": 2233
+    "": 2235
    }
   },
   "climate-control": {
    "no_records": {
-    "": 23013
+    "": 23040
    },
    "not_closed": {
     "ambig_target": 171,
-    "no_list_manifest": 9712,
-    "no_year_manifest": 20551,
-    "unread_sibling_page": 396,
-    "variant_unread": 1985,
-    "year_manifest_bad": 2769
+    "no_list_manifest": 9726,
+    "no_year_manifest": 20587,
+    "unread_sibling_page": 395,
+    "variant_unread": 1988,
+    "year_manifest_bad": 2776
    },
    "unmapped": {
-    "": 2233
+    "": 2235
    }
   },
   "door-front": {
    "no_records": {
-    "": 21452
+    "": 21470
    },
    "not_closed": {
     "ambig_target": 203,
-    "no_list_manifest": 634,
-    "no_year_manifest": 19868,
-    "unread_sibling_page": 10655,
-    "variant_unread": 2323,
-    "year_manifest_bad": 3462
+    "no_list_manifest": 635,
+    "no_year_manifest": 19911,
+    "unread_sibling_page": 10669,
+    "variant_unread": 2325,
+    "year_manifest_bad": 3470
    },
    "unmapped": {
-    "": 2233
+    "": 2235
    }
   },
   "door-rear": {
    "no_records": {
-    "": 20954
+    "": 20982
    },
    "not_closed": {
     "ambig_target": 203,
-    "no_list_manifest": 692,
-    "no_year_manifest": 21785,
-    "unread_sibling_page": 10153,
-    "variant_unread": 2323,
-    "year_manifest_bad": 2487
+    "no_list_manifest": 693,
+    "no_year_manifest": 21820,
+    "unread_sibling_page": 10165,
+    "variant_unread": 2325,
+    "year_manifest_bad": 2495
    },
    "unmapped": {
-    "": 2233
+    "": 2235
    }
   },
   "fender": {
    "no_records": {
-    "": 10370
+    "": 10380
    },
    "not_closed": {
-    "ambig_target": 408,
+    "ambig_target": 409,
     "no_list_manifest": 606,
-    "no_year_manifest": 28618,
+    "no_year_manifest": 28667,
     "unattested": 4952,
-    "uncrawled_chain_member": 2264,
-    "unverified_product": 3439,
-    "variant_unread": 2323,
-    "year_manifest_bad": 5617
+    "uncrawled_chain_member": 2268,
+    "unverified_product": 3449,
+    "variant_unread": 2325,
+    "year_manifest_bad": 5627
    },
    "unmapped": {
-    "": 2233
+    "": 2235
    }
   },
   "fuel-pump-module": {
    "no_records": {
-    "": 24623
+    "": 24648
    },
    "not_closed": {
     "ambig_target": 93,
-    "no_list_manifest": 10269,
-    "no_year_manifest": 19771,
-    "unread_sibling_page": 396,
-    "variant_unread": 1985,
-    "year_manifest_bad": 1460
+    "no_list_manifest": 10284,
+    "no_year_manifest": 19813,
+    "unread_sibling_page": 395,
+    "variant_unread": 1988,
+    "year_manifest_bad": 1462
    },
    "unmapped": {
-    "": 2233
+    "": 2235
    }
   },
   "gauge-cluster": {
    "no_records": {
-    "": 26977
+    "": 27015
    },
    "not_closed": {
     "ambig_target": 319,
     "no_list_manifest": 332,
-    "no_year_manifest": 13783,
-    "unread_sibling_page": 10655,
-    "variant_unread": 1935,
-    "year_manifest_bad": 4596
+    "no_year_manifest": 13807,
+    "unread_sibling_page": 10669,
+    "variant_unread": 1938,
+    "year_manifest_bad": 4603
    },
    "unmapped": {
-    "": 2233
+    "": 2235
    }
   },
   "grille": {
    "no_records": {
-    "": 11427
+    "": 11434
    },
    "not_closed": {
     "ambig_target": 358,
-    "no_list_manifest": 566,
-    "no_year_manifest": 28075,
-    "unattested": 7169,
+    "no_list_manifest": 567,
+    "no_year_manifest": 28126,
+    "unattested": 7178,
     "uncrawled_chain_member": 941,
-    "unverified_product": 2545,
-    "variant_unread": 2323,
-    "year_manifest_bad": 5193
+    "unverified_product": 2550,
+    "variant_unread": 2325,
+    "year_manifest_bad": 5204
    },
    "unmapped": {
-    "": 2233
+    "": 2235
    }
   },
   "headlights": {
    "no_records": {
-    "": 14552
+    "": 14569
    },
    "not_closed": {
-    "ambig_target": 410,
-    "no_list_manifest": 10396,
-    "no_year_manifest": 25347,
-    "unattested": 212,
+    "ambig_target": 409,
+    "no_list_manifest": 10412,
+    "no_year_manifest": 25393,
+    "unattested": 211,
     "uncrawled_chain_member": 184,
-    "variant_unread": 2023,
-    "year_manifest_bad": 5473
+    "variant_unread": 2024,
+    "year_manifest_bad": 5481
    },
    "unmapped": {
-    "": 2233
+    "": 2235
    }
   },
   "hood": {
    "no_records": {
-    "": 6358
+    "": 6357
    },
    "not_closed": {
     "ambig_target": 358,
     "no_list_manifest": 775,
-    "no_year_manifest": 32563,
-    "unattested": 7523,
+    "no_year_manifest": 32623,
+    "unattested": 7532,
     "uncrawled_chain_member": 747,
-    "unverified_product": 2385,
-    "variant_unread": 2323,
-    "year_manifest_bad": 5565
+    "unverified_product": 2390,
+    "variant_unread": 2325,
+    "year_manifest_bad": 5576
    },
    "unmapped": {
-    "": 2233
+    "": 2235
    }
   },
   "ignition-coils": {
    "no_records": {
-    "": 8833
+    "": 8835
    },
    "not_closed": {
     "ambig_target": 220,
     "no_list_manifest": 807,
-    "no_year_manifest": 32726,
-    "uncrawled_chain_member": 469,
-    "unverified_product": 10186,
-    "variant_unread": 2323,
-    "year_manifest_bad": 3033
+    "no_year_manifest": 32789,
+    "uncrawled_chain_member": 470,
+    "unverified_product": 10199,
+    "variant_unread": 2325,
+    "year_manifest_bad": 3038
    },
    "unmapped": {
-    "": 2233
+    "": 2235
    }
   },
   "liftgate": {
    "no_records": {
-    "": 32404
+    "": 32447
    },
    "not_closed": {
     "ambig_target": 203,
-    "no_list_manifest": 172,
-    "no_year_manifest": 10076,
-    "unread_sibling_page": 10625,
-    "variant_unread": 1985,
-    "year_manifest_bad": 3132
+    "no_list_manifest": 173,
+    "no_year_manifest": 10096,
+    "unread_sibling_page": 10639,
+    "variant_unread": 1988,
+    "year_manifest_bad": 3137
    },
    "unmapped": {
-    "": 2233
+    "": 2235
    }
   },
   "power-steering-pump": {
    "no_records": {
-    "": 32211
+    "": 32270
    },
    "not_closed": {
-    "no_list_manifest": 6714,
-    "no_year_manifest": 16717,
-    "unread_sibling_page": 238,
+    "no_list_manifest": 6718,
+    "no_year_manifest": 16739,
+    "unread_sibling_page": 239,
     "variant_unread": 512,
     "year_manifest_bad": 2205
    },
    "unmapped": {
-    "": 2233
+    "": 2235
    }
   },
   "radiator": {
    "no_records": {
-    "": 12381
+    "": 12399
    },
    "not_closed": {
     "ambig_target": 519,
-    "no_list_manifest": 695,
-    "no_year_manifest": 27277,
-    "unattested": 1717,
-    "uncrawled_chain_member": 6986,
-    "unverified_product": 1952,
-    "variant_unread": 2323,
-    "year_manifest_bad": 4747
+    "no_list_manifest": 696,
+    "no_year_manifest": 27318,
+    "unattested": 1724,
+    "uncrawled_chain_member": 6988,
+    "unverified_product": 1957,
+    "variant_unread": 2325,
+    "year_manifest_bad": 4757
    },
    "unmapped": {
-    "": 2233
+    "": 2235
    }
   },
   "side-mirrors": {
    "no_records": {
-    "": 7812
+    "": 7824
    },
    "not_closed": {
     "ambig_target": 457,
-    "no_list_manifest": 10900,
-    "no_year_manifest": 31031,
-    "unread_sibling_page": 396,
-    "variant_unread": 2323,
-    "year_manifest_bad": 5678
+    "no_list_manifest": 10914,
+    "no_year_manifest": 31080,
+    "unread_sibling_page": 395,
+    "variant_unread": 2325,
+    "year_manifest_bad": 5688
    },
    "unmapped": {
-    "": 2233
+    "": 2235
    }
   },
   "starter": {
    "no_records": {
-    "": 17898
+    "": 17923
    },
    "not_closed": {
     "ambig_target": 17,
-    "no_list_manifest": 11059,
-    "no_year_manifest": 26748,
+    "no_list_manifest": 11074,
+    "no_year_manifest": 26792,
     "suspect_variant": 94,
-    "unattested": 27,
+    "unattested": 26,
     "uncrawled_chain_member": 30,
-    "unverified_product": 206,
-    "variant_unread": 2323,
+    "unverified_product": 207,
+    "variant_unread": 2325,
     "year_manifest_bad": 195
    },
    "unmapped": {
-    "": 2233
+    "": 2235
    }
   },
   "tail-lights": {
    "no_records": {
-    "": 12693
+    "": 12701
    },
    "not_closed": {
     "ambig_target": 460,
-    "no_list_manifest": 10845,
-    "no_year_manifest": 27030,
-    "unattested": 178,
-    "uncrawled_chain_member": 218,
-    "variant_unread": 2323,
-    "year_manifest_bad": 4850
+    "no_list_manifest": 10857,
+    "no_year_manifest": 27085,
+    "unattested": 179,
+    "uncrawled_chain_member": 216,
+    "variant_unread": 2325,
+    "year_manifest_bad": 4860
    },
    "unmapped": {
-    "": 2233
+    "": 2235
    }
   },
   "tailgate": {
    "no_records": {
-    "": 35138
+    "": 35186
    },
    "not_closed": {
     "ambig_target": 358,
     "no_list_manifest": 7,
-    "no_year_manifest": 7776,
-    "unattested": 9931,
-    "uncrawled_chain_member": 694,
+    "no_year_manifest": 7789,
+    "unattested": 9944,
+    "uncrawled_chain_member": 695,
     "unread_sibling_page": 30,
-    "variant_unread": 1775,
-    "year_manifest_bad": 2888
+    "variant_unread": 1779,
+    "year_manifest_bad": 2895
    },
    "unmapped": {
-    "": 2233
+    "": 2235
    }
   },
   "throttle-body": {
    "no_records": {
-    "": 27182
+    "": 27217
    },
    "not_closed": {
-    "no_list_manifest": 6622,
-    "no_year_manifest": 20159,
-    "unattested": 48,
-    "uncrawled_chain_member": 176,
-    "variant_unread": 2323,
-    "year_manifest_bad": 2087
+    "no_list_manifest": 6626,
+    "no_year_manifest": 20199,
+    "unattested": 47,
+    "uncrawled_chain_member": 177,
+    "variant_unread": 2325,
+    "year_manifest_bad": 2092
    },
    "unmapped": {
-    "": 2233
+    "": 2235
    }
   },
   "tow-mirrors": {
    "no_records": {
-    "": 52562
+    "": 52645
    },
    "not_closed": {
     "ambig_target": 220,
     "no_list_manifest": 649,
-    "no_year_manifest": 4124,
-    "variant_unread": 840,
+    "no_year_manifest": 4126,
+    "variant_unread": 841,
     "year_manifest_bad": 202
    },
    "unmapped": {
-    "": 2233
+    "": 2235
    }
   },
   "trunk-lid": {
    "no_records": {
-    "": 33352
+    "": 33406
    },
    "not_closed": {
-    "no_list_manifest": 325,
-    "no_year_manifest": 12316,
-    "unattested": 7372,
+    "no_list_manifest": 324,
+    "no_year_manifest": 12331,
+    "unattested": 7385,
     "uncrawled_chain_member": 2255,
     "unverified_product": 43,
-    "variant_unread": 935,
-    "year_manifest_bad": 1999
+    "variant_unread": 938,
+    "year_manifest_bad": 2001
    },
    "unmapped": {
-    "": 2233
+    "": 2235
    }
   },
   "wheels": {
    "no_records": {
-    "": 5952
+    "": 5958
    },
    "not_closed": {
     "ambig_target": 65,
-    "no_list_manifest": 11462,
-    "no_year_manifest": 34819,
-    "variant_unread": 2323,
-    "year_manifest_bad": 3976
+    "no_list_manifest": 11476,
+    "no_year_manifest": 34875,
+    "variant_unread": 2325,
+    "year_manifest_bad": 3984
    },
    "unmapped": {
-    "": 2233
+    "": 2235
    }
   },
   "window-regulator": {
    "no_records": {
-    "": 17127
+    "": 17151
    },
    "not_closed": {
     "ambig_target": 17,
-    "no_list_manifest": 10958,
-    "no_year_manifest": 26356,
-    "unread_sibling_page": 396,
-    "variant_unread": 2323,
-    "year_manifest_bad": 1420
+    "no_list_manifest": 10972,
+    "no_year_manifest": 26400,
+    "unread_sibling_page": 395,
+    "variant_unread": 2325,
+    "year_manifest_bad": 1423
    },
    "unmapped": {
-    "": 2233
+    "": 2235
    }
   },
   "window-switch": {
    "no_records": {
-    "": 11441
+    "": 11465
    },
    "not_closed": {
     "ambig_target": 155,
-    "no_list_manifest": 10970,
-    "no_year_manifest": 30991,
+    "no_list_manifest": 10984,
+    "no_year_manifest": 31034,
     "unattested": 224,
     "uncrawled_chain_member": 103,
-    "unverified_product": 69,
-    "variant_unread": 2323,
-    "year_manifest_bad": 2321
+    "unverified_product": 68,
+    "variant_unread": 2325,
+    "year_manifest_bad": 2325
    },
    "unmapped": {
-    "": 2233
+    "": 2235
    }
   }
  },
@@ -7413,395 +7413,395 @@
   "by_cat": {
    "ac-compressor": {
     "conditional": {
-     "conditional:engine": 1161,
-     "conditional:engine_unattested": 13609,
-     "conditional:trim": 948
+     "conditional:engine": 1162,
+     "conditional:engine_unattested": 13633,
+     "conditional:trim": 944
     },
     "no_records": {
-     "": 8843
+     "": 8861
     },
     "split": {
      "no_candidates": 90,
-     "option_split": 33946
+     "option_split": 33993
     },
     "unmapped": {
-     "": 2233
+     "": 2235
     }
    },
    "alternator": {
     "conditional": {
      "conditional:engine": 272,
-     "conditional:engine_unattested": 7261,
-     "conditional:production": 45,
+     "conditional:engine_unattested": 7269,
+     "conditional:production": 46,
      "conditional:trim": 444
     },
     "no_records": {
-     "": 7203
+     "": 7211
     },
     "split": {
      "no_candidates": 74,
-     "option_split": 43298
+     "option_split": 43367
     },
     "unmapped": {
-     "": 2233
+     "": 2235
     }
    },
    "bumper-front": {
     "conditional": {
-     "conditional:engine_unattested": 3332,
+     "conditional:engine_unattested": 3339,
      "conditional:production": 14,
-     "conditional:trim": 221
+     "conditional:trim": 222
     },
     "no_records": {
-     "": 7314
+     "": 7315
     },
     "split": {
-     "no_candidates": 343,
-     "option_split": 47373
+     "no_candidates": 345,
+     "option_split": 47448
     },
     "unmapped": {
-     "": 2233
+     "": 2235
     }
    },
    "bumper-rear": {
     "conditional": {
-     "conditional:engine_unattested": 3632,
+     "conditional:engine_unattested": 3636,
      "conditional:option": 16,
      "conditional:trim": 57
     },
     "no_records": {
-     "": 3853
+     "": 3854
     },
     "split": {
-     "no_candidates": 274,
-     "option_split": 50765
+     "no_candidates": 277,
+     "option_split": 50843
     },
     "unmapped": {
-     "": 2233
+     "": 2235
     }
    },
    "climate-control": {
     "conditional": {
-     "conditional:colour": 221,
-     "conditional:engine_unattested": 8761,
+     "conditional:colour": 220,
+     "conditional:engine_unattested": 8783,
      "conditional:trim": 227
     },
     "no_records": {
-     "": 23013
+     "": 23040
     },
     "split": {
      "no_candidates": 132,
-     "option_split": 26243
+     "option_split": 26281
     },
     "unmapped": {
-     "": 2233
+     "": 2235
     }
    },
    "door-front": {
     "conditional": {
      "conditional:body": 262,
-     "conditional:engine_unattested": 10145,
-     "conditional:qualifier": 4359,
-     "conditional:trim": 2517
+     "conditional:engine_unattested": 10160,
+     "conditional:qualifier": 4364,
+     "conditional:trim": 2519
     },
     "no_records": {
-     "": 21452
+     "": 21470
     },
     "split": {
-     "no_candidates": 3200,
-     "option_split": 15742,
-     "slot_missing": 920
+     "no_candidates": 3207,
+     "option_split": 15776,
+     "slot_missing": 925
     },
     "unmapped": {
-     "": 2233
+     "": 2235
     }
    },
    "door-rear": {
     "conditional": {
-     "conditional:engine_unattested": 1210,
-     "conditional:qualifier": 17249,
-     "conditional:trim": 840
+     "conditional:engine_unattested": 1212,
+     "conditional:qualifier": 17269,
+     "conditional:trim": 841
     },
     "no_records": {
-     "": 20954
+     "": 20982
     },
     "split": {
-     "no_candidates": 1854,
-     "option_split": 16389,
-     "slot_missing": 101
+     "no_candidates": 1861,
+     "option_split": 16416,
+     "slot_missing": 102
     },
     "unmapped": {
-     "": 2233
+     "": 2235
     }
    },
    "fender": {
     "conditional": {
      "conditional:body": 70,
-     "conditional:engine_unattested": 16544,
-     "conditional:trim": 5553
+     "conditional:engine_unattested": 16568,
+     "conditional:trim": 5556
     },
     "no_records": {
-     "": 10370
+     "": 10380
     },
     "split": {
-     "no_candidates": 391,
-     "option_split": 24719,
-     "slot_missing": 950
+     "no_candidates": 394,
+     "option_split": 24760,
+     "slot_missing": 955
     },
     "unmapped": {
-     "": 2233
+     "": 2235
     }
    },
    "fuel-pump-module": {
     "conditional": {
-     "conditional:engine": 27,
-     "conditional:engine_unattested": 5828,
-     "conditional:trim": 1260
+     "conditional:engine": 26,
+     "conditional:engine_unattested": 5837,
+     "conditional:trim": 1258
     },
     "no_records": {
-     "": 24623
+     "": 24648
     },
     "split": {
      "no_candidates": 27,
-     "option_split": 26832
+     "option_split": 26887
     },
     "unmapped": {
-     "": 2233
+     "": 2235
     }
    },
    "gauge-cluster": {
     "conditional": {
-     "conditional:engine_unattested": 2225,
-     "conditional:production": 199,
-     "conditional:trim": 249
+     "conditional:engine_unattested": 2230,
+     "conditional:production": 198,
+     "conditional:trim": 251
     },
     "no_records": {
-     "": 26977
+     "": 27015
     },
     "split": {
-     "no_candidates": 1307,
-     "option_split": 27640
+     "no_candidates": 1308,
+     "option_split": 27681
     },
     "unmapped": {
-     "": 2233
+     "": 2235
     }
    },
    "grille": {
     "conditional": {
      "conditional:colour": 23,
-     "conditional:engine_unattested": 2508,
-     "conditional:option": 494,
-     "conditional:production": 45,
-     "conditional:trim": 469
+     "conditional:engine_unattested": 2506,
+     "conditional:option": 493,
+     "conditional:production": 46,
+     "conditional:trim": 471
     },
     "no_records": {
-     "": 11427
+     "": 11434
     },
     "split": {
-     "no_candidates": 903,
-     "option_split": 42728
+     "no_candidates": 905,
+     "option_split": 42805
     },
     "unmapped": {
-     "": 2233
+     "": 2235
     }
    },
    "headlights": {
     "conditional": {
-     "conditional:engine_unattested": 7933,
+     "conditional:engine_unattested": 7946,
      "conditional:option": 101,
      "conditional:package": 61,
      "conditional:production": 454,
-     "conditional:trim": 919
+     "conditional:trim": 922
     },
     "no_records": {
-     "": 14552
+     "": 14569
     },
     "split": {
      "no_candidates": 23,
-     "option_split": 34116,
+     "option_split": 34169,
      "slot_missing": 438
     },
     "unmapped": {
-     "": 2233
+     "": 2235
     }
    },
    "hood": {
     "conditional": {
-     "conditional:engine_unattested": 33625,
+     "conditional:engine_unattested": 33678,
      "conditional:production": 59,
-     "conditional:trim": 10076
+     "conditional:trim": 10092
     },
     "no_records": {
-     "": 6358
+     "": 6357
     },
     "split": {
-     "no_candidates": 468,
-     "option_split": 8011
+     "no_candidates": 470,
+     "option_split": 8027
     },
     "unmapped": {
-     "": 2233
+     "": 2235
     }
    },
    "ignition-coils": {
     "conditional": {
-     "conditional:engine_unattested": 16722,
+     "conditional:engine_unattested": 16741,
      "conditional:package": 3462,
      "conditional:trim": 184
     },
     "no_records": {
-     "": 8833
+     "": 8835
     },
     "split": {
      "no_candidates": 157,
-     "option_split": 29239
+     "option_split": 29304
     },
     "unmapped": {
-     "": 2233
+     "": 2235
     }
    },
    "liftgate": {
     "conditional": {
-     "conditional:engine_unattested": 9271,
-     "conditional:option": 1278,
+     "conditional:engine_unattested": 9283,
+     "conditional:option": 1282,
      "conditional:production": 14,
-     "conditional:trim": 2199
+     "conditional:trim": 2204
     },
     "no_records": {
-     "": 32404
+     "": 32447
     },
     "split": {
-     "no_candidates": 9838,
-     "option_split": 3593
+     "no_candidates": 9852,
+     "option_split": 3601
     },
     "unmapped": {
-     "": 2233
+     "": 2235
     }
    },
    "power-steering-pump": {
     "conditional": {
      "conditional:colour": 440,
      "conditional:engine": 302,
-     "conditional:engine_unattested": 11864,
+     "conditional:engine_unattested": 11870,
      "conditional:option": 160,
-     "conditional:trim": 1500
+     "conditional:trim": 1502
     },
     "no_records": {
-     "": 32211
+     "": 32270
     },
     "split": {
      "no_candidates": 186,
-     "option_split": 11934
+     "option_split": 11953
     },
     "unmapped": {
-     "": 2233
+     "": 2235
     }
    },
    "radiator": {
     "conditional": {
-     "conditional:engine_unattested": 2662,
-     "conditional:trim": 879
+     "conditional:engine_unattested": 2669,
+     "conditional:trim": 878
     },
     "no_records": {
-     "": 12381
+     "": 12399
     },
     "split": {
-     "no_candidates": 1359,
-     "option_split": 41316
+     "no_candidates": 1365,
+     "option_split": 41372
     },
     "unmapped": {
-     "": 2233
+     "": 2235
     }
    },
    "side-mirrors": {
     "conditional": {
-     "conditional:colour": 167,
-     "conditional:engine_unattested": 2420,
-     "conditional:option": 408,
+     "conditional:colour": 169,
+     "conditional:engine_unattested": 2417,
+     "conditional:option": 407,
      "conditional:trim": 166
     },
     "no_records": {
-     "": 7812
+     "": 7824
     },
     "split": {
      "no_candidates": 28,
-     "option_split": 45560,
+     "option_split": 45632,
      "position_missing": 7,
-     "slot_missing": 2029
+     "slot_missing": 2033
     },
     "unmapped": {
-     "": 2233
+     "": 2235
     }
    },
    "starter": {
     "conditional": {
-     "conditional:engine": 27,
-     "conditional:engine_unattested": 6149,
+     "conditional:engine": 26,
+     "conditional:engine_unattested": 6168,
      "conditional:option": 160,
      "conditional:trim": 2
     },
     "no_records": {
-     "": 17898
+     "": 17923
     },
     "split": {
      "no_candidates": 195,
-     "option_split": 34166
+     "option_split": 34209
     },
     "unmapped": {
-     "": 2233
+     "": 2235
     }
    },
    "tail-lights": {
     "conditional": {
      "conditional:colour": 54,
-     "conditional:engine_unattested": 5592,
+     "conditional:engine_unattested": 5603,
      "conditional:option": 2,
      "conditional:production": 130,
-     "conditional:trim": 1066
+     "conditional:trim": 1068
     },
     "no_records": {
-     "": 12693
+     "": 12701
     },
     "split": {
      "no_candidates": 49,
-     "option_split": 38455,
-     "slot_missing": 556
+     "option_split": 38515,
+     "slot_missing": 561
     },
     "unmapped": {
-     "": 2233
+     "": 2235
     }
    },
    "tailgate": {
     "conditional": {
-     "conditional:engine_unattested": 2476,
+     "conditional:engine_unattested": 2483,
      "conditional:trim": 593
     },
     "no_records": {
-     "": 35138
+     "": 35186
     },
     "split": {
-     "no_candidates": 10958,
-     "option_split": 9432
+     "no_candidates": 10976,
+     "option_split": 9445
     },
     "unmapped": {
-     "": 2233
+     "": 2235
     }
    },
    "throttle-body": {
     "conditional": {
      "conditional:engine": 53,
-     "conditional:engine_unattested": 14292,
-     "conditional:option": 204,
-     "conditional:trim": 2346
+     "conditional:engine_unattested": 14316,
+     "conditional:option": 203,
+     "conditional:trim": 2348
     },
     "no_records": {
-     "": 27182
+     "": 27217
     },
     "split": {
      "no_candidates": 9,
-     "option_split": 14511
+     "option_split": 14537
     },
     "unmapped": {
-     "": 2233
+     "": 2235
     }
    },
    "tow-mirrors": {
@@ -7810,84 +7810,84 @@
      "conditional:engine_unattested": 61
     },
     "no_records": {
-     "": 52562
+     "": 52645
     },
     "split": {
-     "option_split": 2962,
-     "position_conflict": 607,
-     "slot_missing": 2375
+     "option_split": 2964,
+     "position_conflict": 606,
+     "slot_missing": 2377
     },
     "unmapped": {
-     "": 2233
+     "": 2235
     }
    },
    "trunk-lid": {
     "conditional": {
-     "conditional:engine_unattested": 3796,
-     "conditional:option": 39,
+     "conditional:engine_unattested": 3803,
+     "conditional:option": 38,
      "conditional:qualifier": 39,
      "conditional:trim": 390
     },
     "no_records": {
-     "": 33352
+     "": 33406
     },
     "split": {
-     "no_candidates": 6081,
-     "option_split": 14900
+     "no_candidates": 6093,
+     "option_split": 14914
     },
     "unmapped": {
-     "": 2233
+     "": 2235
     }
    },
    "wheels": {
     "conditional": {
-     "conditional:engine_unattested": 2941,
-     "conditional:package": 54
+     "conditional:engine_unattested": 2948,
+     "conditional:package": 53
     },
     "no_records": {
-     "": 5952
+     "": 5958
     },
     "split": {
-     "option_split": 49650
+     "option_split": 49724
     },
     "unmapped": {
-     "": 2233
+     "": 2235
     }
    },
    "window-regulator": {
     "conditional": {
-     "conditional:trim": 611
+     "conditional:trim": 612
     },
     "no_records": {
-     "": 17127
+     "": 17151
     },
     "split": {
      "no_candidates": 100,
-     "packaging_incomplete": 3974,
-     "packaging_split": 13915,
-     "packaging_unstated": 22132,
-     "position_missing": 738
+     "packaging_incomplete": 3979,
+     "packaging_split": 13934,
+     "packaging_unstated": 22165,
+     "position_missing": 742
     },
     "unmapped": {
-     "": 2233
+     "": 2235
     }
    },
    "window-switch": {
     "conditional": {
-     "conditional:colour": 1334,
+     "conditional:colour": 1337,
      "conditional:engine_unattested": 3160,
-     "conditional:trim": 1355
+     "conditional:trim": 1207
     },
     "no_records": {
-     "": 11441
+     "": 11465
     },
     "split": {
-     "no_candidates": 1399,
-     "option_split": 23494,
-     "position_missing": 16414
+     "no_candidates": 1403,
+     "option_split": 23530,
+     "position_missing": 16581
     },
     "unmapped": {
-     "": 2233
+     "": 2235
     }
    }
   },
@@ -7936,11 +7936,11 @@
    "squash_neighbours": [
     [
      "Explorer",
-     4583
+     4597
     ],
     [
      "Expedition",
-     3196
+     3201
     ],
     [
      "Explorer Sport Trac",
@@ -7982,7 +7982,7 @@
    "squash_neighbours": [
     [
      "Ecosport",
-     72
+     74
     ]
    ]
   },
@@ -8212,90 +8212,90 @@
  "model_map_report": {
   "M10": {
    "bmw": {
-    "cars": 5446,
-    "mapped_cars": 5117,
-    "mapped_share": 0.9396
+    "cars": 5457,
+    "mapped_cars": 5127,
+    "mapped_share": 0.9395
    },
    "ford": {
-    "cars": 60830,
-    "mapped_cars": 58597,
+    "cars": 60918,
+    "mapped_cars": 58683,
     "mapped_share": 0.9633
    },
    "gm": {
-    "cars": 81296,
-    "mapped_cars": 70581,
+    "cars": 81284,
+    "mapped_cars": 70567,
     "mapped_share": 0.8682
    },
    "hmg": {
-    "cars": 21956,
-    "mapped_cars": 21745,
-    "mapped_share": 0.9904
+    "cars": 21994,
+    "mapped_cars": 21784,
+    "mapped_share": 0.9905
    },
    "honda": {
-    "cars": 28590,
-    "mapped_cars": 28191,
-    "mapped_share": 0.986
+    "cars": 28627,
+    "mapped_cars": 28221,
+    "mapped_share": 0.9858
    },
    "mazda": {
-    "cars": 6251,
-    "mapped_cars": 5846,
-    "mapped_share": 0.9352
+    "cars": 6253,
+    "mapped_cars": 5851,
+    "mapped_share": 0.9357
    },
    "mb": {
-    "cars": 4811,
-    "mapped_cars": 1698,
-    "mapped_share": 0.3529
+    "cars": 4822,
+    "mapped_cars": 1711,
+    "mapped_share": 0.3548
    },
    "mitsubishi": {
-    "cars": 2989,
-    "mapped_cars": 2888,
-    "mapped_share": 0.9662
+    "cars": 2993,
+    "mapped_cars": 2891,
+    "mapped_share": 0.9659
    },
    "mopar": {
-    "cars": 44136,
-    "mapped_cars": 42008,
-    "mapped_share": 0.9518
+    "cars": 44234,
+    "mapped_cars": 42106,
+    "mapped_share": 0.9519
    },
    "nissan": {
-    "cars": 33426,
-    "mapped_cars": 32071,
+    "cars": 33484,
+    "mapped_cars": 32129,
     "mapped_share": 0.9595
    },
    "subaru": {
-    "cars": 5605,
-    "mapped_cars": 5352,
-    "mapped_share": 0.9549
+    "cars": 5621,
+    "mapped_cars": 5367,
+    "mapped_share": 0.9548
    },
    "toyota": {
-    "cars": 26388,
-    "mapped_cars": 25828,
+    "cars": 26432,
+    "mapped_cars": 25872,
     "mapped_share": 0.9788
    },
    "vag": {
-    "cars": 9208,
-    "mapped_cars": 8488,
-    "mapped_share": 0.9218
+    "cars": 9219,
+    "mapped_cars": 8501,
+    "mapped_share": 0.9221
    },
    "volvo": {
-    "cars": 2463,
-    "mapped_cars": 2316,
-    "mapped_share": 0.9403
+    "cars": 2469,
+    "mapped_cars": 2321,
+    "mapped_share": 0.9401
    }
   },
   "M6": {
    "by_target": {
     "Acura|CL": {
-     "decoded": 108,
+     "decoded": 105,
      "make_mismatch": 2
     },
     "Acura|Integra": {
-     "decoded": 80
+     "decoded": 79
     },
     "Acura|Legend": {
      "decoded": 38
     },
     "Acura|MDX": {
-     "decoded": 898
+     "decoded": 900
     },
     "Acura|RDX": {
      "decoded": 125
@@ -8308,17 +8308,17 @@
      "decoded": 3
     },
     "Acura|RSX": {
-     "decoded": 108,
+     "decoded": 109,
      "make_mismatch": 1
     },
     "Acura|TL": {
-     "decoded": 1131
+     "decoded": 1136
     },
     "Acura|TLX": {
      "decoded": 32
     },
     "Acura|TSX": {
-     "decoded": 144
+     "decoded": 146
     },
     "Acura|ZDX": {
      "decoded": 4
@@ -8336,7 +8336,7 @@
      "decoded": 636
     },
     "Audi|A4 Quattro": {
-     "decoded": 105
+     "decoded": 106
     },
     "Audi|A5": {
      "decoded": 56
@@ -8348,7 +8348,7 @@
      "decoded": 191
     },
     "Audi|A6 Quattro": {
-     "decoded": 62
+     "decoded": 63
     },
     "Audi|A7 Quattro": {
      "decoded": 8
@@ -8378,7 +8378,7 @@
     },
     "Audi|Q5 Sportback": {},
     "Audi|Q7": {
-     "decoded": 155
+     "decoded": 157
     },
     "Audi|S3": {
      "decoded": 4
@@ -8406,10 +8406,10 @@
      "decoded": 9
     },
     "BMW|128i": {
-     "decoded": 31
+     "decoded": 32
     },
     "BMW|135i": {
-     "decoded": 5
+     "decoded": 6
     },
     "BMW|228i": {
      "decoded": 3
@@ -8425,7 +8425,7 @@
      "decoded": 3
     },
     "BMW|320i": {
-     "decoded": 71
+     "decoded": 72
     },
     "BMW|320i xDrive": {
      "decoded": 9
@@ -8434,19 +8434,19 @@
      "decoded": 10
     },
     "BMW|323i": {
-     "decoded": 70
+     "decoded": 71
     },
     "BMW|325ci": {
      "decoded": 96
     },
     "BMW|325i": {
-     "decoded": 347
+     "decoded": 346
     },
     "BMW|325is": {
      "decoded": 5
     },
     "BMW|325xi": {
-     "decoded": 61
+     "decoded": 62
     },
     "BMW|328ci": {},
     "BMW|328d": {
@@ -8456,13 +8456,13 @@
      "decoded": 2
     },
     "BMW|328i": {
-     "decoded": 856
+     "decoded": 857
     },
     "BMW|328i GT xDrive": {
      "decoded": 2
     },
     "BMW|328i xDrive": {
-     "decoded": 57
+     "decoded": 58
     },
     "BMW|328is": {
      "decoded": 1
@@ -8474,17 +8474,17 @@
      "decoded": 56
     },
     "BMW|330i": {
-     "decoded": 120
+     "decoded": 119
     },
     "BMW|330i GT xDrive": {},
     "BMW|330xi": {
-     "decoded": 33
+     "decoded": 34
     },
     "BMW|335d": {
      "decoded": 2
     },
     "BMW|335i": {
-     "decoded": 135
+     "decoded": 136
     },
     "BMW|335i xDrive": {
      "decoded": 8
@@ -8518,13 +8518,13 @@
      "decoded": 14
     },
     "BMW|528i": {
-     "decoded": 262
+     "decoded": 263
     },
     "BMW|528i xDrive": {
      "decoded": 13
     },
     "BMW|528xi": {
-     "decoded": 20
+     "decoded": 19
     },
     "BMW|530i": {
      "decoded": 148
@@ -8587,7 +8587,7 @@
      "decoded": 34
     },
     "BMW|745i": {
-     "decoded": 22
+     "decoded": 21
     },
     "BMW|750Li": {
      "decoded": 97,
@@ -8597,7 +8597,7 @@
      "decoded": 2
     },
     "BMW|750i": {
-     "decoded": 51
+     "decoded": 52
     },
     "BMW|750iL": {
      "decoded": 6
@@ -8638,7 +8638,7 @@
      "decoded": 89
     },
     "BMW|X3": {
-     "decoded": 408
+     "decoded": 409
     },
     "BMW|X4": {
      "decoded": 1
@@ -8665,34 +8665,34 @@
      "decoded": 2
     },
     "Buick|Century": {
-     "decoded": 594
+     "decoded": 589
     },
     "Buick|Electra": {
      "decoded": 5
     },
     "Buick|Enclave": {
-     "decoded": 981
+     "decoded": 982
     },
     "Buick|Encore": {
-     "decoded": 255
+     "decoded": 256
     },
     "Buick|Encore GX": {
      "decoded": 6
     },
     "Buick|Envision": {
-     "decoded": 22
+     "decoded": 23
     },
     "Buick|Envista": {
      "decoded": 4
     },
     "Buick|LaCrosse": {
-     "decoded": 898
+     "decoded": 893
     },
     "Buick|LeSabre": {
-     "decoded": 944
+     "decoded": 942
     },
     "Buick|Lucerne": {
-     "decoded": 522
+     "decoded": 518
     },
     "Buick|Park Avenue": {
      "decoded": 59
@@ -8705,7 +8705,7 @@
      "decoded": 480
     },
     "Buick|Rendezvous": {
-     "decoded": 316
+     "decoded": 317
     },
     "Buick|Riviera": {
      "decoded": 4
@@ -8721,7 +8721,7 @@
      "decoded": 40
     },
     "Buick|Verano": {
-     "decoded": 349
+     "decoded": 350
     },
     "Cadillac|ATS": {
      "decoded": 126
@@ -8735,7 +8735,7 @@
      "decoded": 2
     },
     "Cadillac|CTS": {
-     "decoded": 599,
+     "decoded": 601,
      "make_mismatch": 1
     },
     "Cadillac|DTS": {
@@ -8749,7 +8749,7 @@
      "decoded": 1
     },
     "Cadillac|Eldorado": {
-     "decoded": 30
+     "decoded": 29
     },
     "Cadillac|Escalade": {
      "decoded": 493,
@@ -8762,7 +8762,7 @@
      "decoded": 582
     },
     "Cadillac|STS": {
-     "decoded": 70
+     "decoded": 71
     },
     "Cadillac|Seville": {
      "decoded": 125
@@ -8775,19 +8775,19 @@
      "decoded": 75
     },
     "Chevrolet|Astro": {
-     "decoded": 444
+     "decoded": 443
     },
     "Chevrolet|Avalanche": {
      "decoded": 414
     },
     "Chevrolet|Aveo": {
-     "decoded": 418
+     "decoded": 417
     },
     "Chevrolet|Beretta": {
      "decoded": 5
     },
     "Chevrolet|Blazer": {
-     "decoded": 531
+     "decoded": 529
     },
     "Chevrolet|Bolt EV": {
      "decoded": 1
@@ -8815,17 +8815,17 @@
      "decoded": 465
     },
     "Chevrolet|Caprice": {
-     "decoded": 73
+     "decoded": 72
     },
     "Chevrolet|Captiva Sport": {
      "decoded": 256
     },
     "Chevrolet|Cavalier": {
-     "decoded": 181
+     "decoded": 182
     },
     "Chevrolet|Celebrity": {},
     "Chevrolet|Cobalt": {
-     "decoded": 1292
+     "decoded": 1286
     },
     "Chevrolet|Colorado": {
      "decoded": 515
@@ -8837,7 +8837,7 @@
      "decoded": 12
     },
     "Chevrolet|Cruze": {
-     "decoded": 3771
+     "decoded": 3770
     },
     "Chevrolet|Equinox": {
      "decoded": 3461
@@ -8852,19 +8852,19 @@
      "decoded": 44
     },
     "Chevrolet|G30": {
-     "decoded": 7
+     "decoded": 8
     },
     "Chevrolet|HHR": {
-     "decoded": 812
+     "decoded": 811
     },
     "Chevrolet|Impala": {
-     "decoded": 3402
+     "decoded": 3396
     },
     "Chevrolet|K10": {
      "decoded": 1
     },
     "Chevrolet|K1500": {
-     "decoded": 288
+     "decoded": 289
     },
     "Chevrolet|K20": {
      "decoded": 2
@@ -8879,7 +8879,7 @@
      "decoded": 53
     },
     "Chevrolet|Malibu": {
-     "decoded": 4471,
+     "decoded": 4475,
      "hybrid": 24
     },
     "Chevrolet|Metro": {},
@@ -8899,7 +8899,7 @@
      "decoded": 2
     },
     "Chevrolet|S-10": {
-     "decoded": 866,
+     "decoded": 867,
      "make_mismatch": 3
     },
     "Chevrolet|Silverado": {},
@@ -8911,27 +8911,27 @@
      "decoded": 1091
     },
     "Chevrolet|Spark": {
-     "decoded": 289
+     "decoded": 287
     },
     "Chevrolet|Spark EV": {
      "decoded": 3
     },
     "Chevrolet|Sprint": {},
     "Chevrolet|Tahoe": {
-     "decoded": 2393,
+     "decoded": 2394,
      "hybrid": 1
     },
     "Chevrolet|Trailblazer": {
-     "decoded": 1693
+     "decoded": 1695
     },
     "Chevrolet|Traverse": {
-     "decoded": 1853
+     "decoded": 1852
     },
     "Chevrolet|Trax": {
-     "decoded": 248
+     "decoded": 247
     },
     "Chevrolet|Uplander": {
-     "decoded": 311
+     "decoded": 310
     },
     "Chevrolet|Venture": {
      "decoded": 193
@@ -8943,13 +8943,13 @@
      "decoded": 1672
     },
     "Chrysler|300": {
-     "decoded": 1327
+     "decoded": 1328
     },
     "Chrysler|300M": {
      "decoded": 70
     },
     "Chrysler|Aspen": {
-     "decoded": 139
+     "decoded": 140
     },
     "Chrysler|Cirrus": {
      "decoded": 12
@@ -8969,10 +8969,10 @@
      "decoded": 11
     },
     "Chrysler|PT Cruiser": {
-     "decoded": 1000
+     "decoded": 1004
     },
     "Chrysler|Pacifica": {
-     "decoded": 401
+     "decoded": 402
     },
     "Chrysler|Sebring": {
      "decoded": 794
@@ -8981,7 +8981,7 @@
      "decoded": 3
     },
     "Chrysler|Town & Country": {
-     "decoded": 2312
+     "decoded": 2327
     },
     "Chrysler|Voyager": {
      "decoded": 49
@@ -9012,13 +9012,13 @@
      "decoded": 738
     },
     "Dodge|Caravan": {
-     "decoded": 803
+     "decoded": 807
     },
     "Dodge|Challenger": {
-     "decoded": 148
+     "decoded": 149
     },
     "Dodge|Charger": {
-     "decoded": 1604
+     "decoded": 1606
     },
     "Dodge|D100": {
      "decoded": 4
@@ -9028,29 +9028,29 @@
     },
     "Dodge|D350": {},
     "Dodge|Dakota": {
-     "decoded": 1450
+     "decoded": 1454
     },
     "Dodge|Dart": {
-     "decoded": 805
+     "decoded": 808
     },
     "Dodge|Daytona": {
      "decoded": 6
     },
     "Dodge|Diplomat": {},
     "Dodge|Durango": {
-     "decoded": 1417
+     "decoded": 1419
     },
     "Dodge|Dynasty": {
      "decoded": 2
     },
     "Dodge|Grand Caravan": {
-     "decoded": 2753
+     "decoded": 2758
     },
     "Dodge|Intrepid": {
      "decoded": 73
     },
     "Dodge|Journey": {
-     "decoded": 1659
+     "decoded": 1665
     },
     "Dodge|Lancer": {},
     "Dodge|Magnum": {
@@ -9060,14 +9060,14 @@
      "decoded": 3
     },
     "Dodge|Neon": {
-     "decoded": 275,
+     "decoded": 273,
      "make_mismatch": 1
     },
     "Dodge|Nitro": {
-     "decoded": 365
+     "decoded": 364
     },
     "Dodge|Ram 1500": {
-     "decoded": 3568
+     "decoded": 3578
     },
     "Dodge|Ram 2500": {
      "decoded": 289
@@ -9076,10 +9076,10 @@
      "decoded": 34
     },
     "Dodge|Ram Van": {
-     "decoded": 170
+     "decoded": 169
     },
     "Dodge|Ram Van 1500": {
-     "decoded": 23
+     "decoded": 24
     },
     "Dodge|Ram Van 2500": {
      "decoded": 8
@@ -9119,68 +9119,68 @@
      "decoded": 65
     },
     "Ford|Bronco": {
-     "decoded": 37
+     "decoded": 38
     },
     "Ford|Bronco II": {
      "decoded": 37
     },
     "Ford|C-Max": {
-     "decoded": 76
+     "decoded": 75
     },
     "Ford|Contour": {
      "decoded": 52
     },
     "Ford|Crown Victoria": {
-     "decoded": 278
+     "decoded": 276
     },
     "Ford|E-150": {
-     "decoded": 677
+     "decoded": 678
     },
     "Ford|E-250": {
-     "decoded": 698
+     "decoded": 697
     },
     "Ford|E-450 Super Duty": {
      "decoded": 2
     },
     "Ford|E-Transit": {},
     "Ford|Edge": {
-     "decoded": 1642
+     "decoded": 1647
     },
     "Ford|Escape": {
-     "decoded": 4129
+     "decoded": 4140
     },
     "Ford|Escort": {
-     "decoded": 211
+     "decoded": 212
     },
     "Ford|Excursion": {
      "decoded": 81
     },
     "Ford|Expedition": {
-     "decoded": 2710
+     "decoded": 2715
     },
     "Ford|Explorer": {
-     "decoded": 3782
+     "decoded": 3795
     },
     "Ford|Explorer Sport": {
      "decoded": 75
     },
     "Ford|Explorer Sport Trac": {
-     "decoded": 436
+     "decoded": 437
     },
     "Ford|F-150": {
-     "decoded": 7809
+     "decoded": 7820
     },
     "Ford|F-250": {
      "decoded": 670
     },
     "Ford|F-250 Super Duty": {
-     "decoded": 531
+     "decoded": 536
     },
     "Ford|F-350": {
-     "decoded": 219
+     "decoded": 220
     },
     "Ford|F-350 Super Duty": {
-     "decoded": 211
+     "decoded": 210
     },
     "Ford|F-450 Super Duty": {
      "decoded": 25
@@ -9189,29 +9189,29 @@
      "decoded": 10
     },
     "Ford|Fiesta": {
-     "decoded": 1029
+     "decoded": 1030
     },
     "Ford|Five Hundred": {
-     "decoded": 330
+     "decoded": 329
     },
     "Ford|Flex": {
      "decoded": 479
     },
     "Ford|Focus": {
-     "decoded": 5365
+     "decoded": 5364
     },
     "Ford|Freestar": {
-     "decoded": 210
+     "decoded": 213
     },
     "Ford|Freestyle": {
      "decoded": 206
     },
     "Ford|Fusion": {
-     "decoded": 4238,
+     "decoded": 4250,
      "hybrid": 164
     },
     "Ford|Mustang": {
-     "decoded": 1041
+     "decoded": 1043
     },
     "Ford|Police Interceptor Sedan": {
      "decoded": 18
@@ -9223,31 +9223,31 @@
      "decoded": 11
     },
     "Ford|Ranger": {
-     "decoded": 1774
+     "decoded": 1781
     },
     "Ford|Taurus": {
-     "decoded": 2259
+     "decoded": 2258
     },
     "Ford|Taurus X": {
-     "decoded": 72
+     "decoded": 73
     },
     "Ford|Tempo": {
      "decoded": 12
     },
     "Ford|Thunderbird": {
-     "decoded": 93
+     "decoded": 92
     },
     "Ford|Transit": {
      "decoded": 15
     },
     "Ford|Transit Connect": {
-     "decoded": 253
+     "decoded": 255
     },
     "Ford|Windstar": {
      "decoded": 259
     },
     "GMC|Acadia": {
-     "decoded": 1510
+     "decoded": 1509
     },
     "GMC|C1500": {
      "decoded": 60
@@ -9259,10 +9259,10 @@
      "decoded": 4
     },
     "GMC|Canyon": {
-     "decoded": 113
+     "decoded": 115
     },
     "GMC|Envoy": {
-     "decoded": 727
+     "decoded": 729
     },
     "GMC|G1500": {
      "decoded": 1
@@ -9271,7 +9271,7 @@
      "decoded": 4
     },
     "GMC|Jimmy": {
-     "decoded": 153
+     "decoded": 154
     },
     "GMC|K1500": {
      "decoded": 10
@@ -9289,11 +9289,11 @@
      "decoded": 141
     },
     "GMC|Savana": {
-     "decoded": 163
+     "decoded": 162
     },
     "GMC|Sierra": {},
     "GMC|Sierra 1500": {
-     "decoded": 1142,
+     "decoded": 1143,
      "hybrid": 1
     },
     "GMC|Sonoma": {
@@ -9301,14 +9301,14 @@
     },
     "GMC|Suburban": {},
     "GMC|Terrain": {
-     "decoded": 1006
+     "decoded": 1009
     },
     "GMC|Yukon": {
-     "decoded": 977,
+     "decoded": 978,
      "hybrid": 1
     },
     "Honda|Accord": {
-     "decoded": 7715,
+     "decoded": 7714,
      "hybrid": 43,
      "make_mismatch": 1
     },
@@ -9317,7 +9317,7 @@
      "hybrid": 23
     },
     "Honda|CR-V": {
-     "decoded": 1568
+     "decoded": 1571
     },
     "Honda|CR-Z": {
      "decoded": 19
@@ -9326,8 +9326,8 @@
      "decoded": 5
     },
     "Honda|Civic": {
-     "decoded": 5676,
-     "hybrid": 294
+     "decoded": 5687,
+     "hybrid": 295
     },
     "Honda|Crosstour": {
      "decoded": 44
@@ -9336,22 +9336,22 @@
      "decoded": 1
     },
     "Honda|Element": {
-     "decoded": 307
+     "decoded": 306
     },
     "Honda|Fit": {
-     "decoded": 180
+     "decoded": 181
     },
     "Honda|HR-V": {
      "decoded": 24
     },
     "Honda|Insight": {
-     "decoded": 101
+     "decoded": 103
     },
     "Honda|Odyssey": {
-     "decoded": 3102
+     "decoded": 3112
     },
     "Honda|Pilot": {
-     "decoded": 1767
+     "decoded": 1768
     },
     "Honda|Prelude": {
      "decoded": 42
@@ -9372,7 +9372,7 @@
      "decoded": 125
     },
     "Hyundai|Elantra": {
-     "decoded": 2449
+     "decoded": 2453
     },
     "Hyundai|Elantra GT": {
      "decoded": 96
@@ -9381,7 +9381,7 @@
      "decoded": 47
     },
     "Hyundai|Entourage": {
-     "decoded": 41
+     "decoded": 42
     },
     "Hyundai|Equus": {
      "decoded": 29
@@ -9390,7 +9390,7 @@
      "decoded": 4
     },
     "Hyundai|Genesis": {
-     "decoded": 275
+     "decoded": 274
     },
     "Hyundai|Genesis Coupe": {
      "decoded": 90
@@ -9402,7 +9402,7 @@
      "decoded": 2
     },
     "Hyundai|Santa Fe": {
-     "decoded": 1016
+     "decoded": 1019
     },
     "Hyundai|Santa Fe Sport": {
      "decoded": 103
@@ -9414,8 +9414,8 @@
      "decoded": 1
     },
     "Hyundai|Sonata": {
-     "decoded": 3383,
-     "hybrid": 37
+     "decoded": 3394,
+     "hybrid": 38
     },
     "Hyundai|Sonata Hybrid": {
      "decoded": 82,
@@ -9425,16 +9425,16 @@
      "decoded": 86
     },
     "Hyundai|Tucson": {
-     "decoded": 466
+     "decoded": 465
     },
     "Hyundai|Veloster": {
-     "decoded": 263
+     "decoded": 262
     },
     "Hyundai|Veloster N": {
      "decoded": 1
     },
     "Hyundai|Veracruz": {
-     "decoded": 69
+     "decoded": 70
     },
     "Hyundai|XG300": {},
     "Hyundai|XG350": {},
@@ -9445,7 +9445,7 @@
      "decoded": 1
     },
     "Infiniti|FX35": {
-     "decoded": 237
+     "decoded": 238
     },
     "Infiniti|FX37": {
      "decoded": 7
@@ -9463,7 +9463,7 @@
      "decoded": 25
     },
     "Infiniti|G35": {
-     "decoded": 809
+     "decoded": 811
     },
     "Infiniti|G37": {
      "decoded": 284
@@ -9478,10 +9478,10 @@
      "decoded": 12
     },
     "Infiniti|JX35": {
-     "decoded": 34
+     "decoded": 35
     },
     "Infiniti|M35": {
-     "decoded": 190
+     "decoded": 192
     },
     "Infiniti|M35h": {
      "decoded": 2
@@ -9499,7 +9499,7 @@
      "decoded": 8
     },
     "Infiniti|Q45": {
-     "decoded": 13
+     "decoded": 14
     },
     "Infiniti|Q50": {
      "decoded": 122
@@ -9520,10 +9520,10 @@
      "decoded": 21
     },
     "Infiniti|QX56": {
-     "decoded": 248
+     "decoded": 247
     },
     "Infiniti|QX60": {
-     "decoded": 166
+     "decoded": 167
     },
     "Infiniti|QX70": {
      "decoded": 12
@@ -9532,19 +9532,19 @@
      "decoded": 19
     },
     "Jeep|Cherokee": {
-     "decoded": 786
+     "decoded": 789
     },
     "Jeep|Comanche": {
      "decoded": 6
     },
     "Jeep|Commander": {
-     "decoded": 402
+     "decoded": 404
     },
     "Jeep|Compass": {
-     "decoded": 837
+     "decoded": 838
     },
     "Jeep|Grand Cherokee": {
-     "decoded": 2920
+     "decoded": 2928
     },
     "Jeep|Grand Cherokee L": {},
     "Jeep|Grand Wagoneer": {
@@ -9554,10 +9554,10 @@
      "decoded": 1
     },
     "Jeep|Liberty": {
-     "decoded": 1606
+     "decoded": 1608
     },
     "Jeep|Patriot": {
-     "decoded": 1221,
+     "decoded": 1224,
      "make_mismatch": 2
     },
     "Jeep|Renegade": {
@@ -9579,10 +9579,10 @@
      "decoded": 66
     },
     "Kia|Forte": {
-     "decoded": 988
+     "decoded": 992
     },
     "Kia|Forte Koup": {
-     "decoded": 71
+     "decoded": 72
     },
     "Kia|K4": {
      "decoded": 4
@@ -9597,7 +9597,7 @@
      "decoded": 19
     },
     "Kia|Optima": {
-     "decoded": 1858,
+     "decoded": 1865,
      "hybrid": 8
     },
     "Kia|Optima Hybrid": {
@@ -9605,7 +9605,7 @@
      "hybrid": 1
     },
     "Kia|Rio": {
-     "decoded": 574
+     "decoded": 576
     },
     "Kia|Rondo": {
      "decoded": 140
@@ -9620,19 +9620,19 @@
      "decoded": 16
     },
     "Kia|Sorento": {
-     "decoded": 1151
+     "decoded": 1154
     },
     "Kia|Soul": {
-     "decoded": 1438
+     "decoded": 1442
     },
     "Kia|Soul EV": {
      "decoded": 1
     },
     "Kia|Spectra": {
-     "decoded": 360
+     "decoded": 362
     },
     "Kia|Sportage": {
-     "decoded": 520
+     "decoded": 517
     },
     "Kia|Stinger": {
      "decoded": 4
@@ -9644,7 +9644,7 @@
      "decoded": 8
     },
     "Lexus|ES 300": {
-     "decoded": 428
+     "decoded": 431
     },
     "Lexus|ES 300h": {
      "decoded": 1
@@ -9653,13 +9653,13 @@
      "decoded": 213
     },
     "Lexus|ES 350": {
-     "decoded": 229
+     "decoded": 231
     },
     "Lexus|GS 300": {
-     "decoded": 181
+     "decoded": 183
     },
     "Lexus|GS 350": {
-     "decoded": 65
+     "decoded": 67
     },
     "Lexus|GS 400": {
      "decoded": 23
@@ -9683,16 +9683,16 @@
      "decoded": 1
     },
     "Lexus|IS 250": {
-     "decoded": 234
+     "decoded": 233
     },
     "Lexus|IS 300": {
-     "decoded": 57
+     "decoded": 56
     },
     "Lexus|IS 350": {
-     "decoded": 35
+     "decoded": 37
     },
     "Lexus|LS 400": {
-     "decoded": 107
+     "decoded": 108
     },
     "Lexus|LS 430": {
      "decoded": 97
@@ -9702,7 +9702,7 @@
     },
     "Lexus|RC 350": {},
     "Lexus|RX 300": {
-     "decoded": 306
+     "decoded": 309
     },
     "Lexus|RX 330": {
      "decoded": 117
@@ -9723,7 +9723,7 @@
      "decoded": 14
     },
     "Lincoln|Aviator": {
-     "decoded": 104
+     "decoded": 103
     },
     "Lincoln|Blackwood": {
      "decoded": 2
@@ -9741,7 +9741,7 @@
      "decoded": 175
     },
     "Lincoln|MKT": {
-     "decoded": 65
+     "decoded": 66
     },
     "Lincoln|MKX": {
      "decoded": 318
@@ -9763,10 +9763,10 @@
      "decoded": 1
     },
     "Lincoln|Navigator": {
-     "decoded": 565
+     "decoded": 563
     },
     "Lincoln|Town Car": {
-     "decoded": 717
+     "decoded": 718
     },
     "Lincoln|Zephyr": {
      "decoded": 68
@@ -9795,13 +9795,13 @@
      "decoded": 2
     },
     "Mazda|CX-7": {
-     "decoded": 333
+     "decoded": 332
     },
     "Mazda|CX-9": {
-     "decoded": 395
+     "decoded": 396
     },
     "Mazda|MPV": {
-     "decoded": 84
+     "decoded": 85
     },
     "Mazda|MX-3": {
      "decoded": 2
@@ -9811,7 +9811,7 @@
      "decoded": 41
     },
     "Mazda|Mazda3": {
-     "decoded": 1090
+     "decoded": 1092
     },
     "Mazda|Mazda5": {
      "decoded": 179
@@ -9826,7 +9826,7 @@
      "decoded": 4
     },
     "Mazda|Protege": {
-     "decoded": 184
+     "decoded": 183
     },
     "Mazda|Protege5": {
      "decoded": 49
@@ -9835,7 +9835,7 @@
      "decoded": 27
     },
     "Mazda|Tribute": {
-     "decoded": 315
+     "decoded": 318
     },
     "Mercedes-Benz|190D": {},
     "Mercedes-Benz|190E": {
@@ -9899,7 +9899,7 @@
      "decoded": 20
     },
     "Mercedes-Benz|C300": {
-     "decoded": 195
+     "decoded": 200
     },
     "Mercedes-Benz|C320": {
      "decoded": 23
@@ -9953,7 +9953,7 @@
      "decoded": 2
     },
     "Mercedes-Benz|E320": {
-     "decoded": 128
+     "decoded": 129
     },
     "Mercedes-Benz|E350": {
      "decoded": 137
@@ -9980,7 +9980,7 @@
      "decoded": 5
     },
     "Mercedes-Benz|GL450": {
-     "decoded": 68
+     "decoded": 69
     },
     "Mercedes-Benz|GL550": {
      "decoded": 10
@@ -9995,10 +9995,10 @@
      "decoded": 30
     },
     "Mercedes-Benz|ML320": {
-     "decoded": 59
+     "decoded": 61
     },
     "Mercedes-Benz|ML350": {
-     "decoded": 89
+     "decoded": 90
     },
     "Mercedes-Benz|ML430": {
      "decoded": 10
@@ -10019,7 +10019,7 @@
      "decoded": 3
     },
     "Mercedes-Benz|R350": {
-     "decoded": 25
+     "decoded": 26
     },
     "Mercedes-Benz|R500": {
      "decoded": 5
@@ -10028,7 +10028,7 @@
      "decoded": 8
     },
     "Mercedes-Benz|S350": {
-     "decoded": 1
+     "decoded": 2
     },
     "Mercedes-Benz|S400": {
      "decoded": 1,
@@ -10062,7 +10062,7 @@
      "decoded": 1
     },
     "Mercedes-Benz|SLK230": {
-     "decoded": 15
+     "decoded": 16
     },
     "Mercedes-Benz|SLK280": {
      "decoded": 3
@@ -10081,11 +10081,11 @@
      "decoded": 11
     },
     "Mercury|Cougar": {
-     "decoded": 79,
+     "decoded": 80,
      "make_mismatch": 1
     },
     "Mercury|Grand Marquis": {
-     "decoded": 815
+     "decoded": 818
     },
     "Mercury|Mariner": {
      "decoded": 272
@@ -10095,7 +10095,7 @@
      "hybrid": 6
     },
     "Mercury|Montego": {
-     "decoded": 81
+     "decoded": 80
     },
     "Mercury|Monterey": {
      "decoded": 30
@@ -10107,7 +10107,7 @@
      "decoded": 12
     },
     "Mercury|Sable": {
-     "decoded": 257
+     "decoded": 256
     },
     "Mercury|Topaz": {
      "decoded": 6
@@ -10122,13 +10122,13 @@
      "decoded": 29
     },
     "Mitsubishi|Eclipse": {
-     "decoded": 119
+     "decoded": 118
     },
     "Mitsubishi|Eclipse Cross": {
      "decoded": 2
     },
     "Mitsubishi|Endeavor": {
-     "decoded": 163
+     "decoded": 164
     },
     "Mitsubishi|Expo": {
      "decoded": 2
@@ -10137,7 +10137,7 @@
      "decoded": 21
     },
     "Mitsubishi|Lancer": {
-     "decoded": 274,
+     "decoded": 273,
      "make_mismatch": 1
     },
     "Mitsubishi|Mighty Max": {
@@ -10150,35 +10150,35 @@
      "decoded": 21
     },
     "Mitsubishi|Montero": {
-     "decoded": 54
+     "decoded": 55
     },
     "Mitsubishi|Montero Sport": {
-     "decoded": 146
+     "decoded": 147
     },
     "Mitsubishi|Outlander": {
-     "decoded": 294
+     "decoded": 293
     },
     "Mitsubishi|Outlander Sport": {
-     "decoded": 155
+     "decoded": 154
     },
     "Nissan|200SX": {
      "decoded": 9
     },
     "Nissan|350Z": {
-     "decoded": 93
+     "decoded": 95
     },
     "Nissan|Altima": {
-     "decoded": 7446,
+     "decoded": 7460,
      "make_mismatch": 1
     },
     "Nissan|Armada": {
-     "decoded": 589
+     "decoded": 593
     },
     "Nissan|Cube": {
-     "decoded": 109
+     "decoded": 108
     },
     "Nissan|Frontier": {
-     "decoded": 550
+     "decoded": 552
     },
     "Nissan|Juke": {
      "decoded": 285
@@ -10190,38 +10190,38 @@
      "decoded": 64
     },
     "Nissan|Maxima": {
-     "decoded": 1610
+     "decoded": 1616
     },
     "Nissan|Murano": {
-     "decoded": 1548
+     "decoded": 1556
     },
     "Nissan|NV": {
      "decoded": 6
     },
     "Nissan|Pathfinder": {
-     "decoded": 1861
+     "decoded": 1864
     },
     "Nissan|Quest": {
-     "decoded": 507
+     "decoded": 511
     },
     "Nissan|Rogue": {
-     "decoded": 2096
+     "decoded": 2101
     },
     "Nissan|Sentra": {
-     "decoded": 3580
+     "decoded": 3586
     },
     "Nissan|Stanza": {
      "decoded": 5
     },
     "Nissan|Titan": {
-     "decoded": 662,
+     "decoded": 667,
      "make_mismatch": 1
     },
     "Nissan|Versa": {
-     "decoded": 1968
+     "decoded": 1966
     },
     "Nissan|Xterra": {
-     "decoded": 947
+     "decoded": 945
     },
     "Oldsmobile|88": {
      "decoded": 11
@@ -10233,7 +10233,7 @@
      "decoded": 6
     },
     "Oldsmobile|Alero": {
-     "decoded": 171
+     "decoded": 170
     },
     "Oldsmobile|Aurora": {},
     "Oldsmobile|Bravada": {
@@ -10277,16 +10277,16 @@
      "decoded": 109
     },
     "Pontiac|G5": {
-     "decoded": 131
+     "decoded": 132
     },
     "Pontiac|G6": {
      "decoded": 985
     },
     "Pontiac|Grand Am": {
-     "decoded": 403
+     "decoded": 404
     },
     "Pontiac|Grand Prix": {
-     "decoded": 710
+     "decoded": 708
     },
     "Pontiac|Montana": {
      "decoded": 108
@@ -10310,10 +10310,10 @@
      "decoded": 15
     },
     "Pontiac|Vibe": {
-     "decoded": 355
+     "decoded": 356
     },
     "Ram|1500": {
-     "decoded": 384
+     "decoded": 385
     },
     "Ram|1500 Classic": {
      "decoded": 12
@@ -10346,7 +10346,7 @@
      "decoded": 45
     },
     "Saturn|Aura": {
-     "decoded": 318,
+     "decoded": 320,
      "hybrid": 3
     },
     "Saturn|ION": {
@@ -10362,7 +10362,7 @@
     "Saturn|LW1": {},
     "Saturn|LW200": {},
     "Saturn|Outlook": {
-     "decoded": 146
+     "decoded": 147
     },
     "Saturn|Relay": {
      "decoded": 19
@@ -10371,20 +10371,20 @@
      "decoded": 3
     },
     "Saturn|VUE": {
-     "decoded": 793,
+     "decoded": 791,
      "hybrid": 15
     },
     "Scion|iM": {
      "decoded": 1
     },
     "Scion|tC": {
-     "decoded": 616
+     "decoded": 617
     },
     "Scion|xA": {
      "decoded": 97
     },
     "Scion|xB": {
-     "decoded": 477
+     "decoded": 478
     },
     "Scion|xD": {
      "decoded": 100
@@ -10396,20 +10396,20 @@
      "decoded": 24
     },
     "Subaru|Forester": {
-     "decoded": 1158
+     "decoded": 1159
     },
     "Subaru|Impreza": {
-     "decoded": 842,
+     "decoded": 848,
      "make_mismatch": 1
     },
     "Subaru|Impreza WRX": {
      "decoded": 4
     },
     "Subaru|Legacy": {
-     "decoded": 854
+     "decoded": 855
     },
     "Subaru|Outback": {
-     "decoded": 1292
+     "decoded": 1296
     },
     "Subaru|SVX": {
      "decoded": 2
@@ -10428,26 +10428,26 @@
      "decoded": 460
     },
     "Toyota|Avalon": {
-     "decoded": 1047,
+     "decoded": 1051,
      "hybrid": 7
     },
     "Toyota|Camry": {
-     "decoded": 6968,
-     "gas": 2267,
-     "hybrid": 235
+     "decoded": 6976,
+     "gas": 2270,
+     "hybrid": 236
     },
     "Toyota|Camry Hybrid": {
      "decoded": 95,
      "hybrid": 95
     },
     "Toyota|Camry Solara": {
-     "decoded": 452
+     "decoded": 451
     },
     "Toyota|Celica": {
      "decoded": 182
     },
     "Toyota|Corolla": {
-     "decoded": 3152
+     "decoded": 3159
     },
     "Toyota|Corolla iM": {
      "decoded": 2
@@ -10456,7 +10456,7 @@
      "decoded": 4
     },
     "Toyota|Echo": {
-     "decoded": 122
+     "decoded": 123
     },
     "Toyota|FJ Cruiser": {
      "decoded": 4
@@ -10512,19 +10512,19 @@
      "decoded": 368
     },
     "Toyota|Sienna": {
-     "decoded": 1465
+     "decoded": 1477
     },
     "Toyota|Supra": {
      "decoded": 12
     },
     "Toyota|Tacoma": {
-     "decoded": 204
+     "decoded": 206
     },
     "Toyota|Tercel": {
-     "decoded": 76
+     "decoded": 75
     },
     "Toyota|Tundra": {
-     "decoded": 417
+     "decoded": 418
     },
     "Toyota|Van": {
      "decoded": 8
@@ -10533,7 +10533,7 @@
      "decoded": 36
     },
     "Toyota|Yaris": {
-     "decoded": 336,
+     "decoded": 337,
      "make_mismatch": 1
     },
     "Volkswagen|Arteon": {
@@ -10546,7 +10546,7 @@
      "decoded": 226
     },
     "Volkswagen|CC": {
-     "decoded": 329
+     "decoded": 328
     },
     "Volkswagen|Cabrio": {
      "decoded": 31
@@ -10566,22 +10566,22 @@
      "decoded": 3
     },
     "Volkswagen|Jetta": {
-     "decoded": 2247,
+     "decoded": 2251,
      "hybrid": 11
     },
     "Volkswagen|Passat": {
-     "decoded": 1103
+     "decoded": 1106
     },
     "Volkswagen|Phaeton": {},
     "Volkswagen|Routan": {
-     "decoded": 144
+     "decoded": 143
     },
     "Volkswagen|Scirocco": {},
     "Volkswagen|Tiguan": {
-     "decoded": 186
+     "decoded": 188
     },
     "Volkswagen|Touareg": {
-     "decoded": 137,
+     "decoded": 138,
      "hybrid": 18
     },
     "Volkswagen|Transporter": {},
@@ -10613,17 +10613,17 @@
      "decoded": 48
     },
     "Volvo|S40": {
-     "decoded": 196
+     "decoded": 195
     },
     "Volvo|S60": {
-     "decoded": 333
+     "decoded": 334
     },
     "Volvo|S60 Cross Country": {},
     "Volvo|S70": {
      "decoded": 2
     },
     "Volvo|S80": {
-     "decoded": 119
+     "decoded": 118
     },
     "Volvo|S90": {
      "decoded": 1
@@ -10639,17 +10639,17 @@
      "decoded": 1
     },
     "Volvo|V70": {
-     "decoded": 74
+     "decoded": 75
     },
     "Volvo|V90": {},
     "Volvo|XC60": {
-     "decoded": 117
+     "decoded": 118
     },
     "Volvo|XC70": {
-     "decoded": 143
+     "decoded": 144
     },
     "Volvo|XC90": {
-     "decoded": 440
+     "decoded": 437
     }
    },
    "note": "vPIC model is not in the published inventory; checked make mismatches and, for hybrid trim subsets, vPIC trim 'Gas'"
@@ -104880,16 +104880,6 @@
   },
   {
    "cat": "bumper-front",
-   "detail": "Ford Five Hundred 2005-2005;Ford Taurus 2008-2008",
-   "evidence": [
-    "www.fordpartsgiant.com:records:L5564"
-   ],
-   "pn": "5G1Z-17757-AA",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "bumper-front",
    "detail": "Ford Fusion 2008-2008;Lincoln MKZ 2008-2008",
    "evidence": [
     "www.fordpartsgiant.com:records:L4582"
@@ -115220,27 +115210,27 @@
    "liftgate": 2
   },
   "likely_app_years_without_own_page": {
-   "bumper-front": 1963,
-   "bumper-rear": 2591,
-   "climate-control": 851,
-   "door-front": 940,
-   "door-rear": 795,
-   "fender": 1104,
-   "gauge-cluster": 1668,
-   "grille": 2032,
-   "headlights": 1848,
+   "bumper-front": 1966,
+   "bumper-rear": 2594,
+   "climate-control": 928,
+   "door-front": 946,
+   "door-rear": 799,
+   "fender": 1108,
+   "gauge-cluster": 1939,
+   "grille": 2036,
+   "headlights": 1876,
    "hood": 536,
-   "liftgate": 164,
-   "side-mirrors": 4277,
-   "tail-lights": 2437,
+   "liftgate": 168,
+   "side-mirrors": 4333,
+   "tail-lights": 2459,
    "tailgate": 235,
-   "tow-mirrors": 297,
-   "trunk-lid": 278,
+   "tow-mirrors": 300,
+   "trunk-lid": 279,
    "wheels": 2688,
-   "window-regulator": 2969,
-   "window-switch": 124
+   "window-regulator": 2995,
+   "window-switch": 125
   },
-  "likely_groups": 81,
+  "likely_groups": 74,
   "list_rows": 77788,
   "records": 7799,
   "released_by_allowlist": 22,
@@ -115307,7 +115297,7 @@
   "(B2) Harvest Gold outer w/Storm Grey center - honeycomb design": 2,
   "(B4) Chestnut outer w/Storm Grey center - honeycomb design": 2,
   "(BG) Bright Amber": 2,
-  "(CP) Designates Crash Part - When Ordering Please Refer To Crash Part Truckload Program Guidelines": 958,
+  "(CP) Designates Crash Part - When Ordering Please Refer To Crash Part Truckload Program Guidelines": 948,
   "(CP) Designates Crash Part - When Ordering Please Refer To Crash Part Truckload Program Guidelines / (CP) Designates Crash Part - When Ordering Please Refer To Crash Part Truckload Program Guidelines": 2,
   "(CRASH PART PROGRAM)": 1,
   "(CX)": 8,
@@ -115624,13 +115614,13 @@
   "58": 14,
   "6 3/4' Box Delete": 1,
   "6 Cyl 3.0L DOHC EFI": 4,
-  "6 Cyl 3.0L DOHC EFI Modular": 4,
+  "6 Cyl 3.0L DOHC EFI Modular": 2,
   "6 Cyl 3.0L OHC Duratec": 182,
-  "6 Cyl 3.5L Cyclone Petrol TIVCT": 14,
-  "6 Cyl 3.5L DOHC T/C": 8,
+  "6 Cyl 3.5L Cyclone Petrol TIVCT": 13,
+  "6 Cyl 3.5L DOHC T/C": 7,
   "6 Cyl 3.5L DOHC VCT SMPI": 176,
   "6 Cyl 3.5L GTDI": 10,
-  "6 Cyl 3.7L DOHC": 28,
+  "6 Cyl 3.7L DOHC": 26,
   "6 Cyl 3.7L PFI NA": 6,
   "6 Cyl 4.0L SOHC EFI": 4,
   "6 Holes": 7,
@@ -115664,11 +115654,11 @@
   "74": 32,
   "75 amp Reman": 4,
   "8 - Terminal Male": 4,
-  "8 Cyl 4.6L Romeo SOHC EFI": 17,
+  "8 Cyl 4.6L Romeo SOHC EFI": 15,
   "8 Cyl 4.6L SOHC EFI": 4,
   "8 Cyl 4.6L Windsor SOHC EFI": 3,
   "8 Cyl 5.0L MOD DOHC SEFI NA": 11,
-  "8 Cyl 5.4L Modular SOHC": 11,
+  "8 Cyl 5.4L Modular SOHC": 8,
   "8 Cyl 6.2L OHC NA": 10,
   "8 Pin": 2,
   "8 X 20\" Accessory Aluminum Wheel": 5,
@@ -115700,7 +115690,7 @@
   "Absorber Asy": 1,
   "Accessory Stainless steel tubular grille": 2,
   "Adaptive Headlamps": 2,
-  "Adjusters": 3,
+  "Adjusters": 1,
   "Aft Axle": 2,
   "Air Conditioning Control Panel": 1,
   "All 20\" Wheels": 2,
@@ -115718,7 +115708,7 @@
   "Aluminum wheel": 1,
   "Amber (top)": 8,
   "And 3D746 Must Be Deleted": 1,
-  "And Wire.": 3,
+  "And Wire.": 1,
   "Appearance Group": 1,
   "Arabic": 2,
   "Argent": 5,
@@ -115758,42 +115748,40 @@
   "Base Number: 1007G": 4,
   "Base Number: 1007H": 1,
   "Base Number: 10346": 65,
-  "Base Number: 10849": 1287,
+  "Base Number: 10849": 1198,
   "Base Number: 10B944": 2,
   "Base Number: 11002": 39,
   "Base Number: 12029": 105,
   "Base Number: 13005": 2,
   "Base Number: 13006": 1,
   "Base Number: 13007": 2,
-  "Base Number: 13008": 207,
-  "Base Number: 13008A": 13,
+  "Base Number: 13008": 206,
+  "Base Number: 13008A": 12,
   "Base Number: 13008B": 5,
   "Base Number: 13035": 1,
-  "Base Number: 13404": 129,
+  "Base Number: 13404": 127,
   "Base Number: 13404A": 23,
   "Base Number: 13404B": 21,
   "Base Number: 13405": 33,
-  "Base Number: 14529": 57,
+  "Base Number: 14529": 56,
   "Base Number: 14529A": 13,
   "Base Number: 14529B": 5,
   "Base Number: 14529C": 3,
   "Base Number: 14529D": 1,
   "Base Number: 14553": 18,
   "Base Number: 14B291A": 1,
-  "Base Number: 14B534": 2,
   "Base Number: 16005": 213,
   "Base Number: 16005A": 2,
   "Base Number: 16005B": 2,
   "Base Number: 16006": 33,
   "Base Number: 16612": 117,
   "Base Number: 16758": 2,
-  "Base Number: 17682": 439,
-  "Base Number: 17682A": 2,
+  "Base Number: 17682": 428,
   "Base Number: 17682B": 4,
   "Base Number: 17683": 22,
   "Base Number: 17757": 124,
   "Base Number: 17859": 2,
-  "Base Number: 17906": 153,
+  "Base Number: 17906": 151,
   "Base Number: 17906A": 7,
   "Base Number: 17906B": 7,
   "Base Number: 17970": 4,
@@ -115812,9 +115800,9 @@
   "Base Number: 17K835B": 8,
   "Base Number: 18B539": 1,
   "Base Number: 19497": 1,
-  "Base Number: 19703": 51,
-  "Base Number: 19980": 145,
-  "Base Number: 19980A": 13,
+  "Base Number: 19703": 50,
+  "Base Number: 19980": 125,
+  "Base Number: 19980A": 12,
   "Base Number: 19980B": 9,
   "Base Number: 19980C": 1,
   "Base Number: 19V703": 14,
@@ -115854,7 +115842,6 @@
   "Base Number: 7823395": 1,
   "Base Number: 7L3Z-1007-L": 1,
   "Base Number: 7L3Z-17682-AE": 1,
-  "Base Number: 7L3Z-17682-BB": 1,
   "Base Number: 7L3Z-17683-AE": 1,
   "Base Number: 8005": 124,
   "Base Number: 8005A": 7,
@@ -115869,16 +115856,14 @@
   "Base Number: 8C3Z-1007-B": 1,
   "Base Number: 8C3Z-8200-EA": 2,
   "Base Number: 8L1Z-1007-A": 1,
-  "Base Number: 8L3Z-17683-DA": 1,
   "Base Number: 8L7Z-1007-A": 1,
   "Base Number: 9275A": 1,
   "Base Number: 9A5Z-1007-B": 1,
   "Base Number: 9A8Z-1007-A": 1,
   "Base Number: 9B357": 1,
   "Base Number: 9E5Z-1007-F": 1,
-  "Base Number: 9E926": 29,
-  "Base Number: 9H307": 90,
-  "Base Number: 9L3Z-17682-EA": 1,
+  "Base Number: 9E926": 28,
+  "Base Number: 9H307": 88,
   "Base Number: 9R3Z-1007-C": 1,
   "Base Number: 9R3Z-1007-D": 1,
   "Base Number: <10922": 4,
@@ -115887,7 +115872,7 @@
   "Base Number: <23200A": 2,
   "Base Number: <23200C": 2,
   "Base Number: <23208": 19,
-  "Base Number: <23394": 92,
+  "Base Number: <23394": 90,
   "Base Number: <24630": 129,
   "Base Number: <27000": 36,
   "Base Number: <40010": 21,
@@ -115897,7 +115882,6 @@
   "Base Number: <40700": 10,
   "Base Number: AL3Z-1007-H": 1,
   "Base Number: AL3Z-1007-J": 1,
-  "Base Number: AL3Z-13008-AC": 1,
   "Base Number: AL3Z-8200-B": 1,
   "Base Number: AL3Z-8200-C": 1,
   "Base Number: AR3Z-1007-F": 1,
@@ -115940,7 +115924,7 @@
   "Bright Chrome": 7,
   "Bright finish": 1,
   "Brown / Gold": 2,
-  "Bulbs": 5,
+  "Bulbs": 3,
   "Bullitt": 4,
   "Bumper": 11,
   "Bumper - Cover": 2,
@@ -115970,26 +115954,26 @@
   "Callout Name: 1007J": 4,
   "Callout Name: 1007K": 4,
   "Callout Name: 1007L": 1,
-  "Callout Name: 10346": 232,
+  "Callout Name: 10346": 230,
   "Callout Name: 10346A": 4,
   "Callout Name: 10346B": 2,
-  "Callout Name: 10849": 1471,
+  "Callout Name: 10849": 1380,
   "Callout Name: 10B944": 3,
-  "Callout Name: 11002": 98,
+  "Callout Name: 11002": 97,
   "Callout Name: 12029": 131,
-  "Callout Name: 13008": 432,
-  "Callout Name: 13008A": 29,
+  "Callout Name: 13008": 412,
+  "Callout Name: 13008A": 24,
   "Callout Name: 13008B": 20,
-  "Callout Name: 13404": 329,
-  "Callout Name: 13404A": 65,
-  "Callout Name: 13404B": 58,
-  "Callout Name: 14529": 50,
+  "Callout Name: 13404": 317,
+  "Callout Name: 13404A": 61,
+  "Callout Name: 13404B": 48,
+  "Callout Name: 14529": 48,
   "Callout Name: 14529A": 31,
   "Callout Name: 14529B": 11,
   "Callout Name: 14529C": 5,
   "Callout Name: 14529D": 1,
   "Callout Name: 14553": 28,
-  "Callout Name: 14B534": 4,
+  "Callout Name: 14B534": 1,
   "Callout Name: 16005": 328,
   "Callout Name: 16005A": 2,
   "Callout Name: 16005B": 2,
@@ -115997,11 +115981,11 @@
   "Callout Name: 16758": 2,
   "Callout Name: 17626": 2,
   "Callout Name: 17626B": 1,
-  "Callout Name: 17682": 937,
+  "Callout Name: 17682": 898,
   "Callout Name: 17757": 281,
   "Callout Name: 17859": 2,
   "Callout Name: 17906": 310,
-  "Callout Name: 17906A": 13,
+  "Callout Name: 17906A": 11,
   "Callout Name: 17906B": 12,
   "Callout Name: 17970": 4,
   "Callout Name: 17970A": 4,
@@ -116020,16 +116004,16 @@
   "Callout Name: 17K835B": 12,
   "Callout Name: 17K835C": 4,
   "Callout Name: 18B539": 3,
-  "Callout Name: 19703": 152,
-  "Callout Name: 19980": 312,
-  "Callout Name: 19980A": 26,
+  "Callout Name: 19703": 148,
+  "Callout Name: 19980": 236,
+  "Callout Name: 19980A": 21,
   "Callout Name: 19980B": 14,
   "Callout Name: 19980C": 1,
   "Callout Name: 19B968": 3,
   "Callout Name: 19D623": 1,
   "Callout Name: 20124": 17,
   "Callout Name: 24630": 28,
-  "Callout Name: 3A674": 130,
+  "Callout Name: 3A674": 125,
   "Callout Name: 40010": 19,
   "Callout Name: 40110": 24,
   "Callout Name: 40700": 42,
@@ -116047,17 +116031,17 @@
   "Callout Name: 9275A": 1,
   "Callout Name: 9350": 19,
   "Callout Name: 9B357": 1,
-  "Callout Name: 9E926": 56,
-  "Callout Name: 9H307": 171,
+  "Callout Name: 9E926": 55,
+  "Callout Name: 9H307": 160,
   "Callout Name: <10922": 15,
-  "Callout Name: <20124": 190,
-  "Callout Name: <23200": 103,
+  "Callout Name: <20124": 187,
+  "Callout Name: <23200": 101,
   "Callout Name: <23200A": 2,
   "Callout Name: <23200C": 2,
-  "Callout Name: <23208": 43,
-  "Callout Name: <23394": 138,
+  "Callout Name: <23208": 41,
+  "Callout Name: <23394": 131,
   "Callout Name: <24630": 173,
-  "Callout Name: <27000": 88,
+  "Callout Name: <27000": 86,
   "Callout Name: <40010": 45,
   "Callout Name: <40110": 77,
   "Callout Name: <40110A": 3,
@@ -116093,7 +116077,7 @@
   "Chrome / Dark Foundry": 1,
   "Chrome / Silver Lining": 1,
   "Chrome Billet Style Insert": 1,
-  "Chrome Finish": 137,
+  "Chrome Finish": 136,
   "Chrome Mesh Insert": 1,
   "Chrome Surround": 22,
   "Chrome Surround With Silver Insert": 1,
@@ -116124,7 +116108,7 @@
   "Cobra SVT": 2,
   "Coil (19D798)": 26,
   "Coil Assy - Ignition": 6,
-  "Complete - Includes Housing": 3,
+  "Complete - Includes Housing": 1,
   "Complete Assembly": 28,
   "Complete Assembly Includes A/C Compressor And Clutch": 18,
   "Complete Kit": 2,
@@ -116139,7 +116123,7 @@
   "Complete asy.": 8,
   "Complete asy. includes parking lamp & I.S. 5318": 3,
   "Compressor Clutch Kit": 1,
-  "Compressor Only": 28,
+  "Compressor Only": 27,
   "Compressor only": 2,
   "Compressor/clutch kit": 2,
   "Contains Ambient Air Temperature Sensor": 2,
@@ -116179,7 +116163,7 @@
   "DOOR ASY. (FRONT) AND 20125": 9,
   "DOOR ASY. (REAR) AND 24631": 8,
   "DUAL POWER MIRRORS": 8,
-  "DX": 25,
+  "DX": 23,
   "Dark Blue Pearl W/B": 2,
   "Dark Blue Pearl/Platinum": 4,
   "Dark Green Satin-includes lens & body only": 2,
@@ -116193,13 +116177,13 @@
   "Dealer To Cut Out Holes For Proximity Sensors If Required": 11,
   "Dearborn Plant Build": 6,
   "Decontented Headlamp - Does Not Include Bulbs": 30,
-  "Decontented Headlamp - Please See Illustration": 40,
+  "Decontented Headlamp - Please See Illustration": 38,
   "Decontented Rear Lamp - Does Not Include Blis Module": 2,
   "Deep Wedgewood Blue": 3,
   "Does Not Include Emblem": 9,
   "Does Not Include Emblems": 1,
   "Does Not Include Motor": 4,
-  "Door Assy - Front": 145,
+  "Door Assy - Front": 142,
   "Door Assy - Rear": 96,
   "Door Assy - Rear - Less Hinges": 36,
   "Door Trim Modification Required: Dealer To Cut Out The Door Trim Switch Opening To Fit The New Switch": 1,
@@ -116219,7 +116203,7 @@
   "Drv Pwr Pd Lmp/Htd/Sat Al Sk Cap": 8,
   "Drv Pwr/Heated/Mem/Puddle Lamp": 5,
   "Drv Pwr/Htd Ck Mirror W/Puddle Lamp": 8,
-  "Du Pw/Ht/Mem/Pud Lamp/Sig/Ec Mirror": 13,
+  "Du Pw/Ht/Mem/Pud Lamp/Sig/Ec Mirror": 11,
   "Dual Bright Horizontal Pipe": 2,
   "Dual Chrome Mesh Insert": 1,
   "Dual Mirror Pwr/Htd/Mem/Fold/Lamp": 1,
@@ -116244,13 +116228,13 @@
   "Dual Pwr/Heat/Mfld/Mem/E'Chr/Bsm": 1,
   "Dual Pwr/Ht/Fold/Pud Lmp/Sig/Bsm": 9,
   "Dual Pwr/Htd/Mem/Fld/E'Chr/Pud Lamp": 5,
-  "Dual Pwr/Htd/Mem/Fld/E'Chr/Pud/Chrm": 4,
+  "Dual Pwr/Htd/Mem/Fld/E'Chr/Pud/Chrm": 2,
   "Dual Sail Mtd Hand Set Mirrors": 5,
-  "Dual Sail Mtd Power Mirrors": 11,
+  "Dual Sail Mtd Power Mirrors": 10,
   "Dual Sail Mtd Pwr Mir W/Arabic Etg": 2,
-  "Dual Sail Telesc TT Mirror-Manual": 8,
+  "Dual Sail Telesc TT Mirror-Manual": 7,
   "Dual Sail Telesc TT Power Mirror": 4,
-  "Dual Zone Auto Temp Control A/C": 17,
+  "Dual Zone Auto Temp Control A/C": 12,
   "Dual row": 1,
   "Dual row / #F75H 8005-GB": 1,
   "E4OD": 1,
@@ -116274,16 +116258,16 @@
   "Eddie Bauer version": 14,
   "Eddie Bauer versions": 4,
   "Electric Motor": 4,
-  "Electric W/Shield Defrost-Partial": 3,
-  "Electronic Dual Zone ATC A/C": 17,
-  "Ensure Powerfold Mirror Is Synchronized Properly Per The Workshop": 4,
+  "Electric W/Shield Defrost-Partial": 2,
+  "Electronic Dual Zone ATC A/C": 14,
+  "Ensure Powerfold Mirror Is Synchronized Properly Per The Workshop": 2,
   "Entire Cover Is Smooth Finish": 34,
   "Estate Green": 8,
   "Except Appearance Group": 1,
   "Except Lightning": 2,
   "Except Limousine": 2,
-  "Excludes Cover": 81,
-  "Export Dealers And Affiliates: Order Direct From FCSD-IDO": 408,
+  "Excludes Cover": 79,
+  "Export Dealers And Affiliates: Order Direct From FCSD-IDO": 392,
   "Export Dealers And Affiliates: Order Direct From FCSD-IDO / Order From Instrument Cluster Online Ordering System Using The Online 1878 Form": 2,
   "Export Dealers And Affiliates: Order Direct From FCSD-IDO / Order From Instrument Cluster Online Ordering System Using The Online Ordering System": 6,
   "Ext Mirror Finish - Gloss": 6,
@@ -116295,7 +116279,7 @@
   "Extended Range Single Fuel Tank": 4,
   "Exterior Decor - Base": 2,
   "Exterior Decor - Monochromatic": 9,
-  "Exterior Mirror Finish - Chrome": 37,
+  "Exterior Mirror Finish - Chrome": 32,
   "Exterior dress up pkg.": 1,
   "F ALL EXCEPT 2.3L": 6,
   "F ``FROM 10/01/81\"": 12,
@@ -116314,12 +116298,12 @@
   "FROM NOV 04": 16,
   "FROM NOV 23": 28,
   "FS-10": 1,
-  "FWD": 9,
-  "FX4": 42,
+  "FWD": 8,
+  "FX4": 34,
   "FX4 Off Road": 4,
   "Fender Assy - Front": 170,
   "Fit Note:": 2,
-  "Fit Note: 'Harley Davidson' Version Package": 34,
+  "Fit Note: 'Harley Davidson' Version Package": 30,
   "Fit Note: (+) \"NA Market \"": 3,
   "Fit Note: (+) North American Markets": 104,
   "Fit Note: (+) SVT": 46,
@@ -116331,16 +116315,16 @@
   "Fit Note: (-)\"Canada\"": 153,
   "Fit Note: (-)\"DZA\"": 1,
   "Fit Note: (-)\"GB\"": 1,
-  "Fit Note: (-)\"GCC\"Gulf Cooperative Countries": 98,
+  "Fit Note: (-)\"GCC\"Gulf Cooperative Countries": 96,
   "Fit Note: (-)\"IL\"": 13,
   "Fit Note: (-)\"Japan\"": 19,
-  "Fit Note: (-)\"KOR\"": 46,
+  "Fit Note: (-)\"KOR\"": 42,
   "Fit Note: (-)\"PH\"": 1,
   "Fit Note: (-)\"RA\"": 4,
   "Fit Note: (-)\"TW\"": 1,
   "Fit Note: 10 Cyl 6.8L": 4,
   "Fit Note: 110V Power Convertor": 9,
-  "Fit Note: 119\"/3023MM Wheelbase": 6,
+  "Fit Note: 119\"/3023MM Wheelbase": 5,
   "Fit Note: 122.44/3110MM Wheelbase": 2,
   "Fit Note: 126\"/3200MM Wheelbase": 2,
   "Fit Note: 131\"/3327.4MM Wheelbase": 3,
@@ -116465,18 +116449,18 @@
   "Fit Note: 4 Door Sedan": 79,
   "Fit Note: 4 Door Wagon": 8,
   "Fit Note: 4.6L": 10,
-  "Fit Note: 5 Door Sedan": 26,
+  "Fit Note: 5 Door Sedan": 24,
   "Fit Note: 50 State Emission Requirements": 1,
   "Fit Note: 54": 88,
   "Fit Note: 58": 6,
   "Fit Note: 6 Cyl 2.5L": 13,
   "Fit Note: 6 Cyl 3.0L": 28,
   "Fit Note: 6 Cyl 3.0L DOHC EFI Modular": 17,
-  "Fit Note: 6 Cyl 3.5L DOHC VCT SMPI": 26,
+  "Fit Note: 6 Cyl 3.5L DOHC VCT SMPI": 25,
   "Fit Note: 6 Cyl 3.5L GTDI": 1,
   "Fit Note: 6 Cyl 3.8L": 18,
   "Fit Note: 6 Cyl 4.0L": 2,
-  "Fit Note: 6 Cyl 4.0L SOHC EFI": 19,
+  "Fit Note: 6 Cyl 4.0L SOHC EFI": 18,
   "Fit Note: 6 Cyl 4.2L": 3,
   "Fit Note: 6 X 15\" Mach Alloy W/Painted Pocket": 1,
   "Fit Note: 6.0 X 16\" Cast Aluminium Wheel": 3,
@@ -116490,7 +116474,7 @@
   "Fit Note: 6.5 X 16\" Steel Wheels - White": 1,
   "Fit Note: 6.5J X 15\" Alloy Wheel": 4,
   "Fit Note: 6.5X16 Alum Bright Machined 5 Spoke": 2,
-  "Fit Note: 60TH Anniversary Package": 18,
+  "Fit Note: 60TH Anniversary Package": 17,
   "Fit Note: 63": 34,
   "Fit Note: 6J X 15\" Multi-Pocket Painted Alloy": 1,
   "Fit Note: 6J x 15 #1 Alloy Wheel": 4,
@@ -116615,7 +116599,7 @@
   "Fit Note: 99": 14,
   "Fit Note: A/C Refrigerant-HF01234YF": 1,
   "Fit Note: A/C Refrigerant-R134A": 6,
-  "Fit Note: AM/FM Stereo/6 CD/Navigation System": 7,
+  "Fit Note: AM/FM Stereo/6 CD/Navigation System": 6,
   "Fit Note: AM/FM Stereo/CD/DVD/Nav System": 5,
   "Fit Note: AM/FM Str/CD/Clk/Navig System": 1,
   "Fit Note: Adaptive Headlamps Level 2": 4,
@@ -116630,13 +116614,13 @@
   "Fit Note: Alternator - 220A": 2,
   "Fit Note: Aluminum Drive Shaft": 1,
   "Fit Note: Analog Audio Broadcast": 1,
-  "Fit Note: Appearance Group 1": 14,
+  "Fit Note: Appearance Group 1": 12,
   "Fit Note: Arizona Beige": 6,
   "Fit Note: Aspen Green Metallic": 3,
   "Fit Note: BIS W/Radar-BLIS/CAN LED": 1,
   "Fit Note: Black Face/Silver Rings - Cluster": 1,
   "Fit Note: Black Label Package": 3,
-  "Fit Note: Blind Spot Detection 2": 20,
+  "Fit Note: Blind Spot Detection 2": 18,
   "Fit Note: Blue Flame": 3,
   "Fit Note: Body Armor - Doors": 3,
   "Fit Note: Body Color Surround/Mesh Insert": 1,
@@ -116650,7 +116634,7 @@
   "Fit Note: Camera-Front Video W/Split View": 6,
   "Fit Note: Charcoal Black Interior": 2,
   "Fit Note: Chrome Appearance Package": 12,
-  "Fit Note: Chrome Package": 67,
+  "Fit Note: Chrome Package": 58,
   "Fit Note: Cluster-Beige Face/Met Rings": 2,
   "Fit Note: Color Keyed Grille W/Gray Insert": 10,
   "Fit Note: Console-Floor-Full W/Chrome": 1,
@@ -116661,7 +116645,7 @@
   "Fit Note: Customer Info Display - Package 1": 1,
   "Fit Note: D Power Puddle Lamp/Htd/Bld Spt Mon": 1,
   "Fit Note: DTRL Lamp Lit In Pos 0 And Pos": 4,
-  "Fit Note: DU Media MP3/6 Disc CD Changer": 8,
+  "Fit Note: DU Media MP3/6 Disc CD Changer": 4,
   "Fit Note: DUAL POWER MIRRORS": 5,
   "Fit Note: Dark Blue Pearl W/B": 4,
   "Fit Note: Dark Grey Tinted": 4,
@@ -116681,18 +116665,18 @@
   "Fit Note: Driver Pwr P Lp/Mem/Ht/BSM/LED Sgnl": 1,
   "Fit Note: Drivers C/K Power Mirror": 2,
   "Fit Note: Drivers Manual Adjust Flat Mirror": 1,
-  "Fit Note: Drivers Power Fld/Htd W/Puddle Lamp": 11,
+  "Fit Note: Drivers Power Fld/Htd W/Puddle Lamp": 10,
   "Fit Note: Drivers Power Heated Convex Mirror": 6,
   "Fit Note: Drivers Power Heated T-Tow Mirror": 2,
   "Fit Note: Drivers Power Mirror W/Puddle Lamps": 6,
   "Fit Note: Drivers Power P Lp/Mem/Htd/LED/Sgnl": 1,
-  "Fit Note: Drivers Power/Htd/Pud/Mn T-Tow Mir": 13,
+  "Fit Note: Drivers Power/Htd/Pud/Mn T-Tow Mir": 11,
   "Fit Note: Drivers Pwr Electro Heat/Mem Mirror": 2,
   "Fit Note: Drivers Pwr Heated Exterior Mirror": 2,
   "Fit Note: Drivers Pwr Mirror \"Arabic Warning\"": 1,
   "Fit Note: Drivers Pwr/Htd W/Puddle Lamp & BSM": 1,
   "Fit Note: Drivers S/Arm Power Mir. Flat Glass": 1,
-  "Fit Note: Drivers Sail/Man/Man T-Tow Mirror": 6,
+  "Fit Note: Drivers Sail/Man/Man T-Tow Mirror": 5,
   "Fit Note: Drv Low Mount Recreation Mirror": 8,
   "Fit Note: Drv Power/Heat Mirror W/Turn Signal": 1,
   "Fit Note: Drv Pwr Heated Mir Memory Pwr Fold": 1,
@@ -116707,21 +116691,21 @@
   "Fit Note: Dual Exhaust": 2,
   "Fit Note: Dual Heavy Duty Alternators": 6,
   "Fit Note: Dual Man Drivers Flat Glass Mirror": 4,
-  "Fit Note: Dual Manual Sgnl Mirror-Body Color": 8,
+  "Fit Note: Dual Manual Sgnl Mirror-Body Color": 6,
   "Fit Note: Dual Manual W/Intergrated Spotter": 1,
   "Fit Note: Dual Mirror Pwr/Htd/Mem/Fold/Lamp": 13,
-  "Fit Note: Dual P/Heat/Signal/Pud Lamp Mirror": 6,
+  "Fit Note: Dual P/Heat/Signal/Pud Lamp Mirror": 4,
   "Fit Note: Dual P/Heat/Signal/Pud Lamp/Blis": 6,
   "Fit Note: Dual Power Adj/Heat/Bld Spt/Signal": 16,
   "Fit Note: Dual Power Adjust/Heated/Blind Spot": 16,
   "Fit Note: Dual Power Adjustable Mirrs W/Blis": 4,
   "Fit Note: Dual Power Fold Htd Signal Mirror's": 5,
   "Fit Note: Dual Power Heated Exterior Mirrors": 14,
-  "Fit Note: Dual Power Heated Fold Back Mirror": 9,
+  "Fit Note: Dual Power Heated Fold Back Mirror": 8,
   "Fit Note: Dual Power Heated/Appr Lmp/Signal": 5,
-  "Fit Note: Dual Power Htd Signal Mirrors": 22,
+  "Fit Note: Dual Power Htd Signal Mirrors": 20,
   "Fit Note: Dual Power Mirrors Mic": 2,
-  "Fit Note: Dual Power Mirrors-Manual Fold Back": 16,
+  "Fit Note: Dual Power Mirrors-Manual Fold Back": 14,
   "Fit Note: Dual Power Signal Mirrors": 2,
   "Fit Note: Dual Power With Integrated Spotter": 1,
   "Fit Note: Dual Power/Heated Mirrors Mic": 6,
@@ -116732,28 +116716,28 @@
   "Fit Note: Dual Power/Htd/Memory/Pud Lamp Mir": 4,
   "Fit Note: Dual Pwr Fold Mirrors W/Indicators": 2,
   "Fit Note: Dual Pwr/Heat/Mem/E Chr/Pud Lmp Mr": 12,
-  "Fit Note: Dual Pwr/Heat/Mem/Pud Lmp/Sig Mr": 6,
+  "Fit Note: Dual Pwr/Heat/Mem/Pud Lmp/Sig Mr": 4,
   "Fit Note: Dual Pwr/Heat/Mfld/Mem/E'Chr/Bsm": 5,
-  "Fit Note: Dual Pwr/Ht/Fold/Pud Lmp/Sig/Bsm": 7,
+  "Fit Note: Dual Pwr/Ht/Fold/Pud Lmp/Sig/Bsm": 5,
   "Fit Note: Dual Pwr/Htd/Fld/E'Chro/Pudd Lamp": 2,
-  "Fit Note: Dual Pwr/Htd/Mem/Fld/E'Chr/Pud Lamp": 35,
-  "Fit Note: Dual Sail Mtd Hand Set Mirrors": 10,
+  "Fit Note: Dual Pwr/Htd/Mem/Fld/E'Chr/Pud Lamp": 33,
+  "Fit Note: Dual Sail Mtd Hand Set Mirrors": 9,
   "Fit Note: Dual Sail Mtd Power Mirrors": 14,
-  "Fit Note: Dual Sail T'Scp TT Mirrors-Pwr/Htd": 28,
-  "Fit Note: Dual Sail Telesc TT Mirror-Manual": 10,
+  "Fit Note: Dual Sail T'Scp TT Mirrors-Pwr/Htd": 18,
+  "Fit Note: Dual Sail Telesc TT Mirror-Manual": 6,
   "Fit Note: Dual Sail Telesc TT Power Mirror": 15,
   "Fit Note: Dual Ttow Pwr Htd Telscp Manfold": 2,
-  "Fit Note: Dual Zone Auto Temp Control A/C": 92,
+  "Fit Note: Dual Zone Auto Temp Control A/C": 56,
   "Fit Note: Dual Zone Automatic Air Cond": 3,
   "Fit Note: Dual Zone Manual Air Cond": 2,
   "Fit Note: Ebony Solid C/C": 10,
   "Fit Note: Ebony WB C/C": 4,
   "Fit Note: Electronic AM/FM/Stereo With Clock": 1,
-  "Fit Note: Electronic Dual Zone ATC A/C": 30,
+  "Fit Note: Electronic Dual Zone ATC A/C": 26,
   "Fit Note: Ext Mirror Finish - Gloss": 11,
   "Fit Note: Ext Mirrors Moulded-In Color": 2,
   "Fit Note: Extended Plus Capacity Fuel Tank": 1,
-  "Fit Note: Exterior Decor - Base": 12,
+  "Fit Note: Exterior Decor - Base": 6,
   "Fit Note: Exterior Decor - Monochromatic": 4,
   "Fit Note: Exterior Light Pack": 2,
   "Fit Note: Exterior Mirror Finish - Chrome": 4,
@@ -116765,7 +116749,7 @@
   "Fit Note: For Hot Climate Zones": 1,
   "Fit Note: For Unleaded Fuel": 27,
   "Fit Note: Ford And Mercury Derivative": 151,
-  "Fit Note: Ford Division Derivative": 316,
+  "Fit Note: Ford Division Derivative": 312,
   "Fit Note: Fr Bumper A-Gloss Body Clr W/Accent": 60,
   "Fit Note: Fr Bumper-Steel-Plastic Ends": 4,
   "Fit Note: Fr Up Grille-W/Hny Cmb Msh Self Clr": 1,
@@ -116782,7 +116766,7 @@
   "Fit Note: Front/Side/Rear View Camera": 3,
   "Fit Note: Fuel Economy Packages Number 4": 3,
   "Fit Note: Full Dress Up RSO No.4": 6,
-  "Fit Note: Full Message Center": 62,
+  "Fit Note: Full Message Center": 41,
   "Fit Note: GWP Less Than 150": 4,
   "Fit Note: Gas/Electric Hybrid": 21,
   "Fit Note: Green Tinted": 4,
@@ -116799,32 +116783,32 @@
   "Fit Note: Grille-Upper Painted": 3,
   "Fit Note: HD ATC Air Conditioning": 7,
   "Fit Note: HEADLAMP BEZEL-BLACK": 10,
-  "Fit Note: HEADLAMP PREP PACK": 10,
+  "Fit Note: HEADLAMP PREP PACK": 8,
   "Fit Note: HEAVY DUTY PLUS ALTERNATOR": 1,
   "Fit Note: Halogen Headlamps - Japan": 2,
   "Fit Note: Halogen Headlamps Less Adjustment": 4,
   "Fit Note: Halogen Signature Headlamps": 8,
   "Fit Note: Headlamp Bezel - Normal": 8,
   "Fit Note: Headlamps - Fixed DSS (LED)": 4,
-  "Fit Note: Headlamps - Halogen": 29,
+  "Fit Note: Headlamps - Halogen": 27,
   "Fit Note: Headlamps - Level 6": 2,
-  "Fit Note: Headlamps - Unique": 8,
+  "Fit Note: Headlamps - Unique": 6,
   "Fit Note: Heater/AC Prep Pack-Deluxe": 1,
   "Fit Note: Heater/Air Conditioning Prep Pack": 1,
-  "Fit Note: Heavy Duty Alternator": 11,
-  "Fit Note: High Intensity Discharge Headlamp": 32,
+  "Fit Note: Heavy Duty Alternator": 10,
+  "Fit Note: High Intensity Discharge Headlamp": 28,
   "Fit Note: High Series Analog Cluster": 2,
-  "Fit Note: Human Machine Interface 1": 9,
-  "Fit Note: Human Machine Interface 3": 11,
+  "Fit Note: Human Machine Interface 1": 6,
+  "Fit Note: Human Machine Interface 3": 7,
   "Fit Note: Human Machine Interface 4": 3,
-  "Fit Note: Human Machine Interface 5": 16,
+  "Fit Note: Human Machine Interface 5": 9,
   "Fit Note: Hybrid Appearance Package": 1,
   "Fit Note: I/P Insert - Mink Zebrano": 1,
   "Fit Note: Kansas City Plant Build": 1,
-  "Fit Note: Kentucky Truck Plant Build": 14,
+  "Fit Note: Kentucky Truck Plant Build": 10,
   "Fit Note: Keyless Entry - Illuminated Key Pad": 3,
   "Fit Note: Keyless Entry - Key Fob/ID Card": 4,
-  "Fit Note: Keyless Entry/Start - Passive": 10,
+  "Fit Note: Keyless Entry/Start - Passive": 2,
   "Fit Note: King Ranch Version Package": 3,
   "Fit Note: Large Rear View Mirror Housing": 2,
   "Fit Note: Lariat Chrome Package": 4,
@@ -116834,8 +116818,8 @@
   "Fit Note: Less Ambient Temp/Speed Pack": 5,
   "Fit Note: Less Appearance Group": 51,
   "Fit Note: Less Automated Parking System": 42,
-  "Fit Note: Less Aux Overhead Heater And A/C": 5,
-  "Fit Note: Less Auxiliary Fuel Ports": 2,
+  "Fit Note: Less Aux Overhead Heater And A/C": 4,
+  "Fit Note: Less Auxiliary Fuel Ports": 1,
   "Fit Note: Less California Special": 2,
   "Fit Note: Less Camera": 7,
   "Fit Note: Less Camera-Front Video": 1,
@@ -116845,7 +116829,7 @@
   "Fit Note: Less Dual Mirrors": 2,
   "Fit Note: Less Engine Oil Cooler": 5,
   "Fit Note: Less Evaporative Emissions": 4,
-  "Fit Note: Less Exterior Appearance Pack": 25,
+  "Fit Note: Less Exterior Appearance Pack": 23,
   "Fit Note: Less Exterior Dress Up Package": 4,
   "Fit Note: Less Exterior Light Pack": 2,
   "Fit Note: Less Exterior Wheel Lip Molding": 13,
@@ -116855,20 +116839,20 @@
   "Fit Note: Less Front Parking Aid": 2,
   "Fit Note: Less Front Towing Hook": 6,
   "Fit Note: Less Grille-Upper": 4,
-  "Fit Note: Less Heated Rear Window": 6,
+  "Fit Note: Less Heated Rear Window": 4,
   "Fit Note: Less Heated Steering Wheel": 1,
   "Fit Note: Less Heated Windscreen": 4,
-  "Fit Note: Less Keyless Entry System": 14,
+  "Fit Note: Less Keyless Entry System": 13,
   "Fit Note: Less Liftgate": 3,
-  "Fit Note: Less Lighting Packages": 6,
+  "Fit Note: Less Lighting Packages": 5,
   "Fit Note: Less Long Wheelbase Package": 2,
   "Fit Note: Less Lower Body Moulding": 1,
   "Fit Note: Less Manual Shift Auto Trans": 4,
-  "Fit Note: Less Memory Package": 8,
+  "Fit Note: Less Memory Package": 3,
   "Fit Note: Less Message Center": 19,
   "Fit Note: Less Mirror Glass Etching": 2,
   "Fit Note: Less Moon Roof": 1,
-  "Fit Note: Less Onboard Vapour Recovery System": 5,
+  "Fit Note: Less Onboard Vapour Recovery System": 4,
   "Fit Note: Less Performance Pack": 1,
   "Fit Note: Less Power Convertor": 9,
   "Fit Note: Less Power Point Plug": 2,
@@ -116887,30 +116871,30 @@
   "Fit Note: Less Signal Mirror System": 2,
   "Fit Note: Less Special Equipment Package": 4,
   "Fit Note: Less Special Purpose Vehicle": 1,
-  "Fit Note: Less Special Service Vehicles 2": 8,
+  "Fit Note: Less Special Service Vehicles 2": 6,
   "Fit Note: Less Special Service Vehicles 4": 2,
   "Fit Note: Less Spoiler": 10,
   "Fit Note: Less Sport Plus Package": 4,
   "Fit Note: Less Tailgate Applique": 2,
-  "Fit Note: Less Temp Control Driver Seat": 12,
+  "Fit Note: Less Temp Control Driver Seat": 10,
   "Fit Note: Less Trailer Towing": 20,
   "Fit Note: Less Transmission Power Take Off": 6,
   "Fit Note: Less Trim Pack": 1,
   "Fit Note: Less Tu-Tone Accent Color": 4,
   "Fit Note: Less Underbody Protection": 7,
-  "Fit Note: Less Version Packages": 10,
+  "Fit Note: Less Version Packages": 8,
   "Fit Note: Lincoln Division Derivative": 130,
   "Fit Note: Low Series Analog Cluster": 18,
   "Fit Note: Lower B/S Moulding-Molded In Colour": 5,
   "Fit Note: Lower Painted Cladding": 4,
   "Fit Note: M/Beam With Extended Axle (Fatboy)": 6,
-  "Fit Note: Manual Air Conditioning": 39,
+  "Fit Note: Manual Air Conditioning": 32,
   "Fit Note: Manual Dual Mirror-Manual Fold Back": 6,
-  "Fit Note: Manual Electric Air Conditioning": 3,
+  "Fit Note: Manual Electric Air Conditioning": 2,
   "Fit Note: Manual Extendable Towing Mirror": 2,
   "Fit Note: Mercury Division Derivative": 85,
   "Fit Note: Message Center With Compass": 1,
-  "Fit Note: Mini Message Center": 90,
+  "Fit Note: Mini Message Center": 65,
   "Fit Note: Mirror Glass Etching - Arabic": 1,
   "Fit Note: Mirror Glass Etching - English": 1,
   "Fit Note: Monochromatic Appearance Package": 1,
@@ -116941,10 +116925,10 @@
   "Fit Note: Platinum Edition Package": 5,
   "Fit Note: Plug-In Gas/Electric Hybrid": 1,
   "Fit Note: Police Instrumentation": 2,
-  "Fit Note: Power 4-Wheel Disc Vacuum Boost": 3,
+  "Fit Note: Power 4-Wheel Disc Vacuum Boost": 2,
   "Fit Note: Power Dual Sail Exterior Mirrors": 1,
-  "Fit Note: Power Front Windows One Touch Down": 12,
-  "Fit Note: Power Front Windows One Touch Up/Do": 27,
+  "Fit Note: Power Front Windows One Touch Down": 10,
+  "Fit Note: Power Front Windows One Touch Up/Do": 24,
   "Fit Note: Power Front Wndow-1 Tch Up/Dwn-Pass": 1,
   "Fit Note: Power Frt Window-1 Tch Dwn-Dr Only": 17,
   "Fit Note: Power Point Plug-Level 3": 3,
@@ -116956,9 +116940,9 @@
   "Fit Note: Pwr Fr Window 1 Touch Up/Dwn-Driver": 2,
   "Fit Note: Pwr Rr Pass/Fixed Drv Rr Window": 2,
   "Fit Note: Rear Auxiliary Air Conditioning": 1,
-  "Fit Note: Rear Bumper - Self Color": 2,
+  "Fit Note: Rear Bumper - Self Color": 1,
   "Fit Note: Rear Bumper - Steel Argent": 4,
-  "Fit Note: Rear Bumper Body Coloured Plastic": 5,
+  "Fit Note: Rear Bumper Body Coloured Plastic": 4,
   "Fit Note: Rear Bumper Sensor Device": 2,
   "Fit Note: Rear View Camera-Fixed": 3,
   "Fit Note: Redfire": 2,
@@ -116971,8 +116955,8 @@
   "Fit Note: Select Shift Tech (SST) W/Pad Shift": 4,
   "Fit Note: Silver Birch Metallic": 2,
   "Fit Note: Skid Plate": 1,
-  "Fit Note: Special Service Vehicle BB": 4,
-  "Fit Note: Sport Appearance Pack - 2": 6,
+  "Fit Note: Special Service Vehicle BB": 3,
+  "Fit Note: Sport Appearance Pack - 2": 4,
   "Fit Note: Sport Package": 2,
   "Fit Note: Sport Plus Package": 5,
   "Fit Note: Standard Duty Alternator": 1,
@@ -116986,8 +116970,8 @@
   "Fit Note: Style 6 Alloy 19 Inch": 1,
   "Fit Note: T/T Acct Color - Pueblo Gold": 2,
   "Fit Note: Tail lamps - LED Rear": 4,
-  "Fit Note: Tail lamps - Level 1": 34,
-  "Fit Note: Tail lamps - Level 2": 16,
+  "Fit Note: Tail lamps - Level 1": 32,
+  "Fit Note: Tail lamps - Level 2": 14,
   "Fit Note: Tail lamps - Level 3": 4,
   "Fit Note: Tail lamps - Level 4": 2,
   "Fit Note: Tail lamps - Level 5": 2,
@@ -116996,9 +116980,9 @@
   "Fit Note: Tailgate Less Flexible Step": 2,
   "Fit Note: Taurus": 111,
   "Fit Note: Taxi Package - High Specification": 1,
-  "Fit Note: Telecsp TT Pwr Htd Lighted": 5,
+  "Fit Note: Telecsp TT Pwr Htd Lighted": 4,
   "Fit Note: Trans Power Take Off Provision": 1,
-  "Fit Note: US MARKETS": 28,
+  "Fit Note: US MARKETS": 27,
   "Fit Note: Vermilion": 2,
   "Fit Note: Voga Trim Pack": 1,
   "Fit Note: With 15\" Wheels": 1,
@@ -117013,7 +116997,7 @@
   "Fit Note: With 22\" Wheels": 1,
   "Fit Note: With 2nd Row Console": 1,
   "Fit Note: With 4 Gauge Instrument Cluster": 27,
-  "Fit Note: With 4 Wheel Disc Brake Hydro-Boost": 2,
+  "Fit Note: With 4 Wheel Disc Brake Hydro-Boost": 1,
   "Fit Note: With 49 State/Non Green State Req": 1,
   "Fit Note: With 5.5' Styleside Box": 1,
   "Fit Note: With 6 Gauge Instument Cluster": 28,
@@ -117025,9 +117009,9 @@
   "Fit Note: With Air Conditioning": 6,
   "Fit Note: With Aluminum Headlamp Bezels": 6,
   "Fit Note: With Automated Parking System": 8,
-  "Fit Note: With Automatic Air Conditioning": 5,
+  "Fit Note: With Automatic Air Conditioning": 3,
   "Fit Note: With Aux Overhead Heater And A/C": 8,
-  "Fit Note: With Auxiliary Fuel Ports": 2,
+  "Fit Note: With Auxiliary Fuel Ports": 1,
   "Fit Note: With Black Exterior Mirror": 8,
   "Fit Note: With Body Color Grille/Chrome Bars": 2,
   "Fit Note: With Body Coloured Front Grille": 6,
@@ -117047,7 +117031,7 @@
   "Fit Note: With Driver Manual Mirror": 9,
   "Fit Note: With Driver Power Mirror": 1,
   "Fit Note: With Drivers Heated And Cooled Seat": 2,
-  "Fit Note: With Drivers Heated Seat": 2,
+  "Fit Note: With Drivers Heated Seat": 1,
   "Fit Note: With Drivers Power Mirror": 13,
   "Fit Note: With Dual Manual Exterior Mirrors": 5,
   "Fit Note: With Dual Side Load Doors": 2,
@@ -117062,28 +117046,28 @@
   "Fit Note: With Grey Grille": 5,
   "Fit Note: With Grey Plastic Rear Bumper": 1,
   "Fit Note: With Halogen Headlamp": 22,
-  "Fit Note: With Heated Rear Seats": 2,
+  "Fit Note: With Heated Rear Seats": 1,
   "Fit Note: With Heated Steering Wheel": 1,
   "Fit Note: With Heavy Duty Trailer Towing": 6,
   "Fit Note: With High Ambient Temp/Speed Pack": 1,
   "Fit Note: With Hill Descent Control": 1,
   "Fit Note: With Illuminated Door Entry Keypad": 5,
   "Fit Note: With KMH Speedometer": 3,
-  "Fit Note: With KMH/MPH Speedometer": 64,
-  "Fit Note: With Keyless Entry": 10,
+  "Fit Note: With KMH/MPH Speedometer": 56,
+  "Fit Note: With Keyless Entry": 5,
   "Fit Note: With Keyless Entry System": 2,
   "Fit Note: With LH 2nd Row Fixed Window": 1,
   "Fit Note: With Lead/Unleaded Fuel": 2,
   "Fit Note: With Level 2 Headlamps": 4,
-  "Fit Note: With Level 3 Headlamps": 11,
+  "Fit Note: With Level 3 Headlamps": 9,
   "Fit Note: With Long Wheelbase Package": 2,
-  "Fit Note: With MPH/KMH Speedometer": 68,
-  "Fit Note: With Manual Front Windows": 23,
+  "Fit Note: With MPH/KMH Speedometer": 63,
+  "Fit Note: With Manual Front Windows": 21,
   "Fit Note: With Manual Liftgate": 4,
-  "Fit Note: With Manual Rear Windows": 18,
+  "Fit Note: With Manual Rear Windows": 16,
   "Fit Note: With Monobeam Suspension - Narrow": 6,
   "Fit Note: With Non-Step Type Rear Bumper": 1,
-  "Fit Note: With Onboard Vapour Recovery System": 5,
+  "Fit Note: With Onboard Vapour Recovery System": 3,
   "Fit Note: With Painted Front Bumper": 9,
   "Fit Note: With Painted Rear Bumper": 1,
   "Fit Note: With Passenger Power Mirror": 5,
@@ -117118,16 +117102,16 @@
   "For Aluminum Part": 1,
   "For Electric Motor Cooling Systems": 2,
   "For First Service 3E764 + 3A713 Must Be Updated To April 2011 Design": 2,
-  "For Instrument Cluster QC Issues Contact fesg@ford.com": 578,
+  "For Instrument Cluster QC Issues Contact fesg@ford.com": 553,
   "For Instrument Cluster QC Issues Contact fesg@ford.com / For Instrument Cluster QC Issues Contact fesg@ford.com": 4,
   "For Instrument Cluster QC Issues Contact fesg@ford.com / Order From Instrument Cluster Online Ordering System Using The Online Ordering System": 2,
-  "For Multimedia Systems QC Issues Contact The Ford Electronics Service Group At fesg@ford.com": 7,
+  "For Multimedia Systems QC Issues Contact The Ford Electronics Service Group At fesg@ford.com": 5,
   "For Normal Temperature Zones": 1,
   "For Police Version": 3,
-  "For Unleaded Fuel": 16,
+  "For Unleaded Fuel": 12,
   "For vehicles with small wheellips originally": 4,
   "Ford And Mercury Derivative": 6,
-  "Ford Division Derivative": 96,
+  "Ford Division Derivative": 91,
   "Ford Retail Spec": 24,
   "Foundry Grey": 11,
   "Four-Wheel Drive": 5,
@@ -117150,17 +117134,17 @@
   "Front Bumper-A-GLS Body Clr Upr/Lwr": 61,
   "Front Bumper-Step A-Gloss Accent CO": 61,
   "Front Camera/Rear View Camera": 3,
-  "Front Controls Interface Module (FCIM)": 7,
+  "Front Controls Interface Module (FCIM)": 5,
   "Front Door": 2,
-  "Front LH Door": 14,
+  "Front LH Door": 13,
   "Front Lower / (CP) Designates Crash Part - When Ordering Please Refer To Crash Part Truckload Program Guidelines": 10,
   "Front RH Door": 1,
-  "Front-Wheel Drive (Left Hand Drive)": 12,
+  "Front-Wheel Drive (Left Hand Drive)": 11,
   "Front/Side/Rear View Camera": 16,
   "Fuel Economy Packages Number 5": 3,
   "Fuel Pump": 3,
   "Fuel Pump/Sending Unit": 1,
-  "Full Message Center": 51,
+  "Full Message Center": 43,
   "Fully Assembled": 9,
   "GC": 1,
   "GD": 1,
@@ -117172,11 +117156,11 @@
   "GT version": 2,
   "GWP Less Than 150": 1,
   "Gas engines only": 16,
-  "Gas/Electric Hybrid": 10,
+  "Gas/Electric Hybrid": 6,
   "Glass": 2,
   "Gloss Black": 1,
   "Grained Finish": 9,
-  "Gray / Blue": 3,
+  "Gray / Blue": 2,
   "Gray Mesh": 1,
   "Green / Green": 1,
   "Green Orchid": 2,
@@ -117215,10 +117199,10 @@
   "HBD-KH": 1,
   "HBD-KY": 1,
   "HBD-ND": 1,
-  "HBD-RF": 2,
+  "HBD-RF": 1,
   "HBD-RM": 1,
   "HBD-RN": 2,
-  "HBD-RW": 2,
+  "HBD-RW": 1,
   "HEADLAMP ASY.": 2,
   "HEADLAMP BEZEL-BLACK": 2,
   "HEV SEL": 7,
@@ -117233,21 +117217,21 @@
   "Harvest Gold (lower)": 1,
   "Harvest Gold - must drill holes for w/park aid": 1,
   "Has No Serviceable Components": 1,
-  "Headlamp Assy": 173,
+  "Headlamp Assy": 154,
   "Headlamp and lens assembly-w/o bulb or socket": 2,
   "Headlamps - Fixed DSS (LED)": 4,
   "Headlamps - Halogen": 2,
   "Headlamps - Level 5": 6,
   "Headlamps - Level 7": 4,
   "Headlamps - Unique": 2,
-  "Heated Seats - Drivers/Passengers": 7,
+  "Heated Seats - Drivers/Passengers": 4,
   "Heated Style Replaced By Non Heated With Instructions": 3,
-  "Heating Ventilation Air Conditioning (HVAC) Module": 67,
+  "Heating Ventilation Air Conditioning (HVAC) Module": 34,
   "Heavy Duty Alternator": 5,
   "Hev Taxi Version": 7,
   "Hi series": 2,
   "High Gray": 2,
-  "High Intensity Discharge Headlamp": 31,
+  "High Intensity Discharge Headlamp": 25,
   "High Level Aftermarket Spec": 26,
   "High Level Aftermarket Spec / Non Warranty Repairs": 23,
   "High Performance Instrumentation": 4,
@@ -117256,24 +117240,24 @@
   "High series analog cluster": 4,
   "Holes and bolt circle: 4": 22,
   "Holes and bolt circle: 5": 55,
-  "Holes for Park Aid Sensors Must Be Drilled Out.": 74,
+  "Holes for Park Aid Sensors Must Be Drilled Out.": 72,
   "Hood Assy": 4,
   "Housing & panel asy": 3,
   "Housing - Throttle Plate": 4,
   "Housing Only": 6,
   "Housing and panel asy.": 1,
-  "Human Machine Interface 1": 46,
-  "Human Machine Interface 2": 55,
-  "Human Machine Interface 3": 43,
-  "Human Machine Interface 4": 39,
+  "Human Machine Interface 1": 29,
+  "Human Machine Interface 2": 35,
+  "Human Machine Interface 3": 28,
+  "Human Machine Interface 4": 28,
   "Human Machine Interface 5": 2,
   "Human Machine Interface 6": 5,
   "I/P Insert - Metal Mesh": 3,
   "I/P Insert - Painted": 2,
   "I/P Insert - Satin Grid": 1,
   "I/P Insert - White Oak": 4,
-  "If Equipped": 89,
-  "If Mirror Is Loose/Vibrates/Folds In Wind": 4,
+  "If Equipped": 87,
+  "If Mirror Is Loose/Vibrates/Folds In Wind": 2,
   "If Using For Police Vehicle": 2,
   "Illus. and Type: 107CA": 1,
   "Illus. and Type: 110 CA": 1,
@@ -117350,7 +117334,7 @@
   "Includes Air Conditioning Compressor Module (ACCM) That Cannot Be Removed From The Electric A/C Compressor": 2,
   "Includes Attaching Hardware": 9,
   "Includes Connector": 5,
-  "Includes Cover": 4,
+  "Includes Cover": 2,
   "Includes Emblem": 19,
   "Includes Heated Rear Window/Air Conditioning Control Buttons": 3,
   "Includes Instruction Sheet": 4,
@@ -117367,7 +117351,7 @@
   "Includes Regulator": 22,
   "Includes Regulator.": 1,
   "Includes Sensor Retainers That Are Sonically Welded In Place": 31,
-  "Includes Turn Signal Lens. Turn Signal Assembly Is Serviced In 17682/3": 5,
+  "Includes Turn Signal Lens. Turn Signal Assembly Is Serviced In 17682/3": 3,
   "Includes bulbs": 2,
   "Includes lens & body only": 2,
   "Includes window opening": 4,
@@ -117391,7 +117375,7 @@
   "KPH/MPH": 13,
   "KPH/mph": 16,
   "Kansas City Plant Build": 33,
-  "Kentucky Truck Plant Build": 44,
+  "Kentucky Truck Plant Build": 40,
   "Kentucky Truck build": 10,
   "Kentucky plant build": 2,
   "Keyless Entry - Illuminated Key Pad": 5,
@@ -117433,7 +117417,7 @@
   "LX 3 door (non fleet vehicle) and LX 4 door - w/ or w/o reverse park aid": 2,
   "LX 3 door wagon/van": 1,
   "Lacy spoke": 2,
-  "Lamp Assy - Rear": 151,
+  "Lamp Assy - Rear": 139,
   "Large Rear View Mirror Housing": 4,
   "Lariat": 5,
   "Lariat Special Edition": 2,
@@ -117451,7 +117435,7 @@
   "Less Ambient Temp/Speed Pack": 3,
   "Less Ambient Temp/Speed Package": 8,
   "Less Appearance Group": 54,
-  "Less Automated Parking System": 10,
+  "Less Automated Parking System": 9,
   "Less Auxiliary Air Conditioning": 4,
   "Less BEV Version": 4,
   "Less Blind Spot Information System": 89,
@@ -117479,12 +117463,12 @@
   "Less Harley Davidson Version": 4,
   "Less Heated Rear Window": 10,
   "Less Heated Steering Wheel": 4,
-  "Less Heated Windscreen": 3,
+  "Less Heated Windscreen": 2,
   "Less Heater/Air Con Prep Pack": 1,
   "Less Hole For Lower Moulding": 4,
   "Less Human Machine Interface": 6,
   "Less In-Dash Internet Device-FIA": 4,
-  "Less Interior Light Group": 29,
+  "Less Interior Light Group": 13,
   "Less Keyless Entry System": 3,
   "Less King Ranch Version": 1,
   "Less Logo": 6,
@@ -117492,14 +117476,14 @@
   "Less Manual Shift Auto Trans": 50,
   "Less Message Center": 18,
   "Less Mirror Cover": 1,
-  "Less Motor": 6,
+  "Less Motor": 4,
   "Less No Boundaries Roof Lugg Rack": 11,
   "Less Plug In Hybrid": 2,
-  "Less Police Equip Pack": 22,
+  "Less Police Equip Pack": 16,
   "Less Police Pack": 2,
   "Less Power Convertor": 4,
   "Less Power Point Plug": 8,
-  "Less Pulley": 44,
+  "Less Pulley": 39,
   "Less Radio": 1,
   "Less Rear Bumper Skirt": 6,
   "Less Rear Heated Seat": 2,
@@ -117508,8 +117492,8 @@
   "Less Rear Towing Hooks": 1,
   "Less Reverse Proximity Sensor": 35,
   "Less Sales Badge": 2,
-  "Less Seat Temperature Control": 8,
-  "Less Side Marker Lamps": 7,
+  "Less Seat Temperature Control": 5,
+  "Less Side Marker Lamps": 6,
   "Less Signal Mirror System": 2,
   "Less Skid Plates": 4,
   "Less Special Equipment Pkg.": 1,
@@ -117519,13 +117503,13 @@
   "Less Spot Light": 17,
   "Less Stripped Chassis": 8,
   "Less Supplemental Parking Lamps": 8,
-  "Less Temp Control Driver Seat": 82,
+  "Less Temp Control Driver Seat": 61,
   "Less Temp Control Passenger Seat": 4,
   "Less Trailer Towing": 13,
   "Less Transmission Power Take Off": 4,
   "Less Trim Pack": 2,
   "Less Underbody Protection": 11,
-  "Less Version Packages": 156,
+  "Less Version Packages": 143,
   "Less window opening": 4,
   "Light Arizona Beige Insert": 1,
   "Light Parchment": 1,
@@ -117595,10 +117579,10 @@
   "Main Control Unit": 4,
   "Main control located in instrument panel": 1,
   "Male": 2,
-  "Manual Air Conditioning": 29,
-  "Manual Before Ordering A Replacement Mirror Assembly": 4,
+  "Manual Air Conditioning": 26,
+  "Manual Before Ordering A Replacement Mirror Assembly": 2,
   "Manual Dual Exterior Mirrors": 1,
-  "Manual Dual Mirror-Manual Fold Back": 4,
+  "Manual Dual Mirror-Manual Fold Back": 3,
   "Market Road Condition - Severe": 1,
   "Mauve/Green": 1,
   "Mauve/Green (replaced by XW7Z-3A674-ABRM)": 1,
@@ -117612,7 +117596,7 @@
   "Medium Steel Blue - must drill holes for w/park aid": 1,
   "Medium Toreador Red": 6,
   "Medium Wedgewood Blue": 9,
-  "Mercury Division Derivative": 182,
+  "Mercury Division Derivative": 177,
   "Mercury Premier": 1,
   "Mesh Type": 2,
   "Message Center With Compass": 1,
@@ -117624,26 +117608,26 @@
   "Midship": 3,
   "Mineral Grey Metallic C/C": 6,
   "Mini": 1,
-  "Mini Message Center": 70,
+  "Mini Message Center": 59,
   "Mini-spare - steel": 1,
   "Minimum order for any combination of \"Volume Crash Part\" facias is 96 pieces (Truck load = 192 pieces)": 1,
-  "Mirror Assy": 100,
+  "Mirror Assy": 89,
   "Mirror Design Does Not Have A Removable/Serviceable Skull Cap": 8,
-  "Mirror Does Not Come With 17D742 Skull Cap. Must Order Separately": 38,
-  "Module - Electronic Automatic Temperature Control (EATC)": 7,
+  "Mirror Does Not Come With 17D742 Skull Cap. Must Order Separately": 36,
+  "Module - Electronic Automatic Temperature Control (EATC)": 3,
   "Moisture Purge Module": 3,
   "Molding": 10,
   "Monterrey Grey": 2,
   "Motor And Attaching Components": 13,
-  "Motor Assy": 66,
-  "Motor Assy - Window Operating": 49,
-  "Motorcraft": 34,
+  "Motor Assy": 61,
+  "Motor Assy - Window Operating": 47,
+  "Motorcraft": 33,
   "Motorcraft TA-1": 2,
   "Mounting gasket XW4Z-9276-AA.": 1,
   "Mounting gasket is XW4Z-9276-AA. 7 pin harness connector. Includes F87Z-9C052-AA Transducer.": 2,
   "Muffler W/ Dual Exhaust": 12,
   "Muffler W/ Single Chrome Tip": 15,
-  "Multiple Switch": 26,
+  "Multiple Switch": 25,
   "Must Also Order - 385967-S300 Plug": 3,
   "Must Also Order 15A101 (Strobe) If Applicable": 2,
   "Must Be Obtained Separately If Necessary": 2,
@@ -117685,10 +117669,10 @@
   "Orange / Green": 1,
   "Orange/Gray": 1,
   "Order 9L3Z 5423726A 30 MM Circle Tape To Cover Unused Holes": 60,
-  "Order From Audio/Multimedia Center Online Ordering System Using The Online 1878 Form": 9,
-  "Order From Instrument Cluster Online Ordering System Using The Online 1878 Form": 603,
+  "Order From Audio/Multimedia Center Online Ordering System Using The Online 1878 Form": 7,
+  "Order From Instrument Cluster Online Ordering System Using The Online 1878 Form": 553,
   "Order From Instrument Cluster Online Ordering System Using The Online 1878 Form / For Instrument Cluster QC Issues Contact fesg@ford.com": 1,
-  "Order From Instrument Cluster Online Ordering System Using The Online Ordering System": 405,
+  "Order From Instrument Cluster Online Ordering System Using The Online Ordering System": 364,
   "Original Equipment Manufacture": 1,
   "Original Equipment Manufacture (OEM)": 1,
   "Original Equipment Manufacturer": 27,
@@ -117706,12 +117690,12 @@
   "PUMP ASY.": 1,
   "PZEV Evaporative Emission": 2,
   "Pacific Green - includes lens & body only": 2,
-  "Package Quantity: 1": 643,
+  "Package Quantity: 1": 640,
   "Paint To Match - Reference TSB 03-10-1": 167,
   "Paint To Match Honeycomb Insert": 1,
   "Paint To Match Surround": 5,
   "Paint to Match (upper)- use with FS": 1,
-  "Paint to match": 598,
+  "Paint to match": 596,
   "Paint to match (does not accept 17C829 bright moulding)": 1,
   "Paint to match (includes bumper bar)": 1,
   "Paint to match (upper)- use with B2 paint code": 1,
@@ -117757,11 +117741,11 @@
   "Pass Pwr Heated W/Puddle Lamp": 5,
   "Pass Pwr Htd Mirror-Cr Sk Caps": 8,
   "Pass Pwr/Htd/Mem/Puddle Lamp Mirror": 7,
-  "Pass Pwr/Htd/Pud/Man T-Tow Mirror": 10,
+  "Pass Pwr/Htd/Pud/Man T-Tow Mirror": 8,
   "Pass Pwr/Pud Lmp/Body Color": 8,
-  "Pass Sail/Man/Man T-Tow Mirror": 3,
+  "Pass Sail/Man/Man T-Tow Mirror": 2,
   "Passenger Power Heated Ext Mirror": 2,
-  "Passenger Pwr Fld/Htd W/Puddle Lamp": 11,
+  "Passenger Pwr Fld/Htd W/Puddle Lamp": 10,
   "Passengers Power Aerodynamic Mirror": 7,
   "Performance": 8,
   "Pillar Black": 1,
@@ -117791,9 +117775,9 @@
   "Prem AM/FM Stereo/CD CHG/CLK/MP3": 1,
   "Premium": 8,
   "Primary": 1,
-  "Prime - Paint To Match": 21,
+  "Prime - Paint To Match": 19,
   "Prime Paint To Match When Color Has Not Been Released For Service": 1,
-  "Primed": 57,
+  "Primed": 56,
   "Primed - Paint to Match": 4,
   "Primed - Paint to match grille": 4,
   "Primed - paint to match": 9,
@@ -117806,7 +117790,7 @@
   "Production Date: 01/2000-04/2003": 1,
   "Production Date: 01/2000-05/2003": 4,
   "Production Date: 01/2000-06/2005": 10,
-  "Production Date: 01/2000-07/2000": 2,
+  "Production Date: 01/2000-07/2000": 1,
   "Production Date: 01/2000-08/2003": 4,
   "Production Date: 01/2000-12/2002": 1,
   "Production Date: 01/2001-05/2003": 2,
@@ -117814,11 +117798,9 @@
   "Production Date: 01/2004-08/2004": 1,
   "Production Date: 01/2004-08/2005": 4,
   "Production Date: 01/2007-02/2007": 4,
-  "Production Date: 01/2007-03/2007": 1,
   "Production Date: 01/2007-03/2008": 1,
-  "Production Date: 01/2007-04/2007": 8,
+  "Production Date: 01/2007-04/2007": 5,
   "Production Date: 01/2007-04/2012": 17,
-  "Production Date: 01/2007-06/2007": 1,
   "Production Date: 01/2007-06/2008": 6,
   "Production Date: 01/2007-07/2010": 2,
   "Production Date: 01/2007-08/2007": 1,
@@ -117827,15 +117809,12 @@
   "Production Date: 01/2008-04/2009": 1,
   "Production Date: 01/2008-07/2008": 3,
   "Production Date: 01/2008-09/2008": 2,
-  "Production Date: 01/2010-02/2010": 4,
   "Production Date: 01/2010-03/2010": 6,
-  "Production Date: 01/2010-07/2010": 1,
   "Production Date: 01/2011-02/2012": 7,
   "Production Date: 01/2011-03/2011": 4,
   "Production Date: 01/2011-03/2012": 2,
   "Production Date: 01/2011-04/2013": 1,
   "Production Date: 01/2011-06/2011": 5,
-  "Production Date: 01/2011-07/2011": 1,
   "Production Date: 01/2011-07/2012": 13,
   "Production Date: 01/2011-08/2014": 2,
   "Production Date: 01/2011-10/2012": 1,
@@ -117846,7 +117825,6 @@
   "Production Date: 01/2013-03/2014": 1,
   "Production Date: 01/2013-05/2015": 3,
   "Production Date: 01/2013-12/2013": 1,
-  "Production Date: 01/2014-03/2014": 1,
   "Production Date: 01/2015-04/2016": 1,
   "Production Date: 01/2016-01/2017": 3,
   "Production Date: 01/2016-02/2016": 1,
@@ -117861,34 +117839,30 @@
   "Production Date: 02/2004-02/2005": 3,
   "Production Date: 02/2004-08/2004": 1,
   "Production Date: 02/2004-12/2014": 2,
-  "Production Date: 02/2005-05/2005": 4,
   "Production Date: 02/2005-10/2005": 1,
   "Production Date: 02/2006-02/2009": 1,
   "Production Date: 02/2006-07/2012": 4,
   "Production Date: 02/2006-09/2009": 1,
   "Production Date: 02/2007-02/2010": 1,
   "Production Date: 02/2007-04/2007": 4,
-  "Production Date: 02/2007-07/2007": 12,
+  "Production Date: 02/2007-07/2007": 6,
   "Production Date: 02/2007-09/2008": 1,
   "Production Date: 02/2008-03/2008": 5,
-  "Production Date: 02/2008-05/2008": 10,
+  "Production Date: 02/2008-05/2008": 6,
   "Production Date: 02/2008-06/2008": 4,
   "Production Date: 02/2008-06/2009": 3,
   "Production Date: 02/2009-01/2011": 3,
-  "Production Date: 02/2009-02/2009": 1,
   "Production Date: 02/2009-02/2012": 3,
-  "Production Date: 02/2009-03/2009": 3,
   "Production Date: 02/2009-03/2010": 2,
   "Production Date: 02/2009-05/2010": 7,
-  "Production Date: 02/2009-06/2009": 29,
+  "Production Date: 02/2009-06/2009": 25,
   "Production Date: 02/2009-06/2014": 12,
-  "Production Date: 02/2009-07/2009": 15,
+  "Production Date: 02/2009-07/2009": 14,
   "Production Date: 02/2009-07/2012": 188,
   "Production Date: 02/2009-08/2009": 13,
   "Production Date: 02/2009-08/2010": 1,
   "Production Date: 02/2009-09/2009": 2,
-  "Production Date: 02/2010-03/2010": 2,
-  "Production Date: 02/2010-04/2010": 3,
+  "Production Date: 02/2010-03/2010": 1,
   "Production Date: 02/2010-07/2016": 16,
   "Production Date: 02/2010-08/2012": 2,
   "Production Date: 02/2010-08/2015": 2,
@@ -117904,17 +117878,12 @@
   "Production Date: 02/2011-12/2014": 4,
   "Production Date: 02/2012-01/2014": 2,
   "Production Date: 02/2012-02/2014": 4,
-  "Production Date: 02/2012-03/2012": 2,
   "Production Date: 02/2012-03/2013": 4,
-  "Production Date: 02/2012-04/2012": 3,
-  "Production Date: 02/2012-05/2012": 1,
   "Production Date: 02/2012-05/2015": 6,
-  "Production Date: 02/2012-06/2012": 7,
   "Production Date: 02/2012-06/2013": 1,
   "Production Date: 02/2012-06/2014": 2,
-  "Production Date: 02/2012-07/2012": 12,
-  "Production Date: 02/2012-09/2012": 14,
-  "Production Date: 02/2012-10/2012": 3,
+  "Production Date: 02/2012-07/2012": 10,
+  "Production Date: 02/2012-09/2012": 11,
   "Production Date: 02/2012-11/2012": 1,
   "Production Date: 02/2012-12/2012": 5,
   "Production Date: 02/2013-12/2014": 5,
@@ -117939,42 +117908,28 @@
   "Production Date: 03/2002-12/2002": 2,
   "Production Date: 03/2004-04/2004": 1,
   "Production Date: 03/2004-08/2004": 1,
-  "Production Date: 03/2005-06/2009": 3,
-  "Production Date: 03/2005-07/2005": 16,
-  "Production Date: 03/2005-10/2005": 1,
+  "Production Date: 03/2005-06/2009": 2,
+  "Production Date: 03/2005-07/2005": 12,
   "Production Date: 03/2005-12/2005": 1,
-  "Production Date: 03/2007-06/2007": 1,
   "Production Date: 03/2007-07/2012": 4,
   "Production Date: 03/2007-11/2007": 1,
-  "Production Date: 03/2008-02/2010": 2,
-  "Production Date: 03/2008-04/2012": 1,
-  "Production Date: 03/2008-06/2008": 7,
-  "Production Date: 03/2008-09/2008": 4,
-  "Production Date: 03/2009-05/2010": 1,
+  "Production Date: 03/2008-06/2008": 5,
   "Production Date: 03/2010-03/2010": 2,
-  "Production Date: 03/2010-05/2010": 1,
   "Production Date: 03/2010-07/2010": 2,
   "Production Date: 03/2011-04/2012": 1,
   "Production Date: 03/2011-07/2011": 4,
   "Production Date: 03/2011-07/2012": 2,
   "Production Date: 03/2011-08/2011": 1,
-  "Production Date: 03/2012-04/2012": 2,
-  "Production Date: 03/2012-05/2012": 1,
   "Production Date: 03/2012-07/2012": 2,
   "Production Date: 03/2012-11/2017": 4,
   "Production Date: 03/2013-12/2014": 1,
   "Production Date: 03/2015-07/2017": 2,
   "Production Date: 03/2015-12/2015": 1,
-  "Production Date: 03/2016-05/2016": 1,
-  "Production Date: 03/2016-06/2016": 4,
-  "Production Date: 03/2016-07/2016": 2,
-  "Production Date: 03/2016-09/2016": 6,
-  "Production Date: 03/2017-08/2018": 2,
+  "Production Date: 03/2016-07/2016": 1,
+  "Production Date: 03/2016-09/2016": 2,
   "Production Date: 04/2004-02/2005": 2,
   "Production Date: 04/2004-08/2004": 1,
-  "Production Date: 04/2004-08/2005": 2,
   "Production Date: 04/2004-08/2007": 5,
-  "Production Date: 04/2004-11/2004": 1,
   "Production Date: 04/2004-12/2010": 4,
   "Production Date: 04/2005-05/2005": 1,
   "Production Date: 04/2005-07/2005": 1,
@@ -117983,16 +117938,14 @@
   "Production Date: 04/2005-12/2005": 8,
   "Production Date: 04/2007-02/2008": 1,
   "Production Date: 04/2007-02/2010": 1,
-  "Production Date: 04/2007-05/2007": 2,
   "Production Date: 04/2007-06/2007": 5,
   "Production Date: 04/2007-06/2008": 1,
   "Production Date: 04/2007-06/2009": 7,
-  "Production Date: 04/2007-07/2007": 3,
+  "Production Date: 04/2007-07/2007": 1,
   "Production Date: 04/2007-08/2010": 2,
   "Production Date: 04/2007-11/2007": 3,
   "Production Date: 04/2007-12/2007": 11,
   "Production Date: 04/2007-12/2008": 6,
-  "Production Date: 04/2008-06/2008": 2,
   "Production Date: 04/2009-05/2010": 2,
   "Production Date: 04/2009-06/2009": 1,
   "Production Date: 04/2009-12/2010": 2,
@@ -118000,7 +117953,6 @@
   "Production Date: 04/2010-01/2011": 2,
   "Production Date: 04/2010-01/2013": 1,
   "Production Date: 04/2010-04/2013": 13,
-  "Production Date: 04/2010-05/2010": 3,
   "Production Date: 04/2010-06/2010": 2,
   "Production Date: 04/2010-07/2010": 2,
   "Production Date: 04/2010-07/2011": 3,
@@ -118011,7 +117963,6 @@
   "Production Date: 04/2012-03/2013": 1,
   "Production Date: 04/2012-03/2014": 3,
   "Production Date: 04/2012-03/2016": 4,
-  "Production Date: 04/2012-05/2012": 1,
   "Production Date: 04/2012-05/2015": 2,
   "Production Date: 04/2012-06/2013": 2,
   "Production Date: 04/2012-09/2014": 1,
@@ -118025,7 +117976,6 @@
   "Production Date: 04/2016-02/2018": 6,
   "Production Date: 04/2016-03/2017": 4,
   "Production Date: 04/2016-06/2016": 2,
-  "Production Date: 04/2016-06/2017": 2,
   "Production Date: 04/2016-07/2016": 2,
   "Production Date: 04/2016-08/2016": 12,
   "Production Date: 04/2016-08/2018": 2,
@@ -118033,49 +117983,37 @@
   "Production Date: 04/2017-08/2017": 6,
   "Production Date: 05/2005-02/2006": 1,
   "Production Date: 05/2005-05/2005": 1,
-  "Production Date: 05/2005-07/2005": 4,
-  "Production Date: 05/2005-08/2007": 2,
+  "Production Date: 05/2005-07/2005": 2,
   "Production Date: 05/2005-10/2005": 1,
   "Production Date: 05/2005-12/2005": 3,
   "Production Date: 05/2005-12/2007": 3,
   "Production Date: 05/2007-01/2008": 3,
   "Production Date: 05/2007-01/2009": 1,
   "Production Date: 05/2007-02/2008": 1,
-  "Production Date: 05/2007-07/2007": 2,
-  "Production Date: 05/2007-08/2007": 2,
+  "Production Date: 05/2007-07/2007": 1,
   "Production Date: 05/2008-02/2009": 1,
   "Production Date: 05/2008-02/2012": 18,
   "Production Date: 05/2008-03/2009": 1,
   "Production Date: 05/2008-05/2009": 2,
-  "Production Date: 05/2008-06/2008": 3,
-  "Production Date: 05/2008-06/2009": 1,
   "Production Date: 05/2008-07/2009": 2,
-  "Production Date: 05/2008-08/2008": 11,
-  "Production Date: 05/2008-10/2008": 4,
+  "Production Date: 05/2008-08/2008": 6,
   "Production Date: 05/2008-12/2008": 2,
-  "Production Date: 05/2009-08/2009": 1,
   "Production Date: 05/2009-09/2010": 2,
   "Production Date: 05/2010-02/2012": 3,
   "Production Date: 05/2010-07/2012": 4,
   "Production Date: 05/2010-09/2010": 6,
   "Production Date: 05/2010-09/2013": 1,
   "Production Date: 05/2010-10/2010": 2,
-  "Production Date: 05/2010-11/2010": 2,
   "Production Date: 05/2012-04/2014": 1,
   "Production Date: 05/2012-11/2013": 2,
-  "Production Date: 05/2012-12/2014": 1,
   "Production Date: 05/2013-04/2016": 2,
-  "Production Date: 05/2013-09/2013": 1,
-  "Production Date: 05/2013-10/2013": 2,
-  "Production Date: 05/2013-12/2014": 2,
+  "Production Date: 05/2013-12/2014": 1,
   "Production Date: 05/2014-11/2014": 1,
   "Production Date: 05/2015-01/2016": 8,
   "Production Date: 05/2015-04/2018": 4,
   "Production Date: 05/2015-05/2016": 1,
-  "Production Date: 05/2015-08/2015": 2,
+  "Production Date: 05/2015-08/2015": 1,
   "Production Date: 05/2015-08/2017": 1,
-  "Production Date: 05/2015-09/2015": 4,
-  "Production Date: 05/2015-10/2015": 1,
   "Production Date: 05/2015-10/2017": 1,
   "Production Date: 05/2016-02/2018": 1,
   "Production Date: 05/2016-08/2017": 1,
@@ -118092,41 +118030,33 @@
   "Production Date: 06/2003-08/2004": 5,
   "Production Date: 06/2003-08/2005": 8,
   "Production Date: 06/2003-09/2003": 1,
-  "Production Date: 06/2003-10/2003": 7,
+  "Production Date: 06/2003-10/2003": 4,
   "Production Date: 06/2003-12/2003": 6,
   "Production Date: 06/2003-12/2014": 8,
   "Production Date: 06/2005-07/2005": 1,
   "Production Date: 06/2005-12/2005": 1,
   "Production Date: 06/2006-07/2007": 2,
   "Production Date: 06/2006-07/2008": 12,
-  "Production Date: 06/2006-09/2007": 6,
   "Production Date: 06/2006-09/2011": 10,
   "Production Date: 06/2006-12/2007": 1,
   "Production Date: 06/2007-02/2008": 10,
   "Production Date: 06/2007-04/2012": 1,
-  "Production Date: 06/2007-05/2009": 1,
   "Production Date: 06/2007-06/2009": 4,
-  "Production Date: 06/2007-07/2007": 18,
+  "Production Date: 06/2007-07/2007": 9,
   "Production Date: 06/2007-08/2008": 1,
   "Production Date: 06/2007-09/2008": 2,
   "Production Date: 06/2007-12/2007": 3,
-  "Production Date: 06/2007-12/2010": 1,
   "Production Date: 06/2008-01/2009": 1,
   "Production Date: 06/2008-04/2012": 2,
   "Production Date: 06/2008-06/2009": 1,
-  "Production Date: 06/2008-09/2008": 2,
   "Production Date: 06/2009-02/2012": 4,
-  "Production Date: 06/2009-05/2010": 3,
   "Production Date: 06/2009-08/2009": 25,
   "Production Date: 06/2009-10/2010": 1,
   "Production Date: 06/2010-04/2013": 2,
   "Production Date: 06/2011-04/2012": 1,
-  "Production Date: 06/2011-08/2011": 5,
   "Production Date: 06/2012-02/2014": 2,
   "Production Date: 06/2012-07/2012": 1,
   "Production Date: 06/2012-11/2012": 4,
-  "Production Date: 06/2014-03/2015": 1,
-  "Production Date: 06/2014-07/2014": 2,
   "Production Date: 06/2014-11/2014": 5,
   "Production Date: 06/2016-08/2017": 2,
   "Production Date: 06/2016-12/2016": 1,
@@ -118143,7 +118073,7 @@
   "Production Date: 07/2004-06/2009": 2,
   "Production Date: 07/2004-11/2004": 1,
   "Production Date: 07/2005-02/2006": 1,
-  "Production Date: 07/2005-07/2005": 2,
+  "Production Date: 07/2005-07/2005": 1,
   "Production Date: 07/2005-08/2006": 8,
   "Production Date: 07/2005-08/2007": 4,
   "Production Date: 07/2005-11/2010": 1,
@@ -118152,7 +118082,7 @@
   "Production Date: 07/2007-02/2009": 18,
   "Production Date: 07/2007-03/2008": 2,
   "Production Date: 07/2007-06/2009": 1,
-  "Production Date: 07/2007-07/2007": 24,
+  "Production Date: 07/2007-07/2007": 12,
   "Production Date: 07/2007-07/2012": 3,
   "Production Date: 07/2007-08/2008": 6,
   "Production Date: 07/2007-11/2007": 34,
@@ -118172,24 +118102,20 @@
   "Production Date: 07/2010-01/2012": 1,
   "Production Date: 07/2010-02/2011": 7,
   "Production Date: 07/2010-02/2012": 4,
-  "Production Date: 07/2010-04/2012": 2,
-  "Production Date: 07/2010-07/2010": 1,
   "Production Date: 07/2010-07/2011": 4,
   "Production Date: 07/2010-07/2012": 14,
   "Production Date: 07/2010-08/2010": 3,
-  "Production Date: 07/2010-09/2010": 12,
+  "Production Date: 07/2010-09/2010": 8,
   "Production Date: 07/2010-09/2011": 3,
-  "Production Date: 07/2010-10/2010": 5,
+  "Production Date: 07/2010-10/2010": 2,
   "Production Date: 07/2010-12/2014": 26,
-  "Production Date: 07/2011-08/2011": 2,
-  "Production Date: 07/2011-09/2012": 1,
   "Production Date: 07/2012-01/2013": 2,
   "Production Date: 07/2012-04/2016": 2,
   "Production Date: 07/2012-07/2013": 2,
   "Production Date: 07/2012-09/2014": 2,
   "Production Date: 07/2012-10/2014": 2,
   "Production Date: 07/2012-11/2013": 8,
-  "Production Date: 07/2012-12/2012": 3,
+  "Production Date: 07/2012-12/2012": 2,
   "Production Date: 07/2012-12/2014": 7,
   "Production Date: 07/2013-04/2016": 1,
   "Production Date: 07/2013-10/2013": 3,
@@ -118210,9 +118136,7 @@
   "Production Date: 08/2003-08/2004": 4,
   "Production Date: 08/2003-12/2003": 1,
   "Production Date: 08/2003-12/2011": 2,
-  "Production Date: 08/2004-05/2005": 1,
   "Production Date: 08/2004-05/2006": 8,
-  "Production Date: 08/2004-08/2005": 1,
   "Production Date: 08/2004-08/2006": 3,
   "Production Date: 08/2004-08/2008": 1,
   "Production Date: 08/2004-08/2014": 4,
@@ -118239,7 +118163,6 @@
   "Production Date: 08/2006-08/2011": 2,
   "Production Date: 08/2006-09/2006": 1,
   "Production Date: 08/2006-09/2008": 2,
-  "Production Date: 08/2006-10/2007": 1,
   "Production Date: 08/2006-12/2006": 12,
   "Production Date: 08/2006-12/2010": 4,
   "Production Date: 08/2007-02/2010": 2,
@@ -118251,7 +118174,7 @@
   "Production Date: 08/2008-02/2013": 10,
   "Production Date: 08/2008-08/2010": 2,
   "Production Date: 08/2008-08/2012": 4,
-  "Production Date: 08/2008-09/2008": 22,
+  "Production Date: 08/2008-09/2008": 10,
   "Production Date: 08/2008-09/2010": 2,
   "Production Date: 08/2008-11/2009": 2,
   "Production Date: 08/2008-11/2010": 14,
@@ -118269,10 +118192,7 @@
   "Production Date: 08/2010-09/2010": 2,
   "Production Date: 08/2010-10/2010": 1,
   "Production Date: 08/2010-11/2010": 1,
-  "Production Date: 08/2010-12/2014": 3,
-  "Production Date: 08/2011-02/2012": 1,
-  "Production Date: 08/2011-03/2012": 4,
-  "Production Date: 08/2011-04/2012": 1,
+  "Production Date: 08/2011-03/2012": 1,
   "Production Date: 08/2012-02/2014": 1,
   "Production Date: 08/2012-04/2016": 8,
   "Production Date: 08/2012-06/2017": 2,
@@ -118302,28 +118222,23 @@
   "Production Date: 09/2008-05/2010": 2,
   "Production Date: 09/2008-05/2013": 1,
   "Production Date: 09/2008-06/2009": 2,
-  "Production Date: 09/2008-09/2008": 33,
+  "Production Date: 09/2008-09/2008": 17,
   "Production Date: 09/2008-12/2010": 8,
   "Production Date: 09/2009-07/2012": 2,
-  "Production Date: 09/2009-11/2009": 1,
   "Production Date: 09/2009-12/2010": 1,
   "Production Date: 09/2010-01/2011": 5,
   "Production Date: 09/2010-02/2011": 2,
   "Production Date: 09/2010-07/2012": 6,
-  "Production Date: 09/2010-11/2010": 10,
+  "Production Date: 09/2010-11/2010": 9,
   "Production Date: 09/2011-12/2014": 6,
   "Production Date: 09/2012-01/2013": 1,
   "Production Date: 09/2012-03/2013": 2,
   "Production Date: 09/2012-04/2014": 2,
   "Production Date: 09/2012-06/2013": 7,
   "Production Date: 09/2013-01/2015": 1,
-  "Production Date: 09/2013-09/2014": 1,
   "Production Date: 09/2013-10/2014": 2,
   "Production Date: 09/2013-11/2014": 1,
-  "Production Date: 09/2013-12/2013": 1,
-  "Production Date: 09/2013-12/2014": 1,
   "Production Date: 09/2014-06/2015": 1,
-  "Production Date: 09/2014-09/2014": 1,
   "Production Date: 09/2015-01/2016": 2,
   "Production Date: 09/2015-03/2016": 2,
   "Production Date: 09/2015-09/2016": 1,
@@ -118338,7 +118253,6 @@
   "Production Date: 10/2005-05/2006": 6,
   "Production Date: 10/2008-06/2014": 2,
   "Production Date: 10/2009-03/2013": 2,
-  "Production Date: 10/2010-01/2011": 2,
   "Production Date: 10/2010-02/2011": 1,
   "Production Date: 10/2010-07/2012": 4,
   "Production Date: 10/2011-12/2014": 1,
@@ -118355,7 +118269,6 @@
   "Production Date: 10/2014-08/2016": 1,
   "Production Date: 10/2014-09/2016": 3,
   "Production Date: 10/2014-12/2015": 2,
-  "Production Date: 10/2015-01/2016": 1,
   "Production Date: 10/2015-02/2016": 1,
   "Production Date: 10/2015-03/2016": 11,
   "Production Date: 10/2015-04/2016": 1,
@@ -118370,7 +118283,6 @@
   "Production Date: 11/2003-09/2004": 1,
   "Production Date: 11/2003-10/2004": 1,
   "Production Date: 11/2004-03/2005": 1,
-  "Production Date: 11/2006-01/2007": 2,
   "Production Date: 11/2006-07/2010": 2,
   "Production Date: 11/2006-07/2012": 1,
   "Production Date: 11/2006-08/2007": 2,
@@ -118383,23 +118295,18 @@
   "Production Date: 11/2007-06/2008": 2,
   "Production Date: 11/2007-08/2008": 4,
   "Production Date: 11/2007-09/2008": 17,
-  "Production Date: 11/2009-01/2010": 4,
   "Production Date: 11/2009-02/2011": 2,
   "Production Date: 11/2009-02/2012": 6,
   "Production Date: 11/2009-04/2010": 2,
-  "Production Date: 11/2009-07/2010": 3,
   "Production Date: 11/2009-12/2010": 1,
   "Production Date: 11/2010-01/2011": 2,
   "Production Date: 11/2010-02/2012": 1,
-  "Production Date: 11/2010-04/2012": 4,
   "Production Date: 11/2010-05/2013": 2,
   "Production Date: 11/2010-05/2015": 1,
   "Production Date: 11/2010-06/2014": 2,
   "Production Date: 11/2010-08/2011": 1,
   "Production Date: 11/2010-08/2012": 1,
-  "Production Date: 11/2010-10/2012": 1,
   "Production Date: 11/2010-12/2014": 18,
-  "Production Date: 11/2011-04/2012": 1,
   "Production Date: 11/2011-12/2014": 4,
   "Production Date: 11/2012-04/2014": 1,
   "Production Date: 11/2012-06/2013": 5,
@@ -118432,24 +118339,23 @@
   "Production Date: 12/2005-12/2007": 6,
   "Production Date: 12/2005-12/2008": 1,
   "Production Date: 12/2005-12/2010": 8,
-  "Production Date: 12/2006-02/2007": 11,
+  "Production Date: 12/2006-02/2007": 5,
   "Production Date: 12/2006-02/2010": 22,
-  "Production Date: 12/2006-04/2007": 7,
-  "Production Date: 12/2006-05/2007": 2,
-  "Production Date: 12/2006-06/2007": 22,
-  "Production Date: 12/2006-07/2007": 13,
+  "Production Date: 12/2006-04/2007": 3,
+  "Production Date: 12/2006-05/2007": 1,
+  "Production Date: 12/2006-06/2007": 15,
+  "Production Date: 12/2006-07/2007": 3,
   "Production Date: 12/2006-08/2007": 4,
   "Production Date: 12/2006-08/2014": 8,
   "Production Date: 12/2006-09/2008": 5,
   "Production Date: 12/2006-12/2007": 2,
-  "Production Date: 12/2007-01/2008": 2,
+  "Production Date: 12/2007-01/2008": 1,
   "Production Date: 12/2007-02/2008": 8,
   "Production Date: 12/2007-02/2010": 4,
   "Production Date: 12/2007-05/2008": 1,
   "Production Date: 12/2007-06/2009": 6,
   "Production Date: 12/2007-08/2008": 8,
   "Production Date: 12/2007-09/2008": 14,
-  "Production Date: 12/2008-09/2009": 2,
   "Production Date: 12/2008-11/2009": 2,
   "Production Date: 12/2009-03/2010": 1,
   "Production Date: 12/2011-05/2012": 1,
@@ -118459,8 +118365,6 @@
   "Production Date: 12/2012-06/2013": 4,
   "Production Date: 12/2013-06/2014": 1,
   "Production Date: 12/2014-01/2016": 1,
-  "Production Date: 12/2014-02/2015": 10,
-  "Production Date: 12/2014-03/2015": 2,
   "Production Date: 12/2014-03/2018": 1,
   "Production Date: 12/2014-06/2015": 1,
   "Production Date: 12/2014-07/2015": 1,
@@ -118561,7 +118465,7 @@
   "RH - Outer": 2,
   "RH - excludes cover": 1,
   "RH front and RH and LH rear": 2,
-  "RH/LH": 14,
+  "RH/LH": 11,
   "ROOF CONV-PANORAMIC TLOS": 1,
   "Race Red": 1,
   "Radiator Assy": 4,
@@ -118595,8 +118499,8 @@
   "Refer to oasis message on 6G alternators.)": 6,
   "Refer to oasis message on 6G alternators.)PCM Controlled": 2,
   "Regulator - Window - Less Motor": 22,
-  "Regulator Assy": 78,
-  "Regulator Asy - Window": 72,
+  "Regulator Assy": 76,
+  "Regulator Asy - Window": 70,
   "Reinforcement": 10,
   "Reinforcement - Member": 1,
   "Reman - 130 amp": 1,
@@ -118607,7 +118511,7 @@
   "Replacing Part Is Paint To Match": 17,
   "Replacing Parts Will Not Have Hole For Tow Ball": 8,
   "Require Quantity: 10": 1,
-  "Require Quantity: 2": 28,
+  "Require Quantity: 2": 25,
   "Require Quantity: 3": 14,
   "Require Quantity: 4": 530,
   "Require Quantity: 5": 3,
@@ -118626,7 +118530,7 @@
   "SE Badge": 8,
   "SE and SEL version": 2,
   "SE/SEL": 1,
-  "SEL": 78,
+  "SEL": 76,
   "SEL Sales Badge": 6,
   "SEL and Limited": 1,
   "SES Badge": 8,
@@ -118645,7 +118549,7 @@
   "SVT Lightning": 6,
   "SVT Pack": 6,
   "Sanden SD-709 (comp only)": 1,
-  "Satin Aluminum Finish": 21,
+  "Satin Aluminum Finish": 19,
   "Satin Brush Aluminum": 3,
   "Satin Chrome": 1,
   "Satin Nickel": 5,
@@ -118653,8 +118557,8 @@
   "Screws": 2,
   "Seals Included": 4,
   "Secondary": 1,
-  "See Basic 17D742": 40,
-  "See Basic 17D743": 41,
+  "See Basic 17D742": 39,
+  "See Basic 17D743": 40,
   "See Note - Contains a programmed speedometer/odometer unit for all vehicles (titled & untitled)": 1,
   "See Note 1": 2,
   "See Note 1 - Contains a programmed speedometer/odometer unit for all vehicles (titled & untitled)": 3,
@@ -118716,7 +118620,7 @@
   "Smooth - includes integral step pad 3 per pack. Minimum order for any combination of Volume Crash Part Facias 96 pieces. (Truck load = 192 pieces)": 1,
   "Smooth Finish": 18,
   "Sockets": 32,
-  "Solid Housing. 17D742 Cover Not Required": 12,
+  "Solid Housing. 17D742 Cover Not Required": 6,
   "Sony Feature Car": 1,
   "Spare Tire - P255/65HR17 A/S BSW": 1,
   "Spare Wheel - 16\" Alum - Cap & Lugs": 1,
@@ -118737,7 +118641,7 @@
   "Sport Mode Manual Shift Auto": 8,
   "Sport Plus": 6,
   "Square type": 2,
-  "Standard Duty Alternator": 2,
+  "Standard Duty Alternator": 1,
   "Standard cooling": 7,
   "Starter Motor Assy": 2,
   "Steel": 29,
@@ -118747,7 +118651,7 @@
   "Steel with fog lamp holes": 1,
   "Steel without fog lamps": 1,
   "Steel-TRUCKLOAD PROGRAM": 1,
-  "Sterling Gray": 13,
+  "Sterling Gray": 11,
   "Stipple Finish": 1,
   "Storm Grey (low gloss) - cross bar design": 2,
   "Storm Grey w/rectangular design": 2,
@@ -118799,10 +118703,10 @@
   "Tag ID: HBD-HF": 1,
   "Tag ID: HBK-KE": 4,
   "Tail lamps - LED Rear": 2,
-  "Tail lamps - Level 1": 24,
+  "Tail lamps - Level 1": 18,
   "Tail lamps - Level 2": 1,
-  "Tail lamps - Level 3": 18,
-  "Tail lamps - Level 5": 4,
+  "Tail lamps - Level 3": 16,
+  "Tail lamps - Level 5": 2,
   "Tailgate - With Flexible Step": 5,
   "Tailgate Less Flexible Step": 6,
   "Tailgate With Flexible Step": 1,
@@ -118812,7 +118716,7 @@
   "Tarnished Dark Ano": 3,
   "Taurus Centennial": 1,
   "Tear drop aluminum wheel - clearcoat only": 1,
-  "Telecsp TT Pwr Htd Lighted": 12,
+  "Telecsp TT Pwr Htd Lighted": 5,
   "Temperature And Fuel Gauges": 8,
   "Temperature Control": 3,
   "Textured Finish": 17,
@@ -119006,7 +118910,7 @@
   "W/puddle light": 3,
   "W709484S300 & YL8Z13A457BA Req'd When Replacing 13404/5 Tail Lamp": 2,
   "WT paint codes": 1,
-  "Warranty Eligible": 50,
+  "Warranty Eligible": 48,
   "Western - swing non-lock - high profile": 2,
   "Western - swing non-lock - high profile / Type 12 - RH - bright": 1,
   "Wheel Assy": 10,
@@ -119080,8 +118984,8 @@
   "With 270° Cargo Door Check Arms": 4,
   "With 2nd Row Console": 2,
   "With 4 Reverse Parking Sensor Holes": 3,
-  "With 4 Wheel Disc Brake Hydro-Boost": 3,
-  "With 49 State/Non Green State Req": 7,
+  "With 4 Wheel Disc Brake Hydro-Boost": 2,
+  "With 49 State/Non Green State Req": 6,
   "With 4x4": 1,
   "With 5.5' Styleside Box": 6,
   "With 6 3/4' Styleside Steel Box": 8,
@@ -119101,27 +119005,27 @@
   "With Air Conditioning": 4,
   "With Aluminium Spare Wheel": 18,
   "With Aluminum Headlamp Bezels": 2,
-  "With Ambient Lighting-Interior": 25,
+  "With Ambient Lighting-Interior": 13,
   "With Analogue Clock": 1,
   "With Argent Front Fenders": 4,
-  "With Automated Parking System": 15,
-  "With Automatic Air Conditioning": 23,
+  "With Automated Parking System": 14,
+  "With Automatic Air Conditioning": 21,
   "With Aux Heater Prep Pack": 1,
-  "With Aux Overhead Heater And A/C": 6,
+  "With Aux Overhead Heater And A/C": 5,
   "With Auxiliary Air Conditioning": 9,
   "With Auxiliary Visors": 1,
   "With Bar Style Grille": 8,
   "With Base Lighting Pack": 2,
   "With Black Coil Boots": 8,
-  "With Black Exterior Mirror": 36,
+  "With Black Exterior Mirror": 24,
   "With Black Fog Lamp Bezel": 12,
   "With Black Grille": 3,
-  "With Blind Spot Monitoring": 55,
+  "With Blind Spot Monitoring": 53,
   "With Body Color Front Fenders": 4,
   "With Body Color Grille/Chrome Bars": 9,
   "With Body Colour Grille - 1 Slot": 11,
   "With Body Colour Grille-Bright Aplq": 2,
-  "With Body Coloured Exterior Mirror": 30,
+  "With Body Coloured Exterior Mirror": 28,
   "With Body Coloured Front Grille": 22,
   "With Bodycolor Wheel Lip Moulding": 6,
   "With Bright Fog Lamp Bezel": 12,
@@ -119145,18 +119049,18 @@
   "With Conventional Instrumentation": 8,
   "With Conventional Spare Wheel": 7,
   "With Conventional Tailgate": 3,
-  "With Diesel Engines": 143,
+  "With Diesel Engines": 112,
   "With Double Rear Wheels": 8,
   "With Driver Electric/Heated Mirror": 28,
   "With Driver Manual Mirror": 1,
   "With Driver Power Mirror": 16,
   "With Drivers Electrochro Pwr Mirror": 1,
   "With Drivers Hand Set Sail Mirror": 11,
-  "With Drivers Heated And Cooled Seat": 24,
-  "With Drivers Heated Seat": 86,
+  "With Drivers Heated And Cooled Seat": 22,
+  "With Drivers Heated Seat": 63,
   "With Drivers Power Mirror": 20,
   "With Dual Manual Exterior Mirrors": 3,
-  "With Dual Media MP3/CD Radio": 8,
+  "With Dual Media MP3/CD Radio": 4,
   "With Dual Side Load Doors": 6,
   "With Dual Spare Wheels": 6,
   "With E-Coated Steel Spare Wheel": 2,
@@ -119164,7 +119068,7 @@
   "With Electric Slide Sunroof": 1,
   "With Engine Oil Cooler": 4,
   "With Executive Long Wheelbase Pack": 1,
-  "With Exterior Appearance Pack": 13,
+  "With Exterior Appearance Pack": 11,
   "With Five Switches": 2,
   "With Fixed Foot Pedals": 2,
   "With Fixed Rear Window": 5,
@@ -119175,14 +119079,14 @@
   "With Front Towing Hook": 17,
   "With Fuel Economy Pack": 3,
   "With Full Floor Console": 1,
-  "With Gas Engines": 150,
+  "With Gas Engines": 115,
   "With Halogen Headlamp": 39,
   "With Halogen Headlamps - NAS": 11,
   "With Heated Passenger Seat": 6,
   "With Heated Rear Seats": 3,
-  "With Heated Rear Window": 13,
+  "With Heated Rear Window": 11,
   "With Heated Steering Wheel": 4,
-  "With Heated/Cooled Front Seats Only": 5,
+  "With Heated/Cooled Front Seats Only": 3,
   "With Heated/Cooled Rear Seats": 1,
   "With High Ambient Temp/Speed Pack": 5,
   "With High Ambient Temp/Speed Package": 8,
@@ -119197,28 +119101,28 @@
   "With Instruction Sheet": 7,
   "With Integrated Spotter Mirror": 6,
   "With KMH Speedometer": 5,
-  "With KMH/MPH Speedometer": 513,
+  "With KMH/MPH Speedometer": 480,
   "With Kerbside Side Load Doors": 8,
   "With Keyless Entry System": 2,
   "With LH 2nd Row Sliding Window": 1,
   "With Level 2 Headlamps": 2,
   "With Level 3 Headlamps": 2,
-  "With Level 4 Headlamps": 16,
+  "With Level 4 Headlamps": 14,
   "With Load Leveling Trailer Towing": 3,
   "With Low Series Cluster": 73,
   "With MPH Speedometer": 2,
-  "With MPH/KMH Speedometer": 548,
+  "With MPH/KMH Speedometer": 503,
   "With Man Rake/Col Shift Strg Column": 8,
   "With Man Rake/Floor Shift Strg Col": 8,
   "With Manual Front Windows": 8,
   "With Manual Shift Auto Trans": 4,
   "With Medium Duty Trailer Towing": 1,
   "With Memory Adjustable Foot Pedals": 2,
-  "With Memory Pack": 19,
+  "With Memory Pack": 12,
   "With Memory Package III": 2,
   "With Message Center": 40,
   "With Message Center Cluster I/P": 55,
-  "With Mid-Ship Fuel Tank": 5,
+  "With Mid-Ship Fuel Tank": 3,
   "With Mini Aluminium Spare Wheel": 1,
   "With Monobeam Suspension - Wide": 6,
   "With Navigation System": 3,
@@ -119239,7 +119143,7 @@
   "With Plastic Rear Bumper-Black": 2,
   "With Plated Grille": 2,
   "With Police Aux Visibility Lighting": 2,
-  "With Police Equipment Pack": 16,
+  "With Police Equipment Pack": 10,
   "With Power Front Windows": 1,
   "With Power Liftgate": 7,
   "With Power Passenger Mirror": 2,
@@ -119272,7 +119176,7 @@
   "With Speed Control": 4,
   "With Spoiler": 1,
   "With Sport Appearance Group": 2,
-  "With Sport Appearance Pack": 6,
+  "With Sport Appearance Pack": 4,
   "With Sport Equipment Pack": 4,
   "With Sport Grille": 4,
   "With Spot Light": 27,
@@ -119297,14 +119201,14 @@
   "With aero headlamps": 3,
   "With single 4 pin electrical connector.": 2,
   "Without spoiler": 1,
-  "XLT": 219,
+  "XLT": 202,
   "XLT (with chrome trim)": 2,
   "XLT - with Sport Appearance Group": 8,
   "XLT / Paint to match": 4,
   "XLT Special Edition": 4,
   "XLT Sport": 78,
   "XLT or Off-Road Package": 4,
-  "Yellow / Green": 2,
+  "Yellow / Green": 1,
   "Yellow Blaze 3 Coat": 2,
   "You Must Drill Holes As Required": 3,
   "ZX4": 3,

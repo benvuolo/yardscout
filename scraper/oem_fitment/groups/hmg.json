@@ -62219,34 +62219,6 @@
    ],
    "reman": false
   },
-  "hmg:553001M550": {
-   "cat": "strut",
-   "comp": null,
-   "evidence": [
-    "www.kiapartsnow.com:records:L3429"
-   ],
-   "names": [
-    "Shock Absorber Assy-Rear"
-   ],
-   "pns": [
-    "553001M550"
-   ],
-   "reman": false
-  },
-  "hmg:553001M570": {
-   "cat": "strut",
-   "comp": null,
-   "evidence": [
-    "www.kiapartsnow.com:records:L3430"
-   ],
-   "names": [
-    "Shock Absorber Assy-Rear"
-   ],
-   "pns": [
-    "553001M570"
-   ],
-   "reman": false
-  },
   "hmg:55300A7020": {
    "cat": "strut",
    "comp": null,
@@ -70376,7 +70348,7 @@
      2013
     ]
    ],
-   "cars": 241,
+   "cars": 243,
    "cat": "wheels",
    "id": "oem:hmg:wheels:C:bf6ad6fc14",
    "kind": "body",
@@ -70409,7 +70381,7 @@
      2013
     ]
    ],
-   "cars": 241,
+   "cars": 243,
    "cat": "wheels",
    "id": "oem:hmg:wheels:C:70880b132a",
    "kind": "body",
@@ -70442,7 +70414,7 @@
      2013
     ]
    ],
-   "cars": 241,
+   "cars": 243,
    "cat": "wheels",
    "id": "oem:hmg:wheels:C:2e0261a4e6",
    "kind": "body",
@@ -70475,7 +70447,7 @@
      2013
     ]
    ],
-   "cars": 241,
+   "cars": 243,
    "cat": "wheels",
    "id": "oem:hmg:wheels:C:c7bbfa91ec",
    "kind": "body",
@@ -70643,7 +70615,7 @@
      2013
     ]
    ],
-   "cars": 241,
+   "cars": 243,
    "cat": "strut",
    "id": "oem:hmg:strut:C:dc246fd668",
    "kind": "body",
@@ -70676,7 +70648,7 @@
      2013
     ]
    ],
-   "cars": 241,
+   "cars": 243,
    "cat": "strut",
    "id": "oem:hmg:strut:C:36728f18d3",
    "kind": "body",
@@ -70709,7 +70681,7 @@
      2013
     ]
    ],
-   "cars": 241,
+   "cars": 243,
    "cat": "strut",
    "id": "oem:hmg:strut:C:07bda0a0e5",
    "kind": "body",
@@ -70742,7 +70714,7 @@
      2013
     ]
    ],
-   "cars": 241,
+   "cars": 243,
    "cat": "strut",
    "id": "oem:hmg:strut:C:4807541a1d",
    "kind": "body",
@@ -70775,7 +70747,7 @@
      2013
     ]
    ],
-   "cars": 241,
+   "cars": 243,
    "cat": "strut",
    "id": "oem:hmg:strut:C:12aa5e048f",
    "kind": "body",
@@ -70808,7 +70780,7 @@
      2013
     ]
    ],
-   "cars": 241,
+   "cars": 243,
    "cat": "strut",
    "id": "oem:hmg:strut:C:abcc8da54b",
    "kind": "body",
@@ -70976,7 +70948,7 @@
      2013
     ]
    ],
-   "cars": 241,
+   "cars": 243,
    "cat": "strut",
    "id": "oem:hmg:strut:C:f2135495e7",
    "kind": "body",
@@ -71009,7 +70981,7 @@
      2013
     ]
    ],
-   "cars": 241,
+   "cars": 243,
    "cat": "strut",
    "id": "oem:hmg:strut:C:c637e8fc23",
    "kind": "body",
@@ -71042,7 +71014,7 @@
      2013
     ]
    ],
-   "cars": 241,
+   "cars": 243,
    "cat": "strut",
    "id": "oem:hmg:strut:C:a267ddf374",
    "kind": "body",
@@ -71075,7 +71047,7 @@
      2013
     ]
    ],
-   "cars": 241,
+   "cars": 243,
    "cat": "strut",
    "id": "oem:hmg:strut:C:697a00cd93",
    "kind": "body",
@@ -71108,7 +71080,7 @@
      2013
     ]
    ],
-   "cars": 241,
+   "cars": 243,
    "cat": "strut",
    "id": "oem:hmg:strut:C:32d5abb875",
    "kind": "body",
@@ -71141,7 +71113,7 @@
      2013
     ]
    ],
-   "cars": 241,
+   "cars": 243,
    "cat": "strut",
    "id": "oem:hmg:strut:C:3d5a25d1fe",
    "kind": "body",
@@ -71309,7 +71281,7 @@
      2013
     ]
    ],
-   "cars": 241,
+   "cars": 243,
    "cat": "strut",
    "id": "oem:hmg:strut:C:cca2bc2a95",
    "kind": "body",
@@ -71342,7 +71314,7 @@
      2013
     ]
    ],
-   "cars": 241,
+   "cars": 243,
    "cat": "strut",
    "id": "oem:hmg:strut:C:aaa7fdd0d2",
    "kind": "body",
@@ -71375,7 +71347,7 @@
      2013
     ]
    ],
-   "cars": 241,
+   "cars": 243,
    "cat": "strut",
    "id": "oem:hmg:strut:C:7505368e51",
    "kind": "body",
@@ -71408,7 +71380,7 @@
      2013
     ]
    ],
-   "cars": 241,
+   "cars": 243,
    "cat": "strut",
    "id": "oem:hmg:strut:C:bb98391df8",
    "kind": "body",
@@ -71441,7 +71413,7 @@
      2013
     ]
    ],
-   "cars": 241,
+   "cars": 243,
    "cat": "strut",
    "id": "oem:hmg:strut:C:a6fcb43b35",
    "kind": "body",
@@ -71474,7 +71446,7 @@
      2013
     ]
    ],
-   "cars": 241,
+   "cars": 243,
    "cat": "strut",
    "id": "oem:hmg:strut:C:6b61bcf74c",
    "kind": "body",
@@ -71499,17 +71471,11 @@
      "Forte Koup",
      2010,
      2010
-    ],
-    [
-     "Kia",
-     "Forte Koup",
-     2013,
-     2013
     ]
    ],
-   "cars": 241,
+   "cars": 228,
    "cat": "strut",
-   "id": "oem:hmg:strut:C:5c51b8ceb1",
+   "id": "oem:hmg:strut:C:6c473c781d",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #553001M510 for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:47:07Z",
@@ -71540,7 +71506,7 @@
      2013
     ]
    ],
-   "cars": 241,
+   "cars": 243,
    "cat": "strut",
    "id": "oem:hmg:strut:C:98838a2421",
    "kind": "body",
@@ -71548,72 +71514,6 @@
    "oldest_retrieved": "2026-11-09T21:47:16Z",
    "pn": [
     "553001M520"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Kia",
-     "Forte",
-     2010,
-     2010
-    ],
-    [
-     "Kia",
-     "Forte Koup",
-     2010,
-     2010
-    ],
-    [
-     "Kia",
-     "Forte Koup",
-     2013,
-     2013
-    ]
-   ],
-   "cars": 241,
-   "cat": "strut",
-   "id": "oem:hmg:strut:C:1d56bf6d57",
-   "kind": "body",
-   "note": "Hyundai/Kia catalog lists #553001M550 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-09T21:47:23Z",
-   "pn": [
-    "553001M550"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Kia",
-     "Forte",
-     2010,
-     2010
-    ],
-    [
-     "Kia",
-     "Forte Koup",
-     2010,
-     2010
-    ],
-    [
-     "Kia",
-     "Forte Koup",
-     2013,
-     2013
-    ]
-   ],
-   "cars": 241,
-   "cat": "strut",
-   "id": "oem:hmg:strut:C:956cedb4f2",
-   "kind": "body",
-   "note": "Hyundai/Kia catalog lists #553001M570 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-09T21:47:31Z",
-   "pn": [
-    "553001M570"
    ],
    "reason": "option",
    "tier": "likely"

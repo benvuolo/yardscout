@@ -257,4 +257,16 @@ check("market: a note with a non-market alternative keeps the row",
 check("market: plant notes are not markets", not _C._market_excludes(["Japan Built"]) and not _C._market_excludes(["US Built"]))
 check("market: a US note keeps the row", not _C._market_excludes(["FOR USA, CANADA"]))
 
+# 2026-11-10 live audit: production-date windows (rule (a), all namespaces)
+check("production: windows that miss the model year exclude it (Lexus IS 2007, RX 330 2004, MKZ 2010 hybrid)",
+      _C._production_excludes(["Production Date: 09/2005-06/2006"], 2007)
+      and _C._production_excludes(["Production Date: 09/2004-02/2006"], 2004)
+      and _C._production_excludes(["Production Date: 07/2000-10/2002"], 2003))
+check("production: an overlapping, open-ended or absent window keeps the row",
+      not _C._production_excludes(["Production Date: 09/2005-06/2006"], 2006)
+      and not _C._production_excludes(["Production Date: 08/2016-"], 2019)
+      and not _C._production_excludes(["Fit Note: HID"], 2010)
+      and not _C._production_excludes(["Production Date: 10/2014-07/2016"], 2015))
+check("production: wheels are left to their own stricter group rule (the per-row cut never adds a claim)",
+      "wheels" in _C.PROD_RULE_SKIP_CATS)
 done("test_regressions")
