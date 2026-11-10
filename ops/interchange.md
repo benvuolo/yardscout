@@ -3536,3 +3536,16 @@ each); nothing allowlisted or crawled.
   - toyota 557 -> 533; nothing added.
   - Other catalogs (toyotapartsnow, honda, acura, ford, gm) print no chassis
     codes like this; the gate stays Lexus-only.
+- **2026-11-10 ~14:30 UTC: paused on hub instruction (owner at 3% weekly
+  usage). No scheduled check-ins remain.** State for whoever resumes:
+  - Live, shipped from this section: Subaru re-ship, the GM rules
+    (generation, EXPORT, cab notes), the GM 1500 series filter, the
+    climate-control note fix, the production-date rule, and the Lexus
+    chassis gate + GROUP_HOLDS.
+  - Branches not merged: `make-breadth-hmg-body` (parked by the hub).
+  - Next: per-namespace own-page breadth once completion lands (ford,
+    jeep, bmw first). Inspect for traps first, then sample with the
+    namespace's wiper-motor groups included, then one push with the
+    re-curate + rebuilt payload + test_groups_hash.
+  - Blocked sites (rule 2, not retried): moparpartsgiant,
+    mbpartsgiant, nissanpartsdeal, subarupartsdeal.
