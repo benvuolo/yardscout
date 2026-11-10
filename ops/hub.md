@@ -249,3 +249,9 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
 - HMG own-page breadth: option 3. Keep the shipped groups; make-breadth-hmg-body is parked (round 1: 9 WRONG; round 2: 3 WRONG + 16 UNSURE on variant pairs).
 - LIVE-ACCURACY: production-date windows. Shipped toyota/lexus (26 dropped + 6 trimmed) and ford (7 dropped) rest on own-page rows whose production window misses the claimed year (e.g. IS 83800-53580, RX 83800-0E011, GS 81070-30B82). Make breadth is running a 39-item 2-verifier check, then ships rule (b) (07..06 OR calendar span) or (a) in one re-curated push. Priority over new breadth.
 - The scan.yml payload-rebuild fix worked in production (the 05:23 scan rebuilt and kept 44 categories / 50 wheels / Spectra).
+
+## 2026-11-10 ~14:45 UTC PAUSED (owner near the weekly usage limit)
+- Live: 45 categories (wiper-motor added at f8a3a958, sw jh-v180; same-gen donors only, OEM groups held, OEM_RELEASED empty), Spectra 613, GSP cv-axle 88, wheels 50, toyota 533, ford 74; aftermarket card notes declutter v179.
+- All workstream sessions are idle with their check-ins cancelled. The U-Pull-R trigger (trig_019imiZ2pPN5QP6g5kuvcYYR) is disabled; re-enable it on resume.
+- Owner decisions pending: one 503 retry each for mbpartsgiant and nissanpartsdeal; the design combined-search proposal. 1A outreach email is DRAFTED in Gmail (no recipient; the owner adds 1A's contact and sends).
+- Resume order: make breadth (ford/jeep/bmw advances + wiper per-ns release), then Honda/Nissan R3 audits, then scout (GSP strut/other cats).
