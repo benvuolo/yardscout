@@ -2630,6 +2630,40 @@ Other outputs of this session:
     kiapartsnow files Forte and Forte Koup under one catalog, and the body shows only in the option
     column ("[Sedan - 4Door]", "[Coupe - 2Door]"). It removes 27 Forte/Forte Koup strut groups from
     hmg.json (strut is held, so no user impact). Tier C/D curation on hmg inherits these rules.
+  - 2026-11-10 12:25 UTC: NEW blocks (503, 07:10-07:16 UTC, CI multi-site cluster; no local crawls):
+    mbpartsgiant (mid W), nissanpartsdeal (mid C knuckle), subarupartsdeal (mid A/B). Reported to the hub.
+    Tier C is landed on most sites; Nissan and MB C are partial. Tier D placeholder rows have begun
+    (hyundai 69 segs).
+  - **Wiper-motor curation handover** (whoever does it; hub priority 1 of the tier C work):
+    1. policy.CATEGORY_POLICY["wiper-motor"]: slots F (windshield) and R (rear/liftgate). Sides for
+       twin-motor cars: Hyundai Sonata "LH", Volvo "Driver/Passenger Side" → FL/FR inside F, required
+       [["F"]].
+       positions.py needs an "end" axis: front/windshield vs rear/liftgate/back-door, from name,
+       position and list-page slug (e.g. rear_window_wiper*, windshield_wiper_rear, rear_wiper).
+    2. positions.packaging("wiper-motor"):
+       - "motor" (bare motor);
+       - "drive" (Nissan "Drive Assy" = motor + linkage);
+       - "module" (GM MODULE incl. transmission; Kia "Motor & Link"; BMW "Wiper System, Complete" are
+         excluded at crawl);
+       - "motor-ecb" (GM "EXCEPT CIRCUIT BOARD").
+       Match only within one packaging.
+    3. NOUN["wiper-motor"] = r"wiper". SIBLING_IGNORE for washer/headlamp-washer pages: needs a
+       basis per site.
+    4. Strict note refusal (hub 18:20): any option, body, drive, plant or production-date note → no
+       claim.
+       Watch for:
+       - Jeep aux "Wiper Linkage" (dropped at crawl);
+       - Mazda/Mitsubishi/Audi bare "Motor" rows (crawl product check requires "wiper");
+       - GM RPO codes in remarks.
+    5. Hashed inputs (policy/positions/notes): re-curate ALL shipped namespaces in the same push,
+       identical-or-explained diff, test_groups_hash green. Coordinate with interchange/wheels-curation
+       (whoever pushes second rebases).
+    6. Independent §11.4 sample (30 closures + 30 pairs, a session that did not write the rules), 0
+       WRONG. Verifiers pass fetch.py --text --max-lines 100000.
+       Then release: wiper-motor is NOT in GROUP_HOLD_CATS (it isn't an app category yet). Add the
+       app category entry (exact price tokens: "=wiper motor", "=windshield wiper motor",
+       "=wiper motor front", "=wiper motor rear"…, mined from coverage_matrix.chain_price_lists) on
+       interchange/categories-<n>, together with its groups.
   - Next per site, once the CI placeholder pass has written its tier D list rows on oem-raw:
     write rules from raw/<site>.lists.jsonl, set tierD 2, raise the version, then ci_audit.
 - Tier C priority: wiper-motor curation and §11.4 next, once honda/toyota/nissan have C data.
