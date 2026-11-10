@@ -95,6 +95,17 @@ GROUP_NOTES: dict = {
 }
 
 
+# Per-group holds (hub decisions after a §11.4 verdict, with the outside basis
+# cited): a Likely group whose (ns, cat, first pn) is listed here is refused as
+# held_group_audit, whatever its apps. Only removes claims.
+GROUP_HOLDS: dict = {
+    ("toyota", "headlights", "81070-30B52"): (
+        "2026-11-10 Lexus chassis audit L06: LH AFS lamp coded UZS190/GRS191/GRS196/URS190 "
+        "(2007+ GS 350/430/460); the 2006 GS 300 (GRS190/195) is not named and has no own-page row; "
+        "Partslink splits 2006 GS lamps (LX2502185) from 2007-11 (LX2518164)"),
+}
+
+
 # Namespaces withheld from shipping (2026-11-09, ops/interchange.md): their
 # held groups are never released by the allowlist.
 WITHHELD_NS = frozenset()   # subaru re-shipped 2026-11-09 (§11.4 round 4: 0 WRONG; hub confirmed)

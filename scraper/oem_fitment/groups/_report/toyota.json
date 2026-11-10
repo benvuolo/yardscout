@@ -98795,6 +98795,16 @@
    "t": null
   },
   {
+   "cat": "headlights",
+   "detail": "2026-11-10 Lexus chassis audit L06: LH AFS lamp coded UZS190/GRS191/GRS196/URS190 (2007+ GS 350/430/460); the 2006 GS 300 (GRS190/195) is not named and has no own-page row; Partslink splits 2006 GS la",
+   "evidence": [
+    "www.lexuspartsnow.com:records:L758"
+   ],
+   "pn": "81070-30B52",
+   "reason": "held_group_audit",
+   "t": null
+  },
+  {
    "cat": "hood",
    "detail": "fender",
    "evidence": [],
@@ -99356,16 +99366,6 @@
    "cat": "wheels",
    "detail": "toyota: no passed §11.4 wheels audit yet",
    "evidence": [
-    "www.lexuspartsnow.com:records:L2523"
-   ],
-   "pn": "42611-53140",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "toyota: no passed §11.4 wheels audit yet",
-   "evidence": [
     "www.lexuspartsnow.com:records:L2524"
    ],
    "pn": "42611-53150",
@@ -99396,16 +99396,6 @@
    "cat": "wheels",
    "detail": "toyota: no passed §11.4 wheels audit yet",
    "evidence": [
-    "www.lexuspartsnow.com:records:L2534"
-   ],
-   "pn": "4261A-53291",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "toyota: no passed §11.4 wheels audit yet",
-   "evidence": [
     "www.lexuspartsnow.com:records:L2535"
    ],
    "pn": "4261A-53311",
@@ -99426,79 +99416,9 @@
    "cat": "wheels",
    "detail": "toyota: no passed §11.4 wheels audit yet",
    "evidence": [
-    "www.lexuspartsnow.com:records:L2537"
-   ],
-   "pn": "4261A-53321",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "toyota: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.lexuspartsnow.com:records:L2538"
-   ],
-   "pn": "42611-53390",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "toyota: no passed §11.4 wheels audit yet",
-   "evidence": [
     "www.lexuspartsnow.com:records:L2540"
    ],
    "pn": "42611-53421",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "toyota: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.lexuspartsnow.com:records:L2542"
-   ],
-   "pn": "42611-53440",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "toyota: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.lexuspartsnow.com:records:L2543"
-   ],
-   "pn": "4261A-53300",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "toyota: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.lexuspartsnow.com:records:L2544"
-   ],
-   "pn": "4261A-53301",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "toyota: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.lexuspartsnow.com:records:L2545"
-   ],
-   "pn": "4261A-53330",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "toyota: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.lexuspartsnow.com:records:L2546"
-   ],
-   "pn": "4261A-53331",
    "reason": "wheels_not_audited",
    "t": null
   },
@@ -99596,16 +99516,6 @@
    "cat": "wheels",
    "detail": "toyota: no passed §11.4 wheels audit yet",
    "evidence": [
-    "www.lexuspartsnow.com:records:L2581"
-   ],
-   "pn": "42611-30A50",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "toyota: no passed §11.4 wheels audit yet",
-   "evidence": [
     "www.lexuspartsnow.com:records:L2582"
    ],
    "pn": "42611-30B10",
@@ -99616,59 +99526,9 @@
    "cat": "wheels",
    "detail": "toyota: no passed §11.4 wheels audit yet",
    "evidence": [
-    "www.lexuspartsnow.com:records:L2583"
-   ],
-   "pn": "42611-3A070",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "toyota: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.lexuspartsnow.com:records:L2584"
-   ],
-   "pn": "42611-3A071",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "toyota: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.lexuspartsnow.com:records:L2585"
-   ],
-   "pn": "42611-3A110",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "toyota: no passed §11.4 wheels audit yet",
-   "evidence": [
     "www.lexuspartsnow.com:records:L2586"
    ],
    "pn": "42611-3A111",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "toyota: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.lexuspartsnow.com:records:L2587"
-   ],
-   "pn": "42611-3A080",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "toyota: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.lexuspartsnow.com:records:L2588"
-   ],
-   "pn": "42611-3A081",
    "reason": "wheels_not_audited",
    "t": null
   },
@@ -99716,26 +99576,6 @@
    "cat": "wheels",
    "detail": "toyota: no passed §11.4 wheels audit yet",
    "evidence": [
-    "www.lexuspartsnow.com:records:L2596"
-   ],
-   "pn": "42611-48211",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "toyota: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.lexuspartsnow.com:records:L2599"
-   ],
-   "pn": "42611-48231",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "toyota: no passed §11.4 wheels audit yet",
-   "evidence": [
     "www.lexuspartsnow.com:records:L2602"
    ],
    "pn": "42611-48331",
@@ -99766,79 +99606,9 @@
    "cat": "wheels",
    "detail": "toyota: no passed §11.4 wheels audit yet",
    "evidence": [
-    "www.lexuspartsnow.com:records:L2606"
-   ],
-   "pn": "42611-48400",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "toyota: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.lexuspartsnow.com:records:L2612"
-   ],
-   "pn": "42611-48201",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "toyota: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.lexuspartsnow.com:records:L2613"
-   ],
-   "pn": "42611-48221",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "toyota: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.lexuspartsnow.com:records:L2615"
-   ],
-   "pn": "42611-AH031",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "toyota: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.lexuspartsnow.com:records:L2620"
-   ],
-   "pn": "42611-AH011",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "toyota: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.lexuspartsnow.com:records:L2622"
-   ],
-   "pn": "42611-AH021",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "toyota: no passed §11.4 wheels audit yet",
-   "evidence": [
     "www.lexuspartsnow.com:records:L2661"
    ],
    "pn": "42611-48330",
-   "reason": "wheels_not_audited",
-   "t": null
-  },
-  {
-   "cat": "wheels",
-   "detail": "toyota: no passed §11.4 wheels audit yet",
-   "evidence": [
-    "www.lexuspartsnow.com:records:L2702"
-   ],
-   "pn": "42611-24300",
    "reason": "wheels_not_audited",
    "t": null
   },
@@ -100014,26 +99784,26 @@
   "likely_app_years_generation_cut": {},
   "likely_app_years_note_restricted": {},
   "likely_app_years_without_own_page": {
-   "bumper-front": 948,
+   "bumper-front": 953,
    "bumper-rear": 583,
    "climate-control": 477,
    "door-front": 972,
    "door-rear": 765,
    "fender": 767,
-   "gauge-cluster": 619,
-   "grille": 1044,
-   "headlights": 1870,
+   "gauge-cluster": 633,
+   "grille": 1045,
+   "headlights": 1888,
    "hood": 451,
-   "liftgate": 98,
-   "side-mirrors": 9172,
-   "tail-lights": 764,
+   "liftgate": 99,
+   "side-mirrors": 9235,
+   "tail-lights": 766,
    "tow-mirrors": 6,
    "trunk-lid": 407,
-   "wheels": 1214,
+   "wheels": 1250,
    "window-regulator": 3277,
    "window-switch": 357
   },
-  "likely_groups": 557,
+  "likely_groups": 533,
   "list_rows": 27712,
   "records": 6446,
   "released_by_allowlist": 0,
@@ -100105,7 +99875,6 @@
   "077 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
   "077 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 2,
   "077 / TAIWAN SPEC&ULTRA LUXURY PACKAGE": 2,
-  "078 / OUTSIDE REAR VIEW MIRROR-AUTOMATIC ANTI-GLARE & W/SIDE CAMERA&INSIDE REAR VIEW MIRROR-AUTOMATIC ANTI-GLARE": 2,
   "083 / KOREA SPEC&F SPORT": 2,
   "0A17 Code": 1,
   "0A18 Code": 1,
@@ -100227,7 +99996,6 @@
   "212 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 2,
   "212 / TAIWAN SPEC&SPORT PACKAGE&FRONT SEAT-SMOOTH LEATHER": 2,
   "212 / TAIWAN SPEC&ULTRA LUXURY PACKAGE": 2,
-  "214 / OUTSIDE REAR VIEW MIRROR-AUTOMATIC ANTI-GLARE & W/SIDE CAMERA&INSIDE REAR VIEW MIRROR-AUTOMATIC ANTI-GLARE": 2,
   "217 / KOREA SPEC&F SPORT": 2,
   "217 / KOREA SPEC&LUXURY PACKAGE": 2,
   "217 / LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER&EMV & NAVIGATION SYSTEM-WITH(HDD NAVIGATION)": 6,
@@ -100424,7 +100192,7 @@
   "Auto Transmission With 5 Speed": 2,
   "BACK MONITOR-WITH STARTING SYSTEM-PUSH BUTTON STARTING SYSTEM-PUSH BUTTON&BACK MONITOR-WITH": 4,
   "BEIGE SF.": 18,
-  "BLACK OPAL MC.": 10,
+  "BLACK OPAL MC.": 2,
   "BLACKSH RED MC.": 2,
   "BLOND M.M.": 12,
   "BLUISH GRAY M.": 3,
@@ -100632,9 +100400,9 @@
   "GREEN ME.OP.": 1,
   "GRS19#": 8,
   "GRS190": 15,
-  "GRS191": 38,
+  "GRS191": 36,
   "GRS195": 14,
-  "GRS196": 14,
+  "GRS196": 10,
   "GSE2#": 14,
   "GSE2#.. 6FC": 2,
   "GSE2#.. ATM": 59,
@@ -100652,7 +100420,7 @@
   "GSU35.. JPP": 5,
   "GT": 7,
   "GT-S": 5,
-  "GYL1#.. JPP": 106,
+  "GYL1#.. JPP": 102,
   "GYL1#.. NAP": 35,
   "GYL10.. JPP": 6,
   "GYL15.. JPP": 31,
@@ -100676,7 +100444,7 @@
   "HEADLAMP-DISCHAGE & WITH(AUTO LEVELING)&CLEARANCE & BACK SONAR-WITH / PAINT REQ.": 1,
   "HEADLAMP-DISCHARGE": 2,
   "HEADLAMP-DISCHARGE & WITH(AFS) / KOREA SPEC&HEADLAMP-DISCHARGE": 2,
-  "HEADLAMP-DISCHARGE HEDLAMP": 26,
+  "HEADLAMP-DISCHARGE HEDLAMP": 22,
   "HEADLAMP-DISCHARGE WITH/AUTO LEVELING / LUXURY PACKAGE / SPORT PACKAGE": 4,
   "HEADLAMP-DISCHARGE WITH/AUTO LEVELING&HEAD LAMP CLEANER-WITH": 3,
   "HEADLAMP-DISCHARGE WITH/AUTO LEVELING&HEAD LAMP CLEANER-WITH&CLEARANCE & BACK SONAR-WITH": 3,
@@ -100802,7 +100570,7 @@
   "LEVER REMOTE CONTROL": 1,
   "LEVER REMOTE CONTROL MIRROR": 2,
   "LT.GREEN ME.OP.": 4,
-  "LT.OLIVE M.M.": 42,
+  "LT.OLIVE M.M.": 40,
   "LUXURY PACKAGE&FRONT SEAT-SEMIANILINE VENTILATED LEATHER": 56,
   "Label: 16400-0H130": 1,
   "Label: 16400-0H131": 1,
@@ -100888,8 +100656,8 @@
   "OUTSIDE REAR VIEW MIRROR-*AREM & AUTOMATIC ANTI-GLARE & MEMORY": 30,
   "OUTSIDE REAR VIEW MIRROR-*AREM & MEMORY & BLIND SPOT DETECTION": 30,
   "OUTSIDE REAR VIEW MIRROR-AUTOMATIC ANTI-GLARE": 18,
-  "OUTSIDE REAR VIEW MIRROR-AUTOMATIC ANTI-GLARE & MEMORY": 22,
-  "OUTSIDE REAR VIEW MIRROR-AUTOMATIC ANTI-GLARE & W/SIDE CAMERA": 20,
+  "OUTSIDE REAR VIEW MIRROR-AUTOMATIC ANTI-GLARE & MEMORY": 18,
+  "OUTSIDE REAR VIEW MIRROR-AUTOMATIC ANTI-GLARE & W/SIDE CAMERA": 16,
   "OUTSIDE REAR VIEW MIRROR-AUTOMATIC ANTI-GLARE & W/SIDE CAMERA&INSIDE REAR VIEW MIRROR-AUTOMATIC ANTI-GLARE": 2,
   "OUTSIDE REAR VIEW MIRROR-AUTOMATIC ANTI-GLARE & WITH(SIDE CAMERA)": 12,
   "OUTSIDE REAR VIEW MIRROR-EXTENDED TYPE & *RCM & *MIH": 2,
@@ -100932,9 +100700,7 @@
   "PREMIUM PACKAGE&HEAD LAMP-DISCHARGE&W(ADAPTIVE FR-LIGHTING SYSTEM) / PREMIUM PACKAGE&HEADLAMP-DISCHARGE&W(ADAPTIVE FR-LIGHTING SYSTEM) / SPORT PACKAGE&HEAD LAMP-DISCHARGE&W(ADAPTIVE FR-LIGHTING SYSTEM) / SPORT PACKAGE&HEADLAMP-DISCHARGE&W(ADAPTIVE FR-LIGHTING SYSTEM)": 2,
   "PREMIUM PACKAGE&HEAD LAMP-DISCHARGE&W(ADAPTIVE FR-LIGHTING SYSTEM) / SPORT PACKAGE&HEAD LAMP-DISCHARGE&W(ADAPTIVE FR-LIGHTING SYSTEM) / TAIWAN SPEC&PREMIUM PACKAGE&HEAD LAMP-DISCHARGE&W(ADAPTIVE FR-LIGHTING SYSTEM) / TAIWAN SPEC&HEAD LAMP-DISCHARGE&W(ADAPTIVE FR-LIGHTING SYSTEM)": 2,
   "PREMIUM PACKAGE&HEADLAMP-DISCHARGE / ULTRAPREMIUM PACKAGE&HEADLAMP-DISCHARGE": 2,
-  "PREMIUM PACKAGE&HEADLAMP-DISCHARGE&AFS&AUTOMATIC HIGH BEAM SYSTEM / PREMIUM PACKAGE&HEADLAMP-DISCHARGE & AFS / ULTRAPREMIUM PACKAGE&HEADLAMP-DISCHARGE&AFS&AUTOMATIC HIGH BEAM SYSTEM": 4,
-  "PREMIUM PACKAGE&HEADLAMP-LED & AFS & AUTOMATIC HIGH BEAM SYSTEM / PREMIUM PACKAGE&HEADLAMP-LED & AFS / ULTRAPREMIUM PACKAGE&HEADLAMP-LED & AFS & AUTOMATIC HIGH BEAM SYSTEM": 2,
-  "PREMIUM PACKAGE&HEADLAMP-LED / ULTRAPREMIUM PACKAGE&HEADLAMP-LED": 2,
+  "PREMIUM PACKAGE&HEADLAMP-DISCHARGE&AFS&AUTOMATIC HIGH BEAM SYSTEM / PREMIUM PACKAGE&HEADLAMP-DISCHARGE & AFS / ULTRAPREMIUM PACKAGE&HEADLAMP-DISCHARGE&AFS&AUTOMATIC HIGH BEAM SYSTEM": 2,
   "PREMIUM PACKAGE&W(MEMORY MIRROR)": 64,
   "PREMIUM PACKAGE(USA)&CRUISE CONTROL-WITH(W/RADAR CRUISE)": 1,
   "PREMIUM PACKAGE(USA)&CRUISE CONTROL-WITH(W/RADAR CRUISE)&SEAT HEATER-WITH(DRIVER & PASSENGER)": 1,
@@ -100951,14 +100717,14 @@
   "Part Name Code: 19500": 43,
   "Part Name Code: 22030": 11,
   "Part Name Code: 22210": 33,
-  "Part Name Code: 27020": 46,
-  "Part Name Code: 28100": 31,
+  "Part Name Code: 27020": 42,
+  "Part Name Code: 28100": 30,
   "Part Name Code: 42601": 302,
   "Part Name Code: 42601A": 154,
   "Part Name Code: 42601F": 22,
   "Part Name Code: 42601R": 20,
-  "Part Name Code: 44310": 5,
-  "Part Name Code: 44320": 16,
+  "Part Name Code: 44310": 4,
+  "Part Name Code: 44320": 15,
   "Part Name Code: 52119A": 123,
   "Part Name Code: 52159": 48,
   "Part Name Code: 52437": 5,
@@ -100987,13 +100753,13 @@
   "Part Name Code: 69840A": 1,
   "Part Name Code: 77020A": 15,
   "Part Name Code: 81110": 25,
-  "Part Name Code: 81135": 110,
+  "Part Name Code: 81135": 104,
   "Part Name Code: 81150": 25,
-  "Part Name Code: 81175": 114,
+  "Part Name Code: 81175": 108,
   "Part Name Code: 81550": 12,
-  "Part Name Code: 81551D": 26,
+  "Part Name Code: 81551D": 25,
   "Part Name Code: 81560": 12,
-  "Part Name Code: 81561D": 26,
+  "Part Name Code: 81561D": 25,
   "Part Name Code: 83100": 191,
   "Part Name Code: 84820": 24,
   "Part Name Code: 85710E": 25,
@@ -101003,10 +100769,10 @@
   "Part Name Code: 85720E": 17,
   "Part Name Code: 87901B": 227,
   "Part Name Code: 87906B": 221,
-  "Part Name Code: 87910": 562,
-  "Part Name Code: 87940": 524,
+  "Part Name Code: 87910": 547,
+  "Part Name Code: 87940": 509,
   "Part Name Code: 88310": 5,
-  "Part Name Code: 88320": 39,
+  "Part Name Code: 88320": 38,
   "Part Name Code: 88370": 2,
   "Pick-Up": 9,
   "Power Locks": 2,
@@ -101195,7 +100961,7 @@
   "Production Date: from 09/2012": 1,
   "Production Date: from 10/1999": 2,
   "Production Date: from 10/2012": 9,
-  "QUARTZ WHITE CS.": 14,
+  "QUARTZ WHITE CS.": 6,
   "RADIATOR-CORE SIZE T=27&FAN & COUPLING-TOWING PACKAGE(DOP)": 1,
   "REAR SPOILER-WITH": 3,
   "REAR SPOILER-WITH&WITH(BACK MONITOR)": 3,
@@ -101328,7 +101094,7 @@
   "TIRE & DISK WHEEL-235/55R19 SPORT ALUMI M+S": 1,
   "TIRE & DISK WHEEL-245/45R19 8J": 4,
   "TOURING EDITION(USA/CANADA/HAWAII/P.RICO)": 2,
-  "TOWING PACKAGE-3500LBS": 6,
+  "TOWING PACKAGE-3500LBS": 5,
   "TOWING PACKAGE-5000LBS 12V 150A": 2,
   "TOWING PACKAGE-5000LBS&FOG LAMP-WITH 12V 150A": 2,
   "TOWING PACKAGE-5000LBS&FOG LAMP-WITH&WITH(DAYTIME RUNNING LIGHT SYSTEM)-WITH(OFF SWITCH) 12V 150A": 2,
@@ -101348,7 +101114,7 @@
   "TOWING PACKAGE-5000LBS&WITH(REAR MANUAL AIR CONDITIONER) 12V 150A": 2,
   "TOWING PACKAGE-WITH": 2,
   "TOWING PACKAGE-WITH&OUTSIDE REAR VIEW MIRROR-EXTENDED TYPE & *RCM & *MIH NO PAINT REQ.": 2,
-  "TOWING PACKGE-W(3500LBS)": 2,
+  "TOWING PACKGE-W(3500LBS)": 1,
   "TOYOTA": 2,
   "TRIM0#": 3,
   "TRIM1#": 1,
@@ -101448,7 +101214,7 @@
   "USF41": 5,
   "UZS160": 32,
   "UZS161": 5,
-  "UZS190": 100,
+  "UZS190": 98,
   "UZZ30": 3,
   "Unheated": 16,
   "Unpainted": 2,
@@ -101496,9 +101262,9 @@
   "WINDOSHIELD DEICER-WITH&WITH(DAYTIME RUNNING LIGHT SYSTEM)-WITH(OFF SWITCH)&WITH(REAR MANUAL AIR CONDITIONER)": 2,
   "WINE RED MC": 1,
   "WITH(AFS) / HEADLAMP-RD4 LO:DISCHARGE WITH(AFS) / INTERMITTENT WIPER-AUTO(RAIN SENSOR)": 2,
-  "WITH(AFS) / INTERMITTENT WIPER-AUTO(RAIN SENSOR)": 11,
+  "WITH(AFS) / INTERMITTENT WIPER-AUTO(RAIN SENSOR)": 9,
   "WITH(AFS)&WITH(HEADLAMP CLEANER) / HEADLAMP-RD4 LO:DISCHARGE WITH(AFS)&WITH(HEAD LAMP CLEANER) / INTERMITTENT WIPER-AUTO(RAIN SENSOR)&WITH(HEADLAMP CLEANER) / WITH(HEADLAMP CLEANER) / WITH(HEAD LAMP CLEANER)": 2,
-  "WITH(AFS)&WITH(HEADLAMP CLEANER) / INTERMITTENT WIPER-AUTO(RAIN SENSOR)&WITH(HEADLAMP CLEANER) / WITH(HEADLAMP CLEANER)": 11,
+  "WITH(AFS)&WITH(HEADLAMP CLEANER) / INTERMITTENT WIPER-AUTO(RAIN SENSOR)&WITH(HEADLAMP CLEANER) / WITH(HEADLAMP CLEANER)": 9,
   "WITH(BACK MONITOR)": 3,
   "WITH(DAYTIME RUNNING LIGHT SYSTEM)-WITH(OFF SWITCH)": 3,
   "WITH(HEAD LAMP CLEANER)": 1,

@@ -3,7 +3,7 @@
 Raw: `dca9cd845f26` @ `dca9cd845f26`; as of 2026-11-09T18:24:28Z.
 
 - records 6446, classes 6402, list rows 27712, year manifests 113, cells 9002
-- Verified groups 0, engine vg groups 0, Likely groups 557
+- Verified groups 0, engine vg groups 0, Likely groups 533
 - blocked sites: none
 
 ## Gates standing for the whole namespace
@@ -431,16 +431,17 @@ Raw: `dca9cd845f26` @ `dca9cd845f26`; as of 2026-11-09T18:24:28Z.
 - cross_category_supersession: 50
 - disputed_class: 44
 - evidence_mismatch: 6
+- held_group_audit: 1
 - recrawl_resolved: 3
 - systemic_evidence_failure: 1
 - universal_part_suspect: 7
-- wheels_not_audited: 52
+- wheels_not_audited: 28
 
 ## Unknown note clauses (top 30)
 
 - `#`: 685
-- `Part Name Code: 87910`: 562
-- `Part Name Code: 87940`: 524
+- `Part Name Code: 87910`: 547
+- `Part Name Code: 87940`: 509
 - `Package Quantity: 1`: 385
 - `Part Name Code: 42601`: 302
 - `Require Quantity: 4`: 228
@@ -453,12 +454,12 @@ Raw: `dca9cd845f26` @ `dca9cd845f26`; as of 2026-11-09T18:24:28Z.
 - `Part Name Code: 52119A`: 123
 - `Require Quantity: 2`: 116
 - `FR`: 114
-- `Part Name Code: 81175`: 114
 - `RR`: 114
-- `Part Name Code: 81135`: 110
+- `Part Name Code: 81175`: 108
 - `GSE20`: 107
-- `GYL1#.. JPP`: 106
-- `UZS190`: 100
+- `Part Name Code: 81135`: 104
+- `GYL1#.. JPP`: 102
+- `UZS190`: 98
 - `ALUMI`: 93
 - `21`: 83
 - `21.. ATM`: 81

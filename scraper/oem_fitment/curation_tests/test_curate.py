@@ -692,4 +692,7 @@ check("pack text: a climate-control 'assy' gets no regulator words; regulators a
 check("group notes: 20862099 names the towing/standard split; keys are (ns, cat, pn)",
       "towing" in _P.GROUP_NOTES[("gm", "side-mirrors", "20862099")]
       and all(len(k) == 3 for k in _P.GROUP_NOTES))
+check("group holds: each entry is (ns, cat, pn) with a cited basis; 81070-30B52 is held",
+      ("toyota", "headlights", "81070-30B52") in _P.GROUP_HOLDS
+      and all(len(k) == 3 and len(v) > 40 for k, v in _P.GROUP_HOLDS.items()))
 done("test_curate")
