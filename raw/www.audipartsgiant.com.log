@@ -447,3 +447,134 @@
 03:17:30 chain-unlinked knuckle 1 numbers named by 5QF-505-435-H, no catalog link: 5QF-505-435-F
 03:18:26 seg done tier=C Audi Q3 [2015, 2021] seeds=[2016, 2020] records=1392 errors=18
 03:18:26 finished records=1392 errors=18 chain_records=0 chain_unlinked=248 chain_failed=0 chain_given_up=0
+10:01:06 start site=www.audipartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=1392 list_lines=341 year_lines=33 url_index=2764
+10:01:06 completion worklist completion/vag.own_page.json: 366 rows
+10:01:39 chain-unlinked climate-control 1 numbers named by 8E0-820-043-BL-5PR, no catalog link: 8E0-820-043-AL-5PR
+10:01:39 chain-unlinked climate-control 1 numbers named by 8E0-820-043-BM-5PR, no catalog link: 8E0-820-043-AM-5PR
+10:01:39 chain-unlinked climate-control 4 numbers named by 8T1-820-043-AJ-XZF, no catalog link: 8T1-820-043-AP-XZF, 8T1-820-043-AB-XZF, 8T1-820-043-K-XZF, 8T1-820-043-Q-XZF
+10:01:39 chain-unlinked climate-control 4 numbers named by 8T1-820-043-AK-XZF, no catalog link: 8T1-820-043-R-XZF, 8T1-820-043-L-XZF, 8T1-820-043-AC-XZF, 8T1-820-043-AQ-XZF
+10:01:39 chain-unlinked climate-control 4 numbers named by 8T1-820-043-AR-XZF, no catalog link: 8T1-820-043-N-XZF, 8T1-820-043-AM-XZF, 8T1-820-043-T-XZF, 8T1-820-043-AG-XZF
+10:01:39 chain-unlinked climate-control 3 numbers named by 8T1-820-043-AS-XZF, no catalog link: 8T1-820-043-AA-XZF, 8T1-820-043-AH-XZF, 8T1-820-043-AN-XZF
+10:02:03 chain-unlinked gauge-cluster 1 numbers named by 8H0-920-951-FX, no catalog link: 8H0-920-950-SX
+10:02:03 chain-unlinked gauge-cluster 1 numbers named by 8H0-920-982-BX, no catalog link: 8H0-920-981-FX
+10:02:03 chain-unlinked gauge-cluster 1 numbers named by 8K0-920-950-A, no catalog link: 8K0-920-950-AX
+10:02:11 chain-unlinked gauge-cluster 1 numbers named by 8K0-920-980-A, no catalog link: 8K0-920-980-AX
+10:02:27 chain-unlinked headlights 1 numbers named by 8K0-941-029-AH, no catalog link: 8K0-941-029-BG
+10:02:27 chain-unlinked headlights 2 numbers named by 8K0-941-029-BC, no catalog link: 8K0-941-029-E, 8K0-941-029-AL
+10:02:27 chain-unlinked headlights 2 numbers named by 8K0-941-029-BD, no catalog link: 8K0-941-029-J, 8K0-941-029-AP
+10:02:27 chain-unlinked headlights 2 numbers named by 8K0-941-030-BC, no catalog link: 8K0-941-030-E, 8K0-941-030-AL
+10:02:27 chain-unlinked headlights 2 numbers named by 8K0-941-030-BD, no catalog link: 8K0-941-030-AP, 8K0-941-030-J
+10:02:27 chain-unlinked headlights 2 numbers named by 8K0-941-030-BG, no catalog link: 8K0-941-030-AH, 8K0-941-030-B
+10:02:35 chain-unlinked hood 1 numbers named by 8H0-823-029-D, no catalog link: 8H0-823-029-B
+10:02:35 chain-unlinked hood 2 numbers named by 8K0-823-029-D, no catalog link: 8K0-823-029-B, 8K0-823-029-C
+10:02:43 chain-unlinked tail-lights 1 numbers named by 8K5-945-095-L, no catalog link: 8K5-945-095-C
+10:02:43 chain-unlinked tail-lights 1 numbers named by 8K5-945-096-L, no catalog link: 8K5-945-096-C
+10:02:51 chain-unlinked trunk-lid 1 numbers named by 8K5-827-023-AE, no catalog link: 8K5-827-023-N
+10:02:51 chain-unlinked trunk-lid 1 numbers named by 8K5-827-023-AG, no catalog link: 8K5-827-023-P
+10:02:59 chain-unlinked window-regulator 1 numbers named by 8H0-837-461-A, no catalog link: 8H0-837-461
+10:02:59 chain-unlinked window-regulator 1 numbers named by 8H0-837-462-A, no catalog link: 8H0-837-462
+10:02:59 chain-unlinked window-regulator 1 numbers named by 8H1-959-801-D, no catalog link: 8H1-959-801-B
+10:03:07 chain-unlinked window-regulator 1 numbers named by 8K0-837-461-C, no catalog link: 8K0-837-461
+10:03:07 chain-unlinked window-regulator 1 numbers named by 8K0-837-462-C, no catalog link: 8K0-837-462
+10:03:07 chain-unlinked window-regulator 1 numbers named by 8T0-959-801-A, no catalog link: 8K0-959-801
+10:03:07 chain-unlinked window-regulator 1 numbers named by 8T0-959-801-B, no catalog link: 8K0-959-801-A
+10:03:07 chain-unlinked window-regulator 1 numbers named by 8T0-959-802-A, no catalog link: 8K0-959-802
+10:03:07 chain-unlinked window-regulator 1 numbers named by 8T0-959-802-B, no catalog link: 8K0-959-802-A
+10:03:15 chain-unlinked window-regulator 1 numbers named by 8K0-839-461-C, no catalog link: 8K0-839-461-A
+10:03:15 chain-unlinked window-regulator 1 numbers named by 8K0-839-462-C, no catalog link: 8K0-839-462-A
+10:03:47 chain-unlinked climate-control 2 numbers named by 8E0-820-043-AH-5PR, no catalog link: 8E0-820-043-Q-5PR, 8E0-820-043-G-5PR
+10:04:03 chain-unlinked fender 1 numbers named by 8E0-821-105-F, no catalog link: 8E0-821-105-D
+10:04:03 chain-unlinked fender 1 numbers named by 8E0-821-106-F, no catalog link: 8E0-821-106-D
+10:04:19 chain-unlinked gauge-cluster 2 numbers named by 8E0-920-951-NX, no catalog link: 8E0-920-951-GX, 8E0-920-951-AX
+10:04:35 chain-unlinked gauge-cluster 3 numbers named by 8E0-920-985-C, no catalog link: 8E0-920-982-FX, 8E0-920-985-CX, 8E0-920-981-NX
+10:04:35 chain-unlinked gauge-cluster 3 numbers named by 8E0-920-985, no catalog link: 8E0-920-981-QX, 8E0-920-982-CX, 8E0-920-985-X
+10:04:43 chain-unlinked grille 1 numbers named by 8E0-853-651-J-VMZ, no catalog link: 8E0-853-651-AA-VMZ
+10:04:43 chain-unlinked grille 1 numbers named by 8E0-853-651-M-VMZ, no catalog link: 8E0-853-651-AC-VMZ
+10:05:15 chain-unlinked hood 1 numbers named by 8E0-823-029-D, no catalog link: 8E0-823-029-B
+10:05:23 chain-unlinked tail-lights 1 numbers named by 8E5-945-093-A, no catalog link: 8E5-945-093
+10:05:23 chain-unlinked tail-lights 1 numbers named by 8E5-945-094-A, no catalog link: 8E5-945-094
+10:05:47 chain-unlinked window-regulator 3 numbers named by 8E0-837-461-C, no catalog link: 8E0-837-461, 8E0-837-461-B, 8E0-837-461-A
+10:05:47 chain-unlinked window-regulator 3 numbers named by 8E0-837-462-C, no catalog link: 8E0-837-462-A, 8E0-837-462-B, 8E0-837-462
+10:05:47 chain-unlinked window-regulator 3 numbers named by 8E1-959-801-G, no catalog link: 8E1-959-801, 8E1-959-801-F, 8E1-959-801-E
+10:05:47 chain-unlinked window-regulator 3 numbers named by 8E1-959-802-G, no catalog link: 8E1-959-802, 8E1-959-802-E, 8E1-959-802-F
+10:05:55 chain-unlinked window-regulator 2 numbers named by 8E0-839-461-C, no catalog link: 8E0-839-461-B, 8E0-839-461-A
+10:05:55 chain-unlinked window-regulator 2 numbers named by 8E0-839-462-C, no catalog link: 8E0-839-462-B, 8E0-839-462-A
+10:05:55 chain-unlinked window-regulator 2 numbers named by 8E0-959-801-E, no catalog link: 8E0-959-801-A, 8E0-959-801-D
+10:05:55 chain-unlinked window-regulator 2 numbers named by 8E0-959-802-E, no catalog link: 8E0-959-802-A, 8E0-959-802-D
+10:06:59 chain-unlinked climate-control 1 numbers named by 8E0-820-043-AD-5PR, no catalog link: 8E0-820-043-L-5PR
+10:06:59 chain-unlinked climate-control 1 numbers named by 8E0-820-043-BQ-5PR, no catalog link: 8E0-820-043-AQ-5PR
+10:07:39 chain-unlinked gauge-cluster 1 numbers named by 8H0-920-983-PX, no catalog link: 8H0-920-980-QX
+10:08:03 chain-unlinked grille 1 numbers named by 8H0-853-651-B-3FZ, no catalog link: 8H0-853-651-3FZ
+10:08:51 chain-unlinked window-regulator 1 numbers named by 8H0-839-461-A, no catalog link: 8H0-839-461
+10:08:51 chain-unlinked window-regulator 1 numbers named by 8H0-839-462-A, no catalog link: 8H0-839-462
+10:10:19 chain-unlinked gauge-cluster 1 numbers named by 8E0-920-950-PX, no catalog link: 8E0-920-950-LX
+10:10:27 chain-unlinked gauge-cluster 3 numbers named by 8E0-920-983-Q, no catalog link: 8E0-920-983-QX, 8E0-920-980-MX, 8E0-920-981-GX
+10:10:35 chain-unlinked grille 1 numbers named by 8E0-853-651-F-3FZ, no catalog link: 8E0-853-651-B-3FZ
+10:10:35 chain-unlinked grille 1 numbers named by 8E0-853-651-G-5PV, no catalog link: 8E0-853-651-E-5PV
+10:11:31 chain-unlinked headlights 1 numbers named by 8H0-941-003-AG, no catalog link: 8H0-941-003-F
+10:11:31 chain-unlinked headlights 1 numbers named by 8H0-941-004-AG, no catalog link: 8H0-941-004-F
+10:11:31 chain-unlinked headlights 4 numbers named by 8H0-941-029-AJ, no catalog link: 8H0-941-029-R, 8H0-941-029-AE, 8H0-941-029-C, 8H0-941-029-G
+10:11:31 chain-unlinked headlights 4 numbers named by 8H0-941-030-AJ, no catalog link: 8H0-941-030-C, 8H0-941-030-AE, 8H0-941-030-G, 8H0-941-030-R
+10:12:19 chain-unlinked window-regulator 1 numbers named by 8H1-959-801-F, no catalog link: 8H1-959-801
+10:12:19 chain-unlinked window-regulator 1 numbers named by 8H1-959-802-F, no catalog link: 8H1-959-802
+10:13:23 chain-unlinked gauge-cluster 1 numbers named by 8K0-920-950-H, no catalog link: 8K0-920-950-HX
+10:13:23 chain-unlinked gauge-cluster 1 numbers named by 8K0-920-981-C, no catalog link: 8K0-920-981-CX
+10:13:31 chain-unlinked gauge-cluster 1 numbers named by 8K0-920-981-H, no catalog link: 8K0-920-981-HX
+10:13:31 chain-unlinked gauge-cluster 1 numbers named by 8K0-920-981-Q, no catalog link: 8K0-920-981-QX
+10:13:31 chain-unlinked gauge-cluster 1 numbers named by 8K0-920-981-R, no catalog link: 8K0-920-981-RX
+10:13:31 chain-unlinked gauge-cluster 1 numbers named by 8K0-920-981-T, no catalog link: 8K0-920-981-TX
+10:14:27 chain-unlinked headlights 1 numbers named by 8K0-941-029-BE, no catalog link: 8K0-941-029-AS
+10:14:27 chain-unlinked headlights 2 numbers named by 8K0-941-029-BF, no catalog link: 8K0-941-029-AA, 8K0-941-029-BB
+10:14:27 chain-unlinked headlights 2 numbers named by 8K0-941-030-BE, no catalog link: 8K0-941-030-R, 8K0-941-030-AS
+10:14:27 chain-unlinked headlights 2 numbers named by 8K0-941-030-BF, no catalog link: 8K0-941-030-BB, 8K0-941-030-AA
+10:14:59 chain-unlinked window-regulator 2 numbers named by 8K0-837-461-E, no catalog link: 8K0-837-461-D, 8K0-837-461-A
+10:14:59 chain-unlinked window-regulator 2 numbers named by 8K0-837-462-E, no catalog link: 8K0-837-462-A, 8K0-837-462-D
+10:16:19 chain-unlinked gauge-cluster 1 numbers named by 8K0-920-950-E, no catalog link: 8K0-920-950-EX
+10:16:19 chain-unlinked gauge-cluster 1 numbers named by 8K0-920-980-M, no catalog link: 8K0-920-980-MX
+10:18:03 chain-unlinked climate-control 1 numbers named by 8E0-820-043-AC-5PR, no catalog link: 8E0-820-043-K-5PR
+10:18:35 chain-unlinked gauge-cluster 1 numbers named by 8H0-920-950-HX, no catalog link: 8H0-920-950-EX
+10:25:15 chain-unlinked climate-control 2 numbers named by 4G0-820-043-BA-5PR, no catalog link: 4G0-820-043-G-5PR, 4G0-820-043-AB-5PR
+10:25:15 chain-unlinked climate-control 2 numbers named by 4G0-820-043-BG-5PR, no catalog link: 4G0-820-043-N-5PR, 4G0-820-043-AH-5PR
+10:25:15 chain-unlinked climate-control 2 numbers named by 4G0-820-043-BC-5PR, no catalog link: 4G0-820-043-AD-5PR, 4G0-820-043-J-5PR
+10:25:15 chain-unlinked climate-control 2 numbers named by 4G0-820-043-BE-5PR, no catalog link: 4G0-820-043-AF-5PR, 4G0-820-043-L-5PR
+10:26:11 chain-unlinked gauge-cluster 1 numbers named by 4G8-920-982-AX, no catalog link: 4G8-920-982-A
+10:26:11 chain-unlinked gauge-cluster 1 numbers named by 4G8-920-982-FX, no catalog link: 4G8-920-982-F
+10:26:11 chain-unlinked gauge-cluster 1 numbers named by 4G8-920-982-GX, no catalog link: 4G8-920-982-G
+10:26:11 chain-unlinked gauge-cluster 2 numbers named by 4G8-920-983-FX, no catalog link: 4G8-920-982-N, 4G8-920-983-F
+10:26:11 chain-unlinked gauge-cluster 2 numbers named by 4G8-920-983-MX, no catalog link: 4G8-920-983, 4G8-920-983-M
+10:27:15 chain-unlinked gauge-cluster 2 numbers named by 4G8-920-981-FX, no catalog link: 4G8-920-981-F, 4G8-920-980-M
+10:27:15 chain-unlinked gauge-cluster 1 numbers named by 4G8-920-981-LX, no catalog link: 4G8-920-981-L
+10:27:15 chain-unlinked gauge-cluster 1 numbers named by 4G8-920-981-MX, no catalog link: 4G8-920-981-M
+10:27:15 chain-unlinked gauge-cluster 1 numbers named by 4G8-920-983-EX, no catalog link: 4G8-920-983-E
+10:27:31 chain-unlinked headlights 1 numbers named by 4G0-941-003-P, no catalog link: 4G0-941-003-B
+10:27:31 chain-unlinked headlights 1 numbers named by 4G0-941-004-P, no catalog link: 4G0-941-004-B
+10:27:31 chain-unlinked headlights 2 numbers named by 4G0-941-043-E, no catalog link: 4G0-941-029-E, 4G0-941-043-B
+10:27:31 chain-unlinked headlights 2 numbers named by 4G0-941-044-E, no catalog link: 4G0-941-030-E, 4G0-941-044-B
+10:27:31 chain-unlinked headlights 2 numbers named by 4G0-941-773-E, no catalog link: 4G0-941-773-B, 4G0-941-029-L
+10:27:31 chain-unlinked headlights 2 numbers named by 4G0-941-774-E, no catalog link: 4G0-941-774-B, 4G0-941-030-L
+10:27:39 chain-unlinked hood 1 numbers named by 4G0-823-029-A, no catalog link: 4G0-823-029
+10:28:19 chain-unlinked side-mirrors 1 numbers named by 4G1-857-409-AQ-01C, no catalog link: 4G1-857-409-Q-01C
+10:28:19 chain-unlinked side-mirrors 1 numbers named by 4G1-857-409-BE-01C, no catalog link: 4G1-857-409-AE-01C
+10:28:19 chain-unlinked side-mirrors 1 numbers named by 4G1-857-409-BG-01C, no catalog link: 4G1-857-409-AG-01C
+10:28:19 chain-unlinked side-mirrors 1 numbers named by 4G1-857-409-BL-01C, no catalog link: 4G1-857-409-AL-01C
+10:28:19 chain-unlinked side-mirrors 1 numbers named by 4G1-857-410-AQ-01C, no catalog link: 4G1-857-410-Q-01C
+10:28:19 chain-unlinked side-mirrors 1 numbers named by 4G1-857-410-BB-01C, no catalog link: 4G1-857-410-AE-01C
+10:28:19 chain-unlinked side-mirrors 1 numbers named by 4G1-857-410-BD-01C, no catalog link: 4G1-857-410-AG-01C
+10:28:19 chain-unlinked side-mirrors 1 numbers named by 4G1-857-410-BH-01C, no catalog link: 4G1-857-410-AL-01C
+10:28:35 chain-unlinked trunk-lid 1 numbers named by 4G5-827-023-C, no catalog link: 4G5-827-023-B
+10:30:11 chain-unlinked headlights 1 numbers named by 4F0-941-003-DN, no catalog link: 4F0-941-003-M
+10:30:11 chain-unlinked headlights 1 numbers named by 4F0-941-004-DN, no catalog link: 4F0-941-004-M
+10:30:11 chain-unlinked headlights 2 numbers named by 4F0-941-029-ED, no catalog link: 4F0-941-029-AM, 4F0-941-029-P
+10:30:11 chain-unlinked headlights 5 numbers named by 4F0-941-029-EK, no catalog link: 4F0-941-029-AH, 4F0-941-029-CS, 4F0-941-029-BD, 4F0-941-029-G, 4F0-941-029-AD
+10:30:11 chain-unlinked headlights 2 numbers named by 4F0-941-030-ED, no catalog link: 4F0-941-030-AM, 4F0-941-030-P
+10:30:11 chain-unlinked headlights 5 numbers named by 4F0-941-030-EK, no catalog link: 4F0-941-030-G, 4F0-941-030-BD, 4F0-941-030-AH, 4F0-941-030-CS, 4F0-941-030-AD
+10:30:19 chain-unlinked hood 2 numbers named by 4F0-823-029-F, no catalog link: 4F0-823-029-D, 4F0-823-029-E
+10:30:27 chain-unlinked tail-lights 2 numbers named by 4F5-945-095-M, no catalog link: 4F5-945-095-R, 4F5-945-095-E
+10:30:27 chain-unlinked tail-lights 2 numbers named by 4F5-945-096-M, no catalog link: 4F5-945-096-R, 4F5-945-096-E
+10:30:44 chain-unlinked window-regulator 1 numbers named by 4F0-837-461-D, no catalog link: 4F0-837-461-C
+10:30:44 chain-unlinked window-regulator 1 numbers named by 4F0-837-462-D, no catalog link: 4F0-837-462-C
+10:30:51 chain-unlinked window-regulator 1 numbers named by 4F0-839-461-B, no catalog link: 4F0-839-461-A
+10:30:51 chain-unlinked window-regulator 1 numbers named by 4F0-839-462-B, no catalog link: 4F0-839-462-A
+10:30:51 chain-unlinked window-regulator 1 numbers named by 4F0-959-801-F, no catalog link: 4F0-959-801-C
+10:30:51 chain-unlinked window-regulator 1 numbers named by 4F0-959-802-F, no catalog link: 4F0-959-802-C
+10:32:43 time budget reached records=1444
