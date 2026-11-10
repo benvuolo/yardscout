@@ -3138,3 +3138,13 @@ each); nothing allowlisted or crawled.
   a markers.py change; not touched). The live inventory has been rescanned:
   test_model_map OK, so curate uses inventory_live.json again (no
   `--inventory` workaround). Next check-in ~07:15 UTC.
+- **2026-11-10 ~01:40 UTC, completion first (hub plan, owner priority:
+  depth on existing categories before new ones).** markers.mode: a site
+  whose worklist was re-opened (no current-version marker, but an earlier
+  version's marker) runs its own-page completion before the re-opened tier
+  C/D pass. Once `raw/<site>.cN.done` is on oem-raw it goes back to the
+  current pass. First-pass sites (gm) and .blocked/.paused are unchanged.
+  Same rate and limits, CI only. Test: tests/test_markers_mode.py (12
+  cases). `--ns all` re-curated on dca9cd845f26 (the raw ref of main's
+  groups): all 8 shipped files byte-identical, so the groups diff is empty.
+  Applies from crawl run 26.

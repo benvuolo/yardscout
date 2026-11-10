@@ -48,15 +48,33 @@ def complete_name(site: str, wl_site: dict | None) -> str | None:
     return None if c is None else f"{site}.c{c['version']}.done"
 
 
+def prev_done(site: str, wl_site: dict | None, on_branch) -> bool:
+    """True when the marker of any earlier worklist version (1 .. N-1) is on
+    oem-raw: the site finished a pass before its worklist was re-opened."""
+    v = version(wl_site)
+    return any(on_branch(done_name(site, {"version": k})) for k in range(1, v))
+
+
 def mode(site: str, wl_site: dict | None, on_branch) -> str | None:
     """What the next run does for a site, given on_branch(name) -> bool for
     raw/<name> on oem-raw: "crawl" (worklist not finished), "complete"
-    (finished, completion configured and not finished) or None (nothing)."""
+    (completion configured and not finished, see below) or None (nothing).
+
+    Completion first (hub, owner priority 2026-11-10: depth on existing
+    categories before new ones): a site whose worklist was re-opened (no
+    current-version marker, but an earlier version's marker exists) runs its
+    own-page completion before the re-opened pass. Once raw/<site>.cN.done
+    is on oem-raw it returns to the worklist ("crawl"). A site still on its
+    first pass (no marker of any version) crawls as before. .blocked and
+    .paused stop everything."""
     if on_branch(f"{site}.blocked") or on_branch(f"{site}.paused"):
         return None
-    if not on_branch(done_name(site, wl_site)):
-        return "crawl"
     cn = complete_name(site, wl_site)
-    if cn and not on_branch(cn):
+    open_complete = bool(cn) and not on_branch(cn)
+    if not on_branch(done_name(site, wl_site)):
+        if open_complete and prev_done(site, wl_site, on_branch):
+            return "complete"
+        return "crawl"
+    if open_complete:
         return "complete"
     return None
