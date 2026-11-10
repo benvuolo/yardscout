@@ -2610,6 +2610,12 @@ Other outputs of this session:
     cosmetic render, and kind wording. Sent to the hub for regression 23:50 UTC.
   - Not run here (no Python playwright): interchange_e2e, pf_ux_e2e, part_finder_e2e.
     Passed: ui_no_truncation (1296/0), pf_guards_unit, pf_new_cats_e2e, all unit suites.
+  - 2026-11-10 00:56 UTC: categories-ship merged by the hub (ef5d52e6, sw jh-v176; interchange.json
+    has 44 categories). Tiles unchanged (hub): propose tile changes with the next batch.
+  - Crawl state 00:58 UTC: run 24 (dispatched 19:34, head b71585b) is still in progress (GM).
+    Run 25 is pending (scheduled 22:32, head 435f911) and predates the tierD flags (aee4fdc), so
+    it crawls tier C only. The tier D placeholder pass starts with the first scheduled run after
+    25. Tier C data so far: vw, hyundai, kia.
   - Next per site, once the CI placeholder pass has written its tier D list rows on oem-raw:
     write rules from raw/<site>.lists.jsonl, set tierD 2, raise the version, then ci_audit.
 - Tier C priority: wiper-motor curation and §11.4 next, once honda/toyota/nissan have C data.
@@ -3084,3 +3090,38 @@ each); nothing allowlisted or crawled.
   - WHEELS_AUDITED_NS adds hmg. Re-curated `--ns all` on oem-raw@dca9cd84.
   - Group diff vs main: hmg +9 wheels (all census OK, 1,784 lot cars) and +39 strut. The struts are tier C output already on raw before the hmg wheels round, with no pinnable raw without them. strut is in GROUP_HOLD_CATS, so none ship. Other namespaces identical.
   - Payload: only data/oem/wheels.json changes in content (50 groups: mopar 28, mb 10, hmg 9, vag 3) plus the oemLazy index. oemStatus hmg reads "54 groups", counting the held struts.
+
+### Aftermarket breadth: Spectra crawl, curation, §11.4 (2026-11-09/10)
+
+- **Crawl.** oem-aftermarket-crawl matrix (hub), Spectra depth-first by lot
+  value (518b146). No detector stop. 1,505 vehicle records on oem-raw by
+  ~02:00 UTC 11-10.
+- **Curation.** `aftermarket/groups_spectra.py` writes to
+  `aftermarket/curated/spectrapremium.json`; not shipped, not under groups/.
+  Rules:
+  - notes are classified clause by clause; refused: plant, region,
+    emissions, single transmission, duty, position, sizes, body codes and
+    anything unknown;
+  - "Body Type" -> body gate; "Drive Type" -> drive gate (hub);
+  - FLEX: only beside the same GAS unit, never on fuel lines (hub);
+  - every config of a key must agree (see round 1).
+  Tests: `tests/test_groups_spectra.py` (58).
+- **§11.4 round 1: FAILED, 10 WRONG of 347 page checks** (independent
+  agent, 106 groups).
+  - One real wrong part: 2014 Fusion 2.0L fuel module, gas SP2500M vs
+    hybrid SP2515M.
+  - Root cause: non-gas configs were dropped before the consistency check.
+    They share the gas car's key, which a lot decode can't split.
+  - Fix 98e5997: every config of the key, whatever its fuel, must list the
+    same unit; fuel lines drop keys that have any non-gas config.
+  - Of the rest: 3 hybrid and 1 FLEX row are covered by the same fix;
+    3 diesel rows were my brief's mistake.
+- **After the fix:** 628 groups, 151 cross-model (1,505 vehicles).
+- **Coverage (upper bound, 1,002-vehicle build, % of 338k lot cars with
+  a donor beyond same model + generation; baseline 0%):** coils 7.9,
+  throttle 5.5, compressor 3.1, heater 3.1, radiator 2.3, evaporator 2.1,
+  condenser 1.7, fuel module 1.0, tank 0.5.
+- **App side:** category-breadth branch `interchange/categories-1`
+  (e4d6373), not merged; gates as a dict in a[5].
+- **Next:** §11.4 round 2 (fresh seed, all configs of one row per group)
+  -> hub.

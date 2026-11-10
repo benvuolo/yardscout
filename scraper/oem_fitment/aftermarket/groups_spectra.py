@@ -26,7 +26,14 @@ Tightening (ops/interchange.md "Aftermarket tightening" + hub 2026-11-09):
 - Per (make, model, year, engine label) the resolution (body -> unit) must
   be the same on every crawled submodel / motorization. A trim, turbo or
   engine-code split under the same liters/cylinders drops that key.
-- Fuel must be GAS or DIESEL (CNG, electric, hybrid-only rows are refused).
+- Every crawled config of a key (make, model, year, liters/cylinders) takes
+  part, WHATEVER its fuel: a hybrid, flex, CNG or PHEV config shares the gas
+  car's key and a lot decode cannot tell them apart. The key is dropped
+  when any config lists no unit in the line, a refused note, or another
+  unit; when no GAS/DIESEL config exists; and, on fuel lines (fuel module,
+  fuel tank), when any non-GAS/DIESEL config exists at all (hub 2026-11-09).
+  (§11.4 audit 2026-11-10: 2014 Fusion 2.0L gas vs hybrid throttle body
+  and fuel module; 2012 Focus 2.0L gas vs flex fuel module.)
 - Make/model go through the scraper's normalizers (groups_am.Names); names
   that match no lot model are reported, never guessed.
 Notes in the output are our own words; no page text is published.
@@ -177,6 +184,7 @@ def build(records: list, names: GA.Names, src: str = "") -> dict:
     reso: dict = defaultdict(list)
     retrieved: dict = {}
     oe_by_unit: dict = defaultdict(set)
+    configs: dict = defaultdict(list)      # (mk, md, year, eng) -> fuel of each crawled config
     seen_vid = set()
     for r in records:
         if r.get("vehicle_id") in seen_vid:
@@ -185,10 +193,13 @@ def build(records: list, names: GA.Names, src: str = "") -> dict:
         if any(f.startswith("card_count_mismatch") or f == "pn_differs_from_link" for f in r.get("flags", [])):
             refused["vehicle_flagged"] += 1
             continue
-        fuel = (r.get("motorization") or {}).get("Fuel", "").upper()
-        if fuel not in ("GAS", "DIESEL", "FLEX"):
-            refused[f"fuel:{fuel or 'none'}"] += 1
-            continue
+        # every fuel config is KEPT here: a hybrid / flex / CNG config shares the
+        # gas car's key (same liters and cylinders) and a lot decode cannot
+        # tell them apart, so it must take part in the consistency check
+        # below instead of being dropped (§11.4 audit 2026-11-10, Fusion 2014)
+        fuel = (r.get("motorization") or {}).get("Fuel", "").upper() or "NONE"
+        if fuel not in ("GAS", "DIESEL"):
+            refused[f"config_fuel:{fuel}"] += 1          # counted; not a claim by itself
         eng = engine_label(r)
         if not eng:
             refused["no_engine_in_submodel"] += 1
@@ -207,10 +218,9 @@ def build(records: list, names: GA.Names, src: str = "") -> dict:
             cat = LINES.get(card.get("line", ""))
             if cat:
                 by_line[cat].append(card)
+        key0 = (mk, md, int(r["year"]), eng)
+        configs[key0].append(fuel)
         for cat, cards in by_line.items():
-            if fuel == "FLEX" and cat in FUEL_LINES:
-                refused[f"{cat}:fuel_FLEX"] += 1
-                continue
             for card in cards:
                 oe_by_unit[(cat, card["pn"])].update(oe_refs(card.get("note", "")))
             res, why = resolve(cards)
@@ -223,21 +233,29 @@ def build(records: list, names: GA.Names, src: str = "") -> dict:
             else:
                 reso[key].append((fuel, tuple(sorted(res.items()))))
             retrieved[key] = max(retrieved.get(key, ""), r.get("retrieved", ""))
-    # consistency across submodels / motorizations
-    units: dict = defaultdict(lambda: defaultdict(list))   # (cat, pn) -> (mk, md, eng, body) -> years
+    # consistency across EVERY crawled config (submodel x motorization x fuel)
+    # of the key: each must list the line, with the same resolution
+    units: dict = defaultdict(lambda: defaultdict(list))   # (cat, pn) -> (mk, md, eng, gates) -> years
     unit_ret: dict = defaultdict(str)
     split = Counter()
     for key, rs in reso.items():
         cat, mk, md, y, eng = key
-        fuels = {f for f, _ in rs}
+        allf = configs[(mk, md, y, eng)]
+        fuels = set(allf)
+        if len(rs) < len(allf):
+            split[f"{cat}:config_without_line"] += 1    # a config of this key lists no unit in this line
+            continue
         rs = [x for _, x in rs]
         if any(x is None for x in rs):
             continue
-        if "FLEX" in fuels and "GAS" not in fuels:
-            split[f"{cat}:flex_without_gas"] += 1   # FLEX rows count only beside the same GAS unit
+        if cat in FUEL_LINES and fuels - {"GAS", "DIESEL"}:
+            split[f"{cat}:non_gas_config_on_fuel_line"] += 1   # hub: fuel lines refuse FLEX/CNG/hybrid/EV
+            continue
+        if not fuels & {"GAS", "DIESEL"}:
+            split[f"{cat}:no_gas_config"] += 1          # FLEX/hybrid count only beside the same GAS unit
             continue
         if len(set(rs)) != 1:
-            split[cat if fuels != {"GAS", "FLEX"} else f"{cat}:flex_gas_differ"] += 1
+            split[cat if fuels <= {"GAS", "DIESEL"} else f"{cat}:fuel_configs_differ"] += 1
             continue
         for gates, pn in rs[0]:
             units[(cat, pn)][(mk, md, eng, gates)].append(y)
