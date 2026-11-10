@@ -5546,10 +5546,13 @@ function clusterPinHtml(items, sameSpot) {
 }
 /* ---- Map bottom sheet: nearby yards (peek / expanded) or one yard's card ---- */
 var _sheetState = 'peek';
-function setSheetState(st) {
+function setSheetState(st, opts = {}) {
   const sh = document.getElementById('yards-map-sheet');
   if (!sh) return;
   _sheetState = st;
+  // instant: no slide (opening the map), so the first view is laid out
+  // against the sheet's final height, not one caught mid-slide
+  if (opts.instant) { sh.style.transition = 'none'; sh.dataset.state = st; void sh.offsetHeight; requestAnimationFrame(() => { sh.style.transition = ''; }); }
   sh.dataset.state = st;
   document.getElementById('ms-handle').setAttribute('aria-expanded', String(st === 'full'));
   if (yardsView === 'map') { liftMapControls(); layoutPins(); }
@@ -6000,9 +6003,9 @@ async function renderYardsMap() {
     _yardsMap.__style = style;
     // The first fit can run before the map has its size and controls: redo the
     // first view once it loads, unless the person has already moved the map.
-    let touched = false;
-    _yardsMap.on('movestart', (e) => { if (e && e.originalEvent) touched = true; });
-    _yardsMap.once('load', () => { if (_yardsMap) { _yardsMap.resize(); liftMapControls(); if (!touched && yardsView === 'map') firstMapView(lib, el); else layoutPins(); } });
+    _mapTouched = false;
+    _yardsMap.on('movestart', (e) => { if (e && e.originalEvent) _mapTouched = true; });
+    _yardsMap.once('load', () => { if (_yardsMap) { _yardsMap.resize(); liftMapControls(); if (!_mapTouched && yardsView === 'map') firstMapView(lib, el); else layoutPins(); } });
     if (window.ResizeObserver) new ResizeObserver(() => { if (_yardsMap && el.clientWidth) { _yardsMap.resize(); layoutPins(); } }).observe(el);
     requestAnimationFrame(() => _yardsMap && _yardsMap.resize());
     let queued = false;
@@ -6016,6 +6019,25 @@ async function renderYardsMap() {
   liftMapControls();
   firstMapView(lib, el);
   layoutMapMode();
+  settleFirstView(lib, el);
+}
+/* Once the map is idle and fonts are in, check the first view again: if a
+ * later re-layout (fonts, the sheet settling, a resize) put the nearest yard
+ * back in a bubble, decide again. Skipped once the person moves the map.
+ * window._firstViewSettled marks the end (tests wait for it). */
+var _mapTouched = false;
+function settleFirstView(lib, el) {
+  window._firstViewSettled = false;
+  const run = () => {
+    if (!_yardsMap || _mapTouched || yardsView !== 'map') { window._firstViewSettled = true; return; }
+    liftMapControls(); layoutPins();
+    const near = firstMapSet()[0];
+    if (near && near.dist != null && !nearestStandsAlone(near.key) && _yardsMap.getZoom() < _yardsMap.getMaxZoom() - 0.1) firstMapView(lib, el);
+    window._firstViewSettled = true;
+  };
+  const idle = new Promise(r => { if (_yardsMap.loaded() && !_yardsMap.isMoving()) r(); else _yardsMap.once('idle', r); });
+  const fonts = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+  Promise.all([idle, fonts]).then(() => requestAnimationFrame(run));
 }
 /* A tapped cluster: yards at one spot (or fully zoomed in) list in the sheet;
  * otherwise zoom to them. */
@@ -6041,7 +6063,7 @@ function setYardsView(view) {
   document.querySelectorAll('.yv-btn').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === yardsView)));
   document.getElementById('tab-yards').classList.toggle('yards-map-mode', yardsView === 'map');
   document.getElementById('yards-map-wrap').hidden = yardsView !== 'map';
-  if (yardsView === 'map') { _mapSheetLoc = null; setSheetState('peek'); }
+  if (yardsView === 'map') { _mapSheetLoc = null; setSheetState('peek', { instant: true }); }
   layoutMapMode();
   if (yardsView === 'map') { renderYardsMap(); if (_yardsMap) setTimeout(() => _yardsMap && _yardsMap.resize(), 50); }
   try { sessionStorage.setItem('ys_yards_view', yardsView); } catch (e) { /* private mode */ }
