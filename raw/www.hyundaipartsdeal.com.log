@@ -1595,3 +1595,6 @@
 03:03:26 chain-unlinked window-regulator 1 numbers named by 83450-2W000, no catalog link: 83450-B8000
 03:03:26 chain-unlinked window-regulator 1 numbers named by 83460-2W000, no catalog link: 83460-B8000
 03:28:14 time budget reached records=4248
+03:28:30 start site=www.hyundaipartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C'] records=4248 list_lines=1125 year_lines=210 url_index=11534
+03:28:30 completion worklist completion/hmg.own_page.json: 47 rows
+03:31:03 completion finished records=4252 errors=1 open_rows=0 chains_owed=0
