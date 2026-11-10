@@ -332,3 +332,10 @@
 15:44:08 chain-unlinked door-rear 2 numbers named by 32291068, no catalog link: 31424614, 32228974
 15:44:08 chain-unlinked door-rear 2 numbers named by 32291069, no catalog link: 32228975, 31424615
 15:58:10 time budget reached records=1187
+15:58:29 start site=www.volvopartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=1187 list_lines=480 year_lines=46 url_index=3059
+15:58:29 completion worklist completion/volvo.own_page.json: 170 rows
+16:09:41 chain-unlinked door-rear 1 numbers named by 32228896, no catalog link: 31335625
+16:09:41 chain-unlinked door-rear 1 numbers named by 32228897, no catalog link: 31335626
+16:17:35 chain-unlinked door-front 1 numbers named by 32228890, no catalog link: 31335565
+16:17:35 chain-unlinked door-front 1 numbers named by 32228891, no catalog link: 31335589
+16:29:36 time budget reached records=1223
