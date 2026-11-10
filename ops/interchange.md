@@ -3549,3 +3549,14 @@ each); nothing allowlisted or crawled.
     re-curate + rebuilt payload + test_groups_hash.
   - Blocked sites (rule 2, not retried): moparpartsgiant,
     mbpartsgiant, nissanpartsdeal, subarupartsdeal.
+- 2026-11-10 14:29: **idle on the hub's instruction** (owner at 3% of weekly
+  usage). Deleted the 15:44 check-in (trig_01F9K2UtoPuGezWPnKCPnZkk); no
+  other scheduled task of this session remains. Status when stopped:
+  - honda, acura and infiniti: tier C done (`.v2.done`); their R3
+    completion pass (`.c1.done`) is due in run 42775878285 and needs no
+    action from this session.
+  - nissanpartsdeal: `.blocked` (503); any retry is the hub's call.
+  - Nothing curated or shipped for honda/nissan; tier D not started.
+  - On resume: check `.c1.done`, re-curate on a pinned sha, run the §11.4
+    sample (verifiers pass `--max-lines 100000`), hub confirmation, ship;
+    then tier D on unblocked sites.
