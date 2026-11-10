@@ -13065,3 +13065,31 @@
 10:32:23 chain-unlinked headlights 1 numbers named by F85Z-13008-AA, no catalog link: 3L3Z-13008-CA
 10:32:23 chain-unlinked headlights 1 numbers named by F85Z-13008-BA, no catalog link: 3L3Z-13008-DA
 10:36:48 time budget reached records=9196
+10:37:11 start site=www.fordpartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=9196 list_lines=4787 year_lines=971 url_index=31947
+10:37:11 completion worklist completion/ford.own_page.json: 695 rows
+10:42:08 product-fail https://www.fordpartsgiant.com/parts/ford-grille-radiator_cl3z-8200-cb.html: ValueError: no partInfo in store
+10:42:23 product-fail https://www.fordpartsgiant.com/parts/ford-grille-radiator_cl3z-8200-bb.html: ValueError: no partInfo in store
+10:42:26 product-fail https://www.fordpartsgiant.com/parts/ford-grille-radiator_dl3z-8200-ab.html: ValueError: no partInfo in store
+10:42:26 product-fail https://www.fordpartsgiant.com/parts/ford-grille-radiator_dl3z-8200-bb.html: ValueError: no partInfo in store
+10:43:04 product-fail https://www.fordpartsgiant.com/parts/ford-mirror-asy-rear-vi_9l3z-17683-ac.html: ValueError: no partInfo in store
+10:43:36 chain-unlinked window-regulator 1 numbers named by BL3Z-1523200-D, no catalog link: BL3Z-1523200-E
+10:44:40 chain-unlinked tail-lights 1 numbers named by 4L3Z-13405-AA, no catalog link: 5L3Z-13405-CA
+10:44:40 chain-unlinked tail-lights 1 numbers named by 4L3Z-13404-AA, no catalog link: 5L3Z-13404-CA
+10:48:56 chain-unlinked climate-control 1 numbers named by XL3Z-19980-AA, no catalog link: 2L3Z-19980-BA
+10:53:04 chain-unlinked side-mirrors 1 numbers named by XL3Z-17683-EAA, no catalog link: YL3Z-17683-DAA
+10:56:32 product-fail https://www.fordpartsgiant.com/parts/ford-grille-radiator_cl3z-8200-cb.html: ValueError: no partInfo in store
+10:56:47 product-fail https://www.fordpartsgiant.com/parts/ford-grille-radiator_cl3z-8200-bb.html: ValueError: no partInfo in store
+10:56:47 product-fail https://www.fordpartsgiant.com/parts/ford-grille-radiator_dl3z-8200-ab.html: ValueError: no partInfo in store
+10:56:47 product-fail https://www.fordpartsgiant.com/parts/ford-grille-radiator_dl3z-8200-bb.html: ValueError: no partInfo in store
+10:56:48 chain-unlinked grille 7 numbers named by EL3Z-8200-BPTM, no catalog link: EL3Z-8200-BB, EL3Z-8200-BD, EL3Z-8200-BA, EL3Z-8200-BF, EL3Z-8200-BG, EL3Z-8200-BC, EL3Z-8200-BE
+10:56:56 chain-unlinked headlights 1 numbers named by DL3Z-13008-A, no catalog link: CL3Z-13008-A
+10:56:56 chain-unlinked headlights 1 numbers named by DL3Z-13008-ACP, no catalog link: CL3Z-13008-ACP
+10:56:56 chain-unlinked headlights 1 numbers named by DL3Z-13008-B, no catalog link: CL3Z-13008-B
+10:56:56 chain-unlinked headlights 1 numbers named by DL3Z-13008-BCP, no catalog link: CL3Z-13008-BCP
+10:56:56 chain-unlinked headlights 1 numbers named by DL3Z-13008-DB, no catalog link: DL3Z-13008-DA
+10:56:56 chain-unlinked headlights 1 numbers named by DL3Z-13008-FB, no catalog link: DL3Z-13008-FA
+10:56:56 chain-unlinked headlights 1 numbers named by DL3Z-13008-CB, no catalog link: DL3Z-13008-EA
+10:56:56 chain-unlinked headlights 1 numbers named by DL3Z-13008-AB, no catalog link: DL3Z-13008-AA
+10:56:56 chain-unlinked headlights 1 numbers named by DL3Z-13008-BB, no catalog link: DL3Z-13008-BA
+10:57:12 product-fail https://www.fordpartsgiant.com/parts/ford-mirror-asy-rear-vi_9l3z-17683-ac.html: ValueError: no partInfo in store
+11:08:00 time budget reached records=9252
