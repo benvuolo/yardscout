@@ -1511,3 +1511,65 @@
 10:59:31 chain-unlinked side-mirrors 2 numbers named by 51-16-8-266-604, no catalog link: 51-16-8-239-006, 51-16-8-239-004
 10:59:31 chain-unlinked side-mirrors 1 numbers named by 51-16-8-266-608, no catalog link: 51-16-8-239-012
 11:04:43 time budget reached records=2122
+11:05:04 start site=www.bmwpartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2122 list_lines=837 year_lines=143 url_index=0
+11:05:04 completion worklist completion/bmw.own_page.json: 507 rows
+11:14:25 chain-unlinked gauge-cluster 1 numbers named by 62-10-9-194-885, no catalog link: 62-10-9-177-255
+11:14:25 chain-unlinked gauge-cluster 10 numbers named by 62-10-9-194-887, no catalog link: 62-11-9-130-127, 62-10-9-168-862, 62-11-9-153-753, 62-11-6-968-723, 62-11-6-974-574, 62-11-6-983-151, 62-11-6-971-896, 62-11-9-135-251, 62-11-9-149-961, 62-10-9-177-259
+11:14:33 chain-unlinked headlights 1 numbers named by 63-12-7-166-115, no catalog link: 63-12-6-919-731
+11:14:33 chain-unlinked headlights 1 numbers named by 63-12-7-166-116, no catalog link: 63-12-6-919-732
+11:14:41 chain-unlinked side-mirrors 1 numbers named by 51-16-7-189-485, no catalog link: 51-16-7-126-527
+11:14:41 chain-unlinked side-mirrors 1 numbers named by 51-16-7-189-488, no catalog link: 51-16-7-126-528
+11:14:41 chain-unlinked side-mirrors 1 numbers named by 51-16-7-189-489, no catalog link: 51-16-7-126-537
+11:14:41 chain-unlinked side-mirrors 1 numbers named by 51-16-7-189-492, no catalog link: 51-16-7-126-538
+11:14:41 chain-unlinked side-mirrors 1 numbers named by 51-16-7-189-493, no catalog link: 51-16-7-126-541
+11:14:41 chain-unlinked side-mirrors 1 numbers named by 51-16-7-189-496, no catalog link: 51-16-7-126-542
+11:14:41 chain-unlinked side-mirrors 1 numbers named by 51-16-7-189-509, no catalog link: 51-16-7-126-545
+11:14:41 chain-unlinked side-mirrors 1 numbers named by 51-16-7-189-512, no catalog link: 51-16-7-126-546
+11:14:57 chain-unlinked window-regulator 1 numbers named by 51-35-7-184-745, no catalog link: 51-35-7-075-673
+11:14:57 chain-unlinked window-regulator 1 numbers named by 51-33-7-184-383, no catalog link: 51-33-7-075-667
+11:14:57 chain-unlinked window-regulator 1 numbers named by 51-33-7-184-384, no catalog link: 51-33-7-075-668
+11:14:57 chain-unlinked window-regulator 1 numbers named by 51-35-7-184-746, no catalog link: 51-35-7-075-674
+11:14:57 chain-unlinked window-regulator 1 numbers named by 67-62-6-981-141, no catalog link: 67-62-6-922-267
+11:14:57 chain-unlinked window-regulator 1 numbers named by 67-62-6-981-142, no catalog link: 67-62-6-922-268
+11:26:20 chain-unlinked door-front 1 numbers named by 41-51-7-038-092, no catalog link: 41-51-7-008-128
+11:26:52 chain-unlinked headlights 1 numbers named by 63-12-7-165-951, no catalog link: 63-12-6-935-729
+11:26:52 chain-unlinked headlights 1 numbers named by 63-12-7-165-952, no catalog link: 63-12-6-935-730
+11:26:52 chain-unlinked headlights 1 numbers named by 63-12-6-904-279, no catalog link: 63-12-8-382-189
+11:26:52 chain-unlinked headlights 1 numbers named by 63-12-6-904-280, no catalog link: 63-12-8-382-190
+11:26:52 chain-unlinked headlights 1 numbers named by 63-12-6-904-297, no catalog link: 63-12-8-384-485
+11:26:52 chain-unlinked headlights 1 numbers named by 63-12-6-904-298, no catalog link: 63-12-8-384-486
+11:26:52 chain-unlinked headlights 1 numbers named by 63-12-7-165-824, no catalog link: 63-12-6-911-454
+11:26:52 chain-unlinked headlights 1 numbers named by 63-12-7-165-903, no catalog link: 63-12-6-919-643
+11:26:52 chain-unlinked headlights 1 numbers named by 63-12-7-165-949, no catalog link: 63-12-6-935-727
+11:26:52 chain-unlinked headlights 1 numbers named by 63-12-7-165-950, no catalog link: 63-12-6-935-728
+11:27:40 chain-unlinked tail-lights 1 numbers named by 63-21-6-937-453, no catalog link: 63-21-6-920-735
+11:27:40 chain-unlinked tail-lights 2 numbers named by 63-21-6-937-454, no catalog link: 63-21-6-920-736, 63-21-6-920-734
+11:27:48 chain-unlinked tail-lights 1 numbers named by 63-21-6-920-700, no catalog link: 63-21-6-920-696
+11:27:56 chain-unlinked trunk-lid 1 numbers named by 51-13-7-170-965, no catalog link: 51-13-8-231-896
+11:28:04 chain-unlinked trunk-lid 1 numbers named by 41-62-7-065-260, no catalog link: 41-62-7-895-672
+11:28:04 chain-unlinked trunk-lid 1 numbers named by 51-13-7-170-967, no catalog link: 51-13-7-064-314
+11:30:28 chain-unlinked gauge-cluster 6 numbers named by 62-11-6-985-675, no catalog link: 62-11-6-932-926, 62-11-6-925-412, 62-10-4-117-757, 62-11-6-931-267, 62-11-6-957-001, 62-10-6-940-900
+11:30:28 chain-unlinked gauge-cluster 4 numbers named by 62-11-6-985-676, no catalog link: 62-11-6-932-927, 62-11-6-957-002, 62-10-6-940-901, 62-10-4-117-758
+11:35:00 chain-unlinked door-front 1 numbers named by 41-00-7-206-107, no catalog link: 41009628753
+11:35:00 chain-unlinked door-front 1 numbers named by 41-00-7-206-108, no catalog link: 41009628754
+11:35:08 chain-unlinked door-rear 1 numbers named by 41-00-7-206-113, no catalog link: 41009628755
+11:35:08 chain-unlinked door-rear 1 numbers named by 41-00-7-206-114, no catalog link: 41009628756
+11:35:24 chain-unlinked gauge-cluster 1 numbers named by 62-10-8-795-126, no catalog link: 62-10-9-311-649
+11:35:24 chain-unlinked gauge-cluster 3 numbers named by 62-10-9-358-979, no catalog link: 62-10-9-285-192, 62-10-9-291-411, 62-10-9-280-480
+11:35:40 chain-unlinked side-mirrors 1 numbers named by 51-16-7-283-515, no catalog link: 51-16-7-206-897
+11:35:40 chain-unlinked side-mirrors 1 numbers named by 51-16-7-283-516, no catalog link: 51-16-7-206-898
+11:35:40 chain-unlinked side-mirrors 1 numbers named by 51-16-7-283-519, no catalog link: 51-16-7-206-901
+11:35:40 chain-unlinked side-mirrors 1 numbers named by 51-16-7-283-520, no catalog link: 51-16-7-206-902
+11:35:40 chain-unlinked side-mirrors 1 numbers named by 51-16-7-283-523, no catalog link: 51-16-7-206-905
+11:35:40 chain-unlinked side-mirrors 1 numbers named by 51-16-7-283-524, no catalog link: 51-16-7-206-906
+11:35:40 chain-unlinked side-mirrors 1 numbers named by 51-16-7-283-527, no catalog link: 51-16-7-206-913
+11:35:40 chain-unlinked side-mirrors 1 numbers named by 51-16-7-283-528, no catalog link: 51-16-7-206-914
+11:35:40 chain-unlinked side-mirrors 1 numbers named by 51-16-7-283-531, no catalog link: 51-16-7-206-917
+11:35:40 chain-unlinked side-mirrors 1 numbers named by 51-16-7-283-532, no catalog link: 51-16-7-206-918
+11:35:40 chain-unlinked side-mirrors 1 numbers named by 51-16-7-283-535, no catalog link: 51-16-7-206-921
+11:35:40 chain-unlinked side-mirrors 1 numbers named by 51-16-7-283-536, no catalog link: 51-16-7-206-922
+11:35:40 chain-unlinked side-mirrors 1 numbers named by 51-16-7-283-607, no catalog link: 51-16-7-206-893
+11:35:40 chain-unlinked side-mirrors 1 numbers named by 51-16-7-283-608, no catalog link: 51-16-7-206-894
+11:35:40 chain-unlinked side-mirrors 1 numbers named by 51-16-7-283-611, no catalog link: 51-16-7-206-909
+11:35:40 chain-unlinked side-mirrors 1 numbers named by 51-16-7-283-612, no catalog link: 51-16-7-206-910
+11:35:56 time budget reached records=2124
