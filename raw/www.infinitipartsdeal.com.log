@@ -850,3 +850,112 @@
 04:43:51 seg done tier=C Infiniti J30 [1993, 1997] seeds=[1994] records=2130 errors=31
 04:47:03 seg done tier=C Infiniti FX45 [2003, 2008] seeds=[2004, 2007, 2006] records=2133 errors=31
 04:47:03 finished records=2133 errors=31 chain_records=0 chain_unlinked=157 chain_failed=0 chain_given_up=0
+10:33:23 start site=www.infinitipartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2133 list_lines=268 year_lines=54 url_index=2668
+10:33:23 completion worklist completion/nissan.own_page.json: 119 rows
+10:33:55 chain-unlinked bumper-front 1 numbers named by 62022-JK60H, no catalog link: 62022-JK60J
+10:33:55 chain-unlinked bumper-front 1 numbers named by 62022-JK62H, no catalog link: 62022-JK62J
+10:34:11 chain-unlinked bumper-front 1 numbers named by 62022-AC925, no catalog link: 62022-AC940
+10:34:11 chain-unlinked bumper-front 1 numbers named by 62022-AM825, no catalog link: 62022-AM840
+10:34:11 chain-unlinked bumper-front 1 numbers named by 62022-AC725, no catalog link: 62022-AC740
+10:34:27 chain-unlinked bumper-rear 1 numbers named by 85022-AM825, no catalog link: 85022-AM840
+10:34:35 chain-unlinked door-front 1 numbers named by H010A-JK6MA, no catalog link: HMA0A-JK6AB
+10:34:35 chain-unlinked door-front 1 numbers named by H010M-JK6MA, no catalog link: HMA0M-JK6AB
+10:34:59 chain-unlinked door-front 1 numbers named by H010A-AL5AA, no catalog link: H010A-AL5AB
+10:35:07 chain-unlinked door-rear 1 numbers named by H2101-JK0MM, no catalog link: HBA0A-JK0MA
+10:35:07 chain-unlinked door-rear 1 numbers named by H2100-JK0MM, no catalog link: HBA0M-JK0MA
+10:35:31 chain-unlinked door-rear 2 numbers named by H210A-AL5AA, no catalog link: H210A-AL5AB, H210A-AL5AM
+10:35:39 chain-unlinked fender 1 numbers named by F3101-JK0AA, no catalog link: FCA01-JK0AA
+10:35:39 chain-unlinked fender 1 numbers named by F3100-JK0AA, no catalog link: FCA00-JK0AA
+10:36:59 chain-unlinked headlights 1 numbers named by 26060-JK61D, no catalog link: 26060-JK61E
+10:36:59 chain-unlinked headlights 1 numbers named by 26060-JK60D, no catalog link: 26060-JK60E
+10:36:59 chain-unlinked headlights 1 numbers named by 26010-JK60D, no catalog link: 26010-JK60E
+10:36:59 chain-unlinked headlights 1 numbers named by 26010-JK61D, no catalog link: 26010-JK61E
+10:37:55 chain-unlinked headlights 1 numbers named by 26060-CM40C, no catalog link: 26060-CM40A
+10:37:55 chain-unlinked headlights 1 numbers named by 26010-CM40C, no catalog link: 26010-CM40A
+10:38:03 chain-unlinked hood 1 numbers named by F510M-JK0M0, no catalog link: FEA0M-JK0M0
+10:38:19 chain-unlinked side-mirrors 1 numbers named by 96302-JK60A, no catalog link: 96302-1NA0A
+10:38:35 chain-unlinked tail-lights 1 numbers named by 26555-JK600, no catalog link: 26555-JK60D
+10:38:35 chain-unlinked tail-lights 1 numbers named by 26550-JK600, no catalog link: 26550-JK60D
+10:39:07 chain-unlinked trunk-lid 1 numbers named by H4300-JK0MM, no catalog link: HDC00-JK0MM
+10:39:31 chain-unlinked window-regulator 1 numbers named by 80731-JK00A, no catalog link: 80731-JX00C
+10:39:31 chain-unlinked window-regulator 1 numbers named by 80731-JK60A, no catalog link: 80731-EW800
+10:39:31 chain-unlinked window-regulator 1 numbers named by 80730-JK00A, no catalog link: 80730-EW800
+10:39:31 chain-unlinked window-regulator 1 numbers named by 80730-JK60A, no catalog link: 80730-JX00C
+10:40:11 chain-unlinked window-regulator 1 numbers named by 80731-AL511, no catalog link: 80731-AL510
+10:40:11 chain-unlinked window-regulator 1 numbers named by 80730-AL501, no catalog link: 80730-AL500
+10:40:11 chain-unlinked window-regulator 1 numbers named by 80721-AM811, no catalog link: 80721-AM802
+10:40:11 chain-unlinked window-regulator 1 numbers named by 80720-AM811, no catalog link: 80720-AM802
+10:41:07 chain-unlinked window-regulator 1 numbers named by 82721-CM30A, no catalog link: 82721-AL510
+10:41:07 chain-unlinked window-regulator 1 numbers named by 82720-CM30A, no catalog link: 82720-AL510
+10:41:39 chain-unlinked bumper-front 1 numbers named by 62022-1NF0H, no catalog link: FBM22-1NF0H
+10:42:03 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_coupe_front_a-k6020jl04b.html: ValueError: no partInfo in store
+10:42:11 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_coupe_front_a-k6020jl07b.html: ValueError: no partInfo in store
+10:42:24 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_coupe_front_a-k6020jl06b.html: ValueError: no partInfo in store
+10:42:27 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_coupe_front_a-k6020jl01b.html: ValueError: no partInfo in store
+10:42:35 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_face_fr_bumper-k60201nl1b.html: ValueError: no partInfo in store
+10:43:31 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_face_fr_bumper-k60201nl1c.html: ValueError: no partInfo in store
+10:43:39 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_coupe_front_a-k6020jl02b.html: ValueError: no partInfo in store
+10:43:47 chain-unlinked bumper-rear 1 numbers named by 85022-1NF0H, no catalog link: HEM22-1NF0H
+10:44:03 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_coupe_rr_aer-k60401vt7b.html: ValueError: no partInfo in store
+10:44:11 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_coupe_rr_aer-k60401vt4b.html: ValueError: no partInfo in store
+10:44:19 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_face_rear_bumpr-k60401vp1b.html: ValueError: no partInfo in store
+10:44:43 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_face_rear_bumpr-k60401vp1c.html: ValueError: no partInfo in store
+10:45:23 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_coupe_rr_aer-k60401vt1b.html: ValueError: no partInfo in store
+10:45:31 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_coupe_rr_aer-k60401vt2b.html: ValueError: no partInfo in store
+10:45:39 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_coupe_rr_aer-k60401vt6b.html: ValueError: no partInfo in store
+10:45:47 chain-unlinked door-front 1 numbers named by H010A-JK6AB, no catalog link: HMA0A-JK6AB
+10:45:47 chain-unlinked door-front 1 numbers named by H010M-JK6AB, no catalog link: HMA0M-JK6AB
+10:46:03 chain-unlinked door-rear 1 numbers named by H210A-JK0MA, no catalog link: HBA0A-JK0MA
+10:46:03 chain-unlinked door-rear 1 numbers named by H210M-JK0MA, no catalog link: HBA0M-JK0MA
+10:46:51 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_sedan_grille-f23101nf1a.html: ValueError: no partInfo in store
+10:47:07 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g35_coupe_grill-f2310jl000.html: ValueError: no partInfo in store
+10:47:39 chain-unlinked headlights 1 numbers named by 26060-1NL0A, no catalog link: 26060-1NL0B
+10:47:39 chain-unlinked headlights 1 numbers named by 26010-1NL0A, no catalog link: 26010-1NL0B
+10:48:19 chain-unlinked tail-lights 1 numbers named by 26555-JK60B, no catalog link: 26555-JK60D
+10:48:19 chain-unlinked tail-lights 1 numbers named by 26550-JK60B, no catalog link: 26550-JK60D
+10:49:07 chain-unlinked window-regulator 1 numbers named by 80721-JL00A, no catalog link: 80775-JL00A
+10:49:39 chain-unlinked door-rear 2 numbers named by 82101-3JC0A, no catalog link: HBA01-3JC0A, HBA01-3JCMA
+10:49:39 chain-unlinked door-rear 2 numbers named by 82100-3JC0A, no catalog link: HBA00-3JCMA, HBA00-3JC0A
+10:49:55 chain-unlinked gauge-cluster 1 numbers named by 24810-3JA1B, no catalog link: 24810-9NA1D
+10:49:55 chain-unlinked gauge-cluster 1 numbers named by 24810-9NA1B, no catalog link: 24810-9NA1D
+10:49:55 chain-unlinked gauge-cluster 1 numbers named by 24810-9NA1C, no catalog link: 24810-9NA1D
+10:50:43 chain-unlinked side-mirrors 1 numbers named by 96302-3JA9A, no catalog link: 96302-3JA0E
+10:50:43 chain-unlinked side-mirrors 1 numbers named by 96302-3JA9B, no catalog link: 96302-3JA2E
+10:50:43 chain-unlinked side-mirrors 1 numbers named by 96301-3JA9A, no catalog link: 96301-3JA0E
+10:50:43 chain-unlinked side-mirrors 1 numbers named by 96301-3JA9B, no catalog link: 96301-3JA2E
+10:50:59 chain-unlinked window-regulator 1 numbers named by 80731-9PG0B, no catalog link: 80731-3KG0A
+10:50:59 chain-unlinked window-regulator 1 numbers named by 80730-9PG0B, no catalog link: 80730-3KG0A
+10:51:39 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_coupe_front_a-k6020jl04b.html: ValueError: no partInfo in store
+10:51:39 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_coupe_front_a-k6020jl07b.html: ValueError: no partInfo in store
+10:51:39 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_coupe_front_a-k6020jl06b.html: ValueError: no partInfo in store
+10:51:39 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_coupe_front_a-k6020jl01b.html: ValueError: no partInfo in store
+10:51:39 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_face_fr_bumper-k60201nl1b.html: ValueError: no partInfo in store
+10:51:47 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_face_fr_bumper-k60201nl1c.html: ValueError: no partInfo in store
+10:51:55 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_coupe_front_a-k6020jl02b.html: ValueError: no partInfo in store
+10:51:55 chain-unlinked bumper-front 1 numbers named by K6020-1VU1B, no catalog link: 62022-3LY9B
+10:52:11 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_coupe_rr_aer-k60401vt7b.html: ValueError: no partInfo in store
+10:52:11 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_coupe_rr_aer-k60401vt4b.html: ValueError: no partInfo in store
+10:52:11 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_face_rear_bumpr-k60401vp1b.html: ValueError: no partInfo in store
+10:52:19 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_face_rear_bumpr-k60401vp1c.html: ValueError: no partInfo in store
+10:52:19 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_coupe_rr_aer-k60401vt1b.html: ValueError: no partInfo in store
+10:52:19 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_coupe_rr_aer-k60401vt2b.html: ValueError: no partInfo in store
+10:52:19 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_coupe_rr_aer-k60401vt6b.html: ValueError: no partInfo in store
+10:53:23 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_sedan_grille-f23101nf1a.html: ValueError: no partInfo in store
+10:53:31 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g35_coupe_grill-f2310jl000.html: ValueError: no partInfo in store
+10:58:27 chain-unlinked tail-lights 1 numbers named by 26555-JK60A, no catalog link: 26555-JK60D
+10:58:27 chain-unlinked tail-lights 1 numbers named by 26550-JK60A, no catalog link: 26550-JK60D
+10:59:47 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_coupe_front_a-k6020jl04b.html: ValueError: no partInfo in store
+10:59:47 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_coupe_front_a-k6020jl07b.html: ValueError: no partInfo in store
+10:59:47 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_coupe_front_a-k6020jl06b.html: ValueError: no partInfo in store
+10:59:47 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_coupe_front_a-k6020jl01b.html: ValueError: no partInfo in store
+10:59:47 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_coupe_front_a-k6020jl02b.html: ValueError: no partInfo in store
+11:00:03 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_coupe_rr_aer-k60401vt7b.html: ValueError: no partInfo in store
+11:00:03 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_coupe_rr_aer-k60401vt4b.html: ValueError: no partInfo in store
+11:00:03 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_coupe_rr_aer-k60401vt1b.html: ValueError: no partInfo in store
+11:00:03 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_coupe_rr_aer-k60401vt2b.html: ValueError: no partInfo in store
+11:00:03 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_coupe_rr_aer-k60401vt6b.html: ValueError: no partInfo in store
+11:01:07 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g_sedan_grille-f23101nf1a.html: ValueError: no partInfo in store
+11:01:15 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g35_coupe_grill-f2310jl000.html: ValueError: no partInfo in store
+11:03:47 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_face_rear_bumpr-k60401vp1c.html: ValueError: no partInfo in store
+11:05:23 product-fail https://www.infinitipartsdeal.com/parts/infiniti-accessories_g35_coupe_grill-f2310jl000.html: ValueError: no partInfo in store
+11:07:07 time budget reached records=2183
