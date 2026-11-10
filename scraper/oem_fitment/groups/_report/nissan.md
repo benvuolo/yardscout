@@ -1,6 +1,6 @@
 # OEM curation report: nissan
 
-Raw: `1351c33fcfbb` @ `1351c33fcfbb`; as of 2026-11-05T17:56:52Z.
+Raw: `dca9cd845f26` @ `dca9cd845f26`; as of 2026-11-05T17:56:52Z.
 
 - records 5686, classes 5544, list rows 0, year manifests 0, cells 8377
 - Verified groups 0, engine vg groups 0, Likely groups 0

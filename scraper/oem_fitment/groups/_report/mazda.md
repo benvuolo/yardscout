@@ -1,6 +1,6 @@
 # OEM curation report: mazda
 
-Raw: `1351c33fcfbb` @ `1351c33fcfbb`; as of 2026-11-05T12:14:17Z.
+Raw: `dca9cd845f26` @ `dca9cd845f26`; as of 2026-11-05T12:14:17Z.
 
 - records 1391, classes 1391, list rows 0, year manifests 0, cells 2463
 - Verified groups 0, engine vg groups 0, Likely groups 0

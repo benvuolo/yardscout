@@ -242671,8 +242671,8 @@
   "year_manifest_bad": 35
  },
  "raw": {
-  "commit": "1351c33fcfbb97862fa5aa9265dd92f7350c1ebc",
-  "ref": "1351c33fcfbb",
+  "commit": "dca9cd845f26337a4047b9176cc17929ffc984a3",
+  "ref": "dca9cd845f26",
   "sites": {
    "www.jeeppartsdeal.com": {
     "blocked": false,
@@ -256723,6 +256723,7 @@
   "www.gmpartsgiant.com.lists.2",
   "www.gmpartsgiant.com.lists.3",
   "www.gmpartsgiant.com.lists.4",
+  "www.gmpartsgiant.com.lists.5",
   "www.gmpartsgiant.com.years",
   "www.hondapartsnow.com.lists",
   "www.hondapartsnow.com.years",

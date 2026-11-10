@@ -1,5 +1,5 @@
 {
- "as_of": "2026-11-09T22:35:02Z",
+ "as_of": "2026-11-10T00:51:53Z",
  "cells": [
   [
    "Buick",
@@ -2196,6 +2196,13 @@
    "Buick",
    "Century",
    1993,
+   "radiator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Century",
+   1993,
    "side-mirrors",
    "open:no_year_manifest"
   ],
@@ -2260,6 +2267,13 @@
    "Century",
    1994,
    "power-steering-pump",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Century",
+   1994,
+   "radiator",
    "open:no_year_manifest"
   ],
   [
@@ -2350,6 +2364,13 @@
    "Buick",
    "Century",
    1995,
+   "radiator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Century",
+   1995,
    "side-mirrors",
    "open:no_year_manifest"
   ],
@@ -2428,6 +2449,13 @@
    "Century",
    1996,
    "power-steering-pump",
+   "open:no_list_manifest"
+  ],
+  [
+   "Buick",
+   "Century",
+   1996,
+   "radiator",
    "open:no_list_manifest"
   ],
   [
@@ -12794,6 +12822,20 @@
    "Buick",
    "Rainier",
    2004,
+   "bumper-front",
+   "open:no_list_manifest"
+  ],
+  [
+   "Buick",
+   "Rainier",
+   2004,
+   "bumper-rear",
+   "open:no_list_manifest"
+  ],
+  [
+   "Buick",
+   "Rainier",
+   2004,
    "climate-control",
    "open:unread_sibling_page"
   ],
@@ -12808,6 +12850,13 @@
    "Buick",
    "Rainier",
    2004,
+   "fender",
+   "open:no_list_manifest"
+  ],
+  [
+   "Buick",
+   "Rainier",
+   2004,
    "fuel-pump-module",
    "open:unread_sibling_page"
   ],
@@ -12815,8 +12864,29 @@
    "Buick",
    "Rainier",
    2004,
+   "gauge-cluster",
+   "open:no_list_manifest"
+  ],
+  [
+   "Buick",
+   "Rainier",
+   2004,
+   "grille",
+   "open:no_list_manifest"
+  ],
+  [
+   "Buick",
+   "Rainier",
+   2004,
    "headlights",
    "open:unread_sibling_page"
+  ],
+  [
+   "Buick",
+   "Rainier",
+   2004,
+   "hood",
+   "open:no_list_manifest"
   ],
   [
    "Buick",
@@ -12899,6 +12969,20 @@
    "Buick",
    "Rainier",
    2005,
+   "bumper-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Rainier",
+   2005,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Rainier",
+   2005,
    "climate-control",
    "open:no_year_manifest"
   ],
@@ -12913,7 +12997,28 @@
    "Buick",
    "Rainier",
    2005,
+   "fender",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Rainier",
+   2005,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Rainier",
+   2005,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Rainier",
+   2005,
+   "hood",
    "open:no_year_manifest"
   ],
   [
@@ -12997,6 +13102,20 @@
    "Buick",
    "Rainier",
    2006,
+   "bumper-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Rainier",
+   2006,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Rainier",
+   2006,
    "climate-control",
    "open:no_year_manifest"
   ],
@@ -13011,7 +13130,28 @@
    "Buick",
    "Rainier",
    2006,
+   "fender",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Rainier",
+   2006,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Rainier",
+   2006,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Rainier",
+   2006,
+   "hood",
    "open:no_year_manifest"
   ],
   [
@@ -13088,6 +13228,20 @@
    "Buick",
    "Rainier",
    2007,
+   "bumper-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Rainier",
+   2007,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Rainier",
+   2007,
    "climate-control",
    "open:no_year_manifest"
   ],
@@ -13102,7 +13256,21 @@
    "Buick",
    "Rainier",
    2007,
+   "fender",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Rainier",
+   2007,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Rainier",
+   2007,
+   "hood",
    "open:no_year_manifest"
   ],
   [
@@ -15293,6 +15461,13 @@
    "Buick",
    "Regal",
    2012,
+   "fender",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Regal",
+   2012,
    "fuel-pump-module",
    "open:no_year_manifest"
   ],
@@ -15308,6 +15483,13 @@
    "Regal",
    2012,
    "headlights",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Regal",
+   2012,
+   "hood",
    "open:no_year_manifest"
   ],
   [
@@ -15419,6 +15601,13 @@
    "Buick",
    "Regal",
    2013,
+   "fender",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Regal",
+   2013,
    "fuel-pump-module",
    "open:no_year_manifest"
   ],
@@ -15434,6 +15623,13 @@
    "Regal",
    2013,
    "headlights",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Regal",
+   2013,
+   "hood",
    "open:no_year_manifest"
   ],
   [
@@ -15517,6 +15713,13 @@
    "Buick",
    "Regal",
    2014,
+   "bumper-rear",
+   "open:no_list_manifest"
+  ],
+  [
+   "Buick",
+   "Regal",
+   2014,
    "climate-control",
    "open:no_list_manifest"
   ],
@@ -15538,6 +15741,13 @@
    "Buick",
    "Regal",
    2014,
+   "fender",
+   "open:no_list_manifest"
+  ],
+  [
+   "Buick",
+   "Regal",
+   2014,
    "fuel-pump-module",
    "open:no_list_manifest"
   ],
@@ -15545,7 +15755,28 @@
    "Buick",
    "Regal",
    2014,
+   "gauge-cluster",
+   "open:no_list_manifest"
+  ],
+  [
+   "Buick",
+   "Regal",
+   2014,
+   "grille",
+   "open:no_list_manifest"
+  ],
+  [
+   "Buick",
+   "Regal",
+   2014,
    "headlights",
+   "open:no_list_manifest"
+  ],
+  [
+   "Buick",
+   "Regal",
+   2014,
+   "hood",
    "open:no_list_manifest"
   ],
   [
@@ -15581,6 +15812,13 @@
    "Regal",
    2014,
    "tail-lights",
+   "open:no_list_manifest"
+  ],
+  [
+   "Buick",
+   "Regal",
+   2014,
+   "trunk-lid",
    "open:no_list_manifest"
   ],
   [
@@ -15622,6 +15860,13 @@
    "Buick",
    "Regal",
    2015,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Regal",
+   2015,
    "climate-control",
    "open:no_year_manifest"
   ],
@@ -15643,6 +15888,13 @@
    "Buick",
    "Regal",
    2015,
+   "fender",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Regal",
+   2015,
    "fuel-pump-module",
    "open:no_year_manifest"
   ],
@@ -15650,7 +15902,21 @@
    "Buick",
    "Regal",
    2015,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Regal",
+   2015,
    "headlights",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Regal",
+   2015,
+   "hood",
    "open:no_year_manifest"
   ],
   [
@@ -15686,6 +15952,13 @@
    "Regal",
    2015,
    "tail-lights",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Regal",
+   2015,
+   "trunk-lid",
    "open:no_year_manifest"
   ],
   [
@@ -15727,6 +16000,13 @@
    "Buick",
    "Regal",
    2016,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Regal",
+   2016,
    "climate-control",
    "open:no_year_manifest"
   ],
@@ -15748,6 +16028,13 @@
    "Buick",
    "Regal",
    2016,
+   "fender",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Regal",
+   2016,
    "fuel-pump-module",
    "open:no_year_manifest"
   ],
@@ -15755,7 +16042,21 @@
    "Buick",
    "Regal",
    2016,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Regal",
+   2016,
    "headlights",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Regal",
+   2016,
+   "hood",
    "open:no_year_manifest"
   ],
   [
@@ -15791,6 +16092,13 @@
    "Regal",
    2016,
    "tail-lights",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Regal",
+   2016,
+   "trunk-lid",
    "open:no_year_manifest"
   ],
   [
@@ -15832,6 +16140,13 @@
    "Buick",
    "Regal",
    2017,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Regal",
+   2017,
    "climate-control",
    "open:no_year_manifest"
   ],
@@ -15853,6 +16168,13 @@
    "Buick",
    "Regal",
    2017,
+   "fender",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Regal",
+   2017,
    "fuel-pump-module",
    "open:no_year_manifest"
   ],
@@ -15860,7 +16182,21 @@
    "Buick",
    "Regal",
    2017,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Regal",
+   2017,
    "headlights",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Regal",
+   2017,
+   "hood",
    "open:no_year_manifest"
   ],
   [
@@ -15896,6 +16232,13 @@
    "Regal",
    2017,
    "tail-lights",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Regal",
+   2017,
+   "trunk-lid",
    "open:no_year_manifest"
   ],
   [
@@ -17575,6 +17918,13 @@
    "Buick",
    "Roadmaster",
    1991,
+   "bumper-rear",
+   "open:no_list_manifest"
+  ],
+  [
+   "Buick",
+   "Roadmaster",
+   1991,
    "climate-control",
    "open:no_list_manifest"
   ],
@@ -17597,6 +17947,13 @@
    "Roadmaster",
    1991,
    "power-steering-pump",
+   "open:no_list_manifest"
+  ],
+  [
+   "Buick",
+   "Roadmaster",
+   1991,
+   "radiator",
    "open:no_list_manifest"
   ],
   [
@@ -17645,6 +18002,13 @@
    "Buick",
    "Roadmaster",
    1992,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Roadmaster",
+   1992,
    "climate-control",
    "open:no_year_manifest"
   ],
@@ -17667,6 +18031,13 @@
    "Roadmaster",
    1992,
    "power-steering-pump",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Roadmaster",
+   1992,
+   "radiator",
    "open:no_year_manifest"
   ],
   [
@@ -17715,6 +18086,13 @@
    "Buick",
    "Roadmaster",
    1993,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Roadmaster",
+   1993,
    "climate-control",
    "open:no_year_manifest"
   ],
@@ -17737,6 +18115,13 @@
    "Roadmaster",
    1993,
    "power-steering-pump",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Roadmaster",
+   1993,
+   "radiator",
    "open:no_year_manifest"
   ],
   [
@@ -17786,6 +18171,13 @@
    "Roadmaster",
    1994,
    "alternator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Roadmaster",
+   1994,
+   "bumper-rear",
    "open:no_year_manifest"
   ],
   [
@@ -17876,6 +18268,13 @@
    "Buick",
    "Roadmaster",
    1995,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Buick",
+   "Roadmaster",
+   1995,
    "climate-control",
    "open:no_year_manifest"
   ],
@@ -17954,6 +18353,13 @@
    "Roadmaster",
    1996,
    "alternator",
+   "open:no_list_manifest"
+  ],
+  [
+   "Buick",
+   "Roadmaster",
+   1996,
+   "bumper-rear",
    "open:no_list_manifest"
   ],
   [
@@ -26338,6 +26744,13 @@
   [
    "Cadillac",
    "ELR",
+   2014,
+   "radiator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Cadillac",
+   "ELR",
    2015,
    "ac-compressor",
    "open:no_year_manifest"
@@ -26373,6 +26786,13 @@
   [
    "Cadillac",
    "ELR",
+   2015,
+   "radiator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Cadillac",
+   "ELR",
    2016,
    "bumper-front",
    "open:no_year_manifest"
@@ -26396,6 +26816,13 @@
    "ELR",
    2016,
    "ignition-coils",
+   "open:no_year_manifest"
+  ],
+  [
+   "Cadillac",
+   "ELR",
+   2016,
+   "radiator",
    "open:no_year_manifest"
   ],
   [
@@ -29965,6 +30392,13 @@
    "Cadillac",
    "Escalade",
    2012,
+   "gauge-cluster",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2012,
    "grille",
    "open:ambig_target"
   ],
@@ -30112,6 +30546,13 @@
    "Cadillac",
    "Escalade",
    2013,
+   "gauge-cluster",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2013,
    "grille",
    "open:ambig_target"
   ],
@@ -30259,6 +30700,13 @@
    "Cadillac",
    "Escalade",
    2014,
+   "gauge-cluster",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2014,
    "grille",
    "open:ambig_target"
   ],
@@ -30358,6 +30806,13 @@
    "Escalade",
    2015,
    "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2015,
+   "bumper-rear",
    "open:ambig_target"
   ],
   [
@@ -30378,6 +30833,13 @@
    "Cadillac",
    "Escalade",
    2015,
+   "fender",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2015,
    "fuel-pump-module",
    "open:ambig_target"
   ],
@@ -30385,7 +30847,21 @@
    "Cadillac",
    "Escalade",
    2015,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2015,
    "headlights",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2015,
+   "hood",
    "open:ambig_target"
   ],
   [
@@ -30442,6 +30918,34 @@
    "Escalade",
    2016,
    "alternator",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2016,
+   "bumper-rear",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2016,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2016,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2016,
+   "fender",
    "open:ambig_target"
   ],
   [
@@ -30455,6 +30959,13 @@
    "Cadillac",
    "Escalade",
    2016,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2016,
    "headlights",
    "open:ambig_target"
   ],
@@ -30462,7 +30973,21 @@
    "Cadillac",
    "Escalade",
    2016,
+   "hood",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2016,
    "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2016,
+   "radiator",
    "open:ambig_target"
   ],
   [
@@ -30518,6 +31043,48 @@
    "Cadillac",
    "Escalade",
    2017,
+   "bumper-front",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2017,
+   "bumper-rear",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2017,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2017,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2017,
+   "fender",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2017,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2017,
    "headlights",
    "open:ambig_target"
   ],
@@ -30525,7 +31092,28 @@
    "Cadillac",
    "Escalade",
    2017,
+   "hood",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2017,
    "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2017,
+   "liftgate",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2017,
+   "radiator",
    "open:ambig_target"
   ],
   [
@@ -30581,6 +31169,48 @@
    "Cadillac",
    "Escalade",
    2018,
+   "bumper-front",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2018,
+   "bumper-rear",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2018,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2018,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2018,
+   "fender",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2018,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2018,
    "headlights",
    "open:ambig_target"
   ],
@@ -30588,7 +31218,28 @@
    "Cadillac",
    "Escalade",
    2018,
+   "hood",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2018,
    "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2018,
+   "liftgate",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2018,
+   "radiator",
    "open:ambig_target"
   ],
   [
@@ -30637,6 +31288,48 @@
    "Cadillac",
    "Escalade",
    2019,
+   "bumper-front",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2019,
+   "bumper-rear",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2019,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2019,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2019,
+   "fender",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2019,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2019,
    "headlights",
    "open:ambig_target"
   ],
@@ -30644,7 +31337,28 @@
    "Cadillac",
    "Escalade",
    2019,
+   "hood",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2019,
    "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2019,
+   "liftgate",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2019,
+   "radiator",
    "open:ambig_target"
   ],
   [
@@ -30693,6 +31407,48 @@
    "Cadillac",
    "Escalade",
    2020,
+   "bumper-front",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2020,
+   "bumper-rear",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2020,
+   "door-front",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2020,
+   "door-rear",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2020,
+   "fender",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2020,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2020,
    "headlights",
    "open:ambig_target"
   ],
@@ -30700,7 +31456,28 @@
    "Cadillac",
    "Escalade",
    2020,
+   "hood",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2020,
    "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2020,
+   "liftgate",
+   "open:ambig_target"
+  ],
+  [
+   "Cadillac",
+   "Escalade",
+   2020,
+   "radiator",
    "open:ambig_target"
   ],
   [
@@ -42593,6 +43370,13 @@
    "Chevrolet",
    "Blazer",
    1992,
+   "gauge-cluster",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Blazer",
+   1992,
    "headlights",
    "open:no_year_manifest"
   ],
@@ -42671,6 +43455,13 @@
    "Blazer",
    1993,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Blazer",
+   1993,
+   "gauge-cluster",
    "open:no_year_manifest"
   ],
   [
@@ -44700,6 +45491,13 @@
    "Chevrolet",
    "C1500",
    1988,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "C1500",
+   1988,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -44798,6 +45596,13 @@
    "Chevrolet",
    "C1500",
    1989,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "C1500",
+   1989,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -44890,6 +45695,13 @@
    "C1500",
    1990,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "C1500",
+   1990,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -45001,6 +45813,13 @@
    "Chevrolet",
    "C1500",
    1991,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "C1500",
+   1991,
    "headlights",
    "open:no_year_manifest"
   ],
@@ -45106,6 +45925,13 @@
    "Chevrolet",
    "C1500",
    1992,
+   "gauge-cluster",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "C1500",
+   1992,
    "headlights",
    "open:no_year_manifest"
   ],
@@ -45198,6 +46024,13 @@
    "C1500",
    1993,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "C1500",
+   1993,
+   "gauge-cluster",
    "open:no_year_manifest"
   ],
   [
@@ -46149,6 +46982,13 @@
    "Chevrolet",
    "C2500",
    1988,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "C2500",
+   1988,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -46247,6 +47087,13 @@
    "Chevrolet",
    "C2500",
    1989,
+   "grille",
+   "open:no_list_manifest"
+  ],
+  [
+   "Chevrolet",
+   "C2500",
+   1989,
    "power-steering-pump",
    "open:no_list_manifest"
   ],
@@ -46339,6 +47186,13 @@
    "C2500",
    1990,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "C2500",
+   1990,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -46450,6 +47304,13 @@
    "Chevrolet",
    "C2500",
    1991,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "C2500",
+   1991,
    "headlights",
    "open:no_year_manifest"
   ],
@@ -46555,6 +47416,13 @@
    "Chevrolet",
    "C2500",
    1992,
+   "gauge-cluster",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "C2500",
+   1992,
    "headlights",
    "open:no_year_manifest"
   ],
@@ -46647,6 +47515,13 @@
    "C2500",
    1993,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "C2500",
+   1993,
+   "gauge-cluster",
    "open:no_year_manifest"
   ],
   [
@@ -47717,6 +48592,13 @@
    "Chevrolet",
    "C3500",
    1988,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "C3500",
+   1988,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -47815,6 +48697,13 @@
    "Chevrolet",
    "C3500",
    1989,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "C3500",
+   1989,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -47907,6 +48796,13 @@
    "C3500",
    1990,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "C3500",
+   1990,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -48012,6 +48908,13 @@
    "C3500",
    1991,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "C3500",
+   1991,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -48130,6 +49033,13 @@
    "Chevrolet",
    "C3500",
    1992,
+   "gauge-cluster",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "C3500",
+   1992,
    "headlights",
    "open:no_year_manifest"
   ],
@@ -48236,6 +49146,13 @@
    "C3500",
    1993,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "C3500",
+   1993,
+   "gauge-cluster",
    "open:no_year_manifest"
   ],
   [
@@ -49460,6 +50377,13 @@
    "Chevrolet",
    "Camaro",
    1982,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Camaro",
+   1982,
    "side-mirrors",
    "open:no_year_manifest"
   ],
@@ -49489,6 +50413,13 @@
    "Camaro",
    1983,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Camaro",
+   1983,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -49537,6 +50468,13 @@
    "Chevrolet",
    "Camaro",
    1984,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Camaro",
+   1984,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -49573,6 +50511,13 @@
    "Camaro",
    1985,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Camaro",
+   1985,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -49628,6 +50573,13 @@
    "Chevrolet",
    "Camaro",
    1986,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Camaro",
+   1986,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -49671,6 +50623,13 @@
    "Camaro",
    1987,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Camaro",
+   1987,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -49733,6 +50692,13 @@
    "Chevrolet",
    "Camaro",
    1988,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Camaro",
+   1988,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -49783,6 +50749,13 @@
    "Camaro",
    1989,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Camaro",
+   1989,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -49852,6 +50825,13 @@
    "Chevrolet",
    "Camaro",
    1990,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Camaro",
+   1990,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -49901,6 +50881,13 @@
    "Chevrolet",
    "Camaro",
    1991,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Camaro",
+   1991,
    "climate-control",
    "open:no_year_manifest"
   ],
@@ -49909,6 +50896,13 @@
    "Camaro",
    1991,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Camaro",
+   1991,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -49957,6 +50951,13 @@
    "Chevrolet",
    "Camaro",
    1992,
+   "bumper-rear",
+   "open:no_list_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Camaro",
+   1992,
    "climate-control",
    "open:unread_sibling_page"
   ],
@@ -49966,6 +50967,20 @@
    1992,
    "fuel-pump-module",
    "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Camaro",
+   1992,
+   "gauge-cluster",
+   "open:no_list_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Camaro",
+   1992,
+   "grille",
+   "open:no_list_manifest"
   ],
   [
    "Chevrolet",
@@ -51945,6 +52960,13 @@
    "Chevrolet",
    "Caprice",
    1982,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1982,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -51980,6 +53002,13 @@
    "Chevrolet",
    "Caprice",
    1983,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1983,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -52015,6 +53044,13 @@
    "Chevrolet",
    "Caprice",
    1984,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1984,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -52030,42 +53066,49 @@
    "Caprice",
    1985,
    "ac-compressor",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Chevrolet",
    "Caprice",
    1985,
    "climate-control",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Chevrolet",
    "Caprice",
    1985,
    "fuel-pump-module",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1985,
+   "grille",
+   "open:no_list_manifest"
   ],
   [
    "Chevrolet",
    "Caprice",
    1985,
    "power-steering-pump",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Chevrolet",
    "Caprice",
    1985,
    "side-mirrors",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Chevrolet",
    "Caprice",
    1985,
    "starter",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Chevrolet",
@@ -52094,6 +53137,13 @@
    1986,
    "fuel-pump-module",
    "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1986,
+   "grille",
+   "open:no_list_manifest"
   ],
   [
    "Chevrolet",
@@ -52142,42 +53192,49 @@
    "Caprice",
    1987,
    "ac-compressor",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Chevrolet",
    "Caprice",
    1987,
    "climate-control",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Chevrolet",
    "Caprice",
    1987,
    "fuel-pump-module",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1987,
+   "grille",
+   "open:no_list_manifest"
   ],
   [
    "Chevrolet",
    "Caprice",
    1987,
    "power-steering-pump",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Chevrolet",
    "Caprice",
    1987,
    "side-mirrors",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Chevrolet",
    "Caprice",
    1987,
    "starter",
-   "open:no_year_manifest"
+   "open:no_list_manifest"
   ],
   [
    "Chevrolet",
@@ -52198,6 +53255,13 @@
    "Caprice",
    1988,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1988,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -52253,6 +53317,13 @@
    "Chevrolet",
    "Caprice",
    1989,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1989,
    "ignition-coils",
    "open:no_year_manifest"
   ],
@@ -52296,6 +53367,13 @@
    "Caprice",
    1990,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1990,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -52344,6 +53422,20 @@
    "Chevrolet",
    "Caprice",
    1991,
+   "bumper-front",
+   "open:no_list_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1991,
+   "bumper-rear",
+   "open:no_list_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1991,
    "climate-control",
    "open:unread_sibling_page"
   ],
@@ -52351,8 +53443,29 @@
    "Chevrolet",
    "Caprice",
    1991,
+   "door-rear",
+   "open:no_list_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1991,
    "fuel-pump-module",
    "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1991,
+   "gauge-cluster",
+   "open:no_list_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1991,
+   "grille",
+   "open:no_list_manifest"
   ],
   [
    "Chevrolet",
@@ -52367,6 +53480,13 @@
    1991,
    "power-steering-pump",
    "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1991,
+   "radiator",
+   "open:no_list_manifest"
   ],
   [
    "Chevrolet",
@@ -52421,6 +53541,20 @@
    "Chevrolet",
    "Caprice",
    1992,
+   "bumper-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1992,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1992,
    "climate-control",
    "open:no_year_manifest"
   ],
@@ -52428,7 +53562,28 @@
    "Chevrolet",
    "Caprice",
    1992,
+   "door-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1992,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1992,
+   "gauge-cluster",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1992,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -52443,6 +53598,13 @@
    "Caprice",
    1992,
    "power-steering-pump",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1992,
+   "radiator",
    "open:no_year_manifest"
   ],
   [
@@ -52491,6 +53653,20 @@
    "Chevrolet",
    "Caprice",
    1993,
+   "bumper-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1993,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1993,
    "climate-control",
    "open:no_year_manifest"
   ],
@@ -52498,7 +53674,28 @@
    "Chevrolet",
    "Caprice",
    1993,
+   "door-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1993,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1993,
+   "gauge-cluster",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1993,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -52513,6 +53710,13 @@
    "Caprice",
    1993,
    "power-steering-pump",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1993,
+   "radiator",
    "open:no_year_manifest"
   ],
   [
@@ -52568,6 +53772,20 @@
    "Chevrolet",
    "Caprice",
    1994,
+   "bumper-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1994,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1994,
    "climate-control",
    "open:no_year_manifest"
   ],
@@ -52575,7 +53793,21 @@
    "Chevrolet",
    "Caprice",
    1994,
+   "door-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1994,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1994,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -52645,6 +53877,20 @@
    "Chevrolet",
    "Caprice",
    1995,
+   "bumper-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1995,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1995,
    "climate-control",
    "open:no_year_manifest"
   ],
@@ -52652,7 +53898,21 @@
    "Chevrolet",
    "Caprice",
    1995,
+   "door-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1995,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1995,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -52722,6 +53982,20 @@
    "Chevrolet",
    "Caprice",
    1996,
+   "bumper-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1996,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1996,
    "climate-control",
    "open:no_year_manifest"
   ],
@@ -52729,7 +54003,21 @@
    "Chevrolet",
    "Caprice",
    1996,
+   "door-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1996,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Caprice",
+   1996,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -69158,6 +70446,13 @@
    "Chevrolet",
    "Impala",
    1982,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Impala",
+   1982,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -69193,6 +70488,13 @@
    "Chevrolet",
    "Impala",
    1983,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Impala",
+   1983,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -69222,6 +70524,13 @@
    "Impala",
    1984,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Impala",
+   1984,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -69257,6 +70566,13 @@
    "Impala",
    1985,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Impala",
+   1985,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -69298,6 +70614,20 @@
    "Chevrolet",
    "Impala",
    1994,
+   "bumper-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Impala",
+   1994,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Impala",
+   1994,
    "climate-control",
    "open:no_year_manifest"
   ],
@@ -69305,7 +70635,21 @@
    "Chevrolet",
    "Impala",
    1994,
+   "door-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Impala",
+   1994,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Impala",
+   1994,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -69375,6 +70719,20 @@
    "Chevrolet",
    "Impala",
    1995,
+   "bumper-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Impala",
+   1995,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Impala",
+   1995,
    "climate-control",
    "open:no_year_manifest"
   ],
@@ -69382,7 +70740,21 @@
    "Chevrolet",
    "Impala",
    1995,
+   "door-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Impala",
+   1995,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Impala",
+   1995,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -69452,6 +70824,20 @@
    "Chevrolet",
    "Impala",
    1996,
+   "bumper-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Impala",
+   1996,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Impala",
+   1996,
    "climate-control",
    "open:no_year_manifest"
   ],
@@ -69459,7 +70845,21 @@
    "Chevrolet",
    "Impala",
    1996,
+   "door-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Impala",
+   1996,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Impala",
+   1996,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -72630,6 +74030,13 @@
    "Chevrolet",
    "K1500",
    1988,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "K1500",
+   1988,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -72728,6 +74135,13 @@
    "Chevrolet",
    "K1500",
    1989,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "K1500",
+   1989,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -72820,6 +74234,13 @@
    "K1500",
    1990,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "K1500",
+   1990,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -72931,6 +74352,13 @@
    "Chevrolet",
    "K1500",
    1991,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "K1500",
+   1991,
    "headlights",
    "open:no_year_manifest"
   ],
@@ -73036,6 +74464,13 @@
    "Chevrolet",
    "K1500",
    1992,
+   "gauge-cluster",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "K1500",
+   1992,
    "headlights",
    "open:no_year_manifest"
   ],
@@ -73128,6 +74563,13 @@
    "K1500",
    1993,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "K1500",
+   1993,
+   "gauge-cluster",
    "open:no_year_manifest"
   ],
   [
@@ -74065,6 +75507,13 @@
    "Chevrolet",
    "K2500",
    1988,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "K2500",
+   1988,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -74163,6 +75612,13 @@
    "Chevrolet",
    "K2500",
    1989,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "K2500",
+   1989,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -74255,6 +75711,13 @@
    "K2500",
    1990,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "K2500",
+   1990,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -74366,6 +75829,13 @@
    "Chevrolet",
    "K2500",
    1991,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "K2500",
+   1991,
    "headlights",
    "open:no_year_manifest"
   ],
@@ -74471,6 +75941,13 @@
    "Chevrolet",
    "K2500",
    1992,
+   "gauge-cluster",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "K2500",
+   1992,
    "headlights",
    "open:no_year_manifest"
   ],
@@ -74563,6 +76040,13 @@
    "K2500",
    1993,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "K2500",
+   1993,
+   "gauge-cluster",
    "open:no_year_manifest"
   ],
   [
@@ -75535,6 +77019,13 @@
    "Chevrolet",
    "K3500",
    1988,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "K3500",
+   1988,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -75633,6 +77124,13 @@
    "Chevrolet",
    "K3500",
    1989,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "K3500",
+   1989,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -75725,6 +77223,13 @@
    "K3500",
    1990,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "K3500",
+   1990,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -75830,6 +77335,13 @@
    "K3500",
    1991,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "K3500",
+   1991,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -75948,6 +77460,13 @@
    "Chevrolet",
    "K3500",
    1992,
+   "gauge-cluster",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "K3500",
+   1992,
    "headlights",
    "open:no_year_manifest"
   ],
@@ -76054,6 +77573,13 @@
    "K3500",
    1993,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "K3500",
+   1993,
+   "gauge-cluster",
    "open:no_year_manifest"
   ],
   [
@@ -78454,6 +79980,20 @@
    "Chevrolet",
    "Malibu",
    1997,
+   "gauge-cluster",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   1997,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   1997,
    "headlights",
    "open:no_year_manifest"
   ],
@@ -78469,6 +80009,13 @@
    "Malibu",
    1997,
    "power-steering-pump",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   1997,
+   "radiator",
    "open:no_year_manifest"
   ],
   [
@@ -78573,6 +80120,20 @@
    "Chevrolet",
    "Malibu",
    1998,
+   "gauge-cluster",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   1998,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   1998,
    "headlights",
    "open:no_year_manifest"
   ],
@@ -78588,6 +80149,13 @@
    "Malibu",
    1998,
    "power-steering-pump",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   1998,
+   "radiator",
    "open:no_year_manifest"
   ],
   [
@@ -78687,6 +80255,20 @@
    1999,
    "fuel-pump-module",
    "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   1999,
+   "gauge-cluster",
+   "open:no_list_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Malibu",
+   1999,
+   "grille",
+   "open:no_list_manifest"
   ],
   [
    "Chevrolet",
@@ -93581,6 +95163,13 @@
    "Chevrolet",
    "Silverado 1500",
    2016,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2016,
    "starter",
    "open:ambig_target"
   ],
@@ -93630,6 +95219,13 @@
    "Chevrolet",
    "Silverado 1500",
    2017,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2017,
    "starter",
    "open:ambig_target"
   ],
@@ -93673,6 +95269,13 @@
    "Silverado 1500",
    2018,
    "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "Chevrolet",
+   "Silverado 1500",
+   2018,
+   "radiator",
    "open:ambig_target"
   ],
   [
@@ -99671,6 +101274,13 @@
    "Chevrolet",
    "Tahoe",
    2016,
+   "radiator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Tahoe",
+   2016,
    "side-mirrors",
    "open:no_year_manifest"
   ],
@@ -99720,6 +101330,13 @@
    "Chevrolet",
    "Tahoe",
    2017,
+   "radiator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Tahoe",
+   2017,
    "side-mirrors",
    "open:no_year_manifest"
   ],
@@ -99769,6 +101386,13 @@
    "Chevrolet",
    "Tahoe",
    2018,
+   "radiator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Tahoe",
+   2018,
    "side-mirrors",
    "open:no_year_manifest"
   ],
@@ -99818,6 +101442,13 @@
    "Chevrolet",
    "Tahoe",
    2019,
+   "radiator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Tahoe",
+   2019,
    "side-mirrors",
    "open:no_year_manifest"
   ],
@@ -99861,6 +101492,13 @@
    "Tahoe",
    2020,
    "ignition-coils",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Tahoe",
+   2020,
+   "radiator",
    "open:no_year_manifest"
   ],
   [
@@ -105495,7 +107133,35 @@
    "Chevrolet",
    "Volt",
    2011,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2011,
    "climate-control",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2011,
+   "door-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2011,
+   "door-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2011,
+   "fender",
    "open:no_year_manifest"
   ],
   [
@@ -105509,6 +107175,13 @@
    "Chevrolet",
    "Volt",
    2011,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2011,
    "headlights",
    "open:no_year_manifest"
   ],
@@ -105516,7 +107189,28 @@
    "Chevrolet",
    "Volt",
    2011,
+   "hood",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2011,
    "ignition-coils",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2011,
+   "liftgate",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2011,
+   "radiator",
    "open:no_year_manifest"
   ],
   [
@@ -105565,8 +107259,36 @@
    "Chevrolet",
    "Volt",
    2012,
+   "bumper-rear",
+   "open:no_list_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2012,
    "climate-control",
    "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2012,
+   "door-front",
+   "open:no_list_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2012,
+   "door-rear",
+   "open:no_list_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2012,
+   "fender",
+   "open:no_list_manifest"
   ],
   [
    "Chevrolet",
@@ -105579,6 +107301,20 @@
    "Chevrolet",
    "Volt",
    2012,
+   "gauge-cluster",
+   "open:no_list_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2012,
+   "grille",
+   "open:no_list_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2012,
    "headlights",
    "open:uncrawled_chain_member"
   ],
@@ -105586,7 +107322,28 @@
    "Chevrolet",
    "Volt",
    2012,
+   "hood",
+   "open:no_list_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2012,
    "ignition-coils",
+   "open:no_list_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2012,
+   "liftgate",
+   "open:no_list_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2012,
+   "radiator",
    "open:no_list_manifest"
   ],
   [
@@ -105649,7 +107406,35 @@
    "Chevrolet",
    "Volt",
    2013,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2013,
    "climate-control",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2013,
+   "door-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2013,
+   "door-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2013,
+   "fender",
    "open:no_year_manifest"
   ],
   [
@@ -105663,6 +107448,13 @@
    "Chevrolet",
    "Volt",
    2013,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2013,
    "headlights",
    "open:no_year_manifest"
   ],
@@ -105670,7 +107462,28 @@
    "Chevrolet",
    "Volt",
    2013,
+   "hood",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2013,
    "ignition-coils",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2013,
+   "liftgate",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2013,
+   "radiator",
    "open:no_year_manifest"
   ],
   [
@@ -105719,7 +107532,35 @@
    "Chevrolet",
    "Volt",
    2014,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2014,
    "climate-control",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2014,
+   "door-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2014,
+   "door-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2014,
+   "fender",
    "open:no_year_manifest"
   ],
   [
@@ -105733,6 +107574,13 @@
    "Chevrolet",
    "Volt",
    2014,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2014,
    "headlights",
    "open:no_year_manifest"
   ],
@@ -105740,7 +107588,28 @@
    "Chevrolet",
    "Volt",
    2014,
+   "hood",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2014,
    "ignition-coils",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2014,
+   "liftgate",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2014,
+   "radiator",
    "open:no_year_manifest"
   ],
   [
@@ -105789,7 +107658,35 @@
    "Chevrolet",
    "Volt",
    2015,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2015,
    "climate-control",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2015,
+   "door-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2015,
+   "door-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2015,
+   "fender",
    "open:no_year_manifest"
   ],
   [
@@ -105803,6 +107700,13 @@
    "Chevrolet",
    "Volt",
    2015,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2015,
    "headlights",
    "open:no_year_manifest"
   ],
@@ -105810,7 +107714,28 @@
    "Chevrolet",
    "Volt",
    2015,
+   "hood",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2015,
    "ignition-coils",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2015,
+   "liftgate",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2015,
+   "radiator",
    "open:no_year_manifest"
   ],
   [
@@ -105859,7 +107784,42 @@
    "Chevrolet",
    "Volt",
    2016,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2016,
+   "door-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2016,
+   "door-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2016,
+   "fender",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2016,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2016,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -105873,7 +107833,28 @@
    "Chevrolet",
    "Volt",
    2016,
+   "hood",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2016,
    "ignition-coils",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2016,
+   "liftgate",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2016,
+   "radiator",
    "open:no_year_manifest"
   ],
   [
@@ -105922,8 +107903,43 @@
    "Chevrolet",
    "Volt",
    2017,
+   "bumper-rear",
+   "open:no_list_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2017,
+   "door-front",
+   "open:no_list_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2017,
+   "door-rear",
+   "open:no_list_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2017,
+   "fender",
+   "open:no_list_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2017,
    "fuel-pump-module",
    "open:unread_sibling_page"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2017,
+   "grille",
+   "open:no_list_manifest"
   ],
   [
    "Chevrolet",
@@ -105936,7 +107952,28 @@
    "Chevrolet",
    "Volt",
    2017,
+   "hood",
+   "open:no_list_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2017,
    "ignition-coils",
+   "open:no_list_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2017,
+   "liftgate",
+   "open:no_list_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2017,
+   "radiator",
    "open:no_list_manifest"
   ],
   [
@@ -105999,7 +108036,42 @@
    "Chevrolet",
    "Volt",
    2018,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2018,
+   "door-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2018,
+   "door-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2018,
+   "fender",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2018,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2018,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -106013,7 +108085,28 @@
    "Chevrolet",
    "Volt",
    2018,
+   "hood",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2018,
    "ignition-coils",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2018,
+   "liftgate",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2018,
+   "radiator",
    "open:no_year_manifest"
   ],
   [
@@ -106062,7 +108155,42 @@
    "Chevrolet",
    "Volt",
    2019,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2019,
+   "door-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2019,
+   "door-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2019,
+   "fender",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2019,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2019,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -106076,7 +108204,21 @@
    "Chevrolet",
    "Volt",
    2019,
+   "hood",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2019,
    "ignition-coils",
+   "open:no_year_manifest"
+  ],
+  [
+   "Chevrolet",
+   "Volt",
+   2019,
+   "liftgate",
    "open:no_year_manifest"
   ],
   [
@@ -108113,6 +110255,13 @@
    "GMC",
    "C1500",
    1988,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "C1500",
+   1988,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -108211,6 +110360,13 @@
    "GMC",
    "C1500",
    1989,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "C1500",
+   1989,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -108303,6 +110459,13 @@
    "C1500",
    1990,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "C1500",
+   1990,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -108414,6 +110577,13 @@
    "GMC",
    "C1500",
    1991,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "C1500",
+   1991,
    "headlights",
    "open:no_year_manifest"
   ],
@@ -108519,6 +110689,20 @@
    "GMC",
    "C1500",
    1992,
+   "gauge-cluster",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "C1500",
+   1992,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "C1500",
+   1992,
    "headlights",
    "open:no_year_manifest"
   ],
@@ -108611,6 +110795,20 @@
    "C1500",
    1993,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "C1500",
+   1993,
+   "gauge-cluster",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "C1500",
+   1993,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -109562,6 +111760,13 @@
    "GMC",
    "C2500",
    1988,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "C2500",
+   1988,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -109660,6 +111865,13 @@
    "GMC",
    "C2500",
    1989,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "C2500",
+   1989,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -109752,6 +111964,13 @@
    "C2500",
    1990,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "C2500",
+   1990,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -109863,6 +112082,13 @@
    "GMC",
    "C2500",
    1991,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "C2500",
+   1991,
    "headlights",
    "open:no_year_manifest"
   ],
@@ -109968,6 +112194,20 @@
    "GMC",
    "C2500",
    1992,
+   "gauge-cluster",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "C2500",
+   1992,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "C2500",
+   1992,
    "headlights",
    "open:no_year_manifest"
   ],
@@ -110060,6 +112300,20 @@
    "C2500",
    1993,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "C2500",
+   1993,
+   "gauge-cluster",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "C2500",
+   1993,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -111130,6 +113384,13 @@
    "GMC",
    "C3500",
    1988,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "C3500",
+   1988,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -111228,6 +113489,13 @@
    "GMC",
    "C3500",
    1989,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "C3500",
+   1989,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -111320,6 +113588,13 @@
    "C3500",
    1990,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "C3500",
+   1990,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -111425,6 +113700,13 @@
    "C3500",
    1991,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "C3500",
+   1991,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -111543,6 +113825,20 @@
    "GMC",
    "C3500",
    1992,
+   "gauge-cluster",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "C3500",
+   1992,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "C3500",
+   1992,
    "headlights",
    "open:no_year_manifest"
   ],
@@ -111649,6 +113945,20 @@
    "C3500",
    1993,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "C3500",
+   1993,
+   "gauge-cluster",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "C3500",
+   1993,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -118788,6 +121098,13 @@
    "GMC",
    "K1500",
    1988,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "K1500",
+   1988,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -118886,6 +121203,13 @@
    "GMC",
    "K1500",
    1989,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "K1500",
+   1989,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -118978,6 +121302,13 @@
    "K1500",
    1990,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "K1500",
+   1990,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -119089,6 +121420,13 @@
    "GMC",
    "K1500",
    1991,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "K1500",
+   1991,
    "headlights",
    "open:no_year_manifest"
   ],
@@ -119194,6 +121532,20 @@
    "GMC",
    "K1500",
    1992,
+   "gauge-cluster",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "K1500",
+   1992,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "K1500",
+   1992,
    "headlights",
    "open:no_year_manifest"
   ],
@@ -119286,6 +121638,20 @@
    "K1500",
    1993,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "K1500",
+   1993,
+   "gauge-cluster",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "K1500",
+   1993,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -120223,6 +122589,13 @@
    "GMC",
    "K2500",
    1988,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "K2500",
+   1988,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -120321,6 +122694,13 @@
    "GMC",
    "K2500",
    1989,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "K2500",
+   1989,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -120413,6 +122793,13 @@
    "K2500",
    1990,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "K2500",
+   1990,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -120524,6 +122911,13 @@
    "GMC",
    "K2500",
    1991,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "K2500",
+   1991,
    "headlights",
    "open:no_year_manifest"
   ],
@@ -120629,6 +123023,20 @@
    "GMC",
    "K2500",
    1992,
+   "gauge-cluster",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "K2500",
+   1992,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "K2500",
+   1992,
    "headlights",
    "open:no_year_manifest"
   ],
@@ -120721,6 +123129,20 @@
    "K2500",
    1993,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "K2500",
+   1993,
+   "gauge-cluster",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "K2500",
+   1993,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -121791,6 +124213,13 @@
    "GMC",
    "K3500",
    1988,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "K3500",
+   1988,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -121889,6 +124318,13 @@
    "GMC",
    "K3500",
    1989,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "K3500",
+   1989,
    "power-steering-pump",
    "open:no_year_manifest"
   ],
@@ -121981,6 +124417,13 @@
    "K3500",
    1990,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "K3500",
+   1990,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -122086,6 +124529,13 @@
    "K3500",
    1991,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "K3500",
+   1991,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -122204,6 +124654,20 @@
    "GMC",
    "K3500",
    1992,
+   "gauge-cluster",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "K3500",
+   1992,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "K3500",
+   1992,
    "headlights",
    "open:no_year_manifest"
   ],
@@ -122310,6 +124774,20 @@
    "K3500",
    1993,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "K3500",
+   1993,
+   "gauge-cluster",
+   "open:no_year_manifest"
+  ],
+  [
+   "GMC",
+   "K3500",
+   1993,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -126901,6 +129379,13 @@
    "GMC",
    "Savana",
    2003,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Savana",
+   2003,
    "headlights",
    "open:ambig_target"
   ],
@@ -127007,6 +129492,13 @@
    "Savana",
    2004,
    "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Savana",
+   2004,
+   "grille",
    "open:ambig_target"
   ],
   [
@@ -127126,6 +129618,13 @@
    "Savana",
    2005,
    "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Savana",
+   2005,
+   "grille",
    "open:ambig_target"
   ],
   [
@@ -127258,6 +129757,13 @@
    "GMC",
    "Savana",
    2006,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Savana",
+   2006,
    "headlights",
    "open:ambig_target"
   ],
@@ -127377,6 +129883,13 @@
    "GMC",
    "Savana",
    2007,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Savana",
+   2007,
    "headlights",
    "open:ambig_target"
   ],
@@ -127496,6 +130009,13 @@
    "GMC",
    "Savana",
    2008,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Savana",
+   2008,
    "headlights",
    "open:ambig_target"
   ],
@@ -127609,6 +130129,13 @@
    "Savana",
    2009,
    "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Savana",
+   2009,
+   "grille",
    "open:ambig_target"
   ],
   [
@@ -127741,6 +130268,13 @@
    "GMC",
    "Savana",
    2010,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Savana",
+   2010,
    "headlights",
    "open:ambig_target"
   ],
@@ -127861,6 +130395,13 @@
    "Savana",
    2011,
    "gauge-cluster",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Savana",
+   2011,
+   "grille",
    "open:ambig_target"
   ],
   [
@@ -127993,6 +130534,13 @@
    "GMC",
    "Savana",
    2012,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Savana",
+   2012,
    "headlights",
    "open:ambig_target"
   ],
@@ -128112,6 +130660,13 @@
    "GMC",
    "Savana",
    2013,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Savana",
+   2013,
    "headlights",
    "open:ambig_target"
   ],
@@ -128231,6 +130786,13 @@
    "GMC",
    "Savana",
    2014,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Savana",
+   2014,
    "headlights",
    "open:ambig_target"
   ],
@@ -128350,6 +130912,13 @@
    "GMC",
    "Savana",
    2015,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Savana",
+   2015,
    "headlights",
    "open:ambig_target"
   ],
@@ -128462,6 +131031,13 @@
    "GMC",
    "Savana",
    2016,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Savana",
+   2016,
    "headlights",
    "open:ambig_target"
   ],
@@ -128553,6 +131129,13 @@
    "GMC",
    "Savana",
    2017,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Savana",
+   2017,
    "headlights",
    "open:ambig_target"
   ],
@@ -128637,6 +131220,13 @@
    "GMC",
    "Savana",
    2018,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Savana",
+   2018,
    "headlights",
    "open:ambig_target"
   ],
@@ -128721,6 +131311,13 @@
    "GMC",
    "Savana",
    2019,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Savana",
+   2019,
    "headlights",
    "open:ambig_target"
   ],
@@ -128799,6 +131396,13 @@
    "Savana",
    2020,
    "fender",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Savana",
+   2020,
+   "grille",
    "open:ambig_target"
   ],
   [
@@ -128890,6 +131494,13 @@
    "Savana",
    2021,
    "fender",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Savana",
+   2021,
+   "grille",
    "open:ambig_target"
   ],
   [
@@ -134566,6 +137177,13 @@
    "GMC",
    "Sierra 1500",
    2016,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2016,
    "starter",
    "open:ambig_target"
   ],
@@ -134608,6 +137226,13 @@
    "GMC",
    "Sierra 1500",
    2017,
+   "radiator",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2017,
    "starter",
    "open:ambig_target"
   ],
@@ -134644,6 +137269,13 @@
    "Sierra 1500",
    2018,
    "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Sierra 1500",
+   2018,
+   "radiator",
    "open:ambig_target"
   ],
   [
@@ -137121,6 +139753,20 @@
    "GMC",
    "Suburban",
    1992,
+   "gauge-cluster",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Suburban",
+   1992,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Suburban",
+   1992,
    "headlights",
    "open:ambig_target"
   ],
@@ -137220,6 +139866,20 @@
    "Suburban",
    1993,
    "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Suburban",
+   1993,
+   "gauge-cluster",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Suburban",
+   1993,
+   "grille",
    "open:ambig_target"
   ],
   [
@@ -139571,6 +142231,20 @@
    "GMC",
    "Yukon",
    1992,
+   "gauge-cluster",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Yukon",
+   1992,
+   "grille",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Yukon",
+   1992,
    "headlights",
    "open:ambig_target"
   ],
@@ -139649,6 +142323,20 @@
    "Yukon",
    1993,
    "fuel-pump-module",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Yukon",
+   1993,
+   "gauge-cluster",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Yukon",
+   1993,
+   "grille",
    "open:ambig_target"
   ],
   [
@@ -142988,6 +145676,13 @@
    "Yukon",
    2016,
    "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Yukon",
+   2016,
+   "radiator",
    "open:ambig_target"
   ],
   [
@@ -143051,6 +145746,13 @@
    "Yukon",
    2017,
    "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Yukon",
+   2017,
+   "radiator",
    "open:ambig_target"
   ],
   [
@@ -143114,6 +145816,13 @@
    "Yukon",
    2018,
    "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Yukon",
+   2018,
+   "radiator",
    "open:ambig_target"
   ],
   [
@@ -143177,6 +145886,13 @@
    "Yukon",
    2019,
    "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Yukon",
+   2019,
+   "radiator",
    "open:ambig_target"
   ],
   [
@@ -143240,6 +145956,13 @@
    "Yukon",
    2020,
    "ignition-coils",
+   "open:ambig_target"
+  ],
+  [
+   "GMC",
+   "Yukon",
+   2020,
+   "radiator",
    "open:ambig_target"
   ],
   [
@@ -145997,6 +148720,13 @@
    "Oldsmobile",
    "Achieva",
    1997,
+   "radiator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Achieva",
+   1997,
    "side-mirrors",
    "open:no_year_manifest"
   ],
@@ -146089,6 +148819,13 @@
    "Achieva",
    1998,
    "power-steering-pump",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Achieva",
+   1998,
+   "radiator",
    "open:no_year_manifest"
   ],
   [
@@ -148076,6 +150813,13 @@
    "Oldsmobile",
    "Bravada",
    1996,
+   "bumper-front",
+   "open:no_list_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Bravada",
+   1996,
    "climate-control",
    "open:no_list_manifest"
   ],
@@ -148104,6 +150848,13 @@
    "Oldsmobile",
    "Bravada",
    1996,
+   "grille",
+   "open:no_list_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Bravada",
+   1996,
    "headlights",
    "open:no_list_manifest"
   ],
@@ -148175,6 +150926,13 @@
    "Bravada",
    1997,
    "alternator",
+   "open:no_list_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Bravada",
+   1997,
+   "bumper-front",
    "open:no_list_manifest"
   ],
   [
@@ -148216,6 +150974,13 @@
    "Oldsmobile",
    "Bravada",
    1997,
+   "grille",
+   "open:no_list_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Bravada",
+   1997,
    "headlights",
    "open:no_list_manifest"
   ],
@@ -148755,6 +151520,20 @@
    "Oldsmobile",
    "Bravada",
    2002,
+   "bumper-front",
+   "open:no_list_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Bravada",
+   2002,
+   "bumper-rear",
+   "open:no_list_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Bravada",
+   2002,
    "climate-control",
    "open:no_list_manifest"
   ],
@@ -148769,6 +151548,13 @@
    "Oldsmobile",
    "Bravada",
    2002,
+   "fender",
+   "open:no_list_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Bravada",
+   2002,
    "fuel-pump-module",
    "open:no_list_manifest"
   ],
@@ -148776,7 +151562,21 @@
    "Oldsmobile",
    "Bravada",
    2002,
+   "grille",
+   "open:no_list_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Bravada",
+   2002,
    "headlights",
+   "open:no_list_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Bravada",
+   2002,
+   "hood",
    "open:no_list_manifest"
   ],
   [
@@ -148853,6 +151653,20 @@
    "Oldsmobile",
    "Bravada",
    2003,
+   "bumper-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Bravada",
+   2003,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Bravada",
+   2003,
    "climate-control",
    "open:no_year_manifest"
   ],
@@ -148867,6 +151681,13 @@
    "Oldsmobile",
    "Bravada",
    2003,
+   "fender",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Bravada",
+   2003,
    "fuel-pump-module",
    "open:no_year_manifest"
   ],
@@ -148874,7 +151695,21 @@
    "Oldsmobile",
    "Bravada",
    2003,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Bravada",
+   2003,
    "headlights",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Bravada",
+   2003,
+   "hood",
    "open:no_year_manifest"
   ],
   [
@@ -148958,6 +151793,20 @@
    "Oldsmobile",
    "Bravada",
    2004,
+   "bumper-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Bravada",
+   2004,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Bravada",
+   2004,
    "climate-control",
    "open:no_year_manifest"
   ],
@@ -148979,7 +151828,21 @@
    "Oldsmobile",
    "Bravada",
    2004,
+   "grille",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Bravada",
+   2004,
    "headlights",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Bravada",
+   2004,
+   "hood",
    "open:no_year_manifest"
   ],
   [
@@ -149791,6 +152654,13 @@
    "Oldsmobile",
    "Custom Cruiser",
    1991,
+   "radiator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Custom Cruiser",
+   1991,
    "side-mirrors",
    "open:no_year_manifest"
   ],
@@ -149847,6 +152717,13 @@
    "Oldsmobile",
    "Custom Cruiser",
    1992,
+   "radiator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Custom Cruiser",
+   1992,
    "side-mirrors",
    "open:no_year_manifest"
   ],
@@ -149889,6 +152766,20 @@
    "Oldsmobile",
    "Cutlass",
    1982,
+   "bumper-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1982,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1982,
    "fuel-pump-module",
    "open:no_year_manifest"
   ],
@@ -149945,6 +152836,20 @@
    "Oldsmobile",
    "Cutlass",
    1983,
+   "bumper-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1983,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1983,
    "fuel-pump-module",
    "open:no_year_manifest"
   ],
@@ -149994,6 +152899,20 @@
    "Oldsmobile",
    "Cutlass",
    1984,
+   "bumper-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1984,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1984,
    "fuel-pump-module",
    "open:no_year_manifest"
   ],
@@ -150043,7 +152962,21 @@
    "Oldsmobile",
    "Cutlass",
    1985,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1985,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1985,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -150099,6 +153032,13 @@
    "Oldsmobile",
    "Cutlass",
    1986,
+   "bumper-rear",
+   "open:year_manifest_bad"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1986,
    "fuel-pump-module",
    "open:year_manifest_bad"
   ],
@@ -150155,6 +153095,13 @@
    "Oldsmobile",
    "Cutlass",
    1987,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1987,
    "fuel-pump-module",
    "open:no_year_manifest"
   ],
@@ -150218,7 +153165,21 @@
    "Oldsmobile",
    "Cutlass",
    1988,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1988,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1988,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -150288,7 +153249,21 @@
    "Oldsmobile",
    "Cutlass",
    1989,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1989,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1989,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -150324,6 +153299,13 @@
    "Cutlass",
    1989,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1989,
+   "trunk-lid",
    "open:no_year_manifest"
   ],
   [
@@ -150351,6 +153333,13 @@
    "Oldsmobile",
    "Cutlass",
    1990,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1990,
    "climate-control",
    "open:no_year_manifest"
   ],
@@ -150359,6 +153348,13 @@
    "Cutlass",
    1990,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1990,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -150394,6 +153390,13 @@
    "Cutlass",
    1990,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1990,
+   "trunk-lid",
    "open:no_year_manifest"
   ],
   [
@@ -150428,6 +153431,13 @@
    "Oldsmobile",
    "Cutlass",
    1991,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1991,
    "climate-control",
    "open:no_year_manifest"
   ],
@@ -150436,6 +153446,13 @@
    "Cutlass",
    1991,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1991,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -150491,6 +153508,13 @@
    "Oldsmobile",
    "Cutlass",
    1991,
+   "trunk-lid",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1991,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -150519,6 +153543,20 @@
    "Oldsmobile",
    "Cutlass",
    1992,
+   "bumper-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1992,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1992,
    "climate-control",
    "open:no_year_manifest"
   ],
@@ -150527,6 +153565,20 @@
    "Cutlass",
    1992,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1992,
+   "gauge-cluster",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1992,
+   "grille",
    "open:no_year_manifest"
   ],
   [
@@ -150582,6 +153634,13 @@
    "Oldsmobile",
    "Cutlass",
    1992,
+   "trunk-lid",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1992,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -150610,6 +153669,20 @@
    "Oldsmobile",
    "Cutlass",
    1993,
+   "bumper-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1993,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1993,
    "climate-control",
    "open:no_year_manifest"
   ],
@@ -150618,6 +153691,13 @@
    "Cutlass",
    1993,
    "fuel-pump-module",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1993,
+   "gauge-cluster",
    "open:no_year_manifest"
   ],
   [
@@ -150666,6 +153746,13 @@
    "Oldsmobile",
    "Cutlass",
    1993,
+   "trunk-lid",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1993,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -150694,6 +153781,13 @@
    "Oldsmobile",
    "Cutlass",
    1994,
+   "bumper-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1994,
    "climate-control",
    "open:no_year_manifest"
   ],
@@ -150716,6 +153810,13 @@
    "Cutlass",
    1994,
    "power-steering-pump",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1994,
+   "radiator",
    "open:no_year_manifest"
   ],
   [
@@ -150750,6 +153851,13 @@
    "Oldsmobile",
    "Cutlass",
    1994,
+   "trunk-lid",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1994,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -150772,6 +153880,13 @@
    "Cutlass",
    1995,
    "alternator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1995,
+   "bumper-front",
    "open:no_year_manifest"
   ],
   [
@@ -150806,6 +153921,13 @@
    "Oldsmobile",
    "Cutlass",
    1995,
+   "radiator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1995,
    "side-mirrors",
    "open:no_year_manifest"
   ],
@@ -150834,6 +153956,13 @@
    "Oldsmobile",
    "Cutlass",
    1995,
+   "trunk-lid",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1995,
    "window-regulator",
    "open:no_year_manifest"
   ],
@@ -150856,6 +153985,13 @@
    "Cutlass",
    1996,
    "alternator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1996,
+   "bumper-front",
    "open:no_year_manifest"
   ],
   [
@@ -150919,6 +154055,13 @@
    "Cutlass",
    1996,
    "throttle-body",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1996,
+   "trunk-lid",
    "open:no_year_manifest"
   ],
   [
@@ -151002,6 +154145,13 @@
    "Oldsmobile",
    "Cutlass",
    1997,
+   "radiator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1997,
    "side-mirrors",
    "open:no_year_manifest"
   ],
@@ -151107,6 +154257,13 @@
    "Oldsmobile",
    "Cutlass",
    1998,
+   "radiator",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Cutlass",
+   1998,
    "side-mirrors",
    "open:no_year_manifest"
   ],
@@ -151807,7 +154964,28 @@
    "Oldsmobile",
    "Intrigue",
    1998,
+   "bumper-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Intrigue",
+   1998,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Intrigue",
+   1998,
    "climate-control",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Intrigue",
+   1998,
+   "gauge-cluster",
    "open:no_year_manifest"
   ],
   [
@@ -151898,7 +155076,28 @@
    "Oldsmobile",
    "Intrigue",
    1999,
+   "bumper-front",
+   "open:no_list_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Intrigue",
+   1999,
+   "bumper-rear",
+   "open:no_list_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Intrigue",
+   1999,
    "climate-control",
+   "open:no_list_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Intrigue",
+   1999,
+   "gauge-cluster",
    "open:no_list_manifest"
   ],
   [
@@ -151989,6 +155188,20 @@
    "Oldsmobile",
    "Intrigue",
    2000,
+   "bumper-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Intrigue",
+   2000,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Intrigue",
+   2000,
    "climate-control",
    "open:no_year_manifest"
   ],
@@ -151997,6 +155210,13 @@
    "Intrigue",
    2000,
    "headlights",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Intrigue",
+   2000,
+   "ignition-coils",
    "open:no_year_manifest"
   ],
   [
@@ -152059,6 +155279,20 @@
    "Oldsmobile",
    "Intrigue",
    2001,
+   "bumper-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Intrigue",
+   2001,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Intrigue",
+   2001,
    "climate-control",
    "open:no_year_manifest"
   ],
@@ -152074,6 +155308,13 @@
    "Intrigue",
    2001,
    "headlights",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Intrigue",
+   2001,
+   "ignition-coils",
    "open:no_year_manifest"
   ],
   [
@@ -152136,6 +155377,20 @@
    "Oldsmobile",
    "Intrigue",
    2002,
+   "bumper-front",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Intrigue",
+   2002,
+   "bumper-rear",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Intrigue",
+   2002,
    "climate-control",
    "open:no_year_manifest"
   ],
@@ -152151,6 +155406,13 @@
    "Intrigue",
    2002,
    "headlights",
+   "open:no_year_manifest"
+  ],
+  [
+   "Oldsmobile",
+   "Intrigue",
+   2002,
+   "ignition-coils",
    "open:no_year_manifest"
   ],
   [
@@ -206638,20 +209900,20 @@
   }
  ],
  "ns": "gm",
- "policy_sha256": "9f78842939480725f6d776e08ef4994695ed01f080cfb6eec172be10602d488c",
+ "policy_sha256": "00333e78ff3dabc9ca00e0c3aab8d9fbb6a787d19e3e219b1e713286373ef94f",
  "raw": {
-  "commit": "1351c33fcfbb97862fa5aa9265dd92f7350c1ebc",
-  "ref": "1351c33fcfbb",
+  "commit": "dca9cd845f26337a4047b9176cc17929ffc984a3",
+  "ref": "dca9cd845f26",
   "sites": {
    "www.gmpartsgiant.com": {
     "blocked": false,
     "done": false,
     "lists": 3281,
     "lists_sha256": "6b6328210a6a0135c948d40c63f884fa8c36ad29257a0c11a387498534f0e196",
-    "records": 6942,
-    "records_sha256": "dd3a2201a9325d2501251053d2b4d5d26fff2be998a3f26f1e5ddd6cba793662",
-    "years": 588,
-    "years_sha256": "8da798e371e15849c7bfb6fbe7f3090ecf8e92e251d6e84e7cccc2cf8dd93eb7"
+    "records": 7197,
+    "records_sha256": "adc82bea8896e34cfb6be20037dc50615033e4cb9eb324ce2170d4a1dcc70f88",
+    "years": 636,
+    "years_sha256": "35612e389e75596089fae2cca6ffb6e51f52504d3972490ea84762a067189462"
    }
   }
  },

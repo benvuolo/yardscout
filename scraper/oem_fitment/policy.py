@@ -445,7 +445,7 @@ WHEEL_SAME_MODEL_ONLY_NS = frozenset({"toyota"})
 # 0 WRONG and the hub confirmed (2026-11-09: mopar, census of 32, 29 shipped).
 # Every other namespace's wheels groups are refused (wheels_not_audited) until
 # its own audit round.
-WHEELS_AUDITED_NS = frozenset({"mopar", "mb", "vag"})   # mb / vag: census 2026-11-09, 10 + 3 shipped
+WHEELS_AUDITED_NS = frozenset({"mopar", "mb", "vag", "hmg"})   # mb / vag: census 2026-11-09, 10 + 3 shipped; hmg: census 2026-11-10, 9 shipped
 WHEEL_DIAMETER_RE = re.compile(r"\b(1[3-9]|2[0-4])(?:\.\d)?\s*(?:x\s*\d|\"|''|-?\s*inch|\s*in\b)", re.I)
 # round 2 (2026-11-09, 2 WRONG): diameters agreed but widths did not ("15x6" on
 # the 2000 Cherokee vs "15x7" on the Wranglers; "20x9, Code WP2" vs "20x8, Code

@@ -1,5 +1,5 @@
 {
- "as_of": "2026-11-09T22:35:02Z",
+ "as_of": "2026-11-10T00:51:53Z",
  "audit_sample": {
   "closures": [],
   "note": "no eligible closure or Verified pair to sample",
@@ -14466,6 +14466,33 @@
    "reason": "family_gap",
    "t": [
     "Oldsmobile",
+    "Intrigue",
+    2000
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Oldsmobile",
+    "Intrigue",
+    2001
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Oldsmobile",
+    "Intrigue",
+    2002
+   ]
+  },
+  {
+   "cat": "ignition-coils",
+   "reason": "family_gap",
+   "t": [
+    "Oldsmobile",
     "Silhouette",
     1992
    ]
@@ -24873,8 +24900,8 @@
    },
    "not_closed": {
     "ambig_target": 10516,
-    "no_list_manifest": 13583,
-    "no_year_manifest": 39609,
+    "no_list_manifest": 13586,
+    "no_year_manifest": 39606,
     "unattested": 34,
     "uncrawled_chain_member": 1102,
     "unverified_product": 1041,
@@ -24903,12 +24930,12 @@
   },
   "bumper-front": {
    "no_records": {
-    "": 11913
+    "": 11581
    },
    "not_closed": {
     "ambig_target": 7707,
-    "no_list_manifest": 15381,
-    "no_year_manifest": 34404,
+    "no_list_manifest": 15481,
+    "no_year_manifest": 34636,
     "variant_unread": 635
    },
    "unmapped": {
@@ -24917,13 +24944,14 @@
   },
   "bumper-rear": {
    "no_records": {
-    "": 13898
+    "": 13306
    },
    "not_closed": {
-    "ambig_target": 7407,
-    "no_list_manifest": 14498,
-    "no_year_manifest": 33602,
-    "variant_unread": 635
+    "ambig_target": 7411,
+    "no_list_manifest": 14696,
+    "no_year_manifest": 33991,
+    "variant_unread": 635,
+    "year_manifest_bad": 1
    },
    "unmapped": {
     "": 11256
@@ -24935,8 +24963,8 @@
    },
    "not_closed": {
     "ambig_target": 10800,
-    "no_list_manifest": 11619,
-    "no_year_manifest": 28036,
+    "no_list_manifest": 11622,
+    "no_year_manifest": 28033,
     "unread_sibling_page": 1885,
     "variant_unread": 615,
     "year_manifest_bad": 6
@@ -24947,12 +24975,12 @@
   },
   "door-front": {
    "no_records": {
-    "": 9224
+    "": 9119
    },
    "not_closed": {
-    "ambig_target": 10933,
-    "no_list_manifest": 14090,
-    "no_year_manifest": 35152,
+    "ambig_target": 10936,
+    "no_list_manifest": 14133,
+    "no_year_manifest": 35211,
     "variant_unread": 635,
     "year_manifest_bad": 6
    },
@@ -24962,12 +24990,12 @@
   },
   "door-rear": {
    "no_records": {
-    "": 15004
+    "": 14824
    },
    "not_closed": {
-    "ambig_target": 7716,
-    "no_list_manifest": 13726,
-    "no_year_manifest": 32953,
+    "ambig_target": 7719,
+    "no_list_manifest": 13786,
+    "no_year_manifest": 33070,
     "variant_unread": 635,
     "year_manifest_bad": 6
    },
@@ -24977,12 +25005,12 @@
   },
   "fender": {
    "no_records": {
-    "": 19703
+    "": 19269
    },
    "not_closed": {
-    "ambig_target": 9504,
-    "no_list_manifest": 12174,
-    "no_year_manifest": 28038,
+    "ambig_target": 9508,
+    "no_list_manifest": 12302,
+    "no_year_manifest": 28340,
     "variant_unread": 615,
     "year_manifest_bad": 6
    },
@@ -24996,8 +25024,8 @@
    },
    "not_closed": {
     "ambig_target": 10285,
-    "no_list_manifest": 13500,
-    "no_year_manifest": 36308,
+    "no_list_manifest": 13503,
+    "no_year_manifest": 36305,
     "unread_sibling_page": 2176,
     "variant_unread": 635,
     "year_manifest_bad": 7
@@ -25008,12 +25036,12 @@
   },
   "gauge-cluster": {
    "no_records": {
-    "": 26782
+    "": 26345
    },
    "not_closed": {
-    "ambig_target": 8721,
-    "no_list_manifest": 14101,
-    "no_year_manifest": 19821,
+    "ambig_target": 8736,
+    "no_list_manifest": 14294,
+    "no_year_manifest": 20050,
     "variant_unread": 615
    },
    "unmapped": {
@@ -25022,12 +25050,12 @@
   },
   "grille": {
    "no_records": {
-    "": 11260
+    "": 10345
    },
    "not_closed": {
-    "ambig_target": 10198,
-    "no_list_manifest": 14576,
-    "no_year_manifest": 33391,
+    "ambig_target": 10317,
+    "no_list_manifest": 14802,
+    "no_year_manifest": 33961,
     "variant_unread": 615
    },
    "unmapped": {
@@ -25055,12 +25083,12 @@
   },
   "hood": {
    "no_records": {
-    "": 18446
+    "": 18005
    },
    "not_closed": {
-    "ambig_target": 9376,
-    "no_list_manifest": 12937,
-    "no_year_manifest": 28660,
+    "ambig_target": 9380,
+    "no_list_manifest": 13065,
+    "no_year_manifest": 28969,
     "variant_unread": 615,
     "year_manifest_bad": 6
    },
@@ -25070,12 +25098,12 @@
   },
   "ignition-coils": {
    "no_records": {
-    "": 4805
+    "": 4751
    },
    "not_closed": {
     "ambig_target": 9338,
     "no_list_manifest": 15505,
-    "no_year_manifest": 39750,
+    "no_year_manifest": 39804,
     "variant_unread": 635,
     "year_manifest_bad": 7
    },
@@ -25085,12 +25113,12 @@
   },
   "liftgate": {
    "no_records": {
-    "": 46123
+    "": 46021
    },
    "not_closed": {
     "ambig_target": 4397,
-    "no_list_manifest": 5156,
-    "no_year_manifest": 14338,
+    "no_list_manifest": 5199,
+    "no_year_manifest": 14397,
     "variant_unread": 20,
     "year_manifest_bad": 6
    },
@@ -25104,8 +25132,8 @@
    },
    "not_closed": {
     "ambig_target": 10730,
-    "no_list_manifest": 9189,
-    "no_year_manifest": 30187,
+    "no_list_manifest": 9192,
+    "no_year_manifest": 30184,
     "unread_sibling_page": 1815,
     "variant_unread": 428,
     "year_manifest_bad": 7
@@ -25116,12 +25144,12 @@
   },
   "radiator": {
    "no_records": {
-    "": 5257
+    "": 4906
    },
    "not_closed": {
-    "ambig_target": 10693,
-    "no_list_manifest": 15305,
-    "no_year_manifest": 38144,
+    "ambig_target": 10738,
+    "no_list_manifest": 15385,
+    "no_year_manifest": 38370,
     "variant_unread": 635,
     "year_manifest_bad": 6
    },
@@ -25135,8 +25163,8 @@
    },
    "not_closed": {
     "ambig_target": 10830,
-    "no_list_manifest": 13771,
-    "no_year_manifest": 39497,
+    "no_list_manifest": 13774,
+    "no_year_manifest": 39494,
     "unread_sibling_page": 2177,
     "variant_unread": 635,
     "year_manifest_bad": 7
@@ -25151,8 +25179,8 @@
    },
    "not_closed": {
     "ambig_target": 10949,
-    "no_list_manifest": 13502,
-    "no_year_manifest": 40513,
+    "no_list_manifest": 13505,
+    "no_year_manifest": 40510,
     "unread_sibling_page": 2176,
     "variant_unread": 635,
     "year_manifest_bad": 7
@@ -25212,11 +25240,11 @@
   },
   "trunk-lid": {
    "no_records": {
-    "": 44646
+    "": 44551
    },
    "not_closed": {
-    "no_list_manifest": 7881,
-    "no_year_manifest": 16898,
+    "no_list_manifest": 7910,
+    "no_year_manifest": 16964,
     "variant_unread": 615
    },
    "unmapped": {
@@ -25299,14 +25327,14 @@
    },
    "bumper-front": {
     "conditional": {
-     "conditional:engine_unattested": 6726,
+     "conditional:engine_unattested": 6765,
      "conditional:qualifier": 614
     },
     "no_records": {
-     "": 11913
+     "": 11581
     },
     "split": {
-     "option_split": 50787
+     "option_split": 51080
     },
     "unmapped": {
      "": 11256
@@ -25314,14 +25342,14 @@
    },
    "bumper-rear": {
     "conditional": {
-     "conditional:engine_unattested": 8434,
-     "conditional:qualifier": 2109
+     "conditional:engine_unattested": 8709,
+     "conditional:qualifier": 2158
     },
     "no_records": {
-     "": 13898
+     "": 13306
     },
     "split": {
-     "option_split": 45599
+     "option_split": 45867
     },
     "unmapped": {
      "": 11256
@@ -25346,12 +25374,12 @@
    },
    "door-front": {
     "conditional": {
-     "conditional:engine_unattested": 33037,
+     "conditional:engine_unattested": 33142,
      "conditional:option": 336,
      "conditional:qualifier": 12315
     },
     "no_records": {
-     "": 9224
+     "": 9119
     },
     "split": {
      "option_split": 8703,
@@ -25363,15 +25391,15 @@
    },
    "door-rear": {
     "conditional": {
-     "conditional:engine_unattested": 19782,
+     "conditional:engine_unattested": 19887,
      "conditional:option": 633,
      "conditional:qualifier": 18748
     },
     "no_records": {
-     "": 15004
+     "": 14824
     },
     "split": {
-     "option_split": 12273,
+     "option_split": 12348,
      "position_missing": 230,
      "slot_missing": 3370
     },
@@ -25381,15 +25409,16 @@
    },
    "fender": {
     "conditional": {
-     "conditional:engine_unattested": 33174,
+     "conditional:engine_unattested": 33247,
      "conditional:option": 530,
      "conditional:qualifier": 8079
     },
     "no_records": {
-     "": 19703
+     "": 19269
     },
     "split": {
-     "option_split": 8554
+     "option_split": 8880,
+     "slot_missing": 35
     },
     "unmapped": {
      "": 11256
@@ -25413,14 +25442,14 @@
    },
    "gauge-cluster": {
     "conditional": {
-     "conditional:engine_unattested": 2916,
+     "conditional:engine_unattested": 3092,
      "conditional:qualifier": 78
     },
     "no_records": {
-     "": 26782
+     "": 26345
     },
     "split": {
-     "option_split": 40264
+     "option_split": 40525
     },
     "unmapped": {
      "": 11256
@@ -25428,14 +25457,14 @@
    },
    "grille": {
     "conditional": {
-     "conditional:engine_unattested": 5527,
+     "conditional:engine_unattested": 5706,
      "conditional:qualifier": 2904
     },
     "no_records": {
-     "": 11260
+     "": 10345
     },
     "split": {
-     "option_split": 50349
+     "option_split": 51085
     },
     "unmapped": {
      "": 11256
@@ -25462,12 +25491,12 @@
    },
    "hood": {
     "conditional": {
-     "conditional:engine_unattested": 39250,
+     "conditional:engine_unattested": 39691,
      "conditional:option": 65,
      "conditional:qualifier": 7032
     },
     "no_records": {
-     "": 18446
+     "": 18005
     },
     "split": {
      "option_split": 5247
@@ -25478,15 +25507,15 @@
    },
    "ignition-coils": {
     "conditional": {
-     "conditional:engine_unattested": 19239,
+     "conditional:engine_unattested": 19271,
      "conditional:package": 763,
      "conditional:qualifier": 2870
     },
     "no_records": {
-     "": 4805
+     "": 4751
     },
     "split": {
-     "option_split": 42363
+     "option_split": 42385
     },
     "unmapped": {
      "": 11256
@@ -25494,11 +25523,11 @@
    },
    "liftgate": {
     "conditional": {
-     "conditional:engine_unattested": 14181,
-     "conditional:qualifier": 6487
+     "conditional:engine_unattested": 14189,
+     "conditional:qualifier": 6581
     },
     "no_records": {
-     "": 46123
+     "": 46021
     },
     "split": {
      "option_split": 3249
@@ -25525,15 +25554,15 @@
    },
    "radiator": {
     "conditional": {
-     "conditional:engine_unattested": 10039,
+     "conditional:engine_unattested": 10113,
      "conditional:option": 63,
      "conditional:qualifier": 2357
     },
     "no_records": {
-     "": 5257
+     "": 4906
     },
     "split": {
-     "option_split": 52324
+     "option_split": 52601
     },
     "unmapped": {
      "": 11256
@@ -25628,11 +25657,11 @@
    },
    "trunk-lid": {
     "conditional": {
-     "conditional:engine_unattested": 12910,
+     "conditional:engine_unattested": 13005,
      "conditional:qualifier": 1908
     },
     "no_records": {
-     "": 44646
+     "": 44551
     },
     "split": {
      "option_split": 10576
@@ -26356,7 +26385,7 @@
    "cat_make": "Saturn",
    "cat_model": "SC",
    "feed_cars": 31,
-   "fitment_rows": 24,
+   "fitment_rows": 34,
    "ns": "gm",
    "proposed": {
     "make": "Saturn",
@@ -26378,7 +26407,7 @@
    "cat_make": "Saturn",
    "cat_model": "SC1",
    "feed_cars": 23,
-   "fitment_rows": 60,
+   "fitment_rows": 117,
    "ns": "gm",
    "proposed": {
     "make": "Saturn",
@@ -26391,7 +26420,7 @@
    "cat_make": "Saturn",
    "cat_model": "SC2",
    "feed_cars": 27,
-   "fitment_rows": 60,
+   "fitment_rows": 117,
    "ns": "gm",
    "proposed": {
     "make": "Saturn",
@@ -26404,7 +26433,7 @@
    "cat_make": "Saturn",
    "cat_model": "SL",
    "feed_cars": 99,
-   "fitment_rows": 60,
+   "fitment_rows": 117,
    "ns": "gm",
    "proposed": {
     "make": "Saturn",
@@ -26430,7 +26459,7 @@
    "cat_make": "Saturn",
    "cat_model": "SL1",
    "feed_cars": 81,
-   "fitment_rows": 60,
+   "fitment_rows": 117,
    "ns": "gm",
    "proposed": {
     "make": "Saturn",
@@ -26443,7 +26472,7 @@
    "cat_make": "Saturn",
    "cat_model": "SL2",
    "feed_cars": 114,
-   "fitment_rows": 60,
+   "fitment_rows": 117,
    "ns": "gm",
    "proposed": {
     "make": "Saturn",
@@ -26456,7 +26485,7 @@
    "cat_make": "Saturn",
    "cat_model": "SW1",
    "feed_cars": 4,
-   "fitment_rows": 53,
+   "fitment_rows": 87,
    "ns": "gm",
    "proposed": {
     "make": "Saturn",
@@ -26469,7 +26498,7 @@
    "cat_make": "Saturn",
    "cat_model": "SW2",
    "feed_cars": 24,
-   "fitment_rows": 60,
+   "fitment_rows": 117,
    "ns": "gm",
    "proposed": {
     "make": "Saturn",
@@ -186283,29 +186312,29 @@
  ],
  "ns": "gm",
  "open_reasons_cells": {
-  "ambig_target": 4671,
-  "no_list_manifest": 2089,
-  "no_year_manifest": 17233,
+  "ambig_target": 4759,
+  "no_list_manifest": 2161,
+  "no_year_manifest": 17538,
   "unattested": 69,
   "uncrawled_chain_member": 128,
   "unread_sibling_page": 348,
   "unverified_product": 54,
   "variant_unread": 83,
-  "year_manifest_bad": 27
+  "year_manifest_bad": 28
  },
  "raw": {
-  "commit": "1351c33fcfbb97862fa5aa9265dd92f7350c1ebc",
-  "ref": "1351c33fcfbb",
+  "commit": "dca9cd845f26337a4047b9176cc17929ffc984a3",
+  "ref": "dca9cd845f26",
   "sites": {
    "www.gmpartsgiant.com": {
     "blocked": false,
     "done": false,
     "lists": 3281,
     "lists_sha256": "6b6328210a6a0135c948d40c63f884fa8c36ad29257a0c11a387498534f0e196",
-    "records": 6942,
-    "records_sha256": "dd3a2201a9325d2501251053d2b4d5d26fff2be998a3f26f1e5ddd6cba793662",
-    "years": 588,
-    "years_sha256": "8da798e371e15849c7bfb6fbe7f3090ecf8e92e251d6e84e7cccc2cf8dd93eb7"
+    "records": 7197,
+    "records_sha256": "adc82bea8896e34cfb6be20037dc50615033e4cb9eb324ce2170d4a1dcc70f88",
+    "years": 636,
+    "years_sha256": "35612e389e75596089fae2cca6ffb6e51f52504d3972490ea84762a067189462"
    }
   }
  },
@@ -186867,6 +186896,22 @@
    "cat": "gauge-cluster",
    "detail": "15 feed models",
    "evidence": [],
+   "pn": "16140015",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "15 feed models",
+   "evidence": [],
+   "pn": "16140145",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "15 feed models",
+   "evidence": [],
    "pn": "16166115",
    "reason": "universal_part_suspect",
    "t": null
@@ -187071,6 +187116,22 @@
    ],
    "pn": "22838395",
    "reason": "rule_drift",
+   "t": null
+  },
+  {
+   "cat": "grille",
+   "detail": "14 feed models",
+   "evidence": [],
+   "pn": "15590613",
+   "reason": "universal_part_suspect",
+   "t": null
+  },
+  {
+   "cat": "grille",
+   "detail": "14 feed models",
+   "evidence": [],
+   "pn": "15615109",
+   "reason": "universal_part_suspect",
    "t": null
   },
   {
@@ -188439,9 +188500,57 @@
   },
   {
    "cat": "window-regulator",
+   "detail": "door-front",
+   "evidence": [],
+   "pn": "gm:84455169",
+   "reason": "cross_category_supersession",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "door-front",
+   "evidence": [],
+   "pn": "gm:84455169",
+   "reason": "cross_category_supersession",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
    "detail": "door-rear",
    "evidence": [],
    "pn": "gm:84103473",
+   "reason": "cross_category_supersession",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "door-rear",
+   "evidence": [],
+   "pn": "gm:84455166",
+   "reason": "cross_category_supersession",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "door-rear",
+   "evidence": [],
+   "pn": "gm:84455166",
+   "reason": "cross_category_supersession",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "door-rear",
+   "evidence": [],
+   "pn": "gm:84455166",
+   "reason": "cross_category_supersession",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "door-rear",
+   "evidence": [],
+   "pn": "gm:84455166",
    "reason": "cross_category_supersession",
    "t": null
   },
@@ -188511,6 +188620,22 @@
   },
   {
    "cat": "window-switch",
+   "detail": "door-front",
+   "evidence": [],
+   "pn": "gm:84455169",
+   "reason": "cross_category_supersession",
+   "t": null
+  },
+  {
+   "cat": "window-switch",
+   "detail": "door-front",
+   "evidence": [],
+   "pn": "gm:84455169",
+   "reason": "cross_category_supersession",
+   "t": null
+  },
+  {
+   "cat": "window-switch",
    "detail": "window-regulator",
    "evidence": [],
    "pn": "gm:23467107",
@@ -188566,6 +188691,7 @@
   "www.gmpartsgiant.com.lists.2",
   "www.gmpartsgiant.com.lists.3",
   "www.gmpartsgiant.com.lists.4",
+  "www.gmpartsgiant.com.lists.5",
   "www.gmpartsgiant.com.years",
   "www.hondapartsnow.com.lists",
   "www.hondapartsnow.com.years",
@@ -188588,12 +188714,12 @@
  ],
  "summary": {
   "blocked_sites": [],
-  "cells": 24702,
-  "classes": 6938,
+  "cells": 25168,
+  "classes": 7193,
   "gates": [
    "no (site, category) of this namespace has passed the audit gate (audits.json has no record; spec 11.4, E5/V7)",
    "engine cells not audited as reliable on www.gmpartsgiant.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE",
-   "www.gmpartsgiant.com: only 0% of its 20214 fitment rows can be coverage: its option column holds trims (option_column_is_trims), which count only after a namespace audit (spec 5.2)"
+   "www.gmpartsgiant.com: only 0% of its 20901 fitment rows can be coverage: its option column holds trims (option_column_is_trims), which count only after a namespace audit (spec 5.2)"
   ],
   "likely_app_years_generation_cut": {
    "window-regulator": 6
@@ -188602,32 +188728,32 @@
    "tail-lights": 3
   },
   "likely_app_years_without_own_page": {
-   "bumper-front": 1489,
-   "bumper-rear": 1304,
+   "bumper-front": 1555,
+   "bumper-rear": 1416,
    "climate-control": 2528,
-   "door-front": 1492,
-   "door-rear": 1936,
-   "fender": 1058,
-   "gauge-cluster": 2241,
-   "grille": 2042,
+   "door-front": 1518,
+   "door-rear": 1994,
+   "fender": 1110,
+   "gauge-cluster": 2274,
+   "grille": 2284,
    "headlights": 2121,
-   "hood": 484,
-   "liftgate": 252,
+   "hood": 507,
+   "liftgate": 263,
    "side-mirrors": 8450,
    "tail-lights": 3305,
    "tailgate": 174,
-   "trunk-lid": 278,
+   "trunk-lid": 289,
    "window-regulator": 7197,
    "window-switch": 784
   },
   "likely_groups": 279,
   "list_rows": 95531,
-  "records": 6938,
+  "records": 7193,
   "released_by_allowlist": 20,
   "verified_groups": 0,
   "vg_groups": 0,
-  "why_no_verified": "no (site, category) of this namespace has passed the audit gate (audits.json has no record; spec 11.4, E5/V7); engine cells not audited as reliable on www.gmpartsgiant.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE; www.gmpartsgiant.com: only 0% of its 20214 fitment rows can be coverage: its option column holds trims (option_column_is_trims), which count only after a namespace audit (spec 5.2)",
-  "year_manifests": 588
+  "why_no_verified": "no (site, category) of this namespace has passed the audit gate (audits.json has no record; spec 11.4, E5/V7); engine cells not audited as reliable on www.gmpartsgiant.com: every engine test there is maybe (spec 4, 5.5), so none of their records can be cover yes in any category (5.10) and E7 blocks engine categories; the completion worklist cannot rank their cells until an audit flips ENGINE_CELLS_RELIABLE; www.gmpartsgiant.com: only 0% of its 20901 fitment rows can be coverage: its option column holds trims (option_column_is_trims), which count only after a namespace audit (spec 5.2)",
+  "year_manifests": 636
  },
  "unknown_note_clauses": {
   "((1988-89)(LO3 W/K60))": 1,
@@ -188659,6 +188785,7 @@
   "(CODE CDD)(W/ENGINE & TRANS OIL COOLER)(INCLUDES 2-12)(FOR 1ST DESIGN SEE 52469674/20823)": 1,
   "(CODE CUT)(INCLUDES 3,4,6-8)(USE TOGETHER WITH MATING CONNECT 89046838(2WAY F))": 1,
   "(CODE FT)(SEE RADIATOR DETAILS ILLUSTRATION IN GROUP 1.000 FOR SERVICED PARTS)(SEE CHART FOR USAGE)": 1,
+  "(CODE GT)": 1,
   "(CODE MAP,HLD)(INCLUDES 2,5-8,10-13)": 1,
   "(CODE PERSONAL DATA ASSISTANT)(INCLUDES 2,5-8,10-13)": 1,
   "(CODE PFC)": 1,
@@ -188677,6 +188804,7 @@
   "(CORE SIZE 25 15/16IN X 14 3/16IN X 11/16IN, CODE GCE)": 1,
   "(CORE SIZE 25 15/16IN X 14 3/16IN X 5/8IN, CODE 6953)": 1,
   "(CORE SIZE 25 15/16IN X 14 3/16IN X 5/8IN, CODE 7242)": 1,
+  "(CORE SIZE 25 15/16IN X 14 3/16IN X 5/8IN, CODE CBS)(USE A Y PIPE LOWER HOSE)(FOR 2ND DESIGN SEE 22676953)": 1,
   "(CORE SIZE 25 7/8 X 15 X 7/8)(INCLUDES 7-12,14,16)(CONTAINS CONNECTORS W/RH THREAD 9/16-18 UNIFIED NATIONAL FINE THREADS-2A)": 1,
   "(CORE SIZE 25 7/8IN X 15IN X 5/8IN, CODE 1209)(INCLUDES 2-5,7-10)": 1,
   "(CORE SIZE 25 7/8IN X 15IN X 5/8IN, CODE 1218)(INCLUDES 2-5,7-10)": 1,
@@ -188710,6 +188838,8 @@
   "(CORE SIZE 30 5/16 X 14 6/16 X 9/16)(USED ON VEHICLES W/BEVEL WASHER AT TRANS OIL COOLER QUICK CONNECT FITTING)": 1,
   "(CORE SIZE 30 5/16 X 15 X 1 5/16)(INCLUDES 7,10,11,12-15,17,19)": 1,
   "(CORE SIZE 30 5/16 X 15 X 7/8)": 1,
+  "(CORE SIZE 30 5/16 X 15 X 7/8)(INCLUDES 2-14)": 1,
+  "(CORE SIZE 30 5/16 X 17 1/16 X 1 7/16)(CODE A9)": 1,
   "(CORE SIZE 30 5/16 X 17 3/16 X 7/8)(INCLUDE 8)": 1,
   "(CORE SIZE 30 5/16IN X 15IN X 1 15/16IN CODE LFD)": 1,
   "(CORE SIZE 30 5/16IN X 15IN X 1 5/16IN CODE 2843,7899)": 1,
@@ -188720,6 +188850,8 @@
   "(CORE SIZE 30 5/16IN X 15IN X 5/8IN CODE CKR,LAN)(INCLUDES 2-11)(SENSOR HOLE MAY NEED TO BLACK ENAMEL DRILLED OUT)": 1,
   "(CORE SIZE 30 5/16IN X 15IN X 5/8IN CODE DCX)(16MM CORE)": 1,
   "(CORE SIZE 30 5/16IN X 15IN X 5/8IN CODE JCM,GAG)(16MM)(W/QUICK CONNECT)": 1,
+  "(CORE SIZE 30 5/16IN X 17 1/16IN X 1 9/16IN, CODE GOLD,AMPLITUDE MODULATION,GX)": 1,
+  "(CORE SIZE 30 5/16IN X 17 3/16IN X 1 5/16IN CODE GT)": 1,
   "(CORE SIZE 30 5/16INX15INX5/8IN CODE CDE)": 1,
   "(CORE SIZE 30IN X 19IN X 1 7/8IN, TRANS OIL COOLER)(SEE GROUP 01 \"RADIATOR MOUNTING & RELATED PARTS\" FOR DETAILED ILLUSTRATED VIEW)(USE ONLY W/RADIATOR CAP 15075118)": 1,
   "(CORE SIZE 34 X 18 1/2 X 1 1/16)(CODE CCJ,AMATEUR RADIO SERVICE,ATN)(INCLUDES 2-11,14)(CODE CCJ,AMATEUR RADIO SERVICE,ATN)": 2,
@@ -188795,7 +188927,7 @@
   "(INCLUDES 2-11,14)(W/COOLER)(CORE SIZE 28 1/4 X 17 1/8 X 1)(CODE AJT)": 2,
   "(INCLUDES 2-12)": 1,
   "(INCLUDES 2-19,22,24)": 2,
-  "(INCLUDES 2-4)": 7,
+  "(INCLUDES 2-4)": 8,
   "(INCLUDES 2-4)(MATING CONNECT USE 13585849 2-WAY WITH LEADS)": 1,
   "(INCLUDES 2-4,17,20,21)": 2,
   "(INCLUDES 2-4,6-8)": 2,
@@ -188807,7 +188939,7 @@
   "(INCLUDES 2-5,8-10)": 2,
   "(INCLUDES 2-5,9,10)(W/95018158 RADIATOR DRAIN ASM)(THUMB SCREW DRAIN COCK)": 1,
   "(INCLUDES 2-5,9,10)(W/95018599 RADIATOR DRAIN ASM)(HEXAGON DRAIN COCK)(USE W/FAN SHROUD TO RADIATOR LOWER MOUNTING SNAP-FIT AND BOLT-IN CONFIG)(FOR 2ND DESIGN SEE 95298552)": 1,
-  "(INCLUDES 2-6)": 4,
+  "(INCLUDES 2-6)": 5,
   "(INCLUDES 2-6,17)": 2,
   "(INCLUDES 2-6,31,32)(INCLUDES HEADLAMP BULBS, HIGH & LOW)": 4,
   "(INCLUDES 2-7)": 6,
@@ -188828,7 +188960,7 @@
   "(INCLUDES 26)(W/O HINGES)(INCLUDES STRIKER)(MAY NEED TO ORDER 12472769 AND 12472770 HINGES)": 2,
   "(INCLUDES 28)": 1,
   "(INCLUDES 28)(INCLUDES STRIKER)(W/O HINGES)": 1,
-  "(INCLUDES 3)": 2,
+  "(INCLUDES 3)": 3,
   "(INCLUDES 3)(USES INSULATOR 22937087)": 1,
   "(INCLUDES 3,4)": 1,
   "(INCLUDES 3,4)(NON RAM AIR)(INCLUDES STRIKER)": 1,
@@ -188965,7 +189097,7 @@
   "(REMANUFACTURED-NOT FOR SALE WHERE IMPORTS ARE RESTRICTED)(DELCO SERIES PG260G)": 1,
   "(REMANUFACTURED-NOT FOR SALE WHERE IMPORTS ARE RESTRICTED)(DELCO SERIES PG260L)": 4,
   "(REPLC HOOD W/FILLER, FILLER IS NO LONGER REQUIRED AND SLOTS REMOVED)(INCLUDES 4)": 1,
-  "(SEE GROUP 01 \"RADIATOR ASM\" FOR DETAILED ILLUSTRATED VIEW)": 8,
+  "(SEE GROUP 01 \"RADIATOR ASM\" FOR DETAILED ILLUSTRATED VIEW)": 10,
   "(SEE GROUP 01 \"RADIATOR ASM\" FOR DETAILED ILLUSTRATED VIEW)(90-DEGREE INLET PORTION)(FOR 1ST DESIGN SEE 10344419)": 1,
   "(SEE GROUP 01.000 \"RADIATOR ASM\" FOR DETAILED ILLUSTRATED VIEW)": 6,
   "(SEE GROUP 01.000 \"RADIATOR ASM\" FOR DETAILED ILLUSTRATED VIEW)(24MM)(CODE AER)": 1,
@@ -188998,6 +189130,7 @@
   "(W/CORNER LAMP)(INCLUDES 11-14,16)(LESS HARNESS AND BRACKET)": 2,
   "(W/CORNER LAMP)(WHEN REPLACE 25769597, DEALER MAY HAVE TO RE-USE EXISTING BULBS & HARNESS OR ORDER P/N: 01999366, 09421330, 09441732, 12450108, & 15301646.)": 1,
   "(W/CORNER LAMP)(WHEN REPLACE 25769598, DEALER MAY HAVE TO RE-USE EXISTING BULBS & HARNESS OR ORDER P/N: 01999366, 09421330, 09441732, 12450108, & 15301646.)": 1,
+  "(W/ENGINE & TRANS OIL COOLER)": 1,
   "(W/ENGINE OIL COOLER)": 1,
   "(W/FRONT SIDE MARKER LAMP)(INCLUDES 3-6,8,10-15)": 2,
   "(W/FRONT SIDE MRK LAMP)(INCLUDES 2-19)(W/ BULB)(COMPLETE ASM)": 1,
@@ -189045,7 +189178,7 @@
   "159(06-36)(C49,C68,Y91,Z75)(EXC U34)": 1,
   "16": 2,
   "17": 2,
-  "2": 969,
+  "2": 971,
   "2(03-43)(DL3,SLT)(EXC GAT,HP2,WEA,WE2,YW3)": 4,
   "2(03-43-53)(5M1,Z5X)(EXPORT)": 4,
   "2(03-43-53)(DE2)": 4,
@@ -189414,10 +189547,12 @@
   "3(LQ4,LR4,LU3,MG5,MW3)(EXC UC2,U19)": 3,
   "3(LU3,C60)": 1,
   "3(LU3,CJ2,C67)": 4,
+  "3(V22,Z88)": 1,
   "3(V22,Z88)(EXC BYP)": 1,
   "3(X88,Z88,5B5)": 32,
   "3(Z88)": 4,
   "3(Z88)(EXC TL1,V22)": 1,
+  "3(Z88)(EXC V22)": 1,
   "3(Z88)(EXC WBZ)": 2,
   "3(Z88)(EXC Y91)": 4,
   "309(03-43-53)(L29,L30,L31,L35,8J9)": 2,
@@ -189425,6 +189560,7 @@
   "309(5J1)": 2,
   "309(DG5,9F8)": 4,
   "309(L29,L30,L31,8J9)": 1,
+  "309(L29,MT1,C60)": 1,
   "309(L30,8A5)(EXC C60)": 1,
   "309(L30,MG5,C60,GU4,GU6,KC4,8A5,GT4)": 1,
   "309(L31,MT1,M30,GT4,GT5,HC4)": 1,
@@ -189618,11 +189754,13 @@
   "AUXILIARY HEATER & A/C (AT ROOF CONSOLE)(FRONT OVERHEAD MOUNTED)(INCLUDES 2-4)": 5,
   "AUXILIARY HEATER & A/C(REAR OVERHEAD MOUNTED)(INCLUDES 2-4)": 1,
   "AUXILIARY HEATER & A/C(REAR OVERHEAD MOUNTED)(INCLUDES 2-4)(9.273)": 1,
+  "AUXILIARY(INCLUDES 2,3)(TRANS COOLER)": 1,
   "AUXILIARY(INCLUDES 2-4)": 1,
   "AUXILIARY(INCLUDES 8,10,31)": 1,
   "AUXILIARY(INCLUDES SENSOR)": 1,
   "AX": 2,
   "AX(37)(EXC BA5)": 1,
+  "B(19)(EXC WM6)": 1,
   "B(UH9,59I)(EXC U19)": 1,
   "BODY": 22,
   "BODY & SHAFT KIT": 1,
@@ -189802,13 +189940,13 @@
   "CK209(03-53)(L29,L31)": 1,
   "CK209(03-53)(L29,L31,C6P,NF2)(EXC K55,8J9)": 2,
   "CK310": 1,
-  "CLUSTER": 7,
-  "COIL": 27,
+  "CLUSTER": 10,
+  "COIL": 28,
   "COMPRESSOR": 15,
   "COMPRESSOR KIT": 16,
   "CONNECT USE 15306009": 1,
   "CONTROL": 35,
-  "COVER": 22,
+  "COVER": 23,
   "CV(48)(DLS,DQ9,LHD)": 1,
   "CV(AE3)": 1,
   "CV(LL0,M4M,C60,WHB)": 1,
@@ -189888,6 +190026,7 @@
   "DRILL OUT RIVET HOLES ON FASCIA TO 8.835MM & ATTACH GRILLE TO FASCIA W/2 U-NUTS 11515638 & 2 BOLTS 11589015)": 1,
   "DRILL OUT RIVET HOLES ON GRILLE TO 8.835MM & ATTACH GRILLE TO FASCIA W 2 U-NUTS 11515638 & 2 BOLTS 11589015)(PAINT TO MATCH)(PAINT TO MATCH)": 1,
   "DRIVE MOTOR BATTERY COOLANT(SEE GROUP 01 \"RADIATOR MOUNTING & RELATED PARTS\" FOR DETAILED ILLUSTRATED VIEW)": 1,
+  "DRIVE MOTOR BATTERY COOLANT(SEE GROUP 02 \"DRIVE MOTOR BATTERY COOLING\" FOR DETAILED ILLUSTRATED VIEW)(ALSO ORDER UPDATED GRILLE P/N 22856576, SEE PI0727A FOR DETAILS)": 1,
   "DS": 10,
   "DS(48)(UD7,V35)(EXC BTM,UDQ)": 1,
   "DS(48)(V35)(EXC BTM,UDQ,UD7)": 1,
@@ -189926,7 +190065,8 @@
   "F(LT1)": 1,
   "F(Y83)": 1,
   "F(Y83)(EXC T96)": 1,
-  "FASCIA": 170,
+  "F(Z28)(EXC Z03)": 1,
+  "FASCIA": 183,
   "FASCIA KIT": 4,
   "FOR 1ST DES SEE 10465463)(2ND DES)": 8,
   "FOR 1ST DESIGN SEE 10463640)(REMANUFACTURED-NOT FOR SALE WHERE IMPORTS ARE RESTRICTED)(DELCO SERIES CS130, TYPE 100)": 1,
@@ -189937,9 +190077,9 @@
   "FOR 2ND DES SEE 10464094)(1ST DES)": 1,
   "FOR 2ND DESIGN SEE 15812949)": 1,
   "FOR 2ND DESIGN SEE 19151898)(SEE SIDE 2000 FOR CONNECTOR LISTING)(REMANUFACTURED-NOT FOR SALE WHERE IMPORTS ARE RESTRICTED)(DELCO SERIES AD230, 6S PULLEY)": 1,
-  "FRONT BUMPER": 14,
+  "FRONT BUMPER": 16,
   "FRONT BUMPER FASCIA": 2,
-  "FRONT BUMPER FASCIA OPENING": 3,
+  "FRONT BUMPER FASCIA OPENING": 4,
   "FRONT BUMPER FASCIA OPENING LOWER": 4,
   "FRONT BUMPER FASCIA OPENING OUTER": 2,
   "FRONT BUMPER FASCIA OPENING UPPER(OPEL)": 1,
@@ -189954,8 +190094,8 @@
   "FRONT BUMPER FASCIA OPENING(SEE GROUP 01 \"GRILLE/RADIATOR FOR DETAILED ILLUSTRATED VIEW)": 1,
   "FRONT BUMPER FASCIA OPENING(SEE GROUP 01 \"GRILLE/RADIATOR\" FOR DETAILED ILLUSTRATED VIEW)": 2,
   "FRONT BUMPER FASCIA(OVERSLAM BUMPER)": 1,
-  "FRONT BUMPER LOWER": 17,
-  "FRONT BUMPER LOWER FASCIA CENTER": 3,
+  "FRONT BUMPER LOWER": 18,
+  "FRONT BUMPER LOWER FASCIA CENTER": 4,
   "FRONT BUMPER LOWER FASCIA SIDE": 2,
   "FRONT BUMPER LOWER(BLACK)": 1,
   "FRONT BUMPER LOWER(BLACK)(ADD HOLES TO CORRESPOND TO FRONT WHEELHOUSE LINER HOLES AS NEEDED.)": 1,
@@ -189976,7 +190116,7 @@
   "FRONT BUMPER UPPER(INCLUDES 34)(W/LH & RH FOG LAMP COVERS)": 1,
   "FRONT BUMPER UPPER(INCLUDES 6)(PAINT TO MATCH)": 1,
   "FRONT BUMPER UPPER(MOLDED BLACK)(PAINT TO MATCH)": 1,
-  "FRONT BUMPER UPPER(PAINT TO MATCH)": 14,
+  "FRONT BUMPER UPPER(PAINT TO MATCH)": 16,
   "FRONT BUMPER UPPER(PAINT TO MATCH)(2 UPPER MIDDLE CLIPS NOT REQUIRED)": 1,
   "FRONT BUMPER UPPER(PAINT TO MATCH)(INCLUDES LOWER REINFORCEMENT)": 1,
   "FRONT BUMPER UPPER(PAINT TO MATCH)(INCLUDES SENSOR BRACKET 15271277)": 1,
@@ -190003,6 +190143,7 @@
   "FRONT BUMPER(INCLUDES 13,14,16,19,24,26)(MAY NEED TO ORDER FOG LAMP BRACKETS #15915313,15915312)": 1,
   "FRONT BUMPER(INCLUDES 13,14,16,19,24,26)(PART REPLACED 2 PARTS. THIS IS CORRECT W/NEW DESIGN)(MAY NEED TO ORDER FOG LAMP BRACKETS #15915313,15915312)": 1,
   "FRONT BUMPER(INCLUDES 18-20)(BLACK)(PAINT TO MATCH)": 1,
+  "FRONT BUMPER(INCLUDES 23)(PAINT TO MATCH)": 2,
   "FRONT BUMPER(INCLUDES 29,31)(PAINT TO MATCH)": 1,
   "FRONT BUMPER(INCLUDES 3,5,11)(PAINT TO MATCH)": 2,
   "FRONT BUMPER(INCLUDES 5,10,12,13)(PAINT TO MATCH)": 4,
@@ -190016,7 +190157,8 @@
   "FRONT BUMPER(ON VEHS BUILT W/FASCIA DEF, DEF NO LONGER REQUIRED FOR IMPROVED COOLING PERFORMANCE)(INCLUDES 9,11,12,14)": 1,
   "FRONT BUMPER(ON VEHS BUILT W/FASCIA DEF, DEF NO LONGER REQUIRED FOR IMPROVED COOLING PERFORMANCE)(INCLUDES 9,14,15,16,18)": 1,
   "FRONT BUMPER(ON VEHS BUILT W/FASCIA DEFLECTOR, DEFLECTOR NO LONGER REQUIRED FOR IMPROVED COOLING PERFORMANCE)(INCLUDES 12,14,15,17,19,20)": 1,
-  "FRONT BUMPER(PAINT TO MATCH)": 52,
+  "FRONT BUMPER(PAINT TO MATCH IF REQUIRED)": 1,
+  "FRONT BUMPER(PAINT TO MATCH)": 55,
   "FRONT BUMPER(PAINT TO MATCH)(ALSO ORDER MOLDING 10308765)(MAY REQUIRE 5MM DIAMETER RIVET HOLE)": 1,
   "FRONT BUMPER(PAINT TO MATCH)(BASE)": 1,
   "FRONT BUMPER(PAINT TO MATCH)(CHEVY)": 1,
@@ -190039,6 +190181,7 @@
   "FRONT BUMPER(PAINT TO MATCH)(WHEN SERVICING VEHICLES WITHOUT REGULAR PRODUCTION OPTION UD5, MUST ORDER TOGETHER WITH ABSORBER 22915860.)": 1,
   "FRONT BUMPER(PAINT TO MATCH)(WITH FOG LAMP OPENINGS)": 1,
   "FRONT BUMPER(PAINT TO MATCH-\"LIMITED\"-\"CUSTOM\")": 1,
+  "FRONT BUMPER(PARTIAL PRIME)": 1,
   "FRONT BUMPER(PARTIAL PRIME)(W/O FOG LAMPS)": 1,
   "FRONT BUMPER(PRIMED)": 1,
   "FRONT BUMPER(PRIMED)(PAINT TO MATCH)": 7,
@@ -190081,7 +190224,7 @@
   "FRONT LOWER OUTER(GRAY)": 2,
   "FRONT LOWER OUTER(W/MOLDING)(W/O FILLER)": 2,
   "FRONT LOWER OUTER(W/O CHROME MOLDING)": 2,
-  "FRONT LOWER(ANTHRACITE)": 2,
+  "FRONT LOWER(ANTHRACITE)": 4,
   "FRONT LOWER(BASE)(BLACK BARS W/BLACK MESH)": 1,
   "FRONT LOWER(BLACK)": 7,
   "FRONT LOWER(BLACK)(CENTER)": 1,
@@ -190094,6 +190237,7 @@
   "FRONT LOWER(GXP LOWER GRILLE,LH)": 1,
   "FRONT LOWER(GXP LOWER GRILLE,RH)": 1,
   "FRONT LOWER(IF REPLACING PLATINUM CHROME LOWER GRILLE WITH BRIGHT CHROME GRILLE, DEALER MUST ORDER UPPER GRILLE 22830012 TO MATCH LOWER GRILLE.)(BRIGHT CHROME)": 1,
+  "FRONT LOWER(INCLUDES 4,6)": 3,
   "FRONT LOWER(INCLUDES 5-7)": 2,
   "FRONT LOWER(INCLUDES 5-7)(BLACK)": 1,
   "FRONT LOWER(INCLUDES 5-7)(BRIGHT CHROME)": 1,
@@ -190284,12 +190428,13 @@
   "FRONT SIDE(INCLUDES 6,7)": 3,
   "FRONT SIDE(INCLUDES 6,7)(W/O BRACKET)(W/O BOLT)": 2,
   "FRONT SIDE(INCLUDES 6,8)": 6,
-  "FRONT SIDE(INCLUDES 6-8)": 4,
+  "FRONT SIDE(INCLUDES 6-8)": 6,
   "FRONT SIDE(INCLUDES 7,12)(INCLUDES PANEL, PLATE, REINFORCEMENT)(DOES NOT REQUIRE LOWER AUXILLIARY WEATHERSTRIP)": 2,
   "FRONT SIDE(INCLUDES 7,48,49,51)": 2,
   "FRONT SIDE(INCLUDES 7,53,55,56)": 2,
   "FRONT SIDE(INCLUDES 7-10)": 2,
   "FRONT SIDE(INCLUDES 8,10)": 2,
+  "FRONT SIDE(INCLUDES 8-11)": 2,
   "FRONT SIDE(INCLUDES 8-12)": 2,
   "FRONT SIDE(INCLUDES 9-11)(FOR 2013 & PRIOR USE 3 BOLTS 11589012 & 3 NUTS 11610510 TO ATTACH INSIDE HANDLE BEZEL & PULL HANDLE)": 1,
   "FRONT SIDE(INCLUDES 9-11)(FOR 2013 & PRIOR USE 3 BOLTS 11589012 & 3 NUTS 11615010 TO ATTACH INSIDE HANDLE BEZEL & PULL HANDLE)": 1,
@@ -190331,6 +190476,7 @@
   "FRONT UPPER(HONEYCOMB)": 1,
   "FRONT UPPER(IF GRILLE ON FASCIA IS RIVETED": 1,
   "FRONT UPPER(IF REPLACING PLATINUM CHROME GRILLE MESH WITH BRIGHT CHROME, DEALER MUST ORDER LOWER GRILLE 15944326 TO MATCH UPPER GRILLE.)(INCLUDES 2)(BRIGHT CHROME)(INCLUDES BOWTIE EMBLEM)": 1,
+  "FRONT UPPER(INCLUDES 1)": 2,
   "FRONT UPPER(INCLUDES 10)": 2,
   "FRONT UPPER(INCLUDES 10,11)": 2,
   "FRONT UPPER(INCLUDES 10,11)(HAS INSERTS)": 1,
@@ -190371,6 +190517,7 @@
   "FRONT(CHROME BRIGHT EMBLEM)(INCLUDES 5-7)(WHITE)": 1,
   "FRONT(CHROME)": 2,
   "FRONT(CHROME/GRAY)(LESS EMBLEM)": 1,
+  "FRONT(CUSTOMER MAY ALSO NEED TO ORDER 2-15962247 DEFLECTOR & 1-15685367 EMBLEM)(PAINT TO MATCH)": 1,
   "FRONT(CUSTOMER MAY BLACK ENAMEL REQUIRED TO ORDER 3542782 WREATH & 25676200 CREST)(INCLUDES 10-12)(PAINT TO MATCH)": 1,
   "FRONT(GRAY)(INCLUDES CHROME TRIM RING)": 1,
   "FRONT(GRAY)(LESS EMBLEM)(DEALER MAY NEED TO REUSE OR ORDER EMBLEM IF REQUIRED)": 1,
@@ -190393,6 +190540,7 @@
   "FRONT(INCLUDES 1-7,14,15)(PAINT TO MATCH)": 1,
   "FRONT(INCLUDES 10)": 4,
   "FRONT(INCLUDES 10)(PAINT TO MATCH)(CUSTOMER MAY BLACK ENAMEL REQUIRED TO ORDER 3542782 WREATH & 25676200 CREST)": 1,
+  "FRONT(INCLUDES 10-13)": 1,
   "FRONT(INCLUDES 11,16-18)": 2,
   "FRONT(INCLUDES 12)": 2,
   "FRONT(INCLUDES 12,15,16)": 1,
@@ -190419,6 +190567,7 @@
   "FRONT(INCLUDES 2,5-11)(EX BRT CHROM)": 1,
   "FRONT(INCLUDES 2,5-11)(SERVICE PRIMER)((PAINT TO MATCH)(CHROMEINSERTS))": 1,
   "FRONT(INCLUDES 2,6)": 2,
+  "FRONT(INCLUDES 2,6,7)(INCLUDES EMBLEM & RETAINERS)": 1,
   "FRONT(INCLUDES 2-3)(CHROME)(LESS EMBLEM)(DEALER MAY NEED TO REUSE OR ORDER EMBLEM IF REQUIRED)": 2,
   "FRONT(INCLUDES 2-3)(GRAY)(ALSO ORDER EMBLEM 12335633(SNAP/IN) WHEN REPLACING 15182288 WITH 88968935)": 2,
   "FRONT(INCLUDES 2-4)(SILVER)(INSTALL 0.60)": 1,
@@ -190437,6 +190586,7 @@
   "FRONT(INCLUDES 3,4)(BLACK)(GRAINED)": 2,
   "FRONT(INCLUDES 3,4,12,14,15)(PRIMER)(LESS EMBLEM 15077065)(USE TOGETHER WITH LABELS 12575049, & (15206697 OR 10388864))": 1,
   "FRONT(INCLUDES 3,5)": 1,
+  "FRONT(INCLUDES 3,5,10)": 2,
   "FRONT(INCLUDES 3,5,6)": 1,
   "FRONT(INCLUDES 3,5,6,7,10,11)(CHROME GRILLE)": 1,
   "FRONT(INCLUDES 3,5-7,9,12-14)(PAINT TO MATCH)(PONTIAC)": 1,
@@ -190456,6 +190606,7 @@
   "FRONT(INCLUDES 4-14)": 4,
   "FRONT(INCLUDES 4-6)(BRIGHT CHROME)": 1,
   "FRONT(INCLUDES 4-6)(CHROME)": 1,
+  "FRONT(INCLUDES 5)": 1,
   "FRONT(INCLUDES 5)(BLACK)(W/O EMBLEM)(WHEN REPLG 15677846 NEED TO ORDER 88934655 EMBLEM)": 1,
   "FRONT(INCLUDES 5)(W/O EMBLEM)(WHEN REPLG 15760162 NEED TO ORDER 88934655 EMBLEM)": 1,
   "FRONT(INCLUDES 5,17)(FENDERS W/12MM PIVOT HOLE IN HOOD HINGE USE WASHER 11562553)": 2,
@@ -190466,11 +190617,13 @@
   "FRONT(INCLUDES 5-7)(PEWTER)(INCLUDES EMBLEM)": 1,
   "FRONT(INCLUDES 5-7)(REDFIRE)(INCLUDES EMBLEM)": 1,
   "FRONT(INCLUDES 5-7)(WHITE)(INCLUDES EMBLEM)": 1,
-  "FRONT(INCLUDES 6)": 1,
+  "FRONT(INCLUDES 6)": 3,
+  "FRONT(INCLUDES 6)(INCLUDES EMBLEM)": 1,
   "FRONT(INCLUDES 6)(INCLUDES MOLDED IN EMBLEM)": 1,
   "FRONT(INCLUDES 6,21)": 4,
   "FRONT(INCLUDES 6,21)(FENDERS W/12MM PIVOT HOLE IN HOOD HINGE USE WASHER 11562553)": 4,
   "FRONT(INCLUDES 6,7)(CHROME)": 1,
+  "FRONT(INCLUDES 6,8)(CHROME)": 1,
   "FRONT(INCLUDES 6,8-10)(PAINT TO MATCH)": 2,
   "FRONT(INCLUDES 6-10)": 2,
   "FRONT(INCLUDES 6-10)(BLACK)": 2,
@@ -190484,6 +190637,7 @@
   "FRONT(INCLUDES 8,9)": 3,
   "FRONT(INCLUDES 9)": 2,
   "FRONT(INCLUDES 9-12)": 1,
+  "FRONT(INCLUDES RUBBER SEALS)": 1,
   "FRONT(INSTALL USING (9) 25768356 NUTS)(INCLUDES 2,4)(CHROME W/CHROME CENTER)(INCLUDES EMBLEM)": 1,
   "FRONT(LESS EMBLEM)": 2,
   "FRONT(NON-NIGHT VISION,NON-ADAPTIVE CRUISE)(INCLUDES 8,10,11)": 1,
@@ -190497,7 +190651,11 @@
   "FRONT(PAINT TO MATCH)(MAY NEED TO ORDER EMBLEM:03544788(STUD), 25676200(COLUMN)/25676201(ARG)CREST WHEN REPLACING ORIGINAL COLUMN GRILLE ASM W/19179711 FOR SERVICE)": 1,
   "FRONT(PAINT TO MATCH)(ONE PIECE W/CENTER BAR MOLDED TO IT,CAN'T USE CHROME CENTER BAR)": 1,
   "FRONT(PAINT TO MATCH)(W/O CENTER BAR AND EMBLEM)": 1,
+  "FRONT(PAINT TO MATCH)(W/O EMBLEM)(INCLUDES 3)": 1,
   "FRONT(PART NO LONGER AVAILABLE FROM GM, NOW SERVICED BY COMPONENTS. FIELD INVENTORY MAY EXIST.)(GRAY)(INCLUDES EMBLEM)": 1,
+  "FRONT(PART NO LONGER AVAILABLE FROM GM, NOW SERVICED BY COMPONENTS. FIELD INVENTORY MAY EXIST.)(INCLUDES 1,3)(INDIGO)": 1,
+  "FRONT(PART NO LONGER AVAILABLE FROM GM, NOW SERVICED BY COMPONENTS. FIELD INVENTORY MAY EXIST.)(INCLUDES 1,3)(PEWTER)": 1,
+  "FRONT(PART NO LONGER AVAILABLE FROM GM, NOW SERVICED BY COMPONENTS. FIELD INVENTORY MAY EXIST.)(INCLUDES 1,3)(WHITE)": 1,
   "FRONT(PEARL)(INCLUDES CHROME TRIM RING)": 1,
   "FRONT(PRIMED)": 1,
   "FRONT(RED)": 1,
@@ -190664,7 +190822,7 @@
   "FUEL(SGX)": 1,
   "FUEL(VPC)": 1,
   "G1": 6,
-  "GATE": 27,
+  "GATE": 29,
   "GB": 4,
   "GB(69)(HP6)(EXC T3U)": 1,
   "GB(69)(LCV)(EXC T3U)": 2,
@@ -190737,12 +190895,17 @@
   "GL(UMN)(EXC AUA)": 1,
   "GM": 12,
   "GM(69)(LAF,CJ2,C68)": 1,
-  "GR": 18,
-  "GRILLE": 94,
+  "GP": 3,
+  "GP(LEA,UVC)(EXC UD7,UFG,UKC,Y3E,Y4W)": 1,
+  "GR": 26,
+  "GRILLE": 105,
   "GRILLE KIT": 1,
   "GS(69)(CJ2,HP6,KA1,4AA,4C7)(EXC KU1,KU3)": 1,
   "GS(69)(CJ2,HP6,KA1,4AB,4C6)(EXC KU1,KU3)": 1,
   "GS(69)(CJ2,KA1,4AB,4C6)(EXC HP6,KU1,KU3)": 1,
+  "GS(69)(KSG,T3U)": 1,
+  "GS(69)(LTG,M7U,M7W,V8D,V8E,Y3E,Y4W)": 1,
+  "GS(69)(T3U)(EXC KSG)": 1,
   "GS(AXG,4AA,4C7)": 1,
   "GS(AXG,4AB)": 1,
   "GS(CJ2,4AA,4C7)(EXC KA1,KU1,KU3)": 1,
@@ -190751,6 +190914,13 @@
   "GS(DBZ)": 2,
   "GS(DWK)(EXC A45,UKC)": 2,
   "GS(EXC DBZ)": 2,
+  "GS(LEA,LTG,UDD,UMN)": 1,
+  "GS(LEA,UVC)(EXC UD7,UFG,UKC,Y3E,Y4W)": 1,
+  "GS(LTG,UD7,UFG,UKC,UVC)(EXC Y3E,Y4W)": 1,
+  "GS(LTG,UD7,UVC)(EXC UFG,UKC,Y3E,Y4W)": 1,
+  "GS(LTG,UVC)(EXC UD7,UFG,UKC,Y3E,Y4W)": 2,
+  "GS(LUK,UD7,UVC)(EXC UFG,UKC,Y3E,Y4W)": 1,
+  "GS(T3U)": 1,
   "GS(T4A)": 2,
   "GS(T4F)": 2,
   "GT(1AB)": 1,
@@ -190886,7 +191056,7 @@
   "HEATER(LABELED 20787112)": 1,
   "HEATER(MATT CHROME)": 1,
   "HEATER(ORIGINAL EQUIPMENT P/N 16240135)": 1,
-  "HOOD": 56,
+  "HOOD": 61,
   "HOOD FRONT": 1,
   "HOOD FRONT(20MMX31MM LONG)(ADJUSTABLE)": 1,
   "HR(B57)": 2,
@@ -190911,6 +191081,7 @@
   "IGNITION(INCLUDES 8)": 1,
   "IGNITION(INCLUDES BOLTS, NUTS)(INCLUDES 6,7)": 2,
   "IGNITION(INCLUDES BOOT)": 1,
+  "IGNITION(INCLUDES IGNITION COIL COVER 10491637-SERVICE SEPARATOR, ELECTRIC. IGNITION CNTL MODULE-NOT SERVICE SEPARATOR, AND IGNITION MODULE SCREWS-4 EACH, 11508176, SERVICE SEPARATOR)(INCLUDE MODULE)(INCLUDES 289,290,291,292)": 1,
   "IGNITION(MELCO, EXCEPT BRACKET, BOLTS)": 1,
   "IGNITION(MELCO-MITSUBISHI)(MATING CONNECT W/LEADS USE 88987184)": 1,
   "IGNITION(REAR)(INCLUDES 201,202,204)(BLACK)": 1,
@@ -190922,7 +191093,7 @@
   "IGNITION(TOGETHER WITH CONNECT 13585316 3-WAY FEMALE)": 1,
   "IGNITION(USE TOGETHER WITH HARNESS 12602860 TO BACK SERVICE 06 AND PRIOR MY IF LOCATOR TAB NOT PRESENT ON HARNESS)(INCLUDES 705)": 1,
   "IGNITION(W/O ISOLATOR W/COMPRESSION LIMITER MOLDED INTO CASE)(INCLUDES 2,35)": 2,
-  "INSTRUMENT": 96,
+  "INSTRUMENT": 102,
   "INSTRUMENT (1990)": 1,
   "INSTRUMENT(16149141 LABELED ON PART)(ELECTROMECHANICAL)(D M)": 1,
   "INSTRUMENT(16170031 LABELED ON PART)(DHN)(ELECTROMECHANICAL)": 1,
@@ -190941,6 +191112,7 @@
   "INSTRUMENT(CANADIAN W/DICHROMATE)(INCLUDES 29)(CZHU CCCP DCSH)": 1,
   "INSTRUMENT(CANADIAN W/DRIVER INFORMATION CENTER & TURBO BOOST)(INCLUDES 29)(DCSK CZHX CCCS)": 1,
   "INSTRUMENT(CJP)": 1,
+  "INSTRUMENT(CODE CAM)": 1,
   "INSTRUMENT(CODE CDKL,DCHB)": 2,
   "INSTRUMENT(CODE CFM)": 1,
   "INSTRUMENT(CODE CKR)": 1,
@@ -190965,9 +191137,11 @@
   "INSTRUMENT(CODE: DJHN)": 1,
   "INSTRUMENT(CODE: DJHP)": 1,
   "INSTRUMENT(CODE: DJHS)": 1,
+  "INSTRUMENT(COMPONENT PARTS SERVICED)": 1,
   "INSTRUMENT(CUPW)": 1,
   "INSTRUMENT(CUPX)": 1,
   "INSTRUMENT(DBDP,NDN)(WITHOUT TACHOMETER)(PART LABELED 10317700)": 1,
+  "INSTRUMENT(DIGITAL ELECTROMECHANICAL)(COMPONENT PARTS SERVICED)": 1,
   "INSTRUMENT(DJHM)": 1,
   "INSTRUMENT(DOMESTIC BASE)": 1,
   "INSTRUMENT(DOMESTIC W/DICHROMATE & TURBO BOOST)(INCLUDES 29)(CZHW CCCR DCSJ)": 1,
@@ -191003,6 +191177,8 @@
   "INSTRUMENT(LABELED 15792714)": 1,
   "INSTRUMENT(LABELED 15885649)": 1,
   "INSTRUMENT(LABELED 15951645.)": 1,
+  "INSTRUMENT(LABELED 19436311, 39137844)": 1,
+  "INSTRUMENT(LABELED 19436323, 39137845)": 1,
   "INSTRUMENT(LABELED 20791621, 25854505, AND 25854509)": 1,
   "INSTRUMENT(LABELED 20808418 & 20786443)": 1,
   "INSTRUMENT(LABELED 20808419 & 20786444)": 1,
@@ -191020,10 +191196,16 @@
   "INSTRUMENT(LABELED 22940459)": 1,
   "INSTRUMENT(LABELED 23121208)": 1,
   "INSTRUMENT(LABELED 23143833)": 1,
+  "INSTRUMENT(LABELED 23197316)": 1,
+  "INSTRUMENT(LABELED 23203674)": 1,
   "INSTRUMENT(LABELED 23209120)": 1,
   "INSTRUMENT(LABELED 23214712)": 1,
   "INSTRUMENT(LABELED 23271827)": 1,
+  "INSTRUMENT(LABELED 23291771)": 1,
   "INSTRUMENT(LABELED 23451501 OR 23155292)": 1,
+  "INSTRUMENT(LABELED 23464937 OR 23449604)": 1,
+  "INSTRUMENT(LABELED 23464939 OR 23449606)": 1,
+  "INSTRUMENT(LABELED 23474825)": 1,
   "INSTRUMENT(LABELED 25860695)": 1,
   "INSTRUMENT(LABELED 25957103 OR 15885648)": 1,
   "INSTRUMENT(LABELED 42342739)": 1,
@@ -191270,12 +191452,14 @@
   "LH(26)(T96)": 1,
   "LH(EXC N10)": 1,
   "LH(EXC R13)": 1,
-  "LID": 29,
+  "LID": 30,
   "LIFT": 8,
   "LIFT GATE SIDE(BLACK)(13MM INSIDE DIAMETER, 22MM O.D.)(7.5MM HIGH)(4.5MM DIAMETER HOLE)": 1,
   "LIFT GATE WINDOW RELEASE": 1,
   "LIFT(DRILL QTY (6) 9.1MM HOLES FOR UPPER SIDE APPLIQUES AND A 10MM HOLE FOR WINDSHIELD WIPER HOSE BY WINDSHIELD WIPER ARM AS NEEDED BASED ON OLD GATE.)": 1,
   "LIFT(INCLUDES 1-3,5-7,26)(VEHICLE W/ONE WIRE HARNESS ACCESS HOLE REQ RUBBER PLUG 22546799)(USE TOGETHER WITH 2-25766856,1-15214189,1-15214190,2-11515908,2-11516569)": 1,
+  "LIFT(INCLUDES 4)": 1,
+  "LIFT(INCLUDES 4)(W/O HINGES)": 1,
   "LIFT(INCLUDES 6,9,10,12,13,38)(PAINT TO MATCH)": 1,
   "LIFT(INCLUDES MOUNTING STUDS FOR LIFTAGE STRUTS)(W/HOLE FOR WIPER MOTOR OPTION)": 1,
   "LIFT(INNER PANEL HAVING A SCALLOPED RADIUS ON THE WINDOW OPENING)": 1,
@@ -191755,9 +191939,11 @@
   "PRODUCT ASM 12563881)(REMANUFACTURED-NOT FOR SALE WHERE IMPORTS ARE RESTRICTED)(DELCO SERIES PMGR, P260F1)": 1,
   "PUMP": 33,
   "PUMP KIT": 17,
-  "Package Quantity: 1": 124,
+  "Package Quantity: 1": 125,
   "QUARTER WINDOW": 2,
-  "RADIATOR": 31,
+  "RADIATOR": 36,
+  "RADIATOR (BLEED)": 1,
+  "RADIATOR (BN)": 1,
   "RADIATOR (JC)(AUTUMN MAPLE)(*01)": 1,
   "RADIATOR (JC)(BLACK)(1988)(*01)": 1,
   "RADIATOR (JC)(BRT BLUE)(*01)": 1,
@@ -191794,7 +191980,7 @@
   "REAR BUMPER FASCIA OPENING": 1,
   "REAR BUMPER FASCIA OPENING(BLACK)": 1,
   "REAR BUMPER FASCIA(INCLUDES 2-4,10,16,37,60,61,63)": 1,
-  "REAR BUMPER LOWER": 19,
+  "REAR BUMPER LOWER": 22,
   "REAR BUMPER LOWER(BLACK)(DUAL EXHAUST)": 1,
   "REAR BUMPER LOWER(BLACK)(SINGLE EXHAUST)": 1,
   "REAR BUMPER LOWER(DUAL EXHAUST OPENING)": 1,
@@ -191809,6 +191995,7 @@
   "REAR BUMPER LOWER(INCLUDES 13)(PAINT TO MATCH)": 3,
   "REAR BUMPER LOWER(INCLUDES 16)(LOWER FASCIA DUAL EXHAUST W/ WELDED BACKUP/FOG LAMP BRACKET)": 1,
   "REAR BUMPER LOWER(INCLUDES 16)(LOWER FASCIA SINGLE EXHAUST W/ WELDED BACKUP/FOG LAMP BRACKET)": 1,
+  "REAR BUMPER LOWER(INCLUDES 18)": 2,
   "REAR BUMPER LOWER(INCLUDES 2-5)(INSTALL 1.50)(22.413 KGS)(INCLUDES DUAL MUFFLERS)": 1,
   "REAR BUMPER LOWER(INCLUDES 7,12)(PAINT TO MATCH)": 2,
   "REAR BUMPER LOWER(INCLUDES 8,9)": 1,
@@ -191828,6 +192015,7 @@
   "REAR BUMPER UPPER(INCLUDES 22)(PAINT TO MATCH)": 2,
   "REAR BUMPER UPPER(INCLUDES 24)(PAINT TO MATCH)": 3,
   "REAR BUMPER UPPER(INCLUDES 5-7,11)(PAINT TO MATCH)(W/SLOTS FOR EXTENSION ATTACHMENT)": 1,
+  "REAR BUMPER UPPER(INCLUDES 6)(PAINT TO MATCH)": 2,
   "REAR BUMPER UPPER(INCLUDES 6)(PAINT TO MATCH)(INCLUDES BRACKETS)": 1,
   "REAR BUMPER UPPER(INCLUDES 6)(PAINT TO MATCH)(W/4 RECTANGLE TABS IN BOTTOM CENTER)": 1,
   "REAR BUMPER UPPER(PAINT TO MATCH)": 18,
@@ -191890,9 +192078,10 @@
   "REAR BUMPER(INCLUDES 8)(PAINT TO MATCH)": 3,
   "REAR BUMPER(INCLUDES 8)(W/O RUBBER STRIPS)(MAY NEED TO ORDER MOLDING 10339931,10339932)": 2,
   "REAR BUMPER(INCLUDES MOLDINGS)": 1,
+  "REAR BUMPER(LOWER PORTION OF FASCIA HAS GRAINED FINISH)(PAINT TO MATCH)(W/O PAD)(ALSO ORDER STEP PAD #12335702)": 1,
   "REAR BUMPER(LOWER PORTION OF FASCIA HAS GRAINED FINISH)(PAINT TO MATCH)(W/O PADS)": 1,
   "REAR BUMPER(MOLDED IN CHARCOAL BASE UNIT)": 1,
-  "REAR BUMPER(PAINT TO MATCH)": 42,
+  "REAR BUMPER(PAINT TO MATCH)": 48,
   "REAR BUMPER(PAINT TO MATCH)(*KIT1)": 2,
   "REAR BUMPER(PAINT TO MATCH)(90-92 MODELS MAY NEED HOLES DRILLED FOR WHEEL OPENING MOLDING)": 1,
   "REAR BUMPER(PAINT TO MATCH)(DOES NOT HAVE TOW HOOK HOLE)(WHEN REPLACING ON VEHICLE WITH RUE, MUST ORDER TOGETHER WITH NEW RIGHT & LEFT FASCIA OUTER GUIDES, CALL OUT # 24.)": 1,
@@ -191902,6 +192091,7 @@
   "REAR BUMPER(PAINT TO MATCH)(MOLDED-IN INTEGRAL EXTENSIONS)": 1,
   "REAR BUMPER(PAINT TO MATCH)(MOLDING MOLDED INTO FASCIA)(1ST DESIGN 12369157)": 1,
   "REAR BUMPER(PAINT TO MATCH)(MUST ORDER REFLECTOR ASM SEPARATELY.)": 1,
+  "REAR BUMPER(PAINT TO MATCH)(PAINT TO MATCH)": 1,
   "REAR BUMPER(PAINT TO MATCH)(PRIMED)": 1,
   "REAR BUMPER(PAINT TO MATCH)(REQUIRES APPLIED MOLDING)(2ND DESIGN 12335658)": 1,
   "REAR BUMPER(PAINT TO MATCH)(W/ABSORBER)": 1,
@@ -191909,6 +192099,7 @@
   "REAR BUMPER(PAINT TO MATCH)(W/O PAD)": 1,
   "REAR BUMPER(PAINT TO MATCH)(W/O PADS)(FOR VEHICLE W/3 STEP PADS)": 1,
   "REAR BUMPER(PAINT TO MATCH)(WHEN REPLACING ON VEHICLE WITH RUE, MUST ORDER TOGETHER WITH NEW RIGHT & LEFT FASCIA OUTER GUIDES, CALL OUT # 24.)": 1,
+  "REAR BUMPER(PARTIAL PRIME)": 1,
   "REAR BUMPER(PRIMED)": 3,
   "REAR BUMPER(PRIMED)(DUAL EXHAUST)": 1,
   "REAR BUMPER(PRIMED)(PAINT TO MATCH)": 2,
@@ -191933,7 +192124,7 @@
   "REAR COMBINATION(INCLUDES 7-9)(BUILT WITH GRAY LAMP HOUSING-INSPECT HOUSING COLOR BY OPENING TRUNK)(FOR 2ND DESIGN SEE 42641835)": 1,
   "REAR COMBINATION(INCLUDES 7-9)(USED ON VEHICLE BUILT WITH BLACK LAMP HOUSING-INSPECT HOUSING COLOR BY OPENING TRUNK)(FOR 1ST DESIGN SEE 84075815)": 1,
   "REAR COMBINATION(INCLUDES 7-9)(USED ON VEHICLE BUILT WITH GRAY LAMP HOUSING-INSPECT HOUSING COLOR BY OPENING TRUNK)(FOR 1ST DESIGN SEE 42641836)": 1,
-  "REAR COMPARTMENT": 30,
+  "REAR COMPARTMENT": 31,
   "REAR COMPARTMENT(2004 & FUTURE VEHICLES HAVE DECKLID W/O KEY LOCK CYL)": 1,
   "REAR COMPARTMENT(DOES NOT HAVE T-SLOT CUSTOMER MAY BLACK ENAMEL REQ'D TO ORDER 25717077)": 1,
   "REAR COMPARTMENT(DRILL AS REQUIRED FOR SPOILER APPLICATION.)": 1,
@@ -192057,7 +192248,8 @@
   "REAR SIDE(INCLUDES 3,5)": 3,
   "REAR SIDE(INCLUDES 3,5)(10.351)": 1,
   "REAR SIDE(INCLUDES 3,5)(W/MANUAL CHILD LOCKS)(WHEN REPLACE DOORS W/ELECTRIC CHILD LOCKS USE TOGETHER WITH PLUG 95326304)": 1,
-  "REAR SIDE(INCLUDES 3-5)": 2,
+  "REAR SIDE(INCLUDES 3-5)": 4,
+  "REAR SIDE(INCLUDES 3-6)": 2,
   "REAR SIDE(INCLUDES 3-7)(USE TOGETHER WITH PLUG 95326304 W/ELECTRIC CHILD LOCKS)": 2,
   "REAR SIDE(INCLUDES 30,36)(W/HINGES)(W/ANTI-THEFT LABEL)(STRIKER HOLES MAY NEED MODIFICATION FOR PROPER FIT.)": 1,
   "REAR SIDE(INCLUDES 38,41,43,51)(USE W/SHORTER WEATHERSTRIP 15738146 & CHANNEL 15655596 IF NECESSARY)(USE TOGETHER WITH 15958302 & 15958304 HINGE KITS, REAR SIDE DOOR)": 1,
@@ -192093,6 +192285,7 @@
   "REAR SIDE(VEHICLE BUILT PRIOR TO 9/12/05 MAY NEED TO REPLACE DOOR TOGETHER WITH CHECK LINK 15839143)(USE COMMON BODY SHOP REPAIR TAPE TO COVER HOLE FOR CHILD SAFETY LOCK IN INNER PANEL)": 2,
   "REAR SIDE(VEHICLES BUILT WITH A MOLDED WATER DEFLECTOR)(WHEN USED ON 2002 & PRIOR MAY NEED TO ORDER CLIPLESS SEALSTRIP 22682283 OR 22682287)(INCLUDES 7-14,35)(W/O HINGES)(WHEN USED ON 2002 & PRIOR VEHICLES W/CLEAR PLASTIC WATER DEFLECTOR, TECHNICIAN MAY NEED TO DRILL 3 LOCATING HOLES FOR INTERIOR TRIM PANEL.)": 1,
   "REAR SIDE(VEHICLES BUILT WITH A MOLDED WATER DEFLECTOR)(WHEN USED ON 2002 & PRIOR MAY NEED TO ORDER CLIPLESS SEALSTRIP 22682284 OR 22682286.)(INCLUDES 7-14,35)(W/O HINGES)(WHEN USED ON 2002 & PRIOR VEHICLES W/CLEAR PLASTIC WATER DEFLECTOR, TECHNICIAN MAY NEED TO DRILL 3 LOCATING HOLES FOR INTERIOR TRIM PANEL.)": 1,
+  "REAR SIDE(W/CHILD SECURITY FEATURE)": 3,
   "REAR SIDE(W/O HINGES)": 4,
   "REAR SIDE(W/O HINGES)(INCLUDES 1)(ALSO REQ 15981563 UPPER DOOR HINGE KIT & 15981561 LOWER DOOR HINGE KIT)": 1,
   "REAR SIDE(W/O HINGES)(INCLUDES 1)(ALSO REQ 15981564 UPPER DOOR HINGE KIT & 15981562 LOWER DOOR HINGE KIT)": 1,
@@ -192133,10 +192326,11 @@
   "RG(68)(D71)": 2,
   "RG(68)(DLW)(EXC UKC)": 2,
   "RG(68)(UFQ)": 1,
+  "RG(68)(UFQ)(EXC UGN)": 1,
   "RV1(NEA,UD7,Z88)": 1,
   "RV1(T26,W49)(EXC MBC,Z49)": 1,
   "RV1(WDA,Y91)": 1,
-  "Require Quantity: 02": 91,
+  "Require Quantity: 02": 92,
   "Require Quantity: 03": 6,
   "Require Quantity: 04": 14,
   "Require Quantity: 06": 3,
@@ -192844,7 +193038,7 @@
     "Suburban"
    ],
    "feed_cars": 221,
-   "row_years": 2946
+   "row_years": 2972
   },
   {
    "cat_make": "Chevrolet",
@@ -193185,7 +193379,7 @@
     "SC"
    ],
    "feed_cars": 31,
-   "row_years": 48
+   "row_years": 67
   },
   {
    "cat_make": "Saturn",
@@ -193196,7 +193390,7 @@
     "SC1"
    ],
    "feed_cars": 23,
-   "row_years": 272
+   "row_years": 470
   },
   {
    "cat_make": "Saturn",
@@ -193207,7 +193401,7 @@
     "SC2"
    ],
    "feed_cars": 27,
-   "row_years": 272
+   "row_years": 470
   },
   {
    "cat_make": "Saturn",
@@ -193218,7 +193412,7 @@
     "SL"
    ],
    "feed_cars": 99,
-   "row_years": 320
+   "row_years": 537
   },
   {
    "cat_make": "Saturn",
@@ -193229,7 +193423,7 @@
     "SL1"
    ],
    "feed_cars": 81,
-   "row_years": 320
+   "row_years": 537
   },
   {
    "cat_make": "Saturn",
@@ -193240,7 +193434,7 @@
     "SL2"
    ],
    "feed_cars": 114,
-   "row_years": 320
+   "row_years": 537
   },
   {
    "cat_make": "Saturn",
@@ -193251,7 +193445,7 @@
     "SW1"
    ],
    "feed_cars": 4,
-   "row_years": 187
+   "row_years": 313
   },
   {
    "cat_make": "Saturn",
@@ -193262,7 +193456,7 @@
     "SW2"
    ],
    "feed_cars": 24,
-   "row_years": 244
+   "row_years": 417
   }
  ],
  "validator": []

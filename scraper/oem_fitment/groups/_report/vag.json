@@ -34027,8 +34027,8 @@
   "unverified_product": 29
  },
  "raw": {
-  "commit": "1351c33fcfbb97862fa5aa9265dd92f7350c1ebc",
-  "ref": "1351c33fcfbb",
+  "commit": "dca9cd845f26337a4047b9176cc17929ffc984a3",
+  "ref": "dca9cd845f26",
   "sites": {
    "www.audipartsgiant.com": {
     "blocked": false,
@@ -35016,6 +35016,7 @@
   "www.gmpartsgiant.com.lists.2",
   "www.gmpartsgiant.com.lists.3",
   "www.gmpartsgiant.com.lists.4",
+  "www.gmpartsgiant.com.lists.5",
   "www.gmpartsgiant.com.years",
   "www.hondapartsnow.com.lists",
   "www.hondapartsnow.com.years",
@@ -35049,6 +35050,7 @@
    "bumper-front": 1,
    "climate-control": 12,
    "gauge-cluster": 8,
+   "strut": 24,
    "window-regulator": 11,
    "window-switch": 9
   },
@@ -35063,6 +35065,7 @@
    "hood": 440,
    "liftgate": 205,
    "side-mirrors": 884,
+   "strut": 797,
    "tail-lights": 1155,
    "trunk-lid": 338,
    "wheels": 714,

@@ -3080,3 +3080,7 @@ each); nothing allowlisted or crawled.
     - wheel_production_date: the row dates must cover the app model year (first .. last + 1).
   - Result: hmg 9 groups / 1,784 lot cars, exactly the census-OK set. mopar / mb / vag unchanged (28 / 10 / 3).
   - hmg is not in WHEELS_AUDITED_NS until the hub confirms.
+- 2026-11-10 ~01:40 UTC, hmg single push (hub-confirmed), based on ef5d52e:
+  - WHEELS_AUDITED_NS adds hmg. Re-curated `--ns all` on oem-raw@dca9cd84.
+  - Group diff vs main: hmg +9 wheels (all census OK, 1,784 lot cars) and +39 strut. The struts are tier C output already on raw before the hmg wheels round, with no pinnable raw without them. strut is in GROUP_HOLD_CATS, so none ship. Other namespaces identical.
+  - Payload: only data/oem/wheels.json changes in content (50 groups: mopar 28, mb 10, hmg 9, vag 3) plus the oemLazy index. oemStatus hmg reads "54 groups", counting the held struts.
