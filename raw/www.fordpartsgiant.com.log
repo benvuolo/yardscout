@@ -13228,3 +13228,15 @@
 14:19:38 completion worklist completion/ford.own_page.json: 695 rows
 14:46:40 chain-unlinked window-regulator 1 numbers named by 3C3Z-2523200-AA, no catalog link: 8C3Z-2523200-B
 14:52:24 time budget reached records=9516
+14:52:54 start site=www.fordpartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=9516 list_lines=6264 year_lines=1114 url_index=34628
+14:52:54 completion worklist completion/ford.own_page.json: 695 rows
+15:03:52 chain-unlinked window-regulator 3 numbers named by BL1Z-7823200-AA, no catalog link: BL1Z-7823200-A, WLR-88, WLRA-80
+15:03:52 chain-unlinked window-regulator 4 numbers named by BL1Z-7823201-AA, no catalog link: 9L1Z-7823201-A, BL1Z-7823201-A, WLRA-57, WLRA-81
+15:03:52 chain-unlinked window-regulator 2 numbers named by AL7Z-7823395-B, no catalog link: AL7Z-7823395-A, WLM-198
+15:03:59 chain-unlinked window-regulator 1 numbers named by BL1Z-7827001-A, no catalog link: WLR-91
+15:03:59 chain-unlinked window-regulator 1 numbers named by BL1Z-7827000-A, no catalog link: WLR-90
+15:06:54 chain-unlinked side-mirrors 1 numbers named by 5F1Z-17683-AA, no catalog link: 6F1Z-17683-A
+15:06:54 chain-unlinked side-mirrors 1 numbers named by 5F1Z-17683-CA, no catalog link: 6F1Z-17683-C
+15:06:54 chain-unlinked side-mirrors 1 numbers named by 5F1Z-17683-BA, no catalog link: 6F1Z-17683-B
+15:21:03 chain-unlinked window-regulator 1 numbers named by DG9Z-9923394-E, no catalog link: DG9Z-14B291-WT
+15:25:11 time budget reached records=9546
