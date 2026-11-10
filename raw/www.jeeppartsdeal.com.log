@@ -7782,3 +7782,15 @@
 15:44:22 chain-unlinked side-mirrors 2 numbers named by 4805692AE, no catalog link: 4805692AC, 4805692AB
 15:44:22 chain-unlinked side-mirrors 2 numbers named by 4805693AE, no catalog link: 4805693AC, 4805693AB
 15:44:39 time budget reached records=6656
+15:45:04 start site=www.jeeppartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=6656 list_lines=4183 year_lines=594 url_index=31829
+15:45:04 completion worklist completion/mopar.own_page.json: 657 rows
+15:46:10 chain-unlinked gauge-cluster 1 numbers named by 5026600AC, no catalog link: 5026600AB
+16:02:54 chain-unlinked climate-control 3 numbers named by 55111131AD, no catalog link: 55111131AC, 55111131AA, 55111131AB
+16:02:54 chain-unlinked climate-control 3 numbers named by 55111132AD, no catalog link: 55111132AC, 55111132AB, 55111132AA
+16:04:46 chain-unlinked window-regulator 1 numbers named by 68227255AB, no catalog link: 68227255AA
+16:04:46 chain-unlinked window-regulator 1 numbers named by 68227254AB, no catalog link: 68227254AA
+16:04:54 chain-unlinked window-regulator 1 numbers named by 68227458AB, no catalog link: 68227458AA
+16:04:54 chain-unlinked window-regulator 1 numbers named by 68227459AB, no catalog link: 68227459AA
+16:11:27 chain-unlinked headlights 4 numbers named by 5303874AE, no catalog link: 5303874AB, 5303874AC, 5303874AD, 5303874AA
+16:11:27 chain-unlinked headlights 4 numbers named by 5303875AE, no catalog link: 5303875AD, 5303875AC, 5303875AB, 5303875AA
+16:17:42 time budget reached records=6704
