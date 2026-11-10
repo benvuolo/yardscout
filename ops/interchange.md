@@ -2625,6 +2625,11 @@ Other outputs of this session:
     Aftermarket groups are gated per source for EVERY category (_AM_SITE_CATS, fail closed: a source
     ships only what its own §11.4 covered). OEM and every other source stay held in all 14
     GROUP_HOLD_CATS categories.
+  - Make breadth 07:40 UTC (branch make-breadth-hmg-body): Hyundai/Kia body gate and production-date
+    rule in curate.py (_hmg_body_excludes, _hmg_row_body_excludes, _hmg_production_excludes).
+    kiapartsnow files Forte and Forte Koup under one catalog, and the body shows only in the option
+    column ("[Sedan - 4Door]", "[Coupe - 2Door]"). It removes 27 Forte/Forte Koup strut groups from
+    hmg.json (strut is held, so no user impact). Tier C/D curation on hmg inherits these rules.
   - Next per site, once the CI placeholder pass has written its tier D list rows on oem-raw:
     write rules from raw/<site>.lists.jsonl, set tierD 2, raise the version, then ci_audit.
 - Tier C priority: wiper-motor curation and §11.4 next, once honda/toyota/nissan have C data.
