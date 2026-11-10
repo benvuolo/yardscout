@@ -820,3 +820,53 @@
 06:15:27 chain-unlinked strut 4 numbers named by KL2G-28-700A, no catalog link: KB8F-28-700B, KL2G-28-700, KD3E-28-700B, KB8F-28-700A
 06:15:35 seg done tier=C Mazda CX-5 [2017, 2023] seeds=[2017] records=1739 errors=13
 06:15:35 finished records=1739 errors=13 chain_records=0 chain_unlinked=369 chain_failed=0 chain_given_up=0
+15:17:02 start site=www.mazdapartsnow.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=1739 list_lines=385 year_lines=40 url_index=3039
+15:17:02 completion worklist completion/mazda.own_page.json: 114 rows
+15:17:19 chain-unlinked climate-control 3 numbers named by BL8F-61-190D, no catalog link: BL8F-61-190B, BL8F-61-190C, BL8F-61-190A
+15:17:19 chain-unlinked climate-control 4 numbers named by BL8W-61-190F, no catalog link: BL8W-61-190B, BL8W-61-190D, BL8W-61-190E, BL8W-61-190C
+15:18:07 chain-unlinked headlights 1 numbers named by BL8D-51-0K0D, no catalog link: BL8D-51-0K0A
+15:18:22 chain-unlinked side-mirrors 1 numbers named by BJ0E-69-120B, no catalog link: BJ0E-69-120A
+15:18:22 chain-unlinked side-mirrors 1 numbers named by BJ0E-69-180B, no catalog link: BJ0E-69-180A
+15:18:22 chain-unlinked side-mirrors 1 numbers named by BJ0G-69-120A, no catalog link: BJ0G-69-120A-57
+15:18:22 chain-unlinked side-mirrors 1 numbers named by BN6B-69-120-SU, no catalog link: BJ0J-69-120E-SU
+15:19:50 chain-unlinked window-regulator 3 numbers named by B25E-59-590E, no catalog link: B25E-59-590D, B25E-59-590B, B25E-59-590A
+15:19:50 chain-unlinked window-regulator 2 numbers named by B25F-58-560A, no catalog link: B25F-58-560, BJ0E-58-58XA
+15:19:50 chain-unlinked window-regulator 1 numbers named by B25F-59-560A, no catalog link: B25F-59-560
+15:19:50 chain-unlinked window-regulator 1 numbers named by B25F-58-58XA, no catalog link: B25F-58-58X
+15:19:50 chain-unlinked window-regulator 1 numbers named by B25F-59-58XA, no catalog link: B25F-59-58X
+15:20:38 chain-unlinked window-regulator 1 numbers named by B25E-72-58X, no catalog link: B25E-72-560
+15:25:03 chain-unlinked window-regulator 3 numbers named by BBM4-58-590C, no catalog link: BBM4-58-590, BBM4-58-590B, BBM4-58-590A
+15:25:03 chain-unlinked window-regulator 3 numbers named by BBM4-59-590C, no catalog link: BBM4-59-590B, BBM4-59-590A, BBM4-59-590
+15:25:03 chain-unlinked window-regulator 2 numbers named by D01G-58-58XB, no catalog link: D01G-58-58XA, D01G-58-58X
+15:25:03 chain-unlinked window-regulator 1 numbers named by D651-59-58XB, no catalog link: D651-59-58XA
+15:25:34 chain-unlinked window-regulator 2 numbers named by D01G-59-58XB, no catalog link: D01G-59-58X, D01G-59-58XA
+15:26:55 chain-unlinked window-regulator 1 numbers named by EG21-58-590B, no catalog link: EG21-58-590A
+15:26:55 chain-unlinked window-regulator 1 numbers named by EG21-59-590B, no catalog link: EG21-59-590A
+15:26:55 chain-unlinked window-regulator 1 numbers named by GJ6A-59-58XF, no catalog link: GJ6A-59-58XE
+15:27:35 chain-unlinked window-regulator 2 numbers named by EG21-72-590C, no catalog link: EG21-72-590B, EG21-72-590A
+15:27:35 chain-unlinked window-regulator 2 numbers named by EG21-73-590C, no catalog link: EG21-73-590A, EG21-73-590B
+15:27:35 chain-unlinked window-regulator 2 numbers named by G22C-59-58XC, no catalog link: G22C-59-58XA, G22C-59-58XB
+15:27:35 chain-unlinked window-regulator 2 numbers named by GJ6A-58-58XC, no catalog link: GJ6A-58-58XA, GJ6A-58-58XB
+15:29:26 chain-unlinked window-regulator 1 numbers named by BP4L-59-560A, no catalog link: BP4L-59-560
+15:29:26 chain-unlinked window-regulator 1 numbers named by BP4K-58-590A, no catalog link: BP4K-58-590
+15:29:26 chain-unlinked window-regulator 1 numbers named by BP4K-59-590A, no catalog link: BP4K-59-590
+15:30:07 chain-unlinked window-regulator 4 numbers named by BP4K-73-590E, no catalog link: BP4K-73-590C, BP4K-73-590B, BP4K-73-590D, BP4K-73-590A
+15:30:07 chain-unlinked window-regulator 3 numbers named by BP4L-72-560D, no catalog link: BP4L-72-560C, BP4L-72-560A, BP4L-72-560B
+15:30:38 chain-unlinked side-mirrors 1 numbers named by EG21-69-120F, no catalog link: EG21-69-120E
+15:30:38 chain-unlinked side-mirrors 1 numbers named by EG21-69-180F, no catalog link: EG21-69-180E
+15:31:43 chain-unlinked side-mirrors 2 numbers named by TD14-69-121, no catalog link: TD14-69-12ZA, TD14-69-12Z
+15:32:08 chain-unlinked window-regulator 1 numbers named by TD11-58-590A, no catalog link: TD11-58-590
+15:32:08 chain-unlinked window-regulator 1 numbers named by TD11-59-590A, no catalog link: TD11-59-590
+15:32:31 chain-unlinked window-regulator 1 numbers named by TD11-72-590A, no catalog link: TD11-72-590
+15:32:31 chain-unlinked window-regulator 1 numbers named by TD11-73-590A, no catalog link: TD11-73-590
+15:33:43 chain-unlinked window-regulator 1 numbers named by GJ6A-59-590G, no catalog link: GJ6A-59-590F
+15:34:55 chain-unlinked window-regulator 2 numbers named by D651-58-58XB, no catalog link: D651-58-58XA, D651-58-58X
+15:37:12 chain-unlinked window-regulator 1 numbers named by C235-58-590B, no catalog link: C235-58-590A
+15:37:12 chain-unlinked window-regulator 1 numbers named by C235-59-590B, no catalog link: C235-59-590A
+15:37:12 chain-unlinked window-regulator 2 numbers named by C235-72-590B, no catalog link: C235-72-590A, C235-72-590
+15:37:12 chain-unlinked window-regulator 2 numbers named by C235-73-590B, no catalog link: C235-73-590, C235-73-590A
+15:43:19 chain-unlinked side-mirrors 2 numbers named by CC33-69-181A, no catalog link: CC33-69-181, CC45-69-18Z
+15:47:07 chain-unlinked window-regulator 1 numbers named by GHP9-58-590A, no catalog link: GHP9-58-590
+15:47:07 chain-unlinked window-regulator 1 numbers named by GHP9-59-590A, no catalog link: GHP9-59-590
+15:47:47 chain-unlinked window-regulator 1 numbers named by GHP9-72-590A, no catalog link: GHP9-72-590
+15:47:47 time budget reached records=1742
