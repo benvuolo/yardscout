@@ -13224,3 +13224,7 @@
 13:53:20 chain-unlinked side-mirrors 1 numbers named by F4UZ-17682-C, no catalog link: F2UZ-17682-C
 13:53:20 chain-unlinked side-mirrors 1 numbers named by F4UZ-17683-B, no catalog link: F2UZ-17683-A
 14:18:56 time budget reached records=9486
+14:19:38 start site=www.fordpartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=9486 list_lines=6066 year_lines=1098 url_index=34529
+14:19:38 completion worklist completion/ford.own_page.json: 695 rows
+14:46:40 chain-unlinked window-regulator 1 numbers named by 3C3Z-2523200-AA, no catalog link: 8C3Z-2523200-B
+14:52:24 time budget reached records=9516
