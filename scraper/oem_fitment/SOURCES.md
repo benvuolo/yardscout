@@ -475,3 +475,16 @@ evidence than any aftermarket list.
 - **Note:** cv-axle notes no longer say "drive". The app's
   "drivetrain not confirmed" line (gate d) then shows on undecoded donors
   (round-2 finding D1).
+- **After §11.4 round 3 (2 WRONG, 2026-11-10).**
+  - Root cause: yards list a Santa Fe Sport as "Santa Fe". The lot-decoded
+    2.0/2.4 was joined to GSP's "Santa Fe" row, which is the 3.3L
+    long-wheelbase car, so the row claimed a configuration that never
+    existed.
+  - Fixes:
+    - On a multi-model unit, a model-year row survives only if every
+      decoded lot car of that model-year has a title engine.
+    - Sibling-name guard: when a unit lists both "X" and "X <suffix>"
+      (Santa Fe / Santa Fe Sport / Santa Fe XL), the base name's rows are
+      refused.
+  - cv-axle notes now carry GSP's own physical check for the puller:
+    inboard/outboard spline counts and compressed length.

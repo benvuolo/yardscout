@@ -364,6 +364,19 @@ def crosses_facelift(fl: dict, models: list, lo: int, hi: int) -> bool:
     return False
 
 
+SPEC_KEYS = (("Inboard Spline Quantity", "inboard splines {}"), ("Outboard Spline Quantity", "outboard splines {}"),
+             ("Compressed Length (MM)", "compressed length {} mm"))
+
+
+def spec_check(cat: str, specs: dict) -> str:
+    """cv-axle: GSP's own physical specs as a check the puller can make on the
+    donor's axle (§11.4 round 3: cross-platform merges, 2WD/4WD shafts)."""
+    if cat != "cv-axle":
+        return ""
+    bits = [fmt.format(specs[k]) for k, fmt in SPEC_KEYS if re.fullmatch(r"\d{1,4}(?:\.\d)?", str(specs.get(k, "")))]
+    return (" Before pulling, check the donor's axle matches: " + ", ".join(bits) + ".") if bits else ""
+
+
 def split(units: dict) -> bool:
     """Units of one brand+kind+body claiming one corner-year. Not a split when
     there is one unit, or when every unit states a non-empty option set and
@@ -386,6 +399,7 @@ def build(records: list, names: GA.Names, site: str, src: str = "", complete: di
     refused_units, refused_rows, unmapped = Counter(), Counter(), Counter()
     claims = defaultdict(dict)           # (cat, brand, mk, md, year, pos) -> {unit: options}
     unit_meta = {}                       # (cat, unit) -> (options, cosmetic)
+    unit_specs = {}                      # (cat, unit) -> GSP specifications (facts)
     accepted = defaultdict(list)         # (cat, unit, pos) -> [(mk, md, year, eng)]
     retrieved, seen = {}, set()
     # models the source ever qualifies by a suspension option (any unit, any year)
@@ -423,11 +437,20 @@ def build(records: list, names: GA.Names, site: str, src: str = "", complete: di
                     refuse = "unit_spans_generations"
                     refused_units[f"{cat}:unit_spans_generations"] += 1
                     break
+        unit_models = {(a["make"], a["model"]) for a, *_r in rows}
+        # sibling-name guard (§11.4 round 3, 2026-11-10): a unit listing "Santa Fe"
+        # AND "Santa Fe Sport"/"Santa Fe XL" names different cars, which yard feeds
+        # lump under the base name; the base name's rows are refused
+        sibling_base = {(mk0, md0) for mk0, md0 in unit_models
+                        if any(mk1 == mk0 and md1 != md0 and md1.lower().startswith(md0.lower() + " ")
+                               for mk1, md1 in unit_models)}
         qualified_models = {(a["make"], a["model"]) for a, _rp, _e, why, mt in rows
                             if why or mt.get("options") or mt.get("body")}
         for a, rp, engines, why, mt in rows:
             # a unqualified row of a make/model this unit also lists WITH a
             # qualifier is coarse data: refuse it (shakeout 2026-11-09)
+            if not why and (a["make"], a["model"]) in sibling_base:
+                why = "sibling_model_name"
             if not why and not mt.get("options") and (a["make"], a["model"]) in qualified_models:
                 why = "sibling_row_qualified"
             if not why and cat == "strut" and (a["make"], a["model"]) in susp_models:
@@ -463,14 +486,22 @@ def build(records: list, names: GA.Names, site: str, src: str = "", complete: di
                     # only the title engines that cars of that model-year on the
                     # lots actually have; none (or no decoded car) -> drop the year.
                     seen_l = obs.get((mk, GA.squash(md), y), set()) | obs.get((a["make"], GA.squash(a["model"]), y), set())
+                    title_l = {round(float(e[:-1]), 1) for e in engines if e}
                     labels = [e for e in engines if e and round(float(e[:-1]), 1) in seen_l]
                     if not labels:
                         refused_rows["no_lot_car_with_title_engine" if seen_l else "no_decoded_lot_car"] += 1
+                        continue
+                    # multi-model unit: the title list is unit-wide, so EVERY decoded
+                    # lot car of that model-year must have a title engine (round 3:
+                    # "Santa Fe" 2017 lot cars include the 3.3L LWB car -> drop)
+                    if len(unit_models) > 1 and not seen_l <= title_l:
+                        refused_rows["lot_engine_outside_unit_title"] += 1
                         continue
                 for e in labels:
                     accepted[(cat, unit, cpos)].append((mk, md, y, e, brand))
             retrieved[(cat, unit)] = r.get("retrieved", "")
             unit_meta[(cat, unit)] = (mt.get("options", ()), mt.get("cosmetic", False))
+            unit_specs[(cat, unit)] = r.get("specs", {})
     conflicts = Counter()
     groups = []
     for (cat, unit, pos), rows in sorted(accepted.items()):
@@ -497,6 +528,7 @@ def build(records: list, names: GA.Names, site: str, src: str = "", complete: di
                    "Drive, transmission, trim and suspension (sport / electronic) are not stated; match them.")
                 + (" Engines shown are the title's engines that cars of that model and year on the lots have."
                    if obs is not None else "")
+                + spec_check(cat, unit_specs.get((cat, unit), {}))
                 + (f" If equipped: {', '.join(opts)}." if opts else "")
                 + (" Color or finish may differ; it may need paint." if cosm else ""))
         ocat = CAT_OUT.get(cat, cat)

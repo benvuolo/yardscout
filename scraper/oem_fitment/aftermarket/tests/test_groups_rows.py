@@ -103,9 +103,27 @@ mm = gsp_rec("X6", [(1999, 2003, "Acura", "TL", ""), (1998, 2002, "Honda", "Acco
 OBS = {("Acura", "tl", y): {3.2} for y in range(1999, 2004)}
 OBS.update({("Honda", "accord", y): {2.3, 3.0} for y in range(1998, 2003)})
 d = R.build([mm], Names(), "gspnorthamerica.com", observed=OBS)
-check("title engine kept only where lot cars of that model-year have it (Accord 3.0 yes, TL 3.0 no)",
-      d["groups"] and {(a[1], a[4]) for a in d["groups"][0]["apps"]} == {("Accord", "3.0L")}
-      and d["refused_rows"].get("no_lot_car_with_title_engine") == 5)
+check("multi-model unit: a model-year whose lot cars include an engine outside the title is dropped "
+      "(Accord 2.3 present) and TL (no 3.0) too", not d["groups"]
+      and d["refused_rows"].get("no_lot_car_with_title_engine") == 5 and d["refused_rows"].get("lot_engine_outside_unit_title") == 5)
+OBSa = {("Acura", "tl", y): {3.2} for y in range(1999, 2004)}
+OBSa.update({("Honda", "accord", y): {3.0} for y in range(1998, 2003)})
+d = R.build([mm], Names(), "gspnorthamerica.com", observed=OBSa)
+check("multi-model unit: kept where every lot car of the model-year has a title engine",
+      {(a[1], a[4]) for a in d["groups"][0]["apps"]} == {("Accord", "3.0L")})
+sf = gsp_rec("X13", [(2017, 2018, "Hyundai", "Santa Fe", ""), (2013, 2018, "Hyundai", "Santa Fe Sport", "")],
+             engines=("2.0", "2.4"))
+OBS3 = {("Hyundai", "santafe", y): {2.0, 2.4} for y in (2017, 2018)}
+OBS3.update({("Hyundai", "santafesport", y): {2.0, 2.4} for y in range(2013, 2019)})
+d = R.build([sf], Names(), "gspnorthamerica.com", observed=OBS3)
+check("round-3 regression: base 'Santa Fe' rows refused next to 'Santa Fe Sport' (yards lump them)",
+      d["groups"] and {a[1] for a in d["groups"][0]["apps"]} == {"Santa Fe Sport"}
+      and d["refused_rows"].get("sibling_model_name") == 1)
+spec = gsp_rec("X14", [(2017, 2022, "Honda", "CR-V", "")], engines=("1.5", "2.4"))
+spec["specs"] = {"Inboard Spline Quantity": "27", "Outboard Spline Quantity": "30", "Compressed Length (MM)": "671"}
+note = R.build([spec], Names(), "gspnorthamerica.com")["groups"][0]["note"]
+check("cv-axle note carries GSP's own physical check (splines, length)",
+      "inboard splines 27, outboard splines 30, compressed length 671 mm" in note and "drive" not in note.lower())
 ct = gsp_rec("X11", [(2017, 2020, "Cadillac", "CT6", "")], engines=("2.0", "4.2"))
 OBS2 = {("Cadillac", "ct6", 2017): {2.0, 3.6}, ("Cadillac", "ct6", 2018): {2.0, 3.0},
         ("Cadillac", "ct6", 2019): {2.0, 4.2}, ("Cadillac", "ct6", 2020): {4.2}}
