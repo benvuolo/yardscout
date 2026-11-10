@@ -969,3 +969,165 @@
 17:49:16 seg done tier=B Nissan Maxima [2016, 2022] seeds=[2016] records=3867 errors=9
 17:56:52 seg done tier=B Nissan 350Z [2003, 2008] seeds=[2004] records=3911 errors=9
 17:56:52 finished records=3911 errors=9
+05:57:49 start site=www.nissanpartsdeal.com mode=worklist tiers=['A', 'B', 'W', 'C'] records=3911 list_lines=0 year_lines=0 url_index=0
+05:57:49 seg done tier=A Nissan Altima [2013, 2015] seeds=[2013] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Altima [2010, 2012] seeds=[2012] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Altima [2007, 2009] seeds=[2008] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Sentra [2013, 2015] seeds=[2014] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Rogue [2011, 2013] seeds=[2013] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Xterra [2000, 2015] seeds=[2004] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Maxima [2009, 2014] seeds=[2011] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Altima [2005, 2006] seeds=[2006] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Versa [2007, 2011] seeds=[2009] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Murano [2009, 2014] seeds=[2009] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Sentra [1984, 2006] seeds=[2006] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Pathfinder [2013, 2020] seeds=[2014] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Sentra [2010, 2012] seeds=[2012] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Pathfinder [2005, 2012] seeds=[2006] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Titan [2004, 2016] seeds=[2004] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Murano [1998, 2007] seeds=[2007] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Rogue [2008, 2010] seeds=[2010] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Versa [2012, 2014] seeds=[2012] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Sentra [2007, 2009] seeds=[2008] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Armada [2004, 2015] seeds=[2006] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Altima [2016, 2018] seeds=[2016] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Sentra [2016, 2019] seeds=[2016] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Versa [2015, 2019] seeds=[2015] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Maxima [2004, 2008] seeds=[2004] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Pathfinder [1987, 2004] seeds=[2001] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Altima [2002, 2004] seeds=[2003] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Rogue [2014, 2016] seeds=[2016] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Frontier [1998, 2004] seeds=[2000] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Maxima [2000, 2003] seeds=[2000] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Juke [2011, 2017] seeds=[2011] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Versa Note [2014, 2020] seeds=[2015] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Quest [2004, 2009] seeds=[2007] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Altima [1993, 2001] seeds=[2001] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Frontier [2005, 2020] seeds=[2005] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Maxima [1984, 1999] seeds=[1997] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Quest [2011, 2017] seeds=[2012] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Pickup [1976, 1997] seeds=[1995] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Cube [2009, 2014] seeds=[2009] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Rogue [2017, 2020] seeds=[2017] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Rogue Select [2014, 2015] seeds=[2014] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Quest [1993, 2002] seeds=[2000] records=3911 errors=9
+05:57:49 seg done tier=A Nissan Maxima [2016, 2022] seeds=[2016] records=3911 errors=9
+05:57:49 seg done tier=A Nissan 350Z [2003, 2008] seeds=[2004] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Altima [2013, 2015] seeds=[2013] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Altima [2010, 2012] seeds=[2012] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Altima [2007, 2009] seeds=[2008] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Sentra [2013, 2015] seeds=[2014] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Rogue [2011, 2013] seeds=[2013] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Xterra [2000, 2015] seeds=[2004] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Maxima [2009, 2014] seeds=[2011] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Altima [2005, 2006] seeds=[2006] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Versa [2007, 2011] seeds=[2009] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Murano [2009, 2014] seeds=[2009] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Sentra [1984, 2006] seeds=[2006] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Pathfinder [2013, 2020] seeds=[2014] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Sentra [2010, 2012] seeds=[2012] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Pathfinder [2005, 2012] seeds=[2006] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Titan [2004, 2016] seeds=[2004] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Murano [1998, 2007] seeds=[2007] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Rogue [2008, 2010] seeds=[2010] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Versa [2012, 2014] seeds=[2012] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Sentra [2007, 2009] seeds=[2008] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Armada [2004, 2015] seeds=[2006] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Altima [2016, 2018] seeds=[2016] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Sentra [2016, 2019] seeds=[2016] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Versa [2015, 2019] seeds=[2015] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Maxima [2004, 2008] seeds=[2004] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Pathfinder [1987, 2004] seeds=[2001] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Altima [2002, 2004] seeds=[2003] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Rogue [2014, 2016] seeds=[2016] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Frontier [1998, 2004] seeds=[2000] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Maxima [2000, 2003] seeds=[2000] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Juke [2011, 2017] seeds=[2011] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Versa Note [2014, 2020] seeds=[2015] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Quest [2004, 2009] seeds=[2007] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Altima [1993, 2001] seeds=[2001] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Frontier [2005, 2020] seeds=[2005] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Maxima [1984, 1999] seeds=[1997] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Quest [2011, 2017] seeds=[2012] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Pickup [1976, 1997] seeds=[1995] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Cube [2009, 2014] seeds=[2009] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Rogue [2017, 2020] seeds=[2017] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Rogue Select [2014, 2015] seeds=[2014] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Quest [1993, 2002] seeds=[2000] records=3911 errors=9
+05:57:49 seg done tier=B Nissan Maxima [2016, 2022] seeds=[2016] records=3911 errors=9
+05:57:49 seg done tier=B Nissan 350Z [2003, 2008] seeds=[2004] records=3911 errors=9
+05:58:30 chain-unlinked wiper-motor 1 numbers named by 28800-3TA1A, no catalog link: 28800-9HS1A
+05:58:45 chain-unlinked wiper-motor 3 numbers named by 28800-ZX01A, no catalog link: 28800-JA000, 28800-JB100, 28800-ZX00A
+05:59:10 chain-unlinked knuckle 1 numbers named by 40015-JA00A, no catalog link: 40015-JA02A
+05:59:10 chain-unlinked knuckle 1 numbers named by 40014-JA00A, no catalog link: 40014-JA02A
+06:00:45 chain-unlinked strut 1 numbers named by E4303-3TA1B, no catalog link: E4303-3TA0B
+06:00:45 chain-unlinked strut 2 numbers named by E4303-3NT1B, no catalog link: E4303-3NT1C, E4303-3NT0B
+06:00:45 chain-unlinked strut 1 numbers named by E4303-3TN1C, no catalog link: E4303-3TN3C
+06:00:45 chain-unlinked strut 1 numbers named by E4302-3TA1B, no catalog link: E4302-3TA0B
+06:00:45 chain-unlinked strut 1 numbers named by E4302-3NT1B, no catalog link: E4302-3NT0B
+06:01:01 chain-unlinked strut 1 numbers named by E6210-3TA1B, no catalog link: E6210-3TA0B
+06:01:42 chain-unlinked strut 1 numbers named by E4303-JA02A, no catalog link: E4303-JA02C
+06:01:42 chain-unlinked strut 2 numbers named by E4303-ZX10A, no catalog link: E4303-ZX10B, E4303-JB12B
+06:01:42 chain-unlinked strut 2 numbers named by E4302-JA02A, no catalog link: E4302-JA01A, E4302-JA02C
+06:01:42 chain-unlinked strut 2 numbers named by E4302-ZX10A, no catalog link: E4302-JB12B, E4302-ZX10B
+06:02:06 chain-unlinked strut 1 numbers named by E6210-ZX10A, no catalog link: E6210-JA12D
+06:02:06 seg done tier=C Nissan Altima [2013, 2015] seeds=[2013] records=3930 errors=9
+06:03:34 chain-unlinked strut 2 numbers named by E4303-ZX00A, no catalog link: E4303-ZX00B, E4303-JA12A
+06:03:34 chain-unlinked strut 2 numbers named by E4302-ZX00A, no catalog link: E4302-JA12A, E4302-ZX00B
+06:03:58 chain-unlinked strut 1 numbers named by E6210-JA01A, no catalog link: E6210-JA00A
+06:03:58 chain-unlinked strut 1 numbers named by E6210-ZX00A, no catalog link: E6210-JA11A
+06:04:14 seg done tier=C Nissan Altima [2010, 2012] seeds=[2012] records=3934 errors=9
+06:05:18 chain-unlinked knuckle 1 numbers named by 40014-JA00B, no catalog link: 40014-JA02A
+06:08:05 seg done tier=C Nissan Altima [2007, 2009] seeds=[2008] records=3951 errors=9
+06:08:53 chain-unlinked wiper-motor 1 numbers named by 28810-3SG0A, no catalog link: 28810-3SG1A
+06:09:17 chain-unlinked knuckle 1 numbers named by 40015-1KA1A, no catalog link: 40015-1KA0A
+06:09:17 chain-unlinked knuckle 1 numbers named by 40014-1KA1A, no catalog link: 40014-1KA0A
+06:10:21 chain-unlinked strut 1 numbers named by E4303-9AM0B, no catalog link: E4303-9AN0B
+06:10:21 chain-unlinked strut 1 numbers named by E4302-9AM0B, no catalog link: E4302-9AN0B
+06:10:46 seg done tier=C Nissan Sentra [2013, 2015] seeds=[2014] records=3964 errors=9
+06:13:02 chain-unlinked strut 1 numbers named by E6210-JM01A, no catalog link: E6210-JM00A
+06:13:02 seg done tier=C Nissan Rogue [2011, 2013] seeds=[2013] records=3973 errors=9
+06:13:49 chain-unlinked wiper-motor 1 numbers named by 28710-ZD300, no catalog link: 28700-2Z600
+06:14:45 chain-unlinked knuckle 1 numbers named by 40015-9Z500, no catalog link: 40015-7Z300
+06:14:45 chain-unlinked knuckle 2 numbers named by 40015-9Z510, no catalog link: 40015-9Z300, 40015-7Z200
+06:14:45 chain-unlinked knuckle 1 numbers named by 40014-9Z500, no catalog link: 40014-7Z300
+06:14:45 chain-unlinked knuckle 2 numbers named by 40014-9Z510, no catalog link: 40014-9Z300, 40014-7Z200
+06:15:33 product-fail https://www.nissanpartsdeal.com/parts/nissan-absorber-kit~56200-1z625.html: ValueError: no __INITIAL_STORE__ on page
+06:17:02 chain-unlinked wiper-motor 1 numbers named by 28800-ZL90B, no catalog link: 28800-ZS00A
+06:17:02 chain-unlinked wiper-motor 1 numbers named by 28815-ZL90B, no catalog link: 28815-ZS00A
+06:18:30 seg done tier=C Nissan Xterra [2000, 2015] seeds=[2004, 2010] records=3998 errors=10
+06:20:38 chain-unlinked strut 1 numbers named by E4303-9DA0A, no catalog link: E4303-9DG0A
+06:20:38 chain-unlinked strut 1 numbers named by E4303-9DC0A, no catalog link: E4303-9DG0C
+06:20:38 chain-unlinked strut 1 numbers named by E4302-9DA0A, no catalog link: E4302-9DG0A
+06:20:38 chain-unlinked strut 1 numbers named by E4302-9DC0A, no catalog link: E4302-9DG0C
+06:21:02 chain-unlinked strut 2 numbers named by E6210-9N10C, no catalog link: 56210-9N10C, E6210-9N10B
+06:21:02 chain-unlinked strut 2 numbers named by E6210-9N60C, no catalog link: 56210-9N60C, E6210-9N60B
+06:21:02 seg done tier=C Nissan Maxima [2009, 2014] seeds=[2011] records=4010 errors=10
+06:21:26 chain-unlinked wiper-motor 1 numbers named by 28810-7Y005, no catalog link: 28810-7Y000
+06:22:54 chain-unlinked strut 1 numbers named by 54303-ZB025, no catalog link: E4303-ZB02B
+06:22:54 chain-unlinked strut 1 numbers named by 54303-ZB125, no catalog link: E4303-ZB03B
+06:22:54 chain-unlinked strut 1 numbers named by 54303-ZB725, no catalog link: E4303-ZB70A
+06:22:54 chain-unlinked strut 1 numbers named by 54302-ZB025, no catalog link: E4302-ZB02B
+06:22:54 chain-unlinked strut 1 numbers named by 54302-ZB125, no catalog link: E4302-ZB03B
+06:22:54 chain-unlinked strut 1 numbers named by 54302-ZB725, no catalog link: E4302-ZB70A
+06:23:26 chain-unlinked strut 3 numbers named by 56210-3Z026, no catalog link: 56210-8J025, 56210-8J026, 56210-3Z025
+06:23:26 seg done tier=C Nissan Altima [2005, 2006] seeds=[2006] records=4022 errors=10
+06:26:38 chain-unlinked strut 2 numbers named by E4303-EM30C, no catalog link: E4303-EM30B, E4303-EM30A
+06:26:38 chain-unlinked strut 1 numbers named by E4303-EL00A, no catalog link: E4303-ZV90E
+06:26:38 chain-unlinked strut 1 numbers named by E4303-ZV90B, no catalog link: E4303-ZV90E
+06:26:38 chain-unlinked strut 2 numbers named by E4302-EM30C, no catalog link: E4302-EM30B, E4302-EM30A
+06:26:38 chain-unlinked strut 1 numbers named by E4302-EL00A, no catalog link: E4C02-EL00A
+06:26:38 chain-unlinked strut 1 numbers named by E4302-ZV90B, no catalog link: E4302-ZV90E
+06:27:18 chain-unlinked strut 1 numbers named by E6200-ZV90B, no catalog link: E6200-ZV91E
+06:27:18 chain-unlinked strut 1 numbers named by E6210-EL00A, no catalog link: E6B10-EL00A
+06:27:18 chain-unlinked strut 1 numbers named by E6210-EM30C, no catalog link: E6210-EM30B
+06:27:34 seg done tier=C Nissan Versa [2007, 2011] seeds=[2009] records=4039 errors=10
+06:28:22 chain-unlinked wiper-motor 1 numbers named by 28800-1AA0A, no catalog link: 28800-1AA0B
+06:29:50 chain-unlinked strut 1 numbers named by E4303-1AA0C, no catalog link: E4303-1AA0D
+06:29:50 chain-unlinked strut 1 numbers named by E4303-1AA1A, no catalog link: E4303-1AA1B
+06:29:50 chain-unlinked strut 1 numbers named by E4302-1AA0C, no catalog link: E4302-1AA0D
+06:29:50 chain-unlinked strut 1 numbers named by E4302-1AA1A, no catalog link: E4302-1AA1B
+06:30:22 chain-unlinked strut 1 numbers named by E6210-1AA0C, no catalog link: E6210-1TZ0A
+06:30:22 chain-unlinked strut 1 numbers named by E6210-1AA1A, no catalog link: E6210-1TZ0B
+06:30:22 seg done tier=C Nissan Murano [2009, 2014] seeds=[2009] records=4052 errors=10
+06:30:22 time budget reached records=4052
