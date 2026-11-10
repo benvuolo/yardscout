@@ -7753,3 +7753,32 @@
 14:58:01 chain-unlinked side-mirrors 1 numbers named by 5074209AC, no catalog link: 5074209AG
 15:02:50 chain-unlinked window-regulator 1 numbers named by 56005164, no catalog link: R6005164
 15:12:26 time budget reached records=6620
+15:12:47 start site=www.jeeppartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=6620 list_lines=3997 year_lines=566 url_index=31420
+15:12:47 completion worklist completion/mopar.own_page.json: 657 rows
+15:13:20 chain-unlinked headlights 3 numbers named by 68088868AD, no catalog link: 68088868AC, 68088868AB, 68088868AA
+15:13:20 chain-unlinked headlights 2 numbers named by 68088869AD, no catalog link: 68088869AC, 68088869AB
+15:20:24 chain-unlinked side-mirrors 1 numbers named by 55077926AB, no catalog link: 55077926AC
+15:23:53 chain-unlinked side-mirrors 7 numbers named by 5115041AK, no catalog link: 5115041AF, 5115041AD, 5115041AG, 5115041AE, 5115041AB, 5115041AI, 5115041AJ
+15:23:53 chain-unlinked side-mirrors 6 numbers named by 5115040AK, no catalog link: 5115040AG, 5115040AE, 5115040AD, 5115040AB, 5115040AF, 5115040AJ
+15:23:53 chain-unlinked side-mirrors 4 numbers named by 5115042AG, no catalog link: 5115042AC, 5115042AE, 5115042AB, 5115042AF
+15:23:53 chain-unlinked side-mirrors 4 numbers named by 5115043AG, no catalog link: 5115043AE, 5115043AB, 5115043AF, 5115043AC
+15:23:53 chain-unlinked side-mirrors 8 numbers named by 5115046AM, no catalog link: 5115046AI, 5115046AF, 5115046AH, 5115046AD, 5115046AL, 5115046AE, 5115046AK, 5115046AG
+15:23:53 chain-unlinked side-mirrors 7 numbers named by 5115047AM, no catalog link: 5115047AL, 5115047AH, 5115047AB, 5115047AF, 5115047AD, 5115047AG, 5115047AE
+15:27:52 chain-unlinked side-mirrors 1 numbers named by 5074208AD, no catalog link: 5074208AG
+15:27:52 chain-unlinked side-mirrors 1 numbers named by 5074209AD, no catalog link: 5074209AG
+15:31:20 chain-unlinked side-mirrors 3 numbers named by 55112640AD, no catalog link: 55112640AA, 55112640AC, 55112640AB
+15:31:20 chain-unlinked side-mirrors 3 numbers named by 55112641AD, no catalog link: 55112641AC, 55112641AB, 55112641AA
+15:31:20 chain-unlinked side-mirrors 2 numbers named by 55077624AI, no catalog link: 55077624AG, 55077624AH
+15:31:20 chain-unlinked side-mirrors 1 numbers named by 55077625AH, no catalog link: 55077625AG
+15:34:00 chain-unlinked climate-control 4 numbers named by 55111943AE, no catalog link: 55111943AD, 55111943AA, 55111943AC, 55111943AB
+15:34:00 chain-unlinked climate-control 6 numbers named by 55111955AC, no catalog link: 55111816AC, 55111816AF, 55111816AE, 55111955AB, 55111816AD, 55111816AB
+15:34:33 chain-unlinked window-regulator 1 numbers named by 68033456AC, no catalog link: 68033456AB
+15:34:33 chain-unlinked window-regulator 2 numbers named by 68033457AC, no catalog link: 68033457AB, 68033457AA
+15:34:33 chain-unlinked window-regulator 1 numbers named by 68033485AB, no catalog link: 68033485AA
+15:34:33 chain-unlinked window-regulator 1 numbers named by 68033484AB, no catalog link: 68033484AA
+15:38:41 chain-unlinked hood 1 numbers named by 68160234AC, no catalog link: 68660811AA
+15:38:41 chain-unlinked hood 1 numbers named by 68160235AD, no catalog link: 68752414AB
+15:39:04 chain-unlinked tailgate 19 numbers named by 68245874AM, no catalog link: 68245874AC, 68245876AF, 68245874AA, 68245874AF, 68245876AC, 68245874AJ, 68245876AD, 68245874AD, 68245876AE, 68245874AH, 68245876AB, 68245874AK, 68245874AL, 68245876AG, 68245874AE, 68245874AG, 68245874AI, 68245874AB, 68245874AO
+15:44:22 chain-unlinked side-mirrors 2 numbers named by 4805692AE, no catalog link: 4805692AC, 4805692AB
+15:44:22 chain-unlinked side-mirrors 2 numbers named by 4805693AE, no catalog link: 4805693AC, 4805693AB
+15:44:39 time budget reached records=6656
