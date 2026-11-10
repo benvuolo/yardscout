@@ -1345,3 +1345,19 @@
 17:26:11 chain-unlinked fender 1 numbers named by 53802-3F210, no catalog link: 53802-3F211
 17:27:23 chain-unlinked side-mirrors 1 numbers named by 87906-30340-C2, no catalog link: 87906-30380-C2
 17:28:27 time budget reached records=3417
+17:28:41 start site=www.lexuspartsnow.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=3417 list_lines=1250 year_lines=208 url_index=16764
+17:28:41 completion worklist completion/toyota.own_page.json: 106 rows
+17:30:02 product-fail https://www.lexuspartsnow.com/parts/lexus-mirror-assy-outer-rear-view-lh~87940-3a150-a1.html: ValueError: no __INITIAL_STORE__ on page
+17:30:02 product-fail https://www.lexuspartsnow.com/parts/lexus-mirror-assy-outer-rear-view-lh~87940-3a150-b1.html: ValueError: HTTP 502 for https://www.lexuspartsnow.com/parts/lexus-mirror-assy-outer-rear-view-lh~87940-3a150-b1.html
+17:31:54 chain-unlinked bumper-front 1 numbers named by 52119-5E913, no catalog link: 52119-5E903
+17:31:54 chain-unlinked bumper-front 1 numbers named by 52119-5E916, no catalog link: 52119-5E906
+17:31:54 chain-unlinked bumper-front 1 numbers named by 52119-5E910, no catalog link: 52119-5E902
+17:32:58 chain-unlinked door-front 1 numbers named by 67002-53110, no catalog link: 67002-53130
+17:32:58 chain-unlinked door-front 1 numbers named by 67001-53100, no catalog link: 67001-53130
+17:33:47 chain-unlinked fender 1 numbers named by 53801-53160, no catalog link: 53802-53180
+17:33:47 chain-unlinked fender 2 numbers named by 53801-53150, no catalog link: 53802-53170, 53801-53170
+17:35:14 chain-unlinked hood 1 numbers named by 53301-53040, no catalog link: 53301-53041
+17:50:18 chain-unlinked side-mirrors 1 numbers named by 87910-53700-A0, no catalog link: 87910-53700-A2
+17:51:31 chain-unlinked trunk-lid 1 numbers named by 64401-53310, no catalog link: 64401-53311
+17:51:31 chain-unlinked trunk-lid 1 numbers named by 64401-53320, no catalog link: 64401-53321
+17:59:38 time budget reached records=3563
