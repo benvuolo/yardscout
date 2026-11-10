@@ -407,3 +407,139 @@
 12:14:40 seg done tier=B Mazda Truck [2002, 2004] seeds=[2002] records=1391 errors=9
 12:14:40 seg done tier=B Mazda CX-5 [2017, 2023] seeds=[2017] records=1391 errors=9
 12:14:40 finished records=1391 errors=9
+04:48:24 start site=www.mazdapartsnow.com mode=worklist tiers=['A', 'B', 'W', 'C'] records=1391 list_lines=0 year_lines=0 url_index=0
+04:48:24 seg done tier=A Mazda Mazda3 [2001, 2009] seeds=[2008] records=1391 errors=9
+04:48:24 seg done tier=A Mazda Mazda3 [2010, 2011] seeds=[2010] records=1391 errors=9
+04:48:24 seg done tier=A Mazda Mazda6 [2003, 2008] seeds=[2007] records=1391 errors=9
+04:48:24 seg done tier=A Mazda CX-9 [2007, 2015] seeds=[2008] records=1391 errors=9
+04:48:24 seg done tier=A Mazda Mazda3 [2012, 2013] seeds=[2012] records=1391 errors=9
+04:48:24 seg done tier=A Mazda Mazda6 [2009, 2013] seeds=[2009] records=1391 errors=9
+04:48:24 seg done tier=A Mazda CX-7 [2007, 2012] seeds=[2010] records=1391 errors=9
+04:48:24 seg done tier=A Mazda Protege [1999, 2003] seeds=[2003] records=1391 errors=9
+04:48:24 seg done tier=A Mazda Tribute [2001, 2004] seeds=[2003] records=1391 errors=9
+04:48:24 seg done tier=A Mazda MPV [1989, 2006] seeds=[2004] records=1391 errors=9
+04:48:24 seg done tier=A Mazda Mazda5 [2008, 2010] seeds=[2008] records=1391 errors=9
+04:48:24 seg done tier=A Mazda Mazda5 [2012, 2015] seeds=[2012] records=1391 errors=9
+04:48:24 seg done tier=A Mazda B-Series [1986, 2007] seeds=[1996] records=1391 errors=9
+04:48:24 seg done tier=A Mazda Tribute [2005, 2006] seeds=[2005] records=1391 errors=9
+04:48:24 seg done tier=A Mazda Mazda6 [2014, 2021] seeds=[2014] records=1391 errors=9
+04:48:24 seg done tier=A Mazda 626 [1985, 2002] seeds=[2002] records=1391 errors=9
+04:48:24 seg done tier=A Mazda MX-5 Miata [1990, 2019] seeds=[2006] records=1391 errors=9
+04:48:24 seg done tier=A Mazda Mazda3 [2014, 2016] seeds=[2014] records=1391 errors=9
+04:48:24 seg done tier=A Mazda Mazda2 [2011, 2014] seeds=[2011] records=1391 errors=9
+04:48:24 seg done tier=A Mazda CX-5 [2013, 2016] seeds=[2014] records=1391 errors=9
+04:48:24 seg done tier=A Mazda Mazda5 [2006, 2007] seeds=[2007] records=1391 errors=9
+04:48:24 seg done tier=A Mazda Tribute [2008, 2011] seeds=[2008] records=1391 errors=9
+04:48:24 seg done tier=A Mazda RX-8 [2004, 2010] seeds=[2004] records=1391 errors=9
+04:48:24 seg done tier=A Mazda Protege5 [2002, 2003] seeds=[2003] records=1391 errors=9
+04:48:24 seg done tier=A Mazda Protege [1995, 1998] seeds=[1998] records=1391 errors=9
+04:48:24 seg done tier=A Mazda Millenia [1995, 2002] seeds=[2002] records=1391 errors=9
+04:48:24 seg done tier=A Mazda Mazda3 [2017, 2018] seeds=[2017] records=1391 errors=9
+04:48:24 seg done tier=A Mazda B2200 [1988, 1993] seeds=[1991] records=1391 errors=9
+04:48:24 seg done tier=A Mazda B2300 [1994, 2005] seeds=[1997] records=1391 errors=9
+04:48:24 seg done tier=A Mazda Truck [2002, 2004] seeds=[2002] records=1391 errors=9
+04:48:24 seg done tier=A Mazda CX-5 [2017, 2023] seeds=[2017] records=1391 errors=9
+04:48:24 seg done tier=B Mazda Mazda3 [2001, 2009] seeds=[2008] records=1391 errors=9
+04:48:24 seg done tier=B Mazda Mazda3 [2010, 2011] seeds=[2010] records=1391 errors=9
+04:48:24 seg done tier=B Mazda Mazda6 [2003, 2008] seeds=[2007] records=1391 errors=9
+04:48:24 seg done tier=B Mazda CX-9 [2007, 2015] seeds=[2008] records=1391 errors=9
+04:48:24 seg done tier=B Mazda Mazda3 [2012, 2013] seeds=[2012] records=1391 errors=9
+04:48:24 seg done tier=B Mazda Mazda6 [2009, 2013] seeds=[2009] records=1391 errors=9
+04:48:24 seg done tier=B Mazda CX-7 [2007, 2012] seeds=[2010] records=1391 errors=9
+04:48:24 seg done tier=B Mazda Protege [1999, 2003] seeds=[2003] records=1391 errors=9
+04:48:24 seg done tier=B Mazda Tribute [2001, 2004] seeds=[2003] records=1391 errors=9
+04:48:24 seg done tier=B Mazda MPV [1989, 2006] seeds=[2004] records=1391 errors=9
+04:48:24 seg done tier=B Mazda Mazda5 [2008, 2010] seeds=[2008] records=1391 errors=9
+04:48:24 seg done tier=B Mazda Mazda5 [2012, 2015] seeds=[2012] records=1391 errors=9
+04:48:24 seg done tier=B Mazda B-Series [1986, 2007] seeds=[1996] records=1391 errors=9
+04:48:24 seg done tier=B Mazda Tribute [2005, 2006] seeds=[2005] records=1391 errors=9
+04:48:24 seg done tier=B Mazda Mazda6 [2014, 2021] seeds=[2014] records=1391 errors=9
+04:48:24 seg done tier=B Mazda 626 [1985, 2002] seeds=[2002] records=1391 errors=9
+04:48:24 seg done tier=B Mazda MX-5 Miata [1990, 2019] seeds=[2006] records=1391 errors=9
+04:48:24 seg done tier=B Mazda Mazda3 [2014, 2016] seeds=[2014] records=1391 errors=9
+04:48:24 seg done tier=B Mazda Mazda2 [2011, 2014] seeds=[2011] records=1391 errors=9
+04:48:24 seg done tier=B Mazda CX-5 [2013, 2016] seeds=[2014] records=1391 errors=9
+04:48:24 seg done tier=B Mazda Mazda5 [2006, 2007] seeds=[2007] records=1391 errors=9
+04:48:24 seg done tier=B Mazda Tribute [2008, 2011] seeds=[2008] records=1391 errors=9
+04:48:24 seg done tier=B Mazda RX-8 [2004, 2010] seeds=[2004] records=1391 errors=9
+04:48:24 seg done tier=B Mazda Protege5 [2002, 2003] seeds=[2003] records=1391 errors=9
+04:48:24 seg done tier=B Mazda Protege [1995, 1998] seeds=[1998] records=1391 errors=9
+04:48:24 seg done tier=B Mazda Millenia [1995, 2002] seeds=[2002] records=1391 errors=9
+04:48:24 seg done tier=B Mazda Mazda3 [2017, 2018] seeds=[2017] records=1391 errors=9
+04:48:24 seg done tier=B Mazda B2200 [1988, 1993] seeds=[1991] records=1391 errors=9
+04:48:24 seg done tier=B Mazda B2300 [1994, 2005] seeds=[1997] records=1391 errors=9
+04:48:24 seg done tier=B Mazda Truck [2002, 2004] seeds=[2002] records=1391 errors=9
+04:48:24 seg done tier=B Mazda CX-5 [2017, 2023] seeds=[2017] records=1391 errors=9
+04:48:57 chain-unlinked wiper-motor 1 numbers named by BN8V-67-340, no catalog link: BP4K-67-340
+04:49:53 chain-unlinked knuckle 1 numbers named by BAK6-33-031, no catalog link: BAK6-33-031A
+04:51:21 chain-unlinked strut 2 numbers named by B37F-34-700B, no catalog link: B37F-34-700, B37F-34-700A
+04:51:21 chain-unlinked strut 4 numbers named by BBM2-34-700C, no catalog link: BBM2-34-700A, BBM2-34-700B, BR5V-34-700A, BR5V-34-700B
+04:51:21 chain-unlinked strut 5 numbers named by BBM2-34-900C, no catalog link: BBM2-34-900A, BR5V-34-900B, BBM2-34-900B, BR5V-34-900C, BR5V-34-900A
+04:51:21 chain-unlinked strut 8 numbers named by BRY0-34-700, no catalog link: BP4K-34-700B, BP4K-34-700F, BP4L-34-700, BP4S-34-700C, BN9A-34-700, BP4S-34-700, BP4K-34-700D, BP4K-34-700E
+04:51:21 chain-unlinked strut 15 numbers named by BRY0-34-900, no catalog link: B32T-34-900C, B32T-34-900D, BP4K-34-900F, BP4L-34-900, BP6J-34-900, BR5S-34-900C, BR5S-34-900B, BP4S-34-900C, BR5S-34-900, BP4K-34-900B, BR5S-34-900A, BN9A-34-900, BP4S-34-900, BP4K-34-900E, BP4T-34-900
+04:51:45 chain-unlinked strut 4 numbers named by B37F-28-910E, no catalog link: B37F-28-910A, B37F-28-910B, B37F-28-910D, B37F-28-910C
+04:51:45 chain-unlinked strut 5 numbers named by BRY0-28-910, no catalog link: BR5S-28-910C, BR5S-28-910, BR5S-28-910E, BR5S-28-910D, BR5S-28-910B
+04:51:45 chain-unlinked strut 4 numbers named by BRY1-28-910, no catalog link: BR5V-28-910B, BR5V-28-910C, BR5V-28-910E, BR5V-28-910D
+04:51:53 nav-fail Mazda Mazda3 2002: NavError: HTTP 404 for https://www.mazdapartsnow.com/2002-mazda-3-parts
+04:51:53 seg done tier=C Mazda Mazda3 [2001, 2009] seeds=[2008, 2002] records=1407 errors=10
+04:53:05 chain-unlinked knuckle 3 numbers named by BBM2-33-021C, no catalog link: BBM2-33-021, BBM2-33-021B, BBM2-33-021A
+04:53:05 chain-unlinked knuckle 3 numbers named by BBM2-33-031C, no catalog link: BBM2-33-031, BBM2-33-031A, BBM2-33-031B
+04:54:01 chain-unlinked strut 2 numbers named by BBM3-34-700C, no catalog link: BBM3-34-700B, BBM3-34-700A
+04:54:01 chain-unlinked strut 2 numbers named by BBM3-34-900C, no catalog link: BBM3-34-900A, BBM3-34-900B
+04:54:25 chain-unlinked strut 4 numbers named by BBM3-28-910D, no catalog link: BBM3-28-910E, BBM3-28-910A, BBM3-28-910F, BBM3-28-910C
+04:54:25 chain-unlinked strut 1 numbers named by BBN5-28-910C, no catalog link: BBN5-28-910B
+04:54:41 seg done tier=C Mazda Mazda3 [2010, 2011] seeds=[2010] records=1417 errors=10
+04:55:29 chain-unlinked wiper-motor 2 numbers named by GM9A-67-450B, no catalog link: GM9A-67-450, GM9A-67-450A
+04:55:29 chain-unlinked wiper-motor 1 numbers named by GP7A-67-340A, no catalog link: GP7A-67-340
+04:56:41 chain-unlinked knuckle 1 numbers named by GR8C-33-03X, no catalog link: GK2A-33-03XE
+04:58:17 chain-unlinked strut 1 numbers named by GM9A-34-700H, no catalog link: GM9A-34-700G
+04:58:33 chain-unlinked strut 5 numbers named by GR1L-28-700A, no catalog link: GM6A-28-700A, GM6A-28-700, GM6A-28-700B, GM6A-28-700E, GM6A-28-700D
+04:58:33 chain-unlinked strut 5 numbers named by GR2F-28-700A, no catalog link: GM9A-28-700B, GM9C-28-700A, GM9A-28-700C, GM9C-28-700, GM9A-28-700D
+04:58:41 chain-unlinked strut 1 numbers named by GP9A-28-700C, no catalog link: GP9A-28-700B
+04:58:41 seg done tier=C Mazda Mazda6 [2003, 2008] seeds=[2007] records=1437 errors=10
+05:00:09 chain-unlinked knuckle 2 numbers named by L206-33-020B, no catalog link: L206-33-020A, L206-33-020
+05:00:09 chain-unlinked knuckle 2 numbers named by L206-33-030B, no catalog link: L206-33-030, L206-33-030A
+05:01:37 chain-unlinked strut 1 numbers named by TD11-34-700C, no catalog link: TD11-34-700B
+05:01:37 chain-unlinked strut 1 numbers named by TD11-34-900C, no catalog link: TD11-34-900B
+05:01:37 chain-unlinked strut 2 numbers named by TD13-34-700D, no catalog link: TD13-34-700C, TD13-34-700B
+05:01:37 chain-unlinked strut 2 numbers named by TD13-34-900D, no catalog link: TD13-34-900B, TD13-34-900C
+05:01:37 chain-unlinked strut 1 numbers named by TDY1-34-700, no catalog link: TD13-34-700E
+05:01:37 chain-unlinked strut 1 numbers named by TDY1-34-900, no catalog link: TD13-34-900E
+05:01:37 chain-unlinked strut 1 numbers named by TDY2-34-700, no catalog link: TD11-34-700D
+05:01:37 chain-unlinked strut 1 numbers named by TDY2-34-900, no catalog link: TD11-34-900D
+05:02:09 chain-unlinked strut 1 numbers named by TD11-28-700C, no catalog link: TD11-28-700B
+05:02:09 chain-unlinked strut 2 numbers named by TD13-28-700C, no catalog link: TD13-28-700B, TD13-28-700A
+05:02:09 chain-unlinked strut 2 numbers named by TDY1-28-700, no catalog link: TD13-28-700D, TD13-28-700E
+05:02:09 chain-unlinked strut 2 numbers named by TDY2-28-700, no catalog link: TD11-28-700D, TD11-28-700E
+05:02:25 seg done tier=C Mazda CX-9 [2007, 2015] seeds=[2008] records=1454 errors=10
+05:03:45 seg done tier=C Mazda Mazda3 [2012, 2013] seeds=[2012] records=1455 errors=10
+05:05:05 chain-unlinked knuckle 1 numbers named by GS3L-33-03XA, no catalog link: GEG1-33-03X
+05:06:17 chain-unlinked strut 1 numbers named by GS3L-34-700C, no catalog link: GS3L-34-700B
+05:06:17 chain-unlinked strut 1 numbers named by GS3L-34-900C, no catalog link: GS3L-34-900B
+05:06:17 chain-unlinked strut 1 numbers named by GS4H-34-700C, no catalog link: GS4H-34-700B
+05:06:17 chain-unlinked strut 1 numbers named by GS4H-34-900C, no catalog link: GS4H-34-900B
+05:06:33 chain-unlinked strut 2 numbers named by GS3L-28-700D, no catalog link: GS3L-28-700B, GS3L-28-700C
+05:06:33 chain-unlinked strut 1 numbers named by GS4H-28-700D, no catalog link: GS4H-28-700C
+05:06:41 seg done tier=C Mazda Mazda6 [2009, 2013] seeds=[2009] records=1468 errors=10
+05:09:21 chain-unlinked strut 1 numbers named by EH44-28-910A, no catalog link: EH44-28-910
+05:09:21 chain-unlinked strut 2 numbers named by EH46-28-910B, no catalog link: EH46-28-910, EH46-28-910A
+05:09:21 chain-unlinked strut 2 numbers named by EH48-28-910B, no catalog link: EH48-28-910, EH48-28-910A
+05:09:29 seg done tier=C Mazda CX-7 [2007, 2012] seeds=[2010] records=1479 errors=10
+05:10:09 chain-unlinked wiper-motor 1 numbers named by B25H-67-450B, no catalog link: B25H-67-450A
+05:10:57 chain-unlinked knuckle 1 numbers named by C100-33-021B, no catalog link: C100-33-021A
+05:10:57 chain-unlinked knuckle 1 numbers named by C100-33-031B, no catalog link: C100-33-031A
+05:10:57 chain-unlinked knuckle 1 numbers named by CB01-33-021A, no catalog link: CB01-33-021
+05:13:05 chain-unlinked strut 1 numbers named by BP7H-34-700B, no catalog link: BP7H-34-700A
+05:13:53 chain-unlinked strut 3 numbers named by B30H-28-700B, no catalog link: B30D-28-700, B30H-28-700A, B30D-28-700A
+05:13:53 chain-unlinked strut 3 numbers named by B30H-28-900B, no catalog link: B30H-28-900A, B30D-28-900, B30D-28-900A
+05:13:53 chain-unlinked strut 3 numbers named by B30P-28-700B, no catalog link: B30P-28-700A, BL8P-28-700, BL8P-28-700A
+05:13:53 chain-unlinked strut 3 numbers named by B30P-28-900B, no catalog link: B30P-28-900A, BL8P-28-900, BL8P-28-900A
+05:13:53 seg done tier=C Mazda Protege [1999, 2003] seeds=[2003] records=1505 errors=10
+05:14:25 chain-unlinked wiper-motor 13 numbers named by ECY1-67-4L0G, no catalog link: EC01-67-450E, ECY1-67-4L0E, EC01-67-450C, ECY1-67-4L0F, EC01-67-450, ECY1-67-4L0A, EC01-67-450A, EC01-67-450D, ECY1-67-4L0C, EC01-67-450B, ECY1-67-7L0A, ECY1-67-4L0, ECY1-67-4L0D
+05:15:13 chain-unlinked knuckle 2 numbers named by EC01-33-021D, no catalog link: EC01-33-021A, EC01-33-021C
+05:15:13 chain-unlinked knuckle 2 numbers named by EC01-33-031D, no catalog link: EC01-33-031A, EC01-33-031C
+05:16:01 chain-unlinked strut 4 numbers named by EFY1-34-900, no catalog link: EC01-34-900G, EC01-34-900H, EC01-34-900F, ECTT-34-900
+05:16:09 seg done tier=C Mazda Tribute [2001, 2004] seeds=[2003] records=1513 errors=10
+05:18:17 chain-unlinked strut 2 numbers named by LD47-34-900B, no catalog link: LD47-34-900A, LD47-34-900
+05:18:41 chain-unlinked strut 1 numbers named by LD47-28-700, no catalog link: LE31-28-700C
+05:18:41 time budget reached records=1522
