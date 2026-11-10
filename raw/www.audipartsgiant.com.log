@@ -170,3 +170,122 @@
 07:30:27 seg done tier=B Audi A5 Quattro [2009, 2012] seeds=[2011] records=1098 errors=14
 07:30:27 seg done tier=B Audi Q3 [2015, 2021] seeds=[2016] records=1098 errors=14
 07:30:27 finished records=1098 errors=14
+01:58:41 start site=www.audipartsgiant.com mode=worklist tiers=['A', 'B', 'W', 'C'] records=1098 list_lines=0 year_lines=0 url_index=0
+01:58:41 seg done tier=A Audi A4 [1996, 2019] seeds=[2008] records=1098 errors=14
+01:58:41 seg done tier=A Audi A6 [1997, 2017] seeds=[2008] records=1098 errors=14
+01:58:41 seg done tier=A Audi Q5 [2009, 2022] seeds=[2012] records=1098 errors=14
+01:58:41 seg done tier=A Audi Q7 [2007, 2017] seeds=[2008] records=1098 errors=14
+01:58:41 seg done tier=A Audi A3 [2006, 2019] seeds=[2006] records=1098 errors=14
+01:58:41 seg done tier=A Audi A4 Quattro [1997, 2016] seeds=[2009] records=1098 errors=14
+01:58:41 seg done tier=A Audi A5 [2009, 2022] seeds=[2010] records=1098 errors=14
+01:58:41 seg done tier=A Audi A6 Quattro [2000, 2015] seeds=[2006] records=1098 errors=14
+01:58:41 seg done tier=A Audi TT [2000, 2008] seeds=[2001] records=1098 errors=14
+01:58:41 seg done tier=A Audi S4 [2000, 2021] seeds=[2005] records=1098 errors=14
+01:58:41 seg done tier=A Audi A8 [1997, 2011] seeds=[2006] records=1098 errors=14
+01:58:41 seg done tier=A Audi Allroad [2001, 2015] seeds=[2005] records=1098 errors=14
+01:58:41 seg done tier=A Audi A5 Quattro [2009, 2012] seeds=[2011] records=1098 errors=14
+01:58:41 seg done tier=A Audi Q3 [2015, 2021] seeds=[2016] records=1098 errors=14
+01:58:41 seg done tier=B Audi A4 [1996, 2019] seeds=[2008] records=1098 errors=14
+01:58:41 seg done tier=B Audi A6 [1997, 2017] seeds=[2008] records=1098 errors=14
+01:58:41 seg done tier=B Audi Q5 [2009, 2022] seeds=[2012] records=1098 errors=14
+01:58:41 seg done tier=B Audi Q7 [2007, 2017] seeds=[2008] records=1098 errors=14
+01:58:41 seg done tier=B Audi A3 [2006, 2019] seeds=[2006] records=1098 errors=14
+01:58:41 seg done tier=B Audi A4 Quattro [1997, 2016] seeds=[2009] records=1098 errors=14
+01:58:41 seg done tier=B Audi A5 [2009, 2022] seeds=[2010] records=1098 errors=14
+01:58:41 seg done tier=B Audi A6 Quattro [2000, 2015] seeds=[2006] records=1098 errors=14
+01:58:41 seg done tier=B Audi TT [2000, 2008] seeds=[2001] records=1098 errors=14
+01:58:41 seg done tier=B Audi S4 [2000, 2021] seeds=[2005] records=1098 errors=14
+01:58:41 seg done tier=B Audi A8 [1997, 2011] seeds=[2006] records=1098 errors=14
+01:58:41 seg done tier=B Audi Allroad [2001, 2015] seeds=[2005] records=1098 errors=14
+01:58:41 seg done tier=B Audi A5 Quattro [2009, 2012] seeds=[2011] records=1098 errors=14
+01:58:41 seg done tier=B Audi Q3 [2015, 2021] seeds=[2016] records=1098 errors=14
+01:59:53 chain-unlinked knuckle 4 numbers named by 8E0-407-253-H, no catalog link: 8E0-407-253-D, 8E0-407-253-C, 8E0-407-253-E, 8E0-407-253-F
+01:59:53 chain-unlinked knuckle 4 numbers named by 8E0-407-254-H, no catalog link: 8E0-407-254-D, 8E0-407-254-F, 8E0-407-254-E, 8E0-407-254-C
+02:00:17 chain-unlinked knuckle 1 numbers named by 8E0-505-431-AF, no catalog link: 8E0-505-431-AC
+02:00:17 chain-unlinked knuckle 1 numbers named by 8E0-505-432-AF, no catalog link: 8E0-505-432-AC
+02:00:41 chain-unlinked knuckle 2 numbers named by 8E0-505-431-AL, no catalog link: 8E0-505-431-AD, 8E0-505-431-AG
+02:00:41 chain-unlinked knuckle 2 numbers named by 8E0-505-432-AL, no catalog link: 8E0-505-432-AG, 8E0-505-432-AD
+02:00:57 chain-unlinked strut 1 numbers named by 8E0-413-031-DF, no catalog link: 8E0-413-031-DB
+02:01:13 chain-unlinked strut 1 numbers named by 8E0-513-036-AD, no catalog link: 8E0-513-035-R
+02:01:13 chain-unlinked strut 2 numbers named by 8E0-513-036-T, no catalog link: 8E0-513-035-T, 8E0-513-036-C
+02:01:29 chain-unlinked strut 2 numbers named by 8E0-513-036-R, no catalog link: 8E0-513-035-S, 8E0-513-036-B
+02:02:17 chain-unlinked wiper-motor 1 numbers named by 4F9-955-711-E, no catalog link: 4F9-955-711-C
+02:03:13 chain-unlinked knuckle 1 numbers named by 8K0-407-253-AA, no catalog link: 8K0-407-253-S
+02:03:13 chain-unlinked knuckle 1 numbers named by 8K0-407-253-AB, no catalog link: 8K0-407-253-Q
+02:03:13 chain-unlinked knuckle 1 numbers named by 8K0-407-254-AA, no catalog link: 8K0-407-254-S
+02:03:13 chain-unlinked knuckle 1 numbers named by 8K0-407-254-AB, no catalog link: 8K0-407-254-Q
+02:03:37 chain-unlinked knuckle 1 numbers named by 8K0-505-431-AP, no catalog link: 8K0-505-431-AK
+02:03:37 chain-unlinked knuckle 1 numbers named by 8K0-505-432-AP, no catalog link: 8K0-505-432-AK
+02:04:01 chain-unlinked knuckle 1 numbers named by 8K0-505-431-AR, no catalog link: 8K0-505-431-AH
+02:04:01 chain-unlinked knuckle 1 numbers named by 8K0-505-432-AR, no catalog link: 8K0-505-432-AH
+02:04:49 chain-unlinked strut 1 numbers named by 8F0-413-029-B, no catalog link: 8F0-413-029
+02:04:49 chain-unlinked strut 1 numbers named by 8F0-413-030-B, no catalog link: 8F0-413-030
+02:04:49 chain-unlinked strut 1 numbers named by 8K0-413-031-CG, no catalog link: 8K0-413-031-BF
+02:05:29 chain-unlinked strut 3 numbers named by 8K0-513-025-J, no catalog link: 8K0-513-025-H, 8K0-513-025-G, 8K0-513-025-F
+02:05:29 chain-unlinked strut 3 numbers named by 8K0-513-026-J, no catalog link: 8K0-513-026-G, 8K0-513-026-F, 8K0-513-026-H
+02:06:25 chain-unlinked wiper-motor 7 numbers named by 8R0-955-711-C, no catalog link: 8E9-955-711-A, 8E9-955-711-B, 8E9-955-711-D, 8E9-955-711-C, 8R0-955-711-B, 8E9-955-711-E, 8E9-955-711-G
+02:07:37 chain-unlinked knuckle 1 numbers named by 8D0-407-257-AL, no catalog link: 8D0-407-257-AC
+02:07:37 chain-unlinked knuckle 2 numbers named by 4B3-407-254-G, no catalog link: 4B3-407-258-G, 4B3-407-254-D
+02:07:37 chain-unlinked knuckle 1 numbers named by 8D0-407-257-AM, no catalog link: 8D0-407-257-AE
+02:07:37 chain-unlinked knuckle 1 numbers named by 8D0-407-258-AM, no catalog link: 8D0-407-258-AE
+02:08:01 chain-unlinked strut 1 numbers named by 7D0-413-031-C, no catalog link: 701-413-031-G
+02:08:01 chain-unlinked strut 1 numbers named by 8D0-413-031-BG, no catalog link: 8D0-413-031-AH
+02:08:49 chain-unlinked strut 1 numbers named by 8D0-513-031-H, no catalog link: 8D0-513-031-F
+02:09:29 chain-unlinked strut 1 numbers named by 8D0-413-031-BE, no catalog link: 8D0-413-031-AE
+02:09:29 seg done tier=C Audi A4 [1996, 2019] seeds=[2008, 2012, 2000] records=1147 errors=14
+02:10:41 chain-unlinked knuckle 1 numbers named by 4F0-407-253-G, no catalog link: 4F0-407-253-E
+02:10:41 chain-unlinked knuckle 1 numbers named by 4F0-407-254-G, no catalog link: 4F0-407-254-E
+02:11:05 chain-unlinked knuckle 1 numbers named by 4F0-505-433-G, no catalog link: 4F0-505-433-F
+02:11:05 chain-unlinked knuckle 1 numbers named by 4F0-505-434-G, no catalog link: 4F0-505-434-F
+02:11:29 chain-unlinked knuckle 1 numbers named by 4F0-505-433-H, no catalog link: 4F0-505-433-E
+02:11:29 chain-unlinked knuckle 1 numbers named by 4F0-505-434-H, no catalog link: 4F0-505-434-E
+02:12:01 chain-unlinked strut 2 numbers named by 4F0-616-039-S, no catalog link: 4F0-616-039-Q, 4F0-616-039-P
+02:12:01 chain-unlinked strut 2 numbers named by 4F0-616-040-S, no catalog link: 4F0-616-040-Q, 4F0-616-040-P
+02:12:17 chain-unlinked strut 1 numbers named by 4F0-513-032-AG, no catalog link: 4F0-513-032-J
+02:13:29 chain-unlinked strut 1 numbers named by 4F0-413-031-AS, no catalog link: 4F0-413-031-AL
+02:13:29 chain-unlinked strut 2 numbers named by 4F0-616-039-AB, no catalog link: 4F0-616-039-T, 4F0-616-039-AA
+02:13:29 chain-unlinked strut 3 numbers named by 4F0-616-040-AB, no catalog link: 4F0-616-040-T, 4F0-616-040-R, 4F0-616-040-AA
+02:13:29 chain-unlinked strut 2 numbers named by 4F0-616-031-M, no catalog link: 4F0-616-031-L, 4F0-616-031-K
+02:13:29 chain-unlinked strut 2 numbers named by 4F0-616-032-M, no catalog link: 4F0-616-032-K, 4F0-616-032-L
+02:14:25 chain-unlinked knuckle 2 numbers named by 4B3-407-253-G, no catalog link: 4B3-407-257-G, 4B3-407-253-D
+02:16:33 chain-unlinked knuckle 1 numbers named by 4G0-407-253-B, no catalog link: 4G0-407-253
+02:16:33 chain-unlinked knuckle 1 numbers named by 4G0-407-254-B, no catalog link: 4G0-407-254
+02:16:57 chain-unlinked knuckle 1 numbers named by 8K0-505-431-AM, no catalog link: 8K0-505-431-AQ
+02:16:57 chain-unlinked knuckle 1 numbers named by 8K0-505-432-AM, no catalog link: 8K0-505-432-AQ
+02:17:21 chain-unlinked knuckle 2 numbers named by 8R0-505-431-F, no catalog link: 8R0-505-431-C, 8R0-505-431-E
+02:17:21 chain-unlinked knuckle 2 numbers named by 8R0-505-432-F, no catalog link: 8R0-505-432-C, 8R0-505-432-E
+02:18:25 chain-unlinked strut 1 numbers named by 4G0-616-031-AE, no catalog link: 4G0-616-031-AA
+02:18:33 seg done tier=C Audi A6 [1997, 2017] seeds=[2008, 2004, 2014] records=1184 errors=14
+02:20:17 chain-unlinked strut 1 numbers named by 8R0-413-029-L, no catalog link: 8R0-413-029-J
+02:20:17 chain-unlinked strut 1 numbers named by 8R0-413-030-L, no catalog link: 8R0-413-030-J
+02:20:50 chain-unlinked strut 2 numbers named by 8R0-513-025-K, no catalog link: 8R0-513-025-J, 8R0-513-025-G
+02:20:50 chain-unlinked strut 2 numbers named by 8R0-513-026-K, no catalog link: 8R0-513-026-J, 8R0-513-026-G
+02:20:50 chain-unlinked strut 1 numbers named by 8R0-513-035-E, no catalog link: 8R0-513-035-C
+02:20:50 chain-unlinked strut 2 numbers named by 8R0-513-035-J, no catalog link: 8R0-513-035-D, 8R0-513-035-H
+02:24:25 chain-unlinked strut 1 numbers named by 80A-413-029-G, no catalog link: 80A-413-029-D
+02:24:25 chain-unlinked strut 1 numbers named by 80A-616-039-L, no catalog link: 80A-616-039-G
+02:24:25 seg done tier=C Audi Q5 [2009, 2022] seeds=[2012, 2020] records=1205 errors=14
+02:25:21 chain-unlinked knuckle 1 numbers named by 7L8-505-435-A, no catalog link: 7L8-505-435
+02:25:21 chain-unlinked knuckle 1 numbers named by 7L8-505-436-A, no catalog link: 7L8-505-436
+02:25:53 chain-unlinked knuckle 2 numbers named by 7L8-407-257-C, no catalog link: 7L8-407-257-A, 7L8-407-257
+02:25:53 chain-unlinked knuckle 2 numbers named by 7L8-407-258-C, no catalog link: 7L8-407-258, 7L8-407-258-A
+02:26:33 chain-unlinked strut 1 numbers named by 7L8-413-031-K, no catalog link: 7L8-413-031-G
+02:26:33 chain-unlinked strut 1 numbers named by 7L8-413-032-K, no catalog link: 7L8-413-032-G
+02:26:33 chain-unlinked strut 3 numbers named by 7L8-616-039-H, no catalog link: 7L8-616-039-B, 7L8-616-039-G, 7L8-616-039-D
+02:26:33 chain-unlinked strut 4 numbers named by 7L8-616-040-H, no catalog link: 7L8-616-040-B, 7L8-616-040-A, 7L8-616-040-D, 7L8-616-040-G
+02:26:57 chain-unlinked strut 2 numbers named by 7L8-616-019-G, no catalog link: 7L8-616-019-C, 7L8-616-019-F
+02:26:57 chain-unlinked strut 2 numbers named by 7L8-616-020-G, no catalog link: 7L8-616-020-F, 7L8-616-020-C
+02:27:53 chain-unlinked strut 2 numbers named by 7L8-513-029-K, no catalog link: 7L8-513-029-H, 7L8-513-029-G
+02:27:53 chain-unlinked strut 3 numbers named by 7L8-413-031-M, no catalog link: 7L8-413-031-H, 7L8-413-031-L, 7L8-413-031-D
+02:27:53 chain-unlinked strut 3 numbers named by 7L8-413-032-M, no catalog link: 7L8-413-032-L, 7L8-413-032-D, 7L8-413-032-H
+02:27:53 chain-unlinked strut 3 numbers named by 7L8-513-028-N, no catalog link: 7L8-513-028, 7L8-513-028-A, 7L8-513-028-M
+02:27:53 chain-unlinked strut 3 numbers named by 7L8-513-029-N, no catalog link: 7L8-513-029-F, 7L8-513-029-D, 7L8-513-029-M
+02:28:25 chain-unlinked wiper-motor 1 numbers named by 4M0-955-711-A, no catalog link: 4M0-955-711-B
+02:29:37 chain-unlinked knuckle 2 numbers named by 4M0-505-431-AF, no catalog link: 4M0-505-431-Q, 4M0-505-431-AJ
+02:29:37 chain-unlinked knuckle 2 numbers named by 4M0-505-432-AF, no catalog link: 4M0-505-432-Q, 4M0-505-432-AJ
+02:30:01 chain-unlinked knuckle 1 numbers named by 4M0-505-431-AE, no catalog link: 4M0-505-431-AH
+02:30:01 chain-unlinked knuckle 1 numbers named by 4M0-505-432-AE, no catalog link: 4M0-505-432-AH
+02:30:49 chain-unlinked strut 1 numbers named by 4M0-513-035-AA, no catalog link: 4M0-513-035-Q
+02:30:49 chain-unlinked strut 2 numbers named by 4M0-513-035-AB, no catalog link: 4M0-513-035-S, 4M0-513-035-T
+02:30:49 chain-unlinked strut 1 numbers named by 4M0-616-031-AE, no catalog link: 4M0-616-031-S
+02:31:13 time budget reached records=1234
