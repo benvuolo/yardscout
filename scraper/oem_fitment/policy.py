@@ -327,6 +327,16 @@ DEFAULT_CATEGORY_POLICY = {"slots": ["C"], "axes": [], "required": [["C"]]}
 # record does not resolve to exactly one clean slot.
 STRICT_NOTE_CATS = frozenset({"wiper-motor"})
 STRICT_NOTE_ALLOWED = frozenset({"POSITION"})
+# Hub 2026-11-10 (wiper rule 3, CLAUDE.md rule 3 body gate): a rear wiper
+# exists only on bodies that have one. OEM Likely apps carry no body gate,
+# so a rear-motor group is refused when any of its models decodes (vPIC
+# BodyClass of inventory VINs, junkyard_scraper.body_style_from_vpic) to one
+# of these bodies, or has no decoded body at all: fail closed.
+NO_REAR_WIPER_BODIES = frozenset({"sedan", "coupe", "convertible", "pickup"})
+# Hub 2026-11-10 (wiper rule 4): option variants named in the part name
+# (rain-sensing / auto wipers, heated park, headlamp washer) refuse the
+# group; OEM Likely groups have no if_equipped form yet.
+WIPER_OPTION_RE = r"\brain\b|sens(or|ing)|\bauto(matic)?\b|heat(ed|er)?\b|head\s*(lamp|light)|washer|intermittent"
 # §5.14: colour collapse is off in Phase 1 for every category.
 COLOR_COLLAPSE: dict[str, bool] = {}
 

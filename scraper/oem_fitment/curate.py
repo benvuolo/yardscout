@@ -88,6 +88,7 @@ class Options:
     js: object = None                       # junkyard_scraper module
     trimu_force: dict = field(default_factory=dict)   # {(make, model, year): [trims]} test hook (case 2)
     strict: bool = False                    # raise on lint errors (tests)
+    model_bodies: dict | None = None        # {(make, model): {body style}} from vPIC decodes (rear wiper gate)
 
 
 class LintError(Exception):
@@ -132,6 +133,7 @@ class Curation:
         self.lint: list = []
         inv = opts.inventory
         self.inv_counts = Counter((r[3], r[4], r[2]) for r in inv["vehicles"]) if inv else Counter()
+        self.model_bodies = opts.model_bodies or {}
         kinds = getattr(self.js, "INTERCHANGE_PART_CATEGORIES", {}) if self.js else {}
         self.kinds = {k: v.get("kind") for k, v in kinds.items()}
 
@@ -299,7 +301,8 @@ class Curation:
                 policy.REMAN_NAME_RE.search(x or "") for r in c.records for x in [r.name, r.aux] + r.note_texts) \
                 or any(policy.is_reman_pn(self.ns, pn) for pn in c.pns)
             names = [n for r in c.records for n in r.oem_names]
-            c.packaging = P.packaging(cat, self.ns, sorted(c.pns)[0], names)
+            c.packaging = P.packaging(cat, self.ns, sorted(c.pns)[0], names,
+                                      [n for r in c.records for n in r.note_texts] if cat == "wiper-motor" else ())
         for key, cs in by_key.items():
             if len(cs) > 1:
                 for c in cs:
@@ -1413,6 +1416,17 @@ class Curation:
         bad = sorted({m["slot"].reason for _, m in cand if m["slot"].reason})
         if bad or len(slots) != 1:
             return "strict_position", ";".join(bad) or "+".join(sorted(slots))
+        names = " | ".join(n for r in c.records for n in r.oem_names)
+        if re.search(policy.WIPER_OPTION_RE, names, re.I):
+            return "strict_option_name", names[:80]
+        if slots == {"R"}:
+            # a body without a rear wiper decoded in any of the group's own
+            # model-years refuses; a model with no decoded body at all refuses
+            for mk, md in sorted({(T[0], T[1]) for T, _ in cand}):
+                yb = set().union(*[self.model_bodies.get((mk, md, T[2])) or () for T, _ in cand
+                                   if (T[0], T[1]) == (mk, md)])
+                if not self.model_bodies.get((mk, md)) or yb & policy.NO_REAR_WIPER_BODIES:
+                    return "rear_body_gate", f"{mk} {md}: decoded bodies {','.join(sorted(yb)) or 'none'}"
         if slots & {"FL", "FR"}:
             # a twin-motor half only when every app's cell holds both halves:
             # Honda/Ford print "Front Driver Side" on single motors
@@ -1966,7 +1980,8 @@ _ONE_PACK_CATS = {"wiper-motor"}
 _WIPER_END = {"F": "windshield wiper motor", "R": "rear wiper motor",
               "FL": "driver-side windshield wiper motor (twin-motor)",
               "FR": "passenger-side windshield wiper motor (twin-motor)"}
-_WIPER_PACK = {"motor": "", "drive": " with linkage", "kit": " kit", "motor-ecb": " without circuit board"}
+_WIPER_PACK = {"motor": "", "drive": " with linkage", "kit": " kit", "motor-ecb": " without circuit board",
+               "motor-ctl": " with integral control module"}
 
 
 def _pack_text(cat: str, packaging: str, slot: str = "") -> str:
@@ -2378,6 +2393,28 @@ def hand_payload(js) -> dict | None:
         js.OEM_GROUPS_DIR = saved
 
 
+def model_bodies(inv, js, decodes_path) -> dict:
+    """{(make, model): {body style}} and {(make, model, year): {body style}}
+    over the inventory's VINs, from the vPIC
+    decode cache via junkyard_scraper.body_style_from_vpic (never from the
+    model name). Unknown bodies are left out. Missing inputs give {}, which
+    refuses every rear-wiper group (fail closed)."""
+    import gzip
+    p = Path(decodes_path or "")
+    if not inv or js is None or not p.exists():
+        return {}
+    dec = json.loads(gzip.open(p).read())
+    f = inv.get("fields") or []
+    iv, imk, imd, iy = f.index("vin"), f.index("make"), f.index("model"), f.index("year")
+    out = defaultdict(set)
+    for r in inv["vehicles"]:
+        b = js.body_style_from_vpic(dec.get(r[iv]), r[imk])
+        if b:
+            out[(r[imk], r[imd])].add(b)
+            out[(r[imk], r[imd], r[iy])].add(b)
+    return {k: frozenset(v) for k, v in out.items()}
+
+
 def curate(ns: str, src: A.RawSource, opts: Options):
     cur = Curation(ns, src, opts).run()
     doc = cur.build_doc()
@@ -2398,6 +2435,8 @@ def main(argv=None) -> int:
     ap.add_argument("--propose-map", action="store_true")
     ap.add_argument("--model-map", default=str(MM.MODEL_MAP_PATH))
     ap.add_argument("--inventory", default=str(MM.INVENTORY_PATH))
+    ap.add_argument("--decodes", default=str(MM.INVENTORY_PATH.parent / "vin_decodes.json.gz"),
+                    help="vPIC decode cache (rear wiper body gate); missing file: every rear wiper group refused")
     a = ap.parse_args(argv)
     import junkyard_scraper as js  # noqa: E402  (offline: curated tables + normalizers)
     import validate as V  # noqa: E402
@@ -2413,12 +2452,13 @@ def main(argv=None) -> int:
     src = A.RawSource(ref=a.raw_ref) if a.raw_ref else A.RawSource(raw_dir=a.raw_dir)
     inv_counts = Counter((r[3], r[4], r[2]) for r in inv["vehicles"]) if inv else Counter()
     hand = hand_payload(js)
+    bodies = model_bodies(inv, js, a.decodes)
     out = Path(a.out)
     results = {}
     no_ns = [s for s in src.sites() if s not in policy.SITE_NS]
     for ns in nss:
         opts = Options(as_of=a.as_of, fixtures=a.fixtures, model_map=mm, model_map_path=Path(a.model_map),
-                       inventory=inv, js=js)
+                       inventory=inv, js=js, model_bodies=bodies)
         cur, doc = curate(ns, src, opts)
         results[ns] = cur
         if not cur.raw_meta:

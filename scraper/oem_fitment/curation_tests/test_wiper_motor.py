@@ -65,13 +65,20 @@ check("NOUN wiper-motor", policy.NOUN.get(W) == r"wiper")
 import curate as CU
 
 
+class _R:
+    def __init__(self, names):
+        self.oem_names = list(names)
+
+
 class _K:
-    def __init__(self, packaging):
+    def __init__(self, packaging, names=("Motor Assy-Windshield Wiper",)):
         self.packaging = packaging
+        self.records = [_R(names)]
 
 
-def _stub(cells, notes):
+def _stub(cells, notes, bodies=None, names=("Motor Assy-Windshield Wiper",)):
     cur = object.__new__(CU.Curation)
+    cur.model_bodies = bodies or {}
     cur.cells_info = cells
     cur.t_sources = {}
     cur.ns_models_f = frozenset()
@@ -108,4 +115,29 @@ check("note words: windshield motor", CU._pack_text(W, "motor", "F") == "windshi
 check("note words: no words for an unknown slot", CU._pack_text(W, "motor", "F+R") == "")
 check("other categories keep their words",
       CU._pack_text("window-regulator", "motor") == "window motor only" and CU._pack_text("radiator", "") == "")
+m_r = {"slot": P.Resolution(("R",), None, None, "R")}
+TC, TD = ("Jeep", "Compass", 2017), ("Audi", "A4", 2012)
+cr = {(T, W): {"slots": {"F": [], "R": []}} for T in (TA, TB, TC, TD)}
+cur4 = _stub(cr, {}, {("Kia", "Soul"): {"hatchback"}, ("Kia", "Soul", 2012): {"hatchback"},
+                      ("Jeep", "Compass"): {"suv", "pickup"}, ("Jeep", "Compass", 2017): {"suv"},
+                      ("Audi", "A4"): {"sedan", "wagon"}, ("Audi", "A4", 2012): {"sedan", "wagon"}})
+rear = _K("motor", ("Motor Assy-Rear Wiper",))
+check("rear motor on hatch + SUV models -> allowed", cur4._strict_refusal(rear, W, [(TB, m_r), (TC, m_r)], {"R"}) is None)
+check("rear motor on a model with sedan decodes (A4) -> rear_body_gate",
+      cur4._strict_refusal(rear, W, [(TC, m_r), (TD, m_r)], {"R"})[0] == "rear_body_gate")
+check("rear motor on a model with no decoded body -> rear_body_gate (fail closed)",
+      cur4._strict_refusal(rear, W, [(TA, m_r), (TC, m_r)], {"R"})[0] == "rear_body_gate")
+check("a stray decode in another year does not refuse (Caravan 'pickup' noise)",
+      cur4._strict_refusal(rear, W, [(TB, m_r), (TC, m_r)], {"R"}) is None)
+check("front motor needs no body", cur4._strict_refusal(_K("motor"), W, [(TA, m_ok), (TD, m_ok)], {"F"}) is None)
+for nm in ["Motor Assy-Windshield Wiper (W/ Rain Sensor)", "Motor, Wiper - Auto", "Motor, Headlamp Washer",
+           "Motor Assy, Heated Wiper"]:
+    r = cur4._strict_refusal(_K("motor", (nm,)), W, [(TA, m_ok), (TB, m_ok)], {"F"})
+    check(f"option word in name {nm!r} -> strict_option_name", bool(r) and r[0] == "strict_option_name", str(r))
+check("Ford smart motor from the row note -> motor-ctl",
+      P.packaging(W, "ford", "x", ["Motor Assy - Wiper"], ['"Smart" wiper motor w/integral wiper control module'])
+      == "motor-ctl")
+check("Ford plain motor note -> motor",
+      P.packaging(W, "ford", "x", ["Motor Assy - Wiper"], ["Rear wiper motor"]) == "motor")
+check("note words: motor-ctl", CU._pack_text(W, "motor-ctl", "F") == "windshield wiper motor with integral control module")
 done("test_wiper_motor")

@@ -222,7 +222,7 @@ def _head(s: str) -> str:
     return re.split(r"[,;(]", s or "", maxsplit=1)[0]
 
 
-def packaging(cat: str, ns: str, pn: str, names: list[str]) -> str:
+def packaging(cat: str, ns: str, pn: str, names: list[str], notes: list[str] = ()) -> str:
     """window-regulator: motor | assy | reg | reg? | door-module (§5.8 and hub
     decision P1); climate-control: switch-module (hub decision T1) | assy;
     every other category: "". Rules run on the OEM name fields (never
@@ -236,7 +236,7 @@ def packaging(cat: str, ns: str, pn: str, names: list[str]) -> str:
             return "switch-module"
         return "assy"
     if cat == "wiper-motor":
-        return wiper_packaging(names)
+        return wiper_packaging(names, notes)
     if cat != "window-regulator":
         return ""
     text = " | ".join(names)
@@ -285,15 +285,23 @@ WIPER_MODULE = re.compile(r"\bmodule\b|system,?\s*complete|motor\s*(&|and)\s*lin
 WIPER_DRIVE = re.compile(r"^\s*drive\b|motor\s+(and|&|w/|with)\s+linkage|linkage\s+(and|&)\s+motor", re.I)
 WIPER_KIT = re.compile(r"\b(kit|package|pkg)\b", re.I)
 WIPER_ECB = re.compile(r"except\s+circuit\s+board", re.I)
+# Ford "Smart" wiper motor w/ integral wiper control module (hub 2026-11-10):
+# its own packaging, never matched with a plain motor. Ford states it only in
+# the list remark, so this one rule also reads the row notes.
+WIPER_CTL = re.compile(r"\bsmart\b[^|]*\bmotor|integral\s+(wiper\s+)?control|w/\s*(wiper\s+)?control\s+module", re.I)
 
 
-def wiper_packaging(names: list[str]) -> str:
+def wiper_packaging(names: list[str], notes: list[str] = ()) -> str:
     """linkage (not a motor: out of the category) | module | drive (motor +
     linkage: Nissan/Infiniti "Drive Assy", Ford "Motor And Linkage Assy") |
     kit (Jeep "MOTOR KIT"/"MOTOR PACKAGE") | motor-ecb (GM "EXCEPT CIRCUIT
-    BOARD") | motor. Rules run on the OEM name fields only."""
+    BOARD") | motor-ctl (Ford "Smart" motor with integral control module,
+    from names or row notes) | motor. Other rules run on the OEM name fields
+    only."""
     names = [n for n in names if n]
     text = " | ".join(names)
+    if WIPER_CTL.search(" | ".join([text] + [n for n in notes if n])):
+        return "motor-ctl"
     if names and all(WIPER_LINKAGE_ONLY.match(n) and not re.search(r"\bmotor\b", n, re.I) for n in names):
         return "linkage"
     if WIPER_MODULE.search(text):
