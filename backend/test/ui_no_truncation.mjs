@@ -772,6 +772,12 @@ const SCREENS = [
     await page.evaluate((label) => { const c = [...document.querySelectorAll('#pf-results .pf-try-chip')].find(b => b.textContent.trim().startsWith(label)); if (!c) throw new Error('no try chip ' + label); c.click(); }, label);
     await page.waitForFunction(() => document.querySelector('#pf-results .pf-row-card, #pf-results .pf-empty'), null, { timeout: 15000 });
     await settle(page, 400);
+    // Results heading (hub 2026-11-10): the bold headline is its own line and
+    // the next line starts plainly: no leading dash, no lowercase start.
+    const head = await page.evaluate(() => { const h = document.querySelector('#pf-results .pf-results-head'); if (!h) return null; const st = h.querySelector('strong'); return { strong: st ? st.textContent : '', rest: st ? h.textContent.slice(h.textContent.indexOf(st.textContent) + st.textContent.length).trim() : h.textContent }; });
+    if (head && /^[\u2014\u2013-]|^[a-z]/.test(head.rest)) throw new Error(`results heading line 2 starts "${head.rest.slice(0, 30)}"`);
+    if (process.env.PF_HEADS && head) console.log('PF_HEAD', name, JSON.stringify(head));
+
   }]),
   ['pf-fit-pro', async (page) => {
     await page.evaluate(() => { localStorage.setItem('jh_pro', '1'); applyProGates(); });

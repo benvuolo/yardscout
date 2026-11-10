@@ -7381,7 +7381,8 @@ function pfRunBrowse(s) {
                     ? `<span class="pf-tier pf-tier-verified" title="The donor\u2019s VIN decode confirms a ${escapeHtml(fam.label)}.">VIN-confirmed</span>`
                     : '' });
     }
-    headTop = `<strong>${rows.length.toLocaleString()} car${rows.length === 1 ? '' : 's'} near you</strong> carrying a ${escapeHtml(fam.label)} &mdash; add your car (year, make, model) above to check what fits.`;
+    // Headline is its own line (strong is display:block); the next line starts plainly.
+    headTop = `<strong>${rows.length.toLocaleString()} car${rows.length === 1 ? '' : 's'} near you with a ${escapeHtml(fam.label)}</strong> Add your car (year, make, model) above to check what fits.`;
   } else {
     pfRenderEngineChips(null);
     // Spotted-part semantics: the car's valuable-parts list names the part —
@@ -7393,7 +7394,7 @@ function pfRunBrowse(s) {
       if (!hit) continue;
       rows.push({ v, d: vehicleDistanceMi(v), warns: [], hit, badge: '' });
     }
-    headTop = `<strong>Showing all cars with this part near you</strong> &mdash; add your car to check what fits. ${rows.length.toLocaleString()} car${rows.length === 1 ? '' : 's'} list${rows.length === 1 ? 's' : ''} a spotted ${escapeHtml(pfCat.label.toLowerCase())}.`;
+    headTop = `<strong>Showing all cars with this part near you</strong> Add your car to check what fits. ${rows.length.toLocaleString()} car${rows.length === 1 ? '' : 's'} list${rows.length === 1 ? 's' : ''} ${/s$/.test(pfCat.label) ? '' : 'a '}spotted ${escapeHtml(pfCat.label.toLowerCase())}.`;
   }
 
   if (!rows.length) {
@@ -8076,7 +8077,7 @@ function pfRunSearch() {
   const CAP = 120;
   const unlocked = isPro();
   out.classList.toggle('pf-vonly-on', pfVerifiedOnly);
-  const head = `<div class="pf-results-head"><strong>${rows.length.toLocaleString()} donor car${rows.length === 1 ? '' : 's'}</strong> in range carrying ${/s$/.test(pfCat.label) ? '' : 'a '}fitting ${escapeHtml(pfCat.label.toLowerCase())} for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)} &mdash; ${pfSort === 'new' ? 'newest arrivals first' : 'nearest first, then confidence'}. Yards track cars, not parts left on them — a long-sitting donor may be picked over.</div>${(!unlocked && !pfCat.noValue) ? proBoxHtml('See what the same used part goes for online', 'pf-value', '', 'pf-pro-box') : ''}`
+  const head = `<div class="pf-results-head"><strong>${rows.length.toLocaleString()} donor car${rows.length === 1 ? '' : 's'} in range</strong> ${rows.length === 1 ? 'It carries' : 'They carry'} ${/s$/.test(pfCat.label) ? '' : 'a '}fitting ${escapeHtml(pfCat.label.toLowerCase())} for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)}. ${pfSort === 'new' ? 'Newest arrivals first' : 'Nearest first, then confidence'}. Yards track cars, not parts left on them — a long-sitting donor may be picked over.</div>${(!unlocked && !pfCat.noValue) ? proBoxHtml('See what the same used part goes for online', 'pf-value', '', 'pf-pro-box') : ''}`
     + pfWatchHtml(s, true)
     + pfSortRowHtml()
     + pfVonlyRowHtml(nVer, rows.length - nVer, pfCat.id === 'engine-assembly' ? 'engine' : 'fit', nSame)
