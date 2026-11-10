@@ -426,7 +426,7 @@ class Curation:
             return True
         if self.ns == "subaru" and _subaru_body_excludes(notes, T[1]):
             return True
-        if self.ns == "toyota" and _lexus_chassis_excludes(notes, T):
+        if self.ns == "toyota" and market and _lexus_chassis_excludes(notes, T):
             return True
         return self._model_names_exclude(notes, T)
 
@@ -2143,10 +2143,27 @@ def _lexus_chassis_excludes(notes, T) -> bool:
     if not fam:
         return False
     for n in notes or []:
-        codes = [c for c in _CHASSIS_TOKEN.findall(n or "") if c[:3] in _LEXUS_CHASSIS_PREFIXES]
+        codes = _chassis_codes(n)
         if codes and not any(_chassis_match(c, ch) for c in codes for ch in fam):
             return True
     return False
+
+
+_CHASSIS_RUN = re.compile(r"(?<![A-Z0-9])([A-Z]{3})(\d[0-9#]{0,3})((?:\s*,\s*\d[0-9#]{0,3}(?![0-9#]))*)")
+
+
+def _chassis_codes(note: str) -> list:
+    """Lexus chassis codes in a note, with comma continuations expanded:
+    'GSE20, 21.. ATM' -> GSE20, GSE21 (2026-11-10 audit: IS 350 2012 mirrors)."""
+    out = []
+    for pre, first, rest in _CHASSIS_RUN.findall(note or ""):
+        if pre not in _LEXUS_CHASSIS_PREFIXES:
+            continue
+        out.append(pre + first)
+        for tail in re.findall(r"\d[0-9#]{0,3}", rest):
+            # '21' after 'GSE20' replaces the last len(tail) characters
+            out.append((pre + first)[: len(pre + first) - len(tail)] + tail)
+    return out
 
 
 _LEXUS_CHASSIS_PREFIXES = frozenset(ch[:3] for fam in _LEXUS_CHASSIS.values() for ch in fam)

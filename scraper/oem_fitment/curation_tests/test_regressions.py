@@ -269,4 +269,16 @@ check("production: an overlapping, open-ended or absent window keeps the row",
       and not _C._production_excludes(["Production Date: 10/2014-07/2016"], 2015))
 check("production: wheels are left to their own stricter group rule (the per-row cut never adds a claim)",
       "wheels" in _C.PROD_RULE_SKIP_CATS)
+# 2026-11-10 live audit: Lexus chassis codes (per row; not pooled across pages)
+check("lexus chassis: a row coded for another chassis is not listed for the car",
+      _C._lexus_chassis_excludes(["GRS19#"], ("Lexus", "GS 430", 2006))
+      and _C._lexus_chassis_excludes(["MCU3#.. JPP; MCU38.. JPP"], ("Lexus", "RX 350", 2007))
+      and _C._lexus_chassis_excludes(["Fitting Vehicle Options: GSE20.. ATM"], ("Lexus", "IS 350", 2012)))
+check("lexus chassis: own chassis, comma continuations, no codes and non-Lexus cars keep the row",
+      not _C._lexus_chassis_excludes(["GRS19#"], ("Lexus", "GS 300", 2006))
+      and not _C._lexus_chassis_excludes(["Fitting Vehicle Options: GSE20, 21.. ATM"], ("Lexus", "IS 350", 2012))
+      and not _C._lexus_chassis_excludes(["09/2005-07/2006", "SK20R11 TRIM04"], ("Lexus", "GS 430", 2006))
+      and not _C._lexus_chassis_excludes(["GRS19#"], ("Toyota", "Camry", 2007)))
+check("lexus chassis: comma codes expand ('GSE20, 21' -> GSE20, GSE21; 'UZS190, 191')",
+      _C._chassis_codes("GSE20, 21.. ATM") == ["GSE20", "GSE21"] and _C._chassis_codes("UZS190, 191") == ["UZS190", "UZS191"])
 done("test_regressions")
