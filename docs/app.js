@@ -5546,10 +5546,13 @@ function clusterPinHtml(items, sameSpot) {
 }
 /* ---- Map bottom sheet: nearby yards (peek / expanded) or one yard's card ---- */
 var _sheetState = 'peek';
-function setSheetState(st) {
+function setSheetState(st, opts = {}) {
   const sh = document.getElementById('yards-map-sheet');
   if (!sh) return;
   _sheetState = st;
+  // instant: no slide (opening the map), so the first view is laid out
+  // against the sheet's final height, not one caught mid-slide
+  if (opts.instant) { sh.style.transition = 'none'; sh.dataset.state = st; void sh.offsetHeight; requestAnimationFrame(() => { sh.style.transition = ''; }); }
   sh.dataset.state = st;
   document.getElementById('ms-handle').setAttribute('aria-expanded', String(st === 'full'));
   if (yardsView === 'map') { liftMapControls(); layoutPins(); }
@@ -5645,7 +5648,7 @@ function layoutMapMode() {
   const top = wrap.getBoundingClientRect().top;
   wrap.style.height = Math.max(220, Math.floor(bottomLimit - top - 8)) + 'px';   // short phones: never under the tab bar
   liftMapControls();
-  if (_yardsMap) _yardsMap.resize();
+  if (_yardsMap) mapResize();
 }
 window.addEventListener('resize', () => { if (yardsView === 'map') layoutMapMode(); });
 if (window.ResizeObserver) {
@@ -5850,6 +5853,7 @@ function layoutPins() {
     }
   }
   _pinGroups = groups;
+  if (!firstViewStillHolds() && _firstViewRedo < 4) { _firstViewRedo++; const fv = _firstView; _firstView = null; firstMapView(fv.lib, fv.el); return; }
   watchPinSizes(layer);
   layer.innerHTML = `${youOn ? `<span class="map-you${youUp ? ' up' : ''}${youOver ? ' over' : ''}${youNoLabel ? ' no-label' : ''}" style="left:${you.x}px;top:${you.y}px"><span data-you="${youLbl.h}">You</span></span>` : ''}
     ${groups.map((g, i) => `<span class="map-pin-at${g.nudged ? ' nudged' : ''}${g.below ? ' below' : ''}" data-g="${i}" style="left:${g.rect.l}px;top:${g.rect.t}px">${g.html}</span>`).join('')}`;
@@ -5914,6 +5918,23 @@ function nearestStandsAlone(key) {
   return _pinGroups.some(g => g.items.length === 1 && g.items[0].key === key);
 }
 function firstMapView(lib, el) {
+  _inFirstView = true;
+  try { firstMapViewInner(lib, el); } finally { _inFirstView = false; }
+  _firstView = _mapTouched ? null : { lib, el };
+  layoutPins();
+}
+/* While the first view stands (nobody has moved the map), a later re-layout
+ * that puts the nearest yard back in a bubble (a resize, fonts, the sheet
+ * settling) decides the first view again. */
+var _firstView = null, _inFirstView = false, _inResize = false, _firstViewRedo = 0;   // redo capped per map render
+function mapResize() { _inResize = true; try { _yardsMap.resize(); } finally { _inResize = false; } }
+function firstViewStillHolds() {
+  if (!_firstView || _inFirstView || _mapTouched || !_yardsMap || yardsView !== 'map') return true;
+  const near = firstMapSet()[0];
+  if (!near || near.dist == null || nearestStandsAlone(near.key) || _yardsMap.getZoom() >= _yardsMap.getMaxZoom() - 0.1) return true;
+  return false;
+}
+function firstMapViewInner(lib, el) {
   const w = el.clientWidth || 360, you = activeZipCoords;
   const fit = (set, maxZoom, withYou = true) => {
     const pts = set.map(s => [s.lng, s.lat]);
@@ -6000,11 +6021,15 @@ async function renderYardsMap() {
     _yardsMap.__style = style;
     // The first fit can run before the map has its size and controls: redo the
     // first view once it loads, unless the person has already moved the map.
-    let touched = false;
-    _yardsMap.on('movestart', (e) => { if (e && e.originalEvent) touched = true; });
-    _yardsMap.once('load', () => { if (_yardsMap) { _yardsMap.resize(); liftMapControls(); if (!touched && yardsView === 'map') firstMapView(lib, el); else layoutPins(); } });
-    if (window.ResizeObserver) new ResizeObserver(() => { if (_yardsMap && el.clientWidth) { _yardsMap.resize(); layoutPins(); } }).observe(el);
-    requestAnimationFrame(() => _yardsMap && _yardsMap.resize());
+    _mapTouched = false;
+    _yardsMap.on('movestart', (e) => {
+      if (e && e.originalEvent) _mapTouched = true;
+      // anything but the first view itself or a resize moving the map ends it
+      if (!_inFirstView && !_inResize) _firstView = null;
+    });
+    _yardsMap.once('load', () => { if (_yardsMap) { mapResize(); liftMapControls(); if (!_mapTouched && yardsView === 'map') firstMapView(lib, el); else layoutPins(); } });
+    if (window.ResizeObserver) new ResizeObserver(() => { if (_yardsMap && el.clientWidth) { mapResize(); layoutPins(); } }).observe(el);
+    requestAnimationFrame(() => _yardsMap && mapResize());
     let queued = false;
     _yardsMap.on('move', () => { if (queued) return; queued = true; requestAnimationFrame(() => { queued = false; followPins(); }); });
     _yardsMap.on('moveend', layoutPins);
@@ -6016,6 +6041,24 @@ async function renderYardsMap() {
   liftMapControls();
   firstMapView(lib, el);
   layoutMapMode();
+  settleFirstView(lib, el);
+}
+/* Once the map is idle and fonts are in, check the first view again: if a
+ * later re-layout (fonts, the sheet settling, a resize) put the nearest yard
+ * back in a bubble, decide again. Skipped once the person moves the map.
+ * window._firstViewSettled marks the end (tests wait for it). */
+var _mapTouched = false;
+function settleFirstView(lib, el) {
+  window._firstViewSettled = false;
+  _firstViewRedo = 0;
+  const run = () => {
+    if (!_yardsMap || _mapTouched || yardsView !== 'map') { window._firstViewSettled = true; return; }
+    liftMapControls(); layoutPins();   // re-decides the first view if it no longer holds
+    window._firstViewSettled = true;
+  };
+  const idle = new Promise(r => { if (_yardsMap.loaded() && !_yardsMap.isMoving()) r(); else _yardsMap.once('idle', r); });
+  const fonts = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+  Promise.all([idle, fonts]).then(() => requestAnimationFrame(run));
 }
 /* A tapped cluster: yards at one spot (or fully zoomed in) list in the sheet;
  * otherwise zoom to them. */
@@ -6041,9 +6084,9 @@ function setYardsView(view) {
   document.querySelectorAll('.yv-btn').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === yardsView)));
   document.getElementById('tab-yards').classList.toggle('yards-map-mode', yardsView === 'map');
   document.getElementById('yards-map-wrap').hidden = yardsView !== 'map';
-  if (yardsView === 'map') { _mapSheetLoc = null; setSheetState('peek'); }
+  if (yardsView === 'map') { _mapSheetLoc = null; setSheetState('peek', { instant: true }); }
   layoutMapMode();
-  if (yardsView === 'map') { renderYardsMap(); if (_yardsMap) setTimeout(() => _yardsMap && _yardsMap.resize(), 50); }
+  if (yardsView === 'map') { renderYardsMap(); if (_yardsMap) setTimeout(() => _yardsMap && mapResize(), 50); }
   try { sessionStorage.setItem('ys_yards_view', yardsView); } catch (e) { /* private mode */ }
 }
 document.querySelector('.yards-view-switch').addEventListener('click', e => {
@@ -7338,7 +7381,8 @@ function pfRunBrowse(s) {
                     ? `<span class="pf-tier pf-tier-verified" title="The donor\u2019s VIN decode confirms a ${escapeHtml(fam.label)}.">VIN-confirmed</span>`
                     : '' });
     }
-    headTop = `<strong>${rows.length.toLocaleString()} car${rows.length === 1 ? '' : 's'} near you</strong> carrying a ${escapeHtml(fam.label)} &mdash; add your car (year, make, model) above to check what fits.`;
+    // Headline is its own line (strong is display:block); the next line starts plainly.
+    headTop = `<strong>${rows.length.toLocaleString()} car${rows.length === 1 ? '' : 's'} near you with a ${escapeHtml(fam.label)}</strong> Add your car (year, make, model) above to check what fits.`;
   } else {
     pfRenderEngineChips(null);
     // Spotted-part semantics: the car's valuable-parts list names the part —
@@ -7350,7 +7394,7 @@ function pfRunBrowse(s) {
       if (!hit) continue;
       rows.push({ v, d: vehicleDistanceMi(v), warns: [], hit, badge: '' });
     }
-    headTop = `<strong>Showing all cars with this part near you</strong> &mdash; add your car to check what fits. ${rows.length.toLocaleString()} car${rows.length === 1 ? '' : 's'} list${rows.length === 1 ? 's' : ''} a spotted ${escapeHtml(pfCat.label.toLowerCase())}.`;
+    headTop = `<strong>Showing all cars with this part near you</strong> Add your car to check what fits. ${rows.length.toLocaleString()} car${rows.length === 1 ? '' : 's'} list${rows.length === 1 ? 's' : ''} ${/s$/.test(pfCat.label) ? '' : 'a '}spotted ${escapeHtml(pfCat.label.toLowerCase())}.`;
   }
 
   if (!rows.length) {
@@ -8033,7 +8077,7 @@ function pfRunSearch() {
   const CAP = 120;
   const unlocked = isPro();
   out.classList.toggle('pf-vonly-on', pfVerifiedOnly);
-  const head = `<div class="pf-results-head"><strong>${rows.length.toLocaleString()} donor car${rows.length === 1 ? '' : 's'}</strong> in range carrying ${/s$/.test(pfCat.label) ? '' : 'a '}fitting ${escapeHtml(pfCat.label.toLowerCase())} for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)} &mdash; ${pfSort === 'new' ? 'newest arrivals first' : 'nearest first, then confidence'}. Yards track cars, not parts left on them — a long-sitting donor may be picked over.</div>${(!unlocked && !pfCat.noValue) ? proBoxHtml('See what the same used part goes for online', 'pf-value', '', 'pf-pro-box') : ''}`
+  const head = `<div class="pf-results-head"><strong>${rows.length.toLocaleString()} donor car${rows.length === 1 ? '' : 's'} in range</strong> ${rows.length === 1 ? 'It carries' : 'They carry'} ${/s$/.test(pfCat.label) ? '' : 'a '}fitting ${escapeHtml(pfCat.label.toLowerCase())} for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)}. ${pfSort === 'new' ? 'Newest arrivals first' : 'Nearest first, then confidence'}. Yards track cars, not parts left on them — a long-sitting donor may be picked over.</div>${(!unlocked && !pfCat.noValue) ? proBoxHtml('See what the same used part goes for online', 'pf-value', '', 'pf-pro-box') : ''}`
     + pfWatchHtml(s, true)
     + pfSortRowHtml()
     + pfVonlyRowHtml(nVer, rows.length - nVer, pfCat.id === 'engine-assembly' ? 'engine' : 'fit', nSame)

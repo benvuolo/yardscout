@@ -91,6 +91,10 @@ try {
             setYardsView('map'); await renderYardsMap();
             const t0 = Date.now();
             while (!(window._yardsMap && _yardsMap.loaded()) && Date.now() - t0 < 20000) await new Promise(r => setTimeout(r, 100));
+            // the app re-checks the first view once the map is idle; check after that
+            while (!window._firstViewSettled && Date.now() - t0 < 25000) await new Promise(r => setTimeout(r, 50));
+            // the app re-checks the first view once the map is idle; check after that
+            while (!window._firstViewSettled && Date.now() - t0 < 25000) await new Promise(r => setTimeout(r, 50));
             await new Promise(r => setTimeout(r, 300));
             const fails = [], stats = []; let youOverCount = 0, packedFirst = 0;
             const ov = (a, b) => a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
