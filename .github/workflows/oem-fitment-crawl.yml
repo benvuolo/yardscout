@@ -1,9 +1,11 @@
-# OEM fitment crawl (scraper/oem_fitment/README.md). One job per catalog site
-# that has a module in scraper/oem_fitment/sites/. Each job resumes from the
-# oem-raw branch, crawls in 30-minute slices through fetch.py (allowlist,
-# robots.txt, 8 s per site, permanent stop on any bot check / 403 / 429 /
-# 503), and commits raw/<site>.* back to oem-raw after every slice, so a
-# killed job loses at most one slice. raw/<site>.* covers the records
+# OEM fitment crawl (scraper/oem_fitment/README.md). One job per hosting
+# PLATFORM (scraper/oem_fitment/platforms.py; today every catalog site is on
+# the SimplePart platform, so one job). A job crawls its sites one at a time in
+# round-robin turns, resuming each from the oem-raw branch, through fetch.py
+# (allowlist, robots.txt, 8 s per site AND 8 s per platform, permanent stop
+# on any bot check / 403 / 429 / 503, refusals logged with request counts in
+# raw/<site>.refusals.jsonl), and commits raw/<site>.* back to oem-raw after
+# every turn, so a killed job loses at most one turn. raw/<site>.* covers the records
 # (<site>.jsonl), the R1/R2 manifests (<site>.lists.jsonl, <site>.years.jsonl;
 # CURATION_SPEC.md §3.2), any size-capped continuation part (<site>.2.jsonl,
 # <site>.lists.2.jsonl, ...), .progress.json, .log, .done, .blocked and
@@ -37,7 +39,8 @@ jobs:
   plan:
     runs-on: ubuntu-latest
     outputs:
-      sites: ${{ steps.list.outputs.sites }}
+      groups: ${{ steps.list.outputs.groups }}
+      nplat: ${{ steps.list.outputs.nplat }}
     steps:
       - uses: actions/checkout@v4
       - id: list
@@ -71,30 +74,38 @@ jobs:
           # while an R3 completion pass ("complete" in worklist.json) has no
           # raw/<site>.cN.done; .blocked / .paused stop both for good
           sites = [s for s in sites if markers.mode(s, wl.get(s), lambda n: on_branch("raw/" + n))]
-          print("sites=" + json.dumps(sites))
+          # one matrix entry per hosting PLATFORM (platforms.py, hub
+          # 2026-11-10): the dealer stores are one platform, so per-site jobs
+          # multiplied its load (07:10-07:16 three 503s with six jobs live)
+          import platforms
+          groups = platforms.groups(sites)
+          print("groups=" + json.dumps(groups))
+          print("nplat=" + str(max(1, len(groups))))
           PY
           cat "$GITHUB_OUTPUT"
 
   crawl:
     needs: plan
-    if: needs.plan.outputs.sites != '[]'
+    if: needs.plan.outputs.groups != '[]'
     runs-on: ubuntu-latest
     timeout-minutes: 350
     strategy:
       fail-fast: false
-      # At most 6 sites at once: about 0.75 requests/s across the
-      # dealer-catalog network at 8 s per site. Dispatch ONE run for all sites
-      # (never one run per site): separate runs are not capped by this.
-      # 2026-11-05: moparpartsgiant (403) and vwpartsgiant (503) refused when
-      # ~14 separate runs added up to ~3.5 requests/s.
-      max-parallel: 6
+      # One job per hosting platform (platforms.py). The SimplePart job crawls
+      # its sites one at a time in round-robin turns, so the whole platform
+      # gets one site's pace (fetch.py PER_DOMAIN_GAP 8 s, plus the
+      # platform-wide PLATFORM_GAP lock), i.e. what a single site got before
+      # 2026-11-05. History: 2026-11-05 ~14 separate runs (~3.5 req/s) drew
+      # a 403 and a 503; 2026-11-10 six per-site jobs drew three 503s.
+      max-parallel: ${{ fromJSON(needs.plan.outputs.nplat) }}
       matrix:
-        site: ${{ fromJSON(needs.plan.outputs.sites) }}
+        group: ${{ fromJSON(needs.plan.outputs.groups) }}
     concurrency:
-      group: oem-crawl-${{ matrix.site }}
+      group: oem-crawl-platform-${{ matrix.group.platform }}
       cancel-in-progress: false
     env:
-      SITE: ${{ matrix.site }}
+      PLATFORM_JOB: ${{ matrix.group.platform }}
+      SITES: ${{ matrix.group.sites }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -112,62 +123,18 @@ jobs:
             git worktree add -q --orphan -b oem-raw "$W"
           fi
           mkdir -p "$W/raw" scraper/oem_fitment/raw
-          cp "$W"/raw/"$SITE".* scraper/oem_fitment/raw/ 2>/dev/null || true
-          ls -la scraper/oem_fitment/raw/
-      - name: Crawl in 30-minute slices, checkpoint after each
-        run: |
-          W="$GITHUB_WORKSPACE/../raw-branch"
-          push_raw() {
-            cp "$GITHUB_WORKSPACE"/scraper/oem_fitment/raw/"$SITE".* "$W/raw/" 2>/dev/null || true
-            ( cd "$W"
-              git add raw
-              if git diff --cached --quiet; then exit 0; fi
-              git commit -q -m "oem-raw: $SITE checkpoint $(date -u +%Y-%m-%dT%H:%MZ)"
-              for t in 1 2 3 4 5 6; do
-                git push -q origin HEAD:oem-raw && exit 0
-                git fetch -q origin oem-raw && git rebase -q FETCH_HEAD || git rebase --abort || true
-                sleep $((t * 5))
-              done
-              echo "::error::could not push checkpoint"; exit 1 )
-          }
-          cd scraper/oem_fitment
-          # worklist crawl until .done; then the R3 completion pass if the
-          # site's worklist entry has "complete" (markers.mode, as in plan)
-          MODE=$(python3 - <<'PY'
-          import json, os, sys
-          from pathlib import Path
-          import markers
-          s = os.environ["SITE"]
-          wl = json.loads(Path("worklist.json").read_text()).get("sites", {}).get(s)
-          print(markers.mode(s, wl, lambda n: Path("raw", n).exists()) or "none")
-          PY
-          )
-          echo "mode: $MODE"
-          if [ "$MODE" = "none" ]; then exit 0; fi
-          ARGS=""
-          if [ "$MODE" = "complete" ]; then ARGS="--complete auto"; fi
-          for i in $(seq 1 10); do
-            set +e
-            python3 crawl.py --site "$SITE" --minutes 30 $ARGS
-            rc=$?
-            set -e
-            tail -2 "raw/$SITE.log" 2>/dev/null || true
-            # offline evidence audit of everything crawled so far (every part
-            # of the records file: raw/$SITE.jsonl, .2.jsonl, ...); a parser
-            # bug (>0.5% mismatches) pauses the site for human review
-            set +e
-            python3 ci_audit.py --site "$SITE" | tee -a "$GITHUB_STEP_SUMMARY"
-            arc=${PIPESTATUS[0]}
-            set -e
-            if [ "$arc" -eq 20 ]; then
-              echo "evidence mismatch above 0.5%: paused for review $(date -u +%FT%TZ)" > "raw/$SITE.paused"
-              push_raw
-              echo "::error::$SITE paused by the evidence audit"
-              break
-            fi
-            push_raw
-            # 10 = time budget reached, 11 = network-failure streak (pause, retry)
-            if [ "$rc" -eq 11 ]; then sleep 120; continue; fi
-            if [ "$rc" -ne 10 ]; then echo "crawl exit $rc after slice $i"; break; fi
+          for SITE in $SITES; do
+            cp "$W"/raw/"$SITE".* scraper/oem_fitment/raw/ 2>/dev/null || true
           done
-          { echo "## $SITE"; echo '```'; tail -5 "raw/$SITE.log" 2>/dev/null; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          ls -la scraper/oem_fitment/raw/
+      - name: Crawl the platform's sites in round-robin turns, checkpoint after each
+        env:
+          RAW_WORKTREE: ${{ github.workspace }}/../raw-branch
+        run: |
+          # platform_crawl.py: rotation by run number, turn length, markers.mode
+          # per turn (completion first), ci_audit + .paused, ci_push_raw.sh after
+          # every turn, per-run skip of a site after an unexpected crawl.py exit
+          # or 2 network-failure exits in a row, and no turn that would end
+          # within 10 minutes of the job timeout (350)
+          cd scraper/oem_fitment
+          python3 platform_crawl.py --sites "$SITES" --run-number "$GITHUB_RUN_NUMBER" --timeout-min 350

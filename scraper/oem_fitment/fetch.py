@@ -25,6 +25,7 @@ import gzip
 import hashlib
 import html as htmllib
 import json
+import os
 import re
 import sys
 import time
@@ -46,6 +47,11 @@ GLOBAL_GAP = 0.5
 # work pending on the domain (hub 2026-11-09: never two crawlers on one site).
 OFFLINE = False
 TIMEOUT = 40
+
+try:
+    import platforms as _platforms
+except ImportError:  # pragma: no cover
+    from . import platforms as _platforms  # type: ignore
 
 ALLOWED = {
     "www.toyotapartsnow.com", "www.lexuspartsnow.com", "www.hondapartsnow.com",
@@ -110,6 +116,59 @@ def _locked_wait(name: str, gap: float) -> None:
         fcntl.flock(fh, fcntl.LOCK_UN)
 
 
+def _platform_wait(netloc: str) -> None:
+    """Platform-wide gap (platforms.PLATFORM_GAP), across processes: all
+    sites of one hosting platform together get at most one request per gap
+    (hub 2026-11-10, after the 07:10-07:16 503 cluster)."""
+    plat = _platforms.platform_of(netloc)
+    g = _platforms.PLATFORM_GAP.get(plat)
+    if g:
+        _locked_wait("platform_" + plat.replace(":", "_"), g)
+
+
+_REQ_TIMES: dict = {}       # netloc -> [epoch seconds of this process's requests, last 15 min]
+
+
+def _note_request(netloc: str, now: float | None = None) -> None:
+    t = time.time() if now is None else now
+    lst = _REQ_TIMES.setdefault(netloc, [])
+    lst.append(t)
+    while lst and lst[0] < t - 900:
+        lst.pop(0)
+
+
+def request_counts(now: float | None = None) -> dict:
+    """{netloc: {"60s": n, "300s": n, "900s": n}} for this process."""
+    t = time.time() if now is None else now
+    return {h: {w: sum(1 for x in ts if x >= t - int(w[:-1])) for w in ("60s", "300s", "900s")}
+            for h, ts in sorted(_REQ_TIMES.items())}
+
+
+REFUSAL_LOG_DIR = ROOT / "raw"
+
+
+def _log_refusal(netloc: str, url: str, status, now: float | None = None) -> Path:
+    """One JSON line per refusal (403/429/503 or challenge) in
+    raw/<netloc>.refusals.jsonl, which the workflow checkpoints with the
+    site's other raw files: the exact request time, the platform, this
+    process's recent request counts on every host it touched, and the CI run
+    and job, so a cluster across platform jobs can be lined up later
+    (hub 2026-11-10). Logging never raises."""
+    t = time.time() if now is None else now
+    rec = {"ts": datetime.fromtimestamp(t, timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.%fZ"), "url": url,
+           "status": status, "platform": _platforms.platform_of(netloc), "counts": request_counts(t),
+           "run": os.environ.get("GITHUB_RUN_ID"), "job": os.environ.get("PLATFORM_JOB") or os.environ.get("GITHUB_JOB"),
+           "site_turn": os.environ.get("SITE")}
+    p = REFUSAL_LOG_DIR / f"{netloc}.refusals.jsonl"
+    try:
+        p.parent.mkdir(parents=True, exist_ok=True)
+        with open(p, "a") as fh:
+            fh.write(json.dumps(rec, sort_keys=True) + "\n")
+    except OSError:
+        pass
+    return p
+
+
 def _breaker(domain: str) -> Path:
     return STATE / f"blocked_{domain}.txt"
 
@@ -126,8 +185,12 @@ def _robots_ok(url: str) -> bool:
             body = cp.read_text(errors="ignore")
         else:
             _locked_wait("global", GLOBAL_GAP)
+            _platform_wait(u.netloc)
             _locked_wait(u.netloc, PER_DOMAIN_GAP)
+            _note_request(u.netloc)
             r = requests.get(f"{u.scheme}://{u.netloc}/robots.txt", headers={"User-Agent": UA}, timeout=TIMEOUT)
+            if r.status_code in (403, 429, 503):
+                _log_refusal(u.netloc, f"{u.scheme}://{u.netloc}/robots.txt", r.status_code)
             if r.status_code >= 400 and r.status_code not in (404, 410):
                 raise Refused(f"robots.txt HTTP {r.status_code} for {u.netloc}: treating site as closed")
             body = r.text if r.status_code == 200 else ""
@@ -357,7 +420,9 @@ def get(url: str) -> dict:
     gap = max(PER_DOMAIN_GAP, DOMAIN_GAP.get(u.netloc, 0.0), _robots_delay(u.netloc))
     for attempt in range(3):
         _locked_wait("global", GLOBAL_GAP)
+        _platform_wait(u.netloc)
         _locked_wait(u.netloc, gap)
+        _note_request(u.netloc)
         try:
             r = requests.get(url, headers={"User-Agent": UA}, timeout=TIMEOUT, allow_redirects=True)
             break
@@ -367,6 +432,7 @@ def get(url: str) -> dict:
             time.sleep(15 * (attempt + 1))
     body = r.text
     if challenged(u.netloc, u.path, r.status_code, body):
+        _log_refusal(u.netloc, url, r.status_code)
         STATE.mkdir(parents=True, exist_ok=True)
         _breaker(u.netloc).write_text(f"{_now()} HTTP {r.status_code} on {url}")
         raise Refused(f"{u.netloc} refused or challenged (HTTP {r.status_code}); domain stopped for this program")

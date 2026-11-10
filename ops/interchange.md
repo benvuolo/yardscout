@@ -2625,6 +2625,11 @@ Other outputs of this session:
     Aftermarket groups are gated per source for EVERY category (_AM_SITE_CATS, fail closed: a source
     ships only what its own §11.4 covered). OEM and every other source stay held in all 14
     GROUP_HOLD_CATS categories.
+  - Make breadth 07:40 UTC (branch make-breadth-hmg-body): Hyundai/Kia body gate and production-date
+    rule in curate.py (_hmg_body_excludes, _hmg_row_body_excludes, _hmg_production_excludes).
+    kiapartsnow files Forte and Forte Koup under one catalog, and the body shows only in the option
+    column ("[Sedan - 4Door]", "[Coupe - 2Door]"). It removes 27 Forte/Forte Koup strut groups from
+    hmg.json (strut is held, so no user impact). Tier C/D curation on hmg inherits these rules.
   - Next per site, once the CI placeholder pass has written its tier D list rows on oem-raw:
     write rules from raw/<site>.lists.jsonl, set tierD 2, raise the version, then ci_audit.
 - Tier C priority: wiper-motor curation and §11.4 next, once honda/toyota/nissan have C data.
@@ -3244,3 +3249,38 @@ each); nothing allowlisted or crawled.
 - ~07:55 UTC: GSP build pinned (6d793a4a): raw oem-raw@624a95ba, lot 91b0b5dd (sha256 recorded); 100 groups. Round-3 §11.4 running: new verifier, seed 777003, 30 groups (10 narrowed, 10 lost-models, 10 AWD-optional) + 30 pairs, against b800ec8's pfAmRows.
 - ~08:20 UTC: GSP round 3 FAILED, 2 WRONG (NCV37071: yard 'Santa Fe' = Sport; lot engines joined to the LWB row). Fixed (a8d8d437): strict lot-engine coverage on multi-model units, sibling-name guard, spline/length check in notes. Rebuilt on the same pins: 89 groups. Round 4 running (seed 31337004, 30 + 30).
 - ~09:00 UTC: GSP cv-axle §11.4 round 4 PASSED (0 WRONG; 12 + 16 RISK, all covered by shown lines; drive gate 0 deviations). Release candidate on branch interchange/gsp-cv-axle-release @ 0201a501 (b800ec8 + main): 88 groups pinned (raw 624a95ba, lot 91b0b5dd), AM_RELEASED gspnorthamerica={cv-axle}, payload rebuilt, all suites pass. Waiting for the hub's regression test, confirm and merge.
+- ~09:10 UTC: hub CONFIRMED GSP cv-axle on round 4, including the two length-only RISKs (Q70/M37x, Q70L 2015). The hub is regression-testing 0201a501 + main and merges on green (sw jh-v178, AM_RELEASED comment updated in its merge). No pushes to the branch meanwhile.
+- **2026-11-10 ~08:40 UTC.**
+  - **Run 25:** completion read pages on 12 sites; hyundai and kia
+    `.c1.done`. mbpartsgiant, nissanpartsdeal and subarupartsdeal are
+    `.blocked` (HTTP 503 at 07:10-07:16, with 6 SimplePart jobs live).
+    Not retried (rule 2).
+  - **Per-platform pacing** (hub task): branch
+    `make-breadth-platform-pacing` (bf777d7). platforms.py has all 20 sites
+    on SimplePart, from recorded served markers, with no new requests. The
+    workflow runs one job per platform in round-robin site turns; fetch.py
+    adds an 8 s platform-wide gap; refusals go to
+    raw/<site>.refusals.jsonl. tests/test_platforms.py. Waiting for the
+    hub's review.
+  - **HMG** (curated on a24900b), branch `make-breadth-hmg-body`. NOT
+    shipped:
+    - Round 1: 9 WRONG of 30. Fixed by a body gate (own-page notes and
+      fitment rows) and production-date windows.
+    - Round 2: 11 R / 3 W / 16 U. All three WRONGs are exterior parts
+      across a variant pair (Forte/Koup, Optima/Hybrid 2016). Fixed by a
+      variant-aware hold (`policy.hold_base_model`) plus an hmg side-mirror
+      hold: 124 groups, 103 added (gauge clusters, regulators, climate).
+    - Asked the hub whether to resample, hold more, or park hmg. hmg stays
+      at the shipped 54 until then.
+  - **Lesson for every namespace:** variant names (Koup, Hybrid, EV, XL,
+    Sport) and production-date windows need checking before sampling.
+- 2026-11-10 09:41 check-in:
+  - **nissanpartsdeal .blocked**: HTTP 503 at 07:15:50 during tier C, run
+    42712787314. subarupartsdeal got a 503 at 07:15:45, so these were
+    clustered 503s across the network (as on 11-05). No `.retried503` on
+    nissan. Any retry is the hub's/owner's call; nothing was changed or
+    worked around. Effect: the 201 Nissan R3 rows cannot be crawled. The
+    Nissan side keeps seed-proxy own-page evidence only.
+  - Tier C finished: honda `.v2.done` (1,942 records), acura (951),
+    infiniti (2,133).
+  - R3 for those three runs in pending run 42775878285.

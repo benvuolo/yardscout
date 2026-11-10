@@ -15110,7 +15110,7 @@ AM_RELEASED = {
                                  "throttle-body", "fuel-pump-module", "ignition-coils"}),
     # GSP North America cv-axle: §11.4 round 4, 2026-11-10 (independent agent,
     # seed 31337004): 0 WRONG, every RISK covered by a shown line; hub confirm
-    # pending at commit time (ops/interchange.md "Source scout 2")
+    # 2026-11-10 ~06:45 UTC (ops/interchange.md "Source scout 2")
     "gspnorthamerica": frozenset({"cv-axle"}),
 }
 
