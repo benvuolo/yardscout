@@ -14837,8 +14837,10 @@ def _attach_oem_layer_inner(payload: dict, before: dict, lazy_out: dict | None =
         payload["oemGroups"], payload["oemVg"] = [], {}
         payload["oemStatus"] = dict(sorted(status.items()))
         return
-    # held categories ship same-generation donors only (GROUP_HOLD_CATS)
-    groups = [g for g in groups if g["cat"] not in GROUP_HOLD_CATS]
+    # held categories ship same-generation donors only (GROUP_HOLD_CATS),
+    # except a namespace released for the category (OEM_RELEASED). vg families
+    # pool namespaces, so a held category's vg stays held whatever the release.
+    groups = [g for g in groups if not _oem_held(g["cat"], g.get("ns"))]
     vg = {fam: kept for fam, cats in vg.items()
           if (kept := {c: v for c, v in cats.items() if c not in GROUP_HOLD_CATS})}
     payload["oemGroups"] = groups
@@ -15146,6 +15148,22 @@ def _am_held(cat: str, site: str) -> bool:
     return cat not in _AM_SITE_CATS.get(site, frozenset())
 
 
+# Per-NAMESPACE OEM release from GROUP_HOLD_CATS (hub 2026-11-10): an OEM
+# catalog namespace ships its groups in a held category only when (ns, cat) is
+# listed here. An entry is added in the push that moves that namespace to a
+# newer pinned raw ref with its §11.4 sample covering the category and the
+# hub's confirm (make breadth's per-namespace advances). Every other namespace
+# stays held. Empty: no OEM namespace is released in any held category.
+OEM_RELEASED: frozenset = frozenset()
+
+
+def _oem_held(cat: str, ns) -> bool:
+    """True when an OEM group of category cat from namespace ns must not ship:
+    the category is held and (ns, cat) is not released. A group without a
+    namespace stays held (fail closed)."""
+    return cat in GROUP_HOLD_CATS and (not ns or (ns, cat) not in OEM_RELEASED)
+
+
 # Categories that ship with same-model-generation donors only (hub 2026-11-09
 # 23:04 UTC): no OEM catalog or aftermarket group for them reaches the payload
 # until that source passes its own §11.4 sample for the category and the hub
@@ -15170,7 +15188,7 @@ def _attach_lazy_layers(payload: dict, lazy_out: dict) -> None:
         by_cat: dict = {}
         held = 0
         for g in lazy_out.get("oem") or []:
-            if g["cat"] in GROUP_HOLD_CATS:
+            if _oem_held(g["cat"], g.get("ns")):
                 held += 1
                 continue
             by_cat.setdefault(g["cat"], {"oemGroups": [], "amGroups": []})["oemGroups"].append(g)
