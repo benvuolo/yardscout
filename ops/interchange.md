@@ -3238,3 +3238,4 @@ each); nothing allowlisted or crawled.
   - The verdict covers the old build. A fresh §11.4 on the new build was
     proposed. Drive-gate (AWD-only corners) and unit-level generation
     merges are with the hub. cv-axle stays held.
+- ~06:40 UTC: GSP rules per hub (9ca3e720): donor drive gate (d) with driven_axle, unit-level generation guard. Final build is 129 groups, 201 apps. The fresh §11.4 waits for category breadth's pfAmRows mirror of gate (d).
