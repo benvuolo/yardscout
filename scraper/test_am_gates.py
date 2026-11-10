@@ -289,6 +289,73 @@ console.log(JSON.stringify(out));
         check("category rowWarn rides every aftermarket row",
               all(any("trans-cooler" in w for w in ws) for ws in o["sedanGate"].values()))
 
+# 5. Per-SOURCE release from GROUP_HOLD_CATS (hub 2026-11-10): Spectra ships in
+# its released held categories; an OEM group in the same category, a Spectra
+# group in a held category not on its list, and a fuel-tank group do not.
+import tempfile  # noqa: E402
+sys.path.insert(0, str(HERE / "oem_fitment" / "aftermarket"))
+import groups_spectra as GS  # noqa: E402
+
+check("AM_RELEASED['spectrapremium'] == groups_spectra.SHIP_CATS (the categories its §11.4 cleared)",
+      js.AM_RELEASED.get("spectrapremium") == frozenset(GS.SHIP_CATS))
+check("fuel-tank is not an aftermarket category", "fuel-tank" not in js._AM_CATS)
+check("released held categories are still in GROUP_HOLD_CATS (release is per source)",
+      {"radiator", "ac-compressor", "ac-condenser", "heater-core", "evaporator", "throttle-body",
+       "fuel-pump-module"} <= js.GROUP_HOLD_CATS)
+
+
+def _am_g(gid, cat, unit, apps):
+    return {"id": gid, "cat": cat, "tier": "likely", "src": "aftermarket", "label": "x", "unit": unit,
+            "retrieved": "2026-11-09T20:00:00Z", "apps": apps,
+            "note": f"Spectra Premium {unit} is listed for each of these vehicles; aftermarket application data."}
+
+
+def _run_release(files: dict, oem: list):
+    old = js.OEM_GROUPS_DIR
+    with tempfile.TemporaryDirectory() as td:
+        (Path(td) / js.OEM_AM_DIR_NAME).mkdir()
+        for stem, groups in files.items():
+            (Path(td) / js.OEM_AM_DIR_NAME / f"{stem}.json").write_text(json.dumps(
+                {"schema": 1, "src": "aftermarket", "tier": "likely", "raw": "test", "groups": groups}))
+        js.OEM_GROUPS_DIR = td
+        try:
+            payload, lazy = {"builtAt": "2026-11-10T00:00:00Z", "oemStatus": {}}, {"oem": oem}
+            js._attach_lazy_layers(payload, lazy)
+        finally:
+            js.OEM_GROUPS_DIR = old
+    return payload, lazy.get("files") or {}
+
+
+APPS = [["Honda", "Civic", 2012, 2015, "1.8L 4-cyl"], ["Acura", "ILX", 2013, 2015, "2.4L 4-cyl"]]
+sp = [_am_g("am:spp:radiator:CU13221", "radiator", "CU13221", APPS),
+      _am_g("am:spp:ignition-coils:C-900", "ignition-coils", "C-900", APPS),
+      _am_g("am:spp:ac-condenser:7-3965", "ac-condenser", "7-3965", [APPS[0] + [{"body": "Sedan"}]]),
+      _am_g("am:spp:cv-axle:X1", "cv-axle", "X1", APPS),            # held, NOT on Spectra's list
+      _am_g("am:spp:fuel-tank:F1", "fuel-tank", "F1", APPS)]        # no Parts-tab category
+other = [_am_g("am:oth:radiator:R9", "radiator", "R9", APPS)]       # another aftermarket source
+oem = [{"id": "oem:toyota:radiator:1640031", "cat": "radiator", "tier": "likely", "src": "oem",
+        "apps": [["Toyota", "Camry", 2012, 2014]], "note": "x"}]
+payload, files = _run_release({"spectrapremium": sp, "othersite": other}, oem)
+am_ids = {c: {g["id"] for g in d.get("amGroups", [])} for c, d in files.items()}
+oem_ids = {c: {g["id"] for g in d.get("oemGroups", [])} for c, d in files.items()}
+check("Spectra group in a released held category (radiator) reaches the lazy file",
+      "am:spp:radiator:CU13221" in am_ids.get("radiator", set()), str(am_ids))
+check("Spectra ignition-coils group reaches the lazy file", "am:spp:ignition-coils:C-900" in am_ids.get("ignition-coils", set()))
+check("Spectra body-gated condenser row reaches the lazy file with its gate",
+      any(a[5:] == [{"body": "Sedan"}] for g in files.get("ac-condenser", {}).get("amGroups", [])
+          for a in g["apps"]))
+check("OEM group in the same released category stays held",
+      not any("oem:toyota:radiator:1640031" in v for v in oem_ids.values()))
+check("another aftermarket source in the same category stays held",
+      not any("am:oth:radiator:R9" in v for v in am_ids.values()))
+check("Spectra group in a held category NOT on its release list (cv-axle) stays held",
+      "cv-axle" not in files and not any("am:spp:cv-axle:X1" in v for v in am_ids.values()))
+check("Spectra fuel-tank group is dropped (refused, never shipped)",
+      not any("am:spp:fuel-tank:F1" in v for v in am_ids.values())
+      and "fuel-tank" not in files and "ok" in (payload.get("amStatus") or {}).get("spectrapremium", ""),
+      str(payload.get("amStatus")))
+check("lazy index counts the Spectra rows", (payload.get("oemLazy") or {}).get("cats", {}).get("radiator", {}).get("am") == 1)
+
 print()
 if failures:
     print(f"FAILED {len(failures)}: " + "; ".join(failures))

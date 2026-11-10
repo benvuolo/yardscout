@@ -14941,8 +14941,8 @@ _OEM_BRANDS = {"toyota": "Toyota", "mopar": "Mopar", "gm": "GM", "ford": "Ford",
 # ---------------------------------------------------------------------------
 OEM_AM_DIR_NAME = "aftermarket"
 _AM_CATS = ("alternator", "starter", "radiator", "ac-compressor", "ac-condenser", "heater-core",
-            "evaporator", "throttle-body", "fuel-pump-module", "cv-axle", "strut")
-_AM_LABELS = {"dbelectrical": "DB Electrical"}
+            "evaporator", "throttle-body", "fuel-pump-module", "cv-axle", "strut", "ignition-coils")
+_AM_LABELS = {"dbelectrical": "DB Electrical", "spectrapremium": "Spectra Premium"}
 
 
 # Gated aftermarket app rows (2026-11-09, ops/interchange.md §9): a 6th element
@@ -15027,7 +15027,7 @@ def _load_am_layer(now: datetime | None = None) -> dict:
     """{"groups": [payload entries], "status": {site: "ok <raw> n groups" |
     "dropped: <reason>"}}. Groups whose retrieval is over the evidence age
     limit (120 days) are dropped, like the OEM layer's build-time expiry."""
-    out = {"groups": [], "status": {}}
+    out = {"groups": [], "status": {}, "site_of": {}}   # site_of: group id -> file stem (source)
     d = Path(OEM_GROUPS_DIR) / OEM_AM_DIR_NAME
     files = sorted(d.glob("*.json")) if d.is_dir() else []
     now = now or datetime.now(timezone.utc)
@@ -15063,6 +15063,7 @@ def _load_am_layer(now: datetime | None = None) -> dict:
             print(f"[interchange] aftermarket {site} dropped: {e}", file=sys.stderr)
             continue
         out["groups"] += ents
+        out["site_of"].update({e["id"]: site for e in ents})
         out["status"][site] = (f"ok {str(doc.get('raw') or '')[:60]} {len(ents)} groups (likely only)"
                                + (f"; {len(refused)} refused (malformed)" if refused else "")
                                + (f"; {expired} expired (evidence over 120 days old)" if expired else ""))
@@ -15092,6 +15093,22 @@ def _lazy_trim(doc: dict, budget: int) -> tuple[list, int]:
     return dropped, n_am
 
 
+# Per-SOURCE release from GROUP_HOLD_CATS (hub 2026-11-10): an aftermarket
+# source listed here ships its groups in these held categories because it
+# passed its own §11.4 sample for them and the hub confirmed. Every other
+# source in a held category (OEM catalogs, other aftermarket sites) stays
+# held until its own sample. Keys are groups/aftermarket/<stem>.json stems.
+AM_RELEASED = {
+    # §11.4 round 2, 2026-11-10: 0 WRONG in all categories; hub confirm 02:38 UTC
+    "spectrapremium": frozenset({"radiator", "ac-compressor", "ac-condenser", "heater-core", "evaporator",
+                                 "throttle-body", "fuel-pump-module", "ignition-coils"}),
+}
+
+
+def _am_held(cat: str, site: str) -> bool:
+    return cat in GROUP_HOLD_CATS and cat not in AM_RELEASED.get(site, frozenset())
+
+
 # Categories that ship with same-model-generation donors only (hub 2026-11-09
 # 23:04 UTC): no OEM catalog or aftermarket group for them reaches the payload
 # until that source passes its own §11.4 sample for the category and the hub
@@ -15119,7 +15136,7 @@ def _attach_lazy_layers(payload: dict, lazy_out: dict) -> None:
                 continue
             by_cat.setdefault(g["cat"], {"oemGroups": [], "amGroups": []})["oemGroups"].append(g)
         for g in am["groups"]:
-            if g["cat"] in GROUP_HOLD_CATS:
+            if _am_held(g["cat"], (am.get("site_of") or {}).get(g["id"], "")):
                 held += 1
                 continue
             by_cat.setdefault(g["cat"], {"oemGroups": [], "amGroups": []})["amGroups"].append(g)

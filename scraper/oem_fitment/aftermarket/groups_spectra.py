@@ -168,7 +168,7 @@ def load_raw(raw: str | None, raw_ref: str | None) -> tuple[list, str]:
                              capture_output=True, text=True, check=True).stdout
         sha = subprocess.run(["git", "rev-parse", raw_ref], cwd=GA.REPO, capture_output=True,
                              text=True, check=True).stdout.strip()
-        src = f"{raw_ref}@{sha[:8]}"
+        src = f"oem-raw@{sha[:8]}:{RAW_PATH}" if re.fullmatch(r"[0-9a-f]{40}", raw_ref) else f"{raw_ref}@{sha[:8]}"
     else:
         p = Path(raw) if raw else HERE / "raw" / f"{SITE}.jsonl"
         txt, src = p.read_text(), str(p)
@@ -309,12 +309,35 @@ def report_md(doc: dict) -> str:
     return "\n".join(out) + "\n"
 
 
+# Categories the hub released for this source (§11.4 round 2, 2026-11-10);
+# must equal junkyard_scraper.AM_RELEASED["spectrapremium"]. fuel-tank has
+# no Parts-tab category and is never exported.
+SHIP_CATS = ("radiator", "ac-compressor", "ac-condenser", "heater-core", "evaporator",
+             "throttle-body", "fuel-pump-module", "ignition-coils")
+SHIP_KEYS = ("id", "cat", "tier", "src", "label", "unit", "note", "apps", "retrieved")
+
+
+def ship(doc: dict) -> dict:
+    """The committed file (groups/aftermarket/spectrapremium.json), DB
+    Electrical doc shape: released categories only, payload keys only."""
+    gs = [{k: g[k] for k in SHIP_KEYS} for g in doc["groups"] if g["cat"] in SHIP_CATS]
+    skipped = Counter(g["cat"] for g in doc["groups"] if g["cat"] not in SHIP_CATS)
+    out = {"schema": SCHEMA, "src": "aftermarket", "site": SITE, "tier": "likely", "raw": doc["raw"],
+           "decision": "hub 2026-11-10 02:38 UTC: §11.4 round 2 (fresh seed, independent agent) 0 WRONG in "
+                       + ", ".join(SHIP_CATS) + "; ops/interchange.md 'Aftermarket breadth'",
+           "skipped": {f"cat_not_released:{c}": n for c, n in sorted(skipped.items())},
+           "groups": sorted(gs, key=lambda g: g["id"])}
+    out["sha256"] = hashlib.sha256(json.dumps(out["groups"], sort_keys=True).encode()).hexdigest()
+    return out
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--raw")
     ap.add_argument("--raw-ref")
     ap.add_argument("--out", default=str(HERE / "curated" / "spectrapremium.json"))
     ap.add_argument("--report", default=str(HERE / "curated" / "spectrapremium.md"))
+    ap.add_argument("--ship", help="also write the committed doc here (needs --raw-ref pinned to a commit)")
     a = ap.parse_args(argv)
     recs, src = load_raw(a.raw, a.raw_ref)
     lot = None
@@ -327,6 +350,10 @@ def main(argv=None) -> int:
     Path(a.out).parent.mkdir(parents=True, exist_ok=True)
     Path(a.out).write_text(json.dumps(doc, indent=1, sort_keys=True) + "\n")
     Path(a.report).write_text(report_md(doc))
+    if a.ship:
+        if not a.raw_ref or not re.fullmatch(r"[0-9a-f]{40}", a.raw_ref):
+            raise SystemExit("--ship needs --raw-ref pinned to a full oem-raw commit sha")
+        Path(a.ship).write_text(json.dumps(ship(doc), indent=1, sort_keys=True) + "\n")
     print(json.dumps(doc["summary"], indent=1))
     return 0
 
