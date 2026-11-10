@@ -1443,3 +1443,71 @@
 10:19:52 chain-unlinked window-regulator 1 numbers named by 67-62-7-406-633, no catalog link: 67-62-7-326-767
 10:19:52 chain-unlinked window-regulator 1 numbers named by 67-62-7-406-634, no catalog link: 67-62-7-326-768
 10:32:08 time budget reached records=2120
+10:32:19 start site=www.bmwpartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2120 list_lines=614 year_lines=127 url_index=0
+10:32:19 completion worklist completion/bmw.own_page.json: 507 rows
+10:33:15 chain-unlinked climate-control 1 numbers named by 64-11-6-931-839, no catalog link: 64-11-6-921-845
+10:33:23 chain-unlinked climate-control 3 numbers named by 64-11-6-956-320, no catalog link: 64-11-4-127-411, 64-11-6-939-775, 64-11-4-125-795
+10:33:47 chain-unlinked door-front 1 numbers named by 41-51-7-034-151, no catalog link: 41-51-7-008-339
+10:33:47 chain-unlinked door-front 1 numbers named by 41-51-7-034-152, no catalog link: 41-51-7-008-340
+10:34:43 chain-unlinked gauge-cluster 4 numbers named by 62-11-6-985-664, no catalog link: 62-11-6-932-915, 62-11-6-956-990, 62-10-4-117-733, 62-10-6-940-889
+10:34:43 chain-unlinked gauge-cluster 1 numbers named by 62-11-6-985-644, no catalog link: 62-11-6-956-970
+10:34:43 chain-unlinked gauge-cluster 6 numbers named by 62-11-6-985-651, no catalog link: 62-11-6-932-902, 62-11-6-925-394, 62-11-6-931-251, 62-11-6-956-977, 62-10-4-117-714, 62-10-6-940-876
+10:34:43 chain-unlinked gauge-cluster 6 numbers named by 62-11-6-985-652, no catalog link: 62-11-6-925-395, 62-11-6-932-903, 62-11-6-931-252, 62-10-6-940-877, 62-10-4-117-715, 62-11-6-956-978
+10:34:59 chain-unlinked headlights 1 numbers named by 63-12-6-902-754, no catalog link: 63-12-8-380-180
+10:34:59 chain-unlinked headlights 1 numbers named by 63-12-6-902-764, no catalog link: 63-12-8-384-480
+10:34:59 chain-unlinked headlights 1 numbers named by 63-12-7-165-771, no catalog link: 63-12-6-910-963
+10:34:59 chain-unlinked headlights 1 numbers named by 63-12-7-165-772, no catalog link: 63-12-6-910-964
+10:34:59 chain-unlinked headlights 1 numbers named by 63-12-7-165-779, no catalog link: 63-12-6-910-975
+10:34:59 chain-unlinked headlights 1 numbers named by 63-12-7-165-780, no catalog link: 63-12-6-910-976
+10:34:59 chain-unlinked headlights 1 numbers named by 63-12-7-165-785, no catalog link: 63-12-6-910-965
+10:34:59 chain-unlinked headlights 1 numbers named by 63-12-7-165-786, no catalog link: 63-12-6-910-966
+10:34:59 chain-unlinked headlights 1 numbers named by 63-12-7-165-791, no catalog link: 63-12-6-910-977
+10:34:59 chain-unlinked headlights 1 numbers named by 63-12-7-165-792, no catalog link: 63-12-6-910-978
+10:34:59 chain-unlinked headlights 1 numbers named by 63-12-7-165-833, no catalog link: 63-12-6-925-645
+10:34:59 chain-unlinked headlights 1 numbers named by 63-12-7-165-834, no catalog link: 63-12-6-925-646
+10:35:47 chain-unlinked tail-lights 1 numbers named by 63-21-6-946-533, no catalog link: 63-21-6-907-933
+10:35:47 chain-unlinked tail-lights 1 numbers named by 63-21-6-946-534, no catalog link: 63-21-6-907-934
+10:36:03 chain-unlinked trunk-lid 1 numbers named by 41-62-7-003-314, no catalog link: 41-62-8-238-462
+10:36:03 chain-unlinked trunk-lid 2 numbers named by 51-13-7-171-699, no catalog link: 51-13-8-204-854, 51-13-7-056-132
+10:36:03 chain-unlinked trunk-lid 2 numbers named by 51-13-7-170-966, no catalog link: 51-13-7-056-133, 51-13-8-208-505
+10:36:19 chain-unlinked window-regulator 1 numbers named by 67-62-8-362-063, no catalog link: 67-62-8-381-021
+10:36:19 chain-unlinked window-regulator 1 numbers named by 67-62-8-362-064, no catalog link: 67-62-8-381-022
+10:41:55 chain-unlinked climate-control 8 numbers named by 64-11-9-199-261, no catalog link: 64-11-6-977-489, 64-11-9-162-984, 64-11-9-168-115, 64-11-9-183-278, 64-11-9-125-971, 64-11-9-147-300, 64-11-9-182-288, 64-11-9-119-687
+10:41:55 chain-unlinked climate-control 1 numbers named by 64-11-9-292-264, no catalog link: 64-11-9-224-546
+10:42:11 chain-unlinked door-front 1 numbers named by 41-51-7-200-569, no catalog link: 41-51-7-169-435
+10:42:11 chain-unlinked door-front 1 numbers named by 41-51-7-200-570, no catalog link: 41-51-7-169-436
+10:42:27 chain-unlinked gauge-cluster 9 numbers named by 62-10-9-316-151, no catalog link: 62-10-9-130-229, 62-10-9-187-368, 62-10-9-242-370, 62-10-9-141-653, 62-10-9-166-858, 62-10-9-220-987, 62-10-9-187-084, 62-10-9-283-839, 62-10-9-168-354
+10:43:07 chain-unlinked headlights 1 numbers named by 63-11-7-182-517, no catalog link: 63-11-4-871-223
+10:43:07 chain-unlinked headlights 1 numbers named by 63-11-7-182-518, no catalog link: 63-11-4-871-224
+10:43:39 chain-unlinked side-mirrors 1 numbers named by 51-16-7-282-623, no catalog link: 51-16-7-208-275
+10:43:39 chain-unlinked side-mirrors 1 numbers named by 51-16-7-282-624, no catalog link: 51-16-7-208-276
+10:44:27 chain-unlinked window-regulator 1 numbers named by 51-33-7-193-455, no catalog link: 51-33-7-119-207
+10:44:27 chain-unlinked window-regulator 1 numbers named by 51-33-7-193-456, no catalog link: 51-33-7-119-208
+10:44:27 chain-unlinked window-regulator 1 numbers named by 67-62-7-189-231, no catalog link: 67-62-6-952-085
+10:44:27 chain-unlinked window-regulator 1 numbers named by 67-62-7-189-232, no catalog link: 67-62-6-952-086
+10:46:19 chain-unlinked door-rear 1 numbers named by 41-52-7-034-155, no catalog link: 41-52-8-245-863
+10:46:19 chain-unlinked door-rear 1 numbers named by 41-52-7-034-156, no catalog link: 41-52-8-245-864
+10:48:11 chain-unlinked trunk-lid 1 numbers named by 51-13-7-170-963, no catalog link: 51-13-8-236-852
+10:57:15 chain-unlinked bumper-rear 1 numbers named by 51-12-8-159-367, no catalog link: 51-12-8-205-924
+10:57:31 chain-unlinked climate-control 3 numbers named by 64-11-6-927-894, no catalog link: 64-11-6-916-641, 64-11-6-902-547, 64-11-6-915-799
+10:57:31 chain-unlinked climate-control 2 numbers named by 64-11-6-927-896, no catalog link: 64-11-6-915-801, 64-11-6-916-643
+10:57:31 chain-unlinked climate-control 2 numbers named by 64-11-8-375-453, no catalog link: 64-11-8-377-546, 64-11-8-376-357
+10:57:47 chain-unlinked door-front 5 numbers named by 41-51-8-216-817, no catalog link: 41-51-8-199-773, 41-51-8-211-853, 41-51-8-215-857, 41-51-8-216-819, 41-51-9-070-897
+10:57:47 chain-unlinked door-front 5 numbers named by 41-51-8-216-818, no catalog link: 41-51-8-211-854, 41-51-8-199-774, 41-51-8-215-858, 41-51-9-070-896, 41-51-8-216-820
+10:58:03 chain-unlinked door-rear 3 numbers named by 41-52-8-266-721, no catalog link: 41-52-8-199-775, 41-52-8-226-227, 41-52-8-199-777
+10:58:03 chain-unlinked door-rear 3 numbers named by 41-52-8-266-722, no catalog link: 41-52-8-199-776, 41-52-8-199-778, 41-52-8-226-228
+10:58:11 chain-unlinked door-rear 1 numbers named by 41-52-8-266-725, no catalog link: 41-52-8-226-233
+10:58:11 chain-unlinked door-rear 1 numbers named by 41-52-8-266-726, no catalog link: 41-52-8-226-234
+10:58:19 chain-unlinked fender 1 numbers named by 41-35-8-162-133, no catalog link: 41-35-8-162-135
+10:58:19 chain-unlinked fender 1 numbers named by 41-35-8-162-134, no catalog link: 41-35-8-162-136
+10:58:43 chain-unlinked gauge-cluster 2 numbers named by 62-10-6-942-230, no catalog link: 62-11-6-914-927, 62-11-6-923-100
+10:58:59 chain-unlinked headlights 1 numbers named by 63-12-6-912-433, no catalog link: 63-12-6-900-207
+10:58:59 chain-unlinked headlights 1 numbers named by 63-12-6-912-434, no catalog link: 63-12-6-900-208
+10:58:59 chain-unlinked headlights 1 numbers named by 63-12-6-912-439, no catalog link: 63-12-6-902-525
+10:58:59 chain-unlinked headlights 1 numbers named by 63-12-6-912-440, no catalog link: 63-12-6-902-526
+10:58:59 chain-unlinked headlights 1 numbers named by 63-12-8-386-560, no catalog link: 63-12-8-385-094
+10:59:15 chain-unlinked hood 2 numbers named by 41-61-8-238-592, no catalog link: 41-61-8-167-798, 41-61-8-212-601
+10:59:31 chain-unlinked side-mirrors 2 numbers named by 51-16-8-266-601, no catalog link: 51-16-8-239-005, 51-16-8-239-001
+10:59:31 chain-unlinked side-mirrors 2 numbers named by 51-16-8-266-604, no catalog link: 51-16-8-239-006, 51-16-8-239-004
+10:59:31 chain-unlinked side-mirrors 1 numbers named by 51-16-8-266-608, no catalog link: 51-16-8-239-012
+11:04:43 time budget reached records=2122
