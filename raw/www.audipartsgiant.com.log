@@ -709,3 +709,26 @@
 12:29:13 chain-unlinked liftgate 2 numbers named by 4B9-827-023-J, no catalog link: 4B9-827-023-H, 4B9-827-023-E
 12:37:05 nav-fail Audi Allroad Quattro 2004: NavError: HTTP 404 for https://www.audipartsgiant.com/2004-audi-allroad-quattro-parts
 12:37:54 time budget reached records=1528
+12:38:15 start site=www.audipartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=1528 list_lines=1285 year_lines=120 url_index=7860
+12:38:15 completion worklist completion/vag.own_page.json: 366 rows
+12:38:47 chain-unlinked headlights 1 numbers named by 80A-941-043-H, no catalog link: 80A-941-043-B
+12:38:47 chain-unlinked headlights 1 numbers named by 80A-941-044-H, no catalog link: 80A-941-044-B
+12:38:47 chain-unlinked headlights 1 numbers named by 80A-941-773-J, no catalog link: 80A-941-773-B
+12:38:47 chain-unlinked headlights 1 numbers named by 80A-941-774-J, no catalog link: 80A-941-774-B
+12:39:03 chain-unlinked liftgate 2 numbers named by 80A-827-025-D-STL, no catalog link: 80A-827-025-B-STL, 80A-827-025-C-STL
+12:39:27 chain-unlinked window-regulator 1 numbers named by 80A-837-461-B, no catalog link: 80A-837-461-A
+12:39:27 chain-unlinked window-regulator 1 numbers named by 80A-837-462-B, no catalog link: 80A-837-462-A
+12:39:36 chain-unlinked window-regulator 1 numbers named by 80A-839-461-A, no catalog link: 80A-839-461
+12:39:36 chain-unlinked window-regulator 1 numbers named by 80A-839-462-A, no catalog link: 80A-839-462
+12:39:36 chain-unlinked window-regulator 1 numbers named by 80A-959-811-A, no catalog link: 80A-959-811
+12:39:36 chain-unlinked window-regulator 1 numbers named by 80A-959-812-A, no catalog link: 80A-959-812
+12:40:55 nav-fail Audi Allroad Quattro 2005: NavError: HTTP 404 for https://www.audipartsgiant.com/2005-audi-allroad-quattro-parts
+12:41:51 chain-unlinked headlights 1 numbers named by 8K0-941-003-AD, no catalog link: 8K0-941-003-N
+12:41:51 chain-unlinked headlights 1 numbers named by 8K0-941-004-AD, no catalog link: 8K0-941-004-N
+12:51:51 list-fail https://www.audipartsgiant.com/parts-list/2013-audi-s4/body-hardware/bumper-components-front: NavError: no __INITIAL_STORE__ on page
+13:04:47 nav-fail Audi A8 Quattro 2006: NavError: HTTP 404 for https://www.audipartsgiant.com/2006-audi-a8-quattro-parts
+13:05:19 chain-unlinked window-regulator 1 numbers named by 4L0-837-461-G, no catalog link: 4L0-837-461-B
+13:05:19 chain-unlinked window-regulator 1 numbers named by 4L0-837-462-G, no catalog link: 4L0-837-462-B
+13:05:28 chain-unlinked window-regulator 1 numbers named by 4L0-839-461-D, no catalog link: 4L0-839-461-A
+13:05:28 chain-unlinked window-regulator 1 numbers named by 4L0-839-462-D, no catalog link: 4L0-839-462-A
+13:08:57 time budget reached records=1553
