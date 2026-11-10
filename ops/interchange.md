@@ -3069,3 +3069,7 @@ each); nothing allowlisted or crawled.
   window-regulator must be added to `_AM_CATS`; that's a category-breadth
   change.
 - 23:30 UTC check-in: GSP cv-axle 1,043 units → 40 groups (9 sitemaps pending); 1A strut 616 → 141 (lamp lines start on the next run). Nothing finished or blocked.
+- 2026-11-10 00:08 check-in: R3 has still not crawled. Run 42684614492 has
+  one job left (gmpartsgiant, cap about 02:16). Scheduled run 42712787314
+  (sites=all) is pending behind it. No .c1.done, .blocked or .paused for the
+  4 sites. Next check about 03:28.
