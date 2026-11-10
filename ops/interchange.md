@@ -3170,3 +3170,16 @@ each); nothing allowlisted or crawled.
   release is category-breadth's. Each re-curation needs a fresh sample.
 - 2026-11-10 02:45 UTC, GM wheels: no tier W records yet. GM's job in run 42684614492 ended with tier A done (344 seeds) and tier B at 257. Run 42712787314 continues it at about 15 B seeds per 70 min, so B finishes in ~7 h and W (~344 seeds) then takes more than a day at that pace. The GM wheels round starts when tier W output lands; check-in scheduled.
 - Live check 01:49 UTC: yardscout.io data/oem/wheels.json serves 50 groups, interchange.json 44 categories (after the 01:12 scan revert was repaired by ec59413 / 838ca47).
+- **Hub CONFIRMED (2026-11-10 02:38 UTC)** radiator, ac-compressor,
+  ac-condenser, heater-core, evaporator, throttle-body, fuel-pump-module,
+  ignition-coils. fuel-tank stays out.
+- **Ship branch `interchange/aftermarket-1`, head 723ec40 (not merged; the
+  hub runs its regression):**
+  - groups/aftermarket/spectrapremium.json, 613 groups, pinned
+    oem-raw@ac4d1f0d (byte-identical to the round-2 sampled raw).
+  - Per-source release AM_RELEASED; GROUP_HOLD_CATS unchanged.
+  - ignition-coils added to _AM_CATS; "Spectra Premium" label.
+  - Tests: test_am_gates, pf_new_cats_e2e, test_lazy_payload guard.
+  - Payload diff: only Spectra amGroups added; OEM unchanged (ok ×8).
+- **Rule:** any later re-curation (oem-raw had 1,998 vehicles at ship
+  time) gets a fresh §11.4 sample before it replaces the shipped file.
