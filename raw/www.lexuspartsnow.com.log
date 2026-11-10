@@ -1311,3 +1311,37 @@
 16:55:43 chain-unlinked side-mirrors 1 numbers named by 87940-0E031-A0, no catalog link: 87940-0E906
 16:55:43 chain-unlinked side-mirrors 1 numbers named by 87940-0E031-B0, no catalog link: 87940-0E906
 16:56:31 time budget reached records=3364
+16:56:51 start site=www.lexuspartsnow.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=3364 list_lines=1078 year_lines=185 url_index=16480
+16:56:51 completion worklist completion/toyota.own_page.json: 106 rows
+17:02:20 nav-fail Lexus GS 450h 2007: ValueError: no model page for Lexus GS 450h (lexus-['gs_450h'])
+17:10:06 product-fail https://www.lexuspartsnow.com/parts/lexus-mirror-assy-outer-rear-view-lh~87940-3a150-a1.html: ValueError: no __INITIAL_STORE__ on page
+17:10:06 product-fail https://www.lexuspartsnow.com/parts/lexus-mirror-assy-outer-rear-view-lh~87940-3a150-b1.html: ValueError: HTTP 502 for https://www.lexuspartsnow.com/parts/lexus-mirror-assy-outer-rear-view-lh~87940-3a150-b1.html
+17:13:15 nav-fail Lexus RX 450h 2010: ValueError: no model page for Lexus RX 450h (lexus-['rx_450h'])
+17:14:35 product-fail https://www.lexuspartsnow.com/parts/lexus-mirror-assy-outer-rear-view-lh~87940-3a150-a1.html: ValueError: no __INITIAL_STORE__ on page
+17:14:35 product-fail https://www.lexuspartsnow.com/parts/lexus-mirror-assy-outer-rear-view-lh~87940-3a150-b1.html: ValueError: HTTP 502 for https://www.lexuspartsnow.com/parts/lexus-mirror-assy-outer-rear-view-lh~87940-3a150-b1.html
+17:16:11 chain-unlinked side-mirrors 1 numbers named by 87910-0E021-B3, no catalog link: 87910-0E905
+17:16:11 chain-unlinked side-mirrors 1 numbers named by 87940-0E021-B3, no catalog link: 87940-0E905
+17:16:27 nav-fail Lexus RX 450h 2012: ValueError: no model page for Lexus RX 450h (lexus-['rx_450h'])
+17:18:35 chain-unlinked grille 1 numbers named by 53111-30C41, no catalog link: 53111-30906
+17:21:31 chain-unlinked side-mirrors 1 numbers named by 87901-30280-A0, no catalog link: 87901-30320-A0
+17:21:31 chain-unlinked side-mirrors 1 numbers named by 87901-30280-B0, no catalog link: 87901-30320-B0
+17:21:31 chain-unlinked side-mirrors 1 numbers named by 87901-30280-B1, no catalog link: 87901-30320-B1
+17:21:31 chain-unlinked side-mirrors 1 numbers named by 87901-30280-C0, no catalog link: 87901-30320-C0
+17:21:31 chain-unlinked side-mirrors 1 numbers named by 87901-30280-D0, no catalog link: 87901-30320-D0
+17:21:31 chain-unlinked side-mirrors 1 numbers named by 87901-30280-E0, no catalog link: 87901-30320-E0
+17:21:31 chain-unlinked side-mirrors 1 numbers named by 87901-30280-J1, no catalog link: 87901-30320-J1
+17:21:31 chain-unlinked side-mirrors 1 numbers named by 87906-30340-A0, no catalog link: 87906-30380-A0
+17:21:31 chain-unlinked side-mirrors 1 numbers named by 87906-30340-B0, no catalog link: 87906-30380-B0
+17:21:31 chain-unlinked side-mirrors 1 numbers named by 87906-30340-B1, no catalog link: 87906-30380-B1
+17:21:31 chain-unlinked side-mirrors 1 numbers named by 87906-30340-B2, no catalog link: 87906-30380-B2
+17:21:31 chain-unlinked side-mirrors 1 numbers named by 87906-30340-C0, no catalog link: 87906-30380-C0
+17:21:31 chain-unlinked side-mirrors 1 numbers named by 87906-30340-D0, no catalog link: 87906-30380-D0
+17:21:31 chain-unlinked side-mirrors 1 numbers named by 87906-30340-E0, no catalog link: 87906-30380-E0
+17:21:31 chain-unlinked side-mirrors 1 numbers named by 87906-30340-J1, no catalog link: 87906-30380-J1
+17:24:36 nav-fail Lexus RX 450h 2013: ValueError: no model page for Lexus RX 450h (lexus-['rx_450h'])
+17:25:23 chain-unlinked door-front 1 numbers named by 67001-30840, no catalog link: 67001-30841
+17:25:23 chain-unlinked door-front 1 numbers named by 67002-30A10, no catalog link: 67002-30A11
+17:26:11 chain-unlinked fender 1 numbers named by 53801-30A00, no catalog link: 53801-30A01
+17:26:11 chain-unlinked fender 1 numbers named by 53802-3F210, no catalog link: 53802-3F211
+17:27:23 chain-unlinked side-mirrors 1 numbers named by 87906-30340-C2, no catalog link: 87906-30380-C2
+17:28:27 time budget reached records=3417
