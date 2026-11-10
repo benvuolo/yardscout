@@ -157,11 +157,22 @@ sheet" in the UI only (jh_saved and watch storage untouched, rule 6); map deferr
   map min height 220px so the sheet never runs under the tab bar. jh-v169 (second of 9c/9d to merge
   needs jh-v171). Tests: map_regions_e2e 11 regions x 6 sizes (1,584 layouts), ui_no_truncation, units.
 
-### Round 9e: Walk the rows on desktop (2026-11-09, branch design/rows-desktop 9a1e341, NOT merged)
+### Round 9e: Walk the rows on desktop (2026-11-09; merged by hub at b22c744, jh-v175)
 - Sanity pass at 1024/1440/1920 with today's data: 672px column, no sideways scroll. Row thumbs get the
   photo fill (PYP 16:9 photos left beige bands), 112px at >=900px; thumbs and photo boxes isolate their
   stacking (fill layers had painted over the sticky row header). jh-v175. photo_layout_e2e 578 (adds rows
   checks; fails without the fix), ui_no_truncation 1,296, units. WebKit still unchecked.
+
+### Round 9f: map first view made deterministic + Parts headings (2026-11-10, branch design/firstview-settle-v3 fd0b8c0, in hub regression)
+- Phoenix 375x553/200% flake: first view decided at zoom 13, then a map resize grew the open area ~5px, a
+  Pull-N-Save point entered and merged with Pull-A-Part. Now the first view stays live until the map is
+  moved (re-decided on any re-layout that bubbles the nearest yard below max zoom; capped), resizes go
+  through mapResize(), the sheet goes to rest instantly on opening the map, and _firstViewSettled marks
+  idle + fonts for tests. Phoenix 375x553 10/10 (was 6/10 failing mid-fix).
+- Parts results headings: bold headline alone, line 2 starts plainly (no em dash) in browse, engine browse
+  and fit search; plural labels drop "a". Checker fails a dash/lowercase line 2. jh-v177.
+- Branch names: v2/v3 exist because a force-push to rewrite a rebased branch is refused in this session;
+  cherry-picked onto current main instead.
 
 ## Earlier state (2026-11-06, exploration)
 
