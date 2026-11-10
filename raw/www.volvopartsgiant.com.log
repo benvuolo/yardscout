@@ -368,3 +368,79 @@
 18:19:37 nav-fail Volvo V60 Cross Country 2017: NavError: HTTP 404 for https://www.volvopartsgiant.com/2017-volvo-v60-cross-country-parts
 18:19:45 nav-fail Volvo V60 Cross Country 2018: NavError: HTTP 404 for https://www.volvopartsgiant.com/2018-volvo-v60-cross-country-parts
 18:30:41 completion finished records=1253 errors=31 open_rows=0 chains_owed=0
+21:34:32 start site=www.volvopartsgiant.com mode=worklist tiers=['A', 'B', 'W', 'C', 'D'] records=1253 list_lines=1431 year_lines=201 url_index=4413
+21:34:32 seg done tier=A Volvo XC90 [2003, 2014] seeds=[2006] records=1253 errors=31
+21:34:32 seg done tier=A Volvo S60 [2001, 2018] seeds=[2012] records=1253 errors=31
+21:34:32 seg done tier=A Volvo S40 [1992, 2013] seeds=[2006] records=1253 errors=31
+21:34:32 seg done tier=A Volvo S80 [1999, 2014] seeds=[2004] records=1253 errors=31
+21:34:32 seg done tier=A Volvo V70 [1998, 2010] seeds=[2002] records=1253 errors=31
+21:34:32 seg done tier=A Volvo XC60 [2010, 2017] seeds=[2013] records=1253 errors=31
+21:34:32 seg done tier=A Volvo XC70 [1998, 2007] seeds=[2004] records=1253 errors=31
+21:34:32 seg done tier=A Volvo C70 [1998, 2013] seeds=[2008] records=1253 errors=31
+21:34:32 seg done tier=A Volvo S70 [1998, 2000] seeds=[2000] records=1253 errors=31
+21:34:32 seg done tier=A Volvo 240 [1976, 1993] seeds=[1992] records=1253 errors=31
+21:34:32 seg done tier=A Volvo XC70 [2008, 2015] seeds=[2008] records=1253 errors=31
+21:34:32 seg done tier=A Volvo V50 [2002, 2011] seeds=[2005] records=1253 errors=31
+21:34:32 seg done tier=A Volvo 850 [1993, 1997] seeds=[1995] records=1253 errors=31
+21:34:32 seg done tier=A Volvo C30 [2008, 2013] seeds=[2011] records=1253 errors=31
+21:34:32 seg done tier=A Volvo 740 [1986, 1992] seeds=[1991] records=1253 errors=31
+21:34:32 seg done tier=A Volvo 960 [1992, 1997] seeds=[1996] records=1253 errors=31
+21:34:32 seg done tier=A Volvo 940 [1992, 1995] seeds=[1994] records=1253 errors=31
+21:34:32 seg done tier=A Volvo V40 [2000, 2004] seeds=[2004] records=1253 errors=31
+21:34:32 seg done tier=A Volvo 60 Series [2001, 2013] seeds=[2012] records=1253 errors=31
+21:34:32 seg done tier=B Volvo XC90 [2003, 2014] seeds=[2006] records=1253 errors=31
+21:34:32 seg done tier=B Volvo S60 [2001, 2018] seeds=[2012] records=1253 errors=31
+21:34:32 seg done tier=B Volvo S40 [1992, 2013] seeds=[2006] records=1253 errors=31
+21:34:32 seg done tier=B Volvo S80 [1999, 2014] seeds=[2004] records=1253 errors=31
+21:34:32 seg done tier=B Volvo V70 [1998, 2010] seeds=[2002] records=1253 errors=31
+21:34:32 seg done tier=B Volvo XC60 [2010, 2017] seeds=[2013] records=1253 errors=31
+21:34:32 seg done tier=B Volvo XC70 [1998, 2007] seeds=[2004] records=1253 errors=31
+21:34:32 seg done tier=B Volvo C70 [1998, 2013] seeds=[2008] records=1253 errors=31
+21:34:32 seg done tier=B Volvo S70 [1998, 2000] seeds=[2000] records=1253 errors=31
+21:34:32 seg done tier=B Volvo 240 [1976, 1993] seeds=[1992] records=1253 errors=31
+21:34:32 seg done tier=B Volvo XC70 [2008, 2015] seeds=[2008] records=1253 errors=31
+21:34:32 seg done tier=B Volvo V50 [2002, 2011] seeds=[2005] records=1253 errors=31
+21:34:32 seg done tier=B Volvo 850 [1993, 1997] seeds=[1995] records=1253 errors=31
+21:34:32 seg done tier=B Volvo C30 [2008, 2013] seeds=[2011] records=1253 errors=31
+21:34:32 seg done tier=B Volvo 740 [1986, 1992] seeds=[1991] records=1253 errors=31
+21:34:32 seg done tier=B Volvo 960 [1992, 1997] seeds=[1996] records=1253 errors=31
+21:34:32 seg done tier=B Volvo 940 [1992, 1995] seeds=[1994] records=1253 errors=31
+21:34:32 seg done tier=B Volvo V40 [2000, 2004] seeds=[2004] records=1253 errors=31
+21:34:32 seg done tier=B Volvo 60 Series [2001, 2013] seeds=[2012] records=1253 errors=31
+21:34:32 seg done tier=C Volvo XC90 [2003, 2014] seeds=[2006] records=1253 errors=31
+21:34:32 seg done tier=C Volvo S60 [2001, 2018] seeds=[2012] records=1253 errors=31
+21:34:32 seg done tier=C Volvo S40 [1992, 2013] seeds=[2006] records=1253 errors=31
+21:34:32 seg done tier=C Volvo S80 [1999, 2014] seeds=[2004] records=1253 errors=31
+21:34:32 seg done tier=C Volvo V70 [1998, 2010] seeds=[2002] records=1253 errors=31
+21:34:32 seg done tier=C Volvo XC60 [2010, 2017] seeds=[2013] records=1253 errors=31
+21:34:32 seg done tier=C Volvo XC70 [1998, 2007] seeds=[2004] records=1253 errors=31
+21:34:32 seg done tier=C Volvo C70 [1998, 2013] seeds=[2008] records=1253 errors=31
+21:34:32 seg done tier=C Volvo S70 [1998, 2000] seeds=[2000] records=1253 errors=31
+21:34:32 seg done tier=C Volvo 240 [1976, 1993] seeds=[1992] records=1253 errors=31
+21:34:32 seg done tier=C Volvo XC70 [2008, 2015] seeds=[2008] records=1253 errors=31
+21:34:32 seg done tier=C Volvo V50 [2002, 2011] seeds=[2005] records=1253 errors=31
+21:34:32 seg done tier=C Volvo 850 [1993, 1997] seeds=[1995] records=1253 errors=31
+21:34:32 seg done tier=C Volvo C30 [2008, 2013] seeds=[2011] records=1253 errors=31
+21:34:32 seg done tier=C Volvo 740 [1986, 1992] seeds=[1991] records=1253 errors=31
+21:34:32 seg done tier=C Volvo 960 [1992, 1997] seeds=[1996] records=1253 errors=31
+21:34:32 seg done tier=C Volvo 940 [1992, 1995] seeds=[1994] records=1253 errors=31
+21:34:32 seg done tier=C Volvo V40 [2000, 2004] seeds=[2004] records=1253 errors=31
+21:34:32 seg done tier=C Volvo 60 Series [2001, 2013] seeds=[2012] records=1253 errors=31
+21:37:46 seg done tier=D Volvo XC90 [2003, 2014] seeds=[2006, 2009, 2010] records=1253 errors=31
+21:39:46 nav-fail Volvo S60 2010: NavError: HTTP 404 for https://www.volvopartsgiant.com/2010-volvo-s60-parts
+21:39:46 seg done tier=D Volvo S60 [2001, 2018] seeds=[2012, 2009, 2010] records=1253 errors=32
+21:42:35 seg done tier=D Volvo S40 [1992, 2013] seeds=[2006, 2002, 2003] records=1253 errors=32
+21:45:38 seg done tier=D Volvo S80 [1999, 2014] seeds=[2004, 2007, 2008] records=1253 errors=32
+21:48:27 seg done tier=D Volvo V70 [1998, 2010] seeds=[2002, 2005, 2004] records=1253 errors=32
+21:51:15 seg done tier=D Volvo XC60 [2010, 2017] seeds=[2013, 2014, 2015] records=1253 errors=32
+21:52:18 nav-fail Volvo XC70 2002: NavError: HTTP 404 for https://www.volvopartsgiant.com/2002-volvo-xc70-parts
+21:52:18 seg done tier=D Volvo XC70 [1998, 2007] seeds=[2004, 2002] records=1253 errors=33
+21:53:06 nav-fail Volvo C70 2005: NavError: HTTP 404 for https://www.volvopartsgiant.com/2005-volvo-c70-parts
+21:53:06 seg done tier=D Volvo C70 [1998, 2013] seeds=[2008, 2005] records=1253 errors=34
+21:55:55 seg done tier=D Volvo S70 [1998, 2000] seeds=[2000, 1999, 1998] records=1253 errors=34
+21:56:34 nav-fail Volvo 240 1984: NavError: HTTP 404 for https://www.volvopartsgiant.com/1984-volvo-240-parts
+21:56:34 seg done tier=D Volvo 240 [1976, 1993] seeds=[1992, 1984] records=1253 errors=35
+21:59:23 seg done tier=D Volvo XC70 [2008, 2015] seeds=[2008, 2012, 2013] records=1253 errors=35
+22:02:11 seg done tier=D Volvo V50 [2002, 2011] seeds=[2005, 2007, 2008] records=1253 errors=35
+22:05:15 seg done tier=D Volvo 850 [1993, 1997] seeds=[1995, 1996, 1994] records=1253 errors=35
+22:05:15 time budget reached records=1253
