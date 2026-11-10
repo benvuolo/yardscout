@@ -441,3 +441,162 @@
 07:21:07 seg done tier=B Infiniti J30 [1993, 1997] seeds=[1994] records=1775 errors=27
 07:21:07 seg done tier=B Infiniti FX45 [2003, 2008] seeds=[2004] records=1775 errors=27
 07:21:07 finished records=1775 errors=27
+03:19:28 start site=www.infinitipartsdeal.com mode=worklist tiers=['A', 'B', 'W', 'C'] records=1775 list_lines=0 year_lines=0 url_index=0
+03:19:28 seg done tier=A Infiniti G35 [2003, 2008] seeds=[2004] records=1775 errors=27
+03:19:28 seg done tier=A Infiniti G37 [2008, 2013] seeds=[2009] records=1775 errors=27
+03:19:28 seg done tier=A Infiniti FX35 [2003, 2012] seeds=[2005] records=1775 errors=27
+03:19:28 seg done tier=A Infiniti M35 [2006, 2010] seeds=[2006] records=1775 errors=27
+03:19:28 seg done tier=A Infiniti QX56 [2004, 2010] seeds=[2008] records=1775 errors=27
+03:19:28 seg done tier=A Infiniti QX60 [2014, 2020] seeds=[2014] records=1775 errors=27
+03:19:28 seg done tier=A Infiniti Q50 [2014, 2020] seeds=[2014] records=1775 errors=27
+03:19:28 seg done tier=A Infiniti QX4 [1997, 2003] seeds=[2001] records=1775 errors=27
+03:19:28 seg done tier=A Infiniti JX35 [2013, 2013] seeds=[2013] records=1775 errors=27
+03:19:28 seg done tier=A Infiniti I30 [1996, 2001] seeds=[2000] records=1775 errors=27
+03:19:28 seg done tier=A Infiniti EX35 [2008, 2013] seeds=[2008] records=1775 errors=27
+03:19:28 seg done tier=A Infiniti QX56 [2011, 2013] seeds=[2012] records=1775 errors=27
+03:19:28 seg done tier=A Infiniti I35 [2002, 2004] seeds=[2002] records=1775 errors=27
+03:19:28 seg done tier=A Infiniti FX [2003, 2012] seeds=[2005] records=1775 errors=27
+03:19:28 seg done tier=A Infiniti Q45 [1990, 2005] seeds=[2002] records=1775 errors=27
+03:19:28 seg done tier=A Infiniti G20 [1991, 2008] seeds=[2002] records=1775 errors=27
+03:19:28 seg done tier=A Infiniti M45 [2003, 2008] seeds=[2006] records=1775 errors=27
+03:19:28 seg done tier=A Infiniti M37 [2011, 2013] seeds=[2011] records=1775 errors=27
+03:19:28 seg done tier=A Infiniti G Sedan [2009, 2013] seeds=[2011] records=1775 errors=27
+03:19:28 seg done tier=A Infiniti M [2006, 2012] seeds=[2006] records=1775 errors=27
+03:19:28 seg done tier=A Infiniti G37 Sedan [2009, 2013] seeds=[2013] records=1775 errors=27
+03:19:28 seg done tier=A Infiniti G25 [2011, 2012] seeds=[2011] records=1775 errors=27
+03:19:28 seg done tier=A Infiniti QX50 [2014, 2021] seeds=[2017] records=1775 errors=27
+03:19:28 seg done tier=A Infiniti G37X [2009, 2013] seeds=[2013] records=1775 errors=27
+03:19:28 seg done tier=A Infiniti QX80 [2014, 2017] seeds=[2014] records=1775 errors=27
+03:19:28 seg done tier=A Infiniti G35X [2007, 2008] seeds=[2008] records=1775 errors=27
+03:19:28 seg done tier=A Infiniti J30 [1993, 1997] seeds=[1994] records=1775 errors=27
+03:19:28 seg done tier=A Infiniti FX45 [2003, 2008] seeds=[2004] records=1775 errors=27
+03:19:28 seg done tier=B Infiniti G35 [2003, 2008] seeds=[2004] records=1775 errors=27
+03:19:28 seg done tier=B Infiniti G37 [2008, 2013] seeds=[2009] records=1775 errors=27
+03:19:28 seg done tier=B Infiniti FX35 [2003, 2012] seeds=[2005] records=1775 errors=27
+03:19:28 seg done tier=B Infiniti M35 [2006, 2010] seeds=[2006] records=1775 errors=27
+03:19:28 seg done tier=B Infiniti QX56 [2004, 2010] seeds=[2008] records=1775 errors=27
+03:19:28 seg done tier=B Infiniti QX60 [2014, 2020] seeds=[2014] records=1775 errors=27
+03:19:28 seg done tier=B Infiniti Q50 [2014, 2020] seeds=[2014] records=1775 errors=27
+03:19:28 seg done tier=B Infiniti QX4 [1997, 2003] seeds=[2001] records=1775 errors=27
+03:19:28 seg done tier=B Infiniti JX35 [2013, 2013] seeds=[2013] records=1775 errors=27
+03:19:28 seg done tier=B Infiniti I30 [1996, 2001] seeds=[2000] records=1775 errors=27
+03:19:28 seg done tier=B Infiniti EX35 [2008, 2013] seeds=[2008] records=1775 errors=27
+03:19:28 seg done tier=B Infiniti QX56 [2011, 2013] seeds=[2012] records=1775 errors=27
+03:19:28 seg done tier=B Infiniti I35 [2002, 2004] seeds=[2002] records=1775 errors=27
+03:19:28 seg done tier=B Infiniti FX [2003, 2012] seeds=[2005] records=1775 errors=27
+03:19:28 seg done tier=B Infiniti Q45 [1990, 2005] seeds=[2002] records=1775 errors=27
+03:19:28 seg done tier=B Infiniti G20 [1991, 2008] seeds=[2002] records=1775 errors=27
+03:19:28 seg done tier=B Infiniti M45 [2003, 2008] seeds=[2006] records=1775 errors=27
+03:19:28 seg done tier=B Infiniti M37 [2011, 2013] seeds=[2011] records=1775 errors=27
+03:19:28 seg done tier=B Infiniti G Sedan [2009, 2013] seeds=[2011] records=1775 errors=27
+03:19:28 seg done tier=B Infiniti M [2006, 2012] seeds=[2006] records=1775 errors=27
+03:19:28 seg done tier=B Infiniti G37 Sedan [2009, 2013] seeds=[2013] records=1775 errors=27
+03:19:28 seg done tier=B Infiniti G25 [2011, 2012] seeds=[2011] records=1775 errors=27
+03:19:28 seg done tier=B Infiniti QX50 [2014, 2021] seeds=[2017] records=1775 errors=27
+03:19:28 seg done tier=B Infiniti G37X [2009, 2013] seeds=[2013] records=1775 errors=27
+03:19:28 seg done tier=B Infiniti QX80 [2014, 2017] seeds=[2014] records=1775 errors=27
+03:19:28 seg done tier=B Infiniti G35X [2007, 2008] seeds=[2008] records=1775 errors=27
+03:19:28 seg done tier=B Infiniti J30 [1993, 1997] seeds=[1994] records=1775 errors=27
+03:19:28 seg done tier=B Infiniti FX45 [2003, 2008] seeds=[2004] records=1775 errors=27
+03:21:36 chain-unlinked knuckle 1 numbers named by 40015-AL550, no catalog link: 40015-AL510
+03:21:36 chain-unlinked knuckle 1 numbers named by 40014-AL550, no catalog link: 40014-AL510
+03:24:00 chain-unlinked strut 1 numbers named by 56110-AM689, no catalog link: 56110-AM685
+03:24:00 chain-unlinked strut 1 numbers named by 56110-AM691, no catalog link: 56110-AM687
+03:24:00 chain-unlinked strut 1 numbers named by 56110-AM690, no catalog link: 56110-AM686
+03:24:00 chain-unlinked strut 1 numbers named by 56110-AM692, no catalog link: 56110-AM688
+03:25:29 chain-unlinked strut 2 numbers named by 56210-AM828, no catalog link: 56210-AM825, 56210-AM827
+03:25:29 chain-unlinked strut 1 numbers named by 56210-CD026, no catalog link: K6210-CD02D
+03:25:29 chain-unlinked strut 1 numbers named by 56210-CD726, no catalog link: 56210-CD325
+03:26:00 chain-unlinked wiper-motor 1 numbers named by 28800-JK600, no catalog link: 28800-JK60A
+03:26:00 chain-unlinked wiper-motor 1 numbers named by 28810-JK60A, no catalog link: 28810-JK60B
+03:28:16 chain-unlinked strut 1 numbers named by E6110-JK01B, no catalog link: E6110-JK01C
+03:28:16 chain-unlinked strut 1 numbers named by E6110-JK00B, no catalog link: E6A10-JK00B
+03:28:16 chain-unlinked strut 1 numbers named by E6110-JK50A, no catalog link: E6A10-JK50A
+03:28:16 chain-unlinked strut 1 numbers named by E6110-JK50B, no catalog link: 56110-JK50B
+03:28:16 chain-unlinked strut 1 numbers named by E6111-JK01B, no catalog link: E6111-JK01C
+03:28:16 chain-unlinked strut 1 numbers named by E6111-JK00B, no catalog link: E6A11-JK00B
+03:28:16 chain-unlinked strut 1 numbers named by E6111-JK50A, no catalog link: E6A11-JK50A
+03:28:16 chain-unlinked strut 1 numbers named by E6111-JK50B, no catalog link: 56111-JK50B
+03:29:12 chain-unlinked strut 1 numbers named by E6210-JK00C, no catalog link: E6210-JK01B
+03:29:12 chain-unlinked strut 1 numbers named by E6210-JK01A, no catalog link: E6210-JK01B
+03:29:12 chain-unlinked strut 1 numbers named by E6210-JK50A, no catalog link: E6B10-JK50A
+03:29:12 chain-unlinked strut 1 numbers named by E6210-JK50B, no catalog link: E6210-JK50C
+03:29:12 seg done tier=C Infiniti G35 [2003, 2008] seeds=[2004, 2008] records=1835 errors=27
+03:30:08 chain-unlinked wiper-motor 1 numbers named by 28800-JK61A, no catalog link: 28800-JK61B
+03:30:08 chain-unlinked wiper-motor 1 numbers named by 28810-JK61A, no catalog link: 28810-JK61B
+03:31:04 chain-unlinked strut 1 numbers named by E6110-JK50C, no catalog link: E6110-JK50D
+03:31:04 chain-unlinked strut 1 numbers named by E6111-JK50C, no catalog link: E6111-JK50D
+03:31:20 chain-unlinked strut 1 numbers named by E6B10-JK01A, no catalog link: E6210-JK01B
+03:32:49 chain-unlinked strut 1 numbers named by E6110-JL01C, no catalog link: E6110-JL01B
+03:32:49 chain-unlinked strut 1 numbers named by E6110-JL00C, no catalog link: E6110-JL00B
+03:32:49 chain-unlinked strut 1 numbers named by E6111-JL01C, no catalog link: E6111-JL01B
+03:32:49 chain-unlinked strut 1 numbers named by E6111-JL00C, no catalog link: E6111-JL00B
+03:33:29 seg done tier=C Infiniti G37 [2008, 2013] seeds=[2009] records=1854 errors=27
+03:34:01 chain-unlinked wiper-motor 1 numbers named by 28710-CG000, no catalog link: 28710-CL70B
+03:36:16 chain-unlinked strut 1 numbers named by 54303-CG725, no catalog link: 54303-CG225
+03:36:16 chain-unlinked strut 1 numbers named by 54303-CL025, no catalog link: 54303-CL026
+03:36:16 chain-unlinked strut 1 numbers named by 54302-CG725, no catalog link: 54302-CG225
+03:36:16 chain-unlinked strut 1 numbers named by 54302-CL025, no catalog link: 54302-CL026
+03:37:04 chain-unlinked strut 1 numbers named by 56210-CG725, no catalog link: 56210-CG225
+03:37:04 chain-unlinked strut 1 numbers named by 56210-CL00J, no catalog link: E6210-CL00J
+03:37:04 chain-unlinked strut 1 numbers named by 56210-CL70J, no catalog link: E6210-CL70J
+03:37:53 chain-unlinked wiper-motor 1 numbers named by 28800-1CA0A, no catalog link: 28800-1CA0B
+03:37:53 chain-unlinked wiper-motor 1 numbers named by 28810-1CA0A, no catalog link: 28810-1CA0B
+03:40:40 chain-unlinked strut 1 numbers named by E6110-1CB0C, no catalog link: E61AM-1CB1C
+03:40:40 chain-unlinked strut 1 numbers named by E6A10-1CB0C, no catalog link: E6110-1CB1D
+03:40:40 chain-unlinked strut 1 numbers named by E6110-1CC0A, no catalog link: E61AM-1CC0C
+03:40:40 chain-unlinked strut 1 numbers named by E6110-1CF0F, no catalog link: E6A10-6WY0A
+03:40:40 chain-unlinked strut 1 numbers named by E6A10-1CA0E, no catalog link: E6110-1DR0C
+03:40:40 chain-unlinked strut 1 numbers named by E6A10-1CC0A, no catalog link: E6110-1CC0C
+03:40:40 chain-unlinked strut 1 numbers named by E6A10-1CF0F, no catalog link: E6110-6WY0A
+03:40:40 chain-unlinked strut 1 numbers named by E6111-1CB0C, no catalog link: E61AA-1CB1C
+03:40:40 chain-unlinked strut 1 numbers named by E6A11-1CB0C, no catalog link: E6111-1CB1C
+03:40:40 chain-unlinked strut 1 numbers named by E6111-1CC0A, no catalog link: E61AA-1CC0C
+03:40:40 chain-unlinked strut 1 numbers named by E6111-1CF0F, no catalog link: E6A11-6WY0A
+03:40:40 chain-unlinked strut 1 numbers named by E6A11-1CA0E, no catalog link: E6111-1DR1C
+03:40:40 chain-unlinked strut 1 numbers named by E6A11-1CC0A, no catalog link: E6111-1CC0C
+03:40:40 chain-unlinked strut 1 numbers named by E6A11-1CF0F, no catalog link: E6111-6WY0A
+03:41:12 chain-unlinked strut 1 numbers named by E6210-1CA0A, no catalog link: E6210-1DR1A
+03:41:12 chain-unlinked strut 1 numbers named by E6210-1CF0B, no catalog link: E6210-6WY0A
+03:41:12 chain-unlinked strut 1 numbers named by E6211-1CF0B, no catalog link: E6211-6WY0A
+03:41:12 seg done tier=C Infiniti FX35 [2003, 2012] seeds=[2005, 2011] records=1897 errors=27
+03:41:52 chain-unlinked wiper-motor 1 numbers named by 28800-EH100, no catalog link: 28800-EH10B
+03:41:52 chain-unlinked wiper-motor 1 numbers named by 28800-EH10A, no catalog link: 28800-EH10B
+03:43:52 chain-unlinked strut 1 numbers named by 56110-EG025, no catalog link: E6A10-EG00D
+03:43:52 chain-unlinked strut 1 numbers named by E6110-EG00D, no catalog link: E6A10-EG00D
+03:43:52 chain-unlinked strut 1 numbers named by E6110-EG01A, no catalog link: E6A10-EG00D
+03:43:52 chain-unlinked strut 1 numbers named by E6110-EG30A, no catalog link: E6A10-EG30A
+03:43:52 chain-unlinked strut 1 numbers named by 56111-EG025, no catalog link: E6A11-EG00D
+03:43:52 chain-unlinked strut 1 numbers named by E6111-EG00D, no catalog link: E6A11-EG00D
+03:43:52 chain-unlinked strut 1 numbers named by E6111-EG01A, no catalog link: E6A11-EG00D
+03:43:52 chain-unlinked strut 1 numbers named by E6111-EG30A, no catalog link: E6A11-EG30A
+03:44:48 chain-unlinked strut 1 numbers named by 56210-EG00J, no catalog link: E6210-EG02A
+03:44:48 chain-unlinked strut 1 numbers named by 56210-EG00K, no catalog link: E6210-EG01E
+03:44:48 chain-unlinked strut 1 numbers named by 56210-EG025, no catalog link: E6210-EG01E
+03:44:48 chain-unlinked strut 1 numbers named by E6210-EG30A, no catalog link: E6210-EG01E
+03:44:48 chain-unlinked strut 1 numbers named by E6B10-EG01C, no catalog link: E6210-EG02A
+03:44:48 chain-unlinked strut 1 numbers named by E6B10-EG01D, no catalog link: E6210-EG01E
+03:44:48 seg done tier=C Infiniti M35 [2006, 2010] seeds=[2006] records=1917 errors=27
+03:45:44 chain-unlinked wiper-motor 1 numbers named by 28800-ZH30A, no catalog link: 28800-9FA0A
+03:45:44 chain-unlinked wiper-motor 1 numbers named by 28810-ZH30A, no catalog link: 28810-7S000
+03:46:24 chain-unlinked knuckle 1 numbers named by 40015-7S000, no catalog link: 40015-1LA0A
+03:46:24 chain-unlinked knuckle 1 numbers named by 40015-ZR00A, no catalog link: 40015-1LA0A
+03:46:24 chain-unlinked knuckle 1 numbers named by 40014-7S000, no catalog link: 40014-1LA0A
+03:46:24 chain-unlinked knuckle 1 numbers named by 40014-ZR00A, no catalog link: 40014-1LA0A
+03:47:28 chain-unlinked strut 1 numbers named by 56110-ZC025, no catalog link: E6110-ZZ50A
+03:47:28 chain-unlinked strut 1 numbers named by 56110-ZC085, no catalog link: E6110-ZZ50B
+03:48:24 chain-unlinked strut 1 numbers named by 56200-ZC01B, no catalog link: 56200-ZV65A
+03:48:24 chain-unlinked strut 1 numbers named by 56200-ZC01A, no catalog link: 56200-ZV65A
+03:48:24 seg done tier=C Infiniti QX56 [2004, 2010] seeds=[2008] records=1936 errors=27
+03:49:04 chain-unlinked wiper-motor 1 numbers named by 28710-3JA0A, no catalog link: 28710-3JA0C
+03:49:04 chain-unlinked wiper-motor 1 numbers named by 28710-3JA0B, no catalog link: 28710-3JA0C
+03:49:36 chain-unlinked wiper-motor 1 numbers named by 28800-3JA0A, no catalog link: 28800-3JA5D
+03:49:36 chain-unlinked wiper-motor 1 numbers named by 28800-3JA1A, no catalog link: 28800-3JA5D
+03:49:36 chain-unlinked wiper-motor 1 numbers named by 28800-3JA2A, no catalog link: 28800-3JA5D
+03:50:17 chain-unlinked knuckle 1 numbers named by 40015-3JA0A, no catalog link: 40015-3JA1B
+03:50:17 chain-unlinked knuckle 1 numbers named by 40015-3JA1A, no catalog link: 40015-3JA1B
+03:50:17 chain-unlinked knuckle 1 numbers named by 40014-3JA0A, no catalog link: 40014-3JA1B
+03:50:17 chain-unlinked knuckle 1 numbers named by 40014-3JA1A, no catalog link: 40014-3JA1B
+03:50:48 chain-unlinked strut 1 numbers named by E4303-3JA0B, no catalog link: E4303-9NF0A
+03:50:48 chain-unlinked strut 1 numbers named by E4302-3JA0B, no catalog link: E4302-9NF0B
+03:51:05 time budget reached records=1948
