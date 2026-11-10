@@ -5648,7 +5648,7 @@ function layoutMapMode() {
   const top = wrap.getBoundingClientRect().top;
   wrap.style.height = Math.max(220, Math.floor(bottomLimit - top - 8)) + 'px';   // short phones: never under the tab bar
   liftMapControls();
-  if (_yardsMap) _yardsMap.resize();
+  if (_yardsMap) mapResize();
 }
 window.addEventListener('resize', () => { if (yardsView === 'map') layoutMapMode(); });
 if (window.ResizeObserver) {
@@ -5853,6 +5853,7 @@ function layoutPins() {
     }
   }
   _pinGroups = groups;
+  if (!firstViewStillHolds() && _firstViewRedo < 4) { _firstViewRedo++; const fv = _firstView; _firstView = null; firstMapView(fv.lib, fv.el); return; }
   watchPinSizes(layer);
   layer.innerHTML = `${youOn ? `<span class="map-you${youUp ? ' up' : ''}${youOver ? ' over' : ''}${youNoLabel ? ' no-label' : ''}" style="left:${you.x}px;top:${you.y}px"><span data-you="${youLbl.h}">You</span></span>` : ''}
     ${groups.map((g, i) => `<span class="map-pin-at${g.nudged ? ' nudged' : ''}${g.below ? ' below' : ''}" data-g="${i}" style="left:${g.rect.l}px;top:${g.rect.t}px">${g.html}</span>`).join('')}`;
@@ -5917,6 +5918,23 @@ function nearestStandsAlone(key) {
   return _pinGroups.some(g => g.items.length === 1 && g.items[0].key === key);
 }
 function firstMapView(lib, el) {
+  _inFirstView = true;
+  try { firstMapViewInner(lib, el); } finally { _inFirstView = false; }
+  _firstView = _mapTouched ? null : { lib, el };
+  layoutPins();
+}
+/* While the first view stands (nobody has moved the map), a later re-layout
+ * that puts the nearest yard back in a bubble (a resize, fonts, the sheet
+ * settling) decides the first view again. */
+var _firstView = null, _inFirstView = false, _inResize = false, _firstViewRedo = 0;   // redo capped per map render
+function mapResize() { _inResize = true; try { _yardsMap.resize(); } finally { _inResize = false; } }
+function firstViewStillHolds() {
+  if (!_firstView || _inFirstView || _mapTouched || !_yardsMap || yardsView !== 'map') return true;
+  const near = firstMapSet()[0];
+  if (!near || near.dist == null || nearestStandsAlone(near.key) || _yardsMap.getZoom() >= _yardsMap.getMaxZoom() - 0.1) return true;
+  return false;
+}
+function firstMapViewInner(lib, el) {
   const w = el.clientWidth || 360, you = activeZipCoords;
   const fit = (set, maxZoom, withYou = true) => {
     const pts = set.map(s => [s.lng, s.lat]);
@@ -6004,10 +6022,14 @@ async function renderYardsMap() {
     // The first fit can run before the map has its size and controls: redo the
     // first view once it loads, unless the person has already moved the map.
     _mapTouched = false;
-    _yardsMap.on('movestart', (e) => { if (e && e.originalEvent) _mapTouched = true; });
-    _yardsMap.once('load', () => { if (_yardsMap) { _yardsMap.resize(); liftMapControls(); if (!_mapTouched && yardsView === 'map') firstMapView(lib, el); else layoutPins(); } });
-    if (window.ResizeObserver) new ResizeObserver(() => { if (_yardsMap && el.clientWidth) { _yardsMap.resize(); layoutPins(); } }).observe(el);
-    requestAnimationFrame(() => _yardsMap && _yardsMap.resize());
+    _yardsMap.on('movestart', (e) => {
+      if (e && e.originalEvent) _mapTouched = true;
+      // anything but the first view itself or a resize moving the map ends it
+      if (!_inFirstView && !_inResize) _firstView = null;
+    });
+    _yardsMap.once('load', () => { if (_yardsMap) { mapResize(); liftMapControls(); if (!_mapTouched && yardsView === 'map') firstMapView(lib, el); else layoutPins(); } });
+    if (window.ResizeObserver) new ResizeObserver(() => { if (_yardsMap && el.clientWidth) { mapResize(); layoutPins(); } }).observe(el);
+    requestAnimationFrame(() => _yardsMap && mapResize());
     let queued = false;
     _yardsMap.on('move', () => { if (queued) return; queued = true; requestAnimationFrame(() => { queued = false; followPins(); }); });
     _yardsMap.on('moveend', layoutPins);
@@ -6028,11 +6050,10 @@ async function renderYardsMap() {
 var _mapTouched = false;
 function settleFirstView(lib, el) {
   window._firstViewSettled = false;
+  _firstViewRedo = 0;
   const run = () => {
     if (!_yardsMap || _mapTouched || yardsView !== 'map') { window._firstViewSettled = true; return; }
-    liftMapControls(); layoutPins();
-    const near = firstMapSet()[0];
-    if (near && near.dist != null && !nearestStandsAlone(near.key) && _yardsMap.getZoom() < _yardsMap.getMaxZoom() - 0.1) firstMapView(lib, el);
+    liftMapControls(); layoutPins();   // re-decides the first view if it no longer holds
     window._firstViewSettled = true;
   };
   const idle = new Promise(r => { if (_yardsMap.loaded() && !_yardsMap.isMoving()) r(); else _yardsMap.once('idle', r); });
@@ -6065,7 +6086,7 @@ function setYardsView(view) {
   document.getElementById('yards-map-wrap').hidden = yardsView !== 'map';
   if (yardsView === 'map') { _mapSheetLoc = null; setSheetState('peek', { instant: true }); }
   layoutMapMode();
-  if (yardsView === 'map') { renderYardsMap(); if (_yardsMap) setTimeout(() => _yardsMap && _yardsMap.resize(), 50); }
+  if (yardsView === 'map') { renderYardsMap(); if (_yardsMap) setTimeout(() => _yardsMap && mapResize(), 50); }
   try { sessionStorage.setItem('ys_yards_view', yardsView); } catch (e) { /* private mode */ }
 }
 document.querySelector('.yards-view-switch').addEventListener('click', e => {
