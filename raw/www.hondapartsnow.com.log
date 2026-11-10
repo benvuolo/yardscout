@@ -1162,3 +1162,6 @@
 10:28:19 nav-fail Honda Accord Hybrid 2015: ValueError: trim_pick chose no trim on https://www.hondapartsnow.com/2015-honda-accord-parts.html
 10:30:11 nav-fail Honda Accord Hybrid 2017: ValueError: trim_pick chose no trim on https://www.hondapartsnow.com/2017-honda-accord-parts.html
 10:31:07 time budget reached records=1965
+10:31:18 start site=www.hondapartsnow.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=1965 list_lines=837 year_lines=217 url_index=6207
+10:31:18 completion worklist completion/honda.own_page.json: 25 rows
+10:32:07 completion finished records=1965 errors=9 open_rows=0 chains_owed=0
