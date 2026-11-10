@@ -3148,3 +3148,4 @@ each); nothing allowlisted or crawled.
   cases). `--ns all` re-curated on dca9cd845f26 (the raw ref of main's
   groups): all 8 shipped files byte-identical, so the groups diff is empty.
   Applies from crawl run 26.
+- 01:30 UTC check-in: GSP cv-axle 2,097 units → 90 groups (8 sitemaps pending); 1A strut 1,042 → 232 (the old-order run is still going; lamp lines start on the next run). Nothing finished or blocked.
