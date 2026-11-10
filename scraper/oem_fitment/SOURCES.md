@@ -465,3 +465,26 @@ evidence than any aftermarket list.
 - **Unit-level generation guard:** a unit whose rows for one make/model,
   taken together, span more than one generation is refused (M37 + Q60,
   A3 8V + 8Y).
+- **Engines, after §11.4 round 2 (2026-11-10).** This replaces the
+  multi-model no-engine rule. For each row and year, the engines kept are the
+  title's engines that cars of that make/model/year on our lots decode to
+  (VIN decode, `docs/data/vehicle_extras.json`). A year with no overlap
+  (e.g. GL "3.5", CX-9 "2.3", CT6 4.2L before 2019) or with no decoded lot
+  car is dropped. This only removes claims: every emitted engine is in GSP's
+  own title and on GSP's own row.
+- **Note:** cv-axle notes no longer say "drive". The app's
+  "drivetrain not confirmed" line (gate d) then shows on undecoded donors
+  (round-2 finding D1).
+- **After §11.4 round 3 (2 WRONG, 2026-11-10).**
+  - Root cause: yards list a Santa Fe Sport as "Santa Fe". The lot-decoded
+    2.0/2.4 was joined to GSP's "Santa Fe" row, which is the 3.3L
+    long-wheelbase car, so the row claimed a configuration that never
+    existed.
+  - Fixes:
+    - On a multi-model unit, a model-year row survives only if every
+      decoded lot car of that model-year has a title engine.
+    - Sibling-name guard: when a unit lists both "X" and "X <suffix>"
+      (Santa Fe / Santa Fe Sport / Santa Fe XL), the base name's rows are
+      refused.
+  - cv-axle notes now carry GSP's own physical check for the puller:
+    inboard/outboard spline counts and compressed length.

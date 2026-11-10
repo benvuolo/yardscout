@@ -115,8 +115,6 @@ def gsp_rows(r: dict):
     # multi-model unit it puts engines on models that never had them (§11.4
     # audit 2026-11-10: TL/CL "3.0", ML320 "5.5", FX35 "3.7"). So title engines
     # go on rows only when the unit covers one make/model; otherwise no engine.
-    if len(models) > 1:
-        engines = [""]
     rows = []
     for a in r.get("applications", []):
         rp = norm_position(a.get("position", ""))
@@ -241,6 +239,50 @@ def oneaauto_rows(r: dict):
     return refuse, pos, rows
 
 
+# ------------------------------------------------- lot-observed engines (GSP) ---
+LOT_FILES = ("docs/data/inventory_live.json", "docs/data/vehicle_extras.json")
+
+
+def lot_snapshot(ref: str | None = None) -> tuple[dict, dict]:
+    """The two lot files, from git `ref` (a commit) or the working tree.
+    -> ({path: text}, {"ref", "sha256": {path: hex}}). Hub 2026-11-10: the
+    release build reads one pinned snapshot; a newer inventory changes output
+    only through a fresh build plus a fresh §11.4 sample."""
+    texts, shas = {}, {}
+    for f in LOT_FILES:
+        if ref:
+            res = subprocess.run(["git", "show", f"{ref}:{f}"], cwd=GA.REPO, capture_output=True, text=True)
+            t = res.stdout if res.returncode == 0 else ""
+        else:
+            pth = GA.REPO / f
+            t = pth.read_text() if pth.exists() else ""
+        texts[f] = t
+        shas[f] = hashlib.sha256(t.encode()).hexdigest()
+    full = subprocess.run(["git", "rev-parse", ref], cwd=GA.REPO, capture_output=True, text=True).stdout.strip() if ref else ""
+    return texts, {"ref": full or "working-tree", "sha256": shas}
+
+
+def load_observed(texts: dict | None = None) -> dict:
+    """(make, squash(model), year) -> {liters} from the cars on our lots: the
+    VIN decode's engine in vehicle_extras.json (field 'engine')."""
+    if texts is None:
+        texts, _ = lot_snapshot()
+    try:
+        inv = json.loads(texts[LOT_FILES[0]])
+        ex = json.loads(texts[LOT_FILES[1]])
+    except (KeyError, ValueError):
+        return {}
+    F = {k: i for i, k in enumerate(inv["fields"])}
+    ei = ex["extraFields"].index("engine")
+    out = defaultdict(set)
+    for v in inv["vehicles"]:
+        e = ex["extras"].get(str(v[F["id"]]))
+        lit = GA.parse_engine(e[ei])[0] if e and len(e) > ei else None
+        if lit and v[F["year"]]:
+            out[(v[F["make"]] or "", GA.squash(v[F["model"]]), int(v[F["year"]]))].add(round(lit, 1))
+    return dict(out)
+
+
 # ------------------------------------------------------ donor drive gate (d) ---
 # Hub 2026-11-10, rule (d). Basis (physical, not fitment): a CV axle exists
 # only at a DRIVEN corner. The gate reads the DONOR's own VIN decode
@@ -322,6 +364,19 @@ def crosses_facelift(fl: dict, models: list, lo: int, hi: int) -> bool:
     return False
 
 
+SPEC_KEYS = (("Inboard Spline Quantity", "inboard splines {}"), ("Outboard Spline Quantity", "outboard splines {}"),
+             ("Compressed Length (MM)", "compressed length {} mm"))
+
+
+def spec_check(cat: str, specs: dict) -> str:
+    """cv-axle: GSP's own physical specs as a check the puller can make on the
+    donor's axle (§11.4 round 3: cross-platform merges, 2WD/4WD shafts)."""
+    if cat != "cv-axle":
+        return ""
+    bits = [fmt.format(specs[k]) for k, fmt in SPEC_KEYS if re.fullmatch(r"\d{1,4}(?:\.\d)?", str(specs.get(k, "")))]
+    return (" Before pulling, check the donor's axle matches: " + ", ".join(bits) + ".") if bits else ""
+
+
 def split(units: dict) -> bool:
     """Units of one brand+kind+body claiming one corner-year. Not a split when
     there is one unit, or when every unit states a non-empty option set and
@@ -334,14 +389,17 @@ def split(units: dict) -> bool:
 
 # ------------------------------------------------------------------ build ---
 def build(records: list, names: GA.Names, site: str, src: str = "", complete: dict | None = None,
-          gens: dict | None = None, facelifts: dict | None = None) -> dict:
+          gens: dict | None = None, facelifts: dict | None = None, observed: dict | None = None,
+          lot_meta: dict | None = None) -> dict:
     gens = load_generations() if gens is None else gens
+    obs = (load_observed() if observed is None else observed) if site == "gspnorthamerica.com" else None
     fl = load_facelifts() if facelifts is None else facelifts
     meta = SITES[site]
     rowfn = gsp_rows if meta["short"] == "gsp" else oneaauto_rows
     refused_units, refused_rows, unmapped = Counter(), Counter(), Counter()
     claims = defaultdict(dict)           # (cat, brand, mk, md, year, pos) -> {unit: options}
     unit_meta = {}                       # (cat, unit) -> (options, cosmetic)
+    unit_specs = {}                      # (cat, unit) -> GSP specifications (facts)
     accepted = defaultdict(list)         # (cat, unit, pos) -> [(mk, md, year, eng)]
     retrieved, seen = {}, set()
     # models the source ever qualifies by a suspension option (any unit, any year)
@@ -379,11 +437,20 @@ def build(records: list, names: GA.Names, site: str, src: str = "", complete: di
                     refuse = "unit_spans_generations"
                     refused_units[f"{cat}:unit_spans_generations"] += 1
                     break
+        unit_models = {(a["make"], a["model"]) for a, *_r in rows}
+        # sibling-name guard (§11.4 round 3, 2026-11-10): a unit listing "Santa Fe"
+        # AND "Santa Fe Sport"/"Santa Fe XL" names different cars, which yard feeds
+        # lump under the base name; the base name's rows are refused
+        sibling_base = {(mk0, md0) for mk0, md0 in unit_models
+                        if any(mk1 == mk0 and md1 != md0 and md1.lower().startswith(md0.lower() + " ")
+                               for mk1, md1 in unit_models)}
         qualified_models = {(a["make"], a["model"]) for a, _rp, _e, why, mt in rows
                             if why or mt.get("options") or mt.get("body")}
         for a, rp, engines, why, mt in rows:
             # a unqualified row of a make/model this unit also lists WITH a
             # qualifier is coarse data: refuse it (shakeout 2026-11-09)
+            if not why and (a["make"], a["model"]) in sibling_base:
+                why = "sibling_model_name"
             if not why and not mt.get("options") and (a["make"], a["model"]) in qualified_models:
                 why = "sibling_row_qualified"
             if not why and cat == "strut" and (a["make"], a["model"]) in susp_models:
@@ -412,10 +479,29 @@ def build(records: list, names: GA.Names, site: str, src: str = "", complete: di
             if refuse:
                 continue
             for y in range(a["years"][0], a["years"][1] + 1):
-                for e in engines:
+                labels = engines
+                if obs is not None:
+                    # §11.4 round 2: GSP's title list is unit-wide and can miss or
+                    # contradict a listed model's engines. Per model-year, keep
+                    # only the title engines that cars of that model-year on the
+                    # lots actually have; none (or no decoded car) -> drop the year.
+                    seen_l = obs.get((mk, GA.squash(md), y), set()) | obs.get((a["make"], GA.squash(a["model"]), y), set())
+                    title_l = {round(float(e[:-1]), 1) for e in engines if e}
+                    labels = [e for e in engines if e and round(float(e[:-1]), 1) in seen_l]
+                    if not labels:
+                        refused_rows["no_lot_car_with_title_engine" if seen_l else "no_decoded_lot_car"] += 1
+                        continue
+                    # multi-model unit: the title list is unit-wide, so EVERY decoded
+                    # lot car of that model-year must have a title engine (round 3:
+                    # "Santa Fe" 2017 lot cars include the 3.3L LWB car -> drop)
+                    if len(unit_models) > 1 and not seen_l <= title_l:
+                        refused_rows["lot_engine_outside_unit_title"] += 1
+                        continue
+                for e in labels:
                     accepted[(cat, unit, cpos)].append((mk, md, y, e, brand))
             retrieved[(cat, unit)] = r.get("retrieved", "")
             unit_meta[(cat, unit)] = (mt.get("options", ()), mt.get("cosmetic", False))
+            unit_specs[(cat, unit)] = r.get("specs", {})
     conflicts = Counter()
     groups = []
     for (cat, unit, pos), rows in sorted(accepted.items()):
@@ -437,7 +523,12 @@ def build(records: list, names: GA.Names, site: str, src: str = "", complete: di
                 f"vehicles in {meta['label']}'s own application list; aftermarket data, not the carmaker's "
                 f"catalog. No other unit of the same brand is listed for the same {where or ''}position on these "
                 f"cars. " + ("Match the engine. " if eng else "No engine is stated; check the engine. ")
-                + "Drive, transmission, trim and suspension (sport / electronic) are not stated; match them."
+                + ("Transmission, trim and suspension (sport / electronic) are not stated; match them."
+                   if cat == "cv-axle" and pos else
+                   "Drive, transmission, trim and suspension (sport / electronic) are not stated; match them.")
+                + (" Engines shown are the title's engines that cars of that model and year on the lots have."
+                   if obs is not None else "")
+                + spec_check(cat, unit_specs.get((cat, unit), {}))
                 + (f" If equipped: {', '.join(opts)}." if opts else "")
                 + (" Color or finish may differ; it may need paint." if cosm else ""))
         ocat = CAT_OUT.get(cat, cat)
@@ -449,7 +540,7 @@ def build(records: list, names: GA.Names, site: str, src: str = "", complete: di
                        "cosmetic": bool(cosm), "note": note,
                        **({"driven_axle": pos.split(" ")[0]} if cat == "cv-axle" and pos else {})})
     doc = {"schema": SCHEMA, "src": "aftermarket", "site": site, "raw": src, "tier": "likely",
-           "crawl_complete": complete or {}, "groups": groups,
+           "crawl_complete": complete or {}, "lot_snapshot": lot_meta or {}, "groups": groups,
            "summary": {"unit_records": len(seen), "groups": len(groups),
                        "cross_model_groups": sum(g["cross_model"] for g in groups),
                        "apps": sum(len(g["apps"]) for g in groups),
@@ -508,15 +599,17 @@ def main(argv=None) -> int:
     ap.add_argument("--raw-ref")
     ap.add_argument("--out")
     ap.add_argument("--report")
+    ap.add_argument("--lot-ref", help="git commit to read the lot files from (release builds pin this)")
     a = ap.parse_args(argv)
     recs, src, complete = load(a.site, a.raw, a.raw_ref)
+    texts, lot_meta = lot_snapshot(a.lot_ref)
     lot = None
-    inv_p = GA.REPO / "docs" / "data" / "inventory_live.json"
-    if inv_p.exists():
-        inv = json.loads(inv_p.read_text())
+    if texts[LOT_FILES[0]]:
+        inv = json.loads(texts[LOT_FILES[0]])
         F = {k: i for i, k in enumerate(inv["fields"])}
         lot = {(v[F["make"]] or "", v[F["model"]] or "") for v in inv["vehicles"]}
-    doc = build(recs, GA.Names(lot), a.site, src, complete)
+    obs = load_observed(texts) if a.site == "gspnorthamerica.com" else None
+    doc = build(recs, GA.Names(lot), a.site, src, complete, observed=obs, lot_meta=lot_meta)
     f = SITES[a.site]["file"]
     out = Path(a.out or HERE / "curated" / f"{f}.json")
     out.parent.mkdir(parents=True, exist_ok=True)
