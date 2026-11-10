@@ -323,6 +323,18 @@ const likelySearch = async (page) => {
       .catch(() => { throw new Error('part finder: no "Likely fits" OEM row rendered (fixture not picked up)'); });
     await page.evaluate(() => { const r = document.querySelector('.pf-row-card.pf-likely'); if (r) r.scrollIntoView({ block: 'center' }); });
 };
+// Aftermarket donor cards (hub 2026-11-10): only the checks to make at the
+// car sit on the card, the listing's provenance is behind "Why it fits"; no
+// such card shows more than 8 lines of warnings at 390px (100% text; 7 today).
+const amLinesCheck = async (page) => {
+  const am = await page.evaluate(() => [...document.querySelectorAll('#pf-results .pf-row-card')].filter(c => c.querySelector('.pf-src-more-text')).map(c => {
+    const w = c.querySelector('.pf-warn'); if (!w) return 0;
+    return Math.round(w.getBoundingClientRect().height / parseFloat(getComputedStyle(w).lineHeight));
+  }));
+  if (process.env.AM_LINES) console.log('AM_LINES', page.viewportSize().width, JSON.stringify(am));
+  if (am.length && page.viewportSize().width === 390 && Math.max(...am) > 8) throw new Error(`an aftermarket card shows ${Math.max(...am)} warning lines at 390px (max 8)`);
+  return am.length;
+};
 const SCREENS = [
   ['results', async (page) => { await tab(page, 'live'); }],
   // Mobile-web store banner (shown on phones only; forced here for each store).
@@ -777,6 +789,7 @@ const SCREENS = [
     const head = await page.evaluate(() => { const h = document.querySelector('#pf-results .pf-results-head'); if (!h) return null; const st = h.querySelector('strong'); return { strong: st ? st.textContent : '', rest: st ? h.textContent.slice(h.textContent.indexOf(st.textContent) + st.textContent.length).trim() : h.textContent }; });
     if (head && /^[\u2014\u2013-]|^[a-z]/.test(head.rest)) throw new Error(`results heading line 2 starts "${head.rest.slice(0, 30)}"`);
     if (process.env.PF_HEADS && head) console.log('PF_HEAD', name, JSON.stringify(head));
+    await amLinesCheck(page);
 
   }]),
   ['pf-fit-pro', async (page) => {
@@ -798,6 +811,39 @@ const SCREENS = [
     await page.evaluate(() => { pfCat = interchangeData.categories.find(c => c.id === 'side-mirrors'); pfPartInput.value = pfCat.label; pfRunSearch(); });
     await settle(page, 600);
   }],
+  // Aftermarket donor cards (hub 2026-11-10): GSP CV axle for a 2021 GMC
+  // Terrain. Only the checks to make at the car sit on the card; the listing's
+  // provenance is behind "Why it fits". No card shows more than 7 lines of
+  // warnings at 390px (100% text).
+  ['pf-am-cv', async (page) => {
+    await tab(page, 'parts');
+    await page.evaluate(() => { const r = document.getElementById('pf-radius'); r.value = '250'; r.dispatchEvent(new Event('change', { bubbles: true })); });
+    // The real GSP CV axle groups (the fixture interchange has no lazy
+    // layer): pick a seeker whose unit is listed for a car on a nearby lot.
+    const groups = JSON.parse(fs.readFileSync(path.join(DOCS, 'data/oem/cv-axle.json'), 'utf8')).amGroups;
+    const seeker = await page.evaluate((groups) => {
+      pfOemLazyData['cv-axle'] = { oemGroups: [], amGroups: groups };
+      for (const v of liveInventory) {
+        const d = vehicleDistanceMi(v); if (d == null || d > 250) continue;
+        const mk = canonicalMake(v.make);
+        const g = groups.find(g => g.apps.some(a => pfAppMatches(a, v.year, mk, v.model)));
+        if (g) { const a = g.apps.find(a => pfAppMatches(a, v.year, mk, v.model)); return [String(v.year), a[0], a[1]]; }
+      }
+      return null;
+    }, groups);
+    if (!seeker) throw new Error('no car near the test zip is listed for any GSP CV axle');
+    const [y, mk, md] = seeker;
+    await page.selectOption('#pf-year', y);
+    await page.selectOption('#pf-make', mk);
+    await page.waitForFunction((md) => [...document.getElementById('pf-model').options].some(o => o.value === md), md, { timeout: 8000 });
+    await page.selectOption('#pf-model', md);
+    await page.evaluate(() => { pfCat = interchangeData.categories.find(c => c.id === 'cv-axle'); pfPartInput.value = pfCat.label; pfRunSearch(); });
+    await page.waitForFunction(() => document.querySelector('#pf-results .pf-row-card, #pf-results .pf-empty'), null, { timeout: 20000 });
+    await settle(page, 600);
+    if (process.env.AM_LINES) console.log('AM_CAR', seeker.join(' '));
+    if (!(await amLinesCheck(page))) throw new Error(`no aftermarket donor card for a ${seeker.join(' ')} CV axle`);
+    await page.evaluate(() => { const c = document.querySelector('#pf-results .pf-row-card .pf-src-more-text'); if (c) { c.closest('.pf-row-card').scrollIntoView({ block: 'start' }); window.scrollBy(0, -80); } });
+  }, async (page) => { await page.evaluate(() => { delete pfOemLazyData['cv-axle']; const r = document.getElementById('pf-radius'); r.value = '100'; r.dispatchEvent(new Event('change', { bubbles: true })); }); }],
   ['pf-likely-pro', async (page) => {
     await page.evaluate(() => { localStorage.setItem('jh_pro', '1'); applyProGates(); });
     await likelySearch(page);
