@@ -792,3 +792,12 @@
 14:08:18 chain-unlinked gauge-cluster 1 numbers named by 8T0-920-981-N, no catalog link: 8T0-920-981-NX
 14:08:18 chain-unlinked gauge-cluster 1 numbers named by 8T0-920-981-T, no catalog link: 8T0-920-981-TX
 14:11:14 time budget reached records=1594
+14:11:37 start site=www.audipartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=1594 list_lines=1811 year_lines=218 url_index=9228
+14:11:37 completion worklist completion/vag.own_page.json: 366 rows
+14:14:50 nav-fail Audi A3 Quattro 2006: NavError: HTTP 404 for https://www.audipartsgiant.com/2006-audi-a3-quattro-parts
+14:16:58 nav-fail Audi A3 Quattro 2007: NavError: HTTP 404 for https://www.audipartsgiant.com/2007-audi-a3-quattro-parts
+14:18:34 nav-fail Audi Q3 Quattro 2017: NavError: HTTP 404 for https://www.audipartsgiant.com/2017-audi-q3-quattro-parts
+14:19:46 chain-unlinked gauge-cluster 1 numbers named by 8W5-920-890-G, no catalog link: 8W5-920-890-D
+14:25:28 chain-unlinked gauge-cluster 1 numbers named by 80A-920-870-C, no catalog link: 8W5-920-870-F
+14:26:39 nav-fail Audi A3 Quattro 2008: NavError: HTTP 404 for https://www.audipartsgiant.com/2008-audi-a3-quattro-parts
+14:41:44 time budget reached records=1596
