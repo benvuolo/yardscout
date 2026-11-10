@@ -2727,6 +2727,47 @@ Other outputs of this session:
     write rules from raw/<site>.lists.jsonl, set tierD 2, raise the version, then ci_audit.
 - Tier C priority: wiper-motor curation and §11.4 next, once honda/toyota/nissan have C data.
   Knuckle and strut audits are last.
+- **Wiper-motor curation (session_016ZzJfKQPmCKfP14gyJpp6a, 2026-11-10 ~13:30 UTC).** Rules are on main;
+  the category is HELD. It has no app kind, so kind_not_phase1 applies, and no audits.json record.
+  - Data on oem-raw@796a77b (distinct wiper pns):
+    ford 92, toyota 89, jeep 81, nissan 61 (partial), infiniti 51, honda 46, hyundai 43, mazda 43, kia 42,
+    volvo 27, vw 23, lexus 22, acura 19, audi 11, mitsubishi 10, mb 9 (partial). bmw 0, gm 0.
+  - Rules (hub-approved plan + hub additions 12:46/13:05):
+    - CATEGORY_POLICY slots F/FL/FR/R; required [F] | [F,R] | [FL,FR] | [FL,FR,R] (exact set).
+      A lone sided motor closes nothing: Honda/Ford print "Front Driver Side" on single motors.
+    - positions end axis: name/position/location/notes; a rear word wins over "windshield"
+      (Honda "RR. Windshield Wiper"). The list-slug fallback is REAR ONLY. Basis, oem-raw@796a77b:
+      Ford windshield_front_wiper / windshield_wiper_motor_washer and Hyundai windshield_wiper list rear
+      motors, while no rear page lists a front motor.
+    - packaging, one per slot: motor | drive (Nissan "Drive Assy", Ford "Motor And Linkage") | kit (Jeep) |
+      motor-ecb (GM) | motor-ctl (Ford "Smart" motor, from the row note). linkage = out of category;
+      module = blocked.
+    - NOUN wiper. No SIBLING_IGNORE entries yet; unread_sibling_page is the top open reason on several sites.
+    - Likely groups (policy.STRICT_NOTE_CATS, curate._strict_refusal), refused when:
+      - any own-page note class is not POSITION;
+      - the class is not in exactly one clean slot;
+      - it is a twin half without both halves on every app's page;
+      - the name carries an option word (WIPER_OPTION_RE);
+      - rear-motor body gate: any app model-year decodes to sedan/coupe/convertible/pickup, or the model
+        has no decoded body (vPIC via curate --decodes docs/data/vin_decodes.json.gz; missing file refuses
+        every rear group).
+      OEM apps have no body-gate field yet, so this fails closed. A per-app gate and if_equipped come with
+      the app category proposal.
+    - Note words name the end and packaging ("rear wiper motor with linkage").
+    - Tests: curation_tests/test_wiper_motor.py (72).
+  - Hashed push, hub GO 13:11:
+    - re-curated --ns all on dca9cd845f26 with --inventory = inventory_live.json@a85c654;
+    - groups diff vs main = policy_sha256 + wiper cells only (hmg 4, vag 9 open reasons), 0 non-wiper changes;
+    - payload rebuilt: builtAt only, oemStatus ok x8;
+    - curation_tests: all pass except test_model_map (live J-10 row, hub exception); tests 42/42;
+      scraper tests 27/27; pf_guards ALL PASS.
+  - Scratch build with kind "body" patched on oem-raw@796a77b: 26 Likely groups (F 17, R 9;
+    mopar 14, nissan 5, hmg 4, toyota 3).
+    - §11.4 running: seed 811023, 27 groups + 30 pairs, independent verifier, outside sources required.
+      The 27th group (Audi A4 rear 4F9-955-711-E) is now refused by the body gate.
+  - Release path (hub 13:05): wiper groups ride make breadth's per-namespace advances to newer pinned refs,
+    sampled with them; make breadth told 13:2x. After the §11.4 passes: propose the app category (kind,
+    label, priceTokens, notes, rowWarn, per-app body gate) to the hub as a separate app change.
 
 ## Aftermarket breadth (session_016ZzJfMnemMEFN88kPnYgxs, 2026-11-09)
 
