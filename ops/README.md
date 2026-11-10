@@ -52,3 +52,5 @@ the SAME push as re-curated groups/<ns>.json for every shipped namespace,
 with an identical-or-explained diff. Otherwise the next scan's V8 check drops
 every OEM namespace from users. A test enforces it.
 
+
+| Interchange: wiper-motor curation (tier C) | session_016ZzJfKQPmCKfP14gyJpp6a | started 2026-11-10 12:40 from category-breadth handover (§10); pushes only on hub go (Lexus chassis gate may be in flight) |
