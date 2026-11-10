@@ -466,7 +466,9 @@ const SCREENS = [
       // ("Photo on car page"), the second as a heavy source ("Photo at yard · tap to
       // load"); neither image shows on a card. Colours are the cars' own.
       window.__fxBody = [];
-      cards.forEach((c, k) => { const e = own(c); if (k === 0) e[0] = 'https://www.kikersupullit.com/inventory-feed/photos/stock-12345.jpg'; if (k === 1) e[0] = 'tSTK12345'; e[5] = k < n - 1 ? bodyOf(vOf(c).model) : ''; window.__fxBody.push(e[5] || 'car'); vehicleExtras[c.dataset.eid] = e; });
+      // the cards after those two have no photo at all (a picked car can hold a
+      // car-screen-only photo, which correctly badges "Photo on car page")
+      cards.forEach((c, k) => { const e = own(c); if (k === 0) e[0] = 'https://www.kikersupullit.com/inventory-feed/photos/stock-12345.jpg'; else if (k === 1) e[0] = 'tSTK12345'; else e[0] = ''; e[5] = k < n - 1 ? bodyOf(vOf(c).model) : ''; window.__fxBody.push(e[5] || 'car'); vehicleExtras[c.dataset.eid] = e; });
       window.__mixFirst = all[i].dataset.eid;
       renderLive();
       const grid = [...document.querySelectorAll('#live-grid .car-card[data-eid]')];
@@ -741,7 +743,11 @@ const SCREENS = [
       const card = document.querySelector('#live-grid .car-card[data-vkey]');
       const v = liveInventory.find(x => vehicleKey(x) === card.dataset.vkey);
       window.__llOrig = [v, v.dateAdded];
-      const d = new Date(Date.now() - 200 * 86400000);
+      // Deterministic (2026-11-10): back far enough to qualify whatever this
+      // yard's typical stay is today (> 2x typical, or >= 120 days with none);
+      // a fixed 200 days stopped qualifying once a yard's typical reached 101.
+      const ls = lifespanFor(v), back = ls && ls.avg ? 3 * ls.avg + 30 : LONG_LISTED_DAYS + 30;
+      const d = new Date(Date.now() - back * 86400000);
       v.dateAdded = d.toISOString().slice(0, 10);
       renderLive();
       const c2 = document.querySelector(`#live-grid .car-card[data-vkey="${CSS.escape(vehicleKey(v))}"]`);
