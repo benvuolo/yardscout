@@ -1377,3 +1377,10 @@
 03:56:56 chain-unlinked trunk-lid 1 numbers named by 69200A7060, no catalog link: 69200B0020
 04:06:48 chain-unlinked hood 1 numbers named by 66400A7600, no catalog link: 66400B0000
 04:23:12 time budget reached records=3680
+04:23:28 start site=www.kiapartsnow.com mode=complete tiers=['A', 'B', 'W', 'C'] records=3680 list_lines=621 year_lines=162 url_index=4753
+04:23:28 completion worklist completion/hmg.own_page.json: 65 rows
+04:35:13 chain-unlinked fender 1 numbers named by 66311D4000, no catalog link: 66311D4000A
+04:35:13 chain-unlinked fender 1 numbers named by 66321D4000, no catalog link: 66321D4000A
+04:43:05 chain-unlinked door-front 4 numbers named by 0K2AA58020E, no catalog link: 0K2AA58020A, 0K2AA58020B, 0K2AA58020, 0K2AA58020C
+04:43:05 chain-unlinked door-front 4 numbers named by 0K2AA59020E, no catalog link: 0K2AA59020C, 0K2AA59020A, 0K2AA59020, 0K2AA59020B
+04:53:45 time budget reached records=3693
