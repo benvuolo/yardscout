@@ -3425,3 +3425,15 @@ each); nothing allowlisted or crawled.
     Lexus groups credit the wrong engine (e.g. RX 350 2007 from 3.3L-only
     rows). Proposed a chassis-code gate to the hub; measure and sample
     first.
+- **2026-11-10 ~13:20 UTC: Lexus chassis-code gate + group hold shipped
+  (ac4c387, payload rebuilt in the same push).** lexuspartsnow chassis codes
+  (GRS19#, MCU3#, GSE20/21 ...) restrict a row to that chassis, applied per
+  row with comma expansion.
+  - The 2-verifier sample (40 groups) rejected two other variants: pooling
+    codes class-wide dropped 39 years that fit; a union variant dropped 13.
+  - Final rule on the sample: 0 years that fit dropped, 7 misfits removed,
+    1 residual. The residual, 81070-30B52, is held via the new
+    `policy.GROUP_HOLDS` with its cited basis.
+  - toyota 557 -> 533; nothing added.
+  - Other catalogs (toyotapartsnow, honda, acura, ford, gm) print no chassis
+    codes like this; the gate stays Lexus-only.
