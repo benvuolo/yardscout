@@ -13215,3 +13215,12 @@
 13:38:33 chain-unlinked side-mirrors 1 numbers named by 5L7Z-17682-EAA, no catalog link: 6L7Z-17682-BA
 13:38:33 chain-unlinked side-mirrors 1 numbers named by 5L7Z-17683-CAA, no catalog link: 6L7Z-17683-AA
 13:47:54 time budget reached records=9472
+13:48:23 start site=www.fordpartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=9472 list_lines=5871 year_lines=1078 url_index=34266
+13:48:23 completion worklist completion/ford.own_page.json: 695 rows
+13:53:20 chain-unlinked side-mirrors 1 numbers named by 2C2Z-17682-BAB, no catalog link: 2C2Z-17682-BAA
+13:53:20 chain-unlinked side-mirrors 1 numbers named by F4UZ-17682-A, no catalog link: F2UZ-17682-B
+13:53:20 chain-unlinked side-mirrors 1 numbers named by F4UZ-17683-A, no catalog link: F2UZ-17683-B
+13:53:20 chain-unlinked side-mirrors 1 numbers named by F4UZ-17682-B, no catalog link: F2UZ-17682-A
+13:53:20 chain-unlinked side-mirrors 1 numbers named by F4UZ-17682-C, no catalog link: F2UZ-17682-C
+13:53:20 chain-unlinked side-mirrors 1 numbers named by F4UZ-17683-B, no catalog link: F2UZ-17683-A
+14:18:56 time budget reached records=9486
