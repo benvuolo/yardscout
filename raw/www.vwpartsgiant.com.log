@@ -1508,3 +1508,8 @@
 08:19:02 chain-unlinked climate-control 4 numbers named by 1K8-907-044-CE-ZJU, no catalog link: 1K8-907-044-A-ZJU, 1K8-907-044-AK-ZJU, 1K8-907-044-AC-ZJU, 1K8-907-044-BF-ZJU
 08:19:02 chain-unlinked climate-control 2 numbers named by 1K8-907-044-CM-ZJU, no catalog link: 1K8-907-044-BR-ZJU, 1K8-907-044-R-ZJU
 08:19:02 time budget reached records=1746
+08:19:13 start site=www.vwpartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C'] records=1746 list_lines=1527 year_lines=252 url_index=11158
+08:19:13 completion worklist completion/vag.own_page.json: 171 rows
+08:21:06 chain-unlinked climate-control 6 numbers named by 5G0-907-426-BJ-WZU, no catalog link: 5G0-907-426-R-WZU, 5G0-907-426-BA-WZU, 5G0-907-426-N-WZU, 5G0-907-426-AA-WZU, 5G0-907-426-AD-WZU, 5G0-907-426-AN-WZU
+08:22:58 nav-fail Volkswagen Golf Alltrack 2017: NavError: HTTP 404 for https://www.vwpartsgiant.com/2017-volkswagen-golf-alltrack-parts
+08:49:14 time budget reached records=1771
