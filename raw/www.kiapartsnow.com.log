@@ -1387,3 +1387,159 @@
 04:54:02 start site=www.kiapartsnow.com mode=complete tiers=['A', 'B', 'W', 'C'] records=3693 list_lines=801 year_lines=206 url_index=4917
 04:54:02 completion worklist completion/hmg.own_page.json: 65 rows
 04:59:30 completion finished records=3693 errors=7 open_rows=0 chains_owed=0
+14:20:10 start site=www.kiapartsnow.com mode=worklist tiers=['A', 'B', 'W', 'C', 'D'] records=3693 list_lines=835 year_lines=215 url_index=4919
+14:20:10 seg done tier=A Kia Soul [2010, 2013] seeds=[2013] records=3693 errors=7
+14:20:10 seg done tier=A Kia Optima [2011, 2013] seeds=[2013] records=3693 errors=7
+14:20:10 seg done tier=A Kia Soul [2014, 2019] seeds=[2014] records=3693 errors=7
+14:20:10 seg done tier=A Kia Rio [2001, 2023] seeds=[2013] records=3693 errors=7
+14:20:10 seg done tier=A Kia Sorento [2011, 2015] seeds=[2011] records=3693 errors=7
+14:20:10 seg done tier=A Kia Optima [2014, 2015] seeds=[2015] records=3693 errors=7
+14:20:10 seg done tier=A Kia Forte [2014, 2018] seeds=[2014] records=3693 errors=7
+14:20:10 seg done tier=A Kia Forte [2010, 2013] seeds=[2010] records=3693 errors=7
+14:20:10 seg done tier=A Kia Sedona [2006, 2014] seeds=[2006] records=3693 errors=7
+14:20:10 seg done tier=A Kia Sportage [1995, 2008] seeds=[2007] records=3693 errors=7
+14:20:10 seg done tier=A Kia Spectra [2007, 2009] seeds=[2009] records=3693 errors=7
+14:20:10 seg done tier=A Kia Optima [2016, 2018] seeds=[2016] records=3693 errors=7
+14:20:10 seg done tier=A Kia Sorento [2003, 2006] seeds=[2006] records=3693 errors=7
+14:20:10 seg done tier=A Kia Sorento [2007, 2009] seeds=[2008] records=3693 errors=7
+14:20:10 seg done tier=A Kia Sorento [2016, 2020] seeds=[2016] records=3693 errors=7
+14:20:10 seg done tier=A Kia Rondo [2007, 2015] seeds=[2007] records=3693 errors=7
+14:20:10 seg done tier=A Kia Sedona [2015, 2021] seeds=[2016] records=3693 errors=7
+14:20:10 seg done tier=A Kia Optima [2007, 2008] seeds=[2008] records=3693 errors=7
+14:20:10 seg done tier=A Kia Spectra [2005, 2006] seeds=[2006] records=3693 errors=7
+14:20:10 seg done tier=A Kia Optima [2009, 2010] seeds=[2009] records=3693 errors=7
+14:20:10 seg done tier=A Kia Sedona [2002, 2005] seeds=[2005] records=3693 errors=7
+14:20:10 seg done tier=A Kia Sportage [2011, 2013] seeds=[2011] records=3693 errors=7
+14:20:10 seg done tier=A Kia Spectra [2001, 2004] seeds=[2004] records=3693 errors=7
+14:20:10 seg done tier=A Kia Sportage [2014, 2016] seeds=[2015] records=3693 errors=7
+14:20:10 seg done tier=A Kia Sportage [2009, 2010] seeds=[2009] records=3693 errors=7
+14:20:10 seg done tier=A Kia Forte Koup [2010, 2016] seeds=[2010] records=3693 errors=7
+14:20:10 seg done tier=A Kia Cadenza [2014, 2019] seeds=[2014] records=3693 errors=7
+14:20:10 seg done tier=A Kia Optima [2005, 2006] seeds=[2006] records=3693 errors=7
+14:20:10 seg done tier=A Kia Rio5 [2002, 2016] seeds=[2013] records=3693 errors=7
+14:20:10 seg done tier=A Kia Forte [2019, 2024] seeds=[2019] records=3693 errors=7
+14:20:10 seg done tier=A Kia Amanti [2004, 2009] seeds=[2004] records=3693 errors=7
+14:20:10 seg done tier=A Kia Optima [2019, 2020] seeds=[2019] records=3693 errors=7
+14:20:10 seg done tier=A Kia Borrego [2009, 2010] seeds=[2009] records=3693 errors=7
+14:20:10 seg done tier=A Kia Forte5 [2011, 2018] seeds=[2016] records=3693 errors=7
+14:20:10 seg done tier=A Kia Sportage [2017, 2019] seeds=[2017] records=3693 errors=7
+14:20:10 seg done tier=B Kia Soul [2010, 2013] seeds=[2013] records=3693 errors=7
+14:20:10 seg done tier=B Kia Optima [2011, 2013] seeds=[2013] records=3693 errors=7
+14:20:10 seg done tier=B Kia Soul [2014, 2019] seeds=[2014] records=3693 errors=7
+14:20:10 seg done tier=B Kia Rio [2001, 2023] seeds=[2013] records=3693 errors=7
+14:20:10 seg done tier=B Kia Sorento [2011, 2015] seeds=[2011] records=3693 errors=7
+14:20:10 seg done tier=B Kia Optima [2014, 2015] seeds=[2015] records=3693 errors=7
+14:20:10 seg done tier=B Kia Forte [2014, 2018] seeds=[2014] records=3693 errors=7
+14:20:10 seg done tier=B Kia Forte [2010, 2013] seeds=[2010] records=3693 errors=7
+14:20:10 seg done tier=B Kia Sedona [2006, 2014] seeds=[2006] records=3693 errors=7
+14:20:10 seg done tier=B Kia Sportage [1995, 2008] seeds=[2007] records=3693 errors=7
+14:20:10 seg done tier=B Kia Spectra [2007, 2009] seeds=[2009] records=3693 errors=7
+14:20:10 seg done tier=B Kia Optima [2016, 2018] seeds=[2016] records=3693 errors=7
+14:20:10 seg done tier=B Kia Sorento [2003, 2006] seeds=[2006] records=3693 errors=7
+14:20:10 seg done tier=B Kia Sorento [2007, 2009] seeds=[2008] records=3693 errors=7
+14:20:10 seg done tier=B Kia Sorento [2016, 2020] seeds=[2016] records=3693 errors=7
+14:20:10 seg done tier=B Kia Rondo [2007, 2015] seeds=[2007] records=3693 errors=7
+14:20:10 seg done tier=B Kia Sedona [2015, 2021] seeds=[2016] records=3693 errors=7
+14:20:10 seg done tier=B Kia Optima [2007, 2008] seeds=[2008] records=3693 errors=7
+14:20:10 seg done tier=B Kia Spectra [2005, 2006] seeds=[2006] records=3693 errors=7
+14:20:10 seg done tier=B Kia Optima [2009, 2010] seeds=[2009] records=3693 errors=7
+14:20:10 seg done tier=B Kia Sedona [2002, 2005] seeds=[2005] records=3693 errors=7
+14:20:10 seg done tier=B Kia Sportage [2011, 2013] seeds=[2011] records=3693 errors=7
+14:20:10 seg done tier=B Kia Spectra [2001, 2004] seeds=[2004] records=3693 errors=7
+14:20:10 seg done tier=B Kia Sportage [2014, 2016] seeds=[2015] records=3693 errors=7
+14:20:10 seg done tier=B Kia Sportage [2009, 2010] seeds=[2009] records=3693 errors=7
+14:20:10 seg done tier=B Kia Forte Koup [2010, 2016] seeds=[2010] records=3693 errors=7
+14:20:10 seg done tier=B Kia Cadenza [2014, 2019] seeds=[2014] records=3693 errors=7
+14:20:10 seg done tier=B Kia Optima [2005, 2006] seeds=[2006] records=3693 errors=7
+14:20:10 seg done tier=B Kia Rio5 [2002, 2016] seeds=[2013] records=3693 errors=7
+14:20:10 seg done tier=B Kia Forte [2019, 2024] seeds=[2019] records=3693 errors=7
+14:20:10 seg done tier=B Kia Amanti [2004, 2009] seeds=[2004] records=3693 errors=7
+14:20:10 seg done tier=B Kia Optima [2019, 2020] seeds=[2019] records=3693 errors=7
+14:20:10 seg done tier=B Kia Borrego [2009, 2010] seeds=[2009] records=3693 errors=7
+14:20:10 seg done tier=B Kia Forte5 [2011, 2018] seeds=[2016] records=3693 errors=7
+14:20:10 seg done tier=B Kia Sportage [2017, 2019] seeds=[2017] records=3693 errors=7
+14:20:10 seg done tier=W Kia Soul [2010, 2013] seeds=[2013] records=3693 errors=7
+14:20:10 seg done tier=W Kia Optima [2011, 2013] seeds=[2013] records=3693 errors=7
+14:20:10 seg done tier=W Kia Soul [2014, 2019] seeds=[2014] records=3693 errors=7
+14:20:10 seg done tier=W Kia Rio [2001, 2023] seeds=[2013] records=3693 errors=7
+14:20:10 seg done tier=W Kia Sorento [2011, 2015] seeds=[2011] records=3693 errors=7
+14:20:10 seg done tier=W Kia Optima [2014, 2015] seeds=[2015] records=3693 errors=7
+14:20:10 seg done tier=W Kia Forte [2014, 2018] seeds=[2014] records=3693 errors=7
+14:20:10 seg done tier=W Kia Forte [2010, 2013] seeds=[2010] records=3693 errors=7
+14:20:10 seg done tier=W Kia Sedona [2006, 2014] seeds=[2006] records=3693 errors=7
+14:20:10 seg done tier=W Kia Sportage [1995, 2008] seeds=[2007] records=3693 errors=7
+14:20:10 seg done tier=W Kia Spectra [2007, 2009] seeds=[2009] records=3693 errors=7
+14:20:10 seg done tier=W Kia Optima [2016, 2018] seeds=[2016] records=3693 errors=7
+14:20:10 seg done tier=W Kia Sorento [2003, 2006] seeds=[2006] records=3693 errors=7
+14:20:10 seg done tier=W Kia Sorento [2007, 2009] seeds=[2008] records=3693 errors=7
+14:20:10 seg done tier=W Kia Sorento [2016, 2020] seeds=[2016] records=3693 errors=7
+14:20:10 seg done tier=W Kia Rondo [2007, 2015] seeds=[2007] records=3693 errors=7
+14:20:10 seg done tier=W Kia Sedona [2015, 2021] seeds=[2016] records=3693 errors=7
+14:20:10 seg done tier=W Kia Optima [2007, 2008] seeds=[2008] records=3693 errors=7
+14:20:10 seg done tier=W Kia Spectra [2005, 2006] seeds=[2006] records=3693 errors=7
+14:20:10 seg done tier=W Kia Optima [2009, 2010] seeds=[2009] records=3693 errors=7
+14:20:10 seg done tier=W Kia Sedona [2002, 2005] seeds=[2005] records=3693 errors=7
+14:20:10 seg done tier=W Kia Sportage [2011, 2013] seeds=[2011] records=3693 errors=7
+14:20:10 seg done tier=W Kia Spectra [2001, 2004] seeds=[2004] records=3693 errors=7
+14:20:10 seg done tier=W Kia Sportage [2014, 2016] seeds=[2015] records=3693 errors=7
+14:20:10 seg done tier=W Kia Sportage [2009, 2010] seeds=[2009] records=3693 errors=7
+14:20:10 seg done tier=W Kia Forte Koup [2010, 2016] seeds=[2010] records=3693 errors=7
+14:20:10 seg done tier=W Kia Cadenza [2014, 2019] seeds=[2014] records=3693 errors=7
+14:20:10 seg done tier=W Kia Optima [2005, 2006] seeds=[2006] records=3693 errors=7
+14:20:10 seg done tier=W Kia Rio5 [2002, 2016] seeds=[2013] records=3693 errors=7
+14:20:10 seg done tier=W Kia Forte [2019, 2024] seeds=[2019] records=3693 errors=7
+14:20:10 seg done tier=W Kia Amanti [2004, 2009] seeds=[2004] records=3693 errors=7
+14:20:10 seg done tier=W Kia Optima [2019, 2020] seeds=[2019] records=3693 errors=7
+14:20:10 seg done tier=W Kia Borrego [2009, 2010] seeds=[2009] records=3693 errors=7
+14:20:10 seg done tier=W Kia Forte5 [2011, 2018] seeds=[2016] records=3693 errors=7
+14:20:10 seg done tier=W Kia Sportage [2017, 2019] seeds=[2017] records=3693 errors=7
+14:20:10 seg done tier=C Kia Soul [2010, 2013] seeds=[2013] records=3693 errors=7
+14:20:10 seg done tier=C Kia Optima [2011, 2013] seeds=[2013] records=3693 errors=7
+14:20:10 seg done tier=C Kia Soul [2014, 2019] seeds=[2014] records=3693 errors=7
+14:20:10 seg done tier=C Kia Rio [2001, 2023] seeds=[2013] records=3693 errors=7
+14:20:10 seg done tier=C Kia Sorento [2011, 2015] seeds=[2011] records=3693 errors=7
+14:20:10 seg done tier=C Kia Optima [2014, 2015] seeds=[2015] records=3693 errors=7
+14:20:10 seg done tier=C Kia Forte [2014, 2018] seeds=[2014] records=3693 errors=7
+14:20:10 seg done tier=C Kia Forte [2010, 2013] seeds=[2010] records=3693 errors=7
+14:20:10 seg done tier=C Kia Sedona [2006, 2014] seeds=[2006] records=3693 errors=7
+14:20:10 seg done tier=C Kia Sportage [1995, 2008] seeds=[2007] records=3693 errors=7
+14:20:10 seg done tier=C Kia Spectra [2007, 2009] seeds=[2009] records=3693 errors=7
+14:20:10 seg done tier=C Kia Optima [2016, 2018] seeds=[2016] records=3693 errors=7
+14:20:10 seg done tier=C Kia Sorento [2003, 2006] seeds=[2006] records=3693 errors=7
+14:20:10 seg done tier=C Kia Sorento [2007, 2009] seeds=[2008] records=3693 errors=7
+14:20:10 seg done tier=C Kia Sorento [2016, 2020] seeds=[2016] records=3693 errors=7
+14:20:10 seg done tier=C Kia Rondo [2007, 2015] seeds=[2007] records=3693 errors=7
+14:20:10 seg done tier=C Kia Sedona [2015, 2021] seeds=[2016] records=3693 errors=7
+14:20:10 seg done tier=C Kia Optima [2007, 2008] seeds=[2008] records=3693 errors=7
+14:20:10 seg done tier=C Kia Spectra [2005, 2006] seeds=[2006] records=3693 errors=7
+14:20:10 seg done tier=C Kia Optima [2009, 2010] seeds=[2009] records=3693 errors=7
+14:20:10 seg done tier=C Kia Sedona [2002, 2005] seeds=[2005] records=3693 errors=7
+14:20:10 seg done tier=C Kia Sportage [2011, 2013] seeds=[2011] records=3693 errors=7
+14:20:10 seg done tier=C Kia Spectra [2001, 2004] seeds=[2004] records=3693 errors=7
+14:20:10 seg done tier=C Kia Sportage [2014, 2016] seeds=[2015] records=3693 errors=7
+14:20:10 seg done tier=C Kia Sportage [2009, 2010] seeds=[2009] records=3693 errors=7
+14:20:10 seg done tier=C Kia Forte Koup [2010, 2016] seeds=[2010] records=3693 errors=7
+14:20:10 seg done tier=C Kia Cadenza [2014, 2019] seeds=[2014] records=3693 errors=7
+14:20:10 seg done tier=C Kia Optima [2005, 2006] seeds=[2006] records=3693 errors=7
+14:20:10 seg done tier=C Kia Rio5 [2002, 2016] seeds=[2013] records=3693 errors=7
+14:20:10 seg done tier=C Kia Forte [2019, 2024] seeds=[2019] records=3693 errors=7
+14:20:10 seg done tier=C Kia Amanti [2004, 2009] seeds=[2004] records=3693 errors=7
+14:20:10 seg done tier=C Kia Optima [2019, 2020] seeds=[2019] records=3693 errors=7
+14:20:10 seg done tier=C Kia Borrego [2009, 2010] seeds=[2009] records=3693 errors=7
+14:20:10 seg done tier=C Kia Forte5 [2011, 2018] seeds=[2016] records=3693 errors=7
+14:20:10 seg done tier=C Kia Sportage [2017, 2019] seeds=[2017] records=3693 errors=7
+14:22:18 seg done tier=D Kia Soul [2010, 2013] seeds=[2013, 2011, 2012] records=3693 errors=7
+14:26:26 seg done tier=D Kia Optima [2011, 2013] seeds=[2013, 2012, 2011] records=3693 errors=7
+14:28:26 seg done tier=D Kia Soul [2014, 2019] seeds=[2014, 2017, 2018] records=3693 errors=7
+14:30:26 seg done tier=D Kia Rio [2001, 2023] seeds=[2013, 2012, 2011] records=3693 errors=7
+14:32:29 seg done tier=D Kia Sorento [2011, 2015] seeds=[2011, 2014, 2013] records=3693 errors=7
+14:34:52 seg done tier=D Kia Optima [2014, 2015] seeds=[2015, 2014] records=3693 errors=7
+14:37:00 seg done tier=D Kia Forte [2014, 2018] seeds=[2014, 2017, 2016] records=3693 errors=7
+14:38:36 seg done tier=D Kia Forte [2010, 2013] seeds=[2010, 2012, 2013] records=3693 errors=7
+14:40:20 seg done tier=D Kia Sedona [2006, 2014] seeds=[2006, 2011, 2010] records=3693 errors=7
+14:41:32 seg done tier=D Kia Sportage [1995, 2008] seeds=[2007, 2001, 2002] records=3693 errors=7
+14:43:16 seg done tier=D Kia Spectra [2007, 2009] seeds=[2009, 2008, 2007] records=3693 errors=7
+14:45:16 seg done tier=D Kia Optima [2016, 2018] seeds=[2016, 2018, 2017] records=3693 errors=7
+14:47:25 seg done tier=D Kia Sorento [2003, 2006] seeds=[2006, 2004, 2005] records=3693 errors=7
+14:49:00 seg done tier=D Kia Sorento [2007, 2009] seeds=[2008, 2009, 2007] records=3693 errors=7
+14:50:21 time budget reached records=3693
