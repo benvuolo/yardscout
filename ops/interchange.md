@@ -3149,3 +3149,22 @@ each); nothing allowlisted or crawled.
   groups): all 8 shipped files byte-identical, so the groups diff is empty.
   Applies from crawl run 26.
 - 01:30 UTC check-in: GSP cv-axle 2,097 units → 90 groups (8 sitemaps pending); 1A strut 1,042 → 232 (the old-order run is still going; lamp lines start on the next run). Nothing finished or blocked.
+- **§11.4 round 2: PASSED, 0 WRONG** (2026-11-10).
+  - Fresh seed, new independent agent, 108 groups (66 cross-model),
+    597 vehicle pages incl. every config of one row per group.
+  - Per category OK/WRONG: compressor 65/0, condenser 81/0,
+    evaporator 59/0, fuel module 62/0, tank 63/0, heater 74/0, coils 71/0,
+    radiator 51/0, throttle 71/0.
+  - Part pages: 104 agree, 1 partial, 3 inconclusive (coil lists longer
+    than the 12-page cap), 0 disagree.
+  - The 1 diesel row is OK.
+- **Gated coverage** (fixed build, 1,505 vehicles, 628 groups; % of
+  338k lot cars beyond the same model + generation; baseline 0): coils
+  11.05, throttle 7.56, heater 5.65, compressor 4.88, condenser 3.95,
+  evaporator 3.38, radiator 3.34, fuel module 1.29, tank 0.53.
+- **Hold:** no Spectra group file is committed (aftermarket/curated/ is
+  git-ignored, d27588c). Coils and tank aren't in _AM_CATS; the 7 others
+  are in GROUP_HOLD_CATS.
+- **Next:** the hub's confirm, then branch interchange/aftermarket-1
+  (spectrapremium.json + _AM_LABELS + coils in _AM_CATS). The category
+  release is category-breadth's. Each re-curation needs a fresh sample.
