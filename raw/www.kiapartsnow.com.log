@@ -1384,3 +1384,6 @@
 04:43:05 chain-unlinked door-front 4 numbers named by 0K2AA58020E, no catalog link: 0K2AA58020A, 0K2AA58020B, 0K2AA58020, 0K2AA58020C
 04:43:05 chain-unlinked door-front 4 numbers named by 0K2AA59020E, no catalog link: 0K2AA59020C, 0K2AA59020A, 0K2AA59020, 0K2AA59020B
 04:53:45 time budget reached records=3693
+04:54:02 start site=www.kiapartsnow.com mode=complete tiers=['A', 'B', 'W', 'C'] records=3693 list_lines=801 year_lines=206 url_index=4917
+04:54:02 completion worklist completion/hmg.own_page.json: 65 rows
+04:59:30 completion finished records=3693 errors=7 open_rows=0 chains_owed=0
