@@ -110,8 +110,13 @@ def gsp_rows(r: dict):
             refuse = "title_token:" + bad[0]
     engines = [f"{float(t):.1f}L" for t in toks if LITERS_RE.match(t)]
     models = {(a["make"], a["model"]) for a in r.get("applications", [])}
-    if refuse is None and len(engines) > 1 and len(models) > 1:
-        refuse = "multi_engine_multi_model"
+
+    # The title's engine list covers the whole unit, not each row. On a
+    # multi-model unit it puts engines on models that never had them (§11.4
+    # audit 2026-11-10: TL/CL "3.0", ML320 "5.5", FX35 "3.7"). So title engines
+    # go on rows only when the unit covers one make/model; otherwise no engine.
+    if len(models) > 1:
+        engines = [""]
     rows = []
     for a in r.get("applications", []):
         rp = norm_position(a.get("position", ""))

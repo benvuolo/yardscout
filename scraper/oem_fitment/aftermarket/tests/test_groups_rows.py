@@ -86,12 +86,18 @@ check("a bare 'Front' unit conflicts with a front-left unit", not any(a[2] <= 20
 for name, rec, why in [
         ("no title engine", gsp_rec("X1", [(2010, 2012, "Honda", "Civic", "")], engines=()), "no_title_engine"),
         ("AWD in the title", gsp_rec("X2", [(2010, 2012, "Honda", "Civic", "")], engines=("AWD",)), "title_token"),
-        ("two engines across two models", gsp_rec("X3", [(2010, 2012, "Honda", "Civic", ""), (2010, 2012, "Acura", "ILX", "")],
-                                                   engines=("1.8", "2.0")), "multi_engine_multi_model"),
         ("duplicate rows flag", gsp_rec("X4", [(2010, 2012, "Honda", "Civic", "")], flags=["duplicate_rows"]), "flag"),
         ("no position", gsp_rec("X5", [(2010, 2012, "Honda", "Civic", "")], pos=""), "title_position")]:
     d = B([rec], Names(), "gspnorthamerica.com")
     check(f"GSP refuses: {name}", not d["groups"] and any(k.endswith(":" + why) for k in d["summary"]["refused_units"]))
+
+mm = gsp_rec("X6", [(1999, 2003, "Acura", "TL", ""), (1998, 2002, "Honda", "Accord", "")], engines=("3.0",))
+d = R.build([mm], Names(), "gspnorthamerica.com")
+check("multi-model GSP unit: no title engine on any row (TL never had the 3.0)",
+      d["groups"] and all(a[4] == "" for a in d["groups"][0]["apps"]) and "No engine is stated" in d["groups"][0]["note"])
+sm1 = gsp_rec("X7", [(2017, 2022, "Honda", "CR-V", "")], engines=("1.5", "2.4"))
+check("single-model GSP unit keeps its title engines", {a[4] for a in R.build([sm1], Names(), "gspnorthamerica.com")["groups"][0]["apps"]}
+      == {"1.5L", "2.4L"})
 
 # ---- 1A Auto
 d = B([A0], Names(), "www.1aauto.com")
