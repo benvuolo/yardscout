@@ -2790,6 +2790,23 @@ Other outputs of this session:
     - Weakest: G01 98110-3S000. Outside evidence covers the Sonata platform, not the Azera by name.
     - Still held: no app kind, no audits.json record. Release rides make breadth's per-namespace ref
       advances, with the app category as a separate change. Proposal sent to the hub 2026-11-10 ~13:50.
+  - Hub 13:46: round 2 ACCEPTED (snippet-level outside evidence is the standard; G01 accepted).
+    - App category approved: branch interchange/categories-wiper (003e259, sw jh-v180, categories 44 -> 45,
+      "wiper-motor" in GROUP_HOLD_CATS). It waits for design/aftermarket-notes (sw v179), then rebase and
+      hub regression.
+    - Per-app body gate + if_equipped for OEM Likely apps: a separate later change. Until then, rear groups
+      on models with sedan variants stay refused.
+    - Once kind "body" is on main, every curate run writes wiper Likely groups into groups/<ns>.json.
+      GROUP_HOLD_CATS keeps them out of the payload. They ship only via make breadth's sampled advances.
+  - **For make breadth: wiper yield ideas** (not started; hub: note only):
+    1. SIBLING_IGNORE with per-site written bases. unread_sibling_page is the top open wiper reason
+       (wiper-named subs that aren't CAT_PAGES: washer/headlamp-washer/wiper-arm pages). Each entry needs
+       the page read once to show it lists no motor.
+    2. Ford own-page completion: 92 wiper pns, 593 own-page drops, 0 groups. Most Ford windshield
+       motors have no end word in the name, so with the rear-only slug fallback they are position_missing;
+       positions only become clean where the position or remark states the end.
+    3. Twin-motor (FL/FR) sites (Hyundai "LH", Volvo Driver/Passenger): no group yet. Each needs both
+       halves on its own page.
 
 ## Aftermarket breadth (session_016ZzJfMnemMEFN88kPnYgxs, 2026-11-09)
 
