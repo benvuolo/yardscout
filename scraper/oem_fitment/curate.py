@@ -334,6 +334,8 @@ class Curation:
                         for t in tgts:
                             if not _row_maps(f, t):
                                 continue
+                            if self.ns == "hmg" and _hmg_row_body_excludes(f, (t.make, t.model, y)):
+                                continue
                             T = (t.make, t.model, y)
                             self.t_rows[(T, cat)].append((c, r, f, t))
                             self.t_sources[T].add((t.cat_make, t.cat_model))
@@ -415,6 +417,8 @@ class Curation:
         if market and (_market_excludes(notes) or _export_only(notes)):
             return True
         if market and self.ns == "subaru" and _subaru_manual_only(notes):
+            return True
+        if market and self.ns == "hmg" and _hmg_production_excludes(notes, T[2]):
             return True
         if _other_division(notes, T[0]):
             return True
@@ -2101,6 +2105,47 @@ def _hmg_body_excludes(notes, T) -> bool:
             continue
         bodies = {f"{a} - {b}" for a, b in _HMG_BODY_RE.findall(n)}
         if bodies and not (bodies & allowed):
+            return True
+    return False
+
+
+def _hmg_row_body_excludes(f, T) -> bool:
+    """Body gate on a product-page fitment row (2026-11-10 hmg sample:
+    824011M200 'Coupe - 2Door' only, credited to the Forte sedan): the row's
+    option column names only bodies T cannot be."""
+    toks = " ; ".join(list(f.trims or []) + list(getattr(f, "options", None) or []))
+    return _hmg_body_excludes(["Fitting Vehicle Options: " + toks], T) if toks else False
+
+
+_PROD_RE = re.compile(r"Production Date\s*:\s*(\d{1,2})/(\d{4})\s*-\s*(?:(\d{1,2})/(\d{4}))?", re.I)
+
+
+_PROD_MIN_MONTHS = 5
+
+
+def _hmg_production_excludes(notes, year: int) -> bool:
+    """2026-11-10 hmg sample (82460-2W020 'Production Date: 01/2014-12/2015'
+    on the 2013 Santa Fe page; 87606-39600 '07/2000-03/2001' on 2002-05 XG350
+    pages; 824712T510 '06/2013-08/2013' on 2011-12 Optima pages): a row whose
+    every production window misses the model year's build window, taken as
+    07/(year-1) - 06/year, is not listed for that year. An open end ('08/2016-')
+    runs on. A window must overlap the model year by 5+ months
+    (_PROD_MIN_MONTHS). Per row; only removes claims."""
+    lo, hi = (year - 1) * 12 + 7, year * 12 + 6
+    for n in notes or []:
+        wins = _PROD_RE.findall(n or "")
+        if not wins:
+            continue
+        ok = False
+        for m1, y1, m2, y2 in wins:
+            a = int(y1) * 12 + int(m1)
+            b = int(y2) * 12 + int(m2) if y2 else 10 ** 9
+            # inclusive months of overlap; 5+ so a window that only grazes
+            # the model year's edge (97250-39500 ends 10/2002: 4 months of
+            # MY2003) does not credit it
+            if min(b, hi) - max(a, lo) + 1 >= _PROD_MIN_MONTHS:
+                ok = True
+        if not ok:
             return True
     return False
 

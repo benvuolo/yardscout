@@ -271,4 +271,23 @@ check("hmg body: matching bodies, unrestricted rows and ungated names keep the r
 check("hmg body: plain Santa Fe 2013-18 is fail-closed on body rows; other years ungated",
       _C._hmg_body_excludes([_FV + "[Wagon - 5Door 5P]"], ("Hyundai", "Santa Fe", 2015))
       and not _C._hmg_body_excludes([_FV + "[Wagon - 5Door 5P]"], ("Hyundai", "Santa Fe", 2008)))
+# 2026-11-10 hmg sample WRONGs: production windows and row-level body tokens
+check("hmg production: a window that misses the model year's build window excludes it",
+      _C._hmg_production_excludes(["Production Date: 01/2014-12/2015"], 2013)
+      and _C._hmg_production_excludes(["Production Date: 07/2000-03/2001"], 2002)
+      and _C._hmg_production_excludes(["Production Date: 06/2013-08/2013"], 2012)
+      and _C._hmg_production_excludes(["Fit Note: HID", "Production Date: 10/2014-07/2016"], 2014)
+      and _C._hmg_production_excludes(["Production Date: 07/2000-10/2002"], 2003)
+      and _C._hmg_production_excludes(["Production Date: 04/2017-03/2018"], 2019))
+check("hmg production: overlapping, open-ended or absent windows keep the row",
+      not _C._hmg_production_excludes(["Production Date: 10/2014-07/2016"], 2015)
+      and not _C._hmg_production_excludes(["Production Date: 04/2017-03/2018"], 2018)
+      and not _C._hmg_production_excludes(["Production Date: 08/2016-"], 2019)
+      and not _C._hmg_production_excludes(["Fit Note: HIGH GRADE"], 2010))
+from types import SimpleNamespace as _NSR
+check("hmg row body: a coupe-only fitment row does not map to the Forte sedan; both-body rows do",
+      _C._hmg_row_body_excludes(_NSR(trims=["Coupe - 2Door"], options=[]), ("Kia", "Forte", 2012))
+      and _C._hmg_row_body_excludes(_NSR(trims=["Sedan - 5Door"], options=[]), ("Kia", "Forte Koup", 2015))
+      and not _C._hmg_row_body_excludes(_NSR(trims=["Sedan - 4Door", "Coupe - 2Door"], options=[]), ("Kia", "Forte", 2012))
+      and not _C._hmg_row_body_excludes(_NSR(trims=[], options=[]), ("Kia", "Forte", 2012)))
 done("test_regressions")
