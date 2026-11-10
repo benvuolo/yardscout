@@ -13093,3 +13093,18 @@
 10:56:56 chain-unlinked headlights 1 numbers named by DL3Z-13008-BB, no catalog link: DL3Z-13008-BA
 10:57:12 product-fail https://www.fordpartsgiant.com/parts/ford-mirror-asy-rear-vi_9l3z-17683-ac.html: ValueError: no partInfo in store
 11:08:00 time budget reached records=9252
+11:08:27 start site=www.fordpartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=9252 list_lines=4958 year_lines=985 url_index=32352
+11:08:27 completion worklist completion/ford.own_page.json: 695 rows
+11:25:32 chain-unlinked grille 1 numbers named by 5L3Z-8200-HAA, no catalog link: 4L3Z-8200-DA
+11:27:40 chain-unlinked bumper-rear 1 numbers named by 8L3Z-17906-C, no catalog link: 5L3Z-17906-CA
+11:27:40 chain-unlinked bumper-rear 1 numbers named by 8L3Z-17906-EPTM, no catalog link: 5L3Z-17906-EAA
+11:27:40 chain-unlinked bumper-rear 1 numbers named by 8L3Z-17906-B, no catalog link: 5L3Z-17906-BA
+11:27:40 chain-unlinked bumper-rear 1 numbers named by 8L3Z-17906-DPTM, no catalog link: 5L3Z-17906-DAA
+11:29:16 chain-unlinked grille 1 numbers named by 7L3Z-8200-D, no catalog link: 7L3Z-8200-DA
+11:29:16 chain-unlinked grille 1 numbers named by 6L3Z-8200-AA, no catalog link: 7L3Z-8200-CA
+11:29:16 chain-unlinked grille 1 numbers named by 6L3Z-8200-APTM, no catalog link: 6L3Z-8200-AAA
+11:29:16 chain-unlinked grille 1 numbers named by 6L3Z-8200-AACP, no catalog link: 7L3Z-8200-CACP
+11:29:48 chain-unlinked tailgate 1 numbers named by 8L3Z-9940700-A, no catalog link: 4L3Z-9940700-AABP
+11:37:09 chain-unlinked tail-lights 1 numbers named by AL3Z-13404-AB, no catalog link: BL3Z-13404-AA
+11:37:09 chain-unlinked tail-lights 1 numbers named by AL3Z-13405-AB, no catalog link: BL3Z-13405-AA
+11:39:16 time budget reached records=9332
