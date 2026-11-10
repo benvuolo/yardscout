@@ -582,3 +582,46 @@
 2026-11-10T00:27:53Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=47993,96866&_score=641.000 products=2 children=0 next=n records=1333 new_requests=1898
 2026-11-10T00:28:17Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=283963,283760&_score=641.000 products=2 children=0 next=n records=1335 new_requests=1901
 2026-11-10T00:28:17Z time budget reached records=1335
+2026-11-10T00:28:27Z start site=ecat.spectrapremium.com cats=['vehicle'] max_products=0 minutes=28.0
+2026-11-10T00:28:44Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=284077,285085&_score=641.000 products=2 children=0 next=n records=1337 new_requests=1904
+2026-11-10T00:29:08Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=65255,161301&_score=641.000 products=2 children=0 next=n records=1339 new_requests=1907
+2026-11-10T00:29:32Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=41531,127014&_score=641.000 products=2 children=0 next=n records=1341 new_requests=1910
+2026-11-10T00:31:32Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=2003&make=Ford&model=Focus&_score=637.000 products=14 children=1 next=n records=1355 new_requests=1925
+2026-11-10T00:32:44Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=2016&make=Nissan&model=Sentra&_score=637.000 products=8 children=0 next=n records=1363 new_requests=1934
+2026-11-10T00:33:08Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=109396,159639&_score=637.000 products=2 children=0 next=n records=1365 new_requests=1937
+2026-11-10T00:33:48Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=2007&make=Buick&model=Lucerne&_score=623.000 products=4 children=0 next=n records=1369 new_requests=1942
+2026-11-10T00:34:36Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=2004&make=Dodge&model=Ram%201500&_score=619.667 products=5 children=3 next=n records=1374 new_requests=1948
+2026-11-10T00:36:28Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=2000&make=Dodge&model=Ram%201500&_score=619.667 products=13 children=3 next=n records=1387 new_requests=1962
+2026-11-10T00:36:52Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=107603,136320&_score=619.667 products=2 children=0 next=n records=1389 new_requests=1965
+2026-11-10T00:37:16Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=158669,187591&_score=619.667 products=2 children=0 next=n records=1391 new_requests=1968
+2026-11-10T00:37:40Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=116983,128660&_score=619.667 products=2 children=0 next=n records=1393 new_requests=1971
+2026-11-10T00:38:04Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=183307,302059&_score=619.667 products=2 children=0 next=n records=1395 new_requests=1974
+2026-11-10T00:38:28Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=299414,241976&_score=619.667 products=2 children=0 next=n records=1397 new_requests=1977
+2026-11-10T00:38:52Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=242345,299715&_score=619.667 products=2 children=0 next=n records=1399 new_requests=1980
+2026-11-10T00:39:24Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=2003&make=GMC&model=Yukon&_score=618.000 products=3 children=2 next=n records=1402 new_requests=1984
+2026-11-10T00:39:48Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=123034,168086&_score=618.000 products=2 children=0 next=n records=1404 new_requests=1987
+2026-11-10T00:40:12Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=6767,102764&_score=618.000 products=2 children=0 next=n records=1406 new_requests=1990
+2026-11-10T00:41:16Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=2011&make=Jeep&model=Grand%20Cherokee&_score=616.000 products=7 children=0 next=n records=1413 new_requests=1998
+2026-11-10T00:41:56Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=2001&make=Chevrolet&model=Blazer&_score=609.000 products=4 children=0 next=n records=1417 new_requests=2003
+2026-11-10T00:43:56Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=1997&make=Ford&model=Ranger&_score=609.000 products=14 children=0 next=n records=1431 new_requests=2018
+2026-11-10T00:44:36Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=2011&make=Honda&model=Pilot&_score=603.000 products=4 children=0 next=n records=1435 new_requests=2023
+2026-11-10T00:45:16Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=2006&make=Ford&model=Mustang&_score=597.000 products=4 children=0 next=n records=1439 new_requests=2028
+2026-11-10T00:45:56Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=2012&make=Cadillac&model=SRX&_score=597.000 products=4 children=0 next=n records=1443 new_requests=2033
+2026-11-10T00:47:00Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=2015&make=Nissan&model=Versa&_score=596.000 products=7 children=0 next=n records=1450 new_requests=2041
+2026-11-10T00:47:48Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=2011&make=Buick&model=LaCrosse&_score=588.000 products=5 children=0 next=n records=1455 new_requests=2047
+2026-11-10T00:48:44Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=2004&make=Nissan&model=Maxima&_score=585.000 products=6 children=0 next=n records=1461 new_requests=2054
+2026-11-10T00:50:12Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=2014&make=Nissan&model=Altima&_score=583.500 products=10 children=0 next=n records=1471 new_requests=2065
+2026-11-10T00:50:52Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=2003&make=Ford&model=F-150&_score=580.333 products=4 children=8 next=n records=1475 new_requests=2070
+2026-11-10T00:51:40Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-submodels.json?year=1999&make=Ford&model=F-150&_score=580.333 products=5 children=8 next=n records=1480 new_requests=2076
+2026-11-10T00:52:04Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=91205,119757&_score=580.333 products=2 children=0 next=n records=1482 new_requests=2079
+2026-11-10T00:52:36Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=69636,90862,134498&_score=580.333 products=3 children=0 next=n records=1485 new_requests=2083
+2026-11-10T00:53:00Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=6046,52916&_score=580.333 products=2 children=0 next=n records=1487 new_requests=2086
+2026-11-10T00:53:32Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=22017,109269,176179&_score=580.333 products=3 children=0 next=n records=1490 new_requests=2090
+2026-11-10T00:53:56Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=98971,105364&_score=580.333 products=2 children=0 next=n records=1492 new_requests=2093
+2026-11-10T00:54:28Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=46445,59257,116909&_score=580.333 products=3 children=0 next=n records=1495 new_requests=2097
+2026-11-10T00:54:52Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=34431,125574&_score=580.333 products=2 children=0 next=n records=1497 new_requests=2100
+2026-11-10T00:55:24Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=109096,138771,144456&_score=580.333 products=3 children=0 next=n records=1500 new_requests=2104
+2026-11-10T00:55:48Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=141711,183887&_score=580.333 products=2 children=0 next=n records=1502 new_requests=2107
+2026-11-10T00:56:12Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=9431,160524&_score=580.333 products=2 children=0 next=n records=1504 new_requests=2110
+2026-11-10T00:56:28Z list vehicle https://ecat.spectrapremium.com/en/vehicules/get-motorizations.json?vehiculeIds=3883,77334&_score=580.333 products=2 children=0 next=n records=1505 new_requests=2112
+2026-11-10T00:56:28Z time budget reached records=1505
