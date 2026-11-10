@@ -1364,3 +1364,16 @@
 22:50:30 seg done tier=C Kia Forte5 [2011, 2018] seeds=[2016, 2014, 2015] records=3667 errors=7
 22:52:54 seg done tier=C Kia Sportage [2017, 2019] seeds=[2017, 2019, 2018] records=3667 errors=7
 22:52:54 finished records=3667 errors=7 chain_records=2 chain_unlinked=121 chain_failed=0 chain_given_up=0
+03:53:11 start site=www.kiapartsnow.com mode=complete tiers=['A', 'B', 'W', 'C'] records=3667 list_lines=405 year_lines=142 url_index=3548
+03:53:11 completion worklist completion/hmg.own_page.json: 65 rows
+03:55:12 chain-unlinked window-regulator 1 numbers named by 824501M000, no catalog link: 824504D000
+03:55:12 chain-unlinked window-regulator 1 numbers named by 824601M000, no catalog link: 824604D000
+03:55:52 chain-unlinked door-front 1 numbers named by 76003A7001, no catalog link: 76003B0000
+03:55:52 chain-unlinked door-front 1 numbers named by 76004A7001, no catalog link: 76004B0000
+03:56:00 chain-unlinked door-rear 1 numbers named by 77003A7010, no catalog link: 77003B0010
+03:56:00 chain-unlinked door-rear 1 numbers named by 77004A7010, no catalog link: 77004B0010
+03:56:32 chain-unlinked liftgate 1 numbers named by 73700A7010, no catalog link: 73700B0000
+03:56:56 chain-unlinked trunk-lid 1 numbers named by 69200A7090, no catalog link: 69200B0030
+03:56:56 chain-unlinked trunk-lid 1 numbers named by 69200A7060, no catalog link: 69200B0020
+04:06:48 chain-unlinked hood 1 numbers named by 66400A7600, no catalog link: 66400B0000
+04:23:12 time budget reached records=3680
