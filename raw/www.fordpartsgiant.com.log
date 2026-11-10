@@ -13007,3 +13007,61 @@
 07:06:27 seg done tier=C Lincoln MKZ [2013, 2016] seeds=[2014] records=9078 errors=69
 07:12:09 seg done tier=C Ford Escape Hybrid [2005, 2011] seeds=[2008, 2009, 2007] records=9084 errors=69
 07:14:41 time budget reached records=9091
+10:01:11 start site=www.fordpartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=9091 list_lines=4626 year_lines=960 url_index=30869
+10:01:11 completion worklist completion/ford.own_page.json: 695 rows
+10:01:51 chain-unlinked climate-control 1 numbers named by 9E5Z-19980-G, no catalog link: 9E5Z-19980-K
+10:01:51 chain-unlinked climate-control 1 numbers named by 9E5Z-19980-E, no catalog link: 9E5Z-19980-K
+10:01:51 chain-unlinked climate-control 1 numbers named by 9E5Z-19980-F, no catalog link: 9E5Z-19980-K
+10:03:03 chain-unlinked side-mirrors 1 numbers named by 9E5Z-17682-B, no catalog link: 9H6Z-17K707-B
+10:03:03 chain-unlinked side-mirrors 1 numbers named by 9H6Z-17682-C, no catalog link: 9H6Z-17K707-A
+10:03:27 chain-unlinked window-regulator 1 numbers named by 8E5Z-5423200-A, no catalog link: 6E5Z-5423200-AA
+10:03:27 chain-unlinked window-regulator 1 numbers named by 8E5Z-5423201-A, no catalog link: 6E5Z-5423201-AA
+10:03:35 chain-unlinked window-regulator 1 numbers named by 8E5Z-5427001-A, no catalog link: 6E5Z-5427001-AA
+10:03:35 chain-unlinked window-regulator 1 numbers named by 8E5Z-5427000-A, no catalog link: 6E5Z-5427000-AA
+10:09:27 chain-unlinked headlights 1 numbers named by 6N7Z-13008-AC, no catalog link: 6N7Z-13008-AB
+10:09:27 chain-unlinked headlights 1 numbers named by 6H6Z-13008-DC, no catalog link: 6H6Z-13008-DB
+10:09:27 chain-unlinked headlights 1 numbers named by 6E5Z-13008-BD, no catalog link: 6E5Z-13008-BC
+10:09:27 chain-unlinked headlights 1 numbers named by 6E5Z-13008-AD, no catalog link: 6E5Z-13008-AC
+10:09:27 chain-unlinked headlights 1 numbers named by 6H6Z-13008-AC, no catalog link: 6H6Z-13008-AB
+10:09:27 chain-unlinked headlights 1 numbers named by 6H6Z-13008-BC, no catalog link: 6H6Z-13008-BB
+10:09:27 chain-unlinked headlights 1 numbers named by 6H6Z-13008-CC, no catalog link: 6H6Z-13008-CB
+10:09:27 chain-unlinked headlights 1 numbers named by 6N7Z-13008-BC, no catalog link: 6N7Z-13008-BB
+10:09:51 chain-unlinked tail-lights 1 numbers named by 6N7Z-13405-A, no catalog link: 6N7Z-13405-B
+10:09:51 chain-unlinked tail-lights 1 numbers named by 6H6Z-13404-B, no catalog link: 6H6Z-13404-A
+10:09:51 chain-unlinked tail-lights 1 numbers named by 6H6Z-13405-B, no catalog link: 6H6Z-13405-A
+10:09:51 chain-unlinked tail-lights 1 numbers named by 6N7Z-13404-A, no catalog link: 6N7Z-13404-B
+10:15:35 product-fail https://www.fordpartsgiant.com/parts/ford-grille-radiator_cl3z-8200-cb.html: ValueError: no partInfo in store
+10:16:23 product-fail https://www.fordpartsgiant.com/parts/ford-grille-radiator_cl3z-8200-bb.html: ValueError: no partInfo in store
+10:16:31 product-fail https://www.fordpartsgiant.com/parts/ford-grille-radiator_dl3z-8200-ab.html: ValueError: no partInfo in store
+10:16:39 product-fail https://www.fordpartsgiant.com/parts/ford-grille-radiator_dl3z-8200-bb.html: ValueError: no partInfo in store
+10:16:39 chain-unlinked grille 1 numbers named by CL3Z-8200-APTM, no catalog link: CL3Z-8200-DPTM
+10:17:59 product-fail https://www.fordpartsgiant.com/parts/ford-mirror-asy-rear-vi_9l3z-17683-ac.html: ValueError: no partInfo in store
+10:17:59 chain-unlinked side-mirrors 1 numbers named by 9L3Z-17682-EC, no catalog link: 8L3Z-17682-DA
+10:17:59 chain-unlinked side-mirrors 1 numbers named by 9L3Z-17683-EC, no catalog link: 8L3Z-17683-DA
+10:19:03 chain-unlinked window-regulator 1 numbers named by BL3Z-1523200-B, no catalog link: BL3Z-1523200-E
+10:19:03 chain-unlinked window-regulator 1 numbers named by BL3Z-1523201-B, no catalog link: BL3Z-1523201-D
+10:19:03 chain-unlinked window-regulator 1 numbers named by BL3Z-1523201-C, no catalog link: BL3Z-1523201-D
+10:19:11 chain-unlinked window-regulator 1 numbers named by BL3Z-1627000-A, no catalog link: WLRA-58
+10:19:51 chain-unlinked climate-control 1 numbers named by BA1Z-19980-F, no catalog link: BA1Z-19980-J
+10:19:51 chain-unlinked climate-control 1 numbers named by BA1Z-19980-H, no catalog link: BA1Z-19980-J
+10:19:51 chain-unlinked climate-control 1 numbers named by BT4Z-19980-G, no catalog link: BT4Z-19980-V
+10:19:51 chain-unlinked climate-control 1 numbers named by BT4Z-19980-M, no catalog link: BT4Z-19980-V
+10:19:51 chain-unlinked climate-control 1 numbers named by BT4Z-19980-P, no catalog link: BT4Z-19980-W
+10:19:51 chain-unlinked climate-control 1 numbers named by BT4Z-19980-T, no catalog link: BT4Z-19980-W
+10:20:55 chain-unlinked side-mirrors 1 numbers named by AT4Z-17683-AA, no catalog link: 9T4Z-17683-AA
+10:20:55 chain-unlinked side-mirrors 1 numbers named by AT4Z-17683-CAPTM, no catalog link: 9T4Z-17683-CAPTM
+10:20:55 chain-unlinked side-mirrors 1 numbers named by AT4Z-17682-CAPTM, no catalog link: 9T4Z-17682-CAPTM
+10:20:55 chain-unlinked side-mirrors 1 numbers named by AT4Z-17682-AA, no catalog link: 9T4Z-17682-AA
+10:21:11 chain-unlinked window-regulator 1 numbers named by 7T4Z-7823394-B, no catalog link: 7T4Z-7823395-A
+10:25:51 product-fail https://www.fordpartsgiant.com/parts/ford-grille-radiator_cl3z-8200-bb.html: ValueError: no partInfo in store
+10:25:51 product-fail https://www.fordpartsgiant.com/parts/ford-grille-radiator_dl3z-8200-ab.html: ValueError: no partInfo in store
+10:25:51 product-fail https://www.fordpartsgiant.com/parts/ford-grille-radiator_cl3z-8200-cb.html: ValueError: no partInfo in store
+10:25:51 product-fail https://www.fordpartsgiant.com/parts/ford-grille-radiator_dl3z-8200-bb.html: ValueError: no partInfo in store
+10:26:32 chain-unlinked side-mirrors 1 numbers named by 9L3Z-17683-CB, no catalog link: 9L3Z-17683-CA
+10:32:23 chain-unlinked headlights 1 numbers named by 2L3Z-13008-AA, no catalog link: 3L3Z-13008-AB
+10:32:23 chain-unlinked headlights 1 numbers named by 2L3Z-13008-AB, no catalog link: 3L3Z-13008-BB
+10:32:23 chain-unlinked headlights 1 numbers named by 1L3Z-13008-AC, no catalog link: 3L3Z-13008-EA
+10:32:23 chain-unlinked headlights 1 numbers named by 1L3Z-13008-BB, no catalog link: 3L3Z-13008-FA
+10:32:23 chain-unlinked headlights 1 numbers named by F85Z-13008-AA, no catalog link: 3L3Z-13008-CA
+10:32:23 chain-unlinked headlights 1 numbers named by F85Z-13008-BA, no catalog link: 3L3Z-13008-DA
+10:36:48 time budget reached records=9196
