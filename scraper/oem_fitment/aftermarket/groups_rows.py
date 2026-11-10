@@ -240,14 +240,37 @@ def oneaauto_rows(r: dict):
 
 
 # ------------------------------------------------- lot-observed engines (GSP) ---
-def load_observed() -> dict:
+LOT_FILES = ("docs/data/inventory_live.json", "docs/data/vehicle_extras.json")
+
+
+def lot_snapshot(ref: str | None = None) -> tuple[dict, dict]:
+    """The two lot files, from git `ref` (a commit) or the working tree.
+    -> ({path: text}, {"ref", "sha256": {path: hex}}). Hub 2026-11-10: the
+    release build reads one pinned snapshot; a newer inventory changes output
+    only through a fresh build plus a fresh §11.4 sample."""
+    texts, shas = {}, {}
+    for f in LOT_FILES:
+        if ref:
+            res = subprocess.run(["git", "show", f"{ref}:{f}"], cwd=GA.REPO, capture_output=True, text=True)
+            t = res.stdout if res.returncode == 0 else ""
+        else:
+            pth = GA.REPO / f
+            t = pth.read_text() if pth.exists() else ""
+        texts[f] = t
+        shas[f] = hashlib.sha256(t.encode()).hexdigest()
+    full = subprocess.run(["git", "rev-parse", ref], cwd=GA.REPO, capture_output=True, text=True).stdout.strip() if ref else ""
+    return texts, {"ref": full or "working-tree", "sha256": shas}
+
+
+def load_observed(texts: dict | None = None) -> dict:
     """(make, squash(model), year) -> {liters} from the cars on our lots: the
-    VIN decode's engine in docs/data/vehicle_extras.json (field 'engine')."""
-    inv_p = GA.REPO / "docs" / "data" / "inventory_live.json"
-    ex_p = GA.REPO / "docs" / "data" / "vehicle_extras.json"
+    VIN decode's engine in vehicle_extras.json (field 'engine')."""
+    if texts is None:
+        texts, _ = lot_snapshot()
     try:
-        inv, ex = json.loads(inv_p.read_text()), json.loads(ex_p.read_text())
-    except (OSError, ValueError):
+        inv = json.loads(texts[LOT_FILES[0]])
+        ex = json.loads(texts[LOT_FILES[1]])
+    except (KeyError, ValueError):
         return {}
     F = {k: i for i, k in enumerate(inv["fields"])}
     ei = ex["extraFields"].index("engine")
@@ -353,7 +376,8 @@ def split(units: dict) -> bool:
 
 # ------------------------------------------------------------------ build ---
 def build(records: list, names: GA.Names, site: str, src: str = "", complete: dict | None = None,
-          gens: dict | None = None, facelifts: dict | None = None, observed: dict | None = None) -> dict:
+          gens: dict | None = None, facelifts: dict | None = None, observed: dict | None = None,
+          lot_meta: dict | None = None) -> dict:
     gens = load_generations() if gens is None else gens
     obs = (load_observed() if observed is None else observed) if site == "gspnorthamerica.com" else None
     fl = load_facelifts() if facelifts is None else facelifts
@@ -484,7 +508,7 @@ def build(records: list, names: GA.Names, site: str, src: str = "", complete: di
                        "cosmetic": bool(cosm), "note": note,
                        **({"driven_axle": pos.split(" ")[0]} if cat == "cv-axle" and pos else {})})
     doc = {"schema": SCHEMA, "src": "aftermarket", "site": site, "raw": src, "tier": "likely",
-           "crawl_complete": complete or {}, "groups": groups,
+           "crawl_complete": complete or {}, "lot_snapshot": lot_meta or {}, "groups": groups,
            "summary": {"unit_records": len(seen), "groups": len(groups),
                        "cross_model_groups": sum(g["cross_model"] for g in groups),
                        "apps": sum(len(g["apps"]) for g in groups),
@@ -543,15 +567,17 @@ def main(argv=None) -> int:
     ap.add_argument("--raw-ref")
     ap.add_argument("--out")
     ap.add_argument("--report")
+    ap.add_argument("--lot-ref", help="git commit to read the lot files from (release builds pin this)")
     a = ap.parse_args(argv)
     recs, src, complete = load(a.site, a.raw, a.raw_ref)
+    texts, lot_meta = lot_snapshot(a.lot_ref)
     lot = None
-    inv_p = GA.REPO / "docs" / "data" / "inventory_live.json"
-    if inv_p.exists():
-        inv = json.loads(inv_p.read_text())
+    if texts[LOT_FILES[0]]:
+        inv = json.loads(texts[LOT_FILES[0]])
         F = {k: i for i, k in enumerate(inv["fields"])}
         lot = {(v[F["make"]] or "", v[F["model"]] or "") for v in inv["vehicles"]}
-    doc = build(recs, GA.Names(lot), a.site, src, complete)
+    obs = load_observed(texts) if a.site == "gspnorthamerica.com" else None
+    doc = build(recs, GA.Names(lot), a.site, src, complete, observed=obs, lot_meta=lot_meta)
     f = SITES[a.site]["file"]
     out = Path(a.out or HERE / "curated" / f"{f}.json")
     out.parent.mkdir(parents=True, exist_ok=True)

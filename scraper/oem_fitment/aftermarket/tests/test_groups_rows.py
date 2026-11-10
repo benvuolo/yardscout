@@ -39,7 +39,8 @@ class AllObs(dict):  # offline: every engine size "seen" on the lots, unless a t
         return {round(x / 10, 1) for x in range(5, 90)}
 
 
-R.load_observed = lambda: AllObs()
+REAL_LOAD_OBSERVED = R.load_observed
+R.load_observed = lambda *a, **k: AllObs()
 FX = HERE / "fixtures"
 GENS = {"honda|accord": [[1990, 1993], [1994, 1997], [1998, 2002], [2003, 2007], [2008, 2012]],
         "honda|crv": [[2017, 2022]], "honda|pilot": [[2016, 2022]]}
@@ -141,6 +142,15 @@ check("a unit whose rows for one model span two generations is refused",
       not d["groups"] and d["summary"]["refused_units"].get("cv-axle:unit_spans_generations") == 1)
 one = gsp_rec("X10", [(2003, 2004, "Honda", "Accord", ""), (2005, 2007, "Honda", "Accord", "")], engines=("2.4",))
 check("rows inside one generation pass", R.build([one], Names(), "gspnorthamerica.com")["groups"] != [])
+
+# ---- lot snapshot pinning (hub 2026-11-10)
+t1, m1 = R.lot_snapshot("HEAD")
+t2, m2 = R.lot_snapshot("HEAD")
+check("lot snapshot from a commit is reproducible (same sha256 twice) and names the commit",
+      m1 == m2 and len(m1["ref"]) == 40 and all(len(h) == 64 for h in m1["sha256"].values()))
+check("observed engines come from the given snapshot texts", REAL_LOAD_OBSERVED({R.LOT_FILES[0]: json.dumps(
+    {"fields": ["id", "year", "make", "model"], "vehicles": [[1, 2010, "Honda", "Fit"]]}), R.LOT_FILES[1]: json.dumps(
+    {"extraFields": ["photo", "color", "engine"], "extras": {"1": ["", "", "1.5L 4-cyl"]}})}) == {("Honda", "fit", 2010): {1.5}})
 
 # ---- 1A Auto
 d = B([A0], Names(), "www.1aauto.com")
