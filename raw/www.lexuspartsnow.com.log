@@ -1252,3 +1252,62 @@
 16:08:09 chain-unlinked side-mirrors 1 numbers named by 87940-3A090-B1, no catalog link: 87940-3A200-B0
 16:08:09 chain-unlinked side-mirrors 1 numbers named by 87940-3A090-A1, no catalog link: 87940-3A200-A0
 16:19:29 time budget reached records=3216
+16:19:43 start site=www.lexuspartsnow.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=3216 list_lines=954 year_lines=174 url_index=15972
+16:19:43 completion worklist completion/toyota.own_page.json: 106 rows
+16:31:35 list-fail https://www.lexuspartsnow.com/parts-list/2008-lexus-gs350/electrical/headlamp.html: ValueError: no __INITIAL_STORE__ on page
+16:38:08 product-fail https://www.lexuspartsnow.com/parts/lexus-mirror-assy-outer-rear-view-lh~87940-3a150-a1.html: ValueError: no __INITIAL_STORE__ on page
+16:38:08 product-fail https://www.lexuspartsnow.com/parts/lexus-mirror-assy-outer-rear-view-lh~87940-3a150-b1.html: ValueError: HTTP 502 for https://www.lexuspartsnow.com/parts/lexus-mirror-assy-outer-rear-view-lh~87940-3a150-b1.html
+16:44:55 chain-unlinked headlights 1 numbers named by 81110-3A611, no catalog link: 81110-3A740
+16:44:55 chain-unlinked headlights 1 numbers named by 81110-3A601, no catalog link: 81110-3A760
+16:44:55 chain-unlinked headlights 1 numbers named by 81110-3A621, no catalog link: 81110-3A750
+16:44:55 chain-unlinked headlights 1 numbers named by 81130-3A601, no catalog link: 81130-3A760
+16:44:55 chain-unlinked headlights 1 numbers named by 81130-3A611, no catalog link: 81130-3A740
+16:44:55 chain-unlinked headlights 1 numbers named by 81130-3A621, no catalog link: 81130-3A750
+16:44:55 chain-unlinked headlights 1 numbers named by 81150-3A731, no catalog link: 81150-3A860
+16:44:55 chain-unlinked headlights 1 numbers named by 81150-3A721, no catalog link: 81150-3A880
+16:44:55 chain-unlinked headlights 1 numbers named by 81150-3A741, no catalog link: 81150-3A870
+16:44:55 chain-unlinked headlights 1 numbers named by 81170-3A741, no catalog link: 81170-3A870
+16:44:55 chain-unlinked headlights 1 numbers named by 81170-3A721, no catalog link: 81170-3A880
+16:44:55 chain-unlinked headlights 1 numbers named by 81170-3A731, no catalog link: 81170-3A860
+16:45:03 product-fail https://www.lexuspartsnow.com/parts/lexus-mirror-assy-outer-rear-view-lh~87940-3a150-a1.html: ValueError: no __INITIAL_STORE__ on page
+16:45:03 product-fail https://www.lexuspartsnow.com/parts/lexus-mirror-assy-outer-rear-view-lh~87940-3a150-b1.html: ValueError: HTTP 502 for https://www.lexuspartsnow.com/parts/lexus-mirror-assy-outer-rear-view-lh~87940-3a150-b1.html
+16:48:55 chain-unlinked headlights 1 numbers named by 81145-0E061, no catalog link: 81130-0E061
+16:48:55 chain-unlinked headlights 2 numbers named by 81185-0E061, no catalog link: 81170-0E060, 81170-0E061
+16:51:27 chain-unlinked side-mirrors 1 numbers named by 87910-48421-E1, no catalog link: 87910-0E905
+16:51:27 chain-unlinked side-mirrors 1 numbers named by 87940-48401-C0, no catalog link: 87940-0E905
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87910-0E021-E0, no catalog link: 87910-0E905
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87910-0E021-E1, no catalog link: 87910-0E905
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87910-0E021-J0, no catalog link: 87910-0E905
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87910-0E041-E0, no catalog link: 87910-0E906
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87910-0E101-E0, no catalog link: 87910-0E907
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87940-0E021-E0, no catalog link: 87940-0E905
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87940-0E021-E1, no catalog link: 87940-0E905
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87940-0E021-J0, no catalog link: 87940-0E905
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87940-0E091-A0, no catalog link: 87940-0E907
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87910-0E021-A0, no catalog link: 87910-0E905
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87910-0E021-B0, no catalog link: 87910-0E905
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87910-0E021-B2, no catalog link: 87910-0E905
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87910-0E021-C0, no catalog link: 87910-0E905
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87910-0E021-C1, no catalog link: 87910-0E905
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87910-0E021-D0, no catalog link: 87910-0E905
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87910-0E021-E2, no catalog link: 87910-0E905
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87910-0E021-J1, no catalog link: 87910-0E905
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87910-0E041-A0, no catalog link: 87910-0E906
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87910-0E041-B0, no catalog link: 87910-0E906
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87910-0E041-C0, no catalog link: 87910-0E906
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87910-0E041-C1, no catalog link: 87910-0E906
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87910-0E041-D0, no catalog link: 87910-0E906
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87910-0E101-A0, no catalog link: 87910-0E907
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87910-0E101-D0, no catalog link: 87910-0E907
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87910-0E101-J1, no catalog link: 87910-0E907
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87940-0E021-A0, no catalog link: 87940-0E905
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87940-0E021-B0, no catalog link: 87940-0E905
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87940-0E021-B2, no catalog link: 87940-0E905
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87940-0E021-C0, no catalog link: 87940-0E905
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87940-0E021-C1, no catalog link: 87940-0E905
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87940-0E021-D0, no catalog link: 87940-0E905
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87940-0E021-E2, no catalog link: 87940-0E905
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87940-0E021-J1, no catalog link: 87940-0E905
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87940-0E031-A0, no catalog link: 87940-0E906
+16:55:43 chain-unlinked side-mirrors 1 numbers named by 87940-0E031-B0, no catalog link: 87940-0E906
+16:56:31 time budget reached records=3364
