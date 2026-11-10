@@ -100,7 +100,8 @@ cng["motorization"]["Fuel"] = "CNG"
 odd = copy.deepcopy(base)
 odd.update(vehicle_id="9", model="Civic Del Sol Whatever")
 doc = GS.build([cng, odd], names, "test")
-ok(doc["groups"] == [] and doc["summary"]["refused"].get("fuel:CNG") == 1 and doc["unmapped_models"], "fuel/unmapped")
+ok(doc["groups"] == [] and doc["summary"]["refused"].get("config_fuel:CNG") == 1 and doc["unmapped_models"],
+   "CNG-only key gives no group; unmapped model reported")
 
 # drive gate (hub 2026-11-09): mapped, never inferred
 ok(GS.classify("Drive Type: AWD") == ("ok", (("drive", "awd"),)), "AWD -> drive gate")
@@ -132,16 +133,29 @@ doc = GS.build([d4], names, "test")
 ok(not any(x["cat"] == "ac-compressor" for x in doc["groups"]), "units gated on different dimensions -> dropped")
 
 # FLEX (hub 2026-11-09): non-fuel lines only, and only beside the same GAS unit
+def clean_fuel(rec):
+    rec = copy.deepcopy(rec)
+    rec["cards"] = [c for c in rec["cards"] if c["pn"] != "SP8965M"]
+    for c in rec["cards"]:
+        if c["pn"] == "SP8054M":
+            c["note"] = ""
+    return rec
+
+
+base_f = clean_fuel(base)
+ok("am:spp:fuel-pump-module:SP8054M" in {x["id"] for x in GS.build([base_f], names, "t")["groups"]},
+   "clean GAS-only fuel module key gives a group (control)")
 flex = copy.deepcopy(base)
 flex.update(vehicle_id="77")
 flex["motorization"]["Fuel"] = "FLEX"
-doc = GS.build([base, flex], names, "test")
+doc = GS.build([base_f, clean_fuel(flex)], names, "test")
 ids = {x["id"] for x in doc["groups"]}
 ok("am:spp:ac-compressor:0610360" in ids and "am:spp:ignition-coils:C-900" in ids, "FLEX + same GAS unit kept")
-ok(doc["summary"]["refused"].get("fuel-pump-module:fuel_FLEX") == 2 - 1 or
-   doc["summary"]["refused"].get("fuel-pump-module:fuel_FLEX") == 1, "fuel lines refuse FLEX")
+ok(not any(x["cat"] == "fuel-pump-module" for x in doc["groups"]) and
+   doc["summary"]["split_keys_dropped"].get("fuel-pump-module:non_gas_config_on_fuel_line") == 1,
+   "fuel lines: a FLEX config of the key drops the key, even when the GAS config lists a unit")
 doc = GS.build([flex], names, "test")
-ok(doc["groups"] == [] and any("flex_without_gas" in k for k in doc["summary"]["split_keys_dropped"]),
+ok(doc["groups"] == [] and any("no_gas_config" in k for k in doc["summary"]["split_keys_dropped"]),
    "FLEX alone (no GAS config that year) -> dropped")
 flex2 = copy.deepcopy(flex)
 for c in flex2["cards"]:
@@ -154,7 +168,35 @@ ok("am:spp:ignition-coils:C-900" not in ids and "am:spp:ignition-coils:C-999" no
 ok("am:spp:ac-compressor:0610360" in ids, "other lines of that year unaffected")
 cng = copy.deepcopy(base)
 cng["motorization"]["Fuel"] = "BI-FUEL"
-ok(GS.build([cng], names, "t")["summary"]["refused"].get("fuel:BI-FUEL") == 1, "BI-FUEL still refused")
+ok(GS.build([cng], names, "t")["groups"] == [], "BI-FUEL-only key gives no group")
+
+# §11.4 audit regression (2026-11-10): a hybrid config shares the gas car's key
+hyb = copy.deepcopy(base)
+hyb.update(vehicle_id="88", submodel="Hybrid L4 1.8L")
+hyb["motorization"]["Fuel"] = "FULL HYBRID EV-GAS (FHEV)"
+for c in hyb["cards"]:
+    if c["pn"] == "TB1242":
+        c["pn"] = c["href_pn"] = "TB1030"       # the hybrid takes a different throttle body
+doc = GS.build([base, hyb], names, "test")
+ids = {x["id"] for x in doc["groups"]}
+ok("am:spp:throttle-body:TB1242" not in ids and "am:spp:throttle-body:TB1030" not in ids,
+   "gas and hybrid configs on different units -> key dropped (Fusion 2014 case)")
+ok("am:spp:ac-compressor:0610360" in ids, "lines where the hybrid config lists the same unit are kept")
+hyb2 = copy.deepcopy(hyb)
+hyb2["cards"] = [c for c in hyb2["cards"] if c["line"] != "Compressor"]
+doc = GS.build([base, hyb2], names, "test")
+ok("am:spp:ac-compressor:0610360" not in {x["id"] for x in doc["groups"]} and
+   doc["summary"]["split_keys_dropped"].get("ac-compressor:config_without_line") == 1,
+   "a config of the key with no unit in the line -> key dropped (Fusion Energi case)")
+# Focus 2012 case: FLEX config on a different fuel module than GAS -> dropped (fuel line)
+fx = copy.deepcopy(base_f)
+fx.update(vehicle_id="99")
+fx["motorization"]["Fuel"] = "FLEX"
+for c in fx["cards"]:
+    if c["pn"] == "SP8054M":
+        c["pn"] = c["href_pn"] = "SP8999M"
+doc = GS.build([base_f, fx], names, "test")
+ok(not any(x["cat"] == "fuel-pump-module" for x in doc["groups"]), "FLEX config drops the fuel-module key")
 
 print(f"{checks - fails}/{checks} checks passed")
 sys.exit(1 if fails else 0)
