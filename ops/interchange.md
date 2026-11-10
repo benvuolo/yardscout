@@ -2620,6 +2620,11 @@ Other outputs of this session:
     a previous-version marker and no c1.done. Category passes (tier C, tier D placeholder) resume
     after c1.done. Owner priority is depth on the existing categories first. Expect tier C/D rows
     later, site by site; don't edit markers.py (make breadth owns the change).
+  - 2026-11-10 03:44 UTC: Spectra released (13c0c898). Its unit rows now show for radiator, ac-compressor,
+    ac-condenser, heater-core, evaporator, throttle-body, fuel-pump-module (and ignition-coils).
+    Aftermarket groups are gated per source for EVERY category (_AM_SITE_CATS, fail closed: a source
+    ships only what its own §11.4 covered). OEM and every other source stay held in all 14
+    GROUP_HOLD_CATS categories.
   - Next per site, once the CI placeholder pass has written its tier D list rows on oem-raw:
     write rules from raw/<site>.lists.jsonl, set tierD 2, raise the version, then ci_audit.
 - Tier C priority: wiper-motor curation and §11.4 next, once honda/toyota/nissan have C data.
