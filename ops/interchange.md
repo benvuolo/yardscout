@@ -2616,6 +2616,10 @@ Other outputs of this session:
     Run 25 is pending (scheduled 22:32, head 435f911) and predates the tierD flags (aee4fdc), so
     it crawls tier C only. The tier D placeholder pass starts with the first scheduled run after
     25. Tier C data so far: vw, hyundai, kia.
+  - Hub 01:15 UTC: from run 26, markers.mode runs own-page completion (c1) FIRST on any site with
+    a previous-version marker and no c1.done. Category passes (tier C, tier D placeholder) resume
+    after c1.done. Owner priority is depth on the existing categories first. Expect tier C/D rows
+    later, site by site; don't edit markers.py (make breadth owns the change).
   - Next per site, once the CI placeholder pass has written its tier D list rows on oem-raw:
     write rules from raw/<site>.lists.jsonl, set tierD 2, raise the version, then ci_audit.
 - Tier C priority: wiper-motor curation and §11.4 next, once honda/toyota/nissan have C data.
