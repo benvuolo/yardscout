@@ -13240,3 +13240,19 @@
 15:06:54 chain-unlinked side-mirrors 1 numbers named by 5F1Z-17683-BA, no catalog link: 6F1Z-17683-B
 15:21:03 chain-unlinked window-regulator 1 numbers named by DG9Z-9923394-E, no catalog link: DG9Z-14B291-WT
 15:25:11 time budget reached records=9546
+23:07:25 start site=www.fordpartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=9546 list_lines=6483 year_lines=1138 url_index=35031
+23:07:25 completion worklist completion/ford.own_page.json: 695 rows
+23:19:20 chain-unlinked side-mirrors 1 numbers named by BB5Z-17682-KBPTM, no catalog link: BB5Z-17682-KAPTM
+23:19:20 chain-unlinked side-mirrors 1 numbers named by DB5Z-17682-DB, no catalog link: DB5Z-17682-DL
+23:19:20 chain-unlinked side-mirrors 1 numbers named by DB5Z-17682-DC, no catalog link: DB5Z-17682-DK
+23:19:20 chain-unlinked side-mirrors 1 numbers named by DB5Z-17682-UE, no catalog link: DB5Z-17682-UK
+23:19:20 chain-unlinked side-mirrors 1 numbers named by DB5Z-17682-UF, no catalog link: DB5Z-17682-UJ
+23:19:20 chain-unlinked side-mirrors 1 numbers named by DB5Z-17683-DA, no catalog link: DB5Z-17683-DF
+23:19:20 chain-unlinked side-mirrors 1 numbers named by DB5Z-17683-DB, no catalog link: DB5Z-17683-DE
+23:19:20 chain-unlinked side-mirrors 1 numbers named by DB5Z-17683-UE, no catalog link: DB5Z-17683-UK
+23:19:20 chain-unlinked side-mirrors 1 numbers named by DB5Z-17683-UF, no catalog link: DB5Z-17683-UJ
+23:19:28 chain-unlinked window-regulator 2 numbers named by EB5Z-7823394-A, no catalog link: WLM-249, WLM-213
+23:19:28 chain-unlinked window-regulator 2 numbers named by EB5Z-7823395-A, no catalog link: WLM-250, WLM-214
+23:19:28 chain-unlinked window-regulator 4 numbers named by EB5Z-7823394-C, no catalog link: EB5Z-7823394-B, WLM-251, WLM-260, WLM-219
+23:19:28 chain-unlinked window-regulator 4 numbers named by EB5Z-7823395-C, no catalog link: EB5Z-7823395-B, WLM-252, WLM-220, WLM-261
+23:40:48 time budget reached records=9583
