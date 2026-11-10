@@ -569,3 +569,133 @@
 21:29:40 chain-unlinked bumper-rear 2 numbers named by 04715-S5A-A91ZZ, no catalog link: 04715-S5A-010ZZ, 71501-S5A-010ZZ
 21:30:02 seg done tier=B Honda Civic Hybrid [2003, 2010] seeds=[2008, 2004] records=1465 errors=3
 21:30:02 finished records=1465 errors=3 chain_records=0 chain_unlinked=277 chain_failed=0 chain_given_up=0
+01:58:39 start site=www.hondapartsnow.com mode=worklist tiers=['A', 'B', 'W', 'C'] records=1465 list_lines=342 year_lines=50 url_index=3204
+01:58:39 seg done tier=A Honda Accord [1998, 2002] seeds=[2002] records=1465 errors=3
+01:58:39 seg done tier=A Honda Accord [2003, 2005] seeds=[2003] records=1465 errors=3
+01:58:39 seg done tier=A Honda Odyssey [2005, 2010] seeds=[2007] records=1465 errors=3
+01:58:39 seg done tier=A Honda Civic [2006, 2008] seeds=[2008] records=1465 errors=3
+01:58:39 seg done tier=A Honda Accord [2008, 2010] seeds=[2008] records=1465 errors=3
+01:58:39 seg done tier=A Honda Pilot [2003, 2008] seeds=[2006] records=1465 errors=3
+01:58:39 seg done tier=A Honda Accord [2006, 2007] seeds=[2007] records=1465 errors=3
+01:58:39 seg done tier=A Honda Civic [2001, 2003] seeds=[2002] records=1465 errors=3
+01:58:39 seg done tier=A Honda Civic [2004, 2005] seeds=[2005] records=1465 errors=3
+01:58:39 seg done tier=A Honda Odyssey [1995, 2004] seeds=[2003] records=1465 errors=3
+01:58:39 seg done tier=A Honda Civic [1996, 2000] seeds=[2000] records=1465 errors=3
+01:58:39 seg done tier=A Honda Civic [2009, 2011] seeds=[2009] records=1465 errors=3
+01:58:39 seg done tier=A Honda CR-V [2002, 2006] seeds=[2004] records=1465 errors=3
+01:58:39 seg done tier=A Honda Pilot [2009, 2015] seeds=[2011] records=1465 errors=3
+01:58:39 seg done tier=A Honda Civic [2012, 2015] seeds=[2012] records=1465 errors=3
+01:58:39 seg done tier=A Honda Accord [1994, 1997] seeds=[1997] records=1465 errors=3
+01:58:39 seg done tier=A Honda Accord [2011, 2012] seeds=[2012] records=1465 errors=3
+01:58:39 seg done tier=A Honda CR-V [2007, 2011] seeds=[2007] records=1465 errors=3
+01:58:39 seg done tier=A Honda CR-V [1997, 2001] seeds=[2001] records=1465 errors=3
+01:58:39 seg done tier=A Honda Fit [2007, 2020] seeds=[2008] records=1465 errors=3
+01:58:39 seg done tier=A Honda Odyssey [2011, 2017] seeds=[2011] records=1465 errors=3
+01:58:39 seg done tier=A Honda Element [2003, 2011] seeds=[2003] records=1465 errors=3
+01:58:39 seg done tier=A Honda Accord [2013, 2017] seeds=[2013] records=1465 errors=3
+01:58:39 seg done tier=A Honda Accord [1981, 1993] seeds=[1993] records=1465 errors=3
+01:58:39 seg done tier=A Honda Civic [1978, 1995] seeds=[1995] records=1465 errors=3
+01:58:39 seg done tier=A Honda Ridgeline [2006, 2014] seeds=[2006] records=1465 errors=3
+01:58:39 seg done tier=A Honda Insight [2000, 2021] seeds=[2010] records=1465 errors=3
+01:58:39 seg done tier=A Honda Civic Hybrid [2003, 2010] seeds=[2008] records=1465 errors=3
+01:58:39 seg done tier=B Honda Accord [1998, 2002] seeds=[2002] records=1465 errors=3
+01:58:39 seg done tier=B Honda Accord [2003, 2005] seeds=[2003] records=1465 errors=3
+01:58:39 seg done tier=B Honda Odyssey [2005, 2010] seeds=[2007] records=1465 errors=3
+01:58:39 seg done tier=B Honda Civic [2006, 2008] seeds=[2008] records=1465 errors=3
+01:58:39 seg done tier=B Honda Accord [2008, 2010] seeds=[2008] records=1465 errors=3
+01:58:39 seg done tier=B Honda Pilot [2003, 2008] seeds=[2006] records=1465 errors=3
+01:58:39 seg done tier=B Honda Accord [2006, 2007] seeds=[2007] records=1465 errors=3
+01:58:39 seg done tier=B Honda Civic [2001, 2003] seeds=[2002] records=1465 errors=3
+01:58:39 seg done tier=B Honda Civic [2004, 2005] seeds=[2005] records=1465 errors=3
+01:58:39 seg done tier=B Honda Odyssey [1995, 2004] seeds=[2003] records=1465 errors=3
+01:58:39 seg done tier=B Honda Civic [1996, 2000] seeds=[2000] records=1465 errors=3
+01:58:39 seg done tier=B Honda Civic [2009, 2011] seeds=[2009] records=1465 errors=3
+01:58:39 seg done tier=B Honda CR-V [2002, 2006] seeds=[2004] records=1465 errors=3
+01:58:39 seg done tier=B Honda Pilot [2009, 2015] seeds=[2011] records=1465 errors=3
+01:58:39 seg done tier=B Honda Civic [2012, 2015] seeds=[2012] records=1465 errors=3
+01:58:39 seg done tier=B Honda Accord [1994, 1997] seeds=[1997] records=1465 errors=3
+01:58:39 seg done tier=B Honda Accord [2011, 2012] seeds=[2012] records=1465 errors=3
+01:58:39 seg done tier=B Honda CR-V [2007, 2011] seeds=[2007] records=1465 errors=3
+01:58:39 seg done tier=B Honda CR-V [1997, 2001] seeds=[2001] records=1465 errors=3
+01:58:39 seg done tier=B Honda Fit [2007, 2020] seeds=[2008] records=1465 errors=3
+01:58:39 seg done tier=B Honda Odyssey [2011, 2017] seeds=[2011] records=1465 errors=3
+01:58:39 seg done tier=B Honda Element [2003, 2011] seeds=[2003] records=1465 errors=3
+01:58:39 seg done tier=B Honda Accord [2013, 2017] seeds=[2013] records=1465 errors=3
+01:58:39 seg done tier=B Honda Accord [1981, 1993] seeds=[1993] records=1465 errors=3
+01:58:39 seg done tier=B Honda Civic [1978, 1995] seeds=[1995] records=1465 errors=3
+01:58:39 seg done tier=B Honda Ridgeline [2006, 2014] seeds=[2006] records=1465 errors=3
+01:58:39 seg done tier=B Honda Insight [2000, 2021] seeds=[2010] records=1465 errors=3
+01:58:39 seg done tier=B Honda Civic Hybrid [2003, 2010] seeds=[2008] records=1465 errors=3
+01:59:28 chain-unlinked wiper-motor 1 numbers named by 76505-S84-A01, no catalog link: 76505-S4K-A01
+02:00:00 chain-unlinked knuckle 4 numbers named by 51210-S4K-A00, no catalog link: 51210-S84-A00, 51210-S84-A01, 51210-S84-305, 51210-S84-A02
+02:00:00 chain-unlinked knuckle 4 numbers named by 51215-S4K-A00, no catalog link: 51215-S84-A00, 51215-S84-305, 51215-S84-A02, 51215-S84-A01
+02:00:32 chain-unlinked knuckle 1 numbers named by 52215-S84-A32, no catalog link: 52215-S84-A31
+02:01:04 chain-unlinked knuckle 1 numbers named by 52210-S84-A52, no catalog link: 52210-S84-A51
+02:01:04 chain-unlinked knuckle 1 numbers named by 52215-S84-A52, no catalog link: 52215-S84-A51
+02:02:00 chain-unlinked strut 3 numbers named by 52611-S84-A04, no catalog link: 52611-S84-A01, 52611-S84-A02, 52611-S84-A03
+02:02:56 chain-unlinked strut 3 numbers named by 52611-S87-A04, no catalog link: 52611-S87-A02, 52611-S87-A01, 52611-S87-A03
+02:02:56 seg done tier=C Honda Accord [1998, 2002] seeds=[2002] records=1483 errors=3
+02:03:36 chain-unlinked wiper-motor 1 numbers named by 76505-SDA-A11, no catalog link: 76505-SDA-A01
+02:04:08 chain-unlinked knuckle 2 numbers named by 51210-SDA-A02, no catalog link: 51210-SDA-A01, 51210-SDA-A00
+02:04:08 chain-unlinked knuckle 2 numbers named by 51215-SDA-A02, no catalog link: 51215-SDA-A00, 51215-SDA-A01
+02:04:48 chain-unlinked knuckle 1 numbers named by 52210-SDC-A10, no catalog link: 52210-SDC-A00
+02:04:48 chain-unlinked knuckle 1 numbers named by 52215-SDC-A10, no catalog link: 52215-SDC-A00
+02:06:08 chain-unlinked strut 3 numbers named by 51601-SDA-A14, no catalog link: 51601-SDA-A11, 51601-SDA-A13, 51601-SDA-A12
+02:06:08 chain-unlinked strut 1 numbers named by 51602-SDA-A32, no catalog link: 51602-SDA-A31
+02:06:08 chain-unlinked strut 3 numbers named by 51602-SDA-A14, no catalog link: 51602-SDA-A11, 51602-SDA-A12, 51602-SDA-A13
+02:06:08 chain-unlinked strut 3 numbers named by 51605-SDA-A04, no catalog link: 51605-SDA-A01, 51605-SDA-A03, 51605-SDA-A02
+02:07:04 chain-unlinked strut 7 numbers named by 51601-SDB-A18, no catalog link: 51601-SDB-A17, 51601-SDB-A13, 51601-SDB-A15, 51601-SDB-A11, 51601-SDB-A14, 51601-SDB-A16, 51601-SDB-A12
+02:07:04 chain-unlinked strut 7 numbers named by 51602-SDB-A18, no catalog link: 51602-SDB-A11, 51602-SDB-A12, 51602-SDB-A13, 51602-SDB-A15, 51602-SDB-A17, 51602-SDB-A16, 51602-SDB-A14
+02:07:04 chain-unlinked strut 3 numbers named by 51605-SDB-A04, no catalog link: 51605-SDB-A01, 51605-SDB-A02, 51605-SDB-A03
+02:07:36 chain-unlinked strut 1 numbers named by 52610-SDB-A03, no catalog link: 52610-SDB-A02
+02:07:36 chain-unlinked strut 1 numbers named by 52610-SDB-A13, no catalog link: 52610-SDB-A12
+02:07:36 chain-unlinked strut 1 numbers named by 52611-SDB-A02, no catalog link: 52611-SDB-A01
+02:07:36 seg done tier=C Honda Accord [2003, 2005] seeds=[2003] records=1505 errors=3
+02:08:40 chain-unlinked wiper-motor 1 numbers named by 76710-SHJ-A02, no catalog link: 76710-SHJ-A01
+02:09:20 chain-unlinked knuckle 1 numbers named by 51211-SHJ-A01, no catalog link: 51211-SHJ-A00
+02:09:20 chain-unlinked knuckle 1 numbers named by 51216-SHJ-A01, no catalog link: 51216-SHJ-A00
+02:11:28 seg done tier=C Honda Odyssey [2005, 2010] seeds=[2007] records=1518 errors=3
+02:12:16 chain-unlinked wiper-motor 1 numbers named by 76505-SNA-A02, no catalog link: 76505-SNA-A01
+02:14:16 chain-unlinked knuckle 2 numbers named by 52210-SVB-A10, no catalog link: 52210-SNE-A00, 52210-SVB-A00
+02:14:16 chain-unlinked knuckle 2 numbers named by 52215-SVB-A10, no catalog link: 52215-SNE-A00, 52215-SVB-A00
+02:15:28 chain-unlinked strut 3 numbers named by 51601-SNA-A17, no catalog link: 51601-SNA-A16, 51601-SNA-A14, 51601-SNA-A15
+02:15:28 chain-unlinked strut 3 numbers named by 51601-SNA-A25, no catalog link: 51601-SNA-A23, 51601-SNA-A24, 51601-SNA-A22
+02:15:28 chain-unlinked strut 3 numbers named by 51602-SNA-A17, no catalog link: 51602-SNA-A14, 51602-SNA-A15, 51602-SNA-A16
+02:15:28 chain-unlinked strut 3 numbers named by 51602-SNA-A25, no catalog link: 51602-SNA-A23, 51602-SNA-A24, 51602-SNA-A22
+02:15:44 chain-unlinked strut 1 numbers named by 52610-SNE-A03, no catalog link: 52610-SNA-A03
+02:16:08 chain-unlinked strut 3 numbers named by 51601-SNA-A35, no catalog link: 51601-SNA-A33, 51601-SNA-A32, 51601-SNA-A34
+02:16:08 chain-unlinked strut 3 numbers named by 51602-SNA-A35, no catalog link: 51602-SNA-A34, 51602-SNA-A32, 51602-SNA-A33
+02:16:16 seg done tier=C Honda Civic [2006, 2008] seeds=[2008] records=1540 errors=3
+02:16:56 chain-unlinked wiper-motor 1 numbers named by 76505-TA0-A02, no catalog link: 76505-TA0-A01
+02:17:28 chain-unlinked knuckle 3 numbers named by 51210-TA0-020, no catalog link: 51210-TA0-A01, 51210-TA0-010, 51210-TA0-A02
+02:17:28 chain-unlinked knuckle 3 numbers named by 51215-TA0-020, no catalog link: 51215-TA0-A01, 51215-TA0-A02, 51215-TA0-010
+02:20:00 chain-unlinked strut 1 numbers named by 51610-TA1-A05, no catalog link: 51610-TA1-A04
+02:20:00 chain-unlinked strut 1 numbers named by 51620-TA1-A05, no catalog link: 51620-TA1-A04
+02:20:32 seg done tier=C Honda Accord [2008, 2010] seeds=[2008] records=1559 errors=3
+02:21:20 chain-unlinked wiper-motor 1 numbers named by 76505-S9V-A02, no catalog link: 76505-S9V-A01
+02:21:36 chain-unlinked wiper-motor 1 numbers named by 76700-S9V-A02, no catalog link: 76700-S9V-A01
+02:22:16 chain-unlinked knuckle 1 numbers named by 51211-S3V-A01, no catalog link: 51211-S3V-A00
+02:22:16 chain-unlinked knuckle 1 numbers named by 51216-S3V-A01, no catalog link: 51216-S3V-A00
+02:23:04 chain-unlinked strut 1 numbers named by 51602-STW-A04, no catalog link: 51602-STW-A03
+02:23:04 chain-unlinked strut 1 numbers named by 51606-STW-A04, no catalog link: 51606-STW-A03
+02:24:00 chain-unlinked strut 1 numbers named by 51602-S9V-A11, no catalog link: 51602-S9V-A09
+02:24:00 chain-unlinked strut 1 numbers named by 51606-S9V-A09, no catalog link: 51606-S9V-A08
+02:24:16 chain-unlinked strut 1 numbers named by 52610-S9V-A02, no catalog link: 52610-S9V-A01
+02:24:16 seg done tier=C Honda Pilot [2003, 2008] seeds=[2006] records=1573 errors=3
+02:27:20 seg done tier=C Honda Accord [2006, 2007] seeds=[2007] records=1583 errors=3
+02:28:00 chain-unlinked wiper-motor 4 numbers named by 76500-S5A-A00, no catalog link: 06760-S5A-A00, 76505-S5D-A01, 76505-S5A-A01, 76505-S5D-999
+02:28:32 chain-unlinked knuckle 1 numbers named by 51210-S5A-J10, no catalog link: 51210-S5A-J00
+02:28:32 chain-unlinked knuckle 1 numbers named by 51215-S5A-J10, no catalog link: 51215-S5A-J00
+02:30:00 chain-unlinked strut 5 numbers named by 51601-S5A-A29, no catalog link: 51601-S5A-A27, 51601-S5D-A27, 51601-S5D-A29, 51601-S5A-A28, 51601-S5D-A28
+02:30:00 chain-unlinked strut 4 numbers named by 51601-S5A-406, no catalog link: 51601-S5A-A14, 51601-S5D-A17, 51601-S5D-A19, 51601-S5D-A18
+02:30:00 chain-unlinked strut 5 numbers named by 51602-S5A-A29, no catalog link: 51602-S5A-A28, 51602-S5D-A29, 51602-S5D-A27, 51602-S5D-A28, 51602-S5A-A27
+02:30:00 chain-unlinked strut 5 numbers named by 51602-S5A-406, no catalog link: 51602-S5A-A14, 51602-S5D-A18, 51602-S5D-A17, 51602-S5A-A15, 51602-S5D-A19
+02:30:00 chain-unlinked strut 5 numbers named by 51605-S5A-307, no catalog link: 51605-S5D-A06, 51605-S5A-A06, 51605-S5D-A07, 51605-S5D-A08, 51605-S5A-A07
+02:30:00 chain-unlinked strut 5 numbers named by 51606-S5A-307, no catalog link: 51606-S5A-A07, 51606-S5D-A06, 51606-S5D-A07, 51606-S5A-A06, 51606-S5D-A08
+02:30:48 chain-unlinked strut 1 numbers named by 52610-S5A-A02, no catalog link: 52610-S5A-307
+02:30:48 chain-unlinked strut 1 numbers named by 52611-S5A-306, no catalog link: 52611-S5A-N04
+02:30:48 chain-unlinked strut 1 numbers named by 52620-S5A-A02, no catalog link: 52620-S5A-307
+02:31:28 chain-unlinked strut 1 numbers named by 52610-S5A-A62, no catalog link: 52610-S5A-A63
+02:31:28 chain-unlinked strut 1 numbers named by 52620-S5A-A62, no catalog link: 52620-S5A-A63
+02:31:28 seg done tier=C Honda Civic [2001, 2003] seeds=[2002] records=1601 errors=3
+02:31:28 time budget reached records=1601
