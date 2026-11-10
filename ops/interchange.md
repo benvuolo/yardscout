@@ -3183,3 +3183,13 @@ each); nothing allowlisted or crawled.
   - Payload diff: only Spectra amGroups added; OEM unchanged (ok ×8).
 - **Rule:** any later re-curation (oem-raw had 1,998 vehicles at ship
   time) gets a fresh §11.4 sample before it replaces the shipped file.
+- 2026-11-10 03:33 check-in: run 42712787314 (01:57) picked up all 4 sites,
+  but in worklist mode for tier C, not R3. Category breadth set tierC +
+  version 2 on them, and markers.mode runs an open worklist before the
+  completion pass.
+  - acurapartswarehouse: `.v2.done` (tier C, 951 records, 5 errors).
+  - hondapartsnow: tier C slices in progress (1,724 records at 03:04).
+  - infinitipartsdeal: started 03:18. nissanpartsdeal: not started yet.
+  - No .blocked or .paused. R3 (`.c1.done`) runs on each site after its
+    `.v2.done`.
+  - Acura has 0 completion rows, so its next run writes `.c1.done` at once.
