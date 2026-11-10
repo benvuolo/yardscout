@@ -1614,3 +1614,13 @@
 12:31:17 chain-unlinked side-mirrors 1 numbers named by 51-16-7-190-189, no catalog link: 51-16-7-041-951
 12:31:17 chain-unlinked side-mirrors 1 numbers named by 51-16-7-190-192, no catalog link: 51-16-7-041-954
 12:42:53 time budget reached records=2133
+12:43:14 start site=www.bmwpartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2133 list_lines=1478 year_lines=202 url_index=0
+12:43:14 completion worklist completion/bmw.own_page.json: 507 rows
+12:55:15 chain-unlinked door-rear 1 numbers named by 41-52-7-202-341, no catalog link: 41009631831
+12:55:15 chain-unlinked door-rear 1 numbers named by 41-52-7-202-342, no catalog link: 41009631832
+12:55:23 chain-unlinked door-rear 1 numbers named by 41-52-7-158-501, no catalog link: 41525A2A367
+12:55:23 chain-unlinked door-rear 1 numbers named by 41-52-7-158-502, no catalog link: 41525A2A368
+13:05:24 chain-unlinked door-rear 1 numbers named by 41-52-7-202-089, no catalog link: 41-52-7-042-957
+13:05:24 chain-unlinked door-rear 1 numbers named by 41-52-7-202-090, no catalog link: 41-52-7-042-958
+13:05:56 chain-unlinked hood 1 numbers named by 41-61-7-200-442, no catalog link: 41-61-7-138-471
+13:13:39 time budget reached records=2133
