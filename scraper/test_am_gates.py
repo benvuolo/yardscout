@@ -96,10 +96,16 @@ check("GROUP_HOLD_CATS covers the 14 new categories",
        "fuel-pump-module", "cv-axle", "strut", "sunroof", "center-console", "door-panel",
        "blower-motor", "fog-lights"} <= js.GROUP_HOLD_CATS)
 _real_load = js._load_am_layer
-_fake_am = [dict(js._am_group_entry(_grp([["Honda", "Accord", 2003, 2007, "2.4L"]]), "spectra"), id="am:h1"),
+# hub 2026-11-10: release is per SOURCE (AM_RELEASED). am:h1 is a radiator group
+# from a source NOT released (gsp): held. am:sp1 is a Spectra radiator group:
+# released, so radiator gets a lazy file carrying only am:sp1.
+_fake_am = [dict(js._am_group_entry(_grp([["Honda", "Accord", 2003, 2007, "2.4L"]]), "gsp"), id="am:h1"),
+            dict(js._am_group_entry(_grp([["Honda", "Accord", 2003, 2007, "2.4L"]]), "spectrapremium"), id="am:sp1"),
             dict(js._am_group_entry({**_grp([["Honda", "Accord", 2003, 2007, "2.4L"]]), "cat": "alternator"},
                                     "dbelectrical"), id="am:ok1")]
-js._load_am_layer = lambda now=None: {"groups": _fake_am, "status": {"spectra": "ok"}}
+js._load_am_layer = lambda now=None: {"groups": _fake_am, "status": {"gsp": "ok", "spectrapremium": "ok"},
+                                      "site_of": {"am:h1": "gsp", "am:sp1": "spectrapremium",
+                                                  "am:ok1": "dbelectrical"}}
 _fake_oem = [{"id": "oem:toyota:x1", "cat": "fog-lights", "ns": "toyota", "tier": "likely", "src": "oem",
               "label": "Toyota catalog", "note": "n", "pn": ["1"], "apps": [["Toyota", "Camry", 2007, 2009, ""]]}]
 _pl = {"builtAt": "2026-11-09T00:00:00Z", "oemStatus": {}}
@@ -107,11 +113,18 @@ _lo = {"oem": _fake_oem}
 js._attach_lazy_layers(_pl, _lo)
 js._load_am_layer = _real_load
 _cats_out = set(_lo.get("files", {}))
-check("held categories get no lazy file (no OEM / aftermarket group ships for them)",
-      not (_cats_out & js.GROUP_HOLD_CATS), str(sorted(_cats_out)))
+_released_out = {c for c in _cats_out if c in js.AM_RELEASED["spectrapremium"]}
+check("held categories get no lazy file, except a category released for the source that has a group in it",
+      (_cats_out & js.GROUP_HOLD_CATS) == {"radiator"} == _released_out, str(sorted(_cats_out)))
+_rad = _lo.get("files", {}).get("radiator", {})
+check("released Spectra radiator group gets the radiator lazy file; the non-released source's group does not",
+      [g["id"] for g in _rad.get("amGroups", [])] == ["am:sp1"] and not _rad.get("oemGroups"),
+      str([g["id"] for g in _rad.get("amGroups", [])]))
+check("the held OEM fog-lights group gets no lazy file", "fog-lights" not in _cats_out)
 check("a category outside the hold still gets its aftermarket file", "alternator" in _cats_out, str(sorted(_cats_out)))
-check("the lazy index never names a held category",
-      not (set((_pl.get("oemLazy") or {}).get("cats", {})) & js.GROUP_HOLD_CATS))
+check("the lazy index names no held category except the released radiator (aftermarket only)",
+      (set((_pl.get("oemLazy") or {}).get("cats", {})) & js.GROUP_HOLD_CATS) <= {"radiator"}
+      and (_pl.get("oemLazy") or {}).get("cats", {}).get("radiator", {}).get("oem", 0) == 0)
 _main = js.build_interchange_payload()
 check("main payload: no oemGroups / platformGroups / oemVg entry for a held category",
       not [g for g in _main.get("oemGroups") or [] if g["cat"] in js.GROUP_HOLD_CATS]

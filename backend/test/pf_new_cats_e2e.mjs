@@ -132,6 +132,27 @@ for (const width of [390, 360, 320]) {
   if (SHOTS && (width === 390 || width === 320)) {
     await page.locator('#pf-results').screenshot({ path: path.join(SHOTS, `pf_radiator_spectra_${width}.png`) });
   }
+  // ignition-coils (engine kind, released for Spectra): the engine path shows the unit row
+  await page.fill('#pf-part', '');
+  await page.type('#pf-part', 'ignition coil');
+  await page.waitForSelector("#pf-part-suggest .compare-suggest-item[data-cat='ignition-coils']", { timeout: 5000 });
+  await page.dispatchEvent("#pf-part-suggest .compare-suggest-item[data-cat='ignition-coils']", 'mousedown');
+  await page.selectOption('#pf-year', '2012');
+  await page.selectOption('#pf-make', 'Chevrolet');
+  await page.waitForTimeout(200);
+  await page.selectOption('#pf-model', 'Equinox');
+  await page.click('#pf-go');
+  await page.waitForTimeout(700);
+  const cchips = page.locator('#pf-engine .pf-chip');
+  for (let i = 0; i < await cchips.count(); i++) {
+    if ((await cchips.nth(i).innerText()).includes('2.4')) { await cchips.nth(i).click(); break; }
+  }
+  await page.waitForTimeout(700);
+  const cres = await page.locator('#pf-results').innerText();
+  check(`${width}px: 2012 Equinox 2.4L ignition coil shows the Spectra Premium C-706 row`,
+    cres.includes('Spectra Premium') && cres.includes('C-706'), cres.slice(0, 300));
+  check(`${width}px: no horizontal page scroll on the coil search`,
+    !(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1)));
   check(`${width}px: no page errors`, !errors.length, errors.slice(0, 3).join('; '));
   await ctx.close();
 }
