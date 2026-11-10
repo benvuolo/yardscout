@@ -128,73 +128,13 @@ jobs:
           done
           ls -la scraper/oem_fitment/raw/
       - name: Crawl the platform's sites in round-robin turns, checkpoint after each
+        env:
+          RAW_WORKTREE: ${{ github.workspace }}/../raw-branch
         run: |
-          W="$GITHUB_WORKSPACE/../raw-branch"
-          push_raw() {
-            cp "$GITHUB_WORKSPACE"/scraper/oem_fitment/raw/"$1".* "$W/raw/" 2>/dev/null || true
-            ( cd "$W"
-              git add raw
-              if git diff --cached --quiet; then exit 0; fi
-              git commit -q -m "oem-raw: $1 checkpoint $(date -u +%Y-%m-%dT%H:%MZ)"
-              for t in 1 2 3 4 5 6; do
-                git push -q origin HEAD:oem-raw && exit 0
-                git fetch -q origin oem-raw && git rebase -q FETCH_HEAD || git rebase --abort || true
-                sleep $((t * 5))
-              done
-              echo "::error::could not push checkpoint"; exit 1 )
-          }
+          # platform_crawl.py: rotation by run number, turn length, markers.mode
+          # per turn (completion first), ci_audit + .paused, ci_push_raw.sh after
+          # every turn, per-run skip of a site after an unexpected crawl.py exit
+          # or 2 network-failure exits in a row, and no turn that would end
+          # within 10 minutes of the job timeout (350)
           cd scraper/oem_fitment
-          # turn order rotates with the run number (platforms.rotation) so no
-          # site is starved when the budget ends mid-round; turn length fits
-          # one round of the platform's sites into the budget
-          ORDER=$(python3 -c "import os, platforms; print(' '.join(platforms.rotation(os.environ['SITES'].split(), int(os.environ['GITHUB_RUN_NUMBER']))))")
-          N=$(echo $ORDER | wc -w)
-          TURN=$(python3 -c "import platforms; print(platforms.slice_minutes($N))")
-          echo "platform $PLATFORM_JOB: $N sites, $TURN-minute turns: $ORDER"
-          START=$(date +%s)
-          BUDGET=$((320 * 60))
-          while :; do
-            active=0
-            for SITE in $ORDER; do
-              export SITE
-              if [ $(( $(date +%s) - START )) -ge $BUDGET ]; then break 2; fi
-              # markers.mode per turn: "crawl" (worklist), "complete" (R3), or none;
-              # .blocked / .paused written in an earlier turn stop the site
-              MODE=$(python3 - <<'PY'
-          import json, os
-          from pathlib import Path
-          import markers
-          s = os.environ["SITE"]
-          wl = json.loads(Path("worklist.json").read_text()).get("sites", {}).get(s)
-          print(markers.mode(s, wl, lambda n: Path("raw", n).exists()) or "none")
-          PY
-              )
-              if [ "$MODE" = "none" ]; then continue; fi
-              active=1
-              echo "== $SITE: mode $MODE, turn $TURN min"
-              ARGS=""
-              if [ "$MODE" = "complete" ]; then ARGS="--complete auto"; fi
-              set +e
-              python3 crawl.py --site "$SITE" --minutes "$TURN" $ARGS
-              rc=$?
-              set -e
-              tail -2 "raw/$SITE.log" 2>/dev/null || true
-              # offline evidence audit of everything crawled so far; a parser
-              # bug (>0.5% mismatches) pauses the site for human review
-              set +e
-              python3 ci_audit.py --site "$SITE" | tee -a "$GITHUB_STEP_SUMMARY"
-              arc=${PIPESTATUS[0]}
-              set -e
-              if [ "$arc" -eq 20 ]; then
-                echo "evidence mismatch above 0.5%: paused for review $(date -u +%FT%TZ)" > "raw/$SITE.paused"
-                echo "::error::$SITE paused by the evidence audit"
-              fi
-              push_raw "$SITE"
-              # 10 = time budget reached (turn over), 11 = network-failure
-              # streak (cool down, next site), anything else = site finished
-              # or stopped for this run
-              if [ "$rc" -eq 11 ]; then sleep 120; fi
-              { echo "## $SITE (rc $rc)"; echo '```'; tail -3 "raw/$SITE.log" 2>/dev/null; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
-            done
-            if [ "$active" -eq 0 ]; then echo "platform $PLATFORM_JOB: nothing left this run"; break; fi
-          done
+          python3 platform_crawl.py --sites "$SITES" --run-number "$GITHUB_RUN_NUMBER" --timeout-min 350

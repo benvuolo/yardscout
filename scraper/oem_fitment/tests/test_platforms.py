@@ -91,9 +91,71 @@ wf = (OEM.parents[1] / ".github" / "workflows" / "oem-fitment-crawl.yml").read_t
 check("workflow: plan emits platform groups; matrix is per platform; max-parallel = platforms",
       "platforms.groups(sites)" in wf and "group: ${{ fromJSON(needs.plan.outputs.groups) }}" in wf
       and "max-parallel: ${{ fromJSON(needs.plan.outputs.nplat) }}" in wf)
-check("workflow: one concurrency group per platform; sites crawled in turn with rotation and checkpoints",
-      "oem-crawl-platform-${{ matrix.group.platform }}" in wf and "platforms.rotation(" in wf
-      and 'push_raw "$SITE"' in wf and "ci_audit.py --site" in wf and "raw/$SITE.paused" in wf)
+check("workflow: one concurrency group per platform; the job runs the platform driver",
+      "oem-crawl-platform-${{ matrix.group.platform }}" in wf and "platform_crawl.py --sites" in wf
+      and "--timeout-min 350" in wf and "timeout-minutes: 350" in wf)
+drv = (OEM / "platform_crawl.py").read_text()
+check("driver: rotation, markers.mode per turn, audit (20 pauses), checkpoint push after every turn",
+      "platforms.rotation(" in drv and "markers.mode(" in drv and "== 20" in drv and "ci_push_raw.sh" in drv)
+
+# driver behaviour with fakes (hub fixes: crash loop, budget edge)
+import platform_crawl as PC  # noqa: E402
+
+
+class Clock:
+    def __init__(self):
+        self.t = 0.0
+
+    def __call__(self):
+        return self.t
+
+
+def sim(sites, rcs, modes=None, timeout=350, turn_secs=None):
+    """rcs: {site: [rc, rc, ...]} consumed per turn; a site with no rc left
+    reports rc 0 and mode None afterwards."""
+    clk, logs, pushed, paused = Clock(), [], [], []
+    left = {s: list(v) for s, v in rcs.items()}
+    done = set()
+
+    def mode_of(s):
+        return None if s in done else (modes or {}).get(s, "crawl")
+
+    def run_crawl(s, m, minutes):
+        clk.t += turn_secs if turn_secs is not None else minutes * 60
+        if not left.get(s):
+            done.add(s)
+            return 0
+        rc = left[s].pop(0)
+        if rc == 0:
+            done.add(s)
+        return rc
+
+    turns = PC.drive(sites, 0, timeout, mode_of=mode_of, run_crawl=run_crawl, run_audit=lambda s: 0,
+                     push=pushed.append, pause=paused.append, log=logs.append, clock=clk,
+                     sleep=lambda x: None)
+    return turns, logs, pushed, clk.t
+
+
+t, lg, pu, _ = sim(["a", "b"], {"a": [2, 2, 2], "b": [10, 0]})
+check("driver: an unexpected crawl exit (2) skips the site for the rest of the run (one turn only)",
+      [x for x in t if x[0] == "a"] == [("a", "crawl", 2)] and any("a: crawl.py exit 2" in m for m in lg), t)
+check("driver: the other site keeps its turns and every turn is pushed",
+      [x[2] for x in t if x[0] == "b"] == [10, 0] and pu == [x[0] for x in t], (t, pu))
+t, lg, _, _ = sim(["a", "b"], {"a": [11, 11, 10], "b": [10, 10, 0]})
+check("driver: 2 consecutive network-failure exits (11) skip the site",
+      [x[2] for x in t if x[0] == "a"] == [11, 11] and any("2 network-failure exits" in m for m in lg), t)
+t, _, _, _ = sim(["a"], {"a": [11, 10, 11, 0]})
+check("driver: an 11 followed by a normal turn resets the streak",
+      [x[2] for x in t] == [11, 10, 11, 0], t)
+t, lg, _, end = sim(["a"], {"a": [10] * 100}, timeout=350)
+check("driver: no turn starts unless elapsed + turn + 10 min fits timeout - 10 (340 min)",
+      end <= 340 * 60 and end + (30 + 10) * 60 > 340 * 60 and any("budget" in m for m in lg), (end / 60, len(t)))
+t, _, _, end = sim(["a", "b", "c"], {"a": [10] * 99, "b": [10] * 99, "c": [10] * 99})
+check("driver: with 3 sites each gets turns in rotation until the budget",
+      [x[0] for x in t][:6] == ["a", "b", "c", "a", "b", "c"] and end <= 340 * 60, [x[0] for x in t][:6])
+t, lg, _, _ = sim(["a", "b"], {"a": [], "b": []})
+check("driver: sites with nothing to do end the run at once",
+      t == [("a", "crawl", 0), ("b", "crawl", 0)] and lg[-1] == "nothing left this run", (t, lg[-1:]))
 check("workflow: no per-site matrix left", "site: ${{ fromJSON(needs.plan.outputs.sites) }}" not in wf)
 
 print(f"\n{'OK' if not FAILS else 'FAILED'} test_platforms ({FAILS} failures)")
