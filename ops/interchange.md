@@ -2768,6 +2768,28 @@ Other outputs of this session:
   - Release path (hub 13:05): wiper groups ride make breadth's per-namespace advances to newer pinned refs,
     sampled with them; make breadth told 13:2x. After the §11.4 passes: propose the app category (kind,
     label, priceTokens, notes, rowWarn, per-app body gate) to the hub as a separate app change.
+  - **§11.4 round 1 (seed 811023, 27 groups + 30 pairs): FAILED. 5 WRONG, 1 RISK.**
+    - WRONG:
+      - G06 55154863AC: motor + pivot/linkage, but the note said bare motor;
+      - G13 55112704AA: 2017 Compass, two generations, two rear motors;
+      - G19 28800-JK600 and G22 28810-JK60A: 2009 G37 sedan JK60A vs coupe JK61A;
+      - G27 A4 rear: wagon only, already removed by the body gate.
+    - RISK: G10 68082552AA: 2013 Charger R/T has 68193883AA.
+    - Fixes on main 3e8dabc, both only removing claims:
+      - strict_slot_split: another non-comparable number in the group's slot of any app's cell;
+      - packaging_conflict: a same-key list row or other_names says pivot/linkage on a non-drive class.
+    - Same commit: curate reports pin inputs {inventory, decodes} by sha256. Pinned copies come from a85c654
+      (decodes 1357625b…, inventory 1a9cfa73…).
+    - Push re-curation: byte-identical groups.
+  - **§11.4 round 2 (seed 52907, fresh verifier, 21 groups + 30 pairs, second-motor check): PASSED.**
+    - 0 WRONG, 0 RISK, 21/21 groups and 30/30 pairs OK. Files: scratch verify_wiper_52907.json.
+    - The 21 groups = exactly round 1's OK set, rebuilt on oem-raw@796a77b with the fixes:
+      mopar 11, nissan 3, hmg 4, toyota 3.
+    - LIMIT (reported to the hub): every outside confirmation is search-result text. WebFetch opened no
+      outside page; refused domains were dropped, never worked around.
+    - Weakest: G01 98110-3S000. Outside evidence covers the Sonata platform, not the Azera by name.
+    - Still held: no app kind, no audits.json record. Release rides make breadth's per-namespace ref
+      advances, with the app category as a separate change. Proposal sent to the hub 2026-11-10 ~13:50.
 
 ## Aftermarket breadth (session_016ZzJfMnemMEFN88kPnYgxs, 2026-11-09)
 
