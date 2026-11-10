@@ -3194,3 +3194,22 @@ each); nothing allowlisted or crawled.
     `.v2.done`.
   - Acura has 0 completion rows, so its next run writes `.c1.done` at once.
 - 03:34 UTC check-in: GSP cv-axle 2,938 units (8 sitemaps pending); 1A strut 1,163 (642 pages pending). Run 42714835085 dates from before the reorder (435f9119), so lamp lines start with the next run (~07:40), or sooner if the hub re-dispatches (offered). Nothing blocked.
+- **MERGED to main at 13c0c898 (hub, 2026-11-10 ~03:44 UTC).**
+  - Spectra Premium Likely groups now ship in radiator, ac-compressor,
+    ac-condenser, heater-core, evaporator, throttle-body, fuel-pump-module
+    and ignition-coils: 613 groups, pinned oem-raw@ac4d1f0d.
+  - Aftermarket sources ship only their audited categories
+    (`_AM_SITE_CATS`, fail closed).
+- **Handover for the next session (re-curation):**
+  1. `python3 scraper/oem_fitment/aftermarket/groups_spectra.py --raw-ref <full oem-raw sha> --ship /tmp/x.json`
+     (--ship refuses anything but a full sha).
+  2. Fresh §11.4 sample: new seed, independent agent, every config of one
+     row per group, part-page cap 12, `--max-lines 100000`; brief it with
+     the curation's engine/fuel labels. 0 WRONG per category.
+  3. Hub confirm, then replace groups/aftermarket/spectrapremium.json and
+     rebuild the payload in the same push.
+  - Scratch tools from this session (sample builder, coverage) were not
+    committed; the method is above.
+  - A new category for Spectra (e.g. fuel-tank) also needs an app category
+    (category-breadth) and an AM_RELEASED entry.
+  - Raw had 1,998 vehicles at merge; the crawl continues.
