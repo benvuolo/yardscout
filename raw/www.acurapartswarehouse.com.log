@@ -262,3 +262,6 @@
 02:56:58 chain-unlinked strut 1 numbers named by 52611-TZ7-A02, no catalog link: 52611-TZ7-A01
 02:56:58 seg done tier=C Acura TLX [2015, 2020] seeds=[2015] records=951 errors=5
 02:56:58 finished records=951 errors=5 chain_records=0 chain_unlinked=163 chain_failed=0 chain_given_up=0
+10:01:09 start site=www.acurapartswarehouse.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=951 list_lines=171 year_lines=52 url_index=1418
+10:01:09 completion worklist completion/honda.own_page.json: 0 rows
+10:01:09 completion finished records=951 errors=5 open_rows=0 chains_owed=0
