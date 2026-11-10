@@ -180,3 +180,85 @@
 02:31:38 chain-unlinked strut 2 numbers named by 51606-STK-A03, no catalog link: 51606-STK-A01, 51606-STK-A02
 02:31:54 chain-unlinked strut 1 numbers named by 52610-STK-A03, no catalog link: 52610-STK-A02
 02:32:10 time budget reached records=866
+02:32:33 start site=www.acurapartswarehouse.com mode=worklist tiers=['A', 'B', 'W', 'C'] records=866 list_lines=99 year_lines=29 url_index=841
+02:32:33 seg done tier=A Acura TL [1996, 2014] seeds=[2005] records=866 errors=3
+02:32:33 seg done tier=A Acura MDX [2001, 2006] seeds=[2005] records=866 errors=3
+02:32:33 seg done tier=A Acura TSX [2004, 2014] seeds=[2006] records=866 errors=3
+02:32:33 seg done tier=A Acura MDX [2007, 2013] seeds=[2007] records=866 errors=3
+02:32:33 seg done tier=A Acura RL [1996, 2012] seeds=[2005] records=866 errors=3
+02:32:33 seg done tier=A Acura RDX [2007, 2019] seeds=[2007] records=866 errors=3
+02:32:33 seg done tier=A Acura RSX [2002, 2006] seeds=[2002] records=866 errors=3
+02:32:33 seg done tier=A Acura CL [1997, 2003] seeds=[2001] records=866 errors=3
+02:32:33 seg done tier=A Acura Integra [1994, 2024] seeds=[1995] records=866 errors=3
+02:32:33 seg done tier=A Acura ILX [2013, 2022] seeds=[2013] records=866 errors=3
+02:32:33 seg done tier=A Acura Legend [1991, 1995] seeds=[1994] records=866 errors=3
+02:32:33 seg done tier=A Acura TLX [2015, 2020] seeds=[2015] records=866 errors=3
+02:32:33 seg done tier=B Acura TL [1996, 2014] seeds=[2005] records=866 errors=3
+02:32:33 seg done tier=B Acura MDX [2001, 2006] seeds=[2005] records=866 errors=3
+02:32:33 seg done tier=B Acura TSX [2004, 2014] seeds=[2006] records=866 errors=3
+02:32:33 seg done tier=B Acura MDX [2007, 2013] seeds=[2007] records=866 errors=3
+02:32:33 seg done tier=B Acura RL [1996, 2012] seeds=[2005] records=866 errors=3
+02:32:33 seg done tier=B Acura RDX [2007, 2019] seeds=[2007] records=866 errors=3
+02:32:33 seg done tier=B Acura RSX [2002, 2006] seeds=[2002] records=866 errors=3
+02:32:33 seg done tier=B Acura CL [1997, 2003] seeds=[2001] records=866 errors=3
+02:32:33 seg done tier=B Acura Integra [1994, 2024] seeds=[1995] records=866 errors=3
+02:32:33 seg done tier=B Acura ILX [2013, 2022] seeds=[2013] records=866 errors=3
+02:32:33 seg done tier=B Acura Legend [1991, 1995] seeds=[1994] records=866 errors=3
+02:32:33 seg done tier=B Acura TLX [2015, 2020] seeds=[2015] records=866 errors=3
+02:32:33 seg done tier=C Acura TL [1996, 2014] seeds=[2005] records=866 errors=3
+02:32:33 seg done tier=C Acura MDX [2001, 2006] seeds=[2005] records=866 errors=3
+02:32:33 seg done tier=C Acura TSX [2004, 2014] seeds=[2006] records=866 errors=3
+02:32:33 seg done tier=C Acura MDX [2007, 2013] seeds=[2007] records=866 errors=3
+02:32:33 seg done tier=C Acura RL [1996, 2012] seeds=[2005] records=866 errors=3
+02:32:33 seg done tier=C Acura RDX [2007, 2019] seeds=[2007] records=866 errors=3
+02:33:14 chain-unlinked wiper-motor 1 numbers named by 76505-S6M-A01, no catalog link: 76505-S9A-A01
+02:33:30 chain-unlinked wiper-motor 1 numbers named by 76710-S6M-003, no catalog link: 76710-S6M-013
+02:36:18 chain-unlinked strut 1 numbers named by 51601-S6M-A05, no catalog link: 51601-S6M-A08
+02:36:18 chain-unlinked strut 1 numbers named by 51601-S6M-A06, no catalog link: 51601-S6M-A08
+02:36:18 chain-unlinked strut 1 numbers named by 51601-S6M-A07, no catalog link: 51601-S6M-A08
+02:36:18 chain-unlinked strut 1 numbers named by 51602-S6M-A05, no catalog link: 51602-S6M-A04
+02:36:18 chain-unlinked strut 1 numbers named by 51602-S6M-A06, no catalog link: 51602-S6M-A08
+02:36:18 chain-unlinked strut 1 numbers named by 51602-S6M-A07, no catalog link: 51602-S6M-A08
+02:36:18 chain-unlinked strut 3 numbers named by 51605-S6M-A06, no catalog link: 51605-S6M-A04, 51605-S6M-A02, 51605-S6M-A05
+02:36:18 chain-unlinked strut 2 numbers named by 51606-S6M-A06, no catalog link: 51606-S6M-A05, 51606-S6M-A04
+02:36:50 chain-unlinked strut 1 numbers named by 52610-S6M-A03, no catalog link: 52610-S6M-A04
+02:36:50 chain-unlinked strut 1 numbers named by 52611-S6M-A03, no catalog link: 52611-S6M-A02
+02:36:50 chain-unlinked strut 1 numbers named by 52620-S6M-A03, no catalog link: 52620-S6M-A04
+02:37:06 seg done tier=C Acura RSX [2002, 2006] seeds=[2002] records=885 errors=3
+02:39:22 chain-unlinked strut 2 numbers named by 51601-S3M-A03, no catalog link: 51601-S3M-A02, 51601-S3M-A01
+02:39:22 chain-unlinked strut 2 numbers named by 51602-S3M-A03, no catalog link: 51602-S3M-A02, 51602-S3M-A01
+02:40:25 chain-unlinked wiper-motor 1 numbers named by 76505-SV4-A01, no catalog link: 76505-SW5-A01
+02:40:58 chain-unlinked knuckle 5 numbers named by 51210-SV4-J52, no catalog link: 51210-SV4-J01, 51210-SV4-J00, 51210-SV4-J02, 51210-SV4-J51, 51210-SV4-J50
+02:40:58 chain-unlinked knuckle 4 numbers named by 51215-SV4-J52, no catalog link: 51215-SV4-J50, 51215-SV4-J00, 51215-SV4-J02, 51215-SV4-J51
+02:41:22 chain-unlinked knuckle 1 numbers named by 52111-SV4-J50, no catalog link: 52111-SV4-C60
+02:41:22 chain-unlinked knuckle 1 numbers named by 52116-SV4-J50, no catalog link: 52116-SV4-C60
+02:41:46 chain-unlinked knuckle 2 numbers named by 51210-SX0-902, no catalog link: 51210-SX0-901, 51210-SX0-900
+02:41:46 chain-unlinked knuckle 2 numbers named by 51215-SX0-902, no catalog link: 51215-SX0-900, 51215-SX0-901
+02:43:06 nav-fail Acura CL 2000: ValueError: no 2000 catalog for Acura CL (acura-['cl'])
+02:43:06 seg done tier=C Acura CL [1997, 2003] seeds=[2001, 1999, 2000] records=903 errors=4
+02:44:26 chain-unlinked knuckle 1 numbers named by 51210-SR3-N00, no catalog link: 51210-SR3-N10
+02:44:26 chain-unlinked knuckle 1 numbers named by 51215-SR3-N00, no catalog link: 51215-SR3-N10
+02:45:46 chain-unlinked strut 1 numbers named by 51605-ST7-N12, no catalog link: 51605-ST7-N11
+02:45:46 chain-unlinked strut 1 numbers named by 51606-ST7-N12, no catalog link: 51606-ST7-N11
+02:46:02 chain-unlinked strut 1 numbers named by 52611-SR3-A02, no catalog link: 52611-SR2-B01
+02:46:18 nav-fail Acura Integra 2013: ValueError: no 2013 catalog for Acura Integra (acura-['integra'])
+02:46:18 seg done tier=C Acura Integra [1994, 2024] seeds=[1995, 2013] records=913 errors=5
+02:47:38 chain-unlinked knuckle 1 numbers named by 51211-TR7-A10, no catalog link: 51211-TR7-A00
+02:47:38 chain-unlinked knuckle 1 numbers named by 51216-TR7-A10, no catalog link: 51216-TR7-A00
+02:48:42 chain-unlinked strut 1 numbers named by 51611-TX6-A05, no catalog link: 51611-TX6-A04
+02:48:42 chain-unlinked strut 1 numbers named by 51621-TX6-A05, no catalog link: 51621-TX6-A04
+02:48:58 chain-unlinked strut 2 numbers named by 52610-TX6-A06, no catalog link: 52610-TX6-A05, 52610-TX8-A03
+02:49:14 seg done tier=C Acura ILX [2013, 2022] seeds=[2013] records=921 errors=5
+02:50:50 chain-unlinked knuckle 1 numbers named by 51210-SP0-020, no catalog link: 51210-SP0-A01
+02:50:50 chain-unlinked knuckle 1 numbers named by 51215-SP0-020, no catalog link: 51215-SP0-A01
+02:52:58 seg done tier=C Acura Legend [1991, 1995] seeds=[1994] records=935 errors=5
+02:54:42 chain-unlinked knuckle 1 numbers named by 52210-TZ3-A11, no catalog link: 52210-TZ3-A10
+02:54:42 chain-unlinked knuckle 1 numbers named by 52215-TZ3-A11, no catalog link: 52215-TZ3-A10
+02:55:30 chain-unlinked knuckle 1 numbers named by 52210-TZ7-A11, no catalog link: 52210-TZ7-A10
+02:55:30 chain-unlinked knuckle 1 numbers named by 52215-TZ7-A11, no catalog link: 52215-TZ7-A10
+02:55:54 chain-unlinked strut 1 numbers named by 51611-TZ3-315, no catalog link: 51611-TZ3-305
+02:55:54 chain-unlinked strut 1 numbers named by 51621-TZ3-315, no catalog link: 51621-TZ3-305
+02:56:42 chain-unlinked strut 1 numbers named by 51621-TZ7-315, no catalog link: 51621-TZ7-305
+02:56:58 chain-unlinked strut 1 numbers named by 52611-TZ7-A02, no catalog link: 52611-TZ7-A01
+02:56:58 seg done tier=C Acura TLX [2015, 2020] seeds=[2015] records=951 errors=5
+02:56:58 finished records=951 errors=5 chain_records=0 chain_unlinked=163 chain_failed=0 chain_given_up=0
