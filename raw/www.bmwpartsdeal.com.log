@@ -1704,3 +1704,18 @@
 22:58:00 chain-unlinked door-rear 1 numbers named by 41-00-7-203-981, no catalog link: 41525A2A393
 22:58:00 chain-unlinked door-rear 1 numbers named by 41-00-7-203-982, no catalog link: 41525A2A394
 23:07:20 time budget reached records=2160
+08:03:45 start site=www.bmwpartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2160 list_lines=2711 year_lines=319 url_index=0
+08:03:45 completion worklist completion/bmw.own_page.json: 507 rows
+08:10:02 nav-fail BMW 128i 2009: ValueError: no parts-list or trim links on https://www.bmwpartsdeal.com/2009-bmw-128i-convertible_n52_engine_e88-parts.html
+08:14:50 chain-unlinked door-rear 2 numbers named by 41-52-8-223-891, no catalog link: 41-52-8-186-821, 41-52-8-186-819
+08:14:50 chain-unlinked door-rear 2 numbers named by 41-52-8-223-892, no catalog link: 41-52-8-186-820, 41-52-8-186-822
+08:18:42 product-fail https://www.bmwpartsdeal.com/parts/bmw-accessories_outer_tail_lamp_left-63217251959.html: ValueError: no partInfo in store
+08:18:50 product-fail https://www.bmwpartsdeal.com/parts/bmw-accessories_outer_tail_lamp_right-63217251960.html: ValueError: no partInfo in store
+08:18:58 product-fail https://www.bmwpartsdeal.com/parts/bmw-accessories_tailgate_tail_lamp_left-63217252779.html: ValueError: no partInfo in store
+08:19:06 product-fail https://www.bmwpartsdeal.com/parts/bmw-accessories_tailgate_tail_lamp_right-63217252780.html: ValueError: no partInfo in store
+08:29:46 chain-unlinked door-front 3 numbers named by 41-51-8-185-797, no catalog link: 41-51-1-960-183, 41-51-1-960-199, 41-51-8-176-357
+08:29:46 chain-unlinked door-front 3 numbers named by 41-51-8-185-798, no catalog link: 41-51-1-960-184, 41-51-8-176-358, 41-51-1-960-200
+08:30:02 chain-unlinked door-rear 1 numbers named by 41-52-8-185-429, no catalog link: 41-52-1-960-231
+08:30:02 chain-unlinked door-rear 1 numbers named by 41-52-8-185-430, no catalog link: 41-52-1-960-232
+08:30:42 chain-unlinked hood 1 numbers named by 41-61-8-135-344, no catalog link: 41-61-8-135-343
+08:34:02 time budget reached records=2160
