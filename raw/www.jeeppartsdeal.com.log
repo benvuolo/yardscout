@@ -7823,3 +7823,25 @@
 00:29:44 chain-unlinked side-mirrors 1 numbers named by 4805617AD, no catalog link: 4805617AC
 00:34:00 chain-unlinked gauge-cluster 2 numbers named by 68376131AB, no catalog link: 68376131AA, 56054921AA
 00:43:04 time budget reached records=6781
+09:38:27 start site=www.jeeppartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=6781 list_lines=4709 year_lines=675 url_index=33013
+09:38:27 completion worklist completion/mopar.own_page.json: 657 rows
+09:38:44 chain-unlinked climate-control 11 numbers named by 55111009AO, no catalog link: 55111009AN, 55111009AK, 55111009AE, 55111009AL, 55111009AD, 55111009AH, 55111009AM, 55111009AJ, 55111009AG, 55111009AC, 55111009AF
+09:40:36 chain-unlinked hood 2 numbers named by 55235439AD, no catalog link: 55235439, 55235439AC
+09:41:08 chain-unlinked window-regulator 3 numbers named by 55235646, no catalog link: 55154722, 55154628, 55235208
+09:41:32 chain-unlinked window-regulator 2 numbers named by 55154898, no catalog link: 55154624, 55154724
+09:41:32 chain-unlinked window-regulator 2 numbers named by 55154899, no catalog link: 55154625, 55154725
+09:42:52 chain-unlinked side-mirrors 2 numbers named by 4805581AE, no catalog link: 4805581AD, 4805581AC
+09:46:04 chain-unlinked headlights 1 numbers named by 68370847AB, no catalog link: 68370847AD
+09:46:04 chain-unlinked headlights 1 numbers named by 68370844AB, no catalog link: 68370844AD
+09:46:04 chain-unlinked headlights 1 numbers named by 68415347AA, no catalog link: 68415347AC
+09:47:00 chain-unlinked headlights 1 numbers named by 68415346AA, no catalog link: 68415346AC
+09:47:00 chain-unlinked headlights 1 numbers named by 68370845AB, no catalog link: 68370845AD
+09:47:00 chain-unlinked headlights 1 numbers named by 68370846AB, no catalog link: 68370846AD
+09:59:08 chain-unlinked side-mirrors 1 numbers named by 5VE98JXWAF, no catalog link: 7SV20JXWAA
+09:59:08 chain-unlinked side-mirrors 1 numbers named by 5VE99JXWAF, no catalog link: 7SV21JXWAC
+09:59:08 chain-unlinked side-mirrors 1 numbers named by 6AK58JXWAA, no catalog link: 6VZ69JXWAA
+09:59:08 chain-unlinked side-mirrors 1 numbers named by 5VE97JXWAE, no catalog link: 7SV33JXWAC
+09:59:08 chain-unlinked side-mirrors 1 numbers named by 5VF01JXWAG, no catalog link: 7SV23JXWAA
+09:59:08 chain-unlinked side-mirrors 1 numbers named by 5VE96JXWAE, no catalog link: 7SV32JXWAC
+09:59:32 chain-unlinked tail-lights 1 numbers named by 4725946AB, no catalog link: 4725946AE
+10:08:44 time budget reached records=6819
