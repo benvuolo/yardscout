@@ -13256,3 +13256,7 @@
 23:19:28 chain-unlinked window-regulator 4 numbers named by EB5Z-7823394-C, no catalog link: EB5Z-7823394-B, WLM-251, WLM-260, WLM-219
 23:19:28 chain-unlinked window-regulator 4 numbers named by EB5Z-7823395-C, no catalog link: EB5Z-7823395-B, WLM-252, WLM-220, WLM-261
 23:40:48 time budget reached records=9583
+08:34:09 start site=www.fordpartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=9583 list_lines=6667 year_lines=1163 url_index=35395
+08:34:09 completion worklist completion/ford.own_page.json: 695 rows
+08:34:50 chain-unlinked bumper-front 1 numbers named by 6W3Z-17D957-CA, no catalog link: 9W3Z-17C829-A
+09:07:39 time budget reached records=9594
