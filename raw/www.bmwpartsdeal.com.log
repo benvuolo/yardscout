@@ -1719,3 +1719,11 @@
 08:30:02 chain-unlinked door-rear 1 numbers named by 41-52-8-185-430, no catalog link: 41-52-1-960-232
 08:30:42 chain-unlinked hood 1 numbers named by 41-61-8-135-344, no catalog link: 41-61-8-135-343
 08:34:02 time budget reached records=2160
+11:41:06 start site=www.bmwpartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2160 list_lines=2897 year_lines=342 url_index=0
+11:41:06 completion worklist completion/bmw.own_page.json: 507 rows
+11:58:36 chain-unlinked climate-control 1 numbers named by 64-11-8-391-224, no catalog link: 64-11-1-387-351
+11:59:40 chain-unlinked fender 1 numbers named by 41-35-8-122-233, no catalog link: 41-35-8-122-439
+11:59:40 chain-unlinked fender 2 numbers named by 41-35-8-122-234, no catalog link: 41-35-8-122-440, 41-35-2-253-566
+12:04:52 chain-unlinked window-regulator 1 numbers named by 67-62-7-406-623, no catalog link: 67-62-7-285-855
+12:04:52 chain-unlinked window-regulator 1 numbers named by 67-62-7-406-624, no catalog link: 67-62-7-285-856
+12:11:16 time budget reached records=2165
