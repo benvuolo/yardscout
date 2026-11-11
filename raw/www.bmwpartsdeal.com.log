@@ -1727,3 +1727,9 @@
 12:04:52 chain-unlinked window-regulator 1 numbers named by 67-62-7-406-623, no catalog link: 67-62-7-285-855
 12:04:52 chain-unlinked window-regulator 1 numbers named by 67-62-7-406-624, no catalog link: 67-62-7-285-856
 12:11:16 time budget reached records=2165
+19:47:08 start site=www.bmwpartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2165 list_lines=3084 year_lines=365 url_index=0
+19:47:08 completion worklist completion/bmw.own_page.json: 507 rows
+19:50:00 chain-unlinked climate-control 2 numbers named by 64-11-6-953-181, no catalog link: 64-11-6-932-146, 64-11-6-925-743
+19:50:00 chain-unlinked climate-control 4 numbers named by 64-11-6-953-182, no catalog link: 64-11-6-922-447, 64-11-6-932-148, 64-11-6-925-745, 64-11-6-923-383
+20:09:15 chain-unlinked hood 2 numbers named by 41-61-7-486-754, no catalog link: 41-00-7-198-615, 41-11-7-174-379
+20:18:50 time budget reached records=2169
