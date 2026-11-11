@@ -855,3 +855,33 @@
 22:29:47 nav-fail Audi A8 Quattro 1998: NavError: HTTP 404 for https://www.audipartsgiant.com/1998-audi-a8-quattro-parts
 22:29:55 nav-fail Audi Q5 Sportback 2025: NavError: HTTP 404 for https://www.audipartsgiant.com/2025-audi-q5-sportback-parts
 22:35:31 time budget reached records=1605
+07:33:18 start site=www.audipartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=1605 list_lines=2381 year_lines=316 url_index=9736
+07:33:18 completion worklist completion/vag.own_page.json: 366 rows
+07:35:22 nav-fail Audi A8 Quattro 1997: NavError: HTTP 404 for https://www.audipartsgiant.com/1997-audi-a8-quattro-parts
+07:41:38 nav-fail Audi A3 Quattro 2009: NavError: HTTP 404 for https://www.audipartsgiant.com/2009-audi-a3-quattro-parts
+07:41:46 nav-fail Audi A3 Quattro 2010: NavError: HTTP 404 for https://www.audipartsgiant.com/2010-audi-a3-quattro-parts
+07:41:54 nav-fail Audi A3 Quattro 2012: NavError: HTTP 404 for https://www.audipartsgiant.com/2012-audi-a3-quattro-parts
+07:42:02 nav-fail Audi TT Quattro 2011: NavError: HTTP 404 for https://www.audipartsgiant.com/2011-audi-tt-quattro-parts
+07:42:10 nav-fail Audi TT Quattro 2012: NavError: HTTP 404 for https://www.audipartsgiant.com/2012-audi-tt-quattro-parts
+07:42:18 nav-fail Audi TT Quattro 2013: NavError: HTTP 404 for https://www.audipartsgiant.com/2013-audi-tt-quattro-parts
+07:42:26 nav-fail Audi TT Quattro 2014: NavError: HTTP 404 for https://www.audipartsgiant.com/2014-audi-tt-quattro-parts
+07:42:34 nav-fail Audi TT Quattro 2015: NavError: HTTP 404 for https://www.audipartsgiant.com/2015-audi-tt-quattro-parts
+07:46:26 nav-fail Audi A3 Quattro 2022: NavError: HTTP 404 for https://www.audipartsgiant.com/2022-audi-a3-quattro-parts
+07:46:34 nav-fail Audi A3 Quattro 2023: NavError: HTTP 404 for https://www.audipartsgiant.com/2023-audi-a3-quattro-parts
+07:46:42 nav-fail Audi A3 Quattro 2024: NavError: HTTP 404 for https://www.audipartsgiant.com/2024-audi-a3-quattro-parts
+07:46:50 nav-fail Audi A3 Quattro 2025: NavError: HTTP 404 for https://www.audipartsgiant.com/2025-audi-a3-quattro-parts
+07:50:10 nav-fail Audi A7 Quattro 2015: NavError: HTTP 404 for https://www.audipartsgiant.com/2015-audi-a7-quattro-parts
+07:57:22 nav-fail Audi A7 Quattro 2017: NavError: HTTP 404 for https://www.audipartsgiant.com/2017-audi-a7-quattro-parts
+07:57:30 nav-fail Audi A7 Quattro 2018: NavError: HTTP 404 for https://www.audipartsgiant.com/2018-audi-a7-quattro-parts
+07:59:38 nav-fail Audi TT Quattro 2020: NavError: HTTP 404 for https://www.audipartsgiant.com/2020-audi-tt-quattro-parts
+07:59:46 nav-fail Audi TT Quattro 2021: NavError: HTTP 404 for https://www.audipartsgiant.com/2021-audi-tt-quattro-parts
+07:59:54 nav-fail Audi TT Quattro 2022: NavError: HTTP 404 for https://www.audipartsgiant.com/2022-audi-tt-quattro-parts
+08:00:02 nav-fail Audi TT Quattro 2023: NavError: HTTP 404 for https://www.audipartsgiant.com/2023-audi-tt-quattro-parts
+08:00:10 nav-fail Audi A8 Quattro 2013: NavError: HTTP 404 for https://www.audipartsgiant.com/2013-audi-a8-quattro-parts
+08:00:18 nav-fail Audi A8 Quattro 2014: NavError: HTTP 404 for https://www.audipartsgiant.com/2014-audi-a8-quattro-parts
+08:00:26 nav-fail Audi A8 Quattro 2015: NavError: HTTP 404 for https://www.audipartsgiant.com/2015-audi-a8-quattro-parts
+08:00:34 nav-fail Audi A8 Quattro 2016: NavError: HTTP 404 for https://www.audipartsgiant.com/2016-audi-a8-quattro-parts
+08:00:42 nav-fail Audi A8 Quattro 2017: NavError: HTTP 404 for https://www.audipartsgiant.com/2017-audi-a8-quattro-parts
+08:00:50 nav-fail Audi A8 Quattro 2018: NavError: HTTP 404 for https://www.audipartsgiant.com/2018-audi-a8-quattro-parts
+08:01:06 list-fail https://www.audipartsgiant.com/parts-list/2018-audi-q7/body-hardware/front-door: NavError: no __INITIAL_STORE__ on page
+08:03:38 time budget reached records=1615
