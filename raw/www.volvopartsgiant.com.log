@@ -444,3 +444,82 @@
 22:02:11 seg done tier=D Volvo V50 [2002, 2011] seeds=[2005, 2007, 2008] records=1253 errors=35
 22:05:15 seg done tier=D Volvo 850 [1993, 1997] seeds=[1995, 1996, 1994] records=1253 errors=35
 22:05:15 time budget reached records=1253
+07:22:00 start site=www.volvopartsgiant.com mode=worklist tiers=['A', 'B', 'W', 'C', 'D'] records=1253 list_lines=1625 year_lines=237 url_index=5874
+07:22:00 seg done tier=A Volvo XC90 [2003, 2014] seeds=[2006] records=1253 errors=35
+07:22:00 seg done tier=A Volvo S60 [2001, 2018] seeds=[2012] records=1253 errors=35
+07:22:00 seg done tier=A Volvo S40 [1992, 2013] seeds=[2006] records=1253 errors=35
+07:22:00 seg done tier=A Volvo S80 [1999, 2014] seeds=[2004] records=1253 errors=35
+07:22:00 seg done tier=A Volvo V70 [1998, 2010] seeds=[2002] records=1253 errors=35
+07:22:00 seg done tier=A Volvo XC60 [2010, 2017] seeds=[2013] records=1253 errors=35
+07:22:00 seg done tier=A Volvo XC70 [1998, 2007] seeds=[2004] records=1253 errors=35
+07:22:00 seg done tier=A Volvo C70 [1998, 2013] seeds=[2008] records=1253 errors=35
+07:22:00 seg done tier=A Volvo S70 [1998, 2000] seeds=[2000] records=1253 errors=35
+07:22:00 seg done tier=A Volvo 240 [1976, 1993] seeds=[1992] records=1253 errors=35
+07:22:00 seg done tier=A Volvo XC70 [2008, 2015] seeds=[2008] records=1253 errors=35
+07:22:00 seg done tier=A Volvo V50 [2002, 2011] seeds=[2005] records=1253 errors=35
+07:22:00 seg done tier=A Volvo 850 [1993, 1997] seeds=[1995] records=1253 errors=35
+07:22:00 seg done tier=A Volvo C30 [2008, 2013] seeds=[2011] records=1253 errors=35
+07:22:00 seg done tier=A Volvo 740 [1986, 1992] seeds=[1991] records=1253 errors=35
+07:22:00 seg done tier=A Volvo 960 [1992, 1997] seeds=[1996] records=1253 errors=35
+07:22:00 seg done tier=A Volvo 940 [1992, 1995] seeds=[1994] records=1253 errors=35
+07:22:00 seg done tier=A Volvo V40 [2000, 2004] seeds=[2004] records=1253 errors=35
+07:22:00 seg done tier=A Volvo 60 Series [2001, 2013] seeds=[2012] records=1253 errors=35
+07:22:00 seg done tier=B Volvo XC90 [2003, 2014] seeds=[2006] records=1253 errors=35
+07:22:00 seg done tier=B Volvo S60 [2001, 2018] seeds=[2012] records=1253 errors=35
+07:22:00 seg done tier=B Volvo S40 [1992, 2013] seeds=[2006] records=1253 errors=35
+07:22:00 seg done tier=B Volvo S80 [1999, 2014] seeds=[2004] records=1253 errors=35
+07:22:00 seg done tier=B Volvo V70 [1998, 2010] seeds=[2002] records=1253 errors=35
+07:22:00 seg done tier=B Volvo XC60 [2010, 2017] seeds=[2013] records=1253 errors=35
+07:22:00 seg done tier=B Volvo XC70 [1998, 2007] seeds=[2004] records=1253 errors=35
+07:22:00 seg done tier=B Volvo C70 [1998, 2013] seeds=[2008] records=1253 errors=35
+07:22:00 seg done tier=B Volvo S70 [1998, 2000] seeds=[2000] records=1253 errors=35
+07:22:00 seg done tier=B Volvo 240 [1976, 1993] seeds=[1992] records=1253 errors=35
+07:22:00 seg done tier=B Volvo XC70 [2008, 2015] seeds=[2008] records=1253 errors=35
+07:22:00 seg done tier=B Volvo V50 [2002, 2011] seeds=[2005] records=1253 errors=35
+07:22:00 seg done tier=B Volvo 850 [1993, 1997] seeds=[1995] records=1253 errors=35
+07:22:00 seg done tier=B Volvo C30 [2008, 2013] seeds=[2011] records=1253 errors=35
+07:22:00 seg done tier=B Volvo 740 [1986, 1992] seeds=[1991] records=1253 errors=35
+07:22:00 seg done tier=B Volvo 960 [1992, 1997] seeds=[1996] records=1253 errors=35
+07:22:00 seg done tier=B Volvo 940 [1992, 1995] seeds=[1994] records=1253 errors=35
+07:22:00 seg done tier=B Volvo V40 [2000, 2004] seeds=[2004] records=1253 errors=35
+07:22:00 seg done tier=B Volvo 60 Series [2001, 2013] seeds=[2012] records=1253 errors=35
+07:22:00 seg done tier=C Volvo XC90 [2003, 2014] seeds=[2006] records=1253 errors=35
+07:22:00 seg done tier=C Volvo S60 [2001, 2018] seeds=[2012] records=1253 errors=35
+07:22:00 seg done tier=C Volvo S40 [1992, 2013] seeds=[2006] records=1253 errors=35
+07:22:00 seg done tier=C Volvo S80 [1999, 2014] seeds=[2004] records=1253 errors=35
+07:22:00 seg done tier=C Volvo V70 [1998, 2010] seeds=[2002] records=1253 errors=35
+07:22:00 seg done tier=C Volvo XC60 [2010, 2017] seeds=[2013] records=1253 errors=35
+07:22:00 seg done tier=C Volvo XC70 [1998, 2007] seeds=[2004] records=1253 errors=35
+07:22:00 seg done tier=C Volvo C70 [1998, 2013] seeds=[2008] records=1253 errors=35
+07:22:00 seg done tier=C Volvo S70 [1998, 2000] seeds=[2000] records=1253 errors=35
+07:22:00 seg done tier=C Volvo 240 [1976, 1993] seeds=[1992] records=1253 errors=35
+07:22:00 seg done tier=C Volvo XC70 [2008, 2015] seeds=[2008] records=1253 errors=35
+07:22:00 seg done tier=C Volvo V50 [2002, 2011] seeds=[2005] records=1253 errors=35
+07:22:00 seg done tier=C Volvo 850 [1993, 1997] seeds=[1995] records=1253 errors=35
+07:22:00 seg done tier=C Volvo C30 [2008, 2013] seeds=[2011] records=1253 errors=35
+07:22:00 seg done tier=C Volvo 740 [1986, 1992] seeds=[1991] records=1253 errors=35
+07:22:00 seg done tier=C Volvo 960 [1992, 1997] seeds=[1996] records=1253 errors=35
+07:22:00 seg done tier=C Volvo 940 [1992, 1995] seeds=[1994] records=1253 errors=35
+07:22:00 seg done tier=C Volvo V40 [2000, 2004] seeds=[2004] records=1253 errors=35
+07:22:00 seg done tier=C Volvo 60 Series [2001, 2013] seeds=[2012] records=1253 errors=35
+07:22:00 seg done tier=D Volvo XC90 [2003, 2014] seeds=[2006] records=1253 errors=35
+07:22:00 seg done tier=D Volvo S60 [2001, 2018] seeds=[2012] records=1253 errors=35
+07:22:00 seg done tier=D Volvo S40 [1992, 2013] seeds=[2006] records=1253 errors=35
+07:22:00 seg done tier=D Volvo S80 [1999, 2014] seeds=[2004] records=1253 errors=35
+07:22:00 seg done tier=D Volvo V70 [1998, 2010] seeds=[2002] records=1253 errors=35
+07:22:00 seg done tier=D Volvo XC60 [2010, 2017] seeds=[2013] records=1253 errors=35
+07:22:00 seg done tier=D Volvo XC70 [1998, 2007] seeds=[2004] records=1253 errors=35
+07:22:00 seg done tier=D Volvo C70 [1998, 2013] seeds=[2008] records=1253 errors=35
+07:22:00 seg done tier=D Volvo S70 [1998, 2000] seeds=[2000] records=1253 errors=35
+07:22:00 seg done tier=D Volvo 240 [1976, 1993] seeds=[1992] records=1253 errors=35
+07:22:00 seg done tier=D Volvo XC70 [2008, 2015] seeds=[2008] records=1253 errors=35
+07:22:00 seg done tier=D Volvo V50 [2002, 2011] seeds=[2005] records=1253 errors=35
+07:22:00 seg done tier=D Volvo 850 [1993, 1997] seeds=[1995] records=1253 errors=35
+07:24:26 seg done tier=D Volvo C30 [2008, 2013] seeds=[2011, 2010, 2012] records=1253 errors=35
+07:26:02 seg done tier=D Volvo 740 [1986, 1992] seeds=[1991, 1989, 1988] records=1253 errors=35
+07:28:34 seg done tier=D Volvo 960 [1992, 1997] seeds=[1996, 1994, 1995] records=1253 errors=35
+07:30:26 seg done tier=D Volvo 940 [1992, 1995] seeds=[1994, 1993, 1995] records=1253 errors=35
+07:33:14 seg done tier=D Volvo V40 [2000, 2004] seeds=[2004, 2002, 2001] records=1253 errors=35
+07:33:14 nav-fail Volvo 60 Series 2012: NavError: Volvo 60 Series: no single catalog model for this feed name
+07:33:14 seg done tier=D Volvo 60 Series [2001, 2013] seeds=[2012] records=1253 errors=36
+07:33:14 finished records=1253 errors=36 chain_records=0 chain_unlinked=230 chain_failed=0 chain_given_up=0
