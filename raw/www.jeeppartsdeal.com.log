@@ -7845,3 +7845,17 @@
 09:59:08 chain-unlinked side-mirrors 1 numbers named by 5VE96JXWAE, no catalog link: 7SV32JXWAC
 09:59:32 chain-unlinked tail-lights 1 numbers named by 4725946AB, no catalog link: 4725946AE
 10:08:44 time budget reached records=6819
+21:22:22 start site=www.jeeppartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=6819 list_lines=4883 year_lines=702 url_index=33262
+21:22:22 completion worklist completion/mopar.own_page.json: 657 rows
+21:32:39 chain-unlinked gauge-cluster 2 numbers named by 56046560AD, no catalog link: 56046560AC, 56046560AB
+21:34:39 chain-unlinked side-mirrors 4 numbers named by 68143804AF, no catalog link: 68143804AD, 68143804AA, 68143804AE, 68143804AC
+21:34:39 chain-unlinked side-mirrors 4 numbers named by 68143806AF, no catalog link: 68143806AE, 68143806AD, 68143806AA, 68143806AC
+21:34:39 chain-unlinked side-mirrors 4 numbers named by 68143807AF, no catalog link: 68143807AA, 68143807AC, 68143807AE, 68143807AD
+21:34:39 chain-unlinked side-mirrors 4 numbers named by 68143805AF, no catalog link: 68143805AA, 68143805AC, 68143805AE, 68143805AD
+21:41:37 chain-unlinked bumper-rear 1 numbers named by 68200265AB, no catalog link: 68200265AC
+21:43:18 chain-unlinked side-mirrors 1 numbers named by 5VE95JXWAE, no catalog link: 7SV31JXWAB
+21:43:18 chain-unlinked side-mirrors 1 numbers named by 5VE94JXWAE, no catalog link: 7SV30JXWAC
+21:43:44 chain-unlinked tail-lights 1 numbers named by 68169777AB, no catalog link: 68169777AC
+21:43:44 chain-unlinked tail-lights 1 numbers named by 68169778AB, no catalog link: 68169778AC
+21:45:34 nav-fail Dodge Ram Van 3500 2000: NavError: HTTP 404 for https://www.jeeppartsdeal.com/catalog/2000-dodge-ram-van-3500-parts
+21:52:27 time budget reached records=6843
