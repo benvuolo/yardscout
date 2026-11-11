@@ -13260,3 +13260,16 @@
 08:34:09 completion worklist completion/ford.own_page.json: 695 rows
 08:34:50 chain-unlinked bumper-front 1 numbers named by 6W3Z-17D957-CA, no catalog link: 9W3Z-17C829-A
 09:07:39 time budget reached records=9594
+20:18:58 start site=www.fordpartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=9594 list_lines=6877 year_lines=1187 url_index=35622
+20:18:58 completion worklist completion/ford.own_page.json: 695 rows
+20:33:31 chain-unlinked climate-control 1 numbers named by BC3Z-19980-J, no catalog link: BC3Z-19980-D
+20:33:31 chain-unlinked climate-control 1 numbers named by BC3Z-19980-K, no catalog link: BC3Z-19980-E
+20:33:31 chain-unlinked climate-control 1 numbers named by BC3Z-19980-F, no catalog link: BC3Z-19980-Q
+20:33:31 chain-unlinked climate-control 1 numbers named by BC3Z-19980-G, no catalog link: BC3Z-19980-R
+20:34:04 chain-unlinked headlights 1 numbers named by BC3Z-13008-E, no catalog link: BC3Z-13008-A
+20:34:04 chain-unlinked headlights 1 numbers named by BC3Z-13008-F, no catalog link: BC3Z-13008-B
+20:40:20 chain-unlinked side-mirrors 1 numbers named by 1F1Z-17683-BA, no catalog link: YF1Z-17683-SBD
+20:40:20 chain-unlinked side-mirrors 1 numbers named by 1F1Z-17682-BA, no catalog link: YF1Z-17682-SBD
+20:46:29 chain-unlinked bumper-front 1 numbers named by 3W7Z-17D957-CA, no catalog link: 1W7Z-17D957-CA
+20:47:07 chain-unlinked bumper-rear 1 numbers named by YW7Z-17K835-CA, no catalog link: F8AZ-17K835-AA
+20:51:00 time budget reached records=9633
