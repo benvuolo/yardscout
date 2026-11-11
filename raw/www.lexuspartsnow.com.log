@@ -1490,3 +1490,137 @@
 18:48:46 nav-fail Lexus GX 470 2009: ValueError: no model page for Lexus GX 470 (lexus-['gx_470'])
 18:48:46 nav-fail Lexus HS 250h 2012: ValueError: no model page for Lexus HS 250h (lexus-['hs_250h'])
 18:50:23 completion finished records=3651 errors=100 open_rows=0 chains_owed=0
+00:43:09 start site=www.lexuspartsnow.com mode=worklist tiers=['A', 'B', 'W', 'C', 'D'] records=3651 list_lines=1599 year_lines=282 url_index=17618
+00:43:09 seg done tier=A Lexus ES 300 [1992, 2008] seeds=[2002] records=3651 errors=100
+00:43:09 seg done tier=A Lexus RX 300 [1999, 2008] seeds=[2000] records=3651 errors=100
+00:43:09 seg done tier=A Lexus IS 250 [2006, 2015] seeds=[2007] records=3651 errors=100
+00:43:09 seg done tier=A Lexus ES 350 [1997, 2018] seeds=[2007] records=3651 errors=100
+00:43:09 seg done tier=A Lexus ES 330 [2004, 2006] seeds=[2004] records=3651 errors=100
+00:43:09 seg done tier=A Lexus GS 300 [1993, 2006] seeds=[2006] records=3651 errors=100
+00:43:09 seg done tier=A Lexus RX 350 [2004, 2016] seeds=[2007] records=3651 errors=100
+00:43:09 seg done tier=A Lexus RX 330 [2004, 2006] seeds=[2004] records=3651 errors=100
+00:43:09 seg done tier=A Lexus LS 400 [1990, 2005] seeds=[1996] records=3651 errors=100
+00:43:09 seg done tier=A Lexus LS 430 [2001, 2006] seeds=[2001] records=3651 errors=100
+00:43:09 seg done tier=A Lexus IS [2004, 2016] seeds=[2007] records=3651 errors=100
+00:43:09 seg done tier=A Lexus LS 460 [1996, 2016] seeds=[2007] records=3651 errors=100
+00:43:09 seg done tier=A Lexus GS [1998, 2018] seeds=[2006] records=3651 errors=100
+00:43:09 seg done tier=A Lexus ES [1990, 2015] seeds=[2007] records=3651 errors=100
+00:43:09 seg done tier=A Lexus GS 350 [1995, 2015] seeds=[2007] records=3651 errors=100
+00:43:09 seg done tier=A Lexus IS 300 [2001, 2005] seeds=[2001] records=3651 errors=100
+00:43:09 seg done tier=A Lexus RX 400h [2006, 2008] seeds=[2006] records=3651 errors=100
+00:43:09 seg done tier=A Lexus IS 350 [2006, 2014] seeds=[2006] records=3651 errors=100
+00:43:09 seg done tier=A Lexus RX [2004, 2008] seeds=[2005] records=3651 errors=100
+00:43:09 seg done tier=A Lexus RX [1999, 2003] seeds=[2001] records=3651 errors=100
+00:43:09 seg done tier=A Lexus GS 400 [1998, 2002] seeds=[1998] records=3651 errors=100
+00:43:09 seg done tier=A Lexus LS [1990, 2012] seeds=[1998] records=3651 errors=100
+00:43:09 seg done tier=A Lexus SC 400 [1992, 1999] seeds=[1992] records=3651 errors=100
+00:43:09 seg done tier=A Lexus GS 430 [2001, 2006] seeds=[2006] records=3651 errors=100
+00:43:09 seg done tier=A Lexus SC 430 [2002, 2005] seeds=[2002] records=3651 errors=100
+00:43:09 seg done tier=B Lexus ES 300 [1992, 2008] seeds=[2002] records=3651 errors=100
+00:43:09 seg done tier=B Lexus RX 300 [1999, 2008] seeds=[2000] records=3651 errors=100
+00:43:09 seg done tier=B Lexus IS 250 [2006, 2015] seeds=[2007] records=3651 errors=100
+00:43:09 seg done tier=B Lexus ES 350 [1997, 2018] seeds=[2007] records=3651 errors=100
+00:43:09 seg done tier=B Lexus ES 330 [2004, 2006] seeds=[2004] records=3651 errors=100
+00:43:09 seg done tier=B Lexus GS 300 [1993, 2006] seeds=[2006] records=3651 errors=100
+00:43:09 seg done tier=B Lexus RX 350 [2004, 2016] seeds=[2007] records=3651 errors=100
+00:43:09 seg done tier=B Lexus RX 330 [2004, 2006] seeds=[2004] records=3651 errors=100
+00:43:09 seg done tier=B Lexus LS 400 [1990, 2005] seeds=[1996] records=3651 errors=100
+00:43:09 seg done tier=B Lexus LS 430 [2001, 2006] seeds=[2001] records=3651 errors=100
+00:43:09 seg done tier=B Lexus IS [2004, 2016] seeds=[2007] records=3651 errors=100
+00:43:09 seg done tier=B Lexus LS 460 [1996, 2016] seeds=[2007] records=3651 errors=100
+00:43:09 seg done tier=B Lexus GS [1998, 2018] seeds=[2006] records=3651 errors=100
+00:43:09 seg done tier=B Lexus ES [1990, 2015] seeds=[2007] records=3651 errors=100
+00:43:09 seg done tier=B Lexus GS 350 [1995, 2015] seeds=[2007] records=3651 errors=100
+00:43:09 seg done tier=B Lexus IS 300 [2001, 2005] seeds=[2001] records=3651 errors=100
+00:43:09 seg done tier=B Lexus RX 400h [2006, 2008] seeds=[2006] records=3651 errors=100
+00:43:09 seg done tier=B Lexus IS 350 [2006, 2014] seeds=[2006] records=3651 errors=100
+00:43:09 seg done tier=B Lexus RX [2004, 2008] seeds=[2005] records=3651 errors=100
+00:43:09 seg done tier=B Lexus RX [1999, 2003] seeds=[2001] records=3651 errors=100
+00:43:09 seg done tier=B Lexus GS 400 [1998, 2002] seeds=[1998] records=3651 errors=100
+00:43:09 seg done tier=B Lexus LS [1990, 2012] seeds=[1998] records=3651 errors=100
+00:43:09 seg done tier=B Lexus SC 400 [1992, 1999] seeds=[1992] records=3651 errors=100
+00:43:09 seg done tier=B Lexus GS 430 [2001, 2006] seeds=[2006] records=3651 errors=100
+00:43:09 seg done tier=B Lexus SC 430 [2002, 2005] seeds=[2002] records=3651 errors=100
+00:43:09 seg done tier=W Lexus ES 300 [1992, 2008] seeds=[2002] records=3651 errors=100
+00:43:09 seg done tier=W Lexus RX 300 [1999, 2008] seeds=[2000] records=3651 errors=100
+00:43:09 seg done tier=W Lexus IS 250 [2006, 2015] seeds=[2007] records=3651 errors=100
+00:43:09 seg done tier=W Lexus ES 350 [1997, 2018] seeds=[2007] records=3651 errors=100
+00:43:09 seg done tier=W Lexus ES 330 [2004, 2006] seeds=[2004] records=3651 errors=100
+00:43:09 seg done tier=W Lexus GS 300 [1993, 2006] seeds=[2006] records=3651 errors=100
+00:43:09 seg done tier=W Lexus RX 350 [2004, 2016] seeds=[2007] records=3651 errors=100
+00:43:09 seg done tier=W Lexus RX 330 [2004, 2006] seeds=[2004] records=3651 errors=100
+00:43:09 seg done tier=W Lexus LS 400 [1990, 2005] seeds=[1996] records=3651 errors=100
+00:43:09 seg done tier=W Lexus LS 430 [2001, 2006] seeds=[2001] records=3651 errors=100
+00:43:09 seg done tier=W Lexus IS [2004, 2016] seeds=[2007] records=3651 errors=100
+00:43:09 seg done tier=W Lexus LS 460 [1996, 2016] seeds=[2007] records=3651 errors=100
+00:43:09 seg done tier=W Lexus GS [1998, 2018] seeds=[2006] records=3651 errors=100
+00:43:09 seg done tier=W Lexus ES [1990, 2015] seeds=[2007] records=3651 errors=100
+00:43:09 seg done tier=W Lexus GS 350 [1995, 2015] seeds=[2007] records=3651 errors=100
+00:43:09 seg done tier=W Lexus IS 300 [2001, 2005] seeds=[2001] records=3651 errors=100
+00:43:09 seg done tier=W Lexus RX 400h [2006, 2008] seeds=[2006] records=3651 errors=100
+00:43:09 seg done tier=W Lexus IS 350 [2006, 2014] seeds=[2006] records=3651 errors=100
+00:43:09 seg done tier=W Lexus RX [2004, 2008] seeds=[2005] records=3651 errors=100
+00:43:09 seg done tier=W Lexus RX [1999, 2003] seeds=[2001] records=3651 errors=100
+00:43:09 seg done tier=W Lexus GS 400 [1998, 2002] seeds=[1998] records=3651 errors=100
+00:43:09 seg done tier=W Lexus LS [1990, 2012] seeds=[1998] records=3651 errors=100
+00:43:09 seg done tier=W Lexus SC 400 [1992, 1999] seeds=[1992] records=3651 errors=100
+00:43:09 seg done tier=W Lexus GS 430 [2001, 2006] seeds=[2006] records=3651 errors=100
+00:43:09 seg done tier=W Lexus SC 430 [2002, 2005] seeds=[2002] records=3651 errors=100
+00:43:09 seg done tier=C Lexus ES 300 [1992, 2008] seeds=[2002] records=3651 errors=100
+00:43:09 seg done tier=C Lexus RX 300 [1999, 2008] seeds=[2000] records=3651 errors=100
+00:43:09 seg done tier=C Lexus IS 250 [2006, 2015] seeds=[2007] records=3651 errors=100
+00:43:09 seg done tier=C Lexus ES 350 [1997, 2018] seeds=[2007] records=3651 errors=100
+00:43:09 seg done tier=C Lexus ES 330 [2004, 2006] seeds=[2004] records=3651 errors=100
+00:43:09 seg done tier=C Lexus GS 300 [1993, 2006] seeds=[2006] records=3651 errors=100
+00:43:09 seg done tier=C Lexus RX 350 [2004, 2016] seeds=[2007] records=3651 errors=100
+00:43:09 seg done tier=C Lexus RX 330 [2004, 2006] seeds=[2004] records=3651 errors=100
+00:43:09 seg done tier=C Lexus LS 400 [1990, 2005] seeds=[1996] records=3651 errors=100
+00:43:09 seg done tier=C Lexus LS 430 [2001, 2006] seeds=[2001] records=3651 errors=100
+00:43:09 seg done tier=C Lexus IS [2004, 2016] seeds=[2007] records=3651 errors=100
+00:43:09 seg done tier=C Lexus LS 460 [1996, 2016] seeds=[2007] records=3651 errors=100
+00:43:09 seg done tier=C Lexus GS [1998, 2018] seeds=[2006] records=3651 errors=100
+00:43:09 seg done tier=C Lexus ES [1990, 2015] seeds=[2007] records=3651 errors=100
+00:43:09 seg done tier=C Lexus GS 350 [1995, 2015] seeds=[2007] records=3651 errors=100
+00:43:09 seg done tier=C Lexus IS 300 [2001, 2005] seeds=[2001] records=3651 errors=100
+00:43:09 seg done tier=C Lexus RX 400h [2006, 2008] seeds=[2006] records=3651 errors=100
+00:43:09 seg done tier=C Lexus IS 350 [2006, 2014] seeds=[2006] records=3651 errors=100
+00:43:09 seg done tier=C Lexus RX [2004, 2008] seeds=[2005] records=3651 errors=100
+00:43:09 seg done tier=C Lexus RX [1999, 2003] seeds=[2001] records=3651 errors=100
+00:43:09 seg done tier=C Lexus GS 400 [1998, 2002] seeds=[1998] records=3651 errors=100
+00:43:09 seg done tier=C Lexus LS [1990, 2012] seeds=[1998] records=3651 errors=100
+00:43:09 seg done tier=C Lexus SC 400 [1992, 1999] seeds=[1992] records=3651 errors=100
+00:43:09 seg done tier=C Lexus GS 430 [2001, 2006] seeds=[2006] records=3651 errors=100
+00:43:09 seg done tier=C Lexus SC 430 [2002, 2005] seeds=[2002] records=3651 errors=100
+00:44:56 seg done tier=D Lexus ES 300 [1992, 2008] seeds=[2002, 2000, 1999] records=3651 errors=100
+00:45:28 nav-fail Lexus RX 300 2004: ValueError: no 2004 catalog for Lexus RX 300 (lexus-['rx300'])
+00:45:28 seg done tier=D Lexus RX 300 [1999, 2008] seeds=[2000, 2004] records=3651 errors=101
+00:48:16 seg done tier=D Lexus IS 250 [2006, 2015] seeds=[2007, 2011, 2012] records=3651 errors=101
+00:50:00 seg done tier=D Lexus ES 350 [1997, 2018] seeds=[2007, 2008, 2009] records=3651 errors=101
+00:51:44 seg done tier=D Lexus ES 330 [2004, 2006] seeds=[2004, 2006, 2005] records=3651 errors=101
+00:53:44 seg done tier=D Lexus GS 300 [1993, 2006] seeds=[2006, 1999, 2000] records=3651 errors=101
+00:57:04 seg done tier=D Lexus RX 350 [2004, 2016] seeds=[2007, 2011, 2010] records=3651 errors=101
+01:00:24 seg done tier=D Lexus RX 330 [2004, 2006] seeds=[2004, 2006, 2005] records=3651 errors=101
+01:02:00 seg done tier=D Lexus LS 400 [1990, 2005] seeds=[1996, 1998, 1999] records=3651 errors=101
+01:03:44 seg done tier=D Lexus LS 430 [2001, 2006] seeds=[2001, 2004, 2005] records=3651 errors=101
+01:03:52 nav-fail Lexus IS 2007: ValueError: no model page for Lexus IS (lexus-['is'])
+01:03:52 seg done tier=D Lexus IS [2004, 2016] seeds=[2007] records=3651 errors=102
+01:04:32 nav-fail Lexus LS 460 2006: ValueError: no 2006 catalog for Lexus LS 460 (lexus-['ls460'])
+01:04:32 seg done tier=D Lexus LS 460 [1996, 2016] seeds=[2007, 2006] records=3651 errors=103
+01:04:40 nav-fail Lexus GS 2006: ValueError: no model page for Lexus GS (lexus-['gs'])
+01:04:40 seg done tier=D Lexus GS [1998, 2018] seeds=[2006] records=3651 errors=104
+01:04:48 nav-fail Lexus ES 2007: ValueError: no model page for Lexus ES (lexus-['es'])
+01:04:48 seg done tier=D Lexus ES [1990, 2015] seeds=[2007] records=3651 errors=105
+01:05:28 nav-fail Lexus GS 350 2005: ValueError: no 2005 catalog for Lexus GS 350 (lexus-['gs350'])
+01:05:28 seg done tier=D Lexus GS 350 [1995, 2015] seeds=[2007, 2005] records=3651 errors=106
+01:07:12 seg done tier=D Lexus IS 300 [2001, 2005] seeds=[2001, 2004, 2003] records=3651 errors=106
+01:08:56 seg done tier=D Lexus RX 400h [2006, 2008] seeds=[2006, 2008, 2007] records=3651 errors=106
+01:11:44 seg done tier=D Lexus IS 350 [2006, 2014] seeds=[2006, 2011, 2010] records=3651 errors=106
+01:11:52 nav-fail Lexus RX 2005: ValueError: no model page for Lexus RX (lexus-['rx'])
+01:11:52 seg done tier=D Lexus RX [2004, 2008] seeds=[2005] records=3651 errors=107
+01:11:52 nav-fail Lexus RX 2001: ValueError: no model page for Lexus RX (lexus-['rx'])
+01:11:52 seg done tier=D Lexus RX [1999, 2003] seeds=[2001] records=3651 errors=108
+01:12:40 nav-fail Lexus GS 400 2001: ValueError: no 2001 catalog for Lexus GS 400 (lexus-['gs400'])
+01:12:40 seg done tier=D Lexus GS 400 [1998, 2002] seeds=[1998, 2001] records=3651 errors=109
+01:12:48 nav-fail Lexus LS 1998: ValueError: no model page for Lexus LS (lexus-['ls'])
+01:12:48 seg done tier=D Lexus LS [1990, 2012] seeds=[1998] records=3651 errors=110
+01:13:20 time budget reached records=3651
