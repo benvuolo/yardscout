@@ -2864,3 +2864,194 @@
 11:31:56 seg done tier=D Toyota Sequoia [2001, 2007] seeds=[2002, 2005, 2004] records=4902 errors=11
 11:35:08 seg done tier=D Toyota Avalon [2005, 2012] seeds=[2006, 2009, 2010] records=4902 errors=11
 11:36:12 time budget reached records=4902
+22:02:07 start site=www.toyotapartsnow.com mode=worklist tiers=['A', 'B', 'W', 'C', 'D'] records=4902 list_lines=2798 year_lines=533 url_index=26847
+22:02:07 seg done tier=A Toyota Camry [2007, 2009] seeds=[2007] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Camry [2002, 2004] seeds=[2002] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Prius [2001, 2019] seeds=[2008] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Sienna [2004, 2010] seeds=[2004] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Camry [2005, 2006] seeds=[2005] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Camry [1997, 1999] seeds=[1999] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Corolla [1998, 2002] seeds=[2001] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Camry [2000, 2001] seeds=[2000] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Corolla [2005, 2008] seeds=[2005] records=4902 errors=11
+22:02:07 seg done tier=A Scion tC [2005, 2016] seeds=[2006] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Camry [2010, 2011] seeds=[2011] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Highlander [2001, 2007] seeds=[2006] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Corolla [2009, 2010] seeds=[2010] records=4902 errors=11
+22:02:07 seg done tier=A Scion xB [2004, 2015] seeds=[2006] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Avalon [2000, 2004] seeds=[2000] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Camry Solara [1999, 2008] seeds=[2006] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Camry [1984, 1996] seeds=[1996] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Corolla [2003, 2004] seeds=[2003] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Sienna [1998, 2003] seeds=[2000] records=4902 errors=11
+22:02:07 seg done tier=A Toyota RAV4 [2006, 2012] seeds=[2007] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Sequoia [2001, 2007] seeds=[2002] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Avalon [2005, 2012] seeds=[2006] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Corolla [1970, 1997] seeds=[1997] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Camry [2012, 2014] seeds=[2012] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Yaris [2006, 2011] seeds=[2007] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Matrix [2003, 2008] seeds=[2003] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Tundra [2000, 2006] seeds=[2006] records=4902 errors=11
+22:02:07 seg done tier=A Toyota 4Runner [1996, 2002] seeds=[1998] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Corolla [2011, 2013] seeds=[2013] records=4902 errors=11
+22:02:07 seg done tier=A Toyota RAV4 [2001, 2005] seeds=[2002] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Avalon [1995, 1999] seeds=[1998] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Corolla [2014, 2016] seeds=[2014] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Sienna [2011, 2019] seeds=[2011] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Echo [2000, 2005] seeds=[2000] records=4902 errors=11
+22:02:07 seg done tier=A Toyota 4Runner [2003, 2008] seeds=[2003] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Tacoma [1995, 2004] seeds=[1998] records=4902 errors=11
+22:02:07 seg done tier=A Toyota RAV4 [1996, 2000] seeds=[1998] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Highlander [2008, 2013] seeds=[2008] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Celica [2000, 2005] seeds=[2000] records=4902 errors=11
+22:02:07 seg done tier=A Scion xA [2004, 2006] seeds=[2006] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Camry [2015, 2017] seeds=[2015] records=4902 errors=11
+22:02:07 seg done tier=A Scion xD [2008, 2014] seeds=[2008] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Tundra [2007, 2013] seeds=[2007] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Camry Hybrid [2007, 2026] seeds=[2007] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Tercel [1980, 1999] seeds=[1996] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Pickup [1965, 2009] seeds=[1994] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Tacoma [2005, 2015] seeds=[2009] records=4902 errors=11
+22:02:07 seg done tier=A Toyota 4Runner [1990, 1995] seeds=[1995] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Matrix [2009, 2013] seeds=[2009] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Prius C [2012, 2017] seeds=[2013] records=4902 errors=11
+22:02:07 seg done tier=A Toyota Corolla [2017, 2019] seeds=[2017] records=4902 errors=11
+22:02:07 seg done tier=A Toyota T100 [1993, 1998] seeds=[1995] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Camry [2007, 2009] seeds=[2007] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Camry [2002, 2004] seeds=[2002] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Prius [2001, 2019] seeds=[2008] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Sienna [2004, 2010] seeds=[2004] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Camry [2005, 2006] seeds=[2005] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Camry [1997, 1999] seeds=[1999] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Corolla [1998, 2002] seeds=[2001] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Camry [2000, 2001] seeds=[2000] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Corolla [2005, 2008] seeds=[2005] records=4902 errors=11
+22:02:07 seg done tier=B Scion tC [2005, 2016] seeds=[2006] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Camry [2010, 2011] seeds=[2011] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Highlander [2001, 2007] seeds=[2006] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Corolla [2009, 2010] seeds=[2010] records=4902 errors=11
+22:02:07 seg done tier=B Scion xB [2004, 2015] seeds=[2006] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Avalon [2000, 2004] seeds=[2000] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Camry Solara [1999, 2008] seeds=[2006] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Camry [1984, 1996] seeds=[1996] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Corolla [2003, 2004] seeds=[2003] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Sienna [1998, 2003] seeds=[2000] records=4902 errors=11
+22:02:07 seg done tier=B Toyota RAV4 [2006, 2012] seeds=[2007] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Sequoia [2001, 2007] seeds=[2002] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Avalon [2005, 2012] seeds=[2006] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Corolla [1970, 1997] seeds=[1997] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Camry [2012, 2014] seeds=[2012] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Yaris [2006, 2011] seeds=[2007] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Matrix [2003, 2008] seeds=[2003] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Tundra [2000, 2006] seeds=[2006] records=4902 errors=11
+22:02:07 seg done tier=B Toyota 4Runner [1996, 2002] seeds=[1998] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Corolla [2011, 2013] seeds=[2013] records=4902 errors=11
+22:02:07 seg done tier=B Toyota RAV4 [2001, 2005] seeds=[2002] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Avalon [1995, 1999] seeds=[1998] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Corolla [2014, 2016] seeds=[2014] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Sienna [2011, 2019] seeds=[2011] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Echo [2000, 2005] seeds=[2000] records=4902 errors=11
+22:02:07 seg done tier=B Toyota 4Runner [2003, 2008] seeds=[2003] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Tacoma [1995, 2004] seeds=[1998] records=4902 errors=11
+22:02:07 seg done tier=B Toyota RAV4 [1996, 2000] seeds=[1998] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Highlander [2008, 2013] seeds=[2008] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Celica [2000, 2005] seeds=[2000] records=4902 errors=11
+22:02:07 seg done tier=B Scion xA [2004, 2006] seeds=[2006] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Camry [2015, 2017] seeds=[2015] records=4902 errors=11
+22:02:07 seg done tier=B Scion xD [2008, 2014] seeds=[2008] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Tundra [2007, 2013] seeds=[2007] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Camry Hybrid [2007, 2026] seeds=[2007] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Tercel [1980, 1999] seeds=[1996] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Pickup [1965, 2009] seeds=[1994] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Tacoma [2005, 2015] seeds=[2009] records=4902 errors=11
+22:02:07 seg done tier=B Toyota 4Runner [1990, 1995] seeds=[1995] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Matrix [2009, 2013] seeds=[2009] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Prius C [2012, 2017] seeds=[2013] records=4902 errors=11
+22:02:07 seg done tier=B Toyota Corolla [2017, 2019] seeds=[2017] records=4902 errors=11
+22:02:07 seg done tier=B Toyota T100 [1993, 1998] seeds=[1995] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Camry [2007, 2009] seeds=[2007] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Camry [2002, 2004] seeds=[2002] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Prius [2001, 2019] seeds=[2008] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Sienna [2004, 2010] seeds=[2004] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Camry [2005, 2006] seeds=[2005] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Camry [1997, 1999] seeds=[1999] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Corolla [1998, 2002] seeds=[2001] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Camry [2000, 2001] seeds=[2000] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Corolla [2005, 2008] seeds=[2005] records=4902 errors=11
+22:02:07 seg done tier=C Scion tC [2005, 2016] seeds=[2006] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Camry [2010, 2011] seeds=[2011] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Highlander [2001, 2007] seeds=[2006] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Corolla [2009, 2010] seeds=[2010] records=4902 errors=11
+22:02:07 seg done tier=C Scion xB [2004, 2015] seeds=[2006] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Avalon [2000, 2004] seeds=[2000] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Camry Solara [1999, 2008] seeds=[2006] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Camry [1984, 1996] seeds=[1996] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Corolla [2003, 2004] seeds=[2003] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Sienna [1998, 2003] seeds=[2000] records=4902 errors=11
+22:02:07 seg done tier=C Toyota RAV4 [2006, 2012] seeds=[2007] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Sequoia [2001, 2007] seeds=[2002] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Avalon [2005, 2012] seeds=[2006] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Corolla [1970, 1997] seeds=[1997] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Camry [2012, 2014] seeds=[2012] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Yaris [2006, 2011] seeds=[2007] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Matrix [2003, 2008] seeds=[2003] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Tundra [2000, 2006] seeds=[2006] records=4902 errors=11
+22:02:07 seg done tier=C Toyota 4Runner [1996, 2002] seeds=[1998] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Corolla [2011, 2013] seeds=[2013] records=4902 errors=11
+22:02:07 seg done tier=C Toyota RAV4 [2001, 2005] seeds=[2002] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Avalon [1995, 1999] seeds=[1998] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Corolla [2014, 2016] seeds=[2014] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Sienna [2011, 2019] seeds=[2011] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Echo [2000, 2005] seeds=[2000] records=4902 errors=11
+22:02:07 seg done tier=C Toyota 4Runner [2003, 2008] seeds=[2003] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Tacoma [1995, 2004] seeds=[1998] records=4902 errors=11
+22:02:07 seg done tier=C Toyota RAV4 [1996, 2000] seeds=[1998] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Highlander [2008, 2013] seeds=[2008] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Celica [2000, 2005] seeds=[2000] records=4902 errors=11
+22:02:07 seg done tier=C Scion xA [2004, 2006] seeds=[2006] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Camry [2015, 2017] seeds=[2015] records=4902 errors=11
+22:02:07 seg done tier=C Scion xD [2008, 2014] seeds=[2008] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Tundra [2007, 2013] seeds=[2007] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Camry Hybrid [2007, 2026] seeds=[2007] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Tercel [1980, 1999] seeds=[1996] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Pickup [1965, 2009] seeds=[1994] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Tacoma [2005, 2015] seeds=[2009] records=4902 errors=11
+22:02:07 seg done tier=C Toyota 4Runner [1990, 1995] seeds=[1995] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Matrix [2009, 2013] seeds=[2009] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Prius C [2012, 2017] seeds=[2013] records=4902 errors=11
+22:02:07 seg done tier=C Toyota Corolla [2017, 2019] seeds=[2017] records=4902 errors=11
+22:02:07 seg done tier=C Toyota T100 [1993, 1998] seeds=[1995] records=4902 errors=11
+22:02:07 seg done tier=D Toyota Camry [2007, 2009] seeds=[2007] records=4902 errors=11
+22:02:07 seg done tier=D Toyota Camry [2002, 2004] seeds=[2002] records=4902 errors=11
+22:02:07 seg done tier=D Toyota Prius [2001, 2019] seeds=[2008] records=4902 errors=11
+22:02:07 seg done tier=D Toyota Sienna [2004, 2010] seeds=[2004] records=4902 errors=11
+22:02:07 seg done tier=D Toyota Camry [2005, 2006] seeds=[2005] records=4902 errors=11
+22:02:07 seg done tier=D Toyota Camry [1997, 1999] seeds=[1999] records=4902 errors=11
+22:02:07 seg done tier=D Toyota Corolla [1998, 2002] seeds=[2001] records=4902 errors=11
+22:02:07 seg done tier=D Toyota Camry [2000, 2001] seeds=[2000] records=4902 errors=11
+22:02:07 seg done tier=D Toyota Corolla [2005, 2008] seeds=[2005] records=4902 errors=11
+22:02:07 seg done tier=D Scion tC [2005, 2016] seeds=[2006] records=4902 errors=11
+22:02:07 seg done tier=D Toyota Camry [2010, 2011] seeds=[2011] records=4902 errors=11
+22:02:07 seg done tier=D Toyota Highlander [2001, 2007] seeds=[2006] records=4902 errors=11
+22:02:07 seg done tier=D Toyota Corolla [2009, 2010] seeds=[2010] records=4902 errors=11
+22:02:07 seg done tier=D Scion xB [2004, 2015] seeds=[2006] records=4902 errors=11
+22:02:07 seg done tier=D Toyota Avalon [2000, 2004] seeds=[2000] records=4902 errors=11
+22:02:07 seg done tier=D Toyota Camry Solara [1999, 2008] seeds=[2006] records=4902 errors=11
+22:02:07 seg done tier=D Toyota Camry [1984, 1996] seeds=[1996] records=4902 errors=11
+22:02:07 seg done tier=D Toyota Corolla [2003, 2004] seeds=[2003] records=4902 errors=11
+22:02:07 seg done tier=D Toyota Sienna [1998, 2003] seeds=[2000] records=4902 errors=11
+22:02:07 seg done tier=D Toyota RAV4 [2006, 2012] seeds=[2007] records=4902 errors=11
+22:02:07 seg done tier=D Toyota Sequoia [2001, 2007] seeds=[2002] records=4902 errors=11
+22:02:07 seg done tier=D Toyota Avalon [2005, 2012] seeds=[2006] records=4902 errors=11
+22:02:07 seg done tier=D Toyota Corolla [1970, 1997] seeds=[1997] records=4902 errors=11
+22:05:22 seg done tier=D Toyota Camry [2012, 2014] seeds=[2012, 2014, 2013] records=4902 errors=11
+22:07:46 seg done tier=D Toyota Yaris [2006, 2011] seeds=[2007, 2009, 2010] records=4902 errors=11
+22:11:22 seg done tier=D Toyota Matrix [2003, 2008] seeds=[2003, 2006, 2007] records=4902 errors=11
+22:14:02 seg done tier=D Toyota Tundra [2000, 2006] seeds=[2006, 2003, 2002] records=4902 errors=11
+22:17:06 seg done tier=D Toyota 4Runner [1996, 2002] seeds=[1998, 2000, 1999] records=4902 errors=11
+22:20:18 seg done tier=D Toyota Corolla [2011, 2013] seeds=[2013, 2012, 2011] records=4902 errors=11
+22:23:30 seg done tier=D Toyota RAV4 [2001, 2005] seeds=[2002, 2004, 2003] records=4902 errors=11
+22:26:26 seg done tier=D Toyota Avalon [1995, 1999] seeds=[1998, 1997, 1996] records=4902 errors=11
+22:29:38 seg done tier=D Toyota Corolla [2014, 2016] seeds=[2014, 2016, 2015] records=4902 errors=11
+22:32:27 seg done tier=D Toyota Sienna [2011, 2019] seeds=[2011, 2016, 2015] records=4902 errors=11
+22:32:27 time budget reached records=4902
