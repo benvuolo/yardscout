@@ -280,3 +280,14 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
 - iOS 1.12.15 (37): WAITING_FOR_REVIEW since 17:27 UTC (asc-status 20:44).
   Expedite request is the owner's to file.
 - Subscribers as of 11-11: Apple 4, Google 1.
+
+## 2026-11-12 ~22:10 UTC car search merged (sw jh-v185)
+
+- `design/car-search` merged at bf82ec45: search box at the top of the Cars
+  tab and `#cars=Make|Model|years` links. Hub regression on the merged tree:
+  car_search unit + e2e, model_years, no_pick_models, funnel_events,
+  share_watch, tab_retap, browser_e2e (17/0), all pass. ui_no_truncation was
+  run by the builder at 390 and 1280 only (568 checks, 0 failures); the full
+  width matrix was not run.
+- Web only; the apps load the same files, so no store release is needed.
+- Suggestion counts show for Pro only (same rule as the Make/Model lists).
