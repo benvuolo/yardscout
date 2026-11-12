@@ -1768,3 +1768,6 @@
 10:10:54 start site=www.bmwpartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2218 list_lines=3627 year_lines=441 url_index=0
 10:10:54 completion worklist completion/bmw.own_page.json: 507 rows
 10:41:26 time budget reached records=2220
+22:47:29 start site=www.bmwpartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2220 list_lines=3818 year_lines=467 url_index=0
+22:47:29 completion worklist completion/bmw.own_page.json: 507 rows
+23:18:53 time budget reached records=2222
