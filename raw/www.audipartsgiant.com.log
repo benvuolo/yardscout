@@ -953,3 +953,61 @@
 22:58:19 seg done tier=D Audi S4 [2000, 2021] seeds=[2005, 2011, 2012] records=1619 errors=106
 23:02:06 seg done tier=D Audi A8 [1997, 2011] seeds=[2006, 2004, 2003] records=1619 errors=106
 23:03:02 time budget reached records=1619
+07:29:54 start site=www.audipartsgiant.com mode=worklist tiers=['A', 'B', 'W', 'C', 'D'] records=1619 list_lines=2739 year_lines=432 url_index=14823
+07:29:54 seg done tier=A Audi A4 [1996, 2019] seeds=[2008] records=1619 errors=106
+07:29:54 seg done tier=A Audi A6 [1997, 2017] seeds=[2008] records=1619 errors=106
+07:29:54 seg done tier=A Audi Q5 [2009, 2022] seeds=[2012] records=1619 errors=106
+07:29:54 seg done tier=A Audi Q7 [2007, 2017] seeds=[2008] records=1619 errors=106
+07:29:54 seg done tier=A Audi A3 [2006, 2019] seeds=[2006] records=1619 errors=106
+07:29:54 seg done tier=A Audi A4 Quattro [1997, 2016] seeds=[2009] records=1619 errors=106
+07:29:54 seg done tier=A Audi A5 [2009, 2022] seeds=[2010] records=1619 errors=106
+07:29:54 seg done tier=A Audi A6 Quattro [2000, 2015] seeds=[2006] records=1619 errors=106
+07:29:54 seg done tier=A Audi TT [2000, 2008] seeds=[2001] records=1619 errors=106
+07:29:54 seg done tier=A Audi S4 [2000, 2021] seeds=[2005] records=1619 errors=106
+07:29:54 seg done tier=A Audi A8 [1997, 2011] seeds=[2006] records=1619 errors=106
+07:29:54 seg done tier=A Audi Allroad [2001, 2015] seeds=[2005] records=1619 errors=106
+07:29:54 seg done tier=A Audi A5 Quattro [2009, 2012] seeds=[2011] records=1619 errors=106
+07:29:54 seg done tier=A Audi Q3 [2015, 2021] seeds=[2016] records=1619 errors=106
+07:29:54 seg done tier=B Audi A4 [1996, 2019] seeds=[2008] records=1619 errors=106
+07:29:54 seg done tier=B Audi A6 [1997, 2017] seeds=[2008] records=1619 errors=106
+07:29:54 seg done tier=B Audi Q5 [2009, 2022] seeds=[2012] records=1619 errors=106
+07:29:54 seg done tier=B Audi Q7 [2007, 2017] seeds=[2008] records=1619 errors=106
+07:29:54 seg done tier=B Audi A3 [2006, 2019] seeds=[2006] records=1619 errors=106
+07:29:54 seg done tier=B Audi A4 Quattro [1997, 2016] seeds=[2009] records=1619 errors=106
+07:29:54 seg done tier=B Audi A5 [2009, 2022] seeds=[2010] records=1619 errors=106
+07:29:54 seg done tier=B Audi A6 Quattro [2000, 2015] seeds=[2006] records=1619 errors=106
+07:29:54 seg done tier=B Audi TT [2000, 2008] seeds=[2001] records=1619 errors=106
+07:29:54 seg done tier=B Audi S4 [2000, 2021] seeds=[2005] records=1619 errors=106
+07:29:54 seg done tier=B Audi A8 [1997, 2011] seeds=[2006] records=1619 errors=106
+07:29:54 seg done tier=B Audi Allroad [2001, 2015] seeds=[2005] records=1619 errors=106
+07:29:54 seg done tier=B Audi A5 Quattro [2009, 2012] seeds=[2011] records=1619 errors=106
+07:29:54 seg done tier=B Audi Q3 [2015, 2021] seeds=[2016] records=1619 errors=106
+07:29:54 seg done tier=C Audi A4 [1996, 2019] seeds=[2008] records=1619 errors=106
+07:29:54 seg done tier=C Audi A6 [1997, 2017] seeds=[2008] records=1619 errors=106
+07:29:54 seg done tier=C Audi Q5 [2009, 2022] seeds=[2012] records=1619 errors=106
+07:29:54 seg done tier=C Audi Q7 [2007, 2017] seeds=[2008] records=1619 errors=106
+07:29:54 seg done tier=C Audi A3 [2006, 2019] seeds=[2006] records=1619 errors=106
+07:29:54 seg done tier=C Audi A4 Quattro [1997, 2016] seeds=[2009] records=1619 errors=106
+07:29:54 seg done tier=C Audi A5 [2009, 2022] seeds=[2010] records=1619 errors=106
+07:29:54 seg done tier=C Audi A6 Quattro [2000, 2015] seeds=[2006] records=1619 errors=106
+07:29:54 seg done tier=C Audi TT [2000, 2008] seeds=[2001] records=1619 errors=106
+07:29:54 seg done tier=C Audi S4 [2000, 2021] seeds=[2005] records=1619 errors=106
+07:29:54 seg done tier=C Audi A8 [1997, 2011] seeds=[2006] records=1619 errors=106
+07:29:54 seg done tier=C Audi Allroad [2001, 2015] seeds=[2005] records=1619 errors=106
+07:29:54 seg done tier=C Audi A5 Quattro [2009, 2012] seeds=[2011] records=1619 errors=106
+07:29:54 seg done tier=C Audi Q3 [2015, 2021] seeds=[2016] records=1619 errors=106
+07:29:54 seg done tier=D Audi A4 [1996, 2019] seeds=[2008] records=1619 errors=106
+07:29:54 seg done tier=D Audi A6 [1997, 2017] seeds=[2008] records=1619 errors=106
+07:29:54 seg done tier=D Audi Q5 [2009, 2022] seeds=[2012] records=1619 errors=106
+07:29:54 seg done tier=D Audi Q7 [2007, 2017] seeds=[2008] records=1619 errors=106
+07:29:54 seg done tier=D Audi A3 [2006, 2019] seeds=[2006] records=1619 errors=106
+07:29:54 seg done tier=D Audi A4 Quattro [1997, 2016] seeds=[2009] records=1619 errors=106
+07:29:54 seg done tier=D Audi A5 [2009, 2022] seeds=[2010] records=1619 errors=106
+07:29:54 seg done tier=D Audi A6 Quattro [2000, 2015] seeds=[2006] records=1619 errors=106
+07:29:54 seg done tier=D Audi TT [2000, 2008] seeds=[2001] records=1619 errors=106
+07:29:54 seg done tier=D Audi S4 [2000, 2021] seeds=[2005] records=1619 errors=106
+07:29:54 seg done tier=D Audi A8 [1997, 2011] seeds=[2006] records=1619 errors=106
+07:29:54 seg done tier=D Audi Allroad [2001, 2015] seeds=[2005] records=1619 errors=106
+07:32:18 seg done tier=D Audi A5 Quattro [2009, 2012] seeds=[2011, 2010, 2012] records=1619 errors=106
+07:34:50 seg done tier=D Audi Q3 [2015, 2021] seeds=[2016, 2019, 2018] records=1619 errors=106
+07:34:50 finished records=1619 errors=106 chain_records=0 chain_unlinked=737 chain_failed=0 chain_given_up=0
