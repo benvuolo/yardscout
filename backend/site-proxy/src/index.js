@@ -18,7 +18,27 @@ const UPSTREAM = 'https://benvuolo.github.io/yardscout';
 // Lives here (not in yardscout-api) so the web app talks same-origin.
 import { handleEntitlements } from './entitlements.js';
 // Server-rendered share pages (/car/<vin>, /yard/<slug>) — see share.js.
-import { renderCarPage, renderYardPage, renderYardSitemap, renderYardsPage, renderLandedPage, renderJunkyardsPage, IOS_URL, PLAY_URL } from './share.js';
+import { renderCarPage, renderYardPage, renderSitemap, renderYardsPage, renderLandedPage, renderJunkyardsPage, renderPricesPage, IOS_URL, PLAY_URL } from './share.js';
+
+/** The server-rendered pages (share.js): a path → the function that renders
+ * it, or null when the path is not one of them. */
+function renderedRoute(pathname) {
+  let m = pathname.match(/^\/car\/([^/]+)\/?$/);
+  if (m) return () => renderCarPage(m[1]);
+  m = pathname.match(/^\/yard\/([^/]+)\/?$/);
+  if (m) return () => renderYardPage(m[1]);
+  // /sitemap.xml is the name crawlers probe; /sitemap-yards.xml is the one
+  // robots.txt has always named. Same body.
+  if (pathname === '/sitemap.xml' || pathname === '/sitemap-yards.xml') return () => renderSitemap();
+  if (/^\/yards\/?$/.test(pathname)) return () => renderYardsPage();
+  m = pathname.match(/^\/landed(?:\/([^/]+))?\/?$/);
+  if (m) return () => renderLandedPage(m[1] || '');
+  m = pathname.match(/^\/junkyards(?:\/([^/]+))?(?:\/([^/]+))?\/?$/);
+  if (m) return () => renderJunkyardsPage(m[1] || '', m[2] || '');
+  m = pathname.match(/^\/prices(?:\/([^/]+))?(?:\/([^/]+))?\/?$/);
+  if (m) return () => renderPricesPage(m[1] || '', m[2] || '');
+  return null;
+}
 
 // Fixed-allowlist upstream mirror for the scan workflow. Some independent
 // yards' hosts (first case: indyupullit.com) hard-block GitHub Actions'
@@ -93,16 +113,19 @@ export default {
         const cm = url.pathname.match(/^\/car\/([^/]+)\/?$/);
         if (cm) return Response.redirect('https://yardscout.io/#car=' + cm[1], 302);
       }
-      let sm = url.pathname.match(/^\/car\/([^/]+)\/?$/);
-      if (sm) return renderCarPage(sm[1]);
-      sm = url.pathname.match(/^\/yard\/([^/]+)\/?$/);
-      if (sm) return renderYardPage(sm[1]);
-      if (url.pathname === '/sitemap-yards.xml') return renderYardSitemap();
-      if (/^\/yards\/?$/.test(url.pathname)) return renderYardsPage();
-      sm = url.pathname.match(/^\/landed(?:\/([^/]+))?\/?$/);
-      if (sm) return renderLandedPage(sm[1] || '');
-      sm = url.pathname.match(/^\/junkyards(?:\/([^/]+))?(?:\/([^/]+))?\/?$/);
-      if (sm) return renderJunkyardsPage(sm[1] || '', sm[2] || '');
+      const page = renderedRoute(url.pathname);
+      if (page) {
+        // One indexable host: the rendered pages answer on the apex only.
+        // This sits AFTER /open and ?app=1 above on purpose. iPhone "Open
+        // the app" buttons point at www.yardscout.io (iOS only hands a link
+        // to the app across domains), and those two landings must keep
+        // answering on www with their own redirects.
+        if (url.hostname === 'www.yardscout.io') {
+          url.hostname = 'yardscout.io';
+          return Response.redirect(url.toString(), 301);
+        }
+        return page();
+      }
     }
     const mirror = MIRRORS[url.pathname];
     if (mirror) {

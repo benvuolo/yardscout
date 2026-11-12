@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- GitHub Pages serves this file, with status 404, for every path that does
+     not exist, at any depth. So every URL in it is absolute. The yardscout.io
+     Worker (backend/site-proxy) passes it through with the 404 status.
+     noindex: it must never appear in search results. -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Page not found — YardScout</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="That page doesn't exist on YardScout. Browse self-service junkyards by state, see every covered yard, or see what landed this week.">
+<meta name="theme-color" content="#F4F2EC" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1C1C1A" media="(prefers-color-scheme: dark)">
+<script>try{var t=localStorage.getItem('ys_theme');if(t=='dark'||t=='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<link rel="icon" href="https://yardscout.io/favicon.ico?v=3" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="https://yardscout.io/favicon-32.png?v=3">
+<link rel="apple-touch-icon" href="https://yardscout.io/apple-touch-icon.png?v=3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Saira+Stencil+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://yardscout.io/styles.css">
+<style>
+body{padding-bottom:2.5rem}
+/* The wordmark is not the page's heading here (same rule as the Worker's
+   rendered pages), so the stylesheet's `header h1` look is repeated. */
+.wm-name{font-family:'Saira Stencil One',var(--font-mono);font-size:1.25rem;font-weight:400;line-height:1.1;text-transform:uppercase;letter-spacing:.02em;display:flex;align-items:center;flex-wrap:wrap;gap:0;margin:0}
+.wm-name a{color:inherit;text-decoration:none}
+.wm-name .wm-scout{color:var(--brand)}
+.nf-main{max-width:680px;margin:0 auto;padding:1.5rem 1.25rem}
+.nf-kicker{font-family:var(--font-mono);font-size:.625rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);margin:.25rem 0 .5rem}
+.nf-h{font-size:1.5rem;font-weight:800;letter-spacing:-.02em;line-height:1.15;margin:0 0 .35rem}
+.nf-sub{color:var(--text-dim);font-size:.875rem;line-height:1.5;margin:0 0 .9rem}
+.nf-list{list-style:none;margin:0 0 1rem;padding:0;display:grid;gap:.5rem}
+.nf-list a{display:block;padding:.75rem .9rem;min-height:44px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);color:var(--text);text-decoration:none;font-weight:700;font-size:.9375rem}
+.nf-list a:hover{border-color:var(--accent)}
+.nf-list small{display:block;color:var(--text-dim);font-weight:500;font-size:.8125rem;margin-top:.15rem}
+.nf-cta .btn{padding:.7rem 1rem;font-size:.875rem;min-height:44px;text-decoration:none;display:inline-flex;align-items:center}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-row">
+    <a href="https://yardscout.io/" aria-label="YardScout home" style="display:block"><svg class="brand-mark" viewBox="4 29 122 72" aria-hidden="true"><g fill="var(--mark-rim)"><circle cx="40" cy="65" r="36"/><circle cx="90" cy="65" r="36"/></g><g fill="#F26B1D"><circle cx="40" cy="65" r="32"/><circle cx="90" cy="65" r="32"/></g><g transform="translate(65 64) scale(0.88) translate(-66.5 -63)"><path d="M16 76 V62 Q16 59 19 59 H35 L46 44.5 Q47 43.5 49 43.5 H79 Q81 43.5 82 44.5 L92 58 L110 60 Q114 60.5 114 63 V76 Q114 79 111 79 H106 A10 10 0 0 0 86 79 H44 A10 10 0 0 0 24 79 H19 Q16 79 16 76 Z" fill="#1C1C1A"/><path d="M49 46.8 H78.3 L88 57.4 H46.6 L44 54.2 Z" fill="#F26B1D"/><rect x="63" y="46" width="2.6" height="12" fill="#1C1C1A"/><g fill="#1C1C1A"><circle cx="34" cy="80" r="8"/><circle cx="96" cy="80" r="8"/></g><g fill="#F26B1D"><circle cx="34" cy="80" r="3.2"/><circle cx="96" cy="80" r="3.2"/></g></g></svg></a>
+    <div class="wordmark"><p class="wm-name"><a href="https://yardscout.io/">Yard<span class="wm-scout">Scout</span></a></p><span class="head-spec">SELF-SERVICE YARD INTEL</span></div>
+  </div>
+</header>
+<main class="nf-main">
+  <p class="nf-kicker">Error 404</p>
+  <h1 class="nf-h">Page not found</h1>
+  <p class="nf-sub">There's nothing at this address. If you followed a link to a car, the yard has probably pulled or crushed it. These pages are live:</p>
+  <ul class="nf-list">
+    <li><a href="https://yardscout.io/junkyards">Junkyards by state and city<small>Self-service yards near you, with what's on each lot</small></a></li>
+    <li><a href="https://yardscout.io/yards">All covered yards<small>Every yard YardScout tracks, and a form to ask for one</small></a></li>
+    <li><a href="https://yardscout.io/landed">What landed this week<small>New arrivals at the yards, by make</small></a></li>
+  </ul>
+  <div class="nf-cta"><a class="btn btn-primary" href="https://yardscout.io/">Search near your zip</a></div>
+</main>
+</body>
+</html>

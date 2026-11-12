@@ -11,8 +11,12 @@
      (WCAG 1.4.4). iOS focus-zoom is prevented by 16px inputs on touch
      screens instead (styles.css, pointer: coarse). -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>YardScout</title>
-<meta name="description" content="Live inventory from every major self-service junkyard chain — Pick-n-Pull, LKQ Pick Your Part, Pull-A-Part — so you find the donor car before you drive. Free, no signup.">
+<title>YardScout: live junkyard inventory search for 300+ self-service yards</title>
+<meta name="description" content="Live junkyard inventory from 300+ self-service yards: Pick-n-Pull, LKQ Pick Your Part, Pull-A-Part and more. Find the donor car before you drive. Free.">
+<!-- Structured data for search engines: the site, who runs it, and the app.
+     No offers and no ratings on purpose (ops/seo.md). Inert in the native
+     shells, which load this same file. -->
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://yardscout.io/#website","url":"https://yardscout.io/","name":"YardScout","description":"Live inventory search for self-service junkyards.","publisher":{"@id":"https://yardscout.io/#organization"}},{"@type":"Organization","@id":"https://yardscout.io/#organization","name":"YardScout","url":"https://yardscout.io/","logo":"https://yardscout.io/icon-512.png","sameAs":["https://apps.apple.com/app/yardscout-junkyard-parts/id6817126581","https://play.google.com/store/apps/details?id=io.yardscout.app"]},{"@type":"MobileApplication","@id":"https://yardscout.io/#app","name":"YardScout: Junkyard Parts","operatingSystem":"iOS, Android","url":"https://yardscout.io/","installUrl":["https://apps.apple.com/app/yardscout-junkyard-parts/id6817126581","https://play.google.com/store/apps/details?id=io.yardscout.app"],"publisher":{"@id":"https://yardscout.io/#organization"}}]}</script>
 <meta name="theme-color" content="#F4F2EC" id="theme-color">
 <script>try{var t=localStorage.getItem('ys_theme');if(t=='dark'||t=='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <meta property="og:type" content="website">
@@ -102,7 +106,7 @@
       <div class="zip-banner-text">
         <strong>Where are you?</strong>
         <span>Enter your zip or postal code and we&rsquo;ll show you what&rsquo;s in the self-service yards near you.</span>
-        <span class="zip-banner-coverage">Coverage: every major self-service chain &mdash; Pick-n-Pull, LKQ Pick Your Part, Pull-A-Part &mdash; plus a growing set of independents: <strong class="coverage-count">210+</strong> yards nationwide. Missing your yard? <a href="mailto:yardscout.io@gmail.com?subject=Add%20my%20yard">Tell us</a>.</span>
+        <span class="zip-banner-coverage">Coverage: every major self-service chain &mdash; Pick-n-Pull, LKQ Pick Your Part, Pull-A-Part &mdash; plus a growing set of independents: <strong class="coverage-count">300+</strong> yards nationwide. Missing your yard? <a href="mailto:yardscout.io@gmail.com?subject=Add%20my%20yard">Tell us</a>.</span>
       </div>
       <div class="zip-banner-form">
         <input type="text" id="zip-banner-input" inputmode="numeric" maxlength="7" placeholder="Zip code">
@@ -614,7 +618,7 @@
     </details>
     <details class="footer-fold">
       <summary>About coverage <svg class="chev" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-      <p>YardScout tracks every major self-service chain with online inventory &mdash; Pick-n-Pull, LKQ Pick Your Part, and Pull-A-Part (including former U-Pull-&amp;-Pay yards) &mdash; plus regional chains and a growing set of independent yards: <span class="coverage-count">210+</span> yards nationwide. The full list is at <a href="https://yardscout.io/yards" target="_blank" rel="noopener">yardscout.io/yards</a>, with a form to ask for a yard we&rsquo;re missing. What landed this week, by make: <a href="https://yardscout.io/landed" target="_blank" rel="noopener">yardscout.io/landed</a>.</p>
+      <p>YardScout tracks every major self-service chain with online inventory &mdash; Pick-n-Pull, LKQ Pick Your Part, and Pull-A-Part (including former U-Pull-&amp;-Pay yards) &mdash; plus regional chains and a growing set of independent yards: <span class="coverage-count">300+</span> yards nationwide. The full list is at <a href="https://yardscout.io/yards" target="_blank" rel="noopener">yardscout.io/yards</a>, with a form to ask for a yard we&rsquo;re missing. What landed this week, by make: <a href="https://yardscout.io/landed" target="_blank" rel="noopener">yardscout.io/landed</a>.</p>
     </details>
     <details class="footer-fold">
       <summary>About freshness <svg class="chev" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
@@ -633,6 +637,10 @@
       </div>
       <p class="badge-legal">Apple and the Apple logo are trademarks of Apple Inc. App Store is a service mark of Apple Inc. Google Play and the Google Play logo are trademarks of Google LLC.</p>
     </div>
+    <!-- Plain, always-visible links to the server-rendered yard pages, so a
+         crawler (and a reader) can reach them from the home page. New tab:
+         this file is also the native app shell. -->
+    <p class="footer-links" style="margin-top:0.5rem;">Browse the yards on the web: <a href="https://yardscout.io/junkyards" target="_blank" rel="noopener">junkyards by state and city</a> &middot; <a href="https://yardscout.io/yards" target="_blank" rel="noopener">all covered yards</a> &middot; <a href="https://yardscout.io/landed" target="_blank" rel="noopener">what landed this week</a></p>
     <p class="footer-links" style="margin-top:0.5rem;"><a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a> &middot; <a href="support.html">Support</a></p>
     <p style="margin-top:0.5rem;">YardScout <span id="jh-version" style="user-select:none;">v2.1</span></p>
   </footer>
@@ -725,7 +733,7 @@
       <ul class="tier-list">
         <li>One-tap "watch this" from any car + nationwide watches (alerts from any yard in the country)</li>
         <li>Email alerts &mdash; one email the same day a scan finds new matches for your watches</li>
-        <li>Unlimited radius + nationwide search across all <span class="coverage-count">210+</span> yards</li>
+        <li>Unlimited radius + nationwide search across all <span class="coverage-count">300+</span> yards</li>
         <li>Sort by leaving soonest, worth the trip, most to save &amp; picked-over-fast &mdash; get there before the crusher</li>
         <li>Unlimited cars on your pull sheet</li>
       </ul>
