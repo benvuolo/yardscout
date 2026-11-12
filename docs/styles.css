@@ -3469,3 +3469,7 @@ html.map-lock #saved-pill { display: none !important; }
 .car-search .compare-suggest-item strong { font-weight: 700; }
 .car-search .compare-suggest-item > span:first-child { flex: 1 1 10em; min-width: 0; overflow-wrap: anywhere; }
 .car-search-note { margin: var(--s2) 0 0; font-size: var(--t-sm); line-height: 1.45; color: var(--text-dim); }
+/* Card badges ("Manual" + "Leaving soon") wrap inside the card head instead
+   of running past the card at 320 px with 200% text (seen on a filtered
+   Xterra list by the car-search screens of ui_no_truncation). */
+.cc-head > .car-badges { flex-shrink: 1; max-width: 100%; }

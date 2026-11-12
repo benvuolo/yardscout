@@ -4876,13 +4876,14 @@ function startCarsIntent(c) {
   track('car-link');
   focusedCarKey = null;
   carsIntent = c;
-  try { document.querySelector('.tab[data-tab="live"]').click(); } catch (e) { /* boot race */ }
   const input = document.getElementById('car-search-input');
   input.value = `${c.make} ${c.model}`.trim();
   // Keep the prefill until the filters actually change.
   _csSyncKey = document.getElementById('live-filter-make').value + '\u0000' + [...selectedModels].join('\u0000');
   document.getElementById('car-search-clear').hidden = false;
   carSearchNote(activeZipCoords ? '' : `Enter your zip above to see every ${escapeHtml(input.value)} near you.`);
+  // Last: opening the tab can render, and so apply the link, right away.
+  try { document.querySelector('.tab[data-tab="live"]').click(); } catch (e) { /* boot race */ }
   carSearchFit();
 }
 function applyCarsIntent() {

@@ -411,8 +411,39 @@ const appSheetOff = async (page) => {
     refreshUpgradeFoot();
   });
 };
+const carSearchOff = async (page) => {
+  await page.evaluate(() => { carSearchClearAll(); document.getElementById('car-search-input').blur(); });
+  await settle(page, 300);
+};
 const SCREENS = [
   ['results', async (page) => { await tab(page, 'live'); }],
+  // Car search (2026-11-12): the suggestion list open, a pick applied, and a
+  // #cars= link for a model not in range (the box prefilled + a note).
+  ['car-search', async (page) => {
+    await tab(page, 'live');
+    await page.click('#car-search-input');
+    await page.fill('#car-search-input', '');
+    await page.type('#car-search-input', 'nissan');
+    await settle(page, 200);
+    if (!(await page.isVisible('#car-search-suggest .compare-suggest-item'))) throw new Error('no car suggestions for "nissan"');
+  }, carSearchOff],
+  ['car-search-picked', async (page) => {
+    await tab(page, 'live');
+    await page.click('#car-search-input');
+    await page.fill('#car-search-input', '');
+    await page.type('#car-search-input', 'xterra');
+    await page.keyboard.press('Enter');
+    await settle(page, 400);
+    if (await page.evaluate(() => !selectedModels.has('Xterra'))) throw new Error('Enter did not pick Nissan Xterra');
+    await page.evaluate(() => window.scrollTo(0, 0));
+  }, carSearchOff],
+  ['car-search-note', async (page) => {
+    await tab(page, 'live');
+    await page.evaluate(() => { location.hash = '#cars=Mercedes-Benz|Sprinter%202500%20Long%20Wheelbase%20High%20Roof'; });
+    await settle(page, 600);
+    if (!(await page.isVisible('#car-search-note'))) throw new Error('no note for a model not in range');
+    await page.evaluate(() => window.scrollTo(0, 0));
+  }, carSearchOff],
   // Mobile-web store banner (shown on phones only; forced here for each store).
   ...['ios', 'android'].map(pl => ['app-promo-' + pl, async (page) => {
     await tab(page, 'live');
