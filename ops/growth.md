@@ -6,7 +6,98 @@ and layout of the steps on it. Source: the funnel audit of 2026-11-12
 as "audit change N"). Standing rules in `/CLAUDE.md` apply; rules 1, 3 and 6
 are the ones this work touches.
 
-## State (2026-11-12) — branch `growth/funnel-1`, NOT merged
+## Free Monday email for web watchers (audit change 2) — branch `growth/email-signup`, NOT merged
+
+Owner approved 2026-11-12. Built on origin/main d6a83c10 (which already
+contains `growth/funnel-1`). Pushed for the hub to review; nothing deployed,
+merged, dispatched or released. Merging deploys the web app and the API
+worker, and the deploy workflow applies migration 0015 (new tables only).
+
+**What the visitor sees (web only; never in the app shells; not for Pro).**
+Right after a new watch (card/car-screen bell, Cars watch strip, Parts watch,
+the share-page one-tap card, and the Alerts form's Add), the watch toast's
+second line becomes: "Get a free Monday email listing every **<Make Model>**
+set out within <N> mi." + an email field + "Email me". Then: "Check your
+inbox. Tap the link we sent to v•••@example.com to start your Monday email.
+Nothing is sent until you do." The watch is saved before the offer shows.
+The x, or 30 s untouched, = not asked again this visit (sessionStorage). The
+confirmation button lands on `/#recap=confirmed&sub=<token>`: "You're in.
+Your free Monday email to v•••@… is confirmed." Later watches: "Add <Make
+Model> to your free Monday email?" + "Add" (one tap, no field).
+
+**Server (`backend/src/recap_signup.js`, migration 0015).**
+`POST /v1/recap/signup` stores the address + a COPY of the watch criteria
+(make, model, years, centre rounded to ~1 km, radius ≤ 250; no trim/drive,
+no browser ids), pending, and sends ONE confirmation (`email:confirm`). A
+second watch within the hour rides the same link. `GET /v1/recap/confirm`
+is a page with a button (mail scanners cannot opt anyone in); `POST`
+confirms, counts `email-confirmed` server-side, 303s to the app with a
+signed one-tap token. `POST /v1/recap/add {sub, watch}` adds a confirmed
+copy. `GET|POST /v1/recap/unsubscribe` (signed, one click, RFC 8058) DELETES
+the address, its copied watches, its recap dedupe and sale dedupe rows.
+Unconfirmed addresses are deleted after 7 days (hourly cron). Limits: 8
+sign-ups/hour per IP (in-memory bucket, IP never stored), 3 confirmation
+emails/day per address, 5 watches per address. The reply never says whether
+an address was already subscribed. Logs mask addresses.
+Monday job (`alerts.js sendWeeklyDigests`): confirmed copies join the
+existing recap (same email, same Pro teaser); dedupe in `recap_sent`; an
+address that is also a free account gets one email.
+**Every** weekly recap (accounts too) now has a footer saying why it came, a
+one-click unsubscribe link and List-Unsubscribe headers; an account holder
+who unsubscribes goes in `recap_optout` (account and its watches untouched).
+**Resend cap:** confirmations and recaps are optional mail and stop while
+fewer than 10 sends are left today (`ops.js optionalEmailAllowed`,
+`RESEND_DAILY_CAP` env overrides 100). A held sign-up gets "Our email sender
+has reached today's limit. Your watch is saved here; try the email again
+tomorrow." and stores nothing; a held recap is not marked sent and the hourly
+cron retries it on a later day (up to 5 days). Both are counted
+(`<channel>:held`).
+
+**Ops email.** USAGE: "Monday email (web sign-ups): N confirmed subscribers
+(M watches) · K waiting for the confirmation click" (text + HTML). Funnel rows
+"Monday email asked / given / confirmed" (web only; dashes for the apps).
+SENDS: "HELD BACK at the Resend daily cap (24 h): …" when anything was held.
+
+**Privacy page:** the web "never leaves your device" sentence names this one
+opt-in exception; new section "The free Monday email (website)" says exactly
+what is stored, why, how to unsubscribe, deleted on unsubscribe; tallies list
+includes the three events. Date: November 12, 2026.
+
+**Tests.** `recap_signup_unit.mjs` (65, real handlers on SQLite with all
+migrations), `recap_ask_e2e.mjs` (35, client), `e2e-email.sh` phase 2 +
+`recap_signup_e2e.mjs` (33, against mock Resend; mock now records html and
+headers), `ui_no_truncation.mjs` screens `watch-toast-recap`, `-msg`,
+`-sent`, `-add`. sw.js jh-v184.
+
+**Needs the owner.**
+1. Postal address for commercial email: `EMAIL_POSTAL_ADDRESS` in
+   `backend/wrangler.toml` is empty, so no address line is printed. Set it
+   (exact text to print) before relying on the recap commercially.
+2. Sender: confirmations and recaps go from `EMAIL_FROM` = "YardScout
+   <hello@yardscout.io>" (subject "Confirm your free YardScout Monday email"
+   / "Your week at the yards — N watched cars arrived"). Keep or change.
+3. `EMAIL_UNSUB_SECRET` must be set in production (it already signs Pro
+   unsubscribe links); without it sign-up answers 503 `not_configured`.
+
+**Seen, not fixed (other files / pre-existing).**
+- Before this branch the free weekly recap had no unsubscribe link or
+  List-Unsubscribe header (fixed here for all recaps). The Pro instant email
+  fallback in `alerts.js` (API-mode accounts, unused) still has none.
+- Full addresses in logs: `email_alerts.js` prod log "alert email sent to
+  <email>", the Pro unsubscribe page shows the full address, `auth.js` DEV
+  log of magic links; `magic_tokens.request_ip` stores the requester's IP.
+- `ui_no_truncation`: with the `yards-map-watch` screen in the run, the
+  Alerts tab badge "99+" sits past the right edge at 200% text on 320–390 px
+  (same on main d6a83c10; tab bar, not this work).
+- At 320 px and 200% text the toast head wraps "Watchi-ng" mid-word
+  (existing head markup).
+
+**Left.** The same field on the Parts results watch prompt is covered (it
+goes through the toast); a standing "Monday email" row on the Alerts tab for
+someone who dismissed the offer is not built. `utm_source=recap` on the
+recap's links is not added.
+
+## State (2026-11-12) — branch `growth/funnel-1` (since merged to main)
 
 Three commits from main cd8e57e5, pushed for the hub to review. Nothing was
 deployed, dispatched or released. Merging to main deploys the web app (GitHub
@@ -140,9 +231,8 @@ Pro sheet and watch/alerts screens were run here).
    trackers… Full stop." The anonymous daily counters have existed since
    2026-10-26 and "What the app fetches" does not list them. Not changed
    here; the wording is the owner's call.
-3. **Free weekly email for web watchers** (audit change 2): a web watch
-   still reaches nobody unless they install the app. Collecting an email is
-   a data decision and needs the privacy text changed. Not built.
+3. **Free weekly email for web watchers** (audit change 2): approved by the
+   owner 2026-11-12; built on `growth/email-signup` (section above).
 4. **Pricing** (audit change 10): annual plan, a short pass, a web first
    month to match the apps' $1.99. Not touched.
 

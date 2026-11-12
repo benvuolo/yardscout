@@ -8,7 +8,7 @@
  *   POST /emails   → records the email; answers with the current mode
  *                    (default 200 {id}); requires "Bearer re_…" auth
  *   POST /mode     {status, message}  — force the next answers (e.g. 403)
- *   GET  /sent     → accepted emails [{from, to, subject, text}]
+ *   GET  /sent     → accepted emails [{from, to, subject, text, html, headers}]
  *   GET  /rejected → emails answered with a non-2xx status
  *   GET  /ping
  *
@@ -89,7 +89,7 @@ createServer(async (req, res) => {
     if (!/^Bearer re_/.test(req.headers.authorization || '')) {
       return json(res, 401, { statusCode: 401, name: 'missing_api_key', message: 'Missing API key' });
     }
-    const rec = { from: msg.from, to: msg.to, subject: msg.subject, text: msg.text };
+    const rec = { from: msg.from, to: msg.to, subject: msg.subject, text: msg.text, html: msg.html, headers: msg.headers };
     if (mode.status >= 300) {
       rejected.push({ ...rec, status: mode.status });
       return json(res, mode.status, { statusCode: mode.status, name: 'validation_error', message: mode.message || 'rejected' });

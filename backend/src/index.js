@@ -9,6 +9,8 @@
  *   GET  /v1/inventory/shard/:yardId         (tier-aware)
  *   GET  /v1/vehicles/:idOrVin               (tier-aware)
  *   POST /v1/coverage/request                 (Parts tab "ask us to add it")
+ *   POST /v1/recap/signup | /v1/recap/add     (free Monday email, web; recap_signup.js)
+ *   GET|POST /v1/recap/confirm, /v1/recap/unsubscribe
  *   POST /v1/auth/request-link
  *   GET  /v1/auth/callback?token=
  *   GET  /v1/me                              (session required)
@@ -64,6 +66,10 @@ import {
   handleCoverageRequest, handleCoverageList, maybeSendCoverageDigest,
 } from './coverage.js';
 import { handleSavedAlertsDispatchRun } from './saved_alerts.js';
+import {
+  handleRecapSignup, handleRecapAdd, handleRecapConfirmPage, handleRecapConfirm,
+  handleRecapUnsubscribe, pruneRecap, recapRetryDue,
+} from './recap_signup.js';
 import { runScanWatchdog } from './scan_watchdog.js';
 import { runOpsCheck, runDailyReport, handleOpsCheckRun, handleOpsDailyRun, handleOpsCanarySet } from './ops_monitor.js';
 import { flushOps, opsFlusher } from './ops.js';
@@ -89,6 +95,16 @@ export default {
           .then(() => runOpsCheck(env))
           .then((r) => console.log(`ops check: ${r.active.length} open, alerted [${r.alerted}], cleared [${r.cleared}], ${r.reason}`))
           .catch((e) => console.log('ops check failed:', e && (e.stack || e.message)))
+          // Monday email sign-ups: unconfirmed addresses go after 7 days; a
+          // recap held back at the Resend cap is retried on a later day.
+          .then(() => pruneRecap(env))
+          .catch((e) => console.log('recap prune failed:', e && (e.stack || e.message)))
+          .then(async () => {
+            if (!(await recapRetryDue(env))) return;
+            const r = await sendWeeklyDigests(env);
+            console.log(`weekly digest retry: ${r.users} users, ${r.emails} emails, ${r.held || 0} still held`);
+          })
+          .catch((e) => console.log('weekly digest retry failed:', e && (e.stack || e.message)))
           .finally(opsFlusher(env))   // the alert email's own counter
       );
       return;
@@ -212,6 +228,15 @@ async function route(req, env, url, ctx) {
   if (method === 'POST' && path === '/v1/coverage/request') {
     if (!rateLimit('cov:ip:' + ip, 10, 3600_000)) return err(429, 'rate_limited', 'Slow down.');
     return handleCoverageRequest(req, env);
+  }
+
+  /* ----- free Monday email for web visitors (recap_signup.js) ----- */
+  if (path === '/v1/recap/signup' && method === 'POST') return handleRecapSignup(req, env, ip);
+  if (path === '/v1/recap/add' && method === 'POST') return handleRecapAdd(req, env, ip);
+  if (path === '/v1/recap/confirm' && method === 'GET') return handleRecapConfirmPage(req, env, url);
+  if (path === '/v1/recap/confirm' && method === 'POST') return handleRecapConfirm(req, env);
+  if (path === '/v1/recap/unsubscribe' && (method === 'GET' || method === 'POST')) {
+    return handleRecapUnsubscribe(req, env, url);
   }
 
   /* ----- alerts: watches + web push (session-scoped) ----- */

@@ -3026,6 +3026,18 @@ a { color: var(--accent); }
 .watch-toast-ask > span { flex: none; }
 .watch-toast-ask .watch-zip-row .btn { flex: 0 0 auto; min-height: 48px; padding: 0 var(--s5); font-size: var(--t-sm); }
 .watch-toast-ask .watch-zip-input { min-height: 48px; }
+/* Free Monday email offer in the same toast (web only, after a new watch):
+   one line, the email field and one button, in the zip field's styles. */
+.mail-form { margin: 0; }
+/* An address needs room: the field and button share a row when it is wide
+   enough (375 px and up at 100% text), else the button goes full width below. */
+.mail-form .watch-zip-input { flex: 10 1 12em; }
+.watch-toast-ask .mail-form .btn { flex: 1 0 auto; }
+.mail-ask .watch-zip-row .btn:only-child { flex: 1 1 auto; }
+/* A toast with a field can outgrow a small screen at large text sizes: it
+   never rises past the top edge, it scrolls inside instead. */
+.watch-toast { max-height: calc(100vh - 2rem - env(safe-area-inset-bottom, 0px)); overflow-y: auto; overscroll-behavior: contain; }
+@media (max-width: 720px) { .watch-toast { max-height: calc(100vh - 5.6rem - env(safe-area-inset-bottom, 0px)); } }
 
 /* ---- Pro box: the one free-user Pro nudge (accent border, PRO badge, one
    line, chevron; the whole box opens the Pro sheet). Pro users never see it. */
