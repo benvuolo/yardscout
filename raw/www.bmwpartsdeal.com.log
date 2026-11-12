@@ -1758,3 +1758,10 @@
 23:23:50 chain-unlinked window-regulator 1 numbers named by 67-62-7-304-524, no catalog link: 67-62-7-281-586
 23:23:50 chain-unlinked window-regulator 1 numbers named by 67-62-9-478-201, no catalog link: 67-62-7-197-921
 23:35:11 time budget reached records=2191
+07:34:54 start site=www.bmwpartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2191 list_lines=3460 year_lines=417 url_index=0
+07:34:54 completion worklist completion/bmw.own_page.json: 507 rows
+07:52:34 chain-unlinked gauge-cluster 1 numbers named by 62-10-6-805-233, no catalog link: 62-10-9-328-829
+07:54:10 chain-unlinked gauge-cluster 2 numbers named by 62-10-6-805-236, no catalog link: 62-10-9-328-832, 62-10-9-342-822
+08:00:18 chain-unlinked gauge-cluster 1 numbers named by 62-10-9-316-120, no catalog link: 62-10-9-283-808
+08:00:18 chain-unlinked gauge-cluster 9 numbers named by 62-10-9-316-142, no catalog link: 62-10-9-187-359, 62-10-9-242-361, 62-10-9-187-065, 62-10-9-166-836, 62-10-9-283-830, 62-10-9-220-978, 62-10-9-168-288, 62-10-9-130-294, 62-10-9-148-025
+08:05:38 time budget reached records=2218
