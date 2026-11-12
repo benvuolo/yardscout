@@ -79,3 +79,17 @@ test/redirects_unit.mjs && node test/prices_unit.mjs` (222 + 51 + 39 checks).
   a car once it leaves, so the page links to the hubs instead.
 - `robots.txt` still names `/sitemap-yards.xml` (same body as
   `/sitemap.xml`). `ops/README.md` has no row for this workstream yet.
+
+## Store screenshots, round 2 (2026-11-12)
+
+Branch `store/screenshots-2` (not merged): six new slides per store, a
+headline over a real light-theme capture, built by
+`tools/capture_store_shots.py` (rewritten: serves docs/ itself, runs the page
+as the native shell with stubbed plugins, blocks API/analytics calls, then
+composes the slides). Zip 78219 (San Antonio, Wrench-A-Part photos carry no
+watermark; Pick-n-Pull photos carry a ROW52 mark and Pick Your Part a PYP
+logo, so those yards were avoided). Files renamed 01_cars … 06_value; the old
+01_live … 06_alerts were removed so the upload does not carry twelve.
+Waiting on the owner's look. Upload: iOS goes up with the next
+`release-ios.yml` run with `submit=true` (needs "ship"); Play with a manual
+`store-listing.yml` dispatch.
