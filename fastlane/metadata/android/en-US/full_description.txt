@@ -1,4 +1,4 @@
-YardScout tracks the live inventory of self-service salvage yards across the country, so you stop driving to yards on a maybe.
+YardScout is a junkyard inventory search for self-service salvage yards across the US: the u-pull-it, pick-and-pull yards where you bring your own tools and pull used auto parts yourself. See what's on the lot before you drive.
 
 FIND THE CAR BEFORE YOU DRIVE
 • Live inventory from 300+ self-serve yards — Pick-n-Pull, LKQ Pick Your Part, Pull-A-Part and a growing set of independents — refreshed throughout the day
@@ -8,7 +8,7 @@ FIND THE CAR BEFORE YOU DRIVE
 • Model search understands yard naming quirks — searching WRX finds every spelling
 
 FIND THE PART THAT FITS
-• Name the part and your car; YardScout lists donor cars near you it fits, with how sure we are (Verified fit or Likely fit)
+• Parts interchange built in: name the part and your car, and YardScout lists the donor cars near you it fits, other years and models included, marked Verified fit or Likely fit
 • Every car shows what it came from the factory with, so you know what to look for in the row
 • Compare one part's price across every yard in range, from each yard's own published price list
 
@@ -35,6 +35,10 @@ NO ACCOUNT, NO EMAIL
 • Light and dark mode — follows your phone, or pick one
 • The whole app works without signing up
 • Alerts use an anonymous device ID — we never ask who you are
+
+WORKS WITH THE YARDS YOU ALREADY USE
+• Junkyards, salvage yards, wrecking yards and auto recyclers that run self-service (u-pull, pick-a-part) lots and post their inventory online
+• Pick-n-Pull, LKQ Pick Your Part, Pull-A-Part and 150+ regional and independent yards in 38 states and 2 Canadian provinces
 
 YardScout Pro is $8.99/month through your Google Play account, auto-renews monthly, cancel anytime in Play Store → Subscriptions. Finding cars is free forever.
 
