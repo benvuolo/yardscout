@@ -1456,3 +1456,83 @@
 07:15:34 chain-unlinked strut 1 numbers named by 56200-7S603, no catalog link: 56200-ZV62A
 07:15:34 seg done tier=C Nissan Armada [2004, 2015] seeds=[2006] records=4263 errors=11
 07:15:50 STOPPED: www.nissanpartsdeal.com refused or challenged (HTTP 503); domain stopped for this program
+22:16:41 start site=www.nissanpartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=4263 list_lines=170 year_lines=33 url_index=2512
+22:16:41 completion worklist completion/nissan.own_page.json: 201 rows
+22:17:25 chain-unlinked climate-control 1 numbers named by 27510-ZD000, no catalog link: 27510-2Z610
+22:17:25 chain-unlinked climate-control 1 numbers named by 27510-ZD005, no catalog link: 27510-2Z600
+22:17:57 chain-unlinked door-front 4 numbers named by H0101-8Z430, no catalog link: 80101-7Z831, 80101-9Z431, 80101-8Z430, 80101-9Z430
+22:17:57 chain-unlinked door-front 3 numbers named by H0100-8Z430, no catalog link: 80100-7Z831, 80100-8Z430, 80100-9Z431
+22:17:57 chain-unlinked door-front 3 numbers named by H0100-8Z431, no catalog link: 80100-7Z832, 80100-9Z432, 80100-8Z431
+22:19:08 chain-unlinked gauge-cluster 3 numbers named by 24810-9Z473, no catalog link: 24820-9Z479, 24820-9Z471, 24820-9Z473
+22:19:08 chain-unlinked gauge-cluster 3 numbers named by 24810-9Z477, no catalog link: 24820-9Z481, 24820-9Z477, 24820-9Z475
+22:19:49 chain-unlinked window-regulator 1 numbers named by 80731-7B400, no catalog link: 80731-7B405
+22:19:49 chain-unlinked window-regulator 1 numbers named by 80730-7B400, no catalog link: 80730-7B405
+22:21:00 chain-unlinked bumper-front 1 numbers named by 62022-7S020, no catalog link: F2022-7S026
+22:21:00 chain-unlinked bumper-front 1 numbers named by 62022-7S202, no catalog link: 62022-ZR08A
+22:21:25 chain-unlinked door-front 1 numbers named by H0101-ZH3MA, no catalog link: H0101-ZQ4MA
+22:21:25 chain-unlinked door-front 1 numbers named by H0100-ZH3MA, no catalog link: H0100-ZQ4MA
+22:21:25 chain-unlinked door-front 1 numbers named by 80101-ZH030, no catalog link: H0101-ZQ3MA
+22:21:25 chain-unlinked door-front 1 numbers named by 80101-ZH230, no catalog link: H0101-ZQ4MA
+22:21:25 chain-unlinked door-front 1 numbers named by H0101-ZC3MA, no catalog link: H0101-ZQ3MA
+22:21:25 chain-unlinked door-front 1 numbers named by 80100-ZH030, no catalog link: H0100-ZQ3MA
+22:21:25 chain-unlinked door-front 1 numbers named by 80100-ZH230, no catalog link: H0100-ZQ4MA
+22:21:25 chain-unlinked door-front 1 numbers named by H0100-ZC3MA, no catalog link: H0100-ZQ3MA
+22:25:49 chain-unlinked gauge-cluster 1 numbers named by 24810-7S00E, no catalog link: 24810-7S004
+22:27:17 chain-unlinked side-mirrors 1 numbers named by 96302-ZH40E, no catalog link: 96302-ZR00E
+22:27:17 chain-unlinked side-mirrors 1 numbers named by 96301-ZH10A, no catalog link: 96301-ZH40A
+22:27:17 chain-unlinked side-mirrors 1 numbers named by 96301-ZH40E, no catalog link: 96301-ZR00E
+22:27:17 chain-unlinked side-mirrors 1 numbers named by 96302-8S100, no catalog link: 96302-ZR10E
+22:27:17 chain-unlinked side-mirrors 1 numbers named by 96302-8S600, no catalog link: 96302-ZR30E
+22:27:17 chain-unlinked side-mirrors 1 numbers named by 96301-8S100, no catalog link: 96301-ZR10E
+22:27:17 chain-unlinked side-mirrors 1 numbers named by 96301-8S600, no catalog link: 96301-ZR30E
+22:27:25 chain-unlinked window-regulator 1 numbers named by 80731-7S000, no catalog link: 80731-9FJ0A
+22:27:25 chain-unlinked window-regulator 1 numbers named by 80730-7S000, no catalog link: 80730-9FJ0A
+22:27:25 chain-unlinked window-regulator 1 numbers named by 80721-7S000, no catalog link: 80721-ZT00A
+22:27:25 chain-unlinked window-regulator 1 numbers named by 80720-7S000, no catalog link: 80720-ZT00A
+22:27:33 chain-unlinked window-regulator 1 numbers named by 82731-7S000, no catalog link: 82731-9FJ0A
+22:27:33 chain-unlinked window-regulator 1 numbers named by 82730-7S000, no catalog link: 82730-9FJ0A
+22:27:33 chain-unlinked window-regulator 1 numbers named by 82721-ZC30A, no catalog link: 82721-ZV50A
+22:27:33 chain-unlinked window-regulator 1 numbers named by 82721-7S000, no catalog link: 82721-ZV50A
+22:27:33 chain-unlinked window-regulator 1 numbers named by 82720-ZC30A, no catalog link: 82720-ZV50A
+22:27:33 chain-unlinked window-regulator 1 numbers named by 82720-7S000, no catalog link: 82720-ZV50A
+22:29:09 chain-unlinked bumper-front 1 numbers named by 62022-7S201, no catalog link: 62022-ZR08A
+22:29:25 chain-unlinked fender 1 numbers named by 63101-7S231, no catalog link: F3101-ZR1EA
+22:29:25 chain-unlinked fender 1 numbers named by 63100-7S231, no catalog link: F3100-ZR1EA
+22:32:37 chain-unlinked door-front 2 numbers named by HMA01-EA0MB, no catalog link: 80101-EA030, 80101-ZL01C
+22:32:37 chain-unlinked door-front 2 numbers named by HMA00-EA0MB, no catalog link: 80100-ZL01C, 80100-EA030
+22:34:53 chain-unlinked gauge-cluster 1 numbers named by 24810-EA03D, no catalog link: 24810-EA00A
+22:34:53 chain-unlinked gauge-cluster 1 numbers named by 24810-EA04C, no catalog link: 24810-EA00B
+22:34:53 chain-unlinked gauge-cluster 1 numbers named by 24810-EA13D, no catalog link: 24810-EA103
+22:34:53 chain-unlinked gauge-cluster 1 numbers named by 24810-EA23E, no catalog link: 24810-EA204
+22:34:53 chain-unlinked gauge-cluster 1 numbers named by 24810-ZP83B, no catalog link: 24810-ZS46E
+22:34:53 chain-unlinked gauge-cluster 1 numbers named by 24810-ZP96B, no catalog link: 24810-ZS49A
+22:34:53 chain-unlinked gauge-cluster 1 numbers named by 24810-EA48D, no catalog link: 24810-EA401
+22:34:53 chain-unlinked gauge-cluster 1 numbers named by 24810-EA67D, no catalog link: 24810-EA602
+22:34:53 chain-unlinked gauge-cluster 1 numbers named by 24810-ZP93A, no catalog link: 24810-ZS47C
+22:35:01 chain-unlinked side-mirrors 1 numbers named by 96302-EA005, no catalog link: 96302-9BC9B
+22:35:01 chain-unlinked side-mirrors 1 numbers named by 96302-EA000, no catalog link: 96302-9BC9A
+22:35:01 chain-unlinked side-mirrors 1 numbers named by 96301-EA005, no catalog link: 96301-9BC9B
+22:35:01 chain-unlinked side-mirrors 1 numbers named by 96301-EA000, no catalog link: 96301-9BC9A
+22:35:09 chain-unlinked window-regulator 1 numbers named by 80720-EA000, no catalog link: 80720-9BF0A
+22:35:33 chain-unlinked window-regulator 1 numbers named by 82721-EA000, no catalog link: 82721-9CF0A
+22:35:33 chain-unlinked window-regulator 1 numbers named by 82720-EA000, no catalog link: 82720-9CF0A
+22:35:57 chain-unlinked climate-control 2 numbers named by 27500-EA21A, no catalog link: 27500-EA20A, 27500-EA200
+22:35:57 chain-unlinked climate-control 1 numbers named by 27500-EA51A, no catalog link: 27500-EA51B
+22:36:13 chain-unlinked fender 1 numbers named by 63101-EA530, no catalog link: 63101-ZL15A
+22:36:13 chain-unlinked fender 1 numbers named by 63100-EA530, no catalog link: 63100-ZL15A
+22:37:25 chain-unlinked hood 1 numbers named by 65100-EA530, no catalog link: 65100-9BP0A
+22:38:37 chain-unlinked climate-control 1 numbers named by 27500-ZL10A, no catalog link: 27500-9CH1B
+22:38:37 chain-unlinked climate-control 1 numbers named by 27500-ZS00A, no catalog link: 27500-9CH0A
+22:38:37 chain-unlinked climate-control 1 numbers named by 27500-ZS00B, no catalog link: 27500-9CH0A
+22:38:37 chain-unlinked climate-control 1 numbers named by 27500-ZS20A, no catalog link: 27500-9CH1B
+22:40:37 chain-unlinked gauge-cluster 1 numbers named by 24810-ZL07C, no catalog link: 24810-ZL93B
+22:40:37 chain-unlinked gauge-cluster 1 numbers named by 24810-ZL08D, no catalog link: 24810-ZL93D
+22:40:37 chain-unlinked gauge-cluster 1 numbers named by 24810-ZL17C, no catalog link: 24810-ZL93C
+22:40:37 chain-unlinked gauge-cluster 1 numbers named by 24810-ZL25C, no catalog link: 24810-ZL93E
+22:40:37 chain-unlinked gauge-cluster 1 numbers named by 24810-ZL36C, no catalog link: 24810-ZL94A
+22:40:37 chain-unlinked gauge-cluster 1 numbers named by 24810-ZS07C, no catalog link: 24810-ZL93B
+22:40:37 chain-unlinked gauge-cluster 1 numbers named by 24810-ZS08D, no catalog link: 24810-ZL93D
+22:40:37 chain-unlinked gauge-cluster 1 numbers named by 24810-ZS17C, no catalog link: 24810-ZL93C
+22:40:37 chain-unlinked gauge-cluster 1 numbers named by 24810-ZS25C, no catalog link: 24810-ZL93E
+22:40:37 chain-unlinked gauge-cluster 1 numbers named by 24810-ZS36C, no catalog link: 24810-ZL94A
+22:47:25 time budget reached records=4370
