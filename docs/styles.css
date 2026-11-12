@@ -3004,6 +3004,29 @@ a { color: var(--accent); }
 #ent-store-row { display: flex; flex-direction: column; margin-top: 0.4rem; }
 #native-iap { margin-top: 0.9rem; }
 
+/* ---- A watch from a share page (2026-11-12) ----
+   .watch-intent: the card at the top of the Alerts tab (the car the visitor
+   came for and, when no location is saved, the zip field for it).
+   .watch-toast-ask: the same zip field in the toast when a bell is tapped
+   with no location saved. Inputs are 1rem so iOS does not zoom the page. */
+.watch-intent { display: flex; flex-direction: column; gap: var(--s2); margin-bottom: var(--s4); padding: var(--s4); border-radius: var(--r); background: var(--accent-soft); border-left: 3px solid var(--accent); color: var(--text); }
+.watch-intent-head { margin: 0; font-size: var(--t-md); font-weight: 700; line-height: 1.35; }
+.watch-intent-row, .watch-zip-row { display: flex; flex-wrap: wrap; gap: var(--s2); }
+.watch-intent-row .btn { flex: 1 1 8em; min-height: 48px; }
+.watch-zip-input {
+  flex: 1 1 8em; min-width: 0; min-height: 48px; padding: 0 var(--s3);
+  font: 1rem/1.3 var(--font-ui); color: var(--text);
+  background: var(--surface); border: 1px solid var(--border-dark); border-radius: var(--r-sm); outline: none;
+}
+.watch-zip-input:focus { border-color: var(--accent); }
+.watch-intent-note { margin: 0; font-size: var(--t-sm); color: var(--text); }
+.watch-zip-msg { margin: 0; font-size: var(--t-sm); font-weight: 700; color: var(--text); }
+.watch-zip-msg:empty { display: none; }
+.watch-toast-next.watch-toast-ask { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: var(--s2); color: var(--text); }
+.watch-toast-ask > span { flex: none; }
+.watch-toast-ask .watch-zip-row .btn { flex: 0 0 auto; min-height: 48px; padding: 0 var(--s5); font-size: var(--t-sm); }
+.watch-toast-ask .watch-zip-input { min-height: 48px; }
+
 /* ---- Pro box: the one free-user Pro nudge (accent border, PRO badge, one
    line, chevron; the whole box opens the Pro sheet). Pro users never see it. */
 .pro-box {

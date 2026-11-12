@@ -931,6 +931,38 @@ const SCREENS = [
     await likelySearch(page);
   }, async (page) => { await page.evaluate(() => { localStorage.removeItem('jh_pro'); applyProGates(); }); }],
   ['alerts', async (page) => { await tab(page, 'alerts'); }],
+  // A watch from a share page (2026-11-12): the card at the top of Alerts
+  // with the car and, when no location is saved, the zip field (and its
+  // message), and the same zip question in the toast after a bell tap.
+  ...[['alerts-intent-car', true, false], ['alerts-intent-zip', false, false], ['alerts-intent-car-located', true, true]].map(([name, car, located]) => [name, async (page) => {
+    await tab(page, 'alerts');
+    await page.evaluate(async ({ car, located }) => {
+      window.__zipWas = activeZipCoords;
+      if (!located) activeZipCoords = null;
+      watchIntent = car ? { make: 'Mercedes-Benz', model: 'Sprinter 2500 Cargo Van', yrMin: 2007, yrMax: 2011 } : null;
+      renderWatchIntent();
+      const el = document.getElementById('watch-intent');
+      if (!el || !el.getClientRects().length) throw new Error('no watch-intent card');
+      if (!located) {
+        if (!document.getElementById('watch-intent-zip')) throw new Error('no zip field in the card');
+        await watchIntentGo();   // empty zip: the message shows in the card
+        if (!/zip|postal/i.test(el.querySelector('.watch-zip-msg').textContent)) throw new Error('no message for an empty zip');
+      } else if (document.getElementById('watch-intent-zip')) throw new Error('zip field shown although a location is saved');
+      window.scrollTo(0, 0);
+    }, { car, located });
+  }, async (page) => { await page.evaluate(() => { watchIntent = null; activeZipCoords = window.__zipWas; renderWatchIntent(); }); }]),
+  ['watch-toast-zip', async (page) => {
+    await tab(page, 'live');
+    await page.evaluate(async () => {
+      window.__zipWas = activeZipCoords;
+      activeZipCoords = null;
+      askZipForWatch('Mercedes-Benz Sprinter 2500 Cargo Van', () => {});
+      const t = document.getElementById('watch-toast');
+      await watchZipSubmit(t.querySelector('.watch-zip-input'), t.querySelector('.watch-zip-msg'));   // empty: message shows
+      if (!document.getElementById('watch-toast-zip').getClientRects().length) throw new Error('no zip field in the toast');
+    });
+    await settle(page, 300);
+  }, async (page) => { await page.evaluate(() => { activeZipCoords = window.__zipWas; document.getElementById('watch-toast').classList.remove('show'); }); }],
   ['alerts-hits', async (page) => {
     await tab(page, 'live');
     await page.evaluate(() => {

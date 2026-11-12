@@ -3583,6 +3583,13 @@ function applyShareHash() {
 window.addEventListener('hashchange', () => {
   const alertId = (location.hash.match(/#alert=([^&]+)/) || [])[1];
   if (alertId) { openFromAlert(safeDecode(alertId)); return; }
+  const watch = parseWatchHash(location.hash);
+  if (watch) {
+    history.replaceState(null, '', location.pathname + location.search);
+    jhOpenAlertsTab();
+    startWatchIntent(watch);
+    return;
+  }
   applyShareHash();
   if (liveLoaded) {
     renderLive();
@@ -4267,7 +4274,7 @@ function nextOneWatch(make, model, source) {
   if (r === 'added') { renderAlerts(); checkAndNotify(); setCardBells(make, model, true); showWatchToast(label); }
   else if (r === 'exists') showWatchToast(label, { manage: true });
   else if (r === 'limit') openUpgradeSheet('watch-limit');
-  else if (r === 'no-zip') alert('Set your zip code up top first, so the watch knows where "near you" is.');
+  else if (r === 'no-zip') askZipForWatch(label, () => nextOneWatch(make, model, source));
   return r;
 }
 function nextOneHtml(make, model, cls) {
@@ -7864,7 +7871,7 @@ function pfWatchClick(btn) {
   if (r === 'added') { renderAlerts(); checkAndNotify(); showWatchToast(`${make} ${model}`); }
   else if (r === 'exists') showWatchToast(`${make} ${model}`, { manage: true });
   else if (r === 'limit') openUpgradeSheet('watch-limit');
-  else if (r === 'no-zip') alert('Set your zip code up top first, so the watch knows where "near you" is.');
+  else if (r === 'no-zip') askZipForWatch(`${make} ${model}`, () => pfWatchClick(btn));
 }
 /* Start screen tiles: the common carry-out parts, one tap each. */
 const PF_TILES = ['alternator', 'starter', 'headlights', 'tail-lights', 'side-mirrors', 'front-seats', 'window-regulator', 'gauge-cluster', 'wheels'];
@@ -8822,6 +8829,9 @@ function getWatchlistHits() {
 }
 
 function renderAlerts() {
+  // The form's names (when the whole scan is not in yet) and the zip / car card.
+  if (document.getElementById('tab-alerts').classList.contains('active')) loadWatchNames();
+  renderWatchIntent();
   const watchlist = loadWatchlist();
   const results = getWatchlistHits();
   // Email-alerts panel state (web only; defined in the EMAIL ALERTS section).
@@ -9098,7 +9108,7 @@ function watchFromCard(btn) {
   }
   const r = addQuickWatch(make, model, null, null, 'card');
   if (r === 'limit') { openUpgradeSheet('watch-limit'); return; }
-  if (r === 'no-zip') { alert('Set your zip code up top first, so the watch knows where "near you" is.'); return; }
+  if (r === 'no-zip') { askZipForWatch(label, () => watchFromCard(btn)); return; }
   if (r === 'added') {
     renderAlerts();
     checkAndNotify();
@@ -9154,7 +9164,7 @@ function jhWatchSearch() {
   }
   if (added) { renderAlerts(); checkAndNotify(); showWatchToast(sc.label); }
   if (blocked === 'limit') openUpgradeSheet('watch-limit');
-  else if (blocked === 'no-zip') alert('Set your zip code up top first, so the watch knows where "near you" is.');
+  else if (blocked === 'no-zip') askZipForWatch(sc.label, () => jhWatchSearch());
   renderLive();
 }
 
@@ -9179,7 +9189,14 @@ function showWatchToast(label, opts = {}) {
   const pushOn = localStorage.getItem('ys_push_on') === '1';
   let next = '';
   let head = `Watching <strong>${escapeHtml(label)}</strong>`;
-  if (opts.undo) {
+  if (opts.zip) {
+    // No location saved (a shared car, a part search before the zip): ask
+    // for it here instead of pointing at a zip field this screen lacks.
+    head = `Watch <strong>${escapeHtml(label)}</strong>`;
+    next = `<span>Enter your zip so we know where &ldquo;near you&rdquo; is.</span>
+      <div class="watch-zip-row">${watchZipInputHtml('watch-toast-zip')}<button type="button" class="btn btn-primary btn-sm" data-act="zip">Watch</button></div>
+      <span class="watch-zip-msg" role="status"></span>`;
+  } else if (opts.undo) {
     head = `Stopped watching <strong>${escapeHtml(label)}</strong>`;
     next = `<span>Removed from your watchlist.</span><button type="button" class="btn btn-sm" data-act="undo">Undo</button>`;
   } else if (opts.manage) {
@@ -9197,12 +9214,17 @@ function showWatchToast(label, opts = {}) {
   } else if (!isPro()) {
     next = `<span>Free: a recap every Monday.</span>${proBoxHtml('A push within hours instead', 'watch-toast', '', 'toast-pro')}`;
   }
-  el.innerHTML = `<div class="watch-toast-head">${opts.undo ? ICON.bell : ICON.check}<span>${head}</span>
+  el.innerHTML = `<div class="watch-toast-head">${opts.undo || opts.zip ? ICON.bell : ICON.check}<span>${head}</span>
       <button type="button" class="watch-toast-x" data-act="close" aria-label="Dismiss">&times;</button></div>
-    ${next ? `<div class="watch-toast-next">${next}</div>` : ''}`;
+    ${next ? `<div class="watch-toast-next${opts.zip ? ' watch-toast-ask' : ''}">${next}</div>` : ''}`;
+  const submitZip = async () => {
+    if (await watchZipSubmit(el.querySelector('.watch-zip-input'), el.querySelector('.watch-zip-msg'))) { hide(); opts.zip(); }
+  };
+  el.onkeydown = (e) => { if (opts.zip && e.key === 'Enter' && e.target.closest('.watch-zip-input')) { e.preventDefault(); submitZip(); } };
   el.onclick = (e) => {
     const act = e.target.closest('[data-act]');
     if (!act) return;
+    if (act.dataset.act === 'zip') { submitZip(); return; }
     if (act.dataset.act === 'push') { track('watch-toast-push'); document.getElementById('native-push-enable').click(); }
     if (act.dataset.act === 'pro') openUpgradeSheet('watch-toast');
     if (act.dataset.act === 'app') track('watch-toast-app');
@@ -9221,21 +9243,269 @@ function showWatchToast(label, opts = {}) {
   };
   el.classList.add('show');
   clearTimeout(_watchToastTimer);
-  _watchToastTimer = setTimeout(hide, next ? 12000 : 4000);
+  // A toast that is waiting for a zip stays until it is answered or dismissed.
+  if (!opts.zip) _watchToastTimer = setTimeout(hide, next ? 12000 : 4000);
 }
+
+/* ===== A WATCH FROM A SHARE PAGE, IN THE FEWEST TAPS (2026-11-12) =====
+ * The server-rendered pages (/car/<vin>, /yard/<slug>, /landed/<make>) send
+ * "Alert me when the next one lands" to /#tab=alerts. A first-time visitor
+ * landed on a watch form whose Make list was empty (it was built from
+ * inventory that waits for a location) with no zip field in sight; the
+ * shared car's bell answered "set your zip up top" on a screen without one.
+ *   - the form's makes and models come from data/models.json until the whole
+ *     scan is in (same names and counts the full scan gives)
+ *   - the car the visitor came for is offered as one tap, with a zip field
+ *     in the same card when no location is saved; the form is prefilled too
+ *   - anywhere a watch needs a location, the zip is asked for right there
+ * Only the creation path changes: every watch is made by addQuickWatch /
+ * addWatchItem as before, and stored watches are never touched (rule 6). */
+/* #watch=<make>|<model>|<years>: model and years optional; years are
+ * "2005-2009", "2005-", "-2009" or "2007". null when there is no make. */
+function parseWatchHash(hash) {
+  const m = /#watch=([^&]*)/.exec(String(hash || ''));
+  if (!m) return null;
+  let raw = m[1];
+  try { raw = decodeURIComponent(raw); } catch (e) { /* keep as typed */ }
+  const clean = (v) => String(v || '').replace(/[\u0000-\u001f<>"]/g, '').trim().slice(0, 60);
+  const [make, model, yrs] = raw.split('|').map(clean);
+  if (!make) return null;
+  const y = /^(\d{4})?(?:-(\d{4})?)?$/.exec(yrs || '');
+  const ok = (n) => (n >= 1900 && n <= 2100 ? n : null);
+  const yrMin = y ? ok(+y[1]) : null;
+  const yrMax = y ? ok(/-/.test(yrs) ? +y[2] : +y[1]) : null;
+  return { make, model: model || '', yrMin, yrMax: yrMin && yrMax && yrMax < yrMin ? null : yrMax };
+}
+/* Which server-rendered page sent the visitor to #tab=alerts (the referrer
+ * is our own page, so its path is readable): a car, a make, or neither. */
+function shareReferrerIntent(referrer, origin) {
+  let u;
+  try { u = new URL(String(referrer || '')); } catch (e) { return null; }
+  if (u.origin !== origin && u.hostname !== 'yardscout.io') return null;
+  let m = /^\/car\/([A-Za-z0-9-]{1,32})\/?$/.exec(u.pathname);
+  if (m) return { kind: 'car', key: m[1] };
+  m = /^\/landed\/([a-z0-9-]{1,40})\/?$/.exec(u.pathname);
+  if (m) return { kind: 'make', slug: m[1] };
+  return { kind: 'page' };
+}
+// Must match slugify() in backend/site-proxy/src/share.js (the /landed/<make> path).
+function shareSlug(v) {
+  return String(v || '').toLowerCase().replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+}
+/* One car by its share key, from the published scan, without changing what
+ * is on screen: the key index names its shard, the shard has the row. */
+async function invFindCar(key) {
+  const here = () => liveInventory.find(x => vehicleKey(x) === key || String(x.id) === key);
+  let v = here();
+  if (v) return v;
+  let s = null;
+  for (let i = 0; i < 100 && !(s = _invNext || _inv); i++) {
+    if (liveLoaded) return here() || null;   // full-file path: what is loaded is all there is
+    await new Promise(r => setTimeout(r, 150));
+  }
+  if (!s) return null;
+  const h = _invHash(key);
+  const kb = await _invGet(s, 'keys-' + _invPad(h % (s.m.keyBuckets || 64)) + '.json', false);
+  const tok = ' ' + h.toString(36) + ' ';
+  for (const si of Object.keys(kb.s || {})) {
+    if (!(' ' + kb.s[si] + ' ').includes(tok)) continue;
+    await _invLoadShard(s, +si);
+    const p = s.parsed.get(+si);
+    v = p && p.vehicles.find(x => vehicleKey(x) === key || String(x.id) === key);
+    if (v) return v;
+  }
+  return null;
+}
+
+/* Zip field markup + submit, shared by the Alerts-tab card and the toast. */
+function watchZipInputHtml(id) {
+  return `<input type="text" id="${id}" class="watch-zip-input" maxlength="7" autocomplete="postal-code" aria-label="${POSTAL_CA ? 'Postal code' : 'Zip code'}"`
+    + ` ${POSTAL_CA ? 'inputmode="text" autocapitalize="characters" placeholder="Postal code"' : 'inputmode="numeric" placeholder="Zip code"'}>`;
+}
+async function watchZipSubmit(input, msg) {
+  const say = (t) => { if (msg) msg.textContent = t; };
+  const pc = input && normalizePostal(input.value);
+  if (!pc) { say(POSTAL_CA ? 'Enter your postal code.' : 'Enter a 5-digit zip code.'); if (input) input.focus(); return false; }
+  say('');
+  document.getElementById('live-zip').value = pc.code;
+  await setZipCenter(pc.code);
+  updateZipBanner();
+  if (!activeZipCoords) { say('We could not find that one. Check it and try again.'); input.focus(); return false; }
+  return true;
+}
+function askZipForWatch(label, retry) {
+  showWatchToast(label, { zip: retry });
+  const i = document.getElementById('watch-toast-zip');
+  if (i && matchMedia('(pointer: fine)').matches) i.focus();
+}
+
+/* What the visitor came to watch: { make, model, yrMin, yrMax } from a share
+ * page or a #watch= link; pendingAdd when the form's Add needed a zip. */
+let watchIntent = null;
+function watchIntentLabel(w) {
+  return ((w.yrMin || w.yrMax ? `${w.yrMin || ''}\u2013${w.yrMax || ''} ` : '') + `${w.make} ${w.model}`).trim();
+}
+/* The card at the top of the Alerts tab. Shown for a car the visitor asked
+ * for (one tap: zip if needed + Watch), and for anyone on the free tier with
+ * no location saved (a watch needs a centre). Gone once neither applies. */
+function renderWatchIntent() {
+  const tab = document.getElementById('tab-alerts');
+  if (!tab) return;
+  let el = document.getElementById('watch-intent');
+  const w = watchIntent && watchIntent.make && watchIntent.model && !watchIntent.done ? watchIntent : null;
+  const needZip = !activeZipCoords && !isPro();
+  const pending = !!(watchIntent && watchIntent.pendingAdd);
+  // An Add waiting for a zip is the form's own watch, not the one-tap car.
+  const car = !pending && w && !hasWatchFor(w.make, w.model) ? w : null;
+  if (!car && !needZip) { if (el) el.remove(); return; }
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'watch-intent';
+    el.className = 'watch-intent';
+    tab.insertBefore(el, tab.firstChild);
+    el.addEventListener('click', (e) => { if (e.target.closest('#watch-intent-go')) watchIntentGo(); });
+    el.addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.target.closest('.watch-zip-input')) { e.preventDefault(); watchIntentGo(); } });
+  }
+  const state = [car ? watchIntentLabel(car) : '', needZip, pending].join('|');
+  if (el.dataset.state === state) return;   // keep what the visitor has typed
+  el.dataset.state = state;
+  const head = car ? `Get told when another <strong>${escapeHtml(watchIntentLabel(car))}</strong> lands near you`
+    : 'Where should we watch?';
+  const note = car ? (isPro() ? '' : freeDeliveryNote())
+    : (pending ? 'Enter your zip so the watch has a centre.' : 'Enter your zip, then add the cars you want below.');
+  el.innerHTML = `<p class="watch-intent-head">${head}</p>
+    <div class="watch-intent-row">${needZip ? watchZipInputHtml('watch-intent-zip') : ''}<button type="button" class="btn btn-primary" id="watch-intent-go">${car ? 'Watch' : (pending ? 'Add watch' : 'Set zip')}</button></div>
+    <p class="watch-zip-msg" role="status"></p>${note ? `<p class="watch-intent-note">${note}</p>` : ''}`;
+}
+async function watchIntentGo() {
+  const el = document.getElementById('watch-intent');
+  if (!el) return;
+  if (!activeZipCoords && !isPro()) {
+    if (!(await watchZipSubmit(el.querySelector('.watch-zip-input'), el.querySelector('.watch-zip-msg')))) return;
+  }
+  if (watchIntent && watchIntent.pendingAdd) {
+    // The form's Add was waiting for this zip: finish it as the visitor set it up.
+    watchIntent.pendingAdd = false;
+    if (watchIntent.make) watchIntent.done = true;
+    renderWatchIntent();
+    addWatchItem();
+    return;
+  }
+  const w = watchIntent && watchIntent.make && watchIntent.model && !watchIntent.done ? watchIntent : null;
+  if (w && !hasWatchFor(w.make, w.model)) {
+    const label = watchIntentLabel(w);
+    const r = addQuickWatch(w.make, w.model, w.yrMin, w.yrMax, 'share');
+    if (r === 'limit') { openUpgradeSheet('watch-limit'); return; }
+    if (r === 'no-zip') { renderWatchIntent(); return; }
+    w.done = true;
+    cancelWatchEdit();   // the form's prefill has done its job
+    renderAlerts();
+    if (r === 'added') { checkAndNotify(); showWatchToast(label); }
+    else showWatchToast(label, { manage: true });
+    return;
+  }
+  renderWatchIntent();
+}
+/* The form shows what the visitor came for, so they can change it (years,
+ * more models) before adding. Never touches a stored watch. */
+function prefillWatchForm(w) {
+  if (!w || !w.make || editingWatchAddedAt) return;
+  const makeSel = document.getElementById('alert-make');
+  if (!makeSel) return;
+  if (![...makeSel.options].some(o => o.value === w.make)) {
+    const opt = document.createElement('option'); opt.value = w.make; opt.textContent = w.make; makeSel.appendChild(opt);
+  }
+  makeSel.value = w.make;
+  for (const [id, y] of [['alert-yr-min', w.yrMin], ['alert-yr-max', w.yrMax]]) {
+    const sel = document.getElementById(id);
+    if (y && ![...sel.options].some(o => +o.value === y)) { const opt = document.createElement('option'); opt.value = y; opt.textContent = y; sel.appendChild(opt); }
+    sel.value = y || '';
+  }
+  populateWatchModelOptions();
+  if (w.model) {
+    watchSelectedModels.add(w.model);
+    if (!_watchModelCounts.has(w.model)) _watchModelCounts.set(w.model, 0);
+    renderWatchModelList(); updateWatchModelBtnLabel();
+  }
+}
+/* Arrival with a watch in mind: #watch=..., or #tab=alerts from one of our
+ * server-rendered pages. */
+async function startWatchIntent(fromHash) {
+  loadWatchNames();
+  watchIntent = fromHash || null;
+  renderWatchIntent();
+  if (!watchIntent) {
+    const ref = shareReferrerIntent(document.referrer, location.origin);
+    try {
+      if (ref && ref.kind === 'car') {
+        const v = await invFindCar(ref.key);
+        if (v && v.make && v.model) watchIntent = { make: v.make, model: v.model, yrMin: null, yrMax: null };
+      } else if (ref && ref.kind === 'make') {
+        const names = await loadWatchNames();
+        const make = Object.keys(names || watchNameIndex()).find(mk => shareSlug(mk) === ref.slug);
+        if (make) watchIntent = { make, model: '', yrMin: null, yrMax: null };
+      }
+    } catch (e) { /* the form and the zip card still work */ }
+  }
+  if (!watchIntent) return;
+  renderWatchIntent();
+  await loadWatchNames();
+  prefillWatchForm(watchIntent);
+}
+
 
 /* Watchlist pickers mirror the Live filters, with one intentional difference:
  * they draw from the FULL national inventory, not the current radius — you
  * watch for cars that aren't near you *yet*. Values are exact scraper strings,
  * so both local and server-side alert matching hit reliably (no typos). */
+/* Until the whole scan is loaded the names come from data/models.json: every
+ * make/model in the scan with its car count, the file the daily watch check
+ * reads (scraper _write_models_json). A new visitor has no location, so no
+ * inventory loads and the Make list used to stay empty; a visitor with only
+ * the nearby regions in saw only nearby names. Same strings as the rows. */
+let watchNames = null;        // { make: { model: cars } } from models.json
+let _watchNamesP = null;
+function loadWatchNames() {
+  if (watchNames || liveComplete) return Promise.resolve(watchNames);
+  if (!_watchNamesP) {
+    _watchNamesP = fetch(DATA_BASE + 'data/models.json', { cache: 'no-cache' })
+      .then(r => (r.ok ? r.json() : null))
+      .then(d => {
+        if (!d || !d.makes || typeof d.makes !== 'object' || Array.isArray(d.makes)) { _watchNamesP = null; return null; }
+        watchNames = d.makes;
+        if (!modelYearSpans) setModelYears(d.modelYears);
+        if (!liveComplete) populateWatchOptions();
+        return watchNames;
+      })
+      .catch(() => { _watchNamesP = null; return null; });
+  }
+  return _watchNamesP;
+}
+/* { make: { model: cars } } for the pickers: the loaded scan once it is
+ * complete, models.json before that, else whatever part is loaded. */
+let _watchIdx = null, _watchIdxOf = null;
+function watchNameIndex() {
+  const src = liveComplete || !watchNames ? liveInventory : watchNames;
+  if (_watchIdx && _watchIdxOf === src) return _watchIdx;
+  let idx = src;
+  if (src === liveInventory) {
+    idx = {};
+    for (const v of liveInventory) {
+      if (!v.make) continue;
+      const ms = idx[v.make] || (idx[v.make] = {});
+      if (v.model) ms[v.model] = (ms[v.model] || 0) + 1;
+    }
+  }
+  _watchIdx = idx; _watchIdxOf = src;
+  return idx;
+}
 function populateWatchOptions() {
   const makeSel = document.getElementById('alert-make');
-  if (!makeSel || !liveLoaded) return;
+  if (!makeSel || (!liveLoaded && !watchNames)) return;
   const prevMake = makeSel.value;
-  const makes = new Set();
-  for (const v of liveInventory) {
-    if (v.make && !JUNK_MAKES.has(v.make.toLowerCase())) makes.add(v.make);
-  }
+  const makes = new Set(Object.keys(watchNameIndex()).filter(m => m && !JUNK_MAKES.has(m.toLowerCase())));
+  // A make being added or edited stays selectable while the lists refresh.
+  if (prevMake && (editingWatchAddedAt || (watchIntent && watchIntent.make === prevMake))) makes.add(prevMake);
   makeSel.innerHTML = '<option value="">Make</option>';
   [...makes].sort().forEach(m => {
     const opt = document.createElement('option');
@@ -9243,9 +9513,27 @@ function populateWatchOptions() {
     makeSel.appendChild(opt);
   });
   makeSel.value = makes.has(prevMake) ? prevMake : '';
+  // Regions landing in the background rebuild these lists; the models the
+  // visitor has already ticked stay ticked.
+  const keep = makeSel.value ? new Map([...watchSelectedModels].map(m => [m, _watchModelCounts.get(m) || 0])) : new Map();
   populateWatchModelOptions();
+  if (keep.size) {
+    for (const [m, n] of keep) { watchSelectedModels.add(m); if (!_watchModelCounts.has(m)) _watchModelCounts.set(m, n); }
+    renderWatchModelList(); updateWatchModelBtnLabel();
+  }
 
-  const years = [...new Set(liveInventory.map(v => v.year).filter(Boolean))].sort((a, b) => b - a);
+  const yearSet = new Set(liveInventory.map(v => v.year).filter(Boolean));
+  if (!liveComplete && modelYearSpans) {
+    // Not the whole scan yet: the published model-year spans give the range.
+    let lo = Infinity, hi = -Infinity;
+    for (const ms of Object.values(modelYearSpans)) for (const sp of Object.values(ms || {})) {
+      const a = +sp[0], b = +sp[1];
+      if (a >= 1940 && a < lo) lo = a;
+      if (b <= new Date().getFullYear() + 1 && b > hi) hi = b;
+    }
+    for (let y = lo; y <= hi; y++) yearSet.add(y);
+  }
+  const years = [...yearSet].sort((a, b) => b - a);
   for (const id of ['alert-yr-min', 'alert-yr-max']) {
     const sel = document.getElementById(id);
     const prev = sel.value;
@@ -9278,15 +9566,14 @@ function populateWatchModelOptions() {
   btn.disabled = false;
   _watchModelCounts = new Map();
   const yLo = yearVal('alert-yr-min'), yHi = yearVal('alert-yr-max');
-  for (const v of liveInventory) {
-    if (v.make === make && v.model && !isNoPickModel(v.make, v.model) && modelFitsYears(v.make, v.model, yLo, yHi)) {
-      _watchModelCounts.set(v.model, (_watchModelCounts.get(v.model) || 0) + 1);
-    }
+  for (const [model, n] of Object.entries(watchNameIndex()[make] || {})) {
+    if (model && !isNoPickModel(make, model) && modelFitsYears(make, model, yLo, yHi)) _watchModelCounts.set(model, n);
   }
   // A model on ONE car nationwide is a yard's typo far more often than a real
   // nameplate (2026-10-29 audit: 'Ttoytcoma', 'Unknown'). Keep it out of the
-  // picker once the whole scan is in; "Watch anyway" still takes it by name.
-  if (liveComplete) for (const [m, n] of [..._watchModelCounts]) if (n < 2) _watchModelCounts.delete(m);
+  // picker once the counts are national (the whole scan, or models.json);
+  // "Watch anyway" still takes it by name.
+  if (liveComplete || watchNames) for (const [m, n] of [..._watchModelCounts]) if (n < 2) _watchModelCounts.delete(m);
   renderWatchModelList();
   updateWatchModelBtnLabel();
 }
@@ -9435,7 +9722,13 @@ function addWatchItem() {
   if (yrMin && yrMax && yrMin > yrMax) return alert('Year min is after year max.');
   const radiusMi = parseInt(document.getElementById('alert-radius').value) || null;
   if (radiusMi && !activeZipCoords) {
-    return alert('Set a zip code (or use "near me") in the Cars tab first, so the radius has a center.');
+    // Ask for the zip in the card above the form, then finish this Add.
+    watchIntent = Object.assign(watchIntent || {}, { pendingAdd: true });
+    renderWatchIntent();
+    const card = document.getElementById('watch-intent'), zip = document.getElementById('watch-intent-zip');
+    if (card) card.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    if (zip) zip.focus({ preventScroll: true });
+    return;
   }
   const matchOnly = document.getElementById('alert-match-only').checked;
   // Trim / drivetrain filters are Pro — free watches stay make/model/years
@@ -9717,10 +10010,15 @@ if (_bootAlertId) {
 }
 loadLiveInventory({ fresh: !!_bootAlertId });
 // #tab=<name> opens a tab directly (share pages link to #tab=alerts).
+// #watch=<make>|<model>|<years> opens Alerts with that watch one tap away;
+// #tab=alerts from one of our own car / make pages does the same from the
+// referrer (see A WATCH FROM A SHARE PAGE).
 {
-  const t = (location.hash.match(/#tab=([a-z]+)/) || [])[1];
+  const w = parseWatchHash(location.hash);
+  const t = w ? 'alerts' : (location.hash.match(/#tab=([a-z]+)/) || [])[1];
   const el = t && document.querySelector(`.tab[data-tab="${t}"]`);
   if (el) { el.click(); history.replaceState(null, '', location.pathname + location.search); }
+  if (el && t === 'alerts') startWatchIntent(w);
 }
 
 // Offline + instant-launch cache. Needs a secure context (HTTPS or localhost) —
