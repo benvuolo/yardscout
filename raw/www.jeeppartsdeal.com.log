@@ -7874,3 +7874,14 @@
 09:35:34 chain-unlinked side-mirrors 1 numbers named by 5VF00JXWAG, no catalog link: 5VF00JXWAI
 09:37:26 nav-fail Dodge Ram Van 3500 1999: NavError: HTTP 404 for https://www.jeeppartsdeal.com/catalog/1999-dodge-ram-van-3500-parts
 09:40:22 time budget reached records=6901
+11:43:23 start site=www.jeeppartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=6901 list_lines=5429 year_lines=788 url_index=33827
+11:43:23 completion worklist completion/mopar.own_page.json: 657 rows
+11:51:15 nav-fail Dodge Ram Van 3500 2001: NavError: HTTP 404 for https://www.jeeppartsdeal.com/catalog/2001-dodge-ram-van-3500-parts
+11:54:35 chain-unlinked climate-control 2 numbers named by 55361430AF, no catalog link: 55361430AD, 55361430AE
+11:55:23 chain-unlinked door-rear 1 numbers named by 55346714AG, no catalog link: 55346714AF
+11:55:23 chain-unlinked door-rear 1 numbers named by 55346718AG, no catalog link: 55346718AF
+11:56:03 nav-fail Dodge Ram Van 2500 2001: NavError: HTTP 404 for https://www.jeeppartsdeal.com/catalog/2001-dodge-ram-van-2500-parts
+12:01:24 chain-unlinked window-regulator 1 numbers named by 68401985AC, no catalog link: 68401985AD
+12:01:24 chain-unlinked window-regulator 1 numbers named by 68401986AC, no catalog link: 68401986AD
+12:06:59 product-fail https://www.jeeppartsdeal.com/oem/mopar~window-regulator-front~55275376ab: NavError: no __INITIAL_STORE__ on page
+12:13:47 time budget reached records=6915
