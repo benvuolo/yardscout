@@ -320,12 +320,15 @@ The generic-only count re-matches every distinct year/make/model in
   differ per generation); Tacoma 3rd gen, Ranger 2019 gen and Cherokee KL
   windows end at 2023 (2024 = new Tacoma/Ranger generations, KL ended);
   Ranger 1998–2011 pieces no longer say "fits 1998–2018". Narrowing only.
-- **Effect for the hub to decide on:** 604 1st-gen Xterras (2000–04) and
-  the one 2024 Tacoma now get no card. No 1st gen row has a price basis.
-  Choices: accept; carry the 2nd gen bands onto 1st gen pieces (the
-  fitment is in §25.1; a price call, not a fitment one); or price research.
-- Needs a price: Xterra 1st gen tail lights (2001–04), roof rack, side
-  steps, console lid. 2000 tail-light number not in the OEM data.
+- Hub decision 2026-11-12: 1st gen Xterra rows added with the pre-split
+  anchor bands, only for the cited years: tail lights 2001–04 (OEM),
+  side steps 2001–04, roof rack 2000–04, console lid 2000–02 (search
+  excerpts). No 1st gen diff-lock switch. The 2024 Tacoma gets no card.
+- Missing fitment: 2000 tail lights and steps, 2003–04 console lid.
+- Excerpt-only bases (upgrade when catalog hosts are reachable): every
+  Xterra row except the tail lights.
+- eBay: the new rows get their own query keys (`xterra|<name>|<window>`),
+  but no keyset exists (ops/ebay.md), so anchors stay until keys exist.
 - Unresolved: Xterra rack/steps standard vs option on 2nd gen trims;
   in-window mid-cycle leads (XJ 1997 interior, Tacoma 2001, Xterra 2009).
 - Network: www.nissanpartsdeal.com and parts.nissanusa.com do not resolve
