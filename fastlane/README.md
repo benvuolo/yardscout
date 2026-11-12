@@ -11,6 +11,8 @@
   no binary.
 
 Screenshots are regenerated from the local web shell with
-`tools/capture_store_shots.py` (both sizes in one run). Edit the text here,
+`tools/capture_store_shots.py` (both sizes in one run): six slides, each a
+headline over a real capture of the app with the data in `docs/data`. Look at
+every slide before committing; the numbers change with each scan. Edit the text here,
 not in the consoles; `appstore-assets/LISTING.md` and `play-assets/LISTING.md`
 are now history/reference only.
