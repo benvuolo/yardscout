@@ -945,11 +945,15 @@ UNOBTANIUM_DB = {
         "year_range": (2000, 2015),
         # §25 (PARTS_GAPS §25.1): these five rows said "fits 2000-2015",
         # across the 2000-04 and 2005-15 generations. Nissan part numbers
-        # differ by generation for every one of them, so each is gated to
-        # the 2nd gen, where the bands were set. The 1st gen pieces have a
-        # fitment basis but no price basis yet ("needs a price"); none is
-        # shipped until one exists.
+        # differ by generation for every one of them, so each row is gated
+        # per generation. 1st gen rows (hub decision 2026-11-12) carry the
+        # pre-split anchor band, only for the years their cited numbers
+        # cover; no 1st gen diff-lock switch (no fitment found).
         "top_parts": [
+            {"name": "Tail Lights (pair, uncracked, match part #)", "rarity": "Uncommon", "low": 50, "high": 130, "cost": 15, "yr_min": 2001, "yr_max": 2004},
+            {"name": "Side Steps / Rock Rails (pair, match part #)", "rarity": "Uncommon", "low": 60, "high": 150, "cost": 20, "yr_min": 2001, "yr_max": 2004},
+            {"name": "Center Console (lid intact)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 12, "yr_min": 2000, "yr_max": 2002},
+            {"name": "OEM Roof Rack (tube-style)", "rarity": "Epic", "low": 150, "high": 350, "cost": 25, "yr_min": 2000, "yr_max": 2004},
             {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 50, "high": 130, "cost": 15, "yr_min": 2005, "yr_max": 2015},
             {"name": "Side Steps / Rock Rails (pair, match part #)", "rarity": "Uncommon", "low": 60, "high": 150, "cost": 20, "yr_min": 2005, "yr_max": 2015},
             {"name": "Center Console (lid intact)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 12, "yr_min": 2005, "yr_max": 2015},

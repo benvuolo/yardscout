@@ -775,11 +775,24 @@ for (mk, md), wins in _GEN25.items():
                 _bad25.append((y, md, name, q["fits"]))
 check("§25 no Xterra/Ranger/Cherokee/Tacoma row leaves its generation (incl. 2024 new gens, Ranger 2012-18)",
       not _bad25, str(_bad25[:6]))
-_x02, _x08 = parts(2002, "Nissan", "Xterra"), parts(2008, "Nissan", "Xterra")
-check("§25.1 Xterra rows are 2nd-gen only (1st gen pieces need a price)",
-      not _x02 and {"Tail Lights (pair, uncracked)", "OEM Roof Rack (tube-style)", "Rear Diff Locker Switch",
-                    "Center Console (lid intact)", "Side Steps / Rock Rails (pair, match part #)"} <= set(_x08)
-      and _x08["Tail Lights (pair, uncracked)"]["fits"] == "2005–2015", str((sorted(_x02), sorted(_x08))))
+_x08 = parts(2008, "Nissan", "Xterra")
+check("§25.1 Xterra 2nd gen rows",
+      {"Tail Lights (pair, uncracked)", "OEM Roof Rack (tube-style)", "Rear Diff Locker Switch",
+       "Center Console (lid intact)", "Side Steps / Rock Rails (pair, match part #)"} <= set(_x08)
+      and _x08["Tail Lights (pair, uncracked)"]["fits"] == "2005–2015", str(sorted(_x08)))
+# 1st gen: only the years each cited number covers (PARTS_GAPS §25.1)
+_RACK, _TL1, _ST, _CON = ("OEM Roof Rack (tube-style)", "Tail Lights (pair, uncracked, match part #)",
+                          "Side Steps / Rock Rails (pair, match part #)", "Center Console (lid intact)")
+_X1 = {2000: {_RACK: "2000–2004", _CON: "2000–2002"},
+       2001: {_RACK: "2000–2004", _CON: "2000–2002", _TL1: "2001–2004", _ST: "2001–2004"},
+       2002: {_RACK: "2000–2004", _CON: "2000–2002", _TL1: "2001–2004", _ST: "2001–2004"},
+       2003: {_RACK: "2000–2004", _TL1: "2001–2004", _ST: "2001–2004"},
+       2004: {_RACK: "2000–2004", _TL1: "2001–2004", _ST: "2001–2004"}}
+_x1bad = {y: {n: q["fits"] for n, q in parts(y, "Nissan", "Xterra").items()} for y in _X1}
+check("§25.1 1st gen Xterra years get exactly their cited rows (no diff-lock switch)",
+      all(_x1bad[y] == _X1[y] for y in _X1), str(_x1bad))
+check("§25.1 1st gen bands are the pre-split anchors",
+      [(q["low"], q["high"]) for q in js.UNOBTANIUM_DB["xterra"]["top_parts"] if q.get("yr_max") == 2004 and q["name"] == _RACK] == [(150, 350)])
 check("§25.1 diff-lock switch keeps its trim gate", _x08["Rear Diff Locker Switch"].get("trim_status") == "unconfirmed")
 check("§25.2 2024 Tacoma (4th gen) gets no 3rd-gen rows", not parts(2024, "Toyota", "Tacoma"))
 check("§25.2 2023 Tacoma keeps its 3rd-gen rows", "TRD Pro Grille" in parts(2023, "Toyota", "Tacoma"))
