@@ -266,3 +266,17 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
 - 2026-11-12 ~16:15 UTC owner decisions: "ship" 1.12.15 (release-ios run 43256550663 submit=true, release-android run 43256556677 track=production, both from cdc8778a); D1 weekly email signup for web watchers APPROVED (not built yet: held for the weekly usage cap, build first after reset); D4 privacy wording done (cdc8778a, sw v183); D8 one 503 retry for nissanpartsdeal and mbpartsgiant (.blocked removed, .retried503 added on oem-raw; next crawl run uses platform pacing); D3 annual plan declined for now; D2, D5, D7 explained, awaiting answer. Owner does Search Console + Bing (sitemap.xml).
 - 2026-11-12 ~18:50 UTC: growth/email-signup merged and live (8be283e4, sw v184). Live check: POST /v1/recap/signup answered 200 confirm-sent and the confirmation email arrived in the owner's inbox (EMAIL_UNSUB_SECRET is set in production). EMAIL_POSTAL_ADDRESS empty by owner's choice for now. New store screenshots (style A) merged at 3331342f; Play listing push and iOS 1.12.15 resubmit (build 37, new shots + listing text) both succeeded; the owner files the expedite request. Outreach: r/fordranger sample sent 11-12; XJ follow-up and r/1stGenTacoma modmail drafted; Tacoma next.
 - Known small items for later: Pick Your Part rows blank; car screen repeats model as trim; dark-mode map zoom buttons white and Map/List tab contrast; ui_no_truncation full run now exceeds 55 min (split by width).
+
+## 2026-11-12 ~20:50 UTC r/XTerra post live; car search building
+
+- Owner posted the weekly Xterra list on r/XTerra (115 set out Nov 5–12, 4x4
+  marked). Site link tagged `utm_source=reddit&utm_campaign=xterra`; Play link
+  carries the same referrer; App Store link is untagged (needs the owner's
+  provider token). First hour: 341 views, 7 upvotes, 2 comments.
+- Comment asked for cars near a zip without picking a part. It exists (Cars
+  tab, Filters → Make → Model) but is hard to find. Build agent is on
+  `design/car-search`: search box at the top of the Cars tab plus a
+  `#cars=Make|Model|years` link. Hub reviews, regresses and merges.
+- iOS 1.12.15 (37): WAITING_FOR_REVIEW since 17:27 UTC (asc-status 20:44).
+  Expedite request is the owner's to file.
+- Subscribers as of 11-11: Apple 4, Google 1.
