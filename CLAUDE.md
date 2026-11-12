@@ -54,5 +54,9 @@ yardscout.io@gmail.com, they/them). Accuracy and dependability come first.
 - Parts curation basis and history: `scraper/PARTS_GAPS_2026-11.md`.
 - Yard registry and outreach history: `scraper/INDEPENDENT_YARDS.md`,
   `scraper/independent_yards_registry.json`, `ops/yards.md`.
+- Owner preference (Ben, 2026-11-12, said to the hub: "always make suggestions
+  if you see a gap or way to improve on anything"): when you notice a gap or
+  an improvement, in any area, say so with a recommendation. Suggest; the
+  standing rules above still decide what may be done without asking.
 - Keep one session per workstream (`ops/README.md`). Do not take on another
   workstream's files in passing; note the need in that workstream's file.
