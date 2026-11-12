@@ -255,3 +255,11 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
 - All workstream sessions are idle with their check-ins cancelled. The U-Pull-R trigger (trig_019imiZ2pPN5QP6g5kuvcYYR) is disabled; re-enable it on resume.
 - Owner decisions pending: one 503 retry each for mbpartsgiant and nissanpartsdeal; the design combined-search proposal. 1A outreach email is DRAFTED in Gmail (no recipient; the owner adds 1A's contact and sends).
 - Resume order: make breadth (ford/jeep/bmw advances + wiper per-ns release), then Honda/Nissan R3 audits, then scout (GSP strut/other cats).
+
+## 2026-11-12 business review; search pages and funnel fixes live
+- Plan and owner decisions: `ops/business-plan.md`. Workstream files: `ops/seo.md`, `ops/growth.md`.
+- Live: seo/onpage-1 (3a886748, sw v181): real H1s and titles, yard inventory pages, /prices pages, /sitemap.xml with 751 URLs, robots.txt points at it. growth/funnel-1 (2f372660, sw v182): apps exempt from the localhost analytics guard, once-only counters, per-platform funnel in the daily email, Pro sheet button pinned (live check 375x667: bottom edge 628), Android web visitors to Google Play, share-page alert intent lands on a prefilled watch card.
+- iOS 1.12.14 went live 2026-11-12 00:59 UTC; Android 1.12.14 live since 11-09. The app half of growth/funnel-1 needs a 1.12.15 store release (owner's "ship").
+- GitHub Pages serves assets with a ~10 min CDN cache: sw.js can show the new version before styles.css/app.js do. Wait for the asset hash before judging a live check.
+- Waiting on the owner: decisions D1-D8 in the plan (weekly email signup for web watchers, free prompt alert, annual plan, privacy page wording, community posts, Search Console + Bing with /sitemap.xml, store listing text, mb/nissan retry).
+- Next builds when approved: web email signup at watch creation (D1), nationwide make/model pages, privacy wording (D4), landing-page measurement.
