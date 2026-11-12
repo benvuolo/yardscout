@@ -54,3 +54,5 @@ every OEM namespace from users. A test enforces it.
 
 
 | Interchange: wiper-motor curation (tier C) | session_016ZzJfKQPmCKfP14gyJpp6a | started 2026-11-10 12:40 from category-breadth handover (§10); pushes only on hub go (Lexus chassis gate may be in flight) |
+
+Business plan and priorities (2026-11-12): `ops/business-plan.md`. Growth work (search pages, funnel, email) comes before new parts-matching depth until traffic passes 40 new visitors a day.
