@@ -37,7 +37,7 @@ check('/apple is not a redirect route', r.status !== 302 || !/apps\.apple\.com/.
  * file from each host with no redirect allowed. */
 const www = async (path, ua = DESKTOP, method = 'GET') => worker.fetch(new Request('https://www.yardscout.io' + path, { method, headers: { 'user-agent': ua } }), {}, { waitUntil() {} });
 const loc = (res) => res.headers.get('location');
-for (const path of ['/landed', '/landed/', '/landed/toyota', '/yards', '/junkyards', '/junkyards/texas', '/junkyards/texas/dallas', '/yard/pick-n-pull-newark', '/car/1HGFB2F50CL000001', '/sitemap.xml', '/sitemap-yards.xml']) {
+for (const path of ['/landed', '/landed/', '/landed/toyota', '/yards', '/junkyards', '/junkyards/texas', '/junkyards/texas/dallas', '/yard/pick-n-pull-newark', '/car/1HGFB2F50CL000001', '/prices', '/prices/pick-n-pull', '/prices/pick-your-part/pick-your-part-anaheim', '/sitemap.xml', '/sitemap-yards.xml']) {
   r = await www(path);
   check(`www${path} -> 301 apex`, r.status === 301 && loc(r) === 'https://yardscout.io' + path, `${r.status} ${loc(r)}`);
 }

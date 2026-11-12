@@ -18,7 +18,7 @@ const UPSTREAM = 'https://benvuolo.github.io/yardscout';
 // Lives here (not in yardscout-api) so the web app talks same-origin.
 import { handleEntitlements } from './entitlements.js';
 // Server-rendered share pages (/car/<vin>, /yard/<slug>) — see share.js.
-import { renderCarPage, renderYardPage, renderSitemap, renderYardsPage, renderLandedPage, renderJunkyardsPage, IOS_URL, PLAY_URL } from './share.js';
+import { renderCarPage, renderYardPage, renderSitemap, renderYardsPage, renderLandedPage, renderJunkyardsPage, renderPricesPage, IOS_URL, PLAY_URL } from './share.js';
 
 /** The server-rendered pages (share.js): a path → the function that renders
  * it, or null when the path is not one of them. */
@@ -35,6 +35,8 @@ function renderedRoute(pathname) {
   if (m) return () => renderLandedPage(m[1] || '');
   m = pathname.match(/^\/junkyards(?:\/([^/]+))?(?:\/([^/]+))?\/?$/);
   if (m) return () => renderJunkyardsPage(m[1] || '', m[2] || '');
+  m = pathname.match(/^\/prices(?:\/([^/]+))?(?:\/([^/]+))?\/?$/);
+  if (m) return () => renderPricesPage(m[1] || '', m[2] || '');
   return null;
 }
 

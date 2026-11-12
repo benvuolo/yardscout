@@ -53,8 +53,9 @@ async function dataJson(name, ttl) {
   return r.ok ? r.json() : null;
 }
 
-/* Chain price-list pages — same table as CHAIN_PRICE_PAGES in docs/app.js
- * (keep the two in step). Independent yards' lists come via the registry. */
+/* The chains' own price pages — same table as CHAIN_PRICE_PAGES in
+ * docs/app.js (keep the two in step). Used as the "source" link on a
+ * /prices/<chain> page, matched by the chain name in the third column. */
 const CHAIN_PRICE_PAGES = [
   [/^pick[\s-]*n[\s-]*pull/i, 'https://www.picknpull.com/part-pricing', 'Pick-n-Pull'],
   [/^pull[\s-]*a[\s-]*part/i, 'https://www.pullapart.com/used-auto-parts/parts-pricing/', 'Pull-A-Part'],
@@ -69,7 +70,6 @@ const CHAIN_PRICE_PAGES = [
   [/^195 used auto parts/i, 'https://www.195usedautoparts.com/Home/PartPrices', '195 Used Auto Parts'],
   [/^san antonio pick[\s-]*n[\s-]*pull/i, 'https://www.picknpullsa.com/price-list', 'San Antonio Pick-N-Pull'],
 ];
-function priceListFor(loc) { const h = CHAIN_PRICE_PAGES.find((c) => c[0].test(loc || '')); return h ? { url: h[1], label: h[2] } : null; }
 let siteLinksCache = { at: 0, rows: null };
 /* Pick Your Part (LKQ): each car id starts with its 4-digit store code
  * ("1263-269258" = Sun Valley), and pyp.com's store page is
@@ -102,44 +102,174 @@ async function yardSiteFor(loc) {
 }
 
 
-/* ---------- Inline price lists (same mapping as yardPriceList in docs/app.js) ----------
- * So a share page reader can check pull prices without leaving the page. */
-const PRICE_FILES = [
-  ['pick-n-pull', 'picknpull_pricing.json', 'list'], ['tear-a-part', 'tearapart_pricing.json', 'list'],
-  ['utah pic-a-part', 'utpap_pricing.json', 'list'], ['u-pull-r', 'upullr_pricing.json', 'list'],
-  ["harry's u-pull-it", 'harrys_pricing.json', 'list'], ['indy-u-pull-it', 'indy_pricing.json', 'list'],
-  ["rupert's u-pull-it", 'ruperts_pricing.json', 'list'], ['u-pull-it', 'upullitne_pricing.json', 'list'],
-  ['pull-n-save', 'pns_pricing.json', 'list'], ['parts galore', 'partsgalore_pricing.json', 'list'],
-  ['chesterfield auto parts', 'chesterfield_pricing.json', 'list'], ['ace pick-a-part', 'ace_pricing.json', 'list'],
-  ['sturtevant auto', 'sturtevant_pricing.json', 'list'], ['nevada pic-a-part', 'nvpap_pricing.json', 'list'],
-  ["barry's u pull it", 'barrys_pricing.json', 'list'], ['195 used auto parts', 'p195_pricing.json', 'list'],
-  ['m&m u-pull-it', 'mmupullit_pricing.json', 'list'], ["chuck & eddie's", 'chuckeddies_pricing.json', 'list'], ['byot auto parts', 'byot_pricing.json', 'list'], ["wilbert's u-pull-it", 'wilberts_pricing.json', 'list'], ['polk county pick and pay', 'polkpickpay_pricing.json', 'list'],
-  ['san antonio pick-n-pull', 'pnpsa_pricing.json', 'list'], ["ryan's pick-a-part", 'ryans_pricing.json', 'list'],
-  ['us auto supply', 'usauto_pricing.json', 'list'], ['u-pull and save', 'upas_pricing.json', 'list'],
-  ['budget u-pull-it', 'budget_pricing.json', 'dict'], ['pick your part', 'pyp_pricing.json', 'dict'],
-  ['pull-a-part', 'pap_pricing.json', 'dict'], ['wrench-a-part', 'wap_pricing.json', 'dict'],
-  ['fenix u-pull', 'fenix_pricing.json', 'dict'],
-];
-async function yardPriceRows(location) {
+/* ---------- Yard price lists ----------
+ * Each chain's own published pull-price list, as the scraper saved it in
+ * docs/data/*_pricing.json. Two shapes: 'list' is one list for the whole
+ * chain; 'dict' is one list per yard, keyed by the yard's name. The location
+ * prefixes are the same mapping as yardPriceList in docs/app.js (keep the
+ * two in step); the chain name and the URL slug (made from the prefix) are
+ * for the /prices pages:
+ *   /prices                      chains with a list and a tracked yard
+ *   /prices/<chain>              the chain's list
+ *   /prices/<chain>/<yard-slug>  one yard's list, only where it differs
+ * The files carry no "read on" date, so the pages state none.
+ * [location prefix, data file, shape, chain name] */
+const PRICE_CHAINS = [
+  ['pick-n-pull', 'picknpull_pricing.json', 'list', 'Pick-n-Pull'], ['tear-a-part', 'tearapart_pricing.json', 'list', 'Tear-A-Part'],
+  ['utah pic-a-part', 'utpap_pricing.json', 'list', 'Utah Pic-A-Part'], ['u-pull-r', 'upullr_pricing.json', 'list', 'U-Pull-R Parts'],
+  ["harry's u-pull-it", 'harrys_pricing.json', 'list', "Harry's U-Pull-It"], ['indy-u-pull-it', 'indy_pricing.json', 'list', 'Indy-U-Pull-It'],
+  ["rupert's u-pull-it", 'ruperts_pricing.json', 'list', "Rupert's U-Pull-It"], ['u-pull-it', 'upullitne_pricing.json', 'list', 'U-Pull-It'],
+  ['pull-n-save', 'pns_pricing.json', 'list', 'Pull-N-Save'], ['parts galore', 'partsgalore_pricing.json', 'list', 'Parts Galore'],
+  ['chesterfield auto parts', 'chesterfield_pricing.json', 'list', 'Chesterfield Auto Parts'], ['ace pick-a-part', 'ace_pricing.json', 'list', 'Ace Pick-A-Part'],
+  ['sturtevant auto', 'sturtevant_pricing.json', 'list', 'Sturtevant Auto'], ['nevada pic-a-part', 'nvpap_pricing.json', 'list', 'Nevada Pic-A-Part'],
+  ["barry's u pull it", 'barrys_pricing.json', 'list', "Barry's U Pull It"], ['195 used auto parts', 'p195_pricing.json', 'list', '195 Used Auto Parts'],
+  ['m&m u-pull-it', 'mmupullit_pricing.json', 'list', 'M&M U-Pull-It'], ["chuck & eddie's", 'chuckeddies_pricing.json', 'list', "Chuck & Eddie's Self Service"],
+  ['byot auto parts', 'byot_pricing.json', 'list', 'BYOT Auto Parts'], ["wilbert's u-pull-it", 'wilberts_pricing.json', 'list', "Wilbert's U-Pull-It"],
+  ['polk county pick and pay', 'polkpickpay_pricing.json', 'list', 'Polk County Pick and Pay'],
+  ['san antonio pick-n-pull', 'pnpsa_pricing.json', 'list', 'San Antonio Pick-N-Pull'], ["ryan's pick-a-part", 'ryans_pricing.json', 'list', "Ryan's Pick-a-Part"],
+  ['us auto supply', 'usauto_pricing.json', 'list', 'US Auto Supply'], ['u-pull and save', 'upas_pricing.json', 'list', 'U-Pull and Save'],
+  ['budget u-pull-it', 'budget_pricing.json', 'dict', 'Budget U-Pull-It'], ['pick your part', 'pyp_pricing.json', 'dict', 'LKQ Pick Your Part'],
+  ['pull-a-part', 'pap_pricing.json', 'dict', 'Pull-A-Part'], ['wrench-a-part', 'wap_pricing.json', 'dict', 'Wrench-A-Part'],
+  ['fenix u-pull', 'fenix_pricing.json', 'dict', 'Fenix U-Pull'],
+].map(([prefix, file, kind, label]) => ({ prefix, file, kind, label, slug: slugify(prefix.replace(/'/g, '')) }));
+export const PRICE_CHAIN_SLUGS = PRICE_CHAINS.map((c) => c.slug);
+function priceChainFor(location) {
   const loc = (location || '').toLowerCase();
-  const hit = PRICE_FILES.find(([pfx]) => pfx === 'wrench-a-part' ? loc.includes(pfx) : loc.startsWith(pfx));
-  if (!hit) return null;
-  const data = await dataJson(hit[1], 3600);
-  if (!data) return null;
-  let rows = [];
-  if (hit[2] === 'list') rows = (Array.isArray(data) ? data : Object.values(data)).map((p) => ({ part: p.description, price: parseFloat(p.price), core: parseFloat(p.corePrice || 0) }));
-  else rows = Object.entries(data[location] || {}).map(([k, v]) => ({ part: k, price: Number(v.price), core: Number(v.core || 0) }));
-  rows = rows.filter((r) => r.part && Number.isFinite(r.price)).sort((a, b) => a.part.localeCompare(b.part));
-  return rows.length ? rows : null;
+  return PRICE_CHAINS.find((c) => (c.prefix === 'wrench-a-part' ? loc.includes(c.prefix) : loc.startsWith(c.prefix))) || null;
 }
-function priceListHtml(rows, yardName) {
-  if (!rows) return '';
-  const money = (n) => '$' + n.toFixed(2);
-  return `<details class="card-fold" id="prices"><summary class="section" style="cursor:pointer;margin-top:1rem">${esc(yardName)} price list <span>· ${rows.length} parts · tap to open</span></summary>
-<div class="car-card"><input type="search" id="pl-q" placeholder="Filter parts…" aria-label="Filter the price list" style="width:100%;min-height:44px;padding:.6rem .75rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);color:var(--text);font:inherit;font-size:16px;margin-bottom:.6rem">
-<ul class="rowlist" id="pl-rows">${rows.map((r) => `<li><a style="font-weight:600;font-size:.875rem">${esc(r.part)}</a><span class="meta">${money(r.price)}${r.core > 0 ? '<br>+ ' + money(r.core) + ' core' : ''}</span></li>`).join('')}</ul>
-<p class="note">From the yard's own published price list. Pull prices change — confirm at the counter.</p></div></details>
-<script>(function(){var q=document.getElementById('pl-q'),rows=[].slice.call(document.querySelectorAll('#pl-rows li'));if(!q)return;q.addEventListener('input',function(){var v=q.value.trim().toLowerCase();rows.forEach(function(li){li.style.display=!v||li.textContent.toLowerCase().indexOf(v)>-1?'':'none';});});})();</script>`;
+
+const money = (n) => '$' + n.toFixed(2);
+// Tear-A-Part prices a few parts by length; every other row is per part.
+const PRICE_UNITS = { feet: 'foot', inches: 'inch', pair: 'pair' };
+/* The yards publish their till's item list, so a few rows are not a part
+ * price. A price page never shows:
+ *   - a row with no price (waived fees, "refused warranty" markers, lines
+ *     that only carry a core charge);
+ *   - a row whose name holds a line break (two rows of the yard's page that
+ *     were read as one, so the price belongs to neither);
+ *   - bookkeeping entries nobody buys;
+ *   - catalytic converters (standing rule 4 in CLAUDE.md).
+ * Everything else is shown as the yard words it. */
+const NOT_A_PART_PRICE = /\b(reimbursement|store credit|refund(ed)?)\b|catalytic/i;
+/** [name, price, core, per] tuples → sorted rows {part, price, core, unit}. */
+export function priceRows(tuples) {
+  const rows = [];
+  for (const [name, price, core, per] of tuples) {
+    const part = String(name == null ? '' : name);
+    if (!part.trim() || /[\r\n]/.test(part) || NOT_A_PART_PRICE.test(part)) continue;
+    const p = Number.parseFloat(price);
+    if (!Number.isFinite(p) || p <= 0) continue;
+    const c = Number.parseFloat(core);
+    const u = String(per || '').toLowerCase();
+    rows.push({ part: part.replace(/\s+/g, ' ').trim(), price: p, core: Number.isFinite(c) && c > 0 ? c : 0, unit: u && u !== 'each' ? (PRICE_UNITS[u] || u) : '' });
+  }
+  return rows.sort((a, b) => a.part.localeCompare(b.part, 'en', { sensitivity: 'base' }) || a.price - b.price);
+}
+
+/** One chain's price file, ready to render. `rows` is the chain's list
+ * (null when the chain has none); `yards` is each yard's own list for a
+ * per-yard file. A per-yard chain has a chain list only when more than half
+ * of its yards post the same list word for word (`base`); the other yards
+ * then get a page each. With no such list, every yard has its own page and
+ * the chain page shows the spread of prices instead. */
+export function buildPriceBook(chain, data) {
+  if (chain.kind === 'list') {
+    const rows = priceRows((Array.isArray(data) ? data : Object.values(data || {})).map((p) => [p && p.description, p && p.price, p && p.corePrice, p && p.per]));
+    return rows.length ? { rows, yards: null, base: null, lists: 1 } : null;
+  }
+  const yards = new Map(), groups = new Map();
+  for (const [loc, parts] of Object.entries(data || {})) {
+    const rows = priceRows(Object.entries(parts || {}).map(([k, v]) => [k, v && v.price, v && v.core]));
+    if (!rows.length) continue;
+    yards.set(loc, rows);
+    const sig = rows.map((r) => `${r.part}\t${r.price}\t${r.core}`).join('\n');
+    if (!groups.has(sig)) groups.set(sig, []);
+    groups.get(sig).push(loc);
+  }
+  if (!yards.size) return null;
+  const biggest = [...groups.values()].sort((a, b) => b.length - a.length)[0];
+  const base = biggest.length * 2 > yards.size ? { rows: yards.get(biggest[0]), locs: new Set(biggest) } : null;
+  return { rows: base ? base.rows : null, yards, base, lists: groups.size };
+}
+// Parsed once per isolate and hour, like the junkyards index: yard, car and
+// price pages of one chain then share the work.
+const priceBooks = new Map();
+async function priceBook(chain) {
+  const hit = priceBooks.get(chain.file);
+  if (hit && Date.now() - hit.at < 3600_000) return hit.book;
+  const data = await dataJson(chain.file, 3600);
+  // A failed refetch keeps serving the last good copy.
+  if (!data) return hit ? hit.book : null;
+  const book = buildPriceBook(chain, data);
+  priceBooks.set(chain.file, { at: Date.now(), book });
+  return book;
+}
+/** Does this yard have a price page of its own (rather than its chain's)? */
+const ownPriceList = (book, loc) => !!(book.yards && book.yards.has(loc) && !(book.base && book.base.locs.has(loc)));
+const priceUrl = (chain, loc) => `${SITE}/prices/${chain.slug}${loc ? '/' + slugify(loc) : ''}`;
+
+/** The price list a yard's pages should show and link: its rows, the page
+ * that holds the full list, and what to call it. Null when the yard's chain
+ * publishes no list we hold. */
+async function yardPrices(location) {
+  const chain = priceChainFor(location);
+  const book = chain && await priceBook(chain).catch(() => null);
+  if (!book) return null;
+  if (!book.yards) return { chain, rows: book.rows, url: priceUrl(chain), label: chain.label };
+  const rows = book.yards.get(location);
+  if (!rows) return null;
+  const own = ownPriceList(book, location);
+  return { chain, rows, url: priceUrl(chain, own ? location : ''), label: own ? location : chain.label };
+}
+/** Just the link, for car pages. A chain with one list for every yard needs
+ * no fetch at all; a per-yard chain needs its file to know which page. */
+async function yardPriceLink(location) {
+  const chain = priceChainFor(location);
+  if (!chain) return null;
+  if (chain.kind === 'list') return { url: priceUrl(chain), label: chain.label };
+  const p = await yardPrices(location);
+  return p && { url: p.url, label: p.label };
+}
+
+/* The handful of parts a yard page shows from the list. A row qualifies only
+ * when its name IS the part (optionally with one of the plain qualifiers
+ * below), so "ALTERNATOR BRACKET" or "STARTER SOLENOID" never stands in for
+ * the part. The row is shown in the yard's own words with its own price; a
+ * list that words a part differently simply shows fewer rows. No engines,
+ * transmissions or catalytic converters here (standing rule 4). */
+const COMMON_PARTS = [['ALTERNATOR'], ['STARTER'], ['RADIATOR'], ['A/C COMPRESSOR', 'AC COMPRESSOR'], ['WATER PUMP'], ['POWER STEERING PUMP'], ['BRAKE CALIPER'],
+  ['DOOR', 'DOOR COMPLETE'], ['FENDER'], ['HOOD'], ['HEADLIGHT', 'HEADLAMP COMPOSITE', 'HEADLIGHT COMPOSITE (NON HID)', 'HEADLIGHT ASSEMBLY (NON-HID/BALLAST)'],
+  ['STEERING WHEEL'], ['WINDOW REGULATOR', 'WINDOW REGULATOR W/MOTOR', 'WINDOW REGULATOR W/ MOTOR'], ['INSTRUMENT CLUSTER']];
+const COMMON_QUALIFIER = /^(| \(ALL\)| \(NON HYBRID\)| ?- ?CAR| CAR| \(CAR\)| BARE| BARE ?- ?CAR| BARE \(CAR\)| ?- ?CAR BARE| ASSEMBLY| ASSY)$/;
+const COMMON_MAX = 8;
+export function commonParts(rows) {
+  const out = [];
+  for (const names of COMMON_PARTS) {
+    let best = null;
+    for (const name of names) {
+      for (const r of rows) {
+        const d = r.part.toUpperCase();
+        if (d.startsWith(name) && COMMON_QUALIFIER.test(d.slice(name.length)) && (!best || d.length < best.part.length)) best = r;
+      }
+      if (best) break;
+    }
+    if (best) out.push(best);
+    if (out.length === COMMON_MAX) break;
+  }
+  return out;
+}
+const PRICE_NOTE = 'Price and core charge are the yard\'s own published figures. Prices change, so confirm at the counter.';
+function priceTable(rows, id) {
+  const cores = rows.some((r) => r.core > 0);
+  return `<table class="ptable"${id ? ` id="${id}"` : ''}><thead><tr><th>Part</th><th class="num">Price</th>${cores ? '<th class="num">Core</th>' : ''}</tr></thead><tbody>${rows.map((r) => `<tr><td>${esc(r.part)}</td><td class="num">${money(r.price)}${r.unit ? `<small> / ${esc(r.unit)}</small>` : ''}</td>${cores ? `<td class="num">${r.core > 0 ? money(r.core) : ''}</td>` : ''}</tr>`).join('')}</tbody></table>`;
+}
+/** Yard page: a short table of common parts and a link to the full list. */
+function commonPricesHtml(prices) {
+  if (!prices) return '';
+  const rows = commonParts(prices.rows);
+  const link = `<a href="${prices.url}">Full ${esc(prices.label)} price list</a> (${plural(prices.rows.length, 'part')})`;
+  return `<div class="section" id="prices">Common part prices here <span>· ${rows.length ? `${rows.length} of ${prices.rows.length.toLocaleString()} parts` : plural(prices.rows.length, 'part')}</span></div>
+<div class="car-card">${rows.length ? priceTable(rows) : ''}<p class="note"${rows.length ? '' : ' style="margin-top:0"'}>${link}. ${PRICE_NOTE}</p></div>`;
 }
 
 /* Yard set-out dates are plain YYYY-MM-DD strings in the yard's local day;
@@ -234,6 +364,14 @@ body{padding-bottom:2.5rem}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.5rem;list-style:none;padding:0;margin:0}
 .grid a{display:block;padding:.6rem .75rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);text-decoration:none;color:var(--text);font-weight:700;font-size:.9rem}
 .grid a small,.grid .tile small{display:block;font-family:var(--font-mono);font-size:.625rem;color:var(--text-dim);font-weight:500;margin-top:.15rem}
+.ptable{width:100%;border-collapse:collapse;font-size:.875rem}
+.ptable th{font-family:var(--font-mono);font-size:.625rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--text-dim);text-align:left;padding:0 0 .4rem;border-bottom:1px solid var(--border)}
+.ptable td{padding:.5rem 0;border-top:1px dashed var(--border);vertical-align:top;font-weight:600;overflow-wrap:anywhere}
+.ptable tbody tr:first-child td{border-top:0}
+.ptable .num{font-family:var(--font-mono);font-size:.8125rem;font-weight:500;text-align:right;white-space:nowrap;padding-left:.8rem}
+.ptable th.num{font-size:.625rem;font-weight:600}
+.ptable .num small{color:var(--text-dim)}
+.pl-q{width:100%;min-height:44px;padding:.6rem .75rem;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);color:var(--text);font:inherit;font-size:16px;margin-bottom:.8rem}
 .grid .tile{display:block;padding:.6rem .75rem;border:1px dashed var(--border);border-radius:var(--radius-sm);color:var(--text);font-weight:700;font-size:.9rem}
 .statenav{font-family:var(--font-mono);font-size:.7rem;line-height:1.9;color:var(--text-dim)}
 .statenav a{color:var(--accent);text-decoration:none}
@@ -337,7 +475,7 @@ function yardPlace(idx, loc) {
 /** Breadcrumb trail as the page's kicker line: links, then the current page. */
 const crumbKicker = (crumbs, tail) => `<p class="kicker">${crumbs.map(([n, u]) => `<a href="${esc(u)}">${esc(n)}</a>`).join(' · ')}${tail ? ' · ' + esc(tail) : ''}</p>`;
 /** Hub links for pages with nothing more specific to offer (gone car, 404s). */
-const HUB_LINKS = `<p class="links"><a href="${SITE}/junkyards">Junkyards by state</a> · <a href="${SITE}/yards">All covered yards</a> · <a href="${SITE}/landed">What landed this week</a></p>`;
+const HUB_LINKS = `<p class="links"><a href="${SITE}/junkyards">Junkyards by state</a> · <a href="${SITE}/yards">All covered yards</a> · <a href="${SITE}/landed">What landed this week</a> · <a href="${SITE}/prices">Yard price lists</a></p>`;
 
 
 function carCard({ name, yardName, where, row, metaHtml, specs, clock, href, badge }) {
@@ -408,9 +546,11 @@ ${HUB_LINKS}${storesLine()}`,
     ? { short: daysOn > avg ? `On the lot ${daysOn} days · past the ~${avg} typical` : `Day ${daysOn + 1} on the lot · ~${avg} typical ${basis === 'yard' ? 'at this yard' : basis === 'chain' ? 'for this chain' : 'across yards'}`, soon: cw.soon }
     : (daysOn != null ? { short: `Day ${daysOn + 1} on the lot`, soon: false } : null);
 
-  const [siteUrl, price, priceRows] = [pypStoreUrl(v.id, yardName, v.make, v.model) || await yardSiteFor(yardName), priceListFor(yardName), await yardPriceRows(yardName)];
+  // The price list is a page of its own (/prices/...), linked from here: the
+  // same few hundred rows used to be repeated on every car page of a chain.
+  const [siteUrl, price] = [pypStoreUrl(v.id, yardName, v.make, v.model) || await yardSiteFor(yardName), y.location ? await yardPriceLink(yardName) : null];
   const yardLinks = (siteUrl || price)
-    ? `<p class="share-sub" style="margin:.2rem 0 .4rem">${siteUrl ? `<a href="${esc(siteUrl)}" target="_blank" rel="noopener">Yard's own inventory page &#8599;</a>` : ''}${siteUrl && price ? ' &middot; ' : ''}${price ? `<a href="${esc(price.url)}" target="_blank" rel="noopener">${esc(price.label)} price list &#8599;</a>` : ''}</p>` : '';
+    ? `<p class="share-sub" style="margin:.2rem 0 .4rem">${siteUrl ? `<a href="${esc(siteUrl)}" target="_blank" rel="noopener">Yard's own inventory page &#8599;</a>` : ''}${siteUrl && price ? ' &middot; ' : ''}${price ? `<a href="${price.url}">${esc(price.label)} price list</a>` : ''}</p>` : '';
   // Breadcrumb: Junkyards > State > City > Yard > this car.
   const trail = [...(place ? place.crumbs : [['Junkyards', SITE + '/junkyards']]), ...(y.location ? [[yardName, yardHref]] : [])];
   const more = [
@@ -425,7 +565,6 @@ ${carCard({ name: '', yardName, where, row: v.row, metaHtml: meta, specs: [trim,
 <div class="clock${cw.soon ? ' soon' : ''}">${esc(cw.line)}<small>Based on how long departed cars sat on this lot before they left — an estimate, not a schedule. Call the yard before a long drive.</small></div>
 </div>
 ${yardLinks}
-${priceListHtml(priceRows, yardName)}
 <div class="cta"><a class="btn btn-primary" href="${SITE}/#car=${encodeURIComponent(key)}" data-app-path="/car/${encodeURIComponent(key)}">Open in YardScout</a><a class="btn" href="${SITE}/#tab=alerts">Alert me when the next ${esc(v.make)} ${esc(v.model)} lands near me</a></div>
 ${more ? `<p class="links">${more}</p>` : ''}
 ${storesLine()}
@@ -509,7 +648,7 @@ export async function renderYardPage(slug) {
     const car = `${r[iYear]} ${r[iMake]} ${r[iModel]}`.trim();
     return `<li><a href="${SITE}/car/${encodeURIComponent(key)}">${esc(car)}</a><span class="meta">${r[iRow] ? 'Row ' + esc(r[iRow]) + '<br>' : ''}${esc(fmtDate(r[iDate]))}</span></li>`;
   }).join('');
-  const [ySite, yPrice, yRows] = [(recent.length && pypStoreUrl(recent[0][iId], name)) || await yardSiteFor(name), priceListFor(name), await yardPriceRows(name)];
+  const [ySite, yPrices] = [(recent.length && pypStoreUrl(recent[0][iId], name)) || await yardSiteFor(name), await yardPrices(name)];
   const lifeLine = avg
     ? `Cars typically last ~${avg} days here${basis === 'chain' ? ' (chain average)' : basis === 'all' ? ' (all-yards average)' : ''}, based on when departed cars arrived and left.`
     : 'Not enough departure history yet to estimate how long cars last here.';
@@ -522,7 +661,7 @@ export async function renderYardPage(slug) {
   const mapUrl = typeof lat === 'number' && typeof lng === 'number' && Number.isFinite(lat) && Number.isFinite(lng) ? `https://www.google.com/maps/search/?api=1&query=${lat}%2C${lng}` : '';
   const outLinks = [
     ySite ? `<a href="${esc(ySite)}" target="_blank" rel="noopener">Yard's own inventory page &#8599;</a>` : '',
-    yPrice ? `<a href="${esc(yPrice.url)}" target="_blank" rel="noopener">${esc(yPrice.label)} price list &#8599;</a>` : '',
+    yPrices ? `<a href="${yPrices.url}">${esc(yPrices.label)} price list</a>` : '',
     mapUrl ? `<a href="${mapUrl}" target="_blank" rel="noopener">Map &#8599;</a>` : '',
   ].filter(Boolean).join(' &middot; ');
   const stamp = esc(fmtStamp(dir.scrapedAt));
@@ -547,7 +686,7 @@ ${makesBlock}
 ${modelsBlock}
 <div class="section">New arrivals: set out in the last 7 days <span>· ${dated ? recent.length.toLocaleString() : 'no dates published'}</span></div>
 <div class="car-card">${items ? `<ul class="rowlist">${items}</ul>` : `<p style="margin:0;color:var(--text-dim);font-size:.875rem">${noArrivals}</p>`}${recent.length > SHOW ? `<p class="note">Showing the newest ${SHOW} of ${recent.length.toLocaleString()}. The full list is in the app.</p>` : ''}</div>
-${priceListHtml(yRows, name)}
+${commonPricesHtml(yPrices)}
 <div class="cta"><a class="btn btn-primary" href="${SITE}/">Search this yard in YardScout</a><a class="btn" href="${SITE}/#tab=alerts">Alert me when a car I want lands here</a></div>
 ${nearest.length ? `<div class="section">Nearest tracked yards</div>
 <div class="car-card">${yardRows(nearest, place.y)}</div>` : ''}
@@ -581,7 +720,8 @@ export async function renderSitemap() {
     + sitemapUrl('/yards', landedAt) + sitemapUrl('/landed', landedAt)
     + (landed ? Object.entries(landed.makes).filter(([, m]) => m.total >= 20).map(([mk]) => sitemapUrl(`/landed/${slugify(mk)}`, landedAt)).join('') : '')
     + dir.yards.map((y) => slugify(y[iLoc])).filter((s) => s && !seen.has(s) && seen.add(s))
-      .map((s) => sitemapUrl(`/yard/${s}`, dir.scrapedAt)).join('');
+      .map((s) => sitemapUrl(`/yard/${s}`, dir.scrapedAt)).join('')
+    + await priceSitemapUrls(idx).catch(() => '');
   const modified = httpDate(dir.scrapedAt);
   return new Response(`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls}</urlset>`, {
     headers: { 'content-type': 'application/xml; charset=utf-8', 'cache-control': 'public, max-age=3600', ...(modified ? { 'last-modified': modified } : {}) },
@@ -862,7 +1002,7 @@ export async function renderJunkyardsPage(stateArg, cityArg) {
 <div class="section">United States <span>· ${plural(us.length, 'state')}</span></div>${grid(us)}
 ${ca.length ? `<div class="section">Canada <span>· ${ca.length} province${ca.length === 1 ? '' : 's'}</span></div>${grid(ca)}` : ''}
 ${JY_CTA}
-<p class="links"><a href="${SITE}/yards">All ${idx.all.length} covered yards on one page</a> · <a href="${SITE}/landed">What landed this week, by make</a></p>
+<p class="links"><a href="${SITE}/yards">All ${idx.all.length} covered yards on one page</a> · <a href="${SITE}/landed">What landed this week, by make</a> · <a href="${SITE}/prices">Yard price lists</a></p>
 ${storesLine()}${junkyardNote(stamp)}`;
     // This page lists states, so its ItemList is the state pages; the yards
     // themselves are listed (and marked up) on each state and city page.
@@ -959,4 +1099,147 @@ function junkyardSitemapUrls(idx) {
   const u = (p) => sitemapUrl(p, idx.scrapedAt);
   return u('/junkyards') + [...idx.states.values()].map((st) => u(`/junkyards/${st.slug}`)
     + [...st.cities.values()].map((c) => u(`/junkyards/${st.slug}/${c.slug}`)).join('')).join('');
+}
+
+/* ---------- /prices — the yards' own price lists ----------
+ *   /prices                      every chain with a list and a tracked yard
+ *   /prices/<chain>              the chain's list; for a chain whose yards
+ *                                post different lists, the price spread and
+ *                                a link to each yard's list
+ *   /prices/<chain>/<yard-slug>  one yard's list, where it is not the chain's
+ * Data and rules: PRICE_CHAINS and priceRows() above. The price files have
+ * no "read on" date, so these pages carry no Last-Modified and no sitemap
+ * <lastmod>, and say nothing about when the list was read. */
+const PRICES_URL = SITE + '/prices';
+const PRICE_FILTER = '<input type="search" id="pl-q" class="pl-q" placeholder="Filter parts…" aria-label="Filter the price list">';
+const PRICE_FILTER_JS = `<script>(function(){var q=document.getElementById('pl-q'),rows=[].slice.call(document.querySelectorAll('#pl-rows tbody tr'));if(!q)return;q.addEventListener('input',function(){var v=q.value.trim().toLowerCase();rows.forEach(function(tr){tr.style.display=!v||tr.textContent.toLowerCase().indexOf(v)>-1?'':'none';});});})();</script>`;
+function pricesMissing(title, msg, status = 404) {
+  return layout({ title: `${title} — YardScout`, desc: msg, canonical: PRICES_URL, status, robots: 'noindex', cache: status === 404 ? 120 : 60, body: `<h1 class="share-h">${esc(title)}</h1><p class="share-sub">${esc(msg)}</p><div class="cta"><a class="btn btn-primary" href="${PRICES_URL}">All price lists</a></div>${HUB_LINKS}` });
+}
+/** "alternator $32.99 plus $9.99 core, starter $30.99": real rows of the
+ * list, for a page description. */
+const priceExamples = (rows) => commonParts(rows).slice(0, 3).map((r) => `${r.part.toLowerCase()} ${money(r.price)}${r.core > 0 ? ` plus ${money(r.core)} core` : ''}`).join(', ');
+/** Lowest and highest posted price per part across a set of yards' lists. */
+function priceRanges(book, locs) {
+  const parts = new Map();
+  for (const loc of locs) {
+    for (const r of book.yards.get(loc)) {
+      let s = parts.get(r.part);
+      if (!s) parts.set(r.part, s = { part: r.part, lo: r.price, hi: r.price, n: 0 });
+      s.n++;
+      if (r.price < s.lo) s.lo = r.price;
+      if (r.price > s.hi) s.hi = r.price;
+    }
+  }
+  return [...parts.values()].sort((a, b) => a.part.localeCompare(b.part, 'en', { sensitivity: 'base' }));
+}
+const yardWhere = (y) => [y.city, y.state].filter(Boolean).join(', ');
+
+export async function renderPricesPage(chainArg, yardArg) {
+  const idx = await junkyardIndex().catch(() => null);
+  // The chain's tracked yards, from the junkyards index (null: index down).
+  const yardsOf = (chain) => (idx ? idx.all.filter((y) => priceChainFor(y.loc) === chain).sort((a, b) => a.loc.localeCompare(b.loc)) : null);
+
+  if (!chainArg) {
+    if (!idx) return pricesMissing('Price lists are briefly unavailable', 'Try again in a minute.', 503);
+    const chains = PRICE_CHAINS.map((c) => ({ c, yards: yardsOf(c) })).filter((x) => x.yards.length).sort((a, b) => a.c.label.localeCompare(b.c.label));
+    const covered = chains.reduce((n, x) => n + x.yards.length, 0);
+    const biggest = [...chains].sort((a, b) => b.yards.length - a.yards.length).slice(0, 3).map((x) => x.c.label);
+    const desc = `Pull-it-yourself part price lists from ${chains.length} self-service junkyard chains and yards, covering ${covered} of the ${idx.all.length} yards YardScout tracks: ${biggest.join(', ')} and more.`;
+    const body = `<p class="kicker">Price lists</p>
+<h1 class="share-h">Self-service junkyard price lists</h1>
+<p class="share-sub">What a part costs at the counter when you pull it yourself, from the price lists these yards publish. ${chains.length} chains and yards, covering ${covered} of the ${idx.all.length} yards YardScout tracks. The other tracked yards have no price list on YardScout yet.</p>
+<div class="car-card"><ul class="rowlist">${chains.map(({ c, yards }) => `<li><a href="${priceUrl(c)}">${esc(c.label)} price list<span class="where">${esc([...new Set(yards.map((y) => y.state))].sort().join(', '))}</span></a><span class="meta">${plural(yards.length, 'yard')}</span></li>`).join('')}</ul></div>
+${JY_CTA}
+<p class="links"><a href="${SITE}/junkyards">Junkyards by state and city</a> · <a href="${SITE}/yards">All covered yards</a> · <a href="${SITE}/landed">What landed this week</a></p>
+${storesLine()}<p class="note">${PRICE_NOTE}</p>`;
+    return layout({ title: `Junkyard price lists: pull prices at ${plural(covered, 'self-service yard')} — YardScout`, ogTitle: 'Self-service junkyard price lists', desc, canonical: PRICES_URL, body, cache: 3600, spec: `${chains.length} PRICE LISTS · ${covered} YARDS`, ld: [ldItemList('Self-service junkyard price lists', chains.map(({ c }) => [`${c.label} price list`, priceUrl(c)]))] });
+  }
+
+  const chain = PRICE_CHAINS.find((c) => c.slug === safeDecode(chainArg).toLowerCase());
+  if (!chain) return pricesMissing('No price list by that name', 'YardScout has no price list for that chain or yard.');
+  const yards = yardsOf(chain);
+  if (yards && !yards.length) return pricesMissing(`${chain.label} is not tracked right now`, `YardScout does not track a ${chain.label} yard at the moment, so its price list is not shown.`);
+  const book = await priceBook(chain).catch(() => null);
+  if (!book) return pricesMissing(`${chain.label} price list is briefly unavailable`, 'Try again in a minute.', 503);
+  const chainUrl = priceUrl(chain);
+  const hubCrumb = ['Price lists', PRICES_URL];
+  const backLinks = `<p class="links"><a href="${PRICES_URL}">All junkyard price lists</a> · <a href="${SITE}/junkyards">Junkyards by state and city</a></p>`;
+
+  if (yardArg) {
+    const key = safeDecode(yardArg).toLowerCase();
+    // One list for the whole chain: a yard's URL is just that list.
+    if (!book.yards) return (!yards || yards.some((y) => slugify(y.loc) === key)) ? Response.redirect(chainUrl, 301) : pricesMissing('No price list for that yard', `YardScout does not track a ${chain.label} yard by that name.`);
+    const loc = [...book.yards.keys()].find((l) => slugify(l) === key && (!idx || idx.byLoc.has(l)));
+    if (!loc) return pricesMissing('No price list for that yard', `YardScout has no ${chain.label} price list for a yard by that name.`);
+    if (!ownPriceList(book, loc)) return Response.redirect(chainUrl, 301);
+    const rows = book.yards.get(loc);
+    const place = yardPlace(idx, loc);
+    const where = place ? [place.city && place.city.name, place.st.code].filter(Boolean).join(', ') : '';
+    const canonical = priceUrl(chain, loc);
+    const examples = priceExamples(rows);
+    const desc = `${loc} self-service price list, ${plural(rows.length, 'part')}${examples ? ': ' + examples : ''}. From the yard's own published list; confirm at the counter.`;
+    const body = `${crumbKicker([hubCrumb, [chain.label, chainUrl]], loc)}
+<h1 class="share-h">${esc(loc)} price list</h1>
+<p class="share-sub">${plural(rows.length, 'part')} on the price list ${esc(chain.label)} publishes for this yard${where ? ` in ${esc(where)}` : ''}. ${esc(chain.label)} prices are not the same at every yard, so this page is this yard's list only.</p>
+<p class="links"><a href="${SITE}/yard/${slugify(loc)}">${esc(loc)} inventory</a> · <a href="${chainUrl}">${esc(chain.label)} prices at every yard</a></p>
+<div class="car-card">${PRICE_FILTER}${priceTable(rows, 'pl-rows')}<p class="note">${PRICE_NOTE}</p></div>
+${JY_CTA}${backLinks}${storesLine()}${PRICE_FILTER_JS}`;
+    return layout({ title: `${loc} price list: ${plural(rows.length, 'part')} and their pull prices — YardScout`, ogTitle: `${loc} price list`, desc, canonical, body, cache: 3600, spec: `${rows.length} PARTS · ${where || chain.label}`, ld: [ldBreadcrumb([hubCrumb, [chain.label, chainUrl], [loc, canonical]])] });
+  }
+
+  const source = CHAIN_PRICE_PAGES.find((c) => c[2] === chain.label);
+  if (book.rows) {
+    // One list: the chain's own, or the one most of its yards post.
+    const rows = book.rows;
+    const onList = yards ? (book.base ? yards.filter((y) => book.base.locs.has(y.loc)) : yards) : null;
+    const ownList = yards && book.base ? yards.filter((y) => ownPriceList(book, y.loc)) : [];
+    const examples = priceExamples(rows);
+    const desc = `${chain.label} self-service price list, ${plural(rows.length, 'part')}${examples ? ': ' + examples : ''}. From the yard's own published list; confirm at the counter.`;
+    const scope = book.base
+      ? `${plural(rows.length, 'part')} on the price list posted for ${onList ? onList.length : book.base.locs.size} of the ${onList ? onList.length + ownList.length : book.yards.size} ${esc(chain.label)} yards YardScout tracks.${ownList.length ? ` The other ${ownList.length === 1 ? 'yard posts its' : `${ownList.length} post their`} own list, linked below.` : ''}`
+      : `${plural(rows.length, 'part')} on the self-service price list ${esc(chain.label)} publishes.${onList ? ` YardScout shows this list for the ${plural(onList.length, 'yard')} below.` : ''}`;
+    const body = `${crumbKicker([hubCrumb], chain.label)}
+<h1 class="share-h">${esc(chain.label)} price list</h1>
+<p class="share-sub">${scope}${source && !book.base ? ` <a href="${esc(source[1])}" target="_blank" rel="noopener">${esc(chain.label)}'s own price page &#8599;</a>` : ''}</p>
+<div class="car-card">${PRICE_FILTER}${priceTable(rows, 'pl-rows')}<p class="note">${PRICE_NOTE}</p></div>
+${onList && onList.length ? `<div class="section">Yards on this list <span>· ${plural(onList.length, 'yard')}</span></div>
+<div class="car-card">${yardRows(onList)}</div>` : ''}
+${ownList.length ? `<div class="section">Yards with their own price list <span>· ${plural(ownList.length, 'yard')}</span></div>
+<div class="car-card"><ul class="rowlist">${ownList.map((y) => `<li><a href="${priceUrl(chain, y.loc)}">${esc(y.loc)} price list<span class="where">${esc(yardWhere(y))}</span></a><span class="meta">${plural(book.yards.get(y.loc).length, 'part')}</span></li>`).join('')}</ul></div>` : ''}
+${JY_CTA}${backLinks}${storesLine()}${PRICE_FILTER_JS}`;
+    return layout({ title: `${chain.label} price list: ${plural(rows.length, 'part')} and their pull prices — YardScout`, ogTitle: `${chain.label} price list`, desc, canonical: chainUrl, body, cache: 3600, spec: `${rows.length} PARTS${onList ? ` · ${plural(onList.length, 'YARD').toUpperCase()}` : ''}`, ld: [ldBreadcrumb([hubCrumb, [chain.label, chainUrl]])] });
+  }
+
+  // Every yard posts its own list and no list covers most of them: show the
+  // spread, and send the reader to their yard's exact list.
+  const listed = yards ? yards.filter((y) => book.yards.has(y.loc)) : [...book.yards.keys()].map((loc) => ({ loc, city: '', state: '' }));
+  if (!listed.length) return pricesMissing(`${chain.label} is not tracked right now`, `YardScout does not track a ${chain.label} yard with a price list at the moment.`);
+  const ranges = priceRanges(book, listed.map((y) => y.loc));
+  const lists = new Set(listed.map((y) => book.yards.get(y.loc).map((r) => `${r.part}\t${r.price}\t${r.core}`).join('\n'))).size;
+  const examples = commonParts(ranges).slice(0, 3).map((r) => `${r.part.toLowerCase()} ${r.lo === r.hi ? money(r.lo) : `${money(r.lo)} to ${money(r.hi)}`}`).join(', ');
+  const desc = `${chain.label} self-service price lists for ${plural(listed.length, 'yard')}, ${plural(ranges.length, 'part')}${examples ? ': ' + examples : ''}. Prices differ by yard; each yard's own published list is linked.`;
+  const body = `${crumbKicker([hubCrumb], chain.label)}
+<h1 class="share-h">${esc(chain.label)} price list</h1>
+<p class="share-sub">${esc(chain.label)} posts a price list for each yard, and they are not all the same: ${plural(lists, 'different list')} across the ${plural(listed.length, 'yard')} YardScout tracks. Pick your yard for its exact prices; the table under the yards shows the lowest and highest posted price for each part.</p>
+<div class="section">Price list by yard <span>· ${plural(listed.length, 'yard')}</span></div>
+<div class="car-card"><ul class="rowlist">${listed.map((y) => `<li><a href="${priceUrl(chain, y.loc)}">${esc(y.loc)} price list<span class="where">${esc(yardWhere(y))}</span></a><span class="meta">${plural(book.yards.get(y.loc).length, 'part')}</span></li>`).join('')}</ul></div>
+<div class="section">Lowest and highest posted price <span>· ${plural(ranges.length, 'part')}</span></div>
+<div class="car-card">${PRICE_FILTER}<table class="ptable" id="pl-rows"><thead><tr><th>Part</th><th class="num">Low</th><th class="num">High</th><th class="num">Yards</th></tr></thead><tbody>${ranges.map((r) => `<tr><td>${esc(r.part)}</td><td class="num">${money(r.lo)}</td><td class="num">${money(r.hi)}</td><td class="num">${r.n}</td></tr>`).join('')}</tbody></table>
+<p class="note">"Yards" is how many of the ${listed.length} lists carry the part. Core charges are on each yard's own list. ${PRICE_NOTE}</p></div>
+${JY_CTA}${backLinks}${storesLine()}${PRICE_FILTER_JS}`;
+  return layout({ title: `${chain.label} price list: ${plural(ranges.length, 'part')}, prices at ${plural(listed.length, 'yard')} — YardScout`, ogTitle: `${chain.label} price lists`, desc, canonical: chainUrl, body, cache: 3600, spec: `${ranges.length} PARTS · ${plural(listed.length, 'YARD').toUpperCase()}`, ld: [ldBreadcrumb([hubCrumb, [chain.label, chainUrl]])] });
+}
+
+/** Sitemap entries for the price pages: the hub, each chain with a tracked
+ * yard, and each yard that has a list of its own. No <lastmod>: the price
+ * files do not say when they were read. */
+async function priceSitemapUrls(idx) {
+  if (!idx) return '';
+  const used = new Set(idx.all.map((y) => priceChainFor(y.loc)));
+  const chains = PRICE_CHAINS.filter((c) => used.has(c));
+  // Only the per-yard files need reading, to know which yards differ.
+  const books = await Promise.all(chains.map((c) => (c.kind === 'dict' ? priceBook(c).catch(() => null) : null)));
+  return sitemapUrl('/prices') + chains.map((c, i) => sitemapUrl(`/prices/${c.slug}`)
+    + (books[i] ? [...books[i].yards.keys()].filter((loc) => idx.byLoc.has(loc) && ownPriceList(books[i], loc)).map((loc) => sitemapUrl(`/prices/${c.slug}/${slugify(loc)}`)).join('') : '')).join('');
 }

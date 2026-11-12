@@ -74,10 +74,23 @@ const SHARDS = {
   6: { vpic: {}, vehicles: Array.from({ length: 14 }, (_, k) => Array.from({ length: 14 - k }, (_, n) =>
     [6000 + k * 100 + n, '', 1990 + n, `Make${String(k + 1).padStart(2, '0')}`, n % 2 ? 'Beta' : 'Alpha', String(k), daysAgo(30 + n), 6, 0, 0, 0])).flat() },
 };
+// Pick-n-Pull's price file as the scraper saves it: the till's item list,
+// including rows that are not a part price.
+const PNP_PRICES = [
+  { description: 'ALTERNATOR', price: '32.99', corePrice: '9.99' }, { description: 'ALTERNATOR BRACKET', price: '5.00', corePrice: '0.00' },
+  { description: 'STARTER', price: '30.99', corePrice: '9.99' }, { description: 'STARTER SOLENOID', price: '11.99', corePrice: '0.00' },
+  { description: 'HOOD - CAR', price: '64.99', corePrice: '0.00' }, { description: 'HOOD LATCH', price: '9.99', corePrice: '0.00' },
+  { description: 'RADIATOR  (W/O SHROUD)', price: '69.99', corePrice: '0.00' }, { description: 'ENGINE (COMPLETE)', price: '299.99', corePrice: '50.00' },
+  { description: 'TRIM <b>MOLDING</b>', price: '0.79', corePrice: '0.00', per: 'Inches' },
+  { description: 'MISCELLANEOUS', price: '0.00', corePrice: '0.00' }, { description: 'CORE - ALUM WHEEL', price: '0.00', corePrice: '53.99' },
+  { description: 'AIR BAGWE DO NOT SELL\r\n            AIR CLEANER', price: '14.00', corePrice: '0.00' },
+  { description: 'CATALYTIC CONVERTER', price: '99.00', corePrice: '0.00' }, { description: 'Reimbursement', price: '5662.80', corePrice: '0.00' },
+];
 let dataDown = true;
 globalThis.fetch = async (u) => {
   u = String(u);
   const json = (o, status = 200) => new Response(JSON.stringify(o), { status, headers: { 'content-type': 'application/json' } });
+  if (u.endsWith('/data/picknpull_pricing.json')) return json(PNP_PRICES);
   if (u.endsWith('/data/junkyards.json')) return dataDown ? new Response('down', { status: 502 }) : json(JUNKYARDS);
   if (u.endsWith('/data/landed.json')) return json(LANDED);
   if (u.endsWith('/data/yards_added.json')) return json([]);
@@ -235,7 +248,9 @@ check('sitemap keeps the existing yard + landed URLs', locs.includes('https://ya
 check('sitemap: home page, hubs, make pages and the metro alias are in', ['/', '/yards', '/landed', '/junkyards', '/landed/ford', '/landed/lexus', '/junkyards/washington/seattle'].every((p) => p in lastmod), Object.keys(lastmod).join(' '));
 check('sitemap: makes with under 20 cars on the lots are left out', !('/landed/yugo' in lastmod));
 check('sitemap: no car pages', !locs.some((l) => l.includes('/car/')));
-check('sitemap: every data-driven URL has <lastmod> = the scan time', Object.entries(lastmod).every(([p, lm]) => (p === '/' ? lm === '' : lm === '2026-10-30T11:58:45Z')), JSON.stringify(Object.entries(lastmod).filter(([p, lm]) => p !== '/' && lm !== '2026-10-30T11:58:45Z')));
+const undated = (p) => p === '/' || p.startsWith('/prices');   // no scan time to quote for these
+check('sitemap: every scan-driven URL has <lastmod> = the scan time', Object.entries(lastmod).every(([p, lm]) => (undated(p) ? lm === '' : lm === '2026-10-30T11:58:45Z')), JSON.stringify(Object.entries(lastmod).filter(([p, lm]) => !undated(p) && lm !== '2026-10-30T11:58:45Z')));
+check('sitemap: price pages for chains with a tracked yard only, no lastmod (the price files carry no date)', lastmod['/prices'] === '' && lastmod['/prices/pick-n-pull'] === '' && !('/prices/tear-a-part' in lastmod) && Object.keys(lastmod).filter((p) => p.startsWith('/prices')).length === 2, Object.keys(lastmod).filter((p) => p.startsWith('/prices')).join(' '));
 check('sitemap: home page has no guessed lastmod', lastmod['/'] === '');
 check('sitemap: no <changefreq>', !r.html.includes('changefreq'));
 check('sitemap: no duplicate URLs', new Set(locs).size === locs.length);
@@ -295,6 +310,11 @@ check('yard: models with counts and model-year span', modelsBlock.includes('<spa
 check('yard: model name escaped', modelsBlock.includes('Ford Ranger &lt;b&gt;<small>1 car · 2001</small>') && !r.html.includes('Ranger <b>'));
 check('yard: newest-arrivals list kept (2 cars, newest first)', section(r.html, 'New arrivals: set out in the last 7 days').indexOf('/car/1HGFB2F50CL000001') > 0 && section(r.html, 'New arrivals: set out in the last 7 days').indexOf('/car/1HGFB2F50CL000001') < section(r.html, 'New arrivals: set out in the last 7 days').indexOf('/car/1FTRF12W09K000002'));
 check('yard: plain map link from its lat/lng', r.html.includes('<a href="https://www.google.com/maps/search/?api=1&query=32.7%2C-96.8" target="_blank" rel="noopener">Map &#8599;</a>'));
+const commonBlock = section(r.html, 'Common part prices here');
+check('yard: short common-parts table instead of the full price list', (commonBlock.match(/<tr><td>/g) || []).length === 3 && commonBlock.includes('<td>ALTERNATOR</td><td class="num">$32.99</td><td class="num">$9.99</td>') && commonBlock.includes('<td>STARTER</td>') && commonBlock.includes('<td>HOOD - CAR</td><td class="num">$64.99</td><td class="num"></td>') && commonBlock.includes('· 3 of 9 parts'), commonBlock.slice(0, 500));
+check('yard: an accessory row never stands in for the part; no engine row', !commonBlock.includes('BRACKET') && !commonBlock.includes('SOLENOID') && !commonBlock.includes('ENGINE') && !commonBlock.includes('RADIATOR'));
+check('yard: links to the full price list page', commonBlock.includes('<a href="https://yardscout.io/prices/pick-n-pull">Full Pick-n-Pull price list</a> (9 parts)') && r.html.includes('<a href="https://yardscout.io/prices/pick-n-pull">Pick-n-Pull price list</a>'));
+check('yard: no filter box, no 472-row list', !r.html.includes('id="pl-q"') && !r.html.includes('id="pl-rows"') && !r.html.includes('tap to open'));
 check('yard: call to action unchanged', r.html.includes(`<a class="btn btn-primary" href="https://yardscout.io/">Search this yard in YardScout</a>`) && r.html.includes('Alert me when a car I want lands here'));
 check('yard: breadcrumb Junkyards > State > City > Yard', ldOf(r.html, 'BreadcrumbList').itemListElement.map((e) => e.item).join() === 'https://yardscout.io/junkyards,https://yardscout.io/junkyards/texas,https://yardscout.io/junkyards/texas/dallas,https://yardscout.io/yard/pick-n-pull-dallas-south');
 check('yard: links to its city and state pages', r.html.includes('href="https://yardscout.io/junkyards/texas/dallas">Junkyards in Dallas, TX</a>') && r.html.includes('href="https://yardscout.io/junkyards/texas">Junkyards in Texas</a>'));
@@ -329,12 +349,39 @@ check('car: og:title keeps the share wording', meta(r.html, 'og:title') === '201
 check('car: breadcrumb Junkyards > State > City > Yard > Car', ldOf(r.html, 'BreadcrumbList').itemListElement.map((e) => e.item).join() === 'https://yardscout.io/junkyards,https://yardscout.io/junkyards/texas,https://yardscout.io/junkyards/texas/dallas,https://yardscout.io/yard/pick-n-pull-dallas-south,https://yardscout.io/car/1HGFB2F50CL000001');
 check('car: links to its yard, its make page and its city page', r.html.includes('href="https://yardscout.io/yard/pick-n-pull-dallas-south">Pick-n-Pull - Dallas South inventory</a>') && r.html.includes('href="https://yardscout.io/landed/honda">Honda arrivals at self-service yards this week</a>') && r.html.includes('href="https://yardscout.io/junkyards/texas/dallas">Junkyards in Dallas, TX</a>'));
 check('car: facts still shown (row, set-out date, VIN, trim, lot clock)', r.html.includes('Row 12') && r.html.includes('VIN 1HGFB2F50CL000001') && r.html.includes('EX · FWD') && r.html.includes('Day 1 on the lot'));
+check('car: no inline price list', !r.html.includes('class="ptable"') && !r.html.includes('id="pl-q"') && !r.html.includes('$32.99') && !r.html.includes('ALTERNATOR') && !r.html.includes('tap to open'));
+check('car: links to the price list page instead', r.html.includes('<a href="https://yardscout.io/prices/pick-n-pull">Pick-n-Pull price list</a>'));
+check('car: page is its own content, not a price list (under 20 KB)', r.html.length < 20000, r.html.length);
 check('car: app link unchanged', r.html.includes('href="https://yardscout.io/#car=1HGFB2F50CL000001" data-app-path="/car/1HGFB2F50CL000001"'));
 r = await get('/car/1HGCM56405A000000');
 check('gone car → 404 noindex, one <h1>, no JSON-LD', r.status === 404 && /content="noindex"/.test(r.html) && h1s(r.html).join() === 'This car is no longer listed' && ldBlocks(r.html).length === 0);
 check('gone car: links to the hubs (its yard and make are no longer known)', ['/junkyards', '/yards', '/landed'].every((p) => r.html.includes(`href="https://yardscout.io${p}"`)));
 r = await get('/car/not%20a%20car');
 check('bad car link → 404 noindex with one <h1>', r.status === 404 && h1s(r.html).length === 1 && /content="noindex"/.test(r.html));
+
+/* ---------- /prices: a chain with one list (per-yard chains: prices_unit.mjs) ---------- */
+r = await get('/prices/pick-n-pull');
+check('price page → 200', r.status === 200, r.status);
+check('price page: one <h1> "<Chain> price list"', h1s(r.html).join('|') === 'Pick-n-Pull price list', JSON.stringify(h1s(r.html)));
+check('price page: title and description from the list itself', titleOf(r.html) === 'Pick-n-Pull price list: 9 parts and their pull prices — YardScout' && meta(r.html, 'description') === 'Pick-n-Pull self-service price list, 9 parts: alternator $32.99 plus $9.99 core, starter $30.99 plus $9.99 core, hood - car $64.99. From the yard&#39;s own published list; confirm at the counter.', `${titleOf(r.html)} | ${meta(r.html, 'description')}`);
+check('price page: BreadcrumbList only, no Offer/Product markup', ldBlocks(r.html).map((b) => b['@type']).join() === 'BreadcrumbList' && !FORBIDDEN_LD.test(r.html) && ldOf(r.html, 'BreadcrumbList').itemListElement.map((e) => e.item).join() === 'https://yardscout.io/prices,https://yardscout.io/prices/pick-n-pull');
+check('price page: indexable, canonical, and no Last-Modified (the file has no read date)', meta(r.html, 'robots') === 'index,follow' && canonical(r.html) === 'https://yardscout.io/prices/pick-n-pull' && !r.headers.get('last-modified') && !/as of|read on|updated/i.test(section(r.html, '<h1')));
+const priceRowsHtml = (r.html.match(/<table class="ptable" id="pl-rows">[\s\S]*?<\/table>/) || [''])[0];
+check('price page: every priced row, in the yard\'s words, with core', (priceRowsHtml.match(/<tr><td>/g) || []).length === 9 && priceRowsHtml.includes('<td>ALTERNATOR</td><td class="num">$32.99</td><td class="num">$9.99</td>') && priceRowsHtml.includes('<td>ENGINE (COMPLETE)</td><td class="num">$299.99</td><td class="num">$50.00</td>') && priceRowsHtml.includes('<td>RADIATOR (W/O SHROUD)</td>'), priceRowsHtml.slice(0, 300));
+check('price page: priced by length says so', priceRowsHtml.includes('<td class="num">$0.79<small> / inch</small></td>'));
+check('price page: part name escaped', priceRowsHtml.includes('TRIM &lt;b&gt;MOLDING&lt;/b&gt;') && !r.html.includes('<b>MOLDING'));
+check('price page: no unpriced, run-together or bookkeeping rows, no catalytic converter', !/MISCELLANEOUS|CORE - ALUM|DO NOT SELL|AIR CLEANER|CATALYTIC|Reimbursement|5662/i.test(r.html));
+check('price page: lists the chain\'s tracked yards and the chain\'s own price page', section(r.html, 'Yards on this list').includes('href="https://yardscout.io/yard/pick-n-pull-dallas-south"') && section(r.html, 'Yards on this list').includes('href="https://yardscout.io/yard/pick-n-pull-lynnwood"') && r.html.includes('· 2 yards') && r.html.includes('href="https://www.picknpull.com/part-pricing" target="_blank" rel="noopener">Pick-n-Pull\'s own price page'));
+check('price page: filter box', r.html.includes('id="pl-q"') && r.html.includes("querySelectorAll('#pl-rows tbody tr')"));
+r = await get('/prices');
+check('/prices hub → 200, one <h1>, lists chains with a tracked yard only', r.status === 200 && h1s(r.html).join('|') === 'Self-service junkyard price lists' && r.html.includes('href="https://yardscout.io/prices/pick-n-pull">Pick-n-Pull price list<span class="where">TX, WA</span></a><span class="meta">2 yards</span>') && !r.html.includes('/prices/tear-a-part'));
+check('/prices hub: counts and ItemList', titleOf(r.html) === 'Junkyard price lists: pull prices at 2 self-service yards — YardScout' && r.html.includes('covering 2 of the 9 yards YardScout tracks') && ldBlocks(r.html).map((b) => b['@type']).join() === 'ItemList' && ldOf(r.html, 'ItemList').numberOfItems === 1 && !FORBIDDEN_LD.test(r.html), titleOf(r.html));
+r = await get('/prices/pick-n-pull/pick-n-pull-dallas-south');
+check('yard URL under a one-list chain → 301 to the chain page', r.status === 301 && r.headers.get('location') === 'https://yardscout.io/prices/pick-n-pull', `${r.status} ${r.headers.get('location')}`);
+for (const p of ['/prices/pick-n-pull/duke-city-u-pull', '/prices/tear-a-part', '/prices/nope', '/prices/%E0%A4%A', '/prices/pick-n-pull/x/y']) {
+  r = await get(p);
+  check(`${p} → 404${p.endsWith('/x/y') ? '' : ' noindex, one <h1>'}`, r.status === 404 && (p.endsWith('/x/y') || (/content="noindex"/.test(r.html) && h1s(r.html).length === 1)), r.status);
+}
 
 /* ---------- www → apex for rendered pages ---------- */
 r = await get('/junkyards/texas/dallas?utm_source=x', 'www.yardscout.io');
