@@ -1,4 +1,4 @@
-# Parts workstream — status (updated 2026-11-06, §13–22 and §24 sensors done; §23 facelifts and §23.6 routing in a second session)
+# Parts workstream — status (updated 2026-11-12, §25 truck generation audit on branch parts/gen-splits-trucks; earlier: §13–24)
 
 Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 (`_GAP_MECH`, `_gap_rows`, `_GAP_GENERIC_KEYS`, per-model blocks),
@@ -313,3 +313,29 @@ The generic-only count re-matches every distinct year/make/model in
 - Leads from an r/XTerra owner thread ("What parts to grab at the junkyard?", 2026-11-12). These are leads, NOT a fitment basis; each needs its own stated basis and price before a row is added:
   second gen (2005–15): roof gear basket and lid (owners report no longer sold new), IPDM relay box (owners prefer the later black revision), rear seat-bottom latch with pull loop, under-seat subwoofer (premium audio: option), roof lights and covers (Off-Road / Pro-4X: option), ECM, door lock actuators, window regulators, cam/crank sensors, ignition coils, evap canister, wiper and light stalks (markings wear off), sun visors, rear door latches, rear cupholder, first-aid kit.
 - Option parts stay flagged `option` with $0 to ranking.
+
+## §25 truck generation audit (2026-11-12, hub task; branch `parts/gen-splits-trucks`, not merged)
+
+- Done (PARTS_GAPS §25): Xterra's five rows gated to 2005–15 (Nissan numbers
+  differ per generation); Tacoma 3rd gen, Ranger 2019 gen and Cherokee KL
+  windows end at 2023 (2024 = new Tacoma/Ranger generations, KL ended);
+  Ranger 1998–2011 pieces no longer say "fits 1998–2018". Narrowing only.
+- **Effect for the hub to decide on:** 604 1st-gen Xterras (2000–04) and
+  the one 2024 Tacoma now get no card. No 1st gen row has a price basis.
+  Choices: accept; carry the 2nd gen bands onto 1st gen pieces (the
+  fitment is in §25.1; a price call, not a fitment one); or price research.
+- Needs a price: Xterra 1st gen tail lights (2001–04), roof rack, side
+  steps, console lid. 2000 tail-light number not in the OEM data.
+- Unresolved: Xterra rack/steps standard vs option on 2nd gen trims;
+  in-window mid-cycle leads (XJ 1997 interior, Tacoma 2001, Xterra 2009).
+- Network: www.nissanpartsdeal.com and parts.nissanusa.com do not resolve
+  from cloud sessions (not on the allowlist). §25.1 uses search excerpts
+  for everything except the tail lights. Allowing those hosts would let a
+  session cite catalog pages directly.
+- Owner-thread Xterra leads (2026-11-12 section above): none added. None
+  has a price basis; several are also excluded by rule (ignition coils)
+  or are option content needing their own source (subwoofer, roof lights).
+- Not this workstream's file: Tacoma has no `MODEL_GENERATIONS` row
+  (the interchange/model-generation table). Worth adding (1995–2004,
+  2005–15, 2016–23, 2024+) so lifespan and part-first windows agree.
+- No app change needed; goes live with the next scan after merge.
