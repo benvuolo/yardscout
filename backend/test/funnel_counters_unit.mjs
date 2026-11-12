@@ -12,6 +12,8 @@
  *              someone who is not Pro, and never for the re-open after a
  *              checkout or an unlock code.
  *   store taps store-click + store-click/<store>-<place>, web only.
+ *   store link one builder decides the store per platform (Android to
+ *              Google Play, iPhone and iPad to the App Store).
  *
  * Run: node backend/test/funnel_counters_unit.mjs   (APP_JS=<path> tests
  * another copy of app.js, e.g. the previous commit's, to see it fail). */
@@ -183,6 +185,36 @@ function boot({ hostname = 'yardscout.io', webdriver = false, native = false, an
   check('store tap sends the funnel counter and the per-store, per-place counter', JSON.stringify(b.events()) === JSON.stringify(['store-click', 'store-click/play-banner']), JSON.stringify(b.events()));
   check('store taps are wired once for every link on the page, web only',
     /if \(!IS_NATIVE\) document\.addEventListener\('click', \(e\) => \{\n  const a = e\.target && e\.target\.closest && e\.target\.closest\('a\[href\]'\);\n  const ev = a && storeClickEvent\(a\.href, storeClickPlace\(a\)\);\n  if \(ev\) track\(ev\);\n\}, true\);/.test(src));
+}
+
+/* ---------- 4. the store a web visitor is sent to (one builder) ---------- */
+{
+  const wsp = fn('webStorePlatform'), sl = fn('storeLink');
+  check('app.js has one store-link builder (webStorePlatform + storeLink)', !!wsp && !!sl);
+  if (wsp && sl) {
+    const ctx = {};
+    vm.createContext(ctx);
+    new vm.Script(`${konst('APP_STORE_URL')}\n${konst('PLAY_URL')}\n${wsp}\n${sl}\nglobalThis.__api = { webStorePlatform, storeLink };`).runInContext(ctx);
+    const { webStorePlatform, storeLink } = ctx.__api;
+    const UA = {
+      android: 'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Mobile Safari/537.36',
+      iphone: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1',
+      ipad: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15',
+      mac: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36',
+      win: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36',
+    };
+    check('store: an Android browser is an Android visitor', webStorePlatform(UA.android, 'Linux armv8l', 5) === 'android');
+    check('store: an iPhone is an iOS visitor', webStorePlatform(UA.iphone, 'iPhone', 5) === 'ios');
+    check('store: an iPad (reports as a Mac with touch) is an iOS visitor', webStorePlatform(UA.ipad, 'MacIntel', 5) === 'ios');
+    check('store: a Mac or Windows desktop is neither', webStorePlatform(UA.mac, 'MacIntel', 0) === null && webStorePlatform(UA.win, 'Win32', 0) === null);
+    const play = storeLink('android'), apple = storeLink('ios');
+    check('store: Android goes to Google Play', /^https:\/\/play\.google\.com\/store\/apps\/details\?id=io\.yardscout\.app$/.test(play.url) && play.name === 'Google Play' && play.store === 'play', JSON.stringify(play));
+    check('store: iOS goes to the App Store', /^https:\/\/apps\.apple\.com\/app\/.*id6817126581$/.test(apple.url) && apple.name === 'the App Store' && apple.store === 'appstore', JSON.stringify(apple));
+    check('store: every "Get the app" builder goes through storeLink (no second place picks a store URL)',
+      (src.match(/\bPLAY_URL\b/g) || []).length === 2 && (src.match(/\bAPP_STORE_URL\b/g) || []).length === 2
+      && /href="\$\{storeLink\(WEB_STORE\)\.url\}"/.test(src) && /const st = storeLink\(platform\);/.test(src));
+    check('store: the Pro sheet link is set per platform (applyStoreLinks)', /function applyStoreLinks\(/.test(src));
+  }
 }
 
 console.log(failures ? `\n${failures} FAILURES` : '\nALL PASS');

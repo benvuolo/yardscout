@@ -2912,6 +2912,17 @@ const watchGateLead = (t) => ({
   'watch-toast': 'Free: a recap every Monday of what landed. Pro: a push within hours, so you get there before the parts are gone.',
   'watch-near-miss': 'Pro would have pushed that one the day it landed. Monday recaps are free; same-day alerts are Pro.',
 })[t] || '';
+/* The pinned footer shows the one primary button that applies (web checkout,
+ * the phone's store, or the app's subscribe) and nothing for a Pro member. */
+function refreshUpgradeFoot() {
+  const sheet = document.getElementById('upgrade-sheet'), foot = document.getElementById('upgrade-foot');
+  if (!sheet || !foot) return;
+  const apiMode = !IS_NATIVE && window.YSApi && YSApi.enabled();
+  const any = ['ent-buy', 'store-buy', 'iap-buy'].some(id => { const el = document.getElementById(id); return el && el.style.display !== 'none'; });
+  const on = any && !isPro() && !apiMode;
+  foot.style.display = on ? '' : 'none';
+  sheet.classList.toggle('no-foot', !on);
+}
 function openUpgradeSheet(trigger, carKey) {
   upgradeTrigger = trigger || 'unknown';
   lastPaywallAt = Date.now();   // the rating sheet never follows a paywall (maybeAskForReview)
@@ -2973,6 +2984,10 @@ function openUpgradeSheet(trigger, carKey) {
       + 'stays free. Subscribe through '
       + (IS_ANDROID ? 'Google Play' : 'the App Store') + '; cancel anytime.';
   }
+  // A Pro member has nothing to buy or restore here.
+  if (IS_NATIVE && isPro()) { const iap = document.getElementById('native-iap'); if (iap) iap.style.display = 'none'; }
+  refreshUpgradeFoot();
+  { const sc = document.getElementById('upgrade-scroll'); if (sc) sc.scrollTop = 0; }   // every open starts at the lead
   document.getElementById('upgrade-sheet').classList.add('open');
   document.getElementById('upgrade-backdrop').classList.add('open');
   // Native app: swap the waitlist for the StoreKit subscribe flow when the
@@ -8950,6 +8965,42 @@ function hasWatchFor(make, model) {
 const FREE_WATCH_LIMIT = 5;              // mirrors MAX_WATCHES_FREE in backend/src/devices.js
 const APP_STORE_URL = 'https://apps.apple.com/app/yardscout-junkyard-parts/id6817126581';
 const PLAY_URL = 'https://play.google.com/store/apps/details?id=io.yardscout.app';
+/* Which store a web visitor's phone uses, decided in ONE place (2026-11-12:
+ * the Pro sheet's link was static HTML and sent Android visitors to the App
+ * Store). null = not a phone or tablet we recognise: both stores are offered. */
+function webStorePlatform(ua, platform, touchPoints) {
+  ua = String(ua || '');
+  if (/android/i.test(ua)) return 'android';
+  if (/iphone|ipod|ipad/i.test(ua) || (platform === 'MacIntel' && touchPoints > 1)) return 'ios';   // iPadOS reports as a Mac
+  return null;
+}
+function storeLink(platform) {
+  return platform === 'android'
+    ? { store: 'play', url: PLAY_URL, name: 'Google Play', device: 'Android' }
+    : { store: 'appstore', url: APP_STORE_URL, name: 'the App Store', device: 'iPhone' };
+}
+const WEB_STORE = IS_NATIVE ? null : webStorePlatform(navigator.userAgent, navigator.platform, navigator.maxTouchPoints);
+/* The Pro sheet's store links for a web visitor. A phone sees its own store
+ * only; anything else sees both. With web billing not live, the phone's
+ * store button is the sheet's pinned primary button (#store-buy) and the
+ * same link is not repeated in the body. */
+function applyStoreLinks(platform, billing) {
+  const $ = (id) => document.getElementById(id);
+  const st = platform ? storeLink(platform) : null;
+  const show = (el, on) => { if (el) el.style.display = on ? '' : 'none'; };
+  show($('ent-appstore-link'), platform !== 'android');
+  show($('ent-play-link'), platform !== 'ios');
+  const acct = $('ent-store-acct'), cancel = $('ent-store-cancel');
+  if (acct) acct.textContent = platform === 'android' ? 'your Google Play account' : platform === 'ios' ? 'your App Store account' : 'your App Store or Google Play account';
+  if (cancel) cancel.textContent = platform === 'android' ? 'Play Store subscriptions' : platform === 'ios' ? 'iOS Settings' : 'iOS Settings or Play Store subscriptions';
+  const primary = $('ent-store-primary'), pAcct = $('ent-store-primary-acct');
+  if (primary && st) { primary.href = st.url; primary.textContent = 'Get YardScout on ' + st.name; }
+  if (pAcct && st) pAcct.textContent = platform === 'android' ? 'your Google Play account' : 'your App Store account';
+  show($('store-buy'), !!st && !billing);
+  show($('ent-store-row'), billing || !st);
+  const head = $('ent-appstore-head');
+  if (head) head.textContent = billing ? 'Prefer the app?' : 'Pro is also in the iPhone and Android apps';
+}
 /* Store-link taps are a funnel step (2026-11-12): "Get the app" is the next
  * step a web watcher is offered, and nothing counted it. One listener covers
  * every store link on the page: store-click/<store>-<place>. Web only (the
@@ -9136,10 +9187,9 @@ function showWatchToast(label, opts = {}) {
   } else if (IS_NATIVE && !pushOn && document.getElementById('native-push-enable')) {
     next = `<span>Turn on notifications so we can tell you.</span>
       <button type="button" class="btn btn-primary btn-sm" data-act="push">Turn on</button>`;
-  } else if (!IS_NATIVE && /android|iphone|ipad|ipod/i.test(navigator.userAgent)) {
-    const android = /android/i.test(navigator.userAgent);
+  } else if (!IS_NATIVE && WEB_STORE) {
     next = `<span>New ones light up in Alerts. For a push when one lands, get the free app.</span>
-      <a class="btn btn-primary btn-sm" data-act="app" href="${android ? PLAY_URL : APP_STORE_URL}" target="_blank" rel="noopener">Get the app</a>`;
+      <a class="btn btn-primary btn-sm" data-act="app" href="${storeLink(WEB_STORE).url}" target="_blank" rel="noopener">Get the app</a>`;
   } else if (!IS_NATIVE) {
     // Desktop: no store to send them to — say where matches show up, and
     // that a phone can be told the day one lands.
@@ -9702,10 +9752,7 @@ if (!IS_NATIVE && 'serviceWorker' in navigator) {
   const qs = new URLSearchParams(location.search).get('appbanner');
   const forced = (qs === 'ios' || qs === 'android') ? qs : null;
   const standalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
-  const isIOS = /iphone|ipod|ipad/i.test(navigator.userAgent)
-    || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1); // iPadOS
-  const isAndroid = /android/i.test(navigator.userAgent);
-  const platform = forced || (isIOS ? 'ios' : (isAndroid ? 'android' : null));
+  const platform = forced || WEB_STORE;
   if (!platform) return; // desktop: unchanged
   if (!forced && (standalone || localStorage.getItem('ys_app_promo') === '1')) return;
   // Shown from the FIRST visit (2026-10-28): Apple's Smart App Banner is
@@ -9718,10 +9765,11 @@ function showAppPromo(platform) {
   const el = document.getElementById('app-promo');
   if (!el) return;
   const link = document.getElementById('app-promo-link');
-  link.href = platform === 'android' ? PLAY_URL : APP_STORE_URL;
+  const st = storeLink(platform);
+  link.href = st.url;
   link.textContent = 'Get the app';
-  link.setAttribute('aria-label', platform === 'android' ? 'Get the app on Google Play' : 'Get the app on the App Store');
-  document.querySelector('#app-promo .app-promo-text strong').textContent = platform === 'android' ? 'YardScout for Android' : 'YardScout for iPhone';
+  link.setAttribute('aria-label', 'Get the app on ' + st.name);
+  document.querySelector('#app-promo .app-promo-text strong').textContent = 'YardScout for ' + st.device;
   el.style.display = '';
   const x = document.getElementById('app-promo-close');
   if (!x.__wired) {
@@ -10301,6 +10349,8 @@ function introOfferText(p) {
     button: free ? `Try free for ${n > 1 ? span : 'a ' + unit}` : `Start for ${p.introPrice}${n > 1 ? `/${unit} for ${span}` : ` — first ${unit}`}`,
     line: free ? `Free for your first ${span}, then ${p.price}/mo. Cancel anytime.`
       : `${p.introPrice}${n > 1 ? `/${unit}` : ''} for your first ${span}, then ${p.price}/mo. Cancel anytime.`,
+    // Under the pinned button, which already states the offer: what follows it.
+    then: `Then ${p.price}/mo. Cancel anytime.`,
   };
 }
 
@@ -10311,6 +10361,9 @@ async function refreshNativeIapUi() {
   const wrap = document.getElementById('native-iap');
   if (!P || !wrap) return;
   wrap.style.display = '';
+  // The subscribe button and the first price are pinned (#upgrade-foot).
+  { const buy = document.getElementById('iap-buy'); if (buy) buy.style.display = ''; }
+  refreshUpgradeFoot();
   const status = document.getElementById('iap-status');
   try {
     const p = await P.getProduct({ productId: IAP_PRODUCT_ID });
@@ -10318,7 +10371,8 @@ async function refreshNativeIapUi() {
       const sub = document.getElementById('iap-subscribe');
       // Intro offer (2026-10-30): the store only reports it to people who are
       // eligible (new subscribers), and applies it at checkout by itself —
-      // say it plainly on the button and in one line under it.
+      // say it plainly on the button and in one line under it. Both are in
+      // the pinned footer, so the first price is on screen with the button.
       const intro = introOfferText(p);
       if (sub && intro) sub.textContent = intro.button;
       else if (sub && p.price) sub.textContent = 'Subscribe — ' + p.price + '/mo';
@@ -10330,7 +10384,7 @@ async function refreshNativeIapUi() {
           line.className = 'iap-intro';
           sub.insertAdjacentElement('afterend', line);
         }
-        if (line) line.textContent = intro.line;
+        if (line) line.textContent = intro.then;
       } else if (line) line.remove();
       if (status) status.textContent = '';
     } else if (status) {
@@ -10554,6 +10608,8 @@ async function refreshNativeIapUi() {
     if (typeof refreshEmailAlertsUi === 'function') refreshEmailAlertsUi();
   }
 
+  applyStoreLinks(WEB_STORE, false);
+  refreshUpgradeFoot();
   /* ---- purchase button: shown only once the Worker reports billing live ---- */
   (async () => {
     try {
@@ -10561,8 +10617,10 @@ async function refreshNativeIapUi() {
       if (ok && data.billing) {
         const buy = $id('ent-buy');
         if (buy) buy.style.display = '';
-        const head = $id('ent-appstore-head');
-        if (head) head.textContent = 'Prefer the app?';
+        const note = $id('ent-buy-note');
+        if (note) note.style.display = '';
+        applyStoreLinks(WEB_STORE, true);   // "Prefer the app?" + this phone's store
+        refreshUpgradeFoot();
         // The static sheet intro ends "Subscribe in the YardScout iOS app." —
         // contradicts the live web checkout button right below it.
         const sub = document.querySelector('#upgrade-sheet .sheet-sub');

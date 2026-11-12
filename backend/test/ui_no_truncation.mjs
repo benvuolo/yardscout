@@ -335,6 +335,82 @@ const amLinesCheck = async (page) => {
   if (am.length && page.viewportSize().width === 390 && Math.max(...am) > 8) throw new Error(`an aftermarket card shows ${Math.max(...am)} warning lines at 390px (max 8)`);
   return am.length;
 };
+/* Pro sheet (2026-11-12): the primary button and the price line under it are
+ * pinned. On a 390x844, 375x667 and 320x568 screen, at 100% and 200% text,
+ * the button's bottom edge and the price line must be inside the viewport
+ * without scrolling, and the button must be the thing a tap there hits. */
+const FOLD_SIZES = [[390, 844], [375, 667], [320, 568]];
+const foldCheck = async (page, label, btnSel, lineSel) => {
+  const was = page.viewportSize();
+  try {
+    for (const [w, h] of FOLD_SIZES) {
+      await page.setViewportSize({ width: w, height: h });
+      for (const z of [1, 2]) {
+        if (z !== 1) await page.evaluate(ZOOM_FN, true);
+        await settle(page, 150);
+        const m = await page.evaluate(({ btnSel, lineSel }) => {
+          const sheet = document.getElementById('upgrade-sheet').getBoundingClientRect();
+          const b = document.querySelector(btnSel), l = lineSel ? document.querySelector(lineSel) : null;
+          if (!b || !b.getClientRects().length) return { err: 'no visible ' + btnSel };
+          const br = b.getBoundingClientRect(), lr = l && l.getClientRects().length ? l.getBoundingClientRect() : null;
+          const hit = document.elementFromPoint(br.left + br.width / 2, br.top + br.height / 2);
+          return { top: Math.round(br.top), bottom: Math.round(br.bottom), vh: innerHeight, sheetTop: Math.round(sheet.top),
+            hit: !!hit && (hit === b || b.contains(hit)), line: lineSel ? (lr ? [Math.round(lr.top), Math.round(lr.bottom)] : null) : 'n/a' };
+        }, { btnSel, lineSel });
+        if (z !== 1) await page.evaluate(ZOOM_FN, false);
+        const at = `${label} at ${w}x${h}, ${z * 100}% text`;
+        if (m.err) throw new Error(`${at}: ${m.err}`);
+        if (m.bottom > m.vh || m.top < Math.max(0, m.sheetTop)) throw new Error(`${at}: the buy button is not fully on screen (${m.top}..${m.bottom} of ${m.vh})`);
+        if (!m.hit) throw new Error(`${at}: something covers the buy button`);
+        if (m.line === null) throw new Error(`${at}: no price line under the button`);
+        if (Array.isArray(m.line) && (m.line[1] > m.vh || m.line[0] < m.bottom - 1)) throw new Error(`${at}: the price line is not on screen under the button (${m.line[0]}..${m.line[1]} of ${m.vh})`);
+      }
+    }
+  } finally {
+    await page.setViewportSize(was);
+    await settle(page, 150);
+  }
+};
+/* The app shells' sheet, as refreshNativeIapUi leaves it with the store's
+ * intro offer (the shells run this same markup and CSS; IS_NATIVE itself
+ * cannot be flipped in a loaded page). The real shells are covered by
+ * backend/test/pro_sheet_fold_e2e.mjs. */
+const appSheet = async (page, android) => {
+  await resetUi(page);
+  await page.evaluate((android) => {
+    openUpgradeSheet('header-pill');
+    document.getElementById('upgrade-form-wrap').style.display = 'none';
+    document.getElementById('ent-buy').style.display = 'none';
+    document.getElementById('store-buy').style.display = 'none';
+    document.getElementById('native-iap').style.display = '';
+    document.getElementById('iap-buy').style.display = '';
+    const sub = document.getElementById('iap-subscribe');
+    const offer = introOfferText({ price: '$8.99', introPrice: '$1.99', introPeriod: '1 month', introCycles: 1 });
+    sub.textContent = offer.button;
+    let line = document.getElementById('iap-intro');
+    if (!line) { line = document.createElement('div'); line.id = 'iap-intro'; line.className = 'iap-intro'; sub.insertAdjacentElement('afterend', line); }
+    line.textContent = offer.then;
+    const note = document.getElementById('iap-note');
+    window.__iapNote = window.__iapNote || note.innerHTML;
+    if (android) note.innerHTML = 'Auto-renews monthly through your Google Play account &mdash; cancel anytime in Play Store subscriptions. <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a>.';
+    refreshUpgradeFoot();
+  }, android);
+  await settle(page, 300);
+};
+const appSheetOff = async (page) => {
+  await resetUi(page);
+  await page.evaluate(() => {
+    document.getElementById('upgrade-form-wrap').style.display = '';
+    document.getElementById('ent-buy').style.display = '';
+    document.getElementById('native-iap').style.display = 'none';
+    document.getElementById('iap-buy').style.display = 'none';
+    const line = document.getElementById('iap-intro'); if (line) line.remove();
+    document.getElementById('iap-subscribe').textContent = 'Subscribe \u2014 $8.99/mo';
+    if (window.__iapNote) document.getElementById('iap-note').innerHTML = window.__iapNote;
+    applyStoreLinks(WEB_STORE, true);
+    refreshUpgradeFoot();
+  });
+};
 const SCREENS = [
   ['results', async (page) => { await tab(page, 'live'); }],
   // Mobile-web store banner (shown on phones only; forced here for each store).
@@ -922,22 +998,79 @@ const SCREENS = [
     await page.evaluate((ks) => { for (const k of ks) if (!savedCars[k]) toggleSaved(k); renderLive(); openSavedSheet(); }, ks);
     await settle(page, 400);
   }],
+  // Web with checkout live (what yardscout.io serves; the run answers
+  // /api/ent/config with billing on).
   ['pro-sheet', async (page) => {
     await resetUi(page);
     await page.evaluate(() => openUpgradeSheet('header-pill'));
     await settle(page, 400);
+    if (!(await page.evaluate(() => document.getElementById('ent-buy').style.display !== 'none'))) throw new Error('web checkout button not shown (billing config not picked up)');
+    await foldCheck(page, 'web Pro sheet', '#ent-checkout', '#ent-buy .sheet-foot-line');
+    // The feature list scrolls under the pinned footer; the footer is not part of the scroller.
+    await page.evaluate(() => {
+      const sc = document.getElementById('upgrade-scroll'), foot = document.getElementById('upgrade-foot');
+      if (sc.contains(foot)) throw new Error('the footer is inside the scrolling part');
+      const before = document.getElementById('ent-checkout').getBoundingClientRect().top;
+      sc.scrollTop = sc.scrollHeight;
+      if (Math.abs(document.getElementById('ent-checkout').getBoundingClientRect().top - before) > 1) throw new Error('the buy button moved when the sheet scrolled');
+      sc.scrollTop = 0;
+    });
   }],
   ['pro-sheet-bottom', async (page) => {
     await resetUi(page);
-    await page.evaluate(() => { openUpgradeSheet('header-pill'); const s = document.getElementById('upgrade-sheet'); s.scrollTop = s.scrollHeight; });
+    await page.evaluate(() => { openUpgradeSheet('header-pill'); const s = document.getElementById('upgrade-scroll'); s.scrollTop = s.scrollHeight; });
     await settle(page, 400);
+    await page.evaluate(() => {
+      // Scrolled to the end, the last line of fine print clears the footer.
+      const sc = document.getElementById('upgrade-scroll'), foot = document.getElementById('upgrade-foot').getBoundingClientRect();
+      const last = [...sc.querySelectorAll('#ent-redeem, #upgrade-form-wrap')].filter(e => e.getClientRects().length).pop();
+      if (last && last.getBoundingClientRect().bottom > foot.top + 1) throw new Error('the end of the sheet is hidden behind the footer');
+    });
   }],
   ['pro-sheet-car', async (page) => {
     await tab(page, 'live');
     const [k] = await firstKeys(page, 1);
     await page.evaluate((k) => openUpgradeSheet('card-value', encodeURIComponent(k)), k);
     await settle(page, 400);
+    await foldCheck(page, 'web Pro sheet from a car', '#ent-checkout', '#ent-buy .sheet-foot-line');
   }],
+  // A phone on the web when checkout is not live: that phone's store leads.
+  ...['ios', 'android'].map(pl => ['pro-sheet-store-' + pl, async (page) => {
+    await resetUi(page);
+    await page.evaluate((pl) => {
+      openUpgradeSheet('header-pill');
+      document.getElementById('ent-buy').style.display = 'none';
+      document.getElementById('ent-buy-note').style.display = 'none';
+      applyStoreLinks(pl, false);
+      refreshUpgradeFoot();
+      const a = document.getElementById('ent-store-primary');
+      const want = pl === 'android' ? /^https:\/\/play\.google\.com\// : /^https:\/\/apps\.apple\.com\//;
+      if (!want.test(a.href)) throw new Error(pl + ' visitor is sent to ' + a.href);
+      const other = document.getElementById(pl === 'android' ? 'ent-appstore-link' : 'ent-play-link');
+      if (other.getClientRects().length) throw new Error(pl + ' visitor is shown the other store too');
+    }, pl);
+    await settle(page, 300);
+    await foldCheck(page, 'store-led Pro sheet (' + pl + ')', '#ent-store-primary', '#store-buy .sheet-foot-line');
+  }, async (page) => {
+    await resetUi(page);
+    await page.evaluate(() => { document.getElementById('ent-buy').style.display = ''; document.getElementById('ent-buy-note').style.display = ''; applyStoreLinks(WEB_STORE, true); refreshUpgradeFoot(); });
+  }]),
+  // The app shells' footer (StoreKit / Play Billing with the intro offer).
+  ...[['pro-sheet-app', false], ['pro-sheet-app-android', true]].map(([name, android]) => [name, async (page) => {
+    await appSheet(page, android);
+    await foldCheck(page, name, '#iap-subscribe', '#iap-intro');
+  }, appSheetOff]),
+  ['pro-sheet-member', async (page) => {
+    // A Pro member: no button to pin, and the sheet's own bottom padding returns.
+    await page.evaluate(() => { localStorage.setItem('jh_pro', '1'); localStorage.setItem('jh_pro_source', 'account'); applyProGates(); renderLive(); });
+    await resetUi(page);
+    await page.evaluate(() => {
+      openUpgradeSheet('header-pill');
+      if (document.getElementById('upgrade-foot').getClientRects().length) throw new Error('a Pro member is shown a buy button');
+      if (!document.getElementById('upgrade-pro-state').getClientRects().length) throw new Error('no "You\u2019re Pro" state');
+    });
+    await settle(page, 300);
+  }, async (page) => { await resetUi(page); await page.evaluate(() => { localStorage.removeItem('jh_pro'); localStorage.removeItem('jh_pro_source'); applyProGates(); renderLive(); }); }],
   ['yards', async (page) => { await tab(page, 'yards'); }],
   ['yard-prices', async (page) => {
     await tab(page, 'yards');
@@ -1049,6 +1182,8 @@ try {
       j.photoSources = PHOTO_ON;
       await route.fulfill({ response: res, json: j });
     });
+    // Web checkout is live on yardscout.io; the Pro sheet is tested in that state.
+    await page.route(/\/api\/ent\/config(\?|$)/, (route) => route.fulfill({ json: { billing: true }, headers: { 'access-control-allow-origin': '*' } }));
     await page.route(/api\.zippopotam\.us\//, (route) => route.fulfill({ json: { 'post code': ZIP, country: 'United States',
       places: [{ 'place name': 'San Jose', state: 'California', 'state abbreviation': 'CA', latitude: '37.3485', longitude: '-121.8863' }] } }));
     // hold the inventory so the loading state can be checked

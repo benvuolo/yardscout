@@ -2978,6 +2978,32 @@ a { color: var(--accent); }
 #upgrade-sheet .sheet-head h2 { flex: 1 1 auto; min-width: 0; }
 #upgrade-sheet .sheet-head button { flex: none; }
 
+/* ---- Pro sheet: the buy button and the first price stay on screen ----
+   (2026-11-12) The button sat 80 to 490 px below the fold on a phone. The
+   sheet is now a column: .sheet-scroll (the pitch, the feature list, the
+   fine print) scrolls, .sheet-foot (one primary button + one price line)
+   is pinned under it. dvh keeps the sheet inside a phone browser's visible
+   area while its bars are showing. At very large text the footer may take
+   up to 70% of the sheet and scrolls inside itself, button first. */
+#upgrade-sheet { display: flex; flex-direction: column; overflow: hidden; padding: 0; max-height: 88vh; max-height: 88dvh; }
+#upgrade-sheet .sheet-scroll {
+  flex: 1 1 auto; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
+  padding: 0.5rem 1.15rem var(--s4);
+}
+#upgrade-sheet.no-foot .sheet-scroll { padding-bottom: calc(1.4rem + env(safe-area-inset-bottom, 0px)); }
+#upgrade-sheet .sheet-foot {
+  flex: 0 0 auto; max-height: 70%; overflow-y: auto; overscroll-behavior: contain;
+  padding: var(--s3) 1.15rem calc(var(--s3) + env(safe-area-inset-bottom, 0px));
+  background: var(--surface); border-top: 1px solid var(--border);
+}
+.sheet-foot .btn-primary { width: 100%; min-height: 52px; font-size: var(--t-md); }
+.sheet-foot-line, .sheet-foot .iap-intro { display: block; margin-top: var(--s2); font-size: var(--t-sm); font-weight: 600; line-height: 1.35; text-align: center; color: var(--text); }
+.sheet-foot .iap-intro { color: var(--accent); }
+.sheet-foot-status { min-height: 0; margin-top: var(--s1); text-align: center; }
+.sheet-foot-status:empty { display: none; }
+#ent-store-row { display: flex; flex-direction: column; margin-top: 0.4rem; }
+#native-iap { margin-top: 0.9rem; }
+
 /* ---- Pro box: the one free-user Pro nudge (accent border, PRO badge, one
    line, chevron; the whole box opens the Pro sheet). Pro users never see it. */
 .pro-box {
