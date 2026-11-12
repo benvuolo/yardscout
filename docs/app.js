@@ -35,7 +35,7 @@ const FUNNEL_EVENTS = {
   'watch-created': 'watch-created', 'push-enabled': 'push-enabled', 'native-push-enable': 'push-enabled',
   'email-alerts-linked': 'push-enabled', 'checkout-start': 'checkout-start', 'iap-subscribe': 'checkout-start',
   'ent-checkout-start': 'checkout-start', 'iap-purchased': 'pro-converted', 'ent-purchased': 'pro-converted',
-  'pro-lock': 'paywall',
+  'pro-lock': 'paywall', 'store-click': 'store-click',
 };
 const ATTRIB = (() => {
   try {
@@ -55,15 +55,36 @@ const ATTRIB = (() => {
  * (upgradeTrigger) rides along as a second counter — paywall/<gate>,
  * checkout/<gate>, purchase/<gate> — so the daily email can say "locked
  * part prices open the sheet most; the watch limit converts best". */
-const REASON_EVENTS = { 'pro-lock': 'paywall', 'iap-subscribe': 'checkout', 'iap-purchased': 'purchase' };
+const REASON_EVENTS = {
+  'pro-lock': 'paywall', 'iap-subscribe': 'checkout', 'iap-purchased': 'purchase',
+  // The web checkout counts per gate too (2026-11-12: the gate table's
+  // checkout and purchase columns were fed by the app events only).
+  'ent-checkout-start': 'checkout', 'ent-purchased': 'purchase',
+  // store-click/<store>-<place>: which store, from which button.
+  'store-click': 'store-click',
+};
 // Local copies and automated browsers never count: the e2e tests run this
 // exact bundle from 127.0.0.1 and were posting real-looking first visits and
 // 'browser-test' paywall opens into the production funnel (2026-11-02).
-const ANALYTICS_OFF = /^(localhost|127\.0\.0\.1|\[::1\]|0\.0\.0\.0)$/.test(location.hostname) || navigator.webdriver === true;
+// The app shells are exempt from the hostname rule (2026-11-12): both load
+// this bundle from the hostname "localhost" (capacitor://localhost on iOS,
+// https://localhost on Android), so that rule silenced every app build made
+// after it shipped. An automated browser stays silent everywhere.
+function analyticsOff(hostname, webdriver, native) {
+  if (webdriver === true) return true;
+  return !native && /^(localhost|127\.0\.0\.1|\[::1\]|0\.0\.0\.0)$/.test(String(hostname || ''));
+}
+const ANALYTICS_OFF = analyticsOff(location.hostname, navigator.webdriver, IS_NATIVE);
+/* v: counting rules version. 2 (2026-11-12) = a zip counts when entered or
+ * changed, a part search once per distinct search, a paywall open only for
+ * someone who is not Pro, and the apps report again. The API notes the first
+ * day each platform sends v2, so the daily email can say which numbers
+ * predate it. Still no ids: one anonymous +1 per event. */
+const EVENTS_V = 2;
 function sendEvent(e) {
   if (ANALYTICS_OFF) return;
   const body = JSON.stringify({ e, src: ATTRIB ? ATTRIB.src : '', cmp: ATTRIB ? ATTRIB.cmp : '', med: ATTRIB ? ATTRIB.med : '',
-    p: IS_NATIVE ? (IS_ANDROID ? 'android' : 'ios') : 'web' });
+    p: IS_NATIVE ? (IS_ANDROID ? 'android' : 'ios') : 'web', v: EVENTS_V });
   // text/plain keeps it a "simple" request (no CORS preflight, works from sendBeacon).
   if (!(navigator.sendBeacon && navigator.sendBeacon(EVENTS_API, new Blob([body], { type: 'text/plain' })))) {
     fetch(EVENTS_API, { method: 'POST', body, headers: { 'content-type': 'text/plain' }, keepalive: true }).catch(() => {});
@@ -83,6 +104,28 @@ function track(event) {
       window.goatcounter.count({ path: event, title: event, event: true });
     }
   } catch (e) { /* analytics must never break the app */ }
+}
+/* Count people, not launches (2026-11-12). "Entered a zip" used to fire on
+ * every launch that restored a saved zip, a part search on every re-render
+ * (sort, lazy file, second tap), and "paywall opens" included Pro members
+ * looking at their own sheet. These three decide what counts. */
+// A zip counts when it is first entered or changed, not when it is restored.
+function zipEntryIsNew(saved, code) {
+  return String(saved || '') !== String(code || '');
+}
+// A part search counts once per distinct part + car while the app is open.
+const _pfCounted = new Set();
+function pfSearchIsNew(key) {
+  if (_pfCounted.has(key)) return false;
+  _pfCounted.add(key);
+  return true;
+}
+// The Pro sheet counts as a paywall open only for someone who can still buy:
+// not for a Pro member, and not when it re-opens after a checkout or an
+// unlock code (those re-opens show a purchase finishing, not a prospect).
+const PAYWALL_NOT_PROSPECT = ['checkout-return', 'checkout-done', 'code-redeemed'];
+function paywallIsProspect(trigger, pro) {
+  return !pro && !PAYWALL_NOT_PROSPECT.includes(String(trigger));
 }
 try { if (!localStorage.getItem('ys_seen')) { localStorage.setItem('ys_seen', '1'); track('first-visit'); } } catch (e) { /* private mode */ }
 if (GOATCOUNTER_CODE) {
@@ -2705,7 +2748,8 @@ async function setZipCenter(zip) {
       localStorage.setItem('jh_zip_coords', JSON.stringify(zipCoordsCache));
     }
     activeZipCoords = zipCoordsCache[cacheKey];
-    track(pc.key ? 'zip-entered/ca' : 'zip-entered');
+    // Counted when entered or changed; a launch restoring the saved zip is not an entry.
+    if (zipEntryIsNew(localStorage.getItem('jh_zip'), pc.code)) track(pc.key ? 'zip-entered/ca' : 'zip-entered');
     localStorage.setItem('jh_zip', pc.code);
     localStorage.removeItem('jh_gps');
     document.getElementById('live-zip').placeholder = 'e.g. 84101';
@@ -2868,6 +2912,17 @@ const watchGateLead = (t) => ({
   'watch-toast': 'Free: a recap every Monday of what landed. Pro: a push within hours, so you get there before the parts are gone.',
   'watch-near-miss': 'Pro would have pushed that one the day it landed. Monday recaps are free; same-day alerts are Pro.',
 })[t] || '';
+/* The pinned footer shows the one primary button that applies (web checkout,
+ * the phone's store, or the app's subscribe) and nothing for a Pro member. */
+function refreshUpgradeFoot() {
+  const sheet = document.getElementById('upgrade-sheet'), foot = document.getElementById('upgrade-foot');
+  if (!sheet || !foot) return;
+  const apiMode = !IS_NATIVE && window.YSApi && YSApi.enabled();
+  const any = ['ent-buy', 'store-buy', 'iap-buy'].some(id => { const el = document.getElementById(id); return el && el.style.display !== 'none'; });
+  const on = any && !isPro() && !apiMode;
+  foot.style.display = on ? '' : 'none';
+  sheet.classList.toggle('no-foot', !on);
+}
 function openUpgradeSheet(trigger, carKey) {
   upgradeTrigger = trigger || 'unknown';
   lastPaywallAt = Date.now();   // the rating sheet never follows a paywall (maybeAskForReview)
@@ -2881,7 +2936,10 @@ function openUpgradeSheet(trigger, carKey) {
     const sub = document.querySelector('#upgrade-sheet .sheet-sub'); if (sub) sub.style.display = car ? 'none' : '';
     if (car) track('pro-lock-car');
   }
-  track('pro-lock/' + upgradeTrigger);
+  // "Paywall opens" are prospects only. A Pro member's own sheet, and the
+  // re-open after a checkout or an unlock code, go under another name that
+  // is not a funnel counter.
+  track((paywallIsProspect(upgradeTrigger, isPro()) ? 'pro-lock/' : 'pro-sheet-member/') + upgradeTrigger);
   // Native builds never enter Stripe billing mode — Pro purchase on iOS will
   // go through StoreKit IAP when it ships; until then natives see the waitlist.
   const apiMode = !IS_NATIVE && window.YSApi && YSApi.enabled();
@@ -2926,6 +2984,10 @@ function openUpgradeSheet(trigger, carKey) {
       + 'stays free. Subscribe through '
       + (IS_ANDROID ? 'Google Play' : 'the App Store') + '; cancel anytime.';
   }
+  // A Pro member has nothing to buy or restore here.
+  if (IS_NATIVE && isPro()) { const iap = document.getElementById('native-iap'); if (iap) iap.style.display = 'none'; }
+  refreshUpgradeFoot();
+  { const sc = document.getElementById('upgrade-scroll'); if (sc) sc.scrollTop = 0; }   // every open starts at the lead
   document.getElementById('upgrade-sheet').classList.add('open');
   document.getElementById('upgrade-backdrop').classList.add('open');
   // Native app: swap the waitlist for the StoreKit subscribe flow when the
@@ -3521,6 +3583,13 @@ function applyShareHash() {
 window.addEventListener('hashchange', () => {
   const alertId = (location.hash.match(/#alert=([^&]+)/) || [])[1];
   if (alertId) { openFromAlert(safeDecode(alertId)); return; }
+  const watch = parseWatchHash(location.hash);
+  if (watch) {
+    history.replaceState(null, '', location.pathname + location.search);
+    jhOpenAlertsTab();
+    startWatchIntent(watch);
+    return;
+  }
   applyShareHash();
   if (liveLoaded) {
     renderLive();
@@ -4205,7 +4274,7 @@ function nextOneWatch(make, model, source) {
   if (r === 'added') { renderAlerts(); checkAndNotify(); setCardBells(make, model, true); showWatchToast(label); }
   else if (r === 'exists') showWatchToast(label, { manage: true });
   else if (r === 'limit') openUpgradeSheet('watch-limit');
-  else if (r === 'no-zip') alert('Set your zip code up top first, so the watch knows where "near you" is.');
+  else if (r === 'no-zip') askZipForWatch(label, () => nextOneWatch(make, model, source));
   return r;
 }
 function nextOneHtml(make, model, cls) {
@@ -7326,10 +7395,19 @@ function pfSearchSignal(s) {
     }
   } catch (e) { /* analytics must never break the app */ }
 }
+/* One search = one count. pfRunSearch re-renders on every sort, lazy file,
+ * radius change and second tap; only the first render of a given part + car
+ * is a search (2026-11-12: one search was counted four times). */
+function pfCountSearch(mode, s) {
+  const key = [mode, pfCat && pfCat.id, s && s.year, s && s.make, s && s.model].map(x => String(x || '').toLowerCase()).join('|');
+  if (!pfSearchIsNew(key)) return false;
+  track(mode === 'browse' ? 'part-browse' : 'part-first-search');
+  pfSearchSignal(s);
+  return true;
+}
 function pfRunBrowse(s) {
   const out = document.getElementById('pf-results');
-  track('part-browse');
-  pfSearchSignal(s);
+  pfCountSearch('browse', s);
   pfSaveState();
   const radius = effectiveRadiusMi();
   const unlocked = isPro();
@@ -7793,7 +7871,7 @@ function pfWatchClick(btn) {
   if (r === 'added') { renderAlerts(); checkAndNotify(); showWatchToast(`${make} ${model}`); }
   else if (r === 'exists') showWatchToast(`${make} ${model}`, { manage: true });
   else if (r === 'limit') openUpgradeSheet('watch-limit');
-  else if (r === 'no-zip') alert('Set your zip code up top first, so the watch knows where "near you" is.');
+  else if (r === 'no-zip') askZipForWatch(`${make} ${model}`, () => pfWatchClick(btn));
 }
 /* Start screen tiles: the common carry-out parts, one tap each. */
 const PF_TILES = ['alternator', 'starter', 'headlights', 'tail-lights', 'side-mirrors', 'front-seats', 'window-regulator', 'gauge-cluster', 'wheels'];
@@ -7863,8 +7941,7 @@ function pfRunSearch() {
   const lw = pfOemLazyLoad(pfCat.id);
   if (lw) { status.textContent = 'Loading catalog matches…'; lw.then(() => pfRunSearch()); return; }
   const lazy = pfOemLazyData[pfCat.id] || { oemGroups: [], amGroups: [] };
-  track('part-first-search');
-  pfSearchSignal(s);
+  pfCountSearch('fit', s);
   pfSaveState();
 
   const radius = effectiveRadiusMi();
@@ -8752,6 +8829,9 @@ function getWatchlistHits() {
 }
 
 function renderAlerts() {
+  // The form's names (when the whole scan is not in yet) and the zip / car card.
+  if (document.getElementById('tab-alerts').classList.contains('active')) loadWatchNames();
+  renderWatchIntent();
   const watchlist = loadWatchlist();
   const results = getWatchlistHits();
   // Email-alerts panel state (web only; defined in the EMAIL ALERTS section).
@@ -8895,6 +8975,63 @@ function hasWatchFor(make, model) {
 const FREE_WATCH_LIMIT = 5;              // mirrors MAX_WATCHES_FREE in backend/src/devices.js
 const APP_STORE_URL = 'https://apps.apple.com/app/yardscout-junkyard-parts/id6817126581';
 const PLAY_URL = 'https://play.google.com/store/apps/details?id=io.yardscout.app';
+/* Which store a web visitor's phone uses, decided in ONE place (2026-11-12:
+ * the Pro sheet's link was static HTML and sent Android visitors to the App
+ * Store). null = not a phone or tablet we recognise: both stores are offered. */
+function webStorePlatform(ua, platform, touchPoints) {
+  ua = String(ua || '');
+  if (/android/i.test(ua)) return 'android';
+  if (/iphone|ipod|ipad/i.test(ua) || (platform === 'MacIntel' && touchPoints > 1)) return 'ios';   // iPadOS reports as a Mac
+  return null;
+}
+function storeLink(platform) {
+  return platform === 'android'
+    ? { store: 'play', url: PLAY_URL, name: 'Google Play', device: 'Android' }
+    : { store: 'appstore', url: APP_STORE_URL, name: 'the App Store', device: 'iPhone' };
+}
+const WEB_STORE = IS_NATIVE ? null : webStorePlatform(navigator.userAgent, navigator.platform, navigator.maxTouchPoints);
+/* The Pro sheet's store links for a web visitor. A phone sees its own store
+ * only; anything else sees both. With web billing not live, the phone's
+ * store button is the sheet's pinned primary button (#store-buy) and the
+ * same link is not repeated in the body. */
+function applyStoreLinks(platform, billing) {
+  const $ = (id) => document.getElementById(id);
+  const st = platform ? storeLink(platform) : null;
+  const show = (el, on) => { if (el) el.style.display = on ? '' : 'none'; };
+  show($('ent-appstore-link'), platform !== 'android');
+  show($('ent-play-link'), platform !== 'ios');
+  const acct = $('ent-store-acct'), cancel = $('ent-store-cancel');
+  if (acct) acct.textContent = platform === 'android' ? 'your Google Play account' : platform === 'ios' ? 'your App Store account' : 'your App Store or Google Play account';
+  if (cancel) cancel.textContent = platform === 'android' ? 'Play Store subscriptions' : platform === 'ios' ? 'iOS Settings' : 'iOS Settings or Play Store subscriptions';
+  const primary = $('ent-store-primary'), pAcct = $('ent-store-primary-acct');
+  if (primary && st) { primary.href = st.url; primary.textContent = 'Get YardScout on ' + st.name; }
+  if (pAcct && st) pAcct.textContent = platform === 'android' ? 'your Google Play account' : 'your App Store account';
+  show($('store-buy'), !!st && !billing);
+  show($('ent-store-row'), billing || !st);
+  const head = $('ent-appstore-head');
+  if (head) head.textContent = billing ? 'Prefer the app?' : 'Pro is also in the iPhone and Android apps';
+}
+/* Store-link taps are a funnel step (2026-11-12): "Get the app" is the next
+ * step a web watcher is offered, and nothing counted it. One listener covers
+ * every store link on the page: store-click/<store>-<place>. Web only (the
+ * apps' own store links are update prompts, not installs). */
+function storeClickEvent(href, place) {
+  const h = String(href || '');
+  const store = /^https:\/\/apps\.apple\.com\//.test(h) ? 'appstore' : /^https:\/\/play\.google\.com\//.test(h) ? 'play' : null;
+  return store ? 'store-click/' + store + '-' + place : null;
+}
+function storeClickPlace(a) {
+  for (const [sel, place] of [['#upgrade-sheet', 'sheet'], ['#watch-toast', 'toast'], ['#app-promo', 'banner'],
+    ['#header-badges', 'header'], ['#footer-get-app', 'footer'], ['#tab-alerts', 'alerts']]) {
+    if (a.closest(sel)) return place;
+  }
+  return 'other';
+}
+if (!IS_NATIVE) document.addEventListener('click', (e) => {
+  const a = e.target && e.target.closest && e.target.closest('a[href]');
+  const ev = a && storeClickEvent(a.href, storeClickPlace(a));
+  if (ev) track(ev);
+}, true);
 
 /** Adds one make/model watch scoped to the current search. Returns
  * 'added' | 'exists' | 'limit' | 'no-zip'. */
@@ -8971,7 +9108,7 @@ function watchFromCard(btn) {
   }
   const r = addQuickWatch(make, model, null, null, 'card');
   if (r === 'limit') { openUpgradeSheet('watch-limit'); return; }
-  if (r === 'no-zip') { alert('Set your zip code up top first, so the watch knows where "near you" is.'); return; }
+  if (r === 'no-zip') { askZipForWatch(label, () => watchFromCard(btn)); return; }
   if (r === 'added') {
     renderAlerts();
     checkAndNotify();
@@ -9027,7 +9164,7 @@ function jhWatchSearch() {
   }
   if (added) { renderAlerts(); checkAndNotify(); showWatchToast(sc.label); }
   if (blocked === 'limit') openUpgradeSheet('watch-limit');
-  else if (blocked === 'no-zip') alert('Set your zip code up top first, so the watch knows where "near you" is.');
+  else if (blocked === 'no-zip') askZipForWatch(sc.label, () => jhWatchSearch());
   renderLive();
 }
 
@@ -9052,7 +9189,14 @@ function showWatchToast(label, opts = {}) {
   const pushOn = localStorage.getItem('ys_push_on') === '1';
   let next = '';
   let head = `Watching <strong>${escapeHtml(label)}</strong>`;
-  if (opts.undo) {
+  if (opts.zip) {
+    // No location saved (a shared car, a part search before the zip): ask
+    // for it here instead of pointing at a zip field this screen lacks.
+    head = `Watch <strong>${escapeHtml(label)}</strong>`;
+    next = `<span>Enter your zip so we know where &ldquo;near you&rdquo; is.</span>
+      <div class="watch-zip-row">${watchZipInputHtml('watch-toast-zip')}<button type="button" class="btn btn-primary btn-sm" data-act="zip">Watch</button></div>
+      <span class="watch-zip-msg" role="status"></span>`;
+  } else if (opts.undo) {
     head = `Stopped watching <strong>${escapeHtml(label)}</strong>`;
     next = `<span>Removed from your watchlist.</span><button type="button" class="btn btn-sm" data-act="undo">Undo</button>`;
   } else if (opts.manage) {
@@ -9060,10 +9204,9 @@ function showWatchToast(label, opts = {}) {
   } else if (IS_NATIVE && !pushOn && document.getElementById('native-push-enable')) {
     next = `<span>Turn on notifications so we can tell you.</span>
       <button type="button" class="btn btn-primary btn-sm" data-act="push">Turn on</button>`;
-  } else if (!IS_NATIVE && /android|iphone|ipad|ipod/i.test(navigator.userAgent)) {
-    const android = /android/i.test(navigator.userAgent);
+  } else if (!IS_NATIVE && WEB_STORE) {
     next = `<span>New ones light up in Alerts. For a push when one lands, get the free app.</span>
-      <a class="btn btn-primary btn-sm" data-act="app" href="${android ? PLAY_URL : APP_STORE_URL}" target="_blank" rel="noopener">Get the app</a>`;
+      <a class="btn btn-primary btn-sm" data-act="app" href="${storeLink(WEB_STORE).url}" target="_blank" rel="noopener">Get the app</a>`;
   } else if (!IS_NATIVE) {
     // Desktop: no store to send them to — say where matches show up, and
     // that a phone can be told the day one lands.
@@ -9071,12 +9214,17 @@ function showWatchToast(label, opts = {}) {
   } else if (!isPro()) {
     next = `<span>Free: a recap every Monday.</span>${proBoxHtml('A push within hours instead', 'watch-toast', '', 'toast-pro')}`;
   }
-  el.innerHTML = `<div class="watch-toast-head">${opts.undo ? ICON.bell : ICON.check}<span>${head}</span>
+  el.innerHTML = `<div class="watch-toast-head">${opts.undo || opts.zip ? ICON.bell : ICON.check}<span>${head}</span>
       <button type="button" class="watch-toast-x" data-act="close" aria-label="Dismiss">&times;</button></div>
-    ${next ? `<div class="watch-toast-next">${next}</div>` : ''}`;
+    ${next ? `<div class="watch-toast-next${opts.zip ? ' watch-toast-ask' : ''}">${next}</div>` : ''}`;
+  const submitZip = async () => {
+    if (await watchZipSubmit(el.querySelector('.watch-zip-input'), el.querySelector('.watch-zip-msg'))) { hide(); opts.zip(); }
+  };
+  el.onkeydown = (e) => { if (opts.zip && e.key === 'Enter' && e.target.closest('.watch-zip-input')) { e.preventDefault(); submitZip(); } };
   el.onclick = (e) => {
     const act = e.target.closest('[data-act]');
     if (!act) return;
+    if (act.dataset.act === 'zip') { submitZip(); return; }
     if (act.dataset.act === 'push') { track('watch-toast-push'); document.getElementById('native-push-enable').click(); }
     if (act.dataset.act === 'pro') openUpgradeSheet('watch-toast');
     if (act.dataset.act === 'app') track('watch-toast-app');
@@ -9095,21 +9243,269 @@ function showWatchToast(label, opts = {}) {
   };
   el.classList.add('show');
   clearTimeout(_watchToastTimer);
-  _watchToastTimer = setTimeout(hide, next ? 12000 : 4000);
+  // A toast that is waiting for a zip stays until it is answered or dismissed.
+  if (!opts.zip) _watchToastTimer = setTimeout(hide, next ? 12000 : 4000);
 }
+
+/* ===== A WATCH FROM A SHARE PAGE, IN THE FEWEST TAPS (2026-11-12) =====
+ * The server-rendered pages (/car/<vin>, /yard/<slug>, /landed/<make>) send
+ * "Alert me when the next one lands" to /#tab=alerts. A first-time visitor
+ * landed on a watch form whose Make list was empty (it was built from
+ * inventory that waits for a location) with no zip field in sight; the
+ * shared car's bell answered "set your zip up top" on a screen without one.
+ *   - the form's makes and models come from data/models.json until the whole
+ *     scan is in (same names and counts the full scan gives)
+ *   - the car the visitor came for is offered as one tap, with a zip field
+ *     in the same card when no location is saved; the form is prefilled too
+ *   - anywhere a watch needs a location, the zip is asked for right there
+ * Only the creation path changes: every watch is made by addQuickWatch /
+ * addWatchItem as before, and stored watches are never touched (rule 6). */
+/* #watch=<make>|<model>|<years>: model and years optional; years are
+ * "2005-2009", "2005-", "-2009" or "2007". null when there is no make. */
+function parseWatchHash(hash) {
+  const m = /#watch=([^&]*)/.exec(String(hash || ''));
+  if (!m) return null;
+  let raw = m[1];
+  try { raw = decodeURIComponent(raw); } catch (e) { /* keep as typed */ }
+  const clean = (v) => String(v || '').replace(/[\u0000-\u001f<>"]/g, '').trim().slice(0, 60);
+  const [make, model, yrs] = raw.split('|').map(clean);
+  if (!make) return null;
+  const y = /^(\d{4})?(?:-(\d{4})?)?$/.exec(yrs || '');
+  const ok = (n) => (n >= 1900 && n <= 2100 ? n : null);
+  const yrMin = y ? ok(+y[1]) : null;
+  const yrMax = y ? ok(/-/.test(yrs) ? +y[2] : +y[1]) : null;
+  return { make, model: model || '', yrMin, yrMax: yrMin && yrMax && yrMax < yrMin ? null : yrMax };
+}
+/* Which server-rendered page sent the visitor to #tab=alerts (the referrer
+ * is our own page, so its path is readable): a car, a make, or neither. */
+function shareReferrerIntent(referrer, origin) {
+  let u;
+  try { u = new URL(String(referrer || '')); } catch (e) { return null; }
+  if (u.origin !== origin && u.hostname !== 'yardscout.io') return null;
+  let m = /^\/car\/([A-Za-z0-9-]{1,32})\/?$/.exec(u.pathname);
+  if (m) return { kind: 'car', key: m[1] };
+  m = /^\/landed\/([a-z0-9-]{1,40})\/?$/.exec(u.pathname);
+  if (m) return { kind: 'make', slug: m[1] };
+  return { kind: 'page' };
+}
+// Must match slugify() in backend/site-proxy/src/share.js (the /landed/<make> path).
+function shareSlug(v) {
+  return String(v || '').toLowerCase().replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+}
+/* One car by its share key, from the published scan, without changing what
+ * is on screen: the key index names its shard, the shard has the row. */
+async function invFindCar(key) {
+  const here = () => liveInventory.find(x => vehicleKey(x) === key || String(x.id) === key);
+  let v = here();
+  if (v) return v;
+  let s = null;
+  for (let i = 0; i < 100 && !(s = _invNext || _inv); i++) {
+    if (liveLoaded) return here() || null;   // full-file path: what is loaded is all there is
+    await new Promise(r => setTimeout(r, 150));
+  }
+  if (!s) return null;
+  const h = _invHash(key);
+  const kb = await _invGet(s, 'keys-' + _invPad(h % (s.m.keyBuckets || 64)) + '.json', false);
+  const tok = ' ' + h.toString(36) + ' ';
+  for (const si of Object.keys(kb.s || {})) {
+    if (!(' ' + kb.s[si] + ' ').includes(tok)) continue;
+    await _invLoadShard(s, +si);
+    const p = s.parsed.get(+si);
+    v = p && p.vehicles.find(x => vehicleKey(x) === key || String(x.id) === key);
+    if (v) return v;
+  }
+  return null;
+}
+
+/* Zip field markup + submit, shared by the Alerts-tab card and the toast. */
+function watchZipInputHtml(id) {
+  return `<input type="text" id="${id}" class="watch-zip-input" maxlength="7" autocomplete="postal-code" aria-label="${POSTAL_CA ? 'Postal code' : 'Zip code'}"`
+    + ` ${POSTAL_CA ? 'inputmode="text" autocapitalize="characters" placeholder="Postal code"' : 'inputmode="numeric" placeholder="Zip code"'}>`;
+}
+async function watchZipSubmit(input, msg) {
+  const say = (t) => { if (msg) msg.textContent = t; };
+  const pc = input && normalizePostal(input.value);
+  if (!pc) { say(POSTAL_CA ? 'Enter your postal code.' : 'Enter a 5-digit zip code.'); if (input) input.focus(); return false; }
+  say('');
+  document.getElementById('live-zip').value = pc.code;
+  await setZipCenter(pc.code);
+  updateZipBanner();
+  if (!activeZipCoords) { say('We could not find that one. Check it and try again.'); input.focus(); return false; }
+  return true;
+}
+function askZipForWatch(label, retry) {
+  showWatchToast(label, { zip: retry });
+  const i = document.getElementById('watch-toast-zip');
+  if (i && matchMedia('(pointer: fine)').matches) i.focus();
+}
+
+/* What the visitor came to watch: { make, model, yrMin, yrMax } from a share
+ * page or a #watch= link; pendingAdd when the form's Add needed a zip. */
+let watchIntent = null;
+function watchIntentLabel(w) {
+  return ((w.yrMin || w.yrMax ? `${w.yrMin || ''}\u2013${w.yrMax || ''} ` : '') + `${w.make} ${w.model}`).trim();
+}
+/* The card at the top of the Alerts tab. Shown for a car the visitor asked
+ * for (one tap: zip if needed + Watch), and for anyone on the free tier with
+ * no location saved (a watch needs a centre). Gone once neither applies. */
+function renderWatchIntent() {
+  const tab = document.getElementById('tab-alerts');
+  if (!tab) return;
+  let el = document.getElementById('watch-intent');
+  const w = watchIntent && watchIntent.make && watchIntent.model && !watchIntent.done ? watchIntent : null;
+  const needZip = !activeZipCoords && !isPro();
+  const pending = !!(watchIntent && watchIntent.pendingAdd);
+  // An Add waiting for a zip is the form's own watch, not the one-tap car.
+  const car = !pending && w && !hasWatchFor(w.make, w.model) ? w : null;
+  if (!car && !needZip) { if (el) el.remove(); return; }
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'watch-intent';
+    el.className = 'watch-intent';
+    tab.insertBefore(el, tab.firstChild);
+    el.addEventListener('click', (e) => { if (e.target.closest('#watch-intent-go')) watchIntentGo(); });
+    el.addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.target.closest('.watch-zip-input')) { e.preventDefault(); watchIntentGo(); } });
+  }
+  const state = [car ? watchIntentLabel(car) : '', needZip, pending].join('|');
+  if (el.dataset.state === state) return;   // keep what the visitor has typed
+  el.dataset.state = state;
+  const head = car ? `Get told when another <strong>${escapeHtml(watchIntentLabel(car))}</strong> lands near you`
+    : 'Where should we watch?';
+  const note = car ? (isPro() ? '' : freeDeliveryNote())
+    : (pending ? 'Enter your zip so the watch has a centre.' : 'Enter your zip, then add the cars you want below.');
+  el.innerHTML = `<p class="watch-intent-head">${head}</p>
+    <div class="watch-intent-row">${needZip ? watchZipInputHtml('watch-intent-zip') : ''}<button type="button" class="btn btn-primary" id="watch-intent-go">${car ? 'Watch' : (pending ? 'Add watch' : 'Set zip')}</button></div>
+    <p class="watch-zip-msg" role="status"></p>${note ? `<p class="watch-intent-note">${note}</p>` : ''}`;
+}
+async function watchIntentGo() {
+  const el = document.getElementById('watch-intent');
+  if (!el) return;
+  if (!activeZipCoords && !isPro()) {
+    if (!(await watchZipSubmit(el.querySelector('.watch-zip-input'), el.querySelector('.watch-zip-msg')))) return;
+  }
+  if (watchIntent && watchIntent.pendingAdd) {
+    // The form's Add was waiting for this zip: finish it as the visitor set it up.
+    watchIntent.pendingAdd = false;
+    if (watchIntent.make) watchIntent.done = true;
+    renderWatchIntent();
+    addWatchItem();
+    return;
+  }
+  const w = watchIntent && watchIntent.make && watchIntent.model && !watchIntent.done ? watchIntent : null;
+  if (w && !hasWatchFor(w.make, w.model)) {
+    const label = watchIntentLabel(w);
+    const r = addQuickWatch(w.make, w.model, w.yrMin, w.yrMax, 'share');
+    if (r === 'limit') { openUpgradeSheet('watch-limit'); return; }
+    if (r === 'no-zip') { renderWatchIntent(); return; }
+    w.done = true;
+    cancelWatchEdit();   // the form's prefill has done its job
+    renderAlerts();
+    if (r === 'added') { checkAndNotify(); showWatchToast(label); }
+    else showWatchToast(label, { manage: true });
+    return;
+  }
+  renderWatchIntent();
+}
+/* The form shows what the visitor came for, so they can change it (years,
+ * more models) before adding. Never touches a stored watch. */
+function prefillWatchForm(w) {
+  if (!w || !w.make || editingWatchAddedAt) return;
+  const makeSel = document.getElementById('alert-make');
+  if (!makeSel) return;
+  if (![...makeSel.options].some(o => o.value === w.make)) {
+    const opt = document.createElement('option'); opt.value = w.make; opt.textContent = w.make; makeSel.appendChild(opt);
+  }
+  makeSel.value = w.make;
+  for (const [id, y] of [['alert-yr-min', w.yrMin], ['alert-yr-max', w.yrMax]]) {
+    const sel = document.getElementById(id);
+    if (y && ![...sel.options].some(o => +o.value === y)) { const opt = document.createElement('option'); opt.value = y; opt.textContent = y; sel.appendChild(opt); }
+    sel.value = y || '';
+  }
+  populateWatchModelOptions();
+  if (w.model) {
+    watchSelectedModels.add(w.model);
+    if (!_watchModelCounts.has(w.model)) _watchModelCounts.set(w.model, 0);
+    renderWatchModelList(); updateWatchModelBtnLabel();
+  }
+}
+/* Arrival with a watch in mind: #watch=..., or #tab=alerts from one of our
+ * server-rendered pages. */
+async function startWatchIntent(fromHash) {
+  loadWatchNames();
+  watchIntent = fromHash || null;
+  renderWatchIntent();
+  if (!watchIntent) {
+    const ref = shareReferrerIntent(document.referrer, location.origin);
+    try {
+      if (ref && ref.kind === 'car') {
+        const v = await invFindCar(ref.key);
+        if (v && v.make && v.model) watchIntent = { make: v.make, model: v.model, yrMin: null, yrMax: null };
+      } else if (ref && ref.kind === 'make') {
+        const names = await loadWatchNames();
+        const make = Object.keys(names || watchNameIndex()).find(mk => shareSlug(mk) === ref.slug);
+        if (make) watchIntent = { make, model: '', yrMin: null, yrMax: null };
+      }
+    } catch (e) { /* the form and the zip card still work */ }
+  }
+  if (!watchIntent) return;
+  renderWatchIntent();
+  await loadWatchNames();
+  prefillWatchForm(watchIntent);
+}
+
 
 /* Watchlist pickers mirror the Live filters, with one intentional difference:
  * they draw from the FULL national inventory, not the current radius — you
  * watch for cars that aren't near you *yet*. Values are exact scraper strings,
  * so both local and server-side alert matching hit reliably (no typos). */
+/* Until the whole scan is loaded the names come from data/models.json: every
+ * make/model in the scan with its car count, the file the daily watch check
+ * reads (scraper _write_models_json). A new visitor has no location, so no
+ * inventory loads and the Make list used to stay empty; a visitor with only
+ * the nearby regions in saw only nearby names. Same strings as the rows. */
+let watchNames = null;        // { make: { model: cars } } from models.json
+let _watchNamesP = null;
+function loadWatchNames() {
+  if (watchNames || liveComplete) return Promise.resolve(watchNames);
+  if (!_watchNamesP) {
+    _watchNamesP = fetch(DATA_BASE + 'data/models.json', { cache: 'no-cache' })
+      .then(r => (r.ok ? r.json() : null))
+      .then(d => {
+        if (!d || !d.makes || typeof d.makes !== 'object' || Array.isArray(d.makes)) { _watchNamesP = null; return null; }
+        watchNames = d.makes;
+        if (!modelYearSpans) setModelYears(d.modelYears);
+        if (!liveComplete) populateWatchOptions();
+        return watchNames;
+      })
+      .catch(() => { _watchNamesP = null; return null; });
+  }
+  return _watchNamesP;
+}
+/* { make: { model: cars } } for the pickers: the loaded scan once it is
+ * complete, models.json before that, else whatever part is loaded. */
+let _watchIdx = null, _watchIdxOf = null;
+function watchNameIndex() {
+  const src = liveComplete || !watchNames ? liveInventory : watchNames;
+  if (_watchIdx && _watchIdxOf === src) return _watchIdx;
+  let idx = src;
+  if (src === liveInventory) {
+    idx = {};
+    for (const v of liveInventory) {
+      if (!v.make) continue;
+      const ms = idx[v.make] || (idx[v.make] = {});
+      if (v.model) ms[v.model] = (ms[v.model] || 0) + 1;
+    }
+  }
+  _watchIdx = idx; _watchIdxOf = src;
+  return idx;
+}
 function populateWatchOptions() {
   const makeSel = document.getElementById('alert-make');
-  if (!makeSel || !liveLoaded) return;
+  if (!makeSel || (!liveLoaded && !watchNames)) return;
   const prevMake = makeSel.value;
-  const makes = new Set();
-  for (const v of liveInventory) {
-    if (v.make && !JUNK_MAKES.has(v.make.toLowerCase())) makes.add(v.make);
-  }
+  const makes = new Set(Object.keys(watchNameIndex()).filter(m => m && !JUNK_MAKES.has(m.toLowerCase())));
+  // A make being added or edited stays selectable while the lists refresh.
+  if (prevMake && (editingWatchAddedAt || (watchIntent && watchIntent.make === prevMake))) makes.add(prevMake);
   makeSel.innerHTML = '<option value="">Make</option>';
   [...makes].sort().forEach(m => {
     const opt = document.createElement('option');
@@ -9117,9 +9513,27 @@ function populateWatchOptions() {
     makeSel.appendChild(opt);
   });
   makeSel.value = makes.has(prevMake) ? prevMake : '';
+  // Regions landing in the background rebuild these lists; the models the
+  // visitor has already ticked stay ticked.
+  const keep = makeSel.value ? new Map([...watchSelectedModels].map(m => [m, _watchModelCounts.get(m) || 0])) : new Map();
   populateWatchModelOptions();
+  if (keep.size) {
+    for (const [m, n] of keep) { watchSelectedModels.add(m); if (!_watchModelCounts.has(m)) _watchModelCounts.set(m, n); }
+    renderWatchModelList(); updateWatchModelBtnLabel();
+  }
 
-  const years = [...new Set(liveInventory.map(v => v.year).filter(Boolean))].sort((a, b) => b - a);
+  const yearSet = new Set(liveInventory.map(v => v.year).filter(Boolean));
+  if (!liveComplete && modelYearSpans) {
+    // Not the whole scan yet: the published model-year spans give the range.
+    let lo = Infinity, hi = -Infinity;
+    for (const ms of Object.values(modelYearSpans)) for (const sp of Object.values(ms || {})) {
+      const a = +sp[0], b = +sp[1];
+      if (a >= 1940 && a < lo) lo = a;
+      if (b <= new Date().getFullYear() + 1 && b > hi) hi = b;
+    }
+    for (let y = lo; y <= hi; y++) yearSet.add(y);
+  }
+  const years = [...yearSet].sort((a, b) => b - a);
   for (const id of ['alert-yr-min', 'alert-yr-max']) {
     const sel = document.getElementById(id);
     const prev = sel.value;
@@ -9152,15 +9566,14 @@ function populateWatchModelOptions() {
   btn.disabled = false;
   _watchModelCounts = new Map();
   const yLo = yearVal('alert-yr-min'), yHi = yearVal('alert-yr-max');
-  for (const v of liveInventory) {
-    if (v.make === make && v.model && !isNoPickModel(v.make, v.model) && modelFitsYears(v.make, v.model, yLo, yHi)) {
-      _watchModelCounts.set(v.model, (_watchModelCounts.get(v.model) || 0) + 1);
-    }
+  for (const [model, n] of Object.entries(watchNameIndex()[make] || {})) {
+    if (model && !isNoPickModel(make, model) && modelFitsYears(make, model, yLo, yHi)) _watchModelCounts.set(model, n);
   }
   // A model on ONE car nationwide is a yard's typo far more often than a real
   // nameplate (2026-10-29 audit: 'Ttoytcoma', 'Unknown'). Keep it out of the
-  // picker once the whole scan is in; "Watch anyway" still takes it by name.
-  if (liveComplete) for (const [m, n] of [..._watchModelCounts]) if (n < 2) _watchModelCounts.delete(m);
+  // picker once the counts are national (the whole scan, or models.json);
+  // "Watch anyway" still takes it by name.
+  if (liveComplete || watchNames) for (const [m, n] of [..._watchModelCounts]) if (n < 2) _watchModelCounts.delete(m);
   renderWatchModelList();
   updateWatchModelBtnLabel();
 }
@@ -9309,7 +9722,13 @@ function addWatchItem() {
   if (yrMin && yrMax && yrMin > yrMax) return alert('Year min is after year max.');
   const radiusMi = parseInt(document.getElementById('alert-radius').value) || null;
   if (radiusMi && !activeZipCoords) {
-    return alert('Set a zip code (or use "near me") in the Cars tab first, so the radius has a center.');
+    // Ask for the zip in the card above the form, then finish this Add.
+    watchIntent = Object.assign(watchIntent || {}, { pendingAdd: true });
+    renderWatchIntent();
+    const card = document.getElementById('watch-intent'), zip = document.getElementById('watch-intent-zip');
+    if (card) card.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    if (zip) zip.focus({ preventScroll: true });
+    return;
   }
   const matchOnly = document.getElementById('alert-match-only').checked;
   // Trim / drivetrain filters are Pro — free watches stay make/model/years
@@ -9347,7 +9766,8 @@ function addWatchItem() {
     watchlist.push(entry);
     seedAlertedForEntry(entry);
     syncWatchToServer(entry);
-    track('watch-created');
+    // Saving an edit replaces a watch; only a net new one is "created".
+    if (!(editing && !added)) track('watch-created');
     added++;
   }
   if (!added) return alert(editing ? 'That\u2019s the same as a watch you already have.' : 'Already on your watchlist.');
@@ -9590,10 +10010,15 @@ if (_bootAlertId) {
 }
 loadLiveInventory({ fresh: !!_bootAlertId });
 // #tab=<name> opens a tab directly (share pages link to #tab=alerts).
+// #watch=<make>|<model>|<years> opens Alerts with that watch one tap away;
+// #tab=alerts from one of our own car / make pages does the same from the
+// referrer (see A WATCH FROM A SHARE PAGE).
 {
-  const t = (location.hash.match(/#tab=([a-z]+)/) || [])[1];
+  const w = parseWatchHash(location.hash);
+  const t = w ? 'alerts' : (location.hash.match(/#tab=([a-z]+)/) || [])[1];
   const el = t && document.querySelector(`.tab[data-tab="${t}"]`);
   if (el) { el.click(); history.replaceState(null, '', location.pathname + location.search); }
+  if (el && t === 'alerts') startWatchIntent(w);
 }
 
 // Offline + instant-launch cache. Needs a secure context (HTTPS or localhost) —
@@ -9625,10 +10050,7 @@ if (!IS_NATIVE && 'serviceWorker' in navigator) {
   const qs = new URLSearchParams(location.search).get('appbanner');
   const forced = (qs === 'ios' || qs === 'android') ? qs : null;
   const standalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
-  const isIOS = /iphone|ipod|ipad/i.test(navigator.userAgent)
-    || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1); // iPadOS
-  const isAndroid = /android/i.test(navigator.userAgent);
-  const platform = forced || (isIOS ? 'ios' : (isAndroid ? 'android' : null));
+  const platform = forced || WEB_STORE;
   if (!platform) return; // desktop: unchanged
   if (!forced && (standalone || localStorage.getItem('ys_app_promo') === '1')) return;
   // Shown from the FIRST visit (2026-10-28): Apple's Smart App Banner is
@@ -9641,10 +10063,11 @@ function showAppPromo(platform) {
   const el = document.getElementById('app-promo');
   if (!el) return;
   const link = document.getElementById('app-promo-link');
-  link.href = platform === 'android' ? PLAY_URL : APP_STORE_URL;
+  const st = storeLink(platform);
+  link.href = st.url;
   link.textContent = 'Get the app';
-  link.setAttribute('aria-label', platform === 'android' ? 'Get the app on Google Play' : 'Get the app on the App Store');
-  document.querySelector('#app-promo .app-promo-text strong').textContent = platform === 'android' ? 'YardScout for Android' : 'YardScout for iPhone';
+  link.setAttribute('aria-label', 'Get the app on ' + st.name);
+  document.querySelector('#app-promo .app-promo-text strong').textContent = 'YardScout for ' + st.device;
   el.style.display = '';
   const x = document.getElementById('app-promo-close');
   if (!x.__wired) {
@@ -10084,17 +10507,20 @@ function maybeAskForReview(reason) {
   // never at app open. On Android 13+ requestPermissions() surfaces the
   // POST_NOTIFICATIONS runtime prompt; on iOS it's the APNs dialog.
   btn.addEventListener('click', async () => {
-    track('native-push-enable');
     localStorage.setItem('ys_push_intent', '1');   // registration listener checks this
     try {
       let perm = await PN.checkPermissions();
       if (perm.receive !== 'granted') perm = await PN.requestPermissions();
       if (perm.receive !== 'granted') {
         localStorage.removeItem('ys_push_intent');
+        track('native-push-refused');   // not a funnel counter
         if (status) status.textContent = 'Notifications are off for YardScout in '
           + (IS_ANDROID ? 'Android' : 'iOS') + ' Settings.';
         return;
       }
+      // "Alerts turned on" counts a granted permission, not the tap: a
+      // refusal at the system prompt used to count too (2026-11-12).
+      track('native-push-enable');
       await PN.register();
     } catch (e) {
       if (status) status.textContent = 'Push setup failed — try again later.';
@@ -10221,6 +10647,8 @@ function introOfferText(p) {
     button: free ? `Try free for ${n > 1 ? span : 'a ' + unit}` : `Start for ${p.introPrice}${n > 1 ? `/${unit} for ${span}` : ` — first ${unit}`}`,
     line: free ? `Free for your first ${span}, then ${p.price}/mo. Cancel anytime.`
       : `${p.introPrice}${n > 1 ? `/${unit}` : ''} for your first ${span}, then ${p.price}/mo. Cancel anytime.`,
+    // Under the pinned button, which already states the offer: what follows it.
+    then: `Then ${p.price}/mo. Cancel anytime.`,
   };
 }
 
@@ -10231,6 +10659,9 @@ async function refreshNativeIapUi() {
   const wrap = document.getElementById('native-iap');
   if (!P || !wrap) return;
   wrap.style.display = '';
+  // The subscribe button and the first price are pinned (#upgrade-foot).
+  { const buy = document.getElementById('iap-buy'); if (buy) buy.style.display = ''; }
+  refreshUpgradeFoot();
   const status = document.getElementById('iap-status');
   try {
     const p = await P.getProduct({ productId: IAP_PRODUCT_ID });
@@ -10238,7 +10669,8 @@ async function refreshNativeIapUi() {
       const sub = document.getElementById('iap-subscribe');
       // Intro offer (2026-10-30): the store only reports it to people who are
       // eligible (new subscribers), and applies it at checkout by itself —
-      // say it plainly on the button and in one line under it.
+      // say it plainly on the button and in one line under it. Both are in
+      // the pinned footer, so the first price is on screen with the button.
       const intro = introOfferText(p);
       if (sub && intro) sub.textContent = intro.button;
       else if (sub && p.price) sub.textContent = 'Subscribe — ' + p.price + '/mo';
@@ -10250,7 +10682,7 @@ async function refreshNativeIapUi() {
           line.className = 'iap-intro';
           sub.insertAdjacentElement('afterend', line);
         }
-        if (line) line.textContent = intro.line;
+        if (line) line.textContent = intro.then;
       } else if (line) line.remove();
       if (status) status.textContent = '';
     } else if (status) {
@@ -10474,6 +10906,8 @@ async function refreshNativeIapUi() {
     if (typeof refreshEmailAlertsUi === 'function') refreshEmailAlertsUi();
   }
 
+  applyStoreLinks(WEB_STORE, false);
+  refreshUpgradeFoot();
   /* ---- purchase button: shown only once the Worker reports billing live ---- */
   (async () => {
     try {
@@ -10481,8 +10915,10 @@ async function refreshNativeIapUi() {
       if (ok && data.billing) {
         const buy = $id('ent-buy');
         if (buy) buy.style.display = '';
-        const head = $id('ent-appstore-head');
-        if (head) head.textContent = 'Prefer the app?';
+        const note = $id('ent-buy-note');
+        if (note) note.style.display = '';
+        applyStoreLinks(WEB_STORE, true);   // "Prefer the app?" + this phone's store
+        refreshUpgradeFoot();
         // The static sheet intro ends "Subscribe in the YardScout iOS app." —
         // contradicts the live web checkout button right below it.
         const sub = document.querySelector('#upgrade-sheet .sheet-sub');
@@ -10495,7 +10931,10 @@ async function refreshNativeIapUi() {
 
   const checkoutBtn = $id('ent-checkout');
   if (checkoutBtn) checkoutBtn.addEventListener('click', async () => {
-    track('ent-checkout-start');
+    track('ent-checkout-start/' + upgradeTrigger);
+    // The gate rides through the Stripe redirect so the purchase is credited
+    // to the paywall that sold it (this tab only; cleared on return).
+    try { sessionStorage.setItem('ys_co_gate', upgradeTrigger); } catch (e) { /* private mode */ }
     checkoutBtn.disabled = true;
     setMsg($id('ent-checkout-status'), 'Opening secure checkout\u2026');
     try {
@@ -10530,6 +10969,8 @@ async function refreshNativeIapUi() {
       return;
     }
     track('ent-checkout-return');
+    let gate = '';
+    try { gate = sessionStorage.getItem('ys_co_gate') || ''; sessionStorage.removeItem('ys_co_gate'); } catch (e) { /* private mode */ }
     openUpgradeSheet('checkout-return');
     setMsg($id('ent-status'), 'Payment received — activating Pro\u2026');
     // The webhook usually lands within seconds; poll the confirm endpoint a few times.
@@ -10539,7 +10980,7 @@ async function refreshNativeIapUi() {
         if (ok && data.pro) {
           grantWebPro({ email: data.email, token: data.token, source: 'stripe',
             note: 'Payment received — Pro is unlocked on this device and linked to ' + data.email + '.' });
-          track('ent-purchased');
+          track('ent-purchased' + (gate ? '/' + gate : ''));
           openUpgradeSheet('checkout-done'); // re-render: now shows the Pro state
           return;
         }

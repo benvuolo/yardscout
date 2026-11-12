@@ -57,3 +57,4 @@ every OEM namespace from users. A test enforces it.
 
 Business plan and priorities (2026-11-12): `ops/business-plan.md`. Growth work (search pages, funnel, email) comes before new parts-matching depth until traffic passes 40 new visitors a day.
 Search pages workstream (server-rendered pages in `backend/site-proxy`, sitemap, store listing text): `ops/seo.md`.
+Growth workstream (funnel counters, Pro sheet, watch/alert entry paths, email capture): `ops/growth.md`.
