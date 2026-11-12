@@ -28,7 +28,8 @@
  */
 
 import { json, err } from './util.js';
-import { CHANNELS, utcDay, resendFetch, pruneOpsErrors } from './ops.js';
+import { CHANNELS, utcDay, resendFetch, pruneOpsErrors, resendDailyCap } from './ops.js';
+import { recapStats } from './recap_signup.js';
 import { watchMatches } from './alerts.js';
 import { FUNNEL_V2_MARK } from './attribution.js';
 
@@ -36,8 +37,7 @@ const H = 3600_000;
 const DAY = 24 * H;
 const STALE_AFTER_MS = 6 * H;
 const REALERT_MS = 6 * H;
-const RESEND_DAILY_CAP = 100;
-const RESEND_WARN_AT = 90;
+const RESEND_WARN_AT = 90;   // of the default 100; scaled to RESEND_DAILY_CAP when that is set
 const DORMANT_MS = 120 * DAY;
 // Yards set out Mon-Fri, so "unchanged" is measured in WEEKDAYS: a list
 // last changed Friday is 1 weekday old on Monday morning, not 3 (2026-11-02:
@@ -155,11 +155,11 @@ export async function sendStats(env, now = Date.now()) {
   const windowStart = Math.floor(now / H) * H - 23 * H;   // 24 hour buckets ending with the current one
   const channels = {};
   const get = (c) => channels[c] || (channels[c] = {
-    last24h: { ok: 0, fail: 0, gone: 0 }, today: { ok: 0, fail: 0, gone: 0 }, failLastHour: 0,
+    last24h: { ok: 0, fail: 0, gone: 0, held: 0 }, today: { ok: 0, fail: 0, gone: 0, held: 0 }, failLastHour: 0,
   });
   for (const c of CHANNELS) get(c);
   for (const r of rows) {
-    const m = String(r.metric).match(/^(.+):(ok|fail|gone)(?:@(\d\d))?$/);
+    const m = String(r.metric).match(/^(.+):(ok|fail|gone|held)(?:@(\d\d))?$/);
     if (!m) continue;
     const s = get(m[1]);
     if (m[3] == null) {
@@ -230,11 +230,12 @@ export async function evaluateConditions(env, now = Date.now()) {
     }
   }
 
-  if (stats.emailsToday >= RESEND_WARN_AT) {
+  const cap = resendDailyCap(env);
+  if (stats.emailsToday >= Math.round(cap * RESEND_WARN_AT / 100)) {
     conditions.push({
       id: 'resend-volume', short: 'Resend near daily cap',
-      title: `Resend volume: ${stats.emailsToday} of ${RESEND_DAILY_CAP} emails sent today (UTC)`,
-      detail: 'The Resend free tier stops at 100/day; later sends (magic links included) fail until the quota resets.',
+      title: `Resend volume: ${stats.emailsToday} of ${cap} emails sent today (UTC)`,
+      detail: `The Resend free tier stops at ${cap}/day; later sends (magic links included) fail until the quota resets. Monday-email confirmations and recaps are held back once 10 or fewer sends are left.`,
       check: 'Which channel is sending (daily email / admin ops daily run); Resend plan & usage page.',
     });
   }
@@ -477,7 +478,8 @@ function nameList(items, fmt) {
 
 const FUNNEL_ROWS = [
   ['first-visit', 'First visits'], ['zip-entered', 'Entered a zip'], ['part-first-search', 'Part searches'],
-  ['watch-created', 'Watches created'], ['push-enabled', 'Alerts turned on'], ['store-click', 'Store link taps'],
+  ['watch-created', 'Watches created'], ['email-asked', 'Monday email asked'], ['email-submitted', 'Monday email given'],
+  ['email-confirmed', 'Monday email confirmed'], ['push-enabled', 'Alerts turned on'], ['store-click', 'Store link taps'],
   ['paywall', 'Paywall opens'], ['checkout-start', 'Checkout taps'], ['pro-converted', 'Purchases'], ['review-prompt', 'Rating prompts'],
 ];
 /* The funnel by platform (2026-11-12). One column pair per platform, exactly
@@ -485,7 +487,9 @@ const FUNNEL_ROWS = [
  * cannot happen on a platform (a store link inside the app, the app's rating
  * sheet on the web) prints a dash, not a zero. */
 export const FUNNEL_PLATFORMS = [['web', 'Web'], ['ios', 'iOS'], ['android', 'Android']];
-const FUNNEL_NA = { 'store-click': ['ios', 'android'], 'review-prompt': ['web'] };
+// The Monday email ask is web only (the apps have push).
+const FUNNEL_NA = { 'store-click': ['ios', 'android'], 'review-prompt': ['web'],
+  'email-asked': ['ios', 'android'], 'email-submitted': ['ios', 'android'], 'email-confirmed': ['ios', 'android'] };
 const funnelCell = (u, k, p) => {
   if ((FUNNEL_NA[k] || []).includes(p)) return null;
   const f = u.funnel[k];
@@ -534,6 +538,14 @@ function storeTapsLine(u) {
     + ` · from: ${t.byPlace.map((x) => `${PLACE_NAMES[x.place] || x.place} ${fmtInt(x.n)}`).join(', ')}`;
 }
 
+/** One line on the free Monday email for web visitors (recap_signup.js). */
+export function recapLineText(rc) {
+  if (!rc) return 'Monday email (web sign-ups): not loaded';
+  if (rc.error) return `Monday email (web sign-ups): could not load (${rc.error})`;
+  return `Monday email (web sign-ups): ${fmtInt(rc.confirmed)} confirmed subscriber${rc.confirmed === 1 ? '' : 's'}`
+    + ` (${fmtInt(rc.watches)} watch${rc.watches === 1 ? '' : 'es'}) · ${fmtInt(rc.pending)} waiting for the confirmation click`;
+}
+
 function usageLines(u, audience) {
   if (!u || u.error) return [`USAGE: could not load (${(u && u.error) || 'unknown'})`];
   const L = ['USAGE'];
@@ -547,6 +559,7 @@ function usageLines(u, audience) {
   L.push('    An install that never turns notifications on is not counted here or anywhere else on the server.');
   L.push(`  Web accounts: ${fmtInt(u.web.accounts)} (${fmtInt(u.web.pro)} pro, ${fmtInt(u.web.active30d)} signed in 30 d)`
     + ` · web watches ${fmtInt(u.web.watches)} · email-alert watchers ${fmtInt(audience && audience.emailWatchers)}`);
+  L.push(`  ${recapLineText(audience && audience.recap)}`);
   const num = (v) => String(v == null ? '–' : fmtInt(v)).padStart(7);
   L.push(`  Funnel by platform (yesterday / 7 d)`);
   L.push(`    ${''.padEnd(22)}${FUNNEL_PLATFORMS.map(([, name]) => name.padStart(11).padEnd(14)).join('')}`.trimEnd());
@@ -620,6 +633,10 @@ function composeDaily(r) {
     }
   } else L.push('  no sends recorded');
   L.push(`  Resend today (UTC): ${r.resend.sentToday} / ${r.resend.dailyCap}`);
+  if (r.resend.heldConfirm || r.resend.heldRecap) {
+    L.push(`  HELD BACK at the Resend daily cap (24 h): ${r.resend.heldConfirm} sign-up confirmation${r.resend.heldConfirm === 1 ? '' : 's'} (visitor told to try tomorrow),`
+      + ` ${r.resend.heldRecap} Monday recap${r.resend.heldRecap === 1 ? '' : 's'} (retried by the hourly job on a later day)  <-`);
+  }
   if (r.recentErrors.length) {
     // Identical errors collapse to one line with a count.
     const groups = [];
@@ -843,6 +860,9 @@ export function composeDailyHtml(r) {
     c.startsWith('email:') ? '—' : String(s.gone)]);
   let sends = active.length ? hTable(['Channel', 'Sent', 'Failed', 'Dead tokens'], sendRows) : hMuted('No sends in the last 24 h.');
   sends += `<div style="font-size:13px;color:${C.dim};margin-top:6px;">Resend today: ${r.resend.sentToday} of ${r.resend.dailyCap}</div>`;
+  if (r.resend.heldConfirm || r.resend.heldRecap) {
+    sends += `<div style="font-size:13px;color:${C.bad};font-weight:600;margin-top:4px;">Held back at the daily cap (24 h): ${fmtInt(r.resend.heldConfirm)} sign-up confirmations (visitor told to try tomorrow), ${fmtInt(r.resend.heldRecap)} Monday recaps (retried on a later day)</div>`;
+  }
   if (r.recentErrors.length) {
     sends += hList(r.recentErrors.slice(0, 3).map((e) => `<span style="color:${C.bad};">${esc(fmtTime(e.at).slice(11))} ${esc(e.channel)} HTTP ${esc(e.status || 'net')}</span> — ${esc(String(e.detail || '').slice(0, 140))}`));
   }
@@ -869,7 +889,8 @@ export function composeDailyHtml(r) {
     usage += `<div style="font-size:13px;color:${C.dim};margin:6px 0 2px;">${dv.byPlatform.map((p) => `${esc(p.platform)} ${esc(p.tier)} ${fmtInt(p.n)}`).join(' · ')}
       &nbsp;|&nbsp; new: ${fmtInt(dv.newYesterday)} yesterday, ${fmtInt(dv.new7d)} in 7 d &nbsp;|&nbsp; used in last 7 d: ${fmtInt(dv.active7d)}<br>
       &ldquo;Apps with alerts on&rdquo; counts app installs that turned notifications on. An install that never does is not counted here or anywhere else on the server.<br>
-      Web: ${fmtInt(u.web.accounts)} account${u.web.accounts === 1 ? '' : 's'} (${fmtInt(u.web.pro)} Pro) · ${fmtInt(u.web.watches)} web watches · ${fmtInt(r.audience && r.audience.emailWatchers)} email-alert watchers</div>`;
+      Web: ${fmtInt(u.web.accounts)} account${u.web.accounts === 1 ? '' : 's'} (${fmtInt(u.web.pro)} Pro) · ${fmtInt(u.web.watches)} web watches · ${fmtInt(r.audience && r.audience.emailWatchers)} email-alert watchers<br>
+      ${esc(recapLineText(r.audience && r.audience.recap))}</div>`;
     S.push(hSection('Users', usage));
 
     // Funnel by platform: one "yesterday / 7 d" cell per platform (six number
@@ -1079,6 +1100,8 @@ export async function buildDailyReport(env, { now = Date.now() } = {}) {
       WHERE apns_token IS NOT NULL OR fcm_token IS NOT NULL GROUP BY tier`
   ).all()).results || [];
   const watchers = await env.DB.prepare('SELECT COUNT(*) AS n FROM email_watchers WHERE enabled = 1').first();
+  let recap;
+  try { recap = await recapStats(env); } catch (e) { recap = { error: String((e && e.message) || e).slice(0, 200) }; }
   let usage;
   try { usage = await loadUsage(env, now); } catch (e) { usage = { error: String((e && e.message) || e).slice(0, 200) }; }
   let watchCheck;
@@ -1124,7 +1147,12 @@ export async function buildDailyReport(env, { now = Date.now() } = {}) {
     },
     yardHealth,
     channels,
-    resend: { sentToday: ev.stats.emailsToday, dailyCap: RESEND_DAILY_CAP },
+    resend: {
+      sentToday: ev.stats.emailsToday, dailyCap: resendDailyCap(env),
+      // Optional mail held back at the cap in the last 24 h (ops.js countHeld).
+      heldConfirm: (ev.stats.channels['email:confirm'] || { last24h: {} }).last24h.held || 0,
+      heldRecap: (ev.stats.channels['email:digest'] || { last24h: {} }).last24h.held || 0,
+    },
     recentErrors: ev.stats.recentErrors.slice(0, 5),
     watchdog: ev.facts.watchdog,
     canary: ev.facts.canary,
@@ -1132,6 +1160,7 @@ export async function buildDailyReport(env, { now = Date.now() } = {}) {
       proDevices: tiers.filter((t) => t.tier === 'pro').reduce((k, t) => k + t.n, 0),
       freeDevices: tiers.filter((t) => t.tier !== 'pro').reduce((k, t) => k + t.n, 0),
       emailWatchers: (watchers && watchers.n) || 0,
+      recap,
     },
     usage,
     watchCheck,

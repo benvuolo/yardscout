@@ -16,6 +16,7 @@
 export const CHANNELS = [
   'apns', 'fcm', 'webpush',
   'email:auth', 'email:digest', 'email:pro-alert', 'email:saved', 'email:coverage', 'email:ops',
+  'email:confirm',
 ];
 
 const MAX_ERRORS = 500;
@@ -82,6 +83,48 @@ export async function countFail(env, channel, status, detail) {
     pendingErrors.push([new Date(now).toISOString(), channel, Number.isFinite(+status) ? +status : 0, scrub(detail)]);
     if (pendingErrors.length > MAX_ERRORS_PER_FLUSH) pendingErrors = pendingErrors.slice(-MAX_ERRORS_PER_FLUSH);
   } catch (e) { console.log('ops countFail failed:', channel, e && e.message); }
+}
+
+/** A send we chose NOT to make because the Resend daily cap is near
+ * (recap_signup.js confirmations, the Monday recap). Not a failure: the
+ * daily email lists it so the owner knows mail was held back. */
+export async function countHeld(env, channel) {
+  try { bump(channel, 'held', Date.now()); } catch (e) { console.log('ops countHeld failed:', channel, e && e.message); }
+}
+
+/* ----- the Resend daily cap (free tier: 100 emails per UTC day) -----
+ * Optional sends (sign-up confirmations, the Monday recap) stop while fewer
+ * than RESEND_RESERVE sends are left today, so sign-in links, Pro alerts and
+ * the ops emails still have room. RESEND_DAILY_CAP (env) overrides the cap
+ * for a paid plan, and for the tests. */
+export const RESEND_DAILY_CAP = 100;
+export const RESEND_RESERVE = 10;
+export function resendDailyCap(env) {
+  const n = parseInt((env && env.RESEND_DAILY_CAP) || '', 10);
+  return Number.isFinite(n) && n > 0 ? n : RESEND_DAILY_CAP;
+}
+
+/** Emails Resend accepted today (UTC): the stored counters plus whatever
+ * this isolate has counted but not flushed yet. Never throws (0 on error). */
+export async function emailsSentToday(env, now = Date.now()) {
+  const day = utcDay(now);
+  let n = 0;
+  for (const [key, v] of pendingCounts) {
+    const cut = key.indexOf('|');
+    if (key.slice(0, cut) === day && /^email:[^@]+:ok$/.test(key.slice(cut + 1))) n += v;
+  }
+  try {
+    const row = await env.DB.prepare(
+      "SELECT COALESCE(SUM(n), 0) AS n FROM ops_counters WHERE day = ?1 AND metric LIKE 'email:%:ok' AND metric NOT LIKE '%@%'"
+    ).bind(day).first();
+    n += (row && row.n) || 0;
+  } catch (e) { console.log('ops emailsSentToday failed:', e && e.message); }
+  return n;
+}
+
+/** True while an optional email may still go out today. */
+export async function optionalEmailAllowed(env, now = Date.now()) {
+  return (await emailsSentToday(env, now)) < resendDailyCap(env) - RESEND_RESERVE;
 }
 
 /** Write everything buffered in ONE env.DB.batch(). Never throws; a failed

@@ -52,6 +52,11 @@ APP_URL = "https://yardscout.io/"
 # to the Resend account's own address (2026-10-29: free digests and sign-in
 # links were silently going nowhere for everyone else).
 EMAIL_FROM = "YardScout <hello@yardscout.io>"
+# Postal address printed in the footer of the free Monday email (US
+# commercial-email law asks for a valid physical postal address). OWNER
+# DECISION: empty = no address line is printed. Set it to the exact text to
+# print, e.g. "YardScout LLC, <street or PO box>, <city>, UT <zip>".
+EMAIL_POSTAL_ADDRESS = ""
 # Sender for Pro email alerts (yardscout.io is verified in Resend).
 EMAIL_ALERTS_FROM = "YardScout Alerts <alerts@yardscout.io>"
 # Owner inbox for the coverage-request digest (Parts tab "ask us to add it";

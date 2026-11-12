@@ -14,7 +14,10 @@
 import { json, err, isoNow, haversineMiles } from './util.js';
 import { getSessionUser, resolveTier } from './auth.js';
 import { sendWebPush, pushConfigured } from './push.js';
-import { resendFetch } from './ops.js';
+import { resendFetch, countHeld, optionalEmailAllowed } from './ops.js';
+import {
+  recapUnsubUrl, postalLine, maskEmail, loadRecapAudience, loadRecapOptouts, noteRecapHeld,
+} from './recap_signup.js';
 import { makeResolver } from './inv_resolve.js';
 import { getDirectory } from './inventory.js';
 
@@ -810,7 +813,7 @@ const PRO_LINK_TEXT = 'See Pro alerts ($8.99/mo)';
  * free-tier Monday digest; otherwise the instant email fallback for Pro users
  * without push (that one is text-only and unchanged). `presence` (weekly
  * only) = Map vehicleId → 'present' | 'gone'; anything else means unknown. */
-export function buildDigestEmail(env, email, matches, { weekly = false, sales = [], now = Date.now(), presence = null } = {}) {
+export function buildDigestEmail(env, email, matches, { weekly = false, sales = [], now = Date.now(), presence = null, unsubUrl = '', signup = false } = {}) {
   const n = matches.length;
   const subject = n
     ? (weekly
@@ -849,9 +852,19 @@ export function buildDigestEmail(env, email, matches, { weekly = false, sales = 
     + (more > 0 ? `\n…and ${more} more` : '');
   const top = summary ? `${summary}\n${PRO_LINK_TEXT}: ${url}\n\n` : '';
   const bottomUpsell = (!summary && n) ? `\n\n${digestUpsell(matches, { now, url })}` : '';
+  // Every recap says why it came and carries a one-click unsubscribe that
+  // deletes the address (recap_signup.js); the postal line is printed only
+  // when the owner has set EMAIL_POSTAL_ADDRESS (never invented).
+  const postal = postalLine(env);
+  const why = signup
+    ? `You get this free Monday email because you asked for it at yardscout.io and confirmed ${email}.`
+    : `You get this free Monday email because your YardScout account (${email}) has watches.`;
+  const footTxt = `\n\n--\n${why}\n` +
+    (unsubUrl ? `Unsubscribe in one click (deletes your address and the watches copied for it): ${unsubUrl}\n` : '') +
+    (postal ? `${postal}\n` : '');
   const text = top +
     (n ? `${intro}\n\n${listTxt}` : 'Nothing new matched your watches this week, but:') +
-    bottomUpsell + salesTxt + outro;
+    bottomUpsell + salesTxt + outro + footTxt;
 
   const appUrl = (env.APP_URL || 'https://yardscout.io/').trim();
   const carHref = (v) => `${appUrl.replace(/\/+$/, '')}/#car=${encodeURIComponent(String(v.id))}`;
@@ -885,6 +898,8 @@ export function buildDigestEmail(env, email, matches, { weekly = false, sales = 
   ${salesHtml}
   <p style="color:#999;font-size:13px;line-height:1.6;margin:18px 0 0;">Yards crush cars within weeks — fresh arrivals are the best odds.
     <a href="${escH(appUrl)}" style="color:#ff9500;">Open the app</a> for rows, VINs, and part details.</p>
+  <p style="color:#777;font-size:11px;line-height:1.5;margin:22px 0 0;border-top:1px solid #2a2a2a;padding-top:12px;">${escH(why)}
+    ${unsubUrl ? `<a href="${escH(unsubUrl)}" style="color:#999;">Unsubscribe in one click</a> (deletes your address and the watches copied for it).` : ''}${postal ? `<br>${escH(postal)}` : ''}</p>
 </div></body></html>`;
   return { subject, text, html, to: email };
 }
@@ -892,8 +907,9 @@ export function buildDigestEmail(env, email, matches, { weekly = false, sales = 
 const escH = (x) => String(x == null ? '' : x)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-async function emailDigest(env, email, matches, { weekly = false, sales = [], now = Date.now(), presence = null, previews = null } = {}) {
-  const built = buildDigestEmail(env, email, matches, { weekly, sales, now, presence });
+async function emailDigest(env, email, matches, { weekly = false, sales = [], now = Date.now(), presence = null, previews = null, signup = false } = {}) {
+  const unsubUrl = weekly ? await recapUnsubUrl(env, email) : '';
+  const built = buildDigestEmail(env, email, matches, { weekly, sales, now, presence, unsubUrl, signup });
   const { subject, text, html } = built;
   if (previews) previews.push(built);   // DEV-only seam (handleDigestRun)
   if (!env.RESEND_API_KEY) {
@@ -901,7 +917,7 @@ async function emailDigest(env, email, matches, { weekly = false, sales = [], no
     // the dedupe bookkeeping. Production without a key correctly reports
     // undelivered (false) so nothing is marked as sent.
     if (env.DEV_MODE === '1') {
-      console.log(`DEV email → ${email} (${weekly ? 'weekly' : 'instant'}): ${matches.length} matches, ${sales.length} sales`);
+      console.log(`DEV email → ${maskEmail(email)} (${weekly ? 'weekly' : 'instant'}): ${matches.length} matches, ${sales.length} sales`);
       return true;
     }
     return false;
@@ -916,6 +932,7 @@ async function emailDigest(env, email, matches, { weekly = false, sales = [], no
       subject,
       text,
       ...(html ? { html } : {}),
+      ...(unsubUrl ? { headers: { 'List-Unsubscribe': `<${unsubUrl}>`, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' } } : {}),
     }),
   });
   if (!r.ok) console.log('alert email failed:', r.status, (await r.text()).slice(0, 200));
@@ -1087,24 +1104,37 @@ export async function sendWeeklyDigests(env, { now = Date.now(), previews = null
        FROM watches w JOIN users u ON u.id = w.user_id`
   ).all()).results || [];
 
+  const optouts = await loadRecapOptouts(env);   // account holders who unsubscribed
   const byUser = new Map();
   for (const r of rows) {
     if (resolveTier(r) === 'pro') continue;   // Pro already heard instantly
+    if (optouts.has(r.email)) continue;
     if (!byUser.has(r.user_id)) byUser.set(r.user_id, { email: r.email, watches: [] });
     byUser.get(r.user_id).watches.push(r);
   }
+  // Web visitors who confirmed the Monday email (recap_signup.js): their
+  // copied watches. An address that is also a free account gets ONE email
+  // with both sets of watches (account dedupe); otherwise its own entry,
+  // deduped per address in recap_sent.
+  const recapAudience = await loadRecapAudience(env);
+  for (const u of byUser.values()) {
+    const extra = recapAudience.get(u.email);
+    if (extra) { u.watches.push(...extra); u.signup = true; recapAudience.delete(u.email); }
+  }
+  for (const [email, watches] of recapAudience) byUser.set('recap:' + email, { email, watches, recap: true, signup: true });
 
-  let emails = 0, usersMatched = 0;
+  let emails = 0, usersMatched = 0, held = 0;
   let presenceOf = null;   // built lazily: only when some recap is actually sent
-  for (const [userId, { email, watches }] of byUser) {
+  for (const [userId, { email, watches, recap, signup }] of byUser) {
     if (emails >= MAX_WEEKLY_EMAILS) { console.log('digest email budget hit — remaining users deferred to next week'); break; }
     const matched = arrivals.filter((v) => watches.some((w) => watchMatches(w, v)));
     if (!matched.length) continue;
+    const seenSql = recap
+      ? 'SELECT 1 AS x FROM recap_sent WHERE email = ?1 AND vehicle_id = ?2'
+      : 'SELECT 1 AS x FROM alerts_sent WHERE user_id = ?1 AND vehicle_id = ?2';
     const fresh = [];
     for (const v of matched) {
-      const seen = await env.DB.prepare(
-        'SELECT 1 AS x FROM alerts_sent WHERE user_id = ?1 AND vehicle_id = ?2'
-      ).bind(userId, String(v.id)).first();
+      const seen = await env.DB.prepare(seenSql).bind(recap ? email : userId, String(v.id)).first();
       if (!seen) fresh.push(v);
     }
     // Upcoming sale days at yards inside this user's watch radii ride along
@@ -1118,16 +1148,28 @@ export async function sendWeeklyDigests(env, { now = Date.now(), previews = null
       if (!seen) freshSales.push(s);
     }
     if (!fresh.length && !freshSales.length) continue;
+    // Resend daily cap: the recap is optional mail. Held back (not marked
+    // sent) while the reserve for sign-in links and alerts is reached; the
+    // hourly cron retries on a later day (recap_signup.js noteRecapHeld).
+    if (!(await optionalEmailAllowed(env))) {
+      held++;
+      await countHeld(env, 'email:digest');
+      continue;
+    }
     usersMatched++;
     emails++;
     if (!presenceOf) presenceOf = await makePresenceLookup(env);
     const presence = fresh.length ? await presenceOf(fresh) : null;
-    const delivered = await emailDigest(env, email, fresh, { weekly: true, sales: freshSales, now, presence, previews });
+    const delivered = await emailDigest(env, email, fresh, { weekly: true, sales: freshSales, now, presence, previews, signup: !!signup });
     if (delivered) {
       for (const v of fresh) {
-        await env.DB.prepare(
-          'INSERT OR IGNORE INTO alerts_sent (user_id, vehicle_id, sent_at) VALUES (?1, ?2, ?3)'
-        ).bind(userId, String(v.id), isoNow()).run();
+        await env.DB.prepare(recap
+          ? 'INSERT OR IGNORE INTO recap_sent (email, vehicle_id, sent_at) VALUES (?1, ?2, ?3)'
+          : 'INSERT OR IGNORE INTO alerts_sent (user_id, vehicle_id, sent_at) VALUES (?1, ?2, ?3)'
+        ).bind(recap ? email : userId, String(v.id), isoNow()).run();
+      }
+      if (recap) {
+        await env.DB.prepare('UPDATE recap_subscribers SET last_email_at = ?1 WHERE email = ?2').bind(isoNow(), email).run();
       }
       for (const s of freshSales) {
         await env.DB.prepare(
@@ -1136,7 +1178,9 @@ export async function sendWeeklyDigests(env, { now = Date.now(), previews = null
       }
     }
   }
-  return { users: usersMatched, emails, arrivals: arrivals.length };
+  if (held) console.log(`weekly recap: ${held} held back at the Resend daily cap`);
+  await noteRecapHeld(env, held);
+  return { users: usersMatched, emails, arrivals: arrivals.length, held };
 }
 
 /* ===== sale-day alerts (chain sale calendars) =====

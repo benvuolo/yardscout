@@ -16,7 +16,12 @@
  * 2026-11-02 on sent nothing). A v2 client says so with {v: 2}; each such
  * event also bumps one marker row per (day, platform), event 'funnel-v2'.
  * The daily email reads the first marker day per platform to say which
- * numbers predate the fix (ops_monitor.js). Still one anonymous counter. */
+ * numbers predate the fix (ops_monitor.js). Still one anonymous counter.
+ *
+ * Monday email (2026-11-12, web only): 'email-asked' and 'email-submitted'
+ * come from the app like any event; 'email-confirmed' is counted by the
+ * server at the confirmation click (recap_signup.js), where it is certain,
+ * so a client may not post it. */
 import { json, err } from './util.js';
 
 export const FUNNEL_V2_MARK = 'funnel-v2';
@@ -34,7 +39,7 @@ export async function handleEvent(req, env) {
   const source = clip(body.src, 40), campaign = clip(body.cmp, 60), medium = clip(body.med, 30);
   const platform = ['web', 'ios', 'android'].includes(body.p) ? body.p : 'web';
   // The marker is the server's to write: a client may not post it as an event.
-  if (event === FUNNEL_V2_MARK) return err(400, 'bad_event', 'Unknown event name.');
+  if (event === FUNNEL_V2_MARK || event === 'email-confirmed') return err(400, 'bad_event', 'Unknown event name.');
   const day = new Date().toISOString().slice(0, 10);
   const bump = env.DB.prepare(
     `INSERT INTO events_daily (day, event, source, campaign, medium, platform, n)
@@ -66,6 +71,7 @@ export async function handleAttribution(req, env) {
     if (!rows.has(key)) rows.set(key, { source: r.source, campaign: r.campaign, medium: r.medium, platform: r.platform, events: {} });
     rows.get(key).events[r.event] = r.n;
   }
-  const FUNNEL = ['first-visit', 'zip-entered', 'part-first-search', 'watch-created', 'push-enabled', 'store-click', 'paywall', 'checkout-start', 'pro-converted'];
+  const FUNNEL = ['first-visit', 'zip-entered', 'part-first-search', 'watch-created', 'email-asked', 'email-submitted',
+    'email-confirmed', 'push-enabled', 'store-click', 'paywall', 'checkout-start', 'pro-converted'];
   return json({ since, days, funnel: FUNNEL, channels: [...rows.values()] });
 }
