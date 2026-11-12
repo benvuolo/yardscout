@@ -71,7 +71,7 @@ export function changeText(cur, prior) {
     return { kind: 'counts', delta, text: `${fmt(cur)} vs ${fmt(prior)} the week before` };
   }
   const pct = Math.round((delta / prior) * 100);
-  return { kind: 'pct', delta, pct, text: `${pct > 0 ? '+' : ''}${pct}% vs the week before (${fmt(prior)})` };
+  return { kind: 'pct', delta, pct, text: `${pct > 0 ? '+' : ''}${pct}% on the week before (${fmt(prior)})` };
 }
 
 /** Is a platform's counting the same across both windows? */
@@ -82,7 +82,7 @@ function comparability(p, v2, w) {
 }
 function notComparableText(name, c) {
   return c.since ? `not comparable before ${scDay(c.since)}`
-    : `not comparable: the ${name} has not reported on the fixed counting yet`;
+    : `not comparable yet (${name} update pending)`;
 }
 
 /**
@@ -152,7 +152,7 @@ export function computeScorecard({ today, rows = [], presence = [], v2 = {}, sub
       const undated = blocking.filter(([, m]) => !m.change.since).map(([p]) => SC_PLATFORMS.find(([q]) => q === p)[1]);
       change = { kind: 'not-comparable', since: dated.length ? dated[dated.length - 1] : null,
         text: dated.length ? `not comparable before ${scDay(dated[dated.length - 1])}`
-          : `not comparable: the ${undated.join(' and ')} ${undated.length > 1 ? 'have' : 'has'} not reported on the fixed counting yet` };
+          : `not comparable yet (${undated.join(' and ')} update pending)` };
     } else if (involved.some(([, m]) => m.current == null || m.prior == null)) {
       change = { kind: 'no-data', text: 'no data for one of the weeks' };
     } else change = changeText(current, prior);
@@ -309,8 +309,23 @@ function sourcesText(v) {
   bits.push(`no tag ${fmt(v.noTag)}`);
   return bits.join(' · ');
 }
-function platformLine(m, fmtCur) {
-  return SC_PLATFORMS.filter(([p]) => m.byPlatform[p]).map(([p, name]) => `${name} ${fmtCur(m.byPlatform[p])}`).join(' · ');
+/** "Web 7, 7 vs 5 the week before": one platform's count and its change
+ * (or why there is none). A platform with nothing reported is "no data". */
+function platformText(m, name, fmtCur = (x) => nd(x.current)) {
+  if (m.current == null && m.prior == null) return `${name}: no data`;
+  return `${name}: ${fmtCur(m)}, ${m.change.text}`;
+}
+function platformLines(m, fmtCur) {
+  return SC_PLATFORMS.filter(([p]) => m.byPlatform[p]).map(([p, name]) => platformText(m.byPlatform[p], name, fmtCur));
+}
+/** All platforms on one line: "Web 7 (7 vs 5 the week before) · iPhone app no data". */
+function platformsCompact(m) {
+  return SC_PLATFORMS.filter(([p]) => m.byPlatform[p]).map(([p, name]) => {
+    const x = m.byPlatform[p];
+    if (x.current == null && x.prior == null) return `${name} no data`;
+    const ch = x.change.kind === 'not-comparable' ? x.change.text.replace(/ \(.*\)$/, '') : x.change.text;
+    return `${name} ${nd(x.current)} (${ch})`;
+  }).join(' · ');
 }
 function sourceRowText(s) {
   const pl = (n, one, many) => `${fmt(n)} ${n === 1 ? one : many}`;
@@ -341,14 +356,14 @@ export function scorecardItems(card) {
   items.push({
     title: 'New visitors a day', value: perDayText(v.perDay),
     lines: [
-      `${nd(v.current)} this week · ${v.change.text}`,
-      platformLine(v, (m) => `${perDayText(m.perDay)}/day${m.change.kind === 'not-comparable' || m.change.kind === 'no-data' ? '' : ` (${m.change.text})`}`),
+      `${nd(v.current)} this week, all platforms · ${v.change.text}`,
+      ...platformLines(v, (m) => `${perDayText(m.perDay)} a day`),
       `From: ${sourcesText(v)}`,
     ],
   });
   const w = card.watches;
   items.push({ title: 'Watches created', value: nd(w.current),
-    lines: [w.change.text, platformLine(w, (m) => nd(m.current))] });
+    lines: [`all platforms: ${w.change.text}`, platformsCompact(w)] });
   const e = card.emails;
   items.push({ title: 'Monday email sign-ups (website)', value: nd(e.submitted.current),
     lines: [`offered ${nd(e.asked.current)} → gave an address ${nd(e.submitted.current)} → confirmed ${nd(e.confirmed.current)}`,
@@ -356,7 +371,7 @@ export function scorecardItems(card) {
   const ps = card.proSheet;
   items.push({ title: 'Pro sheet to checkout', value: ps.rate.text == null ? 'no data' : ps.rate.text,
     lines: [`opened ${nd(ps.opens.current)} → checkout ${nd(ps.checkouts.current)} → bought Pro ${nd(ps.pro.current)}`,
-      `checkouts: ${ps.checkouts.change.text}`] });
+      `checkouts, all platforms: ${ps.checkouts.change.text}`, `checkouts: ${platformsCompact(ps.checkouts)}`] });
   const s = card.subscribers;
   if (!s.now) items.push({ title: 'Paying subscribers', value: 'no data', lines: [`could not load (${s.error})`] });
   else {
@@ -389,7 +404,7 @@ export function scorecardHtml(card, { esc, C }) {
       ${it.lines.filter(Boolean).map((l) => `<div style="font-size:13px;line-height:1.45;color:${C.ink};margin-left:16px;">${esc(l)}</div>`).join('')}
     </td></tr>`).join('');
   const links = sc.links.length
-    ? sc.links.map((l) => `<div style="font-size:13px;line-height:1.5;margin:3px 0;">${esc(l)}</div>`).join('')
+    ? sc.links.map((l) => { const i = l.indexOf(': '); return `<div style="font-size:13px;line-height:1.5;margin:3px 0;"><strong>${esc(l.slice(0, i + 1))}</strong>${esc(l.slice(i + 1))}</div>`; }).join('')
     : `<div style="font-size:13px;color:${C.dim};">No tagged visits this week (add ?utm_source=… to links you post).</div>`;
   return `<tr><td style="padding:18px 22px 4px;">
     <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:${C.accent};margin:0 0 2px;">Weekly scorecard</div>
