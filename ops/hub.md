@@ -304,3 +304,14 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
 - U-Pull-R: Glenn (CTO) has not replied since 11-06. Follow-up saved as a
   Gmail draft in thread `1a1b2b1b2f24f262`; the owner sends it. Reply watch
   `trig_019imiZ2pPN5QP6g5kuvcYYR` is still disabled.
+
+## 2026-11-12 ~23:30 UTC owner: "lets do 3 and 4" (parts accuracy, weekly scorecard)
+
+- Owner sent the U-Pull-R follow-up to Glenn (thread `1a1b2b1b2f24f262`).
+- Two builders running, each in its own worktree; hub reviews and merges:
+  - `parts/gen-splits-trucks`: Xterra, Ranger, Cherokee XJ and Tacoma parts
+    rows that span generations get gated or split, each with a stated basis
+    (rule 3); no invented prices.
+  - `growth/scorecard`: weekly scorecard at the top of the daily ops email
+    (visitors by source, watches, emails, paywall to checkout, subscribers)
+    plus an admin JSON endpoint. Not deployed until merged.
