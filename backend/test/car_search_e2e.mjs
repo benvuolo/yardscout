@@ -149,7 +149,7 @@ try {
   }
   await typeIn(page, 'qqqzzz');
   check('no match: an honest empty row, no suggestions', (await suggestions(page)).length === 0
-    && await page.evaluate(() => /No .qqqzzz. within 100/.test(document.getElementById('car-search-suggest').textContent)));
+    && await page.evaluate(() => /No car called .qqqzzz. within 100.*Parts tab/.test(document.getElementById('car-search-suggest').textContent)));
   await page.keyboard.press('Escape');
   // Arrow keys + Enter pick the highlighted one.
   await typeIn(page, 'nissan');

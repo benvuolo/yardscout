@@ -4815,7 +4815,7 @@ function carSearchRender() {
         <span>${e.model ? `${escapeHtml(e.make)} <strong>${escapeHtml(e.model)}</strong>` : `<strong>${escapeHtml(e.make)}</strong> &middot; all models`}</span>
         ${pro ? `<span class="csi-count">${e.n.toLocaleString()} ${e.n === 1 ? 'car' : 'cars'}</span>` : ''}
       </div>`).join('')
-      : empty(`No &ldquo;${escapeHtml(q)}&rdquo; ${r ? `within ${r}&nbsp;mi` : 'in the inventory'} right now. Try the model name alone, e.g. &ldquo;Xterra&rdquo;.`);
+      : empty(`No car called &ldquo;${escapeHtml(q)}&rdquo; ${r ? `within ${r}&nbsp;mi` : 'in the inventory'} right now. This box finds cars by make or model, e.g. &ldquo;Xterra&rdquo;. Looking for a part? Use the Parts tab.`);
   }
   box.innerHTML = html;
   box.style.display = '';
