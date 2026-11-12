@@ -240,3 +240,12 @@ still need the owner's explicit "ship".
   owner should check when the card work starts.
 
 - 2026-11-06: main moved to sw jh-v147 (typo fix) while this branch uses jh-v146. When merging design/pull-sheet into main, bump to jh-v148 or later so no two different shells share a cache name.
+
+- 2026-11-12 (hub, from the r/XTerra post): a commenter said "I'd like to see
+  donor cars near me without specifying a part". The Cars tab already lists
+  every car near a zip, but narrowing to one model is Filters → Make → Model,
+  below the fold on a phone (checked live at 390 px). The visitor read the site
+  as part-search only. Proposal: a "Search a car (e.g. Xterra)" box at the top
+  of the Cars tab, and a deep link (e.g. `#cars=Nissan|Xterra`) so posts can
+  link straight to a model near the reader's zip. Needs an sw bump; app side
+  needs the owner's "ship".
