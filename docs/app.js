@@ -35,7 +35,7 @@ const FUNNEL_EVENTS = {
   'watch-created': 'watch-created', 'push-enabled': 'push-enabled', 'native-push-enable': 'push-enabled',
   'email-alerts-linked': 'push-enabled', 'checkout-start': 'checkout-start', 'iap-subscribe': 'checkout-start',
   'ent-checkout-start': 'checkout-start', 'iap-purchased': 'pro-converted', 'ent-purchased': 'pro-converted',
-  'pro-lock': 'paywall',
+  'pro-lock': 'paywall', 'store-click': 'store-click',
 };
 const ATTRIB = (() => {
   try {
@@ -55,15 +55,36 @@ const ATTRIB = (() => {
  * (upgradeTrigger) rides along as a second counter — paywall/<gate>,
  * checkout/<gate>, purchase/<gate> — so the daily email can say "locked
  * part prices open the sheet most; the watch limit converts best". */
-const REASON_EVENTS = { 'pro-lock': 'paywall', 'iap-subscribe': 'checkout', 'iap-purchased': 'purchase' };
+const REASON_EVENTS = {
+  'pro-lock': 'paywall', 'iap-subscribe': 'checkout', 'iap-purchased': 'purchase',
+  // The web checkout counts per gate too (2026-11-12: the gate table's
+  // checkout and purchase columns were fed by the app events only).
+  'ent-checkout-start': 'checkout', 'ent-purchased': 'purchase',
+  // store-click/<store>-<place>: which store, from which button.
+  'store-click': 'store-click',
+};
 // Local copies and automated browsers never count: the e2e tests run this
 // exact bundle from 127.0.0.1 and were posting real-looking first visits and
 // 'browser-test' paywall opens into the production funnel (2026-11-02).
-const ANALYTICS_OFF = /^(localhost|127\.0\.0\.1|\[::1\]|0\.0\.0\.0)$/.test(location.hostname) || navigator.webdriver === true;
+// The app shells are exempt from the hostname rule (2026-11-12): both load
+// this bundle from the hostname "localhost" (capacitor://localhost on iOS,
+// https://localhost on Android), so that rule silenced every app build made
+// after it shipped. An automated browser stays silent everywhere.
+function analyticsOff(hostname, webdriver, native) {
+  if (webdriver === true) return true;
+  return !native && /^(localhost|127\.0\.0\.1|\[::1\]|0\.0\.0\.0)$/.test(String(hostname || ''));
+}
+const ANALYTICS_OFF = analyticsOff(location.hostname, navigator.webdriver, IS_NATIVE);
+/* v: counting rules version. 2 (2026-11-12) = a zip counts when entered or
+ * changed, a part search once per distinct search, a paywall open only for
+ * someone who is not Pro, and the apps report again. The API notes the first
+ * day each platform sends v2, so the daily email can say which numbers
+ * predate it. Still no ids: one anonymous +1 per event. */
+const EVENTS_V = 2;
 function sendEvent(e) {
   if (ANALYTICS_OFF) return;
   const body = JSON.stringify({ e, src: ATTRIB ? ATTRIB.src : '', cmp: ATTRIB ? ATTRIB.cmp : '', med: ATTRIB ? ATTRIB.med : '',
-    p: IS_NATIVE ? (IS_ANDROID ? 'android' : 'ios') : 'web' });
+    p: IS_NATIVE ? (IS_ANDROID ? 'android' : 'ios') : 'web', v: EVENTS_V });
   // text/plain keeps it a "simple" request (no CORS preflight, works from sendBeacon).
   if (!(navigator.sendBeacon && navigator.sendBeacon(EVENTS_API, new Blob([body], { type: 'text/plain' })))) {
     fetch(EVENTS_API, { method: 'POST', body, headers: { 'content-type': 'text/plain' }, keepalive: true }).catch(() => {});
@@ -83,6 +104,28 @@ function track(event) {
       window.goatcounter.count({ path: event, title: event, event: true });
     }
   } catch (e) { /* analytics must never break the app */ }
+}
+/* Count people, not launches (2026-11-12). "Entered a zip" used to fire on
+ * every launch that restored a saved zip, a part search on every re-render
+ * (sort, lazy file, second tap), and "paywall opens" included Pro members
+ * looking at their own sheet. These three decide what counts. */
+// A zip counts when it is first entered or changed, not when it is restored.
+function zipEntryIsNew(saved, code) {
+  return String(saved || '') !== String(code || '');
+}
+// A part search counts once per distinct part + car while the app is open.
+const _pfCounted = new Set();
+function pfSearchIsNew(key) {
+  if (_pfCounted.has(key)) return false;
+  _pfCounted.add(key);
+  return true;
+}
+// The Pro sheet counts as a paywall open only for someone who can still buy:
+// not for a Pro member, and not when it re-opens after a checkout or an
+// unlock code (those re-opens show a purchase finishing, not a prospect).
+const PAYWALL_NOT_PROSPECT = ['checkout-return', 'checkout-done', 'code-redeemed'];
+function paywallIsProspect(trigger, pro) {
+  return !pro && !PAYWALL_NOT_PROSPECT.includes(String(trigger));
 }
 try { if (!localStorage.getItem('ys_seen')) { localStorage.setItem('ys_seen', '1'); track('first-visit'); } } catch (e) { /* private mode */ }
 if (GOATCOUNTER_CODE) {
@@ -2705,7 +2748,8 @@ async function setZipCenter(zip) {
       localStorage.setItem('jh_zip_coords', JSON.stringify(zipCoordsCache));
     }
     activeZipCoords = zipCoordsCache[cacheKey];
-    track(pc.key ? 'zip-entered/ca' : 'zip-entered');
+    // Counted when entered or changed; a launch restoring the saved zip is not an entry.
+    if (zipEntryIsNew(localStorage.getItem('jh_zip'), pc.code)) track(pc.key ? 'zip-entered/ca' : 'zip-entered');
     localStorage.setItem('jh_zip', pc.code);
     localStorage.removeItem('jh_gps');
     document.getElementById('live-zip').placeholder = 'e.g. 84101';
@@ -2881,7 +2925,10 @@ function openUpgradeSheet(trigger, carKey) {
     const sub = document.querySelector('#upgrade-sheet .sheet-sub'); if (sub) sub.style.display = car ? 'none' : '';
     if (car) track('pro-lock-car');
   }
-  track('pro-lock/' + upgradeTrigger);
+  // "Paywall opens" are prospects only. A Pro member's own sheet, and the
+  // re-open after a checkout or an unlock code, go under another name that
+  // is not a funnel counter.
+  track((paywallIsProspect(upgradeTrigger, isPro()) ? 'pro-lock/' : 'pro-sheet-member/') + upgradeTrigger);
   // Native builds never enter Stripe billing mode — Pro purchase on iOS will
   // go through StoreKit IAP when it ships; until then natives see the waitlist.
   const apiMode = !IS_NATIVE && window.YSApi && YSApi.enabled();
@@ -7326,10 +7373,19 @@ function pfSearchSignal(s) {
     }
   } catch (e) { /* analytics must never break the app */ }
 }
+/* One search = one count. pfRunSearch re-renders on every sort, lazy file,
+ * radius change and second tap; only the first render of a given part + car
+ * is a search (2026-11-12: one search was counted four times). */
+function pfCountSearch(mode, s) {
+  const key = [mode, pfCat && pfCat.id, s && s.year, s && s.make, s && s.model].map(x => String(x || '').toLowerCase()).join('|');
+  if (!pfSearchIsNew(key)) return false;
+  track(mode === 'browse' ? 'part-browse' : 'part-first-search');
+  pfSearchSignal(s);
+  return true;
+}
 function pfRunBrowse(s) {
   const out = document.getElementById('pf-results');
-  track('part-browse');
-  pfSearchSignal(s);
+  pfCountSearch('browse', s);
   pfSaveState();
   const radius = effectiveRadiusMi();
   const unlocked = isPro();
@@ -7863,8 +7919,7 @@ function pfRunSearch() {
   const lw = pfOemLazyLoad(pfCat.id);
   if (lw) { status.textContent = 'Loading catalog matches…'; lw.then(() => pfRunSearch()); return; }
   const lazy = pfOemLazyData[pfCat.id] || { oemGroups: [], amGroups: [] };
-  track('part-first-search');
-  pfSearchSignal(s);
+  pfCountSearch('fit', s);
   pfSaveState();
 
   const radius = effectiveRadiusMi();
@@ -8895,6 +8950,27 @@ function hasWatchFor(make, model) {
 const FREE_WATCH_LIMIT = 5;              // mirrors MAX_WATCHES_FREE in backend/src/devices.js
 const APP_STORE_URL = 'https://apps.apple.com/app/yardscout-junkyard-parts/id6817126581';
 const PLAY_URL = 'https://play.google.com/store/apps/details?id=io.yardscout.app';
+/* Store-link taps are a funnel step (2026-11-12): "Get the app" is the next
+ * step a web watcher is offered, and nothing counted it. One listener covers
+ * every store link on the page: store-click/<store>-<place>. Web only (the
+ * apps' own store links are update prompts, not installs). */
+function storeClickEvent(href, place) {
+  const h = String(href || '');
+  const store = /^https:\/\/apps\.apple\.com\//.test(h) ? 'appstore' : /^https:\/\/play\.google\.com\//.test(h) ? 'play' : null;
+  return store ? 'store-click/' + store + '-' + place : null;
+}
+function storeClickPlace(a) {
+  for (const [sel, place] of [['#upgrade-sheet', 'sheet'], ['#watch-toast', 'toast'], ['#app-promo', 'banner'],
+    ['#header-badges', 'header'], ['#footer-get-app', 'footer'], ['#tab-alerts', 'alerts']]) {
+    if (a.closest(sel)) return place;
+  }
+  return 'other';
+}
+if (!IS_NATIVE) document.addEventListener('click', (e) => {
+  const a = e.target && e.target.closest && e.target.closest('a[href]');
+  const ev = a && storeClickEvent(a.href, storeClickPlace(a));
+  if (ev) track(ev);
+}, true);
 
 /** Adds one make/model watch scoped to the current search. Returns
  * 'added' | 'exists' | 'limit' | 'no-zip'. */
@@ -9347,7 +9423,8 @@ function addWatchItem() {
     watchlist.push(entry);
     seedAlertedForEntry(entry);
     syncWatchToServer(entry);
-    track('watch-created');
+    // Saving an edit replaces a watch; only a net new one is "created".
+    if (!(editing && !added)) track('watch-created');
     added++;
   }
   if (!added) return alert(editing ? 'That\u2019s the same as a watch you already have.' : 'Already on your watchlist.');
@@ -10084,17 +10161,20 @@ function maybeAskForReview(reason) {
   // never at app open. On Android 13+ requestPermissions() surfaces the
   // POST_NOTIFICATIONS runtime prompt; on iOS it's the APNs dialog.
   btn.addEventListener('click', async () => {
-    track('native-push-enable');
     localStorage.setItem('ys_push_intent', '1');   // registration listener checks this
     try {
       let perm = await PN.checkPermissions();
       if (perm.receive !== 'granted') perm = await PN.requestPermissions();
       if (perm.receive !== 'granted') {
         localStorage.removeItem('ys_push_intent');
+        track('native-push-refused');   // not a funnel counter
         if (status) status.textContent = 'Notifications are off for YardScout in '
           + (IS_ANDROID ? 'Android' : 'iOS') + ' Settings.';
         return;
       }
+      // "Alerts turned on" counts a granted permission, not the tap: a
+      // refusal at the system prompt used to count too (2026-11-12).
+      track('native-push-enable');
       await PN.register();
     } catch (e) {
       if (status) status.textContent = 'Push setup failed — try again later.';
@@ -10495,7 +10575,10 @@ async function refreshNativeIapUi() {
 
   const checkoutBtn = $id('ent-checkout');
   if (checkoutBtn) checkoutBtn.addEventListener('click', async () => {
-    track('ent-checkout-start');
+    track('ent-checkout-start/' + upgradeTrigger);
+    // The gate rides through the Stripe redirect so the purchase is credited
+    // to the paywall that sold it (this tab only; cleared on return).
+    try { sessionStorage.setItem('ys_co_gate', upgradeTrigger); } catch (e) { /* private mode */ }
     checkoutBtn.disabled = true;
     setMsg($id('ent-checkout-status'), 'Opening secure checkout\u2026');
     try {
@@ -10530,6 +10613,8 @@ async function refreshNativeIapUi() {
       return;
     }
     track('ent-checkout-return');
+    let gate = '';
+    try { gate = sessionStorage.getItem('ys_co_gate') || ''; sessionStorage.removeItem('ys_co_gate'); } catch (e) { /* private mode */ }
     openUpgradeSheet('checkout-return');
     setMsg($id('ent-status'), 'Payment received — activating Pro\u2026');
     // The webhook usually lands within seconds; poll the confirm endpoint a few times.
@@ -10539,7 +10624,7 @@ async function refreshNativeIapUi() {
         if (ok && data.pro) {
           grantWebPro({ email: data.email, token: data.token, source: 'stripe',
             note: 'Payment received — Pro is unlocked on this device and linked to ' + data.email + '.' });
-          track('ent-purchased');
+          track('ent-purchased' + (gate ? '/' + gate : ''));
           openUpgradeSheet('checkout-done'); // re-render: now shows the Pro state
           return;
         }

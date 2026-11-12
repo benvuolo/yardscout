@@ -30,6 +30,7 @@
 import { json, err } from './util.js';
 import { CHANNELS, utcDay, resendFetch, pruneOpsErrors } from './ops.js';
 import { watchMatches } from './alerts.js';
+import { FUNNEL_V2_MARK } from './attribution.js';
 
 const H = 3600_000;
 const DAY = 24 * H;
@@ -476,25 +477,86 @@ function nameList(items, fmt) {
 
 const FUNNEL_ROWS = [
   ['first-visit', 'First visits'], ['zip-entered', 'Entered a zip'], ['part-first-search', 'Part searches'],
-  ['watch-created', 'Watches created'], ['push-enabled', 'Alerts turned on'], ['paywall', 'Paywall opens'],
-  ['checkout-start', 'Checkout taps'], ['pro-converted', 'Purchases'], ['review-prompt', 'Rating prompts'],
+  ['watch-created', 'Watches created'], ['push-enabled', 'Alerts turned on'], ['store-click', 'Store link taps'],
+  ['paywall', 'Paywall opens'], ['checkout-start', 'Checkout taps'], ['pro-converted', 'Purchases'], ['review-prompt', 'Rating prompts'],
 ];
+/* The funnel by platform (2026-11-12). One column pair per platform, exactly
+ * as each client reported: nothing is apportioned or estimated. A cell that
+ * cannot happen on a platform (a store link inside the app, the app's rating
+ * sheet on the web) prints a dash, not a zero. */
+export const FUNNEL_PLATFORMS = [['web', 'Web'], ['ios', 'iOS'], ['android', 'Android']];
+const FUNNEL_NA = { 'store-click': ['ios', 'android'], 'review-prompt': ['web'] };
+const funnelCell = (u, k, p) => {
+  if ((FUNNEL_NA[k] || []).includes(p)) return null;
+  const f = u.funnel[k];
+  return (f && f.by && f.by[p]) || { yesterday: 0, week: 0 };
+};
+const shortDay = (day) => new Date(day + 'T00:00:00Z').toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
+const dayDiff = (a, b) => Math.round((Date.parse(b + 'T00:00:00Z') - Date.parse(a + 'T00:00:00Z')) / DAY);
+
+/** Plain sentences under the funnel: which platform columns are on the fixed
+ * counting (docs/app.js EVENTS_V 2), since when, and which are not yet. The
+ * API notes the first day each platform sent a v2 event (attribution.js); a
+ * platform with no such day is labelled, never back-filled. A note drops out
+ * by itself once all seven days shown are on the fixed counting. */
+export function funnelNotes(u) {
+  const v2 = u.funnelV2 || {}, w = u.window || {};
+  const notes = [];
+  const quiet = FUNNEL_PLATFORMS.filter(([p]) => p !== 'web' && !v2[p]).map(([, name]) => name);
+  if (quiet.length) {
+    notes.push(`${quiet.join(' and ')}: no app build with the fixed counters has reported yet. App builds made after 2 Nov 2026 send no events at all,`
+      + ` so ${quiet.length > 1 ? 'these columns are' : 'this column is'} older installs only, not what the app${quiet.length > 1 ? 's' : ''} did.`
+      + ' Counting resumes with the next store release.');
+  }
+  if (!v2.web) {
+    notes.push('Web: still the old counting (a zip counted on every launch, a part search on every re-render, Pro members counted as paywall opens).'
+      + ' No event from the fixed counters has arrived yet.');
+  }
+  for (const [p, name] of FUNNEL_PLATFORMS) {
+    const since = v2[p];
+    if (!since || !w.weekAgo || since <= w.weekAgo) continue;
+    const before = p === 'web' ? 'the old counting (a zip on every launch, a part search on every re-render, Pro members as paywall opens)'
+      : 'older installs only (app builds made after 2 Nov 2026 sent nothing until this one)';
+    if (since > w.yesterday) notes.push(`${name}: the fixed counters started ${shortDay(since)}, after the days shown here. Both columns are still ${before}.`);
+    else {
+      const old = dayDiff(w.weekAgo, since);
+      notes.push(`${name}: fixed counters since ${shortDay(since)}. The 7 d column still includes ${old} earlier day${old === 1 ? '' : 's'} of ${before}; do not compare it with last week.`);
+    }
+  }
+  return notes;
+}
+const STORE_NAMES = { appstore: 'App Store', play: 'Google Play' };
+const PLACE_NAMES = { sheet: 'Pro sheet', toast: 'watch toast', banner: 'app banner', header: 'header badges', footer: 'footer badges', alerts: 'Alerts tab' };
+function storeTapsLine(u) {
+  const t = u.storeTaps;
+  if (!t || !t.total) return '';
+  return `Store link taps (7 d, web): ${t.byStore.map((x) => `${STORE_NAMES[x.store] || x.store} ${fmtInt(x.n)}`).join(', ')}`
+    + ` · from: ${t.byPlace.map((x) => `${PLACE_NAMES[x.place] || x.place} ${fmtInt(x.n)}`).join(', ')}`;
+}
 
 function usageLines(u, audience) {
   if (!u || u.error) return [`USAGE: could not load (${(u && u.error) || 'unknown'})`];
   const L = ['USAGE'];
   const d = u.devices;
-  L.push(`  App devices: ${fmtInt(d.total)} (${fmtInt(d.pro)} pro) · alerts on ${fmtInt(d.push)}`
+  // A device row exists only once an install has a push token (the app
+  // registers nothing before that), so this is NOT a count of installs.
+  L.push(`  App installs with notifications turned on: ${fmtInt(d.total)} (${fmtInt(d.pro)} pro) · reachable by push now ${fmtInt(d.push)}`
     + ` · with a watch ${fmtInt(d.withWatches)} (${fmtInt(d.watches)} watches)`);
   if (d.byPlatform.length) L.push(`    ${d.byPlatform.map((r) => `${r.platform} ${r.tier} ${fmtInt(r.n)}`).join(' · ')}`);
-  L.push(`  New devices: ${fmtInt(d.newYesterday)} yesterday · ${fmtInt(d.new7d)} in 7 d · used in last 7 d: ${fmtInt(d.active7d)}`);
+  L.push(`    New: ${fmtInt(d.newYesterday)} yesterday · ${fmtInt(d.new7d)} in 7 d · used in last 7 d: ${fmtInt(d.active7d)}`);
+  L.push('    An install that never turns notifications on is not counted here or anywhere else on the server.');
   L.push(`  Web accounts: ${fmtInt(u.web.accounts)} (${fmtInt(u.web.pro)} pro, ${fmtInt(u.web.active30d)} signed in 30 d)`
     + ` · web watches ${fmtInt(u.web.watches)} · email-alert watchers ${fmtInt(audience && audience.emailWatchers)}`);
-  L.push(`  Funnel (all platforms)       yesterday     7 d`);
+  const num = (v) => String(v == null ? '–' : fmtInt(v)).padStart(7);
+  L.push(`  Funnel by platform (yesterday / 7 d)`);
+  L.push(`    ${''.padEnd(22)}${FUNNEL_PLATFORMS.map(([, name]) => name.padStart(11).padEnd(14)).join('')}`.trimEnd());
+  L.push(`    ${''.padEnd(22)}${FUNNEL_PLATFORMS.map(() => `${'yest'.padStart(7)}${'7 d'.padStart(7)}`).join('')}`);
   for (const [k, label] of FUNNEL_ROWS) {
-    const f = u.funnel[k] || { yesterday: 0, week: 0 };
-    L.push(`    ${label.padEnd(24)} ${String(fmtInt(f.yesterday)).padStart(9)} ${String(fmtInt(f.week)).padStart(7)}`);
+    L.push(`    ${label.padEnd(22)}${FUNNEL_PLATFORMS.map(([p]) => { const c = funnelCell(u, k, p); return num(c && c.yesterday) + num(c && c.week); }).join('')}`);
   }
+  for (const n of funnelNotes(u)) L.push(`    Note: ${n}`);
+  const taps = storeTapsLine(u);
+  if (taps) L.push(`  ${taps}`);
   L.push(`  Tagged sources (first visits, 7 d): ${u.sources.length
     ? u.sources.map((s) => `${s.source} ${fmtInt(s.n)}`).join(', ') : 'none (add ?utm_source=… to links you post)'}`);
   if (u.topWatches.length) L.push(`  Most watched: ${u.topWatches.map((w) => `${w.name} ${fmtInt(w.n)}`).join(', ')}`);
@@ -588,7 +650,7 @@ async function loadUsage(env, now) {
   const today = utcDay(now), yesterday = utcDay(now - DAY), weekAgo = utcDay(now - 7 * DAY);
   const iso = (ms) => new Date(ms).toISOString();
   const watchesOk = `watches_json IS NOT NULL AND json_valid(watches_json)`;
-  const [dev, users, webWatches, events, sources, top, gateRows, pfRows] = (await env.DB.batch([
+  const [dev, users, webWatches, events, sources, top, gateRows, pfRows, v2Rows, storeRows] = (await env.DB.batch([
     env.DB.prepare(
       `SELECT platform, tier, COUNT(*) AS n,
               SUM(CASE WHEN apns_token IS NOT NULL OR fcm_token IS NOT NULL THEN 1 ELSE 0 END) AS push,
@@ -605,8 +667,8 @@ async function loadUsage(env, now) {
     ).bind(iso(now - 30 * DAY)),
     env.DB.prepare('SELECT COUNT(*) AS n FROM watches'),
     env.DB.prepare(
-      `SELECT event, SUM(CASE WHEN day = ?1 THEN n ELSE 0 END) AS yesterday, SUM(n) AS week
-         FROM events_daily WHERE day >= ?2 AND day < ?3 GROUP BY event`
+      `SELECT event, platform, SUM(CASE WHEN day = ?1 THEN n ELSE 0 END) AS yesterday, SUM(n) AS week
+         FROM events_daily WHERE day >= ?2 AND day < ?3 AND event != '${FUNNEL_V2_MARK}' GROUP BY event, platform`
     ).bind(yesterday, weekAgo, today),
     env.DB.prepare(
       `SELECT source, SUM(n) AS n FROM events_daily
@@ -630,6 +692,13 @@ async function loadUsage(env, now) {
         WHERE day >= ?1 AND day < ?2 AND (event LIKE 'pf/%' OR event LIKE 'pf-car/%')
         GROUP BY event ORDER BY n DESC`
     ).bind(weekAgo, today),
+    // First day each platform sent an event on counting rules v2 (all time).
+    env.DB.prepare(`SELECT platform, MIN(day) AS since FROM events_daily WHERE event = '${FUNNEL_V2_MARK}' GROUP BY platform`),
+    // store-click/<store>-<place>, 7 d: which store, from which button.
+    env.DB.prepare(
+      `SELECT event, SUM(n) AS n FROM events_daily
+        WHERE day >= ?1 AND day < ?2 AND event LIKE 'store-click/%' GROUP BY event`
+    ).bind(weekAgo, today),
   ])).map((r) => r.results || []);
   const gates = new Map();
   for (const r of gateRows) {
@@ -640,14 +709,32 @@ async function loadUsage(env, now) {
   const topParts = pfRows.filter((r) => String(r.event).startsWith('pf/')).slice(0, 8).map((r) => ({ name: String(r.event).slice(3), n: r.n }));
   const topCars = pfRows.filter((r) => String(r.event).startsWith('pf-car/')).slice(0, 8).map((r) => ({ name: String(r.event).slice(7), n: r.n }));
   const sum = (rows, k) => rows.reduce((a, r) => a + (r[k] || 0), 0);
+  // funnel[event] = totals + .by[platform], exactly as reported per platform.
   const funnel = {};
-  for (const e of events) funnel[e.event] = { yesterday: e.yesterday || 0, week: e.week || 0 };
-  // 'review-prompt/<reason>' (in-app rating sheet, 1.12.11+) rolls up into one row.
-  for (const e of events) {
-    if (!String(e.event).startsWith('review-prompt/')) continue;
-    const f = funnel['review-prompt'] || (funnel['review-prompt'] = { yesterday: 0, week: 0 });
+  const addFunnel = (key, e) => {
+    const f = funnel[key] || (funnel[key] = { yesterday: 0, week: 0, by: {} });
+    const b = f.by[e.platform] || (f.by[e.platform] = { yesterday: 0, week: 0 });
     f.yesterday += e.yesterday || 0; f.week += e.week || 0;
+    b.yesterday += e.yesterday || 0; b.week += e.week || 0;
+  };
+  for (const e of events) {
+    addFunnel(e.event, e);
+    // 'review-prompt/<reason>' (in-app rating sheet, 1.12.11+) rolls up into one row.
+    if (String(e.event).startsWith('review-prompt/')) addFunnel('review-prompt', e);
   }
+  const funnelV2 = {};
+  for (const r of v2Rows) funnelV2[r.platform] = r.since;
+  const storeBy = { store: new Map(), place: new Map() };
+  let storeTotal = 0;
+  for (const r of storeRows) {
+    const rest = String(r.event).slice('store-click/'.length);
+    const i = rest.indexOf('-');
+    const store = i < 0 ? rest : rest.slice(0, i), place = i < 0 ? 'other' : rest.slice(i + 1);
+    storeBy.store.set(store, (storeBy.store.get(store) || 0) + r.n);
+    storeBy.place.set(place, (storeBy.place.get(place) || 0) + r.n);
+    storeTotal += r.n;
+  }
+  const ranked = (m, key) => [...m].map(([k, n]) => ({ [key]: k, n })).sort((a, b) => b.n - a.n || String(a[key]).localeCompare(String(b[key])));
   return {
     devices: {
       total: sum(dev, 'n'), pro: sum(dev.filter((r) => r.tier === 'pro'), 'n'),
@@ -660,6 +747,9 @@ async function loadUsage(env, now) {
       active30d: sum(users, 'active30d'), watches: (webWatches[0] && webWatches[0].n) || 0,
     },
     funnel,
+    funnelV2,
+    window: { yesterday, weekAgo, today },
+    storeTaps: { total: storeTotal, byStore: ranked(storeBy.store, 'store'), byPlace: ranked(storeBy.place, 'place') },
     sources: sources.map((r) => ({ source: r.source, n: r.n })),
     topWatches: top.map((r) => ({ name: [r.make, r.model].filter(Boolean).join(' ') || 'any', n: r.n })),
     topParts, topCars,
@@ -772,21 +862,40 @@ export function composeDailyHtml(r) {
   if (u && !u.error) {
     const dv = u.devices;
     let usage = hStats([
-      ['App devices', `${fmtInt(dv.total)}<span style="font-size:13px;color:${C.dim};font-weight:400;"> · ${fmtInt(dv.pro)} Pro</span>`],
-      ['Alerts on', fmtInt(dv.push)],
+      ['Apps with alerts on', `${fmtInt(dv.total)}<span style="font-size:13px;color:${C.dim};font-weight:400;"> · ${fmtInt(dv.pro)} Pro</span>`],
+      ['Push token live', fmtInt(dv.push)],
       ['Watching', `${fmtInt(dv.withWatches)}<span style="font-size:13px;color:${C.dim};font-weight:400;"> · ${fmtInt(dv.watches)} watches</span>`],
     ]);
     usage += `<div style="font-size:13px;color:${C.dim};margin:6px 0 2px;">${dv.byPlatform.map((p) => `${esc(p.platform)} ${esc(p.tier)} ${fmtInt(p.n)}`).join(' · ')}
       &nbsp;|&nbsp; new: ${fmtInt(dv.newYesterday)} yesterday, ${fmtInt(dv.new7d)} in 7 d &nbsp;|&nbsp; used in last 7 d: ${fmtInt(dv.active7d)}<br>
+      &ldquo;Apps with alerts on&rdquo; counts app installs that turned notifications on. An install that never does is not counted here or anywhere else on the server.<br>
       Web: ${fmtInt(u.web.accounts)} account${u.web.accounts === 1 ? '' : 's'} (${fmtInt(u.web.pro)} Pro) · ${fmtInt(u.web.watches)} web watches · ${fmtInt(r.audience && r.audience.emailWatchers)} email-alert watchers</div>`;
     S.push(hSection('Users', usage));
 
+    // Funnel by platform: one "yesterday / 7 d" cell per platform (six number
+    // columns do not fit a phone's mail app), a dash where a step cannot
+    // happen on that platform, and plain notes on what predates the fix.
+    // A long pair (1,234 / 10,456) may wrap between its two numbers on a
+    // narrow screen, so the table never makes the email scroll sideways.
+    const fTD = TDN.replace('white-space:nowrap;', '').replace('padding:6px 10px', 'padding:6px 6px');
+    const fTH = THN.replace('padding:6px 10px', 'padding:6px 6px');
     const fRows = FUNNEL_ROWS.map(([k, label]) => {
       const f = u.funnel[k] || { yesterday: 0, week: 0 };
       const strong = k === 'pro-converted' && f.week ? `font-weight:700;color:${C.ok};` : '';
-      return [`<span style="${strong}">${esc(label)}</span>`, fmtInt(f.yesterday), fmtInt(f.week)];
-    });
-    S.push(hSection('Funnel', hTable(['', 'Yesterday', '7 days'], fRows), 'all platforms'));
+      return `<tr><td style="${TD}"><span style="${strong}">${esc(label)}</span></td>${FUNNEL_PLATFORMS.map(([p]) => {
+        const c = funnelCell(u, k, p);
+        if (!c) return `<td style="${fTD}color:${C.dim};">–</td>`;
+        const pair = `${fmtInt(c.yesterday)} / ${fmtInt(c.week)}`;
+        return `<td style="${fTD}${pair.length <= 9 ? 'white-space:nowrap;' : ''}">${pair}</td>`;
+      }).join('')}</tr>`;
+    }).join('');
+    let funnelHtml = `<table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse;">`
+      + `<tr><th style="${TH}"></th>${FUNNEL_PLATFORMS.map(([, name]) => `<th style="${fTH}">${esc(name)}</th>`).join('')}</tr>${fRows}</table>`;
+    const fNotes = funnelNotes(u);
+    if (fNotes.length) funnelHtml += `<div style="font-size:13px;line-height:1.5;color:${C.dim};margin-top:8px;">${fNotes.map(esc).join('<br>')}</div>`;
+    const taps = storeTapsLine(u);
+    if (taps) funnelHtml += `<div style="font-size:13px;color:${C.ink};margin-top:8px;">${esc(taps)}</div>`;
+    S.push(hSection('Funnel', funnelHtml, 'by platform, as reported · yesterday / 7 days'));
 
     if (u.gates && u.gates.length) {
       S.push(hSection('What opens the Pro sheet', hTable(['Gate', 'Opens', 'Checkout', 'Bought'],

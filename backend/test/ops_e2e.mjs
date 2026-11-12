@@ -165,9 +165,13 @@ check('daily: audience counts', d.audience && ['proDevices', 'freeDevices', 'ema
 check('daily: usage loads', d.usage && !d.usage.error && Number.isInteger(d.usage.devices?.total) && typeof d.usage.funnel === 'object', JSON.stringify(d.usage));
 check('daily: open conditions', d.openConditions?.length === NISSUES, JSON.stringify(d.openConditions));
 for (const sec of [`Verdict: ${NISSUES} issues`, `OPEN ISSUES (${NISSUES})`, 'MISSING from the scan', 'Blocked Yard - Toledo', 'SCAN', 'Last commit:', 'Live: 3 yards · 1,541 vehicles', 'Watchdog:',
-  'YARD HEALTH', 'Dormant Yard - Orem', 'Frozen Yard - Provo', 'Re-serving last copy', 'Carried Yard - Bartow', 'SENDS, last 24 h', 'email:auth', 'Resend today (UTC): 5 / 100', 'USAGE', 'App devices:', 'Funnel (all platforms)', 'Purchases']) {
+  'YARD HEALTH', 'Dormant Yard - Orem', 'Frozen Yard - Provo', 'Re-serving last copy', 'Carried Yard - Bartow', 'SENDS, last 24 h', 'email:auth', 'Resend today (UTC): 5 / 100', 'USAGE', 'App installs with notifications turned on:', 'never turns notifications on is not counted',
+  'Funnel by platform', 'Store link taps', 'Purchases']) {
   check(`daily text has "${sec}"`, text.includes(sec));
 }
+check('daily text no longer calls the push-token count "App devices"', !/App devices/.test(text) && !/App devices/.test(d.email?.html || ''));
+check('daily text: no fixed counters seen yet -> every platform is labelled, none is back-filled',
+  /Note: iOS and Android: no app build with the fixed counters has reported yet\./.test(text) && /Note: Web: still the old counting/.test(text), text.split('USAGE')[1]);
 check('daily text leaks no user email', !/tester\d@users/.test(text));
 const html = d.email?.html || '';
 check('daily html part present', html.startsWith('<!doctype html>') && html.length > 2000, String(html.length));
@@ -184,19 +188,66 @@ const ev = (e, extra = {}) => fetch(BASE + '/v1/events', { method: 'POST', heade
 await ev('first-visit', { src: 'reddit', cmp: 'r-4runner' }); await ev('first-visit'); await ev('checkout-start');
 await ev('paywall/part-value'); await ev('paywall/part-value'); await ev('paywall/watch-limit'); await ev('checkout/watch-limit'); await ev('purchase/watch-limit');
 await ev('pf/alternator'); await ev('pf/alternator'); await ev('pf/headlights'); await ev('pf-car/honda-civic'); await ev('pf-car/honda-civic'); await ev('pf-car/toyota-4runner');
+// Counting rules v2 (docs/app.js EVENTS_V): a web client on the fixed counters
+// says {v: 2}; the legacy iOS events above carry no v. Store-link taps are web only.
+const ev2 = (e, extra = {}) => ev(e, { p: 'web', v: 2, ...extra });
+await ev2('first-visit'); await ev2('first-visit'); await ev2('first-visit'); await ev2('zip-entered'); await ev2('paywall'); await ev2('paywall/header-pill');
+await ev2('store-click'); await ev2('store-click/appstore-sheet'); await ev2('store-click'); await ev2('store-click/play-toast'); await ev2('store-click'); await ev2('store-click/play-banner');
+await ev2('checkout-start'); await ev2('checkout/header-pill'); await ev('review-prompt/third-day');
+const marker = await ev('funnel-v2', { p: 'android', v: 2 });
+check('events: a client cannot post the v2 marker itself', marker.status === 400, String(marker.status));
+const TODAY = new Date().toISOString().slice(0, 10);
 r = await dailyRun({ dryRun: true, nowOffsetHours: 24 });
 const u = r.data.usage || {};
-check('usage: yesterday funnel counts', u.funnel?.['first-visit']?.yesterday === 2 && u.funnel?.['first-visit']?.week === 2
-  && u.funnel?.['checkout-start']?.yesterday === 1, JSON.stringify(u.funnel));
-check('usage: gates ranked by purchases', JSON.stringify(u.gates) === JSON.stringify([
-  { gate: 'watch-limit', paywall: 1, checkout: 1, purchase: 1 }, { gate: 'part-value', paywall: 2, checkout: 0, purchase: 0 }]), JSON.stringify(u.gates));
+check('usage: yesterday funnel counts (totals)', u.funnel?.['first-visit']?.yesterday === 5 && u.funnel?.['first-visit']?.week === 5
+  && u.funnel?.['checkout-start']?.yesterday === 2, JSON.stringify(u.funnel));
+check('usage: funnel split by platform, as reported', u.funnel?.['first-visit']?.by?.ios?.yesterday === 2 && u.funnel?.['first-visit']?.by?.web?.week === 3
+  && !u.funnel?.['first-visit']?.by?.android && u.funnel?.['checkout-start']?.by?.web?.yesterday === 1 && u.funnel?.['checkout-start']?.by?.ios?.yesterday === 1,
+  JSON.stringify(u.funnel?.['first-visit']));
+check('usage: v2 marker is per platform and never a funnel row', u.funnelV2?.web === TODAY && !u.funnelV2?.ios && !u.funnelV2?.android && !u.funnel?.['funnel-v2'], JSON.stringify(u.funnelV2));
+check('usage: store taps by store and place', u.storeTaps?.total === 3 && JSON.stringify(u.storeTaps.byStore) === JSON.stringify([{ store: 'play', n: 2 }, { store: 'appstore', n: 1 }])
+  && JSON.stringify(u.storeTaps.byPlace.map((x) => x.place)) === JSON.stringify(['banner', 'sheet', 'toast']), JSON.stringify(u.storeTaps));
+{
+  const t = r.data.email?.text || '', h = r.data.email?.html || '';
+  const row = (label) => (t.split('\n').find((l) => l.trim().startsWith(label)) || '').trim().split(/\s{2,}|\s(?=[\d–])/).slice(1).join(' ');
+  check('email: funnel header names the three platforms', /Funnel by platform \(yesterday \/ 7 d\)\n\s+Web\s+iOS\s+Android\n\s+yest\s+7 d\s+yest\s+7 d\s+yest\s+7 d/.test(t), t.split('USAGE')[1]);
+  check('email: first visits web 3/3, iOS 2/2, Android 0/0', /First visits\s+3\s+3\s+2\s+2\s+0\s+0\n/.test(t), row('First visits'));
+  check('email: store link taps are web only (dash, not zero, for the apps)', /Store link taps\s+3\s+3\s+–\s+–\s+–\s+–\n/.test(t), row('Store link taps'));
+  check('email: rating prompts are app only (dash for web)', /Rating prompts\s+–\s+–\s+1\s+1\s+0\s+0\n/.test(t), row('Rating prompts'));
+  check('email: paywall opens row', /Paywall opens\s+1\s+1\s+0\s+0\s+0\s+0\n/.test(t), row('Paywall opens'));
+  check('email: store taps line names store and place', /Store link taps \(7 d, web\): Google Play 2, App Store 1 · from: app banner 1, Pro sheet 1, watch toast 1/.test(t), t.split('USAGE')[1]);
+  check('email: web is labelled as mixed (fixed counters started inside the 7 d shown)', /Note: Web: fixed counters since [A-Z][a-z]{2} \d{1,2}\. The 7 d column still includes 6 earlier days of the old counting/.test(t), t.split('USAGE')[1]);
+  check('email: apps with no fixed build are labelled, not back-filled', /Note: iOS and Android: no app build with the fixed counters has reported yet\./.test(t) && !/Note: Web: still the old counting/.test(t));
+  check('email html: platform columns, yesterday / 7 d per cell, dash + notes', /<th[^>]*>Web<\/th><th[^>]*>iOS<\/th><th[^>]*>Android<\/th>/.test(h)
+    && /First visits<\/span><\/td><td[^>]*>3 \/ 3<\/td><td[^>]*>2 \/ 2<\/td><td[^>]*>0 \/ 0<\/td>/.test(h)
+    && /Store link taps<\/span><\/td><td[^>]*>3 \/ 3<\/td><td[^>]*>–<\/td><td[^>]*>–<\/td>/.test(h)
+    && /fixed counters since/.test(h) && /Apps with alerts on/.test(h) && /counts app installs that turned notifications on/.test(h) && /by platform, as reported · yesterday \/ 7 days/.test(h), h.slice(h.indexOf('by platform') - 200, h.indexOf('by platform') + 900));
+}
+// Eight days on, all seven days shown are on the fixed counters: the web note is gone.
+{
+  const later = await dailyRun({ dryRun: true, nowOffsetHours: 24 * 9 });
+  check('email: the mixed-window note drops out once every day shown is on the fixed counters', !/Note: Web:/.test(later.data.email?.text || '')
+    && /Note: iOS and Android:/.test(later.data.email?.text || ''), (later.data.email?.text || '').split('USAGE')[1]);
+}
+// An app build with the fix reports: that platform's label changes, the other stays.
+await ev('first-visit', { p: 'android', v: 2 });
+{
+  const a = await dailyRun({ dryRun: true, nowOffsetHours: 24 });
+  const t = a.data.email?.text || '';
+  check('email: Android reports on the fixed counters -> only iOS is still labelled silent', a.data.usage?.funnelV2?.android === TODAY
+    && /Note: iOS: no app build with the fixed counters has reported yet\..*this column is older installs only, not what the app did\./.test(t)
+    && /Note: Android: fixed counters since/.test(t) && /First visits\s+3\s+3\s+2\s+2\s+1\s+1\n/.test(t), t.split('USAGE')[1]);
+}
+check('usage: gates ranked by purchases (web checkout taps count per gate too)', JSON.stringify(u.gates) === JSON.stringify([
+  { gate: 'watch-limit', paywall: 1, checkout: 1, purchase: 1 }, { gate: 'header-pill', paywall: 1, checkout: 1, purchase: 0 },
+  { gate: 'part-value', paywall: 2, checkout: 0, purchase: 0 }]), JSON.stringify(u.gates));
 check('usage: email lists gates', /Pro sheet by gate[\s\S]*watch-limit\s+1 \/ 1 \/ 1[\s\S]*part-value\s+2 \/ 0 \/ 0/.test(r.data.email?.text || ''), (r.data.email?.text || '').split('USAGE')[1]);
 check('usage: most searched parts and cars ranked', JSON.stringify(u.topParts) === JSON.stringify([{ name: 'alternator', n: 2 }, { name: 'headlights', n: 1 }])
   && JSON.stringify(u.topCars) === JSON.stringify([{ name: 'honda-civic', n: 2 }, { name: 'toyota-4runner', n: 1 }]), JSON.stringify([u.topParts, u.topCars]));
 check('usage: email lists searched parts and cars', /Most searched parts \(7 d\): alternator 2, headlights 1/.test(r.data.email?.text || '') && /Most searched cars \(7 d\): honda-civic 2, toyota-4runner 1/.test(r.data.email?.text || ''), (r.data.email?.text || '').split('USAGE')[1]);
 check('usage: tagged source listed', JSON.stringify(u.sources) === JSON.stringify([{ source: 'reddit', n: 1 }]), JSON.stringify(u.sources));
 check('usage: email shows source + checkout taps', /Tagged sources \(first visits, 7 d\): reddit 1/.test(r.data.email?.text || '')
-  && /Checkout taps\s+1\s+1/.test(r.data.email?.text || ''), (r.data.email?.text || '').split('USAGE')[1]);
+  && /Checkout taps\s+1\s+1\s+1\s+1\s+0\s+0\n/.test(r.data.email?.text || ''), (r.data.email?.text || '').split('USAGE')[1]);
 
 /* ---- 7. daily run (send) ---- */
 r = await dailyRun();

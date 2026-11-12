@@ -119,7 +119,7 @@ function loadInterchange() { return Promise.resolve(interchangeData); }
 function ensurePricingFor() { return null; }
 function getYardsView() { return { inRange: [] }; }
 function pfRunBrowse() { __els['pf-results'] = document.getElementById('pf-results'); __els['pf-results'].innerHTML = 'BROWSE'; }
-function track() {} function pfSearchSignal() {} function pfSaveState() {}
+function track() {} function pfSearchSignal() {} function pfCountSearch() {} function pfSaveState() {}
 function effectiveRadiusMi() { return 0; }
 function pfRenderEngineChips() {}
 function pfAskHtml() { return ''; }
