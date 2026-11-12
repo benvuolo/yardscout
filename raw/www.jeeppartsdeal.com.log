@@ -7865,3 +7865,12 @@
 00:44:53 chain-unlinked headlights 2 numbers named by 68088549AC, no catalog link: 68088549AB, 68088549AA
 01:07:16 nav-fail Dodge Ram Van 2500 2000: NavError: HTTP 404 for https://www.jeeppartsdeal.com/catalog/2000-dodge-ram-van-2500-parts
 01:07:57 time budget reached records=6873
+09:10:05 start site=www.jeeppartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=6873 list_lines=5248 year_lines=758 url_index=33646
+09:10:05 completion worklist completion/mopar.own_page.json: 657 rows
+09:14:06 chain-unlinked headlights 1 numbers named by 68415346AC, no catalog link: 68415346AB
+09:33:02 chain-unlinked tail-lights 1 numbers named by 68169778AA, no catalog link: 68169778AC
+09:33:02 chain-unlinked tail-lights 1 numbers named by 68169777AA, no catalog link: 68169777AC
+09:35:34 chain-unlinked side-mirrors 1 numbers named by 6AK53JXWAA, no catalog link: 6RA65JXWAA
+09:35:34 chain-unlinked side-mirrors 1 numbers named by 5VF00JXWAG, no catalog link: 5VF00JXWAI
+09:37:26 nav-fail Dodge Ram Van 3500 1999: NavError: HTTP 404 for https://www.jeeppartsdeal.com/catalog/1999-dodge-ram-van-3500-parts
+09:40:22 time budget reached records=6901
