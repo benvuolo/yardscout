@@ -335,9 +335,9 @@ def capture(browser, base, platform, slides, raw_dir: Path) -> dict[str, Path]:
 SLIDE_HTML = """<!doctype html><html><head><meta charset="utf-8">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800&display=swap" rel="stylesheet">
 <style>
-  :root { --ink:#1C1C1A; --paper:#F4F2EC; --dim:#B3B1AA; --brand:#F26B1D; --rim:#3F3F3B; }
-  html,body { margin:0; height:100%%; background:var(--ink); }
-  body { font-family:'Inter',system-ui,sans-serif; color:var(--paper); display:flex;
+  :root { --bg:%(bg)s; --fg:%(fg)s; --dim:%(dim)s; --brand:#F26B1D; --rim:%(rim)s; }
+  html,body { margin:0; height:100%%; background:var(--bg); }
+  body { font-family:'Inter',system-ui,sans-serif; color:var(--fg); display:flex;
          flex-direction:column; align-items:center; overflow:hidden; }
   .stripe { position:absolute; left:0; right:0; top:0; height:%(stripe)spx;
             background:repeating-linear-gradient(-45deg,var(--brand) 0 %(sw)spx,transparent %(sw)spx %(sw2)spx); opacity:.9; }
@@ -348,13 +348,23 @@ SLIDE_HTML = """<!doctype html><html><head><meta charset="utf-8">
   .phone { margin-top:%(phgap)spx; width:%(pw)spx; height:%(ph)spx; border-radius:%(pr)spx;
            border:%(bw)spx solid var(--rim); background:#000; padding:%(pad)spx; box-sizing:border-box;
            flex:none; }
-  .screen { width:100%%; height:100%%; border-radius:%(sr)spx; overflow:hidden; background:var(--paper); }
+  .screen { width:100%%; height:100%%; border-radius:%(sr)spx; overflow:hidden; background:%(screen)s; }
   .screen img { display:block; width:100%%; }
 </style></head><body>
 <div class="stripe"></div>
 <div class="head"><h1>%(headline)s</h1>%(subhtml)s</div>
 <div class="phone"><div class="screen"><img src="data:image/png;base64,%(img)s"></div></div>
 </body></html>"""
+
+# Slide styles. Colours are docs/styles.css tokens (light: --bg, --text,
+# --text-dim; dark: the same names under [data-theme="dark"]).
+#   dark-out:  ink background, cream headline, the app in its light theme
+#   light-out: paper background, ink headline, the app in its dark theme
+STYLES = {
+    "dark-out": dict(theme="light", bg="#1C1C1A", fg="#F4F2EC", dim="#B3B1AA", rim="#3F3F3B", screen="#F4F2EC"),
+    "light-out": dict(theme="dark", bg="#F4F2EC", fg="#1C1C1A", dim="#5E5B54", rim="#1C1C1A", screen="#1C1C1A"),
+}
+STYLE = STYLES["dark-out"]
 
 # CSS geometry per store (the page is rendered at the store's CSS size).
 GEOM = {
@@ -372,7 +382,7 @@ def compose(browser, raw: Path, headline: str, sub: str, platform: str, out: Pat
     with Image.open(raw) as im:
         aspect = im.width / im.height
     # Estimate the header height by rendering once and measuring.
-    params = dict(g, headline=headline, subhtml=f"<p>{sub}</p>" if sub else "",
+    params = dict(g, **STYLE, headline=headline, subhtml=f"<p>{sub}</p>" if sub else "",
                   img=base64.b64encode(raw.read_bytes()).decode(), pw=100, ph=100, sr=g["pr"] - g["pad"])
     ctx = browser.new_context(viewport={"width": W, "height": H}, device_scale_factor=g["scale"])
     page = ctx.new_page()
@@ -400,7 +410,12 @@ def main():
     ap.add_argument("--only", help="comma list of steps (cars,map,parts,rows,alerts,value)")
     ap.add_argument("--platforms", default="ios,android")
     ap.add_argument("--keep-raw", type=Path, help="keep the raw app captures here")
+    ap.add_argument("--style", choices=sorted(STYLES), default="dark-out",
+                    help="dark-out: dark slide, light app (default); light-out: light slide, dark app")
     args = ap.parse_args()
+    global THEME, STYLE
+    STYLE = STYLES[args.style]
+    THEME = STYLE["theme"]
 
     slides = [s for s in SLIDES if not args.only or s[3] in args.only.split(",")]
     base, srv = (args.base, None) if args.base else serve_docs()
