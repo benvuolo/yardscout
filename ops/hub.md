@@ -293,3 +293,14 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
   `native/www`, no remote URL), so iPhone and Android get it only with the
   next store release, which needs the owner's "ship".
 - Suggestion counts show for Pro only (same rule as the Make/Model lists).
+
+## 2026-11-12 ~23:00 UTC car search wording; U-Pull-R follow-up drafted
+
+- Owner asked whether the new search box should go (an earlier free-text
+  search was removed because people could type anything). Kept: it is a
+  picker, not free text; the list only changes when a suggestion is picked.
+  bf9c7653 (sw jh-v186): the no-match row now says the box finds cars by make
+  or model and points to the Parts tab.
+- U-Pull-R: Glenn (CTO) has not replied since 11-06. Follow-up saved as a
+  Gmail draft in thread `1a1b2b1b2f24f262`; the owner sends it. Reply watch
+  `trig_019imiZ2pPN5QP6g5kuvcYYR` is still disabled.
