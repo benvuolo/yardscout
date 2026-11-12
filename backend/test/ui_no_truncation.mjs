@@ -963,6 +963,47 @@ const SCREENS = [
     });
     await settle(page, 300);
   }, async (page) => { await page.evaluate(() => { activeZipCoords = window.__zipWas; document.getElementById('watch-toast').classList.remove('show'); }); }],
+  // The free Monday email offer in the watch toast (web, 2026-11-12): the
+  // ask, its message line, the "check your inbox" reply, and the one-tap
+  // add for a confirmed address. The longest model name in the scan.
+  ...[['watch-toast-recap', 'ask'], ['watch-toast-recap-msg', 'msg'], ['watch-toast-recap-sent', 'sent'], ['watch-toast-recap-add', 'add']].map(([name, mode]) => [name, async (page) => {
+    await tab(page, 'live');
+    await page.evaluate(async (mode) => {
+      try { sessionStorage.removeItem('ys_recap_no'); } catch (e) { /* none */ }
+      window.__recapWas = localStorage.getItem('ys_recap');
+      if (mode === 'add') localStorage.setItem('ys_recap', JSON.stringify({ email: 'christopher.longname@example.com', state: 'confirmed', sub: 'eA.' + '0'.repeat(64) }));
+      else localStorage.removeItem('ys_recap');
+      const c = activeZipCoords || { lat: 37.33, lng: -121.89 };
+      _recapNew = [{ make: 'Mercedes-Benz', model: 'Sprinter 2500 Cargo Van', lat: c.lat, lng: c.lng, radiusMi: 250 }];
+      showWatchToast('Mercedes-Benz Sprinter 2500 Cargo Van');
+      clearTimeout(_watchToastTimer);
+      const t = document.getElementById('watch-toast');
+      if (!t.querySelector('.mail-ask')) throw new Error('no Monday-email offer in the toast');
+      if (mode === 'msg') {
+        t.querySelector('.mail-email').value = 'nope';
+        t.querySelector('.mail-form').requestSubmit();
+        if (!t.querySelector('.mail-msg').textContent) throw new Error('no message for a bad address');
+      }
+      if (mode === 'sent') {
+        window.__fetchWas = window.fetch;
+        window.fetch = async (u, i) => (String(u).includes('/v1/recap/') ? new Response('{"ok":true,"state":"confirm-sent"}', { status: 200 }) : window.__fetchWas(u, i));
+        t.querySelector('.mail-email').value = 'christopher.longname@example.com';
+        t.querySelector('.mail-form').requestSubmit();
+        for (let i = 0; i < 40 && !t.dataset.recapDone; i++) await new Promise(r => setTimeout(r, 25));
+        clearTimeout(_watchToastTimer);
+        if (!/Check your inbox/.test(t.innerText)) throw new Error('no "check your inbox" reply');
+      }
+    }, mode);
+    await settle(page, 300);
+  }, async (page) => {
+    await page.evaluate(() => {
+      clearTimeout(_watchToastTimer);
+      document.getElementById('watch-toast').classList.remove('show');
+      if (window.__fetchWas) { window.fetch = window.__fetchWas; window.__fetchWas = null; }
+      if (window.__recapWas) localStorage.setItem('ys_recap', window.__recapWas); else localStorage.removeItem('ys_recap');
+      try { sessionStorage.removeItem('ys_recap_no'); } catch (e) { /* none */ }
+    });
+  }]),
   ['alerts-hits', async (page) => {
     await tab(page, 'live');
     await page.evaluate(() => {

@@ -36,6 +36,10 @@ const FUNNEL_EVENTS = {
   'email-alerts-linked': 'push-enabled', 'checkout-start': 'checkout-start', 'iap-subscribe': 'checkout-start',
   'ent-checkout-start': 'checkout-start', 'iap-purchased': 'pro-converted', 'ent-purchased': 'pro-converted',
   'pro-lock': 'paywall', 'store-click': 'store-click',
+  // Free Monday email (web): asked = the field shown after a watch (once per
+  // visit), submitted = an address sent. 'Confirmed' is counted by the API at
+  // the confirmation click (backend/src/recap_signup.js), not here.
+  'email-asked': 'email-asked', 'email-submitted': 'email-submitted',
 };
 const ATTRIB = (() => {
   try {
@@ -3581,6 +3585,7 @@ function applyShareHash() {
   focusedCarKey = m ? safeDecode(m[1]) : null;
 }
 window.addEventListener('hashchange', () => {
+  if (handleRecapHash()) return;
   const alertId = (location.hash.match(/#alert=([^&]+)/) || [])[1];
   if (alertId) { openFromAlert(safeDecode(alertId)); return; }
   const watch = parseWatchHash(location.hash);
@@ -9057,6 +9062,7 @@ function addQuickWatch(make, model, yrMin, yrMax, source) {
   seedAlertedForEntry(entry);
   syncWatchToServer(entry);
   track('watch-created/' + source);
+  recapNoteNewWatch(entry);
   return 'added';
 }
 
@@ -9172,6 +9178,149 @@ function jhOpenAlertsTab() {
   try { document.querySelector('.tab[data-tab="alerts"]').click(); } catch (e) { /* boot race */ }
 }
 
+/* ===== FREE MONDAY EMAIL ON THE WEB (2026-11-12, owner approved) =====
+ * A web watch lives only in this browser. Right after one is created, the
+ * watch toast offers one line: a free Monday email listing cars that match
+ * it and were set out near the visitor, with an email field and one button.
+ * No account, no password. The API (backend/src/recap_signup.js) keeps a
+ * COPY of the watch's criteria and sends a confirmation email first; nothing
+ * else is sent until the visitor clicks it. The watch saved here is never
+ * changed, and it is saved before the offer appears, so the email can never
+ * block or delay it.
+ *   - web only: the app shells have push and never see this
+ *   - not for Pro (same-day alerts) and not for a watch with no zip centre
+ *   - dismissed (x, or ignored for 30 s) = not asked again during this visit
+ *   - once confirmed (the email's button lands here with #recap=confirmed&sub=),
+ *     later watches join the same Monday email with one tap
+ * localStorage ys_recap = {email, state: 'pending'|'confirmed', sub?}. */
+const RECAP_API = (!IS_NATIVE && /^(localhost|127\.0\.0\.1)$/.test(location.hostname) && window.__YS_RECAP_API)
+  || 'https://yardscout-api.yardscout.workers.dev';
+const RECAP_MAX = 5;   // mirrors RECAP_MAX_WATCHES in backend/src/recap_signup.js
+let _recapNew = [];    // watches created since the last toast
+function recapState() {
+  try { const v = JSON.parse(localStorage.getItem('ys_recap') || 'null'); return v && v.email ? v : null; } catch (e) { return null; }
+}
+function recapSave(v) {
+  try { if (v) localStorage.setItem('ys_recap', JSON.stringify(v)); else localStorage.removeItem('ys_recap'); } catch (e) { /* private mode */ }
+}
+function recapDismissed() {
+  try { return sessionStorage.getItem('ys_recap_no') === '1'; } catch (e) { return false; }
+}
+function recapDismiss() {
+  try { sessionStorage.setItem('ys_recap_no', '1'); } catch (e) { /* private mode */ }
+}
+function recapMask(email) {
+  const s = String(email || ''), at = s.lastIndexOf('@');
+  return at < 1 ? s : `${s[0]}•••${s.slice(at)}`;
+}
+/** Whether a toast for this new watch offers the Monday email. Pure (unit-tested). */
+function recapEligible(entry, native, pro, dismissed) {
+  return !native && !pro && !dismissed && !!entry && !!entry.make && entry.lat != null && entry.lng != null && !!entry.radiusMi;
+}
+function recapNoteNewWatch(entry) {
+  if (recapEligible(entry, IS_NATIVE, isPro(), recapDismissed())) _recapNew.push(entry);
+}
+function recapAskEntries() { return _recapNew.slice(0, RECAP_MAX); }
+function recapTakeEntries() {
+  const e = recapDismissed() || IS_NATIVE || isPro() ? [] : recapAskEntries();
+  _recapNew = [];
+  return e;
+}
+/** The criteria the API copies (free fields only; the centre rounded to ~1 km). */
+function recapWatchBody(e) {
+  return { make: e.make, model: e.model || '', yearMin: e.yrMin || null, yearMax: e.yrMax || null,
+    lat: Math.round(e.lat * 100) / 100, lng: Math.round(e.lng * 100) / 100, radiusMi: e.radiusMi };
+}
+function recapAskHtml(label, entries) {
+  const st = recapState();
+  const r = entries[0].radiusMi;
+  const what = entries.length > 1 ? `these ${entries.length} watches` : `<strong>${escapeHtml(label)}</strong>`;
+  if (st && st.state === 'confirmed' && st.sub) {
+    return `<span class="mail-line">Add ${what} to your free Monday email?</span>
+      <div class="watch-zip-row"><button type="button" class="btn btn-primary btn-sm" data-act="recap-add">Add</button></div>
+      <span class="watch-zip-msg mail-msg" role="status"></span>`;
+  }
+  return `<span class="mail-line">Get a free Monday email listing every ${what} set out within ${escapeHtml(String(r))}&nbsp;mi.</span>
+    <form class="watch-zip-row mail-form" novalidate>
+      <input type="email" class="watch-zip-input mail-email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false"
+        placeholder="Email" aria-label="Email address" maxlength="254" value="${escapeHtml(st ? st.email : '')}">
+      <button type="submit" class="btn btn-primary btn-sm">Email me</button>
+    </form>
+    <span class="watch-zip-msg mail-msg" role="status"></span>`;
+}
+async function recapPost(path, body) {
+  const r = await fetch(RECAP_API + path, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
+  let data = {};
+  try { data = await r.json(); } catch (e) { data = {}; }
+  return { status: r.status, data };
+}
+function recapFail(res) {
+  if (res && res.data && res.data.message && res.status !== 500) return res.data.message;
+  return 'We could not reach our server. Your watch is saved here; try again in a minute.';
+}
+async function recapSubmit(el, entries, done) {
+  const input = el.querySelector('.mail-email'), msg = el.querySelector('.mail-msg'), btn = el.querySelector('.mail-form .btn');
+  const email = String((input && input.value) || '').trim().toLowerCase();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg.textContent = 'Enter your email address.'; input.focus(); return; }
+  btn.disabled = true;
+  msg.textContent = 'Sending…';
+  let res = null;
+  try {
+    for (const e of entries) {
+      res = await recapPost('/v1/recap/signup', { email, watch: recapWatchBody(e) });
+      if (res.status !== 200) break;
+    }
+  } catch (e) { res = { status: 0, data: {} }; }
+  btn.disabled = false;
+  if (!res || res.status !== 200) { msg.textContent = recapFail(res); return; }
+  track('email-submitted');
+  const prev = recapState();
+  recapSave(prev && prev.email === email && prev.state === 'confirmed' ? prev : { email, state: 'pending' });
+  el.dataset.recapDone = '1';
+  const ask = el.querySelector('.mail-ask');
+  if (ask) ask.innerHTML = `<span class="mail-line"><strong>Check your inbox.</strong> Tap the link we sent to ${escapeHtml(recapMask(email))} to start your Monday email. Nothing is sent until you do.</span>`;
+  done();
+}
+async function recapAddAll(el, entries, done) {
+  const st = recapState(), msg = el.querySelector('.mail-msg'), btn = el.querySelector('[data-act="recap-add"]');
+  if (!st || !st.sub) return;
+  btn.disabled = true;
+  msg.textContent = 'Adding…';
+  let res = null;
+  try {
+    for (const e of entries) {
+      res = await recapPost('/v1/recap/add', { sub: st.sub, watch: recapWatchBody(e) });
+      if (res.status !== 200) break;
+    }
+  } catch (e) { res = { status: 0, data: {} }; }
+  btn.disabled = false;
+  if (res && (res.status === 401 || res.status === 404)) {
+    // Unsubscribed (or the token is stale): forget it; the next watch asks afresh.
+    recapSave(null);
+    msg.textContent = 'That address is no longer subscribed. Your next watch will offer the email again.';
+    return;
+  }
+  if (!res || res.status !== 200) { msg.textContent = recapFail(res); return; }
+  el.dataset.recapDone = '1';
+  const ask = el.querySelector('.mail-ask');
+  if (ask) ask.innerHTML = `<span class="mail-line">Added. It will be in your next Monday email to ${escapeHtml(recapMask(st.email))}.</span>`;
+  done();
+}
+/* The confirmation email's button lands here: #recap=confirmed&sub=<token>. */
+function handleRecapHash() {
+  const m = /#recap=confirmed&sub=([^&]+)/.exec(location.hash);
+  if (!m || IS_NATIVE) return false;
+  let sub = '';
+  try { sub = decodeURIComponent(m[1]); } catch (e) { sub = ''; }
+  history.replaceState(null, '', location.pathname + location.search);
+  let email = '';
+  try { email = new TextDecoder().decode(Uint8Array.from(atob(sub.split('.')[0].replace(/-/g, '+').replace(/_/g, '/')), (c) => c.charCodeAt(0))); } catch (e) { email = ''; }
+  if (!/^[^\s@]+@[^\s@]+$/.test(email) || !/\.[0-9a-f]{64}$/.test(sub)) return true;
+  recapSave({ email, state: 'confirmed', sub });
+  showWatchToast('', { message: `<strong>You&rsquo;re in.</strong> Your free Monday email to ${escapeHtml(recapMask(email))} is confirmed.` });
+  return true;
+}
+
 /* Confirmation after a quick watch, with the ONE next step that makes the
  * watch actually reach the person: notifications on (app), the app itself
  * (web), or — already set — what free vs Pro delivery looks like. Never
@@ -9185,11 +9334,22 @@ function showWatchToast(label, opts = {}) {
     el.className = 'watch-toast';
     el.setAttribute('role', 'status');
     document.body.appendChild(el);
+    // Typing an address stops the Monday-email offer from timing out.
+    el.addEventListener('focusin', () => { if (el.dataset.recapAsk === '1') clearTimeout(_watchToastTimer); });
   }
   const pushOn = localStorage.getItem('ys_push_on') === '1';
   let next = '';
   let head = `Watching <strong>${escapeHtml(label)}</strong>`;
-  if (opts.zip) {
+  // Web, right after a new watch: the free Monday email (one line, one
+  // field, one button). The watch is already saved; this only offers more.
+  const recapEntries = !opts.zip && !opts.undo && !opts.manage && !opts.message ? recapTakeEntries() : [];
+  let recapAsk = false;
+  if (opts.message) {
+    head = opts.message;
+  } else if (recapEntries.length) {
+    recapAsk = true;
+    next = recapAskHtml(label, recapEntries);
+  } else if (opts.zip) {
     // No location saved (a shared car, a part search before the zip): ask
     // for it here instead of pointing at a zip field this screen lacks.
     head = `Watch <strong>${escapeHtml(label)}</strong>`;
@@ -9216,15 +9376,26 @@ function showWatchToast(label, opts = {}) {
   }
   el.innerHTML = `<div class="watch-toast-head">${opts.undo || opts.zip ? ICON.bell : ICON.check}<span>${head}</span>
       <button type="button" class="watch-toast-x" data-act="close" aria-label="Dismiss">&times;</button></div>
-    ${next ? `<div class="watch-toast-next${opts.zip ? ' watch-toast-ask' : ''}">${next}</div>` : ''}`;
+    ${next ? `<div class="watch-toast-next${opts.zip || recapAsk ? ' watch-toast-ask' : ''}${recapAsk ? ' mail-ask' : ''}">${next}</div>` : ''}`;
   const submitZip = async () => {
     if (await watchZipSubmit(el.querySelector('.watch-zip-input'), el.querySelector('.watch-zip-msg'))) { hide(); opts.zip(); }
   };
   el.onkeydown = (e) => { if (opts.zip && e.key === 'Enter' && e.target.closest('.watch-zip-input')) { e.preventDefault(); submitZip(); } };
+  el.onsubmit = (e) => {
+    if (!e.target.closest('.mail-form')) return;
+    e.preventDefault();
+    recapSubmit(el, recapEntries, () => { clearTimeout(_watchToastTimer); _watchToastTimer = setTimeout(hide, 9000); });
+  };
+  el.dataset.recapAsk = recapAsk ? '1' : '';
   el.onclick = (e) => {
     const act = e.target.closest('[data-act]');
     if (!act) return;
     if (act.dataset.act === 'zip') { submitZip(); return; }
+    if (act.dataset.act === 'recap-add') {
+      recapAddAll(el, recapEntries, () => { clearTimeout(_watchToastTimer); _watchToastTimer = setTimeout(hide, 6000); });
+      return;
+    }
+    if (act.dataset.act === 'close' && recapAsk && !el.dataset.recapDone) recapDismiss();
     if (act.dataset.act === 'push') { track('watch-toast-push'); document.getElementById('native-push-enable').click(); }
     if (act.dataset.act === 'pro') openUpgradeSheet('watch-toast');
     if (act.dataset.act === 'app') track('watch-toast-app');
@@ -9242,9 +9413,16 @@ function showWatchToast(label, opts = {}) {
     _promoStepAside = false;
   };
   el.classList.add('show');
+  delete el.dataset.recapDone;
   clearTimeout(_watchToastTimer);
+  if (recapAsk) {
+    track('email-asked');
+    // Left alone, the offer goes after 30 s and counts as a "no" for this visit.
+    _watchToastTimer = setTimeout(() => { if (!el.dataset.recapDone) recapDismiss(); hide(); }, 30000);
+    return;
+  }
   // A toast that is waiting for a zip stays until it is answered or dismissed.
-  if (!opts.zip) _watchToastTimer = setTimeout(hide, next ? 12000 : 4000);
+  if (!opts.zip) _watchToastTimer = setTimeout(hide, next ? 12000 : (opts.message ? 6000 : 4000));
 }
 
 /* ===== A WATCH FROM A SHARE PAGE, IN THE FEWEST TAPS (2026-11-12) =====
@@ -9767,7 +9945,7 @@ function addWatchItem() {
     seedAlertedForEntry(entry);
     syncWatchToServer(entry);
     // Saving an edit replaces a watch; only a net new one is "created".
-    if (!(editing && !added)) track('watch-created');
+    if (!(editing && !added)) { track('watch-created'); recapNoteNewWatch(entry); }
     added++;
   }
   if (!added) return alert(editing ? 'That\u2019s the same as a watch you already have.' : 'Already on your watchlist.');
@@ -9779,6 +9957,11 @@ function addWatchItem() {
   renderAlerts();
   saveWatchlistFile();
   checkAndNotify();
+  // The form's Add has no toast of its own; on the web the Monday-email
+  // offer still follows a new watch (never an edit).
+  if (!editing && recapAskEntries().length) {
+    showWatchToast(models.length === 1 && models[0] ? `${make} ${models[0]}` : (models.length > 1 ? `${make} (${added} models)` : make));
+  } else if (editing) _recapNew = [];
 }
 
 function removeWatchItem(idx) {
@@ -10019,6 +10202,7 @@ loadLiveInventory({ fresh: !!_bootAlertId });
   const el = t && document.querySelector(`.tab[data-tab="${t}"]`);
   if (el) { el.click(); history.replaceState(null, '', location.pathname + location.search); }
   if (el && t === 'alerts') startWatchIntent(w);
+  handleRecapHash();
 }
 
 // Offline + instant-launch cache. Needs a secure context (HTTPS or localhost) —
