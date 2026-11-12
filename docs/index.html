@@ -137,6 +137,19 @@
       <div class="skel-chip skeleton"></div>
       <div class="skel-chip skeleton"></div>
     </div>
+    <!-- Car search (2026-11-12, from r/XTerra feedback: "donor cars near me
+         without specifying a part"). Picking a suggestion sets the same
+         Make + Model filters as the Filters panel. A textarea (like the
+         Parts tab's part box) so the placeholder wraps at large text sizes. -->
+    <div class="car-search" id="car-search">
+      <div class="car-search-field">
+        <svg class="ico car-search-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+        <textarea id="car-search-input" class="search-box car-search-input" rows="1" placeholder="Search a car (e.g. Xterra, 4Runner)" aria-label="Search a car near you by make or model" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="car-search-suggest"></textarea>
+        <button type="button" class="car-search-clear" id="car-search-clear" aria-label="Clear car search" hidden><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+        <div class="compare-suggest" id="car-search-suggest" role="listbox" aria-label="Cars near you" style="display:none;"></div>
+      </div>
+      <p class="car-search-note" id="car-search-note" role="status" hidden></p>
+    </div>
     <div class="toolbar">
       <button type="button" id="zip-chip" class="zip-chip" style="display:none;" aria-label="Change your zip code and distance"></button>
       <button type="button" class="filter-toggle" id="live-filter-toggle">

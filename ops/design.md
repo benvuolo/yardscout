@@ -249,3 +249,37 @@ still need the owner's explicit "ship".
   of the Cars tab, and a deep link (e.g. `#cars=Nissan|Xterra`) so posts can
   link straight to a model near the reader's zip. Needs an sw bump; app side
   needs the owner's "ship".
+
+## State (2026-11-12) — car search on the Cars tab, branch `design/car-search`
+
+Built from the r/XTerra note above; not merged (the hub reviews and merges;
+going live on the web is a merge to main, the store shells need nothing).
+- `docs/index.html`: "Search a car (e.g. Xterra, 4Runner)" box between the
+  stats bar and the zip chip + Filters row (a textarea, like the Parts part
+  box, so the placeholder wraps at 200% text). Visible above the fold at
+  390x844 once a zip is set.
+- `docs/app.js` CAR SEARCH: suggestions are the make + model pairs (plus
+  "Make · all models") in the radius scope the Make list uses, spelling-
+  insensitive (xterra, 4 runner, f150, cr v, chevy silverado). A pick sets
+  the Make select + `selectedModels` through `populateModelFilter` and
+  renders through `renderLive`, so it is identical to Filters -> Make ->
+  Model (the e2e compares the two). Enter picks the single/only-exact
+  match; arrows + Enter pick the highlighted one; x resets make + model
+  (years stay, as Filters leaves them). The box follows Filters changes.
+  Counts in suggestions are Pro-only, like the Make/Model lists.
+- `#cars=Make|Model|YYYY-YYYY` (model, years optional; parsed like
+  `#watch=`): opens Cars, applies once a zip and its inventory are in; with
+  no zip the banner shows and the box is prefilled; a name not in range
+  leaves every car listed with a note. Works with `?utm_source=` and while
+  the app is open (hashchange). Example: https://yardscout.io/#cars=Nissan|Xterra|2005-2015
+- `docs/styles.css`: car-search block; plus `.cc-head > .car-badges` may
+  shrink so "Manual" + "Leaving soon" wrap at 320 px / 200% (found by the
+  new truncation screens on a filtered Xterra list).
+- sw `jh-v185`. Tests: `backend/test/car_search_unit.mjs`,
+  `backend/test/car_search_e2e.mjs`, and three car-search screens in
+  `ui_no_truncation.mjs`. Screens: scratchpad `xt/carsearch_{light,dark}.png`.
+- Not changed: default sorts, free limits, watches and their matching, the
+  Parts tab, backend, scraper.
+- Open: Pro users who skipped the zip (nationwide, no location) have the
+  Make filter disabled today, so a `#cars=` link waits for a zip for them
+  too. No goatcounter event names beyond `car-search` / `car-link`.
