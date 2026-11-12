@@ -289,5 +289,7 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
   share_watch, tab_retap, browser_e2e (17/0), all pass. ui_no_truncation was
   run by the builder at 390 and 1280 only (568 checks, 0 failures); the full
   width matrix was not run.
-- Web only; the apps load the same files, so no store release is needed.
+- Live on the web at merge. The apps bundle the web files (`webDir`
+  `native/www`, no remote URL), so iPhone and Android get it only with the
+  next store release, which needs the owner's "ship".
 - Suggestion counts show for Pro only (same rule as the Make/Model lists).
