@@ -315,3 +315,16 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
   - `growth/scorecard`: weekly scorecard at the top of the daily ops email
     (visitors by source, watches, emails, paywall to checkout, subscribers)
     plus an admin JSON endpoint. Not deployed until merged.
+
+## 2026-11-12 ~23:15 UTC weekly scorecard live in the Worker
+
+- `growth/scorecard` merged at 5761863e; deploy-workers run 43326783612
+  succeeded. Hub regression on the merged tree: scorecard_unit (96),
+  ops_quiet, funnel_counters, recap_signup units and e2e-ops.sh, all pass.
+  `/v1/admin/scorecard` answers 401 without the secret (was not there before).
+- First real scorecard: the 13:07 UTC email on 2026-11-13. Week-on-week
+  changes read "not comparable" until two full weeks are on the fixed
+  counting; the subscriber change starts 7 days after the first snapshot.
+- Not done: confirmed email sign-ups cannot be split by link (the server
+  counts confirmations without a source). Noted in `ops/growth.md`.
+- Still running: `parts/gen-splits-trucks`.
