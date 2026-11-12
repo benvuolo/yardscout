@@ -307,3 +307,9 @@ The generic-only count re-matches every distinct year/make/model in
    Routing follow-up (§23.2): done in §23.6 (below).
 5. When the daily email's "Most searched parts / cars (7 d)" has a week of
    data, let it reorder the list. Re-measure after each model.
+
+## 2026-11-12 (hub): Xterra parts list is thin and spans generations; owner-community leads
+- Today the app flags 5 parts for first gen Xterras and 6 for second gen. The roof rack, side steps, tail lights, diff-lock switch and center console rows all say "fits 2000–2015", which spans the 2000–04 and 2005–15 generations. Those parts are not the same across generations: split the rows by generation or state the basis (rule 3).
+- Leads from an r/XTerra owner thread ("What parts to grab at the junkyard?", 2026-11-12). These are leads, NOT a fitment basis; each needs its own stated basis and price before a row is added:
+  second gen (2005–15): roof gear basket and lid (owners report no longer sold new), IPDM relay box (owners prefer the later black revision), rear seat-bottom latch with pull loop, under-seat subwoofer (premium audio: option), roof lights and covers (Off-Road / Pro-4X: option), ECM, door lock actuators, window regulators, cam/crank sensors, ignition coils, evap canister, wiper and light stalks (markings wear off), sun visors, rear door latches, rear cupholder, first-aid kit.
+- Option parts stay flagged `option` with $0 to ranking.
