@@ -13311,3 +13311,14 @@
 10:58:24 chain-unlinked tail-lights 1 numbers named by FB5Z-13405-E, no catalog link: FB5Z-13405-K
 10:58:24 chain-unlinked tail-lights 1 numbers named by FB5Z-13405-F, no catalog link: FB5Z-13405-L
 11:12:16 time budget reached records=9728
+20:12:44 start site=www.fordpartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=9728 list_lines=7623 year_lines=1269 url_index=36339
+20:12:44 completion worklist completion/ford.own_page.json: 695 rows
+20:18:05 chain-unlinked window-regulator 1 numbers named by CC3Z-2523200-B, no catalog link: CC3Z-2523200-E
+20:18:05 chain-unlinked window-regulator 1 numbers named by CC3Z-2523201-B, no catalog link: CC3Z-2523201-E
+20:18:13 chain-unlinked window-regulator 1 numbers named by CC3Z-2627000-B, no catalog link: CC3Z-2627000-D
+20:18:13 chain-unlinked window-regulator 1 numbers named by CC3Z-2627001-B, no catalog link: CC3Z-2627001-D
+20:22:12 chain-unlinked bumper-rear 1 numbers named by F8MZ-17K835-AA, no catalog link: 9W3Z-17C830-A
+20:30:37 chain-unlinked window-regulator 1 numbers named by 6F9Z-7423209-A, no catalog link: 7F9Z-7423209-A
+20:31:17 chain-unlinked window-regulator 2 numbers named by 8F9Z-7427008-A, no catalog link: 5F9Z-7427008-AA, 7F9Z-7427000-A
+20:31:17 chain-unlinked window-regulator 2 numbers named by 8F9Z-7427009-A, no catalog link: 5F9Z-7427009-AA, 7F9Z-7427001-A
+20:44:56 STOPPED: www.fordpartsgiant.com refused or challenged (HTTP 503); domain stopped for this program
