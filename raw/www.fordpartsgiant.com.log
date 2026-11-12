@@ -13285,3 +13285,29 @@
 08:05:47 start site=www.fordpartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=9703 list_lines=7213 year_lines=1222 url_index=36022
 08:05:47 completion worklist completion/ford.own_page.json: 695 rows
 08:38:51 time budget reached records=9710
+10:41:35 start site=www.fordpartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=9710 list_lines=7433 year_lines=1247 url_index=36090
+10:41:35 completion worklist completion/ford.own_page.json: 695 rows
+10:56:40 chain-unlinked bumper-rear 2 numbers named by FB5Z-17K835-ADPTM, no catalog link: FB5Z-17K835-AD, FB5Z-17K835-AB
+10:58:16 chain-unlinked side-mirrors 1 numbers named by GB5Z-17682-MDPTM, no catalog link: GB5Z-17682-MC
+10:58:16 chain-unlinked side-mirrors 1 numbers named by GB5Z-17683-MCPTM, no catalog link: GB5Z-17683-MA
+10:58:16 chain-unlinked side-mirrors 1 numbers named by DB5Z-17682-DF, no catalog link: DB5Z-17682-DK
+10:58:16 chain-unlinked side-mirrors 1 numbers named by DB5Z-17682-DH, no catalog link: DB5Z-17682-DL
+10:58:16 chain-unlinked side-mirrors 1 numbers named by DB5Z-17682-UG, no catalog link: DB5Z-17682-UJ
+10:58:16 chain-unlinked side-mirrors 1 numbers named by DB5Z-17682-UH, no catalog link: DB5Z-17682-UK
+10:58:16 chain-unlinked side-mirrors 1 numbers named by DB5Z-17683-DC, no catalog link: DB5Z-17683-DE
+10:58:16 chain-unlinked side-mirrors 1 numbers named by DB5Z-17683-DD, no catalog link: DB5Z-17683-DF
+10:58:16 chain-unlinked side-mirrors 1 numbers named by DB5Z-17683-UG, no catalog link: DB5Z-17683-UJ
+10:58:16 chain-unlinked side-mirrors 1 numbers named by DB5Z-17683-UH, no catalog link: DB5Z-17683-UK
+10:58:16 chain-unlinked side-mirrors 1 numbers named by GB5Z-17682-BB, no catalog link: GB5Z-17682-BCPTM
+10:58:16 chain-unlinked side-mirrors 1 numbers named by GB5Z-17682-BBPTM, no catalog link: GB5Z-17682-BCPTM
+10:58:16 chain-unlinked side-mirrors 1 numbers named by GB5Z-17682-CBPTM, no catalog link: GB5Z-17682-CCPTM
+10:58:16 chain-unlinked side-mirrors 1 numbers named by GB5Z-17683-BB, no catalog link: GB5Z-17683-BDPTM
+10:58:16 chain-unlinked side-mirrors 1 numbers named by GB5Z-17683-BCPTM, no catalog link: GB5Z-17683-BDPTM
+10:58:16 chain-unlinked side-mirrors 1 numbers named by GB5Z-17683-CBPTM, no catalog link: GB5Z-17683-CCPTM
+10:58:24 chain-unlinked tail-lights 1 numbers named by FB5Z-13404-C, no catalog link: FB5Z-13404-G
+10:58:24 chain-unlinked tail-lights 1 numbers named by FB5Z-13404-D, no catalog link: FB5Z-13404-H
+10:58:24 chain-unlinked tail-lights 1 numbers named by FB5Z-13404-E, no catalog link: FB5Z-13404-K
+10:58:24 chain-unlinked tail-lights 1 numbers named by FB5Z-13405-D, no catalog link: FB5Z-13405-J
+10:58:24 chain-unlinked tail-lights 1 numbers named by FB5Z-13405-E, no catalog link: FB5Z-13405-K
+10:58:24 chain-unlinked tail-lights 1 numbers named by FB5Z-13405-F, no catalog link: FB5Z-13405-L
+11:12:16 time budget reached records=9728
