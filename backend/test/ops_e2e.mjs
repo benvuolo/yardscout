@@ -327,6 +327,15 @@ check('subscribers: why Google is missing is spelled out', /Google Play: not set
 check('subscribers: HTML section present', /Paying subscribers/.test(r.data.email?.html || ''));
 check('subscribers: no subscriber email in the email', !/web1@|web2@|friend@|ios1@/.test(subTxt + (r.data.email?.html || '')));
 
+/* ---- 8b. weekly scorecard: admin JSON (same auth as attribution) + top of the email ---- */
+r = await api('/v1/admin/scorecard');
+check('scorecard requires x-admin-secret', r.status === 401, `got ${r.status}`);
+r = await api('/v1/admin/scorecard', { headers: ADMIN });
+check('scorecard JSON: 200 with windows and five numbers', r.status === 200 && !!r.data.window?.current && ['visitors', 'watches', 'emails', 'proSheet', 'subscribers'].every((k) => k in r.data), JSON.stringify(r.data).slice(0, 300));
+check('scorecard JSON: no subscriber email', !/@/.test(JSON.stringify(r.data)));
+r = await dailyRun({ dryRun: true });
+check('daily text starts with the weekly scorecard', (r.data.email?.text || '').indexOf('WEEKLY SCORECARD') > 0 && r.data.email.text.indexOf('WEEKLY SCORECARD') < r.data.email.text.indexOf('OPEN ISSUES'));
+
 /* ---- 9. production guard: the clock offset is DEV-only (sanity: present here) ---- */
 r = await checkRun({ dryRun: true, nowOffsetHours: 30 });
 check('offset honored in DEV_MODE', r.data.active.some((c) => c.id === 'stale'));

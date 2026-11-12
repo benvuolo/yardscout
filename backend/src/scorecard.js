@@ -378,6 +378,11 @@ export function scorecardItems(card) {
     items.push({ title: 'Paying subscribers', value: `${s.now.complete ? '' : 'at least '}${fmt(s.now.total)}`,
       lines: [`App Store ${nd(s.now.apple)} · Google Play ${nd(s.now.google)} · Web ${nd(s.now.web)}`, s.change.text] });
   }
+  // A number nobody reported in either week gets one short line, not a column of "no data".
+  const empty = [v, w, e.submitted, ps.opens];
+  empty.forEach((m, i) => {
+    if (m.current == null && m.prior == null && (i !== 2 || (e.asked.current == null && e.confirmed.current == null))) items[i].lines = ['nothing reported in either week'];
+  });
   return { range: rangeText(card.window), items, links: card.sourceRows.map(sourceRowText), note: countingNote(card) };
 }
 

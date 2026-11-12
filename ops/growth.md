@@ -246,3 +246,57 @@ Pro sheet and watch/alerts screens were run here).
   count (8, owner confirms the notes may fold); keep asking for
   notifications and reorder Alerts (9).
 - `ops/README.md` has no row for this file yet (hub's table).
+
+## Weekly scorecard — branch `growth/scorecard`, NOT merged (2026-11-12)
+
+Built on origin/main 5df6f218. Nothing deployed, merged, dispatched, sent
+or called in production.
+
+**What it is.** A "Weekly scorecard" block at the top of the daily ops email
+(text and HTML, every day) and the same numbers as JSON from
+`GET /v1/admin/scorecard` (x-admin-secret, like `/v1/admin/attribution`).
+Always the last 7 full UTC days vs the 7 before. Five numbers: new visitors a
+day (by platform, and "From:" top 5 tagged source / campaign + other links +
+"no tag"); watches created; Monday email offered → address given → confirmed
+(website only); Pro sheet opened → checkout → bought Pro with the rate; paying
+subscribers (App Store + Google Play from KV `ops:store-subs`, web = Stripe
+entitlements as the email already counts them). Then one line per tagged link:
+visits (split by medium when there is more than one) → watches → emails
+(addresses given; confirmations are counted server-side without a source) →
+checkouts → Pro. Code: `backend/src/scorecard.js`; wiring in `ops_monitor.js`
+(`buildDailyReport`, `composeDaily`, `composeDailyHtml`, `handleScorecard`)
+and `index.js` (route).
+
+**Honesty rules as built.** No change figure for a platform whose
+`funnel-v2` marker day is after the first day of the earlier week: "not
+comparable before <date>"; a platform with no marker (the apps until a fixed
+build ships) says "not comparable yet (<app> update pending)". A total gets a
+change only if every platform with data is comparable; per-platform changes
+are still shown. A platform with no counter row at all in a week is "no data";
+one that reported but had none of an event is 0. Changes and rates over a base
+under 20 are raw counts ("2 of 9", "7 vs 5 the week before").
+
+**Subscriber history (new KV key, no migration).** No history existed, so the
+real 13:07 daily run now stores one small record in ENTITLEMENTS KV
+`ops:subs-daily` = `{days: {YYYY-MM-DD: {apple, google, web, total,
+complete}}}` (counts only, last 60 days). Dry runs and the admin endpoint
+store nothing. The change compares with the snapshot from exactly 7 days
+earlier; until one exists the email says "change: tracking starts <first
+day>" (nothing back-filled or estimated; a gap says "no count stored for
+<day>"; a missing store count on either day gives no change).
+
+**What to expect the first week.** Web's marker day is when the v2 build
+first reported; for 14 days after it, web changes read "not comparable
+before <that day>". The apps read "not comparable yet" until a store release
+with the fixed counters (needs the owner's "ship"). Subscriber change appears
+7 days after the first daily run after the deploy.
+
+**Tests.** `node backend/test/scorecard_unit.mjs` (96, fixture rows +
+SQLite with all migrations + the whole daily email); `ops_e2e.mjs` gained
+the admin route (401 / 200 / no addresses) and "scorecard before OPEN
+ISSUES" (e2e-ops.sh 150 pass).
+
+**App counters.** None needed for this. Not built: a per-source count of
+confirmed Monday emails (the server counts the confirmation without the
+visitor's source; carrying it would mean storing the source with the pending
+sign-up — a decision for this workstream later, not done here).

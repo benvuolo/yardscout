@@ -156,6 +156,9 @@ const E = computeScorecard({ today: '2026-11-26', eventsError: 'D1 down', subs: 
 check('counters unreadable -> every count "no data", never 0', E.visitors.current === null && E.watches.current === null && E.proSheet.rate.text === null);
 check('counters unreadable -> one "no data" item in the email', scorecardItems(E).items[0].value === 'no data');
 
+const Z = scorecardItems(computeScorecard({ today: '2026-11-26', subs: subsA }));
+check('nothing reported in either week -> "no data" + one short line, never 0', Z.items[0].value === 'no data' && eq(Z.items[0].lines, ['nothing reported in either week']) && Z.items[3].value === 'no data', JSON.stringify(Z.items[0]));
+
 /* ---------- subscriber change ---------- */
 const snap = (apple, google, web) => ({ apple, google, web, total: (apple || 0) + (google || 0) + (web || 0), complete: apple != null && google != null && web != null });
 let s = subscriberChange('2026-11-26', subsA, { days: { '2026-11-22': snap(1, 1, 1) } });
