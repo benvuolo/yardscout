@@ -69,6 +69,10 @@ const SHARDS = {
     [105, '2T1BR32E54C000005', 2004, 'Toyota', 'Corolla', '6', daysAgo(40), 0, 0, 0, 0],
   ] },
   3: { vpic: {}, vehicles: [[301, '', 1999, 'Chevrolet', 'Malibu', '', '', 3, 0, 0, 0], [302, '', 2002, 'Chevrolet', 'Impala', '', '', 3, 0, 0, 0]] },
+  // A big lot for the "top 12 makes / top 15 models" caps: 14 makes with 14,
+  // 13, ... 1 cars, each alternating two models: 105 cars, 27 models.
+  6: { vpic: {}, vehicles: Array.from({ length: 14 }, (_, k) => Array.from({ length: 14 - k }, (_, n) =>
+    [6000 + k * 100 + n, '', 1990 + n, `Make${String(k + 1).padStart(2, '0')}`, n % 2 ? 'Beta' : 'Alpha', String(k), daysAgo(30 + n), 6, 0, 0, 0])).flat() },
 };
 let dataDown = true;
 globalThis.fetch = async (u) => {
@@ -79,6 +83,7 @@ globalThis.fetch = async (u) => {
   if (u.endsWith('/data/yards_added.json')) return json([]);
   if (u.endsWith('/v1/yards')) return json(DIRECTORY);
   let m = u.match(/\/v1\/inventory\/shard\/(\d+)$/);
+  if (m && m[1] === '7') return new Response('boom', { status: 500 });   // Calgary: the API fails for this lot
   if (m) return SHARDS[m[1]] ? json(SHARDS[m[1]]) : json({ vehicles: [], vpic: {} });
   m = u.match(/\/v1\/vehicles\/([^/]+)$/);
   if (m) {
@@ -278,21 +283,38 @@ check('malformed make path → 404, not an exception', r.status === 404, r.statu
 /* ---------- /yard/<slug> ---------- */
 r = await get('/yard/pick-n-pull-dallas-south');
 check('yard → 200', r.status === 200, r.status);
-seoChecks('yard', r, { h1: 'What&#39;s at Pick-n-Pull - Dallas South this week', ld: ['BreadcrumbList'] });
+seoChecks('yard', r, { h1: 'Pick-n-Pull - Dallas South inventory', ld: ['BreadcrumbList'] });
 check('yard: title is "<Yard> inventory: N cars on the lot, n new this week (City, ST)"', titleOf(r.html) === 'Pick-n-Pull - Dallas South inventory: 5 cars on the lot, 2 new this week (Dallas, TX) — YardScout', titleOf(r.html));
 check('yard: og:title keeps the share wording', meta(r.html, 'og:title') === 'What&#39;s at Pick-n-Pull - Dallas South this week', meta(r.html, 'og:title'));
-check('yard: description from the same counts', meta(r.html, 'description').startsWith('5 cars on the lot at Pick-n-Pull - Dallas South (Dallas, TX), 2 set out in the last 7 days, cars typically last ~45 days here.'), meta(r.html, 'description'));
+check('yard: description from the same counts, with the top makes', meta(r.html, 'description') === '5 cars on the lot at Pick-n-Pull - Dallas South (Dallas, TX): Ford 3, Honda 1, Toyota 1. 2 set out in the last 7 days. Cars typically last ~45 days here. Live inventory, refreshed every 4 hours.', meta(r.html, 'description'));
+check('yard: og:description keeps the share wording', meta(r.html, 'og:description') === '5 cars on the lot at Pick-n-Pull - Dallas South (Dallas, TX), 2 set out in the last 7 days, cars typically last ~45 days here. Live list, refreshed every 4 hours.', meta(r.html, 'og:description'));
+check('yard: summary sentence states the lot', r.html.includes('5 cars are on the lot at Pick-n-Pull - Dallas South in Dallas, TX, 2 of them set out in the last 7 days.') && r.html.includes('as of Oct 30, 11:58 AM UTC'));
+check('yard: stats (on the lot, new this week, typical stay)', r.html.includes('<span class="label">On the lot</span><span class="value">5</span>') && r.html.includes('<span class="label">New this week</span><span class="value accent">2</span>') && r.html.includes('<span class="value">~45 days</span>'));
+const modelsBlock = section(r.html, 'Most common models on this lot');
+check('yard: models with counts and model-year span', modelsBlock.includes('<span class="tile">Ford F-150<small>2 cars · 2008–2009</small></span>') && modelsBlock.includes('<span class="tile">Honda Civic<small>1 car · 2012</small></span>') && modelsBlock.includes('· 4 models'), modelsBlock.slice(0, 400));
+check('yard: model name escaped', modelsBlock.includes('Ford Ranger &lt;b&gt;<small>1 car · 2001</small>') && !r.html.includes('Ranger <b>'));
+check('yard: newest-arrivals list kept (2 cars, newest first)', section(r.html, 'New arrivals: set out in the last 7 days').indexOf('/car/1HGFB2F50CL000001') > 0 && section(r.html, 'New arrivals: set out in the last 7 days').indexOf('/car/1HGFB2F50CL000001') < section(r.html, 'New arrivals: set out in the last 7 days').indexOf('/car/1FTRF12W09K000002'));
+check('yard: plain map link from its lat/lng', r.html.includes('<a href="https://www.google.com/maps/search/?api=1&query=32.7%2C-96.8" target="_blank" rel="noopener">Map &#8599;</a>'));
+check('yard: call to action unchanged', r.html.includes(`<a class="btn btn-primary" href="https://yardscout.io/">Search this yard in YardScout</a>`) && r.html.includes('Alert me when a car I want lands here'));
 check('yard: breadcrumb Junkyards > State > City > Yard', ldOf(r.html, 'BreadcrumbList').itemListElement.map((e) => e.item).join() === 'https://yardscout.io/junkyards,https://yardscout.io/junkyards/texas,https://yardscout.io/junkyards/texas/dallas,https://yardscout.io/yard/pick-n-pull-dallas-south');
 check('yard: links to its city and state pages', r.html.includes('href="https://yardscout.io/junkyards/texas/dallas">Junkyards in Dallas, TX</a>') && r.html.includes('href="https://yardscout.io/junkyards/texas">Junkyards in Texas</a>'));
 const nearYards = section(r.html, 'Nearest tracked yards');
 const nearOrder = ['bob-s-pull-and-save', 'grand-prairie-u-pull', 'uapi-texarkana', 'texarkana-pull-it', 'houston-dateless-yard'].map((s) => nearYards.indexOf('/yard/' + s + '"'));
 check('yard: nearest 5 other yards, closest first, with distance', nearOrder.every((p, i) => p > 0 && (i === 0 || p > nearOrder[i - 1])) && (nearYards.match(/<li>/g) || []).length === 5 && /Grand Prairie U-Pull<span class="where">Grand Prairie, TX · 1[0-9] mi/.test(nearYards), nearOrder.join(','));
 check('yard: never lists itself as a nearby yard', !nearYards.includes('/yard/pick-n-pull-dallas-south"'));
-check('yard: top makes link to /landed/<make> with this lot\'s counts', r.html.includes('<a href="https://yardscout.io/landed/ford">Ford</a> 3') && r.html.includes('<a href="https://yardscout.io/landed/honda">Honda</a> 1'));
+check('yard: makes link to /landed/<make> with this lot\'s counts', r.html.includes('<a href="https://yardscout.io/landed/ford">Ford<small>3 on this lot</small></a>') && r.html.includes('<a href="https://yardscout.io/landed/honda">Honda<small>1 on this lot</small></a>') && r.html.includes('On the lot now, by make <span>· 3 makes</span>'));
 check('yard: arrivals link to /car/<vin>', r.html.includes('href="https://yardscout.io/car/1HGFB2F50CL000001"') && !r.html.includes('/car/2T1BR32E54C000005'));
 r = await get('/yard/houston-dateless-yard');
 check('dateless yard: title has no "new this week" figure', titleOf(r.html) === 'Houston Dateless Yard inventory: 2 cars on the lot (Houston, TX) — YardScout', titleOf(r.html));
 check('dateless yard: says dates are not published instead of "0 new"', r.html.includes("doesn't publish set-out dates") && r.html.includes('<span class="label">New this week</span><span class="value accent">—</span>') && !meta(r.html, 'description').includes('set out in the last'));
+r = await get('/yard/duke-city-u-pull');
+check('big lot: title counts all 105 cars', titleOf(r.html) === 'Duke City U-Pull inventory: 105 cars on the lot, 0 new this week (Albuquerque, NM) — YardScout', titleOf(r.html));
+check('big lot: makes capped at 12 of 14, and says so', (r.html.match(/on this lot<\/small>/g) || []).length === 12 && r.html.includes('Make12<small>3 on this lot</small>') && !r.html.includes('Make13') && r.html.includes('· 14 makes') && r.html.includes('The 12 most common of 14 makes on this lot.'));
+check('big lot: models capped at 15 of 27, and says so', (r.html.match(/<span class="tile">/g) || []).length === 15 && r.html.includes('· top 15 of 27') && r.html.includes('<span class="tile">Make01 Alpha<small>7 cars · 1990–2002</small></span>') && r.html.includes('Make08 Alpha<small>4 cars') && !r.html.includes('Make08 Beta'));
+check('big lot: description names the top 3 makes and how many more', meta(r.html, 'description') === '105 cars on the lot at Duke City U-Pull (Albuquerque, NM): Make01 14, Make02 13, Make03 12 and 11 more makes. 0 set out in the last 7 days. Live inventory, refreshed every 4 hours.', meta(r.html, 'description'));
+check('big lot: dated yard with nothing new says so', r.html.includes('No new set-outs in the last 7 days'));
+r = await get('/yard/calgary-pick-a-part');
+check('lot unreadable → 503 noindex, never "0 cars on the lot"', r.status === 503 && /content="noindex"/.test(r.html) && !/0 cars/.test(r.html) && h1s(r.html).length === 1, r.status);
 r = await get('/yard/nope');
 check('unknown yard → 404 noindex with one <h1> and hub links', r.status === 404 && /content="noindex"/.test(r.html) && h1s(r.html).length === 1 && r.html.includes('href="https://yardscout.io/junkyards"') && !r.headers.get('last-modified'));
 r = await get('/yard/%E0%A4%A');
