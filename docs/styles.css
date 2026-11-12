@@ -3442,3 +3442,30 @@ html.map-lock #saved-pill { display: none !important; }
 .yard-premium p { margin: 0 0 var(--s2); font-size: var(--t-sm); }
 .yard-premium-acts { display: flex; flex-wrap: wrap; gap: var(--s2); }
 .yard-premium-acts .btn { flex: 1 1 9rem; }
+
+/* ---------- Cars tab: car search (2026-11-12) ----------
+   One box above the zip chip + Filters row. A textarea like the Parts tab's
+   part box so the placeholder and long names wrap at large text sizes;
+   16px text so iOS does not zoom on focus. Suggestions reuse the part
+   type-ahead list (.compare-suggest). */
+.car-search { position: relative; margin: 0 0 var(--s3); }
+.car-search-field { position: relative; }
+.car-search-input {
+  display: block; width: 100%; resize: none; overflow: hidden; field-sizing: content;
+  min-height: 52px; padding: 14px 48px 14px 42px;
+  font: 400 var(--t-md)/1.35 var(--font-ui);
+  border-color: var(--border-dark); border-radius: var(--r-sm);
+}
+.car-search-ico { position: absolute; left: 14px; top: 17px; width: 18px; height: 18px; color: var(--text-dim); pointer-events: none; }
+.car-search-clear {
+  position: absolute; right: 4px; top: 4px; width: var(--tap); height: var(--tap);
+  display: grid; place-items: center; padding: 0; border: 0; border-radius: var(--r-sm);
+  background: none; color: var(--text-dim); cursor: pointer;
+}
+.car-search-clear[hidden] { display: none; }
+.car-search-clear .ico { width: 18px; height: 18px; }
+.car-search-clear:hover { color: var(--text); background: var(--surface2); }
+.car-search-clear:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+.car-search .compare-suggest-item strong { font-weight: 700; }
+.car-search .compare-suggest-item > span:first-child { flex: 1 1 10em; min-width: 0; overflow-wrap: anywhere; }
+.car-search-note { margin: var(--s2) 0 0; font-size: var(--t-sm); line-height: 1.45; color: var(--text-dim); }

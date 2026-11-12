@@ -2183,6 +2183,10 @@ function populateLiveMakeFilter() {
  * 4Runner + Land Cruiser); empty selection = all models. Disabled until a
  * make is chosen. */
 let selectedModels = new Set();
+// Car search (see CAR SEARCH): a #cars= link waiting for a location and the
+// view's inventory, and the filter state the search box last showed.
+let carsIntent = null;
+let _csSyncKey = null;
 
 /* Yard inventory systems disagree on model naming — most still file the WRX
  * as an Impreza trim (true until 2015), so the same car shows up as "WRX",
@@ -3595,6 +3599,13 @@ window.addEventListener('hashchange', () => {
     startWatchIntent(watch);
     return;
   }
+  const cars = parseCarsHash(location.hash);
+  if (cars) {
+    history.replaceState(null, '', location.pathname + location.search);
+    startCarsIntent(cars);
+    if (liveLoaded) { renderLive(); window.scrollTo({ top: 0 }); }
+    return;
+  }
   applyShareHash();
   if (liveLoaded) {
     renderLive();
@@ -4346,6 +4357,9 @@ function renderLive() {
   }
   populateYardFilter();
   refreshScopedInventory();   // make/model dropdowns follow the radius too
+  // A #cars= link applies once there is a location and its inventory is in.
+  if (carsIntent && activeZipCoords && !focusedCarKey) applyCarsIntent();
+  carSearchSync();
   const vehicles = getFilteredLive();
 
   // KPIs describe what the user is LOOKING AT (their zip/filters), not the
@@ -4602,6 +4616,349 @@ document.getElementById('live-filter-model-clear').addEventListener('click', () 
   renderLive();
 });
 document.getElementById('live-filter-model-done').addEventListener('click', () => closeModelPanel());
+
+/* ===== CAR SEARCH (2026-11-12) =====
+ * From the r/XTerra post: "I'd like to see donor cars near me without
+ * specifying a part." The Cars tab always listed every car near the zip,
+ * but narrowing to one model was Filters -> Make -> Model, below the fold
+ * on a phone. The box at the top of the tab suggests the make + model pairs
+ * in the inventory around the user (the same scope the Make list draws
+ * from), and a pick sets the SAME state Filters does — the Make select and
+ * selectedModels — then renders through renderLive, so sort, counts, the
+ * stats bar, the watch strip and everything else follow unchanged.
+ * #cars=<make>|<model>|<years> (model and years optional; parsed like
+ * #watch=) opens the tab with those filters once a location is set. */
+
+/* Lowercase alphanumerics: "4 Runner" = "4Runner", "f150" = "F-150". */
+function carSearchSquash(s) {
+  return String(s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+}
+
+/* #cars=<make>|<model>|<years>: model and years optional; years are
+ * "2005-2015", "2005-", "-2015" or "2007". null when there is no make. */
+function parseCarsHash(hash) {
+  const m = /#cars=([^&]*)/.exec(String(hash || ''));
+  if (!m) return null;
+  let raw = m[1];
+  try { raw = decodeURIComponent(raw.replace(/\+/g, ' ')); } catch (e) { /* keep as typed */ }
+  const clean = (v) => String(v || '').replace(/[\u0000-\u001f<>"]/g, '').trim().slice(0, 60);
+  const [make, model, yrs] = raw.split('|').map(clean);
+  if (!make) return null;
+  const y = /^(\d{4})?(?:-(\d{4})?)?$/.exec(yrs || '');
+  const ok = (n) => (n >= 1900 && n <= 2100 ? n : null);
+  const yrMin = y ? ok(+y[1]) : null;
+  const yrMax = y ? ok(/-/.test(yrs) ? +y[2] : +y[1]) : null;
+  return { make, model: model || '', yrMin, yrMax: yrMin && yrMax && yrMax < yrMin ? null : yrMax };
+}
+
+/* Suggestions for what was typed. entries: { make, model, n, alts } where
+ * model '' is the whole make and alts are squashed nicknames of the make
+ * ("chevy", "vw"). Tiers: 0 exact model (or make + model, or the make
+ * itself), 1 model (or make) starts with it, 2 "make model" / "model make"
+ * starts with it, 3 the model contains it; with none of those, every typed
+ * word inside "make model" (4). Within a tier, the most cars first. */
+function carSearchMatch(entries, q, limit = 8) {
+  const sq = carSearchSquash, qs = sq(q);
+  if (!qs) return [];
+  const out = [];
+  for (const e of entries || []) {
+    const ks = sq(e.make), ms = sq(e.model), heads = [ks, ...(e.alts || [])];
+    let t = -1;
+    if (!ms) {
+      if (heads.includes(qs)) t = 0;
+      else if (heads.some(h => h.startsWith(qs))) t = 1;
+    } else if (ms === qs || heads.some(h => h + ms === qs || ms + h === qs)) t = 0;
+    else if (ms.startsWith(qs)) t = 1;
+    else if (heads.some(h => (h + ms).startsWith(qs) || (ms + h).startsWith(qs))) t = 2;
+    else if (qs.length >= 2 && ms.includes(qs)) t = 3;
+    if (t >= 0) out.push({ ...e, tier: t });
+  }
+  if (!out.length) {
+    const words = String(q).split(/\s+/).map(sq).filter(Boolean);
+    if (words.length > 1) {
+      for (const e of entries || []) {
+        if (!e.model) continue;
+        const hay = [sq(e.make), ...(e.alts || [])].map(h => h + sq(e.model));
+        if (words.every(w => hay.some(h => h.includes(w)))) out.push({ ...e, tier: 4 });
+      }
+    }
+  }
+  out.sort((a, b) => a.tier - b.tier || (b.n || 0) - (a.n || 0)
+    || (a.make + ' ' + a.model).localeCompare(b.make + ' ' + b.model));
+  return out.slice(0, limit);
+}
+
+/* The one suggestion Enter may pick: the only one, or the only exact one. */
+function carSearchClearMatch(results) {
+  if (!results || !results.length) return null;
+  if (results.length === 1) return results[0];
+  const exact = results.filter(r => r.tier === 0);
+  return exact.length === 1 ? exact[0] : null;
+}
+
+/* The entry a #cars= link names (spelling-insensitive), or null. */
+function carSearchFind(entries, make, model) {
+  const sq = carSearchSquash, mk = sq(make), md = sq(model);
+  if (!mk) return null;
+  const mkOk = (e) => sq(e.make) === mk || (e.alts || []).includes(mk);
+  return (entries || []).find(e => mkOk(e) && (md ? e.model && sq(e.model) === md : !e.model)) || null;
+}
+
+/* Make + model pairs in the inventory around the user, with car counts;
+ * the same cars, junk makes and no-pick models the Make/Model lists use.
+ * Rebuilt when that scope is (refreshScopedInventory swaps the array). */
+let _csIndex = null, _csIndexSrc = null;
+function carSearchIndex() {
+  if (_csIndex && _csIndexSrc === _scopedVehicles) return _csIndex;
+  const makes = new Map(), pairs = new Map();
+  for (const v of _scopedVehicles) {
+    if (!v.make || JUNK_MAKES.has(v.make.toLowerCase())) continue;
+    makes.set(v.make, (makes.get(v.make) || 0) + 1);
+    if (!v.model || isNoPickModel(v.make, v.model)) continue;
+    const model = canonicalModel(v.make, v.model);
+    const k = v.make + '\u0000' + model;
+    const p = pairs.get(k);
+    if (p) p.n++; else pairs.set(k, { make: v.make, model, n: 1 });
+  }
+  const alts = (mk) => {
+    const own = carSearchSquash(mk);
+    return Object.keys(MAKE_ALIASES).filter(a => a !== own && MAKE_ALIASES[a] === mk);
+  };
+  const altsOf = new Map([...makes.keys()].map(mk => [mk, alts(mk)]));
+  _csIndex = [
+    ...[...makes.entries()].map(([make, n]) => ({ make, model: '', n, alts: altsOf.get(make) })),
+    ...[...pairs.values()].map(p => ({ ...p, alts: altsOf.get(p.make) })),
+  ];
+  _csIndexSrc = _scopedVehicles;
+  return _csIndex;
+}
+
+/* Set the Cars filters to a make (and model) the way Filters does: the Make
+ * select, then selectedModels, then the same cascade the select's change
+ * listener runs. The model goes in before the cascade so a year range that
+ * hides it from the list keeps it (populateModelFilter's own rule). False
+ * when the make or model is not in the current scope (nothing changed). */
+function carSearchSetFilter(make, model) {
+  const sel = document.getElementById('live-filter-make');
+  const prevMake = sel.value, prevModels = new Set(selectedModels);
+  sel.value = make || '';
+  if (sel.value !== (make || '')) { sel.value = prevMake; return false; }
+  selectedModels.clear();
+  if (model) selectedModels.add(model);
+  populateModelFilter();
+  if (model && !selectedModels.has(model)) {
+    sel.value = prevMake;
+    selectedModels = prevModels;
+    populateModelFilter();
+    return false;
+  }
+  return true;
+}
+
+function carSearchLabel(make, models) {
+  if (!make) return '';
+  if (models.length === 1) return `${make} ${models[0]}`;
+  return models.length ? `${make} (${models.length} models)` : make;
+}
+
+/* Grow the box with its text (field-sizing where supported). */
+function carSearchFit() {
+  const i = document.getElementById('car-search-input');
+  if (!i.offsetParent) return;
+  i.style.height = 'auto';
+  i.style.height = i.scrollHeight + 2 + 'px';
+}
+
+function carSearchNote(html) {
+  const n = document.getElementById('car-search-note');
+  n.innerHTML = html || '';
+  n.hidden = !html;
+}
+
+/* Keep the box showing what the filters hold (Filters panel, week chips,
+ * a pick, a link), without touching what someone is typing. */
+function carSearchSync() {
+  const input = document.getElementById('car-search-input');
+  const make = document.getElementById('live-filter-make').value;
+  const key = make + '\u0000' + [...selectedModels].join('\u0000');
+  const typing = document.activeElement === input;
+  if (key !== _csSyncKey && !typing) {
+    _csSyncKey = key;
+    input.value = carSearchLabel(make, [...selectedModels]);
+    if (make) carSearchNote('');
+    carSearchFit();
+  }
+  document.getElementById('car-search-clear').hidden = !(input.value || make);
+  if (typing && document.getElementById('car-search-suggest').style.display !== 'none') carSearchRender();
+}
+
+let _csResults = [], _csActive = -1;
+function carSearchRender() {
+  const input = document.getElementById('car-search-input');
+  const box = document.getElementById('car-search-suggest');
+  const q = input.value.trim();
+  _csResults = []; _csActive = -1;
+  input.removeAttribute('aria-activedescendant');
+  if (!q) { carSearchHide(); return; }
+  const empty = (t) => `<div class="compare-suggest-empty">${t}</div>`;
+  let html;
+  if (!activeZipCoords) {
+    html = empty('Enter your zip above, then search the cars near you.');
+  } else if (!liveLoaded || (_inv && !liveComplete && invViewPending())) {
+    html = empty('Loading the cars near you&hellip;');
+  } else {
+    _csResults = carSearchMatch(carSearchIndex(), q, 8);
+    const r = effectiveRadiusMi();
+    const pro = isPro();   // counts are Pro intel, as in the Make/Model lists
+    html = _csResults.length ? _csResults.map((e, i) => `
+      <div class="compare-suggest-item" role="option" id="cs-opt-${i}" aria-selected="false" data-i="${i}">
+        <span>${e.model ? `${escapeHtml(e.make)} <strong>${escapeHtml(e.model)}</strong>` : `<strong>${escapeHtml(e.make)}</strong> &middot; all models`}</span>
+        ${pro ? `<span class="csi-count">${e.n.toLocaleString()} ${e.n === 1 ? 'car' : 'cars'}</span>` : ''}
+      </div>`).join('')
+      : empty(`No &ldquo;${escapeHtml(q)}&rdquo; ${r ? `within ${r}&nbsp;mi` : 'in the inventory'} right now. Try the model name alone, e.g. &ldquo;Xterra&rdquo;.`);
+  }
+  box.innerHTML = html;
+  box.style.display = '';
+  input.setAttribute('aria-expanded', 'true');
+}
+function carSearchHide() {
+  document.getElementById('car-search-suggest').style.display = 'none';
+  const input = document.getElementById('car-search-input');
+  input.setAttribute('aria-expanded', 'false');
+  input.removeAttribute('aria-activedescendant');
+  _csActive = -1;
+}
+function carSearchSetActive(i) {
+  const input = document.getElementById('car-search-input');
+  const items = document.querySelectorAll('#car-search-suggest .compare-suggest-item');
+  if (!items.length) return;
+  _csActive = (i + items.length) % items.length;
+  items.forEach((el, k) => {
+    el.classList.toggle('active', k === _csActive);
+    el.setAttribute('aria-selected', k === _csActive ? 'true' : 'false');
+  });
+  input.setAttribute('aria-activedescendant', items[_csActive].id);
+  items[_csActive].scrollIntoView({ block: 'nearest' });
+}
+
+function carSearchPick(e) {
+  if (!e || !carSearchSetFilter(e.make, e.model)) return;
+  track('car-search');
+  carSearchNote('');
+  carSearchHide();
+  const input = document.getElementById('car-search-input');
+  _csSyncKey = null;   // show the picked filter's label
+  input.blur();
+  renderLive();
+}
+
+function carSearchClearAll() {
+  const input = document.getElementById('car-search-input');
+  input.value = '';
+  carSearchNote('');
+  carSearchHide();
+  const sel = document.getElementById('live-filter-make');
+  if (sel.value || selectedModels.size) {
+    // Filters -> Make -> "All makes", exactly.
+    sel.value = '';
+    sel.dispatchEvent(new Event('change'));
+  } else {
+    carSearchSync();
+  }
+  carSearchFit();
+  if (matchMedia('(pointer: fine)').matches) input.focus();
+}
+
+/* A #cars= link: open the Cars tab, show what it asks for in the box, and
+ * apply it once a location and the inventory around it are in (renderLive
+ * calls applyCarsIntent). */
+function startCarsIntent(c) {
+  track('car-link');
+  focusedCarKey = null;
+  carsIntent = c;
+  try { document.querySelector('.tab[data-tab="live"]').click(); } catch (e) { /* boot race */ }
+  const input = document.getElementById('car-search-input');
+  input.value = `${c.make} ${c.model}`.trim();
+  // Keep the prefill until the filters actually change.
+  _csSyncKey = document.getElementById('live-filter-make').value + '\u0000' + [...selectedModels].join('\u0000');
+  document.getElementById('car-search-clear').hidden = false;
+  carSearchNote(activeZipCoords ? '' : `Enter your zip above to see every ${escapeHtml(input.value)} near you.`);
+  carSearchFit();
+}
+function applyCarsIntent() {
+  const c = carsIntent;
+  carsIntent = null;
+  const idx = carSearchIndex();
+  const hit = carSearchFind(idx, c.make, c.model)
+    || (c.model && carSearchFind(idx, c.make, canonicalModel(c.make, c.model)))
+    || null;
+  const asked = `${c.make} ${c.model}`.trim();
+  if (!hit) {
+    // Nothing by that name in range: every car near the user, the box
+    // prefilled so a corrected spelling is one edit away.
+    const r = effectiveRadiusMi();
+    carSearchNote(`No ${escapeHtml(asked)} ${r ? `within ${r}&nbsp;mi` : 'in the inventory'} right now &mdash; showing every car near you.`);
+    return;
+  }
+  // Years as the Years selects can hold them: the closest years in the list
+  // inside the asked range (the same cars pass either way).
+  const setYear = (id, want, pickMin) => {
+    const sel = document.getElementById(id);
+    if (!want) { sel.value = ''; return; }
+    const ys = [...sel.options].map(o => +o.value).filter(Boolean)
+      .filter(y => (pickMin ? y >= want : y <= want));
+    sel.value = ys.length ? String(pickMin ? Math.min(...ys) : Math.max(...ys)) : '';
+  };
+  setYear('live-filter-year-min', c.yrMin, true);
+  setYear('live-filter-year-max', c.yrMax, false);
+  carSearchSetFilter(hit.make, hit.model);
+  carSearchNote('');
+  _csSyncKey = null;
+}
+
+{
+  const input = document.getElementById('car-search-input');
+  const box = document.getElementById('car-search-suggest');
+  input.addEventListener('input', () => {
+    if (/[\r\n]/.test(input.value)) input.value = input.value.replace(/[\r\n]+/g, ' ');
+    carSearchNote('');
+    document.getElementById('car-search-clear').hidden = !(input.value || document.getElementById('live-filter-make').value);
+    carSearchFit();
+    carSearchRender();
+  });
+  input.addEventListener('focus', () => {
+    // A box showing the current filter: select it so typing replaces it.
+    if (input.value && _csSyncKey !== null
+        && input.value === carSearchLabel(document.getElementById('live-filter-make').value, [...selectedModels])) input.select();
+    if (input.value.trim()) carSearchRender();
+  });
+  input.addEventListener('blur', () => setTimeout(() => { carSearchHide(); carSearchSync(); }, 150));
+  input.addEventListener('keydown', (e) => {
+    const open = box.style.display !== 'none';
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (!open) carSearchRender();
+      const pick = _csActive >= 0 ? _csResults[_csActive] : carSearchClearMatch(_csResults);
+      if (pick) carSearchPick(pick);
+    } else if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      if (!open) carSearchRender();
+      if (_csResults.length) { e.preventDefault(); carSearchSetActive(_csActive + (e.key === 'ArrowDown' ? 1 : (_csActive < 0 ? 0 : -1))); }
+    } else if (e.key === 'Escape' && open) {
+      e.preventDefault();
+      carSearchHide();
+    }
+  });
+  // mousedown (not click) so the blur-hide does not eat the tap (as the
+  // Parts tab's part box does).
+  box.addEventListener('mousedown', (e) => {
+    const item = e.target.closest('.compare-suggest-item');
+    if (!item) return;
+    e.preventDefault();
+    carSearchPick(_csResults[+item.dataset.i]);
+  });
+  document.getElementById('car-search-clear').addEventListener('click', carSearchClearAll);
+  window.addEventListener('resize', carSearchFit);
+}
 document.getElementById('live-filter-year-min').addEventListener('change', () => {
   // Keep the range sane: from > to snaps "to" up to match.
   const lo = document.getElementById('live-filter-year-min');
@@ -10192,6 +10549,12 @@ if (_bootAlertId) {
   history.replaceState(null, '', location.pathname + location.search + '#car=' + _bootAlertId);
 }
 loadLiveInventory({ fresh: !!_bootAlertId });
+// #cars=<make>|<model>|<years> opens the Cars tab with those filters (see
+// CAR SEARCH); they apply once a location and its inventory are in.
+{
+  const c = parseCarsHash(location.hash);
+  if (c) { history.replaceState(null, '', location.pathname + location.search); startCarsIntent(c); }
+}
 // #tab=<name> opens a tab directly (share pages link to #tab=alerts).
 // #watch=<make>|<model>|<years> opens Alerts with that watch one tap away;
 // #tab=alerts from one of our own car / make pages does the same from the
