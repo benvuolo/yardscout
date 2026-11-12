@@ -32,6 +32,7 @@ import { CHANNELS, utcDay, resendFetch, pruneOpsErrors, resendDailyCap } from '.
 import { recapStats } from './recap_signup.js';
 import { watchMatches } from './alerts.js';
 import { FUNNEL_V2_MARK } from './attribution.js';
+import { buildScorecard, subsFromLoaded, storeSubsSnapshot, scorecardTextLines, scorecardHtml, FUNNEL_V2_SINCE_SQL } from './scorecard.js';
 
 const H = 3600_000;
 const DAY = 24 * H;
@@ -596,6 +597,9 @@ function composeDaily(r) {
   L.push(`YardScout daily — ${d.toUTCString().slice(0, 16)} (${d.toISOString().slice(11, 16)} UTC)`);
   L.push(`Verdict: ${r.verdict}`);
   L.push('');
+  // The weekly scorecard comes first (2026-11-12): the five numbers the
+  // owner decides from; everything below is operational detail.
+  if (r.scorecard) { L.push(...scorecardTextLines(r.scorecard)); L.push(''); }
   L.push(`OPEN ISSUES${r.openConditions.length ? ` (${r.openConditions.length})` : ''}`);
   if (r.openConditions.length) for (const c of r.openConditions) L.push(`  - ${c.title}`);
   else L.push('  none');
@@ -710,7 +714,7 @@ async function loadUsage(env, now) {
         GROUP BY event ORDER BY n DESC`
     ).bind(weekAgo, today),
     // First day each platform sent an event on counting rules v2 (all time).
-    env.DB.prepare(`SELECT platform, MIN(day) AS since FROM events_daily WHERE event = '${FUNNEL_V2_MARK}' GROUP BY platform`),
+    env.DB.prepare(FUNNEL_V2_SINCE_SQL),
     // store-click/<store>-<place>, 7 d: which store, from which button.
     env.DB.prepare(
       `SELECT event, SUM(n) AS n FROM events_daily
@@ -811,6 +815,7 @@ export function composeDailyHtml(r) {
   const badge = `<span style="display:inline-block;padding:4px 10px;border-radius:999px;font-size:13px;font-weight:700;color:#fff;background:${good ? C.ok : C.bad};">${esc(r.verdict)}</span>`;
   const S = [];
 
+  if (r.scorecard) S.push(scorecardHtml(r.scorecard, { esc, C }));
   S.push(hSection('Open issues', r.openConditions.length
     ? hList(r.openConditions.map((c) => `<span style="color:${C.bad};font-weight:600;">${esc(c.title)}</span>`))
     : hMuted('None.')));
@@ -1084,7 +1089,7 @@ function subscriberLines(sb) {
 }
 
 /** Builds the daily report (JSON + the email it would send). Read-only. */
-export async function buildDailyReport(env, { now = Date.now() } = {}) {
+export async function buildDailyReport(env, { now = Date.now(), storeSnapshot = false } = {}) {
   const ev = await evaluateConditions(env, now);
   const row = await env.DB.prepare('SELECT directory FROM inv_meta WHERE id = 1').first();
   let dir = null;
@@ -1108,6 +1113,15 @@ export async function buildDailyReport(env, { now = Date.now() } = {}) {
   try { watchCheck = await loadWatchCheck(env, now); } catch (e) { watchCheck = { error: String((e && e.message) || e).slice(0, 200) }; }
   let subscribers;
   try { subscribers = await loadSubscribers(env, now); } catch (e) { subscribers = { error: String((e && e.message) || e).slice(0, 200) }; }
+  // Weekly scorecard. The paying-subscriber snapshot is stored only by the
+  // real daily run (storeSnapshot), never by a dry run.
+  let scorecard;
+  try {
+    const subs = subsFromLoaded(subscribers);
+    const sc = await buildScorecard(env, { today: utcDay(now), subs, storingToday: storeSnapshot });
+    scorecard = sc.card;
+    if (storeSnapshot) await storeSubsSnapshot(env, utcDay(now), subs, sc.history);
+  } catch (e) { scorecard = null; console.log('scorecard failed:', e && e.message); }
 
   const channels = {};
   for (const [c, s] of Object.entries(ev.stats.channels)) channels[c] = { ...s.last24h };
@@ -1165,6 +1179,7 @@ export async function buildDailyReport(env, { now = Date.now() } = {}) {
     usage,
     watchCheck,
     subscribers,
+    scorecard,
   };
   const tail = report.inventory.yards != null
     ? ` · ${fmtInt(report.inventory.yards)} yards · ${fmtInt(report.inventory.vehicles)} cars` : '';
@@ -1173,7 +1188,7 @@ export async function buildDailyReport(env, { now = Date.now() } = {}) {
 }
 
 export async function runDailyReport(env, { now = Date.now(), dryRun = false } = {}) {
-  const report = await buildDailyReport(env, { now });
+  const report = await buildDailyReport(env, { now, storeSnapshot: !dryRun });
   report.dryRun = dryRun;
   report.sent = dryRun ? false : await sendOpsEmail(env, report.email);
   return report;
@@ -1223,5 +1238,20 @@ export async function handleOpsDailyRun(req, env) {
   } catch (e) {
     console.log('ops daily failed:', e && (e.stack || e.message));
     return err(500, 'ops_daily_failed', 'Daily report failed — see Worker logs.');
+  }
+}
+
+/** GET /v1/admin/scorecard — the weekly scorecard as JSON (same numbers as
+ * the top of the daily email). Read-only: stores no snapshot. */
+export async function handleScorecard(req, env) {
+  try {
+    const now = Date.now();
+    let subscribers;
+    try { subscribers = await loadSubscribers(env, now); } catch (e) { subscribers = { error: String((e && e.message) || e).slice(0, 200) }; }
+    const { card } = await buildScorecard(env, { today: utcDay(now), subs: subsFromLoaded(subscribers), storingToday: false });
+    return json(card);
+  } catch (e) {
+    console.log('scorecard failed:', e && (e.stack || e.message));
+    return err(500, 'scorecard_failed', 'Scorecard failed — see Worker logs.');
   }
 }

@@ -25,6 +25,7 @@
  *   GET  /v1/admin/coverage                       x-admin-secret (request counts by key)
  *   POST /v1/events                               public (UTM funnel counters)
  *   GET  /v1/admin/attribution                    x-admin-secret (per-source funnel)
+ *   GET  /v1/admin/scorecard                      x-admin-secret (weekly scorecard JSON, as in the daily email)
  *   POST /v1/admin/ent/grant                      x-ent-admin (owner comps → ENTITLEMENTS KV)
  *   POST /v1/admin/coverage/digest/run            x-admin-secret (manual owner-digest trigger)
  *   POST /v1/admin/saved-alerts/dispatch          x-admin-secret (manual saved-car alert dispatch)
@@ -71,7 +72,7 @@ import {
   handleRecapUnsubscribe, pruneRecap, recapRetryDue,
 } from './recap_signup.js';
 import { runScanWatchdog } from './scan_watchdog.js';
-import { runOpsCheck, runDailyReport, handleOpsCheckRun, handleOpsDailyRun, handleOpsCanarySet } from './ops_monitor.js';
+import { runOpsCheck, runDailyReport, handleOpsCheckRun, handleOpsDailyRun, handleOpsCanarySet, handleScorecard } from './ops_monitor.js';
 import { flushOps, opsFlusher } from './ops.js';
 import { handleAppVersion } from './app_version.js';
 
@@ -222,6 +223,10 @@ async function route(req, env, url, ctx) {
   if (method === 'GET' && path === '/v1/admin/attribution') {
     const bad = await requireAdmin(req, env); if (bad) return bad;
     return handleAttribution(req, env);
+  }
+  if (method === 'GET' && path === '/v1/admin/scorecard') {
+    const bad = await requireAdmin(req, env); if (bad) return bad;
+    return handleScorecard(req, env);
   }
 
   /* ----- coverage requests (public, Parts tab "ask us to add it") ----- */
