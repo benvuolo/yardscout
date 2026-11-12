@@ -328,3 +328,21 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
 - Not done: confirmed email sign-ups cannot be split by link (the server
   counts confirmations without a source). Noted in `ops/growth.md`.
 - Still running: `parts/gen-splits-trucks`.
+
+## 2026-11-13 ~00:00 UTC parts generation splits merged
+
+- `parts/gen-splits-trucks` merged (head b87fabbf). Hub regression on the
+  merged tree: all 25 scraper test files that import the parts tables exit 0;
+  `match_vehicle` checked for 2000/2002/2004/2008 Xterra, 2005 Ranger, 2024
+  Tacoma. Live with the next scan after the merge.
+- Hub decision: first-gen Xterra rows were added back where a part-number
+  basis exists, carrying the pre-split anchor band (the builder's strict
+  version left 604 first-gen trucks with no Xterra card). Recorded in
+  PARTS_GAPS §25.1 as carried anchors.
+- eBay bands do NOT refresh: eBay rejected the developer account on
+  2026-11-06 (`ops/ebay.md`), so anchors stay until a keyset exists.
+- Open for the parts workstream: 2000 tail lights and side steps, 2003–04
+  console lid (no fitment found); four 2nd-gen and three 1st-gen Xterra bases
+  are search-excerpt-only (nissanpartsdeal and parts.nissanusa.com are not on
+  this environment's network allowlist); Tacoma is missing from
+  MODEL_GENERATIONS; the 2024 Tacoma and Ranger have no rows.
