@@ -7885,3 +7885,16 @@
 12:01:24 chain-unlinked window-regulator 1 numbers named by 68401986AC, no catalog link: 68401986AD
 12:06:59 product-fail https://www.jeeppartsdeal.com/oem/mopar~window-regulator-front~55275376ab: NavError: no __INITIAL_STORE__ on page
 12:13:47 time budget reached records=6915
+21:16:02 start site=www.jeeppartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=6915 list_lines=5618 year_lines=825 url_index=34029
+21:16:02 completion worklist completion/mopar.own_page.json: 657 rows
+21:21:07 chain-unlinked bumper-rear 1 numbers named by 68200265AC, no catalog link: 68200265AA
+21:28:03 chain-unlinked bumper-front 1 numbers named by 68505028AB, no catalog link: 68505028AA
+21:28:43 chain-unlinked grille 1 numbers named by 6WF26DX8AC, no catalog link: 6WF26DX8AB
+21:29:07 chain-unlinked headlights 2 numbers named by 68428558AC, no catalog link: 68428558AB, 68428558AA
+21:29:07 chain-unlinked headlights 2 numbers named by 68428559AC, no catalog link: 68428559AB, 68428559AA
+21:32:59 chain-unlinked headlights 2 numbers named by 68003124AD, no catalog link: 68003124AA, 68003124AC
+21:32:59 chain-unlinked headlights 2 numbers named by 68003125AD, no catalog link: 68003125AC, 68003125AA
+21:39:16 chain-unlinked bumper-rear 1 numbers named by 68650600AB, no catalog link: 68650600AA
+21:39:16 chain-unlinked bumper-rear 1 numbers named by 68650622AB, no catalog link: 68650622AA
+21:39:16 chain-unlinked bumper-rear 1 numbers named by 68650625AB, no catalog link: 68650625AA
+21:46:20 time budget reached records=6940
