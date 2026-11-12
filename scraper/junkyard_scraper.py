@@ -943,12 +943,22 @@ UNOBTANIUM_DB = {
         "display": "Nissan Xterra",
         "make": "Nissan",
         "year_range": (2000, 2015),
+        # §25 (PARTS_GAPS §25.1): these five rows said "fits 2000-2015",
+        # across the 2000-04 and 2005-15 generations. Nissan part numbers
+        # differ by generation for every one of them, so each row is gated
+        # per generation. 1st gen rows (hub decision 2026-11-12) carry the
+        # pre-split anchor band, only for the years their cited numbers
+        # cover; no 1st gen diff-lock switch (no fitment found).
         "top_parts": [
-            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 50, "high": 130, "cost": 15},
-            {"name": "Side Steps / Rock Rails (pair)", "rarity": "Uncommon", "low": 60, "high": 150, "cost": 20},
-            {"name": "Center Console (lid intact)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 12},
-            {"name": "OEM Roof Rack (tube-style)", "rarity": "Epic", "low": 150, "high": 350, "cost": 25},
-            {"name": "Rear Diff Locker Switch", "rarity": "Rare", "low": 50, "high": 125, "cost": 5, "trim": ["PRO-4X", "Off-Road"]},
+            {"name": "Tail Lights (pair, uncracked, match part #)", "rarity": "Uncommon", "low": 50, "high": 130, "cost": 15, "yr_min": 2001, "yr_max": 2004},
+            {"name": "Side Steps / Rock Rails (pair, match part #)", "rarity": "Uncommon", "low": 60, "high": 150, "cost": 20, "yr_min": 2001, "yr_max": 2004},
+            {"name": "Center Console (lid intact)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 12, "yr_min": 2000, "yr_max": 2002},
+            {"name": "OEM Roof Rack (tube-style)", "rarity": "Epic", "low": 150, "high": 350, "cost": 25, "yr_min": 2000, "yr_max": 2004},
+            {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 50, "high": 130, "cost": 15, "yr_min": 2005, "yr_max": 2015},
+            {"name": "Side Steps / Rock Rails (pair, match part #)", "rarity": "Uncommon", "low": 60, "high": 150, "cost": 20, "yr_min": 2005, "yr_max": 2015},
+            {"name": "Center Console (lid intact)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 12, "yr_min": 2005, "yr_max": 2015},
+            {"name": "OEM Roof Rack (tube-style)", "rarity": "Epic", "low": 150, "high": 350, "cost": 25, "yr_min": 2005, "yr_max": 2015},
+            {"name": "Rear Diff Locker Switch", "rarity": "Rare", "low": 50, "high": 125, "cost": 5, "trim": ["PRO-4X", "Off-Road"], "yr_min": 2005, "yr_max": 2015},
         ],
     },
     "pathfinder": {
@@ -6480,6 +6490,7 @@ GENERATION_BREAKS = {
     "rogue": [2014, 2021],
     "versa": [2012, 2020],
     "frontier": [2005, 2022],
+    "xterra": [2005],  # §25.1: guard; MODEL_GENERATIONS 2000-04 / 2005-15
     "titan": [2017],
     "armada": [2017],
     "quest": [2004, 2011],
@@ -7931,6 +7942,55 @@ _bound_rows_per_generation()
 if _family_problems:
     raise ValueError(
         "PLATFORM_FAMILIES lint failed:\n  " + "\n  ".join(_family_problems))
+
+
+# ---- §25 (PARTS_GAPS §25): truck generation audit, 2026-11-12.
+# Entry windows that ran past the generation's last model year. 2024 is a
+# new generation for the Tacoma (4th gen, TNGA-F) and the Ranger (P703),
+# so their 2024 cars got 3rd-gen Tacoma / 2019-23 Ranger rows; the KL
+# Cherokee ended with MY2023. The Ranger was not sold in the US for MY2012-
+# 2018, so its 1998-2011 pieces said "fits 1998-2018". Rows are clamped to
+# the real windows (MODEL_GENERATIONS); a piece left with no years is
+# dropped. Narrowing only: no row is added and no band changes. 2024 cars
+# of these models get no card until their own generation is researched.
+_GEN_END_CLAMPS = {
+    # key: (new year_range, US no-sale years (lo, hi) or None)
+    "ranger": ((1983, 2023), (2012, 2018)),
+    "tacoma 2016-2024": ((2016, 2023), None),   # key kept: ebay/test keys use it
+    "cherokee 2014-2024": ((2014, 2023), None),
+}
+
+
+def _apply_gen_end_clamps() -> None:
+    for key, ((lo, hi), gap) in _GEN_END_CLAMPS.items():
+        e = UNOBTANIUM_DB[key]
+        e["year_range"] = (lo, hi)
+        kept = []
+        for p in e["top_parts"]:
+            plo, phi = max(lo, p.get("yr_min", lo)), min(hi, p.get("yr_max", hi))
+            if gap and plo <= gap[1] and phi >= gap[0]:
+                if plo >= gap[0] and phi <= gap[1]:
+                    continue  # piece lies wholly in the no-sale years
+                if plo < gap[0] and phi <= gap[1]:
+                    phi = gap[0] - 1
+                elif plo >= gap[0]:
+                    plo = gap[1] + 1
+                else:
+                    raise ValueError(f"§25 clamp: {key} {p['name']} spans the {gap} gap")
+            if plo > phi:
+                continue
+            q = dict(p)
+            if plo != lo or "yr_min" in p:
+                q["yr_min"] = plo
+            if phi != hi or "yr_max" in p:
+                q["yr_max"] = phi
+            if _is_gap_row(p):
+                _GAP_BLOCK_IDS[id(q)] = q
+            kept.append(q)
+        e["top_parts"] = kept
+
+
+_apply_gen_end_clamps()
 
 
 # ---------------------------------------------------------------------------

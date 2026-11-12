@@ -2435,3 +2435,145 @@ confirmed. The sources show trim-limited or package-only fitment:
 - 9,955 cars now show at least one ADAS row.
 - 1,139 of those have a standard (ranked) ADAS row.
 - New rows: blind spot 5,750 cars, front radar 5,523, windshield camera 1,170.
+
+## 25. Truck generation audit: Xterra, Ranger, Cherokee, Tacoma (2026-11-12, hub)
+
+**Why.** The owner's weekly "what landed" posts go to owner communities
+(r/XTerra today; Ranger, Cherokee XJ and 1st gen Tacoma next). Those owners
+read the "fits" years. The Xterra rows said "fits 2000–2015", across two
+generations.
+
+**Method.** Every row `match_vehicle` returns for each model year from the
+first generation to 2025, compared with the windows in `MODEL_GENERATIONS`
+(Tacoma has no row there; its windows are the split entries 1995–2004,
+2005–15, 2016+). A row is flagged when its "fits" span covers more than one
+window, or years outside every window.
+
+**Audit (before):**
+
+| Row | Fits (before) | Crosses |
+|---|---|---|
+| Xterra Tail Lights (pair, uncracked) | 2000–2015 | 1st gen 2000–04 / 2nd gen 2005–15 |
+| Xterra Side Steps / Rock Rails (pair) | 2000–2015 | 1st / 2nd gen |
+| Xterra Center Console (lid intact) | 2000–2015 | 1st / 2nd gen |
+| Xterra OEM Roof Rack (tube-style) | 2000–2015 | 1st / 2nd gen |
+| Xterra Rear Diff Locker Switch (trim PRO-4X/Off-Road) | 2000–2015 | 1st / 2nd gen |
+| Tacoma 3rd gen: all 19 rows | 2016–2024 | 3rd gen / 4th gen (MY2024) |
+| Ranger 2019 gen: all 12 rows | 2019–2024 (camera 2020–24) | 2019–23 / P703 (MY2024) |
+| Ranger 1998–2011 pieces: 9 rows (tailgate, alternator, starter, cluster, climate panel, window regulator and switch, ECM, 2006 headlights) | 1998–2018 / 2006–2018 | no US Ranger MY2012–18 (no generation crossed; the years do not exist) |
+| Ranger ABS/ESC mandate piece | 2013–2018 | wholly in the no-sale years |
+| Cherokee KL: all 7 rows | 2014–2024 | KL ended MY2023 (no 2024 Cherokee; no generation crossed) |
+
+Not crossing: every Cherokee XJ row (one window 1984–2001), Ranger
+1983–92 and 1993–97 pieces, Tacoma 1st and 2nd gen pieces (the §15 pass
+already split them).
+
+### 25.1 Nissan Xterra (2000–04, 2005–15)
+
+Every row is a different part in each generation (different Nissan
+numbers), so each row is gated to the generation its band was set for.
+The bands have no recorded price basis (no audit row; git history
+squashed at 6b170f92). The entry's only gated row (diff-lock switch,
+PRO-4X/Off-Road) is 2nd-gen-only, so the entry was read as written for the
+2nd gen and the bands stay there.
+
+**1st gen rows (hub decision 2026-11-12, "add the first-gen halves").**
+A row's low/high is an anchor by convention, which `ebay_prices.py`
+replaces with fitment-filtered listing data once it runs. The 1st gen
+trucks already showed these anchors, so each 1st gen row carries the
+pre-split anchor (same band, rarity and cost as its 2nd gen twin): **anchor
+carried from the pre-split row, no separate price basis; to be replaced
+by eBay data.** Years are only those the cited numbers cover.
+
+Basis type: **OEM** = opened catalog record in the repo's OEM data
+(oem-raw); **excerpt** = web-search excerpt only, page not opened (to be
+upgraded once the catalog hosts are reachable).
+
+| Row | Now | Basis |
+|---|---|---|
+| Tail Lights (pair, uncracked) | 2005–2015 | Nissan catalog via repo OEM data (oem-raw `raw/www.nissanpartsdeal.com.jsonl`, retrieved 2026-11-05): 26550-EA025 / 26555-EA025 "2005-2015 Nissan Xterra, all trims". 1st gen numbers differ: 26550/26555-7Z825 (2001–04) and -ZD325 (2003–04 SE), so not the same part. 2000 is not in the data. |
+| Side Steps / Rock Rails (pair, **match part #**) | 2005–2015 | Search excerpts, 2026-11-12 (pages not opened): 2nd gen 96100/96101-EA000 (2005 Off-Road/S/SE, used-parts listing) and 96100/96101-ZP70A (parts.nissanusa.com); 1st gen 96111-7Z060 and 96110/96111-7Z900. Different numbers by generation; more than one number inside the 2nd gen, so the name now says "match part #". |
+| Center Console (lid intact) | 2005–2015 | Search excerpts, 2026-11-12: lid 96920-EA002 (2005–07) superseded by 96920-ZP00C (listed 2005/2006–2015 Xterra, nissanpartsdeal and a dealer site); 1st gen lids 96920-7Z000/7Z001. Covers the lid only; the console body's carry-over is not confirmed. |
+| OEM Roof Rack (tube-style) | 2005–2015 | Search excerpts, 2026-11-12: 2nd gen roof side rail 76314-EA030 listed 2005–2015 (parts.nissanusa.com); 1st gen rear rail 73230-7Z030 listed 2000–2004 (nissanpartsdeal). Different parts. |
+| Rear Diff Locker Switch (trim PRO-4X/Off-Road kept) | 2005–2015 | Search excerpts, 2026-11-12: switch 25154-7S200 listed for 2005–2015 Xterra with the M226 e-locker (nissanpartsdeal, Z1 Off-Road); no 1st gen fitment found. The trims named are 2nd gen trims. |
+
+Basis type of the 2nd gen rows: tail lights OEM; the other four excerpt.
+
+1st gen rows added (every band: anchor carried from the pre-split row, no
+separate price basis; to be replaced by eBay data):
+
+| Row | Years | Basis type | Basis |
+|---|---|---|---|
+| Tail Lights (pair, uncracked, **match part #**) | 2001–2004 | OEM | oem-raw nissanpartsdeal, retrieved 2026-11-05: 26550/26555-7Z825 "2001-2004 Xterra SE, XE" and 26550/26555-ZD325 "2003-2004" (SE / VG33ER option code). Two numbers in the generation, hence "match part #". **2000 left out:** no 2000 number in the data. |
+| Side Steps / Rock Rails (pair, **match part #**) | 2001–2004 | excerpt | Search, 2026-11-12: 96110/96111-7Z900 "2001-2002 SE running boards"; 96111-7Z060 "2003-2004 XE pipe side step". Two numbers, hence "match part #". **2000 left out:** no number found. |
+| Center Console (lid intact) | 2000–2002 | excerpt | Search, 2026-11-12: 96920-7Z000 listed "2000-2002 Xterra" (nissanpartsdeal). 96920-7Z001 listed "1998-2002 Nissan" with no model named, so not used. **2003–04 left out:** no number found. Lid only, like the 2nd gen row. |
+| OEM Roof Rack (tube-style) | 2000–2004 | excerpt | Search, 2026-11-12: rear rail 73230-7Z030 listed "2000-2004 Xterra SE, XE" (nissanpartsdeal). |
+| Rear Diff Locker Switch | none | — | No 1st gen fitment found; not added. |
+
+`GENERATION_BREAKS["xterra"] = [2005]` added as a guard, so a later row
+cannot cross the break unnoticed.
+
+**Sites not reached:** www.nissanpartsdeal.com and parts.nissanusa.com do
+not resolve from this session (host not on the network allowlist); the
+excerpts above came through web search only. Opening those pages would
+turn the search excerpts into catalog citations. Nothing was worked around.
+
+### 25.2 Toyota Tacoma 3rd gen ends at 2023
+
+2024 is the 4th generation (TNGA-F): motor1.com 2024 Tacoma vs Ranger
+comparison, paultan.org 2023-05-19 "2024 fourth generation Toyota Tacoma
+debuts", hagerty.com "The 2024 Tacoma" (search, 2026-11-12). The
+`tacoma 2016-2024` entry now runs 2016–2023 (key kept: tests and price
+keys use it). The one 2024 Tacoma on the lots gets no card until the
+4th gen is researched.
+
+### 25.3 Ford Ranger: 1998–2011 and 2019–2023
+
+- 2024 is the new P703 generation in the US (same search sources as
+  25.2). Entry window 1983–2024 → 1983–2023.
+- No US Ranger MY2012–18: Ford Authority, last North American Ranger built
+  2011-12-22 at Twin Cities; return for MY2019 (first truck 2018-10-22,
+  Michigan Assembly); Wikipedia "Ford Ranger" (search, 2026-11-12). The
+  1998–2011 pieces now say 1998–2011 (were 1998–2018), and the ABS/ESC
+  piece for 2013–18 is dropped. Wikipedia mentions a short 2012 fleet run;
+  the lots have no 2012 Ranger, so it is noted, not acted on.
+
+### 25.4 Jeep Cherokee KL ends at 2023
+
+KL production ended February 2023, model years 2014–2023 (Wikipedia
+"Jeep Cherokee (KL)"; tflcar.com 2023-03; search, 2026-11-12). The
+`cherokee 2014-2024` entry now runs 2014–2023. No car changes rows (no
+2024 Cherokee exists).
+
+**Change.** `_apply_gen_end_clamps()` runs right after
+`_bound_rows_per_generation()`; it only narrows windows and drops pieces
+left with no years. No row was added, no band changed, gates unchanged.
+
+**Checks** (lots 2026-11-12, 336,892 cars, 12,470 distinct
+year/make/model; main vs branch with `match_vehicle`):
+- Only Xterra, Ranger, Cherokee and Tacoma combos changed.
+- Ranger (1,352 cars) and Cherokee (533): "fits" only.
+- Xterra 2nd gen (468 cars): "fits" plus the side-step name.
+- Xterra 1st gen (604 cars): the rows above (2000: rack and console lid;
+  2001–02: all four; 2003–04: tail lights, steps, rack). The diff-lock
+  switch is gone from the 1st gen.
+- The 2024 Tacoma (1 car) gets no card.
+- `test_parts_gaps.py` §25 checks: no row on these four trucks leaves its
+  generation window (every year to 2025).
+
+**Needs a real price:** every 1st gen Xterra row carries the anchor
+only (see 25.1). The eBay refresh would replace them, but no eBay keyset
+exists (ops/ebay.md, 2026-11-06), so the anchors stay for now.
+
+**Fitment still missing:** 2000 tail lights and side steps; 2003–04
+console lid; any 1st gen diff-lock switch.
+
+**Unresolved:**
+- Whether the Xterra roof rack and side steps are on every 2nd gen trim.
+  They are not option-flagged today; that was not changed.
+- Inside one window but possibly across a mid-cycle change (leads, not
+  checked; not crossings of the generation table, so not changed here):
+  - Cherokee XJ dash bezel and door panels 1984–2001 (the 1997 interior
+    redesign);
+  - Tacoma 1st gen climate unit 1995–2004 (the 2001 refresh);
+  - Xterra 2nd gen console body across the 2009 update.

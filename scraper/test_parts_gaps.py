@@ -754,6 +754,52 @@ check("§24.2 existing Hyundai/Nissan radar rows now 'if equipped'",
       _st(2017, "Hyundai", "Elantra", "Smart Cruise Radar Module") == "unconfirmed" and _st(2017, "Nissan", "Altima", "Blind Spot Radar Module") == "unconfirmed")
 check("§24.2 a windshield-camera row doesn't block the 2020+ backup camera", _CAM in parts(2021, "Toyota", "Camry"))
 
+# §25 truck generation audit (Xterra, Ranger, Cherokee, Tacoma): no matched
+# row's "fits" leaves the car's own MODEL_GENERATIONS window.
+_GEN25 = {("Nissan", "Xterra"): ((2000, 2004), (2005, 2015)),
+          ("Ford", "Ranger"): ((1983, 1992), (1993, 1997), (1998, 2011), (2019, 2023)),
+          ("Jeep", "Cherokee"): ((1984, 2001), (2014, 2023)),
+          ("Toyota", "Tacoma"): ((1995, 2004), (2005, 2015), (2016, 2023))}
+# Tacoma has no MODEL_GENERATIONS row; its windows are the split entries.
+_MG = dict(((mk, md), w) for mk, md, w in js.MODEL_GENERATIONS)
+check("§25 truck windows match MODEL_GENERATIONS / the Tacoma split entries",
+      all(_MG[k] == w for k, w in _GEN25.items() if k != ("Toyota", "Tacoma"))
+      and tuple(sorted(e["year_range"] for k, e in js.UNOBTANIUM_DB.items() if k.startswith("tacoma "))) == _GEN25[("Toyota", "Tacoma")])
+_bad25 = []
+for (mk, md), wins in _GEN25.items():
+    for y in range(wins[0][0], 2026):
+        win = next((w for w in wins if w[0] <= y <= w[1]), None)
+        for name, q in parts(y, mk, md).items():
+            a, b = map(int, q["fits"].split("–"))
+            if win is None or a < win[0] or b > win[1]:
+                _bad25.append((y, md, name, q["fits"]))
+check("§25 no Xterra/Ranger/Cherokee/Tacoma row leaves its generation (incl. 2024 new gens, Ranger 2012-18)",
+      not _bad25, str(_bad25[:6]))
+_x08 = parts(2008, "Nissan", "Xterra")
+check("§25.1 Xterra 2nd gen rows",
+      {"Tail Lights (pair, uncracked)", "OEM Roof Rack (tube-style)", "Rear Diff Locker Switch",
+       "Center Console (lid intact)", "Side Steps / Rock Rails (pair, match part #)"} <= set(_x08)
+      and _x08["Tail Lights (pair, uncracked)"]["fits"] == "2005–2015", str(sorted(_x08)))
+# 1st gen: only the years each cited number covers (PARTS_GAPS §25.1)
+_RACK, _TL1, _ST, _CON = ("OEM Roof Rack (tube-style)", "Tail Lights (pair, uncracked, match part #)",
+                          "Side Steps / Rock Rails (pair, match part #)", "Center Console (lid intact)")
+_X1 = {2000: {_RACK: "2000–2004", _CON: "2000–2002"},
+       2001: {_RACK: "2000–2004", _CON: "2000–2002", _TL1: "2001–2004", _ST: "2001–2004"},
+       2002: {_RACK: "2000–2004", _CON: "2000–2002", _TL1: "2001–2004", _ST: "2001–2004"},
+       2003: {_RACK: "2000–2004", _TL1: "2001–2004", _ST: "2001–2004"},
+       2004: {_RACK: "2000–2004", _TL1: "2001–2004", _ST: "2001–2004"}}
+_x1bad = {y: {n: q["fits"] for n, q in parts(y, "Nissan", "Xterra").items()} for y in _X1}
+check("§25.1 1st gen Xterra years get exactly their cited rows (no diff-lock switch)",
+      all(_x1bad[y] == _X1[y] for y in _X1), str(_x1bad))
+check("§25.1 1st gen bands are the pre-split anchors",
+      [(q["low"], q["high"]) for q in js.UNOBTANIUM_DB["xterra"]["top_parts"] if q.get("yr_max") == 2004 and q["name"] == _RACK] == [(150, 350)])
+check("§25.1 diff-lock switch keeps its trim gate", _x08["Rear Diff Locker Switch"].get("trim_status") == "unconfirmed")
+check("§25.2 2024 Tacoma (4th gen) gets no 3rd-gen rows", not parts(2024, "Toyota", "Tacoma"))
+check("§25.2 2023 Tacoma keeps its 3rd-gen rows", "TRD Pro Grille" in parts(2023, "Toyota", "Tacoma"))
+check("§25.3 Ranger 1998-2011 pieces say fits 1998-2011; 2024 Ranger (P703) gets none",
+      parts(2005, "Ford", "Ranger")["Tailgate (clean)"]["fits"] == "1998–2011" and not parts(2024, "Ford", "Ranger"))
+check("§25.4 Cherokee KL rows end at 2023", parts(2016, "Jeep", "Cherokee")["Tail Lights (pair, uncracked)"]["fits"] == "2014–2023")
+
 # 3. band sanity + lint
 bad = []
 for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "milan", "encore", "captiva sport", "park avenue", "scion xb 2008-2015", "sonata", "infiniti qx60", "escort", "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
