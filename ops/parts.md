@@ -342,3 +342,26 @@ The generic-only count re-matches every distinct year/make/model in
   (the interchange/model-generation table). Worth adding (1995–2004,
   2005–15, 2016–23, 2024+) so lifespan and part-first windows agree.
 - No app change needed; goes live with the next scan after merge.
+
+## 2026-11-13 — notable trims read the trim gates (design/notable-trims)
+
+The app now badges a car with a model's trim gate word ("XT", "TRD Pro",
+"Raptor") when the car's usable VIN trim names it, and the Cars Filters get
+a Trim control from the same words. The words are derived from this
+table's NON-option `trim` gates (scan field `notableTrims`, see
+ops/data.md), so a new trim gate here becomes a badge and a filter option
+with the next scan, and removing one removes them. Option-only gates do
+not count. No parts rows or gating were changed.
+- Gap the owner asked about: the Outback has no XT gate (its only trim
+  gate is "Wilderness", 2022+), so the 11 Outbacks that decode as XT on
+  11-13 get no badge and the Outback has no XT filter option. Same for
+  Legacy Outback rows filed under "legacy" (gates "gt"/"spec" only).
+  Recommendation: add 2005–09 Outback XT rows (turbo, top-mount
+  intercooler, hood scoop) with a stated basis (the XT shares the Legacy
+  GT's EJ255; cite the part numbers), gated `["XT"]`. The Tacoma also has
+  no TRD Pro / TRD Off-Road gate (the "TRD Pro" gate is the 4Runner's).
+- Odd words the derivation surfaces, all from existing non-option gates:
+  Camry/Escape "Hybrid" (battery pack rows), Sonata/4Runner/BRZ "Limited",
+  Accord/Fusion/Elantra "Sport", GR86 "Premium", VW "R"/"Autobahn". If any
+  of those is not a real trim split for parts, the gate itself is the
+  thing to revisit.

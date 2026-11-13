@@ -283,3 +283,36 @@ going live on the web is a merge to main, the store shells need nothing).
 - Open: Pro users who skipped the zip (nationwide, no location) have the
   Make filter disabled today, so a `#cars=` link waits for a zip for them
   too. No goatcounter event names beyond `car-search` / `car-link`.
+
+## State (2026-11-13) — notable trims, branch `design/notable-trims`
+
+From the owner: "For Subaru Outback, can we know which ones are Outback XT?
+Same with Forester or other similar cars..." Not merged (hub reviews).
+- Source of the words: the parts table's NON-option `trim` gates, published
+  by the scan as `notableTrims` (scraper change, ops/data.md + ops/parts.md).
+  Live with the first scan after the merge; until then the app shows no
+  badge and no Trim control (checked by notable_trims_e2e).
+- Badge (`.badge-trim`, Manual's sibling, keeps the table's spelling): Cars
+  cards, Alerts hits, Parts donor cards, and a line on the car screen. Only
+  when the decode is `usable` AND names the trim alone: multi-trim lists
+  ("SE / Limited", "Sport, R/T") and "non R design" never badge. Matching is
+  trimFilterMatches; a longer hit wins ("N Line" over "N"). Free for
+  everyone (judgement call: the decoded trim line is Pro on cards, but the
+  Trim filter was asked to be free and would reveal the same thing).
+- Filters -> Trim: with exactly one model picked and a notable trim among
+  the cars the other filters leave; "Any trim" + each trim present (counts
+  Pro-only); note "N <Model>s have no single trim in their VIN data and are
+  not shown"; counted in the Filters badge; resets when make/model change
+  (state keyed to make+model); survives re-renders.
+- Search box: "forester xt" -> "Subaru Forester · XT" row (sets the trim
+  too); `#cars=Make|Model|years|Trim` (years may be empty). Both small and
+  self-contained (CAR SEARCH header says so).
+- Today's data (11-13): 1,686 cars badged across 56 make/model names; top
+  pairs Mustang GT 244, Camry Hybrid 228, Monte Carlo SS 133, TL Type-S
+  107, 4Runner Limited 95. Forester XT 32. Outback XT 0: no Outback XT gate
+  (see ops/parts.md for the recommendation).
+- sw `jh-v190`. Tests: notable_trims_unit (71), notable_trims_e2e (28),
+  scraper/test_notable_trims.py, two ui_no_truncation screens
+  (cards-trim-badges, cars-filters-trim). Browser tests add notableTrims to
+  the served data via backend/test/notable_trims_fixture.mjs until the
+  checked-out data carries it.

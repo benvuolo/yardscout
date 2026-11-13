@@ -304,3 +304,28 @@ The auto-scan 77423a1 published one car as "Cr-Z", which split the CR-Z key. scr
 - Simulated in a scratch repo with a stub payload writer and all four cases correct: code changed mid-scan, rebuild fails, ops-only change, main didn't move.
 - Still to watch: other generated docs/data files built from code (not only the scan) still take the scan's copy on conflict. None is known to be code-built today besides the interchange payload.
 - 2026-11-10 ~13:00 UTC (hub): the feed spelled one Jeep "J-10" (auto-scan 6f12e6d), which split the J10 key and broke curate M3/M5 (same pattern as Cr-Z). _MODEL_CANON jeep gets "j10": "J10", with a test in test_model_normalization. The next scan writes the canonical name.
+
+## 2026-11-13 — notableTrims in the scan output (design/notable-trims)
+
+New top-level field `notableTrims` in `docs/data/inventory_live.json` and
+`docs/data/inv/manifest.json`: `{make: {model: [word, ...]}}`, the trim
+words the parts table gates NON-option rows on for that make/model
+(`notable_trims_from_spans` in junkyard_scraper.py, over the scan's
+`modelYears` spans, with the same entry selection as `match_vehicle` via the
+new `_keyword_hits` / `_matched_entries` helpers; row yr_min/yr_max
+respected). Left out: option rows, words already in the model name, words
+with no letters, body styles gated through "trim". Recomputed after a
+stale-keep carry-forward. ~6 KB, 244 make/model pairs on the 11-13 data.
+The app's trim badge and Cars Trim filter read it; before the first scan
+after the merge the field is absent and the app shows neither. Refactor of
+match_vehicle checked identical on 37,407 (year, make, model, decode)
+combinations against main. Test: `python3 scraper/test_notable_trims.py`.
+- Data-quality gap (for this workstream): vPIC trims rated `usable` include
+  multi-trim lists ("SE / SE NAVI / Limited / Limited NAVI" on 254 Sonatas,
+  "Sport, R/T" Dakotas, "Base/ BaseStyle/ Base Tech Turbo/ Turbo Ultimate"
+  Velosters) and negations ("Premier (non R design)" on Volvo S60s). The
+  app now ignores those for the badge, but the scraper's trim gate
+  (`_gate_hit` on trim + series, whole words) treats any word in such a
+  list as a match, so it can VIN-confirm a trim-gated part the car may not
+  have (not measured here).
+  Recommendation: rate such decodes `ambiguous` in the trim-quality pass.
