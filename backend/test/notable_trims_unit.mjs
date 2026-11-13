@@ -174,9 +174,9 @@ same('markup stripped from the trim', T.parseCarsHash('#cars=Subaru|Forester||<b
 
 /* ---- NOTABLE_TRIMS_FREE: the owner's free-or-Pro switch ---- */
 const shipped = /^const NOTABLE_TRIMS_FREE = (true|false);$/m.exec(src);
-// Shipped value (hub 2026-11-13): false = Pro-only, matching the Pro-only
-// trim line, until the owner chooses. Change this check with the constant.
-check('NOTABLE_TRIMS_FREE is one constant, false as shipped', !!shipped && shipped[1] === 'false', shipped && shipped[0]);
+// Shipped value: true (owner decision 2026-11-13, free for everyone).
+// Change this check with the constant.
+check('NOTABLE_TRIMS_FREE is one constant, true as shipped', !!shipped && shipped[1] === 'true', shipped && shipped[0]);
 for (const free of [true, false]) {
   for (const pro of [false, true]) {
     const c2 = vm.createContext({});

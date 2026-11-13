@@ -319,7 +319,7 @@ try {
 
   // 8. NOTABLE_TRIMS_FREE = false (Pro only): no trim word for a free user;
   // the Pro box in the Trim control's place; Pro keeps everything.
-  check('docs/app.js ships NOTABLE_TRIMS_FREE = false (Pro-only until the owner decides)', /^const NOTABLE_TRIMS_FREE = false;$/m.test(fs.readFileSync(APP_JS, 'utf8')));
+  check('docs/app.js ships NOTABLE_TRIMS_FREE = true (owner decision 2026-11-13)', /^const NOTABLE_TRIMS_FREE = true;$/m.test(fs.readFileSync(APP_JS, 'utf8')));
   freeMode = false;
   page = await open();
   await ready(page);
