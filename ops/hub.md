@@ -38,7 +38,7 @@ watches are bound to it. It does not build features.
 - Disabled: `trig_0185m2qk4vqHhGtnwMEqkjoz` (iOS retry, no longer needed).
 - Not bound to this session: `trig_01PQWZukG51yQNZQ4zbm1956` "Reddit reply
   drafts" (fresh session per run, hourly 6:42–21:42 America/Denver).
-  Disabled until the owner adds the Gmail connector to it. See
+  Owner added Gmail 2026-11-13; enabled by the hub at 16:58 UTC. See
   `ops/reddit.md`.
 
 ## Waiting on the owner
@@ -493,3 +493,16 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
   confirmed sign-ups by link. Nothing left on a branch.
 - For the owner: resubmit the sitemap in Search Console; read the updated
   privacy page.
+
+## 2026-11-13 ~17:00 UTC Reddit reply task running
+
+- Owner added the Gmail connector to "Reddit reply drafts" and ran it by hand
+  at 16:31 UTC: 4 new r/XTerra replies drafted in 64 s, threads labelled.
+  Hub enabled the schedule (next run 17:42 UTC).
+- It runs on the session default model; that first run cost about $0.89 at
+  list price. Asked the owner whether to move it to a cheaper model (a model
+  change needs the owner's explicit ask).
+- From the drafts: u/underling1978 reports the Android app is not available
+  in Canada on Google Play. Country availability is set in Play Console (and
+  App Store Connect), not in this repo; owner to check. u/cgarcusm could not
+  find Xterra as an option: the Model list only offers models within range.

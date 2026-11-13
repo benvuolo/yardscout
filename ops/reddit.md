@@ -47,7 +47,5 @@ session follows the steps below.
 
 `trig_01PQWZukG51yQNZQ4zbm1956` "Reddit reply drafts": hourly 6:42–21:42
 America/Denver, a fresh session each run, push notification when it has
-drafts. **Created disabled**: it could not be given the Gmail connector from
-the hub session (the connectors setting is not available to this
-organization through the API). The owner adds Gmail to it in the Claude
-app's scheduled tasks screen and turns it on.
+drafts. The owner added the Gmail connector in the Claude app on 2026-11-13 (a
+session cannot attach one through the API here); enabled since 16:58 UTC.
