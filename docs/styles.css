@@ -3473,3 +3473,22 @@ html.map-lock #saved-pill { display: none !important; }
    of running past the card at 320 px with 200% text (seen on a filtered
    Xterra list by the car-search screens of ui_no_truncation). */
 .cc-head > .car-badges { flex-shrink: 1; max-width: 100%; }
+
+/* ---------- Filters: fields that hold two things (2026-11-13) ----------
+   The zip field shares its cell with the location button, and Years is two
+   selects. In a two-column grid (phones from about 400 px wide, depending on
+   text size) half a cell was too narrow: the zip placeholder and "From" were
+   cut off on an iPhone. They take a whole row on phones and tablets, and two
+   columns on wide screens (where the grid always has at least two). */
+.controls .ctl-pair { grid-column: 1 / -1; }
+@media (min-width: 900px) { .controls .ctl-pair { grid-column: span 2; } }
+/* Inside those fields the two halves wrap onto two lines when the text is
+   large (a zip beside the location button, From beside To). */
+.controls .ctl-pair > div { flex-wrap: wrap; }
+.controls .ctl-pair > div > input[type="text"] { flex: 1 1 6em !important; }
+.controls .ctl-pair > div > select { flex: 1 1 5.5em !important; }
+.controls .gps-btn { min-width: var(--tap); min-height: var(--tap); }
+/* A select shows its choice on two lines instead of cutting it off when the
+   choice is longer than the field ("Worth the trip (fresh & most to save)"
+   on a small phone, long yard names, any choice at large text sizes). */
+select { white-space: normal; height: auto; }

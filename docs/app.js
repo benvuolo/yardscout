@@ -2791,7 +2791,7 @@ async function useMyLocation() {
     localStorage.removeItem('jh_zip');
     const zipEl = document.getElementById('live-zip');
     zipEl.value = '';
-    zipEl.placeholder = 'Using your location';
+    zipEl.placeholder = 'Near me';
     busy(false);
     updateZipBanner();
     pfSyncWhere();
@@ -5048,7 +5048,7 @@ applyPostalInputs();
     if (gps) {
       try {
         activeZipCoords = JSON.parse(gps);
-        document.getElementById('live-zip').placeholder = 'Using your location';
+        document.getElementById('live-zip').placeholder = 'Near me';
       } catch (e) { localStorage.removeItem('jh_gps'); }
     }
   }
@@ -5474,7 +5474,7 @@ function renderYards() {
   const lz = document.getElementById('live-zip');
   if (document.activeElement !== yz) {
     yz.value = lz.value;
-    yz.placeholder = lz.placeholder;   // carries 'Using your location' when GPS is the center
+    yz.placeholder = lz.placeholder;   // carries 'Near me' when GPS is the center
   }
   updateYardsFilterCount();
   if (!liveLoaded) {
@@ -8782,7 +8782,7 @@ function pfSyncWhere() {
   const lz = document.getElementById('live-zip');
   if (document.activeElement !== pz) {
     pz.value = lz.value;
-    pz.placeholder = lz.placeholder;   // carries 'Using your location' when GPS is the center
+    pz.placeholder = lz.placeholder;   // carries 'Near me' when GPS is the center
   }
   pfUpdateWhereSum();
 }

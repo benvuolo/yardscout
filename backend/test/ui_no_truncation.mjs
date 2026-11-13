@@ -11,7 +11,8 @@
  *   - text clipped by an ancestor with overflow hidden/clip/auto/scroll
  *     (vertical scrolling of a sheet or page is allowed; horizontal is not)
  *   - text past the viewport edge, or a page that scrolls sideways
- *   - an input/select whose value or placeholder is wider than the field
+ *   - an input whose value or placeholder is wider than the field, or a
+ *     select whose choice cannot fit even wrapped (its longest word)
  *   - a tap target smaller than 44x44 CSS px (inline links in a sentence
  *     are exempt, as in WCAG 2.5.8)
  *   - text contrast below 4.5:1 (3:1 for large text), WCAG 1.4.3
@@ -236,7 +237,11 @@ const CHECK_FN = () => {
     const t = f.tagName === 'SELECT' ? (f.selectedOptions[0] ? f.selectedOptions[0].textContent : '') : (f.value || f.placeholder || '');
     if (!t.trim() || f.tagName === 'TEXTAREA') continue;
     cv.font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
-    const need = cv.measureText(t.trim()).width;
+    // A select may wrap its choice onto more lines (styles.css: select
+    // { white-space: normal; height: auto }), so only its longest word has
+    // to fit; an input's value or placeholder stays on one line.
+    const wraps = f.tagName === 'SELECT' && cs.whiteSpace === 'normal' && !f.multiple;
+    const need = wraps ? Math.max(...t.trim().split(/\s+/).map(w => cv.measureText(w).width)) : cv.measureText(t.trim()).width;
     const avail = f.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight) - (f.tagName === 'SELECT' && cs.appearance !== 'none' ? 20 : 0);
     if (need > avail + 1) add('field-text-cut', f, t, `${Math.round(need)}>${Math.round(avail)}`);
     if (!f.value && f.placeholder && f.tagName === 'INPUT' && !disabled(f)) {
@@ -1176,6 +1181,58 @@ const SCREENS = [
     await settle(page, 300);
   }, async (page) => { await resetUi(page); await page.evaluate(() => { localStorage.removeItem('jh_pro'); localStorage.removeItem('jh_pro_source'); applyProGates(); renderLive(); }); }],
   ['yards', async (page) => { await tab(page, 'yards'); }],
+  // Filter panels open (2026-11-13: no screen opened them, so a zip
+  // placeholder and "From" cut off in the two-column layout on an iPhone
+  // went unseen). The -gps screens put the fields in the state the location
+  // button leaves them in: empty zip, the "Near me" placeholder, Pro's 500 mi.
+  ['cars-filters', async (page) => {
+    await tab(page, 'live');
+    await page.evaluate(() => { if (!document.getElementById('live-filter-toggle').classList.contains('open')) document.getElementById('live-filter-toggle').click(); });
+    await settle(page, 300);
+  }],
+  ['cars-filters-gps-pro', async (page) => {
+    await page.evaluate(() => { localStorage.setItem('jh_pro', '1'); applyProGates(); renderLive(); });
+    await tab(page, 'live');
+    await page.evaluate(() => {
+      if (!document.getElementById('live-filter-toggle').classList.contains('open')) document.getElementById('live-filter-toggle').click();
+      const z = document.getElementById('live-zip'); z.value = ''; z.placeholder = 'Near me';
+      const r = document.getElementById('live-radius'); r.value = '500';
+    });
+    await settle(page, 300);
+  }, async (page) => {
+    await page.evaluate(() => {
+      const z = document.getElementById('live-zip'); z.placeholder = 'e.g. 84101'; z.value = localStorage.getItem('jh_zip') || '';
+      document.getElementById('live-radius').value = '100';
+      if (document.getElementById('live-filter-toggle').classList.contains('open')) document.getElementById('live-filter-toggle').click();
+      localStorage.removeItem('jh_pro'); applyProGates(); renderLive();
+    });
+  }],
+  ['yards-filters-gps', async (page) => {
+    await tab(page, 'yards');
+    await page.evaluate(() => {
+      if (!document.getElementById('yards-filter-toggle').classList.contains('open')) document.getElementById('yards-filter-toggle').click();
+      const z = document.getElementById('yards-zip'); z.value = ''; z.placeholder = 'Near me';
+    });
+    await settle(page, 300);
+  }, async (page) => {
+    await page.evaluate(() => {
+      const z = document.getElementById('yards-zip'); z.placeholder = 'e.g. 84101'; z.value = localStorage.getItem('jh_zip') || '';
+      if (document.getElementById('yards-filter-toggle').classList.contains('open')) document.getElementById('yards-filter-toggle').click();
+    });
+  }],
+  ['pf-where-gps', async (page) => {
+    await tab(page, 'parts');
+    await page.evaluate(() => {
+      document.getElementById('pf-where-box').open = true;
+      const z = document.getElementById('pf-zip'); z.value = ''; z.placeholder = 'Near me';
+    });
+    await settle(page, 300);
+  }, async (page) => {
+    await page.evaluate(() => {
+      const z = document.getElementById('pf-zip'); z.placeholder = 'e.g. 84101'; z.value = localStorage.getItem('jh_zip') || '';
+      document.getElementById('pf-where-box').open = false;
+    });
+  }],
   ['yard-prices', async (page) => {
     await tab(page, 'yards');
     await page.evaluate(() => { const c = document.querySelector('#yards-grid .yard-card'); openYardPrices(c.dataset.loc); });
