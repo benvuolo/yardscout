@@ -1,0 +1,135 @@
+# Read-only: in which countries each store offers YardScout, and whether the
+# Pro subscription can be bought there. Written 2026-11-13 after a Canadian
+# user reported "the app isn't available in Canada" on Google Play while the
+# app covers Canadian yards. Changes nothing: the Play edit is opened only to
+# read and is deleted without a commit; App Store Connect calls are GET only.
+# Prints country codes and counts, never a secret.
+name: Store availability
+
+on:
+  workflow_dispatch:
+    inputs:
+      countries:
+        description: "Country codes to report on (ISO 2-letter, comma separated)"
+        default: "US,CA,MX,GB,AU"
+
+permissions:
+  contents: read
+
+jobs:
+  availability:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      WANT: ${{ github.event.inputs.countries }}
+    steps:
+      - run: pip install -q google-auth requests pyjwt cryptography
+      - name: Google Play
+        env:
+          SA_RAW: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+        run: |
+          python3 - <<'PY'
+          import json, os, requests
+          from google.oauth2 import service_account
+          from google.auth.transport.requests import Request
+          want = [c.strip().upper() for c in (os.environ.get("WANT") or "US,CA").split(",") if c.strip()]
+          raw = os.environ["SA_RAW"].strip(); obj, _ = json.JSONDecoder().raw_decode(raw[raw.find("{"):])
+          obj.setdefault("type", "service_account"); obj.setdefault("token_uri", "https://oauth2.googleapis.com/token")
+          cred = service_account.Credentials.from_service_account_info(obj, scopes=["https://www.googleapis.com/auth/androidpublisher"])
+          cred.refresh(Request())
+          H = {"Authorization": f"Bearer {cred.token}"}
+          app = "https://androidpublisher.googleapis.com/androidpublisher/v3/applications/io.yardscout.app"
+          edit = requests.post(f"{app}/edits", headers=H, timeout=60).json()["id"]
+          try:
+              for t in ("production", "internal"):
+                  r = requests.get(f"{app}/edits/{edit}/countryAvailability/{t}", headers=H, timeout=60)
+                  if r.status_code != 200:
+                      print(f"PLAY {t}: HTTP {r.status_code} {r.text[:200]}"); continue
+                  j = r.json()
+                  codes = sorted(c.get("countryCode", "?") for c in j.get("countries", []))
+                  print(f"PLAY {t}: {len(codes)} countries listed; restOfWorld={j.get('restOfWorld')} "
+                        f"syncWithProduction={j.get('syncWithProduction')}")
+                  print(f"PLAY {t}: " + "  ".join(f"{c}={'yes' if c in codes else 'NO'}" for c in want))
+                  print(f"PLAY {t}: all listed = {','.join(codes) if len(codes) <= 60 else ','.join(codes[:60]) + ',…'}")
+          finally:
+              requests.delete(f"{app}/edits/{edit}", headers=H, timeout=60)   # read-only: never commit
+          r = requests.get(f"{app}/subscriptions", headers=H, timeout=60)
+          if r.status_code != 200:
+              print("PLAY subscriptions: HTTP", r.status_code, r.text[:200])
+          for s in (r.json().get("subscriptions", []) if r.status_code == 200 else []):
+              for bp in s.get("basePlans", []):
+                  regs = {c.get("regionCode"): c for c in bp.get("regionalConfigs", [])}
+                  def price(c):
+                      m = (c or {}).get("price") or {}
+                      return f"{m.get('currencyCode','')} {int(m.get('units') or 0) + int(m.get('nanos') or 0) / 1e9:.2f}" if m else "-"
+                  other = bp.get("otherRegionsConfig")
+                  print(f"PLAY subscription {s.get('productId')} / {bp.get('basePlanId')} state={bp.get('state')}: "
+                        f"{len(regs)} regions priced; other-regions config={'yes' if other else 'no'}")
+                  print("PLAY subscription: " + "  ".join(
+                      f"{c}={'buyable ' + price(regs[c]) if c in regs and regs[c].get('newSubscriberAvailability', True) else ('priced, closed to new' if c in regs else 'NO')}"
+                      for c in want))
+          PY
+      - name: App Store
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_P8: ${{ secrets.ASC_API_KEY_P8 }}
+          APP_ID: "6817126581"
+        run: |
+          python3 - <<'PY'
+          import os, time, jwt, requests
+          # ISO-2 -> the 3-letter territory ids App Store Connect uses.
+          A3 = {"US": "USA", "CA": "CAN", "MX": "MEX", "GB": "GBR", "AU": "AUS", "NZ": "NZL", "DE": "DEU", "FR": "FRA"}
+          want = [c.strip().upper() for c in (os.environ.get("WANT") or "US,CA").split(",") if c.strip()]
+          key = os.environ["ASC_P8"].strip().replace("\\n", "\n")
+          token = jwt.encode({"iss": os.environ["ASC_ISSUER_ID"], "iat": int(time.time()), "exp": int(time.time()) + 900,
+                              "aud": "appstoreconnect-v1"}, key, algorithm="ES256",
+                             headers={"kid": os.environ["ASC_KEY_ID"], "typ": "JWT"})
+          H = {"Authorization": f"Bearer {token}"}
+          ROOT = "https://api.appstoreconnect.apple.com"
+          app = os.environ["APP_ID"]
+
+          def pages(url, params=None):
+              out, inc = [], []
+              while url:
+                  r = requests.get(url, headers=H, params=params, timeout=60); params = None
+                  if r.status_code != 200:
+                      try: d = r.json()["errors"][0].get("detail", "")
+                      except Exception: d = r.text[:200]
+                      return None, f"HTTP {r.status_code} {d[:200]}"
+                  j = r.json(); d = j.get("data", []); out += d if isinstance(d, list) else [d]; inc += j.get("included", [])
+                  url = (j.get("links") or {}).get("next")
+              return (out, inc), None
+
+          got, err = pages(f"{ROOT}/v2/appAvailabilities/{app}/territoryAvailabilities", {"include": "territory", "limit": 200})
+          if err:
+              print("APP STORE availability:", err)
+          else:
+              data, _ = got
+              avail = {}
+              for t in data:
+                  tid = (((t.get("relationships") or {}).get("territory") or {}).get("data") or {}).get("id") or "?"
+                  avail[tid] = bool((t.get("attributes") or {}).get("available"))
+              on = sorted(k for k, v in avail.items() if v)
+              print(f"APP STORE app: available in {len(on)} of {len(avail)} territories")
+              print("APP STORE app: " + "  ".join(
+                  f"{c}={'yes' if avail.get(A3.get(c, c)) else ('NO' if A3.get(c, c) in avail else 'not listed')}" for c in want))
+
+          got, err = pages(f"{ROOT}/v1/apps/{app}/subscriptionGroups", {"include": "subscriptions", "limit": 50})
+          if err:
+              print("APP STORE subscriptions:", err)
+          else:
+              _, inc = got
+              subs = [i for i in inc if i.get("type") == "subscriptions"]
+              if not subs: print("APP STORE subscriptions: none found")
+              for s in subs:
+                  a = s.get("attributes") or {}
+                  g2, e2 = pages(f"{ROOT}/v1/subscriptions/{s['id']}/subscriptionAvailability",
+                                 {"include": "availableTerritories", "limit[availableTerritories]": 200})
+                  if e2:
+                      print(f"APP STORE subscription {a.get('productId')} state={a.get('state')}: availability {e2}"); continue
+                  d2, inc2 = g2
+                  terr = sorted(i["id"] for i in inc2 if i.get("type") == "territories")
+                  print(f"APP STORE subscription {a.get('productId')} state={a.get('state')}: sold in {len(terr)} territories")
+                  print("APP STORE subscription: " + "  ".join(f"{c}={'yes' if A3.get(c, c) in terr else 'NO'}" for c in want))
+          PY
