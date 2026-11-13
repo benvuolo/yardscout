@@ -581,3 +581,22 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
 - Next app release would carry: search box, tab scroll, filter fix, card
   share, trim badge and filter, the model-range line, narrowing counters,
   checkout outcomes. Needs the owner's "ship".
+
+## 2026-11-13 ~23:15 UTC checkout outcomes live on the web (sw jh-v194)
+
+- `growth/checkout-outcomes` merged at e2601c12; deploy-workers run
+  43522743494 succeeded; site serving jh-v194. No native file, no migration.
+- Each checkout attempt now ends in exactly one counter: bought, cancelled,
+  pending, incomplete, failed (by class), web "paid, not confirmed"; plus
+  "store product did not load" when the Pro sheet opens in the apps. The
+  scorecard's item 4 shows "of N checkout taps: …" with "no result recorded"
+  for the rest. Counting version is now 4.
+- Hub regression on the merged tree: funnel_counters (139), scorecard (155),
+  recap_signup, ops_quiet units; funnel_events, car_search, card_share e2e;
+  e2e-ops.sh. All pass.
+- The apps report outcomes only after the next store release (owner's
+  "ship"). The release is now ready to cut: nothing else is pending on a
+  branch.
+- Plugin limit noted by the builder: both native Purchases plugins reject
+  with text only, so several store errors share one "store" class. Splitting
+  them needs a small native change in a later release.
