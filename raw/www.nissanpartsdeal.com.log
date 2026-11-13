@@ -1773,3 +1773,23 @@
 20:52:38 chain-unlinked window-regulator 2 numbers named by 80731-4Z305, no catalog link: 80731-4Z300, 80731-5M000
 20:52:38 chain-unlinked window-regulator 2 numbers named by 80730-4Z305, no catalog link: 80730-4Z300, 80730-5M000
 20:57:26 time budget reached records=4881
+22:59:31 start site=www.nissanpartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=4881 list_lines=622 year_lines=132 url_index=4992
+22:59:31 completion worklist completion/nissan.own_page.json: 201 rows
+23:05:01 chain-unlinked window-regulator 1 numbers named by 80731-CA00A, no catalog link: 80731-CA010
+23:05:01 chain-unlinked window-regulator 1 numbers named by 80730-CA00A, no catalog link: 80730-CA010
+23:11:57 chain-unlinked climate-control 1 numbers named by 27500-9BK0A, no catalog link: 27500-9BM1A
+23:11:57 chain-unlinked climate-control 1 numbers named by 27500-9BK0B, no catalog link: 27500-9BM1B
+23:11:57 chain-unlinked climate-control 1 numbers named by 27510-9BK0A, no catalog link: 27510-9BM1A
+23:11:57 chain-unlinked climate-control 1 numbers named by 27510-9BK0B, no catalog link: 27510-9BM1B
+23:13:25 chain-unlinked climate-control 1 numbers named by 27500-9BL0A, no catalog link: 27500-9BM2A
+23:16:13 chain-unlinked window-regulator 1 numbers named by 80731-ZT01A, no catalog link: 80731-9FJ0A
+23:16:13 chain-unlinked window-regulator 1 numbers named by 80730-ZT01A, no catalog link: 80730-9FJ0A
+23:19:41 chain-unlinked window-regulator 1 numbers named by 82730-1FA0A, no catalog link: 82730-CV01C
+23:19:41 chain-unlinked window-regulator 1 numbers named by 82731-1FA0A, no catalog link: 82731-CV01C
+23:19:41 chain-unlinked window-regulator 1 numbers named by 82721-1KA0B, no catalog link: 82721-1KA1C
+23:19:41 chain-unlinked window-regulator 1 numbers named by 82720-1KA0B, no catalog link: 82720-1KA1C
+23:21:09 chain-unlinked window-regulator 1 numbers named by 82721-ZV50A, no catalog link: 82721-7S00A
+23:21:09 chain-unlinked window-regulator 1 numbers named by 82720-ZV50A, no catalog link: 82720-7S00A
+23:27:57 chain-unlinked window-regulator 1 numbers named by 80721-1FA0B, no catalog link: 80721-1FA1C
+23:27:57 chain-unlinked window-regulator 1 numbers named by 80720-1FA0B, no catalog link: 80720-1FA1C
+23:29:33 time budget reached records=4927
