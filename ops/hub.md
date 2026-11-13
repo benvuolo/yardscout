@@ -395,3 +395,30 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
 - Web only; the apps need the next store release (owner's "ship"). The app
   build the owner is using has none of: search box, tab scroll, filters fix,
   card share.
+
+## 2026-11-13 ~08:30 UTC notable trims merged (sw jh-v190); free-or-Pro open
+
+- Owner asked whether the app can tell an Outback XT (and similar trims).
+  `design/notable-trims` merged at 70dae8f4, then 50889cac:
+  - Scan publishes `notableTrims` (make → model → trim words): words the parts
+    table gates non-option rows on, plus a labels-only list
+    (`NOTABLE_TRIM_LABELS`: Outback XT, Cherokee and Grand Cherokee Trailhawk,
+    Liberty Renegade, Silverado Trail Boss). Labels add no part row and
+    confirm nothing. 1,842 cars across 61 names on 11-13 data.
+  - App: trim badge on cards and the car screen, a Trim filter once one model
+    is picked, trim rows in the search box, `#cars=Make|Model|years|trim`.
+  - Accuracy fix: a VIN decode that lists several trims ("Sport, R/T") no
+    longer confirms a trim-gated part. 412 confirmations on 275 cars became
+    "if equipped" (Veloster 276 → 2, Dakota 75 → 0, Jetta 74 → 24).
+- **Open, owner's call:** `NOTABLE_TRIMS_FREE` in `docs/app.js`. Shipped
+  `false` (Pro-only, like the trim line today). Hub recommends `true`. One
+  line plus the two "ships false" test checks.
+- Goes live with the first scan that STARTS after the merge (the 06:23 UTC
+  scan started on 135f7204 and will not carry `notableTrims`).
+- Regression on the merged tree: notable_trims unit and e2e, all scraper
+  tests, car_search / card_share / tab_retap e2e, ui_no_truncation trim and
+  filter screens at 320/360/390/402 in free, Pro-only and as-shipped modes.
+- Open for parts: 21 Outbacks (2005–06) decode as "2.5GT" and look like XTs
+  by VIN pattern; not badged. Tacoma, Ranger, F-150, Tundra, Frontier decodes
+  never name TRD Pro / FX4 / etc., so those trucks cannot be badged from the
+  VIN. The scraper still confirms an "R" gate from an "R-Line" decode.
