@@ -346,3 +346,17 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
   are search-excerpt-only (nissanpartsdeal and parts.nissanusa.com are not on
   this environment's network allowlist); Tacoma is missing from
   MODEL_GENERATIONS; the 2024 Tacoma and Ranger have no rows.
+
+## 2026-11-13 ~01:00 UTC tab scroll fix (tester feedback); Canada question
+
+- Tester: after scrolling to the bottom of one tab, the next tab opened at
+  the bottom too. d570aa41 (sw jh-v187): each tab keeps its own scroll
+  position on real taps; a tab not opened yet starts at the top; re-tap still
+  goes to the top. tab_retap_e2e extended (14 checks pass); car_search,
+  share_watch, model_years, funnel_events e2e and browser_e2e pass. Not run:
+  alerts_e2e (needs the local API server), map_regions_e2e (timed out at
+  420 s, long matrix). Checked live at 390 px.
+- Web only until the next store release (owner's "ship").
+- r/XTerra commenter asked about Canada: 5 Canadian yards are covered
+  (Pick-n-Pull Calgary x2, Edmonton, Kelowna; iPull-uPull Edmonton), postal
+  codes work. Kenny U-Pull (~25 Canadian yards) stays a candidate.
