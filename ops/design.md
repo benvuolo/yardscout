@@ -283,3 +283,64 @@ going live on the web is a merge to main, the store shells need nothing).
 - Open: Pro users who skipped the zip (nationwide, no location) have the
   Make filter disabled today, so a `#cars=` link waits for a zip for them
   too. No goatcounter event names beyond `car-search` / `car-link`.
+
+## State (2026-11-13) — notable trims, branch `design/notable-trims`
+
+From the owner: "For Subaru Outback, can we know which ones are Outback XT?
+Same with Forester or other similar cars..." Not merged (hub reviews).
+- Source of the words: the parts table's NON-option `trim` gates, published
+  by the scan as `notableTrims` (scraper change, ops/data.md + ops/parts.md).
+  Live with the first scan after the merge; until then the app shows no
+  badge and no Trim control (checked by notable_trims_e2e).
+- Badge (`.badge-trim`, Manual's sibling, keeps the table's spelling): Cars
+  cards, Alerts hits, Parts donor cards, and a line on the car screen. Only
+  when the decode is `usable` AND names the trim alone: multi-trim lists
+  ("SE / Limited", "Sport, R/T") and "non R design" never badge. Matching is
+  trimFilterMatches; a longer hit wins ("N Line" over "N"). Free for
+  everyone (judgement call: the decoded trim line is Pro on cards, but the
+  Trim filter was asked to be free and would reveal the same thing).
+- Filters -> Trim: with exactly one model picked and a notable trim among
+  the cars the other filters leave; "Any trim" + each trim present (counts
+  Pro-only); note "N <Model>s have no single trim in their VIN data and are
+  not shown"; counted in the Filters badge; resets when make/model change
+  (state keyed to make+model); survives re-renders.
+- Search box: "forester xt" -> "Subaru Forester · XT" row (sets the trim
+  too); `#cars=Make|Model|years|Trim` (years may be empty). Both small and
+  self-contained (CAR SEARCH header says so).
+- Today's data (11-13): 1,686 cars badged across 56 make/model names; top
+  pairs Mustang GT 244, Camry Hybrid 228, Monte Carlo SS 133, TL Type-S
+  107, 4Runner Limited 95. Forester XT 32. Outback XT 0: no Outback XT gate
+  (see ops/parts.md for the recommendation).
+- sw `jh-v190`. Tests: notable_trims_unit (71), notable_trims_e2e (30),
+  scraper/test_notable_trims.py, two ui_no_truncation screens
+  (cards-trim-badges, cars-filters-trim). Browser tests add notableTrims to
+  the served data via backend/test/notable_trims_fixture.mjs until the
+  checked-out data carries it.
+- Runs on this branch: ui_no_truncation (results, results-pro, car-card,
+  cards-mixed, alerts-hits, cars-filters, cars-filters-gps-pro and the two
+  new screens) at 320/360/375/390/402/430/1280, light+dark, 100%+200%:
+  252 checks, 0 failures; part-finder-likely, pf-fit-pro, pf-am-cv,
+  car-detail at 320/390: 32 checks, 0 failures. car_search_e2e 47,
+  card_share_e2e 19, tab_retap_e2e 14, model_years_e2e 18, share_watch_e2e
+  33, watch_match_unit, car_search_unit: all pass. All 27 scraper test
+  files exit 0.
+- Hub follow-up 2: free or Pro is the owner's call. One constant,
+  `NOTABLE_TRIMS_FREE` in docs/app.js (true on this branch). false = Pro
+  only: a free user gets no badge, no car-screen line, no trim search rows,
+  no trim from a `#cars=` link (the box prefill drops it too), and Filters
+  shows the standard Pro box "Filter this <Model> by trim" in the Trim
+  control's place (no trim word). Both values covered in notable_trims_unit
+  and notable_trims_e2e (the e2e serves app.js with the constant rewritten);
+  `TRIMS_FREE=false` makes ui_no_truncation do the same. Existing behaviour
+  left alone: the one free sample card still shows the decoded trim line
+  ("2.5XT · AWD  PRO"), as before this branch.
+- Hub follow-ups 1 and 3 (labels, multi-trim gate fix): see ops/parts.md.
+  Badged cars on 11-13 now 1,842 across 61 names (labels +123; the
+  "1/2 Ton" series is no longer read as a list, e.g. Yukon XL 1500 Denali
+  18 -> 38). "-Line" packages never badge as the word (Explorer "ST-Line").
+- Re-runs after all three: notable_trims_unit 107, notable_trims_e2e 40,
+  car_search_e2e 47, card_share_e2e 19, all pass; ui_no_truncation same 9
+  screens x 7 widths x 2 themes x 2 zooms: 252 checks, 0 failures; with
+  TRIMS_FREE=false (cars-filters-trim, cars-filters, results, 7 widths):
+  84 checks, 0 failures; 26 scraper test files importing junkyard_scraper
+  + test_inventory_shards exit 0.

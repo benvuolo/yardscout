@@ -3514,3 +3514,25 @@ select { white-space: normal; height: auto; }
   .cc-actions .pull-btn, .cc-actions-end .car-open { padding-left: 7px; padding-right: 7px; }
   .cc-actions .pull-btn .ico { margin-right: -2px; }
 }
+
+/* ---------- Notable trims (2026-11-13) ----------
+   The trim badge ("XT", "TRD Pro") is the Manual badge's sibling: same
+   quiet mono chip, spelled as the parts table spells it (no uppercase
+   transform), and it wraps with "Manual" / "New" / "Leaving soon".
+   The Filters Trim control hides with [hidden] even though .ctl is flex. */
+.badge-trim {
+  background: var(--surface2);
+  color: var(--text);
+  border: 1px solid var(--border-strong, var(--border));
+  font-family: var(--mono, ui-monospace, monospace);
+  letter-spacing: 0.02em;
+  text-transform: none;
+  overflow-wrap: anywhere;
+  max-width: 100%;
+}
+.car-badges .badge { min-width: 0; }
+.pf-row-card .cc-head > .car-badges { flex-shrink: 1; max-width: 100%; }
+.cd-trim .badge-trim { margin-right: var(--s1); }
+.controls .ctl[hidden] { display: none; }
+.controls .trim-note { margin: 0; overflow-wrap: anywhere; }
+.controls .trim-note[hidden] { display: none; }

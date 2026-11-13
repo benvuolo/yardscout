@@ -342,3 +342,72 @@ The generic-only count re-matches every distinct year/make/model in
   (the interchange/model-generation table). Worth adding (1995–2004,
   2005–15, 2016–23, 2024+) so lifespan and part-first windows agree.
 - No app change needed; goes live with the next scan after merge.
+
+## 2026-11-13 — notable trims read the trim gates (design/notable-trims)
+
+The app now badges a car with a model's trim gate word ("XT", "TRD Pro",
+"Raptor") when the car's usable VIN trim names it, and the Cars Filters get
+a Trim control from the same words. The words are derived from this
+table's NON-option `trim` gates (scan field `notableTrims`, see
+ops/data.md), so a new trim gate here becomes a badge and a filter option
+with the next scan, and removing one removes them. Option-only gates do
+not count. No parts rows or gating were changed.
+- Gap the owner asked about: the Outback has no XT gate (its only trim
+  gate is "Wilderness", 2022+), so the 11 Outbacks that decode as XT on
+  11-13 get no badge and the Outback has no XT filter option. Same for
+  Legacy Outback rows filed under "legacy" (gates "gt"/"spec" only).
+  Recommendation: add 2005–09 Outback XT rows (turbo, top-mount
+  intercooler, hood scoop) with a stated basis (the XT shares the Legacy
+  GT's EJ255; cite the part numbers), gated `["XT"]`. The Tacoma also has
+  no TRD Pro / TRD Off-Road gate (the "TRD Pro" gate is the 4Runner's).
+- Odd words the derivation surfaces, all from existing non-option gates:
+  Camry/Escape "Hybrid" (battery pack rows), Sonata/4Runner/BRZ "Limited",
+  Accord/Fusion/Elantra "Sport", GR86 "Premium", VW "R"/"Autobahn". If any
+  of those is not a real trim split for parts, the gate itself is the
+  thing to revisit.
+- 2026-11-13 hub follow-up: `NOTABLE_TRIM_LABELS` (junkyard_scraper.py),
+  a separate LABEL list merged into notableTrims after the gate words.
+  Labels only: a word there adds no parts row, confirms no gated row and
+  changes no value (match_vehicle output identical to main on 37,407
+  combinations with the list in place). Kept, each seen in this repo's own
+  decodes for that model on 11-13: Outback XT (11 cars), Cherokee
+  Trailhawk (24), Grand Cherokee Trailhawk (3), Liberty Renegade (82),
+  Silverado 1500 Trail Boss (3). Dropped, the decode never produces them
+  for the model: Baja Turbo, Tacoma TRD Pro / TRD Off-Road / PreRunner /
+  X-Runner, Tundra TRD Pro, FJ Cruiser Trail Teams, Ranger FX4, F-150
+  Lightning / Harley-Davidson, Sierra 1500 AT4, Frontier Nismo, Explorer
+  ST (its only hit is "ST-Line", an appearance package; the app no longer
+  reads "<word>-Line" as the word).
+- 2005–06 Outbacks decoding "2.5GT" / "2.5GT Limited" (21 cars): VINs
+  4S4BP67C / 4S4BP68C, same BP body and engine code "C" as the 2007–09
+  "XT Limited" (4S4BP63C), with the 5-speed automatic or 5MT the NA 2.5i
+  did not have then. They look like Outback XTs under the Legacy GT name.
+  Not badged (the label is "XT"; "GT" is not an Outback word). If wanted:
+  a label alias "2.5GT" -> "XT" for 2005–06 Outbacks, with a basis.
+
+## 2026-11-13 — trim gates no longer confirmed from multi-trim decodes (hub follow-up 3)
+
+Bug under rule 3: `match_vehicle` VIN-confirmed a trim-gated row when the
+gate word appeared anywhere in the usable decode, including decodes that
+list several trims ("Sport, R/T") or negate ("Premier (non R design)").
+Measured on 11-13 data: 15,707 usable decodes list several trims, 6,674
+more list on the series side only, 201 negate. Of those, 275 cars carried
+412 (car, gated row) VIN confirmations from a list; 0 from a negation.
+Top strings: Veloster "Base/ BaseStyle/ Base Tech Turbo/ Turbo Ultimate"
+91, Dakota "Sport, R/T" 48, Veloster "Standard / Turbo / R-Spec / Rally
+Edition" 46, Jetta "GLS, GLI 1.8T" 34, Dakota "SLT, R/T" 27, Jetta "GLS,
+GLI" 16, PT Cruiser "GT/Dream Cruiser" 10, MX-5 "Grand Touring/GT" 2,
+MX-5 "Club/GS" 1.
+Fix (`_vin_trim_gate`, `_trim_alternatives`): a trim gate is VIN-confirmed
+only when, on the trim or series side, every alternative names a gate word
+and no side says "non/except/without". Otherwise the row is "unconfirmed"
+(if equipped, $0), as for an unknown trim. A decode where no alternative
+names the gate is still excluded, as before. "R/T", "S/T" (letter/letter)
+and "1/2 Ton" (digit/digit) are names, not lists. Same rule as the app's
+trim badge (unit test checks both split alike).
+Confirmed gated rows: 2,081 -> 1,669 (all 412 changes vin -> unconfirmed;
+0 single-trim decodes changed). Drops over 20: Veloster 276 -> 2, Dakota
+75 -> 0, Jetta 74 -> 24. Others: PT Cruiser 63 -> 53, MX-5 4 -> 1.
+Known loss: MX-5 "Grand Touring/GT" (two names for one trim) now reads as
+a list (2 cars, "if equipped"). match_vehicle on the 37,407 single-decode
+combinations is identical to main. Live with the next scan after merge.
