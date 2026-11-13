@@ -80,6 +80,34 @@ try {
   await page.click(tabSel('alerts'));
   await page.waitForTimeout(300);
   check('tapping a different tab switches to it', await page.evaluate(() => document.getElementById('tab-alerts').classList.contains('active')));
+  // 4b. Each tab keeps its own place (2026-11-13): a tab not opened yet starts
+  // at the top even when the one left was scrolled down; coming back returns
+  // to where that tab was left; a re-tap still goes to the top.
+  await page.click(tabSel('live'));
+  await page.waitForTimeout(300);
+  await page.evaluate(() => window.scrollTo(0, 1800));
+  const liveY = await y();
+  await page.click(tabSel('parts'));
+  await page.waitForTimeout(300);
+  check('scrolled Cars -> Parts (first visit): opens at the top', (await y()) === 0, String(await y()));
+  await page.click(tabSel('yards'));
+  await page.waitForTimeout(300);
+  check('-> Yards (left at the top earlier): at the top', (await y()) === 0, String(await y()));
+  await page.evaluate(() => window.scrollTo(0, 500));
+  await page.click(tabSel('alerts'));
+  await page.waitForTimeout(300);
+  check('scrolled Yards -> Alerts: at the top', (await y()) === 0, String(await y()));
+  await page.click(tabSel('live'));
+  await page.waitForTimeout(400);
+  check('back to Cars: returns to where it was left', liveY > 1000 && Math.abs((await y()) - liveY) <= 2, `${await y()} vs ${liveY}`);
+  await page.click(tabSel('yards'));
+  await page.waitForTimeout(300);
+  check('back to Yards: returns to where it was left', Math.abs((await y()) - 500) <= 2, String(await y()));
+  await page.click(tabSel('yards'));
+  await page.waitForTimeout(400);
+  check('re-tap still goes to the top', (await y()) === 0, String(await y()));
+  await page.click(tabSel('alerts'));
+  await page.waitForTimeout(300);
   // 5. A programmatic click on the active tab (used by app code to re-render) still re-renders, no scroll.
   await page.evaluate(() => { window.scrollTo(0, 300); document.querySelector('.tab[data-tab="alerts"]').click(); });
   await page.waitForTimeout(300);

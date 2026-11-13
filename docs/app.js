@@ -9015,6 +9015,7 @@ function tabRetap() {
   window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
   return 'top';
 }
+const _tabScrollY = {};   // tab name -> scrollY when it was last left
 document.querySelectorAll('.tab').forEach(tab => {
   tab.addEventListener('click', (e) => {
     // A real tap on the tab already showing (not a programmatic switch).
@@ -9022,6 +9023,9 @@ document.querySelectorAll('.tab').forEach(tab => {
       tabRetap();
       return;
     }
+    // Remember where the tab being left was scrolled to (see below).
+    const leaving = document.querySelector('.tab.active');
+    if (leaving && leaving !== tab) _tabScrollY[leaving.dataset.tab] = window.scrollY;
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
     tab.classList.add('active');
@@ -9031,6 +9035,16 @@ document.querySelectorAll('.tab').forEach(tab => {
     if (tab.dataset.tab === 'live') renderLive();
     if (tab.dataset.tab === 'parts') initPartsTab();
     if (tab.dataset.tab === 'alerts') renderAlerts();
+    // Each tab keeps its own place (tester feedback 2026-11-13: after
+    // scrolling to the bottom of one tab, the next tab opened at the bottom
+    // too, because all tabs share the page's scroll). A tab not opened yet
+    // starts at the top; coming back to one returns to where it was left;
+    // re-tapping it goes to the top (tabRetap). Real taps only: app code that
+    // switches tabs places the page itself (a shared car, a watch link).
+    if (e.isTrusted !== false) {
+      const locked = document.documentElement.classList.contains('map-lock');
+      window.scrollTo(0, locked ? 0 : (_tabScrollY[tab.dataset.tab] || 0));
+    }
   });
 });
 
