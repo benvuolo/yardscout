@@ -124,12 +124,15 @@ jobs:
               if not subs: print("APP STORE subscriptions: none found")
               for s in subs:
                   a = s.get("attributes") or {}
-                  g2, e2 = pages(f"{ROOT}/v1/subscriptions/{s['id']}/subscriptionAvailability",
-                                 {"include": "availableTerritories", "limit[availableTerritories]": 200})
+                  g2, e2 = pages(f"{ROOT}/v1/subscriptions/{s['id']}/subscriptionAvailability")
                   if e2:
                       print(f"APP STORE subscription {a.get('productId')} state={a.get('state')}: availability {e2}"); continue
-                  d2, inc2 = g2
-                  terr = sorted(i["id"] for i in inc2 if i.get("type") == "territories")
+                  av = (g2[0] or [{}])[0]
+                  g3, e3 = pages(f"{ROOT}/v1/subscriptionAvailabilities/{av.get('id')}/availableTerritories", {"limit": 200})
+                  if e3:
+                      print(f"APP STORE subscription {a.get('productId')} state={a.get('state')}: territories {e3}"); continue
+                  terr = sorted(i["id"] for i in g3[0])
+                  print(f"APP STORE subscription {a.get('productId')}: availableInNewTerritories={(av.get('attributes') or {}).get('availableInNewTerritories')}")
                   print(f"APP STORE subscription {a.get('productId')} state={a.get('state')}: sold in {len(terr)} territories")
                   print("APP STORE subscription: " + "  ".join(f"{c}={'yes' if A3.get(c, c) in terr else 'NO'}" for c in want))
           PY
