@@ -456,7 +456,7 @@ export function narrowingItems(n) {
   const t = n.total;
   const route = (x) => `search box ${fmt(x.search)} · Filters ${fmt(x.filters)} · link ${fmt(x.link)} · trim filter ${fmt(x.trim)}`;
   const lines = [];
-  lines.push(`search box: ${fmt(t.search - t.searchTrim)} make or model, ${fmt(t.searchTrim)} trim row`
+  lines.push(`search box: ${fmt(t.search - t.searchTrim)} make or model, ${fmt(t.searchTrim)} trim row${t.searchTrim === 1 ? '' : 's'}`
     + ` · Filters: ${fmt(t.filtersModel)} model, ${fmt(t.filtersMake)} make only`);
   if (SC_PLATFORMS.some(([p]) => p !== 'web' && n.platforms[p])) {
     for (const [p, name] of SC_PLATFORMS) lines.push(n.platforms[p] ? `${name}: ${route(n.platforms[p])}` : `${name}: no data`);
@@ -516,9 +516,11 @@ function narrowingHtml(n, { esc, C }) {
   const nw = narrowingItems(n);
   if (!nw) return '';
   const last = nw.lines.length - 1;
+  // "search box 14" never breaks inside on a phone; the line breaks at the dots.
+  const keep = (t) => String(t).split(' · ').map((x) => `<span style="white-space:nowrap;">${esc(x)}</span>`).join(' · ');
   return `<div style="margin-top:14px;padding-top:10px;border-top:1px solid ${C.line};">
       <div style="font-size:13px;font-weight:700;color:${C.ink};margin:0 0 2px;">${esc(nw.title)}</div>
-      <div style="font-size:15px;font-weight:700;line-height:1.45;color:${C.ink};margin:0 0 2px;">${esc(nw.head)}</div>
-      ${nw.lines.map((l, i) => `<div style="font-size:${i === last ? 12 : 13}px;line-height:1.45;color:${i === last ? C.dim : C.ink};">${esc(l)}</div>`).join('')}
+      <div style="font-size:15px;font-weight:700;line-height:1.45;color:${C.ink};margin:0 0 2px;">${keep(nw.head)}</div>
+      ${nw.lines.map((l, i) => `<div style="font-size:${i === last ? 12 : 13}px;line-height:1.45;color:${i === last ? C.dim : C.ink};">${i === last ? esc(l) : keep(l)}</div>`).join('')}
     </div>`;
 }

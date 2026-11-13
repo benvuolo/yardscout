@@ -232,7 +232,7 @@ check('text: counting note names Android as not yet fixed', /not yet for the iPh
   check('narrow: routes add up (search box 5 + 2 trim rows = 7, Filters 4 model + 3 make only = 7, link 9, trim 1)',
     eq(n2.total, { search: 7, searchTrim: 2, filters: 7, filtersModel: 4, filtersMake: 3, link: 9, trim: 1 }), JSON.stringify(n2.total));
   check('narrow: head line in plain words', i2.head === 'search box 7 · Filters 7 · link 9 · trim filter 1', i2.head);
-  check('narrow: the split under it', i2.lines[0] === 'search box: 5 make or model, 2 trim row · Filters: 4 model, 3 make only', i2.lines[0]);
+  check('narrow: the split under it', i2.lines[0] === 'search box: 5 make or model, 2 trim rows · Filters: 4 model, 3 make only', i2.lines[0]);
   check('narrow: "counting starts Nov 22: 4 of 7 days so far" until 7 days are covered', n2.daysCounted === 4 && !n2.full && i2.lines.includes('counting starts Nov 22: 4 of 7 days so far'), JSON.stringify(i2.lines));
   check('narrow: website only until the next app update', i2.lines.includes('website only until the next app update') && !i2.lines.some((l) => /^iPhone app:/.test(l)), JSON.stringify(i2.lines));
   check('narrow: says a person counts once a day per way', i2.lines[i2.lines.length - 1] === 'A person counts at most once a day for each way.');
@@ -272,7 +272,7 @@ check('text: counting note names Android as not yet fixed', /not yet for the iPh
   check('narrow text: head on the title line', tl[at] === '  How people narrowed the Cars list (7 days): search box 7 · Filters 7 · link 9 · trim filter 1', tl[at]);
   const hh = scorecardHtml(card, { esc: (x) => String(x), C: { line: '#ddd', dim: '#666', ink: '#111', accent: '#b84a0a' } });
   check('narrow html: inside the scorecard block, after the link lines', hh.indexOf('How people narrowed the Cars list') > hh.indexOf('What each tagged link did this week')
-    && hh.includes('search box 7 · Filters 7 · link 9 · trim filter 1') && hh.includes('counting starts Nov 22: 4 of 7 days so far'));
+    && hh.replace(/<[^>]+>/g, '').includes('search box 7 · Filters 7 · link 9 · trim filter 1') && /white-space:nowrap;">search box 7</.test(hh) && hh.includes('counting starts Nov 22: 4 of 7 days so far'));
   check('narrow: other scorecard numbers unchanged by the narrowing rows', card.visitors.byPlatform.web.current === 70 && card.watches.current === A.watches.current);
 }
 
