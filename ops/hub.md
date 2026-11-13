@@ -556,3 +556,11 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
   shows an intro price only when a store reports one (`introOfferText`).
 - Play country availability: the Android Publisher API only reads it. The
   owner could not find the screen; hub gave the Play Console path.
+
+## 2026-11-13 ~18:45 UTC Canada on both stores
+
+- Owner added Canada in Play Console. `store-availability.yml` run
+  43486697066: Play production lists CA and US (Pro buyable at CAD 12.99);
+  App Store app and Pro both show CA and US (Pro CAD 11.99).
+- The Play API shows the saved setting, not whether Google has finished
+  reviewing or rolling it out; same for Apple's "processing" state earlier.
