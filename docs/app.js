@@ -3534,6 +3534,15 @@ document.getElementById('car-detail-back').addEventListener('click', closeCarDet
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && carDetailKey && !document.querySelector('#upgrade-sheet.open, #saved-sheet.open, #prices-sheet.open')) closeCarDetail();
 });
+// Share on a card (Cars list, Parts donors, Alerts hits): capture phase, so
+// the grid's own click handlers never treat it as a tap on the card.
+document.addEventListener('click', (e) => {
+  const b = e.target.closest('.card-share');
+  if (!b) return;
+  e.preventDefault();
+  e.stopPropagation();
+  shareVehicle(b.dataset.vkey, b);
+}, true);
 document.getElementById('car-detail').addEventListener('click', e => {
   const watch = e.target.closest('.watch-btn');
   if (watch) { e.preventDefault(); watchFromCard(watch); return; }
@@ -3689,7 +3698,7 @@ function shareUrlFor(v) {
   return 'https://yardscout.io/car/' + encodeURIComponent(vehicleKey(v));
 }
 
-async function shareVehicle(key) {
+async function shareVehicle(key, fromBtn) {
   const v = liveInventory.find(x => vehicleKey(x) === key);
   if (!v) return;
   const added = parseYardDate(v.dateAdded);
@@ -3712,7 +3721,7 @@ async function shareVehicle(key) {
   try {
     // Just the link — the page it opens carries the car, yard, row and dates.
     await navigator.clipboard.writeText(url);
-    const btn = document.querySelector(`.share-btn[data-vkey="${CSS.escape(key)}"]`);
+    const btn = fromBtn || document.querySelector(`.share-btn[data-vkey="${CSS.escape(key)}"]`);
     if (btn) {
       const orig = btn.innerHTML;
       btn.innerHTML = '<small style="font-size: 0.6875rem;">Copied</small>';
@@ -4341,6 +4350,14 @@ function pullBtnHtml(key, big) {
   const on = !!savedCars[key];
   return `<button type="button" class="btn ${on ? 'btn-on' : 'btn-accent'} heart-btn pull-btn${big ? ' btn-lg' : ''}${on ? ' saved' : ''}" data-vkey="${escapeHtml(key)}" aria-pressed="${on}">${on ? ICON.check + ' On pull sheet' : ICON.plus + ' Add to pull sheet'}</button>`;
 }
+/* Details + Share, the end of a card's action row (owner request
+ * 2026-11-13: a share button on every card, not only on the car screen).
+ * The two stay together: beside "Add to pull sheet" when there is room, on
+ * their own line when there is not. */
+function cardEndActionsHtml(key) {
+  const k = escapeHtml(key);
+  return `<span class="cc-actions-end"><button type="button" class="btn btn-quiet car-open" data-vkey="${k}">Details</button><button type="button" class="btn btn-quiet card-share" data-vkey="${k}" title="Share this car" aria-label="Share this car">${ICON.share}</button></span>`;
+}
 function refreshPullBtns(key) {
   document.querySelectorAll(`.pull-btn[data-vkey="${CSS.escape(key)}"]`).forEach(b => {
     const big = b.classList.contains('btn-lg');
@@ -4558,7 +4575,7 @@ function renderLive() {
         ${val && val.nParts ? `<button type="button" class="parts-summary car-open" data-vkey="${escapeHtml(key)}"><span>${val.partsSummary}</span>${ICON.chev}</button>` : ''}
         <div class="cc-actions">
           ${pullBtnHtml(key)}
-          <button type="button" class="btn btn-quiet car-open" data-vkey="${escapeHtml(key)}">Details</button>
+          ${cardEndActionsHtml(key)}
         </div>
         ${/stamp-stale/.test(scanLine) ? `<div class="car-footer"><span class="car-footer-meta">${scanLine}</span></div>` : ''}
       </article>`;
@@ -8215,7 +8232,7 @@ function pfDonorCardHtml(r, cls, chip, valueHtml) {
       ${r.srcLine ? `<details class="pf-src-more"><summary>Why it fits${r.srcUnit ? ` <span class="pf-src-unit">&middot; ${r.srcUnit}</span>` : ''} <span class="chev-r" aria-hidden="true"></span></summary><div class="pf-note pf-src">Source: ${r.srcLine}</div>${r.srcMore ? `<div class="pf-note pf-src-more-text">${r.srcMore}</div>` : ''}</details>` : ''}
       ${valueHtml ? `<div class="pf-value">${valueHtml}</div>` : ''}
       ${r.warns && r.warns.length ? `<div class="pf-warn">${r.warns.join(' &middot; ')}</div>` : ''}
-      <div class="cc-actions">${pullBtnHtml(key)}<button type="button" class="btn btn-quiet car-open" data-vkey="${escapeHtml(key)}">Details</button></div>
+      <div class="cc-actions">${pullBtnHtml(key)}${cardEndActionsHtml(key)}</div>
     </div>`;
 }
 /* "Watch for this": a watch on the seeker's own model, limited to the
@@ -9320,7 +9337,7 @@ function renderAlerts() {
         ${isMatch && v.topParts && v.topParts.length ? `<button type="button" class="parts-summary car-open" data-vkey="${escapeHtml(key)}"><span>${v.topParts.length} part${v.topParts.length > 1 ? 's' : ''} to check: ${escapeHtml(partsByValue(v.topParts, v.location).slice(0, 3).map(p => p.name).join(', '))}${v.topParts.length > 3 ? ' and more' : ''}</span>${ICON.chev}</button>` : ''}
         <div class="cc-actions">
           ${pullBtnHtml(key)}
-          <button type="button" class="btn btn-quiet car-open" data-vkey="${escapeHtml(key)}">Details</button>
+          ${cardEndActionsHtml(key)}
         </div>
       </article>`;
   }).join('');

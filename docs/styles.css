@@ -3492,3 +3492,25 @@ html.map-lock #saved-pill { display: none !important; }
    choice is longer than the field ("Worth the trip (fresh & most to save)"
    on a small phone, long yard names, any choice at large text sizes). */
 select { white-space: normal; height: auto; }
+
+/* ---------- Card actions: Details + Share (2026-11-13) ----------
+   "Add to pull sheet" takes the spare room; Details and the share button
+   stay together, beside it when they fit and on their own line when not. */
+.cc-actions .pull-btn { flex: 999 1 auto; }
+.cc-actions-end { display: flex; flex: 1 1 auto; gap: var(--s2); min-width: 0; }
+.cc-actions-end .car-open { flex: 1 1 auto; }
+.cc-actions-end .card-share { flex: none; min-width: var(--tap); min-height: var(--tap); padding: 0; display: inline-flex; align-items: center; justify-content: center; }
+.cc-actions-end .card-share .ico { width: 20px; height: 20px; }
+/* Narrow cards (phones about 360 to 389 px wide): the three buttons still fit
+   on one line with slightly tighter buttons. Narrower than that, Details and
+   Share drop to a second line together (flex-wrap above). */
+.cc-actions { container-type: inline-size; }
+.cc-actions:has(.cc-actions-end) { column-gap: 6px; }
+@container (max-width: 323px) {
+  .cc-actions-end { gap: 6px; }
+  .cc-actions .pull-btn, .cc-actions-end .car-open { font-size: 0.9375rem; padding-left: 10px; padding-right: 10px; }
+}
+@container (max-width: 308px) {
+  .cc-actions .pull-btn, .cc-actions-end .car-open { padding-left: 7px; padding-right: 7px; }
+  .cc-actions .pull-btn .ico { margin-right: -2px; }
+}
