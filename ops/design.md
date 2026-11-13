@@ -324,3 +324,13 @@ Same with Forester or other similar cars..." Not merged (hub reviews).
   card_share_e2e 19, tab_retap_e2e 14, model_years_e2e 18, share_watch_e2e
   33, watch_match_unit, car_search_unit: all pass. All 27 scraper test
   files exit 0.
+- Hub follow-up 2: free or Pro is the owner's call. One constant,
+  `NOTABLE_TRIMS_FREE` in docs/app.js (true on this branch). false = Pro
+  only: a free user gets no badge, no car-screen line, no trim search rows,
+  no trim from a `#cars=` link (the box prefill drops it too), and Filters
+  shows the standard Pro box "Filter this <Model> by trim" in the Trim
+  control's place (no trim word). Both values covered in notable_trims_unit
+  and notable_trims_e2e (the e2e serves app.js with the constant rewritten);
+  `TRIMS_FREE=false` makes ui_no_truncation do the same. Existing behaviour
+  left alone: the one free sample card still shows the decoded trim line
+  ("2.5XT · AWD  PRO"), as before this branch.

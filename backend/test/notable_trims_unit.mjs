@@ -31,9 +31,10 @@ const constLine = (name) => {
 const a = src.indexOf('const TRIM_ALIASES = ['), b = src.indexOf('function vpicFilterMatches(');
 if (a < 0 || b < a) throw new Error('missing trim matcher block');
 const names = ['setNotableTrims', 'notableTrimWords', 'trimAlternatives', 'notableTrimHits', 'notableTrimMaybe',
-  'notableTrimOf', 'carSearchSquash', 'carSearchTrimMatch', 'parseCarsHash'];
+  'notableTrimsShown', 'notableTrimHitsOf', 'notableTrimOf', 'carSearchSquash', 'carSearchTrimMatch', 'parseCarsHash'];
 const ctx = vm.createContext({});
-vm.runInContext([src.slice(a, b), 'let notableTrims = null;', constLine('TRIM_NEGATION'), ...names.map(fn),
+vm.runInContext([src.slice(a, b), 'let notableTrims = null;', constLine('TRIM_NEGATION'),
+  'const NOTABLE_TRIMS_FREE = true;', 'function isPro() { return false; }', ...names.map(fn),
   `globalThis.__t = { ${names.join(', ')}, get table() { return notableTrims; } };`].join('\n'), ctx);
 const T = ctx.__t;
 
@@ -156,6 +157,27 @@ same('percent-encoded trim', T.parseCarsHash('#cars=Toyota%7C4Runner%7C%7CTRD%20
 same('three fields: no trim key (unchanged)', T.parseCarsHash('#cars=Nissan|Xterra|2005-2015'), { make: 'Nissan', model: 'Xterra', yrMin: 2005, yrMax: 2015 });
 same('a trim without a model is dropped', T.parseCarsHash('#cars=Subaru|||XT'), { make: 'Subaru', model: '', yrMin: null, yrMax: null });
 same('markup stripped from the trim', T.parseCarsHash('#cars=Subaru|Forester||<b>XT</b>'), { make: 'Subaru', model: 'Forester', yrMin: null, yrMax: null, trim: 'bXT/b' });
+
+/* ---- NOTABLE_TRIMS_FREE: the owner's free-or-Pro switch ---- */
+const shipped = /^const NOTABLE_TRIMS_FREE = (true|false);$/m.exec(src);
+check('NOTABLE_TRIMS_FREE is one constant, true on this branch', !!shipped && shipped[1] === 'true', shipped && shipped[0]);
+for (const free of [true, false]) {
+  for (const pro of [false, true]) {
+    const c2 = vm.createContext({});
+    vm.runInContext([src.slice(a, b), 'let notableTrims = null;', constLine('TRIM_NEGATION'),
+      `const NOTABLE_TRIMS_FREE = ${free};`, `function isPro() { return ${pro}; }`,
+      ...['setNotableTrims', 'notableTrimWords', 'trimAlternatives', 'notableTrimHits', 'notableTrimsShown', 'notableTrimHitsOf', 'notableTrimOf'].map(fn),
+      'globalThis.__u = { setNotableTrims, notableTrimsShown, notableTrimHitsOf, notableTrimOf };'].join('\n'), c2);
+    const U = c2.__u;
+    U.setNotableTrims(TABLE);
+    const v = car('Subaru', 'Forester', '2.5XT');
+    const want = free || pro;
+    const tag = `FREE=${free}, ${pro ? 'Pro' : 'free user'}`;
+    same(`${tag}: shown = ${want}`, U.notableTrimsShown(), want);
+    same(`${tag}: badge word ${want ? '"XT"' : 'none'}`, U.notableTrimOf(v), want ? 'XT' : '');
+    same(`${tag}: internal hits still computed (stats, never shown)`, U.notableTrimHitsOf(v), ['XT']);
+  }
+}
 
 console.log(fails ? `\n${fails} FAILED` : '\nALL PASS');
 process.exit(fails ? 1 : 0);

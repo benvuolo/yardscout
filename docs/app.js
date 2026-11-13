@@ -3872,7 +3872,7 @@ function getFilteredLive() {
       if (d == null || d > radiusMi) return false;
     }
     if (trimStats) {
-      const hits = notableTrimOf(v) ? v._nt : [];
+      const hits = notableTrimHitsOf(v);
       for (const w of hits) trimStats.words.set(w, (trimStats.words.get(w) || 0) + 1);
       if (trimWord && !hits.includes(trimWord)) {
         if (notableTrimMaybe(v, trimWord)) trimStats.unknown.set(trimWord, (trimStats.unknown.get(trimWord) || 0) + 1);
@@ -4670,6 +4670,16 @@ document.getElementById('live-filter-model-done').addEventListener('click', () =
  * Trim filter and the search rows; trim ALERTS stay Pro (watch logic is
  * unchanged). */
 let notableTrims = null;   // { make: { rawModel: [word] } } or null
+/* Free or Pro: the OWNER decides (hub, 2026-11-13). true = the badge, the
+ * Trim filter and the search box's trim rows for everyone. false = Pro
+ * only: a free user sees no trim word anywhere (no badge, no car-screen
+ * line, no trim rows, no #cars= trim), and Filters shows the standard Pro
+ * box where the Trim control would be. Counts in the Trim options are Pro
+ * only either way. One line to change. */
+const NOTABLE_TRIMS_FREE = true;
+function notableTrimsShown() {
+  return NOTABLE_TRIMS_FREE || isPro();
+}
 function setNotableTrims(m) {
   notableTrims = (m && typeof m === 'object' && !Array.isArray(m)) ? m : null;
 }
@@ -4718,10 +4728,17 @@ function notableTrimMaybe(v, word) {
   if (!v || v.vpicTrimQuality !== 'usable') return true;
   return trimFilterMatches(word, v.vpicTrim, v.vpicSeries, v.make);
 }
-function notableTrimOf(v) {
-  if (!v) return '';
+/* The car's hits, cached per table (internal: not gated by tier). */
+function notableTrimHitsOf(v) {
+  if (!v) return [];
   if (v._ntOf !== notableTrims) { v._ntOf = notableTrims; v._nt = notableTrimHits(v); }
-  return v._nt.length ? v._nt[0] : '';
+  return v._nt;
+}
+/* The word to SHOW for this car: '' when this user may not see trims. */
+function notableTrimOf(v) {
+  if (!notableTrimsShown()) return '';
+  const h = notableTrimHitsOf(v);
+  return h.length ? h[0] : '';
 }
 function notableTrimBadgeHtml(v) {
   const w = notableTrimOf(v);
@@ -4739,6 +4756,7 @@ function liveTrimKey() {
   return make && selectedModels.size === 1 ? make + '\u0000' + [...selectedModels][0] : '';
 }
 function liveTrimWord() {
+  if (!notableTrimsShown()) return '';
   const key = liveTrimKey();
   if (liveTrim.word && liveTrim.key !== key) liveTrim = { key: '', word: '' };
   return key ? liveTrim.word : '';
@@ -4759,8 +4777,15 @@ function renderTrimControl() {
   if (word && !words.includes(word)) words.push(word);
   if (!words.length) { wrap.hidden = true; return; }
   wrap.hidden = false;
-  sel.disabled = !activeZipCoords;
   const pro = isPro();   // counts are Pro intel, as in the Make/Model lists
+  const lock = document.getElementById('live-filter-trim-pro');
+  const shown = notableTrimsShown();
+  sel.hidden = !shown;
+  lock.hidden = shown;
+  // Pro-only mode, free user: the Pro box in the control's place, no word.
+  lock.innerHTML = shown ? '' : proBoxHtml(`Filter this ${escapeHtml([...selectedModels][0] || 'model')} by trim`, 'trim-filter', '', 'trim-pro');
+  if (!shown) { sel.innerHTML = ''; note.textContent = ''; note.hidden = true; return; }
+  sel.disabled = !activeZipCoords;
   sel.innerHTML = '<option value="">Any trim</option>' + words.map(w =>
     `<option value="${escapeHtml(w)}">${escapeHtml(w)}${pro ? ` (${(st && st.words.get(w)) || 0})` : ''}</option>`).join('');
   sel.value = word;
@@ -4898,11 +4923,11 @@ function carSearchFind(entries, make, model) {
 /* Make + model pairs in the inventory around the user, with car counts;
  * the same cars, junk makes and no-pick models the Make/Model lists use.
  * Rebuilt when that scope is (refreshScopedInventory swaps the array). */
-let _csIndex = null, _csIndexSrc = null;
+let _csIndex = null, _csIndexSrc = null, _csIndexTrims = null;
 // A note a #cars= link leaves for the box once its filters show there.
 let _csLinkNote = '';
 function carSearchIndex() {
-  if (_csIndex && _csIndexSrc === _scopedVehicles) return _csIndex;
+  if (_csIndex && _csIndexSrc === _scopedVehicles && _csIndexTrims === notableTrimsShown()) return _csIndex;
   const makes = new Map(), pairs = new Map();
   for (const v of _scopedVehicles) {
     if (!v.make || JUNK_MAKES.has(v.make.toLowerCase())) continue;
@@ -4912,7 +4937,7 @@ function carSearchIndex() {
     const k = v.make + '\u0000' + model;
     let p = pairs.get(k);
     if (p) p.n++; else pairs.set(k, p = { make: v.make, model, n: 1, tm: null });
-    if (notableTrimOf(v)) for (const w of v._nt) (p.tm || (p.tm = new Map())).set(w, (p.tm.get(w) || 0) + 1);
+    if (notableTrimOf(v)) for (const w of notableTrimHitsOf(v)) (p.tm || (p.tm = new Map())).set(w, (p.tm.get(w) || 0) + 1);
   }
   const alts = (mk) => {
     const own = carSearchSquash(mk);
@@ -4924,6 +4949,7 @@ function carSearchIndex() {
     ...[...pairs.values()].map(({ tm, ...p }) => ({ ...p, alts: altsOf.get(p.make), ...(tm ? { trims: [...tm.entries()] } : {}) })),
   ];
   _csIndexSrc = _scopedVehicles;
+  _csIndexTrims = notableTrimsShown();
   return _csIndex;
 }
 
@@ -5039,7 +5065,7 @@ function carSearchSetActive(i) {
 
 function carSearchPick(e) {
   if (!e || !carSearchSetFilter(e.make, e.model)) return;
-  if (e.trim) setLiveTrim(e.trim);
+  if (e.trim && notableTrimsShown()) setLiveTrim(e.trim);
   track('car-search');
   carSearchNote('');
   carSearchHide();
@@ -5074,7 +5100,7 @@ function startCarsIntent(c) {
   focusedCarKey = null;
   carsIntent = c;
   const input = document.getElementById('car-search-input');
-  input.value = `${c.make} ${c.model}`.trim() + (c.trim ? ` \u00b7 ${c.trim}` : '');
+  input.value = `${c.make} ${c.model}`.trim() + (c.trim && notableTrimsShown() ? ` \u00b7 ${c.trim}` : '');
   // Keep the prefill until the filters actually change.
   _csSyncKey = document.getElementById('live-filter-make').value + '\u0000' + [...selectedModels].join('\u0000') + '\u0001' + liveTrimWord();
   document.getElementById('car-search-clear').hidden = false;
@@ -5112,7 +5138,7 @@ function applyCarsIntent() {
   carSearchSetFilter(hit.make, hit.model);
   carSearchNote('');
   _csSyncKey = null;
-  if (c.trim && hit.model) {
+  if (c.trim && hit.model && notableTrimsShown()) {
     // The trim as the model's notable trims spell it; any other word leaves
     // the model's cars listed, with a note.
     const want = carSearchSquash(c.trim);

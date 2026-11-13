@@ -12,6 +12,9 @@
  *     model's cars listed with a note
  *   - without notableTrims in the data (before the first scan that has it):
  *     no badges, no Trim control, no errors
+ *   - NOTABLE_TRIMS_FREE = false (served rewritten): a free user gets no
+ *     trim word anywhere and a Pro box in the Trim control's place; Pro
+ *     keeps badge + filter
  * The car is picked from the published scan in docs/data (Subaru XT first,
  * else the most common notable trim near the test zip), so it does not
  * depend on one VIN staying on a lot. With no such car the run SKIPS and
@@ -28,12 +31,22 @@ const { chromium } = require('playwright');
 const DOCS = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../../docs');
 const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png' };
 let inject = true;
+// NOTABLE_TRIMS_FREE as served: null = as written in docs/app.js, else the
+// test rewrites the constant (the owner's free-or-Pro switch).
+let freeMode = null;
+const APP_JS = path.join(DOCS, 'app.js');
 const server = http.createServer((req, res) => {
   let p = decodeURIComponent(new URL(req.url, 'http://x').pathname);
   if (p.endsWith('/')) p += 'index.html';
   const f = path.join(DOCS, path.normalize(p));
   if (!f.startsWith(DOCS) || !fs.existsSync(f) || fs.statSync(f).isDirectory()) { res.writeHead(404); res.end(); return; }
   res.writeHead(200, { 'content-type': TYPES[path.extname(f)] || 'application/octet-stream' });
+  if (f === APP_JS && freeMode !== null) {
+    const src = fs.readFileSync(f, 'utf8');
+    if (!/^const NOTABLE_TRIMS_FREE = (true|false);$/m.test(src)) throw new Error('NOTABLE_TRIMS_FREE constant not found');
+    res.end(src.replace(/^const NOTABLE_TRIMS_FREE = (true|false);$/m, `const NOTABLE_TRIMS_FREE = ${freeMode};`));
+    return;
+  }
   const body = inject ? serveWithNotableTrims(f) : null;
   if (body) res.end(body); else fs.createReadStream(f).pipe(res);
 });
@@ -303,6 +316,62 @@ try {
   check('no notableTrims in the data: no trim suggestion', (await suggestions(page)).every(s => !s.endsWith('· ' + P.word)));
   await page.close();
   inject = true;
+
+  // 8. NOTABLE_TRIMS_FREE = false (Pro only): no trim word for a free user;
+  // the Pro box in the Trim control's place; Pro keeps everything.
+  check('docs/app.js ships NOTABLE_TRIMS_FREE = true on this branch', /^const NOTABLE_TRIMS_FREE = true;$/m.test(fs.readFileSync(APP_JS, 'utf8')));
+  freeMode = false;
+  page = await open();
+  await ready(page);
+  check('Pro-only mode: the constant is served as false', await page.evaluate(() => NOTABLE_TRIMS_FREE === false && !notableTrimsShown()));
+  await page.click('#live-filter-toggle');
+  await pickModel(page, P.make, P.model);
+  const f1 = await page.evaluate((P) => {
+    const wrap = document.getElementById('live-filter-trim-wrap');
+    const box = document.querySelector('#live-filter-trim-pro .pro-box');
+    return {
+      badges: document.querySelectorAll('.badge-trim').length,
+      wrapShown: !wrap.hidden,
+      selectShown: !document.getElementById('live-filter-trim').hidden && getComputedStyle(document.getElementById('live-filter-trim')).display !== 'none',
+      proBox: !!box && !!box.querySelector('.pro-badge') && !!box.offsetParent,
+      wrapText: wrap.innerText,
+      optionWords: [...document.getElementById('live-filter-trim').options].map(o => o.textContent),
+      filterCount: document.getElementById('live-filter-count').textContent,
+    };
+  }, P);
+  check('Pro-only, free: no trim badge on any card', f1.badges === 0, String(f1.badges));
+  check('Pro-only, free: the Trim control\'s place shows the standard Pro box', f1.wrapShown && f1.proBox && !f1.selectShown, JSON.stringify(f1));
+  check(`Pro-only, free: no trim word in the Trim place or its options`, !new RegExp(`\\b${P.word.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&')}\\b`).test(f1.wrapText) && f1.optionWords.length === 0, JSON.stringify(f1));
+  await page.click('#live-filter-trim-pro .pro-box');
+  await page.waitForTimeout(300);
+  check('Pro-only, free: the Pro box opens the Pro sheet', await page.evaluate(() => document.getElementById('upgrade-sheet').classList.contains('open') || getComputedStyle(document.getElementById('upgrade-sheet')).display !== 'none'));
+  await page.evaluate(() => { if (typeof closeUpgradeSheet === 'function') closeUpgradeSheet(); });
+  await page.click(`#live-grid .car-card[data-vkey] .car-open`);
+  await page.waitForTimeout(300);
+  check('Pro-only, free: no trim line on the car screen', await page.evaluate(() => !document.querySelector('.cd-trim')));
+  await page.close();
+  page = await open();
+  await ready(page);
+  await typeIn(page, `${P.model} ${P.word}`.toLowerCase());
+  check('Pro-only, free: no trim rows in the search box', (await suggestions(page)).every(s => !s.includes(' \u00b7 ' + P.word)), JSON.stringify(await suggestions(page)));
+  await page.close();
+  page = await open(`#cars=${encodeURIComponent(P.make)}|${encodeURIComponent(P.model)}||${encodeURIComponent(P.word)}`);
+  await ready(page);
+  await page.waitForFunction((m) => selectedModels.has(m), P.model, { timeout: 30000 }).catch(() => {});
+  await page.waitForTimeout(300);
+  const f2 = await state(page);
+  check('Pro-only, free: #cars= with a trim applies make + model only, no trim word shown', f2.models.join() === P.model && f2.trimValue === '' && !f2.box.includes(P.word) && !f2.searchNote.includes(P.word) && f2.badges.every(b => b === ''),
+    JSON.stringify({ box: f2.box, note: f2.searchNote, trim: f2.trimValue }));
+  await page.close();
+  page = await open('', { pro: true });
+  await ready(page);
+  await page.click('#live-filter-toggle');
+  await pickModel(page, P.make, P.model);
+  const f3 = await state(page);
+  check('Pro-only, Pro: badge and Trim filter as in free mode', f3.trimShown && f3.trimOptions.some(o => o.startsWith(P.word + ' (')) && f3.badges.includes(P.word)
+    && await page.evaluate(() => !document.querySelector('#live-filter-trim-pro .pro-box')), JSON.stringify(f3.trimOptions));
+  await page.close();
+  freeMode = null;
 
   check('no page errors', errors.length === 0, errors.join(' | '));
 } catch (e) {

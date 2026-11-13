@@ -28,6 +28,7 @@
  *       SHOTS=<dir>  screenshots of every screen (390 @2x and 1280, light,
  *       plus dark at 390) for design review.
  *       BASE=<url>  test a deployed copy instead of serving docs/.
+ *       TRIMS_FREE=false  serve app.js with NOTABLE_TRIMS_FREE = false.
  * Playwright is pre-installed in this environment (require('playwright')). */
 import http from 'node:http';
 import fs from 'node:fs';
@@ -1222,7 +1223,7 @@ const SCREENS = [
       // The make/model + trim with the most cars the note counts as unknown.
       const groups = new Map();
       for (const v of _scopedVehicles) {
-        const w = notableTrimOf(v);
+        const w = notableTrimHitsOf(v)[0] || '';   // internal: also in a Pro-only run
         if (!w || isNoPickModel(v.make, v.model)) continue;
         const k = v.make + '\u0000' + canonicalModel(v.make, v.model) + '\u0000' + w;
         if (!groups.has(k)) groups.set(k, { make: v.make, model: canonicalModel(v.make, v.model), word: w, unknown: 0 });
@@ -1238,7 +1239,9 @@ const SCREENS = [
       setLiveTrim(g.word);
       renderLive();
       if (document.getElementById('live-filter-trim-wrap').hidden) throw new Error('Trim control not shown');
-      if (g.unknown && document.getElementById('live-filter-trim-note').hidden) throw new Error('no "no single trim" note');
+      if (!notableTrimsShown()) {   // TRIMS_FREE=false run: the Pro box in its place
+        if (!document.querySelector('#live-filter-trim-pro .pro-box')) throw new Error('no Pro box for the Trim filter');
+      } else if (g.unknown && document.getElementById('live-filter-trim-note').hidden) throw new Error('no "no single trim" note');
       document.getElementById('live-filter-trim-wrap').scrollIntoView({ block: 'center' });
     });
   }, async (page) => {
@@ -1414,6 +1417,15 @@ try {
       if (/manifest/.test(route.request().url()) && !j.notableTrims) j.notableTrims = notableTrimsFixture();
       await route.fulfill({ response: res, json: j });
     });
+    // TRIMS_FREE=false: serve docs/app.js with NOTABLE_TRIMS_FREE = false
+    // (the owner's Pro-only choice for the trim badge and filter).
+    if (process.env.TRIMS_FREE === 'false') {
+      await page.route(/\/app\.js(\?|$)/, async (route) => {
+        const res = await route.fetch(); const t = await res.text();
+        if (!/^const NOTABLE_TRIMS_FREE = true;$/m.test(t)) throw new Error('NOTABLE_TRIMS_FREE constant not found');
+        await route.fulfill({ response: res, body: t.replace(/^const NOTABLE_TRIMS_FREE = true;$/m, 'const NOTABLE_TRIMS_FREE = false;') });
+      });
+    }
     // Web checkout is live on yardscout.io; the Pro sheet is tested in that state.
     await page.route(/\/api\/ent\/config(\?|$)/, (route) => route.fulfill({ json: { billing: true }, headers: { 'access-control-allow-origin': '*' } }));
     await page.route(/api\.zippopotam\.us\//, (route) => route.fulfill({ json: { 'post code': ZIP, country: 'United States',
