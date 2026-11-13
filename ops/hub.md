@@ -472,3 +472,17 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
   through; the source is kept only while the sign-up is pending.
 - Privacy page updated to say both (dated November 13, 2026).
 - Still pending: the 08:14 UTC scan (trim badges and model page data).
+
+## 2026-11-13 ~11:45 UTC overnight work verified live
+
+- Scan 08:14 → 09:37 UTC succeeded on 946f2b71 (commit 69cfbf80): wrote
+  `docs/data/landed/` (40 make files + index) and `notableTrims` (248 pairs).
+- Model pages: `/landed/nissan/xterra` 200 (99 set out this week),
+  `/landed/toyota/camry` 200 (811), `/landed/isuzu/trooper` 200 (7), unknown
+  model 404. Sitemap lists 410 model URLs.
+- Trims: `#cars=Subaru|Forester||XT` at 390 px near 95112 shows 4 cars, each
+  with the XT badge; Filters shows Trim = XT; 0 page errors.
+- All three overnight items merged: model pages, narrowing counters,
+  confirmed sign-ups by link. Nothing left on a branch.
+- For the owner: resubmit the sitemap in Search Console; read the updated
+  privacy page.
