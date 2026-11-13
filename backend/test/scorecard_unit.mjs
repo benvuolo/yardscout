@@ -13,6 +13,10 @@
  *                  other links + "no tag"; one row per tagged link
  *   subscribers    change only from a stored snapshot exactly 7 days back;
  *                  "tracking starts <date>" before that; snapshots pruned at 60 d
+ *   narrowing      "How people narrowed the Cars list (7 days)": routes add up,
+ *                  no data (no v3 client) vs 0, "counting starts <date>",
+ *                  website only until an app reports, per-platform lines
+ *   by link        emails given and confirmed per tagged link
  *   integration    loadScorecardEvents on SQLite with every migration, and the
  *                  whole daily email (buildDailyReport) with the scorecard first
  *
@@ -22,7 +26,7 @@ import { DatabaseSync } from 'node:sqlite';
 import { readdirSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import {
   computeScorecard, scorecardWindows, rateText, changeText, subscriberChange, storeSubsSnapshot,
-  scorecardTextLines, scorecardHtml, scorecardItems, loadScorecardEvents, buildScorecard, subsFromLoaded, SUBS_HISTORY_KEY,
+  scorecardTextLines, scorecardHtml, scorecardItems, narrowingItems, loadScorecardEvents, buildScorecard, subsFromLoaded, SUBS_HISTORY_KEY,
 } from '../src/scorecard.js';
 import { buildDailyReport } from '../src/ops_monitor.js';
 
@@ -195,7 +199,7 @@ const html = scorecardHtml(A, { esc, C });
 for (const id of ['first-visit', 'watch-created', 'email-asked', 'email-submitted', 'email-confirmed', 'checkout-start', 'pro-converted', 'funnel-v2', 'paywall', 'events_daily', 'undefined', 'NaN', 'null']) {
   check(`email text/html shows no "${id}"`, !text.includes(id) && !html.includes(id));
 }
-check('text: reddit / xterra line', text.includes('reddit / xterra: 30 visits (post 20, comment 10) → 4 watches → 2 emails → 1 checkout → 0 Pro'), text);
+check('text: reddit / xterra line', text.includes('reddit / xterra: 30 visits (post 20, comment 10) → 4 watches → 2 emails given, 0 confirmed → 1 checkout → 0 Pro'), text);
 check('text: "From:" line with no tag', /From: reddit \/ xterra 30 · forum \/ nissan 4 · reddit 3 · creator \/ a 2 · creator \/ b 2 · other links 4 · no tag 25/.test(text), text);
 check('text: iPhone app shows "no data"', /iPhone app: no data/.test(text) && !/no data a day/.test(text));
 check('text: web visitors with their change', text.includes('Web: 10.0 a day, +40% on the week before (50)'), text);
@@ -203,6 +207,93 @@ check('text: Android visitors say not comparable instead of a change', text.incl
 check('text: rate "2 of 9"', /Pro sheet to checkout: 2 of 9/.test(text));
 check('text: five numbered items', [1, 2, 3, 4, 5].every((i) => text.includes(`  ${i}. `)));
 check('text: counting note names Android as not yet fixed', /not yet for the iPhone app and Android app/.test(text), text);
+
+/* ---------- how people narrowed the Cars list (7 days) ---------- */
+{
+  const N = (day, kind, n, p = 'web') => R(day, 'narrow/' + kind, n, { p });
+  const v3p = (ds, p = 'web') => ds.map((day) => ({ day, platform: p }));
+  const nw = (args) => computeScorecard({ today: '2026-11-26', rows: [], presence: presenceA, v2: { web: '2026-11-12' }, subs: subsA, ...args }).narrowing;
+
+  // 1. nothing on v3 yet: no data, even with stray rows
+  const n0 = nw({ rows: [N('2026-11-22', 'search', 4)] });
+  const i0 = narrowingItems(n0);
+  check('narrow: no v3 client yet -> no data (stray rows ignored), never 0', n0.total === null && i0.head === 'no data', JSON.stringify(n0));
+  check('narrow: no v3 client yet -> "counting starts with the first visit to the updated website"', eq(i0.lines, ['counting starts with the first visit to the updated website']), JSON.stringify(i0.lines));
+
+  // 2. counting started inside the window (Nov 22): 4 of 7 days; apps not on it
+  const rows2 = [N('2026-11-22', 'search', 3), N('2026-11-24', 'search', 2), N('2026-11-23', 'search-trim', 2),
+    N('2026-11-22', 'filters-model', 4), N('2026-11-25', 'filters-make', 3), N('2026-11-24', 'trim', 1), N('2026-11-23', 'link', 9),
+    N('2026-11-26', 'search', 50), N('2026-11-18', 'link', 50),          // today and before the window: outside
+    N('2026-11-23', 'search', 7, 'ios'),                                  // a platform with no v3 marker: ignored
+  ];
+  const n2 = nw({ rows: rows2, v3: { web: '2026-11-22' }, v3Presence: v3p(['2026-11-22', '2026-11-23', '2026-11-24', '2026-11-25']) });
+  const i2 = narrowingItems(n2);
+  check('narrow: window = the scorecard\'s last 7 full days', n2.window.from === '2026-11-19' && n2.window.to === '2026-11-25', JSON.stringify(n2.window));
+  check('narrow: routes add up (search box 5 + 2 trim rows = 7, Filters 4 model + 3 make only = 7, link 9, trim 1)',
+    eq(n2.total, { search: 7, searchTrim: 2, filters: 7, filtersModel: 4, filtersMake: 3, link: 9, trim: 1 }), JSON.stringify(n2.total));
+  check('narrow: head line in plain words', i2.head === 'search box 7 · Filters 7 · link 9 · trim filter 1', i2.head);
+  check('narrow: the split under it', i2.lines[0] === 'search box: 5 make or model, 2 trim rows · Filters: 4 model, 3 make only', i2.lines[0]);
+  check('narrow: "counting starts Nov 22: 4 of 7 days so far" until 7 days are covered', n2.daysCounted === 4 && !n2.full && i2.lines.includes('counting starts Nov 22: 4 of 7 days so far'), JSON.stringify(i2.lines));
+  check('narrow: website only until the next app update', i2.lines.includes('website only until the next app update') && !i2.lines.some((l) => /^iPhone app:/.test(l)), JSON.stringify(i2.lines));
+  check('narrow: says a person counts once a day per way', i2.lines[i2.lines.length - 1] === 'A person counts at most once a day for each way.');
+
+  // 3. a full week; a way nobody used is 0, not "no data"
+  const n3 = nw({ rows: [N('2026-11-19', 'search', 14), N('2026-11-25', 'link', 22)], v3: { web: '2026-11-15' }, v3Presence: v3p(CUR) });
+  const i3 = narrowingItems(n3);
+  check('narrow: full week -> no "counting starts" line', n3.full && n3.daysCounted === 7 && !i3.lines.some((l) => /counting starts/.test(l)), JSON.stringify(i3.lines));
+  check('narrow: unused ways are 0 (the website reported all week)', i3.head === 'search box 14 · Filters 0 · link 22 · trim filter 0', i3.head);
+  check('narrow: first v3 day exactly on the window\'s first day counts as a full week', nw({ v3: { web: '2026-11-19' }, v3Presence: v3p(CUR) }).full === true);
+  const n3b = nw({ v3: { web: '2026-11-15' }, v3Presence: v3p(['2026-11-21']) });
+  check('narrow: reporting but nobody narrowed -> all 0', eq(n3b.total, { search: 0, searchTrim: 0, filters: 0, filtersModel: 0, filtersMake: 0, link: 0, trim: 0 }), JSON.stringify(n3b.total));
+
+  // 4. started today: nothing in the window yet
+  const n4 = nw({ v3: { web: '2026-11-26' }, v3Presence: [] });
+  check('narrow: counting started today -> no data, "counting starts Nov 26"', n4.total === null && eq(narrowingItems(n4).lines, ['counting starts Nov 26']), JSON.stringify(narrowingItems(n4)));
+
+  // 5. the iPhone app on v3, Android not: per-platform lines
+  const n5 = nw({ rows: [N('2026-11-20', 'search', 10), N('2026-11-21', 'search', 3, 'ios'), N('2026-11-21', 'link', 1, 'ios'), N('2026-11-21', 'link', 5, 'android')],
+    v3: { web: '2026-11-12', ios: '2026-11-20' }, v3Presence: [...v3p(CUR), ...v3p(['2026-11-20', '2026-11-21'], 'ios')] });
+  const i5 = narrowingItems(n5);
+  check('narrow: total over the reporting platforms only (Android rows without v3 ignored)', n5.total.search === 13 && n5.total.link === 1, JSON.stringify(n5.total));
+  check('narrow: per-platform lines once an app reports', i5.lines.includes('Web: search box 10 · Filters 0 · link 0 · trim filter 0')
+    && i5.lines.includes('iPhone app: search box 3 · Filters 0 · link 1 · trim filter 0') && i5.lines.includes('Android app: no data'), JSON.stringify(i5.lines));
+  check('narrow: names the app still waiting for its update', i5.lines.includes('Android app: not counted until its next update') && !i5.lines.includes('website only until the next app update'), JSON.stringify(i5.lines));
+
+  // 6. counters unreadable
+  const n6 = computeScorecard({ today: '2026-11-26', eventsError: 'D1 down', subs: subsA }).narrowing;
+  check('narrow: unreadable counters -> no data with the reason', narrowingItems(n6).head === 'no data' && /D1 down/.test(narrowingItems(n6).lines[0]));
+
+  // 7. both renderers place it directly under the scorecard
+  const card = computeScorecard({ today: '2026-11-26', rows: [...rowsA, ...rows2], presence: presenceA, v2: { web: '2026-11-12' }, v3: { web: '2026-11-22' },
+    v3Presence: v3p(['2026-11-22', '2026-11-23', '2026-11-24', '2026-11-25']), subs: subsA });
+  const tl = scorecardTextLines(card);
+  const at = tl.findIndex((l) => l.startsWith('  How people narrowed the Cars list (7 days): '));
+  check('narrow text: last block of the scorecard, after the small-numbers note', at > 0 && /Small numbers/.test(tl[at - 1]), JSON.stringify(tl.slice(-8)));
+  check('narrow text: head on the title line', tl[at] === '  How people narrowed the Cars list (7 days): search box 7 · Filters 7 · link 9 · trim filter 1', tl[at]);
+  const hh = scorecardHtml(card, { esc: (x) => String(x), C: { line: '#ddd', dim: '#666', ink: '#111', accent: '#b84a0a' } });
+  check('narrow html: inside the scorecard block, after the link lines', hh.indexOf('How people narrowed the Cars list') > hh.indexOf('What each tagged link did this week')
+    && hh.replace(/<[^>]+>/g, '').includes('search box 7 · Filters 7 · link 9 · trim filter 1') && /white-space:nowrap;">search box 7</.test(hh) && hh.includes('counting starts Nov 22: 4 of 7 days so far'));
+  check('narrow: other scorecard numbers unchanged by the narrowing rows', card.visitors.byPlatform.web.current === 70 && card.watches.current === A.watches.current);
+}
+
+/* ---------- confirmed Monday-email sign-ups by link ---------- */
+{
+  const rowsC = [
+    R('2026-11-20', 'first-visit', 10, { src: 'reddit', cmp: 'xterra', med: 'post' }),
+    R('2026-11-20', 'email-submitted', 3, { src: 'reddit', cmp: 'xterra', med: 'post' }),
+    R('2026-11-21', 'email-confirmed', 2, { src: 'reddit', cmp: 'xterra', med: 'post' }),
+    R('2026-11-21', 'email-confirmed', 1),   // a sign-up with no remembered link
+  ];
+  const C1 = computeScorecard({ today: '2026-11-26', rows: rowsC, presence: presenceA, v2: { web: '2026-11-12' }, subs: subsA });
+  const r = C1.sourceRows.find((s) => s.label === 'reddit / xterra');
+  check('by link: confirmed sign-ups counted per link (2 of 3 given)', r && r.emails === 3 && r.confirmed === 2, JSON.stringify(r));
+  check('by link: total confirmed still counts the untagged one', C1.emails.confirmed.current === 3, JSON.stringify(C1.emails.confirmed));
+  const line = scorecardTextLines(C1).find((l) => l.includes('reddit / xterra:'));
+  check('by link: the line reads "3 emails given, 2 confirmed"', /→ 3 emails given, 2 confirmed → /.test(line), line);
+  const one = scorecardTextLines(computeScorecard({ today: '2026-11-26', rows: [R('2026-11-20', 'first-visit', 1, { src: 'x' }), R('2026-11-20', 'email-submitted', 1, { src: 'x' })], presence: presenceA, subs: subsA }))
+    .find((l) => l.includes('x: '));
+  check('by link: singular "1 email given, 0 confirmed"', /→ 1 email given, 0 confirmed → /.test(one), one);
+}
 
 /* ---------- integration: SQLite with every migration (D1 shim) ---------- */
 function d1(db) {
@@ -221,6 +312,10 @@ const ins = db.prepare('INSERT INTO events_daily (day, event, source, campaign, 
 for (const r of rowsA) ins.run(r.day, r.event, r.source, r.campaign, r.medium, r.platform, r.n);
 // presence the way the API leaves it: the v2 marker row per (day, platform)
 for (const d of [...CUR, ...PRI]) ins.run(d, 'funnel-v2', '', '', '', 'web', 1);
+// v3 web client from Nov 22: its marker rows and what it counted (narrowing)
+for (const d of ['2026-11-22', '2026-11-23', '2026-11-24', '2026-11-25']) ins.run(d, 'funnel-v3', '', '', '', 'web', 1);
+for (const [d, k, n] of [['2026-11-22', 'search', 9], ['2026-11-23', 'search-trim', 2], ['2026-11-22', 'filters-model', 6], ['2026-11-24', 'filters-make', 3],
+  ['2026-11-23', 'link', 22], ['2026-11-25', 'trim', 3], ['2026-11-22', 'search', 3]]) ins.run(d, 'narrow/' + k, d === '2026-11-22' && k === 'search' && n === 3 ? 'reddit' : '', '', '', 'web', n);
 const kv2 = new Map();
 const env = {
   DB: d1(db),
@@ -236,6 +331,10 @@ const I = computeScorecard({ today: '2026-11-26', ...ev, subs: subsA });
 check('D1: same visitors as the fixture (web 70 / 50)', I.visitors.byPlatform.web.current === 70 && I.visitors.byPlatform.web.prior === 50);
 check('D1: android present via its rows only (Nov 13, Nov 22)', I.visitors.byPlatform.android.current === 0 && I.visitors.byPlatform.android.prior === 3);
 check('D1: same link row', eq(I.sourceRows[0], A.sourceRows[0]));
+check('D1: v3 start and marker days read back', ev.v3.web === '2026-11-22' && ev.v3Presence.length === 4 && !ev.v3.ios, JSON.stringify([ev.v3, ev.v3Presence]));
+check('D1: narrowing summed across sources and days (search 12 + 2 trim rows, Filters 6 + 3, link 22, trim 3)',
+  eq(I.narrowing.total, { search: 14, searchTrim: 2, filters: 9, filtersModel: 6, filtersMake: 3, link: 22, trim: 3 }), JSON.stringify(I.narrowing.total));
+check('D1: the markers are not counted as narrowing or as funnel events', I.visitors.byPlatform.web.current === 70);
 
 // The whole daily email: stores, entitlements and public files as fixtures.
 kv2.set('ent:a@users.test', JSON.stringify({ pro: true, source: 'stripe', expiresAt: '2099-01-01T00:00:00Z' }));
@@ -262,6 +361,11 @@ check('daily: subscribers 4 + 2 + 2 web = 8; change from Nov 19 snapshot (6) = +
 check('daily: build without storeSnapshot stores nothing', !JSON.parse(kv2.get(SUBS_HISTORY_KEY)).days['2026-11-26']);
 const t = rep.email.text, h = rep.email.html;
 check('daily text: scorecard before OPEN ISSUES', t.indexOf('WEEKLY SCORECARD') > 0 && t.indexOf('WEEKLY SCORECARD') < t.indexOf('OPEN ISSUES'));
+check('daily text: narrowing block under the scorecard, before OPEN ISSUES',
+  t.includes('  How people narrowed the Cars list (7 days): search box 14 · Filters 9 · link 22 · trim filter 3')
+  && t.indexOf('How people narrowed') > t.indexOf('WEEKLY SCORECARD') && t.indexOf('How people narrowed') < t.indexOf('OPEN ISSUES')
+  && t.includes('counting starts Nov 22: 4 of 7 days so far') && t.includes('website only until the next app update'), t.slice(t.indexOf('How people'), t.indexOf('OPEN ISSUES')));
+check('daily html: narrowing block before Open issues', h.indexOf('How people narrowed the Cars list') > h.indexOf('Weekly scorecard') && h.indexOf('How people narrowed the Cars list') < h.indexOf('Open issues'));
 check('daily html: scorecard before Open issues', h.indexOf('Weekly scorecard') > 0 && h.indexOf('Weekly scorecard') < h.indexOf('Open issues'));
 check('daily html: existing sections still there', ['Open issues', 'Scan', 'Paying subscribers', 'Funnel'].every((x) => h.includes(x)));
 check('daily email leaks no subscriber address', !/users\.test/.test(t) && !/users\.test/.test(h));
@@ -270,6 +374,8 @@ try { await buildDailyReport(env, { now, storeSnapshot: true }); } finally { con
 check('daily: the real run stores today\'s snapshot', eq(JSON.parse(kv2.get(SUBS_HISTORY_KEY)).days['2026-11-26'], { apple: 4, google: 2, web: 2, total: 8, complete: true }));
 const adminCard = (await buildScorecard(env, { today: '2026-11-26', subs: { apple: 4, google: 2, web: 2 } })).card;
 check('admin JSON: same numbers as the email', adminCard.visitors.current === rep.scorecard.visitors.current && eq(adminCard.sourceRows, rep.scorecard.sourceRows));
+check('admin JSON: carries the narrowing numbers', eq(adminCard.narrowing.total, rep.scorecard.narrowing.total) && adminCard.narrowing.since === '2026-11-22'
+  && adminCard.narrowing.daysCounted === 4 && eq(adminCard.narrowing.appsReporting, []), JSON.stringify(adminCard.narrowing));
 check('admin JSON: no per-person fields', !/@|"ip"|"id"|device/i.test(JSON.stringify(adminCard)), JSON.stringify(adminCard).match(/@|"ip"|"id"|device/i));
 globalThis.fetch = realFetch;
 

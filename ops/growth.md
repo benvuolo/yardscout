@@ -300,3 +300,84 @@ ISSUES" (e2e-ops.sh 150 pass).
 confirmed Monday emails (the server counts the confirmation without the
 visitor's source; carrying it would mean storing the source with the pending
 sign-up — a decision for this workstream later, not done here).
+
+## Narrowing counters + confirmed sign-ups by link — branch `growth/narrowing-counters`, NOT merged (2026-11-13)
+
+Built on origin/main b3005269, main merged in at 946f2b71 (no conflicts).
+Nothing deployed, merged, dispatched, sent or called in production.
+
+**Why.** (A) The owner will decide in two weeks whether the Cars search box
+(added 2026-11-12) stays; its picks went only to the switched-off analytics
+(`track('car-search')`, GOATCOUNTER_CODE null), so nothing was counted. (B)
+The scorecard's per-link line could show addresses given but not confirmed.
+
+**A. Counters (docs/app.js, EVENTS_V 2 -> 3).** Through `/v1/events` as
+ordinary anonymous daily counters (no ids, no IPs), names `narrow/<kind>`:
+- `narrow/search` a make or model picked from the search box;
+- `narrow/search-trim` a trim row picked from it (not also `search`);
+- `narrow/filters-model` Filters Make -> Model: counted when the Model list
+  closes with a changed, non-empty choice (Done, tap outside, closing
+  Filters), never per checkbox tick;
+- `narrow/filters-make` a Filters make NOT followed by a Filters model or
+  another route; counted when the person moves on (another make, leaving the
+  Cars tab, closing Filters, the page going to the background);
+- `narrow/trim` the Filters Trim control set to a trim;
+- `narrow/link` a `#cars=` link opened (was `car-link`, off-analytics only).
+Once per device per UTC day per kind: the day each kind last counted is kept
+in the browser's own storage (`ys_narrow`, never sent); memory fallback in
+private mode. (The v2 rules have no per-day rule; the nearest is "a part
+search once per distinct search while open", also decided on the device.)
+One action, one route: a search pick or link sets the filters directly and
+cancels any Filters choice in progress; the box syncing to Filters is not a
+pick; the week chips and the box's clear button dispatch a tagged change so
+the make select does not count them as Filters. Week chips count nothing.
+A v3 event also writes a `funnel-v3` marker per (day, platform) (like
+`funnel-v2`); clients may not post either marker.
+
+**Email + JSON.** Directly under the scorecard's notes, text and HTML:
+"How people narrowed the Cars list (7 days): search box 14 · Filters 9 ·
+link 22 · trim filter 3", then "search box: 12 make or model, 2 trim rows ·
+Filters: 6 model, 3 make only", "counting starts Nov 22: 4 of 7 days so far"
+(until the first v3 day is on or before the window's first day), "website
+only until the next app update" (until an app sends v3), "A person counts at
+most once a day for each way." No v3 marker in the window = "no data" with
+"counting starts …"; reporting but unused = 0. Per-platform lines appear only
+once an app reports. `/v1/admin/scorecard` gains `narrowing` (window, since,
+daysCounted, full, total, platforms, appsReporting).
+
+**B. Sign-ups by link (migration 0016).** The sign-up request carries the
+remembered `src/cmp/med`; `recap_subscribers.pending_source/_campaign/_medium`
+hold it only while the address waits for its click; the click counts
+`email-confirmed` under it and NULLs it in the same UPDATE. A link reused
+within the hour keeps the first request's source; a new link (after the hour)
+takes the new request's; an already-confirmed address stores none; the hourly
+prune NULLs an expired link's source; unconfirmed rows still go at 7 days.
+No source -> the empty source, as before. Per-link line now reads
+"3 emails given, 2 confirmed".
+
+**Privacy page** (dated November 13, 2026): tallies list adds "how the Cars
+list was narrowed: by the search box, the filters, a car link or the trim
+filter (each counted at most once a day per device)"; the Monday email
+section adds the link source kept until confirmation, then deleted.
+sw.js jh-v192.
+
+**Merging triggers:** GitHub Pages (web app) and Deploy Workers
+(`backend/**`): `wrangler d1 migrations apply --remote` (0016: three
+`ALTER TABLE … ADD COLUMN`, nothing back-filled) then the API worker deploy.
+Nothing by hand. The apps count narrowing only after the next store release
+(owner's "ship").
+
+**Tests (merged tree):** scorecard_unit 128, funnel_counters_unit 87,
+recap_signup_unit 91, recap_unit 28, ops_quiet_unit 10, funnel_events_e2e 49,
+car_search_e2e 47, notable_trims_e2e 40, card_share_e2e 19, tab_retap_e2e 14,
+recap_ask_e2e 35, e2e-ops.sh 150 — all pass. ui_no_truncation not run (no
+screen changed).
+
+**When to decide on the box.** Counting starts the day the merge reaches
+users; a full 7-day line exists 8 days later. Two weeks of numbers ≈ 15 days
+after the merge.
+
+**Suggestions.** (1) Count the week chips too if the owner wants every route
+(today they count nothing). (2) `ops/README.md` still has no row for this
+file. (3) Rename nothing else: `car-search` / `car-link` are gone from the
+code; GoatCounter would see `narrow/*` if it is ever switched on.

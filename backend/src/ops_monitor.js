@@ -31,7 +31,7 @@ import { json, err } from './util.js';
 import { CHANNELS, utcDay, resendFetch, pruneOpsErrors, resendDailyCap } from './ops.js';
 import { recapStats } from './recap_signup.js';
 import { watchMatches } from './alerts.js';
-import { FUNNEL_V2_MARK } from './attribution.js';
+import { FUNNEL_V2_MARK, FUNNEL_V3_MARK } from './attribution.js';
 import { buildScorecard, subsFromLoaded, storeSubsSnapshot, scorecardTextLines, scorecardHtml, FUNNEL_V2_SINCE_SQL } from './scorecard.js';
 
 const H = 3600_000;
@@ -689,7 +689,7 @@ async function loadUsage(env, now) {
     env.DB.prepare('SELECT COUNT(*) AS n FROM watches'),
     env.DB.prepare(
       `SELECT event, platform, SUM(CASE WHEN day = ?1 THEN n ELSE 0 END) AS yesterday, SUM(n) AS week
-         FROM events_daily WHERE day >= ?2 AND day < ?3 AND event != '${FUNNEL_V2_MARK}' GROUP BY event, platform`
+         FROM events_daily WHERE day >= ?2 AND day < ?3 AND event NOT IN ('${FUNNEL_V2_MARK}', '${FUNNEL_V3_MARK}') GROUP BY event, platform`
     ).bind(yesterday, weekAgo, today),
     env.DB.prepare(
       `SELECT source, SUM(n) AS n FROM events_daily

@@ -12,6 +12,7 @@ import {
 } from '../src/recap_signup.js';
 import { sendWeeklyDigests, buildDigestEmail } from '../src/alerts.js';
 import { flushOps } from '../src/ops.js';
+import { handleEvent } from '../src/attribution.js';
 
 let failures = 0;
 const check = (name, ok, extra = '') => { console.log(`${ok ? 'PASS' : 'FAIL'}  ${name}${extra ? ' — ' + extra : ''}`); if (!ok) failures++; };
@@ -288,6 +289,110 @@ check('account opted out: no recap; account and its watch untouched', outbox.len
 /* ---- logs never carry a full address ---- */
 const leaked = logged.filter((l) => !/^(PASS|FAIL)/.test(l)).filter((l) => /[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\.[A-Za-z]/.test(l) && !/•••@/.test(l));
 check('no full email address in any log line', leaked.length === 0, leaked.slice(0, 2).join(' | '));
+
+/* ---- sign-ups by link (2026-11-13, migration 0016) ----
+ * The visitor's remembered link {src, cmp, med} rides with the sign-up, is
+ * kept only on the pending row, counts 'email-confirmed' under it at the
+ * click and is cleared in the same step. */
+{
+  const W = { make: 'Nissan', model: 'Xterra', radiusMi: 50, lat: 40.76, lng: -111.89 };
+  const confirmedRows = (e) => rows(e, "SELECT source, campaign, medium, platform, n FROM events_daily WHERE event = 'email-confirmed' ORDER BY source");
+  const pendingOf = (e, em) => rows(e, 'SELECT pending_source AS s, pending_campaign AS c, pending_medium AS m FROM recap_subscribers WHERE email = ?', em)[0];
+
+  // 1. tagged sign-up -> confirmed under its link, source gone afterwards
+  let e = freshEnv(); outbox = [];
+  let res = await jsonOf(await signup(e, { email: 'tagged@example.com', watch: W, src: 'Reddit', cmp: 'XTerra Post!', med: 'comment' }));
+  check('by link: tagged sign-up accepted', res.status === 200, JSON.stringify(res.data));
+  check('by link: source kept with the pending sign-up, cleaned like the counters', JSON.stringify(pendingOf(e, 'tagged@example.com')) === JSON.stringify({ s: 'reddit', c: 'xterrapost', m: 'comment' }),
+    JSON.stringify(pendingOf(e, 'tagged@example.com')));
+  check('by link: nothing counted before the click', confirmedRows(e).length === 0);
+  let tok = decodeURIComponent(linkFrom(outbox[0]) || '');
+  let cr = await confirmPost(e, tok);
+  check('by link: confirm redirects as before', cr.status === 303);
+  check('by link: email-confirmed counted once under reddit / xterrapost / comment (web)',
+    JSON.stringify(confirmedRows(e)) === JSON.stringify([{ source: 'reddit', campaign: 'xterrapost', medium: 'comment', platform: 'web', n: 1 }]), JSON.stringify(confirmedRows(e)));
+  check('by link: the source is cleared at confirmation', JSON.stringify(pendingOf(e, 'tagged@example.com')) === JSON.stringify({ s: null, c: null, m: null }), JSON.stringify(pendingOf(e, 'tagged@example.com')));
+  check('by link: no trace of the source left on the address', !JSON.stringify(rows(e, 'SELECT * FROM recap_subscribers')).includes('reddit')
+    && !JSON.stringify(rows(e, 'SELECT * FROM recap_watches')).includes('reddit'));
+  cr = await confirmPost(e, tok);
+  check('by link: a second click (reused link) counts nothing more', cr.status === 400 && confirmedRows(e)[0].n === 1, JSON.stringify(confirmedRows(e)));
+
+  // 2. a sign-up with no remembered link: the empty source, as before
+  outbox = [];
+  await signup(e, { email: 'plain@example.com', watch: W });
+  await confirmPost(e, decodeURIComponent(linkFrom(outbox[0]) || ''));
+  const plain = confirmedRows(e).find((x) => x.source === '');
+  check('by link: no source -> counted under the empty source', plain && plain.campaign === '' && plain.medium === '' && plain.n === 1, JSON.stringify(confirmedRows(e)));
+  check('by link: no source -> nothing kept after confirmation either', JSON.stringify(pendingOf(e, 'plain@example.com')) === JSON.stringify({ s: null, c: null, m: null }));
+
+  // 3. a second watch within the hour rides the link already sent: its source stays the first one
+  e = freshEnv(); outbox = [];
+  await signup(e, { email: 'two@example.com', watch: W, src: 'forum', cmp: 'nissan' });
+  await signup(e, { email: 'two@example.com', watch: { ...W, model: 'Frontier' }, src: 'reddit' });
+  check('by link: reuse within the hour sends no second email and keeps the first link\'s source', outbox.length === 1 && pendingOf(e, 'two@example.com').s === 'forum', JSON.stringify(pendingOf(e, 'two@example.com')));
+  await confirmPost(e, decodeURIComponent(linkFrom(outbox[0]) || ''));
+  check('by link: one confirmation (two watches) counts once, under forum / nissan',
+    JSON.stringify(confirmedRows(e)) === JSON.stringify([{ source: 'forum', campaign: 'nissan', medium: '', platform: 'web', n: 1 }]), JSON.stringify(confirmedRows(e)));
+
+  // 4. after the hour a new link replaces the old one, with the new request's source
+  e = freshEnv(); outbox = [];
+  await signup(e, { email: 'later@example.com', watch: W, src: 'forum' });
+  const oldTok = decodeURIComponent(linkFrom(outbox[0]) || '');
+  e.raw.prepare('UPDATE recap_subscribers SET confirm_sent_at = ?').run(new Date(Date.now() - 2 * 3600_000).toISOString());
+  outbox = [];
+  await signup(e, { email: 'later@example.com', watch: W, src: 'share', med: 'car' });
+  check('by link: a new link after the hour carries the new request\'s source', outbox.length === 1 && pendingOf(e, 'later@example.com').s === 'share' && pendingOf(e, 'later@example.com').m === 'car');
+  check('by link: the replaced link no longer confirms (and counts nothing)', (await confirmPost(e, oldTok)).status === 400 && confirmedRows(e).length === 0);
+  await confirmPost(e, decodeURIComponent(linkFrom(outbox[0]) || ''));
+  check('by link: counted under the link of the confirmation actually clicked', JSON.stringify(confirmedRows(e).map((x) => [x.source, x.medium, x.n])) === JSON.stringify([['share', 'car', 1]]), JSON.stringify(confirmedRows(e)));
+
+  // 5. an expired link: the source is dropped by the hourly prune, the click counts nothing
+  e = freshEnv(); outbox = [];
+  await signup(e, { email: 'slow@example.com', watch: W, src: 'reddit' });
+  const slowTok = decodeURIComponent(linkFrom(outbox[0]) || '');
+  e.raw.prepare('UPDATE recap_subscribers SET confirm_expires_at = ?').run(new Date(Date.now() - 60_000).toISOString());
+  await pruneRecap(e, Date.now());
+  check('by link: an expired link\'s source is cleared by the prune (row itself kept until day 7)', rows(e, 'SELECT * FROM recap_subscribers').length === 1
+    && JSON.stringify(pendingOf(e, 'slow@example.com')) === JSON.stringify({ s: null, c: null, m: null }), JSON.stringify(pendingOf(e, 'slow@example.com')));
+  check('by link: clicking the expired link counts nothing', (await confirmPost(e, slowTok)).status === 400 && confirmedRows(e).length === 0);
+  // A live link's source survives the prune.
+  outbox = [];
+  await signup(e, { email: 'live@example.com', watch: W, src: 'forum' });
+  await pruneRecap(e, Date.now());
+  check('by link: a live link keeps its source through the prune', pendingOf(e, 'live@example.com').s === 'forum');
+  await pruneRecap(e, Date.now() + 8 * 86400_000);
+  check('by link: an unconfirmed address (and its source) is gone after 7 days', rows(e, 'SELECT * FROM recap_subscribers').length === 0);
+
+  // 6. an address that is already confirmed keeps no source on a new sign-up
+  e = freshEnv(); outbox = [];
+  await signup(e, { email: 'old@example.com', watch: W });
+  await confirmPost(e, decodeURIComponent(linkFrom(outbox[0]) || ''));
+  outbox = [];
+  e.raw.prepare('UPDATE recap_subscribers SET confirm_sent_at = ?').run(new Date(Date.now() - 2 * 3600_000).toISOString());
+  const rr = await jsonOf(await signup(e, { email: 'old@example.com', watch: { ...W, model: 'Pathfinder' }, src: 'reddit' }));
+  check('by link: a confirmed address signing up again stores no source', rr.status === 200 && JSON.stringify(pendingOf(e, 'old@example.com')) === JSON.stringify({ s: null, c: null, m: null }), JSON.stringify(pendingOf(e, 'old@example.com')));
+  if (outbox.length) await confirmPost(e, decodeURIComponent(linkFrom(outbox[0]) || ''));
+  check('by link: and is not counted as a second confirmation', JSON.stringify(confirmedRows(e).map((x) => [x.source, x.n])) === JSON.stringify([['', 1]]), JSON.stringify(confirmedRows(e)));
+
+  // 7. unsubscribe deletes the pending source with the row
+  e = freshEnv(); outbox = [];
+  await signup(e, { email: 'gone@example.com', watch: W, src: 'reddit' });
+  const unsub = await recapUnsubUrl(e, 'gone@example.com');
+  await handleRecapUnsubscribe(new Request(unsub, { method: 'POST' }), e, new URL(unsub));
+  check('by link: unsubscribe removes the row and its source', rows(e, 'SELECT * FROM recap_subscribers').length === 0);
+
+  // 8. the events API: a client may not post the confirmation or the v3 marker; a v3 event writes both markers
+  e = freshEnv();
+  const evPost = (b) => handleEvent(new Request('https://api.test/v1/events', { method: 'POST', body: JSON.stringify(b) }), e);
+  check('events API: email-confirmed from a client refused', (await evPost({ e: 'email-confirmed', src: 'reddit' })).status === 400);
+  check('events API: funnel-v3 from a client refused', (await evPost({ e: 'funnel-v3', p: 'web' })).status === 400);
+  await evPost({ e: 'narrow/search', p: 'web', v: 3, src: 'reddit' });
+  await evPost({ e: 'first-visit', p: 'ios', v: 2 });
+  const evRows = rows(e, 'SELECT event, source, platform, n FROM events_daily ORDER BY event, platform');
+  check('events API: a v3 event bumps funnel-v2 and funnel-v3; a v2 event only funnel-v2',
+    JSON.stringify(evRows.map((x) => [x.event, x.platform])) === JSON.stringify([['first-visit', 'ios'], ['funnel-v2', 'ios'], ['funnel-v2', 'web'], ['funnel-v3', 'web'], ['narrow/search', 'web']]), JSON.stringify(evRows));
+  check('events API: narrow/search counted under its source like any event', evRows.find((x) => x.event === 'narrow/search').source === 'reddit');
+}
 
 console.log(failures ? `\n${failures} FAILURES` : '\nALL PASS');
 process.exit(failures ? 1 : 0);
