@@ -375,3 +375,23 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
 - Open branch: `design/filters-no-cutoff` (a293925e, sw jh-v188): filter
   panels no longer cut text off; waiting on the full layout run at 360, 402
   and 412 before merging.
+
+## 2026-11-13 ~06:00 UTC filter panels and card share live (sw jh-v189)
+
+- Merged 95e7d737: `design/filters-no-cutoff` and `design/card-share`.
+- Filters (owner iPhone screenshot: "Using your loca", "Fron"): in the
+  two-column grid the zip field and Years were too narrow. Zip and Years take
+  a full row below 900 px; placeholder is "Near me"; selects wrap; location
+  button is 44 px; Yards search placeholder "Yard or city". Four filter
+  screens added to ui_no_truncation (none opened a filter panel before).
+  Run: those screens at 320–1280 (9 widths), and every screen at 360/402/412,
+  light and dark, 100% and 200%: 900 checks, 0 failures.
+- Share: every car card (Cars, Alerts hits, Parts donors) has a share button
+  beside Details; one line from 360 px, two lines at 320. New
+  card_share_e2e.mjs (19 checks). Card screens re-run through
+  ui_no_truncation at 320/360/375/390/402/1280: 168 checks, 0 failures.
+- Checked on yardscout.io at 360, 402, 430. Not verifiable here: iPhone's
+  own browser engine (Chromium only), in particular select wrapping.
+- Web only; the apps need the next store release (owner's "ship"). The app
+  build the owner is using has none of: search box, tab scroll, filters fix,
+  card share.
