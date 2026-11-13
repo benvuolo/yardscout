@@ -422,3 +422,19 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
   by VIN pattern; not badged. Tacoma, Ranger, F-150, Tundra, Frontier decodes
   never name TRD Pro / FX4 / etc., so those trucks cannot be badged from the
   VIN. The scraper still confirms an "R" gate from an "R-Line" decode.
+
+## 2026-11-13 ~09:00 UTC owner: trims free; counter yes; overnight builds
+
+- Owner: "Free and yes". `NOTABLE_TRIMS_FREE = true` shipped at b3005269
+  (sw jh-v191). Trim alerts stay Pro.
+- Owner asked for overnight work that improves the business. Two builders
+  running in their own worktrees; hub reviews and merges each when it reports:
+  - `seo/model-pages`: a permanent page per model, `/landed/<make>/<model>`,
+    this week's set-outs by state plus what is on the lots; sitemap and
+    internal links. Business plan priority 8.
+  - `growth/narrowing-counters`: counts search-box picks against Filters
+    picks, links and the trim filter, shown in the daily email (the owner
+    decides on the search box from this in two weeks); confirmed Monday-email
+    sign-ups by link.
+- Still waiting on the owner: adding Gmail to the "Reddit reply drafts"
+  scheduled task; the two U-Pull-R suggestions (reader off, reply watch on).
