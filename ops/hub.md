@@ -455,3 +455,20 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
 - For the owner once live: resubmit the sitemap in Search Console.
 - Judgement call to confirm with the owner: model pages list the whole week
   nationwide, free (the make page stays capped at the newest 40).
+
+## 2026-11-13 ~09:15 UTC narrowing counters and sign-ups by link live (sw jh-v192)
+
+- `growth/narrowing-counters` merged at 0efca23d; deploy-workers run
+  43392668897 succeeded (migration 0016 applied, then the API worker; site
+  worker too). Hub regression on the merged tree: scorecard (128),
+  funnel_counters, recap_signup, recap, ops_quiet units; funnel_events,
+  car_search, recap_ask e2e; e2e-ops.sh. Live check at 390 px: search pick,
+  Filters, all four tabs, 0 page errors.
+- Daily email gains "How people narrowed the Cars list (7 days)": search box,
+  Filters, link, trim filter; each at most once a day per device, website
+  only until the next app release. First full 7-day line about 11-21; the
+  owner decides on the search box from about 11-27.
+- Confirmed Monday-email sign-ups now count under the link the person came
+  through; the source is kept only while the sign-up is pending.
+- Privacy page updated to say both (dated November 13, 2026).
+- Still pending: the 08:14 UTC scan (trim badges and model page data).
