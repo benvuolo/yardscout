@@ -27194,6 +27194,270 @@ def _write_landed_json(payload: dict) -> None:
          "makes": dict(sorted(makes.items()))}, separators=(",", ":")))
 
 
+# ---------- /landed/<make>/<model> pages (seo/model-pages, 2026-11-13) ----------
+# A make/model gets a public page when this many of its cars are on the lots
+# now (379-380 models on the 2026-11-13 scan, the business plan's "379 models
+# with 100+ cars") ...
+LANDED_MODEL_MIN_ON_LOTS = 100
+# ... or when at least this many set out in the last LANDED_DAYS days, so a
+# model having a busy week gets its page even with a smaller lot count.
+LANDED_MODEL_MIN_WEEK = 10
+LANDED_MODELS_DIR = "landed"
+
+
+def landed_slug(s) -> str:
+    """Same as slugify() in backend/site-proxy/src/share.js (and shareSlug in
+    docs/app.js): the /landed/<make>/<model> path segments."""
+    s = str(s or "").lower().replace("&", " and ")
+    return re.sub(r"[^a-z0-9]+", "-", s).strip("-")
+
+
+def landed_drive(drive_type) -> str:
+    """The VIN decode's drive type as the model pages print it: "4x4" (4WD),
+    "AWD", "2WD" (4x2, FWD, RWD), or "" when the decode does not say one
+    thing ("", "2WD/4WD", "6x4", "Other", "Not Applicable"). Same reading as
+    the Reddit lists (ops/reddit.md: "4WD"/"4x4" = 4x4, "4x2" = 2WD); AWD is
+    named as such rather than folded into either."""
+    d = str(drive_type or "").strip().lower()
+    if not d or "2wd/4wd" in d:
+        return ""
+    if re.search(r"(?<![a-z0-9])(4wd|4x4)(?![a-z0-9])|4-wheel", d):
+        return "4x4"
+    if re.search(r"(?<![a-z0-9])awd(?![a-z0-9])|all-wheel", d):
+        return "AWD"
+    if re.search(r"(?<![a-z0-9])(4x2|fwd|rwd|2wd)(?![a-z0-9])|front-wheel|rear-wheel", d):
+        return "2WD"
+    return ""
+
+
+# The app's trim-badge rule (docs/app.js notableTrimHits, with the trim-watch
+# matcher trimTokens / tokensContain / TRIM_ALIASES / trimFilterMatches it
+# calls), ported as is so a model page names exactly the trim the app's badge
+# shows for the same car. The list splitting and the "non ..." rule are the
+# scraper's own _trim_alternatives / _TRIM_NEGATION_RE (the app mirrors
+# those). test_landed_models.py runs the app's JS over the same cases and
+# checks the two agree; change both together or neither.
+_APP_TRIM_ALIASES = (
+    ("toyota", ("limited", "luxury")),
+    ("lexus", ("limited", "luxury")),
+    ("*", ("base", "std", "standard")),
+    ("*", ("grand touring", "gt")),
+)
+
+
+def _app_trim_tokens(s) -> list[str]:
+    out: list[str] = []
+    for raw in re.split(r"[^a-z0-9]+", str(s or "").lower().replace("grade:", " ")):
+        if not raw:
+            continue
+        m = re.match(r"^(\d)([a-z]{2,})$", raw)
+        if m:
+            out += [m.group(1), m.group(2)]
+        else:
+            out.append(raw)
+    return out
+
+
+def _app_tokens_contain(hay: list[str], needle: list[str]) -> bool:
+    if not needle:
+        return False
+    n = len(needle)
+    return any(hay[i:i + n] == needle for i in range(len(hay) - n + 1))
+
+
+def _app_trim_filter_matches(query: str, trim: str, series: str, make: str) -> bool:
+    q = str(query or "").strip().lower()
+    mk = str(make or "").strip().lower()
+    variants = [q]
+    for a_make, words in _APP_TRIM_ALIASES:
+        if a_make != "*" and a_make != mk:
+            continue
+        for w in words:
+            if not _app_tokens_contain(_app_trim_tokens(q), _app_trim_tokens(w)):
+                continue
+            for alt in words:
+                if alt != w:
+                    v = q.replace(w, alt, 1)
+                    if v not in variants:
+                        variants.append(v)
+    hay = _app_trim_tokens(f"{trim or ''} {series or ''}")
+    return any(_app_tokens_contain(hay, _app_trim_tokens(v)) for v in variants)
+
+
+def notable_trim_hits(make: str, words, trim: str, quality: str, series: str) -> list[str]:
+    """The model's notable trim words (notableTrims) this car's VIN decode
+    names on its own, in the table's order; [] when the decode is not
+    'usable', lists several trims, or says what the car is not. Port of the
+    app's notableTrimHits (see the comment above)."""
+    if quality != "usable":
+        return []
+    words = [w for w in (words or ()) if isinstance(w, str) and w.strip()]
+    if not words:
+        return []
+    sides = [str(s or "").strip() for s in (trim, series)]
+    sides = [s for s in sides if s]
+    if not sides or any(_TRIM_NEGATION_RE.search(s.lower()) for s in sides):
+        return []
+    alts = [_trim_alternatives(s, words) for s in sides]
+
+    def names(w: str, t: str) -> bool:
+        # "ST-Line" / "R-Line" are appearance packages, not the ST or the R.
+        return (_app_trim_filter_matches(w, t, "", make)
+                and (bool(re.search(r"line$", w, re.I))
+                     or not _app_tokens_contain(_app_trim_tokens(t), _app_trim_tokens(w) + ["line"])))
+
+    hits = [w for w in words if any(a and all(names(w, t) for t in a) for a in alts)]
+    return [w for w in hits if not any(
+        o != w and len(_app_trim_tokens(o)) > len(_app_trim_tokens(w))
+        and _app_tokens_contain(_app_trim_tokens(o), _app_trim_tokens(w)) for o in hits)]
+
+
+def _write_landed_models_json(payload: dict) -> dict | None:
+    """docs/data/landed/ — the data behind the public /landed/<make>/<model>
+    pages (backend/site-proxy/src/share.js), one file per make so a page view
+    fetches one small file, plus an index:
+
+      index.json      {scrapedAt, days, minOnLots, minWeek,
+                       makes: {make: {slug, total, recentCount,
+                               models: [[model, slug, onLots, setOutLast7Days], ...]}}}
+                      models with a page, most on the lots first
+      <make>.json     {scrapedAt, days, make, slug,
+                       yards: [[location, city, state], ...]   (only yards used below)
+                       models: [{model, slug, total, recentCount,
+                                 states: {state: onLots},
+                                 recent: [[year, yard, row, dateAdded, drive, trim, key], ...]}]}
+
+    Counting is landed.json's: every car of the make/model in the payload is
+    on the lots; "recent" is a dateAdded on or after today - LANDED_DAYS;
+    key is the VIN or the id. `recent` is complete (no cap), newest first.
+    drive is landed_drive() of the VIN decode ("" = the decode does not
+    say); trim is the first notable_trim_hits() word ("" = none named).
+    A model gets a page when total >= LANDED_MODEL_MIN_ON_LOTS or
+    recentCount >= LANDED_MODEL_MIN_WEEK; no-pick names (noPickModels) and
+    blank names never do. Files for makes that no longer qualify are
+    removed. Returns a small summary for the scan log."""
+    from datetime import date as _date, timedelta as _td
+    fields = payload.get("fields") or []
+    fi = {n: i for i, n in enumerate(fields)}
+    yf = payload.get("yardFields") or []
+    yi = {n: i for i, n in enumerate(yf)}
+    need = ("id", "vin", "year", "make", "model", "row", "dateAdded", "yard")
+    if any(n not in fi for n in need):
+        return None
+    cutoff = (_date.today() - _td(days=LANDED_DAYS)).isoformat()
+    src_yards = payload.get("yards") or []
+    vpic = payload.get("vpic") or {}
+    trims_table = payload.get("notableTrims")
+    if not isinstance(trims_table, dict):
+        trims_table = notable_trims_from_spans(payload.get("modelYears") or {})
+    no_pick = {(mk, md) for mk, ms in (payload.get("noPickModels") or {}).items() for md in ms}
+
+    def ycol(y, name):
+        return y[yi[name]] if name in yi and y is not None and yi[name] < len(y) else None
+
+    groups: dict[tuple[str, str], dict] = {}
+    for ri, r in enumerate(payload.get("vehicles") or []):
+        make = str(r[fi["make"]] or "").strip()
+        model = r[fi["model"]]
+        if not make or not isinstance(model, str) or not model.strip():
+            continue
+        g = groups.setdefault((make, model), {"total": 0, "states": collections.Counter(), "recent": []})
+        g["total"] += 1
+        y = r[fi["yard"]]
+        yrow = src_yards[y] if isinstance(y, int) and 0 <= y < len(src_yards) else None
+        st = ycol(yrow, "state") or ""
+        if st:
+            g["states"][st] += 1
+        d = str(r[fi["dateAdded"]] or "")[:10]
+        if d and d >= cutoff:
+            vp = vpic.get(str(ri)) or []
+            vp = list(vp) + [""] * (5 - len(vp))
+            words = (trims_table.get(make) or {}).get(model) or []
+            hits = notable_trim_hits(make, words, vp[0], vp[1], vp[2]) if words else []
+            g["recent"].append([r[fi["year"]], y if yrow is not None else None, r[fi["row"]] or "", d,
+                                landed_drive(vp[3]), hits[0] if hits else "",
+                                r[fi["vin"]] or str(r[fi["id"]])])
+
+    by_make: dict[str, list] = {}
+    for (make, model), g in groups.items():
+        if (make, model) in no_pick:
+            continue
+        if g["total"] < LANDED_MODEL_MIN_ON_LOTS and len(g["recent"]) < LANDED_MODEL_MIN_WEEK:
+            continue
+        if not landed_slug(model) or not landed_slug(make):
+            continue
+        by_make.setdefault(make, []).append((model, g))
+
+    out_dir = DATA_DIR / LANDED_MODELS_DIR
+    out_dir.mkdir(parents=True, exist_ok=True)
+    index_makes: dict[str, dict] = {}
+    written: set[str] = set()
+    make_slugs: set[str] = set()
+    pages = 0
+    for make in sorted(by_make, key=lambda m: (-sum(g["total"] for _, g in by_make[m]), m)):
+        mslug = landed_slug(make)
+        if mslug in make_slugs:
+            print(f"  [landed models] skipped make {make!r}: slug {mslug!r} already used", file=sys.stderr)
+            continue
+        make_slugs.add(mslug)
+        # Two spellings of one model that slug the same ("Mazda3"/"MAZDA3"
+        # cannot happen after normalize_model, but never publish two pages
+        # on one URL): the one with more cars keeps it.
+        seen: set[str] = set()
+        models = []
+        for model, g in sorted(by_make[make], key=lambda mg: (-mg[1]["total"], mg[0])):
+            s = landed_slug(model)
+            if s in seen:
+                print(f"  [landed models] skipped {make} {model!r}: slug {s!r} already used", file=sys.stderr)
+                continue
+            seen.add(s)
+            models.append((model, s, g))
+        local: dict[int, int] = {}
+        yards_out: list[list] = []
+        models_out = []
+        for model, s, g in models:
+            g["recent"].sort(key=lambda x: (x[3], str(x[6])), reverse=True)
+            rows = []
+            for rec in g["recent"]:
+                y = rec[1]
+                if y is not None and y not in local:
+                    local[y] = len(yards_out)
+                    yr = src_yards[y]
+                    yards_out.append([ycol(yr, "location") or "", ycol(yr, "city") or "", ycol(yr, "state") or ""])
+                rows.append([rec[0], local.get(y) if y is not None else None] + rec[2:])
+            models_out.append({"model": model, "slug": s, "total": g["total"], "recentCount": len(rows),
+                               "states": dict(sorted(g["states"].items())), "recent": rows})
+        fname = f"{mslug}.json"
+        (out_dir / fname).write_text(json.dumps(
+            {"scrapedAt": payload.get("scrapedAt"), "days": LANDED_DAYS, "make": make, "slug": mslug,
+             "yards": yards_out, "models": models_out}, separators=(",", ":")))
+        written.add(fname)
+        pages += len(models_out)
+        index_makes[make] = {"slug": mslug,
+                             "total": sum(m["total"] for m in models_out),
+                             "recentCount": sum(m["recentCount"] for m in models_out),
+                             "models": [[m["model"], m["slug"], m["total"], m["recentCount"]] for m in models_out]}
+    for old in out_dir.glob("*.json"):
+        if old.name != "index.json" and old.name not in written:
+            old.unlink()
+    (out_dir / "index.json").write_text(json.dumps(
+        {"scrapedAt": payload.get("scrapedAt"), "days": LANDED_DAYS,
+         "minOnLots": LANDED_MODEL_MIN_ON_LOTS, "minWeek": LANDED_MODEL_MIN_WEEK,
+         "makes": dict(sorted(index_makes.items()))}, separators=(",", ":")))
+    return {"makes": len(index_makes), "models": pages}
+
+
+def _write_landed_models_safe(payload: dict) -> None:
+    """Never fatal to a scan: on failure the previous files stay (each page
+    prints the scan time its file carries)."""
+    try:
+        info = _write_landed_models_json(payload)
+        if info:
+            print(f"  [landed models] {info['models']} model pages across {info['makes']} makes", file=sys.stderr)
+    except Exception as e:  # noqa: BLE001
+        print(f"  [landed models] FAILED ({e}); previous files kept", file=sys.stderr)
+
+
 JUNKYARDS_NEWEST_PER_YARD = 10
 JUNKYARDS_TOP_MAKES = 10
 # Page city for the /junkyards/<state>/<city> pages where the feed's "city"
@@ -28398,6 +28662,7 @@ def main():
                     LIVE_FILE.write_text(json.dumps(payload, separators=(",", ":")))
                     _write_inventory_meta(payload)
                     _write_landed_json(payload)
+                    _write_landed_models_safe(payload)
                     _write_junkyards_json(payload)
                     _write_models_json(payload)
                     _write_model_lifespan_json(payload.get("scrapedAt"))
@@ -28442,6 +28707,7 @@ def main():
                 LIVE_FILE.write_text(json.dumps(payload, separators=(",", ":")))
                 _write_inventory_meta(payload)
                 _write_landed_json(payload)
+                _write_landed_models_safe(payload)
                 _write_junkyards_json(payload)
                 _write_models_json(payload)
                 _write_model_lifespan_json(payload.get("scrapedAt"))
