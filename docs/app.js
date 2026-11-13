@@ -3355,6 +3355,19 @@ function updateSavedPill() {
   if (!n) closeSavedSheet();
 }
 
+/* Hours live with the yard: we do not collect them (owner question
+ * 2026-11-13: "can I see the yard hours from a pull list?"). One tap opens
+ * the yard by name in the phone's maps app, which shows today's hours, the
+ * phone number and directions. Apple Maps in the iPhone app, Google Maps
+ * everywhere else. */
+function yardMapsUrl(yardName, city, state) {
+  const name = String(yardName || '').replace(/\s*\(Premium\)\s*/i, ' ').replace(/\s+-\s+/g, ' ').replace(/\s+/g, ' ').trim();
+  if (!name || /^unknown yard$/i.test(name)) return '';
+  const q = encodeURIComponent([name, [city, state].filter(Boolean).join(', ')].filter(Boolean).join(', '));
+  return /iPhone|iPad|Macintosh/.test(navigator.userAgent) && IS_NATIVE
+    ? `https://maps.apple.com/?q=${q}`
+    : `https://www.google.com/maps/search/?api=1&query=${q}`;
+}
 function renderSavedSheet() {
   const list = document.getElementById('saved-list');
   const entries = Object.entries(savedCars);
@@ -3375,6 +3388,7 @@ function renderSavedSheet() {
     return `
       <div class="saved-yard-group">
         <div class="saved-yard-name">${escapeHtml(yard)} &middot; ${items.length} car${items.length > 1 ? 's' : ''}</div>
+        ${(() => { const u = yardMapsUrl(yard, items[0][1].city, items[0][1].state); return u ? `<a class="saved-yard-link" href="${escapeHtml(u)}" target="_blank" rel="noopener" title="Opens this yard in Maps, which shows today’s hours">${ICON.pin} Hours and directions</a>` : ''; })()}
         ${items.map(([key, s]) => {
           const gone = savedIsGone(key);
           const parts = s.topParts || [];

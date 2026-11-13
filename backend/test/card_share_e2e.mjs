@@ -74,6 +74,27 @@ try {
     check('…the car screen did not open and the pull sheet is unchanged', !after.detail && after.saved === savedBefore, JSON.stringify(after));
     await page.waitForTimeout(1500);
     check('…the icon comes back', await page.evaluate(() => !!document.querySelector('#live-grid .car-card[data-vkey] .card-share svg')));
+    // Pull sheet: each yard has an "Hours and directions" link to Maps
+    // (the app does not collect yard hours; owner question 2026-11-13).
+    {
+      await page.click('#live-grid .car-card[data-vkey] .pull-btn');
+      await page.waitForTimeout(200);
+      await page.evaluate(() => openSavedSheet());
+      await page.waitForTimeout(300);
+      const hl = await page.evaluate(() => {
+        const a = document.querySelector('#saved-list .saved-yard-link');
+        if (!a) return null;
+        const r = a.getBoundingClientRect();
+        const yard = document.querySelector('#saved-list .saved-yard-name').textContent.split('·')[0].trim();
+        return { href: a.href, text: a.textContent.trim(), h: r.height, target: a.target, yard };
+      });
+      const firstWord = hl ? hl.yard.split(/[\s-]+/)[0] : '';
+      check('pull sheet: a yard has an "Hours and directions" link', !!hl && /Hours and directions/.test(hl.text), JSON.stringify(hl));
+      check('…to a Maps search for that yard, in a new tab, at least 44 px tall', !!hl && hl.href.includes('/maps/search/?api=1&query=') && decodeURIComponent(hl.href).includes(firstWord) && hl.target === '_blank' && hl.h >= 43.5, JSON.stringify(hl));
+      await page.evaluate(() => { closeSavedSheet(); });
+      await page.click('#live-grid .car-card[data-vkey] .pull-btn');
+      await page.waitForTimeout(200);
+    }
     // Details still opens the car screen.
     await page.click('#live-grid .car-card[data-vkey] .cc-actions .car-open');
     await page.waitForTimeout(400);
