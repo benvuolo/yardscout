@@ -47,7 +47,13 @@ const server = http.createServer((req, res) => {
     res.end(src.replace(/^const NOTABLE_TRIMS_FREE = (true|false);$/m, `const NOTABLE_TRIMS_FREE = ${freeMode};`));
     return;
   }
-  const body = inject ? serveWithNotableTrims(f) : null;
+  let body = inject ? serveWithNotableTrims(f) : null;
+  // inject = false means "data from before the first scan that had the
+  // list": strip it, since the checked-out data carries it now (2026-11-13).
+  if (!inject && /[\\/]data[\\/](inventory_live|inv[\\/]manifest)\.json$/.test(f)) {
+    const j = JSON.parse(fs.readFileSync(f, 'utf8'));
+    if (j.notableTrims) { delete j.notableTrims; body = Buffer.from(JSON.stringify(j)); }
+  }
   if (body) res.end(body); else fs.createReadStream(f).pipe(res);
 });
 await new Promise(r => server.listen(0, '127.0.0.1', r));
