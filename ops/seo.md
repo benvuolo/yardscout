@@ -20,6 +20,57 @@ name included).
 - No new fetches beyond the data files the worker already reads; price files
   and the junkyards index are parsed once per isolate and cached.
 
+## Model pages: branch `seo/model-pages`, not merged, not deployed (2026-11-13)
+
+Business plan priority 8 and the r/XTerra lesson (a weekly per-model list,
+state first). `/landed/<make>/<model>`, e.g. `/landed/nissan/xterra`
+(slugs are `slugify()` of the scan's make and model names).
+
+- **Threshold:** 100+ cars on the lots now, or 10+ set out in the last 7
+  days. 2026-11-13 scan: 380 + 25 = **405 model pages across 40 makes**.
+  No-pick and blank model names never get a page. Constants
+  `LANDED_MODEL_MIN_ON_LOTS` / `LANDED_MODEL_MIN_WEEK` in the scraper.
+- **Data:** `docs/data/landed/index.json` (~14 KB: models with pages and
+  their counts) and one file per make (`landed/<make>.json`, 41 files,
+  ~2.1 MB in all, Ford largest at ~290 KB), written each scan by
+  `_write_landed_models_json` beside landed.json (same counting rules).
+  Per car: year, yard, row, date, drive ("4x4"/"AWD"/"2WD"/"" from the VIN
+  decode), notable trim ("" unless the app's badge rule names one; Python
+  port of `notableTrimHits`, checked equal to app.js on all 108,723
+  candidate decodes of the 11-13 scan), share key.
+- **Pages:** query-shaped title/H1, lead with count, yards, states, scan time;
+  the whole week's list by state (A–Z), then yard (newest first), then car;
+  jump list; "On the lots now" by-state table (so a zero week still has a
+  page); CTAs `/#cars=Make|Model` and `/#watch=Make|Model`; stores line;
+  honest note; links up (make), across (sibling models), hub (junkyards).
+  JSON-LD BreadcrumbList + ItemList (newest 100 cars). Unknown → 404 noindex;
+  data unreadable → 503 "briefly unavailable"; **before the first scan writes
+  `docs/data/landed/`** (index 404) → 503 noindex holding page linking the
+  make page. Nothing links to model pages until the index exists.
+- **Wired:** sitemap (lastmod = scan), make pages (model headings + "every
+  model" grid), `/landed` hub (top 24 models this week), car pages ("Every
+  <Make> <Model> set out this week"), yard pages (model tiles link).
+- Tests: `node test/model_pages_unit.mjs` (57) beside the three above;
+  scraper `python3 scraper/test_landed_models.py` (52 checks, incl. a node
+  run of app.js for the trim rule).
+
+**On merge:** `deploy-workers.yml` deploys the Worker (path `backend/**`);
+the next 4-hourly `scan.yml` run that starts after the merge writes
+`docs/data/landed/`; GitHub Pages serves it a few minutes after that scan's
+commit. Until then model URLs answer the holding page. Owner: submit the
+sitemap again in Search Console once the files are live.
+
+**Open / next:**
+- The make page caps its list at 40 ("the nationwide search is Pro's Any
+  distance"); model pages list the whole week, as the Reddit post did.
+  Owner's call if that should change.
+- AWD is printed as "AWD" (neither bold 4x4 nor 2WD).
+- Truck trims (TRD Pro, FX4, PRO-4X…) rarely show: the VIN decode does not
+  name them (ops/hub.md 11-13).
+- Suggest: a "this week in <state>" filter or `/landed/<make>/<model>/<state>`
+  pages if the model pages get traffic; Reddit replies can link the model
+  page (`ops/reddit.md`) instead of the app hash.
+
 ## Status: branch `seo/onpage-1`, not merged, not deployed (2026-11-12)
 
 Merging to main deploys the worker (`deploy-workers.yml`) and the Pages
@@ -66,7 +117,7 @@ test/redirects_unit.mjs && node test/prices_unit.mjs` (222 + 51 + 39 checks).
 - **Measurement beacon** on rendered pages (referrer, landing page type,
   crawler counts): waits for the owner's wording of the "no analytics" line
   in `docs/privacy.html`.
-- **Make/model pages** (`/cars/<make>/<model>`): needs a per-model aggregate
+- **Make/model pages**: built as `/landed/<make>/<model>` (see above); was: needs a per-model aggregate
   from the scan (scraper change) and a call on free versus Pro detail.
 - **Interchange pages**: the Interchange workstream's release gate applies.
 - **Store listing text**: needs the owner's "ship" (standing rule 1).
