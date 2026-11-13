@@ -1771,3 +1771,8 @@
 22:47:29 start site=www.bmwpartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2220 list_lines=3818 year_lines=467 url_index=0
 22:47:29 completion worklist completion/bmw.own_page.json: 507 rows
 23:18:53 time budget reached records=2222
+08:34:14 start site=www.bmwpartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2222 list_lines=4010 year_lines=495 url_index=0
+08:34:14 completion worklist completion/bmw.own_page.json: 507 rows
+08:55:06 chain-unlinked door-front 1 numbers named by 41-51-1-959-001, no catalog link: 41-51-1-929-809
+08:55:06 chain-unlinked door-front 1 numbers named by 41-51-1-959-002, no catalog link: 41-51-1-929-810
+09:04:35 time budget reached records=2228
