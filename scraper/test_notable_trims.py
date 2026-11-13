@@ -42,6 +42,16 @@ def words(make, model, lo, hi):
     return NT({make: {model: [lo, hi]}}).get(make, {}).get(model)
 
 
+def gate_words(make, model, lo, hi):
+    """Gate-derived words only (NOTABLE_TRIM_LABELS emptied for the call)."""
+    saved = dict(js.NOTABLE_TRIM_LABELS)
+    js.NOTABLE_TRIM_LABELS.clear()
+    try:
+        return words(make, model, lo, hi)
+    finally:
+        js.NOTABLE_TRIM_LABELS.update(saved)
+
+
 print("derived from gates:")
 check("Forester 1998-2024 -> ['XT']", words("Subaru", "Forester", 1998, 2024) == ["XT"],
       str(words("Subaru", "Forester", 1998, 2024)))
@@ -50,9 +60,9 @@ check("Toyota 4Runner 2010-2024 has TRD Pro", "TRD Pro" in (words("Toyota", "4Ru
 check("Nissan Frontier has PRO-4X", "PRO-4X" in (words("Nissan", "Frontier", 2005, 2020) or []),
       str(words("Nissan", "Frontier", 2005, 2020)))
 # Outback: Wilderness row has yr_min 2022, so a span ending 2021 lists nothing.
-check("Outback 2000-2021 -> none (Wilderness is 2022+)", words("Subaru", "Outback", 2000, 2021) is None,
-      str(words("Subaru", "Outback", 2000, 2021)))
-check("Outback 2000-2024 -> ['Wilderness']", words("Subaru", "Outback", 2000, 2024) == ["Wilderness"])
+check("Outback gates 2000-2021 -> none (Wilderness is 2022+)", gate_words("Subaru", "Outback", 2000, 2021) is None,
+      str(gate_words("Subaru", "Outback", 2000, 2021)))
+check("Outback gates 2000-2024 -> ['Wilderness']", gate_words("Subaru", "Outback", 2000, 2024) == ["Wilderness"])
 check("unknown model -> omitted", NT({"Subaru": {"Nonesuch": [2000, 2010]}}) == {})
 check("bad span skipped", NT({"Subaru": {"Forester": ["x", None]}}) == {})
 
@@ -74,11 +84,35 @@ check("_trim_display keeps mixed case", js._trim_display("tS") == "tS" and js._t
 check("_trim_display capitalises long lowercase", js._trim_display("hybrid") == "Hybrid")
 check("_trim_word_key", js._trim_word_key("PRO-4X") == js._trim_word_key("Pro 4x") == "pro4x")
 
+print("labels (NOTABLE_TRIM_LABELS, labels only):")
+check("Outback 2000-2024 -> gate word first, then the label: ['Wilderness', 'XT']",
+      words("Subaru", "Outback", 2000, 2024) == ["Wilderness", "XT"], str(words("Subaru", "Outback", 2000, 2024)))
+check("Outback 2000-2021 -> label only: ['XT']", words("Subaru", "Outback", 2000, 2021) == ["XT"],
+      str(words("Subaru", "Outback", 2000, 2021)))
+check("Jeep Liberty (no trim gate) -> ['Renegade']", words("Jeep", "Liberty", 2002, 2012) == ["Renegade"],
+      str(words("Jeep", "Liberty", 2002, 2012)))
+check("labels key by the exact model: 'Legacy Outback' gets no XT label",
+      "XT" not in (words("Subaru", "Legacy Outback", 2000, 2004) or []))
+check("every label is a non-empty word with letters",
+      all(w and any(c.isalpha() for c in w) for ws in js.NOTABLE_TRIM_LABELS.values() for w in ws))
+# A label never reaches match_vehicle: same output with the table emptied.
+_saved = dict(js.NOTABLE_TRIM_LABELS)
+_cases = [(2008, "Subaru", "Outback", {"trim": "OBK 2.5XT LTD", "trimQuality": "usable"}),
+          (2007, "Subaru", "Outback", {"trim": "XT Limited", "trimQuality": "usable"}),
+          (2016, "Jeep", "Cherokee", {"trim": "Trailhawk", "trimQuality": "usable", "series": "KL"}),
+          (2005, "Jeep", "Liberty", {"trim": "Renegade", "trimQuality": "usable", "series": "KJ"}),
+          (2021, "Chevrolet", "Silverado 1500", {"trim": "Trail Boss - LT", "trimQuality": "usable", "series": "1500"})]
+_with = [json.dumps(js.match_vehicle(y, mk, md, vin_decode=d), sort_keys=True, default=str) for y, mk, md, d in _cases]
+js.NOTABLE_TRIM_LABELS.clear()
+_without = [json.dumps(js.match_vehicle(y, mk, md, vin_decode=d), sort_keys=True, default=str) for y, mk, md, d in _cases]
+js.NOTABLE_TRIM_LABELS.update(_saved)
+check("labels change no match_vehicle output (5 label cars)", _with == _without)
+
 print("specificity guard (refactor):")
 gc = js._matched_entries(1998, js._keyword_hits("jeep grand cherokee"))
 check("1998 Jeep Grand Cherokee: no plain 'cherokee' entry", all(kw != "cherokee" for kw, _ in gc), str([k for k, _ in gc]))
-gw = words("Jeep", "Grand Cherokee", 1993, 2024) or []
-xj = words("Jeep", "Cherokee", 1984, 2001) or []
+gw = gate_words("Jeep", "Grand Cherokee", 1993, 2024) or []
+xj = gate_words("Jeep", "Cherokee", 1984, 2001) or []
 check("Grand Cherokee words are not the XJ's (guard applies)", gw != xj or not xj, f"{gw} {xj}")
 
 print("payload:")

@@ -329,3 +329,7 @@ combinations against main. Test: `python3 scraper/test_notable_trims.py`.
   list as a match, so it can VIN-confirm a trim-gated part the car may not
   have (not measured here).
   Recommendation: rate such decodes `ambiguous` in the trim-quality pass.
+- Hub follow-up: notableTrims also carries `NOTABLE_TRIM_LABELS` words
+  (labels only, appended after the gate words; list and drops in
+  ops/parts.md). 248 pairs, ~6.5 KB. Badged cars on 11-13: 1,809 across
+  61 make/model names (1,686 from gates + 123 from labels).

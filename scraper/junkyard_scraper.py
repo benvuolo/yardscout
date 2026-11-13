@@ -26835,6 +26835,23 @@ def _trim_display(word: str) -> str:
                   lambda m: m.group(0).upper() if len(m.group(0)) <= 3 else m.group(0).capitalize(), w)
 
 
+# Notable-trim LABELS (hub, 2026-11-13). Labels only: a word here adds no
+# parts row, confirms no gated row and changes no value. It only lets the
+# app badge and filter cars whose VIN decode names that trim (the owner's
+# "which Outbacks are XT?"). Keyed by (make, model) as published, lowercase;
+# merged into notableTrims AFTER the gate-derived words. Each word is a real
+# factory trim of that model AND appears in this repo's own VIN decodes for
+# it (checked on the 2026-11-13 data); words the decode never produces for
+# the model were left out (the dropped list is in ops/parts.md).
+NOTABLE_TRIM_LABELS: dict[tuple[str, str], tuple[str, ...]] = {
+    ("subaru", "outback"): ("XT",),                    # "OBK 2.5XT LTD", "XT Limited" (2007-09)
+    ("jeep", "cherokee"): ("Trailhawk",),              # KL, 2014-20
+    ("jeep", "grand cherokee"): ("Trailhawk",),        # WK2, 2017-18
+    ("jeep", "liberty"): ("Renegade",),                # KJ / KK
+    ("chevrolet", "silverado 1500"): ("Trail Boss",),  # "Trail Boss - LT", "Trail Boss Custom" (2021)
+}
+
+
 def notable_trims_from_spans(spans: dict) -> dict:
     """make -> model -> trim words the parts table gates rows on, for the
     app's trim badge and Cars "Trim" filter (design/notable-trims,
@@ -26851,7 +26868,8 @@ def notable_trims_from_spans(spans: dict) -> dict:
     table's first-seen order (DB order, then row order) and spelling (see
     _trim_display); spelling variants collapse to the first. Pairs with no
     word are omitted. The app badges a car only when its USABLE
-    VIN-decoded trim matches one of these words."""
+    VIN-decoded trim matches one of these words. NOTABLE_TRIM_LABELS words
+    (labels only, no parts meaning) are appended after the gate words."""
     out: dict[str, dict[str, list[str]]] = {}
     for mk, models in spans.items():
         for md, span in models.items():
@@ -26860,12 +26878,10 @@ def notable_trims_from_spans(spans: dict) -> dict:
             except (TypeError, ValueError, IndexError):
                 continue
             hits = _keyword_hits(f"{str(mk).lower()} {str(md).lower()}")
-            if not hits:
-                continue
             model_l = str(md).lower()
             words: list[str] = []
             keys: set[str] = set()
-            for year in range(y0, y1 + 1):
+            for year in range(y0, y1 + 1) if hits else ():
                 for _kw, info in _matched_entries(year, hits):
                     for p in info["top_parts"]:
                         if "trim" not in p or p.get("option"):
@@ -26881,6 +26897,12 @@ def notable_trims_from_spans(spans: dict) -> dict:
                             if _gate_hit((str(w).lower(),), model_l):
                                 continue  # the model name already says it
                             words.append(_trim_display(w))
+            # Labels only, after the gate words (see NOTABLE_TRIM_LABELS).
+            for w in NOTABLE_TRIM_LABELS.get((str(mk).lower(), model_l), ()):
+                k = _trim_word_key(w)
+                if k and k not in keys and not _gate_hit((w.lower(),), model_l):
+                    keys.add(k)
+                    words.append(w)
             if words:
                 out.setdefault(mk, {})[md] = words
     return {mk: dict(sorted(v.items())) for mk, v in sorted(out.items())}

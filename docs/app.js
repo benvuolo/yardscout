@@ -4704,7 +4704,10 @@ function notableTrimHits(v) {
   const sides = [v.vpicTrim, v.vpicSeries].map(s => String(s || '').trim()).filter(Boolean);
   if (!sides.length || sides.some(s => TRIM_NEGATION.test(s))) return [];
   const alts = sides.map(s => trimAlternatives(s, words));
-  const hits = words.filter(w => alts.some(a => a.length && a.every(t => trimFilterMatches(w, t, '', v.make))));
+  // "ST-Line" / "R-Line" are appearance packages, not the ST or the R.
+  const names = (w, t) => trimFilterMatches(w, t, '', v.make)
+    && (/line$/i.test(w) || !tokensContain(trimTokens(t), [...trimTokens(w), 'line']));
+  const hits = words.filter(w => alts.some(a => a.length && a.every(t => names(w, t))));
   return hits.filter(w => !hits.some(o => o !== w && trimTokens(o).length > trimTokens(w).length
     && tokensContain(trimTokens(o), trimTokens(w))));
 }

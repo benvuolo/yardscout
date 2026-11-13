@@ -365,3 +365,22 @@ not count. No parts rows or gating were changed.
   Accord/Fusion/Elantra "Sport", GR86 "Premium", VW "R"/"Autobahn". If any
   of those is not a real trim split for parts, the gate itself is the
   thing to revisit.
+- 2026-11-13 hub follow-up: `NOTABLE_TRIM_LABELS` (junkyard_scraper.py),
+  a separate LABEL list merged into notableTrims after the gate words.
+  Labels only: a word there adds no parts row, confirms no gated row and
+  changes no value (match_vehicle output identical to main on 37,407
+  combinations with the list in place). Kept, each seen in this repo's own
+  decodes for that model on 11-13: Outback XT (11 cars), Cherokee
+  Trailhawk (24), Grand Cherokee Trailhawk (3), Liberty Renegade (82),
+  Silverado 1500 Trail Boss (3). Dropped, the decode never produces them
+  for the model: Baja Turbo, Tacoma TRD Pro / TRD Off-Road / PreRunner /
+  X-Runner, Tundra TRD Pro, FJ Cruiser Trail Teams, Ranger FX4, F-150
+  Lightning / Harley-Davidson, Sierra 1500 AT4, Frontier Nismo, Explorer
+  ST (its only hit is "ST-Line", an appearance package; the app no longer
+  reads "<word>-Line" as the word).
+- 2005–06 Outbacks decoding "2.5GT" / "2.5GT Limited" (21 cars): VINs
+  4S4BP67C / 4S4BP68C, same BP body and engine code "C" as the 2007–09
+  "XT Limited" (4S4BP63C), with the 5-speed automatic or 5MT the NA 2.5i
+  did not have then. They look like Outback XTs under the Legacy GT name.
+  Not badged (the label is "XT"; "GT" is not an Outback word). If wanted:
+  a label alias "2.5GT" -> "XT" for 2005–06 Outbacks, with a basis.

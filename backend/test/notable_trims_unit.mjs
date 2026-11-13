@@ -49,6 +49,8 @@ const TABLE = {
   Dodge: { Dakota: ['R/T'] },
   Toyota: { '4Runner': ['Trail', 'TRD Off-Road', 'TRD Pro', 'Limited'] },
   Volvo: { S60: ['R', 'T6 R'] },
+  Ford: { Explorer: ['ST'] },                 // a label-only word (NOTABLE_TRIM_LABELS shape)
+  Volkswagen: { Golf: ['GTI', 'R', 'Autobahn'] },
 };
 const car = (make, model, trim, q = 'usable', series = '') => ({ make, model, vpicTrim: trim, vpicTrimQuality: q, vpicSeries: series });
 
@@ -103,6 +105,17 @@ same('"Premier (non R design)" is not R', hit(car('Volvo', 'S60', 'Premier (non 
 same('"Base (non R design)" is not R', hit(car('Volvo', 'S60', 'Base (non R design)')), []);
 same('"R-Line"-style word with R alone still R (word match, as the trim watch)', hit(car('Volvo', 'S60', 'R')), ['R']);
 same('null car', hit(null), []);
+same('"ST-Line" is not ST (appearance package)', hit(car('Ford', 'Explorer', 'ST-Line')), []);
+same('"R-Line" is not R', hit(car('Volkswagen', 'Golf', 'R-Line')), []);
+same('"ST" is ST', hit(car('Ford', 'Explorer', 'ST')), ['ST']);
+same('"Golf R" trim "R" is R', hit(car('Volkswagen', 'Golf', 'R')), ['R']);
+same('"N Line" still names N Line', hit(car('Hyundai', 'Elantra', 'N Line')), ['N Line']);
+// Gate-derived and label words are one list to the app: both badge.
+T.setNotableTrims({ ...TABLE, Subaru: { ...TABLE.Subaru, Outback: ['Wilderness', 'XT'] } });
+same('gate word badges (Outback "Wilderness")', hit(car('Subaru', 'Outback', 'Wilderness')), ['Wilderness']);
+same('label word badges (Outback "OBK 2.5XT LTD")', hit(car('Subaru', 'Outback', 'OBK 2.5XT LTD')), ['XT']);
+same('Outback "2.5GT Limited" is not XT', hit(car('Subaru', 'Outback', '2.5GT Limited')), []);
+T.setNotableTrims(TABLE);
 
 /* ---- maybe (counted as "no single trim") ---- */
 check('maybe: unusable decode', T.notableTrimMaybe(car('Subaru', 'Forester', '', 'empty'), 'XT'));
