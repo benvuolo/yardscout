@@ -7903,3 +7903,12 @@
 23:52:29 chain-unlinked hood 3 numbers named by 68534237AC, no catalog link: 68534237AB, 68534237AA, 68534237AD
 23:55:09 nav-fail Dodge Dakota 2011: NavError: https://www.jeeppartsdeal.com/catalog/2011-dodge-dakota-parts redirected to https://www.jeeppartsdeal.com/dodge-dakota-parts
 00:19:25 time budget reached records=6948
+07:01:01 start site=www.jeeppartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=6948 list_lines=5961 year_lines=918 url_index=34522
+07:01:01 completion worklist completion/mopar.own_page.json: 657 rows
+07:27:10 list-fail https://www.jeeppartsdeal.com/parts-list/2015-ram-promaster-3500/body-hardware/fender-components: NavError: no __INITIAL_STORE__ on page
+07:27:18 list-fail https://www.jeeppartsdeal.com/parts-list/2015-ram-promaster-3500/body-hardware/cluster-switches: NavError: HTTP 502 for https://www.jeeppartsdeal.com/parts-list/2015-ram-promaster-3500/body-hardware/cluster-switches
+07:31:59 chain-unlinked gauge-cluster 2 numbers named by 68437726AC, no catalog link: 68437726AB, 68437726AA
+07:31:59 chain-unlinked gauge-cluster 3 numbers named by 68437733AD, no catalog link: 68437733AC, 68437733AA, 68437733AB
+07:31:59 chain-unlinked gauge-cluster 1 numbers named by 68437740AD, no catalog link: 68437740AC
+07:31:59 chain-unlinked gauge-cluster 3 numbers named by 68437744AD, no catalog link: 68437744AC, 68437744AB, 68437744AA
+07:32:47 time budget reached records=6960
