@@ -600,3 +600,17 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
 - Plugin limit noted by the builder: both native Purchases plugins reject
   with text only, so several store errors share one "store" class. Splitting
   them needs a small native change in a later release.
+
+## 2026-11-13 ~23:50 UTC pull sheet: hours and directions link (sw jh-v195)
+
+- Owner asked whether yard hours can be seen from the pull sheet. They could
+  not: the app collects no yard hours, and the pull sheet showed only the
+  yard name and its cars.
+- 4d68a992: each yard on the pull sheet gets an "Hours and directions" link
+  that opens the yard by name, city and state in Maps (Apple Maps in the
+  iPhone app, Google Maps elsewhere). No hours are stored or claimed by us.
+  card_share_e2e extended (21 checks pass); ui_no_truncation pull-sheet
+  screen at 320/360/390/402/1280: 20 checks, 0 failures.
+- Not built: real opening hours shown in the app. That needs a per-chain
+  source for hours (Pick-n-Pull, Pick Your Part and Pull-A-Part publish them
+  per store) and a rule for holidays; owner to decide.
