@@ -902,6 +902,7 @@ const yearVal = (id) => { const el = document.getElementById(id); return (el && 
 function parseInventoryPayload(raw) {
   setNoPickModels(raw && !Array.isArray(raw) ? raw.noPickModels : null);
   setModelYears(raw && !Array.isArray(raw) ? raw.modelYears : null);
+  setNotableTrims(raw && !Array.isArray(raw) ? raw.notableTrims : null);
   {
     if (raw && raw.schemaVersion === 2 && Array.isArray(raw.vehicles)) {
       // v2 compact format: expand lookup-table rows into full vehicle objects.
@@ -1829,6 +1830,7 @@ function _invApply(s) {
   setPublishedPhotoSources(m.photoSources);
   setNoPickModels(m.noPickModels);
   setModelYears(m.modelYears);
+  setNotableTrims(m.notableTrims);
   vehicleExtras = s.extras;
   s.applied = new Set(s.parsed.keys());
   if (complete) s.done = true;
@@ -3462,6 +3464,7 @@ function renderCarDetail() {
     <p class="eyebrow">${dateStr ? 'Set out ' + dateStr : 'Set-out date unknown'}${isNew(v.dateAdded) ? ' &middot; <span class="eyebrow-new">New</span>' : ''}</p>
     <h2 class="cd-name" id="car-detail-title">${escapeHtml(`${v.year} ${v.make} ${v.model}`)}</h2>
     ${specs.length ? `<p class="cd-spec">${specs.join(' &middot; ')}</p>` : ''}
+    ${notableTrimOf(v) ? `<p class="cd-spec cd-trim">${notableTrimBadgeHtml(v)} The VIN names this trim (NHTSA decode).</p>` : ''}
     ${isConfirmedManual(v) ? `<p class="cd-spec"><span class="badge badge-manual">Manual</span> ${escapeHtml(manualSourceInfo(v).tip)}</p>` : ''}
     <section class="locator">
       ${rowPlateHtml(v.row)}
@@ -3851,6 +3854,10 @@ function getFilteredLive() {
   // was tampered with.
   if (!isPro() && PRO_SORTS.has(sortBy)) sortBy = FREE_DEFAULT_SORT;
   const radiusMi = effectiveRadiusMi();
+  // Trim (NOTABLE TRIMS): only with exactly one model picked. The stats
+  // (cars per notable trim, cars that might be it) feed the Trim control.
+  const trimKey = liveTrimKey(), trimWord = liveTrimWord();
+  const trimStats = trimKey && notableTrims ? { key: trimKey, words: new Map(), unknown: new Map() } : null;
 
   let filtered = liveInventory.filter(v => {
     if (makeFilter && v.make !== makeFilter) return false;
@@ -3863,6 +3870,14 @@ function getFilteredLive() {
     if (activeZipCoords && radiusMi) {
       const d = vehicleDistanceMi(v);
       if (d == null || d > radiusMi) return false;
+    }
+    if (trimStats) {
+      const hits = notableTrimOf(v) ? v._nt : [];
+      for (const w of hits) trimStats.words.set(w, (trimStats.words.get(w) || 0) + 1);
+      if (trimWord && !hits.includes(trimWord)) {
+        if (notableTrimMaybe(v, trimWord)) trimStats.unknown.set(trimWord, (trimStats.unknown.get(trimWord) || 0) + 1);
+        return false;
+      }
     }
     // 'manual' is the only Show option besides All cars. (The old 'valuable
     // parts' option was removed in the Oct 2026 needs-first copy rework —
@@ -3944,6 +3959,7 @@ function getFilteredLive() {
       || (tieAscEff ? x[1] - y[1] : y[1] - x[1]));
     filtered = dec.map(d => d[2]);
   }
+  if (!focusedCarKey) _trimStats = trimStats;
   return filtered;
 }
 
@@ -3951,6 +3967,7 @@ function updateLiveFilterCount() {
   let n = 0;
   if (document.getElementById('live-filter-make').value) n++;
   if (selectedModels.size) n++;
+  if (liveTrimWord()) n++;
   if (document.getElementById('live-filter-year-min').value
       || document.getElementById('live-filter-year-max').value) n++;
   if (document.getElementById('live-filter-location').value) n++;
@@ -4378,6 +4395,7 @@ function renderLive() {
   if (carsIntent && activeZipCoords && !focusedCarKey) applyCarsIntent();
   carSearchSync();
   const vehicles = getFilteredLive();
+  renderTrimControl();
 
   // KPIs describe what the user is LOOKING AT (their zip/filters), not the
   // whole national database — that's what a parts hunter actually cares about.
@@ -4553,6 +4571,7 @@ function renderLive() {
     if (lotClock) whenBits.push(lotClock);
     const key = vehicleKey(v);
     const manualBadge = isConfirmedManual(v) ? `<span class="badge badge-manual" title="${escapeHtml(manualSourceInfo(v).tip)}">Manual</span>` : '';
+    const trimBadge = notableTrimBadgeHtml(v);
     const d = vehicleDistanceMi(v);
     // Pull-sheet card: row plate is the hero datum, one primary action
     // (add to pull sheet); watch, share, VIN and the yard link live on the
@@ -4569,7 +4588,7 @@ function renderLive() {
             <div class="car-meta">${stayMeterHtml(daysOn, lotAvg)}<span class="car-meta-text">${whenBits.join(' &middot; ')}${vm.warn}</span></div>
             ${longListed ? longListedHtml(daysOn, 'card-long') : ''}
           </div>
-          ${manualBadge || statusBadge ? `<div class="car-badges">${manualBadge}${statusBadge}</div>` : ''}
+          ${trimBadge || manualBadge || statusBadge ? `<div class="car-badges">${trimBadge}${manualBadge}${statusBadge}</div>` : ''}
         </div>
         ${profitLine}
         ${val && val.nParts ? `<button type="button" class="parts-summary car-open" data-vkey="${escapeHtml(key)}"><span>${val.partsSummary}</span>${ICON.chev}</button>` : ''}
@@ -4634,6 +4653,127 @@ document.getElementById('live-filter-model-clear').addEventListener('click', () 
 });
 document.getElementById('live-filter-model-done').addEventListener('click', () => closeModelPanel());
 
+/* ===== NOTABLE TRIMS (2026-11-13) =====
+ * Owner: "For Subaru Outback, can we know which ones are Outback XT? Same
+ * with Forester or other similar cars that have that trim that makes the
+ * difference." A notable trim is a word the parts table already gates rows
+ * on for that model (Forester "XT", 4Runner "TRD Pro", F-150 "Raptor"); the
+ * scan publishes them per make/model as notableTrims (scraper
+ * notable_trims_from_spans: non-option gates only), so nothing new is
+ * claimed here. Before a scan carries the field there are no badges and no
+ * Trim control. A car shows one only when its VIN decode is 'usable' AND
+ * names that trim alone: decodes that list several trims ("SE / Limited",
+ * "Sport, R/T") or say what it is not ("non R design") never badge, even
+ * though the decoder rates some of them usable. Matching is
+ * trimFilterMatches (the Pro trim watch's), so "2.5XT", "OBK 2.5XT LTD" and
+ * "XT Limited" are all XT while "2.5X" is not. Free: the badge, the Cars
+ * Trim filter and the search rows; trim ALERTS stay Pro (watch logic is
+ * unchanged). */
+let notableTrims = null;   // { make: { rawModel: [word] } } or null
+function setNotableTrims(m) {
+  notableTrims = (m && typeof m === 'object' && !Array.isArray(m)) ? m : null;
+}
+function notableTrimWords(make, model) {
+  const l = notableTrims && notableTrims[make] && notableTrims[make][model];
+  return Array.isArray(l) ? l.filter(w => typeof w === 'string' && w.trim()) : [];
+}
+// A decode that says what the car is NOT never names its trim.
+const TRIM_NEGATION = /(^|[^a-z])(non|except|excl|without|w\/o)([^a-z]|$)/i;
+/* The trims a decode string offers: "SE / SE NAVI / Limited" is three,
+ * "Turbo R-Spec, Turbo and Turbo Ultimate" three, "Limited/Limited
+ * w/Ultimate" two. A gate word with a slash in it ("R/T") stays whole. */
+function trimAlternatives(text, words) {
+  let s = String(text || '').replace(/(^|[^a-z])w\//gi, '$1with ');
+  const kept = [];
+  for (const w of words || []) {
+    if (!/[/,&;]/.test(w)) continue;
+    const re = new RegExp(w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+    s = s.replace(re, () => `\u0001${kept.push(w) - 1}\u0002`);
+  }
+  return s.split(/\s*(?:[/,;&]|\band\b|\bor\b)\s*/i)
+    .map(p => p.replace(/\u0001(\d+)\u0002/g, (_, i) => kept[+i]).trim())
+    .filter(Boolean);
+}
+/* The model's notable words this car's decode names, in the parts table's
+ * order; a word inside a longer hit ("N" in "N Line", "RS" in "2.5RS")
+ * gives way to it. [] when the decode is not usable or names none alone. */
+function notableTrimHits(v) {
+  if (!v || v.vpicTrimQuality !== 'usable') return [];
+  const words = notableTrimWords(v.make, v.model);
+  if (!words.length) return [];
+  const sides = [v.vpicTrim, v.vpicSeries].map(s => String(s || '').trim()).filter(Boolean);
+  if (!sides.length || sides.some(s => TRIM_NEGATION.test(s))) return [];
+  const alts = sides.map(s => trimAlternatives(s, words));
+  const hits = words.filter(w => alts.some(a => a.length && a.every(t => trimFilterMatches(w, t, '', v.make))));
+  return hits.filter(w => !hits.some(o => o !== w && trimTokens(o).length > trimTokens(w).length
+    && tokensContain(trimTokens(o), trimTokens(w))));
+}
+/* Could this car be that trim? No usable decode, or a decode that names
+ * the word inside a list or beside a "non": the Trim filter counts such
+ * cars as unknown (and says so), never as "not that trim". */
+function notableTrimMaybe(v, word) {
+  if (!v || v.vpicTrimQuality !== 'usable') return true;
+  return trimFilterMatches(word, v.vpicTrim, v.vpicSeries, v.make);
+}
+function notableTrimOf(v) {
+  if (!v) return '';
+  if (v._ntOf !== notableTrims) { v._ntOf = notableTrims; v._nt = notableTrimHits(v); }
+  return v._nt.length ? v._nt[0] : '';
+}
+function notableTrimBadgeHtml(v) {
+  const w = notableTrimOf(v);
+  return w ? `<span class="badge badge-trim" title="The VIN names the ${escapeHtml(w)} trim (NHTSA decode)">${escapeHtml(w)}</span>` : '';
+}
+
+/* Cars Filters -> Trim: shows once exactly one model is picked and that
+ * model has a notable trim among the cars the other filters leave. The
+ * choice belongs to that make + model (key) and is dropped as soon as
+ * either changes, by whatever route (Filters, search box, a link). */
+let liveTrim = { key: '', word: '' };
+let _trimStats = null;     // from getFilteredLive: { key, words: Map, unknown: Map }
+function liveTrimKey() {
+  const make = document.getElementById('live-filter-make').value;
+  return make && selectedModels.size === 1 ? make + '\u0000' + [...selectedModels][0] : '';
+}
+function liveTrimWord() {
+  const key = liveTrimKey();
+  if (liveTrim.word && liveTrim.key !== key) liveTrim = { key: '', word: '' };
+  return key ? liveTrim.word : '';
+}
+function setLiveTrim(word) {
+  liveTrim = { key: liveTrimKey(), word: word || '' };
+}
+function trimPlural(model, n) {
+  return n === 1 || /s$/i.test(model) ? model : model + 's';
+}
+function renderTrimControl() {
+  const wrap = document.getElementById('live-filter-trim-wrap');
+  const sel = document.getElementById('live-filter-trim');
+  const note = document.getElementById('live-filter-trim-note');
+  const word = liveTrimWord();
+  const st = _trimStats && _trimStats.key === liveTrimKey() ? _trimStats : null;
+  const words = st ? [...st.words.keys()] : [];
+  if (word && !words.includes(word)) words.push(word);
+  if (!words.length) { wrap.hidden = true; return; }
+  wrap.hidden = false;
+  sel.disabled = !activeZipCoords;
+  const pro = isPro();   // counts are Pro intel, as in the Make/Model lists
+  sel.innerHTML = '<option value="">Any trim</option>' + words.map(w =>
+    `<option value="${escapeHtml(w)}">${escapeHtml(w)}${pro ? ` (${(st && st.words.get(w)) || 0})` : ''}</option>`).join('');
+  sel.value = word;
+  const unknown = word && st ? st.unknown.get(word) || 0 : 0;
+  const model = [...selectedModels][0] || '';
+  const one = unknown === 1;
+  note.textContent = unknown
+    ? `${unknown.toLocaleString()} ${trimPlural(model, unknown)} ${one ? 'has' : 'have'} no single trim in ${one ? 'its' : 'their'} VIN data and ${one ? 'is' : 'are'} not shown.`
+    : '';
+  note.hidden = !unknown;
+}
+document.getElementById('live-filter-trim').addEventListener('change', (e) => {
+  setLiveTrim(e.target.value);
+  renderLive();
+});
+
 /* ===== CAR SEARCH (2026-11-12) =====
  * From the r/XTerra post: "I'd like to see donor cars near me without
  * specifying a part." The Cars tab always listed every car near the zip,
@@ -4644,28 +4784,34 @@ document.getElementById('live-filter-model-done').addEventListener('click', () =
  * selectedModels — then renders through renderLive, so sort, counts, the
  * stats bar, the watch strip and everything else follow unchanged.
  * #cars=<make>|<model>|<years> (model and years optional; parsed like
- * #watch=) opens the tab with those filters once a location is set. */
+ * #watch=) opens the tab with those filters once a location is set.
+ * Notable trims (2026-11-13): "outback xt" / "forester xt" also suggest a
+ * "Subaru Forester · XT" row that sets the Trim filter too, and the link
+ * takes an optional 4th field, #cars=Subaru|Forester||XT. Both are small on
+ * purpose: the badge and the Filters Trim control work without the box. */
 
 /* Lowercase alphanumerics: "4 Runner" = "4Runner", "f150" = "F-150". */
 function carSearchSquash(s) {
   return String(s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
 }
 
-/* #cars=<make>|<model>|<years>: model and years optional; years are
- * "2005-2015", "2005-", "-2015" or "2007". null when there is no make. */
+/* #cars=<make>|<model>|<years>|<trim>: model, years and trim optional;
+ * years are "2005-2015", "2005-", "-2015" or "2007" (or empty, as in
+ * #cars=Subaru|Outback||XT). null when there is no make. */
 function parseCarsHash(hash) {
   const m = /#cars=([^&]*)/.exec(String(hash || ''));
   if (!m) return null;
   let raw = m[1];
   try { raw = decodeURIComponent(raw.replace(/\+/g, ' ')); } catch (e) { /* keep as typed */ }
   const clean = (v) => String(v || '').replace(/[\u0000-\u001f<>"]/g, '').trim().slice(0, 60);
-  const [make, model, yrs] = raw.split('|').map(clean);
+  const [make, model, yrs, trim] = raw.split('|').map(clean);
   if (!make) return null;
   const y = /^(\d{4})?(?:-(\d{4})?)?$/.exec(yrs || '');
   const ok = (n) => (n >= 1900 && n <= 2100 ? n : null);
   const yrMin = y ? ok(+y[1]) : null;
   const yrMax = y ? ok(/-/.test(yrs) ? +y[2] : +y[1]) : null;
-  return { make, model: model || '', yrMin, yrMax: yrMin && yrMax && yrMax < yrMin ? null : yrMax };
+  return { make, model: model || '', yrMin, yrMax: yrMin && yrMax && yrMax < yrMin ? null : yrMax,
+    ...(trim && model ? { trim: trim.slice(0, 30) } : {}) };
 }
 
 /* Suggestions for what was typed. entries: { make, model, n, alts } where
@@ -4705,6 +4851,31 @@ function carSearchMatch(entries, q, limit = 8) {
   return out.slice(0, limit);
 }
 
+/* Model + notable trim rows ("forester xt" -> Subaru Forester · XT) for
+ * entries carrying trims: [[word, cars]]. Only once the text goes past the
+ * model name (with or without the make in front); tier 0 when it is the
+ * whole trim, 1 when it is the start of it. */
+function carSearchTrimMatch(entries, q, limit = 4) {
+  const sq = carSearchSquash, qs = sq(q), out = [];
+  if (!qs) return out;
+  for (const e of entries || []) {
+    if (!e.model || !e.trims || !e.trims.length) continue;
+    const ms = sq(e.model), heads = ['', sq(e.make), ...(e.alts || [])];
+    for (const [w, n] of e.trims) {
+      let t = -1;
+      for (const h of heads) {
+        const base = h + ms, full = base + sq(w);
+        if (qs.length <= base.length || !qs.startsWith(base) || !full.startsWith(qs)) continue;
+        t = qs === full ? 0 : (t === 0 ? 0 : 1);
+      }
+      if (t >= 0) out.push({ make: e.make, model: e.model, trim: w, n, tier: t });
+    }
+  }
+  out.sort((a, b) => a.tier - b.tier || (b.n || 0) - (a.n || 0)
+    || (a.make + a.model + a.trim).localeCompare(b.make + b.model + b.trim));
+  return out.slice(0, limit);
+}
+
 /* The one suggestion Enter may pick: the only one, or the only exact one. */
 function carSearchClearMatch(results) {
   if (!results || !results.length) return null;
@@ -4725,6 +4896,8 @@ function carSearchFind(entries, make, model) {
  * the same cars, junk makes and no-pick models the Make/Model lists use.
  * Rebuilt when that scope is (refreshScopedInventory swaps the array). */
 let _csIndex = null, _csIndexSrc = null;
+// A note a #cars= link leaves for the box once its filters show there.
+let _csLinkNote = '';
 function carSearchIndex() {
   if (_csIndex && _csIndexSrc === _scopedVehicles) return _csIndex;
   const makes = new Map(), pairs = new Map();
@@ -4734,8 +4907,9 @@ function carSearchIndex() {
     if (!v.model || isNoPickModel(v.make, v.model)) continue;
     const model = canonicalModel(v.make, v.model);
     const k = v.make + '\u0000' + model;
-    const p = pairs.get(k);
-    if (p) p.n++; else pairs.set(k, { make: v.make, model, n: 1 });
+    let p = pairs.get(k);
+    if (p) p.n++; else pairs.set(k, p = { make: v.make, model, n: 1, tm: null });
+    if (notableTrimOf(v)) for (const w of v._nt) (p.tm || (p.tm = new Map())).set(w, (p.tm.get(w) || 0) + 1);
   }
   const alts = (mk) => {
     const own = carSearchSquash(mk);
@@ -4744,7 +4918,7 @@ function carSearchIndex() {
   const altsOf = new Map([...makes.keys()].map(mk => [mk, alts(mk)]));
   _csIndex = [
     ...[...makes.entries()].map(([make, n]) => ({ make, model: '', n, alts: altsOf.get(make) })),
-    ...[...pairs.values()].map(p => ({ ...p, alts: altsOf.get(p.make) })),
+    ...[...pairs.values()].map(({ tm, ...p }) => ({ ...p, alts: altsOf.get(p.make), ...(tm ? { trims: [...tm.entries()] } : {}) })),
   ];
   _csIndexSrc = _scopedVehicles;
   return _csIndex;
@@ -4772,9 +4946,9 @@ function carSearchSetFilter(make, model) {
   return true;
 }
 
-function carSearchLabel(make, models) {
+function carSearchLabel(make, models, trim) {
   if (!make) return '';
-  if (models.length === 1) return `${make} ${models[0]}`;
+  if (models.length === 1) return `${make} ${models[0]}${trim ? ` \u00b7 ${trim}` : ''}`;
   return models.length ? `${make} (${models.length} models)` : make;
 }
 
@@ -4797,12 +4971,13 @@ function carSearchNote(html) {
 function carSearchSync() {
   const input = document.getElementById('car-search-input');
   const make = document.getElementById('live-filter-make').value;
-  const key = make + '\u0000' + [...selectedModels].join('\u0000');
+  const key = make + '\u0000' + [...selectedModels].join('\u0000') + '\u0001' + liveTrimWord();
   const typing = document.activeElement === input;
   if (key !== _csSyncKey && !typing) {
     _csSyncKey = key;
-    input.value = carSearchLabel(make, [...selectedModels]);
-    if (make) carSearchNote('');
+    input.value = carSearchLabel(make, [...selectedModels], liveTrimWord());
+    if (make) carSearchNote(_csLinkNote);
+    _csLinkNote = '';
     carSearchFit();
   }
   document.getElementById('car-search-clear').hidden = !(input.value || make);
@@ -4824,12 +4999,13 @@ function carSearchRender() {
   } else if (!liveLoaded || (_inv && !liveComplete && invViewPending())) {
     html = empty('Loading the cars near you&hellip;');
   } else {
-    _csResults = carSearchMatch(carSearchIndex(), q, 8);
+    const idx = carSearchIndex(), tr = carSearchTrimMatch(idx, q, 4);
+    _csResults = [...tr, ...carSearchMatch(idx, q, 8)].slice(0, 8);
     const r = effectiveRadiusMi();
     const pro = isPro();   // counts are Pro intel, as in the Make/Model lists
     html = _csResults.length ? _csResults.map((e, i) => `
       <div class="compare-suggest-item" role="option" id="cs-opt-${i}" aria-selected="false" data-i="${i}">
-        <span>${e.model ? `${escapeHtml(e.make)} <strong>${escapeHtml(e.model)}</strong>` : `<strong>${escapeHtml(e.make)}</strong> &middot; all models`}</span>
+        <span>${e.trim ? `${escapeHtml(e.make)} <strong>${escapeHtml(e.model)}</strong> &middot; <strong>${escapeHtml(e.trim)}</strong>` : e.model ? `${escapeHtml(e.make)} <strong>${escapeHtml(e.model)}</strong>` : `<strong>${escapeHtml(e.make)}</strong> &middot; all models`}</span>
         ${pro ? `<span class="csi-count">${e.n.toLocaleString()} ${e.n === 1 ? 'car' : 'cars'}</span>` : ''}
       </div>`).join('')
       : empty(`No car called &ldquo;${escapeHtml(q)}&rdquo; ${r ? `within ${r}&nbsp;mi` : 'in the inventory'} right now. This box finds cars by make or model, e.g. &ldquo;Xterra&rdquo;. Looking for a part? Use the Parts tab.`);
@@ -4860,6 +5036,7 @@ function carSearchSetActive(i) {
 
 function carSearchPick(e) {
   if (!e || !carSearchSetFilter(e.make, e.model)) return;
+  if (e.trim) setLiveTrim(e.trim);
   track('car-search');
   carSearchNote('');
   carSearchHide();
@@ -4894,9 +5071,9 @@ function startCarsIntent(c) {
   focusedCarKey = null;
   carsIntent = c;
   const input = document.getElementById('car-search-input');
-  input.value = `${c.make} ${c.model}`.trim();
+  input.value = `${c.make} ${c.model}`.trim() + (c.trim ? ` \u00b7 ${c.trim}` : '');
   // Keep the prefill until the filters actually change.
-  _csSyncKey = document.getElementById('live-filter-make').value + '\u0000' + [...selectedModels].join('\u0000');
+  _csSyncKey = document.getElementById('live-filter-make').value + '\u0000' + [...selectedModels].join('\u0000') + '\u0001' + liveTrimWord();
   document.getElementById('car-search-clear').hidden = false;
   carSearchNote(activeZipCoords ? '' : `Enter your zip above to see every ${escapeHtml(input.value)} near you.`);
   // Last: opening the tab can render, and so apply the link, right away.
@@ -4932,6 +5109,18 @@ function applyCarsIntent() {
   carSearchSetFilter(hit.make, hit.model);
   carSearchNote('');
   _csSyncKey = null;
+  if (c.trim && hit.model) {
+    // The trim as the model's notable trims spell it; any other word leaves
+    // the model's cars listed, with a note.
+    const want = carSearchSquash(c.trim);
+    const words = new Set((hit.trims || []).map(t => t[0]));
+    for (const raw of Object.keys((notableTrims && notableTrims[hit.make]) || {})) {
+      if (canonicalModel(hit.make, raw) === hit.model) notableTrimWords(hit.make, raw).forEach(w => words.add(w));
+    }
+    const w = [...words].find(x => carSearchSquash(x) === want);
+    if (w) setLiveTrim(w);
+    else _csLinkNote = `No ${escapeHtml(c.trim)} trim to pick for the ${escapeHtml(hit.model)} &mdash; showing every ${escapeHtml(`${hit.make} ${hit.model}`)} near you.`;
+  }
 }
 
 {
@@ -4947,7 +5136,7 @@ function applyCarsIntent() {
   input.addEventListener('focus', () => {
     // A box showing the current filter: select it so typing replaces it.
     if (input.value && _csSyncKey !== null
-        && input.value === carSearchLabel(document.getElementById('live-filter-make').value, [...selectedModels])) input.select();
+        && input.value === carSearchLabel(document.getElementById('live-filter-make').value, [...selectedModels], liveTrimWord())) input.select();
     if (input.value.trim()) carSearchRender();
   });
   input.addEventListener('blur', () => setTimeout(() => { carSearchHide(); carSearchSync(); }, 150));
@@ -8219,6 +8408,7 @@ function pfDonorCardHtml(r, cls, chip, valueHtml) {
   const ex = extrasFor(v);
   const photo = ex && ex[0] ? photoInfo(ex[0]) : null;
   const dateLbl = pfDateLabel(v.dateAdded);
+  const trimBadge = notableTrimBadgeHtml(v);
   return `<div class="pf-row-card ${cls}" data-vkey="${escapeHtml(key)}">
       ${cardPhotoHtml(v, key)}
       <div class="cc-head">
@@ -8228,6 +8418,7 @@ function pfDonorCardHtml(r, cls, chip, valueHtml) {
           ${chip ? `<div class="pf-chip-line">${chip}</div>` : ''}
           <div class="pf-meta">${escapeHtml(v.location)}${r.d != null ? ` &middot; <span class="dist">${Math.round(r.d)}\u00a0mi</span>` : ''}${dateLbl ? ` &middot; set out ${dateLbl}` : ' &middot; set-out date unknown'}${saleBadgeHtml(v.location)}</div>
         </div>
+        ${trimBadge ? `<div class="car-badges">${trimBadge}</div>` : ''}
       </div>
       ${r.srcLine ? `<details class="pf-src-more"><summary>Why it fits${r.srcUnit ? ` <span class="pf-src-unit">&middot; ${r.srcUnit}</span>` : ''} <span class="chev-r" aria-hidden="true"></span></summary><div class="pf-note pf-src">Source: ${r.srcLine}</div>${r.srcMore ? `<div class="pf-note pf-src-more-text">${r.srcMore}</div>` : ''}</details>` : ''}
       ${valueHtml ? `<div class="pf-value">${valueHtml}</div>` : ''}
@@ -9331,7 +9522,7 @@ function renderAlerts() {
             <div class="live-card-location">${ICON.pin} <span class="loc-name">${escapeHtml(v.location)}</span>${d != null ? ' <span class="dist">&middot; ' + Math.round(d) + '\u00a0mi</span>' : ''}${saleBadgeHtml(v.location)}</div>
             <div class="car-meta"><span class="car-meta-text">${dateStr ? `<span title="Set-out date published by the yard">Set out ${dateStr}</span>` : 'Set-out date unknown'}${vinMetaHtml(v).warn} &middot; matched: ${escapeHtml(matchedRules.join(', '))}</span></div>
           </div>
-          <div class="car-badges"><span class="badge badge-new">Watch hit</span></div>
+          <div class="car-badges">${notableTrimBadgeHtml(v)}<span class="badge badge-new">Watch hit</span></div>
         </div>
         ${recapLineHtml(v, matchedEntries)}
         ${isMatch && v.topParts && v.topParts.length ? `<button type="button" class="parts-summary car-open" data-vkey="${escapeHtml(key)}"><span>${v.topParts.length} part${v.topParts.length > 1 ? 's' : ''} to check: ${escapeHtml(partsByValue(v.topParts, v.location).slice(0, 3).map(p => p.name).join(', '))}${v.topParts.length > 3 ? ' and more' : ''}</span>${ICON.chev}</button>` : ''}

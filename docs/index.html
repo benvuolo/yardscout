@@ -210,6 +210,15 @@
               </div>
             </div>
           </div>
+          <!-- Trim: shown with one model picked when it has a notable trim
+               (docs/app.js NOTABLE TRIMS). -->
+          <div class="ctl ctl-trim" id="live-filter-trim-wrap" hidden>
+            <label for="live-filter-trim">Trim</label>
+            <select id="live-filter-trim" title="Trims the parts list treats separately, from the VIN">
+              <option value="">Any trim</option>
+            </select>
+            <p class="ctl-hint trim-note" id="live-filter-trim-note" hidden></p>
+          </div>
           <div class="ctl ctl-pair">
             <label for="live-filter-year-min">Years (optional)</label>
             <div style="display:flex;gap:0.4rem;align-items:center;">
