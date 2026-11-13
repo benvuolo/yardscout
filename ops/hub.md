@@ -564,3 +564,20 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
   App Store app and Pro both show CA and US (Pro CAD 11.99).
 - The Play API shows the saved setting, not whether Google has finished
   reviewing or rolling it out; same for Apple's "processing" state earlier.
+
+## 2026-11-13 ~22:40 UTC iOS 1.12.15 live; first scorecard read
+
+- asc-status run 43519623862: iOS 1.12.15 (37) is READY_FOR_SALE. Android
+  1.12.15 (38) is completed on Play production.
+- First scorecard (13:07 UTC email, week Nov 6–12, fixed counting from Nov
+  12 only): web first visits 35 on Nov 12 (117 in 7 d); reddit / xterra 20
+  tagged visits in the post's first hours, 0 watches, 0 emails, 0 checkouts;
+  Pro sheet opened 32, checkout taps 8 (iPhone 7, web 1), purchases 0;
+  6 paying subscribers (App Store 4, Play 1, web 1).
+- Gap: the app counts a checkout tap and a purchase and nothing between
+  (cancelled, pending, not completed, error, product failed to load). Builder
+  on `growth/checkout-outcomes`; hub reviews and merges. The apps need a
+  store release for it.
+- Next app release would carry: search box, tab scroll, filter fix, card
+  share, trim badge and filter, the model-range line, narrowing counters,
+  checkout outcomes. Needs the owner's "ship".
