@@ -7001,6 +7001,49 @@ def _gate_hit(tokens, text: str) -> bool:
     return any(_gate_pattern(t).search(text) for t in tokens)
 
 
+# A VIN decode can name several trims ("SE / SE NAVI / Limited / Limited
+# NAVI", "Sport, R/T") or say what the car is NOT ("Premier (non R design)").
+# Such a decode is not evidence for any one trim, so a trim gate is VIN-
+# confirmed only when, on the trim or the series side, EVERY alternative
+# names a gate word and no side says "non" (design/notable-trims, hub
+# 2026-11-13; the app's trim badge uses the same rule, notableTrimHits).
+# Single-trim decodes behave exactly as before.
+_TRIM_NEGATION_RE = re.compile(r"(?<![a-z])(?:non|except|excl|without|w/o)(?![a-z])")
+# A slash between two single letters ("R/T", "S/T") or two digits ("1/2")
+# is part of a name, not a list.
+_TRIM_SPLIT_RE = re.compile(
+    r"\s*(?:(?<![^a-z0-9][a-z])(?<!^[a-z])(?<!\d)/|/(?![a-z](?![a-z0-9]))(?!\d)|[,;&]|\band\b|\bor\b)\s*")
+
+
+def _trim_alternatives(text: str, protect=()) -> list[str]:
+    """The trims a decode string offers, lowercase. A gate word with a
+    separator in it ("r/t") stays whole; "w/" is not a separator."""
+    s = re.sub(r"(^|[^a-z])w/", r"\1with ", str(text or "").lower())
+    kept: list[str] = []
+    for w in protect:
+        w = str(w).lower()
+        if re.search(r"[/,&;]", w) and w in s:
+            s = s.replace(w, f"\x01{len(kept)}\x02")
+            kept.append(w)
+    parts = (re.sub(r"\x01(\d+)\x02", lambda m: kept[int(m.group(1))], x).strip()
+             for x in _TRIM_SPLIT_RE.split(s))
+    return [x for x in parts if x]
+
+
+def _vin_trim_gate(trims, vin_trim: str, vin_series: str) -> bool:
+    """True when the decode (usable trim, series) names the gate on its own:
+    some side whose alternatives ALL hit the gate, and no side negated."""
+    sides = [str(x or "").strip().lower() for x in (vin_trim, vin_series)]
+    sides = [x for x in sides if x]
+    if not sides or any(_TRIM_NEGATION_RE.search(x) for x in sides):
+        return False
+    for side in sides:
+        alts = _trim_alternatives(side, trims)
+        if alts and all(_gate_hit(trims, a) for a in alts):
+            return True
+    return False
+
+
 def lint_gate_tokens() -> list[str]:
     """DB lint: no trim/drive gate token may 'confirm' itself from the bare
     model name.  The substring-matching bug this guards against: trim "st"
@@ -16039,11 +16082,14 @@ def match_vehicle(year: int, make: str, model: str, vin_decode: dict | None = No
     matches = []
     vin_usable = bool(vin_decode and vin_decode.get("trimQuality") == "usable")
     vin_tokens = ""
+    vin_trim_side = vin_series_side = ""
     if vin_decode:
         if vin_usable:
-            vin_tokens += " " + (vin_decode.get("trim") or "").strip().lower()
+            vin_trim_side = (vin_decode.get("trim") or "").strip().lower()
+            vin_tokens += " " + vin_trim_side
         ser = (vin_decode.get("series") or "").strip().lower()
         if ser:
+            vin_series_side = ser
             vin_tokens += " " + ser
     # §22.10: hybrid listings never take the gas-only rows.
     is_hybrid = "hybrid" in model_lower or "hybrid" in vin_tokens
@@ -16078,7 +16124,11 @@ def match_vehicle(year: int, make: str, model: str, vin_decode: dict | None = No
                 if _gate_hit(trims, model_lower):
                     trim_status = "listing"
                 elif vin_tokens and _gate_hit(trims, vin_tokens):
-                    trim_status = "vin"
+                    # A decode listing several trims, or saying "non ...",
+                    # names the gate word without naming the car's trim:
+                    # the part stays "if equipped" (as an unknown trim).
+                    trim_status = ("vin" if _vin_trim_gate(trims, vin_trim_side, vin_series_side)
+                                   else "unconfirmed")
                 elif vin_usable:
                     # Decode is specific and names a different trim:
                     # confident the car doesn't have this part.

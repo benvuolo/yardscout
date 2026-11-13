@@ -4691,7 +4691,8 @@ function notableTrimWords(make, model) {
 const TRIM_NEGATION = /(^|[^a-z])(non|except|excl|without|w\/o)([^a-z]|$)/i;
 /* The trims a decode string offers: "SE / SE NAVI / Limited" is three,
  * "Turbo R-Spec, Turbo and Turbo Ultimate" three, "Limited/Limited
- * w/Ultimate" two. A gate word with a slash in it ("R/T") stays whole. */
+ * w/Ultimate" two. A gate word with a slash in it ("R/T") stays whole.
+ * Mirrors the scraper's _trim_alternatives (trim gates use the same rule). */
 function trimAlternatives(text, words) {
   let s = String(text || '').replace(/(^|[^a-z])w\//gi, '$1with ');
   const kept = [];
@@ -4700,7 +4701,10 @@ function trimAlternatives(text, words) {
     const re = new RegExp(w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
     s = s.replace(re, () => `\u0001${kept.push(w) - 1}\u0002`);
   }
-  return s.split(/\s*(?:[/,;&]|\band\b|\bor\b)\s*/i)
+  // A slash between two single letters ("R/T Scat Pack") or two digits
+  // ("1/2 Ton") is part of a name (same rule as the scraper's
+  // _TRIM_SPLIT_RE, so the badge and the parts gate agree).
+  return s.split(/\s*(?:(?<![^a-z0-9][a-z])(?<!^[a-z])(?<!\d)\/|\/(?![a-z](?![a-z0-9]))(?!\d)|[,;&]|\band\b|\bor\b)\s*/i)
     .map(p => p.replace(/\u0001(\d+)\u0002/g, (_, i) => kept[+i]).trim())
     .filter(Boolean);
 }

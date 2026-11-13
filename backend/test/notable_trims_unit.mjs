@@ -129,6 +129,20 @@ same('comma + and', T.trimAlternatives('Turbo R-Spec, Turbo and Turbo Ultimate',
 same('w/ is not a split', T.trimAlternatives('Limited/Limited w/Ultimate', []), ['Limited', 'Limited with Ultimate']);
 same('a gate word with a slash stays whole', T.trimAlternatives('SLT, R/T', ['R/T']), ['SLT', 'R/T']);
 same('no separators: one', T.trimAlternatives('OBK 2.5XT LTD', ['XT']), ['OBK 2.5XT LTD']);
+same('"R/T Scat Pack" is one trim (letter/letter)', T.trimAlternatives('R/T Scat Pack', []), ['R/T Scat Pack']);
+same('"1500 (1/2 Ton)" is one (digit/digit)', T.trimAlternatives('1500 (1/2 Ton)', []), ['1500 (1/2 Ton)']);
+same('"SE/SEL" is two', T.trimAlternatives('SE/SEL', []), ['SE', 'SEL']);
+same('"GT/Dream Cruiser" is two', T.trimAlternatives('GT/Dream Cruiser', []), ['GT', 'Dream Cruiser']);
+// Same strings through the scraper's _trim_alternatives (lowercase there).
+{
+  const { execFileSync } = await import('node:child_process');
+  const cases = ['R/T Scat Pack', 'Sport, R/T', 'SE / SE NAVI / Limited', '1500 (1/2 Ton)', 'GT/Dream Cruiser',
+    'Base/ BaseStyle/ Base Tech Turbo/ Turbo Ultimate', 'S/T', 'SE/SEL', 'Limited/Limited w/Ultimate', 'GLS, GLI 1.8T', 'Turbo R-Spec, Turbo and Turbo Ultimate'];
+  const py = execFileSync('python3', ['-c', `import json, sys; sys.path.insert(0, 'scraper'); import junkyard_scraper as j; print(json.dumps([j._trim_alternatives(t) for t in json.loads(sys.argv[1])]))`, JSON.stringify(cases)],
+    { cwd: new URL('../..', import.meta.url).pathname, stdio: ['ignore', 'pipe', 'ignore'], maxBuffer: 1 << 24 }).toString();
+  const got = JSON.parse(py.trim().split('\n').pop());
+  cases.forEach((c, i) => same(`app and scraper split "${c}" alike`, T.trimAlternatives(c, []).map(x => x.toLowerCase()), got[i]));
+}
 
 /* ---- car search trim rows ---- */
 const entries = [

@@ -108,6 +108,41 @@ _without = [json.dumps(js.match_vehicle(y, mk, md, vin_decode=d), sort_keys=True
 js.NOTABLE_TRIM_LABELS.update(_saved)
 check("labels change no match_vehicle output (5 label cars)", _with == _without)
 
+print("trim gates vs multi-trim / negated decodes (_vin_trim_gate):")
+G = js._vin_trim_gate
+check("single trim names the gate", G(["turbo"], "turbo", ""))
+check("list where every alternative names it", G(["xt"], "xt / xt limited", ""))
+check("list naming it once: not confirmed", not G(["turbo"], "base/ basestyle/ base tech turbo/ turbo ultimate", ""))
+check("'Sport, R/T': R/T not confirmed", not G(["r/t"], "sport, r/t", ""))
+check("'R/T' alone: confirmed", G(["r/t"], "r/t", ""))
+check("'R/T Scat Pack' is one trim (letter/letter slash)", G(["scat"], "r/t scat pack", ""))
+check("'1500 (1/2 Ton)' series is one (digit/digit slash)", js._trim_alternatives("1500 (1/2 Ton)") == ["1500 (1/2 ton)"])
+check("'Premier (non R design)' never confirms R", not G(["r"], "premier (non r design)", ""))
+check("series alone can confirm", G(["gt"], "", "gt"))
+check("chassis-code series list does not block a trim that names it", G(["hybrid"], "hybrid", "acv40l/gsv40l/ahv40l"))
+
+
+def _gated_statuses(year, make, model, dec, word):
+    out = {}
+    for mt in js.match_vehicle(year, make, model, vin_decode=dec):
+        for p in mt["top_parts"]:
+            src = next((r for e in js.UNOBTANIUM_DB.values() for r in e["top_parts"] if r["name"] == p["name"] and "trim" in r), None)
+            if src and word in [t.lower() for t in src["trim"]]:
+                out[p["name"]] = p.get("trim_status")
+    return out
+
+
+vel_list = _gated_statuses(2013, "Hyundai", "Veloster", {"trim": "Base/ BaseStyle/ Base Tech Turbo/ Turbo Ultimate", "trimQuality": "usable"}, "turbo")
+vel_one = _gated_statuses(2013, "Hyundai", "Veloster", {"trim": "Turbo", "trimQuality": "usable"}, "turbo")
+check("Veloster list decode: Turbo rows 'if equipped' (unconfirmed)", vel_list and set(vel_list.values()) == {"unconfirmed"}, str(vel_list))
+check("Veloster 'Turbo' decode: Turbo rows VIN-confirmed (unchanged)", vel_one and set(vel_one.values()) == {"vin"}, str(vel_one))
+dak = _gated_statuses(2002, "Dodge", "Dakota", {"trim": "Sport, R/T", "trimQuality": "usable", "series": "AN"}, "r/t")
+check("Dakota 'Sport, R/T': R/T rows unconfirmed", dak and set(dak.values()) == {"unconfirmed"}, str(dak))
+dak1 = _gated_statuses(2002, "Dodge", "Dakota", {"trim": "R/T", "trimQuality": "usable", "series": "AN"}, "r/t")
+check("Dakota 'R/T': R/T rows VIN-confirmed (unchanged)", dak1 and set(dak1.values()) == {"vin"}, str(dak1))
+dak0 = _gated_statuses(2002, "Dodge", "Dakota", {"trim": "SLT", "trimQuality": "usable", "series": "AN"}, "r/t")
+check("Dakota 'SLT': R/T rows still excluded (unchanged)", dak0 == {}, str(dak0))
+
 print("specificity guard (refactor):")
 gc = js._matched_entries(1998, js._keyword_hits("jeep grand cherokee"))
 check("1998 Jeep Grand Cherokee: no plain 'cherokee' entry", all(kw != "cherokee" for kw, _ in gc), str([k for k, _ in gc]))

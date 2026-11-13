@@ -384,3 +384,30 @@ not count. No parts rows or gating were changed.
   did not have then. They look like Outback XTs under the Legacy GT name.
   Not badged (the label is "XT"; "GT" is not an Outback word). If wanted:
   a label alias "2.5GT" -> "XT" for 2005–06 Outbacks, with a basis.
+
+## 2026-11-13 — trim gates no longer confirmed from multi-trim decodes (hub follow-up 3)
+
+Bug under rule 3: `match_vehicle` VIN-confirmed a trim-gated row when the
+gate word appeared anywhere in the usable decode, including decodes that
+list several trims ("Sport, R/T") or negate ("Premier (non R design)").
+Measured on 11-13 data: 15,707 usable decodes list several trims, 6,674
+more list on the series side only, 201 negate. Of those, 275 cars carried
+412 (car, gated row) VIN confirmations from a list; 0 from a negation.
+Top strings: Veloster "Base/ BaseStyle/ Base Tech Turbo/ Turbo Ultimate"
+91, Dakota "Sport, R/T" 48, Veloster "Standard / Turbo / R-Spec / Rally
+Edition" 46, Jetta "GLS, GLI 1.8T" 34, Dakota "SLT, R/T" 27, Jetta "GLS,
+GLI" 16, PT Cruiser "GT/Dream Cruiser" 10, MX-5 "Grand Touring/GT" 2,
+MX-5 "Club/GS" 1.
+Fix (`_vin_trim_gate`, `_trim_alternatives`): a trim gate is VIN-confirmed
+only when, on the trim or series side, every alternative names a gate word
+and no side says "non/except/without". Otherwise the row is "unconfirmed"
+(if equipped, $0), as for an unknown trim. A decode where no alternative
+names the gate is still excluded, as before. "R/T", "S/T" (letter/letter)
+and "1/2 Ton" (digit/digit) are names, not lists. Same rule as the app's
+trim badge (unit test checks both split alike).
+Confirmed gated rows: 2,081 -> 1,669 (all 412 changes vin -> unconfirmed;
+0 single-trim decodes changed). Drops over 20: Veloster 276 -> 2, Dakota
+75 -> 0, Jetta 74 -> 24. Others: PT Cruiser 63 -> 53, MX-5 4 -> 1.
+Known loss: MX-5 "Grand Touring/GT" (two names for one trim) now reads as
+a list (2 cars, "if equipped"). match_vehicle on the 37,407 single-decode
+combinations is identical to main. Live with the next scan after merge.
