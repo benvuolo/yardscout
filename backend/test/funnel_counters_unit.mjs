@@ -14,6 +14,10 @@
  *   store taps store-click + store-click/<store>-<place>, web only.
  *   store link one builder decides the store per platform (Android to
  *              Google Play, iPhone and iPad to the App Store).
+ *   narrowing  narrow/<kind> (search box, Filters model / make only, trim
+ *              filter, #cars= link): at most once per device per UTC day per
+ *              kind, kinds independent, a new day counts again, storage that
+ *              throws still counts once (memory), unknown kinds never sent.
  *
  * Run: node backend/test/funnel_counters_unit.mjs   (APP_JS=<path> tests
  * another copy of app.js, e.g. the previous commit's, to see it fail). */
@@ -48,15 +52,15 @@ function konst(name) {
 }
 
 const FNS = ['analyticsOff', 'sendEvent', 'track', 'zipEntryIsNew', 'pfSearchIsNew', 'paywallIsProspect',
-  'pfSearchSignal', 'pfCountSearch', 'normalizePostal', 'setZipCenter', 'storeClickEvent'];
-const CONSTS = ['FUNNEL_EVENTS', 'REASON_EVENTS', 'ANALYTICS_OFF', 'EVENTS_V', '_pfCounted', 'PAYWALL_NOT_PROSPECT'];
+  'pfSearchSignal', 'pfCountSearch', 'normalizePostal', 'setZipCenter', 'storeClickEvent', 'narrowDayIsNew', 'trackNarrow'];
+const CONSTS = ['FUNNEL_EVENTS', 'REASON_EVENTS', 'ANALYTICS_OFF', 'EVENTS_V', '_pfCounted', 'PAYWALL_NOT_PROSPECT', 'NARROW_KINDS', '_narrowMem'];
 const parts = {};
 for (const n of CONSTS) { parts[n] = konst(n); check(`app.js has const ${n}`, !!parts[n]); }
 for (const n of FNS) { parts[n] = fn(n); check(`app.js has function ${n}`, !!parts[n]); }
 if (failures) { console.log(`\n${failures} FAILURES (cannot load the analytics code)`); process.exit(1); }
 
 /* One fake browser (or app shell) with the real analytics code loaded. */
-function boot({ hostname = 'yardscout.io', webdriver = false, native = false, android = false, storage = {} } = {}) {
+function boot({ hostname = 'yardscout.io', webdriver = false, native = false, android = false, storage = {}, brokenStorage = false } = {}) {
   const beacons = [];
   const store = { ...storage };
   const el = () => ({ style: {}, placeholder: '', value: '' });
@@ -65,7 +69,9 @@ function boot({ hostname = 'yardscout.io', webdriver = false, native = false, an
     location: { hostname, search: '', pathname: '/', hash: '' },
     navigator: { webdriver, userAgent: '', sendBeacon: (url, blob) => { beacons.push(JSON.parse(blob.text)); return true; } },
     Blob: class { constructor(p) { this.text = p.join(''); } },
-    localStorage: { getItem: (k) => (k in store ? store[k] : null), setItem: (k, v) => { store[k] = String(v); }, removeItem: (k) => { delete store[k]; } },
+    localStorage: brokenStorage
+      ? { getItem: () => { throw new Error('SecurityError'); }, setItem: () => { throw new Error('QuotaExceeded'); }, removeItem: () => {} }
+      : { getItem: (k) => (k in store ? store[k] : null), setItem: (k, v) => { store[k] = String(v); }, removeItem: (k) => { delete store[k]; } },
     document: { getElementById: el },
     fetch: async (url) => ({ ok: true, json: async () => ({ places: [{ latitude: '33.45', longitude: '-112.07' }] }) }),
     setTimeout: () => 0,
@@ -80,7 +86,7 @@ function boot({ hostname = 'yardscout.io', webdriver = false, native = false, an
     globalThis.__set = (k, v) => { if (k === 'pfCat') pfCat = v; };
   `;
   new vm.Script(prelude + [...CONSTS.slice(0, 2), 'analyticsOff', ...CONSTS.slice(2), ...FNS.filter(n => n !== 'analyticsOff')].map(n => parts[n]).join('\n')
-    + '\nglobalThis.__api = { analyticsOff, sendEvent, track, zipEntryIsNew, pfSearchIsNew, paywallIsProspect, pfCountSearch, setZipCenter, storeClickEvent, ANALYTICS_OFF, EVENTS_V };',
+    + '\nglobalThis.__api = { analyticsOff, sendEvent, track, zipEntryIsNew, pfSearchIsNew, paywallIsProspect, pfCountSearch, setZipCenter, storeClickEvent, narrowDayIsNew, trackNarrow, ANALYTICS_OFF, EVENTS_V };',
   { filename: 'app.js (extract)' }).runInContext(ctx);
   return { api: ctx.__api, beacons, store, set: ctx.__set, events: () => beacons.map(b => b.e) };
 }
@@ -100,13 +106,13 @@ function boot({ hostname = 'yardscout.io', webdriver = false, native = false, an
 {
   // The whole path: what each kind of client actually sends for one event.
   const web = boot(); web.api.track('first-visit');
-  check('web on yardscout.io sends first-visit as web, counting rules v2', web.beacons.length === 1 && web.beacons[0].e === 'first-visit' && web.beacons[0].p === 'web' && web.beacons[0].v === 2, JSON.stringify(web.beacons));
+  check('web on yardscout.io sends first-visit as web, counting rules v3', web.beacons.length === 1 && web.beacons[0].e === 'first-visit' && web.beacons[0].p === 'web' && web.beacons[0].v === 3, JSON.stringify(web.beacons));
   const local = boot({ hostname: 'localhost' }); local.api.track('first-visit');
   check('web on localhost sends nothing', local.beacons.length === 0 && local.api.ANALYTICS_OFF === true, JSON.stringify(local.beacons));
   const bot = boot({ webdriver: true }); bot.api.track('first-visit');
   check('automated browser on the live site sends nothing', bot.beacons.length === 0, JSON.stringify(bot.beacons));
   const ios = boot({ hostname: 'localhost', native: true }); ios.api.track('first-visit');
-  check('iOS shell (capacitor://localhost) sends first-visit as ios', ios.beacons.length === 1 && ios.beacons[0].p === 'ios' && ios.beacons[0].v === 2 && ios.api.ANALYTICS_OFF === false, JSON.stringify(ios.beacons));
+  check('iOS shell (capacitor://localhost) sends first-visit as ios', ios.beacons.length === 1 && ios.beacons[0].p === 'ios' && ios.beacons[0].v === 3 && ios.api.ANALYTICS_OFF === false, JSON.stringify(ios.beacons));
   const and = boot({ hostname: 'localhost', native: true, android: true }); and.api.track('iap-subscribe/watch-limit');
   check('Android shell (https://localhost) sends checkout-start + checkout/<gate> as android', JSON.stringify(and.events()) === JSON.stringify(['checkout-start', 'checkout/watch-limit']) && and.beacons.every(b => b.p === 'android'), JSON.stringify(and.beacons));
   const botApp = boot({ hostname: 'localhost', native: true, webdriver: true }); botApp.api.track('first-visit');
@@ -215,6 +221,51 @@ function boot({ hostname = 'yardscout.io', webdriver = false, native = false, an
       && /href="\$\{storeLink\(WEB_STORE\)\.url\}"/.test(src) && /const st = storeLink\(platform\);/.test(src));
     check('store: the Pro sheet link is set per platform (applyStoreLinks)', /function applyStoreLinks\(/.test(src));
   }
+}
+
+/* ---------- 5. how the Cars list is narrowed ---------- */
+{
+  const today = new Date().toISOString().slice(0, 10);
+  const yesterday = new Date(Date.now() - 864e5).toISOString().slice(0, 10);
+  const b = boot();
+  const ok1 = b.api.trackNarrow('search');
+  const ok2 = b.api.trackNarrow('search');
+  check('narrow: a search-box pick counts once, the second pick the same day does not', ok1 === true && ok2 === false
+    && JSON.stringify(b.events()) === JSON.stringify(['narrow/search']), JSON.stringify(b.events()));
+  check('narrow: the beacon is an ordinary anonymous counter (event, utm fields, platform, v3)',
+    b.beacons.length === 1 && Object.keys(b.beacons[0]).sort().join() === 'cmp,e,med,p,src,v' && b.beacons[0].v === 3 && b.beacons[0].p === 'web', JSON.stringify(b.beacons));
+  check('narrow: the day is kept on the device only, per kind', JSON.parse(b.store.ys_narrow).search === today, b.store.ys_narrow);
+  for (const k of ['search-trim', 'filters-model', 'filters-make', 'trim', 'link']) b.api.trackNarrow(k);
+  for (const k of ['search-trim', 'filters-model', 'filters-make', 'trim', 'link']) b.api.trackNarrow(k);
+  check('narrow: each kind counts once a day, independently of the others',
+    JSON.stringify(b.events()) === JSON.stringify(['narrow/search', 'narrow/search-trim', 'narrow/filters-model', 'narrow/filters-make', 'narrow/trim', 'narrow/link']), JSON.stringify(b.events()));
+  const later = boot({ storage: { ys_narrow: JSON.stringify({ search: today, link: yesterday }) } });
+  later.api.trackNarrow('search'); later.api.trackNarrow('link'); later.api.trackNarrow('link');
+  check('narrow: a reload the same day does not count again; a new day does (once)', JSON.stringify(later.events()) === JSON.stringify(['narrow/link']), JSON.stringify(later.events()));
+  check('narrow: the stored day moves to today', JSON.parse(later.store.ys_narrow).link === today);
+  const broken = boot({ brokenStorage: true });
+  broken.api.trackNarrow('trim'); broken.api.trackNarrow('trim');
+  check('narrow: storage that throws (private mode) still counts once while the page is open', JSON.stringify(broken.events()) === JSON.stringify(['narrow/trim']), JSON.stringify(broken.events()));
+  const junk = boot({ storage: { ys_narrow: '{not json' } });
+  junk.api.trackNarrow('filters-make');
+  check('narrow: a damaged stored value is ignored, not fatal', JSON.stringify(junk.events()) === JSON.stringify(['narrow/filters-make']), JSON.stringify(junk.events()));
+  const u = boot();
+  check('narrow: an unknown kind is never sent', u.api.trackNarrow('search-box-typed-xterra') === false && u.beacons.length === 0);
+  const ios = boot({ hostname: 'localhost', native: true });
+  ios.api.trackNarrow('search');
+  check('narrow: the iPhone app sends it as ios (after its next store update)', ios.beacons.length === 1 && ios.beacons[0].p === 'ios' && ios.beacons[0].e === 'narrow/search');
+  const off = boot({ hostname: 'localhost' });
+  off.api.trackNarrow('search');
+  check('narrow: a local copy sends nothing', off.beacons.length === 0);
+  // Wiring: one route per action.
+  check('narrow: the search pick counts a search (or a trim row) and hands over the route',
+    /narrowRouteTaken\(\);\n  trackNarrow\(trimRow \? 'search-trim' : 'search'\);/.test(src) && !/track\('car-search'\)/.test(src));
+  check('narrow: a #cars= link counts as link (not car-link, which reached only the switched-off analytics)',
+    /function startCarsIntent\(c\) \{\n  narrowRouteTaken\(\);\n  trackNarrow\('link'\);/.test(src) && !/track\('car-link'\)/.test(src));
+  check('narrow: the box syncing to the filters never counts', !/trackNarrow/.test(fn('carSearchSync') || 'trackNarrow'));
+  check('narrow: the week chip and the box\'s clear tag their make change so it is not a Filters choice',
+    (src.match(/new CustomEvent\('change', \{ detail: \{ route: '(week-chip|search-clear)' \} \}\)/g) || []).length === 2 && !/sel\.dispatchEvent\(new Event\('change'\)\)/.test(src));
+  check('narrow: the Trim control counts only a chosen trim', /setLiveTrim\(e\.target\.value\);\n  if \(e\.target\.value\) trackNarrow\('trim'\);/.test(src));
 }
 
 console.log(failures ? `\n${failures} FAILURES` : '\nALL PASS');
