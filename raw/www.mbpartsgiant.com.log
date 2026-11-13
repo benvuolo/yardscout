@@ -3263,3 +3263,50 @@
 00:48:37 chain-unlinked headlights 2 numbers named by 164-820-23-59-64, no catalog link: 164-820-71-61, 164-820-23-59
 00:48:37 chain-unlinked headlights 2 numbers named by 164-820-24-59-64, no catalog link: 164-820-24-59, 164-820-72-61
 00:50:53 time budget reached records=2227
+07:32:54 start site=www.mbpartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2227 list_lines=2039 year_lines=430 url_index=10315
+07:32:54 completion worklist completion/mb.own_page.json: 524 rows
+07:33:51 chain-unlinked headlights 1 numbers named by 208-820-06-61-64, no catalog link: 208-820-06-61
+07:33:51 chain-unlinked headlights 1 numbers named by 208-820-12-61-64, no catalog link: 208-820-12-61
+07:35:11 chain-unlinked headlights 1 numbers named by 209-820-05-61, no catalog link: 209-820-29-61-64
+07:35:11 chain-unlinked headlights 1 numbers named by 209-820-06-61, no catalog link: 209-820-30-61-64
+07:35:11 chain-unlinked headlights 3 numbers named by 209-820-41-61, no catalog link: 209-820-11-61, 209-820-41-61-64, 209-820-35-61
+07:35:11 chain-unlinked headlights 3 numbers named by 209-820-42-61-64, no catalog link: 209-820-42-61, 209-820-36-61, 209-820-12-61
+07:36:15 chain-unlinked window-regulator 1 numbers named by 209-720-07-46, no catalog link: 209-720-03-46
+07:36:15 chain-unlinked window-regulator 1 numbers named by 209-720-08-46, no catalog link: 209-720-04-46
+07:42:39 chain-unlinked headlights 2 numbers named by 164-820-43-61-65, no catalog link: 164-820-43-61, 164-820-43-61-64
+07:42:39 chain-unlinked headlights 1 numbers named by 164-820-44-61, no catalog link: 164-820-44-61-65
+07:48:39 chain-unlinked bumper-rear 2 numbers named by 221-880-06-40-9999, no catalog link: 221-880-07-40-9999, 221-880-06-40
+07:48:39 chain-unlinked bumper-rear 2 numbers named by 221-880-08-40-9999, no catalog link: 221-880-09-40, 221-880-09-40-9999
+07:48:39 chain-unlinked bumper-rear 1 numbers named by 221-880-20-40-9999, no catalog link: 221-880-20-40
+07:48:39 chain-unlinked bumper-rear 2 numbers named by 221-880-21-40-9999, no catalog link: 221-885-11-25-9999, 221-880-21-40
+07:48:56 chain-unlinked gauge-cluster 1 numbers named by 221-900-48-03-80, no catalog link: 221-900-48-03
+07:49:03 chain-unlinked grille 1 numbers named by 221-880-00-83-7712, no catalog link: 221-880-00-83-28-7712
+07:49:03 chain-unlinked grille 1 numbers named by 221-880-00-83-9040, no catalog link: 221-880-00-83-28-9040
+07:49:11 chain-unlinked headlights 1 numbers named by 221-820-59-61, no catalog link: 221-820-81-61
+07:49:11 chain-unlinked headlights 1 numbers named by 221-820-60-61, no catalog link: 221-820-82-61
+07:49:11 chain-unlinked headlights 1 numbers named by 221-820-71-61, no catalog link: 221-820-83-61
+07:49:19 chain-unlinked hood 1 numbers named by 221-880-01-57-28, no catalog link: 221-880-01-57
+07:54:39 chain-unlinked bumper-rear 1 numbers named by 164-885-05-38-9999, no catalog link: 164-885-90-25-9999
+07:54:39 chain-unlinked bumper-rear 1 numbers named by 164-885-06-38-9999, no catalog link: 164-880-40-40-9999
+07:55:11 chain-unlinked headlights 2 numbers named by 164-820-49-59-64, no catalog link: 164-820-82-61, 164-820-49-59
+07:55:11 chain-unlinked headlights 2 numbers named by 164-820-50-59-64, no catalog link: 164-820-83-61, 164-820-50-59
+07:57:03 chain-unlinked headlights 2 numbers named by 251-820-03-61-65, no catalog link: 251-820-03-61-64, 251-820-03-61
+07:57:03 chain-unlinked headlights 2 numbers named by 251-820-04-61-65, no catalog link: 251-820-04-61-64, 251-820-04-61
+07:57:03 chain-unlinked headlights 2 numbers named by 251-820-23-61-64, no catalog link: 251-820-23-61, 251-820-15-61
+07:57:03 chain-unlinked headlights 1 numbers named by 251-820-24-61, no catalog link: 251-820-24-61-64
+07:57:35 chain-unlinked tail-lights 2 numbers named by 251-820-15-64, no catalog link: 251-820-09-64, 251-820-01-64
+07:57:35 chain-unlinked tail-lights 2 numbers named by 251-820-16-64, no catalog link: 251-820-02-64, 251-820-10-64
+07:57:35 chain-unlinked tail-lights 2 numbers named by 251-820-17-64, no catalog link: 251-820-07-64, 251-820-11-64
+07:57:35 chain-unlinked tail-lights 2 numbers named by 251-820-18-64, no catalog link: 251-820-12-64, 251-820-08-64
+07:57:59 chain-unlinked window-regulator 1 numbers named by 251-720-15-79, no catalog link: 251-720-05-79
+07:57:59 chain-unlinked window-regulator 1 numbers named by 251-720-16-79, no catalog link: 251-720-06-79
+08:01:59 chain-unlinked bumper-front 1 numbers named by 210-880-58-70, no catalog link: 210-880-34-70
+08:02:23 chain-unlinked gauge-cluster 1 numbers named by 210-540-94-47, no catalog link: 210-540-43-48
+08:02:39 chain-unlinked headlights 1 numbers named by 210-820-49-61, no catalog link: 210-820-25-61
+08:02:39 chain-unlinked headlights 1 numbers named by 210-820-50-61, no catalog link: 210-820-26-61
+08:02:47 chain-unlinked hood 1 numbers named by 210-880-03-57-28, no catalog link: 210-880-03-57
+08:02:56 chain-unlinked tail-lights 1 numbers named by 210-820-45-64, no catalog link: 210-820-05-64
+08:02:56 chain-unlinked tail-lights 1 numbers named by 210-820-46-64, no catalog link: 210-820-06-64
+08:02:56 chain-unlinked tail-lights 1 numbers named by 210-820-49-64, no catalog link: 210-820-27-64
+08:02:56 chain-unlinked tail-lights 1 numbers named by 210-820-50-64, no catalog link: 210-820-28-64
+08:03:19 time budget reached records=2232
