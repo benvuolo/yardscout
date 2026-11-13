@@ -27,6 +27,15 @@
  * util.js); logs carry masked addresses only (maskEmail). The response to a
  * sign-up does not say whether the address was already subscribed.
  *
+ * Sign-ups by link (2026-11-13, migration 0016): the sign-up request may
+ * carry the visitor's remembered link source {src, cmp, med} (the same
+ * fields the app stamps on its funnel counters). It is kept on the
+ * subscriber row only while that address is waiting for its confirmation
+ * click (pending_source / _campaign / _medium), used once to count
+ * 'email-confirmed' under that source, and cleared in the same step. An
+ * already-confirmed address keeps no source. Expired links lose theirs in
+ * the hourly prune. No source -> the empty source, as before.
+ *
  * Resend daily cap: a confirmation is an optional send. While fewer than
  * RESEND_RESERVE sends are left today (ops.js optionalEmailAllowed) the
  * sign-up is refused with 'daily_cap', nothing is stored, and the held send
@@ -35,6 +44,7 @@
 
 import { json, err, sha256Hex, randomToken, isoNow, rateLimit } from './util.js';
 import { resendFetch, countHeld, optionalEmailAllowed } from './ops.js';
+import { clipAttribution } from './attribution.js';
 
 export const RECAP_MAX_WATCHES = 5;          // the free watch limit (docs/app.js FREE_WATCH_LIMIT)
 const RECAP_MAX_RADIUS = 250;                // the free search radius cap
@@ -254,16 +264,23 @@ export async function handleRecapSignup(req, env, ip) {
   const token = randomToken('ys_recap');
   const hash = await sha256Hex(token);
   const expires = new Date(nowMs + CONFIRM_TTL_MS).toISOString();
+  // The link source goes with this confirmation link, and only while the
+  // address is not confirmed yet (a confirmed address is never counted
+  // again, so its source would have no use). The newest link wins: an
+  // earlier link stops working when this one is issued.
+  const a = sub && sub.confirmed_at ? { source: null, campaign: null, medium: null } : clipAttribution(body);
   if (!sub) {
     await env.DB.prepare(
-      `INSERT INTO recap_subscribers (email, created_at, confirm_hash, confirm_expires_at, confirm_sent_at, confirm_sends, confirm_window_at)
-       VALUES (?1, ?2, ?3, ?4, ?2, 1, ?2)`
-    ).bind(email, now, hash, expires).run();
+      `INSERT INTO recap_subscribers (email, created_at, confirm_hash, confirm_expires_at, confirm_sent_at, confirm_sends, confirm_window_at,
+                                      pending_source, pending_campaign, pending_medium)
+       VALUES (?1, ?2, ?3, ?4, ?2, 1, ?2, ?5, ?6, ?7)`
+    ).bind(email, now, hash, expires, a.source, a.campaign, a.medium).run();
   } else {
     await env.DB.prepare(
       `UPDATE recap_subscribers SET confirm_hash = ?2, confirm_expires_at = ?3, confirm_sent_at = ?4,
-              confirm_sends = ?5, confirm_window_at = ?6 WHERE email = ?1`
-    ).bind(email, hash, expires, now, sends + 1, windowOpen ? sub.confirm_window_at : now).run();
+              confirm_sends = ?5, confirm_window_at = ?6,
+              pending_source = ?7, pending_campaign = ?8, pending_medium = ?9 WHERE email = ?1`
+    ).bind(email, hash, expires, now, sends + 1, windowOpen ? sub.confirm_window_at : now, a.source, a.campaign, a.medium).run();
   }
   if (!dup) await insertWatch(env, email, watch, null);
 
@@ -338,7 +355,8 @@ const badLink = () => page('Link expired', `<h2 style="margin:0 0 .5rem;">This l
 async function subscriberForToken(env, token) {
   if (!/^ys_recap_[A-Za-z0-9_-]{20,}$/.test(String(token || '')) || token.length > 200) return null;
   const row = await env.DB.prepare(
-    'SELECT email, confirmed_at, confirm_expires_at FROM recap_subscribers WHERE confirm_hash = ?1'
+    `SELECT email, confirmed_at, confirm_expires_at, pending_source, pending_campaign, pending_medium
+       FROM recap_subscribers WHERE confirm_hash = ?1`
   ).bind(await sha256Hex(token)).first();
   if (!row || !(Date.parse(row.confirm_expires_at || '') > Date.now())) return null;
   return row;
@@ -368,7 +386,8 @@ export async function handleRecapConfirm(req, env) {
   const now = isoNow();
   // Single use: the conditional UPDATE loses a double-click race.
   const claim = await env.DB.prepare(
-    `UPDATE recap_subscribers SET confirmed_at = COALESCE(confirmed_at, ?2), confirm_hash = NULL
+    `UPDATE recap_subscribers SET confirmed_at = COALESCE(confirmed_at, ?2), confirm_hash = NULL,
+            pending_source = NULL, pending_campaign = NULL, pending_medium = NULL
       WHERE email = ?1 AND confirm_hash = ?3`
   ).bind(row.email, now, await sha256Hex(t)).run();
   if (!claim.meta || !claim.meta.changes) return badLink();
@@ -380,12 +399,13 @@ export async function handleRecapConfirm(req, env) {
   ];
   if (!row.confirmed_at) {
     // The funnel counter for "email confirmed": counted here, where it is
-    // certain, as one anonymous +1 (same table and shape as /v1/events).
+    // certain, as one anonymous +1 (same table and shape as /v1/events),
+    // under the link the sign-up came from (read above, cleared by the claim).
     stmts.push(env.DB.prepare(
       `INSERT INTO events_daily (day, event, source, campaign, medium, platform, n)
-       VALUES (?1, 'email-confirmed', '', '', '', 'web', 1)
+       VALUES (?1, 'email-confirmed', ?2, ?3, ?4, 'web', 1)
        ON CONFLICT(day, event, source, campaign, medium, platform) DO UPDATE SET n = n + 1`
-    ).bind(day));
+    ).bind(day, row.pending_source || '', row.pending_campaign || '', row.pending_medium || ''));
   }
   await env.DB.batch(stmts);
   console.log(`recap confirmed for ${maskEmail(row.email)}`);
@@ -463,6 +483,12 @@ export async function pruneRecap(env, now = Date.now()) {
          (SELECT email FROM recap_subscribers WHERE confirmed_at IS NULL AND created_at < ?1)`
     ).bind(cut),
     env.DB.prepare('DELETE FROM recap_subscribers WHERE confirmed_at IS NULL AND created_at < ?1').bind(cut),
+    // A link source is kept only while its confirmation link can still be used.
+    env.DB.prepare(
+      `UPDATE recap_subscribers SET pending_source = NULL, pending_campaign = NULL, pending_medium = NULL
+        WHERE (pending_source IS NOT NULL OR pending_campaign IS NOT NULL OR pending_medium IS NOT NULL)
+          AND (confirm_hash IS NULL OR confirm_expires_at IS NULL OR confirm_expires_at < ?1)`
+    ).bind(new Date(now).toISOString()),
     env.DB.prepare('DELETE FROM recap_sent WHERE sent_at < ?1').bind(new Date(now - 90 * 86400_000).toISOString()),
   ]);
 }

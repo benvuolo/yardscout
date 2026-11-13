@@ -25,10 +25,18 @@
  *     never estimated. Until a snapshot from 7 days ago exists it says
  *     "tracking starts <date>".
  *
+ * How people narrowed the Cars list (2026-11-13): one short block directly
+ * under the scorecard, last 7 full days only (no week-on-week): search box
+ * picks, Filters Make -> Model (and make only), #cars= links, the Trim
+ * filter. Counted by v3 clients only (docs/app.js EVENTS_V 3, at most once a
+ * day per device per kind); a platform/day is "reporting" when its
+ * 'funnel-v3' marker exists, so "no data" (no v3 client in use) is never
+ * shown as 0, and "counting starts <date>" stands until 7 days are covered.
+ *
  * computeScorecard is pure (fixture-tested in test/scorecard_unit.mjs);
  * loadScorecardInputs does the reads; the renderers take its output. */
 
-import { FUNNEL_V2_MARK } from './attribution.js';
+import { FUNNEL_V2_MARK, FUNNEL_V3_MARK } from './attribution.js';
 
 export const SUBS_HISTORY_KEY = 'ops:subs-daily';
 const SUBS_HISTORY_KEEP_DAYS = 60;
@@ -41,6 +49,8 @@ const EVENTS = ['first-visit', 'watch-created', 'email-asked', 'email-submitted'
   'paywall', 'checkout-start', 'pro-converted'];
 // The Monday email ask exists on the website only.
 const WEB_ONLY = new Set(['email-asked', 'email-submitted', 'email-confirmed']);
+// How the Cars list was narrowed (docs/app.js NARROW_KINDS), one counter each.
+export const NARROW_EVENTS = ['narrow/search', 'narrow/search-trim', 'narrow/filters-model', 'narrow/filters-make', 'narrow/trim', 'narrow/link'];
 
 const DAY_MS = 86400000;
 export const addDays = (day, n) => new Date(Date.parse(day + 'T00:00:00Z') + n * DAY_MS).toISOString().slice(0, 10);
@@ -92,7 +102,7 @@ function notComparableText(name, c) {
  * subs:     null | {error} | {apple, google, web, complete, asOf}  (today's live counts)
  * history:  {days: {day: {apple, google, web, total, complete}}} stored snapshots (before today's)
  */
-export function computeScorecard({ today, rows = [], presence = [], v2 = {}, subs = null, history = null, eventsError = null, storingToday = true }) {
+export function computeScorecard({ today, rows = [], presence = [], v2 = {}, v3 = {}, v3Presence = [], subs = null, history = null, eventsError = null, storingToday = true }) {
   const w = scorecardWindows(today);
   const inWin = (day, win) => day >= win.from && day <= win.to;
   const winOf = (day) => (inWin(day, w.current) ? 'current' : inWin(day, w.prior) ? 'prior' : null);
@@ -180,7 +190,7 @@ export function computeScorecard({ today, rows = [], presence = [], v2 = {}, sub
     .map((s) => ({
       source: s.source, campaign: s.campaign, label: label(s),
       visits: s.events['first-visit'] || 0, watches: s.events['watch-created'] || 0,
-      emails: s.events['email-submitted'] || 0, checkouts: s.events['checkout-start'] || 0, pro: s.events['pro-converted'] || 0,
+      emails: s.events['email-submitted'] || 0, confirmed: s.events['email-confirmed'] || 0, checkouts: s.events['checkout-start'] || 0, pro: s.events['pro-converted'] || 0,
       visitsByMedium: [...s.mediums].filter(([, n]) => n > 0).map(([medium, n]) => ({ medium, n }))
         .sort((a, b) => b.n - a.n || a.medium.localeCompare(b.medium)),
     }))
@@ -197,10 +207,51 @@ export function computeScorecard({ today, rows = [], presence = [], v2 = {}, sub
   // Which platforms' weeks include days before the fixed counting (for one plain note).
   const counting = SC_PLATFORMS.map(([p, name]) => ({ platform: p, name, since: comp[p].since, comparable: comp[p].ok }));
 
+  const narrowing = computeNarrowing({ today, rows, v3, v3Presence, eventsError });
+
   return {
     window: w, eventsError, counting,
     visitors: { ...visitors, bySource, otherTagged, noTag },
-    watches, emails, proSheet, subscribers, sourceRows,
+    watches, emails, proSheet, subscribers, sourceRows, narrowing,
+  };
+}
+
+/* How people narrowed the Cars list, last 7 full days.
+ *   rows:       events_daily rows (any events; narrow/* are used)
+ *   v3:         {platform: first day of a v3 client (all time)}
+ *   v3Presence: [{day, platform}] days with a 'funnel-v3' marker
+ * A route is null (no data) when no platform reported on v3 in the window;
+ * otherwise the sum over the reporting platforms (0 is a real 0). */
+export function computeNarrowing({ today, rows = [], v3 = {}, v3Presence = [], eventsError = null }) {
+  const win = scorecardWindows(today).current;
+  const inWin = (d) => d >= win.from && d <= win.to;
+  const reporting = new Set(v3Presence.filter((r) => inWin(r.day)).map((r) => r.platform));
+  const starts = Object.values(v3).filter(Boolean).sort();
+  const since = starts[0] || null;
+  const daysCounted = since && since <= win.to
+    ? Math.round((Date.parse(win.to) - Date.parse(since > win.from ? since : win.from)) / DAY_MS) + 1 : 0;
+  const by = {};
+  for (const [p] of SC_PLATFORMS) by[p] = Object.fromEntries(NARROW_EVENTS.map((e) => [e, 0]));
+  for (const r of rows) {
+    if (!inWin(r.day) || !NARROW_EVENTS.includes(r.event) || !by[r.platform] || !reporting.has(r.platform)) continue;
+    by[r.platform][r.event] += Number(r.n) || 0;
+  }
+  const routes = (c) => ({
+    search: c['narrow/search'] + c['narrow/search-trim'], searchTrim: c['narrow/search-trim'],
+    filters: c['narrow/filters-model'] + c['narrow/filters-make'], filtersModel: c['narrow/filters-model'], filtersMake: c['narrow/filters-make'],
+    link: c['narrow/link'], trim: c['narrow/trim'],
+  });
+  const platforms = {};
+  for (const [p] of SC_PLATFORMS) platforms[p] = reporting.has(p) ? routes(by[p]) : null;
+  let total = null;
+  if (!eventsError && reporting.size) {
+    total = routes(Object.fromEntries(NARROW_EVENTS.map((e) => [e, SC_PLATFORMS.reduce((a, [p]) => a + (reporting.has(p) ? by[p][e] : 0), 0)])));
+  }
+  return {
+    window: win, since, daysCounted: eventsError ? 0 : daysCounted, full: !eventsError && !!since && since <= win.from,
+    total, platforms: eventsError ? {} : platforms, eventsError,
+    // The apps count this only from the first store release after 2026-11-13.
+    appsReporting: SC_PLATFORMS.filter(([p]) => p !== 'web' && v3[p]).map(([p]) => p),
   };
 }
 
@@ -247,20 +298,25 @@ export const FUNNEL_V2_SINCE_SQL = `SELECT platform, MIN(day) AS since FROM even
 
 export async function loadScorecardEvents(env, today) {
   const w = scorecardWindows(today);
-  const [rows, presence, v2Rows] = (await env.DB.batch([
+  const [rows, presence, v2Rows, v3Rows, v3Presence] = (await env.DB.batch([
     env.DB.prepare(
       `SELECT day, event, source, campaign, medium, platform, SUM(n) AS n FROM events_daily
-        WHERE day >= ?1 AND day <= ?2 AND event IN (${EVENTS.map((e) => `'${e}'`).join(', ')})
+        WHERE day >= ?1 AND day <= ?2 AND event IN (${[...EVENTS, ...NARROW_EVENTS].map((e) => `'${e}'`).join(', ')})
         GROUP BY day, event, source, campaign, medium, platform`
     ).bind(w.prior.from, w.current.to),
     env.DB.prepare(
       `SELECT day, platform FROM events_daily WHERE day >= ?1 AND day <= ?2 GROUP BY day, platform`
     ).bind(w.prior.from, w.current.to),
     env.DB.prepare(FUNNEL_V2_SINCE_SQL),
+    env.DB.prepare(`SELECT platform, MIN(day) AS since FROM events_daily WHERE event = '${FUNNEL_V3_MARK}' GROUP BY platform`),
+    env.DB.prepare(
+      `SELECT day, platform FROM events_daily WHERE event = '${FUNNEL_V3_MARK}' AND day >= ?1 AND day <= ?2 GROUP BY day, platform`
+    ).bind(w.current.from, w.current.to),
   ])).map((r) => r.results || []);
-  const v2 = {};
+  const v2 = {}, v3 = {};
   for (const r of v2Rows) v2[r.platform] = r.since;
-  return { rows, presence, v2 };
+  for (const r of v3Rows) v3[r.platform] = r.since;
+  return { rows, presence, v2, v3, v3Presence };
 }
 
 export async function loadSubsHistory(env) {
@@ -287,7 +343,7 @@ export async function storeSubsSnapshot(env, today, subs, history) {
 /** Everything the scorecard needs, read-only. `subs` comes from the caller's
  * loadSubscribers so the daily email lists entitlements once. */
 export async function buildScorecard(env, { today, subs, storingToday = false }) {
-  let ev = { rows: [], presence: [], v2: {} }, eventsError = null;
+  let ev = { rows: [], presence: [], v2: {}, v3: {}, v3Presence: [] }, eventsError = null;
   try { ev = await loadScorecardEvents(env, today); } catch (e) { eventsError = String((e && e.message) || e).slice(0, 200); }
   const history = await loadSubsHistory(env);
   return { card: computeScorecard({ today, ...ev, subs, history, eventsError, storingToday }), history };
@@ -332,7 +388,8 @@ function sourceRowText(s) {
   const med = s.visitsByMedium.filter((x) => x.medium);
   const medTxt = med.length > 1 || (med.length === 1 && s.visitsByMedium.length > 1)
     ? ` (${s.visitsByMedium.map((x) => `${x.medium || 'untagged'} ${fmt(x.n)}`).join(', ')})` : '';
-  return `${s.label}: ${pl(s.visits, 'visit', 'visits')}${medTxt} → ${pl(s.watches, 'watch', 'watches')} → ${pl(s.emails, 'email', 'emails')}`
+  return `${s.label}: ${pl(s.visits, 'visit', 'visits')}${medTxt} → ${pl(s.watches, 'watch', 'watches')}`
+    + ` → ${pl(s.emails, 'email given', 'emails given')}, ${fmt(s.confirmed || 0)} confirmed`
     + ` → ${pl(s.checkouts, 'checkout', 'checkouts')} → ${fmt(s.pro)} Pro`;
 }
 function countingNote(card) {
@@ -386,6 +443,34 @@ export function scorecardItems(card) {
   return { range: rangeText(card.window), items, links: card.sourceRows.map(sourceRowText), note: countingNote(card) };
 }
 
+/** The narrowing block as {title, head, lines[]} for both renderers. */
+export function narrowingItems(n) {
+  const title = 'How people narrowed the Cars list (7 days)';
+  if (!n) return null;
+  if (n.eventsError) return { title, head: 'no data', lines: [`could not read the counters (${n.eventsError})`] };
+  const start = n.since ? scDay(n.since) : null;
+  if (!n.total) {
+    return { title, head: 'no data',
+      lines: [start ? `counting starts ${start}` : 'counting starts with the first visit to the updated website'] };
+  }
+  const t = n.total;
+  const route = (x) => `search box ${fmt(x.search)} · Filters ${fmt(x.filters)} · link ${fmt(x.link)} · trim filter ${fmt(x.trim)}`;
+  const lines = [];
+  lines.push(`search box: ${fmt(t.search - t.searchTrim)} make or model, ${fmt(t.searchTrim)} trim row`
+    + ` · Filters: ${fmt(t.filtersModel)} model, ${fmt(t.filtersMake)} make only`);
+  if (SC_PLATFORMS.some(([p]) => p !== 'web' && n.platforms[p])) {
+    for (const [p, name] of SC_PLATFORMS) lines.push(n.platforms[p] ? `${name}: ${route(n.platforms[p])}` : `${name}: no data`);
+  }
+  if (!n.full) lines.push(`counting starts ${start}: ${n.daysCounted} of 7 days so far`);
+  if (!n.appsReporting.length) lines.push('website only until the next app update');
+  else {
+    const missing = SC_PLATFORMS.filter(([p]) => p !== 'web' && !n.appsReporting.includes(p)).map(([, name]) => name);
+    if (missing.length) lines.push(`${missing.join(' and ')}: not counted until ${missing.length > 1 ? 'their' : 'its'} next update`);
+  }
+  lines.push('A person counts at most once a day for each way.');
+  return { title, head: route(t), lines };
+}
+
 export function scorecardTextLines(card) {
   const sc = scorecardItems(card);
   const L = [`WEEKLY SCORECARD (${sc.range})`];
@@ -398,6 +483,11 @@ export function scorecardTextLines(card) {
   else L.push('     no tagged visits this week (add ?utm_source=… to links you post)');
   if (sc.note) L.push(`  ${sc.note}`);
   L.push('  Small numbers (under 20) are shown as counts, not percentages. "no data" means nothing was reported, not zero.');
+  const nw = narrowingItems(card.narrowing);
+  if (nw) {
+    L.push(`  ${nw.title}: ${nw.head}`);
+    for (const l of nw.lines) L.push(`     ${l}`);
+  }
   return L;
 }
 
@@ -418,5 +508,17 @@ export function scorecardHtml(card, { esc, C }) {
     <div style="font-size:13px;font-weight:700;color:${C.ink};margin:12px 0 4px;">What each tagged link did this week</div>
     ${links}
     <div style="font-size:12px;line-height:1.5;color:${C.dim};margin-top:10px;">${sc.note ? esc(sc.note) + '<br>' : ''}Small numbers (under 20) are shown as counts, not percentages. &ldquo;No data&rdquo; means nothing was reported, not zero.</div>
+    ${narrowingHtml(card.narrowing, { esc, C })}
   </td></tr>`;
+}
+
+function narrowingHtml(n, { esc, C }) {
+  const nw = narrowingItems(n);
+  if (!nw) return '';
+  const last = nw.lines.length - 1;
+  return `<div style="margin-top:14px;padding-top:10px;border-top:1px solid ${C.line};">
+      <div style="font-size:13px;font-weight:700;color:${C.ink};margin:0 0 2px;">${esc(nw.title)}</div>
+      <div style="font-size:15px;font-weight:700;line-height:1.45;color:${C.ink};margin:0 0 2px;">${esc(nw.head)}</div>
+      ${nw.lines.map((l, i) => `<div style="font-size:${i === last ? 12 : 13}px;line-height:1.45;color:${i === last ? C.dim : C.ink};">${esc(l)}</div>`).join('')}
+    </div>`;
 }

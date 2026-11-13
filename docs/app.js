@@ -66,6 +66,8 @@ const REASON_EVENTS = {
   'ent-checkout-start': 'checkout', 'ent-purchased': 'purchase',
   // store-click/<store>-<place>: which store, from which button.
   'store-click': 'store-click',
+  // narrow/<kind>: how the Cars list was narrowed (trackNarrow below).
+  'narrow': 'narrow',
 };
 // Local copies and automated browsers never count: the e2e tests run this
 // exact bundle from 127.0.0.1 and were posting real-looking first visits and
@@ -81,10 +83,11 @@ function analyticsOff(hostname, webdriver, native) {
 const ANALYTICS_OFF = analyticsOff(location.hostname, navigator.webdriver, IS_NATIVE);
 /* v: counting rules version. 2 (2026-11-12) = a zip counts when entered or
  * changed, a part search once per distinct search, a paywall open only for
- * someone who is not Pro, and the apps report again. The API notes the first
- * day each platform sends v2, so the daily email can say which numbers
- * predate it. Still no ids: one anonymous +1 per event. */
-const EVENTS_V = 2;
+ * someone who is not Pro, and the apps report again. 3 (2026-11-13) = also
+ * counts how the Cars list is narrowed (trackNarrow). The API notes the
+ * first day each platform sends v2 / v3, so the daily email can say which
+ * numbers predate them. Still no ids: one anonymous +1 per event. */
+const EVENTS_V = 3;
 function sendEvent(e) {
   if (ANALYTICS_OFF) return;
   const body = JSON.stringify({ e, src: ATTRIB ? ATTRIB.src : '', cmp: ATTRIB ? ATTRIB.cmp : '', med: ATTRIB ? ATTRIB.med : '',
@@ -131,6 +134,59 @@ const PAYWALL_NOT_PROSPECT = ['checkout-return', 'checkout-done', 'code-redeemed
 function paywallIsProspect(trigger, pro) {
   return !pro && !PAYWALL_NOT_PROSPECT.includes(String(trigger));
 }
+/* How people narrow the Cars list (2026-11-13): the owner decides from these
+ * whether the search box earns its place. One counter per route, sent as
+ * narrow/<kind>:
+ *   search         a make or model picked from the search box
+ *   search-trim    a trim row picked from the search box
+ *   filters-model  a model selection applied in Filters (Make -> Model; on
+ *                  closing the Model list with a changed, non-empty choice,
+ *                  not per checkbox tick)
+ *   filters-make   a make chosen in Filters that was NOT followed by a model
+ *                  there or by another route (counted when the person moves
+ *                  on: another make, leaving the tab, closing Filters, the
+ *                  page going to the background)
+ *   trim           the Filters Trim control set to a trim
+ *   link           a #cars= link opened
+ * Each kind counts at most once per device per UTC day, decided here: the
+ * day each kind last counted is kept in this browser's own storage
+ * (ys_narrow) and never sent. The search box showing what Filters or a link
+ * set is not a pick; a week chip is none of these. */
+const NARROW_KINDS = ['search', 'search-trim', 'filters-model', 'filters-make', 'trim', 'link'];
+const _narrowMem = {};
+let _narrowMakePending = false;   // a Filters make waiting to see if a model follows
+function narrowDayIsNew(seen, kind, day) {
+  return !!seen && NARROW_KINDS.includes(kind) && seen[kind] !== day;
+}
+function trackNarrow(kind) {
+  try {
+    const day = new Date().toISOString().slice(0, 10);
+    let seen = {};
+    try { seen = JSON.parse(localStorage.getItem('ys_narrow') || '{}') || {}; } catch (e) { seen = {}; }
+    if (typeof seen !== 'object') seen = {};
+    if (!narrowDayIsNew(seen, kind, day) || !narrowDayIsNew(_narrowMem, kind, day)) return false;
+    seen[kind] = day; _narrowMem[kind] = day;
+    try { localStorage.setItem('ys_narrow', JSON.stringify(seen)); } catch (e) { /* private mode: memory only */ }
+    track('narrow/' + kind);
+    return true;
+  } catch (e) { return false; }
+}
+/* A Filters make choice that nothing narrowed further counts as make only. */
+function narrowFlushMake() {
+  if (!_narrowMakePending) return;
+  _narrowMakePending = false;
+  trackNarrow('filters-make');
+}
+/* Another route took over (search box, link): the Filters choices in
+ * progress are not counted for it. */
+function narrowRouteTaken() {
+  _narrowMakePending = false;
+  _mfTicked = false;
+  _mfOpenSel = null;
+}
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'hidden') narrowFlushMake();
+});
 try { if (!localStorage.getItem('ys_seen')) { localStorage.setItem('ys_seen', '1'); track('first-visit'); } } catch (e) { /* private mode */ }
 if (GOATCOUNTER_CODE) {
   window.goatcounter = { endpoint: 'https://' + GOATCOUNTER_CODE + '.goatcounter.com/count' };
@@ -2602,8 +2658,20 @@ function updateModelBtnLabel() {
   btn.classList.toggle('has-selection', selectedModels.size > 0);
 }
 
+/* trackNarrow: the Model list counts once it closes with a changed choice. */
+let _mfOpenSel = null, _mfTicked = false;
 function closeModelPanel() {
-  document.getElementById('live-filter-model-panel').style.display = 'none';
+  const panel = document.getElementById('live-filter-model-panel');
+  const wasOpen = panel.style.display !== 'none';
+  panel.style.display = 'none';
+  if (!wasOpen) return;
+  const now = [...selectedModels].sort().join('\u0000');
+  if (_mfTicked && selectedModels.size && now !== _mfOpenSel) {
+    _narrowMakePending = false;   // the make went on to a model
+    trackNarrow('filters-model');
+  }
+  _mfTicked = false;
+  _mfOpenSel = null;
 }
 
 /* Optional year range, populated from the years actually in inventory
@@ -3584,7 +3652,8 @@ document.addEventListener('click', (e) => {
   const sel = document.getElementById('live-filter-make');
   sel.value = c.dataset.make;
   if (sel.value !== c.dataset.make) return;
-  sel.dispatchEvent(new Event('change'));
+  // Tagged: a week chip is not a Filters make choice (trackNarrow).
+  sel.dispatchEvent(new CustomEvent('change', { detail: { route: 'week-chip' } }));
   window.scrollTo({ top: 0 });
 });
 
@@ -4608,13 +4677,18 @@ document.getElementById('live-filter-toggle').addEventListener('click', () => {
   const btn = document.getElementById('live-filter-toggle');
   const open = panel.classList.toggle('open');
   btn.classList.toggle('open', open);
+  if (!open) { closeModelPanel(); narrowFlushMake(); }
   localStorage.setItem('jh_filters_open', open ? '1' : '0');
 });
 if (localStorage.getItem('jh_filters_open') === '1') {
   document.getElementById('live-controls').classList.add('open');
   document.getElementById('live-filter-toggle').classList.add('open');
 }
-document.getElementById('live-filter-make').addEventListener('change', () => {
+document.getElementById('live-filter-make').addEventListener('change', (e) => {
+  // trackNarrow: an earlier make-only choice ends here; a person choosing a
+  // make in Filters (not a week chip or the search box's clear) starts one.
+  narrowFlushMake();
+  if (!(e && e.detail && e.detail.route) && e.target.value) _narrowMakePending = true;
   selectedModels.clear();  // a new make invalidates the old model picks
   populateModelFilter();   // cascade: model list follows the make
   renderLive();
@@ -4624,8 +4698,11 @@ document.getElementById('live-filter-model-btn').addEventListener('click', e => 
   e.stopPropagation();
   const panel = document.getElementById('live-filter-model-panel');
   const opening = panel.style.display === 'none';
-  panel.style.display = opening ? '' : 'none';
-  if (opening) {
+  if (!opening) { closeModelPanel(); return; }
+  panel.style.display = '';
+  _mfOpenSel = [...selectedModels].sort().join('\u0000');
+  _mfTicked = false;
+  {
     const search = document.getElementById('live-filter-model-search');
     search.value = '';
     renderModelList();
@@ -4642,11 +4719,13 @@ document.getElementById('live-filter-model-list').addEventListener('change', e =
   if (!cb) return;
   if (cb.checked) selectedModels.add(cb.dataset.model);
   else selectedModels.delete(cb.dataset.model);
+  _mfTicked = true;
   updateModelBtnLabel();
   renderLive();
 });
 document.getElementById('live-filter-model-clear').addEventListener('click', () => {
   selectedModels.clear();
+  _mfTicked = true;
   renderModelList();
   updateModelBtnLabel();
   renderLive();
@@ -4805,6 +4884,7 @@ function renderTrimControl() {
 }
 document.getElementById('live-filter-trim').addEventListener('change', (e) => {
   setLiveTrim(e.target.value);
+  if (e.target.value) trackNarrow('trim');
   renderLive();
 });
 
@@ -5071,8 +5151,10 @@ function carSearchSetActive(i) {
 
 function carSearchPick(e) {
   if (!e || !carSearchSetFilter(e.make, e.model)) return;
-  if (e.trim && notableTrimsShown()) setLiveTrim(e.trim);
-  track('car-search');
+  const trimRow = !!(e.trim && notableTrimsShown());
+  if (trimRow) setLiveTrim(e.trim);
+  narrowRouteTaken();
+  trackNarrow(trimRow ? 'search-trim' : 'search');
   carSearchNote('');
   carSearchHide();
   const input = document.getElementById('car-search-input');
@@ -5088,9 +5170,9 @@ function carSearchClearAll() {
   carSearchHide();
   const sel = document.getElementById('live-filter-make');
   if (sel.value || selectedModels.size) {
-    // Filters -> Make -> "All makes", exactly.
+    // Filters -> Make -> "All makes", exactly (tagged: not a Filters choice).
     sel.value = '';
-    sel.dispatchEvent(new Event('change'));
+    sel.dispatchEvent(new CustomEvent('change', { detail: { route: 'search-clear' } }));
   } else {
     carSearchSync();
   }
@@ -5102,7 +5184,8 @@ function carSearchClearAll() {
  * apply it once a location and the inventory around it are in (renderLive
  * calls applyCarsIntent). */
 function startCarsIntent(c) {
-  track('car-link');
+  narrowRouteTaken();
+  trackNarrow('link');
   focusedCarKey = null;
   carsIntent = c;
   const input = document.getElementById('car-search-input');
@@ -5141,6 +5224,7 @@ function applyCarsIntent() {
   };
   setYear('live-filter-year-min', c.yrMin, true);
   setYear('live-filter-year-max', c.yrMax, false);
+  narrowRouteTaken();
   carSearchSetFilter(hit.make, hit.model);
   carSearchNote('');
   _csSyncKey = null;
@@ -9269,6 +9353,7 @@ document.querySelectorAll('.tab').forEach(tab => {
     // Remember where the tab being left was scrolled to (see below).
     const leaving = document.querySelector('.tab.active');
     if (leaving && leaving !== tab) _tabScrollY[leaving.dataset.tab] = window.scrollY;
+    if (leaving && leaving.dataset.tab === 'live' && tab.dataset.tab !== 'live') narrowFlushMake();
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
     tab.classList.add('active');
@@ -9882,7 +9967,10 @@ async function recapSubmit(el, entries, done) {
   let res = null;
   try {
     for (const e of entries) {
-      res = await recapPost('/v1/recap/signup', { email, watch: recapWatchBody(e) });
+      // The remembered link (as on the funnel counters) rides along so the
+      // server can count the confirmation under it (recap_signup.js).
+      res = await recapPost('/v1/recap/signup', { email, watch: recapWatchBody(e),
+        src: ATTRIB ? ATTRIB.src : '', cmp: ATTRIB ? ATTRIB.cmp : '', med: ATTRIB ? ATTRIB.med : '' });
       if (res.status !== 200) break;
     }
   } catch (e) { res = { status: 0, data: {} }; }

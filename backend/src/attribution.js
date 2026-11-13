@@ -21,13 +21,36 @@
  * Monday email (2026-11-12, web only): 'email-asked' and 'email-submitted'
  * come from the app like any event; 'email-confirmed' is counted by the
  * server at the confirmation click (recap_signup.js), where it is certain,
- * so a client may not post it. */
+ * so a client may not post it.
+ *
+ * Counting rules v3 (2026-11-13, docs/app.js EVENTS_V 3): the client also
+ * counts how people narrow the Cars list (narrow/search, narrow/search-trim,
+ * narrow/filters-model, narrow/filters-make, narrow/trim, narrow/link), each
+ * at most once per device per UTC day per kind, decided on the device (a day
+ * stamp in its own local storage; nothing about it is sent). A v3 client's
+ * events also bump a 'funnel-v3' marker per (day, platform), so the
+ * scorecard can tell "no client able to count this was in use" (no data)
+ * from "nobody did it" (0). Same anonymous counter, same table.
+ *
+ * Monday email by link (2026-11-13): the sign-up request carries the
+ * visitor's remembered source / campaign / medium; recap_signup.js keeps it
+ * with the PENDING sign-up only and counts 'email-confirmed' under it at the
+ * confirmation click, then drops it. */
 import { json, err } from './util.js';
 
 export const FUNNEL_V2_MARK = 'funnel-v2';
+export const FUNNEL_V3_MARK = 'funnel-v3';
+const MARKS = new Set([FUNNEL_V2_MARK, FUNNEL_V3_MARK]);
 
 const EVENT_RE = /^[a-z0-9][a-z0-9/_-]{0,47}$/;
-const clip = (v, n) => String(v == null ? '' : v).trim().toLowerCase().slice(0, n).replace(/[^a-z0-9._-]/g, '');
+/** The utm fields as stored: lowercased, clipped, [a-z0-9._-] only. */
+export const clip = (v, n) => String(v == null ? '' : v).trim().toLowerCase().slice(0, n).replace(/[^a-z0-9._-]/g, '');
+
+/** {src, cmp, med} as a client sends them -> the stored source fields. */
+export function clipAttribution(body) {
+  const b = body && typeof body === 'object' ? body : {};
+  return { source: clip(b.src, 40), campaign: clip(b.cmp, 60), medium: clip(b.med, 30) };
+}
 
 export async function handleEvent(req, env) {
   let body;
@@ -36,10 +59,10 @@ export async function handleEvent(req, env) {
   if (!body || typeof body !== 'object') return err(400, 'bad_json', 'Body must be JSON.');
   const event = String(body.e || '').trim().toLowerCase();
   if (!EVENT_RE.test(event)) return err(400, 'bad_event', 'Unknown event name.');
-  const source = clip(body.src, 40), campaign = clip(body.cmp, 60), medium = clip(body.med, 30);
+  const { source, campaign, medium } = clipAttribution(body);
   const platform = ['web', 'ios', 'android'].includes(body.p) ? body.p : 'web';
   // The marker is the server's to write: a client may not post it as an event.
-  if (event === FUNNEL_V2_MARK || event === 'email-confirmed') return err(400, 'bad_event', 'Unknown event name.');
+  if (MARKS.has(event) || event === 'email-confirmed') return err(400, 'bad_event', 'Unknown event name.');
   const day = new Date().toISOString().slice(0, 10);
   const bump = env.DB.prepare(
     `INSERT INTO events_daily (day, event, source, campaign, medium, platform, n)
@@ -48,6 +71,7 @@ export async function handleEvent(req, env) {
   );
   const stmts = [bump.bind(day, event, source, campaign, medium, platform)];
   if (Number(body.v) >= 2) stmts.push(bump.bind(day, FUNNEL_V2_MARK, '', '', '', platform));
+  if (Number(body.v) >= 3) stmts.push(bump.bind(day, FUNNEL_V3_MARK, '', '', '', platform));
   await env.DB.batch(stmts);
   return json({ ok: true });
 }
@@ -60,7 +84,7 @@ export async function handleAttribution(req, env) {
   const since = new Date(Date.now() - days * 86400000).toISOString().slice(0, 10);
   const { results } = await env.DB.prepare(
     `SELECT source, campaign, medium, platform, event, SUM(n) AS n
-       FROM events_daily WHERE day >= ?1 AND event != '${FUNNEL_V2_MARK}'
+       FROM events_daily WHERE day >= ?1 AND event NOT IN ('${FUNNEL_V2_MARK}', '${FUNNEL_V3_MARK}')
       GROUP BY source, campaign, medium, platform, event
       ORDER BY source, campaign, medium, platform, event`
   ).bind(since).all();

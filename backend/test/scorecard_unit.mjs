@@ -195,7 +195,7 @@ const html = scorecardHtml(A, { esc, C });
 for (const id of ['first-visit', 'watch-created', 'email-asked', 'email-submitted', 'email-confirmed', 'checkout-start', 'pro-converted', 'funnel-v2', 'paywall', 'events_daily', 'undefined', 'NaN', 'null']) {
   check(`email text/html shows no "${id}"`, !text.includes(id) && !html.includes(id));
 }
-check('text: reddit / xterra line', text.includes('reddit / xterra: 30 visits (post 20, comment 10) → 4 watches → 2 emails → 1 checkout → 0 Pro'), text);
+check('text: reddit / xterra line', text.includes('reddit / xterra: 30 visits (post 20, comment 10) → 4 watches → 2 emails given, 0 confirmed → 1 checkout → 0 Pro'), text);
 check('text: "From:" line with no tag', /From: reddit \/ xterra 30 · forum \/ nissan 4 · reddit 3 · creator \/ a 2 · creator \/ b 2 · other links 4 · no tag 25/.test(text), text);
 check('text: iPhone app shows "no data"', /iPhone app: no data/.test(text) && !/no data a day/.test(text));
 check('text: web visitors with their change', text.includes('Web: 10.0 a day, +40% on the week before (50)'), text);
