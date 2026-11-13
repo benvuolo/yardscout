@@ -43,6 +43,13 @@ watches are bound to it. It does not build features.
 
 ## Waiting on the owner
 
+- **Model pages tabled by the owner (2026-11-13): "bring them up again when
+  you think relevant".** The pages stay live (`/landed/<make>/<model>`).
+  Raise them when: the next weekly list is drafted (link the page instead of
+  pasting the list); a commenter asks for a state or model list; Search
+  Console shows impressions for them; or the full-week-free question needs an
+  answer. Do not push the sitemap resubmission again before then.
+
 - Harry's: note via their contact form (draft in the outreach file, see `ops/yards.md`).
 - Terapeak medians for the 30 parts listed in `ops/ebay.md`.
 - eBay developer keyset (`EBAY_CLIENT_ID`, `EBAY_CLIENT_SECRET` as repo
