@@ -392,6 +392,12 @@ check('no full email address in any log line', leaked.length === 0, leaked.slice
   check('events API: a v3 event bumps funnel-v2 and funnel-v3; a v2 event only funnel-v2',
     JSON.stringify(evRows.map((x) => [x.event, x.platform])) === JSON.stringify([['first-visit', 'ios'], ['funnel-v2', 'ios'], ['funnel-v2', 'web'], ['funnel-v3', 'web'], ['narrow/search', 'web']]), JSON.stringify(evRows));
   check('events API: narrow/search counted under its source like any event', evRows.find((x) => x.event === 'narrow/search').source === 'reddit');
+  // Counting rules v4 (checkout outcomes): its own marker, which a client may not post.
+  check('events API: funnel-v4 from a client refused', (await evPost({ e: 'funnel-v4', p: 'android', v: 4 })).status === 400);
+  await evPost({ e: 'checkout-end/failed-network', p: 'android', v: 4 });
+  const v4Rows = rows(e, "SELECT event, platform, n FROM events_daily WHERE platform = 'android' ORDER BY event");
+  check('events API: a v4 event bumps funnel-v2, -v3 and -v4 for its platform',
+    JSON.stringify(v4Rows.map((x) => [x.event, x.n])) === JSON.stringify([['checkout-end/failed-network', 1], ['funnel-v2', 1], ['funnel-v3', 1], ['funnel-v4', 1]]), JSON.stringify(v4Rows));
 }
 
 console.log(failures ? `\n${failures} FAILURES` : '\nALL PASS');
