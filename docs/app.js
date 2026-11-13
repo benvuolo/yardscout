@@ -4676,7 +4676,9 @@ let notableTrims = null;   // { make: { rawModel: [word] } } or null
  * line, no trim rows, no #cars= trim), and Filters shows the standard Pro
  * box where the Trim control would be. Counts in the Trim options are Pro
  * only either way. One line to change. */
-const NOTABLE_TRIMS_FREE = true;
+// Shipped false (hub 2026-11-13): Pro-only, as the trim line is today, until
+// the owner decides. Keep the constant on a line of its own (tests rewrite it).
+const NOTABLE_TRIMS_FREE = false;
 function notableTrimsShown() {
   return NOTABLE_TRIMS_FREE || isPro();
 }

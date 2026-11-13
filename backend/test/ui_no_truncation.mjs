@@ -28,7 +28,8 @@
  *       SHOTS=<dir>  screenshots of every screen (390 @2x and 1280, light,
  *       plus dark at 390) for design review.
  *       BASE=<url>  test a deployed copy instead of serving docs/.
- *       TRIMS_FREE=false  serve app.js with NOTABLE_TRIMS_FREE = false.
+ *       TRIMS_FREE=true|false  serve app.js with NOTABLE_TRIMS_FREE set to that
+ *       (unset = as shipped).
  * Playwright is pre-installed in this environment (require('playwright')). */
 import http from 'node:http';
 import fs from 'node:fs';
@@ -1186,6 +1187,11 @@ const SCREENS = [
   // New / Leaving soon) and the Filters panel with Trim picked and its
   // "no single trim" note.
   ['cards-trim-badges', async (page) => {
+    // The badge is Pro-only when NOTABLE_TRIMS_FREE is false: show the card
+    // as a Pro user sees it, so the three-badge layout is checked either way.
+    await page.evaluate(() => {
+      if (!NOTABLE_TRIMS_FREE && !isPro()) { localStorage.setItem('jh_pro', '1'); applyProGates(); renderLive(); window.__fxTrimPro = true; }
+    });
     await tab(page, 'live');
     await page.evaluate(() => {
       const cars = _scopedVehicles.filter(v => notableTrimOf(v) && !isNoPickModel(v.make, v.model) && extrasFor(v));
@@ -1214,6 +1220,9 @@ const SCREENS = [
       if (f.ex === undefined) delete vehicleExtras[f.eid]; else vehicleExtras[f.eid] = f.ex;
       f.v.dateAdded = f.date; delete f.v._ts;
       carSearchClearAll(); document.getElementById('car-search-input').blur();
+    });
+    await page.evaluate(() => {
+      if (window.__fxTrimPro) { window.__fxTrimPro = false; localStorage.removeItem('jh_pro'); applyProGates(); renderLive(); }
     });
     await settle(page, 300);
   }],
@@ -1419,11 +1428,11 @@ try {
     });
     // TRIMS_FREE=false: serve docs/app.js with NOTABLE_TRIMS_FREE = false
     // (the owner's Pro-only choice for the trim badge and filter).
-    if (process.env.TRIMS_FREE === 'false') {
+    if (process.env.TRIMS_FREE === 'false' || process.env.TRIMS_FREE === 'true') {
       await page.route(/\/app\.js(\?|$)/, async (route) => {
         const res = await route.fetch(); const t = await res.text();
-        if (!/^const NOTABLE_TRIMS_FREE = true;$/m.test(t)) throw new Error('NOTABLE_TRIMS_FREE constant not found');
-        await route.fulfill({ response: res, body: t.replace(/^const NOTABLE_TRIMS_FREE = true;$/m, 'const NOTABLE_TRIMS_FREE = false;') });
+        if (!/^const NOTABLE_TRIMS_FREE = (true|false);$/m.test(t)) throw new Error('NOTABLE_TRIMS_FREE constant not found');
+        await route.fulfill({ response: res, body: t.replace(/^const NOTABLE_TRIMS_FREE = (true|false);$/m, `const NOTABLE_TRIMS_FREE = ${process.env.TRIMS_FREE};`) });
       });
     }
     // Web checkout is live on yardscout.io; the Pro sheet is tested in that state.

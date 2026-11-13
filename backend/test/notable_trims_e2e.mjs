@@ -33,7 +33,7 @@ const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/cs
 let inject = true;
 // NOTABLE_TRIMS_FREE as served: null = as written in docs/app.js, else the
 // test rewrites the constant (the owner's free-or-Pro switch).
-let freeMode = null;
+let freeMode = true;   // sections 1-7 test the free-for-everyone mode whatever is shipped
 const APP_JS = path.join(DOCS, 'app.js');
 const server = http.createServer((req, res) => {
   let p = decodeURIComponent(new URL(req.url, 'http://x').pathname);
@@ -319,7 +319,7 @@ try {
 
   // 8. NOTABLE_TRIMS_FREE = false (Pro only): no trim word for a free user;
   // the Pro box in the Trim control's place; Pro keeps everything.
-  check('docs/app.js ships NOTABLE_TRIMS_FREE = true on this branch', /^const NOTABLE_TRIMS_FREE = true;$/m.test(fs.readFileSync(APP_JS, 'utf8')));
+  check('docs/app.js ships NOTABLE_TRIMS_FREE = false (Pro-only until the owner decides)', /^const NOTABLE_TRIMS_FREE = false;$/m.test(fs.readFileSync(APP_JS, 'utf8')));
   freeMode = false;
   page = await open();
   await ready(page);
@@ -371,7 +371,7 @@ try {
   check('Pro-only, Pro: badge and Trim filter as in free mode', f3.trimShown && f3.trimOptions.some(o => o.startsWith(P.word + ' (')) && f3.badges.includes(P.word)
     && await page.evaluate(() => !document.querySelector('#live-filter-trim-pro .pro-box')), JSON.stringify(f3.trimOptions));
   await page.close();
-  freeMode = null;
+  freeMode = true;
 
   check('no page errors', errors.length === 0, errors.join(' | '));
 } catch (e) {
