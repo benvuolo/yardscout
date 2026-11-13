@@ -31,8 +31,9 @@ import { json, err } from './util.js';
 import { CHANNELS, utcDay, resendFetch, pruneOpsErrors, resendDailyCap } from './ops.js';
 import { recapStats } from './recap_signup.js';
 import { watchMatches } from './alerts.js';
-import { FUNNEL_V2_MARK, FUNNEL_V3_MARK } from './attribution.js';
-import { buildScorecard, subsFromLoaded, storeSubsSnapshot, scorecardTextLines, scorecardHtml, FUNNEL_V2_SINCE_SQL } from './scorecard.js';
+import { MARKS_SQL } from './attribution.js';
+import { buildScorecard, subsFromLoaded, storeSubsSnapshot, scorecardTextLines, scorecardHtml, FUNNEL_V2_SINCE_SQL, FUNNEL_V4_SINCE_SQL,
+  CHECKOUT_TRY, CHECKOUT_END_PREFIX, PRODUCT_FAIL_PREFIX } from './scorecard.js';
 
 const H = 3600_000;
 const DAY = 24 * H;
@@ -481,8 +482,14 @@ const FUNNEL_ROWS = [
   ['first-visit', 'First visits'], ['zip-entered', 'Entered a zip'], ['part-first-search', 'Part searches'],
   ['watch-created', 'Watches created'], ['email-asked', 'Monday email asked'], ['email-submitted', 'Monday email given'],
   ['email-confirmed', 'Monday email confirmed'], ['push-enabled', 'Alerts turned on'], ['store-click', 'Store link taps'],
-  ['paywall', 'Paywall opens'], ['checkout-start', 'Checkout taps'], ['pro-converted', 'Purchases'], ['review-prompt', 'Rating prompts'],
+  ['paywall', 'Paywall opens'], ['checkout-start', 'Checkout taps'],
+  // How the taps ended (v4 builds only, scorecard.js computeCheckoutOutcomes).
+  ['co:cancelled', 'Checkout cancelled'], ['co:pending', 'Checkout pending'], ['co:incomplete', 'Checkout incomplete'],
+  ['co:failed', 'Checkout failed'], ['co:unconfirmed', 'Paid, not confirmed'], ['co:noresult', 'Checkout: no result'],
+  ['co:product-failed', 'Store price not loaded'],
+  ['pro-converted', 'Purchases'], ['review-prompt', 'Rating prompts'],
 ];
+const OUTCOME_ROWS = new Set(['co:cancelled', 'co:pending', 'co:incomplete', 'co:failed', 'co:unconfirmed', 'co:noresult', 'co:product-failed']);
 /* The funnel by platform (2026-11-12). One column pair per platform, exactly
  * as each client reported: nothing is apportioned or estimated. A cell that
  * cannot happen on a platform (a store link inside the app, the app's rating
@@ -490,9 +497,14 @@ const FUNNEL_ROWS = [
 export const FUNNEL_PLATFORMS = [['web', 'Web'], ['ios', 'iOS'], ['android', 'Android']];
 // The Monday email ask is web only (the apps have push).
 const FUNNEL_NA = { 'store-click': ['ios', 'android'], 'review-prompt': ['web'],
-  'email-asked': ['ios', 'android'], 'email-submitted': ['ios', 'android'], 'email-confirmed': ['ios', 'android'] };
+  'email-asked': ['ios', 'android'], 'email-submitted': ['ios', 'android'], 'email-confirmed': ['ios', 'android'],
+  // The web has no store sheet (no pending / incomplete / product load); the
+  // apps have no Stripe return to confirm.
+  'co:pending': ['web'], 'co:incomplete': ['web'], 'co:product-failed': ['web'], 'co:unconfirmed': ['ios', 'android'] };
 const funnelCell = (u, k, p) => {
   if ((FUNNEL_NA[k] || []).includes(p)) return null;
+  // Outcome rows exist only for a platform with a build that reports them.
+  if (OUTCOME_ROWS.has(k) && !(u.funnelV4 || {})[p]) return null;
   const f = u.funnel[k];
   return (f && f.by && f.by[p]) || { yesterday: 0, week: 0 };
 };
@@ -528,6 +540,15 @@ export function funnelNotes(u) {
       notes.push(`${name}: fixed counters since ${shortDay(since)}. The 7 d column still includes ${old} earlier day${old === 1 ? '' : 's'} of ${before}; do not compare it with last week.`);
     }
   }
+  // Checkout outcome rows (2026-11-13, counting rules v4).
+  const v4 = u.funnelV4 || {};
+  const on = FUNNEL_PLATFORMS.filter(([p]) => v4[p]);
+  const off = FUNNEL_PLATFORMS.filter(([p]) => !v4[p]).map(([, name]) => name);
+  let oc = 'Checkout cancelled … Store price not loaded: how checkout taps ended, counted only by builds that report it';
+  oc += on.length ? ` (${on.map(([, name]) => name).join(', ')} since ${on.map(([p]) => shortDay(v4[p])).join(', ')})` : ' (none has reported yet)';
+  oc += '. "No result" is those builds\' taps minus the ends they reported (app closed, tab left at the payment page).';
+  if (off.length) oc += ` A dash for ${off.join(' and ')}: no build that reports it yet${off.some((n) => n !== 'Web') ? ' (the apps: after the next store release)' : ''}.`;
+  notes.push(oc);
   return notes;
 }
 const STORE_NAMES = { appstore: 'App Store', play: 'Google Play' };
@@ -671,7 +692,7 @@ async function loadUsage(env, now) {
   const today = utcDay(now), yesterday = utcDay(now - DAY), weekAgo = utcDay(now - 7 * DAY);
   const iso = (ms) => new Date(ms).toISOString();
   const watchesOk = `watches_json IS NOT NULL AND json_valid(watches_json)`;
-  const [dev, users, webWatches, events, sources, top, gateRows, pfRows, v2Rows, storeRows] = (await env.DB.batch([
+  const [dev, users, webWatches, events, sources, top, gateRows, pfRows, v2Rows, storeRows, v4Rows] = (await env.DB.batch([
     env.DB.prepare(
       `SELECT platform, tier, COUNT(*) AS n,
               SUM(CASE WHEN apns_token IS NOT NULL OR fcm_token IS NOT NULL THEN 1 ELSE 0 END) AS push,
@@ -689,7 +710,7 @@ async function loadUsage(env, now) {
     env.DB.prepare('SELECT COUNT(*) AS n FROM watches'),
     env.DB.prepare(
       `SELECT event, platform, SUM(CASE WHEN day = ?1 THEN n ELSE 0 END) AS yesterday, SUM(n) AS week
-         FROM events_daily WHERE day >= ?2 AND day < ?3 AND event NOT IN ('${FUNNEL_V2_MARK}', '${FUNNEL_V3_MARK}') GROUP BY event, platform`
+         FROM events_daily WHERE day >= ?2 AND day < ?3 AND event NOT IN (${MARKS_SQL}) GROUP BY event, platform`
     ).bind(yesterday, weekAgo, today),
     env.DB.prepare(
       `SELECT source, SUM(n) AS n FROM events_daily
@@ -720,6 +741,8 @@ async function loadUsage(env, now) {
       `SELECT event, SUM(n) AS n FROM events_daily
         WHERE day >= ?1 AND day < ?2 AND event LIKE 'store-click/%' GROUP BY event`
     ).bind(weekAgo, today),
+    // First day each platform sent an event on counting rules v4 (checkout outcomes).
+    env.DB.prepare(FUNNEL_V4_SINCE_SQL),
   ])).map((r) => r.results || []);
   const gates = new Map();
   for (const r of gateRows) {
@@ -742,9 +765,28 @@ async function loadUsage(env, now) {
     addFunnel(e.event, e);
     // 'review-prompt/<reason>' (in-app rating sheet, 1.12.11+) rolls up into one row.
     if (String(e.event).startsWith('review-prompt/')) addFunnel('review-prompt', e);
+    // Checkout outcomes roll up into one row each; failures and product load
+    // failures over all their classes (the scorecard names the classes).
+    const ev = String(e.event);
+    if (ev.startsWith(CHECKOUT_END_PREFIX)) {
+      const o = ev.slice(CHECKOUT_END_PREFIX.length);
+      addFunnel(o.startsWith('failed-') ? 'co:failed' : `co:${o}`, e);
+      addFunnel('co:ended', e);
+    } else if (ev.startsWith(PRODUCT_FAIL_PREFIX)) addFunnel('co:product-failed', e);
   }
-  const funnelV2 = {};
+  // "No result": v4 taps minus recorded ends, per platform and column (never below 0).
+  {
+    const tries = funnel[CHECKOUT_TRY] || { by: {} }, ended = funnel['co:ended'] || { by: {} };
+    const nr = funnel['co:noresult'] = { yesterday: 0, week: 0, by: {} };
+    for (const p of new Set([...Object.keys(tries.by), ...Object.keys(ended.by)])) {
+      const t = tries.by[p] || { yesterday: 0, week: 0 }, d = ended.by[p] || { yesterday: 0, week: 0 };
+      const c = { yesterday: Math.max(0, t.yesterday - d.yesterday), week: Math.max(0, t.week - d.week) };
+      nr.by[p] = c; nr.yesterday += c.yesterday; nr.week += c.week;
+    }
+  }
+  const funnelV2 = {}, funnelV4 = {};
   for (const r of v2Rows) funnelV2[r.platform] = r.since;
+  for (const r of v4Rows) funnelV4[r.platform] = r.since;
   const storeBy = { store: new Map(), place: new Map() };
   let storeTotal = 0;
   for (const r of storeRows) {
@@ -769,6 +811,7 @@ async function loadUsage(env, now) {
     },
     funnel,
     funnelV2,
+    funnelV4,
     window: { yesterday, weekAgo, today },
     storeTaps: { total: storeTotal, byStore: ranked(storeBy.store, 'store'), byPlace: ranked(storeBy.place, 'place') },
     sources: sources.map((r) => ({ source: r.source, n: r.n })),

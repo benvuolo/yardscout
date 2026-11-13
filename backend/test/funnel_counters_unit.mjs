@@ -52,17 +52,20 @@ function konst(name) {
 }
 
 const FNS = ['analyticsOff', 'sendEvent', 'track', 'zipEntryIsNew', 'pfSearchIsNew', 'paywallIsProspect',
-  'pfSearchSignal', 'pfCountSearch', 'normalizePostal', 'setZipCenter', 'storeClickEvent', 'narrowDayIsNew', 'trackNarrow'];
-const CONSTS = ['FUNNEL_EVENTS', 'REASON_EVENTS', 'ANALYTICS_OFF', 'EVENTS_V', '_pfCounted', 'PAYWALL_NOT_PROSPECT', 'NARROW_KINDS', '_narrowMem'];
+  'pfSearchSignal', 'pfCountSearch', 'normalizePostal', 'setZipCenter', 'storeClickEvent', 'narrowDayIsNew', 'trackNarrow',
+  'checkoutFailClass', 'checkoutOutcomeOf', 'webCheckoutFailClass', 'productLoadFailClass', 'checkoutBegin', 'checkoutResume', 'checkoutEnd'];
+const CONSTS = ['FUNNEL_EVENTS', 'REASON_EVENTS', 'ANALYTICS_OFF', 'EVENTS_V', '_pfCounted', 'PAYWALL_NOT_PROSPECT', 'NARROW_KINDS', '_narrowMem',
+  'CHECKOUT_OUTCOMES', 'CHECKOUT_FAIL_CLASSES'];
 const parts = {};
 for (const n of CONSTS) { parts[n] = konst(n); check(`app.js has const ${n}`, !!parts[n]); }
 for (const n of FNS) { parts[n] = fn(n); check(`app.js has function ${n}`, !!parts[n]); }
 if (failures) { console.log(`\n${failures} FAILURES (cannot load the analytics code)`); process.exit(1); }
 
 /* One fake browser (or app shell) with the real analytics code loaded. */
-function boot({ hostname = 'yardscout.io', webdriver = false, native = false, android = false, storage = {}, brokenStorage = false } = {}) {
+function boot({ hostname = 'yardscout.io', webdriver = false, native = false, android = false, storage = {}, brokenStorage = false, session = {} } = {}) {
   const beacons = [];
   const store = { ...storage };
+  const sess = session;   // shared on purpose: one tab across a Stripe redirect is two boots
   const el = () => ({ style: {}, placeholder: '', value: '' });
   const ctx = {
     console, URLSearchParams, TextEncoder,
@@ -72,6 +75,9 @@ function boot({ hostname = 'yardscout.io', webdriver = false, native = false, an
     localStorage: brokenStorage
       ? { getItem: () => { throw new Error('SecurityError'); }, setItem: () => { throw new Error('QuotaExceeded'); }, removeItem: () => {} }
       : { getItem: (k) => (k in store ? store[k] : null), setItem: (k, v) => { store[k] = String(v); }, removeItem: (k) => { delete store[k]; } },
+    sessionStorage: brokenStorage
+      ? { getItem: () => { throw new Error('SecurityError'); }, setItem: () => { throw new Error('QuotaExceeded'); }, removeItem: () => { throw new Error('SecurityError'); } }
+      : { getItem: (k) => (k in sess ? sess[k] : null), setItem: (k, v) => { sess[k] = String(v); }, removeItem: (k) => { delete sess[k]; } },
     document: { getElementById: el },
     fetch: async (url) => ({ ok: true, json: async () => ({ places: [{ latitude: '33.45', longitude: '-112.07' }] }) }),
     setTimeout: () => 0,
@@ -81,14 +87,15 @@ function boot({ hostname = 'yardscout.io', webdriver = false, native = false, an
   const prelude = `
     const IS_NATIVE = ${native}; const IS_ANDROID = ${native && android};
     const GOATCOUNTER_CODE = null; const ATTRIB = null; const EVENTS_API = 'https://api.test/v1/events';
-    let zipCoordsCache = {}; let activeZipCoords = null; let pfCat = { id: 'alternator' };
+    let zipCoordsCache = {}; let activeZipCoords = null; let pfCat = { id: 'alternator' }; let _coOpen = false;
     function pfSyncWhere() {} function renderLive() {}
     globalThis.__set = (k, v) => { if (k === 'pfCat') pfCat = v; };
   `;
   new vm.Script(prelude + [...CONSTS.slice(0, 2), 'analyticsOff', ...CONSTS.slice(2), ...FNS.filter(n => n !== 'analyticsOff')].map(n => parts[n]).join('\n')
-    + '\nglobalThis.__api = { analyticsOff, sendEvent, track, zipEntryIsNew, pfSearchIsNew, paywallIsProspect, pfCountSearch, setZipCenter, storeClickEvent, narrowDayIsNew, trackNarrow, ANALYTICS_OFF, EVENTS_V };',
+    + '\nglobalThis.__api = { analyticsOff, sendEvent, track, zipEntryIsNew, pfSearchIsNew, paywallIsProspect, pfCountSearch, setZipCenter, storeClickEvent, narrowDayIsNew, trackNarrow, ANALYTICS_OFF, EVENTS_V,'
+    + ' checkoutFailClass, checkoutOutcomeOf, webCheckoutFailClass, productLoadFailClass, checkoutBegin, checkoutResume, checkoutEnd, CHECKOUT_OUTCOMES, CHECKOUT_FAIL_CLASSES };',
   { filename: 'app.js (extract)' }).runInContext(ctx);
-  return { api: ctx.__api, beacons, store, set: ctx.__set, events: () => beacons.map(b => b.e) };
+  return { api: ctx.__api, beacons, store, sess, set: ctx.__set, events: () => beacons.map(b => b.e) };
 }
 
 /* ---------- 1. the guard ---------- */
@@ -106,13 +113,13 @@ function boot({ hostname = 'yardscout.io', webdriver = false, native = false, an
 {
   // The whole path: what each kind of client actually sends for one event.
   const web = boot(); web.api.track('first-visit');
-  check('web on yardscout.io sends first-visit as web, counting rules v3', web.beacons.length === 1 && web.beacons[0].e === 'first-visit' && web.beacons[0].p === 'web' && web.beacons[0].v === 3, JSON.stringify(web.beacons));
+  check('web on yardscout.io sends first-visit as web, counting rules v4', web.beacons.length === 1 && web.beacons[0].e === 'first-visit' && web.beacons[0].p === 'web' && web.beacons[0].v === 4, JSON.stringify(web.beacons));
   const local = boot({ hostname: 'localhost' }); local.api.track('first-visit');
   check('web on localhost sends nothing', local.beacons.length === 0 && local.api.ANALYTICS_OFF === true, JSON.stringify(local.beacons));
   const bot = boot({ webdriver: true }); bot.api.track('first-visit');
   check('automated browser on the live site sends nothing', bot.beacons.length === 0, JSON.stringify(bot.beacons));
   const ios = boot({ hostname: 'localhost', native: true }); ios.api.track('first-visit');
-  check('iOS shell (capacitor://localhost) sends first-visit as ios', ios.beacons.length === 1 && ios.beacons[0].p === 'ios' && ios.beacons[0].v === 3 && ios.api.ANALYTICS_OFF === false, JSON.stringify(ios.beacons));
+  check('iOS shell (capacitor://localhost) sends first-visit as ios', ios.beacons.length === 1 && ios.beacons[0].p === 'ios' && ios.beacons[0].v === 4 && ios.api.ANALYTICS_OFF === false, JSON.stringify(ios.beacons));
   const and = boot({ hostname: 'localhost', native: true, android: true }); and.api.track('iap-subscribe/watch-limit');
   check('Android shell (https://localhost) sends checkout-start + checkout/<gate> as android', JSON.stringify(and.events()) === JSON.stringify(['checkout-start', 'checkout/watch-limit']) && and.beacons.every(b => b.p === 'android'), JSON.stringify(and.beacons));
   const botApp = boot({ hostname: 'localhost', native: true, webdriver: true }); botApp.api.track('first-visit');
@@ -232,8 +239,8 @@ function boot({ hostname = 'yardscout.io', webdriver = false, native = false, an
   const ok2 = b.api.trackNarrow('search');
   check('narrow: a search-box pick counts once, the second pick the same day does not', ok1 === true && ok2 === false
     && JSON.stringify(b.events()) === JSON.stringify(['narrow/search']), JSON.stringify(b.events()));
-  check('narrow: the beacon is an ordinary anonymous counter (event, utm fields, platform, v3)',
-    b.beacons.length === 1 && Object.keys(b.beacons[0]).sort().join() === 'cmp,e,med,p,src,v' && b.beacons[0].v === 3 && b.beacons[0].p === 'web', JSON.stringify(b.beacons));
+  check('narrow: the beacon is an ordinary anonymous counter (event, utm fields, platform, v4)',
+    b.beacons.length === 1 && Object.keys(b.beacons[0]).sort().join() === 'cmp,e,med,p,src,v' && b.beacons[0].v === 4 && b.beacons[0].p === 'web', JSON.stringify(b.beacons));
   check('narrow: the day is kept on the device only, per kind', JSON.parse(b.store.ys_narrow).search === today, b.store.ys_narrow);
   for (const k of ['search-trim', 'filters-model', 'filters-make', 'trim', 'link']) b.api.trackNarrow(k);
   for (const k of ['search-trim', 'filters-model', 'filters-make', 'trim', 'link']) b.api.trackNarrow(k);
@@ -266,6 +273,78 @@ function boot({ hostname = 'yardscout.io', webdriver = false, native = false, an
   check('narrow: the week chip and the box\'s clear tag their make change so it is not a Filters choice',
     (src.match(/new CustomEvent\('change', \{ detail: \{ route: '(week-chip|search-clear)' \} \}\)/g) || []).length === 2 && !/sel\.dispatchEvent\(new Event\('change'\)\)/.test(src));
   check('narrow: the Trim control counts only a chosen trim', /setLiveTrim\(e\.target\.value\);\n  if \(e\.target\.value\) trackNarrow\('trim'\);/.test(src));
+}
+
+/* ---------- 6. how a checkout attempt ends (counting rules v4) ---------- */
+{
+  const { api } = boot();
+  // Exactly what each native plugin rejects with today (they send a message, no code).
+  const IOS_REJECTS = { 'Product not available.': 'product-unavailable', 'Purchase could not be verified.': 'unverified',
+    // StoreKit's own localizedDescription (network, payments not allowed, ...): one class, "store"
+    'The operation couldn’t be completed. (StoreKit.StoreKitError error 1.)': 'store', 'Purchases are not allowed on this device.': 'store' };
+  const ANDROID_REJECTS = { 'Google Play billing isn’t available on this device right now.': 'store-unavailable',
+    'Can’t reach Google Play — check your connection and try again.': 'network',
+    'Google Play billing error.': 'store', 'Item already owned.': 'store', 'Product not available.': 'product-unavailable', 'Purchase failed.': 'unknown' };
+  for (const [m, c] of Object.entries({ ...IOS_REJECTS, ...ANDROID_REJECTS })) {
+    check(`fail class: plugin reject "${m.slice(0, 50)}" -> ${c}`, api.checkoutFailClass(new Error(m)) === c, api.checkoutFailClass(new Error(m)));
+  }
+  check('fail class: no message, a bare string, a Capacitor error with a code', api.checkoutFailClass(new Error('')) === 'unknown' && api.checkoutFailClass(null) === 'unknown'
+    && api.checkoutFailClass('Product not available.') === 'product-unavailable' && api.checkoutFailClass(Object.assign(new Error('"Purchases" plugin is not implemented on ios'), { code: 'UNIMPLEMENTED' })) === 'unknown');
+  check('fail class: every class it can return is in CHECKOUT_FAIL_CLASSES', [...Object.values(IOS_REJECTS), ...Object.values(ANDROID_REJECTS), 'unknown'].every(c => api.CHECKOUT_FAIL_CLASSES.includes(c)));
+  // purchase() resolves
+  const R = [[{ entitled: true }, 'bought'], [{ entitled: false, cancelled: true }, 'cancelled'], [{ cancelled: true }, 'cancelled'],
+    [{ entitled: false, pending: true }, 'pending'], [{ entitled: false }, 'incomplete'], [{}, 'incomplete'], [null, 'incomplete'], [undefined, 'incomplete']];
+  for (const [r, o] of R) check(`outcome: purchase() resolved ${JSON.stringify(r)} -> ${o}`, api.checkoutOutcomeOf(r) === o, api.checkoutOutcomeOf(r));
+  check('outcome: every outcome name is in CHECKOUT_OUTCOMES', R.every(([, o]) => api.CHECKOUT_OUTCOMES.includes(o)));
+  check('web fail class: 503 not configured, other answers server, no answer network', api.webCheckoutFailClass(503, false) === 'not-configured'
+    && api.webCheckoutFailClass(500, false) === 'server' && api.webCheckoutFailClass(200, false) === 'server' && api.webCheckoutFailClass(0, true) === 'network');
+  // getProduct as the sheet opens
+  check('product load: available = no failure', api.productLoadFailClass({ available: true, price: '$8.99' }) === null);
+  check('product load: not available, no error (iOS: Apple returned no product) = product-unavailable', api.productLoadFailClass({ available: false }) === 'product-unavailable' && api.productLoadFailClass(null) === 'product-unavailable');
+  check('product load: not available with the store\'s error = its class', api.productLoadFailClass({ available: false, error: 'Can’t reach Google Play — check your connection and try again.' }) === 'network'
+    && api.productLoadFailClass({ available: false, error: 'Google Play billing error.' }) === 'store' && api.productLoadFailClass({ available: false, error: 'NSURLErrorDomain -1009' }) === 'store');
+  check('product load: getProduct threw (Android billing setup failed) = its class', api.productLoadFailClass(null, new Error('Google Play billing isn’t available on this device right now.')) === 'store-unavailable');
+}
+{
+  // One attempt, exactly one end; the second attempt counts again.
+  const b = boot({ hostname: 'localhost', native: true });
+  b.api.checkoutBegin(false);
+  const e1 = b.api.checkoutEnd('cancelled'), e2 = b.api.checkoutEnd('failed-store');
+  check('attempt: tap = checkout-try; the first end counts, a second end for the same attempt does not', e1 === true && e2 === false
+    && JSON.stringify(b.events()) === JSON.stringify(['checkout-try', 'checkout-end/cancelled']), JSON.stringify(b.events()));
+  b.api.checkoutBegin(false); b.api.checkoutEnd('failed-' + b.api.checkoutFailClass(new Error('Product not available.')));
+  check('attempt: a second attempt counts again, with its own end', JSON.stringify(b.events().slice(2)) === JSON.stringify(['checkout-try', 'checkout-end/failed-product-unavailable']), JSON.stringify(b.events()));
+  check('attempt: an end with no attempt open sends nothing', b.api.checkoutEnd('bought') === false && b.events().length === 4);
+  b.api.checkoutBegin(false); b.api.checkoutEnd('failed-The operation could not be completed');
+  check('attempt: an unknown outcome name is never sent as given (failed-unknown)', b.events()[5] === 'checkout-end/failed-unknown', JSON.stringify(b.events()));
+  check('attempt: beacons are ordinary v4 counters for the platform', b.beacons.every(x => x.p === 'ios' && x.v === 4 && Object.keys(x).sort().join() === 'cmp,e,med,p,src,v'));
+  check('attempt: nothing is kept on the device for an app attempt', !('ys_co_try' in b.sess) && Object.keys(b.store).length === 0);
+  // Web: across the Stripe redirect, in this tab's sessionStorage.
+  const tab = {};
+  const before = boot({ session: tab });
+  before.api.checkoutBegin(true);
+  check('web attempt: the tap marks this tab ("1", nothing else)', tab.ys_co_try === '1' && Object.keys(tab).join() === 'ys_co_try' && JSON.stringify(before.events()) === JSON.stringify(['checkout-try']));
+  const after = boot({ session: tab });   // back from Stripe: a new page in the same tab
+  check('web attempt: back from Stripe the attempt is open again', after.api.checkoutResume() === true);
+  after.api.checkoutEnd('cancelled');
+  check('web attempt: the return ends it once and clears the mark', JSON.stringify(after.events()) === JSON.stringify(['checkout-end/cancelled']) && !('ys_co_try' in tab));
+  const again = boot({ session: tab });
+  check('web attempt: a later page in the tab with no tap has nothing open', again.api.checkoutResume() === false && again.api.checkoutEnd('unconfirmed') === false && again.beacons.length === 0);
+  const priv = boot({ brokenStorage: true });
+  priv.api.checkoutBegin(true); priv.api.checkoutEnd('failed-network');
+  check('web attempt: storage that throws still counts the tap and an end on the same page', JSON.stringify(priv.events()) === JSON.stringify(['checkout-try', 'checkout-end/failed-network']), JSON.stringify(priv.events()));
+  const off = boot({ hostname: 'localhost' });
+  off.api.checkoutBegin(true); off.api.checkoutEnd('bought');
+  check('attempt: a local copy sends nothing', off.beacons.length === 0);
+  // Wiring in app.js: where each end is counted.
+  check('wiring: the app tap begins an attempt right after iap-subscribe', /track\('iap-subscribe\/' \+ upgradeTrigger\);\n    checkoutBegin\(false\);/.test(src));
+  check('wiring: purchase() resolving ends it with checkoutOutcomeOf, rejecting with a class', /const r = await P\.purchase\(\{ productId: IAP_PRODUCT_ID \}\);\n      checkoutEnd\(checkoutOutcomeOf\(r\)\);/.test(src)
+    && /\} catch \(e\) \{\n      checkoutEnd\('failed-' \+ checkoutFailClass\(e\)\);/.test(src));
+  check('wiring: the web tap begins an attempt that survives the redirect', /track\('ent-checkout-start\/' \+ upgradeTrigger\);\n[^\n]*\n    checkoutBegin\(true\);/.test(src));
+  check('wiring: web cancel, bought and unconfirmed each end it', /if \(checkoutResume\(\)\) checkoutEnd\('cancelled'\);/.test(src) && /checkoutEnd\('bought'\);/.test(src) && /checkoutEnd\('unconfirmed'\);/.test(src)
+    && (src.match(/checkoutEnd\('failed-' \+ webCheckoutFailClass\(/g) || []).length === 2);
+  check('wiring: the sheet counts a product that did not load, from both failure paths', (src.match(/track\('iap-product-failed\/' \+ /g) || []).length === 2);
+  check('wiring: no error text is ever put into an event name', !/track\([^)]*e\.message/.test(src) && !/track\([^)]*p\.error/.test(src));
 }
 
 console.log(failures ? `\n${failures} FAILURES` : '\nALL PASS');

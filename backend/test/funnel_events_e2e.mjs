@@ -17,7 +17,14 @@
  *                         Trim filter, search trim row, #cars= link: one event
  *                         each under the route used, once a day per kind
  *                         (also across a reload), a new day counts again
- *   iOS / Android shell   counted on hostname "localhost", with its platform
+ *   iOS / Android shell   counted on hostname "localhost", with its platform;
+ *                         how each checkout attempt ends, from the stubbed
+ *                         Purchases plugin's real answers (bought, cancelled,
+ *                         pending, incomplete, each reject text -> its class),
+ *                         and the store product failing to load per sheet open
+ *   web checkout          cancel return, 503 / error / unreachable, paid but
+ *                         unconfirmed after the polling, bought: one end each,
+ *                         across the Stripe redirect (stubbed /api/ent/)
  *
  * Run: node backend/test/funnel_events_e2e.mjs */
 import fs from 'node:fs';
@@ -55,16 +62,25 @@ const server = http.createServer((req, res) => {
 await new Promise(r => server.listen(0, '127.0.0.1', r));
 const LOCAL = `http://127.0.0.1:${server.address().port}/`;
 
-async function open(browser, { origin, native = null, automated = false, ua = UA_IOS, storage = null }) {
+async function open(browser, { origin, native = null, automated = false, ua = UA_IOS, storage = null, ent = null }) {
   const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, hasTouch: true, userAgent: ua, serviceWorkers: 'block' });
   const page = await ctx.newPage();
   const leaked = [];
-  await page.route('**/*', (route) => {
+  // Every beacon of every page load in this tab (window.__beacons starts empty on each load).
+  const tabBeacons = [];
+  await page.exposeFunction('__recBeacon', (t) => { tabBeacons.push(JSON.parse(t)); });
+  await page.route('**/*', async (route) => {
     const u = new URL(route.request().url());
     if (u.hostname === '127.0.0.1') return route.continue();
     const z = u.href.match(/api\.zippopotam\.us\/us\/(\d{5})/);
     if (z && ZIPS[z[1]]) return route.fulfill({ json: { places: [{ latitude: ZIPS[z[1]][0], longitude: ZIPS[z[1]][1] }] }, headers: { 'access-control-allow-origin': '*' } });
     if (u.pathname === '/api/ent/config') return route.fulfill({ json: { billing: true }, headers: { 'access-control-allow-origin': '*' } });
+    // The web checkout API, as each test case wants it (a stub; nothing leaves the machine).
+    if (ent && u.pathname.startsWith('/api/ent/')) {
+      const a = ent(u.pathname.slice('/api/ent/'.length), u);
+      if (a === 'abort') return route.abort();
+      if (a) return route.fulfill({ status: a.status || 200, json: a.json || {}, headers: { 'access-control-allow-origin': '*' } });
+    }
     // docs/ answers for the site itself (and for the shells' https://yardscout.io/data/...).
     if (u.hostname === 'yardscout.io' || u.origin === origin) {
       const f = fileFor(u.pathname);
@@ -79,13 +95,17 @@ async function open(browser, { origin, native = null, automated = false, ua = UA
   await page.addInitScript(({ native, automated, storage }) => {
     if (!automated) Object.defineProperty(Navigator.prototype, 'webdriver', { get: () => false, configurable: true });
     window.__beacons = [];
-    navigator.sendBeacon = (url, blob) => { blob.text().then(t => window.__beacons.push(JSON.parse(t))); return true; };
+    navigator.sendBeacon = (url, blob) => { blob.text().then(t => { window.__beacons.push(JSON.parse(t)); if (window.__recBeacon) window.__recBeacon(t); }); return true; };
+    // The stubbed store: a test sets window.__purchaseImpl / __productImpl to
+    // answer the way a plugin does (resolve an object, or reject with its message).
+    window.__purchaseImpl = null; window.__productImpl = null;
     if (storage && !sessionStorage.getItem('__seeded')) { for (const [k, v] of Object.entries(storage)) localStorage.setItem(k, v); sessionStorage.setItem('__seeded', '1'); }
     if (native) {
       const L = () => ({ remove() {} });
       window.Capacitor = { isNativePlatform: () => true, getPlatform: () => native, Plugins: {
-        Purchases: { isEntitled: async () => ({ entitled: false }), getProduct: async () => ({ available: true, price: '$8.99', introPrice: '$1.99', introPeriod: '1 month', introCycles: 1 }),
-          purchase: async () => ({ cancelled: true }), restore: async () => ({ entitled: false }) },
+        Purchases: { isEntitled: async () => ({ entitled: false }),
+          getProduct: async () => (window.__productImpl ? window.__productImpl() : { available: true, price: '$8.99', introPrice: '$1.99', introPeriod: '1 month', introCycles: 1 }),
+          purchase: async () => (window.__purchaseImpl ? window.__purchaseImpl() : { cancelled: true }), restore: async () => ({ entitled: false }) },
         PushNotifications: { addListener: L, checkPermissions: async () => ({ receive: 'prompt' }), requestPermissions: async () => ({ receive: 'denied' }), register: async () => {} },
         App: { addListener: L, getInfo: async () => ({ version: '1.12.14', build: '36' }), getLaunchUrl: async () => null },
         Geolocation: { getCurrentPosition: async () => { throw new Error('x'); }, checkPermissions: async () => ({ location: 'prompt' }) },
@@ -100,7 +120,7 @@ async function open(browser, { origin, native = null, automated = false, ua = UA
   const events = async () => { await page.waitForTimeout(250); return page.evaluate(() => window.__beacons.map(b => b.e)); };
   const beacons = async () => { await page.waitForTimeout(250); return page.evaluate(() => window.__beacons.slice()); };
   const clear = () => page.evaluate(() => { window.__beacons.length = 0; });
-  return { ctx, page, events, beacons, clear, leaked, errors };
+  return { ctx, page, events, beacons, clear, leaked, errors, tabBeacons };
 }
 const enterZip = async (page, zip) => {
   await page.fill('#zip-banner-input', zip);
@@ -121,7 +141,7 @@ try {
     ev = await w.events();
     check('web: entering a zip counts once', count(ev, 'zip-entered') === 1, JSON.stringify(ev));
     const all = await w.beacons();
-    check('web: every beacon says platform web, counting rules v3, and nothing else', all.length > 0 && all.every(b => b.p === 'web' && b.v === 3 && Object.keys(b).sort().join() === 'cmp,e,med,p,src,v'), JSON.stringify(all[0]));
+    check('web: every beacon says platform web, counting rules v4, and nothing else', all.length > 0 && all.every(b => b.p === 'web' && b.v === 4 && Object.keys(b).sort().join() === 'cmp,e,med,p,src,v'), JSON.stringify(all[0]));
 
     // Two reloads with the saved zip: the audit recorded "entered a zip" each time.
     ev = [];
@@ -325,7 +345,7 @@ try {
 
     // 7. the per-day rule survives a reload; a new day counts again
     const all = await w.beacons();
-    check('narrow e2e: narrowing beacons are ordinary v3 web counters', all.filter(b => /^narrow\//.test(b.e)).every(b => b.p === 'web' && b.v === 3 && Object.keys(b).sort().join() === 'cmp,e,med,p,src,v'), JSON.stringify(all));
+    check('narrow e2e: narrowing beacons are ordinary v4 web counters', all.filter(b => /^narrow\//.test(b.e)).every(b => b.p === 'web' && b.v === 4 && Object.keys(b).sort().join() === 'cmp,e,med,p,src,v'), JSON.stringify(all));
     await w.page.reload({ waitUntil: 'domcontentloaded' });
     await w.page.waitForSelector('#live-grid .car-card', { timeout: 120000 });
     await w.page.waitForFunction(() => !(typeof _inv !== 'undefined' && _inv && !liveComplete && invViewPending()), null, { timeout: 120000 });
@@ -372,9 +392,135 @@ try {
     const all = await n.beacons();
     const ev = all.map(b => b.e);
     check(`${plat} shell: first visit, zip, paywall and checkout tap all arrive`, ['first-visit', 'zip-entered', 'paywall', 'paywall/header-pill', 'checkout-start', 'checkout/header-pill'].every(e => count(ev, e) === 1), JSON.stringify(ev));
-    check(`${plat} shell: every beacon carries platform ${plat} and v3`, all.length >= 6 && all.every(b => b.p === plat && b.v === 3), JSON.stringify(all.map(b => [b.e, b.p, b.v])));
+    check(`${plat} shell: every beacon carries platform ${plat} and v4`, all.length >= 6 && all.every(b => b.p === plat && b.v === 4), JSON.stringify(all.map(b => [b.e, b.p, b.v])));
     check(`${plat} shell: the stubbed events API was never contacted`, n.leaked.length === 0, JSON.stringify(n.leaked));
+    check(`${plat} shell: the default stub (cancelled) is one attempt, ended once`, count(ev, 'checkout-try') === 1 && count(ev, 'checkout-end/cancelled') === 1
+      && ev.filter(e => /^checkout-end\//.test(e)).length === 1, JSON.stringify(ev));
+
+    /* How each attempt ends: the plugin's real answers (resolve / reject texts). */
+    const setStore = (k, spec) => n.page.evaluate(([k, spec]) => {
+      window[k] = spec == null ? null : async () => {
+        if (spec.reject != null) throw Object.assign(new Error(spec.reject), spec.code ? { code: spec.code } : {});
+        return spec.resolve;
+      };
+    }, [k, spec]);
+    const ends = (list) => list.filter(e => /^checkout-(try|end\/)/.test(e));
+    const attempt = async (spec) => {
+      await n.clear();
+      await setStore('__purchaseImpl', spec);
+      await n.page.evaluate(() => document.getElementById('iap-subscribe').click());
+      await n.page.waitForFunction(() => window.__beacons.some(b => /^checkout-end\//.test(b.e)) && !document.getElementById('iap-subscribe').disabled, null, { timeout: 10000 }).catch(() => {});
+      return n.beacons();
+    };
+    const ERR = plat === 'ios'
+      ? [['Product not available.', 'product-unavailable'], ['Purchase could not be verified.', 'unverified'],
+        ['The operation couldn’t be completed. (StoreKit.StoreKitError error 1.)', 'store'], [{ reject: '"Purchases" plugin is not implemented on ios', code: 'UNIMPLEMENTED' }, 'unknown']]
+      : [['Google Play billing isn’t available on this device right now.', 'store-unavailable'], ['Can’t reach Google Play — check your connection and try again.', 'network'],
+        ['Google Play billing error.', 'store'], ['Product not available.', 'product-unavailable'], ['Purchase failed.', 'unknown']];
+    const CASES = [
+      ['cancelled by the person', { resolve: { entitled: false, cancelled: true } }, 'cancelled'],
+      ['pending approval', { resolve: { entitled: false, pending: true } }, 'pending'],
+      ['did not complete', { resolve: { entitled: false } }, 'incomplete'],
+      ...ERR.map(([m, c]) => [`rejected "${(typeof m === 'string' ? m : m.reject).slice(0, 40)}"`, typeof m === 'string' ? { reject: m } : m, 'failed-' + c]),
+    ];
+    const secrets = [];
+    for (const [name, spec, want] of CASES) {
+      const all = await attempt(spec);
+      const e = all.map(b => b.e);
+      check(`${plat} outcome: ${name} -> exactly checkout-try + checkout-end/${want}`, JSON.stringify(ends(e)) === JSON.stringify(['checkout-try', `checkout-end/${want}`]), JSON.stringify(e));
+      check(`${plat} outcome: ${name} also keeps the existing tap counters, no purchase`, count(e, 'checkout-start') === 1 && count(e, 'pro-converted') === 0, JSON.stringify(e));
+      if (spec.reject) secrets.push(spec.reject);
+      check(`${plat} outcome: ${name} beacons are plain v4 ${plat} counters`, all.every(b => b.p === plat && b.v === 4 && Object.keys(b).sort().join() === 'cmp,e,med,p,src,v'), JSON.stringify(all));
+    }
+    const again = ends((await attempt({ resolve: { entitled: false, cancelled: true } })).map(b => b.e));
+    check(`${plat} outcome: a second attempt counts again`, JSON.stringify(again) === JSON.stringify(['checkout-try', 'checkout-end/cancelled']), JSON.stringify(again));
+
+    /* The store product not loading as the sheet opens: once per open, by class. */
+    const PF = plat === 'ios'
+      ? [[{ resolve: { available: false } }, 'product-unavailable'], [{ resolve: { available: false, error: 'Cannot connect to iTunes Store' } }, 'store'], [{ reject: 'The network connection was lost.' }, 'store']]
+      : [[{ resolve: { available: false, error: 'Google Play billing error.' } }, 'store'], [{ reject: 'Can’t reach Google Play — check your connection and try again.' }, 'network'],
+        [{ reject: 'Google Play billing isn’t available on this device right now.' }, 'store-unavailable'], [{ resolve: { available: false } }, 'product-unavailable']];
+    for (const [spec, want] of PF) {
+      await n.clear();
+      await setStore('__productImpl', spec);
+      await n.page.evaluate(() => { closeUpgradeSheet(); openUpgradeSheet('header-pill'); });
+      await n.page.waitForFunction(() => /right now/.test(document.getElementById('iap-status').textContent), null, { timeout: 10000 }).catch(() => {});
+      const e = await n.events();
+      check(`${plat} product load: ${JSON.stringify(spec).slice(0, 70)} -> one iap-product-failed/${want}`, JSON.stringify(e.filter(x => /^iap-product-failed/.test(x))) === JSON.stringify([`iap-product-failed/${want}`])
+        && ends(e).length === 0, JSON.stringify(e));
+      if (spec.reject) secrets.push(spec.reject);
+      if (spec.resolve && spec.resolve.error) secrets.push(spec.resolve.error);
+    }
+    const priceKept = await n.page.evaluate(() => document.getElementById('iap-subscribe').textContent);
+    await n.clear();
+    await setStore('__productImpl', null);
+    await n.page.evaluate(() => { closeUpgradeSheet(); openUpgradeSheet('header-pill'); });
+    await n.page.waitForFunction(() => /\$1\.99/.test(document.getElementById('iap-subscribe').textContent), null, { timeout: 10000 });
+    check(`${plat} product load: a product that loads counts nothing`, !(await n.events()).some(x => /^iap-product-failed/.test(x)));
+    check(`${plat} product load: the sheet looks as before (button kept its price, status line)`, /\$/.test(priceKept), priceKept);
+
+    // Bought last: it makes this device Pro.
+    const bought = (await attempt({ resolve: { entitled: true } })).map(b => b.e);
+    check(`${plat} outcome: bought -> checkout-try + checkout-end/bought, alongside the existing purchase counters`,
+      JSON.stringify(ends(bought)) === JSON.stringify(['checkout-try', 'checkout-end/bought']) && count(bought, 'pro-converted') === 1 && count(bought, 'purchase/header-pill') === 1, JSON.stringify(bought));
+    const sent = JSON.stringify(n.tabBeacons);
+    check(`${plat}: no store error text ever left the page`, secrets.every(s => !sent.includes(s.slice(0, 20))), secrets.find(s => sent.includes(s.slice(0, 20))));
+    check(`${plat}: no page errors`, n.errors.length === 0, JSON.stringify(n.errors));
     await n.ctx.close();
+  }
+
+  /* ---------- web checkout: how each attempt ends, across the Stripe redirect ---------- */
+  {
+    let mode = 'cancel';
+    const ent = (p) => {
+      if (p === 'checkout') {
+        if (mode === '503') return { status: 503, json: { error: 'billing_off' } };
+        if (mode === '500') return { status: 500, json: { message: 'Stripe said no.' } };
+        if (mode === 'down') return 'abort';
+        return { json: { url: `https://yardscout.io/?entco=${mode === 'cancel' ? 'cancel' : 'cs_test_1'}` } };
+      }
+      if (p.startsWith('checkout-session')) return { json: mode === 'paid' ? { pro: true, email: 'buyer@example.test', token: 'tok_test' } : { pro: false } };
+      return null;
+    };
+    const w = await open(browser, { origin: 'https://yardscout.io', ua: UA_ANDROID, ent });
+    const ends = () => w.tabBeacons.map(b => b.e).filter(e => /^checkout-(try|end\/)/.test(e));
+    const waitEnds = async (k, ms = 15000) => { const t0 = Date.now(); while (ends().length < k && Date.now() - t0 < ms) await new Promise(r => setTimeout(r, 200)); await new Promise(r => setTimeout(r, 400)); };
+    const ready = () => w.page.waitForFunction(() => typeof liveLoaded !== 'undefined' && liveLoaded && document.getElementById('ent-checkout'), null, { timeout: 120000 });
+    const tapCheckout = async () => {
+      await ready();
+      await w.page.evaluate(() => { openUpgradeSheet('header-pill'); document.getElementById('ent-checkout').click(); });
+    };
+    const CASES = [
+      ['cancel', 'returned with cancel', 'cancelled', 15000],
+      ['503', 'checkout not set up (503)', 'failed-not-configured', 15000],
+      ['500', 'checkout answered an error', 'failed-server', 15000],
+      ['down', 'checkout unreachable', 'failed-network', 15000],
+      ['unconfirmed', 'returned paid, polling gave up', 'unconfirmed', 40000],
+      ['paid', 'returned paid and confirmed', 'bought', 20000],
+    ];
+    let k = 0;
+    for (const [m, name, want, ms] of CASES) {
+      mode = m;
+      const before = ends().length;
+      await tapCheckout();
+      await waitEnds(before + 2, ms);
+      const got = ends().slice(before);
+      check(`web outcome: ${name} -> exactly checkout-try + checkout-end/${want}`, JSON.stringify(got) === JSON.stringify(['checkout-try', `checkout-end/${want}`]), JSON.stringify(got));
+      k++;
+    }
+    const all = w.tabBeacons;
+    check('web outcome: every beacon is a plain v4 web counter', all.every(b => b.p === 'web' && b.v === 4 && Object.keys(b).sort().join() === 'cmp,e,med,p,src,v'), JSON.stringify(all.find(b => b.v !== 4)));
+    check('web outcome: bought also counts the existing purchase', all.filter(b => b.e === 'pro-converted').length === 1 && all.some(b => b.e === 'purchase/header-pill'));
+    check('web outcome: the attempt mark is gone after it ends', await w.page.evaluate(() => sessionStorage.getItem('ys_co_try') === null));
+    const n0 = ends().length;
+    await w.page.goto('https://yardscout.io/?entco=cancel', { waitUntil: 'domcontentloaded' });
+    await ready(); await w.page.waitForTimeout(800);
+    check('web outcome: a cancel return with no tap in this tab counts no outcome', ends().length === n0, JSON.stringify(ends().slice(n0)));
+    check('web outcome: no checkout error text left the page', !JSON.stringify(all).includes('Stripe said no') && !JSON.stringify(all).includes('buyer@'));
+    // (Pro on the web also asks the API for email-alert status; aborted here, not an event.)
+    check('web outcome: nothing reached the events API over the network', !w.leaked.some(u => /\/v1\/events/.test(u)), JSON.stringify(w.leaked));
+    check('web outcome: no page errors', w.errors.length === 0, JSON.stringify(w.errors));
+    await w.ctx.close();
   }
 } catch (e) {
   check('harness ran to the end', false, String(e && e.stack || e).split('\n').slice(0, 4).join(' | '));

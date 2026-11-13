@@ -33,10 +33,18 @@
  * 'funnel-v3' marker exists, so "no data" (no v3 client in use) is never
  * shown as 0, and "counting starts <date>" stands until 7 days are covered.
  *
+ * How checkout taps ended (2026-11-13, counting rules v4): in item 4, one
+ * line per reporting platform: "of 7 checkout taps: 0 bought · 5 cancelled
+ * · 1 failed (store product not available) · 1 no result recorded", last 7
+ * full days only. Taps are 'checkout-try' (counted only by clients that also
+ * count the end), so "no result recorded" = taps minus recorded ends, never
+ * hidden. A platform/day reports when its 'funnel-v4' marker exists; "no
+ * data" and "counting starts <date>" follow the narrowing block's rules.
+ *
  * computeScorecard is pure (fixture-tested in test/scorecard_unit.mjs);
  * loadScorecardInputs does the reads; the renderers take its output. */
 
-import { FUNNEL_V2_MARK, FUNNEL_V3_MARK } from './attribution.js';
+import { FUNNEL_V2_MARK, FUNNEL_V3_MARK, FUNNEL_V4_MARK } from './attribution.js';
 
 export const SUBS_HISTORY_KEY = 'ops:subs-daily';
 const SUBS_HISTORY_KEEP_DAYS = 60;
@@ -51,6 +59,20 @@ const EVENTS = ['first-visit', 'watch-created', 'email-asked', 'email-submitted'
 const WEB_ONLY = new Set(['email-asked', 'email-submitted', 'email-confirmed']);
 // How the Cars list was narrowed (docs/app.js NARROW_KINDS), one counter each.
 export const NARROW_EVENTS = ['narrow/search', 'narrow/search-trim', 'narrow/filters-model', 'narrow/filters-make', 'narrow/trim', 'narrow/link'];
+// How a checkout attempt ended (docs/app.js checkoutEnd), v4 clients only.
+export const CHECKOUT_TRY = 'checkout-try';
+export const CHECKOUT_END_PREFIX = 'checkout-end/';
+export const PRODUCT_FAIL_PREFIX = 'iap-product-failed/';
+export const CHECKOUT_OUTCOMES = ['bought', 'cancelled', 'pending', 'incomplete', 'unconfirmed', 'failed'];
+const OUTCOME_LABELS = { bought: 'bought', cancelled: 'cancelled', pending: 'waiting for approval', incomplete: 'did not complete',
+  unconfirmed: 'back from payment, not confirmed', failed: 'failed' };
+// docs/app.js CHECKOUT_FAIL_CLASSES, in plain words.
+export const FAIL_CLASS_LABELS = {
+  'product-unavailable': 'store product not available', network: 'network', 'store-unavailable': 'store billing not available on the device',
+  unverified: 'purchase could not be verified', store: 'store error', 'not-configured': 'web checkout not set up',
+  server: 'checkout server error', unknown: 'unknown error',
+};
+export const failLabel = (c) => FAIL_CLASS_LABELS[c] || c;
 
 const DAY_MS = 86400000;
 export const addDays = (day, n) => new Date(Date.parse(day + 'T00:00:00Z') + n * DAY_MS).toISOString().slice(0, 10);
@@ -102,7 +124,7 @@ function notComparableText(name, c) {
  * subs:     null | {error} | {apple, google, web, complete, asOf}  (today's live counts)
  * history:  {days: {day: {apple, google, web, total, complete}}} stored snapshots (before today's)
  */
-export function computeScorecard({ today, rows = [], presence = [], v2 = {}, v3 = {}, v3Presence = [], subs = null, history = null, eventsError = null, storingToday = true }) {
+export function computeScorecard({ today, rows = [], presence = [], v2 = {}, v3 = {}, v3Presence = [], v4 = {}, v4Presence = [], subs = null, history = null, eventsError = null, storingToday = true }) {
   const w = scorecardWindows(today);
   const inWin = (day, win) => day >= win.from && day <= win.to;
   const winOf = (day) => (inWin(day, w.current) ? 'current' : inWin(day, w.prior) ? 'prior' : null);
@@ -200,7 +222,8 @@ export function computeScorecard({ today, rows = [], presence = [], v2 = {}, v3 
   const watches = metric('watch-created');
   const emails = { asked: metric('email-asked'), submitted: metric('email-submitted'), confirmed: metric('email-confirmed') };
   const opens = metric('paywall'), checkouts = metric('checkout-start'), pro = metric('pro-converted');
-  const proSheet = { opens, checkouts, pro, rate: { num: checkouts.current, den: opens.current, text: rateText(checkouts.current, opens.current) } };
+  const proSheet = { opens, checkouts, pro, rate: { num: checkouts.current, den: opens.current, text: rateText(checkouts.current, opens.current) },
+    outcomes: computeCheckoutOutcomes({ today, rows, v4, v4Presence, eventsError }) };
 
   const subscribers = subscriberChange(today, subs, history, { storingToday });
 
@@ -255,6 +278,120 @@ export function computeNarrowing({ today, rows = [], v3 = {}, v3Presence = [], e
   };
 }
 
+/* How checkout taps ended, last 7 full days.
+ *   rows:       events_daily rows ('checkout-try', 'checkout-end/*', 'iap-product-failed/*' are used)
+ *   v4:         {platform: first day of a v4 client (all time)}
+ *   v4Presence: [{day, platform}] days with a 'funnel-v4' marker
+ * A platform is null (no data) unless it reported on v4 in the window; a
+ * reporting platform's counts are real (0 is 0). noResult = taps minus
+ * recorded ends, floored at 0; `extraEnds` says when ends exceed taps (an
+ * attempt whose end landed in the window but whose tap did not). */
+export function computeCheckoutOutcomes({ today, rows = [], v4 = {}, v4Presence = [], eventsError = null }) {
+  const win = scorecardWindows(today).current;
+  const inWin = (d) => d >= win.from && d <= win.to;
+  const reporting = new Set(v4Presence.filter((r) => inWin(r.day)).map((r) => r.platform));
+  const starts = Object.values(v4).filter(Boolean).sort();
+  const since = starts[0] || null;
+  const daysCounted = since && since <= win.to
+    ? Math.round((Date.parse(win.to) - Date.parse(since > win.from ? since : win.from)) / DAY_MS) + 1 : 0;
+  const empty = () => ({ taps: 0, ...Object.fromEntries(CHECKOUT_OUTCOMES.map((o) => [o, 0])), failedBy: {}, productFailed: 0, productFailedBy: {} });
+  const by = {};
+  for (const [p] of SC_PLATFORMS) by[p] = empty();
+  for (const r of rows) {
+    if (!inWin(r.day) || !by[r.platform] || !reporting.has(r.platform)) continue;
+    const c = by[r.platform], n = Number(r.n) || 0, e = String(r.event);
+    if (e === CHECKOUT_TRY) c.taps += n;
+    else if (e.startsWith(CHECKOUT_END_PREFIX)) {
+      const o = e.slice(CHECKOUT_END_PREFIX.length);
+      if (o.startsWith('failed-')) { c.failed += n; const k = o.slice(7) || 'unknown'; c.failedBy[k] = (c.failedBy[k] || 0) + n; }
+      else if (CHECKOUT_OUTCOMES.includes(o)) c[o] += n;
+    } else if (e.startsWith(PRODUCT_FAIL_PREFIX)) {
+      c.productFailed += n; const k = e.slice(PRODUCT_FAIL_PREFIX.length) || 'unknown'; c.productFailedBy[k] = (c.productFailedBy[k] || 0) + n;
+    }
+  }
+  const finish = (c) => {
+    const ended = CHECKOUT_OUTCOMES.reduce((a, o) => a + c[o], 0);
+    return { ...c, ended, noResult: Math.max(0, c.taps - ended), extraEnds: Math.max(0, ended - c.taps) };
+  };
+  const platforms = {};
+  for (const [p] of SC_PLATFORMS) platforms[p] = reporting.has(p) ? finish(by[p]) : null;
+  let total = null;
+  if (!eventsError && reporting.size) {
+    const t = empty();
+    for (const [p] of SC_PLATFORMS) {
+      if (!reporting.has(p)) continue;
+      const c = by[p];
+      t.taps += c.taps; t.productFailed += c.productFailed;
+      for (const o of CHECKOUT_OUTCOMES) t[o] += c[o];
+      for (const [k, n] of Object.entries(c.failedBy)) t.failedBy[k] = (t.failedBy[k] || 0) + n;
+      for (const [k, n] of Object.entries(c.productFailedBy)) t.productFailedBy[k] = (t.productFailedBy[k] || 0) + n;
+    }
+    total = finish(t);
+  }
+  return {
+    window: win, since, daysCounted: eventsError ? 0 : daysCounted, full: !eventsError && !!since && since <= win.from,
+    total, platforms: eventsError ? {} : platforms, eventsError,
+    // The apps count this only from the first store release after 2026-11-13.
+    appsReporting: SC_PLATFORMS.filter(([p]) => p !== 'web' && v4[p]).map(([p]) => p),
+  };
+}
+
+/** "of 7 checkout taps: 0 bought · 5 cancelled · 1 failed (store product
+ * not available) · 1 no result recorded". Bought and "no result recorded"
+ * are always shown; other outcomes when not 0. */
+export function outcomeText(c) {
+  if (!c) return 'no data';
+  if (!c.taps && !c.ended) return 'no checkout taps';
+  const bits = [`${fmt(c.bought)} bought`];
+  for (const o of CHECKOUT_OUTCOMES) {
+    if (o === 'bought' || !c[o]) continue;
+    if (o === 'failed') {
+      const cls = Object.entries(c.failedBy).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+      const why = cls.length === 1 ? failLabel(cls[0][0]) : cls.map(([k, n]) => `${failLabel(k)} ${fmt(n)}`).join(', ');
+      bits.push(`${fmt(c.failed)} failed (${why})`);
+    } else bits.push(`${fmt(c[o])} ${OUTCOME_LABELS[o]}`);
+  }
+  bits.push(`${fmt(c.noResult)} no result recorded`);
+  let s = `of ${fmt(c.taps)} checkout tap${c.taps === 1 ? '' : 's'}: ${bits.join(' · ')}`;
+  if (c.extraEnds) s += ` (${fmt(c.extraEnds)} more ended than were tapped this week: taps from before the week)`;
+  return s;
+}
+
+/** "the store product did not load on 2 Pro sheet opens (network 1, store error 1)". */
+export function productFailText(c) {
+  if (!c) return 'no data';
+  if (!c.productFailed) return 'the store product loaded every time the Pro sheet opened';
+  const cls = Object.entries(c.productFailedBy).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+  return `the store product did not load on ${fmt(c.productFailed)} Pro sheet open${c.productFailed === 1 ? '' : 's'}`
+    + ` (${cls.map(([k, n]) => `${failLabel(k)} ${fmt(n)}`).join(', ')})`;
+}
+
+/** The lines item 4 gains: how the taps ended, per platform when more than one reports. */
+export function outcomeLines(oc) {
+  if (!oc || oc.eventsError) return [];
+  const start = oc.since ? scDay(oc.since) : null;
+  if (!oc.total) {
+    return [`how checkout taps ended: no data (${start ? `counting starts ${start}` : 'counting starts with the first visit to the updated website'})`];
+  }
+  const L = [];
+  const reporting = SC_PLATFORMS.filter(([p]) => oc.platforms[p]);
+  if (reporting.length === 1) {
+    const [p, name] = reporting[0];
+    L.push(`how checkout taps ended (${p === 'web' ? 'website' : name}): ${outcomeText(oc.platforms[p])}`);
+  } else {
+    L.push('how checkout taps ended:');
+    for (const [p, name] of SC_PLATFORMS) L.push(`${name}: ${oc.platforms[p] ? outcomeText(oc.platforms[p]) : 'no data'}`);
+  }
+  for (const [p, name] of SC_PLATFORMS) if (p !== 'web' && oc.platforms[p]) L.push(`${name}: ${productFailText(oc.platforms[p])}`);
+  if (!oc.full) L.push(`checkout outcomes: counting starts ${start}: ${oc.daysCounted} of 7 days so far`);
+  if (!oc.appsReporting.length) L.push('checkout outcomes: website only until the next app update');
+  else {
+    const missing = SC_PLATFORMS.filter(([p]) => p !== 'web' && !oc.appsReporting.includes(p)).map(([, name]) => name);
+    if (missing.length) L.push(`checkout outcomes: ${missing.join(' and ')} not counted until ${missing.length > 1 ? 'their' : 'its'} next update`);
+  }
+  return L;
+}
+
 /** Today's paying total from the live counts + the change from the snapshot
  * stored 7 days ago (exactly that day; no nearest-day guessing). */
 export function subscriberChange(today, subs, history, { storingToday = true } = {}) {
@@ -295,13 +432,15 @@ export function subsFromLoaded(sb) {
 /* ===== reads and the one write ===== */
 
 export const FUNNEL_V2_SINCE_SQL = `SELECT platform, MIN(day) AS since FROM events_daily WHERE event = '${FUNNEL_V2_MARK}' GROUP BY platform`;
+export const FUNNEL_V4_SINCE_SQL = `SELECT platform, MIN(day) AS since FROM events_daily WHERE event = '${FUNNEL_V4_MARK}' GROUP BY platform`;
 
 export async function loadScorecardEvents(env, today) {
   const w = scorecardWindows(today);
-  const [rows, presence, v2Rows, v3Rows, v3Presence] = (await env.DB.batch([
+  const [rows, presence, v2Rows, v3Rows, v3Presence, v4Rows, v4Presence] = (await env.DB.batch([
     env.DB.prepare(
       `SELECT day, event, source, campaign, medium, platform, SUM(n) AS n FROM events_daily
-        WHERE day >= ?1 AND day <= ?2 AND event IN (${[...EVENTS, ...NARROW_EVENTS].map((e) => `'${e}'`).join(', ')})
+        WHERE day >= ?1 AND day <= ?2 AND (event IN (${[...EVENTS, ...NARROW_EVENTS, CHECKOUT_TRY].map((e) => `'${e}'`).join(', ')})
+          OR event LIKE '${CHECKOUT_END_PREFIX}%' OR event LIKE '${PRODUCT_FAIL_PREFIX}%')
         GROUP BY day, event, source, campaign, medium, platform`
     ).bind(w.prior.from, w.current.to),
     env.DB.prepare(
@@ -312,11 +451,16 @@ export async function loadScorecardEvents(env, today) {
     env.DB.prepare(
       `SELECT day, platform FROM events_daily WHERE event = '${FUNNEL_V3_MARK}' AND day >= ?1 AND day <= ?2 GROUP BY day, platform`
     ).bind(w.current.from, w.current.to),
+    env.DB.prepare(`SELECT platform, MIN(day) AS since FROM events_daily WHERE event = '${FUNNEL_V4_MARK}' GROUP BY platform`),
+    env.DB.prepare(
+      `SELECT day, platform FROM events_daily WHERE event = '${FUNNEL_V4_MARK}' AND day >= ?1 AND day <= ?2 GROUP BY day, platform`
+    ).bind(w.current.from, w.current.to),
   ])).map((r) => r.results || []);
-  const v2 = {}, v3 = {};
+  const v2 = {}, v3 = {}, v4 = {};
   for (const r of v2Rows) v2[r.platform] = r.since;
   for (const r of v3Rows) v3[r.platform] = r.since;
-  return { rows, presence, v2, v3, v3Presence };
+  for (const r of v4Rows) v4[r.platform] = r.since;
+  return { rows, presence, v2, v3, v3Presence, v4, v4Presence };
 }
 
 export async function loadSubsHistory(env) {
@@ -343,7 +487,7 @@ export async function storeSubsSnapshot(env, today, subs, history) {
 /** Everything the scorecard needs, read-only. `subs` comes from the caller's
  * loadSubscribers so the daily email lists entitlements once. */
 export async function buildScorecard(env, { today, subs, storingToday = false }) {
-  let ev = { rows: [], presence: [], v2: {}, v3: {}, v3Presence: [] }, eventsError = null;
+  let ev = { rows: [], presence: [], v2: {}, v3: {}, v3Presence: [], v4: {}, v4Presence: [] }, eventsError = null;
   try { ev = await loadScorecardEvents(env, today); } catch (e) { eventsError = String((e && e.message) || e).slice(0, 200); }
   const history = await loadSubsHistory(env);
   return { card: computeScorecard({ today, ...ev, subs, history, eventsError, storingToday }), history };
@@ -440,6 +584,8 @@ export function scorecardItems(card) {
   empty.forEach((m, i) => {
     if (m.current == null && m.prior == null && (i !== 2 || (e.asked.current == null && e.confirmed.current == null))) items[i].lines = ['nothing reported in either week'];
   });
+  // How the checkout taps ended (v4 clients), under item 4 whatever it shows.
+  items[3].lines.push(...outcomeLines(ps.outcomes));
   return { range: rangeText(card.window), items, links: card.sourceRows.map(sourceRowText), note: countingNote(card) };
 }
 

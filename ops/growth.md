@@ -381,3 +381,72 @@ after the merge.
 (today they count nothing). (2) `ops/README.md` still has no row for this
 file. (3) Rename nothing else: `car-search` / `car-link` are gone from the
 code; GoatCounter would see `narrow/*` if it is ever switched on.
+
+## Checkout outcomes — branch `growth/checkout-outcomes`, NOT merged (2026-11-13)
+
+Built on origin/main db015e9c (main since moved only in `ops/hub.md`).
+Nothing deployed, merged, dispatched, sent or called in production. No
+native file changed.
+
+**Why.** Scorecard day one: iPhone Pro sheet 11 opens, 7 subscribe taps, 0
+bought, and nothing between the tap and a purchase was counted.
+
+**Counters (docs/app.js, EVENTS_V 3 -> 4; same anonymous daily counters).**
+- `checkout-try`: a tap on Subscribe (apps) or Get Pro (web), counted only by
+  v4 clients (the base for "no result recorded"; `checkout-start` still counts
+  every client's taps as before).
+- exactly one `checkout-end/<outcome>` per attempt: `bought`, `cancelled`,
+  `pending`, `incomplete` (store answered without entitled/pending/cancelled),
+  `unconfirmed` (web: back from Stripe, Pro not confirmed when the 8 polls
+  gave up), `failed-<class>`. Classes: `product-unavailable`, `network`,
+  `store-unavailable`, `unverified`, `store`, `not-configured` (web 503),
+  `server` (web other answer), `unknown`. Never the error text; an unlisted
+  name is sent as `failed-unknown`.
+- `iap-product-failed/<class>` (apps): `getProduct` did not return a product
+  when the Pro sheet opened (the "button keeps its baked-in price" path),
+  once per open.
+- Web attempts span the Stripe redirect via sessionStorage `ys_co_try` ("1"),
+  cleared at the end. A tap whose end never arrives (app killed, tab closed
+  at Stripe) is "no result recorded" = taps - ends.
+- v4 events bump a `funnel-v4` marker per (day, platform) (client may not
+  post it).
+
+**What the plugins can tell apart today (no native change made).**
+- iOS (`PurchasesPlugin.swift`): bought, cancelled, pending, "did not
+  complete" (`@unknown default`), reject "Product not available.",
+  "Purchase could not be verified."; every other error is StoreKit's
+  localized description -> `store` (network, payments not allowed, etc. are
+  NOT separable without a native change).
+- Android (`PurchasesPlugin.java`): bought, cancelled, pending, incomplete;
+  rejects "billing isn't available on this device" (BILLING_UNAVAILABLE /
+  SERVICE_UNAVAILABLE / SERVICE_DISCONNECTED -> `store-unavailable`), "Can't
+  reach Google Play" (NETWORK_ERROR -> `network`), "Product not available."
+  (no offer), "Purchase failed." (no activity -> `unknown`); everything else
+  (ITEM_ALREADY_OWNED, ITEM_UNAVAILABLE, DEVELOPER_ERROR, ERROR, and a
+  product query that returns OK but empty) -> Play debug text or "Google
+  Play billing error." -> `store`.
+- Suggested (needs a store release): reject with a code
+  (`call.reject(msg, "network")`) in both plugins so `store` splits.
+
+**Email + JSON.** Item 4 of the scorecard gains, text and HTML:
+"how checkout taps ended (website): of 7 checkout taps: 0 bought ·
+5 cancelled · 1 failed (store product not available) · 1 no result
+recorded"; per platform once an app reports; apps also "the store product
+did not load on N Pro sheet opens (class n, …)"; "checkout outcomes:
+counting starts <date>: N of 7 days so far"; "website only until the next
+app update". No v4 marker in the window = "no data (counting starts …)".
+Funnel by platform gains Checkout cancelled / pending / incomplete / failed,
+Paid, not confirmed, Checkout: no result, Store price not loaded (a dash
+where it cannot happen or the platform has no v4 build) and a note.
+`/v1/admin/scorecard` carries `proSheet.outcomes`.
+
+**Privacy page:** tallies list adds how a checkout ended (dated November
+13, 2026; adjust if merged later). sw.js jh-v194.
+
+**Merging triggers:** GitHub Pages (web app) and Deploy Workers (API worker;
+no migration). The apps count outcomes only after a store release (owner's
+"ship").
+
+**Tests:** funnel_counters_unit, scorecard_unit 155, recap_signup_unit,
+ops_quiet_unit, funnel_events_e2e 128, car_search_e2e 49,
+notable_trims_e2e 40, card_share_e2e 19, e2e-ops.sh 150 — all pass.

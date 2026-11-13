@@ -35,12 +35,25 @@
  * Monday email by link (2026-11-13): the sign-up request carries the
  * visitor's remembered source / campaign / medium; recap_signup.js keeps it
  * with the PENDING sign-up only and counts 'email-confirmed' under it at the
- * confirmation click, then drops it. */
+ * confirmation click, then drops it.
+ *
+ * Counting rules v4 (2026-11-13, docs/app.js EVENTS_V 4): how each checkout
+ * attempt ends. A v4 client counts 'checkout-try' at the tap and exactly one
+ * 'checkout-end/<outcome>' when it learns the end (bought, cancelled,
+ * pending, incomplete, unconfirmed, failed-<coarse class>); the apps also
+ * count 'iap-product-failed/<class>' when the store product did not load as
+ * the Pro sheet opened. Coarse classes only, never an error message. A v4
+ * client's events bump a 'funnel-v4' marker per (day, platform), so the
+ * scorecard can tell "no client able to count this" (no data) from "nobody
+ * did it" (0). Same anonymous counter, same table. */
 import { json, err } from './util.js';
 
 export const FUNNEL_V2_MARK = 'funnel-v2';
 export const FUNNEL_V3_MARK = 'funnel-v3';
-const MARKS = new Set([FUNNEL_V2_MARK, FUNNEL_V3_MARK]);
+export const FUNNEL_V4_MARK = 'funnel-v4';
+const MARKS = new Set([FUNNEL_V2_MARK, FUNNEL_V3_MARK, FUNNEL_V4_MARK]);
+/** The marker names as an SQL list, for queries that must leave them out. */
+export const MARKS_SQL = [...MARKS].map((m) => `'${m}'`).join(', ');
 
 const EVENT_RE = /^[a-z0-9][a-z0-9/_-]{0,47}$/;
 /** The utm fields as stored: lowercased, clipped, [a-z0-9._-] only. */
@@ -72,6 +85,7 @@ export async function handleEvent(req, env) {
   const stmts = [bump.bind(day, event, source, campaign, medium, platform)];
   if (Number(body.v) >= 2) stmts.push(bump.bind(day, FUNNEL_V2_MARK, '', '', '', platform));
   if (Number(body.v) >= 3) stmts.push(bump.bind(day, FUNNEL_V3_MARK, '', '', '', platform));
+  if (Number(body.v) >= 4) stmts.push(bump.bind(day, FUNNEL_V4_MARK, '', '', '', platform));
   await env.DB.batch(stmts);
   return json({ ok: true });
 }
@@ -84,7 +98,7 @@ export async function handleAttribution(req, env) {
   const since = new Date(Date.now() - days * 86400000).toISOString().slice(0, 10);
   const { results } = await env.DB.prepare(
     `SELECT source, campaign, medium, platform, event, SUM(n) AS n
-       FROM events_daily WHERE day >= ?1 AND event NOT IN ('${FUNNEL_V2_MARK}', '${FUNNEL_V3_MARK}')
+       FROM events_daily WHERE day >= ?1 AND event NOT IN (${MARKS_SQL})
       GROUP BY source, campaign, medium, platform, event
       ORDER BY source, campaign, medium, platform, event`
   ).bind(since).all();
