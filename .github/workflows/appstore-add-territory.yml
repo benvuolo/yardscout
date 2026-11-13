@@ -1,0 +1,190 @@
+# Adds ONE country to the App Store listing: the app itself and the Pro
+# subscription (availability, and a price equal to the US price if the
+# country has none). Owner request 2026-11-13: "add Canada on the App Store".
+#
+# apply=false (the default) only reads and prints the plan. apply=true makes
+# the changes, then reads everything back. It never removes a country, never
+# changes a price that already exists, and never touches the US. Not a store
+# release: no build is uploaded and nothing is submitted for review.
+# Prints ids, country codes and prices; never a secret.
+name: App Store add territory
+
+on:
+  workflow_dispatch:
+    inputs:
+      territory:
+        description: "App Store territory id to add (3 letters, e.g. CAN)"
+        default: "CAN"
+      apply:
+        description: "Make the change (false = print the plan only)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  add:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+      ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+      ASC_P8: ${{ secrets.ASC_API_KEY_P8 }}
+      APP_ID: "6817126581"
+      TERR: ${{ github.event.inputs.territory }}
+      APPLY: ${{ github.event.inputs.apply }}
+    steps:
+      - run: pip install -q requests pyjwt cryptography
+      - name: Add the territory
+        run: |
+          python3 - <<'PY'
+          import json, os, re, sys, time, jwt, requests
+          terr = (os.environ.get("TERR") or "").strip().upper()
+          apply = (os.environ.get("APPLY") or "").strip().lower() == "true"
+          if not re.fullmatch(r"[A-Z]{3}", terr) or terr == "USA":
+              print(f"refusing: territory {terr!r} is not a 3-letter id other than USA"); sys.exit(1)
+          key = os.environ["ASC_P8"].strip().replace("\\n", "\n")
+          def headers():
+              t = jwt.encode({"iss": os.environ["ASC_ISSUER_ID"], "iat": int(time.time()), "exp": int(time.time()) + 600,
+                              "aud": "appstoreconnect-v1"}, key, algorithm="ES256",
+                             headers={"kid": os.environ["ASC_KEY_ID"], "typ": "JWT"})
+              return {"Authorization": f"Bearer {t}", "Content-Type": "application/json"}
+          ROOT = "https://api.appstoreconnect.apple.com"
+          app = os.environ["APP_ID"]
+          print(f"MODE: {'APPLY' if apply else 'DRY RUN (plan only)'}; territory {terr}")
+
+          def err_of(r):
+              try: return "; ".join(f"{e.get('code')}: {e.get('detail')}" for e in r.json().get("errors", []))[:400]
+              except Exception: return r.text[:300]
+          def pages(url, params=None):
+              out, inc = [], []
+              while url:
+                  r = requests.get(url, headers=headers(), params=params, timeout=60); params = None
+                  if r.status_code != 200: return None, None, f"HTTP {r.status_code} {err_of(r)}"
+                  j = r.json(); d = j.get("data", []); out += d if isinstance(d, list) else [d]; inc += j.get("included", [])
+                  url = (j.get("links") or {}).get("next")
+              return out, inc, None
+          def write(method, url, body):
+              r = requests.request(method, url, headers=headers(), data=json.dumps(body), timeout=60)
+              ok = r.status_code in (200, 201, 204)
+              print(f"  {method} {url.replace(ROOT, '')} -> HTTP {r.status_code}{'' if ok else ' ' + err_of(r)}")
+              return ok, (r.json() if ok and r.text else {})
+          def money(pp):
+              a = (pp or {}).get("attributes") or {}
+              return a.get("customerPrice") or "?"
+          failed = []
+
+          # ---- 1. the app ----
+          rows, _, e = pages(f"{ROOT}/v2/appAvailabilities/{app}/territoryAvailabilities", {"include": "territory", "limit": 200})
+          if e: print("APP availability:", e); sys.exit(1)
+          def tid(t): return (((t.get("relationships") or {}).get("territory") or {}).get("data") or {}).get("id")
+          row = next((t for t in rows if tid(t) == terr), None)
+          on = sorted(tid(t) for t in rows if (t.get("attributes") or {}).get("available"))
+          print(f"APP: available in {len(on)} territories now: {','.join(on) if len(on) <= 12 else str(len(on)) + ' listed'}")
+          if not row:
+              print(f"APP: no availability record for {terr}; cannot add it by API"); sys.exit(1)
+          a = row.get("attributes") or {}
+          print(f"APP {terr}: available={a.get('available')} releaseDate={a.get('releaseDate')} contentStatuses={a.get('contentStatuses')}")
+          if a.get("available"):
+              print(f"APP {terr}: already available, nothing to do")
+          elif apply:
+              ok, _ = write("PATCH", f"{ROOT}/v1/territoryAvailabilities/{row['id']}",
+                            {"data": {"type": "territoryAvailabilities", "id": row["id"], "attributes": {"available": True}}})
+              if not ok: failed.append("app availability")
+          else:
+              print(f"APP {terr}: PLAN set available=true")
+
+          # ---- 2. the Pro subscription(s) ----
+          _, inc, e = pages(f"{ROOT}/v1/apps/{app}/subscriptionGroups", {"include": "subscriptions", "limit": 50})
+          if e: print("SUBSCRIPTIONS:", e); sys.exit(1)
+          subs = [i for i in inc if i.get("type") == "subscriptions"]
+          if not subs: print("SUBSCRIPTIONS: none")
+          for s in subs:
+              sid, sa = s["id"], s.get("attributes") or {}
+              print(f"\nSUBSCRIPTION {sa.get('productId')} ({sid}) state={sa.get('state')}")
+              # 2a. price in the new territory (before availability: a territory needs a price to be sold in)
+              pr, pinc, e = pages(f"{ROOT}/v1/subscriptions/{sid}/prices",
+                                  {"filter[territory]": terr, "include": "subscriptionPricePoint,territory", "limit": 50})
+              if e: print(f"  price {terr}: {e}"); failed.append("read price"); continue
+              pps = {i["id"]: i for i in pinc if i.get("type") == "subscriptionPricePoints"}
+              if pr:
+                  cur = [money(pps.get((((p.get("relationships") or {}).get("subscriptionPricePoint") or {}).get("data") or {}).get("id"))) for p in pr]
+                  print(f"  price {terr}: already set ({', '.join(cur)}); left as it is")
+              else:
+                  us, uinc, e = pages(f"{ROOT}/v1/subscriptions/{sid}/prices",
+                                      {"filter[territory]": "USA", "include": "subscriptionPricePoint", "limit": 50})
+                  if e or not us: print(f"  price USA: {e or 'none found'}"); failed.append("read US price"); continue
+                  upps = {i["id"]: i for i in uinc if i.get("type") == "subscriptionPricePoints"}
+                  # the price in force: the latest start date not in the future (None = from the start)
+                  today = time.strftime("%Y-%m-%d")
+                  live = sorted([p for p in us if not (p.get("attributes") or {}).get("startDate") or (p["attributes"]["startDate"] <= today)],
+                                key=lambda p: (p.get("attributes") or {}).get("startDate") or "")[-1]
+                  uspp = (((live.get("relationships") or {}).get("subscriptionPricePoint") or {}).get("data") or {}).get("id")
+                  print(f"  price USA: {money(upps.get(uspp))} (price point {uspp})")
+                  eq, _, e = pages(f"{ROOT}/v1/subscriptionPricePoints/{uspp}/equalizations",
+                                   {"filter[territory]": terr, "include": "territory", "limit": 50})
+                  if e or not eq: print(f"  equal price in {terr}: {e or 'none returned'}"); failed.append("find equal price"); continue
+                  tpp = eq[0]
+                  print(f"  price {terr}: none set. Apple's equal price to the US price is {money(tpp)} {terr}")
+                  if apply:
+                      ok, _ = write("POST", f"{ROOT}/v1/subscriptionPrices", {"data": {"type": "subscriptionPrices",
+                          "attributes": {"preserveCurrentPrice": False},
+                          "relationships": {"subscription": {"data": {"type": "subscriptions", "id": sid}},
+                                            "subscriptionPricePoint": {"data": {"type": "subscriptionPricePoints", "id": tpp["id"]}}}}})
+                      if not ok: failed.append("set price"); continue
+                  else:
+                      print(f"  price {terr}: PLAN set {money(tpp)}")
+              # 2b. availability
+              av, _, e = pages(f"{ROOT}/v1/subscriptions/{sid}/subscriptionAvailability")
+              have, new_terr_flag = [], False
+              if e:
+                  print(f"  availability: {e} (treated as none set)")
+              else:
+                  new_terr_flag = bool((av[0].get("attributes") or {}).get("availableInNewTerritories"))
+                  tl, _, e2 = pages(f"{ROOT}/v1/subscriptionAvailabilities/{av[0]['id']}/availableTerritories", {"limit": 200})
+                  if e2: print(f"  availability territories: {e2}"); failed.append("read subscription availability"); continue
+                  have = sorted(t["id"] for t in tl)
+              print(f"  sold in {len(have)} territories now: {','.join(have) if len(have) <= 12 else str(len(have)) + ' listed'}")
+              if terr in have:
+                  print(f"  {terr}: already sold there, nothing to do")
+              else:
+                  want = sorted(set(have) | {terr})
+                  if apply:
+                      ok, _ = write("POST", f"{ROOT}/v1/subscriptionAvailabilities", {"data": {"type": "subscriptionAvailabilities",
+                          "attributes": {"availableInNewTerritories": new_terr_flag},
+                          "relationships": {"subscription": {"data": {"type": "subscriptions", "id": sid}},
+                                            "availableTerritories": {"data": [{"type": "territories", "id": t} for t in want]}}}})
+                      if not ok: failed.append("subscription availability")
+                  else:
+                      print(f"  PLAN sell in: {','.join(want)}")
+              # 2c. introductory offers (reported only; never created here)
+              io, _, e = pages(f"{ROOT}/v1/subscriptions/{sid}/introductoryOffers", {"include": "territory,subscriptionPricePoint", "limit": 200})
+              if e: print(f"  introductory offers: {e}")
+              else:
+                  by = {}
+                  for o in io:
+                      t = (((o.get("relationships") or {}).get("territory") or {}).get("data") or {}).get("id") or "?"
+                      oa = o.get("attributes") or {}
+                      by.setdefault(t, []).append(f"{oa.get('offerMode')} {oa.get('duration')} x{oa.get('numberOfPeriods')} ends={oa.get('endDate')}")
+                  print(f"  introductory offers: USA={by.get('USA') or 'none'}  {terr}={by.get(terr) or 'none'}  (territories with one: {len(by)})")
+
+          # ---- 3. read back ----
+          if apply:
+              time.sleep(5)
+              rows, _, e = pages(f"{ROOT}/v2/appAvailabilities/{app}/territoryAvailabilities", {"include": "territory", "limit": 200})
+              if not e:
+                  row = next((t for t in rows if tid(t) == terr), {})
+                  print(f"\nREAD BACK app {terr}: available={(row.get('attributes') or {}).get('available')} contentStatuses={(row.get('attributes') or {}).get('contentStatuses')}")
+              for s in subs:
+                  av, _, e = pages(f"{ROOT}/v1/subscriptions/{s['id']}/subscriptionAvailability")
+                  if e: print("READ BACK subscription:", e); continue
+                  tl, _, e2 = pages(f"{ROOT}/v1/subscriptionAvailabilities/{av[0]['id']}/availableTerritories", {"limit": 200})
+                  pr, pinc, e3 = pages(f"{ROOT}/v1/subscriptions/{s['id']}/prices", {"filter[territory]": terr, "include": "subscriptionPricePoint", "limit": 50})
+                  pps = {i["id"]: i for i in (pinc or []) if i.get("type") == "subscriptionPricePoints"}
+                  print(f"READ BACK subscription {(s.get('attributes') or {}).get('productId')}: sold in {sorted(t['id'] for t in (tl or []))}; "
+                        f"{terr} price {[money(p) for p in pps.values()] or 'none'}")
+          if failed:
+              print("\nFAILED STEPS:", ", ".join(failed)); sys.exit(1)
+          print("\nDONE" if apply else "\nDRY RUN COMPLETE: nothing was changed")
+          PY
