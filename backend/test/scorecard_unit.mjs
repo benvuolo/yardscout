@@ -17,6 +17,11 @@
  *                  no data (no v3 client) vs 0, "counting starts <date>",
  *                  website only until an app reports, per-platform lines
  *   by link        emails given and confirmed per tagged link
+ *   outcomes       item 4's "of 7 checkout taps: 0 bought · 5 cancelled · …
+ *                  · 1 no result recorded": maths, no data (no v4 client) vs
+ *                  0, "counting starts <date>", website only until an app
+ *                  reports, per platform, product load failures, the funnel
+ *                  table's outcome rows and the admin JSON
  *   integration    loadScorecardEvents on SQLite with every migration, and the
  *                  whole daily email (buildDailyReport) with the scorecard first
  *
@@ -295,6 +300,77 @@ check('text: counting note names Android as not yet fixed', /not yet for the iPh
   check('by link: singular "1 email given, 0 confirmed"', /→ 1 email given, 0 confirmed → /.test(one), one);
 }
 
+/* ---------- how checkout taps ended (counting rules v4) ---------- */
+{
+  const T = '2026-11-26';   // window Nov 19 – Nov 25
+  const days = (from, to) => { const out = []; for (let d = from; d <= to; d = new Date(Date.parse(d) + 864e5).toISOString().slice(0, 10)) out.push(d); return out; };
+  const mark = (p, from, to = '2026-11-25') => days(from, to).map((day) => ({ day, platform: p }));
+  // The example the owner asked for: 7 taps, 0 bought, 5 cancelled, 1 failed (product), 1 no result.
+  const rowsO = [
+    R('2026-11-20', 'checkout-try', 4), R('2026-11-23', 'checkout-try', 3, { src: 'reddit' }),
+    R('2026-11-20', 'checkout-end/cancelled', 3), R('2026-11-23', 'checkout-end/cancelled', 2, { src: 'reddit' }),
+    R('2026-11-23', 'checkout-end/failed-product-unavailable', 1),
+    R('2026-11-12', 'checkout-try', 50), R('2026-11-26', 'checkout-try', 50),   // outside the window: ignored
+    R('2026-11-20', 'checkout-start', 9),   // all clients' taps: not the outcome base
+  ];
+  const o = computeScorecard({ today: T, rows: rowsO, presence: presenceA, v2: { web: '2026-11-12' }, v4: { web: '2026-11-19' }, v4Presence: mark('web', '2026-11-19'), subs: subsA });
+  const oc = o.proSheet.outcomes;
+  check('outcomes: web taps 7, ends add up, 1 no result', oc.platforms.web.taps === 7 && oc.platforms.web.cancelled === 5 && oc.platforms.web.failed === 1
+    && oc.platforms.web.bought === 0 && oc.platforms.web.ended === 6 && oc.platforms.web.noResult === 1, JSON.stringify(oc.platforms.web));
+  check('outcomes: apps without a v4 build are no data (null), not 0', oc.platforms.ios === null && oc.platforms.android === null);
+  check('outcomes: full week counted from Nov 19', oc.full === true && oc.daysCounted === 7 && oc.since === '2026-11-19');
+  const L4 = scorecardItems(o).items[3].lines;
+  check('outcomes: the item-4 line, exact wording',
+    L4.includes('how checkout taps ended (website): of 7 checkout taps: 0 bought · 5 cancelled · 1 failed (store product not available) · 1 no result recorded'), JSON.stringify(L4));
+  check('outcomes: "website only until the next app update" while no app reports', L4.includes('checkout outcomes: website only until the next app update'));
+  check('outcomes: no "counting starts" once the week is covered', !L4.some((l) => /counting starts/.test(l)));
+  check('outcomes: the existing item-4 lines stay first', /^opened .* → checkout .* → bought Pro /.test(L4[0]), L4[0]);
+  // Counting started mid-week.
+  const mid = computeScorecard({ today: T, rows: rowsO, presence: presenceA, v2: { web: '2026-11-12' }, v4: { web: '2026-11-23' }, v4Presence: mark('web', '2026-11-23'), subs: subsA });
+  const Lm = scorecardItems(mid).items[3].lines;
+  check('outcomes: started Nov 23 = "counting starts Nov 23: 3 of 7 days so far"', Lm.includes('checkout outcomes: counting starts Nov 23: 3 of 7 days so far'), JSON.stringify(Lm));
+  check('outcomes: only v4 clients send these counters, so every row in the window counts', mid.proSheet.outcomes.platforms.web.taps === 7, JSON.stringify(mid.proSheet.outcomes.platforms.web));
+  // No v4 client in the window: no data, with the start date or "with the first visit".
+  const none = computeScorecard({ today: T, rows: rowsO, presence: presenceA, v2: { web: '2026-11-12' }, subs: subsA });
+  check('outcomes: no v4 client ever = no data, counting starts with the updated website',
+    scorecardItems(none).items[3].lines.includes('how checkout taps ended: no data (counting starts with the first visit to the updated website)'), JSON.stringify(scorecardItems(none).items[3].lines));
+  const later = computeScorecard({ today: T, rows: rowsO, presence: presenceA, v2: { web: '2026-11-12' }, v4: { web: '2026-11-26' }, subs: subsA });
+  check('outcomes: first v4 day after the window = no data, "counting starts Nov 26"',
+    scorecardItems(later).items[3].lines.includes('how checkout taps ended: no data (counting starts Nov 26)') && later.proSheet.outcomes.total === null);
+  // Reporting but nobody tapped: a real 0.
+  const zero = computeScorecard({ today: T, rows: [], presence: presenceA, v2: { web: '2026-11-12' }, v4: { web: '2026-11-19' }, v4Presence: mark('web', '2026-11-19'), subs: subsA });
+  check('outcomes: reporting with no taps = "no checkout taps" (0, not no data)', zero.proSheet.outcomes.total.taps === 0
+    && scorecardItems(zero).items[3].lines.includes('how checkout taps ended (website): no checkout taps'), JSON.stringify(scorecardItems(zero).items[3].lines));
+  // Apps reporting: per platform lines, every outcome kind, product load failures.
+  const rowsAll = [
+    ...rowsO,
+    R('2026-11-24', 'checkout-try', 6, { p: 'ios' }), R('2026-11-24', 'checkout-end/bought', 1, { p: 'ios' }), R('2026-11-24', 'checkout-end/cancelled', 1, { p: 'ios' }),
+    R('2026-11-24', 'checkout-end/pending', 1, { p: 'ios' }), R('2026-11-24', 'checkout-end/incomplete', 1, { p: 'ios' }),
+    R('2026-11-25', 'checkout-end/failed-store', 1, { p: 'ios' }), R('2026-11-25', 'checkout-end/failed-unverified', 1, { p: 'ios' }),
+    R('2026-11-24', 'iap-product-failed/product-unavailable', 2, { p: 'ios' }), R('2026-11-25', 'iap-product-failed/store', 1, { p: 'ios' }),
+    R('2026-11-21', 'checkout-try', 2), R('2026-11-21', 'checkout-end/unconfirmed', 1), R('2026-11-21', 'checkout-end/failed-network', 1),
+    R('2026-11-21', 'checkout-try', 9, { p: 'android' }),   // android rows without an android v4 marker: not counted
+  ];
+  const all = computeScorecard({ today: T, rows: rowsAll, presence: presenceA, v2: { web: '2026-11-12' }, v4: { web: '2026-11-19', ios: '2026-11-24' },
+    v4Presence: [...mark('web', '2026-11-19'), ...mark('ios', '2026-11-24')], subs: subsA });
+  const La = scorecardItems(all).items[3].lines;
+  check('outcomes: per platform once an app reports', La.includes('how checkout taps ended:')
+    && La.includes('Web: of 9 checkout taps: 0 bought · 5 cancelled · 1 back from payment, not confirmed · 2 failed (network 1, store product not available 1) · 1 no result recorded')
+    && La.includes('iPhone app: of 6 checkout taps: 1 bought · 1 cancelled · 1 waiting for approval · 1 did not complete · 2 failed (store error 1, purchase could not be verified 1) · 0 no result recorded')
+    && La.includes('Android app: no data'), JSON.stringify(La));
+  check('outcomes: product load failures per reporting app, by class', La.includes('iPhone app: the store product did not load on 3 Pro sheet opens (store product not available 2, store error 1)'), JSON.stringify(La));
+  check('outcomes: the app that has not updated is named', La.includes('checkout outcomes: Android app not counted until its next update') && !La.some((l) => /website only/.test(l)));
+  check('outcomes: counting for iOS from Nov 24 does not make the week partial (web covers it)', all.proSheet.outcomes.full === true);
+  check('outcomes: totals over reporting platforms only (android excluded)', all.proSheet.outcomes.total.taps === 15 && all.proSheet.outcomes.total.noResult === 1, JSON.stringify(all.proSheet.outcomes.total));
+  // More ends than taps (a Stripe return the day after a tap outside the window).
+  const extra = computeScorecard({ today: T, rows: [R('2026-11-19', 'checkout-end/cancelled', 2), R('2026-11-19', 'checkout-try', 1)], presence: presenceA,
+    v2: { web: '2026-11-12' }, v4: { web: '2026-11-12' }, v4Presence: mark('web', '2026-11-19'), subs: subsA });
+  check('outcomes: more ends than taps is said, not hidden', scorecardItems(extra).items[3].lines.some((l) => l.endsWith('0 no result recorded (1 more ended than were tapped this week: taps from before the week)')),
+    JSON.stringify(scorecardItems(extra).items[3].lines));
+  check('outcomes: an events read error adds no outcome line', !scorecardTextLines(computeScorecard({ today: T, eventsError: 'D1 down', subs: subsA })).some((l) => /checkout taps ended/.test(l)));
+  check('outcomes: no error text or ids in the numbers', !/message|@|"id"/.test(JSON.stringify(all.proSheet.outcomes)));
+}
+
 /* ---------- integration: SQLite with every migration (D1 shim) ---------- */
 function d1(db) {
   const wrap = (sql, args = []) => ({
@@ -316,6 +392,10 @@ for (const d of [...CUR, ...PRI]) ins.run(d, 'funnel-v2', '', '', '', 'web', 1);
 for (const d of ['2026-11-22', '2026-11-23', '2026-11-24', '2026-11-25']) ins.run(d, 'funnel-v3', '', '', '', 'web', 1);
 for (const [d, k, n] of [['2026-11-22', 'search', 9], ['2026-11-23', 'search-trim', 2], ['2026-11-22', 'filters-model', 6], ['2026-11-24', 'filters-make', 3],
   ['2026-11-23', 'link', 22], ['2026-11-25', 'trim', 3], ['2026-11-22', 'search', 3]]) ins.run(d, 'narrow/' + k, d === '2026-11-22' && k === 'search' && n === 3 ? 'reddit' : '', '', '', 'web', n);
+// v4 web client from Nov 24: checkout taps and how they ended (yesterday = Nov 25)
+for (const d of ['2026-11-24', '2026-11-25']) ins.run(d, 'funnel-v4', '', '', '', 'web', 1);
+for (const [d, e, n] of [['2026-11-24', 'checkout-try', 4], ['2026-11-25', 'checkout-try', 3], ['2026-11-24', 'checkout-end/cancelled', 3],
+  ['2026-11-25', 'checkout-end/cancelled', 2], ['2026-11-25', 'checkout-end/failed-not-configured', 1]]) ins.run(d, e, '', '', '', 'web', n);
 const kv2 = new Map();
 const env = {
   DB: d1(db),
@@ -365,6 +445,26 @@ check('daily text: narrowing block under the scorecard, before OPEN ISSUES',
   t.includes('  How people narrowed the Cars list (7 days): search box 14 · Filters 9 · link 22 · trim filter 3')
   && t.indexOf('How people narrowed') > t.indexOf('WEEKLY SCORECARD') && t.indexOf('How people narrowed') < t.indexOf('OPEN ISSUES')
   && t.includes('counting starts Nov 22: 4 of 7 days so far') && t.includes('website only until the next app update'), t.slice(t.indexOf('How people'), t.indexOf('OPEN ISSUES')));
+check('daily text: item 4 says how the checkout taps ended (web, counting from Nov 24)',
+  t.includes('     how checkout taps ended (website): of 7 checkout taps: 0 bought · 5 cancelled · 1 failed (web checkout not set up) · 1 no result recorded')
+  && t.includes('     checkout outcomes: counting starts Nov 24: 2 of 7 days so far') && t.includes('     checkout outcomes: website only until the next app update'),
+  t.slice(t.indexOf('4. Pro sheet'), t.indexOf('5. Paying')));
+check('daily html: the same outcome line in item 4', h.includes('of 7 checkout taps: 0 bought · 5 cancelled · 1 failed (web checkout not set up) · 1 no result recorded')
+  && h.indexOf('of 7 checkout taps') > h.indexOf('Pro sheet to checkout') && h.indexOf('of 7 checkout taps') < h.indexOf('Paying subscribers'));
+{
+  const fl = (label) => t.split('\n').find((l) => l.startsWith('    ' + label));
+  const cells = (label) => (fl(label) || '').slice(4 + 22).trim().split(/\s+/);
+  check('daily funnel text: outcome rows per platform (web yesterday / 7 d; apps dash: no v4 build)',
+    eq(cells('Checkout cancelled'), ['2', '5', '–', '–', '–', '–']) && eq(cells('Checkout failed'), ['1', '1', '–', '–', '–', '–'])
+    && eq(cells('Checkout: no result'), ['0', '1', '–', '–', '–', '–']) && eq(cells('Checkout pending'), ['–', '–', '–', '–', '–', '–'])
+    && eq(cells('Paid, not confirmed'), ['0', '0', '–', '–', '–', '–']) && eq(cells('Store price not loaded'), ['–', '–', '–', '–', '–', '–']),
+    ['Checkout cancelled', 'Checkout failed', 'Checkout: no result', 'Checkout pending', 'Paid, not confirmed', 'Store price not loaded'].map(fl).join('\n'));
+  check('daily funnel text: a note says which builds count outcomes and what "no result" is',
+    /Note: Checkout cancelled … Store price not loaded: how checkout taps ended, counted only by builds that report it \(Web since Nov 24\)\. "No result" is those builds' taps minus the ends they reported/.test(t)
+    && /A dash for iOS and Android: no build that reports it yet \(the apps: after the next store release\)\./.test(t), t.match(/Note: Checkout cancelled[^\n]*/));
+  check('daily funnel html: outcome rows present', ['Checkout cancelled', 'Checkout failed', 'Checkout: no result', 'Store price not loaded'].every((x) => h.includes(x)));
+  check('daily funnel: the v4 marker is not a funnel row', !/funnel-v4/.test(t) && !/funnel-v4/.test(h));
+}
 check('daily html: narrowing block before Open issues', h.indexOf('How people narrowed the Cars list') > h.indexOf('Weekly scorecard') && h.indexOf('How people narrowed the Cars list') < h.indexOf('Open issues'));
 check('daily html: scorecard before Open issues', h.indexOf('Weekly scorecard') > 0 && h.indexOf('Weekly scorecard') < h.indexOf('Open issues'));
 check('daily html: existing sections still there', ['Open issues', 'Scan', 'Paying subscribers', 'Funnel'].every((x) => h.includes(x)));
@@ -376,6 +476,9 @@ const adminCard = (await buildScorecard(env, { today: '2026-11-26', subs: { appl
 check('admin JSON: same numbers as the email', adminCard.visitors.current === rep.scorecard.visitors.current && eq(adminCard.sourceRows, rep.scorecard.sourceRows));
 check('admin JSON: carries the narrowing numbers', eq(adminCard.narrowing.total, rep.scorecard.narrowing.total) && adminCard.narrowing.since === '2026-11-22'
   && adminCard.narrowing.daysCounted === 4 && eq(adminCard.narrowing.appsReporting, []), JSON.stringify(adminCard.narrowing));
+check('admin JSON: carries the checkout outcomes', adminCard.proSheet.outcomes.since === '2026-11-24' && adminCard.proSheet.outcomes.platforms.web.taps === 7
+  && adminCard.proSheet.outcomes.platforms.web.noResult === 1 && eq(adminCard.proSheet.outcomes.platforms.web.failedBy, { 'not-configured': 1 })
+  && adminCard.proSheet.outcomes.platforms.ios === null && eq(adminCard.proSheet.outcomes, rep.scorecard.proSheet.outcomes), JSON.stringify(adminCard.proSheet.outcomes));
 check('admin JSON: no per-person fields', !/@|"ip"|"id"|device/i.test(JSON.stringify(adminCard)), JSON.stringify(adminCard).match(/@|"ip"|"id"|device/i));
 globalThis.fetch = realFetch;
 
