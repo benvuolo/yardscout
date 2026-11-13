@@ -33,6 +33,7 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
+import { notableTrimsFixture } from './notable_trims_fixture.mjs';
 
 const require = createRequire(import.meta.url);
 const { chromium } = require('playwright');
@@ -1180,6 +1181,73 @@ const SCREENS = [
     });
     await settle(page, 300);
   }, async (page) => { await resetUi(page); await page.evaluate(() => { localStorage.removeItem('jh_pro'); localStorage.removeItem('jh_pro_source'); applyProGates(); renderLive(); }); }],
+  // Notable trims (2026-11-13): a card carrying three badges (trim, Manual,
+  // New / Leaving soon) and the Filters panel with Trim picked and its
+  // "no single trim" note.
+  ['cards-trim-badges', async (page) => {
+    await tab(page, 'live');
+    await page.evaluate(() => {
+      const cars = _scopedVehicles.filter(v => notableTrimOf(v) && !isNoPickModel(v.make, v.model) && extrasFor(v));
+      if (!cars.length) throw new Error('no notable-trim car in range (no notableTrims in the data?)');
+      // The longest name with the longest trim word: the hardest card to fit.
+      const size = (v) => `${v.year} ${v.make} ${v.model}`.length + 2 * notableTrimOf(v).length;
+      const v = cars.sort((a, b) => size(b) - size(a))[0];
+      const eid = String(v.id);
+      window.__fxTrim = { eid, ex: vehicleExtras[eid], date: v.dateAdded, v };
+      const ex = (vehicleExtras[eid] || []).slice();
+      ex[3] = 'Manual'; ex[4] = 'vin';          // fixture: the Manual badge
+      vehicleExtras[eid] = ex;
+      if (!isNew(v.dateAdded) && !carLotClock(v).leavingSoon) v.dateAdded = new Date().toISOString().slice(0, 10);   // fixture: "New"
+      carSearchSetFilter(v.make, canonicalModel(v.make, v.model));
+      setLiveTrim(notableTrimOf(v));
+      renderLive();
+      const c = document.querySelector(`#live-grid .car-card[data-eid="${CSS.escape(eid)}"]`);
+      if (!c) throw new Error('fixture card not rendered');
+      const n = c.querySelectorAll('.car-badges .badge').length;
+      if (n !== 3) throw new Error(`fixture card has ${n} badges, want 3`);
+      c.scrollIntoView({ block: 'start' }); window.scrollBy(0, -70);
+    });
+  }, async (page) => {
+    await page.evaluate(() => {
+      const f = window.__fxTrim; if (!f) return;
+      if (f.ex === undefined) delete vehicleExtras[f.eid]; else vehicleExtras[f.eid] = f.ex;
+      f.v.dateAdded = f.date; delete f.v._ts;
+      carSearchClearAll(); document.getElementById('car-search-input').blur();
+    });
+    await settle(page, 300);
+  }],
+  ['cars-filters-trim', async (page) => {
+    await tab(page, 'live');
+    await page.evaluate(() => {
+      // The make/model + trim with the most cars the note counts as unknown.
+      const groups = new Map();
+      for (const v of _scopedVehicles) {
+        const w = notableTrimOf(v);
+        if (!w || isNoPickModel(v.make, v.model)) continue;
+        const k = v.make + '\u0000' + canonicalModel(v.make, v.model) + '\u0000' + w;
+        if (!groups.has(k)) groups.set(k, { make: v.make, model: canonicalModel(v.make, v.model), word: w, unknown: 0 });
+      }
+      for (const g of groups.values()) {
+        g.unknown = _scopedVehicles.filter(v => v.make === g.make && canonicalModel(v.make, v.model) === g.model
+          && !notableTrimHits(v).includes(g.word) && notableTrimMaybe(v, g.word)).length;
+      }
+      const g = [...groups.values()].sort((a, b) => b.unknown - a.unknown)[0];
+      if (!g) throw new Error('no notable-trim car in range (no notableTrims in the data?)');
+      if (!document.getElementById('live-filter-toggle').classList.contains('open')) document.getElementById('live-filter-toggle').click();
+      carSearchSetFilter(g.make, g.model);
+      setLiveTrim(g.word);
+      renderLive();
+      if (document.getElementById('live-filter-trim-wrap').hidden) throw new Error('Trim control not shown');
+      if (g.unknown && document.getElementById('live-filter-trim-note').hidden) throw new Error('no "no single trim" note');
+      document.getElementById('live-filter-trim-wrap').scrollIntoView({ block: 'center' });
+    });
+  }, async (page) => {
+    await page.evaluate(() => {
+      carSearchClearAll(); document.getElementById('car-search-input').blur();
+      if (document.getElementById('live-filter-toggle').classList.contains('open')) document.getElementById('live-filter-toggle').click();
+    });
+    await settle(page, 300);
+  }],
   ['yards', async (page) => { await tab(page, 'yards'); }],
   // Filter panels open (2026-11-13: no screen opened them, so a zip
   // placeholder and "From" cut off in the two-column layout on an iPhone
@@ -1341,6 +1409,9 @@ try {
     await page.route(/data\/(inv\/manifest|vehicle_extras)\.json(\?|$)/, async (route) => {
       const res = await route.fetch(); const j = await res.json();
       j.photoSources = PHOTO_ON;
+      // notableTrims as the scan publishes it (from the first scan after
+      // design/notable-trims; computed by the scraper until the data has it).
+      if (/manifest/.test(route.request().url()) && !j.notableTrims) j.notableTrims = notableTrimsFixture();
       await route.fulfill({ response: res, json: j });
     });
     // Web checkout is live on yardscout.io; the Pro sheet is tested in that state.

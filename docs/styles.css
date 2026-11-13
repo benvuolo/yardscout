@@ -3526,6 +3526,7 @@ select { white-space: normal; height: auto; }
   border: 1px solid var(--border-strong, var(--border));
   font-family: var(--mono, ui-monospace, monospace);
   letter-spacing: 0.02em;
+  text-transform: none;
   overflow-wrap: anywhere;
   max-width: 100%;
 }
