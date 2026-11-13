@@ -15971,6 +15971,38 @@ def _ebay_band(info: dict, p: dict) -> dict | None:
     return {"low": low, "high": high, "n": int(rec.get("n", 0) or 0), "src": "ebay-sold" if rec.get("sold") else "ebay"}
 
 
+def _keyword_hits(haystack: str) -> list[tuple[str, dict]]:
+    """(matched keyword, entry) for every UNOBTANIUM_DB entry whose keywords
+    hit "make model" (lowercase), in DB order, each entry object once (alias
+    keys share one dict). Year-independent; match_vehicle and
+    notable_trims_from_spans both start here."""
+    seen_entries: set[int] = set()
+    hits: list[tuple[str, dict]] = []
+    for keyword, info in UNOBTANIUM_DB.items():
+        if id(info) in seen_entries:
+            continue  # alias key pointing at an entry object we already tested
+        keywords = info.get("match") or (keyword,)
+        hit = next((k for k in keywords if _kw_pattern(k).search(haystack)), None)
+        if hit is None:
+            continue
+        seen_entries.add(id(info))
+        hits.append((hit, info))
+    return hits
+
+
+def _matched_entries(year: int, hits: list[tuple[str, dict]]) -> list[tuple[str, dict]]:
+    """The entries match_vehicle uses for this model year: keyword hits whose
+    year_range covers it, minus the less specific ones (specificity guard:
+    when "grand cherokee" matched, the plain "cherokee" (XJ) entry is a
+    different vehicle — drop any candidate whose keyword is a proper
+    substring of another candidate's keyword)."""
+    candidates = [(kw, info) for kw, info in hits
+                  if info["year_range"][0] <= year <= info["year_range"][1]]
+    matched_kws = [kw for kw, _ in candidates]
+    return [(kw, info) for kw, info in candidates
+            if not any(kw != other and kw in other for other in matched_kws)]
+
+
 def match_vehicle(year: int, make: str, model: str, vin_decode: dict | None = None) -> list[dict]:
     """Match a vehicle against the unobtanium database, filtering parts by
     year range and trim requirements.  Attaches sell-channel info to each part.
@@ -16028,27 +16060,7 @@ def match_vehicle(year: int, make: str, model: str, vin_decode: dict | None = No
     is_manual = "manual" in trans_str and "automated" not in trans_str
     is_definitely_auto = bool(trans_str) and not is_manual and any(
         t in trans_str for t in ("automatic", "cvt", "dual-clutch", "automated"))
-    haystack = f"{make_lower} {model_lower}"
-    seen_entries: set[int] = set()
-    candidates: list[tuple[str, dict]] = []
-    for keyword, info in UNOBTANIUM_DB.items():
-        if id(info) in seen_entries:
-            continue  # alias key pointing at an entry object we already tested
-        keywords = info.get("match") or (keyword,)
-        hit = next((k for k in keywords if _kw_pattern(k).search(haystack)), None)
-        if hit is None:
-            continue
-        seen_entries.add(id(info))
-        lo, hi = info["year_range"]
-        if lo <= year <= hi:
-            candidates.append((hit, info))
-    # Specificity guard: when "grand cherokee" matched, the plain "cherokee"
-    # (XJ) entry is a different vehicle — drop any candidate whose keyword is
-    # a proper substring of another candidate's keyword.
-    matched_kws = [kw for kw, _ in candidates]
-    for keyword, info in candidates:
-        if any(keyword != other and keyword in other for other in matched_kws):
-            continue
+    for keyword, info in _matched_entries(year, _keyword_hits(f"{make_lower} {model_lower}")):
         low, high = info["year_range"]
         filtered_parts = []
         hybrid_keeps = set().union(*(rows for (mk, sub), rows in _HYBRID_KEEPS.items()
@@ -26783,6 +26795,97 @@ def _span_add(spans: dict, make: str, model: str, year) -> None:
         sp[0], sp[1] = min(sp[0], y), max(sp[1], y)
 
 
+def _trim_word_key(word: str) -> str:
+    """Spelling-insensitive key for a gate word ("STi" = "STI", "F-Sport" =
+    "F Sport", "2.5 RS" = "2.5RS", "PRO-4X" = "Pro-4X"), so a model lists
+    each trim once."""
+    return "".join(re.findall(r"[a-z0-9]+", str(word).lower()))
+
+
+_TRIM_DISPLAY: dict[str, str] | None = None
+# Body styles some rows gate on through "trim" (A5 Cabriolet, TT Roadster,
+# 6 Series Convertible). A body style is not a trim: never a notable trim.
+_NOT_A_TRIM = {"convertible", "cabriolet", "roadster", "coupe", "sedan",
+               "wagon", "hatchback", "spyder", "spider"}
+
+
+def _trim_display(word: str) -> str:
+    """How the app names a gate word. Gates written in mixed or upper case
+    ("XT", "TRD Pro", "tS") are shown as written. Some rows gate on
+    lowercase match tokens ("wrx", "sti", "gt", "hybrid"); those borrow a
+    spelling another row writes for the same word ("sti" -> "STI"), else
+    short parts are uppercased ("is f" -> "IS F", "se-r" -> "SE-R") and
+    longer words capitalised ("hybrid" -> "Hybrid")."""
+    global _TRIM_DISPLAY
+    w = str(word).strip()
+    if w != w.lower():
+        return w
+    if _TRIM_DISPLAY is None:
+        _TRIM_DISPLAY = {}
+        for info in UNOBTANIUM_DB.values():
+            for p in info.get("top_parts") or ():
+                for t in p.get("trim") or ():
+                    t = str(t).strip()
+                    if t != t.lower():
+                        _TRIM_DISPLAY.setdefault(_trim_word_key(t), t)
+    hit = _TRIM_DISPLAY.get(_trim_word_key(w))
+    if hit:
+        return hit
+    return re.sub(r"[a-z0-9]+",
+                  lambda m: m.group(0).upper() if len(m.group(0)) <= 3 else m.group(0).capitalize(), w)
+
+
+def notable_trims_from_spans(spans: dict) -> dict:
+    """make -> model -> trim words the parts table gates rows on, for the
+    app's trim badge and Cars "Trim" filter (design/notable-trims,
+    2026-11-13). Nothing new is claimed: a word is listed only when a
+    NON-option row of an entry that match_vehicle would use for that
+    make/model, in some model year of its modelYears span (the row's own
+    yr_min/yr_max respected), carries it as a "trim" gate. Left out:
+    option rows (factory options, "if equipped" even on the right trim, so
+    "Limited" from a premium-audio option does not make every Limited
+    notable); words that are already part of the model name ("SVT" for a
+    "Focus SVT", "hybrid" for a "Camry Hybrid"); words with no letters
+    ("350", "500" on the Lexus IS F-Sport gate); body styles gated through
+    "trim" (_NOT_A_TRIM: "Convertible", "Roadster"). Words keep the parts
+    table's first-seen order (DB order, then row order) and spelling (see
+    _trim_display); spelling variants collapse to the first. Pairs with no
+    word are omitted. The app badges a car only when its USABLE
+    VIN-decoded trim matches one of these words."""
+    out: dict[str, dict[str, list[str]]] = {}
+    for mk, models in spans.items():
+        for md, span in models.items():
+            try:
+                y0, y1 = int(span[0]), int(span[1])
+            except (TypeError, ValueError, IndexError):
+                continue
+            hits = _keyword_hits(f"{str(mk).lower()} {str(md).lower()}")
+            if not hits:
+                continue
+            model_l = str(md).lower()
+            words: list[str] = []
+            keys: set[str] = set()
+            for year in range(y0, y1 + 1):
+                for _kw, info in _matched_entries(year, hits):
+                    for p in info["top_parts"]:
+                        if "trim" not in p or p.get("option"):
+                            continue
+                        if year < p.get("yr_min", year) or year > p.get("yr_max", year):
+                            continue
+                        for w in p["trim"]:
+                            k = _trim_word_key(w)
+                            if (not k or k in keys or not re.search(r"[a-z]", k)
+                                    or k in _NOT_A_TRIM):
+                                continue
+                            keys.add(k)
+                            if _gate_hit((str(w).lower(),), model_l):
+                                continue  # the model name already says it
+                            words.append(_trim_display(w))
+            if words:
+                out.setdefault(mk, {})[md] = words
+    return {mk: dict(sorted(v.items())) for mk, v in sorted(out.items())}
+
+
 def compact_inventory_v2(entries: list[dict]) -> dict:
     """Schema v2: dedupe yards + part lists into lookup tables and store vehicles
     as flat arrays. Identical part lists repeat across every vehicle of the same
@@ -26901,6 +27004,9 @@ def compact_inventory_v2(entries: list[dict]) -> dict:
         # model year where decoded, else the listing year; implausible years
         # skipped). Pickers show a model for a selected year within span +-1.
         "modelYears": {mk: dict(sorted(v.items())) for mk, v in sorted(spans.items())},
+        # make -> model -> trim words the parts table gates non-option rows
+        # on (notable_trims_from_spans): the app's trim badge + Cars filter.
+        "notableTrims": notable_trims_from_spans(spans),
         "vehicles": rows,
         "_extras": extras,
     }
@@ -27398,6 +27504,9 @@ def merge_carryforward_yards(new_payload: dict, prev_payload: dict,
     for mk, md in sorted(np_listed - np_clean):
         final.setdefault(mk, []).append(md)
     new_payload["noPickModels"] = final
+    # Carried rows may bring make/model pairs (or years) the fresh scan did
+    # not have: recompute from the merged spans.
+    new_payload["notableTrims"] = notable_trims_from_spans(new_payload.get("modelYears") or {})
     return carried
 
 
