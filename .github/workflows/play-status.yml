@@ -80,6 +80,8 @@ jobs:
                         f"{f', grace {grace}' if grace else ''}; US price {money(us and us.get('price'))}; "
                         f"{len(bp.get('regionalConfigs', []))} regions")
                   o = requests.get(f"{app}/subscriptions/{pid}/basePlans/{bp.get('basePlanId')}/offers", headers=H, timeout=60)
+                  print(f"    offers: HTTP {o.status_code}, {len(o.json().get('subscriptionOffers', [])) if o.status_code == 200 else '?'} offer(s) on this base plan"
+                        + ("" if o.status_code == 200 else f" {o.text[:200]}"))
                   for of in (o.json().get("subscriptionOffers", []) if o.status_code == 200 else []):
                       phases = []
                       for ph in of.get("phases", []):
