@@ -542,3 +542,17 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
 - Side finding: the App Store subscription has no introductory offer in any
   territory. If the Pro sheet's "$1.99 first month" is meant to apply on
   iPhone, that needs a look (growth workstream).
+
+## 2026-11-13 ~18:25 UTC no first-month discount exists anywhere
+
+- Owner: "does android have the first month being cheaper? If so stop that."
+  Checked: Google Play base plan `monthly` has no offers (play-status run
+  43481427692: offers endpoint HTTP 204); App Store has no introductory offer
+  in any territory; the web checkout (`backend/src/billing.js`) has no
+  built-in discount, only `allow_promotion_codes`. Nothing to stop.
+- Correction: the hub told the owner earlier that Google Play had a
+  first-month offer. That was not verified and was wrong. The "$1.99 first
+  month" wording in `ops/business-plan.md` came from the funnel audit; the app
+  shows an intro price only when a store reports one (`introOfferText`).
+- Play country availability: the Android Publisher API only reads it. The
+  owner could not find the screen; hub gave the Play Console path.
