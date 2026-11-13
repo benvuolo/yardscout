@@ -1776,3 +1776,11 @@
 08:55:06 chain-unlinked door-front 1 numbers named by 41-51-1-959-001, no catalog link: 41-51-1-929-809
 08:55:06 chain-unlinked door-front 1 numbers named by 41-51-1-959-002, no catalog link: 41-51-1-929-810
 09:04:35 time budget reached records=2228
+11:08:17 start site=www.bmwpartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2228 list_lines=4177 year_lines=531 url_index=0
+11:08:17 completion worklist completion/bmw.own_page.json: 507 rows
+11:41:33 chain-unlinked gauge-cluster 3 numbers named by 62-10-5-A03-E48, no catalog link: 62-10-9-379-950, 62-10-9-382-072, 62-10-9-363-212
+11:41:33 chain-unlinked gauge-cluster 2 numbers named by 62-10-5-A03-E55, no catalog link: 62-10-9-363-219, 62-10-9-379-957
+11:41:33 chain-unlinked gauge-cluster 1 numbers named by 62-10-6-805-181, no catalog link: 62-10-9-371-007
+11:41:33 chain-unlinked gauge-cluster 2 numbers named by 62-10-6-805-196, no catalog link: 62-10-9-371-019, 62-10-9-371-848
+11:41:33 chain-unlinked gauge-cluster 1 numbers named by 62-10-8-794-207, no catalog link: 62-10-8-792-063
+11:41:41 time budget reached records=2258
