@@ -526,3 +526,19 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
   scan published the list. The test now strips the list itself. The hub
   pushed 2d580eb5 before reading that failure; the failure was in the test's
   premise, not in the app.
+
+## 2026-11-13 18:02 UTC Canada added on the App Store (owner: "add Canada on the App Store, I'll do Play")
+
+- New workflow `appstore-add-territory.yml` (dry run by default; never
+  removes a country or changes an existing price). Dry run 43478521310, then
+  apply run 43478608446:
+  - App: Canada `available` false → true. Read back:
+    `['CANNOT_SELL', 'PROCESSING_TO_AVAILABLE']` (Apple is rolling it out).
+  - Pro (`yardscout_pro_monthly`): sold in USA → CAN and USA. Its Canadian
+    price already existed (CAD 11.99, Apple's equalised price); not changed.
+- Google Play: the owner is adding Canada in Play Console (the API cannot).
+- To verify later: dispatch `store-availability.yml`; expect App Store CA=yes
+  for the app and the subscription, and Play CA=yes once the owner has done it.
+- Side finding: the App Store subscription has no introductory offer in any
+  territory. If the Pro sheet's "$1.99 first month" is meant to apply on
+  iPhone, that needs a look (growth workstream).
