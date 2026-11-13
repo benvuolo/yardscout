@@ -506,3 +506,23 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
   in Canada on Google Play. Country availability is set in Play Console (and
   App Store Connect), not in this repo; owner to check. u/cgarcusm could not
   find Xterra as an option: the Model list only offers models within range.
+
+## 2026-11-13 ~17:45 UTC Canada: both stores sell in the US only
+
+- Owner asked the hub to look into "app isn't available in Canada"
+  (u/underling1978). New read-only workflow `store-availability.yml`
+  (run 43470143537):
+  - Google Play production: 1 country listed, US. CA, MX, GB, AU: no. The Pro
+    subscription is already priced in 174 regions (CA: CAD 12.99).
+  - App Store: available in 1 of 175 territories (US). The Pro subscription is
+    sold in 1 territory (US), `availableInNewTerritories` false.
+- Not changed. Play's API cannot set countries (Play Console only). App Store
+  Connect's API can, but adding a country is the owner's decision; waiting.
+- Reddit reply task moved to `claude-sonnet-5-5` at the owner's request.
+- App: Filters now says "Only makes and models within N mi are listed. Widen
+  the distance to see more." (2d580eb5, sw jh-v193), live and checked at 390 px.
+- Test fix: notable_trims_e2e's "no trim list in the data" case assumed the
+  checked-out data lacked `notableTrims`; it failed (3 checks) once the 09:33
+  scan published the list. The test now strips the list itself. The hub
+  pushed 2d580eb5 before reading that failure; the failure was in the test's
+  premise, not in the app.
