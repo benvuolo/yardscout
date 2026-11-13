@@ -7898,3 +7898,8 @@
 21:39:16 chain-unlinked bumper-rear 1 numbers named by 68650622AB, no catalog link: 68650622AA
 21:39:16 chain-unlinked bumper-rear 1 numbers named by 68650625AB, no catalog link: 68650625AA
 21:46:20 time budget reached records=6940
+23:49:24 start site=www.jeeppartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=6940 list_lines=5799 year_lines=857 url_index=34191
+23:49:24 completion worklist completion/mopar.own_page.json: 657 rows
+23:52:29 chain-unlinked hood 3 numbers named by 68534237AC, no catalog link: 68534237AB, 68534237AA, 68534237AD
+23:55:09 nav-fail Dodge Dakota 2011: NavError: https://www.jeeppartsdeal.com/catalog/2011-dodge-dakota-parts redirected to https://www.jeeppartsdeal.com/dodge-dakota-parts
+00:19:25 time budget reached records=6948
