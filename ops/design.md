@@ -334,3 +334,13 @@ Same with Forester or other similar cars..." Not merged (hub reviews).
   `TRIMS_FREE=false` makes ui_no_truncation do the same. Existing behaviour
   left alone: the one free sample card still shows the decoded trim line
   ("2.5XT · AWD  PRO"), as before this branch.
+- Hub follow-ups 1 and 3 (labels, multi-trim gate fix): see ops/parts.md.
+  Badged cars on 11-13 now 1,842 across 61 names (labels +123; the
+  "1/2 Ton" series is no longer read as a list, e.g. Yukon XL 1500 Denali
+  18 -> 38). "-Line" packages never badge as the word (Explorer "ST-Line").
+- Re-runs after all three: notable_trims_unit 107, notable_trims_e2e 40,
+  car_search_e2e 47, card_share_e2e 19, all pass; ui_no_truncation same 9
+  screens x 7 widths x 2 themes x 2 zooms: 252 checks, 0 failures; with
+  TRIMS_FREE=false (cars-filters-trim, cars-filters, results, 7 widths):
+  84 checks, 0 failures; 26 scraper test files importing junkyard_scraper
+  + test_inventory_shards exit 0.
