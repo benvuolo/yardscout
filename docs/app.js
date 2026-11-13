@@ -2181,6 +2181,19 @@ const FREE_MAX_RADIUS_MI = 250;
  * Filter badges count only what the user CHANGED from its default — a fresh
  * install must not wear a "Filters 1" badge (owner request 2026-10-26). */
 const DEFAULT_RADIUS = '100';
+/* One line under Make and Model saying what the lists hold: only makes and
+ * models with a car inside the search distance. Without it, a model missing
+ * from the list reads as "the app doesn't have it" (r/XTerra, 2026-11-13).
+ * Hidden with no location or with no distance limit (Pro, "Any distance"). */
+function updateScopeHint() {
+  const wrap = document.getElementById('live-scope-hint-wrap');
+  if (!wrap) return;
+  const r = effectiveRadiusMi();
+  const show = !!(activeZipCoords && r);
+  wrap.hidden = !show;
+  if (show) document.getElementById('live-scope-hint').textContent =
+    `Only makes and models within ${r}\u00a0mi are listed. Widen the distance to see more.`;
+}
 function effectiveRadiusMi() {
   const raw = parseFloat(document.getElementById('live-radius').value) || null;
   if (isPro()) return raw;
@@ -4460,6 +4473,7 @@ function renderLive() {
   }
   populateYardFilter();
   refreshScopedInventory();   // make/model dropdowns follow the radius too
+  updateScopeHint();
   // A #cars= link applies once there is a location and its inventory is in.
   if (carsIntent && activeZipCoords && !focusedCarKey) applyCarsIntent();
   carSearchSync();

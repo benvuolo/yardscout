@@ -223,6 +223,20 @@ try {
   check('Pro: suggestion shows a car count', /\d+ cars?/.test(proSugg || ''), proSugg);
   check('Pro: still Pro, default sort smart-profit, unchanged by the pick', await page.evaluate(() => isPro()) && proBefore.sort === 'smart-profit' && proAfter.sort === proBefore.sort, `${proBefore.sort} -> ${proAfter.sort}`);
   check('Pro: only Nissan Xterras', proAfter.notXterra === 0 && proAfter.cards > 0);
+  // The Filters panel says what its Make and Model lists hold (2026-11-13).
+  {
+    const hint = await page.evaluate(() => {
+      const w = document.getElementById('live-scope-hint-wrap');
+      const before = { hidden: w.hidden, text: w.textContent.trim() };
+      const r = document.getElementById('live-radius'); const was = r.value;
+      r.value = '50'; r.dispatchEvent(new Event('change', { bubbles: true }));
+      const after = w.textContent.trim();
+      r.value = was; r.dispatchEvent(new Event('change', { bubbles: true }));
+      return { before, after };
+    });
+    check('Filters: a line says only makes and models within the distance are listed', !hint.before.hidden && /Only makes and models within \d+\smi are listed/.test(hint.before.text), JSON.stringify(hint.before));
+    check('…and it follows the distance setting', /within 50\smi/.test(hint.after), hint.after);
+  }
   await page.close();
 
   check('no page errors', errors.length === 0, errors.join(' | '));
