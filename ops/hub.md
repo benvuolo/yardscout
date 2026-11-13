@@ -36,6 +36,10 @@ watches are bound to it. It does not build features.
 - `trig_016qavfgFfYSVTGUH5ERmJuH` one-shot 14:27 UTC 2026-11-04: check
   `docs/data/model_lifespan.json` exists after the 13:23 scan.
 - Disabled: `trig_0185m2qk4vqHhGtnwMEqkjoz` (iOS retry, no longer needed).
+- Not bound to this session: `trig_01PQWZukG51yQNZQ4zbm1956` "Reddit reply
+  drafts" (fresh session per run, hourly 6:42–21:42 America/Denver).
+  Disabled until the owner adds the Gmail connector to it. See
+  `ops/reddit.md`.
 
 ## Waiting on the owner
 
@@ -360,3 +364,14 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
 - r/XTerra commenter asked about Canada: 5 Canadian yards are covered
   (Pick-n-Pull Calgary x2, Edmonton, Kelowna; iPull-uPull Edmonton), postal
   codes work. Kenny U-Pull (~25 Canadian yards) stays a candidate.
+
+## 2026-11-13 ~04:50 UTC Reddit reply drafting
+
+- Owner asked for an agent that drafts Reddit replies. Reddit's reply emails
+  reach the owner's Gmail with the comment text, so no screenshots are needed.
+  Playbook: `ops/reddit.md`. Gmail label `reddit-drafted` created; the seven
+  r/XTerra reply emails so far are labelled.
+- Scheduled task created but disabled (no Gmail connector; see above).
+- Open branch: `design/filters-no-cutoff` (a293925e, sw jh-v188): filter
+  panels no longer cut text off; waiting on the full layout run at 360, 402
+  and 412 before merging.
