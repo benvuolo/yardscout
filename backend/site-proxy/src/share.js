@@ -380,6 +380,12 @@ form input{width:100%;min-height:44px;padding:.6rem .75rem;border:1px solid var(
 form button{margin-top:.9rem;cursor:pointer}
 .ok{color:var(--accent2);font-weight:600;font-size:.875rem}.err{color:var(--red);font-weight:600;font-size:.875rem}
 .gone-card{border-left:3px solid var(--red)}
+.lots th.num{white-space:normal}
+.yardh{font-weight:700;font-size:.875rem;margin:.9rem 0 .2rem;overflow-wrap:anywhere}
+.yardh:first-child{margin-top:0}
+.yardh a{color:var(--accent);text-decoration:none}
+.yardh span{color:var(--text-dim);font-weight:500}
+.trimw{font-family:var(--font-mono);font-size:.7rem;font-weight:600;color:var(--text-dim);letter-spacing:.04em}
 `;
 
 const PIN = '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>';
@@ -497,7 +503,7 @@ export async function renderCarPage(token) {
   const canonical = `${SITE}/car/${encodeURIComponent(token)}`;
   // The junkyards index only adds links (city and state pages), so a failed
   // load never fails the page.
-  const [det, dir, idx] = await Promise.all([apiJson('/v1/vehicles/' + encodeURIComponent(token), 300), apiJson('/v1/yards', 300), junkyardIndex().catch(() => null)]);
+  const [det, dir, idx, midx] = await Promise.all([apiJson('/v1/vehicles/' + encodeURIComponent(token), 300), apiJson('/v1/yards', 300), junkyardIndex().catch(() => null), modelIndex().catch(() => null)]);
 
   if (!det.data || !det.data.vehicle) {
     // A car that was shared and then pulled/crushed is the normal case here,
@@ -533,6 +539,7 @@ ${HUB_LINKS}${storesLine()}`,
   const yardHref = y.location ? `${SITE}/yard/${slugify(yardName)}` : `${SITE}/yards`;
   const makeHref = v.make ? `${SITE}/landed/${slugify(v.make)}` : '';
   const isNew = daysOn != null && daysOn <= 7;
+  const modelHref = modelPageUrl(midx, v.make, v.model);
 
   const descBits = [`${name} at ${yardName}`];
   if (v.row) descBits.push(`Row ${v.row}`);
@@ -554,6 +561,7 @@ ${HUB_LINKS}${storesLine()}`,
   // Breadcrumb: Junkyards > State > City > Yard > this car.
   const trail = [...(place ? place.crumbs : [['Junkyards', SITE + '/junkyards']]), ...(y.location ? [[yardName, yardHref]] : [])];
   const more = [
+    modelHref ? `<a href="${modelHref}">Every ${esc(v.make)} ${esc(v.model)} set out this week, by state</a>` : '',
     y.location ? `<a href="${yardHref}">${esc(yardName)} inventory</a>` : '',
     makeHref ? `<a href="${makeHref}">${esc(v.make)} arrivals at self-service yards this week</a>` : '',
     place && place.city ? `<a href="${place.cityUrl}">Junkyards in ${esc(place.city.name)}, ${esc(place.st.code)}</a>` : '',
@@ -577,7 +585,7 @@ export async function renderYardPage(slug) {
   slug = safeDecode(slug).toLowerCase();
   // The junkyards index only adds links (city, state, nearest yards), so a
   // failed load never fails the page.
-  const [dirRes, jidx] = await Promise.all([apiJson('/v1/yards', 300), junkyardIndex().catch(() => null)]);
+  const [dirRes, jidx, midx] = await Promise.all([apiJson('/v1/yards', 300), junkyardIndex().catch(() => null), modelIndex().catch(() => null)]);
   const dir = dirRes.data;
   if (!dir) return layout({ title: 'YardScout', desc: 'Live self-service junkyard inventory.', canonical: SITE + '/', status: 503, robots: 'noindex', cache: 60, body: '<div class="car-card"><h1 class="car-name">Inventory is briefly unavailable</h1><div class="share-sub" style="margin:.4rem 0 0">Try again in a minute.</div></div>' });
   const yf = dir.yardFields || [];
@@ -624,7 +632,7 @@ export async function renderYardPage(slug) {
     if (!md) continue;
     const k = mk + '\u0000' + md;
     let s = modelStat.get(k);
-    if (!s) modelStat.set(k, s = { label: md.toLowerCase() === mk.toLowerCase() ? mk : `${mk} ${md}`, n: 0, lo: Infinity, hi: -Infinity });
+    if (!s) modelStat.set(k, s = { label: md.toLowerCase() === mk.toLowerCase() ? mk : `${mk} ${md}`, url: modelPageUrl(midx, mk, md), n: 0, lo: Infinity, hi: -Infinity });
     s.n++;
     const yr = +r[iYear];
     if (yr > 1900 && yr < 2100) { if (yr < s.lo) s.lo = yr; if (yr > s.hi) s.hi = yr; }
@@ -670,7 +678,7 @@ export async function renderYardPage(slug) {
 <ul class="grid">${topMakes.map(([mk, n]) => `<li><a href="${SITE}/landed/${slugify(mk)}">${esc(mk)}<small>${n.toLocaleString()} on this lot</small></a></li>`).join('')}</ul>
 <p class="note" style="margin-top:.5rem">${allMakes.length > topMakes.length ? `The ${topMakes.length} most common of ${allMakes.length} makes on this lot. ` : ''}Each make links to its arrivals at every tracked yard this week.</p>` : '';
   const modelsBlock = topModels.length ? `<div class="section">Most common models on this lot <span>· ${modelStat.size > topModels.length ? `top ${topModels.length} of ${modelStat.size.toLocaleString()}` : plural(topModels.length, 'model')}</span></div>
-<ul class="grid">${topModels.map((s) => `<li><span class="tile">${esc(s.label)}<small>${plural(s.n, 'car')}${years(s) ? ' · ' + years(s) : ''}</small></span></li>`).join('')}</ul>
+<ul class="grid">${topModels.map((s) => { const inner = `${esc(s.label)}<small>${plural(s.n, 'car')}${years(s) ? ' · ' + years(s) : ''}</small>`; return `<li>${s.url ? `<a href="${s.url}">${inner}</a>` : `<span class="tile">${inner}</span>`}</li>`; }).join('')}</ul>
 <p class="note" style="margin-top:.5rem">Cars on the lot and the span of their model years. Yards list cars, not the parts still on them.</p>` : '';
   const placeLinks = place ? [
     place.city ? `<a href="${place.cityUrl}">Junkyards in ${esc(place.city.name)}, ${esc(place.st.code)}</a>` : '',
@@ -712,13 +720,14 @@ export async function renderSitemap() {
   if (!dir) return new Response('', { status: 503 });
   const iLoc = dir.yardFields.indexOf('location');
   const seen = new Set();
-  const [landed, idx] = await Promise.all([dataJson('landed.json', 900), junkyardIndex().catch(() => null)]);
+  const [landed, idx, midx] = await Promise.all([dataJson('landed.json', 900), junkyardIndex().catch(() => null), modelIndex().catch(() => null)]);
   const landedAt = landed && landed.scrapedAt;
   // The home page's own HTML changes with deploys, not scans: no lastmod.
   const urls = sitemapUrl('/')
     + junkyardSitemapUrls(idx)
     + sitemapUrl('/yards', landedAt) + sitemapUrl('/landed', landedAt)
     + (landed ? Object.entries(landed.makes).filter(([, m]) => m.total >= 20).map(([mk]) => sitemapUrl(`/landed/${slugify(mk)}`, landedAt)).join('') : '')
+    + modelSitemapUrls(midx)
     + dir.yards.map((y) => slugify(y[iLoc])).filter((s) => s && !seen.has(s) && seen.add(s))
       .map((s) => sitemapUrl(`/yard/${s}`, dir.scrapedAt)).join('')
     + await priceSitemapUrls(idx).catch(() => '');
@@ -793,7 +802,9 @@ catch(err){m.textContent='Could not send — try again.';m.className='err';}retu
  * make, from docs/data/landed.json (written by every scan). The data-post
  * engine: "N 3rd-gen 4Runners landed this week" with row + yard, shareable. */
 export async function renderLandedPage(slug) {
-  const landed = await dataJson('landed.json', 900);
+  // The model index only adds links (model pages), so a failed load never
+  // fails the page.
+  const [landed, midx] = await Promise.all([dataJson('landed.json', 900), modelIndex().catch(() => null)]);
   if (!landed) return layout({ title: 'What landed — YardScout', desc: '', canonical: SITE + '/landed', status: 503, robots: 'noindex', cache: 60, body: '<div class="car-card"><h1 class="car-name">Briefly unavailable</h1></div>' });
   const makes = Object.entries(landed.makes).filter(([, m]) => m.total >= 20);
   const stamp = esc(fmtStamp(landed.scrapedAt));
@@ -805,10 +816,16 @@ export async function renderLandedPage(slug) {
     const unlisted = weekTotal - makes.reduce((n, [, m]) => n + m.recentCount, 0);
     // Yards that set a car out this week (not every tracked yard did).
     const activeYards = landed.yards.filter((r) => r[0] && r[4] > 0).length;
+    // Model pages with the most set-outs this week (from the model index).
+    const topModels = midx ? Object.entries(midx.makes).flatMap(([mk, e]) => (e.models || []).map(([md, s, total, week]) => ({ mk, md, url: `${SITE}/landed/${e.slug}/${s}`, total, week })))
+      .filter((x) => x.week > 0).sort((a, b) => b.week - a.week || b.total - a.total || a.url.localeCompare(b.url)).slice(0, 24) : [];
+    const topBlock = topModels.length ? `<div class="section">Top models this week <span>· by set-outs</span></div>
+<ul class="grid">${topModels.map((x) => `<li><a href="${x.url}">${esc(x.mk)} ${esc(x.md)}<small>${x.week.toLocaleString()} this week · ${x.total.toLocaleString()} on lots</small></a></li>`).join('')}</ul>
+<div class="section">Every make <span>· this week</span></div>` : '';
     const body = `<p class="kicker">Last ${landed.days} days</p><h1 class="share-h">What landed in self-service junkyards this week</h1>
 <div class="stats-bar"><div class="stat-card"><span class="label">Set out this week</span><span class="value accent">${weekTotal.toLocaleString()}</span></div><div class="stat-card"><span class="label">Yards with arrivals</span><span class="value">${activeYards}</span></div><div class="stat-card"><span class="label">Updated</span><span class="value value-sm">${stamp}</span></div></div>
 <p class="share-sub">Every car that set out at a tracked self-service yard in the last ${landed.days} days, by make.${unlisted > 0 ? ` ${unlisted.toLocaleString()} more set out from makes with fewer than 20 cars on the lots.` : ''}</p>
-<ul class="grid">${makes.map(([mk, m]) => `<li><a href="${SITE}/landed/${slugify(mk)}">${esc(mk)}<small>${m.recentCount.toLocaleString()} this week · ${m.total.toLocaleString()} on lots</small></a></li>`).join('')}</ul>
+${topBlock}<ul class="grid">${makes.map(([mk, m]) => `<li><a href="${SITE}/landed/${slugify(mk)}">${esc(mk)}<small>${m.recentCount.toLocaleString()} this week · ${m.total.toLocaleString()} on lots</small></a></li>`).join('')}</ul>
 <div class="cta"><a class="btn btn-primary" href="${SITE}/">Search near your zip</a><a class="btn" href="${SITE}/#tab=alerts">Get the weekly recap for a model you want</a></div>
 <p class="links"><a href="${SITE}/junkyards">Junkyards by state and city</a> · <a href="${SITE}/yards">All covered yards</a></p>${storesLine()}`;
     return layout({ title: `Junkyard new arrivals this week: ${weekTotal.toLocaleString()} cars set out at ${plural(activeYards, 'self-service yard')}, by make — YardScout`, ogTitle: 'What landed in the junkyards this week', desc: `${weekTotal.toLocaleString()} cars set out at ${plural(activeYards, 'self-service junkyard')} in the last ${landed.days} days, by make, with row numbers and yards. As of ${fmtStamp(landed.scrapedAt)}.`, ogDesc: `New set-outs at ${plural(activeYards, 'self-service yard')} in the last ${landed.days} days, by make.`, canonical: SITE + '/landed', body, cache: 900, spec: `${weekTotal.toLocaleString()} NEW THIS WEEK`, lastModified: landed.scrapedAt });
@@ -827,7 +844,9 @@ export async function renderLandedPage(slug) {
   const models = [...byModel.entries()].sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0]));
   const yardName = (i) => (landed.yards[i] || [])[0] || '';
   const yardState = (i) => (landed.yards[i] || [])[2] || '';
-  const blocks = models.map(([model, rows]) => `<div class="section">${esc(mk)} ${esc(model)} <span>· ${rows.length}</span></div>
+  const mp = modelPagesOf(midx, mk);
+  const modelHead = (model) => { const u = mp && mp.urls.get(model); return u ? `<a href="${u}">${esc(mk)} ${esc(model)}</a>` : `${esc(mk)} ${esc(model)}`; };
+  const blocks = models.map(([model, rows]) => `<div class="section">${modelHead(model)} <span>· ${rows.length}</span></div>
 <div class="car-card"><ul class="rowlist">${rows.map((r) => `<li><a href="${SITE}/car/${encodeURIComponent(r[5])}">${esc(r[0])} ${esc(mk)} ${esc(model)}<span class="where">${esc(yardName(r[6]))}${yardState(r[6]) ? ', ' + esc(yardState(r[6])) : ''}</span></a><span class="meta">${r[3] ? 'Row ' + esc(r[3]) + '<br>' : ''}${esc(fmtDate(r[4]))}</span></li>`).join('')}</ul></div>`).join('');
   const truncated = m.recentCount > shown.length ? `<p class="note" style="margin-top:0">Showing the newest ${shown.length} of ${m.recentCount.toLocaleString()} set-outs this week. The full list, filters and alerts are in the app.</p>` : '';
   const desc = `${m.recentCount.toLocaleString()} ${mk} set out at self-service yards in the last ${landed.days} days (${m.total.toLocaleString()} on the lots right now), with row numbers and yards. As of ${fmtStamp(landed.scrapedAt)}.`;
@@ -847,10 +866,179 @@ export async function renderLandedPage(slug) {
 <div class="stats-bar"><div class="stat-card"><span class="label">This week</span><span class="value accent">${m.recentCount.toLocaleString()}</span></div><div class="stat-card"><span class="label">On the lots now</span><span class="value">${m.total.toLocaleString()}</span></div><div class="stat-card"><span class="label">Yards scanned</span><span class="value">${landed.yards.length}</span></div></div>
 <p class="share-sub">Self-service yards crush cars to make room for new ones, so a car on this list won't be there for long. Each car's page shows how long it has been on the lot and, where there is enough history, how long cars typically last at that yard.</p>
 ${truncated}${blocks}
+${mp && mp.models.length ? `<div class="section">Every ${esc(mk)} model with its own page <span>· ${mp.models.length}</span></div>
+<ul class="grid">${mp.models.map(([md, s, total, week]) => `<li><a href="${SITE}/landed/${mp.slug}/${s}">${esc(md)}<small>${week.toLocaleString()} this week · ${total.toLocaleString()} on lots</small></a></li>`).join('')}</ul>` : ''}
 ${statesBlock}
 <div class="cta"><a class="btn btn-primary" href="${SITE}/#tab=alerts">Alert me when a ${esc(mk)} I want lands near me</a><a class="btn" href="${SITE}/">Search near your zip</a></div>${storesLine()}
 <p class="note">Straight from each yard's published list, refreshed every 4 hours (as of ${stamp}). Row numbers and dates are the yard's; call ahead before a long drive.</p>`;
   return layout({ title: `${mk} in junkyards: ${m.total.toLocaleString()} on self-service lots, ${m.recentCount.toLocaleString()} new this week — YardScout`, ogTitle: `${count} landed in junkyards this week`, desc, canonical, body, cache: 900, spec: `${m.recentCount.toLocaleString()} ${mk.toUpperCase()} THIS WEEK`, ld: [ldBreadcrumb([['What landed this week', SITE + '/landed'], [mk, canonical]])], lastModified: landed.scrapedAt });
+}
+
+/* ---------- /landed/<make>/<model> — one model's week, by state ----------
+ * From docs/data/landed/ (scraper _write_landed_models_json, every scan):
+ *   index.json   {scrapedAt, days, minOnLots, minWeek,
+ *                 makes: {make: {slug, total, recentCount, models: [[model, slug, onLots, week], ...]}}}
+ *   <make>.json  {scrapedAt, days, make, slug, yards: [[location, city, state]],
+ *                 models: [{model, slug, total, recentCount, states: {state: onLots},
+ *                           recent: [[year, yard, row, date, drive, trim, key], ...]}]}
+ * A model has a page when 100+ of it are on the lots or 10+ set out this
+ * week (the scraper decides; the index lists exactly those). The whole
+ * week is listed, grouped by state, then yard: people look for their state
+ * (r/XTerra, 2026-11-12). drive is "4x4", "AWD", "2WD" or "" and trim a
+ * notable trim word or "", both only from the VIN decode. No parts, prices
+ * or fitment on these pages. */
+const TITLE_MAX = 65;
+/** The first title that fits TITLE_MAX characters; when none does, the
+ * shortest (last) one whole. Titles are never cut mid-word. */
+export function fitTitle(candidates) {
+  return candidates.find((t) => t.length <= TITLE_MAX) || candidates[candidates.length - 1];
+}
+async function dataFetch(name, ttl) {
+  try {
+    const r = await fetch(`${DATA}/${name}`, { cf: { cacheTtl: ttl, cacheEverything: true } });
+    if (!r.ok) return { status: r.status, data: null };
+    return { status: 200, data: await r.json() };
+  } catch (e) {
+    return { status: 502, data: null };
+  }
+}
+/** The model-page index, or null when it is missing or unreadable (callers
+ * that only add links simply leave them out). */
+async function modelIndex() {
+  const r = await dataFetch('landed/index.json', 900);
+  return r.data && r.data.makes ? r.data : null;
+}
+/** make name -> its index entry plus a model-name -> page-URL map. */
+function modelPagesOf(idx, make) {
+  const e = idx && idx.makes && idx.makes[make];
+  if (!e || !Array.isArray(e.models)) return null;
+  return { ...e, urls: new Map(e.models.map(([md, s]) => [md, `${SITE}/landed/${e.slug}/${s}`])) };
+}
+const modelPageUrl = (idx, make, model) => { const p = modelPagesOf(idx, make); return (p && p.urls.get(model)) || ''; };
+const carsLink = (make, model) => `${SITE}/#cars=${encodeURIComponent(make)}|${encodeURIComponent(model)}`;
+const watchLink = (make, model) => `${SITE}/#watch=${encodeURIComponent(make)}|${encodeURIComponent(model)}`;
+/** "38 states and 2 Canadian provinces" from a list of region codes. */
+function regionsPhrase(codes) {
+  const us = codes.filter((c) => STATE_NAMES[c]).length, ca = codes.filter((c) => PROVINCE_NAMES[c]).length;
+  if (!us && !ca) return '';
+  return [us ? plural(us, 'state') : '', ca ? plural(ca, 'Canadian province') : ''].filter(Boolean).join(' and ');
+}
+/** Region codes in page order: by name, A to Z; codes without a name last. */
+const regionOrder = (a, b) => (regionName(a) ? 0 : 1) - (regionName(b) ? 0 : 1) || (regionName(a) || a).localeCompare(regionName(b) || b);
+function modelMissing(title, h1, msg, status, links) {
+  return layout({ title: `${title} — YardScout`, desc: '', canonical: SITE + '/landed', status, robots: 'noindex', cache: status === 404 ? 120 : 60,
+    body: `<h1 class="share-h">${esc(h1)}</h1><p class="share-sub">${msg}</p>${links || ''}${HUB_LINKS}` });
+}
+
+export async function renderLandedModelPage(makeArg, modelArg) {
+  const makeSlug = safeDecode(makeArg).toLowerCase(), modelSlug = safeDecode(modelArg).toLowerCase();
+  const idxRes = await dataFetch('landed/index.json', 900);
+  if (idxRes.status === 404) {
+    // Before the first scan that writes docs/data/landed/ (and only then):
+    // a holding page, not a guess built from the capped landed.json rows.
+    return modelMissing('Model page coming soon', 'This model page is not built yet',
+      'Model pages fill in with the next inventory scan (every 4 hours). Until then, the make\'s page lists its newest arrivals.', 503,
+      makeSlug ? `<div class="cta"><a class="btn btn-primary" href="${SITE}/landed/${esc(encodeURIComponent(makeSlug))}">This make's arrivals this week</a></div>` : '');
+  }
+  const idx = idxRes.data;
+  if (!idx || !idx.makes) return modelMissing('What landed', 'Briefly unavailable', 'The inventory data could not be read. Try again in a minute.', 503);
+  const makeHit = Object.entries(idx.makes).find(([, e]) => e.slug === makeSlug);
+  if (!makeHit) return modelMissing('Model not found', 'No model page by that name', 'Model pages exist for makes and models with enough cars on the lots.', 404, `<div class="cta"><a class="btn btn-primary" href="${SITE}/landed">All makes this week</a></div>`);
+  const [mk, me] = makeHit;
+  const makeUrl = `${SITE}/landed/${me.slug}`;
+  const entry = me.models.find(([, s]) => s === modelSlug);
+  const siblingGrid = (except) => {
+    const sib = me.models.filter(([, s]) => s !== except);
+    return sib.length ? `<div class="section">Other ${esc(mk)} models <span>· ${sib.length}</span></div>
+<ul class="grid">${sib.map(([md, s, total, week]) => `<li><a href="${makeUrl}/${s}">${esc(md)}<small>${week.toLocaleString()} this week · ${total.toLocaleString()} on lots</small></a></li>`).join('')}</ul>` : '';
+  };
+  if (!entry) return modelMissing('Model not found', `No ${mk} model page by that name`, `${esc(mk)} models with a page are listed below.`, 404, `<div class="cta"><a class="btn btn-primary" href="${makeUrl}">${esc(mk)} arrivals this week</a></div>${siblingGrid('')}`);
+  const fileRes = await dataFetch(`landed/${me.slug}.json`, 900);
+  const file = fileRes.data;
+  const m = file && Array.isArray(file.models) && file.models.find((x) => x.slug === modelSlug);
+  if (!m) return modelMissing('What landed', 'Briefly unavailable', 'The inventory data could not be read. Try again in a minute.', 503);
+  const md = m.model, name = `${mk} ${md}`;
+  const days = file.days || 7;
+  const yards = file.yards || [];
+  const canonical = `${makeUrl}/${m.slug}`;
+  const stamp = fmtStamp(file.scrapedAt);
+  const total = m.total || 0, n = m.recent.length;
+
+  // State, then yard (the yard's newest set-out first), then car (newest first).
+  const byState = new Map();
+  for (const r of m.recent) {
+    const y = yards[r[1]] || ['', '', ''];
+    const code = y[2] || '';
+    if (!byState.has(code)) byState.set(code, new Map());
+    const yk = r[1] == null ? -1 : r[1];
+    const ym = byState.get(code);
+    if (!ym.has(yk)) ym.set(yk, { y, rows: [] });
+    ym.get(yk).rows.push(r);
+  }
+  const newestFirst = (a, b) => String(b[3]).localeCompare(String(a[3])) || String(b[6]).localeCompare(String(a[6]));
+  const states = [...byState.keys()].sort(regionOrder).map((code) => {
+    const ys = [...byState.get(code).values()];
+    ys.forEach((g) => g.rows.sort(newestFirst));
+    ys.sort((a, b) => newestFirst(a.rows[0], b.rows[0]) || String(a.y[0]).localeCompare(String(b.y[0])));
+    return { code, name: regionName(code) || code || 'Other', yards: ys, n: ys.reduce((k, g) => k + g.rows.length, 0) };
+  });
+  const yardCount = states.reduce((k, s) => k + s.yards.length, 0);
+  const weekRegions = regionsPhrase(states.map((s) => s.code));
+  const lotCodes = Object.keys(m.states || {}).sort(regionOrder);
+  const lotRegions = regionsPhrase(lotCodes);
+  const anchor = (code) => 'st-' + (code || 'other').toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  const carLine = (r) => {
+    const drive = r[4] === '4x4' ? ' <strong>4x4</strong>' : r[4] ? ' ' + esc(r[4]) : '';
+    const trim = r[5] ? ` <span class="trimw">${esc(r[5])}</span>` : '';
+    return `<li><a href="${SITE}/car/${encodeURIComponent(r[6])}">${esc(r[0])} ${esc(name)}${drive}${trim}</a><span class="meta">${r[2] ? 'Row ' + esc(r[2]) + '<br>' : ''}${esc(fmtDate(r[3]))}</span></li>`;
+  };
+  const stateBlocks = states.map((s) => `<div class="section" id="${anchor(s.code)}">${esc(s.name)} <span>· ${s.n.toLocaleString()} set out · ${plural(s.yards.length, 'yard')}</span></div>
+<div class="car-card">${s.yards.map((g) => `<div class="yardh">${g.y[0] ? `<a href="${SITE}/yard/${slugify(g.y[0])}">${esc(g.y[0])}</a>` : 'Yard not named'}${g.y[1] ? ` <span>· ${esc(g.y[1])}</span>` : ''}</div>
+<ul class="rowlist">${g.rows.map(carLine).join('')}</ul>`).join('')}</div>`).join('');
+  const jump = states.length > 1 ? `<p class="statenav">Jump to: ${states.map((s) => `<a href="#${anchor(s.code)}">${esc(s.name)} ${s.n}</a>`).join(' · ')} · <a href="#on-lots">on the lots now</a></p>` : '';
+  const weekByState = new Map(states.map((s) => [s.code, s.n]));
+  const lotRows = lotCodes.map((code) => {
+    const nm = regionName(code) || code;
+    const cell = stateSlug(code) ? `<a href="${SITE}/junkyards/${stateSlug(code)}">${esc(nm)}</a>` : esc(nm);
+    return `<tr><td>${cell}</td><td class="num">${(m.states[code] || 0).toLocaleString()}</td><td class="num">${(weekByState.get(code) || 0).toLocaleString()}</td></tr>`;
+  }).join('');
+  const lotsBlock = `<div class="section" id="on-lots">On the lots now <span>· ${total.toLocaleString()}${lotRegions ? ' in ' + esc(lotRegions) : ''}</span></div>
+<div class="car-card">${lotRows ? `<table class="ptable lots"><thead><tr><th>State</th><th class="num">On the lots</th><th class="num">This week</th></tr></thead><tbody>${lotRows}</tbody></table>` : '<p class="share-sub" style="margin:0">No state on file for these yards.</p>'}
+<p class="note">Every ${esc(name)} on a tracked self-service yard's published list right now, including the ones above. The app lists them car by car near your zip.</p></div>`;
+
+  const lead = n
+    ? `In the last ${days} days, ${n.toLocaleString()} ${esc(name)} set out at ${plural(yardCount, 'self-service junkyard')}${weekRegions ? ' in ' + esc(weekRegions) : ''}. ${total.toLocaleString()} ${total === 1 ? 'is' : 'are'} on the lots right now. Inventory as of ${esc(stamp)}, refreshed every 4 hours.`
+    : `No ${esc(name)} set out at a tracked self-service junkyard in the last ${days} days. ${total.toLocaleString()} ${total === 1 ? 'is' : 'are'} on the lots right now${lotRegions ? ' in ' + esc(lotRegions) : ''}. Inventory as of ${esc(stamp)}, refreshed every 4 hours.`;
+  const h1 = n
+    ? `${name} junkyard inventory: ${n.toLocaleString()} set out this week at self-service yards`
+    : `${name} junkyard inventory: none set out this week, ${total.toLocaleString()} on the lots`;
+  const title = n
+    ? fitTitle([`${name} junkyard inventory: ${n.toLocaleString()} set out this week — YardScout`, `${name} junkyard inventory: ${n.toLocaleString()} set out this week`, `${name} junkyard inventory: ${n.toLocaleString()} this week`, `${name} junkyard inventory`])
+    : fitTitle([`${name} junkyard inventory: ${total.toLocaleString()} on self-service lots — YardScout`, `${name} junkyard inventory: ${total.toLocaleString()} on the lots`, `${name} junkyard inventory`]);
+  const desc = n
+    ? `${n.toLocaleString()} ${name} set out at ${plural(yardCount, 'self-service junkyard')}${weekRegions ? ' in ' + weekRegions : ''} in the last ${days} days, by state, with yard, row and date. ${total.toLocaleString()} on the lots now. As of ${stamp}.`
+    : `No ${name} set out at a tracked self-service junkyard in the last ${days} days. ${total.toLocaleString()} on the lots now${lotRegions ? ' in ' + lotRegions : ''}, by state. As of ${stamp}.`;
+  const body = `<p class="kicker"><a href="${SITE}/landed">What landed</a> · <a href="${makeUrl}">${esc(mk)}</a> · ${esc(md)} · last ${days} days</p>
+<h1 class="share-h">${esc(h1)}</h1>
+<p class="share-sub">${lead}</p>
+<div class="stats-bar"><div class="stat-card"><span class="label">Set out this week</span><span class="value accent">${n.toLocaleString()}</span></div><div class="stat-card"><span class="label">On the lots now</span><span class="value">${total.toLocaleString()}</span></div><div class="stat-card"><span class="label">Yards this week</span><span class="value">${yardCount}</span></div></div>
+<div class="cta"><a class="btn btn-primary" href="${carsLink(mk, md)}">See every ${esc(md)} near you</a><a class="btn" href="${watchLink(mk, md)}">Alert me when the next ${esc(md)} sets out near me</a></div>
+${n ? `<div class="section">Set out this week, by state <span>· ${n.toLocaleString()}</span></div>${jump}${stateBlocks}` : `<div class="section">Set out this week <span>· none</span></div><div class="car-card"><p class="share-sub" style="margin:0">None in the last ${days} days at the yards we track. The ones on the lots now are below, and the app can alert you when the next one sets out near you.</p></div>`}
+${lotsBlock}
+<p class="note">Yards move cars around and crush them to make room, so a car here may be gone or on another row: call the yard before a long drive. Drive (4x4, AWD or 2WD) and trim come from each car's VIN decode and are left out when the VIN does not say. Rows and set-out dates are each yard's own published list (as of ${esc(stamp)}).</p>
+<div class="cta"><a class="btn btn-primary" href="${carsLink(mk, md)}">See every ${esc(md)} near you</a><a class="btn" href="${watchLink(mk, md)}">Get an alert for the next ${esc(md)}</a></div>
+${storesLine()}
+${siblingGrid(m.slug)}
+<p class="links"><a href="${makeUrl}">All ${esc(mk)} arrivals this week</a> · <a href="${SITE}/landed">What landed this week, every make</a> · <a href="${SITE}/junkyards">Junkyards by state</a></p>`;
+  const cars = m.recent.slice(0, 100).map((r) => [`${r[0]} ${name} at ${(yards[r[1]] || [])[0] || 'a self-service yard'}`, `${SITE}/car/${encodeURIComponent(r[6])}`]);
+  const ld = [ldBreadcrumb([['What landed this week', SITE + '/landed'], [mk, makeUrl], [name, canonical]])];
+  if (cars.length) ld.push(ldItemList(`${name} set out at self-service junkyards in the last ${days} days`, cars));
+  return layout({ title, ogTitle: n ? `${n.toLocaleString()} ${name} set out in junkyards this week` : `${name} in self-service junkyards: ${total.toLocaleString()} on the lots`, desc, canonical, body, cache: 900, spec: `${n.toLocaleString()} ${md.toUpperCase()} THIS WEEK`, ld, lastModified: file.scrapedAt });
+}
+/** Sitemap entries for every model page in the index. */
+function modelSitemapUrls(idx) {
+  if (!idx || !idx.makes) return '';
+  return Object.values(idx.makes).flatMap((e) => (e.models || []).map(([, s]) => sitemapUrl(`/landed/${e.slug}/${s}`, idx.scrapedAt))).join('');
 }
 
 /* ---------- /junkyards — "junkyards near me" pages ----------
