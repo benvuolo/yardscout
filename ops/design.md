@@ -311,8 +311,16 @@ Same with Forester or other similar cars..." Not merged (hub reviews).
   pairs Mustang GT 244, Camry Hybrid 228, Monte Carlo SS 133, TL Type-S
   107, 4Runner Limited 95. Forester XT 32. Outback XT 0: no Outback XT gate
   (see ops/parts.md for the recommendation).
-- sw `jh-v190`. Tests: notable_trims_unit (71), notable_trims_e2e (28),
+- sw `jh-v190`. Tests: notable_trims_unit (71), notable_trims_e2e (30),
   scraper/test_notable_trims.py, two ui_no_truncation screens
   (cards-trim-badges, cars-filters-trim). Browser tests add notableTrims to
   the served data via backend/test/notable_trims_fixture.mjs until the
   checked-out data carries it.
+- Runs on this branch: ui_no_truncation (results, results-pro, car-card,
+  cards-mixed, alerts-hits, cars-filters, cars-filters-gps-pro and the two
+  new screens) at 320/360/375/390/402/430/1280, light+dark, 100%+200%:
+  252 checks, 0 failures; part-finder-likely, pf-fit-pro, pf-am-cv,
+  car-detail at 320/390: 32 checks, 0 failures. car_search_e2e 47,
+  card_share_e2e 19, tab_retap_e2e 14, model_years_e2e 18, share_watch_e2e
+  33, watch_match_unit, car_search_unit: all pass. All 27 scraper test
+  files exit 0.

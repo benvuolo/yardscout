@@ -201,6 +201,18 @@ try {
   await page.waitForTimeout(300);
   await page.evaluate(() => { if (typeof closeCarDetail === 'function') closeCarDetail(); });
 
+  // Parts donor card and Alerts hits carry the same badge.
+  const other = await page.evaluate((P) => {
+    const v = _scopedVehicles.find(x => notableTrimOf(x) === P.word && x.make === P.make && canonicalModel(x.make, x.model) === P.model);
+    const donor = pfDonorCardHtml({ v, d: 5 }, 'pf-verified', '', '');
+    const r = addQuickWatch(P.make, v.model, null, null, 'cars');
+    renderAlerts();
+    const hit = document.querySelector(`#alert-matches-grid .car-card[data-vkey="${CSS.escape(vehicleKey(v))}"] .badge-trim`);
+    return { donor: (/class="badge badge-trim"[^>]*>([^<]*)</.exec(donor) || [])[1] || '', watch: r, hit: hit ? hit.textContent : '' };
+  }, P);
+  check(`Parts donor card carries the ${P.word} badge`, other.donor === P.word, JSON.stringify(other));
+  check(`Alerts hit card carries the ${P.word} badge`, other.hit === P.word, JSON.stringify(other));
+
   // 3. Reset on model change, then on make change
   const otherModel = await page.evaluate((P) => [..._modelCounts.keys()].find(m => m !== P.model) || '', P);
   if (otherModel) {
