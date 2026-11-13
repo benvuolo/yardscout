@@ -121,7 +121,7 @@ try {
     ev = await w.events();
     check('web: entering a zip counts once', count(ev, 'zip-entered') === 1, JSON.stringify(ev));
     const all = await w.beacons();
-    check('web: every beacon says platform web, counting rules v3, and nothing else', all.length > 0 && all.every(b => b.p === 'web' && b.v === 3 && Object.keys(b).sort().join() === 'cmp,e,med,p,src,v'), JSON.stringify(all[0]));
+    check('web: every beacon says platform web, counting rules v4, and nothing else', all.length > 0 && all.every(b => b.p === 'web' && b.v === 4 && Object.keys(b).sort().join() === 'cmp,e,med,p,src,v'), JSON.stringify(all[0]));
 
     // Two reloads with the saved zip: the audit recorded "entered a zip" each time.
     ev = [];
@@ -325,7 +325,7 @@ try {
 
     // 7. the per-day rule survives a reload; a new day counts again
     const all = await w.beacons();
-    check('narrow e2e: narrowing beacons are ordinary v3 web counters', all.filter(b => /^narrow\//.test(b.e)).every(b => b.p === 'web' && b.v === 3 && Object.keys(b).sort().join() === 'cmp,e,med,p,src,v'), JSON.stringify(all));
+    check('narrow e2e: narrowing beacons are ordinary v4 web counters', all.filter(b => /^narrow\//.test(b.e)).every(b => b.p === 'web' && b.v === 4 && Object.keys(b).sort().join() === 'cmp,e,med,p,src,v'), JSON.stringify(all));
     await w.page.reload({ waitUntil: 'domcontentloaded' });
     await w.page.waitForSelector('#live-grid .car-card', { timeout: 120000 });
     await w.page.waitForFunction(() => !(typeof _inv !== 'undefined' && _inv && !liveComplete && invViewPending()), null, { timeout: 120000 });
@@ -372,7 +372,7 @@ try {
     const all = await n.beacons();
     const ev = all.map(b => b.e);
     check(`${plat} shell: first visit, zip, paywall and checkout tap all arrive`, ['first-visit', 'zip-entered', 'paywall', 'paywall/header-pill', 'checkout-start', 'checkout/header-pill'].every(e => count(ev, e) === 1), JSON.stringify(ev));
-    check(`${plat} shell: every beacon carries platform ${plat} and v3`, all.length >= 6 && all.every(b => b.p === plat && b.v === 3), JSON.stringify(all.map(b => [b.e, b.p, b.v])));
+    check(`${plat} shell: every beacon carries platform ${plat} and v4`, all.length >= 6 && all.every(b => b.p === plat && b.v === 4), JSON.stringify(all.map(b => [b.e, b.p, b.v])));
     check(`${plat} shell: the stubbed events API was never contacted`, n.leaked.length === 0, JSON.stringify(n.leaked));
     await n.ctx.close();
   }

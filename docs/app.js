@@ -40,6 +40,8 @@ const FUNNEL_EVENTS = {
   // visit), submitted = an address sent. 'Confirmed' is counted by the API at
   // the confirmation click (backend/src/recap_signup.js), not here.
   'email-asked': 'email-asked', 'email-submitted': 'email-submitted',
+  // A checkout attempt by a client that also counts how it ends (v4, below).
+  'checkout-try': 'checkout-try',
 };
 const ATTRIB = (() => {
   try {
@@ -68,6 +70,9 @@ const REASON_EVENTS = {
   'store-click': 'store-click',
   // narrow/<kind>: how the Cars list was narrowed (trackNarrow below).
   'narrow': 'narrow',
+  // checkout-end/<outcome>: how a checkout attempt ended; iap-product-failed/
+  // <class>: the store product did not load as the Pro sheet opened (apps).
+  'checkout-end': 'checkout-end', 'iap-product-failed': 'iap-product-failed',
 };
 // Local copies and automated browsers never count: the e2e tests run this
 // exact bundle from 127.0.0.1 and were posting real-looking first visits and
@@ -84,10 +89,12 @@ const ANALYTICS_OFF = analyticsOff(location.hostname, navigator.webdriver, IS_NA
 /* v: counting rules version. 2 (2026-11-12) = a zip counts when entered or
  * changed, a part search once per distinct search, a paywall open only for
  * someone who is not Pro, and the apps report again. 3 (2026-11-13) = also
- * counts how the Cars list is narrowed (trackNarrow). The API notes the
- * first day each platform sends v2 / v3, so the daily email can say which
- * numbers predate them. Still no ids: one anonymous +1 per event. */
-const EVENTS_V = 3;
+ * counts how the Cars list is narrowed (trackNarrow). 4 (2026-11-13, later) = also
+ * counts how each checkout attempt ends (checkoutBegin / checkoutEnd). The
+ * API notes the first day each platform sends v2 / v3 / v4, so the daily
+ * email can say which numbers predate them. Still no ids: one anonymous +1
+ * per event. */
+const EVENTS_V = 4;
 function sendEvent(e) {
   if (ANALYTICS_OFF) return;
   const body = JSON.stringify({ e, src: ATTRIB ? ATTRIB.src : '', cmp: ATTRIB ? ATTRIB.cmp : '', med: ATTRIB ? ATTRIB.med : '',
@@ -187,6 +194,81 @@ function narrowRouteTaken() {
 document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'hidden') narrowFlushMake();
 });
+/* How each checkout attempt ends (2026-11-13, counting rules v4). The tap
+ * counts 'checkout-try'; the end counts exactly one 'checkout-end/<outcome>':
+ *   bought        the store / Stripe confirmed Pro
+ *   cancelled     the person closed the store sheet, or came back from
+ *                 Stripe with "cancel"
+ *   pending       the store says it awaits approval (Ask to Buy, slow payment)
+ *   incomplete    the store answered, but with none of the above
+ *   unconfirmed   web: back from Stripe, but Pro was not confirmed before the
+ *                 polling gave up
+ *   failed-<cls>  an error, as a coarse class only (CHECKOUT_FAIL_CLASSES);
+ *                 the error's own text is never sent
+ * An attempt with no end (app killed, tab closed at Stripe) sends nothing
+ * more; the email shows taps minus ends as "no result recorded". The web
+ * attempt spans the Stripe redirect, so its open state rides in this tab's
+ * sessionStorage (ys_co_try, a "1"; nothing else). */
+const CHECKOUT_OUTCOMES = ['bought', 'cancelled', 'pending', 'incomplete', 'unconfirmed'];
+const CHECKOUT_FAIL_CLASSES = ['product-unavailable', 'network', 'store-unavailable', 'unverified', 'store', 'not-configured', 'server', 'unknown'];
+let _coOpen = false;
+/* A rejected Purchases call -> its class, from the exact texts the native
+ * plugins reject with (ios/App/App/PurchasesPlugin.swift,
+ * android/.../PurchasesPlugin.java). They reject with a message only, no code. */
+function checkoutFailClass(e) {
+  const m = String((e && e.message) || (typeof e === 'string' ? e : '') || '').trim();
+  if (e && e.code) return 'unknown';   // Capacitor's own errors (e.g. UNIMPLEMENTED), not the plugin's
+  if (!m) return 'unknown';
+  if (/^Product not available\.?$/i.test(m)) return 'product-unavailable';
+  if (/could not be verified/i.test(m)) return 'unverified';
+  if (/billing isn.t available on this device/i.test(m)) return 'store-unavailable';
+  if (/^Can.t reach Google Play/i.test(m)) return 'network';
+  if (/^Purchase failed\.?$/i.test(m)) return 'unknown';
+  // iOS: StoreKit's own (localized) description; Android: Play's debug text
+  // or "Google Play billing error.". Either way, the store said no.
+  return 'store';
+}
+/* What Purchases.purchase() resolved with -> the outcome. */
+function checkoutOutcomeOf(r) {
+  if (r && r.entitled) return 'bought';
+  if (r && r.pending) return 'pending';
+  if (r && r.cancelled) return 'cancelled';
+  return 'incomplete';
+}
+/* The web checkout could not start: 503 = not configured, any other answer
+ * without a checkout link = server, no answer at all = network. */
+function webCheckoutFailClass(status, threw) {
+  if (threw) return 'network';
+  return status === 503 ? 'not-configured' : 'server';
+}
+/* getProduct as the Pro sheet opened -> null when the product loaded, else
+ * the class of the failure. */
+function productLoadFailClass(p, e) {
+  if (e !== undefined) return checkoutFailClass(e);
+  if (p && p.available) return null;
+  return p && p.error ? checkoutFailClass({ message: p.error }) : 'product-unavailable';
+}
+function checkoutBegin(acrossRedirect) {
+  _coOpen = true;
+  if (acrossRedirect) { try { sessionStorage.setItem('ys_co_try', '1'); } catch (e) { /* private mode: the end goes unrecorded */ } }
+  track('checkout-try');
+}
+/* Back from Stripe: was an attempt open in this tab? */
+function checkoutResume() {
+  try { if (sessionStorage.getItem('ys_co_try')) _coOpen = true; } catch (e) { /* private mode */ }
+  return _coOpen;
+}
+/* Ends the open attempt with one outcome; a second end, or an end with no
+ * attempt open, sends nothing. Only the fixed names above are ever sent. */
+function checkoutEnd(outcome) {
+  if (!_coOpen) return false;
+  _coOpen = false;
+  try { sessionStorage.removeItem('ys_co_try'); } catch (e) { /* private mode */ }
+  const o = String(outcome || '');
+  const known = CHECKOUT_OUTCOMES.includes(o) || (o.startsWith('failed-') && CHECKOUT_FAIL_CLASSES.includes(o.slice(7)));
+  track('checkout-end/' + (known ? o : 'failed-unknown'));
+  return true;
+}
 try { if (!localStorage.getItem('ys_seen')) { localStorage.setItem('ys_seen', '1'); track('first-visit'); } } catch (e) { /* private mode */ }
 if (GOATCOUNTER_CODE) {
   window.goatcounter = { endpoint: 'https://' + GOATCOUNTER_CODE + '.goatcounter.com/count' };
@@ -11497,10 +11579,12 @@ function revokeNativePro() {
   }
   if (subBtn) subBtn.addEventListener('click', async () => {
     track('iap-subscribe/' + upgradeTrigger);
+    checkoutBegin(false);
     subBtn.disabled = true;
     if (status) status.textContent = '';
     try {
       const r = await P.purchase({ productId: IAP_PRODUCT_ID });
+      checkoutEnd(checkoutOutcomeOf(r));
       if (r && r.entitled) {
         grantNativePro();
         track('iap-purchased/' + upgradeTrigger);
@@ -11511,6 +11595,7 @@ function revokeNativePro() {
         status.textContent = 'Purchase did not complete.';
       }
     } catch (e) {
+      checkoutEnd('failed-' + checkoutFailClass(e));
       if (status) status.textContent = e.message || 'Purchase failed.';
     } finally {
       subBtn.disabled = false;
@@ -11570,8 +11655,14 @@ async function refreshNativeIapUi() {
   { const buy = document.getElementById('iap-buy'); if (buy) buy.style.display = ''; }
   refreshUpgradeFoot();
   const status = document.getElementById('iap-status');
+  // The store product did not load: the button keeps its baked-in price.
+  // Counted once per sheet open (openUpgradeSheet is the only caller), as a
+  // coarse class (productLoadFailClass), never the store's own text.
   try {
-    const p = await P.getProduct({ productId: IAP_PRODUCT_ID });
+    let p;
+    try { p = await P.getProduct({ productId: IAP_PRODUCT_ID }); } catch (e) { track('iap-product-failed/' + productLoadFailClass(null, e)); throw e; }
+    const loadFail = productLoadFailClass(p);
+    if (loadFail) track('iap-product-failed/' + loadFail);
     if (p && p.available) {
       const sub = document.getElementById('iap-subscribe');
       // Intro offer (2026-10-30): the store only reports it to people who are
@@ -11839,6 +11930,8 @@ async function refreshNativeIapUi() {
   const checkoutBtn = $id('ent-checkout');
   if (checkoutBtn) checkoutBtn.addEventListener('click', async () => {
     track('ent-checkout-start/' + upgradeTrigger);
+    // The attempt stays open across the Stripe redirect (ys_co_try).
+    checkoutBegin(true);
     // The gate rides through the Stripe redirect so the purchase is credited
     // to the paywall that sold it (this tab only; cleared on return).
     try { sessionStorage.setItem('ys_co_gate', upgradeTrigger); } catch (e) { /* private mode */ }
@@ -11847,10 +11940,12 @@ async function refreshNativeIapUi() {
     try {
       const { ok, status, data } = await postJson('checkout', {});
       if (ok && data.url) { location.href = data.url; return; }
+      checkoutEnd('failed-' + webCheckoutFailClass(status, false));
       setMsg($id('ent-checkout-status'), status === 503
         ? 'Web checkout isn\u2019t live quite yet — Pro is available in the iPhone and Android apps.'
         : (data.message || 'Could not start checkout — try again.'), true);
     } catch (e) {
+      checkoutEnd('failed-' + webCheckoutFailClass(0, true));
       setMsg($id('ent-checkout-status'), 'Could not reach checkout — check your connection.', true);
     } finally {
       checkoutBtn.disabled = false;
@@ -11872,10 +11967,14 @@ async function refreshNativeIapUi() {
       }
     } catch (e) { /* ignore */ }
     if (!id || id === 'cancel') {
-      if (id === 'cancel') track('ent-checkout-cancel');
+      if (id === 'cancel') {
+        track('ent-checkout-cancel');
+        if (checkoutResume()) checkoutEnd('cancelled');
+      }
       return;
     }
     track('ent-checkout-return');
+    checkoutResume();
     let gate = '';
     try { gate = sessionStorage.getItem('ys_co_gate') || ''; sessionStorage.removeItem('ys_co_gate'); } catch (e) { /* private mode */ }
     openUpgradeSheet('checkout-return');
@@ -11888,12 +11987,14 @@ async function refreshNativeIapUi() {
           grantWebPro({ email: data.email, token: data.token, source: 'stripe',
             note: 'Payment received — Pro is unlocked on this device and linked to ' + data.email + '.' });
           track('ent-purchased' + (gate ? '/' + gate : ''));
+          checkoutEnd('bought');
           openUpgradeSheet('checkout-done'); // re-render: now shows the Pro state
           return;
         }
       } catch (e) { /* retry */ }
       await new Promise((res) => setTimeout(res, 2500));
     }
+    checkoutEnd('unconfirmed');   // back from Stripe, Pro not confirmed before the polling gave up
     { const rd = $id('ent-redeem'); if (rd) rd.open = true; }   // the message lives inside the one-tap row
     setMsg($id('ent-status'),
       'Payment received. Activation can take a minute — use "Already have Pro?" with your checkout email if it doesn\u2019t unlock shortly.', true);
