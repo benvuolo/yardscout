@@ -438,3 +438,20 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
     sign-ups by link.
 - Still waiting on the owner: adding Gmail to the "Reddit reply drafts"
   scheduled task; the two U-Pull-R suggestions (reader off, reply watch on).
+
+## 2026-11-13 ~08:15 UTC model pages merged and deployed
+
+- `seo/model-pages` merged at 946f2b71; deploy-workers run 43391577905
+  succeeded. `/landed/<make>/<model>`: 405 model pages across 40 makes on
+  today's data (100+ on the lots, or 10+ set out this week). Week's set-outs
+  by state, then yard; "on the lots now" by state; links from the make pages,
+  the hub, car and yard pages, and the sitemap.
+- Hub regression on the merged tree: site-proxy model_pages / junkyards /
+  redirects / prices unit tests and e2e.sh (43/0); all scraper tests.
+- Until a scan that started after the merge writes `docs/data/landed/`, model
+  URLs answer 503 "Model page coming soon" (noindex) and nothing links to
+  them. Scan dispatched by hand at 08:14 UTC on 946f2b71 (also carries
+  `notableTrims` for the trim badges). Check-in scheduled to verify.
+- For the owner once live: resubmit the sitemap in Search Console.
+- Judgement call to confirm with the owner: model pages list the whole week
+  nationwide, free (the make page stays capped at the newest 40).
