@@ -628,3 +628,20 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
 - Lesson for live checks: wait for a page load that actually has the new
   code (check for a new function or class in the page), not for sw.js or a
   cache-busted fetch.
+
+## 2026-11-14 ~16:35 UTC status for the owner
+
+- Yard-card "Hours and directions" link confirmed live (all 7 cards near
+  84101, 0 page errors).
+- Scorecard 13:07 UTC (week Nov 7–13; fixed counting from Nov 12): web first
+  visits 37 on Nov 13 and 35 on Nov 12 (about 14 a day before); Android app
+  first visits 12 on Nov 13; watches created 9 in the week (web 2, iPhone 2,
+  Android 5); reddit / xterra 34 tagged visits (post 27, comment 7), 0
+  watches, 0 emails, 0 checkouts; chatgpt.com 5 visits, 1 watch; Pro sheet
+  opened 54, checkout taps 9 (iPhone 8), purchases 0; subscribers 6.
+  First day of narrowing counts (website): search box 4, Filters 5, link 3.
+- Reddit reply task: running hourly on Sonnet; the 15:42 UTC run found
+  nothing new and ended in 7 s.
+- Waiting on the owner: "ship" for the next app release (iPhone checkout
+  outcomes only exist from a new build); U-Pull-R reader off and reply watch
+  on; which parts checks and which post next.
