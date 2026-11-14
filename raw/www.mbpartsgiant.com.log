@@ -3439,3 +3439,18 @@
 09:41:08 chain-unlinked window-regulator 1 numbers named by 140-730-11-46, no catalog link: 140-730-03-46-05
 09:41:08 chain-unlinked window-regulator 2 numbers named by 140-730-12-46, no catalog link: 140-730-04-46-05, 140-730-04-46
 09:48:20 time budget reached records=2258
+10:51:12 start site=www.mbpartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2258 list_lines=3190 year_lines=565 url_index=13027
+10:51:12 completion worklist completion/mb.own_page.json: 524 rows
+11:06:40 chain-unlinked gauge-cluster 2 numbers named by 209-540-33-11, no catalog link: 209-540-40-11, 209-540-03-11
+11:06:40 chain-unlinked gauge-cluster 1 numbers named by 209-540-55-11, no catalog link: 209-540-46-11
+11:14:49 chain-unlinked gauge-cluster 1 numbers named by 205-900-05-18-80, no catalog link: 253-900-94-05
+11:14:49 chain-unlinked gauge-cluster 1 numbers named by 205-900-41-18-80, no catalog link: 253-900-83-04
+11:14:49 chain-unlinked gauge-cluster 1 numbers named by 205-900-70-29-80, no catalog link: 253-900-86-05
+11:15:13 chain-unlinked grille 1 numbers named by 205-888-05-23-64, no catalog link: 205-888-05-23
+11:16:08 chain-unlinked tail-lights 1 numbers named by 205-906-67-05, no catalog link: 205-906-65-00
+11:16:08 chain-unlinked tail-lights 1 numbers named by 205-906-68-05, no catalog link: 205-906-66-00
+11:16:32 chain-unlinked trunk-lid 1 numbers named by 205-750-10-75, no catalog link: 205-750-61-00
+11:16:32 chain-unlinked trunk-lid 1 numbers named by 205-750-24-00, no catalog link: 205-750-24-00-28
+11:18:17 chain-unlinked window-regulator 1 numbers named by 000-906-61-06, no catalog link: 207-906-13-00
+11:18:17 chain-unlinked window-regulator 1 numbers named by 000-906-62-06, no catalog link: 207-906-12-00
+11:22:09 time budget reached records=2288
