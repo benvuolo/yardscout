@@ -8,6 +8,8 @@ Procedure: `RELEASING.md`. **Dispatch only after the owner says "ship".**
 
 | Version | iOS | Android |
 |---|---|---|
+| 1.12.16 | SHIPPED 2026-11-14 17:03 UTC (owner: "ship"). Built from main ac24bcb5 (sw jh-v196). iOS build 40, submit=true, run 43618949981. asc-status: 1.12.16 build 40 WAITING_FOR_REVIEW, submitted 17:13 UTC, automatic release on approval. Carries: Cars-tab search box, per-tab scroll, filter panel fix, card share button, trim badge and filter, model-range line, hours and directions links, narrowing and checkout-outcome counters. | versionCode 39, Play production, status completed, rollout 100% (run 43618947678); Google review pending |
+| 1.12.15 | build 37, live (READY_FOR_SALE) | versionCode 38, Play production, completed |
 | 1.12.10 | build 26, live (READY_FOR_SALE) | — |
 | 1.12.11 | — | versionCode 33, Play production, in review |
 | 1.12.14 | SHIPPED 2026-11-09 14:24 UTC (owner: "Ship the latest"). Round 9 map merged to main (4c1b482e, sw jh-v167). iOS build 36, submit=true, run 42634279207: the workflow withdrew 1.12.13 build 34 from review (WAITING_FOR_REVIEW since 11-07 04:40, built at jh-v155 without the price-copy fix). asc-status confirms 1.12.14 build 36 WAITING_FOR_REVIEW, submitted 14:46 UTC, automatic release on approval. Build 35 is TestFlight only. | versionCode 37, Play production, committed 14:27 UTC (run 42634274314); Google review pending |

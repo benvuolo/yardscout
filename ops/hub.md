@@ -718,3 +718,14 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
   release), and car pages render from the static data files.
 - Check tomorrow midday with `cf-usage.yml` (it reads Cloudflare's analytics
   API and costs no Worker requests).
+
+## 2026-11-14 17:20 UTC 1.12.16 accepted by both stores
+
+- release-android run 29 (43618947678) and release-ios run 40 (43618949981)
+  both succeeded. asc-status 43619959666: 1.12.16 build 40
+  WAITING_FOR_REVIEW, submitted 17:13 UTC. play-status 43619961360:
+  production 1.12.16 (39), status completed, rollout 100%.
+- `ops/release.md` table updated.
+- After approval: the apps report narrowing and checkout outcomes; the
+  scorecard's "website only until the next app update" lines go away as
+  each platform's first v4 event arrives.
