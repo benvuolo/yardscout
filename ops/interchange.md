@@ -3566,3 +3566,14 @@ Earlier Honda/Nissan bullets (tier C trial, the 503 block, check-ins) are scatte
     sample (verifiers pass `--max-lines 100000`), hub confirmation, ship;
     then tier D on unblocked sites.
 - 14:30 UTC: the source-scout-2 session is idle at the hub's request (owner usage). No scheduled check-ins of its own are pending. It resumes only when the hub messages it.
+
+## Demand signals from coverage requests (hub, 2026-11-14)
+
+- Audi A3 alternator (request 2026-11-07, "Can you add this family?"). The
+  request named a 2003, which is not a US model year; the US A3 on the lots is
+  2006 to 2019 and has no alternator coverage in any year (checked 2006: no
+  engine family, no aftermarket rows). A candidate for the next engine-family
+  or aftermarket pass. Nothing was added: no basis researched yet.
+- Chevrolet Colorado alternator (request 2026-11-11) was for a 2003, which
+  does not exist; 2004 is covered. The Parts empty state now points to the
+  neighbouring year (hub change, sw `jh-v197`). No table change needed.

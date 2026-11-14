@@ -729,3 +729,22 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
 - After approval: the apps report narrowing and checkout outcomes; the
   scorecard's "website only until the next app update" lines go away as
   each platform's first v4 event arrives.
+
+## 2026-11-14 ~19:00 UTC coverage requests triaged (owner sent the four emails)
+
+| Request | What it is | Done |
+|---|---|---|
+| U-Pull-It, "Kennewick, WA" (Nov 12, left an email) | Already tracked since 2026-10-28 (`upullitwa`, 853 cars; Pasco and Yakima too). The Yards tab lists only yards inside the chosen distance, so a covered yard farther out looks missing. | Gmail draft reply to the requester (owner sends). Yard request form now checks the full yard table first. |
+| 2003 Chevrolet Colorado, alternator (Nov 11) | No such car: the Colorado starts in 2004. The Parts model list offers a nameplate one year either side of its known span, and the empty state then said "ask us to add it". | Empty state now says the year was never seen, names the span, and offers "search 2004 instead" (2004 has donors). No ask link in that case. |
+| 2003 Audi A3, alternator (Nov 7, "Can you add this family?") | Same cause (US A3 on the lots is 2006 to 2019; 2003 is no longer offered). The real gap behind it: the 2006+ A3 has no alternator coverage at all. | Noted in `ops/interchange.md` as a demand signal. Not built. |
+| U-Pull R Parts (Nov 3, left an email) | The yard that refuses the scraper. Follow-up to its CTO sent by the owner 2026-11-12; no reply known. | Nothing new. The requester has not been told; their address is only in the admin coverage list. |
+
+Web change: sw `jh-v197`, test `backend/test/coverage_gaps_e2e.mjs` (21 checks).
+Apps get it with the next store release (needs a new "ship").
+
+Open suggestions made to the owner:
+- The digest email should mark a yard request that matches a tracked yard
+  ("already tracked: <name>") so it is not read as a gap. Not built.
+- `/junkyards/wa` is a redirect to `/junkyards/washington`; the Washington
+  page data is correct (8 yards). An earlier hub check that found "0
+  mentions" had read the redirect, not the page.

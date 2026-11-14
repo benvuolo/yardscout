@@ -6977,6 +6977,69 @@ document.getElementById('yards-map-wrap').addEventListener('click', e => {
 });
 /* Request a yard (Yards tab footer). kind=yard: the name rides in `part`,
  * city/website in `note` — identical to the public /yards form. */
+/* Is the yard being asked for one we already track? The Yards tab lists only
+ * yards inside the chosen distance, so a covered yard farther out reads as
+ * missing (2026-11-12: a request for "U-Pull-It", "Kennewick, WA", which had
+ * been on the lots since October). Every word typed must be in the yard's
+ * name, city or state. This never blocks a request: the first tap shows what
+ * we have, the second sends anyway. */
+const YR_FILLER = new Set(['the', 'and', 'of', 'inc', 'llc', 'co', 'auto', 'parts', 'salvage', 'yard', 'junkyard']);
+function yrWords(s) {
+  return String(s || '').toLowerCase().replace(/&/g, ' and ').split(/[^a-z0-9]+/).filter(Boolean);
+}
+function coveredYardMatches(name, where) {
+  const m = _inv && _inv.m;
+  if (!m || !Array.isArray(m.yards) || !Array.isArray(m.yardCount)) return [];
+  const nameW = yrWords(name).filter(t => !YR_FILLER.has(t));
+  if (nameW.join('').length < 3) return [];
+  // "City or site": a web address says nothing about the city, and only the
+  // part before a comma is the city ("Kennewick, WA").
+  const isSite = /:\/\/|\.[a-z]{2,}(\/|$)/i.test(where || '');
+  const cityW = isSite ? [] : yrWords(String(where || '').split(',')[0]).filter(t => !YR_FILLER.has(t));
+  const c = activeZipCoords;
+  const out = [];
+  m.yards.forEach((y, i) => {
+    if (!y[0] || !(m.yardCount[i] > 0) || yardDormant(y[0])) return;
+    const have = new Set([...yrWords(y[0]), ...yrWords(y[1]), ...yrWords(y[2])]);
+    const nameHit = nameW.every(t => have.has(t))
+      || (nameW.join('').length >= 5 && yrWords(y[0]).join('').includes(nameW.join('')));
+    if (!nameHit || !cityW.every(t => have.has(t))) return;
+    const dist = (c && y[3] != null && y[4] != null) ? haversineMiles(c.lat, c.lng, y[3], y[4]) : null;
+    out.push({ name: y[0], cars: m.yardCount[i], dist });
+  });
+  return out.sort((a, b) => (a.dist ?? 1e9) - (b.dist ?? 1e9) || a.name.localeCompare(b.name));
+}
+function yrCoveredHtml(hits) {
+  const r = effectiveRadiusMi();
+  const line = (h) => {
+    const far = h.dist != null && r && h.dist > r;
+    return `<strong>${escapeHtml(h.name)}</strong>: ${h.cars.toLocaleString()} cars on the lot`
+      + (h.dist != null ? `, ${Math.round(h.dist).toLocaleString()} mi from you` : '')
+      + (far ? ` (outside your ${r} mi distance, so it is not in the list above)` : '')
+      + `. <button type="button" class="pfc-ask yr-view" data-loc="${escapeHtml(h.name)}">See its cars</button>`;
+  };
+  if (hits.length > 4) {
+    return `We already track ${hits.length} yards that match that name. Add the city to check for yours, or tap Send anyway.`;
+  }
+  return (hits.length === 1
+    ? `We already track ${line(hits[0])}`
+    : `We already track these: <ul class="yr-covered-list">${hits.map(h => `<li>${line(h)}</li>`).join('')}</ul>`)
+    + `<div>Not the yard you mean? Tap Send anyway.</div>`;
+}
+let _yrCoveredFor = null;   // the name|where the "already tracked" note is showing for
+function yrClearCovered() {
+  if (_yrCoveredFor == null) return;
+  _yrCoveredFor = null;
+  const box = document.getElementById('yr-covered');
+  if (box) { box.hidden = true; box.innerHTML = ''; }
+  const btn = document.getElementById('yr-send');
+  if (btn) btn.textContent = 'Request this yard';
+}
+['yr-name', 'yr-where'].forEach(id => document.getElementById(id).addEventListener('input', yrClearCovered));
+document.getElementById('yard-request').addEventListener('click', e => {
+  const v = e.target.closest('.yr-view');
+  if (v) viewYardInLive(v.dataset.loc);
+});
 document.getElementById('yr-send').addEventListener('click', async () => {
   const btn = document.getElementById('yr-send');
   const status = document.getElementById('yr-status');
@@ -6985,6 +7048,21 @@ document.getElementById('yr-send').addEventListener('click', async () => {
   const email = document.getElementById('yr-email').value.trim();
   if (!name) { status.textContent = 'Add the yard\u2019s name.'; document.getElementById('yr-name').focus(); return; }
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { status.textContent = 'That email doesn\u2019t look right \u2014 fix it or leave it blank.'; return; }
+  const sig = name.toLowerCase() + '|' + where.toLowerCase();
+  const box = document.getElementById('yr-covered');
+  if (box && _yrCoveredFor !== sig) {
+    let hits = [];
+    try { hits = coveredYardMatches(name, where); } catch (err) { hits = []; }
+    if (hits.length) {
+      _yrCoveredFor = sig;
+      box.innerHTML = yrCoveredHtml(hits);
+      box.hidden = false;
+      btn.textContent = 'Send anyway';
+      status.textContent = '';
+      track('yard-request-covered');
+      return;
+    }
+  }
   btn.disabled = true;
   status.textContent = 'Sending\u2026';
   try {
@@ -8787,6 +8865,28 @@ function pfRunSearch() {
           + ` every platform donor near you.${pfAskHtml('car')}</div>`;
         return;
       }
+      // The model list offers a nameplate one year either side of what we
+      // know (lot spans can miss a first or last year), so a year the model
+      // was never built can be picked: "2003 Chevrolet Colorado" sent us a
+      // coverage request nobody can fill (2026-11-11). When the next year
+      // over has this part, point there instead of "ask us to add it".
+      const famAt = (y) => interchangeData.engineFamilies.some(f => {
+        const p = f.parts[pfCat.id];
+        return p && (!p.years || (y >= p.years[0] && y <= p.years[1]))
+          && f.apps.some(a => pfAppMatches(a, y, s.make, s.model));
+      });
+      const nearYear = [s.year + 1, s.year - 1].find(famAt);
+      if (nearYear) {
+        const span = modelYearSpans && modelYearSpans[s.make] && modelYearSpans[s.make][s.model];
+        const a = Array.isArray(span) ? Number(span[0]) : 0, b = Array.isArray(span) ? Number(span[1]) : 0;
+        const unseen = a && b && (s.year < a || s.year > b);
+        const car = `${escapeHtml(s.make)} ${escapeHtml(s.model)}`;
+        out.innerHTML = `<div class="pf-empty">Nothing for a ${s.year} ${car} ${escapeHtml(pfCat.label.toLowerCase())}.`
+          + (unseen ? ` We have never seen a ${s.year} ${escapeHtml(s.model)} on a lot: the ones we track run ${a}–${b}.` : '')
+          + ` We do have this part for the ${nearYear} ${escapeHtml(s.model)}. If yours is a ${nearYear}, <button type="button" class="pfc-ask pf-year-fix" data-year="${nearYear}">search ${nearYear} instead</button>.`
+          + (unseen ? '' : pfAskHtml('car')) + `</div>`;
+        return;
+      }
       out.innerHTML = `<div class="pf-empty">No interchange data yet for a ${s.year} ${escapeHtml(s.make)} ${escapeHtml(s.model)} ${escapeHtml(pfCat.label.toLowerCase())}. We only list fits we can stand behind — this car\u2019s engine family isn\u2019t in the verified table yet, so we\u2019d rather show nothing than guess.${pfAskHtml('car')}</div>`;
       return;
     } else if (pfChosenFam === '__none__' && amOnly(null)) {
@@ -9163,6 +9263,14 @@ async function pfCoverageSubmit() {
 
 /* Ask-links live inside innerHTML-built empty states — delegate the clicks. */
 document.getElementById('pf-results').addEventListener('click', e => {
+  const fix = e.target.closest('.pf-year-fix');
+  if (fix) {
+    // "search 2004 instead": change the year and run the same search.
+    const ySel = document.getElementById('pf-year');
+    ySel.value = fix.dataset.year;
+    if (ySel.value === fix.dataset.year) ySel.dispatchEvent(new Event('change', { bubbles: true }));
+    return;
+  }
   const ask = e.target.closest('.pfc-ask');
   if (ask) pfCoverageOpen(ask.dataset.kind, ask);
 });

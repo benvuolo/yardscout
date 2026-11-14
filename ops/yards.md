@@ -727,3 +727,12 @@ jh-v150+. The first message is kept below for the record.
    each has self-service inventory online before adding.
 4. Chains frozen for 6+ scans show in the daily email as `chain-frozen:<chain>`.
 5. Photos: Rupert's and Chuck & Eddie's non-expiring YardSmart URLs (yardconnect parser, per-URL exp check). Pull-N-Save checker is PAUSED (2026-11-07); watch the backlog in the scan log only once un-paused ("[Pull-N-Save photos] … still unchecked"). After the next scan, confirm `photoSources` in `inv/manifest.json` and real PnP/WAP code counts; compare PnP/WAP URLs across scans. Sample the Ario, CRUSH and remaining chains, and re-check WAP URL stability after a few scans.
+
+## 2026-11-14 request for a yard already tracked (Kennewick)
+
+A coverage request on 2026-11-12 asked for "U-Pull-It", "Kennewick, WA". It
+has been tracked since 2026-10-28 (`upullitwa`: Kennewick, Pasco, Yakima).
+Cause: the Yards tab shows only yards inside the chosen distance. The request
+form now looks the name and city up in the whole yard table and says "We
+already track ..." before sending (`coveredYardMatches` in the app script, sw
+`jh-v197`); a second tap still sends. Hub drafted a reply to the requester.

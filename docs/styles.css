@@ -2257,6 +2257,9 @@
 }
 .pfc-ask:hover { color: var(--text); }
 .yard-request { margin-top: 1.25rem; }
+.yr-covered { overflow-wrap: anywhere; }
+.yr-covered-list { margin: 0.2rem 0 0.2rem 1.1rem; padding: 0; }
+.pf-year-fix { color: var(--text); }
 .pf-coverage-form {
   margin-top: 0.6rem; padding: 0.7rem; max-width: 26rem;
   background: var(--surface2); border: 1px solid var(--border);
