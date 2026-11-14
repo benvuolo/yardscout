@@ -1,0 +1,129 @@
+# Read-only: where today's Cloudflare Workers requests are going. Written
+# 2026-11-14 when the account reached 90% of the free plan's 100,000 requests
+# a day (yardscout.io is served entirely by the yardscout-site Worker, and the
+# API is the yardscout-api Worker). GraphQL Analytics queries only; changes
+# nothing. Prints counts, paths and user-agent names; never a secret.
+name: Cloudflare usage
+
+on:
+  workflow_dispatch:
+    inputs:
+      hours:
+        description: "How many hours back to look"
+        default: "24"
+
+permissions:
+  contents: read
+
+jobs:
+  usage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CF_ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      HOURS: ${{ github.event.inputs.hours }}
+    steps:
+      - run: pip install -q requests
+      - name: Query analytics
+        run: |
+          python3 - <<'PY'
+          import os, json, datetime, requests, collections, re
+          H = {"Authorization": f"Bearer {os.environ['CF_TOKEN']}", "Content-Type": "application/json"}
+          API = "https://api.cloudflare.com/client/v4"
+          hours = int(os.environ.get("HOURS") or 24)
+          now = datetime.datetime.utcnow().replace(microsecond=0)
+          since = (now - datetime.timedelta(hours=hours)).isoformat() + "Z"
+          until = now.isoformat() + "Z"
+          day0 = now.replace(hour=0, minute=0, second=0).isoformat() + "Z"
+          print(f"window: {since} to {until} (UTC); today since {day0}")
+
+          def gql(query, variables):
+              r = requests.post(f"{API}/graphql", headers=H, data=json.dumps({"query": query, "variables": variables}), timeout=60)
+              try: j = r.json()
+              except Exception: return None, f"HTTP {r.status_code} {r.text[:200]}"
+              if j.get("errors"): return None, "; ".join(e.get("message", "?") for e in j["errors"])[:400]
+              return j.get("data"), None
+
+          acct = (os.environ.get("CF_ACCOUNT") or "").strip()
+          if not acct:
+              r = requests.get(f"{API}/accounts?per_page=50", headers=H, timeout=60).json()
+              ids = [a["id"] for a in r.get("result", [])]
+              acct = ids[0] if len(ids) == 1 else ""
+          print("account resolved:", "yes" if acct else "NO")
+
+          # 1) Workers invocations by script: today (the number the limit counts) and the window.
+          q = """query($a:String!,$s:Time!,$u:Time!){viewer{accounts(filter:{accountTag:$a}){
+                 workersInvocationsAdaptive(limit:100,filter:{datetime_geq:$s,datetime_lt:$u}){
+                   sum{requests subrequests errors} dimensions{scriptName status}}}}}"""
+          for label, s in (("TODAY (UTC day)", day0), (f"LAST {hours} h", since)):
+              d, e = gql(q, {"a": acct, "s": s, "u": until})
+              if e: print(f"WORKERS {label}: {e}"); continue
+              rows = (d["viewer"]["accounts"] or [{}])[0].get("workersInvocationsAdaptive", [])
+              by = collections.Counter(); st = collections.Counter()
+              for x in rows:
+                  by[x["dimensions"]["scriptName"]] += x["sum"]["requests"]
+                  st[(x["dimensions"]["scriptName"], x["dimensions"]["status"])] += x["sum"]["requests"]
+              print(f"WORKERS {label}: total {sum(by.values()):,} requests  " + "  ".join(f"{k}={v:,}" for k, v in by.most_common()))
+              print(f"WORKERS {label} by status: " + "  ".join(f"{k[0]}/{k[1]}={v:,}" for k, v in st.most_common(8)))
+
+          # 2) By hour today, to see when it climbed.
+          q = """query($a:String!,$s:Time!,$u:Time!){viewer{accounts(filter:{accountTag:$a}){
+                 workersInvocationsAdaptive(limit:200,filter:{datetime_geq:$s,datetime_lt:$u},orderBy:[datetimeHour_ASC]){
+                   sum{requests} dimensions{datetimeHour scriptName}}}}}"""
+          d, e = gql(q, {"a": acct, "s": since, "u": until})
+          if e: print("WORKERS by hour:", e)
+          else:
+              rows = (d["viewer"]["accounts"] or [{}])[0].get("workersInvocationsAdaptive", [])
+              hrs = collections.OrderedDict()
+              for x in rows:
+                  h = x["dimensions"]["datetimeHour"][5:13]
+                  hrs.setdefault(h, collections.Counter())[x["dimensions"]["scriptName"]] += x["sum"]["requests"]
+              for h, c in hrs.items():
+                  print(f"HOUR {h}: {sum(c.values()):>7,}  " + "  ".join(f"{k}={v:,}" for k, v in c.most_common()))
+
+          # 3) Zone traffic: which paths and which clients.
+          z = requests.get(f"{API}/zones?name=yardscout.io", headers=H, timeout=60)
+          zj = z.json() if z.status_code == 200 else {}
+          zone = (zj.get("result") or [{}])[0].get("id", "")
+          print("zone resolved:", "yes" if zone else f"NO (HTTP {z.status_code} {str(zj.get('errors'))[:160]})")
+          if zone:
+              def top(dim, limit=5000):
+                  q = ("query($z:String!,$s:Time!,$u:Time!){viewer{zones(filter:{zoneTag:$z}){"
+                       "httpRequestsAdaptiveGroups(limit:%d,filter:{datetime_geq:$s,datetime_lt:$u},orderBy:[count_DESC]){"
+                       "count dimensions{%s}}}}}" % (limit, dim))
+                  d, e = gql(q, {"z": zone, "s": since, "u": until})
+                  if e: return None, e
+                  return (d["viewer"]["zones"] or [{}])[0].get("httpRequestsAdaptiveGroups", []), None
+              rows, e = top("clientRequestPath")
+              if e: print("ZONE paths:", e)
+              else:
+                  grp = collections.Counter(); exact = collections.Counter()
+                  for x in rows:
+                      p = x["dimensions"]["clientRequestPath"] or "/"
+                      seg = [s for s in p.split("/") if s]
+                      if not seg: k = "/"
+                      elif seg[0] == "data": k = "/data/" + (seg[1] if len(seg) > 1 and seg[1] in ("inv", "oem", "landed") else "*")
+                      elif seg[0] in ("car", "yard", "landed", "junkyards", "prices", "api", "v1", "_upstream"): k = "/" + seg[0] + "/*" + ("/*" if seg[0] == "landed" and len(seg) > 2 else "")
+                      elif re.search(r"\.(js|css|html|png|svg|ico|webmanifest|json|xml|txt|woff2)$", p): k = "/" + seg[-1] if len(seg) == 1 else "/" + seg[0] + "/*"
+                      else: k = "/" + seg[0] + ("/*" if len(seg) > 1 else "")
+                      grp[k] += x["count"]; exact[p] += x["count"]
+                  tot = sum(grp.values())
+                  print(f"ZONE requests in window (top {len(rows)} paths): {tot:,}")
+                  for k, v in grp.most_common(22): print(f"  PATH {v:>8,}  {100*v/max(tot,1):5.1f}%  {k}")
+                  print("  distinct /car/ pages requested:", sum(1 for p in exact if p.startswith('/car/')))
+                  print("  distinct /landed/ pages requested:", sum(1 for p in exact if p.startswith('/landed')))
+              rows, e = top("userAgent", 300)
+              if e: print("ZONE user agents:", e)
+              else:
+                  ua = collections.Counter()
+                  for x in rows:
+                      u = x["dimensions"]["userAgent"] or "(none)"
+                      m = re.search(r"(Googlebot|bingbot|GPTBot|ChatGPT-User|OAI-SearchBot|ClaudeBot|Claude-User|PerplexityBot|Amazonbot|Bytespider|AhrefsBot|SemrushBot|DotBot|MJ12bot|YandexBot|Applebot|facebookexternalhit|meta-externalagent|Twitterbot|Slackbot|DuckDuckBot|PetalBot|HeadlessChrome|python-requests|curl|Go-http-client|okhttp|CFNetwork|Dalvik)", u, re.I)
+                      k = m.group(1) if m else ("Mobile browser/app" if re.search(r"iPhone|Android|Mobile", u) else ("Desktop browser" if "Mozilla" in u else u[:40]))
+                      ua[k] += x["count"]
+                  tot = sum(ua.values())
+                  for k, v in ua.most_common(18): print(f"  CLIENT {v:>8,}  {100*v/max(tot,1):5.1f}%  {k}")
+              rows, e = top("edgeResponseStatus", 50)
+              if not e: print("  STATUS " + "  ".join(f"{x['dimensions']['edgeResponseStatus']}={x['count']:,}" for x in rows[:8]))
+          PY
