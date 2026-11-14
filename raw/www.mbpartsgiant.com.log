@@ -3490,3 +3490,14 @@
 20:25:41 chain-unlinked window-regulator 1 numbers named by 246-906-32-00-64, no catalog link: 246-906-32-00
 20:49:30 chain-unlinked grille 1 numbers named by 206-880-42-05, no catalog link: 206-888-23-00
 20:53:22 time budget reached records=2339
+20:53:26 start site=www.mbpartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2339 list_lines=3950 year_lines=691 url_index=14568
+20:53:26 completion worklist completion/mb.own_page.json: 524 rows
+20:55:47 chain-unlinked gauge-cluster 2 numbers named by 221-440-03-11, no catalog link: 221-540-78-48, 221-906-17-00
+20:55:47 chain-unlinked gauge-cluster 3 numbers named by 221-900-50-03, no catalog link: 221-540-72-48, 221-540-87-48, 221-900-50-03-80
+20:56:42 chain-unlinked gauge-cluster 1 numbers named by 212-900-13-14-80, no catalog link: 212-900-13-14
+20:56:42 chain-unlinked gauge-cluster 1 numbers named by 212-900-42-13-80, no catalog link: 212-900-42-13
+21:14:12 chain-unlinked gauge-cluster 2 numbers named by 163-540-98-11, no catalog link: 163-540-61-11, 163-540-79-11
+21:17:16 chain-unlinked gauge-cluster 1 numbers named by 212-900-72-29-80, no catalog link: 212-900-72-29
+21:23:51 chain-unlinked gauge-cluster 1 numbers named by 205-900-10-34, no catalog link: 253-900-42-06
+21:23:51 chain-unlinked gauge-cluster 1 numbers named by 205-900-04-51, no catalog link: 205-900-72-48
+21:26:31 time budget reached records=2349
