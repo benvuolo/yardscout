@@ -111,7 +111,7 @@ check('state heading counts', r.html.includes('Arizona <span>· 3 set out · 2 y
 const az = r.html.slice(r.html.indexOf('id="st-az"'), r.html.indexOf('id="st-mo"'));
 const azYards = [...az.matchAll(/<div class="yardh"><a href="([^"]+)">([^<]*)<\/a>/g)].map((m) => m[2]);
 check('within a state, yards by newest set-out first', azYards.join('|') === 'Pick-n-Pull - Phoenix|LKQ &lt;Mesa&gt; &amp; Co', azYards.join('|'));
-const phx = [...az.matchAll(/<li><a href="https:\/\/yardscout\.io\/car\/([^"]+)">/g)].map((m) => m[1]);
+const phx = [...az.matchAll(/<li><a href="https:\/\/yardscout\.io\/car\/([^"]+)" rel="nofollow">/g)].map((m) => m[1]);
 check('within a yard, newest car first', phx.slice(0, 2).join() === '5N1AN08U05C000002,ipull-123', phx.join());
 check('yard names are escaped and link to /yard/', az.includes('href="https://yardscout.io/yard/lkq-mesa-and-co"') && !r.html.includes('<Mesa>'));
 check('jump list of states', /Jump to: <a href="#st-ab">Alberta 1<\/a> · <a href="#st-az">Arizona 3<\/a>/.test(r.html));
