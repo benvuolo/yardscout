@@ -3454,3 +3454,18 @@
 11:18:17 chain-unlinked window-regulator 1 numbers named by 000-906-61-06, no catalog link: 207-906-13-00
 11:18:17 chain-unlinked window-regulator 1 numbers named by 000-906-62-06, no catalog link: 207-906-12-00
 11:22:09 time budget reached records=2288
+18:22:22 start site=www.mbpartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2288 list_lines=3347 year_lines=586 url_index=13364
+18:22:22 completion worklist completion/mb.own_page.json: 524 rows
+18:25:10 chain-unlinked window-regulator 2 numbers named by 117-720-00-00-64, no catalog link: 117-720-00-00, 117-720-01-79
+18:25:51 chain-unlinked window-regulator 1 numbers named by 117-730-04-79, no catalog link: 117-730-28-00-64
+18:25:51 chain-unlinked window-regulator 2 numbers named by 117-730-25-00-64, no catalog link: 117-730-01-79, 117-730-25-00
+18:25:51 chain-unlinked window-regulator 2 numbers named by 117-730-26-00-64, no catalog link: 117-730-26-00, 117-730-02-79
+18:32:31 chain-unlinked headlights 1 numbers named by 166-820-52-59, no catalog link: 166-820-51-61
+18:32:31 chain-unlinked headlights 1 numbers named by 166-820-53-59, no catalog link: 166-820-52-61
+18:32:31 chain-unlinked headlights 1 numbers named by 166-820-58-59, no catalog link: 166-820-53-61
+18:32:31 chain-unlinked headlights 1 numbers named by 166-820-59-59, no catalog link: 166-820-54-61
+18:32:38 chain-unlinked tail-lights 1 numbers named by 166-906-34-01, no catalog link: 166-906-02-57
+18:32:38 chain-unlinked tail-lights 1 numbers named by 166-906-35-01, no catalog link: 166-906-03-57
+18:33:18 chain-unlinked window-regulator 1 numbers named by 166-720-12-02, no catalog link: 166-720-02-79
+18:33:59 chain-unlinked window-regulator 1 numbers named by 166-730-90-01, no catalog link: 166-730-52-00
+18:53:14 time budget reached records=2297
