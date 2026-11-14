@@ -1793,3 +1793,32 @@
 23:27:57 chain-unlinked window-regulator 1 numbers named by 80721-1FA0B, no catalog link: 80721-1FA1C
 23:27:57 chain-unlinked window-regulator 1 numbers named by 80720-1FA0B, no catalog link: 80720-1FA1C
 23:29:33 time budget reached records=4927
+06:49:04 start site=www.nissanpartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=4927 list_lines=749 year_lines=182 url_index=5213
+06:49:04 completion worklist completion/nissan.own_page.json: 201 rows
+06:49:20 nav-fail Nissan Kicks 2020: ValueError: no parts-list or trim links on https://www.nissanpartsdeal.com/2020-nissan-kicks-parts.html
+06:52:16 nav-fail Nissan Versa 2021: ValueError: no parts-list or trim links on https://www.nissanpartsdeal.com/2021-nissan-versa-parts.html
+06:56:16 chain-unlinked side-mirrors 1 numbers named by 96302-11G10, no catalog link: 96302-11G7A
+06:56:16 chain-unlinked side-mirrors 1 numbers named by 96302-11G70, no catalog link: 96302-11G7A
+06:56:16 chain-unlinked side-mirrors 1 numbers named by 96301-11G10, no catalog link: K6301-11G26
+06:57:04 nav-fail Nissan Rogue 2020: ValueError: no parts-list or trim links on https://www.nissanpartsdeal.com/2020-nissan-rogue-parts.html
+06:57:12 nav-fail Nissan Kicks 2021: ValueError: no parts-list or trim links on https://www.nissanpartsdeal.com/2021-nissan-kicks-parts.html
+06:57:52 nav-fail Nissan Versa 2020: ValueError: no parts-list or trim links on https://www.nissanpartsdeal.com/2020-nissan-versa-parts.html
+07:02:48 nav-fail Nissan Kicks 2022: ValueError: no parts-list or trim links on https://www.nissanpartsdeal.com/2022-nissan-kicks-parts.html
+07:04:08 nav-fail Nissan Kicks 2023: ValueError: no parts-list or trim links on https://www.nissanpartsdeal.com/2023-nissan-kicks-parts.html
+07:04:32 nav-fail Nissan Maxima 2020: ValueError: no parts-list or trim links on https://www.nissanpartsdeal.com/2020-nissan-maxima-parts.html
+07:04:40 nav-fail Nissan Frontier 2020: ValueError: no parts-list or trim links on https://www.nissanpartsdeal.com/2020-nissan-frontier-parts.html
+07:04:48 nav-fail Nissan Kicks 2024: ValueError: no parts-list or trim links on https://www.nissanpartsdeal.com/2024-nissan-kicks-parts.html
+07:06:00 nav-fail Nissan Murano 2020: ValueError: no parts-list or trim links on https://www.nissanpartsdeal.com/2020-nissan-murano-parts.html
+07:06:08 nav-fail Nissan Murano 2021: ValueError: no parts-list or trim links on https://www.nissanpartsdeal.com/2021-nissan-murano-parts.html
+07:06:32 nav-fail Nissan Versa 2024: ValueError: no parts-list or trim links on https://www.nissanpartsdeal.com/2024-nissan-versa-parts.html
+07:07:36 nav-fail Nissan Versa 2022: ValueError: no parts-list or trim links on https://www.nissanpartsdeal.com/2022-nissan-versa-parts.html
+07:07:44 nav-fail Nissan Versa 2023: ValueError: no parts-list or trim links on https://www.nissanpartsdeal.com/2023-nissan-versa-parts.html
+07:07:52 nav-fail Nissan Versa 2025: ValueError: no parts-list or trim links on https://www.nissanpartsdeal.com/2025-nissan-versa-parts.html
+07:08:00 nav-fail Nissan Maxima 2022: ValueError: no parts-list or trim links on https://www.nissanpartsdeal.com/2022-nissan-maxima-parts.html
+07:12:56 nav-fail Nissan Frontier 2021: ValueError: no parts-list or trim links on https://www.nissanpartsdeal.com/2021-nissan-frontier-parts.html
+07:13:04 nav-fail Nissan Murano 2022: ValueError: no parts-list or trim links on https://www.nissanpartsdeal.com/2022-nissan-murano-parts.html
+07:13:12 nav-fail Nissan Murano 2023: ValueError: no parts-list or trim links on https://www.nissanpartsdeal.com/2023-nissan-murano-parts.html
+07:13:20 nav-fail Nissan Murano 2024: ValueError: no parts-list or trim links on https://www.nissanpartsdeal.com/2024-nissan-murano-parts.html
+07:14:08 nav-fail Nissan Maxima 2021: ValueError: no parts-list or trim links on https://www.nissanpartsdeal.com/2021-nissan-maxima-parts.html
+07:14:16 nav-fail Nissan Maxima 2023: ValueError: no parts-list or trim links on https://www.nissanpartsdeal.com/2023-nissan-maxima-parts.html
+07:14:16 completion finished records=4947 errors=34 open_rows=0 chains_owed=0
