@@ -95,6 +95,28 @@ try {
       await page.click('#live-grid .car-card[data-vkey] .pull-btn');
       await page.waitForTimeout(200);
     }
+    // Yards tab: every yard card has the same link, and tapping it does not
+    // open Walk the rows (owner request 2026-11-14).
+    {
+      await tabTo(page, 'yards');
+      const yl = await page.evaluate(() => {
+        const cards = [...document.querySelectorAll('#yards-grid .yard-card')];
+        const a = cards[0] && cards[0].querySelector('.yard-maps-link');
+        const r = a ? a.getBoundingClientRect() : { height: 0 };
+        return { cards: cards.length, withLink: cards.filter(c => c.querySelector('.yard-maps-link')).length,
+          href: a ? a.href : '', text: a ? a.textContent.trim() : '', h: r.height, target: a ? a.target : '',
+          name: cards[0] ? cards[0].dataset.loc : '' };
+      });
+      check('Yards: every yard card has an "Hours and directions" link', yl.cards > 0 && yl.withLink === yl.cards && /Hours and directions/.test(yl.text), JSON.stringify(yl));
+      check('…to a Maps search for that yard, in a new tab, at least 44 px tall', yl.href.includes('/maps/search/?api=1&query=') && decodeURIComponent(yl.href).includes(yl.name.split(/[\s-]+/)[0]) && yl.target === '_blank' && yl.h >= 43.5, JSON.stringify(yl));
+      // A click on the link must not also open the rows screen. Stop the
+      // navigation itself so the test stays on this page.
+      await page.evaluate(() => document.querySelector('#yards-grid .yard-maps-link').addEventListener('click', e => e.preventDefault(), { once: true }));
+      await page.click('#yards-grid .yard-card .yard-maps-link');
+      await page.waitForTimeout(300);
+      check('…and tapping it does not open Walk the rows', !(await page.evaluate(() => !!document.querySelector('#yard-rows.open'))));
+      await tabTo(page, 'live');
+    }
     // Details still opens the car screen.
     await page.click('#live-grid .car-card[data-vkey] .cc-actions .car-open');
     await page.waitForTimeout(400);

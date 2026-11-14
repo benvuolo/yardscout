@@ -6036,6 +6036,7 @@ function renderYards() {
           <div style="min-width:0;">
             <div class="car-name">${escapeHtml(y.location)}</div>
             <div class="live-card-location">${ICON.pin} <span class="loc-name">${escapeHtml(place) || 'Location unknown'}</span>${distTxt}${saleBadgeHtml(y.location)}</div>
+            ${(() => { const u = yardMapsUrl(y.location, y.city, y.state); return u ? `<a class="saved-yard-link yard-maps-link" href="${escapeHtml(u)}" target="_blank" rel="noopener" title="Opens this yard in Maps, which shows today’s hours">Hours and directions &#8599;</a>` : ''; })()}
             <div class="car-meta">${y.count.toLocaleString()} cars on the lot &middot; ${y.newCount.toLocaleString()} new this week</div>
             ${prem ? `<div class="yard-premium"><p><b>Premium lot</b> &middot; ${prem.count.toLocaleString()} cars &middot; ${prem.newCount.toLocaleString()} new this week</p>
               <div class="yard-premium-acts"><button type="button" class="btn yard-walk-btn" data-loc="${escapeHtml(prem.location)}">Walk premium rows</button><button type="button" class="btn btn-quiet yard-view-btn" data-loc="${escapeHtml(prem.location)}">View premium cars</button></div></div>` : ''}
