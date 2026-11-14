@@ -7934,3 +7934,6 @@
 22:18:00 chain-unlinked headlights 1 numbers named by 68516024AB, no catalog link: 68516024AA
 22:18:00 chain-unlinked headlights 1 numbers named by 68516025AB, no catalog link: 68516025AA
 22:28:24 time budget reached records=6987
+00:31:08 start site=www.jeeppartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=6987 list_lines=6514 year_lines=1059 url_index=34939
+00:31:08 completion worklist completion/mopar.own_page.json: 657 rows
+00:46:49 completion finished records=6987 errors=138 open_rows=0 chains_owed=0
