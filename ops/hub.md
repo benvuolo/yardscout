@@ -645,3 +645,32 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
 - Waiting on the owner: "ship" for the next app release (iPhone checkout
   outcomes only exist from a new build); U-Pull-R reader off and reply watch
   on; which parts checks and which post next.
+
+## 2026-11-14 ~17:30 UTC Cloudflare daily limit passed; cause found and cut
+
+- Cloudflare warned at 15:57 UTC: 90% of the free plan's 100,000 Workers
+  requests a day. New read-only workflow `cf-usage.yml` (run 43618208468):
+  113,751 requests today by 16:55 UTC (yardscout-api 73,177, yardscout-site
+  40,574). 11:00–14:45 UTC ran at 23–25k an hour against about 2k normally.
+  The site and API were still answering at 16:53 and 17:25 UTC.
+- Cause (hub's change): the model pages published 11-13 link to every car set
+  out that week (~28,000 car pages). A crawler walked them. Each /car/ page
+  cost 1 site-worker request + 2 API-worker requests (`/v1/vehicles/<vin>`
+  and `/v1/yards`); `cf.cacheTtl` on a fetch to another Worker saves nothing.
+  The crawler's identity is unknown: the deploy token cannot read zone
+  analytics.
+- Fix 4362f843 + 1ae8d5e9, deploy run 43618471158: robots.txt disallows
+  /car/ for crawlers (link-preview bots still allowed); car links on model
+  and make lists are rel=nofollow; `apiJson` keeps API answers in the site
+  worker's edge cache and the yard list in memory. Checked live: robots.txt,
+  99 nofollow links on the Xterra page, a real car page renders (200).
+- The hub's own live checks today were a few thousand requests at most.
+  Standing rule from now: no polling loops against yardscout.io; one page
+  load per check.
+- yardscout.io is served entirely by the site Worker (it proxies GitHub
+  Pages), and the apps load data from yardscout.io: at the limit, site, apps'
+  data, alerts and checkout all stop until 00:00 UTC. Owner asked to upgrade
+  to Workers Paid ($5 a month). Follow-ups if not: render car pages from the
+  static data files (1 request each), serve /data/ without the Worker.
+- 1.12.16 release: owner said "ship" at ~16:35 UTC. Held for the pre-release
+  layout run and this incident; not dispatched yet.
