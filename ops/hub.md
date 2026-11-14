@@ -695,3 +695,26 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
 - Correction: the times "17:25/17:30 UTC" in the entry above were wrong;
   those checks were made at about 16:55–17:00 UTC.
 - Still to confirm: both runs finish; asc-status and play-status.
+
+## 2026-11-14 17:15 UTC Cloudflare: staying on the free plan
+
+- Owner cannot pay for Workers Paid ("I can't afford the $5"). The site must
+  stay inside the free 100,000 Workers requests a day. Do not suggest the
+  paid plan again unless the owner raises it.
+- Owner asked whether freezing the inventory until the reset would help. It
+  would not: scans are not what is counted; visitors, apps and crawlers
+  loading pages and data files are.
+- cf-usage at 17:11 UTC: 114,194 today; site and API still answering (200).
+  The 17:00 hour is running at about 1,200 an hour, with site and API about
+  equal (it was 1 site to 2 API before the fix), against 23–25k an hour at
+  the peak.
+- Free levers, in order: (1) done: robots.txt, nofollow, API answers cached
+  in the site worker; (2) owner: Cloudflare dashboard, Security → Bots →
+  "Block AI bots" and "Bot Fight Mode" (blocked requests never reach a
+  Worker, so they are not counted; Bot Fight Mode may also block the scan's
+  /_upstream fallback for Indy U-Pull-It, which would show as "re-serving
+  last copy"); (3) hub, not urgent: the app loads /data/ files straight from
+  GitHub Pages instead of through the Worker (web first, apps at the next
+  release), and car pages render from the static data files.
+- Check tomorrow midday with `cf-usage.yml` (it reads Cloudflare's analytics
+  API and costs no Worker requests).
