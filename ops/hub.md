@@ -674,3 +674,24 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
   static data files (1 request each), serve /data/ without the Worker.
 - 1.12.16 release: owner said "ship" at ~16:35 UTC. Held for the pre-release
   layout run and this incident; not dispatched yet.
+
+## 2026-11-14 17:03 UTC 1.12.16 dispatched (owner: "ship")
+
+- Pre-release, all on main at ac24bcb5 (sw jh-v196):
+  - every `backend/test/*_unit.mjs`, the browser e2es (funnel_events,
+    car_search, card_share, notable_trims, tab_retap, model_years,
+    no_pick_models, share_watch, recap_ask, app_promo), browser_e2e.py,
+    site-proxy units: pass. tab_retap failed once while the layout suite was
+    running beside it and passed alone.
+  - Parts tab: pf_ux, interchange, yaris_coverage and part_finder e2e pass.
+  - ui_no_truncation, every screen at 320 and 390, both themes, 100% and
+    200%: 616 checks, 0 failures.
+  - Two test faults found and fixed (009fcc44): pf_guards_unit lacked stubs
+    for the new card pieces (broken since 11-13, never run); part_finder_e2e
+    hardcoded "1" E46 M3 on the lots.
+- Dispatched straight to production, as on 11-12: release-android run 29
+  (version_name 1.12.16, track production), release-ios run 40
+  (marketing_version 1.12.16, submit=true; build number = run number 40).
+- Correction: the times "17:25/17:30 UTC" in the entry above were wrong;
+  those checks were made at about 16:55–17:00 UTC.
+- Still to confirm: both runs finish; asc-status and play-status.
