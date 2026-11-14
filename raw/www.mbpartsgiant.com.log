@@ -3414,3 +3414,8 @@
 01:12:17 chain-unlinked trunk-lid 1 numbers named by 171-750-03-75-28, no catalog link: 171-750-03-75
 01:16:41 chain-unlinked window-regulator 1 numbers named by 202-730-13-46, no catalog link: 202-730-07-46
 01:18:09 time budget reached records=2247
+07:46:11 start site=www.mbpartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2247 list_lines=2887 year_lines=526 url_index=12604
+07:46:11 completion worklist completion/mb.own_page.json: 524 rows
+08:02:43 chain-unlinked window-regulator 1 numbers named by 210-730-03-46, no catalog link: 210-730-15-46
+08:02:43 chain-unlinked window-regulator 1 numbers named by 210-730-04-46, no catalog link: 210-730-16-46
+08:17:24 time budget reached records=2247
