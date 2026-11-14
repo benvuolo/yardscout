@@ -1794,3 +1794,7 @@
 23:29:37 start site=www.bmwpartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2268 list_lines=4502 year_lines=614 url_index=0
 23:29:37 completion worklist completion/bmw.own_page.json: 507 rows
 00:00:37 time budget reached records=2268
+07:14:22 start site=www.bmwpartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2268 list_lines=4705 year_lines=635 url_index=0
+07:14:22 completion worklist completion/bmw.own_page.json: 507 rows
+07:15:23 nav-fail BMW M3 2001: ValueError: no parts-list or trim links on https://www.bmwpartsdeal.com/2001-bmw-m3-coupe_e46-parts.html
+07:15:23 STOPPED: www.bmwpartsdeal.com refused or challenged (HTTP 503); domain stopped for this program
