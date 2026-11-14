@@ -143,6 +143,9 @@ function photoInfo() { return null; }
 function photoBoxHtml() { return ''; }
 function rowPlateHtml() { return ''; }
 function pullBtnHtml() { return ''; }
+// Card pieces added 2026-11-13 (share button, trim badge): not under test here.
+function cardEndActionsHtml() { return ''; }
+function notableTrimBadgeHtml() { return ''; }
 function pfRenderTiles() {}
 function pfRevealResults() {}
 var ICON = { bell: '' };

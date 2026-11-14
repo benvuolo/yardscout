@@ -308,8 +308,11 @@ with sync_playwright() as pw:
         txt = empty.inner_text() if empty.count() else ""
         check("m3 alternator: message names the S54 as M3-specific",
               "S54" in txt and "M3-specific" in txt, txt[:200])
+        # The count follows the live data (it was 1 when this was written and
+        # 0 on 2026-11-14, when the last E46 M3 left the lots): any number.
+        import re as _re
         check("m3 alternator: message counts tracked M3 donors",
-              "1 in tracked yards" in txt, txt[:200])
+              bool(_re.search(r"\b\d+ in tracked yards", txt)), txt[:200])
         check("m3 alternator: message points at the body-part search",
               "window regulator" in txt.lower(), txt[:200])
         page.screenshot(path=str(SHOTS / "pf_m3_alternator_honest.png"))
