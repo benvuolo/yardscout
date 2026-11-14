@@ -1791,3 +1791,6 @@
 21:10:14 product-fail https://www.bmwpartsdeal.com/parts/bmw-accessories_tailgate_tail_lamp_left-63217252779.html: ValueError: no partInfo in store
 21:10:22 product-fail https://www.bmwpartsdeal.com/parts/bmw-accessories_tailgate_tail_lamp_right-63217252780.html: ValueError: no partInfo in store
 21:27:42 time budget reached records=2268
+23:29:37 start site=www.bmwpartsdeal.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2268 list_lines=4502 year_lines=614 url_index=0
+23:29:37 completion worklist completion/bmw.own_page.json: 507 rows
+00:00:37 time budget reached records=2268
