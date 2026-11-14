@@ -3484,3 +3484,9 @@
 20:13:17 chain-unlinked headlights 1 numbers named by 129-820-36-61, no catalog link: 129-820-46-61
 20:13:23 chain-unlinked hood 1 numbers named by 129-880-05-57, no catalog link: 129-880-03-57
 20:23:00 time budget reached records=2317
+20:23:04 start site=www.mbpartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2317 list_lines=3807 year_lines=654 url_index=14231
+20:23:04 completion worklist completion/mb.own_page.json: 524 rows
+20:25:41 chain-unlinked window-regulator 1 numbers named by 246-906-31-00-64, no catalog link: 246-906-31-00
+20:25:41 chain-unlinked window-regulator 1 numbers named by 246-906-32-00-64, no catalog link: 246-906-32-00
+20:49:30 chain-unlinked grille 1 numbers named by 206-880-42-05, no catalog link: 206-888-23-00
+20:53:22 time budget reached records=2339
