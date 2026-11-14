@@ -614,3 +614,17 @@ app work is separate, on design/pull-sheet). Not merged, not deployed.
 - Not built: real opening hours shown in the app. That needs a per-chain
   source for hours (Pick-n-Pull, Pick Your Part and Pull-A-Part publish them
   per store) and a rule for holidays; owner to decide.
+
+## 2026-11-14 ~00:20 UTC yard cards: hours and directions link (sw jh-v196)
+
+- Pull-sheet link confirmed live at 390 px (a page load with the new code
+  shows it; the CDN served a mix of old and new app.js for some minutes
+  after the push, so two earlier live checks saw the old file).
+- Owner asked for the same on the yard cards. 86f91170: every yard card on
+  the Yards tab has "Hours and directions" under the town, opening the yard
+  in Maps; tapping it does not open Walk the rows. card_share_e2e now 24
+  checks; ui_no_truncation yards, yards-premium-list and pull-sheet at
+  320/360/390/402/1280: 60 checks, 0 failures.
+- Lesson for live checks: wait for a page load that actually has the new
+  code (check for a new function or class in the page), not for sw.js or a
+  cache-busted fetch.
