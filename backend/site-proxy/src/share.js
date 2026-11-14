@@ -38,13 +38,46 @@ export function slugify(s) {
     .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 }
 
+/* Every call here is a request to ANOTHER Worker (yardscout-api), and it
+ * counts against the account's daily Workers allowance even when the answer
+ * could have been reused: `cf.cacheTtl` does not help, because a Worker runs
+ * in front of the cache. On 2026-11-14 a crawler walked ~28,000 /car/ pages
+ * in 3.5 hours; each page cost one request here plus two to the API (the car
+ * and the full yard list), 113,751 requests by 16:55 UTC against a 100,000
+ * daily limit. So answers are kept in this Worker's own edge cache
+ * (caches.default) for `ttl` seconds, and the yard list, which is the same
+ * for every page, also in memory. A cache miss or a cache error falls back
+ * to the plain fetch. */
+const _apiMem = new Map();   // path -> { at, status, data }   (per isolate)
 async function apiJson(path, ttl) {
-  const r = await fetch(API + path, {
-    headers: { accept: 'application/json' },
-    cf: { cacheTtl: ttl, cacheEverything: true },
-  });
+  const url = API + path;
+  const now = Date.now();
+  const mem = _apiMem.get(path);
+  if (mem && now - mem.at < ttl * 1000) return { status: mem.status, data: mem.data };
+  const cache = typeof caches !== 'undefined' && caches.default ? caches.default : null;
+  const key = new Request(url, { headers: { accept: 'application/json' } });
+  if (cache) {
+    try {
+      const hit = await cache.match(key);
+      if (hit) {
+        const data = await hit.json();
+        if (path === '/v1/yards') _apiMem.set(path, { at: now, status: 200, data });
+        return { status: 200, data };
+      }
+    } catch (e) { /* fall through to the network */ }
+  }
+  const r = await fetch(url, { headers: { accept: 'application/json' } });
   if (!r.ok) return { status: r.status, data: null };
-  return { status: r.status, data: await r.json() };
+  const text = await r.text();
+  let data;
+  try { data = JSON.parse(text); } catch (e) { return { status: 502, data: null }; }
+  if (path === '/v1/yards') _apiMem.set(path, { at: now, status: r.status, data });
+  if (cache) {
+    try {
+      await cache.put(key, new Response(text, { headers: { 'content-type': 'application/json', 'cache-control': `public, max-age=${Math.max(60, ttl | 0)}` } }));
+    } catch (e) { /* not cached: the next call fetches again */ }
+  }
+  return { status: r.status, data };
 }
 
 const DATA = 'https://benvuolo.github.io/yardscout/data';
@@ -847,7 +880,7 @@ ${topBlock}<ul class="grid">${makes.map(([mk, m]) => `<li><a href="${SITE}/lande
   const mp = modelPagesOf(midx, mk);
   const modelHead = (model) => { const u = mp && mp.urls.get(model); return u ? `<a href="${u}">${esc(mk)} ${esc(model)}</a>` : `${esc(mk)} ${esc(model)}`; };
   const blocks = models.map(([model, rows]) => `<div class="section">${modelHead(model)} <span>· ${rows.length}</span></div>
-<div class="car-card"><ul class="rowlist">${rows.map((r) => `<li><a href="${SITE}/car/${encodeURIComponent(r[5])}">${esc(r[0])} ${esc(mk)} ${esc(model)}<span class="where">${esc(yardName(r[6]))}${yardState(r[6]) ? ', ' + esc(yardState(r[6])) : ''}</span></a><span class="meta">${r[3] ? 'Row ' + esc(r[3]) + '<br>' : ''}${esc(fmtDate(r[4]))}</span></li>`).join('')}</ul></div>`).join('');
+<div class="car-card"><ul class="rowlist">${rows.map((r) => `<li><a href="${SITE}/car/${encodeURIComponent(r[5])}" rel="nofollow">${esc(r[0])} ${esc(mk)} ${esc(model)}<span class="where">${esc(yardName(r[6]))}${yardState(r[6]) ? ', ' + esc(yardState(r[6])) : ''}</span></a><span class="meta">${r[3] ? 'Row ' + esc(r[3]) + '<br>' : ''}${esc(fmtDate(r[4]))}</span></li>`).join('')}</ul></div>`).join('');
   const truncated = m.recentCount > shown.length ? `<p class="note" style="margin-top:0">Showing the newest ${shown.length} of ${m.recentCount.toLocaleString()} set-outs this week. The full list, filters and alerts are in the app.</p>` : '';
   const desc = `${m.recentCount.toLocaleString()} ${mk} set out at self-service yards in the last ${landed.days} days (${m.total.toLocaleString()} on the lots right now), with row numbers and yards. As of ${fmtStamp(landed.scrapedAt)}.`;
   // Where this make landed, as links to the state pages. Counted from the
@@ -990,7 +1023,7 @@ export async function renderLandedModelPage(makeArg, modelArg) {
   const carLine = (r) => {
     const drive = r[4] === '4x4' ? ' <strong>4x4</strong>' : r[4] ? ' ' + esc(r[4]) : '';
     const trim = r[5] ? ` <span class="trimw">${esc(r[5])}</span>` : '';
-    return `<li><a href="${SITE}/car/${encodeURIComponent(r[6])}">${esc(r[0])} ${esc(name)}${drive}${trim}</a><span class="meta">${r[2] ? 'Row ' + esc(r[2]) + '<br>' : ''}${esc(fmtDate(r[3]))}</span></li>`;
+    return `<li><a href="${SITE}/car/${encodeURIComponent(r[6])}" rel="nofollow">${esc(r[0])} ${esc(name)}${drive}${trim}</a><span class="meta">${r[2] ? 'Row ' + esc(r[2]) + '<br>' : ''}${esc(fmtDate(r[3]))}</span></li>`;
   };
   const stateBlocks = states.map((s) => `<div class="section" id="${anchor(s.code)}">${esc(s.name)} <span>· ${s.n.toLocaleString()} set out · ${plural(s.yards.length, 'yard')}</span></div>
 <div class="car-card">${s.yards.map((g) => `<div class="yardh">${g.y[0] ? `<a href="${SITE}/yard/${slugify(g.y[0])}">${esc(g.y[0])}</a>` : 'Yard not named'}${g.y[1] ? ` <span>· ${esc(g.y[1])}</span>` : ''}</div>

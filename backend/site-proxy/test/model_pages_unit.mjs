@@ -115,7 +115,10 @@ const phx = [...az.matchAll(/<li><a href="https:\/\/yardscout\.io\/car\/([^"]+)"
 check('within a yard, newest car first', phx.slice(0, 2).join() === '5N1AN08U05C000002,ipull-123', phx.join());
 check('yard names are escaped and link to /yard/', az.includes('href="https://yardscout.io/yard/lkq-mesa-and-co"') && !r.html.includes('<Mesa>'));
 check('jump list of states', /Jump to: <a href="#st-ab">Alberta 1<\/a> · <a href="#st-az">Arizona 3<\/a>/.test(r.html));
-const line = (key) => (r.html.match(new RegExp(`<li><a href="https://yardscout.io/car/${key}">[\\s\\S]*?</li>`)) || [''])[0];
+// Car links carry rel="nofollow" since 2026-11-14 (crawlers walked 28,000
+// car pages from these lists in one afternoon).
+const line = (key) => (r.html.match(new RegExp(`<li><a href="https://yardscout.io/car/${key}" rel="nofollow">[\\s\\S]*?</li>`)) || [''])[0];
+check('car links on a model page are rel="nofollow"', /<li><a href="https:\/\/yardscout\.io\/car\/[^"]+" rel="nofollow">/.test(r.html) && !/<li><a href="https:\/\/yardscout\.io\/car\/[^"]+">/.test(r.html));
 check('4x4 in bold, trim word when known', line('5N1AN08W08C000001').includes('2008 Nissan Xterra <strong>4x4</strong> <span class="trimw">Off-Road</span>'), line('5N1AN08W08C000001'));
 check('row and set-out date on the line', /Row 25<br>[A-Z][a-z]{2} \d+, \d{4}/.test(line('5N1AN08W08C000001')));
 check('2WD plain', line('5N1AN08U05C000002').includes('2005 Nissan Xterra 2WD</a>'), line('5N1AN08U05C000002'));

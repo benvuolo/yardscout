@@ -1,5 +1,29 @@
+# Car pages (/car/<vin>) are share pages for one car on one lot: they exist
+# so a link sent in a text or a thread shows the car, and they are gone when
+# the car leaves. They are not for search crawlers: each one costs three
+# requests on our side, and on 2026-11-14 a crawler walked 28,000 of them in
+# an afternoon. Model, yard, city and price pages are the ones to index.
 User-agent: *
 Allow: /
 Disallow: /admin.html
 Disallow: /data/
+Disallow: /car/
+
+# Link previews (texts, chat apps, social cards) still read car pages.
+User-agent: facebookexternalhit
+User-agent: Facebot
+User-agent: Twitterbot
+User-agent: Slackbot
+User-agent: Slackbot-LinkExpanding
+User-agent: Discordbot
+User-agent: LinkedInBot
+User-agent: WhatsApp
+User-agent: TelegramBot
+User-agent: redditbot
+User-agent: Pinterestbot
+User-agent: Applebot
+Allow: /
+Disallow: /admin.html
+Disallow: /data/
+
 Sitemap: https://yardscout.io/sitemap.xml
