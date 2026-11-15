@@ -3539,3 +3539,6 @@
 00:02:13 start site=www.mbpartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2381 list_lines=5046 year_lines=848 url_index=14843
 00:02:13 completion worklist completion/mb.own_page.json: 524 rows
 00:32:32 time budget reached records=2386
+00:32:37 start site=www.mbpartsgiant.com mode=complete tiers=['A', 'B', 'W', 'C', 'D'] records=2386 list_lines=5189 year_lines=893 url_index=14864
+00:32:37 completion worklist completion/mb.own_page.json: 524 rows
+00:40:48 completion finished records=2388 errors=21 open_rows=0 chains_owed=0
