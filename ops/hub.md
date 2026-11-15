@@ -5,11 +5,17 @@ watches are bound to it. It does not build features.
 
 ## Live state
 
-- **iOS 1.12.10 build 26**: submitted 2026-11-03 17:21 UTC, WAITING_FOR_REVIEW.
-  Check: dispatch `asc-status.yml`.
-- **Android 1.12.11 (33)**: Play production, status completed (Google review).
-  Check: dispatch `play-status.yml`.
-- **Web**: `main` deploys to GitHub Pages; sw cache `jh-v139`.
+- **iOS 1.12.16 build 40**: READY_FOR_SALE (live) as of the 2026-11-15 00:31
+  UTC check; shipped 2026-11-14. Check: dispatch `asc-status.yml`.
+- **Android 1.12.16 (39)**: Play production, status completed, rollout 100%
+  (the API does not show Google's review state). Check: dispatch
+  `play-status.yml`.
+- **Web**: `main` deploys to GitHub Pages; sw cache `jh-v198` (2026-11-15).
+  Changes after `jh-v196` are NOT in the 1.12.16 apps (next release needs a
+  new "ship").
+- **Cloudflare free plan**: 100,000 Workers requests a day, owner cannot pay
+  for more. After the 2026-11-14 crawler fix the rate is 700 to 900 an hour
+  (about 20,000 a day). Check: dispatch `cf-usage.yml`.
 - **Scan**: `scan.yml` every 4 h, commits `docs/data/`. GitHub skips crons
   often (12:00 and the hourly watchdog were skipped 2026-11-04); dispatch by
   hand when the last scan is over 5 h old.
@@ -748,3 +754,38 @@ Open suggestions made to the owner:
 - `/junkyards/wa` is a redirect to `/junkyards/washington`; the Washington
   page data is correct (8 yards). An earlier hub check that found "0
   mentions" had read the redirect, not the page.
+
+## 2026-11-15 ~00:45 UTC owner: "Update? Do what you think"
+
+Status checks (all read-only):
+- iOS 1.12.16 (40) READY_FOR_SALE. Play production 1.12.16 (39) completed.
+- Cloudflare: 2026-11-14 ended near 122,000 Workers requests (over the
+  100,000 limit, all from the 11:00 to 14:00 UTC crawl). Since the fix:
+  18:00 to 24:00 UTC ran 700 to 1,500 an hour, and before the crawl the
+  normal rate was 1,400 to 3,100 an hour, so the fix also cut the everyday
+  load. Zone analytics still unreadable (token lacks zone analytics read).
+- Reddit drafter ran at 23:43 UTC, succeeded. The owner's r/projectcar post
+  ("My first try at actual bodywork") is drawing many replies; the drafter
+  is labelling them hourly. Suggested to the owner: draft only for questions
+  on personal posts, to save usage. Not changed.
+
+Built and pushed (85f20360, sw `jh-v198`, Worker deployed 00:35 UTC):
+- **Lost yard requests (bug found while reading the Worker).** The in-app
+  Yards form sent no `city`; the Worker refused any yard request without
+  ", ST" in the note, and the app showed "check your connection". The hint
+  even said "Only the yard name is needed". Now: the Worker accepts a zip or
+  a website as the place (this also fixes the shipped 1.12.16 apps for anyone
+  with a zip set); the app sends `city`, shows the server's reason on a 400,
+  and the hint asks for city and state. How many requests were lost is
+  unknown (refusals are not stored).
+- **Digest tag.** A yard request that matches a tracked yard is tagged
+  "ALREADY TRACKED: <yard> (N cars)" in the coverage digest
+  (`trackedYardTag` in `backend/src/coverage.js`).
+- Tests: `backend/test/coverage_gaps_e2e.mjs` 26/26,
+  `backend/test/coverage_tracked_unit.mjs` 14/14, `e2e-coverage.sh` 27/27.
+  Not exercised against production (a live POST would put a fake request in
+  the owner's digest).
+
+Next for the hub: read iPhone checkout outcomes once 1.12.16 has a day of
+use (the "8 Subscribe taps, 0 purchases" question); first full 7-day
+narrowing line about 2026-11-21.
