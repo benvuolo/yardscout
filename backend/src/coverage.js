@@ -15,6 +15,7 @@
 
 import { json, err, isoNow } from './util.js';
 import { resendFetch } from './ops.js';
+import { getDirectory } from './inventory.js';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const VALID_KINDS = new Set(['car', 'engine', 'part', 'yard']);
@@ -47,12 +48,19 @@ export async function handleCoverageRequest(req, env) {
   // yards plus unrelated independents), and a bare name can't be acted on
   // (2026-10-29: one arrived with no city, no note, no email). The /yards
   // form sends `city`; older pages send it inside `note` only.
-  if (kind === 'yard' && clip(body.city, 80).length < 3 && !/,\s*[A-Za-z]{2}\b/.test(String(body.note || ''))) {
+  // The in-app Yards form sends no `city` (its one box rides in `note`), but
+  // it does send the asker's zip. Until 2026-11-15 a request from it without
+  // ", ST" in the box was refused here and the app reported a connection
+  // error, so the request was lost. A zip places the yard well enough to act
+  // on, and so does a website in the note.
+  const zipRaw = clip(body.zip, 10);
+  const zip = /^\d{5}$/.test(zipRaw) ? zipRaw : null;
+  const noteRaw = String(body.note || '');
+  if (kind === 'yard' && clip(body.city, 80).length < 3 && !zip
+      && !/,\s*[A-Za-z]{2}\b/.test(noteRaw) && !/[a-z0-9-]{2,}\.[a-z]{2,}/i.test(noteRaw)) {
     return err(400, 'need_city', 'Tell us the city and state, so we know which yard you mean.');
   }
 
-  const zipRaw = clip(body.zip, 10);
-  const zip = /^\d{5}$/.test(zipRaw) ? zipRaw : null;
   const email = clip(body.email, 254).toLowerCase() || null;
   if (email && !EMAIL_RE.test(email)) return err(400, 'bad_email', 'Enter a valid email address (or leave it blank).');
   const note = clip(body.note, 500) || null;
@@ -92,7 +100,52 @@ export async function handleCoverageList(req, env) {
 function fmtReqLine(g) {
   const what = [g.year, g.make, g.model].filter(Boolean).join(' ');
   const label = [what, g.part].filter(Boolean).join(' — ') || g.request_key;
-  return `${g.requests}× ${label}  [${g.kind}]${g.with_email ? `  (${g.with_email} left an email)` : ''}`;
+  return `${g.requests}× ${label}  [${g.kind}]${g.with_email ? `  (${g.with_email} left an email)` : ''}`
+    + (g.tracked ? `  ${g.tracked}` : '');
+}
+
+/* Is a requested yard one we already track? Same rule as the app's yard form
+ * (coveredYardMatches in docs/app.js): every word of the name, and of the
+ * city when one was given, must be in the yard's name, city or state. On
+ * 2026-11-12 a request for "U-Pull-It", "Kennewick, WA" read as a coverage
+ * gap although the yard had been tracked for two weeks. */
+const YARD_FILLER = new Set(['the', 'and', 'of', 'inc', 'llc', 'co', 'auto', 'parts', 'salvage', 'yard', 'junkyard']);
+const yardWords = (s) => String(s == null ? '' : s).toLowerCase().replace(/&/g, ' and ').split(/[^a-z0-9]+/).filter(Boolean);
+/** The city in a request's note: the public form writes "site · City, ST",
+ * the app writes whatever was typed in "City or site". */
+export function cityFromNote(note) {
+  const segs = String(note || '').split(' · ').map((s) => s.trim())
+    .filter((s) => s && !/:\/\/|[a-z0-9-]{2,}\.[a-z]{2,}/i.test(s));
+  return segs.length ? segs[segs.length - 1].split(',')[0].trim() : '';
+}
+/** dir: the inventory directory ({ yards: [[location, city, state, ...]], counts }). */
+export function trackedYardMatches(dir, name, city) {
+  if (!dir || !Array.isArray(dir.yards)) return [];
+  const nameW = yardWords(name).filter((t) => !YARD_FILLER.has(t));
+  if (nameW.join('').length < 3) return [];
+  const cityW = yardWords(city).filter((t) => !YARD_FILLER.has(t));
+  const out = [];
+  dir.yards.forEach((y, i) => {
+    if (!y || !y[0]) return;
+    const have = new Set([...yardWords(y[0]), ...yardWords(y[1]), ...yardWords(y[2])]);
+    const nameHit = nameW.every((t) => have.has(t))
+      || (nameW.join('').length >= 5 && yardWords(y[0]).join('').includes(nameW.join('')));
+    if (!nameHit || !cityW.every((t) => have.has(t))) return;
+    const cars = Array.isArray(dir.counts) && Number.isFinite(dir.counts[i]) ? dir.counts[i] : null;
+    out.push({ name: y[0], cars });
+  });
+  return out;
+}
+/** One short tag for the digest line, or '' when the yard is not tracked or
+ * no city was given (a bare chain name matches dozens of yards). */
+export function trackedYardTag(dir, name, notes) {
+  const cities = [...new Set((notes || []).map(cityFromNote).filter(Boolean))];
+  const hits = new Map();
+  for (const c of cities) for (const h of trackedYardMatches(dir, name, c)) hits.set(h.name, h);
+  if (!hits.size) return '';
+  const list = [...hits.values()];
+  if (list.length > 3) return `ALREADY TRACKED: ${list.length} yards match this name and city`;
+  return 'ALREADY TRACKED: ' + list.map((h) => h.name + (h.cars != null ? ` (${h.cars.toLocaleString('en-US')} cars)` : '')).join('; ');
 }
 
 async function sendDigestEmail(env, groups, total) {
@@ -176,6 +229,16 @@ export async function maybeSendCoverageDigest(env) {
   ).bind(since).all()).results || [];
   for (const g of groups) {
     g.extras = extras.filter((x) => x.request_key === g.request_key).slice(0, 5);
+  }
+  // Yard requests: say so when the yard is already tracked. A failure here
+  // must never cost the owner the digest.
+  if (groups.some((g) => g.kind === 'yard')) {
+    try {
+      const dir = await getDirectory(env);
+      for (const g of groups) {
+        if (g.kind === 'yard') g.tracked = trackedYardTag(dir, g.part, g.extras.map((x) => x.note));
+      }
+    } catch (e) { console.log('coverage digest: tracked-yard check failed:', String(e).slice(0, 120)); }
   }
 
   const delivered = await sendDigestEmail(env, groups, total);

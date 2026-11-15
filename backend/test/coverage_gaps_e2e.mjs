@@ -35,7 +35,10 @@ const posts = [];
 await p.route(/^https?:\/\/(?!127\.0\.0\.1)/, (r) => {
   const q = r.request();
   if (q.method() === 'POST' && /\/v1\/coverage\/request$/.test(q.url())) {
-    posts.push(JSON.parse(q.postData() || '{}'));
+    const sent = JSON.parse(q.postData() || '{}');
+    posts.push(sent);
+    // The server refuses a yard it cannot place; the app must show why.
+    if (sent.part === 'Nowhere Yard') return r.fulfill({ status: 400, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: JSON.stringify({ error: 'need_city', message: 'Tell us the city and state, so we know which yard you mean.' }) });
     return r.fulfill({ status: 200, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: '{"ok":true}' });
   }
   if (q.method() === 'OPTIONS') return r.fulfill({ status: 204, headers: { 'access-control-allow-origin': '*', 'access-control-allow-headers': '*', 'access-control-allow-methods': '*' } });
@@ -116,6 +119,26 @@ await p.waitForTimeout(300);
 await p.click('#yr-send');
 await p.waitForSelector('#yard-request .pfc-thanks', { timeout: 10000 });
 ok(posts.length === 1 && posts[0].kind === 'yard' && posts[0].part === 'U-Pull-It' && posts[0].note === 'Kennewick, WA', 'the second tap still sends the request unchanged', JSON.stringify(posts));
+ok(posts[0].city === 'Kennewick, WA' && posts[0].zip === '98101', 'the request carries the city and the zip, so the server can place the yard', JSON.stringify(posts[0]));
+
+console.log('Yards tab: a request the server refuses says why');
+await p.reload({ waitUntil: 'domcontentloaded' });
+await p.waitForFunction(() => typeof liveComplete !== 'undefined' && liveComplete, null, { timeout: 180000 });
+await p.click('.tab[data-tab="yards"]');
+{ const lb = await p.$('.yv-btn[data-view="list"]'); if (lb) await lb.click(); }
+await p.locator('#yr-name').scrollIntoViewIfNeeded();
+await p.fill('#yr-name', 'Nowhere Yard');
+await p.click('#yr-send');
+await p.waitForFunction(() => /city and state/i.test(document.getElementById('yr-status').textContent), null, { timeout: 10000 }).catch(() => {});
+st = await p.evaluate(() => ({ status: document.getElementById('yr-status').textContent, disabled: document.getElementById('yr-send').disabled, hint: document.querySelector('#yard-request .pf-hint').textContent }));
+ok(/Tell us the city and state/.test(st.status) && !/connection/i.test(st.status), 'a refused request shows the reason, not "check your connection"', st.status);
+ok(!st.disabled, 'the button is usable again after the refusal');
+ok(/Add the city and state/.test(st.hint) && !/Only the yard name is needed/.test(st.hint), 'the hint asks for the city and state', st.hint);
+await p.fill('#yr-name', 'Site Yard');
+await p.fill('#yr-where', 'https://siteyard.example/inventory');
+await p.click('#yr-send');
+await p.waitForSelector('#yard-request .pfc-thanks', { timeout: 10000 });
+{ const last = posts[posts.length - 1]; ok(last.part === 'Site Yard' && last.city == null && /siteyard/.test(last.note), 'a website is sent as the note, not as a city', JSON.stringify(last)); }
 
 // A yard we do not track goes straight through; a name-only match on a big
 // chain asks for the city instead of listing dozens.

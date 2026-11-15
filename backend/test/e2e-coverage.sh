@@ -124,6 +124,14 @@ R=$(ypost '{"kind":"yard","part":"Carolina Pick N Pull","city":"Wilmington, NC"}
 check "yard request with city accepted" "$(status_of "$R")" "200"
 R=$(ypost '{"kind":"yard","part":"Old Page Yard","note":"https://example.com · Conway, SC"}')
 check "yard request with city in note (older page) accepted" "$(status_of "$R")" "200"
+# The in-app Yards form sends the asker's zip and no city; these were refused
+# (and reported in the app as a connection error) until 2026-11-15.
+R=$(ypost '{"kind":"yard","part":"App Form Yard","zip":"99337"}')
+check "yard request with only a zip (in-app form) accepted" "$(status_of "$R")" "200"
+R=$(ypost '{"kind":"yard","part":"Site Only Yard","note":"siteonlyyard.example"}')
+check "yard request with only a website accepted" "$(status_of "$R")" "200"
+R=$(ypost '{"kind":"yard","part":"Bare Name Yard","zip":"abc"}')
+check "yard request with a bad zip and no city still rejected" "$(status_of "$R")" "400"
 
 echo
 echo "coverage e2e: $PASS passed, $FAIL failed"

@@ -7069,9 +7069,22 @@ document.getElementById('yr-send').addEventListener('click', async () => {
     const r = await fetch(COVERAGE_API + '/v1/coverage/request', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
+      // `city` too: the server refuses a yard it cannot place, and until
+      // 2026-11-15 it never saw the box below as a city unless it held
+      // ", ST" — those requests were lost behind a "check your connection".
       body: JSON.stringify({ kind: 'yard', part: name.slice(0, 80), note: where.slice(0, 500) || null,
+        city: /:\/\/|\.[a-z]{2,}(\/|$)/i.test(where) ? null : (where.slice(0, 80) || null),
         email: email || null, zip: localStorage.getItem('jh_zip') || null }),
     });
+    if (r.status === 400) {
+      // The server's own words ("Tell us the city and state...") beat a
+      // generic failure: the request is fixable, not a connection problem.
+      const j = await r.json().catch(() => ({}));
+      btn.disabled = false;
+      status.textContent = (j && (j.message || (j.error && j.error.message))) || 'Add the city and state, so we know which yard you mean.';
+      document.getElementById('yr-where').focus();
+      return;
+    }
     if (!r.ok) throw new Error(r.status === 429 ? 'rate' : 'http');
     track('yard-request-sent');
     document.getElementById('yard-request').innerHTML =
