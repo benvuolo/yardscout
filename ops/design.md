@@ -344,3 +344,45 @@ Same with Forester or other similar cars..." Not merged (hub reviews).
   TRIMS_FREE=false (cars-filters-trim, cars-filters, results, 7 widths):
   84 checks, 0 failures; 26 scraper test files importing junkyard_scraper
   + test_inventory_shards exit 0.
+
+## 2026-11-16 Cars tab becomes a feed (owner: "intuitive, shareable, easy to scroll, Facebook Marketplace level addicting"; "Do it and ship")
+
+Status: designed by the hub, not built. Starts when `growth/first-view` is
+merged (same screen). Ships in the next app release, which the owner has
+already approved ("ship", 2026-11-16).
+
+Why: today a phone shows one car per screen (a 260 px picture, then seven
+blocks of text and buttons) and a 1280 px desktop shows three. Photo cover
+is good enough for a picture grid: 57% of all cars, 92% at LKQ Pick Your
+Part, 99% at Pick-n-Pull (scan 2026-11-16); the rest get the existing drawing
+in the car's paint colour.
+
+What the Cars tab becomes:
+1. **A grid of small tiles.** Two columns on a phone, more on wider screens.
+   A tile is the picture, the year make model, the yard and distance, the
+   set-out date and row, and the badges cards have today (NEW, trim). Target:
+   at least four cars on the first phone screen.
+2. **Tap a tile for everything.** The car screen (`openCarDetail`) holds all
+   that the big card holds today: row, colour and engine, yard with hours and
+   directions, set-out date and typical stay, the Pro value box, parts to
+   check, add to pull sheet, share, watch this model. Nothing is removed from
+   the product; it moves one tap down. Closing it returns to the same place
+   in the list. Under it: "More <model> near you" tiles.
+3. **Save and share on every tile** (owner asked for share on every card on
+   2026-11-13): a bookmark for the pull sheet and the share button.
+4. **Chips above the grid:** All, New (2 days), This week, then the makes
+   with the most cars near you; picking a make shows its models as chips.
+   They set the same filters as Filters and the search box.
+5. **One summary line instead of three stat tiles:** cars near you, new this
+   week, updated. "Updated" stays always visible (owner request 2026-10-24).
+6. **Endless scroll:** tiles are added as you reach the bottom.
+7. **A reason to come back:** "N set out near you since your last visit
+   (date)" at the top on a return visit, and a divider in the list where the
+   new ones end. Dates only: yards publish a set-out day, not a time.
+8. **Share a list:** when the list is narrowed to a model, a share button
+   sends the public model page (`/landed/<make>/<model>`) when one exists,
+   else the tagged `#cars=` link.
+
+Kept as they are: the accuracy note and its wording, the watch strip, the
+free sample car, Pro gates and their names (`card-value` and the rest), the
+search box, Filters, the pull sheet, per-tab scroll memory, no cut-off text.
