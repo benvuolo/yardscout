@@ -437,6 +437,48 @@ const carSearchOff = async (page) => {
 };
 const SCREENS = [
   ['results', async (page) => { await tab(page, 'live'); }],
+  // Cars feed (2026-11-16): the tile grid is 'results'; these are its other
+  // states: a make chosen in the chips (its models as chips), the watch
+  // strip with the Monday-email field, the car screen opened from a tile
+  // down to "More <model> near you", the since-last-visit line and its
+  // divider, and the first-run note after the first row of tiles.
+  ['feed-chips-make', async (page) => {
+    await tab(page, 'live');
+    await page.click('#feed-chips .fchip[data-chip="make"]');
+    await settle(page, 300);
+    if (await page.evaluate(() => !document.querySelector('#feed-chips .fchip-make') || !document.querySelector('#feed-chips .fchip[data-chip="model"]'))) throw new Error('no make chosen / no model chips');
+    await page.evaluate(() => window.scrollTo(0, 0));
+  }, async (page) => { await page.evaluate(() => { feedClearMake('chip'); }); }],
+  ['feed-strip-mail', async (page) => {
+    await tab(page, 'live');
+    await page.evaluate(() => { carSearchSetFilter('Nissan', 'Xterra'); renderLive(); });
+    await settle(page, 300);
+    await page.evaluate(() => { const s = document.querySelector('#live-grid .strip-mail'); if (!s || !s.querySelector('input.mail-email')) throw new Error('no Monday-email strip'); s.scrollIntoView({ block: 'center' }); });
+  }, async (page) => { await page.evaluate(() => { feedClearMake('chip'); }); }],
+  ['feed-car-from-tile', async (page) => {
+    await tab(page, 'live');
+    const k = await page.evaluate(() => { const t = [...document.querySelectorAll('#live-grid > .car-tile')].find(x => moreLikeThisCars(liveInventory.find(v => vehicleKey(v) === x.dataset.vkey)).length); return t && t.dataset.vkey; });
+    if (!k) throw new Error('no tile with more of its model');
+    await page.click(`#live-grid > .car-tile[data-vkey="${k}"] .tile-open`);
+    await settle(page, 400);
+    await page.evaluate(() => { const m = document.querySelector('#car-detail .cd-more'); if (!m) throw new Error('no "More" section'); m.scrollIntoView({ block: 'start' }); });
+  }],
+  ['feed-since', async (page) => {
+    await tab(page, 'live');
+    await page.evaluate(() => { const d = new Date(); d.setDate(d.getDate() - 3); FEED_SINCE_DAY = localDayStr(d); renderLive(); });
+    await settle(page, 300);
+    if (await page.evaluate(() => !document.querySelector('#live-grid .since-line'))) throw new Error('no since-last-visit line');
+    await page.evaluate(() => window.scrollTo(0, 0));
+  }],
+  ['feed-since-divider', async (page) => {
+    await page.evaluate(() => { for (let i = 0; i < 40 && !document.querySelector('#live-grid .feed-divider'); i++) feedMore(); const d = document.querySelector('#live-grid .feed-divider'); if (!d) throw new Error('no divider'); d.scrollIntoView({ block: 'center' }); });
+  }, async (page) => { await resetUi(page); await page.evaluate(() => { FEED_SINCE_DAY = null; liveSinceOnly = false; renderLive(); }); }],
+  ['feed-first-note', async (page) => {
+    await tab(page, 'live');
+    await page.evaluate(() => { localStorage.removeItem('jh_honesty_ack'); document.getElementById('first-run-note').style.display = ''; renderLive(); });
+    await settle(page, 300);
+    await page.evaluate(() => { const n = document.getElementById('first-run-note'); n.scrollIntoView({ block: 'center' }); });
+  }, async (page) => { await page.evaluate(() => { localStorage.setItem('jh_honesty_ack', '1'); document.getElementById('first-run-note').style.display = 'none'; renderLive(); }); }],
   // Car search (2026-11-12): the suggestion list open, a pick applied, and a
   // #cars= link for a model not in range (the box prefilled + a note).
   ['car-search', async (page) => {
@@ -569,7 +611,8 @@ const SCREENS = [
       // A card with its own real photo, then the next three cards: their own
       // colour, a fixture body style, and one marked as a heavy source.
       const all = [...document.querySelectorAll('#live-grid .car-card[data-eid]')];
-      const hasImg = (c) => c.firstElementChild && c.firstElementChild.querySelector('img');
+      const photoOf = (c) => c.querySelector('.card-photo') || c.firstElementChild;   // tiles (Cars feed): inside .tile-media
+      const hasImg = (c) => photoOf(c) && photoOf(c).querySelector('img');
       const painted = (c) => { const col = String((vehicleExtras[c.dataset.eid] || [])[1] || ''); return !!col && !/unknown|other/i.test(col); };
       // Prefer a stretch whose next cars list a paint colour (shows the tint).
       const run = (k, n) => all.slice(k + 1, k + 1 + n).length === n && all.slice(k + 1, k + 1 + n).every(x => !hasImg(x) && painted(x));
@@ -604,7 +647,7 @@ const SCREENS = [
       const top = four[0].getBoundingClientRect().top + scrollY - 12, bot = four[n].getBoundingClientRect().bottom + scrollY + 12;
       window.__shotClip = { x: 0, y: Math.max(0, top), width: innerWidth, height: bot - top };
       if (typeof cardPhotoHtml === 'undefined') return;   // an older app (before shots): no checks
-      const boxes = four.map(c => c.firstElementChild);
+      const boxes = four.map(c => photoOf(c));
       const want = [['photo-box', 'has-illo'], ...cards.map(() => ['photo-illo'])];
       boxes.forEach((b, k) => { if (!want[k].every(x => b.classList.contains(x))) throw new Error(`card ${k}: ${b.className}`); });
       const badge = (b) => (b && b.querySelector('.illo-badge') || {}).textContent || '';

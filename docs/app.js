@@ -5039,7 +5039,8 @@ function localDayStr(d) {
   const x = d || new Date();
   return `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, '0')}-${String(x.getDate()).padStart(2, '0')}`;
 }
-const FEED_SINCE_DAY = (() => {
+// let, not const: ui_no_truncation sets it to draw the line on demand.
+let FEED_SINCE_DAY = (() => {
   try {
     const held = sessionStorage.getItem('ys_since_day');
     if (held !== null) return /^\d{4}-\d{2}-\d{2}$/.test(held) ? held : null;
