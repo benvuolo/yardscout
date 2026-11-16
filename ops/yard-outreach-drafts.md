@@ -93,23 +93,34 @@ hello@yardscout.io
 
 ---
 
-## 5. Harry's U-Pull-It (Hazle Township, Allentown, Pennsburg PA) — added 2026-11-02
+## 5. Harry's U-Pull-It (Hazle Township, Allentown, Pennsburg PA) — added 2026-11-02, reworded 2026-11-16
 
-Their robots.txt allows crawling, but the site sits behind a Sucuri bot screen that our scanner currently works around. Ask them to allow it properly (or send a feed) so the listing doesn't depend on that. Contact: the form at wegotused.com/contact (no email published).
+Owner, 2026-11-16: "give me harrys, the form never sent". So nothing went to
+Harry's on 11-02 and there is nothing to correct; this is the first note.
+Contact: the form at wegotused.com/contact (no email published); paste the
+text below as the message.
 
-**Subject:** Listing Harry's U-Pull-It inventory in YardScout
+Reworded 2026-11-16 so every sentence is checkable against the reader
+(`scrape_harrys` in `scraper/junkyard_scraper.py`): a scan every four hours,
+about 290 pages a pass (15 cars a page), one page a second
+(`HARRYS_DELAY_SEC`), the scanner's own name (true from the first scan after
+the reader change is on main), and that the reader answers the Sucuri check
+itself today. The 11-02 wording said the screen "sometimes stops our
+scanner", which was not what happens, and "a few times a day", which
+understated six. **Send only after the hub confirms a scan ran with the
+YardScout name.**
 
 Hi,
 
-I run YardScout (yardscout.io), a free app that helps DIY mechanics find cars in self-service yards near them. We list all three Harry's yards and send people to your inventory page and your lots; every car links back to wegotused.com.
+I run YardScout (yardscout.io), a website and app, free to use, that helps DIY mechanics find cars in self-service yards near them. We list all three Harry's yards (Hazle Township, Allentown and Pennsburg), and every car links back to wegotused.com.
 
-Your site's security screen (Sucuri) sometimes stops our scanner, which reads the public inventory pages at a slow pace (one page a second, a few times a day). If you're OK with being listed, could you allow it through? It identifies itself as "YardScout/1.12 (+https://yardscout.io)". If it's easier to send a daily file instead, any format works.
+I would like your OK for that. Our scanner reads your public inventory pages about every four hours: roughly 290 pages a pass, one page a second. It identifies itself as "YardScout/1.12 (+https://yardscout.io)". Your site has a Sucuri security check in front of it, and today our scanner answers that check itself to get the pages. I would rather have your permission than rely on that. Could you allow the scanner by name, or send a daily file instead? Any format works.
 
-If you'd rather not be listed, say the word and we'll take you out.
+If you would rather not be listed, tell me and I will take your yards out.
 
 Thanks,
 Ben
-hello@yardscout.io
+YardScout, hello@yardscout.io
 
 ---
 
@@ -134,16 +145,6 @@ confirms that scan.
 - **Budget**: Gmail draft, a reply in thread `1a19e455f0efaf97` to
   sales@budgetupullit.com (the 11-02 CC to Craig@budgetfl.com bounced; it is
   not on the reply).
-- **Harry's**: no email exists and Gmail holds nothing to or from them; the
-  11-02 note was for the contact form at wegotused.com/contact and
-  `ops/yards.md` records it as not sent. If it was pasted into the form,
-  paste this the same way; if it was not, there is nothing to correct and
-  section 5 above is now accurate as written:
-
-  > Hi, a correction to the note I sent through this form in early November.
-  > I said our scanner identifies itself as "YardScout/1.12
-  > (+https://yardscout.io)". Until November 16 it was sending a generic
-  > browser name; it sends the YardScout name now. Nothing else has changed:
-  > we read your public inventory pages about every four hours and every car
-  > links back to wegotused.com. If you would rather not be listed, tell me
-  > and I will take your yards out. Ben, YardScout (yardscout.io)
+- **Harry's**: none needed. The owner confirmed on 2026-11-16 that the 11-02
+  form note never went out, so section 5 above (reworded the same day) is
+  the first and only note.
