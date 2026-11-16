@@ -252,6 +252,10 @@ HEADERS = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
     "Accept": "application/json",
 }
+# The scanner's own name. Every reader written since 2026-10-28 sends it
+# (YARDSCOUT_HEADERS below); a yard we have told "our scanner identifies
+# itself as YardScout" must be read with it (Pull-N-Save, 2026-11-16).
+YARDSCOUT_UA = "YardScout/1.12 (+https://yardscout.io)"
 
 # NHTSA vPIC — no API key. Unique VINs are decoded in parallel (VPIC_WORKERS); no per-VIN sleep.
 VPIC_DECODEVIN_EXTENDED = "https://vpic.nhtsa.dot.gov/api/vehicles/decodevinvaluesextended/{vin}"
@@ -18502,8 +18506,15 @@ def refresh_ruperts_pricing_file() -> Path:
 # app.pullnsaveapp.com are ignored (no-photos policy).
 PNS_AJAX = "https://pullnsave.com/wp-admin/admin-ajax.php"
 PNS_DELAY_SEC = 10.0  # robots.txt Crawl-delay: 10 — do not lower
+# The inventory reader says who it is (2026-11-16). It sent the generic
+# browser name in HEADERS until then, while the outreach email of 2026-11-02
+# told Pull-N-Save the scanner identifies itself as YardScout (true only of
+# the photo checks). Checked the same day: getMakes answers this name exactly
+# as it answers the browser name (HTTP 200, the same 42 makes). If the yard
+# ever refuses it, that is its answer: outreach, never a different name.
 PNS_HEADERS = {
     **HEADERS,
+    "User-Agent": YARDSCOUT_UA,
     "Content-Type": "application/x-www-form-urlencoded",
     "Referer": "https://www.pullnsave.com/inventory-search/",
     "Origin": "https://www.pullnsave.com",
@@ -20265,7 +20276,7 @@ def refresh_nvpap_pricing_file() -> Path:
 # (2026-10-28: a plain request with an honest UA got 200 + 500 cards.)
 # robots.txt: allow all (wp-admin excepted). ~16 requests/scan at 2s
 # pacing. Both addresses geocode exactly.
-YARDSCOUT_HEADERS = {**HEADERS, "User-Agent": "YardScout/1.12 (+https://yardscout.io)"}
+YARDSCOUT_HEADERS = {**HEADERS, "User-Agent": YARDSCOUT_UA}
 IIS_UPULL_DELAY_SEC = 2.0
 IIS_UPULL_TIMEOUT_RETRY_PAUSE = 30.0
 IIS_UPULL_SITES: dict[str, dict] = {

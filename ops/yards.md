@@ -869,3 +869,36 @@ succeeded. Published data `scrapedAt` 2026-11-16T10:22:50Z, 337,647 cars.
 - Live, one page load of yardscout.io near Atlanta (zip 30318), yard filter
   "Pull-A-Part - Atlanta South": the first six cards loaded from wsrv.nl,
   480x480, six photos 264 KB in total, nothing fetched from the yard's host.
+
+## 2026-11-16 Pull-N-Save: the reader says who it is; photo note drafted
+
+**Found while drafting the photo note (owner: "draft the Pull-N-Save
+note").** The outreach emails of 2026-11-02 told five yards "our scanner
+identifies itself as YardScout/1.12 (+https://yardscout.io)". Checked in the
+scraper on 2026-11-16:
+
+| Yard | What its inventory reader sent | Now |
+|---|---|---|
+| Pull-N-Save (8 yards) | generic browser name (`HEADERS`); only the photo checks sent the YardScout name | **YardScout name** (`PNS_HEADERS`, constant `YARDSCOUT_UA`) |
+| Route 34 | YardScout name | unchanged, the email was right |
+| Budget (2 yards) | generic browser name | not changed, owner asked |
+| U-Pull-R (3 yards, blocked by its captcha, 0 cars) | generic browser name | not changed, owner asked |
+| Harry's (3 yards) | generic browser name, with the Sucuri solver (frozen by rule 2) | not changed, owner asked |
+
+Pull-N-Save test, one request each, 11 s apart (their Crawl-delay is 10):
+`getMakes` answered the YardScout name exactly as the browser name (HTTP
+200, 3,024 bytes, the same 42 makes). `scraper/test_pns_make_model.py` now
+fails if that reader stops sending the scanner's own name. Watch the first
+scan after the change: Pull-N-Save should still read ~11,400 cars; a drop or
+"re-serving last copy" means the yard treats the name differently from
+GitHub's network, which is the yard's answer (outreach, never another name).
+
+**Photo note.** Gmail draft to info@pullnsave.com, subject "May YardScout
+show your car photos?" (thread `1a1e52cb8accbc08`; not sent, the owner
+sends). It asks for an OK to show their photo beside each car (their URL,
+credited, never copied), says what the check costs them (about 11,000 image
+requests once, over about two weeks at one per 10 s, then new cars only),
+that about 170 were tried on 11-06 before the pause, asks for an easier
+signal (a field or feed), and corrects the 11-02 sentence about the name.
+Photo checks stay paused (`PNS_PHOTO_CHECKS_PAUSED = True`) until they say
+yes or the owner says to un-pause.

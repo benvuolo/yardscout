@@ -72,6 +72,14 @@ with tempfile.TemporaryDirectory() as td:
     own = js._pns_model_owners(p)
 check("owner index: noise below the minimum ignored", own.get("a3") == {"Audi"} and own.get("4runner") == {"Toyota"}, own)
 
+# The reader says who it is (2026-11-16): the outreach email told the yard
+# the scanner identifies itself as YardScout, so both the inventory reader and
+# the photo checks must send that name, never a browser's.
+check("the inventory reader sends the scanner's own name",
+      js.PNS_HEADERS.get("User-Agent") == js.YARDSCOUT_UA and js.YARDSCOUT_UA.startswith("YardScout/")
+      and "Mozilla" not in js.PNS_HEADERS.get("User-Agent", ""), js.PNS_HEADERS.get("User-Agent"))
+check("the photo checks send the same name", js.YARDSCOUT_HEADERS.get("User-Agent") == js.YARDSCOUT_UA)
+
 if fails:
     print(f"\n{len(fails)} FAILED")
     sys.exit(1)
