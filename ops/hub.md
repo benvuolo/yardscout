@@ -1063,3 +1063,32 @@ was moved to it only after everything passed. Design and build notes:
   regex lookbehind, no `.at()`.
 - Housekeeping: 22 finished builders' worktrees removed (clean and already
   in main); the session disk was at 94%.
+
+## 2026-11-16 13:28 UTC feed confirmed live; 1.13.0 dispatched (owner: "Do it and ship!")
+
+- Live check at 13:28 UTC, ten minutes after the push (Pages and Deploy
+  Workers both succeeded at 13:17): one fresh phone-size load of
+  yardscout.io with nothing stored, and one of a `#cars=Toyota|4Runner`
+  link. Both served the new shell (`jh-v202`), no page errors. First visit:
+  the guess line with "Change" (zip field closed), no zip card, 40 tiles,
+  first tile at 378 px, two whole tiles and their photos on the first
+  screen, nothing written to `jh_zip` / `jh_gps`. Model link: the four
+  4Runners near the guessed city, "Share this list", then the Monday-email
+  strip with its zip field under the first row.
+- Before/after screenshots sent to the owner.
+- Dispatched straight to production, as on 11-12 and 11-14, from main
+  67fa5d2b: release-android run 30 (43876161947; version_name 1.13.0, track
+  production) at 13:28:56 UTC; release-ios run 41 (43876188232;
+  marketing_version 1.13.0, submit=true, build number = run number 41) at
+  13:29:06 UTC. The iOS submit carries the corrected listing text and the
+  six regenerated screenshots.
+- Release notes (both stores): new Cars photo grid with one-tap filters;
+  cars near you as soon as the app opens; free alerts on one watched car
+  within 50 miles; more yard photos; share a list; what was set out since
+  the last visit.
+- Still to do: confirm both runs; asc-status and play-status; then the Play
+  listing (`store-listing.yml`: text and screenshots;
+  `play-subscription-listing.yml`: benefit line) once the Android build is
+  accepted; when BOTH stores show 1.13.0 live, flip the two held website
+  sentences in `docs/index.html` and the check in
+  `backend/test/free_instant_e2e.mjs`.

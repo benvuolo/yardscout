@@ -1,4 +1,4 @@
-# Release workstream — status (updated 2026-11-09)
+# Release workstream — status (updated 2026-11-16)
 
 Owns: version bumps and store submissions via `release-ios.yml` and
 `release-android.yml`, `fastlane/metadata/`, release notes.
@@ -8,6 +8,7 @@ Procedure: `RELEASING.md`. **Dispatch only after the owner says "ship".**
 
 | Version | iOS | Android |
 |---|---|---|
+| 1.13.0 | DISPATCHED 2026-11-16 13:29 UTC (owner: "Do it and ship!"). Built from main 67fa5d2b (sw jh-v202). iOS build 41, submit=true, run 43876188232; listing text and six new screenshots go up with it. | DISPATCHED 2026-11-16 13:28 UTC, run 43876161947, track production (versionCode 40 expected). |
 | 1.12.16 | SHIPPED 2026-11-14 17:03 UTC (owner: "ship"). Built from main ac24bcb5 (sw jh-v196). iOS build 40, submit=true, run 43618949981. asc-status: 1.12.16 build 40 WAITING_FOR_REVIEW, submitted 17:13 UTC, automatic release on approval. Carries: Cars-tab search box, per-tab scroll, filter panel fix, card share button, trim badge and filter, model-range line, hours and directions links, narrowing and checkout-outcome counters. | versionCode 39, Play production, status completed, rollout 100% (run 43618947678); Google review pending |
 | 1.12.15 | build 37, live (READY_FOR_SALE) | versionCode 38, Play production, completed |
 | 1.12.10 | build 26, live (READY_FOR_SALE) | — |
@@ -18,6 +19,21 @@ Procedure: `RELEASING.md`. **Dispatch only after the owner says "ship".**
 
 1.12.11 added the review prompt (`ReviewPlugin.swift` / `ReviewPlugin.java`,
 `maybeAskForReview` in app.js) and the keyword/title retune.
+
+## In 1.13.0 (owner said "Do it and ship!" 2026-11-16)
+
+- Cars feed: photo tiles, chips, endless scroll, since-last-visit, share a
+  list, the car screen from a tile.
+- No zip gate on the first visit (a guessed place, never saved, never a
+  watch centre); yard and place links.
+- Free instant alert: one watch per install, within 50 miles (apps only).
+- Resized photos from five more yards in the list.
+- Fixes since 1.12.16: yard request form, "search <year> instead" on the
+  Parts empty state, long-listed label on tiles.
+- Pre-flight on the merged tree: see `ops/hub.md` 2026-11-16 13:16 UTC.
+- After both stores show it live: flip the two held website sentences
+  (`docs/index.html`), dispatch `store-listing.yml` and
+  `play-subscription-listing.yml` for the Play listing.
 
 ## In 1.12.12 (owner said "ship" 2026-11-05)
 
