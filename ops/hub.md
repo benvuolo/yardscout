@@ -999,3 +999,18 @@ the first visit").
   only on desktop and the Android browser fallback; car links on yard pages
   and city "Newest arrivals" lack `rel="nofollow"` (`/car/` is disallowed in
   the robots file regardless).
+
+## 2026-11-16 11:50 UTC no-gate confirmed live
+
+One fresh page load of yardscout.io with nothing stored (phone size): the
+new code was served, `/geo` answered 200 `no-store` with a city, the line
+read "Showing yards near <city>. That is a guess from your internet
+connection." with the zip field and "Use my location", the zip card was
+hidden, 400 cars rendered, and neither `jh_zip` nor `jh_gps` was written.
+The Kennewick yard page's "Search this yard in YardScout" button now points
+at `/?utm_source=page&utm_medium=yard&utm_campaign=<slug>#yard=<yard>` with
+`rel="nofollow"`. Deploy Workers succeeded for 4e02c968.
+
+Still true on the live site until the feed merges: on a phone the first car
+sits below the guess line, the "How to read this" note, the three stat
+tiles, the search box and Filters, and the app banner shows at once.
