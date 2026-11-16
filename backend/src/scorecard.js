@@ -60,7 +60,10 @@ const EVENTS = ['first-visit', 'zip-entered', 'watch-created', 'email-asked', 'e
 // The Monday email ask exists on the website only.
 const WEB_ONLY = new Set(['email-asked', 'email-submitted', 'email-confirmed']);
 // How the Cars list was narrowed (docs/app.js NARROW_KINDS), one counter each.
-export const NARROW_EVENTS = ['narrow/search', 'narrow/search-trim', 'narrow/filters-model', 'narrow/filters-make', 'narrow/trim', 'narrow/link'];
+// 'narrow/chip' (2026-11-16, counting rules v5): a make or model chip above
+// the Cars grid. The chips did not exist before v5, so an older client's 0
+// is a real 0 and the block needs no separate "counting starts" for them.
+export const NARROW_EVENTS = ['narrow/search', 'narrow/search-trim', 'narrow/filters-model', 'narrow/filters-make', 'narrow/trim', 'narrow/link', 'narrow/chip'];
 // How a checkout attempt ended (docs/app.js checkoutEnd), v4 clients only.
 export const CHECKOUT_TRY = 'checkout-try';
 export const CHECKOUT_END_PREFIX = 'checkout-end/';
@@ -264,7 +267,7 @@ export function computeNarrowing({ today, rows = [], v3 = {}, v3Presence = [], e
   const routes = (c) => ({
     search: c['narrow/search'] + c['narrow/search-trim'], searchTrim: c['narrow/search-trim'],
     filters: c['narrow/filters-model'] + c['narrow/filters-make'], filtersModel: c['narrow/filters-model'], filtersMake: c['narrow/filters-make'],
-    link: c['narrow/link'], trim: c['narrow/trim'],
+    link: c['narrow/link'], trim: c['narrow/trim'], chip: c['narrow/chip'],
   });
   const platforms = {};
   for (const [p] of SC_PLATFORMS) platforms[p] = reporting.has(p) ? routes(by[p]) : null;
@@ -602,7 +605,7 @@ export function narrowingItems(n) {
       lines: [start ? `counting starts ${start}` : 'counting starts with the first visit to the updated website'] };
   }
   const t = n.total;
-  const route = (x) => `search box ${fmt(x.search)} · Filters ${fmt(x.filters)} · link ${fmt(x.link)} · trim filter ${fmt(x.trim)}`;
+  const route = (x) => `search box ${fmt(x.search)} · chips ${fmt(x.chip)} · Filters ${fmt(x.filters)} · link ${fmt(x.link)} · trim filter ${fmt(x.trim)}`;
   const lines = [];
   lines.push(`search box: ${fmt(t.search - t.searchTrim)} make or model, ${fmt(t.searchTrim)} trim row${t.searchTrim === 1 ? '' : 's'}`
     + ` · Filters: ${fmt(t.filtersModel)} model, ${fmt(t.filtersMake)} make only`);

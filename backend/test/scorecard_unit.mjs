@@ -236,8 +236,8 @@ check('text: counting note names Android as not yet fixed', /not yet for the iPh
   const i2 = narrowingItems(n2);
   check('narrow: window = the scorecard\'s last 7 full days', n2.window.from === '2026-11-19' && n2.window.to === '2026-11-25', JSON.stringify(n2.window));
   check('narrow: routes add up (search box 5 + 2 trim rows = 7, Filters 4 model + 3 make only = 7, link 9, trim 1)',
-    eq(n2.total, { search: 7, searchTrim: 2, filters: 7, filtersModel: 4, filtersMake: 3, link: 9, trim: 1 }), JSON.stringify(n2.total));
-  check('narrow: head line in plain words', i2.head === 'search box 7 · Filters 7 · link 9 · trim filter 1', i2.head);
+    eq(n2.total, { search: 7, searchTrim: 2, filters: 7, filtersModel: 4, filtersMake: 3, link: 9, trim: 1, chip: 0 }), JSON.stringify(n2.total));
+  check('narrow: head line in plain words', i2.head === 'search box 7 · chips 0 · Filters 7 · link 9 · trim filter 1', i2.head);
   check('narrow: the split under it', i2.lines[0] === 'search box: 5 make or model, 2 trim rows · Filters: 4 model, 3 make only', i2.lines[0]);
   check('narrow: "counting starts Nov 22: 4 of 7 days so far" until 7 days are covered', n2.daysCounted === 4 && !n2.full && i2.lines.includes('counting starts Nov 22: 4 of 7 days so far'), JSON.stringify(i2.lines));
   check('narrow: website only until the next app update', i2.lines.includes('website only until the next app update') && !i2.lines.some((l) => /^iPhone app:/.test(l)), JSON.stringify(i2.lines));
@@ -247,10 +247,16 @@ check('text: counting note names Android as not yet fixed', /not yet for the iPh
   const n3 = nw({ rows: [N('2026-11-19', 'search', 14), N('2026-11-25', 'link', 22)], v3: { web: '2026-11-15' }, v3Presence: v3p(CUR) });
   const i3 = narrowingItems(n3);
   check('narrow: full week -> no "counting starts" line', n3.full && n3.daysCounted === 7 && !i3.lines.some((l) => /counting starts/.test(l)), JSON.stringify(i3.lines));
-  check('narrow: unused ways are 0 (the website reported all week)', i3.head === 'search box 14 · Filters 0 · link 22 · trim filter 0', i3.head);
+  check('narrow: unused ways are 0 (the website reported all week)', i3.head === 'search box 14 · chips 0 · Filters 0 · link 22 · trim filter 0', i3.head);
   check('narrow: first v3 day exactly on the window\'s first day counts as a full week', nw({ v3: { web: '2026-11-19' }, v3Presence: v3p(CUR) }).full === true);
   const n3b = nw({ v3: { web: '2026-11-15' }, v3Presence: v3p(['2026-11-21']) });
-  check('narrow: reporting but nobody narrowed -> all 0', eq(n3b.total, { search: 0, searchTrim: 0, filters: 0, filtersModel: 0, filtersMake: 0, link: 0, trim: 0 }), JSON.stringify(n3b.total));
+  check('narrow: reporting but nobody narrowed -> all 0', eq(n3b.total, { search: 0, searchTrim: 0, filters: 0, filtersModel: 0, filtersMake: 0, link: 0, trim: 0, chip: 0 }), JSON.stringify(n3b.total));
+
+  // 3c. chips (counting rules v5, 2026-11-16): their own count, apart from the search box
+  const n3c = nw({ rows: [N('2026-11-20', 'chip', 6), N('2026-11-21', 'chip', 5), N('2026-11-21', 'search', 2), N('2026-11-21', 'chip', 9, 'ios')],
+    v3: { web: '2026-11-15' }, v3Presence: v3p(CUR) });
+  check('narrow: chips are counted on their own (an app with no marker is left out)', n3c.total.chip === 11 && n3c.total.search === 2
+    && narrowingItems(n3c).head === 'search box 2 · chips 11 · Filters 0 · link 0 · trim filter 0', narrowingItems(n3c).head);
 
   // 4. started today: nothing in the window yet
   const n4 = nw({ v3: { web: '2026-11-26' }, v3Presence: [] });
@@ -261,8 +267,8 @@ check('text: counting note names Android as not yet fixed', /not yet for the iPh
     v3: { web: '2026-11-12', ios: '2026-11-20' }, v3Presence: [...v3p(CUR), ...v3p(['2026-11-20', '2026-11-21'], 'ios')] });
   const i5 = narrowingItems(n5);
   check('narrow: total over the reporting platforms only (Android rows without v3 ignored)', n5.total.search === 13 && n5.total.link === 1, JSON.stringify(n5.total));
-  check('narrow: per-platform lines once an app reports', i5.lines.includes('Web: search box 10 · Filters 0 · link 0 · trim filter 0')
-    && i5.lines.includes('iPhone app: search box 3 · Filters 0 · link 1 · trim filter 0') && i5.lines.includes('Android app: no data'), JSON.stringify(i5.lines));
+  check('narrow: per-platform lines once an app reports', i5.lines.includes('Web: search box 10 · chips 0 · Filters 0 · link 0 · trim filter 0')
+    && i5.lines.includes('iPhone app: search box 3 · chips 0 · Filters 0 · link 1 · trim filter 0') && i5.lines.includes('Android app: no data'), JSON.stringify(i5.lines));
   check('narrow: names the app still waiting for its update', i5.lines.includes('Android app: not counted until its next update') && !i5.lines.includes('website only until the next app update'), JSON.stringify(i5.lines));
 
   // 6. counters unreadable
@@ -275,10 +281,10 @@ check('text: counting note names Android as not yet fixed', /not yet for the iPh
   const tl = scorecardTextLines(card);
   const at = tl.findIndex((l) => l.startsWith('  How people narrowed the Cars list (7 days): '));
   check('narrow text: last block of the scorecard, after the small-numbers note', at > 0 && /Small numbers/.test(tl[at - 1]), JSON.stringify(tl.slice(-8)));
-  check('narrow text: head on the title line', tl[at] === '  How people narrowed the Cars list (7 days): search box 7 · Filters 7 · link 9 · trim filter 1', tl[at]);
+  check('narrow text: head on the title line', tl[at] === '  How people narrowed the Cars list (7 days): search box 7 · chips 0 · Filters 7 · link 9 · trim filter 1', tl[at]);
   const hh = scorecardHtml(card, { esc: (x) => String(x), C: { line: '#ddd', dim: '#666', ink: '#111', accent: '#b84a0a' } });
   check('narrow html: inside the scorecard block, after the link lines', hh.indexOf('How people narrowed the Cars list') > hh.indexOf('What each tagged link did this week')
-    && hh.replace(/<[^>]+>/g, '').includes('search box 7 · Filters 7 · link 9 · trim filter 1') && /white-space:nowrap;">search box 7</.test(hh) && hh.includes('counting starts Nov 22: 4 of 7 days so far'));
+    && hh.replace(/<[^>]+>/g, '').includes('search box 7 · chips 0 · Filters 7 · link 9 · trim filter 1') && /white-space:nowrap;">search box 7</.test(hh) && hh.includes('counting starts Nov 22: 4 of 7 days so far'));
   check('narrow: other scorecard numbers unchanged by the narrowing rows', card.visitors.byPlatform.web.current === 70 && card.watches.current === A.watches.current);
 }
 
@@ -414,7 +420,7 @@ check('D1: android present via its rows only (Nov 13, Nov 22)', I.visitors.byPla
 check('D1: same link row', eq(I.sourceRows[0], A.sourceRows[0]));
 check('D1: v3 start and marker days read back', ev.v3.web === '2026-11-22' && ev.v3Presence.length === 4 && !ev.v3.ios, JSON.stringify([ev.v3, ev.v3Presence]));
 check('D1: narrowing summed across sources and days (search 12 + 2 trim rows, Filters 6 + 3, link 22, trim 3)',
-  eq(I.narrowing.total, { search: 14, searchTrim: 2, filters: 9, filtersModel: 6, filtersMake: 3, link: 22, trim: 3 }), JSON.stringify(I.narrowing.total));
+  eq(I.narrowing.total, { search: 14, searchTrim: 2, filters: 9, filtersModel: 6, filtersMake: 3, link: 22, trim: 3, chip: 0 }), JSON.stringify(I.narrowing.total));
 check('D1: the markers are not counted as narrowing or as funnel events', I.visitors.byPlatform.web.current === 70);
 
 // The whole daily email: stores, entitlements and public files as fixtures.
@@ -443,7 +449,7 @@ check('daily: build without storeSnapshot stores nothing', !JSON.parse(kv2.get(S
 const t = rep.email.text, h = rep.email.html;
 check('daily text: scorecard before OPEN ISSUES', t.indexOf('WEEKLY SCORECARD') > 0 && t.indexOf('WEEKLY SCORECARD') < t.indexOf('OPEN ISSUES'));
 check('daily text: narrowing block under the scorecard, before OPEN ISSUES',
-  t.includes('  How people narrowed the Cars list (7 days): search box 14 · Filters 9 · link 22 · trim filter 3')
+  t.includes('  How people narrowed the Cars list (7 days): search box 14 · chips 0 · Filters 9 · link 22 · trim filter 3')
   && t.indexOf('How people narrowed') > t.indexOf('WEEKLY SCORECARD') && t.indexOf('How people narrowed') < t.indexOf('OPEN ISSUES')
   && t.includes('counting starts Nov 22: 4 of 7 days so far') && t.includes('website only until the next app update'), t.slice(t.indexOf('How people'), t.indexOf('OPEN ISSUES')));
 check('daily text: item 4 says how the checkout taps ended (web, counting from Nov 24)',
