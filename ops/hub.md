@@ -1121,3 +1121,60 @@ was moved to it only after everything passed. Design and build notes:
   on the newest scan right before they post.
 - Follow-up scheduled: `trig_016dADedHXNCLcakiqQW9irq`, 2026-11-17 15:00
   UTC (store status, then the held website sentences and the Play listing).
+
+## 2026-11-16 ~16:10 UTC owner's first look on an iPhone (three screenshots)
+
+Owner: "Like the format, lack of pictures is annoying. For pro isn't see
+what you'd save and see what parts are worth the same? Should we make /
+promote alerts as the main flagship feature? Don't want to mess up the
+shopping/scrolling experience with too much. But also want to direct folks
+towards [Pro]." The screenshots are the first real-Safari view of the feed:
+tiles, chips, the note after row one and the car page all render as tested.
+
+**Changed (a373ccdf, sw `jh-v203`, website only until the next app release):**
+- Free car page: one Pro box for the prices, under the parts ("See what
+  each part is worth", gate `part-value`). The second one above the parts
+  ("See what you'd save on this car", gate `card-value`) came over from the
+  old card when the list became tiles; it is gone. Nothing renders
+  `card-value` now.
+- "fits 2013–2013" reads "fits 2013" (`fitsText`; 170 part rows).
+- Newest-first list: within one set-out day, cars whose photo shows in the
+  list come first, then the nearest yard (`listPhotoFlag`). It was the order
+  of the data files, so one yard's batch filled the first screens.
+
+**Photos, measured on the 13:47 UTC scan** (script in the session
+scratchpad; counts only): nationwide 56.0% of cars show a photo in the
+list. Within 100 mi of Salt Lake: 15%. Pick-n-Pull Salt Lake City 98%;
+Pull-N-Save Salt Lake City and Springville (2,710 cars) about 1%, because
+the photo checks are paused (owner, 2026-11-07); Tear-A-Part (1,558) and
+Utah Pic-A-Part (1,710) publish no per-car photo. The owner's screenshot
+was a 50-car batch set out 11-15 at Utah Pic-A-Part Ogden (Premium), so the
+new order does not change that screen. Nationwide the cars with no list
+photo sit at: Pull-A-Part 26,781 (lookups running, 500 a scan), Pull-N-Save
+11,352 (paused), Jalopy Jungle 6,476 (none on site), LKQ 5,690 (no photo
+id in the feed), then chains whose sites show none.
+
+Also seen: about 7,000 YardSmart photos (U-Pick-It AZ, U-Pull-It IA/NE,
+Genesis, Chuck & Eddie's, and the Bessler's / Chesterfield / Bluegrass
+VinPlus brands) are missing today compared with 11-09. Their own feeds have
+been frozen since 11-13/14 (the scan's STALE YARD lines), so the signed
+photo ids in them have lapsed and the scraper rightly drops them. Source
+side; they come back when those feeds refresh. Check in a later scan.
+
+**Pro prompts, 14 days (usage-stats 43900005790; aggregate counts):** Pro
+sheet opened from the header button 49, distance limits 37 (nationwide 18,
+500 mi 15, any distance 4), the two price boxes 33 (18 + 15), alert prompts
+12, the free sample note 8. Checkout started: header 15, nationwide 7,
+alert 1, part name 1. Purchases recorded: 3 (header 2, part name 1). App
+installs: 38 devices, 33 with at least one watch, 247 pushes sent.
+
+**Hub's answer to the owner:** alerts are already the lead of the Pro sheet
+and the store page (round 5, 2026-11-06) and they are what installs
+actually do (33 of 38 have a watch); keep them the flagship. What gets
+people to open Pro is mostly reach (distance) and prices, so Pro reads best
+as "every watch, any distance" with prices second. Rule proposed: one Pro
+prompt per screen, at a limit or beside the thing it unlocks; none inside
+the car grid. Asked the owner about (1) one dismissible "set an alert" card
+in the feed for people with no watch, (2) Pull-N-Save photos: a note to
+them, or un-pausing. Not done without an answer. Not recommended for now:
+example photos of a model for cars with none.
