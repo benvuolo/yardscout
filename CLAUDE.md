@@ -58,5 +58,12 @@ yardscout.io@gmail.com, they/them). Accuracy and dependability come first.
   if you see a gap or way to improve on anything"): when you notice a gap or
   an improvement, in any area, say so with a recommendation. Suggest; the
   standing rules above still decide what may be done without asking.
+- Photos (owner, 2026-11-06 and 2026-11-16): a car's photo loads from the
+  yard's own URL, credited, and is never copied or hosted by us. One
+  exception the owner approved: big photo files may pass through the
+  image-resizing service named in `scraper/photo_sources.json` (`thumb`
+  fields; its `_doc` has the limits). Never add it for a host that refuses the
+  service, and never use it to get around a block (rule 2). A takedown stays a
+  data change (`ops/yards.md`, "Photo takedown").
 - Keep one session per workstream (`ops/README.md`). Do not take on another
   workstream's files in passing; note the need in that workstream's file.

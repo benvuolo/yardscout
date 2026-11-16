@@ -892,3 +892,18 @@ still say no. Today's free tier for reference: up to 5 watches within
 250 mi, one Monday summary push, one check-in push after the first watch.
 Pro: up to 20 watches, any distance, trim and 4WD filters, a push on every
 scan that finds a match, sale-day pushes.
+
+## 2026-11-16 ~07:50 to 08:15 UTC photos (owner: "the more photos the better", then "Do it")
+
+- Count this morning: 47.3% of cars show a photo in the list, 9.7% only on
+  the car screen, 42.8% none (details and the table in `ops/yards.md`).
+- Within the old rules (dc37bbab): six sources of 400 to 700 KB moved onto
+  list cards; Pull-A-Part lookups 500 a scan at 6 s. Scan dispatched 07:46.
+- **Owner decision, recorded:** asked whether a free image-resizing service
+  may shrink big photo files, changing the 2026-11-06 "no proxying" rule, the
+  owner answered "Do it". Built for the five big-file sources the service
+  can fetch (5e2e5198, sw `jh-v199`); four sources whose host refuses the
+  service stay direct. `CLAUDE.md` now carries the rule and its limits.
+- Not taken as approved: user-uploaded photos (mentioned as a later option).
+- Follow-up: second scan queued 08:07 UTC publishes the resized addresses;
+  then recount and look at a live card.

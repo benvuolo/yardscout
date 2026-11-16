@@ -787,3 +787,60 @@ Check after the scan: recount with the same script
 (`photosrc.py` logic: match each extras photo code against the manifest's
 `photoSources`, split by `onCards` and `heavy`), and look at one
 Pull-A-Part and one BYOT card on the live site.
+
+## 2026-11-16 resized photos for big files (owner: "Do it")
+
+**Owner decision.** Asked whether a free image-resizing service may shrink
+big photo files (it changes the 2026-11-06 rule "loaded from the yard's own
+URL ... no rehosting or proxying"), the owner answered "Do it". Scope as
+asked: big files only.
+
+**Service: wsrv.nl** (images.weserv.nl). Terms read on 2026-11-16 from its
+own FAQ and privacy policy: free for anyone; "Using the free service
+provided on wsrv.nl in your products is also permitted", support is best
+effort, no uptime promise; logs (IP, browser, URL, time) kept 7 days;
+servers in Finland and Germany behind Cloudflare; 2,500 uncached images per
+10 minutes per visitor IP, then that IP is blocked for an hour; it refuses
+some origin domains (OpenDNS tagging).
+
+**Measured on real photos (hub, 2026-11-16, two per source):**
+
+| Source | Yard's file | Resized (640x480 box, webp q75) |
+|---|---|---|
+| pap | 786 KB, 767 KB (640x640 PNG) | 44 KB, 41 KB (480x480) |
+| byot | 676 KB, 460 KB | 17 KB, 12 KB (360x480) |
+| ipull | 470 KB | 43 KB |
+| usautosupply | 273 KB, 269 KB | 38 KB, 42 KB |
+| sturtevant | 5.5 MB, 3.4 MB | 66 KB, 27 KB (640x480) |
+| papva, upullitwa, aesop, midwayupull (URG CloudFront) | 190 to 840 KB | **refused**: the host answers the service 403 |
+
+One iPull sample was 404 at the yard itself (photo gone at the source).
+
+**Built (5e2e5198, sw `jh-v199`):**
+- `scraper/photo_sources.json`: `thumbHost` and per-pattern `thumb` on pap,
+  byot, ipull, usautosupply, sturtevant; `thumbLarge` (1600x1200 box) on
+  sturtevant. `published_photo_sources()` publishes them only for a host in
+  `PHOTO_RESIZE_HOSTS` and only when the address asks for a file on the
+  source's own host. `card` and `large` are unchanged, so app builds up to
+  1.12.16 ignore the new fields and behave as before.
+- App: lists use `thumb`; if it fails, a source whose own file may show in
+  lists (pap, byot) falls back to that file, the others to the drawing. The
+  car screen keeps the yard's own file. Sturtevant's 4 MB original is no
+  longer tap-to-load in new code: the car screen and viewer show
+  `thumbLarge`, and the original is never loaded on its own.
+- `docs/privacy.html` names the service, what it receives, and the yards.
+- Local look with the image hosts allowed: 12 Pull-A-Part and 12 BYOT cards
+  all loaded from the service (480x480 and 360x480); 15 photos came to
+  389 KB in total.
+
+**Rule 2 note.** URG's CloudFront refusing the service is a refusal. Those
+four sources get no thumb and nobody adds one by another route. The same
+holds for any future source: add a thumb only after a direct test shows the
+host serves the service.
+
+**Off switch.** Delete the thumb fields (or `thumbHost`) for a source,
+commit, dispatch `scan.yml`. A full takedown is still `enabled: false`.
+
+**Live when:** the scan queued at 08:07 UTC (after the one already running)
+publishes the fields; the website uses them from then, the apps from the
+next release. Check: recount, and one page load of a Pull-A-Part card.
