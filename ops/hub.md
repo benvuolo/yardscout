@@ -1318,3 +1318,10 @@ shows Nov 14 cars ahead of Nov 13.
   dispatched one at 17:54 UTC: run 43923253337 on 4ba8328b, the first with
   the YardScout name. Scans queue one at a time (`junkyard-scan` group), so
   a late scheduled run cannot overlap it.
+
+## 2026-11-16 18:13 UTC spacing fix confirmed live
+
+One fresh load of yardscout.io at phone size: cache `jh-v204`; on a car page
+opened in that load the turnover label sits 12 px under the yard box; no
+page errors. Scan 43923253337 (dispatched 17:54, on 4ba8328b) is in
+progress; the 19:18 UTC check-in reads its log for the four yards.
