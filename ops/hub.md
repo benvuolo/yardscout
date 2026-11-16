@@ -833,3 +833,43 @@ the Xterra list; 3. a Search Console screenshot (Performance, 28 days, Pages)
 to judge the model pages, which is the tabled model-pages topic raised again
 as agreed; 4. offered, not started: a printable QR flyer for yard counters.
 Open from before: Kennewick draft, Reddit drafter limit, U-Pull R requester.
+
+## 2026-11-16 ~07:45 UTC owner: "Do everything you think" (more Pro users, more people using it; main page, look, features, flow all open)
+
+Standing rule 1 still applies: a store release needs an explicit "ship".
+
+Hub's read after screenshots of every main screen (phone and desktop, local):
+the screens work once someone is in (Cars list, car card, Parts, Pro sheet);
+the weak part is the first minute. So the work is flow, not a new look.
+- Brand-new desktop visitor: "Where are you?" card, then stat tiles reading
+  "CARS 0 / NEW THIS WEEK 0", no sentence saying what the site is.
+- Yard pages' "Search this yard in YardScout" and city pages' "Search near
+  your zip" both land on the generic zip card (no yard or city carried over).
+  Model pages already carry the model (`#cars=`).
+- No rendered-page button carries a source tag, so visits that arrive from
+  search pages are invisible in the scorecard.
+- Web Alerts tab never mentions the Monday email.
+
+Done this hour:
+- `/geo` on the site Worker (b72ebe6e, `backend/site-proxy/src/geo.js`, 13
+  checks): the visitor's approximate area from the location Cloudflare
+  attaches to the request; one decimal, US and Canada only, nothing stored,
+  never cached. The app does not call it yet.
+- Reddit drafter prompt: in threads that are not YardScout threads (the
+  owner's personal posts) it drafts only for questions or parts/junkyard
+  talk and lists the rest in one line. Same schedule, same model.
+
+Queued (task list #50 to #53):
+1. Review and merge `growth/first-view` when the builder reports.
+2. Wave 2, same builder: first visit shows cars near the guessed area with
+   the zip field beside it (a guess is never a watch centre; privacy text
+   updated in the same change); national numbers instead of zero tiles;
+   `#yard=` and `#near=` intents and the rendered pages' buttons using them;
+   internal source tag `page/<type>` that never replaces an external source.
+3. 4Runner post on the day the owner posts; Reddit profile link (owner).
+4. Next app release batch, then ask for "ship". Listing text (D7) already
+   went out with 1.12.15. Add: do not count sandbox or test-lab sessions.
+
+Asked the owner, not decided for them: D2, one free instant alert on one
+watch within a short radius (two $3.99 rivals give one). It gives away part
+of Pro, so it stays the owner's yes or no.
