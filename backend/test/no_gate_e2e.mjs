@@ -114,7 +114,20 @@ async function open(browser, { geo = { ok: false }, hash = '', search = '', stor
   return { ctx, page, geoHits, leaked, errors, events, state, cars };
 }
 const count = (list, e) => list.filter((x) => x === e).length;
-const shot = async (page, name) => { if (SHOTS) { fs.mkdirSync(SHOTS, { recursive: true }); await page.screenshot({ path: path.join(SHOTS, name) }); } };
+/* NOGATE_SHOTS=<dir>: the screen at 390 px, light and dark, tall enough to show what is under the line. */
+const shot = async (page, name) => {
+  if (!SHOTS) return;
+  fs.mkdirSync(SHOTS, { recursive: true });
+  await page.evaluate(() => window.scrollTo(0, 0));
+  const fixed = await page.evaluate(() => { const els = [...document.querySelectorAll('body *')].filter((e) => getComputedStyle(e).position === 'fixed'); els.forEach((e) => e.style.setProperty('visibility', 'hidden', 'important')); return els.length; });
+  for (const scheme of ['light', 'dark']) {
+    await page.emulateMedia({ colorScheme: scheme });
+    await page.waitForTimeout(200);
+    await page.screenshot({ path: path.join(SHOTS, `${name}-390-${scheme}.png`), fullPage: true, clip: { x: 0, y: 0, width: 390, height: 1700 } });
+  }
+  await page.emulateMedia({ colorScheme: null });
+  if (fixed) await page.evaluate(() => [...document.querySelectorAll('body *')].forEach((e) => e.style.removeProperty('visibility')));
+};
 
 const browser = await chromium.launch();
 try {
@@ -172,7 +185,7 @@ try {
     check('guess: the radius loader serves the guessed area (cars near Sacramento)', await w.page.evaluate(() => getFilteredLive().slice(0, 50).every((v) => vehicleDistanceMi(v) <= effectiveRadiusMi())), String(all));
     check('guess: the yard filter lists yards around the guess', await w.page.evaluate(() => document.getElementById('live-filter-location').options.length > 1 && !document.getElementById('live-filter-location').disabled));
     check('guess: the Parts tab says where, and that it is a guess', /Sacramento, CA \(a guess\)/.test(await w.page.evaluate(() => document.getElementById('pf-where-sum') ? document.getElementById('pf-where-sum').textContent : 'Sacramento, CA (a guess)')));
-    await shot(w.page, 'guess-line-390-light.png');
+    await shot(w.page, 'guess-line');
     // A watch while the place is a guess: the zip step runs.
     const r = await w.page.evaluate(() => addQuickWatch('Toyota', 'Camry', null, null, 'test'));
     check('guess: addQuickWatch answers no-zip', r === 'no-zip', r);
@@ -265,7 +278,7 @@ try {
     const s = await w.state();
     check('zip card with a cars link: "Find a Nissan Xterra near you"', s.banner && s.head === 'Find a Nissan Xterra near you', s.head);
     check('zip card with a cars link: the first sentence names it (no years, no counts)', s.lead === 'Enter your zip or postal code and we’ll list every Nissan Xterra in the self-service yards near you.', s.lead);
-    await shot(w.page, 'zip-card-car-390-light.png');
+    await shot(w.page, 'zip-card-car');
     await w.ctx.close();
   }
   {
@@ -286,7 +299,7 @@ try {
     check('#yard=: the Cars list is filtered to that yard', s.yardFilter === YARD && await w.page.evaluate((y) => getFilteredLive().every((v) => v.location === y) && getFilteredLive().length > 0, YARD), s.yardFilter);
     check('#yard=: never saved, never a watch centre', s.zip === null && s.coords === null && s.guess && await w.page.evaluate(() => addQuickWatch('Toyota', 'Camry', null, null, 'test')) === 'no-zip', JSON.stringify(s));
     check('#yard=: the hash is cleared', !/#/.test(s.url), s.url);
-    await shot(w.page, 'yard-link-line-390-light.png');
+    await shot(w.page, 'yard-link-line');
     await w.ctx.close();
   }
   {
@@ -298,7 +311,7 @@ try {
     check('#yard=&cars= with a saved zip: the yard for this visit, the make applied', s.yardFilter === YARD && s.make === 'Toyota' && s.temp && s.temp.saved, JSON.stringify(s));
     check('#yard= with a saved zip: the zip is kept, one tap back offered', s.zip === '85003' && s.back === 'Back to 85003' && !s.formShown && !s.guess, JSON.stringify(s));
     check('#yard= with a saved zip: a watch keeps the saved centre', await w.page.evaluate(() => { const r = addQuickWatch('Honda', 'Civic', null, null, 'test'); const e = loadWatchlist().find((x) => x.make === 'Honda'); return r === 'added' && e && e.lat === 33.4511 && e.lng === -112.0783; }));
-    await shot(w.page, 'yard-link-saved-390-light.png');
+    await shot(w.page, 'yard-link-saved');
     await w.page.click('#place-line-back');
     await w.page.waitForTimeout(300);
     s = await w.state();

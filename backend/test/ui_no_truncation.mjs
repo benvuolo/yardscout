@@ -427,8 +427,47 @@ const carSearchOff = async (page) => {
   await page.evaluate(() => { carSearchClearAll(); document.getElementById('car-search-input').blur(); });
   await settle(page, 300);
 };
+/* First view with no zip (2026-11-16, app.js A PLACE FOR THIS VISIT): the
+ * line above the list for a guess from /geo, for a link's place (nothing
+ * saved: zip field + "Use my location"; a saved zip: "Back to <zip>"), and
+ * the zip card naming the car from a cars link. The saved zip is set aside
+ * for the screen and put back after. */
+const placeShow = (p, keepZip) => async (page) => {
+  await tab(page, 'live');
+  await page.evaluate(({ p, keepZip }) => {
+    if (!keepZip) localStorage.removeItem('jh_zip');
+    applyTempPlace(p);
+    window.scrollTo(0, 0);
+  }, { p, keepZip });
+  await settle(page, 600);
+  if (!(await page.isVisible('#place-line'))) throw new Error('no place line');
+};
+const placeBack = async (page) => {
+  await page.evaluate(async (z) => {
+    _tempPlace = null; carsIntent = null;
+    localStorage.setItem('jh_zip', z);
+    await setZipCenter(z, true);
+    afterPlaceChange();
+  }, ZIP);
+  await settle(page, 400);
+};
 const SCREENS = [
   ['results', async (page) => { await tab(page, 'live'); }],
+  ['place-guess', placeShow({ kind: 'guess', lat: 37.35, lng: -121.9, label: 'Rancho Palos Verdes, CA' }, false), placeBack],
+  ['place-link', placeShow({ kind: 'link', lat: 37.35, lng: -121.9, label: 'Pick-n-Pull - San Jose (Capitol Expressway)', yard: '' }, false), placeBack],
+  ['place-link-saved', placeShow({ kind: 'link', lat: 37.35, lng: -121.9, label: 'Pick-n-Pull - San Jose (Capitol Expressway)', yard: '' }, true), placeBack],
+  ['zip-card-car', async (page) => {
+    await tab(page, 'live');
+    await page.evaluate(() => {
+      localStorage.removeItem('jh_zip');
+      carsIntent = { make: 'Mercedes-Benz', model: 'Sprinter 2500 Long Wheelbase High Roof', yrMin: null, yrMax: null };
+      updateZipBanner();
+      window.scrollTo(0, 0);
+    });
+    await settle(page, 400);
+    if (!(await page.isVisible('#zip-banner'))) throw new Error('no zip card');
+    if (!/^Find a Mercedes-Benz Sprinter/.test(await page.textContent('#zip-banner-head'))) throw new Error('the zip card does not name the car');
+  }, placeBack],
   // Car search (2026-11-12): the suggestion list open, a pick applied, and a
   // #cars= link for a model not in range (the box prefilled + a note).
   ['car-search', async (page) => {
