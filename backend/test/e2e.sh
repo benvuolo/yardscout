@@ -81,14 +81,20 @@ echo "── anonymous / free tier"
 YARDS=$(curl -s "$API/v1/yards")
 check "yard directory count" "$(echo "$YARDS" | jq '.yards | length')" "6"
 
-# Yard 0 is Pick-n-Pull Rancho Cordova (38.577, -121.2605); 50mi around it.
-PLAN=$(curl -s "$API/v1/inventory?lat=38.58&lng=-121.26&radius=50")
+# 2 mi around the first seeded yard. The centre is read from the directory:
+# it used to be hardcoded to Rancho Cordova ("yard 0"), and when the scan's
+# yard order changed no seeded yard was within 50 mi of it, so the check
+# below failed on main with "0 of 6" (seen 2026-11-16). A 2 mi radius keeps
+# "narrows" true even when the first six yards share a metro area.
+LAT0=$(echo "$YARDS" | jq '.yards[0][3]')
+LNG0=$(echo "$YARDS" | jq '.yards[0][4]')
+PLAN=$(curl -s "$API/v1/inventory?lat=$LAT0&lng=$LNG0&radius=2")
 check "plan tier is free" "$(echo "$PLAN" | jq -r '.tier')" "free"
 N_RADIUS=$(echo "$PLAN" | jq '.yardIds | length')
 N_ALL=$(curl -s "$API/v1/inventory" | jq '.yardIds | length')
 check "radius filter returns all 6 test yards for no-center" "$N_ALL" "6"
 [ "$N_RADIUS" -ge 1 ] && [ "$N_RADIUS" -lt "$N_ALL" ] \
-  && ok "radius=50mi narrows yards ($N_RADIUS of $N_ALL)" \
+  && ok "radius=2mi around the first yard narrows yards ($N_RADIUS of $N_ALL)" \
   || bad "radius filter did not narrow ($N_RADIUS of $N_ALL)"
 
 SHARD_FREE=$(curl -s --compressed "$API/v1/inventory/shard/0")

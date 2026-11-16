@@ -3549,3 +3549,8 @@ select { white-space: normal; height: auto; }
 .saved-yard-link .ico { width: 18px; height: 18px; flex: none; }
 /* The same link on a yard card (Yards tab), under the yard's town. */
 .yard-card .yard-maps-link { margin: 0; padding-left: 0; }
+/* Free instant alert (apps, 2026-11-16): the one watch that pushes within
+   hours wears the "New" badge style; every other watch gets a one-tap move.
+   Both sit at their own width and wrap rather than cut off. */
+.wl-instant { align-self: flex-start; max-width: 100%; white-space: normal; overflow-wrap: anywhere; margin-top: var(--s1); }
+.wl-instant-move { align-self: flex-start; min-height: var(--tap); font-size: var(--t-sm); text-align: left; overflow-wrap: anywhere; }

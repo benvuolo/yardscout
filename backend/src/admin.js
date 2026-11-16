@@ -102,10 +102,11 @@ export async function handleCommit(req, env, ctx) {
         .catch((e) => console.log('alert dispatch failed:', e && e.message))
         .finally(opsFlusher(env))
     );
-    // Native devices (iOS app): instant APNs push for Pro devices.
+    // Native devices (apps): instant push for Pro devices, then free devices'
+    // one instant watch from the budget Pro left.
     ctx.waitUntil(
       dispatchDeviceAlerts(env, newArrivals)
-        .then((r) => console.log(`device alerts: ${r.devices} devices pushed, ${r.sends} sends`))
+        .then((r) => console.log(`device alerts: ${r.devices} devices pushed (${r.freeInstant || 0} free instant), ${r.sends} sends`))
         .catch((e) => console.log('device alert dispatch failed:', e && e.message))
         .finally(opsFlusher(env))
     );

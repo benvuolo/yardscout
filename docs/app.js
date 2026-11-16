@@ -3129,7 +3129,14 @@ function proSheetCarHtml(enc) {
 }
 /* Why the sheet opened, in one line, when a watch gate opened it — the
  * generic local-proof line reads as a non sequitur after "6th watch". */
-const watchGateLead = (t) => ({
+/* The apps' free tier has one instant watch (FREE INSTANT ALERT below); the
+ * web's does not, so those lines differ by platform. */
+const watchGateLead = (t) => (IS_NATIVE ? {
+  'watch-limit': `Free covers ${FREE_WATCH_LIMIT} watches within 250 mi: one pushes within hours for cars within 50 mi, the rest come in a Monday recap. Pro: up to 20 watches, any distance, every one within hours.`,
+  'watch-anywhere': 'Free watches stay within 250 mi of you. Pro watches the whole country — and pushes within hours when one lands.',
+  'watch-toast': 'Free: one watch pushes within hours for cars within 50 mi; the rest come in a Monday recap. Pro: every watch within hours, at any distance.',
+  'watch-near-miss': 'Pro would have pushed that one the day it landed. Free pushes one watch within 50 mi; every watch at any distance is Pro.',
+} : {
   'watch-limit': `Free covers ${FREE_WATCH_LIMIT} watches within 250 mi, with a recap every Monday. Pro: up to 20 watches, any distance, and a push within hours of one landing.`,
   'watch-anywhere': 'Free watches stay within 250 mi of you. Pro watches the whole country — and pushes within hours when one lands.',
   'watch-toast': 'Free: a recap every Monday of what landed. Pro: a push within hours, so you get there before the parts are gone.',
@@ -3200,12 +3207,18 @@ function openUpgradeSheet(trigger, carKey) {
     // Both platforms have real push now (APNs on iOS, FCM on Android since
     // 1.2) — same honest copy, only the store name differs.
     if (sheetSub) sheetSub.textContent =
-      'A push alert within hours when a car you want lands, so you get '
-      + 'there before the parts are gone. Free gets a Monday recap instead. '
+      'A push alert within hours when a car you want lands, on every watch '
+      + 'and at any distance, so you get there before the parts are gone. '
+      + 'Free pushes one watch within 50 mi and recaps the rest on Monday. '
       + 'Pro also shows what the yard charges vs what the same used part '
       + 'goes for online, and which parts get picked over fast. Finding cars '
       + 'stays free. Subscribe through '
       + (IS_ANDROID ? 'Google Play' : 'the App Store') + '; cancel anytime.';
+    // The apps' free tier has one instant watch, so the web bullet's
+    // "(free gets a Monday recap)" would undersell it here.
+    const li = document.getElementById('tier-alerts-li');
+    if (li) li.innerHTML = '<strong>A push alert within hours on every watch, at any distance</strong> '
+      + '&mdash; plus sale-day alerts (free: one watch within 50&nbsp;mi, the rest on Monday)';
   }
   // A Pro member has nothing to buy or restore here.
   if (IS_NATIVE && isPro()) { const iap = document.getElementById('native-iap'); if (iap) iap.style.display = 'none'; }
@@ -4513,7 +4526,8 @@ function proBoxHtml(line, trigger, arg, cls) {
 function freeDeliveryNote() {
   return hasRecapChannel() ? 'Free: in Alerts and your Monday recap.' : 'Free: new ones show in Alerts.';
 }
-const PRO_PUSH_LINE = 'An alert within hours when one lands';
+// True on the web and in the apps, whose free tier has one instant watch.
+const PRO_PUSH_LINE = 'An alert within hours on every watch';
 const fmtDay = (d) => d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
 /* "You'd have known sooner", free users, one watch hit: only for a car that
  * landed on or after the day the watch was made (cars already on the lot
@@ -4527,6 +4541,12 @@ function recapLineHtml(v, entries) {
   if (!Number.isFinite(since)) return '';
   const sinceDay = new Date(since); sinceDay.setHours(0, 0, 0, 0);
   if (landed < sinceDay) return '';
+  // Apps, free: a car inside the instant watch's 50 mi is pushed, not held
+  // for the recap, so neither the recap date nor "Pro would have" is true.
+  const wl = loadWatchlist(), ii = instantWatchIndex(wl);
+  if (ii >= 0 && inInstantScope(wl[ii], v)) {
+    return `<div class="recap-line"><p>${ICON.bell}<span>Landed ${escapeHtml(fmtDay(landed))} &middot; inside your instant alert.</span></p></div>`;
+  }
   let recap = '';
   if (hasRecapChannel() && landed.getDay() !== RECAP_WEEKDAY) {
     const r = new Date(landed);
@@ -9831,6 +9851,8 @@ function renderAlerts() {
   if (!watchlist.length) {
     wlContainer.innerHTML = '<div class="empty-state"><h3>No vehicles on your watchlist</h3><p>Add a make/model above to start tracking.</p></div>';
   } else {
+    // Free app installs: which watch is the instant one (-1 on web / Pro).
+    const instIdx = instantWatchIndex(watchlist);
     wlContainer.innerHTML = results.map((r, i) => {
       const e = r.entry;
       const label = [e.make, e.model].filter(Boolean).join(' ') || 'Any Vehicle';
@@ -9848,7 +9870,10 @@ function renderAlerts() {
       if (!isPro() && e.addedAt) {
         const setAt = Date.parse(String(e.addedAt).split('~')[0]);
         const dayAgo = Date.now() - 86400000;
-        const missed = r.hits.filter(v => { const d = parseYardDate(v.dateAdded); return d && d.getTime() >= setAt - 86400000 && d.getTime() <= dayAgo; });
+        // The instant watch's own nearby cars are pushed to free users too:
+        // they are no near-miss.
+        const missed = r.hits.filter(v => { const d = parseYardDate(v.dateAdded); return d && d.getTime() >= setAt - 86400000 && d.getTime() <= dayAgo
+          && !(i === instIdx && inInstantScope(e, v)); });
         if (missed.length) {
           const first = missed.map(v => parseYardDate(v.dateAdded)).sort((a, b) => a - b)[0];
           const when = first.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
@@ -9864,11 +9889,18 @@ function renderAlerts() {
       }
       const vpicLabel = (e.driveFilter === '4x4' ? ' &middot; 4WD/AWD only' : e.driveFilter === '2wd' ? ' &middot; 2WD only' : '')
         + (e.trimFilter ? ' &middot; trim &ldquo;' + escapeHtml(e.trimFilter) + '&rdquo;' : '');
-      return `<div class="watchlist-item">
+      // Free instant alert (apps): mark the one, offer the move on the others
+      // that alert at all. A very old watch with no addedAt can't be keyed.
+      const instLine = instIdx < 0 ? ''
+        : i === instIdx ? `<span class="badge badge-new wl-instant">Instant alert, within ${instantRadiusMi(e)} mi</span>`
+        : (i < FREE_WATCH_LIMIT && (e.addedAt || i === 0))
+          ? `<button type="button" class="linklike wl-instant-move" onclick="setInstantWatch(${i})">Make this my instant alert</button>` : '';
+      return `<div class="watchlist-item${i === instIdx ? ' wl-is-instant' : ''}">
         <div class="wl-info">
           <span class="wl-name">${escapeHtml(label)}</span>
           <span class="wl-detail">${yrLabel}${radLabel}${vpicLabel}${e.matchOnly ? ' &middot; Parts only' : ''}</span>
           <span class="wl-count ${hitCount > 0 ? 'has-hits' : 'no-hits'}">${hitCount} in yard now</span>
+          ${instLine}
           ${missLine}
         </div>
         <div style="display:flex;gap:0.5rem;align-items:center;">
@@ -10360,7 +10392,12 @@ function showWatchToast(label, opts = {}) {
     // that a phone can be told the day one lands.
     next = `<span>New ones light up in Alerts. The free iPhone and Android apps can push you the day one lands.</span>`;
   } else if (!isPro()) {
-    next = `<span>Free: a recap every Monday.</span>${proBoxHtml('A push within hours instead', 'watch-toast', '', 'toast-pro')}`;
+    // Apps, free: a new watch is the last in the list; it is the instant one
+    // only when it is also the one instantWatchIndex picks (e.g. the first).
+    const wl = loadWatchlist(), ii = instantWatchIndex(wl);
+    next = ii >= 0 && ii === wl.length - 1
+      ? `<span>Your instant alert: a push within hours for ones within ${instantRadiusMi(wl[ii])}&nbsp;mi. Farther ones come in a Monday recap.</span>${proBoxHtml('Every watch, any distance', 'watch-toast', '', 'toast-pro')}`
+      : `<span>Free: a recap every Monday. You can make it your instant alert in Alerts.</span>${proBoxHtml('A push within hours on every watch', 'watch-toast', '', 'toast-pro')}`;
   }
   el.innerHTML = `<div class="watch-toast-head">${opts.undo || opts.zip ? ICON.bell : ICON.check}<span>${head}</span>
       <button type="button" class="watch-toast-x" data-act="close" aria-label="Dismiss">&times;</button></div>
@@ -11106,8 +11143,9 @@ if (IS_NATIVE || !('Notification' in window)) {
 if (IS_NATIVE) {
   const intro = document.getElementById('alerts-intro-copy');
   if (intro) intro.innerHTML = 'Add vehicles you want to track &mdash; watching is free, '
-    + 'no signup, no email. Free watches get a <strong>weekly recap push</strong>; '
-    + '<strong>push alerts within hours</strong> of a car hitting the yard are Pro.';
+    + 'no signup, no email. Free: <strong>one watch pushes within hours</strong> for cars '
+    + 'within 50&nbsp;mi, the rest come in a <strong>weekly recap push</strong>. '
+    + 'Pro pushes every watch within hours, at any distance.';
 }
 
 document.getElementById('alert-make').addEventListener('change', populateWatchModelOptions);
@@ -11358,8 +11396,9 @@ if (window.YSApi) {
  * degrades to a "can't reach the store" status automatically).
  *
  * Push: official @capacitor/push-notifications plugin + the Worker's
- * anonymous device model (/v1/device/register). Free = weekly recap push,
- * Pro = instant. Watches mirror to the server on every change. The plugin's
+ * anonymous device model (/v1/device/register). Free = weekly recap push
+ * plus one instant watch within 50 mi (FREE INSTANT ALERT below), Pro =
+ * instant on every watch. Watches mirror to the server on every change. The plugin's
  * 'registration' event hands back an APNs token on iOS and an FCM token on
  * Android — the only platform difference below is which field carries it. */
 
@@ -11445,11 +11484,15 @@ async function syncDeviceRegistration(freshToken) {
   const token = freshToken || storedPushToken();
   if (!token) return;   // nothing to sync until push is enabled
   try {
+    const instIdx = instantWatchIndex(loadWatchlist());
     const body = {
       deviceId: deviceId(),
       platform: IS_ANDROID ? 'android' : 'ios',
       tier: isPro() ? 'pro' : 'free',
-      watches: deviceSyncWatches().map((w) => ({
+      watches: deviceSyncWatches().map((w, i) => ({
+        // Free instant alert: exactly one entry carries instant:true (none
+        // for Pro). Same order as loadWatchlist, so the index lines up.
+        ...(i === instIdx ? { instant: true } : {}),
         make: w.make, model: w.model, yearMin: w.yrMin, yearMax: w.yrMax,
         // Rounded to ~1 km: the Worker only needs a radius centre, never
         // the exact GPS fix — and the privacy policy promises as much.
@@ -11485,6 +11528,58 @@ function deviceSyncWatches() {
       radiusMi: Math.min(w.radiusMi || FREE_MAX_RADIUS_MI, FREE_MAX_RADIUS_MI) };
   }).slice(0, FREE_WATCH_LIMIT);
 }
+
+/* ===== FREE INSTANT ALERT (apps only, owner 2026-11-16) =====
+ * A free app install gets ONE watch that pushes within hours, for cars set
+ * out within FREE_INSTANT_RADIUS_MI of its centre (or its own radius when
+ * that is smaller); every other watch, and cars farther out, stay on the
+ * Monday recap. Default: the first watch, so a new user has it with no
+ * setup; one tap in Alerts moves it. The choice is the chosen watch's
+ * addedAt in its own key: stored watches are never edited for it. The
+ * server keeps one flagged watch per install and one install per push
+ * token (backend/src/devices.js), so it is one per phone. Web and Pro: none. */
+const FREE_INSTANT_RADIUS_MI = 50;        // mirrors backend/src/devices.js
+const INSTANT_WATCH_KEY = 'ys_instant_watch';
+function freeInstantOn() { return IS_NATIVE && !isPro(); }
+/** Index of the instant watch in `list`, or -1 (web, Pro, no watches). Only
+ * the first FREE_WATCH_LIMIT watches alert at all, so only they qualify. */
+function instantWatchIndex(list) {
+  if (!freeInstantOn() || !list || !list.length) return -1;
+  let key = null;
+  try { key = localStorage.getItem(INSTANT_WATCH_KEY); } catch (e) { key = null; }
+  const n = Math.min(list.length, FREE_WATCH_LIMIT);
+  if (key) for (let i = 0; i < n; i++) if (list[i].addedAt === key) return i;
+  return 0;
+}
+/** Miles the instant push covers for this watch (legacy watches with no
+ * radius follow the zip at the free cap, so they get the full 50). */
+function instantRadiusMi(e) {
+  return Math.min((e && e.radiusMi) || FREE_INSTANT_RADIUS_MI, FREE_INSTANT_RADIUS_MI);
+}
+/** True when the instant watch would push this car: it matches the watch and
+ * sits within instantRadiusMi of the centre the server gets (the watch's own,
+ * else the zip, as deviceSyncWatches sends it). */
+function inInstantScope(e, v) {
+  if (!e || !v || !watchlistMatches(e, v)) return false;
+  const c = (e.lat != null && e.lng != null) ? e : activeZipCoords;
+  if (!c || v.lat == null || v.lng == null) return false;
+  return haversineMiles(c.lat, c.lng, v.lat, v.lng) <= instantRadiusMi(e);
+}
+/** One tap in Alerts: make watch i the instant one. A watch without addedAt
+ * (very old) can only be chosen when it is first (= the default). */
+function setInstantWatch(i) {
+  const list = loadWatchlist();
+  const e = list[i];
+  if (!freeInstantOn() || !e || i >= FREE_WATCH_LIMIT) return;
+  try {
+    if (e.addedAt) localStorage.setItem(INSTANT_WATCH_KEY, e.addedAt);
+    else if (i === 0) localStorage.removeItem(INSTANT_WATCH_KEY);
+    else return;
+  } catch (err) { return; }
+  renderAlerts();
+  syncDeviceRegistration();
+}
+window.setInstantWatch = setInstantWatch;
 
 /* ===== UPDATE CHECK (native, 2026-10-29) =====
  * Owner: friends had to find YardScout in the store again to update. The
@@ -11663,7 +11758,7 @@ function maybeAskForReview(reason) {
     btn.style.display = 'none';
     if (status) status.textContent = isPro()
       ? 'Push is on — you\u2019ll hear within hours of a watched car landing.'
-      : 'Push is on — your weekly recap arrives Monday morning.';
+      : 'Push is on — your instant alert pushes within hours; the rest come in your Monday recap.';
   });
   PN.addListener('registrationError', (e) => {
     if (status) status.textContent = 'Could not register for push — try again later.';

@@ -454,6 +454,13 @@
     <div class="info-box" style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
       <div style="flex:1 1 15em;min-width:0;">
         <h3 style="margin:0 0 0.25rem;">Vehicle watchlist</h3>
+        <!-- HELD until the app release with the free instant alert is live in both
+             stores (hub, 2026-11-16): the website must not promise what the store
+             versions do not do yet. At that point replace this paragraph's text with:
+             "Add vehicles you want to track (em dash) watching is free, no signup. Matches
+             light up right here. In the iOS and Android apps, free gets one watch pushed
+             within hours (cars within 50 mi) and a weekly recap push for the rest; Pro
+             pushes every watch, at any distance." The apps set their own text in app.js. -->
         <p style="margin:0;" id="alerts-intro-copy">Add vehicles you want to track &mdash; watching is free, no signup. Matches light up right here, and in the iOS and Android apps free watches get a <strong>weekly recap push</strong>; <strong>push alerts within hours</strong> of a car hitting the yard are a Pro feature.</p>
       </div>
       <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
@@ -608,22 +615,28 @@
     <div class="panel" id="native-alerts-note" style="display:none;">
       <h4>Push alerts</h4>
       <p style="font-size:0.8125rem;color:var(--text-dim);line-height:1.6;margin:0.4rem 0 0.8rem;">
-        Free members get a <strong>weekly recap push</strong> &mdash; every watched car that
-        arrived this week, plus upcoming sale days near you. <strong>Pro</strong> gets a push
-        within hours of a watched car hitting any yard, including sale-day alerts. No email, no account.
+        Free members get <strong>one instant alert</strong>: a push within hours for cars within
+        50&nbsp;mi of one watch (marked in your list). Everything else comes in a
+        <strong>weekly recap push</strong> &mdash; every watched car that arrived this week, plus
+        upcoming sale days near you. <strong>Pro</strong> gets a push within hours on every watch,
+        at any distance, including sale-day alerts. No email, no account.
         Pull-sheet alerts (Pro) &mdash; a push when a car on your pull sheet leaves the yard or passes its typical stay.
       </p>
       <div style="display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center;">
         <button type="button" id="native-push-enable" class="btn btn-primary">Enable push notifications</button>
         <span id="native-push-status" style="font-size:0.8125rem;color:var(--text-dim);"></span>
       </div>
-      <button type="button" id="alerts-push-pro" class="pro-box" onclick="openUpgradeSheet('alerts-push')"><span class="pro-badge">Pro</span><span class="pro-box-line">An alert within hours of a car landing</span><span class="pro-box-chev" aria-hidden="true">&rsaquo;</span></button>
+      <button type="button" id="alerts-push-pro" class="pro-box" onclick="openUpgradeSheet('alerts-push')"><span class="pro-badge">Pro</span><span class="pro-box-line">An alert within hours on every watch</span><span class="pro-box-chev" aria-hidden="true">&rsaquo;</span></button>
     </div>
 
     <div class="panel" id="appstore-alerts-panel">
       <h4>Push alerts</h4>
       <p style="font-size: 0.8125rem;color:var(--text-dim);line-height:1.6;margin:0.4rem 0 0.8rem;">
         Real push notifications live in the <strong>YardScout app</strong> for iPhone and Android &mdash;
+        <!-- HELD with the paragraph above (same reason). At release replace the next
+             three lines with: "free members get one watch pushed within hours (cars
+             within 50 mi) and a weekly recap of the rest, and Pro gets a push within
+             hours on every watch, at any distance, even when the app is closed." -->
         free members get a weekly recap of every watched car that arrived, and
         <strong>Pro</strong> gets a push within hours of a watched car hitting any yard,
         even when the app is closed. Your watchlist works right here on the web too;
