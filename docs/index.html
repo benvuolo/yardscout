@@ -268,6 +268,10 @@
         <button class="btn btn-primary" id="live-refresh-btn" title="How to refresh data"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36M21 3v6h-6"/></svg> Refresh data</button>
       </div>
     </div>
+    <!-- Cars feed chips (2026-11-16): All, New, This week, top makes; a
+         chosen make shows its models. Same state as Filters and the search
+         box. This row may scroll sideways; nothing else does. -->
+    <div class="feed-chips" id="feed-chips" role="group" aria-label="Narrow the list" data-hscroll hidden></div>
     <div class="car-grid" id="live-grid">
       <div class="skel-note" style="grid-column:1/-1;">Loading live inventory&hellip;</div>
       <div class="skel-card"><div class="skeleton skel-line w60"></div><div class="skeleton skel-line w40"></div><div class="skeleton skel-line w80"></div><div class="skeleton skel-line w30"></div></div>

@@ -10,7 +10,9 @@
  *   - a computed text-overflow: ellipsis, or -webkit-line-clamp, anywhere
  *   - text clipped by an ancestor with overflow hidden/clip/auto/scroll
  *     (vertical scrolling of a sheet or page is allowed; horizontal is not)
- *   - text past the viewport edge, or a page that scrolls sideways
+ *   - text past the viewport edge, or a page that scrolls sideways (one
+ *     exception: a row marked data-hscroll, the Cars chips, may scroll
+ *     sideways inside the screen; each chip in it still has to fit whole)
  *   - an input whose value or placeholder is wider than the field, or a
  *     select whose choice cannot fit even wrapped (its longest word)
  *   - a tap target smaller than 44x44 CSS px (inline links in a sentence
@@ -212,13 +214,19 @@ const CHECK_FN = () => {
       const r = a.getBoundingClientRect();
       const bl = parseFloat(cs.borderLeftWidth), br = parseFloat(cs.borderRightWidth), bt = parseFloat(cs.borderTopWidth), bb = parseFloat(cs.borderBottomWidth);
       const box = { left: r.left + bl, right: r.right - br, top: r.top + bt, bottom: r.bottom - bb };
+      // A row marked data-hscroll (the Cars chips, 2026-11-16) may scroll
+      // sideways: text outside it is scrolled out of view, not cut.
+      const hscroll = a.hasAttribute('data-hscroll') && (ox === 'auto' || ox === 'scroll');
+      if (hscroll && (tr.left < box.left - 1 || tr.right > box.right + 1)) break;
       if (ox !== 'visible' && (tr.left < box.left - 1 || tr.right > box.right + 1)) { add('clipped-x', el, text, `by ${desc(a)} (${ox})`); break; }
       const outY = tr.top < box.top - 1 || tr.bottom > box.bottom + 1;
       if ((oy === 'auto' || oy === 'scroll') && outY) break;   // scrolled out of view, not clipped
       if ((oy === 'hidden' || oy === 'clip') && outY) { add('clipped-y', el, text, `by ${desc(a)}`); break; }
     }
     // (c) past the viewport edge
-    if (tr.right > W + 1 || tr.left < -1) add('offscreen-x', el, text, `${Math.round(tr.left)}..${Math.round(tr.right)} of ${W}`);
+    const hs = el.closest('[data-hscroll]');
+    const hsOk = hs && /auto|scroll/.test(CS(hs).overflowX) && hs.getBoundingClientRect().right <= W + 1 && hs.getBoundingClientRect().left >= -1;
+    if ((tr.right > W + 1 || tr.left < -1) && !hsOk) add('offscreen-x', el, text, `${Math.round(tr.left)}..${Math.round(tr.right)} of ${W}`);
     // (d) contrast
     // WCAG 1.4.3 exempts logotypes: the stencil wordmark keeps its brand orange.
     if (!blurred(el) && !disabled(el) && !el.closest('header h1')) {

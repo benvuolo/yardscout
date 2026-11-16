@@ -90,11 +90,14 @@ const ANALYTICS_OFF = analyticsOff(location.hostname, navigator.webdriver, IS_NA
  * changed, a part search once per distinct search, a paywall open only for
  * someone who is not Pro, and the apps report again. 3 (2026-11-13) = also
  * counts how the Cars list is narrowed (trackNarrow). 4 (2026-11-13, later) = also
- * counts how each checkout attempt ends (checkoutBegin / checkoutEnd). The
- * API notes the first day each platform sends v2 / v3 / v4, so the daily
+ * counts how each checkout attempt ends (checkoutBegin / checkoutEnd). 5
+ * (2026-11-16, Cars feed) = the Cars chips count as narrow/chip, and
+ * 'email-asked' also counts the Monday-email field in the watch strip (once
+ * per visit), not only the one in the watch toast. The
+ * API notes the first day each platform sends v2 / v3 / v4 / v5, so the daily
  * email can say which numbers predate them. Still no ids: one anonymous +1
  * per event. */
-const EVENTS_V = 4;
+const EVENTS_V = 5;
 function sendEvent(e) {
   if (ANALYTICS_OFF) return;
   const body = JSON.stringify({ e, src: ATTRIB ? ATTRIB.src : '', cmp: ATTRIB ? ATTRIB.cmp : '', med: ATTRIB ? ATTRIB.med : '',
@@ -155,11 +158,14 @@ function paywallIsProspect(trigger, pro) {
  *                  page going to the background)
  *   trim           the Filters Trim control set to a trim
  *   link           a #cars= link opened
+ *   chip           a make or model chip above the Cars grid picked (feed,
+ *                  2026-11-16; counting rules v5). All / New / This week
+ *                  and clearing a chip count nothing.
  * Each kind counts at most once per device per UTC day, decided here: the
  * day each kind last counted is kept in this browser's own storage
  * (ys_narrow) and never sent. The search box showing what Filters or a link
  * set is not a pick; a week chip is none of these. */
-const NARROW_KINDS = ['search', 'search-trim', 'filters-model', 'filters-make', 'trim', 'link'];
+const NARROW_KINDS = ['search', 'search-trim', 'filters-model', 'filters-make', 'trim', 'link', 'chip'];
 const _narrowMem = {};
 let _narrowMakePending = false;   // a Filters make waiting to see if a model follows
 function narrowDayIsNew(seen, kind, day) {
@@ -4124,6 +4130,7 @@ function getFilteredLive() {
     if (locationFilter && v.location !== locationFilter) return false;
     if (!locationFilter && yardDormant(v.location)) return false;  // dormant yards: only when picked
     if (liveWeekOnly && !isNew(v.dateAdded)) return false;
+    if (liveNewOnly && !setOutRecent(v, 2)) return false;
     if (activeZipCoords && radiusMi) {
       const d = vehicleDistanceMi(v);
       if (d == null || d > radiusMi) return false;
@@ -4686,6 +4693,93 @@ function feedSummaryRender(n, nNew, nearLabel) {
   if (liveScrapedAt || n != null) parts.push(`<span class="fs-upd" title="Last scan: ${escapeHtml(scrapedTitle())} — automatic, about every 4 hours">updated ${escapeHtml(scrapeAgoLabel())}</span>`);
   el.innerHTML = parts.length ? `<p class="feed-sum">${parts.join('<span class="fs-dot" aria-hidden="true"> &middot; </span>')}</p>` : '';
 }
+/* Chips above the grid: All, New (set out today or yesterday), This week
+ * (liveWeekOnly, the in-app twin of /landed), then the makes with the most
+ * cars in range; with a make chosen, that make's models. They set the very
+ * state Filters and the search box set (the Make select and selectedModels,
+ * through carSearchSetFilter), and they are redrawn from that state on every
+ * render, so all three always agree. A make or model chip counts as
+ * narrow/chip (trackNarrow); All, New and This week count nothing, like the
+ * old week chips. Counts on chips are Pro, as in the Make and Model lists. */
+let liveNewOnly = false;           // "New": set out in the last 2 days
+let liveSinceOnly = false;         // only the cars set out since the last visit (item 7)
+const FEED_TOP_MAKES = 10;
+function setOutRecent(v, days) {
+  const d = parseYardDate(v.dateAdded);
+  if (!d) return false;
+  const start = new Date(); start.setHours(0, 0, 0, 0); start.setDate(start.getDate() - (days - 1));
+  return d >= start;
+}
+function feedChipsRender(show) {
+  const box = document.getElementById('feed-chips');
+  if (!box) return;
+  if (!show) { box.hidden = true; box.innerHTML = ''; return; }
+  const make = document.getElementById('live-filter-make').value;
+  const pro = isPro();
+  const counts = new Map();
+  for (const v of _scopedVehicles) {
+    if (make ? v.make !== make : (!v.make || JUNK_MAKES.has(v.make.toLowerCase()))) continue;
+    const k = make ? (v.model && !isNoPickModel(v.make, v.model) ? canonicalModel(v.make, v.model) : '') : v.make;
+    if (k) counts.set(k, (counts.get(k) || 0) + 1);
+  }
+  const n = (k) => (pro && counts.has(k) ? ` <span class="chip-n">${counts.get(k).toLocaleString()}</span>` : '');
+  const chip = (attrs, label, on, cls) => `<button type="button" class="fchip${cls ? ' ' + cls : ''}${on ? ' on' : ''}" aria-pressed="${on}" ${attrs}>${label}</button>`;
+  const all = !make && !liveNewOnly && !liveWeekOnly && !liveSinceOnly;
+  let html = chip('data-chip="all"', 'All', all) + chip('data-chip="new"', 'New', liveNewOnly) + chip('data-chip="week"', 'This week', liveWeekOnly);
+  const ranked = [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+  if (make) {
+    html += chip(`data-chip="make" data-make="${escapeHtml(make)}" aria-label="${escapeHtml(make)}: show all makes again"`, `${escapeHtml(make)} <span class="fchip-x" aria-hidden="true">&times;</span>`, true, 'fchip-make');
+    html += ranked.map(([m]) => chip(`data-chip="model" data-make="${escapeHtml(make)}" data-model="${escapeHtml(m)}"`, escapeHtml(m) + n(m), selectedModels.has(m))).join('');
+  } else {
+    html += ranked.slice(0, FEED_TOP_MAKES).map(([m]) => chip(`data-chip="make" data-make="${escapeHtml(m)}"`, escapeHtml(m) + n(m), false)).join('');
+  }
+  box.innerHTML = html;
+  box.hidden = false;
+}
+/* Back to every make, the way the search box's clear does it (a tagged
+ * change: not a Filters choice). */
+function feedClearMake(route) {
+  const sel = document.getElementById('live-filter-make');
+  if (!sel.value && !selectedModels.size) return false;
+  sel.value = '';
+  sel.dispatchEvent(new CustomEvent('change', { detail: { route } }));
+  return true;
+}
+document.getElementById('feed-chips').addEventListener('click', (e) => {
+  const c = e.target.closest('.fchip[data-chip]');
+  if (!c) return;
+  const kind = c.dataset.chip;
+  if (kind === 'all') {
+    liveNewOnly = false; liveWeekOnly = false; liveSinceOnly = false;
+    if (!feedClearMake('chip')) renderLive();
+  } else if (kind === 'new' || kind === 'week') {
+    const on = c.getAttribute('aria-pressed') !== 'true';
+    liveNewOnly = kind === 'new' && on;
+    liveWeekOnly = kind === 'week' && on;
+    if (on) liveSinceOnly = false;
+    renderLive();
+  } else if (kind === 'make') {
+    if (c.getAttribute('aria-pressed') === 'true') { feedClearMake('chip'); return; }
+    if (!carSearchSetFilter(c.dataset.make, '')) return;
+    narrowRouteTaken();
+    trackNarrow('chip');
+    renderLive();
+  } else if (kind === 'model') {
+    const only = selectedModels.size === 1 && selectedModels.has(c.dataset.model);
+    if (!carSearchSetFilter(c.dataset.make, only ? '' : c.dataset.model)) return;
+    narrowRouteTaken();
+    if (!only) trackNarrow('chip');
+    renderLive();
+  }
+  // After the redraw: a chosen make leads the row, so its models are in view;
+  // a chosen model stays in view.
+  const box = document.getElementById('feed-chips');
+  const lead = kind === 'model' ? box.querySelector(`.fchip[data-chip="model"][data-model="${CSS.escape(c.dataset.model)}"]`) : box.querySelector('.fchip-make');
+  if (lead) {
+    const dx = lead.getBoundingClientRect().left - box.getBoundingClientRect().left - 16;
+    if (kind !== 'model' || dx < 0 || lead.getBoundingClientRect().right > box.getBoundingClientRect().right) box.scrollLeft += dx;
+  } else box.scrollLeft = 0;
+});
 /* Car screen, under everything: up to six more of the same make and model
  * inside the search distance, newest set-out first (the same scope the
  * Make and Model lists use). None: no heading at all. */
@@ -4728,8 +4822,9 @@ function carTileHtml(v, sampleKey) {
   const sampleBadge = sampleKey && key === sampleKey && !isPro() ? '<span class="badge badge-sample" title="This car shows everything Pro shows: tap it">Free Pro look</span>' : '';
   const badges = [statusBadge, notableTrimBadgeHtml(v), manualBadge, sampleBadge].filter(Boolean).join(' ');
   const d = vehicleDistanceMi(v);
-  const when = [dateStr ? `Set out ${dateStr}` : 'Set-out date unknown',
-    v.row ? `Row ${escapeHtml(String(v.row))}` : 'No row yet'].join(' &middot; ');
+  // Where in the yard goes with the yard: "Pick-n-Pull - Fremont · 12 mi · Row 31".
+  const when = dateStr ? `Set out ${dateStr}` : 'Set-out date unknown';
+  const row = v.row ? `Row ${escapeHtml(String(v.row))}` : 'No row yet';
   // The photo opens the car screen from a tile (the capture handler below);
   // keyboard focus goes to the tile's own button, not to the picture.
   const photo = cardPhotoHtml(v, key).replace('<button type="button" class="photo-box', '<button type="button" tabindex="-1" class="photo-box');
@@ -4742,7 +4837,7 @@ function carTileHtml(v, sampleKey) {
         </div>
         <button type="button" class="car-open tile-open" data-vkey="${k}">
           <span class="tile-name car-name">${escapeHtml(`${v.year} ${v.make} ${v.model}`)}</span>
-          <span class="tile-where">${escapeHtml(v.location)}${d != null ? ` &middot; <span class="dist">${Math.round(d)} mi</span>` : ''}${saleBadgeHtml(v.location)}</span>
+          <span class="tile-where">${escapeHtml(v.location)}${d != null ? ` &middot; <span class="dist">${Math.round(d)} mi</span>` : ''} &middot; <span class="tile-row">${row}</span>${saleBadgeHtml(v.location)}</span>
           <span class="tile-when">${badges ? `<span class="tile-badges">${badges}</span> ` : ''}${when}</span>
         </button>
       </article>`;
@@ -4780,6 +4875,7 @@ function renderLive() {
   // view, new this week, updated. It wraps, never scrolls sideways, so
   // "Updated" stays visible at every width (owner request 2026-10-24).
   feedSummaryRender(vehicles.length, newThisWeek, nearLabel);
+  feedChipsRender(!focusedCarKey && !!(activeZipCoords || isPro()));
 
   // Shared-link landing: focused single-car view, or an honest message when
   // the shared car has left the inventory.
@@ -4868,21 +4964,10 @@ function renderLive() {
       <span>This week at <strong>${escapeHtml(weekYard)}</strong> &mdash; ${nCars} set out in the last 7 days.</span>
       <button type="button" class="btn" onclick="jhClearWeek()">All cars at this yard</button>
     </div>`;
-  } else if (liveWeekOnly) {
-    // In-app twin of the public /landed page: everything set out in the
-    // last 7 days inside your radius, with the top makes as one-tap chips.
-    const curMake = document.getElementById('live-filter-make').value;
-    const byMake = new Map();
-    for (const v of vehicles) byMake.set(v.make, (byMake.get(v.make) || 0) + 1);
-    const chips = curMake ? '' : [...byMake.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8)
-      .map(([mk, n]) => `<button type="button" class="chip week-make-chip" data-make="${escapeHtml(mk)}">${escapeHtml(mk)} <span class="chip-n">${n}</span></button>`).join('');
-    weekBanner = `
-    <div class="focus-banner week-banner" style="grid-column:1/-1;">
-      <span>Set out this week near you${curMake ? ` &middot; <strong>${escapeHtml(curMake)}</strong>` : ''} &mdash; ${nCars} in the last 7 days.</span>
-      <button type="button" class="btn" onclick="jhClearWeek()">All cars</button>
-      ${chips ? `<div class="week-chips">${chips}</div>` : ''}
-    </div>`;
   }
+  // In-app twin of the public /landed page (everything set out in the last
+  // 7 days inside your radius) is the "This week" chip now: the chip row
+  // shows it pressed and the makes beside it, the summary line the count.
   lastSampleKey = sampleKey;
   updateZipChip();
   // Tiles (CARS FEED): everything else a card held is on the car screen.
