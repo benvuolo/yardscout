@@ -4131,6 +4131,7 @@ function getFilteredLive() {
     if (!locationFilter && yardDormant(v.location)) return false;  // dormant yards: only when picked
     if (liveWeekOnly && !isNew(v.dateAdded)) return false;
     if (liveNewOnly && !setOutRecent(v, 2)) return false;
+    if (liveSinceOnly && !setOutSince(v, FEED_SINCE_DAY)) return false;
     if (activeZipCoords && radiusMi) {
       const d = vehicleDistanceMi(v);
       if (d == null || d > radiusMi) return false;
@@ -4978,11 +4979,75 @@ function renderLive() {
   // the page never jumps back from where someone had scrolled to.
   const sig = feedSignature(vehicles);
   const keep = sig === _feed.sig ? _feed.shown : 0;
-  _feed = { sig, list: vehiclesToRender, total: vehicles.length, sampleKey, shown: Math.min(vehiclesToRender.length, Math.max(FEED_BATCH, keep)) };
-  document.getElementById('live-grid').innerHTML = focusBanner + weekBanner + watchStripHtml(vehicles.length)
+  const since = feedSinceInfo(vehicles);
+  _feed = { sig, list: vehiclesToRender, total: vehicles.length, sampleKey, dividerAt: since.dividerAt,
+    shown: Math.min(vehiclesToRender.length, Math.max(FEED_BATCH, keep)) };
+  document.getElementById('live-grid').innerHTML = focusBanner + weekBanner + since.html + watchStripHtml(vehicles.length)
     + feedTilesHtml(0, _feed.shown) + feedTailHtml();
   feedObserve();
 }
+
+/* ---- A reason to come back (CARS FEED item 7) ----
+ * On a visit on a later day: "N set out near you since your last visit
+ * (Nov 12)" above the grid, one tap to list just those, and a divider in
+ * the newest-first list where they end. Yards publish a set-out DAY, not a
+ * time, so only cars whose set-out day is after the last visit's day count
+ * (a car set out on that same day may already have been seen); cars with no
+ * date never count. The last visit day lives in this browser only
+ * (localStorage ys_last_visit_day, a local YYYY-MM-DD, never sent); the day
+ * compared against is fixed when the visit starts and held for the session
+ * (sessionStorage ys_since_day), so a reload does not make the line vanish. */
+function localDayStr(d) {
+  const x = d || new Date();
+  return `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, '0')}-${String(x.getDate()).padStart(2, '0')}`;
+}
+const FEED_SINCE_DAY = (() => {
+  try {
+    const held = sessionStorage.getItem('ys_since_day');
+    if (held !== null) return /^\d{4}-\d{2}-\d{2}$/.test(held) ? held : null;
+  } catch (e) { /* private mode: decide below, memory only */ }
+  let prev = null;
+  try { prev = localStorage.getItem('ys_last_visit_day'); } catch (e) { prev = null; }
+  const today = localDayStr();
+  const since = prev && /^\d{4}-\d{2}-\d{2}$/.test(prev) && prev < today ? prev : null;
+  try { localStorage.setItem('ys_last_visit_day', today); } catch (e) { /* private mode */ }
+  try { sessionStorage.setItem('ys_since_day', since || ''); } catch (e) { /* private mode */ }
+  return since;
+})();
+function setOutSince(v, day) {
+  const d = parseYardDate(v.dateAdded);
+  return !!(d && day && localDayStr(d) > day);
+}
+function sinceDayLabel(day) {
+  const [y, m, d] = day.split('-').map(Number);
+  const dt = new Date(y, m - 1, d);
+  return dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric', ...(y !== new Date().getFullYear() ? { year: 'numeric' } : {}) });
+}
+/* The line over the grid, and where the divider goes in the list. */
+function feedSinceInfo(vehicles) {
+  if (!FEED_SINCE_DAY || focusedCarKey || (!activeZipCoords && !isPro())) return { html: '', dividerAt: -1, n: 0 };
+  const n = liveSinceOnly ? vehicles.length : vehicles.reduce((k, v) => k + (setOutSince(v, FEED_SINCE_DAY) ? 1 : 0), 0);
+  if (!n && !liveSinceOnly) return { html: '', dividerAt: -1, n: 0 };
+  const near = activeZipCoords ? ' near you' : '';
+  const when = escapeHtml(sinceDayLabel(FEED_SINCE_DAY));
+  const html = liveSinceOnly
+    ? `<div class="since-line on" style="grid-column:1/-1;"><p>Showing the <b>${n.toLocaleString()}</b> ${n === 1 ? 'car' : 'cars'} set out${near} since your last visit (${when}).</p><button type="button" class="btn btn-quiet since-all">Show all cars</button></div>`
+    : `<div class="since-line" style="grid-column:1/-1;"><p><b>${n.toLocaleString()}</b> set out${near} since your last visit (${when}).</p><button type="button" class="btn btn-primary since-show">Show just ${n === 1 ? 'that one' : 'those'}</button></div>`;
+  // The divider: only in the newest-first list, where the new ones lead.
+  const sort = document.getElementById('live-sort').value;
+  const dividerAt = !liveSinceOnly && sort === 'date-desc' && n < vehicles.length ? n : -1;
+  return { html, dividerAt, n };
+}
+document.getElementById('live-grid').addEventListener('click', (e) => {
+  const show = e.target.closest('.since-show'), all = e.target.closest('.since-all');
+  if (!show && !all) return;
+  e.preventDefault();
+  liveSinceOnly = !!show;
+  if (show) { liveNewOnly = false; liveWeekOnly = false; }
+  renderLive();
+  const g = document.getElementById('feed-chips');
+  if (g && g.getBoundingClientRect().top < 0) g.scrollIntoView({ block: 'start' });
+});
 
 /* ---- Endless scroll (CARS FEED item 6) ---- */
 const FEED_BATCH = 40;     // tiles per batch
@@ -4998,7 +5063,12 @@ function feedSignature(vehicles) {
 }
 function feedTilesHtml(from, to) {
   let html = '';
-  for (let i = from; i < to && i < _feed.list.length; i++) html += carTileHtml(_feed.list[i], _feed.sampleKey);
+  for (let i = from; i < to && i < _feed.list.length; i++) {
+    if (i === _feed.dividerAt && FEED_SINCE_DAY) {
+      html += `<div class="feed-divider" role="separator" style="grid-column:1/-1;"><span>Set out before your last visit (${escapeHtml(sinceDayLabel(FEED_SINCE_DAY))})</span></div>`;
+    }
+    html += carTileHtml(_feed.list[i], _feed.sampleKey);
+  }
   return html;
 }
 function feedTailHtml() {
