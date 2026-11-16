@@ -5151,11 +5151,16 @@ function setOutShort(v) {
 function carTileHtml(v, sampleKey) {
   const key = vehicleKey(v), k = escapeHtml(key);
   const dateStr = setOutShort(v);
-  const { leavingSoon } = carLotClock(v);
+  const { leavingSoon, longListed, daysOn } = carLotClock(v);
+  // Listed far past the typical stay (the yard's list may have fallen
+  // behind): the tile says so in a few words; the car screen carries the
+  // whole notice ("... call before going for this one").
   const statusBadge = isNew(v.dateAdded)
     ? '<span class="badge badge-new">New</span>'
     : leavingSoon
     ? '<span class="badge badge-soon" title="This car has been on the lot longer than ~80% of the historical average — yards rotate stock, so it may not be there much longer. An estimate, not a schedule.">Leaving soon</span>'
+    : longListed
+    ? `<span class="badge badge-long" title="Listed ${daysOn.toLocaleString()} days, longer than usual here. Yards’ lists can fall behind; call before going for this one.">Listed ${daysOn.toLocaleString()} days</span>`
     : '';
   const manualBadge = isConfirmedManual(v) ? `<span class="badge badge-manual" title="${escapeHtml(manualSourceInfo(v).tip)}">Manual</span>` : '';
   const sampleBadge = sampleKey && key === sampleKey && !isPro() ? '<span class="badge badge-sample" title="This car shows everything Pro shows: tap it">Free Pro look</span>' : '';
@@ -5177,7 +5182,7 @@ function carTileHtml(v, sampleKey) {
         <button type="button" class="car-open tile-open" data-vkey="${k}">
           <span class="tile-name car-name">${escapeHtml(`${v.year} ${v.make} ${v.model}`)}</span>
           <span class="tile-where">${escapeHtml(v.location)}${d != null ? ` &middot; <span class="dist">${Math.round(d)} mi</span>` : ''} &middot; <span class="tile-row">${row}</span>${saleBadgeHtml(v.location)}</span>
-          <span class="tile-when">${badges ? `<span class="tile-badges">${badges}</span> ` : ''}${when}</span>
+          <span class="tile-when">${badges ? `<span class="tile-badges">${badges}</span> ` : ''}<span class="tile-date">${when}</span></span>
         </button>
       </article>`;
 }

@@ -1006,9 +1006,12 @@ const SCREENS = [
       v.dateAdded = d.toISOString().slice(0, 10);
       renderLive();
       const c2 = document.querySelector(`#live-grid .car-card[data-vkey="${CSS.escape(vehicleKey(v))}"]`);
-      if (!c2 || !c2.querySelector('.long-listed')) throw new Error('no notice on the card');
-      if (c2.querySelector('.stay-meter')) throw new Error('overfull bar still on the card');
-      if (!/Listed \d+ days, longer than usual here/.test(c2.textContent)) throw new Error('notice wording');
+      // A tile (Cars feed) says it in a few words, "Listed N days", with the
+      // whole notice as its tooltip; the car screen carries the whole notice.
+      const chip = c2 && c2.querySelector('.badge-long');
+      if (!chip) throw new Error('no notice on the card');
+      if (c2.querySelector('.stay-meter') || c2.querySelector('.badge-new') || c2.querySelector('.badge-soon')) throw new Error('overfull bar, New or Leaving soon still on the card');
+      if (!/^Listed [\d,]+ days$/.test(chip.textContent) || !/Listed [\d,]+ days, longer than usual here\. Yards\u2019 lists can fall behind; call before going for this one\./.test(chip.title)) throw new Error('notice wording: ' + chip.textContent + ' | ' + chip.title);
       if (detail) {
         openCarDetail(vehicleKey(v));
         const b = document.getElementById('car-detail-body');
@@ -1245,8 +1248,11 @@ const SCREENS = [
     await tab(page, 'live');
     await page.evaluate(() => {
       const keys = [...document.querySelectorAll('#live-grid .car-card[data-vkey]')].map(c => c.dataset.vkey);
-      const k = keys.find(k => { const v = liveInventory.find(x => vehicleKey(x) === k); const l = v && lifespanFor(v); return l && l.basis === 'model-here'; });
-      if (!k) throw new Error('no car with model-here lifespan in view');
+      let k = keys.find(k => { const v = liveInventory.find(x => vehicleKey(x) === k); const l = v && lifespanFor(v); return l && l.basis === 'model-here'; });
+      // Tiles come 40 at a time (Cars feed), and Pro sorts by value first:
+      // look past the first batch, in the list the grid is drawn from.
+      if (!k) { const v = getFilteredLive().find(x => { const l = lifespanFor(x); return l && l.basis === 'model-here'; }); k = v ? vehicleKey(v) : null; }
+      if (!k) throw new Error('no car with model-here lifespan in the list');
       openCarDetail(k);
     });
     await settle(page, 400);

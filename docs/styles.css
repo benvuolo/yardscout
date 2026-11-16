@@ -3632,6 +3632,12 @@ select { white-space: normal; height: auto; }
 .tile-badges .badge { display: inline-block; margin: 0 2px 0 0; padding: 1px 5px; line-height: 1.25; vertical-align: 1px; overflow-wrap: anywhere; max-width: 100%; }
 .tile-row { font-weight: 700; color: var(--text); }
 .badge-sample { background: var(--accent-soft); color: var(--text); border: 1px solid var(--accent); text-transform: none; letter-spacing: 0.02em; }
+/* "Set out Nov 15" moves to the next line whole when it does not fit beside
+   the badges (it broke after "Set"); in a very narrow tile it still wraps. */
+.tile-date { display: inline-block; max-width: 100%; }
+/* A tile for a car listed far past the typical stay: a quiet, neutral chip
+   ("Listed 212 days"). The whole notice is on the car screen (.long-listed). */
+.badge-long { background: var(--surface2); color: var(--text); border: 1px solid var(--border-strong, var(--border)); text-transform: none; letter-spacing: 0.02em; }
 @media (min-width: 560px) { .car-tile .tile-name { font-size: 1rem; } .tile-where, .tile-when { font-size: var(--t-sm); } }
 /* The summary line that replaced the three stat tiles: wraps, never scrolls
    sideways, so "updated" is always on screen. */
