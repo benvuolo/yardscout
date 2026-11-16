@@ -49,6 +49,16 @@ try {
           });
           await page.goto(BASE + '?appbanner=' + plat, { waitUntil: 'domcontentloaded' });
           await page.waitForSelector('#live-grid .car-card', { timeout: 120000 }).catch(() => {});
+          // Cars feed (2026-11-16): on a first day the banner waits until the
+          // visitor scrolls past the third row of tiles (or 30 s).
+          await page.waitForTimeout(300);
+          ok(await page.evaluate(() => getComputedStyle(document.getElementById('app-promo')).display === 'none'), `${cfg}: banner over the first screen of cars on a first visit`);
+          await page.evaluate(() => {
+            const g = document.getElementById('live-grid'), cols = getComputedStyle(g).gridTemplateColumns.split(' ').filter(Boolean).length;
+            const t = g.querySelectorAll(':scope > .car-tile')[3 * cols - 1];
+            window.scrollTo(0, window.scrollY + t.getBoundingClientRect().bottom + 20);
+          });
+          await page.waitForTimeout(300);
           if (big) await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
           await page.waitForTimeout(300);
           const m = await page.evaluate(() => {
@@ -78,7 +88,8 @@ try {
             ok(await page.evaluate(() => getComputedStyle(document.getElementById('app-promo')).display === 'none'), `${cfg}: dismissed banner came back without the test hook`);
           }
           if (!big && theme === 'dark' && width === 320) {
-            await page.evaluate(() => localStorage.removeItem('ys_app_promo'));
+            // A returning visitor (first day earlier): the banner shows at once, as before.
+            await page.evaluate(() => { localStorage.removeItem('ys_app_promo'); localStorage.setItem('ys_first_day', 'Sun Nov 01 2026'); });
             await page.goto(BASE, { waitUntil: 'domcontentloaded' });
             await page.waitForTimeout(500);
             ok(await page.evaluate(() => getComputedStyle(document.getElementById('app-promo')).display !== 'none'), `${cfg}: a phone visit without the hook shows no banner`);

@@ -4988,6 +4988,7 @@ function renderLive() {
     + feedTilesHtml(0, _feed.shown) + feedTailHtml();
   feedObserve();
   feedPlaceNote();
+  if (_feed.shown) appPromoListRendered();
 }
 
 /* ---- First visit (CARS FEED item 9) ----
@@ -11619,6 +11620,22 @@ if (!IS_NATIVE && 'serviceWorker' in navigator) {
  * meta tag in index.html; Android Chrome gets the native Play-install offer
  * via related_applications in manifest.webmanifest.
  * Test hook: ?appbanner=ios|android forces the platform for QA. */
+/* The banner waits (CARS FEED item 10, 2026-11-16). On a visitor's first
+ * day it does not show on the zip card or over the first screen of cars: it
+ * appears once they have scrolled past the third row of tiles, or 30 s after
+ * the list first rendered, whichever is first. Later days: at once, as
+ * before. Dismissed stays dismissed; it still steps aside for the watch
+ * toast. The first day is kept in this browser (ys_first_day). */
+let _promoWait = null;   // { platform, timer, onScroll } while waiting
+const PROMO_WAIT_MS = 30000;
+function promoFirstDay() {
+  try {
+    const today = new Date().toDateString();
+    const first = localStorage.getItem('ys_first_day');
+    if (!first) { localStorage.setItem('ys_first_day', today); return true; }
+    return first === today;
+  } catch (e) { return true; }
+}
 (function appPromo() {
   if (IS_NATIVE) return; // already inside the native app — never promote
   const qs = new URLSearchParams(location.search).get('appbanner');
@@ -11631,8 +11648,36 @@ if (!IS_NATIVE && 'serviceWorker' in navigator) {
   // hidden for good once swiped away and never appears outside Safari, so
   // this is the one pointer a phone visitor reliably sees. Dismiss sticks.
   try { localStorage.setItem('jh_visits', String(parseInt(localStorage.getItem('jh_visits') || '0', 10) + 1)); } catch (e) { /* private mode */ }
+  if (promoFirstDay()) { _promoWait = { platform, timer: null, onScroll: null }; return; }
   showAppPromo(platform);
 })();
+/* renderLive calls this once tiles are on screen: the 30 s clock and the
+ * scroll watch start with the list, not with the zip card. */
+function appPromoListRendered() {
+  if (!_promoWait || _promoWait.timer) return;
+  _promoWait.timer = setTimeout(appPromoRelease, PROMO_WAIT_MS);
+  _promoWait.onScroll = () => { if (promoThirdRowPassed()) appPromoRelease(); };
+  window.addEventListener('scroll', _promoWait.onScroll, { passive: true });
+}
+function promoThirdRowPassed() {
+  const grid = document.getElementById('live-grid');
+  if (!grid || !grid.getClientRects().length) return false;   // Cars tab not shown
+  const tiles = grid.querySelectorAll(':scope > .car-tile');
+  if (!tiles.length) return false;
+  const cols = getComputedStyle(grid).gridTemplateColumns.split(' ').filter(Boolean).length || 1;
+  return tiles[Math.min(tiles.length, 3 * cols) - 1].getBoundingClientRect().bottom < 0;
+}
+function appPromoRelease() {
+  const w = _promoWait;
+  if (!w) return;
+  _promoWait = null;
+  clearTimeout(w.timer);
+  if (w.onScroll) window.removeEventListener('scroll', w.onScroll);
+  showAppPromo(w.platform);
+  // A watch toast is up in the same spot: wait behind it (its hide brings this back).
+  const t = document.getElementById('watch-toast'), promo = document.getElementById('app-promo');
+  if (t && t.classList.contains('show') && promo) { promo.style.display = 'none'; _promoStepAside = true; }
+}
 function showAppPromo(platform) {
   const el = document.getElementById('app-promo');
   if (!el) return;
@@ -11667,7 +11712,8 @@ function showAppPromo(platform) {
   const standalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
   document.body.classList.add('has-store-badges'); // footer pair: all web contexts
   const promo = document.getElementById('app-promo');
-  const promoShowing = !!promo && promo.style.display !== 'none';
+  // A banner waiting for the visitor to scroll (CARS FEED item 10) counts as showing.
+  const promoShowing = (!!promo && promo.style.display !== 'none') || !!_promoWait;
   if (!standalone && !promoShowing) document.body.classList.add('has-header-badges');
 })();
 
