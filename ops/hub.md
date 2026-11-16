@@ -940,3 +940,33 @@ diff before merging. What it does is in `ops/growth.md` (builder's section).
   local server running after it exits (a second run on the same port fails);
   the privacy page does not list saved cars among what the server stores for
   a device (predates this work).
+
+## 2026-11-16 10:41 to 10:50 UTC check-in: photos verified; landing-fix builder had stopped
+
+- **Photos verified** (table in `ops/yards.md`): list photos on the website
+  47.3% to 56.2%; live Pull-A-Part cards load from the resizing service at
+  about 44 KB each; Pull-A-Part lookups ran 500 in the scan, no errors.
+- **The first landing-fix builder stopped at 07:10 UTC**, minutes after it
+  started: two small edits in its worktree, nothing committed or pushed, no
+  completion notice. The hub only saw it at 10:41 (no agent listed, branch
+  never pushed). About three and a half hours lost on that piece. The owner
+  was told.
+- **Restarted as two builders (Opus, worktrees), ~10:47 UTC**, each told to
+  commit and push after every numbered item:
+  - `design/cars-feed`: the feed from `ops/design.md`, with the old
+    landing-fix items that belong to the list folded in (note below the
+    first row of tiles, app banner waits, one-step Monday email in the
+    strip).
+  - `growth/no-gate`: first visit shows cars near a guessed location
+    (`/geo`) instead of the zip card; the zip card names the car when it
+    does show; `#yard=` and `#near=` links; search-page buttons use them and
+    carry `utm_source=page`; an internal source never replaces an outside
+    one.
+  - Ownership split so the two do not edit the same functions: the list,
+    car screen, strip, note and banner belong to the feed; the zip card,
+    zip chip, location storage, link parsing, `ATTRIB` and the site Worker
+    buttons belong to no-gate. Merge note for the hub: the feed's email
+    strip must treat a guessed location as "no zip" (no-gate exposes a
+    helper for that).
+- **Guard against another silent stop:** a check-in every 40 minutes looks
+  at both branches (`trig_01UQ5GHubAnWVnxHKb3Smjmi` first, 11:29 UTC).
