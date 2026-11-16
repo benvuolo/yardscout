@@ -844,3 +844,28 @@ commit, dispatch `scan.yml`. A full takedown is still `enabled: false`.
 **Live when:** the scan queued at 08:07 UTC (after the one already running)
 publishes the fields; the website uses them from then, the apps from the
 next release. Check: recount, and one page load of a Pull-A-Part card.
+
+## 2026-11-16 10:45 UTC photos after both scans (check-in)
+
+Scans 43826202703 (07:46 to 09:07) and 43828750168 (08:07 to 10:26) both
+succeeded. Published data `scrapedAt` 2026-11-16T10:22:50Z, 337,647 cars.
+
+| | This morning (05:14Z) | Now (10:22Z) |
+|---|---|---|
+| Photo in the list, website | 159,438 (47.3%) | 189,876 (56.2%) |
+| Photo in the list, apps up to 1.12.16 | 159,438 (47.3%) | 184,717 (54.7%) |
+| Car screen only | 32,833 (9.7%) | 0 |
+| Tap to load | 765 (0.2%) | 0 |
+| No photo | 144,275 (42.8%) | 147,771 (43.8%) |
+
+- Of the list photos on the website, 25,905 come as small copies: pap
+  15,465, byot 5,281, ipull 3,313, usautosupply 1,081, sturtevant 765.
+- The manifest publishes `thumbHost` for exactly those five.
+- "No photo" is higher at this hour because this scan published at 10:22,
+  inside the hour before the YardSmart links expire (round 5 note above), so
+  fewer of those are written. Compare like with like on a later scan.
+- Pull-A-Part: "looked up 500 this scan"; 15,465 of 42,851 cars have a
+  photo; 27,225 not yet looked up. No error lines.
+- Live, one page load of yardscout.io near Atlanta (zip 30318), yard filter
+  "Pull-A-Part - Atlanta South": the first six cards loaded from wsrv.nl,
+  480x480, six photos 264 KB in total, nothing fetched from the yard's host.
