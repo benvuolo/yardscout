@@ -1178,3 +1178,28 @@ the car grid. Asked the owner about (1) one dismissible "set an alert" card
 in the feed for people with no watch, (2) Pull-N-Save photos: a note to
 them, or un-pausing. Not done without an answer. Not recommended for now:
 example photos of a model for cars with none.
+
+## 2026-11-16 ~16:30 UTC owner: "Yes add the alert card and draft the Pull-N-Save note. lots of no car pics on the web"
+
+With a desktop screenshot: twelve tiles on the first screen, all drawings,
+all from one yard's batch (Utah Pic-A-Part Ogden Premium, set out 11-15).
+
+- **Alert card** (89f38002): one card in the feed after the first dozen
+  cars, for someone with no watch; opens the Alerts form on the Make field;
+  dismissible for good; no Pro prompt in it. Counted as `alert-card-shown`,
+  `alert-card`, `alert-card-x` (the scorecard does not print them yet; the
+  usage-stats "funnel events" list shows them).
+- **Order of "Newest arrivals"** (89f38002): a car whose photo shows in the
+  list counts as one day newer (`PHOTO_DAY_BOOST = 1`); ties go to the
+  photo, then the truly newer day, then the nearest yard; cars set out since
+  the last visit always lead. For a Salt Lake visitor the first 21 tiles are
+  now photos (Pick-n-Pull, set out 11-14), then the 19 drawings of 11-15.
+  A wider boost was weighed and left: it would bury a no-photo yard's new
+  arrivals under days of another yard's photos.
+- **Pull-N-Save note**: Gmail draft, thread `1a1e52cb8accbc08` (details and
+  the scanner-name finding in `ops/yards.md`, same date). The Pull-N-Save
+  inventory reader now sends the YardScout name (34f4b957).
+- Asked the owner: switch Budget, U-Pull-R and Harry's readers to the
+  YardScout name too (their 11-02 emails said the scanner uses it)?
+- All of this is on the website only; the apps get it with the next release
+  (1.13.0 is still waiting for review; a newer build needs a new "ship").
