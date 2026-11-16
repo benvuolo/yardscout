@@ -1203,3 +1203,17 @@ all from one yard's batch (Utah Pic-A-Part Ogden Premium, set out 11-15).
   YardScout name too (their 11-02 emails said the scanner uses it)?
 - All of this is on the website only; the apps get it with the next release
   (1.13.0 is still waiting for review; a newer build needs a new "ship").
+
+## 2026-11-16 ~16:40 UTC owner: "Yes switch all three, however I dont think new arrivles should be buried by a day just because they dont have a picture"
+
+- The one-day photo boost is OUT (e46de036). "Newest arrivals" is strictly
+  by set-out day again; a photo only orders cars set out the same day
+  (photo first, then the nearest yard). Do not bring a boost back without
+  the owner asking. Consequence, told to the owner: when the newest day's
+  arrivals near someone are all at yards with no photos (Salt Lake on a
+  Sunday), the first screen is drawings; only real photos fix that
+  (Pull-N-Save, if they agree).
+- U-Pull-R, Budget and Harry's readers send the YardScout name (table in
+  `ops/yards.md`, same date).
+- The alert-card entry above stands. The "Order" bullet in it is superseded
+  by this entry.

@@ -881,9 +881,19 @@ scraper on 2026-11-16:
 |---|---|---|
 | Pull-N-Save (8 yards) | generic browser name (`HEADERS`); only the photo checks sent the YardScout name | **YardScout name** (`PNS_HEADERS`, constant `YARDSCOUT_UA`) |
 | Route 34 | YardScout name | unchanged, the email was right |
-| Budget (2 yards) | generic browser name | not changed, owner asked |
-| U-Pull-R (3 yards, blocked by its captcha, 0 cars) | generic browser name | not changed, owner asked |
-| Harry's (3 yards) | generic browser name, with the Sucuri solver (frozen by rule 2) | not changed, owner asked |
+| Budget (2 yards) | generic browser name | **YardScout name** (`BUDGET_HEADERS`, inventory and price lists) |
+| U-Pull-R (3 yards, blocked by its captcha, 0 cars) | generic browser name | **YardScout name** (`UPR_HEADERS`, inventory and price list) |
+| Harry's (3 yards) | generic browser name, with the Sucuri solver (frozen by rule 2) | **YardScout name** (inventory and price list); the Sucuri step itself is untouched |
+
+Owner, 2026-11-16, asked whether to switch the last three: "Yes switch all
+three" (e46de036). One request to each with the new name, from this session:
+Budget Winter Garden HTTP 200 with the page (100 KB), U-Pull-R `getMakes`
+HTTP 200, Harry's page 1 HTTP 200 with the list (128 KB, no Sucuri page).
+`scraper/test_pns_make_model.py` fails if any of the four readers goes back
+to a browser name. Watch the first scan after the change for all four: a
+yard that answers the name differently from GitHub's network has given its
+answer (outreach, never another name). No correction has been sent to
+Budget, U-Pull-R or Harry's for the 11-02 sentence; offered to the owner.
 
 Pull-N-Save test, one request each, 11 s apart (their Crawl-delay is 10):
 `getMakes` answered the YardScout name exactly as the browser name (HTTP
