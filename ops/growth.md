@@ -450,3 +450,81 @@ no migration). The apps count outcomes only after a store release (owner's
 **Tests:** funnel_counters_unit, scorecard_unit 155, recap_signup_unit,
 ops_quiet_unit, funnel_events_e2e 128, car_search_e2e 49,
 notable_trims_e2e 40, card_share_e2e 19, e2e-ops.sh 150 — all pass.
+
+## Free instant alert (apps) — branch `growth/free-instant-alert`, NOT merged (2026-11-16)
+
+Owner decision 2026-11-16. Built on origin/main f9bae8c0. Nothing deployed,
+merged, dispatched or released. Merging deploys the web app (Pages) and the
+API worker, and the deploy applies **migration 0017** (one nullable column +
+a partial index on `devices`). The apps get the control only after a store
+release (owner's "ship"); deploy the worker first.
+
+**Rule as built.** A free app install has ONE instant watch: cars matching it
+within 50 mi of its centre (or its own radius if smaller) get the same
+arrivals push Pro gets, on each inventory commit. Other watches, and cars
+farther out, stay on the Monday summary. Default: the first watch in the
+list; "Make this my instant alert" moves it (one at a time; only among the
+first 5, the ones free alerts at all). Pro unchanged. Web unchanged (Monday
+email). "One per phone": no accounts; one device row carries at most one
+instant watch, and registration already steals a push token from any other
+row (now also clearing that row's instant watch), so a reinstall that gets
+the same token leaves one pushable row. A reinstall that gets a NEW token
+(FCM usually does) leaves the old row with a dead token, pruned on the first
+send (UNREGISTERED / 410).
+
+**Payload.** `POST /v1/device/register` `watches[]`: the chosen entry carries
+`instant: true`. Server (`sanitizeWatches`) keeps the first flagged KEPT
+watch of a free device, clamps `radius_mi` to `FREE_INSTANT_RADIUS_MI` (50),
+stores it in `devices.instant_watch_json`; every re-registration rewrites it
+(no flag = NULL = today's behaviour; Pro = NULL). The response adds
+`instant: {make, model, radiusMi}` only when one was kept.
+
+**Dispatch.** `dispatchDeviceAlerts`: Pro first; then free devices with an
+instant watch, longest-unpushed first, from what Pro left of
+`MAX_SENDS_PER_COMMIT` (25). Same payload, `device_alerts_sent` dedupe and
+token pruning. A budget cut marks nothing sent, so the Monday summary still
+lists the car. Counter `free-instant:ok` (ops_counters).
+
+**Monday summary / check-in.** For a device with an instant watch, the one
+Pro line becomes "<N of these are | Both are | This one is> outside your
+instant alert (Volvo 240, 50 mi); Pro pushes every watch at any distance."
+counting only cars the instant watch certainly does not cover; if none, the
+old line. The first-watch check-in says "Your instant alert is <watch>
+within 50 mi; the rest come in the Monday recap. Pro pushes every watch."
+Devices without the flag: unchanged text.
+
+**Ops daily report.** Under SENDS: "of the app pushes, free instant alerts:
+N" (24 h); kept out of the per-channel rows.
+
+**App.** `docs/app.js` FREE INSTANT ALERT block: `ys_instant_watch` = the
+chosen watch's `addedAt` (stored watches never edited); badge "Instant
+alert, within 50 mi" (`badge badge-new`), link-button on the others. Near-
+miss lines and the card recap line no longer claim "Pro would have / your
+recap" for cars inside the instant scope. Copy changed: Alerts intro (web
+and native), native push panel, its Pro box, web app-store panel,
+`PRO_PUSH_LINE`, `watchGateLead` (native variant), native Pro sheet intro and
+alerts bullet, native free watch toast line, "Push is on" status, privacy
+page (flag listed; date Nov 16). sw.js jh-v199. No funnel event added.
+
+**Store listings to fix (hub):** `fastlane/metadata/en-US/description.txt`
+and `android/en-US/full_description.txt` line 24 ("Free watches get a
+weekly recap push…") and line 28 (Pro "a push within hours…" reads as
+Pro-only); `android/en-US/pro_subscription_benefits.txt` line 1 ("Alerts
+within hours when a car lands").
+
+**Tests (all pass):** e2e-devices.sh 74 (new: old build no push; flag inside
+50 / none at 80 mi; 25 mi radius kept; two flags keep the first; Pro ignores
+flag; move + drop flag; 25 Pro devices use the budget and the free car lands
+in Monday; token moved = one push; ops count), e2e-coverage 27, e2e-ops 151,
+free_instant_e2e 30, ui_no_truncation (alerts, alerts-hits, alerts-instant
+new, r5-alerts-recap, pro-sheet; 6 widths, light/dark, 1x/2x) 120 checks 0
+failures, alerts_first_unit 13 (3 new), pf_guards_unit, funnel_events_e2e
+128, tab_retap_e2e 14, share_watch_e2e 33, notable_trims_e2e 40,
+recap_ask_e2e 35, pro_sheet_fold_e2e 188, app_promo_e2e 174, and every
+*_unit.mjs. e2e.sh: 38 pass, 1 fail ("radius filter did not narrow"), the
+same failure on untouched origin/main, so pre-existing.
+
+**Left.** Store listings (above). The web Pro sheet text still says "Free
+gets a Monday recap instead" (true for the web). `freeDeliveryNote()` (in the
+first-view builder's strip) is unchanged and still true, but does not
+mention the instant watch.
