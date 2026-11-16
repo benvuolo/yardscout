@@ -1217,3 +1217,22 @@ all from one yard's batch (Utah Pic-A-Part Ogden Premium, set out 11-15).
   `ops/yards.md`, same date).
 - The alert-card entry above stands. The "Order" bullet in it is superseded
   by this entry.
+
+## 2026-11-16 ~16:55 UTC owner: "Yes draft the corrections for all three"
+
+- Two Gmail drafts and one form text (details in
+  `ops/yard-outreach-drafts.md`, "Corrections, 2026-11-16"): U-Pull-R as a
+  reply to their CTO in thread `1a1b2b1b2f24f262`, Budget as a reply in
+  thread `1a19e455f0efaf97`, Harry's as text for their contact form (no
+  record that the 11-02 note to Harry's was ever sent). None is sent; the
+  owner sends them after the hub confirms the first scan with the new name.
+- U-Pull-R is the serious one: the CTO was told on 11-03 and 11-06 that
+  every request identified itself as YardScout, including the home pull.
+  The reader had always sent a generic browser name.
+- Found by the full run while this was going on, and fixed (0aca7aca): with
+  the alert card above the screen, coming back to the Cars tab landed ~100
+  px short. The tile at the top is now remembered and put back
+  (`feedAnchor` / `feedAnchorRestore`).
+- Suggested to the owner, not done: stop the U-Pull-R reader altogether
+  until their API arrives (each scan still asks their site for the makes,
+  hits the captcha on the first search and reads the price page).
