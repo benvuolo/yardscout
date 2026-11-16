@@ -8,7 +8,7 @@ Procedure: `RELEASING.md`. **Dispatch only after the owner says "ship".**
 
 | Version | iOS | Android |
 |---|---|---|
-| 1.13.0 | DISPATCHED 2026-11-16 13:29 UTC (owner: "Do it and ship!"). Built from main 67fa5d2b (sw jh-v202). iOS build 41, submit=true, run 43876188232; listing text and six new screenshots go up with it. | DISPATCHED 2026-11-16 13:28 UTC, run 43876161947, track production (versionCode 40 expected). |
+| 1.13.0 | SHIPPED 2026-11-16 13:29 UTC (owner: "Do it and ship!"). Built from main 67fa5d2b (sw jh-v202). iOS build 41, submit=true, run 43876188232. asc-status 43877889988: 1.13.0 build 41 WAITING_FOR_REVIEW, submitted 13:39 UTC, automatic release on approval; listing text and six new screenshots went up with it. | versionCode 40, run 43876161947, uploaded 13:32 UTC. play-status 43876886357: production 1.13.0 (40), status completed, rollout 100% (Google review pending). Play listing text and screenshots NOT sent yet: send after 1.13.0 is live. |
 | 1.12.16 | SHIPPED 2026-11-14 17:03 UTC (owner: "ship"). Built from main ac24bcb5 (sw jh-v196). iOS build 40, submit=true, run 43618949981. asc-status: 1.12.16 build 40 WAITING_FOR_REVIEW, submitted 17:13 UTC, automatic release on approval. Carries: Cars-tab search box, per-tab scroll, filter panel fix, card share button, trim badge and filter, model-range line, hours and directions links, narrowing and checkout-outcome counters. | versionCode 39, Play production, status completed, rollout 100% (run 43618947678); Google review pending |
 | 1.12.15 | build 37, live (READY_FOR_SALE) | versionCode 38, Play production, completed |
 | 1.12.10 | build 26, live (READY_FOR_SALE) | — |

@@ -1092,3 +1092,29 @@ was moved to it only after everything passed. Design and build notes:
   accepted; when BOTH stores show 1.13.0 live, flip the two held website
   sentences in `docs/index.html` and the check in
   `backend/test/free_instant_e2e.mjs`.
+
+## 2026-11-16 13:40 UTC 1.13.0 accepted by both stores
+
+- release-android run 30 (43876161947) succeeded 13:33 UTC; play-status
+  43876886357: production 1.13.0 (40), status completed, rollout 100%.
+  Google's review still stands between that and users.
+- release-ios run 41 (43876188232) succeeded 13:39 UTC; asc-status
+  43877889988: 1.13.0 build 41 WAITING_FOR_REVIEW, submitted 13:39 UTC,
+  build processing VALID. Released automatically on approval. The listing
+  text and six new screenshots went up with it.
+- Scorecard (180222b2, Deploy Workers 120 succeeded 13:37 UTC): the
+  narrowing line counts the feed's chips ("search box · chips · Filters ·
+  link · trim filter").
+- NOT done yet, on purpose: the Play listing (`store-listing.yml`,
+  `play-subscription-listing.yml`). Play publishes listing text apart from
+  the app, and the new text says free gets one alert within hours, which is
+  true only once 1.13.0 is what people install. Send both after 1.13.0 is
+  live on Play; until then the old listing is still true, only incomplete.
+- Same trigger for the website: when BOTH stores show 1.13.0 live, flip the
+  two held sentences in `docs/index.html` (the comments beside them carry
+  the new text), flip the check in `backend/test/free_instant_e2e.mjs`,
+  bump the sw cache.
+- 4Runner post: a generator for the "what landed" list is in the session's
+  scratchpad (not in the repo); as of the 10:22 UTC scan, 48 4Runners were
+  set out Nov 9 to 16 in 21 states and provinces, 18 confirmed 4x4. Refresh
+  from the newest scan right before the owner posts.
