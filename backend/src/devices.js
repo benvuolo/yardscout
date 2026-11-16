@@ -7,6 +7,18 @@
  *   - Free devices → ONE weekly summary push from the Monday cron ("Your
  *                    watches matched N arrivals this week"), replacing the
  *                    old weekly digest email.
+ *   - Free instant (2026-11-16) → a free device may flag ONE watch as
+ *                    instant ({..., instant: true} on that entry of
+ *                    watches[]). Cars matching that watch within
+ *                    FREE_INSTANT_RADIUS_MI (or its own smaller radius) get
+ *                    the same arrivals push Pro gets, on each commit, from
+ *                    whatever send budget Pro left. Everything else stays on
+ *                    the Monday summary. There are no accounts: the limit is
+ *                    one instant watch per install row, and one row per push
+ *                    token (registration steals a token from any older row),
+ *                    so a phone has one instant watch however often the app
+ *                    is reinstalled. A build that never sends the flag
+ *                    stores NULL and behaves exactly as before.
  *
  * Channels: APNs for iOS (apns.js), FCM HTTP v1 for Android (fcm.js). A
  * device has exactly one platform, so exactly one token column is set;
@@ -23,11 +35,15 @@ import {
   watchMatches, digestText, digestUpsell, salesForWatches, fmtSaleRange, loadArrivals, sanitizeVpicFilters,
 } from './alerts.js';
 import { sanitizeSaved } from './saved_alerts.js';
+import { countOk, FREE_INSTANT_METRIC } from './ops.js';
 
 const MAX_WATCHES_PER_DEVICE = 20;
 const MAX_WATCHES_FREE = 5;
 const FREE_RADIUS_CAP_MI = 250;
 const MAX_SENDS_PER_COMMIT = 25;    // shares the commit's subrequest budget
+// Free instant alert: one watch per free device, cars within this many miles
+// of its centre (or the watch's own radius when that is smaller).
+export const FREE_INSTANT_RADIUS_MI = 50;
 const MAX_WEEKLY_PUSHES = 40;
 const MAX_SALE_YARDS_PER_PUSH = 3;
 
@@ -61,10 +77,16 @@ export async function sendDevicePush(env, d, payload) {
 // Devices that can currently receive a push (either channel).
 const PUSHABLE = '(apns_token IS NOT NULL OR fcm_token IS NOT NULL)';
 
+/** Kept watches plus the free instant watch: {watches, instant}. `instant` is
+ * the first KEPT watch the client flagged `instant: true` (free tier only;
+ * later flags are ignored), a copy with radius_mi clamped to
+ * FREE_INSTANT_RADIUS_MI, or null. Pro never has one (Pro is instant on
+ * every watch already). */
 function sanitizeWatches(raw, tier) {
-  if (!Array.isArray(raw)) return [];
-  const cap = tier === 'pro' ? MAX_WATCHES_PER_DEVICE : MAX_WATCHES_FREE;
   const out = [];
+  let instant = null;
+  if (!Array.isArray(raw)) return { watches: out, instant };
+  const cap = tier === 'pro' ? MAX_WATCHES_PER_DEVICE : MAX_WATCHES_FREE;
   // Cap what's KEPT, not what's read: a free watch dropped below (no centre)
   // must not push a valid one past the cap.
   for (const w of raw.slice(0, MAX_WATCHES_PER_DEVICE * 2)) {
@@ -84,7 +106,7 @@ function sanitizeWatches(raw, tier) {
     // Trim / drivetrain filters are Pro — silently dropped for free devices
     // (the client never shows them to free users; old clients never send them).
     const { driveFilter, trimFilter } = tier === 'pro' ? sanitizeVpicFilters(w) : { driveFilter: '', trimFilter: '' };
-    out.push({
+    const kept = {
       make, model,
       year_min: Number.isFinite(+w.yearMin) && +w.yearMin > 1900 ? Math.floor(+w.yearMin) : null,
       year_max: Number.isFinite(+w.yearMax) && +w.yearMax > 1900 ? Math.floor(+w.yearMax) : null,
@@ -93,9 +115,14 @@ function sanitizeWatches(raw, tier) {
       radius_mi: radiusMi,
       drive_filter: driveFilter || null,
       trim_filter: trimFilter || null,
-    });
+    };
+    out.push(kept);
+    // Free watches always have a centre and radius here (checked above).
+    if (tier !== 'pro' && !instant && w.instant === true) {
+      instant = { ...kept, radius_mi: Math.min(radiusMi, FREE_INSTANT_RADIUS_MI) };
+    }
   }
-  return out;
+  return { watches: out, instant };
 }
 
 /** POST /v1/device/register — {deviceId, apnsToken?|fcmToken?, platform?,
@@ -116,7 +143,10 @@ export async function handleDeviceRegister(req, env) {
   const fcmToken = /^[A-Za-z0-9_:-]{80,512}$/.test(String(body.fcmToken || ''))
     ? String(body.fcmToken) : null;
   const tier = body.tier === 'pro' ? 'pro' : 'free';
-  const watches = sanitizeWatches(body.watches, tier);
+  // `instant` is set only when a free build flags a watch (see sanitizeWatches);
+  // every re-registration rewrites it, so moving the flag or going Pro clears
+  // the old one.
+  const { watches, instant } = sanitizeWatches(body.watches, tier);
   // Saved cars are stored for every tier (the list is free) but only Pro
   // devices are dispatched — see saved_alerts.js.
   const saved = sanitizeSaved(body.saved);
@@ -124,23 +154,27 @@ export async function handleDeviceRegister(req, env) {
 
   // Push tokens must be unique — steal them from any stale row (reinstall
   // generates a fresh deviceId but the store may hand back the same token).
+  // This is also what makes the free instant alert "one per phone": the old
+  // row loses the token (so PUSHABLE no longer selects it) and its instant
+  // watch with it.
   if (apnsToken) {
-    await env.DB.prepare('UPDATE devices SET apns_token = NULL WHERE apns_token = ?1 AND id != ?2')
+    await env.DB.prepare('UPDATE devices SET apns_token = NULL, instant_watch_json = NULL WHERE apns_token = ?1 AND id != ?2')
       .bind(apnsToken, deviceId).run();
   }
   if (fcmToken) {
-    await env.DB.prepare('UPDATE devices SET fcm_token = NULL WHERE fcm_token = ?1 AND id != ?2')
+    await env.DB.prepare('UPDATE devices SET fcm_token = NULL, instant_watch_json = NULL WHERE fcm_token = ?1 AND id != ?2')
       .bind(fcmToken, deviceId).run();
   }
   const defaultPlatform = fcmToken ? 'android' : 'ios';
   await env.DB.prepare(
-    `INSERT INTO devices (id, apns_token, fcm_token, platform, tier, watches_json, saved_json, created_at, updated_at)
-     VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?8, ?7, ?7)
+    `INSERT INTO devices (id, apns_token, fcm_token, platform, tier, watches_json, saved_json, instant_watch_json, created_at, updated_at)
+     VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?8, ?9, ?7, ?7)
      ON CONFLICT (id) DO UPDATE SET
        apns_token = COALESCE(?2, apns_token), fcm_token = COALESCE(?3, fcm_token),
-       tier = ?5, watches_json = ?6, saved_json = ?8, updated_at = ?7`
+       tier = ?5, watches_json = ?6, saved_json = ?8, instant_watch_json = ?9, updated_at = ?7`
   ).bind(deviceId, apnsToken, fcmToken, String(body.platform || defaultPlatform).slice(0, 12), tier,
-         JSON.stringify(watches), now, saved.length ? JSON.stringify(saved) : null).run();
+         JSON.stringify(watches), now, saved.length ? JSON.stringify(saved) : null,
+         instant ? JSON.stringify(instant) : null).run();
 
   // First-watch check-in clock: starts the first time this device syncs any
   // watch, never resets (see dispatchFirstWatchCheckins).
@@ -159,7 +193,11 @@ export async function handleDeviceRegister(req, env) {
   for (let i = 0; i < seeds.length; i += 80) await env.DB.batch(seeds.slice(i, i + 80));
 
   const push = (!!apnsToken && apnsConfigured(env)) || (!!fcmToken && fcmConfigured(env));
-  return json({ ok: true, watches: watches.length, saved: saved.length, push });
+  return json({
+    ok: true, watches: watches.length, saved: saved.length, push,
+    // Only when a watch was flagged: what the server will push instantly.
+    ...(instant ? { instant: { make: instant.make, model: instant.model, radiusMi: instant.radius_mi } } : {}),
+  });
 }
 
 /** POST /v1/device/test — {deviceId}: one test push to that device. */
@@ -203,38 +241,76 @@ async function markSent(env, deviceId, fresh) {
     .bind(isoNow(), deviceId).run();
 }
 
-/** Instant arrivals push for PRO devices — called from handleCommit alongside
- * dispatchAlerts. Same shape of arrivals array. */
+function parseInstant(row) {
+  if (!row.instant_watch_json) return null;
+  try {
+    const w = JSON.parse(row.instant_watch_json);
+    // Re-clamp on read: the stored row is trusted, but the rule is the rule.
+    if (!w || w.lat == null || w.lng == null || !w.radius_mi) return null;
+    return { ...w, radius_mi: Math.min(w.radius_mi, FREE_INSTANT_RADIUS_MI) };
+  } catch { return null; }
+}
+
+/** One arrivals push to one device for the cars `watches` match. Returns
+ * 'skip' (nothing new), 'ok' or 'fail'. Shared by Pro and free instant so both
+ * use the same payload, dedupe table and token pruning. */
+async function pushArrivals(env, d, watches, arrivals) {
+  const matched = arrivals.filter((v) => watches.some((w) => watchMatches(w, v)));
+  if (!matched.length) return 'skip';
+  const fresh = await freshOnly(env, d.id, matched);
+  if (!fresh.length) return 'skip';
+  const res = await sendDevicePush(env, d, {
+    title: `${fresh.length} watched car${fresh.length === 1 ? '' : 's'} just hit the yard`,
+    body: digestText(fresh),
+    // Deep link to the (first) alerted car: the app bypasses its inventory
+    // cache on alert entry and opens the car's card (#alert= routes there).
+    // Backward-compatible — shipped app versions ignore the url key.
+    url: '/#alert=' + encodeURIComponent(String(fresh[0].id)),
+  });
+  if (!res.ok) return 'fail';
+  await markSent(env, d.id, fresh);
+  return 'ok';
+}
+
+/** Instant arrivals push — called from handleCommit alongside dispatchAlerts.
+ * Same shape of arrivals array. PRO devices first (every watch, any
+ * distance); then FREE devices with an instant watch, only that watch, only
+ * within its clamped radius, and only from the sends Pro left of
+ * MAX_SENDS_PER_COMMIT. A free device the budget cuts loses nothing: its cars
+ * are not marked sent, so the Monday summary still lists them. Free devices
+ * are taken longest-unpushed first, so repeated cuts rotate. */
 export async function dispatchDeviceAlerts(env, arrivals) {
   if (!devicePushConfigured(env) || !Array.isArray(arrivals) || !arrivals.length) {
-    return { devices: 0, sends: 0 };
+    return { devices: 0, sends: 0, freeInstant: 0 };
   }
   const rows = (await env.DB.prepare(
     `SELECT id, apns_token, fcm_token, watches_json FROM devices WHERE tier = 'pro' AND ${PUSHABLE}`
   ).all()).results || [];
-  let sends = 0, devices = 0;
+  let sends = 0, devices = 0, freeInstant = 0;
   for (const d of rows) {
     if (sends >= MAX_SENDS_PER_COMMIT) { console.log('device alert budget hit'); break; }
-    const watches = parseWatches(d);
-    const matched = arrivals.filter((v) => watches.some((w) => watchMatches(w, v)));
-    if (!matched.length) continue;
-    const fresh = await freshOnly(env, d.id, matched);
-    if (!fresh.length) continue;
+    const r = await pushArrivals(env, d, parseWatches(d), arrivals);
+    if (r === 'skip') continue;
     sends++;
-    const res = await sendDevicePush(env, d, {
-      title: `${fresh.length} watched car${fresh.length === 1 ? '' : 's'} just hit the yard`,
-      body: digestText(fresh),
-      // Deep link to the (first) alerted car: the app bypasses its inventory
-      // cache on alert entry and opens the car's card (#alert= routes there).
-      // Backward-compatible — shipped app versions ignore the url key.
-      url: '/#alert=' + encodeURIComponent(String(fresh[0].id)),
-    });
-    if (res.ok) {
-      devices++;
-      await markSent(env, d.id, fresh);
+    if (r === 'ok') devices++;
+  }
+  if (sends < MAX_SENDS_PER_COMMIT) {
+    const free = (await env.DB.prepare(
+      `SELECT id, apns_token, fcm_token, instant_watch_json FROM devices
+        WHERE tier != 'pro' AND instant_watch_json IS NOT NULL AND ${PUSHABLE}
+        ORDER BY last_push_at IS NOT NULL, last_push_at`
+    ).all()).results || [];
+    for (const d of free) {
+      if (sends >= MAX_SENDS_PER_COMMIT) { console.log('device alert budget hit (free instant; rest go in the Monday summary)'); break; }
+      const w = parseInstant(d);
+      if (!w) continue;
+      const r = await pushArrivals(env, d, [w], arrivals);
+      if (r === 'skip') continue;
+      sends++;
+      if (r === 'ok') { devices++; freeInstant++; await countOk(env, FREE_INSTANT_METRIC); }
     }
   }
-  return { devices, sends };
+  return { devices, sends, freeInstant };
 }
 
 /** Instant sale-day push for PRO devices — called from handleCommit after
@@ -278,6 +354,21 @@ export async function dispatchDeviceSaleAlerts(env) {
   return { devices, sends };
 }
 
+/** The one Pro clause in a Monday summary for a free device WITH an instant
+ * watch, or '' (caller falls back to digestUpsell). It counts only cars the
+ * current instant watch certainly does not cover (another watch, or past its
+ * clamped radius). A car the instant watch does cover but that is still
+ * unsent here (cut by the commit budget, or matched before the flag was set)
+ * is not counted, and nothing about when a car landed is stated. */
+export function instantScopeLine(fresh, instant) {
+  if (!instant || !Array.isArray(fresh) || !fresh.length) return '';
+  const n = fresh.length;
+  const k = fresh.filter((v) => !watchMatches(instant, v)).length;
+  if (!k) return '';
+  const subj = k === n ? (n === 1 ? 'This one is' : n === 2 ? 'Both are' : `All ${n} are`) : `${k} of these are`;
+  return `${subj} outside your instant alert (${watchLabel(instant)}, ${instant.radius_mi} mi); Pro pushes every watch at any distance.`;
+}
+
 /** Weekly summary push for FREE devices — cron entry point (replaces the
  * digest email; no email exists in the device model at all). One push per
  * device: arrivals matched this week + upcoming sale days in watch radii. */
@@ -287,11 +378,12 @@ export async function sendWeeklyDevicePushes(env) {
   const arrivals = await loadArrivals(env, since);
 
   const rows = (await env.DB.prepare(
-    `SELECT id, apns_token, fcm_token, watches_json FROM devices WHERE tier != 'pro' AND ${PUSHABLE}`
+    `SELECT id, apns_token, fcm_token, watches_json, instant_watch_json FROM devices WHERE tier != 'pro' AND ${PUSHABLE}`
   ).all()).results || [];
   let sends = 0, devices = 0;
   for (const d of rows) {
     if (sends >= MAX_WEEKLY_PUSHES) { console.log('weekly push budget hit — deferred to next week'); break; }
+    const instant = parseInstant(d);
     const watches = parseWatches(d);
     if (!watches.length) continue;
     const matched = arrivals.filter((v) => watches.some((w) => watchMatches(w, v)));
@@ -317,7 +409,7 @@ export async function sendWeeklyDevicePushes(env) {
         ? `Your week at the yards — ${fresh.length} watched car${fresh.length === 1 ? '' : 's'} arrived`
         : 'Sale days coming up near you',
       body: (fresh.length
-        ? digestText(fresh) + '\n' + digestUpsell(fresh, { short: true })
+        ? digestText(fresh) + '\n' + (instantScopeLine(fresh, instant) || digestUpsell(fresh, { short: true }))
         : '') + salesLine,
       // Same deep-link contract as the instant path when there are arrivals.
       ...(fresh.length ? { url: '/#alert=' + encodeURIComponent(String(fresh[0].id)) } : {}),
@@ -356,7 +448,7 @@ export async function dispatchFirstWatchCheckins(env, { now = Date.now() } = {})
   if (!devicePushConfigured(env)) return { due: 0, sent: 0, gaveUp: 0 };
   const dueBefore = new Date(now - CHECKIN_AFTER_MS).toISOString();
   const rows = (await env.DB.prepare(
-    `SELECT id, apns_token, fcm_token, watches_json, first_watch_at FROM devices
+    `SELECT id, apns_token, fcm_token, watches_json, instant_watch_json, first_watch_at FROM devices
      WHERE tier != 'pro' AND checkin_at IS NULL AND first_watch_at IS NOT NULL
        AND first_watch_at <= ?1 AND ${PUSHABLE}
      ORDER BY first_watch_at LIMIT ?2`
@@ -377,10 +469,16 @@ export async function dispatchFirstWatchCheckins(env, { now = Date.now() } = {})
     const w = watches.find((x) => fresh.some((v) => watchMatches(x, v))) || watches[0];
     const within = w && w.radius_mi ? ` within ${w.radius_mi} mi` : '';
     const n = fresh.length;
+    // A device with an instant watch (2026-11-16) already heard about that
+    // watch's nearby cars, so "Free gets a Monday recap" would undersell it.
+    const inst = parseInstant(d);
+    const tierLine = inst
+      ? `Your instant alert is ${watchLabel(inst)} within ${inst.radius_mi} mi; the rest come in the Monday recap. Pro pushes every watch.`
+      : 'Free gets a Monday recap; Pro pushes each one the day it lands.';
     const res = await sendDevicePush(env, d, {
       title: `Since you started watching ${watchLabel(w)}`,
       body: `${n} landed${within}: ${digestText(fresh.slice(0, 2)).replace(/\n/g, '; ')}${n > 2 ? ` and ${n - 2} more` : ''}. `
-        + 'Free gets a Monday recap; Pro pushes each one the day it lands.',
+        + tierLine,
       url: '/#alert=' + encodeURIComponent(String(fresh[0].id)),
     });
     if (res.ok) {

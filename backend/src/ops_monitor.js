@@ -28,7 +28,7 @@
  */
 
 import { json, err } from './util.js';
-import { CHANNELS, utcDay, resendFetch, pruneOpsErrors, resendDailyCap } from './ops.js';
+import { CHANNELS, utcDay, resendFetch, pruneOpsErrors, resendDailyCap, FREE_INSTANT_METRIC } from './ops.js';
 import { recapStats } from './recap_signup.js';
 import { watchMatches } from './alerts.js';
 import { MARKS_SQL } from './attribution.js';
@@ -651,12 +651,13 @@ function composeDaily(r) {
   }
   L.push('');
   L.push('SENDS, last 24 h (ok / fail / dead tokens)');
-  const active = Object.entries(r.channels).filter(([, s]) => s.ok + s.fail + s.gone > 0);
+  const active = Object.entries(r.channels).filter(([c, s]) => c !== FREE_INSTANT_METRIC && s.ok + s.fail + s.gone > 0);
   if (active.length) {
     for (const [c, s] of active) {
       L.push(`  ${c.padEnd(15)} ${String(s.ok).padStart(5)} / ${s.fail}${c.startsWith('email:') ? '' : ` / ${s.gone}`}${s.fail ? '  <-' : ''}`);
     }
   } else L.push('  no sends recorded');
+  L.push(`  of the app pushes, free instant alerts: ${r.freeInstant24h || 0}`);
   L.push(`  Resend today (UTC): ${r.resend.sentToday} / ${r.resend.dailyCap}`);
   if (r.resend.heldConfirm || r.resend.heldRecap) {
     L.push(`  HELD BACK at the Resend daily cap (24 h): ${r.resend.heldConfirm} sign-up confirmation${r.resend.heldConfirm === 1 ? '' : 's'} (visitor told to try tomorrow),`
@@ -902,11 +903,12 @@ export function composeDailyHtml(r) {
     S.push(hSection('Yard health', hMuted(`Could not load yard_health.json (${esc((yh && yh.error) || 'unknown')})`)));
   }
 
-  const active = Object.entries(r.channels).filter(([, s]) => s.ok + s.fail + s.gone > 0);
+  const active = Object.entries(r.channels).filter(([c, s]) => c !== FREE_INSTANT_METRIC && s.ok + s.fail + s.gone > 0);
   const sendRows = active.map(([c, s]) => [esc(c), fmtInt(s.ok),
     s.fail ? `<span style="color:${C.bad};font-weight:700;">${s.fail}</span>` : '0',
     c.startsWith('email:') ? '—' : String(s.gone)]);
   let sends = active.length ? hTable(['Channel', 'Sent', 'Failed', 'Dead tokens'], sendRows) : hMuted('No sends in the last 24 h.');
+  sends += `<div style="font-size:13px;color:${C.dim};margin-top:6px;">Of the app pushes, free instant alerts: ${fmtInt(r.freeInstant24h || 0)}</div>`;
   sends += `<div style="font-size:13px;color:${C.dim};margin-top:6px;">Resend today: ${r.resend.sentToday} of ${r.resend.dailyCap}</div>`;
   if (r.resend.heldConfirm || r.resend.heldRecap) {
     sends += `<div style="font-size:13px;color:${C.bad};font-weight:600;margin-top:4px;">Held back at the daily cap (24 h): ${fmtInt(r.resend.heldConfirm)} sign-up confirmations (visitor told to try tomorrow), ${fmtInt(r.resend.heldRecap)} Monday recaps (retried on a later day)</div>`;
@@ -1204,6 +1206,8 @@ export async function buildDailyReport(env, { now = Date.now(), storeSnapshot = 
     },
     yardHealth,
     channels,
+    // Accepted free instant pushes, last 24 h (devices.js; also inside apns/fcm ok).
+    freeInstant24h: (ev.stats.channels[FREE_INSTANT_METRIC] || { last24h: {} }).last24h.ok || 0,
     resend: {
       sentToday: ev.stats.emailsToday, dailyCap: resendDailyCap(env),
       // Optional mail held back at the cap in the last 24 h (ops.js countHeld).

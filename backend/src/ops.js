@@ -19,6 +19,11 @@ export const CHANNELS = [
   'email:confirm',
 ];
 
+/* Not a channel: accepted free instant pushes (devices.js), counted on top of
+ * their apns / fcm send. ops_monitor.js shows it as one line under the sends
+ * and keeps it out of the per-channel rows. */
+export const FREE_INSTANT_METRIC = 'free-instant';
+
 const MAX_ERRORS = 500;
 const DETAIL_MAX = 200;
 

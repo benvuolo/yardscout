@@ -211,5 +211,145 @@ r = await api('/v1/admin/device-digest/run', { method: 'POST', headers: ADMIN })
 const capSends = (await sentList()).filter((s) => s.token === capToken);
 check('5th valid free watch survives a dropped one (recap names the Miata)', capSends.length === 1 && /Miata|MX-5/.test(capSends[0].body), JSON.stringify(capSends));
 
+/* ---- free instant alert (2026-11-16): ONE flagged watch per free device,
+ * cars within 50 mi of its centre, from the budget Pro leaves ---- */
+const SLC = { lat: 40.76, lng: -111.89 };
+// ~80 mi due south of the watch centre: inside the 100 mi watch, past 50 mi.
+const FAR = { location: 'Far South Yard', city: 'Far', state: 'UT', lat: 39.60, lng: -111.89 };
+const tokensSent = async (tok) => (await sentList()).filter((s) => s.token === tok);
+
+const oldFreeId = uuid(), oldFreeTok = fcmTok('old-free');
+r = await api('/v1/device/register', J({}, { deviceId: oldFreeId, fcmToken: oldFreeTok, tier: 'free',
+  watches: [{ make: 'Volvo', model: '240', ...SLC, radiusMi: 100 }] }));
+check('old-style free register (no flag): no instant in the answer', r.status === 200 && !('instant' in r.data), JSON.stringify(r.data));
+
+const instId = uuid(), instTok = fcmTok('inst-free');
+r = await api('/v1/device/register', J({}, { deviceId: instId, fcmToken: instTok, tier: 'free', watches: [
+  { make: 'Volvo', model: '740', ...SLC, radiusMi: 100 },
+  { make: 'Volvo', model: '240', ...SLC, radiusMi: 100, instant: true },
+] }));
+check('flagged free watch kept as instant, clamped to 50 mi',
+  r.status === 200 && r.data.instant && r.data.instant.model === '240' && r.data.instant.radiusMi === 50, JSON.stringify(r.data));
+
+const smallId = uuid(), smallTok = fcmTok('inst-small');
+r = await api('/v1/device/register', J({}, { deviceId: smallId, fcmToken: smallTok, tier: 'free',
+  watches: [{ make: 'Volvo', model: '240', ...SLC, radiusMi: 25, instant: true }] }));
+check('instant radius keeps a smaller watch radius (25 mi)', r.data.instant && r.data.instant.radiusMi === 25, JSON.stringify(r.data));
+
+const proVolvoId = uuid(), proVolvoTok = fcmTok('pro-volvo');
+r = await api('/v1/device/register', J({}, { deviceId: proVolvoId, fcmToken: proVolvoTok, tier: 'pro',
+  watches: [{ make: 'Volvo', model: '', instant: true }] }));
+check('pro register ignores the flag (no instant row)', r.status === 200 && !('instant' in r.data), JSON.stringify(r.data));
+
+const twoId = uuid(), twoTok = fcmTok('two-flags');
+r = await api('/v1/device/register', J({}, { deviceId: twoId, fcmToken: twoTok, tier: 'free', watches: [
+  { make: 'Volvo', model: '940', ...SLC, radiusMi: 100, instant: true },
+  { make: 'Volvo', model: '240', ...SLC, radiusMi: 100, instant: true },
+] }));
+check('two flags: the first one is kept', r.data.instant && r.data.instant.model === '940', JSON.stringify(r.data));
+
+// Ogden is ~30 mi from the centre: inside 50, outside 25.
+await commit([
+  arrival(9601, { make: 'Volvo', model: '240', row: '3' }),
+  arrival(9602, { make: 'Volvo', model: '240', row: '4', ...FAR }),
+  arrival(9603, { make: 'Volvo', model: '740', row: '5' }),
+]);
+await waitDispatch();
+let inst = await tokensSent(instTok);
+check('flagged free watch: one instant push', inst.length === 1, `got ${inst.length}`);
+check('instant push is the Pro arrivals push for the car inside 50 mi only',
+  /just hit the yard/.test(inst[0]?.title || '') && /240 — Utah Pick-A-Part - Ogden/.test(inst[0]?.body || '')
+  && !/Far South/.test(inst[0]?.body || '') && !/740/.test(inst[0]?.body || ''), `${inst[0]?.title} | ${inst[0]?.body}`);
+check('instant push deep-links to the car', inst[0]?.data?.url === '/#alert=9601', inst[0]?.data?.url);
+check('old-style free device: no instant push', (await tokensSent(oldFreeTok)).length === 0);
+check('25 mi instant watch: no push for a car ~30 mi out', (await tokensSent(smallTok)).length === 0);
+check('two flags: the unflagged-in-effect watch (240) gets no instant push', (await tokensSent(twoTok)).length === 0);
+const proV = await tokensSent(proVolvoTok);
+check('pro still gets every match at any distance', proV.length === 1 && /Far South/.test(proV[0].body) && /740/.test(proV[0].body), proV[0]?.body);
+
+r = await api('/v1/admin/device-digest/run', { method: 'POST', headers: ADMIN });
+inst = await tokensSent(instTok);
+const instWeekly = inst[1];
+check('Monday summary still comes for the instant device', inst.length === 2 && /week/i.test(instWeekly?.title || ''), JSON.stringify(inst.map((s) => s.title)));
+check('Monday summary holds the far car and the other watch, not the pushed one',
+  /Far South/.test(instWeekly?.body || '') && /740/.test(instWeekly?.body || '') && !/row 3/.test(instWeekly?.body || ''), instWeekly?.body);
+check('Monday summary names what the instant alert did not cover',
+  /Both are outside your instant alert \(Volvo 240, 50 mi\); Pro pushes every watch at any distance\./.test(instWeekly?.body || ''), instWeekly?.body);
+const oldWeekly = (await tokensSent(oldFreeTok))[0];
+check('old-style free device: Monday summary unchanged (both 240s, Pro line as before)',
+  /row 3/.test(oldWeekly?.body || '') && /Far South/.test(oldWeekly?.body || '') && /Pro would have pushed these the day they landed/.test(oldWeekly?.body || '')
+  && !/instant/.test(oldWeekly?.body || ''), oldWeekly?.body);
+const twoWeekly = (await tokensSent(twoTok))[0];
+check('two-flag device: the 240s wait for Monday', /row 3/.test(twoWeekly?.body || ''), twoWeekly?.body);
+
+/* the flag moves with one re-registration; a build that stops sending it
+ * goes back to Monday-only */
+r = await api('/v1/device/register', J({}, { deviceId: instId, fcmToken: instTok, tier: 'free', watches: [
+  { make: 'Volvo', model: '740', ...SLC, radiusMi: 100, instant: true },
+  { make: 'Volvo', model: '240', ...SLC, radiusMi: 100 },
+] }));
+check('moving the flag re-registers as the 740', r.data.instant && r.data.instant.model === '740', JSON.stringify(r.data));
+await commit([arrival(9604, { make: 'Volvo', model: '740', row: '6' }), arrival(9605, { make: 'Volvo', model: '240', row: '7' })]);
+await waitDispatch();
+inst = await tokensSent(instTok);
+check('after the move: pushed for the 740 only', inst.length === 3 && /740/.test(inst[2].body) && !/row 7/.test(inst[2].body), inst[2]?.body);
+r = await api('/v1/device/register', J({}, { deviceId: instId, fcmToken: instTok, tier: 'free', watches: [
+  { make: 'Volvo', model: '740', ...SLC, radiusMi: 100 },
+] }));
+await commit([arrival(9606, { make: 'Volvo', model: '740', row: '8' })]);
+await waitDispatch();
+check('flag dropped (old build): no instant push', (await tokensSent(instTok)).length === 3);
+
+/* Pro first when the budget is tight: 25 Pro devices use all of
+ * MAX_SENDS_PER_COMMIT, the free instant device waits for Monday */
+const saabPro = [];
+for (let i = 0; i < 25; i++) {
+  const id = uuid(), tok = fcmTok(`saab-pro-${i}`);
+  saabPro.push(tok);
+  // The register route allows 30 a minute per IP: on a 429, wait the window out.
+  const reg = () => api('/v1/device/register', J({}, { deviceId: id, fcmToken: tok, tier: 'pro', watches: [{ make: 'Saab', model: '900' }] }));
+  let rr = await reg();
+  if (rr.status === 429) { await new Promise((res) => setTimeout(res, 61_000)); rr = await reg(); }
+  if (rr.status !== 200) check(`saab pro ${i} registers`, false, JSON.stringify(rr));
+}
+const saabFreeId = uuid(), saabFreeTok = fcmTok('saab-free');
+await api('/v1/device/register', J({}, { deviceId: saabFreeId, fcmToken: saabFreeTok, tier: 'free',
+  watches: [{ make: 'Saab', model: '900', ...SLC, radiusMi: 100, instant: true }] }));
+// The production path (commit → waitUntil dispatch), so the car is also stored for Monday.
+await commit([arrival(9701, { make: 'Saab', model: '900', row: '11' })]);
+await new Promise((res) => setTimeout(res, 5000));
+let proGot = 0;
+for (const tok of saabPro) proGot += (await tokensSent(tok)).length;
+check('tight budget: every Pro device pushed', proGot === 25, `got ${proGot}`);
+check('tight budget: free instant device not pushed (Pro used all 25 sends)', (await tokensSent(saabFreeTok)).length === 0);
+r = await api('/v1/admin/device-alerts/dispatch', J(ADMIN, { arrivals: [arrival(9702, { make: 'Saab', model: '900', row: '12' })] }));
+check('admin path agrees: 25 sends, all Pro, no free instant', r.data.sends === 25 && r.data.freeInstant === 0, JSON.stringify(r.data));
+r = await api('/v1/admin/device-digest/run', { method: 'POST', headers: ADMIN });
+const saabWeekly = await tokensSent(saabFreeTok);
+check('the car the budget cut is in the Monday summary', saabWeekly.length === 1 && /week/i.test(saabWeekly[0].title) && /row 11/.test(saabWeekly[0].body), JSON.stringify(saabWeekly));
+check('a cut car is not claimed as outside the instant alert', !/outside your instant alert/.test(saabWeekly[0]?.body || ''), saabWeekly[0]?.body);
+
+/* one phone, one row: a token moved to a new device id leaves the old row
+ * unpushable, so one arrival reaches the phone once */
+const phoneTok = fcmTok('one-phone');
+const oldInstall = uuid(), newInstall2 = uuid();
+await api('/v1/device/register', J({}, { deviceId: oldInstall, fcmToken: phoneTok, tier: 'free',
+  watches: [{ make: 'Volvo', model: '850', ...SLC, radiusMi: 100, instant: true }] }));
+await api('/v1/device/register', J({}, { deviceId: newInstall2, fcmToken: phoneTok, tier: 'free',
+  watches: [{ make: 'Volvo', model: '850', ...SLC, radiusMi: 100, instant: true }] }));
+// (/v1/device/test allows 5 an hour per IP and the tests above used them, so
+// the check is the dispatch itself: both rows carry the same instant watch,
+// and the phone must hear once.)
+const phoneBefore = (await tokensSent(phoneTok)).length;
+r = await api('/v1/admin/device-alerts/dispatch', J(ADMIN, { arrivals: [arrival(9801, { make: 'Volvo', model: '850' })] }));
+check('token moved: old row cleared, one instant push reaches the phone once',
+  (await tokensSent(phoneTok)).length === phoneBefore + 1 && r.data.freeInstant === 1, JSON.stringify(r.data));
+
+/* daily ops email counts free instant pushes */
+r = await api('/v1/admin/ops/daily/run', J(ADMIN, { dryRun: true }));
+check('ops: free instant pushes counted (24 h)', r.data.freeInstant24h >= 3, String(r.data.freeInstant24h));
+check('ops email text carries the free instant line', /of the app pushes, free instant alerts: \d+/.test(r.data.email?.text || ''));
+check('ops email keeps free-instant out of the channel rows', !/^\s+free-instant\s/m.test(r.data.email?.text || ''));
+
 console.log(failures ? `\n${failures} FAILURES` : '\nALL PASS');
 process.exit(failures ? 1 : 0);
