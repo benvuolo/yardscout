@@ -5694,9 +5694,7 @@ function startCarsIntent(c) {
   // Keep the prefill until the filters actually change.
   _csSyncKey = document.getElementById('live-filter-make').value + '\u0000' + [...selectedModels].join('\u0000') + '\u0001' + liveTrimWord();
   document.getElementById('car-search-clear').hidden = false;
-  // No note while a place is on its way (a guess, a link's yard): the zip
-  // card, if it comes to that, names the car itself.
-  carSearchNote(activeZipCoords || placePending() ? '' : `Enter your zip above to see every ${escapeHtml(input.value)} near you.`);
+  carSearchNote(activeZipCoords ? '' : `Enter your zip above to see every ${escapeHtml(input.value)} near you.`);
   // Last: opening the tab can render, and so apply the link, right away.
   try { document.querySelector('.tab[data-tab="live"]').click(); } catch (e) { /* boot race */ }
   carSearchFit();
