@@ -67,6 +67,8 @@ SLIDES = [
     ("06_value", "Know what a part is worth", "Pro: yard price vs what it sells for online", "value", True),
 ]
 
+# Cars slide: search distance (a value of the app's own distance list).
+CARS_RADIUS = "25"
 # Parts slide search: a common car and part with Verified and Likely donors.
 PARTS_CAR = ("2009", "Toyota", "Camry")
 PARTS_PART = "Alternator"
@@ -208,6 +210,14 @@ def scroll_to(page, selector, gap=12):
 
 def step_cars(page, base):
     load_app(page, base)
+    # A short drive only: the first screen then shows cars at the yards in
+    # town (their own photos, numbered rows) rather than the newest car
+    # anywhere within 100 mi.
+    page.evaluate("""r => { const s = document.getElementById('live-radius');
+        if (s && [...s.options].some(o => o.value === r)) { s.value = r; s.dispatchEvent(new Event('change', { bubbles: true })); } }""",
+                  CARS_RADIUS)
+    page.wait_for_timeout(2500)
+    tidy(page)
     page.evaluate("window.scrollTo(0, 0)")
     wait_images(page)
 
