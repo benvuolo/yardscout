@@ -19,6 +19,8 @@ const UPSTREAM = 'https://benvuolo.github.io/yardscout';
 import { handleEntitlements } from './entitlements.js';
 // Server-rendered share pages (/car/<vin>, /yard/<slug>) — see share.js.
 import { renderCarPage, renderYardPage, renderSitemap, renderYardsPage, renderLandedPage, renderLandedModelPage, renderJunkyardsPage, renderPricesPage, IOS_URL, PLAY_URL } from './share.js';
+// GET /geo: the visitor's approximate area, for the first view (see geo.js).
+import { geoResponse } from './geo.js';
 
 /** The server-rendered pages (share.js): a path → the function that renders
  * it, or null when the path is not one of them. */
@@ -89,6 +91,7 @@ export default {
     if (req.method === 'GET' || req.method === 'HEAD') {
       if (url.pathname === '/.well-known/apple-app-site-association' || url.pathname === '/apple-app-site-association') return wellKnown(AASA);
       if (url.pathname === '/.well-known/assetlinks.json') return wellKnown(ASSET_LINKS);
+      if (url.pathname === '/geo') return geoResponse(req);
       // App-button landings. Reached only when the app did NOT claim the
       // link (not installed, or an older build): send the visitor on to the
       // web app (car links) or their store (the header button).
