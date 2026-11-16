@@ -1,5 +1,5 @@
 {
-  "_doc": "Vehicle photo sources: the REMOTE KILL SWITCH. The scraper keeps a car's photo code in vehicle_extras.json / data/inv shards only when the code matches a pattern of an ENABLED source here, and publishes the enabled sources as `photoSources` in vehicle_extras.json and data/inv/manifest.json. The app renders a photo only through a published, enabled source, so a takedown is: set enabled=false, commit, dispatch scan.yml (runbook: ops/yards.md 'Photo takedown'). Patterns are plain regexes valid in both Python and JavaScript, anchored, matched against the whole code; {1}..{9} in card/large are the capture groups. Images load from the yard's own URL, unaltered; never downloaded, rehosted or proxied. onCards (default true): false = the source's images are too heavy for list cards (>~150 KB each), so the app shows them only on the car screen and in the viewer.",
+  "_doc": "Vehicle photo sources: the REMOTE KILL SWITCH. The scraper keeps a car's photo code in vehicle_extras.json / data/inv shards only when the code matches a pattern of an ENABLED source here, and publishes the enabled sources as `photoSources` in vehicle_extras.json and data/inv/manifest.json. The app renders a photo only through a published, enabled source, so a takedown is: set enabled=false, commit, dispatch scan.yml (runbook: ops/yards.md 'Photo takedown'). Patterns are plain regexes valid in both Python and JavaScript, anchored, matched against the whole code; {1}..{9} in card/large are the capture groups. Images load from the yard's own URL, unaltered; never downloaded, rehosted or proxied. onCards (default true): false = the source's images are too large for list cards, so the app shows them only on the car screen and in the viewer. Rule since 2026-11-16 (owner: 'the more photos the better'): a source goes on list cards when its image is at most about 800 px on the long side, whatever the file weight up to about 750 KB (cards load photos lazily and show the drawing until the photo arrives); originals of 1600 px and more (kikers, ipull, usautosupply) stay car-screen only, and multi-megabyte originals stay tap-to-load (heavy).",
   "version": 1,
   "sources": {
     "pyp": {
@@ -110,8 +110,8 @@
           "large": "https://da8h1v3w8q6n5.cloudfront.net/{1}/images/{2}/{3}.jpg"
         }
       ],
-      "note": "Pick-A-Part VA (2 yards). URG's CloudFront (URG hosts the yard's iis-pro-upull inventory plugin and its photos); 800x600 JPEG ~400 KB, the only size.",
-      "onCards": false
+      "note": "Pick-A-Part VA (2 yards). URG's CloudFront (URG hosts the yard's iis-pro-upull inventory plugin and its photos); 800x600 JPEG ~400 KB, the only size. On list cards since 2026-11-16 (lazy-loaded; see _doc).",
+      "onCards": true
     },
     "upullitwa": {
       "enabled": true,
@@ -124,8 +124,8 @@
           "large": "https://da8h1v3w8q6n5.cloudfront.net/{1}/images/{2}/{3}.jpg"
         }
       ],
-      "note": "U-Pull-It Auto Parts WA (3 yards). URG's CloudFront (URG hosts the yard's iis-pro-upull inventory plugin and its photos); 800x600 JPEG ~400 KB, the only size.",
-      "onCards": false
+      "note": "U-Pull-It Auto Parts WA (3 yards). URG's CloudFront (URG hosts the yard's iis-pro-upull inventory plugin and its photos); 800x600 JPEG ~400 KB, the only size. On list cards since 2026-11-16 (lazy-loaded; see _doc).",
+      "onCards": true
     },
     "aesop": {
       "enabled": true,
@@ -138,8 +138,8 @@
           "large": "https://da8h1v3w8q6n5.cloudfront.net/{1}/images/{2}/{3}.jpg"
         }
       ],
-      "note": "AESOP Tulsa. URG's CloudFront (URG hosts the yard's iis-pro-upull inventory plugin and its photos); 800x600 JPEG ~400 KB, the only size.",
-      "onCards": false
+      "note": "AESOP Tulsa. URG's CloudFront (URG hosts the yard's iis-pro-upull inventory plugin and its photos); 800x600 JPEG ~400 KB, the only size. On list cards since 2026-11-16 (lazy-loaded; see _doc).",
+      "onCards": true
     },
     "midwayupull": {
       "enabled": true,
@@ -152,8 +152,8 @@
           "large": "https://da8h1v3w8q6n5.cloudfront.net/{1}/images/{2}/{3}.jpg"
         }
       ],
-      "note": "Midway U-Pull KS/MO. URG's CloudFront (URG hosts the yard's iis-pro-upull inventory plugin and its photos); 800x600 JPEG ~400 KB, the only size.",
-      "onCards": false
+      "note": "Midway U-Pull KS/MO. URG's CloudFront (URG hosts the yard's iis-pro-upull inventory plugin and its photos); 800x600 JPEG ~400 KB, the only size. On list cards since 2026-11-16 (lazy-loaded; see _doc).",
+      "onCards": true
     },
     "byot": {
       "enabled": true,
@@ -166,8 +166,8 @@
           "large": "https://storage.googleapis.com/byotautoparts.appspot.com/yard_inventory/{1}"
         }
       ],
-      "note": "BYOT's own Firebase bucket; 540x720 JPEG ~450-570 KB, the only size.",
-      "onCards": false
+      "note": "BYOT's own Firebase bucket; 540x720 JPEG ~450-570 KB, the only size. On list cards since 2026-11-16 (lazy-loaded; see _doc).",
+      "onCards": true
     },
     "wilberts": {
       "enabled": true,
@@ -577,7 +577,7 @@
       "enabled": true,
       "label": "Photo: Pull-A-Part",
       "host": "papimages.blob.core.windows.net",
-      "onCards": false,
+      "onCards": true,
       "patterns": [
         {
           "code": "^q(\\d{1,4})/(\\d{4})(\\d{2})(\\d{8})/(\\d{1,12})/(\\d{1,4})$",
@@ -585,7 +585,7 @@
           "large": "https://papimages.blob.core.windows.net/carinventory/{1}/{2}/{3}/{2}{3}{4}_{1}_{5}_{6}.png"
         }
       ],
-      "note": "Pull-A-Part's own Azure blob store, via its image service (one cached lookup per car). 640x640 PNG ~700 KB, application/octet-stream."
+      "note": "Pull-A-Part's own Azure blob store, via its image service (one cached lookup per car). 640x640 PNG ~700 KB, application/octet-stream. On list cards since 2026-11-16 (lazy-loaded; see _doc)."
     },
     "ys_upickitaz": {
       "enabled": true,

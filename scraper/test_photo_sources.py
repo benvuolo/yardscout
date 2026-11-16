@@ -58,12 +58,18 @@ check("every published URL is https on the source's host",
           for s in PUB.values() for p in s["patterns"] for w in ("card", "large")))
 check("onCards published as a bool on every source", all(isinstance(s.get("onCards"), bool) for s in PUB.values()))
 # 2026-11-09 owner ("do what you think, it needs to be free"): sources up to
-# ~300 KB per image (Ario tenants, Fenix) show on list cards, lazy-loaded;
-# 400 KB+ sources stay car-screen only.
-check("heavy sources are off list cards",
-      {"byot", "papva", "upullitwa", "aesop", "midwayupull", "kikers", "pap"}
+# ~300 KB per image (Ario tenants, Fenix) show on list cards, lazy-loaded.
+# 2026-11-16 owner ("I would love so much to increase that photo coverage as
+# the more photos the better"): the 400-750 KB sources whose image is at most
+# ~800 px on the long side join them (cards show the drawing until the photo
+# arrives). Originals of 1600 px and more stay car-screen only.
+check("big originals (1600 px and up) are off list cards",
+      {"kikers", "ipull", "usautosupply"}
       <= {k for k, s in PUB.items() if not s["onCards"]},
       sorted(k for k, s in PUB.items() if not s["onCards"]))
+check("sources of at most ~800 px are on list cards",
+      all(PUB[k]["onCards"] is True for k in ("byot", "papva", "upullitwa", "aesop", "midwayupull", "pap")),
+      {k: PUB[k]["onCards"] for k in ("byot", "papva", "upullitwa", "aesop", "midwayupull", "pap")})
 check("onCards defaults to true", js.published_photo_sources({"x": {"enabled": True, "label": "Photo: X", "host": "h",
       "patterns": [{"code": "^x$", "card": "https://h/a", "large": "https://h/a"}]}})["x"]["onCards"] is True)
 check("LKQ card is not cropped (mode=max, not mode=crop)",

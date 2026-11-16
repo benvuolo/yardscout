@@ -16864,12 +16864,20 @@ def fetch_pap_locations() -> list[dict]:
 # windows.net/carinventory/{loc}/{yyyy}/{mm}/{ts}_{loc}_{ticket}_{line}.png"}
 # or "Error retrieving image". The path carries the upload timestamp, so it
 # can't be derived: one lookup per NEW car (newest first, at most
-# PAP_PHOTO_LOOKUP_MAX per scan, 10 s apart, honest YardScout UA), cached
-# for good in the history DB (photo_lookups). Code "q{loc}/{ts}/{ticket}/{line}".
-# Images are 640x640 PNG ~700 KB: car screen only (onCards false).
+# PAP_PHOTO_LOOKUP_MAX per scan, PAP_PHOTO_DELAY_SEC apart, honest YardScout
+# UA), cached for good in the history DB (photo_lookups). Code
+# "q{loc}/{ts}/{ticket}/{line}". Images are 640x640 PNG ~700 KB; on list
+# cards since 2026-11-16 (scraper/photo_sources.json).
+# Pace, 2026-11-16 (owner: "the more photos the better"): 500 lookups 6 s
+# apart, was 300 at 10 s. Same 50 minutes beside the independents, 3,000 a
+# day instead of 1,800; 28,225 cars were still waiting for a first lookup.
+# Still one small JSON request every 6 s, far below what one visitor's
+# results page asks of the same service. Do not go faster without a reason:
+# Pull-N-Save's platform added a bot check over scanners pulling images
+# (ops/yards.md, 2026-11-07).
 PAP_IMAGE_SERVICE = "https://imageservice.pullapart.com/img/retrieveimage/"
-PAP_PHOTO_LOOKUP_MAX = int(os.environ.get("PAP_PHOTO_LOOKUP_MAX", "300"))
-PAP_PHOTO_DELAY_SEC = 10.0
+PAP_PHOTO_LOOKUP_MAX = int(os.environ.get("PAP_PHOTO_LOOKUP_MAX", "500"))
+PAP_PHOTO_DELAY_SEC = 6.0
 PAP_PHOTO_RECHECK_DAYS = 3
 PAP_PHOTO_JOIN_TIMEOUT_SEC = 3600
 _PAP_WEBPATH_RE = re.compile(
