@@ -1114,7 +1114,10 @@ was moved to it only after everything passed. Design and build notes:
   two held sentences in `docs/index.html` (the comments beside them carry
   the new text), flip the check in `backend/test/free_instant_e2e.mjs`,
   bump the sw cache.
-- 4Runner post: a generator for the "what landed" list is in the session's
-  scratchpad (not in the repo); as of the 10:22 UTC scan, 48 4Runners were
-  set out Nov 9 to 16 in 21 states and provinces, 18 confirmed 4x4. Refresh
-  from the newest scan right before the owner posts.
+- 4Runner post: `tools/landed_post.py Toyota 4Runner --gens ...` writes the
+  "what landed" list (fe9f77c2; how to use it is in `ops/reddit.md`). As of
+  the 10:22 UTC scan, 48 4Runners were set out Nov 9 to 16 in 21 states and
+  provinces, 18 confirmed 4x4. A draft went to the owner; run the tool again
+  on the newest scan right before they post.
+- Follow-up scheduled: `trig_016dADedHXNCLcakiqQW9irq`, 2026-11-17 15:00
+  UTC (store status, then the held website sentences and the Play listing).
