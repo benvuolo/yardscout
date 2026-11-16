@@ -1236,3 +1236,33 @@ all from one yard's batch (Utah Pic-A-Part Ogden Premium, set out 11-15).
 - Suggested to the owner, not done: stop the U-Pull-R reader altogether
   until their API arrives (each scan still asks their site for the makes,
   hits the captcha on the first search and reads the price page).
+
+## 2026-11-16 17:17 UTC today's feedback goes to main (sw `jh-v203`)
+
+Branch `hub/feedback-1116`, 16 commits on top of main at 7a33d5c5, pushed to
+main as a fast-forward. Website only; the apps get it with the next release
+(a new "ship").
+
+- In it: the alert card, one price Pro box on a car page instead of two,
+  "fits 2013" instead of "fits 2013–2013", strict newest-first order with a
+  photo deciding only inside a day, the tab-return fix, and the four readers
+  (Pull-N-Save, Budget, U-Pull-R, Harry's) sending the YardScout name.
+- Checks on the final state: run 6 (77 suites: browser e2e, units, site
+  units, python e2e, every `scraper/test_*.py`) passed except `illo_unit`
+  and `photo_policy_unit`, which stopped at "photoEpochBump is not defined".
+  Both copy named functions out of the app and had not been given the new
+  photo counter; tests fixed (app unchanged), both pass. Layout check: six
+  widths, 2,208 checks, 0 failures. API suites and `browser_e2e.py` rerun at
+  17:15 on the final state: all six pass.
+- Owner, ~17:05: "give me harrys, the form never sent". The 11-02 Harry's
+  note never went out, so no correction; the note was reworded to say what
+  the reader does (every four hours, about 290 pages, answers the Sucuri
+  check itself, asks for their OK) and given to the owner
+  (`ops/yard-outreach-drafts.md` section 5). Held with the other three
+  until a scan has run with the name.
+- No reply from any yard in Gmail in the last three days (checked 17:08).
+- NEXT: the 20:00 UTC scan is the first with the YardScout name (the 16:00
+  scan started on the old code). Read its log: Pull-N-Save about 11,400
+  cars, Budget 1,627 + 879, Harry's about 4,259 over three yards, U-Pull-R
+  captcha and 0 cars as before. Then tell the owner the four notes can go.
+  A yard that answers the name differently has given its answer.
