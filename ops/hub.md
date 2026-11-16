@@ -1122,7 +1122,7 @@ was moved to it only after everything passed. Design and build notes:
 - Follow-up scheduled: `trig_016dADedHXNCLcakiqQW9irq`, 2026-11-17 15:00
   UTC (store status, then the held website sentences and the Play listing).
 
-## 2026-11-16 ~16:10 UTC owner's first look on an iPhone (three screenshots)
+## 2026-11-16 ~16:00 UTC owner's first look on an iPhone (three screenshots)
 
 Owner: "Like the format, lack of pictures is annoying. For pro isn't see
 what you'd save and see what parts are worth the same? Should we make /
