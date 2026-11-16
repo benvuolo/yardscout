@@ -750,8 +750,12 @@ Count, scan 2026-11-16 05:14Z, 337,311 cars:
 
 Where "no photo" sits: Pull-A-Part 28,386 (28,225 never looked up yet; the
 photos exist), Pull-N-Save 11,097 (checks paused 2026-11-07, see below),
-LKQ 5,706 (none at the source yet), and about 99,000 at yards whose sites
-show no per-car photo (round 4 and 5 lists above).
+LKQ 5,706 (no photo id in the feed for those cars; not checked further),
+and about 99,000 that are either at yards whose sites show no per-car photo
+(round 4 and 5 lists above) or are cars a yard has not photographed (for
+example Paul's 3,600 of 5,100, Foss 3,360 of 5,400, U-Pull-It Auto Parts
+3,444 of 5,328, Pick-A-Part VA 2,454 of 7,557, EZ Pull N Pay 2,070 of 7,148,
+iPull-uPull 2,029 of 5,342).
 
 Changed by the hub (dc37bbab; live from the scan dispatched 07:46 UTC):
 - **On list cards now:** `pap`, `byot`, `papva`, `upullitwa`, `aesop`,
