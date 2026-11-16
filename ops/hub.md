@@ -789,3 +789,47 @@ Built and pushed (85f20360, sw `jh-v198`, Worker deployed 00:35 UTC):
 Next for the hub: read iPhone checkout outcomes once 1.12.16 has a day of
 use (the "8 Subscribe taps, 0 purchases" question); first full 7-day
 narrowing line about 2026-11-21.
+
+## 2026-11-16 ~07:30 UTC owner: "I want to get more users" (saw $48 in subs)
+
+Read from the 2026-11-15 daily email (week Nov 8 to 14) and local checks:
+- **Reach is small.** 188 new visitors in the week (web 141, Android app 33,
+  iPhone app 14). Tagged: reddit/xterra 37, chatgpt.com 9, facebook 2.
+  One purchase recorded (Android, Nov 14; Google's report had not confirmed it
+  by the Nov 15 count). Paying: 5 (App Store 3 as of 11-14, down from 4
+  earlier in the month; Play 1 as of 11-13; Stripe 1).
+- **Web visitors leave without a hook.** 141 first web visits: 3 watches, the
+  Monday email offered 2 times, 0 addresses, 4 store-link taps. Android app:
+  10 watches from 33 new. reddit/xterra: 37 visits, 0 watches. chatgpt.com:
+  9 visits, 2 watches.
+- **Why (hub screenshots, fresh phone browser, the Reddit link):** the zip
+  card never names the car the link was for; after the zip the first car
+  card starts at y=685 of 844, under the "How to read this" note, the stat
+  tiles, the search box, the filter row and the watch strip, and behind the
+  app banner. The email ask is two steps and sits in a 30 s toast.
+- **iPhone "10 checkout taps, 10 cancelled"** all fell on Nov 14, the day
+  build 40 was in App Review, and only builds that report outcomes (1.12.16)
+  are counted there. Hub's reading: Apple's reviewer and testers, not
+  customers. Same doubt for Android's "store price not loaded" x3 on its
+  upload day (Play pre-launch devices). No conclusion about price or the
+  purchase flow can be drawn from this week. Idea for the next app release:
+  do not count sandbox (TestFlight, App Review) or test-lab sessions.
+- **Who is engaged:** most watched Toyota 4Runner 14 of 88 watches (may
+  include the owner's own), Pickup 4, Tacoma 4; most searched car Lexus
+  GX 470 (18). This week's arrivals (scan 2026-11-16 05:14Z): 4Runner 47 in
+  20 states (3rd gen 32, 4th gen 12; 4x4 18, 2WD 27), Tacoma 29, Sequoia 46,
+  Toyota Pickup 13, GX 470 1.
+
+Started: builder on branch `growth/first-view` (worktree, web only): zip card
+names the car from a cars link; on phones the accuracy note moves below the
+first car on a first visit; the app banner waits for scroll or 30 s; the
+watch strip takes the Monday-email address in one step. Hub reviews, merges,
+and shows the owner before/after. See `ops/growth.md` when it reports.
+
+Told the owner (plan): 1. the landing fix above; 2. next post is the
+4Runner list (hub writes it on the day), and the YardScout link goes in the
+Reddit profile because the personal bodywork post drew far more replies than
+the Xterra list; 3. a Search Console screenshot (Performance, 28 days, Pages)
+to judge the model pages, which is the tabled model-pages topic raised again
+as agreed; 4. offered, not started: a printable QR flyer for yard counters.
+Open from before: Kennewick draft, Reddit drafter limit, U-Pull R requester.
