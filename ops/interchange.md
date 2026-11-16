@@ -3577,3 +3577,19 @@ Earlier Honda/Nissan bullets (tier C trial, the 503 block, check-ins) are scatte
 - Chevrolet Colorado alternator (request 2026-11-11) was for a 2003, which
   does not exist; 2004 is covered. The Parts empty state now points to the
   neighbouring year (hub change, sw `jh-v197`). No table change needed.
+
+## Noted by the hub, 2026-11-16 (tests touched; one app gap left for this workstream)
+
+- `backend/test/interchange_e2e.py`, `part_finder_e2e.py`, `pf_ux_e2e.py`
+  and `yaris_coverage_e2e.py`: after typing the zip each now waits until the
+  zip is stored (`localStorage.jh_zip`). They used to wait for cards, which
+  since the no-gate change appear without a zip; `interchange_e2e` was
+  failing about half the time when the outside zip lookup took over half a
+  second. Nothing else in the tests changed.
+- App gap, not fixed: `setZipCenter` ends with `pfSyncWhere(); renderLive()`
+  and does not run the Parts search again. A part picked while the zip
+  lookup is still out leaves "Set a zip code (or use your location) up top"
+  on the Parts tab after the zip arrives. Suggested: at the end of
+  `setZipCenter`, when a part is chosen and the Parts results hold that
+  empty line, call `pfRunSearch()`. Mind the launch call (a saved zip is
+  restored before the Parts state exists).

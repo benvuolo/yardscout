@@ -1289,3 +1289,32 @@ shows Nov 14 cars ahead of Nov 13.
   has no top margin (styles.css, "Car screen additions") and `.locator` no
   bottom margin. On main since the feed merge; plainer now that the Pro box
   under it is gone.
+
+## 2026-11-16 18:02 UTC car page spacing fix to main (sw `jh-v204`); a test race found and fixed
+
+- **Fix** (63867a1d): 12 px between the yard box and the turnover label on
+  a free user's car page (`.cd-value` top margin). Measured at phone and
+  desktop width on the local build.
+- **Checks**: run 7 (77 suites) passed except `interchange_e2e`; car-screen
+  layout check at six widths, 192 checks, 0 failures.
+- **`interchange_e2e` was not the fix.** It failed 2 of 3 reruns on the
+  branch and 2 of 4 on main without the fix, at three different steps. Cause:
+  the four Parts tests typed a zip and waited for cards; since the no-gate
+  change cards show without a zip, so the tests moved on before the outside
+  zip lookup (api.zippopotam.us, 0.4 to 0.7 s from here this evening)
+  answered. It passed six times earlier today because the lookup was
+  quicker. Tests now wait until the zip is stored (second commit on this
+  branch); after that `interchange_e2e` 6 of 6, `part_finder_e2e`,
+  `pf_ux_e2e`, `yaris_coverage_e2e` 2 of 2 each. Lesson: a hub merge that
+  changes what "the page is ready" means has to be followed through the
+  tests that waited on the old sign.
+- **A small real gap found on the way, not fixed** (Parts tab code; noted in
+  `ops/interchange.md`): if a zip typed on the Cars tab answers after a part
+  was already picked on the Parts tab, the Parts tab keeps saying "Set a zip
+  code" until the part is picked again. Needs a slow connection and quick
+  fingers; shown with `xt/zip_late.py` in the hub scratchpad.
+- **Scan**: no scheduled scan had started since 12:31 (GitHub dropped or
+  delayed the 16:00 slot, as it did 04:00 and 08:00 today), so the hub
+  dispatched one at 17:54 UTC: run 43923253337 on 4ba8328b, the first with
+  the YardScout name. Scans queue one at a time (`junkyard-scan` group), so
+  a late scheduled run cannot overlap it.
