@@ -790,7 +790,7 @@ Next for the hub: read iPhone checkout outcomes once 1.12.16 has a day of
 use (the "8 Subscribe taps, 0 purchases" question); first full 7-day
 narrowing line about 2026-11-21.
 
-## 2026-11-16 ~07:30 UTC owner: "I want to get more users" (saw $48 in subs)
+## 2026-11-16 ~07:05 UTC owner: "I want to get more users" (saw $48 in subs)
 
 Read from the 2026-11-15 daily email (week Nov 8 to 14) and local checks:
 - **Reach is small.** 188 new visitors in the week (web 141, Android app 33,
@@ -834,7 +834,7 @@ to judge the model pages, which is the tabled model-pages topic raised again
 as agreed; 4. offered, not started: a printable QR flyer for yard counters.
 Open from before: Kennewick draft, Reddit drafter limit, U-Pull R requester.
 
-## 2026-11-16 ~07:45 UTC owner: "Do everything you think" (more Pro users, more people using it; main page, look, features, flow all open)
+## 2026-11-16 ~07:20 UTC owner: "Do everything you think" (more Pro users, more people using it; main page, look, features, flow all open)
 
 Standing rule 1 still applies: a store release needs an explicit "ship".
 
@@ -874,7 +874,7 @@ Asked the owner, not decided for them: D2, one free instant alert on one
 watch within a short radius (two $3.99 rivals give one). It gives away part
 of Pro, so it stays the owner's yes or no.
 
-## 2026-11-16 ~08:15 UTC owner on the free instant alert (D2): "Do what u think", asked how one free user is told apart
+## 2026-11-16 ~07:30 UTC owner on the free instant alert (D2): "Do what u think", asked how one free user is told apart
 
 Owner added the YardScout line to their Reddit profile.
 

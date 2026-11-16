@@ -736,3 +736,50 @@ Cause: the Yards tab shows only yards inside the chosen distance. The request
 form now looks the name and city up in the whole yard table and says "We
 already track ..." before sending (`coveredYardMatches` in the app script, sw
 `jh-v197`); a second tap still sends. Hub drafted a reply to the requester.
+
+## 2026-11-16 photos: more of them in the list (owner: "the more photos the better")
+
+Count, scan 2026-11-16 05:14Z, 337,311 cars:
+
+| | Cars | Share |
+|---|---|---|
+| Photo shows in the list | 159,438 | 47.3% |
+| Photo only on the car screen (file too big for the list) | 32,833 | 9.7% |
+| Tap to load (4 MB originals, Sturtevant) | 765 | 0.2% |
+| No photo | 144,275 | 42.8% |
+
+Where "no photo" sits: Pull-A-Part 28,386 (28,225 never looked up yet; the
+photos exist), Pull-N-Save 11,097 (checks paused 2026-11-07, see below),
+LKQ 5,706 (none at the source yet), and about 99,000 at yards whose sites
+show no per-car photo (round 4 and 5 lists above).
+
+Changed by the hub (dc37bbab; live from the scan dispatched 07:46 UTC):
+- **On list cards now:** `pap`, `byot`, `papva`, `upullitwa`, `aesop`,
+  `midwayupull`. Their images are at most ~800 px (640x640, 540x720,
+  800x600) and 400 to 700 KB. Cards load photos lazily over the drawing, so
+  a slow connection shows the drawing first. About 28,400 more cars with a
+  photo in the list at today's counts (47.3% to about 55.7%), more as the
+  Pull-A-Part backlog clears. This replaces the 2026-11-09 line of "300 KB
+  and under"; the new line is in `scraper/photo_sources.json` `_doc`.
+- **Still car screen only:** `kikers` (1600x1200), `ipull` (1920x1440),
+  `usautosupply` (2048x1536): too many pixels for a list on a phone.
+- **Pull-A-Part lookups:** 500 a scan at 6 s (was 300 at 10 s): 3,000 a day
+  in the same 50 minutes. Newest cars first, so new arrivals were already
+  covered within a scan or two; this drains the older backlog faster.
+
+Not changed, and why:
+- **Pull-N-Save (11,097 cars, 200x200 PNG ~100 KB, would suit the list):**
+  stays paused. The platform's operator told the owner that scanners pulling
+  images are why it added its check; a 202 challenge page appeared once on
+  2026-11-09. Un-pause only on the owner's word or through the official API
+  the operator mentioned.
+- **A resizing service or our own thumbnails** would make every photo about
+  25 KB and let `ipull`, `usautosupply`, `kikers` and the 4 MB originals
+  show in the list. It breaks the owner's 2026-11-06 rule ("loaded from the
+  yard's own URL ... no rehosting or proxying"), so it is the owner's
+  decision. Asked 2026-11-16.
+
+Check after the scan: recount with the same script
+(`photosrc.py` logic: match each extras photo code against the manifest's
+`photoSources`, split by `onCards` and `heavy`), and look at one
+Pull-A-Part and one BYOT card on the live site.
