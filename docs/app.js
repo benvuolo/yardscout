@@ -4930,7 +4930,9 @@ function renderLive() {
 
   // National scans can be 45k+ vehicles — rendering all as DOM cards freezes the
   // browser. Cap the grid; filters/search still run against the full dataset.
-  const RENDER_CAP = 400;
+  // Tiles are light and arrive in batches (endless scroll), so the cap rose
+  // from 400 cards to FEED_CAP tiles.
+  const RENDER_CAP = FEED_CAP;
   const overflow = vehicles.length > RENDER_CAP ? vehicles.length - RENDER_CAP : 0;
   const vehiclesToRender = overflow ? vehicles.slice(0, RENDER_CAP) : vehicles;
 
@@ -4970,12 +4972,68 @@ function renderLive() {
   // shows it pressed and the makes beside it, the summary line the count.
   lastSampleKey = sampleKey;
   updateZipChip();
-  // Tiles (CARS FEED): everything else a card held is on the car screen.
+  // Tiles (CARS FEED): everything else a card held is on the car screen. The
+  // first FEED_BATCH tiles now, more as the bottom nears (feedMore). A
+  // re-render of the same list keeps as many tiles as were already shown, so
+  // the page never jumps back from where someone had scrolled to.
+  const sig = feedSignature(vehicles);
+  const keep = sig === _feed.sig ? _feed.shown : 0;
+  _feed = { sig, list: vehiclesToRender, total: vehicles.length, sampleKey, shown: Math.min(vehiclesToRender.length, Math.max(FEED_BATCH, keep)) };
   document.getElementById('live-grid').innerHTML = focusBanner + weekBanner + watchStripHtml(vehicles.length)
-    + vehiclesToRender.map(v => carTileHtml(v, sampleKey)).join('') + (overflow
-    ? `<div class="empty-state" style="grid-column:1/-1;padding:1rem;"><p>Showing first ${RENDER_CAP} of ${vehicles.length.toLocaleString()} vehicles &mdash; narrow with search or filters (results stay fully sorted).</p></div>`
-    : '');
+    + feedTilesHtml(0, _feed.shown) + feedTailHtml();
+  feedObserve();
 }
+
+/* ---- Endless scroll (CARS FEED item 6) ---- */
+const FEED_BATCH = 40;     // tiles per batch
+const FEED_CAP = 1200;     // overall cap; then a plain line asks to narrow
+let _feed = { sig: '', list: [], total: 0, sampleKey: null, shown: 0 };
+let _feedIO = null;
+function feedSignature(vehicles) {
+  const val = (id) => document.getElementById(id).value;
+  return [val('live-filter-make'), [...selectedModels].sort().join(','), val('live-filter-year-min'), val('live-filter-year-max'),
+    val('live-filter-location'), val('live-sort'), effectiveRadiusMi(), activeZipCoords ? activeZipCoords.lat + ',' + activeZipCoords.lng : '',
+    liveWeekOnly, liveNewOnly, liveSinceOnly, liveTrimWord(), isPro(), focusedCarKey || '', liveScrapedAt || '',
+    vehicles.length, vehicles.length ? vehicleKey(vehicles[0]) : ''].join('|');
+}
+function feedTilesHtml(from, to) {
+  let html = '';
+  for (let i = from; i < to && i < _feed.list.length; i++) html += carTileHtml(_feed.list[i], _feed.sampleKey);
+  return html;
+}
+function feedTailHtml() {
+  if (_feed.shown < _feed.list.length) {
+    return `<div class="feed-more" id="feed-more" style="grid-column:1/-1;"><button type="button" class="btn btn-quiet feed-more-btn">Show more cars</button></div>`;
+  }
+  if (_feed.total > _feed.list.length) {
+    return `<p class="feed-end" style="grid-column:1/-1;">Showing the first ${_feed.list.length.toLocaleString()} of ${_feed.total.toLocaleString()} cars in this order. Narrow with the chips, the search box or Filters to see the rest.</p>`;
+  }
+  return '';
+}
+function feedMore() {
+  const tail = document.getElementById('feed-more');
+  if (!tail || _feed.shown >= _feed.list.length) return;
+  const from = _feed.shown;
+  _feed.shown = Math.min(_feed.list.length, from + FEED_BATCH);
+  tail.insertAdjacentHTML('beforebegin', feedTilesHtml(from, _feed.shown));
+  tail.outerHTML = feedTailHtml();
+  feedObserve();
+}
+function feedObserve() {
+  const tail = document.getElementById('feed-more');
+  if (!tail) return;
+  if (!('IntersectionObserver' in window)) return;   // the button still works
+  if (!_feedIO) {
+    _feedIO = new IntersectionObserver((entries) => {
+      if (entries.some(e => e.isIntersecting)) feedMore();
+    }, { rootMargin: '0px 0px 1200px 0px' });
+  }
+  _feedIO.disconnect();
+  _feedIO.observe(tail);
+}
+document.getElementById('live-grid').addEventListener('click', (e) => {
+  if (e.target.closest('.feed-more-btn')) { e.preventDefault(); feedMore(); }
+});
 
 /* Scan stamp so a screenshot carries when this list was true, or the stale
  * warning for a yard whose list stopped changing (car screen). The inventory

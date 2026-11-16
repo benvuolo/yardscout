@@ -3647,6 +3647,10 @@ select { white-space: normal; height: auto; }
 .fchip-x { font-size: 1.1em; line-height: 1; }
 @media (min-width: 721px) { .feed-chips { margin-left: 0; margin-right: 0; padding-left: 0; padding-right: 0; flex-wrap: wrap; overflow-x: visible; } }
 
+/* Endless scroll: the button is the fallback (and what a keyboard reaches);
+   it loads by itself as it comes near. */
+.feed-more { display: flex; justify-content: center; padding: var(--s3) 0; }
+.feed-end { margin: var(--s3) 0; font-size: var(--t-sm); line-height: 1.45; color: var(--text-dim); text-align: center; }
 /* Car screen additions: what the big card showed above the parts, and
    "More <model> near you" tiles at the end. */
 .cd-value { margin: 0 0 var(--s4); }
