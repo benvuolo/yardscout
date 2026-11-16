@@ -108,11 +108,14 @@ const ANALYTICS_OFF = analyticsOff(location.hostname, navigator.webdriver, IS_NA
  * changed, a part search once per distinct search, a paywall open only for
  * someone who is not Pro, and the apps report again. 3 (2026-11-13) = also
  * counts how the Cars list is narrowed (trackNarrow). 4 (2026-11-13, later) = also
- * counts how each checkout attempt ends (checkoutBegin / checkoutEnd). The
- * API notes the first day each platform sends v2 / v3 / v4, so the daily
+ * counts how each checkout attempt ends (checkoutBegin / checkoutEnd). 5
+ * (2026-11-16, Cars feed) = the Cars chips count as narrow/chip, and
+ * 'email-asked' also counts the Monday-email field in the watch strip (once
+ * per visit), not only the one in the watch toast. The
+ * API notes the first day each platform sends v2 / v3 / v4 / v5, so the daily
  * email can say which numbers predate them. Still no ids: one anonymous +1
  * per event. */
-const EVENTS_V = 4;
+const EVENTS_V = 5;
 function sendEvent(e) {
   if (ANALYTICS_OFF) return;
   const body = JSON.stringify({ e, src: ATTRIB ? ATTRIB.src : '', cmp: ATTRIB ? ATTRIB.cmp : '', med: ATTRIB ? ATTRIB.med : '',
@@ -173,11 +176,14 @@ function paywallIsProspect(trigger, pro) {
  *                  page going to the background)
  *   trim           the Filters Trim control set to a trim
  *   link           a #cars= link opened
+ *   chip           a make or model chip above the Cars grid picked (feed,
+ *                  2026-11-16; counting rules v5). All / New / This week
+ *                  and clearing a chip count nothing.
  * Each kind counts at most once per device per UTC day, decided here: the
  * day each kind last counted is kept in this browser's own storage
  * (ys_narrow) and never sent. The search box showing what Filters or a link
  * set is not a pick; a week chip is none of these. */
-const NARROW_KINDS = ['search', 'search-trim', 'filters-model', 'filters-make', 'trim', 'link'];
+const NARROW_KINDS = ['search', 'search-trim', 'filters-model', 'filters-make', 'trim', 'link', 'chip'];
 const _narrowMem = {};
 let _narrowMakePending = false;   // a Filters make waiting to see if a model follows
 function narrowDayIsNew(seen, kind, day) {
@@ -3226,7 +3232,8 @@ function renderPlaceLine() {
   const el = document.getElementById('place-line');
   if (!el) return;
   const p = _tempPlace;
-  if (!p || focusedCarKey) { el.style.display = 'none'; return; }
+  if (!p) { el.style.display = 'none'; el.dataset.open = ''; return; }
+  if (focusedCarKey) { el.style.display = 'none'; return; }
   const own = p.saved ? (localStorage.getItem('jh_zip') || '') : '';
   // A yard link shows that one yard's cars while the Yard filter is still on
   // it; the line then says so rather than "yards near <a yard>".
@@ -3235,6 +3242,7 @@ function renderPlaceLine() {
   const key = [p.kind, p.label, p.saved, own, atYard].join('\u0001');
   if (el.dataset.key !== key) {
     el.dataset.key = key;
+    el.dataset.open = '';   // a new place starts collapsed
     const where = p.label ? `<strong>${escapeHtml(p.label)}</strong>` : '';
     document.getElementById('place-line-text').innerHTML = p.kind === 'guess'
       ? (where ? `Showing yards near ${where}. That is a guess from your internet connection.`
@@ -3242,15 +3250,28 @@ function renderPlaceLine() {
       : (where && atYard ? `Showing the cars at ${where} (from the page you came from).`
         : where ? `Showing yards near ${where} (from the page you came from).`
         : 'Showing yards near the place on the page you came from.');
-    // Nothing saved: the zip field and "Use my location". A saved place: one tap back to it.
-    document.getElementById('place-line-form').hidden = p.saved;
+    // A saved place: one tap back to it.
     const back = document.getElementById('place-line-back');
     back.hidden = !p.saved;
     back.textContent = p.saved ? `Back to ${own || 'my location'}` : '';
     document.getElementById('place-line-msg').textContent = '';
   }
+  // Nothing saved: one "Change" button, which opens the zip field and "Use
+  // my location". Collapsed at first so cars sit on the first screen (the
+  // open form took a third of a phone screen above the first car).
+  const open = el.dataset.open === '1';
+  document.getElementById('place-line-form').hidden = p.saved || !open;
+  const change = document.getElementById('place-line-change');
+  change.hidden = p.saved || open;
+  change.setAttribute('aria-expanded', open ? 'true' : 'false');
   el.style.display = '';
 }
+document.getElementById('place-line-change').addEventListener('click', () => {
+  document.getElementById('place-line').dataset.open = '1';
+  renderPlaceLine();
+  const input = document.getElementById('place-line-input');
+  if (input) input.focus({ preventScroll: true });
+});
 document.getElementById('place-line-go').addEventListener('click', async () => {
   const input = document.getElementById('place-line-input');
   const msg = document.getElementById('place-line-msg');
@@ -3901,6 +3922,10 @@ document.addEventListener('keydown', (e) => {
 }, true);
 document.addEventListener('click', (e) => {
   const b = e.target.closest('.photo-box[data-photo-vkey]');
+  // A tile's picture opens the car screen (CARS FEED); the viewer is one
+  // more tap, on the car screen's own photo.
+  const tile = b && b.closest('.car-tile[data-vkey]');
+  if (tile) { e.preventDefault(); e.stopPropagation(); openCarDetail(tile.dataset.vkey, tile.querySelector('.tile-open') || tile); return; }
   if (!b || b.classList.contains('photo-failed')) return;
   e.preventDefault();
   e.stopPropagation();
@@ -3959,7 +3984,10 @@ function renderCarDetail() {
   const specs = [vm.spec, ...(ex ? [ex[1], shortEngine(ex[2]), transShown].filter(Boolean).map(escapeHtml) : [])].filter(Boolean);
   const d = vehicleDistanceMi(v);
   const place = [v.city, v.state].filter(Boolean).join(', ');
-  const zip = localStorage.getItem('jh_zip');
+  // The distance is measured from where the list is centred: the visitor's
+  // zip, or, while a guess or a link's place is on screen, that place (it
+  // used to name the saved zip even then).
+  const zip = _tempPlace ? tempPlaceWords() : localStorage.getItem('jh_zip');
   const where = [place ? escapeHtml(place) : '', d != null ? `${Math.round(d)}\u00a0mi${zip ? ' from ' + escapeHtml(zip) : ' away'}` : ''].filter(Boolean).join(' &middot; ');
   const dir = carDirectionsUrl(v);
   let stay = '';
@@ -3984,7 +4012,10 @@ function renderCarDetail() {
         ${nextOneHtml(v.make, v.model, 'cd-next')}
       </section>`
     : `<section class="cd-life">${nextOneHtml(v.make, v.model, 'cd-next')}</section>`;
-  const scan = liveScrapedAt ? `<span class="scan-stamp">scanned ${escapeHtml(scrapedShort())}</span>` : '';
+  // The stale-yard warning the card carried ("yard list unchanged since"),
+  // else the plain scan stamp.
+  const scan = carScanLineHtml(v);
+  const hours = yardMapsUrl(v.location, v.city, v.state);
   const pinfo = ex && ex[0] ? photoInfo(ex[0]) : null;
   box.innerHTML = `
     ${photoBoxHtml(pinfo, key, `${v.year} ${v.make} ${v.model}`, 'cd-photo', pinfo && pinfo.heavy ? illoSvgHtml(ex) : '')}
@@ -3999,13 +4030,16 @@ function renderCarDetail() {
         <h3>${escapeHtml(v.location)}${saleBadgeHtml(v.location)}</h3>
         ${where ? `<p>${where}</p>` : ''}
         <div class="locator-links">
-          ${dir ? `<a class="locator-link" href="${escapeHtml(dir)}" target="_blank" rel="noopener">${ICON.pin} Directions</a>` : ''}
+          ${hours ? `<a class="locator-link cd-hours" href="${escapeHtml(hours)}" target="_blank" rel="noopener" title="Opens this yard in Maps, which shows today’s hours, the phone number and directions">${ICON.pin} Hours and directions</a>`
+            : dir ? `<a class="locator-link" href="${escapeHtml(dir)}" target="_blank" rel="noopener">${ICON.pin} Directions</a>` : ''}
           ${yardSiteLinkHtml(v)}
         </div>
       </div>
     </section>
+    ${val && !unlocked && val.profitLine ? `<section class="cd-value">${val.profitLine}</section>` : ''}
     ${val && val.nParts ? `<section class="worth" aria-labelledby="worth-h">
       <h3 class="sec" id="worth-h">Worth pulling <span>${val.nParts} part${val.nParts > 1 ? 's' : ''} on this model</span></h3>
+      <p class="cd-parts-summary">${val.partsSummary}</p>
       ${val.worthHtml}
       ${val.alsoHtml}
       ${val.allValueHtml}
@@ -4018,7 +4052,8 @@ function renderCarDetail() {
     <section class="cd-ref">
       ${vm.vin ? `<div class="cd-vin">${vm.vin}${vm.warn}</div>` : ''}
       ${scan ? `<div class="cd-scan">${scan}</div>` : ''}
-    </section>`;
+    </section>
+    ${moreLikeThisHtml(v)}`;
   document.getElementById('car-detail-actions').innerHTML = `
     ${pullBtnHtml(key, true)}
     <button type="button" class="btn btn-quiet watch-btn cd-icon-btn ${hasWatchFor(v.make, v.model) ? 'watching' : ''}" data-make="${escapeHtml(v.make || '')}" data-model="${escapeHtml(v.model || '')}" title="${hasWatchFor(v.make, v.model) ? 'Watching \u2014 tap to stop' : 'Watch this model \u2014 get alerted when another shows up'}" aria-label="Watch this model">${ICON.bell}</button>
@@ -4079,7 +4114,10 @@ document.getElementById('car-detail').addEventListener('click', e => {
   const share = e.target.closest('.share-btn');
   if (share) { e.preventDefault(); shareVehicle(share.dataset.vkey); return; }
   const heart = e.target.closest('.heart-btn');
-  if (heart) { e.preventDefault(); toggleSaved(heart.dataset.vkey); }
+  if (heart) { e.preventDefault(); toggleSaved(heart.dataset.vkey); return; }
+  // "More <model> near you": a tile opens that car in place.
+  const tile = e.target.closest('.car-tile[data-vkey]');
+  if (tile && !e.target.closest('a')) { e.preventDefault(); openCarDetail(tile.dataset.vkey, carDetailOpener); }
 });
 
 /* ===== SHAREABLE FINDS (deep links) ===== */
@@ -4429,6 +4467,8 @@ function getFilteredLive() {
     if (locationFilter && v.location !== locationFilter) return false;
     if (!locationFilter && yardDormant(v.location)) return false;  // dormant yards: only when picked
     if (liveWeekOnly && !isNew(v.dateAdded)) return false;
+    if (liveNewOnly && !setOutRecent(v, 2)) return false;
+    if (liveSinceOnly && !setOutSince(v, FEED_SINCE_DAY)) return false;
     if (activeZipCoords && radiusMi) {
       const d = vehicleDistanceMi(v);
       if (d == null || d > radiusMi) return false;
@@ -4571,7 +4611,8 @@ function renderLivePending() {
     ? 'Couldn’t load the cars for this area. Check your connection and tap Refresh data.'
     : focusedCarKey ? 'Finding that car&hellip;' : 'Loading cars near you&hellip;';
   const skel = '<div class="skel-card"><div class="skeleton skel-line w60"></div><div class="skeleton skel-line w40"></div><div class="skeleton skel-line w80"></div><div class="skeleton skel-line w30"></div></div>';
-  document.getElementById('live-stats-bar').innerHTML = '';
+  feedSummaryRender(null, null, '');
+  feedNoteHome();
   document.getElementById('sale-strip').style.display = 'none';
   document.getElementById('live-grid').innerHTML =
     `<div class="skel-note" style="grid-column:1/-1;">${msg}</div>` + skel.repeat(3);
@@ -4949,11 +4990,202 @@ function refreshPullBtns(key) {
     const big = b.classList.contains('btn-lg');
     b.outerHTML = pullBtnHtml(key, big);
   });
+  document.querySelectorAll(`.tile-save[data-vkey="${CSS.escape(key)}"]`).forEach(b => { b.outerHTML = tileSaveHtml(key); });
+}
+
+/* ===== CARS FEED (2026-11-16, ops/design.md "Cars tab becomes a feed") =====
+ * Owner: "intuitive, shareable, easy to scroll, Facebook Marketplace level
+ * addicting". The Cars list is a grid of small tiles (two columns on a
+ * phone, about five at 1280 px): the picture, year make model, the yard and
+ * distance, the set-out date and row, and the badges a card carried (New /
+ * Leaving soon, notable trim, Manual). Everything else the big card showed
+ * moved one tap down to the car screen (openCarDetail). Every tile keeps
+ * class="car-card" and data-vkey, so the hooks that find cars still work.
+ * No text is cut off: it wraps (ui_no_truncation). */
+const ICON_BOOKMARK = '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4.5L5 21V4a1 1 0 0 1 1-1Z"/></svg>';
+const ICON_BOOKMARK_ON = '<svg class="ico" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4.5L5 21V4a1 1 0 0 1 1-1Z"/></svg>';
+/* The tile's bookmark: the same action as "Add to pull sheet" (toggleSaved,
+ * jh_saved; the .heart-btn hook routes it). */
+function tileSaveHtml(key) {
+  const on = !!savedCars[key];
+  return `<button type="button" class="tile-btn tile-save heart-btn${on ? ' saved' : ''}" data-vkey="${escapeHtml(key)}" aria-pressed="${on}" aria-label="${on ? 'On your pull sheet' : 'Add to pull sheet'}" title="${on ? 'On your pull sheet — tap to take it off' : 'Add to pull sheet'}">${on ? ICON_BOOKMARK_ON : ICON_BOOKMARK}</button>`;
+}
+/* The summary line over the Cars list: "17,906 cars near you · 1,837 new
+ * this week · updated 2h ago". n = null while the list loads (only the
+ * scan time shows). With no location the list is empty for a free visitor:
+ * the line then carries the national numbers the header shows, and leaves
+ * out any it does not have yet, so it never reads "0 cars". */
+function feedSummaryRender(n, nNew, nearLabel) {
+  const el = document.getElementById('live-stats-bar');
+  if (!el) return;
+  const parts = [];
+  if (n != null && !(n === 0 && !activeZipCoords && !isPro())) {
+    const near = /near/i.test(nearLabel || '') ? (n === 1 ? 'car near you' : 'cars near you') : (n === 1 ? 'car' : 'cars');
+    parts.push(`<span class="fs-n" title="Cars on the lots in view, as of the last scan"><b>${n.toLocaleString()}</b> ${near}</span>`);
+    parts.push(`<span class="fs-new" title="Cars set out in the last 7 days at the yards in view"><b>${(nNew || 0).toLocaleString()}</b> new this week</span>`);
+  } else if (n != null) {
+    const cars = (!liveComplete && _inv) ? _inv.m.vehicles : liveInventory.length;
+    const fresh = liveComplete ? headTickerHeavy().fresh : 0;
+    if (cars) parts.push(`<span class="fs-n" title="Every car on the self-service lots YardScout tracks"><b>${cars.toLocaleString()}</b> cars on the lots</span>`);
+    if (fresh) parts.push(`<span class="fs-new" title="Cars set out in the last 7 days, all yards"><b>${fresh.toLocaleString()}</b> new this week</span>`);
+  }
+  if (liveScrapedAt || n != null) parts.push(`<span class="fs-upd" title="Last scan: ${escapeHtml(scrapedTitle())} — automatic, about every 4 hours">updated ${escapeHtml(scrapeAgoLabel())}</span>`);
+  el.innerHTML = parts.length ? `<p class="feed-sum">${parts.join('<span class="fs-dot" aria-hidden="true"> &middot; </span>')}</p>` : '';
+}
+/* Chips above the grid: All, New (set out today or yesterday), This week
+ * (liveWeekOnly, the in-app twin of /landed), then the makes with the most
+ * cars in range; with a make chosen, that make's models. They set the very
+ * state Filters and the search box set (the Make select and selectedModels,
+ * through carSearchSetFilter), and they are redrawn from that state on every
+ * render, so all three always agree. A make or model chip counts as
+ * narrow/chip (trackNarrow); All, New and This week count nothing, like the
+ * old week chips. Counts on chips are Pro, as in the Make and Model lists. */
+let liveNewOnly = false;           // "New": set out in the last 2 days
+let liveSinceOnly = false;         // only the cars set out since the last visit (item 7)
+const FEED_TOP_MAKES = 10;
+function setOutRecent(v, days) {
+  const d = parseYardDate(v.dateAdded);
+  if (!d) return false;
+  const start = new Date(); start.setHours(0, 0, 0, 0); start.setDate(start.getDate() - (days - 1));
+  return d >= start;
+}
+function feedChipsRender(show) {
+  const box = document.getElementById('feed-chips');
+  if (!box) return;
+  if (!show) { box.hidden = true; box.innerHTML = ''; return; }
+  const make = document.getElementById('live-filter-make').value;
+  const pro = isPro();
+  const counts = new Map();
+  for (const v of _scopedVehicles) {
+    if (make ? v.make !== make : (!v.make || JUNK_MAKES.has(v.make.toLowerCase()))) continue;
+    const k = make ? (v.model && !isNoPickModel(v.make, v.model) ? canonicalModel(v.make, v.model) : '') : v.make;
+    if (k) counts.set(k, (counts.get(k) || 0) + 1);
+  }
+  const n = (k) => (pro && counts.has(k) ? ` <span class="chip-n">${counts.get(k).toLocaleString()}</span>` : '');
+  const chip = (attrs, label, on, cls) => `<button type="button" class="fchip${cls ? ' ' + cls : ''}${on ? ' on' : ''}" aria-pressed="${on}" ${attrs}>${label}</button>`;
+  const all = !make && !liveNewOnly && !liveWeekOnly && !liveSinceOnly;
+  let html = chip('data-chip="all"', 'All', all) + chip('data-chip="new"', 'New', liveNewOnly) + chip('data-chip="week"', 'This week', liveWeekOnly);
+  const ranked = [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+  if (make) {
+    html += chip(`data-chip="make" data-make="${escapeHtml(make)}" aria-label="${escapeHtml(make)}: show all makes again"`, `${escapeHtml(make)} <span class="fchip-x" aria-hidden="true">&times;</span>`, true, 'fchip-make');
+    html += ranked.map(([m]) => chip(`data-chip="model" data-make="${escapeHtml(make)}" data-model="${escapeHtml(m)}"`, escapeHtml(m) + n(m), selectedModels.has(m))).join('');
+  } else {
+    html += ranked.slice(0, FEED_TOP_MAKES).map(([m]) => chip(`data-chip="make" data-make="${escapeHtml(m)}"`, escapeHtml(m) + n(m), false)).join('');
+  }
+  box.innerHTML = html;
+  box.hidden = false;
+}
+/* Back to every make, the way the search box's clear does it (a tagged
+ * change: not a Filters choice). */
+function feedClearMake(route) {
+  const sel = document.getElementById('live-filter-make');
+  if (!sel.value && !selectedModels.size) return false;
+  sel.value = '';
+  sel.dispatchEvent(new CustomEvent('change', { detail: { route } }));
+  return true;
+}
+document.getElementById('feed-chips').addEventListener('click', (e) => {
+  const c = e.target.closest('.fchip[data-chip]');
+  if (!c) return;
+  const kind = c.dataset.chip;
+  if (kind === 'all') {
+    liveNewOnly = false; liveWeekOnly = false; liveSinceOnly = false;
+    if (!feedClearMake('chip')) renderLive();
+  } else if (kind === 'new' || kind === 'week') {
+    const on = c.getAttribute('aria-pressed') !== 'true';
+    liveNewOnly = kind === 'new' && on;
+    liveWeekOnly = kind === 'week' && on;
+    if (on) liveSinceOnly = false;
+    renderLive();
+  } else if (kind === 'make') {
+    if (c.getAttribute('aria-pressed') === 'true') { feedClearMake('chip'); return; }
+    if (!carSearchSetFilter(c.dataset.make, '')) return;
+    narrowRouteTaken();
+    trackNarrow('chip');
+    renderLive();
+  } else if (kind === 'model') {
+    const only = selectedModels.size === 1 && selectedModels.has(c.dataset.model);
+    if (!carSearchSetFilter(c.dataset.make, only ? '' : c.dataset.model)) return;
+    narrowRouteTaken();
+    if (!only) trackNarrow('chip');
+    renderLive();
+  }
+  // After the redraw: a chosen make leads the row, so its models are in view;
+  // a chosen model stays in view.
+  const box = document.getElementById('feed-chips');
+  const lead = kind === 'model' ? box.querySelector(`.fchip[data-chip="model"][data-model="${CSS.escape(c.dataset.model)}"]`) : box.querySelector('.fchip-make');
+  if (lead) {
+    const dx = lead.getBoundingClientRect().left - box.getBoundingClientRect().left - 16;
+    if (kind !== 'model' || dx < 0 || lead.getBoundingClientRect().right > box.getBoundingClientRect().right) box.scrollLeft += dx;
+  } else box.scrollLeft = 0;
+});
+/* Car screen, under everything: up to six more of the same make and model
+ * inside the search distance, newest set-out first (the same scope the
+ * Make and Model lists use). None: no heading at all. */
+const MORE_LIKE_N = 6;
+function moreLikeThisCars(v) {
+  if (!v || !v.make || !v.model || !activeZipCoords) return [];
+  refreshScopedInventory();
+  const key = vehicleKey(v), model = canonicalModel(v.make, v.model);
+  return _scopedVehicles
+    .filter(x => x.make === v.make && canonicalModel(x.make, x.model) === model && vehicleKey(x) !== key && !yardDormant(x.location))
+    .map(x => [yardDateMs(x.dateAdded), vehicleDistanceMi(x), x])
+    .sort((a, b) => (b[0] - a[0]) || ((a[1] == null ? 1e9 : a[1]) - (b[1] == null ? 1e9 : b[1])))
+    .slice(0, MORE_LIKE_N).map(e => e[2]);
+}
+function moreLikeThisHtml(v) {
+  const cars = moreLikeThisCars(v);
+  if (!cars.length) return '';
+  return `<section class="cd-more" aria-labelledby="cd-more-h">
+      <h3 class="sec" id="cd-more-h">More ${escapeHtml(`${v.make} ${canonicalModel(v.make, v.model)}`)} near you</h3>
+      <div class="car-grid more-grid">${cars.map(x => carTileHtml(x, lastSampleKey)).join('')}</div>
+    </section>`;
+}
+/* "Set out Nov 15", the short date tiles and cards use ('' when unknown). */
+function setOutShort(v) {
+  const d = parseYardDate(v.dateAdded);
+  return d ? d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
+}
+/* One tile. sampleKey: the free sample car in this view (its values open on
+ * the car screen), badged so a free visitor can find it. */
+function carTileHtml(v, sampleKey) {
+  const key = vehicleKey(v), k = escapeHtml(key);
+  const dateStr = setOutShort(v);
+  const { leavingSoon } = carLotClock(v);
+  const statusBadge = isNew(v.dateAdded)
+    ? '<span class="badge badge-new">New</span>'
+    : leavingSoon
+    ? '<span class="badge badge-soon" title="This car has been on the lot longer than ~80% of the historical average — yards rotate stock, so it may not be there much longer. An estimate, not a schedule.">Leaving soon</span>'
+    : '';
+  const manualBadge = isConfirmedManual(v) ? `<span class="badge badge-manual" title="${escapeHtml(manualSourceInfo(v).tip)}">Manual</span>` : '';
+  const sampleBadge = sampleKey && key === sampleKey && !isPro() ? '<span class="badge badge-sample" title="This car shows everything Pro shows: tap it">Free Pro look</span>' : '';
+  const badges = [statusBadge, notableTrimBadgeHtml(v), manualBadge, sampleBadge].filter(Boolean).join(' ');
+  const d = vehicleDistanceMi(v);
+  // Where in the yard goes with the yard: "Pick-n-Pull - Fremont · 12 mi · Row 31".
+  const when = dateStr ? `Set out ${dateStr}` : 'Set-out date unknown';
+  const row = v.row ? `Row ${escapeHtml(String(v.row))}` : 'No row yet';
+  // The photo opens the car screen from a tile (the capture handler below);
+  // keyboard focus goes to the tile's own button, not to the picture.
+  const photo = cardPhotoHtml(v, key).replace('<button type="button" class="photo-box', '<button type="button" tabindex="-1" class="photo-box');
+  return `
+      <article class="car-card car-tile ${v.hasMatch ? 'match-card' : 'dim-card'}" data-eid="${escapeHtml(String(v.id))}" data-vkey="${k}">
+        <div class="tile-media">
+          ${photo}
+          <button type="button" class="tile-btn tile-share card-share" data-vkey="${k}" title="Share this car" aria-label="Share this car">${ICON.share}</button>
+          ${tileSaveHtml(key)}
+        </div>
+        <button type="button" class="car-open tile-open" data-vkey="${k}">
+          <span class="tile-name car-name">${escapeHtml(`${v.year} ${v.make} ${v.model}`)}</span>
+          <span class="tile-where">${escapeHtml(v.location)}${d != null ? ` &middot; <span class="dist">${Math.round(d)} mi</span>` : ''} &middot; <span class="tile-row">${row}</span>${saleBadgeHtml(v.location)}</span>
+          <span class="tile-when">${badges ? `<span class="tile-badges">${badges}</span> ` : ''}${when}</span>
+        </button>
+      </article>`;
 }
 
 function renderLive() {
   updateFilterAvailability();
   if (!liveLoaded) return;
+  feedNoteHome();   // the first-run note may sit inside the grid (item 9)
   // A place on its way (the /geo guess, a #yard= link's yard): wait for it
   // rather than flash the "enter your zip" state first.
   if (_pendingYardLink && !_inv && !_invNext) placeYardResolve(null);
@@ -4973,7 +5205,9 @@ function renderLive() {
 
   // KPIs describe what the user is LOOKING AT (their zip/filters), not the
   // whole national database — that's what a parts hunter actually cares about.
-  const nearLabel = activeZipCoords && effectiveRadiusMi() ? 'Cars Near You' : 'Cars';
+  // "near you" only for the visitor's own place: under a guess or a link's
+  // place the line above the list says where, and the count stays plain.
+  const nearLabel = activeZipCoords && effectiveRadiusMi() && !_tempPlace ? 'Cars Near You' : 'Cars';
   // "New this week" replaced "Worth a look" (owner request 2026-10-26): with
   // value coverage this broad, worth-a-look counted nearly every car in view
   // — a stat that never changes anyone's plan. Fresh arrivals do.
@@ -4983,15 +5217,11 @@ function renderLive() {
   updateZipBanner();
   renderSaleStrip();
 
-  // Three chips, no horizontal scroll (owner request 2026-10-24): the old
-  // five-chip bar swiped sideways at phone widths and hid "Updated" — the
-  // chip people most needed — off the end. Freshness now always visible,
-  // which also retired the fresh-stamp line that papered over it.
-  document.getElementById('live-stats-bar').innerHTML = `
-    <div class="stat-card" title="Cars on the lots in view, as of the last scan"><div class="label">${nearLabel}</div><div class="value">${vehicles.length.toLocaleString()}</div></div>
-    <div class="stat-card" title="Cars set out in the last 7 days at the yards in view"><div class="label">New this week</div><div class="value accent">${newThisWeek.toLocaleString()}</div></div>
-    <div class="stat-card" title="Last scan: ${scrapedTitle()} — automatic, about every 4 hours"><div class="label">Updated</div><div class="value value-sm">${scrapeAgoLabel()}</div></div>
-  `;
+  // One summary line (CARS FEED, replaced the three stat tiles): cars in
+  // view, new this week, updated. It wraps, never scrolls sideways, so
+  // "Updated" stays visible at every width (owner request 2026-10-24).
+  feedSummaryRender(vehicles.length, newThisWeek, nearLabel);
+  feedChipsRender(!focusedCarKey && !!(activeZipCoords || isPro()));
 
   // Shared-link landing: focused single-car view, or an honest message when
   // the shared car has left the inventory.
@@ -5041,12 +5271,15 @@ function renderLive() {
     }
     document.getElementById('live-grid').innerHTML = (activeZipCoords ? watchStripHtml(0) : '')
       + `<div class="empty-state" style="grid-column:1/-1;">${msg}</div>`;
+    stripAskCount();
     return;
   }
 
   // National scans can be 45k+ vehicles — rendering all as DOM cards freezes the
   // browser. Cap the grid; filters/search still run against the full dataset.
-  const RENDER_CAP = 400;
+  // Tiles are light and arrive in batches (endless scroll), so the cap rose
+  // from 400 cards to FEED_CAP tiles.
+  const RENDER_CAP = FEED_CAP;
   const overflow = vehicles.length > RENDER_CAP ? vehicles.length - RENDER_CAP : 0;
   const vehiclesToRender = overflow ? vehicles.slice(0, RENDER_CAP) : vehicles;
 
@@ -5080,40 +5313,258 @@ function renderLive() {
       <span>This week at <strong>${escapeHtml(weekYard)}</strong> &mdash; ${nCars} set out in the last 7 days.</span>
       <button type="button" class="btn" onclick="jhClearWeek()">All cars at this yard</button>
     </div>`;
-  } else if (liveWeekOnly) {
-    // In-app twin of the public /landed page: everything set out in the
-    // last 7 days inside your radius, with the top makes as one-tap chips.
-    const curMake = document.getElementById('live-filter-make').value;
-    const byMake = new Map();
-    for (const v of vehicles) byMake.set(v.make, (byMake.get(v.make) || 0) + 1);
-    const chips = curMake ? '' : [...byMake.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8)
-      .map(([mk, n]) => `<button type="button" class="chip week-make-chip" data-make="${escapeHtml(mk)}">${escapeHtml(mk)} <span class="chip-n">${n}</span></button>`).join('');
-    weekBanner = `
-    <div class="focus-banner week-banner" style="grid-column:1/-1;">
-      <span>Set out this week near you${curMake ? ` &middot; <strong>${escapeHtml(curMake)}</strong>` : ''} &mdash; ${nCars} in the last 7 days.</span>
-      <button type="button" class="btn" onclick="jhClearWeek()">All cars</button>
-      ${chips ? `<div class="week-chips">${chips}</div>` : ''}
-    </div>`;
   }
+  // In-app twin of the public /landed page (everything set out in the last
+  // 7 days inside your radius) is the "This week" chip now: the chip row
+  // shows it pressed and the makes beside it, the summary line the count.
   lastSampleKey = sampleKey;
   updateZipChip();
-  document.getElementById('live-grid').innerHTML = focusBanner + weekBanner + watchStripHtml(vehicles.length) + vehiclesToRender.map(v => {
-    // Pro sees everything; free users get exactly one fully-unlocked sample card.
-    const unlocked = isPro() || (sampleKey !== null && vehicleKey(v) === sampleKey);
-    const isSampleCard = unlocked && !isPro();
-    const isMatch = v.hasMatch;
-    const isNewVehicle = isNew(v.dateAdded);
-    const setOutDate = parseYardDate(v.dateAdded);
-    const dateStr = setOutDate ? setOutDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
-    const cardClass = isMatch ? 'match-card' : 'dim-card';
-    const fm = freshnessMultiplier(v.dateAdded);
-    const fl = freshnessLabel(v.dateAdded);
+  // Tiles (CARS FEED): everything else a card held is on the car screen. The
+  // first FEED_BATCH tiles now, more as the bottom nears (feedMore). A
+  // re-render of the same list keeps as many tiles as were already shown, so
+  // the page never jumps back from where someone had scrolled to.
+  const sig = feedSignature(vehicles);
+  const keep = sig === _feed.sig ? _feed.shown : 0;
+  const since = feedSinceInfo(vehicles);
+  _feed = { sig, list: vehiclesToRender, total: vehicles.length, sampleKey, dividerAt: since.dividerAt,
+    shown: Math.min(vehiclesToRender.length, Math.max(FEED_BATCH, keep)) };
+  document.getElementById('live-grid').innerHTML = focusBanner + weekBanner + since.html + watchStripHtml(vehicles.length) + listShareHtml(vehicles.length)
+    + feedTilesHtml(0, _feed.shown) + feedTailHtml();
+  feedObserve();
+  feedPlaceNote();
+  feedPlaceStrip();   // after the note, so the strip ends up ahead of it
+  stripAskCount();
+  if (_feed.shown) appPromoListRendered();
+}
+/* On a phone the watch strip follows the first row of tiles (hub,
+ * 2026-11-16). Someone who opened a link for one model, on a first visit
+ * under a location guess, saw the guess line, the search box, the chips and
+ * this strip on the first screen and not one car. Cars first, then "Want
+ * the next one?". Wider screens keep the strip above the grid, where the
+ * first row is on screen anyway. A strip that already says "Watching ..."
+ * stays on top, and with no cars there is nothing to follow. */
+function feedPlaceStrip() {
+  if (!(window.matchMedia && matchMedia('(max-width: 720px)').matches) || focusedCarKey) return;
+  const grid = document.getElementById('live-grid');
+  const strip = grid.querySelector(':scope > .watch-strip:not(.watching)');
+  const tiles = grid.querySelectorAll(':scope > .car-tile');
+  if (!strip || !tiles.length) return;
+  const cols = getComputedStyle(grid).gridTemplateColumns.split(' ').filter(Boolean).length || 1;
+  tiles[Math.min(cols, tiles.length) - 1].after(strip);
+}
 
-    const { lotClock, leavingSoon, daysOn, avg: lotAvg, longListed } = carLotClock(v);
+/* ---- First visit (CARS FEED item 9) ----
+ * While "How to read this" is not acknowledged (jh_honesty_ack), a phone
+ * shows it after the first row of tiles instead of above the first car, so
+ * the first screen is cars. Same element, same words, same "Got it". With an
+ * empty list, no location, or a wider screen it stays where index.html puts
+ * it (after the zip card). */
+function feedNoteHome() {
+  const note = document.getElementById('first-run-note');
+  const home = document.getElementById('first-run-note-home');
+  if (!note || !home || !note.parentElement || note.parentElement.id !== 'live-grid') return;
+  home.after(note);
+  note.classList.remove('in-feed');
+}
+function feedPlaceNote() {
+  const note = document.getElementById('first-run-note');
+  if (!note || note.style.display === 'none' || !activeZipCoords || focusedCarKey) return;
+  if (!(window.matchMedia && matchMedia('(max-width: 720px)').matches)) return;
+  const grid = document.getElementById('live-grid');
+  const tiles = grid.querySelectorAll(':scope > .car-tile');
+  if (!tiles.length) return;
+  // A marker where index.html put it, so it can go back exactly there.
+  if (!document.getElementById('first-run-note-home') && note.parentElement.id !== 'live-grid') {
+    const home = document.createElement('span');
+    home.id = 'first-run-note-home';
+    home.hidden = true;
+    note.before(home);
+  }
+  const cols = getComputedStyle(grid).gridTemplateColumns.split(' ').filter(Boolean).length || 1;
+  tiles[Math.min(cols, tiles.length) - 1].after(note);
+  note.classList.add('in-feed');
+}
 
-    // Scan stamp so a screenshot carries when this list was true. The
-    // inventory has no per-yard scan time (yard_health.json isn't loaded
-    // here), so this is the global scrapedAt in the viewer's local time.
+/* ---- A reason to come back (CARS FEED item 7) ----
+ * On a visit on a later day: "N set out near you since your last visit
+ * (Nov 12)" above the grid, one tap to list just those, and a divider in
+ * the newest-first list where they end. Yards publish a set-out DAY, not a
+ * time, so only cars whose set-out day is after the last visit's day count
+ * (a car set out on that same day may already have been seen); cars with no
+ * date never count. The last visit day lives in this browser only
+ * (localStorage ys_last_visit_day, a local YYYY-MM-DD, never sent); the day
+ * compared against is fixed when the visit starts and held for the session
+ * (sessionStorage ys_since_day), so a reload does not make the line vanish. */
+function localDayStr(d) {
+  const x = d || new Date();
+  return `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, '0')}-${String(x.getDate()).padStart(2, '0')}`;
+}
+// let, not const: ui_no_truncation sets it to draw the line on demand.
+let FEED_SINCE_DAY = (() => {
+  try {
+    const held = sessionStorage.getItem('ys_since_day');
+    if (held !== null) return /^\d{4}-\d{2}-\d{2}$/.test(held) ? held : null;
+  } catch (e) { /* private mode: decide below, memory only */ }
+  let prev = null;
+  try { prev = localStorage.getItem('ys_last_visit_day'); } catch (e) { prev = null; }
+  const today = localDayStr();
+  const since = prev && /^\d{4}-\d{2}-\d{2}$/.test(prev) && prev < today ? prev : null;
+  try { localStorage.setItem('ys_last_visit_day', today); } catch (e) { /* private mode */ }
+  try { sessionStorage.setItem('ys_since_day', since || ''); } catch (e) { /* private mode */ }
+  return since;
+})();
+function setOutSince(v, day) {
+  const d = parseYardDate(v.dateAdded);
+  return !!(d && day && localDayStr(d) > day);
+}
+function sinceDayLabel(day) {
+  const [y, m, d] = day.split('-').map(Number);
+  const dt = new Date(y, m - 1, d);
+  return dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric', ...(y !== new Date().getFullYear() ? { year: 'numeric' } : {}) });
+}
+/* The line over the grid, and where the divider goes in the list. */
+function feedSinceInfo(vehicles) {
+  if (!FEED_SINCE_DAY || focusedCarKey || (!activeZipCoords && !isPro())) return { html: '', dividerAt: -1, n: 0 };
+  const n = liveSinceOnly ? vehicles.length : vehicles.reduce((k, v) => k + (setOutSince(v, FEED_SINCE_DAY) ? 1 : 0), 0);
+  if (!n && !liveSinceOnly) return { html: '', dividerAt: -1, n: 0 };
+  const near = activeZipCoords ? ' near you' : '';
+  const when = escapeHtml(sinceDayLabel(FEED_SINCE_DAY));
+  const html = liveSinceOnly
+    ? `<div class="since-line on" style="grid-column:1/-1;"><p>Showing the <b>${n.toLocaleString()}</b> ${n === 1 ? 'car' : 'cars'} set out${near} since your last visit (${when}).</p><button type="button" class="btn btn-quiet since-all">Show all cars</button></div>`
+    : `<div class="since-line" style="grid-column:1/-1;"><p><b>${n.toLocaleString()}</b> set out${near} since your last visit (${when}).</p><button type="button" class="btn btn-primary since-show">Show just ${n === 1 ? 'that one' : 'those'}</button></div>`;
+  // The divider: only in the newest-first list, where the new ones lead.
+  const sort = document.getElementById('live-sort').value;
+  const dividerAt = !liveSinceOnly && sort === 'date-desc' && n < vehicles.length ? n : -1;
+  return { html, dividerAt, n };
+}
+document.getElementById('live-grid').addEventListener('click', (e) => {
+  const show = e.target.closest('.since-show'), all = e.target.closest('.since-all');
+  if (!show && !all) return;
+  e.preventDefault();
+  liveSinceOnly = !!show;
+  if (show) { liveNewOnly = false; liveWeekOnly = false; }
+  renderLive();
+  const g = document.getElementById('feed-chips');
+  if (g && g.getBoundingClientRect().top < 0) g.scrollIntoView({ block: 'start' });
+});
+
+/* ---- Share a list (CARS FEED item 8) ----
+ * With the list narrowed to one model, one button shares it: the public
+ * model page yardscout.io/landed/<make>/<model> when the site has one (it
+ * does exactly when data/landed/index.json lists the model: the page
+ * renderLandedModelPage in backend/site-proxy/src/share.js reads the same
+ * index), else a tagged #cars= link that opens this list near the reader. */
+let _landedIndexP = null, _landedIndex;
+function landedIndexLoad() {
+  if (!_landedIndexP) {
+    _landedIndexP = fetch(DATA_BASE + 'data/landed/index.json')
+      .then(r => (r.ok ? r.json() : null)).catch(() => null)
+      .then(j => { _landedIndex = j && j.makes ? j : null; return _landedIndex; });
+  }
+  return _landedIndexP;
+}
+function listShareUrlFrom(idx, make, model) {
+  const e = idx && idx.makes && idx.makes[make];
+  const hit = e && e.slug && Array.isArray(e.models) && e.models.find(m => Array.isArray(m) && m[0] === model && m[1]);
+  if (hit) return `https://yardscout.io/landed/${encodeURIComponent(e.slug)}/${encodeURIComponent(hit[1])}`;
+  return `https://yardscout.io/?utm_source=share&utm_medium=list#cars=${encodeURIComponent(make)}|${encodeURIComponent(model)}`;
+}
+function listShareHtml(n) {
+  const make = document.getElementById('live-filter-make').value;
+  if (!make || selectedModels.size !== 1 || focusedCarKey || !n) return '';
+  landedIndexLoad();   // ready before the tap, so the share sheet opens at once
+  const model = [...selectedModels][0];
+  const r = activeZipCoords ? effectiveRadiusMi() : null;
+  return `<div class="list-share" style="grid-column:1/-1;"><p><b>${n.toLocaleString()}</b> ${escapeHtml(`${make} ${model}`)} ${r ? `within ${r} mi` : 'listed'}</p>
+    <button type="button" class="btn btn-quiet list-share-btn" data-make="${escapeHtml(make)}" data-model="${escapeHtml(model)}" data-n="${n}">${ICON.share} Share this list</button></div>`;
+}
+async function shareList(btn) {
+  const make = btn.dataset.make, model = btn.dataset.model, n = +btn.dataset.n || 0;
+  // Normally loaded while the list rendered; never wait long for it.
+  const idx = _landedIndex !== undefined ? _landedIndex
+    : await Promise.race([landedIndexLoad(), new Promise(r => setTimeout(() => r(null), 400))]);
+  const url = listShareUrlFrom(idx, make, model);
+  const text = `${n.toLocaleString()} ${make} ${model} ${n === 1 ? 'is' : 'are'} on self-service yard lots near me right now (YardScout)`;
+  track('share-list');
+  const touchDevice = IS_NATIVE || (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+  if (navigator.share && touchDevice) {
+    try { await navigator.share({ title: text, text, url }); return; } catch (e) { /* cancelled/unsupported -> copy */ }
+  }
+  try {
+    await navigator.clipboard.writeText(url);
+    const orig = btn.innerHTML;
+    btn.textContent = 'Link copied';
+    setTimeout(() => { btn.innerHTML = orig; }, 1400);
+  } catch (e) {
+    prompt('Copy this link:', url);
+  }
+}
+document.getElementById('live-grid').addEventListener('click', (e) => {
+  const b = e.target.closest('.list-share-btn');
+  if (b) { e.preventDefault(); shareList(b); }
+});
+
+/* ---- Endless scroll (CARS FEED item 6) ---- */
+const FEED_BATCH = 40;     // tiles per batch
+const FEED_CAP = 1200;     // overall cap; then a plain line asks to narrow
+let _feed = { sig: '', list: [], total: 0, sampleKey: null, shown: 0 };
+let _feedIO = null;
+function feedSignature(vehicles) {
+  const val = (id) => document.getElementById(id).value;
+  return [val('live-filter-make'), [...selectedModels].sort().join(','), val('live-filter-year-min'), val('live-filter-year-max'),
+    val('live-filter-location'), val('live-sort'), effectiveRadiusMi(), activeZipCoords ? activeZipCoords.lat + ',' + activeZipCoords.lng : '',
+    liveWeekOnly, liveNewOnly, liveSinceOnly, liveTrimWord(), isPro(), focusedCarKey || '', liveScrapedAt || '',
+    vehicles.length, vehicles.length ? vehicleKey(vehicles[0]) : ''].join('|');
+}
+function feedTilesHtml(from, to) {
+  let html = '';
+  for (let i = from; i < to && i < _feed.list.length; i++) {
+    if (i === _feed.dividerAt && FEED_SINCE_DAY) {
+      html += `<div class="feed-divider" role="separator" style="grid-column:1/-1;"><span>Set out before your last visit (${escapeHtml(sinceDayLabel(FEED_SINCE_DAY))})</span></div>`;
+    }
+    html += carTileHtml(_feed.list[i], _feed.sampleKey);
+  }
+  return html;
+}
+function feedTailHtml() {
+  if (_feed.shown < _feed.list.length) {
+    return `<div class="feed-more" id="feed-more" style="grid-column:1/-1;"><button type="button" class="btn btn-quiet feed-more-btn">Show more cars</button></div>`;
+  }
+  if (_feed.total > _feed.list.length) {
+    return `<p class="feed-end" style="grid-column:1/-1;">Showing the first ${_feed.list.length.toLocaleString()} of ${_feed.total.toLocaleString()} cars in this order. Narrow with the chips, the search box or Filters to see the rest.</p>`;
+  }
+  return '';
+}
+function feedMore() {
+  const tail = document.getElementById('feed-more');
+  if (!tail || _feed.shown >= _feed.list.length) return;
+  const from = _feed.shown;
+  _feed.shown = Math.min(_feed.list.length, from + FEED_BATCH);
+  tail.insertAdjacentHTML('beforebegin', feedTilesHtml(from, _feed.shown));
+  tail.outerHTML = feedTailHtml();
+  feedObserve();
+}
+function feedObserve() {
+  const tail = document.getElementById('feed-more');
+  if (!tail) return;
+  if (!('IntersectionObserver' in window)) return;   // the button still works
+  if (!_feedIO) {
+    _feedIO = new IntersectionObserver((entries) => {
+      if (entries.some(e => e.isIntersecting)) feedMore();
+    }, { rootMargin: '0px 0px 1200px 0px' });
+  }
+  _feedIO.disconnect();
+  _feedIO.observe(tail);
+}
+document.getElementById('live-grid').addEventListener('click', (e) => {
+  if (e.target.closest('.feed-more-btn')) { e.preventDefault(); feedMore(); }
+});
+
+/* Scan stamp so a screenshot carries when this list was true, or the stale
+ * warning for a yard whose list stopped changing (car screen). The inventory
+ * has no per-yard scan time (yard_health.json isn't loaded here), so this is
+ * the global scrapedAt in the viewer's local time. */
+function carScanLineHtml(v) {
     const frozen = yardFrozenSince(v.location);
     const scanLine = yardDormant(v.location)
       ? `<span class="scan-stamp stamp-stale" title="This yard hasn\u2019t posted a new car online in months \u2014 these listings are probably out of date. Call before going.">no new cars since ${escapeHtml(formatYardDate(yardHealth[v.location].newestDateAdded))}</span>`
@@ -5122,59 +5573,7 @@ function renderLive() {
       : liveScrapedAt
       ? `<span class="scan-stamp" title="When YardScout last scanned the yards (${escapeHtml(scrapedTitle())}) — cars can leave between scans">scanned ${escapeHtml(scrapedShort())}</span>`
       : '';
-
-    const val = (isMatch && v.topParts && v.topParts.length) ? carValueParts(v, unlocked, isSampleCard) : null;
-    const cardStyle = val ? val.cardStyle : '', profitLine = val ? val.profitLine : '';
-
-    // One status badge per card, by priority — never a row of colored pills.
-    const statusBadge = isNewVehicle
-      ? '<span class="badge badge-new">New</span>'
-      : leavingSoon
-      ? '<span class="badge badge-soon" title="This car has been on the lot longer than ~80% of the historical average — yards rotate stock, so it may not be there much longer. An estimate, not a schedule.">Leaving soon</span>'
-      : '';
-    const ex = extrasFor(v);
-    const photo = ex && ex[0] ? photoInfo(ex[0]) : null;
-    const vm = vinMetaHtml(v, unlocked);
-    // Line 1 — what the car IS: VIN-decoded trim/drive (Pro) + color/engine/trans.
-    const transShown = ex && ex[3] && isConfirmedManual(v) && manualSourceInfo(v).short
-      ? `${ex[3]} (${manualSourceInfo(v).short})` : (ex ? ex[3] : '');
-    const yardSpecs = ex ? [ex[1], shortEngine(ex[2]), transShown].filter(Boolean).map(escapeHtml) : [];
-    const specLine = [vm.spec, ...yardSpecs].filter(Boolean).join(' &middot; ');
-    // Line 2 — WHEN: set-out date + time on the lot, one line.
-    const whenBits = [dateStr ? `<span title="Set-out date published by the yard">Set out ${dateStr}</span>` : 'Set-out date unknown'];
-    if (lotClock) whenBits.push(lotClock);
-    const key = vehicleKey(v);
-    const manualBadge = isConfirmedManual(v) ? `<span class="badge badge-manual" title="${escapeHtml(manualSourceInfo(v).tip)}">Manual</span>` : '';
-    const trimBadge = notableTrimBadgeHtml(v);
-    const d = vehicleDistanceMi(v);
-    // Pull-sheet card: row plate is the hero datum, one primary action
-    // (add to pull sheet); watch, share, VIN and the yard link live on the
-    // car screen a tap away.
-    return `
-      <article class="car-card ${cardClass}" style="${cardStyle}" data-eid="${escapeHtml(String(v.id))}" data-vkey="${escapeHtml(key)}">
-        ${cardPhotoHtml(v, key)}
-        <div class="cc-head">
-          ${rowPlateHtml(v.row)}
-          <div class="cc-id">
-            <h3 class="car-name"><button type="button" class="car-open" data-vkey="${escapeHtml(key)}">${escapeHtml(`${v.year} ${v.make} ${v.model}`)}</button></h3>
-            ${specLine ? `<div class="car-spec-line">${specLine}</div>` : ''}
-            <div class="live-card-location">${ICON.pin} <span class="loc-name">${escapeHtml(v.location)}</span>${d != null ? ' <span class="dist">&middot; ' + Math.round(d) + '\u00a0mi</span>' : ''}${saleBadgeHtml(v.location)}</div>
-            <div class="car-meta">${stayMeterHtml(daysOn, lotAvg)}<span class="car-meta-text">${whenBits.join(' &middot; ')}${vm.warn}</span></div>
-            ${longListed ? longListedHtml(daysOn, 'card-long') : ''}
-          </div>
-          ${trimBadge || manualBadge || statusBadge ? `<div class="car-badges">${trimBadge}${manualBadge}${statusBadge}</div>` : ''}
-        </div>
-        ${profitLine}
-        ${val && val.nParts ? `<button type="button" class="parts-summary car-open" data-vkey="${escapeHtml(key)}"><span>${val.partsSummary}</span>${ICON.chev}</button>` : ''}
-        <div class="cc-actions">
-          ${pullBtnHtml(key)}
-          ${cardEndActionsHtml(key)}
-        </div>
-        ${/stamp-stale/.test(scanLine) ? `<div class="car-footer"><span class="car-footer-meta">${scanLine}</span></div>` : ''}
-      </article>`;
-  }).join('') + (overflow
-    ? `<div class="empty-state" style="grid-column:1/-1;padding:1rem;"><p>Showing first ${RENDER_CAP} of ${vehicles.length.toLocaleString()} vehicles &mdash; narrow with search or filters (results stay fully sorted).</p></div>`
-    : '');
+    return scanLine;
 }
 
 document.getElementById('live-filter-toggle').addEventListener('click', () => {
@@ -10500,6 +10899,8 @@ function watchStripHtml(nCars) {
       <button type="button" class="linklike" onclick="jhOpenAlertsTab()">Manage</button></div>`;
   }
   const r = activeZipCoords ? effectiveRadiusMi() : null;
+  const mail = stripMailHtml(sc, nCars, r);
+  if (mail) return mail;
   const where = r ? ` within ${r}\u00a0mi` : (isPro() ? ' anywhere' : ' near you');
   return `<div class="watch-strip" style="grid-column:1/-1;">${ICON.bell}
     <span>${nCars ? 'Want the next one?' : 'None here right now.'} Get pinged when ${nCars ? 'another' : 'one'} <strong>${escapeHtml(sc.label)}</strong> lands${where}.${isPro() ? '' : ` <span class="watch-strip-note">${freeDeliveryNote()}</span>`}</span>
@@ -10524,6 +10925,153 @@ function jhWatchSearch() {
 function jhOpenAlertsTab() {
   try { document.querySelector('.tab[data-tab="alerts"]').click(); } catch (e) { /* boot race */ }
 }
+
+/* ===== ONE-STEP MONDAY EMAIL IN THE WATCH STRIP (Cars feed item 11, 2026-11-16) =====
+ * On the web, for someone who is not Pro and has a location, i.e. exactly
+ * when the watch the strip would create gets the Monday-email offer
+ * (recapEligible), the strip asks for the email itself: "Want the next one?
+ * Get a free Monday email with every <X> set out within 100 mi." [email]
+ * [Email me], and "or just watch it here" (today's Watch button). Submitting
+ * creates the watch(es) exactly as jhWatchSearch does (addQuickWatch; the
+ * free limit opens the upgrade sheet and nothing is sent), then the one
+ * sign-up path the toast uses (recapSubmit: /v1/recap/signup, attribution
+ * fields included). A confirmed subscriber gets "Add <X> to your free Monday
+ * email?" (recapAddAll: /v1/recap/add). More than RECAP_MAX models, Pro, the
+ * apps, or the offer dismissed this visit: today's strip. The toast never
+ * asks again for a watch the strip handled. 'email-asked' counts the strip's
+ * field once per visit (counting rules v5). Stored watches are never
+ * changed (rule 6): new ones only, through addQuickWatch. */
+let _stripAskCounted = false;
+function stripMailHtml(sc, nCars, r) {
+  if (IS_NATIVE || isPro() || !activeZipCoords || !r) return '';
+  if ((sc.models.length || 1) > RECAP_MAX) return '';
+  const probe = { make: sc.make, lat: activeZipCoords.lat, lng: activeZipCoords.lng, radiusMi: r };
+  if (!recapEligible(probe, IS_NATIVE, isPro(), recapDismissed())) return '';
+  const st = recapState();
+  const what = `<strong>${escapeHtml(sc.label)}</strong>`;
+  // While the list is centred on a guess or a link's place (A PLACE FOR THIS
+  // VISIT), the watch and the email need the visitor's own zip, so the strip
+  // asks for it in the same step: a guessed place is never a watch centre.
+  const askZip = needOwnZip();
+  // A link's place on screen for someone with a saved zip: the watch is
+  // centred on their own place, so the sentence says which.
+  const ofWhere = askZip ? ' of your zip' : (_tempPlace ? ' of your own location' : '');
+  const zipField = askZip ? watchZipInputHtml('strip-zip') : '';
+  const just = '<button type="button" class="linklike strip-just-watch" onclick="jhWatchSearch()">or just watch it here</button>';
+  if (st && st.state === 'confirmed' && st.sub) {
+    return `<div class="watch-strip strip-mail" style="grid-column:1/-1;">${ICON.bell}
+      <div class="mail-ask strip-ask">
+        <span class="mail-line">Add ${what} to your free Monday email?</span>
+        <div class="strip-row">${zipField}<button type="button" class="btn btn-primary btn-sm" data-act="recap-add">Add</button>${just}</div>
+        <span class="watch-zip-msg mail-msg" role="status"></span>
+      </div>${proBoxHtml(PRO_PUSH_LINE, 'watch-toast', '', 'strip-pro')}</div>`;
+  }
+  return `<div class="watch-strip strip-mail" style="grid-column:1/-1;">${ICON.bell}
+    <div class="mail-ask strip-ask">
+      <span class="mail-line">${nCars ? 'Want the next one?' : 'None here right now.'} Get a free Monday email with every ${what} set out within ${escapeHtml(String(r))}&nbsp;mi${ofWhere}.</span>
+      <form class="watch-zip-row mail-form strip-form" novalidate>
+        ${zipField}<input type="email" class="watch-zip-input mail-email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false"
+          placeholder="Email" aria-label="Email address for the Monday email" maxlength="254" value="${escapeHtml(st ? st.email : '')}">
+        <button type="submit" class="btn btn-primary btn-sm">Email me</button>
+      </form>
+      <span class="watch-zip-msg mail-msg" role="status"></span>
+      ${just}
+    </div>${proBoxHtml(PRO_PUSH_LINE, 'watch-toast', '', 'strip-pro')}</div>`;
+}
+/* After a render: the strip's field shown counts 'email-asked', once a visit. */
+function stripAskCount() {
+  if (_stripAskCounted || !document.querySelector('#live-grid .strip-mail .mail-email')) return;
+  _stripAskCounted = true;
+  track('email-asked');
+}
+/* The watches the strip stands for, made the way jhWatchSearch makes them.
+ * Returns the new entries (for the sign-up), or null when nothing may be sent. */
+function stripMakeWatches(el) {
+  if (el._stripEntries) return el._stripEntries;   // a retry after a failed send
+  const sc = liveWatchScope();
+  if (!sc) return null;
+  const from = _recapNew.length;
+  let added = 0, blocked = null;
+  for (const m of (sc.models.length ? sc.models : [''])) {
+    const r = addQuickWatch(sc.make, m, sc.yrMin, sc.yrMax, 'strip');
+    if (r === 'added') added++;
+    else if (r === 'limit' || r === 'no-zip') { blocked = r; break; }
+  }
+  // These watches are handled here: the toast must not offer them again.
+  const mine = _recapNew.slice(from);
+  _recapNew = _recapNew.slice(0, from);
+  if (added) { renderAlerts(); checkAndNotify(); }
+  if (blocked === 'limit') { openUpgradeSheet('watch-limit'); renderLive(); return null; }
+  if (blocked === 'no-zip') { askZipForWatch(sc.label, () => jhWatchSearch()); return null; }
+  el._stripEntries = mine;
+  el._stripLabel = sc.label;
+  return mine;
+}
+function stripDone(el) {
+  const ask = el.querySelector('.mail-ask');
+  if (ask && el._stripLabel) ask.insertAdjacentHTML('afterbegin', `<span class="mail-line strip-watching">${ICON.check} Watching <strong>${escapeHtml(el._stripLabel)}</strong>; new ones light up in Alerts.</span>`);
+}
+/* Under a guess or a link's place the strip carries a zip field: the
+ * visitor's own place is set first (never the guessed one). The list then
+ * re-renders around it, so the strip is a new element: returns that element
+ * with the typed email carried over, the same element when no zip was asked,
+ * or null when the zip could not be used. */
+async function stripZipFirst(el) {
+  const zipIn = el.querySelector('#strip-zip');
+  if (!zipIn) return el;
+  const msg = el.querySelector('.mail-msg');
+  const emailIn = el.querySelector('.mail-email');
+  const email = emailIn ? emailIn.value : '';
+  const pc = normalizePostal(zipIn.value);
+  if (!pc) { if (msg) msg.textContent = POSTAL_CA ? 'Enter your postal code.' : 'Enter a 5-digit zip code.'; zipIn.focus(); return null; }
+  if (msg) msg.textContent = '';
+  document.getElementById('live-zip').value = pc.code;
+  await setZipCenter(pc.code);
+  if (!ownCenter()) {
+    // The lookup failed. The list may have re-rendered meanwhile, so say so
+    // on the strip that is on screen now, with what was typed put back.
+    const cur = document.querySelector('#live-grid .strip-mail') || el;
+    const m = cur.querySelector('.mail-msg');
+    if (m) m.textContent = 'We could not find that one. Check it and try again.';
+    const em = cur.querySelector('.mail-email');
+    if (em && email) em.value = email;
+    const z = cur.querySelector('#strip-zip');
+    if (z) { z.value = pc.code; z.focus(); }
+    return null;
+  }
+  afterPlaceChange();
+  const now = document.querySelector('#live-grid .strip-mail');
+  if (!now) return null;   // nothing left to ask (already watching it from this place)
+  const again = now.querySelector('.mail-email');
+  if (again && email) again.value = email;
+  return now;
+}
+document.getElementById('live-grid').addEventListener('submit', async (e) => {
+  const form = e.target.closest('.strip-form');
+  if (!form) return;
+  e.preventDefault();
+  let el = form.closest('.watch-strip');
+  const input = el.querySelector('.mail-email'), msg = el.querySelector('.mail-msg');
+  const email = String((input && input.value) || '').trim().toLowerCase();
+  // Checked before any watch is made: a typo makes nothing.
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg.textContent = 'Enter your email address.'; input.focus(); return; }
+  el = await stripZipFirst(el);
+  if (!el) return;
+  const entries = stripMakeWatches(el);
+  if (!entries) return;
+  if (!entries.length) { const m2 = el.querySelector('.mail-msg'); if (m2) m2.textContent = 'You already watch this.'; return; }
+  recapSubmit(el, entries, () => stripDone(el));
+});
+document.getElementById('live-grid').addEventListener('click', async (e) => {
+  const add = e.target.closest('.strip-mail [data-act="recap-add"]');
+  if (!add) return;
+  e.preventDefault();
+  const el = await stripZipFirst(add.closest('.watch-strip'));
+  if (!el) return;
+  const entries = stripMakeWatches(el);
+  if (!entries || !entries.length) return;
+  recapAddAll(el, entries, () => stripDone(el));
+});
 
 /* ===== FREE MONDAY EMAIL ON THE WEB (2026-11-12, owner approved) =====
  * A web watch lives only in this browser. Right after one is created, the
@@ -11607,6 +12155,22 @@ if (!IS_NATIVE && 'serviceWorker' in navigator) {
  * meta tag in index.html; Android Chrome gets the native Play-install offer
  * via related_applications in manifest.webmanifest.
  * Test hook: ?appbanner=ios|android forces the platform for QA. */
+/* The banner waits (CARS FEED item 10, 2026-11-16). On a visitor's first
+ * day it does not show on the zip card or over the first screen of cars: it
+ * appears once they have scrolled past the third row of tiles, or 30 s after
+ * the list first rendered, whichever is first. Later days: at once, as
+ * before. Dismissed stays dismissed; it still steps aside for the watch
+ * toast. The first day is kept in this browser (ys_first_day). */
+let _promoWait = null;   // { platform, timer, onScroll } while waiting
+const PROMO_WAIT_MS = 30000;
+function promoFirstDay() {
+  try {
+    const today = new Date().toDateString();
+    const first = localStorage.getItem('ys_first_day');
+    if (!first) { localStorage.setItem('ys_first_day', today); return true; }
+    return first === today;
+  } catch (e) { return true; }
+}
 (function appPromo() {
   if (IS_NATIVE) return; // already inside the native app — never promote
   const qs = new URLSearchParams(location.search).get('appbanner');
@@ -11619,8 +12183,36 @@ if (!IS_NATIVE && 'serviceWorker' in navigator) {
   // hidden for good once swiped away and never appears outside Safari, so
   // this is the one pointer a phone visitor reliably sees. Dismiss sticks.
   try { localStorage.setItem('jh_visits', String(parseInt(localStorage.getItem('jh_visits') || '0', 10) + 1)); } catch (e) { /* private mode */ }
+  if (promoFirstDay()) { _promoWait = { platform, timer: null, onScroll: null }; return; }
   showAppPromo(platform);
 })();
+/* renderLive calls this once tiles are on screen: the 30 s clock and the
+ * scroll watch start with the list, not with the zip card. */
+function appPromoListRendered() {
+  if (!_promoWait || _promoWait.timer) return;
+  _promoWait.timer = setTimeout(appPromoRelease, PROMO_WAIT_MS);
+  _promoWait.onScroll = () => { if (promoThirdRowPassed()) appPromoRelease(); };
+  window.addEventListener('scroll', _promoWait.onScroll, { passive: true });
+}
+function promoThirdRowPassed() {
+  const grid = document.getElementById('live-grid');
+  if (!grid || !grid.getClientRects().length) return false;   // Cars tab not shown
+  const tiles = grid.querySelectorAll(':scope > .car-tile');
+  if (!tiles.length) return false;
+  const cols = getComputedStyle(grid).gridTemplateColumns.split(' ').filter(Boolean).length || 1;
+  return tiles[Math.min(tiles.length, 3 * cols) - 1].getBoundingClientRect().bottom < 0;
+}
+function appPromoRelease() {
+  const w = _promoWait;
+  if (!w) return;
+  _promoWait = null;
+  clearTimeout(w.timer);
+  if (w.onScroll) window.removeEventListener('scroll', w.onScroll);
+  showAppPromo(w.platform);
+  // A watch toast is up in the same spot: wait behind it (its hide brings this back).
+  const t = document.getElementById('watch-toast'), promo = document.getElementById('app-promo');
+  if (t && t.classList.contains('show') && promo) { promo.style.display = 'none'; _promoStepAside = true; }
+}
 function showAppPromo(platform) {
   const el = document.getElementById('app-promo');
   if (!el) return;
@@ -11655,7 +12247,8 @@ function showAppPromo(platform) {
   const standalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
   document.body.classList.add('has-store-badges'); // footer pair: all web contexts
   const promo = document.getElementById('app-promo');
-  const promoShowing = !!promo && promo.style.display !== 'none';
+  // A banner waiting for the visitor to scroll (CARS FEED item 10) counts as showing.
+  const promoShowing = (!!promo && promo.style.display !== 'none') || !!_promoWait;
   if (!standalone && !promoShowing) document.body.classList.add('has-header-badges');
 })();
 

@@ -119,8 +119,14 @@
          a guess from the connection, or a place a link carried (app.js,
          A PLACE FOR THIS VISIT). One tap to correct it. -->
     <div class="place-line" id="place-line" style="display:none;" role="region" aria-label="Where these cars are">
-      <p class="place-line-text" id="place-line-text"></p>
-      <div class="place-line-form" id="place-line-form">
+      <!-- Collapsed at first: the sentence and one "Change" button, so cars sit
+           on the first screen; the button opens the zip field and "Use my
+           location" (hub, 2026-11-16). -->
+      <div class="place-line-head">
+        <p class="place-line-text" id="place-line-text"></p>
+        <button type="button" class="btn place-line-change" id="place-line-change" aria-label="Change location" aria-controls="place-line-form" aria-expanded="false" hidden>Change</button>
+      </div>
+      <div class="place-line-form" id="place-line-form" hidden>
         <input type="text" id="place-line-input" inputmode="numeric" maxlength="7" autocomplete="postal-code" placeholder="Your zip" aria-label="Your zip code">
         <button type="button" class="btn btn-primary" id="place-line-go">Show me</button>
         <button type="button" class="btn gps-btn" id="place-line-gps"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Use my location</button>
@@ -145,9 +151,8 @@
     <!-- Upcoming half-price/sale days at yards in range (from chain sale calendars) -->
     <div class="sale-strip" id="sale-strip" style="display:none;"></div>
 
-    <div class="stats-bar" id="live-stats-bar">
-      <div class="skel-chip skeleton"></div>
-      <div class="skel-chip skeleton"></div>
+    <!-- Cars feed (2026-11-16): one summary line instead of three stat tiles. -->
+    <div class="feed-summary" id="live-stats-bar">
       <div class="skel-chip skeleton"></div>
     </div>
     <!-- Car search (2026-11-12, from r/XTerra feedback: "donor cars near me
@@ -282,6 +287,10 @@
         <button class="btn btn-primary" id="live-refresh-btn" title="How to refresh data"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36M21 3v6h-6"/></svg> Refresh data</button>
       </div>
     </div>
+    <!-- Cars feed chips (2026-11-16): All, New, This week, top makes; a
+         chosen make shows its models. Same state as Filters and the search
+         box. This row may scroll sideways; nothing else does. -->
+    <div class="feed-chips" id="feed-chips" role="group" aria-label="Narrow the list" data-hscroll hidden></div>
     <div class="car-grid" id="live-grid">
       <div class="skel-note" style="grid-column:1/-1;">Loading live inventory&hellip;</div>
       <div class="skel-card"><div class="skeleton skel-line w60"></div><div class="skeleton skel-line w40"></div><div class="skeleton skel-line w80"></div><div class="skeleton skel-line w30"></div></div>
@@ -384,9 +393,9 @@
     <div class="pf-coverage-form yard-request" id="yard-request">
       <div class="pfc-what"><strong>Don&rsquo;t see your yard?</strong> Tell us and we&rsquo;ll look at adding it.</div>
       <input type="text" id="yr-name" maxlength="80" placeholder="Yard name" autocomplete="off">
-      <input type="text" id="yr-where" maxlength="200" placeholder="City, state or site" aria-label="City and state, or the yard's website" autocomplete="off">
+      <input type="text" id="yr-where" maxlength="200" placeholder="City, state" aria-label="City and state, or the yard's website" autocomplete="off">
       <input type="email" id="yr-email" maxlength="120" placeholder="Email" aria-label="Your email (optional)" autocomplete="email">
-      <div class="pf-hint">Add the city and state so we know which yard you mean. Self-service yards that post their inventory online are the quickest to add. Leave an email and we&rsquo;ll tell you when it&rsquo;s live.</div>
+      <div class="pf-hint">Add the city and state, or the yard&rsquo;s website, so we know which yard you mean. Self-service yards that post their inventory online are the quickest to add. Leave an email and we&rsquo;ll tell you when it&rsquo;s live.</div>
       <div class="pfc-what yr-covered" id="yr-covered" role="status" hidden></div>
       <div class="pfc-actions">
         <button type="button" class="btn btn-primary" id="yr-send">Request this yard</button>

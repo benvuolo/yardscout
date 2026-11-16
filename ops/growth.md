@@ -653,3 +653,19 @@ version" link and the logo are left untagged (links, not buttons).
 typed zip if the owner wants to know which correction people use. (2) Put
 the same guess line on the Yards tab. (3) A "Not here?" link on the stats
 bar for a guess, once the Cars-feed work settles.
+## Note from design/cars-feed (2026-11-16): counting rules v5, for this workstream
+
+The Cars feed branch (`design/cars-feed`, not merged) bumped `EVENTS_V` to
+5 in docs/app.js and added the `funnel-v5` marker in
+`backend/src/attribution.js` (with a recap_signup_unit check). Two changes
+the scorecard does not read yet (backend/src/scorecard.js is this
+workstream's file, so it was left alone):
+- a new narrowing kind `narrow/chip` (a make or model chip above the Cars
+  grid, once per device per UTC day, like the others). `NARROW_EVENTS` and
+  the "How people narrowed the Cars list" block need a "chips" route, with
+  "counting starts" from the first `funnel-v5` day;
+- `email-asked` now also counts the Monday-email field in the Cars watch
+  strip (once per visit), not only the one in the watch toast. Asked can
+  rise without more watches from the day v5 reaches users; the scorecard
+  could note "since <first funnel-v5 day> asked includes the Cars strip".
+Privacy page already updated on that branch (chip tally, the strip).

@@ -269,25 +269,39 @@ with sync_playwright() as pw:
     VALUE_SEL = ".part-cost, .part-price, .part-save, .sell-badge, .range-text, .range-extra, .pf-save"
     page.click(".tab[data-tab='live']")
     page.wait_for_timeout(500)
+    # Cars feed (2026-11-16): the list is tiles; the card's parts line and
+    # value line moved to the car screen (.cd-parts-summary, .cd-value), so
+    # tiles must carry no price at all, and the car-level turnover badge the
+    # free card showed (free on purpose) now sits in the car screen's
+    # .cd-value block, checked for prices only like the card was.
     free = page.evaluate("""(args) => {
       const [re, sel] = args; const rx = new RegExp(re);
       const sample = typeof lastSampleKey !== 'undefined' ? lastSampleKey : null;
       const cards = [...document.querySelectorAll('#live-grid .car-card[data-vkey]')]
-        .filter(c => c.dataset.vkey !== sample && !c.querySelector('.sample-pitch'));
-      const withParts = cards.filter(c => c.querySelector('.parts-summary'));
-      const named = withParts.filter(c => /to check: \\S/.test(c.querySelector('.parts-summary').textContent));
+        .filter(c => c.dataset.vkey !== sample);
+      const vOf = (c) => liveInventory.find(v => vehicleKey(v) === c.dataset.vkey);
+      const withParts = cards.filter(c => { const v = vOf(c); return v && v.hasMatch && v.topParts && v.topParts.length; });
       const leaks = cards.filter(c => rx.test(c.innerText) || c.querySelector(sel))
         .map(c => [(c.innerText.match(new RegExp(re, 'g')) || []).join('|'), (c.querySelector(sel) || {}).className]);
-      const badges = cards.map(c => c.querySelector('.demand-badge')).filter(Boolean)
-        .map(b => ({ text: b.textContent.trim(), price: rx.test(b.textContent) || /\\d/.test(b.textContent) }));
-      return { cards: cards.length, withParts: withParts.length, named: named.length, leaks, badges,
+      const named = [], badges = [];
+      for (const c of withParts.slice(0, 8)) {
+        openCarDetail(c.dataset.vkey);
+        const ps = document.querySelector('#car-detail .cd-parts-summary');
+        if (ps && /to check: \\S/.test(ps.textContent)) named.push(c.dataset.vkey);
+        const b = document.querySelector('#car-detail .cd-value .demand-badge');
+        if (b) badges.push({ text: b.textContent.trim(), price: rx.test(b.textContent) || /\\d/.test(b.textContent) });
+        const cv = document.querySelector('#car-detail .cd-value');
+        if (cv && (rx.test(cv.innerText) || cv.querySelector(sel))) leaks.push(['car-screen value block', c.dataset.vkey]);
+      }
+      hideCarDetail(); history.replaceState(null, '', location.href);   // leave no car-screen history entry behind
+      return { cards: cards.length, withParts: Math.min(withParts.length, 8), named: named.length, leaks, badges,
                key: withParts.length ? withParts[0].dataset.vkey : null,
                keys: withParts.slice(0, 3).map(c => c.dataset.vkey) };
     }""", [PRICE_RE, VALUE_SEL])
-    check("free live cards: part names shown on the card",
+    check("free tiles: part names shown one tap down (the car screen's parts line)",
           free["withParts"] > 0 and free["named"] == free["withParts"], str(free)[:300])
-    check("free live cards: no price/value strings", not free["leaks"], str(free["leaks"][:2]))
-    check("free live cards: a demand badge, when shown, is a turnover label with no price",
+    check("free tiles and the car screen's value block: no price/value strings", not free["leaks"], str(free["leaks"][:2]))
+    check("free value block: a demand badge, when shown, is a turnover label with no price",
           all(b["text"] in ("Usually still there", "Gets picked over fast") and not b["price"] for b in free["badges"]),
           str(free["badges"][:3]))
     # car screen
@@ -295,11 +309,13 @@ with sync_playwright() as pw:
     page.wait_for_selector("#car-detail.open #car-detail-body .part-name")
     det = page.evaluate("""(args) => {
       const [re, sel] = args; const b = document.getElementById('car-detail');
+      const body = b.cloneNode(true); body.querySelectorAll('.cd-value').forEach(e => e.remove());
+      document.body.appendChild(body); const bt = body.innerText; body.remove();
       return { names: b.querySelectorAll('.part-name').length,
                blur: b.querySelectorAll('.locked-blur').length,
                lock: b.querySelectorAll('.parts-lock').length,
-               leak: new RegExp(re).test(b.innerText) || !!b.querySelector(sel),
-               why: [(b.innerText.match(new RegExp(re, 'g')) || []).join('|'), (b.querySelector(sel) || {}).className],
+               leak: new RegExp(re).test(bt) || !!body.querySelector(sel),
+               why: [(bt.match(new RegExp(re, 'g')) || []).join('|'), (body.querySelector(sel) || {}).className],
                text: b.innerText.slice(0, 200) };
     }""", [VALUE_RE, VALUE_SEL])
     check("free car screen: part names shown, none blurred",
@@ -311,7 +327,7 @@ with sync_playwright() as pw:
     worth = page.evaluate("""(args) => {
       const [re, sel, key] = args; const w = document.querySelector('#car-detail .worth');
       const names = [...w.querySelectorAll('.worth-list .part-name')].map(e => e.textContent.trim());
-      const card = document.querySelector(`#live-grid .car-card[data-vkey="${CSS.escape(key)}"] .parts-summary`);
+      const card = document.querySelector('#car-detail .cd-parts-summary');
       const lead = card ? card.textContent.replace(/\\s+/g, ' ').trim() : '';
       const top = w.querySelector('.worth-list');
       return { n: names.length, first: names[0] || '', lead,
@@ -384,10 +400,14 @@ with sync_playwright() as pw:
     page = boot(ctx, PRO_BOOT)
     page.wait_for_timeout(500)
     pro = page.evaluate("""() => {
-      const c = [...document.querySelectorAll('#live-grid .car-card[data-vkey]')].find(c => c.querySelector('.range-text'));
-      return { cardValue: !!c && /\\$\\d/.test(c.querySelector('.range-text').textContent), key: c ? c.dataset.vkey : null };
+      for (const c of document.querySelectorAll('#live-grid .car-card[data-vkey]')) {
+        openCarDetail(c.dataset.vkey);
+        const r = document.querySelector('#car-detail .cd-allvalue .range-text');
+        if (r) { const out = { cardValue: /\\$\\d/.test(r.textContent), key: c.dataset.vkey }; hideCarDetail(); history.replaceState(null, '', location.href); return out; }
+      }
+      hideCarDetail(); history.replaceState(null, '', location.href); return { cardValue: false, key: null };
     }""")
-    check("pro live card: value line shows dollars", pro["cardValue"], str(pro))
+    check("pro: the card's value line (now on the car screen) shows dollars", pro["cardValue"], str(pro))
     page.evaluate("(k) => openCarDetail(k)", pro["key"])
     page.wait_for_selector("#car-detail.open #car-detail-body .part-name")
     pdet = page.evaluate("""() => { const b = document.getElementById('car-detail');

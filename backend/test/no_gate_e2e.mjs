@@ -102,6 +102,7 @@ async function open(browser, { geo = { ok: false }, hash = '', search = '', stor
     line: getComputedStyle(document.getElementById('place-line')).display !== 'none',
     lineText: document.getElementById('place-line-text').textContent.replace(/\s+/g, ' ').trim(),
     formShown: !document.getElementById('place-line-form').hidden,
+    changeShown: !document.getElementById('place-line-change').hidden,
     back: document.getElementById('place-line-back').hidden ? null : document.getElementById('place-line-back').textContent,
     chip: getComputedStyle(document.getElementById('zip-chip')).display !== 'none',
     yardFilter: document.getElementById('live-filter-location').value,
@@ -173,8 +174,19 @@ try {
     let s = await w.state();
     check('guess: cars render with no zip typed', s.cards > 0 && !s.banner, JSON.stringify({ cards: s.cards, banner: s.banner }));
     check('guess: the line names the place and says it is a guess', s.line && s.lineText === 'Showing yards near Sacramento, CA. That is a guess from your internet connection.', s.lineText);
-    check('guess: the zip field, its button and "Use my location" are in the line', s.formShown && !s.back
-      && await w.page.evaluate(() => ['place-line-input', 'place-line-go', 'place-line-gps'].every((id) => document.getElementById(id).getBoundingClientRect().width > 0)));
+    // The line starts as one sentence and a "Change" button, so cars sit on
+    // the first screen; the button opens the zip field and "Use my location".
+    check('guess: the line starts closed: the sentence and one "Change" button', !s.formShown && s.changeShown && !s.back
+      && await w.page.evaluate(() => document.getElementById('place-line-change').getBoundingClientRect().width > 0
+        && ['place-line-input', 'place-line-go', 'place-line-gps'].every((id) => document.getElementById(id).getBoundingClientRect().width === 0)), JSON.stringify(s));
+    await shot(w.page, 'guess-line-closed');
+    await w.page.click('#place-line-change');
+    s = await w.state();
+    check('guess: "Change" opens the zip field, its button and "Use my location", with the cursor in the field', s.formShown && !s.changeShown && !s.back
+      && await w.page.evaluate(() => ['place-line-input', 'place-line-go', 'place-line-gps'].every((id) => document.getElementById(id).getBoundingClientRect().width > 0)
+        && document.activeElement === document.getElementById('place-line-input')), JSON.stringify(s));
+    await w.page.evaluate(() => renderLive());
+    check('guess: the open field stays open when the list redraws', (await w.state()).formShown);
     check('guess: nothing written to jh_zip, jh_zip_coords or jh_gps', s.zip === null && s.coords === null && s.gps === null, JSON.stringify(s));
     check('guess: locationIsGuess() and no own centre', s.guess === true && s.own === null && s.center && s.center.lat === 38.6, JSON.stringify(s));
     check('guess: /geo asked exactly once', w.geoHits.length === 1, String(w.geoHits.length));
@@ -223,6 +235,7 @@ try {
     await w.page.waitForFunction(() => typeof liveLoaded !== 'undefined' && liveLoaded && !!_tempPlace, null, { timeout: 60000 });
     const evR = await w.events();
     check('reload (same visit): /geo asked again (nothing saved) but counted once in total', w.geoHits.length === 2 && count(evR, 'first-view-guess') === 0, `${w.geoHits.length} ${JSON.stringify(evR)}`);
+    await w.page.click('#place-line-change');
     await w.page.fill('#place-line-input', '9581');
     await w.page.click('#place-line-go');
     let msg = await w.page.textContent('#place-line-msg');
@@ -309,7 +322,7 @@ try {
     await w.page.waitForFunction(() => document.getElementById('live-filter-make').value === 'Toyota', null, { timeout: 30000 }).catch(() => {});
     let s = await w.state();
     check('#yard=&cars= with a saved zip: the yard for this visit, the make applied', s.yardFilter === YARD && s.make === 'Toyota' && s.temp && s.temp.saved, JSON.stringify(s));
-    check('#yard= with a saved zip: the zip is kept, one tap back offered', s.zip === '85003' && s.back === 'Back to 85003' && !s.formShown && !s.guess, JSON.stringify(s));
+    check('#yard= with a saved zip: the zip is kept, one tap back offered', s.zip === '85003' && s.back === 'Back to 85003' && !s.formShown && !s.changeShown && !s.guess, JSON.stringify(s));
     check('#yard= with a saved zip: a watch keeps the saved centre', await w.page.evaluate(() => { const r = addQuickWatch('Honda', 'Civic', null, null, 'test'); const e = loadWatchlist().find((x) => x.make === 'Honda'); return r === 'added' && e && e.lat === 33.4511 && e.lng === -112.0783; }));
     await shot(w.page, 'yard-link-saved');
     await w.page.click('#place-line-back');

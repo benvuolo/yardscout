@@ -12,7 +12,7 @@ import {
 } from '../src/recap_signup.js';
 import { sendWeeklyDigests, buildDigestEmail } from '../src/alerts.js';
 import { flushOps } from '../src/ops.js';
-import { handleEvent } from '../src/attribution.js';
+import { handleEvent, MARKS_SQL } from '../src/attribution.js';
 
 let failures = 0;
 const check = (name, ok, extra = '') => { console.log(`${ok ? 'PASS' : 'FAIL'}  ${name}${extra ? ' — ' + extra : ''}`); if (!ok) failures++; };
@@ -398,6 +398,17 @@ check('no full email address in any log line', leaked.length === 0, leaked.slice
   const v4Rows = rows(e, "SELECT event, platform, n FROM events_daily WHERE platform = 'android' ORDER BY event");
   check('events API: a v4 event bumps funnel-v2, -v3 and -v4 for its platform',
     JSON.stringify(v4Rows.map((x) => [x.event, x.n])) === JSON.stringify([['checkout-end/failed-network', 1], ['funnel-v2', 1], ['funnel-v3', 1], ['funnel-v4', 1]]), JSON.stringify(v4Rows));
+  // Counting rules v5 (Cars feed, 2026-11-16): narrow/chip and the strip's
+  // email-asked; its own marker, which a client may not post.
+  check('events API: funnel-v5 from a client refused', (await evPost({ e: 'funnel-v5', p: 'web', v: 5 })).status === 400);
+  const e5 = freshEnv();
+  const ev5 = (b) => handleEvent(new Request('https://api.test/v1/events', { method: 'POST', body: JSON.stringify(b) }), e5);
+  check('events API: narrow/chip accepted', (await ev5({ e: 'narrow/chip', p: 'web', v: 5, src: 'reddit' })).status === 200);
+  await ev5({ e: 'email-asked', p: 'web', v: 5 });
+  const v5Rows = rows(e5, 'SELECT event, source, n FROM events_daily ORDER BY event, source');
+  check('events API: a v5 event bumps funnel-v2 to -v5 once per day and platform, and counts itself under its source',
+    JSON.stringify(v5Rows.map((x) => [x.event, x.source, x.n])) === JSON.stringify([['email-asked', '', 1], ['funnel-v2', '', 2], ['funnel-v3', '', 2], ['funnel-v4', '', 2], ['funnel-v5', '', 2], ['narrow/chip', 'reddit', 1]]), JSON.stringify(v5Rows));
+  check('events API: the v5 marker stays out of the per-source funnel (MARKS_SQL)', MARKS_SQL.includes("'funnel-v5'"));
 }
 
 console.log(failures ? `\n${failures} FAILURES` : '\nALL PASS');

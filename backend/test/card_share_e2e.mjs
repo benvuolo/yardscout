@@ -1,6 +1,7 @@
 /* Browser e2e: a share button on every car card (owner request 2026-11-13).
- * Cars list cards, Alerts hit cards and Parts donor cards each carry one,
- * at least 44x44 px, beside Details. On a desktop it copies the car's
+ * Cars list tiles (feed, 2026-11-16: in a top corner of the picture, the
+ * bookmark in the other), Alerts hit cards and Parts donor cards each carry
+ * one, at least 44x44 px. On a desktop it copies the car's
  * yardscout.io link; on a phone it opens the system share sheet with that
  * link. Either way it does not open the car screen or change the pull sheet.
  * Run: node backend/test/card_share_e2e.mjs   (Playwright pre-installed) */
@@ -53,7 +54,7 @@ try {
     const { page, errs, ctx } = await open({ viewport: { width: 1280, height: 900 } });
     const info = await page.evaluate(() => {
       const cards = [...document.querySelectorAll('#live-grid .car-card[data-vkey]')];
-      const withBtn = cards.filter(c => c.querySelector('.cc-actions .card-share')).length;
+      const withBtn = cards.filter(c => c.querySelector('.tile-media .card-share')).length;
       const c = cards[0], b = c.querySelector('.card-share'), r = b.getBoundingClientRect();
       return { cards: cards.length, withBtn, key: b.dataset.vkey, same: b.dataset.vkey === c.dataset.vkey, w: r.width, h: r.height, label: b.getAttribute('aria-label') };
     });
@@ -77,7 +78,7 @@ try {
     // Pull sheet: each yard has an "Hours and directions" link to Maps
     // (the app does not collect yard hours; owner question 2026-11-13).
     {
-      await page.click('#live-grid .car-card[data-vkey] .pull-btn');
+      await page.click('#live-grid .car-card[data-vkey] .tile-save');
       await page.waitForTimeout(200);
       await page.evaluate(() => openSavedSheet());
       await page.waitForTimeout(300);
@@ -92,7 +93,7 @@ try {
       check('pull sheet: a yard has an "Hours and directions" link', !!hl && /Hours and directions/.test(hl.text), JSON.stringify(hl));
       check('…to a Maps search for that yard, in a new tab, at least 44 px tall', !!hl && hl.href.includes('/maps/search/?api=1&query=') && decodeURIComponent(hl.href).includes(firstWord) && hl.target === '_blank' && hl.h >= 43.5, JSON.stringify(hl));
       await page.evaluate(() => { closeSavedSheet(); });
-      await page.click('#live-grid .car-card[data-vkey] .pull-btn');
+      await page.click('#live-grid .car-card[data-vkey] .tile-save');
       await page.waitForTimeout(200);
     }
     // Yards tab: every yard card has the same link, and tapping it does not
@@ -117,10 +118,10 @@ try {
       check('…and tapping it does not open Walk the rows', !(await page.evaluate(() => !!document.querySelector('#yard-rows.open'))));
       await tabTo(page, 'live');
     }
-    // Details still opens the car screen.
-    await page.click('#live-grid .car-card[data-vkey] .cc-actions .car-open');
+    // The rest of the tile still opens the car screen.
+    await page.click('#live-grid .car-card[data-vkey] .tile-open');
     await page.waitForTimeout(400);
-    check('Details beside it still opens the car screen', await page.evaluate(() => !!document.querySelector('#car-detail.open')));
+    check('the tile beside it still opens the car screen', await page.evaluate(() => !!document.querySelector('#car-detail.open')));
     await page.evaluate(() => closeCarDetail());
     // Alerts: a watch hit card.
     await page.evaluate(() => {
@@ -181,17 +182,40 @@ try {
     const sh = await page.evaluate(() => ({ shared: window.__shared, detail: !!document.querySelector('#car-detail.open') }));
     check('phone tap: the share sheet gets the car\'s link and a title', sh.shared.length === 1 && sh.shared[0].url === 'https://yardscout.io/car/' + encodeURIComponent(key) && /\d{4} /.test(sh.shared[0].title || ''), JSON.stringify(sh.shared));
     check('…and the car screen did not open', !sh.detail);
-    const row = await page.evaluate(() => { const a = document.querySelector('#live-grid .cc-actions'); const tops = [...a.querySelectorAll('button')].map(b => Math.round(b.getBoundingClientRect().top)); return { tops, w: a.clientWidth }; });
-    check('390 px: Add to pull sheet, Details and Share sit on one line', new Set(row.tops).size === 1, JSON.stringify(row));
+    const corners = () => page.evaluate(() => [...document.querySelectorAll('#live-grid .car-tile')].slice(0, 6).map(t => {
+      const m = t.querySelector('.tile-media .photo-box').getBoundingClientRect(), s = t.querySelector('.tile-share').getBoundingClientRect(), b = t.querySelector('.tile-save').getBoundingClientRect();
+      return { s: [s.left - m.left, s.top - m.top, s.width, s.height], b: [m.right - b.right, b.top - m.top, b.width, b.height], mw: m.width, mh: m.height };
+    }));
+    const inCorners = (cs) => cs.every(c => c.s[0] <= 1 && c.s[1] <= 1 && c.b[0] <= 1 && c.b[1] <= 1 && c.s[2] >= 43.5 && c.s[3] >= 43.5 && c.b[2] >= 43.5 && c.b[3] >= 43.5
+      && c.s[2] + c.b[2] <= c.mw && c.s[3] <= c.mh / 2 && c.b[3] <= c.mh / 2);
+    const row = await corners();
+    check('390 px: share and bookmark each sit in a top corner of the picture, 44 px, apart', row.length > 1 && inCorners(row), JSON.stringify(row.slice(0, 2)));
     check('phone: no page errors', errs.length === 0, errs.join(' | '));
     await ctx.close();
   }
   // ---- 360 px (common Android width): still one line ----
   {
     const { page, ctx } = await open({ viewport: { width: 360, height: 800 }, isMobile: true, hasTouch: true });
-    const row = await page.evaluate(() => { const a = document.querySelector('#live-grid .cc-actions'); return { tops: [...a.querySelectorAll('button')].map(b => Math.round(b.getBoundingClientRect().top)), sizes: [...a.querySelectorAll('button')].map(b => Math.round(b.getBoundingClientRect().width) + 'x' + Math.round(b.getBoundingClientRect().height)) }; });
-    check('360 px: the three buttons sit on one line', new Set(row.tops).size === 1, JSON.stringify(row));
-    check('…each at least 44 px tall', row.sizes.every(s => +s.split('x')[1] >= 44 && +s.split('x')[0] >= 44), JSON.stringify(row.sizes));
+    const row = await page.evaluate(() => [...document.querySelectorAll('#live-grid .car-tile')].slice(0, 6).map(t => {
+      const m = t.querySelector('.tile-media .photo-box').getBoundingClientRect(), s = t.querySelector('.tile-share').getBoundingClientRect(), b = t.querySelector('.tile-save').getBoundingClientRect();
+      return { s: [s.left - m.left, s.top - m.top, s.width, s.height], b: [m.right - b.right, b.top - m.top, b.width, b.height], mw: m.width, mh: m.height };
+    }));
+    check('360 px: share and bookmark each sit in a top corner of the picture, apart', row.length > 1 && row.every(c => c.s[0] <= 1 && c.s[1] <= 1 && c.b[0] <= 1 && c.b[1] <= 1 && c.s[2] + c.b[2] <= c.mw && c.s[3] <= c.mh / 2), JSON.stringify(row.slice(0, 2)));
+    check('…each at least 44 px', row.every(c => c.s[2] >= 43.5 && c.s[3] >= 43.5 && c.b[2] >= 43.5 && c.b[3] >= 43.5), JSON.stringify(row.slice(0, 2)));
+    // The bookmark is "Add to pull sheet": the same storage, both ways.
+    const k = await page.evaluate(() => document.querySelector('#live-grid .car-tile .tile-save').dataset.vkey);
+    await page.tap('#live-grid .car-tile .tile-save');
+    await page.waitForTimeout(200);
+    const on = await page.evaluate((k) => ({ saved: !!JSON.parse(localStorage.getItem('jh_saved') || '{}')[k], pressed: document.querySelector('#live-grid .car-tile .tile-save').getAttribute('aria-pressed'), detail: !!document.querySelector('#car-detail.open') }), k);
+    check('360 px: the bookmark adds the car to the pull sheet (jh_saved), shows it, and opens nothing', on.saved && on.pressed === 'true' && !on.detail, JSON.stringify(on));
+    await page.evaluate((k) => openCarDetail(k), k);
+    await page.waitForTimeout(300);
+    check('…and the car screen\'s button agrees ("On pull sheet")', await page.evaluate(() => /On pull sheet/.test(document.querySelector('#car-detail-actions .pull-btn').textContent)));
+    await page.click('#car-detail-actions .pull-btn');
+    await page.waitForTimeout(200);
+    await page.evaluate(() => closeCarDetail());
+    await page.waitForTimeout(300);
+    check('…taking it off there clears the tile\'s bookmark', await page.evaluate((k) => !JSON.parse(localStorage.getItem('jh_saved') || '{}')[k] && document.querySelector('#live-grid .car-tile .tile-save').getAttribute('aria-pressed') === 'false', k));
     await ctx.close();
   }
 } finally {

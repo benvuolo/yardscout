@@ -47,17 +47,27 @@
  * scorecard can tell "no client able to count this" (no data) from "nobody
  * did it" (0). Same anonymous counter, same table.
  *
- * First view from a guess (2026-11-16, no new counting-rules version): with no
- * saved place the app opens the Cars list around the area /geo reports for
- * the connection. 'first-view-guess' counts that (once per visit), and
- * 'guess-replaced' a zip or "Use my location" then replacing the guess (once
- * per visit). Same anonymous counter, same table; nothing about the place. */
+ * First view from a guess (2026-11-16, counted without a version step of its
+ * own): with no saved place the app opens the Cars list around the area /geo
+ * reports for the connection. 'first-view-guess' counts that (once per
+ * visit), and 'guess-replaced' a zip or "Use my location" then replacing the
+ * guess (once per visit). Same anonymous counter, same table; nothing about
+ * the place.
+ *
+ * Counting rules v5 (2026-11-16, docs/app.js EVENTS_V 5, the Cars feed): a
+ * new narrowing kind, narrow/chip (a make or model chip above the Cars
+ * grid), and 'email-asked' also counts the Monday-email field in the Cars
+ * watch strip (once per visit), so it can rise without more watches. A v5
+ * client's events bump a 'funnel-v5' marker per (day, platform), so the
+ * scorecard can say which numbers predate it. Event names are not
+ * allow-listed here (EVENT_RE only); the scorecard decides what it reads. */
 import { json, err } from './util.js';
 
 export const FUNNEL_V2_MARK = 'funnel-v2';
 export const FUNNEL_V3_MARK = 'funnel-v3';
 export const FUNNEL_V4_MARK = 'funnel-v4';
-const MARKS = new Set([FUNNEL_V2_MARK, FUNNEL_V3_MARK, FUNNEL_V4_MARK]);
+export const FUNNEL_V5_MARK = 'funnel-v5';
+const MARKS = new Set([FUNNEL_V2_MARK, FUNNEL_V3_MARK, FUNNEL_V4_MARK, FUNNEL_V5_MARK]);
 /** The marker names as an SQL list, for queries that must leave them out. */
 export const MARKS_SQL = [...MARKS].map((m) => `'${m}'`).join(', ');
 
@@ -92,6 +102,7 @@ export async function handleEvent(req, env) {
   if (Number(body.v) >= 2) stmts.push(bump.bind(day, FUNNEL_V2_MARK, '', '', '', platform));
   if (Number(body.v) >= 3) stmts.push(bump.bind(day, FUNNEL_V3_MARK, '', '', '', platform));
   if (Number(body.v) >= 4) stmts.push(bump.bind(day, FUNNEL_V4_MARK, '', '', '', platform));
+  if (Number(body.v) >= 5) stmts.push(bump.bind(day, FUNNEL_V5_MARK, '', '', '', platform));
   await env.DB.batch(stmts);
   return json({ ok: true });
 }

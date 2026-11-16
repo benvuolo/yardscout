@@ -10,7 +10,9 @@
  *   - a computed text-overflow: ellipsis, or -webkit-line-clamp, anywhere
  *   - text clipped by an ancestor with overflow hidden/clip/auto/scroll
  *     (vertical scrolling of a sheet or page is allowed; horizontal is not)
- *   - text past the viewport edge, or a page that scrolls sideways
+ *   - text past the viewport edge, or a page that scrolls sideways (one
+ *     exception: a row marked data-hscroll, the Cars chips, may scroll
+ *     sideways inside the screen; each chip in it still has to fit whole)
  *   - an input whose value or placeholder is wider than the field, or a
  *     select whose choice cannot fit even wrapped (its longest word)
  *   - a tap target smaller than 44x44 CSS px (inline links in a sentence
@@ -212,13 +214,19 @@ const CHECK_FN = () => {
       const r = a.getBoundingClientRect();
       const bl = parseFloat(cs.borderLeftWidth), br = parseFloat(cs.borderRightWidth), bt = parseFloat(cs.borderTopWidth), bb = parseFloat(cs.borderBottomWidth);
       const box = { left: r.left + bl, right: r.right - br, top: r.top + bt, bottom: r.bottom - bb };
+      // A row marked data-hscroll (the Cars chips, 2026-11-16) may scroll
+      // sideways: text outside it is scrolled out of view, not cut.
+      const hscroll = a.hasAttribute('data-hscroll') && (ox === 'auto' || ox === 'scroll');
+      if (hscroll && (tr.left < box.left - 1 || tr.right > box.right + 1)) break;
       if (ox !== 'visible' && (tr.left < box.left - 1 || tr.right > box.right + 1)) { add('clipped-x', el, text, `by ${desc(a)} (${ox})`); break; }
       const outY = tr.top < box.top - 1 || tr.bottom > box.bottom + 1;
       if ((oy === 'auto' || oy === 'scroll') && outY) break;   // scrolled out of view, not clipped
       if ((oy === 'hidden' || oy === 'clip') && outY) { add('clipped-y', el, text, `by ${desc(a)}`); break; }
     }
     // (c) past the viewport edge
-    if (tr.right > W + 1 || tr.left < -1) add('offscreen-x', el, text, `${Math.round(tr.left)}..${Math.round(tr.right)} of ${W}`);
+    const hs = el.closest('[data-hscroll]');
+    const hsOk = hs && /auto|scroll/.test(CS(hs).overflowX) && hs.getBoundingClientRect().right <= W + 1 && hs.getBoundingClientRect().left >= -1;
+    if ((tr.right > W + 1 || tr.left < -1) && !hsOk) add('offscreen-x', el, text, `${Math.round(tr.left)}..${Math.round(tr.right)} of ${W}`);
     // (d) contrast
     // WCAG 1.4.3 exempts logotypes: the stencil wordmark keeps its brand orange.
     if (!blurred(el) && !disabled(el) && !el.closest('header h1')) {
@@ -442,6 +450,13 @@ const placeShow = (p, keepZip) => async (page) => {
   await settle(page, 600);
   if (!(await page.isVisible('#place-line'))) throw new Error('no place line');
 };
+/* The same line after "Change": the zip field, "Show me" and "Use my location". */
+const placeShowOpen = (p) => async (page) => {
+  await placeShow(p, false)(page);
+  await page.click('#place-line-change');
+  await settle(page, 300);
+  if (!(await page.isVisible('#place-line-input'))) throw new Error('"Change" did not open the zip field');
+};
 const placeBack = async (page) => {
   await page.evaluate(async (z) => {
     _tempPlace = null; carsIntent = null;
@@ -454,7 +469,9 @@ const placeBack = async (page) => {
 const SCREENS = [
   ['results', async (page) => { await tab(page, 'live'); }],
   ['place-guess', placeShow({ kind: 'guess', lat: 37.35, lng: -121.9, label: 'Rancho Palos Verdes, CA' }, false), placeBack],
+  ['place-guess-open', placeShowOpen({ kind: 'guess', lat: 37.35, lng: -121.9, label: 'Rancho Palos Verdes, CA' }), placeBack],
   ['place-link', placeShow({ kind: 'link', lat: 37.35, lng: -121.9, label: 'Pick-n-Pull - San Jose (Capitol Expressway)', yard: '' }, false), placeBack],
+  ['place-link-open', placeShowOpen({ kind: 'link', lat: 37.35, lng: -121.9, label: 'Pick-n-Pull - San Jose (Capitol Expressway)', yard: '' }), placeBack],
   ['place-link-saved', placeShow({ kind: 'link', lat: 37.35, lng: -121.9, label: 'Pick-n-Pull - San Jose (Capitol Expressway)', yard: '' }, true), placeBack],
   ['zip-card-car', async (page) => {
     await tab(page, 'live');
@@ -468,6 +485,48 @@ const SCREENS = [
     if (!(await page.isVisible('#zip-banner'))) throw new Error('no zip card');
     if (!/^Find a Mercedes-Benz Sprinter/.test(await page.textContent('#zip-banner-head'))) throw new Error('the zip card does not name the car');
   }, placeBack],
+  // Cars feed (2026-11-16): the tile grid is 'results'; these are its other
+  // states: a make chosen in the chips (its models as chips), the watch
+  // strip with the Monday-email field, the car screen opened from a tile
+  // down to "More <model> near you", the since-last-visit line and its
+  // divider, and the first-run note after the first row of tiles.
+  ['feed-chips-make', async (page) => {
+    await tab(page, 'live');
+    await page.click('#feed-chips .fchip[data-chip="make"]');
+    await settle(page, 300);
+    if (await page.evaluate(() => !document.querySelector('#feed-chips .fchip-make') || !document.querySelector('#feed-chips .fchip[data-chip="model"]'))) throw new Error('no make chosen / no model chips');
+    await page.evaluate(() => window.scrollTo(0, 0));
+  }, async (page) => { await page.evaluate(() => { feedClearMake('chip'); }); }],
+  ['feed-strip-mail', async (page) => {
+    await tab(page, 'live');
+    await page.evaluate(() => { carSearchSetFilter('Nissan', 'Xterra'); renderLive(); });
+    await settle(page, 300);
+    await page.evaluate(() => { const s = document.querySelector('#live-grid .strip-mail'); if (!s || !s.querySelector('input.mail-email')) throw new Error('no Monday-email strip'); s.scrollIntoView({ block: 'center' }); });
+  }, async (page) => { await page.evaluate(() => { feedClearMake('chip'); }); }],
+  ['feed-car-from-tile', async (page) => {
+    await tab(page, 'live');
+    const k = await page.evaluate(() => { const t = [...document.querySelectorAll('#live-grid > .car-tile')].find(x => moreLikeThisCars(liveInventory.find(v => vehicleKey(v) === x.dataset.vkey)).length); return t && t.dataset.vkey; });
+    if (!k) throw new Error('no tile with more of its model');
+    await page.click(`#live-grid > .car-tile[data-vkey="${k}"] .tile-open`);
+    await settle(page, 400);
+    await page.evaluate(() => { const m = document.querySelector('#car-detail .cd-more'); if (!m) throw new Error('no "More" section'); m.scrollIntoView({ block: 'start' }); });
+  }],
+  ['feed-since', async (page) => {
+    await tab(page, 'live');
+    await page.evaluate(() => { const d = new Date(); d.setDate(d.getDate() - 3); FEED_SINCE_DAY = localDayStr(d); renderLive(); });
+    await settle(page, 300);
+    if (await page.evaluate(() => !document.querySelector('#live-grid .since-line'))) throw new Error('no since-last-visit line');
+    await page.evaluate(() => window.scrollTo(0, 0));
+  }],
+  ['feed-since-divider', async (page) => {
+    await page.evaluate(() => { for (let i = 0; i < 40 && !document.querySelector('#live-grid .feed-divider'); i++) feedMore(); const d = document.querySelector('#live-grid .feed-divider'); if (!d) throw new Error('no divider'); d.scrollIntoView({ block: 'center' }); });
+  }, async (page) => { await resetUi(page); await page.evaluate(() => { FEED_SINCE_DAY = null; liveSinceOnly = false; renderLive(); }); }],
+  ['feed-first-note', async (page) => {
+    await tab(page, 'live');
+    await page.evaluate(() => { localStorage.removeItem('jh_honesty_ack'); document.getElementById('first-run-note').style.display = ''; renderLive(); });
+    await settle(page, 300);
+    await page.evaluate(() => { const n = document.getElementById('first-run-note'); n.scrollIntoView({ block: 'center' }); });
+  }, async (page) => { await page.evaluate(() => { localStorage.setItem('jh_honesty_ack', '1'); document.getElementById('first-run-note').style.display = 'none'; renderLive(); }); }],
   // Car search (2026-11-12): the suggestion list open, a pick applied, and a
   // #cars= link for a model not in range (the box prefilled + a note).
   ['car-search', async (page) => {
@@ -566,28 +625,52 @@ const SCREENS = [
     await page.evaluate(() => openCarDetail(photoCarKey('https://ik.imagekit.io')));
     await settle(page, 1200);
   }],
-  // Heavy source (Sturtevant: camera originals only): the car screen shows a
-  // tap-to-load box with the size; the tap loads the original into it. The
-  // code is put on a car in view; the image host is answered locally.
+  // Heavy source (Sturtevant: camera originals only) with NO resized copy:
+  // the car screen shows a tap-to-load box with the size; the tap loads the
+  // original into it. The code is put on a car in view; the image host is
+  // answered locally. (With a resized copy there is no tap: the next screen.)
   ...[['photo-heavy', false], ['photo-heavy-loaded', true]].map(([name, load]) => [name, async (page) => {
     await tab(page, 'live');
     await page.evaluate(() => {
+      heavyNoThumbs(true);
       const v = liveInventory.find(x => vehicleKey(x) === document.querySelector('#live-grid .car-card[data-vkey]').dataset.vkey);
       vehicleExtras = vehicleExtras || {};
       const ex = vehicleExtras[String(v.id)] || [];
       ex[0] = 'tSTK12345'; vehicleExtras[String(v.id)] = ex;
       if (!photoInfo('tSTK12345') || !photoInfo('tSTK12345').heavy) throw new Error('heavy source not published');
       openCarDetail(vehicleKey(v));
-      const box = document.querySelector('#car-detail .photo-heavy');
+      // .cd-photo is the car screen's own photo box (the screen also holds
+      // "More <model> near you" tiles, which carry their own photos).
+      const box = document.querySelector('#car-detail .cd-photo.photo-heavy');
       if (!box || !/tap to load \(~3\.8\u00a0MB\)/.test(box.textContent)) throw new Error('no tap-to-load box: ' + (box && box.textContent));
-      if (document.querySelector('#car-detail .photo-box img')) throw new Error('heavy photo loaded without a tap');
+      if (document.querySelector('#car-detail .cd-photo img')) throw new Error('heavy photo loaded without a tap');
     });
     if (load) {
-      await page.click('#car-detail .photo-heavy');
-      await page.waitForSelector('#car-detail .photo-box[data-photo-vkey] img', { timeout: 10000 });
+      await page.click('#car-detail .cd-photo.photo-heavy');
+      await page.waitForSelector('#car-detail .cd-photo[data-photo-vkey] img', { timeout: 10000 });
     }
     await settle(page, 800);
-  }, async (page) => { await page.evaluate(() => { heavyPhotosLoaded.clear(); }); }]),
+  }, async (page) => { await page.evaluate(() => { heavyPhotosLoaded.clear(); heavyNoThumbs(false); }); }]),
+  // The same heavy source as published today, with a resized copy
+  // (2026-11-16): the car screen shows the resized photo at once, no tap.
+  ['photo-heavy-resized', async (page) => {
+    await tab(page, 'live');
+    await page.evaluate(() => {
+      const v = liveInventory.find(x => vehicleKey(x) === document.querySelector('#live-grid .car-card[data-vkey]').dataset.vkey);
+      vehicleExtras = vehicleExtras || {};
+      window.__hrOrig = [String(v.id), vehicleExtras[String(v.id)]];
+      const ex = (vehicleExtras[String(v.id)] || []).slice();
+      ex[0] = 'tSTK12345'; vehicleExtras[String(v.id)] = ex;
+      const info = photoInfo('tSTK12345');
+      if (!info || !info.heavy || !info.thumbLarge) throw new Error('heavy source without a resized large copy: ' + JSON.stringify(info));
+      openCarDetail(vehicleKey(v));
+      if (document.querySelector('#car-detail .cd-photo.photo-heavy')) throw new Error('tap-to-load box although a resized copy is published');
+      const img = document.querySelector('#car-detail .cd-photo[data-photo-vkey] img');
+      if (!img || !/^https:\/\/wsrv\.nl\/\?url=https:\/\/inventory\.sturtevantauto\.com\//.test(img.getAttribute('src') || '')) throw new Error('the car screen does not show the resized copy: ' + (img && img.getAttribute('src')));
+    });
+    await page.waitForFunction(() => { const im = document.querySelector('#car-detail .cd-photo[data-photo-vkey] img'); return im && im.complete && im.naturalWidth > 0; }, null, { timeout: 10000 });
+    await settle(page, 800);
+  }, async (page) => { await page.evaluate(() => { const [k, e] = window.__hrOrig || []; if (k) { if (e === undefined) delete vehicleExtras[k]; else vehicleExtras[k] = e; } window.__hrOrig = null; }); }],
   // Cards without a list photo draw the car (body style from the published
   // "body" extra, paint from the listed colour). Until the scan publishes
   // "body", the three cards after a real-photo card get fixture body styles
@@ -597,16 +680,27 @@ const SCREENS = [
     // A natural stretch of the list: a car with its own photo (Pick-n-Pull),
     // then cars with no list photo whose yard lists their colour (iPull-uPull).
     await page.evaluate(() => {
+      // The "heavy" card below is a heavy source with no resized copy (with
+      // one it is simply a photo card, checked in photo_policy_unit).
+      heavyNoThumbs(true);
+      renderLive();
       // A card with its own real photo, then the next three cards: their own
       // colour, a fixture body style, and one marked as a heavy source.
       const all = [...document.querySelectorAll('#live-grid .car-card[data-eid]')];
-      const hasImg = (c) => c.firstElementChild && c.firstElementChild.querySelector('img');
+      const photoOf = (c) => c.querySelector('.card-photo') || c.firstElementChild;   // tiles (Cars feed): inside .tile-media
+      const hasImg = (c) => photoOf(c) && photoOf(c).querySelector('img');
       const painted = (c) => { const col = String((vehicleExtras[c.dataset.eid] || [])[1] || ''); return !!col && !/unknown|other/i.test(col); };
       // Prefer a stretch whose next cars list a paint colour (shows the tint).
       const run = (k, n) => all.slice(k + 1, k + 1 + n).length === n && all.slice(k + 1, k + 1 + n).every(x => !hasImg(x) && painted(x));
       let n = 3, i = all.findIndex((c, k) => hasImg(c) && run(k, 3));
       if (i < 0) { n = 2; i = all.findIndex((c, k) => hasImg(c) && run(k, 2)); }
-      if (i < 0) throw new Error('no real-photo card followed by photo-less cars with a colour');
+      // No such stretch near this zip (more yards' photos show in the list
+      // since 2026-11-16): any real-photo card and the three after it. The
+      // fixture below replaces their photo codes anyway, and gives a paint
+      // colour to a card whose yard lists none.
+      if (i < 0) { n = 3; i = all.findIndex((c, k) => hasImg(c) && all.slice(k + 1, k + 4).length === 3); }
+      if (i < 0) throw new Error('no real-photo card with three cards after it');
+      const FIX_PAINT = ['Silver', 'Blue', 'Red'];
       const cards = all.slice(i + 1, i + 1 + n);
       window.__fxOrig = cards.map(c => [c.dataset.eid, vehicleExtras[c.dataset.eid]]);
       const own = (c) => (vehicleExtras[c.dataset.eid] || []).slice();
@@ -626,7 +720,7 @@ const SCREENS = [
       window.__fxBody = [];
       // the cards after those two have no photo at all (a picked car can hold a
       // car-screen-only photo, which correctly badges "Photo on car page")
-      cards.forEach((c, k) => { const e = own(c); if (k === 0) e[0] = 'https://www.kikersupullit.com/inventory-feed/photos/stock-12345.jpg'; else if (k === 1) e[0] = 'tSTK12345'; else e[0] = ''; e[5] = k < n - 1 ? bodyOf(vOf(c).model) : ''; window.__fxBody.push(e[5] || 'car'); vehicleExtras[c.dataset.eid] = e; });
+      cards.forEach((c, k) => { const e = own(c); if (k === 0) e[0] = 'https://www.kikersupullit.com/inventory-feed/photos/stock-12345.jpg'; else if (k === 1) e[0] = 'tSTK12345'; else e[0] = ''; if (!painted(c)) e[1] = FIX_PAINT[k % FIX_PAINT.length]; e[5] = k < n - 1 ? bodyOf(vOf(c).model) : ''; window.__fxBody.push(e[5] || 'car'); vehicleExtras[c.dataset.eid] = e; });
       window.__mixFirst = all[i].dataset.eid;
       renderLive();
       const grid = [...document.querySelectorAll('#live-grid .car-card[data-eid]')];
@@ -635,7 +729,7 @@ const SCREENS = [
       const top = four[0].getBoundingClientRect().top + scrollY - 12, bot = four[n].getBoundingClientRect().bottom + scrollY + 12;
       window.__shotClip = { x: 0, y: Math.max(0, top), width: innerWidth, height: bot - top };
       if (typeof cardPhotoHtml === 'undefined') return;   // an older app (before shots): no checks
-      const boxes = four.map(c => c.firstElementChild);
+      const boxes = four.map(c => photoOf(c));
       const want = [['photo-box', 'has-illo'], ...cards.map(() => ['photo-illo'])];
       boxes.forEach((b, k) => { if (!want[k].every(x => b.classList.contains(x))) throw new Error(`card ${k}: ${b.className}`); });
       const badge = (b) => (b && b.querySelector('.illo-badge') || {}).textContent || '';
@@ -647,7 +741,7 @@ const SCREENS = [
     });
     await page.waitForFunction(() => [...document.querySelectorAll('#live-grid .car-card img')].slice(0, 1).every(im => im.complete), null, { timeout: 15000 }).catch(() => {});
     await settle(page, 1200);
-  }, async (page) => { await page.evaluate(() => { window.__shotClip = null; const sel = document.getElementById('live-filter-location'); sel.value = ''; for (const [k, v] of window.__fxOrig || []) { if (v === undefined) delete vehicleExtras[k]; else vehicleExtras[k] = v; } renderLive(); }); await resetUi(page); }],
+  }, async (page) => { await page.evaluate(() => { window.__shotClip = null; heavyNoThumbs(false); const sel = document.getElementById('live-filter-location'); sel.value = ''; for (const [k, v] of window.__fxOrig || []) { if (v === undefined) delete vehicleExtras[k]; else vehicleExtras[k] = v; } renderLive(); }); await resetUi(page); }],
   // Lot Map: walk one yard by row (free, Pro, and with pull-sheet cars and a
   // watch match marked), the yards map with pins (MapLibre + OpenFreeMap),
   // a yard's sheet from a pin, and the schematic fallback.
@@ -1283,7 +1377,7 @@ const SCREENS = [
       renderLive();
       const c = document.querySelector(`#live-grid .car-card[data-eid="${CSS.escape(eid)}"]`);
       if (!c) throw new Error('fixture card not rendered');
-      const n = c.querySelectorAll('.car-badges .badge').length;
+      const n = c.querySelectorAll('.tile-badges .badge:not(.badge-sample), .car-badges .badge').length;   // tiles (Cars feed): .tile-badges
       if (n !== 3) throw new Error(`fixture card has ${n} badges, want 3`);
       c.scrollIntoView({ block: 'start' }); window.scrollBy(0, -70);
     });
@@ -1488,6 +1582,8 @@ try {
     await page.route(/^https?:\/\/(?!127\.0\.0\.1|fonts\.googleapis\.com|fonts\.gstatic\.com|cdn\.pypapps\.com|storage\.googleapis\.com|www\.kikersupullit\.com|ik\.imagekit\.io|cdn\.shopify\.com|cdn\.row52\.com|unpkg\.com|tiles\.openfreemap\.org)/, (route) => route.abort());
     // A heavy source's camera original, answered locally (no 4 MB download).
     await page.route(/^https:\/\/inventory\.sturtevantauto\.com\//, (route) => route.fulfill({ contentType: 'image/png', body: fs.readFileSync(path.join(ROOT, 'docs/icon-512.png')) }));
+    // Resized copies (2026-11-16), answered locally too: no outside call.
+    await page.route(/^https:\/\/wsrv\.nl\//, (route) => route.fulfill({ contentType: 'image/png', body: fs.readFileSync(path.join(ROOT, 'docs/icon-512.png')) }));
     // Published photo switch (fail-closed in the app): publish the enabled
     // sources of scraper/photo_sources.json exactly as the scan does.
     const PHOTO_ON = publishedPhotoSources();
@@ -1530,6 +1626,18 @@ try {
           if (ex && ex[0] && String(ex[0]).startsWith(prefix) && photoInfo(ex[0])) return vehicleKey(v);
         }
         throw new Error('no car with a ' + prefix + ' photo in the loaded inventory');
+      };
+      // A heavy source as it shows with NO resized copy (how it was before
+      // 2026-11-16, and how it is again if the resizing service is switched
+      // off for its host): the published sources with the heavy ones' resized
+      // copies taken out. heavyNoThumbs(false) puts the real list back.
+      window.heavyNoThumbs = (on) => {
+        if (on) {
+          if (!window.__psReal) window.__psReal = publishedPhotoSources;
+          const ps = JSON.parse(JSON.stringify(window.__psReal));
+          for (const s of Object.values(ps)) if (s && s.heavy) { delete s.thumbHost; (s.patterns || []).forEach((p) => { delete p.thumb; delete p.thumbLarge; }); }
+          setPublishedPhotoSources(ps);
+        } else if (window.__psReal) { setPublishedPhotoSources(window.__psReal); window.__psReal = null; }
       };
     });
     await page.goto(BASE, { waitUntil: 'domcontentloaded' });

@@ -386,3 +386,127 @@ What the Cars tab becomes:
 Kept as they are: the accuracy note and its wording, the watch strip, the
 free sample car, Pro gates and their names (`card-value` and the rest), the
 search box, Filters, the pull sheet, per-tab scroll memory, no cut-off text.
+
+## 2026-11-16 (built) Cars feed, branch `design/cars-feed` — NOT merged
+
+From origin/main 004eeda0; pushed after every item (092a1520 … see git log).
+Nothing merged, pushed to main, dispatched or sent. Web files only plus
+`backend/src/attribution.js` (the one backend file allowed) and tests. sw
+`jh-v201` (main jh-v200; the hub re-bumps at merge). Shared files touched
+only in their own blocks: index.html (stats line, chip row), styles.css (one
+"CARS FEED" block at the end, plus the per-feature rules beside it), sw.js,
+ui_no_truncation.mjs (new screens, the data-hscroll exception).
+
+What changed, per item:
+1. **Tiles** (`carTileHtml`): picture (cardPhotoHtml unchanged), name, "yard ·
+   12 mi · Row 31", badges + "Set out Nov 15". `class="car-card car-tile"`,
+   `data-vkey`, `data-eid`, match/dim class kept. Two columns on phones
+   (minmax 8.5rem; one column at 200% text on small phones), 13rem wider:
+   5 columns at 1280. Phones: the tile photo box is 3:2 (16:10 at <=380px),
+   contain as always, so nothing is cropped. Four tiles on the first screen
+   at 360x800 and 390x844 (zip set, note acknowledged; asserted).
+2. **Car screen** gained what only the card had: the card's value block
+   (`card-value` Pro box + turnover badge, free; sample car unlocked as
+   before), "N parts to check: …" line, the stale-yard scan line, an "Hours
+   and directions" link (yardMapsUrl, as the pull sheet; plain Directions
+   stays when the yard name is unknown), and "More <make model> near you":
+   up to six tiles of the same make and model in range, newest first (none:
+   no heading). A tile's picture opens the car screen; the car screen's
+   picture opens the viewer. Closing returns to the same scroll offset (the
+   list is not re-rendered).
+3. **Bookmark + share** in the picture's top corners (44 px hit area, 34 px
+   dot): share top-left (shareVehicle), bookmark top-right (toggleSaved, the
+   `.heart-btn` hook; refreshPullBtns redraws it). The credit keeps
+   bottom-left; bottom-right stays clear for chain watermarks.
+4. **Summary line** `#live-stats-bar`: "17,906 cars near you · 1,837 new this
+   week · updated 1h ago", wraps (never scrolls). No location: "337,647 cars
+   on the lots · N new this week · updated …" (parts it lacks are left out,
+   never 0).
+5. **Chips** `#feed-chips`: All, New (set out today or yesterday,
+   `liveNewOnly`), This week (`liveWeekOnly`), top 10 makes in range; a
+   chosen make (pressed, × clears) shows all its models by count. Set
+   through carSearchSetFilter, redrawn every render, so Filters, the search
+   box and chips agree both ways. Counts Pro-only (as the Make list). Phones:
+   one row that scrolls sideways (`data-hscroll`; ui_no_truncation allows
+   that row only); 721px+: the row wraps. Make/model chip = `narrow/chip`.
+   The near-you "This week" banner and its make chips went (the chip row is
+   that now); the yard-week banner stays.
+6. **Endless scroll**: 40 tiles, more as the bottom nears (IntersectionObserver,
+   "Show more cars" button as fallback); cap 1,200 (was 400) with a plain
+   line; a re-render of the same list keeps what was shown.
+7. **Since your last visit**: `ys_last_visit_day` (local day, never sent);
+   the day compared is fixed per session (`ys_since_day`). Counts cars whose
+   set-out DAY is after the last visit's day (same day not counted; undated
+   never). Line above the grid + "Show just those" (`liveSinceOnly`), and a
+   divider in the newest-first list.
+8. **Share a list** (one model): `/landed/<slug>/<slug>` when
+   data/landed/index.json lists the model (what renderLandedModelPage reads),
+   else `https://yardscout.io/?utm_source=share&utm_medium=list#cars=Make|Model`.
+   Text: "57 Nissan Xterra are on self-service yard lots near me right now
+   (YardScout)" (no zip in it).
+9. **First visit**: "How to read this" (same element, words, Got it) moves
+   after the first row of tiles on <=720px; a hidden marker keeps its home.
+10. **App banner**: on the visitor's first day (`ys_first_day`) it waits for
+   the third row of tiles to scroll past or 30 s after the list rendered;
+   later days at once (as before). Header badges treat a waiting banner as
+   showing. Dismiss and the toast step-aside unchanged.
+11. **Watch strip** (web, free, location; recapEligible): the Monday-email
+   ask with "Email me" and "or just watch it here". Watches made by
+   addQuickWatch (source `strip`), then recapSubmit (/v1/recap/signup with
+   src/cmp/med) or recapAddAll for a confirmed subscriber. Limit = upgrade
+   sheet, nothing sent. The strip's watches are taken out of the toast's
+   queue. Over RECAP_MAX models, Pro, apps, offer dismissed: today's strip.
+   The strip keeps its Pro box (`strip-pro`, trigger `watch-toast`).
+
+Counting: EVENTS_V 4 -> 5 (narrow/chip; email-asked also counts the strip's
+field once per visit). attribution.js writes a `funnel-v5` marker. The
+scorecard does not read either yet: noted in ops/growth.md (its file).
+Privacy page: three sentences made true (Monday email can be asked in the
+same step; chip tally from Nov 16).
+
+Departures from the brief: "More <make model>" (not model alone: "More 300
+near you" reads badly); badges sit in the tile text, not on the picture
+(the corners are the buttons, credit and watermark); a "Free Pro look" badge
+on the sample tile so free visitors can find it; the free car screen now
+shows the card's turnover badge inside `.cd-value` (it was free on the card;
+interchange_e2e checks that block for prices only, like the card); first
+visit for the banner = first day, not first page load.
+
+Tests (this branch, final run): cars_feed_e2e (new) 96/0; car_search_e2e
+49/0; card_share_e2e 27/0 (rewritten for tile corners + bookmark);
+coverage_gaps_e2e 26/0; funnel_events_e2e 128/0 (v5); notable_trims_e2e
+40/0; tab_retap_e2e 14/0; pf_guards_unit 167/0; photo_policy_unit 48/0;
+illo_unit 12/0; photo_layout_e2e 610/0; free_instant_e2e 30/0;
+recap_ask_e2e 35/0; share_watch_e2e 33/0; app_promo_e2e 198/0 (waits for
+the third row first); pro_sheet_fold_e2e 188/0; scorecard_unit 155/0;
+funnel_counters_unit 140/0 (+chip); recap_signup_unit 97/0 (+v5 marker);
+model_years_e2e 18/0; no_pick_models_e2e 11/0; pf_new_cats_e2e 162/0;
+car_search_unit 75, notable_trims_unit 107, alerts_first_unit 13,
+watch_match_unit 43, share_watch_unit 20 (all pass); python:
+interchange_e2e 43/0 (follows the tiles), alert_freshness 15/0, pf_ux 38/0,
+yaris 9/0, part_finder 74/0. ui_no_truncation, Cars screens (33 incl. 6 new)
+at 320/360/390/1280, light+dark, 100%+200%: 464 checks, 0 check failures;
+setup errors: cards-trim-badges (fixed, rerun 16/0) and cards-mixed,
+photo-heavy, photo-heavy-loaded, which fail the same way on untouched
+origin/main (the heavy source now publishes a resized copy, so there is no
+tap-to-load box and the card shows the photo: test fixtures are stale).
+Spot run of alerts, Parts, Yards, Pro sheet, toast at 360/390: only
+`[yards] yr-where field-text-cut at 360/200%`, same on origin/main.
+alerts_e2e needs a local worker (fails on main too). WebKit not checked.
+
+Screenshots (scratchpad `feed/`): before-cars-390/1280 (origin/main),
+after-cars-360/390 light+dark and 1280, car-screen-from-tile, car-screen-more,
+chips-make-chosen, strip-email, since-last-visit (all 390).
+
+Left / suggestions:
+- Scorecard: read `narrow/chip` and `funnel-v5` (ops/growth.md note).
+- ui_no_truncation fixtures for heavy photos (above) need the resized-copy
+  case; not touched here.
+- The car screen still says "No photo from this yard" where the tile shows
+  the paint-coloured drawing: show the same drawing there.
+- Desktop: a big make's model chips wrap to 3 rows; a "more models" fold or
+  the phone's sideways row would keep the grid higher.
+- Before merge, the hub re-bumps sw and merges `growth/no-gate` (zip card,
+  chip, location guess): the Cars blocks there are untouched here, but the
+  first-screen budget (four tiles at 360x800) depends on what sits above the
+  grid; cars_feed_e2e asserts it.
