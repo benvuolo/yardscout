@@ -873,3 +873,22 @@ Queued (task list #50 to #53):
 Asked the owner, not decided for them: D2, one free instant alert on one
 watch within a short radius (two $3.99 rivals give one). It gives away part
 of Pro, so it stays the owner's yes or no.
+
+## 2026-11-16 ~08:15 UTC owner on the free instant alert (D2): "Do what u think", asked how one free user is told apart
+
+Owner added the YardScout line to their Reddit profile.
+
+Answer given: the free tier has no accounts; the server knows app installs
+(device id plus push token, `backend/src/devices.js`), which is how the
+5-watch free limit already works. An alert can only reach that phone, so the
+limit is one instant watch per phone; a reinstall is the same phone. Web is
+left out because email addresses are easy to multiply.
+
+Decision recorded: build it into the next app batch (task #54), apps only,
+one watch, cars within 50 mi of the watch centre, opt-in by a new field so
+no shipped build changes behaviour. It reaches users only with a release,
+which needs "ship"; the release summary must spell it out so the owner can
+still say no. Today's free tier for reference: up to 5 watches within
+250 mi, one Monday summary push, one check-in push after the first watch.
+Pro: up to 20 watches, any distance, trim and 4WD filters, a push on every
+scan that finds a match, sale-day pushes.
