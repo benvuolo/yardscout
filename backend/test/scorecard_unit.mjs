@@ -101,8 +101,9 @@ const rowsA = [
   R('2026-11-13', 'checkout-start', 12),
   // android: older installs, prior week only
   R('2026-11-13', 'first-visit', 3, { p: 'android' }),
-  // a counter that is not on the scorecard
+  // zips: untagged ones are on no line; a tagged one is on its link's line
   R('2026-11-21', 'zip-entered', 40),
+  R('2026-11-21', 'zip-entered', 12, { src: 'reddit', cmp: 'xterra', med: 'post' }),
 ];
 const presenceA = [...pres(CUR, 'web'), ...pres(PRI, 'web'), ...pres(['2026-11-13', '2026-11-22'], 'android')];
 const subsA = { apple: 4, google: 2, web: 8 };
@@ -126,8 +127,8 @@ check('by source: top 5 tagged links by visits, source / campaign rolled up acro
 check('by source: the rest as "other links" (share 2 + news 1 + zzz 1)', v.otherTagged === 4, String(v.otherTagged));
 check('by source: "no tag" = the empty source', v.noTag === 25, String(v.noTag));
 const xt = A.sourceRows.find((s) => s.label === 'reddit / xterra');
-check('link row: reddit / xterra 30 visits -> 4 watches -> 2 emails -> 1 checkout -> 0 Pro',
-  xt && xt.visits === 30 && xt.watches === 4 && xt.emails === 2 && xt.checkouts === 1 && xt.pro === 0, JSON.stringify(xt));
+check('link row: reddit / xterra 30 visits -> 12 zips -> 4 watches -> 2 emails -> 1 checkout -> 0 Pro',
+  xt && xt.visits === 30 && xt.zips === 12 && xt.watches === 4 && xt.emails === 2 && xt.checkouts === 1 && xt.pro === 0, JSON.stringify(xt));
 check('link row: visits split by medium (post 20, comment 10)', xt && eq(xt.visitsByMedium, [{ medium: 'post', n: 20 }, { medium: 'comment', n: 10 }]), JSON.stringify(xt && xt.visitsByMedium));
 check('link rows: tagged only, most visits first, at most 8', A.sourceRows.length === 8 && A.sourceRows[0].label === 'reddit / xterra' && !A.sourceRows.some((s) => s.label === 'no tag'), JSON.stringify(A.sourceRows.map((s) => s.label)));
 
@@ -204,7 +205,7 @@ const html = scorecardHtml(A, { esc, C });
 for (const id of ['first-visit', 'watch-created', 'email-asked', 'email-submitted', 'email-confirmed', 'checkout-start', 'pro-converted', 'funnel-v2', 'paywall', 'events_daily', 'undefined', 'NaN', 'null']) {
   check(`email text/html shows no "${id}"`, !text.includes(id) && !html.includes(id));
 }
-check('text: reddit / xterra line', text.includes('reddit / xterra: 30 visits (post 20, comment 10) → 4 watches → 2 emails given, 0 confirmed → 1 checkout → 0 Pro'), text);
+check('text: reddit / xterra line', text.includes('reddit / xterra: 30 visits (post 20, comment 10) → 12 entered a zip → 4 watches → 2 emails given, 0 confirmed → 1 checkout → 0 Pro'), text);
 check('text: "From:" line with no tag', /From: reddit \/ xterra 30 · forum \/ nissan 4 · reddit 3 · creator \/ a 2 · creator \/ b 2 · other links 4 · no tag 25/.test(text), text);
 check('text: iPhone app shows "no data"', /iPhone app: no data/.test(text) && !/no data a day/.test(text));
 check('text: web visitors with their change', text.includes('Web: 10.0 a day, +40% on the week before (50)'), text);
