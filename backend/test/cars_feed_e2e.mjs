@@ -151,6 +151,38 @@ try {
     await ctx.close();
   }
 
+  /* ---------- 1b. the order of the list ---------- */
+  console.log('1b. Newest first; within a day, photos first, then the nearest');
+  {
+    const { page, ctx } = await open({ w: 390, h: 844 });
+    const o = await page.evaluate(() => {
+      const list = getFilteredLive().slice(0, 800);
+      const day = (v) => yardDateMs(v.dateAdded), ph = (v) => listPhotoFlag(v);
+      const dist = (v) => { const d = vehicleDistanceMi(v); return d == null ? 1e9 : d; };
+      let dateOk = true, photoOk = true, distOk = true;
+      for (let i = 1; i < list.length; i++) {
+        const a = list[i - 1], b = list[i];
+        if (day(a) < day(b)) dateOk = false;
+        if (day(a) !== day(b)) continue;
+        if (ph(a) < ph(b)) photoOk = false;
+        if (ph(a) === ph(b) && dist(a) > dist(b) + 1e-9) distOk = false;
+      }
+      // Days that hold both kinds, so the photo rule is really exercised.
+      const byDay = new Map();
+      for (const v of list) { const s = byDay.get(day(v)) || [0, 0]; s[ph(v)]++; byDay.set(day(v), s); }
+      const mixedDays = [...byDay.values()].filter((s) => s[0] && s[1]).length;
+      const keys = [...document.querySelectorAll('#live-grid > .car-tile')].slice(0, 20).map((t) => t.dataset.vkey);
+      // The flag agrees with what a tile draws.
+      const flagTrue = list.slice(0, 60).every((v) => { const ex = extrasFor(v); const info = ex && ex[0] ? photoInfo(ex[0]) : null; return ph(v) === (info && info.inList ? 1 : 0); });
+      return { n: list.length, dateOk, photoOk, distOk, mixedDays, flagTrue, same: keys.length > 0 && keys.every((k, i) => vehicleKey(list[i]) === k), sort: document.getElementById('live-sort').value };
+    });
+    ok(o.sort === 'date-desc' && o.dateOk, 'newest first: the set-out day never goes up down the list', o);
+    ok(o.mixedDays > 0 && o.photoOk && o.flagTrue, 'within a day: cars whose photo shows in the list come before the ones without', o);
+    ok(o.distOk, 'within a day and the same photo state: the nearest first', o);
+    ok(o.same, 'the tiles on screen are the top of that list', o);
+    await ctx.close();
+  }
+
   /* ---------- 2-6, 8, 11 on one phone page ---------- */
   const P = await open({ w: 390, h: 844, storage: { [WL]: JSON.stringify([{ make: 'Honda', model: 'Civic', yrMin: null, yrMax: null, matchOnly: true, radiusMi: 100, lat: 37.35, lng: -121.89, driveFilter: '', trimFilter: 'Si', addedAt: '2026-10-02T10:00:00.000Z~abc123' }]) } });
   const page = P.page;
@@ -180,7 +212,9 @@ try {
         setOut: /Set out|Set-out date unknown/.test(b.querySelector('.eyebrow').textContent),
         stay: !!b.querySelector('.cd-stay .stay-meter') && /typical/.test(b.querySelector('.cd-stay').textContent),
         spec: !!extrasFor(v) ? !!b.querySelector('.cd-spec') : true,
-        valueBox: !!b.querySelector('.cd-value .pro-box') && /card-value/.test(b.querySelector('.cd-value .pro-box').getAttribute('onclick')),
+        // One Pro box for the prices, under the parts; the second one that sat above the list is gone (2026-11-16).
+        priceBoxes: [...b.querySelectorAll('.pro-box')].filter(x => /part-value|card-value/.test(x.getAttribute('onclick') || '')).map(x => (/part-value/.test(x.getAttribute('onclick')) ? 'part-value' : 'card-value') + (x.closest('.worth') ? '@parts' : '@top')),
+        fitsDup: [...b.querySelectorAll('.fits-badge')].some(x => /fits (\d{4})\D+\1$/.test(x.textContent.trim())),
         partsLine: /parts? to check/.test((b.querySelector('.cd-parts-summary') || {}).textContent || ''),
         pull: /Add to pull sheet|On pull sheet/.test(a.querySelector('.pull-btn').textContent), share: !!a.querySelector('.share-btn'), watch: !!a.querySelector('.watch-btn'),
         moreHead: more ? more.querySelector('h3').textContent : '', moreTiles: more ? [...more.querySelectorAll('.car-tile')].map(t => { const x = liveInventory.find(y => vehicleKey(y) === t.dataset.vkey); return x && x.make === v.make && canonicalModel(x.make, x.model) === canonicalModel(v.make, v.model) && vehicleKey(x) !== vehicleKey(v); }) : [],
@@ -190,7 +224,8 @@ try {
     ok(d.row && d.yard && d.dist, 'car screen: row, yard and distance', d);
     ok(/\/maps\/search\/\?api=1&query=/.test(d.hours) && /Hours and directions/.test(d.hoursText), 'car screen: the hours-and-directions link', d.hours);
     ok(d.setOut && d.stay && d.spec, 'car screen: set-out date, typical stay with its bar, colour/engine line', d);
-    ok(d.valueBox, 'car screen (free): the card\'s Pro value box, gate name card-value');
+    ok(d.priceBoxes.length === 1 && d.priceBoxes[0] === 'part-value@parts', 'car screen (free): one Pro box for the prices, under the parts (gate part-value)', d.priceBoxes);
+    ok(!d.fitsDup, 'car screen: a one-year "fits" reads as that year, not "2013\u20132013"');
     ok(d.partsLine, 'car screen: the "parts to check" line');
     ok(d.pull && d.share && d.watch, 'car screen: add to pull sheet, share, watch this model');
     ok(d.moreHead === `More ${d.name} near you` && d.moreTiles.length >= 1 && d.moreTiles.length <= 6 && d.moreTiles.every(Boolean), `car screen: "More ${d.name} near you" with up to six of the same model`, d);

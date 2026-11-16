@@ -1139,6 +1139,7 @@ function setPublishedPhotoSources(ps) {
   // Each manifest / extras file replaces the last: data without photoSources
   // (older data, or a full takedown) clears every rule, so a switch-off never
   // outlives the data that carried the switch.
+  photoEpochBump();   // listPhotoFlag answers are worked out again
   if (!ps || typeof ps !== 'object' || Array.isArray(ps)) { publishedPhotoSources = null; _photoRules = []; return; }
   const rules = [];
   for (const [key, src] of Object.entries(ps)) {
@@ -1307,6 +1308,18 @@ function illoSvgHtml(ex) {
 function extrasFor(v) {
   return (vehicleExtras && vehicleExtras[String(v.id)]) || null;
 }
+/* 1 when this car's photo shows in lists, else 0 (the newest-first order uses
+ * it). Remembered on the car and worked out again whenever the photo rules
+ * or the extras table change (photoEpochBump). */
+let _photoEpoch = 0;
+function photoEpochBump() { _photoEpoch++; }
+function listPhotoFlag(v) {
+  if (v._lpE === _photoEpoch) return v._lp;
+  const ex = extrasFor(v);
+  const info = ex && ex[extraIdx.photo] ? photoInfo(ex[extraIdx.photo]) : null;
+  v._lpE = _photoEpoch;
+  return (v._lp = info && info.inList ? 1 : 0);
+}
 /* Confirmed manual transmission — from the VIN decode, the yard's own
  * listing text, or car-specific evidence the scraper checked (the maker's VIN
  * code, a manual-only trim, the only transmission offered with the engine),
@@ -1360,6 +1373,7 @@ function loadVehicleExtrasFile() {
       setPublishedPhotoSources(d.photoSources);
       setExtraFields(d.extraFields);
       vehicleExtras = d.extras;
+      photoEpochBump();
       hydratePhotos();
     })
     .catch(() => { /* enrichment is optional */ });
@@ -2045,6 +2059,7 @@ function _invApply(s) {
   setModelYears(m.modelYears);
   setNotableTrims(m.notableTrims);
   vehicleExtras = s.extras;
+  photoEpochBump();
   s.applied = new Set(s.parsed.keys());
   if (complete) s.done = true;
 }
@@ -4555,7 +4570,17 @@ function getFilteredLive() {
     case 'year-asc': keyFn = v => v.year || 9999; asc = true; break;
   }
   const tieFn = tsOf, tieAscEff = tieAsc;
-  if (keyFn) {
+  if (sortBy === 'date-desc') {
+    // Newest first. Yards publish a set-out DAY, so many cars tie. Within a
+    // day: cars whose photo shows in the list first, then the nearest yard.
+    // (It used to be the order of the data files, which put one yard's whole
+    // batch first, photo or not: a first screen of drawings while cars with
+    // photos set out the same day sat further down. 2026-11-16.)
+    const dOf = v => { const d = vehicleDistanceMi(v); return d == null ? 1e9 : d; };
+    const dec = filtered.map(v => [tsOf(v), listPhotoFlag(v), dOf(v), v]);
+    dec.sort((x, y) => (y[0] - x[0]) || (y[1] - x[1]) || (x[2] - y[2]));
+    filtered = dec.map(d => d[3]);
+  } else if (keyFn) {
     const dec = filtered.map(v => [keyFn(v), tieFn(v), v]);
     dec.sort((x, y) => (asc ? x[0] - y[0] : y[0] - x[0])
       || (tieAscEff ? x[1] - y[1] : y[1] - x[1]));
@@ -4740,7 +4765,7 @@ function carValueParts(v, unlocked, isSampleCard) {
       // Generation provenance: which model years this part actually fits
       // (from the generation-specific DB entry) — shown to everyone.
       const fitsMark = p.fits
-        ? ` <span class="fits-badge" title="Model years this part fits — prices are specific to this generation">fits ${p.fits}</span>`
+        ? ` <span class="fits-badge" title="Model years this part fits — prices are specific to this generation">fits ${fitsText(p.fits)}</span>`
         : '';
       const hitCls = '';  // part-hit highlight retired with the Live filter
       // "Spot it" tell for unconfirmed option parts — the VIN can't confirm
@@ -4822,12 +4847,15 @@ function carValueParts(v, unlocked, isSampleCard) {
       <div class="profit-line">
         ${demand.label ? `<span class="demand-badge ${demand.cls}" title="How quickly parts like these typically get claimed at the yard">${demand.label}</span>` : ''}
         ${rangeHigh > 0 ? `<span class="range-text">${rangeText}</span>` : ''}
-      </div>${extraNote}` : `
+      </div>${extraNote}` : (demand.label ? `
       <div class="profit-line">
-        ${demand.label ? `<span class="demand-badge ${demand.cls}" title="How quickly parts like these typically get claimed at the yard">${demand.label}</span>` : ''}
-        ${proBoxHtml('See what you’d save on this car', 'card-value', encodeURIComponent(vehicleKey(v)), 'card-pro')}
-      </div>`)
+        <span class="demand-badge ${demand.cls}" title="How quickly parts like these typically get claimed at the yard">${demand.label}</span>
+      </div>` : ''))
       : '';
+    // Free: the turnover label only. A Pro box sat here too ("See what you'd
+    // save on this car"), a few lines above the one under the parts list
+    // ("See what each part is worth"): the same prices, asked for twice
+    // (2026-11-16). The one under the parts stays.
     nParts = shownParts.length;
     const mainIdx = ordered.map((p, i) => i).filter(i => !optFlags[i]);
     const leadIdx = (mainIdx.length ? mainIdx : ordered.map((p, i) => i)).slice(0, 3);
@@ -4856,6 +4884,13 @@ function carValueParts(v, unlocked, isSampleCard) {
           <a class="feedback-link" href="mailto:yardscout.io@gmail.com?subject=YardScout%20feedback">Spot a wrong price or bug? Tell us</a>`;
   }
   return { cardStyle, profitLine, partsList, partsSummary, nParts, worthHtml, alsoHtml, optHtml, allValueHtml };
+}
+
+/** A part's "fits" span for display: "2009–2013", and "2013" (not
+ * "2013–2013") when it is one model year. The data keeps the range form. */
+function fitsText(fits) {
+  const m = /^(\d{4})\s*[–-]\s*(\d{4})$/.exec(String(fits || ''));
+  return m && m[1] === m[2] ? m[1] : String(fits || '');
 }
 
 /* ===== ALERTS FIRST (round 5, owner 2026-11-06: "alerts are the most
