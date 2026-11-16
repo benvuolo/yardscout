@@ -970,3 +970,32 @@ diff before merging. What it does is in `ops/growth.md` (builder's section).
     helper for that).
 - **Guard against another silent stop:** a check-in every 40 minutes looks
   at both branches (`trig_01UQ5GHubAnWVnxHKb3Smjmi` first, 11:29 UTC).
+
+## 2026-11-16 11:40 UTC no-gate merged (4e02c968, sw `jh-v201`)
+
+Builder finished in 42 minutes; hub read the app, site and server diffs and
+the screenshots, then merged. Details in `ops/growth.md` ("No zip gate on
+the first visit").
+
+- First visit with no saved place: one `/geo` question, then the Cars list
+  near the guessed city with "That is a guess from your internet connection"
+  and the zip field beside it. Never saved, never a watch or Monday-email
+  centre (helpers `locationIsGuess()`, `ownCenter()`, `needOwnZip()` in the
+  app script).
+- `#yard=` and `#near=` links; the search pages' buttons use them and carry
+  `utm_source=page`, which never replaces an outside source. All tagged
+  buttons are `rel="nofollow"`; `robots.txt` disallows the tagged address.
+- New counters `first-view-guess` and `guess-replaced` in the daily email;
+  the per-link scorecard line gains "entered a zip".
+- Hub change: a yard link's line reads "Showing the cars at <yard>" while
+  the Yard filter is on it.
+- Tests on the merged tree all pass (list in the commit message).
+- **For the feed merge (hub):** the feed's email strip must use
+  `needOwnZip()` / `locationIsGuess()`; the car screen's "N mi from <zip>"
+  should read `zip && !_tempPlace`; under a guess the summary says "Cars
+  near you" and the Yards tab centres on the guess with no label.
+- Noted by the builder, not changed: on phones the page script rewrites
+  "Open in YardScout" / "Open the app" to app paths, so the source tag rides
+  only on desktop and the Android browser fallback; car links on yard pages
+  and city "Newest arrivals" lack `rel="nofollow"` (`/car/` is disallowed in
+  the robots file regardless).
