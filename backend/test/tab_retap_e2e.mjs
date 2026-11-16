@@ -87,6 +87,12 @@ try {
   await page.waitForTimeout(300);
   await page.evaluate(() => window.scrollTo(0, 1800));
   const liveY = await y();
+  // The car at the top of the screen, and where it sits: coming back must
+  // show the same car at the same place, not only the same scroll number
+  // (2026-11-16: with a full-row card above, it came back ~100 px short).
+  const topCar = () => page.evaluate(() => { for (const t of document.querySelectorAll('#live-grid > .car-tile')) { const r = t.getBoundingClientRect(); if (r.bottom > 0) return [t.dataset.vkey, Math.round(r.top)]; } return null; });
+  const carBefore = await topCar();
+  const cardAbove = await page.evaluate(() => { const c = document.getElementById('alert-card'); return !!c && c.getBoundingClientRect().bottom < 0; });
   await page.click(tabSel('parts'));
   await page.waitForTimeout(300);
   check('scrolled Cars -> Parts (first visit): opens at the top', (await y()) === 0, String(await y()));
@@ -98,8 +104,12 @@ try {
   await page.waitForTimeout(300);
   check('scrolled Yards -> Alerts: at the top', (await y()) === 0, String(await y()));
   await page.click(tabSel('live'));
-  await page.waitForTimeout(400);
-  check('back to Cars: returns to where it was left', liveY > 1000 && Math.abs((await y()) - liveY) <= 2, `${await y()} vs ${liveY}`);
+  await page.waitForTimeout(900);
+  // The scroll number may differ by a few px per row not drawn yet (such a
+  // row stands in at an estimated height); what must hold is the car.
+  check('back to Cars: returns to where it was left (scroll number within one row)', liveY > 1000 && Math.abs((await y()) - liveY) <= 60, `${await y()} vs ${liveY}`);
+  const carAfter = await topCar();
+  check('back to Cars: the same car at the top, in the same place (the alert card is above it)', cardAbove && carBefore && carAfter && carBefore[0] === carAfter[0] && Math.abs(carBefore[1] - carAfter[1]) <= 2, JSON.stringify([cardAbove, carBefore, carAfter]));
   await page.click(tabSel('yards'));
   await page.waitForTimeout(300);
   check('back to Yards: returns to where it was left', Math.abs((await y()) - 500) <= 2, String(await y()));

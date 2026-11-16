@@ -10501,6 +10501,39 @@ function tabRetap() {
   return 'top';
 }
 const _tabScrollY = {};   // tab name -> scrollY when it was last left
+/* Cars is redrawn when its tab is opened again, and tiles not drawn yet
+ * stand in at an estimated height, so the scroll number alone can land a
+ * row off (found 2026-11-16: with the alert card above the screen, coming
+ * back was ~100 px short). So the tile at the top of the screen is
+ * remembered on leaving and put back where it was, over a few frames while
+ * the rows above settle. A touch, wheel or key press ends it at once. */
+let _liveAnchor = null;
+function feedAnchor() {
+  for (const t of document.querySelectorAll('#live-grid > .car-tile')) {
+    const r = t.getBoundingClientRect();
+    if (r.bottom > 0) return { key: t.dataset.vkey, top: r.top };
+  }
+  return null;
+}
+function feedAnchorRestore(a) {
+  if (!a || !a.key) return;
+  // Up to about half a second: rows above are drawn a few at a time, each
+  // one moving the rest by the difference from its estimate.
+  let tries = 30, steady = 0, stop = false;
+  const cancel = () => { stop = true; };
+  const evs = ['touchstart', 'wheel', 'keydown'];
+  evs.forEach(n => window.addEventListener(n, cancel, { once: true, passive: true }));
+  const done = () => evs.forEach(n => window.removeEventListener(n, cancel));
+  const step = () => {
+    if (stop || !document.getElementById('tab-live').classList.contains('active')) { done(); return; }
+    const t = document.querySelector(`#live-grid > .car-tile[data-vkey="${CSS.escape(a.key)}"]`);
+    if (!t) { done(); return; }
+    const d = t.getBoundingClientRect().top - a.top;
+    if (Math.abs(d) > 0.5) { window.scrollBy(0, d); steady = 0; } else steady++;
+    if (--tries > 0 && steady < 6) requestAnimationFrame(step); else done();
+  };
+  step();
+}
 document.querySelectorAll('.tab').forEach(tab => {
   tab.addEventListener('click', (e) => {
     // A real tap on the tab already showing (not a programmatic switch).
@@ -10511,6 +10544,7 @@ document.querySelectorAll('.tab').forEach(tab => {
     // Remember where the tab being left was scrolled to (see below).
     const leaving = document.querySelector('.tab.active');
     if (leaving && leaving !== tab) _tabScrollY[leaving.dataset.tab] = window.scrollY;
+    if (leaving && leaving.dataset.tab === 'live' && tab.dataset.tab !== 'live') _liveAnchor = feedAnchor();
     if (leaving && leaving.dataset.tab === 'live' && tab.dataset.tab !== 'live') narrowFlushMake();
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
@@ -10530,6 +10564,7 @@ document.querySelectorAll('.tab').forEach(tab => {
     if (e.isTrusted !== false) {
       const locked = document.documentElement.classList.contains('map-lock');
       window.scrollTo(0, locked ? 0 : (_tabScrollY[tab.dataset.tab] || 0));
+      if (!locked && tab.dataset.tab === 'live' && _tabScrollY.live) feedAnchorRestore(_liveAnchor);
     }
   });
 });
