@@ -3,11 +3,15 @@
 # the car leaves. They are not for search crawlers: each one costs three
 # requests on our side, and on 2026-11-14 a crawler walked 28,000 of them in
 # an afternoon. Model, yard, city and price pages are the ones to index.
+#
+# Buttons on our own pages open the app with a source tag
+# (/?utm_source=page&...): the same page as /, so not for crawling either.
 User-agent: *
 Allow: /
 Disallow: /admin.html
 Disallow: /data/
 Disallow: /car/
+Disallow: /?utm_source=
 
 # Link previews (texts, chat apps, social cards) still read car pages.
 User-agent: facebookexternalhit

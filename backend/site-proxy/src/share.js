@@ -38,6 +38,30 @@ export function slugify(s) {
     .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 }
 
+/* Buttons from these pages into the app (2026-11-16). Each carries
+ *   ?utm_source=page&utm_medium=<page type>&utm_campaign=<slug>
+ * so visits from search pages show up in the weekly scorecard, and the
+ * place or car the page is about in the hash (#yard=, #near=, #cars=), so
+ * the visitor lands on it instead of a generic zip prompt. The app never lets
+ * this internal "page" source replace an outside one it remembers (docs/app.js
+ * ATTRIB). rel="nofollow" on every such button, and robots.txt, keep crawlers
+ * off these address variants: they add no new crawlable page. */
+export const PAGE_MEDIA = ['yard', 'city', 'state', 'model', 'make', 'landed', 'prices', 'yards', 'car'];
+export function appHref(medium, campaign, hash = '') {
+  const m = PAGE_MEDIA.includes(medium) ? medium : 'page';
+  const c = slugify(campaign).slice(0, 60).replace(/-+$/, '');
+  return `${SITE}/?utm_source=page&utm_medium=${m}${c ? '&utm_campaign=' + c : ''}${hash}`;
+}
+/** #near=<lat>,<lng>,<label> for the app: 3 decimals, a plain label of at most 40 characters. */
+export function nearHash(pt, label) {
+  if (!pt || !Number.isFinite(pt.lat) || !Number.isFinite(pt.lng)) return '';
+  const r = (n) => String(Math.round(n * 1000) / 1000);
+  const l = String(label || '').replace(/[<>"&]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 40).trim();
+  return `#near=${r(pt.lat)},${r(pt.lng)}${l ? ',' + encodeURIComponent(l) : ''}`;
+}
+/** A tagged button into the app. */
+const appBtn = (href, label, primary = false, extra = '') => `<a class="btn${primary ? ' btn-primary' : ''}" href="${esc(href)}" rel="nofollow"${extra}>${label}</a>`;
+
 /* Every call here is a request to ANOTHER Worker (yardscout-api), and it
  * counts against the account's daily Workers allowance even when the answer
  * could have been reused: `cf.cacheTtl` does not help, because a Worker runs
@@ -431,7 +455,10 @@ const ldItemList = (name, items) => ({ '@context': 'https://schema.org', '@type'
 /** Scan time → HTTP date for Last-Modified ('' when the stamp is unusable). */
 const httpDate = (iso) => { const d = new Date(iso || NaN); return isNaN(d) ? '' : d.toUTCString(); };
 
-function layout({ title, desc, canonical, body, status = 200, robots = 'index,follow', cache = 300, ogTitle, ogDesc, type = 'website', spec = 'SELF-SERVICE YARD INTEL', appArg, ld = [], lastModified }) {
+function layout({ title, desc, canonical, body, status = 200, robots = 'index,follow', cache = 300, ogTitle, ogDesc, type = 'website', spec = 'SELF-SERVICE YARD INTEL', appArg, ld = [], lastModified, utm = null }) {
+  // The header's "Open the app" is a button into the app too: tagged like the
+  // page's own buttons when the page says what it is (utm: [medium, campaign]).
+  const openHref = utm ? appHref(utm[0], utm[1]) : `${SITE}/`;
   const modified = status === 200 ? httpDate(lastModified) : '';
   const html = `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -458,7 +485,7 @@ function layout({ title, desc, canonical, body, status = 200, robots = 'index,fo
   </div>
   <div style="display:flex;align-items:center;gap:0.5rem">
     <button type="button" id="theme-toggle" class="theme-toggle" title="Switch light / dark" aria-label="Switch light or dark theme"><svg class="ico ico-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg><svg class="ico ico-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
-    <a class="btn" href="${SITE}/" data-app-path="/open" data-fallback="store" style="text-decoration:none">Open the app</a>
+    <a class="btn" href="${esc(openHref)}"${utm ? ' rel="nofollow"' : ''} data-app-path="/open" data-fallback="store" style="text-decoration:none">Open the app</a>
   </div>
 </header>
 <script>
@@ -549,8 +576,9 @@ export async function renderCarPage(token) {
       canonical, status: 404, robots: 'noindex', cache: 120, spec: 'GONE FROM THE YARD LIST',
       body: `<p class="kicker">Gone from the yard list</p><h1 class="share-h">This car is no longer listed</h1>
 <p class="share-sub">Yards drop a car from their published inventory when it's pulled or crushed. The link may also be older than the inventory we keep.</p>
-<div class="cta"><a class="btn btn-primary" href="${SITE}/#tab=alerts">Watch for the next one</a><a class="btn" href="${SITE}/">Search what's in the yards now</a></div>
+<div class="cta">${appBtn(appHref('car', 'gone', '#tab=alerts'), 'Watch for the next one', true)}${appBtn(appHref('car', 'gone'), 'Search what\'s in the yards now')}</div>
 ${HUB_LINKS}${storesLine()}`,
+      utm: ['car', 'gone'],
     });
   }
 
@@ -606,12 +634,12 @@ ${carCard({ name: '', yardName, where, row: v.row, metaHtml: meta, specs: [trim,
 <div class="clock${cw.soon ? ' soon' : ''}">${esc(cw.line)}<small>Based on how long departed cars sat on this lot before they left — an estimate, not a schedule. Call the yard before a long drive.</small></div>
 </div>
 ${yardLinks}
-<div class="cta"><a class="btn btn-primary" href="${SITE}/#car=${encodeURIComponent(key)}" data-app-path="/car/${encodeURIComponent(key)}">Open in YardScout</a><a class="btn" href="${SITE}/#tab=alerts">Alert me when the next ${esc(v.make)} ${esc(v.model)} lands near me</a></div>
+<div class="cta">${appBtn(appHref('car', `${v.make} ${v.model}`, `#car=${encodeURIComponent(key)}`), 'Open in YardScout', true, ` data-app-path="/car/${encodeURIComponent(key)}"`)}${appBtn(appHref('car', `${v.make} ${v.model}`, '#tab=alerts'), `Alert me when the next ${esc(v.make)} ${esc(v.model)} lands near me`)}</div>
 ${more ? `<p class="links">${more}</p>` : ''}
 ${storesLine()}
 <p class="note">Row and set-out date come straight from the yard's own published list, refreshed every 4 hours (inventory as of ${esc(fmtStamp(d.scrapedAt))}). Yards track cars, not the parts still on them — a car that has sat a while may be picked over.</p>`;
 
-  return layout({ title: `${name} at ${yardName}${where ? ` (${where})` : ''} — YardScout`, ogTitle: `${name}${v.row ? ' · Row ' + v.row : ''} · ${yardName}`, desc, canonical, body, type: 'article', spec: `${where || 'SELF-SERVICE YARD'} · ROW ${v.row || '—'}`, ld: [ldBreadcrumb([...trail, [name, canonical]])], lastModified: d.scrapedAt });
+  return layout({ title: `${name} at ${yardName}${where ? ` (${where})` : ''} — YardScout`, ogTitle: `${name}${v.row ? ' · Row ' + v.row : ''} · ${yardName}`, desc, canonical, body, type: 'article', spec: `${where || 'SELF-SERVICE YARD'} · ROW ${v.row || '—'}`, ld: [ldBreadcrumb([...trail, [name, canonical]])], lastModified: d.scrapedAt, utm: ['car', `${v.make} ${v.model}`] });
 }
 
 export async function renderYardPage(slug) {
@@ -728,13 +756,13 @@ ${modelsBlock}
 <div class="section">New arrivals: set out in the last 7 days <span>· ${dated ? recent.length.toLocaleString() : 'no dates published'}</span></div>
 <div class="car-card">${items ? `<ul class="rowlist">${items}</ul>` : `<p style="margin:0;color:var(--text-dim);font-size:.875rem">${noArrivals}</p>`}${recent.length > SHOW ? `<p class="note">Showing the newest ${SHOW} of ${recent.length.toLocaleString()}. The full list is in the app.</p>` : ''}</div>
 ${commonPricesHtml(yPrices)}
-<div class="cta"><a class="btn btn-primary" href="${SITE}/">Search this yard in YardScout</a><a class="btn" href="${SITE}/#tab=alerts">Alert me when a car I want lands here</a></div>
+<div class="cta">${appBtn(appHref('yard', slug, '#yard=' + encodeURIComponent(name)), 'Search this yard in YardScout', true)}${appBtn(appHref('yard', slug, '#tab=alerts'), 'Alert me when a car I want lands here')}</div>
 ${nearest.length ? `<div class="section">Nearest tracked yards</div>
 <div class="car-card">${yardRows(nearest, place.y)}</div>` : ''}
 <p class="links">${placeLinks}</p>
 ${storesLine()}
 <p class="note">Straight from the yard's own published list, refreshed every 4 hours (inventory as of ${esc(fmtStamp(dir.scrapedAt))}). Row numbers and dates are the yard's; call ahead before a long drive.</p>`;
-  return layout({ title: `${title} — YardScout`, ogTitle: shareHeadline, desc, ogDesc, canonical, body, cache: 900, spec: `${total.toLocaleString()} CARS ON ROW · ${where}`, ld: [ldBreadcrumb([...(place ? place.crumbs : [['Junkyards', SITE + '/junkyards']]), [name, canonical]])], lastModified: dir.scrapedAt });
+  return layout({ title: `${title} — YardScout`, ogTitle: shareHeadline, desc, ogDesc, canonical, body, cache: 900, spec: `${total.toLocaleString()} CARS ON ROW · ${where}`, ld: [ldBreadcrumb([...(place ? place.crumbs : [['Junkyards', SITE + '/junkyards']]), [name, canonical]])], lastModified: dir.scrapedAt, utm: ['yard', slug] });
 }
 
 /** One sitemap entry. <lastmod> is the scan the page is rendered from (W3C
@@ -819,7 +847,7 @@ export async function renderYardsPage() {
 ${newYards.length ? `<div class="section">Recently added</div><div class="car-card"><ul class="rowlist">${newYards.map((y) => `<li><a href="${SITE}/yard/${slugify(y.location)}">${esc(y.location)}${y.city ? `<span class="where">${esc([y.city, y.state].filter(Boolean).join(', '))}</span>` : ''}</a><span class="meta">added ${esc(fmtDate(y.added))}</span></li>`).join('')}</ul></div>` : ''}
 <div class="section">By state</div><p class="statenav">${stateNav}</p>
 ${stateBlocks}
-<div class="cta"><a class="btn btn-primary" href="${SITE}/">Search near your zip</a><a class="btn" href="${SITE}/landed">What landed this week, by make</a></div>
+<div class="cta">${appBtn(appHref('yards', 'all'), 'Search near your zip', true)}<a class="btn" href="${SITE}/landed">What landed this week, by make</a></div>
 ${storesLine()}
 <script>
 async function ysReq(e){e.preventDefault();const f=e.target,m=document.getElementById('yard-req-msg');m.textContent='Sending…';m.className='';
@@ -828,7 +856,7 @@ try{const r=await fetch('${API}/v1/coverage/request',{method:'POST',headers:{'co
 const j=await r.json().catch(()=>({}));if(r.ok){m.textContent='Got it — thanks. We check requests every day.';m.className='ok';f.reset();}else{m.textContent=j.message||'Could not send — try again.';m.className='err';}}
 catch(err){m.textContent='Could not send — try again.';m.className='err';}return false;}
 </script>`;
-  return layout({ title: `Self-service junkyards with online inventory: all ${yardCount} yards by state — YardScout`, ogTitle: `${yardCount} self-service junkyards tracked by YardScout`, desc, canonical: SITE + '/yards', body, cache: 900, spec: `${yardCount} YARDS · ${usCount} STATES · EVERY 4H`, ld: [ldItemList('Self-service junkyards YardScout tracks', yardList)], lastModified: landed.scrapedAt });
+  return layout({ title: `Self-service junkyards with online inventory: all ${yardCount} yards by state — YardScout`, ogTitle: `${yardCount} self-service junkyards tracked by YardScout`, desc, canonical: SITE + '/yards', body, cache: 900, spec: `${yardCount} YARDS · ${usCount} STATES · EVERY 4H`, ld: [ldItemList('Self-service junkyards YardScout tracks', yardList)], lastModified: landed.scrapedAt, utm: ['yards', 'all'] });
 }
 
 /** /landed and /landed/<make-slug> — what set out in the last 7 days, by
@@ -859,9 +887,9 @@ export async function renderLandedPage(slug) {
 <div class="stats-bar"><div class="stat-card"><span class="label">Set out this week</span><span class="value accent">${weekTotal.toLocaleString()}</span></div><div class="stat-card"><span class="label">Yards with arrivals</span><span class="value">${activeYards}</span></div><div class="stat-card"><span class="label">Updated</span><span class="value value-sm">${stamp}</span></div></div>
 <p class="share-sub">Every car that set out at a tracked self-service yard in the last ${landed.days} days, by make.${unlisted > 0 ? ` ${unlisted.toLocaleString()} more set out from makes with fewer than 20 cars on the lots.` : ''}</p>
 ${topBlock}<ul class="grid">${makes.map(([mk, m]) => `<li><a href="${SITE}/landed/${slugify(mk)}">${esc(mk)}<small>${m.recentCount.toLocaleString()} this week · ${m.total.toLocaleString()} on lots</small></a></li>`).join('')}</ul>
-<div class="cta"><a class="btn btn-primary" href="${SITE}/">Search near your zip</a><a class="btn" href="${SITE}/#tab=alerts">Get the weekly recap for a model you want</a></div>
+<div class="cta">${appBtn(appHref('landed', 'all'), 'Search near your zip', true)}${appBtn(appHref('landed', 'all', '#tab=alerts'), 'Get the weekly recap for a model you want')}</div>
 <p class="links"><a href="${SITE}/junkyards">Junkyards by state and city</a> · <a href="${SITE}/yards">All covered yards</a></p>${storesLine()}`;
-    return layout({ title: `Junkyard new arrivals this week: ${weekTotal.toLocaleString()} cars set out at ${plural(activeYards, 'self-service yard')}, by make — YardScout`, ogTitle: 'What landed in the junkyards this week', desc: `${weekTotal.toLocaleString()} cars set out at ${plural(activeYards, 'self-service junkyard')} in the last ${landed.days} days, by make, with row numbers and yards. As of ${fmtStamp(landed.scrapedAt)}.`, ogDesc: `New set-outs at ${plural(activeYards, 'self-service yard')} in the last ${landed.days} days, by make.`, canonical: SITE + '/landed', body, cache: 900, spec: `${weekTotal.toLocaleString()} NEW THIS WEEK`, lastModified: landed.scrapedAt });
+    return layout({ title: `Junkyard new arrivals this week: ${weekTotal.toLocaleString()} cars set out at ${plural(activeYards, 'self-service yard')}, by make — YardScout`, ogTitle: 'What landed in the junkyards this week', desc: `${weekTotal.toLocaleString()} cars set out at ${plural(activeYards, 'self-service junkyard')} in the last ${landed.days} days, by make, with row numbers and yards. As of ${fmtStamp(landed.scrapedAt)}.`, ogDesc: `New set-outs at ${plural(activeYards, 'self-service yard')} in the last ${landed.days} days, by make.`, canonical: SITE + '/landed', body, cache: 900, spec: `${weekTotal.toLocaleString()} NEW THIS WEEK`, lastModified: landed.scrapedAt, utm: ['landed', 'all'] });
   }
   slug = safeDecode(slug).toLowerCase();
   const hit = Object.entries(landed.makes).find(([mk]) => slugify(mk) === slug);
@@ -902,9 +930,9 @@ ${truncated}${blocks}
 ${mp && mp.models.length ? `<div class="section">Every ${esc(mk)} model with its own page <span>· ${mp.models.length}</span></div>
 <ul class="grid">${mp.models.map(([md, s, total, week]) => `<li><a href="${SITE}/landed/${mp.slug}/${s}">${esc(md)}<small>${week.toLocaleString()} this week · ${total.toLocaleString()} on lots</small></a></li>`).join('')}</ul>` : ''}
 ${statesBlock}
-<div class="cta"><a class="btn btn-primary" href="${SITE}/#tab=alerts">Alert me when a ${esc(mk)} I want lands near me</a><a class="btn" href="${SITE}/">Search near your zip</a></div>${storesLine()}
+<div class="cta">${appBtn(appHref('make', slug, '#tab=alerts'), `Alert me when a ${esc(mk)} I want lands near me`, true)}${appBtn(appHref('make', slug, '#cars=' + encodeURIComponent(mk)), `See every ${esc(mk)} near you`)}</div>${storesLine()}
 <p class="note">Straight from each yard's published list, refreshed every 4 hours (as of ${stamp}). Row numbers and dates are the yard's; call ahead before a long drive.</p>`;
-  return layout({ title: `${mk} in junkyards: ${m.total.toLocaleString()} on self-service lots, ${m.recentCount.toLocaleString()} new this week — YardScout`, ogTitle: `${count} landed in junkyards this week`, desc, canonical, body, cache: 900, spec: `${m.recentCount.toLocaleString()} ${mk.toUpperCase()} THIS WEEK`, ld: [ldBreadcrumb([['What landed this week', SITE + '/landed'], [mk, canonical]])], lastModified: landed.scrapedAt });
+  return layout({ title: `${mk} in junkyards: ${m.total.toLocaleString()} on self-service lots, ${m.recentCount.toLocaleString()} new this week — YardScout`, ogTitle: `${count} landed in junkyards this week`, desc, canonical, body, cache: 900, spec: `${m.recentCount.toLocaleString()} ${mk.toUpperCase()} THIS WEEK`, ld: [ldBreadcrumb([['What landed this week', SITE + '/landed'], [mk, canonical]])], lastModified: landed.scrapedAt, utm: ['make', slug] });
 }
 
 /* ---------- /landed/<make>/<model> — one model's week, by state ----------
@@ -948,8 +976,9 @@ function modelPagesOf(idx, make) {
   return { ...e, urls: new Map(e.models.map(([md, s]) => [md, `${SITE}/landed/${e.slug}/${s}`])) };
 }
 const modelPageUrl = (idx, make, model) => { const p = modelPagesOf(idx, make); return (p && p.urls.get(model)) || ''; };
-const carsLink = (make, model) => `${SITE}/#cars=${encodeURIComponent(make)}|${encodeURIComponent(model)}`;
-const watchLink = (make, model) => `${SITE}/#watch=${encodeURIComponent(make)}|${encodeURIComponent(model)}`;
+// From a model page (campaign: "<make slug>-<model slug>"), tagged like every button into the app.
+const carsLink = (make, model, campaign) => appHref('model', campaign, `#cars=${encodeURIComponent(make)}|${encodeURIComponent(model)}`);
+const watchLink = (make, model, campaign) => appHref('model', campaign, `#watch=${encodeURIComponent(make)}|${encodeURIComponent(model)}`);
 /** "38 states and 2 Canadian provinces" from a list of region codes. */
 function regionsPhrase(codes) {
   const us = codes.filter((c) => STATE_NAMES[c]).length, ca = codes.filter((c) => PROVINCE_NAMES[c]).length;
@@ -991,6 +1020,7 @@ export async function renderLandedModelPage(makeArg, modelArg) {
   const m = file && Array.isArray(file.models) && file.models.find((x) => x.slug === modelSlug);
   if (!m) return modelMissing('What landed', 'Briefly unavailable', 'The inventory data could not be read. Try again in a minute.', 503);
   const md = m.model, name = `${mk} ${md}`;
+  const cmp = `${me.slug}-${m.slug}`;   // utm_campaign of this page's buttons
   const days = file.days || 7;
   const yards = file.yards || [];
   const canonical = `${makeUrl}/${m.slug}`;
@@ -1055,18 +1085,18 @@ export async function renderLandedModelPage(makeArg, modelArg) {
 <h1 class="share-h">${esc(h1)}</h1>
 <p class="share-sub">${lead}</p>
 <div class="stats-bar"><div class="stat-card"><span class="label">Set out this week</span><span class="value accent">${n.toLocaleString()}</span></div><div class="stat-card"><span class="label">On the lots now</span><span class="value">${total.toLocaleString()}</span></div><div class="stat-card"><span class="label">Yards this week</span><span class="value">${yardCount}</span></div></div>
-<div class="cta"><a class="btn btn-primary" href="${carsLink(mk, md)}">See every ${esc(md)} near you</a><a class="btn" href="${watchLink(mk, md)}">Alert me when the next ${esc(md)} sets out near me</a></div>
+<div class="cta">${appBtn(carsLink(mk, md, cmp), `See every ${esc(md)} near you`, true)}${appBtn(watchLink(mk, md, cmp), `Alert me when the next ${esc(md)} sets out near me`)}</div>
 ${n ? `<div class="section">Set out this week, by state <span>· ${n.toLocaleString()}</span></div>${jump}${stateBlocks}` : `<div class="section">Set out this week <span>· none</span></div><div class="car-card"><p class="share-sub" style="margin:0">None in the last ${days} days at the yards we track. The ones on the lots now are below, and the app can alert you when the next one sets out near you.</p></div>`}
 ${lotsBlock}
 <p class="note">Yards move cars around and crush them to make room, so a car here may be gone or on another row: call the yard before a long drive. Drive (4x4, AWD or 2WD) and trim come from each car's VIN decode and are left out when the VIN does not say. Rows and set-out dates are each yard's own published list (as of ${esc(stamp)}).</p>
-<div class="cta"><a class="btn btn-primary" href="${carsLink(mk, md)}">See every ${esc(md)} near you</a><a class="btn" href="${watchLink(mk, md)}">Get an alert for the next ${esc(md)}</a></div>
+<div class="cta">${appBtn(carsLink(mk, md, cmp), `See every ${esc(md)} near you`, true)}${appBtn(watchLink(mk, md, cmp), `Get an alert for the next ${esc(md)}`)}</div>
 ${storesLine()}
 ${siblingGrid(m.slug)}
 <p class="links"><a href="${makeUrl}">All ${esc(mk)} arrivals this week</a> · <a href="${SITE}/landed">What landed this week, every make</a> · <a href="${SITE}/junkyards">Junkyards by state</a></p>`;
   const cars = m.recent.slice(0, 100).map((r) => [`${r[0]} ${name} at ${(yards[r[1]] || [])[0] || 'a self-service yard'}`, `${SITE}/car/${encodeURIComponent(r[6])}`]);
   const ld = [ldBreadcrumb([['What landed this week', SITE + '/landed'], [mk, makeUrl], [name, canonical]])];
   if (cars.length) ld.push(ldItemList(`${name} set out at self-service junkyards in the last ${days} days`, cars));
-  return layout({ title, ogTitle: n ? `${n.toLocaleString()} ${name} set out in junkyards this week` : `${name} in self-service junkyards: ${total.toLocaleString()} on the lots`, desc, canonical, body, cache: 900, spec: `${n.toLocaleString()} ${md.toUpperCase()} THIS WEEK`, ld, lastModified: file.scrapedAt });
+  return layout({ title, ogTitle: n ? `${n.toLocaleString()} ${name} set out in junkyards this week` : `${name} in self-service junkyards: ${total.toLocaleString()} on the lots`, desc, canonical, body, cache: 900, spec: `${n.toLocaleString()} ${md.toUpperCase()} THIS WEEK`, ld, lastModified: file.scrapedAt, utm: ['model', cmp] });
 }
 /** Sitemap entries for every model page in the index. */
 function modelSitemapUrls(idx) {
@@ -1195,7 +1225,25 @@ function yardRows(yards, distFrom) {
     return `<li><a href="${SITE}/yard/${slugify(y.loc)}">${esc(y.loc)}<span class="where">${esc(where)}</span></a><span class="meta">${y.cars.toLocaleString()} cars<br>${y.newest.length ? `${y.week.toLocaleString()} this week` : 'no set-out dates'}</span></li>`;
   }).join('')}</ul>`;
 }
-const JY_CTA = `<div class="cta"><a class="btn btn-primary" href="${SITE}/">Search near your zip</a><a class="btn" href="${SITE}/#tab=alerts">Alert me when a car I want lands nearby</a></div>`;
+/* The junkyards and price pages' two buttons into the app. A state or city
+ * page passes its place (nearHash) so the app opens on those yards; the
+ * label then names the place instead of asking for a zip. */
+function jyCta(medium, campaign, near = '', searchLabel = '') {
+  const search = near && searchLabel ? esc(searchLabel) : 'Search near your zip';
+  return `<div class="cta">${appBtn(appHref(medium, campaign, near), search, true)}${appBtn(appHref(medium, campaign, '#tab=alerts'), 'Alert me when a car I want lands nearby')}</div>`;
+}
+/** A point among a group of yards for the app's #near=: the yard with the
+ * most of the group within 100 miles (ties: more cars, then name), so the
+ * app's default radius around it takes in as many of them as it can. */
+export function pointAmongYards(yards) {
+  const pts = (yards || []).filter((y) => Number.isFinite(y.lat) && Number.isFinite(y.lng));
+  let best = null, bestN = -1;
+  for (const y of pts) {
+    const n = pts.filter((o) => miles(y, o) <= 100).length;
+    if (n > bestN || (n === bestN && (y.cars > best.cars || (y.cars === best.cars && y.loc < best.loc)))) { best = y; bestN = n; }
+  }
+  return best ? { lat: best.lat, lng: best.lng } : null;
+}
 function junkyardNote(stamp) {
   return `<p class="note">Counts are the cars on each yard's own published inventory, scanned every 4 hours (as of ${stamp}). YardScout only tracks self-service yards that post their inventory online, so yards that don't aren't listed here. Missing one? <a href="${SITE}/yards#request">Ask for it</a>.</p>`;
 }
@@ -1222,12 +1270,12 @@ export async function renderJunkyardsPage(stateArg, cityArg) {
 <p class="share-sub">Every pick-and-pull yard YardScout tracks, by state: the yards near you, what's on their lots and what set out this week. As of ${stamp}.</p>
 <div class="section">United States <span>· ${plural(us.length, 'state')}</span></div>${grid(us)}
 ${ca.length ? `<div class="section">Canada <span>· ${ca.length} province${ca.length === 1 ? '' : 's'}</span></div>${grid(ca)}` : ''}
-${JY_CTA}
+${jyCta('state', 'all')}
 <p class="links"><a href="${SITE}/yards">All ${idx.all.length} covered yards on one page</a> · <a href="${SITE}/landed">What landed this week, by make</a> · <a href="${SITE}/prices">Yard price lists</a></p>
 ${storesLine()}${junkyardNote(stamp)}`;
     // This page lists states, so its ItemList is the state pages; the yards
     // themselves are listed (and marked up) on each state and city page.
-    return layout({ title: `Self-service junkyards by state: ${plural(idx.all.length, 'yard')} with live inventory, ${cars.toLocaleString()} cars — YardScout`, ogTitle: `${idx.all.length} self-service junkyards with live inventory`, desc, canonical: SITE + '/junkyards', body, cache: 900, spec: `${idx.all.length} YARDS · ${cars.toLocaleString()} CARS`, ld: [ldItemList('Self-service junkyards by state', states.map((s) => [`Junkyards in ${s.name}`, `${SITE}/junkyards/${s.slug}`]))], lastModified: idx.scrapedAt });
+    return layout({ title: `Self-service junkyards by state: ${plural(idx.all.length, 'yard')} with live inventory, ${cars.toLocaleString()} cars — YardScout`, ogTitle: `${idx.all.length} self-service junkyards with live inventory`, desc, canonical: SITE + '/junkyards', body, cache: 900, spec: `${idx.all.length} YARDS · ${cars.toLocaleString()} CARS`, ld: [ldItemList('Self-service junkyards by state', states.map((s) => [`Junkyards in ${s.name}`, `${SITE}/junkyards/${s.slug}`]))], lastModified: idx.scrapedAt, utm: ['state', 'all'] });
   }
 
   const st = idx.states.get(stateKey);
@@ -1260,8 +1308,8 @@ ${storesLine()}${junkyardNote(stamp)}`;
 <p class="share-sub">The ${plural(yc, 'pick-and-pull yard')} in ${esc(st.name)} that YardScout tracks, with what's on each lot right now. As of ${stamp}.</p>
 ${cityNav ? `<p class="statenav">${cityNav}</p>` : ''}
 ${makes}${groups}
-${JY_CTA}${storesLine()}${junkyardNote(stamp)}`;
-    return layout({ title: `Junkyards in ${st.name}: ${plural(yc, 'self-service yard')} with live inventory (${plural(st.cars, 'car')}) — YardScout`, ogTitle: `${plural(yc, 'self-service junkyard')} in ${st.name}`, desc, canonical: stateUrl, body, cache: 900, spec: `${yc} YARD${yc === 1 ? '' : 'S'} · ${st.cars.toLocaleString()} CARS · ${st.code}`, ld: [ldBreadcrumb(crumbs), ldItemList(`Self-service junkyards in ${st.name}`, yardItems(st.metros.flatMap((m) => m.yards)))], lastModified: idx.scrapedAt });
+${jyCta('state', st.slug, nearHash(pointAmongYards(st.yards), st.name), `See the cars in ${st.name} yards`)}${storesLine()}${junkyardNote(stamp)}`;
+    return layout({ title: `Junkyards in ${st.name}: ${plural(yc, 'self-service yard')} with live inventory (${plural(st.cars, 'car')}) — YardScout`, ogTitle: `${plural(yc, 'self-service junkyard')} in ${st.name}`, desc, canonical: stateUrl, body, cache: 900, spec: `${yc} YARD${yc === 1 ? '' : 'S'} · ${st.cars.toLocaleString()} CARS · ${st.code}`, ld: [ldBreadcrumb(crumbs), ldItemList(`Self-service junkyards in ${st.name}`, yardItems(st.metros.flatMap((m) => m.yards)))], lastModified: idx.scrapedAt, utm: ['state', st.slug] });
   }
 
   const city = st.cities.get(cityKey);
@@ -1308,10 +1356,10 @@ ${near.length ? `<div class="section">Within ${NEAR_MILES} miles <span>· ${plur
 <div class="car-card">${yardRows(near, city)}</div>` : ''}
 <div class="section">Newest arrivals <span>· ${pool.length === 1 ? 'this yard' : `${pool.length} yards`}</span></div>
 <div class="car-card">${items ? `<ul class="rowlist">${items}</ul><p class="note">The newest set-outs on ${pool.length === 1 ? "the yard's" : "these yards'"} published lists. Each yard's page has its full week; search and alerts are in the app.</p>` : `<p style="margin:0;color:var(--text-dim);font-size:.875rem">${pool.length === 1 ? "This yard doesn't" : "These yards don't"} publish set-out dates, so there's no arrivals list. The cars are on the yard ${pool.length === 1 ? 'page' : 'pages'} above.</p>`}</div>
-${JY_CTA}
+${jyCta('city', `${st.code}-${city.slug}`, nearHash(city.yards.length ? pointAmongYards(city.yards) : city, place), `See the cars ${alias ? 'near' : 'in'} ${city.name}`)}
 <p class="links"><a href="${stateUrl}">All junkyards in ${esc(st.name)}</a> · <a href="${SITE}/landed">What landed this week, by make</a></p>
 ${storesLine()}${junkyardNote(stamp)}`;
-  return layout({ title: `${title} — YardScout`, ogTitle: alias ? `${plural(sc, 'self-service junkyard')} near ${place}` : `${plural(yc, 'self-service junkyard')} in ${place}`, desc, canonical: cityUrl, body, cache: 900, spec: `${sc} YARD${sc === 1 ? '' : 'S'} · ${cars.toLocaleString()} CARS · ${place}`, ld: [ldBreadcrumb([...crumbs, [city.name, cityUrl]]), ldItemList(alias || !near.length ? heading : `Self-service junkyards in and near ${place}`, yardItems(pool))], lastModified: idx.scrapedAt });
+  return layout({ title: `${title} — YardScout`, ogTitle: alias ? `${plural(sc, 'self-service junkyard')} near ${place}` : `${plural(yc, 'self-service junkyard')} in ${place}`, desc, canonical: cityUrl, body, cache: 900, spec: `${sc} YARD${sc === 1 ? '' : 'S'} · ${cars.toLocaleString()} CARS · ${place}`, ld: [ldBreadcrumb([...crumbs, [city.name, cityUrl]]), ldItemList(alias || !near.length ? heading : `Self-service junkyards in and near ${place}`, yardItems(pool))], lastModified: idx.scrapedAt, utm: ['city', `${st.code}-${city.slug}`] });
 }
 
 /** Sitemap entries for every /junkyards page (folded into the sitemap). */
@@ -1371,10 +1419,10 @@ export async function renderPricesPage(chainArg, yardArg) {
 <h1 class="share-h">Self-service junkyard price lists</h1>
 <p class="share-sub">What a part costs at the counter when you pull it yourself, from the price lists these yards publish. ${chains.length} chains and yards, covering ${covered} of the ${idx.all.length} yards YardScout tracks. The other tracked yards have no price list on YardScout yet.</p>
 <div class="car-card"><ul class="rowlist">${chains.map(({ c, yards }) => `<li><a href="${priceUrl(c)}">${esc(c.label)} price list<span class="where">${esc([...new Set(yards.map((y) => y.state))].sort().join(', '))}</span></a><span class="meta">${plural(yards.length, 'yard')}</span></li>`).join('')}</ul></div>
-${JY_CTA}
+${jyCta('prices', 'all')}
 <p class="links"><a href="${SITE}/junkyards">Junkyards by state and city</a> · <a href="${SITE}/yards">All covered yards</a> · <a href="${SITE}/landed">What landed this week</a></p>
 ${storesLine()}<p class="note">${PRICE_NOTE}</p>`;
-    return layout({ title: `Junkyard price lists: pull prices at ${plural(covered, 'self-service yard')} — YardScout`, ogTitle: 'Self-service junkyard price lists', desc, canonical: PRICES_URL, body, cache: 3600, spec: `${chains.length} PRICE LISTS · ${covered} YARDS`, ld: [ldItemList('Self-service junkyard price lists', chains.map(({ c }) => [`${c.label} price list`, priceUrl(c)]))] });
+    return layout({ title: `Junkyard price lists: pull prices at ${plural(covered, 'self-service yard')} — YardScout`, ogTitle: 'Self-service junkyard price lists', desc, canonical: PRICES_URL, body, cache: 3600, spec: `${chains.length} PRICE LISTS · ${covered} YARDS`, ld: [ldItemList('Self-service junkyard price lists', chains.map(({ c }) => [`${c.label} price list`, priceUrl(c)]))], utm: ['prices', 'all'] });
   }
 
   const chain = PRICE_CHAINS.find((c) => c.slug === safeDecode(chainArg).toLowerCase());
@@ -1405,8 +1453,8 @@ ${storesLine()}<p class="note">${PRICE_NOTE}</p>`;
 <p class="share-sub">${plural(rows.length, 'part')} on the price list ${esc(chain.label)} publishes for this yard${where ? ` in ${esc(where)}` : ''}. ${esc(chain.label)} prices are not the same at every yard, so this page is this yard's list only.</p>
 <p class="links"><a href="${SITE}/yard/${slugify(loc)}">${esc(loc)} inventory</a> · <a href="${chainUrl}">${esc(chain.label)} prices at every yard</a></p>
 <div class="car-card">${PRICE_FILTER}${priceTable(rows, 'pl-rows')}<p class="note">${PRICE_NOTE}</p></div>
-${JY_CTA}${backLinks}${storesLine()}${PRICE_FILTER_JS}`;
-    return layout({ title: `${loc} price list: ${plural(rows.length, 'part')} and their pull prices — YardScout`, ogTitle: `${loc} price list`, desc, canonical, body, cache: 3600, spec: `${rows.length} PARTS · ${where || chain.label}`, ld: [ldBreadcrumb([hubCrumb, [chain.label, chainUrl], [loc, canonical]])] });
+${jyCta('prices', `${chain.slug}-${loc}`)}${backLinks}${storesLine()}${PRICE_FILTER_JS}`;
+    return layout({ title: `${loc} price list: ${plural(rows.length, 'part')} and their pull prices — YardScout`, ogTitle: `${loc} price list`, desc, canonical, body, cache: 3600, spec: `${rows.length} PARTS · ${where || chain.label}`, ld: [ldBreadcrumb([hubCrumb, [chain.label, chainUrl], [loc, canonical]])], utm: ['prices', `${chain.slug}-${loc}`] });
   }
 
   const source = CHAIN_PRICE_PAGES.find((c) => c[2] === chain.label);
@@ -1428,8 +1476,8 @@ ${onList && onList.length ? `<div class="section">Yards on this list <span>· ${
 <div class="car-card">${yardRows(onList)}</div>` : ''}
 ${ownList.length ? `<div class="section">Yards with their own price list <span>· ${plural(ownList.length, 'yard')}</span></div>
 <div class="car-card"><ul class="rowlist">${ownList.map((y) => `<li><a href="${priceUrl(chain, y.loc)}">${esc(y.loc)} price list<span class="where">${esc(yardWhere(y))}</span></a><span class="meta">${plural(book.yards.get(y.loc).length, 'part')}</span></li>`).join('')}</ul></div>` : ''}
-${JY_CTA}${backLinks}${storesLine()}${PRICE_FILTER_JS}`;
-    return layout({ title: `${chain.label} price list: ${plural(rows.length, 'part')} and their pull prices — YardScout`, ogTitle: `${chain.label} price list`, desc, canonical: chainUrl, body, cache: 3600, spec: `${rows.length} PARTS${onList ? ` · ${plural(onList.length, 'YARD').toUpperCase()}` : ''}`, ld: [ldBreadcrumb([hubCrumb, [chain.label, chainUrl]])] });
+${jyCta('prices', chain.slug)}${backLinks}${storesLine()}${PRICE_FILTER_JS}`;
+    return layout({ title: `${chain.label} price list: ${plural(rows.length, 'part')} and their pull prices — YardScout`, ogTitle: `${chain.label} price list`, desc, canonical: chainUrl, body, cache: 3600, spec: `${rows.length} PARTS${onList ? ` · ${plural(onList.length, 'YARD').toUpperCase()}` : ''}`, ld: [ldBreadcrumb([hubCrumb, [chain.label, chainUrl]])], utm: ['prices', chain.slug] });
   }
 
   // Every yard posts its own list and no list covers most of them: show the
@@ -1448,8 +1496,8 @@ ${JY_CTA}${backLinks}${storesLine()}${PRICE_FILTER_JS}`;
 <div class="section">Lowest and highest posted price <span>· ${plural(ranges.length, 'part')}</span></div>
 <div class="car-card">${PRICE_FILTER}<table class="ptable" id="pl-rows"><thead><tr><th>Part</th><th class="num">Low</th><th class="num">High</th><th class="num">Yards</th></tr></thead><tbody>${ranges.map((r) => `<tr><td>${esc(r.part)}</td><td class="num">${money(r.lo)}</td><td class="num">${money(r.hi)}</td><td class="num">${r.n}</td></tr>`).join('')}</tbody></table>
 <p class="note">"Yards" is how many of the ${listed.length} lists carry the part. Core charges are on each yard's own list. ${PRICE_NOTE}</p></div>
-${JY_CTA}${backLinks}${storesLine()}${PRICE_FILTER_JS}`;
-  return layout({ title: `${chain.label} price list: ${plural(ranges.length, 'part')}, prices at ${plural(listed.length, 'yard')} — YardScout`, ogTitle: `${chain.label} price lists`, desc, canonical: chainUrl, body, cache: 3600, spec: `${ranges.length} PARTS · ${plural(listed.length, 'YARD').toUpperCase()}`, ld: [ldBreadcrumb([hubCrumb, [chain.label, chainUrl]])] });
+${jyCta('prices', chain.slug)}${backLinks}${storesLine()}${PRICE_FILTER_JS}`;
+  return layout({ title: `${chain.label} price list: ${plural(ranges.length, 'part')}, prices at ${plural(listed.length, 'yard')} — YardScout`, ogTitle: `${chain.label} price lists`, desc, canonical: chainUrl, body, cache: 3600, spec: `${ranges.length} PARTS · ${plural(listed.length, 'YARD').toUpperCase()}`, ld: [ldBreadcrumb([hubCrumb, [chain.label, chainUrl]])], utm: ['prices', chain.slug] });
 }
 
 /** Sitemap entries for the price pages: the hub, each chain with a tracked

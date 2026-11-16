@@ -352,6 +352,25 @@ try {
     await w.ctx.close();
   }
 
+  /* ---------- the site Worker's own buttons, as it writes them, land right ---------- */
+  {
+    const { appHref, nearHash } = await import('../site-proxy/src/share.js');
+    const cityUrl = new URL(appHref('city', 'ca-sacramento', nearHash({ lat: 38.5816, lng: -121.4944 }, 'Sacramento, CA')));
+    const w = await open(browser, { geo: SAC, search: cityUrl.search, hash: cityUrl.hash });
+    await w.cars();
+    let s = await w.state();
+    const a = await w.page.evaluate(() => JSON.parse(localStorage.getItem('ys_utm')));
+    check('city page button (share.js appHref + nearHash): "Sacramento, CA (from the page you came from)", no /geo', s.lineText === 'Showing yards near Sacramento, CA (from the page you came from).' && w.geoHits.length === 0, s.lineText);
+    check('city page button: remembered as source page, medium city, campaign ca-sacramento; address bar clean', a && a.src === 'page' && a.med === 'city' && a.cmp === 'ca-sacramento' && !/utm_|#/.test(s.url), JSON.stringify(a) + ' ' + s.url);
+    await w.ctx.close();
+    const yardUrl = new URL(appHref('yard', 'pick-n-pull-rancho-cordova', '#yard=' + encodeURIComponent(YARD)));
+    const w2 = await open(browser, { geo: SAC, search: yardUrl.search, hash: yardUrl.hash });
+    await w2.cars();
+    s = await w2.state();
+    check('yard page button (share.js): the app opens on that yard', s.yardFilter === YARD && s.temp && s.temp.kind === 'link' && w2.geoHits.length === 0, JSON.stringify(s));
+    await w2.ctx.close();
+  }
+
   /* ---------- ATTRIB: an internal page tag never replaces an outside source ---------- */
   {
     const reddit = JSON.stringify({ src: 'reddit', cmp: 'xterra', med: '', at: Date.now() });
