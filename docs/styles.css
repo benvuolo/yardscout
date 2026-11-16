@@ -3603,3 +3603,11 @@ select { white-space: normal; height: auto; }
 .tile-badges .badge { display: inline-block; margin: 1px 2px 1px 0; vertical-align: baseline; overflow-wrap: anywhere; max-width: 100%; }
 .badge-sample { background: var(--accent-soft); color: var(--text); border: 1px solid var(--accent); text-transform: none; letter-spacing: 0.02em; }
 @media (min-width: 560px) { .car-tile .tile-name { font-size: 1rem; } .tile-where, .tile-when { font-size: var(--t-sm); } }
+/* Car screen additions: what the big card showed above the parts, and
+   "More <model> near you" tiles at the end. */
+.cd-value { margin: 0 0 var(--s4); }
+.cd-value .profit-line { margin-top: 0; flex-wrap: wrap; }
+.cd-parts-summary { margin: 0 0 var(--s2); font-size: var(--t-sm); font-weight: 600; color: var(--text); }
+.cd-more { margin-top: var(--s5); }
+.more-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 8.5rem), 1fr)); gap: var(--s2); }
+@media (min-width: 560px) { .more-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 11rem), 1fr)); gap: var(--s3); } }

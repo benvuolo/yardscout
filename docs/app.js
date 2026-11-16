@@ -3703,7 +3703,10 @@ function renderCarDetail() {
         ${nextOneHtml(v.make, v.model, 'cd-next')}
       </section>`
     : `<section class="cd-life">${nextOneHtml(v.make, v.model, 'cd-next')}</section>`;
-  const scan = liveScrapedAt ? `<span class="scan-stamp">scanned ${escapeHtml(scrapedShort())}</span>` : '';
+  // The stale-yard warning the card carried ("yard list unchanged since"),
+  // else the plain scan stamp.
+  const scan = carScanLineHtml(v);
+  const hours = yardMapsUrl(v.location, v.city, v.state);
   const pinfo = ex && ex[0] ? photoInfo(ex[0]) : null;
   box.innerHTML = `
     ${photoBoxHtml(pinfo, key, `${v.year} ${v.make} ${v.model}`, 'cd-photo', pinfo && pinfo.heavy ? illoSvgHtml(ex) : '')}
@@ -3718,13 +3721,16 @@ function renderCarDetail() {
         <h3>${escapeHtml(v.location)}${saleBadgeHtml(v.location)}</h3>
         ${where ? `<p>${where}</p>` : ''}
         <div class="locator-links">
-          ${dir ? `<a class="locator-link" href="${escapeHtml(dir)}" target="_blank" rel="noopener">${ICON.pin} Directions</a>` : ''}
+          ${hours ? `<a class="locator-link cd-hours" href="${escapeHtml(hours)}" target="_blank" rel="noopener" title="Opens this yard in Maps, which shows today’s hours, the phone number and directions">${ICON.pin} Hours and directions</a>`
+            : dir ? `<a class="locator-link" href="${escapeHtml(dir)}" target="_blank" rel="noopener">${ICON.pin} Directions</a>` : ''}
           ${yardSiteLinkHtml(v)}
         </div>
       </div>
     </section>
+    ${val && !unlocked && val.profitLine ? `<section class="cd-value">${val.profitLine}</section>` : ''}
     ${val && val.nParts ? `<section class="worth" aria-labelledby="worth-h">
       <h3 class="sec" id="worth-h">Worth pulling <span>${val.nParts} part${val.nParts > 1 ? 's' : ''} on this model</span></h3>
+      <p class="cd-parts-summary">${val.partsSummary}</p>
       ${val.worthHtml}
       ${val.alsoHtml}
       ${val.allValueHtml}
@@ -3737,7 +3743,8 @@ function renderCarDetail() {
     <section class="cd-ref">
       ${vm.vin ? `<div class="cd-vin">${vm.vin}${vm.warn}</div>` : ''}
       ${scan ? `<div class="cd-scan">${scan}</div>` : ''}
-    </section>`;
+    </section>
+    ${moreLikeThisHtml(v)}`;
   document.getElementById('car-detail-actions').innerHTML = `
     ${pullBtnHtml(key, true)}
     <button type="button" class="btn btn-quiet watch-btn cd-icon-btn ${hasWatchFor(v.make, v.model) ? 'watching' : ''}" data-make="${escapeHtml(v.make || '')}" data-model="${escapeHtml(v.model || '')}" title="${hasWatchFor(v.make, v.model) ? 'Watching \u2014 tap to stop' : 'Watch this model \u2014 get alerted when another shows up'}" aria-label="Watch this model">${ICON.bell}</button>
@@ -3798,7 +3805,10 @@ document.getElementById('car-detail').addEventListener('click', e => {
   const share = e.target.closest('.share-btn');
   if (share) { e.preventDefault(); shareVehicle(share.dataset.vkey); return; }
   const heart = e.target.closest('.heart-btn');
-  if (heart) { e.preventDefault(); toggleSaved(heart.dataset.vkey); }
+  if (heart) { e.preventDefault(); toggleSaved(heart.dataset.vkey); return; }
+  // "More <model> near you": a tile opens that car in place.
+  const tile = e.target.closest('.car-tile[data-vkey]');
+  if (tile && !e.target.closest('a')) { e.preventDefault(); openCarDetail(tile.dataset.vkey, carDetailOpener); }
 });
 
 /* ===== SHAREABLE FINDS (deep links) ===== */
@@ -4653,6 +4663,28 @@ const ICON_BOOKMARK_ON = '<svg class="ico" viewBox="0 0 24 24" fill="currentColo
 function tileSaveHtml(key) {
   const on = !!savedCars[key];
   return `<button type="button" class="tile-btn tile-save heart-btn${on ? ' saved' : ''}" data-vkey="${escapeHtml(key)}" aria-pressed="${on}" aria-label="${on ? 'On your pull sheet' : 'Add to pull sheet'}" title="${on ? 'On your pull sheet — tap to take it off' : 'Add to pull sheet'}">${on ? ICON_BOOKMARK_ON : ICON_BOOKMARK}</button>`;
+}
+/* Car screen, under everything: up to six more of the same make and model
+ * inside the search distance, newest set-out first (the same scope the
+ * Make and Model lists use). None: no heading at all. */
+const MORE_LIKE_N = 6;
+function moreLikeThisCars(v) {
+  if (!v || !v.make || !v.model || !activeZipCoords) return [];
+  refreshScopedInventory();
+  const key = vehicleKey(v), model = canonicalModel(v.make, v.model);
+  return _scopedVehicles
+    .filter(x => x.make === v.make && canonicalModel(x.make, x.model) === model && vehicleKey(x) !== key && !yardDormant(x.location))
+    .map(x => [yardDateMs(x.dateAdded), vehicleDistanceMi(x), x])
+    .sort((a, b) => (b[0] - a[0]) || ((a[1] == null ? 1e9 : a[1]) - (b[1] == null ? 1e9 : b[1])))
+    .slice(0, MORE_LIKE_N).map(e => e[2]);
+}
+function moreLikeThisHtml(v) {
+  const cars = moreLikeThisCars(v);
+  if (!cars.length) return '';
+  return `<section class="cd-more" aria-labelledby="cd-more-h">
+      <h3 class="sec" id="cd-more-h">More ${escapeHtml(`${v.make} ${canonicalModel(v.make, v.model)}`)} near you</h3>
+      <div class="car-grid more-grid">${cars.map(x => carTileHtml(x, lastSampleKey)).join('')}</div>
+    </section>`;
 }
 /* "Set out Nov 15", the short date tiles and cards use ('' when unknown). */
 function setOutShort(v) {
