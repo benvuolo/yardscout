@@ -141,7 +141,7 @@ try {
     ev = await w.events();
     check('web: entering a zip counts once', count(ev, 'zip-entered') === 1, JSON.stringify(ev));
     const all = await w.beacons();
-    check('web: every beacon says platform web, counting rules v4, and nothing else', all.length > 0 && all.every(b => b.p === 'web' && b.v === 4 && Object.keys(b).sort().join() === 'cmp,e,med,p,src,v'), JSON.stringify(all[0]));
+    check('web: every beacon says platform web, counting rules v5 (Cars feed), and nothing else', all.length > 0 && all.every(b => b.p === 'web' && b.v === 5 && Object.keys(b).sort().join() === 'cmp,e,med,p,src,v'), JSON.stringify(all[0]));
 
     // Two reloads with the saved zip: the audit recorded "entered a zip" each time.
     ev = [];
@@ -345,7 +345,7 @@ try {
 
     // 7. the per-day rule survives a reload; a new day counts again
     const all = await w.beacons();
-    check('narrow e2e: narrowing beacons are ordinary v4 web counters', all.filter(b => /^narrow\//.test(b.e)).every(b => b.p === 'web' && b.v === 4 && Object.keys(b).sort().join() === 'cmp,e,med,p,src,v'), JSON.stringify(all));
+    check('narrow e2e: narrowing beacons are ordinary v5 web counters', all.filter(b => /^narrow\//.test(b.e)).every(b => b.p === 'web' && b.v === 5 && Object.keys(b).sort().join() === 'cmp,e,med,p,src,v'), JSON.stringify(all));
     await w.page.reload({ waitUntil: 'domcontentloaded' });
     await w.page.waitForSelector('#live-grid .car-card', { timeout: 120000 });
     await w.page.waitForFunction(() => !(typeof _inv !== 'undefined' && _inv && !liveComplete && invViewPending()), null, { timeout: 120000 });
@@ -392,7 +392,7 @@ try {
     const all = await n.beacons();
     const ev = all.map(b => b.e);
     check(`${plat} shell: first visit, zip, paywall and checkout tap all arrive`, ['first-visit', 'zip-entered', 'paywall', 'paywall/header-pill', 'checkout-start', 'checkout/header-pill'].every(e => count(ev, e) === 1), JSON.stringify(ev));
-    check(`${plat} shell: every beacon carries platform ${plat} and v4`, all.length >= 6 && all.every(b => b.p === plat && b.v === 4), JSON.stringify(all.map(b => [b.e, b.p, b.v])));
+    check(`${plat} shell: every beacon carries platform ${plat} and v5`, all.length >= 6 && all.every(b => b.p === plat && b.v === 5), JSON.stringify(all.map(b => [b.e, b.p, b.v])));
     check(`${plat} shell: the stubbed events API was never contacted`, n.leaked.length === 0, JSON.stringify(n.leaked));
     check(`${plat} shell: the default stub (cancelled) is one attempt, ended once`, count(ev, 'checkout-try') === 1 && count(ev, 'checkout-end/cancelled') === 1
       && ev.filter(e => /^checkout-end\//.test(e)).length === 1, JSON.stringify(ev));
@@ -430,7 +430,7 @@ try {
       check(`${plat} outcome: ${name} -> exactly checkout-try + checkout-end/${want}`, JSON.stringify(ends(e)) === JSON.stringify(['checkout-try', `checkout-end/${want}`]), JSON.stringify(e));
       check(`${plat} outcome: ${name} also keeps the existing tap counters, no purchase`, count(e, 'checkout-start') === 1 && count(e, 'pro-converted') === 0, JSON.stringify(e));
       if (spec.reject) secrets.push(spec.reject);
-      check(`${plat} outcome: ${name} beacons are plain v4 ${plat} counters`, all.every(b => b.p === plat && b.v === 4 && Object.keys(b).sort().join() === 'cmp,e,med,p,src,v'), JSON.stringify(all));
+      check(`${plat} outcome: ${name} beacons are plain v5 ${plat} counters`, all.every(b => b.p === plat && b.v === 5 && Object.keys(b).sort().join() === 'cmp,e,med,p,src,v'), JSON.stringify(all));
     }
     const again = ends((await attempt({ resolve: { entitled: false, cancelled: true } })).map(b => b.e));
     check(`${plat} outcome: a second attempt counts again`, JSON.stringify(again) === JSON.stringify(['checkout-try', 'checkout-end/cancelled']), JSON.stringify(again));
@@ -509,7 +509,7 @@ try {
       k++;
     }
     const all = w.tabBeacons;
-    check('web outcome: every beacon is a plain v4 web counter', all.every(b => b.p === 'web' && b.v === 4 && Object.keys(b).sort().join() === 'cmp,e,med,p,src,v'), JSON.stringify(all.find(b => b.v !== 4)));
+    check('web outcome: every beacon is a plain v5 web counter', all.every(b => b.p === 'web' && b.v === 5 && Object.keys(b).sort().join() === 'cmp,e,med,p,src,v'), JSON.stringify(all.find(b => b.v !== 5)));
     check('web outcome: bought also counts the existing purchase', all.filter(b => b.e === 'pro-converted').length === 1 && all.some(b => b.e === 'purchase/header-pill'));
     check('web outcome: the attempt mark is gone after it ends', await w.page.evaluate(() => sessionStorage.getItem('ys_co_try') === null));
     const n0 = ends().length;

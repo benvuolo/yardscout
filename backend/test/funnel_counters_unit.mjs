@@ -113,13 +113,13 @@ function boot({ hostname = 'yardscout.io', webdriver = false, native = false, an
 {
   // The whole path: what each kind of client actually sends for one event.
   const web = boot(); web.api.track('first-visit');
-  check('web on yardscout.io sends first-visit as web, counting rules v4', web.beacons.length === 1 && web.beacons[0].e === 'first-visit' && web.beacons[0].p === 'web' && web.beacons[0].v === 4, JSON.stringify(web.beacons));
+  check('web on yardscout.io sends first-visit as web, counting rules v5', web.beacons.length === 1 && web.beacons[0].e === 'first-visit' && web.beacons[0].p === 'web' && web.beacons[0].v === 5, JSON.stringify(web.beacons));
   const local = boot({ hostname: 'localhost' }); local.api.track('first-visit');
   check('web on localhost sends nothing', local.beacons.length === 0 && local.api.ANALYTICS_OFF === true, JSON.stringify(local.beacons));
   const bot = boot({ webdriver: true }); bot.api.track('first-visit');
   check('automated browser on the live site sends nothing', bot.beacons.length === 0, JSON.stringify(bot.beacons));
   const ios = boot({ hostname: 'localhost', native: true }); ios.api.track('first-visit');
-  check('iOS shell (capacitor://localhost) sends first-visit as ios', ios.beacons.length === 1 && ios.beacons[0].p === 'ios' && ios.beacons[0].v === 4 && ios.api.ANALYTICS_OFF === false, JSON.stringify(ios.beacons));
+  check('iOS shell (capacitor://localhost) sends first-visit as ios', ios.beacons.length === 1 && ios.beacons[0].p === 'ios' && ios.beacons[0].v === 5 && ios.api.ANALYTICS_OFF === false, JSON.stringify(ios.beacons));
   const and = boot({ hostname: 'localhost', native: true, android: true }); and.api.track('iap-subscribe/watch-limit');
   check('Android shell (https://localhost) sends checkout-start + checkout/<gate> as android', JSON.stringify(and.events()) === JSON.stringify(['checkout-start', 'checkout/watch-limit']) && and.beacons.every(b => b.p === 'android'), JSON.stringify(and.beacons));
   const botApp = boot({ hostname: 'localhost', native: true, webdriver: true }); botApp.api.track('first-visit');
@@ -239,8 +239,8 @@ function boot({ hostname = 'yardscout.io', webdriver = false, native = false, an
   const ok2 = b.api.trackNarrow('search');
   check('narrow: a search-box pick counts once, the second pick the same day does not', ok1 === true && ok2 === false
     && JSON.stringify(b.events()) === JSON.stringify(['narrow/search']), JSON.stringify(b.events()));
-  check('narrow: the beacon is an ordinary anonymous counter (event, utm fields, platform, v4)',
-    b.beacons.length === 1 && Object.keys(b.beacons[0]).sort().join() === 'cmp,e,med,p,src,v' && b.beacons[0].v === 4 && b.beacons[0].p === 'web', JSON.stringify(b.beacons));
+  check('narrow: the beacon is an ordinary anonymous counter (event, utm fields, platform, v5)',
+    b.beacons.length === 1 && Object.keys(b.beacons[0]).sort().join() === 'cmp,e,med,p,src,v' && b.beacons[0].v === 5 && b.beacons[0].p === 'web', JSON.stringify(b.beacons));
   check('narrow: the day is kept on the device only, per kind', JSON.parse(b.store.ys_narrow).search === today, b.store.ys_narrow);
   for (const k of ['search-trim', 'filters-model', 'filters-make', 'trim', 'link']) b.api.trackNarrow(k);
   for (const k of ['search-trim', 'filters-model', 'filters-make', 'trim', 'link']) b.api.trackNarrow(k);
@@ -258,6 +258,10 @@ function boot({ hostname = 'yardscout.io', webdriver = false, native = false, an
   check('narrow: a damaged stored value is ignored, not fatal', JSON.stringify(junk.events()) === JSON.stringify(['narrow/filters-make']), JSON.stringify(junk.events()));
   const u = boot();
   check('narrow: an unknown kind is never sent', u.api.trackNarrow('search-box-typed-xterra') === false && u.beacons.length === 0);
+  // Cars feed (counting rules v5): the make/model chips are their own kind.
+  const ch = boot();
+  ch.api.trackNarrow('chip'); ch.api.trackNarrow('chip'); ch.api.trackNarrow('search');
+  check('narrow: a chip counts as narrow/chip once a day, apart from the search box', JSON.stringify(ch.events()) === JSON.stringify(['narrow/chip', 'narrow/search']), JSON.stringify(ch.events()));
   const ios = boot({ hostname: 'localhost', native: true });
   ios.api.trackNarrow('search');
   check('narrow: the iPhone app sends it as ios (after its next store update)', ios.beacons.length === 1 && ios.beacons[0].p === 'ios' && ios.beacons[0].e === 'narrow/search');
@@ -317,7 +321,7 @@ function boot({ hostname = 'yardscout.io', webdriver = false, native = false, an
   check('attempt: an end with no attempt open sends nothing', b.api.checkoutEnd('bought') === false && b.events().length === 4);
   b.api.checkoutBegin(false); b.api.checkoutEnd('failed-The operation could not be completed');
   check('attempt: an unknown outcome name is never sent as given (failed-unknown)', b.events()[5] === 'checkout-end/failed-unknown', JSON.stringify(b.events()));
-  check('attempt: beacons are ordinary v4 counters for the platform', b.beacons.every(x => x.p === 'ios' && x.v === 4 && Object.keys(x).sort().join() === 'cmp,e,med,p,src,v'));
+  check('attempt: beacons are ordinary v5 counters for the platform', b.beacons.every(x => x.p === 'ios' && x.v === 5 && Object.keys(x).sort().join() === 'cmp,e,med,p,src,v'));
   check('attempt: nothing is kept on the device for an app attempt', !('ys_co_try' in b.sess) && Object.keys(b.store).length === 0);
   // Web: across the Stripe redirect, in this tab's sessionStorage.
   const tab = {};
