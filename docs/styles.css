@@ -3649,6 +3649,15 @@ select { white-space: normal; height: auto; }
 
 /* First visit on a phone: "How to read this" after the first row of tiles. */
 .first-run-note.in-feed { grid-column: 1 / -1; margin: 0; }
+/* The watch strip with the Monday email (web, free, a location set). */
+.watch-strip.strip-mail { align-items: flex-start; }
+.watch-strip.strip-mail > .ico { margin-top: 3px; }
+.strip-ask { flex: 1 1 12em; min-width: 0; display: flex; flex-direction: column; align-items: stretch; gap: var(--s2); }
+.strip-ask .mail-line { line-height: 1.4; }
+.strip-ask .mail-form .btn { flex: 1 0 auto; min-height: 48px; padding: 0 var(--s5); font-size: var(--t-sm); }
+.strip-ask .strip-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2) var(--s4); }
+.strip-ask .strip-just-watch { align-self: flex-start; font-size: var(--t-sm); font-weight: 600; }
+.strip-ask .strip-watching .ico { width: 16px; height: 16px; color: var(--accent2); vertical-align: -3px; }
 /* Share a list: one model's list, one button. */
 .list-share { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s2) var(--s3); }
 .list-share p { flex: 1 1 10em; min-width: 0; margin: 0; font-size: var(--t-sm); line-height: 1.4; color: var(--text-dim); }

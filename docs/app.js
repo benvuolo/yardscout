@@ -4928,6 +4928,7 @@ function renderLive() {
     }
     document.getElementById('live-grid').innerHTML = (activeZipCoords ? watchStripHtml(0) : '')
       + `<div class="empty-state" style="grid-column:1/-1;">${msg}</div>`;
+    stripAskCount();
     return;
   }
 
@@ -4988,6 +4989,7 @@ function renderLive() {
     + feedTilesHtml(0, _feed.shown) + feedTailHtml();
   feedObserve();
   feedPlaceNote();
+  stripAskCount();
   if (_feed.shown) appPromoListRendered();
 }
 
@@ -10529,6 +10531,8 @@ function watchStripHtml(nCars) {
       <button type="button" class="linklike" onclick="jhOpenAlertsTab()">Manage</button></div>`;
   }
   const r = activeZipCoords ? effectiveRadiusMi() : null;
+  const mail = stripMailHtml(sc, nCars, r);
+  if (mail) return mail;
   const where = r ? ` within ${r}\u00a0mi` : (isPro() ? ' anywhere' : ' near you');
   return `<div class="watch-strip" style="grid-column:1/-1;">${ICON.bell}
     <span>${nCars ? 'Want the next one?' : 'None here right now.'} Get pinged when ${nCars ? 'another' : 'one'} <strong>${escapeHtml(sc.label)}</strong> lands${where}.${isPro() ? '' : ` <span class="watch-strip-note">${freeDeliveryNote()}</span>`}</span>
@@ -10553,6 +10557,107 @@ function jhWatchSearch() {
 function jhOpenAlertsTab() {
   try { document.querySelector('.tab[data-tab="alerts"]').click(); } catch (e) { /* boot race */ }
 }
+
+/* ===== ONE-STEP MONDAY EMAIL IN THE WATCH STRIP (Cars feed item 11, 2026-11-16) =====
+ * On the web, for someone who is not Pro and has a location, i.e. exactly
+ * when the watch the strip would create gets the Monday-email offer
+ * (recapEligible), the strip asks for the email itself: "Want the next one?
+ * Get a free Monday email with every <X> set out within 100 mi." [email]
+ * [Email me], and "or just watch it here" (today's Watch button). Submitting
+ * creates the watch(es) exactly as jhWatchSearch does (addQuickWatch; the
+ * free limit opens the upgrade sheet and nothing is sent), then the one
+ * sign-up path the toast uses (recapSubmit: /v1/recap/signup, attribution
+ * fields included). A confirmed subscriber gets "Add <X> to your free Monday
+ * email?" (recapAddAll: /v1/recap/add). More than RECAP_MAX models, Pro, the
+ * apps, or the offer dismissed this visit: today's strip. The toast never
+ * asks again for a watch the strip handled. 'email-asked' counts the strip's
+ * field once per visit (counting rules v5). Stored watches are never
+ * changed (rule 6): new ones only, through addQuickWatch. */
+let _stripAskCounted = false;
+function stripMailHtml(sc, nCars, r) {
+  if (IS_NATIVE || isPro() || !activeZipCoords || !r) return '';
+  if ((sc.models.length || 1) > RECAP_MAX) return '';
+  const probe = { make: sc.make, lat: activeZipCoords.lat, lng: activeZipCoords.lng, radiusMi: r };
+  if (!recapEligible(probe, IS_NATIVE, isPro(), recapDismissed())) return '';
+  const st = recapState();
+  const what = `<strong>${escapeHtml(sc.label)}</strong>`;
+  const just = '<button type="button" class="linklike strip-just-watch" onclick="jhWatchSearch()">or just watch it here</button>';
+  if (st && st.state === 'confirmed' && st.sub) {
+    return `<div class="watch-strip strip-mail" style="grid-column:1/-1;">${ICON.bell}
+      <div class="mail-ask strip-ask">
+        <span class="mail-line">Add ${what} to your free Monday email?</span>
+        <div class="strip-row"><button type="button" class="btn btn-primary btn-sm" data-act="recap-add">Add</button>${just}</div>
+        <span class="watch-zip-msg mail-msg" role="status"></span>
+      </div>${proBoxHtml(PRO_PUSH_LINE, 'watch-toast', '', 'strip-pro')}</div>`;
+  }
+  return `<div class="watch-strip strip-mail" style="grid-column:1/-1;">${ICON.bell}
+    <div class="mail-ask strip-ask">
+      <span class="mail-line">${nCars ? 'Want the next one?' : 'None here right now.'} Get a free Monday email with every ${what} set out within ${escapeHtml(String(r))}&nbsp;mi.</span>
+      <form class="watch-zip-row mail-form strip-form" novalidate>
+        <input type="email" class="watch-zip-input mail-email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false"
+          placeholder="Email" aria-label="Email address for the Monday email" maxlength="254" value="${escapeHtml(st ? st.email : '')}">
+        <button type="submit" class="btn btn-primary btn-sm">Email me</button>
+      </form>
+      <span class="watch-zip-msg mail-msg" role="status"></span>
+      ${just}
+    </div>${proBoxHtml(PRO_PUSH_LINE, 'watch-toast', '', 'strip-pro')}</div>`;
+}
+/* After a render: the strip's field shown counts 'email-asked', once a visit. */
+function stripAskCount() {
+  if (_stripAskCounted || !document.querySelector('#live-grid .strip-mail .mail-email')) return;
+  _stripAskCounted = true;
+  track('email-asked');
+}
+/* The watches the strip stands for, made the way jhWatchSearch makes them.
+ * Returns the new entries (for the sign-up), or null when nothing may be sent. */
+function stripMakeWatches(el) {
+  if (el._stripEntries) return el._stripEntries;   // a retry after a failed send
+  const sc = liveWatchScope();
+  if (!sc) return null;
+  const from = _recapNew.length;
+  let added = 0, blocked = null;
+  for (const m of (sc.models.length ? sc.models : [''])) {
+    const r = addQuickWatch(sc.make, m, sc.yrMin, sc.yrMax, 'strip');
+    if (r === 'added') added++;
+    else if (r === 'limit' || r === 'no-zip') { blocked = r; break; }
+  }
+  // These watches are handled here: the toast must not offer them again.
+  const mine = _recapNew.slice(from);
+  _recapNew = _recapNew.slice(0, from);
+  if (added) { renderAlerts(); checkAndNotify(); }
+  if (blocked === 'limit') { openUpgradeSheet('watch-limit'); renderLive(); return null; }
+  if (blocked === 'no-zip') { askZipForWatch(sc.label, () => jhWatchSearch()); return null; }
+  el._stripEntries = mine;
+  el._stripLabel = sc.label;
+  return mine;
+}
+function stripDone(el) {
+  const ask = el.querySelector('.mail-ask');
+  if (ask && el._stripLabel) ask.insertAdjacentHTML('afterbegin', `<span class="mail-line strip-watching">${ICON.check} Watching <strong>${escapeHtml(el._stripLabel)}</strong>; new ones light up in Alerts.</span>`);
+}
+document.getElementById('live-grid').addEventListener('submit', (e) => {
+  const form = e.target.closest('.strip-form');
+  if (!form) return;
+  e.preventDefault();
+  const el = form.closest('.watch-strip');
+  const input = el.querySelector('.mail-email'), msg = el.querySelector('.mail-msg');
+  const email = String((input && input.value) || '').trim().toLowerCase();
+  // Checked before any watch is made: a typo makes nothing.
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg.textContent = 'Enter your email address.'; input.focus(); return; }
+  const entries = stripMakeWatches(el);
+  if (!entries) return;
+  if (!entries.length) { msg.textContent = 'You already watch this.'; return; }
+  recapSubmit(el, entries, () => stripDone(el));
+});
+document.getElementById('live-grid').addEventListener('click', (e) => {
+  const add = e.target.closest('.strip-mail [data-act="recap-add"]');
+  if (!add) return;
+  e.preventDefault();
+  const el = add.closest('.watch-strip');
+  const entries = stripMakeWatches(el);
+  if (!entries || !entries.length) return;
+  recapAddAll(el, entries, () => stripDone(el));
+});
 
 /* ===== FREE MONDAY EMAIL ON THE WEB (2026-11-12, owner approved) =====
  * A web watch lives only in this browser. Right after one is created, the
