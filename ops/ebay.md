@@ -71,3 +71,15 @@ Owns: `scraper/ebay_prices.py`, `.github/workflows/ebay-prices.yml`
    per-key counts.
 2. Spot-check 10 bands against the app's "sold prices" link.
 3. Tighten the plausibility gate if sold data disagrees with anchors.
+
+## Noted by the hub, 2026-11-16 (not fixed; this workstream's file)
+
+`ebay-prices.yml` fails red every Monday while there are no keys (runs of
+11-09 and 11-16). The refresh step only warns ("EBAY_CLIENT_ID /
+EBAY_CLIENT_SECRET not set"); the failure is the next step, "Commit if
+changed": `docs/data/ebay_prices.json` does not exist, so `git diff --quiet`
+on it errors, the "nothing to commit" exit is skipped and `git add` stops
+with "pathspec did not match any files". Nothing is harmed (no data is
+written and the daily ops email does not count it), but a weekly red run
+hides a real failure later. Suggested one-line fix at the top of that step:
+`[ -f docs/data/ebay_prices.json ] || { echo "no bands file yet (no keys)"; exit 0; }`
