@@ -1295,7 +1295,7 @@ const SCREENS = [
       renderLive();
       const c = document.querySelector(`#live-grid .car-card[data-eid="${CSS.escape(eid)}"]`);
       if (!c) throw new Error('fixture card not rendered');
-      const n = c.querySelectorAll('.car-badges .badge').length;
+      const n = c.querySelectorAll('.tile-badges .badge:not(.badge-sample), .car-badges .badge').length;   // tiles (Cars feed): .tile-badges
       if (n !== 3) throw new Error(`fixture card has ${n} badges, want 3`);
       c.scrollIntoView({ block: 'start' }); window.scrollBy(0, -70);
     });
