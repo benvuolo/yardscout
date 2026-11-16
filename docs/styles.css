@@ -3603,6 +3603,14 @@ select { white-space: normal; height: auto; }
 .tile-badges .badge { display: inline-block; margin: 1px 2px 1px 0; vertical-align: baseline; overflow-wrap: anywhere; max-width: 100%; }
 .badge-sample { background: var(--accent-soft); color: var(--text); border: 1px solid var(--accent); text-transform: none; letter-spacing: 0.02em; }
 @media (min-width: 560px) { .car-tile .tile-name { font-size: 1rem; } .tile-where, .tile-when { font-size: var(--t-sm); } }
+/* The summary line that replaced the three stat tiles: wraps, never scrolls
+   sideways, so "updated" is always on screen. */
+.feed-summary { margin: 0 0 var(--s3); min-height: 1.4em; }
+.feed-summary .skel-chip { height: 1.2em; max-width: 16rem; margin: 0; }
+.feed-sum { margin: 0; font-size: var(--t-sm); line-height: 1.45; color: var(--text-dim); overflow-wrap: anywhere; }
+.feed-sum b { font-family: var(--font-mono); font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; }
+.feed-sum .fs-new b { color: var(--accent-on-soft, var(--accent)); }
+
 /* Car screen additions: what the big card showed above the parts, and
    "More <model> near you" tiles at the end. */
 .cd-value { margin: 0 0 var(--s4); }

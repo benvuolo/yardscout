@@ -4266,7 +4266,7 @@ function renderLivePending() {
     ? 'Couldn’t load the cars for this area. Check your connection and tap Refresh data.'
     : focusedCarKey ? 'Finding that car&hellip;' : 'Loading cars near you&hellip;';
   const skel = '<div class="skel-card"><div class="skeleton skel-line w60"></div><div class="skeleton skel-line w40"></div><div class="skeleton skel-line w80"></div><div class="skeleton skel-line w30"></div></div>';
-  document.getElementById('live-stats-bar').innerHTML = '';
+  feedSummaryRender(null, null, '');
   document.getElementById('sale-strip').style.display = 'none';
   document.getElementById('live-grid').innerHTML =
     `<div class="skel-note" style="grid-column:1/-1;">${msg}</div>` + skel.repeat(3);
@@ -4664,6 +4664,28 @@ function tileSaveHtml(key) {
   const on = !!savedCars[key];
   return `<button type="button" class="tile-btn tile-save heart-btn${on ? ' saved' : ''}" data-vkey="${escapeHtml(key)}" aria-pressed="${on}" aria-label="${on ? 'On your pull sheet' : 'Add to pull sheet'}" title="${on ? 'On your pull sheet — tap to take it off' : 'Add to pull sheet'}">${on ? ICON_BOOKMARK_ON : ICON_BOOKMARK}</button>`;
 }
+/* The summary line over the Cars list: "17,906 cars near you · 1,837 new
+ * this week · updated 2h ago". n = null while the list loads (only the
+ * scan time shows). With no location the list is empty for a free visitor:
+ * the line then carries the national numbers the header shows, and leaves
+ * out any it does not have yet, so it never reads "0 cars". */
+function feedSummaryRender(n, nNew, nearLabel) {
+  const el = document.getElementById('live-stats-bar');
+  if (!el) return;
+  const parts = [];
+  if (n != null && !(n === 0 && !activeZipCoords && !isPro())) {
+    const near = /near/i.test(nearLabel || '') ? (n === 1 ? 'car near you' : 'cars near you') : (n === 1 ? 'car' : 'cars');
+    parts.push(`<span class="fs-n" title="Cars on the lots in view, as of the last scan"><b>${n.toLocaleString()}</b> ${near}</span>`);
+    parts.push(`<span class="fs-new" title="Cars set out in the last 7 days at the yards in view"><b>${(nNew || 0).toLocaleString()}</b> new this week</span>`);
+  } else if (n != null) {
+    const cars = (!liveComplete && _inv) ? _inv.m.vehicles : liveInventory.length;
+    const fresh = liveComplete ? headTickerHeavy().fresh : 0;
+    if (cars) parts.push(`<span class="fs-n" title="Every car on the self-service lots YardScout tracks"><b>${cars.toLocaleString()}</b> cars on the lots</span>`);
+    if (fresh) parts.push(`<span class="fs-new" title="Cars set out in the last 7 days, all yards"><b>${fresh.toLocaleString()}</b> new this week</span>`);
+  }
+  if (liveScrapedAt || n != null) parts.push(`<span class="fs-upd" title="Last scan: ${escapeHtml(scrapedTitle())} — automatic, about every 4 hours">updated ${escapeHtml(scrapeAgoLabel())}</span>`);
+  el.innerHTML = parts.length ? `<p class="feed-sum">${parts.join('<span class="fs-dot" aria-hidden="true"> &middot; </span>')}</p>` : '';
+}
 /* Car screen, under everything: up to six more of the same make and model
  * inside the search distance, newest set-out first (the same scope the
  * Make and Model lists use). None: no heading at all. */
@@ -4754,15 +4776,10 @@ function renderLive() {
   updateZipBanner();
   renderSaleStrip();
 
-  // Three chips, no horizontal scroll (owner request 2026-10-24): the old
-  // five-chip bar swiped sideways at phone widths and hid "Updated" — the
-  // chip people most needed — off the end. Freshness now always visible,
-  // which also retired the fresh-stamp line that papered over it.
-  document.getElementById('live-stats-bar').innerHTML = `
-    <div class="stat-card" title="Cars on the lots in view, as of the last scan"><div class="label">${nearLabel}</div><div class="value">${vehicles.length.toLocaleString()}</div></div>
-    <div class="stat-card" title="Cars set out in the last 7 days at the yards in view"><div class="label">New this week</div><div class="value accent">${newThisWeek.toLocaleString()}</div></div>
-    <div class="stat-card" title="Last scan: ${scrapedTitle()} — automatic, about every 4 hours"><div class="label">Updated</div><div class="value value-sm">${scrapeAgoLabel()}</div></div>
-  `;
+  // One summary line (CARS FEED, replaced the three stat tiles): cars in
+  // view, new this week, updated. It wraps, never scrolls sideways, so
+  // "Updated" stays visible at every width (owner request 2026-10-24).
+  feedSummaryRender(vehicles.length, newThisWeek, nearLabel);
 
   // Shared-link landing: focused single-car view, or an honest message when
   // the shared car has left the inventory.
