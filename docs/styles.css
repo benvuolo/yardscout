@@ -3647,6 +3647,8 @@ select { white-space: normal; height: auto; }
 .fchip-x { font-size: 1.1em; line-height: 1; }
 @media (min-width: 721px) { .feed-chips { margin-left: 0; margin-right: 0; padding-left: 0; padding-right: 0; flex-wrap: wrap; overflow-x: visible; } }
 
+/* First visit on a phone: "How to read this" after the first row of tiles. */
+.first-run-note.in-feed { grid-column: 1 / -1; margin: 0; }
 /* Share a list: one model's list, one button. */
 .list-share { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s2) var(--s3); }
 .list-share p { flex: 1 1 10em; min-width: 0; margin: 0; font-size: var(--t-sm); line-height: 1.4; color: var(--text-dim); }

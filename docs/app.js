@@ -4275,6 +4275,7 @@ function renderLivePending() {
     : focusedCarKey ? 'Finding that car&hellip;' : 'Loading cars near you&hellip;';
   const skel = '<div class="skel-card"><div class="skeleton skel-line w60"></div><div class="skeleton skel-line w40"></div><div class="skeleton skel-line w80"></div><div class="skeleton skel-line w30"></div></div>';
   feedSummaryRender(null, null, '');
+  feedNoteHome();
   document.getElementById('sale-strip').style.display = 'none';
   document.getElementById('live-grid').innerHTML =
     `<div class="skel-note" style="grid-column:1/-1;">${msg}</div>` + skel.repeat(3);
@@ -4847,6 +4848,7 @@ function carTileHtml(v, sampleKey) {
 function renderLive() {
   updateFilterAvailability();
   if (!liveLoaded) return;
+  feedNoteHome();   // the first-run note may sit inside the grid (item 9)
   if (_inv && !liveComplete) {
     invKick();
     if (invViewPending()) { renderLivePending(); return; }
@@ -4985,6 +4987,39 @@ function renderLive() {
   document.getElementById('live-grid').innerHTML = focusBanner + weekBanner + since.html + watchStripHtml(vehicles.length) + listShareHtml(vehicles.length)
     + feedTilesHtml(0, _feed.shown) + feedTailHtml();
   feedObserve();
+  feedPlaceNote();
+}
+
+/* ---- First visit (CARS FEED item 9) ----
+ * While "How to read this" is not acknowledged (jh_honesty_ack), a phone
+ * shows it after the first row of tiles instead of above the first car, so
+ * the first screen is cars. Same element, same words, same "Got it". With an
+ * empty list, no location, or a wider screen it stays where index.html puts
+ * it (after the zip card). */
+function feedNoteHome() {
+  const note = document.getElementById('first-run-note');
+  const home = document.getElementById('first-run-note-home');
+  if (!note || !home || !note.parentElement || note.parentElement.id !== 'live-grid') return;
+  home.after(note);
+  note.classList.remove('in-feed');
+}
+function feedPlaceNote() {
+  const note = document.getElementById('first-run-note');
+  if (!note || note.style.display === 'none' || !activeZipCoords || focusedCarKey) return;
+  if (!(window.matchMedia && matchMedia('(max-width: 720px)').matches)) return;
+  const grid = document.getElementById('live-grid');
+  const tiles = grid.querySelectorAll(':scope > .car-tile');
+  if (!tiles.length) return;
+  // A marker where index.html put it, so it can go back exactly there.
+  if (!document.getElementById('first-run-note-home') && note.parentElement.id !== 'live-grid') {
+    const home = document.createElement('span');
+    home.id = 'first-run-note-home';
+    home.hidden = true;
+    note.before(home);
+  }
+  const cols = getComputedStyle(grid).gridTemplateColumns.split(' ').filter(Boolean).length || 1;
+  tiles[Math.min(cols, tiles.length) - 1].after(note);
+  note.classList.add('in-feed');
 }
 
 /* ---- A reason to come back (CARS FEED item 7) ----
