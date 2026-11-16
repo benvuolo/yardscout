@@ -4982,7 +4982,7 @@ function renderLive() {
   const since = feedSinceInfo(vehicles);
   _feed = { sig, list: vehiclesToRender, total: vehicles.length, sampleKey, dividerAt: since.dividerAt,
     shown: Math.min(vehiclesToRender.length, Math.max(FEED_BATCH, keep)) };
-  document.getElementById('live-grid').innerHTML = focusBanner + weekBanner + since.html + watchStripHtml(vehicles.length)
+  document.getElementById('live-grid').innerHTML = focusBanner + weekBanner + since.html + watchStripHtml(vehicles.length) + listShareHtml(vehicles.length)
     + feedTilesHtml(0, _feed.shown) + feedTailHtml();
   feedObserve();
 }
@@ -5047,6 +5047,62 @@ document.getElementById('live-grid').addEventListener('click', (e) => {
   renderLive();
   const g = document.getElementById('feed-chips');
   if (g && g.getBoundingClientRect().top < 0) g.scrollIntoView({ block: 'start' });
+});
+
+/* ---- Share a list (CARS FEED item 8) ----
+ * With the list narrowed to one model, one button shares it: the public
+ * model page yardscout.io/landed/<make>/<model> when the site has one (it
+ * does exactly when data/landed/index.json lists the model: the page
+ * renderLandedModelPage in backend/site-proxy/src/share.js reads the same
+ * index), else a tagged #cars= link that opens this list near the reader. */
+let _landedIndexP = null, _landedIndex;
+function landedIndexLoad() {
+  if (!_landedIndexP) {
+    _landedIndexP = fetch(DATA_BASE + 'data/landed/index.json')
+      .then(r => (r.ok ? r.json() : null)).catch(() => null)
+      .then(j => { _landedIndex = j && j.makes ? j : null; return _landedIndex; });
+  }
+  return _landedIndexP;
+}
+function listShareUrlFrom(idx, make, model) {
+  const e = idx && idx.makes && idx.makes[make];
+  const hit = e && e.slug && Array.isArray(e.models) && e.models.find(m => Array.isArray(m) && m[0] === model && m[1]);
+  if (hit) return `https://yardscout.io/landed/${encodeURIComponent(e.slug)}/${encodeURIComponent(hit[1])}`;
+  return `https://yardscout.io/?utm_source=share&utm_medium=list#cars=${encodeURIComponent(make)}|${encodeURIComponent(model)}`;
+}
+function listShareHtml(n) {
+  const make = document.getElementById('live-filter-make').value;
+  if (!make || selectedModels.size !== 1 || focusedCarKey || !n) return '';
+  landedIndexLoad();   // ready before the tap, so the share sheet opens at once
+  const model = [...selectedModels][0];
+  const r = activeZipCoords ? effectiveRadiusMi() : null;
+  return `<div class="list-share" style="grid-column:1/-1;"><p><b>${n.toLocaleString()}</b> ${escapeHtml(`${make} ${model}`)} ${r ? `within ${r} mi` : 'listed'}</p>
+    <button type="button" class="btn btn-quiet list-share-btn" data-make="${escapeHtml(make)}" data-model="${escapeHtml(model)}" data-n="${n}">${ICON.share} Share this list</button></div>`;
+}
+async function shareList(btn) {
+  const make = btn.dataset.make, model = btn.dataset.model, n = +btn.dataset.n || 0;
+  // Normally loaded while the list rendered; never wait long for it.
+  const idx = _landedIndex !== undefined ? _landedIndex
+    : await Promise.race([landedIndexLoad(), new Promise(r => setTimeout(() => r(null), 400))]);
+  const url = listShareUrlFrom(idx, make, model);
+  const text = `${n.toLocaleString()} ${make} ${model} ${n === 1 ? 'is' : 'are'} on self-service yard lots near me right now (YardScout)`;
+  track('share-list');
+  const touchDevice = IS_NATIVE || (window.matchMedia && window.matchMedia('(pointer: coarse)').matches);
+  if (navigator.share && touchDevice) {
+    try { await navigator.share({ title: text, text, url }); return; } catch (e) { /* cancelled/unsupported -> copy */ }
+  }
+  try {
+    await navigator.clipboard.writeText(url);
+    const orig = btn.innerHTML;
+    btn.textContent = 'Link copied';
+    setTimeout(() => { btn.innerHTML = orig; }, 1400);
+  } catch (e) {
+    prompt('Copy this link:', url);
+  }
+}
+document.getElementById('live-grid').addEventListener('click', (e) => {
+  const b = e.target.closest('.list-share-btn');
+  if (b) { e.preventDefault(); shareList(b); }
 });
 
 /* ---- Endless scroll (CARS FEED item 6) ---- */
