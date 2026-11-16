@@ -37,6 +37,20 @@ session follows the steps below.
 5. End with "Worth knowing" when a comment holds a feature request, a bug, a
    missing yard, or a sign the post is landing badly.
 
+## The weekly "what landed" post
+
+`tools/landed_post.py <Make> <Model>` writes the whole post in the form
+above (state first, then generation with `--gens`, newest first, one tagged
+link) from `docs/data/inventory_live.json`. `git pull` first so it reads the
+newest scan, and run it right before the owner posts: the list goes stale
+with every scan. Example:
+
+    python3 tools/landed_post.py Toyota 4Runner \
+      --gens "1989:1st gen,1995:2nd gen,2002:3rd gen,2009:4th gen,2024:5th gen,9999:6th gen"
+
+It posts nothing. The owner reads the draft, checks the subreddit's rules on
+self-promotion (or asks its moderators first), and posts it themselves.
+
 ## Lessons so far (r/XTerra, 2026-11-12)
 
 - Group lists by state first, then generation: people look for their state.
