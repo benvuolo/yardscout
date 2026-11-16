@@ -1014,3 +1014,52 @@ at `/?utm_source=page&utm_medium=yard&utm_campaign=<slug>#yard=<yard>` with
 Still true on the live site until the feed merges: on a phone the first car
 sits below the guess line, the "How to read this" note, the three stat
 tiles, the search box and Filters, and the app banner shows at once.
+
+## 2026-11-16 13:16 UTC Cars feed merged (c5d2b414; main at 29376618, sw `jh-v202`)
+
+Builder's branch `design/cars-feed` (6d08b0bf) merged with main, plus hub
+fix-ups, on a side branch (`hub/feed-merge`) while the regression ran; main
+was moved to it only after everything passed. Design and build notes:
+`ops/design.md` ("Cars feed").
+
+- What changed for a visitor: the Cars tab is a grid of photo tiles (2
+  columns on a phone), a tile opens the car screen, chips for All / New /
+  This week / makes / models, endless scroll, "since your last visit", share
+  a list, the "How to read this" note after the first row, the app banner
+  later, the Monday email asked for in the watch strip.
+- Hub fix-ups where the feed met the no-gate first visit:
+  - under a guessed place the strip asks for the zip in the same step as the
+    email; watch and sign-up are centred on that zip, never on the guess
+    (`stripZipFirst`, test `backend/test/strip_guess_e2e.mjs`);
+  - on a phone the watch strip follows the first row of tiles
+    (`feedPlaceStrip`): a model link on a first visit showed no car on the
+    first screen, now two;
+  - the guess line is one sentence and a "Change" button that opens the zip
+    field and "Use my location": first tile 84 px higher at 390 px;
+  - a long-listed car says "Listed N days" on its tile (the tile had dropped
+    the old card's notice; found by the full layout run); the whole notice
+    stays on the car screen and in the row view;
+  - "Set out <date>" no longer breaks after "Set" on a tile;
+  - yard request: shorter placeholder (cut at 360 px, large text).
+- Regression on the merged tree, all pass: 52 test files (browser e2e incl.
+  cars_feed 96 checks, no_gate, strip_guess, free_instant, map_regions; all
+  units; site Worker units; the five Parts-tab and freshness Python e2es;
+  three scraper photo tests), then 51 of them again after the tile fix
+  (map_regions left out: it tests map pins); the six API suites (e2e.sh
+  39/39, e2e-ops, e2e-devices, e2e-coverage 27/27, e2e-email, browser_e2e
+  17/17); `ui_no_truncation` every screen at all six widths, both themes,
+  100% and 200% text: 2,184 checks, 0 failures.
+- Layout-check fixtures brought up to date: the heavy photo source now
+  publishes a resized copy (tap-to-load is tested with the copy taken out; a
+  new screen covers the resized car-screen photo); `cards-mixed` no longer
+  needs a natural run of photo-less cars; `r5-car-life` looks past the first
+  40 tiles.
+- Store files, committed, nothing sent yet: listing text for the free
+  instant alert (f262671d), all twelve screenshots regenerated (29376618;
+  the Cars slide is taken at 25 mi).
+- Not checked: no Safari/WebKit engine in this environment. The new CSS and
+  script were read for anything iOS 15 lacks: `:has()` and `:focus-visible`
+  are used for cosmetics only (iOS 15.0 to 15.3 ignore those rules), no
+  regex lookbehind, no `.at()`.
+- Housekeeping: 22 finished builders' worktrees removed (clean and already
+  in main); the session disk was at 94%.
