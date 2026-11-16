@@ -1218,7 +1218,7 @@ all from one yard's batch (Utah Pic-A-Part Ogden Premium, set out 11-15).
 - The alert-card entry above stands. The "Order" bullet in it is superseded
   by this entry.
 
-## 2026-11-16 ~16:55 UTC owner: "Yes draft the corrections for all three"
+## 2026-11-16 ~16:50 UTC owner: "Yes draft the corrections for all three"
 
 - Two Gmail drafts and one form text (details in
   `ops/yard-outreach-drafts.md`, "Corrections, 2026-11-16"): U-Pull-R as a
