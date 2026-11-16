@@ -912,3 +912,22 @@ that about 170 were tried on 11-06 before the pause, asks for an easier
 signal (a field or feed), and corrects the 11-02 sentence about the name.
 Photo checks stay paused (`PNS_PHOTO_CHECKS_PAUSED = True`) until they say
 yes or the owner says to un-pause.
+
+### First scan with the YardScout name: all four as before (2026-11-16)
+
+Scan 43923253337 (dispatched by the hub 17:54 UTC on 4ba8328b, finished
+19:13; 336,886 cars, 304 yards). From its log:
+
+| Yard | This scan, YardScout name | Before |
+|---|---|---|
+| Pull-N-Save | 11,446 cars over 8 yards; make/model check `vin_agrees` 10,412; price list 809 parts; photo checks 0 (paused) | about 11,400 over 8 |
+| Budget | 2,506 (Winter Garden 1,627, Bartow 879); price lists 1,322 parts over 2 yards | 1,627 and 879 |
+| Harry's | 4,259 over 3 yards, read live (about 8 minutes of pages); price list 452 parts | 4,259 |
+| U-Pull-R | captcha at the first search, 0 cars, "will drop out" as on every scan; price list 338 parts | the same |
+
+No yard answered the name differently. Unrelated to the name and as before:
+Budget Bartow has served the same 879 cars since 11-06, and Harry's three
+lists have not changed since Saturday 11-14 07:42 UTC (their source, a
+weekend). The four notes (Pull-N-Save photo note, U-Pull-R and Budget
+corrections, Harry's form note) are true as written from this scan on; the
+owner was told they can be sent.

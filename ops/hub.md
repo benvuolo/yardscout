@@ -1325,3 +1325,20 @@ One fresh load of yardscout.io at phone size: cache `jh-v204`; on a car page
 opened in that load the turnover label sits 12 px under the yard box; no
 page errors. Scan 43923253337 (dispatched 17:54, on 4ba8328b) is in
 progress; the 19:18 UTC check-in reads its log for the four yards.
+
+## 2026-11-16 19:25 UTC first scan with the YardScout name: all four yards as before
+
+Scan 43923253337 finished 19:13 UTC (336,886 cars, 304 yards; data commit
+dfa266c3). Pull-N-Save 11,446 over 8 yards, Budget 1,627 + 879, Harry's
+4,259 over 3 yards (live read), U-Pull-R captcha and 0 cars as always; all
+four price lists read. Table in `ops/yards.md`. Owner told the four notes
+can be sent: two Gmail drafts as replies (U-Pull-R thread
+`1a1b2b1b2f24f262`, Budget thread `1a19e455f0efaf97`), the Pull-N-Save
+photo note (draft, thread `1a1e52cb8accbc08`), and the Harry's text for the
+form at wegotused.com/contact (`ops/yard-outreach-drafts.md` section 5; its
+Sucuri sentence was made conditional, see the note there).
+
+Still open with the owner: stop the U-Pull-R reader until their API arrives
+(hub recommends yes). Pull-N-Save photo checks stay paused until they
+answer. Next hub wake: 2026-11-17 15:00 UTC, the two held website sentences
+once both stores show 1.13.0 live (`trig_016dADedHXNCLcakiqQW9irq`).

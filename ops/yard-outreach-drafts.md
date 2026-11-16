@@ -107,14 +107,17 @@ about 290 pages a pass (15 cars a page), one page a second
 the reader change is on main), and that the reader answers the Sucuri check
 itself today. The 11-02 wording said the screen "sometimes stops our
 scanner", which was not what happens, and "a few times a day", which
-understated six. **Send only after the hub confirms a scan ran with the
-YardScout name.**
+understated six. Confirmed 2026-11-16: scan 43923253337 read all three yards under the
+YardScout name (4,259 cars), so the note can go. The Sucuri sentence is
+conditional on purpose: the reader does not record whether the check came
+up on a given scan (one test request with the new name got the list with no
+check at all), so "when that check stops our scanner" is what can be said.
 
 Hi,
 
 I run YardScout (yardscout.io), a website and app, free to use, that helps DIY mechanics find cars in self-service yards near them. We list all three Harry's yards (Hazle Township, Allentown and Pennsburg), and every car links back to wegotused.com.
 
-I would like your OK for that. Our scanner reads your public inventory pages about every four hours: roughly 290 pages a pass, one page a second. It identifies itself as "YardScout/1.12 (+https://yardscout.io)". Your site has a Sucuri security check in front of it, and today our scanner answers that check itself to get the pages. I would rather have your permission than rely on that. Could you allow the scanner by name, or send a daily file instead? Any format works.
+I would like your OK for that. Our scanner reads your public inventory pages about every four hours: roughly 290 pages a pass, one page a second. It identifies itself as "YardScout/1.12 (+https://yardscout.io)". Your site has a Sucuri security check in front of it. When that check stops our scanner, the scanner answers it by itself and carries on. I would rather have your permission than rely on that. Could you allow the scanner by name, or send a daily file instead? Any format works.
 
 If you would rather not be listed, tell me and I will take your yards out.
 
