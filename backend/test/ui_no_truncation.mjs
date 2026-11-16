@@ -527,6 +527,23 @@ const SCREENS = [
     await settle(page, 300);
     await page.evaluate(() => { const n = document.getElementById('first-run-note'); n.scrollIntoView({ block: 'center' }); });
   }, async (page) => { await page.evaluate(() => { localStorage.setItem('jh_honesty_ack', '1'); document.getElementById('first-run-note').style.display = 'none'; renderLive(); }); }],
+  // The one alert card in the feed (2026-11-16): for someone with no watch,
+  // after the first dozen cars. Watches are set aside for the screen.
+  ['feed-alert-card', async (page) => {
+    await tab(page, 'live');
+    await page.evaluate(() => {
+      window.__acWl = loadWatchlist();
+      saveWatchlist([]);
+      localStorage.removeItem('ys_alert_card_x');
+      _alertCardGone = false;
+      renderLive();
+      const c = document.getElementById('alert-card');
+      if (!c) throw new Error('no alert card in the feed');
+      if (c.querySelector('.pro-box')) throw new Error('a Pro prompt inside the alert card');
+      c.scrollIntoView({ block: 'center' });
+    });
+    await settle(page, 400);
+  }, async (page) => { await page.evaluate(() => { saveWatchlist(window.__acWl || []); window.__acWl = null; renderLive(); window.scrollTo(0, 0); }); }],
   // Car search (2026-11-12): the suggestion list open, a pick applied, and a
   // #cars= link for a model not in range (the box prefilled + a note).
   ['car-search', async (page) => {

@@ -152,35 +152,52 @@ try {
   }
 
   /* ---------- 1b. the order of the list ---------- */
-  console.log('1b. Newest first; within a day, photos first, then the nearest');
+  console.log('1b. Newest arrivals, photos leading (a photo counts as one day newer)');
   {
     const { page, ctx } = await open({ w: 390, h: 844 });
     const o = await page.evaluate(() => {
-      const list = getFilteredLive().slice(0, 800);
-      const day = (v) => yardDateMs(v.dateAdded), ph = (v) => listPhotoFlag(v);
+      const list = getFilteredLive().slice(0, 1200);
+      const ph = (v) => listPhotoFlag(v);
+      const day = (v) => { const ts = yardDateMs(v.dateAdded); if (!ts) return 0; const d = new Date(ts); return Math.round(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 86400000); };
+      const eff = (v) => (day(v) ? day(v) + ph(v) * PHOTO_DAY_BOOST : 0);
       const dist = (v) => { const d = vehicleDistanceMi(v); return d == null ? 1e9 : d; };
-      let dateOk = true, photoOk = true, distOk = true;
+      let effOk = true, photoOk = true, dayOk = true, distOk = true, lagOk = true, boosted = 0;
       for (let i = 1; i < list.length; i++) {
         const a = list[i - 1], b = list[i];
-        if (day(a) < day(b)) dateOk = false;
-        if (day(a) !== day(b)) continue;
+        if (eff(a) < eff(b)) effOk = false;
+        // The car above is never more than the boost older than the car below it.
+        if (day(a) && day(b) - day(a) > PHOTO_DAY_BOOST) lagOk = false;
+        if (day(a) && day(b) > day(a)) boosted++;
+        if (eff(a) !== eff(b)) continue;
         if (ph(a) < ph(b)) photoOk = false;
-        if (ph(a) === ph(b) && dist(a) > dist(b) + 1e-9) distOk = false;
+        if (ph(a) !== ph(b)) continue;
+        if (day(a) < day(b)) dayOk = false;
+        if (day(a) === day(b) && dist(a) > dist(b) + 1e-9) distOk = false;
       }
-      // Days that hold both kinds, so the photo rule is really exercised.
-      const byDay = new Map();
-      for (const v of list) { const s = byDay.get(day(v)) || [0, 0]; s[ph(v)]++; byDay.set(day(v), s); }
-      const mixedDays = [...byDay.values()].filter((s) => s[0] && s[1]).length;
+      const flags = [0, 0]; for (const v of list) flags[ph(v)]++;
       const keys = [...document.querySelectorAll('#live-grid > .car-tile')].slice(0, 20).map((t) => t.dataset.vkey);
       // The flag agrees with what a tile draws.
       const flagTrue = list.slice(0, 60).every((v) => { const ex = extrasFor(v); const info = ex && ex[0] ? photoInfo(ex[0]) : null; return ph(v) === (info && info.inList ? 1 : 0); });
-      return { n: list.length, dateOk, photoOk, distOk, mixedDays, flagTrue, same: keys.length > 0 && keys.every((k, i) => vehicleKey(list[i]) === k), sort: document.getElementById('live-sort').value };
+      const unknownLast = (() => { const k = list.findIndex((v) => !day(v)); return k < 0 || list.slice(k).every((v) => !day(v)); })();
+      return { n: list.length, effOk, photoOk, dayOk, distOk, lagOk, boosted, flags, flagTrue, unknownLast, boost: PHOTO_DAY_BOOST,
+        same: keys.length > 0 && keys.every((k, i) => vehicleKey(list[i]) === k), sort: document.getElementById('live-sort').value, since: FEED_SINCE_DAY };
     });
-    ok(o.sort === 'date-desc' && o.dateOk, 'newest first: the set-out day never goes up down the list', o);
-    ok(o.mixedDays > 0 && o.photoOk && o.flagTrue, 'within a day: cars whose photo shows in the list come before the ones without', o);
-    ok(o.distOk, 'within a day and the same photo state: the nearest first', o);
+    ok(o.sort === 'date-desc' && o.since === null && o.effOk && o.boost === 1, 'newest first, where a car with a list photo counts as one day newer', o);
+    ok(o.lagOk, 'never more than a day out of date order: no car sits above one set out two or more days after it', o);
+    ok(o.flags[0] > 0 && o.flags[1] > 0 && o.photoOk && o.flagTrue, 'on a tie the car whose photo shows in the list comes first', o);
+    ok(o.dayOk && o.distOk, 'then the truly newer day, then the nearest yard', o);
+    ok(o.unknownLast, 'cars with no set-out date stay last', o);
     ok(o.same, 'the tiles on screen are the top of that list', o);
     await ctx.close();
+    // A returning visitor: everything set out since the last visit leads, photo or not.
+    const R = await open({ w: 390, h: 844, storage: { ys_last_visit_day: daysAgo(3) } });
+    const r = await R.page.evaluate(() => {
+      const list = getFilteredLive();
+      const n = list.filter((v) => setOutSince(v, FEED_SINCE_DAY)).length;
+      return { since: FEED_SINCE_DAY, n, total: list.length, lead: list.slice(0, n).every((v) => setOutSince(v, FEED_SINCE_DAY)), rest: list.slice(n, n + 400).every((v) => !setOutSince(v, FEED_SINCE_DAY)) };
+    });
+    ok(r.since && r.n > 0 && r.n < r.total && r.lead && r.rest, 'returning visitor: the cars set out since the last visit lead the list, so the divider still marks where they end', r);
+    await R.ctx.close();
   }
 
   /* ---------- 2-6, 8, 11 on one phone page ---------- */
@@ -592,6 +609,68 @@ try {
     await Z.page.waitForTimeout(500);
     ok(await Z.page.evaluate(() => getComputedStyle(document.getElementById('app-promo')).display === 'none' && getComputedStyle(document.getElementById('zip-banner')).display !== 'none'), 'not on the zip card');
     await Z.ctx.close();
+  }
+
+  console.log('12. One alert card in the feed');
+  {
+    // Phone, no watch: after the first dozen cars (six rows of two).
+    const C = await open({ w: 390, h: 844 });
+    const c = await C.page.evaluate(() => {
+      const g = document.getElementById('live-grid'), card = document.getElementById('alert-card');
+      const kids = [...g.children], tiles = [...g.querySelectorAll(':scope > .car-tile')];
+      return { n: g.querySelectorAll('.alert-card').length, after: card ? tiles.indexOf(card.previousElementSibling) : -2, full: card ? getComputedStyle(card).gridColumnStart + '/' + getComputedStyle(card).gridColumnEnd : '',
+        text: card ? card.querySelector('p').textContent.replace(/\s+/g, ' ').trim() : '', btn: card ? card.querySelector('.alert-card-go').textContent.trim() : '',
+        pro: card ? card.querySelectorAll('.pro-box, .pro-badge').length : -1, firstScreen: card ? card.getBoundingClientRect().top < innerHeight : null, kids: kids.length };
+    });
+    ok(c.n === 1 && c.after === 11, 'phone: one card, after the twelfth tile (six whole rows)', c);
+    ok(c.text === 'Hunting one car? Tell us which and we\u2019ll watch every yard near you for it.' && c.btn === 'Set an alert', 'website wording: what a watch does here, and one button', c);
+    ok(c.pro === 0 && c.firstScreen === false, 'no Pro prompt in it, and it is not on the first screen', c);
+    ok(!(await tracked(C.page)).includes('alert-card-shown'), 'not counted while it is still below the screen');
+    await C.page.evaluate(() => document.getElementById('alert-card').scrollIntoView({ block: 'center' }));
+    await C.page.waitForTimeout(500);
+    ok((await tracked(C.page)).filter((e) => e === 'alert-card-shown').length === 1, 'counted once when it comes into view');
+    await C.page.evaluate(() => renderLive());
+    await C.page.waitForTimeout(300);
+    ok(await C.page.evaluate(() => document.querySelectorAll('#live-grid .alert-card').length === 1) && (await tracked(C.page)).filter((e) => e === 'alert-card-shown').length === 1, 'a re-render keeps one card and does not count it again');
+    // A make picked: the watch strip speaks there, the card steps aside.
+    await C.page.evaluate(() => { const m = document.getElementById('live-filter-make'); m.value = 'Toyota'; m.dispatchEvent(new Event('change', { bubbles: true })); });
+    await C.page.waitForTimeout(400);
+    ok(await C.page.evaluate(() => !document.getElementById('alert-card') && !!document.querySelector('#live-grid .watch-strip')), 'with a make picked: no card (the watch strip is there)');
+    await C.page.evaluate(() => { const m = document.getElementById('live-filter-make'); m.value = ''; m.dispatchEvent(new Event('change', { bubbles: true })); });
+    await C.page.waitForTimeout(400);
+    // The button: the Alerts tab, the make field in view and focused.
+    await C.page.evaluate(() => document.getElementById('alert-card').scrollIntoView({ block: 'center' }));
+    await C.page.click('#alert-card .alert-card-go');
+    await C.page.waitForTimeout(400);
+    const g = await C.page.evaluate(() => { const mk = document.getElementById('alert-make'), r = mk.getBoundingClientRect(); return { tab: document.getElementById('tab-alerts').classList.contains('active'), focus: document.activeElement === mk, inView: r.top >= 0 && r.bottom <= innerHeight }; });
+    ok(g.tab && g.focus && g.inView && (await tracked(C.page)).includes('alert-card'), 'Set an alert: the Alerts tab with the Make field in view and focused, counted', g);
+    await C.ctx.close();
+
+    // Dismissed: gone, and gone on the next visit.
+    const D = await open({ w: 390, h: 844 });
+    await D.page.evaluate(() => document.getElementById('alert-card').scrollIntoView({ block: 'center' }));
+    await D.page.click('#alert-card .alert-card-x');
+    ok(await D.page.evaluate(() => !document.getElementById('alert-card') && localStorage.getItem('ys_alert_card_x') === '1') && (await tracked(D.page)).includes('alert-card-x'), 'the x removes it, remembers that, and is counted');
+    await D.page.evaluate(() => renderLive());
+    ok(await D.page.evaluate(() => !document.getElementById('alert-card')), 'a re-render does not bring it back');
+    await D.page.reload({ waitUntil: 'domcontentloaded' });
+    await D.page.waitForFunction(() => typeof liveComplete !== 'undefined' && liveComplete, null, { timeout: 180000 });
+    await D.page.waitForTimeout(500);
+    ok(await D.page.evaluate(() => !document.getElementById('alert-card') && document.querySelectorAll('#live-grid > .car-tile').length > 12), 'nor does the next load');
+    await D.ctx.close();
+
+    // Someone with a watch never sees it; desktop places it after whole rows; the app says "push".
+    const W = await open({ w: 390, h: 844, storage: { [WL]: JSON.stringify([{ make: 'Honda', model: 'Civic', yrMin: null, yrMax: null, matchOnly: true, radiusMi: 100, lat: 37.35, lng: -121.89, addedAt: '2026-10-02T10:00:00.000Z~abc123' }]) } });
+    ok(await W.page.evaluate(() => !document.getElementById('alert-card')), 'with a watch saved: no card');
+    await W.ctx.close();
+    const K = await open({ w: 1280, h: 900 });
+    const k = await K.page.evaluate(() => { const g = document.getElementById('live-grid'), card = document.getElementById('alert-card'); const cols = getComputedStyle(g).gridTemplateColumns.split(' ').filter(Boolean).length; return { cols, after: card ? [...g.querySelectorAll(':scope > .car-tile')].indexOf(card.previousElementSibling) + 1 : -1 }; });
+    ok(k.cols === 5 && k.after === 15, 'desktop (five columns): after three whole rows', k);
+    await K.ctx.close();
+    const N = await open({ w: 390, h: 844, native: 'ios' });
+    const nt = await N.page.evaluate(() => { const c = document.getElementById('alert-card'); return c ? c.querySelector('p').textContent.replace(/\s+/g, ' ').trim() : ''; });
+    ok(nt === 'Hunting one car? Tell us which and we\u2019ll send a push when one lands near you.', 'the apps: the card says a push', nt);
+    await N.ctx.close();
   }
 } finally {
   await browser.close();

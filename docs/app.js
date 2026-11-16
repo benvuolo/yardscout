@@ -46,6 +46,9 @@ const FUNNEL_EVENTS = {
   // connection appears to come from (/geo), once per visit; and a zip or
   // "Use my location" then replacing that guess (see A PLACE FOR THIS VISIT).
   'first-view-guess': 'first-view-guess', 'guess-replaced': 'guess-replaced',
+  // The one alert card in the Cars feed (2026-11-16, feedPlaceAlertCard):
+  // came into view (once a visit), its button used, dismissed.
+  'alert-card-shown': 'alert-card-shown', 'alert-card': 'alert-card', 'alert-card-x': 'alert-card-x',
 };
 /* Our own search pages tag their buttons utm_source=page (2026-11-16,
  * backend/site-proxy/src/share.js). That is an internal hop, not a channel:
@@ -1313,6 +1316,9 @@ function extrasFor(v) {
  * or the extras table change (photoEpochBump). */
 let _photoEpoch = 0;
 function photoEpochBump() { _photoEpoch++; }
+// Newest arrivals: a car whose photo shows in the list counts as this many
+// days newer (getFilteredLive, 'date-desc').
+const PHOTO_DAY_BOOST = 1;
 function listPhotoFlag(v) {
   if (v._lpE === _photoEpoch) return v._lp;
   const ex = extrasFor(v);
@@ -4571,15 +4577,38 @@ function getFilteredLive() {
   }
   const tieFn = tsOf, tieAscEff = tieAsc;
   if (sortBy === 'date-desc') {
-    // Newest first. Yards publish a set-out DAY, so many cars tie. Within a
-    // day: cars whose photo shows in the list first, then the nearest yard.
-    // (It used to be the order of the data files, which put one yard's whole
-    // batch first, photo or not: a first screen of drawings while cars with
-    // photos set out the same day sat further down. 2026-11-16.)
+    // Newest arrivals, with photos leading (2026-11-16, the owner's phone and
+    // desktop: "lots of no car pics"). Yards publish a set-out DAY, so many
+    // cars tie, and the order used to be the order of the data files: one
+    // yard's whole batch first, photo or not, so a day whose only arrivals
+    // were at a yard with no photos filled the first screens with drawings.
+    //   1. cars set out since the last visit lead (the divider counts on it);
+    //   2. then by day, where a car whose photo shows in the list counts as
+    //      ONE day newer (PHOTO_DAY_BOOST): yesterday's photographed cars
+    //      come before today's unphotographed ones, never more than a day;
+    //   3. on a tie the photo first, then the truly newer day, then the
+    //      nearest yard.
+    // Every tile still shows its own set-out date; unknown dates stay last.
     const dOf = v => { const d = vehicleDistanceMi(v); return d == null ? 1e9 : d; };
-    const dec = filtered.map(v => [tsOf(v), listPhotoFlag(v), dOf(v), v]);
-    dec.sort((x, y) => (y[0] - x[0]) || (y[1] - x[1]) || (x[2] - y[2]));
-    filtered = dec.map(d => d[3]);
+    // The set-out day as a whole number (calendar days, no clock or DST in
+    // it), remembered on the car; 0 when the date is unknown.
+    const dayOf = v => {
+      if (v._day === undefined) {
+        const ts = tsOf(v);
+        if (!ts) v._day = 0;
+        else { const d = new Date(ts); v._day = Math.round(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 86400000); }
+      }
+      return v._day;
+    };
+    // Same rule as setOutSince: set out on a day after the last visit's day.
+    let sinceIdx = null;
+    if (FEED_SINCE_DAY) { const [y, m, d] = FEED_SINCE_DAY.split('-').map(Number); sinceIdx = Math.round(Date.UTC(y, m - 1, d) / 86400000); }
+    const dec = filtered.map(v => {
+      const day = dayOf(v), ph = listPhotoFlag(v);
+      return [sinceIdx != null && day > sinceIdx ? 1 : 0, day ? day + ph * PHOTO_DAY_BOOST : 0, ph, day, dOf(v), v];
+    });
+    dec.sort((x, y) => (y[0] - x[0]) || (y[1] - x[1]) || (y[2] - x[2]) || (y[3] - x[3]) || (x[4] - y[4]));
+    filtered = dec.map(d => d[5]);
   } else if (keyFn) {
     const dec = filtered.map(v => [keyFn(v), tieFn(v), v]);
     dec.sort((x, y) => (asc ? x[0] - y[0] : y[0] - x[0])
@@ -5373,6 +5402,7 @@ function renderLive() {
   feedObserve();
   feedPlaceNote();
   feedPlaceStrip();   // after the note, so the strip ends up ahead of it
+  feedPlaceAlertCard();
   stripAskCount();
   if (_feed.shown) appPromoListRendered();
 }
@@ -5392,6 +5422,76 @@ function feedPlaceStrip() {
   const cols = getComputedStyle(grid).gridTemplateColumns.split(' ').filter(Boolean).length || 1;
   tiles[Math.min(cols, tiles.length) - 1].after(strip);
 }
+
+/* ---- One alert card in the feed (owner, 2026-11-16: "Yes add the alert
+ * card"; alerts are the flagship) ----
+ * For someone who is only scrolling and has no alert set: one card, after
+ * the first dozen cars (a whole number of rows, at least three), that says
+ * what an alert does and opens the Alerts form. Never with a watch saved,
+ * never while a make or model is picked (the watch strip speaks there),
+ * never again once dismissed (localStorage ys_alert_card_x). Counted when it
+ * comes into view ('alert-card-shown', once a visit), when its button is
+ * used ('alert-card') and when it is dismissed ('alert-card-x'). No Pro
+ * prompt in it: the watch toast makes that offer after a watch exists. */
+const ALERT_CARD_AFTER = 12, ALERT_CARD_KEY = 'ys_alert_card_x';
+let _alertCardIO = null, _alertCardGone = false;
+function alertCardWanted() {
+  if (_alertCardGone || focusedCarKey || liveSinceOnly || liveWatchScope()) return false;
+  try { if (localStorage.getItem(ALERT_CARD_KEY) === '1') return false; } catch (e) { /* private mode: shown */ }
+  return loadWatchlist().length === 0;
+}
+function alertCardHtml() {
+  // Each line says only what happens for THIS visitor: the apps push; on
+  // the website a watch shows in Alerts (the toast then offers the Monday
+  // email or the app).
+  const line = IS_NATIVE
+    ? 'Tell us which and we’ll send a push when one lands near you.'
+    : 'Tell us which and we’ll watch every yard near you for it.';
+  return `<div class="alert-card" id="alert-card" style="grid-column:1/-1;" role="region" aria-label="Set an alert for a car">
+      ${ICON.bell}
+      <p><strong>Hunting one car?</strong> ${line}</p>
+      <button type="button" class="btn btn-primary alert-card-go">Set an alert</button>
+      <button type="button" class="alert-card-x" aria-label="Dismiss">&times;</button>
+    </div>`;
+}
+function feedPlaceAlertCard() {
+  if (!alertCardWanted()) return;
+  const grid = document.getElementById('live-grid');
+  const tiles = grid.querySelectorAll(':scope > .car-tile');
+  const cols = getComputedStyle(grid).gridTemplateColumns.split(' ').filter(Boolean).length || 1;
+  // After whole rows: the first dozen cars, and at least three rows.
+  const after = Math.ceil(Math.max(ALERT_CARD_AFTER, 3 * cols) / cols) * cols;
+  if (tiles.length <= after) return;   // a short list: nothing to interrupt
+  tiles[after - 1].insertAdjacentHTML('afterend', alertCardHtml());
+  if (!('IntersectionObserver' in window)) return;
+  if (_alertCardIO) _alertCardIO.disconnect();
+  _alertCardIO = new IntersectionObserver((entries) => {
+    if (!entries.some(e => e.isIntersecting)) return;
+    _alertCardIO.disconnect();
+    if (onceThisVisit('ys_alert_card_seen')) track('alert-card-shown');
+  }, { threshold: 0.6 });
+  _alertCardIO.observe(document.getElementById('alert-card'));
+}
+document.getElementById('live-grid').addEventListener('click', (e) => {
+  const go = e.target.closest('.alert-card-go'), x = e.target.closest('.alert-card-x');
+  if (!go && !x) return;
+  e.preventDefault();
+  if (x) {
+    _alertCardGone = true;
+    try { localStorage.setItem(ALERT_CARD_KEY, '1'); } catch (err) { /* private mode: gone for this visit */ }
+    track('alert-card-x');
+    const card = document.getElementById('alert-card');
+    if (card) card.remove();
+    return;
+  }
+  track('alert-card');
+  jhOpenAlertsTab();
+  const mk = document.getElementById('alert-make');
+  if (mk) {
+    mk.scrollIntoView({ block: 'center' });
+    try { mk.focus({ preventScroll: true }); } catch (err) { /* older engines */ }
+  }
+});
 
 /* ---- First visit (CARS FEED item 9) ----
  * While "How to read this" is not acknowledged (jh_honesty_ack), a phone

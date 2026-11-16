@@ -3707,6 +3707,17 @@ select { white-space: normal; height: auto; }
 .since-line b { font-family: var(--font-mono); }
 .since-line .btn { flex: 0 1 auto; }
 .since-line.on { border-color: var(--border-dark); background: var(--surface); }
+/* One alert card in the feed (2026-11-16): a quiet full-row line among the
+   tiles for someone with no alert set. Same family as the since-line. */
+.alert-card {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2) var(--s3);
+  padding: var(--s3) var(--s3) var(--s3) var(--s4); border: 1px solid var(--border); border-left: 3px solid var(--accent);
+  border-radius: var(--r-sm); background: var(--accent-soft);
+}
+.alert-card > .ico { flex: none; color: var(--accent); }
+.alert-card p { flex: 1 1 14em; min-width: 0; margin: 0; font-size: var(--t-sm); line-height: 1.45; color: var(--text); overflow-wrap: anywhere; }
+.alert-card .btn { flex: 0 1 auto; min-height: var(--tap); }
+.alert-card-x { flex: none; min-width: var(--tap); min-height: var(--tap); border: 0; background: none; color: var(--text); font-size: 1.375rem; line-height: 1; cursor: pointer; border-radius: var(--r-sm); }
 .feed-divider { display: flex; align-items: center; gap: var(--s3); margin: var(--s2) 0; font: 700 var(--t-xs)/1.35 var(--font-ui); letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-dim); }
 .feed-divider::before, .feed-divider::after { content: ''; flex: 1 1 var(--s4); height: 1px; background: var(--border-dark); }
 .feed-divider span { flex: 0 1 auto; min-width: 0; text-align: center; overflow-wrap: anywhere; }
