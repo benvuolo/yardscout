@@ -128,19 +128,51 @@ def load_photo_sources(path: Path | None = None) -> dict:
         return {}
 
 
+# Resized photos (owner decision 2026-11-16, "Do it"): a source whose only
+# image is a big file may ALSO publish `thumb` (list size) and `thumbLarge`
+# (car screen, for multi-megabyte originals) addresses on an image-resizing
+# service. The service fetches the file from the yard's own URL, shrinks it
+# and keeps a cached copy; the phone loads the small copy. This is the one
+# exception to "never proxied" in the 2026-11-06 photo policy, and it has
+# three limits: only the services named here; only for a file on the source's
+# own host (checked below and again in the app); and never to get around a
+# refusal. A host that answers the service with an error is left direct
+# (URG's CloudFront answered it 403 on 2026-11-16: no thumb for those four).
+# `card` and `large` stay the yard's own URLs, so app builds that predate
+# this keep working unchanged, and removing the thumb fields is the off switch.
+PHOTO_RESIZE_HOSTS = ("wsrv.nl",)
+
+
+def _valid_resized_url(url, thumb_host: str, src_host: str) -> bool:
+    return (isinstance(url, str) and thumb_host in PHOTO_RESIZE_HOSTS and bool(src_host)
+            and url.startswith(f"https://{thumb_host}/?url=https://{src_host}/"))
+
+
 def published_photo_sources(sources: dict) -> dict:
     """The enabled sources only, in the shape the app reads."""
     out = {}
     for key, src in sources.items():
         if not (isinstance(src, dict) and src.get("enabled") is True):
             continue
-        pats = [{"code": p["code"], "card": p["card"], "large": p["large"]}
-                for p in src.get("patterns") or []
-                if isinstance(p, dict) and all(isinstance(p.get(k), str) for k in ("code", "card", "large"))]
+        thumb_host = src.get("thumbHost") if isinstance(src.get("thumbHost"), str) else ""
+        src_host = src.get("host", "") if isinstance(src.get("host", ""), str) else ""
+        pats = []
+        has_thumb = False
+        for p in src.get("patterns") or []:
+            if not (isinstance(p, dict) and all(isinstance(p.get(k), str) for k in ("code", "card", "large"))):
+                continue
+            pub = {"code": p["code"], "card": p["card"], "large": p["large"]}
+            for field in ("thumb", "thumbLarge"):
+                if _valid_resized_url(p.get(field), thumb_host, src_host):
+                    pub[field] = p[field]
+                    has_thumb = True
+            pats.append(pub)
         if pats and isinstance(src.get("label"), str):
             # onCards: false = too heavy for list cards (car screen + viewer only).
             out[key] = {"label": src["label"], "host": src.get("host", ""),
                         "onCards": src.get("onCards") is not False, "patterns": pats}
+            if has_thumb:
+                out[key]["thumbHost"] = thumb_host
             # heavy: the yard offers ONLY a large original; the app must not
             # load it on its own (car screen: "Photo available - tap to load
             # (~approxKB KB)"; never on cards).

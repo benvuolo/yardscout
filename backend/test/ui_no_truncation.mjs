@@ -77,10 +77,14 @@ function publishedPhotoSources() {
   const out = {};
   for (const [key, src] of Object.entries(f.sources || {})) {
     if (!src || src.enabled !== true || typeof src.label !== 'string') continue;
+    // Resized copies (2026-11-16): published only for a named resizing host
+    // and only when they ask it for a file on the source's own host.
+    const okT = (u) => typeof u === 'string' && src.thumbHost === 'wsrv.nl' && u.startsWith(`https://wsrv.nl/?url=https://${src.host}/`);
     const pats = (src.patterns || []).filter(p => p && ['code', 'card', 'large'].every(k => typeof p[k] === 'string'))
-      .map(p => ({ code: p.code, card: p.card, large: p.large }));
+      .map(p => ({ code: p.code, card: p.card, large: p.large, ...(okT(p.thumb) ? { thumb: p.thumb } : {}), ...(okT(p.thumbLarge) ? { thumbLarge: p.thumbLarge } : {}) }));
     if (pats.length) out[key] = { label: src.label, host: src.host || '', onCards: src.onCards !== false,
-      ...(src.heavy === true ? { heavy: true, approxKB: src.approxKB } : {}), patterns: pats };
+      ...(src.heavy === true ? { heavy: true, approxKB: src.approxKB } : {}),
+      ...(pats.some(p => p.thumb || p.thumbLarge) ? { thumbHost: src.thumbHost } : {}), patterns: pats };
   }
   return out;
 }
@@ -703,11 +707,14 @@ const SCREENS = [
       const box = document.getElementById('yard-rows-body');
       const item = (v) => box.querySelector(`.yr-item[data-vkey="${CSS.escape(vehicleKey(v))}"]`);
       if (!/Photo on car page/.test(item(r1[0]).querySelector('.yr-tag-photo').textContent) || item(r1[0]).querySelector('.yr-thumb img')) throw new Error('car-screen-only source: tag or thumb wrong');
-      if (!/tap to load/.test(item(r1[1]).querySelector('.yr-tag-photo').textContent) || item(r1[1]).querySelector('.yr-thumb img')) throw new Error('heavy source: tag or thumb wrong');
+      // A heavy source (4 MB originals) with a resized copy shows that copy as
+      // the row thumb and needs no "tap to load" tag (2026-11-16).
+      const hImg = item(r1[1]).querySelector('.yr-thumb img');
+      if (item(r1[1]).querySelector('.yr-tag-photo') || !hImg || !/^https:\/\/wsrv\.nl\/\?url=https:\/\/inventory\.sturtevantauto\.com\//.test(hImg.getAttribute('src') || '')) throw new Error('heavy source with a resized copy: tag or thumb wrong');
       const real = [...box.querySelectorAll('.yr-item')].find(li => li.querySelector('.yr-thumb img'));
       if (real && real.querySelector('.yr-thumb img').getAttribute('loading') !== 'lazy') throw new Error('row thumb not lazy');
       const v = liveInventory.find(x => vehicleKey(x) === (real || {}).dataset?.vkey);
-      if (real && !(photoInfo(extrasFor(v)[0]) || {}).onCards) throw new Error('a car-screen-only photo shown as a row thumb');
+      if (real && !(photoInfo(extrasFor(v)[0]) || {}).inList) throw new Error('a car-screen-only photo shown as a row thumb');
     });
     await settle(page, 600);
   }, async (page) => { await page.evaluate(() => { for (const [k, e] of window.__thOrig || []) { if (e === undefined) delete vehicleExtras[k]; else vehicleExtras[k] = e; } window.__thOrig = null; hideYardRows(); }); await resetUi(page); }],

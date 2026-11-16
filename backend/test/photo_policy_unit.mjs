@@ -27,6 +27,7 @@ const fn = (name) => {
 const one = (re) => { const l = lines.find(x => re.test(x)); if (!l) throw new Error('missing ' + re); return l; };
 const ctx = vm.createContext({ URL });
 vm.runInContext([
+  one(/^const PHOTO_RESIZE_HOSTS = /), fn('resizedPhotoUrl'),
   one(/^let publishedPhotoSources = /), one(/^let _photoRules = /), one(/^const PHOTO_ASPECT = /),
   fn('setPublishedPhotoSources'), fn('photoInfo'),
   one(/^const heavyPhotosLoaded = /), fn('photoSizeText'), fn('photoBoxHtml'),
@@ -114,6 +115,72 @@ const hx = photoInfo('x12');
 check('heavy overrides onCards true; no approxKB -> "large file"', hx && hx.onCards === false && hx.approxKB === null && photoBoxHtml(hx, 'k', 't').includes('tap to load (large file)'), JSON.stringify(hx));
 setPublishedPhotoSources({ x: { label: 'Photo: X', host: 'x.example', heavy: 'yes', patterns: [{ code: 'x(\\d+)', card: 'https://x.example/{1}.jpg', large: 'https://x.example/{1}.jpg' }] } });
 check('heavy missing or not exactly true -> not heavy (normal photo)', photoInfo('x12') && photoInfo('x12').heavy === false && /<img/.test(photoBoxHtml(photoInfo('x12'), 'k', 't')));
+
+/* Resized photos (owner decision 2026-11-16): big-file sources also publish
+ * thumb / thumbLarge on an image-resizing service. Same shape as
+ * junkyard_scraper.py published_photo_sources() with the thumb fields. */
+const RESIZER = 'wsrv.nl';
+const publishFull = (srcs) => Object.fromEntries(Object.entries(srcs)
+  .filter(([, s]) => s && s.enabled === true && typeof s.label === 'string')
+  .map(([k, s]) => {
+    const okT = (u) => typeof u === 'string' && s.thumbHost === RESIZER && u.startsWith(`https://${RESIZER}/?url=https://${s.host}/`);
+    const pats = (s.patterns || []).map(p => ({ code: p.code, card: p.card, large: p.large,
+      ...(okT(p.thumb) ? { thumb: p.thumb } : {}), ...(okT(p.thumbLarge) ? { thumbLarge: p.thumbLarge } : {}) }));
+    return [k, { label: s.label, host: s.host || '', onCards: s.onCards !== false,
+      ...(s.heavy === true ? { heavy: true, approxKB: s.approxKB } : {}),
+      ...(pats.some(p => p.thumb || p.thumbLarge) ? { thumbHost: s.thumbHost } : {}), patterns: pats }];
+  })
+  .filter(([, s]) => s.patterns.length));
+setPublishedPhotoSources(publishFull(sources));
+const R = {
+  pap: 'q12/20261103123456/987654/3',
+  byot: 'b0123-4567-89ab-cdef',
+  ipull: 'iABC12345/front-left_1',
+  usautosupply: 'mSTK123456',
+  sturtevant: 'tSTK12345',
+  papva: 'utt87/ABC123/photo_1',
+};
+const withThumb = Object.entries(sources).filter(([, s]) => s.enabled === true && s.thumbHost).map(([k]) => k).sort();
+check('the sources that publish a resized copy are exactly pap, byot, ipull, usautosupply, sturtevant',
+  withThumb.join() === 'byot,ipull,pap,sturtevant,usautosupply', withThumb.join());
+for (const k of ['pap', 'byot', 'ipull', 'usautosupply', 'sturtevant']) {
+  const i = photoInfo(R[k]);
+  const inner = i && i.thumb ? new URL(i.thumb).searchParams.get('url') : '';
+  check(`${k}: resized copy is on ${RESIZER}, asks for the yard's own file, and the yard's URLs are unchanged`,
+    !!i && new URL(i.thumb).hostname === RESIZER && inner === i.url && new URL(i.url).hostname === sources[k].host && i.large === i.url && i.inList === true,
+    JSON.stringify(i));
+  const card = i ? photoBoxHtml(i, 'car-9', '2004 Honda Civic', 'card-photo', '<svg></svg>') : '';
+  const esc = (u) => u.replace(/&/g, '&amp;');
+  check(`${k}: a list card loads the resized copy, lazily, over the drawing`,
+    card.includes(`src="${esc(i.thumb)}"`) && /loading="lazy"/.test(card) && /has-illo/.test(card) && /onerror="photoImgFail\(this\)"/.test(card) && card.includes(sources[k].label), card);
+  check(`${k}: a failed resized copy falls back to the yard's own file only where that may show in lists`,
+    i.onCards ? card.includes(`data-direct="${esc(i.url)}"`) : !/data-direct/.test(card), card);
+}
+const ip = photoInfo(R.ipull);
+check('ipull: the car screen still loads the yard’s own file (no resized copy there)',
+  photoBoxHtml(ip, 'car-9', 't', 'cd-photo').includes(`src="${ip.url}"`) && !/data-direct/.test(photoBoxHtml(ip, 'car-9', 't', 'cd-photo')));
+const st = photoInfo(R.sturtevant);
+const stBox = photoBoxHtml(st, 'car-9', 't', 'cd-photo');
+check('sturtevant (4 MB originals): the car screen shows the resized large copy with no tap-to-load, and never the original on its own',
+  st.heavy === true && !!st.thumbLarge && stBox.includes(`src="${st.thumbLarge.replace(/&/g, '&amp;')}"`) && !/tap to load/.test(stBox) && /data-photo-vkey="car-9"/.test(stBox) && !stBox.includes(`src="${st.large}"`), stBox);
+const pv = photoInfo(R.papva);
+check('papva (its host refused the service): no resized copy; its own file shows in lists as before',
+  pv && pv.thumb === '' && pv.inList === pv.onCards && photoBoxHtml(pv, 'k', 't', 'card-photo').includes(`src="${pv.url}"`), JSON.stringify(pv));
+const lk = photoInfo(C.pyp);
+check('LKQ and the other light sources are untouched (no resized copy)', lk && lk.thumb === '' && lk.thumbLarge === '' && lk.inList === true);
+// The resizer may only be one we named, and may only be asked for the source's own host.
+const bad = (thumbHost, thumb) => { setPublishedPhotoSources({ x: { label: 'Photo: X', host: 'x.example', onCards: false, thumbHost, patterns: [{ code: 'x(\\d+)', card: 'https://x.example/{1}.jpg', large: 'https://x.example/{1}.jpg', thumb }] } }); return photoInfo('x12'); };
+let b1 = bad('evil.example', 'https://evil.example/?url=https://x.example/{1}.jpg');
+check('a resizing host we did not name is ignored (the photo behaves as before)', b1 && b1.thumb === '' && b1.inList === false && b1.url === 'https://x.example/12.jpg', JSON.stringify(b1));
+b1 = bad('wsrv.nl', 'https://wsrv.nl/?url=https://other.example/{1}.jpg');
+check('a resized address that asks for another host’s file is ignored', b1 && b1.thumb === '' && b1.inList === false, JSON.stringify(b1));
+b1 = bad('wsrv.nl', 'http://wsrv.nl/?url=https://x.example/{1}.jpg');
+check('a resized address that is not https is ignored', b1 && b1.thumb === '');
+b1 = bad('wsrv.nl', 'https://wsrv.nl.evil.example/?url=https://x.example/{1}.jpg');
+check('a look-alike of the resizing host is ignored', b1 && b1.thumb === '');
+b1 = bad('wsrv.nl', 'https://wsrv.nl/?url=https://x.example/{1}.jpg&w=640');
+check('a valid resized address makes a car-screen-only source show in lists', b1 && b1.thumb === 'https://wsrv.nl/?url=https://x.example/12.jpg&w=640' && b1.inList === true && b1.onCards === false);
+// Older data (no thumb fields) behaves exactly as before: checked by every test above this block.
 
 // Newer data without photoSources (older format, or a full takedown) clears everything.
 setPublishedPhotoSources(publish(sources));

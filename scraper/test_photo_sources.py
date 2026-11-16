@@ -72,6 +72,34 @@ check("sources of at most ~800 px are on list cards",
       {k: PUB[k]["onCards"] for k in ("byot", "papva", "upullitwa", "aesop", "midwayupull", "pap")})
 check("onCards defaults to true", js.published_photo_sources({"x": {"enabled": True, "label": "Photo: X", "host": "h",
       "patterns": [{"code": "^x$", "card": "https://h/a", "large": "https://h/a"}]}})["x"]["onCards"] is True)
+
+# Resized copies (owner decision 2026-11-16, "Do it"): the big-file sources
+# also publish thumb / thumbLarge on the resizing service; card and large
+# stay the yard's own URLs, so older app builds are unaffected.
+RESIZED = {"pap", "byot", "ipull", "usautosupply", "sturtevant"}
+check("exactly the big-file sources publish a resized copy",
+      {k for k, s in PUB.items() if s.get("thumbHost")} == RESIZED, sorted(k for k, s in PUB.items() if s.get("thumbHost")))
+check("the resizing host is one we named", all(PUB[k]["thumbHost"] in js.PHOTO_RESIZE_HOSTS for k in RESIZED))
+check("every resized address asks the service for that source's own card file",
+      all(p["thumb"].startswith("https://wsrv.nl/?url=" + p["card"] + "&") for k in RESIZED for p in PUB[k]["patterns"]),
+      [p.get("thumb") for k in RESIZED for p in PUB[k]["patterns"]][:2])
+check("card and large are still the yard's own URLs for those sources",
+      all(p[w].startswith("https://" + PUB[k]["host"] + "/") for k in RESIZED for p in PUB[k]["patterns"] for w in ("card", "large")))
+check("sturtevant (4 MB originals) also publishes a resized large copy; it stays heavy for older builds",
+      all("thumbLarge" in p for p in PUB["sturtevant"]["patterns"]) and PUB["sturtevant"].get("heavy") is True)
+check("the URG sources publish no resized copy (their host refused the service on 2026-11-16)",
+      all(not PUB[k].get("thumbHost") and all("thumb" not in p for p in PUB[k]["patterns"])
+          for k in ("papva", "upullitwa", "aesop", "midwayupull")))
+_fake = lambda host, thumb_host, thumb: js.published_photo_sources({"x": {  # noqa: E731
+    "enabled": True, "label": "Photo: X", "host": host, "thumbHost": thumb_host,
+    "patterns": [{"code": "^x(\\d+)$", "card": f"https://{host}/{{1}}.jpg", "large": f"https://{host}/{{1}}.jpg", "thumb": thumb}]}})["x"]
+check("a resized address on a host we did not name is not published",
+      "thumbHost" not in _fake("h.example", "evil.example", "https://evil.example/?url=https://h.example/{1}.jpg")
+      and "thumb" not in _fake("h.example", "evil.example", "https://evil.example/?url=https://h.example/{1}.jpg")["patterns"][0])
+check("a resized address that asks for another host's file is not published",
+      "thumb" not in _fake("h.example", "wsrv.nl", "https://wsrv.nl/?url=https://other.example/{1}.jpg")["patterns"][0])
+check("a valid resized address is published with its host",
+      _fake("h.example", "wsrv.nl", "https://wsrv.nl/?url=https://h.example/{1}.jpg&w=640").get("thumbHost") == "wsrv.nl")
 check("LKQ card is not cropped (mode=max, not mode=crop)",
       "mode=max" in PUB["pyp"]["patterns"][0]["card"] and "mode=crop" not in PUB["pyp"]["patterns"][0]["card"])
 

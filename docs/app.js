@@ -1078,16 +1078,39 @@ const DATA_CACHE = 'jh-data-v1';
  * Photo policy: see "Chain photos" below (Sep 2026 policy superseded by the
  * 2026-11-06 owner decisions, incl. the narrow Pick-n-Pull exception). */
 /* Chain photos (owner decisions 2026-11-06, ops/hub.md): photos load from the
- * yard's own URL, credited, never downloaded/rehosted/proxied/cached (the
+ * yard's own URL, credited, never downloaded, rehosted or cached by us, and
+ * never proxied except for the resized copies described below (the
  * service worker ignores cross-origin requests). WHICH chains render is data,
  * not code: the scan publishes the enabled sources from
  * scraper/photo_sources.json as `photoSources` in data/inv/manifest.json and
  * data/vehicle_extras.json — {key: {label, host, patterns: [{code, card,
  * large}]}}. A takedown is a data publish (ops/yards.md "Photo takedown").
  * Fail closed: nothing published -> no photos. A pattern's URLs must be
- * https on that source's own published host, or the photo is skipped. */
+ * https on that source's own published host, or the photo is skipped.
+ *
+ * Resized photos (owner decision 2026-11-16, the one exception to "never
+ * proxied"): a source whose only image is a big file may also publish
+ * `thumbHost` and, per pattern, `thumb` (list size) and `thumbLarge` (car
+ * screen and viewer, for a multi-megabyte original). These are addresses on
+ * an image-resizing service that fetches the file from the yard's own URL
+ * and shrinks it. They are used only when the service is in
+ * PHOTO_RESIZE_HOSTS and the address asks it for a file on that source's own
+ * host; anything else is ignored and the photo behaves as it did before. A
+ * resized photo that fails to load gives way to the yard's own file where
+ * that may show in lists (onCards), else to the drawing. `card` and `large`
+ * are always the yard's own URLs (the removal request names `large`). */
+const PHOTO_RESIZE_HOSTS = ['wsrv.nl'];
+function resizedPhotoUrl(u, thumbHost, srcHost) {
+  if (!u || !thumbHost || !srcHost) return '';
+  try {
+    const x = new URL(u);
+    if (x.protocol !== 'https:' || x.hostname.toLowerCase() !== thumbHost) return '';
+    const inner = new URL(x.searchParams.get('url') || '');
+    return inner.protocol === 'https:' && inner.hostname.toLowerCase() === srcHost ? u : '';
+  } catch (e) { return ''; }
+}
 let publishedPhotoSources = null;
-let _photoRules = [];   // compiled [{key, label, host, rx, card, large}]
+let _photoRules = [];   // compiled [{key, label, host, rx, card, large, thumbHost, thumb, thumbLarge}]
 function setPublishedPhotoSources(ps) {
   // Each manifest / extras file replaces the last: data without photoSources
   // (older data, or a full takedown) clears every rule, so a switch-off never
@@ -1106,8 +1129,11 @@ function setPublishedPhotoSources(ps) {
       // only when tapped (approxKB says roughly how big).
       const heavy = src.heavy === true;
       const kb = Number(src.approxKB);
+      const thumbHost = typeof src.thumbHost === 'string' && PHOTO_RESIZE_HOSTS.includes(src.thumbHost.toLowerCase()) ? src.thumbHost.toLowerCase() : '';
       rules.push({ key, label: src.label, host: src.host.toLowerCase(), rx, card: pat.card, large: pat.large,
-        onCards: src.onCards !== false && !heavy, heavy, approxKB: heavy && Number.isFinite(kb) && kb > 0 ? Math.round(kb) : null });
+        onCards: src.onCards !== false && !heavy, heavy, approxKB: heavy && Number.isFinite(kb) && kb > 0 ? Math.round(kb) : null,
+        thumbHost, thumb: thumbHost && typeof pat.thumb === 'string' ? pat.thumb : '',
+        thumbLarge: thumbHost && typeof pat.thumbLarge === 'string' ? pat.thumbLarge : '' });
     }
   }
   publishedPhotoSources = ps;
@@ -1116,7 +1142,9 @@ function setPublishedPhotoSources(ps) {
 let vehicleExtras = null;
 
 /* Photo for a car's extras code, or null: {url (card), large (viewer),
- * label (credit), key, w, h (aspect hint for the box)}. */
+ * label (credit), key, w, h (aspect hint for the box)}. thumb / thumbLarge:
+ * the resized copies, '' when the source publishes none. inList: the photo
+ * may show in lists (its own file is light enough, or it has a thumb). */
 const PHOTO_ASPECT = { wapj: [240, 320], weller: [960, 1280] };
 function photoInfo(code) {
   if (!code || typeof code !== 'string' || code.length > 600) return null;
@@ -1130,7 +1158,10 @@ function photoInfo(code) {
     });
     if (!ok) return null;
     const [w, h] = r.key === 'wap' && /\.j$/.test(code) ? PHOTO_ASPECT.wapj : (PHOTO_ASPECT[r.key] || [4, 3]);
-    return { url: urls[0], large: urls[1], label: r.label, key: r.key, w, h, onCards: r.onCards, heavy: r.heavy, approxKB: r.approxKB };
+    const thumb = r.thumb ? resizedPhotoUrl(fill(r.thumb), r.thumbHost, r.host) : '';
+    const thumbLarge = r.thumbLarge ? resizedPhotoUrl(fill(r.thumbLarge), r.thumbHost, r.host) : '';
+    return { url: urls[0], large: urls[1], label: r.label, key: r.key, w, h, onCards: r.onCards, heavy: r.heavy, approxKB: r.approxKB,
+      thumb, thumbLarge, inList: r.onCards || !!thumb };
   }
   return null;
 }
@@ -1148,18 +1179,37 @@ function photoBoxHtml(info, key, title, cls, under) {
   const rawKey = key;
   key = escapeHtml(key);
   if (!info) return `<div class="photo-box photo-none ${cls || ''}" aria-hidden="true"><span>No photo from this yard</span></div>`;
-  if (info.heavy && !heavyPhotosLoaded.has(rawKey)) {
+  // A multi-megabyte original that has a resized copy needs no tap-to-load.
+  if (info.heavy && !info.thumbLarge && !heavyPhotosLoaded.has(rawKey)) {
     return `<button type="button" class="photo-box photo-heavy ${under ? 'has-illo ' : ''}${cls || ''}" data-photo-load="${key}" aria-label="Load the photo of the ${escapeHtml(title)} (${photoSizeText(info.approxKB)})">
       ${under || ''}<span class="photo-heavy-msg">Photo available &mdash; tap to load (${photoSizeText(info.approxKB)})</span>
       <span class="photo-credit">${escapeHtml(info.label)}</span>
     </button>`;
   }
-  // A heavy source has only the original: load `large` (on that tap) and show it.
-  const src = info.heavy ? info.large : info.url;
+  // List cards take the resized copy when the source has one. The car screen
+  // takes the yard's own file; for a heavy source that is the resized large
+  // copy, or the original once the person tapped to load it.
+  const onCard = /(^|\s)card-photo(\s|$)/.test(cls || '');
+  const tapped = info.heavy && heavyPhotosLoaded.has(rawKey);
+  const src = onCard ? (info.thumb || info.url)
+    : info.heavy ? (tapped ? info.large : (info.thumbLarge || info.large)) : info.url;
+  // Where the source's own file may show in lists, a resized copy that fails falls back to it.
+  const direct = onCard && info.thumb && info.onCards ? info.url : '';
   return `<button type="button" class="photo-box ${under ? 'has-illo ' : ''}${cls || ''}" data-photo-vkey="${key}" aria-label="View photo of the ${escapeHtml(title)}">
-      ${under || ''}<span class="ph-fill" aria-hidden="true"></span><img src="${escapeHtml(src)}" alt="" ${info.heavy ? '' : 'loading="lazy" '}decoding="async" width="${info.w}" height="${info.h}" onload="photoFill(this)" onerror="this.closest('.photo-box').classList.add('photo-failed')">
+      ${under || ''}<span class="ph-fill" aria-hidden="true"></span><img src="${escapeHtml(src)}" alt="" ${tapped ? '' : 'loading="lazy" '}decoding="async" width="${info.w}" height="${info.h}"${direct ? ` data-direct="${escapeHtml(direct)}"` : ''} onload="photoFill(this)" onerror="photoImgFail(this)">
       <span class="photo-credit">${escapeHtml(info.label)}</span>
     </button>`;
+}
+/* A photo that did not load. A resized copy gives way once to the yard's own
+ * file (data-direct, set only where that file may show in lists); otherwise
+ * the box is marked failed and the drawing under it stays, or a row thumb is
+ * removed so its drawing shows. */
+function photoImgFail(img) {
+  const d = img.dataset ? img.dataset.direct : '';
+  if (d) { delete img.dataset.direct; img.src = d; return; }
+  const box = img.closest('.photo-box');
+  if (box) box.classList.add('photo-failed');
+  else if (img.closest('.yr-thumb')) img.remove();
 }
 /* Once a photo has loaded, the space around it (its shape differs from the
  * box) shows a soft blur of the same photo instead of grey bars. Same image,
@@ -1223,7 +1273,7 @@ const ICON_CAMERA = '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="cu
 function cardPhotoHtml(v, key) {
   const ex = extrasFor(v);
   const info = ex && ex[extraIdx.photo] ? photoInfo(ex[extraIdx.photo]) : null;
-  if (info && info.onCards) return photoBoxHtml(info, key, `${v.year} ${v.make} ${v.model}`, 'card-photo', illoSvgHtml(ex));
+  if (info && info.inList) return photoBoxHtml(info, key, `${v.year} ${v.make} ${v.model}`, 'card-photo', illoSvgHtml(ex));
   return illoBoxHtml(v, ex, 'card-photo', { photo: info ? (info.heavy ? 'heavy' : 'inside') : '' });
 }
 function illoSvgHtml(ex) {
@@ -3504,13 +3554,15 @@ function openPhotoViewer(key) {
   const v = liveInventory.find(x => vehicleKey(x) === key);
   const ex = v && extrasFor(v);
   const info = ex && ex[0] ? photoInfo(ex[0]) : null;
-  if (!info || (info.heavy && !heavyPhotosLoaded.has(key))) return;
+  if (!info || (info.heavy && !info.thumbLarge && !heavyPhotosLoaded.has(key))) return;
   const el = document.getElementById('photo-viewer');
   const img = document.getElementById('photo-viewer-img');
   img.removeAttribute('src');
   el.classList.remove('pv-failed');
   img.onerror = () => el.classList.add('pv-failed');
-  img.src = info.large;
+  // A multi-megabyte original is never loaded on its own: the viewer shows
+  // its resized large copy unless the person already tapped to load the file.
+  img.src = info.heavy && info.thumbLarge && !heavyPhotosLoaded.has(key) ? info.thumbLarge : info.large;
   img.alt = `${v.year} ${v.make} ${v.model}`;
   const link = yardPageUrl(v);
   const subject = encodeURIComponent('Photo removal request');
@@ -6204,8 +6256,9 @@ function yardMarks(loc) {
 function yardRowThumb(v) {
   const ex = extrasFor(v);
   const info = ex && ex[extraIdx.photo] ? photoInfo(ex[extraIdx.photo]) : null;
-  if (info && info.onCards) {
-    return `<span class="yr-thumb has-illo">${illoSvgHtml(ex)}<span class="ph-fill" aria-hidden="true"></span><img src="${escapeHtml(info.url)}" alt="" loading="lazy" decoding="async" width="${info.w}" height="${info.h}" onload="photoFill(this)" onerror="this.remove()"></span>`;
+  if (info && info.inList) {
+    const direct = info.thumb && info.onCards ? info.url : '';
+    return `<span class="yr-thumb has-illo">${illoSvgHtml(ex)}<span class="ph-fill" aria-hidden="true"></span><img src="${escapeHtml(info.thumb || info.url)}" alt="" loading="lazy" decoding="async" width="${info.w}" height="${info.h}"${direct ? ` data-direct="${escapeHtml(direct)}"` : ''} onload="photoFill(this)" onerror="photoImgFail(this)"></span>`;
   }
   const paint = paintHex(ex && ex[extraIdx.color]);
   return `<span class="yr-thumb"${paint ? ` style="--paint:${paint}"` : ''}><svg class="illo-car" viewBox="0 0 200 90" aria-hidden="true" focusable="false"><use href="#illo-${illoBody(ex)}"/></svg></span>`;
@@ -6218,7 +6271,7 @@ function yardRowItemHtml(v, flags) {
   const ex = extrasFor(v);
   const color = ex && ex[extraIdx.color] ? String(ex[extraIdx.color]).replace(/^\[|\]$/g, '').replace(/^Field-/, '') : '';
   const pinfo = ex && ex[extraIdx.photo] ? photoInfo(ex[extraIdx.photo]) : null;
-  const photoTag = pinfo && !pinfo.onCards
+  const photoTag = pinfo && !pinfo.inList
     ? `<span class="yr-tag yr-tag-photo">${ICON_CAMERA} ${pinfo.heavy ? 'Photo at yard &middot; tap to load' : 'Photo on car page'}</span>` : '';
   const tags = [
     photoTag,
