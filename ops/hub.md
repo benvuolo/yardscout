@@ -907,3 +907,36 @@ scan that finds a match, sale-day pushes.
 - Not taken as approved: user-uploaded photos (mentioned as a later option).
 - Follow-up: second scan queued 08:07 UTC publishes the resized addresses;
   then recount and look at a live card.
+
+## 2026-11-16 ~08:20 UTC free instant alert merged (fa2ec748, sw `jh-v200`)
+
+Owner: "Do it and ship!" (2026-11-16). Hub read the server diff and the app
+diff before merging. What it does is in `ops/growth.md` (builder's section).
+
+- **Inactive until the app release.** The API pushes instantly for a free
+  device only when that device flagged a watch, and only builds with the new
+  code send the flag. Pro devices are dispatched first, unchanged; free
+  instant pushes use what is left of the 25 sends per scan.
+- **Deploy order is satisfied by this merge:** Deploy Workers runs on the
+  push and applies migration 0017 before any store build exists.
+- **Held on the website:** two sentences in `docs/index.html` that describe
+  the apps' free tier keep their old wording until the new version is live
+  in both stores (comments in the file carry the new text; the check in
+  `free_instant_e2e.mjs` expects the held wording). The apps set their own
+  text in code, so the release is not affected.
+- **Store listing lines to correct with the release** (builder's list):
+  `fastlane/metadata/en-US/description.txt` and
+  `android/en-US/full_description.txt` lines 24 and 28, and
+  `android/en-US/pro_subscription_benefits.txt` line 1. All in task #53.
+- **Test fixed on the way:** `backend/test/e2e.sh` had been failing on main
+  ("radius filter did not narrow (0 of 6)") because it hardcoded the first
+  yard's location and the scan's yard order changed. It now reads the
+  location from the seeded directory. 39 of 39.
+- Tests on the merged tree: e2e-devices, e2e (39), e2e-ops, free_instant_e2e
+  (30), coverage_gaps (26), alerts_first, photo_policy, illo, pf_guards,
+  scorecard, card_share, funnel_events, recap_ask, share_watch, tab_retap,
+  and ui_no_truncation on four screens at 320 and 390 (32 checks): all pass.
+- Left for later, from the builder's notes: `e2e-devices.sh` leaves its
+  local server running after it exits (a second run on the same port fails);
+  the privacy page does not list saved cars among what the server stores for
+  a device (predates this work).
