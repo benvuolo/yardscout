@@ -1204,7 +1204,7 @@ all from one yard's batch (Utah Pic-A-Part Ogden Premium, set out 11-15).
 - All of this is on the website only; the apps get it with the next release
   (1.13.0 is still waiting for review; a newer build needs a new "ship").
 
-## 2026-11-16 ~16:40 UTC owner: "Yes switch all three, however I dont think new arrivles should be buried by a day just because they dont have a picture"
+## 2026-11-16 ~16:35 UTC owner: "Yes switch all three, however I dont think new arrivles should be buried by a day just because they dont have a picture"
 
 - The one-day photo boost is OUT (e46de036). "Newest arrivals" is strictly
   by set-out day again; a photo only orders cars set out the same day
