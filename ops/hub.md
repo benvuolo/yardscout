@@ -1266,3 +1266,26 @@ main as a fast-forward. Website only; the apps get it with the next release
   cars, Budget 1,627 + 879, Harry's about 4,259 over three yards, U-Pull-R
   captcha and 0 cars as before. Then tell the owner the four notes can go.
   A yard that answers the name differently has given its answer.
+
+## 2026-11-16 17:27 UTC today's feedback confirmed live
+
+One fresh page load of yardscout.io at phone size, nothing stored (script
+`xt/live_feedback.js` in the hub scratchpad): cache `jh-v203`; 40 tiles, the
+first 12 photos loaded; the alert card after the 12th tile with the web
+wording and no Pro prompt; a car page opened in the same load has one price
+Pro box (`part-value`, under the parts) and no same-year "fits" range; no
+page errors. The script's own order check failed on a name it could not
+reach (`tsOf` is local to the sort), so order was not measured live; it is
+covered by `cars_feed_e2e` section 1b on the same code, and the screenshot
+shows Nov 14 cars ahead of Nov 13.
+
+- Scans run late on GitHub's clock (12:00 started 12:31; yesterday's 20:00
+  started 23:39). The 16:00 slot had not started at 17:17, so the next scan
+  to start is the first with the YardScout name. Check-in scheduled for
+  19:18 UTC (`trig_01LTCx4YjVckmAEk5HJttNSN`); it reschedules itself until
+  that scan has finished.
+- Seen in the live car page, to fix in the next web change: the turnover
+  label ("Gets picked over fast") sits flush under the yard box. `.cd-value`
+  has no top margin (styles.css, "Car screen additions") and `.locator` no
+  bottom margin. On main since the feed merge; plainer now that the Pro box
+  under it is gone.
