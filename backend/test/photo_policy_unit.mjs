@@ -29,6 +29,7 @@ const ctx = vm.createContext({ URL });
 vm.runInContext([
   one(/^const PHOTO_RESIZE_HOSTS = /), fn('resizedPhotoUrl'),
   one(/^let publishedPhotoSources = /), one(/^let _photoRules = /), one(/^const PHOTO_ASPECT = /),
+  one(/^let _photoEpoch = /), one(/^function photoEpochBump\(/),
   fn('setPublishedPhotoSources'), fn('photoInfo'),
   one(/^const heavyPhotosLoaded = /), fn('photoSizeText'), fn('photoBoxHtml'),
   "function escapeHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\"/g, '&quot;'); }",

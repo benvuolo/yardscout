@@ -26,6 +26,7 @@ vm.runInContext([
   'var __ex = {}; function extrasFor(v) { return __ex[v.id] || null; }',
   one(/^const PHOTO_RESIZE_HOSTS = /), fn('resizedPhotoUrl'),
   one(/^let publishedPhotoSources = /), one(/^let _photoRules = /), one(/^const PHOTO_ASPECT = /),
+  one(/^let _photoEpoch = /), one(/^function photoEpochBump\(/),
   fn('setPublishedPhotoSources'), fn('photoInfo'), one(/^const heavyPhotosLoaded = /), fn('photoSizeText'), fn('photoBoxHtml'),
   one(/^let extraIdx = /), fn('setExtraFields'), one(/^const ILLO_BODIES = /), block('const PAINTS = [', '];'),
   fn('paintHex'), fn('illoBody'), fn('illoBoxHtml'), one(/^const ICON_CAMERA = /), fn('cardPhotoHtml'), fn('illoSvgHtml'),
