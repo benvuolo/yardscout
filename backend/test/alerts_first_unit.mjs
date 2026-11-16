@@ -27,6 +27,17 @@ var localStorage = { getItem(k) { return k === 'ys_email_alerts_on' ? __email : 
 function escapeHtml(s) { return String(s); }
 var ICON = { bell: '' };
 function parseYardDate(s) { if (!s) return null; const d = new Date(s + 'T12:00:00'); d.setHours(0, 0, 0, 0); return d; }
+// Free instant alert (apps): the real helpers, over a stub watch list.
+var __wl = [], activeZipCoords = null, FREE_WATCH_LIMIT = 5;
+function loadWatchlist() { return __wl; }
+function watchlistMatches(e, v) { return e.make === v.make; }
+function haversineMiles(a, b, c, d) { return Math.abs(a - c) * 69; }
+${one(/^const FREE_INSTANT_RADIUS_MI = /)}
+${one(/^const INSTANT_WATCH_KEY = /)}
+${one(/^function freeInstantOn\(/)}
+${fn('instantWatchIndex')}
+${fn('instantRadiusMi')}
+${fn('inInstantScope')}
 ${one(/^const RECAP_WEEKDAY = /)}
 ${fn('hasRecapChannel')}
 ${fn('proBoxHtml')}
@@ -64,6 +75,20 @@ set({ __pro: true });
 check('Pro: never shown', T.recapLineHtml({ dateAdded: day(2026, 11, 3) }, watch(2026, 11, 1)) === '');
 set({ __pro: false });
 check('the earliest matching watch counts', /Landed/.test(T.recapLineHtml({ dateAdded: day(2026, 11, 3) }, [...watch(2026, 11, 5), ...watch(2026, 10, 30)])));
+
+// Apps, free: a car inside the instant watch's 50 mi is pushed, so no recap
+// date and no "Pro would have"; a car past 50 mi keeps both. Web unchanged.
+const inst = { make: 'Toyota', lat: 40, lng: -111, radiusMi: 100, addedAt: iso(new Date(2026, 10, 1, 9)) + '~abc123' };
+set({ IS_NATIVE: true, __token: 'tok', __wl: [inst] });
+const near = { make: 'Toyota', lat: 40.3, lng: -111, dateAdded: day(2026, 11, 3) };   // ~21 mi
+const far = { make: 'Toyota', lat: 41.1, lng: -111, dateAdded: day(2026, 11, 3) };    // ~76 mi
+h = T.recapLineHtml(near, [inst]);
+check('apps, free: a car inside the instant 50 mi says so, no recap date, no Pro box', /inside your instant alert/.test(h) && !/recap/.test(text(h)) && !/pro-box/.test(h), h);
+h = T.recapLineHtml(far, [inst]);
+check('apps, free: a car past 50 mi keeps the recap date and the Pro box', /Mon, Nov 9/.test(h) && /pro-box/.test(h) && !/instant/.test(h), h);
+set({ IS_NATIVE: false });
+h = T.recapLineHtml(near, [inst]);
+check('web: the same car is unchanged (recap date + Pro box)', /Mon, Nov 9/.test(h) && /pro-box/.test(h) && !/instant/.test(h), h);
 
 console.log(fails ? `\n${fails} FAILED` : '\nALL PASS');
 process.exit(fails ? 1 : 0);

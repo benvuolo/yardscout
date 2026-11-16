@@ -1056,6 +1056,33 @@ const SCREENS = [
     await settle(page, 600);
     await page.evaluate(() => { const g = document.getElementById('alert-watchlist'); if (g) g.scrollIntoView(); });
   }],
+  // Free instant alert (apps, 2026-11-16): the marked watch and the one-tap
+  // move on the others. The app-shell state is forced (freeInstantOn) because
+  // this guard runs the web build; the markup is the apps' own.
+  ['alerts-instant', async (page) => {
+    await page.evaluate(() => {
+      window.__fiWas = window.__fiWas || freeInstantOn;
+      window.freeInstantOn = () => true;
+      window.__wlWas = localStorage.getItem('yardscout_watchlist');
+      const c = { lat: 37.35, lng: -121.89 };
+      const w = (make, model, i, r) => ({ make, model, yrMin: null, yrMax: null, matchOnly: false, radiusMi: r, ...c, driveFilter: '', trimFilter: '', addedAt: `2026-11-0${i}T10:00:00.000Z~inst0${i}` });
+      saveWatchlist([w('Mercedes-Benz', 'Sprinter 2500', 1, 100), w('Toyota', 'Camry', 2, 25), w('Chevrolet', 'Silverado 1500', 3, 250)]);
+      localStorage.setItem('ys_instant_watch', '2026-11-02T10:00:00.000Z~inst02');
+      document.querySelector('.tab[data-tab="alerts"]').click();
+      renderAlerts();
+    });
+    await settle(page, 500);
+    await page.evaluate(() => {
+      if (document.querySelectorAll('#alert-watchlist .wl-instant').length !== 1) throw new Error('instant mark not rendered');
+      if (document.querySelectorAll('#alert-watchlist .wl-instant-move').length !== 2) throw new Error('move controls not rendered');
+      const g = document.getElementById('alert-watchlist'); g.scrollIntoView(); window.scrollBy(0, -90);
+    });
+  }, async (page) => { await page.evaluate(() => {
+    if (window.__fiWas) window.freeInstantOn = window.__fiWas;
+    if (window.__wlWas != null) localStorage.setItem('yardscout_watchlist', window.__wlWas); else localStorage.removeItem('yardscout_watchlist');
+    localStorage.removeItem('ys_instant_watch');
+    renderAlerts();
+  }); }],
   // Round 5 (alerts first)
   ['r5-alerts-recap', async (page) => {
     // A free watch made 60 days ago, with the email recap on: matches that
