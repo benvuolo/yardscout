@@ -45,7 +45,13 @@
  * the Pro sheet opened. Coarse classes only, never an error message. A v4
  * client's events bump a 'funnel-v4' marker per (day, platform), so the
  * scorecard can tell "no client able to count this" (no data) from "nobody
- * did it" (0). Same anonymous counter, same table. */
+ * did it" (0). Same anonymous counter, same table.
+ *
+ * First view from a guess (2026-11-16, no new counting-rules version): with no
+ * saved place the app opens the Cars list around the area /geo reports for
+ * the connection. 'first-view-guess' counts that (once per visit), and
+ * 'guess-replaced' a zip or "Use my location" then replacing the guess (once
+ * per visit). Same anonymous counter, same table; nothing about the place. */
 import { json, err } from './util.js';
 
 export const FUNNEL_V2_MARK = 'funnel-v2';
@@ -109,7 +115,7 @@ export async function handleAttribution(req, env) {
     if (!rows.has(key)) rows.set(key, { source: r.source, campaign: r.campaign, medium: r.medium, platform: r.platform, events: {} });
     rows.get(key).events[r.event] = r.n;
   }
-  const FUNNEL = ['first-visit', 'zip-entered', 'part-first-search', 'watch-created', 'email-asked', 'email-submitted',
+  const FUNNEL = ['first-visit', 'first-view-guess', 'zip-entered', 'guess-replaced', 'part-first-search', 'watch-created', 'email-asked', 'email-submitted',
     'email-confirmed', 'push-enabled', 'store-click', 'paywall', 'checkout-start', 'pro-converted'];
   return json({ since, days, funnel: FUNNEL, channels: [...rows.values()] });
 }

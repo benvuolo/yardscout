@@ -104,8 +104,8 @@
   <div id="tab-live" class="tab-content active">
     <div class="zip-banner" id="zip-banner" style="display:none;">
       <div class="zip-banner-text">
-        <strong>Where are you?</strong>
-        <span>Enter your zip or postal code and we&rsquo;ll show you what&rsquo;s in the self-service yards near you.</span>
+        <strong id="zip-banner-head">Where are you?</strong>
+        <span id="zip-banner-lead">Enter your zip or postal code and we&rsquo;ll show you what&rsquo;s in the self-service yards near you.</span>
         <span class="zip-banner-coverage">Coverage: every major self-service chain &mdash; Pick-n-Pull, LKQ Pick Your Part, Pull-A-Part &mdash; plus a growing set of independents: <strong class="coverage-count">300+</strong> yards nationwide. Missing your yard? <a href="mailto:yardscout.io@gmail.com?subject=Add%20my%20yard">Tell us</a>.</span>
       </div>
       <div class="zip-banner-form">
@@ -114,6 +114,19 @@
       </div>
       <button type="button" class="btn gps-btn" id="zip-banner-gps"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Or use my location</button>
       <button type="button" class="pro-box zip-banner-skip-pro" id="zip-banner-skip"><span class="pro-badge">Pro</span><span class="pro-box-line">Browse every yard nationwide</span><span class="pro-box-chev" aria-hidden="true">&rsaquo;</span></button>
+    </div>
+    <!-- Where the list is centred when it is not the visitor's own place:
+         a guess from the connection, or a place a link carried (app.js,
+         A PLACE FOR THIS VISIT). One tap to correct it. -->
+    <div class="place-line" id="place-line" style="display:none;" role="region" aria-label="Where these cars are">
+      <p class="place-line-text" id="place-line-text"></p>
+      <div class="place-line-form" id="place-line-form">
+        <input type="text" id="place-line-input" inputmode="numeric" maxlength="7" autocomplete="postal-code" placeholder="Your zip" aria-label="Your zip code">
+        <button type="button" class="btn btn-primary" id="place-line-go">Show me</button>
+        <button type="button" class="btn gps-btn" id="place-line-gps"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Use my location</button>
+      </div>
+      <button type="button" class="btn place-line-back" id="place-line-back" hidden></button>
+      <p class="place-line-msg" id="place-line-msg" role="status"></p>
     </div>
     <!-- One-time honesty explainer: ghost inventory and estimate caveats live
          in the footer and inside expanded cards, but a first-time user can

@@ -3554,3 +3554,29 @@ select { white-space: normal; height: auto; }
    Both sit at their own width and wrap rather than cut off. */
 .wl-instant { align-self: flex-start; max-width: 100%; white-space: normal; overflow-wrap: anywhere; margin-top: var(--s1); }
 .wl-instant-move { align-self: flex-start; min-height: var(--tap); font-size: var(--t-sm); text-align: left; overflow-wrap: anywhere; }
+
+/* ---------- Place line (2026-11-16): the Cars list centred on a guess from
+   the connection or on a place a link carried. Slim, above the list; the zip
+   field and "Use my location" are one tap away and wrap, never cut off. ---------- */
+.place-line {
+  background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent);
+  border-radius: var(--r); padding: var(--s3); margin-bottom: var(--s3);
+  display: flex; flex-direction: column; gap: var(--s2);
+}
+.place-line-text { margin: 0; font-size: var(--t-sm); line-height: 1.45; color: var(--text); overflow-wrap: anywhere; }
+.place-line-text strong { font-weight: 700; }
+.place-line-form { display: flex; flex-wrap: wrap; gap: var(--s2); align-items: stretch; }
+.place-line-form[hidden] { display: none; }
+.place-line-form input {
+  flex: 1 1 7em; min-width: 0; max-width: 12em; min-height: var(--tap); padding: 0 var(--s3);
+  font: 400 var(--t-md) var(--font-ui); color: var(--text); background: var(--surface);
+  border: 1px solid var(--border-dark, var(--border)); border-radius: var(--r-sm); outline: none;
+}
+.place-line-form input:focus { border-color: var(--accent); }
+.place-line-form .btn { min-height: var(--tap); flex: 0 1 auto; white-space: normal; }
+.place-line-form .gps-btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--s2); }
+.place-line-form .gps-btn .ico { width: 16px; height: 16px; flex: none; }
+.place-line-back { align-self: flex-start; min-height: var(--tap); white-space: normal; text-align: left; max-width: 100%; overflow-wrap: anywhere; }
+.place-line-back[hidden] { display: none; }
+.place-line-msg { margin: 0; font-size: var(--t-sm); color: var(--red, var(--accent)); }
+.place-line-msg:empty { display: none; }
