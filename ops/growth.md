@@ -611,7 +611,17 @@ medium `state`, campaign `all`; a gone car uses `car`/`gone`. App side:
 
 sw.js `jh-v201` (hub re-bumps at merge).
 
-**Tests (all on this branch, final tree):** see the hub report for counts.
+**Tests (final tree, all pass):** no_gate_e2e 76, ui_no_truncation (home,
+results, place-guess, place-link, place-link-saved, zip-card-car at 320/360/
+390/1280, light/dark, 100/200%) 96 checks 0 failures, site units redirects 52,
+model_pages 60, junkyards 236, prices 39, geo 13; car_search_e2e 48,
+coverage_gaps 26, funnel_events 128, tab_retap 14 (one run failed 309 vs 300
+while eight browser tests ran beside it; passed twice alone), free_instant 30,
+recap_ask 35, share_watch 33, pf_guards 167, scorecard_unit 155,
+funnel_counters_unit, e2e.sh 39, e2e-ops.sh ALL PASS, alert_freshness 15,
+browser_e2e 17, app_promo 174, card_share 24, model_years 18, notable_trims
+40, photo_layout 584, pro_sheet_fold 188, map_regions, no_pick_models,
+pf_new_cats.
 New `backend/test/no_gate_e2e.mjs` (the real bundle served as yardscout.io,
 beacons caught; `NOGATE_SHOTS=<dir>` writes 390 px light/dark shots);
 `ui_no_truncation.mjs` screens `place-guess`, `place-link`,
