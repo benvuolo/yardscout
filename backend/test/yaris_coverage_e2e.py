@@ -90,6 +90,9 @@ with sync_playwright() as pw:
     page.wait_for_selector("#live-grid .match-card, #live-grid .dim-card",
                            timeout=30000)
     page.click("#live-filter-toggle")
+    # Cards show without a zip since the no-gate change (2026-11-16), so they
+    # no longer prove the outside zip lookup has answered. Wait for the zip itself.
+    page.wait_for_function("z => localStorage.getItem('jh_zip') === z", arg="90670", timeout=30000)
     page.click(".tab[data-tab='parts']")
     page.wait_for_selector("#tab-parts.active #pf-body", state="visible")
 

@@ -110,6 +110,9 @@ with sync_playwright() as pw:
     page.wait_for_selector("#live-grid .match-card, #live-grid .dim-card",
                            timeout=30000)
     page.click("#live-filter-toggle")
+    # Cards show without a zip since the no-gate change (2026-11-16), so they
+    # no longer prove the outside zip lookup has answered. Wait for the zip itself.
+    page.wait_for_function("z => localStorage.getItem('jh_zip') === z", arg="85003", timeout=30000)
 
     # The finder lives on its own Parts tab now (Live / Yards / Parts /
     # Alerts) — enter the way a user does.
@@ -217,6 +220,9 @@ with sync_playwright() as pw:
         p.wait_for_selector("#live-grid .match-card, #live-grid .dim-card",
                             timeout=30000)
         p.click("#live-filter-toggle")
+        # Cards show without a zip since the no-gate change (2026-11-16), so they
+        # no longer prove the outside zip lookup has answered. Wait for the zip itself.
+        p.wait_for_function("z => localStorage.getItem('jh_zip') === z", arg=zip_code, timeout=30000)
         p.click(".tab[data-tab='parts']")
         p.wait_for_timeout(400)
         return c, p
