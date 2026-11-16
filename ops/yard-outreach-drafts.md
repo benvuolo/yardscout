@@ -110,3 +110,40 @@ If you'd rather not be listed, say the word and we'll take you out.
 Thanks,
 Ben
 hello@yardscout.io
+
+---
+
+## Corrections, 2026-11-16 (owner: "Yes draft the corrections for all three")
+
+The 11-02 / 11-03 notes said the scanner "identifies itself as YardScout/1.12
+(+https://yardscout.io)". For Pull-N-Save, Budget, U-Pull-R and Harry's the
+inventory readers were sending a generic browser name until 2026-11-16 (table
+in `ops/yards.md`, same date). Each correction is true only once the reader
+change is on main and a scan has run with it; the owner sends after the hub
+confirms that scan.
+
+- **Pull-N-Save**: the correction is one paragraph inside the photo note,
+  Gmail draft in thread `1a1e52cb8accbc08`.
+- **U-Pull-R**: Gmail draft, a reply to Glenn Wear (CTO) in thread
+  `1a1b2b1b2f24f262`. This is the one that matters: on 11-03 and 11-06 he
+  was told "every request identified itself as YardScout" and "same
+  identity" for the home-connection pull, and neither was so. The draft
+  says exactly that, says what does hold (only the inventory JSON, about 110
+  small requests a scan 2 s apart, no images, never past the human check,
+  yards still off the app) and that the reader sends the name now.
+- **Budget**: Gmail draft, a reply in thread `1a19e455f0efaf97` to
+  sales@budgetupullit.com (the 11-02 CC to Craig@budgetfl.com bounced; it is
+  not on the reply).
+- **Harry's**: no email exists and Gmail holds nothing to or from them; the
+  11-02 note was for the contact form at wegotused.com/contact and
+  `ops/yards.md` records it as not sent. If it was pasted into the form,
+  paste this the same way; if it was not, there is nothing to correct and
+  section 5 above is now accurate as written:
+
+  > Hi, a correction to the note I sent through this form in early November.
+  > I said our scanner identifies itself as "YardScout/1.12
+  > (+https://yardscout.io)". Until November 16 it was sending a generic
+  > browser name; it sends the YardScout name now. Nothing else has changed:
+  > we read your public inventory pages about every four hours and every car
+  > links back to wegotused.com. If you would rather not be listed, tell me
+  > and I will take your yards out. Ben, YardScout (yardscout.io)
