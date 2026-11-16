@@ -152,40 +152,36 @@ try {
   }
 
   /* ---------- 1b. the order of the list ---------- */
-  console.log('1b. Newest arrivals, photos leading (a photo counts as one day newer)');
+  console.log('1b. Newest arrivals: strictly by day; a photo only orders cars of the same day');
   {
     const { page, ctx } = await open({ w: 390, h: 844 });
     const o = await page.evaluate(() => {
       const list = getFilteredLive().slice(0, 1200);
       const ph = (v) => listPhotoFlag(v);
       const day = (v) => { const ts = yardDateMs(v.dateAdded); if (!ts) return 0; const d = new Date(ts); return Math.round(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 86400000); };
-      const eff = (v) => (day(v) ? day(v) + ph(v) * PHOTO_DAY_BOOST : 0);
       const dist = (v) => { const d = vehicleDistanceMi(v); return d == null ? 1e9 : d; };
-      let effOk = true, photoOk = true, dayOk = true, distOk = true, lagOk = true, boosted = 0;
+      let dateOk = true, photoOk = true, distOk = true, buried = 0;
       for (let i = 1; i < list.length; i++) {
         const a = list[i - 1], b = list[i];
-        if (eff(a) < eff(b)) effOk = false;
-        // The car above is never more than the boost older than the car below it.
-        if (day(a) && day(b) - day(a) > PHOTO_DAY_BOOST) lagOk = false;
-        if (day(a) && day(b) > day(a)) boosted++;
-        if (eff(a) !== eff(b)) continue;
+        if (day(a) < day(b)) { dateOk = false; if (ph(a) && !ph(b)) buried++; }
+        if (day(a) !== day(b)) continue;
         if (ph(a) < ph(b)) photoOk = false;
-        if (ph(a) !== ph(b)) continue;
-        if (day(a) < day(b)) dayOk = false;
-        if (day(a) === day(b) && dist(a) > dist(b) + 1e-9) distOk = false;
+        if (ph(a) === ph(b) && dist(a) > dist(b) + 1e-9) distOk = false;
       }
-      const flags = [0, 0]; for (const v of list) flags[ph(v)]++;
+      // Days that hold both kinds, so the photo rule is really exercised.
+      const byDay = new Map();
+      for (const v of list) { const s = byDay.get(day(v)) || [0, 0]; s[ph(v)]++; byDay.set(day(v), s); }
+      const mixedDays = [...byDay.values()].filter((s) => s[0] && s[1]).length;
       const keys = [...document.querySelectorAll('#live-grid > .car-tile')].slice(0, 20).map((t) => t.dataset.vkey);
       // The flag agrees with what a tile draws.
       const flagTrue = list.slice(0, 60).every((v) => { const ex = extrasFor(v); const info = ex && ex[0] ? photoInfo(ex[0]) : null; return ph(v) === (info && info.inList ? 1 : 0); });
       const unknownLast = (() => { const k = list.findIndex((v) => !day(v)); return k < 0 || list.slice(k).every((v) => !day(v)); })();
-      return { n: list.length, effOk, photoOk, dayOk, distOk, lagOk, boosted, flags, flagTrue, unknownLast, boost: PHOTO_DAY_BOOST,
-        same: keys.length > 0 && keys.every((k, i) => vehicleKey(list[i]) === k), sort: document.getElementById('live-sort').value, since: FEED_SINCE_DAY };
+      return { n: list.length, dateOk, buried, photoOk, distOk, mixedDays, flagTrue, unknownLast, boost: typeof PHOTO_DAY_BOOST,
+        same: keys.length > 0 && keys.every((k, i) => vehicleKey(list[i]) === k), sort: document.getElementById('live-sort').value };
     });
-    ok(o.sort === 'date-desc' && o.since === null && o.effOk && o.boost === 1, 'newest first, where a car with a list photo counts as one day newer', o);
-    ok(o.lagOk, 'never more than a day out of date order: no car sits above one set out two or more days after it', o);
-    ok(o.flags[0] > 0 && o.flags[1] > 0 && o.photoOk && o.flagTrue, 'on a tie the car whose photo shows in the list comes first', o);
-    ok(o.dayOk && o.distOk, 'then the truly newer day, then the nearest yard', o);
+    ok(o.sort === 'date-desc' && o.dateOk && o.buried === 0 && o.boost === 'undefined', 'strictly newest first: no car sits below one set out on an earlier day, photo or not', o);
+    ok(o.mixedDays > 0 && o.photoOk && o.flagTrue, 'within a day: cars whose photo shows in the list come before the ones without', o);
+    ok(o.distOk, 'within a day and the same photo state: the nearest first', o);
     ok(o.unknownLast, 'cars with no set-out date stay last', o);
     ok(o.same, 'the tiles on screen are the top of that list', o);
     await ctx.close();

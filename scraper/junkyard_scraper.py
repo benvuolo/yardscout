@@ -17400,8 +17400,12 @@ UPR_STORES = {
         "lat": 41.7188, "lng": -83.5380},
 }
 UPR_DELAY_SEC = 2.0  # ~1 request / 2s per host
+# Sends the scanner's own name (owner, 2026-11-16: "Yes switch all three").
+# The 2026-11-02 email told U-Pull-R the scanner identifies itself as
+# YardScout; until now this reader sent the generic browser name.
 UPR_HEADERS = {
     **HEADERS,
+    "User-Agent": YARDSCOUT_UA,
     "Content-Type": "application/x-www-form-urlencoded",
     "Referer": "https://upullrparts.com/inventory/",
     "Origin": "https://upullrparts.com",
@@ -17544,7 +17548,7 @@ def refresh_upullr_pricing_file() -> Path:
     import html as html_mod
 
     try:
-        r = requests.get(UPR_PRICING_URL, headers=HEADERS, timeout=30)
+        r = requests.get(UPR_PRICING_URL, headers={**HEADERS, "User-Agent": YARDSCOUT_UA}, timeout=30)
         r.raise_for_status()
         page = r.text
     except Exception as e:
@@ -17947,7 +17951,10 @@ _HARRYS_TOTAL_RE = re.compile(r"of\s+([\d,]+)\s+records")
 def fetch_harrys_inventory() -> list[dict]:
     """Fetch live inventory from every Harry's U-Pull-It yard (paged HTML)."""
     session = requests.Session()
-    session.headers.update({**HEADERS, "Accept": "text/html"})
+    # The scanner's own name (owner, 2026-11-16: "Yes switch all three"; the
+    # 2026-11-02 email told Harry's it identifies itself as YardScout). Only
+    # the name changed: the Sucuri step below is as it was (rule 2).
+    session.headers.update({**HEADERS, "User-Agent": YARDSCOUT_UA, "Accept": "text/html"})
     cookie: str | None = None
 
     def get_page(n: int) -> str | None:
@@ -18070,7 +18077,7 @@ def refresh_harrys_pricing_file() -> Path:
     page = None
     for attempt in (1, 2, 3):
         try:
-            hdrs = {**HEADERS, "Accept": "text/html"}
+            hdrs = {**HEADERS, "User-Agent": YARDSCOUT_UA, "Accept": "text/html"}
             if cookie:
                 hdrs["Cookie"] = cookie
             r = requests.get(HARRYS_PRICE_URL, headers=hdrs, timeout=45)
@@ -21644,12 +21651,18 @@ _BUDGET_BARTOW_SELECT_RE = r'<select[^>]*name="{name}"[^>]*>(.*?)</select>'
 _BUDGET_BARTOW_OPTION_RE = re.compile(r'<option(?: selected="selected")? value="([^"]*)"')
 
 
+# Both Budget readers send the scanner's own name (owner, 2026-11-16: "Yes
+# switch all three"; the 2026-11-02 email said the scanner identifies itself
+# as YardScout, and these sent the generic browser name).
+BUDGET_HEADERS = {**HEADERS, "User-Agent": YARDSCOUT_UA, "Accept": "text/html"}
+
+
 def _budget_wg_vehicles(session: "requests.Session") -> list[dict]:
     """Winter Garden: one GET per make against /current-inventory/."""
     import html as html_mod
     yard = BUDGET_YARDS["wg"]
     try:
-        r = session.get(BUDGET_WG_INVENTORY_URL, headers={**HEADERS, "Accept": "text/html"},
+        r = session.get(BUDGET_WG_INVENTORY_URL, headers=BUDGET_HEADERS,
                         timeout=60)
         r.raise_for_status()
         m = _BUDGET_WG_MAKE_SELECT_RE.search(r.text)
@@ -21666,7 +21679,7 @@ def _budget_wg_vehicles(session: "requests.Session") -> list[dict]:
         try:
             r = session.get(BUDGET_WG_INVENTORY_URL,
                             params={"make": make_name, "model": ""},
-                            headers={**HEADERS, "Accept": "text/html"}, timeout=90)
+                            headers=BUDGET_HEADERS, timeout=90)
             r.raise_for_status()
         except Exception as e:
             print(f"  [Budget WG] make {make_name!r} fetch failed: {e}", file=sys.stderr)
@@ -21729,7 +21742,7 @@ def _budget_bartow_vehicles(session: "requests.Session") -> list[dict]:
                      "ddlMake": make, "ddlModel": model})
         try:
             r = session.post(BUDGET_BARTOW_INVENTORY_URL, data=data,
-                             headers={**HEADERS, "Accept": "text/html"}, timeout=60)
+                             headers=BUDGET_HEADERS, timeout=60)
             r.raise_for_status()
             return r.text
         except Exception as e:
@@ -21738,7 +21751,7 @@ def _budget_bartow_vehicles(session: "requests.Session") -> list[dict]:
 
     try:
         r = session.get(BUDGET_BARTOW_INVENTORY_URL,
-                        headers={**HEADERS, "Accept": "text/html"}, timeout=60)
+                        headers=BUDGET_HEADERS, timeout=60)
         r.raise_for_status()
         base = r.text
     except Exception as e:
@@ -21821,7 +21834,7 @@ def refresh_budget_pricing_file() -> Path:
     for slug, url in (("wg", BUDGET_WG_PRICES_URL), ("bartow", BUDGET_BARTOW_PRICES_URL)):
         yard_name = BUDGET_YARDS[slug]["name"]
         try:
-            r = requests.get(url, headers={**HEADERS, "Accept": "text/html"}, timeout=60)
+            r = requests.get(url, headers=BUDGET_HEADERS, timeout=60)
             r.raise_for_status()
         except Exception as e:
             print(f"  [Budget pricing] {yard_name}: {e}", file=sys.stderr)

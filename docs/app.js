@@ -1316,9 +1316,6 @@ function extrasFor(v) {
  * or the extras table change (photoEpochBump). */
 let _photoEpoch = 0;
 function photoEpochBump() { _photoEpoch++; }
-// Newest arrivals: a car whose photo shows in the list counts as this many
-// days newer (getFilteredLive, 'date-desc').
-const PHOTO_DAY_BOOST = 1;
 function listPhotoFlag(v) {
   if (v._lpE === _photoEpoch) return v._lp;
   const ex = extrasFor(v);
@@ -4577,18 +4574,14 @@ function getFilteredLive() {
   }
   const tieFn = tsOf, tieAscEff = tieAsc;
   if (sortBy === 'date-desc') {
-    // Newest arrivals, with photos leading (2026-11-16, the owner's phone and
-    // desktop: "lots of no car pics"). Yards publish a set-out DAY, so many
-    // cars tie, and the order used to be the order of the data files: one
-    // yard's whole batch first, photo or not, so a day whose only arrivals
-    // were at a yard with no photos filled the first screens with drawings.
-    //   1. cars set out since the last visit lead (the divider counts on it);
-    //   2. then by day, where a car whose photo shows in the list counts as
-    //      ONE day newer (PHOTO_DAY_BOOST): yesterday's photographed cars
-    //      come before today's unphotographed ones, never more than a day;
-    //   3. on a tie the photo first, then the truly newer day, then the
-    //      nearest yard.
-    // Every tile still shows its own set-out date; unknown dates stay last.
+    // Newest arrivals: strictly by set-out day. A newer car is never placed
+    // below an older one for lacking a photo (owner, 2026-11-16: "I don't
+    // think new arrivals should be buried by a day just because they don't
+    // have a picture"; a one-day photo boost was tried that day and taken
+    // out). Yards publish a DAY, so many cars tie; only inside a day does
+    // anything else decide: cars whose photo shows in the list first, then
+    // the nearest yard. (It used to be the order of the data files, which
+    // put one yard's whole batch first.) Unknown dates stay last.
     const dOf = v => { const d = vehicleDistanceMi(v); return d == null ? 1e9 : d; };
     // The set-out day as a whole number (calendar days, no clock or DST in
     // it), remembered on the car; 0 when the date is unknown.
@@ -4600,15 +4593,9 @@ function getFilteredLive() {
       }
       return v._day;
     };
-    // Same rule as setOutSince: set out on a day after the last visit's day.
-    let sinceIdx = null;
-    if (FEED_SINCE_DAY) { const [y, m, d] = FEED_SINCE_DAY.split('-').map(Number); sinceIdx = Math.round(Date.UTC(y, m - 1, d) / 86400000); }
-    const dec = filtered.map(v => {
-      const day = dayOf(v), ph = listPhotoFlag(v);
-      return [sinceIdx != null && day > sinceIdx ? 1 : 0, day ? day + ph * PHOTO_DAY_BOOST : 0, ph, day, dOf(v), v];
-    });
-    dec.sort((x, y) => (y[0] - x[0]) || (y[1] - x[1]) || (y[2] - x[2]) || (y[3] - x[3]) || (x[4] - y[4]));
-    filtered = dec.map(d => d[5]);
+    const dec = filtered.map(v => [dayOf(v), listPhotoFlag(v), dOf(v), v]);
+    dec.sort((x, y) => (y[0] - x[0]) || (y[1] - x[1]) || (x[2] - y[2]));
+    filtered = dec.map(d => d[3]);
   } else if (keyFn) {
     const dec = filtered.map(v => [keyFn(v), tieFn(v), v]);
     dec.sort((x, y) => (asc ? x[0] - y[0] : y[0] - x[0])

@@ -79,6 +79,14 @@ check("the inventory reader sends the scanner's own name",
       js.PNS_HEADERS.get("User-Agent") == js.YARDSCOUT_UA and js.YARDSCOUT_UA.startswith("YardScout/")
       and "Mozilla" not in js.PNS_HEADERS.get("User-Agent", ""), js.PNS_HEADERS.get("User-Agent"))
 check("the photo checks send the same name", js.YARDSCOUT_HEADERS.get("User-Agent") == js.YARDSCOUT_UA)
+# The other yards told the same thing on 2026-11-02 (owner, 2026-11-16: "Yes
+# switch all three"): U-Pull-R, Budget, Harry's.
+check("U-Pull-R and Budget readers send the scanner's own name",
+      js.UPR_HEADERS.get("User-Agent") == js.YARDSCOUT_UA and js.BUDGET_HEADERS.get("User-Agent") == js.YARDSCOUT_UA)
+import inspect  # noqa: E402
+_h = inspect.getsource(js.fetch_harrys_inventory)
+check("Harry's reader sends the scanner's own name (the Sucuri step itself is untouched)",
+      '"User-Agent": YARDSCOUT_UA' in _h and "_sucuri_solve(page)" in _h, _h[:200])
 
 if fails:
     print(f"\n{len(fails)} FAILED")
