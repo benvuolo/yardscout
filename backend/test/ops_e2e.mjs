@@ -194,8 +194,18 @@ const ev2 = (e, extra = {}) => ev(e, { p: 'web', v: 2, ...extra });
 await ev2('first-visit'); await ev2('first-visit'); await ev2('first-visit'); await ev2('zip-entered'); await ev2('paywall'); await ev2('paywall/header-pill');
 await ev2('store-click'); await ev2('store-click/appstore-sheet'); await ev2('store-click'); await ev2('store-click/play-toast'); await ev2('store-click'); await ev2('store-click/play-banner');
 await ev2('checkout-start'); await ev2('checkout/header-pill'); await ev('review-prompt/third-day');
+// First view from the /geo guess (2026-11-16): two web visitors saw cars from a guess, one then gave a zip.
+await ev2('first-view-guess'); await ev2('first-view-guess'); await ev2('guess-replaced');
 const marker = await ev('funnel-v2', { p: 'android', v: 2 });
 check('events: a client cannot post the v2 marker itself', marker.status === 400, String(marker.status));
+{
+  const at = await api('/v1/admin/attribution?days=30', { headers: ADMIN });
+  const f = at.data.funnel || [];
+  check('attribution: the guess counters are funnel columns, beside "zip-entered"',
+    at.status === 200 && f.indexOf('first-view-guess') === f.indexOf('zip-entered') - 1 && f.indexOf('guess-replaced') === f.indexOf('zip-entered') + 1, JSON.stringify(f));
+  const web = (at.data.channels || []).find((c) => c.source === '' && c.platform === 'web') || { events: {} };
+  check('attribution: the guess counters are counted like any event', web.events['first-view-guess'] === 2 && web.events['guess-replaced'] === 1, JSON.stringify(web));
+}
 const TODAY = new Date().toISOString().slice(0, 10);
 r = await dailyRun({ dryRun: true, nowOffsetHours: 24 });
 const u = r.data.usage || {};
@@ -215,6 +225,9 @@ check('usage: store taps by store and place', u.storeTaps?.total === 3 && JSON.s
   check('email: store link taps are web only (dash, not zero, for the apps)', /Store link taps\s+3\s+3\s+–\s+–\s+–\s+–\n/.test(t), row('Store link taps'));
   check('email: rating prompts are app only (dash for web)', /Rating prompts\s+–\s+–\s+1\s+1\s+0\s+0\n/.test(t), row('Rating prompts'));
   check('email: paywall opens row', /Paywall opens\s+1\s+1\s+0\s+0\s+0\s+0\n/.test(t), row('Paywall opens'));
+  check('email: the guess rows sit beside "Entered a zip" (guess, zip, corrected)',
+    /Saw cars from a guess\s+2\s+2\s+0\s+0\s+0\s+0\n\s+Entered a zip\s+1\s+1\s+0\s+0\s+0\s+0\n\s+Guess then corrected\s+1\s+1\s+0\s+0\s+0\s+0\n/.test(t), t.split('USAGE')[1]);
+  check('email html: the guess rows too', /Saw cars from a guess<\/span><\/td><td[^>]*>2 \/ 2<\/td>/.test(h) && /Guess then corrected<\/span><\/td><td[^>]*>1 \/ 1<\/td>/.test(h));
   check('email: store taps line names store and place', /Store link taps \(7 d, web\): Google Play 2, App Store 1 · from: app banner 1, Pro sheet 1, watch toast 1/.test(t), t.split('USAGE')[1]);
   check('email: web is labelled as mixed (fixed counters started inside the 7 d shown)', /Note: Web: fixed counters since [A-Z][a-z]{2} \d{1,2}\. The 7 d column still includes 6 earlier days of the old counting/.test(t), t.split('USAGE')[1]);
   check('email: apps with no fixed build are labelled, not back-filled', /Note: iOS and Android: no app build with the fixed counters has reported yet\./.test(t) && !/Note: Web: still the old counting/.test(t));

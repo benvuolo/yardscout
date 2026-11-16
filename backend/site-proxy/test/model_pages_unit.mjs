@@ -128,15 +128,19 @@ check('no row → no "Row" text', !line('5N1AN08U05C000002').includes('Row'));
 const lots = r.html.slice(r.html.indexOf('id="on-lots"'));
 check('on the lots now: total and regions', lots.startsWith('id="on-lots">On the lots now <span>· 1,078 in 3 states and 1 Canadian province</span>'), lots.slice(0, 120));
 check('on the lots table by state, with this week beside it', lots.includes('<td><a href="https://yardscout.io/junkyards/arizona">Arizona</a></td><td class="num">56</td><td class="num">3</td>') && lots.includes('Texas</a></td><td class="num">166</td><td class="num">0</td>'));
-check('CTA: the app deep link for this model', r.html.includes('href="https://yardscout.io/#cars=Nissan|Xterra">See every Xterra near you</a>'));
-check('CTA: watch link for this model', r.html.includes('href="https://yardscout.io/#watch=Nissan|Xterra"'));
+// Buttons into the app carry the model and a source tag (2026-11-16): utm_source=page, medium model, campaign <make>-<model>.
+const TAG = 'https://yardscout.io/?utm_source=page&amp;utm_medium=model&amp;utm_campaign=nissan-xterra';
+check('CTA: the app deep link for this model, tagged', r.html.includes(`href="${TAG}#cars=Nissan|Xterra" rel="nofollow">See every Xterra near you</a>`), (r.html.match(/<a class="btn btn-primary"[^>]*>See every[^<]*<\/a>/) || [''])[0]);
+check('CTA: watch link for this model, tagged', r.html.includes(`href="${TAG}#watch=Nissan|Xterra" rel="nofollow"`));
+check('header "Open the app" is tagged too (and keeps its app path)', r.html.includes(`href="${TAG}" rel="nofollow" data-app-path="/open"`));
+check('every link into the app is tagged and nofollow', [...r.html.matchAll(/<a [^>]*href="https:\/\/yardscout\.io\/(?:[?#][^"]*)"[^>]*>/g)].every((m) => /utm_source=page/.test(m[0]) && /rel="nofollow"/.test(m[0])), [...r.html.matchAll(/<a [^>]*href="https:\/\/yardscout\.io\/(?:[?#][^"]*)"[^>]*>/g)].map((m) => m[0]).join(' | '));
 check('stores line', r.html.includes('Arrival alerts live in the app'));
 check('honest note: call ahead, VIN-only drive/trim', /call the yard before a long drive/.test(r.html) && /left out when the VIN does not say/.test(r.html));
 check('links up to the make, across to siblings, to the state hub', r.html.includes('href="https://yardscout.io/landed/nissan">All Nissan arrivals this week') && r.html.includes('href="https://yardscout.io/landed/nissan/frontier">Frontier') && r.html.includes('href="https://yardscout.io/junkyards"'));
 check('no parts, prices or fitment', !/\$\d|price list|fits |fitment|alternator/i.test(text(r.html)));
 // Every internal link on the page answers 200 (anchors and app deep links aside).
 const internal = [...new Set([...r.html.matchAll(/href="https:\/\/yardscout\.io(\/[^"#]*)"/g)].map((m) => m[1]))]
-  .filter((p) => p !== '/' && !p.startsWith('/styles') && !/\.(png|ico)/.test(p) && !p.startsWith('/open'));
+  .filter((p) => p !== '/' && !p.startsWith('/?') && !p.startsWith('/styles') && !/\.(png|ico)/.test(p) && !p.startsWith('/open'));
 const broken = [];
 for (const p of internal) {
   if (p.startsWith('/car/') && !SHARD.vehicles.some((v) => p.endsWith('/' + (v[1] || v[0])))) continue;   // cars outside the API fixture

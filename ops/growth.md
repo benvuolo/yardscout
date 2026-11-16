@@ -528,3 +528,128 @@ same failure on untouched origin/main, so pre-existing.
 gets a Monday recap instead" (true for the web). `freeDeliveryNote()` (in the
 first-view builder's strip) is unchanged and still true, but does not
 mention the instant watch.
+
+## No zip gate on the first visit — branch `growth/no-gate`, NOT merged (2026-11-16)
+
+Owner: "make it as intuitive as possible", "Do it and ship". Built on
+origin/main 004eeda0. Nothing merged, deployed, dispatched or released; no
+file in `ios/`, `android/`, `native/`, `fastlane/`, `scraper/`. Merging
+deploys the web app (Pages), the site Worker (yardscout.io pages) and the API
+worker (attribution, ops email, scorecard; no migration). The apps get the
+app half only with a store release (owner's "ship").
+
+**1. A first visit shows cars.** With no saved place (no zip, no GPS, not
+Pro "browse nationwide") the app asks `/geo` once per page load
+(`DATA_BASE + 'geo'`, gives up after 2.5 s). Ok: the Cars list around that
+point at the default radius, with a line above it: "Showing yards near
+**Sacramento, CA**. That is a guess from your internet connection." + zip
+field, "Show me", "Use my location" (no city: "near your internet
+connection's location. That is a guess."). Not ok, failing, slow or abroad:
+today's zip card, unchanged. While the answer is on its way the list shows
+its loading state (no flash of the zip prompt).
+- Rules (app.js block "A PLACE FOR THIS VISIT ONLY"): the guess lives in
+  `_tempPlace` + `activeZipCoords` for the page only; never written to
+  `jh_zip`, `jh_zip_coords`, `jh_gps`. **Helper for the strip:
+  `locationIsGuess()`** (true while a guess or a link's place is on screen
+  for someone with nothing saved). Also `ownCenter()` (the visitor's own
+  zip/GPS centre, never a guess) and `needOwnZip()`. `addQuickWatch` answers
+  'no-zip' while `locationIsGuess()` (Pro too), so `askZipForWatch` runs;
+  watch centres in `addQuickWatch`, `addWatchItem`, `syncWatchToServer`
+  (legacy), `deviceSyncWatches`, `inInstantScope`, the Alerts watch card and
+  `recapNoteNewWatch` read `ownCenter()`. A zip (any field) or GPS replaces
+  the guess for good (`placeReplaced`).
+- The radius loader and the yard filter read `activeZipCoords` as before, so
+  they work from the guess unchanged. The zip chip hides while the line shows.
+  The Parts tab's "Searching within 100 mi of …" says "Sacramento, CA (a guess)".
+- **Counters** (no new counting-rules version; same anonymous +1):
+  `first-view-guess` once per visit (sessionStorage) when the list opens on
+  a guess, and `guess-replaced` once per visit when a zip or GPS then
+  replaces it. Decision: two names, not one, because "Entered a zip" also
+  counts people who saw the zip card, so it cannot say how many corrected a
+  guess. API: both in `attribution.js` FUNNEL; daily email funnel rows "Saw
+  cars from a guess" / "Entered a zip" / "Guess then corrected". iOS/Android
+  columns stay 0 until a store release.
+- Privacy page (`#first-view`): what is read (the city the connection
+  appears to come from, as Cloudflare reports it), used for that one answer,
+  not stored or logged by us, kept only while the page is open, never a watch
+  or Monday-email centre, replaced by a zip; the tallies list and "What the
+  app fetches" say the same.
+
+**2. Zip card names the car** when it shows and the page came with a cars
+link: "Find a Nissan Xterra near you" / "Enter your zip or postal code and
+we'll list every Nissan Xterra in the self-service yards near you." (make
+only when no model; "an" before A/E/I/O; an all-lowercase link word is
+capitalised). Without a cars link: unchanged.
+
+**3. Links that carry a place** (parsed beside `#cars=`, combine with it as
+`#yard=…&cars=…`): `#yard=<name as in the data>` centres on the yard's
+coordinates from the inventory manifest (else the loaded inventory) and sets
+the Yard filter; `#near=<lat>,<lng>,<label>` (US/Canada bounds, label plain
+text ≤ 40). Line: "Showing yards near <label> (from the page you came
+from)." Same rules as a guess. A visitor with a saved zip or GPS keeps it:
+the link's place is for this visit, the line offers "Back to <zip>" ("Back to
+my location" for GPS), and their watches keep their own centre. An unknown
+yard or a bad `#near=`: ignored (zip card / own place). No `/geo` call when
+a link carries a place.
+
+**4. Search pages' buttons** (`backend/site-proxy/src/share.js`): yard page
+"Search this yard" → `#yard=`; state and city pages → `#near=` at a point
+among their yards (`pointAmongYards`: the yard with most of the group within
+100 mi; a metro alias page uses its own point), labelled "See the cars in
+Dallas" / "See the cars in Texas yards" / "See the cars near Seattle"; make
+page's second button → `#cars=<Make>` ("See every Ford near you"); model
+pages keep `#cars=`/`#watch=`. Every button into the app, and the header's
+"Open the app", carries `?utm_source=page&utm_medium=<yard|city|state|model|
+make|landed|prices|yards|car>&utm_campaign=<slug>` and `rel="nofollow"`;
+`docs/robots.txt` adds `Disallow: /?utm_source=`. The /junkyards hub uses
+medium `state`, campaign `all`; a gone car uses `car`/`gone`. App side:
+`ATTRIB` keeps a remembered outside source when the new one is `page`
+(`attribKeepsStored`), tags still stripped from the address bar.
+
+**5. Scorecard** per-link line: "30 visits → 12 entered a zip → 4 watches →
+…" (`zip-entered` added to the scorecard's events; tagged zips only).
+
+sw.js `jh-v201` (hub re-bumps at merge).
+
+**Tests (final tree, all pass):** no_gate_e2e 76, ui_no_truncation (home,
+results, place-guess, place-link, place-link-saved, zip-card-car at 320/360/
+390/1280, light/dark, 100/200%) 96 checks 0 failures, site units redirects 52,
+model_pages 60, junkyards 236, prices 39, geo 13; car_search_e2e 48,
+coverage_gaps 26, funnel_events 128, tab_retap 14 (one run failed 309 vs 300
+while eight browser tests ran beside it; passed twice alone), free_instant 30,
+recap_ask 35, share_watch 33, pf_guards 167, scorecard_unit 155,
+funnel_counters_unit, e2e.sh 39, e2e-ops.sh ALL PASS, alert_freshness 15,
+browser_e2e 17, app_promo 174, card_share 24, model_years 18, notable_trims
+40, photo_layout 584, pro_sheet_fold 188, map_regions, no_pick_models,
+pf_new_cats.
+New `backend/test/no_gate_e2e.mjs` (the real bundle served as yardscout.io,
+beacons caught; `NOGATE_SHOTS=<dir>` writes 390 px light/dark shots);
+`ui_no_truncation.mjs` screens `place-guess`, `place-link`,
+`place-link-saved`, `zip-card-car`; site units (junkyards_unit sweeps 13
+rendered pages for tagged nofollow buttons + robots); `ops_e2e.mjs`
+(attribution columns, email rows); `scorecard_unit`; `funnel_counters_unit`
+harness gained stubs for the new names `setZipCenter` uses.
+
+**For the hub at merge (other workstream's code, not edited here):**
+- Car screen (`renderCarDetail`): "N mi from <zip>" reads `jh_zip`; while a
+  link's place is on screen for someone with a saved zip, the distance is
+  from the link's place but labelled with their zip. One-word fix there:
+  `zip && !_tempPlace`.
+- `#live-stats-bar` says "Cars near you" and the header "N yards in your
+  range" under a guess; the line above says it is a guess. The strip
+  (`watchStripHtml`) should use `locationIsGuess()` if it wants to word the
+  offer differently ("enter your zip to watch").
+
+**Seen, not changed.** The Yards tab and its map centre on a guess too, with
+no line saying so (the Cars line is the only label). iPhone/Android "Open in
+YardScout" and the header button are rewritten to app paths by the page's
+script, so the utm tag only rides on desktop and as the Android browser
+fallback. Car links on yard and city pages (`/yard/…` newest arrivals, city
+"Newest arrivals") have no `rel="nofollow"` (model and make pages do);
+`/car/` is disallowed in robots.txt either way. The stores line's "web
+version" link and the logo are left untagged (links, not buttons).
+
+**Suggestions.** (1) Count the line's "Use my location" separately from a
+typed zip if the owner wants to know which correction people use. (2) Put
+the same guess line on the Yards tab. (3) A "Not here?" link on the stats
+bar for a guess, once the Cars-feed work settles.

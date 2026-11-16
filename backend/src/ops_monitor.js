@@ -479,7 +479,11 @@ function nameList(items, fmt) {
 }
 
 const FUNNEL_ROWS = [
-  ['first-visit', 'First visits'], ['zip-entered', 'Entered a zip'], ['part-first-search', 'Part searches'],
+  ['first-visit', 'First visits'],
+  // First view from the /geo guess (2026-11-16): cars shown with nothing
+  // typed, then how many replaced the guess with their own zip or location.
+  ['first-view-guess', 'Saw cars from a guess'], ['zip-entered', 'Entered a zip'], ['guess-replaced', 'Guess then corrected'],
+  ['part-first-search', 'Part searches'],
   ['watch-created', 'Watches created'], ['email-asked', 'Monday email asked'], ['email-submitted', 'Monday email given'],
   ['email-confirmed', 'Monday email confirmed'], ['push-enabled', 'Alerts turned on'], ['store-click', 'Store link taps'],
   ['paywall', 'Paywall opens'], ['checkout-start', 'Checkout taps'],

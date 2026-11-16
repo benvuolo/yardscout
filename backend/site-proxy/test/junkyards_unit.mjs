@@ -192,7 +192,9 @@ const order = ['1HGFB2F50CL000001', '1GNEK13Z04R000003', 'stock-77', '1FTRF12W09
 check('city: arrivals newest first', order.every((p, i) => p > 0 && (i === 0 || p > order[i - 1])), order.join(','));
 check('city: arrival row + set-out date', r.html.includes('Row 12<br>') && r.html.includes('Row A&amp;B<br>'));
 check('city: model escaped (no script injection)', !r.html.includes('<script>alert') && r.html.includes('Camry &lt;script&gt;alert(1)&lt;/script&gt;'));
-check('city: zip CTA', r.html.includes('Search near your zip'));
+// The city page's button opens the app near the city, tagged (2026-11-16): a point among its yards.
+check('city: the app button lands near the city, tagged', r.html.includes('href="https://yardscout.io/?utm_source=page&amp;utm_medium=city&amp;utm_campaign=tx-dallas#near=32.7,-96.8,Dallas%2C%20TX" rel="nofollow">See the cars in Dallas</a>'), (r.html.match(/<div class="cta">[\s\S]*?<\/div>/) || [''])[0]);
+check('city: the alert button is tagged', r.html.includes('href="https://yardscout.io/?utm_source=page&amp;utm_medium=city&amp;utm_campaign=tx-dallas#tab=alerts" rel="nofollow">Alert me when a car I want lands nearby</a>'));
 check('city: scan time + coverage caveat', r.html.includes('Oct 30, 11:58 AM UTC') && r.html.includes('only tracks self-service yards that post their inventory online'));
 
 r = await get('/junkyards/texas/houston');
@@ -315,7 +317,9 @@ check('yard: short common-parts table instead of the full price list', (commonBl
 check('yard: an accessory row never stands in for the part; no engine row', !commonBlock.includes('BRACKET') && !commonBlock.includes('SOLENOID') && !commonBlock.includes('ENGINE') && !commonBlock.includes('RADIATOR'));
 check('yard: links to the full price list page', commonBlock.includes('<a href="https://yardscout.io/prices/pick-n-pull">Full Pick-n-Pull price list</a> (9 parts)') && r.html.includes('<a href="https://yardscout.io/prices/pick-n-pull">Pick-n-Pull price list</a>'));
 check('yard: no filter box, no 472-row list', !r.html.includes('id="pl-q"') && !r.html.includes('id="pl-rows"') && !r.html.includes('tap to open'));
-check('yard: call to action unchanged', r.html.includes(`<a class="btn btn-primary" href="https://yardscout.io/">Search this yard in YardScout</a>`) && r.html.includes('Alert me when a car I want lands here'));
+check('yard: "Search this yard" opens the app on this yard, tagged', r.html.includes(`<a class="btn btn-primary" href="https://yardscout.io/?utm_source=page&amp;utm_medium=yard&amp;utm_campaign=pick-n-pull-dallas-south#yard=Pick-n-Pull%20-%20Dallas%20South" rel="nofollow">Search this yard in YardScout</a>`), (r.html.match(/<div class="cta">[\s\S]*?<\/div>/) || [''])[0]);
+check('yard: the alert button is tagged', r.html.includes(`href="https://yardscout.io/?utm_source=page&amp;utm_medium=yard&amp;utm_campaign=pick-n-pull-dallas-south#tab=alerts" rel="nofollow">Alert me when a car I want lands here</a>`));
+check('yard: header "Open the app" tagged', r.html.includes(`href="https://yardscout.io/?utm_source=page&amp;utm_medium=yard&amp;utm_campaign=pick-n-pull-dallas-south" rel="nofollow" data-app-path="/open"`));
 check('yard: breadcrumb Junkyards > State > City > Yard', ldOf(r.html, 'BreadcrumbList').itemListElement.map((e) => e.item).join() === 'https://yardscout.io/junkyards,https://yardscout.io/junkyards/texas,https://yardscout.io/junkyards/texas/dallas,https://yardscout.io/yard/pick-n-pull-dallas-south');
 check('yard: links to its city and state pages', r.html.includes('href="https://yardscout.io/junkyards/texas/dallas">Junkyards in Dallas, TX</a>') && r.html.includes('href="https://yardscout.io/junkyards/texas">Junkyards in Texas</a>'));
 const nearYards = section(r.html, 'Nearest tracked yards');
@@ -352,7 +356,7 @@ check('car: facts still shown (row, set-out date, VIN, trim, lot clock)', r.html
 check('car: no inline price list', !r.html.includes('class="ptable"') && !r.html.includes('id="pl-q"') && !r.html.includes('$32.99') && !r.html.includes('ALTERNATOR') && !r.html.includes('tap to open'));
 check('car: links to the price list page instead', r.html.includes('<a href="https://yardscout.io/prices/pick-n-pull">Pick-n-Pull price list</a>'));
 check('car: page is its own content, not a price list (under 20 KB)', r.html.length < 20000, r.html.length);
-check('car: app link unchanged', r.html.includes('href="https://yardscout.io/#car=1HGFB2F50CL000001" data-app-path="/car/1HGFB2F50CL000001"'));
+check('car: app link keeps the car and its app path, tagged', r.html.includes('href="https://yardscout.io/?utm_source=page&amp;utm_medium=car&amp;utm_campaign=honda-civic#car=1HGFB2F50CL000001" rel="nofollow" data-app-path="/car/1HGFB2F50CL000001"'), (r.html.match(/<div class="cta">[\s\S]*?<\/div>/) || [''])[0]);
 r = await get('/car/1HGCM56405A000000');
 check('gone car → 404 noindex, one <h1>, no JSON-LD', r.status === 404 && /content="noindex"/.test(r.html) && h1s(r.html).join() === 'This car is no longer listed' && ldBlocks(r.html).length === 0);
 check('gone car: links to the hubs (its yard and make are no longer known)', ['/junkyards', '/yards', '/landed'].every((p) => r.html.includes(`href="https://yardscout.io${p}"`)));
@@ -381,6 +385,46 @@ check('yard URL under a one-list chain → 301 to the chain page', r.status === 
 for (const p of ['/prices/pick-n-pull/duke-city-u-pull', '/prices/tear-a-part', '/prices/nope', '/prices/%E0%A4%A', '/prices/pick-n-pull/x/y']) {
   r = await get(p);
   check(`${p} → 404${p.endsWith('/x/y') ? '' : ' noindex, one <h1>'}`, r.status === 404 && (p.endsWith('/x/y') || (/content="noindex"/.test(r.html) && h1s(r.html).length === 1)), r.status);
+}
+
+/* ---------- buttons into the app (2026-11-16): a place or car, and a source tag ---------- */
+{
+  const J = 'https://yardscout.io/?utm_source=page&amp;utm_medium=';
+  const cta = (html) => (html.match(/<div class="cta">[\s\S]*?<\/div>/) || [''])[0];
+  r = await get('/junkyards/texas');
+  check('state: "See the cars in Texas yards" opens the app at a point among its yards, tagged', cta(r.html).includes(`href="${J}state&amp;utm_campaign=texas#near=32.7,-96.8,Texas" rel="nofollow">See the cars in Texas yards</a>`), cta(r.html));
+  r = await get('/junkyards/washington/seattle');
+  check('metro alias city: the app opens near the city itself, "near"', cta(r.html).includes(`${J}city&amp;utm_campaign=wa-seattle#near=47.606,-122.332,Seattle%2C%20WA" rel="nofollow">See the cars near Seattle</a>`), cta(r.html));
+  r = await get('/junkyards');
+  check('junkyards hub: tagged, no place (state, all)', cta(r.html).includes(`href="${J}state&amp;utm_campaign=all" rel="nofollow">Search near your zip</a>`), cta(r.html));
+  r = await get('/landed/ford');
+  check('make page: the secondary button carries #cars=Make, tagged', cta(r.html).includes(`href="${J}make&amp;utm_campaign=ford#cars=Ford" rel="nofollow">See every Ford near you</a>`) && cta(r.html).includes(`href="${J}make&amp;utm_campaign=ford#tab=alerts" rel="nofollow"`), cta(r.html));
+  r = await get('/landed');
+  check('landed hub: tagged', cta(r.html).includes(`href="${J}landed&amp;utm_campaign=all" rel="nofollow">Search near your zip</a>`) && cta(r.html).includes(`${J}landed&amp;utm_campaign=all#tab=alerts`), cta(r.html));
+  r = await get('/yards');
+  check('/yards: tagged', cta(r.html).includes(`href="${J}yards&amp;utm_campaign=all" rel="nofollow">Search near your zip</a>`), cta(r.html));
+  r = await get('/prices/pick-n-pull');
+  check('price page: tagged with the chain', cta(r.html).includes(`href="${J}prices&amp;utm_campaign=pick-n-pull" rel="nofollow">Search near your zip</a>`), cta(r.html));
+  r = await get('/car/NOT-LISTED-123');
+  check('gone car: both buttons tagged (car, gone)', cta(r.html).includes(`${J}car&amp;utm_campaign=gone#tab=alerts" rel="nofollow"`) && cta(r.html).includes(`${J}car&amp;utm_campaign=gone" rel="nofollow"`), cta(r.html));
+  // Every rendered page: every link into the app (yardscout.io/?… or /#…) is tagged and nofollow;
+  // no new crawlable address appears; car links that were nofollow stay so.
+  const pages = ['/junkyards', '/junkyards/texas', '/junkyards/texas/dallas', '/junkyards/washington/seattle', '/yards', '/landed', '/landed/ford',
+    '/yard/pick-n-pull-dallas-south', '/yard/duke-city-u-pull', '/car/1HGFB2F50CL000001', '/car/NOT-LISTED-123', '/prices', '/prices/pick-n-pull'];
+  const bad = [];
+  for (const p of pages) {
+    const x = await get(p);
+    for (const m of x.html.matchAll(/<a [^>]*href="https:\/\/yardscout\.io\/[?#][^"]*"[^>]*>/g)) {
+      if (!/utm_source=page&amp;utm_medium=(yard|city|state|model|make|landed|prices|yards|car)&amp;utm_campaign=[a-z0-9-]+/.test(m[0]) || !/rel="nofollow"/.test(m[0])) bad.push(`${p}: ${m[0]}`);
+    }
+    if (/<a [^>]*href="https:\/\/yardscout\.io\/#/.test(x.html)) bad.push(`${p}: an untagged #link`);
+  }
+  check(`every button into the app on ${pages.length} rendered pages is tagged and nofollow`, !bad.length, bad.slice(0, 4).join(' || '));
+  r = await get('/landed/ford');
+  check('make page car links stay rel="nofollow"', /<li><a href="https:\/\/yardscout\.io\/car\/[^"]+" rel="nofollow">/.test(r.html) && !/<li><a href="https:\/\/yardscout\.io\/car\/[^"]+">/.test(r.html));
+  const robots = (await import('node:fs')).readFileSync(new URL('../../../docs/robots.txt', import.meta.url), 'utf8');
+  const star = robots.split(/\n\s*\n/).find((g) => /User-agent: \*/.test(g)) || '';
+  check('robots.txt: /car/ still disallowed, and the tagged app addresses are too', /Disallow: \/car\//.test(star) && /Disallow: \/\?utm_source=/.test(star), star);
 }
 
 /* ---------- www → apex for rendered pages ---------- */

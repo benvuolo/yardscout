@@ -89,6 +89,8 @@ function boot({ hostname = 'yardscout.io', webdriver = false, native = false, an
     const GOATCOUNTER_CODE = null; const ATTRIB = null; const EVENTS_API = 'https://api.test/v1/events';
     let zipCoordsCache = {}; let activeZipCoords = null; let pfCat = { id: 'alternator' }; let _coOpen = false;
     function pfSyncWhere() {} function renderLive() {}
+    // A place for this visit (2026-11-16): none here, so setZipCenter behaves as before.
+    let _tempPlace = null; function placeReplaced() {} function updateZipBanner() {}
     globalThis.__set = (k, v) => { if (k === 'pfCat') pfCat = v; };
   `;
   new vm.Script(prelude + [...CONSTS.slice(0, 2), 'analyticsOff', ...CONSTS.slice(2), ...FNS.filter(n => n !== 'analyticsOff')].map(n => parts[n]).join('\n')

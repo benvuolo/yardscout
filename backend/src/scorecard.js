@@ -9,7 +9,8 @@
  *   4. Pro sheet opens -> checkout starts (rate) -> Pro bought
  *   5. paying subscribers (App Store + Google Play + web) and the change
  *      from 7 days ago, from a daily snapshot this module stores
- * plus one line per tagged link: visits -> watches -> emails -> checkouts -> Pro.
+ * plus one line per tagged link: visits -> entered a zip -> watches -> emails ->
+ * checkouts -> Pro.
  *
  * Honesty rules (the owner reads this on a phone and acts on it):
  *   - A platform whose fixed counting (attribution.js 'funnel-v2' marker)
@@ -53,7 +54,8 @@ const TOP_SOURCES = 5;
 const TOP_SOURCE_ROWS = 8;
 
 export const SC_PLATFORMS = [['web', 'Web'], ['ios', 'iPhone app'], ['android', 'Android app']];
-const EVENTS = ['first-visit', 'watch-created', 'email-asked', 'email-submitted', 'email-confirmed',
+// 'zip-entered' feeds only the per-link line ("entered a zip", 2026-11-16).
+const EVENTS = ['first-visit', 'zip-entered', 'watch-created', 'email-asked', 'email-submitted', 'email-confirmed',
   'paywall', 'checkout-start', 'pro-converted'];
 // The Monday email ask exists on the website only.
 const WEB_ONLY = new Set(['email-asked', 'email-submitted', 'email-confirmed']);
@@ -211,7 +213,7 @@ export function computeScorecard({ today, rows = [], presence = [], v2 = {}, v3 
   const sourceRows = allSrc.filter((s) => s.source)
     .map((s) => ({
       source: s.source, campaign: s.campaign, label: label(s),
-      visits: s.events['first-visit'] || 0, watches: s.events['watch-created'] || 0,
+      visits: s.events['first-visit'] || 0, zips: s.events['zip-entered'] || 0, watches: s.events['watch-created'] || 0,
       emails: s.events['email-submitted'] || 0, confirmed: s.events['email-confirmed'] || 0, checkouts: s.events['checkout-start'] || 0, pro: s.events['pro-converted'] || 0,
       visitsByMedium: [...s.mediums].filter(([, n]) => n > 0).map(([medium, n]) => ({ medium, n }))
         .sort((a, b) => b.n - a.n || a.medium.localeCompare(b.medium)),
@@ -532,7 +534,7 @@ function sourceRowText(s) {
   const med = s.visitsByMedium.filter((x) => x.medium);
   const medTxt = med.length > 1 || (med.length === 1 && s.visitsByMedium.length > 1)
     ? ` (${s.visitsByMedium.map((x) => `${x.medium || 'untagged'} ${fmt(x.n)}`).join(', ')})` : '';
-  return `${s.label}: ${pl(s.visits, 'visit', 'visits')}${medTxt} → ${pl(s.watches, 'watch', 'watches')}`
+  return `${s.label}: ${pl(s.visits, 'visit', 'visits')}${medTxt} → ${fmt(s.zips || 0)} entered a zip → ${pl(s.watches, 'watch', 'watches')}`
     + ` → ${pl(s.emails, 'email given', 'emails given')}, ${fmt(s.confirmed || 0)} confirmed`
     + ` → ${pl(s.checkouts, 'checkout', 'checkouts')} → ${fmt(s.pro)} Pro`;
 }

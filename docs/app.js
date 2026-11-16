@@ -42,14 +42,32 @@ const FUNNEL_EVENTS = {
   'email-asked': 'email-asked', 'email-submitted': 'email-submitted',
   // A checkout attempt by a client that also counts how it ends (v4, below).
   'checkout-try': 'checkout-try',
+  // First view (2026-11-16): the Cars list opened around the area the
+  // connection appears to come from (/geo), once per visit; and a zip or
+  // "Use my location" then replacing that guess (see A PLACE FOR THIS VISIT).
+  'first-view-guess': 'first-view-guess', 'guess-replaced': 'guess-replaced',
 };
+/* Our own search pages tag their buttons utm_source=page (2026-11-16,
+ * backend/site-proxy/src/share.js). That is an internal hop, not a channel:
+ * it never replaces a remembered outside source (a Reddit visitor who later
+ * taps a yard page's button stays a Reddit visitor). Pure (tested). */
+const ATTRIB_INTERNAL = 'page';
+function attribKeepsStored(stored, incomingSrc, now) {
+  return String(incomingSrc || '').toLowerCase() === ATTRIB_INTERNAL
+    && !!stored && !!stored.src && String(stored.src).toLowerCase() !== ATTRIB_INTERNAL
+    && now - stored.at < 90 * 86400000;
+}
 const ATTRIB = (() => {
   try {
     const q = new URLSearchParams(location.search);
     if (q.get('utm_source')) {
-      localStorage.setItem('ys_utm', JSON.stringify({
-        src: q.get('utm_source'), cmp: q.get('utm_campaign') || '', med: q.get('utm_medium') || '', at: Date.now(),
-      }));
+      let stored = null;
+      try { stored = JSON.parse(localStorage.getItem('ys_utm') || 'null'); } catch (e) { stored = null; }
+      if (!attribKeepsStored(stored, q.get('utm_source'), Date.now())) {
+        localStorage.setItem('ys_utm', JSON.stringify({
+          src: q.get('utm_source'), cmp: q.get('utm_campaign') || '', med: q.get('utm_medium') || '', at: Date.now(),
+        }));
+      }
       for (const k of [...q.keys()]) if (k.startsWith('utm_')) q.delete(k);
       history.replaceState(null, '', location.pathname + (q.toString() ? '?' + q : '') + location.hash);
     }
@@ -1974,6 +1992,7 @@ function _invStart(m, { source, cache, quiet, fresh }) {
   if (_invNext) _invStop(_invNext);
   if (swap === 'partial' && _inv) _inv.stopped = true;   // about to be replaced
   _invNext = s;
+  placeYardResolve(m);   // a #yard= link's place comes from this yards table
   _invPump(s);
   return s;
 }
@@ -2885,6 +2904,11 @@ function populateYardFilter() {
   });
   // Keep the selection only if that yard is still in range.
   locSel.value = (prev && rows.some(r => r.name === prev)) ? prev : '';
+  // A #yard= link: that yard, once its cars are in.
+  if (_linkYardFilter && rows.some(r => r.name === _linkYardFilter)) {
+    locSel.value = _linkYardFilter;
+    _linkYardFilter = null;
+  }
 }
 
 /* A location anchors every other filter: with no center there's nothing to
@@ -2946,7 +2970,7 @@ const POSTAL_CA = (() => {
   } catch (e) { return false; }
 })();
 function applyPostalInputs() {
-  for (const id of ['zip-banner-input', 'live-zip', 'yards-zip', 'pf-zip', 'yards-zip-input']) {
+  for (const id of ['zip-banner-input', 'live-zip', 'yards-zip', 'pf-zip', 'yards-zip-input', 'place-line-input']) {
     const el = document.getElementById(id);
     if (!el) continue;
     el.maxLength = 7;
@@ -2958,9 +2982,13 @@ function applyPostalInputs() {
   }
 }
 
-async function setZipCenter(zip) {
+/* restore: the launch putting the saved zip back. When a link's place is on
+ * screen for this visit, the saved zip only becomes the "back to" place. */
+async function setZipCenter(zip, restore = false) {
   const pc = normalizePostal(zip);
-  if (!pc) { activeZipCoords = null; renderLive(); return; }
+  // A half-typed zip clears today's location, but never a place on screen
+  // for this visit (a guess or a link's place stays until a zip replaces it).
+  if (!pc) { if (!_tempPlace) activeZipCoords = null; renderLive(); return; }
   const cacheKey = pc.key || pc.code;
   try {
     if (!zipCoordsCache[cacheKey]) {
@@ -2970,14 +2998,19 @@ async function setZipCenter(zip) {
       zipCoordsCache[cacheKey] = { lat: parseFloat(p.latitude), lng: parseFloat(p.longitude) };
       localStorage.setItem('jh_zip_coords', JSON.stringify(zipCoordsCache));
     }
-    activeZipCoords = zipCoordsCache[cacheKey];
+    if (restore && _tempPlace) _tempPlace.own = zipCoordsCache[cacheKey];
+    else {
+      if (_tempPlace) placeReplaced();   // the visitor's own zip replaces the guess for good
+      activeZipCoords = zipCoordsCache[cacheKey];
+    }
     // Counted when entered or changed; a launch restoring the saved zip is not an entry.
     if (zipEntryIsNew(localStorage.getItem('jh_zip'), pc.code)) track(pc.key ? 'zip-entered/ca' : 'zip-entered');
     localStorage.setItem('jh_zip', pc.code);
     localStorage.removeItem('jh_gps');
     document.getElementById('live-zip').placeholder = 'e.g. 84101';
+    if (!restore) updateZipBanner();
   } catch (e) {
-    activeZipCoords = null;
+    if (!_tempPlace) activeZipCoords = null;
     document.getElementById('live-zip').style.borderColor = 'var(--red)';
     setTimeout(() => { document.getElementById('live-zip').style.borderColor = ''; }, 1500);
   }
@@ -2990,16 +3023,267 @@ function vehicleDistanceMi(v) {
   return haversineMiles(activeZipCoords.lat, activeZipCoords.lng, v.lat, v.lng);
 }
 
+/* ===== A PLACE FOR THIS VISIT ONLY (2026-11-16) =====
+ * A first visit used to open on a "Where are you?" card that wanted a zip
+ * before it showed a single car. Now, with no saved location (no zip, no GPS
+ * choice, no Pro "browse nationwide"), the app asks GET /geo once
+ * (backend/site-proxy/src/geo.js: the city Cloudflare places the connection
+ * in, rounded to ~7 mi, US and Canada only, stored nowhere) and shows the
+ * Cars list around that point at the default radius, with a line that says
+ * it is a guess and offers the zip field and "Use my location". No answer in
+ * GEO_TIMEOUT_MS, or not ok: the zip card, as before.
+ * A link can carry a place too (our search pages' buttons):
+ *   #yard=<yard name as in the data>  that yard's coordinates, the Cars list
+ *                                     filtered to it
+ *   #near=<lat>,<lng>,<label>         that point, "<label> (from the page you
+ *                                     came from)"
+ * Rules for both kinds:
+ *   - kept for this visit only: never written to jh_zip, jh_zip_coords or
+ *     jh_gps;
+ *   - never a watch centre or a Monday-email centre: while one is on screen
+ *     for someone with nothing saved, locationIsGuess() is true, ownCenter()
+ *     is null and addQuickWatch answers 'no-zip', so the zip step runs;
+ *   - a zip or "Use my location" replaces it for good;
+ *   - someone with a saved place keeps it: a link's place shows for this
+ *     visit with one tap back, and their watches keep their own centre.
+ * The view itself (radius-first loader, yard filter, distances) reads
+ * activeZipCoords exactly as it does for a zip. */
+const GEO_TIMEOUT_MS = 2500;
+let _tempPlace = null;        // { kind: 'guess'|'link', label, yard, saved, own }
+let _placePending = 0;        // lookups in flight: /geo, a #yard= link's yard
+let _pendingYardLink = null;  // a #yard= name waiting for the yards table
+let _linkYardFilter = null;   // that yard, for the Yard filter once it is listed
+/** True while the list is centred on a place the visitor did not give us
+ * (a guess or a link's place) and they have none saved. */
+function locationIsGuess() { return !!_tempPlace && !_tempPlace.saved; }
+/** The visitor's own centre (their zip or GPS), never a guess or a link's place. */
+function ownCenter() { return _tempPlace ? (_tempPlace.own || null) : activeZipCoords; }
+/** A watch made now would need the visitor's zip first. */
+function needOwnZip() { return locationIsGuess() || (!ownCenter() && !isPro()); }
+function placePending() { return _placePending > 0; }
+function hasSavedPlace() {
+  try { return !!(localStorage.getItem('jh_zip') || localStorage.getItem('jh_gps')); } catch (e) { return false; }
+}
+const _onceMem = new Set();
+/** First call per tab session and key: true (sessionStorage, memory fallback). */
+function onceThisVisit(key) {
+  if (_onceMem.has(key)) return false;
+  _onceMem.add(key);
+  try { if (sessionStorage.getItem(key) === '1') return false; sessionStorage.setItem(key, '1'); } catch (e) { /* memory only */ }
+  return true;
+}
+/* US and Canada, generously (Hawaii to the Arctic, the Aleutians to Newfoundland). */
+function placeInBounds(lat, lng) {
+  return Number.isFinite(lat) && Number.isFinite(lng) && lat >= 18 && lat <= 84 && lng >= -180 && lng <= -50;
+}
+/** Plain text for a label: no markup, no control characters, one line, at most n characters. */
+function placeCleanLabel(s, n = 40) {
+  return String(s == null ? '' : s).replace(/<[^>]*>/g, '').replace(/[\u0000-\u001f\u007f<>"'`&\\]/g, '')
+    .replace(/\s+/g, ' ').trim().slice(0, n).trim();
+}
+/** A /geo answer -> { lat, lng, label } or null. Pure (tested). */
+function geoAnswerOk(j) {
+  if (!j || typeof j !== 'object' || j.ok !== true) return null;
+  const lat = typeof j.lat === 'number' ? j.lat : NaN, lng = typeof j.lng === 'number' ? j.lng : NaN;
+  if (!placeInBounds(lat, lng)) return null;
+  const city = placeCleanLabel(j.city, 34);
+  const region = /^[A-Za-z]{2,3}$/.test(String(j.region || '')) ? String(j.region).toUpperCase() : '';
+  return { lat, lng, label: city ? (region ? `${city}, ${region}` : city) : '' };
+}
+/** #near=<lat>,<lng>,<label> -> { lat, lng, label } or null. Pure (tested). */
+function parseNearHash(hash) {
+  const m = /(?:^|[#&])near=([^&]*)/.exec(String(hash || ''));
+  if (!m) return null;
+  let raw = m[1];
+  try { raw = decodeURIComponent(raw.replace(/\+/g, ' ')); } catch (e) { return null; }
+  const parts = raw.split(',');
+  const num = /^\s*-?\d{1,3}(\.\d{1,6})?\s*$/;
+  if (parts.length < 2 || !num.test(parts[0]) || !num.test(parts[1])) return null;
+  const lat = parseFloat(parts[0]), lng = parseFloat(parts[1]);
+  if (!placeInBounds(lat, lng)) return null;
+  return { lat, lng, label: placeCleanLabel(parts.slice(2).join(','), 40) };
+}
+/** #yard=<name> -> the name, or null. Pure (tested). */
+function parseYardHash(hash) {
+  const m = /(?:^|[#&])yard=([^&]*)/.exec(String(hash || ''));
+  if (!m) return null;
+  let raw = m[1];
+  try { raw = decodeURIComponent(raw.replace(/\+/g, ' ')); } catch (e) { return null; }
+  const name = String(raw).replace(/[\u0000-\u001f\u007f<>"]/g, '').replace(/\s+/g, ' ').trim().slice(0, 80);
+  return name || null;
+}
+/** Centre the view on a place for this visit only (never stored). */
+function applyTempPlace(p) {
+  const saved = hasSavedPlace();
+  const own = saved ? (_tempPlace ? _tempPlace.own : activeZipCoords) : null;
+  _tempPlace = { kind: p.kind, label: p.label || '', yard: p.yard || '', saved, own };
+  activeZipCoords = { lat: p.lat, lng: p.lng };
+  _linkYardFilter = p.yard || null;
+  _yardScopeKey = null;
+  if (p.kind === 'guess' && onceThisVisit('ys_geo_seen')) track('first-view-guess');
+  afterPlaceChange();
+}
+/** The visitor's own zip or position took over (setZipCenter, GPS). */
+function placeReplaced() {
+  const wasGuess = !!_tempPlace && _tempPlace.kind === 'guess' && !_tempPlace.saved;
+  _tempPlace = null;
+  _linkYardFilter = null;
+  if (wasGuess && onceThisVisit('ys_geo_fixed')) track('guess-replaced');
+}
+/** One tap back to the saved place after a link's place. */
+function placeBackToOwn() {
+  if (!_tempPlace || !_tempPlace.saved) return;
+  const own = _tempPlace.own;
+  _tempPlace = null;
+  _linkYardFilter = null;
+  const loc = document.getElementById('live-filter-location');
+  if (loc) loc.value = '';   // the link's yard goes with the link's place
+  if (own) activeZipCoords = own;
+  else {
+    activeZipCoords = null;
+    const zip = localStorage.getItem('jh_zip');
+    if (zip) setZipCenter(zip, true).then(afterPlaceChange);
+    else { try { activeZipCoords = JSON.parse(localStorage.getItem('jh_gps')); } catch (e) { activeZipCoords = null; } }
+  }
+  afterPlaceChange();
+}
+function afterPlaceChange() {
+  updateZipBanner();
+  updateZipChip();
+  pfSyncWhere();
+  renderLive();
+  if (document.getElementById('tab-yards').classList.contains('active')) renderYards();
+}
+/** The /geo question, once, for a visitor with no saved place. */
+async function askGeoOnce() {
+  _placePending++;
+  updateZipBanner();
+  let g = null;
+  const ctl = typeof AbortController === 'function' ? new AbortController() : null;
+  let timer = 0;
+  try {
+    const slow = new Promise((_, rej) => { timer = setTimeout(() => { if (ctl) ctl.abort(); rej(new Error('slow')); }, GEO_TIMEOUT_MS); });
+    const ask = (async () => {
+      const r = await fetch(DATA_BASE + 'geo', { cache: 'no-store', signal: ctl ? ctl.signal : undefined });
+      return r.ok ? geoAnswerOk(await r.json()) : null;
+    })();
+    ask.catch(() => {});
+    g = await Promise.race([ask, slow]);
+  } catch (e) { g = null; }
+  clearTimeout(timer);
+  _placePending = Math.max(0, _placePending - 1);
+  // Only if nothing gave a place meanwhile (a zip typed, GPS, a link).
+  if (g && !activeZipCoords && !_tempPlace && !hasSavedPlace()) applyTempPlace({ kind: 'guess', lat: g.lat, lng: g.lng, label: g.label });
+  else { updateZipBanner(); renderLive(); }
+}
+/** A #yard= link: its place comes from the yards table (the inventory
+ * manifest, else the loaded inventory). */
+function startYardLink(name) {
+  if (!_pendingYardLink) _placePending++;
+  _pendingYardLink = name;
+  const s = _invNext || _inv;
+  if (s && s.m) placeYardResolve(s.m);
+  else if (liveLoaded) placeYardResolve(null);
+  updateZipBanner();
+}
+function placeYardResolve(m) {
+  if (!_pendingYardLink) return;
+  const name = _pendingYardLink, want = name.toLowerCase();
+  let hit = null;
+  if (m && Array.isArray(m.yards)) {
+    const f = m.yardFields || [];
+    const iL = f.indexOf('location') >= 0 ? f.indexOf('location') : 0;
+    const iLat = f.indexOf('lat') >= 0 ? f.indexOf('lat') : 3, iLng = f.indexOf('lng') >= 0 ? f.indexOf('lng') : 4;
+    const y = m.yards.find(r => String(r[iL]) === name) || m.yards.find(r => String(r[iL]).toLowerCase() === want);
+    if (y) hit = { name: String(y[iL]), lat: +y[iLat], lng: +y[iLng] };
+  } else if (liveLoaded) {
+    const v = liveInventory.find(x => x.location === name && x.lat != null)
+      || liveInventory.find(x => String(x.location || '').toLowerCase() === want && x.lat != null);
+    if (v) hit = { name: v.location, lat: v.lat, lng: v.lng };
+  } else return;   // nothing to look in yet
+  _pendingYardLink = null;
+  _placePending = Math.max(0, _placePending - 1);
+  if (hit && placeInBounds(hit.lat, hit.lng)) applyTempPlace({ kind: 'link', lat: hit.lat, lng: hit.lng, label: hit.name, yard: hit.name });
+  else { updateZipBanner(); renderLive(); }
+}
+/** A link's place: #yard= or #near= (with or without #cars=). */
+function startPlaceLink(hash) {
+  const yard = parseYardHash(hash);
+  if (yard) { startYardLink(yard); return true; }
+  const near = parseNearHash(hash);
+  if (near) { applyTempPlace({ kind: 'link', ...near }); return true; }
+  return false;
+}
+/** The place, in words, for lines like the Parts tab's "Searching within …". */
+function tempPlaceWords() {
+  const p = _tempPlace;
+  if (!p) return '';
+  if (p.kind === 'guess') return p.label ? `${p.label} (a guess)` : 'your connection’s area (a guess)';
+  return p.label || 'the place from your link';
+}
+/* The line above the Cars list while a guess or a link's place is on screen. */
+function renderPlaceLine() {
+  const el = document.getElementById('place-line');
+  if (!el) return;
+  const p = _tempPlace;
+  if (!p || focusedCarKey) { el.style.display = 'none'; return; }
+  const own = p.saved ? (localStorage.getItem('jh_zip') || '') : '';
+  // A yard link shows that one yard's cars while the Yard filter is still on
+  // it; the line then says so rather than "yards near <a yard>".
+  const locSel = document.getElementById('live-filter-location');
+  const atYard = !!p.yard && !!locSel && locSel.value === p.yard;
+  const key = [p.kind, p.label, p.saved, own, atYard].join('\u0001');
+  if (el.dataset.key !== key) {
+    el.dataset.key = key;
+    const where = p.label ? `<strong>${escapeHtml(p.label)}</strong>` : '';
+    document.getElementById('place-line-text').innerHTML = p.kind === 'guess'
+      ? (where ? `Showing yards near ${where}. That is a guess from your internet connection.`
+        : 'Showing yards near your internet connection’s location. That is a guess.')
+      : (where && atYard ? `Showing the cars at ${where} (from the page you came from).`
+        : where ? `Showing yards near ${where} (from the page you came from).`
+        : 'Showing yards near the place on the page you came from.');
+    // Nothing saved: the zip field and "Use my location". A saved place: one tap back to it.
+    document.getElementById('place-line-form').hidden = p.saved;
+    const back = document.getElementById('place-line-back');
+    back.hidden = !p.saved;
+    back.textContent = p.saved ? `Back to ${own || 'my location'}` : '';
+    document.getElementById('place-line-msg').textContent = '';
+  }
+  el.style.display = '';
+}
+document.getElementById('place-line-go').addEventListener('click', async () => {
+  const input = document.getElementById('place-line-input');
+  const msg = document.getElementById('place-line-msg');
+  const pc = normalizePostal(input.value);
+  if (!pc) {
+    msg.textContent = POSTAL_CA ? 'Enter your postal code.' : 'Enter a 5-digit zip code.';
+    input.focus();
+    return;
+  }
+  msg.textContent = '';
+  document.getElementById('live-zip').value = pc.code;
+  await setZipCenter(pc.code);
+  if (_tempPlace) { msg.textContent = 'We could not find that one. Check it and try again.'; input.focus(); return; }
+  input.value = '';
+  afterPlaceChange();
+});
+document.getElementById('place-line-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') { e.preventDefault(); document.getElementById('place-line-go').click(); }
+});
+document.getElementById('place-line-gps').addEventListener('click', useMyLocation);
+document.getElementById('place-line-back').addEventListener('click', placeBackToOwn);
+
 /* GPS "near me". Native: Capacitor Geolocation plugin, so iOS shows the real
  * system prompt ("YardScout would like to use your location") instead of the
  * WKWebView one that says "localhost". Web: browser geolocation (needs HTTPS). */
 async function useMyLocation() {
-  const btns = [document.getElementById('live-gps'), document.getElementById('zip-banner-gps')].filter(Boolean);
+  const btns = [document.getElementById('live-gps'), document.getElementById('zip-banner-gps'), document.getElementById('place-line-gps')].filter(Boolean);
   const busy = on => btns.forEach(b => {
     if (on) { b.disabled = true; b.dataset.orig = b.innerHTML; b.innerHTML = '&hellip;'; }
     else { b.disabled = false; b.innerHTML = b.dataset.orig; }
   });
   const onPos = (lat, lng) => {
+    if (_tempPlace) placeReplaced();   // the visitor's own position replaces the guess for good
     activeZipCoords = { lat, lng };
     track('gps-used');
     localStorage.setItem('jh_gps', JSON.stringify(activeZipCoords));
@@ -3545,7 +3829,8 @@ function updateZipChip() {
   if (!chip) return;
   const zip = localStorage.getItem('jh_zip');
   const gps = localStorage.getItem('jh_gps');
-  if (!activeZipCoords || (!zip && !gps)) { chip.style.display = 'none'; return; }
+  // A guess or a link's place has its own line above the list (renderPlaceLine).
+  if (!activeZipCoords || (!zip && !gps) || _tempPlace) { chip.style.display = 'none'; return; }
   const r = typeof effectiveRadiusMi === 'function' ? effectiveRadiusMi() : null;
   chip.innerHTML = `${ICON.pin}<span class="zip-chip-zip">${escapeHtml(zip || 'Near me')}</span>${r ? `<span class="zip-chip-r">&middot; ${r}\u00a0mi</span>` : ''}`;
   chip.style.display = '';
@@ -3855,6 +4140,17 @@ window.addEventListener('hashchange', () => {
     return;
   }
   const cars = parseCarsHash(location.hash);
+  // #yard= / #near= (with or without #cars=): a place for this visit.
+  const placeHash = location.hash;
+  if (parseYardHash(placeHash) || parseNearHash(placeHash)) {
+    history.replaceState(null, '', location.pathname + location.search);
+    focusedCarKey = null;
+    startPlaceLink(placeHash);
+    if (cars) startCarsIntent(cars);
+    else { try { document.querySelector('.tab[data-tab="live"]').click(); } catch (e) { /* boot race */ } }
+    if (liveLoaded) { renderLive(); window.scrollTo({ top: 0 }); }
+    return;
+  }
   if (cars) {
     history.replaceState(null, '', location.pathname + location.search);
     startCarsIntent(cars);
@@ -4038,10 +4334,33 @@ function updateZipBanner() {
   // A shared deep link should land on the car, not the onboarding banner.
   // The skip flag only counts for Pro — free users can't dismiss their way
   // into the national list, so the banner stays until they set a location.
+  // A guess or a link's place on screen (or one being looked up) takes its
+  // place: see A PLACE FOR THIS VISIT.
   const show = !focusedCarKey
     && !localStorage.getItem('jh_zip') && !localStorage.getItem('jh_gps')
-    && !(isPro() && localStorage.getItem('jh_zip_skipped') === '1');
+    && !(isPro() && localStorage.getItem('jh_zip_skipped') === '1')
+    && !_tempPlace && !placePending();
   document.getElementById('zip-banner').style.display = show ? '' : 'none';
+  if (show) zipBannerCopy(carsIntent);
+  renderPlaceLine();
+}
+/* Opened with a cars link, the card names the car (2026-11-16): "Find a
+ * Nissan Xterra near you". Make and model only, as the link has them; no
+ * years, trim or counts. Without a cars link, the card's own words. */
+function zipBannerCarName(c) {
+  if (!c || !c.make) return '';
+  const tidy = (s) => { s = String(s || '').trim(); return s && s === s.toLowerCase() ? s.charAt(0).toUpperCase() + s.slice(1) : s; };
+  return [tidy(c.make), tidy(c.model)].filter(Boolean).join(' ');
+}
+function zipBannerCopy(c) {
+  const head = document.getElementById('zip-banner-head'), lead = document.getElementById('zip-banner-lead');
+  if (!head || !lead) return;
+  if (head.dataset.orig == null) { head.dataset.orig = head.innerHTML; lead.dataset.orig = lead.innerHTML; }
+  const name = zipBannerCarName(c);
+  if (!name) { head.innerHTML = head.dataset.orig; lead.innerHTML = lead.dataset.orig; return; }
+  const a = /^[aeio]/i.test(name) ? 'an' : 'a';
+  head.textContent = `Find ${a} ${name} near you`;
+  lead.textContent = `Enter your zip or postal code and we’ll list every ${name} in the self-service yards near you.`;
 }
 document.getElementById('zip-banner-go').addEventListener('click', () => {
   const zip = document.getElementById('zip-banner-input').value.trim();
@@ -4635,6 +4954,10 @@ function refreshPullBtns(key) {
 function renderLive() {
   updateFilterAvailability();
   if (!liveLoaded) return;
+  // A place on its way (the /geo guess, a #yard= link's yard): wait for it
+  // rather than flash the "enter your zip" state first.
+  if (_pendingYardLink && !_inv && !_invNext) placeYardResolve(null);
+  if (placePending() && !focusedCarKey) { renderLivePending(); return; }
   if (_inv && !liveComplete) {
     invKick();
     if (invViewPending()) { renderLivePending(); return; }
@@ -5095,7 +5418,8 @@ function carSearchSquash(s) {
  * years are "2005-2015", "2005-", "-2015" or "2007" (or empty, as in
  * #cars=Subaru|Outback||XT). null when there is no make. */
 function parseCarsHash(hash) {
-  const m = /#cars=([^&]*)/.exec(String(hash || ''));
+  // Also after a place: #yard=<name>&cars=… / #near=…&cars=… (2026-11-16).
+  const m = /(?:#|&)cars=([^&]*)/.exec(String(hash || ''));
   if (!m) return null;
   let raw = m[1];
   try { raw = decodeURIComponent(raw.replace(/\+/g, ' ')); } catch (e) { /* keep as typed */ }
@@ -5379,6 +5703,7 @@ function startCarsIntent(c) {
   // Last: opening the tab can render, and so apply the link, right away.
   try { document.querySelector('.tab[data-tab="live"]').click(); } catch (e) { /* boot race */ }
   carSearchFit();
+  updateZipBanner();   // the zip card names the car
 }
 function applyCarsIntent() {
   const c = carsIntent;
@@ -5508,6 +5833,7 @@ document.getElementById('live-zip').addEventListener('input', e => {
     // back on the next launch while the field shows nothing.
     localStorage.removeItem('jh_zip');
     activeZipCoords = null;
+    _tempPlace = null;   // a link's place on screen goes too: nothing to go back to
     updateZipBanner();
     renderLive();
     return;
@@ -5549,7 +5875,7 @@ applyPostalInputs();
   if (savedRadius !== null) document.getElementById('live-radius').value = savedRadius;
   if (savedZip) {
     document.getElementById('live-zip').value = savedZip;
-    setZipCenter(savedZip);
+    setZipCenter(savedZip, true);
   } else {
     const gps = localStorage.getItem('jh_gps');
     if (gps) {
@@ -8849,7 +9175,8 @@ function pfRenderTiles() {
 function pfUpdateWhereSum() {
   const el = document.getElementById('pf-where-sum');
   if (!el) return;
-  const zip = localStorage.getItem('jh_zip');
+  // A guess or a link's place says so (A PLACE FOR THIS VISIT).
+  const zip = _tempPlace ? tempPlaceWords() : localStorage.getItem('jh_zip');
   const r = effectiveRadiusMi();
   el.textContent = activeZipCoords ? `Searching ${r ? 'within ' + r + ' mi of ' : 'everywhere from '}${zip || 'your location'}` : 'Set where to search';
 }
@@ -10067,11 +10394,14 @@ function addQuickWatch(make, model, yrMin, yrMax, source) {
   if (watchlist.some(same) || (!yrMin && !yrMax && hasWatchFor(make, model))) return 'exists';
   if (!isPro() && watchlist.length >= FREE_WATCH_LIMIT) return 'limit';
   // Free watches need a centre: the backend requires a radius for free tiers.
-  if (!isPro() && !activeZipCoords) return 'no-zip';
-  const radiusMi = activeZipCoords ? (effectiveRadiusMi() || null) : null;
+  // A guess or a link's place is never one (A PLACE FOR THIS VISIT): ask for
+  // the zip, Pro included.
+  if (needOwnZip()) return 'no-zip';
+  const c = ownCenter();
+  const radiusMi = c ? (effectiveRadiusMi() || null) : null;
   const entry = { make, model, yrMin: yrMin || null, yrMax: yrMax || null, matchOnly: false, radiusMi,
     addedAt: new Date().toISOString() + '~' + Math.random().toString(36).slice(2, 8) };
-  if (radiusMi) { entry.lat = activeZipCoords.lat; entry.lng = activeZipCoords.lng; }
+  if (radiusMi) { entry.lat = c.lat; entry.lng = c.lng; }
   watchlist.push(entry);
   saveWatchlist(watchlist);
   // The cars already on the lots are known to you — alert only on arrivals
@@ -10235,6 +10565,7 @@ function recapEligible(entry, native, pro, dismissed) {
   return !native && !pro && !dismissed && !!entry && !!entry.make && entry.lat != null && entry.lng != null && !!entry.radiusMi;
 }
 function recapNoteNewWatch(entry) {
+  if (locationIsGuess()) return;   // never a guessed or linked centre (watches cannot carry one anyway)
   if (recapEligible(entry, IS_NATIVE, isPro(), recapDismissed())) _recapNew.push(entry);
 }
 function recapAskEntries() { return _recapNew.slice(0, RECAP_MAX); }
@@ -10533,7 +10864,7 @@ async function watchZipSubmit(input, msg) {
   document.getElementById('live-zip').value = pc.code;
   await setZipCenter(pc.code);
   updateZipBanner();
-  if (!activeZipCoords) { say('We could not find that one. Check it and try again.'); input.focus(); return false; }
+  if (!ownCenter()) { say('We could not find that one. Check it and try again.'); input.focus(); return false; }
   return true;
 }
 function askZipForWatch(label, retry) {
@@ -10556,7 +10887,7 @@ function renderWatchIntent() {
   if (!tab) return;
   let el = document.getElementById('watch-intent');
   const w = watchIntent && watchIntent.make && watchIntent.model && !watchIntent.done ? watchIntent : null;
-  const needZip = !activeZipCoords && !isPro();
+  const needZip = needOwnZip();
   const pending = !!(watchIntent && watchIntent.pendingAdd);
   // An Add waiting for a zip is the form's own watch, not the one-tap car.
   const car = !pending && w && !hasWatchFor(w.make, w.model) ? w : null;
@@ -10583,7 +10914,7 @@ function renderWatchIntent() {
 async function watchIntentGo() {
   const el = document.getElementById('watch-intent');
   if (!el) return;
-  if (!activeZipCoords && !isPro()) {
+  if (needOwnZip()) {
     if (!(await watchZipSubmit(el.querySelector('.watch-zip-input'), el.querySelector('.watch-zip-msg')))) return;
   }
   if (watchIntent && watchIntent.pendingAdd) {
@@ -10924,7 +11255,7 @@ function addWatchItem() {
   const yrMax = parseInt(document.getElementById('alert-yr-max').value) || null;
   if (yrMin && yrMax && yrMin > yrMax) return alert('Year min is after year max.');
   const radiusMi = parseInt(document.getElementById('alert-radius').value) || null;
-  if (radiusMi && !activeZipCoords) {
+  if (radiusMi && !ownCenter()) {   // a guess or a link's place is never a watch centre
     // Ask for the zip in the card above the form, then finish this Add.
     watchIntent = Object.assign(watchIntent || {}, { pendingAdd: true });
     renderWatchIntent();
@@ -10965,7 +11296,7 @@ function addWatchItem() {
     // it unique when several models are added in the same millisecond.
     const entry = { make, model, yrMin, yrMax, matchOnly, radiusMi, driveFilter, trimFilter,
       addedAt: new Date().toISOString() + '~' + Math.random().toString(36).slice(2, 8) };
-    if (radiusMi) { entry.lat = activeZipCoords.lat; entry.lng = activeZipCoords.lng; }
+    if (radiusMi) { const c = ownCenter(); entry.lat = c.lat; entry.lng = c.lng; }
     watchlist.push(entry);
     seedAlertedForEntry(entry);
     syncWatchToServer(entry);
@@ -11024,10 +11355,12 @@ async function syncWatchToServer(entry) {
     if (entry.radiusMi && entry.lat != null && entry.lng != null) {
       // Explicit per-watch radius, chosen when the watch was created.
       w.lat = entry.lat; w.lng = entry.lng; w.radiusMi = entry.radiusMi;
-    } else if (!('radiusMi' in entry) && activeZipCoords) {
+    } else if (!('radiusMi' in entry) && ownCenter()) {
       // Legacy watches (pre radius picker): scope to the current search area,
       // matching the old behavior. New "Anywhere" watches send no center.
-      w.lat = activeZipCoords.lat; w.lng = activeZipCoords.lng;
+      // The visitor's own place only, never a guess or a link's place.
+      const c = ownCenter();
+      w.lat = c.lat; w.lng = c.lng;
       w.radiusMi = effectiveRadiusMi() || 100;
     }
     const res = await YSApi.createWatch(w);
@@ -11217,6 +11550,18 @@ const _bootAlertId = (location.hash.match(/#alert=([^&]+)/) || [])[1] || null;
 if (_bootAlertId) {
   history.replaceState(null, '', location.pathname + location.search + '#car=' + _bootAlertId);
 }
+// A place for this visit (see A PLACE FOR THIS VISIT): #yard= or #near= from
+// one of our pages; else, with no saved place, one /geo guess. Before the
+// manifest loads, so a #yard= link finds its yard in the first yards table.
+{
+  const h = location.hash;
+  if (parseYardHash(h) || parseNearHash(h)) {
+    if (!parseCarsHash(h)) history.replaceState(null, '', location.pathname + location.search);
+    startPlaceLink(h);
+  } else if (!hasSavedPlace() && !(isPro() && localStorage.getItem('jh_zip_skipped') === '1')) {
+    askGeoOnce();
+  }
+}
 loadLiveInventory({ fresh: !!_bootAlertId });
 // #cars=<make>|<model>|<years> opens the Cars tab with those filters (see
 // CAR SEARCH); they apply once a location and its inventory are in.
@@ -11224,6 +11569,7 @@ loadLiveInventory({ fresh: !!_bootAlertId });
   const c = parseCarsHash(location.hash);
   if (c) { history.replaceState(null, '', location.pathname + location.search); startCarsIntent(c); }
 }
+updateZipBanner();
 // #tab=<name> opens a tab directly (share pages link to #tab=alerts).
 // #watch=<make>|<model>|<years> opens Alerts with that watch one tap away;
 // #tab=alerts from one of our own car / make pages does the same from the
@@ -11523,8 +11869,9 @@ function deviceSyncWatches() {
   if (isPro()) return list;
   return list.map(w => {
     if (w.lat != null && w.lng != null && w.radiusMi) return w;
-    if (!activeZipCoords) return w;
-    return { ...w, lat: activeZipCoords.lat, lng: activeZipCoords.lng,
+    const c = ownCenter();   // never a guess or a link's place
+    if (!c) return w;
+    return { ...w, lat: c.lat, lng: c.lng,
       radiusMi: Math.min(w.radiusMi || FREE_MAX_RADIUS_MI, FREE_MAX_RADIUS_MI) };
   }).slice(0, FREE_WATCH_LIMIT);
 }
@@ -11561,7 +11908,7 @@ function instantRadiusMi(e) {
  * else the zip, as deviceSyncWatches sends it). */
 function inInstantScope(e, v) {
   if (!e || !v || !watchlistMatches(e, v)) return false;
-  const c = (e.lat != null && e.lng != null) ? e : activeZipCoords;
+  const c = (e.lat != null && e.lng != null) ? e : ownCenter();
   if (!c || v.lat == null || v.lng == null) return false;
   return haversineMiles(c.lat, c.lng, v.lat, v.lng) <= instantRadiusMi(e);
 }
