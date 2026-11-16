@@ -16,16 +16,16 @@ KNOW THE YARDS
 • Every tracked yard near you with distance, car counts and what arrived this week
 • Each yard's pull-price list right in the app
 • Tool rules per yard (sawzalls, compressors) so you bring the right gear
-• Every yard's pull prices on the car cards, from its own published list
+• Every yard's pull prices on each car's page, from its own published list
 
 WATCH FOR THE RIGHT CAR
 • Build a watchlist of makes, models and years — even a model that isn't in the rows yet
 • Watched cars light up in the app when they arrive at a yard in your radius
-• Free watches get a weekly recap push of every watched car that landed
+• Free: one watch alerts you within hours when its car lands within 50 miles, and every watch gets a weekly recap push
 
 YARDSCOUT PRO
 • Price list before you drive: what the yard charges vs what the same used part goes for online, on nearly every car
-• Donor-car alerts: a push within hours of a watched car hitting a yard in your radius, plus sale-day alerts
+• Alerts on every watch: a push within hours of a watched car hitting a yard in your radius, plus sale-day alerts
 • Saved-car alerts — a push when a car on your visit list leaves the yard, or passes the yard's typical stay
 • Watches by drivetrain and trim — 4WD only, "SR5", "TRD" — confirmed from the VIN
 • Which parts get picked over fast, and sorting by leaving-soonest — get there before the crusher

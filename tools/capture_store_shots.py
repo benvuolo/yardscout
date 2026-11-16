@@ -63,7 +63,7 @@ SLIDES = [
     ("02_map", "Every yard near you on one map", "Tap a yard to see what landed this week", "map", False),
     ("03_parts", "See which cars carry a part that fits", "Camry alternator: verified or likely fit", "parts", False),
     ("04_rows", "Walk the rows with a list", "One yard's cars in row order, tick them off", "rows", False),
-    ("05_alerts", "Get a push the day your car lands", "Watch a model; Pro alerts within hours", "alerts", True),
+    ("05_alerts", "Get a push the day your car lands", "Free on one watch. Pro on every watch.", "alerts", True),
     ("06_value", "Know what a part is worth", "Pro: yard price vs what it sells for online", "value", True),
 ]
 
