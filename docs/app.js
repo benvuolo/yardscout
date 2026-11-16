@@ -3616,6 +3616,10 @@ document.addEventListener('keydown', (e) => {
 }, true);
 document.addEventListener('click', (e) => {
   const b = e.target.closest('.photo-box[data-photo-vkey]');
+  // A tile's picture opens the car screen (CARS FEED); the viewer is one
+  // more tap, on the car screen's own photo.
+  const tile = b && b.closest('.car-tile[data-vkey]');
+  if (tile) { e.preventDefault(); e.stopPropagation(); openCarDetail(tile.dataset.vkey, tile.querySelector('.tile-open') || tile); return; }
   if (!b || b.classList.contains('photo-failed')) return;
   e.preventDefault();
   e.stopPropagation();
@@ -4630,6 +4634,64 @@ function refreshPullBtns(key) {
     const big = b.classList.contains('btn-lg');
     b.outerHTML = pullBtnHtml(key, big);
   });
+  document.querySelectorAll(`.tile-save[data-vkey="${CSS.escape(key)}"]`).forEach(b => { b.outerHTML = tileSaveHtml(key); });
+}
+
+/* ===== CARS FEED (2026-11-16, ops/design.md "Cars tab becomes a feed") =====
+ * Owner: "intuitive, shareable, easy to scroll, Facebook Marketplace level
+ * addicting". The Cars list is a grid of small tiles (two columns on a
+ * phone, about five at 1280 px): the picture, year make model, the yard and
+ * distance, the set-out date and row, and the badges a card carried (New /
+ * Leaving soon, notable trim, Manual). Everything else the big card showed
+ * moved one tap down to the car screen (openCarDetail). Every tile keeps
+ * class="car-card" and data-vkey, so the hooks that find cars still work.
+ * No text is cut off: it wraps (ui_no_truncation). */
+const ICON_BOOKMARK = '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4.5L5 21V4a1 1 0 0 1 1-1Z"/></svg>';
+const ICON_BOOKMARK_ON = '<svg class="ico" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4.5L5 21V4a1 1 0 0 1 1-1Z"/></svg>';
+/* The tile's bookmark: the same action as "Add to pull sheet" (toggleSaved,
+ * jh_saved; the .heart-btn hook routes it). */
+function tileSaveHtml(key) {
+  const on = !!savedCars[key];
+  return `<button type="button" class="tile-btn tile-save heart-btn${on ? ' saved' : ''}" data-vkey="${escapeHtml(key)}" aria-pressed="${on}" aria-label="${on ? 'On your pull sheet' : 'Add to pull sheet'}" title="${on ? 'On your pull sheet — tap to take it off' : 'Add to pull sheet'}">${on ? ICON_BOOKMARK_ON : ICON_BOOKMARK}</button>`;
+}
+/* "Set out Nov 15", the short date tiles and cards use ('' when unknown). */
+function setOutShort(v) {
+  const d = parseYardDate(v.dateAdded);
+  return d ? d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
+}
+/* One tile. sampleKey: the free sample car in this view (its values open on
+ * the car screen), badged so a free visitor can find it. */
+function carTileHtml(v, sampleKey) {
+  const key = vehicleKey(v), k = escapeHtml(key);
+  const dateStr = setOutShort(v);
+  const { leavingSoon } = carLotClock(v);
+  const statusBadge = isNew(v.dateAdded)
+    ? '<span class="badge badge-new">New</span>'
+    : leavingSoon
+    ? '<span class="badge badge-soon" title="This car has been on the lot longer than ~80% of the historical average — yards rotate stock, so it may not be there much longer. An estimate, not a schedule.">Leaving soon</span>'
+    : '';
+  const manualBadge = isConfirmedManual(v) ? `<span class="badge badge-manual" title="${escapeHtml(manualSourceInfo(v).tip)}">Manual</span>` : '';
+  const sampleBadge = sampleKey && key === sampleKey && !isPro() ? '<span class="badge badge-sample" title="This car shows everything Pro shows: tap it">Free Pro look</span>' : '';
+  const badges = [statusBadge, notableTrimBadgeHtml(v), manualBadge, sampleBadge].filter(Boolean).join(' ');
+  const d = vehicleDistanceMi(v);
+  const when = [dateStr ? `Set out ${dateStr}` : 'Set-out date unknown',
+    v.row ? `Row ${escapeHtml(String(v.row))}` : 'No row yet'].join(' &middot; ');
+  // The photo opens the car screen from a tile (the capture handler below);
+  // keyboard focus goes to the tile's own button, not to the picture.
+  const photo = cardPhotoHtml(v, key).replace('<button type="button" class="photo-box', '<button type="button" tabindex="-1" class="photo-box');
+  return `
+      <article class="car-card car-tile ${v.hasMatch ? 'match-card' : 'dim-card'}" data-eid="${escapeHtml(String(v.id))}" data-vkey="${k}">
+        <div class="tile-media">
+          ${photo}
+          <button type="button" class="tile-btn tile-share card-share" data-vkey="${k}" title="Share this car" aria-label="Share this car">${ICON.share}</button>
+          ${tileSaveHtml(key)}
+        </div>
+        <button type="button" class="car-open tile-open" data-vkey="${k}">
+          <span class="tile-name car-name">${escapeHtml(`${v.year} ${v.make} ${v.model}`)}</span>
+          <span class="tile-where">${escapeHtml(v.location)}${d != null ? ` &middot; <span class="dist">${Math.round(d)} mi</span>` : ''}${saleBadgeHtml(v.location)}</span>
+          <span class="tile-when">${badges ? `<span class="tile-badges">${badges}</span> ` : ''}${when}</span>
+        </button>
+      </article>`;
 }
 
 function renderLive() {
@@ -4774,23 +4836,18 @@ function renderLive() {
   }
   lastSampleKey = sampleKey;
   updateZipChip();
-  document.getElementById('live-grid').innerHTML = focusBanner + weekBanner + watchStripHtml(vehicles.length) + vehiclesToRender.map(v => {
-    // Pro sees everything; free users get exactly one fully-unlocked sample card.
-    const unlocked = isPro() || (sampleKey !== null && vehicleKey(v) === sampleKey);
-    const isSampleCard = unlocked && !isPro();
-    const isMatch = v.hasMatch;
-    const isNewVehicle = isNew(v.dateAdded);
-    const setOutDate = parseYardDate(v.dateAdded);
-    const dateStr = setOutDate ? setOutDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
-    const cardClass = isMatch ? 'match-card' : 'dim-card';
-    const fm = freshnessMultiplier(v.dateAdded);
-    const fl = freshnessLabel(v.dateAdded);
+  // Tiles (CARS FEED): everything else a card held is on the car screen.
+  document.getElementById('live-grid').innerHTML = focusBanner + weekBanner + watchStripHtml(vehicles.length)
+    + vehiclesToRender.map(v => carTileHtml(v, sampleKey)).join('') + (overflow
+    ? `<div class="empty-state" style="grid-column:1/-1;padding:1rem;"><p>Showing first ${RENDER_CAP} of ${vehicles.length.toLocaleString()} vehicles &mdash; narrow with search or filters (results stay fully sorted).</p></div>`
+    : '');
+}
 
-    const { lotClock, leavingSoon, daysOn, avg: lotAvg, longListed } = carLotClock(v);
-
-    // Scan stamp so a screenshot carries when this list was true. The
-    // inventory has no per-yard scan time (yard_health.json isn't loaded
-    // here), so this is the global scrapedAt in the viewer's local time.
+/* Scan stamp so a screenshot carries when this list was true, or the stale
+ * warning for a yard whose list stopped changing (car screen). The inventory
+ * has no per-yard scan time (yard_health.json isn't loaded here), so this is
+ * the global scrapedAt in the viewer's local time. */
+function carScanLineHtml(v) {
     const frozen = yardFrozenSince(v.location);
     const scanLine = yardDormant(v.location)
       ? `<span class="scan-stamp stamp-stale" title="This yard hasn\u2019t posted a new car online in months \u2014 these listings are probably out of date. Call before going.">no new cars since ${escapeHtml(formatYardDate(yardHealth[v.location].newestDateAdded))}</span>`
@@ -4799,59 +4856,7 @@ function renderLive() {
       : liveScrapedAt
       ? `<span class="scan-stamp" title="When YardScout last scanned the yards (${escapeHtml(scrapedTitle())}) — cars can leave between scans">scanned ${escapeHtml(scrapedShort())}</span>`
       : '';
-
-    const val = (isMatch && v.topParts && v.topParts.length) ? carValueParts(v, unlocked, isSampleCard) : null;
-    const cardStyle = val ? val.cardStyle : '', profitLine = val ? val.profitLine : '';
-
-    // One status badge per card, by priority — never a row of colored pills.
-    const statusBadge = isNewVehicle
-      ? '<span class="badge badge-new">New</span>'
-      : leavingSoon
-      ? '<span class="badge badge-soon" title="This car has been on the lot longer than ~80% of the historical average — yards rotate stock, so it may not be there much longer. An estimate, not a schedule.">Leaving soon</span>'
-      : '';
-    const ex = extrasFor(v);
-    const photo = ex && ex[0] ? photoInfo(ex[0]) : null;
-    const vm = vinMetaHtml(v, unlocked);
-    // Line 1 — what the car IS: VIN-decoded trim/drive (Pro) + color/engine/trans.
-    const transShown = ex && ex[3] && isConfirmedManual(v) && manualSourceInfo(v).short
-      ? `${ex[3]} (${manualSourceInfo(v).short})` : (ex ? ex[3] : '');
-    const yardSpecs = ex ? [ex[1], shortEngine(ex[2]), transShown].filter(Boolean).map(escapeHtml) : [];
-    const specLine = [vm.spec, ...yardSpecs].filter(Boolean).join(' &middot; ');
-    // Line 2 — WHEN: set-out date + time on the lot, one line.
-    const whenBits = [dateStr ? `<span title="Set-out date published by the yard">Set out ${dateStr}</span>` : 'Set-out date unknown'];
-    if (lotClock) whenBits.push(lotClock);
-    const key = vehicleKey(v);
-    const manualBadge = isConfirmedManual(v) ? `<span class="badge badge-manual" title="${escapeHtml(manualSourceInfo(v).tip)}">Manual</span>` : '';
-    const trimBadge = notableTrimBadgeHtml(v);
-    const d = vehicleDistanceMi(v);
-    // Pull-sheet card: row plate is the hero datum, one primary action
-    // (add to pull sheet); watch, share, VIN and the yard link live on the
-    // car screen a tap away.
-    return `
-      <article class="car-card ${cardClass}" style="${cardStyle}" data-eid="${escapeHtml(String(v.id))}" data-vkey="${escapeHtml(key)}">
-        ${cardPhotoHtml(v, key)}
-        <div class="cc-head">
-          ${rowPlateHtml(v.row)}
-          <div class="cc-id">
-            <h3 class="car-name"><button type="button" class="car-open" data-vkey="${escapeHtml(key)}">${escapeHtml(`${v.year} ${v.make} ${v.model}`)}</button></h3>
-            ${specLine ? `<div class="car-spec-line">${specLine}</div>` : ''}
-            <div class="live-card-location">${ICON.pin} <span class="loc-name">${escapeHtml(v.location)}</span>${d != null ? ' <span class="dist">&middot; ' + Math.round(d) + '\u00a0mi</span>' : ''}${saleBadgeHtml(v.location)}</div>
-            <div class="car-meta">${stayMeterHtml(daysOn, lotAvg)}<span class="car-meta-text">${whenBits.join(' &middot; ')}${vm.warn}</span></div>
-            ${longListed ? longListedHtml(daysOn, 'card-long') : ''}
-          </div>
-          ${trimBadge || manualBadge || statusBadge ? `<div class="car-badges">${trimBadge}${manualBadge}${statusBadge}</div>` : ''}
-        </div>
-        ${profitLine}
-        ${val && val.nParts ? `<button type="button" class="parts-summary car-open" data-vkey="${escapeHtml(key)}"><span>${val.partsSummary}</span>${ICON.chev}</button>` : ''}
-        <div class="cc-actions">
-          ${pullBtnHtml(key)}
-          ${cardEndActionsHtml(key)}
-        </div>
-        ${/stamp-stale/.test(scanLine) ? `<div class="car-footer"><span class="car-footer-meta">${scanLine}</span></div>` : ''}
-      </article>`;
-  }).join('') + (overflow
-    ? `<div class="empty-state" style="grid-column:1/-1;padding:1rem;"><p>Showing first ${RENDER_CAP} of ${vehicles.length.toLocaleString()} vehicles &mdash; narrow with search or filters (results stay fully sorted).</p></div>`
-    : '');
+    return scanLine;
 }
 
 document.getElementById('live-filter-toggle').addEventListener('click', () => {
