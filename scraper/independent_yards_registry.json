@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-11-04",
+  "updated": "2026-11-17",
   "notes": "Independent/regional SELF-SERVICE yards with (or researched for) public online inventory. Statuses: adapter-built | candidate | blocked | retired | directory-only. Coordinates geocoded once via Nominatim (OSM) and hardcoded, matching the YARD_COORDS convention. Row52-embedded inventories are permanently out of scope (see INDEPENDENT_YARDS.md).",
   "chains": [
     {
@@ -2492,8 +2492,8 @@
     },
     {
       "name": "iPull by Intermountain Auto",
-      "status": "blocked",
-      "platform": "wordpress; CRUSH export server-rendered as one static <table id=\"vehicles\"> (Barry's family) - config-driven adapter CRUSH_TABLE_SITES['ifipull'] (config not wired)",
+      "status": "adapter-built",
+      "platform": "wordpress; CRUSH export server-rendered as one static <table id=\"vehicles\"> (Barry's family) - config-driven adapter CRUSH_TABLE_SITES['ifipull'] (fetch_ifipull_inventory, 2026-11-17)",
       "website": "https://ifipull.com",
       "inventory_url": "https://ifipull.com/inventory/",
       "api": {
@@ -2502,18 +2502,19 @@
         "auth": "none",
         "format": "html table#vehicles (Year, Make, Model, Reference, VIN, Color, Stock #, Vehicle Row, Arrival Date)",
         "requests_per_scan": "1",
-        "notes": "BLOCKED 2026-10-28: every page request with the YardScout User-Agent returns HTTP 500 (hosting-panel error page) while robots.txt answers 200 - the host filters our UA. Not worked around. The 2026-10-27 scout saw ~545 rows ('Inventory Updated: 10/27/26'). Re-check later; the adapter config is in a NOT HERE comment under CRUSH_TABLE_SITES. 3015 N 15th E is not in OSM -> 83401 zip centroid."
+        "notes": "ADAPTER BUILT 2026-11-17. History: on 2026-10-28 every page request with the YardScout User-Agent returned HTTP 500 (hosting-panel error page) while robots.txt answered 200; it was not worked around. Re-checked 2026-11-17 with the same YardScout name: /inventory/ answered 200, 578 rows ('Updated: 11/17/26', arrivals 2026-03-30..2026-11-16, 87 in November), every row with a stock number (id basis ifipull-stk0#####) and 557 with a 17-character VIN. One GET per scan. Listed in the app as 'Intermountain Auto iPull - Idaho Falls': a name starting 'iPull' would fall into the app's ^ipull site-link rule for iPull-uPull (California), a different company. If the 500 returns the yard drops out; that is the yard's answer (outreach draft in ops/yard-outreach-drafts.md), never another User-Agent. Price list: /pricelist/ table#pricelist (PART DESCRIPTION, CATGORY, PRICE, PER, CORE; 640 rows, 557 kept: DRINKS, ATV/MOWER and I-CARRY categories are not car parts) -> ifipull_pricing.json (refresh_ifipull_pricing_file). Test: scraper/test_ifipull.py, fixtures scraper/fixtures/ifipull/."
       },
-      "update_freshness": "unknown (blocked)",
-      "robots": "only /cgi-bin/ and /tmp/ disallowed",
-      "tos_flags": "none found",
+      "update_freshness": "daily ('Updated: 11/17/26' on the page; newest arrival 2026-11-16 at build)",
+      "robots": "only /cgi-bin/ and /tmp/ disallowed (read 2026-11-17)",
+      "tos_flags": "no terms or privacy page linked from the site (checked 2026-11-17); footer is a plain copyright line",
       "locations": [
         {
-          "name": "iPull by Intermountain Auto - Idaho Falls",
+          "name": "Intermountain Auto iPull - Idaho Falls",
           "city": "Idaho Falls",
           "state": "ID",
-          "lat": 43.5111,
-          "lng": -112.0058
+          "lat": 43.523,
+          "lng": -112.0038,
+          "address": "3015 N 15th E, Idaho Falls, ID 83401"
         }
       ]
     },

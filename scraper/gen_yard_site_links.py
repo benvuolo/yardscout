@@ -93,6 +93,8 @@ ENTRIES: list[tuple[str, str | None, str | None, str]] = [
      "anchored: Budget/Indy/Harry's/Rupert's/Pipes U-Pull-Its differ upfront"),
     (r"^rupert", "Rupert's U-Pull-It", None, "tier 2 handles cars with a make"),
     (r"^chesterfield", "Chesterfield Auto Parts", None, "search form is POST-only"),
+    (r"^intermountain auto ipull", "iPull by Intermountain Auto", None,
+     "Idaho Falls; named so it cannot fall into the ^ipull (iPull-uPull) entry below"),
     (r"^ipull-upull - edmonton", "iPull-uPull Canada", None,
      "separate Canadian site; must precede the California ^ipull entry"),
     (r"^ipull", "iPull-uPull", None, ""),

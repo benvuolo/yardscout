@@ -21175,15 +21175,30 @@ CRUSH_TABLE_SITES: dict[str, dict] = {
         "yard": {"name": "Hwy 82 Pick & Pay - Poulan", "city": "Poulan",
                  "state": "GA", "lat": 31.5132, "lng": -83.7886},
     },
-    # NOT HERE: iPull by Intermountain Auto (ifipull.com, Idaho Falls ID) —
-    # same table family (Year, Make, Model, Reference, VIN, Color, Stock #,
-    # Vehicle Row, Arrival Date; ~545 rows). On 2026-10-28 every page request
-    # carrying the YardScout User-Agent got HTTP 500 (a hosting-panel error
-    # page) while robots.txt answered 200, i.e. the host filters our UA. Not
-    # worked around (no UA change); re-check later. Config if it opens up:
-    # url https://ifipull.com/inventory/, table_id "vehicles", id_prefix
-    # "ifipull-", yard Idaho Falls ID (3015 N 15th E not in OSM -> 83401 zip
-    # centroid 43.5111, -112.0058).
+    # Intermountain Auto iPull (ifipull.com, Idaho Falls ID) — same table
+    # family: Year, Make, Model, Reference, VIN, Color, Stock #, Vehicle Row,
+    # Arrival Date. History: on 2026-10-28 every page request carrying the
+    # YardScout User-Agent got HTTP 500 (a hosting-panel error page) while
+    # robots.txt answered 200, so the yard was left out and nothing was
+    # worked around. Re-checked 2026-11-17 with the same YardScout name:
+    # /inventory/ answered 200 with 578 rows ("Updated: 11/17/26", newest
+    # arrival 11/16/26, every row with a stock number and a 17-character
+    # VIN). robots.txt: only /cgi-bin/ and /tmp/ disallowed; the site links
+    # no terms page. Stock numbers (STK0#####) are the id basis. One GET per
+    # scan. If the 500 comes back the yard drops out and gets an email
+    # (ops/yard-outreach-drafts.md), never another name.
+    # The display name starts with "Intermountain", not "iPull": the app's
+    # site-link map sends every name starting "ipull" to iPull-uPull
+    # (California), a different company.
+    # Pin: Census geocoder exact match for 3015 N 15th E, Idaho Falls 83401.
+    "ifipull": {
+        "label": "Intermountain Auto iPull (Idaho Falls ID)",
+        "url": "https://ifipull.com/inventory/",
+        "table_id": "vehicles",
+        "id_prefix": "ifipull-",
+        "yard": {"name": "Intermountain Auto iPull - Idaho Falls", "city": "Idaho Falls",
+                 "state": "ID", "lat": 43.5230, "lng": -112.0038},
+    },
     # Route 34 U-Pull-M (route34upullm.com, Auburn NY) — <table id=
     # "crush-inventory">: Year, Make, Model, VIN, Color, Row, Arrival Date.
     # No stock column -> VIN ids (rows without a full VIN fall back to the
@@ -21339,6 +21354,85 @@ def fetch_route34_inventory() -> list[dict]:
 def fetch_sunshine_inventory() -> list[dict]:
     """Sunshine Auto Salvage (Orangeburg SC) via the CRUSH static-table adapter."""
     return fetch_crush_table_site("sunshine")
+
+
+def fetch_ifipull_inventory() -> list[dict]:
+    """Intermountain Auto iPull (Idaho Falls ID) via the CRUSH static-table adapter."""
+    return fetch_crush_table_site("ifipull")
+
+
+# Intermountain Auto iPull publishes its price list at /pricelist/: one
+# <table id="pricelist"> (PART DESCRIPTION, CATGORY [sic], PRICE, PER, CORE;
+# 640 rows on 2026-11-17). Three categories are not car parts and are left
+# out: DRINKS (the counter fridge), ATV/MOWER (its own cheaper "HOOD",
+# "STEERING WHEEL"... would shadow the car prices) and I-CARRY (the
+# all-you-can-carry programme, $0.00 rows). First spelling of a name wins.
+IFIPULL_PRICES_URL = "https://ifipull.com/pricelist/"
+IFIPULL_PRICE_SKIP_CATEGORIES = {"DRINKS", "ATV/MOWER", "I-CARRY"}
+
+
+def _ifipull_parse_pricing_rows(page: str) -> list[dict]:
+    """/pricelist/ table -> [{description, price, corePrice, totalPrice}]
+    (the shape every single-yard price file uses). Header-driven."""
+    import html as html_mod
+    m = re.search(r'<table[^>]*id="pricelist"[^>]*>(.*?)</table>', page, re.S)
+    if not m:
+        return []
+    labels = [re.sub(r"[^a-z]", "", html_mod.unescape(re.sub(r"<[^>]+>", "", t)).lower())
+              for t in _CRUSH_TABLE_TH_RE.findall(m.group(1))]
+    # The first <th> also holds the page's DataTables script; match by ending.
+    col = {}
+    for i, lab in enumerate(labels):
+        for key, field in (("partdescription", "name"), ("catgory", "cat"), ("category", "cat"),
+                           ("price", "price"), ("core", "core")):
+            if lab.endswith(key) and field not in col:
+                col[field] = i
+                break
+    if not all(f in col for f in ("name", "price")):
+        return []
+    out: dict[str, dict] = {}
+    for block in _BARRYS_ROW_RE.findall(m.group(1)):
+        cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
+                 for c in _FENIX_TD_RE.findall(block)]
+        if len(cells) < len(labels):
+            continue
+        name = cells[col["name"]]
+        cat = cells[col["cat"]].upper() if "cat" in col else ""
+        if (not name or name in out or cat in IFIPULL_PRICE_SKIP_CATEGORIES
+                or _PRICE_AS_NAME_RE.match(name)):
+            continue
+        try:
+            price_f = float(cells[col["price"]].replace("$", "").replace(",", ""))
+            core_s = cells[col["core"]] if "core" in col else ""
+            core_f = float(core_s.replace("$", "").replace(",", "")) if core_s else 0.0
+        except ValueError:
+            continue
+        if price_f <= 0:
+            continue
+        out[name] = {"description": name, "price": f"{price_f:.2f}",
+                     "corePrice": f"{core_f:.2f}", "totalPrice": f"{price_f + core_f:.2f}"}
+    return list(out.values())
+
+
+def refresh_ifipull_pricing_file() -> Path:
+    """Refresh Intermountain Auto iPull's price list -> ifipull_pricing.json."""
+    path = DATA_DIR / "ifipull_pricing.json"
+    try:
+        r = requests.get(IFIPULL_PRICES_URL, headers={**YARDSCOUT_HEADERS, "Accept": "text/html"},
+                         timeout=60)
+        r.raise_for_status()
+    except Exception as e:
+        print(f"  [Intermountain iPull pricing] fetch failed: {e} — keeping existing file",
+              file=sys.stderr)
+        return path
+    parts = _ifipull_parse_pricing_rows(r.text)
+    if len(parts) > 150:
+        path.write_text(json.dumps(parts, separators=(",", ":")))
+        print(f"  [Intermountain iPull pricing] wrote {len(parts)} parts", file=sys.stderr)
+    else:
+        print(f"  [Intermountain iPull pricing] only {len(parts)} parts parsed — "
+              f"keeping existing file", file=sys.stderr)
+    return path
 
 
 # Bevell's Pull It Yourself (bevellspiy.com, Goldsboro NC) — 2026-11-03.
@@ -25000,6 +25094,7 @@ INDEPENDENT_FETCHERS: list = [
     ("Hwy 82 Pick & Pay", fetch_hwy82_inventory),
     ("Route 34 U-Pull-M", fetch_route34_inventory),
     ("Sunshine Auto Salvage", fetch_sunshine_inventory),
+    ("Intermountain Auto iPull", fetch_ifipull_inventory),  # 2026-11-17, Idaho Falls ID (one GET)
     ("Bevell's", fetch_bevells_inventory),  # 2026-11-03, Goldsboro NC (paged Toolset table)
     ("OKC Pull-A-Part", fetch_okcpap_inventory),  # 2026-11-04, Oklahoma City (WebForms, one POST per make)
     # 2026-10-28 single-host adapters (Kiker's / Weller / Cagle's block).
@@ -28617,7 +28712,8 @@ def main():
                refresh_ryans_pricing_file, refresh_usauto_pricing_file,
                refresh_upas_pricing_file, refresh_mmupullit_pricing_file,
                refresh_polkpickpay_pricing_file, refresh_chuckeddies_pricing_file,
-               refresh_byot_pricing_file, refresh_wilberts_pricing_file)
+               refresh_byot_pricing_file, refresh_wilberts_pricing_file,
+               refresh_ifipull_pricing_file)
         for fn in fns:
             try:
                 fn()
