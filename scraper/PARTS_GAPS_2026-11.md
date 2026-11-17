@@ -2838,3 +2838,30 @@ Left out, no stated basis: fuel pump 2006–07; rear A/C parts (no audited
 band); the Mercury Monterey twin (no entry; not researched).
 
 Result (same inventory): generic-only 12,851 → 12,598. Freestar 253 → 0.
+
+### 26.6 Ford Freestyle 2005–2007
+
+Basis: WP Ford_Freestyle; consumerguide.com/used/2005-07-ford-freestyle;
+EPA menus 2003–2008; Ford catalog records (oem-raw, retrieved 2026-11-05
+and 2026-11-06).
+- **One generation, no facelift:** the 2006 change was "the availability of
+  a navigation system" and 2007 made side airbags standard (CG). The 2008
+  "mid-cycle revision" was sold as the Taurus X (WP), outside this entry.
+  Ford headlamp 5F9Z-13008-A and grille 5F9Z-8200-AAA list 2005–2007.
+- **A/C:** "front air conditioning" in the SE list every year (CG).
+- **AWD:** "each with front-wheel drive or optional all-wheel drive" (CG);
+  EPA "Freestyle AWD" 2005–2007; "the Haldex Traction-equipped all-wheel
+  drive model" (WP).
+- **Sunroof:** "Power sunroof" in the option tables 2005–07 (CG).
+
+| Row | Years | Gate | Basis |
+|---|---|---|---|
+| A/C compressor | 2005–07 | — | Ford 5F9Z-19V703-DA lists 2005–2007. Standard (CG). |
+| Fuel pump module | 2005 | — | Ford 5F9Z-9H307-AA lists 2005 only. Its replacement 6F9Z-9H307-A is named, but its years are not in the data. |
+| AWD rear differential / transfer unit | 2005–07 | drive: awd/4wd | CG, EPA, WP. Same row and band as the Five Hundred, its platform twin (§19.6). |
+| Sunroof | 2005–07 | option | CG. |
+
+Left out, no stated basis: fuel pump 2006–07; the CVT (transmission);
+third-row seat.
+
+Result (same inventory): generic-only 12,598 → 12,339. Freestyle 259 → 0.

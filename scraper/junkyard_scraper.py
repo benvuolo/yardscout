@@ -6396,6 +6396,18 @@ _gap_extend("freestar", parts=[
     *_per_gen([(2004, 2005)], [_GAP_PUMP]),
 ])
 
+# §26.6 Ford Freestyle 2005-2007 (259 cars generic-only; one generation, no
+# facelift: the 2008 restyle is the renamed Taurus X). Ford A/C compressor
+# 5F9Z-19V703-DA lists 2005-2007 (front A/C standard on the SE, CG). Fuel
+# pump 5F9Z-9H307-AA lists 2005 only (superseded by 6F9Z-9H307-A, whose
+# years are not in the data), so the pump row is 2005. AWD optional on every
+# trim (EPA; Haldex): same row as the Five Hundred, its platform twin
+# (§19.6). Power sunroof optional 2005-07 (CG).
+_gap_extend("freestyle", parts=[
+    *_per_gen([(2005, 2007)], [_GAP_AC, _AWD_REAR_UNIT, _SUNROOF]),
+    *_per_gen([(2005, 2005)], [_GAP_PUMP]),
+])
+
 # ---- end of §26 block
 
 _apply_consensus_evergreens()
