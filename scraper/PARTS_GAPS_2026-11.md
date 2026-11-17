@@ -2776,3 +2776,40 @@ Left out, no stated basis: sunroof (no source read lists it); 2022 A/C
 compressor; mirrors by trim (several numbers per year, no clean window).
 
 Result (same inventory): generic-only 13,399 → 13,132. Trax 267 → 0.
+
+### 26.4 Chevrolet Sonic 2012–2020
+
+Basis: WP Chevrolet_Aveo (T300 section); consumerguide.com/used/2012-15-chevrolet-sonic;
+EPA menus 2011–2023; GM catalog records (oem-raw, retrieved 2026-11-05).
+- **Why 2012 only:** the entry had a headlight row and, from 2013, the
+  MyLink row, so the 281 cars from 2012 were generic-only.
+- **Years:** EPA lists Sonic 2012–2020; "Chevrolet discontinued the Sonic
+  after the 2020 model year in the United States" (WP).
+- **Facelift 2017 (added to `FACELIFT_BREAKS`):** "The facelift brought a
+  restyled front fascia, new LED tail lights" (WP). GM headlamps
+  42390433/4 and all four tail lamps list 2012–2016. The existing
+  headlight row is now cut at 2017.
+- **A/C:** standard on the LS for 2012–15 ("air conditioning" in the LS
+  list, CG). 2016–20 is outside the CG page, so those years are `option`.
+- **Bodies:** sedan and hatchback; the tail lamps are separate GM numbers.
+- **Sunroof:** "Power sunroof" in the option tables 2012–15 (CG).
+
+| Row | Years | Gate | Basis |
+|---|---|---|---|
+| Fuel pump module | 2012–16 | — | GM kit 13507609 lists 2012–2016, 1.4L and 1.8L, sedan and hatchback. |
+| A/C compressor (match part #) | 2013–15 | — | GM kits 42783843 (1.4L, 2013–2020) and 42783863 (1.8L, 2013–2018): two numbers by engine. Standard (CG). |
+| A/C compressor (match part #) | 2016–20 | option | Same numbers; standard fitment not confirmed for these years. |
+| Sedan tail lights | 2012–16 | body: sedan | GM 42407872/3, sedan trims only. `_TAILS` band. |
+| Hatchback tail lights | 2012–16 | body: hatchback | GM 42407868/9, hatchback trims only. Same band as the Accent/Rio/Focus hatch rows. |
+| Sunroof | 2012–15 | option | CG. |
+
+Left out, no stated basis: a 2012 A/C compressor (neither number lists
+2012); fuel pump for 2017–20 (13507609 stops at 2016; 13592113 lists
+2013–2018 for another 1.8L option code only); 2017–20 tail lamps; mirrors
+(numbers at hand list 2013–2014 only); RS and turbo parts.
+**Suggestion, not done:** the Sonic entry is not in the consensus-evergreen
+list, so its 1,281 cars show 2 to 8 rows. Adding it would put "fits
+2012–2020" on rows such as the gauge cluster with no source for that span.
+
+Result (same inventory): generic-only 13,132 → 12,851. Sonic 2012:
+281 → 0. The 999 cars from 2013–20 gain the rows above for their years.

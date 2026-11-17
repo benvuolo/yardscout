@@ -6371,6 +6371,22 @@ _gap_extend("trax", parts=[
     *_per_gen([(2015, 2021)], [_GAP_AC]),
 ])
 
+# §26.4 Chevrolet Sonic, US 2012-2020 (281 cars generic-only, all 2012: the
+# entry had a headlight row and, from 2013, MyLink). 2017 facelift in
+# FACELIFT_BREAKS. GM numbers: fuel pump module kit 13507609 lists 2012-2016
+# (both engines, both bodies); A/C compressor kits 42783843 (1.4L,
+# 2013-2020) and 42783863 (1.8L, 2013-2018): two numbers by engine, match
+# part #; 2012 is not listed, so no A/C row for 2012. A/C standard on the LS
+# for 2012-15 (CG); later years not confirmed (option). Tail lamps differ by
+# body: sedan 42407872/3 and hatchback 42407868/9, both 2012-2016. Power
+# sunroof optional 2012-15 (CG).
+_gap_extend("sonic", parts=[
+    *_per_gen([(2012, 2016)], [_GAP_PUMP, _SEDAN_TAILS, _HATCH_TAILS]),
+    *_per_gen([(2013, 2015)], [_GAP_AC_PN]),
+    *_per_gen([(2016, 2020)], [{**_GAP_AC_PN, "option": True}]),
+    *_per_gen([(2012, 2015)], [_SUNROOF]),
+])
+
 # ---- end of §26 block
 
 _apply_consensus_evergreens()
@@ -6898,6 +6914,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     # §26 (PARTS_GAPS §26; cited there)
     "volvo s40": [2001, 2008],
     "trax": [2017],
+    "sonic": [2017],
 }
 # §22.10: gas-only rows hidden on hybrid listings. Hybrids of the families on
 # the lots generally start and charge through the hybrid system and use a
