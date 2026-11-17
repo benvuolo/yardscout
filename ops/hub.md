@@ -1492,3 +1492,27 @@ appears to be free alerts".
   never name PullScout in ads, keywords or page text; never claim first or
   largest; never copy their wording; never read their site by machine.
 - Reminder given to the owner: the four yard notes are still unsent.
+
+## 2026-11-17 15:05 UTC one-colour name to main (sw `jh-v205`); 1.13.0 live in both stores
+
+- **Name in one colour**: run 8 (77 suites) all pass; layout check six
+  widths, 2,208 checks, 0 failures. Pushed to main as a fast-forward.
+  (Hub slip, no harm found: one browser test was started in the petrol
+  working copy while the layout check was still running; both layout
+  halves still ended clean. Every server or browser test now goes through
+  `flock /tmp/ys-test.lock`.)
+- **1.13.0 is live in both stores** (status runs 44109467799 and
+  44109474369, 15:01 UTC): App Store 1.13.0 build 41 READY_FOR_SALE; Play
+  production 1.13.0 (40) completed, full rollout. `docs/app-version.json`
+  still says iOS 1.12.16; `app-store-version.yml` (every two hours) writes
+  the new one.
+- **Play listing uploaded** (part of the release the owner shipped on
+  11-16): `store-listing.yml` run 44109917152 and
+  `play-subscription-listing.yml` run 44109922973, both success. Google
+  reviews listing edits like a release. The screenshots show the app as
+  1.13.0 looks (orange, two-colour name); new ones go with the next
+  release.
+- **Held sentences**: switched on branch `hub/petrol` (bc4a8585) together
+  with the petrol accent (064f043b, sw `jh-v206`); they go live as one
+  batch after their regression. Task #58 closes then.
+- Builder told that the held sentences are no longer held.
