@@ -6,12 +6,15 @@
  * push subscription). alerts_sent dedupes so overlapping scans never
  * re-alert the same (user, vehicle) pair.
  *
- * Sends run in ctx.waitUntil after the commit response, capped to stay inside
- * the Workers free-plan subrequest budget (50/request). With more users than
- * the cap, upgrade the Worker to paid ($5/mo → 1000 subrequests).
+ * Sends run in ctx.waitUntil after the commit response, one dispatcher after
+ * another, against the ONE call budget every dispatcher of a commit shares
+ * (commit_budget.js; Workers Free allows 50 outside calls an invocation and
+ * the budget stops at 45). What does not fit is carried to the next scan and
+ * counted. The paid plan ($5/mo) lifts the limit.
  */
 
-import { json, err, isoNow, haversineMiles } from './util.js';
+import { json, err, isoNow, haversineMiles, unseenItems, unseenCost, runBatched } from './util.js';
+import { hasRoom, ownCap } from './commit_budget.js';
 import { getSessionUser, resolveTier } from './auth.js';
 import { sendWebPush, pushConfigured } from './push.js';
 import { resendFetch, countHeld, optionalEmailAllowed } from './ops.js';
@@ -24,7 +27,7 @@ import { getDirectory } from './inventory.js';
 const MAX_WATCHES_PER_USER = 20;
 const MAX_WATCHES_FREE = 5;
 const MAX_VEHICLES_PER_DIGEST = 6;   // keep the notification readable
-const MAX_SENDS_PER_COMMIT = 35;     // subrequest budget (free plan: 50/req)
+const MAX_SENDS_PER_COMMIT = 35;     // outside a scan commit only (admin test route); a commit uses commit_budget.js
 const MAX_WEEKLY_EMAILS = 40;        // cron invocations get their own budget
 const ARRIVALS_RETENTION_DAYS = 10;
 
@@ -939,10 +942,16 @@ async function emailDigest(env, email, matches, { weekly = false, sales = [], no
   return r.ok;
 }
 
-/** Called from handleCommit (via ctx.waitUntil) with the commit's newArrivals:
- * [{id, year, make, model, row, location, city, state, lat, lng, dateAdded}]. */
+/** Called from handleCommit with the commit's newArrivals:
+ * [{id, year, make, model, row, location, city, state, lat, lng, dateAdded}].
+ * Returns {users, sends, carried, unchecked}: `carried` users had a new car
+ * and were not served (this function's own cap, or the commit's call budget,
+ * commit_budget.js); nothing is marked sent for them, so the next scan, which
+ * carries the same 3 days of arrivals, finds the same cars. Users are taken
+ * longest-unalerted first so a carried user leads the next scan. */
 export async function dispatchAlerts(env, arrivals) {
-  if (!Array.isArray(arrivals) || !arrivals.length) return { users: 0, sends: 0 };
+  const none = { users: 0, sends: 0, carried: 0, unchecked: 0 };
+  if (!Array.isArray(arrivals) || !arrivals.length) return none;
 
   // Active watches for users whose tier is currently pro (expiry honored).
   const rows = (await env.DB.prepare(
@@ -958,25 +967,38 @@ export async function dispatchAlerts(env, arrivals) {
     if (!byUser.has(r.user_id)) byUser.set(r.user_id, { email: r.email, watches: [] });
     byUser.get(r.user_id).watches.push(r);
   }
-  if (!byUser.size) return { users: 0, sends: 0 };
+  if (!byUser.size) return none;
 
-  let sends = 0;
-  let usersAlerted = 0;
+  // Only users with a matching car in this commit go further.
+  let cands = [];
+  for (const [userId, u] of byUser) {
+    const matched = arrivals.filter((v) => u.watches.some((w) => watchMatches(w, v)));
+    if (matched.length) cands.push({ userId, email: u.email, matched });
+  }
+  if (cands.length > 1) {
+    // Longest-unalerted first (never alerted leads). One read.
+    const last = new Map(((await env.DB.prepare(
+      'SELECT user_id, MAX(sent_at) AS last FROM alerts_sent GROUP BY user_id'
+    ).all()).results || []).map((r) => [r.user_id, r.last || '']));
+    cands = cands.map((c, i) => ({ c, i, last: last.get(c.userId) || '' }))
+      .sort((a, b) => (a.last < b.last ? -1 : a.last > b.last ? 1 : a.i - b.i)).map((x) => x.c);
+  }
 
-  for (const [userId, { email, watches }] of byUser) {
-    if (sends >= MAX_SENDS_PER_COMMIT) { console.log('alert send budget hit — remaining users deferred'); break; }
-    const matched = arrivals.filter((v) => watches.some((w) => watchMatches(w, v)));
-    if (!matched.length) continue;
+  const maxSends = ownCap(env, MAX_SENDS_PER_COMMIT);
+  let sends = 0, usersAlerted = 0, carried = 0, unchecked = 0, cut = false;
+  const stop = (why) => { if (!cut) console.log(`alert send budget hit (${why}): remaining users carried to the next scan`); cut = true; };
 
+  for (let k = 0; k < cands.length; k++) {
+    const { userId, email, matched } = cands[k];
+    if (!hasRoom(env, { svc: unseenCost(matched.length) })) { unchecked += cands.length - k; break; }
     // Dedupe: drop vehicles this user was already alerted about.
-    const fresh = [];
-    for (const v of matched) {
-      const seen = await env.DB.prepare(
-        'SELECT 1 AS x FROM alerts_sent WHERE user_id = ?1 AND vehicle_id = ?2'
-      ).bind(userId, String(v.id)).first();
-      if (!seen) fresh.push(v);
-    }
+    const fresh = await unseenItems(env,
+      'SELECT 1 AS x FROM alerts_sent WHERE user_id = ?1 AND vehicle_id = ?2', userId, matched);
     if (!fresh.length) continue;
+    if (cut) { carried++; continue; }
+    if (sends >= maxSends) { stop('per-commit cap'); carried++; continue; }
+    // Room for the subscription read, one send and its bookkeeping?
+    if (!hasRoom(env, { ext: 1, svc: 3 + unseenCost(fresh.length) })) { stop('commit budget'); carried++; continue; }
 
     const payload = {
       title: `${fresh.length} watched car${fresh.length === 1 ? '' : 's'} just hit the yard`,
@@ -990,37 +1012,44 @@ export async function dispatchAlerts(env, arrivals) {
       'SELECT endpoint, p256dh, auth FROM push_subscriptions WHERE user_id = ?1 LIMIT 3'
     ).bind(userId).all()).results || [];
 
-    let delivered = false;
+    let delivered = false, attempted = false;
     if (pushConfigured(env)) {
       for (const sub of subs) {
-        if (sends >= MAX_SENDS_PER_COMMIT) break;
-        sends++;
+        if (sends >= maxSends) break;
+        // One outside call per device, and the row delete if it is dead.
+        if (!hasRoom(env, { ext: 1, svc: 2 + unseenCost(fresh.length) })) { stop('commit budget'); break; }
         const res = await sendWebPush(env, sub, payload);
+        if (res.deferred) { stop('commit budget'); break; }
+        sends++; attempted = true;
         if (res.gone) {
           await env.DB.prepare('DELETE FROM push_subscriptions WHERE endpoint = ?1').bind(sub.endpoint).run();
         } else if (res.ok) delivered = true;
       }
     }
-    if (!delivered && sends < MAX_SENDS_PER_COMMIT) {
-      sends++;
-      delivered = await emailDigest(env, email, fresh);
+    if (!delivered && !cut && sends < maxSends) {
+      if (hasRoom(env, { ext: 1, svc: 1 + unseenCost(fresh.length) })) {
+        sends++; attempted = true;
+        delivered = await emailDigest(env, email, fresh);
+      } else stop('commit budget');
     }
 
     if (delivered) {
       usersAlerted++;
-      for (const v of fresh) {
-        await env.DB.prepare(
-          'INSERT OR IGNORE INTO alerts_sent (user_id, vehicle_id, sent_at) VALUES (?1, ?2, ?3)'
-        ).bind(userId, String(v.id), isoNow()).run();
-      }
+      const ins = env.DB.prepare('INSERT OR IGNORE INTO alerts_sent (user_id, vehicle_id, sent_at) VALUES (?1, ?2, ?3)');
+      const at = isoNow();
+      await runBatched(env, fresh.map((v) => ins.bind(userId, String(v.id), at)));
+    } else if (cut && !attempted) {
+      carried++;   // nothing was tried for this user: carried, not failed
     }
   }
 
   // Prune dedupe rows older than 90 days (yard cycles are ~6 weeks).
-  await env.DB.prepare("DELETE FROM alerts_sent WHERE sent_at < ?1")
-    .bind(new Date(Date.now() - 90 * 86400_000).toISOString()).run();
+  if (hasRoom(env, { svc: 1 })) {
+    await env.DB.prepare("DELETE FROM alerts_sent WHERE sent_at < ?1")
+      .bind(new Date(Date.now() - 90 * 86400_000).toISOString()).run();
+  }
 
-  return { users: usersAlerted, sends };
+  return { users: usersAlerted, sends, carried, unchecked };
 }
 
 /* ===== weekly digest (free tier) =====
@@ -1190,6 +1219,7 @@ export async function sendWeeklyDigests(env, { now = Date.now(), previews = null
  * free users get them folded into the weekly digest email above. */
 
 const SALE_PUSH_LOOKAHEAD_DAYS = 10;
+const SALE_DEDUPE_READS = 12;   // room asked for before one owner's sale look-ups
 const MAX_SALE_YARDS_PER_PUSH = 3;
 
 export function fmtSaleRange(startIso, endIso) {
@@ -1268,9 +1298,13 @@ export async function dispatchSaleAlerts(env, events) {
     byUser.get(r.user_id).push(r);
   }
 
-  let sends = 0, users = 0;
+  const maxSends = ownCap(env, MAX_SENDS_PER_COMMIT);
+  let sends = 0, users = 0, carried = 0, unchecked = 0;
+  let left = byUser.size + 1;
   for (const [userId, watches] of byUser) {
-    if (sends >= MAX_SENDS_PER_COMMIT) { console.log('sale-alert send budget hit'); break; }
+    left--;
+    if (sends >= maxSends) { console.log('sale-alert send budget hit'); unchecked += left; break; }
+    if (!hasRoom(env, { svc: 2 + SALE_DEDUPE_READS })) { unchecked += left; break; }
     const sales = await salesForWatches(env, watches);
     const fresh = [];
     for (const s of sales) {
@@ -1290,14 +1324,19 @@ export async function dispatchSaleAlerts(env, events) {
       ).join('\n') + (fresh.length > shown.length ? `\n…and ${fresh.length - shown.length} more` : ''),
       url: '/',
     };
+    // The commit's call budget (commit_budget.js): a user it cannot carry is
+    // not marked sent, and the sale rides every commit until it ends.
+    if (!hasRoom(env, { ext: 1, svc: 3 + fresh.length })) { carried++; unchecked += left - 1; break; }
     const subs = (await env.DB.prepare(
       'SELECT endpoint, p256dh, auth FROM push_subscriptions WHERE user_id = ?1 LIMIT 3'
     ).bind(userId).all()).results || [];
     let delivered = false;
     for (const sub of subs) {
-      if (sends >= MAX_SENDS_PER_COMMIT) break;
-      sends++;
+      if (sends >= maxSends) break;
+      if (!hasRoom(env, { ext: 1, svc: 2 + fresh.length })) break;
       const res = await sendWebPush(env, sub, payload);
+      if (res.deferred) break;
+      sends++;
       if (res.gone) {
         await env.DB.prepare('DELETE FROM push_subscriptions WHERE endpoint = ?1').bind(sub.endpoint).run();
       } else if (res.ok) delivered = true;
@@ -1311,5 +1350,5 @@ export async function dispatchSaleAlerts(env, events) {
       }
     }
   }
-  return { ...stored, users, sends };
+  return { ...stored, users, sends, carried, unchecked };
 }

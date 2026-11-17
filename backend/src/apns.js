@@ -15,6 +15,7 @@
 
 import { bytesToB64u } from './push.js';
 import { countOk, countFail, countGone } from './ops.js';
+import { meteredFetch, BudgetExhausted } from './commit_budget.js';
 
 let cachedJwt = null;   // { token, iat } — module-global survives across requests
 
@@ -59,7 +60,7 @@ export async function sendApns(env, deviceToken, payload) {
     const host = (env.APNS_ENV || 'production') === 'sandbox'
       ? 'https://api.sandbox.push.apple.com'
       : 'https://api.push.apple.com';
-    const r = await fetch(`${host}/3/device/${deviceToken}`, {
+    const r = await meteredFetch(env, `${host}/3/device/${deviceToken}`, {
       method: 'POST',
       headers: {
         authorization: 'bearer ' + await apnsJwt(env),
@@ -81,6 +82,8 @@ export async function sendApns(env, deviceToken, payload) {
     if (gone) await countGone(env, 'apns'); else await countFail(env, 'apns', r.status, text);
     return { ok: false, gone };
   } catch (e) {
+    // The scan commit's call budget is used up: not a failure, not sent.
+    if (e instanceof BudgetExhausted) return { ok: false, gone: false, deferred: true };
     console.log('apns send error:', e && e.message);
     await countFail(env, 'apns', 0, `error: ${e && e.message}`);
     return { ok: false, gone: false };

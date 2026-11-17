@@ -20,6 +20,9 @@ for i in $(seq 1 20); do
   [ "$i" = 20 ] && { echo "mock-fcm never came up"; cat "$OUT/mock-fcm.log"; exit 1; }
 done
 
+# COMMIT_EXT_CEILING_TEST=25: one scan commit may make 25 outside calls here
+# (45 in production, src/commit_budget.js), so the "Pro first when the budget
+# is tight" check can fill it with 25 Pro devices.
 # FCM_SA_KEY goes in as one line with literal \n escapes — exactly how a
 # pasted JSON-key private_key arrives in production; fcm.js normalizes.
 SA_KEY_ONELINE=$(awk 'BEGIN{ORS="\\n"} {print}' "$OUT/sa_key.pem")
@@ -32,6 +35,7 @@ FCM_SA_EMAIL=test-fcm@yardscout-test.iam.gserviceaccount.com
 FCM_SA_KEY=$SA_KEY_ONELINE
 FCM_TOKEN_URL_TEST=http://127.0.0.1:$MOCKPORT/token
 FCM_API_URL_TEST=http://127.0.0.1:$MOCKPORT
+COMMIT_EXT_CEILING_TEST=25
 EOF
 rm -rf "$OUT/wrangler-state"
 

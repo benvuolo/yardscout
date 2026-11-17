@@ -6,14 +6,15 @@
  * secret is unconfigured (never "open by default").
  */
 
-import { json, err, sha256Hex, isoNow, timingSafeEqual } from './util.js';
+import { json, err, sha256Hex, isoNow, timingSafeEqual, runBatched } from './util.js';
+import { budgetFor, BudgetExhausted, withBudget } from './commit_budget.js';
 import { dispatchAlerts, dispatchSaleAlerts, storeArrivals } from './alerts.js';
 import { dispatchDeviceAlerts, dispatchDeviceSaleAlerts, dispatchFirstWatchCheckins } from './devices.js';
 import { dispatchEmailAlerts } from './email_alerts.js';
 import { dispatchFreeEmailAlerts } from './free_email_alert.js';
 import { maybeSendCoverageDigest } from './coverage.js';
 import { dispatchSavedCarAlerts } from './saved_alerts.js';
-import { opsFlusher } from './ops.js';
+import { flushOps, countCarried, countMax, COMMIT_EXT_MAX_METRIC, COMMIT_SVC_MAX_METRIC } from './ops.js';
 
 async function checkSecret(req, env, header, envKey) {
   const expected = env[envKey];
@@ -80,119 +81,147 @@ export async function handleCommit(req, env, ctx) {
     return err(400, 'bad_commit', 'Body must include {directory:{yards,scrapedAt,...}, manifest}.');
   }
 
-  await env.DB.prepare(
+  // Everything this invocation calls, the three statements below included,
+  // is counted against one budget (commit_budget.js).
+  const budget = budgetFor(env);
+  const benv = withBudget(env, budget);
+
+  await benv.DB.prepare(
     `INSERT INTO inv_meta (id, directory, manifest, updated_at) VALUES (1, ?1, ?2, ?3)
      ON CONFLICT (id) DO UPDATE SET directory = ?1, manifest = ?2, updated_at = ?3`
   ).bind(JSON.stringify(directory), JSON.stringify(manifest), isoNow()).run();
 
-  // Prune orphans (yards that disappeared between scans).
-  const rows = (await env.DB.prepare('SELECT kind, key, variant FROM inv_shards').all()).results || [];
+  // Prune orphans (yards that disappeared between scans), in one round trip
+  // per 100.
+  const rows = (await benv.DB.prepare('SELECT kind, key, variant FROM inv_shards').all()).results || [];
   const keep = new Set(Object.keys(manifest));
   const orphans = rows.filter((r) => !keep.has(`${r.kind}/${r.key}/${r.variant}`));
-  for (const o of orphans) {
-    await env.DB.prepare('DELETE FROM inv_shards WHERE kind = ?1 AND key = ?2 AND variant = ?3')
-      .bind(o.kind, o.key, o.variant).run();
+  if (orphans.length) {
+    const del = benv.DB.prepare('DELETE FROM inv_shards WHERE kind = ?1 AND key = ?2 AND variant = ?3');
+    await runBatched(benv, orphans.map((o) => del.bind(o.kind, o.key, o.variant)));
   }
-  // Alert dispatch runs after the response goes out — the scan workflow
-  // shouldn't wait on (or fail because of) notification sends. Each chain
-  // ends with ONE batched write of its send counters (ops.js flushOps).
-  // Resolves when this commit's Pro email alerts are out (see the free
-  // emailed alert below, which must run after them).
-  let proEmailsDone = Promise.resolve();
-  if (Array.isArray(newArrivals) && newArrivals.length && ctx) {
-    ctx.waitUntil(
-      dispatchAlerts(env, newArrivals)
-        .then((r) => console.log(`alerts: ${r.users} users notified, ${r.sends} sends`))
-        .catch((e) => console.log('alert dispatch failed:', e && e.message))
-        .finally(opsFlusher(env))
-    );
-    // Native devices (apps): instant push for Pro devices, then free devices'
-    // one instant watch from the budget Pro left.
-    ctx.waitUntil(
-      dispatchDeviceAlerts(env, newArrivals)
-        .then((r) => console.log(`device alerts: ${r.devices} devices pushed (${r.freeInstant || 0} free instant), ${r.sends} sends`))
-        .catch((e) => console.log('device alert dispatch failed:', e && e.message))
-        .finally(opsFlusher(env))
-    );
-    // Web Pro members with email alerts on: one digest email per user.
-    proEmailsDone = dispatchEmailAlerts(env, newArrivals)
-      .then((r) => console.log(`email alerts: ${r.users} users emailed, ${r.emails} attempts`))
-      .catch((e) => console.log('email alert dispatch failed:', e && e.message));
-    ctx.waitUntil(proEmailsDone.finally(opsFlusher(env)));
-    // Snapshot arrivals for the weekly free-tier digest cron.
-    ctx.waitUntil(
-      storeArrivals(env, newArrivals)
-        .then((r) => console.log(`arrivals stored: ${r.stored}`))
-        .catch((e) => console.log('arrival store failed:', e && e.message))
-        .finally(opsFlusher(env))
-    );
-  }
-  // Free web visitors' ONE emailed alert (free_email_alert.js): the lowest
-  // class of mail, so it starts only once this commit's Pro alert emails are
-  // out and counted, and sends only what ops.js freeAlertBudget leaves. Runs
-  // on every commit: a scan with no new cars can still deliver alerts that
-  // an earlier scan held back for the budget.
-  if (ctx) {
-    ctx.waitUntil(
-      proEmailsDone
-        .then(() => dispatchFreeEmailAlerts(env, Array.isArray(newArrivals) ? newArrivals : []))
-        .then((r) => console.log(`free email alerts: ${r.emails} emailed of ${r.matched} matched, ${r.held} newly held, ${r.failed} failed`))
-        .catch((e) => console.log('free email alert dispatch failed:', e && e.message))
-        .finally(opsFlusher(env))
-    );
-  }
-  // Saved-car alerts (Pro): "gone" / "leaving soon" for every synced
-  // yard-visit list, resolved against the shards just committed. Runs on
-  // every commit, arrivals or not — a car can leave on a quiet scan.
-  if (ctx) {
-    // One-time first-watch check-in for new free app users (after storeArrivals
-    // has had a chance to land this commit's arrivals; it reads the table).
-    ctx.waitUntil(
-      dispatchFirstWatchCheckins(env)
-        .then((r) => console.log(`first-watch check-ins: ${r.due} due, ${r.sent} sent, ${r.gaveUp} gave up`))
-        .catch((e) => console.log('first-watch check-in failed:', e && e.message))
-        .finally(opsFlusher(env))
-    );
-    ctx.waitUntil(
-      dispatchSavedCarAlerts(env)
-        .then((r) => console.log(`saved-car alerts: ${r.devices} devices, ${r.emails} emails, ${r.gone} gone, ${r.leaving} leaving, ${r.deferred} deferred`))
-        .catch((e) => console.log('saved-car alert dispatch failed:', e && e.message))
-        .finally(opsFlusher(env))
-    );
-  }
-  // Coverage-request digest to the owner piggybacks the commit hook too —
-  // self-throttled to max one email per day (coverage.js), so riding every
-  // ~6h scan commit costs nothing on quiet days.
-  if (ctx) {
-    ctx.waitUntil(
-      maybeSendCoverageDigest(env)
-        .then((r) => console.log(`coverage digest: ${r.sent ? `sent (${r.requests} requests, ${r.keys} keys)` : `skipped (${r.reason})`}`))
-        .catch((e) => console.log('coverage digest failed:', e && e.message))
-        .finally(opsFlusher(env))
-    );
-  }
-  // Sale-day snapshot + instant sale pushes (Pro). An empty array still
-  // commits — it clears expired sales from the table.
-  if (Array.isArray(saleEvents) && ctx) {
-    ctx.waitUntil(
-      dispatchSaleAlerts(env, saleEvents)
-        // Device sale pushes run AFTER storeSaleEvents (inside dispatchSaleAlerts)
-        // so the sale_events table is current when devices are matched.
-        .then(async (r) => {
-          console.log(`sales: ${r.stored} stored, ${r.users} users pushed, ${r.sends} sends`);
-          const d = await dispatchDeviceSaleAlerts(env);
-          console.log(`device sales: ${d.devices} devices pushed, ${d.sends} sends`);
-        })
-        .catch((e) => console.log('sale-alert dispatch failed:', e && e.message))
-        .finally(opsFlusher(env))
-    );
-  }
+  // Alert dispatch runs after the response goes out: the scan workflow
+  // shouldn't wait on (or fail because of) notification sends.
+  if (ctx) ctx.waitUntil(runCommitDispatch(env, benv, budget, { newArrivals, saleEvents }));
 
   return json({
     ok: true, shards: keep.size, pruned: orphans.length,
     scrapedAt: directory.scrapedAt, arrivals: (newArrivals || []).length,
     sales: Array.isArray(saleEvents) ? saleEvents.length : 0,
   });
+}
+
+/** Everything a commit sends, ONE STEP AT A TIME, in priority order, against
+ * one budget of calls (commit_budget.js): Pro alerts first, the free tier
+ * last. A step that finds no room stops between recipients; what it could
+ * not serve is carried to the next scan (nothing is marked sent, and every
+ * scan carries the last 3 days of arrivals) and counted (ops.js
+ * countCarried, shown in the daily ops email). The order of sacrifice is the
+ * reverse of the order below: the free emailed alert loses first, Pro web
+ * push last. Never throws. Ends with ONE batched write of the send counters.
+ *
+ * Step names are the keys of ops.js COMMIT_STEPS. */
+export async function runCommitDispatch(env, benv, budget, { newArrivals, saleEvents } = {}) {
+  const arrivals = Array.isArray(newArrivals) ? newArrivals : [];
+  const step = async (name, failLabel, fn, line) => {
+    budget.step = name;
+    // Past the deadline nothing new starts, so the counters below are
+    // written before the platform's 30 seconds run out. A step that is not
+    // started has marked nothing: the next scan does its work.
+    if (budget.timeUp()) {
+      budget.cut(name, { unchecked: 1 });
+      console.log(`${failLabel} not started: this commit's time is up; carried to the next scan`);
+      return null;
+    }
+    try {
+      const r = await fn();
+      console.log(line(r));
+      if (r && (r.carried || r.unchecked)) budget.cut(name, { carried: r.carried || 0, unchecked: r.unchecked || 0 });
+      return r;
+    } catch (e) {
+      if (e instanceof BudgetExhausted) {
+        // The backstop: the step ran into the ceiling itself. Whatever it had
+        // not sent is unsent and unmarked, like any carried alert.
+        budget.cut(name, { stopped: 1 });
+        console.log(`${failLabel} stopped at the commit budget (${e.kind}); the rest is carried to the next scan`);
+      } else {
+        console.log(`${failLabel} failed:`, e && e.message);
+      }
+      return null;
+    }
+  };
+  try {
+    let proDeviceSends = 0;
+    if (arrivals.length) {
+      // 1. Pro accounts on the web: push, or the email fallback.
+      await step('pro-webpush', 'alert dispatch', () => dispatchAlerts(benv, arrivals),
+        (r) => `alerts: ${r.users} users notified, ${r.sends} sends`);
+      // 2. Pro app devices.
+      const d = await step('pro-device', 'device alert dispatch', () => dispatchDeviceAlerts(benv, arrivals, { phase: 'pro' }),
+        (r) => `device alerts: ${r.devices} devices pushed, ${r.sends} sends`);
+      proDeviceSends = (d && d.sends) || 0;
+      // 3. Web Pro members with email alerts on: one digest email per user.
+      await step('pro-email', 'email alert dispatch', () => dispatchEmailAlerts(benv, arrivals),
+        (r) => `email alerts: ${r.users} users emailed, ${r.emails} attempts`);
+    }
+    // 4. Saved-car alerts (Pro): "gone" / "leaving soon" for every synced
+    // yard-visit list, resolved against the shards just committed. Runs on
+    // every commit, arrivals or not: a car can leave on a quiet scan.
+    await step('saved', 'saved-car alert dispatch', () => dispatchSavedCarAlerts(benv),
+      (r) => `saved-car alerts: ${r.devices} devices, ${r.emails} emails, ${r.gone} gone, ${r.leaving} leaving, ${r.deferred} deferred`);
+    // 5. Sale-day snapshot + instant sale pushes (Pro). An empty array still
+    // commits: it clears expired sales from the table. Device sale pushes
+    // run AFTER storeSaleEvents (inside dispatchSaleAlerts) so the
+    // sale_events table is current when devices are matched.
+    if (Array.isArray(saleEvents)) {
+      await step('sales', 'sale-alert dispatch', async () => {
+        const r = await dispatchSaleAlerts(benv, saleEvents);
+        console.log(`sales: ${r.stored} stored, ${r.users} users pushed, ${r.sends} sends`);
+        const d = await dispatchDeviceSaleAlerts(benv);
+        return { devices: d.devices, sends: d.sends, carried: (r.carried || 0) + (d.carried || 0), unchecked: (r.unchecked || 0) + (d.unchecked || 0) };
+      }, (r) => `device sales: ${r.devices} devices pushed, ${r.sends} sends`);
+    }
+    if (arrivals.length) {
+      // 6. Snapshot arrivals for the Monday recap and the check-ins below
+      // (no outside calls).
+      await step('arrivals-store', 'arrival store', () => storeArrivals(benv, arrivals),
+        (r) => `arrivals stored: ${r.stored}`);
+    }
+    // 7. Coverage-request digest to the owner: self-throttled to one email
+    // a day (coverage.js), so riding every commit costs nothing on quiet days.
+    await step('coverage', 'coverage digest', () => maybeSendCoverageDigest(benv),
+      (r) => `coverage digest: ${r.sent ? `sent (${r.requests} requests, ${r.keys} keys)` : `skipped (${r.reason})`}`);
+    // ---- the free tier, from what Pro left ----
+    if (arrivals.length) {
+      // 8. Free app devices' one instant watch.
+      await step('free-instant', 'free instant dispatch', () => dispatchDeviceAlerts(benv, arrivals, { phase: 'free', sendsBefore: proDeviceSends }),
+        (r) => `free instant alerts: ${r.freeInstant} devices pushed, ${r.sends} sends`);
+    }
+    // 9. One-time first-watch check-in for new free app users (after
+    // storeArrivals: it reads that table).
+    await step('checkin', 'first-watch check-in', () => dispatchFirstWatchCheckins(benv),
+      (r) => `first-watch check-ins: ${r.due} due, ${r.sent} sent, ${r.gaveUp} gave up`);
+    // 10. Free web visitors' ONE emailed alert (free_email_alert.js): the
+    // lowest class of mail and the last step, so it starts only once this
+    // commit's Pro alert emails are out and counted, and sends only what
+    // ops.js freeAlertBudget and this commit's call budget leave. Runs on
+    // every commit: a scan with no new cars can still deliver alerts that an
+    // earlier scan held back.
+    await step('free-email', 'free email alert dispatch', () => dispatchFreeEmailAlerts(benv, arrivals),
+      (r) => `free email alerts: ${r.emails} emailed of ${r.matched} matched, ${r.held} newly held, ${r.failed} failed`);
+  } catch (e) {
+    console.log('commit dispatch failed:', e && e.message);
+  }
+  // What did not fit, and how full the busiest commit of the day was.
+  for (const [name, c] of Object.entries(budget.cuts)) {
+    if (c.carried) await countCarried(env, name, c.carried);
+    if (c.unchecked || c.stopped) await countCarried(env, name, c.unchecked + c.stopped, 'unchecked');
+  }
+  await countMax(env, COMMIT_EXT_MAX_METRIC, budget.used.ext);
+  await countMax(env, COMMIT_SVC_MAX_METRIC, budget.used.svc + 1);   // + the counter write below
+  console.log(budget.summary());
+  await flushOps(env);   // the one call made outside the budget's count
+  return budget;
 }
 
 /* ===== Account administration ===== */

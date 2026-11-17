@@ -913,3 +913,163 @@ scorecard as one line (offered, asked, confirmed, first email). (3) If free
 alerts are held on most days, a paid Resend plan lifts every limit here by
 setting `RESEND_DAILY_CAP`. (4) Count alerts dropped after 48 h, so "held"
 and "never sent" can be told apart.
+
+## Watertight — branch `hub/watertight-1117`, NOT merged (2026-11-17)
+
+Hub brief of 2026-11-17 (owner: "I want everything large done ... watertight
+features"). Built on origin/main 56f108c5. Nothing deployed, merged,
+dispatched or released; no file in `scraper/`, `fastlane/`, `ios/`,
+`android/`; no price or entitlement rule changed; no migration. One commit
+per item; items 5 to 7 (test scripts, the regression runner, the eBay
+workflow) are in the builder's report to the hub, not here.
+
+### 1. The commit budget: alerts cannot fail unseen on a busy scan
+
+**What was wrong.** `handleCommit` started every dispatcher at once, each
+with a private cap on *sends*: web push 35, app push 25, Pro email 20,
+saved-car 20, sale pushes 35 + 25, check-ins 20, free email 5, the owner's
+coverage digest 1. That is up to 186 sends in one Worker invocation, and an
+FCM push can cost 2 to 4 calls (token request, retry). The new test's
+worst-case load made **162 outside calls, up to 5 at once**, on the old
+tree. Past the platform limit a send simply fails, whichever dispatcher it
+belongs to, and nothing recorded which.
+
+**The documented limits (Workers Free).** Read 2026-11-17. NOTE: this
+session could not open developers.cloudflare.com itself (the host is not in
+its allowed network); the figures below are what the search tool returned
+from these pages, quoted as returned. Worth one look by a person.
+- Outside calls: "50 subrequests per invocation" on Free (10,000 on Paid,
+  configurable to 10 million). Every `fetch()` counts, and "each subrequest
+  in a redirect chain counts against this limit".
+  <https://developers.cloudflare.com/workers/platform/limits/> (page dated
+  2026-07-28 by the search result)
+- Cloudflare's own services (D1, KV): "Workers on the free plan remain
+  limited to 50 external subrequests and 1000 subrequests to Cloudflare
+  services per invocation."
+  <https://developers.cloudflare.com/changelog/post/2026-02-11-subrequests-limit/>
+  (the Workflows limits page repeats 50 / 1,000:
+  <https://developers.cloudflare.com/workflows/reference/limits/>)
+- D1's own page gives a different number: "Queries per Worker invocation
+  (read subrequest limits): 1000 (Workers Paid) / 50 (Free)", and says a
+  `batch()` counts as one. <https://developers.cloudflare.com/d1/platform/limits/>
+  **The two pages disagree for D1 on Free (1,000 or 50).** See "The open
+  question" below.
+- `ctx.waitUntil` work may run "for up to 30 seconds" after the response.
+  At most six connections wait for response headers at once. CPU time on
+  Free is 10 ms per request (same limits page).
+- Not a per-commit limit, but new: D1 Free's daily row limits are enforced
+  since 2026-09-01 (queries fail past them).
+  <https://developers.cloudflare.com/changelog/post/2026-09-01-d1-free-tier-limit-enforcement/>
+
+**What is built** (`backend/src/commit_budget.js`, the runner
+`runCommitDispatch` in `admin.js`).
+- ONE budget per commit: **45 outside calls** (limit 50), **900 D1 + KV
+  calls** (limit 1,000; plus the one counter write at the end), and no new
+  send or step starts **25 s** after the commit began (limit 30 s).
+- It holds by construction, not by counting sends: every outside call in
+  the commit path goes through `meteredFetch` (APNs, FCM and its token
+  request, web push, Resend) and every D1 / KV call through a metered `env`;
+  both count before the call and refuse at the ceiling. A test fails if any
+  file in the commit path has a bare `fetch(`.
+- The dispatchers run **one after another, in priority order**:
+  1. Pro web push (email fallback) 2. Pro app push 3. Pro email alerts
+  4. saved-car alerts (Pro) 5. sale-day pushes (Pro) 6. storing the arrivals
+  for the Monday recap (no outside call) 7. the owner's coverage digest
+  8. free instant push 9. first-watch check-ins 10. free emailed alert.
+  The order of sacrifice is the reverse: the free emailed alert loses first.
+  Once any step is carried for lack of outside calls, no later step sends in
+  that commit (a cheap free send cannot slip past a carried Pro one).
+- Before each send a dispatcher asks for room for the send AND the write
+  that records it, so it stops between recipients, never between a send and
+  its "sent" row.
+- **Carried, never dropped.** A recipient that was not served has no "sent"
+  row, and every scan carries the last 3 days of arrivals
+  (`push_inventory.py`, `ARRIVAL_WINDOW_DAYS`), so the next scan finds the
+  same cars. Recipients are now taken longest-unserved first (Pro web users
+  by their last alert, devices by `last_push_at`, Pro email by
+  `last_email_at`), so whoever was cut leads the next scan. A carried free
+  emailed alert is flagged `held_at` as before and keeps its 48 h catch-up.
+- **Counted.** Per step, in `ops_counters`: `commit:<step>:held` (had
+  something to send, not served) and `commit-unchecked:<step>:held` (never
+  looked at), plus the day's busiest commit (`commit:ext:max`,
+  `commit:svc:max`). The daily ops email gains, under SENDS: "Busiest scan
+  since yesterday (UTC): N of 45 outside calls, M of 900 database calls" and,
+  when anything was carried, "CARRIED TO THE NEXT SCAN by the per-scan call
+  budget (24 h): ..." per step. Carried **Pro** alerts are also an open
+  issue in the verdict line ("N Pro alerts were carried to a later scan").
+  Each commit logs one line: `commit budget: outside calls 12/45, ...`.
+- Private Pro caps (35 / 25 / 20 / 20) no longer apply inside a commit (the
+  shared budget is the limit; otherwise a Pro user could be carried by a cap
+  while a free send went out). They still apply on the admin test routes.
+  The free tier's own limits are unchanged: 5 free alert emails a scan,
+  20 check-ins a scan, the Resend shares.
+- D1 round trips cut: the per-car "already sent?" reads and "sent" writes of
+  web push, app push, Pro email and the Monday pushes go as D1 batches (one
+  round trip per 100 cars instead of one per car); orphan shard deletes too.
+- Outside a commit (admin routes, Monday cron) there is no budget and
+  nothing changes.
+
+**Worst-case arithmetic** (test `commit_budget_unit.mjs`, counted at the
+network stub and the D1 shim, not by the code under test). Load: 60 Pro web
+users, 40 Pro devices, 30 Pro email members, 30 free instant devices, 20
+check-ins due, 10 free alert addresses, a sale, a coverage request, 4,000
+arrivals (the scraper's cap).
+
+| | outside calls | D1 + KV calls |
+|---|---|---|
+| limit (Workers Free) | 50 | 1,000 (D1's page: 50) |
+| old tree, same load | **162** | not the problem measured |
+| new: worst case | **45** | 364 (Pro web 153, Pro app 41, Pro email 62, arrivals store 51, free instant 31, rest 26) |
+| new: busy scan (10 + 10 + 5 Pro, 30 free instant) | 45 | 146 |
+| new: quiet scan | 0 | 21 |
+
+Capacity that follows: 45 pushes or emails per scan, about 270 a day at six
+scans. The worst case above (262 sends owed) cleared in 7 scans, everyone
+reached exactly once. Today's real load is about 10 Pro devices.
+
+**Promises.** None changed. Pro: every watch, pushed within hours, first in
+line. Free instant and the free emailed alert already said "from what Pro
+left" / "can arrive late or be skipped". What IS new and should be known: if
+Pro alone ever needs more than 45 sends in one scan, the rest arrive one
+scan (about 4 h) later and the free tier gets nothing that scan; a car
+carried for more than 3 days (the arrivals window) is lost. Both show in the
+daily email long before that. The paid Workers plan ($5/mo) lifts it.
+
+**The open question (stopped here, on purpose).** If D1 really allows only
+50 queries per invocation on Free (its own page), no arrangement inside one
+invocation is enough: storing 4,000 arrivals alone takes 51 batches today
+(and did before this change), and the fixed reads of ten dispatchers come to
+about 45. Staying inside *that* reading means splitting the commit across
+invocations (the scan calling one endpoint per dispatcher, or an outbox the
+hourly cron drains), which touches `scraper/push_inventory.py` or needs a
+migration. Not done; it needs the hub's call. **One check settles which page
+is right:** `wrangler tail` (or the Workers logs) on the next scan commit.
+`arrivals stored: 4000` together with the new `commit budget:` line means D1
+calls are not capped at 50. A line `... failed: Too many API requests` (or a
+missing `arrivals stored`) means they are, and then alerts have been failing
+unseen on busy scans for some time.
+
+**Tests.** `backend/test/commit_budget_unit.mjs`: 73 checks, all pass (the
+limits under the worst case; order of sacrifice; counted and shown; nothing
+marked sent for the unserved; carry-over until everyone is reached once; the
+deadline; the backstop at the network; no bare `fetch(`). Against the old
+sources (`YS_SRC=<old src> node test/commit_budget_unit.mjs`) it fails at
+once: "outside calls stay under the platform's 50 a commit: made 162",
+"one outside call at a time: up to 5 at once". All other `*_unit.mjs` pass.
+`e2e-devices.sh` runs one commit with the ceiling lowered to 25 (dev-only
+`COMMIT_EXT_CEILING_TEST`, ignored unless `DEV_MODE=1`) for its existing
+"Pro first when the budget is tight" check.
+
+**Decisions here the owner may want to change.** (1) Order among Pro: web
+push, then app push, then Pro email, then saved cars, then sale pushes (the
+order they ran in before). Most paying members are on the apps; putting app
+push first is one line. (2) The owner's coverage digest goes before the free
+tier. (3) Ceilings 45 / 900 / 25 s. (4) Carried Pro alerts are an open issue
+in the daily email but do NOT raise an hourly "[YardScout alert]".
+
+**Not done / known limits.** Saved-car and sale pushes are not rotated
+(same owners first each scan; both re-evaluate every commit). No count of
+alerts lost after 3 days of carry-over. The 10 ms CPU limit is not measured
+or guarded here (see the report to the hub). The saved-car step was not in
+the worst-case load (it needs inventory shards); it goes through the same
+meter.

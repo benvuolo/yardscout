@@ -13,6 +13,8 @@
  * reduced to their domain, long token-like strings and API keys redacted.
  */
 
+import { meteredFetch, BudgetExhausted } from './commit_budget.js';
+
 export const CHANNELS = [
   'apns', 'fcm', 'webpush',
   'email:auth', 'email:digest', 'email:pro-alert', 'email:saved', 'email:coverage', 'email:ops',
@@ -98,6 +100,48 @@ export async function countFail(env, channel, status, detail) {
  * daily email lists it so the owner knows mail was held back. */
 export async function countHeld(env, channel) {
   try { bump(channel, 'held', Date.now()); } catch (e) { console.log('ops countHeld failed:', channel, e && e.message); }
+}
+
+/* ----- the scan commit's call budget (commit_budget.js) -----
+ * What a commit could not fit is carried to the next scan and counted here,
+ * per step, as "<channel>:held" so sendStats (ops_monitor.js) reads it like
+ * any other held count:
+ *   commit:<step>            recipients that had something to send
+ *   commit-unchecked:<step>  recipients the step never got to look at
+ * COMMIT_STEPS is the order the steps run in (admin.js), Pro first. The
+ * busiest commit of each UTC day is kept as two day-level maxima. */
+export const COMMIT_STEPS = [
+  ['pro-webpush', 'Pro web push alerts'],
+  ['pro-device', 'Pro app push alerts'],
+  ['pro-email', 'Pro email alerts'],
+  ['saved', 'saved-car alerts (Pro)'],
+  ['sales', 'sale-day pushes (Pro)'],
+  ['arrivals-store', 'arrivals for the Monday recap'],
+  ['coverage', 'coverage digest to the owner'],
+  ['free-instant', 'free instant pushes'],
+  ['checkin', 'first-watch check-ins'],
+  ['free-email', 'free alert emails'],
+];
+export const COMMIT_EXT_MAX_METRIC = 'commit:ext:max';
+export const COMMIT_SVC_MAX_METRIC = 'commit:svc:max';
+const pendingMax = new Map();      // "day|metric" → largest value seen
+
+/** n recipients of `step` carried to the next scan (kind 'carried'), or never
+ * looked at (kind 'unchecked'). Buffered like every other counter. */
+export async function countCarried(env, step, n, kind = 'carried') {
+  try {
+    const now = Date.now();
+    const channel = (kind === 'unchecked' ? 'commit-unchecked:' : 'commit:') + step;
+    for (let i = 0; i < n; i++) bump(channel, 'held', now);
+  } catch (e) { console.log('ops countCarried failed:', step, e && e.message); }
+}
+
+/** Keep the day's largest value of a metric (the busiest commit). */
+export async function countMax(env, metric, value) {
+  try {
+    const key = `${utcDay(Date.now())}|${metric}`;
+    if (!(pendingMax.get(key) >= value)) pendingMax.set(key, value);
+  } catch (e) { console.log('ops countMax failed:', metric, e && e.message); }
 }
 
 /* ----- the Resend daily cap (free tier: 100 emails per UTC day) -----
@@ -195,13 +239,22 @@ export async function freeAlertBudget(env, now = Date.now()) {
  * Returns the number of statements sent (0 when nothing was pending). */
 export async function flushOps(env) {
   try {
-    if (!pendingCounts.size && !pendingErrors.length) return 0;
+    if (!pendingCounts.size && !pendingErrors.length && !pendingMax.size) return 0;
     const counts = [...pendingCounts];
     const errors = pendingErrors;
+    const maxima = [...pendingMax];
     pendingCounts.clear();
     pendingErrors = [];
+    pendingMax.clear();
     if (!env || !env.DB) return 0;
     const stmts = [];
+    for (let i = 0; i < maxima.length; i += COUNTER_ROWS_PER_STMT) {
+      const chunk = maxima.slice(i, i + COUNTER_ROWS_PER_STMT);
+      stmts.push(env.DB.prepare(
+        `INSERT INTO ops_counters (day, metric, n) VALUES ${chunk.map(() => '(?, ?, ?)').join(', ')}
+         ON CONFLICT (day, metric) DO UPDATE SET n = MAX(n, excluded.n)`
+      ).bind(...chunk.flatMap(([key, n]) => { const cut = key.indexOf('|'); return [key.slice(0, cut), key.slice(cut + 1), n]; })));
+    }
     for (let i = 0; i < counts.length; i += COUNTER_ROWS_PER_STMT) {
       const chunk = counts.slice(i, i + COUNTER_ROWS_PER_STMT);
       const binds = [];
@@ -253,8 +306,12 @@ export function resendUrl(env) {
 export async function resendFetch(env, channel, to, init) {
   let r;
   try {
-    r = await fetch(resendUrl(env), init);
+    r = await meteredFetch(env, resendUrl(env), init);
   } catch (e) {
+    // The scan commit's call budget is used up (commit_budget.js): nothing
+    // was sent and nothing failed. Callers ask hasRoom() first; this is the
+    // backstop.
+    if (e instanceof BudgetExhausted) throw e;
     await countFail(env, channel, 0, `fetch error: ${e && e.message}`);
     throw e;
   }

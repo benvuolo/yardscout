@@ -28,9 +28,10 @@
  * consistent; store receipt validation can harden it later.
  */
 
-import { json, err, isoNow } from './util.js';
+import { json, err, isoNow, unseenItems, unseenCost, runBatched } from './util.js';
 import { sendApns, apnsConfigured } from './apns.js';
-import { sendFcm, fcmConfigured } from './fcm.js';
+import { sendFcm, fcmConfigured, fcmSendCost } from './fcm.js';
+import { hasRoom, ownCap } from './commit_budget.js';
 import {
   watchMatches, digestText, digestUpsell, salesForWatches, fmtSaleRange, loadArrivals, sanitizeVpicFilters,
 } from './alerts.js';
@@ -40,7 +41,7 @@ import { countOk, FREE_INSTANT_METRIC } from './ops.js';
 const MAX_WATCHES_PER_DEVICE = 20;
 const MAX_WATCHES_FREE = 5;
 const FREE_RADIUS_CAP_MI = 250;
-const MAX_SENDS_PER_COMMIT = 25;    // shares the commit's subrequest budget
+const MAX_SENDS_PER_COMMIT = 25;    // outside a scan commit only (admin test route); a commit uses commit_budget.js
 // Free instant alert: one watch per free device, cars within this many miles
 // of its centre (or the watch's own radius when that is smaller).
 export const FREE_INSTANT_RADIUS_MI = 50;
@@ -62,16 +63,28 @@ export async function sendDevicePush(env, d, payload) {
     if (res.gone) {
       await env.DB.prepare('UPDATE devices SET apns_token = NULL WHERE id = ?1').bind(d.id).run();
     }
-    return { ok: res.ok };
+    return { ok: res.ok, ...(res.deferred ? { deferred: true } : {}) };
   }
   if (d.fcm_token && fcmConfigured(env)) {
     const res = await sendFcm(env, d.fcm_token, payload);
     if (res.gone) {
       await env.DB.prepare('UPDATE devices SET fcm_token = NULL WHERE id = ?1').bind(d.id).run();
     }
-    return { ok: res.ok };
+    return { ok: res.ok, ...(res.deferred ? { deferred: true } : {}) };
   }
   return { ok: false };
+}
+
+/** Outside calls one push to this device row makes (commit_budget.js). */
+export function devicePushCost(env, d) {
+  if (d.apns_token && apnsConfigured(env)) return 1;
+  if (d.fcm_token && fcmConfigured(env)) return fcmSendCost();
+  return 0;
+}
+/** Room in the scan commit's budget for one push to `d` and the writes after
+ * it (`writes` D1 calls, plus one in case the token turns out dead)? */
+export function roomForPush(env, d, writes = 1) {
+  return hasRoom(env, { ext: devicePushCost(env, d), svc: writes + 1 });
 }
 
 // Devices that can currently receive a push (either channel).
@@ -220,26 +233,24 @@ function parseWatches(row) {
   try { return JSON.parse(row.watches_json || '[]'); } catch { return []; }
 }
 
-async function freshOnly(env, deviceId, matched) {
-  const fresh = [];
-  for (const v of matched) {
-    const seen = await env.DB.prepare(
-      'SELECT 1 AS x FROM device_alerts_sent WHERE device_id = ?1 AND vehicle_id = ?2'
-    ).bind(deviceId, String(v.id)).first();
-    if (!seen) fresh.push(v);
-  }
-  return fresh;
+/* Dedupe read and "sent" write, each as D1 batches (one round trip per 100
+ * cars): the commit's dispatchers share one budget of calls. */
+function freshOnly(env, deviceId, matched) {
+  return unseenItems(env,
+    'SELECT 1 AS x FROM device_alerts_sent WHERE device_id = ?1 AND vehicle_id = ?2', deviceId, matched);
 }
 
 async function markSent(env, deviceId, fresh) {
-  for (const v of fresh) {
-    await env.DB.prepare(
-      'INSERT OR IGNORE INTO device_alerts_sent (device_id, vehicle_id, sent_at) VALUES (?1, ?2, ?3)'
-    ).bind(deviceId, String(v.id), isoNow()).run();
-  }
-  await env.DB.prepare('UPDATE devices SET last_push_at = ?1 WHERE id = ?2')
-    .bind(isoNow(), deviceId).run();
+  const at = isoNow();
+  const ins = env.DB.prepare(
+    'INSERT OR IGNORE INTO device_alerts_sent (device_id, vehicle_id, sent_at) VALUES (?1, ?2, ?3)');
+  await runBatched(env, [
+    ...fresh.map((v) => ins.bind(deviceId, String(v.id), at)),
+    env.DB.prepare('UPDATE devices SET last_push_at = ?1 WHERE id = ?2').bind(at, deviceId),
+  ]);
 }
+/** D1 calls markSent() makes for n cars. */
+const markSentCost = (n) => unseenCost(n + 1);
 
 function parseInstant(row) {
   if (!row.instant_watch_json) return null;
@@ -252,13 +263,18 @@ function parseInstant(row) {
 }
 
 /** One arrivals push to one device for the cars `watches` match. Returns
- * 'skip' (nothing new), 'ok' or 'fail'. Shared by Pro and free instant so both
- * use the same payload, dedupe table and token pruning. */
-async function pushArrivals(env, d, watches, arrivals) {
+ * 'skip' (nothing new), 'ok', 'fail', 'carry' (something new, but `dry` or no
+ * room in the commit budget: nothing sent, nothing marked, the next scan
+ * finds the same cars) or 'unchecked' (no room even to look). Shared by Pro
+ * and free instant so both use the same payload, dedupe table and token
+ * pruning. */
+async function pushArrivals(env, d, watches, arrivals, { dry = false } = {}) {
   const matched = arrivals.filter((v) => watches.some((w) => watchMatches(w, v)));
   if (!matched.length) return 'skip';
+  if (!hasRoom(env, { svc: unseenCost(matched.length) })) return 'unchecked';
   const fresh = await freshOnly(env, d.id, matched);
   if (!fresh.length) return 'skip';
+  if (dry || !roomForPush(env, d, markSentCost(fresh.length))) return 'carry';
   const res = await sendDevicePush(env, d, {
     title: `${fresh.length} watched car${fresh.length === 1 ? '' : 's'} just hit the yard`,
     body: digestText(fresh),
@@ -267,50 +283,69 @@ async function pushArrivals(env, d, watches, arrivals) {
     // Backward-compatible — shipped app versions ignore the url key.
     url: '/#alert=' + encodeURIComponent(String(fresh[0].id)),
   });
+  if (res.deferred) return 'carry';
   if (!res.ok) return 'fail';
   await markSent(env, d.id, fresh);
   return 'ok';
 }
 
-/** Instant arrivals push — called from handleCommit alongside dispatchAlerts.
- * Same shape of arrivals array. PRO devices first (every watch, any
- * distance); then FREE devices with an instant watch, only that watch, only
- * within its clamped radius, and only from the sends Pro left of
- * MAX_SENDS_PER_COMMIT. A free device the budget cuts loses nothing: its cars
- * are not marked sent, so the Monday summary still lists them. Free devices
- * are taken longest-unpushed first, so repeated cuts rotate. */
-export async function dispatchDeviceAlerts(env, arrivals) {
-  if (!devicePushConfigured(env) || !Array.isArray(arrivals) || !arrivals.length) {
-    return { devices: 0, sends: 0, freeInstant: 0 };
+/** Instant arrivals push, called from handleCommit. Same shape of arrivals
+ * array. PRO devices first (every watch, any distance); then FREE devices
+ * with an instant watch, only that watch, only within its clamped radius, and
+ * only from the sends Pro left of MAX_SENDS_PER_COMMIT. A device that is cut
+ * (this cap, or the commit's call budget, commit_budget.js) loses nothing:
+ * its cars are not marked sent, so the next scan finds them again and a free
+ * device's Monday summary still lists them. Both tiers are taken
+ * longest-unpushed first, so repeated cuts rotate.
+ *
+ * handleCommit runs the two tiers as separate steps (`phase: 'pro'` early,
+ * `phase: 'free'` after every Pro step, passing the Pro sends as
+ * `sendsBefore`); the admin test route runs both at once ('all').
+ * Returns {devices, sends, freeInstant, carried, unchecked}: `carried`
+ * devices had a new car and were not served, `unchecked` were not looked at. */
+export async function dispatchDeviceAlerts(env, arrivals, { phase = 'all', sendsBefore = 0 } = {}) {
+  const out = { devices: 0, sends: 0, freeInstant: 0, carried: 0, unchecked: 0 };
+  if (!devicePushConfigured(env) || !Array.isArray(arrivals) || !arrivals.length) return out;
+  const maxSends = ownCap(env, MAX_SENDS_PER_COMMIT);
+  let sends = sendsBefore, cut = false;
+  /** Walk one tier. watchesOf(row) → the watches to match, or null to skip. */
+  const walk = async (list, watchesOf, label, onOk) => {
+    for (let i = 0; i < list.length; i++) {
+      const d = list[i];
+      const watches = watchesOf(d);
+      if (!watches) continue;
+      const capHit = sends >= maxSends;
+      const r = await pushArrivals(env, d, watches, arrivals, { dry: cut || capHit });
+      if (r === 'skip') continue;
+      if (r === 'unchecked') { out.unchecked += list.length - i; break; }
+      if (r === 'carry') {
+        if (!cut) console.log(`device alert budget hit (${label}${capHit ? ', per-commit cap' : ', commit budget'}): the rest are carried to the next scan`);
+        cut = true;
+        out.carried++;
+        continue;
+      }
+      sends++;
+      if (r === 'ok') { out.devices++; if (onOk) await onOk(); }
+    }
+  };
+  if (phase !== 'free') {
+    const rows = (await env.DB.prepare(
+      `SELECT id, apns_token, fcm_token, watches_json FROM devices WHERE tier = 'pro' AND ${PUSHABLE}
+        ORDER BY last_push_at IS NOT NULL, last_push_at`
+    ).all()).results || [];
+    await walk(rows, (d) => parseWatches(d), 'Pro');
   }
-  const rows = (await env.DB.prepare(
-    `SELECT id, apns_token, fcm_token, watches_json FROM devices WHERE tier = 'pro' AND ${PUSHABLE}`
-  ).all()).results || [];
-  let sends = 0, devices = 0, freeInstant = 0;
-  for (const d of rows) {
-    if (sends >= MAX_SENDS_PER_COMMIT) { console.log('device alert budget hit'); break; }
-    const r = await pushArrivals(env, d, parseWatches(d), arrivals);
-    if (r === 'skip') continue;
-    sends++;
-    if (r === 'ok') devices++;
-  }
-  if (sends < MAX_SENDS_PER_COMMIT) {
+  if (phase !== 'pro') {
     const free = (await env.DB.prepare(
       `SELECT id, apns_token, fcm_token, instant_watch_json FROM devices
         WHERE tier != 'pro' AND instant_watch_json IS NOT NULL AND ${PUSHABLE}
         ORDER BY last_push_at IS NOT NULL, last_push_at`
     ).all()).results || [];
-    for (const d of free) {
-      if (sends >= MAX_SENDS_PER_COMMIT) { console.log('device alert budget hit (free instant; rest go in the Monday summary)'); break; }
-      const w = parseInstant(d);
-      if (!w) continue;
-      const r = await pushArrivals(env, d, [w], arrivals);
-      if (r === 'skip') continue;
-      sends++;
-      if (r === 'ok') { devices++; freeInstant++; await countOk(env, FREE_INSTANT_METRIC); }
-    }
+    await walk(free, (d) => { const w = parseInstant(d); return w ? [w] : null; }, 'free instant; they also go in the Monday summary',
+      async () => { out.freeInstant++; await countOk(env, FREE_INSTANT_METRIC); });
   }
-  return { devices, sends, freeInstant };
+  out.sends = sends - sendsBefore;
+  return out;
 }
 
 /** Instant sale-day push for PRO devices — called from handleCommit after
@@ -320,11 +355,14 @@ export async function dispatchDeviceSaleAlerts(env) {
   const rows = (await env.DB.prepare(
     `SELECT id, apns_token, fcm_token, watches_json FROM devices WHERE tier = 'pro' AND ${PUSHABLE}`
   ).all()).results || [];
-  let sends = 0, devices = 0;
-  for (const d of rows) {
-    if (sends >= MAX_SENDS_PER_COMMIT) break;
+  let sends = 0, devices = 0, carried = 0, unchecked = 0;
+  for (let i = 0; i < rows.length; i++) {
+    const d = rows[i];
+    if (sends >= ownCap(env, MAX_SENDS_PER_COMMIT)) { unchecked += rows.length - i; break; }
     const watches = parseWatches(d).filter((w) => w.lat != null && w.radius_mi);
     if (!watches.length) continue;
+    // Room for this device's sale look-ups (commit_budget.js)?
+    if (!hasRoom(env, { svc: 14 })) { unchecked += rows.length - i; break; }
     const sales = await salesForWatches(env, watches);
     const fresh = [];
     for (const s of sales) {
@@ -335,13 +373,16 @@ export async function dispatchDeviceSaleAlerts(env) {
     }
     if (!fresh.length) continue;
     const shown = fresh.slice(0, MAX_SALE_YARDS_PER_PUSH);
-    sends++;
+    // No room: not marked sent; the sale rides every commit until it ends.
+    if (!roomForPush(env, d, fresh.length)) { carried++; unchecked += rows.length - i - 1; break; }
     const res = await sendDevicePush(env, d, {
       title: shown[0].pct ? `${shown[0].pct}% off sale near you` : 'Yard sale day near you',
       body: shown.map((s) =>
         `${s.yard} — ${fmtSaleRange(s.start_date, s.end_date)}${s.pct ? ` (${s.pct}% off)` : ''}`
       ).join('\n') + (fresh.length > shown.length ? `\n…and ${fresh.length - shown.length} more` : ''),
     });
+    if (res.deferred) { carried++; unchecked += rows.length - i - 1; break; }
+    sends++;
     if (res.ok) {
       devices++;
       for (const s of fresh) {
@@ -351,7 +392,7 @@ export async function dispatchDeviceSaleAlerts(env) {
       }
     }
   }
-  return { devices, sends };
+  return { devices, sends, carried, unchecked };
 }
 
 /** The one Pro clause in a Monday summary for a free device WITH an instant
@@ -453,11 +494,16 @@ export async function dispatchFirstWatchCheckins(env, { now = Date.now() } = {})
        AND first_watch_at <= ?1 AND ${PUSHABLE}
      ORDER BY first_watch_at LIMIT ?2`
   ).bind(dueBefore, MAX_CHECKINS_PER_COMMIT).all()).results || [];
-  let sent = 0, gaveUp = 0;
-  for (const d of rows) {
+  let sent = 0, gaveUp = 0, carried = 0, unchecked = 0;
+  for (let i = 0; i < rows.length; i++) {
+    const d = rows[i];
+    // Room for this device's reads (commit_budget.js)? A device that is not
+    // reached keeps checkin_at NULL and is looked at again on the next scan.
+    if (!hasRoom(env, { svc: 4 })) { unchecked += rows.length - i; break; }
     const watches = parseWatches(d);
     const arrivals = watches.length ? await loadArrivals(env, d.first_watch_at) : [];
     const matched = arrivals.filter((v) => watches.some((w) => watchMatches(w, v)));
+    if (!hasRoom(env, { svc: unseenCost(matched.length) + 1 })) { unchecked += rows.length - i; break; }
     const fresh = await freshOnly(env, d.id, matched);
     if (!fresh.length) {
       if (now - Date.parse(d.first_watch_at) >= CHECKIN_GIVE_UP_MS) {
@@ -475,19 +521,21 @@ export async function dispatchFirstWatchCheckins(env, { now = Date.now() } = {})
     const tierLine = inst
       ? `Your instant alert is ${watchLabel(inst)} within ${inst.radius_mi} mi; the rest come in the Monday recap. Pro pushes every watch.`
       : 'Free gets a Monday recap; Pro pushes each one the day it lands.';
+    if (!roomForPush(env, d, markSentCost(fresh.length) + 1)) { carried++; unchecked += rows.length - i - 1; break; }
     const res = await sendDevicePush(env, d, {
       title: `Since you started watching ${watchLabel(w)}`,
       body: `${n} landed${within}: ${digestText(fresh.slice(0, 2)).replace(/\n/g, '; ')}${n > 2 ? ` and ${n - 2} more` : ''}. `
         + tierLine,
       url: '/#alert=' + encodeURIComponent(String(fresh[0].id)),
     });
+    if (res.deferred) { carried++; unchecked += rows.length - i - 1; break; }
     if (res.ok) {
       await markSent(env, d.id, fresh);
       await env.DB.prepare('UPDATE devices SET checkin_at = ?1 WHERE id = ?2').bind(isoNow(), d.id).run();
       sent++;
     }
   }
-  return { due: rows.length, sent, gaveUp };
+  return { due: rows.length, sent, gaveUp, carried, unchecked };
 }
 
 /* ===== test/ops helpers (x-admin-secret; same pattern as email_alerts) ===== */

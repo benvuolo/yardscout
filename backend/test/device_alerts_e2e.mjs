@@ -300,8 +300,10 @@ await commit([arrival(9606, { make: 'Volvo', model: '740', row: '8' })]);
 await waitDispatch();
 check('flag dropped (old build): no instant push', (await tokensSent(instTok)).length === 3);
 
-/* Pro first when the budget is tight: 25 Pro devices use all of
- * MAX_SENDS_PER_COMMIT, the free instant device waits for Monday */
+/* Pro first when the budget is tight: 25 Pro devices use every outside call
+ * this commit may make (the shared commit budget, src/commit_budget.js; the
+ * suite runs it at 25 with COMMIT_EXT_CEILING_TEST), the free instant device
+ * is carried and also waits for Monday */
 const saabPro = [];
 for (let i = 0; i < 25; i++) {
   const id = uuid(), tok = fcmTok(`saab-pro-${i}`);
@@ -321,7 +323,7 @@ await new Promise((res) => setTimeout(res, 5000));
 let proGot = 0;
 for (const tok of saabPro) proGot += (await tokensSent(tok)).length;
 check('tight budget: every Pro device pushed', proGot === 25, `got ${proGot}`);
-check('tight budget: free instant device not pushed (Pro used all 25 sends)', (await tokensSent(saabFreeTok)).length === 0);
+check('tight budget: free instant device not pushed (Pro used all 25 outside calls of the commit)', (await tokensSent(saabFreeTok)).length === 0);
 r = await api('/v1/admin/device-alerts/dispatch', J(ADMIN, { arrivals: [arrival(9702, { make: 'Saab', model: '900', row: '12' })] }));
 check('admin path agrees: 25 sends, all Pro, no free instant', r.data.sends === 25 && r.data.freeInstant === 0, JSON.stringify(r.data));
 r = await api('/v1/admin/device-digest/run', { method: 'POST', headers: ADMIN });
