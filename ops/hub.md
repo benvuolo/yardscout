@@ -1359,3 +1359,26 @@ once both stores show 1.13.0 live (`trig_016dADedHXNCLcakiqQW9irq`).
   out; no reply from any yard; no mail from Apple or Google. Only Reddit
   notices in the inbox.
 - Website: `jh-v204`, unchanged since 18:13 UTC on 11-16.
+
+## 2026-11-17 14:18 UTC a Reddit comment: "Looks like a copy of www.pullscout.com though?"
+
+On the owner's r/projectcar post (Gmail thread `1a1e8425eb1d6a5d`, already
+labelled `reddit-drafted`). What the hub could establish, from search
+results only (pullscout.com is not on this session's allowed network hosts,
+so the site itself was not opened and its look was not compared):
+
+- PullScout is another junkyard-inventory search site: "Find donor cars and
+  salvage yard inventory near you"; its home page states 288,420 vehicles,
+  233 yards, 35 states and 6 Canadian provinces; search by year, make,
+  model, zip, radius and freshness; pages per yard, per city/state and per
+  car (VIN in the address, "crushed" and "seen 2 months ago" marks);
+  "community-powered updates", "approved photos", saved searches. No app
+  or alert feature could be confirmed either way.
+- Age: one of its car pages records a car crushed on 2026-09-01, so it was
+  collecting by about then. This repo was created 2026-09-02. Who was first
+  is not known; do not claim it.
+- Same category, similar "-Scout" name, different weight: YardScout's own
+  ground is the parts list per car with values, interchange, row numbers,
+  alerts with push, and the two store apps.
+- Draft reply given to the owner in chat (playbook voice). The sentence
+  about not having seen PullScout before is the owner's to keep or cut.
