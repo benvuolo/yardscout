@@ -1644,3 +1644,33 @@ the owner's to try, or the first visitor's.
 - The builder's working copy is removed; its branch stays on origin.
 - Many old agent working copies remain under `.claude/worktrees/` and the
   hub scratchpad (29 listed); harmless, worth pruning if disk gets tight.
+
+## 2026-11-17 20:02 UTC owner: "Ship ... Do everything you think you should ... I want everything large done"
+
+Owner, ~17:00 UTC: "Ship, and yes give me the replacement lines. Do
+everything you think you should, my billing cycle ends in a few days and I
+want everything large done. More breadth, data, parts compatability,
+watertight features, etc."
+
+- **"Ship" = 1.13.1** (petrol, one-colour name, alert card and the rest of
+  the 11-16/17 website changes into the apps). Branch `release/1.13.1`:
+  `release/brand-petrol` merged (app icon, splash, Play icon). Still to do
+  before dispatch: tagline, Play feature graphic, store screenshots, full
+  regression. Task #66.
+- **Five builders launched ~17:10 UTC**, each in its own worktree, each told
+  to push its own branch and report: `yards/breadth-1117` (more yards;
+  stop the U-Pull-R reader), `parts/next-block-1117` (parts table next
+  block), `interchange/next-1117` (release-ready interchange from data
+  already held, no new crawl), `hub/watertight-1117` (alert dispatch
+  inside the Workers subrequest limit, Parts late zip, free-alert loose
+  ends, scorecard lines, test servers, `tools/regress.sh`, eBay workflow),
+  `data/yard-freshness-1117` (a yard's frozen list shown honestly).
+  Agent ids are in task #67.
+- **All five stopped at the account's 5-hour usage limit** (reset 18:40
+  UTC) before pushing anything; the session itself restarted. Owner at
+  20:00: limit reset, continue. Resumed three at 20:01 (watertight, yards,
+  parts); interchange and yard-freshness are resumed when a slot frees, so
+  the limit is not hit again mid-release. Lesson: five builders at once on
+  top of a full day's work is more than one 5-hour window carries.
+- Freed 5.5 GB by removing 15 old working copies whose commits were on
+  origin; 14 others kept (not on origin or with edits).
