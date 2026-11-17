@@ -1544,3 +1544,24 @@ so 1.13.0 is in real use on both phones (check-in step 2). Devices: android
   after the free-email-alert branch merges, since the builder is in those
   files.
 - Task #58 (held sentences) closes with this push once confirmed live.
+
+## 2026-11-17 15:39 UTC petrol and the switched sentences confirmed live; task #58 closed
+
+One fresh load of yardscout.io at phone size: cache `jh-v206`; accent
+`#0B6477`, mark `#1095AF`; the name in one colour; the Alerts intro reads
+"In the iOS and Android apps, free gets one watch pushed within hours
+(cars within 50 mi)..."; 40 tiles; no page errors. Screenshot sent to the
+owner.
+
+- Release prep, NOT shipped: branch `release/brand-petrol` (48995190) holds
+  the app icon, splash and Play icon in petrol (57 PNGs; recoloured with
+  `xt/recolour_icons2.py`, which moves only the orange share of a pixel).
+  Still to do with the release: store screenshots, the Play feature graphic
+  (two-colour name and "250+" in it), email colours, version bump. Task #66.
+  Needs the owner's "ship".
+- Seen while doing this, for a copy pass with the owner: the site
+  description and the Play feature graphic say "Find the donor car before
+  you drive", close to PullScout's "Find donor cars all in one place".
+  Three stock Capacitor splash files (blue logo on white) sit unused in
+  `ios/App/App/Assets.xcassets/Splash.imageset/`.
+- Builder still working on `growth/free-email-alert`.
