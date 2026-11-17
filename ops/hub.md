@@ -1525,3 +1525,22 @@ errors. Deploy Workers (rendered pages) and Pages both succeeded at 15:06.
 Usage stats run 44109930771: `funnel-v5` rows web 88, android 80, ios 14,
 so 1.13.0 is in real use on both phones (check-in step 2). Devices: android
 14 (1 Pro), ios 24 (9 Pro); 33 devices hold 87 watches.
+
+## 2026-11-17 15:27 UTC petrol accent and the switched sentences to main (sw `jh-v206`)
+
+- Run 9 (77 suites) all pass; layout check six widths, 2,208 checks
+  (contrast included), 0 failures; dark theme looked at by eye.
+- Petrol values: light accent `#0B6477`, hover and text-on-tint
+  `#084C5B`; dark accent `#2BB3CC`, hover `#5CC6DA`, text-on-tint
+  `#7FD0E0`; mark `#1095AF` (the mock's `#0E8FA8` put the NEW badge's dark
+  text at 4.48:1, so the mark is a shade lighter: 4.8:1).
+- Web icons recoloured with `xt/recolour_icons.py` (hub scratchpad); the
+  same script will do the app icon and splash at the next release.
+- STILL ORANGE, on purpose or pending: the apps in the stores (1.13.0), the
+  store screenshots and icon, the app icon and splash sources under
+  `assets/`, `android/`, `ios/` (next release, needs "ship"); the colours
+  inside emails (`#ff9500` in `alerts.js`, `email_alerts.js`,
+  `recap_signup.js`; `#f26b1d`/`#b84a0a` in the owner-only ops emails):
+  after the free-email-alert branch merges, since the builder is in those
+  files.
+- Task #58 (held sentences) closes with this push once confirmed live.
