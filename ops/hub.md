@@ -1342,3 +1342,20 @@ Still open with the owner: stop the U-Pull-R reader until their API arrives
 (hub recommends yes). Pull-N-Save photo checks stay paused until they
 answer. Next hub wake: 2026-11-17 15:00 UTC, the two held website sentences
 once both stores show 1.13.0 live (`trig_016dADedHXNCLcakiqQW9irq`).
+
+## 2026-11-17 05:10 UTC owner asked "Update?"
+
+- Stores (status runs 44021860463, 44021863386): **Play production 1.13.0
+  (40) completed, full rollout. App Store 1.13.0 build 41 IN_REVIEW**
+  (was WAITING_FOR_REVIEW; submitted 11-16 13:39); 1.12.16 is still the
+  live iOS version. The two held website sentences wait for iOS; the 15:00
+  UTC check-in (`trig_016dADedHXNCLcakiqQW9irq`) handles it.
+- Three scans since the name change, all green (19:13, 00:40, 01:58 UTC).
+  Latest: Pull-N-Save 11,191 over 8 yards, Budget 1,624 + 879, Harry's
+  4,259 over 3 (their list unchanged since Sat 11-14 07:42 UTC, as before
+  the change), U-Pull-R captcha and 0. 337,259 cars, 304 yards. No failed
+  workflow since 11-16 17:30.
+- Gmail: nothing sent in two days, so the three yard drafts have not gone
+  out; no reply from any yard; no mail from Apple or Google. Only Reddit
+  notices in the inbox.
+- Website: `jh-v204`, unchanged since 18:13 UTC on 11-16.
