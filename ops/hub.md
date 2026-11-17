@@ -1469,3 +1469,26 @@ appears to be free alerts".
   free emailed alert on the web (one car, capped sends), Pro for the rest.
   WAITING ON THE OWNER: accent (pick or keep orange); free web email alert
   (yes or no).
+
+## 2026-11-17 14:49 UTC owner: "let's do petrol, do the free emailed alert ... Can I get sued now? I'm scared"
+
+- **Petrol accent: approved.** Values from the mock: deep `#0B6477`
+  (buttons and links on light), bright `#0E8FA8` (mark, dark theme),
+  darker `#084C5B`. Website first, after the one-colour name is live; app
+  icon, splash and store art follow with the next release (needs "ship").
+- **Free emailed alert on the website: approved.** A builder agent is on
+  branch `growth/free-email-alert` (brief: one watch per confirmed email,
+  the app free tier's distance, lowest email class under the Resend budget,
+  one-click unsubscribe, no change to held sentences or colours). Hub
+  reviews before anything reaches main. Shared test lock:
+  `flock /tmp/ys-test.lock <test>` for anything that starts a server or
+  browser, on both sides.
+- **Legal worry, what the hub said (not legal advice):** no copying took
+  place and the public history shows it; the open question is the name
+  (trademark turns on confusion, not copying; they used theirs first).
+  Third-party trademark indexes show no filing for PULLSCOUT or YARDSCOUT
+  (not the official record). Risk-lowering steps are the ones in hand.
+  Suggested one consult with a trademark lawyer. Rules for us from now on:
+  never name PullScout in ads, keywords or page text; never claim first or
+  largest; never copy their wording; never read their site by machine.
+- Reminder given to the owner: the four yard notes are still unsent.
