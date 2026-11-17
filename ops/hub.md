@@ -1414,3 +1414,31 @@ had no idea pullscout was a thing and they even have the same orange."
   compared; a trademark question belongs with a trademark lawyer.
 - Script: `xt/own_history.py` in the hub scratchpad (dates from the public
   GitHub history).
+
+## 2026-11-17 14:35 UTC PullScout side by side (owner's four screenshots)
+
+What their site shows today: wordmark "Pull" dark + "Scout" orange, serif
+type throughout, blue-grey page, white rounded cards, orange pill buttons;
+"THE LARGEST SELF-SERVICE YARD SEARCH", "Find donor cars all in one place",
+378,119 vehicles at 348 yards, 42,292 arrivals in 7 days, "1 million+
+tracked"; free account with an email "the day a new one lands on a lot";
+USA and Canada; filters for colour, cylinders, transmission, drivetrain,
+fuel; VIN decoder; a "Unicorns" page; yards unchanged for three weeks are
+hidden. (The search engine's stored copy of their home page had older
+wording and 288,420 vehicles at 233 yards, so the page was rewritten and
+grew at some point before today; when is not known.)
+
+Hub's read, given to the owner:
+- Not alike as pages (type, background, layout, product). Alike in the
+  three cues seen first: the "-Scout" name, "Scout" picked out in orange
+  (ours: `header h1 .wm-scout { color: var(--brand) }`), orange pills on
+  light cards. Also the pitch ("all in one place" / "into one search").
+- Recommended: name in one colour (one CSS line; mock sent, image
+  `for_owner/pullscout_vs_yardscout.png` in the hub scratchpad). Keep the
+  orange for now (ours since the first commit; it is on the icon and the
+  store listings). Lead with parts and values, not "every yard in one
+  search": that is their headline and they list more yards (348 vs 304).
+- The name is the overlap no design change removes; they were first. A
+  trademark question is for a lawyer.
+- WAITING ON THE OWNER: yes or no to the one-colour name. Nothing changed
+  in the product.
