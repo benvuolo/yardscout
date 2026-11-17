@@ -160,7 +160,7 @@ async function sendSavedEmail(env, email, events) {
   <p style="color:#bbb;font-size:14px;margin:0 0 4px;">YardScout saved-car alert</p>
   ${lines.map((l) => `<h2 style="margin:14px 0 4px;font-size:17px;color:#fff;">${esc(l.title)}</h2>
   <p style="color:#ccc;font-size:14px;line-height:1.6;margin:0;">${esc(l.body)}</p>`).join('')}
-  <p style="margin:18px 0 0;"><a href="${esc(env.APP_URL || 'https://yardscout.io/')}" style="color:#ff9500;font-size:13px;">Open your saved list</a></p>
+  <p style="margin:18px 0 0;"><a href="${esc(env.APP_URL || 'https://yardscout.io/')}" style="color:#2BB3CC;font-size:13px;">Open your saved list</a></p>
   <p style="color:#666;font-size:11px;margin:22px 0 0;border-top:1px solid #2a2a2a;padding-top:12px;">
     You get these because email alerts are on for ${esc(email)} (a YardScout Pro perk).
     <a href="${unsub}" style="color:#888;">Unsubscribe from email alerts</a> — your Pro membership is unaffected.</p>

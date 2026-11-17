@@ -175,7 +175,7 @@ export function buildConfirmEmail(env, email, watches, link) {
   <h2 style="margin:0 0 12px;font-size:19px;color:#fff;">Confirm your free Monday email</h2>
   <p style="color:#ccc;font-size:14px;line-height:1.5;margin:0 0 10px;">Every Monday we'll email ${esc(email)} the cars matching these watches that were set out at yards near you this week:</p>
   <ul style="color:#eee;font-size:14px;line-height:1.6;margin:0 0 16px;padding-left:18px;">${watches.map((w) => `<li>${esc(watchLabel(w))}, within ${esc(w.radius_mi)} mi</li>`).join('')}</ul>
-  <a href="${esc(link)}" style="display:inline-block;background:#ff9500;color:#141414;font-weight:700;font-size:15px;text-decoration:none;padding:11px 18px;border-radius:8px;">Confirm my Monday email</a>
+  <a href="${esc(link)}" style="display:inline-block;background:#2BB3CC;color:#141414;font-weight:700;font-size:15px;text-decoration:none;padding:11px 18px;border-radius:8px;">Confirm my Monday email</a>
   <p style="color:#999;font-size:13px;line-height:1.6;margin:18px 0 0;">Nothing is sent until you confirm. If you didn't ask for this, ignore this email: the address is deleted within 7 days.</p>
   <p style="color:#666;font-size:11px;margin:22px 0 0;border-top:1px solid #2a2a2a;padding-top:12px;">YardScout · <a href="${esc(appUrl(env))}" style="color:#888;">yardscout.io</a>${postal ? `<br>${esc(postal)}` : ''}</p>
 </div></body></html>`;
@@ -352,7 +352,7 @@ export function page(title, inner, status = 200) {
 }
 const badLink = () => page('Link expired', `<h2 style="margin:0 0 .5rem;">This link has expired</h2>
 <p style="color:#aaa;line-height:1.6;">It was already used, or it is more than 7 days old. Set a watch at
-<a href="https://yardscout.io/" style="color:#f90;">yardscout.io</a> and ask for the Monday email again.</p>`, 400);
+<a href="https://yardscout.io/" style="color:#2BB3CC;">yardscout.io</a> and ask for the Monday email again.</p>`, 400);
 
 async function subscriberForToken(env, token) {
   if (!/^ys_recap_[A-Za-z0-9_-]{20,}$/.test(String(token || '')) || token.length > 200) return null;
@@ -372,7 +372,7 @@ export async function handleRecapConfirmPage(req, env, url) {
 <p style="color:#aaa;line-height:1.6;">For ${esc(maskEmail(row.email))}. One email a week, unsubscribe in one click.</p>
 <form method="post" action="/v1/recap/confirm" style="margin:1.2rem 0 0;">
 <input type="hidden" name="t" value="${esc(t)}">
-<button type="submit" style="font:inherit;font-weight:700;background:#ff9500;color:#141414;border:0;border-radius:8px;padding:.75rem 1.2rem;cursor:pointer;">Confirm my Monday email</button>
+<button type="submit" style="font:inherit;font-weight:700;background:#2BB3CC;color:#141414;border:0;border-radius:8px;padding:.75rem 1.2rem;cursor:pointer;">Confirm my Monday email</button>
 </form>`);
 }
 
@@ -446,7 +446,7 @@ export async function handleRecapUnsubscribe(req, env, url) {
   return page('Unsubscribed', `<h2 style="margin:0 0 .5rem;">You're unsubscribed</h2>
 <p style="color:#aaa;line-height:1.6;">No more Monday emails to ${esc(maskEmail(email))}. We deleted the address and the
 watches copied for it. The watches saved in your browser are unchanged at
-<a href="https://yardscout.io/" style="color:#f90;">yardscout.io</a>.</p>`);
+<a href="https://yardscout.io/" style="color:#2BB3CC;">yardscout.io</a>.</p>`);
 }
 
 /* ===== readers for the Monday job and the ops email ===== */

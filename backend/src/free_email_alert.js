@@ -170,7 +170,7 @@ export function buildFreeAlertConfirmEmail(env, email, watch, link, { replaces =
   <p style="color:#bbb;font-size:14px;margin:0 0 4px;">YardScout</p>
   <h2 style="margin:0 0 12px;font-size:19px;color:#fff;">Confirm your free email alert</h2>
   <p style="color:#ccc;font-size:14px;line-height:1.5;margin:0 0 16px;">We'll email ${esc(email)} when a <strong style="color:#fff;">${esc(label)}</strong> is set out at a yard within ${esc(watch.radius_mi)} mi.</p>
-  <a href="${esc(link)}" style="display:inline-block;background:#ff9500;color:#141414;font-weight:700;font-size:15px;text-decoration:none;padding:11px 18px;border-radius:8px;">Confirm my email alert</a>
+  <a href="${esc(link)}" style="display:inline-block;background:#2BB3CC;color:#141414;font-weight:700;font-size:15px;text-decoration:none;padding:11px 18px;border-radius:8px;">Confirm my email alert</a>
   ${repl ? `<p style="color:#ccc;font-size:13px;line-height:1.6;margin:18px 0 0;">${esc(repl)}</p>` : ''}
   <p style="color:#999;font-size:13px;line-height:1.6;margin:18px 0 0;">${esc(how)}</p>
   <p style="color:#999;font-size:13px;line-height:1.6;margin:10px 0 0;">${esc(ignore)}</p>
@@ -331,7 +331,7 @@ export async function handleFreeAlertSignup(req, env, ip) {
 
 const badLink = () => page('Link expired', `<h2 style="margin:0 0 .5rem;">This link has expired</h2>
 <p style="color:#aaa;line-height:1.6;">It was already used, or it is more than 7 days old. Open the Alerts tab at
-<a href="https://yardscout.io/#tab=alerts" style="color:#f90;">yardscout.io</a> and ask for the email alert again.</p>`, 400);
+<a href="https://yardscout.io/#tab=alerts" style="color:#2BB3CC;">yardscout.io</a> and ask for the email alert again.</p>`, 400);
 
 async function rowForToken(env, token) {
   if (!/^ys_falert_[A-Za-z0-9_-]{20,}$/.test(String(token || '')) || token.length > 200) return null;
@@ -354,7 +354,7 @@ export async function handleFreeAlertConfirmPage(req, env, url) {
 <p style="color:#aaa;line-height:1.6;">For ${esc(maskEmail(row.email))}. At most one email per scan, usually the same day a car is listed; unsubscribe in one click.${old ? ` This replaces your alert for ${esc(watchLabel(old))}.` : ''}</p>
 <form method="post" action="/v1/free-alert/confirm" style="margin:1.2rem 0 0;">
 <input type="hidden" name="t" value="${esc(t)}">
-<button type="submit" style="font:inherit;font-weight:700;background:#ff9500;color:#141414;border:0;border-radius:8px;padding:.75rem 1.2rem;cursor:pointer;">Confirm my email alert</button>
+<button type="submit" style="font:inherit;font-weight:700;background:#2BB3CC;color:#141414;border:0;border-radius:8px;padding:.75rem 1.2rem;cursor:pointer;">Confirm my email alert</button>
 </form>`);
 }
 
@@ -442,7 +442,7 @@ export async function handleFreeAlertUnsubscribe(req, env, url) {
   return page('Unsubscribed', `<h2 style="margin:0 0 .5rem;">You're unsubscribed</h2>
 <p style="color:#aaa;line-height:1.6;">No more alert emails to ${esc(maskEmail(email))}. We deleted the address and the
 watch copied for it. The watches saved in your browser are unchanged at
-<a href="https://yardscout.io/" style="color:#f90;">yardscout.io</a>. If you also get the free Monday email, that one has
+<a href="https://yardscout.io/" style="color:#2BB3CC;">yardscout.io</a>. If you also get the free Monday email, that one has
 its own unsubscribe link.</p>`);
 }
 
@@ -481,7 +481,7 @@ export function buildFreeAlertEmail(env, email, watch, cars, unsubUrl) {
     (postal ? `${postal}\n` : '');
   const rows = shown.map((v) => `
     <tr><td style="padding:10px 0;border-bottom:1px solid #2a2a2a;">
-      <a href="${esc(carUrl(env, v))}" style="color:#ff9500;font-weight:600;text-decoration:none;font-size:15px;">${esc(fmtCar(v))}</a><br>
+      <a href="${esc(carUrl(env, v))}" style="color:#2BB3CC;font-weight:600;text-decoration:none;font-size:15px;">${esc(fmtCar(v))}</a><br>
       <span style="color:#999;font-size:13px;">${esc(v.location || 'unknown yard')}${v.row ? ` &middot; Row ${esc(v.row)}` : ''}${v.dateAdded ? ` &middot; listed ${esc(v.dateAdded)}` : ''}</span>
     </td></tr>`).join('');
   const html = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
@@ -493,7 +493,7 @@ export function buildFreeAlertEmail(env, email, watch, cars, unsubUrl) {
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${rows}</table>
   ${more > 0 ? `<p style="color:#999;font-size:13px;">…and ${more} more on the site.</p>` : ''}
   <p style="color:#999;font-size:13px;line-height:1.6;margin:16px 0 0;">${esc(cadence)}</p>
-  <p style="color:#bbb;font-size:13px;line-height:1.6;margin:12px 0 0;">${esc(pro)} <a href="${esc(alertsUrl)}" style="color:#ff9500;">See Pro</a></p>
+  <p style="color:#bbb;font-size:13px;line-height:1.6;margin:12px 0 0;">${esc(pro)} <a href="${esc(alertsUrl)}" style="color:#2BB3CC;">See Pro</a></p>
   <p style="color:#777;font-size:11px;line-height:1.5;margin:22px 0 0;border-top:1px solid #2a2a2a;padding-top:12px;">${esc(why)}
     <a href="${esc(alertsUrl)}" style="color:#999;">Change the car</a> in the Alerts tab, or
     <a href="${esc(unsubUrl)}" style="color:#999;">unsubscribe in one click</a> (deletes your address and the watch copied for it).${postal ? `<br>${esc(postal)}` : ''}</p>

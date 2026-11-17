@@ -189,7 +189,7 @@ export async function handleEmailAlertsUnsubscribe(req, env, url) {
 <p style="color:#aaa;line-height:1.6;">No more email alerts to <strong>${email.replace(/</g, '&lt;')}</strong>.
 Your Pro membership and your watchlist are unchanged — you can turn email alerts
 back on any time from the Alerts tab at
-<a href="https://yardscout.io/" style="color:#f90;">yardscout.io</a>.</p>
+<a href="https://yardscout.io/" style="color:#2BB3CC;">yardscout.io</a>.</p>
 </div>`,
     { headers: { 'content-type': 'text/html; charset=utf-8' } });
 }
@@ -227,7 +227,7 @@ async function sendAlertEmail(env, email, matches) {
 
   const htmlRows = shown.map((v) => `
     <tr><td style="padding:10px 0;border-bottom:1px solid #2a2a2a;">
-      <a href="${carUrl(env, v)}" style="color:#ff9500;font-weight:600;text-decoration:none;font-size:15px;">${esc(fmtCar(v))}</a><br>
+      <a href="${carUrl(env, v)}" style="color:#2BB3CC;font-weight:600;text-decoration:none;font-size:15px;">${esc(fmtCar(v))}</a><br>
       <span style="color:#999;font-size:13px;">${esc(v.location || 'unknown yard')}${v.row ? ` &middot; Row ${esc(v.row)}` : ''}${v.dateAdded ? ` &middot; listed ${esc(v.dateAdded)}` : ''}</span>
     </td></tr>`).join('');
   const html =
@@ -240,7 +240,7 @@ async function sendAlertEmail(env, email, matches) {
   <p style="color:#999;font-size:13px;line-height:1.6;margin:16px 0 0;">
     Yards crush cars within weeks — fresh arrivals are your best odds.
     Scans run about every 4 hours, so you hear the same day a car is listed.</p>
-  <p style="margin:18px 0 0;"><a href="${esc((env.APP_URL || 'https://yardscout.io/'))}" style="color:#ff9500;font-size:13px;">Manage your watchlist</a></p>
+  <p style="margin:18px 0 0;"><a href="${esc((env.APP_URL || 'https://yardscout.io/'))}" style="color:#2BB3CC;font-size:13px;">Manage your watchlist</a></p>
   <p style="color:#666;font-size:11px;margin:22px 0 0;border-top:1px solid #2a2a2a;padding-top:12px;">
     You get these because email alerts are on for ${esc(email)} (a YardScout Pro perk).
     <a href="${unsub}" style="color:#888;">Unsubscribe from email alerts</a> — your Pro membership is unaffected.</p>

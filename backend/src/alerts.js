@@ -870,17 +870,17 @@ export function buildDigestEmail(env, email, matches, { weekly = false, sales = 
   const carHref = (v) => `${appUrl.replace(/\/+$/, '')}/#car=${encodeURIComponent(String(v.id))}`;
   const rowsHtml = shown.map((v, i) => `
     <tr><td style="padding:12px 0;border-bottom:1px solid #2a2a2a;">
-      <a href="${escH(carHref(v))}" style="color:#ff9500;font-weight:600;text-decoration:none;font-size:15px;">${escH(`${v.year || ''} ${v.make || ''} ${v.model || ''}`.replace(/\s+/g, ' ').trim())}</a><br>
+      <a href="${escH(carHref(v))}" style="color:#2BB3CC;font-weight:600;text-decoration:none;font-size:15px;">${escH(`${v.year || ''} ${v.make || ''} ${v.model || ''}`.replace(/\s+/g, ' ').trim())}</a><br>
       <span style="color:#999;font-size:13px;">${escH(v.location || 'unknown yard')}${v.row ? ` &middot; Row ${escH(v.row)}` : ''}</span>
       ${lines[i] ? `<div style="margin-top:6px;font-size:13px;line-height:1.45;color:${presOf(v) === 'gone' ? '#c9a27a' : '#bdbdbd'};">${escH(lines[i])}</div>` : ''}
     </td></tr>`).join('');
   const proBlock = summary
     ? `<div style="background:#1f1f1f;border:1px solid #333;border-radius:10px;padding:14px 14px 12px;margin:0 0 18px;">
     <p style="margin:0 0 10px;font-size:14px;line-height:1.5;color:#e8e8e8;">${escH(summary)}</p>
-    <a href="${escH(url)}" style="display:inline-block;background:#ff9500;color:#141414;font-weight:700;font-size:14px;text-decoration:none;padding:9px 14px;border-radius:8px;">${escH(PRO_LINK_TEXT)}</a>
+    <a href="${escH(url)}" style="display:inline-block;background:#2BB3CC;color:#141414;font-weight:700;font-size:14px;text-decoration:none;padding:9px 14px;border-radius:8px;">${escH(PRO_LINK_TEXT)}</a>
   </div>` : '';
   const bottomHtml = bottomUpsell
-    ? `<p style="color:#bbb;font-size:13px;line-height:1.6;margin:16px 0 0;">${escH(digestUpsell(matches, { now, url: '' }).replace(/:\n$/, '.'))} <a href="${escH(url)}" style="color:#ff9500;">${escH(PRO_LINK_TEXT)}</a></p>` : '';
+    ? `<p style="color:#bbb;font-size:13px;line-height:1.6;margin:16px 0 0;">${escH(digestUpsell(matches, { now, url: '' }).replace(/:\n$/, '.'))} <a href="${escH(url)}" style="color:#2BB3CC;">${escH(PRO_LINK_TEXT)}</a></p>` : '';
   const salesHtml = sales.length
     ? `<p style="color:#bbb;font-size:14px;margin:20px 0 6px;font-weight:600;">Sale days at yards near your watches</p>`
       + sales.slice(0, 6).map((s) => `<p style="color:#999;font-size:13px;margin:0 0 4px;">${escH(s.yard)} — ${escH(fmtSaleRange(s.start_date, s.end_date))}${s.pct ? ` (${escH(s.pct)}% off)` : ''}</p>`).join('')
@@ -897,7 +897,7 @@ export function buildDigestEmail(env, email, matches, { weekly = false, sales = 
   ${bottomHtml}
   ${salesHtml}
   <p style="color:#999;font-size:13px;line-height:1.6;margin:18px 0 0;">Yards crush cars within weeks — fresh arrivals are the best odds.
-    <a href="${escH(appUrl)}" style="color:#ff9500;">Open the app</a> for rows, VINs, and part details.</p>
+    <a href="${escH(appUrl)}" style="color:#2BB3CC;">Open the app</a> for rows, VINs, and part details.</p>
   <p style="color:#777;font-size:11px;line-height:1.5;margin:22px 0 0;border-top:1px solid #2a2a2a;padding-top:12px;">${escH(why)}
     ${unsubUrl ? `<a href="${escH(unsubUrl)}" style="color:#999;">Unsubscribe in one click</a> (deletes your address and the watches copied for it).` : ''}${postal ? `<br>${escH(postal)}` : ''}</p>
 </div></body></html>`;

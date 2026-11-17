@@ -166,7 +166,7 @@ async function sendDigestEmail(env, groups, total) {
   <h2 style="margin:0 0 14px;font-size:19px;color:#fff;">${total} new coverage request${total === 1 ? '' : 's'}</h2>
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${groups.map((g) => `
     <tr><td style="padding:8px 0;border-bottom:1px solid #2a2a2a;color:#ddd;font-size:14px;">${esc(fmtReqLine(g))}${(g.extras || []).map((x) => `
-      <div style="margin:6px 0 0 12px;color:#bbb;font-size:13px;">${x.note ? `&ldquo;${esc(x.note)}&rdquo;` : '(no note)'}${x.email ? ` &mdash; reply to <a style="color:#f26b1d;" href="mailto:${esc(x.email)}">${esc(x.email)}</a>` : ''}</div>`).join('')}</td></tr>`).join('')}
+      <div style="margin:6px 0 0 12px;color:#bbb;font-size:13px;">${x.note ? `&ldquo;${esc(x.note)}&rdquo;` : '(no note)'}${x.email ? ` &mdash; reply to <a style="color:#2BB3CC;" href="mailto:${esc(x.email)}">${esc(x.email)}</a>` : ''}</div>`).join('')}</td></tr>`).join('')}
   </table>
   <p style="color:#999;font-size:13px;line-height:1.6;margin:16px 0 0;">
     Full history: <code>GET /v1/admin/coverage</code> (x-admin-secret).

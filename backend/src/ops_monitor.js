@@ -854,7 +854,7 @@ async function loadUsage(env, now) {
  * styles only and table layout: what every mail client renders. */
 const esc = (v) => String(v == null ? '' : v)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-const C = { ink: '#1c1c1a', dim: '#6b675f', line: '#e4e0d6', soft: '#f6f4ee', accent: '#b84a0a', ok: '#3f6c33', bad: '#b03429' };
+const C = { ink: '#1c1c1a', dim: '#6b675f', line: '#e4e0d6', soft: '#f6f4ee', accent: '#0b6477', ok: '#3f6c33', bad: '#b03429' };
 const TD = `padding:6px 10px;border-bottom:1px solid ${C.line};font-size:14px;color:${C.ink};`;
 const TDN = TD + 'text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;';
 const TH = `padding:6px 10px;border-bottom:2px solid ${C.line};font-size:12px;color:${C.dim};text-align:left;font-weight:600;text-transform:uppercase;letter-spacing:.04em;`;
