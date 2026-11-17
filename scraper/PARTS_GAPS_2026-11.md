@@ -2691,3 +2691,55 @@ Left out, no stated basis:
 
 Result (same inventory): generic-only 13,880 (4.1%) → 13,675. S40
 264 → 59 (39 first generation, 20 from 2004).
+
+### 26.2 Saturn S-Series 1991–2002 (SL, SC, SW)
+
+Basis: WP Saturn_S-Series; GM catalog records (oem-raw
+`raw/www.gmpartsgiant.com.jsonl`, retrieved 2026-11-05 and 2026-11-06).
+- **Generations** ("marketed in three generations … The model changes took
+  place for the 1997 and 2000 model years", WP; per body from the WP
+  infoboxes and text):
+  - sedan (SL, SL1, SL2): 1991–95, 1996–99 ("a completely redesigned
+    exterior"), 2000–02 ("new body panels from the belt-line down");
+  - wagon (SW1, SW2): 1993–95, 1996–99, 2000–01;
+  - coupe (SC, SC1, SC2): 1991–96, 1997–2000, 2001–02 ("redesigned fascias
+    front and rear, as well as new headlamps and tail lamps for the 2001
+    model year").
+  New `GENERATION_BREAKS`: "saturn sl" [1996, 2000], "saturn sw"
+  [1996, 2000], "saturn sc" [1997, 2001]. GM lamp and mirror numbers agree
+  for the sedan: mirrors 21096065 list 1991–1995 and 21170588/9 1996–2002;
+  headlamps 21111169/70 list 1996–1999 and 21112455/6 2000–2002. The
+  existing SL lamp rows are now bounded by generation.
+- **Fuel pump:** GM 21015330 lists 1991–1996 (SC 1991–92; SC1, SC2, SW1,
+  SW2 1993–96; SL, SL1, SL2 1991–96); 21015072 lists 1997 for every body;
+  21015152 lists 1998–2002 (SW1 to 1999, SW2 to 2001). One number per
+  window, so the standard row name. The number windows do not follow the
+  body generations; the rows are cut at both.
+- **Power windows and mirrors were options:** "Some factory options such as
+  power windows, power locks, or cruise control were not available on the
+  SL"; the SL1 "could be optioned with power windows, power locks, power
+  mirror" (WP). The window-regulator, master-switch and power-mirror rows
+  on these entries are now `option` ("if equipped"). This changes existing
+  rows on 276 SL cars from confirmed to "if equipped".
+
+**Routing: 171 listings had no entry.** "Saturn S-Series" (51), "SC",
+"SC1", "SC2" (76) and "SW", "SW1", "SW2" (44) matched nothing. They now
+have entries `saturn s-series` (1991–2002), `saturn sc` (1991–2002) and
+`saturn sw` (1993–2001) with the pump rows above and the consensus
+evergreens. No lamp or mirror rows: they differ by body and no row-level
+basis was checked. The bare "S-Series" spelling does not say the body, so
+its rows are cut at every sedan and coupe break.
+
+| Row | Years (by GM number, then by generation) | Gate | Basis |
+|---|---|---|---|
+| Fuel pump module | 1991–96, 1997, 1998–2002 | — | GM 21015330, 21015072, 21015152 (all bodies). |
+| Window regulator, master switch, power mirrors (existing rows) | all | option | WP: power windows and mirrors were options. |
+
+Left out, no stated basis: A/C compressor ("air conditioning … available
+on the option sheet", WP, and no compressor number in the data); sunroof
+("A rear spoiler and a sunroof were available options" on the 2000–02
+sedan, WP, but no number); lamp rows for the coupe and wagon; the SC2's
+pop-up headlamps (1991–96).
+
+Result (same inventory): generic-only 13,675 → 13,399 (SL/SL1/SL2
+276 → 0); no entry 12,381 → 12,210 (the 171 listings).

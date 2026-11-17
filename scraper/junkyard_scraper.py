@@ -6340,9 +6340,37 @@ _gap_extend("volvo s40", parts=[
     *_per_gen([(2009, 2009)], [_SUNROOF_STD]),
 ])
 
+# §26.2 Saturn S-Series 1991-2002 (275 SL/SL1/SL2 cars generic-only; 171
+# "S-Series", SC and SW listings had no entry). Sedan generations 1991-95,
+# 1996-99, 2000-02 (new GENERATION_BREAKS). GM fuel pump numbers list every
+# body: 21015330 (1991-1996), 21015072 (1997), 21015152 (1998-2002; SW1 to
+# 1999, SW2 to 2001). The coupe (SC, SC1, SC2; generations 1991-96,
+# 1997-2000, 2001-02), the wagon (SW, SW1, SW2; 1993-95, 1996-99, 2000-01)
+# and the bare "S-Series" spelling get their own entries with those pump
+# rows and the consensus evergreens; no lamp rows (they differ by body and
+# no row-level basis was checked). A/C was optional and no compressor number
+# is at hand: no A/C row.
+for _k, _disp, _match, _yrs in (
+        ("saturn sc", "Saturn SC (coupe)", ["saturn sc"], (1991, 2002)),
+        ("saturn sw", "Saturn SW (wagon)", ["saturn sw"], (1993, 2001)),
+        ("saturn s-series", "Saturn S-Series", ["saturn s-series", "saturn s series"], (1991, 2002))):
+    UNOBTANIUM_DB[_k] = {"display": _disp, "make": "Saturn", "match": _match, "year_range": _yrs, "top_parts": []}
+    _EVERGREEN_TARGET_KEYS = (*_EVERGREEN_TARGET_KEYS, _k)
+_SATURN_S_PUMP = _per_gen([(1991, 1996), (1997, 1997), (1998, 2002)], [_GAP_PUMP])
+for _k in ("saturn sl", "saturn sc", "saturn sw", "saturn s-series"):
+    _gap_extend(_k, parts=[dict(r) for r in _SATURN_S_PUMP])
+
 # ---- end of §26 block
 
 _apply_consensus_evergreens()
+
+# §26.2: power windows and power mirrors were options on the S-Series (not
+# offered at all on the base SL; Wikipedia Saturn_S-Series), so these rows
+# ship "if equipped".
+for _k in ("saturn sl", "saturn sc", "saturn sw", "saturn s-series"):
+    for _p in UNOBTANIUM_DB[_k]["top_parts"]:
+        if _p["name"] in ("Window Regulator + Motor (front)", "Power Window Master Switch", "Side Mirrors (power, pair)"):
+            _p["option"] = True
 
 # ---- 2026-10 Phase A: enthusiast platforms, evergreens BY GENERATION ------
 # Enthusiast entries often span several body generations under one key
@@ -6617,6 +6645,10 @@ GENERATION_BREAKS = {
     "aveo": [2007, 2009],
     # §26 (PARTS_GAPS §26)
     "volvo s40": [2004, 2005],             # 1st gen 2000-04, 2nd gen from "2004.5": 2004 holds both, so it stands alone (§26.1)
+    "saturn sl": [1996, 2000],             # sedan 1991-95, 1996-99, 2000-02 (§26.2)
+    "saturn sc": [1997, 2001],             # coupe 1991-96, 1997-2000, 2001-02 (§26.2)
+    "saturn sw": [1996, 2000],             # wagon 1993-95, 1996-99, 2000-01 (§26.2)
+    "saturn s-series": [1996, 1997, 2000, 2001],  # body unknown: every sedan and coupe break (§26.2)
     "escort": [1997],                      # 2nd gen 1991-96, 3rd gen 1997-2003 (PARTS_GAPS §22.8)
     "park avenue": [1997],                 # 1st gen 1991-96, 2nd gen 1997-2005 (PARTS_GAPS §22.4)
     "stratus": [2001],                     # JA sedan 1995-2000, JR sedan 2001-06 (+ Mitsubishi-based coupe 2001-05) (PARTS_GAPS §21.6)
