@@ -25033,6 +25033,140 @@ def fetch_ipullca_inventory() -> list[dict]:
 # ===== end 2026-10-28 wave-300 block =====
 
 
+# ---- Standard Auto Wreckers UPIC Yard (Scarborough / Toronto ON) -----------
+# (2026-11-17) The self-service ("UPIC", bring your own tools) yard of
+# Standard Auto Wreckers, 1216 Sewells Rd, Scarborough ON. First Ontario
+# yard. Its /upic-inventory/ page is a shell whose own script names a Google
+# Sheet the yard has published as CSV ("UPIC Inventory — sourced from Google
+# Sheets") and draws the table from it. The reader does the same two steps:
+# GET the yard's page, take the sheet address the page itself names, GET that
+# CSV. If the page names no published sheet, the yard is skipped for the scan
+# (nothing is guessed and no remembered address is used).
+# Columns: Stock #, Year, Make, Model, Color, Row, Status, Date Created, Last
+# Update, VIN / Part Type, Location, Batch Number. 524 rows on 2026-11-17,
+# all with a stock number (the id basis), 520 with a 17-character VIN, dates
+# 2026-09-03 .. 2026-11-13. Rows are kept as the yard writes them ("UPIC
+# EAST 12").
+# Checked 2026-11-17 with the scanner's own name: robots.txt allows the page
+# (WooCommerce and wp-admin paths excepted); the Terms of Service page is
+# warranty terms only; docs.google.com robots.txt allows /spreadsheet with
+# Crawl-delay 1. Two requests per scan, 2 s apart.
+# NOT read: the full-service side of the same site (Search Inventory, a URG
+# parts locator) and the UPIC price list (also a published sheet, in
+# Canadian dollars; the app has no currency label yet, see ops/yards.md).
+# Pin: OpenStreetMap house-level match for 1216 Sewells Road.
+STANDARDUPIC_PAGE = "https://standardautowreckers.com/upic-inventory/"
+STANDARDUPIC_DELAY_SEC = 2.0
+STANDARDUPIC_MIN_ROWS = 50   # fewer than this is a broken sheet, not a lot
+STANDARDUPIC_YARD = {"name": "Standard Auto Wreckers UPIC - Toronto", "city": "Scarborough",
+                     "state": "ON", "lat": 43.8436, "lng": -79.2084}
+# Only a sheet the yard published to the web, on Google's own host.
+_STANDARDUPIC_SHEET_RE = re.compile(
+    r'CSV_URL\s*=\s*"(https://docs\.google\.com/spreadsheets/d/e/[A-Za-z0-9_-]+/pub\?[^"\s]*output=csv[^"\s]*)"')
+_STANDARDUPIC_VIN_RE = re.compile(r"^[A-HJ-NPR-Z0-9]{17}$")
+
+
+def _standardupic_sheet_url(page: str) -> str:
+    """The published-sheet CSV address the yard's own page loads, or ''."""
+    m = _STANDARDUPIC_SHEET_RE.search(page or "")
+    return m.group(1) if m else ""
+
+
+def _standardupic_parse_csv(text: str) -> tuple[list[dict], str]:
+    """The yard's CSV -> (vehicle dicts, problem). Header-driven; a row
+    without a stock number, a year or a make/model is skipped."""
+    import csv
+    import io
+    rows = list(csv.reader(io.StringIO(text or "")))
+    if not rows:
+        return [], "empty sheet"
+    col = {re.sub(r"[^a-z]", "", h.lower()): i for i, h in enumerate(rows[0])}
+    need = {"stock": "stock", "year": "year", "make": "make", "model": "model"}
+    if not all(k in col for k in need):
+        return [], f"sheet header {rows[0]} lacks Stock #/Year/Make/Model"
+    i_vin = next((i for k, i in col.items() if k.startswith("vin")), None)
+    i_date = col.get("datecreated")
+    yard = STANDARDUPIC_YARD
+    out: list[dict] = []
+    seen: set[str] = set()
+
+    def cell(r: list[str], i: "int | None") -> str:
+        return r[i].strip() if i is not None and i < len(r) else ""
+
+    for r in rows[1:]:
+        stock = cell(r, col["stock"])
+        year_s, make_s, model_s = cell(r, col["year"]), cell(r, col["make"]), cell(r, col["model"])
+        if not stock or not year_s.isdigit() or not make_s or not model_s:
+            continue
+        vid = f"standardupic-{stock.lower()}"
+        if vid in seen:
+            continue
+        seen.add(vid)
+        vin = cell(r, i_vin).upper()
+        date_iso = ""
+        dm = re.match(r"(\d{1,2})/(\d{1,2})/(\d{4})$", cell(r, i_date))
+        if dm:
+            date_iso = _sanitize_date_added(
+                f"{dm.group(3)}-{int(dm.group(1)):02d}-{int(dm.group(2)):02d}")
+        color = cell(r, col.get("color")).title()
+        v = {
+            "id": vid,
+            "vin": vin if _STANDARDUPIC_VIN_RE.match(vin) else "",
+            "year": int(year_s),
+            "make": _utpap_format_label(make_s),
+            "model": _utpap_format_label(model_s),
+            "row": cell(r, col.get("row")),
+            "dateAdded": date_iso,
+            "_location": yard["name"],
+            "_city": yard["city"],
+            "_state": yard["state"],
+            "_lat": yard["lat"],
+            "_lng": yard["lng"],
+            "_source": "standardupic",
+        }
+        if color:
+            v["_color"] = color
+        out.append(v)
+    return out, ""
+
+
+def fetch_standardupic_inventory() -> list[dict]:
+    """Standard Auto Wreckers UPIC Yard (Scarborough ON): the yard's page,
+    then the published sheet that page names."""
+    label = "Standard UPIC"
+    hdr = {**YARDSCOUT_HEADERS, "Accept": "text/html"}
+    try:
+        r = requests.get(STANDARDUPIC_PAGE, headers=hdr, timeout=60)
+        r.raise_for_status()
+    except Exception as e:
+        print(f"  [{label}] inventory page fetch failed: {e}", file=sys.stderr)
+        return []
+    sheet = _standardupic_sheet_url(r.text)
+    if not sheet:
+        print(f"  [{label}] the page names no published sheet — site changed? "
+              f"skipping the yard this scan", file=sys.stderr)
+        return []
+    time.sleep(STANDARDUPIC_DELAY_SEC)
+    try:
+        r = requests.get(sheet, headers={**YARDSCOUT_HEADERS, "Accept": "text/csv"}, timeout=60)
+        r.raise_for_status()
+        text = r.content.decode("utf-8", errors="replace")
+    except Exception as e:
+        print(f"  [{label}] sheet fetch failed: {e}", file=sys.stderr)
+        return []
+    _indep_cache_raw("standardupic_inventory.csv", text.encode())
+    vehicles, problem = _standardupic_parse_csv(text)
+    if problem:
+        print(f"  [{label}] {problem} — skipping the yard this scan", file=sys.stderr)
+        return []
+    if len(vehicles) < STANDARDUPIC_MIN_ROWS:
+        print(f"  [{label}] only {len(vehicles)} rows in the sheet — skipping the yard "
+              f"this scan rather than publishing a partial lot", file=sys.stderr)
+        return []
+    print(f"  [{label}] {len(vehicles)} vehicles", file=sys.stderr)
+    return vehicles
+
+
 # Chains the scan EXPECTS to return vehicles (source tag -> display name).
 # After the U-Pull-R plugin upgrade silently zeroed all MN/OH coverage for 4
 # days (2026-10-13 → 10-17), any onboarded chain coming back empty now prints
@@ -25099,6 +25233,7 @@ INDEPENDENT_EXPECTED_SOURCES.update({
     "ezpullit": "Pasco EZ Pull It (Hudson FL)",
     "ipullca": "iPull-uPull (Edmonton AB)",
 })
+INDEPENDENT_EXPECTED_SOURCES.update({"standardupic": "Standard Auto Wreckers UPIC (Toronto ON)"})  # 2026-11-17
 
 
 def independent_sources_switched_off() -> set[str]:
@@ -25177,6 +25312,7 @@ INDEPENDENT_FETCHERS: list = [
     ("Army's Auto Wrecking", fetch_armys_inventory),
     ("Pasco EZ Pull It", fetch_ezpullit_inventory),
     ("iPull-uPull Canada", fetch_ipullca_inventory),
+    ("Standard Auto Wreckers UPIC", fetch_standardupic_inventory),  # 2026-11-17, Scarborough ON (2 GETs)
 ]
 
 

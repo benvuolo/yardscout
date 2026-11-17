@@ -232,7 +232,7 @@
     },
     {
       "name": "Kenny U-Pull",
-      "status": "candidate",
+      "status": "blocked",
       "platform": "wordpress-archive (custom AIM build)",
       "inventory_url": "https://kennyupull.com/auto-parts/our-inventory/",
       "api": {
@@ -241,24 +241,14 @@
         "auth": "none",
         "format": "html",
         "requests_per_scan": "~1,600 pages unfiltered; per-branch/make filters exist and would cut this down",
-        "notes": "28 branches (AIM division): mostly Quebec/Ontario/Maritimes, plus US yards in ME (Bangor, Lewiston) and reportedly NY/VT/NH - US branches were NOT found in the main site branch list, so US inventory visibility is unverified. Paginated HTML archive is heavy (~19k vehicles at 12/page). Worth a follow-up to find branch-filtered queries and whether US yards publish inventory at all."
+        "notes": "2026-11-17: kennyupull.com answered the YardScout User-Agent with a Cloudflare block page ('Sorry, you have been blocked', HTTP 403) on the home page; robots.txt is a 404. One request each, nothing worked around. Outreach draft 7 in ops/yard-outreach-drafts.md. Canada only (Quebec, Ontario, New Brunswick, Nova Scotia; about 25 branches): the US yards are gone (Bangor closed 2023). 28 branches (AIM division): mostly Quebec/Ontario/Maritimes, plus US yards in ME (Bangor, Lewiston) and reportedly NY/VT/NH - US branches were NOT found in the main site branch list, so US inventory visibility is unverified. Paginated HTML archive is heavy (~19k vehicles at 12/page). Worth a follow-up to find branch-filtered queries and whether US yards publish inventory at all."
       },
       "update_freshness": "refreshed daily (per site copy)",
-      "robots": "not yet reviewed in detail",
+      "robots": "404 (2026-11-17); the site itself answers our scanner 403 (Cloudflare block page)",
       "tos_flags": "none found",
       "locations": [
         {
-          "name": "Kenny U-Pull - Bangor",
-          "city": "Bangor",
-          "state": "ME"
-        },
-        {
-          "name": "Kenny U-Pull - Lewiston",
-          "city": "Lewiston",
-          "state": "ME"
-        },
-        {
-          "name": "Kenny U-Pull (Canada) - 25+ branches",
+          "name": "Kenny U-Pull (Canada) - about 25 branches",
           "city": "",
           "state": "QC/ON/NB/NS"
         }
@@ -1000,7 +990,7 @@
         "auth": "none",
         "format": "html card deck (expected; see notes)",
         "requests_per_scan": "unverified",
-        "notes": "NOT BUILT 2026-10-27: the plugin's inventory backend is erroring. Every inventory URL (/inventory/ANY/ANY/?k=1, &id=PP93, &pagenum=1, make/model paths like /inventory/FORD/ESCAPE/?k=1, with and without the plugin's cookies) renders the empty-results shell ('No Results Found. Try Browsing Our Parts Or Search Again'; zero .car-details-uPull cards) while the control site on the same plugin (pickapartva.com) renders 500 cards; admin-ajax action=getMakesIISupull answers {\"error\":\"api error\"} (the catalog actions getYearsIISupull / ajaxflowupull getAllModelsIISupull still work, so the WordPress side is up and the URG data feed behind it is down). No 403 / challenge - plain requests get HTTP 200 - so nothing to work around; re-probe later. Price list is a PDF (/wp-content/uploads/2026/04/2026carpricelist-1.pdf) plus a PNG, not an HTML table - not wired. robots.txt allow-all with admin-ajax explicitly allowed. Address on the site header: 47989 255th Street, Garretson SD 57030 (NE of Sioux Falls; not Brandon) - would be the FIRST South Dakota coverage. Pin = Garretson place centroid (the rural house number is not in OSM). 2026-11-04 re-check: /inventory/ANY/ANY/?k=1 (with and without &pagenum=1) still renders 'No Results Found' with zero car-details-uPull cards. /vehicle-list/ shows an unrendered [Product_Table id='1015707' name='VehicleList'] shortcode. No Ario embed. Still candidate."
+        "notes": "NOT BUILT 2026-10-27: the plugin's inventory backend is erroring. Every inventory URL (/inventory/ANY/ANY/?k=1, &id=PP93, &pagenum=1, make/model paths like /inventory/FORD/ESCAPE/?k=1, with and without the plugin's cookies) renders the empty-results shell ('No Results Found. Try Browsing Our Parts Or Search Again'; zero .car-details-uPull cards) while the control site on the same plugin (pickapartva.com) renders 500 cards; admin-ajax action=getMakesIISupull answers {\"error\":\"api error\"} (the catalog actions getYearsIISupull / ajaxflowupull getAllModelsIISupull still work, so the WordPress side is up and the URG data feed behind it is down). No 403 / challenge - plain requests get HTTP 200 - so nothing to work around; re-probe later. Price list is a PDF (/wp-content/uploads/2026/04/2026carpricelist-1.pdf) plus a PNG, not an HTML table - not wired. robots.txt allow-all with admin-ajax explicitly allowed. Address on the site header: 47989 255th Street, Garretson SD 57030 (NE of Sioux Falls; not Brandon) - would be the FIRST South Dakota coverage. Pin = Garretson place centroid (the rural house number is not in OSM). 2026-11-04 re-check: /inventory/ANY/ANY/?k=1 (with and without &pagenum=1) still renders 'No Results Found' with zero car-details-uPull cards. /vehicle-list/ shows an unrendered [Product_Table id='1015707' name='VehicleList'] shortcode. No Ario embed. Still candidate. 2026-11-17 re-check (YardScout User-Agent): /inventory/ANY/ANY/?k=1 still renders 'No Results Found' with zero cards. Still candidate."
       },
       "update_freshness": "unknown (inventory backend still empty 2026-11-04)",
       "robots": "allow all; /wp-admin/admin-ajax.php explicitly allowed",
@@ -1779,15 +1769,15 @@
     },
     {
       "name": "Carolina Pick N Pull",
-      "status": "candidate",
-      "platform": "Own WordPress vehicle search at carolinapicknpull.com/inventory/?location={3|9|10} (Location/Make form, server-rendered; WAF 403s plain curl, browser OK). The Ario Bubble org rows are a 2024 dump and the slugs are 'Yard not found' on the live backend — do NOT use Ario for this chain.",
+      "status": "blocked",
+      "platform": "Own WordPress vehicle search at carolinapicknpull.com/inventory/?location={3|9|10} (Location/Make/Model form, server-rendered). NOT READ: the site's Terms of Service forbid automated access (see tos_flags). The Ario Bubble org rows are a 2024 dump and the slugs are 'Yard not found' on the live backend - do NOT use Ario for this chain.",
       "inventory_url": "https://carolinapicknpull.com/inventory/",
       "api": {
-        "notes": "2026-10-26: wave-1 build dropped it; needs its own adapter (curl_cffi or browser), see EXPANSION_CANDIDATES.md §8.6.2"
+        "notes": "2026-11-17: robots.txt now allows everything (Crawl-delay 10) and /inventory/ answered the YardScout User-Agent with HTTP 200 (the search form; no search was run), but the Terms of Service (Termageddon policy, last updated 2026-08-11) list as prohibited: 'Using any robot, spider or other similar automatic technology, process or means to access or use the Website for any purpose, including monitoring or copying any of the material on this Website'. No reader until the yard says yes: outreach draft 6 in ops/yard-outreach-drafts.md (contact named on the terms page). Earlier: 2026-10-26 wave-1 build dropped it from Ario; see EXPANSION_CANDIDATES.md §8.6.2."
       },
       "update_freshness": "live",
-      "robots": "carolinapicknpull.com answers 403 to non-browser clients; the three yards' Ario public pages are the inventory; app.autorecycler.io: allow all except /version-test/",
-      "tos_flags": "none found",
+      "robots": "carolinapicknpull.com (2026-11-17): Crawl-delay: 10; User-agent: * Disallow: (empty). Earlier note (2026-10-26): answered 403 to non-browser clients.",
+      "tos_flags": "FORBIDS automated access (prohibited uses: 'any robot, spider or other similar automatic technology ... including monitoring or copying'), read 2026-11-17",
       "locations": [
         {
           "name": "Cape Fear Pick N Pull - Wilmington",
@@ -3140,6 +3130,134 @@
           "lat": 43.178,
           "lng": -75.321,
           "address": "8659 Old River Rd, Marcy, NY 13403"
+        }
+      ]
+    },
+    {
+      "name": "Standard Auto Wreckers UPIC",
+      "status": "adapter-built",
+      "platform": "WordPress page whose own script loads a Google Sheet the yard published as CSV ('UPIC Inventory — sourced from Google Sheets') - fetch_standardupic_inventory (2026-11-17)",
+      "website": "https://standardautowreckers.com",
+      "inventory_url": "https://standardautowreckers.com/upic-inventory/",
+      "api": {
+        "endpoint": "https://standardautowreckers.com/upic-inventory/ -> the docs.google.com/spreadsheets/d/e/.../pub?...output=csv address in its CSV_URL",
+        "method": "GET, GET",
+        "auth": "none",
+        "format": "csv (Stock #, Year, Make, Model, Color, Row, Status, Date Created, Last Update, VIN / Part Type, Location, Batch Number)",
+        "requests_per_scan": 2,
+        "notes": "ADAPTER BUILT 2026-11-17. First Ontario yard; the self-service ('UPIC', bring your own tools) yard of Standard Auto Wreckers. 524 rows at build, all with a stock number (id basis standardupic-{stock}), 517 with a valid 17-character VIN, Date Created 2026-09-03..2026-11-13. The sheet address is taken from the yard's page on every scan; if the page names none, the yard is skipped (nothing remembered or guessed). The full-service side of the site (Search Inventory, URG iis-pro-v2 parts locator, urgid ON45) is not read. UPIC price list: /upic-price-list/ loads another published sheet, prices in Canadian dollars - NOT wired (the app shows no currency; owner/hub decision). Test: scraper/test_standardupic.py, fixtures scraper/fixtures/standardupic/."
+      },
+      "update_freshness": "newest Date Created 2026-11-13 at build (2026-11-17); the page caches the sheet 15 minutes",
+      "robots": "standardautowreckers.com: allow * except WooCommerce upload paths, add-to-cart URLs and /wp-admin/ (admin-ajax allowed); docs.google.com: Allow /spreadsheet, Crawl-delay 1 (both read 2026-11-17)",
+      "tos_flags": "Terms of Service page is warranty and returns terms only; nothing about automated access (read 2026-11-17)",
+      "locations": [
+        {
+          "name": "Standard Auto Wreckers UPIC - Toronto",
+          "city": "Scarborough",
+          "state": "ON",
+          "lat": 43.8436,
+          "lng": -79.2084,
+          "address": "1216 Sewells Rd, Scarborough, ON M1X 1S1"
+        }
+      ]
+    },
+    {
+      "name": "Express Pull-N-Save",
+      "status": "blocked",
+      "platform": "Thryv-built brochure site + the yard's own PHP kiosk search at kiosk.expresspullnsave.com (guest mode; make -> model -> all years per location_id)",
+      "website": "https://www.expresspullnsave.com",
+      "inventory_url": "https://kiosk.expresspullnsave.com/",
+      "api": {
+        "endpoint": null,
+        "notes": "NOT ADDED 2026-11-17 (terms): every page of the site says 'Downloading, republication, retransmission or reproduction of content on this website is strictly prohibited', and the linked Terms of Use are an iframe of thryv.com, which answered the YardScout User-Agent HTTP 403, so they could not be read. The kiosk was not opened in this pass. An unmerged reader from 2026-10-28 is on branch yards/express-pull-n-save (about 900 GETs a pass, stock #, row, days on lot; no test; it sends a browser name and must be changed to the YardScout name). Requested by a Reddit user. Outreach draft 8 in ops/yard-outreach-drafts.md."
+      },
+      "update_freshness": "unknown",
+      "robots": "www.expresspullnsave.com: no Disallow; Content-Signal: search=yes, ai-input=yes, ai-train=yes. kiosk host: 404 (read 2026-11-17)",
+      "tos_flags": "site notice forbids reproduction of content; Terms of Use unreadable (thryv.com 403)",
+      "locations": [
+        {
+          "name": "Express Pull-N-Save - La Vergne",
+          "city": "La Vergne",
+          "state": "TN",
+          "lat": 36.0242,
+          "lng": -86.555
+        },
+        {
+          "name": "Express Pull-N-Save - Lebanon",
+          "city": "Lebanon",
+          "state": "TN",
+          "lat": 36.1946,
+          "lng": -86.2862
+        },
+        {
+          "name": "Express Pull-N-Save - Nashville",
+          "city": "Nashville",
+          "state": "TN",
+          "lat": 36.2073,
+          "lng": -86.7841
+        }
+      ]
+    },
+    {
+      "name": "U Pull It Davie",
+      "status": "candidate",
+      "platform": "unknown (pages not read)",
+      "website": "https://upullitdavie.com",
+      "inventory_url": "https://upullitdavie.com/",
+      "api": {
+        "endpoint": null,
+        "notes": "NOT READ 2026-11-17: robots.txt allows * with Content-Signal search=yes, ai-train=no, and disallows AI agents by name (ClaudeBot, Claude-Web, anthropic-ai, GPTBot and others). The builder session is such an agent, so only robots.txt was fetched. A search result quotes the site: over 2,000 vehicles, updated daily. A person can look at how the inventory is shown; then build (the scanner itself falls under '*'). Outreach draft 9 in ops/yard-outreach-drafts.md."
+      },
+      "update_freshness": "site says updated daily (search snippet)",
+      "robots": "User-agent: * Allow: / (Content-Signal search=yes, ai-train=no); named AI agents Disallow: / (read 2026-11-17)",
+      "tos_flags": "not read",
+      "locations": [
+        {
+          "name": "U Pull It Davie",
+          "city": "Davie",
+          "state": "FL"
+        }
+      ]
+    },
+    {
+      "name": "Pull N' Go Self Service Auto Parts",
+      "status": "blocked",
+      "platform": "own PHP page (pullngo.net/inventory.php), not read",
+      "website": "https://pullngo.net",
+      "inventory_url": "https://pullngo.net/inventory.php",
+      "api": {
+        "endpoint": null,
+        "notes": "2026-11-17: robots.txt and /inventory.php both answered the YardScout User-Agent '503 Service Unavailable' (23 bytes). Outage or filter, not known; nothing else tried. Re-check once with the same name; note 11 in ops/yard-outreach-drafts.md."
+      },
+      "update_freshness": "unknown",
+      "robots": "503 (2026-11-17)",
+      "tos_flags": "not read",
+      "locations": [
+        {
+          "name": "Pull N' Go Self Service Auto Parts",
+          "city": "Bradenton",
+          "state": "FL"
+        }
+      ]
+    },
+    {
+      "name": "Andersen Self-Service",
+      "status": "candidate",
+      "platform": "Next.js site: /junk-cars-inventory server-renders the whole yard into the page data (stock, year, make, model, color, row, setDate, VIN last 4, trim text); one GET",
+      "website": "https://andersenselfservice.com",
+      "inventory_url": "https://andersenselfservice.com/junk-cars-inventory",
+      "api": {
+        "endpoint": null,
+        "notes": "NOT WIRED 2026-11-17 (frozen feed): the page reads fine under the YardScout User-Agent (1,721 rows, unique stock numbers), but set dates run 60-120 a month from mid-2025 to 2026-07, six in 2026-08 (last 2026-08-22) and none since, so the export looks stopped and the list may not match the lot (Harold's / JDM precedent: wire when set dates newer than 30 days appear). Build notes for then: 127 'makes', many of them model names or codes (BEL AIR, GALAXIE, TCHEV10, '140' for a Volvo 140), so make/model needs a mapping pass; years 1940-2019 (a classics-heavy yard). Heads-up note 12 in ops/yard-outreach-drafts.md."
+      },
+      "update_freshness": "stale: newest set date 2026-08-22 (checked 2026-11-17)",
+      "robots": "User-Agent: * Allow: /; Disallow: /admin, /api/, /login (read 2026-11-17). The inventory is in the page itself, not under /api/.",
+      "tos_flags": "no terms page linked from the home or inventory page",
+      "locations": [
+        {
+          "name": "Andersen Self-Service",
+          "city": "Kearney",
+          "state": "NE"
         }
       ]
     }

@@ -186,6 +186,9 @@ ENTRIES: list[tuple[str, str | None, str | None, str]] = [
     (r"^c&c pick a part", "C&C Pick A Part", None, "one client-filtered table"),
     (r"^army'?s auto wrecking", "Army's Auto Wrecking", None, ""),
     (r"^pasco ez pull it", "Pasco EZ Pull It", None, ""),
+    # --- 2026-11-17 breadth pass ---
+    (r"^standard auto wreckers upic", "Standard Auto Wreckers UPIC", None,
+     "Scarborough ON; the UPIC (self-service) page, not the full-service search"),
 ]
 
 

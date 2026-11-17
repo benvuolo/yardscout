@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en-US"><head><meta charset="UTF-8"><title>UPIC Inventory - Standard Auto Wreckers</title></head><body>
+<!-- fixture: standardautowreckers.com/upic-inventory/ read 2026-11-17 with the YardScout name; page chrome removed, the inventory shell and the page's own loader script kept unchanged -->
+<div class="upic-inv-toolbar">
+ <input
+ type="text"
+ id="upic-inv-search"
+ placeholder="Search inventory..."
+ aria-label="Search inventory"
+ autocomplete="off"
+ />
+ </div>
+ <div class="upic-inv-table-wrap">
+ <div id="upic-inv-loading" class="upic-inv-loading">Loading inventory…</div>
+ <table id="upic-inv-table" style="display:none;" aria-label="UPIC Inventory">
+ <caption style="display:none;">UPIC Inventory — sourced from Google Sheets</caption>
+ <thead></thead>
+ <tbody></tbody>
+ </table>
+ </div>
+</div>
+<script data-cfasync="false">
+(function () {
+
+  const CSV_URL    = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTqoH8E231jiKALG8zOJI3J0u_5R9pRiCV2jTWqtWPjcJaQ_5LhmXrcpAz4b8rd9EWbTTeuTvh8L2ac/pub?gid=0&single=true&output=csv";
+  const CACHE_KEY    = "upic_inv_csv";
+  const CACHE_TS_KEY = "upic_inv_csv_ts";
+  const CACHE_TTL    = 15 * 60 * 1000; // 15 minutes
+
+  // Columns to display (by header name — order preserved as listed here)
+  const SHOW_COLS = ["Stock #", "Year", "Make", "Model", "Row", "Date Created", "VIN / Part Type"];
+
+  const table       = document.getElementById("upic-inv-table");
+  const thead       = table.querySelector("thead");
+  const tbody       = table.querySelector("tbody");
+  const searchInput = document.getElementById("upic-inv-search");
+  const loadingDiv  = document.getElementById("upic-inv-loading");
+
+  let originalData  = []; // filtered to SHOW_COLS only
+  let filteredData  = [];
+  let sortState     = { col: -1, dir: "asc" };
+  let debounceTimer;
+
+  // ── RFC 4180 CSV parser ────────────────────────────────────────────────────
+  function parseCSV(text) {
+    const rows = [];
+    let row = [], cell = "", inQuotes = false;
+    for (let i = 0; i < text.length; i++) {
+      const ch = text[i];
+      if (inQuotes) {
+        if (ch === '"' && text[i + 1] === '"') { cell += '"'; i++; }
+        else if (ch === '"') { inQuotes = false; }
+        else { cell += ch; }
+      } else {
+        if (ch === '"')  { inQuotes = true; }
+        else if (ch === ',') { row.push(cell); cell = ""; }
+        else if (ch === '\n') { row.push(cell); rows.push(row); row = []; cell = ""; }
+        else if (ch !== '\r') { cell += ch; }
+      }
+    }
+    if (cell !== "" || row.length) { row.push(cell); rows.push(row); }
+    return rows.filter(r => r.some(c => c.trim() !== ""));
+  }
+
+  // ── Filter raw CSV rows to only the columns in SHOW_COLS ──────────────────
+  function filterColumns(allRows) {
+    if (!allRows.length) return [];
+    const headers  = allRows[0];
+    // Build index map: SHOW_COLS order → source column index
+    const colIndexes = SHOW_COLS.map(name => headers.findIndex(h => h.trim() === name));
+    return allRows.map(row => colIndexes.map(ci => ci >= 0 ? (row[ci] || "") : ""));
+  }
+
+  function esc(str) {
+    return String(str == null ? "" : str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function renderHeader(headers) {
+    const cells = headers.map((h, i) => {
+      const sortAttr = sortState.col === i ? ` data-sort="${sortState.dir}"` : "";
+      const ariaSort = sortState.col === i ? (sortState.dir === "asc" ? "ascending" : "descending") : "none";
+      return `<th data-index="${i}" tabindex="0" role="columnheader" aria-sort="${ariaSort}"${sortAttr}>${esc(h)}</th>`;
+    }).join("");
+    thead.innerHTML = `<tr>${cells}</tr>`;
+  }
+
+  function renderBody(data) {
+    const headers = data[0];
+    const rows    = data.slice(1);
+    if (!rows.length) {
+      tbody.innerHTML = `<tr class="upic-inv-status-row"><td colspan="${headers ? headers.length : 1}">No results found.</td></tr>`;
+      return;
+    }
+    const fragment = document.createDocumentFragment();
+    rows.forEach(row => {
+      const tr = document.createElement("tr");
+      headers.forEach((_, ci) => {
+        const td = document.createElement("td");
+        td.textContent = row[ci] != null ? row[ci] : "";
+        tr.appendChild(td);
+      });
+      fragment.appendChild(tr);
+    });
+    tbody.innerHTML = "";
+    tbody.appendChild(fragment);
+  }
+
+  function renderTable(data) {
+    if (!data.length) return;
+    renderHeader(data[0]);
+    renderBody(data);
+  }
+
+  function sortData(colIndex) {
+    if (sortState.col === colIndex) {
+      sortState.dir = sortState.dir === "asc" ? "desc" : "asc";
+    } else {
+      sortState.col = colIndex;
+      sortState.dir = "asc";
+    }
+    const headers = filteredData[0];
+    const rows    = filteredData.slice(1).sort((a, b) => {
+      const av  = (a[colIndex] || "").trim();
+      const bv  = (b[colIndex] || "").trim();
+      const cmp = av.localeCompare(bv, undefined, { numeric: true, sensitivity: "base" });
+      return sortState.dir === "asc" ? cmp : -cmp;
+    });
+    filteredData = [headers, ...rows];
+    renderTable(filteredData);
+  }
+
+  function applySearch(query) {
+    const lower   = query.toLowerCase().trim();
+    const headers = originalData[0];
+    const rows    = originalData.slice(1).filter(row =>
+      row.some(cell => (cell || "").toLowerCase().includes(lower))
+    );
+    filteredData = [headers, ...rows];
+    sortState    = { col: -1, dir: "asc" };
+    renderTable(filteredData);
+  }
+
+  thead.addEventListener("click", e => {
+    const th = e.target.closest("th[data-index]");
+    if (th) sortData(parseInt(th.dataset.index));
+  });
+
+  thead.addEventListener("keydown", e => {
+    if (e.key === "Enter" || e.key === " ") {
+      const th = e.target.closest("th[data-index]");
+      if (th) { e.preventDefault(); sortData(parseInt(th.dataset.index)); }
+    }
+  });
+
+  searchInput.addEventListener("input", e => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => applySearch(e.target.value), 180);
+  });
+
+  function showTable() {
+    loadingDiv.style.display = "none";
+    table.style.display      = "";
+  }
+
+  function showError(msg) {
+    loadingDiv.style.display = "none";
+    table.style.display      = "";
+    thead.innerHTML          = "";
+    tbody.innerHTML          = `<tr class="upic-inv-status-row"><td colspan="1">${esc(msg)}</td></tr>`;
+  }
+
+  function loadData(csvText) {
+    const allRows    = parseCSV(csvText);
+    const sliced     = filterColumns(allRows);
+    originalData     = sliced;
+    filteredData     = sliced.map(row => [...row]);
+    showTable();
+    renderTable(filteredData);
+  }
+
+  function fetchCSV() {
+    const cached = sessionStorage.getItem(CACHE_KEY);
+    const ts     = sessionStorage.getItem(CACHE_TS_KEY);
+    if (cached && ts && Date.now() - Number(ts) < CACHE_TTL) {
+      loadData(cached);
+      return;
+    }
+    fetch(CSV_URL)
+      .then(res => {
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        return res.text();
+      })
+      .then(csv => {
+        try {
+          sessionStorage.setItem(CACHE_KEY, csv);
+          sessionStorage.setItem(CACHE_TS_KEY, String(Date.now()));
+        } catch (_) { /* storage quota — skip cache */ }
+        loadData(csv);
+      })
+      .catch(err => {
+        console.error("[UPIC Inventory]", err);
+        showError("Failed to load inventory. Please refresh the page.");
+      });
+  }
+
+  fetchCSV();
+})();
+</script>
+</body></html>
