@@ -1442,3 +1442,30 @@ Hub's read, given to the owner:
   trademark question is for a lawyer.
 - WAITING ON THE OWNER: yes or no to the one-colour name. Nothing changed
   in the product.
+
+## 2026-11-17 14:43 UTC owner: "Make the name one color, perhaps let's look at different accents"
+
+Also from the owner: "extremely concerning that this was a thing before
+YardScout, I had no idea, and now I look like a copy. His version also
+appears to be free alerts".
+
+- **Name in one colour**: branch `hub/one-colour-name` (65e1becc, sw
+  `jh-v205`): app header, 404 page, rendered pages (`share.js`), both
+  lockup SVGs, `og-card.png` regenerated from `og-card.html`. Full run 8
+  and the layout check (two halves) in flight; live after they pass. Store
+  screenshots still show the two-colour name: next release.
+- **Accent mocks sent, nothing shipped** (`xt/accent_mocks.js` in the hub
+  scratchpad swaps the orange values on the way to the browser; images in
+  `for_owner/accents/`): orange as today, petrol `#0B6477`, cobalt
+  `#1D4ED8`, racing green `#1E7042`, signal red `#B3261E`. Hub's pick if
+  the owner moves: petrol (green collides with the turnover and "swaps
+  with" tags, red with warnings, cobalt reads like every other app). A
+  real switch touches the tokens in `styles.css` (light and dark), the
+  mark, app icon and splash, OG card, store art; the icon needs a release.
+- **Free alerts**: theirs is a free emailed alert with an account ("the
+  day a new one lands on a lot"). Ours: one free instant push per phone in
+  1.13.0 (Android live, iPhone in review), no account; emailed alerts on
+  the web are Pro only (`backend/src/email_alerts.js`). Hub recommended one
+  free emailed alert on the web (one car, capped sends), Pro for the rest.
+  WAITING ON THE OWNER: accent (pick or keep orange); free web email alert
+  (yes or no).
