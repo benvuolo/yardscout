@@ -250,7 +250,10 @@
       radial-gradient(circle 1.6px at 29px 25px, #6f695b 0 1.6px, transparent 1.7px);
     flex-shrink: 0;
   }
-  header h1 .wm-scout { color: var(--brand); }
+  /* The name is one colour (owner, 2026-11-17): a two-colour name with "Scout"
+     in orange read as a copy of another site in the same trade. The orange
+     stays on the mark. */
+  header h1 .wm-scout { color: inherit; }
   .brand-mark { width: 54px; height: 32px; flex-shrink: 0; display: block; }
   .wordmark { display: flex; flex-direction: column; gap: 0; min-width: 0; }
   /* Live spec line under the name — reads like the stamped fields on an

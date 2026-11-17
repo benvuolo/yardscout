@@ -382,7 +382,7 @@ export function crushWindow(daysOn, avg, basis) {
 const CSS = `
 body{padding-bottom:2.5rem}
 .wm-name{font-family:'Saira Stencil One',var(--font-mono);font-size:1.25rem;font-weight:400;line-height:1.1;text-transform:uppercase;letter-spacing:.02em;display:flex;align-items:center;flex-wrap:wrap;gap:0;margin:0}
-.wm-name .wm-scout{color:var(--brand)}
+.wm-name .wm-scout{color:inherit}
 /* The share header's "Open the app" button squeezes the wordmark: let the
  * spec line wrap instead of clipping ("28,500 SET OU…", "SUN VALLEY, C…"). */
 .head-spec{white-space:normal;line-height:1.35;max-width:11rem}
