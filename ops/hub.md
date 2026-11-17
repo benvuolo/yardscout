@@ -1626,3 +1626,21 @@ check and the six API suites are in flight under the test lock.
   a real sign-up is NOT tested by the hub (it would need a real inbox).
   First real numbers come from the ops email ("free alerts" lines) and the
   four `free-alert-*` events.
+
+## 2026-11-17 16:46 UTC free emailed alert confirmed live
+
+Deploy Workers (migration 0018 + API) and Pages both succeeded at 16:36.
+One fresh load of yardscout.io at phone size as a free web visitor with one
+watch (set in the test browser only): cache `jh-v207`; the card "Free email
+alert" sits under the watchlist with the email field, names the car, says
+"within 50 mi, usually the same day" and the sending-limit line, and has no
+Pro prompt; the intro carries the new sentence; a status request with a
+made-up token is refused with 401, so the API side is deployed; no page
+errors. No sign-up was made (it needs a real inbox): the first real one is
+the owner's to try, or the first visitor's.
+
+- Watch for in the daily ops email: the "free alerts" lines (on, pending,
+  mailed, held) and the four `free-alert-*` events.
+- The builder's working copy is removed; its branch stays on origin.
+- Many old agent working copies remain under `.claude/worktrees/` and the
+  hub scratchpad (29 listed); harmless, worth pruning if disk gets tight.
