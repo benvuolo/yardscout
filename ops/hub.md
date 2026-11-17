@@ -1603,3 +1603,26 @@ conflicted; now `jh-v207`), plus the email colour pass (36a12971: petrol
 `#2BB3CC` in every user email and its pages, `#0B6477` in the light ops
 email). Run 10 (the 77 suites plus the three new tests), the full layout
 check and the six API suites are in flight under the test lock.
+
+## 2026-11-17 16:35 UTC free emailed alert to main (sw `jh-v207`, migration 0018)
+
+- Run 10: 80 suites (the 77, plus `free_email_alert_ui_e2e`,
+  `free_email_alert_unit`, `free_email_alert_client_unit`) all pass. Layout
+  check six widths: 2,400 checks, 0 failures. API suites: `e2e-ops`,
+  `e2e-devices`, `e2e-coverage`, `e2e-email` (with the new phase 3) and
+  `browser_e2e` pass.
+- `e2e.sh` failed 3 of 39 in that batch ("inventory before any upload",
+  "new user starts on free tier", "values still stripped"): all three say
+  the server it talked to already held data. It runs first in the API
+  batch, on port 8788, right after the browser suites; re-run by itself
+  after stopping every local server: 39 of 39. Read as a leftover local
+  server from an earlier suite, not as a fault in the change. The API
+  runner should stop stray servers before its first suite too (it only did
+  so after each one).
+- Pushed as a fast-forward. Deploy Workers applies migration 0018 and
+  deploys the API; Pages publishes the page. Until the API is up the card
+  says it could not reach the server.
+- After it is live: one page load to see the card for a free web visitor;
+  a real sign-up is NOT tested by the hub (it would need a real inbox).
+  First real numbers come from the ops email ("free alerts" lines) and the
+  four `free-alert-*` events.
