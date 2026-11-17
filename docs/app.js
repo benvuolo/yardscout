@@ -11478,18 +11478,23 @@ const FALERT_LIMIT_NOTE = 'Free emails share a small daily sending limit, so one
 function falertHeadHtml(title, icon) {
   return `<div class="fa-head">${icon || ICON.bell}<h4>${title}</h4></div>`;
 }
-function falertSelectHtml(choices, picked) {
-  return `<select id="fa-watch" aria-label="Which car">${choices.map(x =>
-    `<option value="${x.i}"${String(x.i) === String(picked) ? ' selected' : ''}>${escapeHtml(falertLabel(x.e))}</option>`).join('')}</select>`;
+/* The cars to pick from, one row each (at most FREE_WATCH_LIMIT). Rows, not
+ * a drop-down: a long name wraps here at any text size, where a drop-down
+ * would cut it off on a narrow phone. */
+function falertPickHtml(choices, picked, legend) {
+  return `<fieldset class="fa-pick"><legend class="fa-label">${legend}</legend>${choices.map(x =>
+    `<label class="fa-opt"><input type="radio" name="fa-watch" value="${x.i}"${String(x.i) === String(picked) ? ' checked' : ''}><span>${escapeHtml(falertLabel(x.e))}</span></label>`).join('')}</fieldset>`;
 }
 function falertAskHtml(choices, email, picked) {
   const cur = choices.find(x => String(x.i) === String(picked)) || choices[0];
   const st = recapState();
   const car = choices.length > 1
-    ? `<label class="fa-label" for="fa-watch">Which car</label>${falertSelectHtml(choices, cur.i)}`
+    ? falertPickHtml(choices, cur.i, 'Which car')
     : `<p class="fa-car">For <strong>${escapeHtml(falertLabel(cur.e))}</strong></p>`;
+  // With one watch there is nothing to pick: the car is named under the line.
+  const lead = choices.length > 1 ? 'Pick one car and we email you' : 'Get an email';
   return `${falertHeadHtml('Free email alert')}
-    <p class="fa-line">Pick one car and we email you when one is set out within <span class="fa-r">${falertRadiusMi(cur.e)}</span>&nbsp;mi, usually the same day. One car, one address, no account.</p>
+    <p class="fa-line">${lead} when one is set out within <span class="fa-r">${falertRadiusMi(cur.e)}</span>&nbsp;mi, usually the same day. One car, one address, no account.</p>
     <form class="fa-form" novalidate>
       ${car}
       <div class="watch-zip-row">
@@ -11504,7 +11509,7 @@ function falertAskHtml(choices, email, picked) {
 function falertPendingHtml(st) {
   return `${falertHeadHtml('Free email alert')}
     <p class="fa-line"><strong>Check your inbox.</strong> Tap the link we sent to ${escapeHtml(recapMask(st.email))} to turn on your email alert${st.label ? ` for <strong>${escapeHtml(st.label)}</strong>` : ''}. Nothing is sent until you do.</p>
-    <div class="fa-actions"><button type="button" class="linklike" data-act="fa-restart">Use a different address or car</button></div>
+    <div class="fa-actions"><button type="button" class="btn" data-act="fa-restart">Use a different address or car</button></div>
     <span class="watch-zip-msg fa-msg" role="status">${escapeHtml(_falertMsg)}</span>`;
 }
 function falertOnHtml(st, choices) {
@@ -11515,7 +11520,7 @@ function falertOnHtml(st, choices) {
   const others = choices.filter(x => !(falertLabel(x.e) === st.label && falertRadiusMi(x.e) === st.r));
   const controls = _falertChanging && others.length
     ? `<form class="fa-form fa-change" novalidate>
-        <label class="fa-label" for="fa-watch">Email me about this car instead</label>${falertSelectHtml(others, others[0].i)}
+        ${falertPickHtml(others, others[0].i, 'Email me about this car instead')}
         <div class="fa-actions"><button type="submit" class="btn btn-primary">Save</button><button type="button" class="btn" data-act="fa-cancel">Cancel</button></div>
       </form>`
     : `<div class="fa-actions">${others.length ? '<button type="button" class="btn" data-act="fa-change">Change car</button>' : ''}<button type="button" class="btn" data-act="fa-off">Turn off</button></div>`;
@@ -11553,7 +11558,7 @@ function renderFreeAlert() {
   const st = offered ? falertState() : null;
   const choices = offered ? falertChoices() : [];
   // What is typed or picked survives a re-render (a scan coming in, a watch added).
-  const typed = el.querySelector('#fa-email'), sel = el.querySelector('#fa-watch');
+  const typed = el.querySelector('#fa-email'), sel = el.querySelector('.fa-form:not(.fa-change) input[name="fa-watch"]:checked');
   const email = typed ? typed.value : null, picked = sel ? sel.value : null;
   const focused = !!typed && document.activeElement === typed;
   let html = '';
@@ -11608,6 +11613,14 @@ function falertCheck() {
     }
   }).catch(() => { /* offline: what this browser remembers stands */ });
 }
+/* What to say when the API refused: its own sentence for the refusals a
+ * person can act on (a bad address, too many tries, the sender's daily
+ * limit); anything else (not deployed yet, an error, offline) is "could not
+ * reach". Pure. */
+function falertFail(res) {
+  const ok = res && [400, 409, 429, 502, 503].includes(res.status) && res.data && res.data.message;
+  return ok ? String(res.data.message) : 'We could not reach our server. Your watch is saved here; try again in a minute.';
+}
 /* The ask form (an address for one car) and "Change car" (the same request,
  * carried by this browser's signed token, so no second confirmation email). */
 async function falertSubmit(el, change) {
@@ -11616,8 +11629,9 @@ async function falertSubmit(el, change) {
   if (change && !st) return;
   const email = change ? st.email : String((input && input.value) || '').trim().toLowerCase();
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg.textContent = 'Enter your email address.'; if (input) input.focus(); return; }
-  const choices = falertChoices(), sel = el.querySelector('#fa-watch');
-  const pick = sel ? choices.find(x => String(x.i) === sel.value) : choices[0];
+  // The picked row; with one watch there are no rows and it is that watch.
+  const choices = falertChoices(), rows = el.querySelector('input[name="fa-watch"]'), sel = el.querySelector('input[name="fa-watch"]:checked');
+  const pick = rows ? (sel && choices.find(x => String(x.i) === sel.value)) : choices[0];
   const watch = pick && falertWatchBody(pick.e, ownCenter());
   if (!watch) { msg.textContent = 'Pick a car first.'; return; }
   // A token this browser already holds for the same address (this alert's,
@@ -11631,7 +11645,7 @@ async function falertSubmit(el, change) {
       src: ATTRIB ? ATTRIB.src : '', cmp: ATTRIB ? ATTRIB.cmp : '', med: ATTRIB ? ATTRIB.med : '' });
   } catch (e) { res = { status: 0, data: {} }; }
   btn.disabled = false;
-  if (!res || res.status !== 200) { msg.textContent = recapFail(res); return; }
+  if (!res || res.status !== 200) { msg.textContent = falertFail(res); return; }
   if (!change) track('free-alert-asked');
   const base = { email, key: pick.e.addedAt || null, label: falertLabel(pick.e), r: watch.radiusMi };
   if (res.data.state === 'on' && res.data.sub) falertSave({ ...base, state: 'on', sub: res.data.sub });
@@ -11672,7 +11686,7 @@ async function falertTurnOff(el) {
     });
     card.addEventListener('change', (e) => {
       // The sentence names the distance of the car that is picked.
-      const sel = e.target.closest('#fa-watch'), r = card.querySelector('.fa-r');
+      const sel = e.target.closest('input[name="fa-watch"]'), r = card.querySelector('.fa-r');
       if (!sel || !r) return;
       const pick = falertChoices().find(x => String(x.i) === sel.value);
       if (pick) r.textContent = String(falertRadiusMi(pick.e));

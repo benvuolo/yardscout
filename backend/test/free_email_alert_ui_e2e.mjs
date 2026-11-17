@@ -7,7 +7,7 @@
  * automation flag is hidden so the funnel events can be read from a
  * sendBeacon recorder.
  *
- *   web free   the card under the watchlist: pick ONE watch, one email field,
+ *   web free   the card under the watchlist: pick ONE watch (rows), one email field,
  *              one button; "shown" counted once; a bad address is answered in
  *              the card; a good one posts a COPY of the criteria (rounded
  *              centre, at most 50 mi, no trim / drive / addedAt); the stored
@@ -124,7 +124,7 @@ async function open(browser, { origin = 'https://yardscout.io', native = null, s
     return {
       shown, text: shown ? el.innerText.replace(/\s+/g, ' ').trim() : '',
       inputs: shown ? [...el.querySelectorAll('input')].map(i => i.type) : [],
-      options: shown ? [...el.querySelectorAll('#fa-watch option')].map(o => o.textContent) : [],
+      options: shown ? [...el.querySelectorAll('.fa-opt')].map(o => o.innerText.replace(/\s+/g, ' ').trim()) : [],
       buttons: shown ? [...el.querySelectorAll('button')].map(b => b.textContent.trim()) : [],
       pro: shown ? !!el.querySelector('.pro-box, .pro-badge, .pro-tag, [onclick*="openUpgradeSheet"]') : false,
       msg: shown && el.querySelector('.fa-msg') ? el.querySelector('.fa-msg').textContent : '',
@@ -169,8 +169,9 @@ try {
     check('it says what it is: one car, one address, no account, usually the same day', /Free email alert/.test(c.text)
       && /Pick one car and we email you when one is set out within 50\smi, usually the same day\. One car, one address, no account\./.test(c.text), c.text);
     check('it is honest about the sending limit, and never says instant or every', /can arrive late or be skipped/.test(c.text) && !/instant|every time|always/i.test(c.text), c.text);
-    check('one select (the two watches, years shown), one email field, one button', JSON.stringify(c.options) === JSON.stringify(['2003–2009 Toyota 4Runner', 'Honda Civic'])
-      && JSON.stringify(c.inputs) === '["email"]' && JSON.stringify(c.buttons) === '["Email me"]', JSON.stringify(c));
+    check('the two watches to pick from (years shown, the first one picked), one email field, one button', JSON.stringify(c.options) === JSON.stringify(['2003–2009 Toyota 4Runner', 'Honda Civic'])
+      && JSON.stringify(c.inputs) === '["radio","radio","email"]' && JSON.stringify(c.buttons) === '["Email me"]'
+      && await v.page.evaluate(() => document.querySelector('#free-alert input[name="fa-watch"]:checked').value === '0'), JSON.stringify(c));
     check('no Pro prompt inside the card', !c.pro && !/\bPro\b/.test(c.text));
     await v.page.evaluate(() => document.getElementById('free-alert').scrollIntoView({ block: 'center' }));
     let ev = await v.events();
@@ -180,18 +181,18 @@ try {
     await v.shot('falert_1_ask');
 
     // The sentence names the distance of the car that is picked.
-    await v.page.selectOption('#fa-watch', { label: 'Honda Civic' });
+    await v.page.click('#free-alert .fa-opt:has-text("Honda Civic")');
     check('picking the 25 mi watch: the sentence says 25 mi', /set out within 25\smi/.test((await v.card()).text));
     await v.page.fill('#fa-email', 'half-typed@');
     await v.page.evaluate(() => renderAlerts());   // a scan arriving re-renders the tab
     check('a re-render keeps what was typed and picked', await v.page.evaluate(() => document.getElementById('fa-email').value === 'half-typed@'
-      && document.getElementById('fa-watch').selectedOptions[0].textContent === 'Honda Civic'));
+      && document.querySelector('#free-alert input[name="fa-watch"]:checked').closest('label').innerText.trim() === 'Honda Civic'));
     await v.page.click('#free-alert .fa-form .btn-primary');
     c = await v.card();
     check('a bad address is answered in the card, nothing sent', /Enter your email address/.test(c.msg) && v.sent.length === 0 && v.dialogs.length === 0, c.msg);
 
     const before = await v.watches();
-    await v.page.selectOption('#fa-watch', { label: '2003–2009 Toyota 4Runner' });
+    await v.page.click('#free-alert .fa-opt:has-text("Toyota 4Runner")');
     await v.page.fill('#fa-email', ' Visitor@Example.com ');
     await v.page.click('#free-alert .fa-form .btn-primary');
     await until(v.page, /Check your inbox/);
@@ -219,7 +220,7 @@ try {
     check('pending survives a reload', /Check your inbox/.test((await v.card()).text));
     await v.page.click('#free-alert [data-act="fa-restart"]');
     c = await v.card();
-    check('"Use a different address or car" brings the ask back', c.inputs.length === 1 && (await v.state()) === null);
+    check('"Use a different address or car" brings the ask back', c.inputs.includes('email') && (await v.state()) === null);
     check('no dialog, no page error', v.dialogs.length === 0 && v.errors.length === 0, JSON.stringify([v.dialogs, v.errors]));
     await v.ctx.close();
   }
@@ -248,6 +249,9 @@ try {
       && /2003–2009 Toyota 4Runner, within 50\smi, to v•••@example\.com\. At most one email per scan, usually the same day a car is listed\./.test(c.text), c.text);
     check('...with the limit said plainly, two buttons, no field, no Pro prompt', /can arrive late or be skipped/.test(c.text)
       && JSON.stringify(c.buttons) === '["Change car","Turn off"]' && c.inputs.length === 0 && !c.pro && !/\bPro\b/.test(c.text), JSON.stringify(c));
+    // The page opened straight into Alerts: the list fills in once the scan
+    // for the saved zip is in (as on any #tab=alerts arrival).
+    await v.page.waitForSelector('#alert-watchlist .watchlist-item', { timeout: 120000 }).catch(() => {});
     check('the watch it stands for wears the mark, the other does not', JSON.stringify(await v.marks()) === JSON.stringify(['Email alert, within 50 mi', null]), JSON.stringify(await v.marks()));
     check('"shown" is not counted for someone who already has it', count(await v.events(), 'free-alert-shown') === 0);
     await v.shot('falert_3_on');
@@ -282,7 +286,7 @@ try {
     check('Turn off: one request with the token', v.sent.filter(s => s.path === '/v1/free-alert/off').length === 1 && v.sent.find(s => s.path === '/v1/free-alert/off').body.sub === SUB);
     c = await v.card();
     check('the card says it is off and what was deleted, and offers the ask again', /Email alert off\. We deleted your address and the watch copied for it\./.test(c.msg)
-      && c.inputs.length === 1 && (await v.state()) === null, JSON.stringify(c));
+      && c.inputs.includes('email') && (await v.state()) === null, JSON.stringify(c));
     check('no watch wears the mark', (await v.marks()).every(m => m === null));
     check('no dialog, no page error', v.dialogs.length === 0 && v.errors.length === 0, JSON.stringify([v.dialogs, v.errors]));
     await v.shot('falert_5_off');
@@ -297,7 +301,7 @@ try {
     await until(v.page, /unsubscribed/);
     const c = await v.card();
     check('the server says off: the card says so and shows the ask again', /Your email alert is off: that address was unsubscribed\. You can ask for it again here\./.test(c.msg)
-      && c.inputs.length === 1 && (await v.state()) === null && (await v.marks()).every(m => m === null), JSON.stringify(c));
+      && c.inputs.includes('email') && (await v.state()) === null && (await v.marks()).every(m => m === null), JSON.stringify(c));
     await v.ctx.close();
   }
   {
@@ -324,7 +328,7 @@ try {
     await until(v.page, /today's limit/);
     c = await v.card();
     check('the cap message is shown in the card', /reached today's limit\. Your watch is saved here; try the email again tomorrow\./.test(c.msg), c.msg);
-    check('nothing remembered, the field still there, no "asked" counted', (await v.state()) === null && c.inputs.length === 1 && count(await v.events(), 'free-alert-asked') === 0);
+    check('nothing remembered, the field still there, no "asked" counted', (await v.state()) === null && JSON.stringify(c.inputs) === '["email"]' && count(await v.events(), 'free-alert-asked') === 0);
     await v.ctx.close();
   }
   {

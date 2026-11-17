@@ -28,15 +28,24 @@ function check(name, cond, extra = '') {
   console.log(`${cond ? 'PASS' : 'FAIL'}  ${name}${extra && !cond ? ' — ' + extra : ''}`);
   if (!cond) failures++;
 }
+/* One connection per request (no keep-alive), and one retry: between the
+ * waits below an idle kept-alive socket to the local mock or to wrangler can
+ * be closed by the other side just as it is reused. */
+async function get(url, opts = {}) {
+  const o = { ...opts, headers: { connection: 'close', ...(opts.headers || {}) } };
+  try { return await fetch(url, o); } catch (e) { await new Promise((r) => setTimeout(r, 300)); return fetch(url, o); }
+}
 async function api(path, opts = {}) {
-  const r = await fetch(BASE + path, { redirect: 'manual', ...opts });
+  const r = await get(BASE + path, { redirect: 'manual', ...opts });
   const text = await r.text();
   let data = {};
   try { data = JSON.parse(text); } catch { data = { __raw: text }; }
   return { status: r.status, data, headers: r.headers };
 }
 const J = (body, headers = {}) => ({ method: 'POST', headers: { 'content-type': 'application/json', ...headers }, body: JSON.stringify(body) });
-const sent = async () => (await (await fetch(MOCK + '/sent')).json());
+const sent = async () => {
+  try { return await (await get(MOCK + '/sent')).json(); } catch (e) { await new Promise((r) => setTimeout(r, 300)); return (await get(MOCK + '/sent')).json(); }
+};
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const d1 = (sql) => JSON.parse(execFileSync('npx', ['wrangler', 'd1', 'execute', 'yardscout-db', '--local', '--persist-to', STATE, '--json', '--command', sql],
   { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }))[0].results;
@@ -85,7 +94,7 @@ await sleep(2500);
 check('no alert email to an unconfirmed address (double opt-in)', (await sent()).slice(before).filter(isAlert).length === 0);
 
 /* ---- 3. confirm: GET is a page, POST opts in ---- */
-const page = await fetch(confirmUrl.href.replace(/^https?:\/\/[^/]+/, BASE));
+const page = await get(confirmUrl.href.replace(/^https?:\/\/[^/]+/, BASE));
 const pageHtml = await page.text();
 check('GET confirm: a page with a button that names the car, nothing confirmed', page.status === 200 && /<form method="post"/.test(pageHtml) && /Toyota Tacoma/.test(pageHtml)
   && !pageHtml.includes(EMAIL) && d1(`SELECT confirmed_at FROM free_email_alerts WHERE email = '${EMAIL}'`)[0].confirmed_at === null);
@@ -199,7 +208,7 @@ check('RFC 8058 one-click POST answers ok', r.status === 200 && r.data.unsubscri
 const left = d1(`SELECT (SELECT COUNT(*) FROM free_email_alerts WHERE email = '${EMAIL}') AS a,
   (SELECT COUNT(*) FROM free_email_alerts_sent WHERE email = '${EMAIL}') AS d`)[0];
 check('address, copied watch and dedupe rows all deleted', left.a === 0 && left.d === 0, JSON.stringify(left));
-const up = await fetch(u);
+const up = await get(u);
 const upHtml = await up.text();
 check('the link opened again: the page, address masked (idempotent)', up.status === 200 && /unsubscribed/i.test(upHtml) && !upHtml.includes(EMAIL));
 r = await api('/v1/free-alert/status', J({ sub }));

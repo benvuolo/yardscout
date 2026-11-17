@@ -1247,15 +1247,15 @@ const SCREENS = [
   // each of its states, with long names. The API is not reachable here (every
   // outside host is aborted), so what the browser remembers is what shows.
   ...[
-    ['alerts-falert-ask', { watches: 3 }, (el) => { if (!el.querySelector('#fa-watch') || !el.querySelector('#fa-email')) throw new Error('ask: no select or no field'); }],
-    ['alerts-falert-ask-one', { watches: 1, msg: 'Enter your email address.' }, (el) => { if (el.querySelector('#fa-watch') || !/For Mercedes-Benz Sprinter 2500/.test(el.innerText)) throw new Error('ask, one watch: the car is not named'); }],
+    ['alerts-falert-ask', { watches: 3 }, (el) => { if (el.querySelectorAll('input[name="fa-watch"]').length !== 3 || !el.querySelector('#fa-email')) throw new Error('ask: no rows to pick from or no field'); }],
+    ['alerts-falert-ask-one', { watches: 1, msg: 'Enter your email address.' }, (el) => { if (el.querySelector('input[name="fa-watch"]') || !/For 2007–2011 Mercedes-Benz Sprinter 2500/.test(el.innerText)) throw new Error('ask, one watch: the car is not named'); }],
     ['alerts-falert-ask-cap', { watches: 3, msg: "Our email sender has reached today's limit. Your watch is saved here; try the email again tomorrow." }, (el) => { if (!/today's limit/.test(el.innerText)) throw new Error('ask: no cap message'); }],
     ['alerts-falert-pending', { watches: 3, state: 'pending' }, (el) => { if (!/Check your inbox/.test(el.innerText) || !el.querySelector('[data-act="fa-restart"]')) throw new Error('pending not rendered'); }],
     ['alerts-falert-on', { watches: 3, state: 'on' }, (el) => {
       if (!/Free email alert is on/.test(el.innerText) || !el.querySelector('[data-act="fa-change"]') || !el.querySelector('[data-act="fa-off"]')) throw new Error('on not rendered');
       if (document.querySelectorAll('#alert-watchlist .wl-falert').length !== 1) throw new Error('the watch is not marked');
     }],
-    ['alerts-falert-change', { watches: 3, state: 'on', changing: true }, (el) => { if (!el.querySelector('.fa-change #fa-watch') || !el.querySelector('[data-act="fa-cancel"]')) throw new Error('change not rendered'); }],
+    ['alerts-falert-change', { watches: 3, state: 'on', changing: true }, (el) => { if (el.querySelectorAll('.fa-change input[name="fa-watch"]').length !== 2 || !el.querySelector('[data-act="fa-cancel"]')) throw new Error('change not rendered'); }],
     ['alerts-falert-on-gone', { watches: 3, state: 'on', gone: true, msg: 'We could not reach our server. The email alert is still on; try again in a minute.' },
       (el) => { if (!/no longer in your list here/.test(el.innerText)) throw new Error('the removed-watch sentence is missing'); }],
     ['alerts-falert-off', { watches: 3, msg: 'Email alert off. We deleted your address and the watch copied for it.' }, (el) => { if (!/Email alert off/.test(el.innerText) || !el.querySelector('#fa-email')) throw new Error('off not rendered'); }],
@@ -1276,7 +1276,13 @@ const SCREENS = [
       _falertChecked = Date.now();   // no status request from this screen
       document.querySelector('.tab[data-tab="alerts"]').click();
       renderAlerts();
-      if (o.msg && !o.state) { const e = document.getElementById('fa-email'); if (e) e.value = 'longer.address.than.most@example.com'; }
+      // What sits in the field for the "Enter your email address." message: a
+      // short wrong entry, as in watch-toast-recap-msg. A whole typed address is
+      // NOT part of any screen here: a one-line field scrolls it (at 200% text
+      // even 19 characters are wider than a phone's field), like every text
+      // field in the app. Where an address is shown as text (waiting / on, with
+      // the long one above) it wraps and is checked.
+      if (o.msg === 'Enter your email address.') { const e = document.getElementById('fa-email'); if (e) e.value = 'nope'; }
       const el = document.getElementById('free-alert');
       if (!el || !el.getClientRects().length) throw new Error('the free alert card is not shown');
       if (el.querySelector('.pro-box, .pro-badge, .pro-tag')) throw new Error('a Pro prompt inside the free alert card');

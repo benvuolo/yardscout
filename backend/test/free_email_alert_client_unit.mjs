@@ -48,7 +48,7 @@ function konst(name) {
   return end < 0 ? null : lines.slice(start, end + 1).join('\n');
 }
 
-const FNS = ['falertOffered', 'falertRadiusMi', 'falertLabel', 'falertWatchBody'];
+const FNS = ['falertOffered', 'falertRadiusMi', 'falertLabel', 'falertWatchBody', 'falertFail'];
 const CONSTS = ['FREE_EMAIL_ALERT_RADIUS_MI', 'FREE_INSTANT_RADIUS_MI', 'FREE_WATCH_LIMIT', 'FUNNEL_EVENTS', 'FALERT_LIMIT_NOTE', 'FALERT_INTRO_HTML'];
 const parts = {};
 for (const n of CONSTS) { parts[n] = konst(n); check(`app.js has const ${n}`, !!parts[n]); }
@@ -57,7 +57,7 @@ if (failures) { console.log(`\n${failures} FAILURES`); process.exit(1); }
 
 const ctx = vm.createContext({ Math, JSON, String, Number });
 vm.runInContext([...CONSTS, ...FNS].map(n => parts[n]).join('\n')
-  + '\n;globalThis.__x = { falertOffered, falertRadiusMi, falertLabel, falertWatchBody, FREE_EMAIL_ALERT_RADIUS_MI, FREE_INSTANT_RADIUS_MI, FREE_WATCH_LIMIT, FUNNEL_EVENTS, FALERT_LIMIT_NOTE, FALERT_INTRO_HTML };', ctx);
+  + '\n;globalThis.__x = { falertOffered, falertRadiusMi, falertLabel, falertWatchBody, falertFail, FREE_EMAIL_ALERT_RADIUS_MI, FREE_INSTANT_RADIUS_MI, FREE_WATCH_LIMIT, FUNNEL_EVENTS, FALERT_LIMIT_NOTE, FALERT_INTRO_HTML };', ctx);
 const A = ctx.__x;
 
 /* ---- who ---- */
@@ -110,6 +110,14 @@ check('says plainly that an email can be late or skipped', /can arrive late or b
 check('the intro sentence: one watch emailed, within 50 mi, on this website', /On this website, free gets <strong>one watch emailed<\/strong>/.test(A.FALERT_INTRO_HTML)
   && /within 50&nbsp;mi/.test(A.FALERT_INTRO_HTML));
 check('no Pro prompt in the card (no upgrade sheet, no Pro box)', !/openUpgradeSheet|proBoxHtml|pro-box|See Pro/.test(htmlFns.slice(0, 3).join('\n')));
+
+/* ---- what a refusal says ---- */
+const GENERIC = 'We could not reach our server. Your watch is saved here; try again in a minute.';
+check('the daily limit and "too many" are said in the API\'s own words', A.falertFail({ status: 503, data: { message: 'limit reached' } }) === 'limit reached'
+  && A.falertFail({ status: 429, data: { message: 'too many' } }) === 'too many' && A.falertFail({ status: 400, data: { message: 'Enter a valid email address.' } }) === 'Enter a valid email address.');
+check('the API not deployed yet (404), an error (500) or offline: "could not reach", never "No such endpoint"',
+  A.falertFail({ status: 404, data: { message: 'No such endpoint.' } }) === GENERIC && A.falertFail({ status: 500, data: { message: 'Internal error.' } }) === GENERIC
+  && A.falertFail({ status: 0, data: {} }) === GENERIC && A.falertFail(null) === GENERIC);
 
 /* ---- events ---- */
 check('the app counts "shown" and "asked"', A.FUNNEL_EVENTS['free-alert-shown'] === 'free-alert-shown' && A.FUNNEL_EVENTS['free-alert-asked'] === 'free-alert-asked');

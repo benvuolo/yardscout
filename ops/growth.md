@@ -669,3 +669,188 @@ workstream's file, so it was left alone):
   rise without more watches from the day v5 reaches users; the scorecard
   could note "since <first funnel-v5 day> asked includes the Cars strip".
 Privacy page already updated on that branch (chip tally, the strip).
+
+## Free emailed alert (website) — branch `growth/free-email-alert`, NOT merged (2026-11-17)
+
+Owner decision 2026-11-17 ("do the free emailed alert"). Built on origin/main
+6f6e545d. Nothing deployed, merged, dispatched or released; no file in
+`ios/`, `android/`, `native/`, `fastlane/`, `scraper/`; no price or
+entitlement rule changed. Merging deploys the web app (Pages) and the API
+worker, and the deploy applies **migration 0018** (two new tables, nothing
+existing altered).
+
+**Rule as built.** On the website a free visitor (not Pro, never in the app
+shells) gets ONE emailed alert: one of their watches, one email address, cars
+set out within 50 mi of that watch's centre (or its own radius if smaller),
+no account. It is the web counterpart of the apps' free instant push and
+uses the same distance constant. Pro is unchanged: every watch, any
+distance. The Monday email is unchanged and separate (own tables, own
+unsubscribe link).
+
+**What the visitor sees** (`docs/app.js` block FREE EMAILED ALERT ON THE
+WEB; card `#free-alert` in `docs/index.html`; styles at the end of
+`docs/styles.css`). A card under the watchlist in Alerts, above the matches:
+- *Ask:* "Free email alert. Pick one car and we email you when one is set
+  out within 50 mi, usually the same day. One car, one address, no account."
+  Then their watches as rows to pick from (only when there is more than one;
+  only the first 5, the ones free alerts at all; rows, not a drop-down,
+  because a drop-down cut a long name off at 320 px with large text), an
+  email field, "Email me", and "Free emails share a small daily sending
+  limit, so one can arrive late or be skipped." With one watch the car is
+  named ("For Toyota 4Runner") and the line starts "Get an email when…". No
+  watch yet: no card.
+- *Waiting:* "Check your inbox. Tap the link we sent to v•••@example.com to
+  turn on your email alert for (car). Nothing is sent until you do." and
+  "Use a different address or car". Goes back to the ask after 7 days.
+- *On:* "Free email alert is on. (car), within N mi, to v•••@example.com. At
+  most one email per scan, usually the same day a car is listed." with
+  "Change car" (the other watches as rows, Save / Cancel; one request, no
+  new confirmation email) and "Turn off". The watch it stands for wears a mark in the list
+  ("Email alert, within N mi"). If that watch is removed from the list, the
+  card says the alert keeps running until changed or turned off.
+- The confirmation button lands on `/#falert=confirmed&sub=(token)`: Alerts
+  opens, toast "Your free email alert is on."
+- One sentence is added after `#alerts-intro-copy` by app.js (element
+  `#alerts-free-email-copy`, free web visitors only): "On this website, free
+  gets one watch emailed: pick it under your watchlist and we email you when
+  one is set out within 50 mi." The two sentences the hub owns
+  (`#alerts-intro-copy`, `#appstore-alerts-panel`) and the check in
+  `free_instant_e2e.mjs` are not touched, and `index.html` has no change next
+  to them, so the hub's rewording merges without a conflict.
+- No Pro prompt in the card. The existing "Email alerts (Pro)" panel further
+  down is as it was (its one "See Pro" button for a free visitor).
+- Rule 6: stored watches are never edited, moved or reordered. The browser
+  keeps its own key `ys_falert` (address, state, token, which watch, label,
+  miles); the server keeps its own COPY of the one watch's free criteria
+  (make, model, years, centre rounded to about 1 km, radius at most 50; no
+  trim, drive or "parts only"). A watch with no centre of its own (made
+  before the radius picker) is sent centred on the visitor's zip; the stored
+  watch is not changed.
+
+**Server** (`backend/src/free_email_alert.js`, migration
+`0018_free_email_alert.sql`). It reuses the Monday email's machinery from
+`recap_signup.js` (helpers exported there, no behaviour change): the
+confirmation-token scheme, the signed browser token, masked addresses in
+logs, the same limits.
+- `POST /v1/free-alert/signup`: stores the address and the copy as PENDING
+  and sends ONE confirmation email ("Confirm your free YardScout email
+  alert", from `EMAIL_FROM`). The reply never says whether the address
+  already has an alert. With the token a browser holds after a confirmation
+  click for the same address (this alert's or the Monday email's) the watch
+  is set at once and no email goes out.
+- `GET /v1/free-alert/confirm` is a page with a button that names the car
+  (mail scanners cannot opt anyone in); `POST` confirms: the pending copy
+  becomes THE watch for the address (a different car replaces the old one,
+  and only after its own click), then 303 to the app with the token.
+- `POST /v1/free-alert/status`, `POST /v1/free-alert/off` (the page's "Turn
+  off": deletes the address).
+- `GET|POST /v1/free-alert/unsubscribe` (signed, one click, RFC 8058):
+  DELETES the address, its watch and its dedupe rows.
+- Alerts are for FUTURE arrivals: when a watch is set, the cars already
+  listed are recorded as known (as the Pro email alerts do).
+- An address whose Pro email alerts are on (and Pro active) is left to the
+  Pro email: never two emails for one car.
+
+**Sending** (`dispatchFreeEmailAlerts`, called from `admin.js` handleCommit).
+It starts only after that commit's Pro email dispatch has finished, and runs
+on every commit (also one with no new cars, so held alerts can go out). At
+most ONE email per address per scan, deduped per (address, car) in
+`free_email_alerts_sent`. From `EMAIL_ALERTS_FROM`, with the signed
+unsubscribe link in the body and `List-Unsubscribe` +
+`List-Unsubscribe-Post` headers, as the Pro emails. Copy says "usually the
+same day", never "instant". One Pro line, no price. Up to 10 cars listed
+per email, "…and N more on the site" for the rest (all marked sent).
+
+**Every limit, and where it lives.**
+
+| Limit | Value | Where |
+|---|---|---|
+| Distance | 50 mi, or the watch's own radius if smaller | `FREE_ALERT_RADIUS_MI` = `FREE_INSTANT_RADIUS_MI` (`devices.js`), imported in `free_email_alert.js`; `FREE_EMAIL_ALERT_RADIUS_MI` in `docs/app.js` (a test holds them equal) |
+| Watches | 1 per address (primary key = address, one `watch_json`); 1 alert per browser (`ys_falert`) | migration 0018; `docs/app.js` |
+| Which watches can carry it | the first 5 | `FREE_WATCH_LIMIT`, `falertChoices` in `docs/app.js` |
+| Free alert emails per scan | 5 | `FREE_ALERT_MAX_PER_SCAN`, `free_email_alert.js` |
+| Free alert emails per UTC day | 20 (20% of the daily cap) | `FREE_ALERT_DAY_SHARE`, `ops.js` |
+| Reserve under all other mail | none once 70 emails of any kind went out today (30% of the cap kept back; always more than the 10 kept for confirmations and recaps) | `FREE_ALERT_RESERVE_SHARE`, `freeAlertBudget`, `ops.js` |
+| Retry of a held alert | later scans, for 48 h, then not sent | `FREE_ALERT_CATCHUP_MS`, `free_email_alert.js` |
+| Confirmation link | 7 days; a second ask within 1 h rides the link already sent | `CONFIRM_TTL_MS`, `CONFIRM_REUSE_MS`, `recap_signup.js` |
+| Confirmation emails | 3 a day per address; refused ("try tomorrow") while fewer than 10 sends are left today | `CONFIRMS_PER_DAY`, `optionalEmailAllowed` |
+| Sign-ups per network | 8 an hour per IP, one bucket shared with the Monday email sign-up; 32 an hour for token changes | `IP_SIGNUPS_PER_HOUR` |
+| Unconfirmed address | deleted 7 days after the last ask (hourly job) | `pruneFreeAlerts` |
+| Dedupe rows | 90 days | `pruneFreeAlerts` |
+
+The daily cap is the Resend free tier's 100 (`RESEND_DAILY_CAP`; the env
+variable overrides it). The two shares follow it if the plan changes.
+
+**The budget, plainly.** Free alert emails are the lowest class of mail. The
+daily ops email, sign-in links, Pro alerts, saved-car emails, confirmations
+and the Monday recap all still have room after free alerts have stopped. A
+matched alert the budget cannot carry is HELD: counted
+(`email:free-alert:held`, once per held stretch), not marked sent, flagged
+on its row (`held_at`), and retried on later scans (longest-waiting first)
+for 48 h. After that the car is not emailed. A send Resend refuses is
+counted as a failure and not retried. If the send counters cannot be read,
+nothing is sent (held). The page, the confirmation email and the privacy
+page all say an email "can arrive late or be skipped".
+
+**Cost per scan** (the commit's dispatchers share one small budget): nobody
+signed up, or nobody matched = 1 D1 statement. Otherwise 3, plus 1 per email
+sent, plus 1 when something is held, plus 1 read while a held alert is
+waiting; at most 5 calls to Resend. A latitude/longitude box runs before the
+exact match rule, so a nationwide scan costs little per address.
+
+**Counting** (no counting-rules version step; counting starts on the deploy
+day). The app sends `free-alert-shown` (the ask on screen, once a visit) and
+`free-alert-asked` (an address given; a car change is not counted). The API
+counts `free-alert-confirmed` (the click, under the link the sign-up came
+from, once per address) and `free-alert-first-email` (the first alert email
+an address is sent); a client cannot post those two. All four are in
+`/v1/admin/attribution` and in the daily email's funnel table ("Free alert
+offered / asked / confirmed / 1st email", web only). The daily email also
+has, under USAGE, "Free email alert (web): N addresses with an alert on · K
+waiting for the confirmation click · M emailed at least once"; under SENDS,
+the `email:free-alert` row and, when anything was held, "HELD BACK for the
+free-alert email budget (24 h): N free alert emails (lowest class of mail;
+retried on later scans for 48 h, then not sent)".
+
+**Privacy page** (`docs/privacy.html`, dated November 17, 2026). New section
+"The free email alert (website)": what is stored (the address, the copy of
+the one watch, dates, the link source until the click, the list of cars
+already emailed), one watch per address, how to remove it (the unsubscribe
+link in every email, "Turn off" in Alerts, or writing to us; each deletes
+the address, the watch and the list), what the browser keeps, and that an
+email can be late or not sent. The location and watchlist paragraphs name it
+as the third opt-in exception; the tallies list has the four events.
+
+**Deploy order.** One push to main is enough. "Deploy Workers" applies
+migration 0018 and then deploys the API; Pages publishes the web app on its
+own. If Pages is first by a minute, the card answers "We could not reach
+our server… try again in a minute" until the API is up (a 404 is treated as
+unreachable); nothing is lost. No new secret or variable.
+`EMAIL_UNSUB_SECRET` must be set in production (it already signs the Pro
+and Monday links); without it a sign-up answers 503. sw.js `jh-v205` (hub
+renumbers at merge).
+
+**Not done.**
+- The watch toast still offers the Monday email after a new watch and does
+  not mention the alert. The alert is found in the Alerts tab only.
+- The weekly scorecard does not read the four events.
+- A browser that is "waiting" cannot tell that the link was opened on
+  another device; it shows "check your inbox" until the visitor starts over
+  or 7 days pass. The alert itself works.
+- No count of alerts dropped after the 48 h (only "held").
+- A Pro member who had a free alert keeps getting it unless their Pro email
+  alerts are on for the same address; the card is hidden for Pro, so they
+  stop it with the unsubscribe link.
+- "Parts only" on a watch is a display filter in the browser; the emailed
+  alert covers every matching car.
+- No postal address line unless `EMAIL_POSTAL_ADDRESS` is set (as for the
+  Monday email; still empty).
+
+**Decisions taken here that the owner may want to change.** (1) 5 per scan,
+20 a day, stop at 70. (2) Held alerts retry for 48 h. (3) The card sits
+under the watchlist, not in "How alerts reach you" at the bottom of the tab.
+(4) An address already confirmed for the Monday email in the same browser
+needs no second confirmation email. (5) The alert and the Monday email
+unsubscribe separately. (6) One Pro line in the alert email, with a link, no
+price. (7) Subjects: "New: 2004 Toyota Tacoma at (yard)" for one car, "3
+new: Toyota Tacoma within 50 mi" for several.
