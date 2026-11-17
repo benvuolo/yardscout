@@ -2743,3 +2743,36 @@ pop-up headlamps (1991–96).
 
 Result (same inventory): generic-only 13,675 → 13,399 (SL/SL1/SL2
 276 → 0); no entry 12,381 → 12,210 (the 171 listings).
+
+### 26.3 Chevrolet Trax 2015–2022
+
+Basis: WP Chevrolet_Trax; consumerguide.com/used/2015-chevrolet-trax; EPA
+menus 2011–2023; GM catalog records (oem-raw, retrieved 2026-11-05 and
+2026-11-09).
+- **Years:** "released in the United States for the 2015 model year";
+  "discontinued the first-generation Trax … following the 2022 model year
+  in North America" (WP). EPA lists Trax 2015–2022. The 2024+ Trax is a
+  different, larger vehicle and has no entry.
+- **Facelift 2017 (added to `FACELIFT_BREAKS`):** "new halogen projector
+  headlights, LED daytime running lights, dual taillights, and a new grille
+  design" (WP). GM numbers agree for the front: headlamps 42435939/40,
+  hood 42599227, fenders 95210618/9 and the grilles all list 2015–2016.
+  The bulb tail lamp 42599449/55 lists 2015–2022, so the tail-light cut is
+  narrower than that number needs (conservative).
+- **A/C:** standard ("Trax is well equipped with automatic transmission,
+  air conditioning, power windows and mirrors", CG).
+- **AWD:** "Front-wheel drive and all-wheel drive were available" (CG);
+  EPA "Trax AWD" every year 2015–2022.
+- **Engine:** the 1.4 turbo was the only US engine (CG); the catalog's
+  1.8L numbers are other markets'.
+
+| Row | Years | Gate | Basis |
+|---|---|---|---|
+| Fuel pump module (match part #) | 2015–22 | — | GM module kits 13516849 and 13516865 both list 2015–2022, 1.4L, LS/LT/LTZ. The catalog does not say what separates them, hence "match part #". |
+| A/C compressor | 2015–21 | — | GM kit 42783843 lists 2015–2021, 1.4L. No number in the data for 2022, so the row ends at 2021. Standard (CG). |
+| AWD rear differential / coupling | 2015–22 | drive: awd/4wd | CG and EPA. Same row and band as the Encore, its platform twin (§22.2). |
+
+Left out, no stated basis: sunroof (no source read lists it); 2022 A/C
+compressor; mirrors by trim (several numbers per year, no clean window).
+
+Result (same inventory): generic-only 13,399 → 13,132. Trax 267 → 0.

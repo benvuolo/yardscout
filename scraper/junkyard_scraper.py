@@ -6360,6 +6360,17 @@ _SATURN_S_PUMP = _per_gen([(1991, 1996), (1997, 1997), (1998, 2002)], [_GAP_PUMP
 for _k in ("saturn sl", "saturn sc", "saturn sw", "saturn s-series"):
     _gap_extend(_k, parts=[dict(r) for r in _SATURN_S_PUMP])
 
+# §26.3 Chevrolet Trax, US 2015-2022 (267 cars generic-only; one generation,
+# 2017 facelift in FACELIFT_BREAKS). GM fuel pump module kits 13516849 and
+# 13516865 both list 2015-2022 (two numbers: match part #); A/C compressor
+# kit 42783843 lists 2015-2021 for the 1.4L, the only US engine (A/C
+# standard, CG). AWD available every year (EPA "Trax AWD"): same row as its
+# platform twin, the Encore (§22.2).
+_gap_extend("trax", parts=[
+    *_per_gen([(2015, 2022)], [_GAP_PUMP_PN, _AWD_COUPLING]),
+    *_per_gen([(2015, 2021)], [_GAP_AC]),
+])
+
 # ---- end of §26 block
 
 _apply_consensus_evergreens()
@@ -6886,6 +6897,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "escort": [1992, 1993, 1999, 2003],
     # §26 (PARTS_GAPS §26; cited there)
     "volvo s40": [2001, 2008],
+    "trax": [2017],
 }
 # §22.10: gas-only rows hidden on hybrid listings. Hybrids of the families on
 # the lots generally start and charge through the hybrid system and use a
