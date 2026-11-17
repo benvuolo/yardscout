@@ -17390,6 +17390,18 @@ def refresh_wap_pricing_file() -> Path:
 # Toledo — and getMakes takes a ModelYear param (empty = all, 56 makes).
 # Response fields are unchanged apart from ignorable extras. ~112 requests
 # per scan (56 makes × 2 sites) at 2s pacing.
+# ---------------------------------------------------------------------------
+# THE U-PULL-R SWITCH (2026-11-17; hub recommendation, owner: do what the hub
+# thinks right). While this is False NOTHING of ours is sent to
+# upullrparts.com: not the inventory reader below (it used to send getMakes
+# and one search per scan, hit their captcha and publish 0 cars), not the
+# price-list refresh, not the snapshot script (it calls the same two
+# functions). Their CTO said on 2026-11-06 that an official API is likely.
+# Turn it back on only when that API or a feed arrives (or the owner says
+# so): see ops/yards.md, "U-Pull-R reader is switched off". The captcha is
+# never solved or routed around (rule 2). scraper/test_upullr_switch.py fails
+# if this is True, so switching it on is always a deliberate, reviewed change.
+UPULLR_READER_ENABLED = False
 UPR_AJAX = "https://upullrparts.com/wp-admin/admin-ajax.php"
 UPR_STORES = {
     1: {"name": "U-Pull-R Parts - Rosemount", "city": "Rosemount", "state": "MN",
@@ -17417,7 +17429,15 @@ def fetch_upullr_inventory() -> list[dict]:
 
     One getVehicles POST per make × site (site=1 = both MN stores, site=3 =
     Toledo), ~2s apart — the same flow their own search UI issues since the
-    2026-10 plugin upgrade; ~112 requests / ~4 min per scan."""
+    2026-10 plugin upgrade; ~112 requests / ~4 min per scan.
+
+    Switched off by UPULLR_READER_ENABLED (see the note above the constant):
+    while it is False this returns [] before any request is built."""
+    if not UPULLR_READER_ENABLED:
+        print("  [U-Pull-R] reader is switched off (UPULLR_READER_ENABLED): "
+              "no request sent, 0 vehicles; waiting on their API",
+              file=sys.stderr)
+        return []
     session = requests.Session()
 
     def _post(api_action: str, **extra) -> requests.Response:
@@ -17544,9 +17564,16 @@ def refresh_upullr_pricing_file() -> Path:
     """Refresh U-Pull-R's published price list -> upullr_pricing.json.
 
     The existing file is only overwritten when the fetch looks complete
-    (>200 parts), so a partial/failed run never clobbers good data."""
+    (>200 parts), so a partial/failed run never clobbers good data.
+
+    Switched off with the inventory reader (UPULLR_READER_ENABLED): while it
+    is False no request is sent and the last published file is kept."""
     import html as html_mod
 
+    if not UPULLR_READER_ENABLED:
+        print("  [U-Pull-R pricing] reader is switched off (UPULLR_READER_ENABLED): "
+              "no request sent, keeping the existing file", file=sys.stderr)
+        return DATA_DIR / "upullr_pricing.json"
     try:
         r = requests.get(UPR_PRICING_URL, headers={**HEADERS, "User-Agent": YARDSCOUT_UA}, timeout=30)
         r.raise_for_status()
@@ -24912,6 +24939,12 @@ INDEPENDENT_EXPECTED_SOURCES.update({
 })
 
 
+def independent_sources_switched_off() -> set[str]:
+    """Sources whose reader is deliberately off, so the zero-vehicle alarm
+    below does not call them broken on every scan. Today: U-Pull-R only."""
+    return set() if UPULLR_READER_ENABLED else {"upullr"}
+
+
 # Canonical adapter order. The parallel fetch below concatenates results in
 # THIS order, so the combined vehicle list (and therefore the saved payload's
 # row order) is byte-identical to what the old sequential loop produced.
@@ -25016,6 +25049,8 @@ def fetch_independent_inventory() -> list[dict]:
     # discovered by users days later (see U-Pull-R, 2026-10-13..17).
     got_sources = {v.get("_source") for v in vehicles}
     for src, label in INDEPENDENT_EXPECTED_SOURCES.items():
+        if src in independent_sources_switched_off():
+            continue  # off on purpose (its reader said so above), not broken
         if src not in got_sources:
             print(f"  WARNING: independent chain {label!r} returned 0 vehicles — "
                   f"adapter broken or site blocking? Investigate before it goes stale.",
@@ -28037,7 +28072,9 @@ YARD_MISSING_DROP = 30
 # counts as an open issue there (backend/src/ops_monitor.js).
 _UPR = ("waiting on the yard: upullrparts.com puts its vehicle search behind a "
         "Cloudflare human check (captcha) since ~2026-10-21; owner emailed them "
-        "2026-11-03 asking for an exemption or a daily file")
+        "2026-11-03 asking for an exemption or a daily file; their CTO said "
+        "2026-11-06 an official API is likely; our reader is switched off "
+        "since 2026-11-17 (nothing is sent to their site) until it arrives")
 KNOWN_MISSING_REASONS: dict[str, str] = {
     "U-Pull-R Parts - East Bethel": _UPR,
     "U-Pull-R Parts - Rosemount": _UPR,

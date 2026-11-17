@@ -20,7 +20,7 @@ directory-only entries.
 | Bevell's Pull It Yourself (NC) | adapter live (`fetch_bevells_inventory`, 50 rows/page, hash ids) |
 | Blue & Gold | directory-only, no website |
 | Ewe Pullet | not added: site renders no inventory cards |
-| U-Pull-R | blocked (Cloudflare Turnstile). Email sent 2026-11-03 to sales@ and jessef@upullrparts.com. sales@ bounced (Microsoft 365 550 5.4.1, address rejected); jessef@ (the contact from the owner's call) did not bounce, so it was delivered. Do not use sales@ again; reader stops at the first 403. Watch in `ops/hub.md`. 2026-11-06: their CTO (Glenn Wear, glennw@aaaparts.com) replied: an official API route is likely, after an exec-team talk; he said he would be back "early next week". No reply by 2026-11-12; the hub saved a follow-up as a Gmail draft for the owner to send. Note for this workstream: `fetch_upullr_inventory` still makes two requests per scan (makes list, then the first search, which 403s) before stopping. Consider skipping the reader entirely until the API exists, so nothing of ours reaches their site while they decide. |
+| U-Pull-R | **reader switched off 2026-11-17** (`UPULLR_READER_ENABLED = False`; nothing is sent to their site; see "U-Pull-R reader is switched off" at the end of this file). History: blocked (Cloudflare Turnstile). Email sent 2026-11-03 to sales@ and jessef@upullrparts.com. sales@ bounced (Microsoft 365 550 5.4.1, address rejected); jessef@ (the contact from the owner's call) did not bounce, so it was delivered. Do not use sales@ again; reader stops at the first 403. Watch in `ops/hub.md`. 2026-11-06: their CTO (Glenn Wear, glennw@aaaparts.com) replied: an official API route is likely, after an exec-team talk; he said he would be back "early next week". No reply by 2026-11-12; the hub saved a follow-up as a Gmail draft for the owner to send. Note for this workstream: `fetch_upullr_inventory` still makes two requests per scan (makes list, then the first search, which 403s) before stopping. Consider skipping the reader entirely until the API exists, so nothing of ours reaches their site while they decide. |
 | Harry's | Sucuri; the owner is sending a note via their contact form |
 | Pull-N-Save, Budget, Route 34 | outreach sent 2026-11-02, no reply yet. Budget: sales@budgetupullit.com delivered; the CC to Craig@budgetfl.com bounced (user does not exist). |
 | Harold's Auto Parts U-Pull-It (Briggs TX) | registry `candidate`. Ario feed embedded on their own site, 612 cars, but all set out 2026-09-09..09-29 and none since (looks like a one-time load). Wire it as config-only in `ARIO_CHAINS` once set-outs newer than 30 days appear. Refine the pin to the parcel first. |
@@ -931,3 +931,42 @@ lists have not changed since Saturday 11-14 07:42 UTC (their source, a
 weekend). The four notes (Pull-N-Save photo note, U-Pull-R and Budget
 corrections, Harry's form note) are true as written from this scan on; the
 owner was told they can be sent.
+
+## 2026-11-17 U-Pull-R reader is switched off
+
+**Why.** Since about 2026-10-21 their vehicle search answers every client
+with a captcha. Each scan still sent two requests (the makes list, then one
+search that got `captcha_missing`) and published 0 cars. Their CTO wrote on
+2026-11-06 that an official API is likely. The hub recommended stopping the
+reader until it arrives and the owner said to do what the hub thinks right.
+
+**What changed.** One switch in `scraper/junkyard_scraper.py`:
+`UPULLR_READER_ENABLED = False` (above `UPR_AJAX`). While it is False:
+- `fetch_upullr_inventory()` returns no cars before any request is built.
+- `refresh_upullr_pricing_file()` sends nothing and keeps the published
+  `docs/data/upullr_pricing.json` (338 parts, last refreshed 2026-11-16).
+- `scraper/update_upullr_snapshot.sh` calls those two functions, so it also
+  sends nothing (it exits with "only 0 vehicles").
+- The scan log prints one line, "[U-Pull-R] reader is switched off", and the
+  "returned 0 vehicles, adapter broken?" warning skips it.
+- The three yards stay listed as missing in the daily email with a reason
+  that starts "waiting on the yard" (so it is not counted as an open issue).
+
+Nothing else in the repo names their host in code. The reader stays
+registered in `INDEPENDENT_FETCHERS`, so switching on needs no re-wiring.
+
+**Test.** `python3 scraper/test_upullr_switch.py` refuses and counts every
+network call, checks both functions stay silent, checks that every function
+naming their site tests the switch first, and **fails if the switch is True**.
+
+**How to turn it on again.** Only when their API or feed arrives, or the
+owner says so. Never to try the captcha again (rule 2).
+1. If they give an API or a feed: write the reader for that (new URL, their
+   key through GitHub secrets if there is one, the YardScout name), with an
+   offline `scraper/test_upullr*.py` from a small saved sample. Keep the ids
+   `upullr-{store}-{stock}` so history and saved watches line up.
+2. Set `UPULLR_READER_ENABLED = True` and, in the same commit, change the
+   first check in `scraper/test_upullr_switch.py` and say in the commit
+   message who approved it.
+3. Remove the three names from `KNOWN_MISSING_REASONS` once cars come back.
+4. Watch the first scan: "[U-Pull-R] N vehicles across 3 yards", about 3,000.
