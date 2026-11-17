@@ -1565,3 +1565,41 @@ owner.
   Three stock Capacitor splash files (blue logo on white) sit unused in
   `ios/App/App/Assets.xcassets/Splash.imageset/`.
 - Builder still working on `growth/free-email-alert`.
+
+## 2026-11-17 16:06 UTC free emailed alert: builder done, hub review, merged branch in checks
+
+Builder's branch `growth/free-email-alert` (29bb2275; its own notes are in
+`ops/growth.md`, dated section). Hub read all of
+`backend/src/free_email_alert.js`, the hook in `admin.js`, the budget in
+`ops.js`, the routes in `index.js` and the whole website diff.
+
+What it is: on the website, a free visitor picks ONE watch in the Alerts
+tab and leaves an address; after a confirmation click they are emailed when
+a matching car is set out within 50 mi (the app free tier's own constant).
+Changing the car replaces it; "Turn off" or the email's one-click
+unsubscribe deletes the address and its copy of the watch.
+
+Review, what holds:
+- Double opt-in; the GET confirm page needs a button press (a mail scanner
+  cannot opt anyone in); the reply never says whether an address exists;
+  per-address and per-IP limits shared with the Monday email.
+- Lowest class of mail, fail closed: 5 per scan, 20 a day, none once 70
+  emails of any kind went out that day (shares of `RESEND_DAILY_CAP`, 100);
+  if the counters cannot be read it sends nothing. It starts only after the
+  same commit's Pro alert emails are out. Held alerts are counted and
+  retried for 48 h.
+- Rule 6: the browser's watches are read, never written; the page keeps its
+  own key `ys_falert`. Not shown to Pro or in the app shells. No Pro prompt
+  in the card. Privacy page says what is stored and how to remove it.
+- Known limits, accepted: a send that fails outright is counted, not
+  retried; the watch toast still offers only the Monday email; "parts only"
+  is not carried to the server.
+- Noted for later (builder's finding, not new): the commit's dispatchers
+  together can exceed the free plan's 50 subrequests on a busy commit; the
+  free alert runs last, so it is the first to lose.
+
+Merge branch `hub/free-email-alert`: main merged in (only `docs/sw.js`
+conflicted; now `jh-v207`), plus the email colour pass (36a12971: petrol
+`#2BB3CC` in every user email and its pages, `#0B6477` in the light ops
+email). Run 10 (the 77 suites plus the three new tests), the full layout
+check and the six API suites are in flight under the test lock.
