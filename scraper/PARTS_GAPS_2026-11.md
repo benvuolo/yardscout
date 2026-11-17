@@ -2992,8 +2992,9 @@ Leftovers in these models: S40 2000–04 (59), Mirage 1997–2002 (56).
 
 **Not done (item 2 remainder): Fiat 500L, Fiat 500X, Buick Encore GX.**
 They keep their evergreen-only entries (97 cars). The catalog data has no
-record for any of them (no Fiat records in the Mopar file; no Encore GX in
-the GM file), so by this block's rule there is no row to add.
+pump, compressor or lamp record for any of them (no Fiat records in the
+Mopar file; for the Encore GX the GM file holds only a hood bumper and two
+window-switch numbers), so by this block's rule there is no row to add.
 
 **For the hub.**
 1. **Radiator-fan rows.** §13–22 added "Radiator Fan Assembly" to FWD
@@ -3013,3 +3014,105 @@ the GM file), so by this block's rule there is no row to add.
    pump 1997 and 2001–03, Trax A/C 2022, Sonic pump 2017–20, first-gen S40,
    1997–2002 Mirage) would close with a crawl seeded on those years. That
    is the interchange workstream's crawl; nothing was fetched here.
+
+## 27. Nissan Xterra: a longer, sourced list (2026-11-17, `ops/parts.md` note of 2026-11-12)
+
+**Why.** The 2026-11-12 note: "the Xterra parts list is thin" (five rows on
+the first generation, six on the second). §25.1 fixed the windows; this
+adds rows. 1,088 Xterras are on the lots (2026-11-17 scan).
+
+**Rule.** As §26: a row needs a Nissan catalog number that lists its
+window, "match part #" where several numbers share it, no radiator-fan
+row. Source: the interchange crawl's records on branch `oem-raw`
+(`raw/www.nissanpartsdeal.com.jsonl`, 344 Xterra records, retrieved
+2026-11-05 to 2026-11-14; read from the branch, no site contacted).
+Equipment and facelift facts: WP Nissan_Xterra;
+consumerguide.com/used/2000-04-nissan-xterra and
+/used/2005-14-nissan-xterra (read 2026-11-17).
+
+**A caution on this catalog's year labels.** Parts that WP and CG date to
+the 2002 front end (hood F5100-7Z830, front fascia F2022-7Z825, grilles
+62310-7Z800/-7Z840, headlamps 26010-7Z825/6) are listed "2001-2004", and
+parts WP dates to the 2009 facelift "(July 2008 production)" are listed
+from 2008 (grille 62310-ZL00A, front fascia FBM22-ZL0MA). The catalog seems
+to label by production date, one year ahead of the model year at a
+mid-year change. Where it matters (the headlamps) the rows follow WP and CG
+for the year and say "match part #".
+
+**Facts used.**
+- Generations 2000–04 and 2005–15 (`GENERATION_BREAKS["xterra"] = [2005]`,
+  §25.1).
+- 2002 front end: "revised front-end styling with rounded headlights and
+  raised hood" (WP); "All ’02 Xterras had a 'power-bulge' hood and a
+  revised dashboard" (CG).
+- A/C: "Standard features on all models included antilock brakes, air
+  conditioning" (CG 2000–04); "air conditioning" in the base S and X lists
+  every year 2005–14 (CG).
+- Power windows: first generation, SE equipment and an XE package ("SE
+  adds: … power mirrors, power windows", CG). Second generation: not on the
+  base S for 2005 or the base X for 2006–07 ("Off-Road adds: … power
+  windows"; "S adds: … power windows"); in the base X list from the 2008
+  lists on (CG).
+- Rockford Fosgate: "For 2003 … a 6-speaker 300W Rockford Fosgate AM/FM/CD
+  audio system with an 8-inch subwoofer" on SE models (WP); in the SE list
+  and an XE V6 package for 2003 and 2004 (CG).
+
+| Row | Years | Gate | Basis (Nissan numbers and what they list) |
+|---|---|---|---|
+| Fuel pump module | 2000–04 | — | 17042-4S400: 2000–2004, SE and XE. One number. |
+| A/C compressor (match part #) | 2000–04 | — | By engine: 92600-7B410 (VG33E, 2000–2004), -8B401 (KA24DE, 2000–2004), -5S700 (VG33ER, 2001–2004), -4S100 (VG33E, 2000–2001). Standard (CG). |
+| Side mirrors (pair, match part #) | 2000–04 | — | 96301/96302-3S500, -3S510, -ZD000, -S3800, -3B300: all 2000–2004, by trim and engine. Soul/Compass mirror band; the row does not claim power mirrors. |
+| Window regulator + motor (front) | 2000–04 | option | Motors 80730/80731-7B400: 2000–2004. Power windows were not standard (CG). |
+| Power window master switch | 2000–04 | option | 25401-9E000: 2000–2004. Same. |
+| Headlights (pair, clear, match part #) | 2000–01, 2002–04 | — | 26010/26060-7B425 (listed 2000–2002) before the 2002 front end; 26010/26060-7Z825 (XE) and -7Z826 (SE) (listed 2001–2004) after. Years per WP and CG; see the caution above. Breadth-pass headlight band. |
+| Rockford Fosgate amp + subwoofer | 2003–04 | option | WP and CG above. Same band and cost as the Shaker / Nakamichi rows (§20.5, §21.7). |
+| Fuel pump module (match part #) | 2005–15 | — | 17040-ZZ00A: 2005–2015; also -EA000 (2005–2008) and -ZS00A (2007–2010). |
+| A/C compressor (match part #) | 2005–15 | — | 92600-EA31A: 2005–2015; also -EA300 (2005–2007) and -EA30C (2007–2015). Standard (CG). |
+| Side mirrors (pair, match part #) | 2005–15 | — | 96301/96302-9BC9A and -9BC9B: 2005–2015; -EA000/-EA005 (2005–2013) and -EA18E (SE, 2008–2011) by trim. |
+| Headlights (pair, clear, match part #) | 2007–15 | — | 26010/26060-EA000 (SE, Off-Road): 2007–2015; -ZL00A (S, X): 2008–2015. Nothing in the data lists 2005–06, so those years have no headlight row. |
+| Window regulator + motor (front) | 2005–07 | option | Motors 80730/80731-EA005: 2005–2015. Not standard on the base trim before 2008 (CG). |
+| Window regulator + motor (front) | 2008–15 | — | Same numbers. Standard (CG). |
+| Power window master switch | 2006–07 | option | 25401-ZP70A: 2006–2015. |
+| Power window master switch | 2008–15 | — | Same number. |
+
+Bands and pull costs are the audited templates (`_GAP_MECH`, the consensus
+evergreen window rows, the breadth-pass headlight row, the Soul mirror
+row). The ranking value of every Xterra is unchanged (the new rows sit
+below the roof rack).
+
+**Left out, with the reason:**
+- **Alternator, starter, throttle body.** The numbers change inside each
+  generation at different years by engine, and no one number spans a
+  window (alternator 23100-3S500 2000–02 / -9Z000 2001–04 for the 2.4,
+  -4S100 2000–03 / -1Z600 2002–04 for the V6; second generation -EA201,
+  -EA20B, -ZH00A, -ZH00B, -ZH00C in steps from 2005 to 2013; throttle body
+  16119-7S001 2005–10 / -7S00A 2009–13). The app's interchange finder
+  already carries the verified alternator groups for these trucks.
+- **Climate panel, gauge cluster.** Both changed with the 2002 dashboard
+  (WP) and again later ("revised HVAC controls" for 2014, CG); 19 and 96
+  numbers by trim and year, with no clean window.
+- **2005–06 headlights, 2005 master switch:** no number in the data.
+- **Radiator fan:** no source names one.
+- **Liftgate, hood, bumpers, fenders:** numbers exist (e.g. liftgate
+  K0100-EA031, 2005–2015) but there is no audited band for these on this
+  truck; not added.
+- **Second-generation Rockford Fosgate:** CG names only the radio
+  ("Rockford Fosgate AM/FM radio w/in-dash 6-disc CD/MP3 changer"); no
+  source read names an amplifier or subwoofer, so no row.
+- **`FACELIFT_BREAKS` for the Xterra: not added.** A 2009 cut would split
+  the tail-light row, and Nissan 26550/26555-EA025 lists 2005–2015 (§25.1).
+  The headlight rows carry their own windows instead.
+
+**Owner-thread leads (2026-11-12): status.**
+- Now sourced and added: window regulators (front), with the switch.
+- Still no basis or no audited band: roof gear basket and lid, IPDM, rear
+  seat latch, roof lights and covers, ECM, door lock actuators, cam/crank
+  sensors, evap canister, stalks, sun visors, rear door latches, rear
+  cupholder, first-aid kit. Ignition coils stay excluded by rule.
+
+**Checks** (2026-11-17 inventory, 336,279 cars; code before §27 vs after,
+seven decodes): only the 16 Xterra year/make/model combinations changed
+(1,088 cars); no row lost, no existing row's band, gate or window changed.
+Coverage counts are unchanged (the Xterra was already model-specific):
+generic-only 11,921, no entry 12,210. `test_parts_gaps.py`: the §25.1
+exact-row check now expects the §27 rows as well; new §27 checks.

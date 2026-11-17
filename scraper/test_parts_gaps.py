@@ -215,6 +215,8 @@ check("§14: only gap-block entries are registered (no id reuse leaks)",
        "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect",
        # §22
        "milan", "encore", "captiva sport", "park avenue", "scion xb 2008-2015", "sonata", "infiniti qx60", "escort", "ford zx2", "encore gx",
+       # §27
+       "xterra",
        # §26
        "volvo s40", "saturn sl", "saturn sc", "saturn sw", "saturn s-series", "trax", "sonic", "freestar", "freestyle", "mirage 2014-2024", "mirage g4", "venture"},
       str(sorted({r[0] for r in js._GAP_BLOCK_ROWS})))
@@ -791,8 +793,28 @@ _X1 = {2000: {_RACK: "2000–2004", _CON: "2000–2002"},
        2003: {_RACK: "2000–2004", _TL1: "2001–2004", _ST: "2001–2004"},
        2004: {_RACK: "2000–2004", _TL1: "2001–2004", _ST: "2001–2004"}}
 _x1bad = {y: {n: q["fits"] for n, q in parts(y, "Nissan", "Xterra").items()} for y in _X1}
-check("§25.1 1st gen Xterra years get exactly their cited rows (no diff-lock switch)",
-      all(_x1bad[y] == _X1[y] for y in _X1), str(_x1bad))
+# §27 added catalog-number rows to both generations; the §25.1 rows and
+# windows are unchanged, and the exact per-year row set is asserted below.
+_X27_1 = {"Fuel Pump Module (in-tank, test before listing)": "2000–2004", "A/C Compressor (clutch spins free, match part #)": "2000–2004",
+          "Side Mirrors (pair, match part #)": "2000–2004", "Window Regulator + Motor (front)": "2000–2004",
+          "Power Window Master Switch": "2000–2004"}
+_HL27, _RF27 = "Headlights (pair, clear, match part #)", "Rockford Fosgate Amp + Subwoofer"
+_X1_27 = {y: {**_X1[y], **_X27_1, _HL27: "2000–2001" if y <= 2001 else "2002–2004", **({_RF27: "2003–2004"} if y >= 2003 else {})} for y in _X1}
+check("§25.1 1st gen Xterra years get exactly their cited rows (no diff-lock switch); §27 rows added, §25 rows unchanged",
+      all(_x1bad[y] == _X1_27[y] for y in _X1), str(_x1bad))
+_x00, _x03, _x05, _x06, _x09 = (parts(y, "Nissan", "Xterra") for y in (2000, 2003, 2005, 2006, 2009))
+check("§27 Xterra 1st gen: power-window rows and Rockford Fosgate are 'if equipped'; pump, A/C and mirrors are plain; no alternator, starter, throttle body or fan row",
+      all(_x03[n]["trim_status"] == "unconfirmed" for n in ("Window Regulator + Motor (front)", "Power Window Master Switch", _RF27))
+      and all("trim_status" not in _x00[n] for n in ("Fuel Pump Module (in-tank, test before listing)", "A/C Compressor (clutch spins free, match part #)", "Side Mirrors (pair, match part #)"))
+      and not any(t in n for n in set(_x03) | set(_x09) for t in ("Alternator", "Starter", "Throttle", "Radiator Fan")))
+check("§27 Xterra 2nd gen: pump, A/C, mirrors 2005-15 by Nissan numbers; headlights only 2007-15; power windows 'if equipped' to 2007, plain from 2008; no switch row for 2005",
+      _x09["Fuel Pump Module (in-tank, match part #)"]["fits"] == "2005–2015" and _x09["A/C Compressor (clutch spins free, match part #)"]["fits"] == "2005–2015"
+      and _x09["Side Mirrors (pair, match part #)"]["fits"] == "2005–2015" and _x09[_HL27]["fits"] == "2007–2015" and _HL27 not in _x05 and _HL27 not in _x06
+      and _x05["Window Regulator + Motor (front)"]["trim_status"] == "unconfirmed" and "Power Window Master Switch" not in _x05
+      and _x06["Power Window Master Switch"]["fits"] == "2006–2007" and "trim_status" not in _x09["Window Regulator + Motor (front)"]
+      and _x09["Power Window Master Switch"]["fits"] == "2008–2015" and _RF27 not in _x09)
+check("§27 Xterra: the ranking value did not move (the new rows sit below the roof rack)",
+      all(max(m["max_value"] for m in js.match_vehicle(y, "Nissan", "Xterra")) == 265 for y in (2000, 2003, 2005, 2009, 2014)))
 check("§25.1 1st gen bands are the pre-split anchors",
       [(q["low"], q["high"]) for q in js.UNOBTANIUM_DB["xterra"]["top_parts"] if q.get("yr_max") == 2004 and q["name"] == _RACK] == [(150, 350)])
 check("§25.1 diff-lock switch keeps its trim gate", _x08["Rear Diff Locker Switch"].get("trim_status") == "unconfirmed")
@@ -910,7 +932,7 @@ check("§26 no radiator-fan row was added in this block",
 
 # 3. band sanity + lint
 bad = []
-for key in ("volvo s40", "saturn sl", "saturn sc", "saturn sw", "saturn s-series", "trax", "sonic", "freestar", "freestyle", "mirage 2014-2024", "mirage g4", "venture", "altima", "accent", "lesabre", "lacrosse", "soul", "milan", "encore", "captiva sport", "park avenue", "scion xb 2008-2015", "sonata", "infiniti qx60", "escort", "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
+for key in ("xterra", "volvo s40", "saturn sl", "saturn sc", "saturn sw", "saturn s-series", "trax", "sonic", "freestar", "freestyle", "mirage 2014-2024", "mirage g4", "venture", "altima", "accent", "lesabre", "lacrosse", "soul", "milan", "encore", "captiva sport", "park avenue", "scion xb 2008-2015", "sonata", "infiniti qx60", "escort", "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
     for q in js.UNOBTANIUM_DB[key]["top_parts"]:
         if not (0 < q["cost"] < q["low"] < q["high"] <= 6 * q["low"]):
             bad.append((key, q["name"], q["cost"], q["low"], q["high"]))

@@ -6454,6 +6454,55 @@ _gap_extend("venture", parts=[
 
 # ---- end of §26 block
 
+# ---- 2026-11 §27 (PARTS_GAPS §27): Nissan Xterra. The 2026-11-12 note
+# called the list thin (five rows on the 1st gen, six on the 2nd). Same
+# rule as §26: a row needs a Nissan catalog number that lists its window
+# (oem-raw raw/www.nissanpartsdeal.com.jsonl), "match part #" where several
+# numbers share it. Rows are written per generation (2000-04, 2005-15);
+# GENERATION_BREAKS already guards the 2005 break.
+# Left out on purpose: alternator, starter and throttle body (the numbers
+# change mid-generation at different years by engine, and no one number
+# spans a window); radiator fan (no source names one); climate panel and
+# gauge cluster (changed at the 2002 facelift, many numbers by trim).
+_HEADLIGHTS_PN = {"name": "Headlights (pair, clear, match part #)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20}
+_MIRRORS_PN = {"name": "Side Mirrors (pair, match part #)", "rarity": "Uncommon", "low": 30, "high": 85, "cost": 15}
+_WIN_REG = {"name": "Window Regulator + Motor (front)", "rarity": "Uncommon", "low": 30, "high": 75, "cost": 12}
+_WIN_SW = {"name": "Power Window Master Switch", "rarity": "Uncommon", "low": 30, "high": 90, "cost": 10}
+_gap_extend("xterra", parts=[
+    # 1st gen. Fuel pump 17042-4S400 lists 2000-2004; A/C compressors
+    # 92600-7B410 / -8B401 / -5S700 / -4S100 by engine (A/C standard, CG);
+    # mirrors 96301/2-3S500, -3S510, -ZD000 ... all 2000-2004 by trim;
+    # front window motors 80730/1-7B400 and main switch 25401-9E000 list
+    # 2000-2004 (power windows were SE equipment and an XE package: option).
+    *_per_gen([(2000, 2004)], [_GAP_PUMP, _GAP_AC_PN, _MIRRORS_PN,
+                               {**_WIN_REG, "option": True}, {**_WIN_SW, "option": True}]),
+    # Headlamps changed with the 2002 front end (Wikipedia; CG): 26010/26060-
+    # 7B425 before, -7Z825 (XE) / -7Z826 (SE) after.
+    *_per_gen([(2000, 2001), (2002, 2004)], [_HEADLIGHTS_PN]),
+    # Rockford Fosgate 300 W system with an 8-inch subwoofer: SE standard,
+    # XE V6 package, 2003-04 (Wikipedia; CG lists).
+    *_per_gen([(2003, 2004)], [
+        {"name": "Rockford Fosgate Amp + Subwoofer", "rarity": "Uncommon", "low": 80, "high": 200, "cost": 24, "option": True},
+    ]),
+    # 2nd gen. Fuel pump 17040-ZZ00A lists 2005-2015 (also -EA000 2005-08,
+    # -ZS00A 2007-10); A/C compressor 92600-EA31A lists 2005-2015 (also
+    # -EA300 2005-07, -EA30C 2007-15; A/C standard, CG); mirrors 96301/2-
+    # 9BC9A/B list 2005-2015 (others by trim); front window motors 80730/1-
+    # EA005 list 2005-2015.
+    *_per_gen([(2005, 2015)], [_GAP_PUMP_PN, _GAP_AC_PN, _MIRRORS_PN]),
+    # Headlamps 26010/26060-EA000 (SE, Off-Road) list 2007-2015 and -ZL00A
+    # (S, X) 2008-2015; nothing at hand lists 2005-06.
+    *_per_gen([(2007, 2015)], [_HEADLIGHTS_PN]),
+    # Power windows: not on the base S (2005) or X (2006-07), standard on
+    # every trim from 2008 (CG lists). Main switch 25401-ZP70A lists
+    # 2006-2015.
+    *_per_gen([(2005, 2007)], [{**_WIN_REG, "option": True}]),
+    *_per_gen([(2006, 2007)], [{**_WIN_SW, "option": True}]),
+    *_per_gen([(2008, 2015)], [_WIN_REG, _WIN_SW]),
+])
+
+# ---- end of §27 block
+
 _apply_consensus_evergreens()
 
 # §26.2: power windows and power mirrors were options on the S-Series (not
