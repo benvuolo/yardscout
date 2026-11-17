@@ -1,4 +1,4 @@
-# Yards workstream — status (updated 2026-11-06, vehicle photos round 3)
+# Yards workstream — status (updated 2026-11-17, breadth pass; the newest sections are at the end)
 
 Owns: independent-yard adapters in `scraper/junkyard_scraper.py`
 (`INDEPENDENT_FETCHERS`), `scraper/independent_yards_registry.json`,
@@ -33,6 +33,8 @@ directory-only entries.
 | Wally's U-Pull-It (Oshkosh WI) | directory-only. Devtools check 2026-11-04: its "inventory" is the URG iis-pro-v2 parts locator (year → catalog make → model → part category). The make list is a parts catalog (2010 lists Tesla, Kenworth) and no endpoint lists lot vehicles |
 | Littleton U-Pull (CO), Andersen's U-Pull-It (Greeley CO, now Alter Trading), One Stop You Pull It (Klamath Falls OR), Vince's U-Pull-It (Marcy NY) | directory-only, no online inventory |
 | U-Pull and Save Mason (MI), Pick A Part of Arizona (Phoenix, Mesa), A-1 Metals (CA) | registry `retired` so the sweep skips them: vehicle purchasing only / closed to the public / not self-service |
+| **Intermountain Auto iPull** (Idaho Falls ID), **S&S U-Pull-It** (Lebanon MO), **Standard Auto Wreckers UPIC** (Toronto ON) | **readers built 2026-11-17 on branch `yards/breadth-1117`** (not on main until the hub merges). Tests `test_ifipull.py`, `test_ssupullit.py`, `test_standardupic.py` |
+| Carolina Pick N Pull, Kenny U-Pull, Express Pull-N-Save, U Pull It Davie, Pull N' Go, Andersen Self-Service, U-Pull It Russellville | checked 2026-11-17, not added; reasons in the 2026-11-17 breadth section, drafts 6 to 12 in `ops/yard-outreach-drafts.md` |
 
 Outreach drafts: `ops/yard-outreach-drafts.md` (all sent except Harry's).
 No new drafts from the 2026-11-04 sweep review, because no checked yard blocked us.
@@ -726,6 +728,7 @@ jh-v150+. The first message is kept below for the record.
 3. After each monthly sweep: review tiers A–B in `coverage_sweep.md`, verify
    each has self-service inventory online before adding.
 4. Chains frozen for 6+ scans show in the daily email as `chain-frozen:<chain>`.
+6. From the 2026-11-17 pass: re-check Pull N' Go (503) once; add Andersen Self-Service when its set dates move past 2026-08-22; build Davie after a person has looked at its pages; finish Express Pull-N-Save, Carolina Pick N Pull and Kenny U-Pull only on a yes from the yard; the Ario question is the owner's.
 5. Photos: Rupert's and Chuck & Eddie's non-expiring YardSmart URLs (yardconnect parser, per-URL exp check). Pull-N-Save checker is PAUSED (2026-11-07); watch the backlog in the scan log only once un-paused ("[Pull-N-Save photos] … still unchecked"). After the next scan, confirm `photoSources` in `inv/manifest.json` and real PnP/WAP code counts; compare PnP/WAP URLs across scans. Sample the Ario, CRUSH and remaining chains, and re-check WAP URL stability after a few scans.
 
 ## 2026-11-14 request for a yard already tracked (Kennewick)
@@ -970,3 +973,132 @@ owner says so. Never to try the captcha again (rule 2).
    message who approved it.
 3. Remove the three names from `KNOWN_MISSING_REASONS` once cars come back.
 4. Watch the first scan: "[U-Pull-R] N vehicles across 3 yards", about 3,000.
+
+## 2026-11-17 breadth pass (branch `yards/breadth-1117`; nothing on main)
+
+Asked by the hub for the owner ("more breadth ... watertight"): add real
+self-service yards with a public online inventory, biggest first, honestly;
+switch off the U-Pull-R reader (section above). Every site was read under the
+scanner's own name at 2 s or slower (10 s where robots.txt asks). No full
+scan was run, no workflow dispatched, nothing sent to any yard.
+
+### Added: 3 yards, about 1,700 cars seen
+
+| Yard | Where | Cars | Reader | robots.txt and terms |
+|---|---|---|---|---|
+| Intermountain Auto iPull | Idaho Falls ID | 578 on the page (557 with a VIN; arrivals 2026-03-30 to 11-16; "Updated: 11/17/26") | `ifipull`: one GET, the CRUSH static-table reader. Stock-number ids | robots.txt disallows only /cgi-bin/ and /tmp/. No terms page on the site |
+| S&S U-Pull-It | Lebanon MO | 573 in the 4 makes probed (Chevrolet 283, Ford 254, Toyota 30, Acura 6); the other 31 makes were not counted | `ssupullit`: the CRUSH MVC reader, 1 GET + 35 POSTs at 1 s. No VIN or stock number, so content-hash ids | no robots.txt (404). No terms page; "Yard Policies" is about returns |
+| Standard Auto Wreckers UPIC | Scarborough (Toronto) ON | 524 in the sheet (517 with a valid VIN; dates 2026-09-03 to 11-13) | `standardupic`: the yard's page, then the Google Sheet that page names (the yard published it as CSV); 2 GETs. Stock-number ids | the site's robots.txt allows the page; docs.google.com allows /spreadsheet (Crawl-delay 1). The terms page is warranty terms only |
+
+Notes on each:
+- **Intermountain Auto iPull** is the yard the registry had as `blocked`: on
+  2026-10-28 its host answered our scanner's name with HTTP 500. On 11-17 the
+  same name gets the page. Nothing changed on our side. If the 500 returns,
+  the yard drops out and that is its answer. It is named "Intermountain Auto
+  iPull", not "iPull by Intermountain Auto", because the app's site-link list
+  sends any name starting "ipull" to iPull-uPull (California). Price list
+  parsed (557 parts; the DRINKS, ATV/MOWER and I-CARRY categories are left
+  out).
+- **S&S U-Pull-It**: the date the site calls ARRIVAL DATE is the date the ROW
+  was set. In the probe every physical row had one date; 16 dates from
+  2017-06-20 to 2026-08-28. So cars dated 2017 are rows still standing, and
+  the dates are published as the yard gives them. Between batches (about every
+  four months) the daily email's "no new arrivals in 30 days" line will name
+  this yard; that is expected, not a fault. Price list parsed (537 parts).
+- **Standard Auto Wreckers UPIC** is the first Ontario yard and the sixth
+  Canadian one. Only the self-service ("UPIC") list is read; the site's
+  full-service parts search is not. Its price list is also a published sheet,
+  in Canadian dollars; not wired (owner decision, see the hub report).
+- No photos for any of the three: none of them shows a per-car photo.
+- Pins: Census exact address matches for the two US yards; OpenStreetMap
+  house-level match for 1216 Sewells Road.
+
+Requests added per scan: 1 + 36 + 2 = 39, on three hosts.
+
+### Not added (9), and why
+
+| Yard | Cars (claimed or seen) | Why not | Draft |
+|---|---|---|---|
+| Carolina Pick N Pull (NC/SC, 3 yards) | about 4,300 (October count) | Terms of Service forbid "any robot, spider or other similar automatic technology". The page itself now answers our scanner | 6 |
+| Kenny U-Pull (QC/ON/NB/NS, about 25 yards) | not seen | Cloudflare block page (403) to our scanner | 7 |
+| Express Pull-N-Save (TN, 3 yards) | not seen | Site notice forbids reproduction; its terms sit on a host that answered 403. Old unmerged reader on `yards/express-pull-n-save` | 8 |
+| U Pull It Davie (FL) | "over 2,000" (their site, via a search result) | robots.txt turns away AI agents by name; this session is one, so only robots.txt was read | 9 |
+| Ario yards (any new one) | n/a | Ario's robots.txt now disallows `/yard/` ("Paid Website Search / embed product"); see below | 10 |
+| Pull N' Go (Bradenton FL) | not seen | 503 to both requests | 11 |
+| Andersen Self-Service (Kearney NE) | 1,721 on the page | Feed frozen: nothing set after 2026-08-22 | 12 |
+| U-Pull It Russellville (AR) | 532 on the page | Undated table whose newest model year is 2010; looks years old | none |
+| Ewe Pullet (SD), sweep tier A | 0 | Still "No Results Found" | none |
+
+Also checked and dropped: West Fargo Self Service (list still "under
+construction"), Hanser's (Billings) and Brandywine (MD) (full-service parts
+locators), Gary's U-Pull-It (now Fenix Binghamton, tracked), pickapartde.com
+(parked), picapartyard.com (self-signed certificate; not read), Sam's
+Riverside (Ario embed), two dead s3softwaresolutions hosts.
+
+### Where candidates were looked for
+
+- **Sweep tiers A and B (2026-11-05 report):** A is Ewe Pullet (above). All
+  five B rows were settled on 11-04 (two retired, two tracked, OKC built).
+- **Covered chains with missing locations:** Pick-n-Pull, LKQ and Pull-A-Part
+  list their own yards on every scan. Fenix's site lists the same four yards
+  we have. No missing location was found.
+- **Canada:** the app takes Canadian postal codes (`normalizePostal`, looked
+  up at zippopotam.us) and five Canadian yards were listed before this pass:
+  Pick-n-Pull Kelowna, Calgary (two) and Edmonton, and iPull-uPull Edmonton.
+  Pick-n-Pull's Canadian yards come from the same national query as the US
+  ones. Kenny U-Pull is blocked (above).
+- **Web search** for the page wording of platforms we already read found S&S,
+  Standard, Andersen, Russellville, Davie and Pull N' Go. No competitor's site
+  was opened or copied from.
+
+### Ario: robots.txt changed (owner decision)
+
+`ario.autorecycler.io/robots.txt`, read 2026-11-17, says for every crawler
+`Disallow: /yard/`, with the comment "Paid Website Search / embed product —
+not for organic indexing". The same host now serves Ario's own consumer
+search site, "U-Pull Yards". Our reader (about 45 yards, about 45,000 cars)
+does not fetch `/yard/` pages: it calls the search function behind them on
+another host, with the page's public key, and it sends a browser name, not
+our scanner's. I added no Ario yard and changed nothing in that reader.
+Options for the owner: ask Ario (draft 10); move EZ Pull N Pay and
+Cash-N-Carry to the tables on their own sites (seen in search results only;
+needs the usual check); or leave it as it is.
+
+### Reader names
+
+New yards are read under the scanner's own name. Readers that still send a
+browser name, as the code stands: the nine older CRUSH MVC tenants, Barry's,
+Pick-A-Part VA, Ario and the big chains. The owner switched four on 11-16
+after one test request each; the same could be done for these. Not done
+here (outside the brief, and each needs its own test request).
+
+### For other workstreams (not done here: `docs/app.js` is not mine)
+
+- **Site links:** `gen_yard_site_links.py` has the three new entries. It needs
+  a run after the first scan with the new yards (it rewrites the list in
+  `docs/app.js` and `docs/data/yard_site_links.json`). Until then the three
+  yards have no "view on the yard's site" link.
+- **Price sheets:** the scan will write `ifipull_pricing.json` and
+  `ssupullit_pricing.json`; the app's price-sheet list does not load them yet.
+
+### Tests
+
+Every `scraper/test_*.py` passes (33 files: the 29 on main plus
+`test_upullr_switch.py`, `test_ifipull.py`, `test_ssupullit.py` and
+`test_standardupic.py`). Fixtures: `scraper/fixtures/<yard>/`.
+
+### What was read, for the record
+
+One request each unless said: robots.txt for every site named above;
+ifipull.com /inventory/ and /pricelist/; ssupullit.com /Home/Inventory,
+/Home/YardPolicies, /Home/PartPrices and 4 make searches;
+standardautowreckers.com home, /upic-inventory/, /terms-of-service/,
+/upic-yard-toronto/, /upic-price-list/ and the inventory sheet;
+carolinapicknpull.com /inventory/ and /terms-of-service plus its policy text;
+expresspullnsave.com home, /inventory and the terms shell; kennyupull.com home
+(blocked); andersenselfservice.com home and /junk-cars-inventory;
+upullitrsvl.com home, /inventory/ and /new-arrivals/; ewepullet.com inventory;
+the home pages of hansers.com, wfselfservice.com (and /yard-vehicles),
+samsriverside.com and ario.autorecycler.io. One slip: brandywineparts.com's
+home page was fetched once before its robots.txt (which names AI agents, as
+Davie's does) had been read; nothing more was requested there.

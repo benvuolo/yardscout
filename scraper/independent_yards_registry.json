@@ -3260,6 +3260,28 @@
           "state": "NE"
         }
       ]
+    },
+    {
+      "name": "U-Pull It Russellville",
+      "status": "directory-only",
+      "platform": "WordPress + wpDataTables: /inventory/ renders one table (id, Year, Make, Model, Location slot); no dates, VIN or stock number",
+      "website": "https://upullitrsvl.com",
+      "inventory_url": "https://upullitrsvl.com/inventory/",
+      "api": {
+        "endpoint": null,
+        "notes": "NOT WIRED 2026-11-17 (list looks years old): 532 rows, but the newest model year is 2010 (one car; 2005-2006 are the big years), there are no dates anywhere, /new-arrivals/ is empty and the footer says 2018. A working u-pull lot in 2026 would show many 2010-2016 cars, so the table is taken to be an old upload. Self-service yard confirmed by its home page (bring your own tools, $1 admission). Re-check if newer model years appear. robots.txt allows the page; no terms page."
+      },
+      "update_freshness": "unknown; table appears unmaintained (newest model year 2010)",
+      "robots": "User-agent: * Disallow: /wp-admin/ (admin-ajax allowed), read 2026-11-17",
+      "tos_flags": "no terms page",
+      "locations": [
+        {
+          "name": "U-Pull It Russellville",
+          "city": "Russellville",
+          "state": "AR",
+          "address": "3001 S. Mobile Ave, Russellville, AR 72802"
+        }
+      ]
     }
   ]
 }
