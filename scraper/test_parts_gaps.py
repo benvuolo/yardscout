@@ -216,7 +216,7 @@ check("§14: only gap-block entries are registered (no id reuse leaks)",
        # §22
        "milan", "encore", "captiva sport", "park avenue", "scion xb 2008-2015", "sonata", "infiniti qx60", "escort", "ford zx2", "encore gx",
        # §26
-       "volvo s40", "saturn sl", "saturn sc", "saturn sw", "saturn s-series", "trax", "sonic", "freestar", "freestyle", "mirage 2014-2024", "mirage g4"},
+       "volvo s40", "saturn sl", "saturn sc", "saturn sw", "saturn s-series", "trax", "sonic", "freestar", "freestyle", "mirage 2014-2024", "mirage g4", "venture"},
       str(sorted({r[0] for r in js._GAP_BLOCK_ROWS})))
 c04, c15 = parts(2004, "Toyota", "Camry", FWD), parts(2015, "Toyota", "Camry", FWD)
 check("§14: Camry 2004 pump fits 2002–2006, 2015 fits 2012–2017",
@@ -888,6 +888,17 @@ check("§26.7 Mirage G4 (sedan) has its own entry from 2017: own lamp windows, p
       and g18[_PUMP]["fits"] == "2017–2024" and g18[_AC]["trim_status"] == "unconfirmed" and _AC not in g22
       and g18["Tail Lights (pair, uncracked)"]["fits"] == "2017–2020" and g22["Tail Lights (pair, uncracked)"]["fits"] == "2021–2024")
 
+u97, u00, u01, u03, u03f, u05 = (parts(1997, "Chevrolet", "Venture", FWD), parts(2000, "Chevrolet", "Venture", FWD), parts(2001, "Chevrolet", "Venture", FWD),
+                                 parts(2003, "Chevrolet", "Venture", AWD), parts(2003, "Chevrolet", "Venture", FWD), parts(2005, "Chevrolet", "Venture", AWD))
+check("§26.8 Venture: A/C 'if equipped' 1997-99, plain 2000, 'match part #' 2001-05 (two GM numbers); pump only 1998-2000 and 2004-05 (the cited numbers)",
+      u97[_AC]["trim_status"] == "unconfirmed" and u97[_AC]["fits"] == "1997–1999" and "trim_status" not in u00[_AC] and u01[_AC_PN]["fits"] == "2001–2005" and _AC not in u01
+      and _PUMP not in u97 and u00[_PUMP]["fits"] == "1998–2000" and _PUMP not in u01 and _PUMP not in u03 and u05[_PUMP]["fits"] == "2004–2005" and _FAN not in u00)
+check("§26.8 Venture: Versatrak AWD unit 2002-04 only, gated; sliding-door motor 'if equipped'; lamps cut at the 2001 facelift",
+      u03["AWD Rear Differential / Transfer Unit"]["trim_status"] == "vin" and "AWD Rear Differential / Transfer Unit" not in u03f
+      and "AWD Rear Differential / Transfer Unit" not in u01 and "AWD Rear Differential / Transfer Unit" not in u05
+      and u00["Power Sliding Door Motor"]["trim_status"] == "unconfirmed"
+      and u00["Headlights (clear, non-hazed)"]["fits"] == "1997–2000" and u03["Headlights (clear, non-hazed)"]["fits"] == "2001–2005")
+
 _pnb = [(k, p["name"], a, b) for k, e in js.UNOBTANIUM_DB.items() for p in e["top_parts"]
         for (bk, tok), ys in js.PART_NUMBER_BREAKS.items() if _re.sub(r" \d{4}-\d{4}$", "", k) == bk and tok in p["name"].lower()
         for a, b in [(max(e["year_range"][0], p.get("yr_min", e["year_range"][0])), min(e["year_range"][1], p.get("yr_max", e["year_range"][1])))]
@@ -895,11 +906,11 @@ _pnb = [(k, p["name"], a, b) for k, e in js.UNOBTANIUM_DB.items() for p in e["to
 check("§26 no row crosses a PART_NUMBER_BREAKS year; every key names a real entry",
       not _pnb and all(any(_re.sub(r" \d{4}-\d{4}$", "", k) == bk for k in js.UNOBTANIUM_DB) for bk, _t in js.PART_NUMBER_BREAKS), str(_pnb[:5]))
 check("§26 no radiator-fan row was added in this block",
-      not any(p["name"] == _FAN for k in ("volvo s40", "saturn sl", "saturn sc", "saturn sw", "saturn s-series", "trax", "sonic", "freestar", "freestyle", "mirage 2014-2024", "mirage g4",) for p in js.UNOBTANIUM_DB[k]["top_parts"]))
+      not any(p["name"] == _FAN for k in ("volvo s40", "saturn sl", "saturn sc", "saturn sw", "saturn s-series", "trax", "sonic", "freestar", "freestyle", "mirage 2014-2024", "mirage g4", "venture",) for p in js.UNOBTANIUM_DB[k]["top_parts"]))
 
 # 3. band sanity + lint
 bad = []
-for key in ("volvo s40", "saturn sl", "saturn sc", "saturn sw", "saturn s-series", "trax", "sonic", "freestar", "freestyle", "mirage 2014-2024", "mirage g4", "altima", "accent", "lesabre", "lacrosse", "soul", "milan", "encore", "captiva sport", "park avenue", "scion xb 2008-2015", "sonata", "infiniti qx60", "escort", "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
+for key in ("volvo s40", "saturn sl", "saturn sc", "saturn sw", "saturn s-series", "trax", "sonic", "freestar", "freestyle", "mirage 2014-2024", "mirage g4", "venture", "altima", "accent", "lesabre", "lacrosse", "soul", "milan", "encore", "captiva sport", "park avenue", "scion xb 2008-2015", "sonata", "infiniti qx60", "escort", "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
     for q in js.UNOBTANIUM_DB[key]["top_parts"]:
         if not (0 < q["cost"] < q["low"] < q["high"] <= 6 * q["low"]):
             bad.append((key, q["name"], q["cost"], q["low"], q["high"]))

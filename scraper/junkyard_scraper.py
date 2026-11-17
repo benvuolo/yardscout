@@ -6435,6 +6435,23 @@ _gap_extend("mirage g4", parts=[
     *_per_gen([(2017, 2019)], [{**_GAP_AC, "option": True}]),
 ])
 
+# §26.8 Chevrolet Venture 1997-2005 (224 cars generic-only; one generation,
+# 2001 facelift in FACELIFT_BREAKS: GM front fascia and grille numbers list
+# 2001-2005). GM A/C compressor 89018902 lists 1997-2000; 19130448 (with
+# rear A/C, option C69) and 19258827 (without) list 2001-2005: match part #.
+# Front A/C standard on the base van from 2000 (CG lists); 1997-99 not
+# confirmed (option). Fuel pump module 19180118 lists 1998-2000 and 19180125
+# 2004-2005; no number at hand for 1997 or 2001-03. Power sliding door
+# optional every year (CG); Versatrak AWD 2002-2004 (CG; Wikipedia).
+_gap_extend("venture", parts=[
+    *_per_gen([(1997, 1999)], [{**_GAP_AC, "option": True}]),
+    *_per_gen([(2000, 2000)], [_GAP_AC]),
+    *_per_gen([(2001, 2005)], [_GAP_AC_PN]),
+    *_per_gen([(1998, 2000), (2004, 2005)], [_GAP_PUMP]),
+    *_per_gen([(1997, 2005)], [_PSD_MOTOR]),
+    *_per_gen([(2002, 2004)], [_AWD_REAR_UNIT]),
+])
+
 # ---- end of §26 block
 
 _apply_consensus_evergreens()
@@ -6966,6 +6983,7 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "sonic": [2017],
     "mirage": [2017, 2021],          # 1999 rear-end-only revision left out
     "mirage g4": [2021],
+    "venture": [2001],
 }
 # §22.10: gas-only rows hidden on hybrid listings. Hybrids of the families on
 # the lots generally start and charge through the hybrid system and use a

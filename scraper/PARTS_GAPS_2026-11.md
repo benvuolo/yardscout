@@ -2921,3 +2921,42 @@ Left out, no stated basis:
 
 Result (same inventory): generic-only 12,339 → 12,145. Mirage and G4
 250 → 56 (all 1997–2002).
+
+### 26.8 Chevrolet Venture 1997–2005
+
+Basis: WP Chevrolet_Venture; consumerguide.com/used/1997-05-chevrolet-venture;
+GM catalog records (oem-raw, retrieved 2026-11-05, 2026-11-06, 2026-11-09).
+- **One generation, 1997–2005** (WP; replaced by the Uplander).
+- **Facelift 2001 (added to `FACELIFT_BREAKS`):** "The exterior was
+  refreshed in 2001"; "2001: The front fascia and steering wheel were
+  redesigned" (WP). GM front fascia 88895114/5 and grille 10310159 list
+  2001–2005. The tail lamps 19206745/6 and mirrors 15935752/3 list
+  1997–2005, so the tail-light cut is narrower than that number needs
+  (conservative).
+- **A/C:** "front air conditioning" in the base (Cargo/Value/Plus) lists
+  2000–2005 (CG). CG's equipment lists start at 2000, so 1997–99 are
+  `option`.
+- **AWD:** "Optional all-wheel drive" for 2002; "Venture loses its
+  regular-length and all-wheel-drive models for a shortened 2005 season"
+  (CG); "GM's Versatrak all-wheel-drive system (on long-wheelbase models
+  only) was introduced" in 2002 (WP).
+- **Power sliding door:** "GM's exclusive power sliding passenger-side
+  door was optional" from 1997; driver side from 2001 (CG).
+
+| Row | Years | Gate | Basis |
+|---|---|---|---|
+| A/C compressor | 1997–99 | option | GM 89018902 lists 1997–2000. Standard not confirmed before 2000. |
+| A/C compressor | 2000 | — | Same number. Standard (CG 2000 lists). |
+| A/C compressor (match part #) | 2001–05 | — | GM 19130448 (option C69, rear A/C) and 19258827 (without) both list 2001–2005. Standard (CG). |
+| Fuel pump module | 1998–2000 | — | GM 19180118 lists 1998–2000. |
+| Fuel pump module | 2004–05 | — | GM 19180125 lists 2004–2005. |
+| Power sliding door motor | 1997–2005 | option | CG. Same conservative band as the Uplander row (§20.3), its successor. |
+| AWD rear differential / transfer unit | 2002–04 | drive: awd/4wd | CG, WP. Same row and band as the Uplander's Versatrak row (§20.3). |
+
+Left out, no stated basis: fuel pump for 1997 and 2001–03 (no number in the
+data); rear A/C parts (no audited band); the Oldsmobile Silhouette and
+Pontiac Trans Sport/Montana twins (the pump and compressor records were not
+checked for them). CG's 1997 trouble note names "the engine cooling fan",
+but gives no part or years, so no fan row.
+
+Result (same inventory): generic-only 12,145 → 11,921. Venture 224 → 0.
