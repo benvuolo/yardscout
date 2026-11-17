@@ -6304,6 +6304,44 @@ _gap_extend("ford zx2", parts=_per_gen([(1998, 2003)], [_GAP_PUMP, _GAP_FAN, {**
 
 # ---- end of §22 block
 
+# ---- 2026-11 §26 (PARTS_GAPS §26; hub brief 2026-11-17).
+# Rule for this block: a mechanical row needs a part-number source for its
+# window. The source is the carmaker catalog records the interchange crawl
+# already holds (branch oem-raw, raw/<site>.jsonl; numbers and "retrieved"
+# dates in PARTS_GAPS §26). A window is only the years a cited number
+# lists. Where two or more numbers cover one window (drive, engine or
+# equipment split) the row name says "match part #". No number, no row.
+# No radiator-fan rows: no source at hand names a fan assembly with its
+# years.
+_GAP_PUMP_PN = {**_GAP_PUMP, "name": "Fuel Pump Module (in-tank, match part #)"}
+_GAP_AC_PN = {**_GAP_AC, "name": "A/C Compressor (clutch spins free, match part #)"}
+_AWD_REAR_UNIT = {"name": "AWD Rear Differential / Transfer Unit", "rarity": "Rare", "low": 90, "high": 220, "cost": 60, "drive": ["awd", "4wd"]}
+_HATCH_TAILS = {"name": "Hatchback Tail Lights (pair, uncracked)", "rarity": "Rare", "low": 55, "high": 140, "cost": 23, "body": ["hatchback"]}
+_SEDAN_TAILS = {"name": "Sedan Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "body": ["sedan"]}
+_SUNROOF_STD = {k: v for k, v in _SUNROOF.items() if k != "option"}
+_GENERIC_LAMP_ROWS = [
+    {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+    {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+    {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+]
+
+# §26.1 Volvo S40 (264 cars generic-only). 1st gen US 2000-04, 2nd gen from
+# "2004.5": both were sold as 2004 models, so 2004 is its own window
+# (GENERATION_BREAKS 2004 and 2005) and gets no new rows. Facelifts 2001 and
+# 2008. 2nd gen: one Volvo A/C compressor number lists 2004-2011 (36050586;
+# A/C standard, CG); the fuel pump has 2WD/4WD and year-split numbers
+# (match part #); AWD T5 2005-2010 (EPA); sunroof optional 2005-08 and
+# 2010-11, standard 2009 (CG equipment lists). 1st gen: no number in the
+# catalog data for pump or compressor, so no mechanical rows.
+_gap_extend("volvo s40", parts=[
+    *_per_gen([(2005, 2011)], [_GAP_AC, _GAP_PUMP_PN]),
+    *_per_gen([(2005, 2010)], [_AWD_COUPLING]),
+    *_per_gen([(2005, 2008), (2010, 2011)], [_SUNROOF]),
+    *_per_gen([(2009, 2009)], [_SUNROOF_STD]),
+])
+
+# ---- end of §26 block
+
 _apply_consensus_evergreens()
 
 # ---- 2026-10 Phase A: enthusiast platforms, evergreens BY GENERATION ------
@@ -6577,6 +6615,8 @@ GENERATION_BREAKS = {
     # T200 through 2008 (restyled Aveo5 2009). Both years break, so no window
     # mixes T200 and T250 cars of one body (PARTS_GAPS §16.6).
     "aveo": [2007, 2009],
+    # §26 (PARTS_GAPS §26)
+    "volvo s40": [2004, 2005],             # 1st gen 2000-04, 2nd gen from "2004.5": 2004 holds both, so it stands alone (§26.1)
     "escort": [1997],                      # 2nd gen 1991-96, 3rd gen 1997-2003 (PARTS_GAPS §22.8)
     "park avenue": [1997],                 # 1st gen 1991-96, 2nd gen 1997-2005 (PARTS_GAPS §22.4)
     "stratus": [2001],                     # JA sedan 1995-2000, JR sedan 2001-06 (+ Mitsubishi-based coupe 2001-05) (PARTS_GAPS §21.6)
@@ -6812,6 +6852,8 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "scion xb": [2011, 2013],
     "infiniti qx60": [2016, 2019],
     "escort": [1992, 1993, 1999, 2003],
+    # §26 (PARTS_GAPS §26; cited there)
+    "volvo s40": [2001, 2008],
 }
 # §22.10: gas-only rows hidden on hybrid listings. Hybrids of the families on
 # the lots generally start and charge through the hybrid system and use a
@@ -6824,6 +6866,7 @@ _HYBRID_GAS_ONLY_ROWS = frozenset({
     "Alternator (spin-test at yard)",
     "Starter (verify part number)",
     "A/C Compressor (clutch spins free)",
+    "A/C Compressor (clutch spins free, match part #)",  # §26
 })
 _HYBRID_KEEPS: dict[tuple[str, str], set[str]] = {
     # (make, model text contains) -> rows that hybrid keeps. Cited in §22.10.
@@ -6834,6 +6877,14 @@ _HYBRID_KEEPS: dict[tuple[str, str], set[str]] = {
     # GM BAS 2009 Vue Hybrid: "retains its standard 12-Volt starter"
     # (greencarreports.com 1021418).
     ("saturn", "vue"): {"Starter (verify part number)"},
+}
+
+# §26: a cited catalog-number change cuts ONE row (matched by a lowercase
+# token of its name) at that model year, the way FACELIFT_BREAKS cuts the
+# appearance rows. Narrowing only. Basis per entry in PARTS_GAPS §26.
+PART_NUMBER_BREAKS: dict[tuple[str, str], list[int]] = {
+    # Volvo mirror assemblies: 30744586/9 list 2004-2006, 31278733/9 2007-2011.
+    ("volvo s40", "side mirrors"): [2007],
 }
 
 _FACELIFT_SENSITIVE_RE = re.compile(
@@ -6913,6 +6964,10 @@ def _bound_rows_per_generation() -> None:
             row_breaks = breaks
             if facelifts and _FACELIFT_SENSITIVE_RE.search(p["name"]):
                 row_breaks = sorted(set(breaks) | set(facelifts))  # §17
+            pn_breaks = [y for (k, tok), ys in PART_NUMBER_BREAKS.items()
+                         if k == base and tok in p["name"].lower() for y in ys]
+            if pn_breaks:
+                row_breaks = sorted(set(row_breaks) | set(pn_breaks))  # §26
             cuts = [b for b in row_breaks if plo < b <= phi] if plo <= phi else []
             if not cuts:
                 new_parts.append(p)

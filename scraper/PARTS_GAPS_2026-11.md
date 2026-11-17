@@ -2577,3 +2577,117 @@ console lid; any 1st gen diff-lock switch.
     redesign);
   - Tacoma 1st gen climate unit 1995–2004 (the 2001 refresh);
   - Xterra 2nd gen console body across the 2009 update.
+
+## 26. Next measured block (2026-11-17, owner via hub: "I want everything large done. More breadth, data, parts compatibility.")
+
+Order from `ops/parts.md` "Next" item 2. Measured on the 2026-11-17 scan
+(336,279 cars, 12,478 distinct year/make/model) with the code before §26:
+generic-only 13,880 (4.1%), no entry 12,381 (3.7%).
+
+| Order | Model | Generic-only cars before |
+|---|---|---|
+| 1 | Volvo S40 2000–11 | 264 |
+| 2 | Saturn SL / SL1 / SL2 1991–2002 (plus 171 S-Series, SC and SW listings with no entry) | 276 |
+| 3 | Chevrolet Trax 2015–22 | 267 |
+| 4 | Chevrolet Sonic 2012 | 281 |
+| 5 | Ford Freestar 2004–07 | 253 |
+| 6 | Ford Freestyle 2005–07 | 259 |
+| 7 | Mitsubishi Mirage and Mirage G4 | 250 |
+| 8 | Chevrolet Venture 1997–2005 | 224 |
+
+**Basis rule for this block (stricter than §13–22).** The hub's brief:
+a row needs a stated basis, and "probably the same" is not one.
+- **Mechanical rows (fuel pump module, A/C compressor) need a catalog part
+  number that lists the window.** The numbers come from the carmaker
+  catalog records the interchange crawl already holds: branch `oem-raw`
+  (read at 57e8b5b9, 2026-11-15), files `raw/www.gmpartsgiant.com.jsonl`,
+  `raw/www.fordpartsgiant.com.jsonl`, `raw/www.volvopartsgiant.com.jsonl`,
+  `raw/www.mitsubishipartsgiant.com.jsonl`. Each record carries the
+  catalog's own fitment lines and a `retrieved` date (2026-11-05 to
+  2026-11-10 for everything cited here). No catalog site was contacted for
+  this block; the records were read from the branch.
+- **A window is only the years a cited number lists.** The crawl was seeded
+  one model year per model, so a year with no number is "not in the data",
+  not "does not fit". Such years get no row and are listed as left out.
+- **"match part #"** is in the row name where two or more numbers cover the
+  same window (a drive, engine or equipment split the listing cannot see).
+- **Standard or option:** a row is plain only where a fetched source lists
+  the item as standard equipment for those years; otherwise `option`.
+- **No radiator-fan rows.** §13–22 added the fan row on the layout alone
+  ("every car, FWD transverse"). No source at hand names a fan assembly
+  with its years (the crawl has no fan category), so the row is left out
+  for every model here. See "For the hub" in §26.9.
+- **Bands and pull costs** are the audited templates unchanged (§1, §13:
+  `_GAP_MECH`, `_SUNROOF`, the AWD rear-unit rows, the Uplander
+  sliding-door motor, the Accent/Rio/Focus hatch tail-light row). Nothing
+  was priced from a web page; no eBay data was read.
+
+**Other sources.** WP = Wikipedia raw wikitext; CG = Consumer Guide used
+reviews (consumerguide.com/used/…); EPA = fueleconomy.gov model menus. All
+read directly on 2026-11-17 (quotes are from the page text, not a summary).
+Not used: cars.com (returned 403 to this session; not worked around) and
+RockAuto (its robots.txt disallows ClaudeBot; not read).
+
+**New mechanism: `PART_NUMBER_BREAKS`.** A cited catalog-number change cuts
+one named row at that model year, the way `FACELIFT_BREAKS` cuts the
+appearance rows. Narrowing only. One entry so far (the S40 mirrors).
+
+### 26.1 Volvo S40 2000–2004, 2004.5–2011
+
+Basis: WP Volvo_S40; consumerguide.com/used/2000-04-volvo-s40v40 and
+/used/2005-11-volvo-s40v50; EPA menus 1999–2012; Volvo catalog records
+(oem-raw `raw/www.volvopartsgiant.com.jsonl`, retrieved 2026-11-05 and
+2026-11-10).
+- **Generations, and why 2004 stands alone.** US sales began with the 2000
+  model year (WP; EPA lists "S40 FWD" 2000–2011). The second generation
+  went "on sale part way through the 2004 model year, it is sometimes known
+  as the 2004.5 Volvo S40" (WP). The catalog agrees: first-generation
+  numbers list "2000-2004 Volvo S40 | Base, LSE | 4 Cyl 1.9 L" and
+  second-generation numbers "2004-2011 Volvo S40 | 2.4i, T5 … | 5 Cyl".
+  A "2004 S40" listing can be either car, so
+  `GENERATION_BREAKS["volvo s40"] = [2004, 2005]`: 2004 is its own window
+  and gets no new rows (20 cars).
+- **Facelifts added to `FACELIFT_BREAKS`:**
+  - 2001: "got a thorough makeover, including freshened styling …
+    subtly reshaped the fenders, reworked the front bumper with an
+    integrated spoiler" (CG); "slightly different front wings and front
+    bumper, and larger front indicators" (WP, Phase II). Volvo sedan tail
+    lamps 30621883/4 list 2001–2004.
+  - 2008: "Both the S40 and V50 received revised exterior and interior
+    styling" (CG); "refreshed for April 2007" (WP). Volvo numbers: grille
+    8620116 and tail-lamp lens 30698347 are noted "2004-07"; headlamps
+    31265706/7 (halogen) and 31214756/7 (bi-xenon) are noted "2008-11".
+- **Mirrors (`PART_NUMBER_BREAKS` 2007):** Volvo mirror assemblies
+  30744586/9 list 2004–2006; 31278733/9 are noted "2007-11". The existing
+  mirror row is now cut at 2007.
+- **A/C:** standard ("air conditioning" in the base 2.4i list every year
+  2005–11, CG).
+- **AWD:** T5 only, 2005–2010 ("added wagon and all-wheel-drive variants
+  for 2005"; "The 2011 Volvo S40 and V50 lineups deleted their
+  manual-transmission and all-wheel-drive models", CG; EPA "S40 AWD"
+  2005–2010; "the AWD system bought from Haldex Traction", WP).
+- **Sunroof:** in option packages 2005–08 and 2010–11; "a sunroof were now
+  standard" for 2009, and "power sunroof" is in the 2009 base list (CG).
+
+| Row | Years | Gate | Basis |
+|---|---|---|---|
+| A/C compressor | 2005–11 | — | Volvo 36050586 lists 2004–2011 S40, every trim. Standard (CG). |
+| Fuel pump module (match part #) | 2005–11 | — | Volvo 31261425 (noted 2WD, 2004–2010), 8629907 (4WD, 2004–2006), 30792729 (2007–2011), 30724566 and 30792778 (2005–2006). Several numbers, hence "match part #". |
+| AWD rear differential / coupling | 2005–10 | drive: awd/4wd | CG, EPA, WP above. Same band as the Tucson/Juke/Encore rows. |
+| Sunroof | 2005–08, 2010–11 | option | CG option packages. |
+| Sunroof | 2009 | — | Standard in the 2009 base list (CG). |
+
+Left out, no stated basis:
+- First generation (2000–03) pump and compressor: no number in the data.
+  A/C was standard ("air conditioning w/automatic climate control", CG
+  2000–04 base lists), but a window needs a number in this block. 39 cars
+  stay generic-only, with their lamp windows now cut at 2001.
+- The 2004 cars (20): both generations, see above.
+- First-generation sunroof (an option every year per CG, but the window
+  crosses the 2001 makeover with no number).
+- 2003 "egg crate" grille (WP; Volvo grille 30652182 lists 2003–2004):
+  grille only, so not a cut (single-component rule, §23.3).
+- T5 turbo parts, R-Design trim parts (not researched).
+
+Result (same inventory): generic-only 13,880 (4.1%) → 13,675. S40
+264 → 59 (39 first generation, 20 from 2004).
