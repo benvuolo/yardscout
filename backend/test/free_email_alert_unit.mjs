@@ -20,9 +20,10 @@ import { readdirSync, readFileSync } from 'node:fs';
 import {
   handleFreeAlertSignup, handleFreeAlertConfirmPage, handleFreeAlertConfirm, handleFreeAlertStatus,
   handleFreeAlertOff, handleFreeAlertUnsubscribe, dispatchFreeEmailAlerts, pruneFreeAlerts, freeAlertStats,
-  sanitizeFreeAlertWatch, freeAlertUnsubUrl, buildFreeAlertEmail, buildFreeAlertConfirmEmail,
+  sanitizeFreeAlertWatch, freeAlertUnsubUrl, buildFreeAlertEmail, buildFreeAlertConfirmEmail, nearBox,
   FREE_ALERT_RADIUS_MI, FREE_ALERT_MAX_PER_SCAN, FREE_ALERT_CATCHUP_MS,
 } from '../src/free_email_alert.js';
+import { haversineMiles } from '../src/util.js';
 import { FREE_INSTANT_RADIUS_MI } from '../src/devices.js';
 import { handleRecapSignup, handleRecapConfirm, recapSubToken, recapUnsubUrl } from '../src/recap_signup.js';
 import { flushOps, freeAlertLimits, freeAlertBudget, optionalEmailAllowed, CHANNELS, RESEND_RESERVE } from '../src/ops.js';
@@ -586,7 +587,32 @@ check('per scan cap is 5', FREE_ALERT_MAX_PER_SCAN === 5);
   check('HTML is escaped', !/<b>Toy|<Sons>/.test(x.html) && x.html.includes('&lt;b&gt;Toy'));
 }
 
-/* ---- 19. logs never carry a full address ---- */
+/* ---- 19. the nearby box never hides a car the real rule would match ---- */
+{
+  let seed = 20261117;
+  const rnd = () => { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; };
+  let missed = 0, inside = 0, kept = 0, n = 0;
+  for (let i = 0; i < 400; i++) {
+    const w = { make: 'Toyota', lat: 18 + rnd() * 53, lng: -170 + rnd() * 110, radius_mi: [1, 10, 25, 50][i % 4] };
+    const near = nearBox(w);
+    for (let k = 0; k < 60; k++) {
+      // Points scattered out to about twice the radius, in every direction.
+      const v = { lat: w.lat + (rnd() - 0.5) * 4 * (w.radius_mi / 69), lng: w.lng + (rnd() - 0.5) * 4 * (w.radius_mi / (69 * Math.cos(w.lat * Math.PI / 180))) };
+      n++;
+      const real = haversineMiles(w.lat, w.lng, v.lat, v.lng) <= w.radius_mi;
+      if (real) inside++;
+      if (near(v)) kept++;
+      if (real && !near(v)) missed++;
+    }
+  }
+  check('24,000 points from Hawaii to the Arctic: every car within the radius passes the box', missed === 0 && inside > 3000, `${missed} missed of ${inside}`);
+  check('...and the box does its job (it drops most of the rest)', kept < n * 0.6, `${kept} of ${n}`);
+  const aleut = { make: 'Toyota', lat: 52, lng: 179.95, radius_mi: 50 };
+  check('across the 180th meridian too', nearBox(aleut)({ lat: 52, lng: -179.95 }) === true && haversineMiles(52, 179.95, 52, -179.95) < 50);
+  check('a car with no position never passes (as in the real rule)', nearBox(aleut)({ lat: null, lng: null }) === false);
+}
+
+/* ---- 20. logs never carry a full address ---- */
 const leaked = logged.filter((l) => !/^(PASS|FAIL)/.test(l)).filter((l) => /[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\.[A-Za-z]/.test(l) && !/•••@/.test(l));
 check('no full email address in any log line', leaked.length === 0, leaked.slice(0, 3).join(' | '));
 

@@ -95,6 +95,25 @@ function parseWatch(text) {
   } catch { return null; }
 }
 
+/** A cheap test that is true for every car within the watch's radius (and a
+ * few just outside): a latitude/longitude box. A scan can carry thousands of
+ * cars nationwide; the exact rule (alerts.js watchMatches) then runs only on
+ * the few near this watch. It never decides a match by itself. */
+export function nearBox(w) {
+  const dLat = w.radius_mi / 68;                      // a degree of latitude is 68.7 to 69.4 mi
+  const edge = Math.min(89.9, Math.abs(w.lat) + dLat);  // meridians are closest at the poleward edge
+  const dLng = w.radius_mi / (68 * Math.cos((edge * Math.PI) / 180));
+  return (v) => {
+    if (v.lat == null || v.lng == null) return false;
+    if (Math.abs(v.lat - w.lat) > dLat) return false;
+    let d = Math.abs(v.lng - w.lng);
+    if (d > 180) d = 360 - d;
+    return d <= dLng;
+  };
+}
+/** The cars a free alert watch covers: watchMatches, behind the box. */
+const matchesOf = (watch, cars) => { const near = nearBox(watch); return cars.filter((v) => near(v) && watchMatches(watch, v)); };
+
 /** What the page may know about the stored watch (never the centre). */
 const publicWatch = (w) => ({ make: w.make, model: w.model || '', yearMin: w.year_min || null, yearMax: w.year_max || null, radiusMi: w.radius_mi });
 
@@ -114,7 +133,7 @@ const bumpEvent = (env, event, a, day) => env.DB.prepare(
  * devices): the dedupe log starts over with every car that already matches. */
 async function seedSent(env, email, watch, now) {
   const existing = await loadArrivals(env);
-  const ids = existing.filter((v) => watchMatches(watch, v)).map((v) => String(v.id));
+  const ids = matchesOf(watch, existing).map((v) => String(v.id));
   const stmts = [env.DB.prepare('DELETE FROM free_email_alerts_sent WHERE email = ?1').bind(email)];
   for (let i = 0; i < ids.length; i += SENT_ROWS_PER_STMT) {
     const chunk = ids.slice(i, i + SENT_ROWS_PER_STMT);
@@ -197,11 +216,13 @@ export async function handleFreeAlertSignup(req, env, ip) {
   try { body = await req.json(); } catch { return err(400, 'bad_json', 'Body must be JSON.'); }
   const email = String((body && body.email) || '').trim().toLowerCase();
   // A browser that already confirmed this address (signed token) is changing
-  // its car, not signing up: a wider bucket, as for the Monday email's "add".
+  // its car, not signing up: its own, wider bucket (as wide as the Monday
+  // email's "add"). A sign-up shares the Monday email's per-IP sign-up bucket.
   const proved = !!(body && body.sub) && EMAIL_RE.test(email) && (await emailFromSubToken(env, body.sub)) === email;
-  if (!rateLimit('recap:ip:' + ip, proved ? IP_SIGNUPS_PER_HOUR * 4 : IP_SIGNUPS_PER_HOUR, 3600_000)) {
-    return err(429, 'rate_limited', 'Too many sign-ups from this network. Try again later.');
-  }
+  const allowed = proved
+    ? rateLimit('falert:chg:ip:' + ip, IP_SIGNUPS_PER_HOUR * 4, 3600_000)
+    : rateLimit('recap:ip:' + ip, IP_SIGNUPS_PER_HOUR, 3600_000);
+  if (!allowed) return err(429, 'rate_limited', 'Too many sign-ups from this network. Try again later.');
   if (!EMAIL_RE.test(email) || email.length > 254) return err(400, 'bad_email', 'Enter a valid email address.');
   const watch = sanitizeFreeAlertWatch(body.watch);
   if (!watch) return err(400, 'bad_watch', 'This watch needs a make and a zip code.');
@@ -548,7 +569,7 @@ export async function dispatchFreeEmailAlerts(env, arrivals, { now = Date.now() 
     const pool = heldFresh(r)
       ? fresh0.concat(catchUp.filter((v) => !r.watch_set_at || !v.seenAt || v.seenAt >= r.watch_set_at))
       : fresh0;
-    const matched = pool.filter((v) => watchMatches(watch, v));
+    const matched = matchesOf(watch, pool);
     if (matched.length) cands.push({ row: r, watch, matched });
   }
   if (!cands.length) return out;

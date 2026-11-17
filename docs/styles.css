@@ -3733,3 +3733,32 @@ select { white-space: normal; height: auto; }
 .cd-more { margin-top: var(--s5); }
 .more-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 8.5rem), 1fr)); gap: var(--s2); }
 @media (min-width: 560px) { .more-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 11rem), 1fr)); gap: var(--s3); } }
+
+/* ---------- Free emailed alert (web, 2026-11-17): the card under the
+   watchlist in Alerts (app.js FREE EMAILED ALERT). Same family as the feed's
+   alert card: a quiet accent-soft block. The field and its button use the zip
+   field's styles and share a row when it is wide enough, else stack. Every
+   line wraps; nothing is cut off. No Pro prompt lives in it. ---------- */
+.free-alert {
+  display: flex; flex-direction: column; gap: var(--s2);
+  margin-top: var(--s4); padding: var(--s4);
+  border: 1px solid var(--border); border-left: 3px solid var(--accent);
+  border-radius: var(--r-sm); background: var(--accent-soft); color: var(--text);
+}
+.fa-head { display: flex; align-items: center; gap: var(--s2); }
+.fa-head .ico { flex: none; color: var(--accent); }
+.fa-head h4 { margin: 0; font-size: var(--t-md); font-weight: 800; line-height: 1.3; overflow-wrap: anywhere; }
+.fa-line, .fa-car, .fa-fine { margin: 0; line-height: 1.45; color: var(--text); overflow-wrap: anywhere; }
+.fa-line, .fa-car { font-size: var(--t-sm); }
+.fa-fine { font-size: var(--t-xs); }
+.fa-form { display: flex; flex-direction: column; gap: var(--s2); margin: 0; }
+.fa-label { font-size: var(--t-sm); font-weight: 700; color: var(--text); }
+.fa-form select { width: 100%; }
+.fa-form .watch-zip-input { flex: 10 1 12em; }
+.fa-form .watch-zip-row .btn { flex: 1 0 auto; min-height: 48px; padding: 0 var(--s5); }
+.fa-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2) var(--s3); }
+.fa-actions .btn { flex: 0 1 auto; min-height: var(--tap); }
+.fa-actions .linklike { text-align: left; font-size: var(--t-sm); overflow-wrap: anywhere; }
+/* The watch the alert stands for wears the "New" badge style, at its own
+   width, wrapping rather than cut off (as the apps' instant-alert mark). */
+.wl-falert { align-self: flex-start; max-width: 100%; white-space: normal; overflow-wrap: anywhere; margin-top: var(--s1); }

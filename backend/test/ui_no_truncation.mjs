@@ -1243,6 +1243,54 @@ const SCREENS = [
     localStorage.removeItem('ys_instant_watch');
     renderAlerts();
   }); }],
+  // Free emailed alert (web, 2026-11-17): the card under the watchlist in
+  // each of its states, with long names. The API is not reachable here (every
+  // outside host is aborted), so what the browser remembers is what shows.
+  ...[
+    ['alerts-falert-ask', { watches: 3 }, (el) => { if (!el.querySelector('#fa-watch') || !el.querySelector('#fa-email')) throw new Error('ask: no select or no field'); }],
+    ['alerts-falert-ask-one', { watches: 1, msg: 'Enter your email address.' }, (el) => { if (el.querySelector('#fa-watch') || !/For Mercedes-Benz Sprinter 2500/.test(el.innerText)) throw new Error('ask, one watch: the car is not named'); }],
+    ['alerts-falert-ask-cap', { watches: 3, msg: "Our email sender has reached today's limit. Your watch is saved here; try the email again tomorrow." }, (el) => { if (!/today's limit/.test(el.innerText)) throw new Error('ask: no cap message'); }],
+    ['alerts-falert-pending', { watches: 3, state: 'pending' }, (el) => { if (!/Check your inbox/.test(el.innerText) || !el.querySelector('[data-act="fa-restart"]')) throw new Error('pending not rendered'); }],
+    ['alerts-falert-on', { watches: 3, state: 'on' }, (el) => {
+      if (!/Free email alert is on/.test(el.innerText) || !el.querySelector('[data-act="fa-change"]') || !el.querySelector('[data-act="fa-off"]')) throw new Error('on not rendered');
+      if (document.querySelectorAll('#alert-watchlist .wl-falert').length !== 1) throw new Error('the watch is not marked');
+    }],
+    ['alerts-falert-change', { watches: 3, state: 'on', changing: true }, (el) => { if (!el.querySelector('.fa-change #fa-watch') || !el.querySelector('[data-act="fa-cancel"]')) throw new Error('change not rendered'); }],
+    ['alerts-falert-on-gone', { watches: 3, state: 'on', gone: true, msg: 'We could not reach our server. The email alert is still on; try again in a minute.' },
+      (el) => { if (!/no longer in your list here/.test(el.innerText)) throw new Error('the removed-watch sentence is missing'); }],
+    ['alerts-falert-off', { watches: 3, msg: 'Email alert off. We deleted your address and the watch copied for it.' }, (el) => { if (!/Email alert off/.test(el.innerText) || !el.querySelector('#fa-email')) throw new Error('off not rendered'); }],
+  ].map(([name, o, assert]) => [name, async (page) => {
+    await page.evaluate(({ o, assertSrc }) => {
+      window.__faWl = localStorage.getItem('yardscout_watchlist');
+      const c = { lat: 37.35, lng: -121.89 };
+      const w = (make, model, i, r, extra = {}) => ({ make, model, yrMin: null, yrMax: null, matchOnly: false, radiusMi: r, ...c, driveFilter: '', trimFilter: '', addedAt: `2026-11-0${i}T10:00:00.000Z~fa0${i}`, ...extra });
+      const all = [w('Mercedes-Benz', 'Sprinter 2500', 1, 250, { yrMin: 2007, yrMax: 2011 }), w('Toyota', 'Camry', 2, 25), w('Chevrolet', 'Silverado 1500', 3, 100)];
+      saveWatchlist(all.slice(0, o.watches));
+      const label = o.gone ? '1994–2001 Volkswagen EuroVan Camper' : '2007–2011 Mercedes-Benz Sprinter 2500';
+      if (o.state) {
+        localStorage.setItem('ys_falert', JSON.stringify({ email: 'longer.address.than.most@example.com', state: o.state, key: o.gone ? 'none' : all[0].addedAt, label, r: 50,
+          ...(o.state === 'on' ? { sub: 'x.' + 'a'.repeat(64) } : { at: Date.now() }) }));
+      } else localStorage.removeItem('ys_falert');
+      _falertMsg = o.msg || '';
+      _falertChanging = !!o.changing;
+      _falertChecked = Date.now();   // no status request from this screen
+      document.querySelector('.tab[data-tab="alerts"]').click();
+      renderAlerts();
+      if (o.msg && !o.state) { const e = document.getElementById('fa-email'); if (e) e.value = 'longer.address.than.most@example.com'; }
+      const el = document.getElementById('free-alert');
+      if (!el || !el.getClientRects().length) throw new Error('the free alert card is not shown');
+      if (el.querySelector('.pro-box, .pro-badge, .pro-tag')) throw new Error('a Pro prompt inside the free alert card');
+      if (o.msg && el.querySelector('.fa-msg').textContent !== o.msg) throw new Error('the message is not shown');
+      new Function('el', `(${assertSrc})(el)`)(el);
+      el.scrollIntoView(); window.scrollBy(0, -90);
+    }, { o, assertSrc: assert.toString() });
+    await settle(page, 400);
+  }, async (page) => { await page.evaluate(() => {
+    if (window.__faWl != null) localStorage.setItem('yardscout_watchlist', window.__faWl); else localStorage.removeItem('yardscout_watchlist');
+    localStorage.removeItem('ys_falert');
+    _falertMsg = ''; _falertChanging = false;
+    renderAlerts();
+  }); }]),
   // Round 5 (alerts first)
   ['r5-alerts-recap', async (page) => {
     // A free watch made 60 days ago, with the email recap on: matches that

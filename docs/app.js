@@ -49,6 +49,11 @@ const FUNNEL_EVENTS = {
   // The one alert card in the Cars feed (2026-11-16, feedPlaceAlertCard):
   // came into view (once a visit), its button used, dismissed.
   'alert-card-shown': 'alert-card-shown', 'alert-card': 'alert-card', 'alert-card-x': 'alert-card-x',
+  // Free emailed alert on the web (2026-11-17, FREE EMAILED ALERT below):
+  // the ask came into view (once a visit), an address was given for one car.
+  // The confirmation click and the first email sent are counted by the API
+  // (backend/src/free_email_alert.js), not here.
+  'free-alert-shown': 'free-alert-shown', 'free-alert-asked': 'free-alert-asked',
 };
 /* Our own search pages tag their buttons utm_source=page (2026-11-16,
  * backend/site-proxy/src/share.js). That is an internal hop, not a channel:
@@ -4186,6 +4191,7 @@ function applyShareHash() {
 }
 window.addEventListener('hashchange', () => {
   if (handleRecapHash()) return;
+  if (handleFalertHash()) return;
   const alertId = (location.hash.match(/#alert=([^&]+)/) || [])[1];
   if (alertId) { openFromAlert(safeDecode(alertId)); return; }
   const watch = parseWatchHash(location.hash);
@@ -10741,6 +10747,9 @@ function renderAlerts() {
   } else {
     // Free app installs: which watch is the instant one (-1 on web / Pro).
     const instIdx = instantWatchIndex(watchlist);
+    // Free web visitors: which watch the free email alert stands for, if it is on.
+    const fa = falertOffered(IS_NATIVE, isPro()) ? falertState() : null;
+    const faKey = fa && fa.state === 'on' && fa.key ? fa.key : null;
     wlContainer.innerHTML = results.map((r, i) => {
       const e = r.entry;
       const label = [e.make, e.model].filter(Boolean).join(' ') || 'Any Vehicle';
@@ -10783,12 +10792,16 @@ function renderAlerts() {
         : i === instIdx ? `<span class="badge badge-new wl-instant">Instant alert, within ${instantRadiusMi(e)} mi</span>`
         : (i < FREE_WATCH_LIMIT && (e.addedAt || i === 0))
           ? `<button type="button" class="linklike wl-instant-move" onclick="setInstantWatch(${i})">Make this my instant alert</button>` : '';
+      // Free email alert (web): the one watch it stands for wears the mark;
+      // the card under the list changes it.
+      const faLine = faKey && e.addedAt === faKey
+        ? `<span class="badge badge-new wl-falert">Email alert, within ${escapeHtml(String(fa.r || FREE_EMAIL_ALERT_RADIUS_MI))} mi</span>` : '';
       return `<div class="watchlist-item${i === instIdx ? ' wl-is-instant' : ''}">
         <div class="wl-info">
           <span class="wl-name">${escapeHtml(label)}</span>
           <span class="wl-detail">${yrLabel}${radLabel}${vpicLabel}${e.matchOnly ? ' &middot; Parts only' : ''}</span>
           <span class="wl-count ${hitCount > 0 ? 'has-hits' : 'no-hits'}">${hitCount} in yard now</span>
-          ${instLine}
+          ${instLine}${faLine}
           ${missLine}
         </div>
         <div style="display:flex;gap:0.5rem;align-items:center;">
@@ -10798,6 +10811,8 @@ function renderAlerts() {
       </div>`;
     }).join('');
   }
+  // The free email alert card under the list (web, free; FREE EMAILED ALERT).
+  renderFreeAlert();
 
   const totalHits = results.reduce((s, r) => s + r.hits.length, 0);
   const uniqueHits = new Set();
@@ -11379,6 +11394,321 @@ function handleRecapHash() {
   if (!/^[^\s@]+@[^\s@]+$/.test(email) || !/\.[0-9a-f]{64}$/.test(sub)) return true;
   recapSave({ email, state: 'confirmed', sub });
   showWatchToast('', { message: `<strong>You&rsquo;re in.</strong> Your free Monday email to ${escapeHtml(recapMask(email))} is confirmed.` });
+  return true;
+}
+
+/* ===== FREE EMAILED ALERT ON THE WEB (2026-11-17, owner: "do the free emailed alert") =====
+ * The apps give a free install one instant push watch within 50 mi. The
+ * website's counterpart: a free visitor (not Pro, never in the app shells)
+ * picks ONE of their watches and leaves an email address. The API
+ * (backend/src/free_email_alert.js) keeps a COPY of that watch's free
+ * criteria, sends one confirmation email, and after the click emails them
+ * when a matching car is set out within FREE_EMAIL_ALERT_RADIUS_MI of the
+ * watch's centre (or its own radius when that is smaller). One watch per
+ * address; choosing another replaces it. Pro has its own email alerts (every
+ * watch, any distance) and never sees this.
+ *   - the card sits under the watchlist in Alerts: ask / check your inbox /
+ *     on (change car, turn off). No Pro prompt in it.
+ *   - rule 6: stored watches are never edited, moved or reordered. What this
+ *     browser remembers lives in its own key:
+ *       localStorage ys_falert = {email, state: 'pending'|'on', sub?, key, label, r, at?}
+ *     (key = the chosen watch's addedAt, only to mark it in the list)
+ *   - the server is the truth for an alert that is on: the card re-checks it
+ *     (falertCheck), so an unsubscribe done from an email shows up here
+ *   - the copy never says "instant" or "every": scans run about every 4
+ *     hours and free emails share a small daily sending limit
+ *   - counted: 'free-alert-shown' (the ask in view, once a visit) and
+ *     'free-alert-asked' (an address given). The API counts the confirmation
+ *     click and the first email sent. */
+const FREE_EMAIL_ALERT_RADIUS_MI = 50;   // the free instant push's distance (FREE_INSTANT_RADIUS_MI; backend/src/devices.js)
+const FALERT_KEY = 'ys_falert';
+const FALERT_PENDING_MS = 7 * 86400000;  // the confirmation link's lifetime
+let _falertMsg = '';         // one status line in the card; survives a re-render
+let _falertChanging = false; // "Change car" is open
+let _falertChecked = 0;      // when the server was last asked what it holds
+let _falertIO = null;
+/** Who is offered it: the website's free visitors. Pure (unit-tested). */
+function falertOffered(native, pro) { return !native && !pro; }
+function falertState() {
+  try {
+    const v = JSON.parse(localStorage.getItem(FALERT_KEY) || 'null');
+    if (!v || !v.email || (v.state !== 'pending' && v.state !== 'on')) return null;
+    // A link that was never clicked has expired: the ask comes back.
+    if (v.state === 'pending' && !(Date.now() - (v.at || 0) < FALERT_PENDING_MS)) return null;
+    if (v.state === 'on' && !v.sub) return null;
+    return v;
+  } catch (e) { return null; }
+}
+function falertSave(v) {
+  try { if (v) localStorage.setItem(FALERT_KEY, JSON.stringify(v)); else localStorage.removeItem(FALERT_KEY); } catch (e) { /* private mode */ }
+}
+/** Miles the alert covers for a watch: its own radius, at most the free 50. Pure. */
+function falertRadiusMi(e) {
+  return Math.min((e && e.radiusMi) || FREE_EMAIL_ALERT_RADIUS_MI, FREE_EMAIL_ALERT_RADIUS_MI);
+}
+/** "2003–2009 Toyota 4Runner", the same text the API's emails use. Pure. */
+function falertLabel(e) {
+  const yrs = e.yrMin || e.yrMax ? `${e.yrMin || ''}–${e.yrMax || ''} ` : '';
+  return `${yrs}${[e.make, e.model].filter(Boolean).join(' ')}`.trim();
+}
+/** The copy of watch e the API keeps: free criteria only (no trim, drive,
+ * "parts only" or addedAt), the centre rounded to ~1 km, the radius at most
+ * 50 mi. A watch with no centre of its own (made before the radius picker,
+ * or "Anywhere") follows `center`, the visitor's own place. null when it has
+ * no make or cannot be centred. Pure (unit-tested). */
+function falertWatchBody(e, center) {
+  if (!e || !e.make) return null;
+  const c = (e.lat != null && e.lng != null) ? e : center;
+  if (!c || c.lat == null || c.lng == null) return null;
+  return { make: e.make, model: e.model || '', yearMin: e.yrMin || null, yearMax: e.yrMax || null,
+    lat: Math.round(c.lat * 100) / 100, lng: Math.round(c.lng * 100) / 100, radiusMi: falertRadiusMi(e) };
+}
+/** The watches that can carry the alert, in list order: the first
+ * FREE_WATCH_LIMIT (the ones free alerts at all) that can be centred. */
+function falertChoices() {
+  const c = ownCenter();
+  return loadWatchlist().slice(0, FREE_WATCH_LIMIT).map((e, i) => ({ i, e })).filter(x => falertWatchBody(x.e, c));
+}
+/** The addedAt of the watch in this browser that the alert stands for, or null. */
+function falertKeyFor(label, r) {
+  const hit = falertChoices().find(x => falertLabel(x.e) === label && falertRadiusMi(x.e) === r);
+  return (hit && hit.e.addedAt) || null;
+}
+const FALERT_LIMIT_NOTE = 'Free emails share a small daily sending limit, so one can arrive late or be skipped.';
+function falertHeadHtml(title, icon) {
+  return `<div class="fa-head">${icon || ICON.bell}<h4>${title}</h4></div>`;
+}
+function falertSelectHtml(choices, picked) {
+  return `<select id="fa-watch" aria-label="Which car">${choices.map(x =>
+    `<option value="${x.i}"${String(x.i) === String(picked) ? ' selected' : ''}>${escapeHtml(falertLabel(x.e))}</option>`).join('')}</select>`;
+}
+function falertAskHtml(choices, email, picked) {
+  const cur = choices.find(x => String(x.i) === String(picked)) || choices[0];
+  const st = recapState();
+  const car = choices.length > 1
+    ? `<label class="fa-label" for="fa-watch">Which car</label>${falertSelectHtml(choices, cur.i)}`
+    : `<p class="fa-car">For <strong>${escapeHtml(falertLabel(cur.e))}</strong></p>`;
+  return `${falertHeadHtml('Free email alert')}
+    <p class="fa-line">Pick one car and we email you when one is set out within <span class="fa-r">${falertRadiusMi(cur.e)}</span>&nbsp;mi, usually the same day. One car, one address, no account.</p>
+    <form class="fa-form" novalidate>
+      ${car}
+      <div class="watch-zip-row">
+        <input type="email" id="fa-email" class="watch-zip-input mail-email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false"
+          placeholder="Email" aria-label="Email address for the free email alert" maxlength="254" value="${escapeHtml(email != null ? email : (st ? st.email : ''))}">
+        <button type="submit" class="btn btn-primary">Email me</button>
+      </div>
+    </form>
+    <span class="watch-zip-msg fa-msg" role="status">${escapeHtml(_falertMsg)}</span>
+    <p class="fa-fine">${FALERT_LIMIT_NOTE}</p>`;
+}
+function falertPendingHtml(st) {
+  return `${falertHeadHtml('Free email alert')}
+    <p class="fa-line"><strong>Check your inbox.</strong> Tap the link we sent to ${escapeHtml(recapMask(st.email))} to turn on your email alert${st.label ? ` for <strong>${escapeHtml(st.label)}</strong>` : ''}. Nothing is sent until you do.</p>
+    <div class="fa-actions"><button type="button" class="linklike" data-act="fa-restart">Use a different address or car</button></div>
+    <span class="watch-zip-msg fa-msg" role="status">${escapeHtml(_falertMsg)}</span>`;
+}
+function falertOnHtml(st, choices) {
+  const what = st.label ? `<strong>${escapeHtml(st.label)}</strong>, within ${escapeHtml(String(st.r || FREE_EMAIL_ALERT_RADIUS_MI))}&nbsp;mi, to` : 'Emails go to';
+  // The server keeps its own copy: it runs on even if the watch is removed here.
+  const gone = st.label && !choices.some(x => falertLabel(x.e) === st.label)
+    ? ' This car is no longer in your list here; the email alert keeps running until you change it or turn it off.' : '';
+  const others = choices.filter(x => !(falertLabel(x.e) === st.label && falertRadiusMi(x.e) === st.r));
+  const controls = _falertChanging && others.length
+    ? `<form class="fa-form fa-change" novalidate>
+        <label class="fa-label" for="fa-watch">Email me about this car instead</label>${falertSelectHtml(others, others[0].i)}
+        <div class="fa-actions"><button type="submit" class="btn btn-primary">Save</button><button type="button" class="btn" data-act="fa-cancel">Cancel</button></div>
+      </form>`
+    : `<div class="fa-actions">${others.length ? '<button type="button" class="btn" data-act="fa-change">Change car</button>' : ''}<button type="button" class="btn" data-act="fa-off">Turn off</button></div>`;
+  return `${falertHeadHtml('Free email alert is on', ICON.check)}
+    <p class="fa-line">${what} ${escapeHtml(recapMask(st.email))}. At most one email per scan, usually the same day a car is listed.${gone}</p>
+    ${controls}
+    <span class="watch-zip-msg fa-msg" role="status">${escapeHtml(_falertMsg)}</span>
+    <p class="fa-fine">${FALERT_LIMIT_NOTE}</p>`;
+}
+/* The one sentence about it in the Alerts intro, right after the paragraph
+ * that says what the apps do (#alerts-intro-copy, whose own text this never
+ * touches). Added here, not in index.html, and only for a free visitor on
+ * the website; hidden again if they become Pro. */
+const FALERT_INTRO_HTML = 'On this website, free gets <strong>one watch emailed</strong>: pick it under your watchlist '
+  + `and we email you when one is set out within ${FREE_EMAIL_ALERT_RADIUS_MI}&nbsp;mi.`;
+function falertIntroNote(offered) {
+  let note = document.getElementById('alerts-free-email-copy');
+  if (!note && offered) {
+    const intro = document.getElementById('alerts-intro-copy');
+    if (!intro) return;
+    note = document.createElement('p');
+    note.id = 'alerts-free-email-copy';
+    note.style.margin = '0.4rem 0 0';
+    note.innerHTML = FALERT_INTRO_HTML;
+    intro.insertAdjacentElement('afterend', note);
+  }
+  if (note) note.style.display = offered ? '' : 'none';
+}
+/** The card under the watchlist, and the one sentence in the Alerts intro. */
+function renderFreeAlert() {
+  const el = document.getElementById('free-alert');
+  if (!el) return;
+  const offered = falertOffered(IS_NATIVE, isPro());
+  falertIntroNote(offered);
+  const st = offered ? falertState() : null;
+  const choices = offered ? falertChoices() : [];
+  // What is typed or picked survives a re-render (a scan coming in, a watch added).
+  const typed = el.querySelector('#fa-email'), sel = el.querySelector('#fa-watch');
+  const email = typed ? typed.value : null, picked = sel ? sel.value : null;
+  const focused = !!typed && document.activeElement === typed;
+  let html = '';
+  if (st && st.state === 'on') html = falertOnHtml(st, choices);
+  else if (st && st.state === 'pending') html = falertPendingHtml(st);
+  else if (choices.length) html = falertAskHtml(choices, email, picked);
+  else if (offered && _falertMsg) html = `${falertHeadHtml('Free email alert')}<span class="watch-zip-msg fa-msg" role="status">${escapeHtml(_falertMsg)}</span>`;
+  el.innerHTML = html;
+  el.style.display = html ? '' : 'none';
+  if (focused) { const again = el.querySelector('#fa-email'); if (again) { try { again.focus({ preventScroll: true }); } catch (e) { /* older engines */ } } }
+  if (_falertIO) { _falertIO.disconnect(); _falertIO = null; }
+  // The ask, seen: counted once a visit, when it is actually on screen.
+  if (html && !st && choices.length && 'IntersectionObserver' in window) {
+    _falertIO = new IntersectionObserver((entries) => {
+      if (!entries.some(e => e.isIntersecting)) return;
+      _falertIO.disconnect(); _falertIO = null;
+      if (onceThisVisit('ys_falert_seen')) track('free-alert-shown');
+    }, { threshold: 0.5 });
+    _falertIO.observe(el);
+  }
+  if (st && st.state === 'on') falertCheck();
+}
+/* Ask the server what it holds for this address (at most once a minute,
+ * only with the Alerts tab open): turned off from an email's unsubscribe
+ * link, or changed from another browser. */
+function falertCheck() {
+  const st = falertState();
+  if (!st || st.state !== 'on' || Date.now() - _falertChecked < 60000) return;
+  const tabEl = document.getElementById('tab-alerts');
+  if (!tabEl || !tabEl.classList.contains('active')) return;
+  _falertChecked = Date.now();
+  recapPost('/v1/free-alert/status', { sub: st.sub }).then((res) => {
+    const cur = falertState();
+    if (!cur || cur.sub !== st.sub) return;
+    if (res.status === 200 && res.data.state === 'on' && res.data.watch) {
+      const w = res.data.watch;
+      const label = falertLabel({ make: w.make, model: w.model, yrMin: w.yearMin, yrMax: w.yearMax });
+      // The mark stays on the watch that was picked while it still says the same.
+      const keep = !!cur.key && falertChoices().some(x => x.e.addedAt === cur.key && falertLabel(x.e) === label && falertRadiusMi(x.e) === w.radiusMi);
+      const key = keep ? cur.key : falertKeyFor(label, w.radiusMi);
+      if (label === cur.label && w.radiusMi === cur.r && key === (cur.key || null)) return;
+      falertSave({ ...cur, label, r: w.radiusMi, key });
+      renderAlerts();
+    } else if (res.status === 200 && res.data.state === 'off') {
+      falertSave(null);
+      _falertMsg = 'Your email alert is off: that address was unsubscribed. You can ask for it again here.';
+      renderAlerts();
+    } else if (res.status === 401) {
+      falertSave(null);
+      _falertMsg = 'This browser can no longer manage that email alert. To stop it, use the unsubscribe link in any alert email.';
+      renderAlerts();
+    }
+  }).catch(() => { /* offline: what this browser remembers stands */ });
+}
+/* The ask form (an address for one car) and "Change car" (the same request,
+ * carried by this browser's signed token, so no second confirmation email). */
+async function falertSubmit(el, change) {
+  const msg = el.querySelector('.fa-msg'), btn = el.querySelector('.fa-form .btn-primary'), input = el.querySelector('#fa-email');
+  const st = falertState();
+  if (change && !st) return;
+  const email = change ? st.email : String((input && input.value) || '').trim().toLowerCase();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg.textContent = 'Enter your email address.'; if (input) input.focus(); return; }
+  const choices = falertChoices(), sel = el.querySelector('#fa-watch');
+  const pick = sel ? choices.find(x => String(x.i) === sel.value) : choices[0];
+  const watch = pick && falertWatchBody(pick.e, ownCenter());
+  if (!watch) { msg.textContent = 'Pick a car first.'; return; }
+  // A token this browser already holds for the same address (this alert's,
+  // or the Monday email's) proves the inbox: the API then needs no new click.
+  const tok = [st, recapState()].find(s => s && s.sub && s.email === email);
+  btn.disabled = true;
+  msg.textContent = change ? 'Saving…' : 'Sending…';
+  let res = null;
+  try {
+    res = await recapPost('/v1/free-alert/signup', { email, watch, ...(tok ? { sub: tok.sub } : {}),
+      src: ATTRIB ? ATTRIB.src : '', cmp: ATTRIB ? ATTRIB.cmp : '', med: ATTRIB ? ATTRIB.med : '' });
+  } catch (e) { res = { status: 0, data: {} }; }
+  btn.disabled = false;
+  if (!res || res.status !== 200) { msg.textContent = recapFail(res); return; }
+  if (!change) track('free-alert-asked');
+  const base = { email, key: pick.e.addedAt || null, label: falertLabel(pick.e), r: watch.radiusMi };
+  if (res.data.state === 'on' && res.data.sub) falertSave({ ...base, state: 'on', sub: res.data.sub });
+  else falertSave({ ...base, state: 'pending', at: Date.now() });
+  _falertChanging = false;
+  _falertMsg = '';
+  _falertChecked = Date.now();
+  renderAlerts();
+}
+async function falertTurnOff(el) {
+  const st = falertState(), msg = el.querySelector('.fa-msg'), btn = el.querySelector('[data-act="fa-off"]');
+  if (!st || st.state !== 'on') return;
+  if (btn) btn.disabled = true;
+  let res = null;
+  try { res = await recapPost('/v1/free-alert/off', { sub: st.sub }); } catch (e) { res = { status: 0, data: {} }; }
+  if (res.status === 200) {
+    falertSave(null);
+    _falertMsg = 'Email alert off. We deleted your address and the watch copied for it.';
+  } else if (res.status === 401) {
+    falertSave(null);
+    _falertMsg = 'This browser can no longer manage that email alert. To stop it, use the unsubscribe link in any alert email.';
+  } else {
+    if (btn) btn.disabled = false;
+    if (msg) msg.textContent = 'We could not reach our server. The email alert is still on; try again in a minute.';
+    return;
+  }
+  _falertChanging = false;
+  renderAlerts();
+}
+{
+  const card = document.getElementById('free-alert');
+  if (card) {
+    card.addEventListener('submit', (e) => {
+      const form = e.target.closest('.fa-form');
+      if (!form) return;
+      e.preventDefault();
+      falertSubmit(card, form.classList.contains('fa-change'));
+    });
+    card.addEventListener('change', (e) => {
+      // The sentence names the distance of the car that is picked.
+      const sel = e.target.closest('#fa-watch'), r = card.querySelector('.fa-r');
+      if (!sel || !r) return;
+      const pick = falertChoices().find(x => String(x.i) === sel.value);
+      if (pick) r.textContent = String(falertRadiusMi(pick.e));
+    });
+    card.addEventListener('click', (e) => {
+      const act = e.target.closest('[data-act]');
+      if (!act) return;
+      const a = act.dataset.act;
+      if (a === 'fa-restart') { falertSave(null); _falertMsg = ''; renderAlerts(); }
+      if (a === 'fa-change') { _falertChanging = true; _falertMsg = ''; renderFreeAlert(); }
+      if (a === 'fa-cancel') { _falertChanging = false; renderFreeAlert(); }
+      if (a === 'fa-off') falertTurnOff(card);
+    });
+  }
+}
+/* The confirmation email's button lands here: #falert=confirmed&sub=<token>. */
+function handleFalertHash() {
+  const m = /#falert=confirmed&sub=([^&]+)/.exec(location.hash);
+  if (!m || IS_NATIVE) return false;
+  let sub = '';
+  try { sub = decodeURIComponent(m[1]); } catch (e) { sub = ''; }
+  history.replaceState(null, '', location.pathname + location.search);
+  let email = '';
+  try { email = new TextDecoder().decode(Uint8Array.from(atob(sub.split('.')[0].replace(/-/g, '+').replace(/_/g, '/')), (c) => c.charCodeAt(0))); } catch (e) { email = ''; }
+  if (!/^[^\s@]+@[^\s@]+$/.test(email) || !/\.[0-9a-f]{64}$/.test(sub)) return true;
+  // What was asked for in this browser (if it was this one) names the car
+  // until the server's answer arrives (falertCheck).
+  let prev = null;
+  try { prev = JSON.parse(localStorage.getItem(FALERT_KEY) || 'null'); } catch (e) { prev = null; }
+  const mine = prev && prev.email === email ? prev : null;
+  falertSave({ email, state: 'on', sub, key: mine ? (mine.key || null) : null, label: mine ? (mine.label || '') : '',
+    r: mine ? (mine.r || FREE_EMAIL_ALERT_RADIUS_MI) : FREE_EMAIL_ALERT_RADIUS_MI });
+  _falertMsg = '';
+  _falertChecked = 0;
+  jhOpenAlertsTab();
+  showWatchToast('', { message: `<strong>Your free email alert is on.</strong> We&rsquo;ll email ${escapeHtml(recapMask(email))} when one is set out near you.` });
   return true;
 }
 
@@ -12291,6 +12621,7 @@ updateZipBanner();
   if (el) { el.click(); history.replaceState(null, '', location.pathname + location.search); }
   if (el && t === 'alerts') startWatchIntent(w);
   handleRecapHash();
+  handleFalertHash();
 }
 
 // Offline + instant-launch cache. Needs a secure context (HTTPS or localhost) —

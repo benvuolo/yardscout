@@ -6,6 +6,10 @@
 #            sign-up -> confirm -> Monday recap -> unsubscribe, through the
 #            REAL Resend send paths against test/mock-resend.mjs, with a small
 #            RESEND_DAILY_CAP so the cap is reached on purpose.
+#   Phase 3: the free emailed alert for web visitors (free_email_alert_e2e.mjs):
+#            sign-up -> confirm -> scan commit -> one alert email -> the
+#            per-scan and per-day limits -> unsubscribe; same mock, its own
+#            database, RESEND_DAILY_CAP=40 (free alerts: 8 a day).
 # Usage: from backend/:  npm run test:e2e-email
 set -euo pipefail
 
@@ -22,7 +26,7 @@ kill_tree() { local c; for c in $(pgrep -P "$1" 2>/dev/null); do kill_tree "$c";
 cleanup() {
   if [ -n "${DEV_PID:-}" ]; then kill_tree "$DEV_PID"; fi
   if [ -n "${MPID:-}" ]; then kill "$MPID" 2>/dev/null || true; fi
-  rm -f .dev.vars.e2e-email .dev.vars.e2e-recap
+  rm -f .dev.vars.e2e-email .dev.vars.e2e-recap .dev.vars.e2e-falert
 }
 trap cleanup EXIT
 
@@ -91,3 +95,31 @@ echo "── wrangler dev (mock Resend, daily cap 14) is up ($API)"
 
 YS_TEST_BASE="$API" YS_MOCK_BASE="http://127.0.0.1:$MOCKPORT" YS_STATE_DIR="$STATE2" \
   YS_DEV_LOG="$OUT/dev-recap.log" node test/recap_signup_e2e.mjs
+kill_tree "$DEV_PID"; DEV_PID=""
+sleep 1
+
+# ---- phase 3: free emailed alert for web visitors ----
+cat > .dev.vars.e2e-falert <<EOF
+DEV_MODE=1
+UPLOAD_TOKEN=dev-upload-token-change-me
+ADMIN_SECRET=dev-admin-secret-change-me
+EMAIL_UNSUB_SECRET=dev-unsub-secret-change-me
+RESEND_API_KEY=re_test_mock_key_0123456789
+RESEND_API_URL_TEST=http://127.0.0.1:$MOCKPORT/emails
+OPS_DATA_BASE_TEST=http://127.0.0.1:$MOCKPORT/data
+OWNER_EMAIL=owner@example.com
+RESEND_DAILY_CAP=40
+EOF
+STATE3="$OUT/wrangler-state-falert"
+rm -rf "$STATE3"
+echo "── applying migrations (local D1, phase 3)"
+npx wrangler d1 migrations apply yardscout-db --local \
+  --persist-to "$STATE3" >"$OUT/migrate-falert.log" 2>&1
+npx wrangler dev --port "$PORT" --env-file .dev.vars.e2e-falert \
+  --persist-to "$STATE3" >"$OUT/dev-falert.log" 2>&1 &
+DEV_PID=$!
+wait_up "$OUT/dev-falert.log"
+echo "── wrangler dev (mock Resend, daily cap 40) is up ($API)"
+
+YS_TEST_BASE="$API" YS_MOCK_BASE="http://127.0.0.1:$MOCKPORT" YS_STATE_DIR="$STATE3" \
+  YS_DEV_LOG="$OUT/dev-falert.log" node test/free_email_alert_e2e.mjs
