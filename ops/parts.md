@@ -1,4 +1,4 @@
-# Parts workstream — status (updated 2026-11-12, §25 truck generation audit on branch parts/gen-splits-trucks; earlier: §13–24)
+# Parts workstream — status (updated 2026-11-17, §26 next block on branch parts/next-block-1117, not merged; earlier: §13–25)
 
 Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 (`_GAP_MECH`, `_gap_rows`, `_GAP_GENERIC_KEYS`, per-model blocks),
@@ -411,3 +411,33 @@ Confirmed gated rows: 2,081 -> 1,669 (all 412 changes vin -> unconfirmed;
 Known loss: MX-5 "Grand Touring/GT" (two names for one trim) now reads as
 a list (2 cars, "if equipped"). match_vehicle on the 37,407 single-decode
 combinations is identical to main. Live with the next scan after merge.
+
+## §26 next block (2026-11-17, hub brief; branch `parts/next-block-1117`, not merged)
+
+Owner via hub: "I want everything large done. More breadth, data, parts
+compatibility." Basis and numbers per model: PARTS_GAPS §26.
+
+- **Rule used in this block (stricter than §13–22):** a mechanical row needs
+  a catalog part number that lists its window. The numbers were read from
+  the interchange crawl's records on branch `oem-raw` (no catalog site was
+  contacted). A window is only the years a number lists; "match part #" in
+  the name where several numbers share a window; no radiator-fan rows (no
+  source names one).
+- **Done, 8 models (item 2):** Volvo S40 2005–11, Saturn S-Series
+  1991–2002 (SL, plus new SC / SW / S-Series entries), Trax 2015–22, Sonic
+  2012–20, Freestar, Freestyle, Mirage (split into 1997–2002, 2014–2024
+  and G4), Venture.
+- **Coverage, same inventory (336,279 cars, 2026-11-17 scan):**
+  generic-only 13,880 (4.1%) → 11,921 (3.5%); no entry 12,381 (3.7%) →
+  12,210 (3.6%). No car lost a row.
+- **New mechanism:** `PART_NUMBER_BREAKS` (a cited number change cuts one
+  named row; first entry: S40 mirrors 2007).
+- **Not done:** Fiat 500L / 500X and Encore GX (no catalog records for
+  them); first-gen S40 and 1997–2002 Mirage mechanical rows (no numbers);
+  the pump years with no number (Freestyle/Freestar 2006–07, Venture 1997
+  and 2001–03, Sonic 2017–20) and Trax A/C 2022.
+- **For the hub (PARTS_GAPS §26.9):** the fan-row convention; an audit of
+  the §13–22 mechanical windows against `oem-raw`; a crawl seeded on the
+  missing years.
+- No docs/data file ships with this change; it goes live with the next
+  scan after merge.

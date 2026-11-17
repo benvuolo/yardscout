@@ -2960,3 +2960,56 @@ checked for them). CG's 1997 trouble note names "the engine cooling fan",
 but gives no part or years, so no fan row.
 
 Result (same inventory): generic-only 12,145 → 11,921. Venture 224 → 0.
+
+### 26.9 Block totals
+
+Same 336,279-car inventory, code before §26 (origin/main 56f108c5) vs
+after: generic-only **13,880 (4.1%) → 11,921 (3.5%)**, so 1,959 cars moved
+to rows with a part-number basis. No entry **12,381 (3.7%) → 12,210
+(3.6%)**: the 171 Saturn S-Series, SC and SW listings.
+- **New `GENERATION_BREAKS`:** volvo s40 2004/2005; saturn sl 1996/2000;
+  saturn sc 1997/2001; saturn sw 1996/2000; saturn s-series (all four);
+  mirage 2017 (the MY2016 gap).
+- **New `FACELIFT_BREAKS`:** volvo s40 2001/2008; trax 2017; sonic 2017;
+  mirage 2017/2021; mirage g4 2021; venture 2001.
+- **New `PART_NUMBER_BREAKS`:** volvo s40 side mirrors 2007.
+- **New entries:** saturn sc, saturn sw, saturn s-series, mirage
+  2014-2024, mirage g4. The `mirage` entry now ends at 2002.
+- **Per-car comparison** (every distinct year/make/model, seven decodes:
+  none, sedan FWD, coupe, hatch, SUV AWD, pickup 4WD, minivan RWD): 145
+  combinations changed, 3,244 cars, all in the models above. No car lost a
+  row. Outside these models nothing changed.
+  - Changed on existing rows: "fits" windows narrowed (S40, Saturn SL,
+    Trax, Sonic, Venture, Mirage); the Mirage G4 card is now titled
+    "Mitsubishi Mirage G4"; Saturn SL window-regulator, master-switch and
+    power-mirror rows went from confirmed to "if equipped" (§26.2).
+- **Tests:** every `scraper/test_*.py` passes (29 files). New §26 checks in
+  `test_parts_gaps.py`; one §22.10 check now names the three canonical
+  hybrid-gate rows because the gate set also holds the "match part #" A/C
+  name.
+
+Leftovers in these models: S40 2000–04 (59), Mirage 1997–2002 (56).
+
+**Not done (item 2 remainder): Fiat 500L, Fiat 500X, Buick Encore GX.**
+They keep their evergreen-only entries (97 cars). The catalog data has no
+record for any of them (no Fiat records in the Mopar file; no Encore GX in
+the GM file), so by this block's rule there is no row to add.
+
+**For the hub.**
+1. **Radiator-fan rows.** §13–22 added "Radiator Fan Assembly" to FWD
+   transverse models on the layout alone. This block left it out for all
+   eight models because no source names the part with its years. If the
+   earlier convention is acceptable, it is one row per model
+   (`_GAP_FAN`); if not, the fan rows on 64 existing entries have the same gap.
+   Recommendation: add a cooling-fan category to the catalog crawl and
+   settle it from part numbers.
+2. **The catalog records can audit the older blocks.** They showed here
+   that same-generation windows are sometimes too wide (Venture A/C
+   changed at 2001; Saturn pump at 1997 and 1998; S40 mirrors at 2007).
+   The §13–22 mechanical rows were windowed by generation without numbers.
+   Recommendation: a pass that compares each existing pump/compressor row
+   with the numbers on `oem-raw` and narrows where they disagree.
+3. **Years with no number** (Freestyle and Freestar pump 2006–07, Venture
+   pump 1997 and 2001–03, Trax A/C 2022, Sonic pump 2017–20, first-gen S40,
+   1997–2002 Mirage) would close with a crawl seeded on those years. That
+   is the interchange workstream's crawl; nothing was fetched here.
