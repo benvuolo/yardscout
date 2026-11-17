@@ -6408,6 +6408,33 @@ _gap_extend("freestyle", parts=[
     *_per_gen([(2005, 2005)], [_GAP_PUMP]),
 ])
 
+# §26.7 Mitsubishi Mirage (250 cars generic-only, G4 included). The breadth
+# entry ran 1997-2024 as one window, across the 2003-13 years with no US
+# Mirage and across two unrelated cars. Now: "mirage" is the 1997-2002 sedan
+# and coupe (no new rows: no catalog number at hand); "mirage 2014-2024" is
+# the hatchback (US MY2014-15 and 2017-24, no MY2016: EPA); "mirage g4" is
+# the 2017-24 sedan, whose tail lamps are its own (Mitsubishi 8330B069/70
+# "Sedan"). Fuel pump 17030W000P lists 2014-15 and 2017-24 (G4 2017-24).
+# A/C compressor 7813A524 lists 2014-15 and 2017-19 (G4 2017-19); automatic
+# climate control standard on the 2014 DE (CG); 2015 and later not confirmed
+# by a source, so those pieces are option-flagged.
+UNOBTANIUM_DB["mirage"]["year_range"] = (1997, 2002)
+UNOBTANIUM_DB["mirage"]["match"] = ["mirage"]
+UNOBTANIUM_DB["mirage 2014-2024"] = {"display": "Mitsubishi Mirage", "make": "Mitsubishi", "match": ["mirage"], "year_range": (2014, 2024),
+                                     "top_parts": [dict(r) for r in _GENERIC_LAMP_ROWS]}
+UNOBTANIUM_DB["mirage g4"] = {"display": "Mitsubishi Mirage G4", "make": "Mitsubishi", "match": ["mirage g4"], "year_range": (2017, 2024),
+                              "top_parts": [dict(r) for r in _GENERIC_LAMP_ROWS]}
+_EVERGREEN_TARGET_KEYS = (*_EVERGREEN_TARGET_KEYS, "mirage 2014-2024", "mirage g4")
+_gap_extend("mirage 2014-2024", parts=[
+    *_per_gen([(2014, 2015), (2017, 2024)], [_GAP_PUMP]),
+    *_per_gen([(2014, 2014)], [_GAP_AC]),
+    *_per_gen([(2015, 2015), (2017, 2019)], [{**_GAP_AC, "option": True}]),
+])
+_gap_extend("mirage g4", parts=[
+    *_per_gen([(2017, 2024)], [_GAP_PUMP]),
+    *_per_gen([(2017, 2019)], [{**_GAP_AC, "option": True}]),
+])
+
 # ---- end of §26 block
 
 _apply_consensus_evergreens()
@@ -6697,6 +6724,7 @@ GENERATION_BREAKS = {
     "saturn sc": [1997, 2001],             # coupe 1991-96, 1997-2000, 2001-02 (§26.2)
     "saturn sw": [1996, 2000],             # wagon 1993-95, 1996-99, 2000-01 (§26.2)
     "saturn s-series": [1996, 1997, 2000, 2001],  # body unknown: every sedan and coupe break (§26.2)
+    "mirage": [2017],                      # hatchback US MY2014-15 and 2017-24, no MY2016; every row is cut at the gap (§26.7)
     "escort": [1997],                      # 2nd gen 1991-96, 3rd gen 1997-2003 (PARTS_GAPS §22.8)
     "park avenue": [1997],                 # 1st gen 1991-96, 2nd gen 1997-2005 (PARTS_GAPS §22.4)
     "stratus": [2001],                     # JA sedan 1995-2000, JR sedan 2001-06 (+ Mitsubishi-based coupe 2001-05) (PARTS_GAPS §21.6)
@@ -6936,6 +6964,8 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "volvo s40": [2001, 2008],
     "trax": [2017],
     "sonic": [2017],
+    "mirage": [2017, 2021],          # 1999 rear-end-only revision left out
+    "mirage g4": [2021],
 }
 # §22.10: gas-only rows hidden on hybrid listings. Hybrids of the families on
 # the lots generally start and charge through the hybrid system and use a
@@ -8174,6 +8204,7 @@ _GEN_END_CLAMPS = {
     "ranger": ((1983, 2023), (2012, 2018)),
     "tacoma 2016-2024": ((2016, 2023), None),   # key kept: ebay/test keys use it
     "cherokee 2014-2024": ((2014, 2023), None),
+    "mirage 2014-2024": ((2014, 2024), (2016, 2016)),  # §26.7: no US MY2016 (EPA)
 }
 
 

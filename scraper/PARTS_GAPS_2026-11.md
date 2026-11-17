@@ -2865,3 +2865,59 @@ Left out, no stated basis: fuel pump 2006–07; the CVT (transmission);
 third-row seat.
 
 Result (same inventory): generic-only 12,598 → 12,339. Freestyle 259 → 0.
+
+### 26.7 Mitsubishi Mirage 1997–2002, 2014–2024, and the Mirage G4
+
+Basis: WP Mitsubishi_Mirage; consumerguide.com/used/1997-02-mitsubishi-mirage
+and /used/2014-mitsubishi-mirage; EPA menus 1996–2004 and 2012–2025;
+Mitsubishi catalog records (oem-raw
+`raw/www.mitsubishipartsgiant.com.jsonl`, retrieved 2026-11-05 and
+2026-11-10).
+
+**Fix: the entry ran 1997–2024 as one window.** Every row said "fits
+1997–2024", across two unrelated cars and across years with no US Mirage.
+- EPA lists Mirage 1996–2002, nothing 2003–2013, Mirage 2014–2015, nothing
+  for 2016, then Mirage and Mirage G4 2017–2024. "There was no 2016 model
+  year in the North American market" (WP); "The last time Mitsubishi sold
+  a car with the Mirage name in the U.S. was in 2002" (CG).
+- Now three entries: `mirage` (1997–2002 sedan and coupe), `mirage
+  2014-2024` (the hatchback) and `mirage g4` (the sedan, 2017–2024: "For
+  the US market, the Mirage G4 sedan was available from spring 2016 as a
+  2017 model", WP). `GENERATION_BREAKS["mirage"] = [2017]` cuts every
+  hatchback row at the MY2016 gap, and the §25 clamp removes 2016.
+- A Mirage listing dated 2003–2013 or 2016 now gets no card (none on the
+  lots today).
+- The G4's tail lamps are its own (Mitsubishi 8330B069/70, noted "Sedan",
+  2017–2020; hatchback 8330A783/4, 2014–2015), which is why it has its own
+  entry and lamp rows.
+
+**Facelifts added to `FACELIFT_BREAKS`:**
+- 2017 (hatchback): "a new front end design, projector headlights with LED
+  daytime running lights, and LED tail lights" (WP). Already a cut through
+  the 2016 gap.
+- 2021 (hatchback and G4): "The second facelift of the Mirage was launched
+  in November 2019, with new front end styling" (WP, global launch date).
+  The US year comes from the catalog: G4 bumper cover 6400H293 and the
+  headlamps 8301D117/8 are noted "2017-20".
+
+| Row | Years | Gate | Basis |
+|---|---|---|---|
+| Fuel pump module (hatchback) | 2014–15, 2017–24 | — | Mitsubishi 17030W000P lists "2017-2024, 2014-2015 Mitsubishi Mirage". |
+| Fuel pump module (G4) | 2017–24 | — | Same number lists the G4 2017–2024. |
+| A/C compressor (hatchback) | 2014 | — | Mitsubishi 7813A524 (7813A531 is the same unit without clutch) lists 2014–2015 and 2017–2019. "automatic climate control" on the base DE (CG 2014). |
+| A/C compressor (hatchback) | 2015, 2017–19 | option | Same number; CG covers 2014 only, so standard fitment is not confirmed. |
+| A/C compressor (G4) | 2017–19 | option | Same number lists the G4 2017–2019. |
+| Headlights, mirrors, tail lights (G4 and 2014+ hatchback entries) | by entry | — | The breadth-pass lamp rows (§11 bands) carried onto the new entries, as before the split. |
+
+Left out, no stated basis:
+- 1997–2002 Mirage (56 cars): no number in the data for pump or
+  compressor. A/C was optional on base cars (CG option tables).
+- 1999: "Minor revisions to the rear end" (CG), "a minor facelift" (WP):
+  rear end only, so not a cut (single-component rule).
+- A/C compressor 2020–24 (no number lists those years); sunroof (none
+  offered in the sources read); HID headlamps (8301C965/6, an option).
+- Note: the halogen headlamp 8301C693/4 lists 2014–15 and 2017–20, so the
+  2017 cut is narrower than that number needs. The gap forces it anyway.
+
+Result (same inventory): generic-only 12,339 → 12,145. Mirage and G4
+250 → 56 (all 1997–2002).

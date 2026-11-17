@@ -216,7 +216,7 @@ check("§14: only gap-block entries are registered (no id reuse leaks)",
        # §22
        "milan", "encore", "captiva sport", "park avenue", "scion xb 2008-2015", "sonata", "infiniti qx60", "escort", "ford zx2", "encore gx",
        # §26
-       "volvo s40", "saturn sl", "saturn sc", "saturn sw", "saturn s-series", "trax", "sonic", "freestar", "freestyle"},
+       "volvo s40", "saturn sl", "saturn sc", "saturn sw", "saturn s-series", "trax", "sonic", "freestar", "freestyle", "mirage 2014-2024", "mirage g4"},
       str(sorted({r[0] for r in js._GAP_BLOCK_ROWS})))
 c04, c15 = parts(2004, "Toyota", "Camry", FWD), parts(2015, "Toyota", "Camry", FWD)
 check("§14: Camry 2004 pump fits 2002–2006, 2015 fits 2012–2017",
@@ -872,6 +872,22 @@ check("§26.6 Freestyle: A/C 2005-07 (Ford 5F9Z-19V703-DA); pump 2005 only (the 
       and y07["AWD Rear Differential / Transfer Unit"]["trim_status"] == "vin" and "AWD Rear Differential / Transfer Unit" not in y07f
       and y07[_SUN]["trim_status"] == "unconfirmed" and _FAN not in y05)
 
+m00, m14, m15, m18, m22, g18, g22 = (parts(2000, "Mitsubishi", "Mirage"), parts(2014, "Mitsubishi", "Mirage", HATCH), parts(2015, "Mitsubishi", "Mirage", HATCH),
+                                     parts(2018, "Mitsubishi", "Mirage", HATCH), parts(2022, "Mitsubishi", "Mirage", HATCH),
+                                     parts(2018, "Mitsubishi", "Mirage G4", SEDAN), parts(2022, "Mitsubishi", "Mirage G4", SEDAN))
+check("§26.7 Mirage: 1997-2002 car keeps its own window and gets no new rows; no card for the no-sale years 2003-13 and 2016",
+      all(q["fits"] == "1997–2002" for q in m00.values()) and not ({_PUMP, _AC} & set(m00))
+      and not parts(2008, "Mitsubishi", "Mirage") and not parts(2016, "Mitsubishi", "Mirage") and not parts(2016, "Mitsubishi", "Mirage G4"))
+check("§26.7 Mirage hatch: pump 2014-15 / 2017-24, A/C plain 2014, 'if equipped' 2015 and 2017-19, none after 2019; no row crosses the MY2016 gap; lamps cut at 2017 and 2021",
+      m15[_PUMP]["fits"] == "2014–2015" and m18[_PUMP]["fits"] == "2017–2024" and "trim_status" not in m14[_AC]
+      and m15[_AC]["trim_status"] == "unconfirmed" and m18[_AC]["fits"] == "2017–2019" and _AC not in m22
+      and all(int(q["fits"][-4:]) <= 2015 for q in m15.values()) and all(int(q["fits"][:4]) >= 2017 for q in m18.values())
+      and m18["Headlights (clear, non-hazed)"]["fits"] == "2017–2020" and m22["Tail Lights (pair, uncracked)"]["fits"] == "2021–2024" and _FAN not in m18)
+check("§26.7 Mirage G4 (sedan) has its own entry from 2017: own lamp windows, pump 2017-24, A/C 'if equipped' 2017-19",
+      _cards(2018, "Mitsubishi", "Mirage G4") == ["Mitsubishi Mirage G4"] and _cards(2018, "Mitsubishi", "Mirage") == ["Mitsubishi Mirage"]
+      and g18[_PUMP]["fits"] == "2017–2024" and g18[_AC]["trim_status"] == "unconfirmed" and _AC not in g22
+      and g18["Tail Lights (pair, uncracked)"]["fits"] == "2017–2020" and g22["Tail Lights (pair, uncracked)"]["fits"] == "2021–2024")
+
 _pnb = [(k, p["name"], a, b) for k, e in js.UNOBTANIUM_DB.items() for p in e["top_parts"]
         for (bk, tok), ys in js.PART_NUMBER_BREAKS.items() if _re.sub(r" \d{4}-\d{4}$", "", k) == bk and tok in p["name"].lower()
         for a, b in [(max(e["year_range"][0], p.get("yr_min", e["year_range"][0])), min(e["year_range"][1], p.get("yr_max", e["year_range"][1])))]
@@ -879,11 +895,11 @@ _pnb = [(k, p["name"], a, b) for k, e in js.UNOBTANIUM_DB.items() for p in e["to
 check("§26 no row crosses a PART_NUMBER_BREAKS year; every key names a real entry",
       not _pnb and all(any(_re.sub(r" \d{4}-\d{4}$", "", k) == bk for k in js.UNOBTANIUM_DB) for bk, _t in js.PART_NUMBER_BREAKS), str(_pnb[:5]))
 check("§26 no radiator-fan row was added in this block",
-      not any(p["name"] == _FAN for k in ("volvo s40", "saturn sl", "saturn sc", "saturn sw", "saturn s-series", "trax", "sonic", "freestar", "freestyle",) for p in js.UNOBTANIUM_DB[k]["top_parts"]))
+      not any(p["name"] == _FAN for k in ("volvo s40", "saturn sl", "saturn sc", "saturn sw", "saturn s-series", "trax", "sonic", "freestar", "freestyle", "mirage 2014-2024", "mirage g4",) for p in js.UNOBTANIUM_DB[k]["top_parts"]))
 
 # 3. band sanity + lint
 bad = []
-for key in ("volvo s40", "saturn sl", "saturn sc", "saturn sw", "saturn s-series", "trax", "sonic", "freestar", "freestyle", "altima", "accent", "lesabre", "lacrosse", "soul", "milan", "encore", "captiva sport", "park avenue", "scion xb 2008-2015", "sonata", "infiniti qx60", "escort", "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
+for key in ("volvo s40", "saturn sl", "saturn sc", "saturn sw", "saturn s-series", "trax", "sonic", "freestar", "freestyle", "mirage 2014-2024", "mirage g4", "altima", "accent", "lesabre", "lacrosse", "soul", "milan", "encore", "captiva sport", "park avenue", "scion xb 2008-2015", "sonata", "infiniti qx60", "escort", "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
     for q in js.UNOBTANIUM_DB[key]["top_parts"]:
         if not (0 < q["cost"] < q["low"] < q["high"] <= 6 * q["low"]):
             bad.append((key, q["name"], q["cost"], q["low"], q["high"]))
