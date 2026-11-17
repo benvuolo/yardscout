@@ -11,6 +11,8 @@
  *   POST /v1/coverage/request                 (Parts tab "ask us to add it")
  *   POST /v1/recap/signup | /v1/recap/add     (free Monday email, web; recap_signup.js)
  *   GET|POST /v1/recap/confirm, /v1/recap/unsubscribe
+ *   POST /v1/free-alert/signup | status | off (free emailed alert, web; free_email_alert.js)
+ *   GET|POST /v1/free-alert/confirm, /v1/free-alert/unsubscribe
  *   POST /v1/auth/request-link
  *   GET  /v1/auth/callback?token=
  *   GET  /v1/me                              (session required)
@@ -29,6 +31,7 @@
  *   POST /v1/admin/ent/grant                      x-ent-admin (owner comps → ENTITLEMENTS KV)
  *   POST /v1/admin/coverage/digest/run            x-admin-secret (manual owner-digest trigger)
  *   POST /v1/admin/saved-alerts/dispatch          x-admin-secret (manual saved-car alert dispatch)
+ *   POST /v1/admin/free-alerts/dispatch           x-admin-secret (manual free emailed alert dispatch)
  *   POST /v1/admin/ops/check/run                  x-admin-secret (hourly owner-alert check now; {dryRun})
  *   POST /v1/admin/ops/daily/run                  x-admin-secret (daily health email now; {dryRun})
  *   POST /v1/admin/ops/canary                     x-admin-secret (owner phone as alert canary; {prefix})
@@ -71,6 +74,10 @@ import {
   handleRecapSignup, handleRecapAdd, handleRecapConfirmPage, handleRecapConfirm,
   handleRecapUnsubscribe, pruneRecap, recapRetryDue,
 } from './recap_signup.js';
+import {
+  handleFreeAlertSignup, handleFreeAlertConfirmPage, handleFreeAlertConfirm, handleFreeAlertStatus,
+  handleFreeAlertOff, handleFreeAlertUnsubscribe, handleFreeAlertDispatchRun, pruneFreeAlerts,
+} from './free_email_alert.js';
 import { runScanWatchdog } from './scan_watchdog.js';
 import { runOpsCheck, runDailyReport, handleOpsCheckRun, handleOpsDailyRun, handleOpsCanarySet, handleScorecard } from './ops_monitor.js';
 import { flushOps, opsFlusher } from './ops.js';
@@ -100,6 +107,9 @@ export default {
           // recap held back at the Resend cap is retried on a later day.
           .then(() => pruneRecap(env))
           .catch((e) => console.log('recap prune failed:', e && (e.stack || e.message)))
+          // Free emailed alert: the same 7-day rule for unconfirmed addresses.
+          .then(() => pruneFreeAlerts(env))
+          .catch((e) => console.log('free alert prune failed:', e && (e.stack || e.message)))
           .then(async () => {
             if (!(await recapRetryDue(env))) return;
             const r = await sendWeeklyDigests(env);
@@ -244,6 +254,16 @@ async function route(req, env, url, ctx) {
     return handleRecapUnsubscribe(req, env, url);
   }
 
+  /* ----- free emailed alert for web visitors (free_email_alert.js) ----- */
+  if (path === '/v1/free-alert/signup' && method === 'POST') return handleFreeAlertSignup(req, env, ip);
+  if (path === '/v1/free-alert/confirm' && method === 'GET') return handleFreeAlertConfirmPage(req, env, url);
+  if (path === '/v1/free-alert/confirm' && method === 'POST') return handleFreeAlertConfirm(req, env);
+  if (path === '/v1/free-alert/status' && method === 'POST') return handleFreeAlertStatus(req, env);
+  if (path === '/v1/free-alert/off' && method === 'POST') return handleFreeAlertOff(req, env);
+  if (path === '/v1/free-alert/unsubscribe' && (method === 'GET' || method === 'POST')) {
+    return handleFreeAlertUnsubscribe(req, env, url);
+  }
+
   /* ----- alerts: watches + web push (session-scoped) ----- */
   if (path === '/v1/watches' && method === 'GET') return handleWatchesList(req, env);
   if (path === '/v1/watches' && method === 'POST') return handleWatchCreate(req, env);
@@ -301,7 +321,7 @@ async function route(req, env, url, ctx) {
       || path === '/v1/admin/device-alerts/dispatch' || path === '/v1/admin/device-digest/run'
       || path === '/v1/admin/checkins/run'
       || path === '/v1/admin/coverage' || path === '/v1/admin/coverage/digest/run'
-      || path === '/v1/admin/saved-alerts/dispatch'
+      || path === '/v1/admin/saved-alerts/dispatch' || path === '/v1/admin/free-alerts/dispatch'
       || path === '/v1/admin/ops/check/run' || path === '/v1/admin/ops/daily/run' || path === '/v1/admin/ops/canary'
       || path === '/v1/admin/test/ent') {
     const denied = await requireAdmin(req, env);
@@ -329,6 +349,10 @@ async function route(req, env, url, ctx) {
     // arrivals) — used by e2e and for ops smoke tests.
     if (method === 'POST' && path === '/v1/admin/email-alerts/dispatch') {
       return handleEmailAlertsDispatchRun(req, env);
+    }
+    // Manual free emailed alert dispatch (exact production path) — same contract.
+    if (method === 'POST' && path === '/v1/admin/free-alerts/dispatch') {
+      return handleFreeAlertDispatchRun(req, env);
     }
     // Manual native-device dispatch + weekly push (APNs/FCM) — same contract.
     if (method === 'POST' && path === '/v1/admin/device-alerts/dispatch') {

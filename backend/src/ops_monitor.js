@@ -30,6 +30,7 @@
 import { json, err } from './util.js';
 import { CHANNELS, utcDay, resendFetch, pruneOpsErrors, resendDailyCap, FREE_INSTANT_METRIC } from './ops.js';
 import { recapStats } from './recap_signup.js';
+import { freeAlertStats } from './free_email_alert.js';
 import { watchMatches } from './alerts.js';
 import { MARKS_SQL } from './attribution.js';
 import { buildScorecard, subsFromLoaded, storeSubsSnapshot, scorecardTextLines, scorecardHtml, FUNNEL_V2_SINCE_SQL, FUNNEL_V4_SINCE_SQL,
@@ -485,7 +486,13 @@ const FUNNEL_ROWS = [
   ['first-view-guess', 'Saw cars from a guess'], ['zip-entered', 'Entered a zip'], ['guess-replaced', 'Guess then corrected'],
   ['part-first-search', 'Part searches'],
   ['watch-created', 'Watches created'], ['email-asked', 'Monday email asked'], ['email-submitted', 'Monday email given'],
-  ['email-confirmed', 'Monday email confirmed'], ['push-enabled', 'Alerts turned on'], ['store-click', 'Store link taps'],
+  ['email-confirmed', 'Monday email confirmed'],
+  // Free emailed alert (web, 2026-11-17, free_email_alert.js): the ask seen,
+  // an address given for one car, the confirmation click, the first alert
+  // email an address was sent. The last two are counted by the server.
+  ['free-alert-shown', 'Free alert offered'], ['free-alert-asked', 'Free alert asked'],
+  ['free-alert-confirmed', 'Free alert confirmed'], ['free-alert-first-email', 'Free alert 1st email'],
+  ['push-enabled', 'Alerts turned on'], ['store-click', 'Store link taps'],
   ['paywall', 'Paywall opens'], ['checkout-start', 'Checkout taps'],
   // How the taps ended (v4 builds only, scorecard.js computeCheckoutOutcomes).
   ['co:cancelled', 'Checkout cancelled'], ['co:pending', 'Checkout pending'], ['co:incomplete', 'Checkout incomplete'],
@@ -502,6 +509,9 @@ export const FUNNEL_PLATFORMS = [['web', 'Web'], ['ios', 'iOS'], ['android', 'An
 // The Monday email ask is web only (the apps have push).
 const FUNNEL_NA = { 'store-click': ['ios', 'android'], 'review-prompt': ['web'],
   'email-asked': ['ios', 'android'], 'email-submitted': ['ios', 'android'], 'email-confirmed': ['ios', 'android'],
+  // The free emailed alert is web only too (the apps have the free instant push).
+  'free-alert-shown': ['ios', 'android'], 'free-alert-asked': ['ios', 'android'],
+  'free-alert-confirmed': ['ios', 'android'], 'free-alert-first-email': ['ios', 'android'],
   // The web has no store sheet (no pending / incomplete / product load); the
   // apps have no Stripe return to confirm.
   'co:pending': ['web'], 'co:incomplete': ['web'], 'co:product-failed': ['web'], 'co:unconfirmed': ['ios', 'android'] };
@@ -572,6 +582,14 @@ export function recapLineText(rc) {
     + ` (${fmtInt(rc.watches)} watch${rc.watches === 1 ? '' : 'es'}) · ${fmtInt(rc.pending)} waiting for the confirmation click`;
 }
 
+/** One line on the free emailed alert for web visitors (free_email_alert.js). */
+export function freeAlertLineText(fa) {
+  if (!fa) return 'Free email alert (web): not loaded';
+  if (fa.error) return `Free email alert (web): could not load (${fa.error})`;
+  return `Free email alert (web): ${fmtInt(fa.on)} address${fa.on === 1 ? '' : 'es'} with an alert on`
+    + ` · ${fmtInt(fa.pending)} waiting for the confirmation click · ${fmtInt(fa.mailed)} emailed at least once`;
+}
+
 function usageLines(u, audience) {
   if (!u || u.error) return [`USAGE: could not load (${(u && u.error) || 'unknown'})`];
   const L = ['USAGE'];
@@ -586,6 +604,7 @@ function usageLines(u, audience) {
   L.push(`  Web accounts: ${fmtInt(u.web.accounts)} (${fmtInt(u.web.pro)} pro, ${fmtInt(u.web.active30d)} signed in 30 d)`
     + ` · web watches ${fmtInt(u.web.watches)} · email-alert watchers ${fmtInt(audience && audience.emailWatchers)}`);
   L.push(`  ${recapLineText(audience && audience.recap)}`);
+  L.push(`  ${freeAlertLineText(audience && audience.freeAlert)}`);
   const num = (v) => String(v == null ? '–' : fmtInt(v)).padStart(7);
   L.push(`  Funnel by platform (yesterday / 7 d)`);
   L.push(`    ${''.padEnd(22)}${FUNNEL_PLATFORMS.map(([, name]) => name.padStart(11).padEnd(14)).join('')}`.trimEnd());
@@ -666,6 +685,10 @@ function composeDaily(r) {
   if (r.resend.heldConfirm || r.resend.heldRecap) {
     L.push(`  HELD BACK at the Resend daily cap (24 h): ${r.resend.heldConfirm} sign-up confirmation${r.resend.heldConfirm === 1 ? '' : 's'} (visitor told to try tomorrow),`
       + ` ${r.resend.heldRecap} Monday recap${r.resend.heldRecap === 1 ? '' : 's'} (retried by the hourly job on a later day)  <-`);
+  }
+  if (r.resend.heldFreeAlert) {
+    L.push(`  HELD BACK for the free-alert email budget (24 h): ${r.resend.heldFreeAlert} free alert email${r.resend.heldFreeAlert === 1 ? '' : 's'}`
+      + ' (lowest class of mail; retried on later scans for 48 h, then not sent)  <-');
   }
   if (r.recentErrors.length) {
     // Identical errors collapse to one line with a count.
@@ -917,6 +940,9 @@ export function composeDailyHtml(r) {
   if (r.resend.heldConfirm || r.resend.heldRecap) {
     sends += `<div style="font-size:13px;color:${C.bad};font-weight:600;margin-top:4px;">Held back at the daily cap (24 h): ${fmtInt(r.resend.heldConfirm)} sign-up confirmations (visitor told to try tomorrow), ${fmtInt(r.resend.heldRecap)} Monday recaps (retried on a later day)</div>`;
   }
+  if (r.resend.heldFreeAlert) {
+    sends += `<div style="font-size:13px;color:${C.bad};font-weight:600;margin-top:4px;">Held back for the free-alert email budget (24 h): ${fmtInt(r.resend.heldFreeAlert)} free alert emails (lowest class of mail; retried on later scans for 48 h, then not sent)</div>`;
+  }
   if (r.recentErrors.length) {
     sends += hList(r.recentErrors.slice(0, 3).map((e) => `<span style="color:${C.bad};">${esc(fmtTime(e.at).slice(11))} ${esc(e.channel)} HTTP ${esc(e.status || 'net')}</span> — ${esc(String(e.detail || '').slice(0, 140))}`));
   }
@@ -944,7 +970,8 @@ export function composeDailyHtml(r) {
       &nbsp;|&nbsp; new: ${fmtInt(dv.newYesterday)} yesterday, ${fmtInt(dv.new7d)} in 7 d &nbsp;|&nbsp; used in last 7 d: ${fmtInt(dv.active7d)}<br>
       &ldquo;Apps with alerts on&rdquo; counts app installs that turned notifications on. An install that never does is not counted here or anywhere else on the server.<br>
       Web: ${fmtInt(u.web.accounts)} account${u.web.accounts === 1 ? '' : 's'} (${fmtInt(u.web.pro)} Pro) · ${fmtInt(u.web.watches)} web watches · ${fmtInt(r.audience && r.audience.emailWatchers)} email-alert watchers<br>
-      ${esc(recapLineText(r.audience && r.audience.recap))}</div>`;
+      ${esc(recapLineText(r.audience && r.audience.recap))}<br>
+      ${esc(freeAlertLineText(r.audience && r.audience.freeAlert))}</div>`;
     S.push(hSection('Users', usage));
 
     // Funnel by platform: one "yesterday / 7 d" cell per platform (six number
@@ -1156,6 +1183,8 @@ export async function buildDailyReport(env, { now = Date.now(), storeSnapshot = 
   const watchers = await env.DB.prepare('SELECT COUNT(*) AS n FROM email_watchers WHERE enabled = 1').first();
   let recap;
   try { recap = await recapStats(env); } catch (e) { recap = { error: String((e && e.message) || e).slice(0, 200) }; }
+  let freeAlert;
+  try { freeAlert = await freeAlertStats(env); } catch (e) { freeAlert = { error: String((e && e.message) || e).slice(0, 200) }; }
   let usage;
   try { usage = await loadUsage(env, now); } catch (e) { usage = { error: String((e && e.message) || e).slice(0, 200) }; }
   let watchCheck;
@@ -1217,6 +1246,8 @@ export async function buildDailyReport(env, { now = Date.now(), storeSnapshot = 
       // Optional mail held back at the cap in the last 24 h (ops.js countHeld).
       heldConfirm: (ev.stats.channels['email:confirm'] || { last24h: {} }).last24h.held || 0,
       heldRecap: (ev.stats.channels['email:digest'] || { last24h: {} }).last24h.held || 0,
+      // Free alert emails the budget could not carry (free_email_alert.js).
+      heldFreeAlert: (ev.stats.channels['email:free-alert'] || { last24h: {} }).last24h.held || 0,
     },
     recentErrors: ev.stats.recentErrors.slice(0, 5),
     watchdog: ev.facts.watchdog,
@@ -1226,6 +1257,7 @@ export async function buildDailyReport(env, { now = Date.now(), storeSnapshot = 
       freeDevices: tiers.filter((t) => t.tier !== 'pro').reduce((k, t) => k + t.n, 0),
       emailWatchers: (watchers && watchers.n) || 0,
       recap,
+      freeAlert,
     },
     usage,
     watchCheck,

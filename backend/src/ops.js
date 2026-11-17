@@ -17,6 +17,9 @@ export const CHANNELS = [
   'apns', 'fcm', 'webpush',
   'email:auth', 'email:digest', 'email:pro-alert', 'email:saved', 'email:coverage', 'email:ops',
   'email:confirm',
+  // Free emailed alert for web visitors (free_email_alert.js): the lowest
+  // class of mail, see freeAlertBudget below.
+  'email:free-alert',
 ];
 
 /* Not a channel: accepted free instant pushes (devices.js), counted on top of
@@ -130,6 +133,61 @@ export async function emailsSentToday(env, now = Date.now()) {
 /** True while an optional email may still go out today. */
 export async function optionalEmailAllowed(env, now = Date.now()) {
   return (await emailsSentToday(env, now)) < resendDailyCap(env) - RESEND_RESERVE;
+}
+
+/* ----- free emailed alerts: the lowest class of mail (2026-11-17) -----
+ * A free web visitor's one emailed alert (free_email_alert.js) must never
+ * take room from Pro alert emails, sign-in links, confirmations, the Monday
+ * recap or the ops emails. Two limits, both shares of the daily cap so they
+ * follow RESEND_DAILY_CAP if the plan changes (at the free tier's 100/day:
+ * 20 a day, and none once 70 emails of any kind have gone out):
+ *   - at most FREE_ALERT_DAY_SHARE of the day's cap goes to free alerts;
+ *   - none while fewer than FREE_ALERT_RESERVE_SHARE of the cap is left
+ *     today, always more than RESEND_RESERVE, so free alerts stop well
+ *     before the optional mail (confirmations, recaps) does.
+ * The dispatcher adds its own per-scan cap. A skipped send is counted with
+ * countHeld(env, FREE_ALERT_CHANNEL). */
+export const FREE_ALERT_CHANNEL = 'email:free-alert';
+export const FREE_ALERT_DAY_SHARE = 0.2;
+export const FREE_ALERT_RESERVE_SHARE = 0.3;
+export function freeAlertLimits(env) {
+  const cap = resendDailyCap(env);
+  return {
+    cap,
+    dayMax: Math.floor(cap * FREE_ALERT_DAY_SHARE),
+    reserve: Math.max(Math.ceil(cap * FREE_ALERT_RESERVE_SHARE), RESEND_RESERVE + 1),
+  };
+}
+
+/** How many free alert emails may still go out right now: {left, total,
+ * free, cap, dayMax, reserve}. One D1 read, plus whatever this isolate has
+ * counted but not flushed. Never throws. If the counters cannot be read the
+ * answer is 0: the lowest class does not send blind. */
+export async function freeAlertBudget(env, now = Date.now()) {
+  const { cap, dayMax, reserve } = freeAlertLimits(env);
+  const day = utcDay(now);
+  let total = 0, free = 0;
+  const add = (metric, n) => {
+    if (!/^email:[^@]+:ok$/.test(metric)) return;
+    total += n;
+    if (metric === FREE_ALERT_CHANNEL + ':ok') free += n;
+  };
+  for (const [key, v] of pendingCounts) {
+    const cut = key.indexOf('|');
+    if (key.slice(0, cut) === day) add(key.slice(cut + 1), v);
+  }
+  let known = true;
+  try {
+    const rows = (await env.DB.prepare(
+      "SELECT metric, n FROM ops_counters WHERE day = ?1 AND metric LIKE 'email:%:ok' AND metric NOT LIKE '%@%'"
+    ).bind(day).all()).results || [];
+    for (const r of rows) add(String(r.metric), r.n || 0);
+  } catch (e) {
+    known = false;
+    console.log('ops freeAlertBudget failed:', e && e.message);
+  }
+  const left = known ? Math.max(0, Math.min(dayMax - free, cap - reserve - total)) : 0;
+  return { left, total, free, cap, dayMax, reserve };
 }
 
 /** Write everything buffered in ONE env.DB.batch(). Never throws; a failed

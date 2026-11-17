@@ -48,11 +48,11 @@ import { clipAttribution } from './attribution.js';
 
 export const RECAP_MAX_WATCHES = 5;          // the free watch limit (docs/app.js FREE_WATCH_LIMIT)
 const RECAP_MAX_RADIUS = 250;                // the free search radius cap
-const CONFIRM_TTL_MS = 7 * 86400_000;        // confirmation link lifetime; unconfirmed rows pruned after it
-const CONFIRM_REUSE_MS = 3600_000;           // a second watch within an hour rides the link already sent
-const CONFIRMS_PER_DAY = 3;                  // persistent per-address cap on confirmation emails
-const IP_SIGNUPS_PER_HOUR = 8;               // in-memory, per isolate (no IP stored)
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+export const CONFIRM_TTL_MS = 7 * 86400_000; // confirmation link lifetime; unconfirmed rows pruned after it
+export const CONFIRM_REUSE_MS = 3600_000;    // a second watch within an hour rides the link already sent
+export const CONFIRMS_PER_DAY = 3;           // persistent per-address cap on confirmation emails
+export const IP_SIGNUPS_PER_HOUR = 8;        // in-memory, per isolate (no IP stored)
+export const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 /* ===== small helpers ===== */
 
@@ -64,7 +64,7 @@ export function maskEmail(email) {
   return `${s[0]}•••${s.slice(at)}`;
 }
 
-const b64u = {
+export const b64u = {
   enc: (s) => btoa(String.fromCharCode(...new TextEncoder().encode(s)))
     .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''),
   dec: (s) => {
@@ -73,8 +73,10 @@ const b64u = {
   },
 };
 
-/** HMAC over the address, one key domain per purpose ('unsub' | 'sub'). */
-async function recapSig(env, purpose, email) {
+/** HMAC over the address, one key domain per purpose ('unsub' | 'sub' for
+ * the Monday email; free_email_alert.js signs its own unsubscribe links with
+ * 'alert-unsub'). */
+export async function recapSig(env, purpose, email) {
   const key = await crypto.subtle.importKey(
     'raw', new TextEncoder().encode(`ys-recap-${purpose}:` + (env.EMAIL_UNSUB_SECRET || '')),
     { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
@@ -82,10 +84,10 @@ async function recapSig(env, purpose, email) {
   return [...new Uint8Array(mac)].map((b) => b.toString(16).padStart(2, '0')).join('');
 }
 
-function apiBase(env) {
+export function apiBase(env) {
   return String(env.API_PUBLIC_URL || 'https://yardscout-api.yardscout.workers.dev').replace(/\/+$/, '');
 }
-function appUrl(env) {
+export function appUrl(env) {
   return String(env.APP_URL || 'https://yardscout.io/').trim();
 }
 
@@ -98,7 +100,7 @@ export async function recapUnsubUrl(env, email) {
 export async function recapSubToken(env, email) {
   return `${b64u.enc(email)}.${await recapSig(env, 'sub', email)}`;
 }
-async function emailFromSubToken(env, token) {
+export async function emailFromSubToken(env, token) {
   const m = /^([A-Za-z0-9_-]{4,400})\.([0-9a-f]{64})$/.exec(String(token || ''));
   if (!m) return null;
   let email;
@@ -112,7 +114,7 @@ export function postalLine(env) {
   return String(env.EMAIL_POSTAL_ADDRESS || '').replace(/[\r\n]+/g, ', ').trim().slice(0, 200);
 }
 
-const esc = (s) => String(s == null ? '' : s)
+export const esc = (s) => String(s == null ? '' : s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 /** The watch as the browser holds it → the copy the server keeps. Free
@@ -341,7 +343,7 @@ export async function handleRecapAdd(req, env, ip) {
 
 /* ===== confirm (GET page with a button → POST) ===== */
 
-function page(title, inner, status = 200) {
+export function page(title, inner, status = 200) {
   return new Response(`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(title)} — YardScout</title></head>
 <body style="font-family:system-ui,-apple-system,sans-serif;background:#141414;color:#eee;display:grid;place-items:center;min-height:90vh;margin:0;">

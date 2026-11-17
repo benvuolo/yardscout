@@ -60,7 +60,15 @@
  * watch strip (once per visit), so it can rise without more watches. A v5
  * client's events bump a 'funnel-v5' marker per (day, platform), so the
  * scorecard can say which numbers predate it. Event names are not
- * allow-listed here (EVENT_RE only); the scorecard decides what it reads. */
+ * allow-listed here (EVENT_RE only); the scorecard decides what it reads.
+ *
+ * Free emailed alert (2026-11-17, web only, free_email_alert.js; no version
+ * step): 'free-alert-shown' (the ask came into view, once per visit) and
+ * 'free-alert-asked' (an address given for one car) come from the app;
+ * 'free-alert-confirmed' (the confirmation click, under the link the
+ * sign-up came from) and 'free-alert-first-email' (the first alert email an
+ * address is sent) are counted by the server where they are certain, so a
+ * client may not post them. Counting starts the day this is deployed. */
 import { json, err } from './util.js';
 
 export const FUNNEL_V2_MARK = 'funnel-v2';
@@ -70,6 +78,9 @@ export const FUNNEL_V5_MARK = 'funnel-v5';
 const MARKS = new Set([FUNNEL_V2_MARK, FUNNEL_V3_MARK, FUNNEL_V4_MARK, FUNNEL_V5_MARK]);
 /** The marker names as an SQL list, for queries that must leave them out. */
 export const MARKS_SQL = [...MARKS].map((m) => `'${m}'`).join(', ');
+
+/** Counted by the server only (recap_signup.js, free_email_alert.js). */
+const SERVER_EVENTS = new Set(['email-confirmed', 'free-alert-confirmed', 'free-alert-first-email']);
 
 const EVENT_RE = /^[a-z0-9][a-z0-9/_-]{0,47}$/;
 /** The utm fields as stored: lowercased, clipped, [a-z0-9._-] only. */
@@ -91,7 +102,7 @@ export async function handleEvent(req, env) {
   const { source, campaign, medium } = clipAttribution(body);
   const platform = ['web', 'ios', 'android'].includes(body.p) ? body.p : 'web';
   // The marker is the server's to write: a client may not post it as an event.
-  if (MARKS.has(event) || event === 'email-confirmed') return err(400, 'bad_event', 'Unknown event name.');
+  if (MARKS.has(event) || SERVER_EVENTS.has(event)) return err(400, 'bad_event', 'Unknown event name.');
   const day = new Date().toISOString().slice(0, 10);
   const bump = env.DB.prepare(
     `INSERT INTO events_daily (day, event, source, campaign, medium, platform, n)
@@ -127,6 +138,7 @@ export async function handleAttribution(req, env) {
     rows.get(key).events[r.event] = r.n;
   }
   const FUNNEL = ['first-visit', 'first-view-guess', 'zip-entered', 'guess-replaced', 'part-first-search', 'watch-created', 'email-asked', 'email-submitted',
-    'email-confirmed', 'push-enabled', 'store-click', 'paywall', 'checkout-start', 'pro-converted'];
+    'email-confirmed', 'free-alert-shown', 'free-alert-asked', 'free-alert-confirmed', 'free-alert-first-email',
+    'push-enabled', 'store-click', 'paywall', 'checkout-start', 'pro-converted'];
   return json({ since, days, funnel: FUNNEL, channels: [...rows.values()] });
 }

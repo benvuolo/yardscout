@@ -10,6 +10,7 @@ import { json, err, sha256Hex, isoNow, timingSafeEqual } from './util.js';
 import { dispatchAlerts, dispatchSaleAlerts, storeArrivals } from './alerts.js';
 import { dispatchDeviceAlerts, dispatchDeviceSaleAlerts, dispatchFirstWatchCheckins } from './devices.js';
 import { dispatchEmailAlerts } from './email_alerts.js';
+import { dispatchFreeEmailAlerts } from './free_email_alert.js';
 import { maybeSendCoverageDigest } from './coverage.js';
 import { dispatchSavedCarAlerts } from './saved_alerts.js';
 import { opsFlusher } from './ops.js';
@@ -95,6 +96,9 @@ export async function handleCommit(req, env, ctx) {
   // Alert dispatch runs after the response goes out — the scan workflow
   // shouldn't wait on (or fail because of) notification sends. Each chain
   // ends with ONE batched write of its send counters (ops.js flushOps).
+  // Resolves when this commit's Pro email alerts are out (see the free
+  // emailed alert below, which must run after them).
+  let proEmailsDone = Promise.resolve();
   if (Array.isArray(newArrivals) && newArrivals.length && ctx) {
     ctx.waitUntil(
       dispatchAlerts(env, newArrivals)
@@ -111,17 +115,29 @@ export async function handleCommit(req, env, ctx) {
         .finally(opsFlusher(env))
     );
     // Web Pro members with email alerts on: one digest email per user.
-    ctx.waitUntil(
-      dispatchEmailAlerts(env, newArrivals)
-        .then((r) => console.log(`email alerts: ${r.users} users emailed, ${r.emails} attempts`))
-        .catch((e) => console.log('email alert dispatch failed:', e && e.message))
-        .finally(opsFlusher(env))
-    );
+    proEmailsDone = dispatchEmailAlerts(env, newArrivals)
+      .then((r) => console.log(`email alerts: ${r.users} users emailed, ${r.emails} attempts`))
+      .catch((e) => console.log('email alert dispatch failed:', e && e.message));
+    ctx.waitUntil(proEmailsDone.finally(opsFlusher(env)));
     // Snapshot arrivals for the weekly free-tier digest cron.
     ctx.waitUntil(
       storeArrivals(env, newArrivals)
         .then((r) => console.log(`arrivals stored: ${r.stored}`))
         .catch((e) => console.log('arrival store failed:', e && e.message))
+        .finally(opsFlusher(env))
+    );
+  }
+  // Free web visitors' ONE emailed alert (free_email_alert.js): the lowest
+  // class of mail, so it starts only once this commit's Pro alert emails are
+  // out and counted, and sends only what ops.js freeAlertBudget leaves. Runs
+  // on every commit: a scan with no new cars can still deliver alerts that
+  // an earlier scan held back for the budget.
+  if (ctx) {
+    ctx.waitUntil(
+      proEmailsDone
+        .then(() => dispatchFreeEmailAlerts(env, Array.isArray(newArrivals) ? newArrivals : []))
+        .then((r) => console.log(`free email alerts: ${r.emails} emailed of ${r.matched} matched, ${r.held} newly held, ${r.failed} failed`))
+        .catch((e) => console.log('free email alert dispatch failed:', e && e.message))
         .finally(opsFlusher(env))
     );
   }
