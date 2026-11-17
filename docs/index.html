@@ -57,7 +57,7 @@
   <div class="header-row">
     <!-- Row-marker plate: the numbered signs bolted to posts at the end of
          every self-service row. Two mounting screws, stamped letters. -->
-    <svg class="brand-mark" viewBox="4 29 122 72" aria-hidden="true"><g fill="var(--mark-rim)"><circle cx="40" cy="65" r="36"/><circle cx="90" cy="65" r="36"/></g><g fill="#F26B1D"><circle cx="40" cy="65" r="32"/><circle cx="90" cy="65" r="32"/></g><g transform="translate(65 64) scale(0.88) translate(-66.5 -63)"><path d="M16 76 V62 Q16 59 19 59 H35 L46 44.5 Q47 43.5 49 43.5 H79 Q81 43.5 82 44.5 L92 58 L110 60 Q114 60.5 114 63 V76 Q114 79 111 79 H106 A10 10 0 0 0 86 79 H44 A10 10 0 0 0 24 79 H19 Q16 79 16 76 Z" fill="#1C1C1A"/><path d="M49 46.8 H78.3 L88 57.4 H46.6 L44 54.2 Z" fill="#F26B1D"/><rect x="63" y="46" width="2.6" height="12" fill="#1C1C1A"/><g fill="#1C1C1A"><circle cx="34" cy="80" r="8"/><circle cx="96" cy="80" r="8"/></g><g fill="#F26B1D"><circle cx="34" cy="80" r="3.2"/><circle cx="96" cy="80" r="3.2"/></g></g></svg>
+    <svg class="brand-mark" viewBox="4 29 122 72" aria-hidden="true"><g fill="var(--mark-rim)"><circle cx="40" cy="65" r="36"/><circle cx="90" cy="65" r="36"/></g><g fill="#1095AF"><circle cx="40" cy="65" r="32"/><circle cx="90" cy="65" r="32"/></g><g transform="translate(65 64) scale(0.88) translate(-66.5 -63)"><path d="M16 76 V62 Q16 59 19 59 H35 L46 44.5 Q47 43.5 49 43.5 H79 Q81 43.5 82 44.5 L92 58 L110 60 Q114 60.5 114 63 V76 Q114 79 111 79 H106 A10 10 0 0 0 86 79 H44 A10 10 0 0 0 24 79 H19 Q16 79 16 76 Z" fill="#1C1C1A"/><path d="M49 46.8 H78.3 L88 57.4 H46.6 L44 54.2 Z" fill="#1095AF"/><rect x="63" y="46" width="2.6" height="12" fill="#1C1C1A"/><g fill="#1C1C1A"><circle cx="34" cy="80" r="8"/><circle cx="96" cy="80" r="8"/></g><g fill="#1095AF"><circle cx="34" cy="80" r="3.2"/><circle cx="96" cy="80" r="3.2"/></g></g></svg>
     <div class="wordmark">
       <h1>Yard<wbr><span class="wm-scout">Scout</span></h1>
       <span class="head-spec" id="head-spec">SELF&#8209;SERVICE YARD INTEL</span>
@@ -476,14 +476,8 @@
     <div class="info-box" style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
       <div style="flex:1 1 15em;min-width:0;">
         <h3 style="margin:0 0 0.25rem;">Vehicle watchlist</h3>
-        <!-- HELD until the app release with the free instant alert is live in both
-             stores (hub, 2026-11-16): the website must not promise what the store
-             versions do not do yet. At that point replace this paragraph's text with:
-             "Add vehicles you want to track (em dash) watching is free, no signup. Matches
-             light up right here. In the iOS and Android apps, free gets one watch pushed
-             within hours (cars within 50 mi) and a weekly recap push for the rest; Pro
-             pushes every watch, at any distance." The apps set their own text in app.js. -->
-        <p style="margin:0;" id="alerts-intro-copy">Add vehicles you want to track &mdash; watching is free, no signup. Matches light up right here, and in the iOS and Android apps free watches get a <strong>weekly recap push</strong>; <strong>push alerts within hours</strong> of a car hitting the yard are a Pro feature.</p>
+        <!-- Free instant alert wording: live since 1.13.0 reached both stores (2026-11-17). -->
+        <p style="margin:0;" id="alerts-intro-copy">Add vehicles you want to track &mdash; watching is free, no signup. Matches light up right here. In the iOS and Android apps, free gets <strong>one watch pushed within hours</strong> (cars within 50 mi) and a <strong>weekly recap push</strong> for the rest; <strong>Pro</strong> pushes every watch, at any distance.</p>
       </div>
       <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
         <button id="alert-notif-btn" class="btn btn-primary">Enable browser notifications</button>
@@ -660,13 +654,9 @@
       <h4>Push alerts</h4>
       <p style="font-size: 0.8125rem;color:var(--text-dim);line-height:1.6;margin:0.4rem 0 0.8rem;">
         Real push notifications live in the <strong>YardScout app</strong> for iPhone and Android &mdash;
-        <!-- HELD with the paragraph above (same reason). At release replace the next
-             three lines with: "free members get one watch pushed within hours (cars
-             within 50 mi) and a weekly recap of the rest, and Pro gets a push within
-             hours on every watch, at any distance, even when the app is closed." -->
-        free members get a weekly recap of every watched car that arrived, and
-        <strong>Pro</strong> gets a push within hours of a watched car hitting any yard,
-        even when the app is closed. Your watchlist works right here on the web too;
+        free members get one watch pushed within hours (cars within 50 mi) and a weekly
+        recap of the rest, and <strong>Pro</strong> gets a push within hours on every watch,
+        at any distance, even when the app is closed. Your watchlist works right here on the web too;
         matches light up in this tab.
       </p>
       <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">

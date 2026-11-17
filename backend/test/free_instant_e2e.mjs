@@ -227,13 +227,10 @@ try {
     await v.page.waitForTimeout(2000);
     check('web: nothing sent to /v1/device/register', v.regs.length === 0, JSON.stringify(v.regs));
     const intro = await v.page.evaluate(() => document.getElementById('alerts-intro-copy').innerText);
-    // HELD (hub, 2026-11-16): until the app release with the free instant
-    // alert is live in both stores, the website keeps the old sentence, so it
-    // never promises what the store versions do not do yet (see the HELD
-    // comment in docs/index.html). When the release is live, switch the page
-    // text and make this check expect "free gets one watch pushed within hours".
-    check('web intro: no instant-alert promise before the app release is live',
-      /in the iOS and Android apps free watches get a weekly recap push/.test(intro) && !/one watch pushed within hours/.test(intro), intro);
+    // The release with the free instant alert is live in both stores
+    // (2026-11-17), so the website says what the apps now do.
+    check('web intro: says what the free tier does in the apps (one watch within hours, 50 mi, recap for the rest)',
+      /free gets one watch pushed within hours/.test(intro) && /50\s?mi/.test(intro) && /weekly recap push/.test(intro), intro);
     await v.page.evaluate(() => openUpgradeSheet('watch-limit'));
     await v.page.waitForTimeout(300);
     const lead = await v.page.evaluate(() => document.getElementById('pro-proof').textContent);

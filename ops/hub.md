@@ -1442,3 +1442,126 @@ Hub's read, given to the owner:
   trademark question is for a lawyer.
 - WAITING ON THE OWNER: yes or no to the one-colour name. Nothing changed
   in the product.
+
+## 2026-11-17 14:43 UTC owner: "Make the name one color, perhaps let's look at different accents"
+
+Also from the owner: "extremely concerning that this was a thing before
+YardScout, I had no idea, and now I look like a copy. His version also
+appears to be free alerts".
+
+- **Name in one colour**: branch `hub/one-colour-name` (65e1becc, sw
+  `jh-v205`): app header, 404 page, rendered pages (`share.js`), both
+  lockup SVGs, `og-card.png` regenerated from `og-card.html`. Full run 8
+  and the layout check (two halves) in flight; live after they pass. Store
+  screenshots still show the two-colour name: next release.
+- **Accent mocks sent, nothing shipped** (`xt/accent_mocks.js` in the hub
+  scratchpad swaps the orange values on the way to the browser; images in
+  `for_owner/accents/`): orange as today, petrol `#0B6477`, cobalt
+  `#1D4ED8`, racing green `#1E7042`, signal red `#B3261E`. Hub's pick if
+  the owner moves: petrol (green collides with the turnover and "swaps
+  with" tags, red with warnings, cobalt reads like every other app). A
+  real switch touches the tokens in `styles.css` (light and dark), the
+  mark, app icon and splash, OG card, store art; the icon needs a release.
+- **Free alerts**: theirs is a free emailed alert with an account ("the
+  day a new one lands on a lot"). Ours: one free instant push per phone in
+  1.13.0 (Android live, iPhone in review), no account; emailed alerts on
+  the web are Pro only (`backend/src/email_alerts.js`). Hub recommended one
+  free emailed alert on the web (one car, capped sends), Pro for the rest.
+  WAITING ON THE OWNER: accent (pick or keep orange); free web email alert
+  (yes or no).
+
+## 2026-11-17 14:49 UTC owner: "let's do petrol, do the free emailed alert ... Can I get sued now? I'm scared"
+
+- **Petrol accent: approved.** Values from the mock: deep `#0B6477`
+  (buttons and links on light), bright `#0E8FA8` (mark, dark theme),
+  darker `#084C5B`. Website first, after the one-colour name is live; app
+  icon, splash and store art follow with the next release (needs "ship").
+- **Free emailed alert on the website: approved.** A builder agent is on
+  branch `growth/free-email-alert` (brief: one watch per confirmed email,
+  the app free tier's distance, lowest email class under the Resend budget,
+  one-click unsubscribe, no change to held sentences or colours). Hub
+  reviews before anything reaches main. Shared test lock:
+  `flock /tmp/ys-test.lock <test>` for anything that starts a server or
+  browser, on both sides.
+- **Legal worry, what the hub said (not legal advice):** no copying took
+  place and the public history shows it; the open question is the name
+  (trademark turns on confusion, not copying; they used theirs first).
+  Third-party trademark indexes show no filing for PULLSCOUT or YARDSCOUT
+  (not the official record). Risk-lowering steps are the ones in hand.
+  Suggested one consult with a trademark lawyer. Rules for us from now on:
+  never name PullScout in ads, keywords or page text; never claim first or
+  largest; never copy their wording; never read their site by machine.
+- Reminder given to the owner: the four yard notes are still unsent.
+
+## 2026-11-17 15:05 UTC one-colour name to main (sw `jh-v205`); 1.13.0 live in both stores
+
+- **Name in one colour**: run 8 (77 suites) all pass; layout check six
+  widths, 2,208 checks, 0 failures. Pushed to main as a fast-forward.
+  (Hub slip, no harm found: one browser test was started in the petrol
+  working copy while the layout check was still running; both layout
+  halves still ended clean. Every server or browser test now goes through
+  `flock /tmp/ys-test.lock`.)
+- **1.13.0 is live in both stores** (status runs 44109467799 and
+  44109474369, 15:01 UTC): App Store 1.13.0 build 41 READY_FOR_SALE; Play
+  production 1.13.0 (40) completed, full rollout. `docs/app-version.json`
+  still says iOS 1.12.16; `app-store-version.yml` (every two hours) writes
+  the new one.
+- **Play listing uploaded** (part of the release the owner shipped on
+  11-16): `store-listing.yml` run 44109917152 and
+  `play-subscription-listing.yml` run 44109922973, both success. Google
+  reviews listing edits like a release. The screenshots show the app as
+  1.13.0 looks (orange, two-colour name); new ones go with the next
+  release.
+- **Held sentences**: switched on branch `hub/petrol` (bc4a8585) together
+  with the petrol accent (064f043b, sw `jh-v206`); they go live as one
+  batch after their regression. Task #58 closes then.
+- Builder told that the held sentences are no longer held.
+
+## 2026-11-17 15:17 UTC one-colour name confirmed live
+
+One fresh load of yardscout.io at phone size: cache `jh-v205`; both halves
+of the name compute to the same colour (rgb 28, 28, 26); 40 tiles; no page
+errors. Deploy Workers (rendered pages) and Pages both succeeded at 15:06.
+Usage stats run 44109930771: `funnel-v5` rows web 88, android 80, ios 14,
+so 1.13.0 is in real use on both phones (check-in step 2). Devices: android
+14 (1 Pro), ios 24 (9 Pro); 33 devices hold 87 watches.
+
+## 2026-11-17 15:27 UTC petrol accent and the switched sentences to main (sw `jh-v206`)
+
+- Run 9 (77 suites) all pass; layout check six widths, 2,208 checks
+  (contrast included), 0 failures; dark theme looked at by eye.
+- Petrol values: light accent `#0B6477`, hover and text-on-tint
+  `#084C5B`; dark accent `#2BB3CC`, hover `#5CC6DA`, text-on-tint
+  `#7FD0E0`; mark `#1095AF` (the mock's `#0E8FA8` put the NEW badge's dark
+  text at 4.48:1, so the mark is a shade lighter: 4.8:1).
+- Web icons recoloured with `xt/recolour_icons.py` (hub scratchpad); the
+  same script will do the app icon and splash at the next release.
+- STILL ORANGE, on purpose or pending: the apps in the stores (1.13.0), the
+  store screenshots and icon, the app icon and splash sources under
+  `assets/`, `android/`, `ios/` (next release, needs "ship"); the colours
+  inside emails (`#ff9500` in `alerts.js`, `email_alerts.js`,
+  `recap_signup.js`; `#f26b1d`/`#b84a0a` in the owner-only ops emails):
+  after the free-email-alert branch merges, since the builder is in those
+  files.
+- Task #58 (held sentences) closes with this push once confirmed live.
+
+## 2026-11-17 15:39 UTC petrol and the switched sentences confirmed live; task #58 closed
+
+One fresh load of yardscout.io at phone size: cache `jh-v206`; accent
+`#0B6477`, mark `#1095AF`; the name in one colour; the Alerts intro reads
+"In the iOS and Android apps, free gets one watch pushed within hours
+(cars within 50 mi)..."; 40 tiles; no page errors. Screenshot sent to the
+owner.
+
+- Release prep, NOT shipped: branch `release/brand-petrol` (48995190) holds
+  the app icon, splash and Play icon in petrol (57 PNGs; recoloured with
+  `xt/recolour_icons2.py`, which moves only the orange share of a pixel).
+  Still to do with the release: store screenshots, the Play feature graphic
+  (two-colour name and "250+" in it), email colours, version bump. Task #66.
+  Needs the owner's "ship".
+- Seen while doing this, for a copy pass with the owner: the site
+  description and the Play feature graphic say "Find the donor car before
+  you drive", close to PullScout's "Find donor cars all in one place".
+  Three stock Capacitor splash files (blue logo on white) sit unused in
+  `ios/App/App/Assets.xcassets/Splash.imageset/`.
+- Builder still working on `growth/free-email-alert`.

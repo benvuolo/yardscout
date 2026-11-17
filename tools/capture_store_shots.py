@@ -345,7 +345,7 @@ def capture(browser, base, platform, slides, raw_dir: Path) -> dict[str, Path]:
 SLIDE_HTML = """<!doctype html><html><head><meta charset="utf-8">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800&display=swap" rel="stylesheet">
 <style>
-  :root { --bg:%(bg)s; --fg:%(fg)s; --dim:%(dim)s; --brand:#F26B1D; --rim:%(rim)s; }
+  :root { --bg:%(bg)s; --fg:%(fg)s; --dim:%(dim)s; --brand:#1095AF; --rim:%(rim)s; }
   html,body { margin:0; height:100%%; background:var(--bg); }
   body { font-family:'Inter',system-ui,sans-serif; color:var(--fg); display:flex;
          flex-direction:column; align-items:center; overflow:hidden; }

@@ -15,13 +15,13 @@
     --text: #1C1C1A;
     --text-dim: #5E5B54;
     /* One accent: safety orange, used sparingly and semantically. */
-    --accent: #B84A0A;
+    --accent: #0B6477;
     /* Brand orange from the logo kit — fills only (badges, stripe, marks);
        as small text it fails AA on cream, so links/text use --accent. */
-    --brand: #F26B1D;
+    --brand: #1095AF;
     --mark-rim: #1C1C1A;
-    --accent-hover: #9C3E08;
-    --accent-soft: rgba(242, 107, 29, 0.10);
+    --accent-hover: #084C5B;
+    --accent-soft: rgba(16, 149, 175, 0.10);
     --accent2: #3f6c33;
     --green-soft: rgba(63, 108, 51, 0.11);
     --red: #b03429;
@@ -89,11 +89,11 @@
     --border-dark: #5E5E58;
     --text: #F4F2EC;
     --text-dim: #B3B1AA;
-    --accent: #F26B1D;
-    --brand: #F26B1D;
+    --accent: #2BB3CC;
+    --brand: #1095AF;
     --mark-rim: #F4F2EC;
-    --accent-hover: #F6843F;
-    --accent-soft: rgba(242, 107, 29, 0.16);
+    --accent-hover: #5CC6DA;
+    --accent-soft: rgba(43, 179, 204, 0.16);
     --accent2: #8dbb7d;
     --green-soft: rgba(141, 187, 125, 0.14);
     --red: #e06b60;
@@ -134,11 +134,11 @@
     --border-dark: #5E5E58;
     --text: #F4F2EC;
     --text-dim: #B3B1AA;
-    --accent: #F26B1D;
-    --brand: #F26B1D;
+    --accent: #2BB3CC;
+    --brand: #1095AF;
     --mark-rim: #F4F2EC;
-    --accent-hover: #F6843F;
-    --accent-soft: rgba(242, 107, 29, 0.16);
+    --accent-hover: #5CC6DA;
+    --accent-soft: rgba(43, 179, 204, 0.16);
     --accent2: #8dbb7d;
     --green-soft: rgba(141, 187, 125, 0.14);
     --red: #e06b60;
@@ -250,7 +250,10 @@
       radial-gradient(circle 1.6px at 29px 25px, #6f695b 0 1.6px, transparent 1.7px);
     flex-shrink: 0;
   }
-  header h1 .wm-scout { color: var(--brand); }
+  /* The name is one colour (owner, 2026-11-17): a two-colour name with "Scout"
+     in orange read as a copy of another site in the same trade. The orange
+     stays on the mark. */
+  header h1 .wm-scout { color: inherit; }
   .brand-mark { width: 54px; height: 32px; flex-shrink: 0; display: block; }
   .wordmark { display: flex; flex-direction: column; gap: 0; min-width: 0; }
   /* Live spec line under the name — reads like the stamped fields on an
@@ -2225,9 +2228,9 @@
 .pf-value { font-size: 0.75rem; display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: baseline; }
 .pf-yard-price { font-family: var(--font-mono); font-weight: 600; }
 .pf-ebay { color: var(--text-dim); }
-.ebay-sold-link { font-size: 0.85em; color: var(--accent, #F26B1D); text-decoration: none; margin-left: 4px; }
+.ebay-sold-link { font-size: 0.85em; color: var(--accent, #0B6477); text-decoration: none; margin-left: 4px; }
 .ebay-sold-link:hover { text-decoration: underline; }
-.lot-fast { display: inline-block; margin-left: 6px; padding: 1px 6px; border-radius: 4px; font-size: 0.8em; font-weight: 600; background: var(--accent, #F26B1D); color: #fff; letter-spacing: .02em; }
+.lot-fast { display: inline-block; margin-left: 6px; padding: 1px 6px; border-radius: 4px; font-size: 0.8em; font-weight: 600; background: var(--accent, #0B6477); color: var(--on-accent, #fff); letter-spacing: .02em; }
 /* Buyer's savings figure: used-online price minus the yard's gate price. */
 .pf-save { font-family: var(--font-mono); font-weight: 700; color: var(--accent2); }
 .pf-warn {
@@ -2726,11 +2729,11 @@ header h1 { flex-wrap: wrap; }
 .car-grid > * { min-width: 0; }
 @media (max-width: 480px) { .car-grid { grid-template-columns: minmax(0, 1fr); } }
 .cc-head > *, .cc-actions > *, .profit-line > * { min-width: 0; }
-/* Orange text on an orange tint: one step darker (light) / lighter (dark)
+/* Accent text on an accent tint: one step darker (light) / lighter (dark)
    so it keeps 4.5:1 on the tint in both themes. */
-:root { --accent-on-soft: #9C3E08; }
-:root[data-theme="dark"] { --accent-on-soft: #FFA36B; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --accent-on-soft: #FFA36B; } }
+:root { --accent-on-soft: #084C5B; }
+:root[data-theme="dark"] { --accent-on-soft: #7FD0E0; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --accent-on-soft: #7FD0E0; } }
 .sample-pitch, .pro-tag, .plan-option.selected, .tier-plus, .pro-car, .pro-proof, .watch-strip, .focus-banner,
 .pf-chip.active, .filter-toggle.open, .cd-icon-btn.watching, .part-item.part-hit, .lot-fast-soft { --accent: var(--accent-on-soft); }
 #saved-pill #saved-count { color: var(--on-ink); }
@@ -2853,7 +2856,7 @@ a { color: var(--accent); }
 #photo-viewer.pv-failed .pv-fail-note { display: block; }
 #photo-viewer.pv-failed .pv-img { display: none; }
 .pv-links { display: flex; flex-wrap: wrap; column-gap: var(--s5); }
-#photo-viewer .locator-link { color: #FFA36B; }
+#photo-viewer .locator-link { color: #7FD0E0; }
 .pv-remove { min-height: var(--tap); display: inline-flex; align-items: center; font-size: var(--t-sm); color: #D8D5CC; }
 /* No photo: a slim strip, so Worth pulling stays near the top. */
 .photo-box.photo-none { aspect-ratio: auto; min-height: 3rem; height: auto; max-height: none; align-items: center; justify-content: flex-start; gap: var(--s2); padding: var(--s2) var(--s3); }
