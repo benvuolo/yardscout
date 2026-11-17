@@ -1674,3 +1674,37 @@ watertight features, etc."
   top of a full day's work is more than one 5-hour window carries.
 - Freed 5.5 GB by removing 15 old working copies whose commits were on
   origin; 14 others kept (not on origin or with edits).
+
+## 2026-11-17 20:38 UTC yards builder done: 3 yards added, U-Pull-R reader off (branch reviewed, not merged yet)
+
+Branch `yards/breadth-1117` (f850bd22). Hub read the whole scraper diff.
+- Added, all read under the YardScout name, offline tests with fixtures:
+  Intermountain Auto iPull (Idaho Falls ID, 578 cars; the host that
+  answered our name with HTTP 500 on 10-28 answers it normally now), S&S
+  U-Pull-It (Lebanon MO, 573 in a 4-make probe of 35 makes), Standard Auto
+  Wreckers UPIC (Scarborough ON, 524; first Ontario yard; read from the
+  Google Sheet the yard's own page names).
+- `UPULLR_READER_ENABLED = False`: nothing is sent to upullrparts.com;
+  `scraper/test_upullr_switch.py` fails if it is switched on.
+- Not added, with reasons and drafts 6 to 12 in
+  `ops/yard-outreach-drafts.md`: Carolina Pick N Pull (terms forbid
+  robots), Kenny U-Pull (Cloudflare 403), Express Pull-N-Save (terms),
+  U Pull It Davie (robots.txt names AI agents), Pull N' Go (503), Andersen
+  (feed frozen since August), Russellville (stale), Ewe Pullet (empty).
+- Scraper-only change: merge after 1.13.1 is dispatched; scraper tests are
+  the check. Afterwards: run `scraper/gen_yard_site_links.py` once the
+  first scan has the yards (it rewrites a list in `docs/app.js`, so that
+  is a website change with its own regression), and wire the two new price
+  files into the app's price-sheet list.
+- FOR THE OWNER (builder's findings, hub agrees they are theirs to decide):
+  1. **Ario**: `ario.autorecycler.io/robots.txt` now disallows `/yard/`
+     for every crawler ("Paid Website Search / embed product") and the host
+     serves Ario's own consumer search. Our reader (about 45 yards, about
+     45,000 cars) does not fetch those pages; it calls the search function
+     behind them on another host, under a browser name. Nothing changed
+     yet. Draft 10 asks Ario.
+  2. **Older readers' names**: the nine older CRUSH MVC tenants, Barry's,
+     Pick-A-Part VA, Ario and the big chains still send a browser name.
+  3. Which outreach drafts to send; Davie needs a human look first;
+     Standard's price list is in Canadian dollars (the app has no currency
+     label).
