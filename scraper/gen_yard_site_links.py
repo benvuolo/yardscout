@@ -143,6 +143,7 @@ ENTRIES: list[tuple[str, str | None, str | None, str]] = [
     (r"^marion county auto parts", "Marion County Auto Parts", None, ""),
     (r"^662 self serve", "662 Self Serve Auto Parts", None, ""),
     (r"^cp'?s u-pull-it", "CP's U-Pull-It", None, ""),
+    (r"^s&s u-pull-it", "S&S U-Pull-It", None, "Lebanon MO (2026-11-17)"),
     (r"^genesis metal recycling", "Genesis Metal Recycling", None, ""),
     # --- yardconnect-pro tenants (2026-10-27) — whole-lot table pages, no deep links ---
     (r"^chuck & eddie'?s", "Chuck & Eddie's Self Service", None,

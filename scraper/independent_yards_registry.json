@@ -2281,6 +2281,34 @@
       ]
     },
     {
+      "name": "S&S U-Pull-It",
+      "status": "adapter-built",
+      "platform": "CRUSH MVC 'Enterprise Websites' app (S3 Software Solutions) - config-driven adapter CRUSH_MVC_SITES['ssupullit'] (fetch_ssupullit_inventory, 2026-11-17); single yard, server-rendered #car-make select",
+      "website": "https://www.ssupullit.com",
+      "inventory_url": "https://www.ssupullit.com/Home/Inventory",
+      "api": {
+        "endpoint": "https://www.ssupullit.com/Home/Inventory",
+        "method": "GET (form) + one multipart POST per make (VehicleMake, VehicleModel empty)",
+        "auth": "none",
+        "format": "html table (YEAR, MAKE, MODEL, COLOR, ROW, ARRIVAL DATE)",
+        "requests_per_scan": 36,
+        "notes": "ADAPTER BUILT 2026-11-17 (found by a web search for the CRUSH MVC page wording). Read with the YardScout User-Agent, 1 s between requests. Probe 2026-11-17, 4 of 35 makes: 573 cars (Chevrolet 283, Ford 254, Toyota 30, Acura 6); the whole lot was not counted. No VIN or stock number -> content-hash ids ssupullit-lebanon-{sha1[:12]}. The ARRIVAL DATE is the ROW's set date: every physical row in the probe carried one date, 16 dates from 2017-06-20 to 2026-08-28 (batches: 2017, 2018, 2020, 2022, 2024-01, 2024-07, 2025-07, 2026-04, 2026-08). So old dates are old rows still standing, and between batches (about every 4 months) the scan's 'no new arrivals in 30 days' note is expected for this yard. Price list /Home/PartPrices: PART DESCRIPTION, PRICE GROUP, PRICE, BASIS, CORE CHARGE (537 parts) -> ssupullit_pricing.json (refresh_ssupullit_pricing_file). Test: scraper/test_ssupullit.py, fixtures scraper/fixtures/ssupullit/."
+      },
+      "update_freshness": "site says 'Updated Daily'; newest row-set date 2026-08-28 at build (rows are set in batches)",
+      "robots": "404 on www.ssupullit.com (no robots.txt), read 2026-11-17",
+      "tos_flags": "no terms page; /Home/YardPolicies covers returns, tires and core refunds only (read 2026-11-17)",
+      "locations": [
+        {
+          "name": "S&S U-Pull-It - Lebanon",
+          "city": "Lebanon",
+          "state": "MO",
+          "lat": 37.6967,
+          "lng": -92.628,
+          "address": "22395 Rte 66, Lebanon, MO 65536"
+        }
+      ]
+    },
+    {
       "name": "Genesis Metal Recycling",
       "status": "adapter-built",
       "platform": "wordpress + yardconnect-pro v2.3 (admin-ajax, table view) - config-driven adapter YARDCONNECT_SITES['genesis']",

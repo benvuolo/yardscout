@@ -23526,7 +23526,40 @@ CRUSH_MVC_SITES: dict[str, dict] = {
              "state": "GA", "lat": 34.7289, "lng": -84.9788},  # Census geocoder exact address match (2026-11-09)
         ],
     },
+    # S&S U-Pull-It — single yard, Lebanon MO (2026-11-17). Same app as
+    # M&M / Polk (server-rendered #car-make select, 35 makes, multipart POST
+    # to /Home/Inventory). Columns YEAR, MAKE, MODEL, COLOR, ROW, ARRIVAL
+    # DATE. The yard sets cars out a ROW at a time and the date is the row's:
+    # in a 4-make probe (573 cars) every physical row carried one date, 16
+    # dates in all from 2017-06-20 to 2026-08-28, so old dates are old rows
+    # still standing, not rows the site forgot to remove. Expect the "no new
+    # arrivals in 30 days" note between batches (about every 4 months).
+    # robots.txt: 404 (none); no terms page (Yard Policies covers returns
+    # only). This tenant is read with the scanner's own name ("headers");
+    # the older tenants above keep what they sent before.
+    # Price list /Home/PartPrices has 5 columns (PRICE GROUP is extra).
+    # Pin: Census geocoder exact match for 22395 Rte 66, Lebanon MO 65536.
+    "ssupullit": {
+        "label": "S&S U-Pull-It (Lebanon MO)",
+        "base": "https://www.ssupullit.com",
+        "page_path": "/Home/Inventory",
+        "search_path": "/Home/Inventory",
+        "prices_path": "/Home/PartPrices",
+        "headers": "yardscout",
+        "yards": [
+            {"yard_id": None, "code": "lebanon",
+             "name": "S&S U-Pull-It - Lebanon", "city": "Lebanon",
+             "state": "MO", "lat": 37.6967, "lng": -92.6280},
+        ],
+    },
 }
+
+
+def _crush_mvc_headers(site: dict) -> dict:
+    """Request headers for one CRUSH MVC tenant. Tenants added from
+    2026-11-17 set "headers": "yardscout" and are read under the scanner's
+    own name; the earlier tenants keep the headers they have always sent."""
+    return YARDSCOUT_HEADERS if site.get("headers") == "yardscout" else HEADERS
 _CRUSH_MVC_MAKE_SELECT_RE = re.compile(
     r'<select[^>]*(?:id="car-make"|name="VehicleMake")[^>]*>(.*?)</select>', re.S)
 _CRUSH_MVC_OPTION_RE = re.compile(r'<option value="([^"]+)"')
@@ -23585,13 +23618,14 @@ def _crush_mvc_makes(site: dict, yard: dict) -> list[str]:
     page_url = base + site.get("page_path", "/Home/Inventory")
     if yard.get("yard_id"):
         r = requests.post(f"{base}/Home/GetMakes", data={"yardId": yard["yard_id"]},
-                          headers={**HEADERS, "Referer": page_url,
+                          headers={**_crush_mvc_headers(site), "Referer": page_url,
                                    "X-Requested-With": "XMLHttpRequest"},
                           timeout=60)
         r.raise_for_status()
         return [m for m in (str((d or {}).get("makeName") or "").strip()
                             for d in r.json()) if m]
-    r = requests.get(page_url, headers={**HEADERS, "Accept": "text/html"}, timeout=60)
+    r = requests.get(page_url, headers={**_crush_mvc_headers(site), "Accept": "text/html"},
+                     timeout=60)
     r.raise_for_status()
     m = _CRUSH_MVC_MAKE_SELECT_RE.search(r.text)
     return [v for v in (_CRUSH_MVC_OPTION_RE.findall(m.group(1)) if m else []) if v]
@@ -23626,7 +23660,7 @@ def fetch_crush_mvc_site(source: str) -> list[dict]:
                 form = {"YardId": (None, str(yard_id)), **form}
             try:
                 r = requests.post(search_url, files=form,
-                                  headers={**HEADERS, "Accept": "text/html",
+                                  headers={**_crush_mvc_headers(site), "Accept": "text/html",
                                            "Referer": page_url},
                                   timeout=60)
                 r.raise_for_status()
@@ -23720,6 +23754,27 @@ def fetch_cpsupullit_inventory() -> list[dict]:
     """CP's U-Pull-It (Dalton GA) via the CRUSH MVC adapter."""
     return fetch_crush_mvc_site("cpsupullit")
 
+
+def fetch_ssupullit_inventory() -> list[dict]:
+    """S&S U-Pull-It (Lebanon MO) via the CRUSH MVC adapter."""
+    return fetch_crush_mvc_site("ssupullit")
+
+
+def _crush_mvc_price_columns(page: str) -> tuple[int, int, int]:
+    """(name, price, core) cell positions on a /Home/PartPrices page, read
+    from its <th> labels. The usual list is PART DESCRIPTION, PRICE, BASIS,
+    CORE -> (0, 1, 3), which is also the answer when no header is found;
+    S&S adds a PRICE GROUP column -> (0, 2, 4)."""
+    import html as html_mod
+    labels = [re.sub(r"[^A-Z]", "", html_mod.unescape(re.sub(r"<[^>]+>", "", h)).upper())
+              for h in _CRUSH_MVC_TH_RE.findall(page)]
+    if "PARTDESCRIPTION" in labels and "PRICE" in labels:
+        core = next((i for i, lab in enumerate(labels) if lab.startswith("CORE")), None)
+        if core is not None:
+            return labels.index("PARTDESCRIPTION"), labels.index("PRICE"), core
+    return 0, 1, 3
+
+
 def refresh_crush_mvc_pricing_file(source: str) -> Path:
     """/Home/PartPrices of one CRUSH MVC tenant -> {source}_pricing.json
     (4 columns: PART DESCRIPTION, $PRICE, BASIS, $CORE — the Ryan's shape;
@@ -23734,20 +23789,34 @@ def refresh_crush_mvc_pricing_file(source: str) -> Path:
         return path
     try:
         r = requests.get(site["base"] + site["prices_path"],
-                         headers={**HEADERS, "Accept": "text/html"}, timeout=60)
+                         headers={**_crush_mvc_headers(site), "Accept": "text/html"}, timeout=60)
         r.raise_for_status()
         page = r.text
     except Exception as e:
         print(f"  [{label} pricing] fetch failed: {e} — keeping existing file",
               file=sys.stderr)
         return path
+    seen = _crush_mvc_parse_prices(page)
+    if len(seen) > 150:
+        path.write_text(json.dumps(list(seen.values()), separators=(",", ":")))
+        print(f"  [{label} pricing] wrote {len(seen)} parts", file=sys.stderr)
+    else:
+        print(f"  [{label} pricing] only {len(seen)} parts parsed — keeping existing file",
+              file=sys.stderr)
+    return path
+
+
+def _crush_mvc_parse_prices(page: str) -> dict[str, dict]:
+    """A /Home/PartPrices page -> {name: price entry}, first spelling wins."""
+    import html as html_mod
+    i_name, i_price, i_core = _crush_mvc_price_columns(page)
     seen: dict[str, dict] = {}
     for block in _CRUSH_MVC_TR_RE.findall(page):
         cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
                  for c in _FENIX_TD_RE.findall(block)]
-        if len(cells) < 4:
+        if len(cells) <= max(i_name, i_price, i_core):
             continue
-        name, price_s, _basis, core_s = cells[:4]
+        name, price_s, core_s = cells[i_name], cells[i_price], cells[i_core]
         if (not name or name.upper() == "PART DESCRIPTION" or name in seen
                 or _PRICE_AS_NAME_RE.match(name)):
             continue
@@ -23762,13 +23831,12 @@ def refresh_crush_mvc_pricing_file(source: str) -> Path:
             "corePrice": f"{core_f:.2f}",
             "totalPrice": f"{price_f + core_f:.2f}",
         }
-    if len(seen) > 150:
-        path.write_text(json.dumps(list(seen.values()), separators=(",", ":")))
-        print(f"  [{label} pricing] wrote {len(seen)} parts", file=sys.stderr)
-    else:
-        print(f"  [{label} pricing] only {len(seen)} parts parsed — keeping existing file",
-              file=sys.stderr)
-    return path
+    return seen
+
+
+def refresh_ssupullit_pricing_file() -> Path:
+    """Refresh S&S U-Pull-It's price list -> ssupullit_pricing.json."""
+    return refresh_crush_mvc_pricing_file("ssupullit")
 
 
 def refresh_mmupullit_pricing_file() -> Path:
@@ -25075,6 +25143,7 @@ INDEPENDENT_FETCHERS: list = [
     ("Marion County Auto Parts", fetch_marioncounty_inventory),
     ("662 Self Serve", fetch_selfserve662_inventory),
     ("CP's U-Pull-It", fetch_cpsupullit_inventory),
+    ("S&S U-Pull-It", fetch_ssupullit_inventory),  # 2026-11-17, Lebanon MO (35 makes at 1 s)
     # yardconnect-pro tenants (2026-10-27): one entry per host, like U-Pick-It
     # AZ above (same config-driven adapter, YARDCONNECT_SITES).
     ("Chuck & Eddie's", fetch_chuckeddies_inventory),
@@ -28713,7 +28782,7 @@ def main():
                refresh_upas_pricing_file, refresh_mmupullit_pricing_file,
                refresh_polkpickpay_pricing_file, refresh_chuckeddies_pricing_file,
                refresh_byot_pricing_file, refresh_wilberts_pricing_file,
-               refresh_ifipull_pricing_file)
+               refresh_ifipull_pricing_file, refresh_ssupullit_pricing_file)
         for fn in fns:
             try:
                 fn()
