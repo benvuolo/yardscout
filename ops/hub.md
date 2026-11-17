@@ -1382,3 +1382,35 @@ so the site itself was not opened and its look was not compared):
   alerts with push, and the two store apps.
 - Draft reply given to the owner in chat (playbook voice). The sentence
   about not having seen PullScout before is the owner's to keep or cut.
+
+## 2026-11-17 14:27 UTC who was first: PullScout, by about five months (public records)
+
+Owner: "They look concerningly similar, can we tell who made theirs first? I
+had no idea pullscout was a thing and they even have the same orange."
+
+| | PullScout | YardScout |
+|---|---|---|
+| Domain registered (registry RDAP) | 2026-03-19 (NameCheap, Cloudflare DNS) | yardscout.io 2026-10-09 |
+| First certificates (crt.sh) | 2026-03-19, incl. www | 2026-10-09 |
+| Web Archive | a working copy dated 2026-05-01 | 2026-10-10 |
+| Project history | not visible | first commit 2026-09-02 as "Junkyard Hunter"; "rebrand to YardScout" 2026-09-09 |
+| Orange | not seen (see below) | `#ff6b35` in the first stylesheet (09-02); today's `#B84A0A` since 2026-10-27 ("brand: logo kit rollout") |
+
+- Their site existed at least four months before this repo's first commit.
+  Do not say or imply YardScout was first, anywhere.
+- Nothing in this repo mentions PullScout before the hub's own note of
+  today, and YardScout's orange dates from its first day under its first
+  name: both fit the owner's statement that it was built without knowing
+  of them.
+- NOT established: what their site looked like at any date, and so whether
+  the look or the orange is theirs first. The hub could not open
+  pullscout.com (the fetch tool could not reach it; a plain fetch from the
+  shell was refused by the session's permission check, and the hub did not
+  try another way) nor the Web Archive copy. A side-by-side needs the
+  owner's screenshots or their go-ahead to open the site.
+- Hub's view given to the owner: since they were first, a close likeness
+  is YardScout's problem to solve, not theirs. Worth making the look
+  plainly its own (accent, wordmark, first screen) once the two can be
+  compared; a trademark question belongs with a trademark lawyer.
+- Script: `xt/own_history.py` in the hub scratchpad (dates from the public
+  GitHub history).
