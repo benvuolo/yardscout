@@ -139,7 +139,11 @@ async function open(browser, { origin = 'https://yardscout.io', native = null, s
   const shot = async (name) => {
     if (!SHOTS) return;
     fs.mkdirSync(SHOTS, { recursive: true });
-    await page.evaluate(() => { const el = document.getElementById('alert-watchlist'); window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - 90); });
+    // The card in the middle of the screen, with no toast over it.
+    await page.evaluate(() => {
+      const t = document.getElementById('watch-toast'); if (t) t.classList.remove('show');
+      const el = document.getElementById('free-alert'); (el && el.getClientRects().length ? el : document.getElementById('alert-watchlist')).scrollIntoView({ block: 'center' });
+    });
     await page.waitForTimeout(200);
     await page.screenshot({ path: path.join(SHOTS, name + '.png') });
   };

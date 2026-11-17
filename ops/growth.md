@@ -854,3 +854,62 @@ needs no second confirmation email. (5) The alert and the Monday email
 unsubscribe separately. (6) One Pro line in the alert email, with a link, no
 price. (7) Subjects: "New: 2004 Toyota Tacoma at (yard)" for one car, "3
 new: Toyota Tacoma within 50 mi" for several.
+
+**Tests (final tree; server, wrangler and browser runs each behind the
+shared lock).** New: `free_email_alert_unit.mjs` 141 (real handlers on SQLite
+with every migration: limits, opt-in, dedupe, budget, held and retried,
+removal, the commit hook order, statements per scan, logs),
+`free_email_alert_client_unit.mjs` 42 (the page's pure rules against the
+server's; app.js parses), `free_email_alert_ui_e2e.mjs` 79 (free web visitor
+through every state, Pro unchanged, both app shells hidden, rule 6 byte for
+byte), `e2e-email.sh` phase 3 = `free_email_alert_e2e.mjs` 53 (wrangler +
+mock Resend: sign-up, confirm, real scan commits, one email, per-scan and
+per-day limits, ops email lines, unsubscribe). `ui_no_truncation.mjs`
+gained 8 screens (`alerts-falert-ask`, `-ask-one`, `-ask-cap`, `-pending`,
+`-on`, `-change`, `-on-gone`, `-off`); run for those plus `alerts`,
+`alerts-hits`, `alerts-instant` at 320 / 390 / 768 / 1280, light and dark,
+100% and 200%: 176 checks, 0 failures.
+Existing, all pass: `e2e-email.sh` 118 in all (phases 1 and 2 unchanged),
+`e2e.sh` 39, `e2e-devices.sh` 74, `e2e-ops.sh` 154, `free_instant_e2e` 30,
+`funnel_events_e2e` 128, `recap_ask_e2e` 35, `share_watch_e2e` 33,
+`tab_retap_e2e` 15, `cars_feed_e2e` 117, `no_gate_e2e` 78, and all 22
+`*_unit.mjs`.
+Not run: the full `ui_no_truncation` (only the screens above, as the hub
+asked), `e2e-coverage.sh`, the other browser suites (pro sheet, app promo,
+trims, photos, car search, card share, part finder, the `.py` ones) and the
+site-proxy units; none of their files were touched.
+What the tests caught on the way, now fixed: the first card used a
+drop-down, which cut "Mercedes-Benz" at 320 px with 200% text (also on the
+existing `alerts-instant` screen), and its "Use a different address or car"
+link was 4.22:1 on the card's tint; the cars are rows now and that is a
+plain button. The server e2e once died on a closed keep-alive socket to the
+local mock (the test's own request, fixed in the test). One browser check
+read the watchlist before the scan had filled it (the test now waits).
+
+**Seen, not fixed.**
+- A typed address is wider than a phone's field at 200% text (19 characters
+  need 336 px, the field has 226). The field scrolls, as every one-line
+  field does, and the Monday-email field is the same; no screen in the
+  layout check holds a whole address in a field.
+- A watch with the email alert on still shows the near-miss line with its
+  Pro box ("Would have sent a push within hours") for cars the free email
+  may already have covered. The apps leave that line out for the instant
+  watch's own nearby cars (`inInstantScope`); the web does not know when the
+  alert was set. Other workstream's block (`renderAlerts` near-miss).
+- `alerts.js` says "free plan: 50/req" for the commit's subrequest budget.
+  Web push (35), device pushes (25), Pro emails (20) and the rest already
+  add up past 50 on a busy commit; this adds at most 5 emails and about 10
+  statements. If that limit is hit, later sends in the commit fail,
+  whichever dispatcher they belong to. Worth a look at the plan's real limit.
+- `/v1/recap/add` and `/v1/recap/signup` share one per-IP bucket with
+  different limits, so adds use up the sign-up allowance.
+- The hourly check's "Resend near daily cap" text names only confirmations
+  and recaps as held; free alerts now stop earlier (at 70).
+
+**Suggestions.** (1) Offer the alert in the watch toast instead of, or
+beside, the Monday email: it is the stronger free promise and today it is
+only found by opening Alerts. (2) Add the four events to the weekly
+scorecard as one line (offered, asked, confirmed, first email). (3) If free
+alerts are held on most days, a paid Resend plan lifts every limit here by
+setting `RESEND_DAILY_CAP`. (4) Count alerts dropped after 48 h, so "held"
+and "never sent" can be told apart.
