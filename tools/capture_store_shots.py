@@ -59,7 +59,7 @@ APP_SCALE = 3
 
 # (file stem, headline, sub-line, capture step, pro?)
 SLIDES = [
-    ("01_cars", "Find the car before you drive", "Each car's row and the day it was set out", "cars", False),
+    ("01_cars", "See what's on the lot before you drive", "Each car's row and the day it was set out", "cars", False),
     ("02_map", "Every yard near you on one map", "Tap a yard to see what landed this week", "map", False),
     ("03_parts", "See which cars carry a part that fits", "Camry alternator: verified or likely fit", "parts", False),
     ("04_rows", "Walk the rows with a list", "One yard's cars in row order, tick them off", "rows", False),
