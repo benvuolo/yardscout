@@ -1516,3 +1516,12 @@ appears to be free alerts".
   with the petrol accent (064f043b, sw `jh-v206`); they go live as one
   batch after their regression. Task #58 closes then.
 - Builder told that the held sentences are no longer held.
+
+## 2026-11-17 15:17 UTC one-colour name confirmed live
+
+One fresh load of yardscout.io at phone size: cache `jh-v205`; both halves
+of the name compute to the same colour (rgb 28, 28, 26); 40 tiles; no page
+errors. Deploy Workers (rendered pages) and Pages both succeeded at 15:06.
+Usage stats run 44109930771: `funnel-v5` rows web 88, android 80, ios 14,
+so 1.13.0 is in real use on both phones (check-in step 2). Devices: android
+14 (1 Pro), ios 24 (9 Pro); 33 devices hold 87 watches.
