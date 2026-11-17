@@ -2813,3 +2813,28 @@ list, so its 1,281 cars show 2 to 8 rows. Adding it would put "fits
 
 Result (same inventory): generic-only 13,132 → 12,851. Sonic 2012:
 281 → 0. The 999 cars from 2013–20 gain the rows above for their years.
+
+### 26.5 Ford Freestar 2004–2007
+
+Basis: consumerguide.com/used/2004-07-ford-freestar; WP Ford_Windstar
+("Third generation (Ford Freestar; 2004–2007)"); EPA menus 2003–2008; Ford
+catalog records (oem-raw `raw/www.fordpartsgiant.com.jsonl`, retrieved
+2026-11-05 and 2026-11-06).
+- **One generation, no facelift:** "virtually unchanged for 2005", "little
+  changed" for 2006, "carries over unchanged during its last year" (CG).
+  The Ford grille numbers list 2004–2007.
+- **Drive:** "All-wheel drive was not offered" (CG; EPA lists FWD only).
+- **A/C:** "front air conditioning" in the base list every year (CG).
+- **Power sliding doors:** "Power operation was available for the sliding
+  side doors"; standard on the Limited (CG).
+
+| Row | Years | Gate | Basis |
+|---|---|---|---|
+| A/C compressor | 2004–07 | — | Ford 4F2Z-19703-AB (and the loaded assembly 4F2Z-19V703-AA) list 2004–2007, 3.9L and 4.2L. Standard (CG). |
+| Fuel pump module | 2004–05 | — | Ford 3F2Z-9H307-AB lists 2004–2005. Its replacement 3F2Z-9H307-A is named, but its years are not in the data. |
+| Power sliding door motor | 2004–07 | option | CG. Same conservative band as the Uplander/Windstar rows (§20.3). |
+
+Left out, no stated basis: fuel pump 2006–07; rear A/C parts (no audited
+band); the Mercury Monterey twin (no entry; not researched).
+
+Result (same inventory): generic-only 12,851 → 12,598. Freestar 253 → 0.

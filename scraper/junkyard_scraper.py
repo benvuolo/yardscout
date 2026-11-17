@@ -6387,6 +6387,15 @@ _gap_extend("sonic", parts=[
     *_per_gen([(2012, 2015)], [_SUNROOF]),
 ])
 
+# §26.5 Ford Freestar 2004-2007 (253 cars generic-only; one generation, no
+# facelift, FWD only). Ford A/C compressor 4F2Z-19703-AB lists 2004-2007
+# (front A/C standard, CG); fuel pump 3F2Z-9H307-AB lists 2004-2005. Power
+# sliding doors optional (standard on the Limited), CG.
+_gap_extend("freestar", parts=[
+    *_per_gen([(2004, 2007)], [_GAP_AC, _PSD_MOTOR]),
+    *_per_gen([(2004, 2005)], [_GAP_PUMP]),
+])
+
 # ---- end of §26 block
 
 _apply_consensus_evergreens()
