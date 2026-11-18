@@ -1708,3 +1708,26 @@ Branch `yards/breadth-1117` (f850bd22). Hub read the whole scraper diff.
   3. Which outreach drafts to send; Davie needs a human look first;
      Standard's price list is in Canadian dollars (the app has no currency
      label).
+
+## 2026-11-18 15:17 UTC yards + parts builders' work to main (scraper only)
+
+Branch `hub/scraper-1118` = `yards/breadth-1117` (f850bd22) +
+`parts/next-block-1117` (ad6cf91b) merged on main. All 33
+`scraper/test_*.py` pass on the combined tree. Takes effect at the next
+scan; no website file changes.
+- Yards: Intermountain Auto iPull (Idaho Falls ID), S&S U-Pull-It
+  (Lebanon MO), Standard Auto Wreckers UPIC (Toronto ON); U-Pull-R reader
+  switched off (`UPULLR_READER_ENABLED = False`, nothing sent to their
+  site). After the first scan with them: run `scraper/gen_yard_site_links.py`
+  (rewrites a list in `docs/app.js`, needs a website regression) and wire
+  `ifipull_pricing.json` / `ssupullit_pricing.json` into the app's
+  price-sheet list.
+- Parts §26: Volvo S40, Saturn S-Series, Trax, Sonic, Freestar, Freestyle,
+  Mirage, Venture, Xterra; every mechanical row from a catalog part number
+  in the `oem-raw` crawl records. Generic-only 4.1% → 3.5% on the same
+  inventory; no car lost a row.
+- Check the next scan log: the three new yards' counts, "[U-Pull-R] reader
+  is switched off", no new WARNING lines.
+- Fable agents stopped by the weekly model limit (reset 2026-11-19 02:00
+  UTC); session switched to Opus by the owner. Watertight, interchange and
+  yard-freshness builders restarted on Opus at ~15:15 UTC.
