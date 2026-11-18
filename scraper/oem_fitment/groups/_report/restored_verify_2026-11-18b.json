@@ -1,0 +1,661 @@
+{
+ "what": "Independent check of the claims interchange/rules-1118 adds back to live OEM groups, the disputed R14 removal, and a seeded spot check of narrowed drive notes",
+ "date": "2026-11-18",
+ "session": "verifier subagent of session_01LsgNuWEh1vdaDCtdP1jxMM",
+ "branch_checked": "origin/interchange/rules-1118 @ 54d0784dcda8040c59db9d65472ca3e0e6b6f239 vs origin/main @ 700bcf9b7aca696e5030016ed406f5c25ab73eeb",
+ "raw": "oem-raw @ dca9cd845f26 (git show), physical line numbers of each part file (lists.jsonl, lists.3.jsonl ...)",
+ "method": "Restored list built from the per-app diff (make, model, year) of every group, keyed by (ns, cat, pn), in scraper/oem_fitment/groups/<ns>.json and in the payload docs/data/oem/*.json (interchange.json carries no oemGroups). Notes compared phrase by phrase: no note on the branch drops a restriction main has. Raw read with my own reader (not curate.py, not audit11_4/sample.py). No fetch, crawl or dispatch. The builder's evidence was not read before these verdicts were written.",
+ "restored_list": {
+  "groups": 9,
+  "apps": 19,
+  "by_ns": {
+   "ford": 6,
+   "gm": 2,
+   "subaru": 1
+  },
+  "matches_expectation": "yes: 9 groups across gm, ford, subaru; group files and payload agree (same 9, same apps, same notes)"
+ },
+ "drive_sample": {
+  "seed": 20261118,
+  "rng": "python random.Random(seed).sample(range(46), 8)",
+  "population": "46 payload groups present on both main and branch whose note gained '<model>: 2WD|4WD|AWD only' (the 2 more in the group files are held hmg strut groups, not live)",
+  "picked_indices": [
+   1,
+   2,
+   4,
+   13,
+   14,
+   21,
+   24,
+   41
+  ]
+ },
+ "counts": {
+  "restored_apps": {
+   "RIGHT": 19,
+   "WRONG": 0,
+   "RISK": 0
+  },
+  "disputed_R14": {
+   "WRONG (removal correct)": 1
+  },
+  "drive_notes": {
+   "over-claim (WRONG)": 0,
+   "limit shown true (RIGHT)": 0,
+   "under-claim, limit not shown true": 8,
+   "RISK": 0
+  }
+ },
+ "census_drive_notes": "All 46 live drive notes: 36 GM app-years carry '<model>: 2WD only'; for 30 of them the other-drive catalog page has no manifest and no record for that category in the raw (note rests on absence); 6 have the 4WD page present (Blazer 2001 x4, Yukon 2003 x2; not checked further). 11 come from FIT rows on catalogs with no drive split (Ram 1500 2012 x9, ML350 2007-08 x2).",
+ "items": [
+  {
+   "class": "restored",
+   "group_id": "oem:ford:window-regulator:FL+FR+RL+RR+SL+SR:7c70e98fa5",
+   "pn": "6CPZ-5423395-A",
+   "note": "Ford catalog lists #6CPZ-5423395-A for both — window motor only; trim-limited; FWD only; verify the number on the part",
+   "app": [
+    "Ford",
+    "Focus",
+    2015
+   ],
+   "verdict": "RIGHT",
+   "reason": "Listed on the 2015 Focus page (single catalog, no body/drive/engine variant pages) with a window-feature fit note only; the competing number on the same page is split by window feature (one-touch), never by body, drive, engine or date; the product page lists 2012-2018 Focus, FWD only. Feature split is covered by \"trim-limited\". rear (Focus passenger rear door; TC driver-side sliding door).",
+   "raw_records": [
+    "raw/www.fordpartsgiant.com.jsonl:998 pn=6CPZ-5423395-A seed=Ford Focus 2015 page=2015-ford-focus/body_and_paint/rear_door_glass_and_window_controls.html list_info=['Motor Assy', 'Location: Passenger Side', 'Fit Note: With Electric Rear Windows', 'Base Number: 14553', 'Callout Name: 14553'] remark=''",
+    "raw/www.fordpartsgiant.com.jsonl:998 FIT \"2012-2018 Ford Focus | 3 Cyl 1.0L EcoBoost 120PS/125PS/140PS, 4 Cyl 2.0L DI TIVCT Petrol, 4 Cyl 2.0L EcoBoost (240PS), Electric Motor | 1-Speed Transmission, 5-Speed Manual Transmission - MTX75, 6-Speed Automatic Transmission 6F15, 6-Speed Automatic Transmission DPS6, 6-Speed Manual Transaxle - MMT6, 6-Speed Manual Transmission - B6, Front-Wheel Drive (Left Hand Drive), Left Hand Drive\"",
+    "raw/www.fordpartsgiant.com.jsonl:998 FIT \"2014-2023 Ford Transit Connect | 4 Cyl 1.5L Duratorq-TDCi (120PS) - Neo, 4 Cyl 2.0L Duratec DI TIVCT (154PS), 4 Cyl 2.5L Duratec (110kW/150PS) | 6-Speed Automatic Transmission 6F Mid-Range, 8-Speed Automatic Transmission 8F35, Front-Wheel Drive (Left Hand Drive), Left Hand Drive\"",
+    "raw/www.fordpartsgiant.com.jsonl:999 pn=6CPZ-5423395-C seed=Ford Focus 2015 page=2015-ford-focus/body_and_paint/rear_door_glass_and_window_controls.html list_info=['Motor Assy', 'Location: Passenger Side', 'Fit Note: Power Rear Window One Shot Up/Down', 'Base Number: 14553', 'Callout Name: 14553'] remark=''"
+   ],
+   "caveat": "Door side differs between the two models' own pages (see the Location fields). The app does not show a position, and the note asks to verify the number, so this is not a car-subset limit; it is a usability risk for a puller who assumes the same door."
+  },
+  {
+   "class": "restored",
+   "group_id": "oem:ford:window-regulator:FL+FR+RL+RR+SL+SR:7c70e98fa5",
+   "pn": "6CPZ-5423395-A",
+   "note": "Ford catalog lists #6CPZ-5423395-A for both — window motor only; trim-limited; FWD only; verify the number on the part",
+   "app": [
+    "Ford",
+    "Transit Connect",
+    2015
+   ],
+   "verdict": "RIGHT",
+   "reason": "Listed on the 2015 Transit Connect page (single catalog) with fit notes naming window features / side-load-door configuration only (covered by \"trim-limited\"); no body, drive, engine or production-date limit; TC is FWD only. rear (Focus passenger rear door; TC driver-side sliding door).",
+   "raw_records": [
+    "raw/www.fordpartsgiant.com.lists.jsonl:334 catalog=2015-ford-transit_connect page=sliding_door_glass.html row pn=6CPZ-5423395-A 'Motor Assy - Window Operating' remark='' extra=[Motor Assy; Location: Driver Side; Fit Note: With Dual Side Load Doors, With Kerbside Side Load Doors, With Electric Rear Windows; Base Number: 14553; Callout Name: 14553]",
+    "raw/www.fordpartsgiant.com.lists.jsonl:334 catalog=2015-ford-transit_connect page=sliding_door_glass.html row pn=6CPZ-5423395-C 'Motor Assy - Window Operating' remark='' extra=[Motor Assy; Location: Driver Side; Fit Note: Power Rear Window One Shot Up/Down, With Dual Side Load Doors, With Kerbside Side Load Doors; Base Number: 14553; Callout Name: 14553]"
+   ],
+   "caveat": "Door side differs between the two models' own pages (see the Location fields). The app does not show a position, and the note asks to verify the number, so this is not a car-subset limit; it is a usability risk for a puller who assumes the same door."
+  },
+  {
+   "class": "restored",
+   "group_id": "oem:ford:window-regulator:FL+FR+RL+RR+SL+SR:83783498ca",
+   "pn": "6CPZ-5423395-B",
+   "note": "Ford catalog lists #6CPZ-5423395-B for both — window motor only; trim-limited; FWD only; verify the number on the part",
+   "app": [
+    "Ford",
+    "Focus",
+    2015
+   ],
+   "verdict": "RIGHT",
+   "reason": "Listed on the 2015 Focus page (single catalog, no body/drive/engine variant pages) with a window-feature fit note only; the competing number on the same page is split by window feature (one-touch), never by body, drive, engine or date; the product page lists 2012-2018 Focus, FWD only. Feature split is covered by \"trim-limited\". front (Focus driver; TC passenger).",
+   "raw_records": [
+    "raw/www.fordpartsgiant.com.jsonl:993 pn=6CPZ-5423395-B seed=Ford Focus 2015 page=2015-ford-focus/body_and_paint/front_door_glass_window_controls.html list_info=['Motor Assy', 'Location: Driver Side', 'Fit Note: Power Frt Window-1 Tch Dwn-Dr Only', 'Base Number: 14553', 'Callout Name: 14553'] remark=''",
+    "raw/www.fordpartsgiant.com.jsonl:993 FIT \"2012-2018 Ford Focus | 3 Cyl 1.0L EcoBoost 120PS/125PS/140PS, 4 Cyl 2.0L DI TIVCT Petrol, 4 Cyl 2.0L EcoBoost (240PS), Electric Motor | 1-Speed Transmission, 5-Speed Manual Transmission - MTX75, 6-Speed Automatic Transmission 6F15, 6-Speed Automatic Transmission DPS6, 6-Speed Manual Transaxle - MMT6, 6-Speed Manual Transmission - B6, Front-Wheel Drive (Left Hand Drive), Left Hand Drive\"",
+    "raw/www.fordpartsgiant.com.jsonl:993 FIT \"2014-2023 Ford Transit Connect | 4 Cyl 1.5L Duratorq-TDCi (120PS) - Neo, 4 Cyl 2.0L Duratec DI TIVCT (154PS), 4 Cyl 2.5L Duratec (110kW/150PS) | 6-Speed Automatic Transmission 6F Mid-Range, 8-Speed Automatic Transmission 8F35, Front-Wheel Drive (Left Hand Drive), Left Hand Drive\"",
+    "raw/www.fordpartsgiant.com.jsonl:994 pn=6CPZ-5423395-D seed=Ford Focus 2015 page=2015-ford-focus/body_and_paint/front_door_glass_window_controls.html list_info=['Motor Assy', 'Location: Driver Side', 'Fit Note: Power Front Windows One Touch Up/Do', 'Base Number: 14553', 'Callout Name: 14553'] remark=''"
+   ],
+   "caveat": "Door side differs between the two models' own pages (see the Location fields). The app does not show a position, and the note asks to verify the number, so this is not a car-subset limit; it is a usability risk for a puller who assumes the same door."
+  },
+  {
+   "class": "restored",
+   "group_id": "oem:ford:window-regulator:FL+FR+RL+RR+SL+SR:83783498ca",
+   "pn": "6CPZ-5423395-B",
+   "note": "Ford catalog lists #6CPZ-5423395-B for both — window motor only; trim-limited; FWD only; verify the number on the part",
+   "app": [
+    "Ford",
+    "Transit Connect",
+    2015
+   ],
+   "verdict": "RIGHT",
+   "reason": "Listed on the 2015 Transit Connect page (single catalog) with fit notes naming window features / side-load-door configuration only (covered by \"trim-limited\"); no body, drive, engine or production-date limit; TC is FWD only. front (Focus driver; TC passenger).",
+   "raw_records": [
+    "raw/www.fordpartsgiant.com.lists.jsonl:333 catalog=2015-ford-transit_connect page=front_door_glass_window_controls.html row pn=6CPZ-5423395-B 'Motor Assy - Window Operating' remark='' extra=[Motor Assy; Location: Passenger Side; Fit Note: Power Frt Window-1 Tch Dwn-Dr Only; Base Number: 14553; Callout Name: 14553]",
+    "raw/www.fordpartsgiant.com.lists.jsonl:333 catalog=2015-ford-transit_connect page=front_door_glass_window_controls.html row pn=6CPZ-5423395-D 'Motor Assy - Window Operating' remark='' extra=[Motor Assy; Location: Passenger Side; Fit Note: Power Front Windows One Touch Up/Do, Pwr Fr Window 1 Touch Up/Dwn-Driver; Base Number: 14553; Callout Name: 14553]"
+   ],
+   "caveat": "Door side differs between the two models' own pages (see the Location fields). The app does not show a position, and the note asks to verify the number, so this is not a car-subset limit; it is a usability risk for a puller who assumes the same door."
+  },
+  {
+   "class": "restored",
+   "group_id": "oem:ford:window-regulator:FL+FR+RL+RR+SL+SR:bf72cf6844",
+   "pn": "6CPZ-9923394-B",
+   "note": "Ford catalog lists #6CPZ-9923394-B for both — window motor only; trim-limited; FWD only; verify the number on the part",
+   "app": [
+    "Ford",
+    "Focus",
+    2015
+   ],
+   "verdict": "RIGHT",
+   "reason": "Listed on the 2015 Focus page (single catalog, no body/drive/engine variant pages) with a window-feature fit note only; the competing number on the same page is split by window feature (one-touch), never by body, drive, engine or date; the product page lists 2012-2018 Focus, FWD only. Feature split is covered by \"trim-limited\". rear (Focus driver rear door; TC passenger sliding door).",
+   "raw_records": [
+    "raw/www.fordpartsgiant.com.jsonl:1000 pn=6CPZ-9923394-B seed=Ford Focus 2015 page=2015-ford-focus/body_and_paint/rear_door_glass_and_window_controls.html list_info=['Motor Assy', 'Location: Driver Side', 'Fit Note: With Electric Rear Windows', 'Base Number: 14553', 'Callout Name: 14553'] remark=''",
+    "raw/www.fordpartsgiant.com.jsonl:1000 FIT \"2022-2025 Ford E-Transit | BATTERY EV (EV/BEV) | \"",
+    "raw/www.fordpartsgiant.com.jsonl:1000 FIT \"2012-2018 Ford Focus | 3 Cyl 1.0L EcoBoost 120PS/125PS/140PS, 4 Cyl 2.0L DI TIVCT Petrol, 4 Cyl 2.0L EcoBoost (240PS), Electric Motor | 1-Speed Transmission, 5-Speed Manual Transmission - MTX75, 6-Speed Automatic Transmission 6F15, 6-Speed Automatic Transmission DPS6, 6-Speed Manual Transaxle - MMT6, 6-Speed Manual Transmission - B6, Front-Wheel Drive (Left Hand Drive), Left Hand Drive\"",
+    "raw/www.fordpartsgiant.com.jsonl:1000 FIT \"2015-2025 Ford Transit | 5 Cyl 3.2L Duratorq-TDCi - Puma, 6 Cyl 3.5L GTDI, 6 Cyl 3.7L PFI NA | 6-Speed Automatic Transmission (6R80)\"",
+    "raw/www.fordpartsgiant.com.jsonl:1000 FIT \"2014-2023 Ford Transit Connect | 4 Cyl 1.5L Duratorq-TDCi (120PS) - Neo, 4 Cyl 2.0L Duratec DI TIVCT (154PS), 4 Cyl 2.5L Duratec (110kW/150PS) | 6-Speed Automatic Transmission 6F Mid-Range, 8-Speed Automatic Transmission 8F35, Front-Wheel Drive (Left Hand Drive), Left Hand Drive\"",
+    "raw/www.fordpartsgiant.com.jsonl:1001 pn=6CPZ-9923394-D seed=Ford Focus 2015 page=2015-ford-focus/body_and_paint/rear_door_glass_and_window_controls.html list_info=['Motor Assy', 'Location: Driver Side', 'Fit Note: Power Rear Window One Shot Up/Down', 'Base Number: 14553', 'Callout Name: 14553'] remark=''"
+   ],
+   "caveat": "Door side differs between the two models' own pages (see the Location fields). The app does not show a position, and the note asks to verify the number, so this is not a car-subset limit; it is a usability risk for a puller who assumes the same door."
+  },
+  {
+   "class": "restored",
+   "group_id": "oem:ford:window-regulator:FL+FR+RL+RR+SL+SR:bf72cf6844",
+   "pn": "6CPZ-9923394-B",
+   "note": "Ford catalog lists #6CPZ-9923394-B for both — window motor only; trim-limited; FWD only; verify the number on the part",
+   "app": [
+    "Ford",
+    "Transit Connect",
+    2015
+   ],
+   "verdict": "RIGHT",
+   "reason": "Listed on the 2015 Transit Connect page (single catalog) with fit notes naming window features / side-load-door configuration only (covered by \"trim-limited\"); no body, drive, engine or production-date limit; TC is FWD only. rear (Focus driver rear door; TC passenger sliding door).",
+   "raw_records": [
+    "raw/www.fordpartsgiant.com.lists.jsonl:334 catalog=2015-ford-transit_connect page=sliding_door_glass.html row pn=6CPZ-9923394-B 'Motor Assy - Window Operating' remark='' extra=[Motor Assy; Location: Passenger Side; Fit Note: Pwr Rr Pass/Fixed Drv Rr Window, With Electric Rear Windows, With Dual Side Load Doors, With Kerbside Side Load Doors; Base Number: 14553; Callout Name: 14553]",
+    "raw/www.fordpartsgiant.com.lists.jsonl:334 catalog=2015-ford-transit_connect page=sliding_door_glass.html row pn=6CPZ-9923394-D 'Motor Assy - Window Operating' remark='' extra=[Motor Assy; Location: Passenger Side; Fit Note: Power Rear Window One Shot Up/Down, With Dual Side Load Doors, With Kerbside Side Load Doors; Base Number: 14553; Callout Name: 14553]"
+   ],
+   "caveat": "Door side differs between the two models' own pages (see the Location fields). The app does not show a position, and the note asks to verify the number, so this is not a car-subset limit; it is a usability risk for a puller who assumes the same door."
+  },
+  {
+   "class": "restored",
+   "group_id": "oem:ford:window-regulator:FL+FR+RL+RR+SL+SR:ec3a8e03bc",
+   "pn": "6CPZ-9923394-C",
+   "note": "Ford catalog lists #6CPZ-9923394-C for both — window motor only; trim-limited; FWD only; verify the number on the part",
+   "app": [
+    "Ford",
+    "Focus",
+    2015
+   ],
+   "verdict": "RIGHT",
+   "reason": "Listed on the 2015 Focus page (single catalog, no body/drive/engine variant pages) with a window-feature fit note only; the competing number on the same page is split by window feature (one-touch), never by body, drive, engine or date; the product page lists 2012-2018 Focus, FWD only. Feature split is covered by \"trim-limited\". front (Focus passenger; TC driver).",
+   "raw_records": [
+    "raw/www.fordpartsgiant.com.jsonl:992 pn=6CPZ-9923394-C seed=Ford Focus 2015 page=2015-ford-focus/body_and_paint/front_door_glass_window_controls.html list_info=['Motor Assy', 'Location: Passenger Side', 'Fit Note: Power Frt Window-1 Tch Dwn-Dr Only', 'Base Number: 14553', 'Callout Name: 14553'] remark=''",
+    "raw/www.fordpartsgiant.com.jsonl:992 FIT \"2012-2018 Ford Focus | 3 Cyl 1.0L EcoBoost 120PS/125PS/140PS, 4 Cyl 2.0L DI TIVCT Petrol, 4 Cyl 2.0L EcoBoost (240PS), Electric Motor | 1-Speed Transmission, 5-Speed Manual Transmission - MTX75, 6-Speed Automatic Transmission 6F15, 6-Speed Automatic Transmission DPS6, 6-Speed Manual Transaxle - MMT6, 6-Speed Manual Transmission - B6, Front-Wheel Drive (Left Hand Drive), Left Hand Drive\"",
+    "raw/www.fordpartsgiant.com.jsonl:992 FIT \"2014-2023 Ford Transit Connect | 4 Cyl 1.5L Duratorq-TDCi (120PS) - Neo, 4 Cyl 2.0L Duratec DI TIVCT (154PS), 4 Cyl 2.5L Duratec (110kW/150PS) | 6-Speed Automatic Transmission 6F Mid-Range, 8-Speed Automatic Transmission 8F35, Front-Wheel Drive (Left Hand Drive), Left Hand Drive\"",
+    "raw/www.fordpartsgiant.com.jsonl:995 pn=6CPZ-9923394-E seed=Ford Focus 2015 page=2015-ford-focus/body_and_paint/front_door_glass_window_controls.html list_info=['Motor Assy', 'Location: Passenger Side', 'Fit Note: Power Front Windows One Touch Up/Do', 'Base Number: 14553', 'Callout Name: 14553'] remark=''"
+   ],
+   "caveat": "Door side differs between the two models' own pages (see the Location fields). The app does not show a position, and the note asks to verify the number, so this is not a car-subset limit; it is a usability risk for a puller who assumes the same door."
+  },
+  {
+   "class": "restored",
+   "group_id": "oem:ford:window-regulator:FL+FR+RL+RR+SL+SR:ec3a8e03bc",
+   "pn": "6CPZ-9923394-C",
+   "note": "Ford catalog lists #6CPZ-9923394-C for both — window motor only; trim-limited; FWD only; verify the number on the part",
+   "app": [
+    "Ford",
+    "Transit Connect",
+    2015
+   ],
+   "verdict": "RIGHT",
+   "reason": "Listed on the 2015 Transit Connect page (single catalog) with fit notes naming window features / side-load-door configuration only (covered by \"trim-limited\"); no body, drive, engine or production-date limit; TC is FWD only. front (Focus passenger; TC driver).",
+   "raw_records": [
+    "raw/www.fordpartsgiant.com.lists.jsonl:333 catalog=2015-ford-transit_connect page=front_door_glass_window_controls.html row pn=6CPZ-9923394-C 'Motor Assy - Window Operating' remark='' extra=[Motor Assy; Location: Driver Side; Fit Note: Power Frt Window-1 Tch Dwn-Dr Only; Base Number: 14553; Callout Name: 14553]",
+    "raw/www.fordpartsgiant.com.lists.jsonl:333 catalog=2015-ford-transit_connect page=front_door_glass_window_controls.html row pn=6CPZ-9923394-E 'Motor Assy - Window Operating' remark='' extra=[Motor Assy; Location: Driver Side; Fit Note: Power Front Windows One Touch Up/Do; Base Number: 14553; Callout Name: 14553]"
+   ],
+   "caveat": "Door side differs between the two models' own pages (see the Location fields). The app does not show a position, and the note asks to verify the number, so this is not a car-subset limit; it is a usability risk for a puller who assumes the same door."
+  },
+  {
+   "class": "restored",
+   "group_id": "oem:ford:window-regulator:FR:dfec425b50",
+   "pn": "CV6Z-5423394-B",
+   "note": "Ford catalog lists #CV6Z-5423394-B for both — window motor only; fits some configurations; C-Max: 2WD only; Focus: FWD only; verify the number on the part",
+   "app": [
+    "Ford",
+    "C-Max",
+    2013
+   ],
+   "verdict": "RIGHT",
+   "reason": "The 2013 C-Max page (single catalog) lists exactly one front motor per side and this is it (same side as on the Focus); no fit note, no production date on the motor rows (only the regulators carry dates). FIT row: 2013-2014 C-Max, FWD.",
+   "raw_records": [
+    "raw/www.fordpartsgiant.com.lists.jsonl:283 catalog=2013-ford-c_max page=front_door_glass_window_controls.html row pn=CV6Z-5423394-B 'Motor Assy - Window Operating' remark='' extra=[Motor Assy; Location: Passenger Side; Callout Name: 14553; Replaced By: 6CPZ-9923394-E]",
+    "raw/www.fordpartsgiant.com.lists.jsonl:283 catalog=2013-ford-c_max page=front_door_glass_window_controls.html row pn=CV6Z-5423395-B 'Motor Assy - Window Operating' remark='' extra=[Motor Assy; Location: Driver Side; Callout Name: 14553; Replaced By: 6CPZ-5423395-D]",
+    "raw/www.fordpartsgiant.com.jsonl:144 FIT \"2013-2014 Ford C-Max | 4 Cyl 2.0L Duratec Hybrid (130kW) | ECVT Auto Trans Power Split, Front-Wheel Drive (Left Hand Drive), Left Hand Drive, Two-Wheel Drive (Left Hand Drive)\""
+   ]
+  },
+  {
+   "class": "restored",
+   "group_id": "oem:ford:window-regulator:FR:dfec425b50",
+   "pn": "CV6Z-5423394-B",
+   "note": "Ford catalog lists #CV6Z-5423394-B for both — window motor only; fits some configurations; C-Max: 2WD only; Focus: FWD only; verify the number on the part",
+   "app": [
+    "Ford",
+    "Focus",
+    2012
+   ],
+   "verdict": "RIGHT",
+   "reason": "Listed on the 2012 Focus page (single catalog) for \"Power Front Windows One Touch Up/Do\"; the other front motor on the page is split by the same window feature (CP9Z \"1 Tch Dwn-Dr Only\"), never by body (sedan and hatch share the page), drive or date. Covered by \"fits some configurations\".",
+   "raw_records": [
+    "raw/www.fordpartsgiant.com.jsonl:144 pn=CV6Z-5423394-B seed=Ford Focus 2012 page=2012-ford-focus/body_and_paint/front_door_glass_window_controls.html list_info=['Motor Assy', 'Location: Passenger Side', 'Fit Note: Power Front Windows One Touch Up/Do', 'Callout Name: 14553', 'Replaced By: 6CPZ-9923394-E'] remark=''",
+    "raw/www.fordpartsgiant.com.jsonl:144 FIT \"2013-2014 Ford C-Max | 4 Cyl 2.0L Duratec Hybrid (130kW) | ECVT Auto Trans Power Split, Front-Wheel Drive (Left Hand Drive), Left Hand Drive, Two-Wheel Drive (Left Hand Drive)\"",
+    "raw/www.fordpartsgiant.com.jsonl:144 FIT \"2012-2014 Ford Focus | 4 Cyl 2.0L DI TIVCT Petrol, 4 Cyl 2.0L EcoBoost (240PS) , Electric Motor | 1-Speed Transmission, 5-Speed Manual Transmission - MTX75, 6-Speed Automatic Transmission DPS6, 6-Speed Manual Transaxle - MMT6, Front-Wheel Drive (Left Hand Drive), Left Hand Drive\"",
+    "raw/www.fordpartsgiant.com.jsonl:142 pn=CP9Z-5423394-B seed=Ford Focus 2012 page=2012-ford-focus/body_and_paint/front_door_glass_window_controls.html list_info=['Motor Assy', 'Location: Passenger Side', 'Fit Note: Power Frt Window-1 Tch Dwn-Dr Only', 'Callout Name: 14553', 'Replaced By: 6CPZ-9923394-C'] remark=''"
+   ]
+  },
+  {
+   "class": "restored",
+   "group_id": "oem:ford:window-regulator:FL:08dc2c924f",
+   "pn": "CV6Z-5423395-B",
+   "note": "Ford catalog lists #CV6Z-5423395-B for both — window motor only; fits some configurations; C-Max: 2WD only; Focus: FWD only; verify the number on the part",
+   "app": [
+    "Ford",
+    "C-Max",
+    2013
+   ],
+   "verdict": "RIGHT",
+   "reason": "The 2013 C-Max page (single catalog) lists exactly one front motor per side and this is it (same side as on the Focus); no fit note, no production date on the motor rows (only the regulators carry dates). FIT row: 2013-2014 C-Max, FWD.",
+   "raw_records": [
+    "raw/www.fordpartsgiant.com.lists.jsonl:283 catalog=2013-ford-c_max page=front_door_glass_window_controls.html row pn=CV6Z-5423394-B 'Motor Assy - Window Operating' remark='' extra=[Motor Assy; Location: Passenger Side; Callout Name: 14553; Replaced By: 6CPZ-9923394-E]",
+    "raw/www.fordpartsgiant.com.lists.jsonl:283 catalog=2013-ford-c_max page=front_door_glass_window_controls.html row pn=CV6Z-5423395-B 'Motor Assy - Window Operating' remark='' extra=[Motor Assy; Location: Driver Side; Callout Name: 14553; Replaced By: 6CPZ-5423395-D]",
+    "raw/www.fordpartsgiant.com.jsonl:145 FIT \"2013-2014 Ford C-Max | 4 Cyl 2.0L Duratec Hybrid (130kW) | ECVT Auto Trans Power Split, Front-Wheel Drive (Left Hand Drive), Left Hand Drive, Two-Wheel Drive (Left Hand Drive)\""
+   ]
+  },
+  {
+   "class": "restored",
+   "group_id": "oem:ford:window-regulator:FL:08dc2c924f",
+   "pn": "CV6Z-5423395-B",
+   "note": "Ford catalog lists #CV6Z-5423395-B for both — window motor only; fits some configurations; C-Max: 2WD only; Focus: FWD only; verify the number on the part",
+   "app": [
+    "Ford",
+    "Focus",
+    2012
+   ],
+   "verdict": "RIGHT",
+   "reason": "Listed on the 2012 Focus page (single catalog) for \"Power Front Windows One Touch Up/Do\"; the other front motor on the page is split by the same window feature (CP9Z \"1 Tch Dwn-Dr Only\"), never by body (sedan and hatch share the page), drive or date. Covered by \"fits some configurations\".",
+   "raw_records": [
+    "raw/www.fordpartsgiant.com.jsonl:145 pn=CV6Z-5423395-B seed=Ford Focus 2012 page=2012-ford-focus/body_and_paint/front_door_glass_window_controls.html list_info=['Motor Assy', 'Location: Driver Side', 'Fit Note: Power Front Windows One Touch Up/Do', 'Callout Name: 14553', 'Replaced By: 6CPZ-5423395-D'] remark=''",
+    "raw/www.fordpartsgiant.com.jsonl:145 FIT \"2013-2014 Ford C-Max | 4 Cyl 2.0L Duratec Hybrid (130kW) | ECVT Auto Trans Power Split, Front-Wheel Drive (Left Hand Drive), Left Hand Drive, Two-Wheel Drive (Left Hand Drive)\"",
+    "raw/www.fordpartsgiant.com.jsonl:145 FIT \"2012-2014 Ford Focus | 4 Cyl 2.0L DI TIVCT Petrol, 4 Cyl 2.0L EcoBoost (240PS) , Electric Motor | 1-Speed Transmission, 5-Speed Manual Transmission - MTX75, 6-Speed Automatic Transmission DPS6, 6-Speed Manual Transaxle - MMT6, Front-Wheel Drive (Left Hand Drive), Left Hand Drive\"",
+    "raw/www.fordpartsgiant.com.jsonl:143 pn=CP9Z-5423395-B seed=Ford Focus 2012 page=2012-ford-focus/body_and_paint/front_door_glass_window_controls.html list_info=['Motor Assy', 'Location: Driver Side', 'Fit Note: Power Frt Window-1 Tch Dwn-Dr Only', 'Callout Name: 14553', 'Replaced By: 6CPZ-5423395-B'] remark=''"
+   ]
+  },
+  {
+   "class": "restored",
+   "group_id": "oem:gm:climate-control:C:91a2833cb4",
+   "pn": "15890412",
+   "note": "GM catalog lists #15890412 for both — option: fits some option packages; verify the number on the part",
+   "app": [
+    "Chevrolet",
+    "Cobalt",
+    2007
+   ],
+   "verdict": "RIGHT",
+   "reason": "The 2007 Cobalt heater-control page lists 15890412 (heater-only control) with no Fitting Vehicle Options, so no body code; the A/C controls on the A/C page carry C67 (A/C option) codes and no body code. Heater-only vs A/C and the trim colour are option splits, covered by the option note. FIT names 2 DOOR and 4 DOOR.",
+   "raw_records": [
+    "raw/www.gmpartsgiant.com.jsonl:549 pn=15890412 seed=Chevrolet Cobalt 2007 page=2007-chevrolet-cobalt/front_end_sheet_metal_heater/heater_control_assembly.html list_info=[] remark='CONTROL,HEATER(INCLUDES 2)(EBONY)'",
+    "raw/www.gmpartsgiant.com.jsonl:549 FIT \"2005-2010 Chevrolet Cobalt | 4 Cyl 2.0L, 4 Cyl 2.2L, 4 Cyl 2.4L | 2 DOOR, 4 DOOR, LEVEL 4 PERFORMANCE (SS) 2 DOOR, LEVEL 4 PERFORMANCE/SC (SS) 2 DOOR, LEVEL 4 PERFORMANCE/SC (SS) 4 DOOR, LEVEL ONE (LS) 2 DOOR, LEVEL ONE (LS) 4 DOOR, LEVEL THREE (SS) 2 DOOR, LEVEL THREE (SS) 4 DOOR, LEVEL TWO (LT) 2 DOOR, LEVEL TWO (LT) 4 DOOR\"",
+    "raw/www.gmpartsgiant.com.jsonl:549 FIT \"2007-2010 Pontiac G5 | 4 Cyl 2.2L, 4 Cyl 2.4L | 2 DOOR, 4 DOOR, GT 2 DOOR, GT 4 DOOR, LS 2 DOOR, LS 4 DOOR, SE 2 DOOR, SE 4 DOOR, SPORT 2 DOOR, SPORT 4 DOOR\"",
+    "raw/www.gmpartsgiant.com.jsonl:549 FIT \"2005-2006 Pontiac Pursuit | 4 Cyl 2.0L, 4 Cyl 2.2L, 4 Cyl 2.4L | 2 DOOR, 4 DOOR, LEVEL 4 PERFORMANCE (SS) 2 DOOR, LEVEL 4 PERFORMANCE/SC (SS) 2 DOOR, LEVEL ONE (LS) 2 DOOR, LEVEL ONE (LS) 4 DOOR, LEVEL THREE (SS) 2 DOOR, LEVEL THREE (SS) 4 DOOR, LEVEL TWO (LT) 2 DOOR, LEVEL TWO (LT) 4 DOOR\"",
+    "raw/www.gmpartsgiant.com.jsonl:547 pn=15829485 seed=Chevrolet Cobalt 2007 page=2007-chevrolet-cobalt/body_mounting_air_conditioning_audio_entertainment/a_c_heater_control_assembly.html list_info=['Fitting Vehicle Options: AM,AP(C67), AL(C67,TV5)'] remark='HEATER & A/C(INCLUDES 2)(SATIN NICKEL)'",
+    "raw/www.gmpartsgiant.com.jsonl:548 pn=15890411 seed=Chevrolet Cobalt 2007 page=2007-chevrolet-cobalt/body_mounting_air_conditioning_audio_entertainment/a_c_heater_control_assembly.html list_info=['Fitting Vehicle Options: AJ,AK(C67), AL(C67)(EXC TV5)'] remark='HEATER & A/C(INCLUDES 2)(EBONY)'"
+   ]
+  },
+  {
+   "class": "restored",
+   "group_id": "oem:gm:climate-control:C:91a2833cb4",
+   "pn": "15890412",
+   "note": "GM catalog lists #15890412 for both — option: fits some option packages; verify the number on the part",
+   "app": [
+    "Pontiac",
+    "G5",
+    2007
+   ],
+   "verdict": "RIGHT",
+   "reason": "The 2007 G5 heater-control page (single catalog) lists 15890412 with no option or body code; its only other controls are the A/C (C67) units. FIT names G5 2 DOOR and 4 DOOR.",
+   "raw_records": [
+    "raw/www.gmpartsgiant.com.lists.jsonl:1543 catalog=2007-pontiac-g5 page=heater_control_assembly.html row pn=15890412 'CONTROL, Heater Control' remark='CONTROL,HEATER(INCLUDES 2)(EBONY)' extra=[]",
+    "raw/www.gmpartsgiant.com.lists.jsonl:1542 catalog=2007-pontiac-g5 page=a_c_heater_control_assembly.html row pn=15829485 'CONTROL' remark='HEATER & A/C(INCLUDES 2)(SATIN NICKEL)' extra=[Fitting Vehicle Options: AL,AN(C67)]",
+    "raw/www.gmpartsgiant.com.lists.jsonl:1542 catalog=2007-pontiac-g5 page=a_c_heater_control_assembly.html row pn=15890411 'CONTROL' remark='HEATER & A/C(INCLUDES 2)(EBONY)' extra=[Fitting Vehicle Options: AL,AN(37)(C67), AJ(C67)]",
+    "raw/www.gmpartsgiant.com.jsonl:549 FIT \"2007-2010 Pontiac G5 | 4 Cyl 2.2L, 4 Cyl 2.4L | 2 DOOR, 4 DOOR, GT 2 DOOR, GT 4 DOOR, LS 2 DOOR, LS 4 DOOR, SE 2 DOOR, SE 4 DOOR, SPORT 2 DOOR, SPORT 4 DOOR\""
+   ]
+  },
+  {
+   "class": "restored",
+   "group_id": "oem:gm:window-regulator:FL+FR:fc32b8c33c",
+   "pn": "88960088",
+   "note": "GM catalog lists #88960088 for both — window motor only; fits some configurations; verify the number on the part",
+   "app": [
+    "Chevrolet",
+    "Camaro",
+    1995
+   ],
+   "verdict": "RIGHT",
+   "reason": "Listed on the 1995 Camaro front-door page (single catalog, no body pages) with no option/body code, quantity 2 (both doors); the only motor on the page. FIT: 1993-2002 Camaro \"2 DOOR, CONVERTIBLE\". The power/manual regulator split is covered by \"fits some configurations\".",
+   "raw_records": [
+    "raw/www.gmpartsgiant.com.lists.jsonl:122 catalog=1995-chevrolet-camaro page=door_hardware_front.html row pn=88960088 'MOTOR, Front Door Window Regulator' remark='MOTOR,FRONT SIDE DOOR WINDOW REGULATOR(TOGETHER WITH RIVET 10157547)(16.263)' extra=[Require Quantity: 02; Package Quantity: 1]",
+    "raw/www.gmpartsgiant.com.lists.jsonl:122 catalog=1995-chevrolet-camaro page=door_hardware_front.html row pn=10305685 'REGULATOR' remark='FRONT SIDE DOOR WINDOW(INCLUDES 97)(W/MOTOR)' extra=[Location: Passenger Side]",
+    "raw/www.gmpartsgiant.com.lists.jsonl:122 catalog=1995-chevrolet-camaro page=door_hardware_front.html row pn=16625870 'REGULATOR' remark='FRONT SIDE DOOR WINDOW(INCLUDES 22)' extra=[Location: Passenger Side]",
+    "raw/www.gmpartsgiant.com.jsonl:2690 pn=88960088 seed=Chevrolet Camaro 1995 page=1995-chevrolet-camaro/windshield_wiper_mirrors_instrument_panel_console_doors/door_hardware_front.html list_info=['Require Quantity: 02', 'Package Quantity: 1'] remark='MOTOR,FRONT SIDE DOOR WINDOW REGULATOR(TOGETHER WITH RIVET 10157547)(16.263)'",
+    "raw/www.gmpartsgiant.com.jsonl:2690 FIT \"1985-1998 Chevrolet Astro | 4 Cyl 2.5L, 6 Cyl 4.3L | VAN ASTRO\"",
+    "raw/www.gmpartsgiant.com.jsonl:2690 FIT \"1993-2002 Chevrolet Camaro | 6 Cyl 3.4L, 6 Cyl 3.8L, 8 Cyl 5.7L | 2 DOOR, CONVERTIBLE\"",
+    "raw/www.gmpartsgiant.com.jsonl:2690 FIT \"1985-1998 GMC Safari | 4 Cyl 2.5L, 6 Cyl 4.3L | VAN SAFARI\"",
+    "raw/www.gmpartsgiant.com.jsonl:2690 FIT \"1993-2002 Pontiac Firebird | 6 Cyl 3.4L, 6 Cyl 3.8L, 8 Cyl 5.7L | 2 DOOR, CONVERTIBLE, COUPE\""
+   ]
+  },
+  {
+   "class": "restored",
+   "group_id": "oem:gm:window-regulator:FL+FR:fc32b8c33c",
+   "pn": "88960088",
+   "note": "GM catalog lists #88960088 for both — window motor only; fits some configurations; verify the number on the part",
+   "app": [
+    "Pontiac",
+    "Firebird",
+    1995
+   ],
+   "verdict": "RIGHT",
+   "reason": "Listed on the 1995 Firebird front-door page (single catalog) with no code, quantity 2. FIT: 1993-2002 Firebird \"2 DOOR, CONVERTIBLE, COUPE\".",
+   "raw_records": [
+    "raw/www.gmpartsgiant.com.lists.jsonl:2686 catalog=1995-pontiac-firebird page=door_hardware_front.html row pn=88960088 'MOTOR, Front Door Window Regulator' remark='MOTOR,FRONT SIDE DOOR WINDOW REGULATOR(TOGETHER WITH RIVET 10157547)(16.263)' extra=[Require Quantity: 02; Package Quantity: 1]",
+    "raw/www.gmpartsgiant.com.jsonl:2690 FIT \"1993-2002 Pontiac Firebird | 6 Cyl 3.4L, 6 Cyl 3.8L, 8 Cyl 5.7L | 2 DOOR, CONVERTIBLE, COUPE\""
+   ]
+  },
+  {
+   "class": "restored",
+   "group_id": "oem:gm:window-regulator:FL+FR:fc32b8c33c",
+   "pn": "88960088",
+   "note": "GM catalog lists #88960088 for both — window motor only; fits some configurations; verify the number on the part",
+   "app": [
+    "GMC",
+    "Safari",
+    1997
+   ],
+   "verdict": "RIGHT",
+   "reason": "Listed on both the 2WD and the AWD 1997 Safari power-window pages with no code, quantity 2, so no drive limit is needed. Only power-window vans (A31) carry a motor; the regulators show the A31 split. Covered by \"fits some configurations\". FIT: 1985-1998 Safari \"VAN SAFARI\".",
+   "raw_records": [
+    "raw/www.gmpartsgiant.com.lists.jsonl:1720 catalog=1997-gmc-safari-2wd page=power_window_door_lock_system.html row pn=88960088 'MOTOR, Door and End Gate Electrical' remark='MOTOR,FRONT SIDE DOOR WINDOW REGULATOR(TOGETHER WITH RIVET 10157547)' extra=[Require Quantity: 02; Package Quantity: 1]",
+    "raw/www.gmpartsgiant.com.lists.jsonl:1732 catalog=1997-gmc-safari-awd page=power_window_door_lock_system.html row pn=88960088 'MOTOR, Door and End Gate Electrical' remark='MOTOR,FRONT SIDE DOOR WINDOW REGULATOR(TOGETHER WITH RIVET 10157547)' extra=[Require Quantity: 02; Package Quantity: 1]",
+    "raw/www.gmpartsgiant.com.lists.jsonl:1717 catalog=1997-gmc-safari-2wd page=door_hardware_side_front.html row pn=15091383 'REGULATOR' remark='FRONT SIDE DOOR WINDOW(USE TOGETHER WITH 88961505 WIRE ASM)(W/ROUND WIRE HARNESS CONNECT)(INCLUDES MOTOR)' extra=[Location: Driver Side; Fitting Vehicle Options: LM1(A31)]",
+    "raw/www.gmpartsgiant.com.lists.jsonl:1717 catalog=1997-gmc-safari-2wd page=door_hardware_side_front.html row pn=15172549 'REGULATOR' remark='FRONT SIDE DOOR WINDOW(INCLUDES 48,55)' extra=[Location: Driver Side; Fitting Vehicle Options: LM1(EXC A31)]",
+    "raw/www.gmpartsgiant.com.jsonl:2690 FIT \"1985-1998 GMC Safari | 4 Cyl 2.5L, 6 Cyl 4.3L | VAN SAFARI\""
+   ]
+  },
+  {
+   "class": "restored",
+   "group_id": "oem:subaru:hood:C:6779a48c93",
+   "pn": "57229AG04A9P",
+   "note": "Subaru catalog lists #57229AG04A9P for both — Turbo hood (scoop cutout): Legacy GT / Outback XT only; verify the number on the part",
+   "app": [
+    "Subaru",
+    "Legacy",
+    2005
+   ],
+   "verdict": "RIGHT",
+   "reason": "The 2005 Legacy page lists it for S.(25GT+25GTLTD) and W.(25GT+25GTLTD) (+25GLI), i.e. the turbo sedan and wagon; the non-turbo hoods are other numbers (03A9P S.I#/W.I#; 05A9P Outback). FIT: 2.5L H4 Turbo GT, GT Limited. The note names the exact subset (Legacy GT).",
+   "raw_records": [
+    "raw/www.subarupartsdeal.com.lists.jsonl:413 catalog=2005-subaru-legacy page=front_hood_front_hood_lock.html row pn=57229AG04A9P 'Hood Complete-Front' remark='' extra=[Location: Front; Fitting Vehicle Options: S.(25GT+25GTLTD) +W.(25GT+25GTLTD) +WOBK.25GTLTD, S.25GLI +W.25GLI +WOBK.(25GT+25GLI)]",
+    "raw/www.subarupartsdeal.com.lists.jsonl:413 catalog=2005-subaru-legacy page=front_hood_front_hood_lock.html row pn=57229AG03A9P 'Hood Complete-Front' remark='' extra=[Location: Front; Fitting Vehicle Options: S.I# +W.I#]",
+    "raw/www.subarupartsdeal.com.lists.jsonl:413 catalog=2005-subaru-legacy page=front_hood_front_hood_lock.html row pn=57229AG05A9P 'Hood Complete-Front' remark='' extra=[Location: Front; Fitting Vehicle Options: SOBK +WOBK.(I#+R#)]",
+    "raw/www.subarupartsdeal.com.jsonl:1369 pn=57229AG04A9P seed=Subaru Outback 2005 page=2005-subaru-outback/body_key_kit_bumper/front_hood_front_hood_lock.html list_info=['Location: Front', 'Fitting Vehicle Options: S.(25GT+25GTLTD) +W.(25GT+25GTLTD) +WOBK.25GTLTD, S.25GLI +W.25GLI +WOBK.(25GT+25GLI)'] remark=''",
+    "raw/www.subarupartsdeal.com.jsonl:1369 FIT \"2005-2009 Subaru Legacy | 2.5L H4 Turbo | GT, GT Limited\"",
+    "raw/www.subarupartsdeal.com.jsonl:1369 FIT \"2005-2009 Subaru Outback | 2.5L H4 Turbo | GT, GT Limited\""
+   ]
+  },
+  {
+   "class": "restored",
+   "group_id": "oem:subaru:hood:C:6779a48c93",
+   "pn": "57229AG04A9P",
+   "note": "Subaru catalog lists #57229AG04A9P for both — Turbo hood (scoop cutout): Legacy GT / Outback XT only; verify the number on the part",
+   "app": [
+    "Subaru",
+    "Outback",
+    2005
+   ],
+   "verdict": "RIGHT",
+   "reason": "The 2005 Outback page lists it for WOBK.25GTLTD / WOBK.(25GT+25GLI) only: turbo Outback wagons (the XT; there is no turbo Outback sedan code). Outback sedan (SOBK) and 2.5i/3.0R wagons take 05A9P. The note names the subset (Outback XT).",
+   "raw_records": [
+    "raw/www.subarupartsdeal.com.lists.jsonl:306 catalog=2005-subaru-outback page=front_hood_front_hood_lock.html row pn=57229AG04A9P 'Hood Complete-Front' remark='' extra=[Location: Front; Fitting Vehicle Options: S.(25GT+25GTLTD) +W.(25GT+25GTLTD) +WOBK.25GTLTD, S.25GLI +W.25GLI +WOBK.(25GT+25GLI)]",
+    "raw/www.subarupartsdeal.com.lists.jsonl:306 catalog=2005-subaru-outback page=front_hood_front_hood_lock.html row pn=57229AG03A9P 'Hood Complete-Front' remark='' extra=[Location: Front; Fitting Vehicle Options: S.I# +W.I#]",
+    "raw/www.subarupartsdeal.com.lists.jsonl:306 catalog=2005-subaru-outback page=front_hood_front_hood_lock.html row pn=57229AG05A9P 'Hood Complete-Front' remark='' extra=[Location: Front; Fitting Vehicle Options: SOBK +WOBK.(I#+R#)]",
+    "raw/www.subarupartsdeal.com.jsonl:1369 pn=57229AG04A9P seed=Subaru Outback 2005 page=2005-subaru-outback/body_key_kit_bumper/front_hood_front_hood_lock.html list_info=['Location: Front', 'Fitting Vehicle Options: S.(25GT+25GTLTD) +W.(25GT+25GTLTD) +WOBK.25GTLTD, S.25GLI +W.25GLI +WOBK.(25GT+25GLI)'] remark=''",
+    "raw/www.subarupartsdeal.com.jsonl:1369 FIT \"2005-2009 Subaru Outback | 2.5L H4 Turbo | GT, GT Limited\""
+   ]
+  },
+  {
+   "class": "disputed",
+   "item": "R14 (groups/_report/removals_verify_2026-11-18.json)",
+   "group_id": "oem:gm:headlights:L:27c1dcc8ca",
+   "pn": "20964008",
+   "note_when_live": "GM catalog lists #20964008 for both — option: fits some option packages; verify the number on the part",
+   "apps_when_live": [
+    [
+     "Chevrolet",
+     "Cobalt",
+     2007,
+     2007
+    ],
+    [
+     "Pontiac",
+     "G5",
+     2007,
+     2007
+    ]
+   ],
+   "verdict": "WRONG (the removed claim); removal correct",
+   "reason": "On the 2007 Cobalt's own lamps page, 20964008 (smoked outer lens) carries 'Fitting Vehicle Options: AP(37)': series AP, GM body style 37 = 2-door coupe. Every other 2007 Cobalt (series AJ, AK, AL, AM, both bodies) is listed with 22740621/22740620 (clear lens). The same 2007 Cobalt catalog uses 69 for the 4-door sedan (rear-door rows carry only (69); rear-compartment weatherstrips split A(37) / A(69)), and AP never appears with (69). The aggregated product FIT row (2005-2010 Cobalt '2 DOOR, 4 DOOR, ...') spans other years and does not override the 2007 page. The live claim showed the part on every 2007 Cobalt, sedans included, with an option note that does not name the coupe limit: WRONG for the 4-door (69) body. The G5 half is fine (2007 G5 page lists 20964008 with no code), but the group pairs it with sedans. The earlier class (b) verdict read the G5 page and the FIT row and missed the Cobalt row's AP(37).",
+   "raw_records": [
+    "raw/www.gmpartsgiant.com.jsonl:512 pn=20964008 seed=Chevrolet Cobalt 2007 page=2007-chevrolet-cobalt/starter_generator_ignition_electrical_lamps/lamps_front.html list_info=['Location: Driver Side', 'Fitting Vehicle Options: AP(37)'] remark='(INCLUDES 9,10,12-19)(MATING CONNECT W/LEADS USE 12101854)(W/BRACKET)(AMBER TURN SIGNAL BULB & SMOKED OUTER LENS. IF THE ORIGINAL ASSEMBLYHAS CLEAR BULB & AMBER TURN SIGNAL & A CLEAR OUTER LENS USE 22740621)'",
+    "raw/www.gmpartsgiant.com.jsonl:512 FIT \"2005-2010 Chevrolet Cobalt | 4 Cyl 2.0L, 4 Cyl 2.2L, 4 Cyl 2.4L | 2 DOOR, 4 DOOR, LEVEL 4 PERFORMANCE (SS) 2 DOOR, LEVEL 4 PERFORMANCE/SC (SS) 2 DOOR, LEVEL 4 PERFORMANCE/SC (SS) 4 DOOR, LEVEL ONE (LS) 2 DOOR, LEVEL ONE (LS) 4 DOOR, LEVEL THREE (SS) 2 DOOR, LEVEL THREE (SS) 4 DOOR, LEVEL TWO (LT) 2 DOOR, LEVEL TWO (LT) 4 DOOR\"",
+    "raw/www.gmpartsgiant.com.jsonl:512 FIT \"2007-2010 Pontiac G5 | 4 Cyl 2.2L, 4 Cyl 2.4L | 2 DOOR, 4 DOOR, GT 2 DOOR, GT 4 DOOR, LS 2 DOOR, LS 4 DOOR, SE 2 DOOR, SE 4 DOOR, SPORT 2 DOOR, SPORT 4 DOOR\"",
+    "raw/www.gmpartsgiant.com.jsonl:512 FIT \"2005-2006 Pontiac Pursuit | 4 Cyl 2.0L, 4 Cyl 2.2L, 4 Cyl 2.4L | LEVEL 4 PERFORMANCE (SS) 2 DOOR, LEVEL 4 PERFORMANCE/SC (SS) 2 DOOR\"",
+    "raw/www.gmpartsgiant.com.jsonl:510 pn=22740621 seed=Chevrolet Cobalt 2007 page=2007-chevrolet-cobalt/starter_generator_ignition_electrical_lamps/lamps_front.html list_info=['Location: Driver Side', 'Fitting Vehicle Options: AJ,AK,AL, AM'] remark='(INCLUDES 9,10,12-19)(W/O BRACKET)(CLEAR TURN SIGNAL BULB, AMBER TURN SIGNAL LENS, & CLEAR OUTER LENS.)'",
+    "raw/www.gmpartsgiant.com.jsonl:511 pn=22740620 seed=Chevrolet Cobalt 2007 page=2007-chevrolet-cobalt/starter_generator_ignition_electrical_lamps/lamps_front.html list_info=['Location: Passenger Side', 'Fitting Vehicle Options: AJ,AK,AL, AM'] remark='(INCLUDES 9,10,12-19)(TOGETHER WITH BRACKET 16532520)(CLEAR TURN SIGNAL BULB, AMBER TURN SIGNAL LENS, & CLEAR OUTER LENS.)'",
+    "raw/www.gmpartsgiant.com.jsonl:513 pn=20964009 seed=Chevrolet Cobalt 2007 page=2007-chevrolet-cobalt/starter_generator_ignition_electrical_lamps/lamps_front.html list_info=['Location: Passenger Side', 'Fitting Vehicle Options: AP(37)'] remark='(INCLUDES 9,10,12-19)(USE TOGETHER WITH MATING CONNECT 12101854)(AMBER TURN SIGNAL BULB & SMOKED OUTER LENS. IF THE ORIGINAL ASSEMBLYHAS CLEAR BULB & AMBER TURN SIGNAL & A CLEAR OUTER LENS USE 22740620)'",
+    "raw/www.gmpartsgiant.com.lists.jsonl:1533 catalog=2007-pontiac-g5 page=lamps_front.html row pn=20964008 'HEADLAMP' remark='(INCLUDES 9,10,12-19)(MATING CONNECT W/LEADS USE 12101854)(W/BRACKET)(AMBER TURN SIGNAL BULB & SMOKED OUTER LENS. IF THE ORIGINAL ASSEMBLY CLEAR BULB & AMBER TURN SIGNAL & A CLEAR OUTER LENS USE 22740621)' extra=[Location: Driver Side]",
+    "raw/www.gmpartsgiant.com.lists.jsonl:1533 catalog=2007-pontiac-g5 page=lamps_front.html row pn=20964009 'HEADLAMP' remark='(INCLUDES 9,10,12-19)(USE TOGETHER WITH MATING CONNECT 12101854)(AMBER TURN SIGNAL BULB & SMOKED OUTER LENS. IF THE ORIGINAL ASSEMBLY HAS CLEAR BULB & AMBER TURN SIGNAL & A CLEAR OUTER LENS USE 22740620)' extra=[Location: Passenger Side]",
+    "raw/www.gmpartsgiant.com.lists.3.jsonl:1594 catalog=2007-chevrolet-cobalt page=door_hardware_rear.html row pn=25938085 'LOCK' remark='REAR SIDE DOOR(INCLUDES 24,26)(POWER)' extra=[Location: Driver Side; Fitting Vehicle Options: AL,AM(69)(AP3,AU0)]",
+    "raw/www.gmpartsgiant.com.lists.3.jsonl:1594 catalog=2007-chevrolet-cobalt page=door_hardware_rear.html row pn=20818703 'LOCK' remark='REAR SIDE DOOR(INCLUDES 24,26)(MANUAL)' extra=[Location: Passenger Side; Fitting Vehicle Options: AJ,AK(69), AL,AM(69)(EXC AP3,AU0)]",
+    "raw/www.gmpartsgiant.com.lists.3.jsonl:1594 catalog=2007-chevrolet-cobalt page=door_hardware_rear.html row pn=25938084 'LOCK' remark='REAR SIDE DOOR(INCLUDES 24,26)(POWER)' extra=[Location: Passenger Side; Fitting Vehicle Options: AL(69), AM(69)]",
+    "raw/www.gmpartsgiant.com.lists.3.jsonl:1600 catalog=2007-chevrolet-cobalt page=rear_compartment_hardware.html row pn=15908041 'WEATHERSTRIP' remark='REAR COMPARTMENT LID' extra=[Fitting Vehicle Options: A(37)]",
+    "raw/www.gmpartsgiant.com.lists.3.jsonl:1600 catalog=2007-chevrolet-cobalt page=rear_compartment_hardware.html row pn=15908043 'WEATHERSTRIP' remark='REAR COMPARTMENT LID' extra=[Fitting Vehicle Options: A(69)]"
+   ]
+  },
+  {
+   "class": "drive_note",
+   "draw_index": 1,
+   "group_id": "oem:gm:climate-control:C:9dd6a7cc3a",
+   "pn": "15858832",
+   "note": "... option: fits some option packages; Colorado: 2WD only; ...",
+   "drive_limited_app": [
+    "Chevrolet",
+    "Colorado",
+    2005
+   ],
+   "verdict": "UNDER-CLAIM (fine; no over-claim)",
+   "reason": "Only the 2WD catalog page's record is in the raw for this category; the 4WD page of the same model-year has no list manifest and no record for it, so 'Colorado: 2WD only' rests on absence, not on a page that omits the part. The product FIT row names no drive, and the twin's own 4WD page lists the same number. Limit not shown true; likely an under-claim. Every other vehicle-year in the group is listed on both drive pages and correctly carries no drive limit.",
+   "raw_records": [
+    "raw/www.gmpartsgiant.com.jsonl:1399 pn=15858832 seed=Chevrolet Colorado 2005 page=2005-chevrolet-colorado-2wd/front_end_sheet_metal_heater/heater_control_assembly.html list_info=[] remark='CONTROL,HEATER & A/C(INCLUDES 3-5)'",
+    "raw/www.gmpartsgiant.com.jsonl:1399 FIT \"2004-2006 Chevrolet Colorado | 4 Cyl 2.8L, 5 Cyl 3.5L | CREW CAB, EXTENDED CAB, EXTENDED LENGTH, PICKUP\"",
+    "raw/www.gmpartsgiant.com.jsonl:1399 FIT \"2004-2006 GMC Canyon | 4 Cyl 2.8L, 5 Cyl 3.5L | PICKUP, PICKUP CREW CAB, PICKUP EXTENDED CAB, PICKUP EXTENDED LENGTH\"",
+    "raw/www.gmpartsgiant.com.lists.jsonl:2108 catalog=2005-gmc-canyon-2wd page=heater_control_assembly.html row pn=15858832 'CONTROL, A/C Instrument Panel' remark='CONTROL,HEATER & A/C(INCLUDES 3-5)' extra=[]",
+    "raw/www.gmpartsgiant.com.lists.jsonl:2110 catalog=2005-gmc-canyon-4wd page=heater_control_assembly.html row pn=15858832 'CONTROL, A/C Instrument Panel' remark='CONTROL,HEATER & A/C(INCLUDES 3-5)' extra=[]"
+   ]
+  },
+  {
+   "class": "drive_note",
+   "draw_index": 2,
+   "group_id": "oem:gm:climate-control:C:a9d88ac6ef",
+   "pn": "19433953",
+   "note": "... option: fits some option packages; Colorado: 2WD only; ...",
+   "drive_limited_app": [
+    "Chevrolet",
+    "Colorado",
+    2005
+   ],
+   "verdict": "UNDER-CLAIM (fine; no over-claim)",
+   "reason": "Only the 2WD catalog page's record is in the raw for this category; the 4WD page of the same model-year has no list manifest and no record for it, so 'Colorado: 2WD only' rests on absence, not on a page that omits the part. The product FIT row names no drive, and the twin's own 4WD page lists the same number. Limit not shown true; likely an under-claim. Every other vehicle-year in the group is listed on both drive pages and correctly carries no drive limit.",
+   "raw_records": [
+    "raw/www.gmpartsgiant.com.jsonl:1398 pn=19433953 seed=Chevrolet Colorado 2005 page=2005-chevrolet-colorado-2wd/body_mounting_air_conditioning_audio_entertainment/a_c_heater_control_assembly.html list_info=[] remark='CONTROL,HEATER & A/C(INCLUDES 3-5)(INCLUDES KNOBS,NOT AVAILABLE SEPERATELY)(FOR 8 WAY CONNECTOR USE 15306189 FOR 9 WAY CONNECTOR USE 12102629)'",
+    "raw/www.gmpartsgiant.com.jsonl:1398 FIT \"2004-2012 Chevrolet Colorado | 4 Cyl 2.8L, 4 Cyl 2.9L, 5 Cyl 3.5L, 5 Cyl 3.7L, 8 Cyl 5.3L | CREW CAB, EXTENDED CAB, EXTENDED LENGTH, PICKUP\"",
+    "raw/www.gmpartsgiant.com.jsonl:1398 FIT \"2004-2012 GMC Canyon | 4 Cyl 2.8L, 4 Cyl 2.9L, 5 Cyl 3.5L, 5 Cyl 3.7L, 8 Cyl 5.3L | PICKUP, PICKUP CREW CAB, PICKUP EXTENDED CAB, PICKUP EXTENDED LENGTH\"",
+    "raw/www.gmpartsgiant.com.lists.jsonl:2107 catalog=2005-gmc-canyon-2wd page=a_c_heater_control_assembly.html row pn=19433953 'CONTROL, A/C Instrument Panel' remark='CONTROL,HEATER & A/C(INCLUDES 3-5)(INCLUDES KNOBS,NOT AVAILABLE SEPERATELY)(FOR 8 WAY CONNECTOR USE 15306189 FOR 9 WAY CONNECTOR USE 12102629)' extra=[]",
+    "raw/www.gmpartsgiant.com.lists.jsonl:2109 catalog=2005-gmc-canyon-4wd page=a_c_heater_control_assembly.html row pn=19433953 'CONTROL, A/C Instrument Panel' remark='CONTROL,HEATER & A/C(INCLUDES 3-5)(INCLUDES KNOBS,NOT AVAILABLE SEPERATELY)(FOR 8 WAY CONNECTOR USE 15306189 FOR 9 WAY CONNECTOR USE 12102629)' extra=[]",
+    "raw/www.gmpartsgiant.com.lists.jsonl:2146 catalog=2011-gmc-canyon-2wd page=a_c_heater_control_assembly.html row pn=19433953 'CONTROL, A/C Instrument Panel' remark='CONTROL,HEATER & A/C(INCLUDES 3-5)(INCLUDES KNOBS,NOT AVAILABLE SEPERATELY)(FOR 8 WAY CONNECTOR USE 15306189 FOR 9 WAY CONNECTOR USE 12102629)' extra=[]",
+    "raw/www.gmpartsgiant.com.lists.jsonl:2147 catalog=2011-gmc-canyon-4wd page=a_c_heater_control_assembly.html row pn=19433953 'CONTROL, A/C Instrument Panel' remark='CONTROL,HEATER & A/C(INCLUDES 3-5)(INCLUDES KNOBS,NOT AVAILABLE SEPERATELY)(FOR 8 WAY CONNECTOR USE 15306189 FOR 9 WAY CONNECTOR USE 12102629)' extra=[]"
+   ]
+  },
+  {
+   "class": "drive_note",
+   "draw_index": 4,
+   "group_id": "oem:gm:headlights:L:67636b51fb",
+   "pn": "22853025",
+   "note": "... fits some configurations; Tahoe: 2WD only; ...",
+   "drive_limited_app": [
+    "Chevrolet",
+    "Tahoe",
+    2007
+   ],
+   "verdict": "UNDER-CLAIM (fine; no over-claim)",
+   "reason": "Only the 2WD catalog page's record is in the raw for this category; the 4WD page of the same model-year has no list manifest and no record for it, so 'Tahoe: 2WD only' rests on absence, not on a page that omits the part. The product FIT row names no drive, and the twin's own 4WD page lists the same number. Limit not shown true; likely an under-claim. Every other vehicle-year in the group is listed on both drive pages and correctly carries no drive limit.",
+   "raw_records": [
+    "raw/www.gmpartsgiant.com.jsonl:1058 pn=22853025 seed=Chevrolet Tahoe 2007 page=2007-chevrolet-tahoe-2wd/starter_generator_ignition_electrical_lamps/lamps_front.html list_info=['Location: Driver Side'] remark='(W/PARKING & FRONT SIDE MARKER & TURN SIGNAL LAMP)(INCLUDES 4,5,14-17)'",
+    "raw/www.gmpartsgiant.com.jsonl:1058 FIT \"2007-2013 Chevrolet Avalanche | 8 Cyl 5.3L, 8 Cyl 5.3L Flex, 8 Cyl 6.0L | 1/2 TON\"",
+    "raw/www.gmpartsgiant.com.jsonl:1058 FIT \"2007-2014 Chevrolet Suburban | 8 Cyl 5.3L, 8 Cyl 5.3L Flex, 8 Cyl 6.0L, 8 Cyl 6.0L Flex | 1/2 TON, 3/4 TON\"",
+    "raw/www.gmpartsgiant.com.jsonl:1058 FIT \"2007-2014 Chevrolet Tahoe | 8 Cyl 4.8L, 8 Cyl 5.3L, 8 Cyl 5.3L Flex, 8 Cyl 6.0L, 8 Cyl 6.0L Flex | 4 DOOR 1/2 TON\"",
+    "raw/www.gmpartsgiant.com.lists.jsonl:1102 catalog=2007-chevrolet-avalanche-2wd page=lamps_front.html row pn=22853025 'HEADLAMP' remark='(W/PARKING & FRONT SIDE MARKER & TURN SIGNAL LAMP)(INCLUDES 4,5,14-17)(2.725)' extra=[Location: Driver Side]",
+    "raw/www.gmpartsgiant.com.lists.jsonl:1103 catalog=2007-chevrolet-avalanche-4wd page=lamps_front.html row pn=22853025 'HEADLAMP' remark='(W/PARKING & FRONT SIDE MARKER & TURN SIGNAL LAMP)(INCLUDES 4,5,14-17)(2.725)' extra=[Location: Driver Side]"
+   ]
+  },
+  {
+   "class": "drive_note",
+   "draw_index": 13,
+   "group_id": "oem:gm:tail-lights:R:8172e5c761",
+   "pn": "5978196",
+   "note": "... fits some configurations; S-10: 2WD only; ...",
+   "drive_limited_app": [
+    "Chevrolet",
+    "S-10",
+    2000
+   ],
+   "verdict": "UNDER-CLAIM (fine; no over-claim)",
+   "reason": "Only the 2WD catalog page's record is in the raw for this category; the 4WD page of the same model-year has no list manifest and no record for it, so 'S-10: 2WD only' rests on absence, not on a page that omits the part. The product FIT row names no drive, and the twin's own 4WD page lists the same number. Limit not shown true; likely an under-claim. Every other vehicle-year in the group is listed on both drive pages and correctly carries no drive limit.",
+   "raw_records": [
+    "raw/www.gmpartsgiant.com.jsonl:978 pn=5978196 seed=Chevrolet S-10 2000 page=2000-chevrolet-s10-2wd/starter_generator_ignition_electrical_lamps/lamps_rear.html list_info=['Location: Passenger Side'] remark='TAIL(INCLUDES 22)'",
+    "raw/www.gmpartsgiant.com.jsonl:978 FIT \"1994-2002 Chevrolet S10 | 4 Cyl 2.2L, 4 Cyl 2.2L Flex, 6 Cyl 4.3L | CREW CAB, ELECTRIC, PICKUP, PICKUP EXTENDED CAB\"",
+    "raw/www.gmpartsgiant.com.jsonl:978 FIT \"1994-2002 GMC Sonoma | 4 Cyl 2.2L, 4 Cyl 2.2L Flex, 6 Cyl 4.3L | 4 DOOR, PICKUP, PICKUP EXTENDED CAB\"",
+    "raw/www.gmpartsgiant.com.lists.jsonl:563 catalog=1996-gmc-sonoma-2wd page=lamps_rear.html row pn=5978196 'LAMP' remark='TAIL(INCLUDES 17-22)' extra=[Location: Passenger Side]",
+    "raw/www.gmpartsgiant.com.lists.jsonl:563 catalog=1996-gmc-sonoma-2wd page=lamps_rear.html row pn=5978196 'LAMP' remark='TAIL(INCLUDES 22)' extra=[Location: Passenger Side]",
+    "raw/www.gmpartsgiant.com.lists.jsonl:564 catalog=1996-gmc-sonoma-4wd page=lamps_rear.html row pn=5978196 'LAMP' remark='TAIL(INCLUDES 17-22)' extra=[Location: Passenger Side]",
+    "raw/www.gmpartsgiant.com.lists.jsonl:564 catalog=1996-gmc-sonoma-4wd page=lamps_rear.html row pn=5978196 'LAMP' remark='TAIL(INCLUDES 22)' extra=[Location: Passenger Side]",
+    "raw/www.gmpartsgiant.com.lists.jsonl:507 catalog=2000-gmc-sonoma-2wd page=lamps_rear.html row pn=5978196 'LAMP' remark='TAIL(INCLUDES 22)' extra=[Location: Passenger Side]",
+    "raw/www.gmpartsgiant.com.lists.jsonl:507 catalog=2000-gmc-sonoma-2wd page=lamps_rear.html row pn=5978196 'LAMP' remark='TAIL(INCLUDES 25)' extra=[Location: Passenger Side]",
+    "raw/www.gmpartsgiant.com.lists.jsonl:508 catalog=2000-gmc-sonoma-4wd page=lamps_rear.html row pn=5978196 'LAMP' remark='TAIL(INCLUDES 22)' extra=[Location: Passenger Side]",
+    "raw/www.gmpartsgiant.com.lists.jsonl:508 catalog=2000-gmc-sonoma-4wd page=lamps_rear.html row pn=5978196 'LAMP' remark='TAIL(INCLUDES 25)' extra=[Location: Passenger Side]"
+   ]
+  },
+  {
+   "class": "drive_note",
+   "draw_index": 14,
+   "group_id": "oem:gm:window-regulator:RL:0c39044d34",
+   "pn": "15643719",
+   "note": "... regulator with motor; fits some configurations; Tahoe: 2WD only; ...",
+   "drive_limited_app": [
+    "Chevrolet",
+    "Tahoe",
+    1999
+   ],
+   "verdict": "UNDER-CLAIM (fine; no over-claim)",
+   "reason": "Only the 2WD catalog page's record is in the raw for this category; the 4WD page of the same model-year has no list manifest and no record for it, so 'Tahoe: 2WD only' rests on absence, not on a page that omits the part. The product FIT row names no drive, and the twin's own 4WD page lists the same number. Limit not shown true; likely an under-claim. Every other vehicle-year in the group is listed on both drive pages and correctly carries no drive limit. Separate observation (not drive, present on main too): the FIT row says Tahoe 'CLASSIC 4 DOOR 1/2 TON' and this is a rear-door part; 1999 Tahoe/Yukon also came as 2-door, which the note does not name. Lot body mix not checked.",
+   "raw_records": [
+    "raw/www.gmpartsgiant.com.jsonl:2424 pn=15643719 seed=Chevrolet Tahoe 1999 page=1999-chevrolet-tahoe-2wd/cab_and_body_structure_mirrors_doors_trim_seat_belts_wipers/door_hardware_side_rear.html list_info=['Location: Driver Side'] remark='REAR SIDE DOOR WINDOW(INCLUDES 29,56)(W/MOTOR)'",
+    "raw/www.gmpartsgiant.com.jsonl:2424 FIT \"1999-2000 Cadillac Escalade | 8 Cyl 5.7L | 1 TON CREW CAB, 4 DOOR 1/2 TON, CLASSIC 4 DOOR 1/2 TON, CREW CAB 1 TON, K2500 CREW CAB, YUKON/DENALI/ESCALADE\"",
+    "raw/www.gmpartsgiant.com.jsonl:2424 FIT \"1999-2000 Chevrolet C2500 | 8 Cyl 5.0L, 8 Cyl 5.7L, 8 Cyl 6.5L Diesel, 8 Cyl 7.4L | C2500 CREW CAB\"",
+    "raw/www.gmpartsgiant.com.jsonl:2424 FIT \"1997-2000 Chevrolet C3500 | 8 Cyl 5.7L, 8 Cyl 6.5L Diesel, 8 Cyl 7.4L | C3500 CREW CAB LONG WHEELBASE, C3500 CREW CAB SHORT WHEELBASE\"",
+    "raw/www.gmpartsgiant.com.jsonl:2424 FIT \"1999-2000 Chevrolet K2500 | 8 Cyl 5.7L, 8 Cyl 6.5L Diesel, 8 Cyl 7.4L | K2500 CREW CAB\"",
+    "raw/www.gmpartsgiant.com.jsonl:2424 FIT \"1997-2000 Chevrolet K3500 | 8 Cyl 5.7L, 8 Cyl 6.5L Diesel, 8 Cyl 7.4L | K3500 CREW CAB LONG WHEELBASE, K3500 CREW CAB SHORT WHEELBASE\"",
+    "raw/www.gmpartsgiant.com.jsonl:2424 FIT \"1999-2000 Chevrolet Tahoe | 8 Cyl 4.8L, 8 Cyl 5.3L, 8 Cyl 5.7L, 8 Cyl 6.5L Diesel | CLASSIC 4 DOOR 1/2 TON\"",
+    "raw/www.gmpartsgiant.com.jsonl:2424 FIT \"1999-2000 GMC C2500 | 8 Cyl 5.0L, 8 Cyl 5.7L, 8 Cyl 6.5L Diesel, 8 Cyl 7.4L | C2500 CREW CAB\"",
+    "raw/www.gmpartsgiant.com.jsonl:2424 FIT \"1997-2000 GMC C3500 | 8 Cyl 5.7L, 8 Cyl 6.5L Diesel, 8 Cyl 7.4L | C3500 CREW CAB LONG WHEELBASE, C3500 CREW CAB SHORT WHEELBASE\"",
+    "raw/www.gmpartsgiant.com.jsonl:2424 FIT \"1999-2000 GMC K2500 | 8 Cyl 5.7L, 8 Cyl 6.5L Diesel, 8 Cyl 7.4L | K2500 CREW CAB\"",
+    "raw/www.gmpartsgiant.com.jsonl:2424 FIT \"1997-2000 GMC K3500 | 8 Cyl 5.7L, 8 Cyl 6.5L Diesel, 8 Cyl 7.4L | K3500 CREW CAB LONG WHEELBASE, K3500 CREW CAB SHORT WHEELBASE\"",
+    "raw/www.gmpartsgiant.com.jsonl:2424 FIT \"1999-2000 GMC Yukon | 8 Cyl 4.8L, 8 Cyl 5.3L, 8 Cyl 5.7L, 8 Cyl 6.0L | CLASSIC 4 DOOR 1/2 TON\"",
+    "raw/www.gmpartsgiant.com.lists.jsonl:1971 catalog=1999-gmc-yukon-2wd page=door_hardware_side_rear.html row pn=15643719 'REGULATOR' remark='REAR SIDE DOOR WINDOW(INCLUDES 29,56)(W/MOTOR)' extra=[Location: Driver Side]",
+    "raw/www.gmpartsgiant.com.lists.jsonl:1977 catalog=1999-gmc-yukon-4wd page=door_hardware_side_rear.html row pn=15643719 'REGULATOR' remark='REAR SIDE DOOR WINDOW(INCLUDES 29,56)(W/MOTOR)' extra=[Location: Driver Side]"
+   ]
+  },
+  {
+   "class": "drive_note",
+   "draw_index": 21,
+   "group_id": "oem:gm:window-regulator:FL:4bcf6eda65",
+   "pn": "19331466",
+   "note": "... regulator without motor; option: fits some option packages; Trailblazer: 2WD only; ...",
+   "drive_limited_app": [
+    "Chevrolet",
+    "Trailblazer",
+    2004
+   ],
+   "verdict": "UNDER-CLAIM (fine; no over-claim)",
+   "reason": "Only the 2WD catalog page's record is in the raw for this category; the 4WD page of the same model-year has no list manifest and no record for it, so 'Trailblazer: 2WD only' rests on absence, not on a page that omits the part. The product FIT row names no drive, and the twin's own 4WD page lists the same number. Limit not shown true; likely an under-claim. Every other vehicle-year in the group is listed on both drive pages and correctly carries no drive limit.",
+   "raw_records": [
+    "raw/www.gmpartsgiant.com.jsonl:365 pn=19331466 seed=Chevrolet Trailblazer 2004 page=2004-chevrolet-trailblazer-2wd/cab_and_body_structure_mirrors_doors_trim_seat_belts_wipers/door_hardware_side_front.html list_info=['Location: Driver Side'] remark='FRONT SIDE DOOR WINDOW(INCLUDES 5,7,8)(W/O MOTOR)'",
+    "raw/www.gmpartsgiant.com.jsonl:365 FIT \"2004-2007 Buick Rainier | 6 Cyl 4.2L, 8 Cyl 5.3L | 4 DOOR\"",
+    "raw/www.gmpartsgiant.com.jsonl:365 FIT \"2002-2009 Chevrolet Trailblazer | 6 Cyl 4.2L, 8 Cyl 5.3L, 8 Cyl 6.0L | 4 DOOR, 4 DOOR EXT\"",
+    "raw/www.gmpartsgiant.com.jsonl:365 FIT \"2002-2009 GMC Envoy | 6 Cyl 4.2L, 8 Cyl 5.3L | 4 DOOR, 4 Door XL, 4 DOOR XUV\"",
+    "raw/www.gmpartsgiant.com.jsonl:365 FIT \"2002-2004 Oldsmobile Bravada | 6 Cyl 4.2L | 4 DOOR\"",
+    "raw/www.gmpartsgiant.com.lists.jsonl:3086 catalog=2004-buick-rainier-2wd page=door_hardware_side_front.html row pn=19331466 'REGULATOR' remark='FRONT SIDE DOOR WINDOW(INCLUDES 6-9)(W/O MOTOR)' extra=[Location: Driver Side]",
+    "raw/www.gmpartsgiant.com.lists.jsonl:3086 catalog=2004-buick-rainier-2wd page=door_hardware_side_front.html row pn=19331466 'REGULATOR' remark='FRONT SIDE DOOR WINDOW(INCLUDES 6-9)(W/O MOTOR)(16.260)' extra=[Location: Driver Side; Fitting Vehicle Options: ST1(06-36)]",
+    "raw/www.gmpartsgiant.com.lists.jsonl:3090 catalog=2004-buick-rainier-4wd page=door_hardware_side_front.html row pn=19331466 'REGULATOR' remark='FRONT SIDE DOOR WINDOW(INCLUDES 6-9)(W/O MOTOR)' extra=[Location: Driver Side]",
+    "raw/www.gmpartsgiant.com.lists.jsonl:3090 catalog=2004-buick-rainier-4wd page=door_hardware_side_front.html row pn=19331466 'REGULATOR' remark='FRONT SIDE DOOR WINDOW(INCLUDES 6-9)(W/O MOTOR)(16.260)' extra=[Location: Driver Side; Fitting Vehicle Options: ST1(06-36)]"
+   ]
+  },
+  {
+   "class": "drive_note",
+   "draw_index": 24,
+   "group_id": "oem:gm:window-regulator:RL:5142940e97",
+   "pn": "23227000",
+   "note": "... regulator with motor; fits some configurations; Tahoe: 2WD only; ...",
+   "drive_limited_app": [
+    "Chevrolet",
+    "Tahoe",
+    2007
+   ],
+   "verdict": "UNDER-CLAIM (fine; no over-claim)",
+   "reason": "Only the 2WD catalog page's record is in the raw for this category; the 4WD page of the same model-year has no list manifest and no record for it, so 'Tahoe: 2WD only' rests on absence, not on a page that omits the part. The product FIT row names no drive, and the twin's own 4WD page lists the same number. Limit not shown true; likely an under-claim. Every other vehicle-year in the group is listed on both drive pages and correctly carries no drive limit.",
+   "raw_records": [
+    "raw/www.gmpartsgiant.com.jsonl:1075 pn=23227000 seed=Chevrolet Tahoe 2007 page=2007-chevrolet-tahoe-2wd/cab_and_body_structure_mirrors_doors_trim_seat_belts_wipers/door_hardware_side_rear.html list_info=['Location: Driver Side'] remark='REAR SIDE DOOR WINDOW(INCLUDES 3,5,6,16,17)(W/MOTOR)'",
+    "raw/www.gmpartsgiant.com.jsonl:1075 FIT \"2007-2014 Cadillac Escalade | 8 Cyl 6.0L, 8 Cyl 6.0L Flex, 8 Cyl 6.2L, 8 Cyl 6.2L Flex | YUKON/DENALI/ESCALADE\"",
+    "raw/www.gmpartsgiant.com.jsonl:1075 FIT \"2007-2014 Chevrolet Tahoe | 8 Cyl 4.8L, 8 Cyl 5.3L, 8 Cyl 5.3L Flex, 8 Cyl 6.0L, 8 Cyl 6.0L Flex | 4 DOOR 1/2 TON\"",
+    "raw/www.gmpartsgiant.com.jsonl:1075 FIT \"2007-2014 GMC Yukon | 8 Cyl 4.8L, 8 Cyl 5.3L, 8 Cyl 5.3L Flex, 8 Cyl 6.0L, 8 Cyl 6.0L Flex, 8 Cyl 6.2L, 8 Cyl 6.2L Flex | YUKON/DENALI/ESCALADE\"",
+    "raw/www.gmpartsgiant.com.lists.jsonl:1271 catalog=2007-cadillac-escalade-2wd page=door_hardware_side_rear.html row pn=23227000 'REGULATOR' remark='REAR SIDE DOOR WINDOW(INCLUDES 3,5,6,16,17)(W/MOTOR)' extra=[Location: Driver Side]",
+    "raw/www.gmpartsgiant.com.lists.jsonl:1276 catalog=2007-cadillac-escalade-awd page=door_hardware_side_rear.html row pn=23227000 'REGULATOR' remark='REAR SIDE DOOR WINDOW(INCLUDES 3,5,6,16,17)(W/MOTOR)' extra=[Location: Driver Side]"
+   ]
+  },
+  {
+   "class": "drive_note",
+   "draw_index": 41,
+   "group_id": "oem:mopar:headlights:R:8b8966eecd",
+   "pn": "55277410AE",
+   "note": "... option: fits some option packages; 1500: 4WD only; ...",
+   "drive_limited_app": [
+    "Ram",
+    "1500",
+    2012
+   ],
+   "verdict": "UNDER-CLAIM (fine; no over-claim)",
+   "reason": "The Ram catalog has one 2012 Ram 1500 page (no drive split); it lists 55277410AE as 'Right [LMA] Up To 07/23/2012' with no drive word. The limit comes from the product FIT row, which names only 4WD 1500 trims. But every pre-07/23/2012 1500 headlamp on that page (55277409AE/10AE [LMA], 68001484AE/85AE [LME], 2AME77409A/10A [X83]) has the same 4WD-only 1500 row, so no listed lamp would fit a 2WD 1500 built before 07/23/2012: the FIT rows look incomplete for 2WD. Limit not shown true; likely an under-claim. The 2011 Ram 2500 (no drive note) is listed for 2WD and 4WD: correct. Separate observation (unchanged from main): the 1500 row is 'Up To 07/23/2012' and the later lamps are other numbers (68096438AC/39AC 'After 07/23/2012'); the note does not name the production window.",
+   "raw_records": [
+    "raw/www.moparpartsgiant.com.jsonl:1539 pn=55277410AE seed=Ram 1500 2012 page=2012-ram-1500/electrical/lamps_front.html list_info=['Right [LMA] Up To 07/23/2012', 'Replaced By: 55277410AG'] remark=''",
+    "raw/www.moparpartsgiant.com.jsonl:1539 FIT \"2011-2012 Ram 1500 | 8 Cyl 4.7L, 8 Cyl 5.7L | Laramie Crew Cab 4WD, Laramie Quad Cab 4WD, Longhorn Crew Cab 4WD, SLT Crew Cab 4WD, SLT HEV Crew Cab 4WD, SLT HEV Plus Crew 4WD, SLT Quad Cab 4WD, SLT Regular Cab 4WD, Sport Crew CAB 4WD, Sport Quad Cab 4WD, Sport Regular Cab 4WD, ST Crew Cab 4WD, ST Quad Cab 4WD, ST Regular Cab 4WD\"",
+    "raw/www.moparpartsgiant.com.jsonl:1539 FIT \"2011-2012 Ram 2500 | 6 Cyl 6.7L Diesel, 8 Cyl 5.7L | Laramie Crew Cab 2WD, Laramie Crew Cab 4WD, Laramie Mega Cab 2WD, Laramie Mega Cab 4WD, Longhorn Crew Cab 2WD, Longhorn Crew Cab 4WD, Longhorn Mega Cab 2WD, Longhorn Mega Cab 4WD, Power Wagon Crew Cab 4WD, Powerwagon Crew Cab 4WD, SLT Crew Cab 2WD, SLT Crew Cab 4WD, SLT Mega Cab 2WD, SLT Mega Cab 4WD, SLT Regular Cab 2WD, SLT Regular Cab 4WD, ST Crew Cab 2WD, ST Crew Cab 4WD, ST Regular Cab 2WD, ST Regular Cab 4WD\"",
+    "raw/www.moparpartsgiant.com.jsonl:1539 FIT \"2011-2012 Ram 3500 | 6 Cyl 6.7L Diesel, 8 Cyl 5.7L | Crew Cab Chassis 4WD, Laramie Crew Cab 2WD, Laramie Crew Cab 4WD, Laramie Mega Cab 2WD, Laramie Mega Cab 4WD, Longhorn Crew Cab 2WD, Longhorn Crew Cab 4WD, Longhorn Mega Cab 2WD, Longhorn Mega Cab 4WD, Regular Cab Chassis 4WD, SLT Crew Cab 2WD, SLT Crew Cab 4WD, SLT Mega Cab 2WD, SLT Mega Cab 4WD, SLT Regular Cab 2WD, SLT Regular Cab 4WD, ST Crew Cab 2WD, ST Crew Cab 4WD, ST Regular Cab 2WD, ST Regular Cab 4WD\"",
+    "raw/www.moparpartsgiant.com.jsonl:1539 FIT \"2011-2012 Ram 4500 | 6 Cyl 6.7L Diesel | Crew Cab Chassis 2WD, Crew Cab Chassis 4WD, Regular Cab Chassis 2WD, Regular Cab Chassis 4WD\"",
+    "raw/www.moparpartsgiant.com.jsonl:1539 FIT \"2011-2012 Ram 5500 | 6 Cyl 6.7L Diesel | Crew Cab Chassis 2WD, Crew Cab Chassis 4WD, Regular Cab Chassis 2WD, Regular Cab Chassis 4WD\"",
+    "raw/www.moparpartsgiant.com.lists.jsonl:347 catalog=2012-ram-1500 page=lamps_front.html row pn=68096438AC 'LAMP Headlamp Park And Turn' remark='' extra=[Right [LMA] After 07/23/2012 / Right [LME] After 07/23/2012; Replaced By: 68096438AJ]",
+    "raw/www.moparpartsgiant.com.lists.jsonl:347 catalog=2012-ram-1500 page=lamps_front.html row pn=55277410AE 'LAMP Headlamp Park And Turn' remark='' extra=[Right [LMA] Up To 07/23/2012; Replaced By: 55277410AG]",
+    "raw/www.moparpartsgiant.com.lists.jsonl:1271 catalog=2011-ram-2500 page=lamps_front.html row pn=55277410AE 'LAMP Headlamp Park And Turn' remark='' extra=[Right [LMA]; Replaced By: 55277410AG]",
+    "raw/www.moparpartsgiant.com.jsonl:1533 pn=68001484AE seed=Ram 1500 2012 page=2012-ram-1500/electrical/lamps_front.html list_info=['Right [LME] Up To 07/23/2012', 'Replaced By: 68001484AI'] remark=''",
+    "raw/www.moparpartsgiant.com.jsonl:1533 FIT \"2011-2012 Ram 1500 | 8 Cyl 4.7L, 8 Cyl 5.7L | Laramie Crew Cab 4WD, Laramie Quad Cab 4WD, Longhorn Crew Cab 4WD, SLT Crew Cab 4WD, SLT HEV Crew Cab 4WD, SLT HEV Plus Crew 4WD, SLT Quad Cab 4WD, SLT Regular Cab 4WD, Sport Crew CAB 4WD, Sport Quad Cab 4WD, Sport Regular Cab 4WD, ST Crew Cab 4WD, ST Quad Cab 4WD, ST Regular Cab 4WD\"",
+    "raw/www.moparpartsgiant.com.jsonl:1535 pn=68096438AC seed=Ram 1500 2012 page=2012-ram-1500/electrical/lamps_front.html list_info=['Right [LMA] After 07/23/2012 / Right [LME] After 07/23/2012', 'Replaced By: 68096438AJ'] remark=''",
+    "raw/www.moparpartsgiant.com.jsonl:1535 FIT \"2012-2014 Ram 1500 | 6 Cyl 3.0L Diesel, 6 Cyl 3.6L, 8 Cyl 4.7L, 8 Cyl 5.7L | HFE Regular Cab 2WD, Laramie Crew Cab 2WD, Laramie Crew Cab 4WD, Laramie Quad Cab 2WD, Laramie Quad Cab 4WD, Longhorn Crew Cab 2WD, Longhorn Crew Cab 4WD, SLT Crew CAB 2WD, SLT Crew Cab 4WD, SLT Quad Cab 2WD, SLT Quad Cab 4WD, SLT Regular Cab 2WD, SLT Regular Cab 4WD, Sport Crew Cab 2WD, Sport Crew CAB 4WD, Sport Quad Cab 2WD, Sport Quad Cab 4WD, Sport Regular Cab 2WD, Sport Regular Cab 4WD, SSV Crew Cab 4WD, ST Crew Cab 2WD, ST Crew Cab 4WD, ST Quad Cab 2WD, ST Quad Cab 4WD, ST Regular Cab 2WD, ST Regular Cab 4WD\"",
+    "raw/www.moparpartsgiant.com.jsonl:1538 pn=55277409AE seed=Ram 1500 2012 page=2012-ram-1500/electrical/lamps_front.html list_info=['Left [LMA] Up To 07/23/2012', 'Replaced By: 55277409AG'] remark=''",
+    "raw/www.moparpartsgiant.com.jsonl:1538 FIT \"2011-2012 Ram 1500 | 8 Cyl 4.7L, 8 Cyl 5.7L | Laramie Crew Cab 4WD, Laramie Quad Cab 4WD, Longhorn Crew Cab 4WD, SLT Crew Cab 4WD, SLT HEV Crew Cab 4WD, SLT HEV Plus Crew 4WD, SLT Quad Cab 4WD, SLT Regular Cab 4WD, Sport Crew CAB 4WD, Sport Quad Cab 4WD, Sport Regular Cab 4WD, ST Crew Cab 4WD, ST Quad Cab 4WD, ST Regular Cab 4WD\""
+   ]
+  }
+ ]
+}
