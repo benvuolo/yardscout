@@ -36,8 +36,9 @@ const FUNNEL_EVENTS = {
   'email-alerts-linked': 'push-enabled', 'checkout-start': 'checkout-start', 'iap-subscribe': 'checkout-start',
   'ent-checkout-start': 'checkout-start', 'iap-purchased': 'pro-converted', 'ent-purchased': 'pro-converted',
   'pro-lock': 'paywall', 'store-click': 'store-click',
-  // Free Monday email (web): asked = the field shown after a watch (once per
-  // visit), submitted = an address sent. 'Confirmed' is counted by the API at
+  // Free Monday email (web): asked = the Monday-email field shown (in the
+  // toast after a new watch; in the Cars watch strip once per visit; never
+  // for the free email alert's ask), submitted = an address sent. 'Confirmed' is counted by the API at
   // the confirmation click (backend/src/recap_signup.js), not here.
   'email-asked': 'email-asked', 'email-submitted': 'email-submitted',
   // A checkout attempt by a client that also counts how it ends (v4, below).
@@ -50,7 +51,9 @@ const FUNNEL_EVENTS = {
   // came into view (once a visit), its button used, dismissed.
   'alert-card-shown': 'alert-card-shown', 'alert-card': 'alert-card', 'alert-card-x': 'alert-card-x',
   // Free emailed alert on the web (2026-11-17, FREE EMAILED ALERT below):
-  // the ask came into view (once a visit), an address was given for one car.
+  // the ask came into view (once a visit, wherever it was: the Alerts card,
+  // the watch toast, or since 2026-11-18 the Cars watch strip), an address
+  // was given for one car.
   // The confirmation click and the first email sent are counted by the API
   // (backend/src/free_email_alert.js), not here.
   'free-alert-shown': 'free-alert-shown', 'free-alert-asked': 'free-alert-asked',
@@ -122,7 +125,16 @@ const ANALYTICS_OFF = analyticsOff(location.hostname, navigator.webdriver, IS_NA
  * per visit), not only the one in the watch toast. The
  * API notes the first day each platform sends v2 / v3 / v4 / v5, so the daily
  * email can say which numbers predate them. Still no ids: one anonymous +1
- * per event. */
+ * per event.
+ * No version step, but a change in what two rows mean in practice (built
+ * 2026-11-18, branch growth/strip-falert-1118; it takes effect the day it is
+ * deployed): where the watch strip's scope is one model and the visitor has
+ * no free email alert here, the strip asks for that alert in place of the
+ * Monday email (ONE-STEP MONDAY EMAIL IN THE WATCH STRIP). That ask counts
+ * 'free-alert-shown' (once a visit, shared with the Alerts card and the
+ * toast), never 'email-asked', which still means only the Monday-email
+ * field. So "Monday email asked" falls and "Free alert offered" rises from
+ * that day; weeks across it are not like for like on those two rows. */
 const EVENTS_V = 5;
 function sendEvent(e) {
   if (ANALYTICS_OFF) return;
@@ -11195,8 +11207,14 @@ function watchStripHtml(nCars) {
   const sc = liveWatchScope();
   if (!sc) return '';
   if (sc.watched) {
+    // The strip's (or the card's, or the toast's) free email alert for this
+    // very car: a later render (a scan coming in) must not lose "check your
+    // inbox", so the watched strip says where the alert stands.
+    const fa = !IS_NATIVE && !isPro() && sc.models.length === 1 ? falertState() : null;
+    const faNote = fa && fa.label === falertLabel({ make: sc.make, model: sc.models[0], yrMin: sc.yrMin, yrMax: sc.yrMax })
+      ? (fa.state === 'on' ? ' Its free email alert is on.' : ' Check your inbox to turn on its email alert.') : '';
     return `<div class="watch-strip watching" style="grid-column:1/-1;">${ICON.check}
-      <span>Watching <strong>${escapeHtml(sc.label)}</strong> &mdash; ${IS_NATIVE ? 'we&rsquo;ll tell you when another lands' : 'new ones light up in Alerts'}.</span>
+      <span>Watching <strong>${escapeHtml(sc.label)}</strong> &mdash; ${IS_NATIVE ? 'we&rsquo;ll tell you when another lands' : 'new ones light up in Alerts'}.${faNote}</span>
       <button type="button" class="linklike" onclick="jhOpenAlertsTab()">Manage</button></div>`;
   }
   const r = activeZipCoords ? effectiveRadiusMi() : null;
@@ -11241,14 +11259,81 @@ function jhOpenAlertsTab() {
  * apps, or the offer dismissed this visit: today's strip. The toast never
  * asks again for a watch the strip handled. 'email-asked' counts the strip's
  * field once per visit (counting rules v5). Stored watches are never
- * changed (rule 6): new ones only, through addQuickWatch. */
-let _stripAskCounted = false;
+ * changed (rule 6): new ones only, through addQuickWatch.
+ *
+ * ----- the free email alert comes first (2026-11-18, growth/strip-falert-1118) -----
+ * In the 7 days to 2026-11-18 the Monday-email ask (this strip and the
+ * toast, 'email-asked') was shown 17 times and no one gave an address. The
+ * free emailed alert (FREE EMAILED ALERT ON THE
+ * WEB, below) is the stronger free promise: "email me when this car shows
+ * up", usually the same day, rather than a weekly list. So where it applies
+ * the strip asks for THAT, in the Monday email's place (one ask, one field):
+ *   "Want the next one? Free email alert for <car>: we email you when another
+ *   is set out within 50 mi, usually the same day. One car, one address, no
+ *   account." [email] [Email me]  "or just watch it here"
+ * It applies (stripAskKind) exactly when the toast would offer it for the
+ * same new watch (falertToastPick; both ask falertAskOpen, and the request
+ * and reply are the toast's own, falertToastSubmit): the website, not Pro, a
+ * location, and
+ *   - the scope is ONE model (make + model, the filter's years if any). The
+ *     alert covers one car per address; a whole make, or several models,
+ *     is not "this car", and spending the one alert on it would make a
+ *     noisy email, so those keep the Monday email (up to RECAP_MAX models);
+ *   - no alert on or waiting for its click in this browser (ys_falert). Then
+ *     the Monday email is offered as before ("Add <car> to your free Monday
+ *     email?" for a confirmed subscriber). "Change your alert to this car"
+ *     is NOT offered here: it would silently replace the car the visitor
+ *     chose for their one alert; the Alerts card keeps "Change car" for that;
+ *   - the alert's offer not declined this visit (the toast's x or 30 s, or
+ *     this strip's "or just watch it here": ys_falert_no, sessionStorage).
+ *     Declined, the strip and the toast fall back to the Monday email;
+ *   - a free watchlist with room (fewer than FREE_WATCH_LIMIT): the alert is
+ *     for the watch the strip makes, and a full list cannot make one (the
+ *     Monday strip then hits the limit as before: the upgrade sheet).
+ * The distance said is the alert's own (falertRadiusMi: the list's radius,
+ * at most FREE_EMAIL_ALERT_RADIUS_MI); the watch itself keeps the list's
+ * radius, as today. Submitting validates the address, asks for the zip
+ * first under a guess or a link's place (stripZipFirst: a guessed place is
+ * never a watch centre), makes the watch through addQuickWatch exactly as
+ * before (stripMakeWatches), then sends the one request the card and the
+ * toast send (falertSignup: /v1/free-alert/signup, a copy of the new watch's
+ * free criteria). The reply is the toast's ("Check your inbox ..." or, when
+ * this browser holds a token for the address, "on"). No Pro prompt inside
+ * the ask; the strip's Pro box under it is unchanged. The free alert keeps
+ * its own key ys_falert; stored watches are never edited (rule 6).
+ * Counting (the daily email's "Free alert offered / asked"): the strip's
+ * alert ask counts 'free-alert-shown' when at least half of it is on screen,
+ * once a visit, under the key the card and the toast use (ys_falert_seen),
+ * so a visit that sees the ask in two places counts once; an address given
+ * counts 'free-alert-asked' (in falertSignup). 'email-asked' keeps meaning
+ * the Monday-email field only and is NOT counted for the alert's ask, so
+ * from the day this is deployed "Monday email asked" falls and "Free alert
+ * offered" rises by the visits whose strip covered one model; the weeks
+ * before and after it are not like for like on those two rows. */
+let _stripAskCounted = false, _stripFalertIO = null;
+/** Which ask the watch strip makes. Pure (unit-tested). o = {native, pro,
+ * located, models (how many the scope names; 0 = the whole make), full (a
+ * free watchlist at FREE_WATCH_LIMIT), falertOpen (the toast's own rule,
+ * falertAskOpen: no alert on or pending here, not declined this visit),
+ * recapNo (the Monday offer dismissed this visit), recapOn (a confirmed
+ * Monday subscriber here)} -> 'falert' | 'recap' | 'recap-add' | '' (the
+ * plain strip with its Watch button). The toast asks the same of its one
+ * new watch (falertToastPick: one entry, falertAskOpen, among the first
+ * FREE_WATCH_LIMIT); here the watch does not exist yet, so "one entry" is
+ * one model and "among the first" is a list with room. */
+function stripAskKind(o) {
+  if (o.native || o.pro || !o.located) return '';
+  if (o.models === 1 && !o.full && o.falertOpen) return 'falert';
+  if (Math.max(o.models, 1) > RECAP_MAX || o.recapNo) return '';
+  return o.recapOn ? 'recap-add' : 'recap';
+}
 function stripMailHtml(sc, nCars, r) {
   if (IS_NATIVE || isPro() || !activeZipCoords || !r) return '';
-  if ((sc.models.length || 1) > RECAP_MAX) return '';
-  const probe = { make: sc.make, lat: activeZipCoords.lat, lng: activeZipCoords.lng, radiusMi: r };
-  if (!recapEligible(probe, IS_NATIVE, isPro(), recapDismissed())) return '';
   const st = recapState();
+  const kind = stripAskKind({ native: IS_NATIVE, pro: isPro(), located: true, models: sc.models.length,
+    full: loadWatchlist().length >= FREE_WATCH_LIMIT, falertOpen: falertAskOpen(),
+    recapNo: recapDismissed(), recapOn: !!(st && st.state === 'confirmed' && st.sub) });
+  if (!kind) return '';
   const what = `<strong>${escapeHtml(sc.label)}</strong>`;
   // While the list is centred on a guess or a link's place (A PLACE FOR THIS
   // VISIT), the watch and the email need the visitor's own zip, so the strip
@@ -11258,8 +11343,27 @@ function stripMailHtml(sc, nCars, r) {
   // centred on their own place, so the sentence says which.
   const ofWhere = askZip ? ' of your zip' : (_tempPlace ? ' of your own location' : '');
   const zipField = askZip ? watchZipInputHtml('strip-zip') : '';
+  if (kind === 'falert') {
+    // The car as the watch will store it, so the name and the distance are
+    // the ones the alert's copy will carry (falertLabel, falertRadiusMi).
+    const car = { make: sc.make, model: sc.models[0], yrMin: sc.yrMin, yrMax: sc.yrMax, radiusMi: r };
+    // "or just watch it here" is a "no" to the alert for this visit: the
+    // toast that follows offers the Monday email, not the same ask again.
+    const justFa = '<button type="button" class="linklike strip-just-watch" onclick="falertToastDismiss(); jhWatchSearch()">or just watch it here</button>';
+    return `<div class="watch-strip strip-mail strip-falert" style="grid-column:1/-1;">${ICON.bell}
+    <div class="mail-ask strip-ask">
+      <span class="mail-line">${nCars ? 'Want the next one?' : 'None here right now.'} Free email alert for <strong>${escapeHtml(falertLabel(car))}</strong>: we email you when ${nCars ? 'another' : 'one'} is set out within ${falertRadiusMi(car)}&nbsp;mi${ofWhere}, usually the same day. One car, one address, no account.</span>
+      <form class="watch-zip-row mail-form strip-form" novalidate>
+        ${zipField}<input type="email" class="watch-zip-input mail-email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false"
+          placeholder="Email" aria-label="Email address for the free email alert" maxlength="254" value="${escapeHtml(st ? st.email : '')}">
+        <button type="submit" class="btn btn-primary btn-sm">Email me</button>
+      </form>
+      <span class="watch-zip-msg mail-msg" role="status"></span>
+      ${justFa}
+    </div>${proBoxHtml(PRO_PUSH_LINE, 'watch-toast', '', 'strip-pro')}</div>`;
+  }
   const just = '<button type="button" class="linklike strip-just-watch" onclick="jhWatchSearch()">or just watch it here</button>';
-  if (st && st.state === 'confirmed' && st.sub) {
+  if (kind === 'recap-add') {
     return `<div class="watch-strip strip-mail" style="grid-column:1/-1;">${ICON.bell}
       <div class="mail-ask strip-ask">
         <span class="mail-line">Add ${what} to your free Monday email?</span>
@@ -11279,19 +11383,39 @@ function stripMailHtml(sc, nCars, r) {
       ${just}
     </div>${proBoxHtml(PRO_PUSH_LINE, 'watch-toast', '', 'strip-pro')}</div>`;
 }
-/* After a render: the strip's field shown counts 'email-asked', once a visit. */
+/* After a render: the strip's Monday-email field shown counts 'email-asked',
+ * once a visit; the strip's free email alert ask counts 'free-alert-shown'
+ * instead, once a visit, when at least half of it is on screen (as the
+ * Alerts card is counted; the key is shared with the card and the toast). */
 function stripAskCount() {
-  if (_stripAskCounted || !document.querySelector('#live-grid .strip-mail .mail-email')) return;
+  if (_stripFalertIO) { _stripFalertIO.disconnect(); _stripFalertIO = null; }
+  const fa = document.querySelector('#live-grid .strip-falert');
+  if (fa && fa.querySelector('.mail-email') && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      if (!entries.some(x => x.isIntersecting)) return;
+      io.disconnect();
+      if (_stripFalertIO === io) _stripFalertIO = null;
+      if (onceThisVisit('ys_falert_seen')) track('free-alert-shown');
+    }, { threshold: 0.5 });
+    _stripFalertIO = io;
+    io.observe(fa);
+  }
+  if (_stripAskCounted || !document.querySelector('#live-grid .strip-mail:not(.strip-falert) .mail-email')) return;
   _stripAskCounted = true;
   track('email-asked');
 }
 /* The watches the strip stands for, made the way jhWatchSearch makes them.
- * Returns the new entries (for the sign-up), or null when nothing may be sent. */
-function stripMakeWatches(el) {
-  if (el._stripEntries) return el._stripEntries;   // a retry after a failed send
+ * Returns the new entries for the sign-up, or null when nothing may be sent:
+ * for the Monday email the ones it can carry (as the toast would have
+ * offered them), for the free email alert ('falert') every watch made here
+ * (one: its scope is one model), whether or not the Monday offer was
+ * dismissed this visit. */
+function stripMakeWatches(el, kind) {
+  if (el._stripEntries) return kind === 'falert' ? el._stripMade : el._stripEntries;   // a retry after a failed send
   const sc = liveWatchScope();
   if (!sc) return null;
   const from = _recapNew.length;
+  const before = new Set(loadWatchlist().map(e => e.addedAt));
   let added = 0, blocked = null;
   for (const m of (sc.models.length ? sc.models : [''])) {
     const r = addQuickWatch(sc.make, m, sc.yrMin, sc.yrMax, 'strip');
@@ -11301,12 +11425,14 @@ function stripMakeWatches(el) {
   // These watches are handled here: the toast must not offer them again.
   const mine = _recapNew.slice(from);
   _recapNew = _recapNew.slice(0, from);
+  const made = loadWatchlist().filter(e => e.addedAt && !before.has(e.addedAt));
   if (added) { renderAlerts(); checkAndNotify(); }
   if (blocked === 'limit') { openUpgradeSheet('watch-limit'); renderLive(); return null; }
   if (blocked === 'no-zip') { askZipForWatch(sc.label, () => jhWatchSearch()); return null; }
   el._stripEntries = mine;
+  el._stripMade = made;
   el._stripLabel = sc.label;
-  return mine;
+  return kind === 'falert' ? made : mine;
 }
 function stripDone(el) {
   const ask = el.querySelector('.mail-ask');
@@ -11358,10 +11484,15 @@ document.getElementById('live-grid').addEventListener('submit', async (e) => {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg.textContent = 'Enter your email address.'; input.focus(); return; }
   el = await stripZipFirst(el);
   if (!el) return;
-  const entries = stripMakeWatches(el);
+  // Which ask this is, read off the strip on screen now (a zip just set
+  // re-renders it).
+  const fa = el.classList.contains('strip-falert');
+  const entries = stripMakeWatches(el, fa ? 'falert' : '');
   if (!entries) return;
   if (!entries.length) { const m2 = el.querySelector('.mail-msg'); if (m2) m2.textContent = 'You already watch this.'; return; }
-  recapSubmit(el, entries, () => stripDone(el));
+  // The free email alert: the same request and reply as the toast's offer.
+  if (fa) falertToastSubmit(el, entries[0], () => stripDone(el));
+  else recapSubmit(el, entries, () => stripDone(el));
 });
 document.getElementById('live-grid').addEventListener('click', async (e) => {
   const add = e.target.closest('.strip-mail [data-act="recap-add"]');
@@ -11818,17 +11949,26 @@ async function falertSignup(email, e, change) {
  * new watch, in its place (one offer; no Pro prompt in it). The Monday email
  * offer comes back once the alert is asked for, for a batch of several new
  * watches, for a watch past the first FREE_WATCH_LIMIT, and after the alert
- * offer was dismissed this visit. */
+ * offer was dismissed this visit. The Cars watch strip makes the same offer,
+ * on the same terms, for the one-model watch it creates (stripAskKind); its
+ * "or just watch it here" counts as dismissing it (ys_falert_no). */
 function falertToastDismissed() {
   try { return sessionStorage.getItem('ys_falert_no') === '1'; } catch (e) { return false; }
 }
 function falertToastDismiss() {
   try { sessionStorage.setItem('ys_falert_no', '1'); } catch (e) { /* private mode */ }
 }
+/** Whether the alert may be offered for a new watch right now: a free web
+ * visitor, no alert on or waiting for its click in this browser, the offer
+ * not declined this visit. The toast (falertToastPick) and the Cars watch
+ * strip (stripMailHtml) both ask this one rule. */
+function falertAskOpen() {
+  return falertOffered(IS_NATIVE, isPro()) && !falertState() && !falertToastDismissed();
+}
 /** The new watch the toast offers the alert for, as a falertChoices() entry,
  * or null (then the Monday email is offered, as before). */
 function falertToastPick(entries) {
-  if (!entries || entries.length !== 1 || !falertOffered(IS_NATIVE, isPro()) || falertState() || falertToastDismissed()) return null;
+  if (!entries || entries.length !== 1 || !falertAskOpen()) return null;
   const e = entries[0];
   return (e && e.addedAt && falertChoices().find(x => x.e.addedAt === e.addedAt)) || null;
 }
@@ -11842,6 +11982,10 @@ function falertToastHtml(e) {
     </form>
     <span class="watch-zip-msg mail-msg" role="status"></span>`;
 }
+/* The toast's offer and the Cars watch strip's (ONE-STEP MONDAY EMAIL IN THE
+ * WATCH STRIP, "the free email alert comes first") both send through here:
+ * `el` holds the .mail-email field, the .mail-form button, the .mail-msg
+ * line and the .mail-ask box the reply replaces; `e` is the new watch. */
 async function falertToastSubmit(el, e, done) {
   const input = el.querySelector('.mail-email'), msg = el.querySelector('.mail-msg'), btn = el.querySelector('.mail-form .btn');
   const email = String((input && input.value) || '').trim().toLowerCase();
