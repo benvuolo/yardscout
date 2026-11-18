@@ -3624,8 +3624,8 @@ have no product data on oem-raw (no "D2" lines), so they need a crawl (below).
   same pins as the shipped files; re-curating toyota/mopar on dca9cd84 with them
   reproduces groups/<ns>.json byte for byte apart from the `raw.ref` label).
 - Candidate file `groups/_report/nissan.candidate.json`: 346 Likely groups (343
-  shippable + 3 held wiper-motor): gauge-cluster 95, window-regulator 135,
-  side-mirrors 94, climate-control 26 (counts at round 4; final 343). The
+  shippable + 3 held wiper-motor): window-regulator 133, side-mirrors 94,
+  gauge-cluster 90, climate-control 26. The
   payload loader reads only groups/*.json, so the candidate does not ship.
 - What the app would show: Likely donors across Nissan/Infiniti twins and renames
   (Frontier/Xterra/Pathfinder 2005+, Titan/Armada, M37/M56/Q70, FX/QX70, EX/QX50,
