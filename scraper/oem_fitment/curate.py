@@ -1392,6 +1392,7 @@ class Curation:
         self.likely_engine_conflict = Counter()   # cat -> Infiniti vehicle-years whose fitment rows name other engines
         self.likely_drive_dropped = Counter()     # cat -> vehicle-years left out by the §5.16 drive rule (ambiguous)
         self.likely_drive_noted = Counter()       # cat -> groups whose note names a drive limit
+        self.likely_drive_single = Counter()      # cat -> vehicle-years whose limit is dropped: one drive only
         self.likely_generation_cut = Counter()     # cat -> vehicle-years cut at a generation break  # cat -> vehicle-years a class-wide note restricts away
         self.release_allow = policy.release_allowlist()   # §5.16 exact owner-approved releases
         self.release_notes = policy.release_notes()
@@ -1467,6 +1468,16 @@ class Curation:
                 # named in the note; ambiguous drive evidence leaves it out
                 for T in Ts:
                     d = self.drive_of(c, cat, T)
+                    if d and d != DRIVE_AMBIGUOUS:
+                        # hub 2026-11-18: no limit where the model-year comes
+                        # in one drive family only (catalog structure, else
+                        # policy.SINGLE_DRIVE_TABLE)
+                        mat = self.drive_material(T, d)
+                        if mat is False:
+                            self.likely_drive_single[cat] += 1
+                            d = None
+                        elif mat == DRIVE_AMBIGUOUS:
+                            d = DRIVE_AMBIGUOUS
                     if d == DRIVE_AMBIGUOUS:
                         self.likely_drive_dropped[cat] += 1
                         continue
@@ -1864,6 +1875,35 @@ class Curation:
     # statement. drive_basis says which kind a vehicle-year's limit is; the
     # gate is the same for both (only donors of the checked drive are shown),
     # the note words the second kind "<model>: only 2WD checked".
+    def drive_material(self, T, d):
+        """Hub 2026-11-18 (after the gates review): is T's drive limit d a
+        real split? A limit needs the model-year to come in the other drive
+        family too. Decided by the catalog's own structure where it files a
+        model-year by drive (gmpartsgiant '2007-chevrolet-tahoe-2wd' / '-4wd',
+        '2011-chevrolet-traverse-2wd' / '-awd': the year page's variants):
+        True when a catalog of the other family is offered for T (read or
+        not), False when only d's family is. Where the catalog does not file
+        by drive (one catalog per model-year: Ford, Mopar, Mercedes, Nissan),
+        policy.SINGLE_DRIVE_TABLE decides: False for a listed model-year in
+        d's family, DRIVE_AMBIGUOUS when the table's drive is the other family
+        (the evidence contradicts itself: the vehicle-year is left out), True
+        otherwise (unchanged). Only removes limits the model cannot have, or
+        vehicle-years; never adds one."""
+        fam = _FOUR if set(d) <= _FOUR else _TWO
+        other = _TWO if fam is _FOUR else _FOUR
+        offered = set()
+        for ym in self.t_years.get(T, []):
+            for v in [ym.variant] + list(ym.variants or []):
+                vd = _variant_drive(v)
+                if vd:
+                    offered |= set(vd)
+        if offered:
+            return bool(offered & other)
+        single = policy.single_drive(T[0], T[1], T[2])
+        if single is None:
+            return True
+        return False if set(single) <= fam else DRIVE_AMBIGUOUS
+
     def drive_basis(self, c, cat, T, d) -> str:
         """'stated' when the catalog states T's drive limit for class c:
         every own-page row of the number names the drive itself (option code,

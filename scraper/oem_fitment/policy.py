@@ -155,6 +155,43 @@ MODEL_BODY_TABLE = {
 }
 
 
+# §5.16 drive rule, single-drive model-years (hub 2026-11-18, gates review): a
+# drive limit ("Focus: FWD only") is no split when the model-year is built in
+# one drive family only, and as a gate it would mark every donor whose VIN
+# carries no drive type "if equipped" (vPIC returns none for most Focus VINs).
+# Where the catalog files a model-year by drive (gmpartsgiant 2wd / 4wd / awd
+# catalogs) its structure decides (curate.Curation.drive_material). Where it
+# files one catalog per model-year, a model-year listed here carries no drive
+# limit in its family. Only model-years a gated group touches, each with its
+# basis: the independent check's reading of the catalog (one catalog, no drive
+# split on its pages: groups/_report/restored_verify_2026-11-18b.json), or a
+# decode census of the pinned lot (main@a85c654).
+SINGLE_DRIVE_TABLE = {
+    ("Ford", "Focus"): (
+        (2012, 2012, "fwd", "fordpartsgiant 2012 Focus: one catalog, no drive split on its pages (restored_verify_2026-11-18b)"),
+        (2015, 2015, "fwd", "fordpartsgiant 2015 Focus: one catalog, no drive split on its pages (restored_verify_2026-11-18b)"),
+    ),
+    ("Ford", "C-Max"): (
+        (2013, 2013, "fwd", "fordpartsgiant 2013 C-Max: one catalog, no drive split on its pages (restored_verify_2026-11-18b)"),
+    ),
+    ("Ford", "Transit Connect"): (
+        (2015, 2015, "fwd", "fordpartsgiant 2015 Transit Connect: one catalog, no drive split (restored_verify_2026-11-18b)"),
+    ),
+    ("Mercedes-Benz", "ML350"): (
+        (2007, 2008, "awd", "mbpartsgiant one 'ml350' catalog; pinned lot a85c654: 19 of 19 decoded 2007-08 ML350 are AWD"),
+    ),
+}
+
+
+def single_drive(make: str, model: str, year: int):
+    """frozenset of the drive classes a SINGLE_DRIVE_TABLE model-year is built
+    in, or None when it is not listed."""
+    for a, b, drive, _basis in SINGLE_DRIVE_TABLE.get((make, model), ()):
+        if a <= year <= b:
+            return frozenset(drive.split("/"))
+    return None
+
+
 def model_body_table(make: str, model: str, year: int):
     """The fixed bodies of MODEL_BODY_TABLE for a feed model-year, or None
     when the model is not listed (or the year is outside its spans)."""

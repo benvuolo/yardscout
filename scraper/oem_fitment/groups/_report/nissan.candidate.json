@@ -90432,7 +90432,7 @@
   }
  ],
  "ns": "nissan",
- "policy_sha256": "aede50ab74dc59ffe05c79d1bfa64e26a0e8a47eb371960409740f007640bbd1",
+ "policy_sha256": "96f528783ceb0378bda6dc338f26473aac353d4f5b8af12bf516ccfa68a3cfa6",
  "raw": {
   "commit": "57e8b5b99de04282b844ea41f035cee3b37d5484",
   "ref": "57e8b5b99de0",

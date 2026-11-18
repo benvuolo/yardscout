@@ -1,4 +1,5 @@
-Live diff, main b9785c22 (rules-1118 merged) -> interchange/gates-1118 (per-app gates), 2026-11-18.
+Live diff, main b9785c22 (rules-1118 merged) -> interchange/gates-1118 (per-app gates), 2026-11-18,
+after the hub's gates review (no drive limit on a model-year built in one drive only).
 
 Pins: oem-raw@dca9cd845f26 (8 shipped namespaces), @57e8b5b99de0 (nissan, candidate
 only), inventory and decodes from main@a85c654 (sha256 1a9cfa73..., 1357625b...).
@@ -7,9 +8,13 @@ Read-only; no fetch or crawl.
 1. Groups (audit11_4/live_diff.py OLD=main groups NEW=branch groups, 8 shipped ns).
    live_diff compares apps and notes only; gates-only changes are counted in 2 and 3.
    ADDED: 0. REMOVED: 0. CHANGED: 48 notes, apps unchanged ("lost [] gained []" on
-   every line): "<model>: 2WD only" -> "<model>: only 2WD checked" where the drive
-   limit's basis is "unchecked" (the other drive's page is not in the raw, or
-   fitment rows that may be incomplete). Stated limits keep "X only".
+   every line):
+   - gm 34, mopar 7: "<model>: 2WD only" -> "<model>: only 2WD checked" (drive basis
+     unchecked: the other drive's page not in the raw, or fitment rows that may be
+     incomplete). Stated limits keep "X only" (gm Yukon 2003 mirrors, mopar tail lights).
+   - ford 6, mb 1: the drive limit is gone with its gate. The model-years are built in
+     one drive only (policy.SINGLE_DRIVE_TABLE: Focus 2012/2015, C-Max 2013, Transit
+     Connect 2015 FWD; ML350 2007-08 AWD), so "FWD only" / "ML350: AWD only" was no split.
 
 gm CHANGED LIVE ('climate-control', ('15098963',)) [['Chevrolet', 'S-10', 2000, 2000], ['GMC', 'Jimmy', 1998, 1998], ['GMC', 'Sonoma', 2000, 2000]] lost [] gained []
     old: GM catalog lists #15098963 for both — option: fits some option packages; S-10: 2WD only; verify the number on the part
@@ -136,25 +141,25 @@ mopar CHANGED LIVE ('headlights', ('68001485AE',)) [['Ram', '1500', 2012, 2012],
     new: Mopar catalog lists #68001485AE for both — option: fits some option packages; 1500: only 4WD checked; verify the number on the part
 ford CHANGED LIVE ('window-regulator', ('6CPZ-5423395-A',)) [['Ford', 'Focus', 2015, 2015], ['Ford', 'Transit Connect', 2015, 2015]] lost [] gained []
     old: Ford catalog lists #6CPZ-5423395-A for both — window motor only; trim-limited; FWD only; verify the number on the part
-    new: Ford catalog lists #6CPZ-5423395-A for both — window motor only; trim-limited; only FWD checked; verify the number on the part
+    new: Ford catalog lists #6CPZ-5423395-A for both — window motor only; trim-limited; verify the number on the part
 ford CHANGED LIVE ('window-regulator', ('6CPZ-5423395-B',)) [['Ford', 'Focus', 2015, 2015], ['Ford', 'Transit Connect', 2015, 2015]] lost [] gained []
     old: Ford catalog lists #6CPZ-5423395-B for both — window motor only; trim-limited; FWD only; verify the number on the part
-    new: Ford catalog lists #6CPZ-5423395-B for both — window motor only; trim-limited; only FWD checked; verify the number on the part
+    new: Ford catalog lists #6CPZ-5423395-B for both — window motor only; trim-limited; verify the number on the part
 ford CHANGED LIVE ('window-regulator', ('6CPZ-9923394-B',)) [['Ford', 'Focus', 2015, 2015], ['Ford', 'Transit Connect', 2015, 2015]] lost [] gained []
     old: Ford catalog lists #6CPZ-9923394-B for both — window motor only; trim-limited; FWD only; verify the number on the part
-    new: Ford catalog lists #6CPZ-9923394-B for both — window motor only; trim-limited; only FWD checked; verify the number on the part
+    new: Ford catalog lists #6CPZ-9923394-B for both — window motor only; trim-limited; verify the number on the part
 ford CHANGED LIVE ('window-regulator', ('6CPZ-9923394-C',)) [['Ford', 'Focus', 2015, 2015], ['Ford', 'Transit Connect', 2015, 2015]] lost [] gained []
     old: Ford catalog lists #6CPZ-9923394-C for both — window motor only; trim-limited; FWD only; verify the number on the part
-    new: Ford catalog lists #6CPZ-9923394-C for both — window motor only; trim-limited; only FWD checked; verify the number on the part
+    new: Ford catalog lists #6CPZ-9923394-C for both — window motor only; trim-limited; verify the number on the part
 ford CHANGED LIVE ('window-regulator', ('CV6Z-5423394-B',)) [['Ford', 'C-Max', 2013, 2013], ['Ford', 'Focus', 2012, 2012]] lost [] gained []
     old: Ford catalog lists #CV6Z-5423394-B for both — window motor only; fits some configurations; C-Max: 2WD only; Focus: FWD only; verify the number on the part
-    new: Ford catalog lists #CV6Z-5423394-B for both — window motor only; fits some configurations; only 2WD checked; verify the number on the part
+    new: Ford catalog lists #CV6Z-5423394-B for both — window motor only; fits some configurations; verify the number on the part
 ford CHANGED LIVE ('window-regulator', ('CV6Z-5423395-B',)) [['Ford', 'C-Max', 2013, 2013], ['Ford', 'Focus', 2012, 2012]] lost [] gained []
     old: Ford catalog lists #CV6Z-5423395-B for both — window motor only; fits some configurations; C-Max: 2WD only; Focus: FWD only; verify the number on the part
-    new: Ford catalog lists #CV6Z-5423395-B for both — window motor only; fits some configurations; only 2WD checked; verify the number on the part
+    new: Ford catalog lists #CV6Z-5423395-B for both — window motor only; fits some configurations; verify the number on the part
 mb CHANGED LIVE ('wheels', ('6-6-47-4207',)) [['Mercedes-Benz', 'ML350', 2007, 2008], ['Mercedes-Benz', 'ML500', 2006, 2006]] lost [] gained []
     old: Mercedes catalog lists #6-6-47-4207 for both — trim-limited; ML350: AWD only; verify the number on the part
-    new: Mercedes catalog lists #6-6-47-4207 for both — trim-limited; ML350: only AWD checked; verify the number on the part
+    new: Mercedes catalog lists #6-6-47-4207 for both — trim-limited; verify the number on the part
 
 2. Gates per namespace and make (app-years by gate key; drive by basis). HELD = a
    held category (not shipped). nissan = the candidate (not shipped).
@@ -164,10 +169,8 @@ mb CHANGED LIVE ('wheels', ('6-6-47-4207',)) [['Mercedes-Benz', 'ML350', 2007, 2
    LIVE GMC: app-years {'cab': 2, 'drive:stated': 2}
 == mopar: gated groups {'LIVE': 9}
    LIVE Ram: app-years {'drive:stated': 2, 'drive:unchecked': 7}
-== ford: gated groups {'LIVE': 6}
-   LIVE Ford: app-years {'drive:unchecked': 12}
-== mb: gated groups {'LIVE': 1}
-   LIVE Mercedes-Benz: app-years {'drive:unchecked': 2}
+== ford: gated groups {}
+== mb: gated groups {}
 == hmg: gated groups {'HELD': 35}
    HELD Kia: app-years {'drive:stated': 44, 'eng': 81, 'trans': 4}
 == toyota: gated groups {}
@@ -180,14 +183,10 @@ mb CHANGED LIVE ('wheels', ('6-6-47-4207',)) [['Mercedes-Benz', 'ML350', 2007, 2
 3. Payload claim diff (docs/data/interchange.json + docs/data/oem/*.json, by (ns, cat, pn)):
 
 
-ford     gated app-years    12
-ford     gates added        6
 ford     note changed       6
 gm       gated app-years    50
 gm       gates added        48
 gm       note changed       34
-mb       gated app-years    2
-mb       gates added        1
 mb       note changed       1
 mopar    gated app-years    9
 mopar    gates added        9
@@ -200,14 +199,12 @@ groups old 1183 new 1183 | added groups 0 | added app-years 0
    and distinct lot cars that are a donor for at least one group.
 
 ns       | donor (group, car) pairs before -> after | excluded | if-equipped | distinct donor cars before -> after
-ford     |   27335 ->   27335 |      0 |   3858 | 6949 -> 6949
-         Ford: pairs 23529, excluded 0 (0 cars), if-equipped 3858
+ford     |   27335 ->   27335 |      0 |      0 | 6949 -> 6949
 gm       |   59852 ->   56081 |   3771 |   1787 | 8191 -> 8152
          Chevrolet: pairs 41169, excluded 3663 (655 cars), if-equipped 1704
          GMC: pairs 5088, excluded 108 (54 cars), if-equipped 83
 hmg      |    3754 ->    3754 |      0 |      0 | 734 -> 734
-mb       |     243 ->     243 |      0 |      2 | 77 -> 77
-         Mercedes-Benz: pairs 243, excluded 0 (0 cars), if-equipped 2
+mb       |     243 ->     243 |      0 |      0 | 77 -> 77
 mopar    |  116281 ->  115939 |    342 |     27 | 7629 -> 7629
          Ram: pairs 2559, excluded 342 (38 cars), if-equipped 27
 subaru   |    4055 ->    4055 |      0 |      0 | 1184 -> 1184

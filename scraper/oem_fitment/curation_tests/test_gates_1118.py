@@ -104,6 +104,36 @@ fit_both = _Cur("mopar", seeds=fit_only.t_seed_records,
 check("basis: another number's fitment row names 2WD -> the catalog lists both drives: stated",
       fit_both.drive_basis(ch, cat, ram, FOUR) == "stated")
 
+# ------------------------------------------------------------ single-drive model-years (hub, gates review)
+class _Mat:
+    drive_material = C.Curation.drive_material
+
+    def __init__(self, years):
+        self.t_years = years
+
+
+ym = lambda *vs: NS(variant=vs[0], variants=list(vs))  # noqa: E731
+check("material: the catalog files the year by drive and offers the other drive (Tahoe 2wd + 4wd pages) -> a real split",
+      _Mat({T2: [ym("2wd", "4wd")]}).drive_material(T2, TWO) is True)
+check("material: Traverse 2wd + awd catalogs -> a real split for a 2WD limit",
+      _Mat({("Chevrolet", "Traverse", 2011): [ym("2wd", "awd")]}).drive_material(("Chevrolet", "Traverse", 2011), TWO) is True)
+check("material: the catalog files the year by drive but offers one drive only -> no split, no limit",
+      _Mat({T2: [ym("2wd")]}).drive_material(T2, TWO) is False)
+F15, TC15, ML07, RAM12 = ("Ford", "Focus", 2015), ("Ford", "Transit Connect", 2015), ("Mercedes-Benz", "ML350", 2007), ("Ram", "1500", 2012)
+check("material: one catalog per year (Ford, Mercedes) -> SINGLE_DRIVE_TABLE: Focus 2015 FWD, ML350 2007 AWD are no split",
+      _Mat({F15: [ym("")]}).drive_material(F15, frozenset({"fwd"})) is False
+      and _Mat({TC15: [ym("")]}).drive_material(TC15, frozenset({"fwd"})) is False
+      and _Mat({ML07: [ym("ml350")]}).drive_material(ML07, frozenset({"awd"})) is False)
+check("material: a model-year the table does not list keeps its limit (Ram 1500 2012, one catalog, both drives)",
+      _Mat({RAM12: [ym("")]}).drive_material(RAM12, FOUR) is True)
+check("material: a table model-year with a limit in the OTHER family contradicts itself -> left out",
+      _Mat({F15: [ym("")]}).drive_material(F15, FOUR) == C.DRIVE_AMBIGUOUS)
+check("table: every entry has a drive of one family and a one-line basis",
+      all(V.gate_problem({"drive": d}) is None and b and "\n" not in b
+          for ents in policy.SINGLE_DRIVE_TABLE.values() for _a, _b, d, b in ents))
+check("table: single_drive() reads the spans", policy.single_drive("Ford", "Focus", 2012) == frozenset({"fwd"})
+      and policy.single_drive("Ford", "Focus", 2016) is None and policy.single_drive("Ram", "1500", 2012) is None)
+
 # ------------------------------------------------------------ wording
 u = _Cur("gm")
 Ts = [T2, ("Chevrolet", "Avalanche", 2007)]
@@ -208,4 +238,13 @@ for name, d in by_ns.items():
 check("payload files: every shipped group has exactly its curated app-years, and its gates on the gated years",
       not mism and gated_ship, str(mism[:5]))
 check("nissan stays a candidate: no groups/nissan.json", not (OEM / "groups" / "nissan.json").exists())
+single_hits = [(n, g["id"], mk, md, y) for n, d in by_ns.items() for g in d["likely"]
+               for mk, md, lo, hi, gate in g.get("gates") or [] if "drive" in gate
+               for y in range(lo, hi + 1) if policy.single_drive(mk, md, y) is not None]
+check("committed files: no drive gate on a SINGLE_DRIVE_TABLE model-year (Focus, C-Max, Transit Connect, ML350)",
+      not single_hits, str(single_hits[:3]))
+focus = [g for g in by_ns["ford.json"]["likely"] if g["pn"][0] in ("6CPZ-5423395-A", "CV6Z-5423394-B")]
+check("committed files: the Focus/Transit Connect and C-Max/Focus window motors carry no drive note or gate",
+      len(focus) == 2 and all("checked" not in g["note"] and "FWD" not in g["note"] and not g.get("gates") for g in focus),
+      str([(g["note"], g.get("gates")) for g in focus]))
 done("test_gates_1118")
