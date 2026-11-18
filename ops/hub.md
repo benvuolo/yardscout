@@ -1839,3 +1839,28 @@ All 34 `scraper/test_*.py` pass on the tree merged with main.
   `ebay_prices.py` first); Chrysler 200 generation break (with a source);
   audit alternator and starter rows the same way (next round); seed a crawl
   on the 32 no-number windows (interchange crawl list).
+
+## 2026-11-18 17:56 UTC interchange: wrong live claims removed; Nissan held
+
+Independent verifier (seed 46021118 / 7731118; report `groups/_report/
+nissan_verify_2026-11-18.json`, `removals_verify_2026-11-18.json`, section
+"Independent verification" in `ops/interchange.md`):
+- **Nissan candidate: 9 WRONG of 60** → NOT shipped. 6 drive (4WD-only or
+  2WD-only gauge clusters claimed for every car of a model-year built in
+  both; 43 of 343 groups have it), 3 body (sedan-only clusters on the
+  200SX coupe). 11 RISK (engine/transmission/hybrid splits, Titan rear-door
+  motors without a cab code).
+- **Removals: shipped.** 28 checked: 18 wrong live claims (coupe parts on
+  sedans, rear-door parts on coupes, "from 10/2012" rows on 2012 IS 350s), 7
+  true claims lost (Ford window motors split by feature, Sonic, Camaro/
+  Firebird, Cobalt/G5, one Subaru), 3 cannot tell. Losing a true claim
+  shows less, never something wrong; recover them later by decoding GM body
+  codes (37/69/67) and Subaru S./W.
+- Tests on the merged tree: run 13 (89 suites incl. part finder,
+  interchange, pf_ux, pf_new_cats) all pass; curation tests pass except
+  `test_model_map` (fails on main too: new one-car spellings in the live
+  inventory); oem_fitment tests pass. Payload 1,538,963 → 1,503,938 bytes.
+- Rule flaws the verifier found, for the next interchange round: drive
+  codes in the option column not read (may affect LIVE makes too: check),
+  body check leans on lot vPIC bodies, engine/transmission splits get only
+  "option", gas/hybrid pages, body codes not read as bodies.
