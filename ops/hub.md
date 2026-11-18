@@ -2047,3 +2047,9 @@ now read "<model>: only 2WD checked".
   that add claims this round.
 - Next: independent §11.4 sample of the nissan candidate WITH the gates.
 - 23:15 UTC confirmed live: sw jh-v212; data/oem/window-regulator.json carries 22 unchecked drive gates, as main; one page load, no page errors.
+- 23:25 UTC container restart lost the first independent nissan check (no
+  work had been pushed); restarted with the same brief, told to push partial
+  work every 30-40 min. Branch-to-be: `interchange/verify-nissan-1118c`.
+- 23:30 UTC Apple 1.13.1 build 42 still WAITING_FOR_REVIEW. Check-in
+  trig_01JcAHSWqZ1rxaB5VAPHXG34 at 2026-11-19 09:10 UTC (on acceptance:
+  store-listing.yml + play-subscription-listing.yml).
