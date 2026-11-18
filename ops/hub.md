@@ -1791,3 +1791,27 @@ name, so the apps already in the stores ignore them.
   read `listState`; date-only edits at 19 yards make `lastChangedAt` look
   fresher than the list. Yards to check: Wrench-A-Part Holland, UAPI
   Alexandria, Colorado Auto & Parts, Youngstown, Budget Bartow (12-day cycle).
+
+## 2026-11-18 interchange builder done; independent verifier started
+
+`interchange/next-1117` (12f9a78d; builder's section at the end of
+`ops/interchange.md`). Nothing shipped yet.
+- Nissan/Infiniti candidate: 343 Likely groups, 15,788 lot cars (window
+  regulators, mirrors, gauge clusters, climate controls). Builder's round 5
+  had 0 WRONG, but the builder wrote the rule fixes, so §11.4 needs an
+  independent sample: verifier agent on `interchange/verify-1118`.
+- New rules (all namespaces): a model-year sold in more than one body joins
+  a cross-model group only when its own pages list the number for every
+  body; "Production Date: from MM/YYYY" windows are now read. They REMOVE
+  live claims: gm 63 groups (Cavalier/Sunfire, Cobalt/G5, Alero/Grand Am
+  coupe vs sedan), subaru 14, mopar 8 + 1 narrowed, ford 7, toyota 4
+  (`groups/_report/live_diff_2026-11-18.txt`). The verifier also checks at
+  least 25 of those removals before they go out.
+- Ranking of what else can ship without a crawl: toyota +15.9k lot cars,
+  mopar +10.7k, hmg (after its parked body rules), vag, bmw.
+- Crawl wishes (not dispatched): Tier D wave 1 product pages (need strict
+  name rules per site first); gmpartsgiant / fordpartsgiant own-page
+  completion (24% / 18% of lot cars) are blocked with 503: a retry is the
+  owner's call (rule 2: no workaround either way).
+- `test_model_map` fails on main too: new one-car spellings in the live
+  inventory ("Honda Cr-V E:fcev", "BMW 535i GT xDrive"); data quality.
