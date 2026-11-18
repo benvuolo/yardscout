@@ -87,6 +87,15 @@ for (const c of P1_CONSTS) {
   if (m) { new vm.Script(m[0]); code += m[0] + '\n'; }
   else code += 'function pfAmGateParse() { return null; } function pfAmGate() { return "confirm"; } function pfAmGateText() { return ""; }\n';
 }
+// Gated OEM app rows (gates-1118): the OEM-GATE block (pfOemGate and helpers).
+// Absent in an older app.js: stubbed open (no gate), so the OEM gate checks
+// below fail there, as they should.
+{
+  const m = src.match(/\/\* OEM-GATE BEGIN[\s\S]*?\/\* OEM-GATE END \*\//);
+  check('app.js carries the OEM-GATE block', !!m);
+  if (m) { new vm.Script(m[0]); code += m[0] + '\n'; }
+  else code += 'function pfOemGateParse() { return null; } function pfOemGateText() { return ""; } function pfOemGate() { return { verdict: "confirm", keys: [] }; } function pfOemDonorGate() { return { verdict: "confirm", warn: "" }; }\n';
+}
 for (const fn of P1_FNS) {
   const s = extractFn(fn);
   check(`app.js has top-level function ${fn}`, !!s);
@@ -799,6 +808,137 @@ print(json.dumps([G.engine_agrees(G.parse_engine(a), G.parse_engine(b)) for a, b
   const rm = run(base([], gens), inv, { year: 2009, make: 'Toyota', model: 'Camry' }, cat());
   check('other categories: no "each" on the yard price', rm.html.includes('Yard: $31.99') && !rm.html.includes('Yard: $31.99 each'), '');
   Object.assign(ctx, { isPro: saved.isPro, yardPartQuote: saved.q, onlinePriceHtml: saved.o });
+}
+
+/* ==== OEM-GATE (gates-1118): per-app limits on OEM catalog groups ========
+ * A gated OEM app is [make, model, lo, hi, null, gate]. A donor whose own VIN
+ * decode or listing contradicts the limit is not offered; one the car cannot
+ * confirm stays, "if equipped", with a line naming the limit (the aftermarket
+ * gate's and the parts table's rule for unknown); a group with no gate renders
+ * exactly as before. */
+{
+  const G = (gate, v = {}, ex = null) => ctx.pfOemGate(gate, { model: 'Tahoe', ...v }, ex).verdict;
+  const DT4 = '4WD/4-Wheel Drive/4x4', DT2 = '4x2';
+  // drive
+  check('gate drive 2wd: a 4WD decode excludes', G({ drive: '2wd' }, { vpicDriveType: DT4 }) === 'exclude');
+  check('gate drive 2wd: an AWD decode excludes', G({ drive: '2wd' }, { vpicDriveType: 'AWD/All-Wheel Drive' }) === 'exclude');
+  check('gate drive 2wd: 4x2, RWD and FWD decodes confirm',
+    G({ drive: '2wd' }, { vpicDriveType: DT2 }) === 'confirm' && G({ drive: '2wd' }, { vpicDriveType: 'RWD/Rear-Wheel Drive' }) === 'confirm'
+    && G({ drive: '2wd' }, { vpicDriveType: 'FWD/Front-Wheel Drive' }) === 'confirm');
+  check('gate drive 2wd: no decode -> unconfirmed (shown, "if equipped")', G({ drive: '2wd' }, {}) === 'unconfirmed');
+  check('gate drive 2wd: a decode naming both families ("2WD/4WD") -> unconfirmed', G({ drive: '2wd' }, { vpicDriveType: '2WD/4WD' }) === 'unconfirmed');
+  check('gate drive 2wd: the listing naming it confirms ("Tahoe 2WD", no decode)', G({ drive: '2wd' }, { model: 'Tahoe 2WD' }) === 'confirm');
+  check('gate drive 4wd: 4x2 excludes, 4WD confirms, no decode unconfirmed',
+    G({ drive: '4wd' }, { vpicDriveType: DT2 }) === 'exclude' && G({ drive: '4wd' }, { vpicDriveType: DT4 }) === 'confirm'
+    && G({ drive: '4wd' }, {}) === 'unconfirmed');
+  check('gate drive awd vs a 4WD decode: excluded, as pfAmDriveVerdict does (one class named, not the gate’s)',
+    G({ drive: 'awd' }, { vpicDriveType: DT4 }) === 'exclude' && ctx.pfAmDriveVerdict('awd', 'ML350', DT4) === 'exclude');
+  check('gate drive fwd: 4x2 (front or rear not said) -> unconfirmed; RWD excludes',
+    G({ drive: 'fwd' }, { vpicDriveType: DT2 }) === 'unconfirmed' && G({ drive: 'fwd' }, { vpicDriveType: 'RWD/Rear-Wheel Drive' }) === 'exclude');
+  check('gate drive fwd/rwd reads as 2WD (4x2 confirms)', G({ drive: 'fwd/rwd' }, { vpicDriveType: DT2 }) === 'confirm');
+  check('gate drive a4wd (All-Mode 4WD): a 4WD decode cannot confirm it; 4x2 excludes',
+    G({ drive: 'a4wd' }, { vpicDriveType: DT4 }) === 'unconfirmed' && G({ drive: 'a4wd' }, { vpicDriveType: DT2 }) === 'exclude');
+  check('drive_basis does not change the gate', G({ drive: '2wd', drive_basis: 'unchecked' }, { vpicDriveType: DT4 }) === 'exclude'
+    && G({ drive: '2wd', drive_basis: 'stated' }, { vpicDriveType: DT2 }) === 'confirm');
+  // body (the decode's silhouette, extras position 5)
+  const ex = (o = {}) => ['', '', o.engine || '', o.trans || '', '', o.body || ''];
+  check('gate body coupe: a sedan decode excludes, a coupe decode confirms, no decode unconfirmed',
+    G({ body: 'coupe' }, { model: 'Altima' }, ex({ body: 'sedan' })) === 'exclude'
+    && G({ body: 'coupe' }, { model: 'Altima' }, ex({ body: 'coupe' })) === 'confirm'
+    && G({ body: 'coupe' }, { model: 'Altima' }, null) === 'unconfirmed');
+  check('gate body coupe: the listing naming it confirms ("Altima Coupe")', G({ body: 'coupe' }, { model: 'Altima Coupe' }, null) === 'confirm');
+  check('gate body list [sedan, coupe]: coupe confirms, wagon excludes',
+    G({ body: ['sedan', 'coupe'] }, { model: 'G37' }, ex({ body: 'coupe' })) === 'confirm'
+    && G({ body: ['sedan', 'coupe'] }, { model: 'G37' }, ex({ body: 'wagon' })) === 'exclude');
+  // cab
+  check('gate cab: listing or VIN series naming the cab confirms; another cab excludes; nothing said unconfirmed',
+    G({ cab: 'crew cab' }, { model: 'Colorado Crew Cab' }) === 'confirm'
+    && G({ cab: 'crew cab' }, { model: 'Colorado', vpicSeries: 'Extended Cab' }) === 'exclude'
+    && G({ cab: 'crew cab' }, { model: 'Colorado', vpicSeries: '1/2 Ton' }) === 'unconfirmed');
+  check('gate cab: a "Crew" trim (Grand Caravan) is not a cab', G({ cab: 'crew cab' }, { model: 'Grand Caravan', vpicTrim: 'Crew', vpicTrimQuality: 'usable' }) === 'unconfirmed');
+  check('gate cab: a decode naming two cabs ("Club Cab, Quad Cab") confirms neither',
+    G({ cab: 'quad cab' }, { model: 'Dakota', vpicTrim: 'Laramie Club Cab, Quad Cab', vpicTrimQuality: 'usable' }) === 'unconfirmed');
+  // engine, transmission, fuel
+  check('gate eng 3.7L: 3.7L confirms, 5.6L excludes, unknown unconfirmed',
+    G({ eng: ['3.7L'] }, { model: 'Q70' }, ex({ engine: '3.7L 6-cyl' })) === 'confirm'
+    && G({ eng: ['3.7L'] }, { model: 'Q70' }, ex({ engine: '5.6L 8-cyl' })) === 'exclude'
+    && G({ eng: ['3.7L'] }, { model: 'Q70' }, null) === 'unconfirmed');
+  check('gate trans MT: manual confirms, automatic and AMT exclude, unknown unconfirmed',
+    G({ trans: 'MT' }, {}, ex({ trans: '6-spd Manual/Standard' })) === 'confirm'
+    && G({ trans: 'MT' }, {}, ex({ trans: '5-spd Automatic' })) === 'exclude'
+    && G({ trans: 'MT' }, {}, ex({ trans: 'Automated Manual Transmission (AMT)' })) === 'exclude'
+    && G({ trans: 'MT' }, {}, null) === 'unconfirmed');
+  check('gate fuel gas: as the parts table (§22.10): a hybrid named by the VIN series or a diesel decode excludes; FFV and plain confirm',
+    G({ fuel: 'gas' }, { model: 'Silverado 1500', vpicSeries: '1/2 Ton Hybrid' }) === 'exclude'
+    && G({ fuel: 'gas' }, { model: 'Silverado 1500' }, ex({ engine: '6.6L 8-cyl Diesel' })) === 'exclude'
+    && G({ fuel: 'gas' }, { model: 'Silverado 1500' }, ex({ engine: '5.3L 8-cyl Flexible Fuel Vehicle (FFV)' })) === 'confirm'
+    && G({ fuel: 'gas' }, { model: 'Silverado 1500' }, null) === 'confirm');
+  check('gate fuel hybrid: a hybrid named confirms, nothing said unconfirmed',
+    G({ fuel: 'hybrid' }, { model: 'Q70', vpicTrim: 'Hybrid', vpicTrimQuality: 'usable' }) === 'confirm'
+    && G({ fuel: 'hybrid' }, { model: 'Q70' }, null) === 'unconfirmed');
+  check('no gate (4-element app) confirms', G(undefined, { vpicDriveType: DT4 }) === 'confirm');
+  check('gate text words the limit like the note', ctx.pfOemGateText({ cab: 'crew cab', drive: '4wd', eng: ['2.4L'] }) === 'crew cab, 4WD, 2.4L'
+    && ctx.pfOemGateText({ drive: 'fwd/rwd' }) === '2WD' && ctx.pfOemGateText({ eng: ['3.7L'], fuel: 'gas' }) === '3.7L, gas');
+}
+{
+  // pfRunSearch: a 2WD-only Tahoe app; the twin (Avalanche) app has no limit
+  const twoWd = { drive: '2wd', drive_basis: 'unchecked' };
+  const gTahoe = oemG({ id: 'oem:gm:side-mirrors:L:t1', ns: 'gm', label: 'GM catalog', pn: ['22853025'],
+    note: 'GM catalog lists #22853025 for both — fits some configurations; Tahoe: only 2WD checked; verify the number on the part',
+    apps: [['Chevrolet', 'Avalanche', 2006, 2008], ['Chevrolet', 'Tahoe', 2006, 2008, null, twoWd]] });
+  const inv = [car(1, 2006, 'Chevrolet', 'Tahoe', { vpicDriveType: '4WD/4-Wheel Drive/4x4' }),
+    car(2, 2007, 'Chevrolet', 'Tahoe', { vpicDriveType: '4x2' }),
+    car(3, 2008, 'Chevrolet', 'Tahoe'),
+    car(4, 2007, 'Chevrolet', 'Avalanche', { vpicDriveType: '4WD/4-Wheel Drive/4x4' })];
+  const seek = { year: 2007, make: 'Chevrolet', model: 'Avalanche' };
+  lazyPreset = { 'side-mirrors': { oemGroups: [gTahoe], amGroups: [] } };
+  const r = run(base([], lazyIdx({ 'side-mirrors': { oem: 1, am: 0 } })), inv, seek, cat());
+  check('OEM gate: a 4WD Tahoe is NOT listed as a donor for a 2WD-only part', !r.rows['2006 Chevrolet Tahoe'], JSON.stringify(Object.keys(r.rows)));
+  const t2 = r.rows['2007 Chevrolet Tahoe'], t3 = r.rows['2008 Chevrolet Tahoe'], av = r.rows['2007 Chevrolet Avalanche'];
+  check('OEM gate: a 2WD-decoded Tahoe is listed, with no "if equipped" line', t2 && !t2.warn.includes('if equipped'), JSON.stringify(t2));
+  check('OEM gate: a Tahoe with no drive decode is listed "if equipped", the line names the limit (as the aftermarket gate)',
+    t3 && t3.tier === 'likely' && t3.warn.includes("if equipped: this part is listed for 2WD only — this donor's drivetrain isn't confirmed, check the car"),
+    JSON.stringify(t3));
+  check('OEM gate: the ungated twin app (4WD Avalanche) is unchanged', av && !av.warn.includes('if equipped'), JSON.stringify(av));
+  check('OEM gate: the seeker on an ungated app gets no "listed for ... only" header line', !r.head.includes('Some catalog numbers here are listed for'), r.head);
+  const rs = run(base([], lazyIdx({ 'side-mirrors': { oem: 1, am: 0 } })), inv, { year: 2007, make: 'Chevrolet', model: 'Tahoe' }, cat());
+  check('OEM gate: a seeker whose own app is gated is told in the header (escaped)',
+    rs.head.includes('Some catalog numbers here are listed for a 2007 Tahoe with 2WD only — check yours matches before you pull.'), rs.head);
+  // the same group with no gate renders as before: every Tahoe, no gate line
+  lazyPreset = { 'side-mirrors': { oemGroups: [oemG({ ...gTahoe, apps: [['Chevrolet', 'Avalanche', 2006, 2008], ['Chevrolet', 'Tahoe', 2006, 2008]] })], amGroups: [] } };
+  const r0 = run(base([], lazyIdx({ 'side-mirrors': { oem: 1, am: 0 } })), inv, seek, cat());
+  check('OEM group with no gate: unchanged (the 4WD Tahoe listed, no "if equipped" line anywhere)',
+    Object.keys(r0.rows).length === 4 && !r0.html.includes('if equipped') && !r0.head.includes('Some catalog numbers here'), JSON.stringify(Object.keys(r0.rows)));
+  // a second group whose gate the donor cannot confirm adds its line to the row
+  const gYukon = oemG({ id: 'oem:gm:side-mirrors:L:t2', ns: 'gm', label: 'GM catalog', pn: ['22853026'],
+    note: 'GM catalog lists #22853026 for both — fits some configurations; verify the number on the part',
+    apps: [['Chevrolet', 'Avalanche', 2006, 2008], ['Chevrolet', 'Tahoe', 2006, 2008, null, { cab: 'crew cab' }]] });
+  lazyPreset = { 'side-mirrors': { oemGroups: [oemG({ ...gTahoe, apps: [['Chevrolet', 'Avalanche', 2006, 2008], ['Chevrolet', 'Tahoe', 2006, 2008]] }), gYukon], amGroups: [] } };
+  const r2 = run(base([], lazyIdx({ 'side-mirrors': { oem: 2, am: 0 } })), inv, seek, cat());
+  const m = r2.rows['2007 Chevrolet Tahoe'];
+  check('OEM gate: a second, gated group on the same donor adds its number and its "if equipped" line',
+    m && m.src.includes('#22853025, #22853026') && m.warn.includes('listed for crew cab only'), JSON.stringify(m));
+  // fail closed: a main-file Verified group with a gate the donor cannot confirm renders Likely
+  const gv = oemG({ id: 'oem:toyota:side-mirrors:V:9', tier: 'verified', note: 'Toyota catalog lists #87910-06470 for every trim of both',
+    apps: [['Toyota', 'Avalon', 2012, 2012, null, { drive: 'fwd' }], ['Toyota', 'Camry', 2007, 2012]] });
+  const rv = run(base([], { oemGroups: [gv] }), [car(1, 2012, 'Toyota', 'Avalon', { vin: VIN_2012 })], SEEK, cat());
+  check('OEM gate: an unconfirmed limit never renders Verified', rv.rows['2012 Toyota Avalon']?.tier === 'likely', JSON.stringify(rv.rows));
+  lazyPreset = null;
+}
+{
+  // body gate through pfRunSearch: coupe-only app; the decode's silhouette rules
+  const gB = oemG({ id: 'oem:nissan:side-mirrors:L:b1', ns: 'nissan', label: 'Nissan catalog', pn: ['96301-ZX00A'],
+    note: 'Nissan catalog lists #96301-ZX00A for both — fits some configurations; verify the number on the part',
+    apps: [['Nissan', 'Altima', 2009, 2011, null, { body: 'coupe' }], ['Nissan', 'Maxima', 2009, 2011]] });
+  const inv = [car(1, 2009, 'Nissan', 'Altima'), car(2, 2010, 'Nissan', 'Altima'), car(3, 2011, 'Nissan', 'Altima')];
+  const exs = { 1: ['', '', '', '', '', 'sedan'], 2: ['', '', '', '', '', 'coupe'] };
+  lazyPreset = { 'side-mirrors': { oemGroups: [gB], amGroups: [] } };
+  const r = run(base([], lazyIdx({ 'side-mirrors': { oem: 1, am: 0 } })), inv, { year: 2010, make: 'Nissan', model: 'Maxima' }, cat(), exs);
+  check('OEM body gate: a sedan-decoded Altima is not listed for a coupe-only app', !r.rows['2009 Nissan Altima'], JSON.stringify(Object.keys(r.rows)));
+  check('OEM body gate: a coupe-decoded Altima is listed plainly', r.rows['2010 Nissan Altima'] && !r.rows['2010 Nissan Altima'].warn.includes('if equipped'));
+  check('OEM body gate: an undecoded Altima is listed "if equipped" (body style isn’t confirmed)',
+    r.rows['2011 Nissan Altima']?.warn.includes("listed for coupe only — this donor's body style isn't confirmed, check the car"), JSON.stringify(r.rows['2011 Nissan Altima']));
+  lazyPreset = null;
 }
 
 console.log(failures ? `\n${failures} FAILURES` : '\nALL PASS');

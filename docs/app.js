@@ -9663,6 +9663,148 @@ function pfAmSplitNote(note) {
   return { inline: rest, more: more.join(' ') };
 }
 /* AM-GATE END */
+/* OEM-GATE BEGIN — gated OEM catalog app rows (ops/interchange.md, 2026-11-18
+ * gates). A Likely OEM group's app may carry the aftermarket row's 6th element,
+ * [make, model, lo, hi, null, gate] (position 4 unused): the limits the group's
+ * note names for that vehicle-year (curate._gate_runs, validate.gate_problem):
+ *   drive "2wd" | "fwd" | "rwd" | "4wd" | "awd" | "a4wd" (classes of ONE drive
+ *         family, several joined by "/"); body a silhouette word or a list;
+ *   cab "crew cab" ...; eng ["3.7L", ...]; fuel "gas" | "hybrid" | "diesel";
+ *   trans "MT" | "AT".
+ * Same honesty as the aftermarket gate above and the car-card parts table
+ * (match_vehicle's drive, body and manual gates): the donor's own VIN decode
+ * or listing naming the limit confirms it; one naming something else rules
+ * the donor out (it is not offered); nothing on the car to say either way is
+ * "if equipped": the donor is offered with a line that names the limit and
+ * says to check the car. Nothing is inferred. One exception, the parts
+ * table's (§22.10 gas-only rows): a "gas" limit rules out a donor whose
+ * listing or VIN trim/series says hybrid, or whose decode names another fuel,
+ * and otherwise counts as met. A decode naming both drive families ("2WD/4WD")
+ * stays "if equipped".
+ * pfOemGate(gate, v, ex) -> { verdict: 'confirm' | 'unconfirmed' | 'exclude', keys } */
+const PF_OEM_TWO = ['2wd', 'fwd', 'rwd'];
+const PF_OEM_CABS = { 'crew cab': ['crew cab', 'crewcab'], 'king cab': ['king cab', 'kingcab'], 'extended cab': ['extended cab', 'ext cab', 'extcab'], 'regular cab': ['regular cab', 'reg cab'], supercab: ['supercab', 'super cab'], supercrew: ['supercrew', 'super crew'], 'double cab': ['double cab'], 'quad cab': ['quad cab'], crewmax: ['crewmax', 'crew max'], 'access cab': ['access cab'], 'club cab': ['club cab'] };
+const PF_OEM_GATE_NOUN = { drive: 'drivetrain', body: 'body style', cab: 'cab', eng: 'engine', fuel: 'fuel type', trans: 'transmission' };
+function pfOemGateParse(g) {
+  return g && typeof g === 'object' && !Array.isArray(g) && Object.keys(g).length ? g : null;
+}
+function pfOemDriveSet(drive) {
+  const allow = new Set(String(drive || '').toLowerCase().split('/').filter(Boolean));
+  if (allow.has('fwd') && allow.has('rwd')) allow.add('2wd');
+  return allow;
+}
+function pfOemDriveVerdict(drive, model, driveType) {
+  const allow = pfOemDriveSet(drive);
+  const two = [...allow].every(c => PF_OEM_TWO.includes(c));
+  const ok = c => allow.has(c) || (allow.has('2wd') && (c === 'fwd' || c === 'rwd'));
+  const cls = pfAmDriveClasses(driveType);
+  const one = cls.size === 1 ? [...cls][0] : '';
+  if (one && ok(one)) return 'confirm';                                      // decode names it
+  const toks = c => (c === '2wd' ? ['2wd', '4x2'] : PF_AM_DRIVE[c] || []);   // 'a4wd' has no word
+  if ([...allow].some(c => toks(c).some(t => pfAmWord(t, model)))) return 'confirm';   // listing names it
+  if (!one) return 'unconfirmed';                       // no decode, or one naming several classes
+  if (two === (one === '4wd' || one === 'awd')) return 'exclude';   // the other drive family
+  if (two && one === '2wd') return 'unconfirmed';       // "4x2" does not say front or rear
+  if (allow.has('a4wd')) return 'unconfirmed';          // All-Mode 4WD is not in a decode
+  return 'exclude';                                     // one class named, not the limit's
+}
+function pfOemBodyVerdict(body, model, sil) {
+  const vs = (Array.isArray(body) ? body : [body]).map(b => pfAmBodyVerdict(b, model, sil));
+  if (vs.includes('confirm')) return 'confirm';
+  return vs.length && vs.every(x => x === 'exclude') ? 'exclude' : 'unconfirmed';
+}
+function pfOemCabsIn(text) {
+  return new Set(Object.keys(PF_OEM_CABS).filter(k => PF_OEM_CABS[k].some(t => pfAmWord(t, text))));
+}
+function pfOemCabVerdict(cab, v) {
+  // the listing, the VIN series, and the VIN trim when it is one trim
+  const named = pfOemCabsIn([v.model, v.vpicSeries, v.vpicTrimQuality === 'usable' ? v.vpicTrim : ''].filter(Boolean).join(' '));
+  if (named.size === 1 && named.has(cab)) return 'confirm';
+  return named.size && !named.has(cab) ? 'exclude' : 'unconfirmed';
+}
+function pfOemEngVerdict(eng, carEng) {
+  const l = pfAmParseEngine(carEng).l;
+  if (l == null) return 'unconfirmed';
+  return (Array.isArray(eng) ? eng : [eng]).some(x => Math.abs(parseFloat(x) - l) < 0.05) ? 'confirm' : 'exclude';
+}
+/* pfAmCarTrans, except that an automated manual (AMT) is an automatic, as in
+ * the parts table's manual gate. */
+function pfOemCarTrans(s) {
+  return /automated/i.test(String(s || '')) ? 'AT' : pfAmCarTrans(s);
+}
+function pfOemTransVerdict(trans, carTrans) {
+  const tr = pfOemCarTrans(carTrans);
+  if (!tr) return 'unconfirmed';
+  return tr === trans ? 'confirm' : 'exclude';
+}
+/* 'hybrid' | 'diesel' | 'other' (an electric, gas-cylinder or fuel-cell
+ * decode) | '' (nothing on the car says another fuel than gasoline). The
+ * hybrid words are read where the parts table reads them: the listing, the
+ * VIN series, and the VIN trim when it is one trim. */
+function pfOemCarFuel(v, ex) {
+  const name = [v.model, v.vpicSeries, v.vpicTrimQuality === 'usable' ? v.vpicTrim : ''].filter(Boolean).join(' ').toLowerCase();
+  const eng = String((ex && ex[extraIdx.engine]) || '').toLowerCase();
+  if (/\bhybrid\b/.test(name) || /\bhybrid\b/.test(eng)) return 'hybrid';
+  if (/\bdiesel\b/.test(name) || /\bdiesel\b/.test(eng)) return 'diesel';
+  if (/\belectric\b|natural gas|\bcng\b|propane|\blpg\b|fuel cell/.test(eng)) return 'other';
+  return '';
+}
+function pfOemFuelVerdict(fuel, v, ex) {
+  const f = pfOemCarFuel(v, ex);
+  if (fuel === 'gas') return f ? 'exclude' : 'confirm';
+  if (f === fuel) return 'confirm';
+  return f === 'hybrid' || f === 'diesel' ? 'exclude' : 'unconfirmed';
+}
+function pfOemGate(gate, v, ex) {
+  const g = pfOemGateParse(gate);
+  if (!g) return { verdict: 'confirm', keys: [] };
+  const vs = {};
+  if (g.drive) vs.drive = pfOemDriveVerdict(g.drive, v.model, v.vpicDriveType);
+  if (g.body) vs.body = pfOemBodyVerdict(g.body, v.model, ex ? ex[extraIdx.body] : '');
+  if (g.cab) vs.cab = pfOemCabVerdict(g.cab, v);
+  if (g.eng) vs.eng = pfOemEngVerdict(g.eng, ex ? ex[extraIdx.engine] : '');
+  if (g.fuel) vs.fuel = pfOemFuelVerdict(g.fuel, v, ex);
+  if (g.trans) vs.trans = pfOemTransVerdict(g.trans, ex ? ex[extraIdx.trans] : '');
+  const keys = Object.keys(vs);
+  if (keys.some(k => vs[k] === 'exclude')) return { verdict: 'exclude', keys: keys.filter(k => vs[k] === 'exclude') };
+  const unc = keys.filter(k => vs[k] === 'unconfirmed');
+  return { verdict: unc.length ? 'unconfirmed' : 'confirm', keys: unc };
+}
+/* The limit as the note words it: "2WD", "crew cab, 4WD", "3.7L, gas". */
+function pfOemGateText(gate) {
+  const g = pfOemGateParse(gate);
+  if (!g) return '';
+  const bits = [];
+  if (g.cab) bits.push(String(g.cab));
+  if (g.drive) {
+    const a = pfOemDriveSet(g.drive);
+    bits.push([...a].every(c => PF_OEM_TWO.includes(c))
+      ? (a.size === 1 && a.has('fwd') ? 'FWD' : a.size === 1 && a.has('rwd') ? 'RWD' : '2WD')
+      : ['4wd', 'awd', 'a4wd'].filter(c => a.has(c)).map(c => (c === 'a4wd' ? '4WD AUTO' : c.toUpperCase())).join('/'));
+  }
+  if (g.body) bits.push((Array.isArray(g.body) ? g.body : [g.body]).join(' or '));
+  if (g.eng) bits.push((Array.isArray(g.eng) ? g.eng : [g.eng]).join('/'));
+  if (g.trans) bits.push(g.trans === 'MT' ? 'manual' : 'automatic');
+  if (g.fuel) bits.push(String(g.fuel));
+  return bits.join(', ');
+}
+/* A donor against the apps of one group that match it: an ungated or
+ * confirmed app keeps it as a plain row; else an "if equipped" app keeps it
+ * with a line naming the limit; when every matching app is ruled out by the
+ * car's own decode or listing, the donor is not offered for this group. */
+function pfOemDonorGate(apps, v, ex) {
+  let unc = null;
+  for (const a of apps) {
+    const r = pfOemGate(a[5], v, ex);
+    if (r.verdict === 'confirm') return { verdict: 'confirm', warn: '' };
+    if (r.verdict === 'unconfirmed' && !unc) unc = { r, a };
+  }
+  if (!unc) return { verdict: 'exclude', warn: '' };
+  const nouns = unc.r.keys.map(k => PF_OEM_GATE_NOUN[k]);
+  return { verdict: 'unconfirmed',
+    warn: `if equipped: this part is listed for ${pfOemGateText(unc.a[5])} only — this donor's ${nouns.join(' and ')} ${nouns.length > 1 ? "aren't" : "isn't"} confirmed, check the car` };
+}
+/* OEM-GATE END */
 function pfAmRows(s, groups, results, radius, fam) {
   let hit = 0;
   for (const g of groups || []) {
@@ -10096,21 +10238,33 @@ function pfRunSearch() {
       const oemList = [...(interchangeData.oemGroups || []).map(g => [g, false]),
                        ...(lazy.oemGroups || []).map(g => [g, true])];
       let oemLikelyHit = false;
-      const oemHits = new Map();   // vehicle id -> {label, pns, note}
+      const oemHits = new Map();   // vehicle id -> {label, pns, note, gw: gate lines}
+      const oemSeekerGates = new Set();
       for (const [g, fromLazy] of oemList) {
         if (g.cat !== pfCat.id || g.src !== 'oem' || !Array.isArray(g.apps)) continue;
-        if (!g.apps.some(a => pfAppMatches(a, s.year, s.make, s.model))) continue;
+        const sApps = g.apps.filter(a => pfAppMatches(a, s.year, s.make, s.model));
+        if (!sApps.length) continue;
+        // OEM-GATE: the seeker's own drive/cab/engine is not known here; a
+        // number listed only for some versions of the car says so up top
+        if (sApps.every(a => pfOemGateParse(a[5]))) sApps.forEach(a => oemSeekerGates.add(pfOemGateText(a[5])));
         const gTier = (!fromLazy && g.tier === 'verified') ? 'verified' : 'likely';
         if (gTier === 'likely') oemLikelyHit = true;
         else groupNotes.push(`${g.label}: ${g.note}`);
         for (const v of liveInventory) {
-          if (!g.apps.some(a => pfAppMatches(a, v.year, canonicalMake(v.make), v.model))) continue;
+          const dApps = g.apps.filter(a => pfAppMatches(a, v.year, canonicalMake(v.make), v.model));
+          if (!dApps.length) continue;
+          // OEM-GATE: a donor whose own decode or listing contradicts the
+          // app's limit (a 4WD Tahoe for a part checked on 2WD only) is not
+          // offered; one the car can't confirm is "if equipped"
+          const gate = pfOemDonorGate(dApps, v, extrasFor(v));
+          if (gate.verdict === 'exclude') continue;
           const d = vehicleDistanceMi(v);
           if (radius && (d == null || d > radius)) continue;
           const prev = results.get(v.id);
           if (prev && prev.tier === 'verified') continue; // verified wins
           let tier = gTier;
           const warns = [];
+          if (gate.warn) tier = 'likely';   // never Verified on an unconfirmed limit
           if (tier === 'verified') {
             const id = pfDonorIdentity(v, { oem: true });  // P0.4, OEM rows need a VIN
             if (!id.ok) { tier = 'likely'; warns.push(escapeHtml(id.warn)); }
@@ -10118,12 +10272,16 @@ function pfRunSearch() {
           const h = oemHits.get(v.id);
           if (tier === 'likely' && prev && !h) {
             // a hand Likely row stays; it gains the catalog line
-            oemHits.set(v.id, { label: g.label, pns: [...(g.pn || [])], note: '', keep: true });
+            oemHits.set(v.id, { label: g.label, pns: [...(g.pn || [])], note: '', keep: true, gw: gate.warn ? [gate.warn] : [] });
             continue;
           }
-          if (tier === 'likely' && h) { h.pns.push(...(g.pn || [])); continue; }
-          oemHits.set(v.id, { label: g.label, pns: [...(g.pn || [])], note: g.note, keep: false });
-          results.set(v.id, { v, d, tier, src: 'oem', warns: [...warns, escapeHtml(g.note), rowWarn].filter(Boolean) });
+          if (tier === 'likely' && h) {
+            h.pns.push(...(g.pn || []));
+            if (gate.warn && !h.gw.includes(gate.warn)) h.gw.push(gate.warn);
+            continue;
+          }
+          oemHits.set(v.id, { label: g.label, pns: [...(g.pn || [])], note: g.note, keep: false, gw: [] });
+          results.set(v.id, { v, d, tier, src: 'oem', warns: [...warns, escapeHtml(g.note), escapeHtml(gate.warn), rowWarn].filter(Boolean) });
         }
       }
       for (const [vid, h] of oemHits) {
@@ -10131,8 +10289,12 @@ function pfRunSearch() {
         if (!r) continue;
         const line = escapeHtml(pfOemSourceText(h.label, h.pns));
         if (h.keep) r.warns.push(line); else r.srcLine = line;
+        for (const w of h.gw) if (!r.warns.includes(escapeHtml(w))) r.warns.push(escapeHtml(w));
       }
       if (oemLikelyHit) groupNotes.push(PF_OEM_LIKELY_HEAD);
+      if (oemSeekerGates.size) {
+        groupNotes.push(`Some catalog numbers here are listed for a ${s.year} ${s.model} with ${[...oemSeekerGates].join(' or ')} only — check yours matches before you pull.`);
+      }
     }
     // Aftermarket unit lists (Spectra, GSP/1A…) for chassis-side categories:
     // Likely rows that name their unit, before same-generation donors (a donor
