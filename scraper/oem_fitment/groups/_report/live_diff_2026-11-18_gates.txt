@@ -1,0 +1,230 @@
+Live diff, main b9785c22 (rules-1118 merged) -> interchange/gates-1118 (per-app gates), 2026-11-18.
+
+Pins: oem-raw@dca9cd845f26 (8 shipped namespaces), @57e8b5b99de0 (nissan, candidate
+only), inventory and decodes from main@a85c654 (sha256 1a9cfa73..., 1357625b...).
+Read-only; no fetch or crawl.
+
+1. Groups (audit11_4/live_diff.py OLD=main groups NEW=branch groups, 8 shipped ns).
+   live_diff compares apps and notes only; gates-only changes are counted in 2 and 3.
+   ADDED: 0. REMOVED: 0. CHANGED: 48 notes, apps unchanged ("lost [] gained []" on
+   every line): "<model>: 2WD only" -> "<model>: only 2WD checked" where the drive
+   limit's basis is "unchecked" (the other drive's page is not in the raw, or
+   fitment rows that may be incomplete). Stated limits keep "X only".
+
+gm CHANGED LIVE ('climate-control', ('15098963',)) [['Chevrolet', 'S-10', 2000, 2000], ['GMC', 'Jimmy', 1998, 1998], ['GMC', 'Sonoma', 2000, 2000]] lost [] gained []
+    old: GM catalog lists #15098963 for both — option: fits some option packages; S-10: 2WD only; verify the number on the part
+    new: GM catalog lists #15098963 for both — option: fits some option packages; S-10: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('climate-control', ('15858832',)) [['Chevrolet', 'Colorado', 2005, 2005], ['GMC', 'Canyon', 2005, 2005]] lost [] gained []
+    old: GM catalog lists #15858832 for both — option: fits some option packages; Colorado: 2WD only; verify the number on the part
+    new: GM catalog lists #15858832 for both — option: fits some option packages; Colorado: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('climate-control', ('19433953',)) [['Chevrolet', 'Colorado', 2005, 2005], ['GMC', 'Canyon', 2005, 2005], ['GMC', 'Canyon', 2011, 2011]] lost [] gained []
+    old: GM catalog lists #19433953 for both — option: fits some option packages; Colorado: 2WD only; verify the number on the part
+    new: GM catalog lists #19433953 for both — option: fits some option packages; Colorado: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('climate-control', ('20787112',)) [['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Silverado 1500', 2008, 2008], ['Chevrolet', 'Tahoe', 2007, 2007]] lost [] gained []
+    old: GM catalog lists #20787112 for both — option: fits some option packages; Tahoe: 2WD only; verify the number on the part
+    new: GM catalog lists #20787112 for both — option: fits some option packages; Tahoe: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('headlights', ('22853025',)) [['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Tahoe', 2007, 2007]] lost [] gained []
+    old: GM catalog lists #22853025 for both — fits some configurations; Tahoe: 2WD only; verify the number on the part
+    new: GM catalog lists #22853025 for both — fits some configurations; Tahoe: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('headlights', ('22853026',)) [['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Tahoe', 2007, 2007]] lost [] gained []
+    old: GM catalog lists #22853026 for both — fits some configurations; Tahoe: 2WD only; verify the number on the part
+    new: GM catalog lists #22853026 for both — fits some configurations; Tahoe: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('tail-lights', ('19179358',)) [['Chevrolet', 'Blazer', 2001, 2001], ['GMC', 'Jimmy', 1998, 1998]] lost [] gained []
+    old: GM catalog lists #19179358 for both — option: fits some option packages; Blazer: 2WD only; verify the number on the part
+    new: GM catalog lists #19179358 for both — option: fits some option packages; Blazer: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('tail-lights', ('19179679',)) [['Chevrolet', 'Blazer', 2001, 2001], ['GMC', 'Jimmy', 1998, 1998]] lost [] gained []
+    old: GM catalog lists #19179679 for both — option: fits some option packages; Blazer: 2WD only; verify the number on the part
+    new: GM catalog lists #19179679 for both — option: fits some option packages; Blazer: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('tail-lights', ('19417443',)) [['Chevrolet', 'Colorado', 2005, 2005], ['GMC', 'Canyon', 2005, 2005], ['GMC', 'Canyon', 2011, 2011]] lost [] gained []
+    old: GM catalog lists #19417443 for both — fits some configurations; Colorado: 2WD only; verify the number on the part
+    new: GM catalog lists #19417443 for both — fits some configurations; Colorado: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('tail-lights', ('19417444',)) [['Chevrolet', 'Colorado', 2005, 2005], ['GMC', 'Canyon', 2005, 2005], ['GMC', 'Canyon', 2011, 2011]] lost [] gained []
+    old: GM catalog lists #19417444 for both — fits some configurations; Colorado: 2WD only; verify the number on the part
+    new: GM catalog lists #19417444 for both — fits some configurations; Colorado: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('tail-lights', ('5978195',)) [['Chevrolet', 'S-10', 2000, 2000], ['GMC', 'Sonoma', 1996, 1996], ['GMC', 'Sonoma', 2000, 2000]] lost [] gained []
+    old: GM catalog lists #5978195 for both — fits some configurations; S-10: 2WD only; verify the number on the part
+    new: GM catalog lists #5978195 for both — fits some configurations; S-10: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('tail-lights', ('5978196',)) [['Chevrolet', 'S-10', 2000, 2000], ['GMC', 'Sonoma', 1996, 1996], ['GMC', 'Sonoma', 2000, 2000]] lost [] gained []
+    old: GM catalog lists #5978196 for both — fits some configurations; S-10: 2WD only; verify the number on the part
+    new: GM catalog lists #5978196 for both — fits some configurations; S-10: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('15643719',)) [['Chevrolet', 'Tahoe', 1999, 1999], ['GMC', 'Yukon', 1999, 1999]] lost [] gained []
+    old: GM catalog lists #15643719 for both — regulator with motor; fits some configurations; Tahoe: 2WD only; verify the number on the part
+    new: GM catalog lists #15643719 for both — regulator with motor; fits some configurations; Tahoe: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('15643720',)) [['Chevrolet', 'Tahoe', 1999, 1999], ['GMC', 'Yukon', 1999, 1999]] lost [] gained []
+    old: GM catalog lists #15643720 for both — regulator with motor; fits some configurations; Tahoe: 2WD only; verify the number on the part
+    new: GM catalog lists #15643720 for both — regulator with motor; fits some configurations; Tahoe: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('19167712',)) [['Chevrolet', 'Colorado', 2005, 2005], ['GMC', 'Canyon', 2005, 2005], ['GMC', 'Canyon', 2011, 2011]] lost [] gained []
+    old: GM catalog lists #19167712 for both — window motor only; fits some configurations; Colorado: 2WD only; verify the number on the part
+    new: GM catalog lists #19167712 for both — window motor only; fits some configurations; Colorado: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('19167713',)) [['Chevrolet', 'Colorado', 2005, 2005], ['GMC', 'Canyon', 2005, 2005], ['GMC', 'Canyon', 2011, 2011]] lost [] gained []
+    old: GM catalog lists #19167713 for both — window motor only; fits some configurations; Colorado: 2WD only; verify the number on the part
+    new: GM catalog lists #19167713 for both — window motor only; fits some configurations; Colorado: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('19331461',)) [['Buick', 'Rainier', 2004, 2004], ['Chevrolet', 'Trailblazer', 2004, 2004]] lost [] gained []
+    old: GM catalog lists #19331461 for both — regulator without motor; option: fits some option packages; Trailblazer: 2WD only; verify the number on the part
+    new: GM catalog lists #19331461 for both — regulator without motor; option: fits some option packages; Trailblazer: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('19331462',)) [['Buick', 'Rainier', 2004, 2004], ['Chevrolet', 'Trailblazer', 2004, 2004]] lost [] gained []
+    old: GM catalog lists #19331462 for both — regulator without motor; fits some configurations; Trailblazer: 2WD only; verify the number on the part
+    new: GM catalog lists #19331462 for both — regulator without motor; fits some configurations; Trailblazer: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('19331463',)) [['Buick', 'Rainier', 2004, 2004], ['Chevrolet', 'Trailblazer', 2004, 2004]] lost [] gained []
+    old: GM catalog lists #19331463 for both — regulator without motor; fits some configurations; Trailblazer: 2WD only; verify the number on the part
+    new: GM catalog lists #19331463 for both — regulator without motor; fits some configurations; Trailblazer: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('19331466',)) [['Buick', 'Rainier', 2004, 2004], ['Chevrolet', 'Trailblazer', 2004, 2004]] lost [] gained []
+    old: GM catalog lists #19331466 for both — regulator without motor; option: fits some option packages; Trailblazer: 2WD only; verify the number on the part
+    new: GM catalog lists #19331466 for both — regulator without motor; option: fits some option packages; Trailblazer: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('20785728',)) [['Chevrolet', 'Traverse', 2011, 2011], ['Saturn', 'Outlook', 2008, 2008]] lost [] gained []
+    old: GM catalog lists #20785728 for both — fits some configurations; Traverse: 2WD only; verify the number on the part
+    new: GM catalog lists #20785728 for both — fits some configurations; Traverse: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('20785729',)) [['Chevrolet', 'Traverse', 2011, 2011], ['Saturn', 'Outlook', 2008, 2008]] lost [] gained []
+    old: GM catalog lists #20785729 for both — fits some configurations; Traverse: 2WD only; verify the number on the part
+    new: GM catalog lists #20785729 for both — fits some configurations; Traverse: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('23227000',)) [['Cadillac', 'Escalade', 2007, 2007], ['Chevrolet', 'Tahoe', 2007, 2007]] lost [] gained []
+    old: GM catalog lists #23227000 for both — regulator with motor; fits some configurations; Tahoe: 2WD only; verify the number on the part
+    new: GM catalog lists #23227000 for both — regulator with motor; fits some configurations; Tahoe: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('23227001',)) [['Cadillac', 'Escalade', 2007, 2007], ['Chevrolet', 'Tahoe', 2007, 2007]] lost [] gained []
+    old: GM catalog lists #23227001 for both — regulator with motor; fits some configurations; Tahoe: 2WD only; verify the number on the part
+    new: GM catalog lists #23227001 for both — regulator with motor; fits some configurations; Tahoe: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('25783492',)) [['Chevrolet', 'Traverse', 2011, 2011], ['Saturn', 'Outlook', 2008, 2008]] lost [] gained []
+    old: GM catalog lists #25783492 for both — window motor only; fits some configurations; Traverse: 2WD only; verify the number on the part
+    new: GM catalog lists #25783492 for both — window motor only; fits some configurations; Traverse: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('25783493',)) [['Chevrolet', 'Traverse', 2011, 2011], ['Saturn', 'Outlook', 2008, 2008]] lost [] gained []
+    old: GM catalog lists #25783493 for both — window motor only; fits some configurations; Traverse: 2WD only; verify the number on the part
+    new: GM catalog lists #25783493 for both — window motor only; fits some configurations; Traverse: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('25783494',)) [['Chevrolet', 'Traverse', 2011, 2011], ['Saturn', 'Outlook', 2008, 2008]] lost [] gained []
+    old: GM catalog lists #25783494 for both — window motor only; fits some configurations; Traverse: 2WD only; verify the number on the part
+    new: GM catalog lists #25783494 for both — window motor only; fits some configurations; Traverse: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('25783495',)) [['Chevrolet', 'Traverse', 2011, 2011], ['Saturn', 'Outlook', 2008, 2008]] lost [] gained []
+    old: GM catalog lists #25783495 for both — window motor only; fits some configurations; Traverse: 2WD only; verify the number on the part
+    new: GM catalog lists #25783495 for both — window motor only; fits some configurations; Traverse: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('5483148',)) [['Chevrolet', 'Blazer', 2001, 2001], ['GMC', 'Jimmy', 1998, 1998]] lost [] gained []
+    old: GM catalog lists #5483148 for both — fits some configurations; Blazer: 2WD only; verify the number on the part
+    new: GM catalog lists #5483148 for both — fits some configurations; Blazer: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('5483149',)) [['Chevrolet', 'Blazer', 2001, 2001], ['GMC', 'Jimmy', 1998, 1998]] lost [] gained []
+    old: GM catalog lists #5483149 for both — fits some configurations; Blazer: 2WD only; verify the number on the part
+    new: GM catalog lists #5483149 for both — fits some configurations; Blazer: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('88980703',)) [['Buick', 'Rainier', 2004, 2004], ['Chevrolet', 'Trailblazer', 2004, 2004]] lost [] gained []
+    old: GM catalog lists #88980703 for both — window motor only; fits some configurations; Trailblazer: 2WD only; verify the number on the part
+    new: GM catalog lists #88980703 for both — window motor only; fits some configurations; Trailblazer: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('88980704',)) [['Buick', 'Rainier', 2004, 2004], ['Chevrolet', 'Trailblazer', 2004, 2004]] lost [] gained []
+    old: GM catalog lists #88980704 for both — window motor only; fits some configurations; Trailblazer: 2WD only; verify the number on the part
+    new: GM catalog lists #88980704 for both — window motor only; fits some configurations; Trailblazer: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('88980705',)) [['Buick', 'Rainier', 2004, 2004], ['Chevrolet', 'Trailblazer', 2004, 2004]] lost [] gained []
+    old: GM catalog lists #88980705 for both — window motor only; fits some configurations; Trailblazer: 2WD only; verify the number on the part
+    new: GM catalog lists #88980705 for both — window motor only; fits some configurations; Trailblazer: only 2WD checked; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('88980706',)) [['Buick', 'Rainier', 2004, 2004], ['Chevrolet', 'Trailblazer', 2004, 2004]] lost [] gained []
+    old: GM catalog lists #88980706 for both — window motor only; fits some configurations; Trailblazer: 2WD only; verify the number on the part
+    new: GM catalog lists #88980706 for both — window motor only; fits some configurations; Trailblazer: only 2WD checked; verify the number on the part
+mopar CHANGED LIVE ('climate-control', ('55111290AD',)) [['Ram', '1500', 2012, 2012], ['Ram', '2500', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #55111290AD for both — older catalog-only number; 1500: 4WD only; verify the number on the part
+    new: Mopar catalog lists #55111290AD for both — older catalog-only number; 1500: only 4WD checked; verify the number on the part
+mopar CHANGED LIVE ('climate-control', ('55111291AC',)) [['Ram', '1500', 2012, 2012], ['Ram', '2500', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #55111291AC for both — older catalog-only number; 1500: 4WD only; verify the number on the part
+    new: Mopar catalog lists #55111291AC for both — older catalog-only number; 1500: only 4WD checked; verify the number on the part
+mopar CHANGED LIVE ('climate-control', ('55111292AD',)) [['Ram', '1500', 2012, 2012], ['Ram', '2500', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #55111292AD for both — older catalog-only number; 1500: 4WD only; verify the number on the part
+    new: Mopar catalog lists #55111292AD for both — older catalog-only number; 1500: only 4WD checked; verify the number on the part
+mopar CHANGED LIVE ('headlights', ('55277409AE',)) [['Ram', '1500', 2012, 2012], ['Ram', '2500', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #55277409AE for both — option: fits some option packages; 1500: 4WD only; verify the number on the part
+    new: Mopar catalog lists #55277409AE for both — option: fits some option packages; 1500: only 4WD checked; verify the number on the part
+mopar CHANGED LIVE ('headlights', ('55277410AE',)) [['Ram', '1500', 2012, 2012], ['Ram', '2500', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #55277410AE for both — option: fits some option packages; 1500: 4WD only; verify the number on the part
+    new: Mopar catalog lists #55277410AE for both — option: fits some option packages; 1500: only 4WD checked; verify the number on the part
+mopar CHANGED LIVE ('headlights', ('68001484AE',)) [['Ram', '1500', 2012, 2012], ['Ram', '2500', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #68001484AE for both — option: fits some option packages; 1500: 4WD only; verify the number on the part
+    new: Mopar catalog lists #68001484AE for both — option: fits some option packages; 1500: only 4WD checked; verify the number on the part
+mopar CHANGED LIVE ('headlights', ('68001485AE',)) [['Ram', '1500', 2012, 2012], ['Ram', '2500', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #68001485AE for both — option: fits some option packages; 1500: 4WD only; verify the number on the part
+    new: Mopar catalog lists #68001485AE for both — option: fits some option packages; 1500: only 4WD checked; verify the number on the part
+ford CHANGED LIVE ('window-regulator', ('6CPZ-5423395-A',)) [['Ford', 'Focus', 2015, 2015], ['Ford', 'Transit Connect', 2015, 2015]] lost [] gained []
+    old: Ford catalog lists #6CPZ-5423395-A for both — window motor only; trim-limited; FWD only; verify the number on the part
+    new: Ford catalog lists #6CPZ-5423395-A for both — window motor only; trim-limited; only FWD checked; verify the number on the part
+ford CHANGED LIVE ('window-regulator', ('6CPZ-5423395-B',)) [['Ford', 'Focus', 2015, 2015], ['Ford', 'Transit Connect', 2015, 2015]] lost [] gained []
+    old: Ford catalog lists #6CPZ-5423395-B for both — window motor only; trim-limited; FWD only; verify the number on the part
+    new: Ford catalog lists #6CPZ-5423395-B for both — window motor only; trim-limited; only FWD checked; verify the number on the part
+ford CHANGED LIVE ('window-regulator', ('6CPZ-9923394-B',)) [['Ford', 'Focus', 2015, 2015], ['Ford', 'Transit Connect', 2015, 2015]] lost [] gained []
+    old: Ford catalog lists #6CPZ-9923394-B for both — window motor only; trim-limited; FWD only; verify the number on the part
+    new: Ford catalog lists #6CPZ-9923394-B for both — window motor only; trim-limited; only FWD checked; verify the number on the part
+ford CHANGED LIVE ('window-regulator', ('6CPZ-9923394-C',)) [['Ford', 'Focus', 2015, 2015], ['Ford', 'Transit Connect', 2015, 2015]] lost [] gained []
+    old: Ford catalog lists #6CPZ-9923394-C for both — window motor only; trim-limited; FWD only; verify the number on the part
+    new: Ford catalog lists #6CPZ-9923394-C for both — window motor only; trim-limited; only FWD checked; verify the number on the part
+ford CHANGED LIVE ('window-regulator', ('CV6Z-5423394-B',)) [['Ford', 'C-Max', 2013, 2013], ['Ford', 'Focus', 2012, 2012]] lost [] gained []
+    old: Ford catalog lists #CV6Z-5423394-B for both — window motor only; fits some configurations; C-Max: 2WD only; Focus: FWD only; verify the number on the part
+    new: Ford catalog lists #CV6Z-5423394-B for both — window motor only; fits some configurations; only 2WD checked; verify the number on the part
+ford CHANGED LIVE ('window-regulator', ('CV6Z-5423395-B',)) [['Ford', 'C-Max', 2013, 2013], ['Ford', 'Focus', 2012, 2012]] lost [] gained []
+    old: Ford catalog lists #CV6Z-5423395-B for both — window motor only; fits some configurations; C-Max: 2WD only; Focus: FWD only; verify the number on the part
+    new: Ford catalog lists #CV6Z-5423395-B for both — window motor only; fits some configurations; only 2WD checked; verify the number on the part
+mb CHANGED LIVE ('wheels', ('6-6-47-4207',)) [['Mercedes-Benz', 'ML350', 2007, 2008], ['Mercedes-Benz', 'ML500', 2006, 2006]] lost [] gained []
+    old: Mercedes catalog lists #6-6-47-4207 for both — trim-limited; ML350: AWD only; verify the number on the part
+    new: Mercedes catalog lists #6-6-47-4207 for both — trim-limited; ML350: only AWD checked; verify the number on the part
+
+2. Gates per namespace and make (app-years by gate key; drive by basis). HELD = a
+   held category (not shipped). nissan = the candidate (not shipped).
+
+== gm: gated groups {'LIVE': 48}
+   LIVE Chevrolet: app-years {'cab': 1, 'drive:unchecked': 34, 'fuel': 11}
+   LIVE GMC: app-years {'cab': 2, 'drive:stated': 2}
+== mopar: gated groups {'LIVE': 9}
+   LIVE Ram: app-years {'drive:stated': 2, 'drive:unchecked': 7}
+== ford: gated groups {'LIVE': 6}
+   LIVE Ford: app-years {'drive:unchecked': 12}
+== mb: gated groups {'LIVE': 1}
+   LIVE Mercedes-Benz: app-years {'drive:unchecked': 2}
+== hmg: gated groups {'HELD': 35}
+   HELD Kia: app-years {'drive:stated': 44, 'eng': 81, 'trans': 4}
+== toyota: gated groups {}
+== subaru: gated groups {}
+== vag: gated groups {}
+== nissan: gated groups {'LIVE': 106}
+   LIVE Infiniti: app-years {'drive:stated': 12, 'eng': 10, 'fuel': 98, 'trans': 4}
+   LIVE Nissan: app-years {'cab': 95, 'drive:stated': 45, 'eng': 76, 'fuel': 15, 'trans': 2}
+
+3. Payload claim diff (docs/data/interchange.json + docs/data/oem/*.json, by (ns, cat, pn)):
+
+
+ford     gated app-years    12
+ford     gates added        6
+ford     note changed       6
+gm       gated app-years    50
+gm       gates added        48
+gm       note changed       34
+mb       gated app-years    2
+mb       gates added        1
+mb       note changed       1
+mopar    gated app-years    9
+mopar    gates added        9
+mopar    note changed       7
+groups old 1183 new 1183 | added groups 0 | added app-years 0
+
+4. Donor census on the pinned inventory (main@a85c654): the app's own OEM-GATE code run
+   in node over every shipped OEM group. (group, lot car) donor pairs before (main) and
+   after (branch), pairs the car's own decode rules out, pairs offered "if equipped",
+   and distinct lot cars that are a donor for at least one group.
+
+ns       | donor (group, car) pairs before -> after | excluded | if-equipped | distinct donor cars before -> after
+ford     |   27335 ->   27335 |      0 |   3858 | 6949 -> 6949
+         Ford: pairs 23529, excluded 0 (0 cars), if-equipped 3858
+gm       |   59852 ->   56081 |   3771 |   1787 | 8191 -> 8152
+         Chevrolet: pairs 41169, excluded 3663 (655 cars), if-equipped 1704
+         GMC: pairs 5088, excluded 108 (54 cars), if-equipped 83
+hmg      |    3754 ->    3754 |      0 |      0 | 734 -> 734
+mb       |     243 ->     243 |      0 |      2 | 77 -> 77
+         Mercedes-Benz: pairs 243, excluded 0 (0 cars), if-equipped 2
+mopar    |  116281 ->  115939 |    342 |     27 | 7629 -> 7629
+         Ram: pairs 2559, excluded 342 (38 cars), if-equipped 27
+subaru   |    4055 ->    4055 |      0 |      0 | 1184 -> 1184
+toyota   |  112182 ->  112182 |      0 |      0 | 2211 -> 2211
+vag      |    1501 ->    1501 |      0 |      0 | 458 -> 458
+distinct excluded cars by make and gate key: { 'Chevrolet drive': 655, 'Ram drive': 38, 'GMC drive': 54 }
+
+   nissan candidate (not shipped), the same census:
+
+ns       | donor (group, car) pairs before -> after | excluded | if-equipped | distinct donor cars before -> after
+nissan   |   86136 ->   82460 |   3676 |   6190 | 15344 -> 15343
+         Infiniti: pairs 11755, excluded 490 (189 cars), if-equipped 651
+         Nissan: pairs 74381, excluded 3186 (1647 cars), if-equipped 5539
+distinct excluded cars by make and gate key: {
+  'Nissan eng': 629,
+  'Nissan drive': 1032,
+  'Infiniti drive': 187,
+  'Infiniti eng': 1,
+  'Infiniti trans': 1
+}

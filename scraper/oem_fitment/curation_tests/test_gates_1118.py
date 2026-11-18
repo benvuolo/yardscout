@@ -116,6 +116,12 @@ check("note: models sharing the label are named together",
       u._unchecked_note({T2: "2WD", ("GMC", "Yukon", 2007): "2WD"}, [T2, ("GMC", "Yukon", 2007), Ts[1]])
       == "Tahoe, Yukon: only 2WD checked")
 check("note: none -> ''", u._unchecked_note({}, Ts) == "")
+CM, FO = ("Ford", "C-Max", 2013), ("Ford", "Focus", 2012)
+check("note: every vehicle-year unchecked in one family under different labels -> the family once "
+      "(keeps the restored C-Max/Focus window-motor notes within 160 characters)",
+      u._unchecked_note({CM: "2WD", FO: "FWD"}, [CM, FO]) == "only 2WD checked"
+      and u._unchecked_note({CM: "4WD", FO: "AWD"}, [CM, FO]) == "only 4WD/AWD checked"
+      and u._unchecked_note({CM: "2WD"}, [CM, FO]) == "C-Max: only 2WD checked")
 check("note: the short form keeps a 2004 Trailblazer regulator note within 160 characters",
       C._likely_note_fits("GM", "19331461", "option: fits some option packages; Trailblazer: only 2WD checked",
                           C._pack_text("window-regulator", "reg", "FL")))
@@ -168,7 +174,9 @@ for name, d in by_ns.items():
             lab = C._drive_label(frozenset(gate["drive"].split("/")))
             if gate.get("drive_basis") == "unchecked":
                 n_unc += 1
-                ok = f"only {lab} checked" in g["note"] and f"{lab} only" not in g["note"]
+                fam = "2WD" if lab in ("2WD", "FWD", "RWD") else "4WD/AWD"
+                ok = (f"only {lab} checked" in g["note"] or f"only {fam} checked" in g["note"]) \
+                    and f"{lab} only" not in g["note"]
             else:
                 n_st += 1
                 ok = f"{lab} only" in g["note"] or f"{lab}," in g["note"]

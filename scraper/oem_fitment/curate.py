@@ -1918,13 +1918,22 @@ class Curation:
         the 2004 Trailblazer regulator notes, which would be refused). Models
         sharing the label are named together; '<model> 2005-2007' when only
         some of its years are; no model when every vehicle-year of the group
-        is. '' for none."""
+        is. When every vehicle-year is unchecked within one drive family but
+        under different labels (C-Max 2WD, Focus FWD), the family is named
+        once ('only 2WD checked': FWD is a 2-wheel drive), which keeps those
+        notes within 160 characters. '' for none."""
         if not unchecked_by_T:
             return ""
+        allT = set(Ts)
+        labs = set(unchecked_by_T.values())
+        if set(unchecked_by_T) == allT and len(labs) > 1:
+            if labs <= {"2WD", "FWD", "RWD"}:
+                return "only 2WD checked"
+            if not labs & {"2WD", "FWD", "RWD"}:
+                return "only 4WD/AWD checked"
         by = defaultdict(list)
         for T, lab in unchecked_by_T.items():
             by[lab].append(T)
-        allT = set(Ts)
         parts = []
         for lab, ts in sorted(by.items()):
             if set(ts) == allT:
