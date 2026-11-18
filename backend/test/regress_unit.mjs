@@ -47,7 +47,11 @@ check(`every self-contained browser suite is listed (${wantE2e.length})`, !missi
 check('...and nothing on the left-out list is (each named with a reason in the header)', e2e.filter((f) => LEFT_OUT.includes(path.basename(f)) && path.basename(f) !== 'browser_e2e.py').every((f) => !listed.has(f))
   && LEFT_OUT.every((n) => src.includes(n.replace(/_e2e\.mjs$/, '')) ), [...listed].filter((x) => LEFT_OUT.some((n) => x.endsWith(n))).join(', '));
 for (const s of ['e2e.sh', 'e2e-ops.sh', 'e2e-devices.sh', 'e2e-coverage.sh', 'e2e-email.sh', 'browser_e2e.py']) {
-  check(`API suite listed: ${s}`, list.stdout.split('\n').some((l) => /^api\s/.test(l) && l.trim().endsWith(`backend/test/${s}`)));
+  // Listed whether or not this checkout can run it: without backend/node_modules
+  // the line ends "(would be skipped: ...)" (2026-11-18: the check used to
+  // require the line to END with the file name, so it failed in a fresh worktree).
+  check(`API suite listed: ${s}`, list.stdout.split('\n').some((l) => /^api\s/.test(l)
+    && new RegExp(`\\sbackend/test/${s.replace(/[.]/g, '\\.')}(\\s|$)`).test(l)));
 }
 check('the layout check at its six widths, as two halves', /layout\s+backend\/test\/ui_no_truncation\.mjs WIDTHS=320,375,390 \| WIDTHS=430,768,1280/.test(list.stdout));
 const quickList = spawnSync('bash', [RUNNER, '--list', '--quick'], { encoding: 'utf8', cwd: ROOT }).stdout;

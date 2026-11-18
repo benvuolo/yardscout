@@ -89,6 +89,7 @@ class Options:
     trimu_force: dict = field(default_factory=dict)   # {(make, model, year): [trims]} test hook (case 2)
     strict: bool = False                    # raise on lint errors (tests)
     model_bodies: dict | None = None        # {(make, model): {body style}} from vPIC decodes (rear wiper gate)
+    body_counts: dict | None = None         # {(make, model, year): Counter(silhouette)} (§5.16 body-variant rule)
 
 
 class LintError(Exception):
@@ -134,6 +135,7 @@ class Curation:
         inv = opts.inventory
         self.inv_counts = Counter((r[3], r[4], r[2]) for r in inv["vehicles"]) if inv else Counter()
         self.model_bodies = opts.model_bodies or {}
+        self.body_counts = opts.body_counts or {}
         kinds = getattr(self.js, "INTERCHANGE_PART_CATEGORIES", {}) if self.js else {}
         self.kinds = {k: v.get("kind") for k, v in kinds.items()}
 
@@ -376,6 +378,54 @@ class Curation:
         for r in self.records:
             for T in self.targets_of_seed(r.seed):
                 self.t_seed_records[(T, r.cat)].append(r)
+        # §5.16 body-variant rule: every body-named catalog page offered for T
+        self.t_body_variants = defaultdict(set)
+        for lr in self.list_rows:
+            for T in self.targets_of_seed(lr.seed):
+                self.t_body_variants[T] |= _body_words(lr.variant)
+        for ym in self.years:
+            for T in self.targets_of_seed(ym.seed):
+                for v in [ym.variant] + list(ym.variants or []):
+                    self.t_body_variants[T] |= _body_words(v)
+
+    def body_need(self, T) -> set:
+        """§5.16 body-variant rule: the bodies T comes in, from the lot (vPIC
+        decodes, LIKELY_BODY_MIN_SHARE / _MIN_CARS) and from the body-named
+        catalog pages offered for T."""
+        need = set(self.t_body_variants.get(T, ()))
+        cnt = self.body_counts.get(T) or {}
+        tot = sum(cnt.values())
+        for b, n in cnt.items():
+            if n >= policy.LIKELY_BODY_MIN_CARS and n >= policy.LIKELY_BODY_MIN_SHARE * tot:
+                need.add(b)
+        return need
+
+    def body_ok(self, T, cat, c: Klass) -> bool:
+        """§5.16 body-variant rule: False when T comes in 2+ bodies and T's own
+        pages do not show the number for every one of them (fail closed: OEM
+        Likely apps carry no body gate in the app)."""
+        if not policy.LIKELY_BODY_GATE or cat in policy.LIKELY_BODY_SKIP_CATS:
+            return True
+        need = self.body_need(T)
+        if len(need) < 2:
+            return True
+        ctx = N.NoteContext(T[2], frozenset(m.lower() for _, m in self.t_sources.get(T, set())),
+                            getattr(self, "ns_models_f", frozenset()))
+        if self.t_list_rows.get((T, cat)):
+            items = [(lr.variant, lr.notes) for lr in self.t_list_rows[(T, cat)]
+                     if policy.pn_key(self.ns, lr.pn) == c.key and lr.matched and not self.note_excludes(lr.notes, T)]
+        else:
+            items = [(_catalog_of(r.list_url), r.note_texts) for r in self.t_seed_records.get((T, cat), [])
+                     if r.key == c.key and not self.note_excludes(r.note_texts, T)]
+        covered = set()
+        for variant, notes in items:
+            vb = _body_words(variant)
+            rc = _row_body_cover(notes, ctx)
+            if vb:
+                covered |= vb if rc is None else (vb & rc)
+            else:
+                covered |= need if rc is None else rc
+        return need <= covered
 
     def own_page(self, T, cat, c: Klass):
         """(on_page, notes, position sources, pointers) for class c on T."""
@@ -430,6 +480,10 @@ class Curation:
         if self.ns == "subaru" and _subaru_body_excludes(notes, T[1]):
             return True
         if self.ns == "toyota" and market and _lexus_chassis_excludes(notes, T):
+            return True
+        if self.ns == "nissan" and market and _infiniti_engine_excludes(notes, T):
+            return True
+        if self.ns == "nissan" and market and _nissan_body_code_excludes(notes, self.body_need(T)):
             return True
         return self._model_names_exclude(notes, T)
 
@@ -1293,6 +1347,8 @@ class Curation:
         self.own_page_missing = defaultdict(lambda: defaultdict(set))  # T -> cat -> class keys (R3 input)
         self.held_exterior = []                  # §5.16 exterior hold (owner checklist)
         self.likely_note_restricted = Counter()
+        self.likely_body_mixed = Counter()        # cat -> vehicle-years left out by the §5.16 body-variant rule
+        self.likely_engine_conflict = Counter()   # cat -> Infiniti vehicle-years whose fitment rows name other engines
         self.likely_generation_cut = Counter()     # cat -> vehicle-years cut at a generation break  # cat -> vehicle-years a class-wide note restricts away
         self.release_allow = policy.release_allowlist()   # §5.16 exact owner-approved releases
         self.release_notes = policy.release_notes()
@@ -1322,8 +1378,20 @@ class Curation:
                     self.likely_own_page_drops[cat] += 1
                     dropped.append(T)
                     continue
-                cand.append((T, m))
+                # T's own-page notes join the class-wide pool even when the
+                # body rule leaves T out: the pool may only restrict more
                 class_notes += notes
+                if not self.body_ok(T, cat, c):
+                    # §5.16 body-variant rule: T comes in bodies its own pages
+                    # do not show the number for (only removes claims)
+                    self.likely_body_mixed[cat] += 1
+                    continue
+                if self.ns == "nissan" and _infiniti_fitment_engine_conflict(c, T):
+                    # the product page ties the number to another engine than
+                    # the Infiniti model T ever had (only removes claims)
+                    self.likely_engine_conflict[cat] += 1
+                    continue
+                cand.append((T, m))
             # R3 own-page completion input: the left-out vehicle-years of a
             # class that would span 2+ feed models if their own pages listed it
             if dropped and len({(T[0], T[1]) for T in dropped} | {(T[0], T[1]) for T, _ in cand}) >= 2:
@@ -1608,6 +1676,41 @@ class Curation:
                         all_cab = False
             if all_cab and len(cabs) == 1:
                 out.append(f"{md}: {next(iter(cabs))} only")
+        if not out and getattr(self, "ns", None) == "nissan":
+            return self._nissan_cab_only(c, cat, Ts)
+        return "; ".join(out)
+
+    # nissanpartsdeal option-column cab codes (interchange 2026-11-18): the
+    # Frontier and Titan pages code each row "KC" (King Cab) or "CC" (Crew
+    # Cab), e.g. 2010 Frontier climate controls 27510-9CA0A "CC. S" beside
+    # 27510-9BA0A "KC. S"; Nissan's own store names KC/CC parts the same way
+    # (parts.nissanusa.com 999T1-BR103KC "King Cab, Crew Cab"). The product
+    # page's fitment trims print no cab, so the GM rule above never fires.
+    _NISSAN_CABS = {"CC": "crew cab", "KC": "king cab"}
+
+    def _nissan_cab_only(self, c, cat, Ts) -> str:
+        """Same note as _cab_only, from the own-page option column: when every
+        own-page row listing the number for a model codes only one cab, the
+        group says '<model>: <cab> only'. A row without a code, or with any
+        other code, leaves that model without a note."""
+        out = []
+        for mk, md in sorted({(T[0], T[1]) for T in Ts}):
+            cabs, all_cab = set(), True
+            for T in Ts:
+                if (T[0], T[1]) != (mk, md):
+                    continue
+                rows = [lr for lr in self.t_list_rows.get((T, cat), [])
+                        if policy.pn_key(self.ns, lr.pn) == c.key and lr.matched]
+                if not rows:
+                    all_cab = False
+                for lr in rows:
+                    codes = _fvo_cab_codes(lr.notes)
+                    if codes is None:
+                        all_cab = False
+                    else:
+                        cabs |= codes
+            if all_cab and len(cabs) == 1:
+                out.append(f"{md}: {self._NISSAN_CABS[next(iter(cabs))]} only")
         return "; ".join(out)
 
     # ------------------------------------------------------------ report
@@ -1667,6 +1770,10 @@ class Curation:
                             getattr(self, "likely_note_restricted", Counter()).items())),
                         "likely_app_years_generation_cut": dict(sorted(
                             getattr(self, "likely_generation_cut", Counter()).items())),
+                        "likely_app_years_body_mixed": dict(sorted(
+                            getattr(self, "likely_body_mixed", Counter()).items())),
+                        "likely_app_years_engine_conflict": dict(sorted(
+                            getattr(self, "likely_engine_conflict", Counter()).items())),
                         "blocked_sites": sorted(self.blocked),
                         "why_no_verified": _why_none(self), "gates": global_gates(self)},
             "funnel_cars": fz(funnel),
@@ -2162,11 +2269,208 @@ def _subaru_manual_only(notes) -> bool:
 
 
 _PROD_RE = re.compile(r"Production Date\s*:\s*(\d{1,2})/(\d{4})\s*-\s*(?:(\d{1,2})/(\d{4}))?", re.I)
+# "Production Date: from 12/2002" (open end; 610 rows on nissanpartsdeal, 969 on
+# lexuspartsnow at oem-raw@57e8b5b9) and the same inside a comma list
+# ("02/2009-08/2010,from 08/2010"); interchange 2026-11-18, nissan §11.4 round 3
+_PROD_FROM_RE = re.compile(r"(?:^|[\s:,])from\s+(\d{1,2})/(\d{4})", re.I)
 _PROD_MIN_MONTHS = 5
 # wheels have their own, stricter whole-group production-date refusal
 # (wheel_production_date); a per-row cut first would let a group that rule
 # refuses through, so the per-row rule never adds a claim there
 PROD_RULE_SKIP_CATS = frozenset({"wheels"})
+
+# §5.16 body-variant rule (policy.LIKELY_BODY_GATE). Body words as catalogs
+# print them in a catalog/variant name ("2009-infiniti-g37-sedan") or a note;
+# vPIC files one crossover as "wagon" or "SUV" (Infiniti QX50 17 / 4 on the
+# lots, 2026-11-18), so the two count as one silhouette here.
+_BODY_WORDS = (
+    ("sedan", re.compile(r"\b(?:sedan|saloon)", re.I)),
+    ("coupe", re.compile(r"\b(?:coupe|koup)", re.I)),
+    ("convertible", re.compile(r"\b(?:convertible|cabrio|roadster)", re.I)),
+    ("hatchback", re.compile(r"\b(?:hatch(?:back)?|liftback)", re.I)),
+    ("wagon", re.compile(r"\b(?:wagon|sportwagen|avant|estate)\b", re.I)),
+    ("van", re.compile(r"\b(?:mini)?van\b", re.I)),
+    ("pickup", re.compile(r"\bpick-?up\b", re.I)),
+)
+_SILHOUETTE = {"suv": "wagon"}
+_FVO_RE = re.compile(r"^\s*fitting\s+vehicle\s+options", re.I)   # PartsGiant option column (body codes S/C/KC...)
+_PROD_CLAUSE_RE = re.compile(r"^\s*production\s+date", re.I)
+
+
+def _body_words(text) -> set:
+    t = str(text or "").replace("_", " ").replace("-", " ")
+    return {_SILHOUETTE.get(b, b) for b, rx in _BODY_WORDS if rx.search(t)}
+
+
+def _catalog_of(list_url: str) -> str:
+    """The catalog segment of a parts-list URL (".../parts-list/2008-infiniti-g35-sedan/...")."""
+    m = re.search(r"/parts-list/([^/]+)/", list_url or "")
+    return m.group(1) if m else ""
+
+
+# Infiniti feed models whose name fixes the engine displacement (interchange
+# 2026-11-18, nissan §11.4 round 1: 24820-6AH1A "SEDAN. VQ37VHR" claimed for
+# the M56 and 24820-6AH1C "SEDAN. VK56VD" for the M37; 24820-1NP0C "VQ35HR"
+# for the M45). infinitipartsdeal files M35/M45 and M37/M56 under one catalog
+# and the option column names the engine (VQ35HR 3.5L, VK45DE 4.5L, VQ37VHR
+# 3.7L, VK56VD 5.6L, VK50VE 5.0L, VQ25HR 2.5L, VQ30DE 3.0L, VH45DE 4.5L, SR20
+# 2.0L: the two digits after the family letters). Post-2014 names (Q40, Q50,
+# Q60, Q70, QX50/60/70/80) do not encode the engine and are not listed.
+_INFINITI_DISP = {"G20": 20, "G25": 25, "G35": 35, "G37": 37, "G37X": 37, "I30": 30, "I35": 35, "J30": 30,
+                  "M30": 30, "M35": 35, "M35H": 35, "M37": 37, "M45": 45, "M56": 56, "Q45": 45, "FX35": 35,
+                  "FX37": 37, "FX45": 45, "FX50": 50, "EX35": 35, "EX37": 37, "JX35": 35, "QX56": 56}
+_NISSAN_ENGINE_CODE_RE = re.compile(r"\b(?:VQ|VK|VG|VH|QR|KA|SR|MR|HR|VR)(\d{2})(?:[A-Z]{1,4})?\b")
+
+
+def _infiniti_engine_excludes(notes, T) -> bool:
+    """True when an own-page row's option column restricts the number to
+    engines the Infiniti model T never had: every alternative names an engine
+    code and none has T's displacement. Per row only (never pooled across
+    pages, like the Lexus chassis gate). Only removes claims."""
+    if T[0] != "Infiniti":
+        return False
+    disp = _INFINITI_DISP.get(re.sub(r"\s+", "", str(T[1])).upper())
+    if not disp:
+        return False
+    for n in notes or []:
+        m = re.match(r"^\s*fitting\s+vehicle\s+options\s*:\s*(.*)$", n or "", re.I)
+        if not m:
+            continue
+        alts = _split_top_plus(m.group(1), ",")
+        found = [{int(d) for d in _NISSAN_ENGINE_CODE_RE.findall(x)} for x in alts]
+        if alts and all(f for f in found) and not any(disp in f for f in found):
+            return True
+    return False
+
+
+_ENGINE_LITRE_RE = re.compile(r"\b(\d)\.(\d)\s*L\b", re.I)
+
+
+def _infiniti_fitment_engine_conflict(c, T) -> bool:
+    """nissan §11.4 round 2 (24820-6AH2A: the product page prints '2013
+    Infiniti M56 | Base, Premium, SportPre | 6 Cyl 3.7L | VQ37VHR'): True when
+    every product-page fitment row of the class for the Infiniti model T and
+    T's year names engines (engine cell or engine code), and none has T's
+    displacement (_INFINITI_DISP). Engine cells are never used to ADD a claim
+    (§5.5); here they only remove one."""
+    if T[0] != "Infiniti":
+        return False
+    disp = _INFINITI_DISP.get(re.sub(r"\s+", "", str(T[1])).upper())
+    if not disp:
+        return False
+    want = re.sub(r"\s+", "", str(T[1])).upper()
+    rows = [f for r in c.records for f in r.rows
+            if re.sub(r"\s+", "", str(f.model)).upper() == want and f.lo <= T[2] <= f.hi]
+    if not rows:
+        return False
+    for f in rows:
+        found = {int(d) for x in (f.options or []) for d in _NISSAN_ENGINE_CODE_RE.findall(str(x))}
+        found |= {int(a) * 10 + int(b) for x in (f.engines or []) for a, b in _ENGINE_LITRE_RE.findall(str(x))}
+        if not found or disp in found:
+            return False
+    return True
+
+
+# nissanpartsdeal option-column body codes (nissan §11.4 round 4): shared
+# catalog pages list each body's number behind a leading body code, e.g. the
+# B14 Sentra/200SX page: 24820-8B700 "C. GA16DE" (coupe = 200SX) on the 1999
+# Sentra page and 24820-89Y02 "4S. (E + XE + GXE)" (4-door sedan) on the 1996
+# 200SX page; the G35 sedan page codes coupe parts "C" and sedan parts "S";
+# Versa "SED."; Xterra/Pathfinder "W." (wagon). Region prefixes FED./CAL. and
+# plant prefixes J/ U/ come first.
+_NISSAN_BODY_CODES = {"4S": "sedan", "2S": "sedan", "S": "sedan", "SED": "sedan", "SEDAN": "sedan",
+                      "LSEDAN": "sedan", "C": "coupe", "CPE": "coupe", "COUPE": "coupe", "W": "wagon",
+                      "WAG": "wagon", "WAGON": "wagon", "HB": "hatchback", "CONV": "convertible"}
+_NISSAN_PREFIX_RE = re.compile(r"^(?:(?:FED|CAL)\.\s*|[JU]/)+", re.I)
+
+
+def _nissan_body_code_excludes(notes, bodies) -> bool:
+    """True when a row's option column names a body for every alternative
+    (and every '+'-joined part) and none of them is a body the car comes in
+    (bodies: Curation.body_need, lot vPIC + catalog pages). No known body
+    for the car: no exclusion. Per row only. Only removes claims."""
+    if not bodies:
+        return False
+    for n in notes or []:
+        m = re.match(r"^\s*fitting\s+vehicle\s+options\s*:\s*(.*)$", n or "", re.I)
+        if not m:
+            continue
+        named, all_coded = set(), True
+        for alt in _split_top_plus(m.group(1), ","):
+            for part in _split_top_plus(alt, "+"):
+                part = _NISSAN_PREFIX_RE.sub("", part.strip().lstrip("*").lstrip("(").strip())
+                tok = re.match(r"^([A-Za-z0-9]+)(?=[.\s)]|$)", part)
+                b = _NISSAN_BODY_CODES.get(tok.group(1).upper()) if tok else None
+                if not b:
+                    all_coded = False
+                    break
+                named.add(b)
+            if not all_coded:
+                break
+        if all_coded and named and not (named & set(bodies)):
+            return True
+    return False
+
+
+def _fvo_cab_codes(notes) -> set | None:
+    """{"CC"} / {"KC"} / both when every alternative of the row's option
+    column ("Fitting Vehicle Options: CC. S, CC. XE") starts with a cab code;
+    None when the row has no option column or an alternative names no cab
+    or another code ("(KC+ SC). XD")."""
+    codes, seen = set(), False
+    for n in notes or []:
+        m = re.match(r"^\s*fitting\s+vehicle\s+options\s*:\s*(.*)$", n or "", re.I)
+        if not m:
+            continue
+        seen = True
+        for alt in _split_top_plus(m.group(1), ","):
+            # '+' joins configurations inside one alternative ("*KC. 4WD. LE +
+            # *CC. 4WD. LE" is both cabs): every joined part needs its own code
+            for part in _split_top_plus(alt, "+"):
+                part = part.strip().lstrip("*")
+                grp = re.match(r"^\(([^)]*)\)", part)
+                heads = _split_top_plus(grp.group(1), "+") if grp else [part]
+                for h in heads:
+                    mm = re.match(r"^\*?(KC|CC)(?![A-Za-z0-9])", h.strip())
+                    if not mm:
+                        return None
+                    codes.add(mm.group(1))
+    return codes if seen else None
+
+
+def _split_top_plus(text: str, sep: str) -> list:
+    """Split on sep outside parentheses ("CC. 4WD. (S+ SV). 6MT" stays whole)."""
+    out, depth, cur = [], 0, ""
+    for ch in text or "":
+        if ch == "(":
+            depth += 1
+        elif ch == ")":
+            depth = max(0, depth - 1)
+        if ch == sep and depth == 0:
+            out.append(cur)
+            cur = ""
+            continue
+        cur += ch
+    out.append(cur)
+    return [x for x in (y.strip() for y in out) if x]
+
+
+def _row_body_cover(notes, ctx) -> set | None:
+    """None when a row's notes cannot restrict the body (no body word, no
+    option-column code, no unparsed clause other than a production date):
+    the row covers every body of its page. Otherwise the bodies its notes
+    name in words (possibly none)."""
+    named, unsafe = set(), False
+    for n in notes or []:
+        for seg in N.split_note(n):
+            for cl in seg:
+                c = N.classify_clause(cl, ctx)
+                if c.cls == "BODY" or any(a.cls == "BODY" for a in c.atoms) or _FVO_RE.match(cl):
+                    named |= _body_words(cl)
+                    unsafe = True
+                elif c.cls == "UNKNOWN" and not _PROD_CLAUSE_RE.match(cl):
+                    unsafe = True
+    return named if unsafe else None
 
 
 def _production_excludes(notes, year: int) -> bool:
@@ -2183,6 +2487,8 @@ def _production_excludes(notes, year: int) -> bool:
     lo, hi = (year - 1) * 12 + 7, year * 12 + 6
     for n in notes or []:
         wins = _PROD_RE.findall(n or "")
+        if re.search(r"production\s+date", n or "", re.I):
+            wins += [(m1, y1, "", "") for m1, y1 in _PROD_FROM_RE.findall(n or "")]
         if not wins:
             continue
         ok = False
@@ -2438,6 +2744,34 @@ def model_bodies(inv, js, decodes_path) -> dict:
     return {k: frozenset(v) for k, v in out.items()}
 
 
+def model_body_counts(inv, js, decodes_path) -> dict:
+    """{(make, model, year): {silhouette: cars}} over the inventory's VINs
+    from the vPIC decode cache (junkyard_scraper.body_style_from_vpic; wagon
+    and SUV count as one silhouette). Unknown bodies are left out. Missing
+    inputs give {}: the §5.16 body-variant rule then reads catalog pages only."""
+    import gzip
+    p = Path(decodes_path or "")
+    if not inv or js is None or not p.exists():
+        return {}
+    dec = json.loads(gzip.open(p).read())
+    f = inv.get("fields") or []
+    iv, imk, imd, iy = f.index("vin"), f.index("make"), f.index("model"), f.index("year")
+    out = defaultdict(Counter)
+    for r in inv["vehicles"]:
+        vp = dec.get(r[iv])
+        b = js.body_style_from_vpic(vp, r[imk])
+        # a car whose decode names another model is not a body of this feed
+        # model (lots list some Outbacks as "Legacy": vPIC model Outback, SUV)
+        dm, fm = _squash_model((vp or {}).get("model")), _squash_model(r[imd])
+        if b and (not dm or dm.startswith(fm) or fm.startswith(dm)):
+            out[(r[imk], r[imd], r[iy])][_SILHOUETTE.get(b, b)] += 1
+    return {k: dict(v) for k, v in out.items()}
+
+
+def _squash_model(s) -> str:
+    return re.sub(r"[^a-z0-9]", "", str(s or "").lower())
+
+
 def curate(ns: str, src: A.RawSource, opts: Options):
     cur = Curation(ns, src, opts).run()
     doc = cur.build_doc()
@@ -2476,12 +2810,13 @@ def main(argv=None) -> int:
     inv_counts = Counter((r[3], r[4], r[2]) for r in inv["vehicles"]) if inv else Counter()
     hand = hand_payload(js)
     bodies = model_bodies(inv, js, a.decodes)
+    body_counts = model_body_counts(inv, js, a.decodes)
     out = Path(a.out)
     results = {}
     no_ns = [s for s in src.sites() if s not in policy.SITE_NS]
     for ns in nss:
         opts = Options(as_of=a.as_of, fixtures=a.fixtures, model_map=mm, model_map_path=Path(a.model_map),
-                       inventory=inv, js=js, model_bodies=bodies)
+                       inventory=inv, js=js, model_bodies=bodies, body_counts=body_counts)
         cur, doc = curate(ns, src, opts)
         results[ns] = cur
         if not cur.raw_meta:

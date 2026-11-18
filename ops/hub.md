@@ -1839,3 +1839,94 @@ All 34 `scraper/test_*.py` pass on the tree merged with main.
   `ebay_prices.py` first); Chrysler 200 generation break (with a source);
   audit alternator and starter rows the same way (next round); seed a crawl
   on the 32 no-number windows (interchange crawl list).
+
+## 2026-11-18 17:56 UTC interchange: wrong live claims removed; Nissan held
+
+Independent verifier (seed 46021118 / 7731118; report `groups/_report/
+nissan_verify_2026-11-18.json`, `removals_verify_2026-11-18.json`, section
+"Independent verification" in `ops/interchange.md`):
+- **Nissan candidate: 9 WRONG of 60** → NOT shipped. 6 drive (4WD-only or
+  2WD-only gauge clusters claimed for every car of a model-year built in
+  both; 43 of 343 groups have it), 3 body (sedan-only clusters on the
+  200SX coupe). 11 RISK (engine/transmission/hybrid splits, Titan rear-door
+  motors without a cab code).
+- **Removals: shipped.** 28 checked: 18 wrong live claims (coupe parts on
+  sedans, rear-door parts on coupes, "from 10/2012" rows on 2012 IS 350s), 7
+  true claims lost (Ford window motors split by feature, Sonic, Camaro/
+  Firebird, Cobalt/G5, one Subaru), 3 cannot tell. Losing a true claim
+  shows less, never something wrong; recover them later by decoding GM body
+  codes (37/69/67) and Subaru S./W.
+- Tests on the merged tree: run 13 (89 suites incl. part finder,
+  interchange, pf_ux, pf_new_cats) all pass; curation tests pass except
+  `test_model_map` (fails on main too: new one-car spellings in the live
+  inventory); oem_fitment tests pass. Payload 1,538,963 → 1,503,938 bytes.
+- Rule flaws the verifier found, for the next interchange round: drive
+  codes in the option column not read (may affect LIVE makes too: check),
+  body check leans on lot vPIC bodies, engine/transmission splits get only
+  "option", gas/hybrid pages, body codes not read as bodies.
+
+## 2026-11-18 17:58 UTC list jumps held from "new"; ops email names the site's stale yards
+
+`data/list-jumps-1118` (66e6e6b4; numbers in `ops/data.md`, "2026-11-18
+(later)"). A scan where a yard adds cars under ids it has NEVER listed
+(history DB) making up 25%+ of its list and 50+ cars is a jump: its cars
+get the flush mark (no alerts, not "new this week", no New badge) for 8
+days. Measured on 160 committed scans: catches all 15 re-key / source-swap
+events (Ryan's Detroit 10-26, U-Pull-It x5 10-28, Pull-N-Save x6 10-31,
+Midway x2 11-14), no real set-out day (largest real 18.9%, smallest jump
+27.5%). Ids that come back (Indy's 35 flips, Riverside's 13, partial reads)
+are not held: they keep their dates and the alert dedupe already stops
+them. Ops email: the per-yard list now uses `listState` (same yards and
+dates as the site) plus an "early warning" line a day earlier.
+Tests on the tree merged with main: 33 scraper tests and every API unit
+(incl. new `ops_yard_list_unit`) pass; builder's `e2e-ops` 154/154.
+Not done (saved_alerts.js, after the watertight merge): skip "leaving soon"
+at stale/frozen yards; send "gone" only after two missing commits and no
+flush mark. Flip-flopping feeds (Indy, Pull-N-Save Riverside) and the date
+fields of the 10-28/10-31 source changes: yards workstream.
+
+## 2026-11-18 ~18:45 UTC LKQ partial read, Pull-N-Save check page, Play 1.13.1 live
+
+- Scan 44350039303 (16:40): LKQ Pick Your Part 51,476 cars against ~72,200
+  before. 17 yards stopped after their first one or two pages (25 or 50
+  cars); STALE-KEEP carried their earlier lists forward, so no car vanished.
+  The 13 scans before it had 0 such yards except one on 11-16 (1 yard).
+  The reader ended a store's read on ANY error, silently. Now
+  (`_pyp_get_page`): one retry after 5 s for a timeout, dropped connection,
+  429 or 5xx (Retry-After honoured, at most 30 s); 403/404 not retried; a
+  stop is logged with yard, page and reason. Test `scraper/test_pyp_reader.py`.
+- Same scan: Pull-N-Save answered getMakes with HTTP 202 and a meta-refresh
+  page (a check page) 3 times; the 01:58 scan saw the same, 07:23 and 12:30
+  read all 11,310 cars. Rule 2: no workaround. Their 8 yards were carried
+  forward. The draft to Pull-N-Save is in Gmail (ops/yard-outreach-drafts.md).
+  If it lasts a full day, add it to that draft.
+- Also 0 this scan: Bevell's (1,145 kept), Route 34 (333 kept), Budget
+  Winter Garden (1,624 kept).
+- Google Play: production 1.13.1 (41) rollout complete (play-status 18:18).
+  Apple: 1.13.1 build 42 WAITING_FOR_REVIEW (submitted 15:03).
+- usage-stats: Apple's sales report printed a 404 as a row of zeros (0
+  downloads since 11-06 while the app counts ~5 new iPhone users a day). Now
+  it says "no report" with Apple's words, and units by product type (0145a829).
+- Apple sales reports (usage-stats 44369641326): SALES SUMMARY 1_1 has 404
+  "expected results but none were found" for every day from 11-06 to 11-17;
+  1_0 also 404; 1_2/1_3 are not valid versions (400); the WEEKLY report for
+  the week ending 11-15 is 404 too. 11-04/05 had 153 and 190 updates a day,
+  so Apple has stopped publishing sales for this vendor, not our users. The
+  SUBSCRIPTION snapshot still arrives (3 active on 11-17). Owner to check App
+  Store Connect: Business (an agreement waiting to be accepted?) and Trends
+  (does the web page show units after 11-06?).
+- Gmail connector turns every URL or bare domain in a draft into a
+  google.com/url redirect (RAW-checked). Sent 11-18 ~17:28 with such links:
+  Kenny U-Pull, Carolina Pick N Pull, Express Pull-N-Save, Andersen. The two
+  unsent drafts (Budget follow-up, 1A Auto) rewritten with no addresses.
+  Rule from now: hub drafts carry no web addresses (ops/yard-outreach-drafts.md).
+- Check-in (trig_01Bj2uqq2oFAy4JdziSoq38G) on scan 44350039303 (committed
+  18:17): new yards in: Standard UPIC 524, Intermountain Idaho Falls 578,
+  S&S Lebanon 1,187. "[U-Pull-R] reader is switched off ... no request
+  sent". "[list freshness] 4 stale (4,333 cars), 4 frozen (2,309)", as the
+  dry run said. Manifest yardFields end with listChangedAt, listState,
+  listReadAt, listFlushAt. No FAILED or Traceback lines; 2 WARNING lines
+  (Pull-N-Save check page, Route 34 0 cars). Live: yardscout.io/car/
+  utpap-orem-K026992 says "This yard's list has not changed since Oct 22,
+  2026. Call before you go." Next: wire ifipull/ssupullit price lists and
+  run gen_yard_site_links.py after the watertight merge.

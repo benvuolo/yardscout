@@ -90513,36 +90513,6 @@
    ],
    "reman": false
   },
-  "mopar:4602469AB": {
-   "cat": "gauge-cluster",
-   "comp": null,
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L3850"
-   ],
-   "names": [
-    "Cluster - Instrument Panel",
-    "Cluster Assembly"
-   ],
-   "pns": [
-    "4602469AB"
-   ],
-   "reman": false
-  },
-  "mopar:4602780AD": {
-   "cat": "window-switch",
-   "comp": null,
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L38"
-   ],
-   "names": [
-    "Switch - Window And Door Lock",
-    "Window Switch"
-   ],
-   "pns": [
-    "4602780AD"
-   ],
-   "reman": false
-  },
   "mopar:4674627AB": {
    "cat": "hood",
    "comp": null,
@@ -91169,34 +91139,6 @@
    ],
    "pns": [
     "4805953AA"
-   ],
-   "reman": false
-  },
-  "mopar:4806030AB": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.moparpartsgiant.com:records:L1614"
-   ],
-   "names": [
-    "MIRROR Outside Rearview"
-   ],
-   "pns": [
-    "4806030AB"
-   ],
-   "reman": false
-  },
-  "mopar:4806031AB": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.moparpartsgiant.com:records:L1615"
-   ],
-   "names": [
-    "MIRROR Outside Rearview"
-   ],
-   "pns": [
-    "4806031AB"
    ],
    "reman": false
   },
@@ -93128,66 +93070,6 @@
    ],
    "pns": [
     "68004819AB"
-   ],
-   "reman": false
-  },
-  "mopar:68021446AA": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L1464"
-   ],
-   "names": [
-    "Motor - Window Regulator",
-    "Window Motor"
-   ],
-   "pns": [
-    "68021446AA"
-   ],
-   "reman": false
-  },
-  "mopar:68021447AA": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L1465"
-   ],
-   "names": [
-    "Motor - Window Regulator",
-    "Window Motor"
-   ],
-   "pns": [
-    "68021447AA"
-   ],
-   "reman": false
-  },
-  "mopar:68023518AA": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L1468"
-   ],
-   "names": [
-    "Regulator - Rear Door Window",
-    "Window Regulator"
-   ],
-   "pns": [
-    "68023518AA"
-   ],
-   "reman": false
-  },
-  "mopar:68023519AA": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.jeeppartsdeal.com:records:L1469"
-   ],
-   "names": [
-    "Regulator - Rear Door Window",
-    "Window Regulator"
-   ],
-   "pns": [
-    "68023519AA"
    ],
    "reman": false
   },
@@ -113634,60 +113516,6 @@
   {
    "apps": [
     [
-     "Chrysler",
-     "Sebring",
-     2004,
-     2004
-    ],
-    [
-     "Dodge",
-     "Stratus",
-     2006,
-     2006
-    ]
-   ],
-   "cars": 196,
-   "cat": "gauge-cluster",
-   "id": "oem:mopar:gauge-cluster:C:8b537ad6b7",
-   "kind": "body",
-   "note": "Mopar catalog lists #4602469AB for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T12:32:29Z",
-   "pn": [
-    "4602469AB"
-   ],
-   "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chrysler",
-     "Sebring",
-     2008,
-     2008
-    ],
-    [
-     "Dodge",
-     "Avenger",
-     2013,
-     2013
-    ]
-   ],
-   "cars": 564,
-   "cat": "window-switch",
-   "id": "oem:mopar:window-switch:DM:7fc2e6a936",
-   "kind": "body",
-   "note": "Mopar catalog lists #4602780AD for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T00:53:50Z",
-   "pn": [
-    "4602780AD"
-   ],
-   "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
      "Dodge",
      "Caravan",
      1999,
@@ -114078,28 +113906,22 @@
      2000
     ],
     [
-     "Chrysler",
-     "Sebring",
-     2004,
-     2004
-    ],
-    [
      "Dodge",
      "Intrepid",
      2004,
      2004
     ]
    ],
-   "cars": 192,
+   "cars": 74,
    "cat": "climate-control",
-   "id": "oem:mopar:climate-control:C:d2ecfab57c",
+   "id": "oem:mopar:climate-control:C:3411d3db38",
    "kind": "body",
-   "note": "Mopar catalog lists #4698199AG for both — trim-limited; verify the number on the part",
+   "note": "Mopar catalog lists #4698199AG for both — option: fits some option packages; verify the number on the part",
    "oldest_retrieved": "2026-11-06T06:34:48Z",
    "pn": [
     "4698199AG"
    ],
-   "reason": "trim",
+   "reason": "option",
    "tier": "likely"
   },
   {
@@ -114980,60 +114802,6 @@
    "oldest_retrieved": "2026-11-06T08:50:09Z",
    "pn": [
     "4805953AA"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chrysler",
-     "Sebring",
-     2004,
-     2004
-    ],
-    [
-     "Dodge",
-     "Stratus",
-     2006,
-     2006
-    ]
-   ],
-   "cars": 196,
-   "cat": "side-mirrors",
-   "id": "oem:mopar:side-mirrors:R:b498f1c24e",
-   "kind": "body",
-   "note": "Mopar catalog lists #4806030AB for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T05:29:52Z",
-   "pn": [
-    "4806030AB"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chrysler",
-     "Sebring",
-     2004,
-     2004
-    ],
-    [
-     "Dodge",
-     "Stratus",
-     2006,
-     2006
-    ]
-   ],
-   "cars": 196,
-   "cat": "side-mirrors",
-   "id": "oem:mopar:side-mirrors:L:e9db3b8f17",
-   "kind": "body",
-   "note": "Mopar catalog lists #4806031AB for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T05:30:00Z",
-   "pn": [
-    "4806031AB"
    ],
    "reason": "option",
    "tier": "likely"
@@ -119034,114 +118802,6 @@
   {
    "apps": [
     [
-     "Chrysler",
-     "Sebring",
-     2008,
-     2008
-    ],
-    [
-     "Dodge",
-     "Avenger",
-     2013,
-     2013
-    ]
-   ],
-   "cars": 564,
-   "cat": "window-regulator",
-   "id": "oem:mopar:window-regulator:FL+FR+RL+RR+SL+SR:c52b35e0b5",
-   "kind": "body",
-   "note": "Mopar catalog lists #68021446AA for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T04:06:35Z",
-   "pn": [
-    "68021446AA"
-   ],
-   "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chrysler",
-     "Sebring",
-     2008,
-     2008
-    ],
-    [
-     "Dodge",
-     "Avenger",
-     2013,
-     2013
-    ]
-   ],
-   "cars": 564,
-   "cat": "window-regulator",
-   "id": "oem:mopar:window-regulator:FL+FR+RL+RR+SL+SR:8acd6beaec",
-   "kind": "body",
-   "note": "Mopar catalog lists #68021447AA for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T04:06:43Z",
-   "pn": [
-    "68021447AA"
-   ],
-   "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chrysler",
-     "Sebring",
-     2008,
-     2008
-    ],
-    [
-     "Dodge",
-     "Avenger",
-     2013,
-     2013
-    ]
-   ],
-   "cars": 564,
-   "cat": "window-regulator",
-   "id": "oem:mopar:window-regulator:RR:50a583e4f3",
-   "kind": "body",
-   "note": "Mopar catalog lists #68023518AA for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T04:07:15Z",
-   "pn": [
-    "68023518AA"
-   ],
-   "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chrysler",
-     "Sebring",
-     2008,
-     2008
-    ],
-    [
-     "Dodge",
-     "Avenger",
-     2013,
-     2013
-    ]
-   ],
-   "cars": 564,
-   "cat": "window-regulator",
-   "id": "oem:mopar:window-regulator:RL:1d41d7f5d1",
-   "kind": "body",
-   "note": "Mopar catalog lists #68023519AA for both — trim-limited; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T04:07:23Z",
-   "pn": [
-    "68023519AA"
-   ],
-   "reason": "trim",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
      "Dodge",
      "Grand Caravan",
      2010,
@@ -121268,7 +120928,7 @@
   }
  ],
  "ns": "mopar",
- "policy_sha256": "7799c6db352532323d7353859aa608d265ce34b48a13daff705b7fab99065a28",
+ "policy_sha256": "1a082aeb1a3a0e3141217283eb46894dd2d93e326bfa723c3bfc1a6f91258266",
  "raw": {
   "commit": "dca9cd845f26337a4047b9176cc17929ffc984a3",
   "ref": "dca9cd845f26",

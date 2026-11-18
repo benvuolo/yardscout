@@ -54,6 +54,28 @@ MIN_GROUP_VEHICLE_YEARS = 2
 # app-years had no own-page evidence at all. Engine categories never form
 # Likely groups (body only), so they keep their own rules.
 LIKELY_REQUIRES_OWN_PAGE = True
+# §5.16 body-variant rule (interchange 2026-11-18, nissan §11.4 trap check on
+# oem-raw@57e8b5b9): one feed model name can cover several bodies (Infiniti
+# "G37" = sedan, coupe and convertible; "G35" sedan/coupe; Nissan "Versa"
+# sedan/hatchback; "Altima" sedan/coupe), while the catalog files a body's
+# parts on that body's own page (infinitipartsdeal 2008-infiniti-g37-sedan,
+# -coupe; 2010 G37 offers convertible/coupe/sedan) or behind a body code in
+# its option column ("Fitting Vehicle Options: S" sedan / "C" coupe on the
+# 2007 G35 sedan page). 82721-JK000, a REAR-door regulator, joined G37
+# 2008-2013 from the sedan pages although every decoded 2008 G37 on the lots
+# is a coupe (40/40) and coupes have no rear doors. OEM Likely apps carry no
+# body gate in the app, so such a vehicle-year is left out (fail closed): when
+# T comes in 2+ bodies (lot vPIC bodies with >= LIKELY_BODY_MIN_SHARE of T's
+# decoded cars and >= LIKELY_BODY_MIN_CARS cars, plus every body-named catalog
+# page the catalog offers T), T joins a Likely group only when T's own pages
+# show the number for EVERY one of those bodies: matched on that body's page,
+# or on a page that names no body with a row whose notes carry no body word,
+# no option-column code and no unparsed clause. Only removes claims. Wheels
+# keep their own whole-group body rules (WHEEL_BODY_RE, wheel_body_option).
+LIKELY_BODY_GATE = True
+LIKELY_BODY_MIN_SHARE = 0.05
+LIKELY_BODY_MIN_CARS = 2
+LIKELY_BODY_SKIP_CATS = frozenset({"wheels"})
 # §5.16 exterior hold (owner decision 2026-11-06, ops/hub.md): in exterior
 # styling categories a Likely group whose apps span more than one BASE model
 # is held (refusal held_exterior_cross_model, listed in

@@ -1,0 +1,856 @@
+{
+ "what": "Independent check of live-group removals on interchange/next-1117 (groups/_report/live_diff_2026-11-18.txt): was each removed claim really unsupported?",
+ "date": "2026-11-18",
+ "session": "https://claude.ai/code/session_01LsgNuWEh1vdaDCtdP1jxMM (verifier subagent)",
+ "seed": 7731118,
+ "draw": {
+  "population_removed": {
+   "ford": 7,
+   "gm": 63,
+   "mopar": 8,
+   "subaru": 14,
+   "toyota": 4
+  },
+  "changed": 1,
+  "quota": {
+   "gm": 11,
+   "subaru": 5,
+   "mopar": 4,
+   "ford": 4,
+   "toyota": 3
+  },
+  "method": "Verifier's own draw: per-make quota (gm 11, subaru 5, mopar 4, ford 4, toyota 3), removed lines grouped by app list, families visited round-robin in seeded order; plus the one mopar CHANGED (narrowed) line. wiper-motor lines excluded (held). Every app family of every make is represented."
+ },
+ "evidence_sources": "oem-raw@dca9cd845f26 (the pin of the shipped groups) raw/<site>.jsonl and .lists*.jsonl read from git; live groups from groups/<ns>.json at the branch base main@2cb8191c; lot mix from inventory/decodes main@a85c654. No web search was needed for this part.",
+ "classes": {
+  "a": "unsupported or wrong by the evidence: the live claim showed at least one car that cannot carry the number (removal correct)",
+  "b": "supported for every car the live claim named (removal loses a true claim)",
+  "c": "cannot tell from the raw records"
+ },
+ "counts_per_ns": {
+  "ford": {
+   "a": 1,
+   "b": 3
+  },
+  "gm": {
+   "b": 3,
+   "a": 8
+  },
+  "mopar": {
+   "a": 5
+  },
+  "subaru": {
+   "a": 1,
+   "b": 1,
+   "c": 3
+  },
+  "toyota": {
+   "a": 3
+  }
+ },
+ "counts": {
+  "a": 18,
+  "b": 7,
+  "c": 3
+ },
+ "items": [
+  {
+   "item": "R01",
+   "ns": "ford",
+   "kind": "REMOVED",
+   "cat": "climate-control",
+   "pn": [
+    "F8XZ-19980-AA"
+   ],
+   "live_apps": [
+    [
+     "Ford",
+     "Contour",
+     1998,
+     1998
+    ],
+    [
+     "Ford",
+     "Mustang",
+     1998,
+     1998
+    ]
+   ],
+   "live_note": "Ford catalog lists #F8XZ-19980-AA for both — trim-limited; verify the number on the part",
+   "live_id": "oem:ford:climate-control:C:72c7053cc8",
+   "verdict": "a",
+   "evidence": "Not a body issue: the 1998 Contour rows (fordpartsgiant.lists L456/L457) and the 1998 Mustang seed page (product L2286, 1998-ford-mustang--6_cyl_3_8l-4at_4r70w heater_controls) carry no body word. But the number is a 'Moisture Purge Module, use with harness kit F78Z-14K095-BA' listed for 11 Ford/Lincoln/Mercury lines 1994-2003 (FIT rows), a service add-on rather than either car's A/C control head. A donor is unlikely to carry it, and the claim implies the two control heads interchange. Removal correct, for a reason other than the body rule."
+  },
+  {
+   "item": "R02",
+   "ns": "ford",
+   "kind": "REMOVED",
+   "cat": "window-regulator",
+   "pn": [
+    "CV6Z-5423394-B"
+   ],
+   "live_apps": [
+    [
+     "Ford",
+     "C-Max",
+     2013,
+     2013
+    ],
+    [
+     "Ford",
+     "Focus",
+     2012,
+     2012
+    ]
+   ],
+   "live_note": "Ford catalog lists #CV6Z-5423394-B for both — window motor only; fits some configurations; verify the number on the part",
+   "live_id": "oem:ford:window-regulator:FR:dfec425b50",
+   "verdict": "b",
+   "evidence": "2012 Focus front-door seed page (product L144 and its siblings on 2012-ford-focus front_door_glass_window_controls): motors split only by window feature (CP9Z-5423394-B 'Power Frt Window-1 Tch Dwn-Dr Only' vs CV6Z-5423394-B 'Power Front Windows One Touch Up/Do'); no row on the page carries a body word. 2013 C-Max page (L283) lists it. The Focus sedan and 5-door share front doors. Supported for every body named; removal loses a true claim."
+  },
+  {
+   "item": "R03",
+   "ns": "ford",
+   "kind": "REMOVED",
+   "cat": "window-regulator",
+   "pn": [
+    "6CPZ-5423395-A"
+   ],
+   "live_apps": [
+    [
+     "Ford",
+     "Focus",
+     2015,
+     2015
+    ],
+    [
+     "Ford",
+     "Transit Connect",
+     2015,
+     2015
+    ]
+   ],
+   "live_note": "Ford catalog lists #6CPZ-5423395-A for both — window motor only; trim-limited; verify the number on the part",
+   "live_id": "oem:ford:window-regulator:FL+FR+RL+RR+SL+SR:7c70e98fa5",
+   "verdict": "b",
+   "evidence": "2015 Focus rear-door seed page (product L998 and siblings): 6CPZ-5423395-A 'With Electric Rear Windows' vs 6CPZ-5423395-C 'Power Rear Window One Shot Up/Down', no body word on any sibling. 2015 Transit Connect (L334) 'With Dual Side Load Doors, With Kerbside Side Load Doors, With Electric Rear Windows' is covered by the live 'trim-limited' note. Supported for both Focus bodies; removal loses a true claim."
+  },
+  {
+   "item": "R04",
+   "ns": "ford",
+   "kind": "REMOVED",
+   "cat": "window-regulator",
+   "pn": [
+    "CV6Z-5423395-B"
+   ],
+   "live_apps": [
+    [
+     "Ford",
+     "C-Max",
+     2013,
+     2013
+    ],
+    [
+     "Ford",
+     "Focus",
+     2012,
+     2012
+    ]
+   ],
+   "live_note": "Ford catalog lists #CV6Z-5423395-B for both — window motor only; fits some configurations; verify the number on the part",
+   "live_id": "oem:ford:window-regulator:FL:08dc2c924f",
+   "verdict": "b",
+   "evidence": "Driver-side twin of R02: CV6Z-5423395-B 'Power Front Windows One Touch Up/Do' on the 2012 Focus seed page (product L145) and the 2013 C-Max page (L283). No body word. Removal loses a true claim."
+  },
+  {
+   "item": "R05",
+   "ns": "gm",
+   "kind": "REMOVED",
+   "cat": "window-switch",
+   "pn": [
+    "95188244"
+   ],
+   "live_apps": [
+    [
+     "Chevrolet",
+     "Sonic",
+     2013,
+     2013
+    ],
+    [
+     "Chevrolet",
+     "Trax",
+     2016,
+     2016
+    ]
+   ],
+   "live_note": "GM catalog lists #95188244 for both — fits some configurations; verify the number on the part",
+   "live_id": "oem:gm:window-switch:DM:40fce38b64",
+   "verdict": "b",
+   "evidence": "Product L590 FIT '2012-2016 Chevrolet Sonic | ... | 4 DOOR HATCHBACK, 4 DOOR NOTCHBACK, LS 4 DOOR NOTCHBACK/SEDAN, LS 5 DOOR HATCHBACK, ...' (both Sonic bodies); 2016 Trax page (gmpartsgiant.lists L58) lists it. The driver window switch fits every body named. Removal loses a true claim."
+  },
+  {
+   "item": "R06",
+   "ns": "gm",
+   "kind": "REMOVED",
+   "cat": "side-mirrors",
+   "pn": [
+    "22728842"
+   ],
+   "live_apps": [
+    [
+     "Chevrolet",
+     "Cavalier",
+     2003,
+     2003
+    ],
+    [
+     "Pontiac",
+     "Sunfire",
+     1999,
+     1999
+    ],
+    [
+     "Pontiac",
+     "Sunfire",
+     2005,
+     2005
+    ]
+   ],
+   "live_note": "GM catalog lists #22728842 for both — option: fits some option packages; verify the number on the part",
+   "live_id": "oem:gm:side-mirrors:R:515f4d0383",
+   "verdict": "a",
+   "evidence": "1999 and 2005 Sunfire pages (L1074/L1052): 22728842 'Fitting Vehicle Options: J(37)(DG7)' (GM body style 37 = 2-door coupe); sedan J(69) uses 22728844, convertible J(67) uses 88892500. FIT '2 DOOR' only. The live group showed 2003 Cavalier sedans (53 on the lot) and 1999 Sunfire sedans/convertibles. Removal correct."
+  },
+  {
+   "item": "R07",
+   "ns": "gm",
+   "kind": "REMOVED",
+   "cat": "window-regulator",
+   "pn": [
+    "88960088"
+   ],
+   "live_apps": [
+    [
+     "Chevrolet",
+     "Camaro",
+     1995,
+     1995
+    ],
+    [
+     "GMC",
+     "Safari",
+     1997,
+     1997
+    ],
+    [
+     "Pontiac",
+     "Firebird",
+     1995,
+     1995
+    ]
+   ],
+   "live_note": "GM catalog lists #88960088 for both — window motor only; fits some configurations; verify the number on the part",
+   "live_id": "oem:gm:window-regulator:FL+FR:fc32b8c33c",
+   "verdict": "b",
+   "evidence": "Product L2690 FIT 'Camaro | ... | 2 DOOR, CONVERTIBLE' and 'Firebird | ... | 2 DOOR, CONVERTIBLE, COUPE'; 1995 Camaro and Firebird door pages (L122/L2686) list 88960088 with no body code; 1997 Safari 2wd and awd power-window pages (L1720/L1732) list it. Supported for every body; removal loses a true claim."
+  },
+  {
+   "item": "R08",
+   "ns": "gm",
+   "kind": "REMOVED",
+   "cat": "side-mirrors",
+   "pn": [
+    "15943864"
+   ],
+   "live_apps": [
+    [
+     "Chevrolet",
+     "Cobalt",
+     2007,
+     2007
+    ],
+    [
+     "Pontiac",
+     "G5",
+     2007,
+     2007
+    ]
+   ],
+   "live_note": "GM catalog lists #15943864 for both — option: fits some option packages; verify the number on the part",
+   "live_id": "oem:gm:side-mirrors:R:27daae1592",
+   "verdict": "a",
+   "evidence": "2007 G5 page (L1535): 15943864 'AJ(37)(DC8)' (coupe); the sedan mirror is 15943877 'AJ(69)(DC8)'. FIT 'Cobalt | 2 DOOR', 'G5 | 2 DOOR'. The live group showed 2007 Cobalt sedans (152 decoded on the lot). Removal correct."
+  },
+  {
+   "item": "R09",
+   "ns": "gm",
+   "kind": "REMOVED",
+   "cat": "window-regulator",
+   "pn": [
+    "22730703"
+   ],
+   "live_apps": [
+    [
+     "Oldsmobile",
+     "Alero",
+     2001,
+     2001
+    ],
+    [
+     "Pontiac",
+     "Grand Am",
+     2004,
+     2004
+    ]
+   ],
+   "live_note": "GM catalog lists #22730703 for both — regulator with motor; fits some configurations; verify the number on the part",
+   "live_id": "oem:gm:window-regulator:RL:ed73a04832",
+   "verdict": "a",
+   "evidence": "Rear-door regulator: 2001 Alero rear-door page (L610) and product L1710 FIT 'Alero | GL SEDAN 4 DOOR, LEVEL II SEDAN 4 DOOR', 'Grand Am | GT 4 DOOR, SE 4 DOOR'. Coupes have no rear doors; the live group showed Alero 2001 (9) and Grand Am 2004 (12) coupes. Removal correct."
+  },
+  {
+   "item": "R10",
+   "ns": "gm",
+   "kind": "REMOVED",
+   "cat": "window-regulator",
+   "pn": [
+    "15218050"
+   ],
+   "live_apps": [
+    [
+     "Chevrolet",
+     "Cavalier",
+     2003,
+     2003
+    ],
+    [
+     "Pontiac",
+     "Sunfire",
+     1999,
+     1999
+    ],
+    [
+     "Pontiac",
+     "Sunfire",
+     2005,
+     2005
+    ]
+   ],
+   "live_note": "GM catalog lists #15218050 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "live_id": "oem:gm:window-regulator:FR:e3fdc8a8c6",
+   "verdict": "a",
+   "evidence": "1999/2005 Sunfire front-door pages (L1077/L1055): 15218050 'J(37)(A31)' (coupe, power windows); the sedan is 15218059 'J(69)(A31)', the convertible 12362900 'J(67)'. FIT '2 DOOR'. Sedans and convertibles were shown. Removal correct."
+  },
+  {
+   "item": "R11",
+   "ns": "gm",
+   "kind": "REMOVED",
+   "cat": "side-mirrors",
+   "pn": [
+    "15943877"
+   ],
+   "live_apps": [
+    [
+     "Chevrolet",
+     "Cobalt",
+     2007,
+     2007
+    ],
+    [
+     "Pontiac",
+     "G5",
+     2007,
+     2007
+    ]
+   ],
+   "live_note": "GM catalog lists #15943877 for both — option: fits some option packages; verify the number on the part",
+   "live_id": "oem:gm:side-mirrors:R:0607cca349",
+   "verdict": "a",
+   "evidence": "2007 G5 page (L1535): 15943877 'AJ(69)(DC8)' (sedan); FIT 'Cobalt | 4 DOOR', 'G5 | 4 DOOR'. The live group showed 2007 Cobalt coupes (112 decoded) and 2007 G5s (44+ decoded coupes). Removal correct."
+  },
+  {
+   "item": "R12",
+   "ns": "gm",
+   "kind": "REMOVED",
+   "cat": "window-regulator",
+   "pn": [
+    "22697442"
+   ],
+   "live_apps": [
+    [
+     "Oldsmobile",
+     "Alero",
+     2001,
+     2001
+    ],
+    [
+     "Pontiac",
+     "Grand Am",
+     2004,
+     2004
+    ]
+   ],
+   "live_note": "GM catalog lists #22697442 for both — option: fits some option packages; verify the number on the part",
+   "live_id": "oem:gm:window-regulator:FR:446b3e2a87",
+   "verdict": "a",
+   "evidence": "2001 Alero front-door page (L609): 22697442 'NK(69)(EXC A31)' (sedan, manual windows); the coupe uses 22697438 'NK(37)(EXC A31)'. FIT '4 DOOR' only. Coupes were shown. Removal correct."
+  },
+  {
+   "item": "R13",
+   "ns": "gm",
+   "kind": "REMOVED",
+   "cat": "window-regulator",
+   "pn": [
+    "16830436"
+   ],
+   "live_apps": [
+    [
+     "Chevrolet",
+     "Cavalier",
+     2003,
+     2003
+    ],
+    [
+     "Pontiac",
+     "Sunfire",
+     1999,
+     1999
+    ],
+    [
+     "Pontiac",
+     "Sunfire",
+     2005,
+     2005
+    ]
+   ],
+   "live_note": "GM catalog lists #16830436 for both — option: fits some option packages; verify the number on the part",
+   "live_id": "oem:gm:window-regulator:FR:a92c71a4ca",
+   "verdict": "a",
+   "evidence": "1999/2005 Sunfire pages (L1077/L1055): 16830436 'J(37)(EXC A31)' (coupe); sedan 16830432 'J(69)(EXC A31)'. FIT '2 DOOR'. Removal correct."
+  },
+  {
+   "item": "R14",
+   "ns": "gm",
+   "kind": "REMOVED",
+   "cat": "headlights",
+   "pn": [
+    "20964008"
+   ],
+   "live_apps": [
+    [
+     "Chevrolet",
+     "Cobalt",
+     2007,
+     2007
+    ],
+    [
+     "Pontiac",
+     "G5",
+     2007,
+     2007
+    ]
+   ],
+   "live_note": "GM catalog lists #20964008 for both — option: fits some option packages; verify the number on the part",
+   "live_id": "oem:gm:headlights:L:27c1dcc8ca",
+   "verdict": "b",
+   "evidence": "2007 G5 lamps page (L1533): 20964008 row has no body code ('Location: Driver Side'); product L512 FIT 'Cobalt | 2 DOOR, 4 DOOR, ...' and 'G5 | 2 DOOR, 4 DOOR, ...'. The lens variant (amber/smoked vs clear, 'USE 22740621') is covered by the option note. Supported for every body; removal loses a true claim."
+  },
+  {
+   "item": "R15",
+   "ns": "gm",
+   "kind": "REMOVED",
+   "cat": "window-regulator",
+   "pn": [
+    "22730702"
+   ],
+   "live_apps": [
+    [
+     "Oldsmobile",
+     "Alero",
+     2001,
+     2001
+    ],
+    [
+     "Pontiac",
+     "Grand Am",
+     2004,
+     2004
+    ]
+   ],
+   "live_note": "GM catalog lists #22730702 for both — regulator with motor; fits some configurations; verify the number on the part",
+   "live_id": "oem:gm:window-regulator:RR:4150c115a6",
+   "verdict": "a",
+   "evidence": "Passenger twin of R09: rear-door regulator 22730702 (L610; FIT 'SEDAN 4 DOOR' / '4 DOOR') shown for coupes. Removal correct."
+  },
+  {
+   "item": "R16",
+   "ns": "mopar",
+   "kind": "REMOVED",
+   "cat": "gauge-cluster",
+   "pn": [
+    "4602469AB"
+   ],
+   "live_apps": [
+    [
+     "Chrysler",
+     "Sebring",
+     2004,
+     2004
+    ],
+    [
+     "Dodge",
+     "Stratus",
+     2006,
+     2006
+    ]
+   ],
+   "live_note": "Mopar catalog lists #4602469AB for both — trim-limited; verify the number on the part",
+   "live_id": "oem:mopar:gauge-cluster:C:8b537ad6b7",
+   "verdict": "a",
+   "evidence": "2004 Sebring cluster page (jeeppartsdeal.lists L1444) 'Part Notes: Convertible, Special;Special'; 2006 Stratus 'Without Auto Stick'. The 2004 Sebring name also covers the Mitsubishi-built coupe (separate 2004-chrysler-sebring-coupe catalog in years.jsonl; 7 lot 2004 Sebrings carry 4C3 VINs, which vPIC labels Sedan). The coupe never carried this cluster, and the note leaves the sedan unclear. Removal correct."
+  },
+  {
+   "item": "R17",
+   "ns": "mopar",
+   "kind": "REMOVED",
+   "cat": "window-regulator",
+   "pn": [
+    "68023518AA"
+   ],
+   "live_apps": [
+    [
+     "Chrysler",
+     "Sebring",
+     2008,
+     2008
+    ],
+    [
+     "Dodge",
+     "Avenger",
+     2013,
+     2013
+    ]
+   ],
+   "live_note": "Mopar catalog lists #68023518AA for both — trim-limited; verify the number on the part",
+   "live_id": "oem:mopar:window-regulator:RR:50a583e4f3",
+   "verdict": "a",
+   "evidence": "2008 Sebring rear-door page (L421): 68023518AA 'Part Notes: Sedan,'. The convertible has no rear doors; the live group showed 2008 Sebring convertibles (84 decoded on the lot). Removal correct."
+  },
+  {
+   "item": "R18",
+   "ns": "mopar",
+   "kind": "REMOVED",
+   "cat": "side-mirrors",
+   "pn": [
+    "4806030AB"
+   ],
+   "live_apps": [
+    [
+     "Chrysler",
+     "Sebring",
+     2004,
+     2004
+    ],
+    [
+     "Dodge",
+     "Stratus",
+     2006,
+     2006
+    ]
+   ],
+   "live_note": "Mopar catalog lists #4806030AB for both — option: fits some option packages; verify the number on the part",
+   "live_id": "oem:mopar:side-mirrors:R:b498f1c24e",
+   "verdict": "a",
+   "evidence": "2004 Sebring sedan/convertible mirror page (moparpartsgiant.lists L370): 4806030AB 'Fitting Vehicle Options: 41 - SEDAN/QUAD CAB SWB'; the convertible uses 4806136AA/4806137AA '27 - 2-DR CONVERTIBLE'. FIT 'Sebring | ... Sedan'. The live group showed 60 decoded 2004 Sebring convertibles. Removal correct."
+  },
+  {
+   "item": "R19",
+   "ns": "mopar",
+   "kind": "REMOVED",
+   "cat": "window-regulator",
+   "pn": [
+    "68021447AA"
+   ],
+   "live_apps": [
+    [
+     "Chrysler",
+     "Sebring",
+     2008,
+     2008
+    ],
+    [
+     "Dodge",
+     "Avenger",
+     2013,
+     2013
+    ]
+   ],
+   "live_note": "Mopar catalog lists #68021447AA for both — trim-limited; verify the number on the part",
+   "live_id": "oem:mopar:window-regulator:FL+FR+RL+RR+SL+SR:8acd6beaec",
+   "verdict": "a",
+   "evidence": "2008 Sebring rear-door page (L421): 68021447AA 'Part Notes: Sedan,'; convertible window motors are 68027866AA/68027867AA ('200, Avenger; Left; Convertible', 2013 Avenger page L144). Convertibles were shown. Removal correct."
+  },
+  {
+   "item": "R20",
+   "ns": "subaru",
+   "kind": "REMOVED",
+   "cat": "climate-control",
+   "pn": [
+    "72311AE06B"
+   ],
+   "live_apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2001,
+     2001
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2001,
+     2001
+    ]
+   ],
+   "live_note": "Subaru catalog lists #72311AE06B for both — option: fits some option packages; verify the number on the part",
+   "live_id": "oem:subaru:climate-control:C:ea7caa716a",
+   "verdict": "a",
+   "evidence": "Not a body issue: 2001 Legacy pages (subarupartsdeal.lists L21/L109) and the Outback seed page (product L391) give 'S +W.(BRI+L+GT+OBK+OBKCW) +W.OBKLTD.MT, *W.OBKLTD.AT' (sedans and wagons). But the 2001 Outback H6 uses 72311AE11B ('FOR U.S.A.; W.EZ30D'), and FIT lists the Outback 2.5L H4 only, so L.L.Bean/VDC Outbacks (9+ on the lot) cannot carry it. Removal safe for an engine reason; under the RISK-tolerant reading this would be a lost claim."
+  },
+  {
+   "item": "R21",
+   "ns": "subaru",
+   "kind": "REMOVED",
+   "cat": "hood",
+   "pn": [
+    "57229AG04A9P"
+   ],
+   "live_apps": [
+    [
+     "Subaru",
+     "Legacy",
+     2005,
+     2005
+    ],
+    [
+     "Subaru",
+     "Outback",
+     2005,
+     2005
+    ]
+   ],
+   "live_note": "Subaru catalog lists #57229AG04A9P for both — Turbo hood (scoop cutout): Legacy GT / Outback XT only; verify the number on the part",
+   "live_id": "oem:subaru:hood:C:6779a48c93",
+   "verdict": "b",
+   "evidence": "2005 Legacy and 2005 Outback hood pages (L413/L306) both list 57229AG04A9P for 'S.(25GT+25GTLTD) +W.(25GT+25GTLTD) +WOBK.25GTLTD, S.25GLI +W.25GLI +WOBK.(25GT+25GLI)' (sedan and wagon turbo trims). The live note already said 'Turbo hood (scoop cutout): Legacy GT / Outback XT only'. Supported for every body named; removal loses a true claim. Apparent cause: curate._row_body_cover treats a Fitting Vehicle Options row as naming only body WORDS, and Subaru's S./W. codes are not words, so the row covers no body."
+  },
+  {
+   "item": "R22",
+   "ns": "subaru",
+   "kind": "REMOVED",
+   "cat": "headlights",
+   "pn": [
+    "84001FJ090"
+   ],
+   "live_apps": [
+    [
+     "Subaru",
+     "Impreza",
+     2012,
+     2012
+    ],
+    [
+     "Subaru",
+     "XV Crosstrek",
+     2013,
+     2013
+    ]
+   ],
+   "live_note": "Subaru catalog lists #84001FJ090 for both — option: fits some option packages; verify the number on the part",
+   "live_id": "oem:subaru:headlights:L:1e4e3fa05a",
+   "verdict": "c",
+   "evidence": "Own-page evidence only from the 2012 Impreza SEDAN page (product L464 seed 2012-subaru-impreza-sedan 'S.(20I+20IP+20IPP), *S.20IL.CVT'). The 5-door (about half of the lot's 2012 Imprezas decode Wagon) and the 2013 XV Crosstrek rest only on the aggregated FIT row (Impreza '... Sport ...', XV 'Limited, Premium'). Neither page is in the raw data to check for non-US configuration codes (the cause of the earlier Subaru WRONG 91036FJ100)."
+  },
+  {
+   "item": "R23",
+   "ns": "subaru",
+   "kind": "REMOVED",
+   "cat": "climate-control",
+   "pn": [
+    "72311FJ130"
+   ],
+   "live_apps": [
+    [
+     "Subaru",
+     "Impreza",
+     2012,
+     2012
+    ],
+    [
+     "Subaru",
+     "XV Crosstrek",
+     2013,
+     2013
+    ]
+   ],
+   "live_note": "Subaru catalog lists #72311FJ130 for both — option: fits some option packages; verify the number on the part",
+   "live_id": "oem:subaru:climate-control:C:d394abb7da",
+   "verdict": "c",
+   "evidence": "Same as R22: 72311FJ130 'SINGLE AUTO; *S.20IL.CVT' from the sedan page only (product L487); 5-door 'Sport Limited' and XV 'Limited' only in the aggregated FIT row."
+  },
+  {
+   "item": "R24",
+   "ns": "subaru",
+   "kind": "REMOVED",
+   "cat": "climate-control",
+   "pn": [
+    "72311FJ050"
+   ],
+   "live_apps": [
+    [
+     "Subaru",
+     "Impreza",
+     2012,
+     2012
+    ],
+    [
+     "Subaru",
+     "XV Crosstrek",
+     2013,
+     2013
+    ]
+   ],
+   "live_note": "Subaru catalog lists #72311FJ050 for both — option: fits some option packages; verify the number on the part",
+   "live_id": "oem:subaru:climate-control:C:ecad08f072",
+   "verdict": "c",
+   "evidence": "Same as R22: 72311FJ050 'MANUAL; *S.20IPP, S.(20I+20IP)' from the sedan page only (product L485); 5-door 'Sport' and XV 'Premium' only in the FIT row."
+  },
+  {
+   "item": "R25",
+   "ns": "toyota",
+   "kind": "REMOVED",
+   "cat": "window-regulator",
+   "pn": [
+    "85710-53061"
+   ],
+   "live_apps": [
+    [
+     "Lexus",
+     "IS 250",
+     2013,
+     2013
+    ],
+    [
+     "Lexus",
+     "IS 350",
+     2012,
+     2012
+    ]
+   ],
+   "live_note": "Toyota catalog lists #85710-53061 for both — window motor only; fits some configurations; verify the number on the part",
+   "live_id": "oem:toyota:window-regulator:RL:a558342510",
+   "verdict": "a",
+   "evidence": "2012 IS 350 page (lexuspartsnow.lists L125) and 2013 IS 250 seed page (product L581): 'Production Date: from 10/2012'. MY2012 (07/2011-06/2012) has no overlap, so no 2012 IS 350 carries it (hub rule (a)). Removal correct."
+  },
+  {
+   "item": "R26",
+   "ns": "toyota",
+   "kind": "REMOVED",
+   "cat": "window-regulator",
+   "pn": [
+    "85720-53051"
+   ],
+   "live_apps": [
+    [
+     "Lexus",
+     "IS 250",
+     2013,
+     2013
+    ],
+    [
+     "Lexus",
+     "IS 350",
+     2012,
+     2012
+    ]
+   ],
+   "live_note": "Toyota catalog lists #85720-53051 for both — window motor only; fits some configurations; verify the number on the part",
+   "live_id": "oem:toyota:window-regulator:FL:3e5ec6fe2b",
+   "verdict": "a",
+   "evidence": "Same window as R25: 85720-53051 'from 10/2012' on the 2012 IS 350 page (L124) and the 2013 IS 250 seed page (product L579). Removal correct."
+  },
+  {
+   "item": "R27",
+   "ns": "toyota",
+   "kind": "REMOVED",
+   "cat": "window-regulator",
+   "pn": [
+    "85720-53061"
+   ],
+   "live_apps": [
+    [
+     "Lexus",
+     "IS 250",
+     2013,
+     2013
+    ],
+    [
+     "Lexus",
+     "IS 350",
+     2012,
+     2012
+    ]
+   ],
+   "live_note": "Toyota catalog lists #85720-53061 for both — window motor only; fits some configurations; verify the number on the part",
+   "live_id": "oem:toyota:window-regulator:RR:96041b764c",
+   "verdict": "a",
+   "evidence": "Same window as R25: 85720-53061 'from 10/2012' (L125; product L583). Removal correct."
+  },
+  {
+   "item": "R28",
+   "ns": "mopar",
+   "kind": "CHANGED",
+   "cat": "climate-control",
+   "pn": [
+    "4698199AG"
+   ],
+   "live_apps": [
+    [
+     "Chrysler",
+     "300M",
+     2002,
+     2002
+    ],
+    [
+     "Chrysler",
+     "Concorde",
+     2002,
+     2002
+    ],
+    [
+     "Chrysler",
+     "LHS",
+     2000,
+     2000
+    ],
+    [
+     "Chrysler",
+     "Sebring",
+     2004,
+     2004
+    ],
+    [
+     "Dodge",
+     "Intrepid",
+     2004,
+     2004
+    ]
+   ],
+   "live_note": "Mopar catalog lists #4698199AG for both — trim-limited; verify the number on the part",
+   "live_id": "oem:mopar:climate-control:C:d2ecfab57c",
+   "verdict": "a",
+   "evidence": "Narrowed (lost Chrysler Sebring 2004): on the 2004 Sebring A/C control page (jeeppartsdeal.lists L508) the sedan row is 4596277AB 'Sedan,' and 4698199AG is 'Convertible, With ATC;With ATC'. The coupe (separate catalog) is also covered by the name. 300M/Concorde/LHS/Intrepid stay ('With ATC' / no note). Dropping the Sebring is correct."
+  }
+ ]
+}

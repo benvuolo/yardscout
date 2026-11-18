@@ -62400,6 +62400,62 @@
     "77004-C1010"
    ],
    "reman": false
+  },
+  "hmg:981101M000": {
+   "cat": "wiper-motor",
+   "comp": "motor",
+   "evidence": [
+    "www.kiapartsnow.com:records:L3417"
+   ],
+   "names": [
+    "Motor Assy-Windshield Wiper"
+   ],
+   "pns": [
+    "981101M000"
+   ],
+   "reman": false
+  },
+  "hmg:981102W000": {
+   "cat": "wiper-motor",
+   "comp": "motor",
+   "evidence": [
+    "www.hyundaipartsdeal.com:records:L4056"
+   ],
+   "names": [
+    "Motor Assy-Windshield Wiper"
+   ],
+   "pns": [
+    "98110-2W000"
+   ],
+   "reman": false
+  },
+  "hmg:981103S000": {
+   "cat": "wiper-motor",
+   "comp": "motor",
+   "evidence": [
+    "www.hyundaipartsdeal.com:records:L4048"
+   ],
+   "names": [
+    "Motor Assy-Windshield Wiper"
+   ],
+   "pns": [
+    "98110-3S000"
+   ],
+   "reman": false
+  },
+  "hmg:98110A7000": {
+   "cat": "wiper-motor",
+   "comp": "motor",
+   "evidence": [
+    "www.kiapartsnow.com:records:L3397"
+   ],
+   "names": [
+    "Motor Assy-Windshield Wiper"
+   ],
+   "pns": [
+    "98110A7000"
+   ],
+   "reman": false
   }
  },
  "curate_version": "1.0",
@@ -71868,10 +71924,124 @@
    ],
    "reason": "conditional",
    "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013
+    ]
+   ],
+   "cars": 243,
+   "cat": "wiper-motor",
+   "id": "oem:hmg:wiper-motor:F:a27fb229ea",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #981101M000 for both — windshield wiper motor; fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:45:16Z",
+   "pn": [
+    "981101M000"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Hyundai",
+     "Santa Fe",
+     2013,
+     2013
+    ],
+    [
+     "Hyundai",
+     "Santa Fe Sport",
+     2013,
+     2013
+    ]
+   ],
+   "cars": 84,
+   "cat": "wiper-motor",
+   "id": "oem:hmg:wiper-motor:F:bd5f99a1b7",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #98110-2W000 for both — windshield wiper motor; fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T22:36:26Z",
+   "pn": [
+    "98110-2W000"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Hyundai",
+     "Azera",
+     2014,
+     2014
+    ],
+    [
+     "Hyundai",
+     "Sonata Hybrid",
+     2013,
+     2013
+    ]
+   ],
+   "cars": 31,
+   "cat": "wiper-motor",
+   "id": "oem:hmg:wiper-motor:F:3c95c43c7e",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #98110-3S000 for both — windshield wiper motor; fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T22:32:04Z",
+   "pn": [
+    "98110-3S000"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014
+    ]
+   ],
+   "cars": 164,
+   "cat": "wiper-motor",
+   "id": "oem:hmg:wiper-motor:F:924ddf7799",
+   "kind": "body",
+   "note": "Hyundai/Kia catalog lists #98110A7000 for both — windshield wiper motor; fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-09T21:41:56Z",
+   "pn": [
+    "98110A7000"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
   }
  ],
  "ns": "hmg",
- "policy_sha256": "7799c6db352532323d7353859aa608d265ce34b48a13daff705b7fab99065a28",
+ "policy_sha256": "1a082aeb1a3a0e3141217283eb46894dd2d93e326bfa723c3bfc1a6f91258266",
  "raw": {
   "commit": "dca9cd845f26337a4047b9176cc17929ffc984a3",
   "ref": "dca9cd845f26",

@@ -63,6 +63,14 @@ FLUSH_HOLD_DAYS = 8
 # repeated here so this module needs no import of the scraper; a test checks
 # the two agree.
 FLUSH_SHARE = 0.4
+# List jump (2026-11-18 follow-up): one scan adds cars under ids the yard
+# has never listed, at least JUMP_SHARE of the list and JUMP_MIN_CARS cars.
+# Marked like a flush (listFlushAt, listFlushWhy "jump"): the cars it
+# brought are not new arrivals. On the 10-25 .. 11-18 history the biggest
+# real set-out day was 18.9% of its list (Harry's Allentown, 11-14) and the
+# smallest jump 27.5% (Pull-N-Save Riverside, 10-31); ops/data.md lists all.
+JUMP_SHARE = 0.25
+JUMP_MIN_CARS = 50
 
 YARD_LIST_FIELDS = ["listChangedAt", "listState", "listReadAt", "listFlushAt"]
 
@@ -119,7 +127,8 @@ def id_fingerprint(ids) -> str:
 
 def update_list_freshness(prev: dict, prev_scraped_at: str | None, current: dict[str, list],
                           carried: set[str], now: str, date_fps: dict[str, str] | None = None,
-                          prev_ids=None, flush_share: float = FLUSH_SHARE) -> dict[str, dict]:
+                          prev_ids=None, flush_share: float = FLUSH_SHARE,
+                          seen_before=None) -> dict[str, dict]:
     """One scan's list freshness for every yard in `current` ({name: [car
     id, ...]}, the published payload, carried yards included).
 
@@ -130,11 +139,15 @@ def update_list_freshness(prev: dict, prev_scraped_at: str | None, current: dict
     this code ships): unchanged id|date fingerprint => the list has not
     changed since its lastChangedAt; anything else => changed now (the
     conservative side: it never claims a list is older than it is).
-    prev_ids(name) -> set of the last read car ids, or None; called only for
-    a yard that was frozen and has just changed (flush check).
+    prev_ids(name) -> set of the last read car ids, or None; called for a
+    yard whose list changed (flush and jump checks).
+    seen_before(name, ids) -> the subset of ids this yard listed at any time
+    before (the history DB); called only for a jump candidate. Without it
+    every added id counts as never listed (the cautious side: hold).
 
     Returns {name: {"listFingerprint", "listChangedAt", "listReadAt",
-    "listState", optional "listFlushAt", optional "flush": {...}}}."""
+    "listState", optional "listFlushAt" + "listFlushWhy" ("flush" | "jump"),
+    optional "flush": {...}, optional "jump": {...}}}."""
     out: dict[str, dict] = {}
     t_now = _p(now)
     for name, ids in current.items():
@@ -149,6 +162,7 @@ def update_list_freshness(prev: dict, prev_scraped_at: str | None, current: dict
             prev_scraped_at if p and not p.get("carried") and not p.get("missingScans") else None) \
             or p.get("lastChangedAt")
         flush_at = p.get("listFlushAt")
+        why = p.get("listFlushWhy") or "flush"
         info: dict = {}
         if not read:
             info = {"listFingerprint": p_fp or "", "listChangedAt": p_changed or p.get("lastChangedAt") or now,
@@ -163,22 +177,37 @@ def update_list_freshness(prev: dict, prev_scraped_at: str | None, current: dict
             info = {"listFingerprint": fp, "listChangedAt": p_changed or now, "listReadAt": now}
         else:
             info = {"listFingerprint": fp, "listChangedAt": now, "listReadAt": now}
+            before = prev_ids(name) if prev_ids else None
+            cur = {str(i) for i in ids} if before else None
             # Was it frozen as of the last time we READ it? Unread scans are
             # not frozen time (we cannot know the list did not change then).
             a, b = _p(p_changed), _p(p_read)
-            if a is not None and b is not None and full_business_days(a, b) >= FROZEN_BUSINESS_DAYS:
-                before = prev_ids(name) if prev_ids else None
-                if before:
-                    cur = {str(i) for i in ids}
-                    added, removed = len(cur - before), len(before - cur)
-                    share = max(added / max(len(cur), 1), removed / max(len(before), 1))
-                    info["flush"] = {"added": added, "removed": removed, "share": round(share, 3),
-                                     "frozenSince": p_changed}
-                    if share >= flush_share:
-                        flush_at = now
+            if before and a is not None and b is not None and full_business_days(a, b) >= FROZEN_BUSINESS_DAYS:
+                added, removed = len(cur - before), len(before - cur)
+                share = max(added / max(len(cur), 1), removed / max(len(before), 1))
+                info["flush"] = {"added": added, "removed": removed, "share": round(share, 3),
+                                 "frozenSince": p_changed}
+                if share >= flush_share:
+                    flush_at, why = now, "flush"
+            # List jump (any list, frozen or not): this one scan added cars
+            # under ids the yard has NEVER listed, for a large share of the
+            # list: a re-key, a coverage change, a source swap. Ids that come
+            # back (a flip between two lists, a partial read recovering) are
+            # not counted: they keep their own set-out dates and the alert
+            # dedupe already knows them (ops/data.md, 2026-11-18 list jumps).
+            if before and flush_at != now:
+                added_ids = cur - before
+                if len(added_ids) >= max(JUMP_MIN_CARS, JUMP_SHARE * len(cur)):
+                    back = seen_before(name, added_ids) if seen_before else set()
+                    never = len(added_ids) - len(back)
+                    info["jump"] = {"added": len(added_ids), "returning": len(back), "neverListed": never,
+                                    "share": round(never / max(len(cur), 1), 3)}
+                    if never >= JUMP_MIN_CARS and never >= JUMP_SHARE * len(cur):
+                        flush_at, why = now, "jump"
         f = _p(flush_at)
         if f is not None and t_now is not None and t_now - f < timedelta(days=FLUSH_HOLD_DAYS):
             info["listFlushAt"] = flush_at
+            info["listFlushWhy"] = why if flush_at == now else (p.get("listFlushWhy") or "flush")
         info["listState"] = list_state(info["listChangedAt"], now)
         out[name] = info
     return out
