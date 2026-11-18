@@ -66767,34 +66767,6 @@
    ],
    "reman": false
   },
-  "toyota:8571053051": {
-   "cat": "window-regulator",
-   "comp": "motor",
-   "evidence": [
-    "www.lexuspartsnow.com:records:L577"
-   ],
-   "names": [
-    "Motor Assy, Power Window Regulator, RH"
-   ],
-   "pns": [
-    "85710-53051"
-   ],
-   "reman": false
-  },
-  "toyota:8571053061": {
-   "cat": "window-regulator",
-   "comp": "motor",
-   "evidence": [
-    "www.lexuspartsnow.com:records:L581"
-   ],
-   "names": [
-    "Motor Assy, Power Window Regulator, LH"
-   ],
-   "pns": [
-    "85710-53061"
-   ],
-   "reman": false
-  },
   "toyota:8571053070": {
    "cat": "window-regulator",
    "comp": "motor",
@@ -66909,34 +66881,6 @@
    ],
    "pns": [
     "85720-33161"
-   ],
-   "reman": false
-  },
-  "toyota:8572053051": {
-   "cat": "window-regulator",
-   "comp": "motor",
-   "evidence": [
-    "www.lexuspartsnow.com:records:L579"
-   ],
-   "names": [
-    "Motor Assy, Power Window Regulator, LH"
-   ],
-   "pns": [
-    "85720-53051"
-   ],
-   "reman": false
-  },
-  "toyota:8572053061": {
-   "cat": "window-regulator",
-   "comp": "motor",
-   "evidence": [
-    "www.lexuspartsnow.com:records:L583"
-   ],
-   "names": [
-    "Motor Assy, Power Window Regulator, RH"
-   ],
-   "pns": [
-    "85720-53061"
    ],
    "reman": false
   },
@@ -89731,60 +89675,6 @@
    ],
    "cars": 6,
    "cat": "window-regulator",
-   "id": "oem:toyota:window-regulator:FR:0cf29b5926",
-   "kind": "body",
-   "note": "Toyota catalog lists #85710-53051 for both — window motor only; fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T05:54:57Z",
-   "pn": [
-    "85710-53051"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Lexus",
-     "IS 250",
-     2013,
-     2013
-    ],
-    [
-     "Lexus",
-     "IS 350",
-     2012,
-     2012
-    ]
-   ],
-   "cars": 6,
-   "cat": "window-regulator",
-   "id": "oem:toyota:window-regulator:RL:a558342510",
-   "kind": "body",
-   "note": "Toyota catalog lists #85710-53061 for both — window motor only; fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T05:55:37Z",
-   "pn": [
-    "85710-53061"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Lexus",
-     "IS 250",
-     2013,
-     2013
-    ],
-    [
-     "Lexus",
-     "IS 350",
-     2012,
-     2012
-    ]
-   ],
-   "cars": 6,
-   "cat": "window-regulator",
    "id": "oem:toyota:window-regulator:FR:464fa73faa",
    "kind": "body",
    "note": "Toyota catalog lists #85710-53070 for both — window motor only; fits some configurations; verify the number on the part",
@@ -90012,60 +89902,6 @@
     "85720-33161"
    ],
    "reason": "plant",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Lexus",
-     "IS 250",
-     2013,
-     2013
-    ],
-    [
-     "Lexus",
-     "IS 350",
-     2012,
-     2012
-    ]
-   ],
-   "cars": 6,
-   "cat": "window-regulator",
-   "id": "oem:toyota:window-regulator:FL:3e5ec6fe2b",
-   "kind": "body",
-   "note": "Toyota catalog lists #85720-53051 for both — window motor only; fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T05:55:13Z",
-   "pn": [
-    "85720-53051"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Lexus",
-     "IS 250",
-     2013,
-     2013
-    ],
-    [
-     "Lexus",
-     "IS 350",
-     2012,
-     2012
-    ]
-   ],
-   "cars": 6,
-   "cat": "window-regulator",
-   "id": "oem:toyota:window-regulator:RR:96041b764c",
-   "kind": "body",
-   "note": "Toyota catalog lists #85720-53061 for both — window motor only; fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T05:55:53Z",
-   "pn": [
-    "85720-53061"
-   ],
-   "reason": "conditional",
    "tier": "likely"
   },
   {
@@ -97423,7 +97259,7 @@
   }
  ],
  "ns": "toyota",
- "policy_sha256": "7799c6db352532323d7353859aa608d265ce34b48a13daff705b7fab99065a28",
+ "policy_sha256": "1a082aeb1a3a0e3141217283eb46894dd2d93e326bfa723c3bfc1a6f91258266",
  "raw": {
   "commit": "dca9cd845f26337a4047b9176cc17929ffc984a3",
   "ref": "dca9cd845f26",
