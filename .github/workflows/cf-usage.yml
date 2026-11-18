@@ -82,6 +82,39 @@ jobs:
               for h, c in hrs.items():
                   print(f"HOUR {h}: {sum(c.values()):>7,}  " + "  ".join(f"{k}={v:,}" for k, v in c.most_common()))
 
+          # 2b) CPU limit (2026-11-18, after Cloudflare's "Workers CPU limit exceeded" email):
+          # requests stopped for exceeding CPU, by hour and script, and CPU time
+          # per script and status (microseconds; the free plan allows 10 ms).
+          q = """query($a:String!,$s:Time!,$u:Time!){viewer{accounts(filter:{accountTag:$a}){
+                 workersInvocationsAdaptive(limit:500,filter:{datetime_geq:$s,datetime_lt:$u,status:"exceededResources"},orderBy:[datetimeHour_ASC]){
+                   sum{requests} dimensions{datetimeHour scriptName}}}}}"""
+          d, e = gql(q, {"a": acct, "s": since, "u": until})
+          if e: print("CPU exceeded by hour:", e)
+          else:
+              rows = (d["viewer"]["accounts"] or [{}])[0].get("workersInvocationsAdaptive", [])
+              print(f"CPU EXCEEDED total {sum(x['sum']['requests'] for x in rows):,}")
+              for x in rows:
+                  print(f"CPU EXCEEDED {x['dimensions']['datetimeHour'][5:13]} {x['dimensions']['scriptName']}={x['sum']['requests']:,}")
+          q = """query($a:String!,$s:Time!,$u:Time!){viewer{accounts(filter:{accountTag:$a}){
+                 workersInvocationsAdaptive(limit:100,filter:{datetime_geq:$s,datetime_lt:$u}){
+                   sum{requests} quantiles{cpuTimeP50 cpuTimeP90 cpuTimeP99 cpuTimeP999} dimensions{scriptName status}}}}}"""
+          d, e = gql(q, {"a": acct, "s": since, "u": until})
+          if e: print("CPU quantiles:", e)
+          else:
+              for x in (d["viewer"]["accounts"] or [{}])[0].get("workersInvocationsAdaptive", []):
+                  qq = x["quantiles"]
+                  print(f"CPU TIME {x['dimensions']['scriptName']}/{x['dimensions']['status']}: n={x['sum']['requests']:,} "
+                        f"p50={qq['cpuTimeP50']/1000:.1f}ms p90={qq['cpuTimeP90']/1000:.1f}ms p99={qq['cpuTimeP99']/1000:.1f}ms p99.9={qq['cpuTimeP999']/1000:.1f}ms")
+          q = """query($a:String!,$s:Time!,$u:Time!){viewer{accounts(filter:{accountTag:$a}){
+                 workersInvocationsAdaptive(limit:500,filter:{datetime_geq:$s,datetime_lt:$u,scriptName:"yardscout-api"},orderBy:[datetimeHour_ASC]){
+                   sum{requests} quantiles{cpuTimeP50 cpuTimeP99} dimensions{datetimeHour}}}}}"""
+          d, e = gql(q, {"a": acct, "s": since, "u": until})
+          if e: print("CPU api by hour:", e)
+          else:
+              for x in (d["viewer"]["accounts"] or [{}])[0].get("workersInvocationsAdaptive", []):
+                  qq = x["quantiles"]
+                  print(f"CPU API HOUR {x['dimensions']['datetimeHour'][5:13]} n={x['sum']['requests']:,} p50={qq['cpuTimeP50']/1000:.1f}ms p99={qq['cpuTimeP99']/1000:.1f}ms")
+
           # 3) Zone traffic: which paths and which clients.
           z = requests.get(f"{API}/zones?name=yardscout.io", headers=H, timeout=60)
           zj = z.json() if z.status_code == 200 else {}
