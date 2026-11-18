@@ -4139,3 +4139,210 @@ I read `live_diff_2026-11-18_rules.txt` and the "2026-11-18 Rules after the inde
 - The 1999 Tahoe/Yukon rear-door body point (Found item 3).
 
 **No disagreement on any verdict.**
+
+## 2026-11-18 Per-app gates on OEM groups (builder subagent of session_01LsgNuWEh1vdaDCtdP1jxMM, branch `interchange/gates-1118`)
+
+Hub brief: turn the §5.16 note limits ("Tahoe: 2WD only", "1500: 4WD only",
+"Q70: 3.7L, gas only", "crew cab only") into real per-app gates in the payload
+and docs/app.js; claims only down; sw jh-v212; test_model_map on the pinned
+inventory. Hub refinement mid-task: carry each drive limit's basis, word the
+unchecked kind honestly. Base rules-1118 (54d0784d), then origin/main b9785c22
+(rules-1118 merged) merged in. No fetch, crawl, dispatch, email or main push.
+
+### What the data carries
+
+- Curated group (`groups/<ns>.json`, Likely only): new optional field
+  `"gates": [[make, model, lo, hi, gate], ...]`, each run inside the group's own
+  apps. Apps, ids and claims are unchanged. `validate.gate_problem` / `_gates_ok`
+  hold the vocabulary and refuse a run outside the apps (V2):
+  - `drive`: classes of ONE family joined by "/": 2wd fwd rwd | 4wd awd a4wd;
+  - `drive_basis`: `stated` | `unchecked` (below);
+  - `body`: a silhouette (sedan coupe hatchback wagon suv pickup van
+    convertible) or a list; `cab`: "crew cab", "king cab", "supercrew"...;
+  - `eng`: ["3.7L", ...]; `fuel`: gas | hybrid | diesel; `trans`: MT | AT.
+- Payload (`docs/data/oem/<cat>.json`): the aftermarket row's 6-element shape,
+  position 4 unused. `_oem_gated_apps` splits a run where the gate changes and
+  raises on a gate outside the apps (the namespace is dropped, fail closed).
+  Example, gm 23227000:
+  `[["Cadillac","Escalade",2007,2007], ["Chevrolet","Tahoe",2007,2007,null,{"drive":"2wd","drive_basis":"unchecked"}]]`.
+  Old readers (`pfAppMatches`, measure.py, coverage_matrix.py, live_diff.py)
+  read a[0..3] only.
+- Note text unchanged, except unchecked drive limits (next section).
+- Body: no rule writes a body limit into a note today (the body-variant rule
+  drops the vehicle-year instead), so no group carries `body`. It is supported
+  end to end and tested.
+
+### Drive basis (hub refinement)
+
+`Curation.drive_basis`:
+- **stated**: every own-page row of the number names the drive itself (option
+  code, GM series letter, a drive note); or it sits on a drive-named page while
+  T's page of the other drive family was read IN THIS CATEGORY without the
+  number; or (fitment-row limits) another number's fitment row on T's page
+  names the other drive.
+- **unchecked**: everything else.
+
+Same gate for both. The note says "<model>: only 2WD checked" for unchecked.
+That is the hub's "checked for 2WD; 4WD not checked" in fewer characters: the
+long form pushes the four 2004 Trailblazer regulator notes over 160 and they
+would be refused. When every vehicle-year of a group is unchecked within one
+family under different labels, the family is named once ("only 2WD checked",
+C-Max 2WD + Focus FWD). Otherwise the restored CV6Z-5423394-B/-5423395-B notes
+reach 170 characters.
+
+App-years per make (shipped):
+
+| make | stated | unchecked | other gates |
+|---|---|---|---|
+| Chevrolet | 0 | 34 | fuel 11, cab 1 |
+| GMC | 2 (Yukon 2003 mirrors, both pages read) | 0 | cab 2 |
+| Ram | 2 (55277414AB/15AB, "6 - Lt. Duty DODGE 4WD") | 7 (climate 3, headlamps 4: fitment rows only) | |
+| Ford | 0 | 12 (Focus, Transit Connect, C-Max) | |
+| Mercedes-Benz | 0 | 2 (ML350 wheels) | |
+| Kia (hmg, held) | 44 | 0 | eng 81, trans 4 |
+| nissan candidate | Nissan 45, Infiniti 12 | 0 | cab 95, eng 86, fuel 113, trans 6 |
+
+- GM: 34 of 36 app-years unchecked (the verifier counted 30). I count "the 4wd
+  page read in this category" only, from a record seeded on it; pages read for
+  other categories do not count.
+
+### How the app applies it (docs/app.js OEM-GATE block, 9666-9810)
+
+`pfOemDonorGate` runs per donor in the OEM loop of `pfRunSearch` (10262).
+- Exclude: the car's own data contradicts the limit. Sources: VIN drive type,
+  decoded silhouette (extras body), listing / VIN series / single VIN trim (cab,
+  hybrid), extras engine and transmission. The donor is not offered for that
+  group.
+- Confirm: plain row.
+- Unknown: shown "if equipped" with a line naming the limit ("this part is
+  listed|checked for 2WD only — this donor's drivetrain isn't confirmed, check
+  the car"). "checked" is used when the basis is unchecked.
+- A seeker on a gated app gets a header line. An unconfirmed limit never
+  renders Verified. A group without a gate renders exactly as before.
+
+Unknown behaviour of the existing gates (line numbers on 54d0784d), copied:
+- Parts table, scraper/junkyard_scraper.py `match_vehicle`:
+  - drive 16555-16584: the decode names a gate class -> "vin"; the listing
+    names it -> "listing"; the decode names exactly one other class -> row
+    dropped; no decode, or a decode spanning classes -> "unconfirmed" ("if
+    equipped", $0 in ranking);
+  - body 16585-16598: the same; another decoded body -> dropped; no decode ->
+    "unconfirmed";
+  - manual 16545-16554: manual -> "vin"; a definite automatic -> dropped;
+    unknown -> "unconfirmed";
+  - hybrid gas-only rows 16502, 16522: hidden only when the listing or the VIN
+    trim/series says hybrid; otherwise shown with no flag.
+- Aftermarket gate, docs/app.js:
+  - pfAmBodyVerdict 9565, pfAmDriveVerdict 9576, pfAmGate 9588;
+  - donor loop 9694: 'exclude' rows dropped; 9699 and 9722: 'unconfirmed' kept
+    with "if equipped: this unit is listed for X only — ... isn't confirmed,
+    check the car";
+  - engine 9518 / 9702 / 9721: dropped only when the decode names another
+    displacement; unknown -> "engine not confirmed — check under the hood";
+  - transmission 9527 / 9704 / 9737: dropped on a known other class; unknown
+    -> "check the transmission".
+
+Choices the OEM gate makes, stated plainly:
+- Fuel "gas" follows the parts table: no extra line when nothing says hybrid.
+  It also excludes a decode that names Diesel, Electric, CNG, LPG or Fuel Cell.
+- "4x2" against an FWD-only or RWD-only limit, and any 4WD/AWD decode against
+  "4WD AUTO" (All-Mode), stay "if equipped".
+- A decode naming both families ("2WD/4WD", 13 cars) stays "if equipped". The
+  parts table and pfAmDriveVerdict would confirm it, which their own comment
+  says they should not.
+- 4WD vs AWD is exclusion, as pfAmDriveVerdict does.
+- An automated manual (AMT) counts as automatic, as the parts table does
+  (pfAmCarTrans calls it manual).
+- Cab is confirmed only by a cab phrase in the listing, the VIN series or a
+  single VIN trim; another named cab excludes. No decoded field holds the cab,
+  so on the lots it is almost always "if equipped".
+
+### Effect on the pinned inventory (main@a85c654), app code run in node
+
+(group, lot car) donor pairs, main -> branch:
+
+| ns | pairs main | pairs branch | excluded | if equipped |
+|---|---|---|---|---|
+| gm | 59,852 | 56,081 | 3,771 | 1,787 |
+| mopar | 116,281 | 115,939 | 342 | 27 |
+| ford | 27,335 | 27,335 | 0 | 3,858 |
+| mb | 243 | 243 | 0 | 2 |
+| toyota, subaru, vag, hmg | | unchanged | | |
+
+- Excluded pairs by distinct cars: Chevrolet 655, GMC 54, Ram 38. All are
+  drive exclusions; no fuel or cab exclusion on these lots.
+- GM cars that are a donor for no OEM group any more: 8,191 -> 8,152.
+- Nissan candidate (not shipped), same census: 3,676 pairs excluded (Nissan
+  1,647 cars, Infiniti 189); 6,190 "if equipped".
+
+### Live diff vs origin/main b9785c22 (`groups/_report/live_diff_2026-11-18_gates.txt`)
+
+- Groups: 0 added, 0 removed, 48 notes changed with apps unchanged (gm 34,
+  mopar 7, ford 6, mb 1: "only X checked").
+- Payload: 1,183 -> 1,183 groups, 0 added app-years. Gates added: gm 48
+  groups / 50 app-years, mopar 9 / 9, ford 6 / 12, mb 1 / 2.
+- Re-curated all 8 shipped namespaces on oem-raw@dca9cd845f26 (pinned
+  inventory/decodes). toyota, subaru and vag are byte-identical; hmg gains
+  gates on held groups only. Nissan re-curated on @57e8b5b99de0: 286 groups,
+  106 gated, no note changed; still `_report/nissan.candidate.json`, not shipped.
+
+### test_model_map
+
+Chose the pinned inventory. M1-M10 run on `a85c654:docs/data/inventory_live.json`,
+read with git and sha256-checked. In a shallow clone the M2-M10 block SKIPs
+with the reason. The live inventory is still validated and its findings are
+printed as REPORT lines, not failed. Move `PIN` when re-curating on a newer
+inventory. curate.py itself still refuses to run on live-map errors.
+
+### Tests
+
+- New `curation_tests/test_gates_1118.py` (38 checks): helpers, drive basis on
+  stubs, wording, validator, payload shape, committed files.
+- `pf_guards_unit.mjs` +39 checks. They pass on this app.js; 29 of them
+  fail on 54d0784d's app.js.
+- `part_finder_e2e.py` gains a real-payload check: 2007 Tahoe regulators from
+  90670; no row naming a gated number is a car its gate rules out; header
+  line. interchange_e2e.py covers no OEM donors and is unchanged.
+- curation_tests 22/22 files pass (Phase 2 parity SKIP unchanged);
+  oem_fitment/tests 42/42.
+- Full regression: see "Regression" below.
+
+### Noticed, not fixed
+
+- Ford Focus 2012/2015, C-Max 2013 and Transit Connect 2015 are FWD-only
+  models, but their "only FWD/2WD checked" gate puts 3,858 donor rows "if
+  equipped". vPIC returns no drive type for most Focus VINs. A curated
+  single-drive model table (like MODEL_BODY_TABLE) would drop these
+  non-material limits. Suggest it.
+- The verifier's other items are out of scope and untouched:
+  - Ford 6CPZ motors sit in different doors on Focus vs Transit Connect;
+  - Mopar "Up To 07/23/2012" production windows have no note;
+  - the 1999 Tahoe/Yukon "CLASSIC 4 DOOR" body point.
+- Body gates could let the body-variant rule keep vehicle-years instead of
+  dropping them. That adds claims back, so it is a hub/owner decision.
+- measure.py and coverage_matrix.py read OEM apps as ungated (a[0..3]), so
+  their coverage counts are slightly high where a gate excludes donors.
+- Shipped `_report/<ns>.json` curate reports were not regenerated (as on
+  rules-1118); only the groups and the nissan candidate were.
+
+### Regression
+
+`tools/regress.sh` on b9b3f9b1 (the code head; after it, only this ops
+section): **104 passed, 0 failed, 0 skipped**. That includes pf_guards_unit,
+test_am_gates, test_interchange, interchange_e2e, part_finder_e2e (the tahoe07
+gate checks: 33 rows, 34 naming a gated number, 0 ruled out) and both layout
+halves. backend/node_modules was a symlink to the main checkout's for the run;
+it is removed and was not committed.
+
+### For the hub
+
+1. Merge `interchange/gates-1118`? Every change narrows: 0 added groups,
+   0 added app-years, 48 notes reworded.
+2. Unknown drive on an "only X checked" limit: the donor is shown "if
+   equipped", the same rule as the existing gates. If the hub wants an
+   unknown-drive donor hidden for the unchecked kind ("never show unverified
+   fitment" read strictly), that is a one-line change in pfOemDonorGate. It
+   would also hide most Focus/C-Max/Transit Connect donors, where vPIC gives
+   no drive. I did not make it without a decision.
+3. Nissan: the candidate now carries 106 gated groups. The independent §11.4
+   sample WITH the gates is the next step in the hub's order.
