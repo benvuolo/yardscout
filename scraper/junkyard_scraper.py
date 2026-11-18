@@ -6503,6 +6503,56 @@ _gap_extend("xterra", parts=[
 
 # ---- end of §27 block
 
+# ---- 2026-11 §31 (PARTS_GAPS §31): next models by generic-only cars. Same
+# rule as §26: a mechanical row needs a catalog number (oem-raw) that lists
+# its window; "match part #" where several numbers share it. No editorial
+# source could be read this session, so standard A/C is not confirmed: the
+# A/C rows are option-flagged ("if equipped", $0 to ranking).
+_AC_OPT = {**_GAP_AC, "option": True}
+_AC_PN_OPT = {**_GAP_AC_PN, "option": True}
+# Pontiac Torrent 2006-09: A/C 19130251 lists 2006-2009; the 2006 pump
+# module kits (19122388 / 19370681 primary, 19122391 auxiliary) list 2006.
+_gap_extend("torrent", parts=[
+    *_per_gen([(2006, 2009)], [_AC_OPT]),
+    *_per_gen([(2006, 2006)], [_GAP_PUMP_PN]),
+])
+# Lincoln MKS 2009-16: A/C 8G1Z-19703-AA (2009-2012), FB5Z-19703-B
+# (2013-2016); pumps 8A5Z-9H307-A/B/C (2009), AA5Z-9H307-B and
+# AG1Z-9H307-A/C (2010-2012), DA5Z-9H307-F (2013-2016) and DG1Z-9H307-P
+# (2014-2016). Appearance cut at 2013 in FACELIFT_BREAKS.
+_gap_extend("mks", parts=[
+    *_per_gen([(2009, 2012), (2013, 2016)], [_AC_OPT]),
+    *_per_gen([(2009, 2009), (2010, 2012), (2013, 2016)], [_GAP_PUMP_PN]),
+])
+# Oldsmobile Alero 1999-2004 (N-body, as the Grand Am §19.2): pump modules
+# 19179627 (1999) and 88967294 (2000-2004); A/C 89018903 (3.4L, 1999-2004),
+# 89018887 (2.4L, 1999-2001), 89019330 (2002-2004): match part #.
+_gap_extend("alero", parts=[
+    *_per_gen([(1999, 1999), (2000, 2004)], [_GAP_PUMP]),
+    *_per_gen([(1999, 2004)], [_AC_PN_OPT]),
+])
+# Lincoln LS 2000-06: A/C BU2Z-19V703-KA / XW4Z-19703-AA (2000-2005) and
+# 2R8Z-19703-AA (2003-2005): match part #; 2R8Z-19V703-BA lists 2003-2006.
+# Pump 4W4Z-9H307-AA lists 2003-2005. Appearance cuts 2003 and 2006.
+_gap_extend("lincoln ls", parts=[
+    *_per_gen([(2000, 2005)], [_AC_PN_OPT]),
+    *_per_gen([(2006, 2006)], [_AC_OPT]),
+    *_per_gen([(2003, 2005)], [_GAP_PUMP]),
+])
+# Volvo S80 1999-2006 / 2007-16: A/C 8602621 (1999-2006); 36050840
+# (2008-2015, with 36050839 3.0L 2011 and 36050841 2.5L 2012-2015): match
+# part #; 2007 has only the 4.4L number, 2016 none. Pumps 30761743
+# (1999-2002); 30761742 (2003-2006) and 30761745 (AWD/R 2005-2006);
+# 31372880 (2007-2015) and 31372883 (2007-2014, by chassis number).
+_gap_extend("volvo s80", parts=[
+    *_per_gen([(1999, 2006)], [_AC_OPT]),
+    *_per_gen([(2008, 2015)], [_AC_PN_OPT]),
+    *_per_gen([(1999, 2002)], [_GAP_PUMP]),
+    *_per_gen([(2003, 2006), (2007, 2015)], [_GAP_PUMP_PN]),
+])
+
+# ---- end of §31 block
+
 _apply_consensus_evergreens()
 
 # §26.2: power windows and power mirrors were options on the S-Series (not
@@ -7033,6 +7083,23 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "mirage": [2017, 2021],          # 1999 rear-end-only revision left out
     "mirage g4": [2021],
     "venture": [2001],
+    # §30 (PARTS_GAPS §30): years where the oem-raw catalog numbers of two or
+    # more appearance parts (headlamps, tail lamps, grille, bumper covers)
+    # change at once inside a generation. Cited there, part by part.
+    "cr-v": [2005],                  # lamps and both bumper covers list 2002-2004; hood 2002-2006
+    "outback": [2008, 2013, 2018],   # 2008 lamps; 2013 grille, front bumper, headlamps; 2018 grille, both bumpers
+    "chrysler 300": [2015],          # LD: headlamps, tail lamps, grille, both bumpers change at 2015
+    "c-class": [2012, 2019],         # W204 lamps, bumpers, hood 2012; W205 lamps stop at 2018, new rear bumper 2019
+    "acura tl": [2007, 2012],        # 3rd gen tail lamps, bumpers to 2006; 4th gen lamps to 2011
+    "acadia": [2013],                # headlamps, tail lamps, grille, front bumper change at 2013
+    "f-250": [2011],                 # Super Duty headlamps, grille, front bumper change at 2011
+    "durango": [2014],               # WD headlamps, grille, front bumper to 2013; tail lamps change at 2014
+    "s10": [1998],                   # S10/Sonoma headlamps; Sonoma grille and front bumper change at 1998
+    "chrysler 200": [2015],          # every appearance number at hand starts 2015 (hood and fenders too)
+    # §31 (PARTS_GAPS §31)
+    "mks": [2013],                   # headlamps, tail lamps, grille list 2009-2012; rear bumper 2009-12 / 2013-16
+    "lincoln ls": [2003, 2006],      # headlamps and tail lamps list 2003-2005; fenders, front bumper 2000-2006
+    "volvo s80": [2004],             # tail lamps and a headlamp pair start 2004; pump/A/C numbers cover 1999-2002
 }
 # §22.10: gas-only rows hidden on hybrid listings. Hybrids of the families on
 # the lots generally start and charge through the hybrid system and use a
@@ -7064,6 +7131,75 @@ _HYBRID_KEEPS: dict[tuple[str, str], set[str]] = {
 PART_NUMBER_BREAKS: dict[tuple[str, str], list[int]] = {
     # Volvo mirror assemblies: 30744586/9 list 2004-2006, 31278733/9 2007-2011.
     ("volvo s40", "side mirrors"): [2007],
+    # §28 audit of the §13-22 pump and A/C rows against the oem-raw catalog
+    # records (PARTS_GAPS §28 has every number and year). A cut goes where
+    # the numbers change (no number lists both sides), where every number at
+    # hand stops inside the row's window (the other years keep their own
+    # window), and on both sides of a year that holds the outgoing and the
+    # incoming number. Hyundai/Kia/Nissan years that the catalog labels by
+    # production get a cut on both candidate years. Narrowing only.
+    ("camry", "a/c compressor"): [1993],                    # 88320-33030/-33060: 1993-1996
+    ("lesabre", "a/c compressor"): [1996],                  # 89018865: 1996-1999
+    ("lesabre", "fuel pump module"): [2004],                # 19369904 2000-03 / 19369903 2004-05
+    ("lacrosse", "a/c compressor"): [2012],                 # 2010-11 kits / 2012+ kits
+    ("lacrosse", "fuel pump module"): [2007, 2008, 2009],   # 2005-06 / 19370064 2007-08 / 23120337 2008-09
+    ("soul", "a/c compressor"): [2012],                     # 977012K600..K750: 2012-2013
+    ("soul", "fuel pump module"): [2017],                   # 31110B2500 etc.: 2014-2016
+    ("focus", "a/c compressor"): [2003],                    # 3S4Z/4S4Z numbers start 2003
+    ("explorer", "a/c compressor"): [1993],                 # FOTZ19703G: 1991-1992
+    ("explorer", "fuel pump module"): [2000],               # 1L2Z-9H307-GA: 2000-2001
+    ("compass", "a/c compressor"): [2009, 2010],            # 5058228AI 2007-08 ("2007-09") / 55111610AC 2009-17 ("2010-17")
+    ("kia rio", "a/c compressor"): [2016],                  # 977011R100: 2012-2015
+    ("kia rio", "fuel pump module"): [2016],                # 311101R500: 2012-2015
+    ("century", "a/c compressor"): [1987, 1993, 1994],      # 89018893 1987-92 / 1994-96 numbers
+    ("century", "fuel pump module"): [1987, 1988, 1993, 2000, 2004, 2005],
+    ("passat", "a/c compressor"): [2011],                   # 1K0-820-808-F: 2006-2010
+    ("passat", "fuel pump module"): [2011],                 # 3C8-919-051-A: 2006-2010
+    ("lucerne", "fuel pump module"): [2008],                # 19331979 / 19370076: 2006-2007
+    ("regal", "a/c compressor"): [2012],                    # 19419917 2011 / 23413999 2012-16
+    ("regal", "fuel pump module"): [2000, 2004],            # 19369955 2000-03 / 19369965 2004
+    ("tucson", "a/c compressor"): [2019],                   # 97701-D3200 etc.: 2016-2018
+    ("tucson", "fuel pump module"): [2014],                 # 31110-2S500 2009-13 (MPI) / -2S600 2014-15 (GDI)
+    ("sportage", "fuel pump module"): [2014, 2015],         # 311102S500 2010-13 / 311102S600 2014-15 (production years)
+    ("spectra", "a/c compressor"): [2007],                  # 977012F100 2003-06 / 977012F130 2007-09
+    ("spectra", "fuel pump module"): [2007],                # 311102F600: 2007-2009
+    ("legacy", "a/c compressor"): [1997],                   # 73111AC002: 1997-1999
+    ("legacy", "fuel pump module"): [1999, 2004, 2012, 2013],
+    ("galant", "fuel pump module"): [2002],                 # MR508283 1999-2001 / MR990817 2002-03
+    ("grand am", "fuel pump module"): [2000],               # 19179627 1999 / 88967294 2000-05
+    ("sorento", "fuel pump module"): [2006, 2007],          # 311503E500: "2006-2008" (production years)
+    ("five hundred", "fuel pump module"): [2006],           # 5G1Z-9H307-AA: 2005
+    ("optima", "a/c compressor"): [2008, 2009],             # 977013K125/K220 2006-08 / 977012G270, 3K520 2008-10
+    ("mkz", "fuel pump module"): [2010],                    # 7E5Z/8E5Z 2007-09 / AE5Z 2010-12
+    ("mkx", "a/c compressor"): [2008, 2011],                # 7T4Z-19703-A 2007 / BT4Z-19703-A 2011-15
+    ("mkx", "fuel pump module"): [2011],                    # 8T4Z-9H307-A/B 2007-10 / BT4Z, DT4Z 2011-15
+    ("malibu", "fuel pump module"): [1998, 2000],           # 19179627 1998-99 / 88967294 2000-05
+    ("tribute", "fuel pump module"): [2005, 2009],          # YFTT 2001-04 / ZZC1 2005-06; ZZC2 2008
+    ("uplander", "fuel pump module"): [2008],               # 19153047/19352897 2005-07 / 2310613x 2008-09
+    ("windstar", "fuel pump module"): [2001],               # XF2Z-9H307-BA 1999-2000 / 1F2Z-9H307-AA 2001-03
+    ("savana", "a/c compressor"): [2000, 2008, 2010, 2017],  # HT6 1996-99 / HU6 2000-02; 2003-07, 2008-09, 2010-16, 2017-24 kits
+    ("savana", "fuel pump module"): [2004, 2017],           # 19303373 2003 / 1933193x 2004-08; nothing lists 2017+
+    ("mariner", "fuel pump module"): [2007, 2009, 2011],    # 5L8Z 2005-06 / 8L8Z-9H307-C 2007-08; 8L8Z 2008 / 9L8Z 2009-10
+    ("spark", "a/c compressor"): [2014, 2015],              # 42787366 2013-14 / 94558242 2014-15 (build date)
+    ("sable", "a/c compressor"): [1993],                    # 5U2Z-19V703-KA: 1993-1995
+    ("mustang", "a/c compressor"): [2011],                  # 2010 numbers (AR3Z-19703-A/B, 8R3Z-19703-A) list 2010
+    ("mustang", "fuel pump module"): [2006, 2007],          # 6R3Z-9H307-AA: 2006
+    ("transit connect", "a/c compressor"): [2017, 2018, 2020],  # CV6Z-19703-L 2014-16 / GV6Z-19703-C/G 2018-19
+    ("transit connect", "fuel pump module"): [2019],        # DV6Z-9H307-F: 2014-2018
+    ("milan", "fuel pump module"): [2008, 2010],            # 7E5Z-9H307-S 2006-07 / 8E5Z-9H307-S 2008-09 / AE5Z 2010-11
+    ("encore", "a/c compressor"): [2022],                   # 42783843: 2013-2021
+    ("park avenue", "a/c compressor"): [1996],              # 89018865: 1996
+    ("park avenue", "fuel pump module"): [1998, 2004],      # 19369899/19369904 1998-2003 / 19369903 2004-05
+    ("scion xb", "a/c compressor"): [2013],                 # 88310-02520: 2008-2012
+    ("sonata", "fuel pump module"): [2001, 2002],           # 31110-38200 etc.: "2001-2005" (production years)
+    ("juke", "a/c compressor"): [2014, 2015],               # 92600-1KC1A 2011-12 / -1KC3A 2011-13
+    ("infiniti qx60", "a/c compressor"): [2017, 2018],      # 92600-1JA1A / -9NB0A: to 2016
+    ("infiniti qx60", "fuel pump module"): [2018, 2019],    # 17040-3KA1C: 2013-2017
+    # §30: Acura TL 3rd-gen headlamps 33101/33151-SEP-A02 list 2004-2005.
+    ("acura tl", "headlight"): [2006],
+    # §31: Volvo S80 headlamps: none listed before 2003 (30698xxx pairs list
+    # 2003-2006 / 2004-2006); 2nd-gen numbers list to 2014 or from 2015.
+    ("volvo s80", "headlight"): [2003, 2015],
 }
 
 _FACELIFT_SENSITIVE_RE = re.compile(

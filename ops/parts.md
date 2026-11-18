@@ -1,4 +1,4 @@
-# Parts workstream — status (updated 2026-11-17, §26 next block on branch parts/next-block-1117, not merged; earlier: §13–25)
+# Parts workstream — status (updated 2026-11-18, §28–31 on branch parts/next-block-1118, not merged; §26–27 merged 2026-11-18)
 
 Owns: parts entries and gap curation in `scraper/junkyard_scraper.py`
 (`_GAP_MECH`, `_gap_rows`, `_GAP_GENERIC_KEYS`, per-model blocks),
@@ -291,20 +291,21 @@ The generic-only count re-matches every distinct year/make/model in
 
 ## Next
 
-1. Sensors follow-up: research the not-researched ADAS cells (§24.2 list) and parking/rain sensors per model.
-2. Next block by generic-only cars: Volvo S40 (276), Saturn SL (267), Chevrolet Trax (266), Chevrolet Sonic (261), Ford Freestar (254), Ford Freestyle (252), Mitsubishi Mirage (233), Chevrolet Venture (226).
-   Research generations and facelifts with sources first. The Fiat 500L/500X
-   and Encore GX have evergreen-only entries awaiting their own research.
-3. Follow-up: "ES 300"/"ES 330" listings match both `lexus es` and the
-   overlay `es 300` entry (two "Lexus ES" cards). Merge the overlay rows
-   into `lexus es` and drop the duplicate (§20.5).
-4. Facelifts: §23 done (21 keys; Suburban/Tahoe/Yukon have no confirmed
-   year). Next by cars: CR-V, Murano, Acadia, Durango, Chrysler 300,
-   Sienna, Outback, C-Class, F-250, Acura TL, Express, Forester, S10,
-   Journey, Chrysler 200 (Journey/200 have no GENERATION_BREAKS; fine for
-   FACELIFT_BREAKS). Same rule: a cited source per year; single-component
-   years (grille-only, tail-only) and mid-year changes are not cuts.
-   Routing follow-up (§23.2): done in §23.6 (below).
+1. Sensors follow-up: research the not-researched ADAS cells (§24.2 list) and parking/rain sensors per model. Needs a source that names the sensor (not reachable on 2026-11-18, see §29–31 above).
+2. Next by generic-only cars (2026-11-18, after §31): Silverado 2500 (332;
+   HD rows need part numbers, §23.6), Altima 1998–2001 (219), Lumina (214;
+   sedan and APV records mixed), Sentra 1995–2001 (209), RDX (195),
+   Endeavor (191), Sunfire (190), Renegade (189), Cube (187), Outlook
+   (181). Same §26 rule (a catalog number per window). The Fiat 500L/500X
+   and Encore GX still have no catalog records.
+3. §28 follow-ups (hub decision): "match part #" names on the 45 confirmed
+   multi-number §13–22 rows; the same number audit for the evergreen
+   alternator/starter rows; a crawl seeded on the 32 no-number windows
+   (§28.3).
+4. Facelifts still open: Murano, Sienna, Forester, Journey, Express,
+   CR-V 2010/2015/2020, Suburban/Tahoe/Yukon, and an editorial cite for the
+   §30 years. `GENERATION_BREAKS["chrysler 200"] = [2015]` once a source
+   page can be read (the 2015 car is a new generation).
 5. When the daily email's "Most searched parts / cars (7 d)" has a week of
    data, let it reorder the list. Re-measure after each model.
 
@@ -441,3 +442,53 @@ compatibility." Basis and numbers per model: PARTS_GAPS §26.
   missing years.
 - No docs/data file ships with this change; it goes live with the next
   scan after merge.
+
+## §28 window audit (2026-11-18, hub brief; branch `parts/next-block-1118`, not merged)
+
+- Every §13–22 fuel pump and A/C row (205 windows, 55 entries) checked
+  against the `oem-raw` catalog numbers (read from git, no site contacted).
+  Rule, numbers and years per row: PARTS_GAPS §28.
+- 91 confirmed (a number lists the whole window); **64 corrected** on 40
+  entries (cut with `PART_NUMBER_BREAKS` where the numbers change, stop, or
+  a mid-year change makes one year hold both); 18 mismatched but not clear
+  (left, listed in §28.2); 32 with no number (left, §28.3).
+- Kia/Hyundai/Nissan catalogs label some years by production: there both
+  candidate years are cut; next-generation numbers are not cuts.
+- Narrowing only: 439 year/make/model combos (19,355 cars) get narrower
+  "fits" windows; no row, band, gate or status changed; coverage unchanged.
+- Not auditable (no crawl category): 93 fan windows, 36 AWD-unit/diff/
+  motor windows.
+- For the hub (§28.5): "match part #" naming on 45 confirmed multi-number
+  rows; the evergreen alternator/starter rows could get the same audit.
+
+## §29–31 (2026-11-18, same branch)
+
+- **§29 Lexus ES duplicate (Next item 3): done.** The overlay entry matched
+  "es 300"/"es 330" and created a second "Lexus ES" card. It now matches
+  `lexus es`; its two rows (window regulator, Mark Levinson option) end at
+  2006 (ES 300/330 years) and are bounded per generation. 778 cars; ES
+  300/330 listings show one card; 2 mislabeled 2007–08 "ES 300" listings
+  lose the two rows.
+- **§30 facelifts (Next item 4): 10 models**, years from `oem-raw`
+  appearance numbers (two or more parts change at once): CR-V 2005,
+  Outback 2008/2013/2018, Chrysler 300 2015, C-Class 2012/2019, Acura TL
+  2007/2012 (+ headlamp 2006), Acadia 2013, F-250 2011, Durango 2014, S10
+  1998, Chrysler 200 2015. 4,151 cars get narrower lamp windows. Not done
+  (no clean catalog change or no records): Murano, Sienna, Forester,
+  Journey, Express, CR-V 2010/2015/2020, Outback 2003.
+- **Network:** `en.wikipedia.org` and `www.consumerguide.com` do not
+  resolve from this session (§17–27 sources). No other web host was tried;
+  §30–31 rest on catalog records only. Allowing those two hosts would let
+  the next session cite editorial pages (facelift text, standard A/C).
+- **§31 next models (Next item 5): Torrent, MKS, Alero, Lincoln LS, S80**
+  (1,053 cars): pump and A/C rows windowed by catalog numbers; A/C rows
+  `option` (standard fitment not sourced); lamp cuts MKS 2013, LS
+  2003/2006, S80 2003/2004/2015.
+- **Coverage, same 336,827-car inventory (2026-11-18 file), origin/main
+  94286349 vs branch head:** generic-only 11,949 (3.55%) → 10,896 (3.23%);
+  no entry 12,228 (3.63%) unchanged. 569 year/make/model combos (25,337
+  cars) changed: narrower windows or added rows; the only rows lost are the
+  two mislabeled ES listings above.
+- **Not done: sensors (Next item 1).** No source at hand names a sensor:
+  the crawl has no sensor category and the editorial hosts are unreachable.
+- Tests: every `scraper/test_*.py` passes (33 files).

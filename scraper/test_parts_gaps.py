@@ -138,7 +138,7 @@ check("Camry 1998: no 2002+ rows (Entune, 17\"/18\" wheels)", not ({"Entune / To
 check("Camry 2004: one fuel pump row, fits 2002+ window", parts(2004, "Toyota", "Camry", FWD)["Fuel Pump Module (in-tank, test before listing)"]["fits"].startswith("2002"),
       parts(2004, "Toyota", "Camry", FWD)["Fuel Pump Module (in-tank, test before listing)"]["fits"])
 check("Camry 1995 / 1999: mechanical rows bounded to their own generation",
-      parts(1995, "Toyota", "Camry", FWD)["A/C Compressor (clutch spins free)"]["fits"] == "1992–1996"
+      parts(1995, "Toyota", "Camry", FWD)["A/C Compressor (clutch spins free)"]["fits"] == "1993–1996"
       and parts(1999, "Toyota", "Camry", FWD)["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1997–2001"
       and parts(1999, "Toyota", "Camry", FWD)["Sunroof Glass + Motor"]["fits"] == "1997–2001")
 check("Camry 1991: still outside the entry", not names(1991, "Toyota", "Camry", FWD))
@@ -217,6 +217,8 @@ check("§14: only gap-block entries are registered (no id reuse leaks)",
        "milan", "encore", "captiva sport", "park avenue", "scion xb 2008-2015", "sonata", "infiniti qx60", "escort", "ford zx2", "encore gx",
        # §27
        "xterra",
+       # §31
+       "torrent", "mks", "alero", "lincoln ls", "volvo s80",
        # §26
        "volvo s40", "saturn sl", "saturn sc", "saturn sw", "saturn s-series", "trax", "sonic", "freestar", "freestyle", "mirage 2014-2024", "mirage g4", "venture"},
       str(sorted({r[0] for r in js._GAP_BLOCK_ROWS})))
@@ -261,7 +263,7 @@ FOUR = {**SEDAN, "bodyClass": "Sport Utility Vehicle (SUV)/Multipurpose Vehicle 
 RWD = {**FOUR, "driveType": "RWD/Rear-Wheel Drive"}
 e93, e99 = parts(1993, "Ford", "Explorer", FOUR), parts(1999, "Ford", "Explorer", FOUR)
 check("§16 Explorer 1993/1999: pump in its generation, no electric-fan row", e93["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1991–1994"
-      and e99["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1995–2001" and "Radiator Fan Assembly" not in e99)
+      and e99["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1995–1999" and "Radiator Fan Assembly" not in e99)
 check("§16 Explorer 1999: 4WD decode confirms the shift motor; RWD decode excludes it",
       e99["Transfer Case Shift Motor (match part #)"]["trim_status"] == "vin" and "Transfer Case Shift Motor (match part #)" not in names(1999, "Ford", "Explorer", RWD))
 check("§16 Explorer 2004: none of the 1991-2001 rows", "Leather Power Driver Seat (Eddie Bauer/Limited)" not in names(2004, "Ford", "Explorer", FOUR))
@@ -275,14 +277,14 @@ check("§16 Compass: AWD decode confirms rear unit, FWD excludes; 2018 none", j0
 
 k09, k13 = parts(2009, "Kia", "Rio", FWD), parts(2013, "Kia", "Rio", FWD)
 check("§16 Rio 2009/2013: pump, fan, tail lights per generation; A/C 'if equipped' 2009, plain 2013", MECH3 <= set(k09) and MECH3 <= set(k13)
-      and k09["Tail Lights (pair, uncracked)"]["fits"] == "2006–2011" and k13["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2012–2017"
+      and k09["Tail Lights (pair, uncracked)"]["fits"] == "2006–2011" and k13["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2012–2015"
       and k09["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed" and k13["A/C Compressor (clutch spins free)"].get("trim_status") is None)
 check("§16 Rio 2013 hatch decode: hatch lamps VIN-confirmed; sedan excluded", parts(2013, "Kia", "Rio", HATCH)["Hatchback Tail Lights (pair, uncracked)"]["trim_status"] == "vin"
       and "Hatchback Tail Lights (pair, uncracked)" not in names(2013, "Kia", "Rio", SEDAN))
 
 b92, b02 = parts(1992, "Buick", "Century", FWD), parts(2002, "Buick", "Century", FWD)
 check("§16 Century 1992/2002: pump in its generation; A/C 'if equipped' 1992, plain 2002; 1984 none",
-      b92["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1986–1996" and b02["A/C Compressor (clutch spins free)"]["fits"] == "1997–2005"
+      b92["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1988–1992" and b02["A/C Compressor (clutch spins free)"]["fits"] == "1997–2005"
       and b92["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed" and b02["A/C Compressor (clutch spins free)"].get("trim_status") is None
       and "Fuel Pump Module (in-tank, test before listing)" not in names(1984, "Buick", "Century", FWD))
 check("§16 Century 2002: mirrors + Limited seat 'if equipped'", "Side Mirrors (pair)" in b02 and b02["Leather Power Driver Seat (Limited)"]["trim_status"] == "unconfirmed")
@@ -295,7 +297,7 @@ check("§16 Aveo: pump per window (2005 -> 2004-06, 2008 -> 2007-08, 2010 -> 200
 
 v03, v08 = parts(2003, "Volkswagen", "Passat", FWD), parts(2008, "Volkswagen", "Passat", AWD)
 check("§16 Passat 2003/2008: mechanical rows per generation; Monsoon 'if equipped' on B5 only", MECH3 <= set(v03) and MECH3 <= set(v08)
-      and v03["A/C Compressor (clutch spins free)"]["fits"] == "1998–2005" and v08["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2006–2011"
+      and v03["A/C Compressor (clutch spins free)"]["fits"] == "1998–2005" and v08["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2006–2010"
       and v03["Monsoon Amp + Speakers"]["trim_status"] == "unconfirmed" and "Monsoon Amp + Speakers" not in v08)
 check("§16 Passat 2008: AWD decode confirms 4Motion diff; FWD decode excludes", v08["4Motion Rear Differential (match part #)"]["trim_status"] == "vin"
       and "4Motion Rear Differential (match part #)" not in names(2008, "Volkswagen", "Passat", FWD))
@@ -367,14 +369,14 @@ check("§18 Spectra: pump per generation, none for ambiguous 2004; tails cut at 
 
 l97, l02, l13 = parts(1997, "Subaru", "Legacy", AWD), parts(2002, "Subaru", "Legacy", FWD), parts(2013, "Subaru", "Legacy", FWD)
 check("§18 Legacy: pump per generation; rear diff gated 1995-99 (AWD decode confirms), ungated 2000-04/2010-14",
-      l97["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1995–1999" and l02["Radiator Fan Assembly"]["fits"] == "2000–2004"
+      l97["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1995–1998" and l02["Radiator Fan Assembly"]["fits"] == "2000–2004"
       and l97["Rear Differential (match final-drive ratio)"]["trim_status"] == "vin"
       and "Rear Differential (match final-drive ratio)" not in names(1997, "Subaru", "Legacy", FWD)
       and l02["Rear Differential (match final-drive ratio)"].get("trim_status") is None and l13["Rear Differential (match final-drive ratio)"]["fits"] == "2010–2014")
 
 z08, z15 = parts(2008, "Lincoln", "MKZ", AWD), parts(2015, "Lincoln", "MKZ", FWD)
 check("§18 MKZ: rows per generation (new 2013 break); AWD gated; existing lamp rows cut at the 2010/2017 facelifts",
-      z08["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2007–2012" and z15["Radiator Fan Assembly"]["fits"] == "2013–2020"
+      z08["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2007–2009" and z15["Radiator Fan Assembly"]["fits"] == "2013–2020"
       and z08["AWD Rear Differential / Transfer Unit"]["trim_status"] == "vin" and "AWD Rear Differential / Transfer Unit" not in z15
       and z08["Headlights (clear, non-hazed)"]["fits"] == "2007–2009" and z15["Tail Lights (pair, uncracked)"]["fits"] == "2013–2016")
 
@@ -389,7 +391,7 @@ check("§18 Elantra XD: mech 2001-06; lamps 2001-03 (2004 facelift cut); hatch l
 m01, m08 = parts(2001, "Mitsubishi", "Galant", FWD), parts(2008, "Mitsubishi", "Galant", FWD)
 check("§19 Galant: mech per generation, A/C plain; tail lights cut at the 2002/2007/2009 facelifts",
       MECH3 <= set(m01) and MECH3 <= set(m08) and m08["A/C Compressor (clutch spins free)"].get("trim_status") is None
-      and m01["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1999–2003" and m01["Tail Lights (pair, uncracked)"]["fits"] == "1999–2001"
+      and m01["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1999–2001" and m01["Tail Lights (pair, uncracked)"]["fits"] == "1999–2001"
       and m08["Tail Lights (pair, uncracked)"]["fits"] == "2007–2008")
 
 a97, a03 = parts(1997, "Pontiac", "Grand Am", FWD), parts(2003, "Pontiac", "Grand Am", FWD)
@@ -402,7 +404,7 @@ check("§19 Grand Am: mech per generation; A/C plain 1997/2003, 'if equipped' 19
 
 r05, r08 = parts(2005, "Kia", "Sorento", FWD), parts(2008, "Kia", "Sorento", FWD)
 check("§19 Sorento: mech 2003-09; tails cut at the 2007 facelift; A/C plain 2005, 'if equipped' 2008",
-      MECH3 <= set(r05) and MECH3 <= set(r08) and r05["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2003–2009"
+      MECH3 <= set(r05) and MECH3 <= set(r08) and r05["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2003–2005"
       and r05["Tail Lights (pair, uncracked)"]["fits"] == "2003–2006" and r08["Tail Lights (pair, uncracked)"]["fits"] == "2007–2009"
       and r05["A/C Compressor (clutch spins free)"].get("trim_status") is None and r08["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed")
 
@@ -414,7 +416,7 @@ check("§19 Santa Fe: mech 2001-06; tails cut at the 2005 facelift; AWD coupling
 
 k09, k13 = parts(2009, "Lincoln", "MKX", AWD), parts(2013, "Lincoln", "MKX", FWD)
 check("§19 MKX: rows per generation (new 2016 break); PTU gated; THX 'if equipped'; lamps cut at the 2011 facelift",
-      MECH3 <= set(k09) and k09["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2007–2015"
+      MECH3 <= set(k09) and k09["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2007–2010"
       and k09["AWD Power Transfer Unit (PTU)"]["trim_status"] == "vin" and "AWD Power Transfer Unit (PTU)" not in k13
       and k13["THX II Amp + Speakers"]["trim_status"] == "unconfirmed" and "Revel Amp + Speakers" not in k13
       and k09["Tail Lights (pair, uncracked)"]["fits"] == "2007–2010" and k13["Headlights (clear, non-hazed)"]["fits"] == "2011–2015")
@@ -440,7 +442,7 @@ check("§19 CC: mech 2009-17; 4Motion diff gated 2009-16; lamps cut at the 2013 
 # §20
 c99, c02 = parts(1999, "Chevrolet", "Malibu", FWD), parts(2002, "Chevrolet", "Malibu", FWD)
 check("§20 Malibu 1997-2003: mech rows (A/C plain); sunroof/spoiler 'if equipped' 2000-03 only; 2005 keeps the Epsilon rows",
-      MECH3 <= set(c99) and c99["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1997–2003"
+      MECH3 <= set(c99) and c99["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1998–1999"
       and c02["Sunroof Glass + Motor"]["trim_status"] == "unconfirmed" and "LS Rear Spoiler" not in c99
       and parts(2005, "Chevrolet", "Malibu", FWD)["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2004–2007")
 
@@ -453,7 +455,7 @@ check("§20 Chevrolet Classic 2005: own N-body entry, rows bounded 2004-05, ever
 
 b03, b09 = parts(2003, "Mazda", "Tribute", FOUR), parts(2009, "Mazda", "Tribute", FWD)
 check("§20 Tribute: mech per generation; PTU on 4WD decodes only; tails cut at the 2005 facelift",
-      MECH3 <= set(b03) and b03["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2001–2006"
+      MECH3 <= set(b03) and b03["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2001–2004"
       and b09["Radiator Fan Assembly"]["fits"] == "2008–2011" and b03["AWD Power Transfer Unit (PTU)"]["trim_status"] == "vin"
       and "AWD Power Transfer Unit (PTU)" not in b09 and b03["Tail Lights (pair, uncracked)"]["fits"] == "2001–2004")
 
@@ -492,14 +494,14 @@ check("§20 Windstar: rows per generation (new 1999 break); sliding-door motor g
 
 g00, g10 = parts(2000, "GMC", "Savana", FWD), parts(2010, "GMC", "Savana", FWD)
 check("§20 Savana: pump bounded at the 2003 revision; A/C 'if equipped'; no electric-fan row; lamps cut at the 2003 facelift",
-      g00["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1996–2002" and g10["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2003–2024"
+      g00["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1996–2002" and g10["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2004–2016"
       and g10["A/C Compressor (clutch spins free)"]["trim_status"] == "unconfirmed" and "Radiator Fan Assembly" not in g10
       and g00["Headlights (clear, non-hazed)"]["fits"] == "1996–2002")
 
 # §21
 r06, r09 = parts(2006, "Mercury", "Mariner", AWD), parts(2009, "Mercury", "Mariner", FWD)
 check("§21 Mariner: rows per generation (new 2008 break); PTU on AWD decodes; sunroof gen 1 only; lamps bounded by generation",
-      MECH3 <= set(r06) and MECH3 <= set(r09) and r06["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2005–2007"
+      MECH3 <= set(r06) and MECH3 <= set(r09) and r06["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2005–2006"
       and r09["A/C Compressor (clutch spins free)"]["fits"] == "2008–2011" and r06["AWD Power Transfer Unit (PTU)"]["trim_status"] == "vin"
       and "AWD Power Transfer Unit (PTU)" not in r09 and "Sunroof Glass + Motor" not in r09 and r06["Tail Lights (pair, uncracked)"]["fits"] == "2005–2007")
 
@@ -548,7 +550,7 @@ check("§21 Stratus: JA rows 1995-2000; JR rows sedan-gated (sedan decode confir
 
 s05, s12 = parts(2005, "Ford", "Mustang", FWD), parts(2012, "Ford", "Mustang", FWD)
 check("§21 Mustang S197: pump + A/C per generation; Shaker 'if equipped' 2005-09; no fan row; lamps cut at the 2013 facelift",
-      s05["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2005–2009" and s12["A/C Compressor (clutch spins free)"]["fits"] == "2010–2014"
+      s05["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2005–2005" and s12["A/C Compressor (clutch spins free)"]["fits"] == "2011–2014"
       and s05["Shaker 500/1000 Amp + Subwoofer"]["trim_status"] == "unconfirmed" and "Shaker 500/1000 Amp + Subwoofer" not in s12
       and "Radiator Fan Assembly" not in s05 and s12["Headlights (clear, non-hazed)"]["fits"] == "2010–2012")
 
@@ -600,7 +602,7 @@ check("§23.5 Edge/Charger/Dakota/Grand Cherokee: Edge LED headlights cut at the
 # §22
 n08, n06 = parts(2008, "Mercury", "Milan", AWD), parts(2006, "Mercury", "Milan", AWD)
 check("§22 Milan: mech 2006-11; AWD unit 2007-11 only (AWD decode confirms 2008); lamps cut at the 2010 facelift",
-      MECH3 <= set(n08) and n08["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2006–2011"
+      MECH3 <= set(n08) and n08["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2008–2009"
       and n08["AWD Rear Differential / Transfer Unit"]["trim_status"] == "vin" and "AWD Rear Differential / Transfer Unit" not in n06
       and n08["Tail Lights (pair, uncracked)"]["fits"] == "2006–2009")
 
@@ -632,7 +634,7 @@ check("§22 Scion xB 2nd gen: mech 2008-15; lamps cut at the 2011 facelift and 2
 
 y01, y04 = parts(2001, "Hyundai", "Sonata", FWD), parts(2004, "Hyundai", "Sonata", FWD)
 check("§22 Sonata EF: mech 1999-2005 (A/C plain); sunroof 'if equipped'; lamps cut at the 2002 facelift; 2008 untouched",
-      MECH3 <= set(y01) and y01["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "1999–2005"
+      MECH3 <= set(y01) and y01["Fuel Pump Module (in-tank, test before listing)"]["fits"] == "2001–2001"
       and y04["A/C Compressor (clutch spins free)"].get("trim_status") is None and y04["Sunroof Glass + Motor"]["trim_status"] == "unconfirmed"
       and "Fuel Pump Module (in-tank, test before listing)" not in parts(2008, "Hyundai", "Sonata", FWD))
 
@@ -929,6 +931,107 @@ check("§26 no row crosses a PART_NUMBER_BREAKS year; every key names a real ent
       not _pnb and all(any(_re.sub(r" \d{4}-\d{4}$", "", k) == bk for k in js.UNOBTANIUM_DB) for bk, _t in js.PART_NUMBER_BREAKS), str(_pnb[:5]))
 check("§26 no radiator-fan row was added in this block",
       not any(p["name"] == _FAN for k in ("volvo s40", "saturn sl", "saturn sc", "saturn sw", "saturn s-series", "trax", "sonic", "freestar", "freestyle", "mirage 2014-2024", "mirage g4", "venture",) for p in js.UNOBTANIUM_DB[k]["top_parts"]))
+
+# §28 (PARTS_GAPS §28): the §13-22 pump and A/C windows cut where the
+# oem-raw catalog numbers change. Narrowing only: every year that had the
+# row still has it, with the same band, cost and gate.
+_PUMP, _AC = "Fuel Pump Module (in-tank, test before listing)", "A/C Compressor (clutch spins free)"
+check("§28 LeSabre: pump 2000-03 / 2004-05 (GM 19369904 / 19369903); A/C 1992-95 / 1996-99 (89018865); 1992-99 pump unchanged (not clear)",
+      parts(2002, "Buick", "LeSabre", FWD)[_PUMP]["fits"] == "2000–2003" and parts(2005, "Buick", "LeSabre", FWD)[_PUMP]["fits"] == "2004–2005"
+      and parts(1994, "Buick", "LeSabre", FWD)[_AC]["fits"] == "1992–1995" and parts(1998, "Buick", "LeSabre", FWD)[_AC]["fits"] == "1996–1999"
+      and parts(1997, "Buick", "LeSabre", FWD)[_PUMP]["fits"] == "1992–1999")
+check("§28 LaCrosse: pump 2005-06 / 2007 / 2008 (both numbers) / 2009; A/C 2010-11 / 2012-16; 2010-16 pump unchanged (not clear)",
+      [parts(y, "Buick", "LaCrosse", FWD)[_PUMP]["fits"] for y in (2005, 2007, 2008, 2009, 2013)] == ["2005–2006", "2007–2007", "2008–2008", "2009–2009", "2010–2016"]
+      and parts(2011, "Buick", "LaCrosse", FWD)[_AC]["fits"] == "2010–2011" and parts(2014, "Buick", "LaCrosse", FWD)[_AC]["fits"] == "2012–2016")
+check("§28 Savana: A/C (option) 1996-99 / 2000-02 / 2003-07 / 2008-09 / 2010-16 / 2017-24; pump 2003 / 2004-16 / 2017-24",
+      [parts(y, "GMC", "Savana", FWD)[_AC]["fits"] for y in (1998, 2001, 2005, 2009, 2012, 2020)]
+      == ["1996–1999", "2000–2002", "2003–2007", "2008–2009", "2010–2016", "2017–2024"]
+      and all(parts(y, "GMC", "Savana", FWD)[_AC]["trim_status"] == "unconfirmed" for y in (1998, 2020))
+      and [parts(y, "GMC", "Savana", FWD)[_PUMP]["fits"] for y in (2003, 2010, 2020)] == ["2003–2003", "2004–2016", "2017–2024"])
+check("§28 Kia/Hyundai/Nissan production-year labels: both candidate years cut (Sportage pump 2014, Sonata pump 2001, Juke A/C 2014, Sorento pump 2006 stand alone)",
+      parts(2014, "Kia", "Sportage", FWD)[_PUMP]["fits"] == "2014–2014" and parts(2016, "Kia", "Sportage", FWD)[_PUMP]["fits"] == "2015–2016"
+      and parts(2001, "Hyundai", "Sonata", FWD)[_PUMP]["fits"] == "2001–2001" and parts(2003, "Hyundai", "Sonata", FWD)[_PUMP]["fits"] == "2002–2005"
+      and parts(2014, "Nissan", "Juke", FWD)[_AC]["fits"] == "2014–2014" and parts(2006, "Kia", "Sorento", FWD)[_PUMP]["fits"] == "2006–2006")
+check("§28 Sportage A/C and Sorento A/C unchanged (the catalog's later numbers are the next generation)",
+      parts(2013, "Kia", "Sportage", FWD)[_AC]["fits"] == "2011–2016" and parts(2008, "Kia", "Sorento", FWD)[_AC]["fits"] == "2007–2009")
+check("§28 rows with a spanning number untouched (Accent 2006-11 A/C, Corolla 1998-2002 A/C, Santa Fe pump, Elantra XD pump)",
+      parts(2008, "Hyundai", "Accent", FWD)[_AC]["fits"] == "2006–2011" and parts(2000, "Toyota", "Corolla", FWD)[_AC]["fits"] == "1998–2002"
+      and parts(2004, "Hyundai", "Santa Fe", FWD)[_PUMP]["fits"] == "2001–2006" and parts(2004, "Hyundai", "Elantra", FWD)[_PUMP]["fits"] == "2001–2006")
+_28 = [k for k in js.PART_NUMBER_BREAKS if k[1] in ("a/c compressor", "fuel pump module")]
+_28_lost = []
+for (bk, tok), ys in js.PART_NUMBER_BREAKS.items():
+    if (bk, tok) not in _28:
+        continue
+    for k, e in js.UNOBTANIUM_DB.items():
+        if _re.sub(r" \d{4}-\d{4}$", "", k) != bk:
+            continue
+        rows = [p for p in e["top_parts"] if tok in p["name"].lower()]
+        for y in ys:
+            for yy in (y - 1, y):
+                if not (e["year_range"][0] <= yy <= e["year_range"][1]):
+                    continue
+                if any(p.get("yr_min", 0) <= y - 1 and p.get("yr_max", 9999) >= y for p in rows):
+                    _28_lost.append((k, tok, y, "crosses"))
+_28_band = {(p["low"], p["high"], p["cost"]) for (bk, tok) in _28 for k, e in js.UNOBTANIUM_DB.items()
+            if _re.sub(r" \d{4}-\d{4}$", "", k) == bk for p in e["top_parts"] if tok in p["name"].lower() and js._is_gap_row(p)}
+
+# §29 (PARTS_GAPS §29): the overlay "es 300"/"es 330" entry merged into
+# lexus es: one "Lexus ES" card; its two rows bounded to the ES 300/330
+# years and per generation; no 2007+ ES gets them.
+_es = {y: js.match_vehicle(y, "Lexus", "ES 300") for y in (1996, 2003, 2005)}
+check("§29 Lexus ES: one card for ES 300 / ES 330 / ES300 / ES listings; no 'es 300' entry",
+      all(len(js.match_vehicle(y, "Lexus", mo)) == 1 for y in (1996, 2003, 2005) for mo in ("ES 300", "ES 330", "ES300", "ES"))
+      and "es 300" not in js.UNOBTANIUM_DB, str({y: [m["display"] for m in ms] for y, ms in _es.items()}))
+check("§29 Lexus ES: window regulator per generation 1995-96 / 1997-2001 / 2002-06; Mark Levinson (option) 2002-06 next to the 2007+ row; none on 2008",
+      parts(1996, "Lexus", "ES 300")["Window Regulator + Motor (front)"]["fits"] == "1995–1996"
+      and parts(1999, "Lexus", "ES300")["Window Regulator + Motor (front)"]["fits"] == "1997–2001"
+      and parts(2005, "Lexus", "ES 330")["Window Regulator + Motor (front)"]["fits"] == "2002–2006"
+      and parts(2004, "Lexus", "ES 330")["Mark Levinson Amp + Speakers"]["trim_status"] == "unconfirmed"
+      and parts(2004, "Lexus", "ES 330")["Mark Levinson Amp + Speakers"]["fits"] == "2002–2006"
+      and not ({"Window Regulator + Motor (front)", "Mark Levinson Amp + Speakers"} & names(2008, "Lexus", "ES 350", FWD))
+      and "Mark Levinson Amp/Speakers" in names(2008, "Lexus", "ES 350", FWD)
+      and "Window Regulator + Motor (front)" not in names(1994, "Lexus", "ES 300", FWD))
+# §30 (PARTS_GAPS §30): facelift years from catalog appearance numbers.
+check("§30 facelift years from catalog numbers: CR-V 2005, Chrysler 300 2015, C-Class 2012/2019, Acura TL 2007/2012, Chrysler 200 2015 (+ Outback, Acadia, F-250, Durango, S10)",
+      js.FACELIFT_BREAKS["cr-v"] == [2005] and js.FACELIFT_BREAKS["chrysler 300"] == [2015] and js.FACELIFT_BREAKS["c-class"] == [2012, 2019]
+      and js.FACELIFT_BREAKS["acura tl"] == [2007, 2012] and js.FACELIFT_BREAKS["chrysler 200"] == [2015]
+      and js.FACELIFT_BREAKS["outback"] == [2008, 2013, 2018] and js.FACELIFT_BREAKS["acadia"] == [2013]
+      and js.FACELIFT_BREAKS["f-250"] == [2011] and js.FACELIFT_BREAKS["durango"] == [2014] and js.FACELIFT_BREAKS["s10"] == [1998])
+check("§30 lamp windows cut: CR-V 2003 / 2006, 300 2013 / 2016, C-Class 2017 / 2020, TL 2005 / 2006 / 2008 / 2013, 200 2012 / 2016",
+      parts(2003, "Honda", "CR-V", FWD)["Headlights (clear, non-hazed)"]["fits"] == "2002–2004"
+      and parts(2006, "Honda", "CR-V", FWD)["Tail Lights (pair, uncracked)"]["fits"] == "2005–2006"
+      and parts(2013, "Chrysler", "300")["HID/LED Headlights (pair)"]["fits"] == "2011–2014"
+      and parts(2016, "Chrysler", "300")["Chrome Grille"]["fits"] == "2015–2023"
+      and parts(2017, "Mercedes-Benz", "C-Class")["OEM LED Headlights"]["fits"] == "2015–2018"
+      and parts(2020, "Mercedes-Benz", "C-Class")["OEM LED Headlights"]["fits"] == "2019–2021"
+      and [parts(y, "Acura", "TL")["OEM HID Headlights"]["fits"] for y in (2005, 2006, 2008, 2013)] == ["2004–2005", "2006–2006", "2007–2008", "2012–2014"]
+      and parts(2012, "Chrysler", "200")["Headlights (clear, non-hazed)"]["fits"] == "2011–2014"
+      and parts(2016, "Chrysler", "200")["Headlights (clear, non-hazed)"]["fits"] == "2015–2017")
+# §31 (PARTS_GAPS §31): Torrent, MKS, Alero, Lincoln LS, S80 rows, each
+# window a catalog number's years; A/C "if equipped" (standard not sourced).
+_ACN, _ACP, _PN = "A/C Compressor (clutch spins free)", "A/C Compressor (clutch spins free, match part #)", "Fuel Pump Module (in-tank, match part #)"
+check("§31 Torrent: A/C 'if equipped' 2006-09; pump 'match part #' 2006 only; no fan row",
+      parts(2008, "Pontiac", "Torrent", AWD)[_ACN]["fits"] == "2006–2009" and parts(2008, "Pontiac", "Torrent", AWD)[_ACN]["trim_status"] == "unconfirmed"
+      and parts(2006, "Pontiac", "Torrent", AWD)[_PN]["fits"] == "2006–2006" and _PN not in names(2007, "Pontiac", "Torrent", AWD)
+      and "Radiator Fan Assembly" not in names(2007, "Pontiac", "Torrent", AWD))
+check("§31 MKS: A/C 2009-12 / 2013-16 'if equipped'; pump 2009 / 2010-12 / 2013-16 'match part #'; lamps cut at 2013",
+      [parts(y, "Lincoln", "MKS", FWD)[_PN]["fits"] for y in (2009, 2011, 2015)] == ["2009–2009", "2010–2012", "2013–2016"]
+      and parts(2014, "Lincoln", "MKS", FWD)[_ACN]["fits"] == "2013–2016" and parts(2014, "Lincoln", "MKS", FWD)[_ACN]["trim_status"] == "unconfirmed"
+      and parts(2011, "Lincoln", "MKS", FWD)["Headlights (clear, non-hazed)"]["fits"] == "2009–2012")
+check("§31 Alero: pump 1999 / 2000-04 (GM 19179627 / 88967294); A/C 'match part #' 1999-2004 'if equipped'",
+      parts(1999, "Oldsmobile", "Alero", FWD)[_PUMP]["fits"] == "1999–1999" and parts(2003, "Oldsmobile", "Alero", FWD)[_PUMP]["fits"] == "2000–2004"
+      and parts(2003, "Oldsmobile", "Alero", FWD)[_ACP]["trim_status"] == "unconfirmed")
+check("§31 Lincoln LS: A/C 'match part #' 2000-05, plain-name 2006, both 'if equipped'; pump 2003-05 only; lamps cut at 2003 and 2006",
+      parts(2001, "Lincoln", "LS", FWD)[_ACP]["fits"] == "2000–2005" and parts(2006, "Lincoln", "LS", FWD)[_ACN]["fits"] == "2006–2006"
+      and _PUMP not in names(2001, "Lincoln", "LS", FWD) and parts(2004, "Lincoln", "LS", FWD)[_PUMP]["fits"] == "2003–2005"
+      and parts(2004, "Lincoln", "LS", FWD)["Tail Lights (pair, uncracked)"]["fits"] == "2003–2005")
+check("§31 Volvo S80: A/C 1999-2006 and 2008-15 (none 2007, 2016); pump 1999-2002 / 2003-06 / 2007-15; headlamps 1999-2002 / 2003 / 2004-06 / 2007-14",
+      parts(2002, "Volvo", "S80", FWD)[_ACN]["fits"] == "1999–2006" and parts(2010, "Volvo", "S80", FWD)[_ACP]["fits"] == "2008–2015"
+      and not ({_ACN, _ACP} & names(2007, "Volvo", "S80", FWD)) and parts(2001, "Volvo", "S80", FWD)[_PUMP]["fits"] == "1999–2002"
+      and parts(2005, "Volvo", "S80", FWD)[_PN]["fits"] == "2003–2006" and parts(2012, "Volvo", "S80", FWD)[_PN]["fits"] == "2007–2015"
+      and [parts(y, "Volvo", "S80", FWD)["Xenon/HID Headlights (pair)"]["fits"] for y in (2000, 2003, 2005, 2010)] == ["1999–2002", "2003–2003", "2004–2006", "2007–2014"])
+check("§28 every cut names a pump or A/C row and none crosses; the cut rows keep the _GAP_MECH bands",
+      len(_28) >= 50 and not _28_lost and _28_band <= {(40, 90, 24), (60, 130, 40)}, str((_28_lost[:5], _28_band)))
 
 # 3. band sanity + lint
 bad = []
