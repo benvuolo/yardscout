@@ -25,6 +25,9 @@
  *              or once asked for, the Monday email is offered instead
  *   web free   the near-miss line ("Would have sent a push within hours")
  *              leaves out the cars the alert that is on covers
+ *   web free   the Cars watch strip, one model (case 11, 2026-11-18): asks for
+ *              the alert in the Monday email's place; "shown" sent once, in
+ *              view; one new watch, a copy of it sent; pending; rule 6
  *   iOS / Android shells: no card, no sentence, no request
  *
  * Run: node backend/test/free_email_alert_ui_e2e.mjs   (SHOTS=<dir> for screenshots;
@@ -559,6 +562,65 @@ try {
     const t = await toast();
     check('dismiss: the next watch offers the Monday email, not the alert again', /Monday email/.test(t) && !/Free email alert/.test(t), t);
     check('dismiss: nothing was sent', v.sent.length === 0);
+    await v.ctx.close();
+  }
+
+  /* ---- 11. the Cars watch strip asks for the alert for one model (2026-11-18) ---- */
+  {
+    // An earlier watch is stored (rule 6: it must come out byte for byte);
+    // the strip is for another model in range, taken from the list itself.
+    const v = await open(browser, { storage: { ...BASE_STORE, [WL]: ONE } });
+    // The whole scan in first, so no late render replaces the strip mid-case
+    // (that case is checked on purpose below).
+    await v.page.waitForFunction(() => liveComplete && document.querySelector('#live-grid .car-card'), null, { timeout: 180000 });
+    const pick = await v.page.evaluate(() => {
+      const c = getFilteredLive().find(x => x.make && x.model && !(x.make === 'Toyota' && x.model === '4Runner') && !isNoPickModel(x.make, x.model) && carSearchSetFilter(x.make, canonicalModel(x.make, x.model)));
+      if (!c) return null;
+      renderLive();
+      return { make: c.make, model: [...selectedModels][0] };
+    });
+    check('strip: a model in range to filter on', !!pick, JSON.stringify(pick));
+    const label = pick ? `${pick.make} ${pick.model}` : '';
+    await v.page.evaluate(() => { const s = document.querySelector('#live-grid .watch-strip'); if (s) s.scrollIntoView({ block: 'center' }); });
+    const strip = () => v.page.evaluate(() => { const s = document.querySelector('#live-grid .watch-strip'); return s ? { fa: s.classList.contains('strip-falert'), text: s.innerText.replace(/\s+/g, ' ').trim(),
+      ask: (s.querySelector('.mail-ask') || {}).innerText || '', inputs: [...s.querySelectorAll('.mail-ask input')].map(i => i.type), pro: !!s.querySelector('.mail-ask .pro-box, .mail-ask [onclick*="openUpgradeSheet"]') } : null; });
+    let s = await strip();
+    check('strip: one model, free web visitor: the free email alert for that car, in place of the Monday email', s && s.fa && s.text.includes(`Free email alert for ${label}: we email you when`)
+      && /within 50\smi, usually the same day\. One car, one address, no account\./.test(s.text) && !/Monday/.test(s.ask), JSON.stringify(s));
+    check('strip: one email field, no Pro prompt inside the ask', s && JSON.stringify(s.inputs) === '["email"]' && !s.pro && !/\bPro\b/.test(s.ask), JSON.stringify(s));
+    let ev = await v.events();
+    check('strip: "free alert shown" sent once it is on screen, "email asked" (the Monday offer) not at all', count(ev, 'free-alert-shown') === 1 && count(ev, 'email-asked') === 0, JSON.stringify(ev));
+    await v.page.evaluate(() => { renderLive(); renderLive(); });
+    await v.page.evaluate(() => document.querySelector('#live-grid .watch-strip').scrollIntoView({ block: 'center' }));
+    check('strip: ...and not again on a re-render', count(await v.events(), 'free-alert-shown') === 1);
+    await v.page.fill('#live-grid .strip-falert .mail-email', ' Visitor@Example.com ');
+    await v.page.click('#live-grid .strip-falert .mail-form .btn');
+    await v.page.waitForFunction(() => /Check your inbox/.test((document.querySelector('#live-grid .strip-falert') || {}).innerText || ''), null, { timeout: 8000 }).catch(() => {});
+    const wl = JSON.parse(await v.watches());
+    const req = v.sent.find(x => x.path === '/v1/free-alert/signup') || { body: { watch: {} } };
+    check('strip: exactly one new watch, made as the strip always made it (the list\'s 100 mi); the earlier one byte for byte (rule 6)',
+      wl.length === 2 && JSON.stringify(wl[0]) === JSON.stringify(JSON.parse(ONE)[0]) && `${wl[1].make} ${wl[1].model}` === label && wl[1].radiusMi === 100, JSON.stringify(wl));
+    check('strip: one request, a copy of the NEW watch (50 mi, rounded centre, no addedAt)', v.sent.length === 1 && req.body.email === EMAIL
+      && JSON.stringify(req.body.watch) === JSON.stringify({ make: pick.make, model: pick.model, yearMin: null, yearMax: null, lat: 33.45, lng: -112.07, radiusMi: 50 }) && !/addedAt/.test(JSON.stringify(req.body)), JSON.stringify(v.sent));
+    s = await strip();
+    check('strip: "check your inbox" for the alert, and the car is watched', /Check your inbox\. Tap the link we sent to v•••@example\.com to turn on your email alert for/.test(s.text) && s.text.includes(`Watching ${label}`), s.text);
+    const st = await v.state();
+    check('strip: the alert is pending in its own key, for the new watch', st && st.state === 'pending' && st.key === wl[1].addedAt && st.label === label && st.r === 50, JSON.stringify(st));
+    ev = await v.events();
+    check('strip: "free alert asked" sent once; no Monday-email event', count(ev, 'free-alert-asked') === 1 && count(ev, 'email-asked') === 0 && count(ev, 'email-submitted') === 0, JSON.stringify(ev));
+    // A later render (a scan coming in) shows the strip as watched: it still
+    // says the alert waits for the click, and goes on to say when it is on.
+    await v.page.evaluate(() => renderLive());
+    s = await strip();
+    check('strip: re-rendered as watched, it still says to check the inbox', s && !s.fa && s.text.includes(`Watching ${label}`) && /Check your inbox to turn on its email alert\./.test(s.text), s && s.text);
+    await v.page.evaluate(() => { const f = JSON.parse(localStorage.getItem('ys_falert')); localStorage.setItem('ys_falert', JSON.stringify({ ...f, state: 'on', sub: 'x.' + 'a'.repeat(64) })); renderLive(); });
+    s = await strip();
+    check('strip: ...and that its free email alert is on, once it is', s && /Its free email alert is on\./.test(s.text) && !/Check your inbox/.test(s.text), s && s.text);
+    await v.page.evaluate((p) => { localStorage.setItem('ys_falert', p); renderLive(); }, JSON.stringify(st));
+    await v.alerts();
+    check('strip: the Alerts card agrees (waiting for the click, that car)', /Check your inbox/.test((await v.card()).text) && (await v.card()).text.includes(label), (await v.card()).text);
+    check('strip: "shown" still once this visit', count(await v.events(), 'free-alert-shown') === 1);
+    check('strip: no page error, no dialog', !v.errors.length && !v.dialogs.length, JSON.stringify([v.errors, v.dialogs]));
     await v.ctx.close();
   }
 

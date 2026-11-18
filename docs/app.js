@@ -11198,8 +11198,14 @@ function watchStripHtml(nCars) {
   const sc = liveWatchScope();
   if (!sc) return '';
   if (sc.watched) {
+    // The strip's (or the card's, or the toast's) free email alert for this
+    // very car: a later render (a scan coming in) must not lose "check your
+    // inbox", so the watched strip says where the alert stands.
+    const fa = !IS_NATIVE && !isPro() && sc.models.length === 1 ? falertState() : null;
+    const faNote = fa && fa.label === falertLabel({ make: sc.make, model: sc.models[0], yrMin: sc.yrMin, yrMax: sc.yrMax })
+      ? (fa.state === 'on' ? ' Its free email alert is on.' : ' Check your inbox to turn on its email alert.') : '';
     return `<div class="watch-strip watching" style="grid-column:1/-1;">${ICON.check}
-      <span>Watching <strong>${escapeHtml(sc.label)}</strong> &mdash; ${IS_NATIVE ? 'we&rsquo;ll tell you when another lands' : 'new ones light up in Alerts'}.</span>
+      <span>Watching <strong>${escapeHtml(sc.label)}</strong> &mdash; ${IS_NATIVE ? 'we&rsquo;ll tell you when another lands' : 'new ones light up in Alerts'}.${faNote}</span>
       <button type="button" class="linklike" onclick="jhOpenAlertsTab()">Manage</button></div>`;
   }
   const r = activeZipCoords ? effectiveRadiusMi() : null;
