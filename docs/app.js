@@ -344,6 +344,8 @@ let pnpsaPricing = {};     // San Antonio Pick-N-Pull (Independent, TX): one yar
 let ryansPricing = {};     // Ryan's Pick-a-Part (Detroit MI): one yard-wide list
 let usautoPricing = {};    // US Auto Supply (Sterling Heights MI): one yard-wide list
 let upasPricing = {};      // U-Pull and Save (Pontiac MI): one yard-wide list
+let ifipullPricing = {};   // Intermountain Auto iPull (Idaho Falls ID): one yard-wide list (2026-11-18)
+let ssupullitPricing = {}; // S&S U-Pull-It (Lebanon MO): one yard-wide list (2026-11-18)
 
 /* utpap = exact "Part Description" from utpap.com/1064Carpricelist.php (Ogden pricelist iframe on ogden-prices page)
  * pyp = exact "Description" from pyp.com per-location PriceList API
@@ -817,6 +819,8 @@ const PRICING_FILES = [
   [l => l.startsWith("chuck & eddie's"), 'chuckeddies', d => d.forEach(p => { chuckeddiesPricing[p.description] = p; })],
   [l => l.startsWith('byot auto parts'), 'byot', d => d.forEach(p => { byotPricing[p.description] = p; })],
   [l => l.startsWith("wilbert's u-pull-it"), 'wilberts', d => d.forEach(p => { wilbertsPricing[p.description] = p; })],
+  [l => l.startsWith('intermountain auto ipull'), 'ifipull', d => d.forEach(p => { ifipullPricing[p.description] = p; })],
+  [l => l.startsWith('s&s u-pull-it'), 'ssupullit', d => d.forEach(p => { ssupullitPricing[p.description] = p; })],
   [l => l.startsWith('san antonio pick-n-pull'), 'pnpsa', d => d.forEach(p => { pnpsaPricing[p.description] = p; })],
   [l => l.startsWith("ryan's pick-a-part"), 'ryans', d => d.forEach(p => { ryansPricing[p.description] = p; })],
   [l => l.startsWith('us auto supply'), 'usauto', d => d.forEach(p => { usautoPricing[p.description] = p; })],
@@ -8209,6 +8213,8 @@ function yardPriceList(location) {
   else if (loc.startsWith("chuck & eddie's")) rows = fromList(chuckeddiesPricing);
   else if (loc.startsWith('byot auto parts')) rows = fromList(byotPricing);
   else if (loc.startsWith("wilbert's u-pull-it")) rows = fromList(wilbertsPricing);
+  else if (loc.startsWith('intermountain auto ipull')) rows = fromList(ifipullPricing);
+  else if (loc.startsWith('s&s u-pull-it')) rows = fromList(ssupullitPricing);
   // The independent San Antonio yard — NOT the Pick-n-Pull chain (whose
   // startsWith('pick-n-pull') branch above can never match this name).
   else if (loc.startsWith('san antonio pick-n-pull')) rows = fromList(pnpsaPricing);
