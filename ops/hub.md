@@ -1864,3 +1864,23 @@ nissan_verify_2026-11-18.json`, `removals_verify_2026-11-18.json`, section
   codes in the option column not read (may affect LIVE makes too: check),
   body check leans on lot vPIC bodies, engine/transmission splits get only
   "option", gas/hybrid pages, body codes not read as bodies.
+
+## 2026-11-18 17:58 UTC list jumps held from "new"; ops email names the site's stale yards
+
+`data/list-jumps-1118` (66e6e6b4; numbers in `ops/data.md`, "2026-11-18
+(later)"). A scan where a yard adds cars under ids it has NEVER listed
+(history DB) making up 25%+ of its list and 50+ cars is a jump: its cars
+get the flush mark (no alerts, not "new this week", no New badge) for 8
+days. Measured on 160 committed scans: catches all 15 re-key / source-swap
+events (Ryan's Detroit 10-26, U-Pull-It x5 10-28, Pull-N-Save x6 10-31,
+Midway x2 11-14), no real set-out day (largest real 18.9%, smallest jump
+27.5%). Ids that come back (Indy's 35 flips, Riverside's 13, partial reads)
+are not held: they keep their dates and the alert dedupe already stops
+them. Ops email: the per-yard list now uses `listState` (same yards and
+dates as the site) plus an "early warning" line a day earlier.
+Tests on the tree merged with main: 33 scraper tests and every API unit
+(incl. new `ops_yard_list_unit`) pass; builder's `e2e-ops` 154/154.
+Not done (saved_alerts.js, after the watertight merge): skip "leaving soon"
+at stale/frozen yards; send "gone" only after two missing commits and no
+flush mark. Flip-flopping feeds (Indy, Pull-N-Save Riverside) and the date
+fields of the 10-28/10-31 source changes: yards workstream.
