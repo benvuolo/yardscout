@@ -1930,3 +1930,28 @@ fields of the 10-28/10-31 source changes: yards workstream.
   utpap-orem-K026992 says "This yard's list has not changed since Oct 22,
   2026. Call before you go." Next: wire ifipull/ssupullit price lists and
   run gen_yard_site_links.py after the watertight merge.
+
+## 2026-11-18 ~19:20 UTC watertight batch to main (sw `jh-v210`, ca283423)
+
+`hub/watertight-merge-1118` = builder branch `hub/watertight-1117` (notes in
+`ops/growth.md`, "Watertight" and "Watertight, continued") + main of 19:00 +
+three hub commits: regress_unit lists API suites without node_modules
+(612b1a10), price sheets for Intermountain Idaho Falls and S&S Lebanon
+(1459c696), inventory links for the three new yards from
+`gen_yard_site_links.py` (ca283423).
+- In it: one shared outside-call / D1 budget per scan commit with the
+  dispatchers in priority order; the watch toast offers the free email alert;
+  the Parts tab re-runs its search when a late zip arrives; tests stop the
+  servers they start; `tools/regress.sh` (the whole regression under the lock).
+- Tests: full `tools/regress.sh` on fe91f512: 95 PASS, regress_unit FAIL and
+  6 API suites SKIP (no backend/node_modules in the worktree). Fixed the
+  test, linked node_modules: regress_unit + all six API suites PASS. After
+  merging main + the price sheets: --quick 71 PASS; interchange_e2e,
+  part_finder_e2e, pf_ux_e2e, cars_feed_e2e, card_share_e2e,
+  alert_freshness_e2e, e2e-ops, browser_e2e all PASS. After the yard links:
+  site-proxy units, yard_list units, card_share_e2e, cars_feed_e2e PASS.
+  Not run: map_regions_e2e (left out of the runner by design; needs outside
+  map servers); the layout check was not repeated after the merge (main's
+  changes since were data and server-side).
+- The strip builder (`growth/strip-falert-1118`) was told the toast is done
+  and to merge this head.
