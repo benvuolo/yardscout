@@ -1349,6 +1349,8 @@ class Curation:
         self.likely_note_restricted = Counter()
         self.likely_body_mixed = Counter()        # cat -> vehicle-years left out by the §5.16 body-variant rule
         self.likely_engine_conflict = Counter()   # cat -> Infiniti vehicle-years whose fitment rows name other engines
+        self.likely_drive_dropped = Counter()     # cat -> vehicle-years left out by the §5.16 drive rule (ambiguous)
+        self.likely_drive_noted = Counter()       # cat -> groups whose note names a drive limit
         self.likely_generation_cut = Counter()     # cat -> vehicle-years cut at a generation break  # cat -> vehicle-years a class-wide note restricts away
         self.release_allow = policy.release_allowlist()   # §5.16 exact owner-approved releases
         self.release_notes = policy.release_notes()
@@ -1418,6 +1420,20 @@ class Curation:
                 Ts = Ts2
                 if len({(T[0], T[1]) for T in Ts}) < 2:
                     continue
+            drive_by_T = {}
+            if policy.LIKELY_DRIVE_RULE:
+                # §5.16 drive rule: a vehicle-year limited to one drive family is
+                # named in the note; ambiguous drive evidence leaves it out
+                for T in Ts:
+                    d = self.drive_of(c, cat, T)
+                    if d == DRIVE_AMBIGUOUS:
+                        self.likely_drive_dropped[cat] += 1
+                        continue
+                    drive_by_T[T] = d
+                if len(drive_by_T) != len(Ts):
+                    Ts = [T for T in Ts if T in drive_by_T]
+                    if len({(T[0], T[1]) for T in Ts}) < 2:
+                        continue
             if cat in policy.STRICT_NOTE_CATS:
                 why_s = self._strict_refusal(c, cat, [(T, m) for T, m in cand if T in set(Ts)], slots)
                 if why_s:
@@ -1426,12 +1442,21 @@ class Curation:
                     continue
             reason, text = _likely_reason(whys)
             text = policy.GROUP_NOTES.get((self.ns, cat, sorted(c.pns)[0]), text)
+            slot = "+".join(sorted(slots)) or "C"
             cab = self._cab_only(c, cat, Ts)
             if cab:
                 text = f"{text}; {cab}"
-                if len(_likely_note(brand, sorted(c.pns)[0], text, _pack_text(cat, c.packaging))) > policy.NOTE_MAX_LEN:
+                if not _likely_note_fits(brand, sorted(c.pns)[0], text, _pack_text(cat, c.packaging, slot)):
                     self.refuse("held_cab_qualifier", cat=cat, pn=sorted(c.pns)[0],
                                 evidence=[r.pointer for r in c.records], detail=cab)
+                    continue
+            drv = self._drive_note(drive_by_T)
+            if drv:
+                text = f"{text}; {drv}"
+                self.likely_drive_noted[cat] += 1
+                if not _likely_note_fits(brand, sorted(c.pns)[0], text, _pack_text(cat, c.packaging, slot)):
+                    self.refuse("held_drive_qualifier", cat=cat, pn=sorted(c.pns)[0],
+                                evidence=[r.pointer for r in c.records], detail=drv)
                     continue
             pns = sorted(c.pns)
             apps = _runs(Ts)
@@ -1444,6 +1469,8 @@ class Curation:
             released = rkey in self.release_allow
             if released and rkey in self.release_notes:
                 text = self.release_notes[rkey]     # the split its source states (hub 2026-11-09)
+                if drv:
+                    text = f"{text}; {drv}"         # §5.16 drive rule: the limit is never dropped
             if released:
                 self.released_exterior.append({"cat": cat, "pn": pns, "apps": apps})
             hold = policy.held_cross_model_cat(self.ns, cat)
@@ -1680,6 +1707,88 @@ class Curation:
             return self._nissan_cab_only(c, cat, Ts)
         return "; ".join(out)
 
+    # ------------------------------------------- §5.16 drive rule (2026-11-18)
+    def _gm_page_letters(self, T):
+        """GM series letters on every own page of T (all categories)."""
+        cache = self.__dict__.setdefault("_gm_letters", {})
+        if T not in cache:
+            letters = set()
+            for (t, _cat), rows in self.t_list_rows.items():
+                if t != T:
+                    continue
+                for lr in rows:
+                    for n in lr.notes:
+                        m = _FVO_BODY_RE.match(n or "")
+                        s = _gm_series_letters(m.group(1)) if m else None
+                        if s:
+                            letters |= s
+            cache[T] = frozenset(letters)
+        return cache[T]
+
+    def drive_of(self, c, cat, T):
+        """§5.16 drive rule: the drive classes T's evidence limits class c to,
+        None when nothing limits it, DRIVE_AMBIGUOUS when the evidence is
+        ambiguous or contradicts itself (the vehicle-year is left out)."""
+        gm_letters = self._gm_page_letters(T) if self.ns == "gm" else None
+        if self.t_list_rows.get((T, cat)):
+            own = [lr for lr in self.t_list_rows[(T, cat)]
+                   if policy.pn_key(self.ns, lr.pn) == c.key and lr.matched and not self.note_excludes(lr.notes, T)]
+            own_d = [_row_drive(lr.notes, lr.site, gm_letters, lr.variant) for lr in own]
+        else:
+            own = [r for r in self.t_seed_records.get((T, cat), [])
+                   if r.key == c.key and not self.note_excludes(r.note_texts, T)]
+            own_d = [_row_drive(r.note_texts, r.site, gm_letters, _catalog_of(r.list_url)) for r in own]
+        d_own = _drive_union(own_d) if own_d else None
+        fit = [f for (cc, r, f, t) in self.t_rows.get((T, cat), []) if cc is c]
+        d_fit = _drive_union([_fit_drive(f) for f in fit]) if fit else None
+        if DRIVE_AMBIGUOUS in (d_own, d_fit):
+            return DRIVE_AMBIGUOUS
+        if d_own is None or d_fit is None:
+            d = d_own if d_fit is None else d_fit
+        else:
+            d = d_own & d_fit
+            if not d:
+                return DRIVE_AMBIGUOUS
+        if d is None:
+            return None
+        # a feed model whose name states its drive ('Prius AWD-e')
+        mp, mn, _ = _drive_terms(T[1])
+        md = _drive_allowed(mp, mn)
+        if md:
+            return None if md <= d else DRIVE_AMBIGUOUS
+        return d
+
+    def _drive_note(self, drive_by_T) -> str:
+        """'<model>: 4WD only' per model whose vehicle-years are limited to one
+        drive family ('<model> 2005-2008: 4WD only' when only some are); one
+        '4WD only' when every vehicle-year of the group has the same limit."""
+        by = defaultdict(dict)
+        for T, d in drive_by_T.items():
+            by[(T[0], T[1])][T[2]] = _drive_label(d) if d else ""
+        labels = {lab for ys in by.values() for lab in ys.values()}
+        if labels == {""}:
+            return ""
+        if len(labels) == 1:
+            return f"{next(iter(labels))} only"
+        parts = []
+        for (mk, md), ys in sorted(by.items()):
+            labs = {lab for lab in ys.values()}
+            if labs == {""}:
+                continue
+            if len(labs) == 1:
+                parts.append(f"{md}: {next(iter(labs))} only")
+                continue
+            run = []
+            for y in sorted(ys):
+                if run and ys[y] == run[-1][2] and y == run[-1][1] + 1:
+                    run[-1][1] = y
+                else:
+                    run.append([y, y, ys[y]])
+            for a, b, lab in run:
+                if lab:
+                    parts.append(f"{md} {a}{'-' + str(b) if b != a else ''}: {lab} only")
+        return "; ".join(parts)
+
     # nissanpartsdeal option-column cab codes (interchange 2026-11-18): the
     # Frontier and Titan pages code each row "KC" (King Cab) or "CC" (Crew
     # Cab), e.g. 2010 Frontier climate controls 27510-9CA0A "CC. S" beside
@@ -1774,6 +1883,10 @@ class Curation:
                             getattr(self, "likely_body_mixed", Counter()).items())),
                         "likely_app_years_engine_conflict": dict(sorted(
                             getattr(self, "likely_engine_conflict", Counter()).items())),
+                        "likely_app_years_drive_ambiguous": dict(sorted(
+                            getattr(self, "likely_drive_dropped", Counter()).items())),
+                        "likely_groups_drive_noted": dict(sorted(
+                            getattr(self, "likely_drive_noted", Counter()).items())),
                         "blocked_sites": sorted(self.blocked),
                         "why_no_verified": _why_none(self), "gates": global_gates(self)},
             "funnel_cars": fz(funnel),
@@ -2473,6 +2586,262 @@ def _row_body_cover(notes, ctx) -> set | None:
     return named if unsafe else None
 
 
+# ------------------------------------------------ §5.16 drive rule (2026-11-18)
+# Drive classes. FOUR / TWO are the two families a yard car belongs to; a
+# restriction is material only when it leaves one family out.
+_FOUR = frozenset({"4wd", "awd"})
+_TWO = frozenset({"2wd", "fwd", "rwd"})
+_DRIVE_ALL = _FOUR | _TWO
+_DB = r"(?<![A-Za-z0-9/])"           # "6-1/4x4-3/4" (a Mopar mirror glass size) is no drive
+_DE = r"(?![A-Za-z0-9]|-\d|/\d)"
+_DRIVE_PATTERNS = (
+    # GM "FOR 2 OR 4 DOOR MODELS W/2 OR 4 WHEEL DRIVE": both families
+    (("2wd", "4wd"), re.compile(r"(?<![A-Za-z0-9])2\s*(?:OR|/|&)\s*4[\s-]*WHEEL[\s-]*DRIVE" + _DE, re.I)),
+    (("2wd", "4wd"), re.compile(_DB + r"4\s?X\s?2\s*(?:OR|/|&)\s*4\s?X\s?4" + _DE, re.I)),
+    (("4wd",), re.compile(_DB + r"(?:4\s?WD|4\s?X\s?4|FOUR[\s-]*WHEEL[\s-]*DRIVE|4[\s-]*WHEEL[\s-]*DRIVE)" + _DE, re.I)),
+    (("awd",), re.compile(_DB + r"(?:SH-AWD|AWD|ALL[\s-]*WHEEL[\s-]*DRIVE|4\s?MATIC|4\s?MOTION|QUATTRO|XDRIVE)" + _DE, re.I)),
+    (("2wd",), re.compile(_DB + r"(?:2\s?WD|4\s?X\s?2|TWO[\s-]*WHEEL[\s-]*DRIVE|2[\s-]*WHEEL[\s-]*DRIVE)" + _DE, re.I)),
+    (("fwd",), re.compile(_DB + r"(?:FWD|FRONT[\s-]*WHEEL[\s-]*DRIVE)" + _DE, re.I)),
+    (("rwd",), re.compile(_DB + r"(?:RWD|REAR[\s-]*WHEEL[\s-]*DRIVE)" + _DE, re.I)),
+)
+_DRIVE_NEG_RE = re.compile(r"(?:\bwithout|\bw/o|\bless|\bnon|\bexc(?:ept)?\.?|\bexcluding|\bnot)[\s-]*\(?\s*$", re.I)
+# words a clean drive clause may hold besides the drive itself ("With AWD",
+# "(FWD)", "4x2 or 4x4", "Four-Wheel Drive only"); anything else makes a free
+# text clause that names a drive ambiguous ("4x4 Hi & Lo - IND#194 / ...")
+_DRIVE_FILLER_RE = re.compile(r"\b(?:with|w/o|w/|without|less|non|exc|except|excluding|only|models?|vehicles?|"
+                              r"and|or|for|drive|all)\b|[()\[\]&,.:;/*+-]", re.I)
+DRIVE_AMBIGUOUS = "?"
+
+
+def _drive_terms(text: str):
+    """(positive classes, negated classes, leftover text) named in text."""
+    pos, neg = set(), set()
+    s = str(text or "")
+    for classes, rx in _DRIVE_PATTERNS:
+        while True:
+            m = rx.search(s)
+            if not m:
+                break
+            (neg if _DRIVE_NEG_RE.search(s[:m.start()]) else pos).update(classes)
+            s = s[:m.start()] + " " * (m.end() - m.start()) + s[m.end():]
+    return pos, neg, s
+
+
+def _drive_allowed(pos: set, neg: set):
+    """The drive classes a clause allows, or None when it allows both families.
+    'Without AWD' allows the 2-wheel family (a car that is not AWD is 2WD)."""
+    if pos:
+        allowed = set(pos)
+    elif neg:
+        allowed = set(_DRIVE_ALL)
+        if neg & _FOUR:
+            allowed -= _FOUR
+        if neg & _TWO:
+            allowed -= _TWO
+    else:
+        return None
+    allowed = frozenset(allowed)
+    if not allowed or (allowed & _FOUR and allowed & _TWO):
+        return None
+    return allowed
+
+
+def _drive_label(allowed) -> str:
+    a = frozenset(allowed or ())
+    if a and a <= _FOUR:
+        return "AWD" if a == {"awd"} else "4WD" if a == {"4wd"} else "4WD/AWD"
+    if a and a <= _TWO:
+        return "FWD" if a == {"fwd"} else "RWD" if a == {"rwd"} else "2WD"
+    return ""
+
+
+def _drive_union(ds):
+    """Union of per-row drive sets: None when any row is unrestricted,
+    DRIVE_AMBIGUOUS when any is ambiguous (and none unrestricted), else the
+    union, which may stop being material (both families)."""
+    ds = list(ds)
+    if not ds or any(d is None for d in ds):
+        return None
+    if any(d == DRIVE_AMBIGUOUS for d in ds):
+        return DRIVE_AMBIGUOUS
+    u = frozenset().union(*ds)
+    return None if (u & _FOUR and u & _TWO) else u
+
+
+def _mopar_codes(body: str) -> list:
+    """'41 - SEDAN/QUAD CAB SWB, C - CHRYSLER, F - BRAND AWD' -> [('41', 'SEDAN/QUAD CAB SWB'), ...]."""
+    return [(m.group(1), m.group(2).strip()) for m in
+            re.finditer(r"(?:^|,\s*)([A-Z0-9*]{1,4})\s+-\s+((?:(?!,\s*[A-Z0-9*]{1,4}\s+-\s).)*)", body)]
+
+
+_MOPAR_LINE_RE = re.compile(r"\b(?:CHRYSLER|DODGE|JEEP|RAM|PLYMOUTH|FIAT|EAGLE|BRAND|DUTY)\b", re.I)
+
+
+def _fvo_drive(body: str, site: str):
+    """Drive allowed by one 'Fitting Vehicle Options' column (site semantics,
+    policy.DRIVE_CONFIG_FVO_SITES), None when it does not restrict the drive."""
+    if site in policy.DRIVE_CONFIG_FVO_SITES:
+        out = []
+        for alt in _split_top_plus(body, ","):
+            for part in _split_top_plus(alt, "+"):
+                pos, neg, _ = _drive_terms(part)
+                if not pos and not neg:
+                    return None          # this configuration fits any drive
+                out.append(_drive_allowed(pos, neg))
+        return _drive_union(out) if out else None
+    if site in ("www.jeeppartsdeal.com", "www.moparpartsgiant.com"):
+        # sales-code lists: a brand/line code without a drive word ('C - CHRYSLER'
+        # beside 'F - BRAND AWD', 'D - DODGE' beside 'E - DODGE AWD') leaves the
+        # drive open; otherwise the drive words of the line codes are the drives
+        codes = _mopar_codes(body)
+        pos, neg = set(), set()
+        for _code, text in codes:
+            p, n, _ = _drive_terms(text)
+            if _MOPAR_LINE_RE.search(text) and not p and not n:
+                return None
+            pos |= p
+            neg |= n
+        if not codes:
+            pos, neg, _ = _drive_terms(body)
+        return _drive_allowed(pos, neg)
+    pos, neg, _ = _drive_terms(body)
+    return _drive_allowed(pos, neg)
+
+
+def _free_note_drive(text: str):
+    """Drive allowed by one free-text note ('Sedan, FWD'; '2009-2012, Without
+    AWD'; 'A;B' = alternatives): None when some alternative names no drive,
+    DRIVE_AMBIGUOUS when a clause names a drive among other words."""
+    segs = N.split_note(text)
+    if not segs:
+        return None
+    out = []
+    for seg in segs:
+        pos, neg, ambiguous = set(), set(), False
+        for cl in seg:
+            p, n, rest = _drive_terms(cl)
+            if not p and not n:
+                continue
+            pos |= p
+            neg |= n
+            if _DRIVE_FILLER_RE.sub(" ", rest).strip():
+                ambiguous = True
+        if not pos and not neg:
+            return None
+        a = _drive_allowed(pos, neg)
+        if a is None:
+            return None
+        out.append(DRIVE_AMBIGUOUS if ambiguous else a)
+    return _drive_union(out)
+
+
+def _gm_series_letters(body: str):
+    """gmpartsgiant series letters of an option column ('CK1,2(...)' -> {C,K};
+    'K207(53)(...), CK209(...)' -> {C,K}); None when an alternative's head is
+    not a truck-style series (letters followed by a digit: 'U', 'UM,UT', 'JB')."""
+    letters = set()
+    alts = _split_top_plus(body, ",")
+    # 'CK1,2,3' splits into 'CK1', '2', '3' outside parentheses: a bare
+    # number continues the previous series
+    seen_any = False
+    for alt in alts:
+        head = alt.split("(")[0].strip()
+        if not head:
+            return None
+        if re.fullmatch(r"\d+", head) and seen_any:
+            continue
+        m = re.fullmatch(r"([A-Z]{1,2})(\d+)", head)
+        if not m:
+            return None
+        letters |= set(m.group(1))
+        seen_any = True
+    return frozenset(letters) if letters else None
+
+
+def _row_drive(notes, site: str, gm_page_letters=None, variant: str = ""):
+    """Drive allowed by one own-page row (its notes are conjunctive, and the
+    catalog page it sits on may name a drive: gmpartsgiant files Silverado
+    pages as '1500_2wd' / '1500_4wd', audipartsgiant 'a4_quattro'): None, a
+    frozenset of classes, or DRIVE_AMBIGUOUS. On gmpartsgiant the row's own
+    series code is the part's application: 'ST1' on the 2wd page names both
+    series, so it overrides the page's drive."""
+    allowed, restricted, ambiguous, both = set(_DRIVE_ALL), False, False, False
+    for n in notes or []:
+        m = _FVO_BODY_RE.match(n or "")
+        if m:
+            d = _fvo_drive(m.group(1), site)
+            if site == "www.gmpartsgiant.com":
+                g = _gm_series_drive(m.group(1), gm_page_letters)
+                if g == "both":
+                    both = True
+                elif g == DRIVE_AMBIGUOUS:
+                    ambiguous = True
+                elif g is not None:
+                    d = g if d is None else (d & g) or DRIVE_AMBIGUOUS
+        else:
+            d = _free_note_drive(n)
+        if d is None:
+            continue
+        if d == DRIVE_AMBIGUOUS:
+            ambiguous = True
+            continue
+        allowed &= d
+        restricted = True
+    if not both:
+        vp, vn, _ = _drive_terms(re.sub(r"[_-]+", " ", variant or ""))
+        va = _drive_allowed(vp, vn)
+        if va:
+            allowed &= va
+            restricted = True
+    if ambiguous:
+        return DRIVE_AMBIGUOUS
+    if not restricted:
+        return None
+    return frozenset(allowed) if allowed else DRIVE_AMBIGUOUS
+
+
+_FVO_BODY_RE = re.compile(r"^\s*fitting\s+vehicle\s+options\s*:\s*(.*)$", re.I)
+
+
+def _gm_series_drive(body: str, page_letters):
+    """GM series code of one option column (policy.GM_SERIES_DRIVE): 'both'
+    when it names every series of a known pair (CK1, ST1, LM1, RV1), the
+    drive classes of a single series of a pair (K1, T1), DRIVE_AMBIGUOUS
+    when it names fewer series than T's own pages show and the pair is not
+    in the table (Savana H1 beside G1), else None."""
+    row = _gm_series_letters(body)
+    if not row:
+        return None
+    for pair, drive in policy.GM_SERIES_DRIVE.items():
+        if row <= pair:
+            return "both" if row == pair else frozenset(drive[x] for x in row)
+    if page_letters and row < page_letters:
+        return DRIVE_AMBIGUOUS
+    return None
+
+
+def _fit_drive(f) -> object:
+    """Drive allowed by one product-page fitment row: every trim naming a
+    drive ('SUV AWD, SUV LT AWD'), or the drive values of an option-layout
+    row ('..., Four-Wheel Drive'). None when it does not restrict."""
+    if f.layout == "trim" and f.trims:
+        # each trim (or, on gmpartsgiant, each option-column configuration)
+        # is one configuration: a trim without a drive fits any drive
+        out = []
+        for tr in f.trims:
+            pos, neg, _ = _drive_terms(tr)
+            if not pos and not neg:
+                return None
+            out.append(_drive_allowed(pos, neg))
+        return _drive_union(out)
+    pos, neg = set(), set()
+    for o in f.options or []:
+        p, n, _ = _drive_terms(o)
+        pos |= p
+        neg |= n
+    return _drive_allowed(pos, neg)
+
+
 def _production_excludes(notes, year: int) -> bool:
     """Production-date windows (2026-11-10, live-accuracy audit of 39 shipped
     toyota/ford groups: 29 vehicle-years credited outside the window of the
@@ -2588,6 +2957,16 @@ def _likely_note(brand: str, pn: str, text: str, pack: str = "") -> str:
     if len(mid) > room:
         mid = mid[:max(room - 3, 1)].rstrip(" ,;") + "..."
     return head + mid + _LIKELY_TAIL
+
+
+def _likely_note_fits(brand: str, pn: str, text: str, pack: str = "") -> bool:
+    """True when the §5.16 note holds text whole: _likely_note cuts an
+    over-long reason with '...', which must never cut a cab or drive limit
+    (2026-11-18: the old length test compared the already-cut note, so it
+    could not fail)."""
+    head = _sanitize(f"{brand} catalog lists #{pn} for both — ")
+    mid = _sanitize(f"{pack}; {text}" if pack else text)
+    return len(head) + len(mid) + len(_LIKELY_TAIL) <= policy.NOTE_MAX_LEN
 
 
 def _likely_reason(whys: set) -> tuple[str, str]:

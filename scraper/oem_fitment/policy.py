@@ -76,6 +76,43 @@ LIKELY_BODY_GATE = True
 LIKELY_BODY_MIN_SHARE = 0.05
 LIKELY_BODY_MIN_CARS = 2
 LIKELY_BODY_SKIP_CATS = frozenset({"wheels"})
+# §5.16 drive rule (interchange 2026-11-18, flaw 1 of the independent nissan
+# check, groups/_report/nissan_verify_2026-11-18.json): a number the catalog
+# lists for one drive only (nissanpartsdeal 24810-EA101 "*KC. 4WD. LE" on the
+# 2005 Frontier page, "*W. 4WD. SE" on the 2005 Xterra page; the 2WD cluster
+# sits beside it under another number) was claimed for every car of those
+# model-years. OEM Likely apps carry no drive gate in the app, so the group
+# names the drive in its note ("Frontier: 4WD only", like the cab note), and a
+# vehicle-year whose drive evidence is ambiguous or contradictory is left out.
+# The drive is read from T's own-page rows of the number (option-column codes
+# and note clauses), the product page's fitment rows for T (every trim naming
+# a drive), and, on gmpartsgiant, the series letters below. Only ever narrows
+# or removes claims.
+LIKELY_DRIVE_RULE = True
+# Option columns whose comma/plus alternatives are each a whole configuration
+# ("*KC. 4WD. LE + *CC. LE", "S.2WD.(L+LS) +SW.2WD.(L+LS)", "2.7L MU.. 4AT 2WD",
+# "[1.6L - GAMMA]> [Auto - 6 Speed 2WD]"): an alternative without a drive code
+# fits any drive. Every other site's option column lists option VALUES of
+# several dimensions ("4 Cyl 2.3L ..., Front-Wheel Drive" on fordpartsgiant;
+# "41 - SEDAN/QUAD CAB SWB, 6 - Lt. Duty DODGE 4WD" on the Mopar sites): the
+# drive values it names are the drives it fits.
+DRIVE_CONFIG_FVO_SITES = frozenset({"www.nissanpartsdeal.com", "www.infinitipartsdeal.com",
+                                    "www.subarupartsdeal.com", "www.hyundaipartsdeal.com",
+                                    "www.kiapartsnow.com"})
+# gmpartsgiant option-column series (the head before the first "(", e.g.
+# "CK1,2", "K107(06)", "ST1", "T1(06)"): GM files its trucks by series letter,
+# C = 2WD / K = 4WD (full-size: the catalog's own K2500 model and the
+# C/K1500-3500 names) and S = 2WD / T = 4WD (S-10, Sonoma, Blazer, Jimmy,
+# Canyon, Colorado, TrailBlazer, Envoy, Rainier), M = RWD / L = AWD
+# (Astro, Safari) and R = FWD / V = AWD (Outlook, Acadia, Enclave, Traverse),
+# the same letters as the 5th VIN character. A row naming both letters of a
+# pair ("ST1(06-36)" on the 2004 TrailBlazer 2wd page) fits both drives,
+# whatever drive the page is filed under; one letter ("T1(06-16)") limits the
+# row to that drive. A letter split this table does not know (Savana G1 vs
+# H1) leaves the vehicle-year out when the row names fewer letters than T's
+# own pages show (all categories).
+GM_SERIES_DRIVE = {frozenset("CK"): {"C": "2wd", "K": "4wd"}, frozenset("ST"): {"S": "2wd", "T": "4wd"},
+                   frozenset("LM"): {"M": "rwd", "L": "awd"}, frozenset("RV"): {"R": "fwd", "V": "awd"}}
 # §5.16 exterior hold (owner decision 2026-11-06, ops/hub.md): in exterior
 # styling categories a Likely group whose apps span more than one BASE model
 # is held (refusal held_exterior_cross_model, listed in

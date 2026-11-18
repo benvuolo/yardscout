@@ -3842,3 +3842,31 @@ read only after mine were written.
   naming body *words* only, so GM RPO body styles (37/69/67) and Subaru
   S./W. codes count as no body. Decode those codes, and accept FIT rows that
   name every body.
+
+## 2026-11-18 Rules after the independent check (session_01LsgNuWEh1vdaDCtdP1jxMM, branch `interchange/rules-1118`)
+
+Hub brief: fix the verifier's six flaw classes, live drive first. No fetch,
+crawl or dispatch. Raw read from git only. Full report at the end of this
+section when the branch stops.
+
+### Item 1: drive on the live makes (`groups/_report/live_diff_2026-11-18_drive.txt`)
+
+- New §5.16 drive rule (`policy.LIKELY_DRIVE_RULE`, `curate.Curation.drive_of`),
+  hashed input, all 8 shipped namespaces re-curated in the same push on their
+  pinned raw (oem-raw@dca9cd84, inventory/decodes from a85c654).
+- Census of main's live groups (`audit11_4/drive_census.py`): an app
+  vehicle-year limited to one drive was claimed with no drive in the note in
+  gm 42 groups (8 vehicle-years: Tahoe 2007, Trailblazer 2004, Colorado 2005,
+  Traverse 2011, Blazer 2001, S-10 2000, Yukon 2003; 1,878 lot cars), mopar 9
+  (Ram 1500 2012: rows coded "6 - Lt. Duty DODGE 4WD"; 78 cars), mb 1 (ML350
+  2007-08 wheels, trims "4Matic" only). toyota, ford, subaru, hmg, vag: 0.
+  Almost all GM cases are the catalog's own drive split: gmpartsgiant files
+  those model-years as two catalogs (`2007-chevrolet-tahoe-2wd` / `-4wd`), and
+  the number was read on the 2wd catalog only.
+- Done with them: gm 36 groups now say "<model>: 2WD only", 6 Colorado/Canyon
+  window-regulator groups refused (crew-cab + drive note over 160 chars);
+  mopar 9 say "1500: 4WD only"; mb 1 says "ML350: AWD only". No claim added.
+- Also fixed: the cab-note length test compared the already-cut note, so it
+  could never fail; `_likely_note_fits` now tests the uncut note. No live note
+  was cut before this change.
+- Test: `curation_tests/test_drive.py` (27 checks).

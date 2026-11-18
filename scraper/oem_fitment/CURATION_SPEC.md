@@ -780,6 +780,20 @@ heated splits remain. It is deferred.
   `held_exterior_cross_model`, listed with its note and record URLs in
   `groups/_report/held_exterior.json` for an owner checklist. Held groups
   are never shipped.
+- **Drive rule (2026-11-18, `policy.LIKELY_DRIVE_RULE`).** OEM Likely apps
+  carry no drive gate in the app. Per app vehicle-year the curator reads the
+  drive the evidence allows: T's own-page rows of the number (option-column
+  drive codes, read per site by `policy.DRIVE_CONFIG_FVO_SITES`; clean note
+  clauses such as "Sedan, FWD" or "Without AWD"; the catalog page's own
+  drive, e.g. gmpartsgiant `2007-chevrolet-tahoe-2wd`), gmpartsgiant series
+  codes (`policy.GM_SERIES_DRIVE`: C/K, S/T, M/L, R/V; "ST1" names both and
+  overrides the page's drive), and the product page's fitment rows for T
+  (every trim naming one drive). A vehicle-year limited to one drive family
+  is named in the note ("Frontier: 4WD only"; one "4WD only" when every app
+  has the same limit; years when only some are limited). Ambiguous or
+  contradictory drive evidence leaves the vehicle-year out. A note that does
+  not fit `NOTE_MAX_LEN` whole refuses the group (`held_drive_qualifier`,
+  `held_cab_qualifier`); the note is never cut. Only narrows claims.
 - **Skips and refusals.** Single-model classes are skipped, because the
   same-model generation loop already covers them. Classes over the 12-model
   cap are refused.
