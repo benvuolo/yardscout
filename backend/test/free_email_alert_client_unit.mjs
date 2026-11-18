@@ -129,21 +129,26 @@ for (const e of [stored, legacy, { make: 'Ford', model: '', yrMin: 1999, yrMax: 
 
 /* ---- the Cars watch strip: which ask it makes (stripAskKind, 2026-11-18) ---- */
 {
-  const K = (o) => A.stripAskKind({ native: false, pro: false, located: true, models: 1, full: false, falert: false, falertNo: false, recapNo: false, recapOn: false, ...o });
+  const K = (o) => A.stripAskKind({ native: false, pro: false, located: true, models: 1, full: false, falertOpen: true, recapNo: false, recapOn: false, ...o });
   check('strip: one model, free, on the website, a location, no alert here: the free email alert', K({}) === 'falert');
   check('strip: the Monday email dismissed this visit does not hide the alert\'s ask', K({ recapNo: true }) === 'falert');
   check('strip: a confirmed Monday subscriber is offered the alert too (their address is filled in)', K({ recapOn: true }) === 'falert');
   check('strip: two models: the Monday email', K({ models: 2 }) === 'recap');
   check('strip: the whole make (no model picked): the Monday email, not the one alert', K({ models: 0 }) === 'recap');
   check(`strip: more than ${A.RECAP_MAX} models: the plain strip`, K({ models: A.RECAP_MAX + 1 }) === '' && K({ models: A.RECAP_MAX }) === 'recap');
-  check('strip: an alert on or pending in this browser: the Monday email', K({ falert: true }) === 'recap');
-  check('strip: ...and "Add" for a confirmed Monday subscriber', K({ falert: true, recapOn: true }) === 'recap-add');
-  check('strip: the alert\'s offer declined this visit: the Monday email', K({ falertNo: true }) === 'recap');
-  check('strip: both declined this visit: the plain strip', K({ falertNo: true, recapNo: true }) === '' && K({ falert: true, recapNo: true }) === '');
+  check('strip: the toast\'s rule says no (an alert on or pending here, or declined this visit): the Monday email', K({ falertOpen: false }) === 'recap');
+  check('strip: ...and "Add" for a confirmed Monday subscriber', K({ falertOpen: false, recapOn: true }) === 'recap-add');
+  check('strip: both declined this visit: the plain strip', K({ falertOpen: false, recapNo: true }) === '');
   check('strip: a full free list (no new watch can carry it): not the alert', K({ full: true }) === 'recap');
   check('strip: Pro, the app shells, or no location: the plain strip', K({ pro: true }) === '' && K({ native: true }) === '' && K({ located: false }) === ''
-    && K({ native: true, models: 2 }) === '' && K({ pro: true, falert: true }) === '');
+    && K({ native: true, models: 2 }) === '' && K({ pro: true, falertOpen: false }) === '');
   check('strip: the Monday email\'s model cap is the server\'s (RECAP_MAX_WATCHES)', A.RECAP_MAX === RECAP_MAX_WATCHES);
+  // One rule for the toast and the strip (falertAskOpen), not two copies.
+  const open = fn('falertAskOpen') || '', pickFn = fn('falertToastPick') || '', strip = fn('stripMailHtml') || '';
+  check('strip: the toast and the strip ask the same rule (falertAskOpen: free web visitor, no alert here, not declined)',
+    /falertOffered\(IS_NATIVE, isPro\(\)\) && !falertState\(\) && !falertToastDismissed\(\)/.test(open)
+    && /falertAskOpen\(\)/.test(pickFn) && /falertOpen: falertAskOpen\(\)/.test(strip) && !/falertState\(\)|falertToastDismissed\(\)/.test(strip), open);
+  check('strip: its request and reply are the toast\'s own (falertToastSubmit), no second copy', /falertToastSubmit\(el, entries\[0\]/.test(src));
 }
 
 /* ---- wording ---- */

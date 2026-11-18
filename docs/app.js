@@ -11262,8 +11262,10 @@ function jhOpenAlertsTab() {
  *   "Want the next one? Free email alert for <car>: we email you when another
  *   is set out within 50 mi, usually the same day. One car, one address, no
  *   account." [email] [Email me]  "or just watch it here"
- * It applies (stripAskKind) when the toast would offer it for the same new
- * watch (falertToastPick): the website, not Pro, a location, and
+ * It applies (stripAskKind) exactly when the toast would offer it for the
+ * same new watch (falertToastPick; both ask falertAskOpen, and the request
+ * and reply are the toast's own, falertToastSubmit): the website, not Pro, a
+ * location, and
  *   - the scope is ONE model (make + model, the filter's years if any). The
  *     alert covers one car per address; a whole make, or several models,
  *     is not "this car", and spending the one alert on it would make a
@@ -11302,14 +11304,17 @@ function jhOpenAlertsTab() {
 let _stripAskCounted = false, _stripFalertIO = null;
 /** Which ask the watch strip makes. Pure (unit-tested). o = {native, pro,
  * located, models (how many the scope names; 0 = the whole make), full (a
- * free watchlist at FREE_WATCH_LIMIT), falert (an alert on or pending in
- * this browser), falertNo (its offer declined this visit), recapNo (the
- * Monday offer dismissed this visit), recapOn (a confirmed Monday
- * subscriber here)} -> 'falert' | 'recap' | 'recap-add' | '' (the plain
- * strip with its Watch button). */
+ * free watchlist at FREE_WATCH_LIMIT), falertOpen (the toast's own rule,
+ * falertAskOpen: no alert on or pending here, not declined this visit),
+ * recapNo (the Monday offer dismissed this visit), recapOn (a confirmed
+ * Monday subscriber here)} -> 'falert' | 'recap' | 'recap-add' | '' (the
+ * plain strip with its Watch button). The toast asks the same of its one
+ * new watch (falertToastPick: one entry, falertAskOpen, among the first
+ * FREE_WATCH_LIMIT); here the watch does not exist yet, so "one entry" is
+ * one model and "among the first" is a list with room. */
 function stripAskKind(o) {
   if (o.native || o.pro || !o.located) return '';
-  if (o.models === 1 && !o.full && !o.falert && !o.falertNo) return 'falert';
+  if (o.models === 1 && !o.full && o.falertOpen) return 'falert';
   if (Math.max(o.models, 1) > RECAP_MAX || o.recapNo) return '';
   return o.recapOn ? 'recap-add' : 'recap';
 }
@@ -11317,7 +11322,7 @@ function stripMailHtml(sc, nCars, r) {
   if (IS_NATIVE || isPro() || !activeZipCoords || !r) return '';
   const st = recapState();
   const kind = stripAskKind({ native: IS_NATIVE, pro: isPro(), located: true, models: sc.models.length,
-    full: loadWatchlist().length >= FREE_WATCH_LIMIT, falert: !!falertState(), falertNo: falertToastDismissed(),
+    full: loadWatchlist().length >= FREE_WATCH_LIMIT, falertOpen: falertAskOpen(),
     recapNo: recapDismissed(), recapOn: !!(st && st.state === 'confirmed' && st.sub) });
   if (!kind) return '';
   const what = `<strong>${escapeHtml(sc.label)}</strong>`;
@@ -11944,10 +11949,17 @@ function falertToastDismissed() {
 function falertToastDismiss() {
   try { sessionStorage.setItem('ys_falert_no', '1'); } catch (e) { /* private mode */ }
 }
+/** Whether the alert may be offered for a new watch right now: a free web
+ * visitor, no alert on or waiting for its click in this browser, the offer
+ * not declined this visit. The toast (falertToastPick) and the Cars watch
+ * strip (stripMailHtml) both ask this one rule. */
+function falertAskOpen() {
+  return falertOffered(IS_NATIVE, isPro()) && !falertState() && !falertToastDismissed();
+}
 /** The new watch the toast offers the alert for, as a falertChoices() entry,
  * or null (then the Monday email is offered, as before). */
 function falertToastPick(entries) {
-  if (!entries || entries.length !== 1 || !falertOffered(IS_NATIVE, isPro()) || falertState() || falertToastDismissed()) return null;
+  if (!entries || entries.length !== 1 || !falertAskOpen()) return null;
   const e = entries[0];
   return (e && e.addedAt && falertChoices().find(x => x.e.addedAt === e.addedAt)) || null;
 }

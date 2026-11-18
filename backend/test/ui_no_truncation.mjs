@@ -498,7 +498,8 @@ const SCREENS = [
   }, placeBack],
   // Cars feed (2026-11-16): the tile grid is 'results'; these are its other
   // states: a make chosen in the chips (its models as chips), the watch
-  // strip with the Monday-email field, the car screen opened from a tile
+  // strip with the Monday-email field and with the free email alert ask
+  // (2026-11-18), the car screen opened from a tile
   // down to "More <model> near you", the since-last-visit line and its
   // divider, and the first-run note after the first row of tiles.
   ['feed-chips-make', async (page) => {
@@ -508,12 +509,82 @@ const SCREENS = [
     if (await page.evaluate(() => !document.querySelector('#feed-chips .fchip-make') || !document.querySelector('#feed-chips .fchip[data-chip="model"]'))) throw new Error('no make chosen / no model chips');
     await page.evaluate(() => window.scrollTo(0, 0));
   }, async (page) => { await page.evaluate(() => { feedClearMake('chip'); }); }],
+  // The Monday email in the strip: since 2026-11-18 a one-model strip asks
+  // for the free email alert first, so this screen has an alert already
+  // waiting in the browser (the state in which the Monday email is asked).
   ['feed-strip-mail', async (page) => {
     await tab(page, 'live');
-    await page.evaluate(() => { carSearchSetFilter('Nissan', 'Xterra'); renderLive(); });
+    await page.evaluate(() => {
+      window.__faStripWas = localStorage.getItem('ys_falert');
+      localStorage.setItem('ys_falert', JSON.stringify({ email: 'christopher.longname@example.com', state: 'pending', at: Date.now(), key: null, label: 'Toyota Camry', r: 50 }));
+      carSearchSetFilter('Nissan', 'Xterra'); renderLive();
+    });
     await settle(page, 300);
-    await page.evaluate(() => { const s = document.querySelector('#live-grid .strip-mail'); if (!s || !s.querySelector('input.mail-email')) throw new Error('no Monday-email strip'); s.scrollIntoView({ block: 'center' }); });
-  }, async (page) => { await page.evaluate(() => { feedClearMake('chip'); }); }],
+    await page.evaluate(() => { const s = document.querySelector('#live-grid .strip-mail:not(.strip-falert)'); if (!s || !s.querySelector('input.mail-email')) throw new Error('no Monday-email strip'); s.scrollIntoView({ block: 'center' }); });
+  }, async (page) => { await page.evaluate(() => {
+    if (window.__faStripWas) localStorage.setItem('ys_falert', window.__faStripWas); else localStorage.removeItem('ys_falert');
+    window.__faStripWas = null;
+    feedClearMake('chip');
+  }); }],
+  // The strip's free email alert ask (2026-11-18): the ask, the same with the
+  // zip field a guessed place brings, its message line, and the "check your
+  // inbox" reply under "Watching ...". The longest make + model in range,
+  // with a year range, so the sentence is as long as it gets.
+  ...[['feed-strip-falert', 'ask'], ['feed-strip-falert-zip', 'zip'], ['feed-strip-falert-msg', 'msg'], ['feed-strip-falert-sent', 'sent']].map(([name, mode]) => [name, async (page) => {
+    await tab(page, 'live');
+    await page.evaluate(async (mode) => {
+      window.__faStripWas = localStorage.getItem('ys_falert');
+      localStorage.removeItem('ys_falert');
+      try { sessionStorage.removeItem('ys_falert_no'); } catch (e) { /* none */ }
+      if (mode === 'zip') { window.__nozWas = needOwnZip; needOwnZip = () => true; }
+      const names = [...new Set(getFilteredLive().filter(v => v.make && v.model).map(v => v.make + '|' + canonicalModel(v.make, v.model)))]
+        .sort((a, b) => b.length - a.length);
+      let ok = false;
+      for (const k of names) { const [mk, md] = k.split('|'); if (!isNoPickModel(mk, md) && carSearchSetFilter(mk, md)) { ok = true; break; } }
+      if (!ok) throw new Error('no model to filter on');
+      const ys = [...document.getElementById('live-filter-year-min').options].map(o => o.value).filter(Boolean).sort();
+      document.getElementById('live-filter-year-min').value = ys[0];
+      document.getElementById('live-filter-year-max').value = ys[ys.length - 1];
+      renderLive();
+      const s = document.querySelector('#live-grid .strip-falert');
+      if (!s || !s.querySelector('input.mail-email')) throw new Error('no free email alert ask in the strip');
+      if (mode === 'zip' && !s.querySelector('#strip-zip')) throw new Error('no zip field in the strip');
+      if (mode === 'msg') {
+        s.querySelector('.mail-email').value = 'nope';
+        s.querySelector('.mail-form').requestSubmit();
+        if (!s.querySelector('.mail-msg').textContent) throw new Error('no message for a bad address');
+      }
+      if (mode === 'sent') {
+        // No watch is stored here: the strip's watch maker is handed the new
+        // watch, and the request is answered in the page.
+        const c = activeZipCoords || { lat: 37.33, lng: -121.89 };
+        const sc = liveWatchScope();
+        const e = { make: sc.make, model: sc.models[0], yrMin: sc.yrMin, yrMax: sc.yrMax, lat: c.lat, lng: c.lng, radiusMi: 250, addedAt: '2026-11-18T00:00:00.000Z~layout' };
+        window.__smwWas = stripMakeWatches;
+        stripMakeWatches = (el) => { el._stripLabel = sc.label; return [e]; };
+        window.__fetchWas = window.fetch;
+        window.fetch = async (u, i) => (String(u).includes('/v1/free-alert/') ? new Response('{"ok":true,"state":"confirm-sent"}', { status: 200 }) : window.__fetchWas(u, i));
+        s.querySelector('.mail-email').value = 'christopher.longname@example.com';
+        s.querySelector('.mail-form').requestSubmit();
+        for (let i = 0; i < 40 && !s.dataset.recapDone; i++) await new Promise(r => setTimeout(r, 25));
+        if (!/Check your inbox/.test(s.innerText) || !/Watching/.test(s.innerText)) throw new Error('no "check your inbox" reply under "Watching"');
+      }
+      s.scrollIntoView({ block: 'center' });
+    }, mode);
+    await settle(page, 300);
+  }, async (page) => {
+    await page.evaluate(() => {
+      if (window.__fetchWas) { window.fetch = window.__fetchWas; window.__fetchWas = null; }
+      if (window.__smwWas) { stripMakeWatches = window.__smwWas; window.__smwWas = null; }
+      if (window.__nozWas) { needOwnZip = window.__nozWas; window.__nozWas = null; }
+      if (window.__faStripWas) localStorage.setItem('ys_falert', window.__faStripWas); else localStorage.removeItem('ys_falert');
+      window.__faStripWas = null;
+      try { sessionStorage.removeItem('ys_falert_no'); } catch (e) { /* none */ }
+      document.getElementById('live-filter-year-min').value = '';
+      document.getElementById('live-filter-year-max').value = '';
+      feedClearMake('chip');
+    });
+  }]),
   ['feed-car-from-tile', async (page) => {
     await tab(page, 'live');
     const k = await page.evaluate(() => { const t = [...document.querySelectorAll('#live-grid > .car-tile')].find(x => moreLikeThisCars(liveInventory.find(v => vehicleKey(v) === x.dataset.vkey)).length); return t && t.dataset.vkey; });
