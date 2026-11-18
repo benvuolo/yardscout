@@ -18483,20 +18483,6 @@
   ]
  ],
  "classes": {
-  "subaru:57229AG04A9P": {
-   "cat": "hood",
-   "comp": null,
-   "evidence": [
-    "www.subarupartsdeal.com:records:L1369"
-   ],
-   "names": [
-    "Hood Complete-Front"
-   ],
-   "pns": [
-    "57229AG04A9P"
-   ],
-   "reman": false
-  },
   "subaru:57229AJ00A9P": {
    "cat": "hood",
    "comp": null,
@@ -18609,34 +18595,6 @@
    ],
    "reman": false
   },
-  "subaru:61041FJ010": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.subarupartsdeal.com:records:L480"
-   ],
-   "names": [
-    "Regulator & Motor Assembly-Front Left"
-   ],
-   "pns": [
-    "61041FJ010"
-   ],
-   "reman": false
-  },
-  "subaru:61041FJ020": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.subarupartsdeal.com:records:L481"
-   ],
-   "names": [
-    "Regulator & Motor Assembly-Front Right"
-   ],
-   "pns": [
-    "61041FJ020"
-   ],
-   "reman": false
-  },
   "subaru:61042AL00A": {
    "cat": "window-regulator",
    "comp": "reg?",
@@ -18718,34 +18676,6 @@
    ],
    "pns": [
     "61188AE01B"
-   ],
-   "reman": false
-  },
-  "subaru:61188KG000": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.subarupartsdeal.com:records:L478"
-   ],
-   "names": [
-    "Motor Assembly-Regulator,Type P"
-   ],
-   "pns": [
-    "61188KG000"
-   ],
-   "reman": false
-  },
-  "subaru:61188KG010": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.subarupartsdeal.com:records:L479"
-   ],
-   "names": [
-    "Motor Assembly-Regulator,Type Q"
-   ],
-   "pns": [
-    "61188KG010"
    ],
    "reman": false
   },
@@ -18861,48 +18791,6 @@
    ],
    "reman": false
   },
-  "subaru:62222FJ000": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.subarupartsdeal.com:records:L483"
-   ],
-   "names": [
-    "Regulator Assembly-Rear,Right"
-   ],
-   "pns": [
-    "62222FJ000"
-   ],
-   "reman": false
-  },
-  "subaru:62222FJ010": {
-   "cat": "window-regulator",
-   "comp": "reg?",
-   "evidence": [
-    "www.subarupartsdeal.com:records:L482"
-   ],
-   "names": [
-    "Regulator Assembly-Rear,Left"
-   ],
-   "pns": [
-    "62222FJ010"
-   ],
-   "reman": false
-  },
-  "subaru:72311AE06B": {
-   "cat": "climate-control",
-   "comp": "assy",
-   "evidence": [
-    "www.subarupartsdeal.com:records:L391"
-   ],
-   "names": [
-    "Heater Control Assembly"
-   ],
-   "pns": [
-    "72311AE06B"
-   ],
-   "reman": false
-  },
   "subaru:72311AL10A": {
    "cat": "climate-control",
    "comp": "assy",
@@ -18959,62 +18847,6 @@
    ],
    "reman": false
   },
-  "subaru:72311FJ040": {
-   "cat": "climate-control",
-   "comp": "assy",
-   "evidence": [
-    "www.subarupartsdeal.com:records:L486"
-   ],
-   "names": [
-    "Heater Control Assembly"
-   ],
-   "pns": [
-    "72311FJ040"
-   ],
-   "reman": false
-  },
-  "subaru:72311FJ050": {
-   "cat": "climate-control",
-   "comp": "assy",
-   "evidence": [
-    "www.subarupartsdeal.com:records:L485"
-   ],
-   "names": [
-    "Heater Control Assembly"
-   ],
-   "pns": [
-    "72311FJ050"
-   ],
-   "reman": false
-  },
-  "subaru:72311FJ130": {
-   "cat": "climate-control",
-   "comp": "assy",
-   "evidence": [
-    "www.subarupartsdeal.com:records:L487"
-   ],
-   "names": [
-    "Heater Control Assembly"
-   ],
-   "pns": [
-    "72311FJ130"
-   ],
-   "reman": false
-  },
-  "subaru:72311FJ160": {
-   "cat": "climate-control",
-   "comp": "assy",
-   "evidence": [
-    "www.subarupartsdeal.com:records:L488"
-   ],
-   "names": [
-    "Heater Control Assembly"
-   ],
-   "pns": [
-    "72311FJ160"
-   ],
-   "reman": false
-  },
   "subaru:84001AL02A": {
    "cat": "headlights",
    "comp": null,
@@ -19040,34 +18872,6 @@
    ],
    "pns": [
     "84001AL03A"
-   ],
-   "reman": false
-  },
-  "subaru:84001FJ080": {
-   "cat": "headlights",
-   "comp": null,
-   "evidence": [
-    "www.subarupartsdeal.com:records:L466"
-   ],
-   "names": [
-    "Lamp Assembly-Head Right"
-   ],
-   "pns": [
-    "84001FJ080"
-   ],
-   "reman": false
-  },
-  "subaru:84001FJ090": {
-   "cat": "headlights",
-   "comp": null,
-   "evidence": [
-    "www.subarupartsdeal.com:records:L464"
-   ],
-   "names": [
-    "Lamp Assembly-Head Left"
-   ],
-   "pns": [
-    "84001FJ090"
    ],
    "reman": false
   }
@@ -22842,33 +22646,6 @@
     [
      "Subaru",
      "Legacy",
-     2005,
-     2005
-    ],
-    [
-     "Subaru",
-     "Outback",
-     2005,
-     2005
-    ]
-   ],
-   "cars": 197,
-   "cat": "hood",
-   "id": "oem:subaru:hood:C:6779a48c93",
-   "kind": "body",
-   "note": "Subaru catalog lists #57229AG04A9P for both — Turbo hood (scoop cutout): Legacy GT / Outback XT only; verify the number on the part",
-   "oldest_retrieved": "2026-11-06T04:07:28Z",
-   "pn": [
-    "57229AG04A9P"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Subaru",
-     "Legacy",
      2011,
      2013
     ],
@@ -23090,60 +22867,6 @@
    "apps": [
     [
      "Subaru",
-     "Impreza",
-     2012,
-     2012
-    ],
-    [
-     "Subaru",
-     "XV Crosstrek",
-     2013,
-     2013
-    ]
-   ],
-   "cars": 132,
-   "cat": "window-regulator",
-   "id": "oem:subaru:window-regulator:FL:448e605b2e",
-   "kind": "body",
-   "note": "Subaru catalog lists #61041FJ010 for both — fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T08:54:18Z",
-   "pn": [
-    "61041FJ010"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Subaru",
-     "Impreza",
-     2012,
-     2012
-    ],
-    [
-     "Subaru",
-     "XV Crosstrek",
-     2013,
-     2013
-    ]
-   ],
-   "cars": 132,
-   "cat": "window-regulator",
-   "id": "oem:subaru:window-regulator:FR:7fac2a333e",
-   "kind": "body",
-   "note": "Subaru catalog lists #61041FJ020 for both — fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T08:54:26Z",
-   "pn": [
-    "61041FJ020"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Subaru",
      "Legacy",
      2015,
      2015
@@ -23298,60 +23021,6 @@
    "oldest_retrieved": "2026-11-05T08:36:54Z",
    "pn": [
     "61188AE01B"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Subaru",
-     "Impreza",
-     2012,
-     2012
-    ],
-    [
-     "Subaru",
-     "XV Crosstrek",
-     2013,
-     2013
-    ]
-   ],
-   "cars": 132,
-   "cat": "window-regulator",
-   "id": "oem:subaru:window-regulator:FL+FR+RL+RR+SL+SR:3f26f73028",
-   "kind": "body",
-   "note": "Subaru catalog lists #61188KG000 for both — fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T08:54:02Z",
-   "pn": [
-    "61188KG000"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Subaru",
-     "Impreza",
-     2012,
-     2012
-    ],
-    [
-     "Subaru",
-     "XV Crosstrek",
-     2013,
-     2013
-    ]
-   ],
-   "cars": 132,
-   "cat": "window-regulator",
-   "id": "oem:subaru:window-regulator:FL+FR+RL+RR+SL+SR:815a223692",
-   "kind": "body",
-   "note": "Subaru catalog lists #61188KG010 for both — fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T08:54:10Z",
-   "pn": [
-    "61188KG010"
    ],
    "reason": "conditional",
    "tier": "likely"
@@ -23576,87 +23245,6 @@
    "apps": [
     [
      "Subaru",
-     "Impreza",
-     2012,
-     2012
-    ],
-    [
-     "Subaru",
-     "XV Crosstrek",
-     2013,
-     2013
-    ]
-   ],
-   "cars": 132,
-   "cat": "window-regulator",
-   "id": "oem:subaru:window-regulator:RR:c4cbff57cb",
-   "kind": "body",
-   "note": "Subaru catalog lists #62222FJ000 for both — fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T08:54:42Z",
-   "pn": [
-    "62222FJ000"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Subaru",
-     "Impreza",
-     2012,
-     2012
-    ],
-    [
-     "Subaru",
-     "XV Crosstrek",
-     2013,
-     2013
-    ]
-   ],
-   "cars": 132,
-   "cat": "window-regulator",
-   "id": "oem:subaru:window-regulator:RL:f4b7f062e3",
-   "kind": "body",
-   "note": "Subaru catalog lists #62222FJ010 for both — fits some configurations; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T08:54:34Z",
-   "pn": [
-    "62222FJ010"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Subaru",
-     "Legacy",
-     2001,
-     2001
-    ],
-    [
-     "Subaru",
-     "Outback",
-     2001,
-     2001
-    ]
-   ],
-   "cars": 115,
-   "cat": "climate-control",
-   "id": "oem:subaru:climate-control:C:ea7caa716a",
-   "kind": "body",
-   "note": "Subaru catalog lists #72311AE06B for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T08:32:14Z",
-   "pn": [
-    "72311AE06B"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Subaru",
      "Legacy",
      2015,
      2015
@@ -23765,114 +23353,6 @@
    "apps": [
     [
      "Subaru",
-     "Impreza",
-     2012,
-     2012
-    ],
-    [
-     "Subaru",
-     "XV Crosstrek",
-     2013,
-     2013
-    ]
-   ],
-   "cars": 132,
-   "cat": "climate-control",
-   "id": "oem:subaru:climate-control:C:02c42ecbcf",
-   "kind": "body",
-   "note": "Subaru catalog lists #72311FJ040 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T08:55:38Z",
-   "pn": [
-    "72311FJ040"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Subaru",
-     "Impreza",
-     2012,
-     2012
-    ],
-    [
-     "Subaru",
-     "XV Crosstrek",
-     2013,
-     2013
-    ]
-   ],
-   "cars": 132,
-   "cat": "climate-control",
-   "id": "oem:subaru:climate-control:C:ecad08f072",
-   "kind": "body",
-   "note": "Subaru catalog lists #72311FJ050 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T08:55:30Z",
-   "pn": [
-    "72311FJ050"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Subaru",
-     "Impreza",
-     2012,
-     2012
-    ],
-    [
-     "Subaru",
-     "XV Crosstrek",
-     2013,
-     2013
-    ]
-   ],
-   "cars": 132,
-   "cat": "climate-control",
-   "id": "oem:subaru:climate-control:C:d394abb7da",
-   "kind": "body",
-   "note": "Subaru catalog lists #72311FJ130 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T08:55:46Z",
-   "pn": [
-    "72311FJ130"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Subaru",
-     "Impreza",
-     2012,
-     2012
-    ],
-    [
-     "Subaru",
-     "XV Crosstrek",
-     2013,
-     2013
-    ]
-   ],
-   "cars": 132,
-   "cat": "climate-control",
-   "id": "oem:subaru:climate-control:C:2c103cfe62",
-   "kind": "body",
-   "note": "Subaru catalog lists #72311FJ160 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T08:55:54Z",
-   "pn": [
-    "72311FJ160"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Subaru",
      "Legacy",
      2015,
      2015
@@ -23922,64 +23402,10 @@
    ],
    "reason": "option",
    "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Subaru",
-     "Impreza",
-     2012,
-     2012
-    ],
-    [
-     "Subaru",
-     "XV Crosstrek",
-     2013,
-     2013
-    ]
-   ],
-   "cars": 132,
-   "cat": "headlights",
-   "id": "oem:subaru:headlights:R:cc9f39a147",
-   "kind": "body",
-   "note": "Subaru catalog lists #84001FJ080 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T08:50:19Z",
-   "pn": [
-    "84001FJ080"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Subaru",
-     "Impreza",
-     2012,
-     2012
-    ],
-    [
-     "Subaru",
-     "XV Crosstrek",
-     2013,
-     2013
-    ]
-   ],
-   "cars": 132,
-   "cat": "headlights",
-   "id": "oem:subaru:headlights:L:1e4e3fa05a",
-   "kind": "body",
-   "note": "Subaru catalog lists #84001FJ090 for both — option: fits some option packages; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T08:50:03Z",
-   "pn": [
-    "84001FJ090"
-   ],
-   "reason": "option",
-   "tier": "likely"
   }
  ],
  "ns": "subaru",
- "policy_sha256": "7799c6db352532323d7353859aa608d265ce34b48a13daff705b7fab99065a28",
+ "policy_sha256": "1a082aeb1a3a0e3141217283eb46894dd2d93e326bfa723c3bfc1a6f91258266",
  "raw": {
   "commit": "dca9cd845f26337a4047b9176cc17929ffc984a3",
   "ref": "dca9cd845f26",
