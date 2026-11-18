@@ -2019,3 +2019,30 @@ data network-first per scan, no sw bump).
   production windows are not named; 1999 Tahoe/Yukon rear-door regulators
   ("CLASSIC 4 DOOR") carry no body note (both already on main).
 - 20:55 UTC confirmed live: yardscout.io/data/oem/window-regulator.json carries the new drive notes, same counts as main.
+
+## 2026-11-18 ~22:40 UTC OEM per-app gates to main (sw `jh-v212`, 6703c2cc)
+
+`interchange/gates-1118` (builder section at the end of ops/interchange.md).
+OEM groups' drive / cab / engine / fuel / transmission limits are real per-app
+gates: payload app `[make, model, lo, hi, null, gate]`; the app's OEM-GATE
+block (`pfOemDonorGate`): a donor whose own decode or listing contradicts the
+limit is not offered; unknown is "if equipped" with a line naming the limit
+(same as the parts table's drive/body/manual gates and the aftermarket gate);
+an unconfirmed limit is never Verified. Notes from an unread other-drive page
+now read "<model>: only 2WD checked".
+- Hub review asked for one fix, done: no drive limit where the model-year
+  comes in one drive (GM: decided by the year page's catalogs; Ford Focus
+  2012/2015, C-Max 2013, Transit Connect 2015 FWD and ML350 2007-08 AWD in
+  `policy.SINGLE_DRIVE_TABLE`, each with its basis). Ford/MB donors back to
+  plain rows.
+- Live diff vs main: 0 groups added or removed, 0 app-years added; 48 notes
+  reworded. Donor pairs on the pinned lot: GM 59,852 -> 56,081 (3,771
+  excluded, 1,787 "if equipped"); Mopar 116,281 -> 115,939; Ford, MB, Toyota,
+  Subaru, VAG, HMG unchanged.
+- Builder's full tools/regress.sh on a833fe49 (code head; main contained):
+  104 PASS / 0 FAIL / 0 SKIP. Main had not moved; fast-forward.
+- test_model_map now checks the pinned inventory (a85c654) and only REPORTs
+  live-inventory spellings.
+- Hub decisions recorded: unknown drive stays "if equipped"; no body gates
+  that add claims this round.
+- Next: independent §11.4 sample of the nissan candidate WITH the gates.
