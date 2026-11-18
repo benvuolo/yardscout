@@ -20,6 +20,7 @@
 
 import { json, err, gunzipToText, haversineMiles, vindexBucket } from './util.js';
 import { resolveTier, variantFor } from './auth.js';
+import { pickKey, pickRow, pickVpic } from './jsonpick.js';
 
 const DEFAULT_RADIUS_MI = 100;
 const MAX_RADIUS_MI = 30000; // "no limit" — the whole planet is smaller
@@ -130,23 +131,38 @@ export async function handleYardShard(req, env, user, yardId) {
   return serveShard(req, env, 'yard', yardId, variantFor(resolveTier(user)), 300);
 }
 
-/** Vehicle detail by scraper id or VIN — powers #car= deep links without the
- * client holding the full dataset. Resolves the yard via the small vindex
- * shard, then parses ONE yard shard (largest ≈ 300KB, ~2-3ms). */
+/** Vehicle detail by scraper id or VIN — powers #car= deep links and the
+ * website's /car/ pages without the client holding the full dataset.
+ * Resolves the yard via the vindex bucket, then picks the one row out of ONE
+ * yard shard (jsonpick.js; up to ~770 KB of JSON, which a full parse turned
+ * into ~15 ms of CPU, over the free plan's 10 ms). */
 export async function handleVehicleDetail(req, env, user, token) {
   const dir = await getDirectory(env);
   if (!dir) return err(503, 'no_inventory', 'No inventory has been uploaded yet.');
   if (!token || token.length > 32) return err(400, 'bad_id', 'Pass a vehicle id or VIN.');
-  if (/[a-z]/.test(token)) token = token.toUpperCase(); // VINs are stored uppercase; ids are digits
 
+  // The token as given first: most scraper ids carry lowercase letters
+  // ("pap-…", "pns-…"; 215,229 of 336,835 cars on 2026-11-18) and are stored
+  // as they are. Until 2026-11-18 every token was upper-cased first (VINs
+  // are stored upper-case), so a car with such an id and no VIN (45,985 on
+  // that day) had no detail and its /car/ page answered 404. Then the
+  // upper-case form, for a VIN typed or linked in lower case.
+  const tokens = [token];
+  if (/[a-z]/.test(token)) tokens.push(token.toUpperCase());
   const mod = dir.vindexMod || 64;
-  const bucketRow = await env.DB.prepare(
-    'SELECT body FROM inv_shards WHERE kind = ?1 AND key = ?2 AND variant = ?3'
-  ).bind('vindex', String(vindexBucket(token, mod)), 'all').first();
-  if (!bucketRow) return err(404, 'not_found', 'Vehicle not found in the current inventory.');
-
-  const index = JSON.parse(await gunzipToText(bucketRow.body));
-  const hit = index[token];
+  let hit = null;
+  for (const t of tokens) {
+    const bucketRow = await env.DB.prepare(
+      'SELECT body FROM inv_shards WHERE kind = ?1 AND key = ?2 AND variant = ?3'
+    ).bind('vindex', String(vindexBucket(t, mod)), 'all').first();
+    if (!bucketRow) continue;
+    // Pick the one entry out of the bucket text; a miss falls back to the
+    // full parse, so the picker can cost CPU but never a car.
+    const indexText = await gunzipToText(bucketRow.body);
+    hit = pickKey(indexText, t);
+    if (!Array.isArray(hit)) hit = JSON.parse(indexText)[t] || null;
+    if (hit) { token = t; break; }
+  }
   if (!hit) return err(404, 'not_found', 'Vehicle not found in the current inventory.');
   const [yardIdx, id] = hit;
 
@@ -156,9 +172,15 @@ export async function handleVehicleDetail(req, env, user, token) {
   ).bind('yard', String(yardIdx), variantFor(tier)).first();
   if (!shardRow) return err(404, 'not_found', 'Vehicle not found in the current inventory.');
 
-  const shard = JSON.parse(await gunzipToText(shardRow.body));
+  const shardText = await gunzipToText(shardRow.body);
   const f = dir.fields; // [id, vin, year, make, model, row, dateAdded, yard, partSet, maxValue, premium]
-  const row = shard.vehicles.find((r) => String(r[0]) === String(id) || String(r[1]) === token);
+  let row = pickRow(shardText, id, f.length);
+  let vpic = row ? pickVpic(shardText, row[0]) : null;
+  if (!row) {
+    const shard = JSON.parse(shardText);
+    row = shard.vehicles.find((r) => String(r[0]) === String(id) || String(r[1]) === token);
+    if (row) vpic = shard.vpic?.[String(row[0])] || null;
+  }
   if (!row) return err(404, 'not_found', 'Vehicle not found in the current inventory.');
 
   const vehicle = {};
@@ -168,7 +190,7 @@ export async function handleVehicleDetail(req, env, user, token) {
     scrapedAt: dir.scrapedAt,
     tier,
     vehicle,
-    vpic: shard.vpic?.[String(row[0])] || null,
+    vpic: vpic || null,
     yard: { id: yardIdx, location: y[0], city: y[1], state: y[2], lat: y[3], lng: y[4] },
     // Client resolves part names/values via /v1/inventory/partsets (cacheable)
     partSetIndex: row[f.indexOf('partSet')],
