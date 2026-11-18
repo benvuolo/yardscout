@@ -1907,3 +1907,11 @@ fields of the 10-28/10-31 source changes: yards workstream.
 - usage-stats: Apple's sales report printed a 404 as a row of zeros (0
   downloads since 11-06 while the app counts ~5 new iPhone users a day). Now
   it says "no report" with Apple's words, and units by product type (0145a829).
+- Apple sales reports (usage-stats 44369641326): SALES SUMMARY 1_1 has 404
+  "expected results but none were found" for every day from 11-06 to 11-17;
+  1_0 also 404; 1_2/1_3 are not valid versions (400); the WEEKLY report for
+  the week ending 11-15 is 404 too. 11-04/05 had 153 and 190 updates a day,
+  so Apple has stopped publishing sales for this vendor, not our users. The
+  SUBSCRIPTION snapshot still arrives (3 active on 11-17). Owner to check App
+  Store Connect: Business (an agreement waiting to be accepted?) and Trends
+  (does the web page show units after 11-06?).
