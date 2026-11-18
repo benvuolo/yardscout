@@ -1731,3 +1731,26 @@ scan; no website file changes.
 - Fable agents stopped by the weekly model limit (reset 2026-11-19 02:00
   UTC); session switched to Opus by the owner. Watertight, interchange and
   yard-freshness builders restarted on Opus at ~15:15 UTC.
+
+## 2026-11-18 15:22 UTC CPU-limit fix to main (API only)
+
+Cloudflare emailed (owner screenshot, ~14:22 UTC): "Your Workers hit the
+free tier CPU time limit at least 100+ times in the past 24 hours".
+`cf-usage.yml` (now with CPU lines, 9174695f): yardscout-api, 656 requests
+stopped ("exceededResources") on 11-17 between 12:00 and 15:00 UTC; none
+on yardscout-site; none on 11-18 so far. From 07:00 to 17:00 on 11-17 the
+API took up to 2,645 requests an hour with p50 14-17 ms of CPU: a crawler
+on the website's /car/ pages, each needing `GET /v1/vehicles/:id`.
+Fix (branch `hub/cpu-limit`): `backend/src/jsonpick.js` picks the one
+entry instead of parsing a ~400 KB index bucket and a yard shard of up to
+~770 KB; ~5 ms per lookup with gunzip instead of ~14. Plus: tokens are no
+longer upper-cased first; 45,985 cars (lowercase id, no VIN) had 404 car
+pages. Tests: new `jsonpick_unit`, every API unit, site units, `e2e`
+(39/39), `e2e-ops`, `e2e-devices`, `e2e-email`, `e2e-coverage`,
+`browser_e2e`: all pass. The owner was told no upgrade is needed.
+Next: one live check of a lowercase-id car page; `cf-usage.yml` again
+after the next crawl. Further options if needed: VINDEX_MOD 64→512
+(saves ~1.3 ms of gunzip a lookup), memoize landed.json in the site worker
+(its p90 is 28 ms, p99 99 ms; it has not been stopped).
+Zone analytics (paths, user agents) is not readable with the current API
+token ("zone.analytics.read" missing), so the crawler is not named.
