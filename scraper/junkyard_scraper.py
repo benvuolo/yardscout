@@ -6503,6 +6503,56 @@ _gap_extend("xterra", parts=[
 
 # ---- end of §27 block
 
+# ---- 2026-11 §31 (PARTS_GAPS §31): next models by generic-only cars. Same
+# rule as §26: a mechanical row needs a catalog number (oem-raw) that lists
+# its window; "match part #" where several numbers share it. No editorial
+# source could be read this session, so standard A/C is not confirmed: the
+# A/C rows are option-flagged ("if equipped", $0 to ranking).
+_AC_OPT = {**_GAP_AC, "option": True}
+_AC_PN_OPT = {**_GAP_AC_PN, "option": True}
+# Pontiac Torrent 2006-09: A/C 19130251 lists 2006-2009; the 2006 pump
+# module kits (19122388 / 19370681 primary, 19122391 auxiliary) list 2006.
+_gap_extend("torrent", parts=[
+    *_per_gen([(2006, 2009)], [_AC_OPT]),
+    *_per_gen([(2006, 2006)], [_GAP_PUMP_PN]),
+])
+# Lincoln MKS 2009-16: A/C 8G1Z-19703-AA (2009-2012), FB5Z-19703-B
+# (2013-2016); pumps 8A5Z-9H307-A/B/C (2009), AA5Z-9H307-B and
+# AG1Z-9H307-A/C (2010-2012), DA5Z-9H307-F (2013-2016) and DG1Z-9H307-P
+# (2014-2016). Appearance cut at 2013 in FACELIFT_BREAKS.
+_gap_extend("mks", parts=[
+    *_per_gen([(2009, 2012), (2013, 2016)], [_AC_OPT]),
+    *_per_gen([(2009, 2009), (2010, 2012), (2013, 2016)], [_GAP_PUMP_PN]),
+])
+# Oldsmobile Alero 1999-2004 (N-body, as the Grand Am §19.2): pump modules
+# 19179627 (1999) and 88967294 (2000-2004); A/C 89018903 (3.4L, 1999-2004),
+# 89018887 (2.4L, 1999-2001), 89019330 (2002-2004): match part #.
+_gap_extend("alero", parts=[
+    *_per_gen([(1999, 1999), (2000, 2004)], [_GAP_PUMP]),
+    *_per_gen([(1999, 2004)], [_AC_PN_OPT]),
+])
+# Lincoln LS 2000-06: A/C BU2Z-19V703-KA / XW4Z-19703-AA (2000-2005) and
+# 2R8Z-19703-AA (2003-2005): match part #; 2R8Z-19V703-BA lists 2003-2006.
+# Pump 4W4Z-9H307-AA lists 2003-2005. Appearance cuts 2003 and 2006.
+_gap_extend("lincoln ls", parts=[
+    *_per_gen([(2000, 2005)], [_AC_PN_OPT]),
+    *_per_gen([(2006, 2006)], [_AC_OPT]),
+    *_per_gen([(2003, 2005)], [_GAP_PUMP]),
+])
+# Volvo S80 1999-2006 / 2007-16: A/C 8602621 (1999-2006); 36050840
+# (2008-2015, with 36050839 3.0L 2011 and 36050841 2.5L 2012-2015): match
+# part #; 2007 has only the 4.4L number, 2016 none. Pumps 30761743
+# (1999-2002); 30761742 (2003-2006) and 30761745 (AWD/R 2005-2006);
+# 31372880 (2007-2015) and 31372883 (2007-2014, by chassis number).
+_gap_extend("volvo s80", parts=[
+    *_per_gen([(1999, 2006)], [_AC_OPT]),
+    *_per_gen([(2008, 2015)], [_AC_PN_OPT]),
+    *_per_gen([(1999, 2002)], [_GAP_PUMP]),
+    *_per_gen([(2003, 2006), (2007, 2015)], [_GAP_PUMP_PN]),
+])
+
+# ---- end of §31 block
+
 _apply_consensus_evergreens()
 
 # §26.2: power windows and power mirrors were options on the S-Series (not
@@ -7046,6 +7096,10 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "durango": [2014],               # WD headlamps, grille, front bumper to 2013; tail lamps change at 2014
     "s10": [1998],                   # S10/Sonoma headlamps; Sonoma grille and front bumper change at 1998
     "chrysler 200": [2015],          # every appearance number at hand starts 2015 (hood and fenders too)
+    # §31 (PARTS_GAPS §31)
+    "mks": [2013],                   # headlamps, tail lamps, grille list 2009-2012; rear bumper 2009-12 / 2013-16
+    "lincoln ls": [2003, 2006],      # headlamps and tail lamps list 2003-2005; fenders, front bumper 2000-2006
+    "volvo s80": [2004],             # tail lamps and a headlamp pair start 2004; pump/A/C numbers cover 1999-2002
 }
 # §22.10: gas-only rows hidden on hybrid listings. Hybrids of the families on
 # the lots generally start and charge through the hybrid system and use a
@@ -7143,6 +7197,9 @@ PART_NUMBER_BREAKS: dict[tuple[str, str], list[int]] = {
     ("infiniti qx60", "fuel pump module"): [2018, 2019],    # 17040-3KA1C: 2013-2017
     # §30: Acura TL 3rd-gen headlamps 33101/33151-SEP-A02 list 2004-2005.
     ("acura tl", "headlight"): [2006],
+    # §31: Volvo S80 headlamps: none listed before 2003 (30698xxx pairs list
+    # 2003-2006 / 2004-2006); 2nd-gen numbers list to 2014 or from 2015.
+    ("volvo s80", "headlight"): [2003, 2015],
 }
 
 _FACELIFT_SENSITIVE_RE = re.compile(

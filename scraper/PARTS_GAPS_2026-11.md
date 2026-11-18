@@ -3426,3 +3426,63 @@ year/make/model combinations, 4,151 cars (Chrysler 200 1,971, Acura TL
 1,090, CR-V 691, Chrysler 300 370, C-Class 28). Every change is a narrower
 "fits" window on an appearance row; no row, band, gate or status changed.
 Coverage unchanged. New §30 checks in `test_parts_gaps.py`.
+
+## 31. Next models by generic-only cars: Torrent, MKS, Alero, Lincoln LS, S80 (2026-11-18, `ops/parts.md` Next item 5)
+
+**Order.** The measuring script on the 2026-11-18 inventory (336,827 cars),
+after §28–30: Silverado 2500 (332; HD rows need part numbers, §23.6 open),
+Altima 1998–2001 (219), Lumina (214), **Torrent (214), MKS (213), Alero
+(210)**, Sentra 1995–2001 (209), **S80 (209), Lincoln LS (205)**. Done here:
+the five whose catalog records give clean windows. Altima 1998–2001,
+Sentra 1995–2001 and Lumina were not reached (Lumina's GM records mix the
+sedan with other bodies; not checked further).
+
+**Rule** (as §26): a mechanical row needs an `oem-raw` catalog number that
+lists its window (57e8b5b9, read from git, retrieved 2026-11-05 and
+2026-11-06); "match part #" where several numbers share it; no radiator-fan
+row. **No editorial source could be read this session** (Wikipedia and
+Consumer Guide do not resolve), so standard A/C is not confirmed for any of
+these: every A/C row is `option` ("if equipped", $0 to ranking). Pumps are
+plain (every car has one). Bands and costs are the audited `_GAP_MECH`
+templates; nothing was priced. Appearance cuts follow the §30 rule (two or
+more parts change, or stop while other body numbers run on).
+
+| Model | Row | Years | Gate | Basis (numbers and the years they list) |
+|---|---|---|---|---|
+| Pontiac Torrent | A/C compressor | 2006–09 | option | GM 19130251: 2006–2009. |
+| Pontiac Torrent | Fuel pump module (match part #) | 2006 | — | GM module kits 19122388, 19370681 (primary), 19122391 (auxiliary): 2006. Nothing at hand lists 2007–09. |
+| Lincoln MKS | A/C compressor | 2009–12, 2013–16 | option | Ford 8G1Z-19703-AA (kit): 2009–2012; FB5Z-19703-B (replaces DA8Z-19703-A): 2013–2016. |
+| Lincoln MKS | Fuel pump module (match part #) | 2009, 2010–12, 2013–16 | — | Ford 8A5Z-9H307-A/-B/-C: 2009; AA5Z-9H307-B, AG1Z-9H307-A/-C: 2010–2012; DA5Z-9H307-F: 2013–2016, DG1Z-9H307-P: 2014–2016. |
+| Oldsmobile Alero | Fuel pump module | 1999, 2000–04 | — | GM module 19179627: 1999; module kit 88967294: 2000–2004 (the Grand Am's, §28.1). |
+| Oldsmobile Alero | A/C compressor (match part #) | 1999–2004 | option | GM 89018903 (3.4L): 1999–2004; 89018887 (2.4L): 1999–2001; 89019330: 2002–2004. |
+| Lincoln LS | A/C compressor (match part #) | 2000–05 | option | Ford BU2Z-19V703-KA and XW4Z-19703-AA: 2000–2005; 2R8Z-19703-AA: 2003–2005. |
+| Lincoln LS | A/C compressor | 2006 | option | Ford 2R8Z-19V703-BA (replaces 2R8Z-19703-AA): 2003–2006. |
+| Lincoln LS | Fuel pump module | 2003–05 | — | Ford 4W4Z-9H307-AA (replaces 3W4Z-9H307-AD): 2003–2005. |
+| Volvo S80 | A/C compressor | 1999–2006 | option | Volvo 8602621: 1999–2006. |
+| Volvo S80 | A/C compressor (match part #) | 2008–15 | option | Volvo 36050840: 2008–2015; 36050839 (3.0L): 2011; 36050841 (2.5L): 2012–2015. |
+| Volvo S80 | Fuel pump module | 1999–2002 | — | Volvo 30761743: 1999–2002. |
+| Volvo S80 | Fuel pump module (match part #) | 2003–06, 2007–15 | — | Volvo 30761742: 2003–2006, 30761745 (AWD/R): 2005–2006; 31372880: 2007–2015, 31372883 (by chassis number): 2007–2014. |
+
+**Appearance cuts** (existing breadth-pass lamp rows):
+- MKS `FACELIFT_BREAKS` 2013: all 12 headlamp numbers, the tail lamps and
+  the grille list 2009–2012 (some from 2009–2010); rear bumper covers
+  2009–2012 / 2013–2016; front bumper covers run to 2016, so the crawl
+  covers the later years.
+- Lincoln LS `FACELIFT_BREAKS` 2003 and 2006: the headlamp and tail-lamp
+  numbers list 2003–2005 (none before or after), while the fenders and a
+  front bumper list 2000–2006.
+- S80 `FACELIFT_BREAKS` 2004 (tail lamps and one headlamp pair list
+  2004–2006) and `PART_NUMBER_BREAKS` headlights 2003 and 2015 (nothing
+  lists 1999–2002; second-generation numbers list to 2014 or 2015–2016).
+
+**Left out, no stated basis:** Torrent pump 2007–09; S80 A/C 2007 (only the
+4.4L number 36002114) and 2016, pump 2016; LS pump 2000–02 and 2006; AWD
+units for Torrent, MKS and S80 (no source names the drive availability:
+EPA and editorial pages unreachable); radiator fans (no source).
+
+**Result** (same inventory; §30 state vs this change, seven decodes): 42
+year/make/model combinations, 1,053 cars; rows added and lamp windows
+narrowed, no row lost, no band or gate changed. Generic-only **11,949
+(3.55%) → 10,896 (3.23%)**; no entry unchanged at 12,228 (3.63%). New §31
+checks in `test_parts_gaps.py`; the §14 registry list names the five
+entries.

@@ -217,6 +217,8 @@ check("§14: only gap-block entries are registered (no id reuse leaks)",
        "milan", "encore", "captiva sport", "park avenue", "scion xb 2008-2015", "sonata", "infiniti qx60", "escort", "ford zx2", "encore gx",
        # §27
        "xterra",
+       # §31
+       "torrent", "mks", "alero", "lincoln ls", "volvo s80",
        # §26
        "volvo s40", "saturn sl", "saturn sc", "saturn sw", "saturn s-series", "trax", "sonic", "freestar", "freestyle", "mirage 2014-2024", "mirage g4", "venture"},
       str(sorted({r[0] for r in js._GAP_BLOCK_ROWS})))
@@ -1005,6 +1007,29 @@ check("§30 lamp windows cut: CR-V 2003 / 2006, 300 2013 / 2016, C-Class 2017 / 
       and [parts(y, "Acura", "TL")["OEM HID Headlights"]["fits"] for y in (2005, 2006, 2008, 2013)] == ["2004–2005", "2006–2006", "2007–2008", "2012–2014"]
       and parts(2012, "Chrysler", "200")["Headlights (clear, non-hazed)"]["fits"] == "2011–2014"
       and parts(2016, "Chrysler", "200")["Headlights (clear, non-hazed)"]["fits"] == "2015–2017")
+# §31 (PARTS_GAPS §31): Torrent, MKS, Alero, Lincoln LS, S80 rows, each
+# window a catalog number's years; A/C "if equipped" (standard not sourced).
+_ACN, _ACP, _PN = "A/C Compressor (clutch spins free)", "A/C Compressor (clutch spins free, match part #)", "Fuel Pump Module (in-tank, match part #)"
+check("§31 Torrent: A/C 'if equipped' 2006-09; pump 'match part #' 2006 only; no fan row",
+      parts(2008, "Pontiac", "Torrent", AWD)[_ACN]["fits"] == "2006–2009" and parts(2008, "Pontiac", "Torrent", AWD)[_ACN]["trim_status"] == "unconfirmed"
+      and parts(2006, "Pontiac", "Torrent", AWD)[_PN]["fits"] == "2006–2006" and _PN not in names(2007, "Pontiac", "Torrent", AWD)
+      and "Radiator Fan Assembly" not in names(2007, "Pontiac", "Torrent", AWD))
+check("§31 MKS: A/C 2009-12 / 2013-16 'if equipped'; pump 2009 / 2010-12 / 2013-16 'match part #'; lamps cut at 2013",
+      [parts(y, "Lincoln", "MKS", FWD)[_PN]["fits"] for y in (2009, 2011, 2015)] == ["2009–2009", "2010–2012", "2013–2016"]
+      and parts(2014, "Lincoln", "MKS", FWD)[_ACN]["fits"] == "2013–2016" and parts(2014, "Lincoln", "MKS", FWD)[_ACN]["trim_status"] == "unconfirmed"
+      and parts(2011, "Lincoln", "MKS", FWD)["Headlights (clear, non-hazed)"]["fits"] == "2009–2012")
+check("§31 Alero: pump 1999 / 2000-04 (GM 19179627 / 88967294); A/C 'match part #' 1999-2004 'if equipped'",
+      parts(1999, "Oldsmobile", "Alero", FWD)[_PUMP]["fits"] == "1999–1999" and parts(2003, "Oldsmobile", "Alero", FWD)[_PUMP]["fits"] == "2000–2004"
+      and parts(2003, "Oldsmobile", "Alero", FWD)[_ACP]["trim_status"] == "unconfirmed")
+check("§31 Lincoln LS: A/C 'match part #' 2000-05, plain-name 2006, both 'if equipped'; pump 2003-05 only; lamps cut at 2003 and 2006",
+      parts(2001, "Lincoln", "LS", FWD)[_ACP]["fits"] == "2000–2005" and parts(2006, "Lincoln", "LS", FWD)[_ACN]["fits"] == "2006–2006"
+      and _PUMP not in names(2001, "Lincoln", "LS", FWD) and parts(2004, "Lincoln", "LS", FWD)[_PUMP]["fits"] == "2003–2005"
+      and parts(2004, "Lincoln", "LS", FWD)["Tail Lights (pair, uncracked)"]["fits"] == "2003–2005")
+check("§31 Volvo S80: A/C 1999-2006 and 2008-15 (none 2007, 2016); pump 1999-2002 / 2003-06 / 2007-15; headlamps 1999-2002 / 2003 / 2004-06 / 2007-14",
+      parts(2002, "Volvo", "S80", FWD)[_ACN]["fits"] == "1999–2006" and parts(2010, "Volvo", "S80", FWD)[_ACP]["fits"] == "2008–2015"
+      and not ({_ACN, _ACP} & names(2007, "Volvo", "S80", FWD)) and parts(2001, "Volvo", "S80", FWD)[_PUMP]["fits"] == "1999–2002"
+      and parts(2005, "Volvo", "S80", FWD)[_PN]["fits"] == "2003–2006" and parts(2012, "Volvo", "S80", FWD)[_PN]["fits"] == "2007–2015"
+      and [parts(y, "Volvo", "S80", FWD)["Xenon/HID Headlights (pair)"]["fits"] for y in (2000, 2003, 2005, 2010)] == ["1999–2002", "2003–2003", "2004–2006", "2007–2014"])
 check("§28 every cut names a pump or A/C row and none crosses; the cut rows keep the _GAP_MECH bands",
       len(_28) >= 50 and not _28_lost and _28_band <= {(40, 90, 24), (60, 130, 40)}, str((_28_lost[:5], _28_band)))
 
