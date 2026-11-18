@@ -77,3 +77,18 @@ What's New (both stores): `scratchpad/release/whatsnew_1131.txt`.
 After both stores accept: dispatch `store-listing.yml` and
 `play-subscription-listing.yml` (new screenshots and banner on Play; iOS
 screenshots go up with the submission).
+
+## Apple notice 2026-11-18: ITMS-90725, iOS 27 SDK required from April 2027
+
+On the 1.13.1 build 42 delivery (a warning; delivery succeeded and the
+build is in review): "This app was built with the iOS 26.5 SDK. Starting
+April 2027, iOS and iPadOS apps must be built with the iOS 27 SDK or later,
+included in Xcode 27 or later."
+- Why: `release-ios.yml` runs on `macos-latest` and uses whatever Xcode is
+  that image's default (26.5 today); it never selects a version.
+- To do, well before April 2027: add a step that selects Xcode 27 on the
+  runner (list `/Applications/Xcode_*.app`, `sudo xcode-select -s` the
+  newest 27.x, fail loudly if none), build ONCE to TestFlight only
+  (`submit=false`), and have the owner open it on a phone before any store
+  submission uses it: a new SDK can change how the web view and system
+  controls look. Hub check-in suggested for mid-January 2027.
