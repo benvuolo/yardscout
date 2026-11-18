@@ -3957,3 +3957,17 @@ a85c654). Live groups only:
     where the M35h hybrid twin shares the part; Nissan "*" markers undecoded.
 - Shipped namespaces re-curated after these last rule changes: byte-identical
   to item 2 (they touch config-tuple sites only; subaru/hmg unchanged).
+
+### Item 5: model map (test_model_map passes)
+
+- 16 one-car feed spellings excluded by the map's existing rule (no claims
+  until a reviewed entry): Toyota Corolla Hybrid, Chevrolet Celebrity Wagon,
+  GMC Sprint, GMC Express Van, Pontiac Bonneville Sse, Oldsmobile Alero Gls,
+  Saturn Astra Sat, Oldsmobile LSS, Ford Escape Hev, Ford Transit Wagon,
+  Honda Cr-V E:fcev, Volkswagen Tiguan Limited, Audi TTS, BMW 535i GT xDrive,
+  BMW 323Ic; "Chevrolet Canyon" excluded as a mislabelled listing.
+- Acura CL unmapped (M6: 2 of 98 cached decodes name another make, 2.04%,
+  over the 2% cap), like Chevrolet Suburban and Acura ILX before it. honda
+  is not shipped, so no live effect.
+- model_map.json is hashed: all 8 shipped namespaces and the nissan candidate
+  re-curated in the same push; only `policy_sha256` changed. Payload rebuilt.
