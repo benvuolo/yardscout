@@ -6679,6 +6679,7 @@ const YARD_INVENTORY_PAGES = [
   [/^u[\s-]*pull[\s-]*it\b/i, 'https://upullitne.com/search-inventory/'],
   [/^rupert/i, 'https://rupertsupullit.com/search-our-inventory/'],
   [/^chesterfield/i, 'https://chesterfieldauto.com/search-our-inventory-by-location'],
+  [/^intermountain auto ipull/i, 'https://ifipull.com/inventory/'],
   [/^ipull-upull - edmonton/i, 'https://ipullupullcanada.ca/inventory-pricing/'],
   [/^ipull/i, 'https://ipullupull.com/inventory-pricing/'],
   [/^st\.?\s*cloud/i, 'https://stccrush.com/Home/Inventory'],
@@ -6709,6 +6710,7 @@ const YARD_INVENTORY_PAGES = [
   [/^marion county auto parts/i, 'https://marioncountyautoparts.com/Home/Inventory'],
   [/^662 self serve/i, 'https://662selfserveautoparts.com/Home/Inventory'],
   [/^cp'?s u-pull-it/i, 'https://cpsupullit.com/Home/Inventory'],
+  [/^s&s u-pull-it/i, 'https://www.ssupullit.com/Home/Inventory'],
   [/^genesis metal recycling/i, 'https://genesismetalrecycling.com/inventory-search/'],
   [/^chuck & eddie'?s/i, 'https://www.chuckandeddies.com/vehicle-inventory/'],
   [/^robertson'?s u[\s-]*pull[\s-]*it/i, 'https://robertsonautosalvage.com/inventory-search/'],
@@ -6731,6 +6733,7 @@ const YARD_INVENTORY_PAGES = [
   [/^c&c pick a part/i, 'https://candcpickapart.com/inventory/'],
   [/^army'?s auto wrecking/i, 'https://armysauto.com/self-service-inventory/'],
   [/^pasco ez pull it/i, 'https://ezpullit.com/search'],
+  [/^standard auto wreckers upic/i, 'https://standardautowreckers.com/upic-inventory/'],
 ];
 /* GEN:YARD_INVENTORY_PAGES:END */
 
