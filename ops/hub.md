@@ -1999,3 +1999,22 @@ WRONG (not independent). Not merged.
   would turn many "2WD only" notes back into plain claims; gmpartsgiant is
   marked blocked (rule 2), so it stays off unless the owner decides.
 - 20:25 UTC confirmed live: sw jh-v211; one load of #cars=Nissan|Xterra with a zip shows the strip-falert ask ("Free email alert for Nissan Xterra ... within 50 mi"), no page errors.
+
+## 2026-11-18 ~21:15 UTC interchange rules round 2 to main (ad97b79b)
+
+`interchange/rules-1118` + `interchange/verify-restored-1118` merged. Data
+only (docs/data/oem/*.json and docs/data/interchange.json; the app fetches
+data network-first per scan, no sw bump).
+- Independent check (verifier did not write the rules; own reader on
+  oem-raw@dca9cd84): the diff restores 9 groups / 19 apps (ford 6, gm 2,
+  subaru 1): 19 RIGHT, 0 WRONG, 0 RISK. R14 Cobalt 2007 headlamp is AP(37)
+  coupe only: its removal is right. 8 seeded drive notes (seed 20261118):
+  no over-claim; 7 GM notes rest on an unread 4wd page and the Mopar note on
+  4WD-only fitment rows, so they under-claim. The gates builder was told to
+  carry that basis and word those notes "checked for 2WD; 4WD not checked".
+- Tests on the merge: --quick 71 PASS; interchange_e2e, part_finder_e2e,
+  pf_ux_e2e, yaris_coverage_e2e, card_share_e2e PASS.
+- Verifier notes not fixed: the Ford 6CPZ window motors are different doors
+  on Focus vs Transit Connect (no door in the note); Mopar "Up To 07/23/2012"
+  production windows are not named; 1999 Tahoe/Yukon rear-door regulators
+  ("CLASSIC 4 DOOR") carry no body note (both already on main).
