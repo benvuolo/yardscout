@@ -3971,3 +3971,51 @@ a85c654). Live groups only:
   is not shipped, so no live effect.
 - model_map.json is hashed: all 8 shipped namespaces and the nissan candidate
   re-curated in the same push; only `policy_sha256` changed. Payload rebuilt.
+- After merging main (751bce87, payload files regenerated) the live inventory
+  held 21 more new spellings ("Civic 2Dr", "Focus Htbk", "Passat Tdi", "Eos
+  Conv", "Impreza Wrx"...): excluded the same way; target "Subaru Impreza
+  WRX" unmapped (M3: shares its squash with "Impreza Wrx"; no live group
+  names it). Re-curated: only `policy_sha256` changes, plus subaru cell
+  counts (2,640 -> 2,408) from the unmapped target; no group changes.
+
+### For the hub (2026-11-18, end of this branch)
+
+- Branch `interchange/rules-1118`, head in the commit that adds this block.
+  Nothing pushed to main, nothing dispatched, no fetch or crawl.
+- Live effect vs main 82df0482 (`live_diff_2026-11-18_rules.txt`): gm 11
+  removed / 2 restored / 47 notes narrowed; ford 6 restored; mopar 9 and mb 1
+  narrowed; subaru 1 restored; toyota, hmg, vag unchanged. Payload
+  1,503,938 -> 1,503,908 bytes before the merge.
+- Tests on the final tree: curation_tests 21/21 files pass (test_model_map
+  included; the Phase 2 parity SKIP is unchanged), oem_fitment/tests 42/42,
+  scraper/test_interchange and test_am_gates pass, pf_guards_unit ALL PASS.
+  Browser e2e not run (app unchanged).
+- Decisions for the hub / owner:
+  1. Merge the live changes? Every live change narrows a note or removes a
+     group, except the 9 restored groups; 4 of those were outside the
+     verifier's sample (ford 6CPZ-5423395-B, 6CPZ-9923394-B, 6CPZ-9923394-C;
+     gm 15890412). A second reader on those 4 before merging would match the
+     §11.4 habit.
+  2. R14 (Cobalt/G5 headlamp 20964008): the verifier called it true; I read
+     the Cobalt row "AP(37)" as coupe-only and left it removed.
+  3. Nissan: 283 shippable groups, my own check 0 WRONG; an independent
+     sample is still owed (`audit11_4/sample.py nissan 57e8b5b99de0 ...`).
+  4. Drive notes from GM catalog pages: most GM "2WD only" notes come from
+     the 4wd catalog never being read for that category (Tahoe 2007,
+     TrailBlazer 2004...). They under-claim rather than over-claim. A
+     completion crawl of the gmpartsgiant 4wd/awd/hybrid variant pages would
+     turn many back into plain claims (gmpartsgiant is `.blocked`; owner's
+     call).
+- Suggestions:
+  - App (docs/app.js, not touched): OEM Likely groups have no per-app gate.
+    The aftermarket path already reads `a[5]` gates ({body}, {drive}). Letting
+    OEM apps carry the same 6th element (drive / body / engine / cab) would
+    let these notes become gates, so a 2WD Frontier seeker never sees 4WD-only
+    clusters, and the body rule could keep claims instead of dropping them.
+  - test_model_map runs against the live inventory, so every scan that adds a
+    one-car spelling ("Htbk", "2Dr", "Conv", "Tdi") breaks it. Either collapse
+    those suffixes in the feed normalizer (data workstream) or run M5 against
+    the pinned inventory the groups were curated with.
+  - Production-date splits inside a model-year (rows overlapping 5+ months)
+    still get the generic note; naming the window ("built from 01/2008")
+    would close the last RISK class seen in my sample.
