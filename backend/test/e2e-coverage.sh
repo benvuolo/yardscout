@@ -13,6 +13,10 @@ PORT="${YS_TEST_PORT:-8791}"
 API="http://127.0.0.1:$PORT"
 OUT="test/.out-coverage"
 mkdir -p "$OUT"
+# Stops what it starts on any exit; refuses a port that is already taken.
+source test/servers.sh
+ys_need_port "$PORT" "wrangler dev"
+ys_on_exit 'rm -f .dev.vars.e2e-coverage'
 
 ADMIN_SECRET="e2e-admin-secret"
 
@@ -37,10 +41,9 @@ npx wrangler d1 migrations apply yardscout-db --local \
   --persist-to "$OUT/wrangler-state" >"$OUT/migrate.log" 2>&1
 
 echo "── starting wrangler dev on :$PORT"
-npx wrangler dev --port "$PORT" --env-file .dev.vars.e2e-coverage \
-  --persist-to "$OUT/wrangler-state" >"$OUT/dev.log" 2>&1 &
-DEV_PID=$!
-trap 'kill $DEV_PID 2>/dev/null; rm -f .dev.vars.e2e-coverage' EXIT
+ys_start "$OUT/dev.log" npx wrangler dev --port "$PORT" --env-file .dev.vars.e2e-coverage \
+  --persist-to "$OUT/wrangler-state"
+DEV_PID=$YS_LAST_PID
 
 for i in $(seq 1 60); do
   sleep 1

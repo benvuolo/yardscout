@@ -10,10 +10,17 @@ MOCKPORT="${YS_MOCK_PORT:-8797}"
 API="http://127.0.0.1:$PORT"
 OUT="test/.out-devices"
 mkdir -p "$OUT"
+# Stops what it starts on any exit (mock-fcm included: it used to start
+# before the trap, and workerd outlived a plain kill of npx); refuses a port
+# that is already taken.
+source test/servers.sh
+ys_need_port "$MOCKPORT" "mock-fcm"
+ys_need_port "$PORT" "wrangler dev"
+ys_on_exit 'rm -f .dev.vars.e2e-devices'
 
 echo "── starting mock-fcm on :$MOCKPORT"
-node test/mock-fcm.mjs "$MOCKPORT" "$OUT" >"$OUT/mock-fcm.log" 2>&1 &
-MPID=$!
+ys_start "$OUT/mock-fcm.log" node test/mock-fcm.mjs "$MOCKPORT" "$OUT"
+MPID=$YS_LAST_PID
 for i in $(seq 1 20); do
   sleep 0.5
   curl -sf "http://127.0.0.1:$MOCKPORT/ping" >/dev/null 2>&1 && break
@@ -39,16 +46,15 @@ COMMIT_EXT_CEILING_TEST=25
 EOF
 rm -rf "$OUT/wrangler-state"
 
-trap 'kill $MPID 2>/dev/null || true; [ -n "${DEV_PID:-}" ] && kill $DEV_PID 2>/dev/null || true; rm -f .dev.vars.e2e-devices' EXIT
 
 echo "── applying migrations (local D1)"
 npx wrangler d1 migrations apply yardscout-db --local \
   --persist-to "$OUT/wrangler-state" >"$OUT/migrate.log" 2>&1
 
 echo "── starting wrangler dev on :$PORT"
-npx wrangler dev --port "$PORT" --env-file .dev.vars.e2e-devices \
-  --persist-to "$OUT/wrangler-state" >"$OUT/dev.log" 2>&1 &
-DEV_PID=$!
+ys_start "$OUT/dev.log" npx wrangler dev --port "$PORT" --env-file .dev.vars.e2e-devices \
+  --persist-to "$OUT/wrangler-state"
+DEV_PID=$YS_LAST_PID
 
 for i in $(seq 1 60); do
   sleep 1

@@ -14,6 +14,8 @@ The script starts and tears down its own wrangler dev + static file server.
 import json
 import os
 import re
+import signal
+import socket
 import subprocess
 import sys
 import time
@@ -37,6 +39,67 @@ def check(name, cond, detail=""):
     print(("  ✓ " if cond else "  ✗ ") + name + (f"  [{detail}]" if detail and not cond else ""))
 
 
+def port_busy(port):
+    """True when something accepts connections on 127.0.0.1:port."""
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.settimeout(0.5)
+        return s.connect_ex(("127.0.0.1", port)) == 0
+
+
+def need_ports(*ports):
+    """Refuse to start (exit 2) when a port this suite uses is taken: never
+    test against someone else's server (2026-11-17: e2e.sh failed 3 of 39 on
+    a server an earlier run had left behind)."""
+    busy = [p for p in ports if port_busy(p)]
+    if busy:
+        print(f"REFUSING TO START: port {', '.join(map(str, busy))}, needed by browser_e2e.py, "
+              "is already in use. Another test is running, or an earlier run left a server "
+              "behind. Stop it and run again.", file=sys.stderr)
+        sys.exit(2)
+
+
+def start_group(cmd, **kw):
+    """Start cmd in a process group of its own, so stop_group() reaches every
+    process under it (npx -> wrangler -> workerd; terminating the npx process
+    alone left workerd on the port)."""
+    return subprocess.Popen(cmd, start_new_session=True, **kw)
+
+
+def group_alive(pgid):
+    try:
+        os.killpg(pgid, 0)
+        return True
+    except (ProcessLookupError, PermissionError):
+        return False
+
+
+def stop_group(proc, port=None):
+    """TERM the whole group, KILL it after 5 s; with port, wait for it to close."""
+    if proc is None:
+        return
+    pgid = proc.pid   # start_new_session: the child leads its own group
+    for sig, wait_s in ((signal.SIGTERM, 5.0), (signal.SIGKILL, 2.0)):
+        if not group_alive(pgid):
+            break
+        try:
+            os.killpg(pgid, sig)
+        except ProcessLookupError:
+            break
+        deadline = time.time() + wait_s
+        while time.time() < deadline and group_alive(pgid):
+            time.sleep(0.1)
+    try:
+        proc.wait(timeout=2)
+    except Exception:
+        pass
+    if port is not None:
+        for _ in range(50):
+            if not port_busy(port):
+                return
+            time.sleep(0.1)
+        print(f"WARNING: port {port} still in use after stopping its server", file=sys.stderr)
+
+
 def wait_http(url, tries=60):
     for _ in range(tries):
         try:
@@ -48,6 +111,9 @@ def wait_http(url, tries=60):
 
 
 def main():
+    need_ports(API_PORT, WEB_PORT)
+    # A runner's SIGTERM (or Ctrl-C) still runs the finally below.
+    signal.signal(signal.SIGTERM, lambda *_: sys.exit(143))
     env_file = BACKEND / ".dev.vars.browser"
     env_file.write_text(
         f"DEV_MODE=1\nUPLOAD_TOKEN={UPLOAD_TOKEN}\nADMIN_SECRET={ADMIN_SECRET}\n"
@@ -62,16 +128,17 @@ def main():
          "--persist-to", str(state)],
         cwd=BACKEND, check=True, capture_output=True,
     )
-    api_proc = subprocess.Popen(
-        ["npx", "wrangler", "dev", "--port", str(API_PORT), "--env-file", str(env_file),
-         "--persist-to", str(state)],
-        cwd=BACKEND, stdout=(OUT / "browser-api.log").open("w"), stderr=subprocess.STDOUT,
-    )
-    web_proc = subprocess.Popen(
-        [sys.executable, "-m", "http.server", str(WEB_PORT), "--bind", "127.0.0.1"],
-        cwd=ROOT / "docs", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-    )
+    api_proc = web_proc = None
     try:
+        api_proc = start_group(
+            ["npx", "wrangler", "dev", "--port", str(API_PORT), "--env-file", str(env_file),
+             "--persist-to", str(state)],
+            cwd=BACKEND, stdout=(OUT / "browser-api.log").open("w"), stderr=subprocess.STDOUT,
+        )
+        web_proc = start_group(
+            [sys.executable, "-m", "http.server", str(WEB_PORT), "--bind", "127.0.0.1"],
+            cwd=ROOT / "docs", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+        )
         assert wait_http(f"{API}/v1/health"), "wrangler dev never came up"
         assert wait_http(f"{WEB}/index.html"), "static server never came up"
 
@@ -83,8 +150,8 @@ def main():
         )
         run_browser()
     finally:
-        api_proc.terminate()
-        web_proc.terminate()
+        stop_group(api_proc, API_PORT)
+        stop_group(web_proc, WEB_PORT)
         env_file.unlink(missing_ok=True)
 
     print(f"\n════ BROWSER RESULT: {len(passed)} passed, {len(failed)} failed ════")
