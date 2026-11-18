@@ -1073,6 +1073,7 @@ function parseInventoryPayload(raw) {
   setNoPickModels(raw && !Array.isArray(raw) ? raw.noPickModels : null);
   setModelYears(raw && !Array.isArray(raw) ? raw.modelYears : null);
   setNotableTrims(raw && !Array.isArray(raw) ? raw.notableTrims : null);
+  setYardLists(raw && !Array.isArray(raw) ? raw.yards : null, raw && !Array.isArray(raw) ? raw.yardFields : null);
   {
     if (raw && raw.schemaVersion === 2 && Array.isArray(raw.vehicles)) {
       // v2 compact format: expand lookup-table rows into full vehicle objects.
@@ -1392,9 +1393,9 @@ function loadVehicleExtrasFile() {
  * The scan time is global, but a yard's own list can lag it: the yard
  * stopped publishing, our source froze, or rows were carried forward.
  * yard_health records when each yard's list last CHANGED and its newest
- * set-out date. Cards show "yard list unchanged since …" once a list has
- * been frozen > 3 days (yards set out Tue-Fri, so 2 days flagged ordinary
- * weekday lulls — owner, 2026-10-30); a yard whose newest car is > 120 days old is
+ * set-out date. "List unchanged" now comes from the yard rows (YARD LIST
+ * FRESHNESS below); yardFrozenSince (> 3 weekdays, owner 2026-10-30) is its
+ * fallback for data files without those columns. A yard whose newest car is > 120 days old is
  * DORMANT: kept on the Yards tab with a warning, left out of the default
  * Cars list and the yard count (it isn't really being tracked). */
 let yardHealth = {};
@@ -1433,6 +1434,77 @@ fetch(DATA_BASE + 'data/yard_health.json')
     if (document.getElementById('tab-yards').classList.contains('active')) renderYards();
   })
   .catch(() => { /* freshness labels are optional */ });
+
+/* ===== YARD LIST FRESHNESS (the yard rows' listChangedAt / listState) =====
+ * When each yard's own published list last CHANGED (a car added or
+ * removed), from the yard rows of inv/manifest.json or inventory_live.json
+ * (columns named in yardFields, written by scraper/yard_freshness.py). The
+ * scan sets the state from full business days without a change, with the
+ * thresholds measured on the scan history (ops/data.md, 2026-11-18):
+ *   stale  (3+)   the car and the yard say so plainly, with a call-ahead
+ *   frozen (10+)  its cars are also held back from Newest arrivals and every
+ *                 "new" count; they stay listed and marked, and the yard's
+ *                 own view (Yard filter, its card, its rows) shows them as usual
+ * listFlushAt: a frozen list that then changed by 40%+ at once; its cars
+ * listed on or before that day are not new arrivals. listReadAt: set when
+ * the last scan could not read the yard (its last copy is shown).
+ * Data without the columns (older files): yardFrozenSince's yard_health.json
+ * rule, as "stale". */
+let yardLists = null;   // { location: { state, changedAt, readAt, flushAt } }, or null
+function setYardLists(yards, yardFields) {
+  const f = Array.isArray(yardFields) ? yardFields : [];
+  const iS = f.indexOf('listState');
+  if (!Array.isArray(yards) || iS < 0) { yardLists = null; return; }
+  const iL = f.indexOf('location') >= 0 ? f.indexOf('location') : 0;
+  const iC = f.indexOf('listChangedAt'), iR = f.indexOf('listReadAt'), iF = f.indexOf('listFlushAt');
+  const out = {};
+  for (const y of yards) {
+    if (!Array.isArray(y) || !y[iL]) continue;
+    out[y[iL]] = { state: y[iS] || '', changedAt: iC >= 0 ? y[iC] : null, readAt: iR >= 0 ? y[iR] : null, flushAt: iF >= 0 ? y[iF] : null };
+  }
+  yardLists = out;
+}
+/** { state: 'stale'|'frozen', changed: Date, read: Date|null } for a yard
+ * whose list has not changed for a while, else null. */
+function yardListStale(loc) {
+  if (yardLists) {
+    const y = yardLists[loc];
+    if (!y || (y.state !== 'stale' && y.state !== 'frozen')) return null;
+    const changed = new Date(y.changedAt || NaN);
+    if (isNaN(changed)) return null;
+    const read = y.readAt ? new Date(y.readAt) : null;
+    return { state: y.state, changed, read: read && !isNaN(read) ? read : null };
+  }
+  const f = yardFrozenSince(loc);
+  return f ? { state: 'stale', changed: f, read: null } : null;
+}
+/** Not a new arrival: its yard's list is frozen, or the car came in with
+ * that yard's flush (listed on or before the flush day). */
+function arrivalHeld(v) {
+  const y = yardLists && v && yardLists[v.location];
+  if (!y) return false;
+  if (y.state === 'frozen') return true;
+  return !!(y.flushAt && v.dateAdded) && String(v.dateAdded).slice(0, 10) <= String(y.flushAt).slice(0, 10);
+}
+function isNewArrival(v) { return isNew(v.dateAdded) && !arrivalHeld(v); }
+function listDateShort(d) {
+  return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric', ...(d.getFullYear() !== new Date().getFullYear() ? { year: 'numeric' } : {}) });
+}
+/** The plain sentence, kind to the yard: what we saw, and what to do. */
+function yardListSentence(s) {
+  const read = s.read ? `, and we have not been able to read it since ${listDateShort(s.read)}` : '';
+  return `This yard’s list has not changed since ${listDateShort(s.changed)}${read}. Call before you go.`;
+}
+function yardListNoteHtml(loc, cls) {
+  const s = yardListStale(loc);
+  if (!s) return '';
+  const held = s.state === 'frozen' ? ' Until it changes, its cars are left out of Newest arrivals and alerts.' : '';
+  return `<p class="long-listed list-note${cls ? ' ' + cls : ''}" role="note">${escapeHtml(yardListSentence(s) + held)}</p>`;
+}
+function yardListChipHtml(loc) {
+  const s = yardListStale(loc);
+  return s ? `<span class="badge badge-long" title="${escapeHtml(yardListSentence(s))}">List unchanged since ${escapeHtml(listDateShort(s.changed))}</span>` : '';
+}
 
 /* ===== MODEL LIFESPANS (data/model_lifespan.json) =====
  * Median days on the lot per model and per yard+model, from the scan's
@@ -2066,6 +2138,7 @@ function _invApply(s) {
   setNoPickModels(m.noPickModels);
   setModelYears(m.modelYears);
   setNotableTrims(m.notableTrims);
+  setYardLists(m.yards, m.yardFields);
   vehicleExtras = s.extras;
   photoEpochBump();
   s.applied = new Set(s.parsed.keys());
@@ -2299,7 +2372,7 @@ function headTickerHeavy() {
     activeZipCoords && activeZipCoords.lng, r, Math.floor(Date.now() / 3600000)].join('|');
   if (key === _headHeavyKey) return _headHeavyVal;
   const weekAgo = Date.now() - 7 * 86400000;
-  const fresh = liveInventory.reduce((k, v) => k + (yardDateMs(v.dateAdded) >= weekAgo ? 1 : 0), 0);
+  const fresh = liveInventory.reduce((k, v) => k + (yardDateMs(v.dateAdded) >= weekAgo && !arrivalHeld(v) ? 1 : 0), 0);
   let near = 0;
   if (activeZipCoords) {
     near = new Set(liveInventory
@@ -3422,7 +3495,7 @@ let lastPaywallAt = 0;
  * in their radius). Silent when there's nothing true to say. */
 function proSheetProof() {
   if (!liveLoaded) return '';
-  const week = v => isNew(v.dateAdded);
+  const week = isNewArrival;
   const watches = loadWatchlist();
   if (watches.length) {
     const ids = new Set();
@@ -4014,7 +4087,8 @@ function renderCarDetail() {
   const where = [place ? escapeHtml(place) : '', d != null ? `${Math.round(d)}\u00a0mi${zip ? ' from ' + escapeHtml(zip) : ' away'}` : ''].filter(Boolean).join(' &middot; ');
   const dir = carDirectionsUrl(v);
   let stay = '';
-  if (lc.longListed) stay = `<section class="cd-stay cd-stay-long">${longListedHtml(lc.daysOn)}</section>`;
+  if (lc.listStale) stay = `<section class="cd-stay cd-stay-long">${yardListNoteHtml(v.location)}</section>`;
+  else if (lc.longListed) stay = `<section class="cd-stay cd-stay-long">${longListedHtml(lc.daysOn)}</section>`;
   else if (lc.avg && lc.daysOn != null) {
     const f = (lc.daysOn + 1) / lc.avg;
     const word = lc.daysOn > 2 * lc.avg ? 'Past typical' : f >= 0.8 ? 'Leaving soon' : f >= 0.34 ? 'Mid-stay' : 'Fresh';
@@ -4042,7 +4116,7 @@ function renderCarDetail() {
   const pinfo = ex && ex[0] ? photoInfo(ex[0]) : null;
   box.innerHTML = `
     ${photoBoxHtml(pinfo, key, `${v.year} ${v.make} ${v.model}`, 'cd-photo', pinfo && pinfo.heavy ? illoSvgHtml(ex) : '')}
-    <p class="eyebrow">${dateStr ? 'Set out ' + dateStr : 'Set-out date unknown'}${isNew(v.dateAdded) ? ' &middot; <span class="eyebrow-new">New</span>' : ''}</p>
+    <p class="eyebrow">${dateStr ? 'Set out ' + dateStr : 'Set-out date unknown'}${isNewArrival(v) ? ' &middot; <span class="eyebrow-new">New</span>' : ''}</p>
     <h2 class="cd-name" id="car-detail-title">${escapeHtml(`${v.year} ${v.make} ${v.model}`)}</h2>
     ${specs.length ? `<p class="cd-spec">${specs.join(' &middot; ')}</p>` : ''}
     ${notableTrimOf(v) ? `<p class="cd-spec cd-trim">${notableTrimBadgeHtml(v)} The VIN names this trim (NHTSA decode).</p>` : ''}
@@ -4490,7 +4564,7 @@ function getFilteredLive() {
     if (yearMax && (!v.year || v.year > yearMax)) return false;
     if (locationFilter && v.location !== locationFilter) return false;
     if (!locationFilter && yardDormant(v.location)) return false;  // dormant yards: only when picked
-    if (liveWeekOnly && !isNew(v.dateAdded)) return false;
+    if (liveWeekOnly && !isNewArrival(v)) return false;
     if (liveNewOnly && !setOutRecent(v, 2)) return false;
     if (liveSinceOnly && !setOutSince(v, FEED_SINCE_DAY)) return false;
     if (activeZipCoords && radiusMi) {
@@ -4599,8 +4673,12 @@ function getFilteredLive() {
       }
       return v._day;
     };
-    const dec = filtered.map(v => [dayOf(v), listPhotoFlag(v), dOf(v), v]);
-    dec.sort((x, y) => (y[0] - x[0]) || (y[1] - x[1]) || (x[2] - y[2]));
+    // A frozen yard's cars, and cars that came in with a yard's flush, are
+    // not arrivals: they go after every other car (still listed, marked),
+    // except in the yard's own view (Yard filter on).
+    const heldOf = locationFilter ? () => 0 : v => (arrivalHeld(v) ? 1 : 0);
+    const dec = filtered.map(v => [dayOf(v), listPhotoFlag(v), dOf(v), v, heldOf(v)]);
+    dec.sort((x, y) => (x[4] - y[4]) || (y[0] - x[0]) || (y[1] - x[1]) || (x[2] - y[2]));
     filtered = dec.map(d => d[3]);
   } else if (keyFn) {
     const dec = filtered.map(v => [keyFn(v), tieFn(v), v]);
@@ -4705,7 +4783,11 @@ function carLotClock(v) {
   }
   const longListed = isLongListed(daysOn, ls ? ls.avg : null);
   if (longListed) { lotClock = ''; leavingSoon = false; }
-  return { daysOn, avg: ls && daysOn != null && !longListed ? ls.avg : null, lotClock, leavingSoon, longListed };
+  // The yard's own list has not changed for a while: no countdown against
+  // the typical stay (the list itself may be behind); the car says so.
+  const listStale = yardListStale(v.location);
+  if (listStale) { lotClock = ''; leavingSoon = false; }
+  return { daysOn, avg: ls && daysOn != null && !longListed && !listStale ? ls.avg : null, lotClock, leavingSoon, longListed, listStale };
 }
 
 /* Value + parts for one car: the card's value line, and the parts list the
@@ -5102,7 +5184,7 @@ let liveSinceOnly = false;         // only the cars set out since the last visit
 const FEED_TOP_MAKES = 10;
 function setOutRecent(v, days) {
   const d = parseYardDate(v.dateAdded);
-  if (!d) return false;
+  if (!d || arrivalHeld(v)) return false;
   const start = new Date(); start.setHours(0, 0, 0, 0); start.setDate(start.getDate() - (days - 1));
   return d >= start;
 }
@@ -5208,11 +5290,14 @@ function setOutShort(v) {
 function carTileHtml(v, sampleKey) {
   const key = vehicleKey(v), k = escapeHtml(key);
   const dateStr = setOutShort(v);
-  const { leavingSoon, longListed, daysOn } = carLotClock(v);
+  const { leavingSoon, longListed, daysOn, listStale } = carLotClock(v);
   // Listed far past the typical stay (the yard's list may have fallen
   // behind): the tile says so in a few words; the car screen carries the
-  // whole notice ("... call before going for this one").
-  const statusBadge = isNew(v.dateAdded)
+  // whole notice ("... call before going for this one"). A yard whose own
+  // list has not changed for a while says that first, the same quiet way.
+  const statusBadge = listStale
+    ? yardListChipHtml(v.location)
+    : isNewArrival(v)
     ? '<span class="badge badge-new">New</span>'
     : leavingSoon
     ? '<span class="badge badge-soon" title="This car has been on the lot longer than ~80% of the historical average — yards rotate stock, so it may not be there much longer. An estimate, not a schedule.">Leaving soon</span>'
@@ -5273,7 +5358,7 @@ function renderLive() {
   // "New this week" replaced "Worth a look" (owner request 2026-10-26): with
   // value coverage this broad, worth-a-look counted nearly every car in view
   // — a stat that never changes anyone's plan. Fresh arrivals do.
-  const newThisWeek = vehicles.filter(v => isNew(v.dateAdded)).length;
+  const newThisWeek = vehicles.filter(isNewArrival).length;
 
   updateLiveFilterCount();
   updateZipBanner();
@@ -5548,7 +5633,7 @@ let FEED_SINCE_DAY = (() => {
 })();
 function setOutSince(v, day) {
   const d = parseYardDate(v.dateAdded);
-  return !!(d && day && localDayStr(d) > day);
+  return !!(d && day && localDayStr(d) > day) && !arrivalHeld(v);
 }
 function sinceDayLabel(day) {
   const [y, m, d] = day.split('-').map(Number);
@@ -5694,15 +5779,13 @@ document.getElementById('live-grid').addEventListener('click', (e) => {
 });
 
 /* Scan stamp so a screenshot carries when this list was true, or the stale
- * warning for a yard whose list stopped changing (car screen). The inventory
- * has no per-yard scan time (yard_health.json isn't loaded here), so this is
+ * warning for a yard that has posted no new car in months (car screen). A
+ * yard whose list has not changed for a while says so in the car screen's
+ * stay section instead (yardListNoteHtml), so the stamp stays the scan time:
  * the global scrapedAt in the viewer's local time. */
 function carScanLineHtml(v) {
-    const frozen = yardFrozenSince(v.location);
     const scanLine = yardDormant(v.location)
       ? `<span class="scan-stamp stamp-stale" title="This yard hasn\u2019t posted a new car online in months \u2014 these listings are probably out of date. Call before going.">no new cars since ${escapeHtml(formatYardDate(yardHealth[v.location].newestDateAdded))}</span>`
-      : frozen
-      ? `<span class="scan-stamp stamp-stale" title="This yard\u2019s published list hasn\u2019t changed since then, even though we re-check it every 4 hours \u2014 the yard may have stopped updating it. Call before a long drive.">yard list unchanged since ${escapeHtml(frozen.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }))}</span>`
       : liveScrapedAt
       ? `<span class="scan-stamp" title="When YardScout last scanned the yards (${escapeHtml(scrapedTitle())}) — cars can leave between scans">scanned ${escapeHtml(scrapedShort())}</span>`
       : '';
@@ -6745,7 +6828,7 @@ function buildYardDirectory() {
       byLoc.set(v.location, y);
     }
     y.count++;
-    if (isNew(v.dateAdded)) y.newCount++;
+    if (isNewArrival(v)) y.newCount++;
   }
   return [...byLoc.values()];
 }
@@ -6974,7 +7057,7 @@ function renderYards() {
             <div class="lot-clock" title="Chain-published rule — individual locations can differ; torches and jacks are banned everywhere. Confirm at the gate before a long drive.">${ICON.tag} Tools: ${chainToolPolicy(y.location)}</div>
             ${yardDormant(y.location)
               ? `<div class="yard-stale-note">No new cars posted online since ${escapeHtml(formatYardDate(yardHealth[y.location].newestDateAdded))} &mdash; the yard may have stopped updating its list. Call before going.</div>`
-              : (() => { const f = yardFrozenSince(y.location); return f ? `<div class="yard-stale-note">List unchanged since ${escapeHtml(f.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }))} &mdash; call to confirm.</div>` : ''; })()}
+              : yardListNoteHtml(y.location, 'yard-list-note')}
           </div>
         </div>
         <div class="yard-actions">
@@ -7125,7 +7208,7 @@ function yardMarks(loc) {
   for (const v of liveInventory) {
     if (v.location !== loc) continue;
     cars++;
-    if (isNew(v.dateAdded)) fresh++;
+    if (isNewArrival(v)) fresh++;
     if (savedCars[vehicleKey(v)]) pull++;
     if (watches.length && watchMatchesFor(v, watches)) watch++;
   }
@@ -7185,7 +7268,7 @@ function renderYardRows() {
   }
   const watches = loadWatchlist();
   const checks = loadYardChecks()[loc] || {};
-  const items = cars.map(v => ({ v, pull: !!savedCars[vehicleKey(v)], watch: watches.length ? watchMatchesFor(v, watches) : false, fresh: isNew(v.dateAdded), checked: !!checks[vehicleKey(v)] }));
+  const items = cars.map(v => ({ v, pull: !!savedCars[vehicleKey(v)], watch: watches.length ? watchMatchesFor(v, watches) : false, fresh: isNewArrival(v), checked: !!checks[vehicleKey(v)] }));
   const n = { all: items.length, pull: items.filter(i => i.pull).length, watch: items.filter(i => i.watch).length, fresh: items.filter(i => i.fresh).length };
   if (yardRowsFilter !== 'all' && !n[yardRowsFilter]) yardRowsFilter = 'all';
   const shown = items.filter(i => yardRowsFilter === 'all' || i[yardRowsFilter]);
@@ -7204,6 +7287,7 @@ function renderYardRows() {
     <p class="eyebrow">Walk the yard</p>
     <h2 class="yr-title" id="yard-rows-title">${escapeHtml(loc)}</h2>
     <p class="yr-place">${escapeHtml(place)}${d != null ? ` &middot; ${Math.round(d)} mi` : ''}${liveScrapedAt ? ` &middot; rows as listed, scanned ${escapeHtml(scrapedShort())}` : ''}</p>
+    ${yardListNoteHtml(loc, 'yr-list-note')}
     <div class="yr-chips" role="group" aria-label="Show">
       ${chip('all', 'All cars')}${chip('pull', 'Pull sheet')}${chip('watch', 'Watch matches')}${chip('fresh', 'New this week')}
     </div>

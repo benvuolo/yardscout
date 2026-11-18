@@ -327,6 +327,17 @@ const tab = async (page, t) => {
 };
 const firstKeys = (page, n) => page.evaluate((n) => [...document.querySelectorAll('#live-grid .heart-btn[data-vkey], #live-grid [data-vkey]')].map(b => b.dataset.vkey).filter((k, i, a) => a.indexOf(k) === i).slice(0, n), n);
 
+// Puts the app's yard list table back after a list-* screen.
+const listFreshOff = async (page) => {
+  await page.evaluate(() => {
+    if (window.__ylOrig !== undefined) { yardLists = window.__ylOrig; window.__ylOrig = undefined; }
+    try { hideYardRows(); } catch (e) { /* not open */ }
+    renderLive();
+    if (document.getElementById('tab-yards').classList.contains('active')) renderYards();
+  });
+  await resetUi(page);
+};
+
 const likelySearch = async (page) => {
     await tab(page, 'parts');
     await page.selectOption('#pf-year', '2009');
@@ -885,6 +896,87 @@ const SCREENS = [
     });
     await settle(page, 500);
   }, async (page) => { await page.evaluate(() => { if (window.__llOrig) { window.__llOrig[0].dateAdded = window.__llOrig[1]; window.__llOrig = null; } hideYardRows(); }); await resetUi(page); }],
+  // Yard list freshness (2026-11-18): a yard whose own list has not changed
+  // for a while (scraper/yard_freshness.py). The data on main may not carry
+  // the yard rows' list columns yet, so these screens set the app's table
+  // (yardLists) directly and put it back after.
+  // Tiles: "List unchanged since Nov 6" on a stale yard's cars; a frozen
+  // yard's cars leave the top of Newest arrivals.
+  ['list-stale-tiles', async (page) => {
+    await tab(page, 'live');
+    await page.evaluate(() => {
+      window.__ylOrig = yardLists;
+      const locOf = (t) => (liveInventory.find(v => vehicleKey(v) === t.dataset.vkey) || {}).location;
+      const tiles = [...document.querySelectorAll('#live-grid > .car-tile[data-vkey]')].slice(0, 6);
+      const locs = [...new Set(tiles.map(locOf).filter(Boolean))];
+      const all = [...new Set(liveInventory.map(v => v.location))];
+      const r = effectiveRadiusMi() || 1e9;
+      const frozen = all.find(l => !locs.includes(l) && liveInventory.some(v => v.location === l && isNew(v.dateAdded) && vehicleDistanceMi(v) != null && vehicleDistanceMi(v) <= r));
+      const t = {};
+      for (const l of all) t[l] = { state: '', changedAt: liveScrapedAt, readAt: null, flushAt: null };
+      for (const l of locs.slice(0, 2)) t[l] = { state: 'stale', changedAt: '2026-11-06T11:46:31Z', readAt: null, flushAt: null };
+      if (frozen) t[frozen] = { state: 'frozen', changedAt: '2026-10-22T02:14:15Z', readAt: null, flushAt: null };
+      yardLists = t;
+      renderLive();
+      const chip = document.querySelector('#live-grid .car-tile .badge-long');
+      if (!chip || !/^List unchanged since /.test(chip.textContent)) throw new Error('no "List unchanged since" chip on a tile');
+      if (document.getElementById('live-sort').value === 'date-desc' && frozen) {
+        const top = [...document.querySelectorAll('#live-grid > .car-tile[data-vkey]')].slice(0, 24).map(locOf);
+        if (top.includes(frozen)) throw new Error('a frozen yard’s car is still near the top of Newest arrivals');
+      }
+      chip.closest('.car-tile').scrollIntoView({ block: 'center' });
+    });
+    await settle(page, 400);
+  }, listFreshOff],
+  // Car screen: the notice in place of the stay meter, with the "could not
+  // read it since" clause (the longest sentence).
+  ['list-stale-detail', async (page) => {
+    await tab(page, 'live');
+    const k = await page.evaluate(() => {
+      window.__ylOrig = yardLists;
+      const t = document.querySelector('#live-grid > .car-tile[data-vkey]');
+      const v = liveInventory.find(x => vehicleKey(x) === t.dataset.vkey);
+      yardLists = { [v.location]: { state: 'stale', changedAt: '2026-11-06T11:46:31Z', readAt: '2026-11-16T10:22:50Z', flushAt: null } };
+      return t.dataset.vkey;
+    });
+    await page.evaluate((k) => openCarDetail(k), k);
+    await settle(page, 400);
+    await page.evaluate(() => {
+      const n = document.querySelector('#car-detail .list-note');
+      if (!n || !/has not changed since .+ Call before you go\.$/.test(n.textContent)) throw new Error('no list notice on the car screen');
+      if (document.querySelector('#car-detail .stay-meter')) throw new Error('stay meter still shown for a stale list');
+      n.scrollIntoView({ block: 'center' });
+    });
+  }, listFreshOff],
+  // Yards tab: a frozen yard's card, not read in the last scan.
+  ['list-frozen-yard', async (page) => {
+    await tab(page, 'yards');
+    await page.evaluate(() => {
+      window.__ylOrig = yardLists;
+      setYardsView('list'); renderYards();
+      const loc = document.querySelector('#yards-grid .yard-card[data-loc]').dataset.loc;
+      yardLists = { [loc]: { state: 'frozen', changedAt: '2026-10-22T02:14:15Z', readAt: '2026-11-17T23:47:19Z', flushAt: null } };
+      renderYards();
+      const c = document.querySelector(`#yards-grid .yard-card[data-loc="${CSS.escape(loc)}"]`);
+      const n = c && c.querySelector('.yard-list-note');
+      if (!n || !/left out of Newest arrivals and alerts\.$/.test(n.textContent)) throw new Error('no frozen-list note on the yard card');
+      c.scrollIntoView({ block: 'start' }); window.scrollBy(0, -80);
+    });
+    await settle(page, 400);
+  }, listFreshOff],
+  // The yard's own rows: the same note at the top of the sheet.
+  ['list-frozen-rows', async (page) => {
+    await tab(page, 'yards');
+    await page.evaluate(() => {
+      window.__ylOrig = yardLists;
+      setYardsView('list'); renderYards();
+      const loc = document.querySelector('#yards-grid .yard-card[data-loc]').dataset.loc;
+      yardLists = { [loc]: { state: 'frozen', changedAt: '2026-10-22T02:14:15Z', readAt: null, flushAt: null } };
+      openYardRows(loc);
+      if (!document.querySelector('#yard-rows-body .yr-list-note')) throw new Error('no list note in the row view');
+    });
+    await settle(page, 500);
+  }, listFreshOff],
   // Yards list: a yard's Premium lot rides on the main yard's card (centre moved
   // to Ogden, UT for the test, then restored).
   ['yards-premium-list', async (page) => {
