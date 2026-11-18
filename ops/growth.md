@@ -1300,3 +1300,106 @@ the docs before this branch. The checked-in inventory on this base was
 scraped 11-17 18:45 and the check reads today's date, so it should pass on
 fresher data. Layout check at six widths: 2,472 checks, 0 failures. All six
 API suites pass and left nothing listening.
+
+## The Cars watch strip asks for the free email alert — branch `growth/strip-falert-1118`, NOT merged (2026-11-18)
+
+Hub brief 2026-11-18: in the 7 days to 11-18 the Monday-email ask (strip and
+toast, `email-asked`) was shown 17 times and no one gave an address; the free
+emailed alert (live since 11-17 16:46 UTC, hub.md) was only offered in the
+Alerts card. The watch toast already offers the alert on this base
+(5c0e402c, "Watertight, continued" 3b), so this branch is the Cars watch
+STRIP only, on the toast's own rule and request. Built on
+`origin/hub/watertight-merge-1118` (fe91f512), then merged its head ca283423
+and main fee45c10. Nothing deployed, merged into main, dispatched or sent.
+
+**What the strip shows** (website, a make picked in the Cars list, not
+already watched; `stripAskKind`, block "the free email alert comes first"
+under ONE-STEP MONDAY EMAIL IN THE WATCH STRIP in `docs/app.js`):
+
+| Case | Strip |
+|---|---|
+| One model, free, a location, no alert on or waiting here, not declined this visit, a free list with room | "Want the next one? Free email alert for **Nissan Xterra**: we email you when another is set out within 50 mi, usually the same day. One car, one address, no account." [email] [Email me], "or just watch it here". No cars in the list: "None here right now. … when one is set out …". The distance is the alert's (the list's radius, at most 50). No Pro prompt in the ask; the strip's Pro box under it is unchanged. |
+| …after "Email me" | One watch through `addQuickWatch` (source `strip`, the list's radius, as before), one `POST /v1/free-alert/signup` with a copy of it (make, model, years, centre rounded, at most 50 mi; the toast's `falertToastSubmit` / `falertSignup`). The strip: "✓ Watching X; new ones light up in Alerts." and "Check your inbox. Tap the link we sent to v•••@… to turn on your email alert for X. Nothing is sent until you do." With a token this browser holds for that address (a confirmed Monday subscriber): "Your free email alert is on for X, to v•••@…" and no confirmation email. `ys_falert` pending (or on); the Alerts card shows the same. |
+| …a later render (a scan coming in) | "Watching X — new ones light up in Alerts. Check your inbox to turn on its email alert." / "Its free email alert is on." (new: before, a re-render dropped the "check your inbox" line). |
+| Several models (2 to 5) or the whole make | The Monday email, as before ("Add X to your free Monday email?" for a confirmed subscriber). More than 5: the plain strip. |
+| An alert on or waiting for its click here | The Monday email (or "Add"). No "change your alert to this car": it would silently replace the car chosen for the one alert; "Change car" stays in the Alerts card. |
+| The alert declined this visit (toast x or 30 s, or the strip's "or just watch it here") | The Monday email; both declined: the plain strip. |
+| A free list at 5 watches | The Monday strip, as before (its submit opens the upgrade sheet, nothing sent): a full list cannot make the alert's watch. |
+| Pro / the app shells | The plain strip with its Watch button, unchanged. |
+| No location at all | The plain strip; Watch asks for the zip in the toast, and the toast then offers the alert (unchanged path). |
+| A guessed place or a link's place | The alert ask carries the zip field (`stripZipFirst`): "within 50 mi of your zip"; the zip is saved first and the watch is centred on it, never on the guess. With a saved zip under a link's place: "of your own location". |
+
+"or just watch it here" on the alert ask makes the watch (`jhWatchSearch`)
+and counts as declining the alert this visit (`ys_falert_no`), so the toast
+that follows offers the Monday email, not the same ask again.
+
+**The toast** is as 5c0e402c built it. Its rule is now one function,
+`falertAskOpen()` (free web visitor, no alert on or waiting here, not
+declined this visit), which `falertToastPick` and the strip both call; no
+behaviour change in the toast.
+
+**Counting (dated; the daily email compares weeks).** From the day this is
+deployed the strip's alert ask counts `free-alert-shown` ("Free alert
+offered"): when at least half of it is on screen, once a visit, under the
+key the card and the toast use (`ys_falert_seen`), so a visit that sees the
+ask in two places counts once. An address given counts `free-alert-asked`.
+`email-asked` still means the Monday-email field only and is NOT counted for
+the alert's ask. So "Monday email asked" falls and "Free alert offered" rises
+by the visits whose strip covered one model; weeks across the deploy day are
+not like for like on those two rows. No counting-rules version step (as for
+the alert itself). Written in `docs/app.js` (EVENTS_V comment, FUNNEL_EVENTS,
+the strip block).
+
+**Rule 6.** Watches are made only by `addQuickWatch`, exactly as before;
+stored watches are never edited (byte-for-byte checks in three suites). The
+alert keeps its own key `ys_falert`.
+
+**Files.** `docs/app.js`, `docs/sw.js` (`jh-v211`); tests
+`backend/test/cars_feed_e2e.mjs` (11, 11a, 11b rewritten: 43 strip checks),
+`strip_guess_e2e.mjs` (the alert under a guess; the Monday email under a
+guess with an alert waiting: 20), `free_email_alert_ui_e2e.mjs` case 11 (15,
+real beacons; against the base docs its first checks fail and the case stops
+at the missing ask), `free_email_alert_client_unit.mjs` (+19: `stripAskKind`
+for every case above, the shared rule, the ask's wording, no Pro prompt in
+it), `ui_no_truncation.mjs` (`feed-strip-mail` now with an alert waiting;
+new `feed-strip-falert`, `-zip`, `-msg`, `-sent`, longest model in range with
+years: those plus the toast's alert screen and `r5-cars-next` at six widths,
+light and dark, 100% and 200%: 168 checks, 0 failures).
+
+**Decisions the owner may want to change.** (1) One model only: a whole
+make keeps the Monday email. (2) No "change your alert to this car" in the
+strip. (3) "or just watch it here" declines the alert for the visit; the
+toast then offers the Monday email. (4) A full free list keeps the Monday
+strip (and its upgrade sheet) rather than the plain strip.
+
+**Seen, not fixed.**
+- With 5 free watches the strip still asks for an email and then opens the
+  upgrade sheet (before this branch too); the plain strip would be kinder.
+- The strip names a year range after the car ("Silverado 1500 2003–2007")
+  and the alert before it ("2003–2007 Silverado 1500"), so the reply shows
+  both forms.
+- On the Monday strip (several models), "or just watch it here" is followed
+  by the toast asking for the Monday email again (before this branch too;
+  `cars_feed_e2e` 11b checks it).
+- `backend/` has no `package-lock.json`, so `npm ci` stops with EUSAGE; the
+  run below used the main checkout's `backend/node_modules` through a link
+  (as the hub did), not committed.
+- `tools/regress.sh` takes the shared lock itself and says never to run it
+  under `flock`: wrapped in `flock /tmp/ys-test.lock` it would wait on itself
+  forever. Run as `bash tools/regress.sh --out DIR`.
+
+**Suggestions.** (1) The scorecard's Monday-email item could say "the Cars
+strip asks for the free alert first since (deploy day)", so the drop in
+"asked" is not read as interest falling. (2) A strip that says "Watching X"
+could offer the alert for that watch when `falertAskOpen()` and it is among
+the first 5 (today only the Alerts card does). (3) With 17 asks a week, give
+it two weeks before judging the switch.
+
+**Final run** (branch head 3e881c5e = the work above merged with main
+fee45c10; 2026-11-18 19:14 UTC): `bash tools/regress.sh --out DIR`, one
+test at a time under the shared lock it takes itself: **104 passed, 0
+failed, 0 skipped** (units, scraper, tools, every self-contained browser
+suite, the six API suites, the layout check). Layout at six widths: 2,664
+checks, 0 failures. `cars_feed_e2e` passed in full this time (its "New:
+only cars set out today or yesterday" check, which failed on the older
+inventory in the watertight run, passes on today's data).
