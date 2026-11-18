@@ -1289,3 +1289,14 @@ migration). Against the scorecard before the change the new checks fail.
 
 Decision the owner may want to change: the free alert line sits under the
 Monday email item rather than as a sixth numbered item.
+
+### Final run (branch head 5c0e402c, 2026-11-18 16:47 UTC)
+
+`tools/regress.sh` (new in this branch, item 6), one test at a time under
+the shared lock: **93 passed, 1 failed, 0 skipped**, about 80 minutes. The
+one failure is `cars_feed_e2e.mjs` "New: only cars set out today or
+yesterday" (0 such cars in the test's area): it fails the same way against
+the docs before this branch. The checked-in inventory on this base was
+scraped 11-17 18:45 and the check reads today's date, so it should pass on
+fresher data. Layout check at six widths: 2,472 checks, 0 failures. All six
+API suites pass and left nothing listening.
