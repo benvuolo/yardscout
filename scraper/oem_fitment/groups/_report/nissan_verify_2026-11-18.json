@@ -1,0 +1,3229 @@
+{
+ "what": "Independent CURATION_SPEC 11.4 release sample of the nissan candidate (groups/_report/nissan.candidate.json, raw oem-raw@57e8b5b9). Verifier did not write the rules and did not read the builder's verdicts before writing these.",
+ "date": "2026-11-18",
+ "session": "https://claude.ai/code/session_01LsgNuWEh1vdaDCtdP1jxMM (verifier subagent)",
+ "seed": 46021118,
+ "draw": {
+  "population": 343,
+  "held_excluded": [
+   "wiper-motor"
+  ],
+  "group_quota": {
+   "climate-control": 2,
+   "gauge-cluster": 8,
+   "side-mirrors": 8,
+   "window-regulator": 12
+  },
+  "strata_counts": {
+   "O": 278,
+   "S": 52,
+   "G": 13
+  },
+  "method": "Verifier's own draw (not audit11_4/sample.py): 30 groups, per-category quota (>=1 each, rest by largest remainder), round-robin over strata X cross-make / G cross-generation / S single-year windows / O other inside each category; 30 pairs from the other groups, one per group, seeker and donor of different feed models, random years. No cross-make groups exist in the candidate, so X is empty."
+ },
+ "evidence_sources": "Raw records read from git (oem-raw@57e8b5b9 raw/www.nissanpartsdeal.com.* and raw/www.infinitipartsdeal.com.*; Lnnn = line in <site>.lists.jsonl, product Lnnn = line in <site>.jsonl). Lot mix from main@a85c654 inventory_live.json (sha256 1a9cfa73...) and vin_decodes.json.gz (1357625b...). Two web searches, search-result text only ('82730-9FJ0A window motor Titan crew cab'; 'Nissan Titan King Cab rear access door window fixed'): the first summary names 'Crew Cab' for 82730-9FJ0A, the second settles nothing; no page fetched, no catalog or competitor site opened.",
+ "rubric": {
+  "RIGHT": "Every named vehicle-year lists the number (own list page, or the product record's own seed page / fitment row when the vehicle-year has no list page for the category), and each remaining restriction is a trim/package option (covered by the option/configurations note), a production window overlapping the model year by >=5 months (hub rule (a), curate._production_excludes), or a cab code the note names correctly.",
+  "WRONG": "A named vehicle-year where, by the evidence, no US car can carry the number (body, engine, drive, cab, market, years, window, side); or a vehicle-year built in two or more bodies or drive types where the rows limit the number to one and the group has no body/drive gate or note (CLAUDE.md rule 3: body gate, drive gate).",
+  "RISK": "Every named vehicle-year lists the number, but part of a vehicle-year cannot carry it for a reason the note does not name and that is not an equipment option: a second engine or transmission under the same model name, or a cab split the catalog rows do not mark. Under the brief's literal wording ('any car the group would show as a donor cannot carry that part number') these are WRONG; the spec treats ENGINE/TRANS clauses as a 'maybe' cover, which is what Likely means. Counted separately so the hub can apply either reading."
+ },
+ "counts": {
+  "all": {
+   "RIGHT": 40,
+   "WRONG": 9,
+   "RISK": 11
+  },
+  "groups": {
+   "RIGHT": 18,
+   "WRONG": 5,
+   "RISK": 7
+  },
+  "pairs": {
+   "RISK": 4,
+   "RIGHT": 22,
+   "WRONG": 4
+  }
+ },
+ "items": [
+  {
+   "item": "G01",
+   "id": "oem:nissan:climate-control:C:267b73795c",
+   "cat": "climate-control",
+   "pn": [
+    "27510-1E400"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1993,
+     1993
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1993,
+     1993
+    ]
+   ],
+   "note": "Nissan catalog lists #27510-1E400 for both — option: fits some option packages; verify the number on the part",
+   "strata": [
+    "S"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "1993-nissan-altima (nissanpartsdeal.lists L669) and 1993-nissan-stanza (L820) both list 27510-1E400 'F/AIR CONDITIONER-STD TYPE; *FED. S. XE + *CAL. S. XE, FED. S. (GXE+ SE) + CAL. S. (GXE+ SE)'; GLE uses 28525-1E501 on the same pages. Product L4815 FIT '1993-1994 Nissan Altima | GXE, SE, XE' and Stanza. Trim split covered by the option note."
+  },
+  {
+   "item": "G02",
+   "id": "oem:nissan:climate-control:C:632486d0ca",
+   "cat": "climate-control",
+   "pn": [
+    "27510-ZD005"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2003,
+     2004
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2003,
+     2004
+    ]
+   ],
+   "note": "Nissan catalog lists #27510-ZD005 for both — option: fits some option packages; Frontier: crew cab only; verify the number on the part",
+   "strata": [
+    "O"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "2003/2004-nissan-frontier (L408/L435) '*CC. SB. SC + *CC. XB. SC, CC. SB. XE + CC. XB. XE' (crew cab only, named in the note); 2003-nissan-xterra (L274) 'W. KA24DE + W. (VG33E+ VG33ER). XE'. 2004 Xterra has no own climate page; product L281 FIT '2002-2004 Nissan Xterra | XE|... KA24DE, VG33E, VG33ER' and seed page 2004-nissan-xterra list_info say the same. 2003 rows 'Production Date: from 09/2002' overlap MY2003 by 10 months (hub rule (a))."
+  },
+  {
+   "item": "G03",
+   "id": "oem:nissan:gauge-cluster:C:849ca1f764",
+   "cat": "gauge-cluster",
+   "pn": [
+    "24820-89Y02"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "200SX",
+     1995,
+     1995
+    ],
+    [
+     "Nissan",
+     "200SX",
+     1998,
+     1999
+    ],
+    [
+     "Nissan",
+     "Sentra",
+     1992,
+     1999
+    ]
+   ],
+   "note": "Nissan catalog lists #24820-89Y02 for both — option: fits some option packages; verify the number on the part",
+   "strata": [
+    "G"
+   ],
+   "verdict": "WRONG",
+   "evidence": "BODY: the 200SX is a 2-door coupe. On 1995/1998/1999-nissan-200sx (L800/L792/L838, the shared B14 page) 24820-89Y02 is listed only as 'Fitting Vehicle Options: 4S. (E + XE + GXE)' (4-door sedan trims); the coupe rows on the same pages are 24820-89Y00 '4S. GLE + C. GA16DE', 24820-8B700 'C, C. GA16DE', 24820-89Y06 'C. SR20DE'. Every lot 200SX 1995-98 VIN is 1N4AB42D/1N4BB42D (B42, coupe; vPIC 'Coupe' for 1995-97, mislabels the 1998s 'Sedan/Saloon'). The product page FIT '1995-1999 Nissan 200SX | Base, GXE, XE' is the shared-page aggregate and contradicts the option column. No 200SX can carry it; the group shows 200SX 1995/1998-99 donors."
+  },
+  {
+   "item": "G04",
+   "id": "oem:nissan:gauge-cluster:C:4bacd87189",
+   "cat": "gauge-cluster",
+   "pn": [
+    "24820-6AH1B"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "M37",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "Q70",
+     2014,
+     2014
+    ]
+   ],
+   "note": "Nissan catalog lists #24820-6AH1B for both — option: fits some option packages; verify the number on the part",
+   "strata": [
+    "S"
+   ],
+   "verdict": "RISK",
+   "evidence": "ENGINE within one model name: 24820-6AH1B is 'SEDAN. VQ37VHR. PREMIUM + SEDAN. (BASE+ SPORTPRE)' on 2013-infiniti-m37 (L951) and 2014-infiniti-q70-gas (L1201). The 2014 Q70 page covers both engines; its VK56VD rows use 24820-6AH1C/-6AH1D/-1MA5C/-1MA5D. A Q70 5.6 cannot carry it; the note says only 'option: fits some option packages'. Under the brief's literal wording this is WRONG. Lot now: Q70 2014 = 1 x 3.7L + 1 undecoded."
+  },
+  {
+   "item": "G05",
+   "id": "oem:nissan:gauge-cluster:C:a366a9efd1",
+   "cat": "gauge-cluster",
+   "pn": [
+    "24820-8Z002"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "200SX",
+     1998,
+     1999
+    ],
+    [
+     "Nissan",
+     "Sentra",
+     1998,
+     1999
+    ]
+   ],
+   "note": "Nissan catalog lists #24820-8Z002 for both — option: fits some option packages; verify the number on the part",
+   "strata": [
+    "O"
+   ],
+   "verdict": "WRONG",
+   "evidence": "BODY: 24820-8Z002 is '4S. GA16DE' only on 1998-nissan-200sx (L792) and 1999-nissan-200sx (L838); the coupe GA16DE row is 24820-8B700 'C, C. GA16DE' / 'C. GA16DE'. Group names 200SX 1998-99 (coupe-only model)."
+  },
+  {
+   "item": "G06",
+   "id": "oem:nissan:gauge-cluster:C:18568e51e9",
+   "cat": "gauge-cluster",
+   "pn": [
+    "24820-89Y00"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "200SX",
+     1995,
+     1999
+    ],
+    [
+     "Nissan",
+     "Sentra",
+     1992,
+     1999
+    ]
+   ],
+   "note": "Nissan catalog lists #24820-89Y00 for both — option: fits some option packages; verify the number on the part",
+   "strata": [
+    "G"
+   ],
+   "verdict": "WRONG",
+   "evidence": "BODY (one vehicle-year): 1999-nissan-200sx (L838) lists 24820-89Y00 only as '4S. GLE'; the 1999 coupe GA16DE row is 24820-8B700 'C. GA16DE'. 1995-97 pages give '4S. GLE + C. GA16DE' (coupe covered) and 1998 '4S. GLE, 4S. GLE + C. GA16DE'. The group names 200SX 1995-1999, so a 1999 200SX would be shown though no 1999 coupe row lists the number. 0 lot cars of 1999 200SX today."
+  },
+  {
+   "item": "G07",
+   "id": "oem:nissan:gauge-cluster:C:e27f43d13a",
+   "cat": "gauge-cluster",
+   "pn": [
+    "24810-EA101"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2005,
+     2005
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2005,
+     2005
+    ]
+   ],
+   "note": "Nissan catalog lists #24810-EA101 for both — option: fits some option packages; verify the number on the part",
+   "strata": [
+    "S"
+   ],
+   "verdict": "WRONG",
+   "evidence": "DRIVE: 24810-EA101 is 4WD-only on both own pages: 2005-nissan-frontier (L400) '*KC. 4WD. LE + *CC. 4WD. LE, *KC. 4WD. SE. AT + *CC. 4WD. SE. AT'; 2005-nissan-xterra (L290) '*W. 4WD. SE'. The same pages list 2WD clusters under other numbers (Frontier 24810-EA206/-EA21E/-EA24E 'KC. 2WD...', Xterra 24810-EA67E 'W. 2WD. SE'). No drive gate or note (CLAUDE.md rule 3). Lot: 2005 Frontier 37 x 4x2 / 12 x 4WD; 2005 Xterra 48 x 4x2 / 36 x 4WD."
+  },
+  {
+   "item": "G08",
+   "id": "oem:nissan:gauge-cluster:C:cf319653cb",
+   "cat": "gauge-cluster",
+   "pn": [
+    "24810-ZP67A"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2007,
+     2009
+    ],
+    [
+     "Nissan",
+     "Pathfinder",
+     2006,
+     2008
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2007,
+     2007
+    ]
+   ],
+   "note": "Nissan catalog lists #24810-ZP67A for both — option: fits some option packages; verify the number on the part",
+   "strata": [
+    "O"
+   ],
+   "verdict": "WRONG",
+   "evidence": "DRIVE: 24810-ZP67A is 4WD-only on every own page: 2007-09 Frontier (L446/L461/L580) '*KC. 4WD. LE + *KC. 4WD. OFFROAD. AT + *CC. 4WD. (LE+ OFFROAD)'; 2006-08 Pathfinder (L285/L252/L235) '*W. 4WD', 'W. 4WD. S'; 2007 Xterra (L296) '*W. 4WD. SE'. 2WD clusters are other numbers (e.g. 24810-ZP74A 'KC. 2WD. LE + CC. 2WD. LE'). Lot: 2007 Pathfinder 55 x 4x2 of 112."
+  },
+  {
+   "item": "G09",
+   "id": "oem:nissan:gauge-cluster:C:397ce76b2d",
+   "cat": "gauge-cluster",
+   "pn": [
+    "24820-1MA5A"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "M37",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "Q70",
+     2014,
+     2014
+    ]
+   ],
+   "note": "Nissan catalog lists #24820-1MA5A for both — option: fits some option packages; verify the number on the part",
+   "strata": [
+    "S"
+   ],
+   "verdict": "RISK",
+   "evidence": "ENGINE within one model name: 24820-1MA5A 'SEDAN. VQ37VHR. (ADVTECH + SPADTEC)' on 2013 M37 (L951) and 2014 Q70 gas page (L1201, window 01/2013-11/2013); Q70 VK56VD uses 24820-1MA5C/-1MA5D. Same class as G04."
+  },
+  {
+   "item": "G10",
+   "id": "oem:nissan:gauge-cluster:C:2444c15328",
+   "cat": "gauge-cluster",
+   "pn": [
+    "24820-1MA5B"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "M37",
+     2012,
+     2013
+    ],
+    [
+     "Infiniti",
+     "Q70",
+     2014,
+     2014
+    ]
+   ],
+   "note": "Nissan catalog lists #24820-1MA5B for both — option: fits some option packages; verify the number on the part",
+   "strata": [
+    "O"
+   ],
+   "verdict": "RISK",
+   "evidence": "ENGINE within one model name: 24820-1MA5B 'SEDAN. VQ37VHR. TECHNOLO + SEDAN. (BASE+ SPORTTEC)' on 2012/2013 M37 (L910/L951) and 2014 Q70 (L1201). Same class as G04."
+  },
+  {
+   "item": "G11",
+   "id": "oem:nissan:side-mirrors:R:3d122f1ab9",
+   "cat": "side-mirrors",
+   "pn": [
+    "96301-ZD000"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2004,
+     2004
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2004,
+     2004
+    ]
+   ],
+   "note": "Nissan catalog lists #96301-ZD000 for both — option: fits some option packages; Frontier: king cab only; verify the number on the part",
+   "strata": [
+    "S"
+   ],
+   "verdict": "RISK",
+   "evidence": "ENGINE: 96301-ZD000 is 'KC. KA24DE' on 2004-nissan-frontier (L438, from 10/2003) and 'W. KA24DE' on the 2004 Xterra seed page (product L266 list_info). V6 King Cabs and all crew cabs use 96301-3S500/-3S510. Cab named correctly ('Frontier: king cab only'), engine not named. Lot: 122 of 126 decoded 2004 Xterras are 3.3L V6."
+  },
+  {
+   "item": "G12",
+   "id": "oem:nissan:side-mirrors:R:a003acd2ac",
+   "cat": "side-mirrors",
+   "pn": [
+    "96301-1CA0A"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "FX35",
+     2009,
+     2012
+    ],
+    [
+     "Infiniti",
+     "FX37",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "FX50",
+     2009,
+     2010
+    ],
+    [
+     "Infiniti",
+     "QX70",
+     2014,
+     2017
+    ]
+   ],
+   "note": "Nissan catalog lists #96301-1CA0A for both — option: fits some option packages; verify the number on the part",
+   "strata": [
+    "O"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "Every named vehicle-year lists 96301-1CA0A (FX35 2009/2010/2012 L664/L681/L1050; FX37 2013 L1024; FX50 2009/2010 L1065/L1400; QX70 2014-17 L1166/L1216/L1225/L1258); options are Premium-package configurations ('W. VQ35HR. PREMIUM + W. VK50VE', 'W. PREMIUM'). FX35 2011 has no own page; product L251 seed page 2011-infiniti-fx35 'W. VQ35HR. PREMIUM' and FIT '2009-2012 Infiniti FX35'."
+  },
+  {
+   "item": "G13",
+   "id": "oem:nissan:side-mirrors:R:2e0d578a9b",
+   "cat": "side-mirrors",
+   "pn": [
+    "K6301-1MA0A"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "M37",
+     2011,
+     2011
+    ],
+    [
+     "Infiniti",
+     "M56",
+     2011,
+     2011
+    ]
+   ],
+   "note": "Nissan catalog lists #K6301-1MA0A for both — fits some configurations; verify the number on the part",
+   "strata": [
+    "S"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "2011-infiniti-m56 (L1013) lists K6301-1MA0A 'PRIMER; Production Date: 01/2010-12/2010' (6 months of MY2011). M37 2011 has no own list page in lists.jsonl; product L850 seed page 2011-infiniti-m37 has the same row and FIT '2011 Infiniti M37 | ... VK56VD, VQ37VHR'."
+  },
+  {
+   "item": "G14",
+   "id": "oem:nissan:side-mirrors:L:59c8838b2d",
+   "cat": "side-mirrors",
+   "pn": [
+    "96302-CL70A"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "FX35",
+     2006,
+     2007
+    ],
+    [
+     "Infiniti",
+     "FX45",
+     2006,
+     2007
+    ]
+   ],
+   "note": "Nissan catalog lists #96302-CL70A for both — option: fits some option packages; verify the number on the part",
+   "strata": [
+    "O"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "96302-CL70A 'W, W. VQ35DE' (first alternative = every FX) on 2006/2007 FX35 (L474/L580) and 2006/2007 FX45 (L929/L1385). The 2005-page product row carries 'Production Date: 11/2005-08/2006'; the 2007 own pages carry no window, so the own page is taken."
+  },
+  {
+   "item": "G15",
+   "id": "oem:nissan:side-mirrors:L:1291e1794f",
+   "cat": "side-mirrors",
+   "pn": [
+    "96302-ZD000"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2004,
+     2004
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2004,
+     2004
+    ]
+   ],
+   "note": "Nissan catalog lists #96302-ZD000 for both — option: fits some option packages; Frontier: king cab only; verify the number on the part",
+   "strata": [
+    "S"
+   ],
+   "verdict": "RISK",
+   "evidence": "ENGINE: LH twin of G11. 96302-ZD000 'KC. KA24DE' on 2004 Frontier (L438) and 'W. KA24DE' on the 2004 Xterra seed page (product L262). Engine not named in the note."
+  },
+  {
+   "item": "G16",
+   "id": "oem:nissan:side-mirrors:L:33151185cc",
+   "cat": "side-mirrors",
+   "pn": [
+    "96302-EH100"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "M35",
+     2006,
+     2008
+    ],
+    [
+     "Infiniti",
+     "M45",
+     2006,
+     2008
+    ]
+   ],
+   "note": "Nissan catalog lists #96302-EH100 for both — fits some configurations; verify the number on the part",
+   "strata": [
+    "O"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "96302-EH100 with no option code on 2007/2008 M35 (L460/L552) and 2006-08 M45 (L693/L768/L981); 2008 window 12/2004-01/2008 overlaps MY2008 by 7 months. M35 2006: product L300 seed page 2006-infiniti-m35, FIT '2006-2010 Infiniti M35'."
+  },
+  {
+   "item": "G17",
+   "id": "oem:nissan:side-mirrors:L:7e052f5685",
+   "cat": "side-mirrors",
+   "pn": [
+    "K6302-1MA0A"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "M37",
+     2011,
+     2011
+    ],
+    [
+     "Infiniti",
+     "M56",
+     2011,
+     2011
+    ]
+   ],
+   "note": "Nissan catalog lists #K6302-1MA0A for both — fits some configurations; verify the number on the part",
+   "strata": [
+    "S"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "LH twin of G13: 2011-infiniti-m56 (L1013) and product L848 seed page 2011-infiniti-m37, 'PRIMER; 01/2010-12/2010'."
+  },
+  {
+   "item": "G18",
+   "id": "oem:nissan:side-mirrors:L:f96050c2ab",
+   "cat": "side-mirrors",
+   "pn": [
+    "96302-CL21A"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "FX35",
+     2005,
+     2006
+    ],
+    [
+     "Infiniti",
+     "FX45",
+     2005,
+     2006
+    ]
+   ],
+   "note": "Nissan catalog lists #96302-CL21A for both — option: fits some option packages; verify the number on the part",
+   "strata": [
+    "O"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "96302-CL21A '*W' on 2005/2006 FX35 (L700/L474) and FX45 (L942/L929); 2005 window 11/2004-11/2005."
+  },
+  {
+   "item": "G19",
+   "id": "oem:nissan:window-regulator:RR:1f791b9473",
+   "cat": "window-regulator",
+   "pn": [
+    "82720-1HL0A"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Kicks",
+     2018,
+     2019
+    ],
+    [
+     "Nissan",
+     "Versa",
+     2013,
+     2013
+    ],
+    [
+     "Nissan",
+     "Versa",
+     2017,
+     2019
+    ]
+   ],
+   "note": "Nissan catalog lists #82720-1HL0A for both — option: fits some option packages; verify the number on the part",
+   "strata": [
+    "G"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "82720-1HL0A on 2018/2019-nissan-kicks (L787/L789) and 2013/2017/2018/2019-nissan-versa-sedan (L545/L553/L634/L662) 'SED. (BASE + MID)'. The catalog has only sedan Versa pages for 2013+ (hatchback = separate Versa Note). Product L971 FIT includes Kicks 2018-2024 and Versa 2012-2025."
+  },
+  {
+   "item": "G20",
+   "id": "oem:nissan:window-regulator:RR:5af5348a13",
+   "cat": "window-regulator",
+   "pn": [
+    "82730-1E400"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1993,
+     1993
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1993,
+     1993
+    ]
+   ],
+   "note": "Nissan catalog lists #82730-1E400 for both — fits some configurations; verify the number on the part",
+   "strata": [
+    "S"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "82730-1E400 on 1993-nissan-altima (L674) and 1993-nissan-stanza (L825), 'Production Date: 06/1992-08/1993' (full MY1993)."
+  },
+  {
+   "item": "G21",
+   "id": "oem:nissan:window-regulator:RR:30895da2ee",
+   "cat": "window-regulator",
+   "pn": [
+    "82700-0E710"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1993,
+     1997
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1993,
+     1997
+    ]
+   ],
+   "note": "Nissan catalog lists #82700-0E710 for both — option: fits some option packages; verify the number on the part",
+   "strata": [
+    "O"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "82700-0E710 'FED. S. XE + CAL. S. XE' on Altima 1993/94/96/97 (L674/L551/L630/L515) and Stanza 1993-97 (L825/L813/L819/L831/L837); Altima 1995 via product L1564 seed page 1995-nissan-altima (same option) and FIT '1993-1997 Nissan Altima | XE'."
+  },
+  {
+   "item": "G22",
+   "id": "oem:nissan:window-regulator:FR:356c6aeb2c",
+   "cat": "window-regulator",
+   "pn": [
+    "80720-1HL0A"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Kicks",
+     2018,
+     2019
+    ],
+    [
+     "Nissan",
+     "Versa",
+     2013,
+     2013
+    ],
+    [
+     "Nissan",
+     "Versa",
+     2017,
+     2019
+    ]
+   ],
+   "note": "Nissan catalog lists #80720-1HL0A for both — option: fits some option packages; verify the number on the part",
+   "strata": [
+    "G"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "Front twin of G19: 80720-1HL0A on Kicks 2018/2019 (L786/L788) and Versa sedan 2013/2017/2018/2019 (L544/L552/L633/L661) 'SED. (BASE + MID)'."
+  },
+  {
+   "item": "G23",
+   "id": "oem:nissan:window-regulator:RR:3558fa3b82",
+   "cat": "window-regulator",
+   "pn": [
+    "82730-9FJ0A"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Armada",
+     2009,
+     2009
+    ],
+    [
+     "Nissan",
+     "Titan",
+     2012,
+     2012
+    ]
+   ],
+   "note": "Nissan catalog lists #82730-9FJ0A for both — fits some configurations; verify the number on the part",
+   "strata": [
+    "S"
+   ],
+   "verdict": "RISK",
+   "evidence": "CAB, unmarked in the catalog: 82730-9FJ0A (rear-door window motor) on 2009-nissan-armada (L714, 04/2008-08/2011) and 2012-nissan-titan (L745, 08/2011-11/2014) with no cab code, so no cab note was made. The same Titan rear-door pages split the rear-door glass by cab (82300-7S200 'KC. S' vs 82300-8S500 'CC'), and a search-result summary for 82730-9FJ0A names 'Crew Cab'. Whether a 2012 Titan King Cab access door has a window motor at all is not settled by the raw records; if it does not, King Cab donors are shown for a part they lack."
+  },
+  {
+   "item": "G24",
+   "id": "oem:nissan:window-regulator:FR:6f0276b8ac",
+   "cat": "window-regulator",
+   "pn": [
+    "80720-1MA0A"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "M35h",
+     2012,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M37",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M56",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "Q70",
+     2014,
+     2015
+    ],
+    [
+     "Infiniti",
+     "Q70L",
+     2015,
+     2015
+    ]
+   ],
+   "note": "Nissan catalog lists #80720-1MA0A for both — option: fits some option packages; verify the number on the part",
+   "strata": [
+    "O"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "80720-1MA0A on every named vehicle-year: M35h 2012/13 (L1182/L1480), M37 2011-13 (L1251/L918/L959), M56 2011-13 (L1016/L1430/L1291), Q70 2014/15 (L1209/L1125 'SEDAN, SEDAN + LSEDAN'), Q70L 2015 (L1318). No engine or body restriction."
+  },
+  {
+   "item": "G25",
+   "id": "oem:nissan:window-regulator:RR:35d76f7c19",
+   "cat": "window-regulator",
+   "pn": [
+    "82731-CV01B"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Cube",
+     2011,
+     2014
+    ],
+    [
+     "Nissan",
+     "Juke",
+     2011,
+     2014
+    ],
+    [
+     "Nissan",
+     "Juke",
+     2016,
+     2016
+    ],
+    [
+     "Nissan",
+     "Leaf",
+     2011,
+     2012
+    ]
+   ],
+   "note": "Nissan catalog lists #82731-CV01B for both — fits some configurations; verify the number on the part",
+   "strata": [
+    "G"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "82731-CV01B with no option on Cube 2011-14 (L656/L742/L747/L785), Juke 2011-14 and 2016 (L666/L541/L543/L603/L735), Leaf 2011/12 (L726/L694)."
+  },
+  {
+   "item": "G26",
+   "id": "oem:nissan:window-regulator:RL:442bf3166f",
+   "cat": "window-regulator",
+   "pn": [
+    "82731-1E400"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1993,
+     1993
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1993,
+     1993
+    ]
+   ],
+   "note": "Nissan catalog lists #82731-1E400 for both — fits some configurations; verify the number on the part",
+   "strata": [
+    "S"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "82731-1E400 on 1993 Altima (L674) and 1993 Stanza (L825), 06/1992-08/1993."
+  },
+  {
+   "item": "G27",
+   "id": "oem:nissan:window-regulator:RL:41756fffc0",
+   "cat": "window-regulator",
+   "pn": [
+    "82731-7Z005"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2001,
+     2001
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2000,
+     2002
+    ]
+   ],
+   "note": "Nissan catalog lists #82731-7Z005 for both — option: fits some option packages; Frontier: crew cab only; verify the number on the part",
+   "strata": [
+    "O"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "82731-7Z005: 2001-nissan-frontier (L317) '*CC' (crew cab, named in the note); 2000 Xterra (L194) no option; 2001/2002 Xterra (L215/L177) '*W. KA24DE + *W. VG33E. XE, *W. VG33E, W. VG33E. SE + W. VG33ER' (every engine)."
+  },
+  {
+   "item": "G28",
+   "id": "oem:nissan:window-regulator:FL:f05355bd0d",
+   "cat": "window-regulator",
+   "pn": [
+    "80731-1MA0A"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "M35h",
+     2012,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M37",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M56",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "Q70",
+     2014,
+     2019
+    ],
+    [
+     "Infiniti",
+     "Q70L",
+     2015,
+     2016
+    ],
+    [
+     "Infiniti",
+     "Q70L",
+     2018,
+     2019
+    ]
+   ],
+   "note": "Nissan catalog lists #80731-1MA0A for both — fits some configurations; verify the number on the part",
+   "strata": [
+    "G"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "80731-1MA0A, no option, on every named page: M35h 2012/13, M37 2011-13, M56 2011-13, Q70 2014-19 (L1209/L1125/L1492/L1363/L1497/L1370), Q70L 2015/16/18/19 (L1318/L1358/L1507/L1515)."
+  },
+  {
+   "item": "G29",
+   "id": "oem:nissan:window-regulator:RR:e01e9e3108",
+   "cat": "window-regulator",
+   "pn": [
+    "82720-3JA0A"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "JX35",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX60",
+     2014,
+     2014
+    ]
+   ],
+   "note": "Nissan catalog lists #82720-3JA0A for both — fits some configurations; verify the number on the part",
+   "strata": [
+    "S"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "82720-3JA0A on 2013-infiniti-jx35 (L339); QX60 2014 via product L389 seed page 2014-infiniti-qx60-gas, 'Production Date: 11/2012-10/2014' (full MY2014); FIT also lists QX60 2014-2015 QR25DER (hybrid)."
+  },
+  {
+   "item": "G30",
+   "id": "oem:nissan:window-regulator:RL:4586fb5f87",
+   "cat": "window-regulator",
+   "pn": [
+    "82721-7Z005"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2001,
+     2001
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2000,
+     2004
+    ]
+   ],
+   "note": "Nissan catalog lists #82721-7Z005 for both — option: fits some option packages; Frontier: crew cab only; verify the number on the part",
+   "strata": [
+    "O"
+   ],
+   "verdict": "RISK",
+   "evidence": "ENGINE (one vehicle-year): 2000-nissan-xterra (L194) lists 82721-7Z005 only as '*W. VG33E'; the all-Xterra row 'W' is 82721-7Z000. 2001-2003 rows cover every engine; 2004 via seed page 'W. KA24DE + W. (VG33E+ VG33ER). XE, W. SE'. Frontier 2001 '*CC' with the crew-cab note. A 2000 KA24DE Xterra carries 7Z000 per the catalog."
+  },
+  {
+   "item": "P01",
+   "id": "oem:nissan:gauge-cluster:C:ced7bf2051",
+   "cat": "gauge-cluster",
+   "pn": [
+    "24810-9BD4C"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2011,
+     2012
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2011,
+     2012
+    ]
+   ],
+   "note": "Nissan catalog lists #24810-9BD4C for both — option: fits some option packages; verify the number on the part",
+   "seeker": [
+    "Nissan",
+    "Xterra",
+    2011
+   ],
+   "donor": [
+    "Nissan",
+    "Frontier",
+    2011
+   ],
+   "strata": [
+    "O"
+   ],
+   "verdict": "RISK",
+   "evidence": "TRANSMISSION: 24810-9BD4C is 'W. PRO-4X. 6MT' (2011 Xterra, L506) and 'KC. PRO-4X. 6MT + CC. PRO-4X. 6MT' (2011 Frontier, L560). PRO-4X is a package (covered); 6MT-only is a powertrain split the note does not name (PRO-4X also came with the automatic)."
+  },
+  {
+   "item": "P02",
+   "id": "oem:nissan:window-regulator:RL:9f7a24b9e3",
+   "cat": "window-regulator",
+   "pn": [
+    "82731-7S000"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Armada",
+     2004,
+     2008
+    ],
+    [
+     "Nissan",
+     "Titan",
+     2004,
+     2011
+    ]
+   ],
+   "note": "Nissan catalog lists #82731-7S000 for both — fits some configurations; verify the number on the part",
+   "seeker": [
+    "Nissan",
+    "Titan",
+    2004
+   ],
+   "donor": [
+    "Nissan",
+    "Armada",
+    2004
+   ],
+   "strata": [
+    "O"
+   ],
+   "verdict": "RISK",
+   "evidence": "CAB, unmarked: 82731-7S000 rear-door motor, seeker Titan 2004 (no own page; product L854 seed page 2004-nissan-titan, no option) and donor Armada 2004 (L328). Same open question as G23 (Titan King Cab access doors)."
+  },
+  {
+   "item": "P03",
+   "id": "oem:nissan:gauge-cluster:C:c9fafd5872",
+   "cat": "gauge-cluster",
+   "pn": [
+    "24810-7S04E"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Armada",
+     2007,
+     2007
+    ],
+    [
+     "Nissan",
+     "Titan",
+     2007,
+     2007
+    ]
+   ],
+   "note": "Nissan catalog lists #24810-7S04E for both — option: fits some option packages; verify the number on the part",
+   "seeker": [
+    "Nissan",
+    "Armada",
+    2007
+   ],
+   "donor": [
+    "Nissan",
+    "Titan",
+    2007
+   ],
+   "strata": [
+    "S"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "24810-7S04E: 2007 Armada (L348) 'W. SE', 2007 Titan (L337) '*KC. (SE+ LE) + *CC. (SE+ LE)', both 08/2006-04/2007 (9 months of MY2007). No drive or cab restriction."
+  },
+  {
+   "item": "P04",
+   "id": "oem:nissan:gauge-cluster:C:26d5ec1fd0",
+   "cat": "gauge-cluster",
+   "pn": [
+    "24810-7S01A"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Armada",
+     2004,
+     2006
+    ],
+    [
+     "Nissan",
+     "Titan",
+     2004,
+     2007
+    ]
+   ],
+   "note": "Nissan catalog lists #24810-7S01A for both — option: fits some option packages; verify the number on the part",
+   "seeker": [
+    "Nissan",
+    "Armada",
+    2004
+   ],
+   "donor": [
+    "Nissan",
+    "Titan",
+    2007
+   ],
+   "strata": [
+    "O"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "24810-7S01A: 2004 Armada (L321) '*W. SE, W. LE'; 2007 Titan (L337) '*KC. (SE+ LE) + *CC. (SE+ LE), ...' (both cabs, both drives)."
+  },
+  {
+   "item": "P05",
+   "id": "oem:nissan:window-regulator:RL:b39ca5d79c",
+   "cat": "window-regulator",
+   "pn": [
+    "80731-JK60C"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "G25",
+     2011,
+     2012
+    ],
+    [
+     "Infiniti",
+     "Q40",
+     2015,
+     2015
+    ]
+   ],
+   "note": "Nissan catalog lists #80731-JK60C for both — option: fits some option packages; verify the number on the part",
+   "seeker": [
+    "Infiniti",
+    "Q40",
+    2015
+   ],
+   "donor": [
+    "Infiniti",
+    "G25",
+    2012
+   ],
+   "strata": [
+    "O"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "80731-JK60C: 2015 Q40 (L831) 'S, ...' (every sedan); 2012 G25 (L732) covers 2WD and AWD VQ25HR, 06/2011-06/2014. Both models are sedan-only."
+  },
+  {
+   "item": "P06",
+   "id": "oem:nissan:side-mirrors:L:17a50e6dfb",
+   "cat": "side-mirrors",
+   "pn": [
+    "96302-9BC9A"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2013,
+     2019
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2012,
+     2013
+    ]
+   ],
+   "note": "Nissan catalog lists #96302-9BC9A for both — option: fits some option packages; verify the number on the part",
+   "seeker": [
+    "Nissan",
+    "Frontier",
+    2013
+   ],
+   "donor": [
+    "Nissan",
+    "Xterra",
+    2013
+   ],
+   "strata": [
+    "O"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "96302-9BC9A: 2013 Frontier (L685) 'KC. S + CC. S' (both cabs, S trim), 2013 Xterra (L729) 'W. X'. Trim options."
+  },
+  {
+   "item": "P07",
+   "id": "oem:nissan:window-regulator:FR+RR:26a48c4d9d",
+   "cat": "window-regulator",
+   "pn": [
+    "80730-89915"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Murano",
+     2003,
+     2007
+    ],
+    [
+     "Nissan",
+     "Versa",
+     2007,
+     2007
+    ]
+   ],
+   "note": "Nissan catalog lists #80730-89915 for both — fits some configurations; verify the number on the part",
+   "seeker": [
+    "Nissan",
+    "Versa",
+    2007
+   ],
+   "donor": [
+    "Nissan",
+    "Murano",
+    2005
+   ],
+   "strata": [
+    "O"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "80730-89915: 2007 Versa sedan (L592, 12/2006-07/2007) and hatchback (L594, 05/2006-01/2007) pages both list it; 2005 Murano (L624) no option."
+  },
+  {
+   "item": "P08",
+   "id": "oem:nissan:gauge-cluster:C:c88d3f8d32",
+   "cat": "gauge-cluster",
+   "pn": [
+    "24810-3JA1B"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "JX35",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX60",
+     2014,
+     2014
+    ]
+   ],
+   "note": "Nissan catalog lists #24810-3JA1B for both — option: fits some option packages; verify the number on the part",
+   "seeker": [
+    "Infiniti",
+    "QX60",
+    2014
+   ],
+   "donor": [
+    "Infiniti",
+    "JX35",
+    2013
+   ],
+   "strata": [
+    "S"
+   ],
+   "verdict": "RISK",
+   "evidence": "POWERTRAIN within one model name: 24810-3JA1B '*W. PREMIUM' on 2013 JX35 (L330); QX60 2014 only via product L1212 seed page 2014-infiniti-qx60-gas, FIT '2014 Infiniti QX60 | Premium|6 Cyl 3.5L | VQ35DE'. No 2014 QX60 hybrid page was crawled; 8 of 79 lot 2014 QX60s decode 2.5L (hybrid)."
+  },
+  {
+   "item": "P09",
+   "id": "oem:nissan:window-regulator:FL:8a8c3dabe5",
+   "cat": "window-regulator",
+   "pn": [
+    "80721-JK00A"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "G25",
+     2011,
+     2012
+    ],
+    [
+     "Infiniti",
+     "Q40",
+     2015,
+     2015
+    ]
+   ],
+   "note": "Nissan catalog lists #80721-JK00A for both — fits some configurations; verify the number on the part",
+   "seeker": [
+    "Infiniti",
+    "G25",
+    2011
+   ],
+   "donor": [
+    "Infiniti",
+    "Q40",
+    2015
+   ],
+   "strata": [
+    "O"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "80721-JK00A, no option, on 2011 G25 (L610) and 2015 Q40 (L830); both sedan-only."
+  },
+  {
+   "item": "P10",
+   "id": "oem:nissan:gauge-cluster:C:3e3ffb5972",
+   "cat": "gauge-cluster",
+   "pn": [
+    "24810-ZL96C"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2010,
+     2010
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2010,
+     2010
+    ]
+   ],
+   "note": "Nissan catalog lists #24810-ZL96C for both — option: fits some option packages; verify the number on the part",
+   "seeker": [
+    "Nissan",
+    "Xterra",
+    2010
+   ],
+   "donor": [
+    "Nissan",
+    "Frontier",
+    2010
+   ],
+   "strata": [
+    "S"
+   ],
+   "verdict": "WRONG",
+   "evidence": "DRIVE: 24810-ZL96C is 2WD-only: 2010 Frontier (L472) 'KC. 2WD. VQ40DE. SE. AT + CC. 2WD. SE. AT'; 2010 Xterra via product L2192 seed page 'W. 2WD. S + W. 2WD. BASECAMP. 5AT'. 4WD 2010s use other numbers (e.g. 24810-ZL95E 'KC. 4WD...'). Lot: 2010 Frontier 7 x 4WD, Xterra 11 x 4WD."
+  },
+  {
+   "item": "P11",
+   "id": "oem:nissan:window-regulator:RR:b1b62f2f6b",
+   "cat": "window-regulator",
+   "pn": [
+    "82720-1LA0A"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "QX56",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX80",
+     2014,
+     2019
+    ]
+   ],
+   "note": "Nissan catalog lists #82720-1LA0A for both — fits some configurations; verify the number on the part",
+   "seeker": [
+    "Infiniti",
+    "QX80",
+    2017
+   ],
+   "donor": [
+    "Infiniti",
+    "QX56",
+    2013
+   ],
+   "strata": [
+    "O"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "82720-1LA0A, no option, on 2017 QX80 (L1352) and 2013 QX56 (L802)."
+  },
+  {
+   "item": "P12",
+   "id": "oem:nissan:side-mirrors:L:996881756d",
+   "cat": "side-mirrors",
+   "pn": [
+    "96302-CL80A"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "FX35",
+     2006,
+     2007
+    ],
+    [
+     "Infiniti",
+     "FX45",
+     2006,
+     2007
+    ]
+   ],
+   "note": "Nissan catalog lists #96302-CL80A for both — option: fits some option packages; verify the number on the part",
+   "seeker": [
+    "Infiniti",
+    "FX45",
+    2006
+   ],
+   "donor": [
+    "Infiniti",
+    "FX35",
+    2007
+   ],
+   "strata": [
+    "O"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "96302-CL80A '*W, *W. VQ35DE' on 2006 FX45 (L929) and 2007 FX35 (L580)."
+  },
+  {
+   "item": "P13",
+   "id": "oem:nissan:side-mirrors:L:94f0b2b5ad",
+   "cat": "side-mirrors",
+   "pn": [
+    "96302-3S510"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     1998,
+     2004
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2000,
+     2004
+    ]
+   ],
+   "note": "Nissan catalog lists #96302-3S510 for both — option: fits some option packages; verify the number on the part",
+   "seeker": [
+    "Nissan",
+    "Frontier",
+    2001
+   ],
+   "donor": [
+    "Nissan",
+    "Xterra",
+    2001
+   ],
+   "strata": [
+    "O"
+   ],
+   "verdict": "RISK",
+   "evidence": "ENGINE (donor): 96302-3S510 on 2001 Frontier (L315) covers every cab; 2001 Xterra (L213) 'W. SE, W. VG33E. XE' excludes the KA24DE XE (4 of the lot's 2001 Xterras are 2.4L)."
+  },
+  {
+   "item": "P14",
+   "id": "oem:nissan:climate-control:C:43f6f5c4fe",
+   "cat": "climate-control",
+   "pn": [
+    "27510-8Z315"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2001,
+     2002
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2002,
+     2002
+    ]
+   ],
+   "note": "Nissan catalog lists #27510-8Z315 for both — option: fits some option packages; Frontier: crew cab only; verify the number on the part",
+   "seeker": [
+    "Nissan",
+    "Xterra",
+    2002
+   ],
+   "donor": [
+    "Nissan",
+    "Frontier",
+    2001
+   ],
+   "strata": [
+    "O"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "27510-8Z315: 2002 Xterra (L171) 'W. SE', 07/2001-09/2002; 2001 Frontier (L311) 'CC. SB. (SE+ SC) + CC. XB. (SE+ SC)' (crew cab, named in the note)."
+  },
+  {
+   "item": "P15",
+   "id": "oem:nissan:climate-control:C:d6095abf97",
+   "cat": "climate-control",
+   "pn": [
+    "28525-1E504"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1995,
+     1996
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1995,
+     1996
+    ]
+   ],
+   "note": "Nissan catalog lists #28525-1E504 for both — option: fits some option packages; verify the number on the part",
+   "seeker": [
+    "Nissan",
+    "Stanza",
+    1995
+   ],
+   "donor": [
+    "Nissan",
+    "Altima",
+    1995
+   ],
+   "strata": [
+    "O"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "28525-1E504 'FED. S. GLE + CAL. S. GLE', 07/1994-02/1996: 1995 Stanza (L814); 1995 Altima via product L1573 seed page 1995-nissan-altima (same row)."
+  },
+  {
+   "item": "P16",
+   "id": "oem:nissan:side-mirrors:L:2e7eaacb31",
+   "cat": "side-mirrors",
+   "pn": [
+    "96302-1NC3A"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "G25",
+     2011,
+     2012
+    ],
+    [
+     "Infiniti",
+     "Q40",
+     2015,
+     2015
+    ]
+   ],
+   "note": "Nissan catalog lists #96302-1NC3A for both — option: fits some option packages; verify the number on the part",
+   "seeker": [
+    "Infiniti",
+    "G25",
+    2012
+   ],
+   "donor": [
+    "Infiniti",
+    "Q40",
+    2015
+   ],
+   "strata": [
+    "O"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "96302-1NC3A 'S. JOURNEY' on 2012 G25 (L728) and 2015 Q40 (L827); trim option."
+  },
+  {
+   "item": "P17",
+   "id": "oem:nissan:window-regulator:FL:c7c1dab96d",
+   "cat": "window-regulator",
+   "pn": [
+    "80721-EH100"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "M35",
+     2006,
+     2008
+    ],
+    [
+     "Infiniti",
+     "M45",
+     2006,
+     2008
+    ]
+   ],
+   "note": "Nissan catalog lists #80721-EH100 for both — fits some configurations; verify the number on the part",
+   "seeker": [
+    "Infiniti",
+    "M45",
+    2007
+   ],
+   "donor": [
+    "Infiniti",
+    "M35",
+    2007
+   ],
+   "strata": [
+    "O"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "80721-EH100, no option, on 2007 M45 (L771) and 2007 M35 (L463)."
+  },
+  {
+   "item": "P18",
+   "id": "oem:nissan:window-regulator:RL:2b80079398",
+   "cat": "window-regulator",
+   "pn": [
+    "82721-1BA0A"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "EX35",
+     2008,
+     2012
+    ],
+    [
+     "Infiniti",
+     "EX37",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX50",
+     2014,
+     2017
+    ]
+   ],
+   "note": "Nissan catalog lists #82721-1BA0A for both — fits some configurations; verify the number on the part",
+   "seeker": [
+    "Infiniti",
+    "EX35",
+    2008
+   ],
+   "donor": [
+    "Infiniti",
+    "EX37",
+    2013
+   ],
+   "strata": [
+    "O"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "82721-1BA0A: 2013 EX37 (L1277); 2008 EX35 via product L553 seed page 2008-infiniti-ex35 (no option)."
+  },
+  {
+   "item": "P19",
+   "id": "oem:nissan:window-regulator:RL:0a71fd7a1d",
+   "cat": "window-regulator",
+   "pn": [
+    "82730-CV01B"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Cube",
+     2011,
+     2014
+    ],
+    [
+     "Nissan",
+     "Juke",
+     2011,
+     2016
+    ],
+    [
+     "Nissan",
+     "Leaf",
+     2011,
+     2012
+    ]
+   ],
+   "note": "Nissan catalog lists #82730-CV01B for both — option: fits some option packages; verify the number on the part",
+   "seeker": [
+    "Nissan",
+    "Juke",
+    2014
+   ],
+   "donor": [
+    "Nissan",
+    "Leaf",
+    2012
+   ],
+   "strata": [
+    "O"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "82730-CV01B, no option, on 2014 Juke (L603) and 2012 Leaf (L694)."
+  },
+  {
+   "item": "P20",
+   "id": "oem:nissan:gauge-cluster:C:0998334880",
+   "cat": "gauge-cluster",
+   "pn": [
+    "24810-ZL95E"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2010,
+     2010
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2010,
+     2010
+    ]
+   ],
+   "note": "Nissan catalog lists #24810-ZL95E for both — option: fits some option packages; verify the number on the part",
+   "seeker": [
+    "Nissan",
+    "Frontier",
+    2010
+   ],
+   "donor": [
+    "Nissan",
+    "Xterra",
+    2010
+   ],
+   "strata": [
+    "S"
+   ],
+   "verdict": "WRONG",
+   "evidence": "DRIVE: 24810-ZL95E is 4WD-only: 2010 Frontier (L472) 'KC. 4WD. SE. 6MT + CC. 4WD. 6MT'; 2010 Xterra via product L2189 seed page 'W. 4WD. 6MT'. Lot: 2010 Frontier 14 x 4x2, Xterra 13 x 4x2."
+  },
+  {
+   "item": "P21",
+   "id": "oem:nissan:side-mirrors:R:7c8d1100fb",
+   "cat": "side-mirrors",
+   "pn": [
+    "96301-3Y200"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "I30",
+     2000,
+     2001
+    ],
+    [
+     "Infiniti",
+     "I35",
+     2002,
+     2004
+    ]
+   ],
+   "note": "Nissan catalog lists #96301-3Y200 for both — option: fits some option packages; verify the number on the part",
+   "seeker": [
+    "Infiniti",
+    "I30",
+    2001
+   ],
+   "donor": [
+    "Infiniti",
+    "I35",
+    2002
+   ],
+   "strata": [
+    "O"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "96301-3Y200 'S' (sedan; both models sedan-only) on 2001 I30 (L566) and 2002 I35 (L631)."
+  },
+  {
+   "item": "P22",
+   "id": "oem:nissan:window-regulator:FR:4287ed567a",
+   "cat": "window-regulator",
+   "pn": [
+    "80720-2Z700"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2002,
+     2004
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2002,
+     2004
+    ]
+   ],
+   "note": "Nissan catalog lists #80720-2Z700 for both — option: fits some option packages; verify the number on the part",
+   "seeker": [
+    "Nissan",
+    "Frontier",
+    2003
+   ],
+   "donor": [
+    "Nissan",
+    "Xterra",
+    2002
+   ],
+   "strata": [
+    "O"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "80720-2Z700: 2003 Frontier (L412) '*KC + *CC. SB + *CC. XB, KC + CC. SB + CC. XB' (every cab on the page); 2002 Xterra (L176) every engine/trim."
+  },
+  {
+   "item": "P23",
+   "id": "oem:nissan:climate-control:C:c87195cb31",
+   "cat": "climate-control",
+   "pn": [
+    "27515-7Z100"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     1999,
+     2001
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2000,
+     2000
+    ]
+   ],
+   "note": "Nissan catalog lists #27515-7Z100 for both — option: fits some option packages; verify the number on the part",
+   "seeker": [
+    "Nissan",
+    "Frontier",
+    1999
+   ],
+   "donor": [
+    "Nissan",
+    "Xterra",
+    2000
+   ],
+   "strata": [
+    "O"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "27515-7Z100: 1999 Frontier (L529) 'KC. 2WD. VG33E + CC, T + KC + CC' (every cab); 2000 Xterra (L188) 'W. KA24DE + W. VG33E. XE', 05/1999-11/1999 (5 months of MY2000, at the hub rule (a) limit)."
+  },
+  {
+   "item": "P24",
+   "id": "oem:nissan:gauge-cluster:C:6b90a6805c",
+   "cat": "gauge-cluster",
+   "pn": [
+    "24810-EA48C"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2005,
+     2006
+    ],
+    [
+     "Nissan",
+     "Pathfinder",
+     2006,
+     2008
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2006,
+     2007
+    ]
+   ],
+   "note": "Nissan catalog lists #24810-EA48C for both — option: fits some option packages; verify the number on the part",
+   "seeker": [
+    "Nissan",
+    "Pathfinder",
+    2007
+   ],
+   "donor": [
+    "Nissan",
+    "Xterra",
+    2006
+   ],
+   "strata": [
+    "O"
+   ],
+   "verdict": "WRONG",
+   "evidence": "DRIVE: 24810-EA48C is 4WD-only: 2007 Pathfinder (L252) 'W. 4WD'; 2006 Xterra (L217) 'W. 4WD. SE'. Lot: 2007 Pathfinder 55 x 4x2, 2006 Xterra 58 x 4x2."
+  },
+  {
+   "item": "P25",
+   "id": "oem:nissan:window-regulator:RL:5863edc17c",
+   "cat": "window-regulator",
+   "pn": [
+    "82731-3TA2A"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     2014,
+     2018
+    ],
+    [
+     "Nissan",
+     "Maxima",
+     2016,
+     2019
+    ],
+    [
+     "Nissan",
+     "Sentra",
+     2014,
+     2017
+    ]
+   ],
+   "note": "Nissan catalog lists #82731-3TA2A for both — fits some configurations; verify the number on the part",
+   "seeker": [
+    "Nissan",
+    "Maxima",
+    2018
+   ],
+   "donor": [
+    "Nissan",
+    "Altima",
+    2017
+   ],
+   "strata": [
+    "O"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "82731-3TA2A, no option, on 2018 Maxima (L773) and 2017 Altima sedan (L555); both sedan-only that year."
+  },
+  {
+   "item": "P26",
+   "id": "oem:nissan:window-regulator:RR:2bd923d8cc",
+   "cat": "window-regulator",
+   "pn": [
+    "82720-7Z005"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2001,
+     2001
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2000,
+     2004
+    ]
+   ],
+   "note": "Nissan catalog lists #82720-7Z005 for both — option: fits some option packages; Frontier: crew cab only; verify the number on the part",
+   "seeker": [
+    "Nissan",
+    "Frontier",
+    2001
+   ],
+   "donor": [
+    "Nissan",
+    "Xterra",
+    2002
+   ],
+   "strata": [
+    "O"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "82720-7Z005: 2001 Frontier (L317) '*CC' (crew cab note); 2002 Xterra (L177) every engine."
+  },
+  {
+   "item": "P27",
+   "id": "oem:nissan:side-mirrors:R:f606f17c72",
+   "cat": "side-mirrors",
+   "pn": [
+    "96301-1NC3A"
+   ],
+   "apps": [
+    [
+     "Infiniti",
+     "G25",
+     2011,
+     2012
+    ],
+    [
+     "Infiniti",
+     "Q40",
+     2015,
+     2015
+    ]
+   ],
+   "note": "Nissan catalog lists #96301-1NC3A for both — option: fits some option packages; verify the number on the part",
+   "seeker": [
+    "Infiniti",
+    "Q40",
+    2015
+   ],
+   "donor": [
+    "Infiniti",
+    "G25",
+    2012
+   ],
+   "strata": [
+    "O"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "96301-1NC3A 'S. JOURNEY' on 2015 Q40 (L827) and 2012 G25 (L728)."
+  },
+  {
+   "item": "P28",
+   "id": "oem:nissan:window-regulator:RR:4e683f9bc0",
+   "cat": "window-regulator",
+   "pn": [
+    "82730-3TA2A"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     2014,
+     2018
+    ],
+    [
+     "Nissan",
+     "Maxima",
+     2016,
+     2019
+    ],
+    [
+     "Nissan",
+     "Sentra",
+     2014,
+     2017
+    ]
+   ],
+   "note": "Nissan catalog lists #82730-3TA2A for both — fits some configurations; verify the number on the part",
+   "seeker": [
+    "Nissan",
+    "Altima",
+    2014
+   ],
+   "donor": [
+    "Nissan",
+    "Sentra",
+    2017
+   ],
+   "strata": [
+    "O"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "82730-3TA2A, no option, on 2014 Altima sedan (L442) and 2017 Sentra (L591, 12/2015-10/2017)."
+  },
+  {
+   "item": "P29",
+   "id": "oem:nissan:gauge-cluster:C:527c160204",
+   "cat": "gauge-cluster",
+   "pn": [
+    "24810-ZS42D"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2008,
+     2010
+    ],
+    [
+     "Nissan",
+     "Pathfinder",
+     2008,
+     2009
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2008,
+     2009
+    ]
+   ],
+   "note": "Nissan catalog lists #24810-ZS42D for both — option: fits some option packages; verify the number on the part",
+   "seeker": [
+    "Nissan",
+    "Frontier",
+    2008
+   ],
+   "donor": [
+    "Nissan",
+    "Pathfinder",
+    2009
+   ],
+   "strata": [
+    "O"
+   ],
+   "verdict": "WRONG",
+   "evidence": "DRIVE: 24810-ZS42D is 4WD-only: 2008 Frontier (L461) '*KC. 4WD. LE + *CC. 4WD. LE, *KC. 4WD. LE + *KC. 4WD. OFFROAD. AT + *CC. 4WD. (LE+ OFFROAD)'; 2009 Pathfinder (L494) 'W. 4WD. S'. Lot: 2008 Frontier 18 x 4x2, 2009 Pathfinder 13 x 4x2."
+  },
+  {
+   "item": "P30",
+   "id": "oem:nissan:side-mirrors:L:c398b8c387",
+   "cat": "side-mirrors",
+   "pn": [
+    "96302-2B500"
+   ],
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1995,
+     1997
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1995,
+     1997
+    ]
+   ],
+   "note": "Nissan catalog lists #96302-2B500 for both — option: fits some option packages; verify the number on the part",
+   "seeker": [
+    "Nissan",
+    "Stanza",
+    1995
+   ],
+   "donor": [
+    "Nissan",
+    "Altima",
+    1995
+   ],
+   "strata": [
+    "O"
+   ],
+   "verdict": "RIGHT",
+   "evidence": "96302-2B500 'BLACK; from 02/1995; FED. S. (XE+ GXE+ SE) + CAL. S. (XE+ GXE+ SE)' on 1995 Stanza (L816) and the 1995 Altima seed page (product L1547); 5 months of MY1995 (hub rule (a) limit); it replaces 96302-1E400."
+  }
+ ],
+ "census": {
+  "what": "Verifier census over all 343 shippable candidate groups for the two WRONG classes found in the sample (own reader, scratch script census_drive_body.py; vehicle-years with no own list page are not judged, so this is a lower bound).",
+  "rule": "DRIVE: every Fitting Vehicle Options configuration of the number on a named vehicle-year own page names one drive (4WD/AWD/4X4, or 2WD/4X2) while the same page lists another number of the same part name for the other drive. BODY: every configuration names a sedan code (4S/2S/S/SED/SEDAN) and no coupe code on a coupe-only feed model (200SX).",
+  "groups_flagged": 46,
+  "by_class": {
+   "DRIVE": 43,
+   "BODY": 3
+  },
+  "by_cat": {
+   "gauge-cluster": 46
+  },
+  "groups": [
+   {
+    "id": "oem:nissan:gauge-cluster:C:037967fa36",
+    "pn": "24810-9BA4D",
+    "classes": [
+     "DRIVE(4WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Frontier",
+      2010
+     ],
+     [
+      "Nissan",
+      "Frontier",
+      2011
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:06754c11cd",
+    "pn": "24810-EA02D",
+    "classes": [
+     "DRIVE(2WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Frontier",
+      2005
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2005
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:0998334880",
+    "pn": "24810-ZL95E",
+    "classes": [
+     "DRIVE(4WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Frontier",
+      2010
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:09cc53d4ef",
+    "pn": "24810-9BD4D",
+    "classes": [
+     "DRIVE(4WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Frontier",
+      2012
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2011
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2012
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:0c05f2a0d3",
+    "pn": "24820-6AH2A",
+    "classes": [
+     "DRIVE(2WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Infiniti",
+      "M37",
+      2013
+     ],
+     [
+      "Infiniti",
+      "Q70",
+      2014
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:1008083d23",
+    "pn": "24810-ZL99A",
+    "classes": [
+     "DRIVE(4WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Frontier",
+      2010
+     ],
+     [
+      "Nissan",
+      "Frontier",
+      2011
+     ],
+     [
+      "Nissan",
+      "Pathfinder",
+      2010
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:133b878062",
+    "pn": "24810-ZL96B",
+    "classes": [
+     "DRIVE(4WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Frontier",
+      2010
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:14a215fa3e",
+    "pn": "24810-EA21E",
+    "classes": [
+     "DRIVE(2WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Frontier",
+      2005
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2005
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2006
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:18568e51e9",
+    "pn": "24820-89Y00",
+    "classes": [
+     "BODY(sedan row on coupe-only model)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "200SX",
+      1999
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:1c6c599444",
+    "pn": "24810-9BA5B",
+    "classes": [
+     "DRIVE(2WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Frontier",
+      2010
+     ],
+     [
+      "Nissan",
+      "Frontier",
+      2011
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2011
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:212288ff2b",
+    "pn": "24810-9BD5A",
+    "classes": [
+     "DRIVE(4WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Frontier",
+      2012
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:27d3c6a390",
+    "pn": "24810-ZL80C",
+    "classes": [
+     "DRIVE(4WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Frontier",
+      2010
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:34d4ceb915",
+    "pn": "24810-EA12D",
+    "classes": [
+     "DRIVE(4WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Frontier",
+      2005
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2005
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2006
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:3c595ad4ac",
+    "pn": "24810-ZL80D",
+    "classes": [
+     "DRIVE(4WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Frontier",
+      2010
+     ],
+     [
+      "Nissan",
+      "Frontier",
+      2011
+     ],
+     [
+      "Nissan",
+      "Pathfinder",
+      2010
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:3e3ffb5972",
+    "pn": "24810-ZL96C",
+    "classes": [
+     "DRIVE(2WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Frontier",
+      2010
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:3e85a9735f",
+    "pn": "24810-9Z477",
+    "classes": [
+     "DRIVE(4WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Xterra",
+      2000
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:44ee3d0f81",
+    "pn": "24810-EC44C",
+    "classes": [
+     "DRIVE(4WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Xterra",
+      2006
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2007
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:457a37cd07",
+    "pn": "24810-ZS44D",
+    "classes": [
+     "DRIVE(2WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Pathfinder",
+      2008
+     ],
+     [
+      "Nissan",
+      "Pathfinder",
+      2009
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2008
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2009
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:5217f3ed85",
+    "pn": "24810-9BA7C",
+    "classes": [
+     "DRIVE(4WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Frontier",
+      2010
+     ],
+     [
+      "Nissan",
+      "Frontier",
+      2011
+     ],
+     [
+      "Nissan",
+      "Pathfinder",
+      2011
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:527c160204",
+    "pn": "24810-ZS42D",
+    "classes": [
+     "DRIVE(4WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Frontier",
+      2008
+     ],
+     [
+      "Nissan",
+      "Frontier",
+      2009
+     ],
+     [
+      "Nissan",
+      "Frontier",
+      2010
+     ],
+     [
+      "Nissan",
+      "Pathfinder",
+      2008
+     ],
+     [
+      "Nissan",
+      "Pathfinder",
+      2009
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2008
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2009
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:55fd083065",
+    "pn": "24810-EA01D",
+    "classes": [
+     "DRIVE(2WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Frontier",
+      2005
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2005
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2006
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:5609e7159d",
+    "pn": "24810-ZL99B",
+    "classes": [
+     "DRIVE(2WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Frontier",
+      2010
+     ],
+     [
+      "Nissan",
+      "Frontier",
+      2011
+     ],
+     [
+      "Nissan",
+      "Pathfinder",
+      2010
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:6b90a6805c",
+    "pn": "24810-EA48C",
+    "classes": [
+     "DRIVE(4WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Frontier",
+      2005
+     ],
+     [
+      "Nissan",
+      "Frontier",
+      2006
+     ],
+     [
+      "Nissan",
+      "Pathfinder",
+      2006
+     ],
+     [
+      "Nissan",
+      "Pathfinder",
+      2007
+     ],
+     [
+      "Nissan",
+      "Pathfinder",
+      2008
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2006
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2007
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:7700b4a8c5",
+    "pn": "24810-ZP93A",
+    "classes": [
+     "DRIVE(4WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Xterra",
+      2007
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:7aa6333f8a",
+    "pn": "24810-7S005",
+    "classes": [
+     "DRIVE(2WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Titan",
+      2006
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:7af5cd62cd",
+    "pn": "24810-ZL80B",
+    "classes": [
+     "DRIVE(2WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Frontier",
+      2010
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:7e261c418d",
+    "pn": "24810-ZL80A",
+    "classes": [
+     "DRIVE(4WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Frontier",
+      2010
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:849ca1f764",
+    "pn": "24820-89Y02",
+    "classes": [
+     "BODY(sedan row on coupe-only model)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "200SX",
+      1995
+     ],
+     [
+      "Nissan",
+      "200SX",
+      1998
+     ],
+     [
+      "Nissan",
+      "200SX",
+      1999
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:84f5d15413",
+    "pn": "24810-ZP77A",
+    "classes": [
+     "DRIVE(2WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Pathfinder",
+      2006
+     ],
+     [
+      "Nissan",
+      "Pathfinder",
+      2007
+     ],
+     [
+      "Nissan",
+      "Pathfinder",
+      2008
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2006
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2007
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2008
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:8d32932797",
+    "pn": "24810-EA67D",
+    "classes": [
+     "DRIVE(2WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Pathfinder",
+      2006
+     ],
+     [
+      "Nissan",
+      "Pathfinder",
+      2007
+     ],
+     [
+      "Nissan",
+      "Pathfinder",
+      2008
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2006
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2007
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:8e76fbec83",
+    "pn": "24810-9Z481",
+    "classes": [
+     "DRIVE(2WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Frontier",
+      2001
+     ],
+     [
+      "Nissan",
+      "Frontier",
+      2002
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2000
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2001
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2002
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:94af95f1dd",
+    "pn": "24810-9BA7D",
+    "classes": [
+     "DRIVE(2WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Frontier",
+      2010
+     ],
+     [
+      "Nissan",
+      "Frontier",
+      2011
+     ],
+     [
+      "Nissan",
+      "Pathfinder",
+      2011
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:9940c646d4",
+    "pn": "24810-EA03C",
+    "classes": [
+     "DRIVE(4WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Frontier",
+      2005
+     ],
+     [
+      "Nissan",
+      "Frontier",
+      2006
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2005
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2006
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:a366a9efd1",
+    "pn": "24820-8Z002",
+    "classes": [
+     "BODY(sedan row on coupe-only model)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "200SX",
+      1998
+     ],
+     [
+      "Nissan",
+      "200SX",
+      1999
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:a65580bf8f",
+    "pn": "24810-ZL81A",
+    "classes": [
+     "DRIVE(2WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Frontier",
+      2009
+     ],
+     [
+      "Nissan",
+      "Frontier",
+      2010
+     ],
+     [
+      "Nissan",
+      "Frontier",
+      2011
+     ],
+     [
+      "Nissan",
+      "Pathfinder",
+      2010
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:abbea6ff2c",
+    "pn": "24810-9Z479",
+    "classes": [
+     "DRIVE(2WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Frontier",
+      2001
+     ],
+     [
+      "Nissan",
+      "Frontier",
+      2002
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2000
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2001
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2002
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:ac64e3f5f0",
+    "pn": "24810-EA67E",
+    "classes": [
+     "DRIVE(2WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Pathfinder",
+      2005
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2005
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:cf319653cb",
+    "pn": "24810-ZP67A",
+    "classes": [
+     "DRIVE(4WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Frontier",
+      2007
+     ],
+     [
+      "Nissan",
+      "Frontier",
+      2008
+     ],
+     [
+      "Nissan",
+      "Frontier",
+      2009
+     ],
+     [
+      "Nissan",
+      "Pathfinder",
+      2006
+     ],
+     [
+      "Nissan",
+      "Pathfinder",
+      2007
+     ],
+     [
+      "Nissan",
+      "Pathfinder",
+      2008
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2007
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:cf42ba3e38",
+    "pn": "24810-9BD1B",
+    "classes": [
+     "DRIVE(4WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Frontier",
+      2011
+     ],
+     [
+      "Nissan",
+      "Frontier",
+      2012
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:cfc273851c",
+    "pn": "24820-1MK5A",
+    "classes": [
+     "DRIVE(2WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Infiniti",
+      "M37",
+      2012
+     ],
+     [
+      "Infiniti",
+      "M37",
+      2013
+     ],
+     [
+      "Infiniti",
+      "Q70",
+      2014
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:d0f8fe7de1",
+    "pn": "24810-ZL80E",
+    "classes": [
+     "DRIVE(2WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Frontier",
+      2009
+     ],
+     [
+      "Nissan",
+      "Frontier",
+      2010
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2009
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:d438cb3acf",
+    "pn": "24810-ZL96A",
+    "classes": [
+     "DRIVE(2WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Frontier",
+      2010
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:d45cea6871",
+    "pn": "24810-EA48D",
+    "classes": [
+     "DRIVE(4WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Pathfinder",
+      2005
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2005
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:e27f43d13a",
+    "pn": "24810-EA101",
+    "classes": [
+     "DRIVE(4WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Frontier",
+      2005
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2005
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:ee9e4132db",
+    "pn": "24810-9Z473",
+    "classes": [
+     "DRIVE(4WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Xterra",
+      2000
+     ]
+    ]
+   },
+   {
+    "id": "oem:nissan:gauge-cluster:C:f88a1d4f9c",
+    "pn": "24810-9BA5A",
+    "classes": [
+     "DRIVE(4WD-only)"
+    ],
+    "vehicle_years": [
+     [
+      "Nissan",
+      "Frontier",
+      2010
+     ],
+     [
+      "Nissan",
+      "Frontier",
+      2011
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2011
+     ]
+    ]
+   }
+  ],
+  "sample_items_flagged": [
+   "G03",
+   "G05",
+   "G06",
+   "G07",
+   "G08",
+   "P10",
+   "P20",
+   "P24",
+   "P29"
+  ]
+ }
+}

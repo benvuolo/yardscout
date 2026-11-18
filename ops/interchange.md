@@ -3750,3 +3750,95 @@ two verifiers check the removed groups, and the hub may want that here too.
   completion (no `.c1.done`), and both are `.blocked` (503). Any retry is the
   owner's call; it is listed only because it is the largest remaining
   interchange gain.
+
+## 2026-11-18 Independent verification (verifier subagent of session_01LsgNuWEh1vdaDCtdP1jxMM, branch `interchange/verify-1118`)
+
+Hub brief: an independent §11.4 release sample of the nissan candidate, and a
+check of the live-group removals on `interchange/next-1117` (head 12f9a78d).
+This was a check only: no rule, policy or group file was changed. Raw records
+were read from git (oem-raw@57e8b5b9 for nissan, @dca9cd84 for the shipped
+groups). No fetch, crawl or dispatch was made. Two web searches were run
+(search-result text only, one part number); no page was opened. My own draw
+and reader were used, not `audit11_4/sample.py`. The builder's verdicts were
+read only after mine were written.
+
+### Nissan §11.4, seed 46021118: FAILED (9 WRONG). Do not ship nissan.
+
+- 30 groups (window-regulator 12, side-mirrors 8, gauge-cluster 8,
+  climate-control 2) + 30 pairs from the other groups, out of 343 shippable
+  groups. Per-item verdicts with record lines:
+  `groups/_report/nissan_verify_2026-11-18.json`.
+- **RIGHT 40, WRONG 9, RISK 11** (groups 18/5/7, pairs 22/4/4).
+- WRONG falls in two classes that no rule covers:
+  1. **Drive (6).** A 4WD-only or 2WD-only cluster is claimed for every car
+     of model-years built in both drives, with only the "option" note:
+     - G07 24810-EA101 (2005 Frontier "*KC. 4WD. LE + ...", 2005 Xterra "*W. 4WD. SE");
+     - G08 24810-ZP67A; P20 24810-ZL95E; P24 24810-EA48C; P29 24810-ZS42D;
+     - P10 24810-ZL96C (2WD-only).
+
+     The same pages list the other drive's cluster under other numbers.
+     CLAUDE.md rule 3 asks for a drive gate. Census: **43 of 343 groups**
+     (all gauge-cluster) are in this class.
+  2. **Body, B14 200SX (3).** Sedan "4S." rows are credited to the
+     coupe-only 200SX:
+     - G03 24820-89Y02 (200SX 1995, 1998-99);
+     - G05 24820-8Z002 (1998-99);
+     - G06 24820-89Y00 (1999: "4S. GLE" only).
+
+     Round 5's fix removed 1996-97 but kept the years where the lot vPIC data
+     is thin (1995: one decoded car), wrong (1998: `1N4AB42D` B42 coupes
+     decoded "Sedan/Saloon") or empty (1999).
+- RISK (11): part of a model-year cannot carry the number, for a reason the
+  note does not name.
+  - Engine, transmission or powertrain split under one model name (9):
+    - Q70 2014 VQ37VHR-only clusters: G04, G09, G10;
+    - KA24DE-only 2004 Frontier/Xterra mirrors: G11, G15 (122 of 126 decoded
+      2004 Xterras are V6);
+    - 2000 Xterra regulator (G30) and 2001 Xterra mirror (P13);
+    - PRO-4X 6MT-only cluster (P01);
+    - QX60 2014 cluster from the gas page only (P08: no hybrid page was
+      crawled, and 8 lot cars are hybrids).
+  - Titan rear-door window motors with no cab code: G23 82730-9FJ0A and P02
+    82731-7S000. A King Cab access door may have no window motor, and the
+    search text names "Crew Cab" for 9FJ0A.
+
+  Under the brief's literal wording ("any car the group would show"), the 9
+  engine, transmission and powertrain items are WRONG too.
+- Fixes to make before a fresh independent sample:
+  1. Option-column drive codes: refuse, or add a "<model>: 4WD only" note
+     with a per-app drive gate.
+  2. Take model bodies from a source that does not depend on lot vPIC data:
+     the catalog's own C./4S. structure, or a static table (200SX = coupe).
+  3. Name the engine or transmission in the note when it splits a
+     model-year, or refuse.
+  4. Treat powertrain-variant pages (q70-gas, qx60-gas vs hybrid) like
+     body-named pages.
+  5. Mark Titan/Frontier rear-door window parts crew cab only, by page
+     structure (the rear-door glass is split KC/CC).
+
+### Removals, seed 7731118: ship them
+
+- 27 removed groups plus the 1 narrowed group, covering every app family of
+  every make: gm 11, subaru 5, mopar 4+1, ford 4, toyota 3. Per-item verdicts:
+  `groups/_report/removals_verify_2026-11-18.json`.
+- **(a) unsupported or wrong, removal correct: 18** (gm 8, mopar 5, toyota 3,
+  ford 1, subaru 1). These live claims show wrong-body donors today:
+  - coupe-only J(37)/AJ(37) mirrors and regulators on sedans;
+  - rear-door parts on coupes and convertibles;
+  - 2012 IS 350 against rows that read "from 10/2012".
+
+  R01 (Ford moisture purge module) and R20 (the 2001 Outback H6 uses
+  72311AE11B) are correct for a reason other than body.
+- **(b) supported for every car named, removal loses a true claim: 7:**
+  - ford R02 CV6Z-5423394-B, R03 6CPZ-5423395-A, R04 CV6Z-5423395-B
+    (motors split by window feature, never by body);
+  - gm R05 95188244 (FIT names both Sonic bodies), R07 88960088 (Camaro and
+    Firebird coupe + convertible), R14 20964008 (Cobalt/G5 2 and 4 DOOR);
+  - subaru R21 57229AG04A9P (both pages list S. and W. codes).
+- **(c) cannot tell: 3** (subaru R22-R24, Impreza 2012 / XV 2013): only the
+  sedan page exists; the 5-door and the XV rest on aggregated FIT rows.
+- The removals add no claim, and they take real WRONGs out of live data.
+- To recover the (b) class: `_row_body_cover` reads an option-column row as
+  naming body *words* only, so GM RPO body styles (37/69/67) and Subaru
+  S./W. codes count as no body. Decode those codes, and accept FIT rows that
+  name every body.
