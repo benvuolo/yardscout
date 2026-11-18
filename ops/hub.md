@@ -1976,3 +1976,25 @@ PASS, 0 FAIL, 0 SKIP (layout 2,664 checks). Main since: ops only.
   has no package-lock.json (npm ci fails; tests use the main checkout's
   node_modules); year ranges are written after the model in the strip and
   before it in the alert.
+
+## 2026-11-18 ~20:30 UTC interchange rules round 2 back; two agents started
+
+`interchange/rules-1118` (54d0784d; builder section "2026-11-18 Rules after
+the independent check" in ops/interchange.md on the branch). Live diff vs
+main: gm 11 removed, 2 restored, 47 narrowed (36 drive, 11 "gas only");
+ford 6 restored; mopar 9 narrowed ("1500: 4WD only"); mb 1 narrowed;
+subaru 1 restored. Nissan candidate 283 groups, builder's own sample 0
+WRONG (not independent). Not merged.
+- Started an independent check of every restored claim (built from the diff,
+  not the builder's list), the disputed R14 Cobalt headlamp, and 8 seeded
+  drive notes: branch `interchange/verify-restored-1118`.
+- Started a builder to turn the notes into real per-app gates (drive, body,
+  cab, engine, fuel, transmission) in the payload and docs/app.js, claims
+  only down, sw jh-v212, plus test_model_map on pinned inventory: branch
+  `interchange/gates-1118`. Reason: rule 3 asks for drive and body GATES; a
+  note does not stop a 2WD car being listed for a 4WD-only part.
+- Order: restorations verified -> gates merged -> a fresh independent §11.4
+  sample of nissan WITH the gates -> nissan may ship (0 WRONG).
+- Owner decision named by the builder: a gm 4wd/awd/hybrid catalog crawl
+  would turn many "2WD only" notes back into plain claims; gmpartsgiant is
+  marked blocked (rule 2), so it stays off unless the owner decides.
