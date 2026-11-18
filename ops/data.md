@@ -487,3 +487,132 @@ test_photo_sources, and the five site-proxy unit tests. sw jh-v209.
 - Backend (other builder): saved-car "leaving soon" alerts
   (saved_alerts.js) still count days against the typical stay at a frozen
   yard; a flush also sends "gone" for every car it removes at once.
+
+## 2026-11-18 (later) — one-scan list jumps held from "new"; ops email reads listState
+
+Branch `data/list-jumps-1118` (hub follow-up to the freshness work above).
+
+### Rule (`scraper/yard_freshness.py`, `JUMP_SHARE`, `JUMP_MIN_CARS`)
+
+A scan that adds cars under ids the yard has **never listed** (history DB,
+`db.ids_listed_before`) for **25%+ of its list and 50+ cars** is a list
+jump: a re-key, a source swap, our adapter suddenly seeing more of the lot.
+It is marked exactly like a flush (`listFlushAt`, with `listFlushWhy`
+"jump" in yard_health.json), so everything that already honours the flush
+holds its cars (dated on or before that day, for 8 days): alert arrivals
+(push_inventory), "new this week" in landed.json / landed models /
+junkyards.json, the app's New badge, counts, chips and Newest-arrivals
+order, and the site worker's yard and car pages. No app or worker change
+was needed (no sw bump).
+
+Ids that come back (a feed flipping between two lists, a partial read
+recovering) do not count. Measured: they carry their own set-out dates (no
+inflated "new this week"), and the Worker's alert dedupe is per vehicle id
+for 90 days, so they never re-alert. Holding them would have hidden real
+arrivals at healthy yards for 8 days after a one-scan partial read
+(16 Pick Your Part yards) and at Indy-U-Pull-It continuously for 2 weeks.
+A re-key is different: new ids defeat the dedupe, and the re-keyed lists
+came with implausible "set out this week" shares (U-Pull-It Omaha South
+576 of 856 cars dated within 7 days, Lincoln 296 of 799).
+
+### Measured on the committed history (160 scans, 10-25 16:15 -> 11-18 13:47 UTC)
+
+Every added car classified per scan: id listed at that yard before ("back"),
+new id with a VIN the yard listed before (re-key), or never listed. 5,629
+yard-scans added cars.
+
+| rule (never-listed >= max(50, S x list)) | S=15% | 20% | **25%** | 30% | 40% |
+|---|---|---|---|---|---|
+| events caught | 19 | 15 | **15** | 12 | 7 |
+| of them real set-out days | 4 | 0 | **0** | 0 | 0 |
+
+Counting returning ids too (added >= 20%) would catch 92, 16 of them real days.
+
+**Held (15):** Ryan's Pick-a-Part Detroit 10-26 (+1,348, the whole list
+re-keyed); U-Pull-It Des Moines, Lincoln, Omaha North, Omaha South and
+Prestige Houston 10-28 (+4,313, a source swap); Pull-N-Save Glendale,
+Phoenix North, Gilbert, Springville, Tucson, Riverside 10-31 (2,801 never-listed, the
+adapter suddenly saw 25-41% more of each lot, mostly old-dated); Midway
+U-Pull Muncie and Liberty 11-14 (+251, a third of each list replaced);
+Indy-U-Pull-It 10-25 23:18 (+323), which is an artefact of the window
+starting that day: the scan's DB has the full history and knows those ids,
+so in production it is a flip, not a jump. What the holds cost: 831 cars
+dated within 3 days kept out of alerts and 2,336 dated within 7 days out of
+"new this week" across the 14 real events (Omaha South alone 228 / 576);
+before the re-keys most of them had been listed and alerted under old ids.
+
+**Not held, real big days (never-listed >= 10% or >= 100 cars), biggest
+first by share:** Harry's Allentown 11-14 (102 of 540, 18.9%), Pick Ur Part
+11-10 (204 of 1,087, 18.8%), U-Pull-It Omaha South 11-04 (188, 17.9%),
+Omaha North 10-31 (124, 15.7%), Indy 10-31 (184, 14.2%), U-Pull-It Lincoln
+11-14 (98, 13.6%), Sturtevant 11-10 (108, 13.5%), Utah Pic-A-Part Orem
+10-27 (80, 11.6%), Pull-A-Part Denver 11-03 (106), Harry's Hazle Township
+(+156..204 on four days), Pick-A-Part VA Stafford 11-05 (169), Ace
+Jacksonville 11-07 / 11-14 (155 / 168), Hwy 82 Poulan, Edmonton, Fenix
+Moultrie, A-1 Crashed Cars, Route 34 Auburn, St. Cloud, plus small lots
+under the 50-car floor (Pick-n-Pull Sherwood +10..13 on a 70-car lot,
+Utah Pic-A-Part Ogden Premium +19 on 50). Nearly all of their added cars
+are dated within 3 days. The gap: real days <= 18.9%, jumps >= 27.5%
+(Riverside); 25% sits between.
+
+**Not held, old-dated additions under 25%:** Wilbert's Rochester 10-28
+(138), OKC Pull-A-Part 11-05 (107, none dated in 7 days), San Antonio
+Pick-N-Pull 11-06 (108), Bevell's Goldsboro 11-13 (135 and 179, the second
+none in 7 days), Auto Parts U Pull Shelby's weekly batches. Their cars are
+old by their own dates, so they do not count as new anyway.
+
+**Not held, ids coming back (>= 50 and >= 10% of the list), 28 yards:**
+Indy-U-Pull-It flipped on 35 scans (25,716 ids back, 2,248 of them dated
+within 3 days; all deduped), Pull-N-Save Riverside 13 scans (6,210),
+Pull-N-Save Glendale / Phoenix North / Gilbert / Springville / Tucson twice
+each, Tear-A-Part Ogden, US Auto Supply, Go Pull-It Gainesville,
+Chesterfield Richmond, Ace Jacksonville, and partial reads coming back at 16
+Pick Your Part yards (Fayetteville, Chicago South, Wichita, Sun Valley,
+Denver 52nd, Largo, Blue Island, Bakersfield, Fontana, Huntsville, Greer,
+Houston SW, Milwaukee, Chattanooga, Nashville, Houston Northville).
+
+The scan logs every candidate: `[list freshness] <yard>: +N in one scan,
+B listed here before, M never (P% of the list) — LIST JUMP ...` or "...
+flip / partial read back: normal". Without the history DB every added id
+counts as never listed (hold: the cautious side).
+
+### Daily ops email (backend/src/ops_monitor.js, yardFlags + the two lines)
+
+The scan writes `listState` into yard_health.json (only when set). The
+email's per-yard list is now "Marked on the site, list unchanged 3+
+business days (frozen = 10+, cars held from new and alerts)" from
+`listState`, with the site's own since-date (`listChangedAt`) and frozen /
+not-read tags; a carried yard the site marks is listed there too. The old
+3-weekday rule stays as a separate "Early warning, not on the site yet"
+line, only for yards the site has not marked (useful: about a business day
+earlier, e.g. the 14 two-business-day yards on 11-18 morning). A file
+without list fields keeps the old single list.
+
+### Tests
+
+`python3 scraper/test_yard_freshness.py` (86 checks: re-key held, flip and
+partial-read recovery not held, a real 13-20% day not held, small-lot
+floor, no-DB fallback, measured events replayed, `db.ids_listed_before`,
+apply_stale_keep handing over the previous ids, alerts through
+push_inventory), `node backend/test/ops_yard_list_unit.mjs` (9),
+`node backend/test/ops_quiet_unit.mjs`; unchanged: test_inventory_shards,
+test_model_lifespan, test_junkyards_json, test_landed_models.
+
+### Saved-car alerts (saved_alerts.js, not changed here; another builder owns it)
+
+- "Leaving soon": skip it when the car's yard row has `listState` stale or
+  frozen (read by `yardFields.indexOf('listState')` from the directory the
+  dispatch already holds). The app and site already drop the typical-stay
+  countdown there; a push saying "go soon" from a list that may be weeks
+  old is the wrong message.
+- "Gone": today a key missing from one commit sends "off the yard's list,
+  pulled or crushed", once, forever. Three measured cases make that false:
+  a flip (Indy 35 times, Riverside 13: the car is back 4 hours later), a
+  partial read (16 Pick Your Part yards), and a car saved by id in a
+  re-key (in the U-Pull-It, Ryan's, Prestige and Midway re-keys no added
+  car matched a VIN the yard listed before, so a saved key there is the old
+  id; VIN keys survive a re-key). Suggest: send "gone" only when the key has been
+  missing on two consecutive commits AND the yard's row has no
+  `listFlushAt` from this or the previous scan; for a flush after a long
+  freeze, say "off the yard's list after N weeks without updates" rather
+  than "pulled or crushed".
