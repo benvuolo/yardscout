@@ -352,6 +352,29 @@ def export_vin_decodes_gz(path: Path, min_new: int = 20000,
     return True
 
 
+def ids_listed_before(location: str, ids) -> set:
+    """The subset of `ids` (car ids as the scan publishes them) that this
+    location listed in any earlier scan, departed or not: cars coming back
+    (a feed flipping between two lists, a partial read recovering), as
+    opposed to ids the yard has never listed (a re-key, a source swap).
+    Called only for a list-jump candidate (yard_freshness.py), so the
+    unindexed vehicle_id lookup runs a handful of times a month at most."""
+    ids = [str(i) for i in ids if str(i)]
+    if not ids or not location:
+        return set()
+    conn = _connect()
+    out: set = set()
+    try:
+        for k in range(0, len(ids), 500):
+            chunk = ids[k:k + 500]
+            q = (f"SELECT vehicle_id FROM vehicles WHERE location = ? "
+                 f"AND vehicle_id IN ({','.join('?' * len(chunk))})")
+            out.update(r[0] for r in conn.execute(q, (location, *chunk)))
+    finally:
+        conn.close()
+    return out
+
+
 def yard_departure_reliability(min_days: float = 0.5, max_days: float = 400.0,
                                flush_share: float = 0.4, stale_scans: int = 36) -> dict:
     """Per-yard verdict on whether departures can be read as cars leaving.

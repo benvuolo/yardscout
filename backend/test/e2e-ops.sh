@@ -10,10 +10,15 @@ MOCKPORT="${YS_MOCK_PORT:-8798}"
 API="http://127.0.0.1:$PORT"
 OUT="test/.out-ops"
 mkdir -p "$OUT"
+# Stops what it starts on any exit; refuses a port that is already taken.
+source test/servers.sh
+ys_need_port "$MOCKPORT" "mock-resend"
+ys_need_port "$PORT" "wrangler dev"
+ys_on_exit 'rm -f .dev.vars.e2e-ops'
 
 echo "── starting mock-resend on :$MOCKPORT"
-node test/mock-resend.mjs "$MOCKPORT" >"$OUT/mock-resend.log" 2>&1 &
-MPID=$!
+ys_start "$OUT/mock-resend.log" node test/mock-resend.mjs "$MOCKPORT"
+MPID=$YS_LAST_PID
 for i in $(seq 1 20); do
   sleep 0.5
   curl -sf "http://127.0.0.1:$MOCKPORT/ping" >/dev/null 2>&1 && break
@@ -33,10 +38,6 @@ OWNER_EMAIL=owner@example.com
 EOF
 rm -rf "$OUT/wrangler-state"
 
-# npx → wrangler → workerd: kill the whole tree, or workerd outlives the run
-# and holds the port (and a deleted state dir) for the next one.
-kill_tree() { local c; for c in $(pgrep -P "$1" 2>/dev/null); do kill_tree "$c"; done; kill "$1" 2>/dev/null || true; }
-trap 'kill $MPID 2>/dev/null || true; [ -n "${DEV_PID:-}" ] && kill_tree $DEV_PID; rm -f .dev.vars.e2e-ops' EXIT
 
 echo "── applying migrations (local D1)"
 npx wrangler d1 migrations apply yardscout-db --local \
@@ -55,9 +56,9 @@ kvput "ops:store-subs" "{\"at\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"apple\":{\"
 
 echo "── starting wrangler dev on :$PORT"
 # --test-scheduled exposes /__scheduled?cron=… so the cron branches run for real.
-npx wrangler dev --port "$PORT" --env-file .dev.vars.e2e-ops --test-scheduled \
-  --persist-to "$OUT/wrangler-state" >"$OUT/dev.log" 2>&1 &
-DEV_PID=$!
+ys_start "$OUT/dev.log" npx wrangler dev --port "$PORT" --env-file .dev.vars.e2e-ops --test-scheduled \
+  --persist-to "$OUT/wrangler-state"
+DEV_PID=$YS_LAST_PID
 
 for i in $(seq 1 60); do
   sleep 1

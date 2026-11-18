@@ -15,6 +15,7 @@
  */
 
 import { countOk, countFail, countGone } from './ops.js';
+import { meteredFetch, BudgetExhausted } from './commit_budget.js';
 
 /* ---------- base64url helpers ---------- */
 
@@ -114,7 +115,7 @@ export async function sendWebPush(env, sub, payload) {
       new TextEncoder().encode(typeof payload === 'string' ? payload : JSON.stringify(payload)),
       sub.p256dh, sub.auth
     );
-    const r = await fetch(sub.endpoint, {
+    const r = await meteredFetch(env, sub.endpoint, {
       method: 'POST',
       headers: {
         authorization: await vapidAuthHeader(env, endpoint.origin),
@@ -135,6 +136,8 @@ export async function sendWebPush(env, sub, payload) {
     }
     return { ok: r.ok, gone: false };
   } catch (e) {
+    // The scan commit's call budget is used up: not a failure, not sent.
+    if (e instanceof BudgetExhausted) return { ok: false, gone: false, deferred: true };
     console.log('push send error:', e && e.message);
     await countFail(env, 'webpush', 0, `error: ${e && e.message}`);
     return { ok: false, gone: false };

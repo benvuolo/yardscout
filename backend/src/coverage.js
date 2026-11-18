@@ -15,6 +15,7 @@
 
 import { json, err, isoNow } from './util.js';
 import { resendFetch } from './ops.js';
+import { hasRoom } from './commit_budget.js';
 import { getDirectory } from './inventory.js';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -241,6 +242,9 @@ export async function maybeSendCoverageDigest(env) {
     } catch (e) { console.log('coverage digest: tracked-yard check failed:', String(e).slice(0, 120)); }
   }
 
+  // The scan commit's call budget (commit_budget.js): with no room the state
+  // row is left alone, so the next commit sends the digest.
+  if (!hasRoom(env, { ext: 1, svc: 1 })) return { sent: false, reason: 'commit_budget', since, carried: 1 };
   const delivered = await sendDigestEmail(env, groups, total);
   if (delivered) {
     await env.DB.prepare(

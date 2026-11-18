@@ -107,3 +107,34 @@ export function vindexBucket(token, mod) {
   for (const b of bytes) sum = (sum + b) % mod;
   return sum;
 }
+
+/* ===== D1 round trips =====
+ * A scan commit's dispatchers share one small budget of calls
+ * (commit_budget.js), and one D1 batch is one call whatever it holds. */
+export const D1_BATCH = 100;
+
+/** Which of `items` have no row yet for (key, item): the same
+ * `SELECT 1 ... WHERE a = ?1 AND b = ?2` a per-item loop would send, as D1
+ * batches (one round trip per 100 items instead of one per item). */
+export async function unseenItems(env, sql, key, items, idOf = (v) => String(v.id)) {
+  const out = [];
+  if (!items.length) return out;
+  const stmt = env.DB.prepare(sql);
+  for (let i = 0; i < items.length; i += D1_BATCH) {
+    const chunk = items.slice(i, i + D1_BATCH);
+    const res = await env.DB.batch(chunk.map((v) => stmt.bind(key, idOf(v))));
+    chunk.forEach((v, j) => {
+      const r = res && res[j];
+      if (!(r && Array.isArray(r.results) && r.results.length)) out.push(v);
+    });
+  }
+  return out;
+}
+
+/** Round trips unseenItems() needs for n items. */
+export const unseenCost = (n) => Math.ceil(n / D1_BATCH);
+
+/** Run bound statements as D1 batches of 100 (each batch is a transaction). */
+export async function runBatched(env, stmts) {
+  for (let i = 0; i < stmts.length; i += D1_BATCH) await env.DB.batch(stmts.slice(i, i + D1_BATCH));
+}

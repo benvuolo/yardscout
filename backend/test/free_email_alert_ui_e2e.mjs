@@ -21,9 +21,17 @@
  *              once (the token rides along)
  *   web free   only the first 5 watches can carry it; no watch, no card
  *   web Pro    no card, no sentence; the Pro email panel is as it was
+ *   web free   the watch toast's one offer is the alert (case 10); dismissed,
+ *              or once asked for, the Monday email is offered instead
+ *   web free   the near-miss line ("Would have sent a push within hours")
+ *              leaves out the cars the alert that is on covers
+ *   web free   the Cars watch strip, one model (case 11, 2026-11-18): asks for
+ *              the alert in the Monday email's place; "shown" sent once, in
+ *              view; one new watch, a copy of it sent; pending; rule 6
  *   iOS / Android shells: no card, no sentence, no request
  *
- * Run: node backend/test/free_email_alert_ui_e2e.mjs   (SHOTS=<dir> for screenshots) */
+ * Run: node backend/test/free_email_alert_ui_e2e.mjs   (SHOTS=<dir> for screenshots;
+ * YS_DOCS=<another docs/ folder> runs it against other sources) */
 import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
@@ -31,7 +39,7 @@ import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const { chromium } = require('playwright');
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../..');
-const DOCS = path.join(ROOT, 'docs');
+const DOCS = path.resolve(process.env.YS_DOCS || path.join(ROOT, 'docs'));   // YS_DOCS: another docs/ folder (e.g. before a fix)
 const SHOTS = process.env.SHOTS || '';
 const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json',
   '.png': 'image/png', '.svg': 'image/svg+xml', '.ico': 'image/x-icon', '.webmanifest': 'application/manifest+json' };
@@ -422,6 +430,44 @@ try {
     await v.ctx.close();
   }
 
+  /* ---- 7b. the near-miss line leaves out the cars the email alert covers (2026-11-18) ---- */
+  {
+    // One watch (Phoenix, 100 mi, set 11-01) and two cars listed three days
+    // ago: one 13 mi out (inside the alert's 50 mi), one 78 mi out (inside
+    // the watch's own 100 only). The page's inventory is swapped for the two
+    // inside one evaluate, so the background loader cannot interfere.
+    const DAY = 86400000, listed = new Date(Date.now() - 3 * DAY).toISOString().slice(0, 10);
+    const near = { id: 'nm-near', vin: '', year: 2005, make: 'Toyota', model: '4Runner', lat: 33.6, lng: -112.2, dateAdded: listed, location: 'Near Test Yard', row: '1', topParts: [] };
+    const far = { id: 'nm-far', vin: '', year: 2006, make: 'Toyota', model: '4Runner', lat: 34.54, lng: -112.47, dateAdded: listed, location: 'Far Test Yard', row: '2', topParts: [] };
+    const statusOn = { '/v1/free-alert/status': [200, { ok: true, state: 'on', watch: { make: 'Toyota', model: '4Runner', yearMin: null, yearMax: null, radiusMi: 50 } }] };
+    const v = await open(browser, { storage: { ...BASE_STORE, [WL]: ONE }, api: statusOn });
+    await v.alerts();
+    const miss = (falert, cars) => v.page.evaluate(({ falert, cars }) => {
+      if (falert) localStorage.setItem('ys_falert', JSON.stringify(falert)); else localStorage.removeItem('ys_falert');
+      liveInventory = cars;
+      renderAlerts();
+      const el = document.querySelector('#alert-watchlist .watchlist-item');
+      const m = el && el.querySelector('.wl-miss');
+      return { text: m ? m.textContent.replace(/\s+/g, ' ').trim() : '', pro: !!(el && el.querySelector('.wl-pro')), mark: !!(el && el.querySelector('.wl-falert')) };
+    }, { falert, cars });
+    const on = (extra) => ({ email: EMAIL, key: '2026-11-01T10:00:00.000Z~w1xyz', label: 'Toyota 4Runner', r: 50, state: 'on', sub: SUB, ...extra });
+    let r = await miss(null, [near, far]);
+    check('near-miss, no email alert: both cars, with the Pro box', /^2 landed since you set this watch/.test(r.text) && r.pro, JSON.stringify(r));
+    r = await miss(on({ onAt: Date.now() - 5 * DAY }), [near, far]);
+    check('near-miss, email alert on before they landed: only the car outside its 50 mi', r.mark && /^One landed on/.test(r.text) && r.pro, JSON.stringify(r));
+    r = await miss(on({ onAt: Date.now() - 5 * DAY }), [near]);
+    check('near-miss, email alert on: a car it covers gets no line and no Pro box', r.mark && r.text === '' && !r.pro, JSON.stringify(r));
+    r = await miss(on({ onAt: Date.now() }), [near, far]);
+    check('near-miss, email alert turned on after they landed: both still count (it never emailed them)', /^2 landed/.test(r.text) && r.pro, JSON.stringify(r));
+    r = await miss(on({}), [near, far]);
+    check('near-miss, email alert on since an unknown time: the car in its range is left out', /^One landed on/.test(r.text) && r.pro, JSON.stringify(r));
+    r = await miss({ email: EMAIL, key: '2026-11-01T10:00:00.000Z~w1xyz', label: 'Toyota 4Runner', r: 50, state: 'pending', at: Date.now() }, [near, far]);
+    check('near-miss, email alert only pending: both cars', /^2 landed/.test(r.text) && r.pro, JSON.stringify(r));
+    check('near-miss: the stored watch is untouched (rule 6)', (await v.watches()) === ONE);
+    check('near-miss: no page error', !v.errors.length, v.errors.join(' | '));
+    await v.ctx.close();
+  }
+
   /* ---- 8. the app shells: never ---- */
   for (const native of ['ios', 'android']) {
     const on = JSON.stringify({ email: EMAIL, key: '2026-11-01T10:00:00.000Z~w1xyz', label: '2003–2009 Toyota 4Runner', r: 50, state: 'on', sub: SUB });
@@ -433,6 +479,148 @@ try {
     check(`${native} shell: nothing sent to /v1/free-alert, nothing counted`, v.sent.length === 0 && count(await v.events(), 'free-alert-shown') === 0);
     check(`${native} shell: a #falert= link does nothing`, await v.page.evaluate(() => handleFalertHash() === false));
     check(`${native} shell: no page error`, v.errors.length === 0, v.errors.join(' | '));
+    await v.ctx.close();
+  }
+
+  /* ---- 10. the watch toast's one offer is the free email alert (2026-11-18) ---- */
+  {
+    const v = await open(browser, { storage: { ...BASE_STORE } });
+    const toast = () => v.page.evaluate(() => { const t = document.getElementById('watch-toast'); return t && t.classList.contains('show') ? t.innerText.replace(/\s+/g, ' ').trim() : ''; });
+    // The bell on the n-th car's screen (the quick-watch path, as recap_ask_e2e.mjs drives it).
+    const bell = async (n) => {
+      await v.page.evaluate(() => { try { hideCarDetail(); } catch (e) { /* closed */ } });
+      await v.page.waitForTimeout(400);
+      await v.page.locator('#live-grid .car-card .car-open').nth(n).click();
+      await v.page.waitForSelector('#car-detail.open .watch-btn', { timeout: 15000 });
+      const label = await v.page.evaluate(() => { const b = document.querySelector('#car-detail.open .watch-btn'); return `${b.dataset.make} ${b.dataset.model}`.trim(); });
+      await v.page.click('#car-detail.open .watch-btn');
+      await v.page.waitForSelector('#watch-toast.show', { timeout: 5000 });
+      return label;
+    };
+    await v.page.waitForSelector('#live-grid .car-card .car-open', { timeout: 120000 });
+    const label = await bell(0);
+    const saved = await v.watches();
+    const t = await toast();
+    check('toast: a new watch offers the free email alert for that car, in place of the Monday email', t.includes(`Watching ${label}`)
+      && /Free email alert for [^:]*/.test(t) && t.includes(label) && /usually the same day/.test(t) && !/Monday email/.test(t), t);
+    check('toast: never "instant", "every time" or "always"', !/instant|every time|always|guarantee/i.test(t), t);
+    check('toast: one email field, one button, no Pro box, no store link', await v.page.evaluate(() => {
+      const ask = document.querySelector('#watch-toast .mail-ask');
+      if (!ask) return false;
+      const i = ask.querySelectorAll('input'), b = ask.querySelectorAll('button');
+      return i.length === 1 && i[0].type === 'email' && b.length === 1 && b[0].textContent.trim() === 'Email me'
+        && !document.querySelector('#watch-toast .pro-box, #watch-toast [data-act="app"], #watch-toast [data-act="pro"]');
+    }));
+    let ev = await v.events();
+    check('toast: "free alert shown" counted once, "email asked" (the Monday offer) not at all', ev.filter(e => e === 'free-alert-shown').length === 1 && !ev.includes('email-asked'), JSON.stringify(ev));
+    await v.page.fill('#watch-toast .mail-email', 'not-an-address');
+    await v.page.click('#watch-toast .mail-form .btn');
+    check('toast: a bad address is answered in the toast, nothing sent', /Enter your email address/.test(await toast()) && v.sent.length === 0);
+    await v.page.fill('#watch-toast .mail-email', ' Visitor@Example.com ');
+    await v.page.click('#watch-toast .mail-form .btn');
+    await v.page.waitForFunction(() => /Check your inbox/.test(document.getElementById('watch-toast').innerText), null, { timeout: 5000 }).catch(() => {});
+    const req = v.sent.find(x => x.path === '/v1/free-alert/signup') || { body: {} };
+    const neww = JSON.parse(saved).slice(-1)[0];
+    check('toast: one sign-up request, for the NEW watch, as a copy (at most 50 mi, no addedAt)', v.sent.length === 1 && req.body.email === EMAIL
+      && `${req.body.watch.make} ${req.body.watch.model}` === label && req.body.watch.radiusMi <= 50 && !/addedAt|trimFilter|driveFilter|matchOnly/.test(JSON.stringify(req.body)), JSON.stringify(v.sent));
+    const t2 = await toast();
+    check('toast: "check your inbox", masked address, names the car', /Check your inbox\. Tap the link we sent to v•••@example\.com to turn on your email alert for/.test(t2) && t2.includes(label), t2);
+    const st = await v.state();
+    check('toast: this browser remembers it as pending, for that watch', st && st.state === 'pending' && st.key === neww.addedAt, JSON.stringify(st));
+    ev = await v.events();
+    check('toast: "free alert asked" counted once', ev.filter(e => e === 'free-alert-asked').length === 1, JSON.stringify(ev));
+    check('toast: the stored watches are byte for byte what they were (rule 6)', (await v.watches()) === saved);
+    await v.page.evaluate(() => { try { hideCarDetail(); } catch (e) { /* closed */ } });
+    await v.page.waitForTimeout(400);
+    await v.alerts();
+    check('toast: the Alerts card now waits for the click', /Check your inbox/.test((await v.card()).text), (await v.card()).text);
+    await v.page.click('.tab[data-tab="live"]');
+    const label2 = await bell(3);
+    const t3 = await toast();
+    check('toast: with the alert asked for, the next watch is offered the Monday email again', t3.includes(`Watching ${label2}`) && /Monday email/.test(t3) && !/Free email alert/.test(t3), t3);
+    check('toast: no page error', !v.errors.length, v.errors.join(' | '));
+    await v.ctx.close();
+  }
+
+  /* ---- 10b. dismissing the alert offer: the next watch offers the Monday email ---- */
+  {
+    const v = await open(browser, { storage: { ...BASE_STORE } });
+    const toast = () => v.page.evaluate(() => { const t = document.getElementById('watch-toast'); return t && t.classList.contains('show') ? t.innerText.replace(/\s+/g, ' ').trim() : ''; });
+    const bell = async (n) => {
+      await v.page.evaluate(() => { try { hideCarDetail(); } catch (e) { /* closed */ } });
+      await v.page.waitForTimeout(400);
+      await v.page.locator('#live-grid .car-card .car-open').nth(n).click();
+      await v.page.waitForSelector('#car-detail.open .watch-btn', { timeout: 15000 });
+      await v.page.click('#car-detail.open .watch-btn');
+      await v.page.waitForSelector('#watch-toast.show', { timeout: 5000 });
+    };
+    await v.page.waitForSelector('#live-grid .car-card .car-open', { timeout: 120000 });
+    await bell(0);
+    check('dismiss: offered first', /Free email alert/.test(await toast()));
+    await v.page.click('#watch-toast .watch-toast-x');
+    await bell(3);
+    const t = await toast();
+    check('dismiss: the next watch offers the Monday email, not the alert again', /Monday email/.test(t) && !/Free email alert/.test(t), t);
+    check('dismiss: nothing was sent', v.sent.length === 0);
+    await v.ctx.close();
+  }
+
+  /* ---- 11. the Cars watch strip asks for the alert for one model (2026-11-18) ---- */
+  {
+    // An earlier watch is stored (rule 6: it must come out byte for byte);
+    // the strip is for another model in range, taken from the list itself.
+    const v = await open(browser, { storage: { ...BASE_STORE, [WL]: ONE } });
+    // The whole scan in first, so no late render replaces the strip mid-case
+    // (that case is checked on purpose below).
+    await v.page.waitForFunction(() => liveComplete && document.querySelector('#live-grid .car-card'), null, { timeout: 180000 });
+    const pick = await v.page.evaluate(() => {
+      const c = getFilteredLive().find(x => x.make && x.model && !(x.make === 'Toyota' && x.model === '4Runner') && !isNoPickModel(x.make, x.model) && carSearchSetFilter(x.make, canonicalModel(x.make, x.model)));
+      if (!c) return null;
+      renderLive();
+      return { make: c.make, model: [...selectedModels][0] };
+    });
+    check('strip: a model in range to filter on', !!pick, JSON.stringify(pick));
+    const label = pick ? `${pick.make} ${pick.model}` : '';
+    await v.page.evaluate(() => { const s = document.querySelector('#live-grid .watch-strip'); if (s) s.scrollIntoView({ block: 'center' }); });
+    const strip = () => v.page.evaluate(() => { const s = document.querySelector('#live-grid .watch-strip'); return s ? { fa: s.classList.contains('strip-falert'), text: s.innerText.replace(/\s+/g, ' ').trim(),
+      ask: (s.querySelector('.mail-ask') || {}).innerText || '', inputs: [...s.querySelectorAll('.mail-ask input')].map(i => i.type), pro: !!s.querySelector('.mail-ask .pro-box, .mail-ask [onclick*="openUpgradeSheet"]') } : null; });
+    let s = await strip();
+    check('strip: one model, free web visitor: the free email alert for that car, in place of the Monday email', s && s.fa && s.text.includes(`Free email alert for ${label}: we email you when`)
+      && /within 50\smi, usually the same day\. One car, one address, no account\./.test(s.text) && !/Monday/.test(s.ask), JSON.stringify(s));
+    check('strip: one email field, no Pro prompt inside the ask', s && JSON.stringify(s.inputs) === '["email"]' && !s.pro && !/\bPro\b/.test(s.ask), JSON.stringify(s));
+    let ev = await v.events();
+    check('strip: "free alert shown" sent once it is on screen, "email asked" (the Monday offer) not at all', count(ev, 'free-alert-shown') === 1 && count(ev, 'email-asked') === 0, JSON.stringify(ev));
+    await v.page.evaluate(() => { renderLive(); renderLive(); });
+    await v.page.evaluate(() => document.querySelector('#live-grid .watch-strip').scrollIntoView({ block: 'center' }));
+    check('strip: ...and not again on a re-render', count(await v.events(), 'free-alert-shown') === 1);
+    await v.page.fill('#live-grid .strip-falert .mail-email', ' Visitor@Example.com ');
+    await v.page.click('#live-grid .strip-falert .mail-form .btn');
+    await v.page.waitForFunction(() => /Check your inbox/.test((document.querySelector('#live-grid .strip-falert') || {}).innerText || ''), null, { timeout: 8000 }).catch(() => {});
+    const wl = JSON.parse(await v.watches());
+    const req = v.sent.find(x => x.path === '/v1/free-alert/signup') || { body: { watch: {} } };
+    check('strip: exactly one new watch, made as the strip always made it (the list\'s 100 mi); the earlier one byte for byte (rule 6)',
+      wl.length === 2 && JSON.stringify(wl[0]) === JSON.stringify(JSON.parse(ONE)[0]) && `${wl[1].make} ${wl[1].model}` === label && wl[1].radiusMi === 100, JSON.stringify(wl));
+    check('strip: one request, a copy of the NEW watch (50 mi, rounded centre, no addedAt)', v.sent.length === 1 && req.body.email === EMAIL
+      && JSON.stringify(req.body.watch) === JSON.stringify({ make: pick.make, model: pick.model, yearMin: null, yearMax: null, lat: 33.45, lng: -112.07, radiusMi: 50 }) && !/addedAt/.test(JSON.stringify(req.body)), JSON.stringify(v.sent));
+    s = await strip();
+    check('strip: "check your inbox" for the alert, and the car is watched', /Check your inbox\. Tap the link we sent to v•••@example\.com to turn on your email alert for/.test(s.text) && s.text.includes(`Watching ${label}`), s.text);
+    const st = await v.state();
+    check('strip: the alert is pending in its own key, for the new watch', st && st.state === 'pending' && st.key === wl[1].addedAt && st.label === label && st.r === 50, JSON.stringify(st));
+    ev = await v.events();
+    check('strip: "free alert asked" sent once; no Monday-email event', count(ev, 'free-alert-asked') === 1 && count(ev, 'email-asked') === 0 && count(ev, 'email-submitted') === 0, JSON.stringify(ev));
+    // A later render (a scan coming in) shows the strip as watched: it still
+    // says the alert waits for the click, and goes on to say when it is on.
+    await v.page.evaluate(() => renderLive());
+    s = await strip();
+    check('strip: re-rendered as watched, it still says to check the inbox', s && !s.fa && s.text.includes(`Watching ${label}`) && /Check your inbox to turn on its email alert\./.test(s.text), s && s.text);
+    await v.page.evaluate(() => { const f = JSON.parse(localStorage.getItem('ys_falert')); localStorage.setItem('ys_falert', JSON.stringify({ ...f, state: 'on', sub: 'x.' + 'a'.repeat(64) })); renderLive(); });
+    s = await strip();
+    check('strip: ...and that its free email alert is on, once it is', s && /Its free email alert is on\./.test(s.text) && !/Check your inbox/.test(s.text), s && s.text);
+    await v.page.evaluate((p) => { localStorage.setItem('ys_falert', p); renderLive(); }, JSON.stringify(st));
+    await v.alerts();
+    check('strip: the Alerts card agrees (waiting for the click, that car)', /Check your inbox/.test((await v.card()).text) && (await v.card()).text.includes(label), (await v.card()).text);
+    check('strip: "shown" still once this visit', count(await v.events(), 'free-alert-shown') === 1);
+    check('strip: no page error, no dialog', !v.errors.length && !v.dialogs.length, JSON.stringify([v.errors, v.dialogs]));
     await v.ctx.close();
   }
 

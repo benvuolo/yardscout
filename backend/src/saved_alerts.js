@@ -28,13 +28,14 @@
 import { json, err, isoNow } from './util.js';
 import { makeResolver } from './inv_resolve.js';
 import { getDirectory } from './inventory.js';
-import { sendDevicePush, devicePushConfigured } from './devices.js';
+import { sendDevicePush, devicePushConfigured, roomForPush } from './devices.js';
+import { hasRoom, ownCap } from './commit_budget.js';
 import { entActive, esc, unsubUrl } from './email_alerts.js';
 import { resendFetch } from './ops.js';
 
 const MAX_SAVED_PER_OWNER = 50;
 const MAX_KEYS_PER_RUN = 300;      // ~2 resolves/ms worst case; well under the budget
-const MAX_SENDS_PER_RUN = 20;      // shares the commit's subrequest budget
+const MAX_SENDS_PER_RUN = 20;      // outside a scan commit only (admin test route); a commit uses commit_budget.js
 const LEAVING_RATIO = 0.8;         // mirrors the card's "leavingSoon" rule
 const PAST_TYPICAL_RATIO = 2;      // past this the card stops claiming "soon"
 const SENT_RETENTION_DAYS = 180;
@@ -185,12 +186,16 @@ async function sendSavedEmail(env, email, events) {
 /* ----- entry point (handleCommit → ctx.waitUntil) ----- */
 
 export async function dispatchSavedCarAlerts(env) {
-  const stats = { devices: 0, emails: 0, sends: 0, gone: 0, leaving: 0, deferred: 0 };
+  // `carried` owners had an alert the commit's call budget (commit_budget.js)
+  // could not carry, `unchecked` were not looked at. Neither is marked sent:
+  // every commit re-reads every saved list, so the next one finds them.
+  const stats = { devices: 0, emails: 0, sends: 0, gone: 0, leaving: 0, deferred: 0, carried: 0, unchecked: 0 };
   const dir = await getDirectory(env);
   if (!dir || !Array.isArray(dir.yards)) return stats;
   dir._yardByLoc = new Map(dir.yards.map((y, i) => [y[0], i]));
   const resolve = makeResolver(env, dir);
   const budget = { keys: MAX_KEYS_PER_RUN, deferred: 0 };
+  const maxSends = ownCap(env, MAX_SENDS_PER_RUN);
 
   // Native Pro devices → one push per event.
   if (devicePushConfigured(env)) {
@@ -198,14 +203,20 @@ export async function dispatchSavedCarAlerts(env) {
       `SELECT id, apns_token, fcm_token, saved_json FROM devices
         WHERE tier = 'pro' AND saved_json IS NOT NULL AND (apns_token IS NOT NULL OR fcm_token IS NOT NULL)`
     ).all()).results || [];
-    for (const d of rows) {
-      if (stats.sends >= MAX_SENDS_PER_RUN || budget.keys <= 0) break;
+    for (let i = 0; i < rows.length; i++) {
+      const d = rows[i];
+      if (stats.sends >= maxSends || budget.keys <= 0) break;
+      // Room for this owner's look-ups (one read, two per saved car)?
+      if (!hasRoom(env, { svc: 2 + 2 * MAX_SAVED_PER_OWNER })) { stats.unchecked += rows.length - i; break; }
       const events = await eventsFor(env, dir, resolve, 'device', d.id, parseSaved(d.saved_json), budget);
       const delivered = [];
+      let cut = false;
       for (const ev of events) {
-        if (stats.sends >= MAX_SENDS_PER_RUN) break;
-        stats.sends++;
+        if (stats.sends >= maxSends) break;
+        if (!roomForPush(env, d, 1)) { cut = true; break; }
         const res = await sendDevicePush(env, d, savedAlertPayload(ev));
+        if (res.deferred) { cut = true; break; }
+        stats.sends++;
         if (res.ok) delivered.push(ev);
       }
       if (delivered.length) {
@@ -213,6 +224,7 @@ export async function dispatchSavedCarAlerts(env) {
         await markSent(env, 'device', d.id, delivered);
         for (const ev of delivered) stats[ev.kind]++;
       }
+      if (cut) { stats.carried++; stats.unchecked += rows.length - i - 1; break; }
     }
   }
 
@@ -221,12 +233,15 @@ export async function dispatchSavedCarAlerts(env) {
     const rows = (await env.DB.prepare(
       'SELECT email, saved_json FROM email_watchers WHERE enabled = 1 AND saved_json IS NOT NULL'
     ).all()).results || [];
-    for (const row of rows) {
-      if (stats.sends >= MAX_SENDS_PER_RUN || budget.keys <= 0) break;
+    for (let i = 0; i < rows.length; i++) {
+      const row = rows[i];
+      if (stats.sends >= maxSends || budget.keys <= 0) break;
+      if (!hasRoom(env, { svc: 3 + 2 * MAX_SAVED_PER_OWNER })) { stats.unchecked += rows.length - i; break; }
       const events = await eventsFor(env, dir, resolve, 'email', row.email, parseSaved(row.saved_json), budget);
       if (!events.length) continue;
       const ent = await env.ENTITLEMENTS.get('ent:' + row.email, 'json');
       if (!entActive(ent)) continue;   // lapsed Pro: nothing, row kept
+      if (!hasRoom(env, { ext: 1, svc: 1 })) { stats.carried++; stats.unchecked += rows.length - i - 1; break; }
       stats.sends++;
       if (await sendSavedEmail(env, row.email, events)) {
         stats.emails++;
@@ -237,8 +252,10 @@ export async function dispatchSavedCarAlerts(env) {
   }
 
   stats.deferred = budget.deferred;
-  await env.DB.prepare('DELETE FROM saved_alerts_sent WHERE sent_at < ?1')
-    .bind(new Date(Date.now() - SENT_RETENTION_DAYS * 86400_000).toISOString()).run();
+  if (hasRoom(env, { svc: 1 })) {
+    await env.DB.prepare('DELETE FROM saved_alerts_sent WHERE sent_at < ?1')
+      .bind(new Date(Date.now() - SENT_RETENTION_DAYS * 86400_000).toISOString()).run();
+  }
   return stats;
 }
 

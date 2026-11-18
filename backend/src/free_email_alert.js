@@ -28,7 +28,8 @@
  *
  * It reuses the Monday email's machinery (recap_signup.js): the same
  * confirmation-token scheme, link lifetime and reuse window, per-address and
- * per-IP limits (one shared per-IP bucket), the same signed browser token
+ * per-IP limits (sign-ups share the Monday email's per-IP sign-up bucket; a
+ * car change has its own, IP_ADDS_PER_HOUR), the same signed browser token
  * (so an address confirmed for the Monday email in this browser needs no
  * second confirmation email), masked addresses in logs, a reply that never
  * says whether an address was already in.
@@ -51,13 +52,14 @@
 import { json, err, sha256Hex, randomToken, isoNow, rateLimit } from './util.js';
 import { resendFetch, countHeld, optionalEmailAllowed, freeAlertBudget, FREE_ALERT_CHANNEL } from './ops.js';
 import { clipAttribution } from './attribution.js';
+import { hasRoom } from './commit_budget.js';
 import { watchMatches, loadArrivals } from './alerts.js';
 import { FREE_INSTANT_RADIUS_MI } from './devices.js';
 import { entActive } from './email_alerts.js';
 import {
   sanitizeRecapWatch, watchLabel, maskEmail, postalLine, recapSig, recapSubToken, emailFromSubToken,
   b64u, apiBase, appUrl, esc, page, EMAIL_RE,
-  CONFIRM_TTL_MS, CONFIRM_REUSE_MS, CONFIRMS_PER_DAY, IP_SIGNUPS_PER_HOUR,
+  CONFIRM_TTL_MS, CONFIRM_REUSE_MS, CONFIRMS_PER_DAY, IP_SIGNUPS_PER_HOUR, IP_ADDS_PER_HOUR,
 } from './recap_signup.js';
 
 /** The free tier's distance: the free instant push's own constant. */
@@ -220,7 +222,7 @@ export async function handleFreeAlertSignup(req, env, ip) {
   // email's "add"). A sign-up shares the Monday email's per-IP sign-up bucket.
   const proved = !!(body && body.sub) && EMAIL_RE.test(email) && (await emailFromSubToken(env, body.sub)) === email;
   const allowed = proved
-    ? rateLimit('falert:chg:ip:' + ip, IP_SIGNUPS_PER_HOUR * 4, 3600_000)
+    ? rateLimit('falert:chg:ip:' + ip, IP_ADDS_PER_HOUR, 3600_000)
     : rateLimit('recap:ip:' + ip, IP_SIGNUPS_PER_HOUR, 3600_000);
   if (!allowed) return err(429, 'rate_limited', 'Too many sign-ups from this network. Try again later.');
   if (!EMAIL_RE.test(email) || email.length > 254) return err(400, 'bad_email', 'Enter a valid email address.');
@@ -543,7 +545,10 @@ const inList = (n, from = 1) => Array.from({ length: n }, (_, i) => `?${i + from
  * rows; only when something matched, one batched read (dedupe + Pro
  * overlap), one small batch per email sent, one UPDATE for held rows. */
 export async function dispatchFreeEmailAlerts(env, arrivals, { now = Date.now() } = {}) {
-  const out = { matched: 0, emails: 0, held: 0, failed: 0 };
+  // `carried`: alerts the scan commit's CALL budget (commit_budget.js) could
+  // not carry, as opposed to `held` for the email budget. Both are kept
+  // unsent and retried the same way.
+  const out = { matched: 0, emails: 0, held: 0, failed: 0, carried: 0 };
   const fresh0 = Array.isArray(arrivals) ? arrivals : [];
   const rows = (await env.DB.prepare(
     `SELECT email, watch_json, watch_set_at, last_email_at, first_email_at, held_at FROM free_email_alerts
@@ -606,10 +611,17 @@ export async function dispatchFreeEmailAlerts(env, arrivals, { now = Date.now() 
       if (entActive(ent)) continue;
     }
     out.matched++;
-    if (left <= 0) {
-      // Held for the budget: not marked sent, retried on later scans for
-      // FREE_ALERT_CATCHUP_MS. Counted once per held stretch, not per scan.
-      if (!heldFresh(row)) { out.held++; await countHeld(env, FREE_ALERT_CHANNEL); }
+    // Room in the commit's call budget for one email and its one batch?
+    // (Free is the last step of the commit: it gets what every other
+    // dispatcher left.)
+    const room = hasRoom(env, { ext: 1, svc: 2 });
+    if (left <= 0 || !room) {
+      // Held for a budget: not marked sent, retried on later scans for
+      // FREE_ALERT_CATCHUP_MS. Counted once per held stretch, not per scan:
+      // under the email budget when that is what ran out, else as carried by
+      // the commit's call budget (the caller counts that).
+      if (left <= 0) { if (!heldFresh(row)) { out.held++; await countHeld(env, FREE_ALERT_CHANNEL); } }
+      else out.carried++;
       holdNow.push(row.email);
       continue;
     }
@@ -633,6 +645,7 @@ export async function dispatchFreeEmailAlerts(env, arrivals, { now = Date.now() 
     await env.DB.batch(stmts);
   }
   for (let i = 0; i < holdNow.length; i += EMAILS_PER_IN) {
+    if (!hasRoom(env, { svc: 1 })) break;   // still unsent: the next scan's arrivals carry the same cars
     const emails = holdNow.slice(i, i + EMAILS_PER_IN);
     await env.DB.prepare(`UPDATE free_email_alerts SET held_at = ?1 WHERE email IN (${inList(emails.length, 2)})`)
       .bind(new Date(now).toISOString(), ...emails).run();

@@ -913,3 +913,493 @@ scorecard as one line (offered, asked, confirmed, first email). (3) If free
 alerts are held on most days, a paid Resend plan lifts every limit here by
 setting `RESEND_DAILY_CAP`. (4) Count alerts dropped after 48 h, so "held"
 and "never sent" can be told apart.
+
+## Watertight — branch `hub/watertight-1117`, NOT merged (2026-11-17)
+
+Hub brief of 2026-11-17 (owner: "I want everything large done ... watertight
+features"). Built on origin/main 56f108c5. Nothing deployed, merged,
+dispatched or released; no file in `scraper/`, `fastlane/`, `ios/`,
+`android/`; no price or entitlement rule changed; no migration. One commit
+per item; items 5 to 7 (test scripts, the regression runner, the eBay
+workflow) are in the builder's report to the hub, not here.
+
+### 1. The commit budget: alerts cannot fail unseen on a busy scan
+
+**What was wrong.** `handleCommit` started every dispatcher at once, each
+with a private cap on *sends*: web push 35, app push 25, Pro email 20,
+saved-car 20, sale pushes 35 + 25, check-ins 20, free email 5, the owner's
+coverage digest 1. That is up to 186 sends in one Worker invocation, and an
+FCM push can cost 2 to 4 calls (token request, retry). The new test's
+worst-case load made **162 outside calls, up to 5 at once**, on the old
+tree. Past the platform limit a send simply fails, whichever dispatcher it
+belongs to, and nothing recorded which.
+
+**The documented limits (Workers Free).** Read 2026-11-17. NOTE: this
+session could not open developers.cloudflare.com itself (the host is not in
+its allowed network); the figures below are what the search tool returned
+from these pages, quoted as returned. Worth one look by a person.
+- Outside calls: "50 subrequests per invocation" on Free (10,000 on Paid,
+  configurable to 10 million). Every `fetch()` counts, and "each subrequest
+  in a redirect chain counts against this limit".
+  <https://developers.cloudflare.com/workers/platform/limits/> (page dated
+  2026-07-28 by the search result)
+- Cloudflare's own services (D1, KV): "Workers on the free plan remain
+  limited to 50 external subrequests and 1000 subrequests to Cloudflare
+  services per invocation."
+  <https://developers.cloudflare.com/changelog/post/2026-02-11-subrequests-limit/>
+  (the Workflows limits page repeats 50 / 1,000:
+  <https://developers.cloudflare.com/workflows/reference/limits/>)
+- D1's own page gives a different number: "Queries per Worker invocation
+  (read subrequest limits): 1000 (Workers Paid) / 50 (Free)", and says a
+  `batch()` counts as one. <https://developers.cloudflare.com/d1/platform/limits/>
+  **The two pages disagree for D1 on Free (1,000 or 50).** See "The open
+  question" below.
+- `ctx.waitUntil` work may run "for up to 30 seconds" after the response.
+  At most six connections wait for response headers at once. CPU time on
+  Free is 10 ms per request (same limits page).
+- Not a per-commit limit, but new: D1 Free's daily row limits are enforced
+  since 2026-09-01 (queries fail past them).
+  <https://developers.cloudflare.com/changelog/post/2026-09-01-d1-free-tier-limit-enforcement/>
+
+**What is built** (`backend/src/commit_budget.js`, the runner
+`runCommitDispatch` in `admin.js`).
+- ONE budget per commit: **45 outside calls** (limit 50), **900 D1 + KV
+  calls** (limit 1,000; plus the one counter write at the end), and no new
+  send or step starts **25 s** after the commit began (limit 30 s).
+- It holds by construction, not by counting sends: every outside call in
+  the commit path goes through `meteredFetch` (APNs, FCM and its token
+  request, web push, Resend) and every D1 / KV call through a metered `env`;
+  both count before the call and refuse at the ceiling. A test fails if any
+  file in the commit path has a bare `fetch(`.
+- The dispatchers run **one after another, in priority order**:
+  1. Pro web push (email fallback) 2. Pro app push 3. Pro email alerts
+  4. saved-car alerts (Pro) 5. sale-day pushes (Pro) 6. storing the arrivals
+  for the Monday recap (no outside call) 7. the owner's coverage digest
+  8. free instant push 9. first-watch check-ins 10. free emailed alert.
+  The order of sacrifice is the reverse: the free emailed alert loses first.
+  Once any step is carried for lack of outside calls, no later step sends in
+  that commit (a cheap free send cannot slip past a carried Pro one).
+- Before each send a dispatcher asks for room for the send AND the write
+  that records it, so it stops between recipients, never between a send and
+  its "sent" row.
+- **Carried, never dropped.** A recipient that was not served has no "sent"
+  row, and every scan carries the last 3 days of arrivals
+  (`push_inventory.py`, `ARRIVAL_WINDOW_DAYS`), so the next scan finds the
+  same cars. Recipients are now taken longest-unserved first (Pro web users
+  by their last alert, devices by `last_push_at`, Pro email by
+  `last_email_at`), so whoever was cut leads the next scan. A carried free
+  emailed alert is flagged `held_at` as before and keeps its 48 h catch-up.
+- **Counted.** Per step, in `ops_counters`: `commit:<step>:held` (had
+  something to send, not served) and `commit-unchecked:<step>:held` (never
+  looked at), plus the day's busiest commit (`commit:ext:max`,
+  `commit:svc:max`). The daily ops email gains, under SENDS: "Busiest scan
+  since yesterday (UTC): N of 45 outside calls, M of 900 database calls" and,
+  when anything was carried, "CARRIED TO THE NEXT SCAN by the per-scan call
+  budget (24 h): ..." per step. Carried **Pro** alerts are also an open
+  issue in the verdict line ("N Pro alerts were carried to a later scan").
+  Each commit logs one line: `commit budget: outside calls 12/45, ...`.
+- Private Pro caps (35 / 25 / 20 / 20) no longer apply inside a commit (the
+  shared budget is the limit; otherwise a Pro user could be carried by a cap
+  while a free send went out). They still apply on the admin test routes.
+  The free tier's own limits are unchanged: 5 free alert emails a scan,
+  20 check-ins a scan, the Resend shares.
+- D1 round trips cut: the per-car "already sent?" reads and "sent" writes of
+  web push, app push, Pro email and the Monday pushes go as D1 batches (one
+  round trip per 100 cars instead of one per car); orphan shard deletes too.
+- Outside a commit (admin routes, Monday cron) there is no budget and
+  nothing changes.
+
+**Worst-case arithmetic** (test `commit_budget_unit.mjs`, counted at the
+network stub and the D1 shim, not by the code under test). Load: 60 Pro web
+users, 40 Pro devices, 30 Pro email members, 30 free instant devices, 20
+check-ins due, 10 free alert addresses, a sale, a coverage request, 4,000
+arrivals (the scraper's cap).
+
+| | outside calls | D1 + KV calls |
+|---|---|---|
+| limit (Workers Free) | 50 | 1,000 (D1's page: 50) |
+| old tree, same load | **162** | not the problem measured |
+| new: worst case | **45** | 364 (Pro web 153, Pro app 41, Pro email 62, arrivals store 51, free instant 31, rest 26) |
+| new: busy scan (10 + 10 + 5 Pro, 30 free instant) | 45 | 146 |
+| new: quiet scan | 0 | 21 |
+
+Capacity that follows: 45 pushes or emails per scan, about 270 a day at six
+scans. The worst case above (262 sends owed) cleared in 7 scans, everyone
+reached exactly once. Today's real load is about 10 Pro devices.
+
+**Promises.** None changed. Pro: every watch, pushed within hours, first in
+line. Free instant and the free emailed alert already said "from what Pro
+left" / "can arrive late or be skipped". What IS new and should be known: if
+Pro alone ever needs more than 45 sends in one scan, the rest arrive one
+scan (about 4 h) later and the free tier gets nothing that scan; a car
+carried for more than 3 days (the arrivals window) is lost. Both show in the
+daily email long before that. The paid Workers plan ($5/mo) lifts it.
+
+**The open question (stopped here, on purpose).** If D1 really allows only
+50 queries per invocation on Free (its own page), no arrangement inside one
+invocation is enough: storing 4,000 arrivals alone takes 51 batches today
+(and did before this change), and the fixed reads of ten dispatchers come to
+about 45. Staying inside *that* reading means splitting the commit across
+invocations (the scan calling one endpoint per dispatcher, or an outbox the
+hourly cron drains), which touches `scraper/push_inventory.py` or needs a
+migration. Not done; it needs the hub's call. **One check settles which page
+is right:** `wrangler tail` (or the Workers logs) on the next scan commit.
+`arrivals stored: 4000` together with the new `commit budget:` line means D1
+calls are not capped at 50. A line `... failed: Too many API requests` (or a
+missing `arrivals stored`) means they are, and then alerts have been failing
+unseen on busy scans for some time.
+
+**Tests.** `backend/test/commit_budget_unit.mjs`: 73 checks, all pass (the
+limits under the worst case; order of sacrifice; counted and shown; nothing
+marked sent for the unserved; carry-over until everyone is reached once; the
+deadline; the backstop at the network; no bare `fetch(`). Against the old
+sources (`YS_SRC=<old src> node test/commit_budget_unit.mjs`) it fails at
+once: "outside calls stay under the platform's 50 a commit: made 162",
+"one outside call at a time: up to 5 at once". All other `*_unit.mjs` pass.
+`e2e-devices.sh` runs one commit with the ceiling lowered to 25 (dev-only
+`COMMIT_EXT_CEILING_TEST`, ignored unless `DEV_MODE=1`) for its existing
+"Pro first when the budget is tight" check.
+
+**Decisions here the owner may want to change.** (1) Order among Pro: web
+push, then app push, then Pro email, then saved cars, then sale pushes (the
+order they ran in before). Most paying members are on the apps; putting app
+push first is one line. (2) The owner's coverage digest goes before the free
+tier. (3) Ceilings 45 / 900 / 25 s. (4) Carried Pro alerts are an open issue
+in the daily email but do NOT raise an hourly "[YardScout alert]".
+
+**Not done / known limits.** Saved-car and sale pushes are not rotated
+(same owners first each scan; both re-evaluate every commit). No count of
+alerts lost after 3 days of carry-over. The 10 ms CPU limit is not measured
+or guarded here (see the report to the hub). The saved-car step was not in
+the worst-case load (it needs inventory shards); it goes through the same
+meter.
+
+## Watertight, continued — branch `hub/watertight-1117`, NOT merged (2026-11-18)
+
+Second builder on the hub's brief (the first stopped at a usage limit after
+items 1 and 7). Same base, same rules: nothing deployed, merged, dispatched
+or released; no file in `scraper/`, `fastlane/`, `ios/`, `android/`,
+`backend/src/inventory.js`, `backend/src/jsonpick.js`; no price or
+entitlement rule changed; no migration. Items 5 and 6 are in the report to
+the hub.
+
+### 1. The commit budget: review
+
+**Re-run.** `commit_budget_unit.mjs` 73 of 73 on the branch; against the
+sources before the change (`YS_SRC=<56f108c5 src>`) it fails at once ("made
+162", "up to 5 at once"), so the test does fail without the fix. All 23
+`*_unit.mjs` pass. `e2e-devices.sh` passes (its "tight budget" checks
+included).
+
+**The limits, checked again (2026-11-18).** developers.cloudflare.com is not
+reachable from this session either; these are from search results quoting
+the pages, the same as the first builder's.
+- Workers limits page and the 2026-02-11 changelog: Free = **50 outside
+  subrequests and 1,000 subrequests to Cloudflare services (D1, KV) per
+  invocation**; Paid = 10,000 (raisable to 10 million).
+  <https://developers.cloudflare.com/workers/platform/limits/>,
+  <https://developers.cloudflare.com/changelog/post/2026-02-11-subrequests-limit/>
+- D1 limits page: "Queries per Worker invocation (read subrequest limits):
+  1000 (Workers Paid) / 50 (Free)", pointing at the Workers page.
+  <https://developers.cloudflare.com/d1/platform/limits/>
+- **The open question is settled on paper:** the D1 row still gives Paid
+  1,000, the figure the 2026-02-11 change replaced with 10,000, so that row
+  is the old Workers table copied before the change, and the Workers page it
+  points to governs: 1,000 on Free. The first builder's `wrangler tail`
+  check (an `arrivals stored: 4000` line next to the `commit budget:` line on
+  a real scan) is still the proof and costs nothing.
+- Not confirmed by an official page I could read: that a D1 `batch()` counts
+  as ONE subrequest (a third-party write-up says so; Cloudflare's D1
+  introduction calls a batch one round trip). The budget's 900 assumes it.
+  If a batch counted per statement, the worst case would be about 4,450 D1
+  calls (the 4,000 arrival rows alone), far past 1,000; again the tail line
+  settles it.
+
+**Arithmetic, worst case** (test load: 60 Pro web users, 40 Pro devices, 30
+Pro email, 30 free instant, 20 check-ins, 10 free alert addresses, a sale, a
+coverage request, 4,000 arrivals): outside calls **45 of 50** (Pro web push
+took all 45; 5 left for redirects); D1 + KV **364 of 1,000** (36%), plus the
+one counter write; one call at a time (the six-connection limit is never
+near); no step starts after 25 s of the 30 s `waitUntil` allows. It holds.
+
+**Fixed in review.** `fits()` closed outside calls only when the OUTSIDE
+count was short. A send refused because D1 room was short is carried just
+the same, but a later, cheaper, lower-priority send could still go out:
+the priority promise broken in a corner. It now closes outside calls in
+that case too. New check "fits: a send refused for D1 room closes outside
+calls too" (fails on the first builder's `fits()`, passes now).
+
+**NOT solvable by this design: the 10 ms CPU limit (new, 2026-11-18).** The
+commit is one request, and the dispatch runs in its `waitUntil`; CPU spent
+there is (by every account I found; not stated on a page I could open)
+counted against the same request. Measured in Node 22 on this machine (the
+same V8 engine, not a Worker; scratch script, not in the repo): a commit
+body with 4,000 arrivals is about 1.1 MB and `JSON.parse` of it takes about
+**6 ms**; `watchMatches` over 4,000 arrivals takes about **4.7 ms per
+watch**, so 50 watches is about 175 ms. Every dispatcher matches every
+arrival against its watches, so a commit's CPU grows with arrivals x
+watches and is far past 10 ms today (the hub's count on 11-17: 87 watches
+on devices alone). Budgeting calls cannot fix that; if Cloudflare stops the
+commit for CPU, the dispatch ends wherever it was and no `commit budget:`
+line or counter is written, which is exactly the silent failure item 1 is
+about. Whether it happens is in the usage report the hub already has (CPU
+stops on `POST /v1/admin/inventory/commit`). Options, none done here: (a)
+Workers Paid ($5/mo: 30 s CPU, 10,000 subrequests) lifts both limits at
+once; (b) make matching cheaper (memoize the make/model normalisation per
+string, precompute each watch once, bucket arrivals by make): perhaps 5 to
+10 times less, still not 10 ms at 4,000 arrivals; (c) have the scan send
+only arrivals new since the last commit (touches `scraper/push_inventory.py`,
+another workstream). Recommendation: (a), then (b).
+
+### 2. Parts tab: a zip that arrives late (`docs/app.js`, sw `jh-v208`)
+
+**What was wrong.** A part picked while the zip lookup was still out left
+"Set a zip code (or use your location) up top" on the Parts tab after the
+zip arrived (the hub's note in `ops/interchange.md`, 2026-11-16). Testing
+the obvious fix found a second half: run again the moment the zip lands,
+the search saw only the cars loaded so far and said "No cars within 100 mi
+listing a spotted headlights right now", because the radius-first loader
+had not yet fetched the cars around the new centre, and nothing re-ran the
+Parts search when they came.
+
+**What changed.**
+- The waiting line carries `data-wait-place`. `pfSyncWhere()`, which every
+  centre change already goes through (a zip lookup coming back, the /geo
+  guess and links through `afterPlaceChange`, "Use my location"), now ends
+  with `pfRerunIfPlaceArrived()`: when that line is on screen, a part is
+  picked and a centre exists, it runs the search again.
+- The launch call: a saved zip is restored (and, with its coordinates
+  cached, `setZipCenter` runs to its end) before `let pfCat` is
+  initialised. The new function reads the results box first; it is empty at
+  launch, so `pfCat` is never read before it exists.
+- A Parts search that runs while the cars around its centre are still
+  loading (`invViewPending({ focus: false })`) is marked, and
+  `afterInventoryChange` runs it once more when they land (the mark clears
+  when the area is in). Counting is unchanged: `pfCountSearch` already
+  counts one search once.
+- Also covered by the same hook, not asked for: the same stale line after a
+  late /geo guess or a late "Use my location".
+
+**Test.** `backend/test/pf_late_zip_e2e.mjs` (new; the real `docs/` served
+as https://yardscout.io/ through Playwright, no port, the zip lookup held
+until the test releases it): typed zip, late; saved zip, late; saved zip
+with cached coordinates (the launch order). 13 of 13. With
+`PF_DOCS=<docs before the fix>` it fails 2: "once the zip arrives, the
+results come" in both late cases, with the waiting line still on screen.
+`pf_guards_unit.mjs` gained a stub for the loader check. Also run, all pass:
+`no_gate_e2e` 78, `pf_new_cats_e2e`, `part_finder_e2e.py`,
+`pf_ux_e2e.py`, `interchange_e2e.py`, `funnel_events_e2e`, all 23
+`*_unit.mjs`.
+
+### 3. Free emailed alert: the four loose ends
+
+**(a) No "would have sent a push" for cars the alert covers** (`docs/app.js`
+near-miss in `renderAlerts`). The line "One landed on …, after you set this
+watch" with its Pro box "Would have sent a push within hours" now leaves out,
+on the one watch whose free email alert is on, the cars that alert covers:
+within the copy's radius of the copy's centre (exactly as
+`falertWatchBody` sends them) and listed no earlier than the day before the
+alert went on (the API records the cars already listed as known, so earlier
+ones were never emailed and stay a near-miss). The browser now records when
+it saw the alert go on (`onAt` in its own `ys_falert`; no watch touched).
+With no `onAt` (an alert turned on before this change, or changed from
+another browser) every car in range counts as covered: the line must never
+claim a miss the email may have brought. Pending (no click yet) covers
+nothing. Pure helper `falertCovers`. Not known to the page: whether a
+covered car's email was actually sent or held past 48 h by the daily limit;
+such a car shows no near-miss line.
+Test: `free_email_alert_ui_e2e.mjs` case 7b (8 checks, 3 fail on the docs
+before the change, run with the new `YS_DOCS` override);
+`free_email_alert_client_unit.mjs` +11 checks of `falertCovers`.
+
+**(b) The watch toast offers the free email alert** (`showWatchToast`). After
+a new watch on the website, a free visitor who has not asked for the alert
+in this browser is offered THAT for the new watch, in place of the Monday
+email: "Free email alert for (car): we email you when one is set out within
+50 mi, usually the same day. One car, one address, no account.", one field,
+"Email me". One offer, no Pro box, no store link. The reply is the card's:
+"Check your inbox … to turn on your email alert for (car)" (or "on" at once
+when this browser already holds a token for the address). The Monday email
+offer comes back, as before, once the alert is asked for, for a batch of
+several new watches, for a watch past the first 5, and after the alert offer
+was dismissed (x or 30 s) this visit (`ys_falert_no`, session). Counted as
+the card is: `free-alert-shown` once a visit (shared key), `free-alert-asked`
+on an address; `email-asked` is not counted when the Monday offer is not
+shown. The request is the card's own (`falertSignup`, now shared by the card,
+"Change car" and the toast). Layout check gained `watch-toast-falert`,
+`-msg`, `-sent`.
+Test: `free_email_alert_ui_e2e.mjs` cases 10 and 10b (17 checks: the offer,
+wording, one field and no Pro box, counts, a bad address, the request is a
+copy of the NEW watch, pending state keyed to it, rule 6 byte for byte, the
+card waits for the click, the next watch gets the Monday offer, dismissal);
+`recap_ask_e2e.mjs` now runs its web cases with the alert already asked for
+(the state in which the toast still offers the Monday email).
+
+**(c) Per-IP buckets** (`backend/src/recap_signup.js`). `/v1/recap/add` (32
+an hour) and `/v1/recap/signup` (8 an hour) bumped one counter, so eight
+one-tap adds from a network used up its sign-ups. Adds now have
+`recap:add:ip:` and the named constant `IP_ADDS_PER_HOUR` (also used by the
+free alert's car change, in its own `falert:chg:ip:`). Sign-ups (Monday
+email and free alert, both send a confirmation) still share `recap:ip:`.
+Test: `recap_signup_unit.mjs` 8b (3 checks; "10 adds from one network leave
+its sign-ups untouched" fails with 429 on the shared bucket).
+
+**(d) Hourly "Resend near daily cap"** (`backend/src/ops_monitor.js`). The
+detail now reads: "Held back before that, lowest class first: free alert
+emails (web) once 70 emails of any kind went out today (and after 20 free
+alert emails; held alerts are retried on later scans), then sign-up
+confirmations (Monday email and free alert) and Monday recaps once 10 or
+fewer sends are left." Built from the limits `ops.js` enforces, so it
+follows `RESEND_DAILY_CAP`. Test: `free_email_alert_unit.mjs` +4 (wording at
+100 and 1,000 a day; the real hourly check firing at 95 of 100 with it).
+
+**Decisions the owner may want to change.** (1) The toast offers the alert
+INSTEAD of the Monday email until the alert is asked for; the Monday email
+is then offered on later watches. (2) Dismissing the alert offer brings the
+Monday offer back on the next watch the same visit (not nothing). (3) An
+alert with an unknown start counts every car in range as covered (fewer Pro
+prompts rather than a wrong one).
+
+### 4. The weekly scorecard: the alert card and the free emailed alert (`backend/src/scorecard.js`)
+
+Two lines, this week's counts only, in the style of item 3's "offered →
+gave an address → confirmed" line:
+- under item 2 (Watches created), every platform summed (the feed is the
+  same in the apps): `alert card in the Cars feed: shown 42 → "Set an
+  alert" 5 · dismissed 6`
+- under item 3 (Monday email sign-ups), website only:
+  `free email alert (website): offered 40 → gave an address 6 → confirmed
+  4 → first email 2`
+
+Honesty rules, as for the other lines: "no data" when no platform it
+exists on reported anything this week; "nothing counted yet" when
+platforms reported but none of these counters exists in either week (not a
+row of 0s); a first counter inside this week adds "(counting started Nov
+22)" (no counting-rules marker exists for these events, so the first
+counted day is the start). No week-on-week change on either line yet (both
+started on 11-16 and 11-17). The seven events are added to the one read
+the scorecard already makes (daily email and the admin route; no public
+request path).
+
+Test: `scorecard_unit.mjs` 169 (14 new: both lines, sums across
+platforms, web only for the free alert, placement under items 2 and 3, the
+HTML email, "counting started", "nothing counted yet", "no data", last week
+only, a read error, and the lines read back from SQLite with every
+migration). Against the scorecard before the change the new checks fail.
+
+Decision the owner may want to change: the free alert line sits under the
+Monday email item rather than as a sixth numbered item.
+
+### Final run (branch head 5c0e402c, 2026-11-18 16:47 UTC)
+
+`tools/regress.sh` (new in this branch, item 6), one test at a time under
+the shared lock: **93 passed, 1 failed, 0 skipped**, about 80 minutes. The
+one failure is `cars_feed_e2e.mjs` "New: only cars set out today or
+yesterday" (0 such cars in the test's area): it fails the same way against
+the docs before this branch. The checked-in inventory on this base was
+scraped 11-17 18:45 and the check reads today's date, so it should pass on
+fresher data. Layout check at six widths: 2,472 checks, 0 failures. All six
+API suites pass and left nothing listening.
+
+## The Cars watch strip asks for the free email alert — branch `growth/strip-falert-1118`, NOT merged (2026-11-18)
+
+Hub brief 2026-11-18: in the 7 days to 11-18 the Monday-email ask (strip and
+toast, `email-asked`) was shown 17 times and no one gave an address; the free
+emailed alert (live since 11-17 16:46 UTC, hub.md) was only offered in the
+Alerts card. The watch toast already offers the alert on this base
+(5c0e402c, "Watertight, continued" 3b), so this branch is the Cars watch
+STRIP only, on the toast's own rule and request. Built on
+`origin/hub/watertight-merge-1118` (fe91f512), then merged its head ca283423
+and main fee45c10. Nothing deployed, merged into main, dispatched or sent.
+
+**What the strip shows** (website, a make picked in the Cars list, not
+already watched; `stripAskKind`, block "the free email alert comes first"
+under ONE-STEP MONDAY EMAIL IN THE WATCH STRIP in `docs/app.js`):
+
+| Case | Strip |
+|---|---|
+| One model, free, a location, no alert on or waiting here, not declined this visit, a free list with room | "Want the next one? Free email alert for **Nissan Xterra**: we email you when another is set out within 50 mi, usually the same day. One car, one address, no account." [email] [Email me], "or just watch it here". No cars in the list: "None here right now. … when one is set out …". The distance is the alert's (the list's radius, at most 50). No Pro prompt in the ask; the strip's Pro box under it is unchanged. |
+| …after "Email me" | One watch through `addQuickWatch` (source `strip`, the list's radius, as before), one `POST /v1/free-alert/signup` with a copy of it (make, model, years, centre rounded, at most 50 mi; the toast's `falertToastSubmit` / `falertSignup`). The strip: "✓ Watching X; new ones light up in Alerts." and "Check your inbox. Tap the link we sent to v•••@… to turn on your email alert for X. Nothing is sent until you do." With a token this browser holds for that address (a confirmed Monday subscriber): "Your free email alert is on for X, to v•••@…" and no confirmation email. `ys_falert` pending (or on); the Alerts card shows the same. |
+| …a later render (a scan coming in) | "Watching X — new ones light up in Alerts. Check your inbox to turn on its email alert." / "Its free email alert is on." (new: before, a re-render dropped the "check your inbox" line). |
+| Several models (2 to 5) or the whole make | The Monday email, as before ("Add X to your free Monday email?" for a confirmed subscriber). More than 5: the plain strip. |
+| An alert on or waiting for its click here | The Monday email (or "Add"). No "change your alert to this car": it would silently replace the car chosen for the one alert; "Change car" stays in the Alerts card. |
+| The alert declined this visit (toast x or 30 s, or the strip's "or just watch it here") | The Monday email; both declined: the plain strip. |
+| A free list at 5 watches | The Monday strip, as before (its submit opens the upgrade sheet, nothing sent): a full list cannot make the alert's watch. |
+| Pro / the app shells | The plain strip with its Watch button, unchanged. |
+| No location at all | The plain strip; Watch asks for the zip in the toast, and the toast then offers the alert (unchanged path). |
+| A guessed place or a link's place | The alert ask carries the zip field (`stripZipFirst`): "within 50 mi of your zip"; the zip is saved first and the watch is centred on it, never on the guess. With a saved zip under a link's place: "of your own location". |
+
+"or just watch it here" on the alert ask makes the watch (`jhWatchSearch`)
+and counts as declining the alert this visit (`ys_falert_no`), so the toast
+that follows offers the Monday email, not the same ask again.
+
+**The toast** is as 5c0e402c built it. Its rule is now one function,
+`falertAskOpen()` (free web visitor, no alert on or waiting here, not
+declined this visit), which `falertToastPick` and the strip both call; no
+behaviour change in the toast.
+
+**Counting (dated; the daily email compares weeks).** From the day this is
+deployed the strip's alert ask counts `free-alert-shown` ("Free alert
+offered"): when at least half of it is on screen, once a visit, under the
+key the card and the toast use (`ys_falert_seen`), so a visit that sees the
+ask in two places counts once. An address given counts `free-alert-asked`.
+`email-asked` still means the Monday-email field only and is NOT counted for
+the alert's ask. So "Monday email asked" falls and "Free alert offered" rises
+by the visits whose strip covered one model; weeks across the deploy day are
+not like for like on those two rows. No counting-rules version step (as for
+the alert itself). Written in `docs/app.js` (EVENTS_V comment, FUNNEL_EVENTS,
+the strip block).
+
+**Rule 6.** Watches are made only by `addQuickWatch`, exactly as before;
+stored watches are never edited (byte-for-byte checks in three suites). The
+alert keeps its own key `ys_falert`.
+
+**Files.** `docs/app.js`, `docs/sw.js` (`jh-v211`); tests
+`backend/test/cars_feed_e2e.mjs` (11, 11a, 11b rewritten: 43 strip checks),
+`strip_guess_e2e.mjs` (the alert under a guess; the Monday email under a
+guess with an alert waiting: 20), `free_email_alert_ui_e2e.mjs` case 11 (15,
+real beacons; against the base docs its first checks fail and the case stops
+at the missing ask), `free_email_alert_client_unit.mjs` (+19: `stripAskKind`
+for every case above, the shared rule, the ask's wording, no Pro prompt in
+it), `ui_no_truncation.mjs` (`feed-strip-mail` now with an alert waiting;
+new `feed-strip-falert`, `-zip`, `-msg`, `-sent`, longest model in range with
+years: those plus the toast's alert screen and `r5-cars-next` at six widths,
+light and dark, 100% and 200%: 168 checks, 0 failures).
+
+**Decisions the owner may want to change.** (1) One model only: a whole
+make keeps the Monday email. (2) No "change your alert to this car" in the
+strip. (3) "or just watch it here" declines the alert for the visit; the
+toast then offers the Monday email. (4) A full free list keeps the Monday
+strip (and its upgrade sheet) rather than the plain strip.
+
+**Seen, not fixed.**
+- With 5 free watches the strip still asks for an email and then opens the
+  upgrade sheet (before this branch too); the plain strip would be kinder.
+- The strip names a year range after the car ("Silverado 1500 2003–2007")
+  and the alert before it ("2003–2007 Silverado 1500"), so the reply shows
+  both forms.
+- On the Monday strip (several models), "or just watch it here" is followed
+  by the toast asking for the Monday email again (before this branch too;
+  `cars_feed_e2e` 11b checks it).
+- `backend/` has no `package-lock.json`, so `npm ci` stops with EUSAGE; the
+  run below used the main checkout's `backend/node_modules` through a link
+  (as the hub did), not committed.
+- `tools/regress.sh` takes the shared lock itself and says never to run it
+  under `flock`: wrapped in `flock /tmp/ys-test.lock` it would wait on itself
+  forever. Run as `bash tools/regress.sh --out DIR`.
+
+**Suggestions.** (1) The scorecard's Monday-email item could say "the Cars
+strip asks for the free alert first since (deploy day)", so the drop in
+"asked" is not read as interest falling. (2) A strip that says "Watching X"
+could offer the alert for that watch when `falertAskOpen()` and it is among
+the first 5 (today only the Alerts card does). (3) With 17 asks a week, give
+it two weeks before judging the switch.
+
+**Final run** (branch head 3e881c5e = the work above merged with main
+fee45c10; 2026-11-18 19:14 UTC): `bash tools/regress.sh --out DIR`, one
+test at a time under the shared lock it takes itself: **104 passed, 0
+failed, 0 skipped** (units, scraper, tools, every self-contained browser
+suite, the six API suites, the layout check). Layout at six widths: 2,664
+checks, 0 failures. `cars_feed_e2e` passed in full this time (its "New:
+only cars set out today or yesterday" check, which failed on the older
+inventory in the watertight run, passes on today's data).

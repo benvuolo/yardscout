@@ -20,15 +20,13 @@ API="http://127.0.0.1:$PORT"
 OUT="test/.out-email"
 mkdir -p "$OUT"
 
-# npx -> wrangler -> workerd: kill the whole tree, or workerd outlives the run
-# and holds the port (and a deleted state dir) for the next one.
-kill_tree() { local c; for c in $(pgrep -P "$1" 2>/dev/null); do kill_tree "$c"; done; kill "$1" 2>/dev/null || true; }
-cleanup() {
-  if [ -n "${DEV_PID:-}" ]; then kill_tree "$DEV_PID"; fi
-  if [ -n "${MPID:-}" ]; then kill "$MPID" 2>/dev/null || true; fi
-  rm -f .dev.vars.e2e-email .dev.vars.e2e-recap .dev.vars.e2e-falert
-}
-trap cleanup EXIT
+# Stops what it starts on any exit (each server in its own process group:
+# npx -> wrangler -> workerd, so workerd cannot outlive the run and hold the
+# port); refuses a port that is already taken, before every phase too.
+source test/servers.sh
+ys_need_port "$PORT" "wrangler dev"
+ys_need_port "$MOCKPORT" "mock-resend"
+ys_on_exit 'rm -f .dev.vars.e2e-email .dev.vars.e2e-recap .dev.vars.e2e-falert'
 
 wait_up() {
   for i in $(seq 1 60); do
@@ -52,20 +50,20 @@ npx wrangler d1 migrations apply yardscout-db --local \
   --persist-to "$OUT/wrangler-state" >"$OUT/migrate.log" 2>&1
 
 echo "── starting wrangler dev on :$PORT"
-npx wrangler dev --port "$PORT" --env-file .dev.vars.e2e-email \
-  --persist-to "$OUT/wrangler-state" >"$OUT/dev.log" 2>&1 &
-DEV_PID=$!
+ys_start "$OUT/dev.log" npx wrangler dev --port "$PORT" --env-file .dev.vars.e2e-email \
+  --persist-to "$OUT/wrangler-state"
+DEV_PID=$YS_LAST_PID
 wait_up "$OUT/dev.log"
 echo "── wrangler dev is up ($API)"
 
 YS_TEST_BASE="$API" node test/email_alerts_e2e.mjs
-kill_tree "$DEV_PID"; DEV_PID=""
-sleep 1
+ys_stop "$DEV_PID" "$PORT"; DEV_PID=""
+ys_need_port "$PORT" "wrangler dev (next phase)"
 
 # ---- phase 2: free Monday email for web visitors ----
 echo "── starting mock-resend on :$MOCKPORT"
-node test/mock-resend.mjs "$MOCKPORT" >"$OUT/mock-resend.log" 2>&1 &
-MPID=$!
+ys_start "$OUT/mock-resend.log" node test/mock-resend.mjs "$MOCKPORT"
+MPID=$YS_LAST_PID
 for i in $(seq 1 20); do
   sleep 0.5
   curl -sf "http://127.0.0.1:$MOCKPORT/ping" >/dev/null 2>&1 && break
@@ -87,16 +85,16 @@ rm -rf "$STATE2"
 echo "── applying migrations (local D1, phase 2)"
 npx wrangler d1 migrations apply yardscout-db --local \
   --persist-to "$STATE2" >"$OUT/migrate-recap.log" 2>&1
-npx wrangler dev --port "$PORT" --env-file .dev.vars.e2e-recap \
-  --persist-to "$STATE2" >"$OUT/dev-recap.log" 2>&1 &
-DEV_PID=$!
+ys_start "$OUT/dev-recap.log" npx wrangler dev --port "$PORT" --env-file .dev.vars.e2e-recap \
+  --persist-to "$STATE2"
+DEV_PID=$YS_LAST_PID
 wait_up "$OUT/dev-recap.log"
 echo "── wrangler dev (mock Resend, daily cap 14) is up ($API)"
 
 YS_TEST_BASE="$API" YS_MOCK_BASE="http://127.0.0.1:$MOCKPORT" YS_STATE_DIR="$STATE2" \
   YS_DEV_LOG="$OUT/dev-recap.log" node test/recap_signup_e2e.mjs
-kill_tree "$DEV_PID"; DEV_PID=""
-sleep 1
+ys_stop "$DEV_PID" "$PORT"; DEV_PID=""
+ys_need_port "$PORT" "wrangler dev (next phase)"
 
 # ---- phase 3: free emailed alert for web visitors ----
 cat > .dev.vars.e2e-falert <<EOF
@@ -115,9 +113,9 @@ rm -rf "$STATE3"
 echo "── applying migrations (local D1, phase 3)"
 npx wrangler d1 migrations apply yardscout-db --local \
   --persist-to "$STATE3" >"$OUT/migrate-falert.log" 2>&1
-npx wrangler dev --port "$PORT" --env-file .dev.vars.e2e-falert \
-  --persist-to "$STATE3" >"$OUT/dev-falert.log" 2>&1 &
-DEV_PID=$!
+ys_start "$OUT/dev-falert.log" npx wrangler dev --port "$PORT" --env-file .dev.vars.e2e-falert \
+  --persist-to "$STATE3"
+DEV_PID=$YS_LAST_PID
 wait_up "$OUT/dev-falert.log"
 echo "── wrangler dev (mock Resend, daily cap 40) is up ($API)"
 

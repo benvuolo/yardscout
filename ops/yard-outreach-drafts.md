@@ -1,5 +1,15 @@
 # Yard outreach — send from hello@yardscout.io
 
+
+> **Gmail connector rewrites links (found 2026-11-18).** Any web address or
+> bare domain written into a draft through the Gmail tool (create_draft /
+> update_draft), even "yardscout.io" in plain text, is stored as a Google
+> redirect link (`google.com/url?q=...&source=gmail&ust=...`). Five emails
+> the owner sent on 11-18 at ~17:28 UTC went out that way (Kenny U-Pull,
+> Carolina Pick N Pull, Express Pull-N-Save, Andersen; the Glenn reply quotes
+> them). Drafts written by the hub carry NO web addresses from now on; the
+> owner adds a link by hand in Gmail if one is wanted. Check a draft with
+> get_draft RAW, not the plain-text view.
 Four emails, one per blocked source. Pull-N-Save is the one that matters most (8 yards, ~11,000 cars, and their own search is broken for 6 stores — they'll want to know).
 
 ---

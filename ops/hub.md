@@ -1864,3 +1864,115 @@ nissan_verify_2026-11-18.json`, `removals_verify_2026-11-18.json`, section
   codes in the option column not read (may affect LIVE makes too: check),
   body check leans on lot vPIC bodies, engine/transmission splits get only
   "option", gas/hybrid pages, body codes not read as bodies.
+
+## 2026-11-18 17:58 UTC list jumps held from "new"; ops email names the site's stale yards
+
+`data/list-jumps-1118` (66e6e6b4; numbers in `ops/data.md`, "2026-11-18
+(later)"). A scan where a yard adds cars under ids it has NEVER listed
+(history DB) making up 25%+ of its list and 50+ cars is a jump: its cars
+get the flush mark (no alerts, not "new this week", no New badge) for 8
+days. Measured on 160 committed scans: catches all 15 re-key / source-swap
+events (Ryan's Detroit 10-26, U-Pull-It x5 10-28, Pull-N-Save x6 10-31,
+Midway x2 11-14), no real set-out day (largest real 18.9%, smallest jump
+27.5%). Ids that come back (Indy's 35 flips, Riverside's 13, partial reads)
+are not held: they keep their dates and the alert dedupe already stops
+them. Ops email: the per-yard list now uses `listState` (same yards and
+dates as the site) plus an "early warning" line a day earlier.
+Tests on the tree merged with main: 33 scraper tests and every API unit
+(incl. new `ops_yard_list_unit`) pass; builder's `e2e-ops` 154/154.
+Not done (saved_alerts.js, after the watertight merge): skip "leaving soon"
+at stale/frozen yards; send "gone" only after two missing commits and no
+flush mark. Flip-flopping feeds (Indy, Pull-N-Save Riverside) and the date
+fields of the 10-28/10-31 source changes: yards workstream.
+
+## 2026-11-18 ~18:45 UTC LKQ partial read, Pull-N-Save check page, Play 1.13.1 live
+
+- Scan 44350039303 (16:40): LKQ Pick Your Part 51,476 cars against ~72,200
+  before. 17 yards stopped after their first one or two pages (25 or 50
+  cars); STALE-KEEP carried their earlier lists forward, so no car vanished.
+  The 13 scans before it had 0 such yards except one on 11-16 (1 yard).
+  The reader ended a store's read on ANY error, silently. Now
+  (`_pyp_get_page`): one retry after 5 s for a timeout, dropped connection,
+  429 or 5xx (Retry-After honoured, at most 30 s); 403/404 not retried; a
+  stop is logged with yard, page and reason. Test `scraper/test_pyp_reader.py`.
+- Same scan: Pull-N-Save answered getMakes with HTTP 202 and a meta-refresh
+  page (a check page) 3 times; the 01:58 scan saw the same, 07:23 and 12:30
+  read all 11,310 cars. Rule 2: no workaround. Their 8 yards were carried
+  forward. The draft to Pull-N-Save is in Gmail (ops/yard-outreach-drafts.md).
+  If it lasts a full day, add it to that draft.
+- Also 0 this scan: Bevell's (1,145 kept), Route 34 (333 kept), Budget
+  Winter Garden (1,624 kept).
+- Google Play: production 1.13.1 (41) rollout complete (play-status 18:18).
+  Apple: 1.13.1 build 42 WAITING_FOR_REVIEW (submitted 15:03).
+- usage-stats: Apple's sales report printed a 404 as a row of zeros (0
+  downloads since 11-06 while the app counts ~5 new iPhone users a day). Now
+  it says "no report" with Apple's words, and units by product type (0145a829).
+- Apple sales reports (usage-stats 44369641326): SALES SUMMARY 1_1 has 404
+  "expected results but none were found" for every day from 11-06 to 11-17;
+  1_0 also 404; 1_2/1_3 are not valid versions (400); the WEEKLY report for
+  the week ending 11-15 is 404 too. 11-04/05 had 153 and 190 updates a day,
+  so Apple has stopped publishing sales for this vendor, not our users. The
+  SUBSCRIPTION snapshot still arrives (3 active on 11-17). Owner to check App
+  Store Connect: Business (an agreement waiting to be accepted?) and Trends
+  (does the web page show units after 11-06?).
+- Gmail connector turns every URL or bare domain in a draft into a
+  google.com/url redirect (RAW-checked). Sent 11-18 ~17:28 with such links:
+  Kenny U-Pull, Carolina Pick N Pull, Express Pull-N-Save, Andersen. The two
+  unsent drafts (Budget follow-up, 1A Auto) rewritten with no addresses.
+  Rule from now: hub drafts carry no web addresses (ops/yard-outreach-drafts.md).
+- Check-in (trig_01Bj2uqq2oFAy4JdziSoq38G) on scan 44350039303 (committed
+  18:17): new yards in: Standard UPIC 524, Intermountain Idaho Falls 578,
+  S&S Lebanon 1,187. "[U-Pull-R] reader is switched off ... no request
+  sent". "[list freshness] 4 stale (4,333 cars), 4 frozen (2,309)", as the
+  dry run said. Manifest yardFields end with listChangedAt, listState,
+  listReadAt, listFlushAt. No FAILED or Traceback lines; 2 WARNING lines
+  (Pull-N-Save check page, Route 34 0 cars). Live: yardscout.io/car/
+  utpap-orem-K026992 says "This yard's list has not changed since Oct 22,
+  2026. Call before you go." Next: wire ifipull/ssupullit price lists and
+  run gen_yard_site_links.py after the watertight merge.
+
+## 2026-11-18 ~19:20 UTC watertight batch to main (sw `jh-v210`, ca283423)
+
+`hub/watertight-merge-1118` = builder branch `hub/watertight-1117` (notes in
+`ops/growth.md`, "Watertight" and "Watertight, continued") + main of 19:00 +
+three hub commits: regress_unit lists API suites without node_modules
+(612b1a10), price sheets for Intermountain Idaho Falls and S&S Lebanon
+(1459c696), inventory links for the three new yards from
+`gen_yard_site_links.py` (ca283423).
+- In it: one shared outside-call / D1 budget per scan commit with the
+  dispatchers in priority order; the watch toast offers the free email alert;
+  the Parts tab re-runs its search when a late zip arrives; tests stop the
+  servers they start; `tools/regress.sh` (the whole regression under the lock).
+- Tests: full `tools/regress.sh` on fe91f512: 95 PASS, regress_unit FAIL and
+  6 API suites SKIP (no backend/node_modules in the worktree). Fixed the
+  test, linked node_modules: regress_unit + all six API suites PASS. After
+  merging main + the price sheets: --quick 71 PASS; interchange_e2e,
+  part_finder_e2e, pf_ux_e2e, cars_feed_e2e, card_share_e2e,
+  alert_freshness_e2e, e2e-ops, browser_e2e all PASS. After the yard links:
+  site-proxy units, yard_list units, card_share_e2e, cars_feed_e2e PASS.
+  Not run: map_regions_e2e (left out of the runner by design; needs outside
+  map servers); the layout check was not repeated after the merge (main's
+  changes since were data and server-side).
+- The strip builder (`growth/strip-falert-1118`) was told the toast is done
+  and to merge this head.
+- 19:24 UTC confirmed live: yardscout.io/sw.js names `jh-v210`; one load of
+  /car/utpap-orem-K026992: 200, the frozen-list sentence, no page errors.
+
+## 2026-11-18 ~20:00 UTC Cars watch strip offers the free email alert (sw `jh-v211`, f27e3e22)
+
+Builder branch `growth/strip-falert-1118` (6f2ab742; cases, counting change
+and suggestions at the end of `ops/growth.md`). Hub read the app.js diff:
+one rule (`falertAskOpen`) shared by the toast and the strip; `stripAskKind`
+picks alert / Monday / Monday-add / plain; the removed `recapEligible` call
+was equivalent to the checks already at the top of `stripMailHtml`; new
+watches only through `addQuickWatch` (rule 6); not in the app shells or for
+Pro. Builder's full `tools/regress.sh` on the merged tree 3e881c5e: 104
+PASS, 0 FAIL, 0 SKIP (layout 2,664 checks). Main since: ops only.
+- Counting from today: the strip's alert ask counts `free-alert-shown`, not
+  `email-asked`; "Monday email asked" will fall and "Free alert offered"
+  rise. Weeks across 11-18 are not like for like on those two rows.
+- Builder's open items: the scorecard could note the switch date; a
+  "Watching X" strip could offer the alert for an existing watch; backend/
+  has no package-lock.json (npm ci fails; tests use the main checkout's
+  node_modules); year ranges are written after the model in the strip and
+  before it in the alert.

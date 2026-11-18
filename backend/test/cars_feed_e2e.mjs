@@ -19,12 +19,17 @@
  *      page, else the tagged #cars= link
  *   9  first visit: "How to read this" after the first row of tiles on a phone
  *   10 the app banner waits for the third row (or 30 s) on a first visit
- *   11 the watch strip's one-step Monday email: one watch + one sign-up with
- *      the right body; the limit sends nothing; confirmed = Add; Pro and the
- *      app shells keep today's strip; the toast does not ask again
+ *   11 the watch strip's one-step email ask: for ONE model the free email
+ *      alert (2026-11-18), for several models or the whole make the Monday
+ *      email; one watch + one request with the right body; the alert's ask
+ *      counts free-alert-shown once a visit and never email-asked; an alert
+ *      already here, or declined ("or just watch it here"), brings the
+ *      Monday email back; a full list sends nothing; confirmed Monday
+ *      subscriber: the alert at once, or Add; Pro and the app shells keep
+ *      today's strip; the toast does not ask again; stored watches untouched
  * Offline: serves docs/ on 127.0.0.1 (also answers https://yardscout.io/ from
  * disk for the app-shell page), blocks every other host, answers the API's
- * /v1/recap/* POSTs itself. Images from the yards are answered with a 1x1
+ * /v1/recap/* and /v1/free-alert/* POSTs itself. Images from the yards are answered with a 1x1
  * PNG so photo boxes behave as loaded.
  *   node backend/test/cars_feed_e2e.mjs */
 import http from 'node:http';
@@ -70,10 +75,15 @@ async function open({ w = 390, h = 844, storage = {}, zip = true, ack = true, qs
   await page.route(/^https?:\/\/(?!127\.0\.0\.1)/, async (route) => {
     const q = route.request();
     const u = new URL(q.url());
-    if (u.hostname === 'api.test' && u.pathname.startsWith('/v1/recap/')) {
+    if (u.hostname === 'api.test' && (u.pathname.startsWith('/v1/recap/') || u.pathname.startsWith('/v1/free-alert/'))) {
       const cors = { 'access-control-allow-origin': '*', 'access-control-allow-headers': 'content-type', 'access-control-allow-methods': 'POST' };
       if (q.method() === 'OPTIONS') return route.fulfill({ status: 204, headers: cors });
-      posts.push({ path: u.pathname, body: JSON.parse(q.postData() || '{}') });
+      const body = JSON.parse(q.postData() || '{}');
+      posts.push({ path: u.pathname, body });
+      // The free alert: a token for the address this browser holds proves the
+      // inbox, so the alert is on at once (free_email_alert.js); else a link.
+      if (u.pathname === '/v1/free-alert/signup' && body.sub) return route.fulfill({ status: 200, json: { ok: true, state: 'on', sub: body.sub }, headers: cors });
+      if (u.pathname === '/v1/free-alert/status') return route.fulfill({ status: 200, json: { ok: true, state: 'off' }, headers: cors });
       return route.fulfill({ status: 200, json: { ok: true, state: u.pathname.endsWith('/add') ? 'added' : 'confirm-sent' }, headers: cors });
     }
     if (q.method() === 'POST') { posts.push({ path: u.hostname + u.pathname, body: q.postData() }); return route.abort(); }
@@ -423,91 +433,171 @@ try {
     await page.evaluate(() => { carSearchSetFilter('', ''); renderLive(); });
   }
 
-  console.log('11. The watch strip: one-step Monday email');
+  console.log('11. The watch strip: the free email alert for one model');
   {
+    const n = (list, e) => list.filter(x => x === e).length;
     await page.evaluate(() => { window.__tracked.length = 0; carSearchSetFilter('Nissan', 'Xterra'); renderLive(); });
     await page.waitForTimeout(300);
-    const st = await page.evaluate(() => { const s = document.querySelector('#live-grid .watch-strip'); return s ? { mail: s.classList.contains('strip-mail'), text: s.innerText.replace(/\s+/g, ' '), field: !!s.querySelector('input.mail-email'), btn: (s.querySelector('.mail-form .btn') || {}).textContent, just: !!s.querySelector('.strip-just-watch') } : null; });
-    ok(st && st.mail && st.text.includes('Want the next one? Get a free Monday email with every Nissan Xterra set out within 100 mi.') && st.field && st.btn === 'Email me' && st.just, 'free web + location: the strip asks for the email, with "or just watch it here"', st);
-    // (Counted when section 8 first showed the strip: once a visit.)
-    await page.evaluate(() => renderLive());
-    ok(await page.evaluate(() => _stripAskCounted) && !(await tracked(page)).includes('email-asked'), 'email-asked: counted once this visit, not again on a re-render', await tracked(page));
+    const st = await page.evaluate(() => { const s = document.querySelector('#live-grid .watch-strip'); return s ? { fa: s.classList.contains('strip-falert'), text: s.innerText.replace(/\s+/g, ' '), field: !!s.querySelector('input.mail-email'), btn: (s.querySelector('.mail-form .btn') || {}).textContent, just: !!s.querySelector('.strip-just-watch'),
+      ask: (s.querySelector('.mail-ask') || {}).innerText || '', askPro: !!s.querySelector('.mail-ask .pro-box, .mail-ask [onclick*="openUpgradeSheet"]'), stripPro: !!s.querySelector(':scope > .pro-box') } : null; });
+    ok(st && st.fa && st.text.includes('Want the next one? Free email alert for Nissan Xterra: we email you when another is set out within 50 mi, usually the same day. One car, one address, no account.') && st.field && st.btn === 'Email me' && st.just,
+      'free web + location, one model: the strip asks for the free email alert (the alert\'s 50 mi), with "or just watch it here"', st);
+    ok(st && !/Monday|instant|every time|always|\bPro\b/i.test(st.ask), 'the ask never says Monday, Pro, instant, every time or always', st && st.ask);
+    ok(st && !st.askPro && st.stripPro, 'no Pro prompt inside the ask; the strip\'s own Pro box under it is as it was', st);
+    await page.evaluate(() => { renderLive(); renderLive(); });
+    ok(n(await tracked(page), 'email-asked') === 0, 'the alert\'s ask never counts email-asked (that row stays the Monday email only)', await tracked(page));
     // A bad address: nothing made, nothing sent.
-    await page.fill('#live-grid .strip-mail .mail-email', 'not-an-address');
-    await page.click('#live-grid .strip-mail .mail-form .btn');
+    await page.fill('#live-grid .strip-falert .mail-email', 'not-an-address');
+    await page.click('#live-grid .strip-falert .mail-form .btn');
     await page.waitForTimeout(300);
-    ok(await page.evaluate((k) => localStorage.getItem(k), WL) === OLD_WL && P.posts.length === 0 && /Enter your email/.test(await page.evaluate(() => document.querySelector('#live-grid .strip-mail .mail-msg').textContent)), 'a bad address: no watch, no request, a message');
-    await page.fill('#live-grid .strip-mail .mail-email', 'visitor@example.com');
-    await page.click('#live-grid .strip-mail .mail-form .btn');
-    await page.waitForTimeout(800);
+    ok(await page.evaluate((k) => localStorage.getItem(k), WL) === OLD_WL && P.posts.length === 0 && /Enter your email/.test(await page.evaluate(() => document.querySelector('#live-grid .strip-falert .mail-msg').textContent)), 'a bad address: no watch, no request, a message');
+    await page.fill('#live-grid .strip-falert .mail-email', ' Visitor@Example.com ');
+    await page.click('#live-grid .strip-falert .mail-form .btn');
+    await page.waitForFunction(() => /Check your inbox/.test((document.querySelector('#live-grid .strip-falert') || {}).innerText || ''), null, { timeout: 8000 }).catch(() => {});
     const wl = JSON.parse(await page.evaluate((k) => localStorage.getItem(k), WL));
     const neu = wl.slice(1);
-    ok(neu.length === 1 && neu[0].make === 'Nissan' && neu[0].model === 'Xterra' && neu[0].radiusMi === 100 && !neu[0].yrMin, 'Email me made exactly one watch, Nissan Xterra within 100 mi', neu);
+    ok(neu.length === 1 && neu[0].make === 'Nissan' && neu[0].model === 'Xterra' && neu[0].radiusMi === 100 && !neu[0].yrMin, 'Email me made exactly one watch, Nissan Xterra within the list\'s 100 mi (through addQuickWatch, as before)', neu);
     ok(JSON.stringify(wl[0]) === JSON.stringify(JSON.parse(OLD_WL)[0]), 'the watch saved earlier is untouched (rule 6)');
-    const sign = P.posts.filter(p => p.path === '/v1/recap/signup');
-    const want = await page.evaluate((e) => recapWatchBody(e), neu[0]);
-    ok(P.posts.length === 1 && sign.length === 1 && sign[0].body.email === 'visitor@example.com' && JSON.stringify(sign[0].body.watch) === JSON.stringify(want)
-      && ['src', 'cmp', 'med'].every(k => k in sign[0].body), 'one sign-up request, with the watch body recapWatchBody makes and the attribution fields', P.posts);
-    const done = await page.evaluate(() => ({ strip: document.querySelector('#live-grid .strip-mail').innerText.replace(/\s+/g, ' '), toast: !!document.querySelector('#watch-toast.show .mail-ask'), rs: JSON.parse(localStorage.getItem('ys_recap') || 'null') }));
-    ok(/Check your inbox\./.test(done.strip) && /Watching Nissan Xterra/.test(done.strip) && done.rs && done.rs.state === 'pending', 'the strip says "Check your inbox" and that the car is watched', done);
-    ok(!done.toast, 'no toast asks for the email again');
-    ok((await tracked(page)).includes('email-submitted') && (await tracked(page)).includes('watch-created/strip'), 'counted: watch-created/strip and email-submitted', await tracked(page));
-    // A later watch from a car screen: the toast does not ask about the strip's watch.
+    const sign = P.posts.filter(p => p.path === '/v1/free-alert/signup');
+    const want = await page.evaluate((e) => falertWatchBody(e, ownCenter()), neu[0]);
+    ok(P.posts.length === 1 && sign.length === 1 && sign[0].body.email === 'visitor@example.com' && JSON.stringify(sign[0].body.watch) === JSON.stringify(want) && want.radiusMi === 50
+      && ['src', 'cmp', 'med'].every(k => k in sign[0].body) && !('sub' in sign[0].body), 'one free-alert sign-up: a copy of the new watch (at most 50 mi), the attribution fields, no token; no Monday-email request', P.posts);
+    const done = await page.evaluate(() => ({ strip: document.querySelector('#live-grid .strip-falert').innerText.replace(/\s+/g, ' '), toast: !!document.querySelector('#watch-toast.show .mail-ask'),
+      fa: JSON.parse(localStorage.getItem('ys_falert') || 'null'), rs: localStorage.getItem('ys_recap') }));
+    ok(/Check your inbox\. Tap the link we sent to v•••@example\.com to turn on your email alert for Nissan Xterra\. Nothing is sent until you do\./.test(done.strip) && /Watching Nissan Xterra/.test(done.strip), 'the strip says "Check your inbox" for the alert and that the car is watched', done);
+    ok(done.fa && done.fa.state === 'pending' && done.fa.key === neu[0].addedAt && done.fa.label === 'Nissan Xterra' && done.fa.r === 50 && done.rs === null, 'this browser remembers the alert as pending, in its own key, for the new watch; no Monday-email state', done);
+    ok(!done.toast, 'no toast asks for an email again');
+    const t11 = await tracked(page);
+    ok(n(t11, 'free-alert-asked') === 1 && t11.includes('watch-created/strip') && !t11.includes('email-submitted'), 'counted: watch-created/strip and free-alert-asked (not email-submitted)', t11);
+    ok(JSON.stringify(JSON.parse(await page.evaluate((k) => localStorage.getItem(k), WL))) === JSON.stringify(wl), 'the request changed no stored watch (rule 6)');
     await page.evaluate(() => renderLive());
     ok(await page.evaluate(() => /Watching Nissan Xterra/.test(document.querySelector('#live-grid .watch-strip').textContent) && !document.querySelector('#live-grid .strip-mail')), 'after a re-render the strip shows the watch as watched');
     ok(await page.evaluate(() => !recapAskEntries().some(e => e.make === 'Nissan' && e.model === 'Xterra')), 'the toast\'s queue does not hold the strip\'s watch');
+    // With the alert now waiting for its click, the next model gets the Monday email.
+    await page.evaluate(() => { carSearchSetFilter('Nissan', 'Frontier'); renderLive(); });
+    await page.waitForTimeout(300);
+    const mon = await page.evaluate(() => { const s = document.querySelector('#live-grid .watch-strip'); return s ? { fa: s.classList.contains('strip-falert'), mail: s.classList.contains('strip-mail'), text: s.innerText.replace(/\s+/g, ' ') } : null; });
+    ok(mon && mon.mail && !mon.fa && /Get a free Monday email with every Nissan Frontier set out within 100 mi\./.test(mon.text), 'alert pending here: the next one-model strip offers the Monday email', mon);
+    ok(await page.evaluate(() => JSON.parse(localStorage.getItem('ys_falert')).key) === neu[0].addedAt, 'the alert in this browser is left as it was');
     await page.evaluate(() => { carSearchSetFilter('', ''); renderLive(); });
   }
   ok(!P.errors.length, 'phone page: no page errors', P.errors);
   await P.ctx.close();
 
-  console.log('11b. Limit, confirmed subscriber, "or just watch", Pro, app shell');
+  console.log('11a. Several models or the whole make: the Monday email, as before');
   {
-    // The free limit: the upgrade sheet opens and nothing is sent.
+    const M = await open();
+    const strip = () => M.page.evaluate(() => { const s = document.querySelector('#live-grid .watch-strip'); return s ? { fa: s.classList.contains('strip-falert'), mail: s.classList.contains('strip-mail'), text: s.innerText.replace(/\s+/g, ' '), field: !!s.querySelector('input.mail-email') } : null; });
+    await M.page.evaluate(() => { carSearchSetFilter('Nissan', 'Xterra'); selectedModels.add('Frontier'); renderLive(); });
+    await M.page.waitForTimeout(300);
+    let s = await strip();
+    ok(s && s.mail && !s.fa && s.field && /Get a free Monday email with every Nissan \(2 models\) set out within 100 mi\./.test(s.text), 'two models: the Monday email (the alert covers one car)', s);
+    ok(JSON.stringify((await tracked(M.page)).filter(e => e === 'email-asked' || e === 'free-alert-shown')) === JSON.stringify(['email-asked']), 'counted: email-asked, no free-alert-shown', await tracked(M.page));
+    await M.page.fill('#live-grid .strip-mail .mail-email', 'visitor@example.com');
+    await M.page.click('#live-grid .strip-mail .mail-form .btn');
+    await M.page.waitForFunction(() => /Check your inbox/.test((document.querySelector('#live-grid .strip-mail') || {}).innerText || ''), null, { timeout: 8000 }).catch(() => {});
+    const mw = JSON.parse(await M.page.evaluate((k) => localStorage.getItem(k) || '[]', WL));
+    const sign = M.posts.filter(p => p.path === '/v1/recap/signup');
+    ok(mw.length === 2 && sign.length === 2 && !M.posts.some(p => p.path.startsWith('/v1/free-alert/'))
+      && sign.every((p, i) => JSON.stringify(p.body.watch) === JSON.stringify({ make: 'Nissan', model: mw[i].model, yearMin: null, yearMax: null, lat: Math.round(mw[i].lat * 100) / 100, lng: Math.round(mw[i].lng * 100) / 100, radiusMi: 100 })),
+      'two watches and two Monday-email sign-ups, nothing to the alert API', M.posts);
+    ok(await M.page.evaluate(() => JSON.parse(localStorage.getItem('ys_recap') || 'null').state === 'pending' && !localStorage.getItem('ys_falert')) && (await tracked(M.page)).includes('email-submitted'), 'Monday email pending, no alert state; email-submitted counted');
+    await M.page.evaluate(() => { carSearchSetFilter('Toyota', ''); renderLive(); });
+    await M.page.waitForTimeout(300);
+    s = await strip();
+    ok(s && s.mail && !s.fa && /Get a free Monday email with every Toyota set out within 100 mi\./.test(s.text), 'the whole make (no model): the Monday email, not the one alert', s);
+    ok(!M.errors.length, 'several models: no page errors', M.errors);
+    await M.ctx.close();
+  }
+
+  console.log('11b. Limit, confirmed subscriber, alert already here, "or just watch", Pro, app shell');
+  {
+    // The free limit: the Monday strip (a full list cannot make the alert's
+    // watch), the upgrade sheet, and nothing is sent.
     const five = JSON.stringify(['Ford|F-150', 'Toyota|Camry', 'Honda|Accord', 'Dodge|Ram 1500', 'Chevrolet|Impala'].map((p, i) => ({ make: p.split('|')[0], model: p.split('|')[1], yrMin: null, yrMax: null, matchOnly: false, radiusMi: 100, lat: 37.35, lng: -121.89, addedAt: `2026-10-0${i + 1}T10:00:00.000Z~x${i}` })));
     const L = await open({ storage: { [WL]: five } });
     await L.page.evaluate(() => { carSearchSetFilter('Nissan', 'Xterra'); renderLive(); });
     await L.page.waitForTimeout(300);
+    ok(await L.page.evaluate(() => !!document.querySelector('#live-grid .strip-mail') && !document.querySelector('#live-grid .strip-falert')), 'a full free list: no alert ask (no new watch could carry it)');
     await L.page.fill('#live-grid .strip-mail .mail-email', 'visitor@example.com');
     await L.page.click('#live-grid .strip-mail .mail-form .btn');
     await L.page.waitForTimeout(600);
     ok(await L.page.evaluate(() => !!document.querySelector('#upgrade-sheet.open')) && L.posts.length === 0 && (await L.page.evaluate((k) => localStorage.getItem(k), WL)) === five, 'over the free limit: the upgrade sheet, no watch, nothing sent', L.posts);
     await L.ctx.close();
-    // Confirmed subscriber: "Add X to your free Monday email?" + Add.
+    // A confirmed Monday subscriber, no alert yet: the alert's ask with the
+    // address filled in; the Monday token proves the inbox, so it is on at once.
     const C = await open({ storage: { ys_recap: JSON.stringify({ email: 'visitor@example.com', state: 'confirmed', sub: SUB }) } });
     await C.page.evaluate(() => { carSearchSetFilter('Nissan', 'Xterra'); renderLive(); window.__tracked.length = 0; });
     await C.page.waitForTimeout(300);
-    const ct = await C.page.evaluate(() => (document.querySelector('#live-grid .strip-mail') || {}).innerText || '');
-    ok(/Add Nissan Xterra to your free Monday email\?/.test(ct.replace(/\s+/g, ' ')) && await C.page.evaluate(() => !document.querySelector('#live-grid .strip-mail input')), 'confirmed subscriber: "Add Nissan Xterra to your free Monday email?" with Add, no field', ct);
-    await C.page.click('#live-grid .strip-mail [data-act="recap-add"]');
-    await C.page.waitForTimeout(600);
-    const add = C.posts.filter(p => p.path === '/v1/recap/add');
-    const cw = JSON.parse(await C.page.evaluate((k) => localStorage.getItem(k) || '[]', WL));
-    ok(C.posts.length === 1 && add.length === 1 && add[0].body.sub === SUB && cw.length === 1 && cw[0].model === 'Xterra', 'Add: one watch and one /v1/recap/add with the subscription', C.posts);
-    ok(!(await tracked(C.page)).includes('email-asked'), 'no field shown, no email-asked');
+    ok(await C.page.evaluate(() => { const s = document.querySelector('#live-grid .strip-falert'); return !!s && s.querySelector('.mail-email').value === 'visitor@example.com'; }), 'confirmed Monday subscriber: the alert\'s ask, the address filled in');
+    await C.page.click('#live-grid .strip-falert .mail-form .btn');
+    await C.page.waitForFunction(() => /alert is on/.test((document.querySelector('#live-grid .strip-falert') || {}).innerText || ''), null, { timeout: 8000 }).catch(() => {});
+    const cs = C.posts.filter(p => p.path === '/v1/free-alert/signup');
+    const ct = await C.page.evaluate(() => ({ text: ((document.querySelector('#live-grid .strip-falert') || {}).innerText || '').replace(/\s+/g, ' '), fa: JSON.parse(localStorage.getItem('ys_falert') || 'null'), rs: JSON.parse(localStorage.getItem('ys_recap') || 'null') }));
+    ok(C.posts.length === 1 && cs.length === 1 && cs[0].body.sub === SUB && /Your free email alert is on for Nissan Xterra, to v•••@example\.com\./.test(ct.text) && ct.fa && ct.fa.state === 'on' && ct.rs.state === 'confirmed',
+      'the token rides along: on at once, no confirmation email; the Monday email state untouched', { posts: C.posts, ct });
     await C.ctx.close();
-    // "or just watch it here" = today's Watch button (the toast then offers the email).
+    // Confirmed Monday subscriber whose alert is already waiting: "Add X to your free Monday email?" + Add.
+    const C2 = await open({ storage: { ys_recap: JSON.stringify({ email: 'visitor@example.com', state: 'confirmed', sub: SUB }),
+      ys_falert: JSON.stringify({ email: 'visitor@example.com', state: 'pending', at: Date.now(), key: null, label: 'Toyota Camry', r: 50 }) } });
+    await C2.page.evaluate(() => { carSearchSetFilter('Nissan', 'Xterra'); renderLive(); window.__tracked.length = 0; });
+    await C2.page.waitForTimeout(300);
+    const c2t = await C2.page.evaluate(() => (document.querySelector('#live-grid .strip-mail') || {}).innerText || '');
+    ok(/Add Nissan Xterra to your free Monday email\?/.test(c2t.replace(/\s+/g, ' ')) && await C2.page.evaluate(() => !document.querySelector('#live-grid .strip-falert') && !document.querySelector('#live-grid .strip-mail input')), 'alert already waiting here + confirmed subscriber: "Add Nissan Xterra to your free Monday email?" with Add, no field', c2t);
+    const fa0 = await C2.page.evaluate(() => localStorage.getItem('ys_falert'));
+    await C2.page.click('#live-grid .strip-mail [data-act="recap-add"]');
+    await C2.page.waitForTimeout(600);
+    const add = C2.posts.filter(p => p.path === '/v1/recap/add');
+    const cw = JSON.parse(await C2.page.evaluate((k) => localStorage.getItem(k) || '[]', WL));
+    ok(C2.posts.length === 1 && add.length === 1 && add[0].body.sub === SUB && cw.length === 1 && cw[0].model === 'Xterra', 'Add: one watch and one /v1/recap/add with the subscription', C2.posts);
+    ok(!(await tracked(C2.page)).includes('email-asked') && !(await tracked(C2.page)).includes('free-alert-shown'), 'no field shown: neither email-asked nor free-alert-shown', await tracked(C2.page));
+    ok(await C2.page.evaluate(() => localStorage.getItem('ys_falert')) === fa0, 'the alert waiting here is left as it was');
+    await C2.ctx.close();
+    // An alert that is ON here (no Monday email yet): the Monday email field.
+    const O = await open({ storage: { ys_falert: JSON.stringify({ email: 'visitor@example.com', state: 'on', sub: SUB, key: null, label: 'Toyota Camry', r: 50, onAt: Date.now() }) } });
+    await O.page.evaluate(() => { carSearchSetFilter('Nissan', 'Xterra'); renderLive(); });
+    await O.page.waitForTimeout(300);
+    ok(await O.page.evaluate(() => { const s = document.querySelector('#live-grid .strip-mail'); return !!s && !s.classList.contains('strip-falert') && /Get a free Monday email with every Nissan Xterra/.test(s.innerText.replace(/\s+/g, ' ')) && !/Change/.test(s.innerText); }), 'alert on here: the Monday email; no "change your alert" offer in the strip');
+    await O.ctx.close();
+    // Counting, on a fresh visit: the alert's ask counts free-alert-shown once,
+    // when it is on screen, over several renders; never email-asked.
     const J = await open();
     await J.page.evaluate(() => { carSearchSetFilter('Nissan', 'Xterra'); renderLive(); renderLive(); carSearchSetFilter('Nissan', 'Frontier'); renderLive(); carSearchSetFilter('Nissan', 'Xterra'); renderLive(); });
-    await J.page.waitForTimeout(300);
-    ok(JSON.stringify((await tracked(J.page)).filter(e => e === 'email-asked')) === JSON.stringify(['email-asked']), 'a fresh visit: the strip\'s field counts email-asked exactly once over several renders', await tracked(J.page));
-    await J.page.click('#live-grid .strip-mail .strip-just-watch');
+    await J.page.evaluate(() => document.querySelector('#live-grid .strip-falert').scrollIntoView({ block: 'center' }));
+    await J.page.waitForTimeout(400);
+    await J.page.evaluate(() => { renderLive(); });
+    await J.page.evaluate(() => document.querySelector('#live-grid .strip-falert').scrollIntoView({ block: 'center' }));
+    await J.page.waitForTimeout(400);
+    const jt = await tracked(J.page);
+    ok(jt.filter(e => e === 'free-alert-shown').length === 1 && !jt.includes('email-asked') && await J.page.evaluate(() => sessionStorage.getItem('ys_falert_seen') === '1'),
+      'a fresh visit: the strip\'s alert ask counts free-alert-shown exactly once over several renders (the card\'s and toast\'s key), and no email-asked', jt);
+    // "or just watch it here" = the watch, a "no" to the alert for this visit; the toast then offers the Monday email.
+    await J.page.click('#live-grid .strip-falert .strip-just-watch');
     await J.page.waitForTimeout(500);
     const jw = JSON.parse(await J.page.evaluate((k) => localStorage.getItem(k) || '[]', WL));
-    ok(jw.length === 1 && jw[0].model === 'Xterra' && J.posts.length === 0 && await J.page.evaluate(() => !!document.querySelector('#watch-toast.show .mail-ask')), '"or just watch it here": the watch, then the toast\'s usual email offer; nothing sent', { jw, posts: J.posts });
+    const jtoast = await J.page.evaluate(() => { const t = document.querySelector('#watch-toast.show'); return t ? { ask: !!t.querySelector('.mail-ask'), text: t.innerText.replace(/\s+/g, ' ') } : null; });
+    ok(jw.length === 1 && jw[0].model === 'Xterra' && J.posts.length === 0 && jtoast && jtoast.ask && /Monday email/.test(jtoast.text) && !/Free email alert/.test(jtoast.text),
+      '"or just watch it here": the watch, then the toast\'s Monday-email offer (not the same alert ask again); nothing sent', { jw, posts: J.posts, jtoast });
+    ok(await J.page.evaluate(() => sessionStorage.getItem('ys_falert_no') === '1' && !localStorage.getItem('ys_falert')), '...the alert counts as declined for this visit; nothing stored for it');
+    await J.page.evaluate(() => { document.getElementById('watch-toast').classList.remove('show'); clearTimeout(_watchToastTimer); carSearchSetFilter('Nissan', 'Frontier'); renderLive(); });
+    await J.page.waitForTimeout(300);
+    ok(await J.page.evaluate(() => { const s = document.querySelector('#live-grid .strip-mail'); return !!s && !s.classList.contains('strip-falert') && /Get a free Monday email with every Nissan Frontier/.test(s.innerText.replace(/\s+/g, ' ')); }), 'declined this visit: the next one-model strip offers the Monday email');
+    ok(JSON.stringify((await tracked(J.page)).filter(e => e === 'free-alert-shown')) === JSON.stringify(['free-alert-shown']), 'free-alert-shown still counted once this visit', await tracked(J.page));
+    ok(!J.errors.length, '"or just watch": no page errors', J.errors);
     await J.ctx.close();
     // Pro: today's strip.
     const Pr = await open({ storage: { jh_pro: '1', jh_pro_source: 'account' } });
     await Pr.page.evaluate(() => { carSearchSetFilter('Nissan', 'Xterra'); renderLive(); });
     await Pr.page.waitForTimeout(300);
-    ok(await Pr.page.evaluate(() => { const s = document.querySelector('#live-grid .watch-strip'); return !!s && !s.classList.contains('strip-mail') && /Get pinged when another/.test(s.textContent) && /Watch/.test(s.querySelector('.btn').textContent); }), 'Pro: today\'s strip (Watch button, no email field)');
+    ok(await Pr.page.evaluate(() => { const s = document.querySelector('#live-grid .watch-strip'); return !!s && !s.classList.contains('strip-mail') && /Get pinged when another/.test(s.textContent) && /Watch/.test(s.querySelector('.btn').textContent); }), 'Pro: today\'s strip (Watch button, no email field, no alert ask)');
+    ok(!(await tracked(Pr.page)).some(e => e === 'free-alert-shown' || e === 'email-asked'), 'Pro: nothing counted for an email ask', await tracked(Pr.page));
     await Pr.ctx.close();
     // App shell (stubbed Capacitor, data answered from disk as yardscout.io).
     const N = await open({ native: 'ios' });
     await N.page.evaluate(() => { carSearchSetFilter('Nissan', 'Xterra'); renderLive(); });
     await N.page.waitForTimeout(300);
-    ok(await N.page.evaluate(() => IS_NATIVE && (() => { const s = document.querySelector('#live-grid .watch-strip'); return !!s && !s.classList.contains('strip-mail') && !s.querySelector('input'); })()), 'app shell: today\'s strip, no email field');
-    ok(N.posts.length === 0, 'app shell: nothing sent', N.posts);
+    ok(await N.page.evaluate(() => IS_NATIVE && (() => { const s = document.querySelector('#live-grid .watch-strip'); return !!s && !s.classList.contains('strip-mail') && !s.querySelector('input'); })()), 'app shell: today\'s strip, no email field, no alert ask');
+    ok(N.posts.length === 0 && !(await tracked(N.page)).some(e => e === 'free-alert-shown' || e === 'email-asked'), 'app shell: nothing sent, nothing counted for an email ask', N.posts);
     await N.ctx.close();
   }
 

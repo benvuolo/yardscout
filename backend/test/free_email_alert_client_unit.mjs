@@ -11,13 +11,15 @@
  *            watch object is not touched), centre rounded to ~1 km
  *   wording  never "instant", never "every time"; says the limit plainly
  *   events   the app sends shown/asked; confirmed/first-email are the API's
+ *   strip    which ask the Cars watch strip makes (stripAskKind, 2026-11-18):
+ *            the alert for one model, the Monday email otherwise
  *
  * Run: node backend/test/free_email_alert_client_unit.mjs */
 import fs from 'node:fs';
 import vm from 'node:vm';
 import { FREE_INSTANT_RADIUS_MI as SERVER_INSTANT_MI } from '../src/devices.js';
 import { sanitizeFreeAlertWatch, FREE_ALERT_RADIUS_MI as SERVER_ALERT_MI } from '../src/free_email_alert.js';
-import { watchLabel } from '../src/recap_signup.js';
+import { watchLabel, RECAP_MAX_WATCHES } from '../src/recap_signup.js';
 
 const APP = process.env.APP_JS || new URL('../../docs/app.js', import.meta.url);
 const src = fs.readFileSync(APP, 'utf8');
@@ -48,8 +50,8 @@ function konst(name) {
   return end < 0 ? null : lines.slice(start, end + 1).join('\n');
 }
 
-const FNS = ['falertOffered', 'falertRadiusMi', 'falertLabel', 'falertWatchBody', 'falertFail'];
-const CONSTS = ['FREE_EMAIL_ALERT_RADIUS_MI', 'FREE_INSTANT_RADIUS_MI', 'FREE_WATCH_LIMIT', 'FUNNEL_EVENTS', 'FALERT_LIMIT_NOTE', 'FALERT_INTRO_HTML'];
+const FNS = ['falertOffered', 'falertRadiusMi', 'falertLabel', 'falertWatchBody', 'falertFail', 'haversineMiles', 'falertCovers', 'stripAskKind'];
+const CONSTS = ['FREE_EMAIL_ALERT_RADIUS_MI', 'FREE_INSTANT_RADIUS_MI', 'FREE_WATCH_LIMIT', 'FUNNEL_EVENTS', 'FALERT_LIMIT_NOTE', 'FALERT_INTRO_HTML', 'RECAP_MAX'];
 const parts = {};
 for (const n of CONSTS) { parts[n] = konst(n); check(`app.js has const ${n}`, !!parts[n]); }
 for (const n of FNS) { parts[n] = fn(n); check(`app.js has function ${n}`, !!parts[n]); }
@@ -57,7 +59,7 @@ if (failures) { console.log(`\n${failures} FAILURES`); process.exit(1); }
 
 const ctx = vm.createContext({ Math, JSON, String, Number });
 vm.runInContext([...CONSTS, ...FNS].map(n => parts[n]).join('\n')
-  + '\n;globalThis.__x = { falertOffered, falertRadiusMi, falertLabel, falertWatchBody, falertFail, FREE_EMAIL_ALERT_RADIUS_MI, FREE_INSTANT_RADIUS_MI, FREE_WATCH_LIMIT, FUNNEL_EVENTS, FALERT_LIMIT_NOTE, FALERT_INTRO_HTML };', ctx);
+  + '\n;globalThis.__x = { falertOffered, falertRadiusMi, falertLabel, falertWatchBody, falertFail, falertCovers, stripAskKind, FREE_EMAIL_ALERT_RADIUS_MI, FREE_INSTANT_RADIUS_MI, FREE_WATCH_LIMIT, FUNNEL_EVENTS, FALERT_LIMIT_NOTE, FALERT_INTRO_HTML, RECAP_MAX };', ctx);
 const A = ctx.__x;
 
 /* ---- who ---- */
@@ -100,9 +102,68 @@ for (const e of [stored, legacy, { make: 'Ford', model: '', yrMin: 1999, yrMax: 
   check(`label "${A.falertLabel(e)}" = the server's`, A.falertLabel(e) === watchLabel(s), watchLabel(s));
 }
 
+/* ---- the near-miss line leaves out what the email alert covers ---- */
+{
+  // Phoenix watch, 50 mi copy; on since 2026-11-10 noon UTC.
+  const DAY = 86400000;
+  const onAt = Date.parse('2026-11-10T12:00:00Z');
+  const st = { email: 'v@example.com', state: 'on', sub: 'x', onAt };
+  const w = { make: 'Toyota', model: '4Runner', radiusMi: 100, lat: 33.45, lng: -112.07, addedAt: 'k' };
+  const near = { lat: 33.6, lng: -112.2 };      // ~13 mi away
+  const far = { lat: 34.54, lng: -112.47 };     // Prescott, ~78 mi: inside the watch's 100, outside the alert's 50
+  const after = Date.parse('2026-11-12T00:00:00Z'), sameDay = Date.parse('2026-11-10T00:00:00Z'), before = onAt - 3 * DAY;
+  check('covers: a car in range listed after the alert went on', A.falertCovers(w, near, st, null, after) === true);
+  check('covers: the day it went on counts as covered (the yard date has no time)', A.falertCovers(w, near, st, null, sameDay) === true);
+  check('not covered: listed days before the alert went on (a real near-miss)', A.falertCovers(w, near, st, null, before) === false);
+  check('not covered: outside the alert\'s 50 mi, even inside the watch\'s own radius', A.falertCovers(w, far, st, null, after) === false);
+  check('not covered: the alert is only pending (no click yet)', A.falertCovers(w, near, { ...st, state: 'pending' }, null, after) === false);
+  check('not covered: no alert at all', A.falertCovers(w, near, null, null, after) === false);
+  check('unknown start (no onAt): every car in range counts as covered', A.falertCovers(w, near, { ...st, onAt: undefined }, null, before) === true
+    && A.falertCovers(w, far, { ...st, onAt: undefined }, null, before) === false);
+  check('a watch with no centre of its own follows the visitor\'s place', A.falertCovers({ make: 'Toyota', model: '4Runner' }, near, st, { lat: 33.45, lng: -112.07 }, after) === true
+    && A.falertCovers({ make: 'Toyota', model: '4Runner' }, near, st, null, after) === false);
+  check('a 10 mi watch: its own 10 mi, not 50', A.falertCovers({ ...w, radiusMi: 10 }, near, st, null, after) === false);
+  check('a car with no coordinates is not covered', A.falertCovers(w, { lat: null, lng: null }, st, null, after) === false);
+  check('covers() leaves the stored watch untouched', JSON.stringify(w) === JSON.stringify({ make: 'Toyota', model: '4Runner', radiusMi: 100, lat: 33.45, lng: -112.07, addedAt: 'k' }));
+}
+
+/* ---- the Cars watch strip: which ask it makes (stripAskKind, 2026-11-18) ---- */
+{
+  const K = (o) => A.stripAskKind({ native: false, pro: false, located: true, models: 1, full: false, falertOpen: true, recapNo: false, recapOn: false, ...o });
+  check('strip: one model, free, on the website, a location, no alert here: the free email alert', K({}) === 'falert');
+  check('strip: the Monday email dismissed this visit does not hide the alert\'s ask', K({ recapNo: true }) === 'falert');
+  check('strip: a confirmed Monday subscriber is offered the alert too (their address is filled in)', K({ recapOn: true }) === 'falert');
+  check('strip: two models: the Monday email', K({ models: 2 }) === 'recap');
+  check('strip: the whole make (no model picked): the Monday email, not the one alert', K({ models: 0 }) === 'recap');
+  check(`strip: more than ${A.RECAP_MAX} models: the plain strip`, K({ models: A.RECAP_MAX + 1 }) === '' && K({ models: A.RECAP_MAX }) === 'recap');
+  check('strip: the toast\'s rule says no (an alert on or pending here, or declined this visit): the Monday email', K({ falertOpen: false }) === 'recap');
+  check('strip: ...and "Add" for a confirmed Monday subscriber', K({ falertOpen: false, recapOn: true }) === 'recap-add');
+  check('strip: both declined this visit: the plain strip', K({ falertOpen: false, recapNo: true }) === '');
+  check('strip: a full free list (no new watch can carry it): not the alert', K({ full: true }) === 'recap');
+  check('strip: Pro, the app shells, or no location: the plain strip', K({ pro: true }) === '' && K({ native: true }) === '' && K({ located: false }) === ''
+    && K({ native: true, models: 2 }) === '' && K({ pro: true, falertOpen: false }) === '');
+  check('strip: the Monday email\'s model cap is the server\'s (RECAP_MAX_WATCHES)', A.RECAP_MAX === RECAP_MAX_WATCHES);
+  // One rule for the toast and the strip (falertAskOpen), not two copies.
+  const open = fn('falertAskOpen') || '', pickFn = fn('falertToastPick') || '', strip = fn('stripMailHtml') || '';
+  check('strip: the toast and the strip ask the same rule (falertAskOpen: free web visitor, no alert here, not declined)',
+    /falertOffered\(IS_NATIVE, isPro\(\)\) && !falertState\(\) && !falertToastDismissed\(\)/.test(open)
+    && /falertAskOpen\(\)/.test(pickFn) && /falertOpen: falertAskOpen\(\)/.test(strip) && !/falertState\(\)|falertToastDismissed\(\)/.test(strip), open);
+  check('strip: its request and reply are the toast\'s own (falertToastSubmit), no second copy', /falertToastSubmit\(el, entries\[0\]/.test(src));
+}
+
 /* ---- wording ---- */
-const htmlFns = ['falertAskHtml', 'falertPendingHtml', 'falertOnHtml', 'handleFalertHash', 'falertCheck', 'falertTurnOff'].map(fn);
-check('the card builders are there', htmlFns.every(Boolean));
+const htmlFns = ['falertAskHtml', 'falertPendingHtml', 'falertOnHtml', 'handleFalertHash', 'falertCheck', 'falertTurnOff', 'falertToastHtml', 'falertToastSubmit', 'stripMailHtml'].map(fn);
+check('the card builders (and the watch toast\'s and the strip\'s offer) are there', htmlFns.every(Boolean));
+check('the watch toast\'s offer has no Pro prompt either', !/openUpgradeSheet|proBoxHtml|pro-box|See Pro/.test(htmlFns.slice(6, 8).join('\n')));
+{
+  // The strip's alert ask: no Pro prompt inside the .mail-ask box (the
+  // strip's own Pro box after it is unchanged and sits outside the ask).
+  const fa = (fn('stripMailHtml') || '').match(/if \(kind === 'falert'\) \{[\s\S]*?\n  \}/);
+  const ask = fa ? (fa[0].match(/<div class="mail-ask strip-ask">[\s\S]*?<\/div>\$\{proBoxHtml/) || [''])[0].replace(/\$\{proBoxHtml$/, '') : '';
+  check('the strip\'s alert ask: found, "usually the same day", one car, no account', !!ask && /usually the same day\. One car, one address, no account\./.test(ask), ask.slice(0, 200));
+  check('the strip\'s alert ask has no Pro prompt inside it', !!ask && !/openUpgradeSheet|proBoxHtml|pro-box|See Pro|\bPro\b/.test(ask));
+  check('the strip\'s alert ask never says "Monday"', !!ask && !/Monday/.test(ask));
+}
 const copy = htmlFns.join('\n') + A.FALERT_LIMIT_NOTE + A.FALERT_INTRO_HTML;
 check('never "instant", "every time", "always" or "guarantee"', !/instant|every time|always|guarantee/i.test(copy), (copy.match(/.{30}(instant|every time|always|guarantee).{30}/i) || [''])[0]);
 check('says "usually the same day"', /usually the same day/.test(copy));

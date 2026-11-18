@@ -52,6 +52,12 @@ export const CONFIRM_TTL_MS = 7 * 86400_000; // confirmation link lifetime; unco
 export const CONFIRM_REUSE_MS = 3600_000;    // a second watch within an hour rides the link already sent
 export const CONFIRMS_PER_DAY = 3;           // persistent per-address cap on confirmation emails
 export const IP_SIGNUPS_PER_HOUR = 8;        // in-memory, per isolate (no IP stored)
+/* Each per-IP limit has its own bucket (2026-11-18): adds and token changes
+ * used to bump the sign-up counter too, so 8 one-tap adds from a network
+ * used up its sign-ups. Sign-ups (Monday email and free alert, both send a
+ * confirmation email) share `recap:ip:`; adds `recap:add:ip:`; the free
+ * alert's token changes `falert:chg:ip:`. */
+export const IP_ADDS_PER_HOUR = IP_SIGNUPS_PER_HOUR * 4;   // a confirmed browser's one-tap add / car change (no email sent)
 export const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 /* ===== small helpers ===== */
@@ -312,7 +318,7 @@ export async function handleRecapSignup(req, env, ip) {
 /* ===== POST /v1/recap/add {sub, watch} — a confirmed browser, one tap ===== */
 
 export async function handleRecapAdd(req, env, ip) {
-  if (!rateLimit('recap:ip:' + ip, IP_SIGNUPS_PER_HOUR * 4, 3600_000)) {
+  if (!rateLimit('recap:add:ip:' + ip, IP_ADDS_PER_HOUR, 3600_000)) {
     return err(429, 'rate_limited', 'Slow down.');
   }
   let body;

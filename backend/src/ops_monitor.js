@@ -28,7 +28,11 @@
  */
 
 import { json, err } from './util.js';
-import { CHANNELS, utcDay, resendFetch, pruneOpsErrors, resendDailyCap, FREE_INSTANT_METRIC } from './ops.js';
+import {
+  CHANNELS, utcDay, resendFetch, pruneOpsErrors, resendDailyCap, FREE_INSTANT_METRIC, freeAlertLimits, RESEND_RESERVE,
+  COMMIT_STEPS, COMMIT_EXT_MAX_METRIC, COMMIT_SVC_MAX_METRIC,
+} from './ops.js';
+import { COMMIT_EXT_CEILING, COMMIT_SVC_CEILING } from './commit_budget.js';
 import { recapStats } from './recap_signup.js';
 import { freeAlertStats } from './free_email_alert.js';
 import { watchMatches } from './alerts.js';
@@ -161,7 +165,11 @@ export async function sendStats(env, now = Date.now()) {
     last24h: { ok: 0, fail: 0, gone: 0, held: 0 }, today: { ok: 0, fail: 0, gone: 0, held: 0 }, failLastHour: 0,
   });
   for (const c of CHANNELS) get(c);
+  // The busiest scan commit since yesterday 00:00 UTC (ops.js countMax).
+  const commitPeak = { ext: null, svc: null };
   for (const r of rows) {
+    if (r.metric === COMMIT_EXT_MAX_METRIC) { commitPeak.ext = Math.max(commitPeak.ext || 0, r.n); continue; }
+    if (r.metric === COMMIT_SVC_MAX_METRIC) { commitPeak.svc = Math.max(commitPeak.svc || 0, r.n); continue; }
     const m = String(r.metric).match(/^(.+):(ok|fail|gone|held)(?:@(\d\d))?$/);
     if (!m) continue;
     const s = get(m[1]);
@@ -184,10 +192,59 @@ export async function sendStats(env, now = Date.now()) {
   ).bind(new Date(now - DAY).toISOString(), nowIso).all()).results || [];
   const emailsToday = Object.entries(channels)
     .filter(([c]) => c.startsWith('email:')).reduce((n, [, s]) => n + s.today.ok, 0);
-  return { channels, errorsLastHour, recentErrors, emailsToday };
+  return { channels, errorsLastHour, recentErrors, emailsToday, commitPeak };
+}
+
+/** What the scan commits of the last 24 h could not fit into their call
+ * budget (commit_budget.js) and carried to the next scan, per step in
+ * priority order, plus the busiest commit. `pro` counts the steps above the
+ * free tier: a Pro alert carried once arrives one scan later. */
+const FREE_STEPS = new Set(['free-instant', 'checkin', 'free-email']);
+const QUIET_STEPS = new Set(['arrivals-store', 'coverage']);   // not an alert to anyone
+export function commitBudgetReport(stats) {
+  const held = (c) => ((stats.channels[c] || { last24h: {} }).last24h.held) || 0;
+  const carried = [], unchecked = [];
+  let pro = 0;
+  for (const [step, label] of COMMIT_STEPS) {
+    const n = held('commit:' + step), u = held('commit-unchecked:' + step);
+    if (n) carried.push({ step, label, n });
+    if (u) unchecked.push({ step, label, n: u });
+    if (!FREE_STEPS.has(step) && !QUIET_STEPS.has(step)) pro += n + u;
+  }
+  const peak = stats.commitPeak || { ext: null, svc: null };
+  return { carried, unchecked, pro, peakExt: peak.ext, peakSvc: peak.svc, extCeiling: COMMIT_EXT_CEILING, svcCeiling: COMMIT_SVC_CEILING };
+}
+const commitList = (xs) => xs.map((x) => `${x.label} ${x.n}`).join(', ');
+/** The lines the daily email prints for it (text; the HTML reuses them). */
+export function commitBudgetLines(cb) {
+  const L = [];
+  if (!cb) return L;
+  if (cb.peakExt != null) {
+    L.push(`Busiest scan since yesterday (UTC): ${cb.peakExt} of ${cb.extCeiling} outside calls, ${cb.peakSvc == null ? '?' : cb.peakSvc} of ${cb.svcCeiling} database calls`);
+  }
+  if (cb.carried.length || cb.unchecked.length) {
+    L.push(`CARRIED TO THE NEXT SCAN by the per-scan call budget (24 h): ${commitList(cb.carried) || 'none counted'}`
+      + (cb.unchecked.length ? `; not looked at: ${commitList(cb.unchecked)}` : '')
+      + (cb.pro ? ' (Pro goes first; a carried Pro alert arrives one scan later)' : ' (free tier only; Pro went out in full)'));
+  }
+  return L;
 }
 
 /** Every alert condition that is true right now. Read-only. */
+/** The hourly "Resend near daily cap" detail: what is already being held
+ * back before the cap, lowest class first, in the numbers ops.js enforces
+ * (freeAlertLimits, RESEND_RESERVE; both follow RESEND_DAILY_CAP). The free
+ * emailed alert (2026-11-17) stops first, well before this warning fires.
+ * Pure. */
+export function resendVolumeDetail(env) {
+  const cap = resendDailyCap(env);
+  const fa = freeAlertLimits(env);
+  return `The Resend free tier stops at ${cap}/day; later sends (magic links included) fail until the quota resets. `
+    + `Held back before that, lowest class first: free alert emails (web) once ${cap - fa.reserve} emails of any kind went out today `
+    + `(and after ${fa.dayMax} free alert emails; held alerts are retried on later scans), then sign-up confirmations `
+    + `(Monday email and free alert) and Monday recaps once ${RESEND_RESERVE} or fewer sends are left.`;
+}
+
 export async function evaluateConditions(env, now = Date.now()) {
   const stats = await sendStats(env, now);
   const meta = await env.DB.prepare('SELECT updated_at FROM inv_meta WHERE id = 1').first();
@@ -238,7 +295,7 @@ export async function evaluateConditions(env, now = Date.now()) {
     conditions.push({
       id: 'resend-volume', short: 'Resend near daily cap',
       title: `Resend volume: ${stats.emailsToday} of ${cap} emails sent today (UTC)`,
-      detail: `The Resend free tier stops at ${cap}/day; later sends (magic links included) fail until the quota resets. Monday-email confirmations and recaps are held back once 10 or fewer sends are left.`,
+      detail: resendVolumeDetail(env),
       check: 'Which channel is sending (daily email / admin ops daily run); Resend plan & usage page.',
     });
   }
@@ -424,10 +481,19 @@ export async function runOpsCheck(env, { now = Date.now(), dryRun = false } = {}
 
 /* ===== daily health email ===== */
 
-function yardFlags(h) {
+/* `frozen` = the yards the SITE marks: yard_health.json's listState (the
+ * scan's scraper/yard_freshness.py, the same value the yard rows publish):
+ * "stale" = no car added or removed for 3+ full business days, "frozen" =
+ * 10+ (its cars held from new arrivals and alerts); a carried yard counts
+ * too (the site shows it, marked "could not read"). `frozenSoon` = early
+ * warning for us, not shown on the site: unchanged 3+ weekdays (today
+ * counted), about a business day before the site marks it. A file without
+ * list fields (before the scan wrote them) keeps the 3-weekday rule. */
+export function yardFlags(h) {
   if (!h || typeof h.yards !== 'object' || !h.yards) return null;
   const scraped = Date.parse(h.scrapedAt) || Date.now();
-  const dormant = [], frozen = [], carried = [], missing = [];
+  const dormant = [], frozen = [], frozenSoon = [], carried = [], missing = [];
+  const listMode = Object.values(h.yards).some((y) => y && y.listChangedAt);
   const chains = new Map();   // "Pick-n-Pull" -> { total, stuck, since }
   for (const [name, y] of Object.entries(h.yards)) {
     if (!y || typeof y !== 'object') continue;
@@ -454,14 +520,22 @@ function yardFlags(h) {
     }
     // Our fetch returned nothing and the scan re-served the last good copy
     // (scraper stale-keep): actionable on OUR side, listed separately.
+    if (listMode && (y.listState === 'stale' || y.listState === 'frozen')) {
+      frozen.push({ name, lastChangedAt: y.listChangedAt, state: y.listState, ...(y.carried ? { notRead: true } : {}) });
+    }
     if (y.carried) { carried.push({ name, lastChangedAt: y.lastChangedAt, count: y.count }); continue; }
     const newest = y.newestDateAdded ? Date.parse(String(y.newestDateAdded).slice(0, 10) + 'T00:00:00Z') : NaN;
     if (Number.isFinite(newest) && scraped - newest > DORMANT_MS) dormant.push({ name, newestDateAdded: y.newestDateAdded });
-    const changed = y.lastChangedAt ? Date.parse(y.lastChangedAt) : NaN;
-    if (Number.isFinite(changed) && weekdaysBetween(changed, scraped) >= FROZEN_WEEKDAYS) frozen.push({ name, lastChangedAt: y.lastChangedAt });
+    const lc = listMode ? (y.listChangedAt || y.lastChangedAt) : y.lastChangedAt;
+    const changed = lc ? Date.parse(lc) : NaN;
+    if (Number.isFinite(changed) && weekdaysBetween(changed, scraped) >= FROZEN_WEEKDAYS) {
+      if (!listMode) frozen.push({ name, lastChangedAt: lc });
+      else if (!y.listState) frozenSoon.push({ name, lastChangedAt: lc });
+    }
   }
   dormant.sort((a, b) => String(a.newestDateAdded).localeCompare(String(b.newestDateAdded)));
   frozen.sort((a, b) => String(a.lastChangedAt).localeCompare(String(b.lastChangedAt)));
+  frozenSoon.sort((a, b) => String(a.lastChangedAt).localeCompare(String(b.lastChangedAt)));
   carried.sort((a, b) => String(a.lastChangedAt).localeCompare(String(b.lastChangedAt)));
   missing.sort((a, b) => b.missingScans - a.missingScans);
   const chainFrozen = [...chains.values()]
@@ -471,7 +545,7 @@ function yardFlags(h) {
     // information, not an issue. It becomes one once a business day passes.
     .map((c) => ({ ...c, quiet: !!c.since && fullBusinessDaysBetween(Date.parse(c.since), scraped) === 0 }))
     .sort((a, b) => b.total - a.total);
-  return { scrapedAt: h.scrapedAt || null, yards: Object.keys(h.yards).length, dormant, frozen, carried, missing, chainFrozen };
+  return { scrapedAt: h.scrapedAt || null, yards: Object.keys(h.yards).length, dormant, frozen, frozenSoon, listMode, carried, missing, chainFrozen };
 }
 
 function nameList(items, fmt) {
@@ -668,7 +742,12 @@ function composeDaily(r) {
     const quietChains = (yh.chainFrozen || []).filter((c) => c.quiet);
     if (frozenChains.length) L.push(`  CHAIN FEED FROZEN (same-day): ${frozenChains.map(chainLine).join('; ')}`);
     if (quietChains.length) L.push(`  Quiet since the last business day (normal over a weekend or overnight, not an issue): ${quietChains.map(chainLine).join('; ')}`);
-    L.push(`  Frozen, unchanged 3+ weekdays at the source: ${yh.frozen.length}${yh.frozen.length ? ' — ' + nameList(yh.frozen, (y) => `${y.name} (${String(y.lastChangedAt).slice(5, 10)})`) : ''}`);
+    if (yh.listMode) {
+      L.push(`  Marked on the site, list unchanged 3+ business days (frozen = 10+, cars held from new and alerts): ${yh.frozen.length}${yh.frozen.length ? ' — ' + nameList(yh.frozen, (y) => `${y.name} (${String(y.lastChangedAt).slice(5, 10)}${y.state === 'frozen' ? ', frozen' : ''}${y.notRead ? ', not read' : ''})`) : ''}`);
+      L.push(`  Early warning, not on the site yet (unchanged 3+ weekdays): ${yh.frozenSoon.length}${yh.frozenSoon.length ? ' — ' + nameList(yh.frozenSoon, (y) => `${y.name} (${String(y.lastChangedAt).slice(5, 10)})`) : ''}`);
+    } else {
+      L.push(`  Frozen, unchanged 3+ weekdays at the source: ${yh.frozen.length}${yh.frozen.length ? ' — ' + nameList(yh.frozen, (y) => `${y.name} (${String(y.lastChangedAt).slice(5, 10)})`) : ''}`);
+    }
   } else {
     L.push(`YARD HEALTH: could not load yard_health.json (${(yh && yh.error) || 'unknown'})`);
   }
@@ -690,6 +769,7 @@ function composeDaily(r) {
     L.push(`  HELD BACK for the free-alert email budget (24 h): ${r.resend.heldFreeAlert} free alert email${r.resend.heldFreeAlert === 1 ? '' : 's'}`
       + ' (lowest class of mail; retried on later scans for 48 h, then not sent)  <-');
   }
+  for (const line of commitBudgetLines(r.commitBudget)) L.push(`  ${line}${/^CARRIED/.test(line) ? '  <-' : ''}`);
   if (r.recentErrors.length) {
     // Identical errors collapse to one line with a count.
     const groups = [];
@@ -922,9 +1002,16 @@ export function composeDailyHtml(r) {
       parts.push(`<div style="font-size:14px;margin:10px 0 2px;color:${C.bad};"><strong>${yh.carried.length}</strong> re-serving last copy <span style="color:${C.dim};">(our fetch returned nothing — check the adapter or the source)</span></div>`);
       parts.push(hList(yh.carried.map((y) => `${esc(y.name)} <span style="color:${C.dim};">· ${fmtInt(y.count)} cars · since ${esc(String(y.lastChangedAt).slice(5, 10))}</span>`)));
     }
-    parts.push(`<div style="font-size:14px;margin:10px 0 2px;"><strong>${yh.frozen.length}</strong> frozen <span style="color:${C.dim};">(the yard's own list unchanged 3+ weekdays)</span></div>`);
-    if (yh.frozen.length) parts.push(hList(yh.frozen.slice(0, MAX_YARD_NAMES).map((y) => `${esc(y.name)} <span style="color:${C.dim};">· since ${esc(String(y.lastChangedAt).slice(5, 10))}</span>`))
+    parts.push(yh.listMode
+      ? `<div style="font-size:14px;margin:10px 0 2px;"><strong>${yh.frozen.length}</strong> marked on the site <span style="color:${C.dim};">(the yard's own list unchanged 3+ business days; frozen = 10+, cars held from new and alerts)</span></div>`
+      : `<div style="font-size:14px;margin:10px 0 2px;"><strong>${yh.frozen.length}</strong> frozen <span style="color:${C.dim};">(the yard's own list unchanged 3+ weekdays)</span></div>`);
+    if (yh.frozen.length) parts.push(hList(yh.frozen.slice(0, MAX_YARD_NAMES).map((y) => `${esc(y.name)} <span style="color:${C.dim};">· since ${esc(String(y.lastChangedAt).slice(5, 10))}${y.state === 'frozen' ? ' · frozen' : ''}${y.notRead ? ' · not read' : ''}</span>`))
       + (yh.frozen.length > MAX_YARD_NAMES ? hMuted(`+${yh.frozen.length - MAX_YARD_NAMES} more`) : ''));
+    if (yh.listMode && yh.frozenSoon.length) {
+      parts.push(`<div style="font-size:14px;margin:10px 0 2px;"><strong>${yh.frozenSoon.length}</strong> early warning <span style="color:${C.dim};">(unchanged 3+ weekdays, not on the site yet)</span></div>`);
+      parts.push(hList(yh.frozenSoon.slice(0, MAX_YARD_NAMES).map((y) => `${esc(y.name)} <span style="color:${C.dim};">· since ${esc(String(y.lastChangedAt).slice(5, 10))}</span>`))
+        + (yh.frozenSoon.length > MAX_YARD_NAMES ? hMuted(`+${yh.frozenSoon.length - MAX_YARD_NAMES} more`) : ''));
+    }
     S.push(hSection('Yard health', parts.join(''), `${yh.yards} yards checked`));
   } else {
     S.push(hSection('Yard health', hMuted(`Could not load yard_health.json (${esc((yh && yh.error) || 'unknown')})`)));
@@ -942,6 +1029,10 @@ export function composeDailyHtml(r) {
   }
   if (r.resend.heldFreeAlert) {
     sends += `<div style="font-size:13px;color:${C.bad};font-weight:600;margin-top:4px;">Held back for the free-alert email budget (24 h): ${fmtInt(r.resend.heldFreeAlert)} free alert emails (lowest class of mail; retried on later scans for 48 h, then not sent)</div>`;
+  }
+  for (const line of commitBudgetLines(r.commitBudget)) {
+    const carried = /^CARRIED/.test(line);
+    sends += `<div style="font-size:13px;color:${carried ? C.bad : C.dim};${carried ? 'font-weight:600;' : ''}margin-top:${carried ? 4 : 6}px;">${esc(carried ? line.replace(/^CARRIED TO THE NEXT SCAN/, 'Carried to the next scan') : line)}</div>`;
   }
   if (r.recentErrors.length) {
     sends += hList(r.recentErrors.slice(0, 3).map((e) => `<span style="color:${C.bad};">${esc(fmtTime(e.at).slice(11))} ${esc(e.channel)} HTTP ${esc(e.status || 'net')}</span> — ${esc(String(e.detail || '').slice(0, 140))}`));
@@ -1225,6 +1316,12 @@ export async function buildDailyReport(env, { now = Date.now(), storeSnapshot = 
     const o = watchCheck.newlyOrphaned;
     conds.push({ id: 'watch-orphans', title: `${o.length} watched name${o.length === 1 ? '' : 's'} stopped matching any car since yesterday: ${o.slice(0, 4).map((w) => `${w.make} ${w.model}`.trim()).join(', ')}${o.length > 4 ? ` +${o.length - 4} more` : ''}` });
   }
+  // A Pro alert the per-scan call budget carried arrives a scan late: that is
+  // an open issue, not a footnote (free-tier carry-over is listed under SENDS).
+  const commitBudget = commitBudgetReport(ev.stats);
+  if (commitBudget.pro) {
+    conds.push({ id: 'commit-budget-pro', title: `${commitBudget.pro} Pro alert${commitBudget.pro === 1 ? ' was' : 's were'} carried to a later scan in the last 24 h (the per-scan call budget was full)` });
+  }
   const n = conds.length;
   const report = {
     at: new Date(now).toISOString(),
@@ -1249,6 +1346,7 @@ export async function buildDailyReport(env, { now = Date.now(), storeSnapshot = 
       // Free alert emails the budget could not carry (free_email_alert.js).
       heldFreeAlert: (ev.stats.channels['email:free-alert'] || { last24h: {} }).last24h.held || 0,
     },
+    commitBudget,
     recentErrors: ev.stats.recentErrors.slice(0, 5),
     watchdog: ev.facts.watchdog,
     canary: ev.facts.canary,

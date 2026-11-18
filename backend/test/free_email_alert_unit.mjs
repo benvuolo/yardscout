@@ -28,6 +28,7 @@ import { FREE_INSTANT_RADIUS_MI } from '../src/devices.js';
 import { handleRecapSignup, handleRecapConfirm, recapSubToken, recapUnsubUrl } from '../src/recap_signup.js';
 import { flushOps, freeAlertLimits, freeAlertBudget, optionalEmailAllowed, CHANNELS, RESEND_RESERVE } from '../src/ops.js';
 import { handleEvent } from '../src/attribution.js';
+import { resendVolumeDetail, evaluateConditions } from '../src/ops_monitor.js';
 import { handleCommit } from '../src/admin.js';
 import { storeArrivals } from '../src/alerts.js';
 
@@ -613,6 +614,21 @@ check('per scan cap is 5', FREE_ALERT_MAX_PER_SCAN === 5);
 }
 
 /* ---- 20. logs never carry a full address ---- */
+/* ---- the hourly "Resend near daily cap" check names free alerts among what is held (2026-11-18) ---- */
+{
+  const d = resendVolumeDetail({});
+  check('near-cap wording: free alert emails are named, first, at their own numbers (70 sent today, 20 a day)',
+    /lowest class first: free alert emails \(web\) once 70 emails of any kind went out today \(and after 20 free alert emails/.test(d), d);
+  check('near-cap wording: then confirmations (both kinds) and recaps at 10 or fewer left', /then sign-up confirmations \(Monday email and free alert\) and Monday recaps once 10 or fewer sends are left/.test(d), d);
+  const big = resendVolumeDetail({ RESEND_DAILY_CAP: '1000' });
+  check('near-cap wording follows RESEND_DAILY_CAP (1,000: 700 and 200)', /once 700 emails/.test(big) && /after 200 free alert emails/.test(big) && /stops at 1000\/day/.test(big), big);
+  const e = freshEnv();
+  e.raw.prepare("INSERT INTO ops_counters (day, metric, n) VALUES (?, 'email:pro-alert:ok', 95)").run(new Date().toISOString().slice(0, 10));
+  const { conditions } = await evaluateConditions(e);
+  const rv = conditions.find((c) => c.id === 'resend-volume');
+  check('the hourly check fires at 95 of 100 and carries that wording', !!rv && rv.detail === d && /95 of 100/.test(rv.title), JSON.stringify(rv));
+}
+
 const leaked = logged.filter((l) => !/^(PASS|FAIL)/.test(l)).filter((l) => /[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+\.[A-Za-z]/.test(l) && !/•••@/.test(l));
 check('no full email address in any log line', leaked.length === 0, leaked.slice(0, 3).join(' | '));
 
