@@ -3593,3 +3593,160 @@ Earlier Honda/Nissan bullets (tier C trial, the 503 block, check-ins) are scatte
   `setZipCenter`, when a part is chosen and the Parts results hold that
   empty line, call `pfRunSearch()`. Mind the launch call (a saved zip is
   restored before the Parts state exists).
+
+## 2026-11-18 Interchange builder: units from data already held (session_01LsgNuWEh1vdaDCtdP1jxMM, branch `interchange/next-1117`)
+
+Hub brief: largest release-ready units with no new crawl. No fetch, crawl or
+dispatch was made. Branch head f1114b21, rebased on main 2cb8191c. Not merged.
+
+### Ranking (oem-raw@57e8b5b9, main rules + this branch's rules; lot cars from the live inventory)
+
+Lot cars that sit in at least one shippable cross-model Likely group, shipped
+build -> head build (held categories excluded):
+
+| unit | groups (shippable) | lot cars in a group | note |
+|---|---|---|---|
+| nissan (new make; Nissan + Infiniti) | 0 -> 343 | 0 -> 15,788 | all four sites `.c1.done`; this unit |
+| toyota advance (dca9cd84 -> head) | 529 -> 1,104 | 2,206 -> 18,072 | completion pages on toyota/lexus |
+| mopar advance | 301 -> 532 | 7,565 -> 18,306 | jeeppartsdeal `.c1.done` |
+| hmg advance | 15 -> 331 | 748 -> 5,749 | needs make-breadth-hmg-body rules first (Forte/Koup, Optima Hybrid) |
+| vag advance | 19 -> 379 | 451 -> 3,323 | |
+| honda (new) | 0 -> 9 | 0 -> 2,385 | Honda parts rarely cross models |
+| bmw (new) | 0 -> 209 | 0 -> 1,972 | 3-series body mix (sedan/coupe/conv/wagon) |
+| mazda / volvo / mb / subaru / mitsubishi | 33 / 87 / 109 / 46 / 27 | +1,632 / +1,601 / +1,231 / +1,363 / +715 | |
+
+Tier D categories (sunroof, center console, door panel, blower, fog lights)
+have no product data on oem-raw (no "D2" lines), so they need a crawl (below).
+
+### Unit 1: nissan. Candidate, NOT shipped (independent sample owed)
+
+- Raw oem-raw@57e8b5b9; inventory and decodes pinned from main@a85c654 (the
+  same pins as the shipped files; re-curating toyota/mopar on dca9cd84 with them
+  reproduces groups/<ns>.json byte for byte apart from the `raw.ref` label).
+- Candidate file `groups/_report/nissan.candidate.json`: 346 Likely groups (343
+  shippable + 3 held wiper-motor): gauge-cluster 95, window-regulator 135,
+  side-mirrors 94, climate-control 26 (counts at round 4; final 343). The
+  payload loader reads only groups/*.json, so the candidate does not ship.
+- What the app would show: Likely donors across Nissan/Infiniti twins and renames
+  (Frontier/Xterra/Pathfinder 2005+, Titan/Armada, M37/M56/Q70, FX/QX70, EX/QX50,
+  JX35/QX60, QX56/QX80, G25/Q40, Altima/Maxima/Sentra window motors, Cube/Juke/
+  Leaf/Rogue motors, U13 Altima/Stanza), with notes such as "Nissan catalog
+  lists #27510-9CA0A for both — option: fits some option packages; Frontier:
+  crew cab only; verify the number on the part". No Verified tier.
+- §11.4 rounds (30 groups + 30 pairs each, seeded; record with per-item
+  verdicts in `groups/_report/nissan_audit_2026-11-18.json`):
+  1. seed 1117001, main rules: trap check only. Rear-door regulator
+     82721-JK000 joined the 2008 G37 from the catalog's `2008-infiniti-g37-sedan`
+     page, but every decoded 2008 G37 on the lots is a coupe (40/40). Fix:
+     body-variant rule.
+  2. seed 1118003: FAILED, 19 WRONG. Infiniti files M35/M45 and M37/M56 under
+     one catalog page, and the option column names the engine. Examples:
+     24820-6AH1A "SEDAN. VQ37VHR" was claimed for the M56; 24820-6AH1C/-6AH1D
+     "VK56VD" for the M37; M35<->M45 and FX35<->FX45 clusters/mirrors. Nine
+     false "king cab only" notes came from this session's first cab parser.
+     Fixes: engine-code rule; the parser reads every "+"-joined part.
+  3. seed 1118004: FAILED, 4 WRONG. 24820-6AH2A and -1MK5A print the M56
+     with "6 Cyl 3.7L | VQ37VHR" on the product page. Fix: fitment-row engine
+     conflict.
+  4. seed 1118005: FAILED, 1 WRONG. The 2002 Xterra row reads "Production
+     Date: from 12/2002", and the production rule never read "from" windows
+     (610 rows on nissanpartsdeal, 969 on lexuspartsnow). Fix: the production
+     rule reads "from MM/YYYY" in every namespace.
+  5. seed 1118006: FAILED, 2 WRONG. The shared B14 Sentra/200SX page puts
+     coupe parts behind "C." and sedan parts behind "4S.". 24820-8B700 "C." was
+     on the sedan-only 1999 Sentra. Fix: option-column body codes. A census of
+     all 343 groups then checked every class found so far: none left.
+  6. seed 1118007: **0 WRONG; 58 RIGHT, 2 RISK** (P15/P19: a single-engine
+     cluster claimed for the Q70, which came with both engines).
+- Limits, for the hub to weigh:
+  - **Not independent.** This session wrote the fixes between rounds.
+    §11.4 asks for a session that did not write curate.py. An independent
+    re-sample is owed before nissan ships: `audit11_4/sample.py nissan
+    57e8b5b99de0 <inventory@a85c654> <decodes@a85c654> <new seed> <dir>`.
+  - **Page re-read = raw records and list manifests**, not fetch.py. The cache
+    holds only robots.txt, and this task forbids fetches.
+  - **Outside evidence = search-result text**, the same standard the hub
+    accepted for wiper round 2. Confirmed: 80721-AR000 (Q45 02-06, G35 sedan
+    only 03-06, FX 03-05); 82721-7S000 (Titan 04-15, Armada 05-15); 82730-1MA0A
+    (M37/M35h, QX56, QX80); 82721-1HL0A (Kicks, Versa); 24810-7S005 (Armada
+    04-05, Titan 04-07); 80721-ZL90A (Frontier 10-21, Pathfinder 10-12, Xterra
+    10-15).
+- To ship after an independent pass: move the candidate to `groups/nissan.json`
+  (same policy hash and raw), rebuild the payload, and run test_groups_hash and
+  test_lazy_payload. Size: about +127 KB in the lazy files (gauge-cluster
+  5.7 -> 38.6 KB, window-regulator 77.6 -> 127.7 KB, side-mirrors 174.0 ->
+  208.6 KB, climate-control 21.7 -> 31.5 KB); interchange.json +59 bytes.
+
+### Rules added (curate.py / policy.py; hashed inputs, all 8 shipped namespaces re-curated in the same push)
+
+- §5.16 body-variant rule (`policy.LIKELY_BODY_GATE`, all namespaces except
+  wheels). It applies when a vehicle-year comes in 2+ bodies: lot vPIC bodies
+  with >=5% and >=2 cars, where the decode's model must agree (yards list some
+  Outbacks as "Legacy"), plus body-named catalog pages. Such a vehicle-year
+  joins only when its own pages show the number for every body. Its notes still
+  feed the class-wide restriction pool, so no claim can be gained.
+- Production rule (a) reads "from MM/YYYY" (all namespaces).
+- nissan only:
+  - Infiniti engine codes, in the option column and in product fitment rows,
+    for fixed-displacement names (M35/M45/M37/M56/FX35/FX45/FX50/G25/G35/G37/
+    I30/I35/EX35/EX37/JX35/QX56...);
+  - option-column body codes (4S/2S/S/SED/SEDAN = sedan, C = coupe,
+    W = wagon...);
+  - a cab note "<model>: crew cab only" / "king cab only" from KC/CC codes,
+    like the GM `_cab_only` note.
+- Tests: `curation_tests/test_body_variant.py` (34 checks).
+
+### Live effect on shipped groups (claims only go down; `groups/_report/live_diff_2026-11-18.txt`)
+
+| namespace | change | groups |
+|---|---|---|
+| gm | removed (body) | 63: Cavalier/Sunfire, Cobalt/G5 (the G5 was coupe-only in 2007; the Cobalt was both), Alero/Grand Am coupe/sedan regulators and mirrors |
+| subaru | removed (body) | 14: Impreza 2012 sedan/5-door, Legacy 2001/2005 sedan/wagon |
+| mopar | removed / narrowed (body) | 8 removed, 1 narrowed: Sebring 2004 (Mitsubishi-built coupe + convertible), Sebring 2008 sedan/convertible |
+| ford | removed (body) | 7: Focus sedan/hatch, Mustang 1998 coupe/convertible |
+| toyota | removed (production "from" windows) | 4: Lexus IS 250 2013 / IS 350 2012 motors |
+| hmg, mb, vag | none | identical apart from the policy hash and held wiper groups |
+
+Payload 1,538,963 -> 1,503,938 bytes; oemStatus ok x8. These removals were not
+sampled one by one. They come from fail-closed rules; earlier live fixes had
+two verifiers check the removed groups, and the hub may want that here too.
+
+### Tests on f1114b21
+
+- curation_tests: all pass except test_model_map. It fails on main too, because
+  the live inventory has new one-car feed spellings ("Honda Cr-V E:fcev", "GMC
+  Express Van", "BMW 535i GT xDrive", ...: M5) and an Acura CL M6. That is data
+  quality's, not changed here. Curation therefore runs with the pinned
+  a85c654 inventory.
+- oem_fitment tests 42/42; scraper test_interchange and test_am_gates pass;
+  backend/test/pf_guards_unit.mjs ALL PASS.
+- Not run: the browser e2e scripts (interchange_e2e, pf_ux_e2e) and
+  ui_no_truncation; the app is unchanged.
+
+### Next (in order)
+
+1. Independent §11.4 on nissan (new seed, a session that did not write these
+   rules). Ship on 0 WRONG plus hub confirm.
+2. toyota and mopar advances to head raw: +15.9k and +10.7k lot cars. Inspect
+   for traps (variants, production dates, body codes on shared pages), sample
+   with the wiper groups included, then one push.
+3. vag/bmw: the body rule matters most there (Jetta/Golf/Passat/3-series), and
+   SimplePart prints body words in its notes.
+4. hmg: land make-breadth-hmg-body first.
+5. App (another workstream): a per-app body gate on OEM Likely apps would let
+   the body rule keep claims instead of dropping them (e.g. G37 sedan-only rows
+   shown only on sedan donors). Same idea for engine (Q70 V6/V8 clusters).
+
+### Crawl requests for the hub (none dispatched)
+
+- Tier D wave 1, D2 product pages: no D2 lines exist on oem-raw. Order by lot
+  cars, skipping blocked sites (gm, ford, mb, mopar, subaru, bmw, spectra, 1A):
+  toyotapartsnow + lexuspartsnow, jeeppartsdeal, hondapartsnow +
+  acurapartswarehouse, nissanpartsdeal + infinitipartsdeal, hyundai/kia,
+  vw/audi, mazda, volvo, mitsubishi. Categories: blower-motor, fog-lights,
+  center-console, door-panel, sunroof. Each needs its strict name rules first
+  (tier D handover above).
+- gmpartsgiant and fordpartsgiant (24% and 18% of lot cars) never ran own-page
+  completion (no `.c1.done`), and both are `.blocked` (503). Any retry is the
+  owner's call; it is listed only because it is the largest remaining
+  interchange gain.
