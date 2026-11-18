@@ -1073,3 +1073,80 @@ alerts lost after 3 days of carry-over. The 10 ms CPU limit is not measured
 or guarded here (see the report to the hub). The saved-car step was not in
 the worst-case load (it needs inventory shards); it goes through the same
 meter.
+
+## Watertight, continued — branch `hub/watertight-1117`, NOT merged (2026-11-18)
+
+Second builder on the hub's brief (the first stopped at a usage limit after
+items 1 and 7). Same base, same rules: nothing deployed, merged, dispatched
+or released; no file in `scraper/`, `fastlane/`, `ios/`, `android/`,
+`backend/src/inventory.js`, `backend/src/jsonpick.js`; no price or
+entitlement rule changed; no migration. Items 5 and 6 are in the report to
+the hub.
+
+### 1. The commit budget: review
+
+**Re-run.** `commit_budget_unit.mjs` 73 of 73 on the branch; against the
+sources before the change (`YS_SRC=<56f108c5 src>`) it fails at once ("made
+162", "up to 5 at once"), so the test does fail without the fix. All 23
+`*_unit.mjs` pass. `e2e-devices.sh` passes (its "tight budget" checks
+included).
+
+**The limits, checked again (2026-11-18).** developers.cloudflare.com is not
+reachable from this session either; these are from search results quoting
+the pages, the same as the first builder's.
+- Workers limits page and the 2026-02-11 changelog: Free = **50 outside
+  subrequests and 1,000 subrequests to Cloudflare services (D1, KV) per
+  invocation**; Paid = 10,000 (raisable to 10 million).
+  <https://developers.cloudflare.com/workers/platform/limits/>,
+  <https://developers.cloudflare.com/changelog/post/2026-02-11-subrequests-limit/>
+- D1 limits page: "Queries per Worker invocation (read subrequest limits):
+  1000 (Workers Paid) / 50 (Free)", pointing at the Workers page.
+  <https://developers.cloudflare.com/d1/platform/limits/>
+- **The open question is settled on paper:** the D1 row still gives Paid
+  1,000, the figure the 2026-02-11 change replaced with 10,000, so that row
+  is the old Workers table copied before the change, and the Workers page it
+  points to governs: 1,000 on Free. The first builder's `wrangler tail`
+  check (an `arrivals stored: 4000` line next to the `commit budget:` line on
+  a real scan) is still the proof and costs nothing.
+- Not confirmed by an official page I could read: that a D1 `batch()` counts
+  as ONE subrequest (a third-party write-up says so; Cloudflare's D1
+  introduction calls a batch one round trip). The budget's 900 assumes it.
+  If a batch counted per statement, the worst case would be about 4,450 D1
+  calls (the 4,000 arrival rows alone), far past 1,000; again the tail line
+  settles it.
+
+**Arithmetic, worst case** (test load: 60 Pro web users, 40 Pro devices, 30
+Pro email, 30 free instant, 20 check-ins, 10 free alert addresses, a sale, a
+coverage request, 4,000 arrivals): outside calls **45 of 50** (Pro web push
+took all 45; 5 left for redirects); D1 + KV **364 of 1,000** (36%), plus the
+one counter write; one call at a time (the six-connection limit is never
+near); no step starts after 25 s of the 30 s `waitUntil` allows. It holds.
+
+**Fixed in review.** `fits()` closed outside calls only when the OUTSIDE
+count was short. A send refused because D1 room was short is carried just
+the same, but a later, cheaper, lower-priority send could still go out:
+the priority promise broken in a corner. It now closes outside calls in
+that case too. New check "fits: a send refused for D1 room closes outside
+calls too" (fails on the first builder's `fits()`, passes now).
+
+**NOT solvable by this design: the 10 ms CPU limit (new, 2026-11-18).** The
+commit is one request, and the dispatch runs in its `waitUntil`; CPU spent
+there is (by every account I found; not stated on a page I could open)
+counted against the same request. Measured in Node 22 on this machine (the
+same V8 engine, not a Worker; scratch script, not in the repo): a commit
+body with 4,000 arrivals is about 1.1 MB and `JSON.parse` of it takes about
+**6 ms**; `watchMatches` over 4,000 arrivals takes about **4.7 ms per
+watch**, so 50 watches is about 175 ms. Every dispatcher matches every
+arrival against its watches, so a commit's CPU grows with arrivals x
+watches and is far past 10 ms today (the hub's count on 11-17: 87 watches
+on devices alone). Budgeting calls cannot fix that; if Cloudflare stops the
+commit for CPU, the dispatch ends wherever it was and no `commit budget:`
+line or counter is written, which is exactly the silent failure item 1 is
+about. Whether it happens is in the usage report the hub already has (CPU
+stops on `POST /v1/admin/inventory/commit`). Options, none done here: (a)
+Workers Paid ($5/mo: 30 s CPU, 10,000 subrequests) lifts both limits at
+once; (b) make matching cheaper (memoize the make/model normalisation per
+string, precompute each watch once, bucket arrivals by make): perhaps 5 to
+10 times less, still not 10 ms at 4,000 arrivals; (c) have the scan send
+only arrivals new since the last commit (touches `scraper/push_inventory.py`,
+another workstream). Recommendation: (a), then (b).

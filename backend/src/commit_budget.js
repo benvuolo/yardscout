@@ -82,7 +82,12 @@ export class CommitBudget {
       if (this.extClosed) return false;
       if (this.used.ext + ext > this.cap.ext) { this.extClosed = true; return false; }
     }
-    return this.used.svc + svc <= this.cap.svc;
+    if (this.used.svc + svc <= this.cap.svc) return true;
+    // A send refused for lack of D1/KV room is carried just the same, so
+    // outside calls close here too: a cheaper, lower-priority send must not
+    // go out after it.
+    if (ext > 0) this.extClosed = true;
+    return false;
   }
   /** Count a call that is about to be made; throws at the ceiling. The
    * deadline does not stop it: bookkeeping for a send already made must

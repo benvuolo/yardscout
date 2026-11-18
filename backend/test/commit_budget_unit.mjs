@@ -370,6 +370,14 @@ const WORST = { web: 30, webEmail: 30, proDev: 40, proEmail: 30, freeInstant: 30
   b.spend('ext');
   check('fits: an ask that does not fit closes outside calls for the rest of the commit', !b.fits({ ext: 2 }) && b.extClosed && !b.fits({ ext: 1 }));
   check('fits: D1-only work is still allowed after that', b.fits({ svc: 1 }));
+  {
+    // A send refused for lack of D1 room is carried too: no cheaper send
+    // (one that needs less D1) may go out after it.
+    const s = new CommitBudget({ ext: 10, svc: 5, ms: 1000, now: () => 0 });
+    s.spend('svc', 4);
+    const refused = !s.fits({ ext: 1, svc: 3 });
+    check('fits: a send refused for D1 room closes outside calls too', refused && s.extClosed && !s.fits({ ext: 1, svc: 1 }) && s.fits({ svc: 1 }));
+  }
   b.spend('ext');
   let threw = null;
   try { b.spend('ext'); } catch (e) { threw = e; }
