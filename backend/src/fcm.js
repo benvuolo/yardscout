@@ -21,6 +21,7 @@
  */
 
 import { countOk, countFail, countGone } from './ops.js';
+import { meteredFetch, BudgetExhausted } from './commit_budget.js';
 
 const TOKEN_URL = 'https://oauth2.googleapis.com/token';
 const FCM_BASE = 'https://fcm.googleapis.com';
@@ -30,6 +31,14 @@ let cachedAuth = null;   // { token, exp(sec) } — module-global, like apns.js
 
 export function fcmConfigured(env) {
   return !!(env.FCM_PROJECT_ID && env.FCM_SA_EMAIL && env.FCM_SA_KEY);
+}
+
+/** Outside calls the next sendFcm() makes when nothing goes wrong: the send,
+ * plus the OAuth token request when no bearer is cached. (A revoked bearer
+ * costs two more; sendFcm reports `deferred` if the budget cannot carry
+ * them.) */
+export function fcmSendCost() {
+  return cachedAuth && Math.floor(Date.now() / 1000) < cachedAuth.exp ? 1 : 2;
 }
 
 function tokenUrl(env) {
@@ -69,7 +78,7 @@ async function accessToken(env) {
     'RSASSA-PKCS1-v1_5', key, new TextEncoder().encode(unsigned));
   const assertion = unsigned + '.' + b64url(new Uint8Array(sig));
 
-  const r = await fetch(url, {
+  const r = await meteredFetch(env, url, {
     method: 'POST',
     headers: { 'content-type': 'application/x-www-form-urlencoded' },
     body: new URLSearchParams({
@@ -104,7 +113,7 @@ export async function sendFcm(env, deviceToken, payload) {
       },
     });
     const send = async (bearer) =>
-      fetch(`${apiBase(env)}/v1/projects/${env.FCM_PROJECT_ID}/messages:send`, {
+      meteredFetch(env, `${apiBase(env)}/v1/projects/${env.FCM_PROJECT_ID}/messages:send`, {
         method: 'POST',
         headers: { authorization: 'Bearer ' + bearer, 'content-type': 'application/json' },
         body,
@@ -125,6 +134,8 @@ export async function sendFcm(env, deviceToken, payload) {
     if (gone) await countGone(env, 'fcm'); else await countFail(env, 'fcm', r.status, text);
     return { ok: false, gone };
   } catch (e) {
+    // The scan commit's call budget is used up: not a failure, not sent.
+    if (e instanceof BudgetExhausted) return { ok: false, gone: false, deferred: true };
     console.log('fcm send error:', e && e.message);
     await countFail(env, 'fcm', 0, `error: ${e && e.message}`);
     return { ok: false, gone: false };

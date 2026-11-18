@@ -16,6 +16,9 @@
  *          the address; the next watch is one tap ("Add")
  *   web    the sender's daily cap: the reason is shown, the watch is kept
  *   web    Pro: no offer
+ *   (web cases run with the free email alert already asked for in the
+ *   browser: without it the toast offers the alert instead, see
+ *   free_email_alert_ui_e2e.mjs)
  *   iOS / Android shells: no offer, no request
  *
  * Run: node backend/test/recap_ask_e2e.mjs   (SHOTS=<dir> for screenshots) */
@@ -33,6 +36,12 @@ const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/cs
 const UA_IOS = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1';
 const WL = 'yardscout_watchlist';
 const SUB = Buffer.from('visitor@example.com').toString('base64url') + '.' + 'a'.repeat(64);
+// Since 2026-11-18 a free visitor who has NOT asked for the free email alert
+// is offered that in the toast instead (free_email_alert_ui_e2e.mjs, case
+// 10). These cases test the Monday email offer, so the alert has been asked
+// for already in this browser (waiting for its click), the state in which the
+// toast offers the Monday email.
+const FALERT_ASKED = () => JSON.stringify({ email: 'other@example.com', state: 'pending', at: Date.now(), key: null, label: 'Ford Ranger', r: 50 });
 
 let failures = 0;
 const check = (name, ok, detail = '') => { console.log(`${ok ? 'PASS' : 'FAIL'}  ${name}${ok ? '' : ' — ' + detail}`); if (!ok) failures++; };
@@ -128,7 +137,7 @@ try {
   {
     // A watch saved earlier in the shape the app writes, to prove it is untouched.
     const OLD = JSON.stringify([{ make: 'Honda', model: 'Civic', yrMin: null, yrMax: null, matchOnly: true, radiusMi: 100, lat: 33.45, lng: -112.07, driveFilter: '', trimFilter: 'Si', addedAt: '2026-10-02T10:00:00.000Z~abc123' }]);
-    const v = await open(browser, { storage: { [WL]: OLD, ys_seen: '1', ys_app_promo: '1' } });
+    const v = await open(browser, { storage: { [WL]: OLD, ys_seen: '1', ys_app_promo: '1', ys_falert: FALERT_ASKED() } });
     await enterZip(v.page);
     const label = await bell(v.page);
     const after = JSON.parse(await v.watches());
@@ -173,7 +182,7 @@ try {
 
   /* ---- 2. web: x = not asked again during this visit ---- */
   {
-    const v = await open(browser, { storage: { ys_seen: '1', ys_app_promo: '1' } });
+    const v = await open(browser, { storage: { ys_seen: '1', ys_app_promo: '1', ys_falert: FALERT_ASKED() } });
     await enterZip(v.page);
     await bell(v.page, 0);
     check('offered on the first watch', (await v.toast()).includes('Monday email'));
@@ -192,7 +201,7 @@ try {
 
   /* ---- 3. web: the confirmation link lands; later watches are one tap ---- */
   {
-    const v = await open(browser, { storage: { ys_seen: '1', ys_app_promo: '1' } });
+    const v = await open(browser, { storage: { ys_seen: '1', ys_app_promo: '1', ys_falert: FALERT_ASKED() } });
     await v.page.goto('https://yardscout.io/#recap=confirmed&sub=' + encodeURIComponent(SUB), { waitUntil: 'domcontentloaded' });
     await v.page.waitForFunction(() => typeof liveLoaded !== 'undefined', null, { timeout: 60000 });
     await v.page.waitForSelector('#watch-toast.show', { timeout: 10000 }).catch(() => {});
@@ -215,7 +224,7 @@ try {
 
   /* ---- 4. web: the API refuses (daily cap): the reason is shown, the watch stays ---- */
   {
-    const v = await open(browser, { storage: { ys_seen: '1', ys_app_promo: '1' },
+    const v = await open(browser, { storage: { ys_seen: '1', ys_app_promo: '1', ys_falert: FALERT_ASKED() },
       api: { '/v1/recap/signup': [503, { error: 'daily_cap', message: "Our email sender has reached today's limit. Your watch is saved here; try the email again tomorrow." }] } });
     await enterZip(v.page);
     await bell(v.page, 2);
@@ -231,7 +240,7 @@ try {
 
   /* ---- 5. web Pro: no offer ---- */
   {
-    const v = await open(browser, { storage: { ys_seen: '1', ys_app_promo: '1' } });
+    const v = await open(browser, { storage: { ys_seen: '1', ys_app_promo: '1', ys_falert: FALERT_ASKED() } });
     await enterZip(v.page);
     // The web re-checks a stored Pro flag against its entitlement at boot, so
     // set it the way the other UI tests do, after load.

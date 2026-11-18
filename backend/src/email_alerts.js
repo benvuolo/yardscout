@@ -28,13 +28,14 @@
  * "same day", never "instant".
  */
 
-import { json, err, isoNow } from './util.js';
+import { json, err, isoNow, unseenItems, unseenCost, runBatched } from './util.js';
+import { hasRoom, ownCap } from './commit_budget.js';
 import { resendFetch } from './ops.js';
 import { watchMatches, loadArrivals, sanitizeVpicFilters } from './alerts.js';
 import { sanitizeSaved } from './saved_alerts.js';
 
 const MAX_WATCHES = 20;                 // mirrors MAX_WATCHES_PER_USER / device cap
-const MAX_EMAILS_PER_COMMIT = 20;       // subrequest budget (shared with push sends)
+const MAX_EMAILS_PER_COMMIT = 20;       // outside a scan commit only (admin test route); a commit uses commit_budget.js
 const MAX_VEHICLES_PER_EMAIL = 30;      // one digest email, never one-per-car
 
 /* ===== entitlement lookups (ENTITLEMENTS KV — shared with the site Worker) ===== */
@@ -280,32 +281,34 @@ async function sendAlertEmail(env, email, matches) {
 }
 
 /** One digest email per subscriber whose watches matched this commit's new
- * arrivals. Pro is re-checked in KV per subscriber at send time. */
+ * arrivals. Pro is re-checked in KV per subscriber at send time.
+ * Returns {users, emails, carried, unchecked}: `carried` subscribers had a
+ * new car and were not served (this function's cap, or the commit's call
+ * budget, commit_budget.js). Nothing is marked sent for them, so the next
+ * scan finds the same cars; subscribers are taken longest-unmailed first. */
 export async function dispatchEmailAlerts(env, arrivals) {
   if (!Array.isArray(arrivals) || !arrivals.length || !env.ENTITLEMENTS) {
-    return { users: 0, emails: 0 };
+    return { users: 0, emails: 0, carried: 0, unchecked: 0 };
   }
   const rows = (await env.DB.prepare(
-    'SELECT email, watches_json FROM email_watchers WHERE enabled = 1'
+    `SELECT email, watches_json FROM email_watchers WHERE enabled = 1
+      ORDER BY last_email_at IS NOT NULL, last_email_at`
   ).all()).results || [];
 
-  let emails = 0, users = 0;
-  for (const row of rows) {
-    if (emails >= MAX_EMAILS_PER_COMMIT) { console.log('email alert budget hit — remaining deferred'); break; }
+  let emails = 0, users = 0, carried = 0, unchecked = 0, cut = false;
+  for (let i = 0; i < rows.length; i++) {
+    const row = rows[i];
     let watches;
     try { watches = JSON.parse(row.watches_json || '[]'); } catch { watches = []; }
     if (!watches.length) continue;
     const matched = arrivals.filter((v) => watches.some((w) => watchMatches(w, v)));
     if (!matched.length) continue;
+    // Room for the dedupe read and the entitlement read?
+    if (!hasRoom(env, { svc: unseenCost(matched.length) + 1 })) { unchecked += rows.length - i; break; }
 
     // Dedupe BEFORE the (costly) entitlement read.
-    const fresh = [];
-    for (const v of matched) {
-      const seen = await env.DB.prepare(
-        'SELECT 1 AS x FROM email_alerts_sent WHERE email = ?1 AND vehicle_id = ?2'
-      ).bind(row.email, String(v.id)).first();
-      if (!seen) fresh.push(v);
-    }
+    const fresh = await unseenItems(env,
+      'SELECT 1 AS x FROM email_alerts_sent WHERE email = ?1 AND vehicle_id = ?2', row.email, matched);
     if (!fresh.length) continue;
 
     // Pro gate at send time: entitlement lapsed/refunded → no email, row kept
@@ -313,23 +316,28 @@ export async function dispatchEmailAlerts(env, arrivals) {
     const ent = await env.ENTITLEMENTS.get('ent:' + row.email, 'json');
     if (!entActive(ent)) continue;
 
+    if (!cut && emails >= ownCap(env, MAX_EMAILS_PER_COMMIT)) { console.log('email alert budget hit (per-commit cap): the rest are carried to the next scan'); cut = true; }
+    if (!cut && !hasRoom(env, { ext: 1, svc: unseenCost(fresh.length + 1) })) { console.log('email alert budget hit (commit budget): the rest are carried to the next scan'); cut = true; }
+    if (cut) { carried++; continue; }
+
     emails++;
     const delivered = await sendAlertEmail(env, row.email, fresh);
     if (delivered) {
       users++;
-      for (const v of fresh) {
-        await env.DB.prepare(
-          'INSERT OR IGNORE INTO email_alerts_sent (email, vehicle_id, sent_at) VALUES (?1, ?2, ?3)'
-        ).bind(row.email, String(v.id), isoNow()).run();
-      }
-      await env.DB.prepare('UPDATE email_watchers SET last_email_at = ?1 WHERE email = ?2')
-        .bind(isoNow(), row.email).run();
+      const at = isoNow();
+      const ins = env.DB.prepare('INSERT OR IGNORE INTO email_alerts_sent (email, vehicle_id, sent_at) VALUES (?1, ?2, ?3)');
+      await runBatched(env, [
+        ...fresh.map((v) => ins.bind(row.email, String(v.id), at)),
+        env.DB.prepare('UPDATE email_watchers SET last_email_at = ?1 WHERE email = ?2').bind(at, row.email),
+      ]);
     }
   }
   // Prune dedupe rows alongside the other sent-logs (90 days).
-  await env.DB.prepare('DELETE FROM email_alerts_sent WHERE sent_at < ?1')
-    .bind(new Date(Date.now() - 90 * 86400_000).toISOString()).run();
-  return { users, emails };
+  if (hasRoom(env, { svc: 1 })) {
+    await env.DB.prepare('DELETE FROM email_alerts_sent WHERE sent_at < ?1')
+      .bind(new Date(Date.now() - 90 * 86400_000).toISOString()).run();
+  }
+  return { users, emails, carried, unchecked };
 }
 
 /* ===== test/ops helpers ===== */

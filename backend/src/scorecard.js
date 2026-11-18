@@ -57,8 +57,18 @@ export const SC_PLATFORMS = [['web', 'Web'], ['ios', 'iPhone app'], ['android', 
 // 'zip-entered' feeds only the per-link line ("entered a zip", 2026-11-16).
 const EVENTS = ['first-visit', 'zip-entered', 'watch-created', 'email-asked', 'email-submitted', 'email-confirmed',
   'paywall', 'checkout-start', 'pro-converted'];
-// The Monday email ask exists on the website only.
-const WEB_ONLY = new Set(['email-asked', 'email-submitted', 'email-confirmed']);
+/* Two one-line read-outs (2026-11-18), this week's counts only:
+ *   the alert card in the Cars feed (2026-11-16; every platform): shown,
+ *     its button used, dismissed;
+ *   the free emailed alert (2026-11-17; website): offered, an address
+ *     given, confirmed (counted by the API), first email sent (the API).
+ * No counting-rules marker exists for either, so "counting started <day>"
+ * is the first day either window holds one of its counters. */
+export const ALERT_CARD_EVENTS = ['alert-card-shown', 'alert-card', 'alert-card-x'];
+export const FREE_ALERT_EVENTS = ['free-alert-shown', 'free-alert-asked', 'free-alert-confirmed', 'free-alert-first-email'];
+EVENTS.push(...ALERT_CARD_EVENTS, ...FREE_ALERT_EVENTS);
+// The Monday email ask and the free emailed alert exist on the website only.
+const WEB_ONLY = new Set(['email-asked', 'email-submitted', 'email-confirmed', ...FREE_ALERT_EVENTS]);
 // How the Cars list was narrowed (docs/app.js NARROW_KINDS), one counter each.
 // 'narrow/chip' (2026-11-16, counting rules v5): a make or model chip above
 // the Cars grid. The chips did not exist before v5, so an older client's 0
@@ -237,10 +247,17 @@ export function computeScorecard({ today, rows = [], presence = [], v2 = {}, v3 
 
   const narrowing = computeNarrowing({ today, rows, v3, v3Presence, eventsError });
 
+  // First day in either window holding one of these counters (null = none yet).
+  const firstDay = (events) => rows.filter((r) => winOf(r.day) && events.includes(r.event) && Number(r.n) > 0)
+    .map((r) => r.day).sort()[0] || null;
+  const alertCard = { shown: metric('alert-card-shown'), used: metric('alert-card'), dismissed: metric('alert-card-x'), since: firstDay(ALERT_CARD_EVENTS) };
+  const freeAlert = { shown: metric('free-alert-shown'), asked: metric('free-alert-asked'), confirmed: metric('free-alert-confirmed'),
+    firstEmail: metric('free-alert-first-email'), since: firstDay(FREE_ALERT_EVENTS) };
+
   return {
     window: w, eventsError, counting,
     visitors: { ...visitors, bySource, otherTagged, noTag },
-    watches, emails, proSheet, subscribers, sourceRows, narrowing,
+    watches, emails, proSheet, subscribers, sourceRows, narrowing, alertCard, freeAlert,
   };
 }
 
@@ -552,6 +569,27 @@ function countingNote(card) {
   return `Week-on-week changes start once both weeks are on the fixed counting; ${bits.join('; ')}.`;
 }
 
+/* One line each, this week only, in the style of item 3's first line. "no
+ * data": no platform it exists on reported anything this week; "nothing
+ * counted yet": platforms reported, but never one of these counters (not
+ * live yet, or nobody reached it); a first counter inside this week adds
+ * "(counting started <day>)". */
+function sinceNote(since, w) { return since && since > w.current.from ? ` (counting started ${scDay(since)})` : ''; }
+export function alertCardLine(ac, w) {
+  if (!ac) return '';
+  const head = 'alert card in the Cars feed';
+  if ([ac.shown, ac.used, ac.dismissed].every((m) => m.current == null)) return `${head}: no data`;
+  if (!ac.since || ac.since > w.current.to) return `${head}: nothing counted yet`;
+  return `${head}: shown ${nd(ac.shown.current)} → "Set an alert" ${nd(ac.used.current)} · dismissed ${nd(ac.dismissed.current)}${sinceNote(ac.since, w)}`;
+}
+export function freeAlertLine(fa, w) {
+  if (!fa) return '';
+  const head = 'free email alert (website)';
+  if ([fa.shown, fa.asked, fa.confirmed, fa.firstEmail].every((m) => m.current == null)) return `${head}: no data`;
+  if (!fa.since || fa.since > w.current.to) return `${head}: nothing counted yet`;
+  return `${head}: offered ${nd(fa.shown.current)} → gave an address ${nd(fa.asked.current)} → confirmed ${nd(fa.confirmed.current)} → first email ${nd(fa.firstEmail.current)}${sinceNote(fa.since, w)}`;
+}
+
 /** Five numbered items + the per-link lines, as {title, value, lines[]} for both renderers. */
 export function scorecardItems(card) {
   if (card.eventsError) {
@@ -591,6 +629,10 @@ export function scorecardItems(card) {
   });
   // How the checkout taps ended (v4 clients), under item 4 whatever it shows.
   items[3].lines.push(...outcomeLines(ps.outcomes));
+  // The alert card (a way to a watch) under item 2; the free emailed alert
+  // (the website's other email offer) under item 3. Whatever those show.
+  items[1].lines.push(alertCardLine(card.alertCard, card.window));
+  items[2].lines.push(freeAlertLine(card.freeAlert, card.window));
   return { range: rangeText(card.window), items, links: card.sourceRows.map(sourceRowText), note: countingNote(card) };
 }
 

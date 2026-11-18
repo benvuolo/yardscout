@@ -205,6 +205,21 @@ for (let i = 0; i < 10; i++) {
 check('per-IP sign-up limit: 8 an hour, then 429', limited === 2, `limited=${limited}`);
 check('IP not in the database', !JSON.stringify(rows(env, 'SELECT * FROM recap_subscribers')).includes('203.0.113.9'));
 
+/* ---- 8b. each per-IP limit has its own bucket (2026-11-18) ----
+ * /v1/recap/add (32 an hour) used to bump the sign-up counter (8 an hour), so
+ * one-tap adds from a network used up its sign-ups. The limit is checked
+ * before the token, so a made-up token is enough to count an add. */
+env = freshEnv();
+for (let i = 0; i < 10; i++) await add(env, { sub: 'made-up', watch: browserWatch }, '203.0.113.20');
+let afterAdds = await signup(env, { email: 'after-adds@example.com', watch: browserWatch }, '203.0.113.20');
+check('10 adds from one network leave its sign-ups untouched', afterAdds.status === 200, `status ${afterAdds.status}`);
+for (let i = 0; i < 8; i++) await signup(env, { email: `s8b${i}@example.com`, watch: browserWatch }, '203.0.113.21');
+const addAfterSignups = await add(env, { sub: 'made-up', watch: browserWatch }, '203.0.113.21');
+check('...and 8 sign-ups leave its adds untouched (refused for the token, not 429)', addAfterSignups.status === 401, `status ${addAfterSignups.status}`);
+let addLimited = 0;
+for (let i = 0; i < 34; i++) { const x = await add(env, { sub: 'made-up', watch: browserWatch }, '203.0.113.22'); if (x.status === 429) addLimited++; }
+check('the add limit itself: 32 an hour, then 429', addLimited === 2, `limited=${addLimited}`);
+
 /* ---- 9. per-address cap on confirmation emails ---- */
 env = freshEnv();
 outbox = [];

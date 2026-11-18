@@ -957,6 +957,10 @@ function afterInventoryChange({ quiet = false } = {}) {
   _makeScopeKey = null;   // data changed — force the scoped rebuild
   _yardScopeKey = null;   // ...and the yard dropdown's counts
   refreshScopedInventory();
+  // A Parts search that ran while the cars around its centre were still
+  // loading (a zip that arrived late) runs again now they are in (same
+  // forward-reference rule as pfInited above).
+  if (_pfAwaitShards && pfCat) pfRunSearch();
   populateWatchOptions();
   updateStaleBanner();
   invUpdateProgress();
@@ -8999,6 +9003,7 @@ function pfDateLabel(dateAdded) {
 }
 
 let pfCat = null;        // chosen category object
+let _pfAwaitShards = false;   // the last search ran before its area's cars were in (afterInventoryChange re-runs it)
 let pfChosenFam = null;  // chosen engine family id when the model had several
 
 function pfSaveState() {
@@ -9832,9 +9837,14 @@ function pfRunSearch() {
   const s = pfSeeker();
   if (!pfCat) { status.textContent = 'Pick a part first.'; return; }
   if (!activeZipCoords) {
-    out.innerHTML = '<div class="pf-empty">Set a zip code (or use your location) up top so we know which yards are near you — distances drive this whole list.</div>';
+    // data-wait-place: pfRerunIfPlaceArrived() runs this search again when a
+    // centre lands later (a zip lookup still out, the /geo guess, GPS).
+    out.innerHTML = '<div class="pf-empty" data-wait-place>Set a zip code (or use your location) up top so we know which yards are near you — distances drive this whole list.</div>';
     return;
   }
+  // The radius-first loader may still be fetching the cars around this
+  // centre (it just arrived): if so, this search runs again when they land.
+  _pfAwaitShards = invViewPending({ focus: false });
   if (!interchangeData) { loadInterchange().then(() => pfRunSearch()); return; }
   // Same for the price lists of the yards in range: every result row quotes
   // its yard's list (lazy lists — see LAZY YARD PRICE LISTS).
@@ -10360,6 +10370,23 @@ function pfSyncWhere() {
     pz.placeholder = lz.placeholder;   // carries 'Near me' when GPS is the center
   }
   pfUpdateWhereSum();
+  pfRerunIfPlaceArrived();
+}
+/* A part picked while no centre was known leaves "Set a zip code (or use your
+ * location) up top" in the results (pfRunSearch). Every centre change passes
+ * through pfSyncWhere (setZipCenter when a zip lookup comes back, the /geo
+ * guess and links via afterPlaceChange, GPS), so the search runs again here
+ * once a centre exists. Order matters: the results box is read FIRST. At
+ * launch a saved zip is restored before the Parts state is declared (`let
+ * pfCat` further down is not initialised yet, and reading it would throw);
+ * the box is still empty then, so pfCat is never read before it exists.
+ * Only the waiting line triggers it, so a search already on screen is not
+ * re-run (and pfCountSearch dedupes a repeat anyway). */
+function pfRerunIfPlaceArrived() {
+  const out = document.getElementById('pf-results');
+  if (!out || !out.querySelector('.pf-empty[data-wait-place]')) return;
+  if (!activeZipCoords || !pfCat) return;
+  pfRunSearch();
 }
 
 /* ===== TRY-EXAMPLE CHIPS (owner request, 2026-10-23) =====================
@@ -10851,10 +10878,14 @@ function renderAlerts() {
       if (!isPro() && e.addedAt) {
         const setAt = Date.parse(String(e.addedAt).split('~')[0]);
         const dayAgo = Date.now() - 86400000;
-        // The instant watch's own nearby cars are pushed to free users too:
+        // The instant watch's own nearby cars are pushed to free users too,
+        // and the free email alert's watch has its nearby cars emailed (web):
         // they are no near-miss.
+        const faHere = !!faKey && e.addedAt === faKey;
+        const center = faHere ? ownCenter() : null;
         const missed = r.hits.filter(v => { const d = parseYardDate(v.dateAdded); return d && d.getTime() >= setAt - 86400000 && d.getTime() <= dayAgo
-          && !(i === instIdx && inInstantScope(e, v)); });
+          && !(i === instIdx && inInstantScope(e, v))
+          && !(faHere && falertCovers(e, v, fa, center, d.getTime())); });
         if (missed.length) {
           const first = missed.map(v => parseYardDate(v.dateAdded)).sort((a, b) => a - b)[0];
           const when = first.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
@@ -11495,8 +11526,10 @@ function handleRecapHash() {
  *     on (change car, turn off). No Pro prompt in it.
  *   - rule 6: stored watches are never edited, moved or reordered. What this
  *     browser remembers lives in its own key:
- *       localStorage ys_falert = {email, state: 'pending'|'on', sub?, key, label, r, at?}
- *     (key = the chosen watch's addedAt, only to mark it in the list)
+ *       localStorage ys_falert = {email, state: 'pending'|'on', sub?, key, label, r, at?, onAt?}
+ *     (key = the chosen watch's addedAt, only to mark it in the list; onAt =
+ *     when this browser saw it go on, so the near-miss line can leave out
+ *     the cars the alert covers)
  *   - the server is the truth for an alert that is on: the card re-checks it
  *     (falertCheck), so an unsubscribe done from an email shows up here
  *   - the copy never says "instant" or "every": scans run about every 4
@@ -11529,6 +11562,22 @@ function falertSave(v) {
 /** Miles the alert covers for a watch: its own radius, at most the free 50. Pure. */
 function falertRadiusMi(e) {
   return Math.min((e && e.radiusMi) || FREE_EMAIL_ALERT_RADIUS_MI, FREE_EMAIL_ALERT_RADIUS_MI);
+}
+/** True when the email alert `st` (this browser's ys_falert), on for watch
+ * e, covers car v: v sits within the copy's radius of the copy's centre (as
+ * falertWatchBody sends them; `center` = the visitor's own place) and was
+ * listed (`listedMs`, the yard's date) no earlier than the day before the
+ * alert went on (`st.onAt`; the API records the cars already listed as
+ * known). With no onAt (an alert turned on before the browser kept that
+ * time, or changed from another browser) every car in range counts as
+ * covered: the near-miss line must never tell someone they missed a car
+ * their email may have brought. Pure (unit-tested). */
+function falertCovers(e, v, st, center, listedMs) {
+  if (!st || st.state !== 'on' || !v || v.lat == null || v.lng == null) return false;
+  const w = falertWatchBody(e, center);
+  if (!w || haversineMiles(w.lat, w.lng, v.lat, v.lng) > w.radiusMi) return false;
+  if (!st.onAt) return true;
+  return !(listedMs > 0) || listedMs >= st.onAt - 86400000;
 }
 /** "2003–2009 Toyota 4Runner", the same text the API's emails use. Pure. */
 function falertLabel(e) {
@@ -11684,7 +11733,10 @@ function falertCheck() {
       const keep = !!cur.key && falertChoices().some(x => x.e.addedAt === cur.key && falertLabel(x.e) === label && falertRadiusMi(x.e) === w.radiusMi);
       const key = keep ? cur.key : falertKeyFor(label, w.radiusMi);
       if (label === cur.label && w.radiusMi === cur.r && key === (cur.key || null)) return;
-      falertSave({ ...cur, label, r: w.radiusMi, key });
+      // Another car, set from another browser at a time this one cannot know:
+      // no onAt (falertCovers then counts every car in range as covered).
+      const same = label === cur.label && w.radiusMi === cur.r;
+      falertSave({ ...cur, label, r: w.radiusMi, key, onAt: same ? (cur.onAt || null) : null });
       renderAlerts();
     } else if (res.status === 200 && res.data.state === 'off') {
       falertSave(null);
@@ -11716,28 +11768,88 @@ async function falertSubmit(el, change) {
   // The picked row; with one watch there are no rows and it is that watch.
   const choices = falertChoices(), rows = el.querySelector('input[name="fa-watch"]'), sel = el.querySelector('input[name="fa-watch"]:checked');
   const pick = rows ? (sel && choices.find(x => String(x.i) === sel.value)) : choices[0];
-  const watch = pick && falertWatchBody(pick.e, ownCenter());
-  if (!watch) { msg.textContent = 'Pick a car first.'; return; }
-  // A token this browser already holds for the same address (this alert's,
-  // or the Monday email's) proves the inbox: the API then needs no new click.
-  const tok = [st, recapState()].find(s => s && s.sub && s.email === email);
+  if (!pick || !falertWatchBody(pick.e, ownCenter())) { msg.textContent = 'Pick a car first.'; return; }
   btn.disabled = true;
   msg.textContent = change ? 'Saving…' : 'Sending…';
+  const res = await falertSignup(email, pick.e, change);
+  btn.disabled = false;
+  if (!res || res.status !== 200) { msg.textContent = falertFail(res); return; }
+  _falertChanging = false;
+  _falertMsg = '';
+  renderAlerts();
+}
+/* The request behind the card's form, its "Change car" and the watch toast's
+ * offer: the alert for watch e at `email`. On a 200 this browser's ys_falert
+ * says pending (or on, when a token it holds proved the inbox). Returns the
+ * API's answer ({status, data}). */
+async function falertSignup(email, e, change) {
+  const watch = falertWatchBody(e, ownCenter());
+  if (!watch) return { status: 0, data: {} };
+  // A token this browser already holds for the same address (this alert's,
+  // or the Monday email's) proves the inbox: the API then needs no new click.
+  const tok = [falertState(), recapState()].find(s => s && s.sub && s.email === email);
   let res = null;
   try {
     res = await recapPost('/v1/free-alert/signup', { email, watch, ...(tok ? { sub: tok.sub } : {}),
       src: ATTRIB ? ATTRIB.src : '', cmp: ATTRIB ? ATTRIB.cmp : '', med: ATTRIB ? ATTRIB.med : '' });
-  } catch (e) { res = { status: 0, data: {} }; }
+  } catch (err) { res = { status: 0, data: {} }; }
+  if (!res || res.status !== 200) return res;
+  if (!change) track('free-alert-asked');
+  const base = { email, key: e.addedAt || null, label: falertLabel(e), r: watch.radiusMi };
+  // onAt: when this copy went on (falertCovers; the near-miss line).
+  if (res.data.state === 'on' && res.data.sub) falertSave({ ...base, state: 'on', sub: res.data.sub, onAt: Date.now() });
+  else falertSave({ ...base, state: 'pending', at: Date.now() });
+  _falertChecked = Date.now();
+  return res;
+}
+/* ----- the watch toast's one offer (2026-11-18) -----
+ * Right after a new watch on the website, the toast used to offer only the
+ * Monday email. The free email alert is the stronger free promise, so a free
+ * visitor who has not asked for it in this browser is offered THAT for the
+ * new watch, in its place (one offer; no Pro prompt in it). The Monday email
+ * offer comes back once the alert is asked for, for a batch of several new
+ * watches, for a watch past the first FREE_WATCH_LIMIT, and after the alert
+ * offer was dismissed this visit. */
+function falertToastDismissed() {
+  try { return sessionStorage.getItem('ys_falert_no') === '1'; } catch (e) { return false; }
+}
+function falertToastDismiss() {
+  try { sessionStorage.setItem('ys_falert_no', '1'); } catch (e) { /* private mode */ }
+}
+/** The new watch the toast offers the alert for, as a falertChoices() entry,
+ * or null (then the Monday email is offered, as before). */
+function falertToastPick(entries) {
+  if (!entries || entries.length !== 1 || !falertOffered(IS_NATIVE, isPro()) || falertState() || falertToastDismissed()) return null;
+  const e = entries[0];
+  return (e && e.addedAt && falertChoices().find(x => x.e.addedAt === e.addedAt)) || null;
+}
+function falertToastHtml(e) {
+  const st = recapState();
+  return `<span class="mail-line">Free email alert for <strong>${escapeHtml(falertLabel(e))}</strong>: we email you when one is set out within ${falertRadiusMi(e)}&nbsp;mi, usually the same day. One car, one address, no account.</span>
+    <form class="watch-zip-row mail-form fa-toast-form" novalidate>
+      <input type="email" class="watch-zip-input mail-email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false"
+        placeholder="Email" aria-label="Email address for the free email alert" maxlength="254" value="${escapeHtml(st ? st.email : '')}">
+      <button type="submit" class="btn btn-primary btn-sm">Email me</button>
+    </form>
+    <span class="watch-zip-msg mail-msg" role="status"></span>`;
+}
+async function falertToastSubmit(el, e, done) {
+  const input = el.querySelector('.mail-email'), msg = el.querySelector('.mail-msg'), btn = el.querySelector('.mail-form .btn');
+  const email = String((input && input.value) || '').trim().toLowerCase();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg.textContent = 'Enter your email address.'; input.focus(); return; }
+  btn.disabled = true;
+  msg.textContent = 'Sending…';
+  const res = await falertSignup(email, e, false);
   btn.disabled = false;
   if (!res || res.status !== 200) { msg.textContent = falertFail(res); return; }
-  if (!change) track('free-alert-asked');
-  const base = { email, key: pick.e.addedAt || null, label: falertLabel(pick.e), r: watch.radiusMi };
-  if (res.data.state === 'on' && res.data.sub) falertSave({ ...base, state: 'on', sub: res.data.sub });
-  else falertSave({ ...base, state: 'pending', at: Date.now() });
-  _falertChanging = false;
-  _falertMsg = '';
-  _falertChecked = Date.now();
+  el.dataset.recapDone = '1';
+  const st = falertState();
+  const ask = el.querySelector('.mail-ask');
+  if (ask) ask.innerHTML = st && st.state === 'on'
+    ? `<span class="mail-line"><strong>Your free email alert is on</strong> for ${escapeHtml(falertLabel(e))}, to ${escapeHtml(recapMask(email))}.</span>`
+    : `<span class="mail-line"><strong>Check your inbox.</strong> Tap the link we sent to ${escapeHtml(recapMask(email))} to turn on your email alert for ${escapeHtml(falertLabel(e))}. Nothing is sent until you do.</span>`;
   renderAlerts();
+  done();
 }
 async function falertTurnOff(el) {
   const st = falertState(), msg = el.querySelector('.fa-msg'), btn = el.querySelector('[data-act="fa-off"]');
@@ -11802,7 +11914,7 @@ function handleFalertHash() {
   try { prev = JSON.parse(localStorage.getItem(FALERT_KEY) || 'null'); } catch (e) { prev = null; }
   const mine = prev && prev.email === email ? prev : null;
   falertSave({ email, state: 'on', sub, key: mine ? (mine.key || null) : null, label: mine ? (mine.label || '') : '',
-    r: mine ? (mine.r || FREE_EMAIL_ALERT_RADIUS_MI) : FREE_EMAIL_ALERT_RADIUS_MI });
+    r: mine ? (mine.r || FREE_EMAIL_ALERT_RADIUS_MI) : FREE_EMAIL_ALERT_RADIUS_MI, onAt: Date.now() });
   _falertMsg = '';
   _falertChecked = 0;
   jhOpenAlertsTab();
@@ -11833,8 +11945,14 @@ function showWatchToast(label, opts = {}) {
   // field, one button). The watch is already saved; this only offers more.
   const recapEntries = !opts.zip && !opts.undo && !opts.manage && !opts.message ? recapTakeEntries() : [];
   let recapAsk = false;
+  // ...or, in its place, the free email alert for that watch (FREE EMAILED
+  // ALERT ON THE WEB, "the watch toast's one offer").
+  const falertPick = recapEntries.length ? falertToastPick(recapEntries) : null;
   if (opts.message) {
     head = opts.message;
+  } else if (falertPick) {
+    recapAsk = true;
+    next = falertToastHtml(falertPick.e);
   } else if (recapEntries.length) {
     recapAsk = true;
     next = recapAskHtml(label, recapEntries);
@@ -11878,7 +11996,9 @@ function showWatchToast(label, opts = {}) {
   el.onsubmit = (e) => {
     if (!e.target.closest('.mail-form')) return;
     e.preventDefault();
-    recapSubmit(el, recapEntries, () => { clearTimeout(_watchToastTimer); _watchToastTimer = setTimeout(hide, 9000); });
+    const after = () => { clearTimeout(_watchToastTimer); _watchToastTimer = setTimeout(hide, 9000); };
+    if (falertPick) falertToastSubmit(el, falertPick.e, after);
+    else recapSubmit(el, recapEntries, after);
   };
   el.dataset.recapAsk = recapAsk ? '1' : '';
   el.onclick = (e) => {
@@ -11889,7 +12009,7 @@ function showWatchToast(label, opts = {}) {
       recapAddAll(el, recapEntries, () => { clearTimeout(_watchToastTimer); _watchToastTimer = setTimeout(hide, 6000); });
       return;
     }
-    if (act.dataset.act === 'close' && recapAsk && !el.dataset.recapDone) recapDismiss();
+    if (act.dataset.act === 'close' && recapAsk && !el.dataset.recapDone) { if (falertPick) falertToastDismiss(); else recapDismiss(); }
     if (act.dataset.act === 'push') { track('watch-toast-push'); document.getElementById('native-push-enable').click(); }
     if (act.dataset.act === 'pro') openUpgradeSheet('watch-toast');
     if (act.dataset.act === 'app') track('watch-toast-app');
@@ -11910,9 +12030,11 @@ function showWatchToast(label, opts = {}) {
   delete el.dataset.recapDone;
   clearTimeout(_watchToastTimer);
   if (recapAsk) {
-    track('email-asked');
+    // The alert's offer is counted as the card's is: "shown", once a visit.
+    if (falertPick) { if (onceThisVisit('ys_falert_seen')) track('free-alert-shown'); }
+    else track('email-asked');
     // Left alone, the offer goes after 30 s and counts as a "no" for this visit.
-    _watchToastTimer = setTimeout(() => { if (!el.dataset.recapDone) recapDismiss(); hide(); }, 30000);
+    _watchToastTimer = setTimeout(() => { if (!el.dataset.recapDone) { if (falertPick) falertToastDismiss(); else recapDismiss(); } hide(); }, 30000);
     return;
   }
   // A toast that is waiting for a zip stays until it is answered or dismissed.

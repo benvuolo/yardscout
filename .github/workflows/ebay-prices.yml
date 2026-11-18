@@ -58,6 +58,10 @@ jobs:
       - name: Commit if changed
         if: ${{ github.event.inputs.dry_run != 'true' }}
         run: |
+          # No keys yet (ops/ebay.md): the refresh step only warns and writes
+          # no file. Without this line `git add` below stops on a path that
+          # does not exist and the run goes red every Monday.
+          [ -f docs/data/ebay_prices.json ] || { echo "no bands file yet (no keys)"; exit 0; }
           git diff --quiet docs/data/ebay_prices.json 2>/dev/null && [ -z "$(git status --porcelain docs/data/ebay_prices.json)" ] && { echo "nothing to commit"; exit 0; }
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

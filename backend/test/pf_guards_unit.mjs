@@ -148,6 +148,9 @@ function cardEndActionsHtml() { return ''; }
 function notableTrimBadgeHtml() { return ''; }
 function pfRenderTiles() {}
 function pfRevealResults() {}
+// The radius-first loader's "cars around the centre still loading?" (2026-11-18): all in here.
+function invViewPending() { return false; }
+var _pfAwaitShards = false;
 var ICON = { bell: '' };
 function freeDeliveryNote() { return ''; }
 function proBoxHtml() { return ''; }
