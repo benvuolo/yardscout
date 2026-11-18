@@ -28,7 +28,8 @@
  *
  * It reuses the Monday email's machinery (recap_signup.js): the same
  * confirmation-token scheme, link lifetime and reuse window, per-address and
- * per-IP limits (one shared per-IP bucket), the same signed browser token
+ * per-IP limits (sign-ups share the Monday email's per-IP sign-up bucket; a
+ * car change has its own, IP_ADDS_PER_HOUR), the same signed browser token
  * (so an address confirmed for the Monday email in this browser needs no
  * second confirmation email), masked addresses in logs, a reply that never
  * says whether an address was already in.
@@ -58,7 +59,7 @@ import { entActive } from './email_alerts.js';
 import {
   sanitizeRecapWatch, watchLabel, maskEmail, postalLine, recapSig, recapSubToken, emailFromSubToken,
   b64u, apiBase, appUrl, esc, page, EMAIL_RE,
-  CONFIRM_TTL_MS, CONFIRM_REUSE_MS, CONFIRMS_PER_DAY, IP_SIGNUPS_PER_HOUR,
+  CONFIRM_TTL_MS, CONFIRM_REUSE_MS, CONFIRMS_PER_DAY, IP_SIGNUPS_PER_HOUR, IP_ADDS_PER_HOUR,
 } from './recap_signup.js';
 
 /** The free tier's distance: the free instant push's own constant. */
@@ -221,7 +222,7 @@ export async function handleFreeAlertSignup(req, env, ip) {
   // email's "add"). A sign-up shares the Monday email's per-IP sign-up bucket.
   const proved = !!(body && body.sub) && EMAIL_RE.test(email) && (await emailFromSubToken(env, body.sub)) === email;
   const allowed = proved
-    ? rateLimit('falert:chg:ip:' + ip, IP_SIGNUPS_PER_HOUR * 4, 3600_000)
+    ? rateLimit('falert:chg:ip:' + ip, IP_ADDS_PER_HOUR, 3600_000)
     : rateLimit('recap:ip:' + ip, IP_SIGNUPS_PER_HOUR, 3600_000);
   if (!allowed) return err(429, 'rate_limited', 'Too many sign-ups from this network. Try again later.');
   if (!EMAIL_RE.test(email) || email.length > 254) return err(400, 'bad_email', 'Enter a valid email address.');
