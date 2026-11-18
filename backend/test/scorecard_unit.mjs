@@ -388,6 +388,65 @@ function d1(db) {
   });
   return { prepare: (sql) => wrap(sql), batch: async (stmts) => Promise.all(stmts.map((st) => st.all())) };
 }
+/* ---------- the alert card and the free emailed alert: one line each (2026-11-18) ---------- */
+{
+  const T = '2026-11-26';   // this week = Nov 19–25
+  const both = [...pres([...CUR, ...PRI], 'web'), ...pres(CUR, 'ios')];
+  const rowsF = [
+    R('2026-11-20', 'alert-card-shown', 30), R('2026-11-21', 'alert-card-shown', 12, { p: 'ios' }), R('2026-11-20', 'alert-card', 4),
+    R('2026-11-22', 'alert-card', 1, { p: 'ios' }), R('2026-11-23', 'alert-card-x', 6), R('2026-11-14', 'alert-card-shown', 99),   // last week: not in the line
+    R('2026-11-20', 'free-alert-shown', 40), R('2026-11-21', 'free-alert-asked', 6, { src: 'reddit' }), R('2026-11-22', 'free-alert-confirmed', 4),
+    R('2026-11-24', 'free-alert-first-email', 2), R('2026-11-20', 'free-alert-asked', 5, { p: 'ios' }),   // not web: ignored
+    R('2026-11-15', 'free-alert-shown', 7),   // last week: counting is older than this week, so no start note
+  ];
+  const F = computeScorecard({ today: T, rows: rowsF, presence: both, v2: { web: '2026-11-01' }, subs: { apple: 0, google: 0, web: 0 } });
+  const tl = scorecardTextLines(F);
+  const i2 = tl.findIndex((l) => l.startsWith('  2. ')), i3 = tl.findIndex((l) => l.startsWith('  3. ')), i4 = tl.findIndex((l) => l.startsWith('  4. '));
+  const card = tl.find((l) => l.includes('alert card in the Cars feed:')), fa = tl.find((l) => l.includes('free email alert (website):'));
+  check('alert card line: this week, all platforms summed (shown 30 + 12, used 4 + 1, dismissed 6)',
+    card === '     alert card in the Cars feed: shown 42 → "Set an alert" 5 · dismissed 6', card);
+  check('alert card line sits under item 2 (watches created)', tl.indexOf(card) > i2 && tl.indexOf(card) < i3, JSON.stringify([i2, tl.indexOf(card), i3]));
+  check('free alert line: website only, across links (offered 40 → 6 → 4 → 2)',
+    fa === '     free email alert (website): offered 40 → gave an address 6 → confirmed 4 → first email 2', fa);
+  check('free alert line sits under item 3 (the Monday email item)', tl.indexOf(fa) > i3 && tl.indexOf(fa) < i4);
+  const html = scorecardHtml(F, { esc: (x) => String(x).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'), C: { line: '#ddd', dim: '#666', accent: '#0B6477', ink: '#111' } });
+  check('both lines are in the HTML email too', html.includes('alert card in the Cars feed: shown 42 → &quot;Set an alert&quot; 5 · dismissed 6')
+    && html.includes('free email alert (website): offered 40 → gave an address 6 → confirmed 4 → first email 2'));
+  check('the existing Monday email line is still there', tl.some((l) => /^ {5}offered (\d+|no data) → gave an address/.test(l)));
+
+  // Counting started inside this week (the first counter on Nov 22).
+  const S = computeScorecard({ today: T, rows: [R('2026-11-22', 'free-alert-shown', 3), R('2026-11-23', 'alert-card-shown', 2)], presence: both, subs: null });
+  const sl = scorecardTextLines(S);
+  check('a first counter inside this week: "(counting started Nov 22)"', sl.some((l) => l.endsWith('free email alert (website): offered 3 → gave an address 0 → confirmed 0 → first email 0 (counting started Nov 22)')), sl.filter((l) => /free email/.test(l)).join('|'));
+  check('...each line its own start (alert card: Nov 23)', sl.some((l) => l.endsWith('(counting started Nov 23)') && l.includes('alert card')));
+  // Platforms reported, but none of these counters in either week.
+  const N = computeScorecard({ today: T, rows: [R('2026-11-20', 'first-visit', 5)], presence: both, subs: null });
+  const nl = scorecardTextLines(N);
+  check('reported, but none of these counters: "nothing counted yet", never a row of 0s',
+    nl.includes('     alert card in the Cars feed: nothing counted yet') && nl.includes('     free email alert (website): nothing counted yet'), nl.filter((l) => /alert/.test(l)).join('|'));
+  // Nothing reported at all: no data.
+  const Z = computeScorecard({ today: T, rows: [], presence: [], subs: null });
+  const zl = scorecardTextLines(Z);
+  check('nothing reported this week: "no data"', zl.includes('     alert card in the Cars feed: no data') && zl.includes('     free email alert (website): no data'), zl.filter((l) => /alert/.test(l)).join('|'));
+  // Counted last week only: the line is this week's, so 0 and no start note.
+  const P = computeScorecard({ today: T, rows: [R('2026-11-14', 'free-alert-shown', 9)], presence: both, subs: null });
+  check('counted last week only: this week\'s 0s, no start note', scorecardTextLines(P).includes('     free email alert (website): offered 0 → gave an address 0 → confirmed 0 → first email 0'));
+  // An events read error: the item shows the error, no stray lines.
+  check('an events read error adds neither line', !scorecardTextLines(computeScorecard({ today: T, eventsError: 'D1 down', subs: null })).some((l) => /alert card|free email alert/.test(l)));
+
+  // Read back from SQLite with every migration (the SQL lists the new counters).
+  const dbF = new DatabaseSync(':memory:');
+  const md = new URL('../migrations/', import.meta.url);
+  for (const f of readdirSync(md).filter((x) => x.endsWith('.sql')).sort()) dbF.exec(readFileSync(new URL(f, md), 'utf8'));
+  const insF = dbF.prepare('INSERT INTO events_daily (day, event, source, campaign, medium, platform, n) VALUES (?, ?, ?, ?, ?, ?, ?)');
+  for (const r of rowsF) insF.run(r.day, r.event, r.source, r.campaign, r.medium, r.platform, r.n);
+  for (const d of [...CUR, ...PRI]) insF.run(d, 'funnel-v2', '', '', '', 'web', 1);
+  for (const d of CUR) insF.run(d, 'funnel-v2', '', '', '', 'ios', 1);
+  const evF = await loadScorecardEvents({ DB: d1(dbF) }, T);
+  const tF = scorecardTextLines(computeScorecard({ today: T, ...evF, subs: null }));
+  check('D1: both lines read back the same from the counters table', tF.includes(card) && tF.includes(fa), tF.filter((l) => /alert/.test(l)).join('|'));
+}
+
 const db = new DatabaseSync(':memory:');
 const mdir = new URL('../migrations/', import.meta.url);
 for (const f of readdirSync(mdir).filter((x) => x.endsWith('.sql')).sort()) db.exec(readFileSync(new URL(f, mdir), 'utf8'));

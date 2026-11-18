@@ -1190,3 +1190,33 @@ results come" in both late cases, with the waiting line still on screen.
 `no_gate_e2e` 78, `pf_new_cats_e2e`, `part_finder_e2e.py`,
 `pf_ux_e2e.py`, `interchange_e2e.py`, `funnel_events_e2e`, all 23
 `*_unit.mjs`.
+
+### 4. The weekly scorecard: the alert card and the free emailed alert (`backend/src/scorecard.js`)
+
+Two lines, this week's counts only, in the style of item 3's "offered →
+gave an address → confirmed" line:
+- under item 2 (Watches created), every platform summed (the feed is the
+  same in the apps): `alert card in the Cars feed: shown 42 → "Set an
+  alert" 5 · dismissed 6`
+- under item 3 (Monday email sign-ups), website only:
+  `free email alert (website): offered 40 → gave an address 6 → confirmed
+  4 → first email 2`
+
+Honesty rules, as for the other lines: "no data" when no platform it
+exists on reported anything this week; "nothing counted yet" when
+platforms reported but none of these counters exists in either week (not a
+row of 0s); a first counter inside this week adds "(counting started Nov
+22)" (no counting-rules marker exists for these events, so the first
+counted day is the start). No week-on-week change on either line yet (both
+started on 11-16 and 11-17). The seven events are added to the one read
+the scorecard already makes (daily email and the admin route; no public
+request path).
+
+Test: `scorecard_unit.mjs` 169 (14 new: both lines, sums across
+platforms, web only for the free alert, placement under items 2 and 3, the
+HTML email, "counting started", "nothing counted yet", "no data", last week
+only, a read error, and the lines read back from SQLite with every
+migration). Against the scorecard before the change the new checks fail.
+
+Decision the owner may want to change: the free alert line sits under the
+Monday email item rather than as a sixth numbered item.
