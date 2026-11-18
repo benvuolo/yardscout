@@ -5730,9 +5730,9 @@
  },
  "input_issues": [],
  "inputs": {
-  "decodes": "/tmp/claude-0/-home-user-yardscout/b5cad117-18a8-5e8f-a13e-4df8e5afbeaf/scratchpad/decodes_a85c654.json.gz",
+  "decodes": "main@a85c654 docs/data/vin_decodes.json.gz",
   "decodes_sha256": "1357625b4429eaf936acafb234b64efb383abdbdcfbbe5ba84b3518139a32fc4",
-  "inventory": "/tmp/claude-0/-home-user-yardscout/b5cad117-18a8-5e8f-a13e-4df8e5afbeaf/scratchpad/inventory_a85c654.json",
+  "inventory": "main@a85c654 docs/data/inventory_live.json",
   "inventory_sha256": "1a9cfa73e9c15e41809e1149c2e752504e797efd91c18de4668df454364ce1d6"
  },
  "lint": [],
@@ -180621,16 +180621,6 @@
   },
   {
    "cat": "bumper-front",
-   "detail": "Infiniti FX35 2009-2012;Infiniti FX50 2009-2011",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L1536"
-   ],
-   "pn": "FBM22-1CA0H",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "bumper-front",
    "detail": "Infiniti FX35 2009-2012;Infiniti FX50 2009-2012",
    "evidence": [
     "www.infinitipartsdeal.com:records:L1537"
@@ -180651,6 +180641,16 @@
   },
   {
    "cat": "bumper-front",
+   "detail": "Infiniti FX50 2010: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L1536"
+   ],
+   "pn": "FBM22-1CA0H",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "bumper-front",
    "detail": "Infiniti G25 2011-2012;Infiniti Q40 2015-2015",
    "evidence": [
     "www.infinitipartsdeal.com:records:L1083"
@@ -180666,16 +180666,6 @@
     "www.infinitipartsdeal.com:records:L1084"
    ],
    "pn": "62022-1NF0H",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "bumper-front",
-   "detail": "Infiniti M35h 2012-2013;Infiniti M37 2011-2013;Infiniti M56 2011-2013;Infiniti Q70 2014-2015;Infiniti Q70L 2015-2015",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L1658"
-   ],
-   "pn": "62022-1MA0H",
    "reason": "held_exterior_cross_model",
    "t": null
   },
@@ -180740,6 +180730,16 @@
    "t": null
   },
   {
+   "cat": "bumper-front",
+   "detail": "M37 2011: 4WD only; M56 2011: 4WD only; Q70: gas only",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L1658"
+   ],
+   "pn": "62022-1MA0H",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
    "cat": "bumper-rear",
    "detail": "Infiniti EX35 2008-2012;Infiniti EX37 2013-2013;Infiniti QX50 2014-2016",
    "evidence": [
@@ -180761,22 +180761,22 @@
   },
   {
    "cat": "bumper-rear",
-   "detail": "Infiniti FX35 2009-2012;Infiniti FX37 2013-2013;Infiniti FX50 2009-2011;Infiniti QX70 2014-2017",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L1539"
-   ],
-   "pn": "HEM22-1CA0H",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "bumper-rear",
    "detail": "Infiniti FX35 2009-2012;Infiniti FX37 2013-2013;Infiniti FX50 2009-2013;Infiniti QX70 2014-2017",
    "evidence": [
     "www.infinitipartsdeal.com:records:L1538"
    ],
    "pn": "HEM22-1CH0H",
    "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "bumper-rear",
+   "detail": "Infiniti FX50 2010: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L1539"
+   ],
+   "pn": "HEM22-1CA0H",
+   "reason": "held_engine_conflict",
    "t": null
   },
   {
@@ -180847,6 +180847,16 @@
    ],
    "pn": "85022-3ZD0H",
    "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "climate-control",
+   "detail": "Frontier 2008: 2.5L only; Pathfinder 2007-2009: 4.0L only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L323"
+   ],
+   "pn": "27510-EA000",
+   "reason": "held_drive_qualifier",
    "t": null
   },
   {
@@ -182080,6 +182090,366 @@
   },
   {
    "cat": "gauge-cluster",
+   "detail": "Frontier 1999: 3.3L only; Frontier 2001: 3.3L only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L3336"
+   ],
+   "pn": "24820-7Z100",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier 1999: 3.3L only; Frontier 2001: 3.3L only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L3337"
+   ],
+   "pn": "24820-9Z000",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier 2000: 2.4L, manual only; Frontier 2001-2002: 3.3L, manual only; Xterra: manual only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L3329"
+   ],
+   "pn": "24810-9Z475",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier 2000: 2WD, 2.4L, automatic only; Frontier 2001-2002: 2WD, 3.3L, automatic only; Xterra: 2WD, automatic only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L3324"
+   ],
+   "pn": "24810-9Z481",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier 2000: 2WD, automatic only; Frontier 2001-2002: 2WD, 3.3L, automatic only; Xterra: 2WD, automatic only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L3331"
+   ],
+   "pn": "24810-9Z479",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier 2000: 4WD, 2.4L, automatic only; Frontier 2001-2002: 3.3L only; Xterra 2000: 4WD, automatic only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L3330"
+   ],
+   "pn": "24810-9Z477",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier 2000: 4WD, 2.4L, automatic only; Frontier 2001-2002: 3.3L only; Xterra 2000: 4WD, automatic only; Xterra 2001-2002: 3.3L only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L3328"
+   ],
+   "pn": "24810-9Z473",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier 2000: manual only; Frontier 2001-2002: 3.3L, manual only; Xterra: 3.3L, manual only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L3325"
+   ],
+   "pn": "24810-9Z471",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier 2011: 4.0L, manual only; Frontier 2012: manual only; Xterra: manual only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4795"
+   ],
+   "pn": "24810-9BD4C",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier 2011: 4WD, 4.0L, automatic only; Frontier 2012: 4WD, automatic only; Xterra: automatic only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4794"
+   ],
+   "pn": "24810-9BD1B",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier: 2WD, 4.0L only; Pathfinder: 2WD only; Xterra: 2WD only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2188"
+   ],
+   "pn": "24810-ZL81A",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier: 2WD, 4.0L only; Pathfinder: 2WD only; Xterra: 2WD only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2194"
+   ],
+   "pn": "24810-ZL99B",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier: 2WD, 4.0L, automatic only; Xterra: 2WD only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2187"
+   ],
+   "pn": "24810-ZL80E",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier: 2WD, 4.0L, automatic only; Xterra: 2WD only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2192"
+   ],
+   "pn": "24810-ZL96C",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier: 2WD, 4.0L, automatic only; Xterra: 2WD, automatic only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L3544"
+   ],
+   "pn": "24810-EA21E",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier: 2WD, 4.0L, manual only; Xterra: 2WD, manual only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2184"
+   ],
+   "pn": "24810-ZL80B",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier: 2WD, 4.0L, manual only; Xterra: 2WD, manual only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2190"
+   ],
+   "pn": "24810-ZL96A",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier: 2WD, 4.0L, manual only; Xterra: 2WD, manual only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L3518"
+   ],
+   "pn": "24810-EA01D",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier: 2WD, 4.0L, manual only; Xterra: 2WD, manual only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L3522"
+   ],
+   "pn": "24810-EA02D",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier: 4WD, 3.3L only; Xterra 2003: 4WD only; Xterra 2004: 4WD, automatic only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2152"
+   ],
+   "pn": "24810-2Z710",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier: 4WD, 3.3L only; Xterra 2003: 4WD, 3.3L only; Xterra 2004: 4WD, 3.3L, automatic only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2157"
+   ],
+   "pn": "24810-ZD210",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier: 4WD, 4.0L only; Pathfinder: 4WD only; Xterra: 4WD only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2186"
+   ],
+   "pn": "24810-ZL80D",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier: 4WD, 4.0L only; Pathfinder: 4WD only; Xterra: 4WD only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2193"
+   ],
+   "pn": "24810-ZL99A",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier: 4WD, 4.0L only; Pathfinder: 4WD only; Xterra: 4WD only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2198"
+   ],
+   "pn": "24810-ZS42D",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier: 4WD, 4.0L only; Pathfinder: 4WD only; Xterra: 4WD only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2720"
+   ],
+   "pn": "24810-EA48C",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier: 4WD, 4.0L only; Pathfinder: 4WD only; Xterra: 4WD only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2729"
+   ],
+   "pn": "24810-ZP67A",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier: 4WD, 4.0L, automatic only; Xterra: 4WD, automatic only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L3533"
+   ],
+   "pn": "24810-EA12D",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier: 4WD, 4.0L, manual only; Xterra: 4WD, manual only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2183"
+   ],
+   "pn": "24810-ZL80A",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier: 4WD, 4.0L, manual only; Xterra: 4WD, manual only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2189"
+   ],
+   "pn": "24810-ZL95E",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier: 4WD, 4.0L, manual only; Xterra: 4WD, manual only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L3524"
+   ],
+   "pn": "24810-EA03C",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier: 4WD, 4.0L, manual only; Xterra: manual only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L2180"
+   ],
+   "pn": "24810-9BA4D",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Frontier: 4WD, manual only; Xterra: 4WD, automatic only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L4796"
+   ],
+   "pn": "24810-9BD4D",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Infiniti M35 2008: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L1154"
+   ],
+   "pn": "24820-EJ20A",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Infiniti M35 2008: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L1155"
+   ],
+   "pn": "24820-EJ20B",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Infiniti M35 2008: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L1703"
+   ],
+   "pn": "24820-EJ70A",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
+   "detail": "Infiniti M35 2008: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L1704"
+   ],
+   "pn": "24820-EJ70B",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "gauge-cluster",
    "detail": "records disagree on fitment",
    "evidence": [
     "www.infinitipartsdeal.com:records:L1385",
@@ -182232,16 +182602,6 @@
   },
   {
    "cat": "grille",
-   "detail": "Infiniti M35h 2012-2013;Infiniti M37 2011-2013;Infiniti M56 2011-2013;Infiniti Q70 2014-2015;Infiniti Q70L 2015-2015",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L1662"
-   ],
-   "pn": "62310-1MA0B",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "grille",
    "detail": "Infiniti M37 2011-2013;Infiniti M56 2011-2013;Infiniti Q70 2014-2015;Infiniti Q70L 2015-2015",
    "evidence": [
     "www.infinitipartsdeal.com:records:L1661"
@@ -182278,6 +182638,16 @@
    ],
    "pn": "62310-4AM1B",
    "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "grille",
+   "detail": "M37 2011: 4WD only; M56 2011: 4WD only; Q70: gas only",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L1662"
+   ],
+   "pn": "62310-1MA0B",
+   "reason": "held_drive_qualifier",
    "t": null
   },
   {
@@ -183430,29 +183800,9 @@
    "cat": "headlights",
    "detail": "Infiniti FX35 2005-2006;Infiniti FX45 2005-2006",
    "evidence": [
-    "www.infinitipartsdeal.com:records:L173"
-   ],
-   "pn": "26060-CG01A",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
-   "detail": "Infiniti FX35 2005-2006;Infiniti FX45 2005-2006",
-   "evidence": [
     "www.infinitipartsdeal.com:records:L175"
    ],
    "pn": "26060-CL01A",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
-   "detail": "Infiniti FX35 2005-2006;Infiniti FX45 2005-2006",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L177"
-   ],
-   "pn": "26010-CG01A",
    "reason": "held_exterior_cross_model",
    "t": null
   },
@@ -183528,26 +183878,6 @@
   },
   {
    "cat": "headlights",
-   "detail": "Infiniti FX35 2009-2012;Infiniti FX50 2009-2012",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L229"
-   ],
-   "pn": "26060-1CA0C",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
-   "detail": "Infiniti FX35 2009-2012;Infiniti FX50 2009-2012",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L238"
-   ],
-   "pn": "26010-1CA0C",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
    "detail": "Infiniti FX35 2010-2012;Infiniti FX37 2013-2013;Infiniti FX50 2010-2013;Infiniti QX70 2014-2016",
    "evidence": [
     "www.infinitipartsdeal.com:records:L230"
@@ -183568,42 +183898,82 @@
   },
   {
    "cat": "headlights",
-   "detail": "Infiniti FX35 2011-2012;Infiniti FX37 2013-2013;Infiniti FX50 2011-2013;Infiniti QX70 2014-2016",
+   "detail": "Infiniti FX45 2005: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L173"
+   ],
+   "pn": "26060-CG01A",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "headlights",
+   "detail": "Infiniti FX45 2005: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L177"
+   ],
+   "pn": "26010-CG01A",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "headlights",
+   "detail": "Infiniti FX50 2009: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L229"
+   ],
+   "pn": "26060-1CA0C",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "headlights",
+   "detail": "Infiniti FX50 2009: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L238"
+   ],
+   "pn": "26010-1CA0C",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "headlights",
+   "detail": "Infiniti FX50 2012: engine limit excludes the model's only engine",
    "evidence": [
     "www.infinitipartsdeal.com:records:L236"
    ],
    "pn": "26060-1CF0E",
-   "reason": "held_exterior_cross_model",
+   "reason": "held_engine_conflict",
    "t": null
   },
   {
    "cat": "headlights",
-   "detail": "Infiniti FX35 2011-2012;Infiniti FX37 2013-2013;Infiniti FX50 2011-2013;Infiniti QX70 2014-2016",
+   "detail": "Infiniti FX50 2012: engine limit excludes the model's only engine",
    "evidence": [
     "www.infinitipartsdeal.com:records:L244"
    ],
    "pn": "26010-1CF0E",
-   "reason": "held_exterior_cross_model",
+   "reason": "held_engine_conflict",
    "t": null
   },
   {
    "cat": "headlights",
-   "detail": "Infiniti FX35 2012-2012;Infiniti FX37 2013-2013;Infiniti FX50 2012-2013;Infiniti QX70 2014-2016",
+   "detail": "Infiniti FX50 2013: engine limit excludes the model's only engine",
    "evidence": [
     "www.infinitipartsdeal.com:records:L232"
    ],
    "pn": "26060-1CE0E",
-   "reason": "held_exterior_cross_model",
+   "reason": "held_engine_conflict",
    "t": null
   },
   {
    "cat": "headlights",
-   "detail": "Infiniti FX35 2012-2012;Infiniti FX37 2013-2013;Infiniti FX50 2012-2013;Infiniti QX70 2014-2016",
+   "detail": "Infiniti FX50 2013: engine limit excludes the model's only engine",
    "evidence": [
     "www.infinitipartsdeal.com:records:L240"
    ],
    "pn": "26010-1CE0E",
-   "reason": "held_exterior_cross_model",
+   "reason": "held_engine_conflict",
    "t": null
   },
   {
@@ -183688,26 +184058,6 @@
   },
   {
    "cat": "headlights",
-   "detail": "Infiniti M35 2006-2008;Infiniti M45 2006-2008",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L290"
-   ],
-   "pn": "26060-EH126",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
-   "detail": "Infiniti M35 2006-2008;Infiniti M45 2006-2008",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L294"
-   ],
-   "pn": "26010-EH126",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "headlights",
    "detail": "Infiniti M35 2007-2009;Infiniti M45 2007-2009",
    "evidence": [
     "www.infinitipartsdeal.com:records:L2184"
@@ -183728,42 +184078,62 @@
   },
   {
    "cat": "headlights",
-   "detail": "Infiniti M35 2007-2010;Infiniti M45 2007-2010",
+   "detail": "Infiniti M35 2007: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L290"
+   ],
+   "pn": "26060-EH126",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "headlights",
+   "detail": "Infiniti M35 2007: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L294"
+   ],
+   "pn": "26010-EH126",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "headlights",
+   "detail": "Infiniti M35 2007: engine limit excludes the model's only engine",
    "evidence": [
     "www.infinitipartsdeal.com:records:L895"
    ],
    "pn": "26060-EH20D",
-   "reason": "held_exterior_cross_model",
+   "reason": "held_engine_conflict",
    "t": null
   },
   {
    "cat": "headlights",
-   "detail": "Infiniti M35 2007-2010;Infiniti M45 2007-2010",
+   "detail": "Infiniti M35 2007: engine limit excludes the model's only engine",
    "evidence": [
     "www.infinitipartsdeal.com:records:L897"
    ],
    "pn": "26010-EH20D",
-   "reason": "held_exterior_cross_model",
+   "reason": "held_engine_conflict",
    "t": null
   },
   {
    "cat": "headlights",
-   "detail": "Infiniti M35 2008-2010;Infiniti M45 2008-2010",
+   "detail": "Infiniti M35 2008: engine limit excludes the model's only engine",
    "evidence": [
     "www.infinitipartsdeal.com:records:L894"
    ],
    "pn": "26060-EH10E",
-   "reason": "held_exterior_cross_model",
+   "reason": "held_engine_conflict",
    "t": null
   },
   {
    "cat": "headlights",
-   "detail": "Infiniti M35 2008-2010;Infiniti M45 2008-2010",
+   "detail": "Infiniti M35 2008: engine limit excludes the model's only engine",
    "evidence": [
     "www.infinitipartsdeal.com:records:L896"
    ],
    "pn": "26010-EH10E",
-   "reason": "held_exterior_cross_model",
+   "reason": "held_engine_conflict",
    "t": null
   },
   {
@@ -184878,16 +185248,6 @@
   },
   {
    "cat": "liftgate",
-   "detail": "Infiniti FX35 2009-2011;Infiniti FX50 2009-2010",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L1541"
-   ],
-   "pn": "KMA00-1CB0A",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "liftgate",
    "detail": "Infiniti FX35 2009-2011;Infiniti FX50 2009-2011",
    "evidence": [
     "www.infinitipartsdeal.com:records:L1542"
@@ -184904,6 +185264,16 @@
    ],
    "pn": "KMA00-1CB1B",
    "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "liftgate",
+   "detail": "Infiniti FX50 2009: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L1541"
+   ],
+   "pn": "KMA00-1CB0A",
+   "reason": "held_engine_conflict",
    "t": null
   },
   {
@@ -185129,6 +185499,146 @@
    ],
    "pn": "21460-1L015",
    "reason": "disputed_class",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "Frontier 2002-2004: 3.3L only; Xterra 2001-2004: 3.3L only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L261"
+   ],
+   "pn": "96302-3S510",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "Frontier 2003-2004: 3.3L only; Xterra 2001-2004: 3.3L only",
+   "evidence": [
+    "www.nissanpartsdeal.com:records:L265"
+   ],
+   "pn": "96301-3S510",
+   "reason": "held_drive_qualifier",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "Infiniti FX35 2003: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L191"
+   ],
+   "pn": "96302-CG200",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "Infiniti FX35 2003: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L192"
+   ],
+   "pn": "96302-CG205",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "Infiniti FX35 2003: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L199"
+   ],
+   "pn": "96301-CG200",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "Infiniti FX35 2003: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L200"
+   ],
+   "pn": "96301-CG205",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "Infiniti FX35 2005: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L193"
+   ],
+   "pn": "96302-CL20A",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "Infiniti FX35 2005: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L194"
+   ],
+   "pn": "96302-CL21A",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "Infiniti FX35 2005: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L201"
+   ],
+   "pn": "96301-CL20A",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "Infiniti FX35 2005: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L202"
+   ],
+   "pn": "96301-CL21A",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "Infiniti FX35 2006: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L203"
+   ],
+   "pn": "96301-CL70A",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "Infiniti FX35 2006: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L204"
+   ],
+   "pn": "96301-CL80A",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "Infiniti FX45 2006: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L195"
+   ],
+   "pn": "96302-CL70A",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "side-mirrors",
+   "detail": "Infiniti FX45 2006: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L196"
+   ],
+   "pn": "96302-CL80A",
+   "reason": "held_engine_conflict",
    "t": null
   },
   {
@@ -185913,29 +186423,9 @@
    "cat": "tail-lights",
    "detail": "Infiniti FX35 2005-2006;Infiniti FX45 2005-2006",
    "evidence": [
-    "www.infinitipartsdeal.com:records:L181"
-   ],
-   "pn": "26555-CG00A",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "tail-lights",
-   "detail": "Infiniti FX35 2005-2006;Infiniti FX45 2005-2006",
-   "evidence": [
     "www.infinitipartsdeal.com:records:L183"
    ],
    "pn": "26555-CL00A",
-   "reason": "held_exterior_cross_model",
-   "t": null
-  },
-  {
-   "cat": "tail-lights",
-   "detail": "Infiniti FX35 2005-2006;Infiniti FX45 2005-2006",
-   "evidence": [
-    "www.infinitipartsdeal.com:records:L185"
-   ],
-   "pn": "26550-CG00A",
    "reason": "held_exterior_cross_model",
    "t": null
   },
@@ -185997,6 +186487,26 @@
    ],
    "pn": "26550-1CA0A",
    "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Infiniti FX45 2005: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L181"
+   ],
+   "pn": "26555-CG00A",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "tail-lights",
+   "detail": "Infiniti FX45 2005: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L185"
+   ],
+   "pn": "26550-CG00A",
+   "reason": "held_engine_conflict",
    "t": null
   },
   {
@@ -186536,6 +187046,66 @@
    ],
    "pn": "H4300-1A50A",
    "reason": "held_exterior_cross_model",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "Infiniti FX35 2003: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L211"
+   ],
+   "pn": "82721-CG000",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "Infiniti FX35 2003: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L212"
+   ],
+   "pn": "82720-CG000",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "Infiniti FX45 2005: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L207"
+   ],
+   "pn": "82731-CG000",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "Infiniti FX45 2005: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L209"
+   ],
+   "pn": "82730-CG000",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "Infiniti FX45 2006: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L640"
+   ],
+   "pn": "82731-CM80A",
+   "reason": "held_engine_conflict",
+   "t": null
+  },
+  {
+   "cat": "window-regulator",
+   "detail": "Infiniti FX45 2006: engine limit excludes the model's only engine",
+   "evidence": [
+    "www.infinitipartsdeal.com:records:L641"
+   ],
+   "pn": "82730-CM80A",
+   "reason": "held_engine_conflict",
    "t": null
   },
   {
@@ -187343,21 +187913,22 @@
   "likely_app_years_body_mixed": {
    "bumper-front": 61,
    "bumper-rear": 58,
-   "climate-control": 13,
-   "door-front": 78,
+   "climate-control": 21,
+   "door-front": 84,
    "door-rear": 37,
-   "fender": 66,
-   "gauge-cluster": 126,
+   "fender": 74,
+   "gauge-cluster": 138,
    "grille": 33,
-   "headlights": 106,
-   "hood": 24,
-   "liftgate": 4,
-   "side-mirrors": 168,
-   "tail-lights": 62,
-   "trunk-lid": 58,
-   "window-regulator": 367,
-   "wiper-motor": 18
+   "headlights": 122,
+   "hood": 27,
+   "liftgate": 6,
+   "side-mirrors": 185,
+   "tail-lights": 76,
+   "trunk-lid": 65,
+   "window-regulator": 402,
+   "wiper-motor": 20
   },
+  "likely_app_years_drive_ambiguous": {},
   "likely_app_years_engine_conflict": {
    "climate-control": 2,
    "door-front": 2,
@@ -187381,7 +187952,7 @@
    "door-front": 1050,
    "door-rear": 856,
    "fender": 907,
-   "gauge-cluster": 2829,
+   "gauge-cluster": 2833,
    "grille": 592,
    "headlights": 1462,
    "hood": 352,
@@ -187394,7 +187965,24 @@
    "window-regulator": 1950,
    "wiper-motor": 799
   },
-  "likely_groups": 346,
+  "likely_groups": 286,
+  "likely_groups_drive_noted": {
+   "bumper-front": 5,
+   "bumper-rear": 4,
+   "climate-control": 6,
+   "door-front": 7,
+   "door-rear": 6,
+   "fender": 2,
+   "gauge-cluster": 69,
+   "grille": 8,
+   "headlights": 16,
+   "hood": 2,
+   "liftgate": 2,
+   "side-mirrors": 21,
+   "tail-lights": 8,
+   "trunk-lid": 3,
+   "window-regulator": 35
+  },
   "list_rows": 75222,
   "records": 7778,
   "released_by_allowlist": 0,
@@ -188107,9 +188695,9 @@
   "F/AIR CONDITIONER LESS": 4,
   "F/AIR CONDITIONER-AUTO": 5,
   "F/AIR CONDITIONER-STD TYPE": 24,
-  "F/AIR SPOILER": 6,
+  "F/AIR SPOILER": 8,
   "F/AIR SPOILER / F/TOURING": 1,
-  "F/AIR SPOILER / JPA MAKE F/AIR SPOILER": 1,
+  "F/AIR SPOILER / JPA MAKE F/AIR SPOILER": 2,
   "F/ANALOG": 3,
   "F/ANTI SKID CONT-4WHL": 4,
   "F/ANTI SKID CONT-4WHL / F/ANTI SKID F/ANTI SKID CONT-4WHL": 2,
@@ -188223,10 +188811,11 @@
   "J/GA16DE. STD. (J/MT. F5 + J/AT. F4)": 2,
   "J/SR20DE": 4,
   "J/SR20DE. MT": 1,
-  "JAP MAKE": 4,
+  "JAP MAKE": 5,
   "JAP MAKE F/AIR CONDITIONER-STD TYPE": 2,
+  "JAP MAKE F/AIR SPOILER": 1,
   "JAPAN MAKE": 1,
-  "JPA MAKE": 2,
+  "JPA MAKE": 3,
   "JPN MAKE": 2,
   "JYOUNAN": 2,
   "KA24DE": 4,
@@ -188497,6 +189086,7 @@
   "Production Date: 01/2016-10/2016": 4,
   "Production Date: 01/2016-11/2018": 1,
   "Production Date: 02/1985-07/1986": 1,
+  "Production Date: 02/1991-07/1992": 1,
   "Production Date: 02/1991-10/1992": 1,
   "Production Date: 02/1993-07/1994": 10,
   "Production Date: 02/1994-02/1997": 4,
@@ -189166,7 +189756,7 @@
   "Production Date: 10/2017-02/2018": 4,
   "Production Date: 11/1986-06/1989": 2,
   "Production Date: 11/1990-07/1992": 3,
-  "Production Date: 11/1990-09/1992": 1,
+  "Production Date: 11/1990-09/1992": 2,
   "Production Date: 11/1993-12/1995": 4,
   "Production Date: 11/1999-07/2000": 2,
   "Production Date: 11/2000-07/2001": 1,

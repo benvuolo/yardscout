@@ -1500,13 +1500,19 @@ class Curation:
                     fuel_drop = True
                     break
                 eng, tr = self.engine_trans_of(c, cat, T, gas_only=(fu == "gas"))
+                if eng == DRIVE_AMBIGUOUS:
+                    fuel_drop = "engine"
+                    break
                 labs += [x for x in (eng, tr) if x]
                 if fu:
                     labs.append(fu)
                 label_by_T[T] = ", ".join(labs)
             if fuel_drop:
-                self.refuse("held_fuel_conflict", cat=cat, pn=sorted(c.pns)[0],
-                            evidence=[r.pointer for r in c.records], detail="hybrid feed name, gas page only")
+                self.refuse("held_engine_conflict" if fuel_drop == "engine" else "held_fuel_conflict",
+                            cat=cat, pn=sorted(c.pns)[0], evidence=[r.pointer for r in c.records],
+                            detail=f"{T[0]} {T[1]} {T[2]}: " + ("engine limit excludes the model's only engine"
+                                                                  if fuel_drop == "engine" else
+                                                                  "hybrid feed name, gas page only"))
                 continue
             if cab:
                 text = f"{text}; {cab}"
@@ -1916,8 +1922,8 @@ class Curation:
             if k == c.key or not (set(m["slot"].slots) & mine) or self.comparable(cat, c.key, k):
                 continue
             sib = self.classes.get((k, cat))
-            if sib is None:
-                continue
+            if sib is None or sib.packaging != c.packaging:
+                continue        # a motor is no alternative to a bare regulator in the same door
             srows = self._own_rows(sib, cat, T)
             se = [_row_engine_trans(n, st)[0] for n, st, _v, _u in srows]
             if srows and all(e is not None for e in se):
@@ -1929,20 +1935,29 @@ class Curation:
 
     def _t_engines(self, T, cat, gas_only=False):
         """The displacements T comes in: the year page's engine list when it
-        has one (all parsed), else every engine a row on T's own pages in cat
-        names (2014 Q70 gauge clusters: VQ37VHR and VK56VD rows); None when
+        has one (all parsed), else every engine a row on T's own pages names,
+        in any category (2014 Q70 gauge clusters: VQ37VHR and VK56VD rows; the
+        2000 Xterra regulator page names VG33E only, its mirror page KA24DE
+        too); None when
         neither says. Hybrid keys are left out for a gas-only number."""
         keys = [k for k in self.engineu.get(T, ()) if not (gas_only and len(k) > 2 and k[2] == "hybrid")]
         if keys and self.engineu_src.get(T) == "year_page":
             if any(not isinstance(k[0], int) for k in keys):
                 return None
             return {round(k[1], 1) for k in keys}
-        page = set()
-        for lr in self.t_list_rows.get((T, cat), []):
-            page |= _row_engine_names(lr.notes, lr.site)
-        for r in self.t_seed_records.get((T, cat), []):
-            page |= _row_engine_names(r.note_texts, r.site)
-        return page or None
+        cache = self.__dict__.setdefault("_t_page_engines", {})
+        if T not in cache:
+            page = set()
+            for (t, _c), rows in self.t_list_rows.items():
+                if t == T:
+                    for lr in rows:
+                        page |= _row_engine_names(lr.notes, lr.site)
+            for (t, _c), recs in self.t_seed_records.items():
+                if t == T:
+                    for r in recs:
+                        page |= _row_engine_names(r.note_texts, r.site)
+            cache[T] = frozenset(page)
+        return set(cache[T]) or None
 
     def engine_trans_of(self, c, cat, T, gas_only=False):
         """(engine label, transmission label) the option column limits class c
@@ -1961,6 +1976,11 @@ class Curation:
             disp = _INFINITI_DISP.get(re.sub(r"\s+", "", str(T[1])).upper()) if T[0] == "Infiniti" else None
             if disp and round(disp / 10, 1) in E:
                 eng = ""
+            elif disp:
+                # the limit leaves out the only engine the name allows (FX45
+                # mirror 96301-CL21A: the sibling rule takes 4.5L away): the
+                # evidence contradicts itself for this vehicle-year
+                return DRIVE_AMBIGUOUS, ""
             elif U and U <= E:
                 eng = ""
             else:
@@ -2942,7 +2962,10 @@ def _row_names_body(notes, site: str) -> bool:
 # ------------------------------------------------ §5.16 drive rule (2026-11-18)
 # Drive classes. FOUR / TWO are the two families a yard car belongs to; a
 # restriction is material only when it leaves one family out.
-_FOUR = frozenset({"4wd", "awd"})
+# "a4wd": nissanpartsdeal's "AUTO" drive field (2006 Pathfinder clusters are
+# coded "W. 2WD", "W. 4WD" and "*W. AUTO" in the same field: All-Mode 4WD), a
+# four-wheel drive of its own, never the part-time 4WD's number
+_FOUR = frozenset({"4wd", "awd", "a4wd"})
 _TWO = frozenset({"2wd", "fwd", "rwd"})
 _DRIVE_ALL = _FOUR | _TWO
 _DB = r"(?<![A-Za-z0-9/])"           # "6-1/4x4-3/4" (a Mopar mirror glass size) is no drive
@@ -2999,10 +3022,13 @@ def _drive_allowed(pos: set, neg: set):
     return allowed
 
 
+_DRIVE_LABELS = {"4wd": "4WD", "awd": "AWD", "a4wd": "4WD AUTO"}
+
+
 def _drive_label(allowed) -> str:
     a = frozenset(allowed or ())
     if a and a <= _FOUR:
-        return "AWD" if a == {"awd"} else "4WD" if a == {"4wd"} else "4WD/AWD"
+        return "/".join(_DRIVE_LABELS[x] for x in ("4wd", "awd", "a4wd") if x in a)
     if a and a <= _TWO:
         return "FWD" if a == {"fwd"} else "RWD" if a == {"rwd"} else "2WD"
     return ""
@@ -3027,6 +3053,7 @@ def _mopar_codes(body: str) -> list:
             re.finditer(r"(?:^|,\s*)([A-Z0-9*]{1,4})\s+-\s+((?:(?!,\s*[A-Z0-9*]{1,4}\s+-\s).)*)", body)]
 
 
+_NISSAN_SITES = frozenset({"www.nissanpartsdeal.com", "www.infinitipartsdeal.com"})
 _MOPAR_LINE_RE = re.compile(r"\b(?:CHRYSLER|DODGE|JEEP|RAM|PLYMOUTH|FIAT|EAGLE|BRAND|DUTY)\b", re.I)
 
 
@@ -3038,6 +3065,8 @@ def _fvo_drive(body: str, site: str):
         for alt in _split_top_plus(body, ","):
             for part in _split_top_plus(alt, "+"):
                 pos, neg, _ = _drive_terms(part)
+                if site in _NISSAN_SITES and re.search(r"(?:^|\.)\s*\*?AUTO\s*(?:\.|$)", part):
+                    pos.add("a4wd")      # the drive field: 2WD / 4WD / AUTO
                 if not pos and not neg:
                     return None          # this configuration fits any drive
                 out.append(_drive_allowed(pos, neg))

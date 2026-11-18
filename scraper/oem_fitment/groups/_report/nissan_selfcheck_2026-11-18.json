@@ -1,0 +1,2468 @@
+{
+ "branch": "interchange/rules-1118",
+ "candidate": {
+  "before": 343,
+  "by_cat": {
+   "climate-control": 25,
+   "gauge-cluster": 55,
+   "side-mirrors": 80,
+   "window-regulator": 123
+  },
+  "likely": 286,
+  "shippable": 283
+ },
+ "census": "audit-style raw-token census of all shippable groups (drive, body, engine, transmission, hybrid page, rear-door cab codes vs the note): 0 unexplained suspects (22 flagged were Infiniti fixed-displacement names or a G37 2008 row listed on both its sedan and coupe pages)",
+ "date": "2026-11-18",
+ "earlier_draw_findings": [
+  "seed 61181118 on an intermediate build: P09 82731-CG000 and P12 96301-CL21A carried self-contradictory labels (\"FX45: 3.5L only\", \"FX35: 4.5L only\") from the sibling-engine rule; fixed: an engine limit that excludes an Infiniti fixed-name model's only engine refuses the group (held_engine_conflict, 41 groups).",
+  "same draw: siblings of another packaging (motor vs regulator) fed the sibling-engine rule; fixed.",
+  "same draw: 2000 Xterra regulator 82721-7Z005 got no engine note because only its regulator page was used as the engine universe; fixed: every category of the vehicle-year's own pages (\"Xterra 2000: 3.3L only\")."
+ ],
+ "pins": "inventory/decodes main@a85c654",
+ "raw": "57e8b5b99de0",
+ "residual_risk": [
+  "Production-date splits inside a model-year keep the generic note (96302-EV50A, 2008 M35 \"from 01/2008\"; the production rule keeps rows overlapping the model-year by 5+ months).",
+  "\"gas only\" on Q70 groups that also hold the M35h (the hybrid twin) under-claims for Q70 Hybrids.",
+  "Nissan \"*\" markers and trim codes are not decoded (generic option note)."
+ ],
+ "sample": {
+  "counts": {
+   "RIGHT": 59,
+   "RIGHT after fix": 1
+  },
+  "items": [
+   {
+    "apps": [
+     [
+      "Nissan",
+      "Frontier",
+      2010,
+      2013
+     ],
+     [
+      "Nissan",
+      "Pathfinder",
+      2011,
+      2012
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2010,
+      2014
+     ]
+    ],
+    "cat": "climate-control",
+    "item": "G01",
+    "note_on_draw": "Nissan catalog lists #27510-9CA0A for both \u2014 option: fits some option packages; Frontier: crew cab only; Pathfinder: 4.0L only; verify the number on the part",
+    "pn": [
+     "27510-9CA0A"
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Nissan",
+      "Altima",
+      1993,
+      1994
+     ],
+     [
+      "Nissan",
+      "Stanza",
+      1993,
+      1994
+     ]
+    ],
+    "cat": "climate-control",
+    "item": "G02",
+    "note_on_draw": "Nissan catalog lists #27515-1E400 for both \u2014 option: fits some option packages; verify the number on the part",
+    "pn": [
+     "27515-1E400"
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Nissan",
+      "Frontier",
+      2003,
+      2004
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2003,
+      2004
+     ]
+    ],
+    "cat": "climate-control",
+    "item": "G03",
+    "note_on_draw": "Nissan catalog lists #27510-ZD005 for both \u2014 option: fits some option packages; Frontier: crew cab only; verify the number on the part",
+    "pn": [
+     "27510-ZD005"
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Nissan",
+      "Pathfinder",
+      2008,
+      2009
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2008,
+      2009
+     ]
+    ],
+    "cat": "gauge-cluster",
+    "item": "G04",
+    "note_on_draw": "Nissan catalog lists #24810-ZS44D for both \u2014 option: fits some option packages; 2WD only; verify the number on the part",
+    "pn": [
+     "24810-ZS44D"
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Nissan",
+      "Pathfinder",
+      2006,
+      2008
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2006,
+      2007
+     ]
+    ],
+    "cat": "gauge-cluster",
+    "item": "G05",
+    "note_on_draw": "Nissan catalog lists #24810-EA67D for both \u2014 option: fits some option packages; 2WD only; verify the number on the part",
+    "pn": [
+     "24810-EA67D"
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Nissan",
+      "Pathfinder",
+      2006,
+      2007
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2006,
+      2007
+     ]
+    ],
+    "cat": "gauge-cluster",
+    "item": "G06",
+    "note_on_draw": "Nissan catalog lists #24810-EC44C for both \u2014 option: fits some option packages; Xterra: 4WD only; verify the number on the part",
+    "pn": [
+     "24810-EC44C"
+    ],
+    "verdict": "RIGHT after fix",
+    "why": "On the intermediate build the 2006-07 Pathfinder rows read \"*W. AUTO\" (the page codes its clusters W. 2WD / W. 4WD / *W. AUTO in one field: All-Mode 4WD) and the group said only \"option\". Fixed: the AUTO drive field is read; the note now says \"Pathfinder: 4WD AUTO only; Xterra: 4WD only\"."
+   },
+   {
+    "apps": [
+     [
+      "Nissan",
+      "Armada",
+      2005,
+      2006
+     ],
+     [
+      "Nissan",
+      "Titan",
+      2004,
+      2006
+     ]
+    ],
+    "cat": "gauge-cluster",
+    "item": "G07",
+    "note_on_draw": "Nissan catalog lists #24810-7S00E for both \u2014 option: fits some option packages; verify the number on the part",
+    "pn": [
+     "24810-7S00E"
+    ],
+    "verdict": "RIGHT",
+    "why": "Titan 2004-06 row \"*KC. (SE+ LE) + *CC. (SE+ LE)\" names no drive while 2WD-coded siblings share its production window; the \"*\" marker is not decoded. Covered only by the generic option note."
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "QX56",
+      2013,
+      2013
+     ],
+     [
+      "Infiniti",
+      "QX80",
+      2014,
+      2015
+     ]
+    ],
+    "cat": "gauge-cluster",
+    "item": "G08",
+    "note_on_draw": "Nissan catalog lists #24820-3ZD0C for both \u2014 option: fits some option packages; verify the number on the part",
+    "pn": [
+     "24820-3ZD0C"
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "M35",
+      2006,
+      2007
+     ],
+     [
+      "Infiniti",
+      "M45",
+      2006,
+      2007
+     ]
+    ],
+    "cat": "gauge-cluster",
+    "item": "G09",
+    "note_on_draw": "Nissan catalog lists #24820-EH101 for both \u2014 option: fits some option packages; verify the number on the part",
+    "pn": [
+     "24820-EH101"
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "M35h",
+      2012,
+      2013
+     ],
+     [
+      "Infiniti",
+      "M37",
+      2012,
+      2013
+     ],
+     [
+      "Infiniti",
+      "M56",
+      2012,
+      2013
+     ],
+     [
+      "Infiniti",
+      "Q70",
+      2014,
+      2014
+     ]
+    ],
+    "cat": "side-mirrors",
+    "item": "G10",
+    "note_on_draw": "Nissan catalog lists #K6301-1PM0B for both \u2014 option: fits some option packages; Q70: gas only; verify the number on the part",
+    "pn": [
+     "K6301-1PM0B"
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "FX35",
+      2009,
+      2012
+     ],
+     [
+      "Infiniti",
+      "FX37",
+      2013,
+      2013
+     ],
+     [
+      "Infiniti",
+      "FX50",
+      2009,
+      2010
+     ],
+     [
+      "Infiniti",
+      "QX70",
+      2014,
+      2017
+     ]
+    ],
+    "cat": "side-mirrors",
+    "item": "G11",
+    "note_on_draw": "Nissan catalog lists #96302-1CA0A for both \u2014 option: fits some option packages; verify the number on the part",
+    "pn": [
+     "96302-1CA0A"
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "M35h",
+      2012,
+      2013
+     ],
+     [
+      "Infiniti",
+      "M37",
+      2011,
+      2013
+     ],
+     [
+      "Infiniti",
+      "M56",
+      2011,
+      2013
+     ],
+     [
+      "Infiniti",
+      "Q70",
+      2014,
+      2014
+     ]
+    ],
+    "cat": "side-mirrors",
+    "item": "G12",
+    "note_on_draw": "Nissan catalog lists #K6301-1MA0B for both \u2014 option: fits some option packages; Q70: gas only; verify the number on the part",
+    "pn": [
+     "K6301-1MA0B"
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "FX35",
+      2009,
+      2012
+     ],
+     [
+      "Infiniti",
+      "FX37",
+      2013,
+      2013
+     ],
+     [
+      "Infiniti",
+      "FX50",
+      2009,
+      2010
+     ],
+     [
+      "Infiniti",
+      "QX70",
+      2014,
+      2017
+     ]
+    ],
+    "cat": "side-mirrors",
+    "item": "G13",
+    "note_on_draw": "Nissan catalog lists #96301-1CA0A for both \u2014 option: fits some option packages; verify the number on the part",
+    "pn": [
+     "96301-1CA0A"
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "M35h",
+      2012,
+      2013
+     ],
+     [
+      "Infiniti",
+      "M37",
+      2012,
+      2013
+     ],
+     [
+      "Infiniti",
+      "M56",
+      2012,
+      2013
+     ],
+     [
+      "Infiniti",
+      "Q70",
+      2014,
+      2014
+     ]
+    ],
+    "cat": "side-mirrors",
+    "item": "G14",
+    "note_on_draw": "Nissan catalog lists #K6302-1PM0B for both \u2014 option: fits some option packages; Q70: gas only; verify the number on the part",
+    "pn": [
+     "K6302-1PM0B"
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "M35h",
+      2012,
+      2013
+     ],
+     [
+      "Infiniti",
+      "M37",
+      2011,
+      2013
+     ],
+     [
+      "Infiniti",
+      "M56",
+      2011,
+      2013
+     ],
+     [
+      "Infiniti",
+      "Q70",
+      2014,
+      2014
+     ]
+    ],
+    "cat": "side-mirrors",
+    "item": "G15",
+    "note_on_draw": "Nissan catalog lists #K6302-1MA0B for both \u2014 option: fits some option packages; Q70: gas only; verify the number on the part",
+    "pn": [
+     "K6302-1MA0B"
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "EX35",
+      2011,
+      2012
+     ],
+     [
+      "Infiniti",
+      "EX37",
+      2013,
+      2013
+     ],
+     [
+      "Infiniti",
+      "QX50",
+      2014,
+      2015
+     ]
+    ],
+    "cat": "side-mirrors",
+    "item": "G16",
+    "note_on_draw": "Nissan catalog lists #96302-1BA3D for both \u2014 option: fits some option packages; verify the number on the part",
+    "pn": [
+     "96302-1BA3D"
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Nissan",
+      "Frontier",
+      1998,
+      2003
+     ],
+     [
+      "Nissan",
+      "Pathfinder",
+      1989,
+      1993
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2000,
+      2003
+     ]
+    ],
+    "cat": "side-mirrors",
+    "item": "G17",
+    "note_on_draw": "Nissan catalog lists #96301-S3800 for both \u2014 option: fits some option packages; Frontier 2003: 2.4L only; Xterra 2003: 2.4L only; verify the number on the part",
+    "pn": [
+     "96301-S3800"
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "M35h",
+      2012,
+      2013
+     ],
+     [
+      "Infiniti",
+      "M37",
+      2011,
+      2013
+     ],
+     [
+      "Infiniti",
+      "M56",
+      2011,
+      2013
+     ],
+     [
+      "Infiniti",
+      "Q70",
+      2014,
+      2017
+     ],
+     [
+      "Infiniti",
+      "Q70L",
+      2015,
+      2017
+     ],
+     [
+      "Infiniti",
+      "QX56",
+      2011,
+      2013
+     ],
+     [
+      "Infiniti",
+      "QX80",
+      2014,
+      2017
+     ]
+    ],
+    "cat": "window-regulator",
+    "item": "G18",
+    "note_on_draw": "Nissan catalog lists #82730-1MA0A for both \u2014 fits some configurations; Q70: gas only; verify the number on the part",
+    "pn": [
+     "82730-1MA0A"
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "M35h",
+      2012,
+      2013
+     ],
+     [
+      "Infiniti",
+      "M37",
+      2011,
+      2013
+     ],
+     [
+      "Infiniti",
+      "M56",
+      2011,
+      2013
+     ],
+     [
+      "Infiniti",
+      "Q70",
+      2014,
+      2017
+     ],
+     [
+      "Infiniti",
+      "Q70L",
+      2015,
+      2017
+     ],
+     [
+      "Infiniti",
+      "QX56",
+      2011,
+      2013
+     ],
+     [
+      "Infiniti",
+      "QX80",
+      2014,
+      2017
+     ]
+    ],
+    "cat": "window-regulator",
+    "item": "G19",
+    "note_on_draw": "Nissan catalog lists #82731-1MA0A for both \u2014 fits some configurations; Q70: gas only; verify the number on the part",
+    "pn": [
+     "82731-1MA0A"
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "M35h",
+      2012,
+      2013
+     ],
+     [
+      "Infiniti",
+      "M37",
+      2011,
+      2013
+     ],
+     [
+      "Infiniti",
+      "M56",
+      2011,
+      2013
+     ],
+     [
+      "Infiniti",
+      "Q70",
+      2014,
+      2015
+     ],
+     [
+      "Infiniti",
+      "Q70L",
+      2015,
+      2015
+     ]
+    ],
+    "cat": "window-regulator",
+    "item": "G20",
+    "note_on_draw": "Nissan catalog lists #80721-1MA0A for both \u2014 option: fits some option packages; Q70: gas only; verify the number on the part",
+    "pn": [
+     "80721-1MA0A"
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "M35h",
+      2012,
+      2013
+     ],
+     [
+      "Infiniti",
+      "M37",
+      2011,
+      2013
+     ],
+     [
+      "Infiniti",
+      "M56",
+      2011,
+      2013
+     ],
+     [
+      "Infiniti",
+      "Q70",
+      2014,
+      2015
+     ],
+     [
+      "Infiniti",
+      "Q70L",
+      2015,
+      2015
+     ]
+    ],
+    "cat": "window-regulator",
+    "item": "G21",
+    "note_on_draw": "Nissan catalog lists #80720-1MA0A for both \u2014 option: fits some option packages; Q70: gas only; verify the number on the part",
+    "pn": [
+     "80720-1MA0A"
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "M35h",
+      2012,
+      2013
+     ],
+     [
+      "Infiniti",
+      "M37",
+      2011,
+      2013
+     ],
+     [
+      "Infiniti",
+      "M56",
+      2011,
+      2013
+     ],
+     [
+      "Infiniti",
+      "Q70",
+      2014,
+      2019
+     ],
+     [
+      "Infiniti",
+      "Q70L",
+      2015,
+      2016
+     ],
+     [
+      "Infiniti",
+      "Q70L",
+      2018,
+      2019
+     ]
+    ],
+    "cat": "window-regulator",
+    "item": "G22",
+    "note_on_draw": "Nissan catalog lists #80730-1MA0A for both \u2014 fits some configurations; Q70 2014-2018: gas only; verify the number on the part",
+    "pn": [
+     "80730-1MA0A"
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "M35h",
+      2012,
+      2013
+     ],
+     [
+      "Infiniti",
+      "M37",
+      2011,
+      2013
+     ],
+     [
+      "Infiniti",
+      "M56",
+      2011,
+      2013
+     ],
+     [
+      "Infiniti",
+      "Q70",
+      2014,
+      2019
+     ],
+     [
+      "Infiniti",
+      "Q70L",
+      2015,
+      2016
+     ],
+     [
+      "Infiniti",
+      "Q70L",
+      2018,
+      2019
+     ]
+    ],
+    "cat": "window-regulator",
+    "item": "G23",
+    "note_on_draw": "Nissan catalog lists #80731-1MA0A for both \u2014 fits some configurations; Q70 2014-2018: gas only; verify the number on the part",
+    "pn": [
+     "80731-1MA0A"
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "FX35",
+      2010,
+      2012
+     ],
+     [
+      "Infiniti",
+      "FX37",
+      2013,
+      2013
+     ],
+     [
+      "Infiniti",
+      "FX50",
+      2010,
+      2013
+     ],
+     [
+      "Infiniti",
+      "QX70",
+      2014,
+      2015
+     ]
+    ],
+    "cat": "window-regulator",
+    "item": "G24",
+    "note_on_draw": "Nissan catalog lists #80721-1CA0B for both \u2014 fits some configurations; verify the number on the part",
+    "pn": [
+     "80721-1CA0B"
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "FX35",
+      2010,
+      2012
+     ],
+     [
+      "Infiniti",
+      "FX37",
+      2013,
+      2013
+     ],
+     [
+      "Infiniti",
+      "FX50",
+      2010,
+      2013
+     ],
+     [
+      "Infiniti",
+      "QX70",
+      2014,
+      2015
+     ]
+    ],
+    "cat": "window-regulator",
+    "item": "G25",
+    "note_on_draw": "Nissan catalog lists #80720-1CA0B for both \u2014 fits some configurations; verify the number on the part",
+    "pn": [
+     "80720-1CA0B"
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Nissan",
+      "Cube",
+      2011,
+      2014
+     ],
+     [
+      "Nissan",
+      "Juke",
+      2011,
+      2014
+     ],
+     [
+      "Nissan",
+      "Juke",
+      2016,
+      2016
+     ],
+     [
+      "Nissan",
+      "Leaf",
+      2011,
+      2012
+     ]
+    ],
+    "cat": "window-regulator",
+    "item": "G26",
+    "note_on_draw": "Nissan catalog lists #82731-CV01B for both \u2014 fits some configurations; verify the number on the part",
+    "pn": [
+     "82731-CV01B"
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "G25",
+      2011,
+      2012
+     ],
+     [
+      "Infiniti",
+      "G35",
+      2008,
+      2008
+     ],
+     [
+      "Infiniti",
+      "Q40",
+      2015,
+      2015
+     ]
+    ],
+    "cat": "window-regulator",
+    "item": "G27",
+    "note_on_draw": "Nissan catalog lists #82721-JK000 for both \u2014 fits some configurations; verify the number on the part",
+    "pn": [
+     "82721-JK000"
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "Q70",
+      2018,
+      2019
+     ],
+     [
+      "Infiniti",
+      "Q70L",
+      2018,
+      2019
+     ],
+     [
+      "Infiniti",
+      "QX80",
+      2018,
+      2019
+     ]
+    ],
+    "cat": "window-regulator",
+    "item": "G28",
+    "note_on_draw": "Nissan catalog lists #82731-1MA0B for both \u2014 fits some configurations; Q70 2018: gas only; verify the number on the part",
+    "pn": [
+     "82731-1MA0B"
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Nissan",
+      "Altima",
+      2014,
+      2018
+     ],
+     [
+      "Nissan",
+      "Maxima",
+      2016,
+      2019
+     ],
+     [
+      "Nissan",
+      "Sentra",
+      2014,
+      2017
+     ]
+    ],
+    "cat": "window-regulator",
+    "item": "G29",
+    "note_on_draw": "Nissan catalog lists #82731-3TA2A for both \u2014 fits some configurations; verify the number on the part",
+    "pn": [
+     "82731-3TA2A"
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "EX35",
+      2008,
+      2012
+     ],
+     [
+      "Infiniti",
+      "EX37",
+      2013,
+      2013
+     ],
+     [
+      "Infiniti",
+      "QX50",
+      2014,
+      2017
+     ]
+    ],
+    "cat": "window-regulator",
+    "item": "G30",
+    "note_on_draw": "Nissan catalog lists #82720-1BA0A for both \u2014 fits some configurations; verify the number on the part",
+    "pn": [
+     "82720-1BA0A"
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Nissan",
+      "Murano",
+      2015,
+      2019
+     ],
+     [
+      "Nissan",
+      "Rogue",
+      2014,
+      2019
+     ]
+    ],
+    "cat": "window-regulator",
+    "donor": [
+     "Nissan",
+     "Rogue",
+     2014
+    ],
+    "item": "P01",
+    "note_on_draw": "Nissan catalog lists #80730-4BA1A for both \u2014 fits some configurations; Murano 2016-2017: gas only; Rogue 2017-2019: gas only; verify the number on the part",
+    "pn": [
+     "80730-4BA1A"
+    ],
+    "seeker": [
+     "Nissan",
+     "Murano",
+     2016
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Nissan",
+      "Armada",
+      2005,
+      2015
+     ],
+     [
+      "Nissan",
+      "Titan",
+      2005,
+      2008
+     ]
+    ],
+    "cat": "side-mirrors",
+    "donor": [
+     "Nissan",
+     "Titan",
+     2008
+    ],
+    "item": "P02",
+    "note_on_draw": "Nissan catalog lists #96301-ZC20A for both \u2014 option: fits some option packages; verify the number on the part",
+    "pn": [
+     "96301-ZC20A"
+    ],
+    "seeker": [
+     "Nissan",
+     "Armada",
+     2010
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Nissan",
+      "Frontier",
+      2010,
+      2013
+     ],
+     [
+      "Nissan",
+      "Pathfinder",
+      2011,
+      2012
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2011,
+      2013
+     ]
+    ],
+    "cat": "window-regulator",
+    "donor": [
+     "Nissan",
+     "Frontier",
+     2013
+    ],
+    "item": "P03",
+    "note_on_draw": "Nissan catalog lists #80721-ZL90A for both \u2014 option: fits some option packages; verify the number on the part",
+    "pn": [
+     "80721-ZL90A"
+    ],
+    "seeker": [
+     "Nissan",
+     "Pathfinder",
+     2012
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Nissan",
+      "Altima",
+      1993,
+      1993
+     ],
+     [
+      "Nissan",
+      "Stanza",
+      1993,
+      1993
+     ]
+    ],
+    "cat": "window-regulator",
+    "donor": [
+     "Nissan",
+     "Altima",
+     1993
+    ],
+    "item": "P04",
+    "note_on_draw": "Nissan catalog lists #82720-0E700 for both \u2014 option: fits some option packages; verify the number on the part",
+    "pn": [
+     "82720-0E700"
+    ],
+    "seeker": [
+     "Nissan",
+     "Stanza",
+     1993
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "G25",
+      2011,
+      2012
+     ],
+     [
+      "Infiniti",
+      "Q40",
+      2015,
+      2015
+     ]
+    ],
+    "cat": "side-mirrors",
+    "donor": [
+     "Infiniti",
+     "Q40",
+     2015
+    ],
+    "item": "P05",
+    "note_on_draw": "Nissan catalog lists #96301-1NC2A for both \u2014 option: fits some option packages; verify the number on the part",
+    "pn": [
+     "96301-1NC2A"
+    ],
+    "seeker": [
+     "Infiniti",
+     "G25",
+     2012
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "Q70",
+      2015,
+      2019
+     ],
+     [
+      "Infiniti",
+      "Q70L",
+      2015,
+      2016
+     ],
+     [
+      "Infiniti",
+      "Q70L",
+      2018,
+      2019
+     ]
+    ],
+    "cat": "window-regulator",
+    "donor": [
+     "Infiniti",
+     "Q70L",
+     2019
+    ],
+    "item": "P06",
+    "note_on_draw": "Nissan catalog lists #80721-1MA0B for both \u2014 option: fits some option packages; Q70 2015-2018: gas only; verify the number on the part",
+    "pn": [
+     "80721-1MA0B"
+    ],
+    "seeker": [
+     "Infiniti",
+     "Q70",
+     2019
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "M37",
+      2013,
+      2013
+     ],
+     [
+      "Infiniti",
+      "Q70",
+      2014,
+      2014
+     ]
+    ],
+    "cat": "gauge-cluster",
+    "donor": [
+     "Infiniti",
+     "M37",
+     2013
+    ],
+    "item": "P07",
+    "note_on_draw": "Nissan catalog lists #24820-6AH1A for both \u2014 option: fits some option packages; Q70: 3.7L, gas only; verify the number on the part",
+    "pn": [
+     "24820-6AH1A"
+    ],
+    "seeker": [
+     "Infiniti",
+     "Q70",
+     2014
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Nissan",
+      "Armada",
+      2007,
+      2008
+     ],
+     [
+      "Nissan",
+      "Titan",
+      2008,
+      2008
+     ]
+    ],
+    "cat": "gauge-cluster",
+    "donor": [
+     "Nissan",
+     "Armada",
+     2007
+    ],
+    "item": "P08",
+    "note_on_draw": "Nissan catalog lists #24810-ZR29A for both \u2014 option: fits some option packages; verify the number on the part",
+    "pn": [
+     "24810-ZR29A"
+    ],
+    "seeker": [
+     "Nissan",
+     "Titan",
+     2008
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Nissan",
+      "Altima",
+      1993,
+      1995
+     ],
+     [
+      "Nissan",
+      "Stanza",
+      1993,
+      1995
+     ]
+    ],
+    "cat": "side-mirrors",
+    "donor": [
+     "Nissan",
+     "Altima",
+     1994
+    ],
+    "item": "P09",
+    "note_on_draw": "Nissan catalog lists #96302-1E400 for both \u2014 option: fits some option packages; verify the number on the part",
+    "pn": [
+     "96302-1E400"
+    ],
+    "seeker": [
+     "Nissan",
+     "Stanza",
+     1994
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "G25",
+      2011,
+      2012
+     ],
+     [
+      "Infiniti",
+      "Q40",
+      2015,
+      2015
+     ]
+    ],
+    "cat": "side-mirrors",
+    "donor": [
+     "Infiniti",
+     "Q40",
+     2015
+    ],
+    "item": "P10",
+    "note_on_draw": "Nissan catalog lists #96302-1NC3A for both \u2014 option: fits some option packages; verify the number on the part",
+    "pn": [
+     "96302-1NC3A"
+    ],
+    "seeker": [
+     "Infiniti",
+     "G25",
+     2012
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "JX35",
+      2013,
+      2013
+     ],
+     [
+      "Infiniti",
+      "QX60",
+      2014,
+      2019
+     ]
+    ],
+    "cat": "window-regulator",
+    "donor": [
+     "Infiniti",
+     "JX35",
+     2013
+    ],
+    "item": "P11",
+    "note_on_draw": "Nissan catalog lists #82731-3KG0A for both \u2014 fits some configurations; QX60 2014-2017: gas only; verify the number on the part",
+    "pn": [
+     "82731-3KG0A"
+    ],
+    "seeker": [
+     "Infiniti",
+     "QX60",
+     2015
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Nissan",
+      "Armada",
+      2009,
+      2009
+     ],
+     [
+      "Nissan",
+      "Titan",
+      2012,
+      2012
+     ]
+    ],
+    "cat": "window-regulator",
+    "donor": [
+     "Nissan",
+     "Armada",
+     2009
+    ],
+    "item": "P12",
+    "note_on_draw": "Nissan catalog lists #82731-9FJ0A for both \u2014 fits some configurations; Titan: crew cab only; verify the number on the part",
+    "pn": [
+     "82731-9FJ0A"
+    ],
+    "seeker": [
+     "Nissan",
+     "Titan",
+     2012
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "M35",
+      2006,
+      2008
+     ],
+     [
+      "Infiniti",
+      "M45",
+      2006,
+      2008
+     ]
+    ],
+    "cat": "side-mirrors",
+    "donor": [
+     "Infiniti",
+     "M45",
+     2007
+    ],
+    "item": "P13",
+    "note_on_draw": "Nissan catalog lists #96302-EH100 for both \u2014 fits some configurations; verify the number on the part",
+    "pn": [
+     "96302-EH100"
+    ],
+    "seeker": [
+     "Infiniti",
+     "M35",
+     2006
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Nissan",
+      "Frontier",
+      2005,
+      2012
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2005,
+      2013
+     ]
+    ],
+    "cat": "side-mirrors",
+    "donor": [
+     "Nissan",
+     "Frontier",
+     2012
+    ],
+    "item": "P14",
+    "note_on_draw": "Nissan catalog lists #96302-EA000 for both \u2014 option: fits some option packages; verify the number on the part",
+    "pn": [
+     "96302-EA000"
+    ],
+    "seeker": [
+     "Nissan",
+     "Xterra",
+     2009
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Nissan",
+      "Altima",
+      1996,
+      1996
+     ],
+     [
+      "Nissan",
+      "Stanza",
+      1996,
+      1996
+     ]
+    ],
+    "cat": "climate-control",
+    "donor": [
+     "Nissan",
+     "Altima",
+     1996
+    ],
+    "item": "P15",
+    "note_on_draw": "Nissan catalog lists #28525-1E505 for both \u2014 option: fits some option packages; verify the number on the part",
+    "pn": [
+     "28525-1E505"
+    ],
+    "seeker": [
+     "Nissan",
+     "Stanza",
+     1996
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Nissan",
+      "Cube",
+      2009,
+      2011
+     ],
+     [
+      "Nissan",
+      "Juke",
+      2011,
+      2011
+     ],
+     [
+      "Nissan",
+      "Rogue",
+      2009,
+      2011
+     ]
+    ],
+    "cat": "window-regulator",
+    "donor": [
+     "Nissan",
+     "Juke",
+     2011
+    ],
+    "item": "P16",
+    "note_on_draw": "Nissan catalog lists #80730-JX30B for both \u2014 fits some configurations; verify the number on the part",
+    "pn": [
+     "80730-JX30B"
+    ],
+    "seeker": [
+     "Nissan",
+     "Cube",
+     2011
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Nissan",
+      "Altima",
+      1993,
+      1996
+     ],
+     [
+      "Nissan",
+      "Stanza",
+      1993,
+      1996
+     ]
+    ],
+    "cat": "side-mirrors",
+    "donor": [
+     "Nissan",
+     "Altima",
+     1996
+    ],
+    "item": "P17",
+    "note_on_draw": "Nissan catalog lists #J6301-1E400 for both \u2014 option: fits some option packages; verify the number on the part",
+    "pn": [
+     "J6301-1E400"
+    ],
+    "seeker": [
+     "Nissan",
+     "Stanza",
+     1993
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "Q70",
+      2018,
+      2019
+     ],
+     [
+      "Infiniti",
+      "Q70L",
+      2018,
+      2019
+     ]
+    ],
+    "cat": "window-regulator",
+    "donor": [
+     "Infiniti",
+     "Q70",
+     2019
+    ],
+    "item": "P18",
+    "note_on_draw": "Nissan catalog lists #82720-1MA0B for both \u2014 fits some configurations; Q70 2018: gas only; verify the number on the part",
+    "pn": [
+     "82720-1MA0B"
+    ],
+    "seeker": [
+     "Infiniti",
+     "Q70L",
+     2018
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Nissan",
+      "Frontier",
+      2010,
+      2013
+     ],
+     [
+      "Nissan",
+      "Pathfinder",
+      2011,
+      2012
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2011,
+      2013
+     ]
+    ],
+    "cat": "window-regulator",
+    "donor": [
+     "Nissan",
+     "Frontier",
+     2012
+    ],
+    "item": "P19",
+    "note_on_draw": "Nissan catalog lists #80720-ZL90A for both \u2014 option: fits some option packages; verify the number on the part",
+    "pn": [
+     "80720-ZL90A"
+    ],
+    "seeker": [
+     "Nissan",
+     "Pathfinder",
+     2011
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Nissan",
+      "Murano",
+      2007,
+      2007
+     ],
+     [
+      "Nissan",
+      "Versa",
+      2008,
+      2008
+     ],
+     [
+      "Nissan",
+      "Versa",
+      2010,
+      2011
+     ]
+    ],
+    "cat": "window-regulator",
+    "donor": [
+     "Nissan",
+     "Versa",
+     2011
+    ],
+    "item": "P20",
+    "note_on_draw": "Nissan catalog lists #80730-8991A for both \u2014 fits some configurations; verify the number on the part",
+    "pn": [
+     "80730-8991A"
+    ],
+    "seeker": [
+     "Nissan",
+     "Murano",
+     2007
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "M35",
+      2006,
+      2006
+     ],
+     [
+      "Infiniti",
+      "M45",
+      2006,
+      2006
+     ]
+    ],
+    "cat": "gauge-cluster",
+    "donor": [
+     "Infiniti",
+     "M35",
+     2006
+    ],
+    "item": "P21",
+    "note_on_draw": "Nissan catalog lists #24820-EH11A for both \u2014 option: fits some option packages; verify the number on the part",
+    "pn": [
+     "24820-EH11A"
+    ],
+    "seeker": [
+     "Infiniti",
+     "M45",
+     2006
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Nissan",
+      "Frontier",
+      2013,
+      2019
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2012,
+      2013
+     ]
+    ],
+    "cat": "side-mirrors",
+    "donor": [
+     "Nissan",
+     "Xterra",
+     2012
+    ],
+    "item": "P22",
+    "note_on_draw": "Nissan catalog lists #96302-9BC9A for both \u2014 option: fits some option packages; verify the number on the part",
+    "pn": [
+     "96302-9BC9A"
+    ],
+    "seeker": [
+     "Nissan",
+     "Frontier",
+     2016
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "EX35",
+      2011,
+      2012
+     ],
+     [
+      "Infiniti",
+      "EX37",
+      2013,
+      2013
+     ],
+     [
+      "Infiniti",
+      "QX50",
+      2014,
+      2015
+     ]
+    ],
+    "cat": "side-mirrors",
+    "donor": [
+     "Infiniti",
+     "QX50",
+     2014
+    ],
+    "item": "P23",
+    "note_on_draw": "Nissan catalog lists #96302-1BA3E for both \u2014 option: fits some option packages; verify the number on the part",
+    "pn": [
+     "96302-1BA3E"
+    ],
+    "seeker": [
+     "Infiniti",
+     "EX37",
+     2013
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Nissan",
+      "Frontier",
+      2001,
+      2002
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2002,
+      2002
+     ]
+    ],
+    "cat": "climate-control",
+    "donor": [
+     "Nissan",
+     "Xterra",
+     2002
+    ],
+    "item": "P24",
+    "note_on_draw": "Nissan catalog lists #27510-8Z315 for both \u2014 option: fits some option packages; Frontier: crew cab only; verify the number on the part",
+    "pn": [
+     "27510-8Z315"
+    ],
+    "seeker": [
+     "Nissan",
+     "Frontier",
+     2002
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "EX37",
+      2013,
+      2013
+     ],
+     [
+      "Infiniti",
+      "QX50",
+      2014,
+      2015
+     ]
+    ],
+    "cat": "side-mirrors",
+    "donor": [
+     "Infiniti",
+     "QX50",
+     2014
+    ],
+    "item": "P25",
+    "note_on_draw": "Nissan catalog lists #96301-3WV3E for both \u2014 option: fits some option packages; verify the number on the part",
+    "pn": [
+     "96301-3WV3E"
+    ],
+    "seeker": [
+     "Infiniti",
+     "EX37",
+     2013
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "QX56",
+      2011,
+      2013
+     ],
+     [
+      "Infiniti",
+      "QX80",
+      2014,
+      2019
+     ]
+    ],
+    "cat": "window-regulator",
+    "donor": [
+     "Infiniti",
+     "QX56",
+     2011
+    ],
+    "item": "P26",
+    "note_on_draw": "Nissan catalog lists #82720-1LA0A for both \u2014 fits some configurations; verify the number on the part",
+    "pn": [
+     "82720-1LA0A"
+    ],
+    "seeker": [
+     "Infiniti",
+     "QX80",
+     2015
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Nissan",
+      "Frontier",
+      1998,
+      2004
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2000,
+      2004
+     ]
+    ],
+    "cat": "side-mirrors",
+    "donor": [
+     "Nissan",
+     "Xterra",
+     2004
+    ],
+    "item": "P27",
+    "note_on_draw": "Nissan catalog lists #96302-3S500 for both \u2014 option: fits some option packages; Frontier 2004: 3.3L only; Xterra 2000: 3.3L only; verify the number on the part",
+    "pn": [
+     "96302-3S500"
+    ],
+    "seeker": [
+     "Nissan",
+     "Frontier",
+     2003
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Infiniti",
+      "FX35",
+      2009,
+      2009
+     ],
+     [
+      "Infiniti",
+      "FX50",
+      2009,
+      2009
+     ]
+    ],
+    "cat": "window-regulator",
+    "donor": [
+     "Infiniti",
+     "FX50",
+     2009
+    ],
+    "item": "P28",
+    "note_on_draw": "Nissan catalog lists #80721-1CA0A for both \u2014 fits some configurations; verify the number on the part",
+    "pn": [
+     "80721-1CA0A"
+    ],
+    "seeker": [
+     "Infiniti",
+     "FX35",
+     2009
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Nissan",
+      "Altima",
+      1994,
+      1996
+     ],
+     [
+      "Nissan",
+      "Stanza",
+      1994,
+      1996
+     ]
+    ],
+    "cat": "window-regulator",
+    "donor": [
+     "Nissan",
+     "Stanza",
+     1995
+    ],
+    "item": "P29",
+    "note_on_draw": "Nissan catalog lists #82721-0E715 for both \u2014 option: fits some option packages; verify the number on the part",
+    "pn": [
+     "82721-0E715"
+    ],
+    "seeker": [
+     "Nissan",
+     "Altima",
+     1994
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   },
+   {
+    "apps": [
+     [
+      "Nissan",
+      "Altima",
+      1994,
+      1997
+     ],
+     [
+      "Nissan",
+      "Stanza",
+      1994,
+      1997
+     ]
+    ],
+    "cat": "climate-control",
+    "donor": [
+     "Nissan",
+     "Stanza",
+     1996
+    ],
+    "item": "P30",
+    "note_on_draw": "Nissan catalog lists #27515-2B001 for both \u2014 option: fits some option packages; verify the number on the part",
+    "pn": [
+     "27515-2B001"
+    ],
+    "seeker": [
+     "Nissan",
+     "Altima",
+     1994
+    ],
+    "verdict": "RIGHT",
+    "why": "own-page rows of every app vehicle-year list the number; every drive, body, engine, transmission, fuel and cab code on them is named in the note or covers the whole model-year"
+   }
+  ],
+  "seed": 61181118,
+  "tool": "audit11_4/sample.py (30 groups + 30 pairs)"
+ },
+ "session": "session_01LsgNuWEh1vdaDCtdP1jxMM",
+ "verifier_items_now": [
+  {
+   "cat": "gauge-cluster",
+   "item": "G03",
+   "now": null,
+   "pn": [
+    "24820-89Y02"
+   ],
+   "verdict_then": "WRONG"
+  },
+  {
+   "cat": "gauge-cluster",
+   "item": "G04",
+   "now": {
+    "apps": [
+     [
+      "Infiniti",
+      "M37",
+      2013,
+      2013
+     ],
+     [
+      "Infiniti",
+      "Q70",
+      2014,
+      2014
+     ]
+    ],
+    "note": "Nissan catalog lists #24820-6AH1B for both \u2014 option: fits some option packages; Q70: 3.7L, gas only; verify the number on the part"
+   },
+   "pn": [
+    "24820-6AH1B"
+   ],
+   "verdict_then": "RISK"
+  },
+  {
+   "cat": "gauge-cluster",
+   "item": "G05",
+   "now": null,
+   "pn": [
+    "24820-8Z002"
+   ],
+   "verdict_then": "WRONG"
+  },
+  {
+   "cat": "gauge-cluster",
+   "item": "G06",
+   "now": {
+    "apps": [
+     [
+      "Nissan",
+      "200SX",
+      1995,
+      1998
+     ],
+     [
+      "Nissan",
+      "Sentra",
+      1995,
+      1999
+     ]
+    ],
+    "note": "Nissan catalog lists #24820-89Y00 for both \u2014 option: fits some option packages; 200SX: 1.6L only; Sentra 1997-1998: 1.6L only; verify the number on the part"
+   },
+   "pn": [
+    "24820-89Y00"
+   ],
+   "verdict_then": "WRONG"
+  },
+  {
+   "cat": "gauge-cluster",
+   "item": "G07",
+   "now": {
+    "apps": [
+     [
+      "Nissan",
+      "Frontier",
+      2005,
+      2005
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2005,
+      2005
+     ]
+    ],
+    "note": "Nissan catalog lists #24810-EA101 for both \u2014 option: fits some option packages; Frontier: 4WD, 4.0L only; Xterra: 4WD only; verify the number on the part"
+   },
+   "pn": [
+    "24810-EA101"
+   ],
+   "verdict_then": "WRONG"
+  },
+  {
+   "cat": "gauge-cluster",
+   "item": "G08",
+   "now": null,
+   "pn": [
+    "24810-ZP67A"
+   ],
+   "verdict_then": "WRONG"
+  },
+  {
+   "cat": "gauge-cluster",
+   "item": "G09",
+   "now": {
+    "apps": [
+     [
+      "Infiniti",
+      "M37",
+      2013,
+      2013
+     ],
+     [
+      "Infiniti",
+      "Q70",
+      2014,
+      2014
+     ]
+    ],
+    "note": "Nissan catalog lists #24820-1MA5A for both \u2014 option: fits some option packages; Q70: 3.7L, gas only; verify the number on the part"
+   },
+   "pn": [
+    "24820-1MA5A"
+   ],
+   "verdict_then": "RISK"
+  },
+  {
+   "cat": "gauge-cluster",
+   "item": "G10",
+   "now": {
+    "apps": [
+     [
+      "Infiniti",
+      "M37",
+      2012,
+      2013
+     ],
+     [
+      "Infiniti",
+      "Q70",
+      2014,
+      2014
+     ]
+    ],
+    "note": "Nissan catalog lists #24820-1MA5B for both \u2014 option: fits some option packages; Q70: 3.7L, gas only; verify the number on the part"
+   },
+   "pn": [
+    "24820-1MA5B"
+   ],
+   "verdict_then": "RISK"
+  },
+  {
+   "cat": "side-mirrors",
+   "item": "G11",
+   "now": {
+    "apps": [
+     [
+      "Nissan",
+      "Frontier",
+      2004,
+      2004
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2004,
+      2004
+     ]
+    ],
+    "note": "Nissan catalog lists #96301-ZD000 for both \u2014 option: fits some option packages; Frontier: king cab only; 2.4L only; verify the number on the part"
+   },
+   "pn": [
+    "96301-ZD000"
+   ],
+   "verdict_then": "RISK"
+  },
+  {
+   "cat": "side-mirrors",
+   "item": "G15",
+   "now": {
+    "apps": [
+     [
+      "Nissan",
+      "Frontier",
+      2004,
+      2004
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2004,
+      2004
+     ]
+    ],
+    "note": "Nissan catalog lists #96302-ZD000 for both \u2014 option: fits some option packages; Frontier: king cab only; 2.4L only; verify the number on the part"
+   },
+   "pn": [
+    "96302-ZD000"
+   ],
+   "verdict_then": "RISK"
+  },
+  {
+   "cat": "window-regulator",
+   "item": "G23",
+   "now": {
+    "apps": [
+     [
+      "Nissan",
+      "Armada",
+      2009,
+      2009
+     ],
+     [
+      "Nissan",
+      "Titan",
+      2012,
+      2012
+     ]
+    ],
+    "note": "Nissan catalog lists #82730-9FJ0A for both \u2014 fits some configurations; Titan: crew cab only; verify the number on the part"
+   },
+   "pn": [
+    "82730-9FJ0A"
+   ],
+   "verdict_then": "RISK"
+  },
+  {
+   "cat": "window-regulator",
+   "item": "G30",
+   "now": {
+    "apps": [
+     [
+      "Nissan",
+      "Frontier",
+      2001,
+      2001
+     ],
+     [
+      "Nissan",
+      "Xterra",
+      2000,
+      2004
+     ]
+    ],
+    "note": "Nissan catalog lists #82721-7Z005 for both \u2014 option: fits some option packages; Frontier: crew cab only; Xterra 2000: 3.3L only; verify the number on the part"
+   },
+   "pn": [
+    "82721-7Z005"
+   ],
+   "verdict_then": "RISK"
+  },
+  {
+   "cat": "gauge-cluster",
+   "item": "P01",
+   "now": null,
+   "pn": [
+    "24810-9BD4C"
+   ],
+   "verdict_then": "RISK"
+  },
+  {
+   "cat": "window-regulator",
+   "item": "P02",
+   "now": {
+    "apps": [
+     [
+      "Nissan",
+      "Armada",
+      2004,
+      2008
+     ],
+     [
+      "Nissan",
+      "Titan",
+      2004,
+      2011
+     ]
+    ],
+    "note": "Nissan catalog lists #82731-7S000 for both \u2014 fits some configurations; Titan: crew cab only; verify the number on the part"
+   },
+   "pn": [
+    "82731-7S000"
+   ],
+   "verdict_then": "RISK"
+  },
+  {
+   "cat": "gauge-cluster",
+   "item": "P08",
+   "now": {
+    "apps": [
+     [
+      "Infiniti",
+      "JX35",
+      2013,
+      2013
+     ],
+     [
+      "Infiniti",
+      "QX60",
+      2014,
+      2014
+     ]
+    ],
+    "note": "Nissan catalog lists #24810-3JA1B for both \u2014 option: fits some option packages; QX60: gas only; verify the number on the part"
+   },
+   "pn": [
+    "24810-3JA1B"
+   ],
+   "verdict_then": "RISK"
+  },
+  {
+   "cat": "gauge-cluster",
+   "item": "P10",
+   "now": null,
+   "pn": [
+    "24810-ZL96C"
+   ],
+   "verdict_then": "WRONG"
+  },
+  {
+   "cat": "side-mirrors",
+   "item": "P13",
+   "now": null,
+   "pn": [
+    "96302-3S510"
+   ],
+   "verdict_then": "RISK"
+  },
+  {
+   "cat": "gauge-cluster",
+   "item": "P20",
+   "now": null,
+   "pn": [
+    "24810-ZL95E"
+   ],
+   "verdict_then": "WRONG"
+  },
+  {
+   "cat": "gauge-cluster",
+   "item": "P24",
+   "now": null,
+   "pn": [
+    "24810-EA48C"
+   ],
+   "verdict_then": "WRONG"
+  },
+  {
+   "cat": "gauge-cluster",
+   "item": "P29",
+   "now": null,
+   "pn": [
+    "24810-ZS42D"
+   ],
+   "verdict_then": "WRONG"
+  }
+ ],
+ "what": "Rule author self-check of the rebuilt nissan candidate (groups/_report/nissan.candidate.json). NOT independent: the same session wrote the rules. The hub owes an independent \u00a711.4 sample."
+}

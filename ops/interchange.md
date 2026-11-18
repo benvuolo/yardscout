@@ -3929,3 +3929,31 @@ a85c654). Live groups only:
   body style 37 = coupe; I read it as coupe-only, the verifier did not), R01
   and R20 (held), R22-R24 (Impreza/XV: only the sedan page).
 - Payload 1,503,938 -> 1,503,908 bytes.
+
+### Item 4: nissan candidate rebuilt (oem-raw@57e8b5b9). NOT shipped; an independent sample is owed.
+
+- `groups/_report/nissan.candidate.json`: 286 Likely groups, **283 shippable**
+  (was 343): window-regulator 123, side-mirrors 80, gauge-cluster 55,
+  climate-control 25. Refusals: 37 notes over 160 chars, 41
+  `held_engine_conflict` (mostly FX35/FX45 and M35 2008, where a sibling of
+  the same slot is coded for the other engine).
+- The verifier's 20 WRONG/RISK items now (`nissan_selfcheck_2026-11-18.json`):
+  drive WRONGs G07/G08/P20/P24/P29 say "4WD only", P10 "Frontier: 2WD,
+  automatic only; Xterra: 2WD only"; 200SX G03/G05 gone, G06 lost 1999;
+  Q70 G04/G09/G10 "Q70: 3.7L, gas only"; G11/G15 "Frontier: king cab only;
+  2.4L only"; G30 "Xterra 2000: 3.3L only"; P01 "manual only"; P08 "QX60:
+  gas only"; G23/P02 "Titan: crew cab only" (2004 too); P13 gone.
+- My own check (rule author, not independent): raw-token census of all 283
+  groups (drive/body/engine/transmission/hybrid/rear-cab codes vs note): no
+  unexplained suspect. Seeded sample `audit11_4/sample.py` seed 61181118, 30
+  groups + 30 pairs, read twice:
+  - on an intermediate build it found two self-contradictory engine labels
+    (FX35/FX45 "FX45: 3.5L only"), sibling packaging mixing, a too-narrow
+    engine universe (2000 Xterra) and the Pathfinder "*W. AUTO" drive field
+    (All-Mode 4WD clusters claimed for every Pathfinder). All four fixed.
+  - on the final build: 59 RIGHT, 1 RIGHT after the AUTO fix, 0 WRONG.
+  - Residual RISK (not new): production-date splits inside a model-year keep
+    the generic note (2008 M35 mirror "from 01/2008"); "gas only" under-claims
+    where the M35h hybrid twin shares the part; Nissan "*" markers undecoded.
+- Shipped namespaces re-curated after these last rule changes: byte-identical
+  to item 2 (they touch config-tuple sites only; subaru/hmg unchanged).

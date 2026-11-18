@@ -51,6 +51,11 @@ check("nissan: every configuration 4WD -> 4WD (the verifier's G07 24810-EA101)",
 check("nissan: a configuration without a drive code fits any drive; both drives are no limit",
       C._row_drive([F + "*KC. 4WD. LE, *CC. LE"], NPD) is None
       and C._row_drive([F + "*KC. 4WD. LE + *KC. 2WD. LE"], NPD) is None and C._row_drive([], NPD) is None)
+check("nissan: the AUTO drive field is All-Mode 4WD (2006 Pathfinder 24810-EC44C '*W. AUTO' beside 'W. 4WD', 'W. 2WD')",
+      C._row_drive([F + "*W. AUTO"], NPD) == frozenset({"a4wd"})
+      and C._drive_label(C._row_drive([F + "*W. AUTO"], NPD)) == "4WD AUTO"
+      and C._row_drive([F + "*W. AUTO + W. 2WD"], NPD) is None
+      and C._row_drive([F + "*W. AUTO"], GM) is None)
 check("subaru: S.2WD.(L+LS) +SW.2WD.(L+LS) -> 2WD; S.L +S.4WD.TURBO -> none",
       C._row_drive([F + "S.2WD.(L+LS) +SW.2WD.(L+LS)"], SPD) == TWO
       and C._row_drive([F + "S.L +S.4WD.TURBO +SW"], SPD) is None)
