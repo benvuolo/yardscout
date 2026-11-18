@@ -877,6 +877,13 @@ print(json.dumps([G.engine_agrees(G.parse_engine(a), G.parse_engine(b)) for a, b
     G({ fuel: 'hybrid' }, { model: 'Q70', vpicTrim: 'Hybrid', vpicTrimQuality: 'usable' }) === 'confirm'
     && G({ fuel: 'hybrid' }, { model: 'Q70' }, null) === 'unconfirmed');
   check('no gate (4-element app) confirms', G(undefined, { vpicDriveType: DT4 }) === 'confirm');
+  const W = gate => ctx.pfOemDonorGate([['Ram', '1500', 2012, 2012, null, gate]], { model: '1500' }, null).warn;
+  check('donor line: a stated drive limit is "listed for", an unchecked one "checked for" (as the note words it)',
+    W({ drive: '4wd', drive_basis: 'stated' }).startsWith('if equipped: this part is listed for 4WD only')
+    && W({ drive: '4wd', drive_basis: 'unchecked' }).startsWith('if equipped: this part is checked for 4WD only'));
+  check('donor gate: every matching app ruled out -> exclude; one ungated app -> confirm',
+    ctx.pfOemDonorGate([['Ram', '1500', 2012, 2012, null, { drive: '4wd' }]], { model: '1500', vpicDriveType: DT2 }, null).verdict === 'exclude'
+    && ctx.pfOemDonorGate([['Ram', '1500', 2012, 2012, null, { drive: '4wd' }], ['Ram', '1500', 2012, 2012]], { model: '1500', vpicDriveType: DT2 }, null).verdict === 'confirm');
   check('gate text words the limit like the note', ctx.pfOemGateText({ cab: 'crew cab', drive: '4wd', eng: ['2.4L'] }) === 'crew cab, 4WD, 2.4L'
     && ctx.pfOemGateText({ drive: 'fwd/rwd' }) === '2WD' && ctx.pfOemGateText({ eng: ['3.7L'], fuel: 'gas' }) === '3.7L, gas');
 }
@@ -897,13 +904,13 @@ print(json.dumps([G.engine_agrees(G.parse_engine(a), G.parse_engine(b)) for a, b
   const t2 = r.rows['2007 Chevrolet Tahoe'], t3 = r.rows['2008 Chevrolet Tahoe'], av = r.rows['2007 Chevrolet Avalanche'];
   check('OEM gate: a 2WD-decoded Tahoe is listed, with no "if equipped" line', t2 && !t2.warn.includes('if equipped'), JSON.stringify(t2));
   check('OEM gate: a Tahoe with no drive decode is listed "if equipped", the line names the limit (as the aftermarket gate)',
-    t3 && t3.tier === 'likely' && t3.warn.includes("if equipped: this part is listed for 2WD only — this donor's drivetrain isn't confirmed, check the car"),
+    t3 && t3.tier === 'likely' && t3.warn.includes("if equipped: this part is checked for 2WD only — this donor's drivetrain isn't confirmed, check the car"),
     JSON.stringify(t3));
   check('OEM gate: the ungated twin app (4WD Avalanche) is unchanged', av && !av.warn.includes('if equipped'), JSON.stringify(av));
-  check('OEM gate: the seeker on an ungated app gets no "listed for ... only" header line', !r.head.includes('Some catalog numbers here are listed for'), r.head);
+  check('OEM gate: the seeker on an ungated app gets no "listed for ... only" header line', !r.head.includes('Some catalog numbers here were found for'), r.head);
   const rs = run(base([], lazyIdx({ 'side-mirrors': { oem: 1, am: 0 } })), inv, { year: 2007, make: 'Chevrolet', model: 'Tahoe' }, cat());
   check('OEM gate: a seeker whose own app is gated is told in the header (escaped)',
-    rs.head.includes('Some catalog numbers here are listed for a 2007 Tahoe with 2WD only — check yours matches before you pull.'), rs.head);
+    rs.head.includes('Some catalog numbers here were found for a 2007 Tahoe with 2WD only — check yours matches before you pull.'), rs.head);
   // the same group with no gate renders as before: every Tahoe, no gate line
   lazyPreset = { 'side-mirrors': { oemGroups: [oemG({ ...gTahoe, apps: [['Chevrolet', 'Avalanche', 2006, 2008], ['Chevrolet', 'Tahoe', 2006, 2008]] })], amGroups: [] } };
   const r0 = run(base([], lazyIdx({ 'side-mirrors': { oem: 1, am: 0 } })), inv, seek, cat());

@@ -274,6 +274,49 @@ with sync_playwright() as pw:
         print(f"     corolla99 rows={rows.count()} — "
               f"shot pf_corolla99_window_regulator.png")
 
+    # OEM catalog donors honour the per-app gate (gates-1118): the GM
+    # 23227000/23227001 regulators are listed for 2007 Tahoes on the 2WD page
+    # only ("Tahoe: only 2WD checked"). On the real payload and inventory: no
+    # rendered row that names a gated catalog number may be a car the app's
+    # own gate rules out (a 4WD-decoded Tahoe), and the seeker on the gated
+    # app is told in the header. Row counts follow the live lots (printed).
+    model = pf_search(page, "2007", "Chevrolet", ["Tahoe"], None,
+                      part="window regulator")
+    check("tahoe07 gate: model option found", model is not None)
+    if model is not None:
+        res = page.evaluate("""() => {
+          const rows = [...document.querySelectorAll('#pf-results .pf-row-card')];
+          const byKey = new Map(liveInventory.map(v => [vehicleKey(v), v]));
+          const groups = ((pfOemLazyData['window-regulator'] || {}).oemGroups || [])
+            .filter(g => g.apps.some(a => a.length > 5));
+          let named = 0, ruledOut = [], ifEq = 0;
+          for (const el of rows) {
+            const v = byKey.get(el.dataset.vkey);
+            const txt = el.textContent;
+            if (txt.includes('if equipped: this part is listed for')) ifEq++;
+            if (!v) continue;
+            for (const g of groups) {
+              if (!g.pn.some(p => txt.includes('#' + p))) continue;
+              const dApps = g.apps.filter(a => pfAppMatches(a, v.year, canonicalMake(v.make), v.model));
+              if (!dApps.length) continue;
+              named++;
+              if (pfOemDonorGate(dApps, v, extrasFor(v)).verdict === 'exclude')
+                ruledOut.push(`${v.year} ${v.model} ${v.vpicDriveType || ''} #${g.pn[0]}`);
+            }
+          }
+          const head = (document.querySelector('#pf-results') || {}).textContent || '';
+          return { rows: rows.length, gatedGroups: groups.length, named, ruledOut, ifEq,
+                   header: head.includes('found for a 2007 Tahoe with 2WD only') };
+        }""")
+        check("tahoe07 gate: the payload ships gated window-regulator apps", res["gatedGroups"] > 0, str(res))
+        check("tahoe07 gate: no row naming a gated catalog number is a car its gate rules out",
+              not res["ruledOut"], str(res["ruledOut"][:5]))
+        if res["rows"]:
+            check("tahoe07 gate: the seeker on the gated app is told in the header", res["header"], str(res))
+        print(f"     tahoe07 rows={res['rows']} naming a gated number={res['named']} "
+              f"if-equipped lines={res['ifEq']}")
+        page.screenshot(path=str(SHOTS / "pf_tahoe07_window_regulator_gate.png"))
+
     # ---- E46 M3: the performance-trim platform fix -------------------------
     # Body part: the M3 maps into the E46 platform group, so a window-
     # regulator search must surface regular E46 donors (112 within 100 mi of

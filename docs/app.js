@@ -9801,8 +9801,11 @@ function pfOemDonorGate(apps, v, ex) {
   }
   if (!unc) return { verdict: 'exclude', warn: '' };
   const nouns = unc.r.keys.map(k => PF_OEM_GATE_NOUN[k]);
+  // a drive limit from the one drive page read ("only 2WD checked") is not
+  // the catalog's own statement: say "checked", as the note does
+  const verb = unc.a[5].drive_basis === 'unchecked' ? 'checked' : 'listed';
   return { verdict: 'unconfirmed',
-    warn: `if equipped: this part is listed for ${pfOemGateText(unc.a[5])} only — this donor's ${nouns.join(' and ')} ${nouns.length > 1 ? "aren't" : "isn't"} confirmed, check the car` };
+    warn: `if equipped: this part is ${verb} for ${pfOemGateText(unc.a[5])} only — this donor's ${nouns.join(' and ')} ${nouns.length > 1 ? "aren't" : "isn't"} confirmed, check the car` };
 }
 /* OEM-GATE END */
 function pfAmRows(s, groups, results, radius, fam) {
@@ -10293,7 +10296,7 @@ function pfRunSearch() {
       }
       if (oemLikelyHit) groupNotes.push(PF_OEM_LIKELY_HEAD);
       if (oemSeekerGates.size) {
-        groupNotes.push(`Some catalog numbers here are listed for a ${s.year} ${s.model} with ${[...oemSeekerGates].join(' or ')} only — check yours matches before you pull.`);
+        groupNotes.push(`Some catalog numbers here were found for a ${s.year} ${s.model} with ${[...oemSeekerGates].join(' or ')} only — check yours matches before you pull.`);
       }
     }
     // Aftermarket unit lists (Spectra, GSP/1A…) for chassis-side categories:
