@@ -3898,3 +3898,34 @@ section when the branch stops.
 - Notes are never cut: an over-long note refuses the group.
 - Tests: `curation_tests/test_rules_1118.py` (23); test_body_variant's
   lot-count cases moved to a model outside the table (35).
+
+### Item 3: live diff, main 82df0482 -> this branch (`groups/_report/live_diff_2026-11-18_rules.txt`)
+
+Shipped namespaces on their pinned raw (oem-raw@dca9cd84, inventory/decodes
+a85c654). Live groups only:
+
+| ns | removed | restored | changed (note narrowed) |
+|---|---|---|---|
+| gm | 11 | 2 | 47 (36 "<model>: 2WD only", 11 "Silverado 1500 2012: gas only") |
+| ford | 0 | 6 | 0 |
+| mopar | 0 | 0 | 9 ("1500: 4WD only") |
+| mb | 0 | 0 | 1 ("ML350: AWD only") |
+| subaru | 0 | 1 | 0 |
+| toyota, hmg, vag | 0 | 0 | 0 (hmg: 35 held strut groups only) |
+
+- Removed: notes over 160 characters once the drive/fuel limit is added
+  (6 Colorado/Canyon 2005 window parts with crew-cab notes; 5
+  Avalanche/Silverado/Escalade parts). Nothing is cut short any more.
+- Restored, with every app vehicle-year's own-page evidence in the diff file:
+  R02/R03/R04 (Ford CV6Z-5423394-B, 6CPZ-5423395-A, CV6Z-5423395-B), R07 (GM
+  88960088), R21 (Subaru 57229AG04A9P), plus four of the same evidence class
+  outside the verifier's sample (Ford 6CPZ-5423395-B, 6CPZ-9923394-B,
+  6CPZ-9923394-C on the same 2015 Focus / Transit Connect pages; GM 15890412
+  Cobalt/G5 2007 heater control, no body code on either page, fitment trims
+  "2 DOOR, 4 DOOR"). The hub may want those four checked by someone else.
+- Not restored, with reasons: R05 Sonic (the sedan catalog was never read;
+  GM fitment trims are not used to add a body because R14 shows they list
+  bodies a row's own code excludes), R14 Cobalt headlamp (own row "AP(37)",
+  body style 37 = coupe; I read it as coupe-only, the verifier did not), R01
+  and R20 (held), R22-R24 (Impreza/XV: only the sedan page).
+- Payload 1,503,938 -> 1,503,908 bytes.

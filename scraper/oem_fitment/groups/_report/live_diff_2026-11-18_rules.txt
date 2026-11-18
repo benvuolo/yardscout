@@ -1,0 +1,388 @@
+# Live claim diff, main (82df0482) -> branch interchange/rules-1118 (items 1-2 of the 2026-11-18 rules brief).
+# Re-curation of the 8 shipped namespaces on their pinned raw oem-raw@dca9cd845f26, inventory and decodes pinned
+# from main@a85c654 (inventory sha256 1a9cfa73..., decodes 1357625b...). Tool: audit11_4/live_diff.py.
+# HELD lines are GROUP_HOLD_CATS (never shipped).
+#
+# Per namespace (live groups only):
+#   ns      removed  restored  changed (note narrowed)
+#   gm        11        2        47   (36 "<model>: 2WD only" drive, 11 "Silverado 1500 2012: gas only")
+#   ford       0        6         0
+#   mopar      0        0         9   ("1500: 4WD only")
+#   mb         0        0         1   ("ML350: AWD only")
+#   subaru     0        1         0
+#   toyota, hmg, vag: no live change (hmg: 35 HELD strut groups gained drive/engine notes; never shipped)
+#
+# Removed (11, gm): 6 Colorado/Canyon 2005 window parts (crew-cab + 2WD note over 160 chars), 5 Avalanche/Silverado/
+#   Escalade parts (cab/option + "Silverado 1500 2012: gas only" over 160 chars). Refused held_drive_qualifier.
+# Restored (9): every app vehicle-year's own catalog page lists the number with no body restriction left once
+#   body codes, quantity/callout fields and feature notes are read (evidence below); the independent removals
+#   check found 5 of them TRUE (R02, R03, R04 ford; R07 gm; R21 subaru). The other 4 (ford 6CPZ-5423395-B,
+#   6CPZ-9923394-B, 6CPZ-9923394-C: the same 2015 Focus / Transit Connect pages as R03; gm 15890412 Cobalt/G5 2007
+#   heater control) were not in that sample and carry the same evidence class. Not restored: R05 gm 95188244 (the
+#   2013 Sonic sedan catalog was never read; GM fitment trims list bodies a row's own code excludes, see R14, so
+#   they are not used to add a body), R14 gm 20964008 (the 2007 Cobalt's own row reads "AP(37)", body style 37 =
+#   coupe), R01/R20 (held in policy.GROUP_HOLDS: wrong for a reason other than body), R22-R24 (Impreza/XV: only
+#   the sedan page exists).
+#
+# Restored groups, evidence per app vehicle-year (record pointers into oem-raw@dca9cd84, page, notes, decoded cover):
+#   ## gm climate-control 15890412 apps [['Chevrolet', 'Cobalt', 2007, 2007], ['Pontiac', 'G5', 2007, 2007]]
+#      note: GM catalog lists #15890412 for both — option: fits some option packages; verify the number on the part
+#      Chevrolet Cobalt 2007: bodies ['coupe', 'sedan']; own rows ['www.gmpartsgiant.com:records:L549']
+#         page 2007-chevrolet-cobalt/front_end_sheet_metal_heater/heater_control_assembly.html notes ['CONTROL,HEATER(INCLUDES 2)(EBONY)'] -> cover None
+#         fitment trims: ['2 DOOR, 4 DOOR, LEVEL 4 PERFORMANCE (SS) 2 DOOR, LEVEL 4 PERFORMANCE/SC (SS) 2 DOOR, LEVEL 4 PERFORMANCE/SC (SS) 4 DOOR,']
+#      Pontiac G5 2007: bodies ['coupe']; own rows ['www.gmpartsgiant.com:lists:L1543']
+#         page 2007-pontiac-g5/front_end_sheet_metal_heater/heater_control_assembly.html notes [] -> cover None
+#         fitment trims: ['2 DOOR, 4 DOOR, GT 2 DOOR, GT 4 DOOR, LS 2 DOOR, LS 4 DOOR, SE 2 DOOR, SE 4 DOOR, SPORT 2 DOOR, SPORT 4 DOOR']
+#   ## gm window-regulator 88960088 apps [['Chevrolet', 'Camaro', 1995, 1995], ['GMC', 'Safari', 1997, 1997], ['Pontiac', 'Firebird', 1995, 1995]]
+#      note: GM catalog lists #88960088 for both — window motor only; fits some configurations; verify the number on the part
+#      Chevrolet Camaro 1995: bodies ['convertible', 'coupe']; own rows ['www.gmpartsgiant.com:lists:L122']
+#         page 1995-chevrolet-camaro/windshield_wiper_mirrors_instrument_panel_console_doors/door_hardwar notes ['Require Quantity: 02', 'Package Quantity: 1'] -> cover None
+#         fitment trims: ['2 DOOR, CONVERTIBLE']
+#      GMC Safari 1997: bodies ['van']; own rows ['www.gmpartsgiant.com:lists:L1720', 'www.gmpartsgiant.com:lists:L1732']
+#         page 1997-gmc-safari-2wd/cab_and_body_structure_mirrors_doors_trim_seat_belts_wipers/power_wind notes ['Require Quantity: 02', 'Package Quantity: 1'] -> cover None
+#         page 1997-gmc-safari-awd/cab_and_body_structure_mirrors_doors_trim_seat_belts_wipers/power_wind notes ['Require Quantity: 02', 'Package Quantity: 1'] -> cover None
+#         fitment trims: ['VAN SAFARI']
+#      Pontiac Firebird 1995: bodies ['convertible', 'hatchback']; own rows ['www.gmpartsgiant.com:lists:L2686']
+#         page 1995-pontiac-firebird/windshield_wiper_mirrors_instrument_panel_console_doors/door_hardwar notes ['Require Quantity: 02', 'Package Quantity: 1'] -> cover None
+#         fitment trims: ['2 DOOR, CONVERTIBLE, COUPE']
+#   ## ford window-regulator 6CPZ-5423395-A apps [['Ford', 'Focus', 2015, 2015], ['Ford', 'Transit Connect', 2015, 2015]]
+#      note: Ford catalog lists #6CPZ-5423395-A for both — window motor only; trim-limited; FWD only; verify the number on the part
+#      Ford Focus 2015: bodies ['hatchback', 'sedan']; own rows ['www.fordpartsgiant.com:records:L998']
+#         page 2015-ford-focus/body_and_paint/rear_door_glass_and_window_controls.html notes ['Motor Assy', 'Fit Note: With Electric Rear Windows', 'Base Number: 14553', 'Callout Name: 14553'] -> cover None
+#      Ford Transit Connect 2015: bodies ['van']; own rows ['www.fordpartsgiant.com:lists:L334']
+#         page 2015-ford-transit_connect/body_and_paint/sliding_door_glass.html notes ['Motor Assy', 'Fit Note: With Dual Side Load Doors, With Kerbside Side Load Doors, With Electric Rear Windows', 'Base Number: 14553', 'Callout Name: 14553'] -> cover None
+#   ## ford window-regulator 6CPZ-5423395-B apps [['Ford', 'Focus', 2015, 2015], ['Ford', 'Transit Connect', 2015, 2015]]
+#      note: Ford catalog lists #6CPZ-5423395-B for both — window motor only; trim-limited; FWD only; verify the number on the part
+#      Ford Focus 2015: bodies ['hatchback', 'sedan']; own rows ['www.fordpartsgiant.com:records:L993']
+#         page 2015-ford-focus/body_and_paint/front_door_glass_window_controls.html notes ['Motor Assy', 'Fit Note: Power Frt Window-1 Tch Dwn-Dr Only', 'Base Number: 14553', 'Callout Name: 14553'] -> cover None
+#      Ford Transit Connect 2015: bodies ['van']; own rows ['www.fordpartsgiant.com:lists:L333']
+#         page 2015-ford-transit_connect/body_and_paint/front_door_glass_window_controls.html notes ['Motor Assy', 'Fit Note: Power Frt Window-1 Tch Dwn-Dr Only', 'Base Number: 14553', 'Callout Name: 14553'] -> cover None
+#   ## ford window-regulator 6CPZ-9923394-B apps [['Ford', 'Focus', 2015, 2015], ['Ford', 'Transit Connect', 2015, 2015]]
+#      note: Ford catalog lists #6CPZ-9923394-B for both — window motor only; trim-limited; FWD only; verify the number on the part
+#      Ford Focus 2015: bodies ['hatchback', 'sedan']; own rows ['www.fordpartsgiant.com:records:L1000']
+#         page 2015-ford-focus/body_and_paint/rear_door_glass_and_window_controls.html notes ['Motor Assy', 'Fit Note: With Electric Rear Windows', 'Base Number: 14553', 'Callout Name: 14553'] -> cover None
+#      Ford Transit Connect 2015: bodies ['van']; own rows ['www.fordpartsgiant.com:lists:L334']
+#         page 2015-ford-transit_connect/body_and_paint/sliding_door_glass.html notes ['Motor Assy', 'Fit Note: Pwr Rr Pass/Fixed Drv Rr Window, With Electric Rear Windows, With Dual Side Load Doors, With Kerbside Side Load Doors', 'Base Number: 14553', 'Callout Name: 14553'] -> cover None
+#   ## ford window-regulator 6CPZ-9923394-C apps [['Ford', 'Focus', 2015, 2015], ['Ford', 'Transit Connect', 2015, 2015]]
+#      note: Ford catalog lists #6CPZ-9923394-C for both — window motor only; trim-limited; FWD only; verify the number on the part
+#      Ford Focus 2015: bodies ['hatchback', 'sedan']; own rows ['www.fordpartsgiant.com:records:L992']
+#         page 2015-ford-focus/body_and_paint/front_door_glass_window_controls.html notes ['Motor Assy', 'Fit Note: Power Frt Window-1 Tch Dwn-Dr Only', 'Base Number: 14553', 'Callout Name: 14553'] -> cover None
+#      Ford Transit Connect 2015: bodies ['van']; own rows ['www.fordpartsgiant.com:lists:L333']
+#         page 2015-ford-transit_connect/body_and_paint/front_door_glass_window_controls.html notes ['Motor Assy', 'Fit Note: Power Frt Window-1 Tch Dwn-Dr Only', 'Base Number: 14553', 'Callout Name: 14553'] -> cover None
+#   ## ford window-regulator CV6Z-5423394-B apps [['Ford', 'C-Max', 2013, 2013], ['Ford', 'Focus', 2012, 2012]]
+#      note: Ford catalog lists #CV6Z-5423394-B for both — window motor only; fits some configurations; C-Max: 2WD only; Focus: FWD only; verify the number on the part
+#      Ford C-Max 2013: bodies ['hatchback']; own rows ['www.fordpartsgiant.com:lists:L283']
+#         page 2013-ford-c_max/body_and_paint/front_door_glass_window_controls.html notes ['Motor Assy', 'Callout Name: 14553'] -> cover None
+#      Ford Focus 2012: bodies ['hatchback', 'sedan']; own rows ['www.fordpartsgiant.com:records:L144']
+#         page 2012-ford-focus/body_and_paint/front_door_glass_window_controls.html notes ['Motor Assy', 'Fit Note: Power Front Windows One Touch Up/Do', 'Callout Name: 14553'] -> cover None
+#   ## ford window-regulator CV6Z-5423395-B apps [['Ford', 'C-Max', 2013, 2013], ['Ford', 'Focus', 2012, 2012]]
+#      note: Ford catalog lists #CV6Z-5423395-B for both — window motor only; fits some configurations; C-Max: 2WD only; Focus: FWD only; verify the number on the part
+#      Ford C-Max 2013: bodies ['hatchback']; own rows ['www.fordpartsgiant.com:lists:L283']
+#         page 2013-ford-c_max/body_and_paint/front_door_glass_window_controls.html notes ['Motor Assy', 'Callout Name: 14553'] -> cover None
+#      Ford Focus 2012: bodies ['hatchback', 'sedan']; own rows ['www.fordpartsgiant.com:records:L145']
+#         page 2012-ford-focus/body_and_paint/front_door_glass_window_controls.html notes ['Motor Assy', 'Fit Note: Power Front Windows One Touch Up/Do', 'Callout Name: 14553'] -> cover None
+#   ## subaru hood 57229AG04A9P apps [['Subaru', 'Legacy', 2005, 2005], ['Subaru', 'Outback', 2005, 2005]]
+#      note: Subaru catalog lists #57229AG04A9P for both — Turbo hood (scoop cutout): Legacy GT / Outback XT only; verify the number on the part
+#      Subaru Legacy 2005: bodies ['sedan', 'wagon']; own rows ['www.subarupartsdeal.com:lists:L413']
+#         page 2005-subaru-legacy/body_key_kit_bumper/front_hood_front_hood_lock.html notes ['Fitting Vehicle Options: S.(25GT+25GTLTD) +W.(25GT+25GTLTD) +WOBK.25GTLTD, S.25GLI +W.25GLI +WOBK.(25GT+25GLI)'] -> cover {'wagon', 'sedan'}
+#         fitment trims: ['GT, GT Limited']
+#      Subaru Outback 2005: bodies ['wagon']; own rows ['www.subarupartsdeal.com:lists:L306']
+#         page 2005-subaru-outback/body_key_kit_bumper/front_hood_front_hood_lock.html notes ['Fitting Vehicle Options: S.(25GT+25GTLTD) +W.(25GT+25GTLTD) +WOBK.25GTLTD, S.25GLI +W.25GLI +WOBK.(25GT+25GLI)'] -> cover {'wagon', 'sedan'}
+#         fitment trims: ['GT, GT Limited']
+
+gm CHANGED LIVE ('climate-control', ('15098963',)) [['Chevrolet', 'S-10', 2000, 2000], ['GMC', 'Jimmy', 1998, 1998], ['GMC', 'Sonoma', 2000, 2000]] lost [] gained []
+    old: GM catalog lists #15098963 for both — option: fits some option packages; verify the number on the part
+    new: GM catalog lists #15098963 for both — option: fits some option packages; S-10: 2WD only; verify the number on the part
+gm CHANGED LIVE ('climate-control', ('15858832',)) [['Chevrolet', 'Colorado', 2005, 2005], ['GMC', 'Canyon', 2005, 2005]] lost [] gained []
+    old: GM catalog lists #15858832 for both — option: fits some option packages; verify the number on the part
+    new: GM catalog lists #15858832 for both — option: fits some option packages; Colorado: 2WD only; verify the number on the part
+gm ADDED LIVE ('climate-control', ('15890412',)) [['Chevrolet', 'Cobalt', 2007, 2007], ['Pontiac', 'G5', 2007, 2007]] | GM catalog lists #15890412 for both — option: fits some option packages; verify the number on the part
+gm CHANGED LIVE ('climate-control', ('19433953',)) [['Chevrolet', 'Colorado', 2005, 2005], ['GMC', 'Canyon', 2005, 2005], ['GMC', 'Canyon', 2011, 2011]] lost [] gained []
+    old: GM catalog lists #19433953 for both — option: fits some option packages; verify the number on the part
+    new: GM catalog lists #19433953 for both — option: fits some option packages; Colorado: 2WD only; verify the number on the part
+gm CHANGED LIVE ('climate-control', ('20787112',)) [['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Silverado 1500', 2008, 2008], ['Chevrolet', 'Tahoe', 2007, 2007]] lost [] gained []
+    old: GM catalog lists #20787112 for both — option: fits some option packages; verify the number on the part
+    new: GM catalog lists #20787112 for both — option: fits some option packages; Tahoe: 2WD only; verify the number on the part
+gm CHANGED LIVE ('headlights', ('22853025',)) [['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Tahoe', 2007, 2007]] lost [] gained []
+    old: GM catalog lists #22853025 for both — fits some configurations; verify the number on the part
+    new: GM catalog lists #22853025 for both — fits some configurations; Tahoe: 2WD only; verify the number on the part
+gm CHANGED LIVE ('headlights', ('22853026',)) [['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Tahoe', 2007, 2007]] lost [] gained []
+    old: GM catalog lists #22853026 for both — fits some configurations; verify the number on the part
+    new: GM catalog lists #22853026 for both — fits some configurations; Tahoe: 2WD only; verify the number on the part
+gm CHANGED LIVE ('side-mirrors', ('19153377',)) [['GMC', 'Sierra 1500', 2004, 2004], ['GMC', 'Yukon', 2003, 2003]] lost [] gained []
+    old: GM catalog lists #19153377 for both — fits some configurations; verify the number on the part
+    new: GM catalog lists #19153377 for both — fits some configurations; Yukon: 2WD only; verify the number on the part
+gm CHANGED LIVE ('side-mirrors', ('19153378',)) [['GMC', 'Sierra 1500', 2004, 2004], ['GMC', 'Yukon', 2003, 2003]] lost [] gained []
+    old: GM catalog lists #19153378 for both — fits some configurations; verify the number on the part
+    new: GM catalog lists #19153378 for both — fits some configurations; Yukon: 2WD only; verify the number on the part
+gm CHANGED LIVE ('side-mirrors', ('20809948',)) [['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Silverado 1500', 2008, 2008], ['Chevrolet', 'Silverado 1500', 2012, 2012]] lost [] gained []
+    old: GM catalog lists #20809948 for both — option: fits some option packages; verify the number on the part
+    new: GM catalog lists #20809948 for both — option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part
+gm CHANGED LIVE ('side-mirrors', ('20809968',)) [['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Silverado 1500', 2008, 2008], ['Chevrolet', 'Silverado 1500', 2012, 2012]] lost [] gained []
+    old: GM catalog lists #20809968 for both — option: fits some option packages; verify the number on the part
+    new: GM catalog lists #20809968 for both — option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part
+gm CHANGED LIVE ('side-mirrors', ('20843116',)) [['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Silverado 1500', 2008, 2008], ['Chevrolet', 'Silverado 1500', 2012, 2012]] lost [] gained []
+    old: GM catalog lists #20843116 for both — option: fits some option packages; verify the number on the part
+    new: GM catalog lists #20843116 for both — option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part
+gm CHANGED LIVE ('side-mirrors', ('20843177',)) [['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Silverado 1500', 2008, 2008], ['Chevrolet', 'Silverado 1500', 2012, 2012]] lost [] gained []
+    old: GM catalog lists #20843177 for both — option: fits some option packages; verify the number on the part
+    new: GM catalog lists #20843177 for both — option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part
+gm CHANGED LIVE ('side-mirrors', ('20862098',)) [['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Silverado 1500', 2008, 2008], ['Chevrolet', 'Silverado 1500', 2012, 2012]] lost [] gained []
+    old: GM catalog lists #20862098 for both — option: fits some option packages; verify the number on the part
+    new: GM catalog lists #20862098 for both — option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part
+gm REMOVED LIVE ('side-mirrors', ('20862099',)) [['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Silverado 1500', 2008, 2008], ['Chevrolet', 'Silverado 1500', 2012, 2012]]
+gm CHANGED LIVE ('tail-lights', ('19179358',)) [['Chevrolet', 'Blazer', 2001, 2001], ['GMC', 'Jimmy', 1998, 1998]] lost [] gained []
+    old: GM catalog lists #19179358 for both — option: fits some option packages; verify the number on the part
+    new: GM catalog lists #19179358 for both — option: fits some option packages; Blazer: 2WD only; verify the number on the part
+gm CHANGED LIVE ('tail-lights', ('19179679',)) [['Chevrolet', 'Blazer', 2001, 2001], ['GMC', 'Jimmy', 1998, 1998]] lost [] gained []
+    old: GM catalog lists #19179679 for both — option: fits some option packages; verify the number on the part
+    new: GM catalog lists #19179679 for both — option: fits some option packages; Blazer: 2WD only; verify the number on the part
+gm CHANGED LIVE ('tail-lights', ('19417443',)) [['Chevrolet', 'Colorado', 2005, 2005], ['GMC', 'Canyon', 2005, 2005], ['GMC', 'Canyon', 2011, 2011]] lost [] gained []
+    old: GM catalog lists #19417443 for both — fits some configurations; verify the number on the part
+    new: GM catalog lists #19417443 for both — fits some configurations; Colorado: 2WD only; verify the number on the part
+gm CHANGED LIVE ('tail-lights', ('19417444',)) [['Chevrolet', 'Colorado', 2005, 2005], ['GMC', 'Canyon', 2005, 2005], ['GMC', 'Canyon', 2011, 2011]] lost [] gained []
+    old: GM catalog lists #19417444 for both — fits some configurations; verify the number on the part
+    new: GM catalog lists #19417444 for both — fits some configurations; Colorado: 2WD only; verify the number on the part
+gm CHANGED LIVE ('tail-lights', ('5978195',)) [['Chevrolet', 'S-10', 2000, 2000], ['GMC', 'Sonoma', 1996, 1996], ['GMC', 'Sonoma', 2000, 2000]] lost [] gained []
+    old: GM catalog lists #5978195 for both — fits some configurations; verify the number on the part
+    new: GM catalog lists #5978195 for both — fits some configurations; S-10: 2WD only; verify the number on the part
+gm CHANGED LIVE ('tail-lights', ('5978196',)) [['Chevrolet', 'S-10', 2000, 2000], ['GMC', 'Sonoma', 1996, 1996], ['GMC', 'Sonoma', 2000, 2000]] lost [] gained []
+    old: GM catalog lists #5978196 for both — fits some configurations; verify the number on the part
+    new: GM catalog lists #5978196 for both — fits some configurations; S-10: 2WD only; verify the number on the part
+gm REMOVED LIVE ('window-regulator', ('15113351',)) [['Chevrolet', 'Colorado', 2005, 2005], ['GMC', 'Canyon', 2005, 2005]]
+gm REMOVED LIVE ('window-regulator', ('15113352',)) [['Chevrolet', 'Colorado', 2005, 2005], ['GMC', 'Canyon', 2005, 2005]]
+gm CHANGED LIVE ('window-regulator', ('15643719',)) [['Chevrolet', 'Tahoe', 1999, 1999], ['GMC', 'Yukon', 1999, 1999]] lost [] gained []
+    old: GM catalog lists #15643719 for both — regulator with motor; fits some configurations; verify the number on the part
+    new: GM catalog lists #15643719 for both — regulator with motor; fits some configurations; Tahoe: 2WD only; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('15643720',)) [['Chevrolet', 'Tahoe', 1999, 1999], ['GMC', 'Yukon', 1999, 1999]] lost [] gained []
+    old: GM catalog lists #15643720 for both — regulator with motor; fits some configurations; verify the number on the part
+    new: GM catalog lists #15643720 for both — regulator with motor; fits some configurations; Tahoe: 2WD only; verify the number on the part
+gm REMOVED LIVE ('window-regulator', ('15844876',)) [['Cadillac', 'Escalade', 2007, 2007], ['Chevrolet', 'Silverado 1500', 2008, 2008], ['Chevrolet', 'Silverado 1500', 2012, 2012]]
+gm REMOVED LIVE ('window-regulator', ('15844877',)) [['Cadillac', 'Escalade', 2007, 2007], ['Chevrolet', 'Silverado 1500', 2008, 2008], ['Chevrolet', 'Silverado 1500', 2012, 2012]]
+gm REMOVED LIVE ('window-regulator', ('15922916',)) [['Chevrolet', 'Colorado', 2005, 2005], ['GMC', 'Canyon', 2005, 2005], ['GMC', 'Canyon', 2011, 2011]]
+gm REMOVED LIVE ('window-regulator', ('15922917',)) [['Chevrolet', 'Colorado', 2005, 2005], ['GMC', 'Canyon', 2005, 2005], ['GMC', 'Canyon', 2011, 2011]]
+gm CHANGED LIVE ('window-regulator', ('19167712',)) [['Chevrolet', 'Colorado', 2005, 2005], ['GMC', 'Canyon', 2005, 2005], ['GMC', 'Canyon', 2011, 2011]] lost [] gained []
+    old: GM catalog lists #19167712 for both — window motor only; fits some configurations; verify the number on the part
+    new: GM catalog lists #19167712 for both — window motor only; fits some configurations; Colorado: 2WD only; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('19167713',)) [['Chevrolet', 'Colorado', 2005, 2005], ['GMC', 'Canyon', 2005, 2005], ['GMC', 'Canyon', 2011, 2011]] lost [] gained []
+    old: GM catalog lists #19167713 for both — window motor only; fits some configurations; verify the number on the part
+    new: GM catalog lists #19167713 for both — window motor only; fits some configurations; Colorado: 2WD only; verify the number on the part
+gm REMOVED LIVE ('window-regulator', ('19167714',)) [['Chevrolet', 'Colorado', 2005, 2005], ['GMC', 'Canyon', 2005, 2005], ['GMC', 'Canyon', 2011, 2011]]
+gm REMOVED LIVE ('window-regulator', ('19167715',)) [['Chevrolet', 'Colorado', 2005, 2005], ['GMC', 'Canyon', 2005, 2005], ['GMC', 'Canyon', 2011, 2011]]
+gm CHANGED LIVE ('window-regulator', ('19331461',)) [['Buick', 'Rainier', 2004, 2004], ['Chevrolet', 'Trailblazer', 2004, 2004]] lost [] gained []
+    old: GM catalog lists #19331461 for both — regulator without motor; option: fits some option packages; verify the number on the part
+    new: GM catalog lists #19331461 for both — regulator without motor; option: fits some option packages; Trailblazer: 2WD only; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('19331462',)) [['Buick', 'Rainier', 2004, 2004], ['Chevrolet', 'Trailblazer', 2004, 2004]] lost [] gained []
+    old: GM catalog lists #19331462 for both — regulator without motor; fits some configurations; verify the number on the part
+    new: GM catalog lists #19331462 for both — regulator without motor; fits some configurations; Trailblazer: 2WD only; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('19331463',)) [['Buick', 'Rainier', 2004, 2004], ['Chevrolet', 'Trailblazer', 2004, 2004]] lost [] gained []
+    old: GM catalog lists #19331463 for both — regulator without motor; fits some configurations; verify the number on the part
+    new: GM catalog lists #19331463 for both — regulator without motor; fits some configurations; Trailblazer: 2WD only; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('19331466',)) [['Buick', 'Rainier', 2004, 2004], ['Chevrolet', 'Trailblazer', 2004, 2004]] lost [] gained []
+    old: GM catalog lists #19331466 for both — regulator without motor; option: fits some option packages; verify the number on the part
+    new: GM catalog lists #19331466 for both — regulator without motor; option: fits some option packages; Trailblazer: 2WD only; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('20785728',)) [['Chevrolet', 'Traverse', 2011, 2011], ['Saturn', 'Outlook', 2008, 2008]] lost [] gained []
+    old: GM catalog lists #20785728 for both — fits some configurations; verify the number on the part
+    new: GM catalog lists #20785728 for both — fits some configurations; Traverse: 2WD only; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('20785729',)) [['Chevrolet', 'Traverse', 2011, 2011], ['Saturn', 'Outlook', 2008, 2008]] lost [] gained []
+    old: GM catalog lists #20785729 for both — fits some configurations; verify the number on the part
+    new: GM catalog lists #20785729 for both — fits some configurations; Traverse: 2WD only; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('20914715',)) [['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Silverado 1500', 2008, 2008], ['Chevrolet', 'Silverado 1500', 2012, 2012]] lost [] gained []
+    old: GM catalog lists #20914715 for both — regulator without motor; option: fits some option packages; verify the number on the part
+    new: GM catalog lists #20914715 for both — regulator without motor; option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('20914716',)) [['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Silverado 1500', 2008, 2008], ['Chevrolet', 'Silverado 1500', 2012, 2012]] lost [] gained []
+    old: GM catalog lists #20914716 for both — regulator without motor; option: fits some option packages; verify the number on the part
+    new: GM catalog lists #20914716 for both — regulator without motor; option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('20945138',)) [['Cadillac', 'Escalade', 2007, 2007], ['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Silverado 1500', 2008, 2008], ['Chevrolet', 'Silverado 1500', 2012, 2012]] lost [] gained []
+    old: GM catalog lists #20945138 for both — regulator with motor; option: fits some option packages; verify the number on the part
+    new: GM catalog lists #20945138 for both — regulator with motor; option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('20945139',)) [['Cadillac', 'Escalade', 2007, 2007], ['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Silverado 1500', 2008, 2008], ['Chevrolet', 'Silverado 1500', 2012, 2012]] lost [] gained []
+    old: GM catalog lists #20945139 for both — regulator with motor; option: fits some option packages; verify the number on the part
+    new: GM catalog lists #20945139 for both — regulator with motor; option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part
+gm REMOVED LIVE ('window-regulator', ('20945140',)) [['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Silverado 1500', 2008, 2008], ['Chevrolet', 'Silverado 1500', 2012, 2012]]
+gm REMOVED LIVE ('window-regulator', ('20945141',)) [['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Silverado 1500', 2008, 2008], ['Chevrolet', 'Silverado 1500', 2012, 2012]]
+gm CHANGED LIVE ('window-regulator', ('23227000',)) [['Cadillac', 'Escalade', 2007, 2007], ['Chevrolet', 'Tahoe', 2007, 2007]] lost [] gained []
+    old: GM catalog lists #23227000 for both — regulator with motor; fits some configurations; verify the number on the part
+    new: GM catalog lists #23227000 for both — regulator with motor; fits some configurations; Tahoe: 2WD only; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('23227001',)) [['Cadillac', 'Escalade', 2007, 2007], ['Chevrolet', 'Tahoe', 2007, 2007]] lost [] gained []
+    old: GM catalog lists #23227001 for both — regulator with motor; fits some configurations; verify the number on the part
+    new: GM catalog lists #23227001 for both — regulator with motor; fits some configurations; Tahoe: 2WD only; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('25783492',)) [['Chevrolet', 'Traverse', 2011, 2011], ['Saturn', 'Outlook', 2008, 2008]] lost [] gained []
+    old: GM catalog lists #25783492 for both — window motor only; fits some configurations; verify the number on the part
+    new: GM catalog lists #25783492 for both — window motor only; fits some configurations; Traverse: 2WD only; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('25783493',)) [['Chevrolet', 'Traverse', 2011, 2011], ['Saturn', 'Outlook', 2008, 2008]] lost [] gained []
+    old: GM catalog lists #25783493 for both — window motor only; fits some configurations; verify the number on the part
+    new: GM catalog lists #25783493 for both — window motor only; fits some configurations; Traverse: 2WD only; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('25783494',)) [['Chevrolet', 'Traverse', 2011, 2011], ['Saturn', 'Outlook', 2008, 2008]] lost [] gained []
+    old: GM catalog lists #25783494 for both — window motor only; fits some configurations; verify the number on the part
+    new: GM catalog lists #25783494 for both — window motor only; fits some configurations; Traverse: 2WD only; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('25783495',)) [['Chevrolet', 'Traverse', 2011, 2011], ['Saturn', 'Outlook', 2008, 2008]] lost [] gained []
+    old: GM catalog lists #25783495 for both — window motor only; fits some configurations; verify the number on the part
+    new: GM catalog lists #25783495 for both — window motor only; fits some configurations; Traverse: 2WD only; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('5483148',)) [['Chevrolet', 'Blazer', 2001, 2001], ['GMC', 'Jimmy', 1998, 1998]] lost [] gained []
+    old: GM catalog lists #5483148 for both — fits some configurations; verify the number on the part
+    new: GM catalog lists #5483148 for both — fits some configurations; Blazer: 2WD only; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('5483149',)) [['Chevrolet', 'Blazer', 2001, 2001], ['GMC', 'Jimmy', 1998, 1998]] lost [] gained []
+    old: GM catalog lists #5483149 for both — fits some configurations; verify the number on the part
+    new: GM catalog lists #5483149 for both — fits some configurations; Blazer: 2WD only; verify the number on the part
+gm ADDED LIVE ('window-regulator', ('88960088',)) [['Chevrolet', 'Camaro', 1995, 1995], ['GMC', 'Safari', 1997, 1997], ['Pontiac', 'Firebird', 1995, 1995]] | GM catalog lists #88960088 for both — window motor only; fits some configurations; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('88980703',)) [['Buick', 'Rainier', 2004, 2004], ['Chevrolet', 'Trailblazer', 2004, 2004]] lost [] gained []
+    old: GM catalog lists #88980703 for both — window motor only; fits some configurations; verify the number on the part
+    new: GM catalog lists #88980703 for both — window motor only; fits some configurations; Trailblazer: 2WD only; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('88980704',)) [['Buick', 'Rainier', 2004, 2004], ['Chevrolet', 'Trailblazer', 2004, 2004]] lost [] gained []
+    old: GM catalog lists #88980704 for both — window motor only; fits some configurations; verify the number on the part
+    new: GM catalog lists #88980704 for both — window motor only; fits some configurations; Trailblazer: 2WD only; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('88980705',)) [['Buick', 'Rainier', 2004, 2004], ['Chevrolet', 'Trailblazer', 2004, 2004]] lost [] gained []
+    old: GM catalog lists #88980705 for both — window motor only; fits some configurations; verify the number on the part
+    new: GM catalog lists #88980705 for both — window motor only; fits some configurations; Trailblazer: 2WD only; verify the number on the part
+gm CHANGED LIVE ('window-regulator', ('88980706',)) [['Buick', 'Rainier', 2004, 2004], ['Chevrolet', 'Trailblazer', 2004, 2004]] lost [] gained []
+    old: GM catalog lists #88980706 for both — window motor only; fits some configurations; verify the number on the part
+    new: GM catalog lists #88980706 for both — window motor only; fits some configurations; Trailblazer: 2WD only; verify the number on the part
+gm CHANGED LIVE ('window-switch', ('20835552',)) [['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Silverado 1500', 2008, 2008], ['Chevrolet', 'Silverado 1500', 2012, 2012]] lost [] gained []
+    old: GM catalog lists #20835552 for both — option: fits some option packages; verify the number on the part
+    new: GM catalog lists #20835552 for both — option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part
+gm CHANGED LIVE ('window-switch', ('20835553',)) [['Chevrolet', 'Avalanche', 2007, 2007], ['Chevrolet', 'Silverado 1500', 2008, 2008], ['Chevrolet', 'Silverado 1500', 2012, 2012]] lost [] gained []
+    old: GM catalog lists #20835553 for both — option: fits some option packages; verify the number on the part
+    new: GM catalog lists #20835553 for both — option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part
+ford ADDED LIVE ('window-regulator', ('6CPZ-5423395-A',)) [['Ford', 'Focus', 2015, 2015], ['Ford', 'Transit Connect', 2015, 2015]] | Ford catalog lists #6CPZ-5423395-A for both — window motor only; trim-limited; FWD only; verify the number on the part
+ford ADDED LIVE ('window-regulator', ('6CPZ-5423395-B',)) [['Ford', 'Focus', 2015, 2015], ['Ford', 'Transit Connect', 2015, 2015]] | Ford catalog lists #6CPZ-5423395-B for both — window motor only; trim-limited; FWD only; verify the number on the part
+ford ADDED LIVE ('window-regulator', ('6CPZ-9923394-B',)) [['Ford', 'Focus', 2015, 2015], ['Ford', 'Transit Connect', 2015, 2015]] | Ford catalog lists #6CPZ-9923394-B for both — window motor only; trim-limited; FWD only; verify the number on the part
+ford ADDED LIVE ('window-regulator', ('6CPZ-9923394-C',)) [['Ford', 'Focus', 2015, 2015], ['Ford', 'Transit Connect', 2015, 2015]] | Ford catalog lists #6CPZ-9923394-C for both — window motor only; trim-limited; FWD only; verify the number on the part
+ford ADDED LIVE ('window-regulator', ('CV6Z-5423394-B',)) [['Ford', 'C-Max', 2013, 2013], ['Ford', 'Focus', 2012, 2012]] | Ford catalog lists #CV6Z-5423394-B for both — window motor only; fits some configurations; C-Max: 2WD only; Focus: FWD only; verify the number on the part
+ford ADDED LIVE ('window-regulator', ('CV6Z-5423395-B',)) [['Ford', 'C-Max', 2013, 2013], ['Ford', 'Focus', 2012, 2012]] | Ford catalog lists #CV6Z-5423395-B for both — window motor only; fits some configurations; C-Max: 2WD only; Focus: FWD only; verify the number on the part
+mopar CHANGED LIVE ('climate-control', ('55111290AD',)) [['Ram', '1500', 2012, 2012], ['Ram', '2500', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #55111290AD for both — older catalog-only number; verify the number on the part
+    new: Mopar catalog lists #55111290AD for both — older catalog-only number; 1500: 4WD only; verify the number on the part
+mopar CHANGED LIVE ('climate-control', ('55111291AC',)) [['Ram', '1500', 2012, 2012], ['Ram', '2500', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #55111291AC for both — older catalog-only number; verify the number on the part
+    new: Mopar catalog lists #55111291AC for both — older catalog-only number; 1500: 4WD only; verify the number on the part
+mopar CHANGED LIVE ('climate-control', ('55111292AD',)) [['Ram', '1500', 2012, 2012], ['Ram', '2500', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #55111292AD for both — older catalog-only number; verify the number on the part
+    new: Mopar catalog lists #55111292AD for both — older catalog-only number; 1500: 4WD only; verify the number on the part
+mopar CHANGED LIVE ('headlights', ('55277409AE',)) [['Ram', '1500', 2012, 2012], ['Ram', '2500', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #55277409AE for both — option: fits some option packages; verify the number on the part
+    new: Mopar catalog lists #55277409AE for both — option: fits some option packages; 1500: 4WD only; verify the number on the part
+mopar CHANGED LIVE ('headlights', ('55277410AE',)) [['Ram', '1500', 2012, 2012], ['Ram', '2500', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #55277410AE for both — option: fits some option packages; verify the number on the part
+    new: Mopar catalog lists #55277410AE for both — option: fits some option packages; 1500: 4WD only; verify the number on the part
+mopar CHANGED LIVE ('headlights', ('68001484AE',)) [['Ram', '1500', 2012, 2012], ['Ram', '2500', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #68001484AE for both — option: fits some option packages; verify the number on the part
+    new: Mopar catalog lists #68001484AE for both — option: fits some option packages; 1500: 4WD only; verify the number on the part
+mopar CHANGED LIVE ('headlights', ('68001485AE',)) [['Ram', '1500', 2012, 2012], ['Ram', '2500', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #68001485AE for both — option: fits some option packages; verify the number on the part
+    new: Mopar catalog lists #68001485AE for both — option: fits some option packages; 1500: 4WD only; verify the number on the part
+mopar CHANGED LIVE ('tail-lights', ('55277414AB',)) [['Ram', '1500', 2012, 2012], ['Ram', '2500', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #55277414AB for both — option: fits some option packages; verify the number on the part
+    new: Mopar catalog lists #55277414AB for both — option: fits some option packages; 1500: 4WD only; verify the number on the part
+mopar CHANGED LIVE ('tail-lights', ('55277415AB',)) [['Ram', '1500', 2012, 2012], ['Ram', '2500', 2011, 2011]] lost [] gained []
+    old: Mopar catalog lists #55277415AB for both — option: fits some option packages; verify the number on the part
+    new: Mopar catalog lists #55277415AB for both — option: fits some option packages; 1500: 4WD only; verify the number on the part
+subaru ADDED LIVE ('hood', ('57229AG04A9P',)) [['Subaru', 'Legacy', 2005, 2005], ['Subaru', 'Outback', 2005, 2005]] | Subaru catalog lists #57229AG04A9P for both — Turbo hood (scoop cutout): Legacy GT / Outback XT only; verify the number on the part
+hmg CHANGED HELD ('strut', ('546511M100',)) [['Kia', 'Forte', 2010, 2010], ['Kia', 'Forte Koup', 2010, 2010], ['Kia', 'Forte Koup', 2013, 2013]] lost [] gained []
+    old: Hyundai/Kia catalog lists #546511M100 for both — option: fits some option packages; verify the number on the part
+    new: Hyundai/Kia catalog lists #546511M100 for both — option: fits some option packages; 2WD, 2.0L only; verify the number on the part
+hmg CHANGED HELD ('strut', ('546511M200',)) [['Kia', 'Forte', 2010, 2010], ['Kia', 'Forte Koup', 2010, 2010], ['Kia', 'Forte Koup', 2013, 2013]] lost [] gained []
+    old: Hyundai/Kia catalog lists #546511M200 for both — option: fits some option packages; verify the number on the part
+    new: Hyundai/Kia catalog lists #546511M200 for both — option: fits some option packages; 2WD, 2.4L only; verify the number on the part
+hmg CHANGED HELD ('strut', ('546511M310',)) [['Kia', 'Forte', 2010, 2010], ['Kia', 'Forte Koup', 2010, 2010], ['Kia', 'Forte Koup', 2013, 2013]] lost [] gained []
+    old: Hyundai/Kia catalog lists #546511M310 for both — option: fits some option packages; verify the number on the part
+    new: Hyundai/Kia catalog lists #546511M310 for both — option: fits some option packages; 2WD, 2.0L only; verify the number on the part
+hmg CHANGED HELD ('strut', ('546511M320',)) [['Kia', 'Forte', 2010, 2010], ['Kia', 'Forte Koup', 2010, 2010], ['Kia', 'Forte Koup', 2013, 2013]] lost [] gained []
+    old: Hyundai/Kia catalog lists #546511M320 for both — option: fits some option packages; verify the number on the part
+    new: Hyundai/Kia catalog lists #546511M320 for both — option: fits some option packages; 2WD, 2.4L only; verify the number on the part
+hmg CHANGED HELD ('strut', ('546511M360',)) [['Kia', 'Forte', 2010, 2010], ['Kia', 'Forte Koup', 2010, 2010], ['Kia', 'Forte Koup', 2013, 2013]] lost [] gained []
+    old: Hyundai/Kia catalog lists #546511M360 for both — option: fits some option packages; verify the number on the part
+    new: Hyundai/Kia catalog lists #546511M360 for both — option: fits some option packages; 2WD only; verify the number on the part
+hmg CHANGED HELD ('strut', ('546511M520',)) [['Kia', 'Forte', 2010, 2010], ['Kia', 'Forte Koup', 2010, 2010], ['Kia', 'Forte Koup', 2013, 2013]] lost [] gained []
+    old: Hyundai/Kia catalog lists #546511M520 for both — option: fits some option packages; verify the number on the part
+    new: Hyundai/Kia catalog lists #546511M520 for both — option: fits some option packages; 2WD, 2.4L only; verify the number on the part
+hmg CHANGED HELD ('strut', ('54651A7200',)) [['Kia', 'Forte', 2014, 2014], ['Kia', 'Forte Koup', 2014, 2014]] lost [] gained []
+    old: Hyundai/Kia catalog lists #54651A7200 for both — fits some configurations; verify the number on the part
+    new: Hyundai/Kia catalog lists #54651A7200 for both — fits some configurations; 1.8L only; verify the number on the part
+hmg CHANGED HELD ('strut', ('54651A7210',)) [['Kia', 'Forte', 2014, 2014], ['Kia', 'Forte Koup', 2014, 2014]] lost [] gained []
+    old: Hyundai/Kia catalog lists #54651A7210 for both — option: fits some option packages; verify the number on the part
+    new: Hyundai/Kia catalog lists #54651A7210 for both — option: fits some option packages; 1.6L/2.0L only; verify the number on the part
+hmg CHANGED HELD ('strut', ('54651A7300',)) [['Kia', 'Forte', 2014, 2014], ['Kia', 'Forte Koup', 2014, 2014]] lost [] gained []
+    old: Hyundai/Kia catalog lists #54651A7300 for both — option: fits some option packages; verify the number on the part
+    new: Hyundai/Kia catalog lists #54651A7300 for both — option: fits some option packages; 2WD, 2.0L, automatic only; verify the number on the part
+hmg CHANGED HELD ('strut', ('54651A7600',)) [['Kia', 'Forte', 2014, 2014], ['Kia', 'Forte Koup', 2014, 2014]] lost [] gained []
+    old: Hyundai/Kia catalog lists #54651A7600 for both — option: fits some option packages; verify the number on the part
+    new: Hyundai/Kia catalog lists #54651A7600 for both — option: fits some option packages; 1.6L only; verify the number on the part
+hmg CHANGED HELD ('strut', ('54651A7650',)) [['Kia', 'Forte', 2014, 2014], ['Kia', 'Forte Koup', 2014, 2014]] lost [] gained []
+    old: Hyundai/Kia catalog lists #54651A7650 for both — option: fits some option packages; verify the number on the part
+    new: Hyundai/Kia catalog lists #54651A7650 for both — option: fits some option packages; 2WD, 2.0L only; verify the number on the part
+hmg CHANGED HELD ('strut', ('546611M100',)) [['Kia', 'Forte', 2010, 2010], ['Kia', 'Forte Koup', 2010, 2010], ['Kia', 'Forte Koup', 2013, 2013]] lost [] gained []
+    old: Hyundai/Kia catalog lists #546611M100 for both — option: fits some option packages; verify the number on the part
+    new: Hyundai/Kia catalog lists #546611M100 for both — option: fits some option packages; 2WD, 2.0L only; verify the number on the part
+hmg CHANGED HELD ('strut', ('546611M200',)) [['Kia', 'Forte', 2010, 2010], ['Kia', 'Forte Koup', 2010, 2010], ['Kia', 'Forte Koup', 2013, 2013]] lost [] gained []
+    old: Hyundai/Kia catalog lists #546611M200 for both — option: fits some option packages; verify the number on the part
+    new: Hyundai/Kia catalog lists #546611M200 for both — option: fits some option packages; 2WD, 2.4L only; verify the number on the part
+hmg CHANGED HELD ('strut', ('546611M310',)) [['Kia', 'Forte', 2010, 2010], ['Kia', 'Forte Koup', 2010, 2010], ['Kia', 'Forte Koup', 2013, 2013]] lost [] gained []
+    old: Hyundai/Kia catalog lists #546611M310 for both — option: fits some option packages; verify the number on the part
+    new: Hyundai/Kia catalog lists #546611M310 for both — option: fits some option packages; 2WD, 2.0L only; verify the number on the part
+hmg CHANGED HELD ('strut', ('546611M320',)) [['Kia', 'Forte', 2010, 2010], ['Kia', 'Forte Koup', 2010, 2010], ['Kia', 'Forte Koup', 2013, 2013]] lost [] gained []
+    old: Hyundai/Kia catalog lists #546611M320 for both — option: fits some option packages; verify the number on the part
+    new: Hyundai/Kia catalog lists #546611M320 for both — option: fits some option packages; 2WD, 2.4L only; verify the number on the part
+hmg CHANGED HELD ('strut', ('546611M360',)) [['Kia', 'Forte', 2010, 2010], ['Kia', 'Forte Koup', 2010, 2010], ['Kia', 'Forte Koup', 2013, 2013]] lost [] gained []
+    old: Hyundai/Kia catalog lists #546611M360 for both — option: fits some option packages; verify the number on the part
+    new: Hyundai/Kia catalog lists #546611M360 for both — option: fits some option packages; 2WD only; verify the number on the part
+hmg CHANGED HELD ('strut', ('546611M520',)) [['Kia', 'Forte', 2010, 2010], ['Kia', 'Forte Koup', 2010, 2010], ['Kia', 'Forte Koup', 2013, 2013]] lost [] gained []
+    old: Hyundai/Kia catalog lists #546611M520 for both — option: fits some option packages; verify the number on the part
+    new: Hyundai/Kia catalog lists #546611M520 for both — option: fits some option packages; 2WD, 2.4L only; verify the number on the part
+hmg CHANGED HELD ('strut', ('54661A7200',)) [['Kia', 'Forte', 2014, 2014], ['Kia', 'Forte Koup', 2014, 2014]] lost [] gained []
+    old: Hyundai/Kia catalog lists #54661A7200 for both — fits some configurations; verify the number on the part
+    new: Hyundai/Kia catalog lists #54661A7200 for both — fits some configurations; 1.8L only; verify the number on the part
+hmg CHANGED HELD ('strut', ('54661A7210',)) [['Kia', 'Forte', 2014, 2014], ['Kia', 'Forte Koup', 2014, 2014]] lost [] gained []
+    old: Hyundai/Kia catalog lists #54661A7210 for both — option: fits some option packages; verify the number on the part
+    new: Hyundai/Kia catalog lists #54661A7210 for both — option: fits some option packages; 1.6L/2.0L only; verify the number on the part
+hmg CHANGED HELD ('strut', ('54661A7300',)) [['Kia', 'Forte', 2014, 2014], ['Kia', 'Forte Koup', 2014, 2014]] lost [] gained []
+    old: Hyundai/Kia catalog lists #54661A7300 for both — option: fits some option packages; verify the number on the part
+    new: Hyundai/Kia catalog lists #54661A7300 for both — option: fits some option packages; 2WD, 2.0L, automatic only; verify the number on the part
+hmg CHANGED HELD ('strut', ('54661A7600',)) [['Kia', 'Forte', 2014, 2014], ['Kia', 'Forte Koup', 2014, 2014]] lost [] gained []
+    old: Hyundai/Kia catalog lists #54661A7600 for both — option: fits some option packages; verify the number on the part
+    new: Hyundai/Kia catalog lists #54661A7600 for both — option: fits some option packages; 1.6L only; verify the number on the part
+hmg CHANGED HELD ('strut', ('54661A7650',)) [['Kia', 'Forte', 2014, 2014], ['Kia', 'Forte Koup', 2014, 2014]] lost [] gained []
+    old: Hyundai/Kia catalog lists #54661A7650 for both — option: fits some option packages; verify the number on the part
+    new: Hyundai/Kia catalog lists #54661A7650 for both — option: fits some option packages; 2WD, 2.0L only; verify the number on the part
+hmg CHANGED HELD ('strut', ('553001M100',)) [['Kia', 'Forte', 2010, 2010], ['Kia', 'Forte Koup', 2010, 2010], ['Kia', 'Forte Koup', 2013, 2013]] lost [] gained []
+    old: Hyundai/Kia catalog lists #553001M100 for both — option: fits some option packages; verify the number on the part
+    new: Hyundai/Kia catalog lists #553001M100 for both — option: fits some option packages; 2.0L only; verify the number on the part
+hmg CHANGED HELD ('strut', ('553001M200',)) [['Kia', 'Forte', 2010, 2010], ['Kia', 'Forte Koup', 2010, 2010], ['Kia', 'Forte Koup', 2013, 2013]] lost [] gained []
+    old: Hyundai/Kia catalog lists #553001M200 for both — option: fits some option packages; verify the number on the part
+    new: Hyundai/Kia catalog lists #553001M200 for both — option: fits some option packages; 2.4L only; verify the number on the part
+hmg CHANGED HELD ('strut', ('553001M310',)) [['Kia', 'Forte', 2010, 2010], ['Kia', 'Forte Koup', 2010, 2010], ['Kia', 'Forte Koup', 2013, 2013]] lost [] gained []
+    old: Hyundai/Kia catalog lists #553001M310 for both — option: fits some option packages; verify the number on the part
+    new: Hyundai/Kia catalog lists #553001M310 for both — option: fits some option packages; 2.0L only; verify the number on the part
+hmg CHANGED HELD ('strut', ('553001M320',)) [['Kia', 'Forte', 2010, 2010], ['Kia', 'Forte Koup', 2010, 2010], ['Kia', 'Forte Koup', 2013, 2013]] lost [] gained []
+    old: Hyundai/Kia catalog lists #553001M320 for both — option: fits some option packages; verify the number on the part
+    new: Hyundai/Kia catalog lists #553001M320 for both — option: fits some option packages; 2.4L only; verify the number on the part
+hmg CHANGED HELD ('strut', ('553001M510',)) [['Kia', 'Forte', 2010, 2010], ['Kia', 'Forte Koup', 2010, 2010]] lost [] gained []
+    old: Hyundai/Kia catalog lists #553001M510 for both — option: fits some option packages; verify the number on the part
+    new: Hyundai/Kia catalog lists #553001M510 for both — option: fits some option packages; 2.0L only; verify the number on the part
+hmg CHANGED HELD ('strut', ('553001M520',)) [['Kia', 'Forte', 2010, 2010], ['Kia', 'Forte Koup', 2010, 2010], ['Kia', 'Forte Koup', 2013, 2013]] lost [] gained []
+    old: Hyundai/Kia catalog lists #553001M520 for both — option: fits some option packages; verify the number on the part
+    new: Hyundai/Kia catalog lists #553001M520 for both — option: fits some option packages; 2.4L only; verify the number on the part
+hmg CHANGED HELD ('strut', ('55300A7020',)) [['Kia', 'Forte', 2014, 2014], ['Kia', 'Forte Koup', 2014, 2014]] lost [] gained []
+    old: Hyundai/Kia catalog lists #55300A7020 for both — option: fits some option packages; verify the number on the part
+    new: Hyundai/Kia catalog lists #55300A7020 for both — option: fits some option packages; 1.6L/2.0L only; verify the number on the part
+hmg CHANGED HELD ('strut', ('55300A7300',)) [['Kia', 'Forte', 2014, 2014], ['Kia', 'Forte Koup', 2014, 2014]] lost [] gained []
+    old: Hyundai/Kia catalog lists #55300A7300 for both — fits some configurations; verify the number on the part
+    new: Hyundai/Kia catalog lists #55300A7300 for both — fits some configurations; 1.8L only; verify the number on the part
+hmg CHANGED HELD ('strut', ('55300A7400',)) [['Kia', 'Forte', 2014, 2014], ['Kia', 'Forte Koup', 2014, 2014]] lost [] gained []
+    old: Hyundai/Kia catalog lists #55300A7400 for both — fits some configurations; verify the number on the part
+    new: Hyundai/Kia catalog lists #55300A7400 for both — fits some configurations; 1.8L only; verify the number on the part
+hmg CHANGED HELD ('strut', ('55300A7600',)) [['Kia', 'Forte', 2014, 2014], ['Kia', 'Forte Koup', 2014, 2014]] lost [] gained []
+    old: Hyundai/Kia catalog lists #55300A7600 for both — option: fits some option packages; verify the number on the part
+    new: Hyundai/Kia catalog lists #55300A7600 for both — option: fits some option packages; 1.6L only; verify the number on the part
+hmg CHANGED HELD ('strut', ('55300A7650',)) [['Kia', 'Forte', 2014, 2014], ['Kia', 'Forte Koup', 2014, 2014]] lost [] gained []
+    old: Hyundai/Kia catalog lists #55300A7650 for both — option: fits some option packages; verify the number on the part
+    new: Hyundai/Kia catalog lists #55300A7650 for both — option: fits some option packages; 2.0L only; verify the number on the part
+hmg CHANGED HELD ('strut', ('55300A7660',)) [['Kia', 'Forte', 2014, 2014], ['Kia', 'Forte Koup', 2014, 2014]] lost [] gained []
+    old: Hyundai/Kia catalog lists #55300A7660 for both — option: fits some option packages; verify the number on the part
+    new: Hyundai/Kia catalog lists #55300A7660 for both — option: fits some option packages; 2.0L only; verify the number on the part
+hmg CHANGED HELD ('strut', ('55300A7670',)) [['Kia', 'Forte', 2014, 2014], ['Kia', 'Forte Koup', 2014, 2014]] lost [] gained []
+    old: Hyundai/Kia catalog lists #55300A7670 for both — option: fits some option packages; verify the number on the part
+    new: Hyundai/Kia catalog lists #55300A7670 for both — option: fits some option packages; 1.6L only; verify the number on the part
+mb CHANGED LIVE ('wheels', ('6-6-47-4207',)) [['Mercedes-Benz', 'ML350', 2007, 2008], ['Mercedes-Benz', 'ML500', 2006, 2006]] lost [] gained []
+    old: Mercedes catalog lists #6-6-47-4207 for both — trim-limited; verify the number on the part
+    new: Mercedes catalog lists #6-6-47-4207 for both — trim-limited; ML350: AWD only; verify the number on the part
