@@ -33,10 +33,10 @@
  "standard": "Each item is judged from the raw product-page fitment rows and each app vehicle-year's own list-page row (Fitting Vehicle Options, Production Date), plus the lot at a85c654 replayed through a Python port of the app's OEM-GATE code (pfOemDonorGate). WRONG: a car the app shows as a plain row cannot take the part per the raw evidence, judged on what the app could know: the car's own decode/listing (drive, engine, body, cab, trans, fuel) contradicts a limit the catalog states (product-page engine column, own-page option codes), or no car of an app-year can take it, or the number is a market variant (km/h cluster) whose US-market counterpart is a different number with different sharing. Trim, option-package and partial production-date limits that no decode can show are taken as carried by the group's 'fits some option packages / configurations; verify the number on the part' note (the design the app ships), and recorded as observations when the catalog names the trim plainly. RISK: the evidence for a shown row is incomplete either way. PARTIAL WORK: verdicts still being written; PENDING items are not yet judged.",
  "counts": {
   "groups": {
-   "RIGHT": 15,
-   "WRONG": 5,
+   "RIGHT": 21,
+   "WRONG": 9,
    "RISK": 0,
-   "PENDING": 10
+   "PENDING": 0
   },
   "pairs": {
    "RIGHT": 0,
@@ -7845,7 +7845,8 @@
      2017
     ]
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "82720-1BA0A. Own pages EX35 2009-2012, EX37 2013, QX50 2014-2017 (including the 2016-2017 long-wheelbase QX50) list it with no option note, replaced by 82720-1BA0B. EX35 2008 has no list page; the product page covers EX35 2008-2012, EX37 2013, QX50 2014-2017, all trims and engines.",
    "raw_product_records": [
     {
      "ref": "www.infinitipartsdeal.com:records:L554",
@@ -8351,7 +8352,8 @@
      1996
     ]
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "82721-0E715 (power rear LH regulator). Own pages Altima 1994, 1996, Stanza 1994-1996: 'FED. S. (GXE+ GLE+ SE) + CAL. S. (GXE+ GLE+ SE)', prod 08/1993-02/1996, replaced by 82721-0E717 (from 07/1996, MY1997 left out of the group). XE takes the manual 82701-0E710. Option (power windows) and production-date limits carried by the note.",
    "raw_product_records": [
     {
      "ref": "www.nissanpartsdeal.com:records:L1563",
@@ -8605,7 +8607,9 @@
      2019
     ]
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "82730-1MA0B rear RH window motor. Own pages Q70 2018-2019 (gas), Q70L 2018-2019, QX80 2018-2019: from 04/2017 (Q70/Q70L 2018), from 10/2017 (QX80 2018), no date 2019; it replaces 82730-1MA0A. Product page lists M35h/M37/M56, Q70 (incl. VQ35HR hybrid), Q70L, QX56, QX80. One lot car (Q70 2019).",
+   "observation": "the 'Q70 2018: gas only' gate/note is stricter than the product page (which lists the M35h and the Q70's VQ35HR hybrid); harmless",
    "raw_product_records": [
     {
      "ref": "www.infinitipartsdeal.com:records:L2425",
@@ -8772,7 +8776,8 @@
      }
     ]
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "82720-7S000 rear RH regulator. Own pages Armada 2004-2006 and Titan 2005-2006 (prod to 12/2005, then 82720-ZC30A; both replaced by 82720-ZV50A); Titan 2004 has no list page, product page covers it. Titan gated 'crew cab' (466 Titan lot cars 'if equipped ... crew cab'); Armada plain. Production-date split in MY2006 carried by the note.",
    "raw_product_records": [
     {
      "ref": "www.nissanpartsdeal.com:records:L857",
@@ -9390,7 +9395,9 @@
      }
     ]
    ],
-   "verdict": "PENDING",
+   "verdict": "WRONG",
+   "reason": "80721-3S500 (power front LH regulator, 'F/POWER WINDOW'). Frontier 1998-2001 own pages list it for T (regular cab), KC and CC, but the 2002 page (nissanpartsdeal lists L333) lists it only for '*KC + *CC, *KC + *CC. SB + *CC. XB' while the same page lists the regular cab under 80721-3S510 'KC + CC. SB + CC. XB, T + KC + CC'. So a 2002 regular-cab Frontier takes 3S510, not 3S500. The Frontier app is ungated, so every 2002 Frontier on the lot (70 cars, cab unknown) is a plain row; a cab gate cannot say 'king cab or crew cab' in the current format, so the year needed refusing or a two-cab gate. The 2003 page lists no regular cab for any front regulator. Xterra 2004 gate eng 3.3L is weaker than the 2004 row ('*W. VG33ER. XE'), but displacement cannot separate VG33E from VG33ER.",
+   "class": "ungated cab exclusion (regular cab)",
    "raw_product_records": [
     {
      "ref": "www.nissanpartsdeal.com:records:L269",
@@ -10553,7 +10560,8 @@
      2019
     ]
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "80721-1MA0B. Own pages Q70 2015-2019 (gas catalog) and Q70L 2015, 2016, 2018, 2019: 'SEDAN + LSEDAN' (2015), prod 02/2015-02/2018 (2016), no note 2017-2019; replaces 80721-1MA0A (07/2014-02/2015). Product page lists M35h, M37, M56, Q70 (incl. VQ35HR), Q70L. No gateable limit; 'gas only' on Q70 2015-2018 is stricter than the product page (harmless).",
    "raw_product_records": [
     {
      "ref": "www.infinitipartsdeal.com:records:L2382",
@@ -10797,7 +10805,9 @@
      2004
     ]
    ],
-   "verdict": "PENDING",
+   "verdict": "WRONG",
+   "reason": "80721-2Z700 (front LH power regulator; replaces 80721-3S500). Frontier own pages 2002-2004 list it only for KC and CC ('*KC + *CC. SB + *CC. XB, KC + CC. SB + CC. XB'); the 2002 page (nissanpartsdeal lists L333) lists the regular cab only under 80721-3S510 ('KC + CC. SB + CC. XB, T + KC + CC'). The Frontier app is ungated, so all 2002-2004 Frontiers on the lot (172, cab unknown) are plain rows, including any 2002 regular cab, which per the catalog takes 3S510. Xterra rows fine (KA24DE/VG33E XE, VG33E SE, VG33ER).",
+   "class": "ungated cab exclusion (regular cab)",
    "raw_product_records": [
     {
      "ref": "www.nissanpartsdeal.com:records:L270",
@@ -11498,7 +11508,8 @@
      2008
     ]
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "80731-AL511 front LH window motor. Own pages FX35 and FX45 2003-2008 all list it with no option note (it replaces 80731-AL510); product page FX35/FX45 2003-2008, 3.5L and 4.5L. No limit.",
    "raw_product_records": [
     {
      "ref": "www.infinitipartsdeal.com:records:L31",
@@ -12049,7 +12060,21 @@
      2015
     ]
    ],
-   "verdict": "PENDING",
+   "verdict": "WRONG",
+   "reason": "80730-JK00C (motor, listed on the rear-door window page). Own pages: G25 2012 (infinitipartsdeal lists L732) 'S. LEATHER' prod 07/2011-06/2014, while 80730-JK60C is 'S. 2WD/STD. VQ25HR. (JOURNEY+ PREMIUM+ SPORT/P) + S. AWD. VQ25HR + S. VQ37VHR'; Q40 2015 (L831) JK00C 'S. LEATHER', JK60C 'S, S. 2WD/STD. VQ25HR. ... + S. AWD. VQ25HR + S. VQ37VHR'. Product page: 'G25 | Leather|6 Cyl 2.5L', '2015 Infiniti Q40 | Leather|6 Cyl 2.5L | VQ25HR'. So the 3.7L (VQ37VHR) and the AWD car take JK60C. Ungated, the app shows as plain rows all 9 lot Q40 2015 (every one 3.7L: JN1CV6AP4FM503483, JN1CV6AP6FM501654, JN1CV6APXFM503150, JN1CV6AR8FM522460, JN1CV6AR8FM520501, JN1CV6AR7FM651256, JN1CV6AP5FM580458, JN1CV6AR0FM523148, plus one with no VIN) and 2 G25 2012 AWD decoded 4WD (JN1DV6AR4CM862107, JN1DV6AR4CM860793). The US Q40 had only the 3.7L, so no US Q40 donor carries this number.",
+   "class": "ungated engine and drive",
+   "wrong_cars": [
+    "JN1CV6AP4FM503483",
+    "JN1CV6AP6FM501654",
+    "JN1CV6APXFM503150",
+    "JN1CV6AR8FM522460",
+    "JN1CV6AR8FM520501",
+    "JN1CV6AR7FM651256",
+    "JN1CV6AP5FM580458",
+    "JN1CV6AR0FM523148",
+    "JN1DV6AR4CM862107",
+    "JN1DV6AR4CM860793"
+   ],
    "raw_product_records": [
     {
      "ref": "www.infinitipartsdeal.com:records:L876",
@@ -12273,7 +12298,45 @@
      }
     ]
    ],
-   "verdict": "PENDING",
+   "verdict": "WRONG",
+   "reason": "80730-4BA1A front LH window motor of the T32 Rogue and Z52 Murano: own pages Murano 2015-2019 and the Rogue 'rogue-t32u' catalog 2014, 2015, 2017-2019; product page '2014-2020 Nissan Rogue', '2015-2024 Nissan Murano'. The catalog keeps the older S35 body sold in 2014-2015 as a separate model, 'Rogue Select' (catalog 2014-nissan-rogue-select / 2015-nissan-rogue-select), not listed for this number. Yards list many of those as plain 'Rogue', and the app matches feed 'Rogue' 2014-2015 to this group: 34 lot cars with S35 VINs (JN8AS5M...) are plain rows (2014: JN8AS5MT3EW608300, JN8AS5MT1EW101234, JN8AS5MV0EW718917, JN8AS5MV4EW202527, JN8AS5MT6EW608744, JN8AS5MV1EW204333, JN8AS5MV2EW711614, JN8AS5MT6EW622093, JN8AS5MT0EW620291, JN8AS5MV1EW701009, JN8AS5MT7EW604959; 2015: 23 more, listed in wrong_cars). Gas gates on Murano 2016-2017 and Rogue 2017-2019 are stricter than the product page (it lists QR25DER and MR20DD hybrids), harmless.",
+   "class": "generation mix under one feed model (Rogue / Rogue Select 2014-2015)",
+   "wrong_cars": [
+    "JN8AS5MT3EW608300",
+    "JN8AS5MT1EW101234",
+    "JN8AS5MV0EW718917",
+    "JN8AS5MV4EW202527",
+    "JN8AS5MT6EW608744",
+    "JN8AS5MV1EW204333",
+    "JN8AS5MV2EW711614",
+    "JN8AS5MT6EW622093",
+    "JN8AS5MT0EW620291",
+    "JN8AS5MV1EW701009",
+    "JN8AS5MT7EW604959",
+    "JN8AS5MTXFW654966",
+    "JN8AS5MTXFW160056",
+    "JN8AS5MTXFW152197",
+    "JN8AS5MT8FW659356",
+    "JN8AS5MT7FW653502",
+    "JN8AS5MT6FW660036",
+    "JN8AS5MT8FW652049",
+    "JN8AS5MVXFW755216",
+    "JN8AS5MT9FW156452",
+    "JN8AS5MT2FW151674",
+    "JN8AS5MT5FW667494",
+    "JN8AS5MT9FW161148",
+    "JN8AS5MT5FW152057",
+    "JN8AS5MT6FW163178",
+    "JN8AS5MT0FW658038",
+    "JN8AS5MV8FW761841",
+    "JN8AS5MV6FW250144",
+    "JN8AS5MT0FW662283",
+    "JN8AS5MT3FW612220",
+    "JN8AS5MV6FW759649",
+    "JN8AS5MV9FW761539",
+    "JN8AS5MT8FW161366",
+    "JN8AS5MVXFW771190"
+   ],
    "raw_product_records": [
     {
      "ref": "www.nissanpartsdeal.com:records:L1287",
