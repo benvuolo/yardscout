@@ -1815,3 +1815,27 @@ name, so the apps already in the stores ignore them.
   owner's call (rule 2: no workaround either way).
 - `test_model_map` fails on main too: new one-car spellings in the live
   inventory ("Honda Cr-V E:fcev", "BMW 535i GT xDrive"); data quality.
+
+## 2026-11-18 16:43 UTC parts round 2 to main (scraper only)
+
+`parts/next-block-1118` (0b78d7bb; PARTS_GAPS §28-31, `ops/parts.md`).
+All 34 `scraper/test_*.py` pass on the tree merged with main.
+- §28 accuracy audit of the §13-22 fuel-pump and A/C windows against the
+  catalog numbers in `oem-raw`: 205 checked, 91 confirmed, 64 corrected
+  (narrowed or split where the numbers change; table in §28.1), 18 left
+  with reasons (§28.2), 32 with no number in the data (§28.3). 439
+  year/make/model combinations, 19,355 cars, get narrower windows; no row
+  lost. Radiator fans, AWD units and similar could not be checked (no
+  catalog category).
+- §29 Lexus ES duplicate card fixed; §30 facelift cuts for 12 models from
+  catalog appearance numbers; §31 Torrent, MKS, Alero, Lincoln LS, S80.
+- Generic-only 3.55% → 3.23% on the same inventory.
+- Builder said Wikipedia and Consumer Guide "do not resolve": the hub
+  checked, both answer 200 from this session with a plain request; the
+  builder's page-reading tool failed, not the network. Tell the next parts
+  builder to read them with `curl` (read-only reference pages).
+- Builder's questions, hub's view: rename the 45 multi-number §13-22 rows
+  "match part #" (yes, next round; it changes eBay keys, check
+  `ebay_prices.py` first); Chrysler 200 generation break (with a source);
+  audit alternator and starter rows the same way (next round); seed a crawl
+  on the 32 no-number windows (interchange crawl list).
