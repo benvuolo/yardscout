@@ -60,3 +60,20 @@ Procedure: `RELEASING.md`. **Dispatch only after the owner says "ship".**
 5. Watch the runs; `asc-status.yml` / `play-status.yml` to confirm.
 6. iOS archive note: the workflow mints a fresh provisioning profile via the
    ASC API; a 403 there means an Apple account change is in progress.
+
+## 1.13.1 — dispatched 2026-11-18 14:52 UTC (owner, 2026-11-17: "Ship")
+
+Built from main after `release/1.13.1` (sw `jh-v208`) went to main as a
+fast-forward. Regression run 11 on the release tree: 81 suites, the full
+layout check (6 widths) and the six API suites all pass.
+In it: petrol accent and the name in one colour (app icon, splash, Play
+icon recoloured; `release/brand-petrol`), "Know what to pull before you
+drive" in the site descriptions and the Play banner (rebuilt from
+`docs/brand/feature-graphic.html`, 300+ yards), new store screenshots
+(`tools/capture_store_shots.py`), and every website change since 1.13.0:
+the alert card, one price Pro box, photo-first within a day, the Cars-tab
+return fix, the free emailed alert (web only; hidden in the apps).
+What's New (both stores): `scratchpad/release/whatsnew_1131.txt`.
+After both stores accept: dispatch `store-listing.yml` and
+`play-subscription-listing.yml` (new screenshots and banner on Play; iOS
+screenshots go up with the submission).
