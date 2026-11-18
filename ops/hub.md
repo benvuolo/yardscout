@@ -2018,3 +2018,4 @@ data network-first per scan, no sw bump).
   on Focus vs Transit Connect (no door in the note); Mopar "Up To 07/23/2012"
   production windows are not named; 1999 Tahoe/Yukon rear-door regulators
   ("CLASSIC 4 DOOR") carry no body note (both already on main).
+- 20:55 UTC confirmed live: yardscout.io/data/oem/window-regulator.json carries the new drive notes, same counts as main.
