@@ -20,6 +20,9 @@ vm.runInContext([
   'var __ls = null, __days = null;',
   'function lifespanFor() { return __ls; }',
   'function daysSinceAdded() { return __days; }',
+  // carLotClock asks whether the yard's own list has gone stale (2026-11-18,
+  // yard_list_unit.mjs tests that); here every yard's list is current.
+  'function yardListStale() { return null; }',
   "function escapeHtml(s) { return String(s); }",
   one(/^const LONG_LISTED_DAYS = /), fn('isLongListed'), fn('longListedHtml'), fn('carLotClock'),
   'globalThis.__t = { isLongListed, longListedHtml, carLotClock, set: (ls, d) => { __ls = ls; __days = d; } };',
