@@ -353,6 +353,39 @@ function fmtStamp(iso) {
   return isNaN(d) ? '' : d.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZone: 'UTC' }) + ' UTC';
 }
 
+/** A yard row's list freshness (scraper/yard_freshness.py: listChangedAt,
+ * listState, listReadAt, listFlushAt, named in yardFields; a directory from
+ * before them has none). Read from the yard directory this page already
+ * holds: no extra request, no extra parsing. */
+export function yardListOf(yardFields, row) {
+  const yf = yardFields || [];
+  const iS = yf.indexOf('listState');
+  if (!row || iS < 0) return null;
+  const at = (k) => { const i = yf.indexOf(k); return i >= 0 ? row[i] : null; };
+  return { state: row[iS] || '', changedAt: at('listChangedAt'), readAt: at('listReadAt'), flushAt: at('listFlushAt') };
+}
+/** The plain sentence for a yard whose own list has not changed for a while
+ * (the app's wording), '' otherwise. Dates in UTC, like the rest of these
+ * pages: never earlier than the change, so the sentence stays true. */
+export function yardListSentence(l) {
+  if (!l || (l.state !== 'stale' && l.state !== 'frozen')) return '';
+  const changed = fmtDate(l.changedAt);
+  if (!changed) return '';
+  const read = l.readAt ? fmtDate(l.readAt) : '';
+  return `This yard’s list has not changed since ${changed}${read ? `, and we have not been able to read it since ${read}` : ''}. Call before you go.`;
+}
+/** Not a new arrival: the yard's list is frozen, or the car came in with its
+ * flush (listed on or before the flush day). */
+export function yardListHeld(l, dateAdded) {
+  if (!l) return false;
+  if (l.state === 'frozen') return true;
+  return !!(l.flushAt && dateAdded) && String(dateAdded).slice(0, 10) <= String(l.flushAt).slice(0, 10);
+}
+const yardListNote = (l) => {
+  const s = yardListSentence(l);
+  return s ? `<p class="long-listed list-note" role="note">${esc(s)}${l.state === 'frozen' ? ' Until it changes, its cars are left out of new arrivals and alerts.' : ''}</p>` : '';
+};
+
 /** Crush-window copy. Factual day count vs the yard's historical average —
  * worded as an estimate, never a schedule (same rules as the app card). */
 export function crushWindow(daysOn, avg, basis) {
@@ -587,6 +620,10 @@ ${HUB_LINKS}${storesLine()}`,
   const yrow = dir.data && dir.data.yards && dir.data.yards[y.id];
   const avg = yrow ? yrow[yf.indexOf('avgLifespanDays')] : null;
   const basis = yrow ? yrow[yf.indexOf('lifespanBasis')] : null;
+  // The yard's own list has not changed for a while: say so, and drop the
+  // countdown against the typical stay (the list itself may be behind).
+  const list = yardListOf(yf, yrow);
+  const listStale = !!yardListSentence(list);
   const daysOn = daysSince(v.dateAdded);
   const cw = crushWindow(daysOn, avg, basis);
   const name = `${v.year} ${v.make} ${v.model}`.trim();
@@ -599,18 +636,19 @@ ${HUB_LINKS}${storesLine()}`,
   const drive = vp[3] ? String(vp[3]).split('/')[0] : '';
   const yardHref = y.location ? `${SITE}/yard/${slugify(yardName)}` : `${SITE}/yards`;
   const makeHref = v.make ? `${SITE}/landed/${slugify(v.make)}` : '';
-  const isNew = daysOn != null && daysOn <= 7;
+  const isNew = daysOn != null && daysOn <= 7 && !yardListHeld(list, v.dateAdded);
   const modelHref = modelPageUrl(midx, v.make, v.model);
 
   const descBits = [`${name} at ${yardName}`];
   if (v.row) descBits.push(`Row ${v.row}`);
   if (v.dateAdded) descBits.push(`set out ${fmtDate(v.dateAdded)}`);
-  if (daysOn != null && avg) descBits.push(cw.left > 0 ? `~${cw.left} days left at this yard's typical pace` : 'past this yard\'s typical stay');
+  if (listStale) descBits.push(`yard list unchanged since ${fmtDate(list.changedAt)}, call before you go`);
+  else if (daysOn != null && avg) descBits.push(cw.left > 0 ? `~${cw.left} days left at this yard's typical pace` : 'past this yard\'s typical stay');
   const desc = descBits.join(' · ') + '. Live self-service yard inventory on YardScout.';
 
   const meta = [v.dateAdded ? `Set out ${esc(fmtDate(v.dateAdded))}` : 'Set-out date not published',
     v.vin ? `&middot; VIN ${esc(v.vin)}` : ''].join(' ');
-  const shortClock = avg && daysOn != null
+  const shortClock = avg && daysOn != null && !listStale
     ? { short: daysOn > avg ? `On the lot ${daysOn} days · past the ~${avg} typical` : `Day ${daysOn + 1} on the lot · ~${avg} typical ${basis === 'yard' ? 'at this yard' : basis === 'chain' ? 'for this chain' : 'across yards'}`, soon: cw.soon }
     : (daysOn != null ? { short: `Day ${daysOn + 1} on the lot`, soon: false } : null);
 
@@ -631,7 +669,7 @@ ${HUB_LINKS}${storesLine()}`,
 <h1 class="share-h">${esc(name)} at ${esc(yardName)}</h1>
 ${carCard({ name: '', yardName, where, row: v.row, metaHtml: meta, specs: [trim, drive].filter(Boolean).join(' · '), clock: shortClock, badge: isNew ? 'New' : '' })}
 <div class="car-card">
-<div class="clock${cw.soon ? ' soon' : ''}">${esc(cw.line)}<small>Based on how long departed cars sat on this lot before they left — an estimate, not a schedule. Call the yard before a long drive.</small></div>
+${listStale ? yardListNote(list) : `<div class="clock${cw.soon ? ' soon' : ''}">${esc(cw.line)}<small>Based on how long departed cars sat on this lot before they left — an estimate, not a schedule. Call the yard before a long drive.</small></div>`}
 </div>
 ${yardLinks}
 <div class="cta">${appBtn(appHref('car', `${v.make} ${v.model}`, `#car=${encodeURIComponent(key)}`), 'Open in YardScout', true, ` data-app-path="/car/${encodeURIComponent(key)}"`)}${appBtn(appHref('car', `${v.make} ${v.model}`, '#tab=alerts'), `Alert me when the next ${esc(v.make)} ${esc(v.model)} lands near me`)}</div>
@@ -660,6 +698,7 @@ export async function renderYardPage(slug) {
   const place = yardPlace(jidx, name);
   const city = (place && place.city && place.city.name) || y[yf.indexOf('city')];
   const avg = y[yf.indexOf('avgLifespanDays')]; const basis = y[yf.indexOf('lifespanBasis')];
+  const list = yardListOf(yf, y);
   const canonical = `${SITE}/yard/${slug}`;
   const shard = (await apiJson('/v1/inventory/shard/' + idx, 900)).data;
   // No shard is "we could not read the lot", never "0 cars on the lot".
@@ -670,7 +709,9 @@ export async function renderYardPage(slug) {
   const iYear = f.indexOf('year'), iMake = f.indexOf('make'), iModel = f.indexOf('model'), iRow = f.indexOf('row'), iDate = f.indexOf('dateAdded'), iVin = f.indexOf('vin'), iId = f.indexOf('id');
   const rows = shard.vehicles;
   const total = rows.length;
-  const recent = rows.filter((r) => { const d = daysSince(r[iDate]); return d != null && d <= 7; })
+  // New arrivals leave out a frozen list's cars and those that came in with
+  // its flush (yardListHeld); they are still counted on the lot.
+  const recent = rows.filter((r) => { const d = daysSince(r[iDate]); return d != null && d <= 7 && !yardListHeld(list, r[iDate]); })
     .sort((a, b) => String(b[iDate]).localeCompare(String(a[iDate])) || String(a[iMake]).localeCompare(String(b[iMake])));
   const where = [city, state].filter(Boolean).join(', ');
   // A yard that publishes no set-out dates has no "new this week" figure at
@@ -749,6 +790,7 @@ export async function renderYardPage(slug) {
   const body = `${place ? crumbKicker(place.crumbs, name) : `<p class="kicker">Self-service yard · ${esc(where)}</p>`}
 <h1 class="share-h">${esc(headline)}</h1>
 <p class="share-sub">${summary}</p>
+${yardListNote(list)}
 <div class="stats-bar"><div class="stat-card"><span class="label">On the lot</span><span class="value">${total.toLocaleString()}</span></div><div class="stat-card"><span class="label">New this week</span><span class="value accent">${dated ? recent.length.toLocaleString() : '—'}</span></div><div class="stat-card"><span class="label">Typical stay</span><span class="value">${avg ? '~' + avg + ' days' : '—'}</span></div></div>
 <p class="share-sub">${esc(lifeLine)}${outLinks ? ' ' + outLinks : ''}</p>
 ${makesBlock}
