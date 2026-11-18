@@ -322,3 +322,27 @@ One thing you may want to know first: the inventory on andersenselfservice.com s
 Thanks,
 Ben
 YardScout, hello@yardscout.io
+
+## Gmail drafts as of 2026-11-18 16:50 UTC (owner: "ensure they're filled out with an address/proper destination. Make follow up drafts where needed, and make them sound non ai")
+
+All rewritten in the owner's own plain voice (short, first person, no lists
+or dashes, no pasted Google redirect links). None sent; the owner sends.
+
+| Draft | To | Kind |
+|---|---|---|
+| U-Pull-R correction | glennw@aaaparts.com (thread with Glenn) | correction + reader switched off since Nov 18 |
+| Budget | sales@budgetupullit.com (Nov 2 thread) | follow-up + correction |
+| Pull-N-Save | info@pullnsave.com (reply to the Nov 2 email) | follow-up + correction + photo question; the old stand-alone photo draft was deleted |
+| Route 34 | route34upullm@gmail.com (Nov 2 thread) | follow-up (reads fine now) |
+| Kenny U-Pull | info@kennyupull.com (Oct 27 thread, no reply, no bounce) | follow-up (site blocks us) |
+| Carolina Pick N Pull | mvanoverpnp@gmail.com (Marc, named on their terms page) | first note |
+| Express Pull-N-Save | info@expresspullnsave.com | first note (their site: terms questions to tspelta@ergtn.com) |
+| Andersen Self-Service | info@andersenselfservice.com (on their own home page, read once 11-18) | heads-up: no car set after Aug 22 |
+| 1A Auto | NO ADDRESS (no verified email found; their site errored our crawler, so not read) | permission request; owner adds the address from 1aauto.com's contact page |
+
+Not in Gmail (no email address): Harry's (form at wegotused.com/contact),
+U Pull It Davie (its robots.txt turns AI agents away, so not read; owner
+opens upullitdavie.com), Ario (no address found: "ari.app" is an unrelated
+auto-repair software company; autopartneredsolutions.com turns AI agents
+away; owner decision on Ario still open). Form texts for Harry's and Davie
+were given to the owner in chat.
