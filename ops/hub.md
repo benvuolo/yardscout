@@ -1957,3 +1957,22 @@ three hub commits: regress_unit lists API suites without node_modules
   and to merge this head.
 - 19:24 UTC confirmed live: yardscout.io/sw.js names `jh-v210`; one load of
   /car/utpap-orem-K026992: 200, the frozen-list sentence, no page errors.
+
+## 2026-11-18 ~20:00 UTC Cars watch strip offers the free email alert (sw `jh-v211`, f27e3e22)
+
+Builder branch `growth/strip-falert-1118` (6f2ab742; cases, counting change
+and suggestions at the end of `ops/growth.md`). Hub read the app.js diff:
+one rule (`falertAskOpen`) shared by the toast and the strip; `stripAskKind`
+picks alert / Monday / Monday-add / plain; the removed `recapEligible` call
+was equivalent to the checks already at the top of `stripMailHtml`; new
+watches only through `addQuickWatch` (rule 6); not in the app shells or for
+Pro. Builder's full `tools/regress.sh` on the merged tree 3e881c5e: 104
+PASS, 0 FAIL, 0 SKIP (layout 2,664 checks). Main since: ops only.
+- Counting from today: the strip's alert ask counts `free-alert-shown`, not
+  `email-asked`; "Monday email asked" will fall and "Free alert offered"
+  rise. Weeks across 11-18 are not like for like on those two rows.
+- Builder's open items: the scorecard could note the switch date; a
+  "Watching X" strip could offer the alert for an existing watch; backend/
+  has no package-lock.json (npm ci fails; tests use the main checkout's
+  node_modules); year ranges are written after the model in the strip and
+  before it in the alert.
