@@ -28640,6 +28640,9 @@ def merge_carryforward_yards(new_payload: dict, prev_payload: dict,
 # "carried" so the daily health email can separate "our fetch failed" from
 # "the yard's own list hasn't changed" (owner, 2026-10-30).
 _CARRIED_YARDS: set[str] = set()
+# {yard: [car id, ...]} of the previous publish, filled by apply_stale_keep
+# (which reads that file anyway) for the list-jump check.
+_PREV_IDS_OF: dict[str, list[str]] = {}
 # Old yard name -> new name, for yards the upstream renamed this scan.
 _RENAMED_YARDS: dict[str, str] = {}
 # Renames that predate the per-scan detection above (it only sees a rename on
@@ -28654,6 +28657,7 @@ def apply_stale_keep(payload: dict, extras: dict) -> None:
     """Compare the fresh payload against the last published LIVE_FILE and carry
     forward any yard that vanished or collapsed below STALE_KEEP_FLOOR of its
     previous count. Mutates payload/extras in place. Loud by design."""
+    _PREV_IDS_OF.clear()
     try:
         prev = json.loads(LIVE_FILE.read_text())
     except Exception:
@@ -28692,6 +28696,9 @@ def apply_stale_keep(payload: dict, extras: dict) -> None:
     prev_ids_of: dict[str, list[str]] = {}
     for row in prev["vehicles"]:
         prev_ids_of.setdefault(prev_names[row[i_yard]], []).append(str(row[i_id]))
+    # The previous publish's ids per yard, for the list-jump check right after
+    # this (_apply_yard_list_freshness), so it need not re-read the file.
+    _PREV_IDS_OF.update(prev_ids_of)
 
     to_carry: list[str] = []
     for name, pc in sorted(prev_counts.items()):
@@ -28783,7 +28790,7 @@ def _yard_freshness_mod():
 # (published in the yard rows) and written into yard_health.json by
 # _update_yard_health, so both files say the same thing.
 _LIST_FRESHNESS: dict[str, dict] = {}
-_LIST_KEYS = ("listFingerprint", "listChangedAt", "listReadAt", "listFlushAt")
+_LIST_KEYS = ("listFingerprint", "listChangedAt", "listReadAt", "listFlushAt", "listFlushWhy")
 
 
 def _yard_date_fingerprints(payload: dict) -> dict[str, str]:
@@ -28819,25 +28826,43 @@ def _apply_yard_list_freshness(payload: dict) -> None:
 
         def prev_ids(name: str):
             # The last READ copy of a yard = its rows in the previous publish
-            # (LIVE_FILE is overwritten only after this step). Loaded once,
-            # and only when a frozen yard has just changed.
+            # (LIVE_FILE is overwritten only after this step): from
+            # apply_stale_keep, which read that file already; else loaded once.
             if "ids" not in prev_cache:
                 prev_cache["ids"] = {}
-                try:
-                    pp = json.loads(LIVE_FILE.read_text())
-                    pn = [y[0] for y in pp["yards"]]
-                    pi, py = pp["fields"].index("id"), pp["fields"].index("yard")
-                    for r in pp["vehicles"]:
-                        prev_cache["ids"].setdefault(pn[r[py]], set()).add(str(r[pi]))
-                except Exception as e:  # noqa: BLE001
-                    print(f"  [list freshness] previous publish unreadable ({e}); flush check skipped",
-                          file=sys.stderr)
+                if _PREV_IDS_OF:
+                    prev_cache["ids"] = {n: set(v) for n, v in _PREV_IDS_OF.items()}
+                else:
+                    try:
+                        pp = json.loads(LIVE_FILE.read_text())
+                        pn = [y[0] for y in pp["yards"]]
+                        pi, py = pp["fields"].index("id"), pp["fields"].index("yard")
+                        for r in pp["vehicles"]:
+                            prev_cache["ids"].setdefault(pn[r[py]], set()).add(str(r[pi]))
+                    except Exception as e:  # noqa: BLE001
+                        print(f"  [list freshness] previous publish unreadable ({e}); flush and jump "
+                              f"checks skipped", file=sys.stderr)
             return prev_cache["ids"].get(name)
+
+        def seen_before(name: str, ids: set) -> set:
+            # Ids this yard listed in any earlier scan (history DB): a flip
+            # or a partial read coming back, not a jump. No DB -> none known,
+            # so every added id counts as never listed (hold: the safe side).
+            try:
+                try:
+                    import db as _db
+                except ImportError:
+                    from scraper import db as _db  # pragma: no cover
+                return _db.ids_listed_before(name, ids)
+            except Exception as e:  # noqa: BLE001
+                print(f"  [list freshness] history DB unavailable for {name} ({e}); "
+                      f"added ids treated as never listed", file=sys.stderr)
+                return set()
 
         info = _yf.update_list_freshness(
             prev_file.get("yards") or {}, prev_file.get("scrapedAt"), current, set(_CARRIED_YARDS),
             payload["scrapedAt"], date_fps=_yard_date_fingerprints(payload), prev_ids=prev_ids,
-            flush_share=LIFESPAN_FLUSH_SHARE)
+            flush_share=LIFESPAN_FLUSH_SHARE, seen_before=seen_before)
         _yf.annotate_yard_rows(payload, info)
         _LIST_FRESHNESS.update(info)
     except Exception as e:  # noqa: BLE001
@@ -28860,6 +28885,13 @@ def _apply_yard_list_freshness(payload: dict) -> None:
                 else "under the flush share: normal arrivals"
             print(f"  [list freshness] {n}: frozen since {f['frozenSince']}, now +{f['added']} "
                   f"-{f['removed']} ({round(100 * f['share'])}% of the list) — {verdict}", file=sys.stderr)
+        if i.get("jump"):
+            j = i["jump"]
+            verdict = "LIST JUMP: the cars it brought are not new arrivals" \
+                if i.get("listFlushAt") == payload["scrapedAt"] and i.get("listFlushWhy") == "jump" \
+                else "mostly ids it listed before (flip / partial read back): normal"
+            print(f"  [list freshness] {n}: +{j['added']} in one scan, {j['returning']} listed here before, "
+                  f"{j['neverListed']} never ({round(100 * j['share'])}% of the list) — {verdict}", file=sys.stderr)
 
 
 def _update_yard_health(payload: dict) -> None:
@@ -28911,8 +28943,11 @@ def _update_yard_health(payload: dict) -> None:
                         # this scan published in the yard rows. listReadAt is
                         # left out when it is this scan (the next scan reads
                         # it back from scrapedAt), as in the yard rows.
+                        # listState (only when set) is what the site marks;
+                        # the daily ops email reads it from here.
                         **{k: v for k, v in (_LIST_FRESHNESS.get(n) or {}).items()
-                           if k in _LIST_KEYS and v and not (k == "listReadAt" and v == now)}}
+                           if (k in _LIST_KEYS or k == "listState") and v
+                           and not (k == "listReadAt" and v == now)}}
         if unchanged >= YARD_STALE_SCANS:
             stale.append((unchanged, n, len(per_yard[n])))
         # A feed can keep CHANGING (departures hidden) while receiving no

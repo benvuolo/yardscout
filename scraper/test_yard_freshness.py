@@ -130,17 +130,16 @@ out = yf.update_list_freshness(frozen_prev, "2026-11-18T08:41:39Z", {"F": small}
 check("frozen list back with a 5% change: not a flush (its new cars are new)",
       "listFlushAt" not in out["F"] and out["F"]["flush"]["share"] == 0.05)
 fresh_prev = {"F": {**frozen_prev["F"], "listChangedAt": "2026-11-16T02:00:00Z"}}
-calls = []
 out = yf.update_list_freshness(fresh_prev, "2026-11-18T08:41:39Z", {"F": big}, set(), NOW,
-                               prev_ids=lambda n: calls.append(n) or before)
-check("a 55% change on a list that was NOT frozen: not this rule (and no reload of the old list)",
-      "listFlushAt" not in out["F"] and not calls)
+                               prev_ids=lambda n: before, seen_before=lambda n, s: set(s))
+check("a 55% change on a list that was NOT frozen: not the flush rule (and all 60 ids came back: not a jump)",
+      "flush" not in out["F"] and "listFlushAt" not in out["F"] and out["F"]["jump"]["returning"] == 60)
 unread_prev = {"F": {**frozen_prev["F"], "listChangedAt": "2026-11-05T02:00:00Z",
                      "listReadAt": "2026-11-10T02:00:00Z"}}
 out = yf.update_list_freshness(unread_prev, "2026-11-18T08:41:39Z", {"F": big}, set(), NOW,
-                               prev_ids=lambda n: before)
+                               prev_ids=lambda n: before, seen_before=lambda n, s: set(s))
 check("frozen only if the unread days are counted: not a flush (unread is not unchanged)",
-      "listFlushAt" not in out["F"])
+      "flush" not in out["F"] and "listFlushAt" not in out["F"])
 check("the flush share is the lifespan writer's (one rule)", yf.FLUSH_SHARE == 0.4)
 kept = {"F": {"listFingerprint": yf.id_fingerprint(big), "listChangedAt": NOW, "listReadAt": NOW, "listFlushAt": NOW}}
 later = (datetime.strptime(NOW, "%Y-%m-%dT%H:%M:%SZ") + timedelta(days=7, hours=23)).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -273,6 +272,8 @@ with tempfile.TemporaryDirectory() as td:
     check("a yard that goes missing keeps its last read time (the scan before)",
           hm.get("missingScans") == 1 and hm.get("listReadAt") == scan_now and hm.get("listChangedAt") == scan_now, str(hm))
     js.YARD_HEALTH_FILE.write_text(json.dumps(hf))
+    check("yard_health.json: listState (what the site marks) for the ops email, only when set",
+          h["Frozen - B"].get("listState") == "frozen" and "listState" not in h["Live - A"])
     check("yard_health.json: a missing yard keeps its list fields as last read",
           h["Gone - D"]["listChangedAt"] == long_ago and h["Gone - D"]["listFingerprint"] == "gf"
           and h["Gone - D"]["missingScans"] == 1)
