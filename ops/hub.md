@@ -2046,3 +2046,4 @@ now read "<model>: only 2WD checked".
 - Hub decisions recorded: unknown drive stays "if equipped"; no body gates
   that add claims this round.
 - Next: independent §11.4 sample of the nissan candidate WITH the gates.
+- 23:15 UTC confirmed live: sw jh-v212; data/oem/window-regulator.json carries 22 unchecked drive gates, as main; one page load, no page errors.
