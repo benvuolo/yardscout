@@ -6304,7 +6304,214 @@ _gap_extend("ford zx2", parts=_per_gen([(1998, 2003)], [_GAP_PUMP, _GAP_FAN, {**
 
 # ---- end of §22 block
 
+# ---- 2026-11 §26 (PARTS_GAPS §26; hub brief 2026-11-17).
+# Rule for this block: a mechanical row needs a part-number source for its
+# window. The source is the carmaker catalog records the interchange crawl
+# already holds (branch oem-raw, raw/<site>.jsonl; numbers and "retrieved"
+# dates in PARTS_GAPS §26). A window is only the years a cited number
+# lists. Where two or more numbers cover one window (drive, engine or
+# equipment split) the row name says "match part #". No number, no row.
+# No radiator-fan rows: no source at hand names a fan assembly with its
+# years.
+_GAP_PUMP_PN = {**_GAP_PUMP, "name": "Fuel Pump Module (in-tank, match part #)"}
+_GAP_AC_PN = {**_GAP_AC, "name": "A/C Compressor (clutch spins free, match part #)"}
+_AWD_REAR_UNIT = {"name": "AWD Rear Differential / Transfer Unit", "rarity": "Rare", "low": 90, "high": 220, "cost": 60, "drive": ["awd", "4wd"]}
+_HATCH_TAILS = {"name": "Hatchback Tail Lights (pair, uncracked)", "rarity": "Rare", "low": 55, "high": 140, "cost": 23, "body": ["hatchback"]}
+_SEDAN_TAILS = {"name": "Sedan Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "body": ["sedan"]}
+_SUNROOF_STD = {k: v for k, v in _SUNROOF.items() if k != "option"}
+_GENERIC_LAMP_ROWS = [
+    {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+    {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+    {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+]
+
+# §26.1 Volvo S40 (264 cars generic-only). 1st gen US 2000-04, 2nd gen from
+# "2004.5": both were sold as 2004 models, so 2004 is its own window
+# (GENERATION_BREAKS 2004 and 2005) and gets no new rows. Facelifts 2001 and
+# 2008. 2nd gen: one Volvo A/C compressor number lists 2004-2011 (36050586;
+# A/C standard, CG); the fuel pump has 2WD/4WD and year-split numbers
+# (match part #); AWD T5 2005-2010 (EPA); sunroof optional 2005-08 and
+# 2010-11, standard 2009 (CG equipment lists). 1st gen: no number in the
+# catalog data for pump or compressor, so no mechanical rows.
+_gap_extend("volvo s40", parts=[
+    *_per_gen([(2005, 2011)], [_GAP_AC, _GAP_PUMP_PN]),
+    *_per_gen([(2005, 2010)], [_AWD_COUPLING]),
+    *_per_gen([(2005, 2008), (2010, 2011)], [_SUNROOF]),
+    *_per_gen([(2009, 2009)], [_SUNROOF_STD]),
+])
+
+# §26.2 Saturn S-Series 1991-2002 (275 SL/SL1/SL2 cars generic-only; 171
+# "S-Series", SC and SW listings had no entry). Sedan generations 1991-95,
+# 1996-99, 2000-02 (new GENERATION_BREAKS). GM fuel pump numbers list every
+# body: 21015330 (1991-1996), 21015072 (1997), 21015152 (1998-2002; SW1 to
+# 1999, SW2 to 2001). The coupe (SC, SC1, SC2; generations 1991-96,
+# 1997-2000, 2001-02), the wagon (SW, SW1, SW2; 1993-95, 1996-99, 2000-01)
+# and the bare "S-Series" spelling get their own entries with those pump
+# rows and the consensus evergreens; no lamp rows (they differ by body and
+# no row-level basis was checked). A/C was optional and no compressor number
+# is at hand: no A/C row.
+for _k, _disp, _match, _yrs in (
+        ("saturn sc", "Saturn SC (coupe)", ["saturn sc"], (1991, 2002)),
+        ("saturn sw", "Saturn SW (wagon)", ["saturn sw"], (1993, 2001)),
+        ("saturn s-series", "Saturn S-Series", ["saturn s-series", "saturn s series"], (1991, 2002))):
+    UNOBTANIUM_DB[_k] = {"display": _disp, "make": "Saturn", "match": _match, "year_range": _yrs, "top_parts": []}
+    _EVERGREEN_TARGET_KEYS = (*_EVERGREEN_TARGET_KEYS, _k)
+_SATURN_S_PUMP = _per_gen([(1991, 1996), (1997, 1997), (1998, 2002)], [_GAP_PUMP])
+for _k in ("saturn sl", "saturn sc", "saturn sw", "saturn s-series"):
+    _gap_extend(_k, parts=[dict(r) for r in _SATURN_S_PUMP])
+
+# §26.3 Chevrolet Trax, US 2015-2022 (267 cars generic-only; one generation,
+# 2017 facelift in FACELIFT_BREAKS). GM fuel pump module kits 13516849 and
+# 13516865 both list 2015-2022 (two numbers: match part #); A/C compressor
+# kit 42783843 lists 2015-2021 for the 1.4L, the only US engine (A/C
+# standard, CG). AWD available every year (EPA "Trax AWD"): same row as its
+# platform twin, the Encore (§22.2).
+_gap_extend("trax", parts=[
+    *_per_gen([(2015, 2022)], [_GAP_PUMP_PN, _AWD_COUPLING]),
+    *_per_gen([(2015, 2021)], [_GAP_AC]),
+])
+
+# §26.4 Chevrolet Sonic, US 2012-2020 (281 cars generic-only, all 2012: the
+# entry had a headlight row and, from 2013, MyLink). 2017 facelift in
+# FACELIFT_BREAKS. GM numbers: fuel pump module kit 13507609 lists 2012-2016
+# (both engines, both bodies); A/C compressor kits 42783843 (1.4L,
+# 2013-2020) and 42783863 (1.8L, 2013-2018): two numbers by engine, match
+# part #; 2012 is not listed, so no A/C row for 2012. A/C standard on the LS
+# for 2012-15 (CG); later years not confirmed (option). Tail lamps differ by
+# body: sedan 42407872/3 and hatchback 42407868/9, both 2012-2016. Power
+# sunroof optional 2012-15 (CG).
+_gap_extend("sonic", parts=[
+    *_per_gen([(2012, 2016)], [_GAP_PUMP, _SEDAN_TAILS, _HATCH_TAILS]),
+    *_per_gen([(2013, 2015)], [_GAP_AC_PN]),
+    *_per_gen([(2016, 2020)], [{**_GAP_AC_PN, "option": True}]),
+    *_per_gen([(2012, 2015)], [_SUNROOF]),
+])
+
+# §26.5 Ford Freestar 2004-2007 (253 cars generic-only; one generation, no
+# facelift, FWD only). Ford A/C compressor 4F2Z-19703-AB lists 2004-2007
+# (front A/C standard, CG); fuel pump 3F2Z-9H307-AB lists 2004-2005. Power
+# sliding doors optional (standard on the Limited), CG.
+_gap_extend("freestar", parts=[
+    *_per_gen([(2004, 2007)], [_GAP_AC, _PSD_MOTOR]),
+    *_per_gen([(2004, 2005)], [_GAP_PUMP]),
+])
+
+# §26.6 Ford Freestyle 2005-2007 (259 cars generic-only; one generation, no
+# facelift: the 2008 restyle is the renamed Taurus X). Ford A/C compressor
+# 5F9Z-19V703-DA lists 2005-2007 (front A/C standard on the SE, CG). Fuel
+# pump 5F9Z-9H307-AA lists 2005 only (superseded by 6F9Z-9H307-A, whose
+# years are not in the data), so the pump row is 2005. AWD optional on every
+# trim (EPA; Haldex): same row as the Five Hundred, its platform twin
+# (§19.6). Power sunroof optional 2005-07 (CG).
+_gap_extend("freestyle", parts=[
+    *_per_gen([(2005, 2007)], [_GAP_AC, _AWD_REAR_UNIT, _SUNROOF]),
+    *_per_gen([(2005, 2005)], [_GAP_PUMP]),
+])
+
+# §26.7 Mitsubishi Mirage (250 cars generic-only, G4 included). The breadth
+# entry ran 1997-2024 as one window, across the 2003-13 years with no US
+# Mirage and across two unrelated cars. Now: "mirage" is the 1997-2002 sedan
+# and coupe (no new rows: no catalog number at hand); "mirage 2014-2024" is
+# the hatchback (US MY2014-15 and 2017-24, no MY2016: EPA); "mirage g4" is
+# the 2017-24 sedan, whose tail lamps are its own (Mitsubishi 8330B069/70
+# "Sedan"). Fuel pump 17030W000P lists 2014-15 and 2017-24 (G4 2017-24).
+# A/C compressor 7813A524 lists 2014-15 and 2017-19 (G4 2017-19); automatic
+# climate control standard on the 2014 DE (CG); 2015 and later not confirmed
+# by a source, so those pieces are option-flagged.
+UNOBTANIUM_DB["mirage"]["year_range"] = (1997, 2002)
+UNOBTANIUM_DB["mirage"]["match"] = ["mirage"]
+UNOBTANIUM_DB["mirage 2014-2024"] = {"display": "Mitsubishi Mirage", "make": "Mitsubishi", "match": ["mirage"], "year_range": (2014, 2024),
+                                     "top_parts": [dict(r) for r in _GENERIC_LAMP_ROWS]}
+UNOBTANIUM_DB["mirage g4"] = {"display": "Mitsubishi Mirage G4", "make": "Mitsubishi", "match": ["mirage g4"], "year_range": (2017, 2024),
+                              "top_parts": [dict(r) for r in _GENERIC_LAMP_ROWS]}
+_EVERGREEN_TARGET_KEYS = (*_EVERGREEN_TARGET_KEYS, "mirage 2014-2024", "mirage g4")
+_gap_extend("mirage 2014-2024", parts=[
+    *_per_gen([(2014, 2015), (2017, 2024)], [_GAP_PUMP]),
+    *_per_gen([(2014, 2014)], [_GAP_AC]),
+    *_per_gen([(2015, 2015), (2017, 2019)], [{**_GAP_AC, "option": True}]),
+])
+_gap_extend("mirage g4", parts=[
+    *_per_gen([(2017, 2024)], [_GAP_PUMP]),
+    *_per_gen([(2017, 2019)], [{**_GAP_AC, "option": True}]),
+])
+
+# §26.8 Chevrolet Venture 1997-2005 (224 cars generic-only; one generation,
+# 2001 facelift in FACELIFT_BREAKS: GM front fascia and grille numbers list
+# 2001-2005). GM A/C compressor 89018902 lists 1997-2000; 19130448 (with
+# rear A/C, option C69) and 19258827 (without) list 2001-2005: match part #.
+# Front A/C standard on the base van from 2000 (CG lists); 1997-99 not
+# confirmed (option). Fuel pump module 19180118 lists 1998-2000 and 19180125
+# 2004-2005; no number at hand for 1997 or 2001-03. Power sliding door
+# optional every year (CG); Versatrak AWD 2002-2004 (CG; Wikipedia).
+_gap_extend("venture", parts=[
+    *_per_gen([(1997, 1999)], [{**_GAP_AC, "option": True}]),
+    *_per_gen([(2000, 2000)], [_GAP_AC]),
+    *_per_gen([(2001, 2005)], [_GAP_AC_PN]),
+    *_per_gen([(1998, 2000), (2004, 2005)], [_GAP_PUMP]),
+    *_per_gen([(1997, 2005)], [_PSD_MOTOR]),
+    *_per_gen([(2002, 2004)], [_AWD_REAR_UNIT]),
+])
+
+# ---- end of §26 block
+
+# ---- 2026-11 §27 (PARTS_GAPS §27): Nissan Xterra. The 2026-11-12 note
+# called the list thin (five rows on the 1st gen, six on the 2nd). Same
+# rule as §26: a row needs a Nissan catalog number that lists its window
+# (oem-raw raw/www.nissanpartsdeal.com.jsonl), "match part #" where several
+# numbers share it. Rows are written per generation (2000-04, 2005-15);
+# GENERATION_BREAKS already guards the 2005 break.
+# Left out on purpose: alternator, starter and throttle body (the numbers
+# change mid-generation at different years by engine, and no one number
+# spans a window); radiator fan (no source names one); climate panel and
+# gauge cluster (changed at the 2002 facelift, many numbers by trim).
+_HEADLIGHTS_PN = {"name": "Headlights (pair, clear, match part #)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20}
+_MIRRORS_PN = {"name": "Side Mirrors (pair, match part #)", "rarity": "Uncommon", "low": 30, "high": 85, "cost": 15}
+_WIN_REG = {"name": "Window Regulator + Motor (front)", "rarity": "Uncommon", "low": 30, "high": 75, "cost": 12}
+_WIN_SW = {"name": "Power Window Master Switch", "rarity": "Uncommon", "low": 30, "high": 90, "cost": 10}
+_gap_extend("xterra", parts=[
+    # 1st gen. Fuel pump 17042-4S400 lists 2000-2004; A/C compressors
+    # 92600-7B410 / -8B401 / -5S700 / -4S100 by engine (A/C standard, CG);
+    # mirrors 96301/2-3S500, -3S510, -ZD000 ... all 2000-2004 by trim;
+    # front window motors 80730/1-7B400 and main switch 25401-9E000 list
+    # 2000-2004 (power windows were SE equipment and an XE package: option).
+    *_per_gen([(2000, 2004)], [_GAP_PUMP, _GAP_AC_PN, _MIRRORS_PN,
+                               {**_WIN_REG, "option": True}, {**_WIN_SW, "option": True}]),
+    # Headlamps changed with the 2002 front end (Wikipedia; CG): 26010/26060-
+    # 7B425 before, -7Z825 (XE) / -7Z826 (SE) after.
+    *_per_gen([(2000, 2001), (2002, 2004)], [_HEADLIGHTS_PN]),
+    # Rockford Fosgate 300 W system with an 8-inch subwoofer: SE standard,
+    # XE V6 package, 2003-04 (Wikipedia; CG lists).
+    *_per_gen([(2003, 2004)], [
+        {"name": "Rockford Fosgate Amp + Subwoofer", "rarity": "Uncommon", "low": 80, "high": 200, "cost": 24, "option": True},
+    ]),
+    # 2nd gen. Fuel pump 17040-ZZ00A lists 2005-2015 (also -EA000 2005-08,
+    # -ZS00A 2007-10); A/C compressor 92600-EA31A lists 2005-2015 (also
+    # -EA300 2005-07, -EA30C 2007-15; A/C standard, CG); mirrors 96301/2-
+    # 9BC9A/B list 2005-2015 (others by trim); front window motors 80730/1-
+    # EA005 list 2005-2015.
+    *_per_gen([(2005, 2015)], [_GAP_PUMP_PN, _GAP_AC_PN, _MIRRORS_PN]),
+    # Headlamps 26010/26060-EA000 (SE, Off-Road) list 2007-2015 and -ZL00A
+    # (S, X) 2008-2015; nothing at hand lists 2005-06.
+    *_per_gen([(2007, 2015)], [_HEADLIGHTS_PN]),
+    # Power windows: not on the base S (2005) or X (2006-07), standard on
+    # every trim from 2008 (CG lists). Main switch 25401-ZP70A lists
+    # 2006-2015.
+    *_per_gen([(2005, 2007)], [{**_WIN_REG, "option": True}]),
+    *_per_gen([(2006, 2007)], [{**_WIN_SW, "option": True}]),
+    *_per_gen([(2008, 2015)], [_WIN_REG, _WIN_SW]),
+])
+
+# ---- end of §27 block
+
 _apply_consensus_evergreens()
+
+# §26.2: power windows and power mirrors were options on the S-Series (not
+# offered at all on the base SL; Wikipedia Saturn_S-Series), so these rows
+# ship "if equipped".
+for _k in ("saturn sl", "saturn sc", "saturn sw", "saturn s-series"):
+    for _p in UNOBTANIUM_DB[_k]["top_parts"]:
+        if _p["name"] in ("Window Regulator + Motor (front)", "Power Window Master Switch", "Side Mirrors (power, pair)"):
+            _p["option"] = True
 
 # ---- 2026-10 Phase A: enthusiast platforms, evergreens BY GENERATION ------
 # Enthusiast entries often span several body generations under one key
@@ -6577,6 +6784,13 @@ GENERATION_BREAKS = {
     # T200 through 2008 (restyled Aveo5 2009). Both years break, so no window
     # mixes T200 and T250 cars of one body (PARTS_GAPS §16.6).
     "aveo": [2007, 2009],
+    # §26 (PARTS_GAPS §26)
+    "volvo s40": [2004, 2005],             # 1st gen 2000-04, 2nd gen from "2004.5": 2004 holds both, so it stands alone (§26.1)
+    "saturn sl": [1996, 2000],             # sedan 1991-95, 1996-99, 2000-02 (§26.2)
+    "saturn sc": [1997, 2001],             # coupe 1991-96, 1997-2000, 2001-02 (§26.2)
+    "saturn sw": [1996, 2000],             # wagon 1993-95, 1996-99, 2000-01 (§26.2)
+    "saturn s-series": [1996, 1997, 2000, 2001],  # body unknown: every sedan and coupe break (§26.2)
+    "mirage": [2017],                      # hatchback US MY2014-15 and 2017-24, no MY2016; every row is cut at the gap (§26.7)
     "escort": [1997],                      # 2nd gen 1991-96, 3rd gen 1997-2003 (PARTS_GAPS §22.8)
     "park avenue": [1997],                 # 1st gen 1991-96, 2nd gen 1997-2005 (PARTS_GAPS §22.4)
     "stratus": [2001],                     # JA sedan 1995-2000, JR sedan 2001-06 (+ Mitsubishi-based coupe 2001-05) (PARTS_GAPS §21.6)
@@ -6812,6 +7026,13 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "scion xb": [2011, 2013],
     "infiniti qx60": [2016, 2019],
     "escort": [1992, 1993, 1999, 2003],
+    # §26 (PARTS_GAPS §26; cited there)
+    "volvo s40": [2001, 2008],
+    "trax": [2017],
+    "sonic": [2017],
+    "mirage": [2017, 2021],          # 1999 rear-end-only revision left out
+    "mirage g4": [2021],
+    "venture": [2001],
 }
 # §22.10: gas-only rows hidden on hybrid listings. Hybrids of the families on
 # the lots generally start and charge through the hybrid system and use a
@@ -6824,6 +7045,7 @@ _HYBRID_GAS_ONLY_ROWS = frozenset({
     "Alternator (spin-test at yard)",
     "Starter (verify part number)",
     "A/C Compressor (clutch spins free)",
+    "A/C Compressor (clutch spins free, match part #)",  # §26
 })
 _HYBRID_KEEPS: dict[tuple[str, str], set[str]] = {
     # (make, model text contains) -> rows that hybrid keeps. Cited in §22.10.
@@ -6834,6 +7056,14 @@ _HYBRID_KEEPS: dict[tuple[str, str], set[str]] = {
     # GM BAS 2009 Vue Hybrid: "retains its standard 12-Volt starter"
     # (greencarreports.com 1021418).
     ("saturn", "vue"): {"Starter (verify part number)"},
+}
+
+# §26: a cited catalog-number change cuts ONE row (matched by a lowercase
+# token of its name) at that model year, the way FACELIFT_BREAKS cuts the
+# appearance rows. Narrowing only. Basis per entry in PARTS_GAPS §26.
+PART_NUMBER_BREAKS: dict[tuple[str, str], list[int]] = {
+    # Volvo mirror assemblies: 30744586/9 list 2004-2006, 31278733/9 2007-2011.
+    ("volvo s40", "side mirrors"): [2007],
 }
 
 _FACELIFT_SENSITIVE_RE = re.compile(
@@ -6913,6 +7143,10 @@ def _bound_rows_per_generation() -> None:
             row_breaks = breaks
             if facelifts and _FACELIFT_SENSITIVE_RE.search(p["name"]):
                 row_breaks = sorted(set(breaks) | set(facelifts))  # §17
+            pn_breaks = [y for (k, tok), ys in PART_NUMBER_BREAKS.items()
+                         if k == base and tok in p["name"].lower() for y in ys]
+            if pn_breaks:
+                row_breaks = sorted(set(row_breaks) | set(pn_breaks))  # §26
             cuts = [b for b in row_breaks if plo < b <= phi] if plo <= phi else []
             if not cuts:
                 new_parts.append(p)
@@ -8037,6 +8271,7 @@ _GEN_END_CLAMPS = {
     "ranger": ((1983, 2023), (2012, 2018)),
     "tacoma 2016-2024": ((2016, 2023), None),   # key kept: ebay/test keys use it
     "cherokee 2014-2024": ((2014, 2023), None),
+    "mirage 2014-2024": ((2014, 2024), (2016, 2016)),  # §26.7: no US MY2016 (EPA)
 }
 
 
@@ -17390,6 +17625,18 @@ def refresh_wap_pricing_file() -> Path:
 # Toledo — and getMakes takes a ModelYear param (empty = all, 56 makes).
 # Response fields are unchanged apart from ignorable extras. ~112 requests
 # per scan (56 makes × 2 sites) at 2s pacing.
+# ---------------------------------------------------------------------------
+# THE U-PULL-R SWITCH (2026-11-17; hub recommendation, owner: do what the hub
+# thinks right). While this is False NOTHING of ours is sent to
+# upullrparts.com: not the inventory reader below (it used to send getMakes
+# and one search per scan, hit their captcha and publish 0 cars), not the
+# price-list refresh, not the snapshot script (it calls the same two
+# functions). Their CTO said on 2026-11-06 that an official API is likely.
+# Turn it back on only when that API or a feed arrives (or the owner says
+# so): see ops/yards.md, "U-Pull-R reader is switched off". The captcha is
+# never solved or routed around (rule 2). scraper/test_upullr_switch.py fails
+# if this is True, so switching it on is always a deliberate, reviewed change.
+UPULLR_READER_ENABLED = False
 UPR_AJAX = "https://upullrparts.com/wp-admin/admin-ajax.php"
 UPR_STORES = {
     1: {"name": "U-Pull-R Parts - Rosemount", "city": "Rosemount", "state": "MN",
@@ -17417,7 +17664,15 @@ def fetch_upullr_inventory() -> list[dict]:
 
     One getVehicles POST per make × site (site=1 = both MN stores, site=3 =
     Toledo), ~2s apart — the same flow their own search UI issues since the
-    2026-10 plugin upgrade; ~112 requests / ~4 min per scan."""
+    2026-10 plugin upgrade; ~112 requests / ~4 min per scan.
+
+    Switched off by UPULLR_READER_ENABLED (see the note above the constant):
+    while it is False this returns [] before any request is built."""
+    if not UPULLR_READER_ENABLED:
+        print("  [U-Pull-R] reader is switched off (UPULLR_READER_ENABLED): "
+              "no request sent, 0 vehicles; waiting on their API",
+              file=sys.stderr)
+        return []
     session = requests.Session()
 
     def _post(api_action: str, **extra) -> requests.Response:
@@ -17544,9 +17799,16 @@ def refresh_upullr_pricing_file() -> Path:
     """Refresh U-Pull-R's published price list -> upullr_pricing.json.
 
     The existing file is only overwritten when the fetch looks complete
-    (>200 parts), so a partial/failed run never clobbers good data."""
+    (>200 parts), so a partial/failed run never clobbers good data.
+
+    Switched off with the inventory reader (UPULLR_READER_ENABLED): while it
+    is False no request is sent and the last published file is kept."""
     import html as html_mod
 
+    if not UPULLR_READER_ENABLED:
+        print("  [U-Pull-R pricing] reader is switched off (UPULLR_READER_ENABLED): "
+              "no request sent, keeping the existing file", file=sys.stderr)
+        return DATA_DIR / "upullr_pricing.json"
     try:
         r = requests.get(UPR_PRICING_URL, headers={**HEADERS, "User-Agent": YARDSCOUT_UA}, timeout=30)
         r.raise_for_status()
@@ -21148,15 +21410,30 @@ CRUSH_TABLE_SITES: dict[str, dict] = {
         "yard": {"name": "Hwy 82 Pick & Pay - Poulan", "city": "Poulan",
                  "state": "GA", "lat": 31.5132, "lng": -83.7886},
     },
-    # NOT HERE: iPull by Intermountain Auto (ifipull.com, Idaho Falls ID) —
-    # same table family (Year, Make, Model, Reference, VIN, Color, Stock #,
-    # Vehicle Row, Arrival Date; ~545 rows). On 2026-10-28 every page request
-    # carrying the YardScout User-Agent got HTTP 500 (a hosting-panel error
-    # page) while robots.txt answered 200, i.e. the host filters our UA. Not
-    # worked around (no UA change); re-check later. Config if it opens up:
-    # url https://ifipull.com/inventory/, table_id "vehicles", id_prefix
-    # "ifipull-", yard Idaho Falls ID (3015 N 15th E not in OSM -> 83401 zip
-    # centroid 43.5111, -112.0058).
+    # Intermountain Auto iPull (ifipull.com, Idaho Falls ID) — same table
+    # family: Year, Make, Model, Reference, VIN, Color, Stock #, Vehicle Row,
+    # Arrival Date. History: on 2026-10-28 every page request carrying the
+    # YardScout User-Agent got HTTP 500 (a hosting-panel error page) while
+    # robots.txt answered 200, so the yard was left out and nothing was
+    # worked around. Re-checked 2026-11-17 with the same YardScout name:
+    # /inventory/ answered 200 with 578 rows ("Updated: 11/17/26", newest
+    # arrival 11/16/26, every row with a stock number and a 17-character
+    # VIN). robots.txt: only /cgi-bin/ and /tmp/ disallowed; the site links
+    # no terms page. Stock numbers (STK0#####) are the id basis. One GET per
+    # scan. If the 500 comes back the yard drops out and gets an email
+    # (ops/yard-outreach-drafts.md), never another name.
+    # The display name starts with "Intermountain", not "iPull": the app's
+    # site-link map sends every name starting "ipull" to iPull-uPull
+    # (California), a different company.
+    # Pin: Census geocoder exact match for 3015 N 15th E, Idaho Falls 83401.
+    "ifipull": {
+        "label": "Intermountain Auto iPull (Idaho Falls ID)",
+        "url": "https://ifipull.com/inventory/",
+        "table_id": "vehicles",
+        "id_prefix": "ifipull-",
+        "yard": {"name": "Intermountain Auto iPull - Idaho Falls", "city": "Idaho Falls",
+                 "state": "ID", "lat": 43.5230, "lng": -112.0038},
+    },
     # Route 34 U-Pull-M (route34upullm.com, Auburn NY) — <table id=
     # "crush-inventory">: Year, Make, Model, VIN, Color, Row, Arrival Date.
     # No stock column -> VIN ids (rows without a full VIN fall back to the
@@ -21312,6 +21589,85 @@ def fetch_route34_inventory() -> list[dict]:
 def fetch_sunshine_inventory() -> list[dict]:
     """Sunshine Auto Salvage (Orangeburg SC) via the CRUSH static-table adapter."""
     return fetch_crush_table_site("sunshine")
+
+
+def fetch_ifipull_inventory() -> list[dict]:
+    """Intermountain Auto iPull (Idaho Falls ID) via the CRUSH static-table adapter."""
+    return fetch_crush_table_site("ifipull")
+
+
+# Intermountain Auto iPull publishes its price list at /pricelist/: one
+# <table id="pricelist"> (PART DESCRIPTION, CATGORY [sic], PRICE, PER, CORE;
+# 640 rows on 2026-11-17). Three categories are not car parts and are left
+# out: DRINKS (the counter fridge), ATV/MOWER (its own cheaper "HOOD",
+# "STEERING WHEEL"... would shadow the car prices) and I-CARRY (the
+# all-you-can-carry programme, $0.00 rows). First spelling of a name wins.
+IFIPULL_PRICES_URL = "https://ifipull.com/pricelist/"
+IFIPULL_PRICE_SKIP_CATEGORIES = {"DRINKS", "ATV/MOWER", "I-CARRY"}
+
+
+def _ifipull_parse_pricing_rows(page: str) -> list[dict]:
+    """/pricelist/ table -> [{description, price, corePrice, totalPrice}]
+    (the shape every single-yard price file uses). Header-driven."""
+    import html as html_mod
+    m = re.search(r'<table[^>]*id="pricelist"[^>]*>(.*?)</table>', page, re.S)
+    if not m:
+        return []
+    labels = [re.sub(r"[^a-z]", "", html_mod.unescape(re.sub(r"<[^>]+>", "", t)).lower())
+              for t in _CRUSH_TABLE_TH_RE.findall(m.group(1))]
+    # The first <th> also holds the page's DataTables script; match by ending.
+    col = {}
+    for i, lab in enumerate(labels):
+        for key, field in (("partdescription", "name"), ("catgory", "cat"), ("category", "cat"),
+                           ("price", "price"), ("core", "core")):
+            if lab.endswith(key) and field not in col:
+                col[field] = i
+                break
+    if not all(f in col for f in ("name", "price")):
+        return []
+    out: dict[str, dict] = {}
+    for block in _BARRYS_ROW_RE.findall(m.group(1)):
+        cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
+                 for c in _FENIX_TD_RE.findall(block)]
+        if len(cells) < len(labels):
+            continue
+        name = cells[col["name"]]
+        cat = cells[col["cat"]].upper() if "cat" in col else ""
+        if (not name or name in out or cat in IFIPULL_PRICE_SKIP_CATEGORIES
+                or _PRICE_AS_NAME_RE.match(name)):
+            continue
+        try:
+            price_f = float(cells[col["price"]].replace("$", "").replace(",", ""))
+            core_s = cells[col["core"]] if "core" in col else ""
+            core_f = float(core_s.replace("$", "").replace(",", "")) if core_s else 0.0
+        except ValueError:
+            continue
+        if price_f <= 0:
+            continue
+        out[name] = {"description": name, "price": f"{price_f:.2f}",
+                     "corePrice": f"{core_f:.2f}", "totalPrice": f"{price_f + core_f:.2f}"}
+    return list(out.values())
+
+
+def refresh_ifipull_pricing_file() -> Path:
+    """Refresh Intermountain Auto iPull's price list -> ifipull_pricing.json."""
+    path = DATA_DIR / "ifipull_pricing.json"
+    try:
+        r = requests.get(IFIPULL_PRICES_URL, headers={**YARDSCOUT_HEADERS, "Accept": "text/html"},
+                         timeout=60)
+        r.raise_for_status()
+    except Exception as e:
+        print(f"  [Intermountain iPull pricing] fetch failed: {e} — keeping existing file",
+              file=sys.stderr)
+        return path
+    parts = _ifipull_parse_pricing_rows(r.text)
+    if len(parts) > 150:
+        path.write_text(json.dumps(parts, separators=(",", ":")))
+        print(f"  [Intermountain iPull pricing] wrote {len(parts)} parts", file=sys.stderr)
+    else:
+        print(f"  [Intermountain iPull pricing] only {len(parts)} parts parsed — "
+              f"keeping existing file", file=sys.stderr)
+    return path
 
 
 # Bevell's Pull It Yourself (bevellspiy.com, Goldsboro NC) — 2026-11-03.
@@ -23405,7 +23761,40 @@ CRUSH_MVC_SITES: dict[str, dict] = {
              "state": "GA", "lat": 34.7289, "lng": -84.9788},  # Census geocoder exact address match (2026-11-09)
         ],
     },
+    # S&S U-Pull-It — single yard, Lebanon MO (2026-11-17). Same app as
+    # M&M / Polk (server-rendered #car-make select, 35 makes, multipart POST
+    # to /Home/Inventory). Columns YEAR, MAKE, MODEL, COLOR, ROW, ARRIVAL
+    # DATE. The yard sets cars out a ROW at a time and the date is the row's:
+    # in a 4-make probe (573 cars) every physical row carried one date, 16
+    # dates in all from 2017-06-20 to 2026-08-28, so old dates are old rows
+    # still standing, not rows the site forgot to remove. Expect the "no new
+    # arrivals in 30 days" note between batches (about every 4 months).
+    # robots.txt: 404 (none); no terms page (Yard Policies covers returns
+    # only). This tenant is read with the scanner's own name ("headers");
+    # the older tenants above keep what they sent before.
+    # Price list /Home/PartPrices has 5 columns (PRICE GROUP is extra).
+    # Pin: Census geocoder exact match for 22395 Rte 66, Lebanon MO 65536.
+    "ssupullit": {
+        "label": "S&S U-Pull-It (Lebanon MO)",
+        "base": "https://www.ssupullit.com",
+        "page_path": "/Home/Inventory",
+        "search_path": "/Home/Inventory",
+        "prices_path": "/Home/PartPrices",
+        "headers": "yardscout",
+        "yards": [
+            {"yard_id": None, "code": "lebanon",
+             "name": "S&S U-Pull-It - Lebanon", "city": "Lebanon",
+             "state": "MO", "lat": 37.6967, "lng": -92.6280},
+        ],
+    },
 }
+
+
+def _crush_mvc_headers(site: dict) -> dict:
+    """Request headers for one CRUSH MVC tenant. Tenants added from
+    2026-11-17 set "headers": "yardscout" and are read under the scanner's
+    own name; the earlier tenants keep the headers they have always sent."""
+    return YARDSCOUT_HEADERS if site.get("headers") == "yardscout" else HEADERS
 _CRUSH_MVC_MAKE_SELECT_RE = re.compile(
     r'<select[^>]*(?:id="car-make"|name="VehicleMake")[^>]*>(.*?)</select>', re.S)
 _CRUSH_MVC_OPTION_RE = re.compile(r'<option value="([^"]+)"')
@@ -23464,13 +23853,14 @@ def _crush_mvc_makes(site: dict, yard: dict) -> list[str]:
     page_url = base + site.get("page_path", "/Home/Inventory")
     if yard.get("yard_id"):
         r = requests.post(f"{base}/Home/GetMakes", data={"yardId": yard["yard_id"]},
-                          headers={**HEADERS, "Referer": page_url,
+                          headers={**_crush_mvc_headers(site), "Referer": page_url,
                                    "X-Requested-With": "XMLHttpRequest"},
                           timeout=60)
         r.raise_for_status()
         return [m for m in (str((d or {}).get("makeName") or "").strip()
                             for d in r.json()) if m]
-    r = requests.get(page_url, headers={**HEADERS, "Accept": "text/html"}, timeout=60)
+    r = requests.get(page_url, headers={**_crush_mvc_headers(site), "Accept": "text/html"},
+                     timeout=60)
     r.raise_for_status()
     m = _CRUSH_MVC_MAKE_SELECT_RE.search(r.text)
     return [v for v in (_CRUSH_MVC_OPTION_RE.findall(m.group(1)) if m else []) if v]
@@ -23505,7 +23895,7 @@ def fetch_crush_mvc_site(source: str) -> list[dict]:
                 form = {"YardId": (None, str(yard_id)), **form}
             try:
                 r = requests.post(search_url, files=form,
-                                  headers={**HEADERS, "Accept": "text/html",
+                                  headers={**_crush_mvc_headers(site), "Accept": "text/html",
                                            "Referer": page_url},
                                   timeout=60)
                 r.raise_for_status()
@@ -23599,6 +23989,27 @@ def fetch_cpsupullit_inventory() -> list[dict]:
     """CP's U-Pull-It (Dalton GA) via the CRUSH MVC adapter."""
     return fetch_crush_mvc_site("cpsupullit")
 
+
+def fetch_ssupullit_inventory() -> list[dict]:
+    """S&S U-Pull-It (Lebanon MO) via the CRUSH MVC adapter."""
+    return fetch_crush_mvc_site("ssupullit")
+
+
+def _crush_mvc_price_columns(page: str) -> tuple[int, int, int]:
+    """(name, price, core) cell positions on a /Home/PartPrices page, read
+    from its <th> labels. The usual list is PART DESCRIPTION, PRICE, BASIS,
+    CORE -> (0, 1, 3), which is also the answer when no header is found;
+    S&S adds a PRICE GROUP column -> (0, 2, 4)."""
+    import html as html_mod
+    labels = [re.sub(r"[^A-Z]", "", html_mod.unescape(re.sub(r"<[^>]+>", "", h)).upper())
+              for h in _CRUSH_MVC_TH_RE.findall(page)]
+    if "PARTDESCRIPTION" in labels and "PRICE" in labels:
+        core = next((i for i, lab in enumerate(labels) if lab.startswith("CORE")), None)
+        if core is not None:
+            return labels.index("PARTDESCRIPTION"), labels.index("PRICE"), core
+    return 0, 1, 3
+
+
 def refresh_crush_mvc_pricing_file(source: str) -> Path:
     """/Home/PartPrices of one CRUSH MVC tenant -> {source}_pricing.json
     (4 columns: PART DESCRIPTION, $PRICE, BASIS, $CORE — the Ryan's shape;
@@ -23613,20 +24024,34 @@ def refresh_crush_mvc_pricing_file(source: str) -> Path:
         return path
     try:
         r = requests.get(site["base"] + site["prices_path"],
-                         headers={**HEADERS, "Accept": "text/html"}, timeout=60)
+                         headers={**_crush_mvc_headers(site), "Accept": "text/html"}, timeout=60)
         r.raise_for_status()
         page = r.text
     except Exception as e:
         print(f"  [{label} pricing] fetch failed: {e} — keeping existing file",
               file=sys.stderr)
         return path
+    seen = _crush_mvc_parse_prices(page)
+    if len(seen) > 150:
+        path.write_text(json.dumps(list(seen.values()), separators=(",", ":")))
+        print(f"  [{label} pricing] wrote {len(seen)} parts", file=sys.stderr)
+    else:
+        print(f"  [{label} pricing] only {len(seen)} parts parsed — keeping existing file",
+              file=sys.stderr)
+    return path
+
+
+def _crush_mvc_parse_prices(page: str) -> dict[str, dict]:
+    """A /Home/PartPrices page -> {name: price entry}, first spelling wins."""
+    import html as html_mod
+    i_name, i_price, i_core = _crush_mvc_price_columns(page)
     seen: dict[str, dict] = {}
     for block in _CRUSH_MVC_TR_RE.findall(page):
         cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
                  for c in _FENIX_TD_RE.findall(block)]
-        if len(cells) < 4:
+        if len(cells) <= max(i_name, i_price, i_core):
             continue
-        name, price_s, _basis, core_s = cells[:4]
+        name, price_s, core_s = cells[i_name], cells[i_price], cells[i_core]
         if (not name or name.upper() == "PART DESCRIPTION" or name in seen
                 or _PRICE_AS_NAME_RE.match(name)):
             continue
@@ -23641,13 +24066,12 @@ def refresh_crush_mvc_pricing_file(source: str) -> Path:
             "corePrice": f"{core_f:.2f}",
             "totalPrice": f"{price_f + core_f:.2f}",
         }
-    if len(seen) > 150:
-        path.write_text(json.dumps(list(seen.values()), separators=(",", ":")))
-        print(f"  [{label} pricing] wrote {len(seen)} parts", file=sys.stderr)
-    else:
-        print(f"  [{label} pricing] only {len(seen)} parts parsed — keeping existing file",
-              file=sys.stderr)
-    return path
+    return seen
+
+
+def refresh_ssupullit_pricing_file() -> Path:
+    """Refresh S&S U-Pull-It's price list -> ssupullit_pricing.json."""
+    return refresh_crush_mvc_pricing_file("ssupullit")
 
 
 def refresh_mmupullit_pricing_file() -> Path:
@@ -24844,6 +25268,140 @@ def fetch_ipullca_inventory() -> list[dict]:
 # ===== end 2026-10-28 wave-300 block =====
 
 
+# ---- Standard Auto Wreckers UPIC Yard (Scarborough / Toronto ON) -----------
+# (2026-11-17) The self-service ("UPIC", bring your own tools) yard of
+# Standard Auto Wreckers, 1216 Sewells Rd, Scarborough ON. First Ontario
+# yard. Its /upic-inventory/ page is a shell whose own script names a Google
+# Sheet the yard has published as CSV ("UPIC Inventory — sourced from Google
+# Sheets") and draws the table from it. The reader does the same two steps:
+# GET the yard's page, take the sheet address the page itself names, GET that
+# CSV. If the page names no published sheet, the yard is skipped for the scan
+# (nothing is guessed and no remembered address is used).
+# Columns: Stock #, Year, Make, Model, Color, Row, Status, Date Created, Last
+# Update, VIN / Part Type, Location, Batch Number. 524 rows on 2026-11-17,
+# all with a stock number (the id basis), 520 with a 17-character VIN, dates
+# 2026-09-03 .. 2026-11-13. Rows are kept as the yard writes them ("UPIC
+# EAST 12").
+# Checked 2026-11-17 with the scanner's own name: robots.txt allows the page
+# (WooCommerce and wp-admin paths excepted); the Terms of Service page is
+# warranty terms only; docs.google.com robots.txt allows /spreadsheet with
+# Crawl-delay 1. Two requests per scan, 2 s apart.
+# NOT read: the full-service side of the same site (Search Inventory, a URG
+# parts locator) and the UPIC price list (also a published sheet, in
+# Canadian dollars; the app has no currency label yet, see ops/yards.md).
+# Pin: OpenStreetMap house-level match for 1216 Sewells Road.
+STANDARDUPIC_PAGE = "https://standardautowreckers.com/upic-inventory/"
+STANDARDUPIC_DELAY_SEC = 2.0
+STANDARDUPIC_MIN_ROWS = 50   # fewer than this is a broken sheet, not a lot
+STANDARDUPIC_YARD = {"name": "Standard Auto Wreckers UPIC - Toronto", "city": "Scarborough",
+                     "state": "ON", "lat": 43.8436, "lng": -79.2084}
+# Only a sheet the yard published to the web, on Google's own host.
+_STANDARDUPIC_SHEET_RE = re.compile(
+    r'CSV_URL\s*=\s*"(https://docs\.google\.com/spreadsheets/d/e/[A-Za-z0-9_-]+/pub\?[^"\s]*output=csv[^"\s]*)"')
+_STANDARDUPIC_VIN_RE = re.compile(r"^[A-HJ-NPR-Z0-9]{17}$")
+
+
+def _standardupic_sheet_url(page: str) -> str:
+    """The published-sheet CSV address the yard's own page loads, or ''."""
+    m = _STANDARDUPIC_SHEET_RE.search(page or "")
+    return m.group(1) if m else ""
+
+
+def _standardupic_parse_csv(text: str) -> tuple[list[dict], str]:
+    """The yard's CSV -> (vehicle dicts, problem). Header-driven; a row
+    without a stock number, a year or a make/model is skipped."""
+    import csv
+    import io
+    rows = list(csv.reader(io.StringIO(text or "")))
+    if not rows:
+        return [], "empty sheet"
+    col = {re.sub(r"[^a-z]", "", h.lower()): i for i, h in enumerate(rows[0])}
+    need = {"stock": "stock", "year": "year", "make": "make", "model": "model"}
+    if not all(k in col for k in need):
+        return [], f"sheet header {rows[0]} lacks Stock #/Year/Make/Model"
+    i_vin = next((i for k, i in col.items() if k.startswith("vin")), None)
+    i_date = col.get("datecreated")
+    yard = STANDARDUPIC_YARD
+    out: list[dict] = []
+    seen: set[str] = set()
+
+    def cell(r: list[str], i: "int | None") -> str:
+        return r[i].strip() if i is not None and i < len(r) else ""
+
+    for r in rows[1:]:
+        stock = cell(r, col["stock"])
+        year_s, make_s, model_s = cell(r, col["year"]), cell(r, col["make"]), cell(r, col["model"])
+        if not stock or not year_s.isdigit() or not make_s or not model_s:
+            continue
+        vid = f"standardupic-{stock.lower()}"
+        if vid in seen:
+            continue
+        seen.add(vid)
+        vin = cell(r, i_vin).upper()
+        date_iso = ""
+        dm = re.match(r"(\d{1,2})/(\d{1,2})/(\d{4})$", cell(r, i_date))
+        if dm:
+            date_iso = _sanitize_date_added(
+                f"{dm.group(3)}-{int(dm.group(1)):02d}-{int(dm.group(2)):02d}")
+        color = cell(r, col.get("color")).title()
+        v = {
+            "id": vid,
+            "vin": vin if _STANDARDUPIC_VIN_RE.match(vin) else "",
+            "year": int(year_s),
+            "make": _utpap_format_label(make_s),
+            "model": _utpap_format_label(model_s),
+            "row": cell(r, col.get("row")),
+            "dateAdded": date_iso,
+            "_location": yard["name"],
+            "_city": yard["city"],
+            "_state": yard["state"],
+            "_lat": yard["lat"],
+            "_lng": yard["lng"],
+            "_source": "standardupic",
+        }
+        if color:
+            v["_color"] = color
+        out.append(v)
+    return out, ""
+
+
+def fetch_standardupic_inventory() -> list[dict]:
+    """Standard Auto Wreckers UPIC Yard (Scarborough ON): the yard's page,
+    then the published sheet that page names."""
+    label = "Standard UPIC"
+    hdr = {**YARDSCOUT_HEADERS, "Accept": "text/html"}
+    try:
+        r = requests.get(STANDARDUPIC_PAGE, headers=hdr, timeout=60)
+        r.raise_for_status()
+    except Exception as e:
+        print(f"  [{label}] inventory page fetch failed: {e}", file=sys.stderr)
+        return []
+    sheet = _standardupic_sheet_url(r.text)
+    if not sheet:
+        print(f"  [{label}] the page names no published sheet — site changed? "
+              f"skipping the yard this scan", file=sys.stderr)
+        return []
+    time.sleep(STANDARDUPIC_DELAY_SEC)
+    try:
+        r = requests.get(sheet, headers={**YARDSCOUT_HEADERS, "Accept": "text/csv"}, timeout=60)
+        r.raise_for_status()
+        text = r.content.decode("utf-8", errors="replace")
+    except Exception as e:
+        print(f"  [{label}] sheet fetch failed: {e}", file=sys.stderr)
+        return []
+    _indep_cache_raw("standardupic_inventory.csv", text.encode())
+    vehicles, problem = _standardupic_parse_csv(text)
+    if problem:
+        print(f"  [{label}] {problem} — skipping the yard this scan", file=sys.stderr)
+        return []
+    if len(vehicles) < STANDARDUPIC_MIN_ROWS:
+        print(f"  [{label}] only {len(vehicles)} rows in the sheet — skipping the yard "
+              f"this scan rather than publishing a partial lot", file=sys.stderr)
+        return []
+    print(f"  [{label}] {len(vehicles)} vehicles", file=sys.stderr)
+    return vehicles
+
+
 # Chains the scan EXPECTS to return vehicles (source tag -> display name).
 # After the U-Pull-R plugin upgrade silently zeroed all MN/OH coverage for 4
 # days (2026-10-13 → 10-17), any onboarded chain coming back empty now prints
@@ -24910,6 +25468,13 @@ INDEPENDENT_EXPECTED_SOURCES.update({
     "ezpullit": "Pasco EZ Pull It (Hudson FL)",
     "ipullca": "iPull-uPull (Edmonton AB)",
 })
+INDEPENDENT_EXPECTED_SOURCES.update({"standardupic": "Standard Auto Wreckers UPIC (Toronto ON)"})  # 2026-11-17
+
+
+def independent_sources_switched_off() -> set[str]:
+    """Sources whose reader is deliberately off, so the zero-vehicle alarm
+    below does not call them broken on every scan. Today: U-Pull-R only."""
+    return set() if UPULLR_READER_ENABLED else {"upullr"}
 
 
 # Canonical adapter order. The parallel fetch below concatenates results in
@@ -24948,6 +25513,7 @@ INDEPENDENT_FETCHERS: list = [
     ("Marion County Auto Parts", fetch_marioncounty_inventory),
     ("662 Self Serve", fetch_selfserve662_inventory),
     ("CP's U-Pull-It", fetch_cpsupullit_inventory),
+    ("S&S U-Pull-It", fetch_ssupullit_inventory),  # 2026-11-17, Lebanon MO (35 makes at 1 s)
     # yardconnect-pro tenants (2026-10-27): one entry per host, like U-Pick-It
     # AZ above (same config-driven adapter, YARDCONNECT_SITES).
     ("Chuck & Eddie's", fetch_chuckeddies_inventory),
@@ -24967,6 +25533,7 @@ INDEPENDENT_FETCHERS: list = [
     ("Hwy 82 Pick & Pay", fetch_hwy82_inventory),
     ("Route 34 U-Pull-M", fetch_route34_inventory),
     ("Sunshine Auto Salvage", fetch_sunshine_inventory),
+    ("Intermountain Auto iPull", fetch_ifipull_inventory),  # 2026-11-17, Idaho Falls ID (one GET)
     ("Bevell's", fetch_bevells_inventory),  # 2026-11-03, Goldsboro NC (paged Toolset table)
     ("OKC Pull-A-Part", fetch_okcpap_inventory),  # 2026-11-04, Oklahoma City (WebForms, one POST per make)
     # 2026-10-28 single-host adapters (Kiker's / Weller / Cagle's block).
@@ -24980,6 +25547,7 @@ INDEPENDENT_FETCHERS: list = [
     ("Army's Auto Wrecking", fetch_armys_inventory),
     ("Pasco EZ Pull It", fetch_ezpullit_inventory),
     ("iPull-uPull Canada", fetch_ipullca_inventory),
+    ("Standard Auto Wreckers UPIC", fetch_standardupic_inventory),  # 2026-11-17, Scarborough ON (2 GETs)
 ]
 
 
@@ -25016,6 +25584,8 @@ def fetch_independent_inventory() -> list[dict]:
     # discovered by users days later (see U-Pull-R, 2026-10-13..17).
     got_sources = {v.get("_source") for v in vehicles}
     for src, label in INDEPENDENT_EXPECTED_SOURCES.items():
+        if src in independent_sources_switched_off():
+            continue  # off on purpose (its reader said so above), not broken
         if src not in got_sources:
             print(f"  WARNING: independent chain {label!r} returned 0 vehicles — "
                   f"adapter broken or site blocking? Investigate before it goes stale.",
@@ -28037,7 +28607,9 @@ YARD_MISSING_DROP = 30
 # counts as an open issue there (backend/src/ops_monitor.js).
 _UPR = ("waiting on the yard: upullrparts.com puts its vehicle search behind a "
         "Cloudflare human check (captcha) since ~2026-10-21; owner emailed them "
-        "2026-11-03 asking for an exemption or a daily file")
+        "2026-11-03 asking for an exemption or a daily file; their CTO said "
+        "2026-11-06 an official API is likely; our reader is switched off "
+        "since 2026-11-17 (nothing is sent to their site) until it arrives")
 KNOWN_MISSING_REASONS: dict[str, str] = {
     "U-Pull-R Parts - East Bethel": _UPR,
     "U-Pull-R Parts - Rosemount": _UPR,
@@ -28580,7 +29152,8 @@ def main():
                refresh_ryans_pricing_file, refresh_usauto_pricing_file,
                refresh_upas_pricing_file, refresh_mmupullit_pricing_file,
                refresh_polkpickpay_pricing_file, refresh_chuckeddies_pricing_file,
-               refresh_byot_pricing_file, refresh_wilberts_pricing_file)
+               refresh_byot_pricing_file, refresh_wilberts_pricing_file,
+               refresh_ifipull_pricing_file, refresh_ssupullit_pricing_file)
         for fn in fns:
             try:
                 fn()

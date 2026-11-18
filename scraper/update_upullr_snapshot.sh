@@ -15,6 +15,12 @@
 #
 # PERMISSION: 2026-11-03 the owner phoned U-Pull-R; the front desk said
 # listing and scanning is fine. Run only with that permission standing.
+#
+# SWITCHED OFF 2026-11-17: UPULLR_READER_ENABLED = False in
+# junkyard_scraper.py. While it is off this script sends nothing to their
+# site (both functions it calls return at once) and exits 1 with "only 0
+# vehicles". Do not run it to get around the captcha; see ops/yards.md,
+# "U-Pull-R reader is switched off".
 set -euo pipefail
 cd "$(dirname "$0")/.."
 

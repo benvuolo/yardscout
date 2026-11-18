@@ -93,6 +93,8 @@ ENTRIES: list[tuple[str, str | None, str | None, str]] = [
      "anchored: Budget/Indy/Harry's/Rupert's/Pipes U-Pull-Its differ upfront"),
     (r"^rupert", "Rupert's U-Pull-It", None, "tier 2 handles cars with a make"),
     (r"^chesterfield", "Chesterfield Auto Parts", None, "search form is POST-only"),
+    (r"^intermountain auto ipull", "iPull by Intermountain Auto", None,
+     "Idaho Falls; named so it cannot fall into the ^ipull (iPull-uPull) entry below"),
     (r"^ipull-upull - edmonton", "iPull-uPull Canada", None,
      "separate Canadian site; must precede the California ^ipull entry"),
     (r"^ipull", "iPull-uPull", None, ""),
@@ -141,6 +143,7 @@ ENTRIES: list[tuple[str, str | None, str | None, str]] = [
     (r"^marion county auto parts", "Marion County Auto Parts", None, ""),
     (r"^662 self serve", "662 Self Serve Auto Parts", None, ""),
     (r"^cp'?s u-pull-it", "CP's U-Pull-It", None, ""),
+    (r"^s&s u-pull-it", "S&S U-Pull-It", None, "Lebanon MO (2026-11-17)"),
     (r"^genesis metal recycling", "Genesis Metal Recycling", None, ""),
     # --- yardconnect-pro tenants (2026-10-27) — whole-lot table pages, no deep links ---
     (r"^chuck & eddie'?s", "Chuck & Eddie's Self Service", None,
@@ -183,6 +186,9 @@ ENTRIES: list[tuple[str, str | None, str | None, str]] = [
     (r"^c&c pick a part", "C&C Pick A Part", None, "one client-filtered table"),
     (r"^army'?s auto wrecking", "Army's Auto Wrecking", None, ""),
     (r"^pasco ez pull it", "Pasco EZ Pull It", None, ""),
+    # --- 2026-11-17 breadth pass ---
+    (r"^standard auto wreckers upic", "Standard Auto Wreckers UPIC", None,
+     "Scarborough ON; the UPIC (self-service) page, not the full-service search"),
 ]
 
 
