@@ -1754,3 +1754,7 @@ after the next crawl. Further options if needed: VINDEX_MOD 64→512
 (its p90 is 28 ms, p99 99 ms; it has not been stopped).
 Zone analytics (paths, user agents) is not readable with the current API
 token ("zone.analytics.read" missing), so the crawler is not named.
+- 15:45 UTC confirmed live: `GET /v1/vehicles/utpap-orem-K026992` (a
+  lowercase id with no VIN, 404 before) → 200 with the car; a VIN lookup →
+  200; `yardscout.io/car/utpap-orem-K026992` → 200. Re-check of the CPU
+  numbers scheduled ~20 h later (`cf-usage.yml`).
