@@ -4197,14 +4197,49 @@ App-years per make (shipped):
 | Chevrolet | 0 | 34 | fuel 11, cab 1 |
 | GMC | 2 (Yukon 2003 mirrors, both pages read) | 0 | cab 2 |
 | Ram | 2 (55277414AB/15AB, "6 - Lt. Duty DODGE 4WD") | 7 (climate 3, headlamps 4: fitment rows only) | |
-| Ford | 0 | 12 (Focus, Transit Connect, C-Max) | |
-| Mercedes-Benz | 0 | 2 (ML350 wheels) | |
+| Ford | 0 | 0 (12 dropped: single-drive, below) | |
+| Mercedes-Benz | 0 | 0 (2 dropped: single-drive, below) | |
 | Kia (hmg, held) | 44 | 0 | eng 81, trans 4 |
 | nissan candidate | Nissan 45, Infiniti 12 | 0 | cab 95, eng 86, fuel 113, trans 6 |
 
 - GM: 34 of 36 app-years unchecked (the verifier counted 30). I count "the 4wd
   page read in this category" only, from a record seeded on it; pages read for
   other categories do not count.
+
+### Single-drive model-years (hub gates review, after a0363fce)
+
+Hub decisions: unknown-drive donors stay "if equipped" for both kinds; no
+body gates that add claims back this round. Fix: no drive limit (no gate, no
+note words) on a model-year built in one drive only.
+
+`Curation.drive_material(T, d)`:
+- (a) Where the catalog files the model-year by drive (gmpartsgiant 2wd /
+  4wd / awd catalogs: the year page's variants), the limit stands only if a
+  catalog of the other drive family is offered for that year, read or not.
+  Every gated GM model-year offers both (Tahoe, Blazer, S-10, Colorado,
+  Trailblazer and Yukon 2wd + 4wd; Traverse 2wd + awd), so GM is unchanged.
+- (b) Where the catalog is one per model-year (Ford, Mopar, Mercedes,
+  Nissan), structure cannot tell, so `policy.SINGLE_DRIVE_TABLE` (hashed) lists
+  the single-drive model-years the gated groups touch. Each entry has a
+  one-line basis:
+  - Ford Focus 2012 and 2015, C-Max 2013, Transit Connect 2015: FWD. The
+    fordpartsgiant catalog is one catalog with no drive split on its pages
+    (restored_verify_2026-11-18b).
+  - Mercedes ML350 2007-08: AWD. One 'ml350' catalog, and 19 of 19 decoded
+    2007-08 ML350s on the pinned lot are AWD.
+  - A listed model-year with a limit of the other family would leave the
+    vehicle-year out; none occurs.
+- Result: ford 6 groups (12 app-years) and mb 1 group (2 app-years) lose the
+  limit and its gate. Their notes go back to "window motor only; trim-limited;
+  verify the number on the part" etc.
+- Ram 1500 2012 is one catalog but both drives (the lot holds 38 4x2, 37 4WD),
+  so it is not listed and keeps its limits (2 stated, 7 unchecked).
+- Nissan candidate: no gate falls in the case, and the re-curation changed
+  only policy_sha256. Every gated Nissan/Infiniti model-year either decodes in
+  both families on the lot (Frontier, Xterra, Pathfinder 2005-09, Titan, QX60)
+  or has catalog rows coded for both drives (Pathfinder 2011 carries 2WD and
+  4WD groups). JX35 2013's AWD limit comes from option codes; JX35 was built
+  FWD and AWD.
 
 ### How the app applies it (docs/app.js OEM-GATE block, 9666-9810)
 
@@ -4265,8 +4300,8 @@ Choices the OEM gate makes, stated plainly:
 |---|---|---|---|---|
 | gm | 59,852 | 56,081 | 3,771 | 1,787 |
 | mopar | 116,281 | 115,939 | 342 | 27 |
-| ford | 27,335 | 27,335 | 0 | 3,858 |
-| mb | 243 | 243 | 0 | 2 |
+| ford | 27,335 | 27,335 | 0 | 0 (was 3,858 before the single-drive fix) |
+| mb | 243 | 243 | 0 | 0 (was 2) |
 | toyota, subaru, vag, hmg | | unchanged | | |
 
 - Excluded pairs by distinct cars: Chevrolet 655, GMC 54, Ram 38. All are
@@ -4277,14 +4312,19 @@ Choices the OEM gate makes, stated plainly:
 
 ### Live diff vs origin/main b9785c22 (`groups/_report/live_diff_2026-11-18_gates.txt`)
 
-- Groups: 0 added, 0 removed, 48 notes changed with apps unchanged (gm 34,
-  mopar 7, ford 6, mb 1: "only X checked").
+- Groups: 0 added, 0 removed, 48 notes changed with apps unchanged:
+  - gm 34, mopar 7: "<model>: X only" becomes "only X checked";
+  - ford 6, mb 1: the drive limit is gone (single-drive model-years).
 - Payload: 1,183 -> 1,183 groups, 0 added app-years. Gates added: gm 48
-  groups / 50 app-years, mopar 9 / 9, ford 6 / 12, mb 1 / 2.
+  groups / 50 app-years, mopar 9 / 9. Ford and mb carry no gate.
 - Re-curated all 8 shipped namespaces on oem-raw@dca9cd845f26 (pinned
-  inventory/decodes). toyota, subaru and vag are byte-identical; hmg gains
-  gates on held groups only. Nissan re-curated on @57e8b5b99de0: 286 groups,
-  106 gated, no note changed; still `_report/nissan.candidate.json`, not shipped.
+  inventory/decodes); policy.py moved the hash, so every file changes
+  policy_sha256. Beyond that:
+  - toyota, subaru, vag: nothing;
+  - hmg: gates on held groups only;
+  - ford, mb: as above.
+- Nissan re-curated on @57e8b5b99de0: 286 groups, 106 gated, no note changed.
+  It stays `_report/nissan.candidate.json`, not shipped.
 
 ### test_model_map
 
@@ -4296,8 +4336,9 @@ inventory. curate.py itself still refuses to run on live-map errors.
 
 ### Tests
 
-- New `curation_tests/test_gates_1118.py` (38 checks): helpers, drive basis on
-  stubs, wording, validator, payload shape, committed files.
+- New `curation_tests/test_gates_1118.py` (48 checks): helpers, drive basis
+  and drive_material on stubs, SINGLE_DRIVE_TABLE, wording, validator, payload
+  shape, committed files (no drive gate on a table model-year).
 - `pf_guards_unit.mjs` +39 checks. They pass on this app.js; 29 of them
   fail on 54d0784d's app.js.
 - `part_finder_e2e.py` gains a real-payload check: 2007 Tahoe regulators from
@@ -4309,11 +4350,13 @@ inventory. curate.py itself still refuses to run on live-map errors.
 
 ### Noticed, not fixed
 
-- Ford Focus 2012/2015, C-Max 2013 and Transit Connect 2015 are FWD-only
-  models, but their "only FWD/2WD checked" gate puts 3,858 donor rows "if
-  equipped". vPIC returns no drive type for most Focus VINs. A curated
-  single-drive model table (like MODEL_BODY_TABLE) would drop these
-  non-material limits. Suggest it.
+- SINGLE_DRIVE_TABLE covers only the model-years today's gated groups touch.
+  If a later crawl brings a drive limit on another single-catalog,
+  single-drive model, that model keeps the limit and its gate (undecoded
+  donors shown "if equipped") until it gets an entry with a basis. Nothing
+  flags such a model by itself. A census like
+  `drive_census_models` (pinned-lot decode mix per gated model-year) at each
+  re-curation would catch it.
 - The verifier's other items are out of scope and untouched:
   - Ford 6CPZ motors sit in different doors on Focus vs Transit Connect;
   - Mopar "Up To 07/23/2012" production windows have no note;
@@ -4327,22 +4370,22 @@ inventory. curate.py itself still refuses to run on live-map errors.
 
 ### Regression
 
-`tools/regress.sh` on b9b3f9b1 (the code head; after it, only this ops
-section): **104 passed, 0 failed, 0 skipped**. That includes pf_guards_unit,
-test_am_gates, test_interchange, interchange_e2e, part_finder_e2e (the tahoe07
-gate checks: 33 rows, 34 naming a gated number, 0 ruled out) and both layout
-halves. backend/node_modules was a symlink to the main checkout's for the run;
-it is removed and was not committed.
+`tools/regress.sh`, not under flock, on two code heads:
+- b9b3f9b1 (before the single-drive fix): **104 passed, 0 failed, 0 skipped**.
+- a833fe49 (the final code head; only this ops section follows it): **104
+  passed, 0 failed, 0 skipped**.
+
+Both runs include pf_guards_unit, test_am_gates, test_interchange,
+interchange_e2e, part_finder_e2e (tahoe07 gate checks: 33 rows, 34 naming a
+gated number, 0 ruled out) and both layout halves. backend/node_modules was a
+symlink to the main checkout's for the runs; it is removed and was not
+committed. sw stays jh-v212.
 
 ### For the hub
 
 1. Merge `interchange/gates-1118`? Every change narrows: 0 added groups,
-   0 added app-years, 48 notes reworded.
-2. Unknown drive on an "only X checked" limit: the donor is shown "if
-   equipped", the same rule as the existing gates. If the hub wants an
-   unknown-drive donor hidden for the unchecked kind ("never show unverified
-   fitment" read strictly), that is a one-line change in pfOemDonorGate. It
-   would also hide most Focus/C-Max/Transit Connect donors, where vPIC gives
-   no drive. I did not make it without a decision.
+   0 added app-years, 48 notes reworded or narrowed.
+2. Decided by the hub (gates review): unknown-drive donors stay "if equipped"
+   for both kinds; no body gates that add claims back this round.
 3. Nissan: the candidate now carries 106 gated groups. The independent §11.4
    sample WITH the gates is the next step in the hub's order.
