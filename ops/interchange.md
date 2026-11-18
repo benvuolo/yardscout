@@ -4019,3 +4019,123 @@ a85c654). Live groups only:
   - Production-date splits inside a model-year (rows overlapping 5+ months)
     still get the generic note; naming the window ("built from 01/2008")
     would close the last RISK class seen in my sample.
+
+## 2026-11-18 Independent check of the restored claims (verifier subagent of session_01LsgNuWEh1vdaDCtdP1jxMM, branch `interchange/verify-restored-1118`)
+
+Hub brief: an independent read of every claim `interchange/rules-1118` (head 54d0784d) adds back to the live
+groups, the disputed R14 removal, and a seeded spot check of the narrowed drive notes. Check only: no rule,
+policy, group or payload file was changed. Raw read from git (oem-raw@dca9cd84) with my own reader, not
+curate.py or `audit11_4/sample.py`. No fetch, crawl or dispatch. The builder's evidence was not read before
+these verdicts were written. Per-item verdicts with the raw record lines:
+`groups/_report/restored_verify_2026-11-18b.json`.
+
+### Restored list (built from the diff)
+
+Per-app diff (make, model, year) of every group keyed by (ns, cat, pn), main@700bcf9b -> branch, in both
+`groups/<ns>.json` and the payload (`docs/data/oem/*.json`; `interchange.json` holds no oemGroups). Both agree:
+**9 groups, 19 apps** (ford 6, gm 2, subaru 1), as expected. No group gains a vehicle-year on top of a live
+claim, and no note on the branch drops a phrase main has.
+
+| pn | apps | note (short) |
+|---|---|---|
+| ford 6CPZ-5423395-A, -5423395-B, 6CPZ-9923394-B, -9923394-C | Focus 2015, Transit Connect 2015 | window motor only; trim-limited; FWD only |
+| ford CV6Z-5423394-B, CV6Z-5423395-B | C-Max 2013, Focus 2012 | window motor only; fits some configurations; C-Max 2WD / Focus FWD |
+| gm 15890412 (heater-only control) | Cobalt 2007, G5 2007 | option |
+| gm 88960088 (front window motor) | Camaro 1995, Firebird 1995, Safari 1997 | window motor only; fits some configurations |
+| subaru 57229AG04A9P (turbo hood) | Legacy 2005, Outback 2005 | Legacy GT / Outback XT only |
+
+### 1. Restored claims: RIGHT 19, WRONG 0, RISK 0
+
+Each app's own catalog page lists the number, and the only splits on the pages are ones the note names:
+- window features (one-touch, power rear windows, power sliding-door windows) for the motors;
+- the A/C option (C67) for the heater-only control;
+- the turbo trims (S./W. 25GT, WOBK 25GT) for the Subaru hood.
+
+None of these pages is split by body, drive, engine or production date:
+- Focus, C-Max and Transit Connect are single catalogs;
+- the GM heater-control and motor rows carry no body code;
+- Safari 2WD and AWD both list 88960088;
+- FIT rows name 2 DOOR + 4 DOOR, or 2 DOOR + CONVERTIBLE.
+
+Caveat on the four 6CPZ Focus/Transit Connect groups (not a verdict change): the same number sits in a
+different door on each model's own page. For example:
+- 6CPZ-5423395-B is the Focus driver-front motor but the Transit Connect passenger-front motor;
+- 6CPZ-5423395-A is the Focus passenger-rear motor but the Transit Connect driver sliding-door motor.
+
+The app shows no position, and the note says to verify the number. A puller who assumes the same door gets the
+wrong motor.
+
+### 2. R14 (gm 20964008, Cobalt/G5 2007 headlamp): the removed claim was WRONG; the removal is correct
+
+The 2007 Cobalt's own lamps page lists 20964008 (smoked lens) only for `Fitting Vehicle Options: AP(37)`. In
+GM body-style numbers, 37 is the 2-door coupe; the same 2007 Cobalt catalog uses 69 for the sedan:
+- rear-door rows carry only (69);
+- the trunk weatherstrips split A(37) / A(69).
+
+Every other 2007 Cobalt (series AJ/AK/AL/AM, both bodies) is listed with 22740621/22740620 (clear lens). The
+product FIT row "Cobalt 2005-2010 | 2 DOOR, 4 DOOR" spans other years and does not override the 2007 page. The
+live claim put the part on every 2007 Cobalt, sedans included, under an option note that does not name the
+coupe limit. The earlier class (b) verdict cited the G5 row (no code) and the FIT row. It missed the Cobalt
+row's AP(37), which is in record jsonl:512.
+
+### 3. Drive notes, seed 20261118: over-claims 0; limits shown true 0 of 8 (all safe under-claims)
+
+The population is the 46 payload groups whose note gained "<model>: 2WD|4WD|AWD only". I drew
+`random.Random(20261118).sample(range(46), 8)`, which gave indices 1, 2, 4, 13, 14, 21, 24 and 41:
+- gm 15858832 and 19433953 (Colorado 2005);
+- gm 22853025 and 23227000 (Tahoe 2007);
+- gm 5978196 (S-10 2000);
+- gm 15643719 (Tahoe 1999);
+- gm 19331466 (Trailblazer 2004);
+- mopar 55277410AE (Ram 1500 2012).
+
+In every pick, the other vehicle-years (Canyon, Avalanche, Sonoma, Yukon, Rainier, Escalade, Ram 2500) are
+listed on both drive pages and correctly carry no limit, so there is no over-claim. But no limit is shown true:
+- **GM (7):** only the 2WD page's record exists for that category. The 4WD page of the same model-year has no
+  list manifest and no record in the raw, so "2WD only" rests on a page never captured. The twin's own 4WD page
+  lists the same number, and the FIT row names no drive. Census over all 46: 30 of the 36 GM "2WD only"
+  app-years are in this state.
+- **Mopar (1):** "1500: 4WD only" comes from a FIT row that lists only 4WD 1500 trims. Every pre-07/23/2012
+  1500 headlamp on the 2012 page has the same 4WD-only row, so that row is incomplete for 2WD.
+
+These notes are safe under-claims, but they state a limit the catalog does not state, and they hide true 4WD
+donors.
+
+### Found, not changed (for the hub)
+
+1. Drive rule: treat "other-drive page not in raw" as unknown (no note, or read that page), not as "2WD only".
+   Ignore FIT-row drive lists when every sibling on the page shares the same gap.
+2. Mopar 2012 Ram 1500 headlamps 55277409AE/10AE and 68001484AE/85AE are "Up To 07/23/2012" on the 1500 page,
+   but no note names the production window. This is unchanged from main. The production rule may not read
+   Mopar's "Up To MM/DD/YYYY" form.
+3. gm 15643719/15643720 (Tahoe/Yukon 1999 rear-door regulators): the FIT row says "CLASSIC 4 DOOR"; 1999 also
+   had 2-door Tahoes/Yukons. The note does not name the body. Lot body mix not checked.
+4. Ford window motors: print the page's fit note and the door per model in the note (e.g. "Transit Connect:
+   passenger front"). "trim-limited" alone does not tell a puller which door holds the number.
+
+**Recommendation: ship the 9 restored groups.**
+
+### Agreement / disagreement with the builder (read after the verdicts above were committed, 538bf175)
+
+I read `live_diff_2026-11-18_rules.txt` and the "2026-11-18 Rules after the independent check" section.
+
+**Agree:**
+- Same 9 restored groups and the same 19 apps. The builder diffed against main 82df0482; I diffed against
+  700bcf9b, and the result is the same.
+- All 9 rest on the same own-page rows I cited (records L144/145/549/992/993/998/1000; lists L122/283/333/334/
+  413/306/1543/2686/1720/1732).
+- The 4 restored groups outside the earlier sample (6CPZ-5423395-B, 6CPZ-9923394-B, 6CPZ-9923394-C, 15890412)
+  hold up under my read.
+- R14: I read AP(37) as coupe-only, as the builder did, and against the earlier verifier's class (b). The
+  removal stands.
+- Drive notes: the builder already flagged that most GM "2WD only" notes come from 4wd pages never read
+  ("under-claim rather than over-claim"). I agree and put a number on it: 30 of 36 GM app-years.
+
+**Add (the builder did not raise these):**
+- On the four 6CPZ Focus/Transit Connect groups, the door side differs between the two models' pages.
+- The Mopar "1500: 4WD only" limit rests on FIT rows that no 2012 1500 headlamp before 07/23/2012 lists for
+  2WD, so those rows look incomplete rather than a real drive split.
+- The Mopar "Up To 07/23/2012" production window is not named in the note.
+- The 1999 Tahoe/Yukon rear-door body point (Found item 3).
+
+**No disagreement on any verdict.**
