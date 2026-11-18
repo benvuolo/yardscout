@@ -53755,9 +53755,21 @@
    ],
    "cars": 28,
    "cat": "wheels",
+   "gates": [
+    [
+     "Mercedes-Benz",
+     "ML350",
+     2007,
+     2008,
+     {
+      "drive": "awd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:mb:wheels:C:5c71ada41d",
    "kind": "body",
-   "note": "Mercedes catalog lists #6-6-47-4207 for both — trim-limited; ML350: AWD only; verify the number on the part",
+   "note": "Mercedes catalog lists #6-6-47-4207 for both — trim-limited; ML350: only AWD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:04:03Z",
    "pn": [
     "6-6-47-4207"

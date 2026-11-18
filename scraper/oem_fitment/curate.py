@@ -1484,17 +1484,30 @@ class Curation:
             reason, text = _likely_reason(whys)
             text = policy.GROUP_NOTES.get((self.ns, cat, sorted(c.pns)[0]), text)
             slot = "+".join(sorted(slots)) or "C"
-            cab = self._cab_only(c, cat, Ts)
+            cab_map = self._cab_only_map(c, cat, Ts)
+            cab = "; ".join(f"{md}: {cb} only" for (_mk, md), cb in cab_map.items())
             # §5.16 limits per vehicle-year: rear-door crew cab, drive, engine,
-            # transmission, fuel (2026-11-18); ambiguous fuel leaves T out
-            label_by_T, fuel_drop = {}, False
+            # transmission, fuel (2026-11-18); ambiguous fuel leaves T out.
+            # The same limits become the vehicle-year's gate (gates-1118): the
+            # app hides a donor whose own decode or listing contradicts one.
+            label_by_T, gate_by_T, unchecked_by_T, fuel_drop = {}, {}, {}, False
             for T in Ts:
-                labs = []
+                labs, gate = [], {}
                 rc = self.rear_cab_of(c, cat, T, slots)
                 if rc and f"{T[1]}: crew cab only" not in cab:
                     labs.append(rc)
+                if cab_map.get((T[0], T[1])) or rc:
+                    gate["cab"] = _cab_gate(cab_map.get((T[0], T[1])) or rc)
                 if drive_by_T.get(T):
-                    labs.append(_drive_label(drive_by_T[T]))
+                    d = drive_by_T[T]
+                    basis = self.drive_basis(c, cat, T, d)
+                    if basis == "stated":
+                        labs.append(_drive_label(d))
+                    else:
+                        # hub 2026-11-18: same gate, honest words (checked drive only)
+                        unchecked_by_T[T] = _drive_label(d)
+                    gate["drive"] = _drive_gate(d)
+                    gate["drive_basis"] = basis
                 fu = self.fuel_of(c, cat, T)
                 if fu == DRIVE_AMBIGUOUS:
                     fuel_drop = True
@@ -1504,9 +1517,16 @@ class Curation:
                     fuel_drop = "engine"
                     break
                 labs += [x for x in (eng, tr) if x]
+                if eng:
+                    gate["eng"] = eng.split("/")
+                if tr:
+                    gate["trans"] = _TRANS_GATE[tr]
                 if fu:
                     labs.append(fu)
+                    gate["fuel"] = fu
                 label_by_T[T] = ", ".join(labs)
+                if gate:
+                    gate_by_T[T] = gate
             if fuel_drop:
                 self.refuse("held_engine_conflict" if fuel_drop == "engine" else "held_fuel_conflict",
                             cat=cat, pn=sorted(c.pns)[0], evidence=[r.pointer for r in c.records],
@@ -1520,7 +1540,7 @@ class Curation:
                     self.refuse("held_cab_qualifier", cat=cat, pn=sorted(c.pns)[0],
                                 evidence=[r.pointer for r in c.records], detail=cab)
                     continue
-            drv = self._limit_note(label_by_T)
+            drv = "; ".join(x for x in (self._limit_note(label_by_T), self._unchecked_note(unchecked_by_T, Ts)) if x)
             if drv:
                 text = f"{text}; {drv}"
                 self.likely_drive_noted[cat] += 1
@@ -1565,10 +1585,12 @@ class Curation:
             # its own evidence date: build-time expiry drops a Likely group
             # whose oldest record passes 120 days (review F18)
             stamps = sorted(r.retrieved for r in c.records if _ts(r.retrieved))
+            gates = _gate_runs(gate_by_T)
             out.append({"id": f"oem:{self.ns}:{cat}:{slot}:{_sha1([pns, apps])[:10]}", "cat": cat,
                         "tier": "likely", "kind": "body", "apps": apps, "pn": pns, "reason": reason,
                         "note": note, "keys": [key], "cars": sum(self.inv_counts.get(T, 0) for T in Ts),
-                        "oldest_retrieved": stamps[0] if stamps else None})
+                        "oldest_retrieved": stamps[0] if stamps else None,
+                        **({"gates": gates} if gates else {})})
         return out
 
     def _strict_refusal(self, c, cat, cand, slots):
@@ -1754,7 +1776,12 @@ class Curation:
         """Hub 2026-11-09 (GM 15844876: Silverado fitment rows name extended
         cab only): when every fitment row crediting a model names one cab
         type, the group says '<model>: <cab> only' for it. '' when none does."""
-        out = []
+        return "; ".join(f"{md}: {cab} only" for (_mk, md), cab in self._cab_only_map(c, cat, Ts).items())
+
+    def _cab_only_map(self, c, cat, Ts) -> dict:
+        """{(make, model): cab} behind _cab_only's note (the per-app cab gate,
+        2026-11-18), in the note's order."""
+        out = {}
         for mk, md in sorted({(T[0], T[1]) for T in Ts}):
             cabs, all_cab = set(), True
             for T in Ts:
@@ -1772,10 +1799,10 @@ class Curation:
                     if not f.trims:
                         all_cab = False
             if all_cab and len(cabs) == 1:
-                out.append(f"{md}: {next(iter(cabs))} only")
+                out[(mk, md)] = next(iter(cabs))
         if not out and getattr(self, "ns", None) == "nissan":
-            return self._nissan_cab_only(c, cat, Ts)
-        return "; ".join(out)
+            return self._nissan_cab_only_map(c, cat, Ts)
+        return out
 
     # ------------------------------------------- §5.16 drive rule (2026-11-18)
     def _gm_page_letters(self, T):
@@ -1827,6 +1854,97 @@ class Curation:
         if md:
             return None if md <= d else DRIVE_AMBIGUOUS
         return d
+
+    # --------------------------- drive limit basis (gates-1118, hub refinement)
+    # The independent check of rules-1118 (groups/_report/restored_verify_2026-
+    # 11-18b.json) found most GM "<model>: 2WD only" limits rest on the 4wd
+    # catalog page never having been read (only the 2wd page is in the raw),
+    # and the Mopar "1500: 4WD only" on 2012 Ram fitment rows that list 4WD
+    # trims for every number on the page. Those limits are not the catalog's
+    # statement. drive_basis says which kind a vehicle-year's limit is; the
+    # gate is the same for both (only donors of the checked drive are shown),
+    # the note words the second kind "<model>: only 2WD checked".
+    def drive_basis(self, c, cat, T, d) -> str:
+        """'stated' when the catalog states T's drive limit for class c:
+        every own-page row of the number names the drive itself (option code,
+        GM series letter, a drive note) or sits on a drive-named catalog page
+        of T while a page of T of the other drive family was read in this
+        category without the number; or, when the limit comes from the product
+        pages' fitment rows, another number's fitment row for T in this
+        category names the other drive family. 'unchecked' otherwise: the
+        other drive's page is not in the raw, or no fitment row on T's page
+        names the other drive (rows that may be incomplete)."""
+        fam = _FOUR if d and set(d) <= _FOUR else _TWO
+        other = _TWO if fam is _FOUR else _FOUR
+        gm_letters = self._gm_page_letters(T) if self.ns == "gm" else None
+        if self.t_list_rows.get((T, cat)):
+            page = [(lr.variant, policy.pn_key(self.ns, lr.pn)) for lr in self.t_list_rows[(T, cat)]]
+            own = [(lr.notes, lr.site, lr.variant) for lr in self.t_list_rows[(T, cat)]
+                   if policy.pn_key(self.ns, lr.pn) == c.key and lr.matched and not self.note_excludes(lr.notes, T)]
+        else:
+            recs = self.t_seed_records.get((T, cat), [])
+            page = [(_catalog_of(r.list_url), r.key) for r in recs]
+            own = [(r.note_texts, r.site, _catalog_of(r.list_url)) for r in recs
+                   if r.key == c.key and not self.note_excludes(r.note_texts, T)]
+        other_pages = {v for v, _k in page if (vd := _variant_drive(v)) and vd <= other}
+        other_has_it = any(k == c.key for v, k in page if v in other_pages)
+        verdicts = []
+        for notes, site, variant in own:
+            rd = _row_drive(notes, site, gm_letters, "")
+            if rd not in (None, DRIVE_AMBIGUOUS) and rd <= fam:
+                verdicts.append(True)           # the row's own code or note names the drive
+                continue
+            vd = _variant_drive(variant)
+            if vd and vd <= fam:
+                verdicts.append(bool(other_pages) and not other_has_it)
+                continue
+            verdicts.append(None)               # the row says nothing about the drive
+        if verdicts and all(v is True for v in verdicts):
+            return "stated"
+        if any(v is False for v in verdicts):
+            return "unchecked"
+        for (cc, _r, f, _t) in self.t_rows.get((T, cat), []):
+            if cc is c:
+                continue
+            fd = _fit_drive(f)
+            if fd not in (None, DRIVE_AMBIGUOUS) and fd <= other:
+                return "stated"
+        return "unchecked"
+
+    def _unchecked_note(self, unchecked_by_T, Ts) -> str:
+        """'<model>: only 2WD checked' for vehicle-years whose drive limit is
+        'unchecked': the hub's "checked for 2WD; 4WD not checked", in words
+        short enough for the 160-character note (the long form does not fit
+        the 2004 Trailblazer regulator notes, which would be refused). Models
+        sharing the label are named together; '<model> 2005-2007' when only
+        some of its years are; no model when every vehicle-year of the group
+        is. '' for none."""
+        if not unchecked_by_T:
+            return ""
+        by = defaultdict(list)
+        for T, lab in unchecked_by_T.items():
+            by[lab].append(T)
+        allT = set(Ts)
+        parts = []
+        for lab, ts in sorted(by.items()):
+            if set(ts) == allT:
+                parts.append(f"only {lab} checked")
+                continue
+            names = []
+            for mk, md in sorted({(T[0], T[1]) for T in ts}):
+                ys = sorted(T[2] for T in ts if (T[0], T[1]) == (mk, md))
+                if set(ys) == {T[2] for T in allT if (T[0], T[1]) == (mk, md)}:
+                    names.append(md)
+                    continue
+                run = []
+                for y in ys:
+                    if run and y == run[-1][1] + 1:
+                        run[-1][1] = y
+                    else:
+                        run.append([y, y])
+                names += [f"{md} {a}{'-' + str(b) if b != a else ''}" for a, b in run]
+            parts.append(f"{', '.join(names)}: only {lab} checked")
+        return "; ".join(parts)
 
     def _drive_note(self, drive_by_T) -> str:
         """The drive part of the §5.16 limit note (see _limit_note)."""
@@ -2059,7 +2177,11 @@ class Curation:
         own-page row listing the number for a model codes only one cab, the
         group says '<model>: <cab> only'. A row without a code, or with any
         other code, leaves that model without a note."""
-        out = []
+        return "; ".join(f"{md}: {cab} only" for (_mk, md), cab in self._nissan_cab_only_map(c, cat, Ts).items())
+
+    def _nissan_cab_only_map(self, c, cat, Ts) -> dict:
+        """{(make, model): cab} behind _nissan_cab_only's note."""
+        out = {}
         for mk, md in sorted({(T[0], T[1]) for T in Ts}):
             cabs, all_cab = set(), True
             for T in Ts:
@@ -2076,8 +2198,8 @@ class Curation:
                     else:
                         cabs |= codes
             if all_cab and len(cabs) == 1:
-                out.append(f"{md}: {self._NISSAN_CABS[next(iter(cabs))]} only")
-        return "; ".join(out)
+                out[(mk, md)] = self._NISSAN_CABS[next(iter(cabs))]
+        return out
 
     # ------------------------------------------------------------ report
     def report(self, doc, inv_counts: Counter):
@@ -3032,6 +3154,54 @@ def _drive_label(allowed) -> str:
     if a and a <= _TWO:
         return "FWD" if a == {"fwd"} else "RWD" if a == {"rwd"} else "2WD"
     return ""
+
+
+# Per-app gates (interchange gates-1118): the §5.16 limits of a vehicle-year,
+# structured, beside the note that names them. The payload builder ships them
+# as the 6th element of the app ([make, model, lo, hi, null, gate]), the form
+# the aftermarket rows already use, and docs/app.js (OEM-GATE) hides a donor
+# whose own decode or listing contradicts one. validate.gate_problem holds the
+# vocabulary. Only ever narrows which lot cars are offered; apps, ids and notes
+# are unchanged.
+_GATE_DRIVE_ORDER = ("2wd", "fwd", "rwd", "4wd", "awd", "a4wd")
+_TRANS_GATE = {"manual": "MT", "automatic": "AT"}
+
+
+def _drive_gate(allowed) -> str:
+    """frozenset({'fwd', 'rwd'}) -> 'fwd/rwd' (classes in a fixed order)."""
+    return "/".join(x for x in _GATE_DRIVE_ORDER if x in set(allowed or ()))
+
+
+def _cab_gate(cab: str) -> str:
+    """The note's cab words as one gate value ('super cab' -> 'supercab')."""
+    c = re.sub(r"\s+", " ", str(cab or "").strip().lower())
+    return {"super cab": "supercab", "super crew": "supercrew", "crew max": "crewmax"}.get(c, c)
+
+
+def _gate_runs(gate_by_T: dict) -> list:
+    """[[make, model, lo, hi, gate], ...]: per feed model, maximal runs of
+    consecutive gated years with the same gate (keys sorted)."""
+    by = defaultdict(dict)
+    for (mk, md, y), g in gate_by_T.items():
+        by[(mk, md)][y] = {k: g[k] for k in sorted(g)}
+    out = []
+    for (mk, md), ys in sorted(by.items()):
+        run = None
+        for y in sorted(ys):
+            if run and y == run[3] + 1 and ys[y] == run[4]:
+                run[3] = y
+            else:
+                if run:
+                    out.append(run)
+                run = [mk, md, y, y, ys[y]]
+        out.append(run)
+    return out
+
+
+def _variant_drive(variant: str):
+    """Drive a catalog page's name gives ('2007-chevrolet-tahoe-2wd' -> {'2wd'}), or None."""
+    pos, neg, _ = _drive_terms(re.sub(r"[_-]+", " ", variant or ""))
+    return _drive_allowed(pos, neg)
 
 
 def _drive_union(ds):

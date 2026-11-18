@@ -88056,34 +88056,6 @@
    ],
    "reman": false
   },
-  "ford:CV6Z5423394B": {
-   "cat": "window-regulator",
-   "comp": "motor",
-   "evidence": [
-    "www.fordpartsgiant.com:records:L144"
-   ],
-   "names": [
-    "Motor Assy - Window Operating"
-   ],
-   "pns": [
-    "CV6Z-5423394-B"
-   ],
-   "reman": false
-  },
-  "ford:CV6Z5423395B": {
-   "cat": "window-regulator",
-   "comp": "motor",
-   "evidence": [
-    "www.fordpartsgiant.com:records:L145"
-   ],
-   "names": [
-    "Motor Assy - Window Operating"
-   ],
-   "pns": [
-    "CV6Z-5423395-B"
-   ],
-   "reman": false
-  },
   "ford:DG9Z17906A": {
    "cat": "bumper-rear",
    "comp": null,
@@ -100032,9 +100004,31 @@
    ],
    "cars": 416,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Ford",
+     "Focus",
+     2015,
+     2015,
+     {
+      "drive": "fwd",
+      "drive_basis": "unchecked"
+     }
+    ],
+    [
+     "Ford",
+     "Transit Connect",
+     2015,
+     2015,
+     {
+      "drive": "fwd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:ford:window-regulator:FL+FR+RL+RR+SL+SR:7c70e98fa5",
    "kind": "body",
-   "note": "Ford catalog lists #6CPZ-5423395-A for both — window motor only; trim-limited; FWD only; verify the number on the part",
+   "note": "Ford catalog lists #6CPZ-5423395-A for both — window motor only; trim-limited; only FWD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T03:45:20Z",
    "pn": [
     "6CPZ-5423395-A"
@@ -100059,9 +100053,31 @@
    ],
    "cars": 416,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Ford",
+     "Focus",
+     2015,
+     2015,
+     {
+      "drive": "fwd",
+      "drive_basis": "unchecked"
+     }
+    ],
+    [
+     "Ford",
+     "Transit Connect",
+     2015,
+     2015,
+     {
+      "drive": "fwd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:ford:window-regulator:FL+FR+RL+RR+SL+SR:83783498ca",
    "kind": "body",
-   "note": "Ford catalog lists #6CPZ-5423395-B for both — window motor only; trim-limited; FWD only; verify the number on the part",
+   "note": "Ford catalog lists #6CPZ-5423395-B for both — window motor only; trim-limited; only FWD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T03:44:32Z",
    "pn": [
     "6CPZ-5423395-B"
@@ -100086,9 +100102,31 @@
    ],
    "cars": 416,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Ford",
+     "Focus",
+     2015,
+     2015,
+     {
+      "drive": "fwd",
+      "drive_basis": "unchecked"
+     }
+    ],
+    [
+     "Ford",
+     "Transit Connect",
+     2015,
+     2015,
+     {
+      "drive": "fwd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:ford:window-regulator:FL+FR+RL+RR+SL+SR:bf72cf6844",
    "kind": "body",
-   "note": "Ford catalog lists #6CPZ-9923394-B for both — window motor only; trim-limited; FWD only; verify the number on the part",
+   "note": "Ford catalog lists #6CPZ-9923394-B for both — window motor only; trim-limited; only FWD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T03:45:36Z",
    "pn": [
     "6CPZ-9923394-B"
@@ -100113,9 +100151,31 @@
    ],
    "cars": 416,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Ford",
+     "Focus",
+     2015,
+     2015,
+     {
+      "drive": "fwd",
+      "drive_basis": "unchecked"
+     }
+    ],
+    [
+     "Ford",
+     "Transit Connect",
+     2015,
+     2015,
+     {
+      "drive": "fwd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:ford:window-regulator:FL+FR+RL+RR+SL+SR:ec3a8e03bc",
    "kind": "body",
-   "note": "Ford catalog lists #6CPZ-9923394-C for both — window motor only; trim-limited; FWD only; verify the number on the part",
+   "note": "Ford catalog lists #6CPZ-9923394-C for both — window motor only; trim-limited; only FWD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T03:44:24Z",
    "pn": [
     "6CPZ-9923394-C"
@@ -100629,60 +100689,6 @@
    "oldest_retrieved": "2026-11-05T23:30:01Z",
    "pn": [
     "BT4Z-17906-ACP"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Ford",
-     "C-Max",
-     2013,
-     2013
-    ],
-    [
-     "Ford",
-     "Focus",
-     2012,
-     2012
-    ]
-   ],
-   "cars": 1097,
-   "cat": "window-regulator",
-   "id": "oem:ford:window-regulator:FR:dfec425b50",
-   "kind": "body",
-   "note": "Ford catalog lists #CV6Z-5423394-B for both — window motor only; fits some configurations; C-Max: 2WD only; Focus: FWD only; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T01:26:47Z",
-   "pn": [
-    "CV6Z-5423394-B"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Ford",
-     "C-Max",
-     2013,
-     2013
-    ],
-    [
-     "Ford",
-     "Focus",
-     2012,
-     2012
-    ]
-   ],
-   "cars": 1097,
-   "cat": "window-regulator",
-   "id": "oem:ford:window-regulator:FL:08dc2c924f",
-   "kind": "body",
-   "note": "Ford catalog lists #CV6Z-5423395-B for both — window motor only; fits some configurations; C-Max: 2WD only; Focus: FWD only; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T01:26:51Z",
-   "pn": [
-    "CV6Z-5423395-B"
    ],
    "reason": "conditional",
    "tier": "likely"

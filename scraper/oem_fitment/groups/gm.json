@@ -201620,9 +201620,21 @@
    ],
    "cars": 211,
    "cat": "climate-control",
+   "gates": [
+    [
+     "Chevrolet",
+     "S-10",
+     2000,
+     2000,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:climate-control:C:c56743a878",
    "kind": "body",
-   "note": "GM catalog lists #15098963 for both — option: fits some option packages; S-10: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #15098963 for both — option: fits some option packages; S-10: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:21:12Z",
    "pn": [
     "15098963"
@@ -202229,9 +202241,21 @@
    ],
    "cars": 219,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Chevrolet",
+     "Tahoe",
+     1999,
+     1999,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:window-regulator:RL:0c39044d34",
    "kind": "body",
-   "note": "GM catalog lists #15643719 for both — regulator with motor; fits some configurations; Tahoe: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #15643719 for both — regulator with motor; fits some configurations; Tahoe: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T13:02:39Z",
    "pn": [
     "15643719"
@@ -202256,9 +202280,21 @@
    ],
    "cars": 219,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Chevrolet",
+     "Tahoe",
+     1999,
+     1999,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:window-regulator:RR:48ada603e8",
    "kind": "body",
-   "note": "GM catalog lists #15643720 for both — regulator with motor; fits some configurations; Tahoe: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #15643720 for both — regulator with motor; fits some configurations; Tahoe: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T13:02:47Z",
    "pn": [
     "15643720"
@@ -202688,9 +202724,21 @@
    ],
    "cars": 180,
    "cat": "climate-control",
+   "gates": [
+    [
+     "Chevrolet",
+     "Colorado",
+     2005,
+     2005,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:climate-control:C:9dd6a7cc3a",
    "kind": "body",
-   "note": "GM catalog lists #15858832 for both — option: fits some option packages; Colorado: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #15858832 for both — option: fits some option packages; Colorado: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T07:23:33Z",
    "pn": [
     "15858832"
@@ -203303,6 +203351,18 @@
    ],
    "cars": 213,
    "cat": "side-mirrors",
+   "gates": [
+    [
+     "GMC",
+     "Yukon",
+     2003,
+     2003,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated"
+     }
+    ]
+   ],
    "id": "oem:gm:side-mirrors:L:6d656e9cf9",
    "kind": "body",
    "note": "GM catalog lists #19153377 for both — fits some configurations; Yukon: 2WD only; verify the number on the part",
@@ -203330,6 +203390,18 @@
    ],
    "cars": 213,
    "cat": "side-mirrors",
+   "gates": [
+    [
+     "GMC",
+     "Yukon",
+     2003,
+     2003,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated"
+     }
+    ]
+   ],
    "id": "oem:gm:side-mirrors:R:73e37e2f21",
    "kind": "body",
    "note": "GM catalog lists #19153378 for both — fits some configurations; Yukon: 2WD only; verify the number on the part",
@@ -203363,9 +203435,21 @@
    ],
    "cars": 186,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Chevrolet",
+     "Colorado",
+     2005,
+     2005,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:window-regulator:FR:5b573a7074",
    "kind": "body",
-   "note": "GM catalog lists #19167712 for both — window motor only; fits some configurations; Colorado: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #19167712 for both — window motor only; fits some configurations; Colorado: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T07:21:17Z",
    "pn": [
     "19167712"
@@ -203396,9 +203480,21 @@
    ],
    "cars": 186,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Chevrolet",
+     "Colorado",
+     2005,
+     2005,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:window-regulator:FL:e8fad881ae",
    "kind": "body",
-   "note": "GM catalog lists #19167713 for both — window motor only; fits some configurations; Colorado: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #19167713 for both — window motor only; fits some configurations; Colorado: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T07:21:09Z",
    "pn": [
     "19167713"
@@ -203423,9 +203519,21 @@
    ],
    "cars": 124,
    "cat": "tail-lights",
+   "gates": [
+    [
+     "Chevrolet",
+     "Blazer",
+     2001,
+     2001,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:tail-lights:L:96652d4d51",
    "kind": "body",
-   "note": "GM catalog lists #19179358 for both — option: fits some option packages; Blazer: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #19179358 for both — option: fits some option packages; Blazer: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:49:24Z",
    "pn": [
     "19179358"
@@ -203450,9 +203558,21 @@
    ],
    "cars": 124,
    "cat": "tail-lights",
+   "gates": [
+    [
+     "Chevrolet",
+     "Blazer",
+     2001,
+     2001,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:tail-lights:R:9b1e9653f4",
    "kind": "body",
-   "note": "GM catalog lists #19179679 for both — option: fits some option packages; Blazer: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #19179679 for both — option: fits some option packages; Blazer: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:49:32Z",
    "pn": [
     "19179679"
@@ -203846,9 +203966,21 @@
    ],
    "cars": 395,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Chevrolet",
+     "Trailblazer",
+     2004,
+     2004,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:window-regulator:FR:4bc178f6eb",
    "kind": "body",
-   "note": "GM catalog lists #19331461 for both — regulator without motor; option: fits some option packages; Trailblazer: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #19331461 for both — regulator without motor; option: fits some option packages; Trailblazer: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:59:14Z",
    "pn": [
     "19331461"
@@ -203873,9 +204005,21 @@
    ],
    "cars": 395,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Chevrolet",
+     "Trailblazer",
+     2004,
+     2004,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:window-regulator:RL:775e9a961a",
    "kind": "body",
-   "note": "GM catalog lists #19331462 for both — regulator without motor; fits some configurations; Trailblazer: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #19331462 for both — regulator without motor; fits some configurations; Trailblazer: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:59:34Z",
    "pn": [
     "19331462"
@@ -203900,9 +204044,21 @@
    ],
    "cars": 395,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Chevrolet",
+     "Trailblazer",
+     2004,
+     2004,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:window-regulator:RR:70d865d615",
    "kind": "body",
-   "note": "GM catalog lists #19331463 for both — regulator without motor; fits some configurations; Trailblazer: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #19331463 for both — regulator without motor; fits some configurations; Trailblazer: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:59:38Z",
    "pn": [
     "19331463"
@@ -203927,9 +204083,21 @@
    ],
    "cars": 395,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Chevrolet",
+     "Trailblazer",
+     2004,
+     2004,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:window-regulator:FL:4bcf6eda65",
    "kind": "body",
-   "note": "GM catalog lists #19331466 for both — regulator without motor; option: fits some option packages; Trailblazer: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #19331466 for both — regulator without motor; option: fits some option packages; Trailblazer: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:59:18Z",
    "pn": [
     "19331466"
@@ -203960,9 +204128,21 @@
    ],
    "cars": 186,
    "cat": "tail-lights",
+   "gates": [
+    [
+     "Chevrolet",
+     "Colorado",
+     2005,
+     2005,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:tail-lights:R:fee2814027",
    "kind": "body",
-   "note": "GM catalog lists #19417443 for both — fits some configurations; Colorado: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #19417443 for both — fits some configurations; Colorado: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T07:19:09Z",
    "pn": [
     "19417443"
@@ -203993,9 +204173,21 @@
    ],
    "cars": 186,
    "cat": "tail-lights",
+   "gates": [
+    [
+     "Chevrolet",
+     "Colorado",
+     2005,
+     2005,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:tail-lights:L:61c33204e8",
    "kind": "body",
-   "note": "GM catalog lists #19417444 for both — fits some configurations; Colorado: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #19417444 for both — fits some configurations; Colorado: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T07:19:17Z",
    "pn": [
     "19417444"
@@ -204026,9 +204218,21 @@
    ],
    "cars": 186,
    "cat": "climate-control",
+   "gates": [
+    [
+     "Chevrolet",
+     "Colorado",
+     2005,
+     2005,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:climate-control:C:a9d88ac6ef",
    "kind": "body",
-   "note": "GM catalog lists #19433953 for both — option: fits some option packages; Colorado: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #19433953 for both — option: fits some option packages; Colorado: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T07:23:17Z",
    "pn": [
     "19433953"
@@ -204080,9 +204284,21 @@
    ],
    "cars": 635,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Chevrolet",
+     "Traverse",
+     2011,
+     2011,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:window-regulator:RL:bf233115e8",
    "kind": "body",
-   "note": "GM catalog lists #20785728 for both — fits some configurations; Traverse: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #20785728 for both — fits some configurations; Traverse: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:53:02Z",
    "pn": [
     "20785728"
@@ -204107,9 +204323,21 @@
    ],
    "cars": 635,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Chevrolet",
+     "Traverse",
+     2011,
+     2011,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:window-regulator:RR:1880379fcf",
    "kind": "body",
-   "note": "GM catalog lists #20785729 for both — fits some configurations; Traverse: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #20785729 for both — fits some configurations; Traverse: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:53:06Z",
    "pn": [
     "20785729"
@@ -204140,9 +204368,21 @@
    ],
    "cars": 681,
    "cat": "climate-control",
+   "gates": [
+    [
+     "Chevrolet",
+     "Tahoe",
+     2007,
+     2007,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:climate-control:C:aae9694494",
    "kind": "body",
-   "note": "GM catalog lists #20787112 for both — option: fits some option packages; Tahoe: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #20787112 for both — option: fits some option packages; Tahoe: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:49:21Z",
    "pn": [
     "20787112"
@@ -204239,6 +204479,17 @@
    ],
    "cars": 417,
    "cat": "side-mirrors",
+   "gates": [
+    [
+     "Chevrolet",
+     "Silverado 1500",
+     2012,
+     2012,
+     {
+      "fuel": "gas"
+     }
+    ]
+   ],
    "id": "oem:gm:side-mirrors:R:dbb7fb8e26",
    "kind": "body",
    "note": "GM catalog lists #20809948 for both — option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
@@ -204272,6 +204523,17 @@
    ],
    "cars": 417,
    "cat": "side-mirrors",
+   "gates": [
+    [
+     "Chevrolet",
+     "Silverado 1500",
+     2012,
+     2012,
+     {
+      "fuel": "gas"
+     }
+    ]
+   ],
    "id": "oem:gm:side-mirrors:R:ffdc0241fa",
    "kind": "body",
    "note": "GM catalog lists #20809968 for both — option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
@@ -204332,6 +204594,17 @@
    ],
    "cars": 417,
    "cat": "window-switch",
+   "gates": [
+    [
+     "Chevrolet",
+     "Silverado 1500",
+     2012,
+     2012,
+     {
+      "fuel": "gas"
+     }
+    ]
+   ],
    "id": "oem:gm:window-switch:DM:d5841134b0",
    "kind": "body",
    "note": "GM catalog lists #20835552 for both — option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
@@ -204365,6 +204638,17 @@
    ],
    "cars": 417,
    "cat": "window-switch",
+   "gates": [
+    [
+     "Chevrolet",
+     "Silverado 1500",
+     2012,
+     2012,
+     {
+      "fuel": "gas"
+     }
+    ]
+   ],
    "id": "oem:gm:window-switch:DM:7c40f97f24",
    "kind": "body",
    "note": "GM catalog lists #20835553 for both — option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
@@ -204425,6 +204709,17 @@
    ],
    "cars": 417,
    "cat": "side-mirrors",
+   "gates": [
+    [
+     "Chevrolet",
+     "Silverado 1500",
+     2012,
+     2012,
+     {
+      "fuel": "gas"
+     }
+    ]
+   ],
    "id": "oem:gm:side-mirrors:L:3e6d74f43d",
    "kind": "body",
    "note": "GM catalog lists #20843116 for both — option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
@@ -204458,6 +204753,17 @@
    ],
    "cars": 417,
    "cat": "side-mirrors",
+   "gates": [
+    [
+     "Chevrolet",
+     "Silverado 1500",
+     2012,
+     2012,
+     {
+      "fuel": "gas"
+     }
+    ]
+   ],
    "id": "oem:gm:side-mirrors:L:f7a9546875",
    "kind": "body",
    "note": "GM catalog lists #20843177 for both — option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
@@ -204491,6 +204797,17 @@
    ],
    "cars": 417,
    "cat": "side-mirrors",
+   "gates": [
+    [
+     "Chevrolet",
+     "Silverado 1500",
+     2012,
+     2012,
+     {
+      "fuel": "gas"
+     }
+    ]
+   ],
    "id": "oem:gm:side-mirrors:L:0e9a1c7070",
    "kind": "body",
    "note": "GM catalog lists #20862098 for both — option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
@@ -204551,6 +204868,17 @@
    ],
    "cars": 417,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Chevrolet",
+     "Silverado 1500",
+     2012,
+     2012,
+     {
+      "fuel": "gas"
+     }
+    ]
+   ],
    "id": "oem:gm:window-regulator:FL:8ed850ce7c",
    "kind": "body",
    "note": "GM catalog lists #20914715 for both — regulator without motor; option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
@@ -204584,6 +204912,17 @@
    ],
    "cars": 417,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Chevrolet",
+     "Silverado 1500",
+     2012,
+     2012,
+     {
+      "fuel": "gas"
+     }
+    ]
+   ],
    "id": "oem:gm:window-regulator:FR:270e9141c3",
    "kind": "body",
    "note": "GM catalog lists #20914716 for both — regulator without motor; option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
@@ -204623,6 +204962,17 @@
    ],
    "cars": 482,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Chevrolet",
+     "Silverado 1500",
+     2012,
+     2012,
+     {
+      "fuel": "gas"
+     }
+    ]
+   ],
    "id": "oem:gm:window-regulator:FL:95a5e67317",
    "kind": "body",
    "note": "GM catalog lists #20945138 for both — regulator with motor; option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
@@ -204662,6 +205012,17 @@
    ],
    "cars": 482,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Chevrolet",
+     "Silverado 1500",
+     2012,
+     2012,
+     {
+      "fuel": "gas"
+     }
+    ]
+   ],
    "id": "oem:gm:window-regulator:FR:e27cc3ca48",
    "kind": "body",
    "note": "GM catalog lists #20945139 for both — regulator with motor; option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
@@ -204878,9 +205239,21 @@
    ],
    "cars": 447,
    "cat": "headlights",
+   "gates": [
+    [
+     "Chevrolet",
+     "Tahoe",
+     2007,
+     2007,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:headlights:L:67636b51fb",
    "kind": "body",
-   "note": "GM catalog lists #22853025 for both — fits some configurations; Tahoe: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #22853025 for both — fits some configurations; Tahoe: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:43:37Z",
    "pn": [
     "22853025"
@@ -204905,9 +205278,21 @@
    ],
    "cars": 447,
    "cat": "headlights",
+   "gates": [
+    [
+     "Chevrolet",
+     "Tahoe",
+     2007,
+     2007,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:headlights:R:25f8643ae9",
    "kind": "body",
-   "note": "GM catalog lists #22853026 for both — fits some configurations; Tahoe: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #22853026 for both — fits some configurations; Tahoe: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:43:45Z",
    "pn": [
     "22853026"
@@ -204932,9 +205317,21 @@
    ],
    "cars": 420,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Chevrolet",
+     "Tahoe",
+     2007,
+     2007,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:window-regulator:RL:5142940e97",
    "kind": "body",
-   "note": "GM catalog lists #23227000 for both — regulator with motor; fits some configurations; Tahoe: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #23227000 for both — regulator with motor; fits some configurations; Tahoe: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:46:57Z",
    "pn": [
     "23227000"
@@ -204959,9 +205356,21 @@
    ],
    "cars": 420,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Chevrolet",
+     "Tahoe",
+     2007,
+     2007,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:window-regulator:RR:fd64441e4d",
    "kind": "body",
-   "note": "GM catalog lists #23227001 for both — regulator with motor; fits some configurations; Tahoe: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #23227001 for both — regulator with motor; fits some configurations; Tahoe: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:47:05Z",
    "pn": [
     "23227001"
@@ -205598,6 +206007,35 @@
    ],
    "cars": 232,
    "cat": "window-switch",
+   "gates": [
+    [
+     "Chevrolet",
+     "Colorado",
+     2005,
+     2005,
+     {
+      "cab": "crew cab"
+     }
+    ],
+    [
+     "GMC",
+     "Canyon",
+     2005,
+     2005,
+     {
+      "cab": "crew cab"
+     }
+    ],
+    [
+     "GMC",
+     "Canyon",
+     2011,
+     2011,
+     {
+      "cab": "crew cab"
+     }
+    ]
+   ],
    "id": "oem:gm:window-switch:DM:53a5121102",
    "kind": "body",
    "note": "GM catalog lists #25779767 for both — option: fits some option packages; Colorado: crew cab only; Canyon: crew cab only; verify the number on the part",
@@ -205718,9 +206156,21 @@
    ],
    "cars": 635,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Chevrolet",
+     "Traverse",
+     2011,
+     2011,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:window-regulator:RL:f200a622d6",
    "kind": "body",
-   "note": "GM catalog lists #25783492 for both — window motor only; fits some configurations; Traverse: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #25783492 for both — window motor only; fits some configurations; Traverse: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:53:10Z",
    "pn": [
     "25783492"
@@ -205745,9 +206195,21 @@
    ],
    "cars": 635,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Chevrolet",
+     "Traverse",
+     2011,
+     2011,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:window-regulator:RR:078ef265fc",
    "kind": "body",
-   "note": "GM catalog lists #25783493 for both — window motor only; fits some configurations; Traverse: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #25783493 for both — window motor only; fits some configurations; Traverse: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:53:14Z",
    "pn": [
     "25783493"
@@ -205772,9 +206234,21 @@
    ],
    "cars": 635,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Chevrolet",
+     "Traverse",
+     2011,
+     2011,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:window-regulator:FL:7a3b59c45a",
    "kind": "body",
-   "note": "GM catalog lists #25783494 for both — window motor only; fits some configurations; Traverse: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #25783494 for both — window motor only; fits some configurations; Traverse: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:52:54Z",
    "pn": [
     "25783494"
@@ -205799,9 +206273,21 @@
    ],
    "cars": 635,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Chevrolet",
+     "Traverse",
+     2011,
+     2011,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:window-regulator:FR:a568ca529c",
    "kind": "body",
-   "note": "GM catalog lists #25783495 for both — window motor only; fits some configurations; Traverse: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #25783495 for both — window motor only; fits some configurations; Traverse: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:52:50Z",
    "pn": [
     "25783495"
@@ -206216,9 +206702,21 @@
    ],
    "cars": 124,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Chevrolet",
+     "Blazer",
+     2001,
+     2001,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:window-regulator:RL:00f17f69c1",
    "kind": "body",
-   "note": "GM catalog lists #5483148 for both — fits some configurations; Blazer: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #5483148 for both — fits some configurations; Blazer: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:50:44Z",
    "pn": [
     "5483148"
@@ -206243,9 +206741,21 @@
    ],
    "cars": 124,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Chevrolet",
+     "Blazer",
+     2001,
+     2001,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:window-regulator:RR:dd8cdf523e",
    "kind": "body",
-   "note": "GM catalog lists #5483149 for both — fits some configurations; Blazer: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #5483149 for both — fits some configurations; Blazer: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T06:50:52Z",
    "pn": [
     "5483149"
@@ -206342,9 +206852,21 @@
    ],
    "cars": 191,
    "cat": "tail-lights",
+   "gates": [
+    [
+     "Chevrolet",
+     "S-10",
+     2000,
+     2000,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:tail-lights:L:e4269447bd",
    "kind": "body",
-   "note": "GM catalog lists #5978195 for both — fits some configurations; S-10: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #5978195 for both — fits some configurations; S-10: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:16:40Z",
    "pn": [
     "5978195"
@@ -206375,9 +206897,21 @@
    ],
    "cars": 191,
    "cat": "tail-lights",
+   "gates": [
+    [
+     "Chevrolet",
+     "S-10",
+     2000,
+     2000,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:tail-lights:R:8172e5c761",
    "kind": "body",
-   "note": "GM catalog lists #5978196 for both — fits some configurations; S-10: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #5978196 for both — fits some configurations; S-10: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T05:16:32Z",
    "pn": [
     "5978196"
@@ -206561,9 +207095,21 @@
    ],
    "cars": 395,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Chevrolet",
+     "Trailblazer",
+     2004,
+     2004,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:window-regulator:FL:a959bbf3c4",
    "kind": "body",
-   "note": "GM catalog lists #88980703 for both — window motor only; fits some configurations; Trailblazer: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #88980703 for both — window motor only; fits some configurations; Trailblazer: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:59:22Z",
    "pn": [
     "88980703"
@@ -206588,9 +207134,21 @@
    ],
    "cars": 395,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Chevrolet",
+     "Trailblazer",
+     2004,
+     2004,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:window-regulator:FR:14bc47e6d3",
    "kind": "body",
-   "note": "GM catalog lists #88980704 for both — window motor only; fits some configurations; Trailblazer: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #88980704 for both — window motor only; fits some configurations; Trailblazer: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:59:26Z",
    "pn": [
     "88980704"
@@ -206615,9 +207173,21 @@
    ],
    "cars": 395,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Chevrolet",
+     "Trailblazer",
+     2004,
+     2004,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:window-regulator:RL:dba3565557",
    "kind": "body",
-   "note": "GM catalog lists #88980705 for both — window motor only; fits some configurations; Trailblazer: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #88980705 for both — window motor only; fits some configurations; Trailblazer: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:59:46Z",
    "pn": [
     "88980705"
@@ -206642,9 +207212,21 @@
    ],
    "cars": 395,
    "cat": "window-regulator",
+   "gates": [
+    [
+     "Chevrolet",
+     "Trailblazer",
+     2004,
+     2004,
+     {
+      "drive": "2wd",
+      "drive_basis": "unchecked"
+     }
+    ]
+   ],
    "id": "oem:gm:window-regulator:RR:57a4b895c9",
    "kind": "body",
-   "note": "GM catalog lists #88980706 for both — window motor only; fits some configurations; Trailblazer: 2WD only; verify the number on the part",
+   "note": "GM catalog lists #88980706 for both — window motor only; fits some configurations; Trailblazer: only 2WD checked; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:59:42Z",
    "pn": [
     "88980706"

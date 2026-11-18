@@ -143,6 +143,92 @@ def _app_ok(app, ns_makes, year_cap, targets, ns, verified=False) -> str | None:
     return None
 
 
+# Per-app gates of a Likely group (interchange gates-1118; curate._gate_runs):
+# "gates": [[make, model, lo, hi, gate], ...], each run inside the group's own
+# apps (a gate never adds a vehicle-year). The payload builder ships a gated
+# app as [make, model, lo, hi, null, gate]; docs/app.js (OEM-GATE) applies it.
+#   drive  classes joined by "/" (2wd fwd rwd 4wd awd a4wd), one drive family
+#   drive_basis  "stated" (the catalog states the split: a row code, or both
+#          drive pages read and the number on one) | "unchecked" (the other
+#          drive's page is not in the raw, or fitment rows that may be
+#          incomplete); same gate, the note words the second kind
+#          "<model>: only 2WD checked" (hub 2026-11-18)
+#   body   a silhouette class of junkyard_scraper.body_style_from_vpic, or a list
+#   cab    one cab type ("crew cab", "king cab", "supercrew", ...)
+#   eng    displacements ["3.7L", ...]
+#   fuel   gas | hybrid | diesel
+#   trans  MT | AT (the aftermarket group's trans codes)
+GATE_DRIVES_TWO = ("2wd", "fwd", "rwd")
+GATE_DRIVES_FOUR = ("4wd", "awd", "a4wd")
+GATE_DRIVE_BASES = ("stated", "unchecked")
+GATE_BODIES = ("sedan", "coupe", "hatchback", "wagon", "suv", "pickup", "van", "convertible")
+GATE_CABS = ("crew cab", "king cab", "extended cab", "regular cab", "supercab", "supercrew",
+             "double cab", "quad cab", "crewmax", "access cab", "club cab")
+GATE_FUELS = ("gas", "hybrid", "diesel")
+GATE_TRANS = ("MT", "AT")
+_GATE_ENG_RE = re.compile(r"^\d{1,2}\.\dL$")
+
+
+def gate_problem(gate) -> str | None:
+    """Why one app gate is malformed, or None."""
+    if not isinstance(gate, dict) or not gate:
+        return f"gate is not a non-empty object: {gate!r}"
+    extra = set(gate) - {"drive", "drive_basis", "body", "cab", "eng", "fuel", "trans"}
+    if extra:
+        return f"gate keys {sorted(extra)}"
+    if "drive" in gate:
+        d = gate["drive"]
+        cl = d.split("/") if isinstance(d, str) else []
+        if not cl or len(set(cl)) != len(cl) or not (set(cl) <= set(GATE_DRIVES_TWO)
+                                                    or set(cl) <= set(GATE_DRIVES_FOUR)):
+            return f"gate drive {d!r} (classes of one drive family)"
+    if "drive_basis" in gate and ("drive" not in gate or gate["drive_basis"] not in GATE_DRIVE_BASES):
+        return f"gate drive_basis {gate['drive_basis']!r}"
+    if "body" in gate:
+        b = gate["body"]
+        bs = [b] if isinstance(b, str) else b if isinstance(b, list) else None
+        if not bs or any(x not in GATE_BODIES for x in bs) or len(set(bs)) != len(bs):
+            return f"gate body {b!r}"
+    if "cab" in gate and gate["cab"] not in GATE_CABS:
+        return f"gate cab {gate['cab']!r}"
+    if "eng" in gate:
+        e = gate["eng"]
+        if not isinstance(e, list) or not e or any(not isinstance(x, str) or not _GATE_ENG_RE.match(x) for x in e):
+            return f"gate eng {e!r}"
+    if "fuel" in gate and gate["fuel"] not in GATE_FUELS:
+        return f"gate fuel {gate['fuel']!r}"
+    if "trans" in gate and gate["trans"] not in GATE_TRANS:
+        return f"gate trans {gate['trans']!r}"
+    return None
+
+
+def _gates_ok(gates, apps) -> str | None:
+    """Why a Likely group's "gates" are malformed, or None (absent is fine)."""
+    if gates is None:
+        return None
+    if not isinstance(gates, list) or not gates:
+        return "gates must be a non-empty list"
+    years = {(a[0], a[1], y) for a in apps if isinstance(a, list) and len(a) == 4
+             and isinstance(a[2], int) and isinstance(a[3], int) for y in range(a[2], a[3] + 1)}
+    seen = set()
+    for x in gates:
+        if not (isinstance(x, list) and len(x) == 5 and isinstance(x[0], str) and isinstance(x[1], str)
+                and isinstance(x[2], int) and isinstance(x[3], int) and x[2] <= x[3]):
+            return f"malformed gate run {x!r}"[:200]
+        for y in range(x[2], x[3] + 1):
+            if (x[0], x[1], y) not in years:
+                return f"gate run outside the group's apps: {x[:4]!r}"
+            if (x[0], x[1], y) in seen:
+                return f"two gates for {x[0]} {x[1]} {y}"
+            seen.add((x[0], x[1], y))
+        why = gate_problem(x[4])
+        if why:
+            return why
+    if [x[:4] for x in gates] != sorted(x[:4] for x in gates):
+        return "gates not sorted"
+    return None
+
+
 def _note_ok(note: str, tier: str, pns: list) -> str | None:
     if not isinstance(note, str) or not note:
         return "empty note"
@@ -277,6 +363,11 @@ def structural(doc: dict, ctx: dict) -> list:
                     P.append(f"V2 {gid}: {why}")
             if apps != sorted(apps):
                 P.append(f"V8 {gid}: apps not sorted")
+            if "gates" in g:
+                why = _gates_ok(g["gates"], apps) if kind_key == "likely" else \
+                    "gates on a Verified group (Likely only)"
+                if why:
+                    P.append(f"V2 {gid}: {why}")
             pns = g.get("pn") or []
             if not isinstance(pns, list) or not all(isinstance(x, str) for x in pns):
                 P.append(f"V1 {gid}: pn is not a list of strings")

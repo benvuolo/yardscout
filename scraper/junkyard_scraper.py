@@ -15316,11 +15316,46 @@ def _oem_entries(ns: str, doc: dict) -> tuple[list, list]:
     groups, vg = [], []
     for g in list(doc.get("groups") or []) + list(doc.get("likely") or []):
         groups.append({"id": g["id"], "ns": ns, "cat": g["cat"], "tier": g["tier"],
-                       "label": f"{brand} catalog", "note": g["note"], "apps": g["apps"],
+                       "label": f"{brand} catalog", "note": g["note"],
+                       "apps": _oem_gated_apps(g["apps"], g.get("gates")),
                        "pn": g["pn"], "src": "oem", **({"cars": g["cars"]} if g.get("cars") else {})})
     for g in doc.get("vg") or []:
         vg.append((g["family"], g["cat"], g["spans"]))
     return groups, vg
+
+
+def _oem_gated_apps(apps: list, gates: list | None) -> list:
+    """Payload apps of a curated group (gates-1118, validate._gates_ok): its
+    [make, model, lo, hi] runs, split where a vehicle-year's gate changes; a
+    gated run takes the aftermarket row's 6-element shape [make, model, lo,
+    hi, None, gate] (position 4, the aftermarket row's engine, is unused), so
+    docs/app.js hides a donor whose own decode contradicts the limit. The
+    vehicle-years are exactly the apps' (claims unchanged). Raises on a gate
+    outside the apps, so the caller drops the namespace (fail closed)."""
+    if not gates:
+        return apps
+    gate_of = {}
+    for mk, md, lo, hi, gate in gates:
+        for y in range(lo, hi + 1):
+            gate_of[(mk, md, y)] = {k: gate[k] for k in sorted(gate)}
+    out, used = [], set()
+    for a in apps:
+        mk, md, lo, hi = a
+        run = None
+        for y in range(lo, hi + 1):
+            gt = gate_of.get((mk, md, y))
+            if gt is not None:
+                used.add((mk, md, y))
+            if run and run[2] == gt:
+                run[1] = y
+                continue
+            if run:
+                out.append([mk, md, run[0], run[1]] + ([None, run[2]] if run[2] else []))
+            run = [y, y, gt]
+        out.append([mk, md, run[0], run[1]] + ([None, run[2]] if run[2] else []))
+    if used != set(gate_of):
+        raise ValueError(f"gate outside the group's apps: {sorted(set(gate_of) - used)[:3]}")
+    return out
 
 
 def _attach_oem_layer_inner(payload: dict, before: dict, lazy_out: dict | None = None) -> None:

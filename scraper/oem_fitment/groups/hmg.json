@@ -70673,6 +70673,47 @@
    ],
    "cars": 243,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.0L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.0L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.0L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:dc246fd668",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #546511M100 for both — option: fits some option packages; 2WD, 2.0L only; verify the number on the part",
@@ -70706,6 +70747,47 @@
    ],
    "cars": 243,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.4L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.4L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.4L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:36728f18d3",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #546511M200 for both — option: fits some option packages; 2WD, 2.4L only; verify the number on the part",
@@ -70739,6 +70821,47 @@
    ],
    "cars": 243,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.0L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.0L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.0L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:07bda0a0e5",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #546511M310 for both — option: fits some option packages; 2WD, 2.0L only; verify the number on the part",
@@ -70772,6 +70895,47 @@
    ],
    "cars": 243,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.4L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.4L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.4L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:4807541a1d",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #546511M320 for both — option: fits some option packages; 2WD, 2.4L only; verify the number on the part",
@@ -70805,6 +70969,38 @@
    ],
    "cars": 243,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated"
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated"
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated"
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:12aa5e048f",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #546511M360 for both — option: fits some option packages; 2WD only; verify the number on the part",
@@ -70838,6 +71034,47 @@
    ],
    "cars": 243,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.4L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.4L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.4L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:abcc8da54b",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #546511M520 for both — option: fits some option packages; 2WD, 2.4L only; verify the number on the part",
@@ -70865,6 +71102,30 @@
    ],
    "cars": 164,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014,
+     {
+      "eng": [
+       "1.8L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014,
+     {
+      "eng": [
+       "1.8L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:bb6c2ca96c",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #54651A7200 for both — fits some configurations; 1.8L only; verify the number on the part",
@@ -70892,6 +71153,32 @@
    ],
    "cars": 164,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014,
+     {
+      "eng": [
+       "1.6L",
+       "2.0L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014,
+     {
+      "eng": [
+       "1.6L",
+       "2.0L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:88034982a8",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #54651A7210 for both — option: fits some option packages; 1.6L/2.0L only; verify the number on the part",
@@ -70919,6 +71206,36 @@
    ],
    "cars": 164,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.0L"
+      ],
+      "trans": "AT"
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.0L"
+      ],
+      "trans": "AT"
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:8fa8bb0f6f",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #54651A7300 for both — option: fits some option packages; 2WD, 2.0L, automatic only; verify the number on the part",
@@ -70946,6 +71263,30 @@
    ],
    "cars": 164,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014,
+     {
+      "eng": [
+       "1.6L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014,
+     {
+      "eng": [
+       "1.6L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:750be2c5c0",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #54651A7600 for both — option: fits some option packages; 1.6L only; verify the number on the part",
@@ -70973,6 +71314,34 @@
    ],
    "cars": 164,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.0L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.0L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:f2ff2dde72",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #54651A7650 for both — option: fits some option packages; 2WD, 2.0L only; verify the number on the part",
@@ -71006,6 +71375,47 @@
    ],
    "cars": 243,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.0L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.0L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.0L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:f2135495e7",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #546611M100 for both — option: fits some option packages; 2WD, 2.0L only; verify the number on the part",
@@ -71039,6 +71449,47 @@
    ],
    "cars": 243,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.4L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.4L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.4L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:c637e8fc23",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #546611M200 for both — option: fits some option packages; 2WD, 2.4L only; verify the number on the part",
@@ -71072,6 +71523,47 @@
    ],
    "cars": 243,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.0L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.0L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.0L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:a267ddf374",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #546611M310 for both — option: fits some option packages; 2WD, 2.0L only; verify the number on the part",
@@ -71105,6 +71597,47 @@
    ],
    "cars": 243,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.4L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.4L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.4L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:697a00cd93",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #546611M320 for both — option: fits some option packages; 2WD, 2.4L only; verify the number on the part",
@@ -71138,6 +71671,38 @@
    ],
    "cars": 243,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated"
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated"
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated"
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:32d5abb875",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #546611M360 for both — option: fits some option packages; 2WD only; verify the number on the part",
@@ -71171,6 +71736,47 @@
    ],
    "cars": 243,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.4L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.4L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.4L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:3d5a25d1fe",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #546611M520 for both — option: fits some option packages; 2WD, 2.4L only; verify the number on the part",
@@ -71198,6 +71804,30 @@
    ],
    "cars": 164,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014,
+     {
+      "eng": [
+       "1.8L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014,
+     {
+      "eng": [
+       "1.8L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:4095fde0bb",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #54661A7200 for both — fits some configurations; 1.8L only; verify the number on the part",
@@ -71225,6 +71855,32 @@
    ],
    "cars": 164,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014,
+     {
+      "eng": [
+       "1.6L",
+       "2.0L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014,
+     {
+      "eng": [
+       "1.6L",
+       "2.0L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:a65a56ee82",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #54661A7210 for both — option: fits some option packages; 1.6L/2.0L only; verify the number on the part",
@@ -71252,6 +71908,36 @@
    ],
    "cars": 164,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.0L"
+      ],
+      "trans": "AT"
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.0L"
+      ],
+      "trans": "AT"
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:0e75c37dff",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #54661A7300 for both — option: fits some option packages; 2WD, 2.0L, automatic only; verify the number on the part",
@@ -71279,6 +71965,30 @@
    ],
    "cars": 164,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014,
+     {
+      "eng": [
+       "1.6L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014,
+     {
+      "eng": [
+       "1.6L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:fd7b69ac33",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #54661A7600 for both — option: fits some option packages; 1.6L only; verify the number on the part",
@@ -71306,6 +72016,34 @@
    ],
    "cars": 164,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.0L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014,
+     {
+      "drive": "2wd",
+      "drive_basis": "stated",
+      "eng": [
+       "2.0L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:8176c1c4e6",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #54661A7650 for both — option: fits some option packages; 2WD, 2.0L only; verify the number on the part",
@@ -71339,6 +72077,41 @@
    ],
    "cars": 243,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010,
+     {
+      "eng": [
+       "2.0L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010,
+     {
+      "eng": [
+       "2.0L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013,
+     {
+      "eng": [
+       "2.0L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:cca2bc2a95",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #553001M100 for both — option: fits some option packages; 2.0L only; verify the number on the part",
@@ -71372,6 +72145,41 @@
    ],
    "cars": 243,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010,
+     {
+      "eng": [
+       "2.4L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010,
+     {
+      "eng": [
+       "2.4L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013,
+     {
+      "eng": [
+       "2.4L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:aaa7fdd0d2",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #553001M200 for both — option: fits some option packages; 2.4L only; verify the number on the part",
@@ -71405,6 +72213,41 @@
    ],
    "cars": 243,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010,
+     {
+      "eng": [
+       "2.0L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010,
+     {
+      "eng": [
+       "2.0L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013,
+     {
+      "eng": [
+       "2.0L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:7505368e51",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #553001M310 for both — option: fits some option packages; 2.0L only; verify the number on the part",
@@ -71438,6 +72281,41 @@
    ],
    "cars": 243,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010,
+     {
+      "eng": [
+       "2.4L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010,
+     {
+      "eng": [
+       "2.4L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013,
+     {
+      "eng": [
+       "2.4L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:bb98391df8",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #553001M320 for both — option: fits some option packages; 2.4L only; verify the number on the part",
@@ -71531,6 +72409,30 @@
    ],
    "cars": 228,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010,
+     {
+      "eng": [
+       "2.0L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010,
+     {
+      "eng": [
+       "2.0L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:6c473c781d",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #553001M510 for both — option: fits some option packages; 2.0L only; verify the number on the part",
@@ -71564,6 +72466,41 @@
    ],
    "cars": 243,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2010,
+     2010,
+     {
+      "eng": [
+       "2.4L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2010,
+     2010,
+     {
+      "eng": [
+       "2.4L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2013,
+     2013,
+     {
+      "eng": [
+       "2.4L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:98838a2421",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #553001M520 for both — option: fits some option packages; 2.4L only; verify the number on the part",
@@ -71591,6 +72528,32 @@
    ],
    "cars": 164,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014,
+     {
+      "eng": [
+       "1.6L",
+       "2.0L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014,
+     {
+      "eng": [
+       "1.6L",
+       "2.0L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:dd392c7403",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #55300A7020 for both — option: fits some option packages; 1.6L/2.0L only; verify the number on the part",
@@ -71618,6 +72581,30 @@
    ],
    "cars": 164,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014,
+     {
+      "eng": [
+       "1.8L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014,
+     {
+      "eng": [
+       "1.8L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:bb7d70abfa",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #55300A7300 for both — fits some configurations; 1.8L only; verify the number on the part",
@@ -71645,6 +72632,30 @@
    ],
    "cars": 164,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014,
+     {
+      "eng": [
+       "1.8L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014,
+     {
+      "eng": [
+       "1.8L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:64c9847dca",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #55300A7400 for both — fits some configurations; 1.8L only; verify the number on the part",
@@ -71672,6 +72683,30 @@
    ],
    "cars": 164,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014,
+     {
+      "eng": [
+       "1.6L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014,
+     {
+      "eng": [
+       "1.6L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:fc11451430",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #55300A7600 for both — option: fits some option packages; 1.6L only; verify the number on the part",
@@ -71699,6 +72734,30 @@
    ],
    "cars": 164,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014,
+     {
+      "eng": [
+       "2.0L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014,
+     {
+      "eng": [
+       "2.0L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:132bf1e7cd",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #55300A7650 for both — option: fits some option packages; 2.0L only; verify the number on the part",
@@ -71726,6 +72785,30 @@
    ],
    "cars": 164,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014,
+     {
+      "eng": [
+       "2.0L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014,
+     {
+      "eng": [
+       "2.0L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:4484eb94b5",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #55300A7660 for both — option: fits some option packages; 2.0L only; verify the number on the part",
@@ -71753,6 +72836,30 @@
    ],
    "cars": 164,
    "cat": "strut",
+   "gates": [
+    [
+     "Kia",
+     "Forte",
+     2014,
+     2014,
+     {
+      "eng": [
+       "1.6L"
+      ]
+     }
+    ],
+    [
+     "Kia",
+     "Forte Koup",
+     2014,
+     2014,
+     {
+      "eng": [
+       "1.6L"
+      ]
+     }
+    ]
+   ],
    "id": "oem:hmg:strut:C:d791a799c7",
    "kind": "body",
    "note": "Hyundai/Kia catalog lists #55300A7670 for both — option: fits some option packages; 1.6L only; verify the number on the part",
