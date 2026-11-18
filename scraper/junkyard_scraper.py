@@ -17049,11 +17049,21 @@ def _split_ymm(ymm: str) -> tuple[int, str, str]:
     return year, _utpap_format_label(make), _utpap_format_label(model)
 
 
-def _fetch_pyp_store_inventory(store: dict, session: requests.Session) -> list[dict]:
-    """Paginate one store's inventory (20 rows/page, server-fixed)."""
-    vehicles: list[dict] = []
-    page = 0
-    while page < 200:  # hard stop: no store holds 4,000 cars
+PYP_RETRY_WAIT = 5.0  # seconds before the one retry of a failed page
+
+
+def _pyp_get_page(session: requests.Session, store: dict, page: int):
+    """One inventory page: (response, None), or (None, why it failed).
+
+    A timeout, a dropped connection, a 429 or a 5xx gets ONE retry after a
+    pause (Retry-After when the site sends one, at most 30 s). Anything else
+    (403, 404, ...) is not retried. Until 2026-11-18 any error ended the
+    store's read silently: in the 16:40 scan that day 17 yards stopped after
+    their first page or two (25 or 50 cars) and were carried forward by
+    STALE-KEEP, with nothing in the log saying why."""
+    why = ""
+    for attempt in range(2):
+        wait = PYP_RETRY_WAIT
         try:
             r = session.get(
                 PYP_INVENTORY_API,
@@ -17061,8 +17071,31 @@ def _fetch_pyp_store_inventory(store: dict, session: requests.Session) -> list[d
                 headers=PYP_HEADERS,
                 timeout=30,
             )
-            r.raise_for_status()
-        except Exception:
+        except requests.RequestException as e:
+            why = type(e).__name__
+        else:
+            if r.status_code == 200:
+                return r, None
+            why = f"HTTP {r.status_code}"
+            if r.status_code != 429 and r.status_code < 500:
+                return None, why
+            ra = (r.headers.get("Retry-After") or "").strip()
+            if ra.isdigit():
+                wait = min(30.0, float(ra))
+        if attempt == 0:
+            time.sleep(wait)
+    return None, why + " (after one retry)"
+
+
+def _fetch_pyp_store_inventory(store: dict, session: requests.Session) -> list[dict]:
+    """Paginate one store's inventory (20 rows/page, server-fixed)."""
+    vehicles: list[dict] = []
+    page = 0
+    while page < 200:  # hard stop: no store holds 4,000 cars
+        r, why = _pyp_get_page(session, store, page)
+        if r is None:
+            print(f"  [Pick Your Part] {store.get('name', store.get('code'))}: page {page + 1} "
+                  f"failed ({why}); this read stops at {len(vehicles)} cars", file=sys.stderr)
             break
         if not HAS_BS4:
             break

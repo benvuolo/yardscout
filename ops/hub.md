@@ -1884,3 +1884,26 @@ Not done (saved_alerts.js, after the watertight merge): skip "leaving soon"
 at stale/frozen yards; send "gone" only after two missing commits and no
 flush mark. Flip-flopping feeds (Indy, Pull-N-Save Riverside) and the date
 fields of the 10-28/10-31 source changes: yards workstream.
+
+## 2026-11-18 ~18:45 UTC LKQ partial read, Pull-N-Save check page, Play 1.13.1 live
+
+- Scan 44350039303 (16:40): LKQ Pick Your Part 51,476 cars against ~72,200
+  before. 17 yards stopped after their first one or two pages (25 or 50
+  cars); STALE-KEEP carried their earlier lists forward, so no car vanished.
+  The 13 scans before it had 0 such yards except one on 11-16 (1 yard).
+  The reader ended a store's read on ANY error, silently. Now
+  (`_pyp_get_page`): one retry after 5 s for a timeout, dropped connection,
+  429 or 5xx (Retry-After honoured, at most 30 s); 403/404 not retried; a
+  stop is logged with yard, page and reason. Test `scraper/test_pyp_reader.py`.
+- Same scan: Pull-N-Save answered getMakes with HTTP 202 and a meta-refresh
+  page (a check page) 3 times; the 01:58 scan saw the same, 07:23 and 12:30
+  read all 11,310 cars. Rule 2: no workaround. Their 8 yards were carried
+  forward. The draft to Pull-N-Save is in Gmail (ops/yard-outreach-drafts.md).
+  If it lasts a full day, add it to that draft.
+- Also 0 this scan: Bevell's (1,145 kept), Route 34 (333 kept), Budget
+  Winter Garden (1,624 kept).
+- Google Play: production 1.13.1 (41) rollout complete (play-status 18:18).
+  Apple: 1.13.1 build 42 WAITING_FOR_REVIEW (submitted 15:03).
+- usage-stats: Apple's sales report printed a 404 as a row of zeros (0
+  downloads since 11-06 while the app counts ~5 new iPhone users a day). Now
+  it says "no report" with Apple's words, and units by product type (0145a829).
