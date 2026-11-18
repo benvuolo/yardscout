@@ -1758,3 +1758,36 @@ token ("zone.analytics.read" missing), so the crawler is not named.
   lowercase id with no VIN, 404 before) → 200 with the car; a VIN lookup →
   200; `yardscout.io/car/utpap-orem-K026992` → 200. Re-check of the CPU
   numbers scheduled ~20 h later (`cf-usage.yml`).
+
+## 2026-11-18 16:29 UTC yard list freshness to main (sw `jh-v209`)
+
+Builder's branch `data/yard-freshness-1117` (c2c69279; notes in
+`ops/data.md`, "2026-11-18 — yard list freshness"), merged as
+`hub/freshness-1118`. Hub read the scan side (`yard_freshness.py`, the
+arrivals filter in `push_inventory.py`) and checked that the four new yard
+columns go at the END of each yard row: every reader (the app's
+`expandV2Row`, `placeYardResolve`, the workers) reads positions 0-6 or by
+name, so the apps already in the stores ignore them.
+- Thresholds from 3.5 weeks of committed history (6,791 gaps, 301 yards):
+  "stale" after 3 full business days without a car added or removed
+  (fires on 1.00% of healthy yards' scans), "frozen" after 10 (0.05%).
+  Frozen yards' cars: no New badge, out of "new this week", last in Newest
+  arrivals, no alerts; still listed. A list that jumps 40%+ after a freeze
+  (flush) does not alert either (the lifespan rule's share, tested equal).
+- Today's dry run: frozen 4 yards / 2,309 cars (Wrench-A-Part Holland since
+  Oct 22, UAPI Alexandria, Colorado Auto & Parts Englewood, Utah Pic-A-Part
+  Orem Premium); stale 4 / 4,333 (Youngstown, Paul's Lake Station, M&M
+  Buffalo, Foss Wilson). Takes effect at the next scan; until then the app
+  falls back to the old yard_health rule in the new quiet style.
+- Run 12 (89 suites incl. the new `yard_list_unit`, `yard_list_pages_unit`,
+  `jsonpick_unit`; `test_yard_freshness.py` 64 checks), layout 2,496
+  checks, six API suites: all pass except `long_listed_unit` ("yardListStale
+  is not defined": the test copies functions out of the app); test fixed
+  (95285c18), passes.
+- Builder's suggestions, not done: apply the 40% hold to ANY one-scan jump
+  (whole lists re-added under new ids on 10-26/10-28 got past alert dedupe;
+  Indy-U-Pull-It and Pull-N-Save Riverside flip-flopped lists for 10 days);
+  saved-car "leaving soon"/"gone" at frozen or flushed yards; ops email to
+  read `listState`; date-only edits at 19 yards make `lastChangedAt` look
+  fresher than the list. Yards to check: Wrench-A-Part Holland, UAPI
+  Alexandria, Colorado Auto & Parts, Youngstown, Budget Bartow (12-day cycle).
