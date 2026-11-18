@@ -17390,6 +17390,18 @@ def refresh_wap_pricing_file() -> Path:
 # Toledo — and getMakes takes a ModelYear param (empty = all, 56 makes).
 # Response fields are unchanged apart from ignorable extras. ~112 requests
 # per scan (56 makes × 2 sites) at 2s pacing.
+# ---------------------------------------------------------------------------
+# THE U-PULL-R SWITCH (2026-11-17; hub recommendation, owner: do what the hub
+# thinks right). While this is False NOTHING of ours is sent to
+# upullrparts.com: not the inventory reader below (it used to send getMakes
+# and one search per scan, hit their captcha and publish 0 cars), not the
+# price-list refresh, not the snapshot script (it calls the same two
+# functions). Their CTO said on 2026-11-06 that an official API is likely.
+# Turn it back on only when that API or a feed arrives (or the owner says
+# so): see ops/yards.md, "U-Pull-R reader is switched off". The captcha is
+# never solved or routed around (rule 2). scraper/test_upullr_switch.py fails
+# if this is True, so switching it on is always a deliberate, reviewed change.
+UPULLR_READER_ENABLED = False
 UPR_AJAX = "https://upullrparts.com/wp-admin/admin-ajax.php"
 UPR_STORES = {
     1: {"name": "U-Pull-R Parts - Rosemount", "city": "Rosemount", "state": "MN",
@@ -17417,7 +17429,15 @@ def fetch_upullr_inventory() -> list[dict]:
 
     One getVehicles POST per make × site (site=1 = both MN stores, site=3 =
     Toledo), ~2s apart — the same flow their own search UI issues since the
-    2026-10 plugin upgrade; ~112 requests / ~4 min per scan."""
+    2026-10 plugin upgrade; ~112 requests / ~4 min per scan.
+
+    Switched off by UPULLR_READER_ENABLED (see the note above the constant):
+    while it is False this returns [] before any request is built."""
+    if not UPULLR_READER_ENABLED:
+        print("  [U-Pull-R] reader is switched off (UPULLR_READER_ENABLED): "
+              "no request sent, 0 vehicles; waiting on their API",
+              file=sys.stderr)
+        return []
     session = requests.Session()
 
     def _post(api_action: str, **extra) -> requests.Response:
@@ -17544,9 +17564,16 @@ def refresh_upullr_pricing_file() -> Path:
     """Refresh U-Pull-R's published price list -> upullr_pricing.json.
 
     The existing file is only overwritten when the fetch looks complete
-    (>200 parts), so a partial/failed run never clobbers good data."""
+    (>200 parts), so a partial/failed run never clobbers good data.
+
+    Switched off with the inventory reader (UPULLR_READER_ENABLED): while it
+    is False no request is sent and the last published file is kept."""
     import html as html_mod
 
+    if not UPULLR_READER_ENABLED:
+        print("  [U-Pull-R pricing] reader is switched off (UPULLR_READER_ENABLED): "
+              "no request sent, keeping the existing file", file=sys.stderr)
+        return DATA_DIR / "upullr_pricing.json"
     try:
         r = requests.get(UPR_PRICING_URL, headers={**HEADERS, "User-Agent": YARDSCOUT_UA}, timeout=30)
         r.raise_for_status()
@@ -21148,15 +21175,30 @@ CRUSH_TABLE_SITES: dict[str, dict] = {
         "yard": {"name": "Hwy 82 Pick & Pay - Poulan", "city": "Poulan",
                  "state": "GA", "lat": 31.5132, "lng": -83.7886},
     },
-    # NOT HERE: iPull by Intermountain Auto (ifipull.com, Idaho Falls ID) —
-    # same table family (Year, Make, Model, Reference, VIN, Color, Stock #,
-    # Vehicle Row, Arrival Date; ~545 rows). On 2026-10-28 every page request
-    # carrying the YardScout User-Agent got HTTP 500 (a hosting-panel error
-    # page) while robots.txt answered 200, i.e. the host filters our UA. Not
-    # worked around (no UA change); re-check later. Config if it opens up:
-    # url https://ifipull.com/inventory/, table_id "vehicles", id_prefix
-    # "ifipull-", yard Idaho Falls ID (3015 N 15th E not in OSM -> 83401 zip
-    # centroid 43.5111, -112.0058).
+    # Intermountain Auto iPull (ifipull.com, Idaho Falls ID) — same table
+    # family: Year, Make, Model, Reference, VIN, Color, Stock #, Vehicle Row,
+    # Arrival Date. History: on 2026-10-28 every page request carrying the
+    # YardScout User-Agent got HTTP 500 (a hosting-panel error page) while
+    # robots.txt answered 200, so the yard was left out and nothing was
+    # worked around. Re-checked 2026-11-17 with the same YardScout name:
+    # /inventory/ answered 200 with 578 rows ("Updated: 11/17/26", newest
+    # arrival 11/16/26, every row with a stock number and a 17-character
+    # VIN). robots.txt: only /cgi-bin/ and /tmp/ disallowed; the site links
+    # no terms page. Stock numbers (STK0#####) are the id basis. One GET per
+    # scan. If the 500 comes back the yard drops out and gets an email
+    # (ops/yard-outreach-drafts.md), never another name.
+    # The display name starts with "Intermountain", not "iPull": the app's
+    # site-link map sends every name starting "ipull" to iPull-uPull
+    # (California), a different company.
+    # Pin: Census geocoder exact match for 3015 N 15th E, Idaho Falls 83401.
+    "ifipull": {
+        "label": "Intermountain Auto iPull (Idaho Falls ID)",
+        "url": "https://ifipull.com/inventory/",
+        "table_id": "vehicles",
+        "id_prefix": "ifipull-",
+        "yard": {"name": "Intermountain Auto iPull - Idaho Falls", "city": "Idaho Falls",
+                 "state": "ID", "lat": 43.5230, "lng": -112.0038},
+    },
     # Route 34 U-Pull-M (route34upullm.com, Auburn NY) — <table id=
     # "crush-inventory">: Year, Make, Model, VIN, Color, Row, Arrival Date.
     # No stock column -> VIN ids (rows without a full VIN fall back to the
@@ -21312,6 +21354,85 @@ def fetch_route34_inventory() -> list[dict]:
 def fetch_sunshine_inventory() -> list[dict]:
     """Sunshine Auto Salvage (Orangeburg SC) via the CRUSH static-table adapter."""
     return fetch_crush_table_site("sunshine")
+
+
+def fetch_ifipull_inventory() -> list[dict]:
+    """Intermountain Auto iPull (Idaho Falls ID) via the CRUSH static-table adapter."""
+    return fetch_crush_table_site("ifipull")
+
+
+# Intermountain Auto iPull publishes its price list at /pricelist/: one
+# <table id="pricelist"> (PART DESCRIPTION, CATGORY [sic], PRICE, PER, CORE;
+# 640 rows on 2026-11-17). Three categories are not car parts and are left
+# out: DRINKS (the counter fridge), ATV/MOWER (its own cheaper "HOOD",
+# "STEERING WHEEL"... would shadow the car prices) and I-CARRY (the
+# all-you-can-carry programme, $0.00 rows). First spelling of a name wins.
+IFIPULL_PRICES_URL = "https://ifipull.com/pricelist/"
+IFIPULL_PRICE_SKIP_CATEGORIES = {"DRINKS", "ATV/MOWER", "I-CARRY"}
+
+
+def _ifipull_parse_pricing_rows(page: str) -> list[dict]:
+    """/pricelist/ table -> [{description, price, corePrice, totalPrice}]
+    (the shape every single-yard price file uses). Header-driven."""
+    import html as html_mod
+    m = re.search(r'<table[^>]*id="pricelist"[^>]*>(.*?)</table>', page, re.S)
+    if not m:
+        return []
+    labels = [re.sub(r"[^a-z]", "", html_mod.unescape(re.sub(r"<[^>]+>", "", t)).lower())
+              for t in _CRUSH_TABLE_TH_RE.findall(m.group(1))]
+    # The first <th> also holds the page's DataTables script; match by ending.
+    col = {}
+    for i, lab in enumerate(labels):
+        for key, field in (("partdescription", "name"), ("catgory", "cat"), ("category", "cat"),
+                           ("price", "price"), ("core", "core")):
+            if lab.endswith(key) and field not in col:
+                col[field] = i
+                break
+    if not all(f in col for f in ("name", "price")):
+        return []
+    out: dict[str, dict] = {}
+    for block in _BARRYS_ROW_RE.findall(m.group(1)):
+        cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
+                 for c in _FENIX_TD_RE.findall(block)]
+        if len(cells) < len(labels):
+            continue
+        name = cells[col["name"]]
+        cat = cells[col["cat"]].upper() if "cat" in col else ""
+        if (not name or name in out or cat in IFIPULL_PRICE_SKIP_CATEGORIES
+                or _PRICE_AS_NAME_RE.match(name)):
+            continue
+        try:
+            price_f = float(cells[col["price"]].replace("$", "").replace(",", ""))
+            core_s = cells[col["core"]] if "core" in col else ""
+            core_f = float(core_s.replace("$", "").replace(",", "")) if core_s else 0.0
+        except ValueError:
+            continue
+        if price_f <= 0:
+            continue
+        out[name] = {"description": name, "price": f"{price_f:.2f}",
+                     "corePrice": f"{core_f:.2f}", "totalPrice": f"{price_f + core_f:.2f}"}
+    return list(out.values())
+
+
+def refresh_ifipull_pricing_file() -> Path:
+    """Refresh Intermountain Auto iPull's price list -> ifipull_pricing.json."""
+    path = DATA_DIR / "ifipull_pricing.json"
+    try:
+        r = requests.get(IFIPULL_PRICES_URL, headers={**YARDSCOUT_HEADERS, "Accept": "text/html"},
+                         timeout=60)
+        r.raise_for_status()
+    except Exception as e:
+        print(f"  [Intermountain iPull pricing] fetch failed: {e} — keeping existing file",
+              file=sys.stderr)
+        return path
+    parts = _ifipull_parse_pricing_rows(r.text)
+    if len(parts) > 150:
+        path.write_text(json.dumps(parts, separators=(",", ":")))
+        print(f"  [Intermountain iPull pricing] wrote {len(parts)} parts", file=sys.stderr)
+    else:
+        print(f"  [Intermountain iPull pricing] only {len(parts)} parts parsed — "
+              f"keeping existing file", file=sys.stderr)
+    return path
 
 
 # Bevell's Pull It Yourself (bevellspiy.com, Goldsboro NC) — 2026-11-03.
@@ -23405,7 +23526,40 @@ CRUSH_MVC_SITES: dict[str, dict] = {
              "state": "GA", "lat": 34.7289, "lng": -84.9788},  # Census geocoder exact address match (2026-11-09)
         ],
     },
+    # S&S U-Pull-It — single yard, Lebanon MO (2026-11-17). Same app as
+    # M&M / Polk (server-rendered #car-make select, 35 makes, multipart POST
+    # to /Home/Inventory). Columns YEAR, MAKE, MODEL, COLOR, ROW, ARRIVAL
+    # DATE. The yard sets cars out a ROW at a time and the date is the row's:
+    # in a 4-make probe (573 cars) every physical row carried one date, 16
+    # dates in all from 2017-06-20 to 2026-08-28, so old dates are old rows
+    # still standing, not rows the site forgot to remove. Expect the "no new
+    # arrivals in 30 days" note between batches (about every 4 months).
+    # robots.txt: 404 (none); no terms page (Yard Policies covers returns
+    # only). This tenant is read with the scanner's own name ("headers");
+    # the older tenants above keep what they sent before.
+    # Price list /Home/PartPrices has 5 columns (PRICE GROUP is extra).
+    # Pin: Census geocoder exact match for 22395 Rte 66, Lebanon MO 65536.
+    "ssupullit": {
+        "label": "S&S U-Pull-It (Lebanon MO)",
+        "base": "https://www.ssupullit.com",
+        "page_path": "/Home/Inventory",
+        "search_path": "/Home/Inventory",
+        "prices_path": "/Home/PartPrices",
+        "headers": "yardscout",
+        "yards": [
+            {"yard_id": None, "code": "lebanon",
+             "name": "S&S U-Pull-It - Lebanon", "city": "Lebanon",
+             "state": "MO", "lat": 37.6967, "lng": -92.6280},
+        ],
+    },
 }
+
+
+def _crush_mvc_headers(site: dict) -> dict:
+    """Request headers for one CRUSH MVC tenant. Tenants added from
+    2026-11-17 set "headers": "yardscout" and are read under the scanner's
+    own name; the earlier tenants keep the headers they have always sent."""
+    return YARDSCOUT_HEADERS if site.get("headers") == "yardscout" else HEADERS
 _CRUSH_MVC_MAKE_SELECT_RE = re.compile(
     r'<select[^>]*(?:id="car-make"|name="VehicleMake")[^>]*>(.*?)</select>', re.S)
 _CRUSH_MVC_OPTION_RE = re.compile(r'<option value="([^"]+)"')
@@ -23464,13 +23618,14 @@ def _crush_mvc_makes(site: dict, yard: dict) -> list[str]:
     page_url = base + site.get("page_path", "/Home/Inventory")
     if yard.get("yard_id"):
         r = requests.post(f"{base}/Home/GetMakes", data={"yardId": yard["yard_id"]},
-                          headers={**HEADERS, "Referer": page_url,
+                          headers={**_crush_mvc_headers(site), "Referer": page_url,
                                    "X-Requested-With": "XMLHttpRequest"},
                           timeout=60)
         r.raise_for_status()
         return [m for m in (str((d or {}).get("makeName") or "").strip()
                             for d in r.json()) if m]
-    r = requests.get(page_url, headers={**HEADERS, "Accept": "text/html"}, timeout=60)
+    r = requests.get(page_url, headers={**_crush_mvc_headers(site), "Accept": "text/html"},
+                     timeout=60)
     r.raise_for_status()
     m = _CRUSH_MVC_MAKE_SELECT_RE.search(r.text)
     return [v for v in (_CRUSH_MVC_OPTION_RE.findall(m.group(1)) if m else []) if v]
@@ -23505,7 +23660,7 @@ def fetch_crush_mvc_site(source: str) -> list[dict]:
                 form = {"YardId": (None, str(yard_id)), **form}
             try:
                 r = requests.post(search_url, files=form,
-                                  headers={**HEADERS, "Accept": "text/html",
+                                  headers={**_crush_mvc_headers(site), "Accept": "text/html",
                                            "Referer": page_url},
                                   timeout=60)
                 r.raise_for_status()
@@ -23599,6 +23754,27 @@ def fetch_cpsupullit_inventory() -> list[dict]:
     """CP's U-Pull-It (Dalton GA) via the CRUSH MVC adapter."""
     return fetch_crush_mvc_site("cpsupullit")
 
+
+def fetch_ssupullit_inventory() -> list[dict]:
+    """S&S U-Pull-It (Lebanon MO) via the CRUSH MVC adapter."""
+    return fetch_crush_mvc_site("ssupullit")
+
+
+def _crush_mvc_price_columns(page: str) -> tuple[int, int, int]:
+    """(name, price, core) cell positions on a /Home/PartPrices page, read
+    from its <th> labels. The usual list is PART DESCRIPTION, PRICE, BASIS,
+    CORE -> (0, 1, 3), which is also the answer when no header is found;
+    S&S adds a PRICE GROUP column -> (0, 2, 4)."""
+    import html as html_mod
+    labels = [re.sub(r"[^A-Z]", "", html_mod.unescape(re.sub(r"<[^>]+>", "", h)).upper())
+              for h in _CRUSH_MVC_TH_RE.findall(page)]
+    if "PARTDESCRIPTION" in labels and "PRICE" in labels:
+        core = next((i for i, lab in enumerate(labels) if lab.startswith("CORE")), None)
+        if core is not None:
+            return labels.index("PARTDESCRIPTION"), labels.index("PRICE"), core
+    return 0, 1, 3
+
+
 def refresh_crush_mvc_pricing_file(source: str) -> Path:
     """/Home/PartPrices of one CRUSH MVC tenant -> {source}_pricing.json
     (4 columns: PART DESCRIPTION, $PRICE, BASIS, $CORE — the Ryan's shape;
@@ -23613,20 +23789,34 @@ def refresh_crush_mvc_pricing_file(source: str) -> Path:
         return path
     try:
         r = requests.get(site["base"] + site["prices_path"],
-                         headers={**HEADERS, "Accept": "text/html"}, timeout=60)
+                         headers={**_crush_mvc_headers(site), "Accept": "text/html"}, timeout=60)
         r.raise_for_status()
         page = r.text
     except Exception as e:
         print(f"  [{label} pricing] fetch failed: {e} — keeping existing file",
               file=sys.stderr)
         return path
+    seen = _crush_mvc_parse_prices(page)
+    if len(seen) > 150:
+        path.write_text(json.dumps(list(seen.values()), separators=(",", ":")))
+        print(f"  [{label} pricing] wrote {len(seen)} parts", file=sys.stderr)
+    else:
+        print(f"  [{label} pricing] only {len(seen)} parts parsed — keeping existing file",
+              file=sys.stderr)
+    return path
+
+
+def _crush_mvc_parse_prices(page: str) -> dict[str, dict]:
+    """A /Home/PartPrices page -> {name: price entry}, first spelling wins."""
+    import html as html_mod
+    i_name, i_price, i_core = _crush_mvc_price_columns(page)
     seen: dict[str, dict] = {}
     for block in _CRUSH_MVC_TR_RE.findall(page):
         cells = [html_mod.unescape(re.sub(r"<[^>]+>", "", c)).strip()
                  for c in _FENIX_TD_RE.findall(block)]
-        if len(cells) < 4:
+        if len(cells) <= max(i_name, i_price, i_core):
             continue
-        name, price_s, _basis, core_s = cells[:4]
+        name, price_s, core_s = cells[i_name], cells[i_price], cells[i_core]
         if (not name or name.upper() == "PART DESCRIPTION" or name in seen
                 or _PRICE_AS_NAME_RE.match(name)):
             continue
@@ -23641,13 +23831,12 @@ def refresh_crush_mvc_pricing_file(source: str) -> Path:
             "corePrice": f"{core_f:.2f}",
             "totalPrice": f"{price_f + core_f:.2f}",
         }
-    if len(seen) > 150:
-        path.write_text(json.dumps(list(seen.values()), separators=(",", ":")))
-        print(f"  [{label} pricing] wrote {len(seen)} parts", file=sys.stderr)
-    else:
-        print(f"  [{label} pricing] only {len(seen)} parts parsed — keeping existing file",
-              file=sys.stderr)
-    return path
+    return seen
+
+
+def refresh_ssupullit_pricing_file() -> Path:
+    """Refresh S&S U-Pull-It's price list -> ssupullit_pricing.json."""
+    return refresh_crush_mvc_pricing_file("ssupullit")
 
 
 def refresh_mmupullit_pricing_file() -> Path:
@@ -24844,6 +25033,140 @@ def fetch_ipullca_inventory() -> list[dict]:
 # ===== end 2026-10-28 wave-300 block =====
 
 
+# ---- Standard Auto Wreckers UPIC Yard (Scarborough / Toronto ON) -----------
+# (2026-11-17) The self-service ("UPIC", bring your own tools) yard of
+# Standard Auto Wreckers, 1216 Sewells Rd, Scarborough ON. First Ontario
+# yard. Its /upic-inventory/ page is a shell whose own script names a Google
+# Sheet the yard has published as CSV ("UPIC Inventory — sourced from Google
+# Sheets") and draws the table from it. The reader does the same two steps:
+# GET the yard's page, take the sheet address the page itself names, GET that
+# CSV. If the page names no published sheet, the yard is skipped for the scan
+# (nothing is guessed and no remembered address is used).
+# Columns: Stock #, Year, Make, Model, Color, Row, Status, Date Created, Last
+# Update, VIN / Part Type, Location, Batch Number. 524 rows on 2026-11-17,
+# all with a stock number (the id basis), 520 with a 17-character VIN, dates
+# 2026-09-03 .. 2026-11-13. Rows are kept as the yard writes them ("UPIC
+# EAST 12").
+# Checked 2026-11-17 with the scanner's own name: robots.txt allows the page
+# (WooCommerce and wp-admin paths excepted); the Terms of Service page is
+# warranty terms only; docs.google.com robots.txt allows /spreadsheet with
+# Crawl-delay 1. Two requests per scan, 2 s apart.
+# NOT read: the full-service side of the same site (Search Inventory, a URG
+# parts locator) and the UPIC price list (also a published sheet, in
+# Canadian dollars; the app has no currency label yet, see ops/yards.md).
+# Pin: OpenStreetMap house-level match for 1216 Sewells Road.
+STANDARDUPIC_PAGE = "https://standardautowreckers.com/upic-inventory/"
+STANDARDUPIC_DELAY_SEC = 2.0
+STANDARDUPIC_MIN_ROWS = 50   # fewer than this is a broken sheet, not a lot
+STANDARDUPIC_YARD = {"name": "Standard Auto Wreckers UPIC - Toronto", "city": "Scarborough",
+                     "state": "ON", "lat": 43.8436, "lng": -79.2084}
+# Only a sheet the yard published to the web, on Google's own host.
+_STANDARDUPIC_SHEET_RE = re.compile(
+    r'CSV_URL\s*=\s*"(https://docs\.google\.com/spreadsheets/d/e/[A-Za-z0-9_-]+/pub\?[^"\s]*output=csv[^"\s]*)"')
+_STANDARDUPIC_VIN_RE = re.compile(r"^[A-HJ-NPR-Z0-9]{17}$")
+
+
+def _standardupic_sheet_url(page: str) -> str:
+    """The published-sheet CSV address the yard's own page loads, or ''."""
+    m = _STANDARDUPIC_SHEET_RE.search(page or "")
+    return m.group(1) if m else ""
+
+
+def _standardupic_parse_csv(text: str) -> tuple[list[dict], str]:
+    """The yard's CSV -> (vehicle dicts, problem). Header-driven; a row
+    without a stock number, a year or a make/model is skipped."""
+    import csv
+    import io
+    rows = list(csv.reader(io.StringIO(text or "")))
+    if not rows:
+        return [], "empty sheet"
+    col = {re.sub(r"[^a-z]", "", h.lower()): i for i, h in enumerate(rows[0])}
+    need = {"stock": "stock", "year": "year", "make": "make", "model": "model"}
+    if not all(k in col for k in need):
+        return [], f"sheet header {rows[0]} lacks Stock #/Year/Make/Model"
+    i_vin = next((i for k, i in col.items() if k.startswith("vin")), None)
+    i_date = col.get("datecreated")
+    yard = STANDARDUPIC_YARD
+    out: list[dict] = []
+    seen: set[str] = set()
+
+    def cell(r: list[str], i: "int | None") -> str:
+        return r[i].strip() if i is not None and i < len(r) else ""
+
+    for r in rows[1:]:
+        stock = cell(r, col["stock"])
+        year_s, make_s, model_s = cell(r, col["year"]), cell(r, col["make"]), cell(r, col["model"])
+        if not stock or not year_s.isdigit() or not make_s or not model_s:
+            continue
+        vid = f"standardupic-{stock.lower()}"
+        if vid in seen:
+            continue
+        seen.add(vid)
+        vin = cell(r, i_vin).upper()
+        date_iso = ""
+        dm = re.match(r"(\d{1,2})/(\d{1,2})/(\d{4})$", cell(r, i_date))
+        if dm:
+            date_iso = _sanitize_date_added(
+                f"{dm.group(3)}-{int(dm.group(1)):02d}-{int(dm.group(2)):02d}")
+        color = cell(r, col.get("color")).title()
+        v = {
+            "id": vid,
+            "vin": vin if _STANDARDUPIC_VIN_RE.match(vin) else "",
+            "year": int(year_s),
+            "make": _utpap_format_label(make_s),
+            "model": _utpap_format_label(model_s),
+            "row": cell(r, col.get("row")),
+            "dateAdded": date_iso,
+            "_location": yard["name"],
+            "_city": yard["city"],
+            "_state": yard["state"],
+            "_lat": yard["lat"],
+            "_lng": yard["lng"],
+            "_source": "standardupic",
+        }
+        if color:
+            v["_color"] = color
+        out.append(v)
+    return out, ""
+
+
+def fetch_standardupic_inventory() -> list[dict]:
+    """Standard Auto Wreckers UPIC Yard (Scarborough ON): the yard's page,
+    then the published sheet that page names."""
+    label = "Standard UPIC"
+    hdr = {**YARDSCOUT_HEADERS, "Accept": "text/html"}
+    try:
+        r = requests.get(STANDARDUPIC_PAGE, headers=hdr, timeout=60)
+        r.raise_for_status()
+    except Exception as e:
+        print(f"  [{label}] inventory page fetch failed: {e}", file=sys.stderr)
+        return []
+    sheet = _standardupic_sheet_url(r.text)
+    if not sheet:
+        print(f"  [{label}] the page names no published sheet — site changed? "
+              f"skipping the yard this scan", file=sys.stderr)
+        return []
+    time.sleep(STANDARDUPIC_DELAY_SEC)
+    try:
+        r = requests.get(sheet, headers={**YARDSCOUT_HEADERS, "Accept": "text/csv"}, timeout=60)
+        r.raise_for_status()
+        text = r.content.decode("utf-8", errors="replace")
+    except Exception as e:
+        print(f"  [{label}] sheet fetch failed: {e}", file=sys.stderr)
+        return []
+    _indep_cache_raw("standardupic_inventory.csv", text.encode())
+    vehicles, problem = _standardupic_parse_csv(text)
+    if problem:
+        print(f"  [{label}] {problem} — skipping the yard this scan", file=sys.stderr)
+        return []
+    if len(vehicles) < STANDARDUPIC_MIN_ROWS:
+        print(f"  [{label}] only {len(vehicles)} rows in the sheet — skipping the yard "
+              f"this scan rather than publishing a partial lot", file=sys.stderr)
+        return []
+    print(f"  [{label}] {len(vehicles)} vehicles", file=sys.stderr)
+    return vehicles
+
+
 # Chains the scan EXPECTS to return vehicles (source tag -> display name).
 # After the U-Pull-R plugin upgrade silently zeroed all MN/OH coverage for 4
 # days (2026-10-13 → 10-17), any onboarded chain coming back empty now prints
@@ -24910,6 +25233,13 @@ INDEPENDENT_EXPECTED_SOURCES.update({
     "ezpullit": "Pasco EZ Pull It (Hudson FL)",
     "ipullca": "iPull-uPull (Edmonton AB)",
 })
+INDEPENDENT_EXPECTED_SOURCES.update({"standardupic": "Standard Auto Wreckers UPIC (Toronto ON)"})  # 2026-11-17
+
+
+def independent_sources_switched_off() -> set[str]:
+    """Sources whose reader is deliberately off, so the zero-vehicle alarm
+    below does not call them broken on every scan. Today: U-Pull-R only."""
+    return set() if UPULLR_READER_ENABLED else {"upullr"}
 
 
 # Canonical adapter order. The parallel fetch below concatenates results in
@@ -24948,6 +25278,7 @@ INDEPENDENT_FETCHERS: list = [
     ("Marion County Auto Parts", fetch_marioncounty_inventory),
     ("662 Self Serve", fetch_selfserve662_inventory),
     ("CP's U-Pull-It", fetch_cpsupullit_inventory),
+    ("S&S U-Pull-It", fetch_ssupullit_inventory),  # 2026-11-17, Lebanon MO (35 makes at 1 s)
     # yardconnect-pro tenants (2026-10-27): one entry per host, like U-Pick-It
     # AZ above (same config-driven adapter, YARDCONNECT_SITES).
     ("Chuck & Eddie's", fetch_chuckeddies_inventory),
@@ -24967,6 +25298,7 @@ INDEPENDENT_FETCHERS: list = [
     ("Hwy 82 Pick & Pay", fetch_hwy82_inventory),
     ("Route 34 U-Pull-M", fetch_route34_inventory),
     ("Sunshine Auto Salvage", fetch_sunshine_inventory),
+    ("Intermountain Auto iPull", fetch_ifipull_inventory),  # 2026-11-17, Idaho Falls ID (one GET)
     ("Bevell's", fetch_bevells_inventory),  # 2026-11-03, Goldsboro NC (paged Toolset table)
     ("OKC Pull-A-Part", fetch_okcpap_inventory),  # 2026-11-04, Oklahoma City (WebForms, one POST per make)
     # 2026-10-28 single-host adapters (Kiker's / Weller / Cagle's block).
@@ -24980,6 +25312,7 @@ INDEPENDENT_FETCHERS: list = [
     ("Army's Auto Wrecking", fetch_armys_inventory),
     ("Pasco EZ Pull It", fetch_ezpullit_inventory),
     ("iPull-uPull Canada", fetch_ipullca_inventory),
+    ("Standard Auto Wreckers UPIC", fetch_standardupic_inventory),  # 2026-11-17, Scarborough ON (2 GETs)
 ]
 
 
@@ -25016,6 +25349,8 @@ def fetch_independent_inventory() -> list[dict]:
     # discovered by users days later (see U-Pull-R, 2026-10-13..17).
     got_sources = {v.get("_source") for v in vehicles}
     for src, label in INDEPENDENT_EXPECTED_SOURCES.items():
+        if src in independent_sources_switched_off():
+            continue  # off on purpose (its reader said so above), not broken
         if src not in got_sources:
             print(f"  WARNING: independent chain {label!r} returned 0 vehicles — "
                   f"adapter broken or site blocking? Investigate before it goes stale.",
@@ -28037,7 +28372,9 @@ YARD_MISSING_DROP = 30
 # counts as an open issue there (backend/src/ops_monitor.js).
 _UPR = ("waiting on the yard: upullrparts.com puts its vehicle search behind a "
         "Cloudflare human check (captcha) since ~2026-10-21; owner emailed them "
-        "2026-11-03 asking for an exemption or a daily file")
+        "2026-11-03 asking for an exemption or a daily file; their CTO said "
+        "2026-11-06 an official API is likely; our reader is switched off "
+        "since 2026-11-17 (nothing is sent to their site) until it arrives")
 KNOWN_MISSING_REASONS: dict[str, str] = {
     "U-Pull-R Parts - East Bethel": _UPR,
     "U-Pull-R Parts - Rosemount": _UPR,
@@ -28580,7 +28917,8 @@ def main():
                refresh_ryans_pricing_file, refresh_usauto_pricing_file,
                refresh_upas_pricing_file, refresh_mmupullit_pricing_file,
                refresh_polkpickpay_pricing_file, refresh_chuckeddies_pricing_file,
-               refresh_byot_pricing_file, refresh_wilberts_pricing_file)
+               refresh_byot_pricing_file, refresh_wilberts_pricing_file,
+               refresh_ifipull_pricing_file, refresh_ssupullit_pricing_file)
         for fn in fns:
             try:
                 fn()

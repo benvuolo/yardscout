@@ -837,3 +837,45 @@ Their registry locations had no `ario_slug`, so the sweep's dedupe missed them.
 Those slugs are now set, and the new entries carry theirs too.
 `scraper/coverage_candidates.md` is the parts-gap miner's report (Parts
 workstream), not a yard list. It has no tiers and was not acted on here.
+
+## 2026-11-17 — Breadth pass (3 yards added; 9 checked and not added)
+
+Full account, with what was read from each site: `ops/yards.md`, "2026-11-17
+breadth pass". Every site was read with the YardScout User-Agent only.
+
+| Yard | Source | Count | How | Checked |
+|---|---|---|---|---|
+| Intermountain Auto iPull — Idaho Falls ID (3015 N 15th E) | `ifipull` | 578 (557 with VIN), arrivals to 2026-11-16 | `CRUSH_TABLE_SITES` entry, one GET | robots allows the page; no terms page. The 2026-10-28 HTTP 500 no longer happens |
+| S&S U-Pull-It — Lebanon MO (22395 Rte 66) | `ssupullit` | 573 in 4 of 35 makes; whole lot not counted | `CRUSH_MVC_SITES` entry, 36 requests at 1 s | no robots.txt (404); no terms page. Dates are row-set dates (one per row, 2017..2026-08-28) |
+| Standard Auto Wreckers UPIC — Scarborough/Toronto ON (1216 Sewells Rd) | `standardupic` | 524 (517 with VIN), dates to 2026-11-13 | the yard's page, then the published Google Sheet it names; 2 GETs | robots allows both hosts; terms are warranty terms only |
+
+New pattern worth remembering: a yard page that draws its table from a
+Google Sheet "published to the web" (`const CSV_URL =
+"https://docs.google.com/spreadsheets/d/e/.../pub?...output=csv"`). The
+reader takes the address from the yard's page each scan.
+
+Platform changes: `CRUSH_MVC_SITES` tenants may set `"headers": "yardscout"`
+(S&S does; the nine older tenants are unchanged). The CRUSH MVC price parser
+reads its columns from the header, so a list with an extra PRICE GROUP
+column parses; 4-column lists read as before.
+
+Not added (registry has each): Carolina Pick N Pull (terms forbid robots),
+Kenny U-Pull (Cloudflare block), Express Pull-N-Save (no-reproduction notice;
+terms unreadable), U Pull It Davie (robots turns away AI agents; not read),
+Pull N' Go Bradenton (503), Andersen Self-Service Kearney NE (feed frozen at
+2026-08-22), U-Pull It Russellville AR (table years old), Ewe Pullet (still
+empty), West Fargo Self Service (list still "under construction"). Also
+looked at and dropped: Hanser's Billings MT and Brandywine MD (full-service
+parts locators), Gary's U-Pull-It Binghamton (now Fenix Binghamton, already
+tracked), pickapartde.com (parked domain), picapartyard.com Millerstown PA
+(self-signed certificate, not read), two dead `*.s3softwaresolutions.com`
+hosts, Sam's Riverside Des Moines (its u-pull list is an Ario embed).
+
+**Ario.** `ario.autorecycler.io/robots.txt` now disallows `/yard/` for every
+crawler ("Paid Website Search / embed product") and the host serves Ario's
+own consumer search, "U-Pull Yards". No Ario yard was added. EZ Pull N Pay
+and Cash-N-Carry also publish CRUSH tables on their own sites
+(`ezpullnpay.com/<yard>/`, `cashncarryparts.com/search-inventory/`, seen in
+search results only), which the static-table reader could use after the
+usual robots and terms check.
+

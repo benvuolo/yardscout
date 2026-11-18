@@ -151,3 +151,174 @@ confirms that scan.
 - **Harry's**: none needed. The owner confirmed on 2026-11-16 that the 11-02
   form note never went out, so section 5 above (reworded the same day) is
   the first and only note.
+
+---
+
+# 2026-11-17 drafts (yards breadth pass). None sent; the owner sends.
+
+Each yard below was checked with the scanner's own name
+("YardScout/1.12 (+https://yardscout.io)") and was NOT added, for the reason
+given. Nothing was worked around. What was read is listed so each note can be
+checked: `ops/yards.md`, "2026-11-17 breadth pass".
+
+## 6. Carolina Pick N Pull (Wilmington NC, Fayetteville NC, Conway SC; about 4,300 cars)
+
+**Why a note and not a reader:** their Terms of Service (last updated
+2026-08-11) list as a prohibited use "Using any robot, spider or other similar
+automatic technology, process or means to access or use the Website for any
+purpose, including monitoring or copying any of the material on this Website".
+robots.txt allows everything (Crawl-delay 10) and the inventory page answered
+our scanner normally, but the terms say no, so we ask.
+**Read from their site on 2026-11-17:** robots.txt, the inventory page once
+(the search form only, no search run), the terms page.
+**To:** mvanoverpnp@gmail.com (Marc, the contact their terms page names;
+phone 910-332-1824)
+**Subject:** May YardScout list Carolina Pick N Pull's inventory?
+
+Hi Marc,
+
+I run YardScout (yardscout.io), a website and app, free to use, that helps DIY mechanics find cars in self-service yards near them. People in Wilmington, Fayetteville and Myrtle Beach ask it where a car is, and today we cannot send them to you.
+
+Your terms of service do not allow automated reading of your site, so I am asking first. With your OK we would read your public vehicle inventory for Cape Fear, Sandhills and Grand Strand (year, make, model, row, date), no faster than the 10 seconds between requests your site asks for, and show each car with your yard's name and a link back to carolinapicknpull.com. Our scanner identifies itself as "YardScout/1.12 (+https://yardscout.io)". If a daily file or feed is easier for you, any format works and we would read that instead.
+
+We have not read your inventory. If the answer is no, we will leave you off.
+
+Thanks,
+Ben
+YardScout, hello@yardscout.io
+
+---
+
+## 7. Kenny U-Pull (about 25 yards in Quebec, Ontario, New Brunswick, Nova Scotia)
+
+**Why:** kennyupull.com answered our scanner with a Cloudflare block page
+("Sorry, you have been blocked", HTTP 403) on the home page; robots.txt is a
+404. One request each, nothing else tried. This is the largest Canadian
+self-service chain and the one the Canadian store listings would gain most
+from.
+**To:** not found without reading their site. Use the contact form on
+kennyupull.com, or the owner finds a marketing or web contact at Kenny U-Pull
+/ AIM Recycling.
+**Subject:** May YardScout list Kenny U-Pull's inventory?
+
+Hi,
+
+I run YardScout (yardscout.io), a website and app, free to use, that helps DIY mechanics find cars in self-service yards near them. It covers Canada (postal codes work, and both app stores offer it there), but only five Canadian yards so far, none of them yours.
+
+Your site blocks our scanner, so we have not read anything and will not. I am asking instead: may we list your yards' vehicle inventory (year, make, model, row, date listed), each car shown with the branch name and a link back to kennyupull.com? If yes, the simplest way is a daily file or feed in any format. Or you could allow our scanner, which identifies itself as "YardScout/1.12 (+https://yardscout.io)", at whatever pace you set.
+
+If you would rather not be listed, tell me and that is the end of it.
+
+Thanks,
+Ben
+YardScout, hello@yardscout.io
+
+---
+
+## 8. Express Pull-N-Save (La Vergne, Lebanon, Nashville TN)
+
+**Why:** every page of expresspullnsave.com carries "Downloading,
+republication, retransmission or reproduction of content on this website is
+strictly prohibited", and the Terms of Use it links are served from the site
+builder's host (thryv.com), which answered our scanner HTTP 403, so the terms
+could not be read. robots.txt itself allows everything. A Reddit user asked
+for these yards on 2026-10-28; an unmerged reader exists on the old branch
+`yards/express-pull-n-save` (their public kiosk search, about 900 requests a
+pass) and can be finished with a test in about an hour once they say yes.
+**Read on 2026-11-17:** robots.txt, the home page, /inventory, the terms page
+shell; the kiosk host's robots.txt (404). The kiosk itself was not opened.
+**To:** info@expresspullnsave.com (terms questions go to tspelta@ergtn.com
+per their site)
+**Subject:** May YardScout list Express Pull-N-Save's inventory?
+
+Hi,
+
+I run YardScout (yardscout.io), a website and app, free to use, that helps DIY mechanics find cars in self-service yards near them. People around Nashville have asked us for your three yards.
+
+Your website says its content may not be reproduced, so I am asking before we list anything. With your OK we would read the public vehicle search on kiosk.expresspullnsave.com for La Vergne, Lebanon and Nashville (stock number, year, make, model, row, days on lot), about 900 page requests a pass at one a second, a few times a day, and show each car with your yard's name and a link back to your site. No photos unless you say so. Our scanner identifies itself as "YardScout/1.12 (+https://yardscout.io)". A daily file would also work and would mean far fewer requests.
+
+If you would rather not be listed, tell me and we will leave you off.
+
+Thanks,
+Ben
+YardScout, hello@yardscout.io
+
+---
+
+## 9. U Pull It Davie (Davie FL; the site says over 2,000 vehicles, updated daily)
+
+**Why:** its robots.txt allows search crawlers ("search=yes") but turns away
+AI agents by name (ClaudeBot, Claude-Web, anthropic-ai, GPTBot and others).
+The builder in this session is such an agent, so it read robots.txt and
+nothing else, and did not look at the pages under the scanner's name
+instead. A person can open upullitdavie.com and see how the inventory is
+shown; if it is a plain page or feed the reader is small.
+**To:** not read. Their site's contact page.
+**Subject:** May YardScout list U Pull It Davie's inventory?
+
+Hi,
+
+I run YardScout (yardscout.io), a website and app, free to use, that helps DIY mechanics find cars in self-service yards near them. We list many South Florida yards and people ask about yours.
+
+May we list your vehicle inventory (year, make, model, row, date), each car shown with your yard's name and a link back to upullitdavie.com? We would read only the public inventory, slowly, a few times a day, and our scanner identifies itself as "YardScout/1.12 (+https://yardscout.io)". A daily file or feed in any format is just as good.
+
+If you would rather not be listed, tell me and we will leave you off.
+
+Thanks,
+Ben
+YardScout, hello@yardscout.io
+
+---
+
+## 10. Ario / autorecycler.io (the platform behind about 45,000 cars we already list)
+
+**Why this is on the list (owner decision, not a new yard):**
+`ario.autorecycler.io/robots.txt` now says, for every crawler, `Disallow:
+/yard/` with the comment "Paid Website Search / embed product — not for
+organic indexing", and the same host now serves Ario's own consumer search
+site, "U-Pull Yards" (upullyards.com), which makes Ario a competitor as well
+as a vendor. Our reader does not fetch `/yard/` pages; it calls the search
+function behind them on another host, with the page's public key and a
+browser name. No new Ario yard was added in this pass for that reason. The
+existing reader was left as it is.
+**To:** not found. Ario / ari (Auto PARTnered Solutions), via its website.
+**Subject:** YardScout and the yards that use Ario's website search
+
+Hi,
+
+I run YardScout (yardscout.io), a website and app, free to use, that helps DIY mechanics find cars in self-service yards near them. Since October we have listed about 45 yards whose own websites embed your inventory search (EZ Pull N Pay, Foss, UAPI, Paul's and others), reading the same search those pages use, a few times a day, and linking every car back to the yard.
+
+Your robots.txt now marks the yard search as a paid embed product that crawlers should leave alone, so I would rather ask than assume. Is there a way you would be comfortable with us listing these yards' cars: an official feed, a partner key, or terms we should follow? If the answer is that we should stop, tell me and we will.
+
+Thanks,
+Ben
+YardScout, hello@yardscout.io
+
+---
+
+## 11. Pull N' Go Self Service Auto Parts (Bradenton FL)
+
+**Why:** pullngo.net answered both of our requests (robots.txt and
+/inventory.php) with "503 Service Unavailable", 23 bytes. That may be an
+outage or a filter; either way nothing more was tried. Re-check once with
+the same name in a week or two. If it still answers 503 while the site
+opens in a browser, send the Davie note above with the names changed.
+
+## 12. Andersen Self-Service (Kearney NE; 1,721 vehicles on its page). Not blocked: a heads-up
+
+**Why not added:** the page reads fine (robots.txt allows it, one request
+returns the whole yard), but its newest set date is 08/22/2026: 60 to 120
+cars a month from mid-2025 to July 2026, six in August, none since. That
+looks like an inventory export that stopped, so the list may no longer match
+the lot. Add it when new set dates appear (registry: candidate).
+**To:** not read. Phone on their site: 308-236-7661.
+
+Hi,
+
+I run YardScout (yardscout.io), a website and app, free to use, that helps DIY mechanics find cars in self-service yards near them. I would like to list your Kearney yard.
+
+One thing you may want to know first: the inventory on andersenselfservice.com shows no vehicle set after August 22, 2026. If the yard has set cars since then, the website is not getting them. Once it is current we will list it, each car with your name and a link back to your site. Our scanner identifies itself as "YardScout/1.12 (+https://yardscout.io)" and would read that one page a few times a day.
+
+Thanks,
+Ben
+YardScout, hello@yardscout.io
