@@ -8,6 +8,7 @@ thresholds, "a car added or removed" as the only change, unread scans
 existing yard_health fingerprint, the flush rule after a long freeze, the
 yard-row columns (old readers unaffected), yard_health.json agreeing with
 the published columns, and held arrivals leaving alerts and "new this week"."""
+import collections
 import json
 import sys
 import tempfile
@@ -155,6 +156,59 @@ check("not a flush car: listed after the flush day / no flush / no date",
 check("arrival held: frozen yard or flush car only",
       yf.arrival_held("frozen", None, "2026-11-18") and yf.arrival_held("", NOW, "2026-11-17")
       and not yf.arrival_held("stale", None, "2026-11-18") and not yf.arrival_held("", None, "2026-11-18"))
+
+# ---------- list jumps (any list, not only after a freeze) ----------
+JP = {"J": {"listFingerprint": fp, "listChangedAt": "2026-11-18T08:41:39Z", "listReadAt": "2026-11-18T08:41:39Z"}}
+base = [f"c{i}" for i in range(1000)]
+JP["J"]["listFingerprint"] = yf.id_fingerprint(base)
+none_back = lambda n, s: set()          # noqa: E731
+all_back = lambda n, s: set(s)          # noqa: E731
+# re-key: the whole list under new ids, none listed before
+rekey = [f"k{i}" for i in range(1000)]
+out = yf.update_list_freshness(JP, "2026-11-18T08:41:39Z", {"J": rekey}, set(), NOW,
+                               prev_ids=lambda n: set(base), seen_before=none_back)
+check("jump: a re-key (1,000 never-listed ids at once) -> marked, why 'jump'",
+      out["J"].get("listFlushAt") == NOW and out["J"].get("listFlushWhy") == "jump"
+      and out["J"]["jump"]["neverListed"] == 1000 and "flush" not in out["J"], str(out["J"]))
+# a flip back: the same number of ids, all listed here before
+out = yf.update_list_freshness(JP, "2026-11-18T08:41:39Z", {"J": rekey}, set(), NOW,
+                               prev_ids=lambda n: set(base), seen_before=all_back)
+check("flip / partial read back (ids it listed before): not held",
+      "listFlushAt" not in out["J"] and out["J"]["jump"]["returning"] == 1000)
+# a big genuine set-out day: +150 new ids on a 1,000-car list (15%; the
+# biggest real day measured was 17%)
+day = base[150:] + [f"n{i}" for i in range(150)]
+out = yf.update_list_freshness(JP, "2026-11-18T08:41:39Z", {"J": day}, set(), NOW,
+                               prev_ids=lambda n: set(base), seen_before=none_back)
+check(f"a big real set-out day (+150 = 15% < {yf.JUMP_SHARE:.0%} of the list): not held, no DB lookup",
+      "listFlushAt" not in out["J"] and "jump" not in out["J"])
+edge = base[:] + [f"n{i}" for i in range(int(yf.JUMP_SHARE * 1500) + 1)]
+out = yf.update_list_freshness(JP, "2026-11-18T08:41:39Z", {"J": edge}, set(), NOW,
+                               prev_ids=lambda n: set(base), seen_before=none_back)
+check("just over the share of the list: held", out["J"].get("listFlushWhy") == "jump", str(out["J"].get("jump")))
+# tiny lot: 40 never-listed on a 60-car list is 67%, but under the car floor
+tiny = {"T": {"listFingerprint": yf.id_fingerprint(base[:60]), "listChangedAt": "2026-11-18T08:41:39Z",
+              "listReadAt": "2026-11-18T08:41:39Z"}}
+out = yf.update_list_freshness(tiny, "2026-11-18T08:41:39Z", {"T": base[:20] + [f"t{i}" for i in range(40)]},
+                               set(), NOW, prev_ids=lambda n: set(base[:60]), seen_before=none_back)
+check(f"a small lot under {yf.JUMP_MIN_CARS} cars added: not held", "listFlushAt" not in out["T"])
+out = yf.update_list_freshness(JP, "2026-11-18T08:41:39Z", {"J": rekey}, set(), NOW, prev_ids=lambda n: set(base))
+check("no history DB: every added id counts as never listed (held)", out["J"].get("listFlushWhy") == "jump")
+half = {"J": rekey}
+out = yf.update_list_freshness(JP, "2026-11-18T08:41:39Z", half, set(), NOW, prev_ids=lambda n: set(base),
+                               seen_before=lambda n, s: set(sorted(s)[:850]))
+check("mostly back, 150 never listed (15%): not held", "listFlushAt" not in out["J"] and out["J"]["jump"]["neverListed"] == 150)
+kept = {"J": {"listFingerprint": yf.id_fingerprint(rekey), "listChangedAt": NOW, "listReadAt": NOW,
+              "listFlushAt": NOW, "listFlushWhy": "jump"}}
+later = (datetime.strptime(NOW, "%Y-%m-%dT%H:%M:%SZ") + timedelta(days=3)).strftime("%Y-%m-%dT%H:%M:%SZ")
+out = yf.update_list_freshness(kept, NOW, {"J": rekey}, set(), later)
+check("jump mark kept with its reason", out["J"].get("listFlushAt") == NOW and out["J"].get("listFlushWhy") == "jump")
+fz = {"J": {**JP["J"], "listChangedAt": "2026-10-22T02:14:15Z"}}
+out = yf.update_list_freshness(fz, "2026-11-18T08:41:39Z", {"J": rekey}, set(), NOW,
+                               prev_ids=lambda n: set(base), seen_before=none_back)
+check("frozen list that flushes: why 'flush' (the flush rule decides first)", out["J"].get("listFlushWhy") == "flush")
+check("one hold for both: a jump's cars are held like a flush's",
+      yf.arrival_held("", NOW, "2026-11-17") and not yf.arrival_held("", NOW, "2026-11-19"))
 
 # ---------- yard rows ----------
 BASE_YF = ["location", "city", "state", "lat", "lng", "avgLifespanDays", "lifespanBasis"]
@@ -329,6 +383,56 @@ with tempfile.TemporaryDirectory() as td:
            "yards": [list(y) for y in yards], "vehicles": [["x"]]}
     js._apply_yard_list_freshness(bad)
     check("a payload the step cannot read ships without the columns", bad["yardFields"] == BASE_YF)
+
+# ---------- list jumps through the scan (history DB, apply_stale_keep) ----------
+import db  # noqa: E402
+with tempfile.TemporaryDirectory() as td:
+    td = Path(td)
+    db.DB_FILE = td / "h.db"
+    js.DATA_DIR, js.LIVE_FILE, js.YARD_HEALTH_FILE = td, td / "inventory_live.json", td / "yard_health.json"
+    js.EXTRAS_FILE = td / "vehicle_extras.json"
+    js._CARRIED_YARDS.clear()
+    yards = [["Rekey - E", "E", "TX", 30.0, -97.0, 60, "yard"], ["Flip - F", "F", "TX", 30.1, -97.1, 60, "yard"],
+             ["Busy - G", "G", "TX", 30.2, -97.2, 60, "yard"]]
+    old_e = [car(i, 0, d_old) for i in range(200)]
+    list_a = [car(i, 1, d_old) for i in range(200)]               # Flip - F's list A
+    list_b = [car(1000 + i, 1, d_recent) for i in range(150)] + list_a[:50]
+    g0 = [car(i, 2, d_old) for i in range(300)]
+    # Earlier scans the DB saw: F listed list B once (it flips back to it now).
+    two_ago = (today - timedelta(hours=8)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    ent = lambda rows, loc: [{"id": r[0], "location": loc, "dateAdded": r[6]} for r in rows]  # noqa: E731
+    db.record_scan(ent(old_e, "Rekey - E") + ent(list_b, "Flip - F") + ent(g0, "Busy - G"), two_ago)
+    prev_at = (today - timedelta(hours=4)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    db.record_scan(ent(old_e, "Rekey - E") + ent(list_a, "Flip - F") + ent(g0, "Busy - G"), prev_at)
+    check("db.ids_listed_before: ids this yard listed in any earlier scan, departed or not",
+          db.ids_listed_before("Flip - F", {list_b[0][0], list_a[0][0], "nope"}) == {list_b[0][0], list_a[0][0]}
+          and db.ids_listed_before("Busy - G", {list_b[0][0]}) == set())
+    prev_rows = old_e + list_a + g0
+    js.LIVE_FILE.write_text(json.dumps({"schemaVersion": 2, "scrapedAt": prev_at, "fields": FIELDS,
+                                        "yardFields": BASE_YF, "yards": yards, "vehicles": prev_rows}))
+    js.YARD_HEALTH_FILE.write_text(json.dumps({"scrapedAt": prev_at, "yards": {
+        n: {"listFingerprint": yf.id_fingerprint(ids_of(prev_rows, i)), "listChangedAt": prev_at, "listReadAt": prev_at}
+        for i, n in enumerate(["Rekey - E", "Flip - F", "Busy - G"])}}))
+    new_e = [[f"E2-{i}"] + r[1:] for i, r in enumerate(old_e)]   # same cars, new ids
+    busy = g0[40:] + [car(500 + i, 2, d_recent) for i in range(40)]  # a real day: 40 of 300 (13%)
+    payload = {"schemaVersion": 2, "scrapedAt": scan_now, "fields": FIELDS, "yardFields": list(BASE_YF),
+               "yards": [list(y) for y in yards], "vehicles": new_e + list_b + busy, "partSets": [], "vpic": {}}
+    js.apply_stale_keep(payload, {})
+    check("apply_stale_keep hands the previous publish's ids to the jump check",
+          set(js._PREV_IDS_OF.get("Flip - F", [])) == {r[0] for r in list_a})
+    js._apply_yard_list_freshness(payload)
+    cols = yf.yard_list_columns(payload)
+    check("scan: re-keyed list -> held (listFlushAt now)", cols[0][3] == scan_now, str(cols[0]))
+    check("scan: list flipping back to ids it listed before -> not held", cols[1][3] is None, str(cols[1]))
+    check("scan: a real 13% set-out day -> not held", cols[2][3] is None, str(cols[2]))
+    js._update_yard_health(payload)
+    h = json.loads(js.YARD_HEALTH_FILE.read_text())["yards"]
+    check("yard_health.json records why ('jump')", h["Rekey - E"].get("listFlushWhy") == "jump"
+          and "listFlushWhy" not in h["Flip - F"])
+    arr = push_inventory.build_arrivals(payload)
+    by = collections.Counter(a["location"] for a in arr)
+    check("alerts: the re-keyed yard sends nothing; the flip's recent cars ride along (the dedupe knows their ids); "
+          "the real day's 40 cars alert", "Rekey - E" not in by and by["Flip - F"] == 150 and by["Busy - G"] == 40, str(by))
 
 print()
 if fails:
