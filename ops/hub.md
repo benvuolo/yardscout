@@ -1915,3 +1915,8 @@ fields of the 10-28/10-31 source changes: yards workstream.
   SUBSCRIPTION snapshot still arrives (3 active on 11-17). Owner to check App
   Store Connect: Business (an agreement waiting to be accepted?) and Trends
   (does the web page show units after 11-06?).
+- Gmail connector turns every URL or bare domain in a draft into a
+  google.com/url redirect (RAW-checked). Sent 11-18 ~17:28 with such links:
+  Kenny U-Pull, Carolina Pick N Pull, Express Pull-N-Save, Andersen. The two
+  unsent drafts (Budget follow-up, 1A Auto) rewritten with no addresses.
+  Rule from now: hub drafts carry no web addresses (ops/yard-outreach-drafts.md).
