@@ -957,6 +957,10 @@ function afterInventoryChange({ quiet = false } = {}) {
   _makeScopeKey = null;   // data changed — force the scoped rebuild
   _yardScopeKey = null;   // ...and the yard dropdown's counts
   refreshScopedInventory();
+  // A Parts search that ran while the cars around its centre were still
+  // loading (a zip that arrived late) runs again now they are in (same
+  // forward-reference rule as pfInited above).
+  if (_pfAwaitShards && pfCat) pfRunSearch();
   populateWatchOptions();
   updateStaleBanner();
   invUpdateProgress();
@@ -8915,6 +8919,7 @@ function pfDateLabel(dateAdded) {
 }
 
 let pfCat = null;        // chosen category object
+let _pfAwaitShards = false;   // the last search ran before its area's cars were in (afterInventoryChange re-runs it)
 let pfChosenFam = null;  // chosen engine family id when the model had several
 
 function pfSaveState() {
@@ -9748,9 +9753,14 @@ function pfRunSearch() {
   const s = pfSeeker();
   if (!pfCat) { status.textContent = 'Pick a part first.'; return; }
   if (!activeZipCoords) {
-    out.innerHTML = '<div class="pf-empty">Set a zip code (or use your location) up top so we know which yards are near you — distances drive this whole list.</div>';
+    // data-wait-place: pfRerunIfPlaceArrived() runs this search again when a
+    // centre lands later (a zip lookup still out, the /geo guess, GPS).
+    out.innerHTML = '<div class="pf-empty" data-wait-place>Set a zip code (or use your location) up top so we know which yards are near you — distances drive this whole list.</div>';
     return;
   }
+  // The radius-first loader may still be fetching the cars around this
+  // centre (it just arrived): if so, this search runs again when they land.
+  _pfAwaitShards = invViewPending({ focus: false });
   if (!interchangeData) { loadInterchange().then(() => pfRunSearch()); return; }
   // Same for the price lists of the yards in range: every result row quotes
   // its yard's list (lazy lists — see LAZY YARD PRICE LISTS).
@@ -10276,6 +10286,23 @@ function pfSyncWhere() {
     pz.placeholder = lz.placeholder;   // carries 'Near me' when GPS is the center
   }
   pfUpdateWhereSum();
+  pfRerunIfPlaceArrived();
+}
+/* A part picked while no centre was known leaves "Set a zip code (or use your
+ * location) up top" in the results (pfRunSearch). Every centre change passes
+ * through pfSyncWhere (setZipCenter when a zip lookup comes back, the /geo
+ * guess and links via afterPlaceChange, GPS), so the search runs again here
+ * once a centre exists. Order matters: the results box is read FIRST. At
+ * launch a saved zip is restored before the Parts state is declared (`let
+ * pfCat` further down is not initialised yet, and reading it would throw);
+ * the box is still empty then, so pfCat is never read before it exists.
+ * Only the waiting line triggers it, so a search already on screen is not
+ * re-run (and pfCountSearch dedupes a repeat anyway). */
+function pfRerunIfPlaceArrived() {
+  const out = document.getElementById('pf-results');
+  if (!out || !out.querySelector('.pf-empty[data-wait-place]')) return;
+  if (!activeZipCoords || !pfCat) return;
+  pfRunSearch();
 }
 
 /* ===== TRY-EXAMPLE CHIPS (owner request, 2026-10-23) =====================

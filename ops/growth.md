@@ -1150,3 +1150,43 @@ string, precompute each watch once, bucket arrivals by make): perhaps 5 to
 10 times less, still not 10 ms at 4,000 arrivals; (c) have the scan send
 only arrivals new since the last commit (touches `scraper/push_inventory.py`,
 another workstream). Recommendation: (a), then (b).
+
+### 2. Parts tab: a zip that arrives late (`docs/app.js`, sw `jh-v208`)
+
+**What was wrong.** A part picked while the zip lookup was still out left
+"Set a zip code (or use your location) up top" on the Parts tab after the
+zip arrived (the hub's note in `ops/interchange.md`, 2026-11-16). Testing
+the obvious fix found a second half: run again the moment the zip lands,
+the search saw only the cars loaded so far and said "No cars within 100 mi
+listing a spotted headlights right now", because the radius-first loader
+had not yet fetched the cars around the new centre, and nothing re-ran the
+Parts search when they came.
+
+**What changed.**
+- The waiting line carries `data-wait-place`. `pfSyncWhere()`, which every
+  centre change already goes through (a zip lookup coming back, the /geo
+  guess and links through `afterPlaceChange`, "Use my location"), now ends
+  with `pfRerunIfPlaceArrived()`: when that line is on screen, a part is
+  picked and a centre exists, it runs the search again.
+- The launch call: a saved zip is restored (and, with its coordinates
+  cached, `setZipCenter` runs to its end) before `let pfCat` is
+  initialised. The new function reads the results box first; it is empty at
+  launch, so `pfCat` is never read before it exists.
+- A Parts search that runs while the cars around its centre are still
+  loading (`invViewPending({ focus: false })`) is marked, and
+  `afterInventoryChange` runs it once more when they land (the mark clears
+  when the area is in). Counting is unchanged: `pfCountSearch` already
+  counts one search once.
+- Also covered by the same hook, not asked for: the same stale line after a
+  late /geo guess or a late "Use my location".
+
+**Test.** `backend/test/pf_late_zip_e2e.mjs` (new; the real `docs/` served
+as https://yardscout.io/ through Playwright, no port, the zip lookup held
+until the test releases it): typed zip, late; saved zip, late; saved zip
+with cached coordinates (the launch order). 13 of 13. With
+`PF_DOCS=<docs before the fix>` it fails 2: "once the zip arrives, the
+results come" in both late cases, with the waiting line still on screen.
+`pf_guards_unit.mjs` gained a stub for the loader check. Also run, all pass:
+`no_gate_e2e` 78, `pf_new_cats_e2e`, `part_finder_e2e.py`,
+`pf_ux_e2e.py`, `interchange_e2e.py`, `funnel_events_e2e`, all 23
+`*_unit.mjs`.
