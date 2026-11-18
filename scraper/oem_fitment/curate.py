@@ -393,6 +393,11 @@ class Curation:
         decodes, LIKELY_BODY_MIN_SHARE / _MIN_CARS) and from the body-named
         catalog pages offered for T."""
         need = set(self.t_body_variants.get(T, ()))
+        fixed = policy.model_body_table(T[0], T[1], T[2])
+        if fixed is not None:
+            # policy.MODEL_BODY_TABLE (2026-11-18): the model's own line-up,
+            # not the lot decodes (1998 200SX coupes decoded as sedans)
+            return need | set(fixed)
         cnt = self.body_counts.get(T) or {}
         tot = sum(cnt.values())
         for b, n in cnt.items():
@@ -412,20 +417,56 @@ class Curation:
         ctx = N.NoteContext(T[2], frozenset(m.lower() for _, m in self.t_sources.get(T, set())),
                             getattr(self, "ns_models_f", frozenset()))
         if self.t_list_rows.get((T, cat)):
-            items = [(lr.variant, lr.notes) for lr in self.t_list_rows[(T, cat)]
+            items = [(lr.variant, lr.notes, lr.site) for lr in self.t_list_rows[(T, cat)]
                      if policy.pn_key(self.ns, lr.pn) == c.key and lr.matched and not self.note_excludes(lr.notes, T)]
         else:
-            items = [(_catalog_of(r.list_url), r.note_texts) for r in self.t_seed_records.get((T, cat), [])
+            items = [(_catalog_of(r.list_url), r.note_texts, r.site) for r in self.t_seed_records.get((T, cat), [])
                      if r.key == c.key and not self.note_excludes(r.note_texts, T)]
+        # does any row on T's pages in this category name a body? (then an
+        # unparsed clause may be a body split and keeps restricting). The
+        # product page's fitment trims for T may also split by body ("4 DOOR"
+        # only for a Cobalt regulator whose own row reads "FRONT SIDE DOOR
+        # WINDOW(MANUAL)"): then the clause keeps restricting too.
+        if self.t_list_rows.get((T, cat)):
+            page_body = any(_row_names_body(lr.notes, lr.site) for lr in self.t_list_rows[(T, cat)])
+        else:
+            page_body = any(_row_names_body(r.note_texts, r.site) for r in self.t_seed_records.get((T, cat), []))
+        if not page_body and not self.fit_bodies_plausible(T, cat, c, need):
+            page_body = True
         covered = set()
-        for variant, notes in items:
+        for variant, notes, site in items:
             vb = _body_words(variant)
-            rc = _row_body_cover(notes, ctx)
+            rc = _row_body_cover(notes, ctx, site, page_body)
             if vb:
                 covered |= vb if rc is None else (vb & rc)
             else:
                 covered |= need if rc is None else rc
         return need <= covered
+
+    def fit_bodies_plausible(self, T, cat, c: Klass, need) -> bool:
+        """False when the product page's fitment trims for T name bodies or
+        door counts (gmpartsgiant '4 DOOR', '2 DOOR, CONVERTIBLE') that leave a
+        body of `need` out; True when they carry no body information. Used
+        only to keep a clause restricting (never to add a body)."""
+        words, doors, info = set(), set(), False
+        for (cc, r, f, t) in getattr(self, "t_rows", {}).get((T, cat), []):
+            if cc is not c or f.layout != "trim":
+                continue
+            for tr in f.trims or []:
+                w = _body_words(tr)
+                d = {int(x) for x in _DOOR_RE.findall(tr)}
+                words |= w
+                doors |= d
+                info = info or bool(w or d)
+        if not info:
+            return True
+        for b in need:
+            if b in words:
+                continue
+            ok = _BODY_DOORS.get(b)
+            if ok is not None and not (doors & ok):
+                return False
+        return True
 
     def own_page(self, T, cat, c: Klass):
         """(on_page, notes, position sources, pointers) for class c on T."""
@@ -1444,13 +1485,36 @@ class Curation:
             text = policy.GROUP_NOTES.get((self.ns, cat, sorted(c.pns)[0]), text)
             slot = "+".join(sorted(slots)) or "C"
             cab = self._cab_only(c, cat, Ts)
+            # §5.16 limits per vehicle-year: rear-door crew cab, drive, engine,
+            # transmission, fuel (2026-11-18); ambiguous fuel leaves T out
+            label_by_T, fuel_drop = {}, False
+            for T in Ts:
+                labs = []
+                rc = self.rear_cab_of(c, cat, T, slots)
+                if rc and f"{T[1]}: crew cab only" not in cab:
+                    labs.append(rc)
+                if drive_by_T.get(T):
+                    labs.append(_drive_label(drive_by_T[T]))
+                fu = self.fuel_of(c, cat, T)
+                if fu == DRIVE_AMBIGUOUS:
+                    fuel_drop = True
+                    break
+                eng, tr = self.engine_trans_of(c, cat, T, gas_only=(fu == "gas"))
+                labs += [x for x in (eng, tr) if x]
+                if fu:
+                    labs.append(fu)
+                label_by_T[T] = ", ".join(labs)
+            if fuel_drop:
+                self.refuse("held_fuel_conflict", cat=cat, pn=sorted(c.pns)[0],
+                            evidence=[r.pointer for r in c.records], detail="hybrid feed name, gas page only")
+                continue
             if cab:
                 text = f"{text}; {cab}"
                 if not _likely_note_fits(brand, sorted(c.pns)[0], text, _pack_text(cat, c.packaging, slot)):
                     self.refuse("held_cab_qualifier", cat=cat, pn=sorted(c.pns)[0],
                                 evidence=[r.pointer for r in c.records], detail=cab)
                     continue
-            drv = self._drive_note(drive_by_T)
+            drv = self._limit_note(label_by_T)
             if drv:
                 text = f"{text}; {drv}"
                 self.likely_drive_noted[cat] += 1
@@ -1759,14 +1823,19 @@ class Curation:
         return d
 
     def _drive_note(self, drive_by_T) -> str:
-        """'<model>: 4WD only' per model whose vehicle-years are limited to one
-        drive family ('<model> 2005-2008: 4WD only' when only some are); one
-        '4WD only' when every vehicle-year of the group has the same limit."""
+        """The drive part of the §5.16 limit note (see _limit_note)."""
+        return self._limit_note({T: (_drive_label(d) if d else "") for T, d in drive_by_T.items()})
+
+    def _limit_note(self, label_by_T) -> str:
+        """'<model>: <label> only' per model whose vehicle-years carry a limit
+        label ('4WD', 'crew cab, 4WD, 2.4L'); '<model> 2005-2008: ... only'
+        when only some years do or the years differ; one '<label> only' when
+        every vehicle-year of the group has the same label. '' for none."""
         by = defaultdict(dict)
-        for T, d in drive_by_T.items():
-            by[(T[0], T[1])][T[2]] = _drive_label(d) if d else ""
+        for T, lab in label_by_T.items():
+            by[(T[0], T[1])][T[2]] = lab or ""
         labels = {lab for ys in by.values() for lab in ys.values()}
-        if labels == {""}:
+        if labels <= {""}:
             return ""
         if len(labels) == 1:
             return f"{next(iter(labels))} only"
@@ -1784,10 +1853,178 @@ class Curation:
                     run[-1][1] = y
                 else:
                     run.append([y, y, ys[y]])
-            for a, b, lab in run:
+            for a0, b0, lab in run:
                 if lab:
-                    parts.append(f"{md} {a}{'-' + str(b) if b != a else ''}: {lab} only")
+                    parts.append(f"{md} {a0}{'-' + str(b0) if b0 != a0 else ''}: {lab} only")
         return "; ".join(parts)
+
+    # ------------------------------ §5.16 engine / transmission / fuel / rear cab (2026-11-18)
+    def _own_rows(self, c, cat, T):
+        """[(notes, site, page variant, list_url)] of T's own-page rows listing class c."""
+        if self.t_list_rows.get((T, cat)):
+            return [(lr.notes, lr.site, lr.variant, lr.list_url) for lr in self.t_list_rows[(T, cat)]
+                    if policy.pn_key(self.ns, lr.pn) == c.key and lr.matched and not self.note_excludes(lr.notes, T)]
+        return [(r.note_texts, r.site, _catalog_of(r.list_url), r.list_url) for r in self.t_seed_records.get((T, cat), [])
+                if r.key == c.key and not self.note_excludes(r.note_texts, T)]
+
+    def _t_trans_seen(self, T):
+        """Transmission classes any own-page row of T (all categories) names."""
+        cache = self.__dict__.setdefault("_trans_seen", {})
+        if T not in cache:
+            seen = set()
+            for (t, _cat), rows in self.t_list_rows.items():
+                if t == T:
+                    for lr in rows:
+                        for n in lr.notes:
+                            m = _FVO_BODY_RE.match(n or "")
+                            if m:
+                                seen |= _trans_terms(m.group(1))
+            for (t, _cat), recs in self.t_seed_records.items():
+                if t == T:
+                    for r in recs:
+                        for n in r.note_texts:
+                            m = _FVO_BODY_RE.match(n or "")
+                            if m:
+                                seen |= _trans_terms(m.group(1))
+            cache[T] = frozenset(seen)
+        return cache[T]
+
+    def _engine_limit(self, c, cat, T, gas_only=False):
+        """frozenset of litres the option column limits class c to on T, or
+        None: every configuration of every own row names an engine code; or
+        (sibling rule) another number in the same slot of T's cell is listed
+        for an engine our rows never name (2014 Q70: 24820-6AH1B 'SEDAN.
+        VQ37VHR. PREMIUM + SEDAN. (BASE+ SPORTPRE)' while the VK56VD clusters
+        are 24820-6AH1C/-6AH1D), so that engine is not ours."""
+        rows = self._own_rows(c, cat, T)
+        if not rows:
+            return None
+        es = [_row_engine_trans(n, st)[0] for n, st, _v, _u in rows]
+        if all(e is not None for e in es):
+            return frozenset().union(*es)
+        U = self._t_engines(T, cat, gas_only)
+        if not U:
+            return None
+        named = set().union(*[_row_engine_names(n, st) for n, st, _v, _u in rows])
+        members = (self.cells_info.get((T, cat)) or {}).get("members") or {}
+        me = members.get(c.key)
+        if not me:
+            return None
+        mine = set(me["slot"].slots)
+        excluded = set()
+        for k, m in members.items():
+            if k == c.key or not (set(m["slot"].slots) & mine) or self.comparable(cat, c.key, k):
+                continue
+            sib = self.classes.get((k, cat))
+            if sib is None:
+                continue
+            srows = self._own_rows(sib, cat, T)
+            se = [_row_engine_trans(n, st)[0] for n, st, _v, _u in srows]
+            if srows and all(e is not None for e in se):
+                excluded |= set().union(*se) - named
+        allowed = U - excluded
+        if excluded and allowed and allowed < U:
+            return frozenset(allowed)
+        return None
+
+    def _t_engines(self, T, cat, gas_only=False):
+        """The displacements T comes in: the year page's engine list when it
+        has one (all parsed), else every engine a row on T's own pages in cat
+        names (2014 Q70 gauge clusters: VQ37VHR and VK56VD rows); None when
+        neither says. Hybrid keys are left out for a gas-only number."""
+        keys = [k for k in self.engineu.get(T, ()) if not (gas_only and len(k) > 2 and k[2] == "hybrid")]
+        if keys and self.engineu_src.get(T) == "year_page":
+            if any(not isinstance(k[0], int) for k in keys):
+                return None
+            return {round(k[1], 1) for k in keys}
+        page = set()
+        for lr in self.t_list_rows.get((T, cat), []):
+            page |= _row_engine_names(lr.notes, lr.site)
+        for r in self.t_seed_records.get((T, cat), []):
+            page |= _row_engine_names(r.note_texts, r.site)
+        return page or None
+
+    def engine_trans_of(self, c, cat, T, gas_only=False):
+        """(engine label, transmission label) the option column limits class c
+        to on T, '' when none: _engine_limit names fewer displacements than
+        T's engine list (year page); or every configuration names a
+        transmission of one class and T's own pages show the other class.
+        Config-tuple option columns only (policy.DRIVE_CONFIG_FVO_SITES)."""
+        rows = self._own_rows(c, cat, T)
+        if not rows or not policy.LIKELY_ENGINE_TRANS_RULE:
+            return "", ""
+        xs = [_row_engine_trans(n, st)[1] for n, st, _v, _u in rows]
+        E = self._engine_limit(c, cat, T, gas_only)
+        eng = ""
+        if E:
+            U = self._t_engines(T, cat, gas_only)
+            disp = _INFINITI_DISP.get(re.sub(r"\s+", "", str(T[1])).upper()) if T[0] == "Infiniti" else None
+            if disp and round(disp / 10, 1) in E:
+                eng = ""
+            elif U and U <= E:
+                eng = ""
+            else:
+                eng = "/".join(f"{x:.1f}L" for x in sorted(E))
+        tr = ""
+        if xs and all(x for x in xs) and len(set(xs)) == 1:
+            x = xs[0]
+            other = {"manual": "auto", "auto": "manual"}[x]
+            if other in self._t_trans_seen(T):
+                tr = "manual" if x == "manual" else "automatic"
+        return eng, tr
+
+    def fuel_of(self, c, cat, T):
+        """'gas' / 'hybrid' when T's catalog offers a hybrid page (year page
+        variants: infinitipartsdeal 2014 Q70 'gas' + 'hybrid') and class c sits
+        on one of the two only; '' for none; DRIVE_AMBIGUOUS when the feed name
+        says hybrid and the number is on the gas page only."""
+        if not policy.LIKELY_FUEL_RULE:
+            return ""
+        vs = {v.lower() for ym in self.t_years.get(T, []) for v in [ym.variant] + list(ym.variants or []) if v}
+        if not any("hybrid" in v for v in vs):
+            return ""
+        rows = self._own_rows(c, cat, T)
+        if not rows:
+            return ""
+        fuels = {"hybrid" if re.search(r"hybrid", (v or "") + " " + (u or ""), re.I) else "gas"
+                 for _n, _s, v, u in rows}
+        named_h = bool(re.search(r"hybrid", T[1], re.I))
+        if fuels == {"gas"}:
+            return DRIVE_AMBIGUOUS if named_h else "gas"
+        if fuels == {"hybrid"}:
+            return "" if named_h else "hybrid"
+        return ""
+
+    def rear_cab_of(self, c, cat, T, slots) -> str:
+        """'crew cab' for a rear-door window part on T when T's own page for
+        it is split by cab code (nissanpartsdeal Titan/Frontier rear-door
+        glass 'KC. S' beside 'CC') and the part's own row names no cab: the
+        King Cab rear access door has its own glass and no such part. '' else."""
+        if self.ns != "nissan" or cat not in ("window-regulator", "window-switch") or not slots \
+                or not set(slots) <= {"RL", "RR"}:
+            return ""
+        rows = self._own_rows(c, cat, T)
+        if not rows or any(_fvo_cab_codes(n) for n, _s, _v, _u in rows):
+            return ""
+        return "crew cab" if {"KC", "CC"} <= self._model_rear_cabs(T[0], T[1], cat) else ""
+
+    def _model_rear_cabs(self, mk, md, cat):
+        """Cab codes on the model's own rear-door pages in cat, any year
+        (nissanpartsdeal '.../rear_door_window_regulator.html': glass
+        82300-7S200 'KC. S' beside 82300-8S500 'CC'). A year without its own
+        manifest (2004 Titan, seed page only) takes the model's structure."""
+        cache = self.__dict__.setdefault("_rear_cabs", {})
+        key = (mk, md, cat)
+        if key not in cache:
+            codes = set()
+            for (t, cc), rows in self.t_list_rows.items():
+                if (t[0], t[1]) != (mk, md) or cc != cat:
+                    continue
+                for lr in rows:
+                    if re.search(r"rear[_-]door", lr.list_url or "", re.I):
+                        codes |= _fvo_cab_codes(lr.notes) or set()
+            cache[key] = frozenset(codes)
+        return cache[key]
 
     # nissanpartsdeal option-column cab codes (interchange 2026-11-18): the
     # Frontier and Titan pages code each row "KC" (King Cab) or "CC" (Crew
@@ -2568,13 +2805,27 @@ def _split_top_plus(text: str, sep: str) -> list:
     return [x for x in (y.strip() for y in out) if x]
 
 
-def _row_body_cover(notes, ctx) -> set | None:
+def _row_body_cover(notes, ctx, site: str = "", page_body: bool = True) -> set | None:
     """None when a row's notes cannot restrict the body (no body word, no
     option-column code, no unparsed clause other than a production date):
     the row covers every body of its page. Otherwise the bodies its notes
-    name in words (possibly none)."""
+    name, in words or (2026-11-18) in a fully decoded option-column body code
+    (_fvo_bodies: subarupartsdeal S./W./OBK, gmpartsgiant body styles 37/69/
+    67, nissanpartsdeal C./4S.), possibly none. PartsGiant quantity, callout
+    and colour fields restrict nothing. With page_body False (no row on T's
+    pages in the category names a body or carries a body code), an unparsed
+    clause without a body-like word ('Fit Note: Power Front Windows One
+    Touch Up/Do') restricts nothing either: the page does not split by body."""
     named, unsafe = set(), False
     for n in notes or []:
+        if _NEUTRAL_FIELD_RE.match(n or ""):
+            continue
+        fm = _FVO_BODY_RE.match(n or "")
+        if fm:
+            dec = _fvo_bodies(fm.group(1), site)
+            named |= dec if dec else _body_words(fm.group(1))
+            unsafe = True
+            continue
         for seg in N.split_note(n):
             for cl in seg:
                 c = N.classify_clause(cl, ctx)
@@ -2582,8 +2833,110 @@ def _row_body_cover(notes, ctx) -> set | None:
                     named |= _body_words(cl)
                     unsafe = True
                 elif c.cls == "UNKNOWN" and not _PROD_CLAUSE_RE.match(cl):
-                    unsafe = True
+                    if page_body or _BODYISH_RE.search(cl):
+                        unsafe = True
     return named if unsafe else None
+
+
+# fitment-trim door counts ("4 DOOR", "LS 5 DOOR HATCHBACK", "2DR"); a body
+# with a door set here is plausible only when the trims name one of them
+_DOOR_RE = re.compile(r"(?<![A-Za-z0-9])([2-5])\s*-?\s*(?:DOORS?|DR)(?![A-Za-z0-9])", re.I)
+_BODY_DOORS = {"coupe": {2, 3}, "convertible": {2}, "sedan": {4}}
+
+
+# PartsGiant row fields that never name a body (Nissan/GM "Require Quantity:
+# 02", "Package Quantity: 1", Ford "Callout Name: 14553", "Interior Color:")
+_NEUTRAL_FIELD_RE = re.compile(r"^\s*(?:require\s+quantity|package\s+quantity|callout\s+name|interior\s+colou?r|"
+                               r"exterior\s+colou?r)\s*:", re.I)
+# words that may name a body or a cab in free text; an unparsed clause holding
+# one always restricts
+_BODYISH_RE = re.compile(r"(?<![A-Za-z0-9])(?:\d\s?-?doors?|[2-5]\s?-?dr|sedan|saloon|coupe|koup|wagon|hatch\w*|"
+                         r"liftback|notchback|fastback|convertible|cabrio\w*|roadster|van|pickup|pick-up|cab|crew|"
+                         r"king|access|suv|utility|estate|avant|sportback|body)(?![A-Za-z0-9])", re.I)
+# gmpartsgiant body-style codes (the 2-digit group after the series:
+# "AP(37)", "J(67)", "F(87)"), passenger-car styles only; truck cab and box
+# codes (03/53/43/36/06...) stay undecoded and keep restricting
+_GM_BODY_STYLE = {"27": {"coupe"}, "37": {"coupe"}, "47": {"coupe"}, "57": {"coupe"},
+                  "87": {"coupe", "hatchback"}, "19": {"sedan"}, "69": {"sedan"}, "67": {"convertible"},
+                  "35": {"wagon"}, "48": {"hatchback"}, "68": {"hatchback"}}
+# subarupartsdeal alternative heads ("S.(25GT+25GTLTD) +W.(...) +WOBK.25GTLTD")
+_SUBARU_BODY_HEADS = {"S": {"sedan"}, "W": {"wagon"}, "SW": {"wagon"}, "TW": {"wagon"}, "WOBK": {"wagon"},
+                      "SOBK": {"sedan"}, "P": {"pickup"}}
+
+
+def _subaru_head_bodies(h: str):
+    h = h.strip().lstrip("*")
+    if h in _SUBARU_BODY_HEADS:
+        return _SUBARU_BODY_HEADS[h]
+    if re.fullmatch(r"OBK\w*", h):
+        return {"wagon"}          # Outback wagon (OBK, OBK6, OBKLTD...)
+    if re.fullmatch(r"SUS\w*", h):
+        return {"sedan"}          # Outback sport-utility sedan
+    if re.fullmatch(r"BAJA\w*", h):
+        return {"pickup"}
+    return None
+
+
+def _fvo_bodies(body: str, site: str):
+    """The bodies an option column names when EVERY alternative carries a
+    body code this table knows; None otherwise (it then restricts like any
+    unparsed option column)."""
+    out = set()
+    if site == "www.subarupartsdeal.com":
+        alts = _split_top(body)
+        if not alts:
+            return None
+        for alt in alts:
+            head = alt.strip().lstrip("*").partition(".")[0]
+            heads = re.findall(r"[A-Z0-9#]+", head) if head.startswith("(") else [head]
+            for h in heads:
+                b = _subaru_head_bodies(h)
+                if not b:
+                    return None
+                out |= b
+        return out or None
+    if site == "www.gmpartsgiant.com":
+        alts = _split_top_plus(body, ",")
+        if not alts:
+            return None
+        for alt in alts:
+            g = re.match(r"^\s*[A-Z]{1,2}\d*\s*\(\s*(\d{2}(?:\s*[-,]\s*\d{2})*)\s*\)", alt)
+            if not g:
+                return None
+            for code in re.split(r"\s*[-,]\s*", g.group(1)):
+                b = _GM_BODY_STYLE.get(code)
+                if not b:
+                    return None
+                out |= b
+        return out or None
+    if site in ("www.nissanpartsdeal.com", "www.infinitipartsdeal.com"):
+        alts = _split_top_plus(body, ",")
+        if not alts:
+            return None
+        for alt in alts:
+            for part in _split_top_plus(alt, "+"):
+                part = _NISSAN_PREFIX_RE.sub("", part.strip().lstrip("*").lstrip("(").strip())
+                tok = re.match(r"^([A-Za-z0-9]+)(?=[.\s)]|$)", part)
+                b = _NISSAN_BODY_CODES.get(tok.group(1).upper()) if tok else None
+                if not b:
+                    return None
+                out.add(b)
+        return out or None
+    return None
+
+
+def _row_names_body(notes, site: str) -> bool:
+    """True when a row's notes name a body (word or decoded body code) or
+    carry a body-like word: the page splits by body."""
+    for n in notes or []:
+        if _NEUTRAL_FIELD_RE.match(n or ""):
+            continue
+        fm = _FVO_BODY_RE.match(n or "")
+        if fm and _fvo_bodies(fm.group(1), site):
+            return True
+        if _body_words(n) or _BODYISH_RE.search(n or ""):
+            return True
+    return False
 
 
 # ------------------------------------------------ §5.16 drive rule (2026-11-18)
@@ -2818,6 +3171,62 @@ def _gm_series_drive(body: str, page_letters):
     if page_letters and row < page_letters:
         return DRIVE_AMBIGUOUS
     return None
+
+
+# engine codes in config-tuple option columns: Nissan/Infiniti families
+# (VQ37VHR 3.7L, KA24DE 2.4L, VG33E 3.3L, QR25DE 2.5L, VK56DE 5.6L), Subaru
+# EJ/EZ/FB/FA, and Hyundai/Kia litres ("2.0L Theta", "[1.6L - GAMMA]")
+_ENGINE_CODE_RE = re.compile(r"(?<![A-Z0-9])(?:VQ|VK|VG|VH|QR|KA|SR|MR|HR|VR|GA|KR|CD|YD|RB|CA|EJ|EZ|FB|FA)"
+                             r"(\d{2})(?:[A-Z#]{0,4}\d?)?(?![A-Z0-9])")
+_LITRE_RE = re.compile(r"(?<![0-9.])(\d)\.(\d)\s*L(?![A-Za-z])", re.I)
+_MANUAL_RE = re.compile(r"(?<![A-Za-z0-9])(?:\d?MT|M/T)(?![A-Za-z0-9])|\[\s*Manual\b", re.I)
+_AUTO_RE = re.compile(r"(?<![A-Za-z0-9])(?:\d?AT|A/T|CVT|E-?CVT)(?![A-Za-z0-9])|\[\s*Auto\b", re.I)
+
+
+def _engine_terms(text: str) -> set:
+    t = str(text or "")
+    out = {int(d) / 10 for d in _ENGINE_CODE_RE.findall(t.upper())}
+    out |= {int(a) + int(b) / 10 for a, b in _LITRE_RE.findall(t)}
+    return {round(x, 1) for x in out}
+
+
+def _trans_terms(text: str) -> set:
+    t = str(text or "")
+    return ({"manual"} if _MANUAL_RE.search(t) else set()) | ({"auto"} if _AUTO_RE.search(t) else set())
+
+
+def _row_engine_names(notes, site: str) -> set:
+    """Every engine (litres) a row's option column names anywhere."""
+    if site not in policy.DRIVE_CONFIG_FVO_SITES:
+        return set()
+    out = set()
+    for n in notes or []:
+        m = _FVO_BODY_RE.match(n or "")
+        if m:
+            out |= _engine_terms(m.group(1))
+    return out
+
+
+def _row_engine_trans(notes, site: str):
+    """(engines, trans) one own-page row's option column limits it to:
+    engines = frozenset of litres when every configuration names an engine,
+    trans = 'manual' / 'auto' when every configuration names one class; None
+    for no limit. Config-tuple option columns only."""
+    if site not in policy.DRIVE_CONFIG_FVO_SITES:
+        return None, None
+    for n in notes or []:
+        m = _FVO_BODY_RE.match(n or "")
+        if not m:
+            continue
+        parts = [pt for alt in _split_top_plus(m.group(1), ",") for pt in _split_top_plus(alt, "+")]
+        if not parts:
+            return None, None
+        es = [_engine_terms(pt) for pt in parts]
+        xs = [_trans_terms(pt) for pt in parts]
+        eng = frozenset().union(*es) if all(es) else None
+        tr = next(iter(xs[0])) if all(len(x) == 1 for x in xs) and len({next(iter(x)) for x in xs}) == 1 else None
+        return eng, tr
+    return None, None
 
 
 def _fit_drive(f) -> object:

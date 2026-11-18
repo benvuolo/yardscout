@@ -113,6 +113,55 @@ DRIVE_CONFIG_FVO_SITES = frozenset({"www.nissanpartsdeal.com", "www.infinitipart
 # own pages show (all categories).
 GM_SERIES_DRIVE = {frozenset("CK"): {"C": "2wd", "K": "4wd"}, frozenset("ST"): {"S": "2wd", "T": "4wd"},
                    frozenset("LM"): {"M": "rwd", "L": "awd"}, frozenset("RV"): {"R": "fwd", "V": "awd"}}
+# §5.16 engine / transmission rule (2026-11-18, flaw 3 of the independent
+# nissan check: VQ37VHR-only Q70 clusters, KA24DE-only 2004 Frontier/Xterra
+# mirrors, a 6MT-only PRO-4X cluster, all with only an "option" note). On the
+# config-tuple option columns (DRIVE_CONFIG_FVO_SITES) a row whose every
+# configuration names an engine code limits the number to those engines when
+# T's year-page engine list has another displacement ("Q70: 3.7L only"); one
+# whose every configuration names one transmission class limits it when T's
+# own pages show the other class ("Frontier: manual only"). Only narrows.
+LIKELY_ENGINE_TRANS_RULE = True
+# §5.16 fuel rule (2026-11-18, flaw 4: q70-gas / qx60-gas pages). When T's year
+# page offers a hybrid catalog beside the gas one (infinitipartsdeal 2014 Q70
+# variants gas + hybrid; only the gas pages were read), a number read on the
+# gas pages only is "gas only"; a feed name that says Hybrid with gas-page
+# evidence only refuses the group.
+LIKELY_FUEL_RULE = True
+# §5.16 body-variant rule, fixed bodies (2026-11-18, flaw 2: the B14 200SX is a
+# coupe, but the lots decode 1998 200SX coupes "Sedan/Saloon", hold one decoded
+# 1995 car and none for 1999, so sedan "4S." rows on the shared Sentra/200SX
+# page were credited to it). For a (make, model) listed here the bodies of a
+# model-year are this table's (manufacturer US line-up, every body listed) plus
+# the body-named catalog pages; lot vPIC bodies are not read for it. Every
+# other model keeps lot vPIC + catalog pages.
+MODEL_BODY_TABLE = {
+    ("Nissan", "200SX"): ((1995, 1999, ("coupe",)),),
+    ("Nissan", "NX"): ((1991, 1993, ("coupe",)),),
+    ("Nissan", "240SX"): ((1989, 1994, ("coupe", "hatchback", "convertible")), (1995, 1998, ("coupe",))),
+    ("Nissan", "300ZX"): ((1984, 1996, ("coupe", "hatchback", "convertible")),),
+    ("Nissan", "350Z"): ((2003, 2009, ("coupe", "convertible")),),
+    ("Nissan", "370Z"): ((2009, 2020, ("coupe", "convertible")),),
+    ("Nissan", "Sentra"): ((1991, 1994, ("sedan", "coupe")), (1995, 2024, ("sedan",))),
+    ("Nissan", "Altima"): ((1993, 2007, ("sedan",)), (2008, 2013, ("sedan", "coupe")), (2014, 2024, ("sedan",))),
+    ("Nissan", "Versa"): ((2007, 2012, ("sedan", "hatchback")), (2013, 2019, ("sedan", "hatchback")),
+                          (2020, 2024, ("sedan",))),
+    ("Nissan", "Murano"): ((2003, 2010, ("wagon",)), (2011, 2014, ("wagon", "convertible")), (2015, 2024, ("wagon",))),
+    ("Infiniti", "G35"): ((2003, 2007, ("sedan", "coupe")), (2008, 2008, ("sedan",))),
+    ("Infiniti", "G37"): ((2008, 2008, ("coupe",)), (2009, 2013, ("sedan", "coupe", "convertible"))),
+    ("Infiniti", "G25"): ((2011, 2012, ("sedan",)),),
+    ("Infiniti", "Q40"): ((2015, 2015, ("sedan",)),),
+    ("Infiniti", "Q60"): ((2014, 2015, ("coupe", "convertible")), (2017, 2022, ("coupe",))),
+}
+
+
+def model_body_table(make: str, model: str, year: int):
+    """The fixed bodies of MODEL_BODY_TABLE for a feed model-year, or None
+    when the model is not listed (or the year is outside its spans)."""
+    for a, b, bodies in MODEL_BODY_TABLE.get((make, model), ()):
+        if a <= year <= b:
+            return frozenset(bodies)
+    return None
 # §5.16 exterior hold (owner decision 2026-11-06, ops/hub.md): in exterior
 # styling categories a Likely group whose apps span more than one BASE model
 # is held (refusal held_exterior_cross_model, listed in
@@ -162,6 +211,15 @@ GROUP_HOLDS: dict = {
         "2026-11-10 Lexus chassis audit L06: LH AFS lamp coded UZS190/GRS191/GRS196/URS190 "
         "(2007+ GS 350/430/460); the 2006 GS 300 (GRS190/195) is not named and has no own-page row; "
         "Partslink splits 2006 GS lamps (LX2502185) from 2007-11 (LX2518164)"),
+    # 2026-11-18 independent removals check (groups/_report/removals_verify_2026-11-18.json):
+    # removed by the body rule, but wrong for another reason, so the fixed body rules
+    # must not bring them back
+    ("ford", "climate-control", "F8XZ-19980-AA"): (
+        "2026-11-18 removals check R01: a moisture purge module (use with harness kit F78Z-14K095-BA) "
+        "listed for 11 Ford/Lincoln/Mercury lines 1994-2003, a service add-on, not either car's A/C control head"),
+    ("subaru", "climate-control", "72311AE06B"): (
+        "2026-11-18 removals check R20: the 2001 Outback H6 (W.EZ30D) uses 72311AE11B and FIT lists the "
+        "Outback 2.5L H4 only; L.L.Bean/VDC Outbacks cannot carry it"),
 }
 
 

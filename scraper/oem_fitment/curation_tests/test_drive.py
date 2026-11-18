@@ -119,6 +119,7 @@ check("union: an unrestricted row wins; an ambiguous row (none unrestricted) is 
 
 class _Cur:
     _drive_note = C.Curation._drive_note
+    _limit_note = C.Curation._limit_note
 
 
 cur = _Cur()

@@ -177103,34 +177103,6 @@
    ],
    "reman": false
   },
-  "gm:15844876": {
-   "cat": "window-regulator",
-   "comp": "motor",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L137"
-   ],
-   "names": [
-    "MOTOR, REAR SIDE DOOR WINDOW REGULATOR(PART OF 2)(CONNECT USE 88988609)"
-   ],
-   "pns": [
-    "15844876"
-   ],
-   "reman": false
-  },
-  "gm:15844877": {
-   "cat": "window-regulator",
-   "comp": "motor",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L138"
-   ],
-   "names": [
-    "MOTOR, REAR SIDE DOOR WINDOW REGULATOR(PART OF 2)"
-   ],
-   "pns": [
-    "15844877"
-   ],
-   "reman": false
-  },
   "gm:15858832": {
    "cat": "climate-control",
    "comp": "assy",
@@ -177170,6 +177142,20 @@
    ],
    "pns": [
     "15871125"
+   ],
+   "reman": false
+  },
+  "gm:15890412": {
+   "cat": "climate-control",
+   "comp": "assy",
+   "evidence": [
+    "www.gmpartsgiant.com:records:L549"
+   ],
+   "names": [
+    "CONTROL, Heater Control, CONTROL,HEATER(INCLUDES 2)(EBONY)"
+   ],
+   "pns": [
+    "15890412"
    ],
    "reman": false
   },
@@ -177985,20 +177971,6 @@
    ],
    "reman": false
   },
-  "gm:20862099": {
-   "cat": "side-mirrors",
-   "comp": null,
-   "evidence": [
-    "www.gmpartsgiant.com:records:L116"
-   ],
-   "names": [
-    "MIRROR, OUTSIDE REAR VIEW(INCLUDES 1-4,6,9)(MOLDED IN BLACK)"
-   ],
-   "pns": [
-    "20862099"
-   ],
-   "reman": false
-  },
   "gm:20912823": {
    "cat": "window-switch",
    "comp": null,
@@ -178066,34 +178038,6 @@
    ],
    "pns": [
     "20945139"
-   ],
-   "reman": false
-  },
-  "gm:20945140": {
-   "cat": "window-regulator",
-   "comp": "assy",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L135"
-   ],
-   "names": [
-    "REGULATOR, REAR SIDE DOOR WINDOW(INCLUDES 3,4,13-15)(W/MOTOR)"
-   ],
-   "pns": [
-    "20945140"
-   ],
-   "reman": false
-  },
-  "gm:20945141": {
-   "cat": "window-regulator",
-   "comp": "assy",
-   "evidence": [
-    "www.gmpartsgiant.com:records:L136"
-   ],
-   "names": [
-    "REGULATOR, REAR SIDE DOOR WINDOW(INCLUDES 3,4,13-15)(W/MOTOR)"
-   ],
-   "pns": [
-    "20945141"
    ],
    "reman": false
   },
@@ -179004,6 +178948,20 @@
    ],
    "pns": [
     "84512890"
+   ],
+   "reman": false
+  },
+  "gm:88960088": {
+   "cat": "window-regulator",
+   "comp": "motor",
+   "evidence": [
+    "www.gmpartsgiant.com:records:L2690"
+   ],
+   "names": [
+    "MOTOR, Front Door Window Regulator, MOTOR,FRONT SIDE DOOR WINDOW REGULATOR(TOGETHER WITH RIVET 10157547)(16.263)"
+   ],
+   "pns": [
+    "88960088"
    ],
    "reman": false
   },
@@ -202716,72 +202674,6 @@
   {
    "apps": [
     [
-     "Cadillac",
-     "Escalade",
-     2007,
-     2007
-    ],
-    [
-     "Chevrolet",
-     "Silverado 1500",
-     2008,
-     2008
-    ],
-    [
-     "Chevrolet",
-     "Silverado 1500",
-     2012,
-     2012
-    ]
-   ],
-   "cars": 390,
-   "cat": "window-regulator",
-   "id": "oem:gm:window-regulator:RL:c9a82b644c",
-   "kind": "body",
-   "note": "GM catalog lists #15844876 for both — window motor only; fits some configurations; Silverado 1500: extended cab only; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T01:29:13Z",
-   "pn": [
-    "15844876"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Cadillac",
-     "Escalade",
-     2007,
-     2007
-    ],
-    [
-     "Chevrolet",
-     "Silverado 1500",
-     2008,
-     2008
-    ],
-    [
-     "Chevrolet",
-     "Silverado 1500",
-     2012,
-     2012
-    ]
-   ],
-   "cars": 390,
-   "cat": "window-regulator",
-   "id": "oem:gm:window-regulator:RR:5bce78e25c",
-   "kind": "body",
-   "note": "GM catalog lists #15844877 for both — window motor only; fits some configurations; Silverado 1500: extended cab only; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T01:29:18Z",
-   "pn": [
-    "15844877"
-   ],
-   "reason": "conditional",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
      "Chevrolet",
      "Colorado",
      2005,
@@ -202858,6 +202750,33 @@
     "15871125"
    ],
    "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
+     "Chevrolet",
+     "Cobalt",
+     2007,
+     2007
+    ],
+    [
+     "Pontiac",
+     "G5",
+     2007,
+     2007
+    ]
+   ],
+   "cars": 408,
+   "cat": "climate-control",
+   "id": "oem:gm:climate-control:C:91a2833cb4",
+   "kind": "body",
+   "note": "GM catalog lists #15890412 for both — option: fits some option packages; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T03:18:23Z",
+   "pn": [
+    "15890412"
+   ],
+   "reason": "option",
    "tier": "likely"
   },
   {
@@ -204322,7 +204241,7 @@
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:dbb7fb8e26",
    "kind": "body",
-   "note": "GM catalog lists #20809948 for both — option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #20809948 for both — option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:27:10Z",
    "pn": [
     "20809948"
@@ -204355,7 +204274,7 @@
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:R:ffdc0241fa",
    "kind": "body",
-   "note": "GM catalog lists #20809968 for both — option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #20809968 for both — option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:27:14Z",
    "pn": [
     "20809968"
@@ -204415,7 +204334,7 @@
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:d5841134b0",
    "kind": "body",
-   "note": "GM catalog lists #20835552 for both — option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #20835552 for both — option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:30:05Z",
    "pn": [
     "20835552"
@@ -204448,7 +204367,7 @@
    "cat": "window-switch",
    "id": "oem:gm:window-switch:DM:7c40f97f24",
    "kind": "body",
-   "note": "GM catalog lists #20835553 for both — option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #20835553 for both — option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:30:02Z",
    "pn": [
     "20835553"
@@ -204508,7 +204427,7 @@
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:3e6d74f43d",
    "kind": "body",
-   "note": "GM catalog lists #20843116 for both — option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #20843116 for both — option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:27:30Z",
    "pn": [
     "20843116"
@@ -204541,7 +204460,7 @@
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:f7a9546875",
    "kind": "body",
-   "note": "GM catalog lists #20843177 for both — option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #20843177 for both — option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:27:02Z",
    "pn": [
     "20843177"
@@ -204574,43 +204493,10 @@
    "cat": "side-mirrors",
    "id": "oem:gm:side-mirrors:L:0e9a1c7070",
    "kind": "body",
-   "note": "GM catalog lists #20862098 for both — option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #20862098 for both — option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:27:38Z",
    "pn": [
     "20862098"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chevrolet",
-     "Avalanche",
-     2007,
-     2007
-    ],
-    [
-     "Chevrolet",
-     "Silverado 1500",
-     2008,
-     2008
-    ],
-    [
-     "Chevrolet",
-     "Silverado 1500",
-     2012,
-     2012
-    ]
-   ],
-   "cars": 417,
-   "cat": "side-mirrors",
-   "id": "oem:gm:side-mirrors:R:fc6ef1542f",
-   "kind": "body",
-   "note": "GM catalog lists #20862099 for both — power-heated mirror; towing and standard mirrors differ — match yours; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T01:27:33Z",
-   "pn": [
-    "20862099"
    ],
    "reason": "option",
    "tier": "likely"
@@ -204667,7 +204553,7 @@
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:8ed850ce7c",
    "kind": "body",
-   "note": "GM catalog lists #20914715 for both — regulator without motor; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #20914715 for both — regulator without motor; option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:28:37Z",
    "pn": [
     "20914715"
@@ -204700,7 +204586,7 @@
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:270e9141c3",
    "kind": "body",
-   "note": "GM catalog lists #20914716 for both — regulator without motor; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #20914716 for both — regulator without motor; option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:28:42Z",
    "pn": [
     "20914716"
@@ -204739,7 +204625,7 @@
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FL:95a5e67317",
    "kind": "body",
-   "note": "GM catalog lists #20945138 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #20945138 for both — regulator with motor; option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:21:09Z",
    "pn": [
     "20945138"
@@ -204778,76 +204664,10 @@
    "cat": "window-regulator",
    "id": "oem:gm:window-regulator:FR:e27cc3ca48",
    "kind": "body",
-   "note": "GM catalog lists #20945139 for both — regulator with motor; option: fits some option packages; verify the number on the part",
+   "note": "GM catalog lists #20945139 for both — regulator with motor; option: fits some option packages; Silverado 1500 2012: gas only; verify the number on the part",
    "oldest_retrieved": "2026-11-05T01:21:13Z",
    "pn": [
     "20945139"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chevrolet",
-     "Avalanche",
-     2007,
-     2007
-    ],
-    [
-     "Chevrolet",
-     "Silverado 1500",
-     2008,
-     2008
-    ],
-    [
-     "Chevrolet",
-     "Silverado 1500",
-     2012,
-     2012
-    ]
-   ],
-   "cars": 417,
-   "cat": "window-regulator",
-   "id": "oem:gm:window-regulator:RL:91699b7f93",
-   "kind": "body",
-   "note": "GM catalog lists #20945140 for both — regulator with motor; option: fits some option packages; Silverado 1500: crew cab only; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T01:29:06Z",
-   "pn": [
-    "20945140"
-   ],
-   "reason": "option",
-   "tier": "likely"
-  },
-  {
-   "apps": [
-    [
-     "Chevrolet",
-     "Avalanche",
-     2007,
-     2007
-    ],
-    [
-     "Chevrolet",
-     "Silverado 1500",
-     2008,
-     2008
-    ],
-    [
-     "Chevrolet",
-     "Silverado 1500",
-     2012,
-     2012
-    ]
-   ],
-   "cars": 417,
-   "cat": "window-regulator",
-   "id": "oem:gm:window-regulator:RR:e1eb9593b0",
-   "kind": "body",
-   "note": "GM catalog lists #20945141 for both — regulator with motor; option: fits some option packages; Silverado 1500: crew cab only; verify the number on the part",
-   "oldest_retrieved": "2026-11-05T01:29:09Z",
-   "pn": [
-    "20945141"
    ],
    "reason": "option",
    "tier": "likely"
@@ -206694,6 +206514,39 @@
   {
    "apps": [
     [
+     "Chevrolet",
+     "Camaro",
+     1995,
+     1995
+    ],
+    [
+     "GMC",
+     "Safari",
+     1997,
+     1997
+    ],
+    [
+     "Pontiac",
+     "Firebird",
+     1995,
+     1995
+    ]
+   ],
+   "cars": 88,
+   "cat": "window-regulator",
+   "id": "oem:gm:window-regulator:FL+FR:fc32b8c33c",
+   "kind": "body",
+   "note": "GM catalog lists #88960088 for both — window motor only; fits some configurations; verify the number on the part",
+   "oldest_retrieved": "2026-11-05T20:46:36Z",
+   "pn": [
+    "88960088"
+   ],
+   "reason": "conditional",
+   "tier": "likely"
+  },
+  {
+   "apps": [
+    [
      "Buick",
      "Rainier",
      2004,
@@ -206909,7 +206762,7 @@
   }
  ],
  "ns": "gm",
- "policy_sha256": "3affa1f9684f8dc99c8f904d981ebdfbeda243303cffa8b0bb4393db25646b4d",
+ "policy_sha256": "9f0ae746b2d85e1655511f1af27cce97b55299cc8d45769197cdadecc7f62046",
  "raw": {
   "commit": "dca9cd845f26337a4047b9176cc17929ffc984a3",
   "ref": "dca9cd845f26",

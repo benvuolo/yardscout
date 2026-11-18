@@ -794,6 +794,33 @@ heated splits remain. It is deferred.
   contradictory drive evidence leaves the vehicle-year out. A note that does
   not fit `NOTE_MAX_LEN` whole refuses the group (`held_drive_qualifier`,
   `held_cab_qualifier`); the note is never cut. Only narrows claims.
+- **More limits in the same note (2026-11-18, flaws 2-6 of the independent
+  nissan check).** Per vehicle-year, beside the drive:
+  - engine (`policy.LIKELY_ENGINE_TRANS_RULE`; config-tuple option columns):
+    every configuration of every own row names an engine code, or another
+    number of the same slot is listed for an engine our rows never name
+    (sibling rule), and T's engines (year page, else the engines T's rows in
+    the category name) include another displacement: "Q70: 3.7L only";
+  - transmission: every configuration names one class and T's own pages show
+    the other: "manual only";
+  - fuel (`policy.LIKELY_FUEL_RULE`): T's year page offers a hybrid catalog and
+    the number sits on the gas pages only: "gas only" (a feed name saying
+    Hybrid with gas-page evidence refuses: `held_fuel_conflict`);
+  - rear-door window parts on a model whose rear-door pages are split by cab
+    code (Titan/Frontier: KC/CC glass), the part's row naming no cab: "crew
+    cab only".
+  Labels combine per model ("Frontier: 2WD, automatic only").
+- **Body sources (2026-11-18).** `policy.MODEL_BODY_TABLE` gives the bodies of
+  listed models (B14 200SX coupe; G37 by year...) in place of the lot decodes,
+  plus body-named catalog pages; other models keep lot vPIC + pages. A row's
+  option-column body codes count as bodies when every alternative carries one
+  (`_fvo_bodies`: subarupartsdeal S./W./WOBK/SOBK/OBK, gmpartsgiant
+  passenger body styles 37/69/67/27/47/57/87/35/48/68, nissanpartsdeal
+  C./4S./SED...). PartsGiant quantity, callout and colour fields restrict
+  nothing; an unparsed clause without a body-like word restricts nothing
+  when no row on T's pages in the category names a body and the product
+  page's fitment trims for T do not leave a body out (`fit_bodies_plausible`:
+  "4 DOOR" only rules out a coupe). Fitment trims never add a body.
 - **Skips and refusals.** Single-model classes are skipped, because the
   same-model generation loop already covers them. Classes over the 12-model
   cap are refused.

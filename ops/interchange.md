@@ -3870,3 +3870,31 @@ section when the branch stops.
   could never fail; `_likely_note_fits` now tests the uncut note. No live note
   was cut before this change.
 - Test: `curation_tests/test_drive.py` (27 checks).
+
+### Item 2: rules for flaws 2-6 (curate.py / policy.py; shipped namespaces re-curated in the same push)
+
+- Flaw 2 (body from lot data): `policy.MODEL_BODY_TABLE` (B14 200SX coupe;
+  NX; 240SX; 300ZX; 350Z/370Z; Sentra; Altima; Versa; Murano; G35/G37/G25/
+  Q40/Q60 by year). A listed model's bodies are the table's plus body-named
+  catalog pages; lot decodes are not read for it. Other models keep lot +
+  pages (dropping lot data there would add claims back without evidence).
+- Flaw 3 (engine/transmission): config-tuple option columns name the limit
+  ("Q70: 3.7L only", "manual only"); sibling rule: another number of the
+  same slot listed for an engine our rows never name (2014 Q70 VK56VD
+  clusters) takes that engine away. Engine universe: year page, else the
+  engines T's rows in the category name.
+- Flaw 4 (gas/hybrid pages): a year page offering a hybrid catalog plus a
+  number read on the gas pages only gives "gas only"; a Hybrid feed name with
+  gas-only evidence refuses.
+- Flaw 5 (body codes): Subaru S./W./WOBK/SOBK/OBK, GM passenger body styles
+  (37/69/67/27/47/57/87/35/48/68), Nissan C./4S. decoded when every
+  alternative carries one; PartsGiant quantity/callout/colour fields neutral;
+  an unparsed feature note is neutral when no row on T's pages in the
+  category names a body and the fitment trims do not leave a body out.
+  R01 (Ford moisture purge module) and R20 (2001 Outback H6) are held in
+  `policy.GROUP_HOLDS` so the fixed rules cannot bring them back.
+- Flaw 6 (Titan/Frontier rear doors): a rear-door window part with no cab
+  code on a model whose rear-door pages split by KC/CC is "crew cab only".
+- Notes are never cut: an over-long note refuses the group.
+- Tests: `curation_tests/test_rules_1118.py` (23); test_body_variant's
+  lot-count cases moved to a model outside the table (35).

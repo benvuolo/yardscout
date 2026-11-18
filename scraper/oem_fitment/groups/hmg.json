@@ -70675,7 +70675,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:dc246fd668",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #546511M100 for both — option: fits some option packages; 2WD only; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #546511M100 for both — option: fits some option packages; 2WD, 2.0L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:47:49Z",
    "pn": [
     "546511M100"
@@ -70708,7 +70708,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:36728f18d3",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #546511M200 for both — option: fits some option packages; 2WD only; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #546511M200 for both — option: fits some option packages; 2WD, 2.4L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:47:56Z",
    "pn": [
     "546511M200"
@@ -70741,7 +70741,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:07bda0a0e5",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #546511M310 for both — option: fits some option packages; 2WD only; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #546511M310 for both — option: fits some option packages; 2WD, 2.0L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:48:04Z",
    "pn": [
     "546511M310"
@@ -70774,7 +70774,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:4807541a1d",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #546511M320 for both — option: fits some option packages; 2WD only; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #546511M320 for both — option: fits some option packages; 2WD, 2.4L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:48:12Z",
    "pn": [
     "546511M320"
@@ -70840,7 +70840,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:abcc8da54b",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #546511M520 for both — option: fits some option packages; 2WD only; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #546511M520 for both — option: fits some option packages; 2WD, 2.4L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:48:28Z",
    "pn": [
     "546511M520"
@@ -70867,7 +70867,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:bb6c2ca96c",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #54651A7200 for both — fits some configurations; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #54651A7200 for both — fits some configurations; 1.8L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:43:49Z",
    "pn": [
     "54651A7200"
@@ -70894,7 +70894,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:88034982a8",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #54651A7210 for both — option: fits some option packages; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #54651A7210 for both — option: fits some option packages; 1.6L/2.0L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:43:55Z",
    "pn": [
     "54651A7210"
@@ -70921,7 +70921,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:8fa8bb0f6f",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #54651A7300 for both — option: fits some option packages; 2WD only; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #54651A7300 for both — option: fits some option packages; 2WD, 2.0L, automatic only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:44:03Z",
    "pn": [
     "54651A7300"
@@ -70948,7 +70948,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:750be2c5c0",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #54651A7600 for both — option: fits some option packages; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #54651A7600 for both — option: fits some option packages; 1.6L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:44:12Z",
    "pn": [
     "54651A7600"
@@ -70975,7 +70975,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:f2ff2dde72",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #54651A7650 for both — option: fits some option packages; 2WD only; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #54651A7650 for both — option: fits some option packages; 2WD, 2.0L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:44:22Z",
    "pn": [
     "54651A7650"
@@ -71008,7 +71008,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:f2135495e7",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #546611M100 for both — option: fits some option packages; 2WD only; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #546611M100 for both — option: fits some option packages; 2WD, 2.0L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:48:35Z",
    "pn": [
     "546611M100"
@@ -71041,7 +71041,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:c637e8fc23",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #546611M200 for both — option: fits some option packages; 2WD only; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #546611M200 for both — option: fits some option packages; 2WD, 2.4L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:48:45Z",
    "pn": [
     "546611M200"
@@ -71074,7 +71074,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:a267ddf374",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #546611M310 for both — option: fits some option packages; 2WD only; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #546611M310 for both — option: fits some option packages; 2WD, 2.0L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:48:53Z",
    "pn": [
     "546611M310"
@@ -71107,7 +71107,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:697a00cd93",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #546611M320 for both — option: fits some option packages; 2WD only; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #546611M320 for both — option: fits some option packages; 2WD, 2.4L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:48:59Z",
    "pn": [
     "546611M320"
@@ -71173,7 +71173,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:3d5a25d1fe",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #546611M520 for both — option: fits some option packages; 2WD only; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #546611M520 for both — option: fits some option packages; 2WD, 2.4L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:49:16Z",
    "pn": [
     "546611M520"
@@ -71200,7 +71200,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:4095fde0bb",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #54661A7200 for both — fits some configurations; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #54661A7200 for both — fits some configurations; 1.8L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:44:27Z",
    "pn": [
     "54661A7200"
@@ -71227,7 +71227,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:a65a56ee82",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #54661A7210 for both — option: fits some option packages; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #54661A7210 for both — option: fits some option packages; 1.6L/2.0L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:44:35Z",
    "pn": [
     "54661A7210"
@@ -71254,7 +71254,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:0e75c37dff",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #54661A7300 for both — option: fits some option packages; 2WD only; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #54661A7300 for both — option: fits some option packages; 2WD, 2.0L, automatic only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:44:44Z",
    "pn": [
     "54661A7300"
@@ -71281,7 +71281,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:fd7b69ac33",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #54661A7600 for both — option: fits some option packages; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #54661A7600 for both — option: fits some option packages; 1.6L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:44:51Z",
    "pn": [
     "54661A7600"
@@ -71308,7 +71308,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:8176c1c4e6",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #54661A7650 for both — option: fits some option packages; 2WD only; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #54661A7650 for both — option: fits some option packages; 2WD, 2.0L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:45:00Z",
    "pn": [
     "54661A7650"
@@ -71341,7 +71341,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:cca2bc2a95",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #553001M100 for both — option: fits some option packages; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #553001M100 for both — option: fits some option packages; 2.0L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:46:28Z",
    "pn": [
     "553001M100"
@@ -71374,7 +71374,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:aaa7fdd0d2",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #553001M200 for both — option: fits some option packages; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #553001M200 for both — option: fits some option packages; 2.4L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:46:36Z",
    "pn": [
     "553001M200"
@@ -71407,7 +71407,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:7505368e51",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #553001M310 for both — option: fits some option packages; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #553001M310 for both — option: fits some option packages; 2.0L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:46:43Z",
    "pn": [
     "553001M310"
@@ -71440,7 +71440,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:bb98391df8",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #553001M320 for both — option: fits some option packages; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #553001M320 for both — option: fits some option packages; 2.4L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:46:52Z",
    "pn": [
     "553001M320"
@@ -71533,7 +71533,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:6c473c781d",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #553001M510 for both — option: fits some option packages; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #553001M510 for both — option: fits some option packages; 2.0L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:47:07Z",
    "pn": [
     "553001M510"
@@ -71566,7 +71566,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:98838a2421",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #553001M520 for both — option: fits some option packages; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #553001M520 for both — option: fits some option packages; 2.4L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:47:16Z",
    "pn": [
     "553001M520"
@@ -71593,7 +71593,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:dd392c7403",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #55300A7020 for both — option: fits some option packages; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #55300A7020 for both — option: fits some option packages; 1.6L/2.0L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:42:59Z",
    "pn": [
     "55300A7020"
@@ -71620,7 +71620,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:bb7d70abfa",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #55300A7300 for both — fits some configurations; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #55300A7300 for both — fits some configurations; 1.8L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:42:52Z",
    "pn": [
     "55300A7300"
@@ -71647,7 +71647,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:64c9847dca",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #55300A7400 for both — fits some configurations; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #55300A7400 for both — fits some configurations; 1.8L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:43:08Z",
    "pn": [
     "55300A7400"
@@ -71674,7 +71674,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:fc11451430",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #55300A7600 for both — option: fits some option packages; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #55300A7600 for both — option: fits some option packages; 1.6L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:42:44Z",
    "pn": [
     "55300A7600"
@@ -71701,7 +71701,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:132bf1e7cd",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #55300A7650 for both — option: fits some option packages; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #55300A7650 for both — option: fits some option packages; 2.0L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:43:17Z",
    "pn": [
     "55300A7650"
@@ -71728,7 +71728,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:4484eb94b5",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #55300A7660 for both — option: fits some option packages; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #55300A7660 for both — option: fits some option packages; 2.0L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:43:23Z",
    "pn": [
     "55300A7660"
@@ -71755,7 +71755,7 @@
    "cat": "strut",
    "id": "oem:hmg:strut:C:d791a799c7",
    "kind": "body",
-   "note": "Hyundai/Kia catalog lists #55300A7670 for both — option: fits some option packages; verify the number on the part",
+   "note": "Hyundai/Kia catalog lists #55300A7670 for both — option: fits some option packages; 1.6L only; verify the number on the part",
    "oldest_retrieved": "2026-11-09T21:43:31Z",
    "pn": [
     "55300A7670"
@@ -72041,7 +72041,7 @@
   }
  ],
  "ns": "hmg",
- "policy_sha256": "3affa1f9684f8dc99c8f904d981ebdfbeda243303cffa8b0bb4393db25646b4d",
+ "policy_sha256": "9f0ae746b2d85e1655511f1af27cce97b55299cc8d45769197cdadecc7f62046",
  "raw": {
   "commit": "dca9cd845f26337a4047b9176cc17929ffc984a3",
   "ref": "dca9cd845f26",

@@ -58,14 +58,15 @@ class K:
     key = policy.pn_key("nissan", "82721-JK000")
 
 
-def cur_with(rows, variants=(), counts=None):
+def cur_with(rows, variants=(), counts=None, T=None):
+    T = T or globals()["T"]
     c = C.Curation.__new__(C.Curation)
     c.ns = "nissan"
     c.t_list_rows = {(T, "window-regulator"): rows} if rows else {}
     c.t_seed_records = {}
     c.t_body_variants = {T: set(variants)}
     c.body_counts = {T: counts} if counts else {}
-    c.t_sources = {T: {("Infiniti", "G37")}}
+    c.t_sources = {T: {(T[0], T[1])}}
     c.ns_models_f = frozenset()
     c.note_excludes = lambda notes, t, market=True: False
     return c
@@ -84,18 +85,25 @@ check("a sedan page row coded C (coupe) does not cover the sedan", not c.body_ok
 c = cur_with([lr("sedan")], variants={"sedan"}, counts={"coupe": 40})
 check("2008 G37: only a sedan page in the catalog, but the lot's cars are coupes -> left out",
       not c.body_ok(T, "window-regulator", K()))
-c = cur_with([lr("sedan")], variants={"sedan"}, counts={"sedan": 200, "coupe": 2})
-check("lot noise under 5% does not make a body (Sentra 'coupe' 2 of 3,764)", c.body_ok(T, "window-regulator", K()))
-c = cur_with([lr("")], variants=set(), counts={"sedan": 50, "coupe": 30})
-check("combined page, row without notes: covers every body -> joins", c.body_ok(T, "window-regulator", K()))
-c = cur_with([lr("", notes=["Coupe"])], variants=set(), counts={"sedan": 50, "coupe": 30})
-check("combined page, row noted 'Coupe' on a sedan/coupe car -> left out", not c.body_ok(T, "window-regulator", K()))
-c = cur_with([lr("", notes=["Sedan"]), lr("", notes=["Coupe"], line=2)], variants=set(), counts={"sedan": 50, "coupe": 30})
-check("combined page, rows noted 'Sedan' and 'Coupe' for the same number -> joins", c.body_ok(T, "window-regulator", K()))
+# lot-count cases use a model outside policy.MODEL_BODY_TABLE (the G37 is in
+# it since 2026-11-18, so its bodies come from the table, not the lot)
+TL = ("Nissan", "Maxima", 2010)
+c = cur_with([lr("sedan")], variants={"sedan"}, counts={"sedan": 200, "coupe": 2}, T=TL)
+check("lot noise under 5% does not make a body (Sentra 'coupe' 2 of 3,764)", c.body_ok(TL, "window-regulator", K()))
+c = cur_with([lr("")], variants=set(), counts={"sedan": 50, "coupe": 30}, T=TL)
+check("combined page, row without notes: covers every body -> joins", c.body_ok(TL, "window-regulator", K()))
+c = cur_with([lr("", notes=["Coupe"])], variants=set(), counts={"sedan": 50, "coupe": 30}, T=TL)
+check("combined page, row noted 'Coupe' on a sedan/coupe car -> left out", not c.body_ok(TL, "window-regulator", K()))
+c = cur_with([lr("", notes=["Sedan"]), lr("", notes=["Coupe"], line=2)], variants=set(), counts={"sedan": 50, "coupe": 30},
+             T=TL)
+check("combined page, rows noted 'Sedan' and 'Coupe' for the same number -> joins", c.body_ok(TL, "window-regulator", K()))
 c = cur_with([lr("sedan")], variants={"sedan", "coupe"})
 check("wheels are skipped (their own whole-group rules)", c.body_ok(T, "wheels", K()))
+c = cur_with([lr("sedan")], variants={"sedan"}, counts={"sedan": 90}, T=TL)
+check("single-body car: no change", c.body_ok(TL, "window-regulator", K()))
 c = cur_with([lr("sedan")], variants={"sedan"}, counts={"sedan": 90})
-check("single-body car: no change", c.body_ok(T, "window-regulator", K()))
+check("G37 2010 (MODEL_BODY_TABLE: sedan, coupe, convertible): a lot of sedans does not make it single-body",
+      not c.body_ok(T, "window-regulator", K()))
 
 
 # ---------------------------------------------------------------- lot counts
