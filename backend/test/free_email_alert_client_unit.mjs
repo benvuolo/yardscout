@@ -126,8 +126,9 @@ for (const e of [stored, legacy, { make: 'Ford', model: '', yrMin: 1999, yrMax: 
 }
 
 /* ---- wording ---- */
-const htmlFns = ['falertAskHtml', 'falertPendingHtml', 'falertOnHtml', 'handleFalertHash', 'falertCheck', 'falertTurnOff'].map(fn);
-check('the card builders are there', htmlFns.every(Boolean));
+const htmlFns = ['falertAskHtml', 'falertPendingHtml', 'falertOnHtml', 'handleFalertHash', 'falertCheck', 'falertTurnOff', 'falertToastHtml', 'falertToastSubmit'].map(fn);
+check('the card builders (and the watch toast\'s offer) are there', htmlFns.every(Boolean));
+check('the watch toast\'s offer has no Pro prompt either', !/openUpgradeSheet|proBoxHtml|pro-box|See Pro/.test(htmlFns.slice(6).join('\n')));
 const copy = htmlFns.join('\n') + A.FALERT_LIMIT_NOTE + A.FALERT_INTRO_HTML;
 check('never "instant", "every time", "always" or "guarantee"', !/instant|every time|always|guarantee/i.test(copy), (copy.match(/.{30}(instant|every time|always|guarantee).{30}/i) || [''])[0]);
 check('says "usually the same day"', /usually the same day/.test(copy));

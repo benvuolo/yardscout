@@ -1191,6 +1191,75 @@ results come" in both late cases, with the waiting line still on screen.
 `pf_ux_e2e.py`, `interchange_e2e.py`, `funnel_events_e2e`, all 23
 `*_unit.mjs`.
 
+### 3. Free emailed alert: the four loose ends
+
+**(a) No "would have sent a push" for cars the alert covers** (`docs/app.js`
+near-miss in `renderAlerts`). The line "One landed on …, after you set this
+watch" with its Pro box "Would have sent a push within hours" now leaves out,
+on the one watch whose free email alert is on, the cars that alert covers:
+within the copy's radius of the copy's centre (exactly as
+`falertWatchBody` sends them) and listed no earlier than the day before the
+alert went on (the API records the cars already listed as known, so earlier
+ones were never emailed and stay a near-miss). The browser now records when
+it saw the alert go on (`onAt` in its own `ys_falert`; no watch touched).
+With no `onAt` (an alert turned on before this change, or changed from
+another browser) every car in range counts as covered: the line must never
+claim a miss the email may have brought. Pending (no click yet) covers
+nothing. Pure helper `falertCovers`. Not known to the page: whether a
+covered car's email was actually sent or held past 48 h by the daily limit;
+such a car shows no near-miss line.
+Test: `free_email_alert_ui_e2e.mjs` case 7b (8 checks, 3 fail on the docs
+before the change, run with the new `YS_DOCS` override);
+`free_email_alert_client_unit.mjs` +11 checks of `falertCovers`.
+
+**(b) The watch toast offers the free email alert** (`showWatchToast`). After
+a new watch on the website, a free visitor who has not asked for the alert
+in this browser is offered THAT for the new watch, in place of the Monday
+email: "Free email alert for (car): we email you when one is set out within
+50 mi, usually the same day. One car, one address, no account.", one field,
+"Email me". One offer, no Pro box, no store link. The reply is the card's:
+"Check your inbox … to turn on your email alert for (car)" (or "on" at once
+when this browser already holds a token for the address). The Monday email
+offer comes back, as before, once the alert is asked for, for a batch of
+several new watches, for a watch past the first 5, and after the alert offer
+was dismissed (x or 30 s) this visit (`ys_falert_no`, session). Counted as
+the card is: `free-alert-shown` once a visit (shared key), `free-alert-asked`
+on an address; `email-asked` is not counted when the Monday offer is not
+shown. The request is the card's own (`falertSignup`, now shared by the card,
+"Change car" and the toast). Layout check gained `watch-toast-falert`,
+`-msg`, `-sent`.
+Test: `free_email_alert_ui_e2e.mjs` cases 10 and 10b (17 checks: the offer,
+wording, one field and no Pro box, counts, a bad address, the request is a
+copy of the NEW watch, pending state keyed to it, rule 6 byte for byte, the
+card waits for the click, the next watch gets the Monday offer, dismissal);
+`recap_ask_e2e.mjs` now runs its web cases with the alert already asked for
+(the state in which the toast still offers the Monday email).
+
+**(c) Per-IP buckets** (`backend/src/recap_signup.js`). `/v1/recap/add` (32
+an hour) and `/v1/recap/signup` (8 an hour) bumped one counter, so eight
+one-tap adds from a network used up its sign-ups. Adds now have
+`recap:add:ip:` and the named constant `IP_ADDS_PER_HOUR` (also used by the
+free alert's car change, in its own `falert:chg:ip:`). Sign-ups (Monday
+email and free alert, both send a confirmation) still share `recap:ip:`.
+Test: `recap_signup_unit.mjs` 8b (3 checks; "10 adds from one network leave
+its sign-ups untouched" fails with 429 on the shared bucket).
+
+**(d) Hourly "Resend near daily cap"** (`backend/src/ops_monitor.js`). The
+detail now reads: "Held back before that, lowest class first: free alert
+emails (web) once 70 emails of any kind went out today (and after 20 free
+alert emails; held alerts are retried on later scans), then sign-up
+confirmations (Monday email and free alert) and Monday recaps once 10 or
+fewer sends are left." Built from the limits `ops.js` enforces, so it
+follows `RESEND_DAILY_CAP`. Test: `free_email_alert_unit.mjs` +4 (wording at
+100 and 1,000 a day; the real hourly check firing at 95 of 100 with it).
+
+**Decisions the owner may want to change.** (1) The toast offers the alert
+INSTEAD of the Monday email until the alert is asked for; the Monday email
+is then offered on later watches. (2) Dismissing the alert offer brings the
+Monday offer back on the next watch the same visit (not nothing). (3) An
+alert with an unknown start counts every car in range as covered (fewer Pro
+prompts rather than a wrong one).
+
 ### 4. The weekly scorecard: the alert card and the free emailed alert (`backend/src/scorecard.js`)
 
 Two lines, this week's counts only, in the style of item 3's "offered →

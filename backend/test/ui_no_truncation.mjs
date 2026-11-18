@@ -1203,6 +1203,52 @@ const SCREENS = [
       try { sessionStorage.removeItem('ys_recap_no'); } catch (e) { /* none */ }
     });
   }]),
+  // The watch toast's free email alert offer (web, 2026-11-18; it takes the
+  // Monday email's place for a free visitor who has not asked for the
+  // alert): the ask, its message line, the "check your inbox" reply. The
+  // longest model name in the scan, with years.
+  ...[['watch-toast-falert', 'ask'], ['watch-toast-falert-msg', 'msg'], ['watch-toast-falert-sent', 'sent']].map(([name, mode]) => [name, async (page) => {
+    await tab(page, 'live');
+    await page.evaluate(async (mode) => {
+      window.__falertWas = localStorage.getItem('ys_falert');
+      localStorage.removeItem('ys_falert');
+      try { sessionStorage.removeItem('ys_falert_no'); sessionStorage.removeItem('ys_recap_no'); } catch (e) { /* none */ }
+      const c = activeZipCoords || { lat: 37.33, lng: -121.89 };
+      const e = { make: 'Mercedes-Benz', model: 'Sprinter 2500 Cargo Van', yrMin: 2007, yrMax: 2018, lat: c.lat, lng: c.lng, radiusMi: 250, addedAt: '2026-11-18T00:00:00.000Z~layout' };
+      // The pick is the new watch; here it is handed in, so no watch is stored.
+      window.__ftpWas = falertToastPick;
+      falertToastPick = () => ({ i: 0, e });
+      _recapNew = [e];
+      showWatchToast('Mercedes-Benz Sprinter 2500 Cargo Van');
+      clearTimeout(_watchToastTimer);
+      const t = document.getElementById('watch-toast');
+      if (!t.querySelector('.fa-toast-form')) throw new Error('no free email alert offer in the toast');
+      if (mode === 'msg') {
+        t.querySelector('.mail-email').value = 'nope';
+        t.querySelector('.mail-form').requestSubmit();
+        if (!t.querySelector('.mail-msg').textContent) throw new Error('no message for a bad address');
+      }
+      if (mode === 'sent') {
+        window.__fetchWas = window.fetch;
+        window.fetch = async (u, i) => (String(u).includes('/v1/free-alert/') ? new Response('{"ok":true,"state":"confirm-sent"}', { status: 200 }) : window.__fetchWas(u, i));
+        t.querySelector('.mail-email').value = 'christopher.longname@example.com';
+        t.querySelector('.mail-form').requestSubmit();
+        for (let i = 0; i < 40 && !t.dataset.recapDone; i++) await new Promise(r => setTimeout(r, 25));
+        clearTimeout(_watchToastTimer);
+        if (!/Check your inbox/.test(t.innerText)) throw new Error('no "check your inbox" reply');
+      }
+    }, mode);
+    await settle(page, 300);
+  }, async (page) => {
+    await page.evaluate(() => {
+      clearTimeout(_watchToastTimer);
+      document.getElementById('watch-toast').classList.remove('show');
+      if (window.__fetchWas) { window.fetch = window.__fetchWas; window.__fetchWas = null; }
+      if (window.__ftpWas) { falertToastPick = window.__ftpWas; window.__ftpWas = null; }
+      if (window.__falertWas) localStorage.setItem('ys_falert', window.__falertWas); else localStorage.removeItem('ys_falert');
+      try { sessionStorage.removeItem('ys_falert_no'); } catch (e) { /* none */ }
+    });
+  }]),
   ['alerts-hits', async (page) => {
     await tab(page, 'live');
     await page.evaluate(() => {

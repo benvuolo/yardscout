@@ -21,6 +21,8 @@
  *              once (the token rides along)
  *   web free   only the first 5 watches can carry it; no watch, no card
  *   web Pro    no card, no sentence; the Pro email panel is as it was
+ *   web free   the watch toast's one offer is the alert (case 10); dismissed,
+ *              or once asked for, the Monday email is offered instead
  *   web free   the near-miss line ("Would have sent a push within hours")
  *              leaves out the cars the alert that is on covers
  *   iOS / Android shells: no card, no sentence, no request
@@ -474,6 +476,89 @@ try {
     check(`${native} shell: nothing sent to /v1/free-alert, nothing counted`, v.sent.length === 0 && count(await v.events(), 'free-alert-shown') === 0);
     check(`${native} shell: a #falert= link does nothing`, await v.page.evaluate(() => handleFalertHash() === false));
     check(`${native} shell: no page error`, v.errors.length === 0, v.errors.join(' | '));
+    await v.ctx.close();
+  }
+
+  /* ---- 10. the watch toast's one offer is the free email alert (2026-11-18) ---- */
+  {
+    const v = await open(browser, { storage: { ...BASE_STORE } });
+    const toast = () => v.page.evaluate(() => { const t = document.getElementById('watch-toast'); return t && t.classList.contains('show') ? t.innerText.replace(/\s+/g, ' ').trim() : ''; });
+    // The bell on the n-th car's screen (the quick-watch path, as recap_ask_e2e.mjs drives it).
+    const bell = async (n) => {
+      await v.page.evaluate(() => { try { hideCarDetail(); } catch (e) { /* closed */ } });
+      await v.page.waitForTimeout(400);
+      await v.page.locator('#live-grid .car-card .car-open').nth(n).click();
+      await v.page.waitForSelector('#car-detail.open .watch-btn', { timeout: 15000 });
+      const label = await v.page.evaluate(() => { const b = document.querySelector('#car-detail.open .watch-btn'); return `${b.dataset.make} ${b.dataset.model}`.trim(); });
+      await v.page.click('#car-detail.open .watch-btn');
+      await v.page.waitForSelector('#watch-toast.show', { timeout: 5000 });
+      return label;
+    };
+    await v.page.waitForSelector('#live-grid .car-card .car-open', { timeout: 120000 });
+    const label = await bell(0);
+    const saved = await v.watches();
+    const t = await toast();
+    check('toast: a new watch offers the free email alert for that car, in place of the Monday email', t.includes(`Watching ${label}`)
+      && /Free email alert for [^:]*/.test(t) && t.includes(label) && /usually the same day/.test(t) && !/Monday email/.test(t), t);
+    check('toast: never "instant", "every time" or "always"', !/instant|every time|always|guarantee/i.test(t), t);
+    check('toast: one email field, one button, no Pro box, no store link', await v.page.evaluate(() => {
+      const ask = document.querySelector('#watch-toast .mail-ask');
+      if (!ask) return false;
+      const i = ask.querySelectorAll('input'), b = ask.querySelectorAll('button');
+      return i.length === 1 && i[0].type === 'email' && b.length === 1 && b[0].textContent.trim() === 'Email me'
+        && !document.querySelector('#watch-toast .pro-box, #watch-toast [data-act="app"], #watch-toast [data-act="pro"]');
+    }));
+    let ev = await v.events();
+    check('toast: "free alert shown" counted once, "email asked" (the Monday offer) not at all', ev.filter(e => e === 'free-alert-shown').length === 1 && !ev.includes('email-asked'), JSON.stringify(ev));
+    await v.page.fill('#watch-toast .mail-email', 'not-an-address');
+    await v.page.click('#watch-toast .mail-form .btn');
+    check('toast: a bad address is answered in the toast, nothing sent', /Enter your email address/.test(await toast()) && v.sent.length === 0);
+    await v.page.fill('#watch-toast .mail-email', ' Visitor@Example.com ');
+    await v.page.click('#watch-toast .mail-form .btn');
+    await v.page.waitForFunction(() => /Check your inbox/.test(document.getElementById('watch-toast').innerText), null, { timeout: 5000 }).catch(() => {});
+    const req = v.sent.find(x => x.path === '/v1/free-alert/signup') || { body: {} };
+    const neww = JSON.parse(saved).slice(-1)[0];
+    check('toast: one sign-up request, for the NEW watch, as a copy (at most 50 mi, no addedAt)', v.sent.length === 1 && req.body.email === EMAIL
+      && `${req.body.watch.make} ${req.body.watch.model}` === label && req.body.watch.radiusMi <= 50 && !/addedAt|trimFilter|driveFilter|matchOnly/.test(JSON.stringify(req.body)), JSON.stringify(v.sent));
+    const t2 = await toast();
+    check('toast: "check your inbox", masked address, names the car', /Check your inbox\. Tap the link we sent to v•••@example\.com to turn on your email alert for/.test(t2) && t2.includes(label), t2);
+    const st = await v.state();
+    check('toast: this browser remembers it as pending, for that watch', st && st.state === 'pending' && st.key === neww.addedAt, JSON.stringify(st));
+    ev = await v.events();
+    check('toast: "free alert asked" counted once', ev.filter(e => e === 'free-alert-asked').length === 1, JSON.stringify(ev));
+    check('toast: the stored watches are byte for byte what they were (rule 6)', (await v.watches()) === saved);
+    await v.page.evaluate(() => { try { hideCarDetail(); } catch (e) { /* closed */ } });
+    await v.page.waitForTimeout(400);
+    await v.alerts();
+    check('toast: the Alerts card now waits for the click', /Check your inbox/.test((await v.card()).text), (await v.card()).text);
+    await v.page.click('.tab[data-tab="live"]');
+    const label2 = await bell(3);
+    const t3 = await toast();
+    check('toast: with the alert asked for, the next watch is offered the Monday email again', t3.includes(`Watching ${label2}`) && /Monday email/.test(t3) && !/Free email alert/.test(t3), t3);
+    check('toast: no page error', !v.errors.length, v.errors.join(' | '));
+    await v.ctx.close();
+  }
+
+  /* ---- 10b. dismissing the alert offer: the next watch offers the Monday email ---- */
+  {
+    const v = await open(browser, { storage: { ...BASE_STORE } });
+    const toast = () => v.page.evaluate(() => { const t = document.getElementById('watch-toast'); return t && t.classList.contains('show') ? t.innerText.replace(/\s+/g, ' ').trim() : ''; });
+    const bell = async (n) => {
+      await v.page.evaluate(() => { try { hideCarDetail(); } catch (e) { /* closed */ } });
+      await v.page.waitForTimeout(400);
+      await v.page.locator('#live-grid .car-card .car-open').nth(n).click();
+      await v.page.waitForSelector('#car-detail.open .watch-btn', { timeout: 15000 });
+      await v.page.click('#car-detail.open .watch-btn');
+      await v.page.waitForSelector('#watch-toast.show', { timeout: 5000 });
+    };
+    await v.page.waitForSelector('#live-grid .car-card .car-open', { timeout: 120000 });
+    await bell(0);
+    check('dismiss: offered first', /Free email alert/.test(await toast()));
+    await v.page.click('#watch-toast .watch-toast-x');
+    await bell(3);
+    const t = await toast();
+    check('dismiss: the next watch offers the Monday email, not the alert again', /Monday email/.test(t) && !/Free email alert/.test(t), t);
+    check('dismiss: nothing was sent', v.sent.length === 0);
     await v.ctx.close();
   }
 
