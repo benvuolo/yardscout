@@ -143,6 +143,24 @@ def build_shards(data: dict, max_yards: int | None = None) -> tuple[dict, dict]:
     return directory, shards
 
 
+def arrival_held_fn(data: dict):
+    """(yard index, dateAdded) -> True when the car must not alert as new:
+    its yard's list is frozen or it came in with a flush. Reads the yard
+    rows' list columns; always False for a payload without them."""
+    try:
+        try:
+            import yard_freshness as yfr
+        except ImportError:
+            from scraper import yard_freshness as yfr  # pragma: no cover
+        cols = yfr.yard_list_columns(data)
+    except Exception as e:  # noqa: BLE001 -- never block the push
+        print(f"WARN list freshness unreadable ({e}); no arrivals held back", file=sys.stderr)
+        cols = {}
+    if not cols:
+        return lambda y, d: False
+    return lambda y, d: bool(cols.get(y)) and yfr.arrival_held(cols[y][1], cols[y][3], d)
+
+
 def build_arrivals(data: dict) -> list[dict]:
     """Recent arrivals expanded into self-contained dicts (with yard coords)
     for the Worker's watch matching — it never has to parse shards."""
@@ -154,8 +172,13 @@ def build_arrivals(data: dict) -> list[dict]:
     vpic = data.get("vpic", {})
     cutoff = (datetime.now(timezone.utc) - timedelta(days=ARRIVAL_WINDOW_DAYS)).strftime("%Y-%m-%d")
 
+    # A yard whose own list is frozen, or a car that came in with a frozen
+    # list's flush (yard_freshness.py), is not a new arrival: no alert. The
+    # car stays listed on its yard's page.
+    held = arrival_held_fn(data)
     # vpic is keyed by global vehicle position, so carry the index along.
-    recent = [(i, r) for i, r in enumerate(data["vehicles"]) if str(r[IDX_DATE] or "") >= cutoff]
+    recent = [(i, r) for i, r in enumerate(data["vehicles"]) if str(r[IDX_DATE] or "") >= cutoff
+              and not held(r[IDX_YARD], str(r[IDX_DATE] or ""))]
     # When the window overflows the cap, keep the NEWEST arrivals — those are
     # the ones nobody has been alerted about yet.
     recent.sort(key=lambda ir: str(ir[1][IDX_DATE] or ""), reverse=True)

@@ -4,7 +4,9 @@ Owns: make/model normalization in `scraper/junkyard_scraper.py` (and its
 tests `test_make_normalization.py`, `test_model_normalization.py`), the
 lifespan writer `_write_model_lifespan_json` and `db.model_lifespan_stats`,
 `scraper/test_model_lifespan.py`, and the lifespan display in `docs/app.js`
-(`lifespanFor`, "leaves fast here", "Day N of ~X").
+(`lifespanFor`, "leaves fast here", "Day N of ~X"); since 2026-11-18 also
+yard list freshness (`scraper/yard_freshness.py`, its test, the app's
+"YARD LIST FRESHNESS" block and share.js `yardListOf`).
 
 ## Rules specific to this work
 
@@ -333,3 +335,155 @@ combinations against main. Test: `python3 scraper/test_notable_trims.py`.
   (labels only, appended after the gate words; list and drops in
   ops/parts.md). 248 pairs, ~6.5 KB. Badged cars on 11-13: 1,809 across
   61 make/model names (1,686 from gates + 123 from labels).
+
+## 2026-11-18 — yard list freshness (branch data/yard-freshness-1117, hub review)
+
+Owner ask (11-17, "watertight"): be honest when a yard's own published list
+has gone stale. Before this, the scan only logged it (`STALE YARD`); the
+app showed an orange "yard list unchanged since" stamp on the car screen
+only, from yard_health.json, at 3 weekdays (a guess).
+
+### What the scan publishes (`scraper/yard_freshness.py`)
+
+Four columns appended at the END of every yard row in inventory_live.json,
+inv/manifest.json and the API's yard directory (push_inventory copies
+`yardFields`/`yards`, so `/v1/yards` carries them without touching
+backend/src), named in `yardFields`:
+
+| column | meaning |
+|---|---|
+| `listChangedAt` | scan at which a car was last ADDED or REMOVED (id set; a date-only edit is not a change) |
+| `listState` | `""` / `"stale"` (3+ full business days unchanged) / `"frozen"` (10+) |
+| `listReadAt` | null when this scan read the yard; else the last scan that did (carried yard) |
+| `listFlushAt` | a frozen list that then changed by >= 40% in one scan (kept 8 days) |
+
+Unread scans (stale-keep carried, or yard missing) neither change nor
+confirm a list; the next read is compared with the last READ copy, and the
+flush check asks "frozen as of the last read" (unread days are not frozen
+days). yard_health.json gets the same values (`listFingerprint`,
+`listChangedAt`, `listReadAt` only when it is not that scan, `listFlushAt`;
++23 KB raw on a 51 KB file the app also loads); its own fields, which the ops
+email reads, are unchanged. First scan after merge: a yard whose
+id|date fingerprint did not change seeds `listChangedAt` from its
+`lastChangedAt` (so the dates match the ops email from day one); anything
+else seeds "now" (never claims a list is older than known).
+
+Compatibility: positions 0..6 of a yard row are untouched; every reader
+found indexes them by position (app `expandV2Row` y[0..6], Worker
+`inventory.js` y[3]/y[4]) or by name (`yardFields.indexOf`), so old app
+builds in the stores and the current Workers ignore the extra columns.
+Cost: +11 KB raw / +0.6 KB gzipped on the 304-yard table (manifest 121 KB);
+the Workers read it from the directory they already parse.
+
+### Thresholds: how they were measured
+
+Sources reachable here: 163 committed versions of yard_health.json and 160
+of inventory_live.json (2026-10-25 16:15 -> 11-18 13:47 UTC; the clone is
+shallow, nothing earlier). The CI history DB (Actions cache) is not
+reachable. Per yard, a "change" = the id set differs from the last scan
+that READ the yard; gaps spanning an unread scan (192) set aside. Unit:
+full business days = weekdays whose 14:00-22:00 UTC block lies wholly in
+the gap (the ops email's `fullBusinessDaysBetween`), Thanksgiving + Friday,
+Dec 24/25/31 and Jan 1 not counted (no holiday was in the window: that rule
+is judgment, not measurement).
+
+6,791 closed gaps, 301 yards (cumulative): 0 bd 65.5% · 1 bd 95.3% · 2 bd
+98.9% · 3 bd 99.4% · 4 bd 99.7% · 5 bd 99.8% · 6 bd 99.87% · 8 bd 99.97% ·
+10 bd 99.985% · 12 bd 100%. Calendar days: p50 0.83, p90 2.76, p99 4.67,
+p99.9 11.0. Weekends are the 1-bd bump (a daily yard's Fri->Mon gap).
+
+Healthy = the 265 yards whose median gap is <= 1.25 days (daily updaters).
+Share of their yard-scans that a threshold would flag / yards ever flagged
+in 24 days: 2 bd 2.84% / 94 · **3 bd 1.00% / 25** · 4 bd 0.57% / 16 ·
+5 bd 0.35% / 5 · 6 bd 0.22% / 2 · 8 bd 0.13% / 2 · **10 bd 0.05% / 1**.
+Daily yards' 3+ bd gaps: 27 of 6,561 (0.41%), all plausibly feed lags (five
+yards of one feed together 10-22 -> 10-28, Pull-A-Part, Pick-n-Pull Carson
+City/Kelowna, Flagstaff 8 bd). The 36 slower yards are weekly-batch feeds
+(Foss, EZ Pull N Pay, Shelby, Utah Pic-A-Part Ogden, St. Cloud ...) and
+Budget Bartow (~12-day cycle, 8 bd): 3 bd flags 25% of their scans, 10 bd
+2.2% (5 yards).
+
+- **Stale = 3 full business days** without a car added or removed: almost
+  never on a daily updater (1% of scans, all lag-shaped); 2 bd would flag
+  ordinary lulls (173 gaps). Weekly-batch lists will carry the notice part
+  of most weeks; their lists really are days old then.
+- **Frozen = 10 full business days** (two working weeks): 2 closed gaps in
+  the window ever reached it (Eichelberger's 12, M&M Buffalo 10); the
+  slowest regular updater (Bartow) peaks at 8.
+- Flush: the lifespan writer's `LIFESPAN_FLUSH_SHARE` (0.4), one constant
+  (a test checks they agree). No post-freeze flush happened in the window
+  (Eichelberger and M&M resumed with 3% and 9% changes, i.e. real
+  arrivals); the canonical case is Prestige Houston on 10-28 (frozen since
+  07-10, then 866 of 916 replaced).
+- The ops email's per-yard rule (3+ weekdays, today counted) flags 1.45% of
+  daily yards' scans / 53 yards; it stays as is (an early warning for us);
+  the visitor-facing rule waits for one more complete business day.
+
+### What would be marked today (11-18 13:47 UTC data, first scan after merge)
+
+Frozen: Wrench-A-Part - Holland (1,113 cars, since Oct 22), UAPI -
+Alexandria (827, Oct 29), Colorado Auto & Parts - Englewood (283, Oct 28),
+Utah Pic-A-Part - Orem (Premium) (86, Oct 22): 4 yards, 2,309 cars.
+Stale: Youngstown U-Pull-It (1,557, Nov 6 UTC), Paul's Auto Yard - Lake
+Station (1,399, Nov 10), M&M U-Pull-It - Buffalo (702, Nov 12), Foss
+U-Pull-It - Wilson (675, Nov 8): 4 yards, 4,333 cars. 14 more sit at 2 bd
+(Pull-A-Part Canton / Corpus Christi / New Orleans West, BYOT Baton Rouge /
+Jackson, RG Anthony ...) and turn stale at 22:00 UTC if still unchanged.
+Agreement with the ops email: the same "since" date for all 8 (seeded from
+`lastChangedAt`); the email's frozen list has those 8 plus the 14 at 2 bd.
+Over time the id-only date can be earlier than the email's: on 11-18 19
+yards' `lastChangedAt` was one scan after their last id change (a date-only
+edit the scan after), and Utah Pic-A-Part Ogden (Premium) / Army's Auto
+Wrecking - Lima have had date edits only since Nov 2 / Nov 10.
+
+### What a visitor sees
+
+- App tiles (stale or frozen yard): a quiet `badge-long` chip "List
+  unchanged since Nov 6" in the status slot (before New / Leaving soon).
+- App car screen: in place of the stay meter, the quiet `.long-listed`
+  notice "This yard's list has not changed since Nov 6. Call before you
+  go." (+ ", and we have not been able to read it since Nov 16" when the
+  last scan could not read it); frozen adds "Until it changes, its cars are
+  left out of Newest arrivals and alerts." The orange stamp is gone.
+- App Yards tab card and the yard's rows sheet: the same notice.
+- Frozen yard's cars and flush cars: not "New", not in any "new this week"
+  count or the New / This week / since-last-visit chips, and sorted after
+  every other car in Newest arrivals (unless that yard is picked). Still
+  listed, still searchable, in order on the yard's own views.
+- Site worker /yard/<slug> and /car/<key>: the same sentence (UTC date with
+  year); the car page drops the "~N days left" countdown and the yard
+  page's new-this-week list leaves held cars out.
+- Alerts (all paths read push_inventory's arrivals) and the weekly counts in
+  landed.json, landed/<make>.json and junkyards.json skip held cars.
+- Old data files (no columns): the app falls back to yard_health at 3
+  weekdays, shown the new quiet way; nothing is held back.
+
+Tests (all pass): `python3 scraper/test_yard_freshness.py` (64 checks),
+`node backend/test/yard_list_unit.mjs` (24), `node backend/site-proxy/test/
+yard_list_pages_unit.mjs` (23), ui_no_truncation SCREENS=list-stale-tiles,
+list-stale-detail,list-frozen-yard,list-frozen-rows at 320/390/768/1280
+(64 checks). Re-run unchanged: test_inventory_shards, test_model_lifespan,
+test_junkyards_json, test_landed_models, test_notable_trims,
+test_photo_sources, and the five site-proxy unit tests. sw jh-v209.
+
+### Open / for the owner or hub
+
+- Decisions to confirm: 3 / 10 business days; weekly-batch yards showing
+  the notice part of each week; frozen cars moved to the end of Newest
+  arrivals (not hidden, unlike dormant yards); the flush rule applies only
+  after a 10-bd freeze, as asked, and holds 8 days by set-out date; a stale
+  (not frozen) yard's new cars still alert; holidays list.
+- Suggest: the same 40% hold for ANY single-scan change, not only after a
+  freeze. Measured re-keys and flaps that re-added whole lists: Ryan's
+  Detroit 10-26 (+1,348), U-Pull-It Omaha N/S, Lincoln, Des Moines and
+  Prestige 10-28 (+4,313 new ids), Indy-U-Pull-It alternating two lists
+  every scan 10-30 -> 11-09, Pull-N-Save Riverside likewise; new ids defeat
+  the Worker's per-vehicle alert dedupe for cars dated in the last 3 days.
+- Hub: the ops email could read `listState` for its per-yard frozen list so
+  the email and the site name the same yards (one line in ops_monitor.js).
+- Yards workstream: outreach / adapter check for Holland (since Oct 22),
+  UAPI Alexandria, Colorado Auto & Parts, Youngstown, and Budget Bartow's
+  12-day cycle.
+- Backend (other builder): saved-car "leaving soon" alerts
+  (saved_alerts.js) still count days against the typical stay at a frozen
+  yard; a flush also sends "gone" for every car it removes at once.

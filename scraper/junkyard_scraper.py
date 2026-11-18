@@ -27779,6 +27779,21 @@ LANDED_DAYS = 7
 LANDED_PER_MAKE = 250
 
 
+def _arrival_held_fn(payload: dict):
+    """(yard index, dateAdded) -> True when a car is NOT a new arrival for
+    "new this week" counts: its yard's list is frozen, or it came in with a
+    flush (yard_freshness.arrival_held). Always False when the payload has
+    no list columns."""
+    try:
+        _yf = _yard_freshness_mod()
+        cols = _yf.yard_list_columns(payload)
+    except Exception:  # noqa: BLE001
+        cols = {}
+    if not cols:
+        return lambda y, d: False
+    return lambda y, d: bool(cols.get(y)) and _yf.arrival_held(cols[y][1], cols[y][3], d)
+
+
 def _write_landed_json(payload: dict) -> None:
     """docs/data/landed.json — what set out in the last LANDED_DAYS days, per
     make, for the public /landed/<make> pages rendered by the site Worker
@@ -27793,6 +27808,7 @@ def _write_landed_json(payload: dict) -> None:
     if any(n not in fi for n in need):
         return
     cutoff = (_date.today() - _td(days=LANDED_DAYS)).isoformat()
+    held = _arrival_held_fn(payload)
     makes: dict[str, dict] = {}
     for r in payload.get("vehicles") or []:
         make = str(r[fi["make"]] or "").strip()
@@ -27801,7 +27817,7 @@ def _write_landed_json(payload: dict) -> None:
         m = makes.setdefault(make, {"total": 0, "recent": []})
         m["total"] += 1
         d = str(r[fi["dateAdded"]] or "")[:10]
-        if d >= cutoff:
+        if d >= cutoff and not held(r[fi["yard"]], d):
             m["recent"].append([r[fi["year"]], make, r[fi["model"]], r[fi["row"]], d,
                                 r[fi["vin"]] or str(r[fi["id"]]), r[fi["yard"]]])
     for m in makes.values():
@@ -27816,7 +27832,8 @@ def _write_landed_json(payload: dict) -> None:
     for r in payload.get("vehicles") or []:
         c = ycount.setdefault(r[fi["yard"]], [0, 0])
         c[0] += 1
-        if str(r[fi["dateAdded"]] or "")[:10] >= cutoff:
+        d = str(r[fi["dateAdded"]] or "")[:10]
+        if d >= cutoff and not held(r[fi["yard"]], d):
             c[1] += 1
     yards = [[y[yi["location"]] if "location" in yi else None,
               y[yi["city"]] if "city" in yi else None,
@@ -27979,6 +27996,7 @@ def _write_landed_models_json(payload: dict) -> dict | None:
     if any(n not in fi for n in need):
         return None
     cutoff = (_date.today() - _td(days=LANDED_DAYS)).isoformat()
+    held = _arrival_held_fn(payload)
     src_yards = payload.get("yards") or []
     vpic = payload.get("vpic") or {}
     trims_table = payload.get("notableTrims")
@@ -28003,7 +28021,7 @@ def _write_landed_models_json(payload: dict) -> dict | None:
         if st:
             g["states"][st] += 1
         d = str(r[fi["dateAdded"]] or "")[:10]
-        if d and d >= cutoff:
+        if d and d >= cutoff and not held(y, d):
             vp = vpic.get(str(ri)) or []
             vp = list(vp) + [""] * (5 - len(vp))
             words = (trims_table.get(make) or {}).get(model) or []
@@ -28139,6 +28157,7 @@ def _write_junkyards_json(payload: dict) -> None:
     if any(n not in fi for n in need) or any(n not in yi for n in ("location", "city", "state")):
         return
     cutoff = (_date.today() - _td(days=LANDED_DAYS)).isoformat()
+    held = _arrival_held_fn(payload)
     src_yards = payload.get("yards") or []
     counts = [[0, 0] for _ in src_yards]
     dated: list[list] = [[] for _ in src_yards]
@@ -28154,7 +28173,7 @@ def _write_junkyards_json(payload: dict) -> None:
         m = re.search(r"\d+$", str(r[fi["id"]]))
         dated[y].append([r[fi["year"]], r[fi["make"]], r[fi["model"]], r[fi["row"]], d,
                          r[fi["vin"]] or str(r[fi["id"]]), int(m.group()) if m else 0])
-        if d >= cutoff:
+        if d >= cutoff and not held(y, d):
             counts[y][1] += 1
             make = str(r[fi["make"]] or "").strip()
             st = src_yards[y][yi["state"]]
@@ -28616,6 +28635,97 @@ KNOWN_MISSING_REASONS: dict[str, str] = {
     "U-Pull-R Parts - Toledo": _UPR,
 }
 
+def _yard_freshness_mod():
+    try:
+        import yard_freshness as _yf
+    except ImportError:
+        from scraper import yard_freshness as _yf  # pragma: no cover
+    return _yf
+
+
+# {yard: list freshness} computed by _apply_yard_list_freshness for this scan
+# (published in the yard rows) and written into yard_health.json by
+# _update_yard_health, so both files say the same thing.
+_LIST_FRESHNESS: dict[str, dict] = {}
+_LIST_KEYS = ("listFingerprint", "listChangedAt", "listReadAt", "listFlushAt")
+
+
+def _yard_date_fingerprints(payload: dict) -> dict[str, str]:
+    """{yard: sha of its sorted id|dateAdded entries}: yard_health.json's
+    `fingerprint` (adds, removals AND date corrections)."""
+    names = [y[0] for y in payload["yards"]]
+    per_yard: dict[str, list[str]] = {n: [] for n in names}
+    for row in payload["vehicles"]:
+        per_yard[names[row[7]]].append(f"{row[0]}|{row[6]}")
+    return {n: hashlib.sha1("\n".join(sorted(v)).encode()).hexdigest()[:16] for n, v in per_yard.items()}
+
+
+def _apply_yard_list_freshness(payload: dict) -> None:
+    """When each yard's list last changed (a car added or removed), whether it
+    is stale/frozen, and whether it just flushed (yard_freshness.py): four
+    columns appended to every yard row, before the payload is written
+    anywhere. Never fatal: on failure the payload ships without the columns
+    and the app shows what it showed before."""
+    _LIST_FRESHNESS.clear()
+    try:
+        _yf = _yard_freshness_mod()
+        prev_file: dict = {}
+        try:
+            prev_file = json.loads(YARD_HEALTH_FILE.read_text())
+        except Exception:
+            pass
+        names = [y[0] for y in payload["yards"]]
+        i_id, i_yard = payload["fields"].index("id"), payload["fields"].index("yard")
+        current: dict[str, list] = {n: [] for n in names}
+        for row in payload["vehicles"]:
+            current[names[row[i_yard]]].append(str(row[i_id]))
+        prev_cache: dict = {}
+
+        def prev_ids(name: str):
+            # The last READ copy of a yard = its rows in the previous publish
+            # (LIVE_FILE is overwritten only after this step). Loaded once,
+            # and only when a frozen yard has just changed.
+            if "ids" not in prev_cache:
+                prev_cache["ids"] = {}
+                try:
+                    pp = json.loads(LIVE_FILE.read_text())
+                    pn = [y[0] for y in pp["yards"]]
+                    pi, py = pp["fields"].index("id"), pp["fields"].index("yard")
+                    for r in pp["vehicles"]:
+                        prev_cache["ids"].setdefault(pn[r[py]], set()).add(str(r[pi]))
+                except Exception as e:  # noqa: BLE001
+                    print(f"  [list freshness] previous publish unreadable ({e}); flush check skipped",
+                          file=sys.stderr)
+            return prev_cache["ids"].get(name)
+
+        info = _yf.update_list_freshness(
+            prev_file.get("yards") or {}, prev_file.get("scrapedAt"), current, set(_CARRIED_YARDS),
+            payload["scrapedAt"], date_fps=_yard_date_fingerprints(payload), prev_ids=prev_ids,
+            flush_share=LIFESPAN_FLUSH_SHARE)
+        _yf.annotate_yard_rows(payload, info)
+        _LIST_FRESHNESS.update(info)
+    except Exception as e:  # noqa: BLE001
+        print(f"  [list freshness] FAILED ({e}); yard rows published without list dates",
+              file=sys.stderr)
+        _LIST_FRESHNESS.clear()
+        return
+    counts = collections.Counter(i["listState"] for i in info.values())
+    cars = collections.Counter()
+    for n, ids in current.items():
+        cars[info[n]["listState"]] += len(ids)
+    print(f"  [list freshness] {counts.get('stale', 0)} yard(s) stale ({cars.get('stale', 0)} cars), "
+          f"{counts.get('frozen', 0)} frozen ({cars.get('frozen', 0)} cars): "
+          f"no car added or removed for {_yf.STALE_BUSINESS_DAYS}+ / {_yf.FROZEN_BUSINESS_DAYS}+ "
+          f"full business days", file=sys.stderr)
+    for n, i in sorted(info.items()):
+        if i.get("flush"):
+            f = i["flush"]
+            verdict = "FLUSH: its cars are not new arrivals" if i.get("listFlushAt") == payload["scrapedAt"] \
+                else "under the flush share: normal arrivals"
+            print(f"  [list freshness] {n}: frozen since {f['frozenSince']}, now +{f['added']} "
+                  f"-{f['removed']} ({round(100 * f['share'])}% of the list) — {verdict}", file=sys.stderr)
+
+
 def _update_yard_health(payload: dict) -> None:
     """Per-yard change tracking -> docs/data/yard_health.json (committed by the
     scan workflow along with the rest of docs/data/). Compares each yard's
@@ -28623,8 +28733,10 @@ def _update_yard_health(payload: dict) -> None:
     log when a yard has been frozen for YARD_STALE_SCANS+ scans or has
     disappeared from the scrape entirely."""
     prev: dict = {}
+    prev_at = None
     try:
-        prev = json.loads(YARD_HEALTH_FILE.read_text()).get("yards", {})
+        _pf = json.loads(YARD_HEALTH_FILE.read_text())
+        prev, prev_at = _pf.get("yards", {}), _pf.get("scrapedAt")
     except Exception:
         pass
 
@@ -28658,7 +28770,13 @@ def _update_yard_health(payload: dict) -> None:
         yards_out[n] = {"count": len(per_yard[n]), "fingerprint": fp,
                         "unchangedScans": unchanged, "lastChangedAt": last_changed,
                         **({"newestDateAdded": newest[n]} if newest[n] else {}),
-                        **({"carried": True} if n in _CARRIED_YARDS else {})}
+                        **({"carried": True} if n in _CARRIED_YARDS else {}),
+                        # list freshness (yard_freshness.py): the same values
+                        # this scan published in the yard rows. listReadAt is
+                        # left out when it is this scan (the next scan reads
+                        # it back from scrapedAt), as in the yard rows.
+                        **{k: v for k, v in (_LIST_FRESHNESS.get(n) or {}).items()
+                           if k in _LIST_KEYS and v and not (k == "listReadAt" and v == now)}}
         if unchanged >= YARD_STALE_SCANS:
             stale.append((unchanged, n, len(per_yard[n])))
         # A feed can keep CHANGING (departures hidden) while receiving no
@@ -28698,7 +28816,13 @@ def _update_yard_health(payload: dict) -> None:
         explained = reason == "retired" or reason.startswith("renamed")
         if miss > YARD_MISSING_DROP and explained:
             continue
-        yards_out[n] = {**{k: p[k] for k in ("count", "fingerprint", "lastChangedAt") if k in p},
+        # A missing yard was not read: its list fields stay as last read (a
+        # yard read in the previous scan has its listReadAt left out there:
+        # it is that scan's time).
+        last_read = p.get("listReadAt") or (
+            prev_at if p.get("listFingerprint") and not p.get("missingScans") and not p.get("carried") else None)
+        yards_out[n] = {**{k: p[k] for k in ("count", "fingerprint", "lastChangedAt") + _LIST_KEYS if k in p},
+                        **({"listReadAt": last_read} if last_read else {}),
                         "unchangedScans": int(p.get("unchangedScans", 0)),
                         "missingScans": miss,
                         **({"missingReason": reason} if reason else {})}
@@ -29296,6 +29420,7 @@ def main():
                 extras = payload.pop("_extras", {})
                 if args.save:
                     apply_stale_keep(payload, extras)
+                    _apply_yard_list_freshness(payload)
                     LIVE_FILE.write_text(json.dumps(payload, separators=(",", ":")))
                     _write_inventory_meta(payload)
                     _write_landed_json(payload)
@@ -29341,6 +29466,7 @@ def main():
             extras = payload.pop("_extras", {})
             if args.save:
                 apply_stale_keep(payload, extras)
+                _apply_yard_list_freshness(payload)
                 LIVE_FILE.write_text(json.dumps(payload, separators=(",", ":")))
                 _write_inventory_meta(payload)
                 _write_landed_json(payload)
