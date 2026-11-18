@@ -39,10 +39,10 @@
    "PENDING": 0
   },
   "pairs": {
-   "RIGHT": 0,
-   "WRONG": 0,
-   "RISK": 0,
-   "PENDING": 30
+   "RIGHT": 27,
+   "WRONG": 2,
+   "RISK": 1,
+   "PENDING": 0
   }
  },
  "census": null,
@@ -13070,7 +13070,8 @@
     "QX56",
     2011
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "Pair QX56 2011: own page (infinitipartsdeal lists L620) lists 80731-1LE0A 'Location: Passenger Side; Replaced By: 80731-1LE0B' with no option note; product page QX56 2011-2013, QX80 2014-2015, 5.6L. 32 lot cars plain, correct.",
    "raw_product_records": [
     {
      "ref": "www.infinitipartsdeal.com:records:L574",
@@ -13204,7 +13205,8 @@
     "Stanza",
     1993
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "Pair Stanza 1993: own page (nissanpartsdeal lists L820) lists 28525-1E501 'FED. S. GLE + CAL. S. GLE' (auto A/C controller; XE/GXE/SE take 27510/27515 units). Product page Altima/Stanza 1993-1995 GLE; prod 06/1992-07/1994 on the 1995 Altima page, so 1995 is correctly out. Trim limit carried by the note. No lot cars for this vehicle-year.",
    "raw_product_records": [
     {
      "ref": "www.nissanpartsdeal.com:records:L1572",
@@ -13310,7 +13312,8 @@
     "Cube",
     2012
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "Pair Cube 2012: own page rear regulator (nissanpartsdeal lists L742) lists 82731-CV01B 'Location: Passenger Side; Replaced By: 82731-CV01C'; product page Cube 2010-2014 1.8L, Juke 2011-2017, Leaf 2011-2012. 11 lot cars plain, correct.",
    "raw_product_records": [
     {
      "ref": "www.nissanpartsdeal.com:records:L1420",
@@ -13466,7 +13469,8 @@
     "Frontier",
     2011
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "Pair Frontier 2011: own page (nissanpartsdeal lists L560) lists 24810-9BA7C 'CC. 4WD. SL' prod 08/2010-04/2011 (then 24810-9CA7C, which replaces it). Gate crew cab + 4wd + 4.0L matches (SL is 4.0L only). Lot: 4 4x2 hidden, 7 'if equipped ... crew cab, 4WD, 4.0L'; no plain rows.",
    "raw_product_records": [
     {
      "ref": "www.nissanpartsdeal.com:records:L4703",
@@ -13600,7 +13604,8 @@
     "M45",
     2006
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "Pair M45 2006: own page (infinitipartsdeal lists L688) lists speedometer 24820-EH11B '*S' prod 05/2005-05/2006 (EH11A 'S' same dates; EJ20A/B from 05/2006). Product page M35 and M45 2006-2007, both engines. The A/B split is unprinted (both descriptions plain 'Speedometer Assy'), carried by the note. 20 lot cars plain.",
    "raw_product_records": [
     {
      "ref": "www.infinitipartsdeal.com:records:L1153",
@@ -13709,7 +13714,8 @@
     "G25",
     2011
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "Pair G25 2011: own page (infinitipartsdeal lists L611) lists 80730-JK60C 'S. 2WD/STD. VQ25HR. (JOURNEY+ PREMIUM+ SPORT/P) + S. AWD. VQ25HR + S. VQ37VHR' (base 'S. LEATHER' takes JK00B/JK00C). 16 lot cars plain: AWD (decoded 4WD) and 2WD Journey/Premium take it; base 2WD is a trim limit carried by the note.",
    "raw_product_records": [
     {
      "ref": "www.infinitipartsdeal.com:records:L877",
@@ -13845,7 +13851,8 @@
     "Versa",
     2007
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "Pair Versa 2007: own pages sedan (nissanpartsdeal lists L592, prod 12/2006-07/2007) and hatchback (L594, prod 05/2006-01/2007) list front RH motor 80730-89915, replaced by 80730-8991A after. Product page Murano 2003-2007 and Versa 2007-2008. Power-window option and production-date split carried by the note. 175 lot cars plain.",
    "raw_product_records": [
     {
      "ref": "www.nissanpartsdeal.com:records:L920",
@@ -14041,7 +14048,19 @@
     "QX60",
     2014
    ],
-   "verdict": "PENDING",
+   "verdict": "WRONG",
+   "reason": "Pair QX60 2014: product page (infinitipartsdeal records L1212) '2014 Infiniti QX60 | Premium|6 Cyl 3.5L | VQ35DE', seed row '*W. PREMIUM' on the qx60-gas catalog. The 'gas' gate counts as met for 8 lot QX60 2014 decoded 2.5L (the QX60 Hybrid; VINs 5N1CL0MN8EC524170, 5N1CL0MN1EC521952, 5N1CL0MM9EC514772, 5N1CL0MN6EC514804, 5N1CL0MN5EC521713, 5N1CL0MM0EC527619, 5N1CL0MM6EC525311, 5N1CL0MM9EC548064), which are plain rows for a gas-only cluster.",
+   "class": "gas gate passes hybrid decoded 2.5L",
+   "wrong_cars": [
+    "5N1CL0MN8EC524170",
+    "5N1CL0MN1EC521952",
+    "5N1CL0MM9EC514772",
+    "5N1CL0MN6EC514804",
+    "5N1CL0MN5EC521713",
+    "5N1CL0MM0EC527619",
+    "5N1CL0MM6EC525311",
+    "5N1CL0MM9EC548064"
+   ],
    "raw_product_records": [
     {
      "ref": "www.infinitipartsdeal.com:records:L1212",
@@ -14185,7 +14204,8 @@
     "Stanza",
     1993
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "Pair Stanza 1993: own page (nissanpartsdeal lists L824) lists 80720-0E700 prod 06/1992-08/1993 (power regulator; 80700-0E710 is the manual one). Product page Altima/Stanza 1993-1994 GLE, GXE, SE. No lot cars.",
    "raw_product_records": [
     {
      "ref": "www.nissanpartsdeal.com:records:L4820",
@@ -14267,7 +14287,8 @@
     "QX50",
     2015
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "Pair QX50 2015: own page (infinitipartsdeal lists L1303) lists 96301-3WV3E '*WAG. LEATHER' prod 07/2012-07/2015 (LWB 5UB mirrors from 07/2015 are MY2016). One lot car plain; leather/option split carried by the note.",
    "raw_product_records": [
     {
      "ref": "www.infinitipartsdeal.com:records:L662",
@@ -14405,7 +14426,9 @@
     "M35h",
     2013
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "Pair M35h 2013: own page (infinitipartsdeal lists L1477) lists K6301-1MA0B 'PRIMER; SED'. Product page M35h 2012-2013, M37/M56 2011-2013, Q70 2014 (incl. VQ35HR). No lot cars.",
+   "observation": "the Q70 'gas only' gate is stricter than the product page (harmless)",
    "raw_product_records": [
     {
      "ref": "www.infinitipartsdeal.com:records:L851",
@@ -14491,7 +14514,8 @@
     "Altima",
     1995
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "Pair Altima 1995: no lists-manifest page, but the product record is seeded from the 1995 Altima page (nissanpartsdeal records L1551) with row 'BLACK; Production Date: from 02/1995; FED. S. (XE+ GXE+ SE) + CAL. S. (XE+ GXE+ SE)'; it replaces 96301-1E400 (the earlier MY1995 number). 15 lot cars plain; GLE (paint-less J6301) is a trim limit carried by the note.",
    "raw_product_records": [
     {
      "ref": "www.nissanpartsdeal.com:records:L1551",
@@ -14634,7 +14658,9 @@
     "Pathfinder",
     2005
    ],
-   "verdict": "PENDING",
+   "verdict": "WRONG",
+   "reason": "Pair Pathfinder 2005: own page (nissanpartsdeal lists L224) lists 24810-EA48D 'W. 4WD' prod 12/2004-09/2005, and separately 24810-EA47D / EA403 '*W. AUTO' (All-Mode 4WD) for the same dates. The gate is drive '4wd', which the app confirms for every vPIC '4WD/4-Wheel Drive/4x4' decode; All-Mode (AUTO) Pathfinders decode the same way. So all 89 lot Pathfinder 2005 decoded 4WD are plain rows, including the All-Mode cars that per the catalog take EA47D, not EA48D. The app models AUTO as its own class ('a4wd', which leaves 4WD decodes 'if equipped' in item 4); a '4wd' gate on a model-year with an AUTO sibling needs the same treatment.",
+   "class": "4wd gate confirms All-Mode (AUTO) 4WD decodes",
    "raw_product_records": [
     {
      "ref": "www.nissanpartsdeal.com:records:L2721",
@@ -14780,7 +14806,8 @@
     "Altima",
     1996
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "Pair Altima 1996: own page (nissanpartsdeal lists L629) lists front RH motor 80730-1E400 'Replaced By: 80730-0E701'. Power-window option (XE manual 80700-0E710) carried by the note. 9 lot cars plain.",
    "raw_product_records": [
     {
      "ref": "www.nissanpartsdeal.com:records:L1555",
@@ -14914,7 +14941,8 @@
     "Xterra",
     2002
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "Pair Xterra 2002: own page (nissanpartsdeal lists L176) lists 80721-2Z710 'W. KA24DE + W. VG33E. XE'; product page 'Xterra | XE|4 Cyl 2.4L, 6 Cyl 3.3L'. SE and supercharged (VG33ER) Xterras take 2Z700/3S500; that is a trim/engine-code limit no decode shows (both 3.3L), carried by the note. 159 lot cars plain, none with a contradicting decode.",
    "raw_product_records": [
     {
      "ref": "www.nissanpartsdeal.com:records:L4277",
@@ -15107,7 +15135,8 @@
     "Q40",
     2015
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "Pair Q40 2015: own page (infinitipartsdeal lists L831) lists 82720-JK000 with no option note; product page G25/G35/G37/Q40 all trims, 2.5L and 3.7L. 10 lot cars plain, correct.",
    "raw_product_records": [
     {
      "ref": "www.infinitipartsdeal.com:records:L124",
@@ -15241,7 +15270,8 @@
     "Stanza",
     1993
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "Pair Stanza 1993: own page (nissanpartsdeal lists L824) lists front LH motor 80731-1E400, replaced by 80731-0E701. No lot cars.",
    "raw_product_records": [
     {
      "ref": "www.nissanpartsdeal.com:records:L1554",
@@ -15355,7 +15385,9 @@
     "Xterra",
     2007
    ],
-   "verdict": "PENDING",
+   "verdict": "RISK",
+   "reason": "Pair Xterra 2007: own page (nissanpartsdeal lists L296) lists 24810-ZP93A '*W. 4WD. SE' prod 09/2006-08/2007; the Pathfinder side is '*W. AUTO' (product page Pathfinder LE, Xterra SE). Gates (Xterra 4wd, Pathfinder a4wd) match the notes; 43 Xterra 4WD plain, 42 4x2 hidden.",
+   "missing": "the cluster's market/unit. ZP93A pairs Pathfinder AUTO with Xterra 4WD SE exactly as the km/h cluster 24810-EC44C ('Instrument-Kph') does for 09/2005-04/2007, while the same period's other asterisked numbers split the way the mph ones do (24810-ZP67A '*W. 4WD' Pathfinder + '*W. 4WD. SE' Xterra, replaced by 24810-ZL99A; 24810-ZP66A '*W. AUTO' Pathfinder only). ZP93A's description names no unit ('Instrument Combination Meter Assembly'). If it is km/h, the 43 plain US Xterra donors carry ZP67A, not ZP93A, and this is WRONG like item 4. One web search on the number (result text only, no page opened) gave no unit.",
    "raw_product_records": [
     {
      "ref": "www.nissanpartsdeal.com:records:L2732",
@@ -15502,7 +15534,8 @@
     "Frontier",
     2016
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "Pair Frontier 2016: own page (nissanpartsdeal lists L755) lists 96301-9BC9B 'KC. SV + CC. FED. SV + CC. FLXFUEL. 2WD. STD/BED. SV + ... , KC. SV + CC. SV' (S, SL, PRO-4X take other numbers). Both cabs, both engines (product page QR25DE and VQ40DE). Trim limit carried by the note; 5 lot cars plain.",
    "raw_product_records": [
     {
      "ref": "www.nissanpartsdeal.com:records:L4808",
@@ -15640,7 +15673,8 @@
     "QX60",
     2016
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "Pair QX60 2016: own page (infinitipartsdeal lists L840) lists 96301-3JA9A 'W. BASE' prod 08/2013-01/2016 (refresh 96301-9NF9A from 01/2016). Product page lists QX60 2014-2017 with QR25DER and VQ35DE, so the hybrid is covered too. Trim and production-date limits carried by the note; 11 lot cars plain.",
    "raw_product_records": [
     {
      "ref": "www.infinitipartsdeal.com:records:L374",
@@ -15786,7 +15820,8 @@
     "Q40",
     2015
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "Pair Q40 2015: own page (infinitipartsdeal lists L831) lists 82721-JK000 with no option note; product page G25/G35/G37/Q40, 2.5L and 3.7L. 10 lot cars plain, correct.",
    "raw_product_records": [
     {
      "ref": "www.infinitipartsdeal.com:records:L123",
@@ -15940,7 +15975,8 @@
     "Q70L",
     2019
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "Pair Q70L 2019: own page (infinitipartsdeal lists L1516) lists 82720-1MA0B with no note (it replaces 82720-EG000). No lot cars.",
    "raw_product_records": [
     {
      "ref": "www.infinitipartsdeal.com:records:L2429",
@@ -16079,7 +16115,8 @@
     "Frontier",
     2003
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "Pair Frontier 2003: own page (nissanpartsdeal lists L411) lists 96301-3S500 '*KC + *CC. SB + *CC. XB, *KC. (SE+ SC) + ..., *KC. KA24DE + *KC. VG33E. XE + *CC. SB. XE + *CC. XB. XE' (every cab, trim and engine the page prints, all asterisked; the unasterisked 3S510 / S3800 / ZD000 are the other option). No regular cab appears on the 2003 page. 48 lot cars plain; the asterisk option is carried by the note.",
    "raw_product_records": [
     {
      "ref": "www.nissanpartsdeal.com:records:L264",
@@ -16260,7 +16297,8 @@
     "Stanza",
     1993
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "Pair Stanza 1993: own page (nissanpartsdeal lists L825) lists rear LH motor 82731-1E400 prod 06/1992-08/1993 (MY1993). No lot cars.",
    "raw_product_records": [
     {
      "ref": "www.nissanpartsdeal.com:records:L4821",
@@ -16412,7 +16450,8 @@
     "Q70L",
     2018
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "Pair Q70L 2018: own page (infinitipartsdeal lists L1507) lists front LH motor 80731-1MA0A with no note; product page M35h/M37/M56/Q70/Q70L. No lot cars.",
    "raw_product_records": [
     {
      "ref": "www.infinitipartsdeal.com:records:L852",
@@ -16508,7 +16547,8 @@
     "Pathfinder",
     2010
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "Pair Pathfinder 2010: own page (nissanpartsdeal lists L419) lists 80721-EA000 prod 07/2008-04/2010 (80721-ZL90A after). Product page Pathfinder 2005-2011 4.0L and 5.6L, so the V8 lot car is fine. Production-date split carried by the note; 54 lot cars plain.",
    "raw_product_records": [
     {
      "ref": "www.nissanpartsdeal.com:records:L310",
@@ -16654,7 +16694,8 @@
     "G25",
     2011
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "Pair G25 2011: own page (infinitipartsdeal lists L607) lists 96302-1NC2A 'S. LEATHER' (Journey takes 1NC3A, Premium/Sport-P 1NC4A). Sedan-only model. Trim limit carried by the note; 16 lot cars plain.",
    "raw_product_records": [
     {
      "ref": "www.infinitipartsdeal.com:records:L96",
@@ -16791,7 +16832,9 @@
     "Titan",
     2006
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "Pair Titan 2006: own page (nissanpartsdeal lists L180) lists 24810-7S03A ('-Mph') '*KC. (SE+ LE) + *CC. (SE+ LE)' prod 08/2005-08/2006, both cabs and drives. XE and ~50 sibling numbers with the same or overlapping printed options are trim/unprinted-option limits carried by the note. The '1.0L' lot decode is a bad decode.",
+   "observation": "as in item 6, many siblings share the same printed options, so the note is honest but weak",
    "raw_product_records": [
     {
      "ref": "www.nissanpartsdeal.com:records:L3020",
@@ -16982,7 +17025,8 @@
     "QX80",
     2015
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "Pair QX80 2015: own page (infinitipartsdeal lists L1132) lists speedometer 24820-3ZD0C '*3ROW' with no date (02/2013-08/2014 on the 2014 page). Product page QX56 2013, QX80 2014-2015. 3 lot cars plain.",
    "raw_product_records": [
     {
      "ref": "www.infinitipartsdeal.com:records:L1725",
@@ -17103,7 +17147,8 @@
     "Xterra",
     2012
    ],
-   "verdict": "PENDING",
+   "verdict": "RIGHT",
+   "reason": "Pair Xterra 2012: own page (nissanpartsdeal lists L639) lists 27510-9BF0B 'W. (S + PRO-4X)'; product page 'Xterra | Off-Road, PRO-4X, S|6 Cyl 4.0L'. 27510-9CA0A on the same page ('W. 2WD + W. S. 6MT, W. X') is the supersession number for several older controllers (item 2 shows EA000/EA00A/9BH0A replaced by it), so it does not by itself limit 9BF0B to 4WD. Trim limit carried by the note; 14 lot cars plain.",
    "raw_product_records": [
     {
      "ref": "www.nissanpartsdeal.com:records:L4860",
