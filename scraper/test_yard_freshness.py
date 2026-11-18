@@ -158,6 +158,28 @@ check("arrival held: frozen yard or flush car only",
       and not yf.arrival_held("stale", None, "2026-11-18") and not yf.arrival_held("", None, "2026-11-18"))
 
 # ---------- list jumps (any list, not only after a freeze) ----------
+check("jump thresholds as measured (25% of the list, 50 cars)", yf.JUMP_SHARE == 0.25 and yf.JUMP_MIN_CARS == 50)
+
+
+def measured(count, never, back=0):
+    """One measured event, replayed: `never` ids the yard never listed plus
+    `back` ids it listed before, on a list now `count` long."""
+    prev_l = [f"p{i}" for i in range(count)]
+    keep = prev_l[:count - never - back]
+    cur_l = keep + [f"x{i}" for i in range(never)] + [f"r{i}" for i in range(back)]
+    o = yf.update_list_freshness({"M": {"listFingerprint": yf.id_fingerprint(prev_l), "listChangedAt": NOW,
+                                        "listReadAt": NOW}}, NOW, {"M": cur_l}, set(), NOW,
+                                 prev_ids=lambda n: set(prev_l),
+                                 seen_before=lambda n, s: {i for i in s if i.startswith("r")})
+    return o["M"].get("listFlushWhy") == "jump"
+
+
+check("measured real days not held: Harry's Allentown 11-14 (102/540), Pick Ur Part 11-10 (204/1087), "
+      "Omaha South 11-04 (188/1052)", not measured(540, 102) and not measured(1087, 204) and not measured(1052, 188))
+check("measured jumps held: Riverside 10-31 (152/553), Midway Muncie 11-14 (120/420), Ryan's 10-26 (1348/1376), "
+      "Pull-N-Save Glendale 10-31 (772/1890)",
+      measured(553, 152) and measured(420, 120) and measured(1376, 1348) and measured(1890, 772))
+check("measured flip not held: Indy 11-01 (672 back on 1,299)", not measured(1299, 0, 672))
 JP = {"J": {"listFingerprint": fp, "listChangedAt": "2026-11-18T08:41:39Z", "listReadAt": "2026-11-18T08:41:39Z"}}
 base = [f"c{i}" for i in range(1000)]
 JP["J"]["listFingerprint"] = yf.id_fingerprint(base)

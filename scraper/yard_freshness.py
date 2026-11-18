@@ -66,8 +66,10 @@ FLUSH_SHARE = 0.4
 # List jump (2026-11-18 follow-up): one scan adds cars under ids the yard
 # has never listed, at least JUMP_SHARE of the list and JUMP_MIN_CARS cars.
 # Marked like a flush (listFlushAt, listFlushWhy "jump"): the cars it
-# brought are not new arrivals. Measured in ops/data.md.
-JUMP_SHARE = 0.3
+# brought are not new arrivals. On the 10-25 .. 11-18 history the biggest
+# real set-out day was 18.9% of its list (Harry's Allentown, 11-14) and the
+# smallest jump 27.5% (Pull-N-Save Riverside, 10-31); ops/data.md lists all.
+JUMP_SHARE = 0.25
 JUMP_MIN_CARS = 50
 
 YARD_LIST_FIELDS = ["listChangedAt", "listState", "listReadAt", "listFlushAt"]
