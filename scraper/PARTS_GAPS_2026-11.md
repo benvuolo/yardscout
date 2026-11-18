@@ -2577,3 +2577,542 @@ console lid; any 1st gen diff-lock switch.
     redesign);
   - Tacoma 1st gen climate unit 1995–2004 (the 2001 refresh);
   - Xterra 2nd gen console body across the 2009 update.
+
+## 26. Next measured block (2026-11-17, owner via hub: "I want everything large done. More breadth, data, parts compatibility.")
+
+Order from `ops/parts.md` "Next" item 2. Measured on the 2026-11-17 scan
+(336,279 cars, 12,478 distinct year/make/model) with the code before §26:
+generic-only 13,880 (4.1%), no entry 12,381 (3.7%).
+
+| Order | Model | Generic-only cars before |
+|---|---|---|
+| 1 | Volvo S40 2000–11 | 264 |
+| 2 | Saturn SL / SL1 / SL2 1991–2002 (plus 171 S-Series, SC and SW listings with no entry) | 276 |
+| 3 | Chevrolet Trax 2015–22 | 267 |
+| 4 | Chevrolet Sonic 2012 | 281 |
+| 5 | Ford Freestar 2004–07 | 253 |
+| 6 | Ford Freestyle 2005–07 | 259 |
+| 7 | Mitsubishi Mirage and Mirage G4 | 250 |
+| 8 | Chevrolet Venture 1997–2005 | 224 |
+
+**Basis rule for this block (stricter than §13–22).** The hub's brief:
+a row needs a stated basis, and "probably the same" is not one.
+- **Mechanical rows (fuel pump module, A/C compressor) need a catalog part
+  number that lists the window.** The numbers come from the carmaker
+  catalog records the interchange crawl already holds: branch `oem-raw`
+  (read at 57e8b5b9, 2026-11-15), files `raw/www.gmpartsgiant.com.jsonl`,
+  `raw/www.fordpartsgiant.com.jsonl`, `raw/www.volvopartsgiant.com.jsonl`,
+  `raw/www.mitsubishipartsgiant.com.jsonl`. Each record carries the
+  catalog's own fitment lines and a `retrieved` date (2026-11-05 to
+  2026-11-10 for everything cited here). No catalog site was contacted for
+  this block; the records were read from the branch.
+- **A window is only the years a cited number lists.** The crawl was seeded
+  one model year per model, so a year with no number is "not in the data",
+  not "does not fit". Such years get no row and are listed as left out.
+- **"match part #"** is in the row name where two or more numbers cover the
+  same window (a drive, engine or equipment split the listing cannot see).
+- **Standard or option:** a row is plain only where a fetched source lists
+  the item as standard equipment for those years; otherwise `option`.
+- **No radiator-fan rows.** §13–22 added the fan row on the layout alone
+  ("every car, FWD transverse"). No source at hand names a fan assembly
+  with its years (the crawl has no fan category), so the row is left out
+  for every model here. See "For the hub" in §26.9.
+- **Bands and pull costs** are the audited templates unchanged (§1, §13:
+  `_GAP_MECH`, `_SUNROOF`, the AWD rear-unit rows, the Uplander
+  sliding-door motor, the Accent/Rio/Focus hatch tail-light row). Nothing
+  was priced from a web page; no eBay data was read.
+
+**Other sources.** WP = Wikipedia raw wikitext; CG = Consumer Guide used
+reviews (consumerguide.com/used/…); EPA = fueleconomy.gov model menus. All
+read directly on 2026-11-17 (quotes are from the page text, not a summary).
+Not used: cars.com (returned 403 to this session; not worked around) and
+RockAuto (its robots.txt disallows ClaudeBot; not read).
+
+**New mechanism: `PART_NUMBER_BREAKS`.** A cited catalog-number change cuts
+one named row at that model year, the way `FACELIFT_BREAKS` cuts the
+appearance rows. Narrowing only. One entry so far (the S40 mirrors).
+
+### 26.1 Volvo S40 2000–2004, 2004.5–2011
+
+Basis: WP Volvo_S40; consumerguide.com/used/2000-04-volvo-s40v40 and
+/used/2005-11-volvo-s40v50; EPA menus 1999–2012; Volvo catalog records
+(oem-raw `raw/www.volvopartsgiant.com.jsonl`, retrieved 2026-11-05 and
+2026-11-10).
+- **Generations, and why 2004 stands alone.** US sales began with the 2000
+  model year (WP; EPA lists "S40 FWD" 2000–2011). The second generation
+  went "on sale part way through the 2004 model year, it is sometimes known
+  as the 2004.5 Volvo S40" (WP). The catalog agrees: first-generation
+  numbers list "2000-2004 Volvo S40 | Base, LSE | 4 Cyl 1.9 L" and
+  second-generation numbers "2004-2011 Volvo S40 | 2.4i, T5 … | 5 Cyl".
+  A "2004 S40" listing can be either car, so
+  `GENERATION_BREAKS["volvo s40"] = [2004, 2005]`: 2004 is its own window
+  and gets no new rows (20 cars).
+- **Facelifts added to `FACELIFT_BREAKS`:**
+  - 2001: "got a thorough makeover, including freshened styling …
+    subtly reshaped the fenders, reworked the front bumper with an
+    integrated spoiler" (CG); "slightly different front wings and front
+    bumper, and larger front indicators" (WP, Phase II). Volvo sedan tail
+    lamps 30621883/4 list 2001–2004.
+  - 2008: "Both the S40 and V50 received revised exterior and interior
+    styling" (CG); "refreshed for April 2007" (WP). Volvo numbers: grille
+    8620116 and tail-lamp lens 30698347 are noted "2004-07"; headlamps
+    31265706/7 (halogen) and 31214756/7 (bi-xenon) are noted "2008-11".
+- **Mirrors (`PART_NUMBER_BREAKS` 2007):** Volvo mirror assemblies
+  30744586/9 list 2004–2006; 31278733/9 are noted "2007-11". The existing
+  mirror row is now cut at 2007.
+- **A/C:** standard ("air conditioning" in the base 2.4i list every year
+  2005–11, CG).
+- **AWD:** T5 only, 2005–2010 ("added wagon and all-wheel-drive variants
+  for 2005"; "The 2011 Volvo S40 and V50 lineups deleted their
+  manual-transmission and all-wheel-drive models", CG; EPA "S40 AWD"
+  2005–2010; "the AWD system bought from Haldex Traction", WP).
+- **Sunroof:** in option packages 2005–08 and 2010–11; "a sunroof were now
+  standard" for 2009, and "power sunroof" is in the 2009 base list (CG).
+
+| Row | Years | Gate | Basis |
+|---|---|---|---|
+| A/C compressor | 2005–11 | — | Volvo 36050586 lists 2004–2011 S40, every trim. Standard (CG). |
+| Fuel pump module (match part #) | 2005–11 | — | Volvo 31261425 (noted 2WD, 2004–2010), 8629907 (4WD, 2004–2006), 30792729 (2007–2011), 30724566 and 30792778 (2005–2006). Several numbers, hence "match part #". |
+| AWD rear differential / coupling | 2005–10 | drive: awd/4wd | CG, EPA, WP above. Same band as the Tucson/Juke/Encore rows. |
+| Sunroof | 2005–08, 2010–11 | option | CG option packages. |
+| Sunroof | 2009 | — | Standard in the 2009 base list (CG). |
+
+Left out, no stated basis:
+- First generation (2000–03) pump and compressor: no number in the data.
+  A/C was standard ("air conditioning w/automatic climate control", CG
+  2000–04 base lists), but a window needs a number in this block. 39 cars
+  stay generic-only, with their lamp windows now cut at 2001.
+- The 2004 cars (20): both generations, see above.
+- First-generation sunroof (an option every year per CG, but the window
+  crosses the 2001 makeover with no number).
+- 2003 "egg crate" grille (WP; Volvo grille 30652182 lists 2003–2004):
+  grille only, so not a cut (single-component rule, §23.3).
+- T5 turbo parts, R-Design trim parts (not researched).
+
+Result (same inventory): generic-only 13,880 (4.1%) → 13,675. S40
+264 → 59 (39 first generation, 20 from 2004).
+
+### 26.2 Saturn S-Series 1991–2002 (SL, SC, SW)
+
+Basis: WP Saturn_S-Series; GM catalog records (oem-raw
+`raw/www.gmpartsgiant.com.jsonl`, retrieved 2026-11-05 and 2026-11-06).
+- **Generations** ("marketed in three generations … The model changes took
+  place for the 1997 and 2000 model years", WP; per body from the WP
+  infoboxes and text):
+  - sedan (SL, SL1, SL2): 1991–95, 1996–99 ("a completely redesigned
+    exterior"), 2000–02 ("new body panels from the belt-line down");
+  - wagon (SW1, SW2): 1993–95, 1996–99, 2000–01;
+  - coupe (SC, SC1, SC2): 1991–96, 1997–2000, 2001–02 ("redesigned fascias
+    front and rear, as well as new headlamps and tail lamps for the 2001
+    model year").
+  New `GENERATION_BREAKS`: "saturn sl" [1996, 2000], "saturn sw"
+  [1996, 2000], "saturn sc" [1997, 2001]. GM lamp and mirror numbers agree
+  for the sedan: mirrors 21096065 list 1991–1995 and 21170588/9 1996–2002;
+  headlamps 21111169/70 list 1996–1999 and 21112455/6 2000–2002. The
+  existing SL lamp rows are now bounded by generation.
+- **Fuel pump:** GM 21015330 lists 1991–1996 (SC 1991–92; SC1, SC2, SW1,
+  SW2 1993–96; SL, SL1, SL2 1991–96); 21015072 lists 1997 for every body;
+  21015152 lists 1998–2002 (SW1 to 1999, SW2 to 2001). One number per
+  window, so the standard row name. The number windows do not follow the
+  body generations; the rows are cut at both.
+- **Power windows and mirrors were options:** "Some factory options such as
+  power windows, power locks, or cruise control were not available on the
+  SL"; the SL1 "could be optioned with power windows, power locks, power
+  mirror" (WP). The window-regulator, master-switch and power-mirror rows
+  on these entries are now `option` ("if equipped"). This changes existing
+  rows on 276 SL cars from confirmed to "if equipped".
+
+**Routing: 171 listings had no entry.** "Saturn S-Series" (51), "SC",
+"SC1", "SC2" (76) and "SW", "SW1", "SW2" (44) matched nothing. They now
+have entries `saturn s-series` (1991–2002), `saturn sc` (1991–2002) and
+`saturn sw` (1993–2001) with the pump rows above and the consensus
+evergreens. No lamp or mirror rows: they differ by body and no row-level
+basis was checked. The bare "S-Series" spelling does not say the body, so
+its rows are cut at every sedan and coupe break.
+
+| Row | Years (by GM number, then by generation) | Gate | Basis |
+|---|---|---|---|
+| Fuel pump module | 1991–96, 1997, 1998–2002 | — | GM 21015330, 21015072, 21015152 (all bodies). |
+| Window regulator, master switch, power mirrors (existing rows) | all | option | WP: power windows and mirrors were options. |
+
+Left out, no stated basis: A/C compressor ("air conditioning … available
+on the option sheet", WP, and no compressor number in the data); sunroof
+("A rear spoiler and a sunroof were available options" on the 2000–02
+sedan, WP, but no number); lamp rows for the coupe and wagon; the SC2's
+pop-up headlamps (1991–96).
+
+Result (same inventory): generic-only 13,675 → 13,399 (SL/SL1/SL2
+276 → 0); no entry 12,381 → 12,210 (the 171 listings).
+
+### 26.3 Chevrolet Trax 2015–2022
+
+Basis: WP Chevrolet_Trax; consumerguide.com/used/2015-chevrolet-trax; EPA
+menus 2011–2023; GM catalog records (oem-raw, retrieved 2026-11-05 and
+2026-11-09).
+- **Years:** "released in the United States for the 2015 model year";
+  "discontinued the first-generation Trax … following the 2022 model year
+  in North America" (WP). EPA lists Trax 2015–2022. The 2024+ Trax is a
+  different, larger vehicle and has no entry.
+- **Facelift 2017 (added to `FACELIFT_BREAKS`):** "new halogen projector
+  headlights, LED daytime running lights, dual taillights, and a new grille
+  design" (WP). GM numbers agree for the front: headlamps 42435939/40,
+  hood 42599227, fenders 95210618/9 and the grilles all list 2015–2016.
+  The bulb tail lamp 42599449/55 lists 2015–2022, so the tail-light cut is
+  narrower than that number needs (conservative).
+- **A/C:** standard ("Trax is well equipped with automatic transmission,
+  air conditioning, power windows and mirrors", CG).
+- **AWD:** "Front-wheel drive and all-wheel drive were available" (CG);
+  EPA "Trax AWD" every year 2015–2022.
+- **Engine:** the 1.4 turbo was the only US engine (CG); the catalog's
+  1.8L numbers are other markets'.
+
+| Row | Years | Gate | Basis |
+|---|---|---|---|
+| Fuel pump module (match part #) | 2015–22 | — | GM module kits 13516849 and 13516865 both list 2015–2022, 1.4L, LS/LT/LTZ. The catalog does not say what separates them, hence "match part #". |
+| A/C compressor | 2015–21 | — | GM kit 42783843 lists 2015–2021, 1.4L. No number in the data for 2022, so the row ends at 2021. Standard (CG). |
+| AWD rear differential / coupling | 2015–22 | drive: awd/4wd | CG and EPA. Same row and band as the Encore, its platform twin (§22.2). |
+
+Left out, no stated basis: sunroof (no source read lists it); 2022 A/C
+compressor; mirrors by trim (several numbers per year, no clean window).
+
+Result (same inventory): generic-only 13,399 → 13,132. Trax 267 → 0.
+
+### 26.4 Chevrolet Sonic 2012–2020
+
+Basis: WP Chevrolet_Aveo (T300 section); consumerguide.com/used/2012-15-chevrolet-sonic;
+EPA menus 2011–2023; GM catalog records (oem-raw, retrieved 2026-11-05).
+- **Why 2012 only:** the entry had a headlight row and, from 2013, the
+  MyLink row, so the 281 cars from 2012 were generic-only.
+- **Years:** EPA lists Sonic 2012–2020; "Chevrolet discontinued the Sonic
+  after the 2020 model year in the United States" (WP).
+- **Facelift 2017 (added to `FACELIFT_BREAKS`):** "The facelift brought a
+  restyled front fascia, new LED tail lights" (WP). GM headlamps
+  42390433/4 and all four tail lamps list 2012–2016. The existing
+  headlight row is now cut at 2017.
+- **A/C:** standard on the LS for 2012–15 ("air conditioning" in the LS
+  list, CG). 2016–20 is outside the CG page, so those years are `option`.
+- **Bodies:** sedan and hatchback; the tail lamps are separate GM numbers.
+- **Sunroof:** "Power sunroof" in the option tables 2012–15 (CG).
+
+| Row | Years | Gate | Basis |
+|---|---|---|---|
+| Fuel pump module | 2012–16 | — | GM kit 13507609 lists 2012–2016, 1.4L and 1.8L, sedan and hatchback. |
+| A/C compressor (match part #) | 2013–15 | — | GM kits 42783843 (1.4L, 2013–2020) and 42783863 (1.8L, 2013–2018): two numbers by engine. Standard (CG). |
+| A/C compressor (match part #) | 2016–20 | option | Same numbers; standard fitment not confirmed for these years. |
+| Sedan tail lights | 2012–16 | body: sedan | GM 42407872/3, sedan trims only. `_TAILS` band. |
+| Hatchback tail lights | 2012–16 | body: hatchback | GM 42407868/9, hatchback trims only. Same band as the Accent/Rio/Focus hatch rows. |
+| Sunroof | 2012–15 | option | CG. |
+
+Left out, no stated basis: a 2012 A/C compressor (neither number lists
+2012); fuel pump for 2017–20 (13507609 stops at 2016; 13592113 lists
+2013–2018 for another 1.8L option code only); 2017–20 tail lamps; mirrors
+(numbers at hand list 2013–2014 only); RS and turbo parts.
+**Suggestion, not done:** the Sonic entry is not in the consensus-evergreen
+list, so its 1,281 cars show 2 to 8 rows. Adding it would put "fits
+2012–2020" on rows such as the gauge cluster with no source for that span.
+
+Result (same inventory): generic-only 13,132 → 12,851. Sonic 2012:
+281 → 0. The 999 cars from 2013–20 gain the rows above for their years.
+
+### 26.5 Ford Freestar 2004–2007
+
+Basis: consumerguide.com/used/2004-07-ford-freestar; WP Ford_Windstar
+("Third generation (Ford Freestar; 2004–2007)"); EPA menus 2003–2008; Ford
+catalog records (oem-raw `raw/www.fordpartsgiant.com.jsonl`, retrieved
+2026-11-05 and 2026-11-06).
+- **One generation, no facelift:** "virtually unchanged for 2005", "little
+  changed" for 2006, "carries over unchanged during its last year" (CG).
+  The Ford grille numbers list 2004–2007.
+- **Drive:** "All-wheel drive was not offered" (CG; EPA lists FWD only).
+- **A/C:** "front air conditioning" in the base list every year (CG).
+- **Power sliding doors:** "Power operation was available for the sliding
+  side doors"; standard on the Limited (CG).
+
+| Row | Years | Gate | Basis |
+|---|---|---|---|
+| A/C compressor | 2004–07 | — | Ford 4F2Z-19703-AB (and the loaded assembly 4F2Z-19V703-AA) list 2004–2007, 3.9L and 4.2L. Standard (CG). |
+| Fuel pump module | 2004–05 | — | Ford 3F2Z-9H307-AB lists 2004–2005. Its replacement 3F2Z-9H307-A is named, but its years are not in the data. |
+| Power sliding door motor | 2004–07 | option | CG. Same conservative band as the Uplander/Windstar rows (§20.3). |
+
+Left out, no stated basis: fuel pump 2006–07; rear A/C parts (no audited
+band); the Mercury Monterey twin (no entry; not researched).
+
+Result (same inventory): generic-only 12,851 → 12,598. Freestar 253 → 0.
+
+### 26.6 Ford Freestyle 2005–2007
+
+Basis: WP Ford_Freestyle; consumerguide.com/used/2005-07-ford-freestyle;
+EPA menus 2003–2008; Ford catalog records (oem-raw, retrieved 2026-11-05
+and 2026-11-06).
+- **One generation, no facelift:** the 2006 change was "the availability of
+  a navigation system" and 2007 made side airbags standard (CG). The 2008
+  "mid-cycle revision" was sold as the Taurus X (WP), outside this entry.
+  Ford headlamp 5F9Z-13008-A and grille 5F9Z-8200-AAA list 2005–2007.
+- **A/C:** "front air conditioning" in the SE list every year (CG).
+- **AWD:** "each with front-wheel drive or optional all-wheel drive" (CG);
+  EPA "Freestyle AWD" 2005–2007; "the Haldex Traction-equipped all-wheel
+  drive model" (WP).
+- **Sunroof:** "Power sunroof" in the option tables 2005–07 (CG).
+
+| Row | Years | Gate | Basis |
+|---|---|---|---|
+| A/C compressor | 2005–07 | — | Ford 5F9Z-19V703-DA lists 2005–2007. Standard (CG). |
+| Fuel pump module | 2005 | — | Ford 5F9Z-9H307-AA lists 2005 only. Its replacement 6F9Z-9H307-A is named, but its years are not in the data. |
+| AWD rear differential / transfer unit | 2005–07 | drive: awd/4wd | CG, EPA, WP. Same row and band as the Five Hundred, its platform twin (§19.6). |
+| Sunroof | 2005–07 | option | CG. |
+
+Left out, no stated basis: fuel pump 2006–07; the CVT (transmission);
+third-row seat.
+
+Result (same inventory): generic-only 12,598 → 12,339. Freestyle 259 → 0.
+
+### 26.7 Mitsubishi Mirage 1997–2002, 2014–2024, and the Mirage G4
+
+Basis: WP Mitsubishi_Mirage; consumerguide.com/used/1997-02-mitsubishi-mirage
+and /used/2014-mitsubishi-mirage; EPA menus 1996–2004 and 2012–2025;
+Mitsubishi catalog records (oem-raw
+`raw/www.mitsubishipartsgiant.com.jsonl`, retrieved 2026-11-05 and
+2026-11-10).
+
+**Fix: the entry ran 1997–2024 as one window.** Every row said "fits
+1997–2024", across two unrelated cars and across years with no US Mirage.
+- EPA lists Mirage 1996–2002, nothing 2003–2013, Mirage 2014–2015, nothing
+  for 2016, then Mirage and Mirage G4 2017–2024. "There was no 2016 model
+  year in the North American market" (WP); "The last time Mitsubishi sold
+  a car with the Mirage name in the U.S. was in 2002" (CG).
+- Now three entries: `mirage` (1997–2002 sedan and coupe), `mirage
+  2014-2024` (the hatchback) and `mirage g4` (the sedan, 2017–2024: "For
+  the US market, the Mirage G4 sedan was available from spring 2016 as a
+  2017 model", WP). `GENERATION_BREAKS["mirage"] = [2017]` cuts every
+  hatchback row at the MY2016 gap, and the §25 clamp removes 2016.
+- A Mirage listing dated 2003–2013 or 2016 now gets no card (none on the
+  lots today).
+- The G4's tail lamps are its own (Mitsubishi 8330B069/70, noted "Sedan",
+  2017–2020; hatchback 8330A783/4, 2014–2015), which is why it has its own
+  entry and lamp rows.
+
+**Facelifts added to `FACELIFT_BREAKS`:**
+- 2017 (hatchback): "a new front end design, projector headlights with LED
+  daytime running lights, and LED tail lights" (WP). Already a cut through
+  the 2016 gap.
+- 2021 (hatchback and G4): "The second facelift of the Mirage was launched
+  in November 2019, with new front end styling" (WP, global launch date).
+  The US year comes from the catalog: G4 bumper cover 6400H293 and the
+  headlamps 8301D117/8 are noted "2017-20".
+
+| Row | Years | Gate | Basis |
+|---|---|---|---|
+| Fuel pump module (hatchback) | 2014–15, 2017–24 | — | Mitsubishi 17030W000P lists "2017-2024, 2014-2015 Mitsubishi Mirage". |
+| Fuel pump module (G4) | 2017–24 | — | Same number lists the G4 2017–2024. |
+| A/C compressor (hatchback) | 2014 | — | Mitsubishi 7813A524 (7813A531 is the same unit without clutch) lists 2014–2015 and 2017–2019. "automatic climate control" on the base DE (CG 2014). |
+| A/C compressor (hatchback) | 2015, 2017–19 | option | Same number; CG covers 2014 only, so standard fitment is not confirmed. |
+| A/C compressor (G4) | 2017–19 | option | Same number lists the G4 2017–2019. |
+| Headlights, mirrors, tail lights (G4 and 2014+ hatchback entries) | by entry | — | The breadth-pass lamp rows (§11 bands) carried onto the new entries, as before the split. |
+
+Left out, no stated basis:
+- 1997–2002 Mirage (56 cars): no number in the data for pump or
+  compressor. A/C was optional on base cars (CG option tables).
+- 1999: "Minor revisions to the rear end" (CG), "a minor facelift" (WP):
+  rear end only, so not a cut (single-component rule).
+- A/C compressor 2020–24 (no number lists those years); sunroof (none
+  offered in the sources read); HID headlamps (8301C965/6, an option).
+- Note: the halogen headlamp 8301C693/4 lists 2014–15 and 2017–20, so the
+  2017 cut is narrower than that number needs. The gap forces it anyway.
+
+Result (same inventory): generic-only 12,339 → 12,145. Mirage and G4
+250 → 56 (all 1997–2002).
+
+### 26.8 Chevrolet Venture 1997–2005
+
+Basis: WP Chevrolet_Venture; consumerguide.com/used/1997-05-chevrolet-venture;
+GM catalog records (oem-raw, retrieved 2026-11-05, 2026-11-06, 2026-11-09).
+- **One generation, 1997–2005** (WP; replaced by the Uplander).
+- **Facelift 2001 (added to `FACELIFT_BREAKS`):** "The exterior was
+  refreshed in 2001"; "2001: The front fascia and steering wheel were
+  redesigned" (WP). GM front fascia 88895114/5 and grille 10310159 list
+  2001–2005. The tail lamps 19206745/6 and mirrors 15935752/3 list
+  1997–2005, so the tail-light cut is narrower than that number needs
+  (conservative).
+- **A/C:** "front air conditioning" in the base (Cargo/Value/Plus) lists
+  2000–2005 (CG). CG's equipment lists start at 2000, so 1997–99 are
+  `option`.
+- **AWD:** "Optional all-wheel drive" for 2002; "Venture loses its
+  regular-length and all-wheel-drive models for a shortened 2005 season"
+  (CG); "GM's Versatrak all-wheel-drive system (on long-wheelbase models
+  only) was introduced" in 2002 (WP).
+- **Power sliding door:** "GM's exclusive power sliding passenger-side
+  door was optional" from 1997; driver side from 2001 (CG).
+
+| Row | Years | Gate | Basis |
+|---|---|---|---|
+| A/C compressor | 1997–99 | option | GM 89018902 lists 1997–2000. Standard not confirmed before 2000. |
+| A/C compressor | 2000 | — | Same number. Standard (CG 2000 lists). |
+| A/C compressor (match part #) | 2001–05 | — | GM 19130448 (option C69, rear A/C) and 19258827 (without) both list 2001–2005. Standard (CG). |
+| Fuel pump module | 1998–2000 | — | GM 19180118 lists 1998–2000. |
+| Fuel pump module | 2004–05 | — | GM 19180125 lists 2004–2005. |
+| Power sliding door motor | 1997–2005 | option | CG. Same conservative band as the Uplander row (§20.3), its successor. |
+| AWD rear differential / transfer unit | 2002–04 | drive: awd/4wd | CG, WP. Same row and band as the Uplander's Versatrak row (§20.3). |
+
+Left out, no stated basis: fuel pump for 1997 and 2001–03 (no number in the
+data); rear A/C parts (no audited band); the Oldsmobile Silhouette and
+Pontiac Trans Sport/Montana twins (the pump and compressor records were not
+checked for them). CG's 1997 trouble note names "the engine cooling fan",
+but gives no part or years, so no fan row.
+
+Result (same inventory): generic-only 12,145 → 11,921. Venture 224 → 0.
+
+### 26.9 Block totals
+
+Same 336,279-car inventory, code before §26 (origin/main 56f108c5) vs
+after: generic-only **13,880 (4.1%) → 11,921 (3.5%)**, so 1,959 cars moved
+to rows with a part-number basis. No entry **12,381 (3.7%) → 12,210
+(3.6%)**: the 171 Saturn S-Series, SC and SW listings.
+- **New `GENERATION_BREAKS`:** volvo s40 2004/2005; saturn sl 1996/2000;
+  saturn sc 1997/2001; saturn sw 1996/2000; saturn s-series (all four);
+  mirage 2017 (the MY2016 gap).
+- **New `FACELIFT_BREAKS`:** volvo s40 2001/2008; trax 2017; sonic 2017;
+  mirage 2017/2021; mirage g4 2021; venture 2001.
+- **New `PART_NUMBER_BREAKS`:** volvo s40 side mirrors 2007.
+- **New entries:** saturn sc, saturn sw, saturn s-series, mirage
+  2014-2024, mirage g4. The `mirage` entry now ends at 2002.
+- **Per-car comparison** (every distinct year/make/model, seven decodes:
+  none, sedan FWD, coupe, hatch, SUV AWD, pickup 4WD, minivan RWD): 145
+  combinations changed, 3,244 cars, all in the models above. No car lost a
+  row. Outside these models nothing changed.
+  - Changed on existing rows: "fits" windows narrowed (S40, Saturn SL,
+    Trax, Sonic, Venture, Mirage); the Mirage G4 card is now titled
+    "Mitsubishi Mirage G4"; Saturn SL window-regulator, master-switch and
+    power-mirror rows went from confirmed to "if equipped" (§26.2).
+- **Tests:** every `scraper/test_*.py` passes (29 files). New §26 checks in
+  `test_parts_gaps.py`; one §22.10 check now names the three canonical
+  hybrid-gate rows because the gate set also holds the "match part #" A/C
+  name.
+
+Leftovers in these models: S40 2000–04 (59), Mirage 1997–2002 (56).
+
+**Not done (item 2 remainder): Fiat 500L, Fiat 500X, Buick Encore GX.**
+They keep their evergreen-only entries (97 cars). The catalog data has no
+pump, compressor or lamp record for any of them (no Fiat records in the
+Mopar file; for the Encore GX the GM file holds only a hood bumper and two
+window-switch numbers), so by this block's rule there is no row to add.
+
+**For the hub.**
+1. **Radiator-fan rows.** §13–22 added "Radiator Fan Assembly" to FWD
+   transverse models on the layout alone. This block left it out for all
+   eight models because no source names the part with its years. If the
+   earlier convention is acceptable, it is one row per model
+   (`_GAP_FAN`); if not, the fan rows on 64 existing entries have the same gap.
+   Recommendation: add a cooling-fan category to the catalog crawl and
+   settle it from part numbers.
+2. **The catalog records can audit the older blocks.** They showed here
+   that same-generation windows are sometimes too wide (Venture A/C
+   changed at 2001; Saturn pump at 1997 and 1998; S40 mirrors at 2007).
+   The §13–22 mechanical rows were windowed by generation without numbers.
+   Recommendation: a pass that compares each existing pump/compressor row
+   with the numbers on `oem-raw` and narrows where they disagree.
+3. **Years with no number** (Freestyle and Freestar pump 2006–07, Venture
+   pump 1997 and 2001–03, Trax A/C 2022, Sonic pump 2017–20, first-gen S40,
+   1997–2002 Mirage) would close with a crawl seeded on those years. That
+   is the interchange workstream's crawl; nothing was fetched here.
+
+## 27. Nissan Xterra: a longer, sourced list (2026-11-17, `ops/parts.md` note of 2026-11-12)
+
+**Why.** The 2026-11-12 note: "the Xterra parts list is thin" (five rows on
+the first generation, six on the second). §25.1 fixed the windows; this
+adds rows. 1,088 Xterras are on the lots (2026-11-17 scan).
+
+**Rule.** As §26: a row needs a Nissan catalog number that lists its
+window, "match part #" where several numbers share it, no radiator-fan
+row. Source: the interchange crawl's records on branch `oem-raw`
+(`raw/www.nissanpartsdeal.com.jsonl`, 344 Xterra records, retrieved
+2026-11-05 to 2026-11-14; read from the branch, no site contacted).
+Equipment and facelift facts: WP Nissan_Xterra;
+consumerguide.com/used/2000-04-nissan-xterra and
+/used/2005-14-nissan-xterra (read 2026-11-17).
+
+**A caution on this catalog's year labels.** Parts that WP and CG date to
+the 2002 front end (hood F5100-7Z830, front fascia F2022-7Z825, grilles
+62310-7Z800/-7Z840, headlamps 26010-7Z825/6) are listed "2001-2004", and
+parts WP dates to the 2009 facelift "(July 2008 production)" are listed
+from 2008 (grille 62310-ZL00A, front fascia FBM22-ZL0MA). The catalog seems
+to label by production date, one year ahead of the model year at a
+mid-year change. Where it matters (the headlamps) the rows follow WP and CG
+for the year and say "match part #".
+
+**Facts used.**
+- Generations 2000–04 and 2005–15 (`GENERATION_BREAKS["xterra"] = [2005]`,
+  §25.1).
+- 2002 front end: "revised front-end styling with rounded headlights and
+  raised hood" (WP); "All ’02 Xterras had a 'power-bulge' hood and a
+  revised dashboard" (CG).
+- A/C: "Standard features on all models included antilock brakes, air
+  conditioning" (CG 2000–04); "air conditioning" in the base S and X lists
+  every year 2005–14 (CG).
+- Power windows: first generation, SE equipment and an XE package ("SE
+  adds: … power mirrors, power windows", CG). Second generation: not on the
+  base S for 2005 or the base X for 2006–07 ("Off-Road adds: … power
+  windows"; "S adds: … power windows"); in the base X list from the 2008
+  lists on (CG).
+- Rockford Fosgate: "For 2003 … a 6-speaker 300W Rockford Fosgate AM/FM/CD
+  audio system with an 8-inch subwoofer" on SE models (WP); in the SE list
+  and an XE V6 package for 2003 and 2004 (CG).
+
+| Row | Years | Gate | Basis (Nissan numbers and what they list) |
+|---|---|---|---|
+| Fuel pump module | 2000–04 | — | 17042-4S400: 2000–2004, SE and XE. One number. |
+| A/C compressor (match part #) | 2000–04 | — | By engine: 92600-7B410 (VG33E, 2000–2004), -8B401 (KA24DE, 2000–2004), -5S700 (VG33ER, 2001–2004), -4S100 (VG33E, 2000–2001). Standard (CG). |
+| Side mirrors (pair, match part #) | 2000–04 | — | 96301/96302-3S500, -3S510, -ZD000, -S3800, -3B300: all 2000–2004, by trim and engine. Soul/Compass mirror band; the row does not claim power mirrors. |
+| Window regulator + motor (front) | 2000–04 | option | Motors 80730/80731-7B400: 2000–2004. Power windows were not standard (CG). |
+| Power window master switch | 2000–04 | option | 25401-9E000: 2000–2004. Same. |
+| Headlights (pair, clear, match part #) | 2000–01, 2002–04 | — | 26010/26060-7B425 (listed 2000–2002) before the 2002 front end; 26010/26060-7Z825 (XE) and -7Z826 (SE) (listed 2001–2004) after. Years per WP and CG; see the caution above. Breadth-pass headlight band. |
+| Rockford Fosgate amp + subwoofer | 2003–04 | option | WP and CG above. Same band and cost as the Shaker / Nakamichi rows (§20.5, §21.7). |
+| Fuel pump module (match part #) | 2005–15 | — | 17040-ZZ00A: 2005–2015; also -EA000 (2005–2008) and -ZS00A (2007–2010). |
+| A/C compressor (match part #) | 2005–15 | — | 92600-EA31A: 2005–2015; also -EA300 (2005–2007) and -EA30C (2007–2015). Standard (CG). |
+| Side mirrors (pair, match part #) | 2005–15 | — | 96301/96302-9BC9A and -9BC9B: 2005–2015; -EA000/-EA005 (2005–2013) and -EA18E (SE, 2008–2011) by trim. |
+| Headlights (pair, clear, match part #) | 2007–15 | — | 26010/26060-EA000 (SE, Off-Road): 2007–2015; -ZL00A (S, X): 2008–2015. Nothing in the data lists 2005–06, so those years have no headlight row. |
+| Window regulator + motor (front) | 2005–07 | option | Motors 80730/80731-EA005: 2005–2015. Not standard on the base trim before 2008 (CG). |
+| Window regulator + motor (front) | 2008–15 | — | Same numbers. Standard (CG). |
+| Power window master switch | 2006–07 | option | 25401-ZP70A: 2006–2015. |
+| Power window master switch | 2008–15 | — | Same number. |
+
+Bands and pull costs are the audited templates (`_GAP_MECH`, the consensus
+evergreen window rows, the breadth-pass headlight row, the Soul mirror
+row). The ranking value of every Xterra is unchanged (the new rows sit
+below the roof rack).
+
+**Left out, with the reason:**
+- **Alternator, starter, throttle body.** The numbers change inside each
+  generation at different years by engine, and no one number spans a
+  window (alternator 23100-3S500 2000–02 / -9Z000 2001–04 for the 2.4,
+  -4S100 2000–03 / -1Z600 2002–04 for the V6; second generation -EA201,
+  -EA20B, -ZH00A, -ZH00B, -ZH00C in steps from 2005 to 2013; throttle body
+  16119-7S001 2005–10 / -7S00A 2009–13). The app's interchange finder
+  already carries the verified alternator groups for these trucks.
+- **Climate panel, gauge cluster.** Both changed with the 2002 dashboard
+  (WP) and again later ("revised HVAC controls" for 2014, CG); 19 and 96
+  numbers by trim and year, with no clean window.
+- **2005–06 headlights, 2005 master switch:** no number in the data.
+- **Radiator fan:** no source names one.
+- **Liftgate, hood, bumpers, fenders:** numbers exist (e.g. liftgate
+  K0100-EA031, 2005–2015) but there is no audited band for these on this
+  truck; not added.
+- **Second-generation Rockford Fosgate:** CG names only the radio
+  ("Rockford Fosgate AM/FM radio w/in-dash 6-disc CD/MP3 changer"); no
+  source read names an amplifier or subwoofer, so no row.
+- **`FACELIFT_BREAKS` for the Xterra: not added.** A 2009 cut would split
+  the tail-light row, and Nissan 26550/26555-EA025 lists 2005–2015 (§25.1).
+  The headlight rows carry their own windows instead.
+
+**Owner-thread leads (2026-11-12): status.**
+- Now sourced and added: window regulators (front), with the switch.
+- Still no basis or no audited band: roof gear basket and lid, IPDM, rear
+  seat latch, roof lights and covers, ECM, door lock actuators, cam/crank
+  sensors, evap canister, stalks, sun visors, rear door latches, rear
+  cupholder, first-aid kit. Ignition coils stay excluded by rule.
+
+**Checks** (2026-11-17 inventory, 336,279 cars; code before §27 vs after,
+seven decodes): only the 16 Xterra year/make/model combinations changed
+(1,088 cars); no row lost, no existing row's band, gate or window changed.
+Coverage counts are unchanged (the Xterra was already model-specific):
+generic-only 11,921, no entry 12,210. `test_parts_gaps.py`: the §25.1
+exact-row check now expects the §27 rows as well; new §27 checks.

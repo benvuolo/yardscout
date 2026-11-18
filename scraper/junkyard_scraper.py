@@ -6304,7 +6304,214 @@ _gap_extend("ford zx2", parts=_per_gen([(1998, 2003)], [_GAP_PUMP, _GAP_FAN, {**
 
 # ---- end of §22 block
 
+# ---- 2026-11 §26 (PARTS_GAPS §26; hub brief 2026-11-17).
+# Rule for this block: a mechanical row needs a part-number source for its
+# window. The source is the carmaker catalog records the interchange crawl
+# already holds (branch oem-raw, raw/<site>.jsonl; numbers and "retrieved"
+# dates in PARTS_GAPS §26). A window is only the years a cited number
+# lists. Where two or more numbers cover one window (drive, engine or
+# equipment split) the row name says "match part #". No number, no row.
+# No radiator-fan rows: no source at hand names a fan assembly with its
+# years.
+_GAP_PUMP_PN = {**_GAP_PUMP, "name": "Fuel Pump Module (in-tank, match part #)"}
+_GAP_AC_PN = {**_GAP_AC, "name": "A/C Compressor (clutch spins free, match part #)"}
+_AWD_REAR_UNIT = {"name": "AWD Rear Differential / Transfer Unit", "rarity": "Rare", "low": 90, "high": 220, "cost": 60, "drive": ["awd", "4wd"]}
+_HATCH_TAILS = {"name": "Hatchback Tail Lights (pair, uncracked)", "rarity": "Rare", "low": 55, "high": 140, "cost": 23, "body": ["hatchback"]}
+_SEDAN_TAILS = {"name": "Sedan Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "body": ["sedan"]}
+_SUNROOF_STD = {k: v for k, v in _SUNROOF.items() if k != "option"}
+_GENERIC_LAMP_ROWS = [
+    {"name": "Headlights (clear, non-hazed)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20},
+    {"name": "Side Mirrors (power, pair)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15, "yr_min": 1994},
+    {"name": "Tail Lights (pair, uncracked)", "rarity": "Uncommon", "low": 35, "high": 100, "cost": 15},
+]
+
+# §26.1 Volvo S40 (264 cars generic-only). 1st gen US 2000-04, 2nd gen from
+# "2004.5": both were sold as 2004 models, so 2004 is its own window
+# (GENERATION_BREAKS 2004 and 2005) and gets no new rows. Facelifts 2001 and
+# 2008. 2nd gen: one Volvo A/C compressor number lists 2004-2011 (36050586;
+# A/C standard, CG); the fuel pump has 2WD/4WD and year-split numbers
+# (match part #); AWD T5 2005-2010 (EPA); sunroof optional 2005-08 and
+# 2010-11, standard 2009 (CG equipment lists). 1st gen: no number in the
+# catalog data for pump or compressor, so no mechanical rows.
+_gap_extend("volvo s40", parts=[
+    *_per_gen([(2005, 2011)], [_GAP_AC, _GAP_PUMP_PN]),
+    *_per_gen([(2005, 2010)], [_AWD_COUPLING]),
+    *_per_gen([(2005, 2008), (2010, 2011)], [_SUNROOF]),
+    *_per_gen([(2009, 2009)], [_SUNROOF_STD]),
+])
+
+# §26.2 Saturn S-Series 1991-2002 (275 SL/SL1/SL2 cars generic-only; 171
+# "S-Series", SC and SW listings had no entry). Sedan generations 1991-95,
+# 1996-99, 2000-02 (new GENERATION_BREAKS). GM fuel pump numbers list every
+# body: 21015330 (1991-1996), 21015072 (1997), 21015152 (1998-2002; SW1 to
+# 1999, SW2 to 2001). The coupe (SC, SC1, SC2; generations 1991-96,
+# 1997-2000, 2001-02), the wagon (SW, SW1, SW2; 1993-95, 1996-99, 2000-01)
+# and the bare "S-Series" spelling get their own entries with those pump
+# rows and the consensus evergreens; no lamp rows (they differ by body and
+# no row-level basis was checked). A/C was optional and no compressor number
+# is at hand: no A/C row.
+for _k, _disp, _match, _yrs in (
+        ("saturn sc", "Saturn SC (coupe)", ["saturn sc"], (1991, 2002)),
+        ("saturn sw", "Saturn SW (wagon)", ["saturn sw"], (1993, 2001)),
+        ("saturn s-series", "Saturn S-Series", ["saturn s-series", "saturn s series"], (1991, 2002))):
+    UNOBTANIUM_DB[_k] = {"display": _disp, "make": "Saturn", "match": _match, "year_range": _yrs, "top_parts": []}
+    _EVERGREEN_TARGET_KEYS = (*_EVERGREEN_TARGET_KEYS, _k)
+_SATURN_S_PUMP = _per_gen([(1991, 1996), (1997, 1997), (1998, 2002)], [_GAP_PUMP])
+for _k in ("saturn sl", "saturn sc", "saturn sw", "saturn s-series"):
+    _gap_extend(_k, parts=[dict(r) for r in _SATURN_S_PUMP])
+
+# §26.3 Chevrolet Trax, US 2015-2022 (267 cars generic-only; one generation,
+# 2017 facelift in FACELIFT_BREAKS). GM fuel pump module kits 13516849 and
+# 13516865 both list 2015-2022 (two numbers: match part #); A/C compressor
+# kit 42783843 lists 2015-2021 for the 1.4L, the only US engine (A/C
+# standard, CG). AWD available every year (EPA "Trax AWD"): same row as its
+# platform twin, the Encore (§22.2).
+_gap_extend("trax", parts=[
+    *_per_gen([(2015, 2022)], [_GAP_PUMP_PN, _AWD_COUPLING]),
+    *_per_gen([(2015, 2021)], [_GAP_AC]),
+])
+
+# §26.4 Chevrolet Sonic, US 2012-2020 (281 cars generic-only, all 2012: the
+# entry had a headlight row and, from 2013, MyLink). 2017 facelift in
+# FACELIFT_BREAKS. GM numbers: fuel pump module kit 13507609 lists 2012-2016
+# (both engines, both bodies); A/C compressor kits 42783843 (1.4L,
+# 2013-2020) and 42783863 (1.8L, 2013-2018): two numbers by engine, match
+# part #; 2012 is not listed, so no A/C row for 2012. A/C standard on the LS
+# for 2012-15 (CG); later years not confirmed (option). Tail lamps differ by
+# body: sedan 42407872/3 and hatchback 42407868/9, both 2012-2016. Power
+# sunroof optional 2012-15 (CG).
+_gap_extend("sonic", parts=[
+    *_per_gen([(2012, 2016)], [_GAP_PUMP, _SEDAN_TAILS, _HATCH_TAILS]),
+    *_per_gen([(2013, 2015)], [_GAP_AC_PN]),
+    *_per_gen([(2016, 2020)], [{**_GAP_AC_PN, "option": True}]),
+    *_per_gen([(2012, 2015)], [_SUNROOF]),
+])
+
+# §26.5 Ford Freestar 2004-2007 (253 cars generic-only; one generation, no
+# facelift, FWD only). Ford A/C compressor 4F2Z-19703-AB lists 2004-2007
+# (front A/C standard, CG); fuel pump 3F2Z-9H307-AB lists 2004-2005. Power
+# sliding doors optional (standard on the Limited), CG.
+_gap_extend("freestar", parts=[
+    *_per_gen([(2004, 2007)], [_GAP_AC, _PSD_MOTOR]),
+    *_per_gen([(2004, 2005)], [_GAP_PUMP]),
+])
+
+# §26.6 Ford Freestyle 2005-2007 (259 cars generic-only; one generation, no
+# facelift: the 2008 restyle is the renamed Taurus X). Ford A/C compressor
+# 5F9Z-19V703-DA lists 2005-2007 (front A/C standard on the SE, CG). Fuel
+# pump 5F9Z-9H307-AA lists 2005 only (superseded by 6F9Z-9H307-A, whose
+# years are not in the data), so the pump row is 2005. AWD optional on every
+# trim (EPA; Haldex): same row as the Five Hundred, its platform twin
+# (§19.6). Power sunroof optional 2005-07 (CG).
+_gap_extend("freestyle", parts=[
+    *_per_gen([(2005, 2007)], [_GAP_AC, _AWD_REAR_UNIT, _SUNROOF]),
+    *_per_gen([(2005, 2005)], [_GAP_PUMP]),
+])
+
+# §26.7 Mitsubishi Mirage (250 cars generic-only, G4 included). The breadth
+# entry ran 1997-2024 as one window, across the 2003-13 years with no US
+# Mirage and across two unrelated cars. Now: "mirage" is the 1997-2002 sedan
+# and coupe (no new rows: no catalog number at hand); "mirage 2014-2024" is
+# the hatchback (US MY2014-15 and 2017-24, no MY2016: EPA); "mirage g4" is
+# the 2017-24 sedan, whose tail lamps are its own (Mitsubishi 8330B069/70
+# "Sedan"). Fuel pump 17030W000P lists 2014-15 and 2017-24 (G4 2017-24).
+# A/C compressor 7813A524 lists 2014-15 and 2017-19 (G4 2017-19); automatic
+# climate control standard on the 2014 DE (CG); 2015 and later not confirmed
+# by a source, so those pieces are option-flagged.
+UNOBTANIUM_DB["mirage"]["year_range"] = (1997, 2002)
+UNOBTANIUM_DB["mirage"]["match"] = ["mirage"]
+UNOBTANIUM_DB["mirage 2014-2024"] = {"display": "Mitsubishi Mirage", "make": "Mitsubishi", "match": ["mirage"], "year_range": (2014, 2024),
+                                     "top_parts": [dict(r) for r in _GENERIC_LAMP_ROWS]}
+UNOBTANIUM_DB["mirage g4"] = {"display": "Mitsubishi Mirage G4", "make": "Mitsubishi", "match": ["mirage g4"], "year_range": (2017, 2024),
+                              "top_parts": [dict(r) for r in _GENERIC_LAMP_ROWS]}
+_EVERGREEN_TARGET_KEYS = (*_EVERGREEN_TARGET_KEYS, "mirage 2014-2024", "mirage g4")
+_gap_extend("mirage 2014-2024", parts=[
+    *_per_gen([(2014, 2015), (2017, 2024)], [_GAP_PUMP]),
+    *_per_gen([(2014, 2014)], [_GAP_AC]),
+    *_per_gen([(2015, 2015), (2017, 2019)], [{**_GAP_AC, "option": True}]),
+])
+_gap_extend("mirage g4", parts=[
+    *_per_gen([(2017, 2024)], [_GAP_PUMP]),
+    *_per_gen([(2017, 2019)], [{**_GAP_AC, "option": True}]),
+])
+
+# §26.8 Chevrolet Venture 1997-2005 (224 cars generic-only; one generation,
+# 2001 facelift in FACELIFT_BREAKS: GM front fascia and grille numbers list
+# 2001-2005). GM A/C compressor 89018902 lists 1997-2000; 19130448 (with
+# rear A/C, option C69) and 19258827 (without) list 2001-2005: match part #.
+# Front A/C standard on the base van from 2000 (CG lists); 1997-99 not
+# confirmed (option). Fuel pump module 19180118 lists 1998-2000 and 19180125
+# 2004-2005; no number at hand for 1997 or 2001-03. Power sliding door
+# optional every year (CG); Versatrak AWD 2002-2004 (CG; Wikipedia).
+_gap_extend("venture", parts=[
+    *_per_gen([(1997, 1999)], [{**_GAP_AC, "option": True}]),
+    *_per_gen([(2000, 2000)], [_GAP_AC]),
+    *_per_gen([(2001, 2005)], [_GAP_AC_PN]),
+    *_per_gen([(1998, 2000), (2004, 2005)], [_GAP_PUMP]),
+    *_per_gen([(1997, 2005)], [_PSD_MOTOR]),
+    *_per_gen([(2002, 2004)], [_AWD_REAR_UNIT]),
+])
+
+# ---- end of §26 block
+
+# ---- 2026-11 §27 (PARTS_GAPS §27): Nissan Xterra. The 2026-11-12 note
+# called the list thin (five rows on the 1st gen, six on the 2nd). Same
+# rule as §26: a row needs a Nissan catalog number that lists its window
+# (oem-raw raw/www.nissanpartsdeal.com.jsonl), "match part #" where several
+# numbers share it. Rows are written per generation (2000-04, 2005-15);
+# GENERATION_BREAKS already guards the 2005 break.
+# Left out on purpose: alternator, starter and throttle body (the numbers
+# change mid-generation at different years by engine, and no one number
+# spans a window); radiator fan (no source names one); climate panel and
+# gauge cluster (changed at the 2002 facelift, many numbers by trim).
+_HEADLIGHTS_PN = {"name": "Headlights (pair, clear, match part #)", "rarity": "Uncommon", "low": 40, "high": 110, "cost": 20}
+_MIRRORS_PN = {"name": "Side Mirrors (pair, match part #)", "rarity": "Uncommon", "low": 30, "high": 85, "cost": 15}
+_WIN_REG = {"name": "Window Regulator + Motor (front)", "rarity": "Uncommon", "low": 30, "high": 75, "cost": 12}
+_WIN_SW = {"name": "Power Window Master Switch", "rarity": "Uncommon", "low": 30, "high": 90, "cost": 10}
+_gap_extend("xterra", parts=[
+    # 1st gen. Fuel pump 17042-4S400 lists 2000-2004; A/C compressors
+    # 92600-7B410 / -8B401 / -5S700 / -4S100 by engine (A/C standard, CG);
+    # mirrors 96301/2-3S500, -3S510, -ZD000 ... all 2000-2004 by trim;
+    # front window motors 80730/1-7B400 and main switch 25401-9E000 list
+    # 2000-2004 (power windows were SE equipment and an XE package: option).
+    *_per_gen([(2000, 2004)], [_GAP_PUMP, _GAP_AC_PN, _MIRRORS_PN,
+                               {**_WIN_REG, "option": True}, {**_WIN_SW, "option": True}]),
+    # Headlamps changed with the 2002 front end (Wikipedia; CG): 26010/26060-
+    # 7B425 before, -7Z825 (XE) / -7Z826 (SE) after.
+    *_per_gen([(2000, 2001), (2002, 2004)], [_HEADLIGHTS_PN]),
+    # Rockford Fosgate 300 W system with an 8-inch subwoofer: SE standard,
+    # XE V6 package, 2003-04 (Wikipedia; CG lists).
+    *_per_gen([(2003, 2004)], [
+        {"name": "Rockford Fosgate Amp + Subwoofer", "rarity": "Uncommon", "low": 80, "high": 200, "cost": 24, "option": True},
+    ]),
+    # 2nd gen. Fuel pump 17040-ZZ00A lists 2005-2015 (also -EA000 2005-08,
+    # -ZS00A 2007-10); A/C compressor 92600-EA31A lists 2005-2015 (also
+    # -EA300 2005-07, -EA30C 2007-15; A/C standard, CG); mirrors 96301/2-
+    # 9BC9A/B list 2005-2015 (others by trim); front window motors 80730/1-
+    # EA005 list 2005-2015.
+    *_per_gen([(2005, 2015)], [_GAP_PUMP_PN, _GAP_AC_PN, _MIRRORS_PN]),
+    # Headlamps 26010/26060-EA000 (SE, Off-Road) list 2007-2015 and -ZL00A
+    # (S, X) 2008-2015; nothing at hand lists 2005-06.
+    *_per_gen([(2007, 2015)], [_HEADLIGHTS_PN]),
+    # Power windows: not on the base S (2005) or X (2006-07), standard on
+    # every trim from 2008 (CG lists). Main switch 25401-ZP70A lists
+    # 2006-2015.
+    *_per_gen([(2005, 2007)], [{**_WIN_REG, "option": True}]),
+    *_per_gen([(2006, 2007)], [{**_WIN_SW, "option": True}]),
+    *_per_gen([(2008, 2015)], [_WIN_REG, _WIN_SW]),
+])
+
+# ---- end of §27 block
+
 _apply_consensus_evergreens()
+
+# §26.2: power windows and power mirrors were options on the S-Series (not
+# offered at all on the base SL; Wikipedia Saturn_S-Series), so these rows
+# ship "if equipped".
+for _k in ("saturn sl", "saturn sc", "saturn sw", "saturn s-series"):
+    for _p in UNOBTANIUM_DB[_k]["top_parts"]:
+        if _p["name"] in ("Window Regulator + Motor (front)", "Power Window Master Switch", "Side Mirrors (power, pair)"):
+            _p["option"] = True
 
 # ---- 2026-10 Phase A: enthusiast platforms, evergreens BY GENERATION ------
 # Enthusiast entries often span several body generations under one key
@@ -6577,6 +6784,13 @@ GENERATION_BREAKS = {
     # T200 through 2008 (restyled Aveo5 2009). Both years break, so no window
     # mixes T200 and T250 cars of one body (PARTS_GAPS §16.6).
     "aveo": [2007, 2009],
+    # §26 (PARTS_GAPS §26)
+    "volvo s40": [2004, 2005],             # 1st gen 2000-04, 2nd gen from "2004.5": 2004 holds both, so it stands alone (§26.1)
+    "saturn sl": [1996, 2000],             # sedan 1991-95, 1996-99, 2000-02 (§26.2)
+    "saturn sc": [1997, 2001],             # coupe 1991-96, 1997-2000, 2001-02 (§26.2)
+    "saturn sw": [1996, 2000],             # wagon 1993-95, 1996-99, 2000-01 (§26.2)
+    "saturn s-series": [1996, 1997, 2000, 2001],  # body unknown: every sedan and coupe break (§26.2)
+    "mirage": [2017],                      # hatchback US MY2014-15 and 2017-24, no MY2016; every row is cut at the gap (§26.7)
     "escort": [1997],                      # 2nd gen 1991-96, 3rd gen 1997-2003 (PARTS_GAPS §22.8)
     "park avenue": [1997],                 # 1st gen 1991-96, 2nd gen 1997-2005 (PARTS_GAPS §22.4)
     "stratus": [2001],                     # JA sedan 1995-2000, JR sedan 2001-06 (+ Mitsubishi-based coupe 2001-05) (PARTS_GAPS §21.6)
@@ -6812,6 +7026,13 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "scion xb": [2011, 2013],
     "infiniti qx60": [2016, 2019],
     "escort": [1992, 1993, 1999, 2003],
+    # §26 (PARTS_GAPS §26; cited there)
+    "volvo s40": [2001, 2008],
+    "trax": [2017],
+    "sonic": [2017],
+    "mirage": [2017, 2021],          # 1999 rear-end-only revision left out
+    "mirage g4": [2021],
+    "venture": [2001],
 }
 # §22.10: gas-only rows hidden on hybrid listings. Hybrids of the families on
 # the lots generally start and charge through the hybrid system and use a
@@ -6824,6 +7045,7 @@ _HYBRID_GAS_ONLY_ROWS = frozenset({
     "Alternator (spin-test at yard)",
     "Starter (verify part number)",
     "A/C Compressor (clutch spins free)",
+    "A/C Compressor (clutch spins free, match part #)",  # §26
 })
 _HYBRID_KEEPS: dict[tuple[str, str], set[str]] = {
     # (make, model text contains) -> rows that hybrid keeps. Cited in §22.10.
@@ -6834,6 +7056,14 @@ _HYBRID_KEEPS: dict[tuple[str, str], set[str]] = {
     # GM BAS 2009 Vue Hybrid: "retains its standard 12-Volt starter"
     # (greencarreports.com 1021418).
     ("saturn", "vue"): {"Starter (verify part number)"},
+}
+
+# §26: a cited catalog-number change cuts ONE row (matched by a lowercase
+# token of its name) at that model year, the way FACELIFT_BREAKS cuts the
+# appearance rows. Narrowing only. Basis per entry in PARTS_GAPS §26.
+PART_NUMBER_BREAKS: dict[tuple[str, str], list[int]] = {
+    # Volvo mirror assemblies: 30744586/9 list 2004-2006, 31278733/9 2007-2011.
+    ("volvo s40", "side mirrors"): [2007],
 }
 
 _FACELIFT_SENSITIVE_RE = re.compile(
@@ -6913,6 +7143,10 @@ def _bound_rows_per_generation() -> None:
             row_breaks = breaks
             if facelifts and _FACELIFT_SENSITIVE_RE.search(p["name"]):
                 row_breaks = sorted(set(breaks) | set(facelifts))  # §17
+            pn_breaks = [y for (k, tok), ys in PART_NUMBER_BREAKS.items()
+                         if k == base and tok in p["name"].lower() for y in ys]
+            if pn_breaks:
+                row_breaks = sorted(set(row_breaks) | set(pn_breaks))  # §26
             cuts = [b for b in row_breaks if plo < b <= phi] if plo <= phi else []
             if not cuts:
                 new_parts.append(p)
@@ -8037,6 +8271,7 @@ _GEN_END_CLAMPS = {
     "ranger": ((1983, 2023), (2012, 2018)),
     "tacoma 2016-2024": ((2016, 2023), None),   # key kept: ebay/test keys use it
     "cherokee 2014-2024": ((2014, 2023), None),
+    "mirage 2014-2024": ((2014, 2024), (2016, 2016)),  # §26.7: no US MY2016 (EPA)
 }
 
 

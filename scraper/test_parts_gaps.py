@@ -214,7 +214,11 @@ check("§14: only gap-block entries are registered (no id reuse leaks)",
        # §21
        "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect",
        # §22
-       "milan", "encore", "captiva sport", "park avenue", "scion xb 2008-2015", "sonata", "infiniti qx60", "escort", "ford zx2", "encore gx"},
+       "milan", "encore", "captiva sport", "park avenue", "scion xb 2008-2015", "sonata", "infiniti qx60", "escort", "ford zx2", "encore gx",
+       # §27
+       "xterra",
+       # §26
+       "volvo s40", "saturn sl", "saturn sc", "saturn sw", "saturn s-series", "trax", "sonic", "freestar", "freestyle", "mirage 2014-2024", "mirage g4", "venture"},
       str(sorted({r[0] for r in js._GAP_BLOCK_ROWS})))
 c04, c15 = parts(2004, "Toyota", "Camry", FWD), parts(2015, "Toyota", "Camry", FWD)
 check("§14: Camry 2004 pump fits 2002–2006, 2015 fits 2012–2017",
@@ -719,7 +723,7 @@ check("§22 ZX2: 'ZX2' and 'Escort ZX2' listings get the ZX2 entry (mech + moonr
 _G = js._HYBRID_GAS_ONLY_ROWS
 check("§22.10 Camry Hybrid and Fusion Hybrid never get the alternator/starter/belt A/C rows; gas twins keep them",
       not (_G & set(parts(2010, "Toyota", "Camry Hybrid"))) and not (_G & set(parts(2012, "Ford", "Fusion Hybrid")))
-      and _G <= set(parts(2010, "Toyota", "Camry", FWD)) and {"Alternator (spin-test at yard)", "Starter (verify part number)"} <= set(parts(2012, "Ford", "Fusion")))
+      and (_G - {"A/C Compressor (clutch spins free, match part #)"}) <= set(parts(2010, "Toyota", "Camry", FWD)) and {"Alternator (spin-test at yard)", "Starter (verify part number)"} <= set(parts(2012, "Ford", "Fusion")))
 check("§22.10 a VIN decode naming Hybrid in the series also drops them",
       not (_G & set(parts(2010, "Toyota", "Camry", {**FWD, "series": "Hybrid"}))))
 check("§22.10 other rows on hybrids are kept (lamps, pump)", "Fuel Pump Module (in-tank, test before listing)" in parts(2010, "Toyota", "Camry Hybrid"))
@@ -789,8 +793,28 @@ _X1 = {2000: {_RACK: "2000–2004", _CON: "2000–2002"},
        2003: {_RACK: "2000–2004", _TL1: "2001–2004", _ST: "2001–2004"},
        2004: {_RACK: "2000–2004", _TL1: "2001–2004", _ST: "2001–2004"}}
 _x1bad = {y: {n: q["fits"] for n, q in parts(y, "Nissan", "Xterra").items()} for y in _X1}
-check("§25.1 1st gen Xterra years get exactly their cited rows (no diff-lock switch)",
-      all(_x1bad[y] == _X1[y] for y in _X1), str(_x1bad))
+# §27 added catalog-number rows to both generations; the §25.1 rows and
+# windows are unchanged, and the exact per-year row set is asserted below.
+_X27_1 = {"Fuel Pump Module (in-tank, test before listing)": "2000–2004", "A/C Compressor (clutch spins free, match part #)": "2000–2004",
+          "Side Mirrors (pair, match part #)": "2000–2004", "Window Regulator + Motor (front)": "2000–2004",
+          "Power Window Master Switch": "2000–2004"}
+_HL27, _RF27 = "Headlights (pair, clear, match part #)", "Rockford Fosgate Amp + Subwoofer"
+_X1_27 = {y: {**_X1[y], **_X27_1, _HL27: "2000–2001" if y <= 2001 else "2002–2004", **({_RF27: "2003–2004"} if y >= 2003 else {})} for y in _X1}
+check("§25.1 1st gen Xterra years get exactly their cited rows (no diff-lock switch); §27 rows added, §25 rows unchanged",
+      all(_x1bad[y] == _X1_27[y] for y in _X1), str(_x1bad))
+_x00, _x03, _x05, _x06, _x09 = (parts(y, "Nissan", "Xterra") for y in (2000, 2003, 2005, 2006, 2009))
+check("§27 Xterra 1st gen: power-window rows and Rockford Fosgate are 'if equipped'; pump, A/C and mirrors are plain; no alternator, starter, throttle body or fan row",
+      all(_x03[n]["trim_status"] == "unconfirmed" for n in ("Window Regulator + Motor (front)", "Power Window Master Switch", _RF27))
+      and all("trim_status" not in _x00[n] for n in ("Fuel Pump Module (in-tank, test before listing)", "A/C Compressor (clutch spins free, match part #)", "Side Mirrors (pair, match part #)"))
+      and not any(t in n for n in set(_x03) | set(_x09) for t in ("Alternator", "Starter", "Throttle", "Radiator Fan")))
+check("§27 Xterra 2nd gen: pump, A/C, mirrors 2005-15 by Nissan numbers; headlights only 2007-15; power windows 'if equipped' to 2007, plain from 2008; no switch row for 2005",
+      _x09["Fuel Pump Module (in-tank, match part #)"]["fits"] == "2005–2015" and _x09["A/C Compressor (clutch spins free, match part #)"]["fits"] == "2005–2015"
+      and _x09["Side Mirrors (pair, match part #)"]["fits"] == "2005–2015" and _x09[_HL27]["fits"] == "2007–2015" and _HL27 not in _x05 and _HL27 not in _x06
+      and _x05["Window Regulator + Motor (front)"]["trim_status"] == "unconfirmed" and "Power Window Master Switch" not in _x05
+      and _x06["Power Window Master Switch"]["fits"] == "2006–2007" and "trim_status" not in _x09["Window Regulator + Motor (front)"]
+      and _x09["Power Window Master Switch"]["fits"] == "2008–2015" and _RF27 not in _x09)
+check("§27 Xterra: the ranking value did not move (the new rows sit below the roof rack)",
+      all(max(m["max_value"] for m in js.match_vehicle(y, "Nissan", "Xterra")) == 265 for y in (2000, 2003, 2005, 2009, 2014)))
 check("§25.1 1st gen bands are the pre-split anchors",
       [(q["low"], q["high"]) for q in js.UNOBTANIUM_DB["xterra"]["top_parts"] if q.get("yr_max") == 2004 and q["name"] == _RACK] == [(150, 350)])
 check("§25.1 diff-lock switch keeps its trim gate", _x08["Rear Diff Locker Switch"].get("trim_status") == "unconfirmed")
@@ -800,9 +824,115 @@ check("§25.3 Ranger 1998-2011 pieces say fits 1998-2011; 2024 Ranger (P703) get
       parts(2005, "Ford", "Ranger")["Tailgate (clean)"]["fits"] == "1998–2011" and not parts(2024, "Ford", "Ranger"))
 check("§25.4 Cherokee KL rows end at 2023", parts(2016, "Jeep", "Cherokee")["Tail Lights (pair, uncracked)"]["fits"] == "2014–2023")
 
+# §26 (PARTS_GAPS §26): mechanical rows only where a catalog part number
+# lists the window; "match part #" where two or more numbers share it.
+_PUMP, _PUMP_PN = "Fuel Pump Module (in-tank, test before listing)", "Fuel Pump Module (in-tank, match part #)"
+_AC, _AC_PN = "A/C Compressor (clutch spins free)", "A/C Compressor (clutch spins free, match part #)"
+_SUN, _FAN = "Sunroof Glass + Motor", "Radiator Fan Assembly"
+
+s02, s04, s06, s07, s09, s11 = (parts(y, "Volvo", "S40", FWD) for y in (2002, 2004, 2006, 2007, 2009, 2011))
+check("§26.1 Volvo S40: 2004 stands alone (both generations sold as 2004); no new rows on 2000-04; no row crosses 2004/2005",
+      all(q["fits"] == "2004–2004" for q in s04.values()) and not ({_PUMP, _PUMP_PN, _AC, _SUN} & (set(s02) | set(s04)))
+      and all(int(q["fits"][-4:]) <= 2003 for q in s02.values()) and all(int(q["fits"][:4]) >= 2005 for q in s06.values()), str(s04))
+check("§26.1 Volvo S40 2nd gen: A/C 2005-11 (one Volvo number), pump 'match part #', no fan row",
+      s06[_AC]["fits"] == "2005–2011" and s11[_PUMP_PN]["fits"] == "2005–2011" and _PUMP not in s06 and _FAN not in s06)
+check("§26.1 Volvo S40: AWD coupling 2005-10 only, gated (AWD decode confirms, FWD excludes); sunroof 'if equipped' 2006, standard 2009, 'if equipped' 2011",
+      parts(2008, "Volvo", "S40", AWD)["AWD Rear Differential / Coupling"]["trim_status"] == "vin"
+      and "AWD Rear Differential / Coupling" not in s06 and "AWD Rear Differential / Coupling" not in parts(2011, "Volvo", "S40", AWD)
+      and s06[_SUN]["trim_status"] == "unconfirmed" and "trim_status" not in s09[_SUN] and s11[_SUN]["trim_status"] == "unconfirmed")
+check("§26.1 Volvo S40: lamps cut at the 2001 and 2008 facelifts; mirror row cut at the 2007 part-number change; other rows not",
+      parts(2000, "Volvo", "S40")["Headlights (clear, non-hazed)"]["fits"] == "2000–2000" and s02["Tail Lights (pair, uncracked)"]["fits"] == "2001–2003"
+      and s06["Headlights (clear, non-hazed)"]["fits"] == "2005–2007" and s09["Tail Lights (pair, uncracked)"]["fits"] == "2008–2011"
+      and s06["Side Mirrors (power, pair)"]["fits"] == "2005–2006" and s07["Side Mirrors (power, pair)"]["fits"] == "2007–2011"
+      and s07["Gauge Cluster"]["fits"] == "2005–2011")
+
+_sl95, _sl96, _sl97, _sl99, _sl01 = (parts(y, "Saturn", "SL2") for y in (1995, 1996, 1997, 1999, 2001))
+check("§26.2 Saturn SL: pump rows follow the GM numbers (1991-96, 1997, 1998-2002) and the sedan generations (1996, 2000)",
+      [_sl95[_PUMP]["fits"], _sl96[_PUMP]["fits"], _sl97[_PUMP]["fits"], _sl99[_PUMP]["fits"], _sl01[_PUMP]["fits"]]
+      == ["1991–1995", "1996–1996", "1997–1997", "1998–1999", "2000–2002"]
+      and _sl99["Headlights (clear, non-hazed)"]["fits"] == "1996–1999" and _AC not in _sl99 and _FAN not in _sl99)
+check("§26.2 Saturn S-Series: power-window and power-mirror rows are 'if equipped'",
+      all(_sl99[n]["trim_status"] == "unconfirmed" for n in ("Window Regulator + Motor (front)", "Power Window Master Switch", "Side Mirrors (power, pair)")))
+check("§26.2 Saturn SC / SW / S-Series listings get their own entries: pump + evergreens, no lamp rows; SL listings stay on the SL",
+      _cards(1998, "Saturn", "SC2") == ["Saturn SC (coupe)"] and _cards(1994, "Saturn", "SC") == ["Saturn SC (coupe)"]
+      and _cards(1997, "Saturn", "SW1") == ["Saturn SW (wagon)"] and _cards(2000, "Saturn", "S-Series") == ["Saturn S-Series"]
+      and _cards(1999, "Saturn", "SL1") == ["Saturn SL"] and _cards(1999, "Saturn", "SL") == ["Saturn SL"]
+      and parts(1998, "Saturn", "SC2")[_PUMP]["fits"] == "1998–2000" and parts(2001, "Saturn", "SC1")[_PUMP]["fits"] == "2001–2002"
+      and parts(1997, "Saturn", "SW2")[_PUMP]["fits"] == "1997–1997" and parts(2000, "Saturn", "S-Series")[_PUMP]["fits"] == "2000–2000"
+      and not any("Light" in n or "Mirror" in n for n in parts(1998, "Saturn", "SC2"))
+      and not _cards(2002, "Saturn", "SW2") and _cards(2008, "Saturn", "Sky") == [])
+
+x16, x19, x22 = parts(2016, "Chevrolet", "Trax", AWD), parts(2019, "Chevrolet", "Trax", FWD), parts(2022, "Chevrolet", "Trax", FWD)
+check("§26.3 Trax: pump 'match part #' 2015-22; A/C 2015-21 only (the cited GM number); no fan row",
+      x16[_PUMP_PN]["fits"] == "2015–2022" and x16[_AC]["fits"] == "2015–2021" and _AC not in x22 and _PUMP_PN in x22 and _FAN not in x16)
+check("§26.3 Trax: AWD coupling gated (AWD decode confirms, FWD excludes); lamps cut at the 2017 facelift; 2024 Trax (2nd gen) gets no card",
+      x16["AWD Rear Differential / Coupling"]["trim_status"] == "vin" and "AWD Rear Differential / Coupling" not in x19
+      and x16["Headlights (clear, non-hazed)"]["fits"] == "2015–2016" and x19["Tail Lights (pair, uncracked)"]["fits"] == "2017–2022"
+      and not parts(2024, "Chevrolet", "Trax"))
+
+o12s, o12h, o12, o14, o18 = parts(2012, "Chevrolet", "Sonic", SEDAN), parts(2012, "Chevrolet", "Sonic", HATCH), parts(2012, "Chevrolet", "Sonic"), parts(2014, "Chevrolet", "Sonic", SEDAN), parts(2018, "Chevrolet", "Sonic", SEDAN)
+check("§26.4 Sonic 2012: pump 2012-16 (GM 13507609); no A/C row for 2012; tail lamps by body (sedan decode confirms sedan, excludes hatch; no decode 'if equipped')",
+      o12s[_PUMP]["fits"] == "2012–2016" and _AC_PN not in o12s and _AC not in o12s
+      and o12s["Sedan Tail Lights (pair, uncracked)"]["trim_status"] == "vin" and "Hatchback Tail Lights (pair, uncracked)" not in o12s
+      and o12h["Hatchback Tail Lights (pair, uncracked)"]["trim_status"] == "vin" and "Sedan Tail Lights (pair, uncracked)" not in o12h
+      and o12["Sedan Tail Lights (pair, uncracked)"]["trim_status"] == "unconfirmed" and o12h["Hatchback Tail Lights (pair, uncracked)"]["fits"] == "2012–2016")
+check("§26.4 Sonic: A/C 'match part #' plain 2013-15, 'if equipped' 2016-20; no pump or body tail lamps after 2016; sunroof 'if equipped' 2012-15; headlights cut at the 2017 facelift",
+      "trim_status" not in o14[_AC_PN] and o14[_AC_PN]["fits"] == "2013–2015" and o18[_AC_PN]["trim_status"] == "unconfirmed"
+      and _PUMP not in o18 and "Sedan Tail Lights (pair, uncracked)" not in o18
+      and o14[_SUN]["trim_status"] == "unconfirmed" and _SUN not in o18
+      and o14["Headlights (clear, non-hazed)"]["fits"] == "2012–2016" and o18["Headlights (clear, non-hazed)"]["fits"] == "2017–2020" and _FAN not in o14)
+
+r04, r06 = parts(2004, "Ford", "Freestar", FWD), parts(2006, "Ford", "Freestar", FWD)
+check("§26.5 Freestar: A/C 2004-07 (Ford 4F2Z-19703-AB); pump 2004-05 only (the cited number); sliding-door motor 'if equipped'; no fan or AWD row",
+      r04[_AC]["fits"] == "2004–2007" and r04[_PUMP]["fits"] == "2004–2005" and _PUMP not in r06 and _AC in r06
+      and r06["Power Sliding Door Motor"]["trim_status"] == "unconfirmed" and _FAN not in r04
+      and not any("AWD" in n for n in parts(2005, "Ford", "Freestar", AWD)))
+
+y05, y07, y07f = parts(2005, "Ford", "Freestyle", AWD), parts(2007, "Ford", "Freestyle", AWD), parts(2007, "Ford", "Freestyle", FWD)
+check("§26.6 Freestyle: A/C 2005-07 (Ford 5F9Z-19V703-DA); pump 2005 only (the cited number); AWD unit gated; sunroof 'if equipped'; no fan row",
+      y05[_AC]["fits"] == "2005–2007" and y05[_PUMP]["fits"] == "2005–2005" and _PUMP not in y07
+      and y07["AWD Rear Differential / Transfer Unit"]["trim_status"] == "vin" and "AWD Rear Differential / Transfer Unit" not in y07f
+      and y07[_SUN]["trim_status"] == "unconfirmed" and _FAN not in y05)
+
+m00, m14, m15, m18, m22, g18, g22 = (parts(2000, "Mitsubishi", "Mirage"), parts(2014, "Mitsubishi", "Mirage", HATCH), parts(2015, "Mitsubishi", "Mirage", HATCH),
+                                     parts(2018, "Mitsubishi", "Mirage", HATCH), parts(2022, "Mitsubishi", "Mirage", HATCH),
+                                     parts(2018, "Mitsubishi", "Mirage G4", SEDAN), parts(2022, "Mitsubishi", "Mirage G4", SEDAN))
+check("§26.7 Mirage: 1997-2002 car keeps its own window and gets no new rows; no card for the no-sale years 2003-13 and 2016",
+      all(q["fits"] == "1997–2002" for q in m00.values()) and not ({_PUMP, _AC} & set(m00))
+      and not parts(2008, "Mitsubishi", "Mirage") and not parts(2016, "Mitsubishi", "Mirage") and not parts(2016, "Mitsubishi", "Mirage G4"))
+check("§26.7 Mirage hatch: pump 2014-15 / 2017-24, A/C plain 2014, 'if equipped' 2015 and 2017-19, none after 2019; no row crosses the MY2016 gap; lamps cut at 2017 and 2021",
+      m15[_PUMP]["fits"] == "2014–2015" and m18[_PUMP]["fits"] == "2017–2024" and "trim_status" not in m14[_AC]
+      and m15[_AC]["trim_status"] == "unconfirmed" and m18[_AC]["fits"] == "2017–2019" and _AC not in m22
+      and all(int(q["fits"][-4:]) <= 2015 for q in m15.values()) and all(int(q["fits"][:4]) >= 2017 for q in m18.values())
+      and m18["Headlights (clear, non-hazed)"]["fits"] == "2017–2020" and m22["Tail Lights (pair, uncracked)"]["fits"] == "2021–2024" and _FAN not in m18)
+check("§26.7 Mirage G4 (sedan) has its own entry from 2017: own lamp windows, pump 2017-24, A/C 'if equipped' 2017-19",
+      _cards(2018, "Mitsubishi", "Mirage G4") == ["Mitsubishi Mirage G4"] and _cards(2018, "Mitsubishi", "Mirage") == ["Mitsubishi Mirage"]
+      and g18[_PUMP]["fits"] == "2017–2024" and g18[_AC]["trim_status"] == "unconfirmed" and _AC not in g22
+      and g18["Tail Lights (pair, uncracked)"]["fits"] == "2017–2020" and g22["Tail Lights (pair, uncracked)"]["fits"] == "2021–2024")
+
+u97, u00, u01, u03, u03f, u05 = (parts(1997, "Chevrolet", "Venture", FWD), parts(2000, "Chevrolet", "Venture", FWD), parts(2001, "Chevrolet", "Venture", FWD),
+                                 parts(2003, "Chevrolet", "Venture", AWD), parts(2003, "Chevrolet", "Venture", FWD), parts(2005, "Chevrolet", "Venture", AWD))
+check("§26.8 Venture: A/C 'if equipped' 1997-99, plain 2000, 'match part #' 2001-05 (two GM numbers); pump only 1998-2000 and 2004-05 (the cited numbers)",
+      u97[_AC]["trim_status"] == "unconfirmed" and u97[_AC]["fits"] == "1997–1999" and "trim_status" not in u00[_AC] and u01[_AC_PN]["fits"] == "2001–2005" and _AC not in u01
+      and _PUMP not in u97 and u00[_PUMP]["fits"] == "1998–2000" and _PUMP not in u01 and _PUMP not in u03 and u05[_PUMP]["fits"] == "2004–2005" and _FAN not in u00)
+check("§26.8 Venture: Versatrak AWD unit 2002-04 only, gated; sliding-door motor 'if equipped'; lamps cut at the 2001 facelift",
+      u03["AWD Rear Differential / Transfer Unit"]["trim_status"] == "vin" and "AWD Rear Differential / Transfer Unit" not in u03f
+      and "AWD Rear Differential / Transfer Unit" not in u01 and "AWD Rear Differential / Transfer Unit" not in u05
+      and u00["Power Sliding Door Motor"]["trim_status"] == "unconfirmed"
+      and u00["Headlights (clear, non-hazed)"]["fits"] == "1997–2000" and u03["Headlights (clear, non-hazed)"]["fits"] == "2001–2005")
+
+_pnb = [(k, p["name"], a, b) for k, e in js.UNOBTANIUM_DB.items() for p in e["top_parts"]
+        for (bk, tok), ys in js.PART_NUMBER_BREAKS.items() if _re.sub(r" \d{4}-\d{4}$", "", k) == bk and tok in p["name"].lower()
+        for a, b in [(max(e["year_range"][0], p.get("yr_min", e["year_range"][0])), min(e["year_range"][1], p.get("yr_max", e["year_range"][1])))]
+        if any(a < y <= b for y in ys)]
+check("§26 no row crosses a PART_NUMBER_BREAKS year; every key names a real entry",
+      not _pnb and all(any(_re.sub(r" \d{4}-\d{4}$", "", k) == bk for k in js.UNOBTANIUM_DB) for bk, _t in js.PART_NUMBER_BREAKS), str(_pnb[:5]))
+check("§26 no radiator-fan row was added in this block",
+      not any(p["name"] == _FAN for k in ("volvo s40", "saturn sl", "saturn sc", "saturn sw", "saturn s-series", "trax", "sonic", "freestar", "freestyle", "mirage 2014-2024", "mirage g4", "venture",) for p in js.UNOBTANIUM_DB[k]["top_parts"]))
+
 # 3. band sanity + lint
 bad = []
-for key in ("altima", "accent", "lesabre", "lacrosse", "soul", "milan", "encore", "captiva sport", "park avenue", "scion xb 2008-2015", "sonata", "infiniti qx60", "escort", "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
+for key in ("xterra", "volvo s40", "saturn sl", "saturn sc", "saturn sw", "saturn s-series", "trax", "sonic", "freestar", "freestyle", "mirage 2014-2024", "mirage g4", "venture", "altima", "accent", "lesabre", "lacrosse", "soul", "milan", "encore", "captiva sport", "park avenue", "scion xb 2008-2015", "sonata", "infiniti qx60", "escort", "mariner", "fiat 500", "spark", "juke", "sable", "stratus", "mustang 2005-2014", "transit connect", "tribute", "uplander", "mazda5", "lexus es", "windstar", "savana", "galant", "grand am", "sorento", "santa fe", "mkx", "five hundred", "optima", "volkswagen cc", "forte", "regal", "tucson", "sportage", "spectra", "legacy", "mkz", "compass", "kia rio", "century", "aveo", "passat", "lucerne", "explorer 1991-2001", "rogue", "cr-v", "rav4", "explorer 2011-2019", *js._GAP_GENERIC_KEYS, "camry", "civic 2001-2005", "civic 2006-2011", "civic 2012-2015", "focus", "malibu", "escape", "equinox", "sentra", "corolla", "elantra"):
     for q in js.UNOBTANIUM_DB[key]["top_parts"]:
         if not (0 < q["cost"] < q["low"] < q["high"] <= 6 * q["low"]):
             bad.append((key, q["name"], q["cost"], q["low"], q["high"]))
