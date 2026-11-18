@@ -29,7 +29,7 @@
 
 import { json, err } from './util.js';
 import {
-  CHANNELS, utcDay, resendFetch, pruneOpsErrors, resendDailyCap, FREE_INSTANT_METRIC,
+  CHANNELS, utcDay, resendFetch, pruneOpsErrors, resendDailyCap, FREE_INSTANT_METRIC, freeAlertLimits, RESEND_RESERVE,
   COMMIT_STEPS, COMMIT_EXT_MAX_METRIC, COMMIT_SVC_MAX_METRIC,
 } from './ops.js';
 import { COMMIT_EXT_CEILING, COMMIT_SVC_CEILING } from './commit_budget.js';
@@ -231,6 +231,20 @@ export function commitBudgetLines(cb) {
 }
 
 /** Every alert condition that is true right now. Read-only. */
+/** The hourly "Resend near daily cap" detail: what is already being held
+ * back before the cap, lowest class first, in the numbers ops.js enforces
+ * (freeAlertLimits, RESEND_RESERVE; both follow RESEND_DAILY_CAP). The free
+ * emailed alert (2026-11-17) stops first, well before this warning fires.
+ * Pure. */
+export function resendVolumeDetail(env) {
+  const cap = resendDailyCap(env);
+  const fa = freeAlertLimits(env);
+  return `The Resend free tier stops at ${cap}/day; later sends (magic links included) fail until the quota resets. `
+    + `Held back before that, lowest class first: free alert emails (web) once ${cap - fa.reserve} emails of any kind went out today `
+    + `(and after ${fa.dayMax} free alert emails; held alerts are retried on later scans), then sign-up confirmations `
+    + `(Monday email and free alert) and Monday recaps once ${RESEND_RESERVE} or fewer sends are left.`;
+}
+
 export async function evaluateConditions(env, now = Date.now()) {
   const stats = await sendStats(env, now);
   const meta = await env.DB.prepare('SELECT updated_at FROM inv_meta WHERE id = 1').first();
@@ -281,7 +295,7 @@ export async function evaluateConditions(env, now = Date.now()) {
     conditions.push({
       id: 'resend-volume', short: 'Resend near daily cap',
       title: `Resend volume: ${stats.emailsToday} of ${cap} emails sent today (UTC)`,
-      detail: `The Resend free tier stops at ${cap}/day; later sends (magic links included) fail until the quota resets. Monday-email confirmations and recaps are held back once 10 or fewer sends are left.`,
+      detail: resendVolumeDetail(env),
       check: 'Which channel is sending (daily email / admin ops daily run); Resend plan & usage page.',
     });
   }
