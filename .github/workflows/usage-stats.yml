@@ -69,26 +69,57 @@ jobs:
           def report(kind, sub, ver, day):
               r = requests.get(URL, headers=H, timeout=60, params={"filter[frequency]": "DAILY", "filter[reportType]": kind,
                   "filter[reportSubType]": sub, "filter[vendorNumber]": os.environ["VENDOR"], "filter[reportDate]": day, "filter[version]": ver})
-              if r.status_code == 404: return []          # no activity that day (or not published yet)
+              if r.status_code == 404:                    # no activity that day, or not published (yet)
+                  MISSING[(kind, day)] = " ".join(r.text.split())[:160]
+                  return []
               if r.status_code == 403:
                   raise SystemExit("App Store Connect: this API key's role can't read sales. Create a key with the Sales role "
                                    "(Users and Access → Integrations) and add it as ASC_SALES_KEY_ID + ASC_SALES_P8.")
               if r.status_code != 200: raise SystemExit(f"{kind} {day}: HTTP {r.status_code} {r.text[:300]}")
               return list(csv.DictReader(io.StringIO(gzip.decompress(r.content).decode()), delimiter="\t"))
+          MISSING = {}
           DOWNLOAD = {"1", "1F", "1T", "F1"}
           tot = {"downloads": 0, "sub_units": 0, "proceeds": 0.0}
-          print("day         downloads  subscription units (new+renewals)  proceeds")
+          print("day         downloads  subscription units (new+renewals)  proceeds  all rows by product type")
           today = dt.date.today()
           for i in range(14, 0, -1):
               day = (today - dt.timedelta(days=i)).isoformat()
               rows = report("SALES", "SUMMARY", "1_1", day)
+              if ("SALES", day) in MISSING:
+                  # A 404 used to print as a row of zeros; say it, with Apple's words.
+                  print(f"{day}  no report: {MISSING[('SALES', day)]}")
+                  continue
               d = sum(int(r["Units"]) for r in rows if r["Product Type Identifier"] in DOWNLOAD)
               s = [r for r in rows if r["Product Type Identifier"].startswith("IA")]
               u = sum(int(r["Units"]) for r in s)
               p = sum(float(r["Developer Proceeds"] or 0) * int(r["Units"]) for r in s)
               tot["downloads"] += d; tot["sub_units"] += u; tot["proceeds"] += p
-              print(f"{day}  {d:>9}  {u:>34}  {p:>8.2f}")
-          print(f"TOTAL       {tot['downloads']:>9}  {tot['sub_units']:>34}  {tot['proceeds']:>8.2f}  (proceeds in each row's currency, mostly USD)")
+              types = {}
+              for r in rows: types[r["Product Type Identifier"]] = types.get(r["Product Type Identifier"], 0) + int(r["Units"])
+              print(f"{day}  {d:>9}  {u:>34}  {p:>8.2f}  " + " ".join(f"{k}={v}" for k, v in sorted(types.items())))
+          print(f"TOTAL       {tot['downloads']:>9}  {tot['sub_units']:>34}  {tot['proceeds']:>8.2f}  (proceeds in each row's currency, mostly USD;"
+                " days with no report are left out)")
+          print("Product types: 1/1F/1T/F1 first downloads, 3/3F redownloads, 7/7F updates, IA* in-app and subscriptions.")
+          # 2026-11-18: no SALES 1_1 report since 11-06 although 11-04/05 had 150+ updates a day.
+          # When the newest days are missing, ask once per other report version which ones answer.
+          last = (today - dt.timedelta(days=2)).isoformat()
+          if ("SALES", last) in MISSING:
+              for ver in ("1_0", "1_2", "1_3"):
+                  r = requests.get(URL, headers=H, timeout=60, params={"filter[frequency]": "DAILY", "filter[reportType]": "SALES",
+                      "filter[reportSubType]": "SUMMARY", "filter[vendorNumber]": os.environ["VENDOR"], "filter[reportDate]": last,
+                      "filter[version]": ver})
+                  print(f"probe SALES {ver} {last}: HTTP {r.status_code} " + ("(report found)" if r.status_code == 200 else " ".join(r.text.split())[:140]))
+              w = (today - dt.timedelta(days=today.weekday() + 1)).isoformat()   # Sunday ending last full week
+              r = requests.get(URL, headers=H, timeout=60, params={"filter[frequency]": "WEEKLY", "filter[reportType]": "SALES",
+                  "filter[reportSubType]": "SUMMARY", "filter[vendorNumber]": os.environ["VENDOR"], "filter[reportDate]": w,
+                  "filter[version]": "1_1"})
+              if r.status_code == 200:
+                  rows = list(csv.DictReader(io.StringIO(gzip.decompress(r.content).decode()), delimiter="\t"))
+                  types = {}
+                  for x in rows: types[x["Product Type Identifier"]] = types.get(x["Product Type Identifier"], 0) + int(x["Units"])
+                  print(f"probe WEEKLY 1_1 week ending {w}: " + (" ".join(f"{k}={v}" for k, v in sorted(types.items())) or "empty"))
+              else:
+                  print(f"probe WEEKLY 1_1 week ending {w}: HTTP {r.status_code} " + " ".join(r.text.split())[:140])
           for i in range(1, 5):   # newest published subscription snapshot
               day = (today - dt.timedelta(days=i)).isoformat()
               rows = report("SUBSCRIPTION", "SUMMARY", "1_4", day)

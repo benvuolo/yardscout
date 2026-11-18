@@ -1,0 +1,2148 @@
+{
+ "date": "2026-11-18",
+ "independence": "NOT independent: this session wrote the rule fixes between rounds (curate.py body-variant rule, Infiniti engine rules, Nissan cab note and body codes, production \"from\" windows). Spec 11.4 wants a session that did not write curate.py; an independent re-sample is required before nissan ships.",
+ "inputs": {
+  "decodes": "main@a85c654 docs/data/vin_decodes.json.gz sha256 1357625b4429eaf936acafb234b64efb383abdbdcfbbe5ba84b3518139a32fc4",
+  "inventory": "main@a85c654 docs/data/inventory_live.json sha256 1a9cfa73e9c15e41809e1149c2e752504e797efd91c18de4668df454364ce1d6"
+ },
+ "method": "CURATION_SPEC 11.4 as far as this task allows: 30 groups (stratified by category, cross-model first) + 30 donor pairs per round, seeded. Page re-read = the raw records and list manifests on oem-raw (the fetch cache holds only robots.txt and this task forbids new fetches, so no live page was read). Outside evidence = web search result text (dealer/aftermarket listings), the standard the hub accepted for the wiper round 2. Tools: scraper/oem_fitment/audit11_4/.",
+ "ns": "nissan",
+ "raw": "57e8b5b99de04282b844ea41f035cee3b37d5484",
+ "round5_items": [
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2005,
+     2008
+    ],
+    [
+     "Nissan",
+     "Pathfinder",
+     2005,
+     2009
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2007,
+     2009
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "climate-control",
+   "donor": null,
+   "item": "G01",
+   "pn": [
+    "27510-EA000"
+   ],
+   "seeker": null,
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2010,
+     2013
+    ],
+    [
+     "Nissan",
+     "Pathfinder",
+     2011,
+     2012
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2010,
+     2014
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "climate-control",
+   "donor": null,
+   "item": "G02",
+   "pn": [
+    "27510-9CA0A"
+   ],
+   "seeker": null,
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1995,
+     1996
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1995,
+     1996
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "climate-control",
+   "donor": null,
+   "item": "G03",
+   "pn": [
+    "28525-1E504"
+   ],
+   "seeker": null,
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2010,
+     2011
+    ],
+    [
+     "Nissan",
+     "Pathfinder",
+     2010,
+     2010
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2010,
+     2010
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "gauge-cluster",
+   "donor": null,
+   "item": "G04",
+   "pn": [
+    "24810-ZL99A"
+   ],
+   "seeker": null,
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2010,
+     2011
+    ],
+    [
+     "Nissan",
+     "Pathfinder",
+     2010,
+     2010
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2010,
+     2010
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "gauge-cluster",
+   "donor": null,
+   "item": "G05",
+   "pn": [
+    "24810-ZL80D"
+   ],
+   "seeker": null,
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2005,
+     2006
+    ],
+    [
+     "Nissan",
+     "Pathfinder",
+     2006,
+     2008
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2006,
+     2007
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "gauge-cluster",
+   "donor": null,
+   "item": "G06",
+   "pn": [
+    "24810-EA48C"
+   ],
+   "seeker": null,
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2007,
+     2009
+    ],
+    [
+     "Nissan",
+     "Pathfinder",
+     2006,
+     2008
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2007,
+     2007
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "gauge-cluster",
+   "donor": null,
+   "item": "G07",
+   "pn": [
+    "24810-ZP67A"
+   ],
+   "seeker": null,
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2010,
+     2011
+    ],
+    [
+     "Nissan",
+     "Pathfinder",
+     2010,
+     2010
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2010,
+     2010
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "gauge-cluster",
+   "donor": null,
+   "item": "G08",
+   "pn": [
+    "24810-ZL99B"
+   ],
+   "seeker": null,
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2008,
+     2010
+    ],
+    [
+     "Nissan",
+     "Pathfinder",
+     2008,
+     2009
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2008,
+     2009
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "gauge-cluster",
+   "donor": null,
+   "item": "G09",
+   "pn": [
+    "24810-ZS42D"
+   ],
+   "seeker": null,
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2009,
+     2011
+    ],
+    [
+     "Nissan",
+     "Pathfinder",
+     2010,
+     2010
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2010,
+     2010
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "gauge-cluster",
+   "donor": null,
+   "item": "G10",
+   "pn": [
+    "24810-ZL81A"
+   ],
+   "seeker": null,
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Armada",
+     2004,
+     2005
+    ],
+    [
+     "Nissan",
+     "Titan",
+     2004,
+     2006
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames; outside: 24810-7S005 listed for Armada 2004-05 and Titan 2004-07 (parts seller listing; superseded by 24810-7S01A)",
+   "cat": "gauge-cluster",
+   "donor": null,
+   "item": "G11",
+   "pn": [
+    "24810-7S005"
+   ],
+   "seeker": null,
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "M35h",
+     2012,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M37",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M56",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "Q70",
+     2014,
+     2014
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "side-mirrors",
+   "donor": null,
+   "item": "G12",
+   "pn": [
+    "K6301-1MA0B"
+   ],
+   "seeker": null,
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "FX35",
+     2009,
+     2012
+    ],
+    [
+     "Infiniti",
+     "FX37",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "FX50",
+     2009,
+     2010
+    ],
+    [
+     "Infiniti",
+     "QX70",
+     2014,
+     2017
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "side-mirrors",
+   "donor": null,
+   "item": "G13",
+   "pn": [
+    "96301-1CA0A"
+   ],
+   "seeker": null,
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "FX35",
+     2009,
+     2012
+    ],
+    [
+     "Infiniti",
+     "FX37",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "FX50",
+     2009,
+     2010
+    ],
+    [
+     "Infiniti",
+     "QX70",
+     2014,
+     2017
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "side-mirrors",
+   "donor": null,
+   "item": "G14",
+   "pn": [
+    "96302-1CA0A"
+   ],
+   "seeker": null,
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "M35h",
+     2012,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M37",
+     2012,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M56",
+     2012,
+     2013
+    ],
+    [
+     "Infiniti",
+     "Q70",
+     2014,
+     2014
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "side-mirrors",
+   "donor": null,
+   "item": "G15",
+   "pn": [
+    "K6302-1PM0B"
+   ],
+   "seeker": null,
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "M35h",
+     2012,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M37",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M56",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "Q70",
+     2014,
+     2014
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "side-mirrors",
+   "donor": null,
+   "item": "G16",
+   "pn": [
+    "K6302-1MA0B"
+   ],
+   "seeker": null,
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "M35h",
+     2012,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M37",
+     2012,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M56",
+     2012,
+     2013
+    ],
+    [
+     "Infiniti",
+     "Q70",
+     2014,
+     2014
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "side-mirrors",
+   "donor": null,
+   "item": "G17",
+   "pn": [
+    "K6301-1PM0B"
+   ],
+   "seeker": null,
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "EX35",
+     2011,
+     2012
+    ],
+    [
+     "Infiniti",
+     "EX37",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX50",
+     2014,
+     2015
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "side-mirrors",
+   "donor": null,
+   "item": "G18",
+   "pn": [
+    "96301-1BA3D"
+   ],
+   "seeker": null,
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "EX35",
+     2011,
+     2012
+    ],
+    [
+     "Infiniti",
+     "EX37",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX50",
+     2014,
+     2015
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "side-mirrors",
+   "donor": null,
+   "item": "G19",
+   "pn": [
+    "96302-1BA1E"
+   ],
+   "seeker": null,
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "M35h",
+     2012,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M37",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M56",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "Q70",
+     2014,
+     2017
+    ],
+    [
+     "Infiniti",
+     "Q70L",
+     2015,
+     2017
+    ],
+    [
+     "Infiniti",
+     "QX56",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX80",
+     2014,
+     2017
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames; outside: aftermarket/dealer listings cross 82731-1MA0A family (82730-1MA0A: M37/M35h 2011-13, QX56 2011-13, QX80 2014-18), round 2 search",
+   "cat": "window-regulator",
+   "donor": null,
+   "item": "G20",
+   "pn": [
+    "82731-1MA0A"
+   ],
+   "seeker": null,
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "M35h",
+     2012,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M37",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M56",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "Q70",
+     2014,
+     2017
+    ],
+    [
+     "Infiniti",
+     "Q70L",
+     2015,
+     2017
+    ],
+    [
+     "Infiniti",
+     "QX56",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX80",
+     2014,
+     2017
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames; outside: 82730-1MA0A listed for M37/M35h 2011-13, QX56 2011-13, QX80 2014-18 (dealer listing, search 2026-11-18)",
+   "cat": "window-regulator",
+   "donor": null,
+   "item": "G21",
+   "pn": [
+    "82730-1MA0A"
+   ],
+   "seeker": null,
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "M35h",
+     2012,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M37",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M56",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "Q70",
+     2014,
+     2015
+    ],
+    [
+     "Infiniti",
+     "Q70L",
+     2015,
+     2015
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "window-regulator",
+   "donor": null,
+   "item": "G22",
+   "pn": [
+    "80721-1MA0A"
+   ],
+   "seeker": null,
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "M35h",
+     2012,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M37",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M56",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "Q70",
+     2014,
+     2019
+    ],
+    [
+     "Infiniti",
+     "Q70L",
+     2015,
+     2016
+    ],
+    [
+     "Infiniti",
+     "Q70L",
+     2018,
+     2019
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "window-regulator",
+   "donor": null,
+   "item": "G23",
+   "pn": [
+    "80730-1MA0A"
+   ],
+   "seeker": null,
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "M35h",
+     2012,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M37",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M56",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "Q70",
+     2014,
+     2019
+    ],
+    [
+     "Infiniti",
+     "Q70L",
+     2015,
+     2016
+    ],
+    [
+     "Infiniti",
+     "Q70L",
+     2018,
+     2019
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "window-regulator",
+   "donor": null,
+   "item": "G24",
+   "pn": [
+    "80731-1MA0A"
+   ],
+   "seeker": null,
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "M35h",
+     2012,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M37",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "M56",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "Q70",
+     2014,
+     2015
+    ],
+    [
+     "Infiniti",
+     "Q70L",
+     2015,
+     2015
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "window-regulator",
+   "donor": null,
+   "item": "G25",
+   "pn": [
+    "80720-1MA0A"
+   ],
+   "seeker": null,
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "FX35",
+     2010,
+     2012
+    ],
+    [
+     "Infiniti",
+     "FX37",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "FX50",
+     2010,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX70",
+     2014,
+     2015
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "window-regulator",
+   "donor": null,
+   "item": "G26",
+   "pn": [
+    "80721-1CA0B"
+   ],
+   "seeker": null,
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "FX35",
+     2010,
+     2012
+    ],
+    [
+     "Infiniti",
+     "FX37",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "FX50",
+     2010,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX70",
+     2014,
+     2015
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "window-regulator",
+   "donor": null,
+   "item": "G27",
+   "pn": [
+    "80720-1CA0B"
+   ],
+   "seeker": null,
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2010,
+     2013
+    ],
+    [
+     "Nissan",
+     "Pathfinder",
+     2011,
+     2012
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2011,
+     2013
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames; outside: 80721-ZL90A listed for Frontier 2010-21, Pathfinder 2010-12, Xterra 2010-15 (dealer listing)",
+   "cat": "window-regulator",
+   "donor": null,
+   "item": "G28",
+   "pn": [
+    "80721-ZL90A"
+   ],
+   "seeker": null,
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "EX35",
+     2010,
+     2012
+    ],
+    [
+     "Infiniti",
+     "EX37",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX50",
+     2014,
+     2017
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "window-regulator",
+   "donor": null,
+   "item": "G29",
+   "pn": [
+    "80721-1BA0B"
+   ],
+   "seeker": null,
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2005,
+     2019
+    ],
+    [
+     "Nissan",
+     "Pathfinder",
+     2005,
+     2008
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2005,
+     2015
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "window-regulator",
+   "donor": null,
+   "item": "G30",
+   "pn": [
+    "80730-EA005"
+   ],
+   "seeker": null,
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Kicks",
+     2018,
+     2019
+    ],
+    [
+     "Nissan",
+     "Versa",
+     2013,
+     2013
+    ],
+    [
+     "Nissan",
+     "Versa",
+     2017,
+     2019
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames; outside: 82721-1HL0A: Nissan catalog listing, Kicks 2018-24 / Kicks Play 2025 / Versa 2012-25",
+   "cat": "window-regulator",
+   "donor": [
+    "Nissan",
+    "Kicks",
+    2019
+   ],
+   "item": "P01",
+   "pn": [
+    "82721-1HL0A"
+   ],
+   "seeker": [
+    "Nissan",
+    "Versa",
+    2019
+   ],
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2000,
+     2002
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2000,
+     2002
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "gauge-cluster",
+   "donor": [
+    "Nissan",
+    "Frontier",
+    2000
+   ],
+   "item": "P02",
+   "pn": [
+    "24810-9Z479"
+   ],
+   "seeker": [
+    "Nissan",
+    "Xterra",
+    2000
+   ],
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Armada",
+     2005,
+     2007
+    ],
+    [
+     "Nissan",
+     "Titan",
+     2006,
+     2006
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "side-mirrors",
+   "donor": [
+    "Nissan",
+    "Titan",
+    2006
+   ],
+   "item": "P03",
+   "pn": [
+    "96301-ZC60A"
+   ],
+   "seeker": [
+    "Nissan",
+    "Armada",
+    2006
+   ],
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2013,
+     2019
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2012,
+     2013
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "side-mirrors",
+   "donor": [
+    "Nissan",
+    "Frontier",
+    2019
+   ],
+   "item": "P04",
+   "pn": [
+    "96301-9BC9B"
+   ],
+   "seeker": [
+    "Nissan",
+    "Xterra",
+    2012
+   ],
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1993,
+     1997
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1993,
+     1997
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "window-regulator",
+   "donor": [
+    "Nissan",
+    "Altima",
+    1995
+   ],
+   "item": "P05",
+   "pn": [
+    "82700-0E710"
+   ],
+   "seeker": [
+    "Nissan",
+    "Stanza",
+    1994
+   ],
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "QX56",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX80",
+     2014,
+     2014
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "gauge-cluster",
+   "donor": [
+    "Infiniti",
+    "QX80",
+    2014
+   ],
+   "item": "P06",
+   "pn": [
+    "24820-3ZD0A"
+   ],
+   "seeker": [
+    "Infiniti",
+    "QX56",
+    2013
+   ],
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2010,
+     2011
+    ],
+    [
+     "Nissan",
+     "Pathfinder",
+     2011,
+     2011
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "gauge-cluster",
+   "donor": [
+    "Nissan",
+    "Pathfinder",
+    2011
+   ],
+   "item": "P07",
+   "pn": [
+    "24810-9BA7D"
+   ],
+   "seeker": [
+    "Nissan",
+    "Frontier",
+    2010
+   ],
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "Q70",
+     2015,
+     2019
+    ],
+    [
+     "Infiniti",
+     "Q70L",
+     2015,
+     2016
+    ],
+    [
+     "Infiniti",
+     "Q70L",
+     2018,
+     2019
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "window-regulator",
+   "donor": [
+    "Infiniti",
+    "Q70L",
+    2015
+   ],
+   "item": "P08",
+   "pn": [
+    "80720-1MA0B"
+   ],
+   "seeker": [
+    "Infiniti",
+    "Q70",
+    2015
+   ],
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "M35",
+     2008,
+     2010
+    ],
+    [
+     "Infiniti",
+     "M45",
+     2008,
+     2010
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "side-mirrors",
+   "donor": [
+    "Infiniti",
+    "M45",
+    2008
+   ],
+   "item": "P09",
+   "pn": [
+    "96301-EV50A"
+   ],
+   "seeker": [
+    "Infiniti",
+    "M35",
+    2008
+   ],
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "QX56",
+     2011,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX80",
+     2014,
+     2014
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "window-regulator",
+   "donor": [
+    "Infiniti",
+    "QX56",
+    2012
+   ],
+   "item": "P10",
+   "pn": [
+    "80730-1LE0A"
+   ],
+   "seeker": [
+    "Infiniti",
+    "QX80",
+    2014
+   ],
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Armada",
+     2007,
+     2007
+    ],
+    [
+     "Nissan",
+     "Titan",
+     2007,
+     2007
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "gauge-cluster",
+   "donor": [
+    "Nissan",
+    "Armada",
+    2007
+   ],
+   "item": "P11",
+   "pn": [
+    "24810-7S04E"
+   ],
+   "seeker": [
+    "Nissan",
+    "Titan",
+    2007
+   ],
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1993,
+     1997
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1993,
+     1997
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "window-regulator",
+   "donor": [
+    "Nissan",
+    "Stanza",
+    1995
+   ],
+   "item": "P12",
+   "pn": [
+    "80701-0E710"
+   ],
+   "seeker": [
+    "Nissan",
+    "Altima",
+    1993
+   ],
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1993,
+     1996
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1993,
+     1996
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "side-mirrors",
+   "donor": [
+    "Nissan",
+    "Altima",
+    1996
+   ],
+   "item": "P13",
+   "pn": [
+    "J6302-1E400"
+   ],
+   "seeker": [
+    "Nissan",
+    "Stanza",
+    1993
+   ],
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1993,
+     1994
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1993,
+     1994
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "climate-control",
+   "donor": [
+    "Nissan",
+    "Altima",
+    1993
+   ],
+   "item": "P14",
+   "pn": [
+    "28525-1E501"
+   ],
+   "seeker": [
+    "Nissan",
+    "Stanza",
+    1993
+   ],
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "M56",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "Q70",
+     2014,
+     2014
+    ]
+   ],
+   "basis": "Q70 2014 came with the V6 and the V8; 24820-1MA5D is coded VK56VD (V8) only. Fits the V8 Q70; the note says only \"fits some option packages\".",
+   "cat": "gauge-cluster",
+   "donor": [
+    "Infiniti",
+    "M56",
+    2013
+   ],
+   "item": "P15",
+   "pn": [
+    "24820-1MA5D"
+   ],
+   "seeker": [
+    "Infiniti",
+    "Q70",
+    2014
+   ],
+   "verdict": "RISK"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "FX35",
+     2003,
+     2006
+    ],
+    [
+     "Infiniti",
+     "FX45",
+     2005,
+     2006
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "window-regulator",
+   "donor": [
+    "Infiniti",
+    "FX45",
+    2006
+   ],
+   "item": "P16",
+   "pn": [
+    "82731-CG000"
+   ],
+   "seeker": [
+    "Infiniti",
+    "FX35",
+    2004
+   ],
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2001,
+     2002
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2001,
+     2002
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "gauge-cluster",
+   "donor": [
+    "Nissan",
+    "Frontier",
+    2001
+   ],
+   "item": "P17",
+   "pn": [
+    "24810-7Z809"
+   ],
+   "seeker": [
+    "Nissan",
+    "Xterra",
+    2001
+   ],
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2000,
+     2002
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2000,
+     2002
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "gauge-cluster",
+   "donor": [
+    "Nissan",
+    "Xterra",
+    2000
+   ],
+   "item": "P18",
+   "pn": [
+    "24810-9Z477"
+   ],
+   "seeker": [
+    "Nissan",
+    "Frontier",
+    2000
+   ],
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "M37",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "Q70",
+     2014,
+     2014
+    ]
+   ],
+   "basis": "Q70 2014 came with the V6 and the V8; 24820-1MA5A is coded VQ37VHR (V6) only. Fits the V6 Q70; generic option note.",
+   "cat": "gauge-cluster",
+   "donor": [
+    "Infiniti",
+    "M37",
+    2013
+   ],
+   "item": "P19",
+   "pn": [
+    "24820-1MA5A"
+   ],
+   "seeker": [
+    "Infiniti",
+    "Q70",
+    2014
+   ],
+   "verdict": "RISK"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Altima",
+     1994,
+     1996
+    ],
+    [
+     "Nissan",
+     "Stanza",
+     1994,
+     1996
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "window-regulator",
+   "donor": [
+    "Nissan",
+    "Altima",
+    1994
+   ],
+   "item": "P20",
+   "pn": [
+    "82721-0E715"
+   ],
+   "seeker": [
+    "Nissan",
+    "Stanza",
+    1995
+   ],
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     1998,
+     2003
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2000,
+     2004
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "window-regulator",
+   "donor": [
+    "Nissan",
+    "Frontier",
+    2003
+   ],
+   "item": "P21",
+   "pn": [
+    "80720-3S500"
+   ],
+   "seeker": [
+    "Nissan",
+    "Xterra",
+    2003
+   ],
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2000,
+     2002
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2000,
+     2001
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "climate-control",
+   "donor": [
+    "Nissan",
+    "Xterra",
+    2000
+   ],
+   "item": "P22",
+   "pn": [
+    "27510-7Z416"
+   ],
+   "seeker": [
+    "Nissan",
+    "Frontier",
+    2001
+   ],
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "M35",
+     2006,
+     2010
+    ],
+    [
+     "Infiniti",
+     "M45",
+     2006,
+     2010
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "window-regulator",
+   "donor": [
+    "Infiniti",
+    "M45",
+    2007
+   ],
+   "item": "P23",
+   "pn": [
+    "82731-EH100"
+   ],
+   "seeker": [
+    "Infiniti",
+    "M35",
+    2007
+   ],
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Cube",
+     2011,
+     2014
+    ],
+    [
+     "Nissan",
+     "Juke",
+     2011,
+     2016
+    ],
+    [
+     "Nissan",
+     "Leaf",
+     2011,
+     2012
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "window-regulator",
+   "donor": [
+    "Nissan",
+    "Juke",
+    2016
+   ],
+   "item": "P24",
+   "pn": [
+    "82730-CV01B"
+   ],
+   "seeker": [
+    "Nissan",
+    "Cube",
+    2014
+   ],
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     2005,
+     2012
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2005,
+     2013
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "side-mirrors",
+   "donor": [
+    "Nissan",
+    "Xterra",
+    2006
+   ],
+   "item": "P25",
+   "pn": [
+    "96301-EA000"
+   ],
+   "seeker": [
+    "Nissan",
+    "Frontier",
+    2008
+   ],
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "M56",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "Q70",
+     2014,
+     2014
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "gauge-cluster",
+   "donor": [
+    "Infiniti",
+    "Q70",
+    2014
+   ],
+   "item": "P26",
+   "pn": [
+    "24820-6AH1C"
+   ],
+   "seeker": [
+    "Infiniti",
+    "M56",
+    2013
+   ],
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Nissan",
+     "Frontier",
+     1998,
+     2004
+    ],
+    [
+     "Nissan",
+     "Xterra",
+     2000,
+     2004
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "side-mirrors",
+   "donor": [
+    "Nissan",
+    "Xterra",
+    2004
+   ],
+   "item": "P27",
+   "pn": [
+    "96302-3S510"
+   ],
+   "seeker": [
+    "Nissan",
+    "Frontier",
+    2000
+   ],
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "I30",
+     2000,
+     2001
+    ],
+    [
+     "Infiniti",
+     "I35",
+     2002,
+     2004
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "side-mirrors",
+   "donor": [
+    "Infiniti",
+    "I35",
+    2003
+   ],
+   "item": "P28",
+   "pn": [
+    "96301-3Y300"
+   ],
+   "seeker": [
+    "Infiniti",
+    "I30",
+    2001
+   ],
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "FX35",
+     2009,
+     2012
+    ],
+    [
+     "Infiniti",
+     "FX37",
+     2013,
+     2013
+    ],
+    [
+     "Infiniti",
+     "QX70",
+     2014,
+     2017
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "side-mirrors",
+   "donor": [
+    "Infiniti",
+    "FX37",
+    2013
+   ],
+   "item": "P29",
+   "pn": [
+    "96301-1CA1A"
+   ],
+   "seeker": [
+    "Infiniti",
+    "FX35",
+    2009
+   ],
+   "verdict": "RIGHT"
+  },
+  {
+   "apps": [
+    [
+     "Infiniti",
+     "G25",
+     2011,
+     2012
+    ],
+    [
+     "Infiniti",
+     "Q40",
+     2015,
+     2015
+    ]
+   ],
+   "basis": "raw re-read: product-page fitment lists every app; each app-year's own list page lists the number (matched row) with option-column codes consistent with the claim (engine, body, cab, production window); same-body twins or renames",
+   "cat": "side-mirrors",
+   "donor": [
+    "Infiniti",
+    "G25",
+    2011
+   ],
+   "item": "P30",
+   "pn": [
+    "96301-1NC3A"
+   ],
+   "seeker": [
+    "Infiniti",
+    "Q40",
+    2015
+   ],
+   "verdict": "RIGHT"
+  }
+ ],
+ "rounds": [
+  {
+   "build": "main rules",
+   "result": "not judged; trap check found the body-variant split (G37 2008 coupes on a sedan rear-door regulator 82721-JK000) -> body-variant rule",
+   "seed": 1117001
+  },
+  {
+   "detail": "engine codes on shared Infiniti pages: 24820-6AH1A (VQ37VHR) on the M56, 24820-6AH1C/-6AH1D (VK56VD) on the M37, 24820-1NP0C/-1NP0A M35<->M45, 96301-CG100 / 96301-8Y95A / 24820-CL002 FX35<->FX45, FX50 2011 in 96302-1CA0A, FX35 2012 in 96301-3EV0B; plus 9 false \"king cab only\" notes from this session's first cab parser (G04 G05 G07 G08 G11 P05 P09 P21 P23)",
+   "fix": "Infiniti option-column engine rule; cab parser reads every \"+\"-joined part",
+   "result": "FAILED",
+   "seed": 1118003,
+   "wrong": 19
+  },
+  {
+   "detail": "24820-6AH2A and 24820-1MK5A: product page prints the M56 with \"6 Cyl 3.7L | VQ37VHR\"; 24820-CG701 FX45<->FX35; 24820-5Y705 I30<->I35 cluster rows name one engine each",
+   "fix": "fitment-row engine conflict for fixed-displacement Infiniti models",
+   "result": "FAILED",
+   "seed": 1118004,
+   "wrong": 4
+  },
+  {
+   "detail": "P08 24810-2Z710: the 2002 Xterra row is \"Production Date: from 12/2002\"; the production rule did not read \"from\" windows (610 such rows on nissanpartsdeal, 969 on lexuspartsnow)",
+   "fix": "production rule reads \"from MM/YYYY\" (all namespaces; toyota loses 4 live Lexus IS groups)",
+   "result": "FAILED",
+   "seed": 1118005,
+   "wrong": 1
+  },
+  {
+   "detail": "option-column body codes on the shared B14 Sentra/200SX page: 24820-8B700 \"C.\" (coupe) on the sedan-only 1999 Sentra; 24820-89Y02 \"4S.\" (4-door sedan) on the 1996 200SX",
+   "fix": "Nissan option-column body codes vs the car's bodies; census of all 343 groups for every class found",
+   "result": "FAILED",
+   "seed": 1118006,
+   "wrong": 2
+  },
+  {
+   "candidate_file": "groups/_report/nissan.candidate.json (346 Likely incl. 3 held wiper-motor)",
+   "groups": 30,
+   "pairs": 30,
+   "result": "0 WRONG",
+   "right": 58,
+   "risk": 2,
+   "seed": 1118007,
+   "shippable_groups": 343,
+   "wrong": 0
+  }
+ ],
+ "session": "session_01LsgNuWEh1vdaDCtdP1jxMM (interchange builder)"
+}

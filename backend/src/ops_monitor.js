@@ -481,10 +481,19 @@ export async function runOpsCheck(env, { now = Date.now(), dryRun = false } = {}
 
 /* ===== daily health email ===== */
 
-function yardFlags(h) {
+/* `frozen` = the yards the SITE marks: yard_health.json's listState (the
+ * scan's scraper/yard_freshness.py, the same value the yard rows publish):
+ * "stale" = no car added or removed for 3+ full business days, "frozen" =
+ * 10+ (its cars held from new arrivals and alerts); a carried yard counts
+ * too (the site shows it, marked "could not read"). `frozenSoon` = early
+ * warning for us, not shown on the site: unchanged 3+ weekdays (today
+ * counted), about a business day before the site marks it. A file without
+ * list fields (before the scan wrote them) keeps the 3-weekday rule. */
+export function yardFlags(h) {
   if (!h || typeof h.yards !== 'object' || !h.yards) return null;
   const scraped = Date.parse(h.scrapedAt) || Date.now();
-  const dormant = [], frozen = [], carried = [], missing = [];
+  const dormant = [], frozen = [], frozenSoon = [], carried = [], missing = [];
+  const listMode = Object.values(h.yards).some((y) => y && y.listChangedAt);
   const chains = new Map();   // "Pick-n-Pull" -> { total, stuck, since }
   for (const [name, y] of Object.entries(h.yards)) {
     if (!y || typeof y !== 'object') continue;
@@ -511,14 +520,22 @@ function yardFlags(h) {
     }
     // Our fetch returned nothing and the scan re-served the last good copy
     // (scraper stale-keep): actionable on OUR side, listed separately.
+    if (listMode && (y.listState === 'stale' || y.listState === 'frozen')) {
+      frozen.push({ name, lastChangedAt: y.listChangedAt, state: y.listState, ...(y.carried ? { notRead: true } : {}) });
+    }
     if (y.carried) { carried.push({ name, lastChangedAt: y.lastChangedAt, count: y.count }); continue; }
     const newest = y.newestDateAdded ? Date.parse(String(y.newestDateAdded).slice(0, 10) + 'T00:00:00Z') : NaN;
     if (Number.isFinite(newest) && scraped - newest > DORMANT_MS) dormant.push({ name, newestDateAdded: y.newestDateAdded });
-    const changed = y.lastChangedAt ? Date.parse(y.lastChangedAt) : NaN;
-    if (Number.isFinite(changed) && weekdaysBetween(changed, scraped) >= FROZEN_WEEKDAYS) frozen.push({ name, lastChangedAt: y.lastChangedAt });
+    const lc = listMode ? (y.listChangedAt || y.lastChangedAt) : y.lastChangedAt;
+    const changed = lc ? Date.parse(lc) : NaN;
+    if (Number.isFinite(changed) && weekdaysBetween(changed, scraped) >= FROZEN_WEEKDAYS) {
+      if (!listMode) frozen.push({ name, lastChangedAt: lc });
+      else if (!y.listState) frozenSoon.push({ name, lastChangedAt: lc });
+    }
   }
   dormant.sort((a, b) => String(a.newestDateAdded).localeCompare(String(b.newestDateAdded)));
   frozen.sort((a, b) => String(a.lastChangedAt).localeCompare(String(b.lastChangedAt)));
+  frozenSoon.sort((a, b) => String(a.lastChangedAt).localeCompare(String(b.lastChangedAt)));
   carried.sort((a, b) => String(a.lastChangedAt).localeCompare(String(b.lastChangedAt)));
   missing.sort((a, b) => b.missingScans - a.missingScans);
   const chainFrozen = [...chains.values()]
@@ -528,7 +545,7 @@ function yardFlags(h) {
     // information, not an issue. It becomes one once a business day passes.
     .map((c) => ({ ...c, quiet: !!c.since && fullBusinessDaysBetween(Date.parse(c.since), scraped) === 0 }))
     .sort((a, b) => b.total - a.total);
-  return { scrapedAt: h.scrapedAt || null, yards: Object.keys(h.yards).length, dormant, frozen, carried, missing, chainFrozen };
+  return { scrapedAt: h.scrapedAt || null, yards: Object.keys(h.yards).length, dormant, frozen, frozenSoon, listMode, carried, missing, chainFrozen };
 }
 
 function nameList(items, fmt) {
@@ -725,7 +742,12 @@ function composeDaily(r) {
     const quietChains = (yh.chainFrozen || []).filter((c) => c.quiet);
     if (frozenChains.length) L.push(`  CHAIN FEED FROZEN (same-day): ${frozenChains.map(chainLine).join('; ')}`);
     if (quietChains.length) L.push(`  Quiet since the last business day (normal over a weekend or overnight, not an issue): ${quietChains.map(chainLine).join('; ')}`);
-    L.push(`  Frozen, unchanged 3+ weekdays at the source: ${yh.frozen.length}${yh.frozen.length ? ' — ' + nameList(yh.frozen, (y) => `${y.name} (${String(y.lastChangedAt).slice(5, 10)})`) : ''}`);
+    if (yh.listMode) {
+      L.push(`  Marked on the site, list unchanged 3+ business days (frozen = 10+, cars held from new and alerts): ${yh.frozen.length}${yh.frozen.length ? ' — ' + nameList(yh.frozen, (y) => `${y.name} (${String(y.lastChangedAt).slice(5, 10)}${y.state === 'frozen' ? ', frozen' : ''}${y.notRead ? ', not read' : ''})`) : ''}`);
+      L.push(`  Early warning, not on the site yet (unchanged 3+ weekdays): ${yh.frozenSoon.length}${yh.frozenSoon.length ? ' — ' + nameList(yh.frozenSoon, (y) => `${y.name} (${String(y.lastChangedAt).slice(5, 10)})`) : ''}`);
+    } else {
+      L.push(`  Frozen, unchanged 3+ weekdays at the source: ${yh.frozen.length}${yh.frozen.length ? ' — ' + nameList(yh.frozen, (y) => `${y.name} (${String(y.lastChangedAt).slice(5, 10)})`) : ''}`);
+    }
   } else {
     L.push(`YARD HEALTH: could not load yard_health.json (${(yh && yh.error) || 'unknown'})`);
   }
@@ -980,9 +1002,16 @@ export function composeDailyHtml(r) {
       parts.push(`<div style="font-size:14px;margin:10px 0 2px;color:${C.bad};"><strong>${yh.carried.length}</strong> re-serving last copy <span style="color:${C.dim};">(our fetch returned nothing — check the adapter or the source)</span></div>`);
       parts.push(hList(yh.carried.map((y) => `${esc(y.name)} <span style="color:${C.dim};">· ${fmtInt(y.count)} cars · since ${esc(String(y.lastChangedAt).slice(5, 10))}</span>`)));
     }
-    parts.push(`<div style="font-size:14px;margin:10px 0 2px;"><strong>${yh.frozen.length}</strong> frozen <span style="color:${C.dim};">(the yard's own list unchanged 3+ weekdays)</span></div>`);
-    if (yh.frozen.length) parts.push(hList(yh.frozen.slice(0, MAX_YARD_NAMES).map((y) => `${esc(y.name)} <span style="color:${C.dim};">· since ${esc(String(y.lastChangedAt).slice(5, 10))}</span>`))
+    parts.push(yh.listMode
+      ? `<div style="font-size:14px;margin:10px 0 2px;"><strong>${yh.frozen.length}</strong> marked on the site <span style="color:${C.dim};">(the yard's own list unchanged 3+ business days; frozen = 10+, cars held from new and alerts)</span></div>`
+      : `<div style="font-size:14px;margin:10px 0 2px;"><strong>${yh.frozen.length}</strong> frozen <span style="color:${C.dim};">(the yard's own list unchanged 3+ weekdays)</span></div>`);
+    if (yh.frozen.length) parts.push(hList(yh.frozen.slice(0, MAX_YARD_NAMES).map((y) => `${esc(y.name)} <span style="color:${C.dim};">· since ${esc(String(y.lastChangedAt).slice(5, 10))}${y.state === 'frozen' ? ' · frozen' : ''}${y.notRead ? ' · not read' : ''}</span>`))
       + (yh.frozen.length > MAX_YARD_NAMES ? hMuted(`+${yh.frozen.length - MAX_YARD_NAMES} more`) : ''));
+    if (yh.listMode && yh.frozenSoon.length) {
+      parts.push(`<div style="font-size:14px;margin:10px 0 2px;"><strong>${yh.frozenSoon.length}</strong> early warning <span style="color:${C.dim};">(unchanged 3+ weekdays, not on the site yet)</span></div>`);
+      parts.push(hList(yh.frozenSoon.slice(0, MAX_YARD_NAMES).map((y) => `${esc(y.name)} <span style="color:${C.dim};">· since ${esc(String(y.lastChangedAt).slice(5, 10))}</span>`))
+        + (yh.frozenSoon.length > MAX_YARD_NAMES ? hMuted(`+${yh.frozenSoon.length - MAX_YARD_NAMES} more`) : ''));
+    }
     S.push(hSection('Yard health', parts.join(''), `${yh.yards} yards checked`));
   } else {
     S.push(hSection('Yard health', hMuted(`Could not load yard_health.json (${esc((yh && yh.error) || 'unknown')})`)));
