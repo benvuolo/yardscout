@@ -622,10 +622,10 @@
   {
    "make": "Lexus",
    "match": [
-    "es 300",
-    "es 330"
+    "lexus es"
    ],
    "display": "Lexus ES",
+   "note": "2026-11-18 (PARTS_GAPS §29): was match ['es 300', 'es 330'], which created a second 'Lexus ES' card. Now merges into the lexus es entry. yr_max 2009 -> 2006: only ES 300 / ES 330 listings (1992-2006) ever took these rows, and the entry has its own 2007+ Mark Levinson row.",
    "parts": [
     {
      "name": "Window Regulator + Motor (front)",
@@ -633,7 +633,7 @@
      "high": 80,
      "cost": 10,
      "yr_min": 1995,
-     "yr_max": 2009,
+     "yr_max": 2006,
      "rarity": "Rare",
      "source": "agent-research",
      "added": "2026-10-09"
@@ -645,7 +645,7 @@
      "high": 200,
      "cost": 20,
      "yr_min": 2002,
-     "yr_max": 2009,
+     "yr_max": 2006,
      "option": true,
      "source": "agent-research",
      "added": "2026-10-09"

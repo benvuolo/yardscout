@@ -3312,3 +3312,44 @@ rows above. No row lost; no band, cost, gate or "if equipped" status
 changed. Coverage unchanged: no entry 12,228 (3.63%), generic-only 11,949
 (3.55%). `test_parts_gaps.py`: 17 existing checks (18 window values) now
 expect the §28 windows; new §28 checks. Every `scraper/test_*.py` passes.
+
+## 29. Lexus ES: the overlay "es 300" entry merged into `lexus es` (2026-11-18, `ops/parts.md` Next item 3; §20.5 follow-up)
+
+**What was wrong.** `parts_overlay.json` had an entry with match terms
+`es 300` / `es 330`. No table entry used those keywords (the `lexus es`
+entry matches on its key), so the overlay merge created a second entry
+`es 300` (display "Lexus ES", years 1990–2026). Every listing spelled
+"ES 300" or "ES 330" showed two "Lexus ES" cards; listings spelled "ES300"
+or "ES" showed one card without the overlay rows. The overlay card's two
+rows said "fits 1995–2009" and "fits 2002–2009", across the 1997, 2002 and
+2007 generation breaks, because the per-generation pass only bounds
+entries with `GENERATION_BREAKS` (the `es 300` entry had none).
+
+**Change (data only, `parts_overlay.json`).** The entry's match is now
+`lexus es`, so the overlay merge adds its rows to the `lexus es` entry and
+creates no second entry. Both rows end at 2006:
+- *Window Regulator + Motor (front)*, 1995–2006 (was 1995–2009). The
+  §15 pass now bounds it per generation: 1995–96, 1997–2001, 2002–06.
+- *Mark Levinson Amp + Speakers* (option), 2002–2006 (was 2002–2009).
+  The `lexus es` entry has its own 2007+ "Mark Levinson Amp/Speakers" row,
+  so 2007–09 would otherwise show two.
+- **Why 2006.** Only "ES 300" / "ES 330" listings ever took these rows.
+  Those models ran 1992–2003 (ES 300) and 2004–06 (ES 330); the 2007 ES is
+  the ES 350 (§20.5 generations; FACELIFT_BREAKS and GENERATION_BREAKS for
+  `lexus es`). So the 2007–09 part of the old windows reached no real car,
+  and no ES 350 gets a row it did not have. No row, band, cost or flag was
+  added or changed; the basis of the two rows is unchanged (overlay
+  research of 2026-10-09).
+
+**Checks** (same 336,827-car inventory; §28 state vs this change, seven
+decodes): 31 year/make/model combinations, 778 cars, all Lexus ES.
+- ES 300 / ES 330 listings 1995–2006 (706 cars): one card instead of two,
+  same rows; the two rows now carry per-generation windows.
+- Listings spelled "ES", and "ES 350" dated 1995–2006 (67 + 5 cars, the
+  same ES 300/330 cars under other spellings): gain the two rows.
+- Two "ES 300" listings dated 2007 and 2008 lose them (no ES 300 was built
+  those years).
+- Coverage unchanged (the ES was already model-specific). New §29 checks in
+  `test_parts_gaps.py`.
+- If `research_parts.py` proposes "es 300" rows again, they belong on this
+  entry (match `lexus es`), not a new one.

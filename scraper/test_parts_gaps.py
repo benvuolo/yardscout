@@ -972,6 +972,23 @@ for (bk, tok), ys in js.PART_NUMBER_BREAKS.items():
                     _28_lost.append((k, tok, y, "crosses"))
 _28_band = {(p["low"], p["high"], p["cost"]) for (bk, tok) in _28 for k, e in js.UNOBTANIUM_DB.items()
             if _re.sub(r" \d{4}-\d{4}$", "", k) == bk for p in e["top_parts"] if tok in p["name"].lower() and js._is_gap_row(p)}
+
+# §29 (PARTS_GAPS §29): the overlay "es 300"/"es 330" entry merged into
+# lexus es: one "Lexus ES" card; its two rows bounded to the ES 300/330
+# years and per generation; no 2007+ ES gets them.
+_es = {y: js.match_vehicle(y, "Lexus", "ES 300") for y in (1996, 2003, 2005)}
+check("§29 Lexus ES: one card for ES 300 / ES 330 / ES300 / ES listings; no 'es 300' entry",
+      all(len(js.match_vehicle(y, "Lexus", mo)) == 1 for y in (1996, 2003, 2005) for mo in ("ES 300", "ES 330", "ES300", "ES"))
+      and "es 300" not in js.UNOBTANIUM_DB, str({y: [m["display"] for m in ms] for y, ms in _es.items()}))
+check("§29 Lexus ES: window regulator per generation 1995-96 / 1997-2001 / 2002-06; Mark Levinson (option) 2002-06 next to the 2007+ row; none on 2008",
+      parts(1996, "Lexus", "ES 300")["Window Regulator + Motor (front)"]["fits"] == "1995–1996"
+      and parts(1999, "Lexus", "ES300")["Window Regulator + Motor (front)"]["fits"] == "1997–2001"
+      and parts(2005, "Lexus", "ES 330")["Window Regulator + Motor (front)"]["fits"] == "2002–2006"
+      and parts(2004, "Lexus", "ES 330")["Mark Levinson Amp + Speakers"]["trim_status"] == "unconfirmed"
+      and parts(2004, "Lexus", "ES 330")["Mark Levinson Amp + Speakers"]["fits"] == "2002–2006"
+      and not ({"Window Regulator + Motor (front)", "Mark Levinson Amp + Speakers"} & names(2008, "Lexus", "ES 350", FWD))
+      and "Mark Levinson Amp/Speakers" in names(2008, "Lexus", "ES 350", FWD)
+      and "Window Regulator + Motor (front)" not in names(1994, "Lexus", "ES 300", FWD))
 check("§28 every cut names a pump or A/C row and none crosses; the cut rows keep the _GAP_MECH bands",
       len(_28) >= 50 and not _28_lost and _28_band <= {(40, 90, 24), (60, 130, 40)}, str((_28_lost[:5], _28_band)))
 
