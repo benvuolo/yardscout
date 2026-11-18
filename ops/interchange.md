@@ -4114,3 +4114,28 @@ donors.
    passenger front"). "trim-limited" alone does not tell a puller which door holds the number.
 
 **Recommendation: ship the 9 restored groups.**
+
+### Agreement / disagreement with the builder (read after the verdicts above were committed, 538bf175)
+
+I read `live_diff_2026-11-18_rules.txt` and the "2026-11-18 Rules after the independent check" section.
+
+**Agree:**
+- Same 9 restored groups and the same 19 apps. The builder diffed against main 82df0482; I diffed against
+  700bcf9b, and the result is the same.
+- All 9 rest on the same own-page rows I cited (records L144/145/549/992/993/998/1000; lists L122/283/333/334/
+  413/306/1543/2686/1720/1732).
+- The 4 restored groups outside the earlier sample (6CPZ-5423395-B, 6CPZ-9923394-B, 6CPZ-9923394-C, 15890412)
+  hold up under my read.
+- R14: I read AP(37) as coupe-only, as the builder did, and against the earlier verifier's class (b). The
+  removal stands.
+- Drive notes: the builder already flagged that most GM "2WD only" notes come from 4wd pages never read
+  ("under-claim rather than over-claim"). I agree and put a number on it: 30 of 36 GM app-years.
+
+**Add (the builder did not raise these):**
+- On the four 6CPZ Focus/Transit Connect groups, the door side differs between the two models' pages.
+- The Mopar "1500: 4WD only" limit rests on FIT rows that no 2012 1500 headlamp before 07/23/2012 lists for
+  2WD, so those rows look incomplete rather than a real drive split.
+- The Mopar "Up To 07/23/2012" production window is not named in the note.
+- The 1999 Tahoe/Yukon rear-door body point (Found item 3).
+
+**No disagreement on any verdict.**
