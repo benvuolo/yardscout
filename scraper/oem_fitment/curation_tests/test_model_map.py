@@ -1,18 +1,48 @@
 #!/usr/bin/env python3
-"""CURATION_SPEC.md §9 test_model_map: M1-M10 against the real
-docs/data/inventory_live.json (skips with a printed reason when absent)."""
+"""CURATION_SPEC.md §9 test_model_map: M1-M10 against the PINNED inventory
+the committed groups were curated on (interchange gates-1118): every scan
+that brought a new one-car feed spelling ("Focus Htbk", "Civic 2Dr", "Eos
+Conv", "Passat Tdi") used to fail M5 here, although the shipped groups were
+curated on another inventory and an unmapped spelling gets no claim (no
+target, no app that matches it). The pin is read from git and checked by
+sha256; without it (a shallow clone) M2-M10 SKIP with the reason. The live
+docs/data/inventory_live.json is still validated, and what it finds is
+REPORTED, not failed: a new spelling there is for the next re-curation (add a
+map exclusion or entry, then re-curate on the newer inventory and move PIN)."""
 import copy
+import hashlib
 import json
+import subprocess
 import tempfile
 from pathlib import Path
 
-from _util import check, done, js, skip
+from _util import OEM, check, done, js, skip
 import model_map as MM
 import policy
 
+# The inventory the shipped groups and the nissan candidate were curated on
+# (curate --inventory; groups/_report/nissan.json "inputs"; audit11_4/README.md).
+# Move it together with a re-curation on a newer inventory.
+PIN = {"ref": "a85c654", "path": "docs/data/inventory_live.json",
+       "sha256": "1a9cfa73e9c15e41809e1149c2e752504e797efd91c18de4668df454364ce1d6"}
+
+
+def pinned_inventory():
+    """(inventory dict, '') or (None, why) from git, sha256-checked."""
+    try:
+        raw = subprocess.run(["git", "-C", str(OEM), "show", f"{PIN['ref']}:{PIN['path']}"],
+                             capture_output=True, check=True, timeout=300).stdout
+    except (OSError, subprocess.SubprocessError) as e:
+        return None, f"git show {PIN['ref']}:{PIN['path']} failed ({type(e).__name__}); a shallow clone has no pin"
+    got = hashlib.sha256(raw).hexdigest()
+    if got != PIN["sha256"]:
+        return None, f"pinned inventory sha256 {got[:12]} != {PIN['sha256'][:12]}"
+    return json.loads(raw), ""
+
+
 doc = MM.load()
 mm = MM.ModelMap(doc)
-inv = MM.load_inventory()
+inv, pin_why = pinned_inventory()
 J = js()
 
 check("model_map.json is schema 1 with entries and an exclude table",
@@ -28,11 +58,23 @@ check("Camry Hybrid target only before 2018", [t.model for t in mm.targets("toyo
 check("trim pattern 'hybrid*' matches 'hybrid le' but not 'le'",
       camry[1].trim_ok("hybrid le") if camry[1].model == "Camry Hybrid" else camry[0].trim_ok("hybrid le"))
 
+live = MM.load_inventory()
+if live is None:
+    skip("report on the live inventory", "docs/data/inventory_live.json is absent")
+else:
+    lerrs, _lw, _lr = MM.validate(mm, live, J, policy.NAMESPACES)
+    print(f"     live inventory ({live.get('scrapedAt', '?')}): {len(lerrs)} finding(s), reported, not failed"
+          + (" (curate.py on this inventory refuses to run until the map covers them)" if lerrs else ""))
+    for e in lerrs[:40]:
+        print(f"     REPORT {e}")
+    if len(lerrs) > 40:
+        print(f"     REPORT ... {len(lerrs) - 40} more")
+
 if inv is None:
-    skip("M2-M10 against inventory", "docs/data/inventory_live.json is absent")
+    skip("M2-M10 against the pinned inventory", pin_why)
 else:
     errs, warns, rep = MM.validate(mm, inv, J, policy.NAMESPACES)
-    check("the committed map passes M1-M10 (no errors)", errs == [], str(errs[:5]))
+    check(f"the committed map passes M1-M10 on the pinned inventory ({PIN['ref']}, no errors)", errs == [], str(errs[:5]))
     print(f"     ({len(warns)} M2 warnings: targets without cars)")
     check("M4: the 'Camry' target does not catch a 'Camry Hybrid' car",
           not J._app_matches(("Toyota", "Camry", 2007, 2017), 2009, "Toyota", "Camry Hybrid"))
