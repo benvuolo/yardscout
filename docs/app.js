@@ -10794,10 +10794,14 @@ function renderAlerts() {
       if (!isPro() && e.addedAt) {
         const setAt = Date.parse(String(e.addedAt).split('~')[0]);
         const dayAgo = Date.now() - 86400000;
-        // The instant watch's own nearby cars are pushed to free users too:
+        // The instant watch's own nearby cars are pushed to free users too,
+        // and the free email alert's watch has its nearby cars emailed (web):
         // they are no near-miss.
+        const faHere = !!faKey && e.addedAt === faKey;
+        const center = faHere ? ownCenter() : null;
         const missed = r.hits.filter(v => { const d = parseYardDate(v.dateAdded); return d && d.getTime() >= setAt - 86400000 && d.getTime() <= dayAgo
-          && !(i === instIdx && inInstantScope(e, v)); });
+          && !(i === instIdx && inInstantScope(e, v))
+          && !(faHere && falertCovers(e, v, fa, center, d.getTime())); });
         if (missed.length) {
           const first = missed.map(v => parseYardDate(v.dateAdded)).sort((a, b) => a - b)[0];
           const when = first.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
@@ -11438,8 +11442,10 @@ function handleRecapHash() {
  *     on (change car, turn off). No Pro prompt in it.
  *   - rule 6: stored watches are never edited, moved or reordered. What this
  *     browser remembers lives in its own key:
- *       localStorage ys_falert = {email, state: 'pending'|'on', sub?, key, label, r, at?}
- *     (key = the chosen watch's addedAt, only to mark it in the list)
+ *       localStorage ys_falert = {email, state: 'pending'|'on', sub?, key, label, r, at?, onAt?}
+ *     (key = the chosen watch's addedAt, only to mark it in the list; onAt =
+ *     when this browser saw it go on, so the near-miss line can leave out
+ *     the cars the alert covers)
  *   - the server is the truth for an alert that is on: the card re-checks it
  *     (falertCheck), so an unsubscribe done from an email shows up here
  *   - the copy never says "instant" or "every": scans run about every 4
@@ -11472,6 +11478,22 @@ function falertSave(v) {
 /** Miles the alert covers for a watch: its own radius, at most the free 50. Pure. */
 function falertRadiusMi(e) {
   return Math.min((e && e.radiusMi) || FREE_EMAIL_ALERT_RADIUS_MI, FREE_EMAIL_ALERT_RADIUS_MI);
+}
+/** True when the email alert `st` (this browser's ys_falert), on for watch
+ * e, covers car v: v sits within the copy's radius of the copy's centre (as
+ * falertWatchBody sends them; `center` = the visitor's own place) and was
+ * listed (`listedMs`, the yard's date) no earlier than the day before the
+ * alert went on (`st.onAt`; the API records the cars already listed as
+ * known). With no onAt (an alert turned on before the browser kept that
+ * time, or changed from another browser) every car in range counts as
+ * covered: the near-miss line must never tell someone they missed a car
+ * their email may have brought. Pure (unit-tested). */
+function falertCovers(e, v, st, center, listedMs) {
+  if (!st || st.state !== 'on' || !v || v.lat == null || v.lng == null) return false;
+  const w = falertWatchBody(e, center);
+  if (!w || haversineMiles(w.lat, w.lng, v.lat, v.lng) > w.radiusMi) return false;
+  if (!st.onAt) return true;
+  return !(listedMs > 0) || listedMs >= st.onAt - 86400000;
 }
 /** "2003–2009 Toyota 4Runner", the same text the API's emails use. Pure. */
 function falertLabel(e) {
@@ -11627,7 +11649,10 @@ function falertCheck() {
       const keep = !!cur.key && falertChoices().some(x => x.e.addedAt === cur.key && falertLabel(x.e) === label && falertRadiusMi(x.e) === w.radiusMi);
       const key = keep ? cur.key : falertKeyFor(label, w.radiusMi);
       if (label === cur.label && w.radiusMi === cur.r && key === (cur.key || null)) return;
-      falertSave({ ...cur, label, r: w.radiusMi, key });
+      // Another car, set from another browser at a time this one cannot know:
+      // no onAt (falertCovers then counts every car in range as covered).
+      const same = label === cur.label && w.radiusMi === cur.r;
+      falertSave({ ...cur, label, r: w.radiusMi, key, onAt: same ? (cur.onAt || null) : null });
       renderAlerts();
     } else if (res.status === 200 && res.data.state === 'off') {
       falertSave(null);
@@ -11675,7 +11700,8 @@ async function falertSubmit(el, change) {
   if (!res || res.status !== 200) { msg.textContent = falertFail(res); return; }
   if (!change) track('free-alert-asked');
   const base = { email, key: pick.e.addedAt || null, label: falertLabel(pick.e), r: watch.radiusMi };
-  if (res.data.state === 'on' && res.data.sub) falertSave({ ...base, state: 'on', sub: res.data.sub });
+  // onAt: when this copy went on (falertCovers; the near-miss line).
+  if (res.data.state === 'on' && res.data.sub) falertSave({ ...base, state: 'on', sub: res.data.sub, onAt: Date.now() });
   else falertSave({ ...base, state: 'pending', at: Date.now() });
   _falertChanging = false;
   _falertMsg = '';
@@ -11745,7 +11771,7 @@ function handleFalertHash() {
   try { prev = JSON.parse(localStorage.getItem(FALERT_KEY) || 'null'); } catch (e) { prev = null; }
   const mine = prev && prev.email === email ? prev : null;
   falertSave({ email, state: 'on', sub, key: mine ? (mine.key || null) : null, label: mine ? (mine.label || '') : '',
-    r: mine ? (mine.r || FREE_EMAIL_ALERT_RADIUS_MI) : FREE_EMAIL_ALERT_RADIUS_MI });
+    r: mine ? (mine.r || FREE_EMAIL_ALERT_RADIUS_MI) : FREE_EMAIL_ALERT_RADIUS_MI, onAt: Date.now() });
   _falertMsg = '';
   _falertChecked = 0;
   jhOpenAlertsTab();

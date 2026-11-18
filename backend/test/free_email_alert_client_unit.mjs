@@ -48,7 +48,7 @@ function konst(name) {
   return end < 0 ? null : lines.slice(start, end + 1).join('\n');
 }
 
-const FNS = ['falertOffered', 'falertRadiusMi', 'falertLabel', 'falertWatchBody', 'falertFail'];
+const FNS = ['falertOffered', 'falertRadiusMi', 'falertLabel', 'falertWatchBody', 'falertFail', 'haversineMiles', 'falertCovers'];
 const CONSTS = ['FREE_EMAIL_ALERT_RADIUS_MI', 'FREE_INSTANT_RADIUS_MI', 'FREE_WATCH_LIMIT', 'FUNNEL_EVENTS', 'FALERT_LIMIT_NOTE', 'FALERT_INTRO_HTML'];
 const parts = {};
 for (const n of CONSTS) { parts[n] = konst(n); check(`app.js has const ${n}`, !!parts[n]); }
@@ -57,7 +57,7 @@ if (failures) { console.log(`\n${failures} FAILURES`); process.exit(1); }
 
 const ctx = vm.createContext({ Math, JSON, String, Number });
 vm.runInContext([...CONSTS, ...FNS].map(n => parts[n]).join('\n')
-  + '\n;globalThis.__x = { falertOffered, falertRadiusMi, falertLabel, falertWatchBody, falertFail, FREE_EMAIL_ALERT_RADIUS_MI, FREE_INSTANT_RADIUS_MI, FREE_WATCH_LIMIT, FUNNEL_EVENTS, FALERT_LIMIT_NOTE, FALERT_INTRO_HTML };', ctx);
+  + '\n;globalThis.__x = { falertOffered, falertRadiusMi, falertLabel, falertWatchBody, falertFail, falertCovers, FREE_EMAIL_ALERT_RADIUS_MI, FREE_INSTANT_RADIUS_MI, FREE_WATCH_LIMIT, FUNNEL_EVENTS, FALERT_LIMIT_NOTE, FALERT_INTRO_HTML };', ctx);
 const A = ctx.__x;
 
 /* ---- who ---- */
@@ -98,6 +98,31 @@ for (const e of [stored, legacy, { make: 'Ford', model: '', yrMin: 1999, yrMax: 
   { make: 'Mercedes-Benz', model: 'Sprinter 2500', yrMin: null, yrMax: 2012, lat: 1, lng: 1, radiusMi: 50 }]) {
   const s = sanitizeFreeAlertWatch(A.falertWatchBody(e, { lat: 1, lng: 1 }));
   check(`label "${A.falertLabel(e)}" = the server's`, A.falertLabel(e) === watchLabel(s), watchLabel(s));
+}
+
+/* ---- the near-miss line leaves out what the email alert covers ---- */
+{
+  // Phoenix watch, 50 mi copy; on since 2026-11-10 noon UTC.
+  const DAY = 86400000;
+  const onAt = Date.parse('2026-11-10T12:00:00Z');
+  const st = { email: 'v@example.com', state: 'on', sub: 'x', onAt };
+  const w = { make: 'Toyota', model: '4Runner', radiusMi: 100, lat: 33.45, lng: -112.07, addedAt: 'k' };
+  const near = { lat: 33.6, lng: -112.2 };      // ~13 mi away
+  const far = { lat: 34.54, lng: -112.47 };     // Prescott, ~78 mi: inside the watch's 100, outside the alert's 50
+  const after = Date.parse('2026-11-12T00:00:00Z'), sameDay = Date.parse('2026-11-10T00:00:00Z'), before = onAt - 3 * DAY;
+  check('covers: a car in range listed after the alert went on', A.falertCovers(w, near, st, null, after) === true);
+  check('covers: the day it went on counts as covered (the yard date has no time)', A.falertCovers(w, near, st, null, sameDay) === true);
+  check('not covered: listed days before the alert went on (a real near-miss)', A.falertCovers(w, near, st, null, before) === false);
+  check('not covered: outside the alert\'s 50 mi, even inside the watch\'s own radius', A.falertCovers(w, far, st, null, after) === false);
+  check('not covered: the alert is only pending (no click yet)', A.falertCovers(w, near, { ...st, state: 'pending' }, null, after) === false);
+  check('not covered: no alert at all', A.falertCovers(w, near, null, null, after) === false);
+  check('unknown start (no onAt): every car in range counts as covered', A.falertCovers(w, near, { ...st, onAt: undefined }, null, before) === true
+    && A.falertCovers(w, far, { ...st, onAt: undefined }, null, before) === false);
+  check('a watch with no centre of its own follows the visitor\'s place', A.falertCovers({ make: 'Toyota', model: '4Runner' }, near, st, { lat: 33.45, lng: -112.07 }, after) === true
+    && A.falertCovers({ make: 'Toyota', model: '4Runner' }, near, st, null, after) === false);
+  check('a 10 mi watch: its own 10 mi, not 50', A.falertCovers({ ...w, radiusMi: 10 }, near, st, null, after) === false);
+  check('a car with no coordinates is not covered', A.falertCovers(w, { lat: null, lng: null }, st, null, after) === false);
+  check('covers() leaves the stored watch untouched', JSON.stringify(w) === JSON.stringify({ make: 'Toyota', model: '4Runner', radiusMi: 100, lat: 33.45, lng: -112.07, addedAt: 'k' }));
 }
 
 /* ---- wording ---- */

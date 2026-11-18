@@ -21,9 +21,12 @@
  *              once (the token rides along)
  *   web free   only the first 5 watches can carry it; no watch, no card
  *   web Pro    no card, no sentence; the Pro email panel is as it was
+ *   web free   the near-miss line ("Would have sent a push within hours")
+ *              leaves out the cars the alert that is on covers
  *   iOS / Android shells: no card, no sentence, no request
  *
- * Run: node backend/test/free_email_alert_ui_e2e.mjs   (SHOTS=<dir> for screenshots) */
+ * Run: node backend/test/free_email_alert_ui_e2e.mjs   (SHOTS=<dir> for screenshots;
+ * YS_DOCS=<another docs/ folder> runs it against other sources) */
 import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
@@ -31,7 +34,7 @@ import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const { chromium } = require('playwright');
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../..');
-const DOCS = path.join(ROOT, 'docs');
+const DOCS = path.resolve(process.env.YS_DOCS || path.join(ROOT, 'docs'));   // YS_DOCS: another docs/ folder (e.g. before a fix)
 const SHOTS = process.env.SHOTS || '';
 const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json',
   '.png': 'image/png', '.svg': 'image/svg+xml', '.ico': 'image/x-icon', '.webmanifest': 'application/manifest+json' };
@@ -419,6 +422,44 @@ try {
     check('...and for a free visitor that panel still shows its one "See Pro" button', /Email alerts/.test(proPanelFree) && /See Pro/.test(proPanelFree), proPanelFree);
     await v.page.evaluate(() => { localStorage.removeItem('jh_pro'); applyProGates(); renderAlerts(); });
     check('Pro lapses: the card is back (what the browser remembered was not thrown away)', (await v.card()).shown);
+    await v.ctx.close();
+  }
+
+  /* ---- 7b. the near-miss line leaves out the cars the email alert covers (2026-11-18) ---- */
+  {
+    // One watch (Phoenix, 100 mi, set 11-01) and two cars listed three days
+    // ago: one 13 mi out (inside the alert's 50 mi), one 78 mi out (inside
+    // the watch's own 100 only). The page's inventory is swapped for the two
+    // inside one evaluate, so the background loader cannot interfere.
+    const DAY = 86400000, listed = new Date(Date.now() - 3 * DAY).toISOString().slice(0, 10);
+    const near = { id: 'nm-near', vin: '', year: 2005, make: 'Toyota', model: '4Runner', lat: 33.6, lng: -112.2, dateAdded: listed, location: 'Near Test Yard', row: '1', topParts: [] };
+    const far = { id: 'nm-far', vin: '', year: 2006, make: 'Toyota', model: '4Runner', lat: 34.54, lng: -112.47, dateAdded: listed, location: 'Far Test Yard', row: '2', topParts: [] };
+    const statusOn = { '/v1/free-alert/status': [200, { ok: true, state: 'on', watch: { make: 'Toyota', model: '4Runner', yearMin: null, yearMax: null, radiusMi: 50 } }] };
+    const v = await open(browser, { storage: { ...BASE_STORE, [WL]: ONE }, api: statusOn });
+    await v.alerts();
+    const miss = (falert, cars) => v.page.evaluate(({ falert, cars }) => {
+      if (falert) localStorage.setItem('ys_falert', JSON.stringify(falert)); else localStorage.removeItem('ys_falert');
+      liveInventory = cars;
+      renderAlerts();
+      const el = document.querySelector('#alert-watchlist .watchlist-item');
+      const m = el && el.querySelector('.wl-miss');
+      return { text: m ? m.textContent.replace(/\s+/g, ' ').trim() : '', pro: !!(el && el.querySelector('.wl-pro')), mark: !!(el && el.querySelector('.wl-falert')) };
+    }, { falert, cars });
+    const on = (extra) => ({ email: EMAIL, key: '2026-11-01T10:00:00.000Z~w1xyz', label: 'Toyota 4Runner', r: 50, state: 'on', sub: SUB, ...extra });
+    let r = await miss(null, [near, far]);
+    check('near-miss, no email alert: both cars, with the Pro box', /^2 landed since you set this watch/.test(r.text) && r.pro, JSON.stringify(r));
+    r = await miss(on({ onAt: Date.now() - 5 * DAY }), [near, far]);
+    check('near-miss, email alert on before they landed: only the car outside its 50 mi', r.mark && /^One landed on/.test(r.text) && r.pro, JSON.stringify(r));
+    r = await miss(on({ onAt: Date.now() - 5 * DAY }), [near]);
+    check('near-miss, email alert on: a car it covers gets no line and no Pro box', r.mark && r.text === '' && !r.pro, JSON.stringify(r));
+    r = await miss(on({ onAt: Date.now() }), [near, far]);
+    check('near-miss, email alert turned on after they landed: both still count (it never emailed them)', /^2 landed/.test(r.text) && r.pro, JSON.stringify(r));
+    r = await miss(on({}), [near, far]);
+    check('near-miss, email alert on since an unknown time: the car in its range is left out', /^One landed on/.test(r.text) && r.pro, JSON.stringify(r));
+    r = await miss({ email: EMAIL, key: '2026-11-01T10:00:00.000Z~w1xyz', label: 'Toyota 4Runner', r: 50, state: 'pending', at: Date.now() }, [near, far]);
+    check('near-miss, email alert only pending: both cars', /^2 landed/.test(r.text) && r.pro, JSON.stringify(r));
+    check('near-miss: the stored watch is untouched (rule 6)', (await v.watches()) === ONE);
+    check('near-miss: no page error', !v.errors.length, v.errors.join(' | '));
     await v.ctx.close();
   }
 
