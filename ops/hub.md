@@ -1998,3 +1998,4 @@ WRONG (not independent). Not merged.
 - Owner decision named by the builder: a gm 4wd/awd/hybrid catalog crawl
   would turn many "2WD only" notes back into plain claims; gmpartsgiant is
   marked blocked (rule 2), so it stays off unless the owner decides.
+- 20:25 UTC confirmed live: sw jh-v211; one load of #cars=Nissan|Xterra with a zip shows the strip-falert ask ("Free email alert for Nissan Xterra ... within 50 mi"), no page errors.
