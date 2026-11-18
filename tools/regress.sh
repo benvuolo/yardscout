@@ -4,7 +4,7 @@
 # skipped or left a server behind; 2 on a usage error.
 #
 #   tools/regress.sh            full run (about an hour and a half)
-#   tools/regress.sh --quick    units and scraper tests only (minutes)
+#   tools/regress.sh --quick    units, scraper and tools tests only (minutes)
 #   tools/regress.sh --list     print what would run, then stop (no lock)
 #   tools/regress.sh --only RE  only tests whose name matches the regex RE
 #   tools/regress.sh --out DIR  logs and summary in DIR (default
@@ -14,13 +14,14 @@
 # line per test in DIR/summary.txt and on screen):
 #   unit      backend/test/*_unit.mjs, backend/site-proxy/test/*_unit.mjs
 #   scraper   scraper/test_*.py                         (python3 scraper/test_x.py)
+#   tools     tools/test_*.py (the workflow-step tests)
 #   browser   backend/test/*_e2e.mjs and *_e2e.py that are self-contained
 #   api       backend/test/e2e.sh, e2e-ops.sh, e2e-devices.sh, e2e-coverage.sh,
 #             e2e-email.sh, browser_e2e.py               (wrangler dev + mocks)
 #   layout    backend/test/ui_no_truncation.mjs at its six widths, as two
 #             halves side by side (320,375,390 and 430,768,1280; each serves
 #             docs/ on a port the OS picks, so they cannot collide)
-# --quick runs the unit and scraper groups only.
+# --quick runs the unit, scraper and tools groups only.
 #
 # Left out on purpose (not self-contained), with the reason:
 #   backend/test/map_regions_e2e.mjs   needs tiles.openfreemap.org and unpkg.com
@@ -138,6 +139,10 @@ done
 for f in scraper/test_*.py; do
   [ -e "$f" ] && run scraper "$f" 900 python3 "$f"
 done
+# ---- tools ----
+for f in tools/test_*.py; do
+  [ -e "$f" ] && run tools "$f" 300 python3 "$f"
+done
 
 if [ "$QUICK" = 0 ]; then
   # ---- browser (self-contained) ----
@@ -178,7 +183,7 @@ if [ "$QUICK" = 0 ]; then
 fi
 
 [ "$LIST" = 1 ] && exit 0
-line "──── $NPASS passed, $NFAIL failed, $NSKIP skipped$( [ "$QUICK" = 1 ] && echo ' (--quick: units and scraper tests only)' ) ────"
+line "──── $NPASS passed, $NFAIL failed, $NSKIP skipped$( [ "$QUICK" = 1 ] && echo ' (--quick: units, scraper and tools tests only)' ) ────"
 if [ "${#FAILED[@]}" -gt 0 ]; then
   echo
   echo "Not passed (last 20 lines of each log):"

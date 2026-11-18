@@ -8,7 +8,7 @@
  *              own lock file and port list, so it never waits on, or watches,
  *              the real ones): one log per test, one summary line per test,
  *              exit 1 when a test fails (with the failing log's tail), exit 0
- *              when all pass, --quick runs units and scraper tests only, a
+ *              when all pass, --quick runs units, scraper and tools tests only, a
  *              test that leaves a server on a watched port fails, and the
  *              lock is waited for
  *
@@ -51,7 +51,7 @@ for (const s of ['e2e.sh', 'e2e-ops.sh', 'e2e-devices.sh', 'e2e-coverage.sh', 'e
 }
 check('the layout check at its six widths, as two halves', /layout\s+backend\/test\/ui_no_truncation\.mjs WIDTHS=320,375,390 \| WIDTHS=430,768,1280/.test(list.stdout));
 const quickList = spawnSync('bash', [RUNNER, '--list', '--quick'], { encoding: 'utf8', cwd: ROOT }).stdout;
-check('--quick lists units and scraper tests only', quickList.trim().split('\n').every((l) => /^(unit|scraper)\s/.test(l)) && quickList.includes('scraper/'), quickList.split('\n').filter((l) => !/^(unit|scraper)\s/.test(l)).slice(0, 3).join(' | '));
+check('--quick lists units, scraper and tools tests only', quickList.trim().split('\n').every((l) => /^(unit|scraper|tools)\s/.test(l)) && quickList.includes('scraper/'), quickList.split('\n').filter((l) => !/^(unit|scraper)\s/.test(l)).slice(0, 3).join(' | '));
 
 /* ---------- behaviour, on a scratch tree ---------- */
 const freePort = () => new Promise((res) => { const s = net.createServer(); s.listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => res(p)); }); });
@@ -80,7 +80,7 @@ const sumQ = fs.existsSync(path.join(tmp, 'out-q/summary.txt')) ? fs.readFileSyn
 check('--quick on a tree with one failing unit: exit 1', q.status === 1, `status ${q.status}\n${q.stdout}\n${q.stderr}`);
 check('one summary line per test, the failure with its exit code', /PASS\s+\d+s\s+unit\s+backend\/test\/a_unit\.mjs/.test(sumQ) && /FAIL \(exit 1\)\s+\d+s\s+unit\s+backend\/test\/b_unit\.mjs/.test(sumQ)
   && /PASS\s+\d+s\s+unit\s+backend\/site-proxy\/test\/c_unit\.mjs/.test(sumQ) && /PASS\s+\d+s\s+scraper\s+scraper\/test_d\.py/.test(sumQ), sumQ);
-check('...and a total line', /──── 3 passed, 1 failed, 0 skipped \(--quick: units and scraper tests only\) ────/.test(sumQ), sumQ);
+check('...and a total line', /──── 3 passed, 1 failed, 0 skipped \(--quick: units, scraper and tools tests only\) ────/.test(sumQ), sumQ);
 check('--quick ran no browser suite', !/leak_e2e/.test(sumQ));
 check('one log per test, in the log directory', ['backend_test_a_unit.mjs.log', 'backend_test_b_unit.mjs.log', 'scraper_test_d.py.log'].every((f) => fs.existsSync(path.join(tmp, 'out-q/logs', f))));
 check('the failing test\'s output is shown at the end', /Not passed/.test(q.stdout) && /boom: expected 2, got 3/.test(q.stdout), q.stdout);
