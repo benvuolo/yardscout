@@ -3116,3 +3116,199 @@ seven decodes): only the 16 Xterra year/make/model combinations changed
 Coverage counts are unchanged (the Xterra was already model-specific):
 generic-only 11,921, no entry 12,210. `test_parts_gaps.py`: the §25.1
 exact-row check now expects the §27 rows as well; new §27 checks.
+
+## 28. Audit of the §13–22 pump and A/C windows against catalog numbers (2026-11-18, hub brief; §26.9 item 2)
+
+**Why.** §13–22 windowed the fuel pump and A/C compressor rows by
+generation, with no part number. The app reads a row's "fits" window as
+"a donor from any of these years fits", so a window that crosses a
+part-number change tells a visitor a part fits when it may not (§14). §26
+showed such changes inside generations (Venture A/C 2001, Saturn pump
+1997/1998). This pass checks every §13–22 pump and A/C row.
+
+**Source.** The interchange crawl's carmaker catalog records, branch
+`oem-raw` at 57e8b5b9, read from git (no catalog site was contacted):
+`raw/<site>.jsonl` for gmpartsgiant, fordpartsgiant, toyotapartsnow,
+lexuspartsnow, hyundaipartsdeal, kiapartsnow, subarupartsdeal,
+mitsubishipartsgiant, mazdapartsnow, vwpartsgiant, jeeppartsdeal,
+moparpartsgiant, nissanpartsdeal, infinitipartsdeal (categories
+`fuel-pump-module` and `ac-compressor`; every number cited here was
+retrieved 2026-11-05 or 2026-11-06). A number's years are the years its own
+fitment table lists for that make and model. The crawl has no fan, AWD-unit,
+transfer-case or door-motor category, so those rows could not be checked.
+
+**Rule used.**
+- *Confirmed:* one catalog number lists every year of the window.
+- *Cut (corrected):* the window is cut, with `PART_NUMBER_BREAKS`, at a year
+  where (a) the numbers change: numbers exist on both sides and none lists
+  both; or (b) every number at hand stops inside the window: the years with
+  no number keep their own window (their old basis, nothing claimed across
+  the cut); or (c) a single year holds both the outgoing and the incoming
+  number of one engine (a mid-year change): that year stands alone, like
+  the 2004 Volvo S40 (§26.1).
+- *Kia, Hyundai, Nissan, Infiniti:* these catalogs often label years by
+  production, one year ahead of the model year at a change (§27 caution;
+  here, e.g., Sportage SL numbers list "2010–2015" for MY2011–16, and the
+  numbers listed from "2016" are the next generation's). Where the labels
+  look shifted, both candidate years are cut, so the uncertain year stands
+  alone; where a later number's "first year" is the next generation, there
+  is no cut.
+- *Not changed, listed:* no clean change year (overlapping numbers, engine
+  splits), catalog model names that cover two different cars, Mopar
+  suffix-only revisions, and numbers of different kinds (bare pump vs
+  sender) that disagree.
+- Narrowing only. Names, bands, costs, gates and option flags are unchanged.
+
+**Result.** 205 pump and A/C windows on 55 entries checked:
+- 91 confirmed (46 by one number; 45 have several numbers in the window,
+  by engine, drive or trim, with at least one listing all of it);
+- 64 corrected (cut), on 40 entries (table below; the Transit Connect A/C
+  line holds two windows);
+- 18 mismatched but not clear: not changed (list below);
+- 32 with no number in the data: not changed (list below).
+
+### 28.1 Corrected rows
+
+Windows before → after. Numbers and the years they list.
+
+| Entry | Row | Before → after | Evidence |
+|---|---|---|---|
+| Camry | A/C | 1992–96 → 1992 / 1993–96 | 88320-33030 and -33060 list 1993–1996; nothing lists 1992. |
+| LeSabre | A/C | 1992–99 → 1992–95 / 1996–99 | 89018865 lists 1996–1999. |
+| LeSabre | pump | 2000–05 → 2000–03 / 2004–05 | Module kits 19369904 (2000–2003), 19369903 (2004–2005). |
+| LaCrosse | A/C | 2010–16 → 2010–11 / 2012–16 | 19419917/-15/-18 list 2010–2011; 19419921, 23413999, 84378272 from 2012. |
+| LaCrosse | pump | 2005–09 → 2005–06 / 2007 / 2008 / 2009 | 19331943, 19332071 (2005–2006); 3.8L 19370064 (2007–2008) and 23120337/-47 (2008–2009), so 2008 holds both. |
+| Soul | A/C | 2010–13 → 2010–11 / 2012–13 | 977012K600/-K650 (1.6L), -K700/-K750 (2.0L) list 2012–2013. |
+| Soul | pump | 2014–19 → 2014–16 / 2017–19 | 31110B2500/-01, 31120B2500/-01 list 2014–2016. |
+| Focus | A/C (option) | 2000–04 → 2000–02 / 2003–04 | 3S4Z-19V703-AA/-BA (2003–2004), 4S4Z-19V703-AA (2003–2007). |
+| Explorer 1991–2001 | A/C (option) | 1991–94 → 1991–92 / 1993–94 | FOTZ19703G lists 1991–1992. |
+| Explorer 1991–2001 | pump | 1995–2001 → 1995–99 / 2000–01 | 1L2Z-9H307-GA lists 2000–2001. |
+| Compass | A/C (option) | 2007–16 → 2007–08 / 2009 / 2010–16 | 5058228AI and 2AMA8228AA list 2007–2008 (list note "2007-09"); 55111610AB/-AC list from 2009 (note "2010-17"). Both years cut. |
+| Rio | A/C | 2012–17 → 2012–15 / 2016–17 | 977011R100 lists 2012–2015. |
+| Rio | pump | 2012–17 → 2012–15 / 2016–17 | 311101R500 lists 2012–2015. |
+| Century | A/C (option) | 1986–96 → 1986 / 1987–92 / 1993 / 1994–96 | 89018893 (1987–1992); 1135277, 19253613, 89018863, 89018894 (1994–1996). |
+| Century | pump | 1986–96 → 1986 / 1987 / 1988–92 / 1993–96 | 25116162 (1987); 25163468, 25116285, 25326793, sender 25093498 (1988/89–1992); sender 19111393 and pump 88962471 (1993–1996). |
+| Century | pump | 1997–2005 → 1997–99 / 2000–03 / 2004 / 2005 | 19369955 (2000–2003), 19369965 (2004). |
+| Passat | A/C | 2006–11 → 2006–10 / 2011 | 1K0-820-808-F (2006–2010), 1K0-820-859-S (2006–2008). |
+| Passat | pump | 2006–11 → 2006–10 / 2011 | 3C8-919-051-A (2006–2010), -B (2006–2008). |
+| Lucerne | pump | 2006–11 → 2006–07 / 2008–11 | 19331979, 19370076 list 2006–2007. |
+| Regal | A/C | 2011–17 → 2011 / 2012–17 | 19419917 (2011); 23413999 (2012–2016), 84441491 (2014–2017). |
+| Regal | pump | 1997–2004 → 1997–99 / 2000–03 / 2004 | 19369955 (2000–2003), 19369965 (2004). |
+| Tucson | A/C (option) | 2016–21 → 2016–18 / 2019–21 | 97701-D3200/-D3201/-D3300/-D3301/-D9001 list 2016–2018. |
+| Tucson | pump | 2010–15 → 2010–13 / 2014–15 | 31110-2S500/-2S510 "DOHC - MPI" 2009–2013; 31110-2S600, 31111-2W050 "DOHC - GDI" 2014–2015. |
+| Sportage | pump | 2011–16 → 2011–13 / 2014 / 2015–16 | 311102S500/-S510, 311103W800/-W810 "2010–2013"; 311102S600, 311103W830, 311112W050, 311113Q500 "2014–2015". Production-year labels: 2014 and 2015 cut. |
+| Spectra | A/C (option) | 2005–09 → 2005–06 / 2007–09 | 977012F100/-F110 (2003–2006), 977012F130 (2007–2009). |
+| Spectra | pump | 2005–09 → 2005–06 / 2007–09 | 311102F600 lists 2007–2009. |
+| Legacy | A/C (option) | 1995–99 → 1995–96 / 1997–99 | 73111AC002 (1997–1999), 73111AC070 (1998–1999). |
+| Legacy | pump | 1995–99 → 1995–98 / 1999 | 42021AC072 (1995–1998) and others to 1998; 42021AC200 (1999). |
+| Legacy | pump | 2000–04 → 2000–03 / 2004 | 42021AE02A (2000–2003), AE03A (2001–2003); AE05A/06A/07A/08A (2004). |
+| Legacy | pump | 2010–14 → 2010–11 / 2012 / 2013–14 | 42021AJ060/070/090 and their -1 revisions (2010–2011); AJ150/160/170 (2012); AJ230/240 (2013–2014). |
+| Galant | pump | 1999–2003 → 1999–2001 / 2002–03 | MR508283 (1999–2001), MR990817 (2002–2003). |
+| Grand Am | pump | 1999–2005 → 1999 / 2000–05 | Module 19179627 (1999), 88967294 (2000–2005). |
+| Sorento | pump | 2003–09 → 2003–05 / 2006 / 2007–09 | 311503E500 (3.3/3.8 Lambda) "2006–2008"; Kia labels Sorento years by production (its "2009" numbers are the next generation), so 2006 and 2007 are cut. |
+| Five Hundred | pump | 2005–07 → 2005 / 2006–07 | 5G1Z-9H307-AA lists 2005 (as the Freestyle's, §26.6). |
+| Optima | A/C | 2007–10 → 2007 / 2008 / 2009–10 | 977013K125/-K220/-L270 (2006–2008), 977012G270/-3K520 (2008–2010): 2008 holds both. |
+| MKZ | pump | 2007–12 → 2007–09 / 2010–12 | 7E5Z-/8E5Z-9H307 (2007–2009), AE5Z-9H307 (2010–2012). |
+| MKX | A/C (option) | 2007–15 → 2007 / 2008–10 / 2011–15 | 7T4Z-19703-A (2007), BT4Z-19703-A (2011–2015). |
+| MKX | pump | 2007–15 → 2007–10 / 2011–15 | 8T4Z-9H307-A/-B (2007–2010), BT4Z-9H307-C/-D, DT4Z-9H307-A (2011–2015). |
+| Malibu | pump | 1997–2003 → 1997 / 1998–99 / 2000–03 | Module 19179627 (1998–1999), 88967294 (2000–2005). |
+| Tribute | pump | 2001–06 → 2001–04 / 2005–06 | YFTT-13-35XA (2001–2004), ZZC1-13-35XA (2005–2006). |
+| Tribute | pump | 2008–11 → 2008 / 2009–11 | ZZC2-13-35XB, ZZCA-13-35XA list 2008. |
+| Uplander | pump | 2005–09 → 2005–07 / 2008–09 | 19153047, 19352897 (2005–2007); 23106136/-37/-38 (2008–2009). |
+| Windstar | pump | 1999–2003 → 1999–2000 / 2001–03 | XF2Z-9H307-BA (1999–2000), 1F2Z-9H307-AA (2001–2003). |
+| Savana | A/C (option) | 1996–2002 → 1996–99 / 2000–02 | HT6 89019403 (1996–1999), HU6 89019356 (2000–2002). |
+| Savana | A/C (option) | 2003–24 → 2003–07 / 2008–09 / 2010–16 / 2017–24 | 19433082/-85, 19130454 (to 2007); 19433083/-84 (2008–2009); 86811107/-09 (2010–2016); 86807272 (2017–2024). |
+| Savana | pump | 2003–24 → 2003 / 2004–16 / 2017–24 | 19303373 (2003); 19331938/-39/-46/-49 and others from 2004; nothing lists 2017 on. |
+| Mariner | pump | 2005–07 → 2005–06 / 2007 | 5L8Z-9H307-A/-B, 6L8Z-9H307 (2005–2006); 8L8Z-9H307-C (2007–2008). |
+| Mariner | pump | 2008–11 → 2008 / 2009–10 / 2011 | 8L8Z-9H307-C/-D/-F/-G (2008); 9L8Z-9H307-A/-B/-C (2009–2010). |
+| Spark | A/C | 2013–15 → 2013 / 2014 / 2015 | 42787366 (2013–2014); 94558242 ("use on vehicle built after" a 2014 date) and 95409044 (2014–2015). |
+| Sable | A/C (option) | 1992–95 → 1992 / 1993–95 | 5U2Z-19V703-KA lists 1993–1995. |
+| Mustang 2005–14 | A/C | 2010–14 → 2010 / 2011–14 | 8R3Z-19703-A, AR3Z-19703-A/-B list 2010; AU2Z-19V703-AE 2007–2010. |
+| Mustang 2005–14 | pump | 2005–09 → 2005 / 2006 / 2007–09 | 6R3Z-9H307-AA lists 2006, every engine. |
+| Transit Connect | A/C | 2014–18 (option) → 2014–16 / 2017 / 2018; 2019–23 → 2019 / 2020–23 | CV6Z-19703-C/-L (2014–2016); GV6Z-19703-C/-G (2018–2019). |
+| Transit Connect | pump | 2014–23 → 2014–18 / 2019–23 | DV6Z-9H307-F lists 2014–2018. |
+| Milan | pump | 2006–11 → 2006–07 / 2008–09 / 2010–11 | 2.3L 7E5Z-9H307-S (2006–2007), 8E5Z-9H307-S (2008–2009); 3.0L 6E5Z-9H307-G (2006–2007), 8E5Z-9H307-T (2008–2009); AE5Z-9H307 (2010–2011). |
+| Encore | A/C | 2013–22 → 2013–21 / 2022 | 42783843 lists 2013–2021 (as the Trax's, §26.3). |
+| Park Avenue | A/C | 1991–96 → 1991–95 / 1996 | 89018865 lists 1996. |
+| Park Avenue | pump | 1997–2005 → 1997 / 1998–2003 / 2004–05 | 19369899, 19369904 (1998–2003), 19369903 (2004–2005). |
+| Scion xB 2008–15 | A/C | 2008–15 → 2008–12 / 2013–15 | 88310-02520 lists 2008–2012. |
+| Sonata | pump | 1999–2005 → 1999–2000 / 2001 / 2002–05 | 31110-38200/-38250/-38260, 31111-38050 "2001–2005"; the NF numbers start "2005" (MY2006), so production labels: 2001 and 2002 cut. |
+| Juke | A/C | 2011–17 → 2011–13 / 2014 / 2015–17 | 92600-1KC1A (2011–2012), -1KC3A (2011–2013). Nissan labels: 2014 and 2015 cut. |
+| QX60 | A/C | 2013–20 → 2013–16 / 2017 / 2018–20 | 92600-1JA1A (2013–2015), -9NB0A (2014–2016). |
+| QX60 | pump | 2013–20 → 2013–17 / 2018 / 2019–20 | 17040-3KA1C (2013–2017); -3KA1A / -3KA1B to 2014 / 2015. |
+
+### 28.2 Mismatched, not changed (not clear)
+
+- **LeSabre pump 1992–99:** the sender changes (19111388 1992; 19179526
+  1996–97; 19179430 1997–99) but the bare pump 88962472 lists 1994–99. The
+  two kinds disagree.
+- **LaCrosse pump 2010–16, Regal pump 2011–17, Park Avenue pump 1991–96,
+  Savana pump 1996–2002:** overlapping numbers, no year where they all
+  change.
+- **Regal A/C 2012–17:** 23413999 (2012–16) and 84441491 (2014–17) overlap
+  for the 2.4L.
+- **Malibu A/C 1997–2003, Legacy A/C 2000–04, Uplander A/C 2005–09:** engine
+  splits. Malibu 2.4L 89018887 (1997–99), 3.1L 89018903 (1999–2003, no 3.1L
+  number for 1997–98). Legacy 2.5L changes at 2004 while the H6 73111AE040
+  lists 2001–04. Uplander 3.5L 19129938 (2005–06), 3.9L 19257978
+  (2006–09): each engine's number covers its own years.
+- **Savana pump 2004–16:** the gas modules change at 2009 and 2010, but the
+  6.6L diesel numbers (15127556, 19301237 and others) list 2006 or
+  2008–2016.
+- **Galant pump 2004–12:** only the 3.8L number 1760A177 (2006–09) is in
+  the data; no 2.4L number.
+- **Mustang pump 2010–14:** AR3Z-9H307-A (4.0/4.6) lists 2010 only, but
+  the GT500's AR3Z-9H307-B lists 2010–13. No number for the 2011–14 3.7/5.0.
+- **Stratus A/C 2001–06 and pumps 1995–2000 / 2001–06:** the catalog's
+  "Dodge Stratus" includes the Mitsubishi-built coupe (MR… numbers), and the
+  sedan changes are Mopar suffix revisions (4596550AB 2004–05 → AC 2006;
+  4897804AC 2000 only).
+- **Sportage A/C 2011–16 and 2017–22, Sorento A/C 2007–09:** the apparent
+  changes at "2016" and "2009" are the next generation (production-year
+  labels, see the rule); no change inside the model years.
+- **Rio A/C and pump 2001–05:** the only numbers listing "2005" are the JB
+  Rio's (977011G000, 311101G500, "2005–2011"), production-labelled; none
+  for the DC car.
+
+### 28.3 No number in the data (not changed)
+
+Pump: Corolla 1998–2002, Focus 2000–04, Explorer 1991–94, Aveo (all three
+windows), Spectra 2000–03, Grand Am 1996–98, Optima 2001–05, MKX 2016–18,
+Mazda5 2012–15, Lexus ES (all three), Windstar 1995–98, Fiat 500, Sable
+1992–95 / 1996–99 / 2000–05, Scion xB 2008–15, Escort (both), ZX2.
+A/C: Explorer 1995–2001, Galant 1999–2003, Lexus ES 1992–96, Windstar
+1999–2003, Fiat 500 (both), Escort (both), ZX2.
+A crawl seeded on these models and years would settle them (interchange
+workstream).
+
+### 28.4 Not auditable here
+
+93 "Radiator Fan Assembly" windows and 36 drive-unit and motor windows
+(AWD rear differential / coupling / PTU, 4Motion and Legacy rear
+differentials, Explorer transfer-case shift motor, power sliding-door
+motor): the crawl has no category for them. Unchanged. The fan question is
+§26.9 item 1.
+
+### 28.5 Observations for the hub
+
+- **Wider than a generation, not acted on:** some numbers cross a
+  `GENERATION_BREAKS` year (Camry V6 reman 88320-33030-84 1994–2003;
+  Mariner 8L8Z-9H307-C 2007–2008; Mustang V6 AU2Z-19V703-AE 2007–2010). The
+  table never lets a row cross a generation break (§14/§15), so these stay
+  split; the verified-interchange layer is the place for such links.
+- **"match part #" naming:** 45 of the 91 confirmed windows have two or
+  more numbers inside them (engine, drive, trim). §26 names such rows
+  "match part #"; the §13–22 rows keep their old names. Renaming them is a
+  display change on about 45 rows plus their eBay keys and tests.
+  Recommendation: a small block of its own, if the hub agrees.
+- **Evergreen alternator and starter rows** on these entries are also
+  generation-windowed without numbers; the crawl has both categories, so the
+  same audit applies to them.
+
+**Checks.** Same 336,827-car inventory (2026-11-18 file), origin/main
+94286349 vs this change, seven decodes: 439 year/make/model combinations
+(19,355 cars) changed, every change a narrower "fits" window on one of the
+rows above. No row lost; no band, cost, gate or "if equipped" status
+changed. Coverage unchanged: no entry 12,228 (3.63%), generic-only 11,949
+(3.55%). `test_parts_gaps.py`: 17 existing checks (18 window values) now
+expect the §28 windows; new §28 checks. Every `scraper/test_*.py` passes.

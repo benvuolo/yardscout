@@ -7064,6 +7064,70 @@ _HYBRID_KEEPS: dict[tuple[str, str], set[str]] = {
 PART_NUMBER_BREAKS: dict[tuple[str, str], list[int]] = {
     # Volvo mirror assemblies: 30744586/9 list 2004-2006, 31278733/9 2007-2011.
     ("volvo s40", "side mirrors"): [2007],
+    # §28 audit of the §13-22 pump and A/C rows against the oem-raw catalog
+    # records (PARTS_GAPS §28 has every number and year). A cut goes where
+    # the numbers change (no number lists both sides), where every number at
+    # hand stops inside the row's window (the other years keep their own
+    # window), and on both sides of a year that holds the outgoing and the
+    # incoming number. Hyundai/Kia/Nissan years that the catalog labels by
+    # production get a cut on both candidate years. Narrowing only.
+    ("camry", "a/c compressor"): [1993],                    # 88320-33030/-33060: 1993-1996
+    ("lesabre", "a/c compressor"): [1996],                  # 89018865: 1996-1999
+    ("lesabre", "fuel pump module"): [2004],                # 19369904 2000-03 / 19369903 2004-05
+    ("lacrosse", "a/c compressor"): [2012],                 # 2010-11 kits / 2012+ kits
+    ("lacrosse", "fuel pump module"): [2007, 2008, 2009],   # 2005-06 / 19370064 2007-08 / 23120337 2008-09
+    ("soul", "a/c compressor"): [2012],                     # 977012K600..K750: 2012-2013
+    ("soul", "fuel pump module"): [2017],                   # 31110B2500 etc.: 2014-2016
+    ("focus", "a/c compressor"): [2003],                    # 3S4Z/4S4Z numbers start 2003
+    ("explorer", "a/c compressor"): [1993],                 # FOTZ19703G: 1991-1992
+    ("explorer", "fuel pump module"): [2000],               # 1L2Z-9H307-GA: 2000-2001
+    ("compass", "a/c compressor"): [2009, 2010],            # 5058228AI 2007-08 ("2007-09") / 55111610AC 2009-17 ("2010-17")
+    ("kia rio", "a/c compressor"): [2016],                  # 977011R100: 2012-2015
+    ("kia rio", "fuel pump module"): [2016],                # 311101R500: 2012-2015
+    ("century", "a/c compressor"): [1987, 1993, 1994],      # 89018893 1987-92 / 1994-96 numbers
+    ("century", "fuel pump module"): [1987, 1988, 1993, 2000, 2004, 2005],
+    ("passat", "a/c compressor"): [2011],                   # 1K0-820-808-F: 2006-2010
+    ("passat", "fuel pump module"): [2011],                 # 3C8-919-051-A: 2006-2010
+    ("lucerne", "fuel pump module"): [2008],                # 19331979 / 19370076: 2006-2007
+    ("regal", "a/c compressor"): [2012],                    # 19419917 2011 / 23413999 2012-16
+    ("regal", "fuel pump module"): [2000, 2004],            # 19369955 2000-03 / 19369965 2004
+    ("tucson", "a/c compressor"): [2019],                   # 97701-D3200 etc.: 2016-2018
+    ("tucson", "fuel pump module"): [2014],                 # 31110-2S500 2009-13 (MPI) / -2S600 2014-15 (GDI)
+    ("sportage", "fuel pump module"): [2014, 2015],         # 311102S500 2010-13 / 311102S600 2014-15 (production years)
+    ("spectra", "a/c compressor"): [2007],                  # 977012F100 2003-06 / 977012F130 2007-09
+    ("spectra", "fuel pump module"): [2007],                # 311102F600: 2007-2009
+    ("legacy", "a/c compressor"): [1997],                   # 73111AC002: 1997-1999
+    ("legacy", "fuel pump module"): [1999, 2004, 2012, 2013],
+    ("galant", "fuel pump module"): [2002],                 # MR508283 1999-2001 / MR990817 2002-03
+    ("grand am", "fuel pump module"): [2000],               # 19179627 1999 / 88967294 2000-05
+    ("sorento", "fuel pump module"): [2006, 2007],          # 311503E500: "2006-2008" (production years)
+    ("five hundred", "fuel pump module"): [2006],           # 5G1Z-9H307-AA: 2005
+    ("optima", "a/c compressor"): [2008, 2009],             # 977013K125/K220 2006-08 / 977012G270, 3K520 2008-10
+    ("mkz", "fuel pump module"): [2010],                    # 7E5Z/8E5Z 2007-09 / AE5Z 2010-12
+    ("mkx", "a/c compressor"): [2008, 2011],                # 7T4Z-19703-A 2007 / BT4Z-19703-A 2011-15
+    ("mkx", "fuel pump module"): [2011],                    # 8T4Z-9H307-A/B 2007-10 / BT4Z, DT4Z 2011-15
+    ("malibu", "fuel pump module"): [1998, 2000],           # 19179627 1998-99 / 88967294 2000-05
+    ("tribute", "fuel pump module"): [2005, 2009],          # YFTT 2001-04 / ZZC1 2005-06; ZZC2 2008
+    ("uplander", "fuel pump module"): [2008],               # 19153047/19352897 2005-07 / 2310613x 2008-09
+    ("windstar", "fuel pump module"): [2001],               # XF2Z-9H307-BA 1999-2000 / 1F2Z-9H307-AA 2001-03
+    ("savana", "a/c compressor"): [2000, 2008, 2010, 2017],  # HT6 1996-99 / HU6 2000-02; 2003-07, 2008-09, 2010-16, 2017-24 kits
+    ("savana", "fuel pump module"): [2004, 2017],           # 19303373 2003 / 1933193x 2004-08; nothing lists 2017+
+    ("mariner", "fuel pump module"): [2007, 2009, 2011],    # 5L8Z 2005-06 / 8L8Z-9H307-C 2007-08; 8L8Z 2008 / 9L8Z 2009-10
+    ("spark", "a/c compressor"): [2014, 2015],              # 42787366 2013-14 / 94558242 2014-15 (build date)
+    ("sable", "a/c compressor"): [1993],                    # 5U2Z-19V703-KA: 1993-1995
+    ("mustang", "a/c compressor"): [2011],                  # 2010 numbers (AR3Z-19703-A/B, 8R3Z-19703-A) list 2010
+    ("mustang", "fuel pump module"): [2006, 2007],          # 6R3Z-9H307-AA: 2006
+    ("transit connect", "a/c compressor"): [2017, 2018, 2020],  # CV6Z-19703-L 2014-16 / GV6Z-19703-C/G 2018-19
+    ("transit connect", "fuel pump module"): [2019],        # DV6Z-9H307-F: 2014-2018
+    ("milan", "fuel pump module"): [2008, 2010],            # 7E5Z-9H307-S 2006-07 / 8E5Z-9H307-S 2008-09 / AE5Z 2010-11
+    ("encore", "a/c compressor"): [2022],                   # 42783843: 2013-2021
+    ("park avenue", "a/c compressor"): [1996],              # 89018865: 1996
+    ("park avenue", "fuel pump module"): [1998, 2004],      # 19369899/19369904 1998-2003 / 19369903 2004-05
+    ("scion xb", "a/c compressor"): [2013],                 # 88310-02520: 2008-2012
+    ("sonata", "fuel pump module"): [2001, 2002],           # 31110-38200 etc.: "2001-2005" (production years)
+    ("juke", "a/c compressor"): [2014, 2015],               # 92600-1KC1A 2011-12 / -1KC3A 2011-13
+    ("infiniti qx60", "a/c compressor"): [2017, 2018],      # 92600-1JA1A / -9NB0A: to 2016
+    ("infiniti qx60", "fuel pump module"): [2018, 2019],    # 17040-3KA1C: 2013-2017
 }
 
 _FACELIFT_SENSITIVE_RE = re.compile(

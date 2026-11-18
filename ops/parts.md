@@ -441,3 +441,21 @@ compatibility." Basis and numbers per model: PARTS_GAPS §26.
   missing years.
 - No docs/data file ships with this change; it goes live with the next
   scan after merge.
+
+## §28 window audit (2026-11-18, hub brief; branch `parts/next-block-1118`, not merged)
+
+- Every §13–22 fuel pump and A/C row (205 windows, 55 entries) checked
+  against the `oem-raw` catalog numbers (read from git, no site contacted).
+  Rule, numbers and years per row: PARTS_GAPS §28.
+- 91 confirmed (a number lists the whole window); **64 corrected** on 40
+  entries (cut with `PART_NUMBER_BREAKS` where the numbers change, stop, or
+  a mid-year change makes one year hold both); 18 mismatched but not clear
+  (left, listed in §28.2); 32 with no number (left, §28.3).
+- Kia/Hyundai/Nissan catalogs label some years by production: there both
+  candidate years are cut; next-generation numbers are not cuts.
+- Narrowing only: 439 year/make/model combos (19,355 cars) get narrower
+  "fits" windows; no row, band, gate or status changed; coverage unchanged.
+- Not auditable (no crawl category): 93 fan windows, 36 AWD-unit/diff/
+  motor windows.
+- For the hub (§28.5): "match part #" naming on 45 confirmed multi-number
+  rows; the evergreen alternator/starter rows could get the same audit.
