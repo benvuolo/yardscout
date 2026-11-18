@@ -1920,3 +1920,13 @@ fields of the 10-28/10-31 source changes: yards workstream.
   Kenny U-Pull, Carolina Pick N Pull, Express Pull-N-Save, Andersen. The two
   unsent drafts (Budget follow-up, 1A Auto) rewritten with no addresses.
   Rule from now: hub drafts carry no web addresses (ops/yard-outreach-drafts.md).
+- Check-in (trig_01Bj2uqq2oFAy4JdziSoq38G) on scan 44350039303 (committed
+  18:17): new yards in: Standard UPIC 524, Intermountain Idaho Falls 578,
+  S&S Lebanon 1,187. "[U-Pull-R] reader is switched off ... no request
+  sent". "[list freshness] 4 stale (4,333 cars), 4 frozen (2,309)", as the
+  dry run said. Manifest yardFields end with listChangedAt, listState,
+  listReadAt, listFlushAt. No FAILED or Traceback lines; 2 WARNING lines
+  (Pull-N-Save check page, Route 34 0 cars). Live: yardscout.io/car/
+  utpap-orem-K026992 says "This yard's list has not changed since Oct 22,
+  2026. Call before you go." Next: wire ifipull/ssupullit price lists and
+  run gen_yard_site_links.py after the watertight merge.
