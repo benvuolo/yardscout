@@ -7033,6 +7033,19 @@ FACELIFT_BREAKS: dict[str, list[int]] = {
     "mirage": [2017, 2021],          # 1999 rear-end-only revision left out
     "mirage g4": [2021],
     "venture": [2001],
+    # §30 (PARTS_GAPS §30): years where the oem-raw catalog numbers of two or
+    # more appearance parts (headlamps, tail lamps, grille, bumper covers)
+    # change at once inside a generation. Cited there, part by part.
+    "cr-v": [2005],                  # lamps and both bumper covers list 2002-2004; hood 2002-2006
+    "outback": [2008, 2013, 2018],   # 2008 lamps; 2013 grille, front bumper, headlamps; 2018 grille, both bumpers
+    "chrysler 300": [2015],          # LD: headlamps, tail lamps, grille, both bumpers change at 2015
+    "c-class": [2012, 2019],         # W204 lamps, bumpers, hood 2012; W205 lamps stop at 2018, new rear bumper 2019
+    "acura tl": [2007, 2012],        # 3rd gen tail lamps, bumpers to 2006; 4th gen lamps to 2011
+    "acadia": [2013],                # headlamps, tail lamps, grille, front bumper change at 2013
+    "f-250": [2011],                 # Super Duty headlamps, grille, front bumper change at 2011
+    "durango": [2014],               # WD headlamps, grille, front bumper to 2013; tail lamps change at 2014
+    "s10": [1998],                   # S10/Sonoma headlamps; Sonoma grille and front bumper change at 1998
+    "chrysler 200": [2015],          # every appearance number at hand starts 2015 (hood and fenders too)
 }
 # §22.10: gas-only rows hidden on hybrid listings. Hybrids of the families on
 # the lots generally start and charge through the hybrid system and use a
@@ -7128,6 +7141,8 @@ PART_NUMBER_BREAKS: dict[tuple[str, str], list[int]] = {
     ("juke", "a/c compressor"): [2014, 2015],               # 92600-1KC1A 2011-12 / -1KC3A 2011-13
     ("infiniti qx60", "a/c compressor"): [2017, 2018],      # 92600-1JA1A / -9NB0A: to 2016
     ("infiniti qx60", "fuel pump module"): [2018, 2019],    # 17040-3KA1C: 2013-2017
+    # §30: Acura TL 3rd-gen headlamps 33101/33151-SEP-A02 list 2004-2005.
+    ("acura tl", "headlight"): [2006],
 }
 
 _FACELIFT_SENSITIVE_RE = re.compile(

@@ -3353,3 +3353,76 @@ decodes): 31 year/make/model combinations, 778 cars, all Lexus ES.
   `test_parts_gaps.py`.
 - If `research_parts.py` proposes "es 300" rows again, they belong on this
   entry (match `lexus es`), not a new one.
+
+## 30. Facelift years from catalog appearance numbers (2026-11-18, `ops/parts.md` Next item 4)
+
+**Source.** Wikipedia and Consumer Guide (the §17–26 sources) did not
+resolve from this session (`en.wikipedia.org`, `www.consumerguide.com`:
+host not allowed), so no editorial page was read and no further web hosts
+were tried. The basis here is the carmaker catalog records on branch
+`oem-raw` (57e8b5b9, read from git; categories `headlights`,
+`tail-lights`, `grille`, `bumper-front`, `bumper-rear`, with `hood` and
+`fender` as a control; retrieved 2026-11-05 to 2026-11-13). A year is a
+facelift cut only where the numbers of **two or more** appearance parts
+change at that year inside a generation (none lists both sides), or stop
+there while other body numbers of the same car run on (so the crawl does
+cover the later years). One-part changes are not facelift cuts (§23.3
+rule); where only the headlamp changes, the headlamp row alone is cut
+(`PART_NUMBER_BREAKS`).
+
+| Model | Year | Catalog evidence |
+|---|---|---|
+| Honda CR-V (RD4/5) | 2005 | Headlamps 33101/33151-S9A-A01, tail lamps 33501/33551-S9A-A00 and -SCA-A00, front and rear bumper covers all list 2002–2004; the hood lists 2002–2006. |
+| Subaru Outback | 2008 | BP headlamps and tail lamps: numbers list 2005(–2007) and 2008(–2009), none both. |
+| Subaru Outback | 2013 | Grille (2010–12 / 2013–14), front bumper (2010–12 / 2013–14) and headlamps (2012 / 2013–14). |
+| Subaru Outback | 2018 | Grille (2015–17 / 2018–19), front bumper (2015–17 / 2018–19), rear bumper (2015–16 / 2018–19). |
+| Chrysler 300 (LD) | 2015 | Headlamps, tail lamps, grilles, front and rear bumper covers: every number lists 2011–2014 or from 2015, none both; fenders list 2011–2023. |
+| Mercedes C-Class (W204) | 2012 | Headlamps, tail lamps, front and rear bumper covers and hood: numbers list 2008–2011 or 2012–2014 (204-820-00-39-80 and others), none both. |
+| Mercedes C-Class (W205) | 2019 | Headlamps (205-906-56-05, -57-05, -77-03-64, -78-03-64) and tail lamps list 2015–2018; rear bumper covers listed 2019–2021 only; grilles, hood and fenders list to 2021. |
+| Acura TL (3rd gen) | 2007 | Tail lamps 33501/33551-SEP-A01 and front and rear bumper covers list 2004–2006; hood and fenders 2004–2008. |
+| Acura TL (4th gen) | 2012 | Headlamps 33101/33151-TK4-A01 list 2010–2011, tail lamps 33500/33550-TK4-A02 2009–2011. |
+| GMC Acadia | 2013 | Headlamps, tail lamps, grilles, front bumper covers: 2007(/2008)–2012 or 2013–2016, none both. |
+| Ford F-250 Super Duty | 2011 | Headlamps, grilles, front bumpers: 2008–2010 or 2011–2016, none both (tail lamps run 2008–2016). |
+| Dodge Durango (WD) | 2014 | Headlamps, grilles and front bumper covers list 2011–2013 only; tail lamps 2011–2013 vs 2014–2021. |
+| Chevrolet S10 / GMC Sonoma | 1998 | Headlamps 1994–1997 vs 1998–2004 (both makes); Sonoma grille and front bumper 1994–1997 vs 1998 on. |
+| Chrysler 200 | 2015 | Every appearance number at hand (19 headlamps, tail lamps, grilles, bumpers, hood, fenders) starts at 2015; none lists 2011–2014. |
+
+Plus one `PART_NUMBER_BREAKS` cut: Acura TL headlamps 33101/33151-SEP-A02
+(replacing -A01) list 2004–2005, so the HID headlight row is cut at 2006.
+
+**What changes today** (appearance rows that exist): CR-V headlights and
+tail lights 2002–06 → 2002–04 / 2005–06; Chrysler 300 HID/LED headlights
+and chrome grille 2011–23 → 2011–14 / 2015–23; C-Class LED headlights
+2015–21 → 2015–18 / 2019–21; Acura TL HID headlights 2004–08 →
+2004–05 / 2006 / 2007–08 and 2009–14 → 2009–11 / 2012–14; Chrysler 200
+headlights 2011–17 → 2011–14 / 2015–17. The Outback, Acadia, F-250,
+Durango and S10 cuts bound future lamp rows (no row there crosses them
+today).
+
+**Left out, with the reason.**
+- **Not in the data or not clean:** CR-V 2010 (only the bumper covers
+  change; lamps run 2007–2011) and 2015/2020 (no records after 2011);
+  Outback 2003 (grille and front bumper change, but the headlamps run
+  2000–2004: cutting the headlight row would go against its number);
+  Forester (records stop at 2005 for every part, hood and fenders too, so
+  nothing shows a change); Murano (Z50 changes listed "2005" by a
+  production-labelling catalog, and no Murano row is affected; Z51 numbers
+  overlap); Journey (one headlamp number lists 2009–2020; the 2011 grille
+  and bumper are a single front change with no lamp change); Sienna (no
+  records after 2005 for the XL20; XL30 numbers overlap); Express (lamps and
+  grille run 1996–2002 and 2003–2024, no change); C-Class W203, Durango
+  1998–2010, F-250 1999–2007 (overlapping numbers).
+- **Acura TL 2010:** the 4th-gen headlamp numbers list 2010–2011 and
+  replace a "-999" placeholder, while the same-platform tail lamps list
+  2009; no cut at 2010.
+- **Chrysler 200:** the 2015 car is a new generation, not a facelift. Only
+  the appearance rows are cut here (the hub's note allows FACELIFT_BREAKS
+  for it); a `GENERATION_BREAKS["chrysler 200"] = [2015]` would also split
+  its mechanical and evergreen rows. Recommended once a source page can be
+  read; not done here.
+
+**Checks** (same inventory; §29 state vs this change, seven decodes): 57
+year/make/model combinations, 4,151 cars (Chrysler 200 1,971, Acura TL
+1,090, CR-V 691, Chrysler 300 370, C-Class 28). Every change is a narrower
+"fits" window on an appearance row; no row, band, gate or status changed.
+Coverage unchanged. New §30 checks in `test_parts_gaps.py`.

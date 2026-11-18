@@ -989,6 +989,22 @@ check("§29 Lexus ES: window regulator per generation 1995-96 / 1997-2001 / 2002
       and not ({"Window Regulator + Motor (front)", "Mark Levinson Amp + Speakers"} & names(2008, "Lexus", "ES 350", FWD))
       and "Mark Levinson Amp/Speakers" in names(2008, "Lexus", "ES 350", FWD)
       and "Window Regulator + Motor (front)" not in names(1994, "Lexus", "ES 300", FWD))
+# §30 (PARTS_GAPS §30): facelift years from catalog appearance numbers.
+check("§30 facelift years from catalog numbers: CR-V 2005, Chrysler 300 2015, C-Class 2012/2019, Acura TL 2007/2012, Chrysler 200 2015 (+ Outback, Acadia, F-250, Durango, S10)",
+      js.FACELIFT_BREAKS["cr-v"] == [2005] and js.FACELIFT_BREAKS["chrysler 300"] == [2015] and js.FACELIFT_BREAKS["c-class"] == [2012, 2019]
+      and js.FACELIFT_BREAKS["acura tl"] == [2007, 2012] and js.FACELIFT_BREAKS["chrysler 200"] == [2015]
+      and js.FACELIFT_BREAKS["outback"] == [2008, 2013, 2018] and js.FACELIFT_BREAKS["acadia"] == [2013]
+      and js.FACELIFT_BREAKS["f-250"] == [2011] and js.FACELIFT_BREAKS["durango"] == [2014] and js.FACELIFT_BREAKS["s10"] == [1998])
+check("§30 lamp windows cut: CR-V 2003 / 2006, 300 2013 / 2016, C-Class 2017 / 2020, TL 2005 / 2006 / 2008 / 2013, 200 2012 / 2016",
+      parts(2003, "Honda", "CR-V", FWD)["Headlights (clear, non-hazed)"]["fits"] == "2002–2004"
+      and parts(2006, "Honda", "CR-V", FWD)["Tail Lights (pair, uncracked)"]["fits"] == "2005–2006"
+      and parts(2013, "Chrysler", "300")["HID/LED Headlights (pair)"]["fits"] == "2011–2014"
+      and parts(2016, "Chrysler", "300")["Chrome Grille"]["fits"] == "2015–2023"
+      and parts(2017, "Mercedes-Benz", "C-Class")["OEM LED Headlights"]["fits"] == "2015–2018"
+      and parts(2020, "Mercedes-Benz", "C-Class")["OEM LED Headlights"]["fits"] == "2019–2021"
+      and [parts(y, "Acura", "TL")["OEM HID Headlights"]["fits"] for y in (2005, 2006, 2008, 2013)] == ["2004–2005", "2006–2006", "2007–2008", "2012–2014"]
+      and parts(2012, "Chrysler", "200")["Headlights (clear, non-hazed)"]["fits"] == "2011–2014"
+      and parts(2016, "Chrysler", "200")["Headlights (clear, non-hazed)"]["fits"] == "2015–2017")
 check("§28 every cut names a pump or A/C row and none crosses; the cut rows keep the _GAP_MECH bands",
       len(_28) >= 50 and not _28_lost and _28_band <= {(40, 90, 24), (60, 130, 40)}, str((_28_lost[:5], _28_band)))
 
