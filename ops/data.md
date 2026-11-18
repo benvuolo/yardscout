@@ -361,8 +361,9 @@ Unread scans (stale-keep carried, or yard missing) neither change nor
 confirm a list; the next read is compared with the last READ copy, and the
 flush check asks "frozen as of the last read" (unread days are not frozen
 days). yard_health.json gets the same values (`listFingerprint`,
-`listChangedAt`, `listReadAt`, `listFlushAt`); its own fields, which the
-ops email reads, are unchanged. First scan after merge: a yard whose
+`listChangedAt`, `listReadAt` only when it is not that scan, `listFlushAt`;
++23 KB raw on a 51 KB file the app also loads); its own fields, which the ops
+email reads, are unchanged. First scan after merge: a yard whose
 id|date fingerprint did not change seeds `listChangedAt` from its
 `lastChangedAt` (so the dates match the ops email from day one); anything
 else seeds "now" (never claims a list is older than known).
@@ -457,7 +458,7 @@ Wrecking - Lima have had date edits only since Nov 2 / Nov 10.
 - Old data files (no columns): the app falls back to yard_health at 3
   weekdays, shown the new quiet way; nothing is held back.
 
-Tests (all pass): `python3 scraper/test_yard_freshness.py` (62 checks),
+Tests (all pass): `python3 scraper/test_yard_freshness.py` (64 checks),
 `node backend/test/yard_list_unit.mjs` (24), `node backend/site-proxy/test/
 yard_list_pages_unit.mjs` (23), ui_no_truncation SCREENS=list-stale-tiles,
 list-stale-detail,list-frozen-yard,list-frozen-rows at 320/390/768/1280

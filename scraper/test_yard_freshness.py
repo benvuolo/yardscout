@@ -253,7 +253,26 @@ with tempfile.TemporaryDirectory() as td:
     h = json.loads(js.YARD_HEALTH_FILE.read_text())["yards"]
     check("yard_health.json carries the same list fields as the published rows",
           all(h[n]["listChangedAt"] == cols[i][0] for i, n in enumerate(["Live - A", "Frozen - B", "Flush - C"]))
-          and h["Flush - C"].get("listFlushAt") == scan_now and h["Frozen - B"]["listReadAt"] == scan_now)
+          and h["Flush - C"].get("listFlushAt") == scan_now and "listReadAt" not in h["Frozen - B"])
+    # Next scan: the yard is carried (not read). Its last read comes back
+    # from the previous file's scrapedAt, as if listReadAt had been stored.
+    nxt = (today + timedelta(hours=4)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    hf = json.loads(js.YARD_HEALTH_FILE.read_text())
+    again = yf.update_list_freshness(hf["yards"], hf["scrapedAt"], {"Frozen - B": ids_of(new_rows, 1)},
+                                     {"Frozen - B"}, nxt)
+    check("listReadAt left out when it is the scan time: read back exactly on the next (unread) scan",
+          again["Frozen - B"]["listReadAt"] == scan_now and again["Frozen - B"]["listChangedAt"] == long_ago,
+          str(again["Frozen - B"]))
+    # Next scan: "Live - A" goes missing. Its entry keeps the last read time
+    # (this scan), so if it comes back changed the flush check knows when.
+    p_missing = {**payload, "scrapedAt": nxt, "yards": [list(y) for y in payload["yards"] if y[0] != "Live - A"],
+                 "vehicles": []}
+    js._LIST_FRESHNESS.clear()
+    js._update_yard_health(p_missing)
+    hm = json.loads(js.YARD_HEALTH_FILE.read_text())["yards"]["Live - A"]
+    check("a yard that goes missing keeps its last read time (the scan before)",
+          hm.get("missingScans") == 1 and hm.get("listReadAt") == scan_now and hm.get("listChangedAt") == scan_now, str(hm))
+    js.YARD_HEALTH_FILE.write_text(json.dumps(hf))
     check("yard_health.json: a missing yard keeps its list fields as last read",
           h["Gone - D"]["listChangedAt"] == long_ago and h["Gone - D"]["listFingerprint"] == "gf"
           and h["Gone - D"]["missingScans"] == 1)

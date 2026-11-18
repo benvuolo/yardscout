@@ -28161,8 +28161,10 @@ def _update_yard_health(payload: dict) -> None:
     log when a yard has been frozen for YARD_STALE_SCANS+ scans or has
     disappeared from the scrape entirely."""
     prev: dict = {}
+    prev_at = None
     try:
-        prev = json.loads(YARD_HEALTH_FILE.read_text()).get("yards", {})
+        _pf = json.loads(YARD_HEALTH_FILE.read_text())
+        prev, prev_at = _pf.get("yards", {}), _pf.get("scrapedAt")
     except Exception:
         pass
 
@@ -28198,9 +28200,11 @@ def _update_yard_health(payload: dict) -> None:
                         **({"newestDateAdded": newest[n]} if newest[n] else {}),
                         **({"carried": True} if n in _CARRIED_YARDS else {}),
                         # list freshness (yard_freshness.py): the same values
-                        # this scan published in the yard rows.
+                        # this scan published in the yard rows. listReadAt is
+                        # left out when it is this scan (the next scan reads
+                        # it back from scrapedAt), as in the yard rows.
                         **{k: v for k, v in (_LIST_FRESHNESS.get(n) or {}).items()
-                           if k in _LIST_KEYS and v}}
+                           if k in _LIST_KEYS and v and not (k == "listReadAt" and v == now)}}
         if unchanged >= YARD_STALE_SCANS:
             stale.append((unchanged, n, len(per_yard[n])))
         # A feed can keep CHANGING (departures hidden) while receiving no
@@ -28240,8 +28244,13 @@ def _update_yard_health(payload: dict) -> None:
         explained = reason == "retired" or reason.startswith("renamed")
         if miss > YARD_MISSING_DROP and explained:
             continue
-        # A missing yard was not read: its list fields stay as last read.
+        # A missing yard was not read: its list fields stay as last read (a
+        # yard read in the previous scan has its listReadAt left out there:
+        # it is that scan's time).
+        last_read = p.get("listReadAt") or (
+            prev_at if p.get("listFingerprint") and not p.get("missingScans") and not p.get("carried") else None)
         yards_out[n] = {**{k: p[k] for k in ("count", "fingerprint", "lastChangedAt") + _LIST_KEYS if k in p},
+                        **({"listReadAt": last_read} if last_read else {}),
                         "unchangedScans": int(p.get("unchangedScans", 0)),
                         "missingScans": miss,
                         **({"missingReason": reason} if reason else {})}
